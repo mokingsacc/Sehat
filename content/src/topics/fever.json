@@ -130,6 +130,34 @@
       }
     },
     {
+      "id": "fever.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: یافتن علت تب",
+        "ps": "په کلینیک کې: د تبې د لامل موندل",
+        "en": "At the clinic: finding the cause"
+      },
+      "text": {
+        "fa": "کارمند صحی گوش، گلو، سینه و پوست را معاینه می‌کند و شاید معاینهٔ ملاریا کند. پاراسیتامول می‌دهد، و انتی‌بیوتیک فقط برای عفونتی که ضرورت دارد، مثل عفونت گوش.",
+        "ps": "روغتیايي کارکوونکی غوږونه، ستونی، سینه او پوستکی معاینه کوي او ښايي د ملاریا معاینه وکړي. پاراسیټامول ورکوي، او انټي بیوټیک یوازې د هغه انتان لپاره چې اړتیا لري، لکه د غوږ انتان.",
+        "en": "The health worker checks ears, throat, chest and skin, and may test for malaria. They give paracetamol, and an antibiotic only for an infection that needs it, like an ear infection."
+      }
+    },
+    {
+      "id": "fever.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: تب خطرناک",
+        "ps": "په روغتون کې: خطرناکه تبه",
+        "en": "At the hospital: dangerous fever"
+      },
+      "text": {
+        "fa": "طفل با تب و علامت خطر برای مننژیت، سینه‌بغل شدید یا ملاریای شدید معاینه می‌شود. شفاخانه انتی‌بیوتیک پیچکاری، سیروم، اکسیجن و دوای تشنج می‌دهد و از نزدیک زیر نظر می‌گیرد.",
+        "ps": "ماشوم له تبې او د خطر نښې سره د مننژیت، سخت سینه بغل یا سختې ملاریا لپاره معاینه کېږي. روغتون پیچکاري انټي بیوټیک، سیروم، اکسیجن او د اختلاج درمل ورکوي او له نږدې یې څاري.",
+        "en": "A child with fever and a danger sign is checked for meningitis, severe pneumonia or severe malaria. The hospital gives antibiotics by injection, fluids, oxygen and medicine for fits, and watches closely."
+      }
+    },
+    {
       "id": "fever.urgent",
       "type": "alert",
       "level": "urgent",
@@ -258,6 +286,15 @@
             "ps": "د تشو متیازو پر وخت درد لري یا ژاړي",
             "en": "has pain or cries when passing urine"
           }
+        },
+        {
+          "id": "fever.soon.throat",
+          "icon": "no-drink",
+          "text": {
+            "fa": "گلودرد شدید با لکه‌های سفید دارد، یا بلعیده نمی‌تواند",
+            "ps": "سخت ستونی درد له سپینو داغونو سره لري، یا نه شي تېرولای",
+            "en": "has a very sore throat with white spots, or cannot swallow"
+          }
         }
       ]
     },
@@ -277,7 +314,10 @@
     "WHO IMCI Chart Booklet (2014): fever, measles, ear problem, general danger signs, when to return",
     "WHO Pocket Book of Hospital Care for Children (2013): fever, meningitis",
     "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses; immunization",
-    "WHO fact sheet: Measles"
+    "WHO fact sheet: Measles",
+    "WHO IMCI Chart Booklet (2014): fever classification, malaria test, ear problem (amoxicillin), sore throat; very severe febrile disease referred",
+    "WHO Pocket Book of Hospital Care for Children (2013): meningitis, severe malaria, septicaemia",
+    "Burden: Afghanistan MoPH NDSR week 33 2026: 4,391 meningitis cases and 188 deaths in 2026 to date"
   ],
   "review": [
     "Fever is defined as 37.5 C or more (IMCI, axillary). Written as '37 and a half degrees' in Dari and Pashto for the narrator.",
@@ -289,6 +329,8 @@
     "Tip on measles isolation: keeping a child with a rash away from babies and pregnant women is general public health advice, not an IMCI caregiver message.",
     "Fever by touch (added): 'back of the hand on the chest, belly or neck; hotter than your own skin'. IMCI counts 'feels hot' or 'history of fever'. Studies show touch detects fever fairly well but misses some; the thermometer step follows.",
     "fever.check text changed (same id): its clip must be re-recorded.",
-    "fever.urgent.cold added: under 2 months and feels cold = hospital now (IMCI low body temperature, matches danger-child.young.temperature)."
+    "fever.urgent.cold added: under 2 months and feels cold = hospital now (IMCI low body temperature, matches danger-child.young.temperature).",
+    "Sore-throat item uses the 'no-drink' icon (no throat icon exists); IMCI treats streptococcal sore throat with an antibiotic.",
+    "Malaria testing at BHC level in Samangan (low-transmission province) may not be routine; the text says 'may test'."
   ]
 }

@@ -212,13 +212,19 @@
       }
     },
     {
-      "id": "choking-baby.prevent",
-      "type": "tip",
+      "id": "choking-baby.safety",
+      "type": "link",
+      "to": "topic/child-safety",
       "icon": "bowl-food",
+      "title": {
+        "fa": "چیزهای خورد را از شیرخوار دور نگه دارید",
+        "ps": "واړه شیان له تي خوړونکي ماشوم لرې وساتئ",
+        "en": "Keep small things from babies"
+      },
       "text": {
-        "fa": "چارمغز، تخمه، نخود، سکه و بازیچه‌های خورد را از شیرخوار دور نگه دارید. غذای نرم و میده‌شده بدهید.",
-        "ps": "غوز، دانې، نخود، سکې او واړه لوبتکي له ماشوم لرې وساتئ. نرم او میده خواړه ورکړئ.",
-        "en": "Keep nuts, seeds, chickpeas, coins and small toys away from babies. Give soft, mashed food."
+        "fa": "چارمغز، سکه و بازیچهٔ خورد، و راه‌های دیگر حفاظت شیرخوار در خانه. صفحه را باز کنید.",
+        "ps": "غوز، سکې او واړه لوبتکي، او په کور کې د ماشوم د ساتنې نورې لارې. پاڼه پرانیزئ.",
+        "en": "Nuts, coins and small toys, and other ways to keep babies safe at home. Open the page."
       }
     }
   ],
@@ -233,6 +239,7 @@
     "No abdominal thrusts under 1 year (all guidelines).",
     "'Baby' means under 1 year. Older children go to the 'choking' page.",
     "Hospital after any back blows or chest thrusts: RCUK/ERC advise a medical check after abdominal or chest thrusts. Back blows alone are included here because a baby's airway may be hurt and families find it hard to judge.",
-    "Pashto ژامه for jaw and Dari الاشه (as in red-flags): check."
+    "Pashto ژامه for jaw and Dari الاشه (as in red-flags): check.",
+    "Home safety section (2026-10-07): choking-baby.prevent moved to child-safety (child-safety.small, same text) and is replaced by a link (choking-baby.safety)."
   ]
 }

@@ -99,122 +99,19 @@
       }
     },
     {
-      "id": "kit-bp.numbers",
-      "type": "step",
-      "icon": "heart",
-      "title": {
-        "fa": "عددها چه معنا دارند",
-        "ps": "شمېرې څه مانا لري",
-        "en": "What the numbers mean"
-      },
-      "text": {
-        "fa": "عدد بالا اول گفته می‌شود. در خانه، کمتر از ۱۳۵ بر ۸۵ عادی است. در حاملگی، ۱۴۰ بر ۹۰ یا بیشتر بلند است.",
-        "ps": "پورتنۍ شمېره لومړی ویل کېږي. په کور کې، له ۱۳۵ پر ۸۵ کم عادي دی. په امیندوارۍ کې، ۱۴۰ پر ۹۰ یا ډېر لوړ دی.",
-        "en": "The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high."
-      }
-    },
-    {
-      "id": "kit-bp.check",
+      "id": "kit-bp.meaning-page",
       "type": "link",
-      "to": "tool/reading/bp",
-      "icon": "bp",
+      "to": "topic/reading-bp",
+      "icon": "check",
       "title": {
-        "fa": "فشار خون را معاینه کنید",
-        "ps": "د وینې فشار وګورئ",
-        "en": "Check a blood pressure"
+        "fa": "عدد من چه معنا دارد؟",
+        "ps": "زما شمېره څه مانا لري؟",
+        "en": "What does my reading mean?"
       },
       "text": {
-        "fa": "هر دو عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.",
-        "ps": "دواړه شمېرې ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.",
-        "en": "Put in both numbers and hear what they mean and what to do."
-      }
-    },
-    {
-      "id": "kit-bp.urgent",
-      "type": "alert",
-      "level": "urgent",
-      "title": {
-        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
-        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
-        "en": "Go to hospital now, day or night, if:"
-      },
-      "items": [
-        {
-          "id": "kit-bp.urgent.very-high",
-          "icon": "bp",
-          "text": {
-            "fa": "دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است",
-            "ps": "دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی",
-            "en": "it is 180 over 120 or more, two times"
-          }
-        },
-        {
-          "id": "kit-bp.urgent.signs",
-          "icon": "stroke-face",
-          "text": {
-            "fa": "بلند است، با درد سینه، ضعف، مشکل گپ زدن یا سردرد شدید",
-            "ps": "لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې یا سخت سر درد سره",
-            "en": "high, with chest pain, weakness, trouble speaking or a bad headache"
-          }
-        },
-        {
-          "id": "kit-bp.urgent.pregnant-very-high",
-          "icon": "pregnant",
-          "text": {
-            "fa": "حامله است و ۱۶۰ بر ۱۱۰ یا بیشتر دارد",
-            "ps": "امیندواره ده او ۱۶۰ پر ۱۱۰ یا ډېر لري",
-            "en": "pregnant, and 160 over 110 or more"
-          }
-        },
-        {
-          "id": "kit-bp.urgent.pregnant-signs",
-          "icon": "headache",
-          "text": {
-            "fa": "حامله، ۱۴۰ بر ۹۰ یا بیشتر، با سردرد، تاری چشم یا پندیدگی",
-            "ps": "امیندواره، ۱۴۰ پر ۹۰ یا ډېر، له سر درد، د سترګو تتوالي یا پړسوب سره",
-            "en": "pregnant, 140 over 90 or more, with headache, blurred vision or swelling"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kit-bp.soon",
-      "type": "alert",
-      "level": "soon",
-      "title": {
-        "fa": "اگر یکی از این‌ها بود، امروز به کلینیک بروید",
-        "ps": "که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ",
-        "en": "Go to the clinic today if:"
-      },
-      "items": [
-        {
-          "id": "kit-bp.soon.pregnant",
-          "icon": "pregnant",
-          "text": {
-            "fa": "حامله است و ۱۴۰ بر ۹۰ یا بیشتر دارد",
-            "ps": "امیندواره ده او ۱۴۰ پر ۹۰ یا ډېر لري",
-            "en": "pregnant, and 140 over 90 or more"
-          }
-        },
-        {
-          "id": "kit-bp.soon.low",
-          "icon": "warning",
-          "text": {
-            "fa": "عدد بالا کمتر از ۹۰ است، با سرچرخی یا بیهوش شدن",
-            "ps": "پورتنۍ شمېره له ۹۰ کمه ده، له سر ګرځېدو یا بې هوښۍ سره",
-            "en": "the top number is under 90, with dizziness or fainting"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kit-bp.week",
-      "type": "tip",
-      "icon": "calendar",
-      "text": {
-        "fa": "در خانه اکثراً ۱۳۵ بر ۸۵ یا بیشتر است؟ همین هفته با یادداشت‌ها به کلینیک بروید. شاید دوا ضرورت باشد.",
-        "ps": "په کور کې اکثره ۱۳۵ پر ۸۵ یا ډېر وي؟ په همدې اونۍ کې له یادښتونو سره کلینیک ته ولاړ شئ. کېدای شي درملو ته اړتیا وي.",
-        "en": "Often 135 over 85 or more at home? Go to the clinic this week with your notes. You may need medicine."
+        "fa": "صفحهٔ صحت را باز کنید: معنای عدد، چه وقت بروید، و بررسی آن.",
+        "ps": "د روغتیا پاڼه پرانیزئ: د شمېرې مانا، کله ولاړ شئ، او د هغې کتل.",
+        "en": "Open the Health page: what it means, when to go, and a checker."
       }
     },
     {
@@ -226,15 +123,6 @@
         "en": "Do not do these things:"
       },
       "items": [
-        {
-          "id": "kit-bp.dont.stop",
-          "icon": "pill",
-          "text": {
-            "fa": "به خاطر یک عدد، دوای خود را قطع یا تغییر ندهید.",
-            "ps": "د یوې شمېرې له امله خپل درمل مه بندوئ او مه بدلوئ.",
-            "en": "Do not stop or change your medicine because of one reading."
-          }
-        },
         {
           "id": "kit-bp.dont.clothes",
           "icon": "no",
@@ -266,6 +154,7 @@
     "'Often 135/85 or more: clinic this week' is a judgement call.",
     "Price 1,500 to 3,000 afghanis for a validated upper-arm machine is an estimate (about 20 to 45 US dollars). Cheaper unvalidated machines exist.",
     "'Clinically tested' (validated) may mean nothing to buyers; pharmacists may not know. Consider naming validated brands available in Mazar or Aybak after checking validatebp.org.",
-    "Sitting on a chair at a table is shown in the picture; many homes sit on the floor. Floor sitting with back against a wall and arm on a cushion at heart height is acceptable; check the picture is understood."
+    "Sitting on a chair at a table is shown in the picture; many homes sit on the floor. Floor sitting with back against a wall and arm on a cushion at heart height is acceptable; check the picture is understood.",
+    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-bp: kit-bp.numbers, kit-bp.urgent, kit-bp.soon, kit-bp.week, kit-bp.check. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen)."
   ]
 }

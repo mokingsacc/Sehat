@@ -1,0 +1,177 @@
+{
+  "id": "heart-food",
+  "section": "everyone",
+  "title": {
+    "fa": "غذا برای قلب صحتمند",
+    "ps": "د روغ زړه لپاره خواړه",
+    "en": "Food for a healthy heart"
+  },
+  "summary": {
+    "fa": "شکر، نوشابهٔ شیرین، سرخ کردن و نمک کمتر؛ ترکاری و دال بیشتر.",
+    "ps": "لږه بوره، خواږه څښاکونه، سره کول او مالګه؛ ډېرې سبزۍ او دال.",
+    "en": "Less sugar, sweet drinks, frying and salt; more vegetables and lentils."
+  },
+  "image": "heart-food",
+  "blocks": [
+    {
+      "id": "heart-food.lead",
+      "type": "lead",
+      "text": {
+        "fa": "آنچه هر روز می‌خوریم، می‌تواند سال‌ها قلب و رگ‌ها را محافظت کند. این تغییرها با غذاهایی است که خانوادهٔ شما همین حالا دارد.",
+        "ps": "هغه څه چې هره ورځ یې خورو، کولای شي ډېر کلونه زړه او رګونه وساتي. دا بدلونونه په هغو خوړو دي چې ستاسو کورنۍ یې همدا اوس لري.",
+        "en": "What we eat every day can protect the heart and blood vessels for many years. These changes use foods your family already has."
+      }
+    },
+    {
+      "id": "heart-food.sugar",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "شکر کمتر در چای و شیرینی",
+        "ps": "په چای او خوږو کې لږه بوره",
+        "en": "Less sugar in tea and sweets"
+      },
+      "text": {
+        "fa": "در چای شکر کمتر بیندازید و شیرینی، نُقل و بیسکویت را کمتر بخورید. شکر زیاد وزن را بالا می‌برد و می‌تواند مرض شکر و خرابی دندان بیاورد.",
+        "ps": "په چای کې لږه بوره واچوئ او خواږه، نُقل او بسکیټ لږ وخورئ. ډېره بوره وزن زیاتوي او کولای شي د شکرې ناروغي او د غاښونو خرابي راولي.",
+        "en": "Put less sugar in tea, and eat sweets, noql and biscuits less often. Too much sugar adds weight and can bring diabetes and bad teeth."
+      }
+    },
+    {
+      "id": "heart-food.drinks",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب، نه نوشابهٔ شیرین",
+        "ps": "اوبه، نه خواږه څښاکونه",
+        "en": "Water, not sweet drinks"
+      },
+      "text": {
+        "fa": "به جای نوشابهٔ گازدار، نوشابهٔ انرژی و جوس قطی، آب پاک بنوشید. یک بوتل آن می‌تواند چندین قاشق شکر داشته باشد.",
+        "ps": "د ګازدارو څښاکونو، انرژي څښاکونو او د ډبې جوس پر ځای پاکې اوبه وڅښئ. یو بوتل یې کېدای شي ډېرې کاشوغې بوره ولري.",
+        "en": "Drink clean water instead of fizzy drinks, energy drinks and packet juice. One bottle can hold many spoons of sugar."
+      }
+    },
+    {
+      "id": "heart-food.fry",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "سرخ کردن کمتر، روغن مایع",
+        "ps": "لږ سره کول، اوبلن غوړي",
+        "en": "Less frying, and liquid oil"
+      },
+      "text": {
+        "fa": "به جای سرخ کردن، بیشتر بجوشانید، دم کنید یا در تنور بپزید. کمی روغن مایع استفاده کنید، نه روغن جامد یا چربی حیوانی که به قلب و رگ‌ها ضرر دارد.",
+        "ps": "د سره کولو پر ځای، ډېر یې وایشوئ، دم یې کړئ یا په تنور کې یې پاخه کړئ. لږ اوبلن غوړي وکاروئ، نه کلک غوړي یا د څارویو وازده چې زړه او رګونو ته زیان رسوي.",
+        "en": "Boil, stew or bake more often than you fry. Use a little liquid oil, not solid ghee or animal fat, which harm the heart and blood vessels."
+      }
+    },
+    {
+      "id": "heart-food.salt",
+      "type": "step",
+      "icon": "salt",
+      "title": {
+        "fa": "نمک کمتر",
+        "ps": "لږه مالګه",
+        "en": "Less salt"
+      },
+      "text": {
+        "fa": "در وقت پختن نمک کمتر بزنید و سر دسترخوان نمک اضافه نکنید. قروت شور، ترشی و خوراکی‌های نمکی را کمتر بخورید. نمک فشار خون را بالا می‌برد.",
+        "ps": "د پخلي پر وخت لږه مالګه واچوئ او پر دسترخوان نوره مه اچوئ. مالګین قروت، اچار او مالګین خوراکونه لږ وخورئ. مالګه د وینې فشار لوړوي.",
+        "en": "Add less salt when cooking, and none at the meal. Eat salty qurut, pickles and salted snacks less often. Salt raises blood pressure."
+      }
+    },
+    {
+      "id": "heart-food.plants",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "ترکاری، میوه و دال بیشتر",
+        "ps": "ډېرې سبزۍ، مېوې او دال",
+        "en": "More vegetables, fruit and lentils"
+      },
+      "text": {
+        "fa": "هر روز ترکاری، میوه، و دال، لوبیا یا نخود بخورید. نان آرد کامل گندم را انتخاب کنید. این‌ها شما را سیر نگه می‌دارد و قلب را محافظت می‌کند.",
+        "ps": "هره ورځ سبزۍ، مېوې، او دال، لوبیا یا نخود وخورئ. د بشپړو غنمو د اوړو ډوډۍ غوره کړئ. دا تاسو موړ ساتي او زړه ساتي.",
+        "en": "Every day, eat vegetables, fruit, and lentils, beans or chickpeas. Choose bread from whole wheat flour. They keep you full and protect the heart."
+      }
+    },
+    {
+      "id": "heart-food.slowly",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "آهسته‌آهسته تغییر دهید: هر هفته کمی شکر و نمک کمتر. بعد از چند هفته زبان عادت می‌کند.",
+        "ps": "ورو ورو بدلون راولئ: هره اونۍ لږه بوره او مالګه کمه کړئ. له څو اونیو وروسته ژبه ورسره عادت کېږي.",
+        "en": "Change slowly: a little less sugar and salt each week. In a few weeks the tongue gets used to it."
+      }
+    },
+    {
+      "id": "heart-food.bp",
+      "type": "link",
+      "to": "topic/blood-pressure",
+      "icon": "bp",
+      "title": {
+        "fa": "فشار خون بلند",
+        "ps": "د وینې لوړ فشار",
+        "en": "High blood pressure"
+      },
+      "text": {
+        "fa": "چرا بعد از ۴۰ سالگی هر سال آن را اندازه کنید، و علایم خطر آن.",
+        "ps": "ولې له ۴۰ کلنۍ وروسته هر کال اندازه کړئ، او د هغه د خطر نښې.",
+        "en": "Why to check it every year after 40, and its danger signs."
+      }
+    },
+    {
+      "id": "heart-food.move",
+      "type": "link",
+      "to": "topic/move-daily",
+      "icon": "walk",
+      "title": {
+        "fa": "تحرک هر روزه",
+        "ps": "هره ورځ حرکت",
+        "en": "Moving every day"
+      },
+      "text": {
+        "fa": "پیاده‌روی و حرکت‌های سادهٔ قوت هم قلب را محافظت می‌کند.",
+        "ps": "پلي ګرځېدل او د ځواک ساده حرکتونه هم زړه ساتي.",
+        "en": "Walking and simple strength moves protect the heart too."
+      }
+    },
+    {
+      "id": "heart-food.ask",
+      "type": "link",
+      "to": "ask",
+      "icon": "talk",
+      "title": {
+        "fa": "حالتان خوب نیست؟",
+        "ps": "ځان ناروغه احساسوئ؟",
+        "en": "Feeling unwell?"
+      },
+      "text": {
+        "fa": "اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.",
+        "ps": "که ځان ناروغه احساسوئ، د روغتیا برخې ته ولاړ شئ او «څه ستونزه لرئ؟» ووهئ.",
+        "en": "If you feel unwell, go to Health and tap What is wrong?"
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Healthy diet (2020): fruit, vegetables, legumes and whole grains every day; limit free sugars, salt, and saturated and industrial trans fats; prefer unsaturated oils",
+    "WHO Guideline: Sugars intake for adults and children (2015): free sugars below 10% of energy, ideally below 5%; sugar-sweetened drinks are a main source",
+    "WHO fact sheet: Sodium reduction (2023): less than 5 g of salt a day; too much salt raises blood pressure and the risk of heart disease and stroke",
+    "WHO fact sheet: Trans fat (2024) and REPLACE action package (2018): industrial trans fats (partly hydrogenated oils, e.g. solid vanaspati ghee) raise heart disease risk",
+    "WHO fact sheet: Hypertension (2023)"
+  ],
+  "review": [
+    "Mo's 'avoid processed items: cut out added sugars, fried foods' is kept and extended with sweet drinks and salt, as briefed, using local foods: tea with sugar, noql (sugared almonds), biscuits, fizzy and energy drinks, packet juice, qurut, pickles; vegetables, fruit, lentils, beans, chickpeas, whole wheat bread. 'Cut out' is softened to 'less', in the warm tone asked for.",
+    "Fats: 'liquid oil, not solid ghee or animal fat' follows WHO (prefer unsaturated oils; avoid industrial trans fats). Solid vanaspati ghee (often called 'dalda') is common in Afghan cooking and is the main trans-fat source; the brand name is left out. Check that 'روغن جامد / کلک غوړي' is how families name it.",
+    "Drinks: 'clean water' only. Dugh was left out because it is usually salted. Many energy drinks are sold to young men in Afghan bazaars.",
+    "'One bottle can hold many spoons of sugar' keeps it vague on purpose (a 500 ml cola has about 50 g, roughly 10 to 12 teaspoons). Add the number if you want it.",
+    "Salt: 'none at the meal' and 'salty qurut' (very salty dried yoghurt) are local points. WHO limit is under 5 g a day; no number given to families.",
+    "'Many years' in the lead and 'protect the heart' are general WHO healthy-diet claims; no statistics.",
+    "No alert box: the danger signs are on the blood-pressure page this links to. Icon 'water' used for drinks and 'food-iron' for vegetables and pulses (closest).",
+    "Words to check: Dari نُقل، نوشابهٔ انرژی، جوس قطی، روغن جامد، دم کنید، نان آرد کامل گندم (whole wheat bread: is there a better village word?); Pashto نُقل، د ډبې جوس، کلک غوړي، وازده، وایشوئ، د بشپړو غنمو اوړه.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: . Urgent signs are reached through the red link to the Health side."
+  ]
+}

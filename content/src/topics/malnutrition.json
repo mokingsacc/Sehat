@@ -1,0 +1,285 @@
+{
+  "id": "malnutrition",
+  "section": "children",
+  "title": {
+    "fa": "طفل لاغر (سوءتغذی)",
+    "ps": "ډنګر ماشوم (خوارځواکي)",
+    "en": "Thin child (malnutrition)"
+  },
+  "summary": {
+    "fa": "طفل بسیار لاغر در کلینیک رایگان تداوی می‌شود.",
+    "ps": "ډېر ډنګر ماشوم په کلینیک کې وړیا درملنه کېږي.",
+    "en": "A very thin child can be treated free at the clinic."
+  },
+  "image": "malnutrition",
+  "blocks": [
+    {
+      "id": "malnutrition.lead",
+      "type": "lead",
+      "text": {
+        "fa": "وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند و تداوی رایگان است.",
+        "ps": "کله چې ماشوم ډېر ډنګر وي، یا دواړه پښې یې پړسېدلې وي، بدن یې کمزوری وي او یوه ساده ناروغي یې وژلای شي. کلینیک دا حالت درملنه کوي او درملنه وړیا ده.",
+        "en": "When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this, and treatment is free."
+      }
+    },
+    {
+      "id": "malnutrition.signs",
+      "type": "step",
+      "icon": "muac",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "طفل بسیار لاغر است، قبرغه‌ها و استخوان‌هایش معلوم می‌شود، پوست سرینش شُل و چین‌خورده است، یا هر دو پایش پندیده است. شاید ضعیف باشد و میل به خوردن نداشته باشد.",
+        "ps": "ماشوم ډېر ډنګر وي، پښتۍ او هډوکي یې ښکاري، د کوناټو پوستکی یې شل او ګونځې وي، یا دواړه پښې یې پړسېدلې وي. ښايي کمزوری وي او خوړلو ته زړه ونه لري.",
+        "en": "The child is very thin, the ribs and bones show, the skin hangs loose on the buttocks, or both feet are swollen. The child may be weak and not want to eat."
+      }
+    },
+    {
+      "id": "malnutrition.band",
+      "type": "step",
+      "icon": "muac",
+      "title": {
+        "fa": "فیتهٔ رنگی بازو",
+        "ps": "د مټ رنګه فیته",
+        "en": "The coloured arm band"
+      },
+      "text": {
+        "fa": "کارمند صحی یا کارمند صحی قریه دور بازوی طفل را با یک فیتهٔ رنگی اندازه می‌کند. سرخ یعنی طفل همین حالا تداوی ضرورت دارد؛ زرد یعنی برای غذای اضافی و معاینه بیایید.",
+        "ps": "روغتیايي کارکوونکی یا د کلي روغتیايي کارکوونکی د ماشوم مټ په یوه رنګه فیته اندازه کوي. سور یعنې ماشوم همدا اوس درملنې ته اړتیا لري؛ ژېړ یعنې د اضافي خوړو او معاینې لپاره راشئ.",
+        "en": "The health worker or village health worker measures the upper arm with a coloured band. Red means the child needs treatment now; yellow means come for extra food and checks."
+      }
+    },
+    {
+      "id": "malnutrition.feed",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "در راه هم شیر و غذا بدهید",
+        "ps": "په لاره کې هم شیدې او خواړه ورکړئ",
+        "en": "Keep feeding on the way"
+      },
+      "text": {
+        "fa": "شیردهی را ادامه دهید. غذای نرم را کم‌کم و زیاد بار بدهید، روزی ۵ یا ۶ بار، و هر وقت می‌توانید کمی روغن، تخم، لوبیا یا ماست اضافه کنید.",
+        "ps": "تي ورکول ته دوام ورکړئ. نرم خواړه لږ لږ او ډېر ځله ورکړئ، په ورځ کې ۵ یا ۶ ځله، او کله چې کولای شئ لږ غوړي، هګۍ، لوبیا یا مستې ورسره ورکړئ.",
+        "en": "Keep breastfeeding. Offer small soft meals often, 5 or 6 times a day, with a little oil, egg, beans or yoghurt when you can."
+      }
+    },
+    {
+      "id": "malnutrition.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "طفل را گرم نگه دارید",
+        "ps": "ماشوم تود وساتئ",
+        "en": "Keep the child warm"
+      },
+      "text": {
+        "fa": "طفل بسیار لاغر زود سرد می‌شود. طفل را بپوشانید و نزدیک بدن خود نگه دارید، مخصوصاً شب و در راه.",
+        "ps": "ډېر ډنګر ماشوم ژر سړېږي. ماشوم وپوښئ او خپل بدن ته نږدې یې وساتئ، په تېره بیا د شپې او په لاره کې.",
+        "en": "A very thin child gets cold easily. Cover the child and keep them close to your body, especially at night and on the way."
+      }
+    },
+    {
+      "id": "malnutrition.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: وزن و خمیر مخصوص",
+        "ps": "په کلینیک کې: تول او ځانګړې خمیره",
+        "en": "At the clinic: weighing and special paste"
+      },
+      "text": {
+        "fa": "کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، یک خمیر مخصوص از بادام‌زمینی می‌گیرد که به خانه ببرد، رایگان، با معاینهٔ هفته‌وار.",
+        "ps": "روغتیايي کارکوونکی ماشوم تلي او د ناروغۍ لپاره یې معاینه کوي. هغه ډېر ډنګر ماشوم چې لا هم ښه خوري، د ممپلي یوه ځانګړې خمیره اخلي چې کور ته یې یوسي، وړیا، د اونیزې معاینې سره.",
+        "en": "The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, free, with weekly checks."
+      }
+    },
+    {
+      "id": "malnutrition.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: مراقبت از طفل ناتوان",
+        "ps": "په روغتون کې: د کمزوري ماشوم پاملرنه",
+        "en": "At the hospital: care for weak children"
+      },
+      "text": {
+        "fa": "طفل لاغری که نمی‌تواند بخورد، بسیار خواب‌آلود است، پاهایش پندیده یا مریض است، بستر می‌شود. شیر مخصوص، گرمی، انتی‌بیوتیک و تغذیهٔ دقیق می‌گیرد تا آن قدر قوی شود که به خانه برود.",
+        "ps": "هغه ډنګر ماشوم چې نه شي خوړلای، ډېر خوبولی وي، پښې یې پړسېدلې وي یا ناروغ وي، بستر کېږي. ځانګړې شیدې، تودوخه، انټي بیوټیک او دقیق تغذیه ورکول کېږي تر څو دومره پیاوړی شي چې کور ته ولاړ شي.",
+        "en": "A thin child who cannot eat, is very sleepy, has swollen feet or is sick is admitted. They get special milk, warmth, antibiotics and careful feeding until strong enough for home."
+      }
+    },
+    {
+      "id": "malnutrition.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "malnutrition.urgent.feet",
+          "icon": "swollen-feet",
+          "text": {
+            "fa": "هر دو پایش پندیده است",
+            "ps": "دواړه پښې یې پړسېدلې دي",
+            "en": "has swelling of both feet"
+          }
+        },
+        {
+          "id": "malnutrition.urgent.eat",
+          "icon": "no-drink",
+          "text": {
+            "fa": "بسیار لاغر است و نمی‌خورد و نمی‌نوشد",
+            "ps": "ډېر ډنګر دی او نه خوري او نه څښي",
+            "en": "is very thin and will not eat or drink"
+          }
+        },
+        {
+          "id": "malnutrition.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بسیار لاغر و بسیار خواب‌آلود است، یا به سختی بیدار می‌شود",
+            "ps": "ډېر ډنګر او ډېر خوبولی دی، یا په سختۍ ویښېږي",
+            "en": "is very thin and very sleepy, or hard to wake"
+          }
+        },
+        {
+          "id": "malnutrition.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "بسیار لاغر است و همه چیز را استفراغ می‌کند",
+            "ps": "ډېر ډنګر دی او هر څه کانګې کوي",
+            "en": "is very thin and vomits everything"
+          }
+        },
+        {
+          "id": "malnutrition.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "بسیار لاغر است و تب دارد، یا بدنش سرد است",
+            "ps": "ډېر ډنګر دی او تبه لري، یا بدن یې سوړ دی",
+            "en": "is very thin and has fever, or feels cold"
+          }
+        }
+      ]
+    },
+    {
+      "id": "malnutrition.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "malnutrition.soon.thin",
+          "icon": "muac",
+          "text": {
+            "fa": "از اطفال هم‌سن خود لاغرتر است",
+            "ps": "د خپل عمر له نورو ماشومانو ډنګر دی",
+            "en": "is thinner than other children of the same age"
+          }
+        },
+        {
+          "id": "malnutrition.soon.weight",
+          "icon": "growth",
+          "text": {
+            "fa": "وزن کم می‌کند، یا وزن نمی‌گیرد",
+            "ps": "وزن بایلي، یا وزن نه اخلي",
+            "en": "is losing weight, or not gaining weight"
+          }
+        },
+        {
+          "id": "malnutrition.soon.eating",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "چند روز است کمتر از پیش می‌خورد",
+            "ps": "څو ورځې کېږي چې له پخوا لږ خوري",
+            "en": "has eaten less than before for several days"
+          }
+        },
+        {
+          "id": "malnutrition.soon.diarrhoea",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "۱۴ روز یا بیشتر اسهال دارد",
+            "ps": "۱۴ ورځې یا ډېر نس ناستی لري",
+            "en": "has had diarrhoea for 14 days or more"
+          }
+        }
+      ]
+    },
+    {
+      "id": "malnutrition.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "malnutrition.dont.stop",
+          "icon": "no",
+          "text": {
+            "fa": "خمیر مخصوص را زود قطع نکنید؛ تمام دوره را تمام کنید.",
+            "ps": "ځانګړې خمیره وخته مه پرېږدئ؛ ټوله دوره بشپړه کړئ.",
+            "en": "Do not stop the special paste early; finish the whole course."
+          }
+        },
+        {
+          "id": "malnutrition.dont.share",
+          "icon": "family",
+          "text": {
+            "fa": "خمیر طفل را با اطفال دیگر تقسیم نکنید؛ این دوای همان طفل است.",
+            "ps": "د ماشوم خمیره له نورو ماشومانو سره مه شریکوئ؛ دا د همغه ماشوم درمل دي.",
+            "en": "Do not share the child's paste with other children; it is that child's medicine."
+          }
+        },
+        {
+          "id": "malnutrition.dont.sweets",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "به جای غذا چای، نوشابه یا شیرینی ندهید.",
+            "ps": "د خوړو پر ځای چای، سوډا یا خواږه مه ورکوئ.",
+            "en": "Do not give tea, fizzy drinks or sweets instead of food."
+          }
+        }
+      ]
+    },
+    {
+      "id": "malnutrition.fault",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "لاغری طفل تقصیر مادر نیست. مریضی، فقر و خشکسالی باعث آن می‌شود. از کلینیک در مورد غذای اضافی برای تمام فامیل بپرسید.",
+        "ps": "د ماشوم ډنګروالی د مور ګناه نه ده. ناروغي، بېوزلي او وچکالي یې لامل کېږي. له کلینیک څخه د ټولې کورنۍ لپاره د اضافي خوړو په اړه وپوښتئ.",
+        "en": "Malnutrition is not the mother's fault. Illness, poverty and drought cause it. Ask the clinic about extra food for the whole family."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guideline on the prevention and management of wasting and nutritional oedema (acute malnutrition) in infants and children under 5 years (2023): outpatient RUTF for uncomplicated SAM, inpatient care for complicated SAM",
+    "WHO IMCI Chart Booklet (2014): check for acute malnutrition (MUAC under 115 mm, oedema of both feet, medical complications), refer urgently if complicated",
+    "WHO Pocket Book of Hospital Care for Children (2013), chapter 7: severe acute malnutrition (warmth, F-75 and F-100 therapeutic milk, antibiotics, careful feeding)",
+    "WHO/UNICEF Facts for Life (2010): nutrition and growth; coughs, colds and more serious illnesses",
+    "WHO fact sheet: Malnutrition (1 Mar 2024)",
+    "Afghanistan IPEHS (2019): outpatient management of acute malnutrition from BHC level, inpatient (stabilisation) care at district hospital and above; BPHS (2010) nutrition component",
+    "Burden: UNICEF Afghanistan Humanitarian Situation Reports (2026): about 3.7 million children wasted in 2026, including about 942,000 with severe acute malnutrition; 522,233 SAM/MAM admissions Jan-Jul 2026; MICS 2022-23: stunting 51.3 percent in Samangan"
+  ],
+  "review": [
+    "RUTF is called 'a special peanut paste' (Dari خمیر مخصوص از بادام‌زمینی, Pashto د ممپلي ځانګړې خمیره). Confirm the words families in Samangan use for RUTF/Plumpy'Nut and for peanut.",
+    "'Free': outpatient SAM/MAM care is funded by UNICEF/WFP/HER and user fees are banned at BPHS facilities, but confirm the nearest BHC/CHC actually runs an OPD-SAM site.",
+    "MUAC colours: red under 115 mm (severe), yellow 115-124 mm (moderate), per IMCI 2014. Yellow children get supplementary food only where a MAM programme exists; wording says 'extra food and checks'.",
+    "Hospital block mentions antibiotics: WHO 2023 recommends antibiotics for children admitted with complicated SAM; for uncomplicated SAM it is a clinician decision, so the clinic block does not promise them.",
+    "'Weekly checks' reflects standard CMAM follow-up; confirm local schedule (some sites fortnightly).",
+    "Dari سوءتغذی and Pashto خوارځواکي are the formal words; a translator should check whether villagers say something simpler (e.g. کم‌غذایی / لاغری).",
+    "Icon wanted: a 'thin child' or 'swollen feet' icon on the summary; used muac and swollen-feet."
+  ]
+}

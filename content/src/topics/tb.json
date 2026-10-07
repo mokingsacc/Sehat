@@ -146,6 +146,34 @@
       }
     },
     {
+      "id": "tb.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ بلغم و دوای رایگان",
+        "ps": "په کلینیک کې: د بلغم معاینه او وړیا درمل",
+        "en": "At the clinic: sputum test, free medicine"
+      },
+      "text": {
+        "fa": "بلغم می‌دهید؛ نتیجه در یکی دو روز می‌آید. اگر مثبت باشد، کلینیک فوراً تابلیت‌ها را شروع می‌کند و هر ماه شما را می‌بیند. فامیل هم معاینه می‌شود.",
+        "ps": "بلغم ورکوئ؛ پایله په یوه دوه ورځو کې راځي. که مثبت وي، کلینیک سمدستي ګولۍ پیلوي او هره میاشت مو ویني. کورنۍ هم معاینه کېږي.",
+        "en": "You give sputum; the result comes in a day or two. If positive, the clinic starts the tablets at once and sees you monthly. The family is checked too."
+      }
+    },
+    {
+      "id": "tb.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: توبرکلوز شدید یا مقاوم",
+        "ps": "په روغتون کې: سخت یا مقاوم نری رنځ",
+        "en": "At the hospital: severe or resistant TB"
+      },
+      "text": {
+        "fa": "شخص بسیار ناخوش، طفل مشکوک به توبرکلوز، یا کسی که توبرکلوزش به دوا جواب نمی‌دهد در شفاخانه دیده می‌شود، که عکس سینه، معاینهٔ ماشینی و دواهای مخصوص توبرکلوز مقاوم را دارد، آن هم رایگان.",
+        "ps": "ډېر ناجوړه کس، د نري رنځ شکمن ماشوم، یا هغه څوک چې نری رنځ یې درملو ته ځواب نه وايي په روغتون کې کتل کېږي، چې د سینې عکس، ماشیني معاینه او د مقاوم نري رنځ ځانګړي درمل لري، هغه هم وړیا.",
+        "en": "A very ill person, a child with suspected TB, or someone whose TB does not respond goes to the hospital, which has X-ray, the machine test and medicines for resistant TB, free."
+      }
+    },
+    {
       "id": "tb.urgent",
       "type": "alert",
       "level": "urgent",
@@ -190,7 +218,10 @@
     "WHO consolidated guidelines on tuberculosis, Module 4: treatment (2022 update): 6-month regimen for drug-susceptible TB",
     "WHO consolidated guidelines on tuberculosis, Module 1: prevention (2024): household contact investigation and TB preventive treatment",
     "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021): symptom screen (cough, fever, night sweats, weight loss)",
-    "WHO guidelines on tuberculosis infection prevention and control (2019): cough etiquette, ventilation, separation"
+    "WHO guidelines on tuberculosis infection prevention and control (2019): cough etiquette, ventilation, separation",
+    "WHO consolidated guidelines on tuberculosis, Module 3: diagnosis (2024): rapid molecular tests (GeneXpert) as the initial test; Module 4: treatment (2022)",
+    "Afghanistan National TB Programme via Pajhwok (13 Nov 2025): 51,419 cases notified in 2024, free diagnosis and treatment at 3,189 centres, 138 GeneXpert machines",
+    "Afghanistan IPEHS (2019): TB diagnosis and treatment from CHC level; drug-resistant TB management at provincial/regional hospitals"
   ],
   "review": [
     "'Usually 6 months': WHO also has 4-month regimens (children with non-severe TB; HPMZ for people aged 12 and over), and drug-resistant TB takes longer.",
@@ -199,6 +230,8 @@
     "Added an urgent alert (coughing up a lot of blood, great difficulty breathing, too weak to get out of bed). This was not in the brief.",
     "'Sleep apart until the health worker says you can no longer spread TB' gives no fixed time on purpose.",
     "'Check the whole family' does not mention preventive treatment for child contacts by name ('young children may be given medicine to protect them' could be added).",
-    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
+    "'Result in a day or two' assumes smear microscopy or GeneXpert at a CHC; in villages far from a TB centre it can take longer.",
+    "Which Samangan facilities have GeneXpert is unknown; 'the machine test' is placed at the hospital."
   ]
 }

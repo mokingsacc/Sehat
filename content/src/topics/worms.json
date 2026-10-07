@@ -1,0 +1,256 @@
+{
+  "id": "worms",
+  "section": "children",
+  "title": {
+    "fa": "کرم‌های شکم",
+    "ps": "د نس چینجي",
+    "en": "Worms in the belly"
+  },
+  "summary": {
+    "fa": "کرم‌ها طفل را ضعیف و رنگ‌پریده می‌کنند. دوای کرم در کلینیک رایگان است.",
+    "ps": "چینجي ماشوم کمزوری او رنګ الوتی کوي. د چینجیو درمل په کلینیک کې وړیا دي.",
+    "en": "Worms make children weak and pale. Clinic worm medicine is free."
+  },
+  "image": "worms",
+  "blocks": [
+    {
+      "id": "worms.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کرم‌ها از راه خاک روی دست‌ها، غذا و پاهای برهنه داخل بدن می‌شوند. غذا و خون طفل را می‌خورند. دست‌های پاک و دوای کرم از کلینیک جلو آن‌ها را می‌گیرد.",
+        "ps": "چینجي د لاسونو، خوړو او لوڅو پښو له خاورو څخه بدن ته ننوځي. د ماشوم خواړه او وینه خوري. پاک لاسونه او له کلینیک څخه د چینجیو درمل یې مخه نیسي.",
+        "en": "Worms get into the body from dirt on hands, food and bare feet. They steal the child's food and blood. Clean hands and worm medicine from the clinic stop them."
+      }
+    },
+    {
+      "id": "worms.signs",
+      "type": "step",
+      "icon": "belly-pain",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "درد شکم، شکم پندیده، خارش اطراف مقعد در شب، کرم در مدفوع، بی‌اشتهایی، رنگ‌پریدگی، یا طفلی که خوب رشد نمی‌کند.",
+        "ps": "د نس درد، پړسېدلی نس، د شپې د کوناټو شاوخوا خارښت، په ډکو کې چینجي، بې اشتهايي، رنګ الوتی پوستکی، یا هغه ماشوم چې ښه نه لویېږي.",
+        "en": "Belly pain, a swollen belly, itching around the bottom at night, worms in the stool, poor appetite, pale skin, or a child who does not grow well."
+      }
+    },
+    {
+      "id": "worms.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "دوای کرم از ۱ سالگی",
+        "ps": "له ۱ کلنۍ د چینجیو درمل",
+        "en": "Worm medicine from 1 year"
+      },
+      "text": {
+        "fa": "از ۱ سالگی، کلینیک هر ۶ ماه یک تابلیت کرم می‌دهد، رایگان. در وقت واکسین یا وزن‌کردن آن را بخواهید.",
+        "ps": "له ۱ کلنۍ څخه، کلینیک هرو ۶ میاشتو کې د چینجیو یوه ګولۍ ورکوي، وړیا. د واکسین یا تلو پر وخت یې وغواړئ.",
+        "en": "From 1 year old, the clinic gives a worm tablet every 6 months, free. Ask for it at the vaccine or weighing visit."
+      }
+    },
+    {
+      "id": "worms.hands",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست‌ها را با صابون بشویید",
+        "ps": "لاسونه په صابون ومینځئ",
+        "en": "Wash hands with soap"
+      },
+      "text": {
+        "fa": "پیش از خوردن و پختن، و بعد از تشناب یا پاک کردن طفل. ناخن‌ها را کوتاه و پاک نگه دارید.",
+        "ps": "له خوړلو او پخولو مخکې، او له تشناب یا د ماشوم له پاکولو وروسته. نوکان لنډ او پاک وساتئ.",
+        "en": "Before eating and cooking, and after the toilet or cleaning a child. Keep nails short and clean."
+      }
+    },
+    {
+      "id": "worms.shoes",
+      "type": "step",
+      "icon": "foot",
+      "title": {
+        "fa": "بوت و تشناب",
+        "ps": "بوټان او تشناب",
+        "en": "Shoes and a latrine"
+      },
+      "text": {
+        "fa": "اطفال بیرون از خانه بوت یا چپلک بپوشند. همه از تشناب کار بگیرند، و زمین نزدیک خانه از مدفوع پاک باشد.",
+        "ps": "ماشومان له کوره بهر بوټان یا څپلۍ واغوندي. ټول له تشناب څخه کار واخلي، او کور ته نږدې ځمکه له ډکو پاکه وي.",
+        "en": "Children should wear shoes or sandals outside. Everyone should use a latrine, and the ground near the house should be clean of stool."
+      }
+    },
+    {
+      "id": "worms.food",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "سبزی را بشویید، گوشت را خوب بپزید",
+        "ps": "سابه ومینځئ، غوښه ښه پخه کړئ",
+        "en": "Wash vegetables, cook meat well"
+      },
+      "text": {
+        "fa": "میوه و سبزی را با آب پاک بشویید. گوشت را کاملاً بپزید. آب پاک بنوشید.",
+        "ps": "مېوه او سابه په پاکو اوبو ومینځئ. غوښه پوره پخه کړئ. پاکې اوبه وڅښئ.",
+        "en": "Wash fruit and vegetables with clean water. Cook meat fully. Drink safe water."
+      }
+    },
+    {
+      "id": "worms.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: تابلیت کرم و معاینهٔ خون",
+        "ps": "په کلینیک کې: د چینجیو ګولۍ او د وینې معاینه",
+        "en": "At the clinic: worm tablet, blood check"
+      },
+      "text": {
+        "fa": "کارمند صحی یک تابلیت کرم (البندازول یا میبندازول) می‌دهد و کم‌خونی را معاینه می‌کند. طفل رنگ‌پریده شاید شربت آهن هم بگیرد. تمام فامیل تداوی شده می‌توانند.",
+        "ps": "روغتیايي کارکوونکی د چینجیو یوه ګولۍ (البنډازول یا مېبنډازول) ورکوي او د وینې کمښت معاینه کوي. رنګ الوتی ماشوم ښايي د اوسپنې شربت هم واخلي. ټوله کورنۍ درملنه کېدای شي.",
+        "en": "The health worker gives a single worm tablet (albendazole or mebendazole) and checks for anaemia. A pale child may also get iron syrup. The whole family can be treated."
+      }
+    },
+    {
+      "id": "worms.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "worms.urgent.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم با شکم سخت و پندیده دارد",
+            "ps": "د نس سخت درد لري او نس یې کلک او پړسېدلی دی",
+            "en": "has severe belly pain with a hard, swollen belly"
+          }
+        },
+        {
+          "id": "worms.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "همه چیز را استفراغ می‌کند، یا کرم استفراغ می‌کند",
+            "ps": "هر څه کانګې کوي، یا چینجي کانګې کوي",
+            "en": "vomits everything, or vomits worms"
+          }
+        },
+        {
+          "id": "worms.urgent.pale",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بسیار رنگ‌پریده و بسیار خواب‌آلود است، یا نفسش تنگ است",
+            "ps": "ډېر رنګ الوتی او ډېر خوبولی دی، یا ساه یې لنډه ده",
+            "en": "is very pale and very sleepy, or short of breath"
+          }
+        }
+      ]
+    },
+    {
+      "id": "worms.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "worms.soon.stool",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "در مدفوع یا استفراغ کرم دارد",
+            "ps": "په ډکو یا کانګو کې چینجي لري",
+            "en": "has worms in the stool or vomit"
+          }
+        },
+        {
+          "id": "worms.soon.pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شکمی دارد که بار بار برمی‌گردد",
+            "ps": "د نس داسې درد لري چې بیا بیا راګرځي",
+            "en": "has belly pain that keeps coming back"
+          }
+        },
+        {
+          "id": "worms.soon.pale",
+          "icon": "eye",
+          "text": {
+            "fa": "رنگ‌پریده است، یا خسته و ضعیف است",
+            "ps": "رنګ الوتی دی، یا ستړی او کمزوری دی",
+            "en": "looks pale, or is tired and weak"
+          }
+        },
+        {
+          "id": "worms.soon.weight",
+          "icon": "growth",
+          "text": {
+            "fa": "وزن نمی‌گیرد",
+            "ps": "وزن نه اخلي",
+            "en": "is not gaining weight"
+          }
+        }
+      ]
+    },
+    {
+      "id": "worms.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "worms.dont.baby",
+          "icon": "pill",
+          "text": {
+            "fa": "برای طفل زیر ۱ سال بدون پرسیدن از کارمند صحی دوای کرم نخرید.",
+            "ps": "تر ۱ کال کم ماشوم ته د روغتیايي کارکوونکي له پوښتلو پرته د چینجیو درمل مه اخلئ.",
+            "en": "Do not give a baby under 1 year worm medicine unless the clinic says."
+          }
+        },
+        {
+          "id": "worms.dont.kerosene",
+          "icon": "no",
+          "text": {
+            "fa": "برای کرم از تیل خاک، گیاه یا دواهای خانگی دیگر کار نگیرید.",
+            "ps": "د چینجیو لپاره له خاورینو تېلو، بوټو یا نورو کورنیو درملو کار مه اخلئ.",
+            "en": "Do not use kerosene, herbs or other home cures for worms."
+          }
+        }
+      ]
+    },
+    {
+      "id": "worms.together",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "دوای کرم وقتی بهترین اثر را دارد که تمام فامیل و همسایه‌ها یکجا بخورند و همه از تشناب کار بگیرند.",
+        "ps": "د چینجیو درمل هغه وخت ښه اغېز کوي چې ټوله کورنۍ او ګاونډیان یې یوځای وخوري او ټول له تشناب څخه کار واخلي.",
+        "en": "Worm medicine works best when the whole family and the neighbours take it at the same time, and everyone uses a latrine."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Soil-transmitted helminth infections (18 Jan 2023): transmission, signs, periodic deworming with albendazole or mebendazole, WASH",
+    "WHO guideline: Preventive chemotherapy to control soil-transmitted helminth infections in at-risk population groups (2017): annual or twice-yearly deworming of children from 12 months",
+    "WHO IMCI Chart Booklet (2014): give mebendazole from 1 year of age if no dose in the previous 6 months; check for anaemia and give iron",
+    "WHO Pocket Book of Hospital Care for Children (2013): anaemia; intestinal obstruction by worms as a surgical emergency",
+    "Afghanistan BPHS (2010): mebendazole in the Basic Health Centre drug list; Afghanistan National Essential Medicines List (2014): albendazole, mebendazole, iron",
+    "WHO/UNICEF Facts for Life (2010): hygiene; nutrition and growth"
+  ],
+  "review": [
+    "The clinic block names albendazole/mebendazole as what the clinic gives (no dose). Confirm with Mo that naming the medicine is acceptable here; delete the brackets if not.",
+    "'Every 6 months from 1 year, free': IMCI 2014 and the BPHS schedule; Afghanistan's mass deworming has mostly been school-based, so confirm that BHCs stock mebendazole/albendazole for under-fives in Samangan.",
+    "Urgent item 'vomits worms' is meant to catch ascaris intestinal obstruction (Pocket Book 2013); keep or soften as Mo prefers.",
+    "'Worm medicine for a baby under 1 year' do-not item: WHO deworming starts at 12 months; wording leaves the decision to the health worker.",
+    "Dari کرم‌های شکم and Pashto د نس چینجي are everyday words; Pashto spelling چینجي (plural) to be checked by a native speaker."
+  ]
+}

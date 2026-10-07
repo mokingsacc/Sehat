@@ -311,7 +311,13 @@ Source: ERC Guidelines 2021 Basic Life Support (Olasveengen et al., Resuscitatio
 
 ### Batch 2: daily hygiene and diarrhoea (v2 style)
 
-Their narration is already in `content/src/anims.json` (same text as the draft) and `tools/build.py` precaches `anim/*.js` by glob, so they ship offline. Not yet placed on any page: that needs `anim` blocks in the topics. Suggested placements: `water` on the safe-water / diarrhoea page, `nappies` on the newborn or baby-care page, `handwashing` on the hygiene page and the diarrhoea page, `ors` on the diarrhoea page (after the lead), `spread` on the hygiene page or the home page's "keep the family well" section. Posters in `anim/demo.html`: water s2, nappies s4, handwashing s6, ors s3, spread s7 (indexes 1, 3, 5, 2, 6).
+Their narration is in `content/src/anims.json` and `tools/build.py` precaches `anim/*.js` by glob, so they ship offline.
+
+Placed on pages (content merge 2, 2026-10-07), each right after the page's lead, with no title of its own (the block reads `anim.<name>.title`): `ors` and `water` on Diarrhoea (children) and Diarrhoea in adults; `handwashing` and `spread` on Clean hands, water and food (hygiene); `nappies` on Newborn care. At most 2 per page.
+
+Medical defaults chosen for the narration (Mo to confirm): chlorine tablets "follow the dose on the packet" (no fixed tablet-to-litre example); ash only "if there is no soap"; packet ORS only, no home sugar-salt recipe (no packet: rice water or soup for now, and go to the clinic for packets). **The pictures were not changed** (`anim/*.js` belongs to the animation worker): water s3 still shows the badge "1 tablet -> 1 jerrycan" and ors s3 still shows the sugar and salt teaspoons. Both should be redrawn to match the new lines (a packet with a "read the dose" label; a rice-water bowl and a clinic).
+
+Posters in `anim/demo.html`: water s2, nappies s4, handwashing s6, ors s3, spread s7 (indexes 1, 3, 5, 2, 6).
 
 #### anim.water: Making water safe
 
@@ -322,7 +328,7 @@ Sources: WHO Guidelines for drinking-water quality, 4th edition incorporating th
 | `anim.water.title` | poster = scene 2 | Making water safe |
 | `anim.water.s1` | in the yard a woman holds a glass of clear-looking water; a magnifying glass slides over it and shows germs | Water can look clear and still carry germs that give children diarrhoea. Mothers have found a few easy ways to make it safe. |
 | `anim.water.s2` | close-up: a pot on a hearth fire, big rolling bubbles and steam; a timer sweeps 1 minute; the lid drops on | Boil it: wait until big bubbles roll, then keep it boiling for 1 minute. Let it cool with the lid on. |
-| `anim.water.s3` | a hand drops a tablet into the opening of a yellow jerrycan; the tablet packet; badge "1 tablet -> 1 jerrycan" | Short of firewood? Use the chlorine tablets the clinic or health worker gives out. Ask how much water one tablet is for: for example, one big tablet for a 20-litre jerrycan. |
+| `anim.water.s3` | a hand drops a tablet into the opening of a yellow jerrycan; the tablet packet; badge "1 tablet -> 1 jerrycan" | Short of firewood? Use the chlorine tablets the clinic or health worker gives out. Follow the dose on the packet; ask the health worker to read it to you. |
 | `anim.water.s4` | a woman shakes the closed jerrycan; a timer fills half (30 minutes); a cup with a green tick | Close the lid, shake it, and wait 30 minutes before anyone drinks. A light chlorine smell is normal: it means the tablet is working. |
 | `anim.water.s5` | indoors, a seated woman scrubs a container in a basin with soap; a clay water pot with a lid and tap stands on a stand off the floor | Keep drinking water covered, in a clean container up off the floor. Wash the container with soap every few days. |
 | `anim.water.s6` | water pours from the pot's tap into a cup, green tick; inset: a cup dipped into the pot, red cross | Pour the water out from the tap or spout. Don't dip cups or hands into the pot: that brings the germs back in. |
@@ -352,7 +358,7 @@ Sources: WHO/UNICEF Facts for Life (2010), hygiene; UNICEF "Handwashing with soa
 | `anim.handwashing.s3` | indoors, a woman washes at the clay water pot's tap; food waits on a low board (bowl, fruit, naan) | Wash before you start preparing food. |
 | `anim.handwashing.s4` | at the dastarkhan a seated mother pours water from an ewer over a child's hands into a basin; the grandmother waits by the food | Wash before eating and before feeding a child. Wash the children's hands too. |
 | `anim.handwashing.s5` | a daughter pours water for her mother; the baby lies nearby waiting to be fed | Wash before breastfeeding your baby. |
-| `anim.handwashing.s6` | close-up: two hands rub with lather (palms, backs, between the fingers, thumbs); a timer sweeps 20 seconds | Wet your hands, add soap or ash, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails. |
+| `anim.handwashing.s6` | close-up: two hands rub with lather (palms, backs, between the fingers, thumbs); a timer sweeps 20 seconds | Wet your hands, add soap, or ash if there is no soap, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails. |
 | `anim.handwashing.s7` | close-up: hands under a stream of poured water, drops fall; a clean cloth | Rinse under running water. Shake your hands dry or use a clean cloth. |
 
 #### anim.ors: Making ORS at home
@@ -364,7 +370,7 @@ Sources: WHO "The treatment of diarrhoea: a manual for physicians and other seni
 | `anim.ors.title` | poster = scene 3 | Making ORS at home |
 | `anim.ors.s1` | a sick child lies on a toshak, the mother beside him; a glass on the shelf drains drop by drop; an ORS sachet with a tick | Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost. |
 | `anim.ors.s2` | a 1-litre jug with a mark; a sachet tilts and powder pours in; a spoon stirs; inset: washing hands | Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves. |
-| `anim.ors.s3` | the jug; a teaspoon makes trips from a sugar bowl (6 chips fill) and from a salt bowl (half a chip) | No packet? Mix 6 level teaspoons of sugar and half a level teaspoon of salt into 1 litre of clean water. Measure carefully: too much salt is harmful. |
+| `anim.ors.s3` | the jug; a teaspoon makes trips from a sugar bowl (6 chips fill) and from a salt bowl (half a chip) | No packet? For now give rice water or soup, and go to the clinic for ORS packets. Always keep a few packets at home. |
 | `anim.ors.s4` | a seated mother gives a toddler sips from a spoon; the jug and a cup beside her; a stopwatch for the 10-minute wait | Give small sips often, with a spoon or a cup. If the child vomits, wait 10 minutes, then give it more slowly. Make it fresh each day. |
 | `anim.ors.s5` | the mother breastfeeds; a zinc blister pack; 14 day dots (10 filled, 4 more) | Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 10 to 14 days, help the child get well, even after the diarrhoea stops. |
 | `anim.ors.s6` | five danger-sign icons (cannot drink, very sleepy, blood, fever, getting worse); the mother walks to the clinic with the child | Go to the clinic quickly if the child cannot drink or breastfeed, is very sleepy, has blood in the poo, has a fever, or is not getting better. |

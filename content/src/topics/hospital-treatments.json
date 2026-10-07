@@ -1,0 +1,165 @@
+{
+  "id": "hospital-treatments",
+  "section": "everyone",
+  "title": {
+    "fa": "تداوی‌های معمول",
+    "ps": "عامې درملنې",
+    "en": "Common treatments"
+  },
+  "summary": {
+    "fa": "سیروم، پیچکاری، اکسیجن، بخیه، خون و عملیات، به زبان ساده",
+    "ps": "سیروم، پیچکاري، اکسیجن، ټانکې، وینه او عملیات، په ساده ژبه",
+    "en": "Drips, injections, oxygen, stitches, blood and operations, explained simply"
+  },
+  "image": "hospital-treatments",
+  "blocks": [
+    {
+      "id": "hospital-treatments.lead",
+      "type": "lead",
+      "text": {
+        "fa": "تداوی‌های شفاخانه شاید ترسناک معلوم شود، اما بیشتر آن‌ها ساده است و زود کمک می‌کند. می‌توانید از کارمندان بخواهید هر کدام را توضیح بدهند.",
+        "ps": "د روغتون درملنې کېدای شي ډارونکې ښکاره شي، خو ډېرې یې ساده دي او ژر مرسته کوي. کولی شئ له کارکوونکو وغواړئ چې هره یوه تشریح کړي.",
+        "en": "Hospital treatments can look frightening, but most are simple and help quickly. You can ask the staff to explain each one."
+      }
+    },
+    {
+      "id": "hospital-treatments.drip",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "سیروم: مایع در رگ",
+        "ps": "سیروم: رګ ته اوبه",
+        "en": "Drip: fluid into a vein"
+      },
+      "text": {
+        "fa": "یک نل نازک و نرم در رگ دست یا بازو گذاشته می‌شود. وقتی مریض به اندازهٔ کافی نوشیده نمی‌تواند، آب، نمک یا دوا می‌دهد. فقط سوزن اول درد دارد.",
+        "ps": "یو نری او نرم نل د لاس یا مټ په رګ کې ایښودل کېږي. کله چې ناروغ کافي اوبه نشي څښلای، اوبه، مالګې یا درمل ورکوي. یوازې لومړۍ ستنه درد کوي.",
+        "en": "A thin soft tube goes into a vein in the hand or arm. It gives water, salts or medicine when the person cannot drink enough. Only the first prick hurts."
+      },
+      "picture": "hosp-drip"
+    },
+    {
+      "id": "hospital-treatments.injection",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "پیچکاری",
+        "ps": "پیچکاري",
+        "en": "Injection"
+      },
+      "text": {
+        "fa": "دوا با سوزن در عضله یا رگ داده می‌شود. زود اثر می‌کند، و فقط یک لحظه درد دارد.",
+        "ps": "درمل په ستنې سره عضلې یا رګ ته ورکول کېږي. ژر اغېز کوي، او یوازې یوه شېبه درد کوي.",
+        "en": "Medicine goes in with a needle, into a muscle or a vein. It works fast, and stings only for a moment."
+      }
+    },
+    {
+      "id": "hospital-treatments.oxygen",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "اکسیجن و نبولایزر",
+        "ps": "اکسیجن او نبولایزر",
+        "en": "Oxygen and nebuliser"
+      },
+      "text": {
+        "fa": "اکسیجن از راه نل‌های نرم در بینی، یا ماسک، به کسی که نفس‌تنگی دارد کمک می‌کند. نبولایزر دوا را بخار می‌سازد تا مریض آن را نفس بکشد.",
+        "ps": "اکسیجن د پوزې د نرمو نلونو یا ماسک له لارې، له هغه چا سره مرسته کوي چې ساه لنډي لري. نبولایزر درمل په بړاس بدلوي، څو ناروغ یې په ساه کې واخلي.",
+        "en": "Oxygen through soft tubes in the nose, or a mask, helps someone short of breath. A nebuliser turns medicine into a mist to breathe in."
+      }
+    },
+    {
+      "id": "hospital-treatments.stitches",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "بخیه و گچ",
+        "ps": "ټانکې او ګچ",
+        "en": "Stitches and plaster"
+      },
+      "text": {
+        "fa": "بخیه زخم عمیق را می‌بندد، بعد از دوایی که پوست را بی‌حس می‌کند. گچ، استخوان شکسته را بی‌حرکت نگه می‌دارد تا راست جور شود.",
+        "ps": "ټانکې ژور ټپ تړي، وروسته له هغه درمل چې پوستکی بې‌حسه کوي. ګچ مات هډوکی ساکن ساتي، څو سم جوړ شي.",
+        "en": "Stitches close a deep cut, after medicine to numb the skin. A plaster cast holds a broken bone still, so it heals straight."
+      }
+    },
+    {
+      "id": "hospital-treatments.blood",
+      "type": "step",
+      "icon": "bleeding",
+      "title": {
+        "fa": "خون دادن به مریض",
+        "ps": "ناروغ ته وینه ورکول",
+        "en": "Blood transfusion"
+      },
+      "text": {
+        "fa": "وقتی کسی خون زیاد از دست داده یا خونش خیلی کم است، خون اهدایی از راه سیروم داده می‌شود. خون اول معاینه می‌شود. شاید از فامیل بخواهند که خون بدهند.",
+        "ps": "کله چې څوک ډېره وینه له لاسه ورکړي یا یې وینه ډېره کمه وي، د بسپنې وینه د سیروم له لارې ورکول کېږي. وینه لومړی معاینه کېږي. کېدای شي له کورنۍ وغوښتل شي چې وینه ورکړي.",
+        "en": "Donated blood goes in through a drip when someone has lost a lot of blood, or has very little. It is checked first. Family may be asked to give blood."
+      }
+    },
+    {
+      "id": "hospital-treatments.operation",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "عملیات و بیهوشی",
+        "ps": "عملیات او بې‌هوښي",
+        "en": "Operation and anaesthesia"
+      },
+      "text": {
+        "fa": "دوای بیهوشی مریض را خواب می‌کند، یا یک قسمت بدن را بی‌حس می‌کند، تا درد نداشته باشد. پیش از عملیات چیزی نخورید و ننوشید، مگر کارمندان اجازه بدهند.",
+        "ps": "د بې‌هوښۍ درمل ناروغ ویده کوي، یا د بدن یوه برخه بې‌حسه کوي، څو درد ونه لري. له عملیات مخکې څه مه خورئ او مه څښئ، مګر دا چې کارکوونکي اجازه درکړي.",
+        "en": "Anaesthesia medicine makes the person sleep, or numbs one part, so there is no pain. Do not eat or drink before, unless the staff say you may."
+      }
+    },
+    {
+      "id": "hospital-treatments.caesarean",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "ولادت با عملیات سزارین",
+        "ps": "د سزارین عملیات زېږون",
+        "en": "Caesarean birth"
+      },
+      "text": {
+        "fa": "وقتی ولادت عادی بی‌خطر نیست، طفل از راه یک برش در شکم به دنیا می‌آید. بیشتر مادران و اطفال خوب می‌شوند، و شیردهی را زود شروع کرده می‌توانند.",
+        "ps": "کله چې عادي زېږون خوندي نه وي، ماشوم د نس د یوه چاک له لارې زېږول کېږي. ډېری میندې او ماشومان ښه کېږي، او ژر تي ورکول پیلولی شي.",
+        "en": "When a normal birth is not safe, the baby is born through a cut in the belly. Most mothers and babies do well, and can start breastfeeding soon."
+      }
+    },
+    {
+      "id": "hospital-treatments.first-aid",
+      "type": "link",
+      "to": "topic/first-aid",
+      "icon": "wound",
+      "title": {
+        "fa": "کمک‌های اولیه در راه",
+        "ps": "په لاره کې لومړنۍ مرستې",
+        "en": "First aid on the way"
+      },
+      "text": {
+        "fa": "برای خونریزی، سوختگی، تشنج و زخم، پیش از رسیدن به کمک چه کنید.",
+        "ps": "د وینې بهېدو، سوځېدنې، اختلاج او ټپونو لپاره، مرستې ته تر رسېدو مخکې څه وکړئ.",
+        "en": "What to do for bleeding, burns, fits and injuries before you reach help."
+      }
+    }
+  ],
+  "sources": [
+    "NHS (nhs.uk) health A to Z: Intravenous (IV) fluids / drip, Blood transfusion, General anaesthesia, Stitches, Broken arm or wrist (plaster cast), Caesarean section, Nebuliser, Home oxygen",
+    "WHO fact sheet Blood safety and availability (2025): screening of donated blood; family/replacement donors",
+    "WHO recommendations: non-clinical interventions to reduce unnecessary caesarean sections (2018) and WHO statement on caesarean section rates (2015); WHO PCPNC (2015): early breastfeeding",
+    "WHO Oxygen therapy for children (2016): nasal prongs and masks",
+    "WHO Surgical Safety Checklist (2009) and WHO Pocket Book of Hospital Care for Children (2013): fasting before anaesthesia, IV fluids"
+  ],
+  "review": [
+    "Drip: Afghans usually call an IV drip سیروم (also in Pashto). The text explains it as 'fluid into a vein'. Many families believe a drip is a general tonic and ask for one; a line such as 'A drip is not needed if the person can drink' could be added. Decide.",
+    "Injection: no mention that tablets often work as well as injections (a common local belief that injections are stronger). Consider adding.",
+    "Blood transfusion: 'Family may be asked to give blood' reflects replacement-donor practice in Afghanistan (WHO prefers voluntary donors). Check for Samangan.",
+    "Anaesthesia: 'Do not eat or drink before, unless the staff say you may'. Breastfed babies have shorter fasting; staff will say.",
+    "Caesarean: 'Most mothers and babies do well' is general reassurance; no numbers given. Afghan Dari سزارین; Pashto سزارین عملیات (also سیزیرین). Native speakers to choose.",
+    "Stitches: Dari بخیه, Pashto ټانکې; plaster cast: گچ / ګچ. Check.",
+    "Nebuliser: نبولایزر in both languages, explained as 'turns medicine into a mist'.",
+    "Icons: drip uses 'drops', oxygen 'breathe', stitches and plaster 'wound', transfusion 'bleeding', operation 'sleep' (bed), caesarean 'pregnant'. Wanted: 'drip', 'oxygen', 'cast'."
+  ]
+}

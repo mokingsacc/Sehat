@@ -113,6 +113,34 @@
       }
     },
     {
+      "id": "diabetes.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ شکر و دوا",
+        "ps": "په کلینیک کې: د شکرې معاینه او درمل",
+        "en": "At the clinic: sugar test and medicine"
+      },
+      "text": {
+        "fa": "کارمند صحی شکر را با معاینهٔ نوک انگشت می‌بیند، فشار خون، پاها و چشم‌ها را معاینه می‌کند و در مورد غذا مشوره می‌دهد. اکثر مردم یک تابلیت روزانه (میتفورمین) شروع می‌کنند؛ بعضی به انسولین از شفاخانه ضرورت دارند.",
+        "ps": "روغتیايي کارکوونکی شکره د ګوتې په معاینه ګوري، د وینې فشار، پښې او سترګې معاینه کوي او د خوړو په اړه مشوره ورکوي. ډېری خلک ورځنۍ ګولۍ (مېټفورمین) پیلوي؛ ځینې له روغتون څخه انسولین ته اړتیا لري.",
+        "en": "The health worker tests sugar with a finger prick, checks blood pressure, feet and eyes, and advises on food. Most people start a daily tablet (metformin); some need insulin from the hospital."
+      }
+    },
+    {
+      "id": "diabetes.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: بحران شکر، زخم پا",
+        "ps": "په روغتون کې: د شکرې بحران، د پښې زخم",
+        "en": "At the hospital: sugar crisis, foot wounds"
+      },
+      "text": {
+        "fa": "مریض شکری که استفراغ می‌کند، گیج یا بسیار خواب‌آلود است، در شفاخانه به سیروم و انسولین ضرورت دارد. زخم چرکی پا به انتی‌بیوتیک پیچکاری و مراقبت زخم ضرورت دارد تا پا نجات یابد.",
+        "ps": "د شکرې ناروغ چې کانګې کوي، ګډوډ یا ډېر خوبولی وي، په روغتون کې سیروم او انسولین ته اړتیا لري. د پښې چرکن زخم پیچکاري انټي بیوټیک او د زخم پاملرنې ته اړتیا لري چې پښه وژغورل شي.",
+        "en": "Someone with diabetes who is vomiting, confused or very drowsy needs fluids and insulin by drip in hospital. An infected foot wound needs injected antibiotics and wound care to save the foot."
+      }
+    },
+    {
       "id": "diabetes.soon",
       "type": "alert",
       "level": "soon",
@@ -195,13 +223,16 @@
     "WHO fact sheet: Diabetes (November 2024): symptoms, healthy diet, physical activity, foot care",
     "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020): lifestyle advice, foot care, hypoglycaemia",
     "WHO Package of Essential Noncommunicable Disease Interventions (PEN) 2013, Protocols 2 and 3: diet, activity, foot care, hypoglycaemia (give sugar if able to swallow), referral",
-    "WHO guideline: Sugars intake for adults and children (2015)"
+    "WHO guideline: Sugars intake for adults and children (2015)",
+    "WHO guidelines on second- and third-line medicines and type of insulin for type 2 diabetes (2018); WHO PEN (2020): metformin first line, insulin referral, foot and eye checks",
+    "Afghanistan IPEHS (2019): diabetes screening and metformin from CHC level; insulin at district hospital and above; Afghanistan National Essential Medicines List (2014): metformin, glibenclamide, insulin"
   ],
   "review": [
     "Low sugar: sugar or a sweet drink is given only 'if they can swallow', and the drink is described as sweet tea or sugar water in fa/ps. No amount is given.",
     "Added a 'clinic today' alert (a new cut or sore on the foot, a wound that is not healing, low sugar that keeps coming back). This was not in the brief.",
     "Walking 'about half an hour every day' is based on WHO's 150 minutes a week.",
     "Urgent 'confusion or unconsciousness' covers both high and low sugar. Fast or deep breathing (DKA) is not listed separately.",
-    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
+    "Metformin is named (WHO PEN first line); confirm Samangan CHCs stock it and whether insulin is reliably available at Aybak provincial hospital."
   ]
 }

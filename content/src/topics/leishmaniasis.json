@@ -98,6 +98,34 @@
       }
     },
     {
+      "id": "leishmaniasis.treatment",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: پیچکاری در زخم",
+        "ps": "په کلینیک کې: په زخم کې پیچکاري",
+        "en": "At the clinic: injections into the sore"
+      },
+      "text": {
+        "fa": "سالک با تراشیدن زخم و دیدن زیر میکروسکوپ تایید می‌شود. تداوی پیچکاری هفته‌وار یک دوا (گلوکانتیم) در داخل زخم برای چند هفته است، در مراکز دولتی رایگان. هر نوبت را حاضر شوید.",
+        "ps": "سالک د زخم په تراشلو او د مایکروسکوپ لاندې کتلو تاییدېږي. درملنه د څو اونیو لپاره په زخم کې د یوه درمل (ګلوکانتیم) اونیزه پیچکاري ده، په دولتي مرکزونو کې وړیا. هره لیدنه حاضر شئ.",
+        "en": "Salak is confirmed by scraping the sore and looking under a microscope. Treatment is weekly injections of a medicine (glucantime) into the sore for several weeks, free at government centres."
+      }
+    },
+    {
+      "id": "leishmaniasis.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: زخم‌های زیاد یا بزرگ",
+        "ps": "په روغتون کې: ډېر یا لوی زخمونه",
+        "en": "At the hospital: many or large sores"
+      },
+      "text": {
+        "fa": "زخم‌های زیاد، زخم روی روی یا نزدیک چشم، یا زخم‌هایی که با پیچکاری جور نمی‌شوند، در شفاخانه با یک دورهٔ پیچکاری در عضله یا سیروم، زیر نظر داکتر تداوی می‌شوند.",
+        "ps": "ډېر زخمونه، پر مخ یا سترګې ته نږدې زخم، یا هغه زخمونه چې په پیچکارۍ نه جوړېږي، په روغتون کې د عضلې په پیچکارۍ یا سیروم یوه دوره، د ډاکټر تر څارنې لاندې درملنه کېږي.",
+        "en": "Many sores, sores on the face or near the eye, or sores not healing with injections are treated at the hospital with injections into the muscle or a drip, under supervision."
+      }
+    },
+    {
       "id": "leishmaniasis.soon-infected",
       "type": "alert",
       "level": "soon",
@@ -237,13 +265,17 @@
     "WHO fact sheet: Leishmaniasis (12 Jan 2023)",
     "WHO EMRO Manual for case management of cutaneous leishmaniasis in the WHO Eastern Mediterranean Region (2014)",
     "WHO Control of the leishmaniases, TRS 949 (2010): personal protection, treated nets, covering lesions in anthroponotic CL",
-    "Burden: Rahimi et al., medRxiv 12 Aug 2026 (87,245 cases in 2024; Hazrat-e-Sultan, Samangan 234.5/10,000; Jawzjan highest province)"
+    "Burden: Rahimi et al., medRxiv 12 Aug 2026 (87,245 cases in 2024; Hazrat-e-Sultan, Samangan 234.5/10,000; Jawzjan highest province)",
+    "WHO EMRO Manual for case management of cutaneous leishmaniasis in the WHO Eastern Mediterranean Region (2014): diagnosis by smear, intralesional and systemic antimonials (meglumine antimoniate), thermotherapy and cryotherapy",
+    "Afghanistan National Essential Medicines List (2014): meglumine antimoniate; Afghanistan national leishmaniasis programme (MoPH with WHO support): free treatment at designated centres"
   ],
   "review": [
     "Local names: 'سالک' (Dari) and 'د سالک زخم' (Pashto) are assumed. Confirm what families in Samangan call it (e.g. 'Kabul sore'/'دانهٔ کابلی'). Sandfly is written 'پشهٔ خاکی' (Dari) and 'د شګو ماشی' (Pashto); bed net is 'پشه‌خانه' / 'پشه خانه'.",
     "The 'not healed after two weeks' threshold for a clinic visit this week is pragmatic, not from WHO.",
     "The harmful practices listed (acid, battery water, hot metal on the sore) are assumed from regional practice and are not sourced. Confirm they happen locally or replace them.",
     "Two soon alerts are used (infected sore: today; possible salak: this week). Check this is acceptable for the app layout.",
-    "Advice to cover sores to stop sandfly spread applies to the anthroponotic (L. tropica) form, which made up 92% of 2024 cases."
+    "Advice to cover sores to stop sandfly spread applies to the anthroponotic (L. tropica) form, which made up 92% of 2024 cases.",
+    "'Glucantime' (meglumine antimoniate) named because it is the brand people know; confirm Samangan CL treatment centres (Aybak) and their supply in 2026 (shortages were reported nationally).",
+    "Weekly intralesional injections 'for several weeks' follows WHO EMRO 2014; exact schedule left to the clinic."
   ]
 }

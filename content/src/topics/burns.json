@@ -261,13 +261,19 @@
       }
     },
     {
-      "id": "burns.prevent",
-      "type": "tip",
+      "id": "burns.safety",
+      "type": "link",
+      "to": "topic/fire-safety",
       "icon": "stove",
+      "title": {
+        "fa": "جلوگیری از سوختگی و آتش‌سوزی",
+        "ps": "د سوځېدنې او اور مخنیوی",
+        "en": "Prevent burns and fires"
+      },
       "text": {
-        "fa": "اطفال را از تنور دور نگه دارید و چای و دیگ داغ را بلند و دور از دست‌شان بگذارید.",
-        "ps": "ماشومان له تنوره لرې وساتئ او ګرمه چای او کټوګان لوړ او د هغوی له لاسه لرې کېږدئ.",
-        "en": "Keep children away from the tandoor, and put hot tea and pots up high, out of their reach."
+        "fa": "تنور، چراغ، تیل خاک و دیگ داغ: چطور خانواده را بی‌خطر نگه دارید. صفحه را باز کنید.",
+        "ps": "تنور، څراغ، خاورین تېل او ګرم کټوګان: څنګه خپله کورنۍ خوندي وساتئ. پاڼه پرانیزئ.",
+        "en": "Tandoor, lamps, kerosene and hot pots: how to keep your family safe. Open the page."
       }
     }
   ],
@@ -284,6 +290,7 @@
     "Size rule: 'bigger than the person's palm' (about 1% of the body). first-aid.urgent.big-burn says 'hand' and child-safety says 'palm'. Pick one wording for the whole book.",
     "'Any burn on a baby' is urgent, as in first-aid.urgent.big-burn.",
     "Cling film is used in UK first aid. 'Clean plastic' may not be available; 'clean, dry cloth' is the fallback.",
-    "Pashto 'اوبلنې دانې' for blisters and Dari 'آبله': check."
+    "Pashto 'اوبلنې دانې' for blisters and Dari 'آبله': check.",
+    "Home safety section (2026-10-07): burns.prevent (children away from the tandoor, hot tea and pots up high) repeated child-safety.fire. It is replaced by a link to fire-safety (burns.safety), which links on to child-safety."
   ]
 }

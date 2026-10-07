@@ -486,3 +486,168 @@ img{max-width:100%;display:block}
 [dir=rtl] .toggle::after{left:auto;right:4px}
 [dir=rtl] .toggle[aria-pressed=true]::after{left:auto;right:24px}
 .askbox .mic{flex:0 0 auto}
+
+/* ---------- "clinic" block: what the clinic or the hospital does ---------- */
+.blk.clinic{background:#F1F7F3;border-color:#CFE3D6}
+.blk.clinic .pic{width:52px;height:52px;border-radius:14px;background:#2E7D4F;color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.blk.clinic .pic .ic{width:34px;height:34px}
+.blk.clinic .h{font-weight:700;font-size:17.5px;line-height:1.4;color:#1F5A38}
+.blk.clinic .x{font-size:16px;color:#3A3632;line-height:1.6;margin-top:2px}
+
+/* ==========================================================================
+   Health / Home / Family layout (docs/HOME_LAYOUT.md): big buttons with big speakers,
+   picture rows in every list, a red Emergency button in every header.
+   Old Android: no inset-inline-* here; left/right are set per direction.
+   ========================================================================== */
+:root{--bg:#F8F5EE;--line:#E7E0D3;--shadow:0 1px 2px rgba(60,40,20,.05),0 2px 8px rgba(60,40,20,.04)}
+
+/* header bar */
+.top{gap:8px;padding:10px 0 8px;min-height:64px}
+.top h1{font-size:20px;line-height:1.3;min-width:0;overflow-wrap:anywhere}
+.top .round{width:44px;height:44px}
+.top .spk{width:48px;height:48px}
+.listen.hl-ic{width:44px;height:44px;min-height:0;margin:0;padding:0;border-radius:999px;flex:0 0 auto;justify-content:center;background:var(--ink)}
+.listen.hl-ic .pp{width:44px;height:44px;background:transparent}
+.listen.hl-ic .pp svg{width:20px;height:20px}
+.listen.hl-ic .lt,.listen.hl-ic .prog{display:none}
+.listen.hl-ic.on{background:var(--accent)}.listen.hl-ic.on .pp{background:transparent}.listen.hl-ic.on .pp svg{fill:#fff}
+.empill{display:flex;align-items:center;gap:6px;height:44px;padding:0 12px;border-radius:999px;background:var(--red);color:#fff;font-weight:700;font-size:15px;line-height:1;white-space:nowrap;flex:0 0 auto;box-shadow:0 2px 8px rgba(182,50,45,.28)}
+.empill svg{width:20px;height:20px;flex:0 0 auto}
+.top .gear{color:var(--ink)}
+.topic-hero .empill{position:absolute;top:12px}
+[dir=rtl] .topic-hero .empill{left:12px}
+[dir=ltr] .topic-hero .empill{right:12px}
+[dir=rtl] .topic-hero .round{right:12px;left:auto}
+[dir=ltr] .topic-hero .round{left:12px;right:auto}
+@media (max-width:359px){.top{gap:6px}.empill{padding:0 9px;font-size:14px;gap:4px}.top h1{font-size:18px}}
+
+/* big title with its speaker */
+.title-row{margin:6px 0 14px;gap:12px}
+.title-row h1{font-size:26px;line-height:1.3}
+.title-row .spk,.hbtn .spk{width:56px;height:56px}
+.title-row .spk svg,.hbtn .spk svg{width:26px;height:26px}
+
+/* the big buttons on Health and Home */
+.hbtn{position:relative;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:12px;margin-bottom:14px;min-height:100px;box-shadow:var(--shadow)}
+.hbtn .grow{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:14px;text-align:start;color:inherit}
+.hbtn .hv{width:72px;height:72px;border-radius:18px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--accent-t);color:var(--accent)}
+.hbtn .hv>svg{width:40px;height:40px}.hbtn .hv>.ic{width:42px;height:42px}
+.hbtn .hv img{width:100%;height:100%;object-fit:cover}
+.hbtn .tx{display:flex;flex-direction:column;min-width:0}
+.hbtn .t{font-size:22px;font-weight:800;line-height:1.3}
+.hbtn .s{font-size:14.5px;color:var(--mute);line-height:1.45;margin-top:2px}
+.hbtn.em{background:var(--red);border-color:var(--red);color:#fff;min-height:132px;padding:16px 14px;box-shadow:0 8px 22px rgba(182,50,45,.32)}
+.hbtn.em .hv{background:rgba(255,255,255,.16);color:#fff;width:84px;height:84px;border-radius:999px}
+.hbtn.em .hv>svg{width:54px;height:54px}
+.hbtn.em .t{font-size:34px;line-height:1.2}
+.hbtn.em .spk,.hbtn.fa .spk{background:#fff;border-color:#fff;color:var(--red)}
+.hbtn.fa{background:var(--red-t);border-color:#EBC3BF}
+.hbtn.fa .t{color:var(--red-d)}
+.hbtn.fa .hv,.hbtn.list .hv{width:96px;height:72px;border-radius:14px}
+.hbtn.ask .hv{background:var(--teal);color:#fff;border-radius:999px}
+.hbtn.ask .hv svg{width:36px;height:36px}
+.hbtn.sec{flex-wrap:wrap;padding:0;overflow:hidden;align-items:stretch}
+.hbtn.sec .grow{flex-direction:column;align-items:stretch;gap:0}
+.hbtn.sec .hv{width:100%;height:auto;border-radius:0;aspect-ratio:16/7}
+.hbtn.sec .tx{padding:10px 14px 14px}
+[dir=rtl] .hbtn.sec .tx{padding-left:80px}[dir=ltr] .hbtn.sec .tx{padding-right:80px}
+.hbtn.sec .spk{position:absolute;bottom:14px}
+[dir=rtl] .hbtn.sec .spk{left:14px}[dir=ltr] .hbtn.sec .spk{right:14px}
+.hbtn.sec .t{font-size:26px}
+.hbtn.share .hv{background:var(--green-t);color:var(--green)}
+.hbtn.share .hv svg{width:36px;height:36px}
+.hbtn.fbk .hv{background:var(--amber-t);color:var(--amber)}
+.hbtn.near .hv{background:var(--teal-t);color:var(--teal)}
+@media (max-width:359px){.hbtn{padding:10px;gap:8px}.hbtn .grow{gap:10px}.hbtn .hv{width:60px;height:60px}.hbtn.fa .hv,.hbtn.list .hv{width:76px;height:60px}.hbtn .t{font-size:19.5px}.hbtn.em .t{font-size:29px}.hbtn.em .hv{width:68px;height:68px}.hbtn .s{font-size:13.5px}}
+/* a vaccine due within 7 days: a slim strip under the header */
+.vstrip{display:flex;align-items:center;gap:10px;background:var(--amber-t);border-radius:16px;padding:6px 8px 6px 12px;margin:0 0 12px;font-weight:700;font-size:15px;line-height:1.4}
+[dir=rtl] .vstrip{padding:6px 12px 6px 8px}
+.vstrip .ic{width:26px;height:26px;color:var(--amber);flex:0 0 auto}
+.vstrip .grow{flex:1 1 0;min-width:0}
+.vstrip .spk{width:48px;height:48px}
+.vstrip.late{background:var(--red-t)}.vstrip.late .ic{color:var(--red)}
+
+/* lists: a big row per topic, with its picture */
+.trow{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px;margin-bottom:10px;box-shadow:var(--shadow)}
+.trow .grow{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:12px;color:inherit}
+.trow .tp{width:116px;height:84px;border-radius:14px;overflow:hidden;flex:0 0 auto;background:var(--accent-t);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.trow .tp img{width:100%;height:100%;object-fit:cover}
+.trow .tp.ticon{background:var(--teal-t);color:var(--teal)}
+.trow .tp.ticon .ic{width:48px;height:48px}
+.trow .tx{display:flex;flex-direction:column;min-width:0}
+.trow .t{font-size:18px;font-weight:700;line-height:1.35}
+.trow .s{font-size:13.5px;color:var(--mute);line-height:1.45;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.trow .spk{width:52px;height:52px}
+.trow.tool{background:#F4FAFB;border-color:#CFE6EA}
+@media (max-width:359px){.trow .tp{width:92px;height:68px}.trow .grow{gap:10px}.trow .t{font-size:16.5px}.trow .s{-webkit-line-clamp:1}.trow .spk{width:48px;height:48px}}
+.group-h{display:flex;align-items:center;gap:10px;margin:24px 0 10px}
+.group-h h2.t{flex:1 1 auto;margin:0;font-size:21px;line-height:1.35}
+.group-h .spk{width:48px;height:48px}
+.group-h.danger h2.t{color:var(--red)}
+.lhero{border-radius:22px;overflow:hidden;background:var(--accent-t);margin:2px 0 6px}
+.lhero img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.empty{text-align:center;color:var(--mute);padding:28px 12px;background:var(--card);border:1px dashed var(--line);border-radius:20px;margin:8px 0 14px}
+.empty .ic{width:48px;height:48px;color:var(--teal)}
+.empty p{margin:8px 0 0;font-size:17px}
+
+/* the Emergency screens and CPR and first aid */
+.em-car{border:0;background:var(--red-t);padding:8px 8px 8px 12px;gap:10px;margin:2px 0 10px}
+[dir=rtl] .em-car{padding:8px 12px 8px 8px}
+.em-car .spk{width:52px;height:52px}
+.em-car.slim{margin:0 0 14px}
+.em-car.slim .body{font-size:16px}
+.em-near{display:flex;align-items:center;gap:10px;background:var(--teal-t);border-radius:18px;padding:8px 8px 8px 12px;margin:0 0 14px;font-weight:700;font-size:17px}
+[dir=rtl] .em-near{padding:8px 12px 8px 8px}
+.em-near .ic{width:32px;height:32px;color:var(--teal);flex:0 0 auto}
+.em-near .grow{flex:1 1 0;min-width:0;color:var(--teal-d)}
+.em-near .spk{width:52px;height:52px}
+.em-who{margin:16px 0 10px}
+.em-who h2{font-size:24px}
+.em-who .spk{width:56px;height:56px}
+.em-ages{gap:12px;margin-bottom:16px}
+.em-age{position:relative;border:2px solid #EBC3BF;border-radius:22px;box-shadow:var(--shadow)}
+.em-age>a{display:flex;flex-direction:column;color:inherit}
+.em-age .em-pic{aspect-ratio:4/3}
+.em-age .t{display:block;text-align:center;font-size:23px;font-weight:800;line-height:1.3;padding:10px 6px 12px;color:var(--red-d)}
+.em-age .spk{position:absolute;top:8px;width:52px;height:52px;background:#fff;border-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+[dir=rtl] .em-age .spk{left:8px}[dir=ltr] .em-age .spk{right:8px}
+.em-cpr{padding:14px;border-radius:22px;box-shadow:0 8px 22px rgba(182,50,45,.3)}
+.em-cpr .ic{width:56px;height:56px}
+.em-cpr .t{font-size:28px;font-weight:800;line-height:1.25}
+.em-cpr .spk{width:56px;height:56px}
+.em-watch{min-height:58px;font-size:20px}
+.ptiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.ptile{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.ptile>a{display:flex;flex-direction:column;color:inherit;height:100%}
+.ptile .pp{display:block;aspect-ratio:4/3;background:var(--accent-t)}
+.ptile .pp img{width:100%;height:100%;object-fit:cover}
+.ptile .t{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:16px;font-weight:700;line-height:1.35;padding:8px 10px 10px}
+.ptile .spk{position:absolute;top:6px;width:48px;height:48px;background:#fff;border-color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+[dir=rtl] .ptile .spk{left:6px}[dir=ltr] .ptile .spk{right:6px}
+.em-all summary{min-height:52px;display:flex;align-items:center}
+
+/* red link rows: from a Home page to the Health side's emergency pages */
+.blk.link.urgent{background:var(--red-t);border-color:#EBC3BF}
+.blk.link.urgent .pic{background:var(--red);color:#fff}
+.blk.link.urgent .h{color:var(--red-d)}
+
+/* bottom bar: three tabs with picture icons */
+.nav{padding:6px 10px calc(8px + var(--safe-b));gap:8px;box-shadow:0 -2px 12px rgba(60,40,20,.06)}
+.nav a{flex:1 1 0;min-width:0;min-height:60px;gap:2px;font-size:14.5px;color:var(--mute);border-radius:16px}
+.nav .tabic{display:flex;align-items:center;justify-content:center;width:52px;height:32px;border-radius:999px}
+.nav .tabic .ic{width:26px;height:26px}
+.nav a[aria-current=page]{color:var(--ink)}
+.nav a[aria-current=page] .tabic{background:var(--accent-t);color:var(--accent)}
+.page{padding-bottom:calc(104px + var(--safe-b))}
+
+/* calmer cards everywhere */
+.blk,.tcard,.erow,.panel,.kid,.fac,.rcard{box-shadow:var(--shadow)}
+.blk.lead{box-shadow:none}
+.disc{margin:18px 0 12px}
+.srow .spk{width:48px;height:48px}
+.hbtn.em .hv{width:64px;height:64px}.hbtn.em .hv>svg{width:44px;height:44px}
+[lang=en] .hbtn.em .t{font-size:26px}
+@media (max-width:359px){[lang=en] .hbtn.em .t{font-size:22px}.hbtn.em .hv{width:56px;height:56px}}
+.hbtn .t{font-size:21px}
+.askbox input{min-width:0;width:100%}
+.trow .t,.erow .t,.ptile .t,.hbtn .t{overflow-wrap:break-word;word-wrap:break-word}

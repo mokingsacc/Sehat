@@ -1,0 +1,157 @@
+{
+  "id": "wellbeing",
+  "section": "everyone",
+  "title": {
+    "fa": "زندگی صحتمند: عادت‌های کوچک روزانه",
+    "ps": "روغ ژوند: ورځني کوچني عادتونه",
+    "en": "Well-being: small daily habits"
+  },
+  "summary": {
+    "fa": "خواب، شب‌های آرام، غذای خوب و تحرک: از کجا شروع کنیم.",
+    "ps": "خوب، ارام ماښامونه، ښه خواړه او حرکت: له کومه پیل وکړو.",
+    "en": "Sleep, calm evenings, good food and moving: where to start."
+  },
+  "image": "wellbeing",
+  "blocks": [
+    {
+      "id": "wellbeing.lead",
+      "type": "lead",
+      "text": {
+        "fa": "عادت‌های کوچکی که هر روز انجام شوند، به جسم و ذهن کمک می‌کنند قوی بمانند. این مشوره‌ها از خانواده‌های دیگر و از کارمندان صحی است.",
+        "ps": "کوچني عادتونه چې هره ورځ وشي، له بدن او ذهن سره مرسته کوي چې پیاوړي پاتې شي. دا لارښوونې د نورو کورنیو او روغتیايي کارکوونکو دي.",
+        "en": "Small habits, done every day, help the body and mind stay strong. These tips come from other families and from health workers."
+      }
+    },
+    {
+      "id": "wellbeing.sleep",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "تقریباً در یک وقت بخوابید",
+        "ps": "نږدې په یو وخت ویده شئ",
+        "en": "Sleep at about the same time"
+      },
+      "text": {
+        "fa": "وقت خواب منظم، در یک اتاق تاریک و آرام، خواب را عمیق‌تر می‌کند. خواب عمیق به قلب و ذهن آرامش می‌دهد.",
+        "ps": "د خوب منظم وخت، په تیاره او ارامه کوټه کې، خوب ژور کوي. ژور خوب زړه او ذهن ته ارام ورکوي.",
+        "en": "A regular bedtime in a dark, quiet room gives deeper sleep. Deep sleep rests the heart and the mind."
+      }
+    },
+    {
+      "id": "wellbeing.evening",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "شب‌ها را آرام بگذرانید",
+        "ps": "ماښامونه په ارامۍ تېر کړئ",
+        "en": "Make evenings calm"
+      },
+      "text": {
+        "fa": "غذای شب را سبک‌تر و کمی زودتر بخورید، از ۱ تا ۲ ساعت پیش از خواب دیگر چای نخورید، و تیلفون را کنار بگذارید.",
+        "ps": "د شپې ډوډۍ سپکه او لږ وختي وخورئ، له خوب ۱ تر ۲ ساعته مخکې نور چای مه څښئ، او ټیلیفون یوې خوا ته کېږدئ.",
+        "en": "Eat a lighter dinner a little earlier, have no tea for 1 to 2 hours before bed, and put the phone away."
+      }
+    },
+    {
+      "id": "wellbeing.food",
+      "type": "step",
+      "icon": "salt",
+      "title": {
+        "fa": "شکر، نمک و سرخ کردن کمتر",
+        "ps": "لږه بوره، مالګه او سره کول",
+        "en": "Less sugar, salt and frying"
+      },
+      "text": {
+        "fa": "با شکر، نمک و روغن کمتر پخته کنید و ترکاری، میوه و دال بیشتر بخورید. این کار قلب و فشار خون را محافظت می‌کند.",
+        "ps": "په لږې بورې، مالګې او غوړیو پخلی وکړئ، او ډېرې سبزۍ، مېوې او دال وخورئ. دا کار زړه او د وینې فشار ساتي.",
+        "en": "Cook with less sugar, salt and oil, and eat more vegetables, fruit and lentils. This protects the heart and blood pressure."
+      }
+    },
+    {
+      "id": "wellbeing.move",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "هر روز فعال باشید",
+        "ps": "هره ورځ فعال اوسئ",
+        "en": "Be active every day"
+      },
+      "text": {
+        "fa": "پیاده‌روی، کار خانه و حرکت‌های ساده برای قوت عضلات در خانه، همه حساب می‌شوند. تحرک به قلب، روحیه و خواب کمک می‌کند.",
+        "ps": "پلي ګرځېدل، د کور کار او په کور کې د عضلو د ځواک ساده حرکتونه ټول حسابېږي. حرکت له زړه، روحیې او خوب سره مرسته کوي.",
+        "en": "Walking, housework and simple strength moves at home all count. Moving helps the heart, the mood and sleep."
+      }
+    },
+    {
+      "id": "wellbeing.sleep-page",
+      "type": "link",
+      "to": "topic/sleep-well",
+      "icon": "sleep",
+      "title": {
+        "fa": "خواب خوب",
+        "ps": "ښه خوب",
+        "en": "Sleep well"
+      },
+      "text": {
+        "fa": "وقت خواب منظم، اتاق تاریک و آرام، و گرم ماندن بی‌خطر در شب.",
+        "ps": "د خوب منظم وخت، تیاره او ارامه کوټه، او د شپې په خوندي ډول ګرم پاتې کېدل.",
+        "en": "A regular bedtime, a dark quiet room, and keeping warm safely at night."
+      }
+    },
+    {
+      "id": "wellbeing.move-page",
+      "type": "link",
+      "to": "topic/move-daily",
+      "icon": "walk",
+      "title": {
+        "fa": "تحرک هر روزه",
+        "ps": "هره ورځ حرکت",
+        "en": "Moving every day"
+      },
+      "text": {
+        "fa": "چقدر تحرک لازم است، قدم زدن بعد از غذا، و حرکت‌های قوت در خانه.",
+        "ps": "څومره حرکت ته اړتیا ده، له ډوډۍ وروسته ګرځېدل، او په کور کې د ځواک حرکتونه.",
+        "en": "How much to move, a walk after meals, and strength moves at home."
+      }
+    },
+    {
+      "id": "wellbeing.start",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "همین هفته با یک تغییر کوچک شروع کنید. وقتی تمام خانواده با هم انجام دهند، آسان‌تر است.",
+        "ps": "همدا اونۍ په یوه کوچني بدلون پیل وکړئ. کله چې ټوله کورنۍ یې یوځای وکړي، اسانه وي.",
+        "en": "Start with one small change this week. It is easier when the whole family does it together."
+      }
+    },
+    {
+      "id": "wellbeing.ask",
+      "type": "link",
+      "to": "ask",
+      "icon": "talk",
+      "title": {
+        "fa": "حالتان خوب نیست؟",
+        "ps": "ځان ناروغه احساسوئ؟",
+        "en": "Feeling unwell?"
+      },
+      "text": {
+        "fa": "اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.",
+        "ps": "که ځان ناروغه احساسوئ، د روغتیا برخې ته ولاړ شئ او «څه ستونزه لرئ؟» ووهئ.",
+        "en": "If you feel unwell, go to Health and tap What is wrong?"
+      }
+    }
+  ],
+  "sources": [
+    "CDC: Sleep, Tips for better sleep (2024): same bedtime and wake time; quiet, dark, relaxing bedroom at a comfortable temperature; remove electronic devices; avoid large meals and caffeine before bed; be active by day",
+    "NHS: How to get to sleep, and Insomnia (nhs.uk): regular sleep times; dark, quiet, cool bedroom; no caffeine or big meals late; no screens before bed; sleeping pills only short term and can be addictive",
+    "WHO fact sheet: Healthy diet (2020): fruit, vegetables, legumes and whole grains every day; limit free sugars, salt, and saturated and industrial trans fats; prefer unsaturated oils",
+    "WHO fact sheet: Sodium reduction (2023): less than 5 g of salt a day; too much salt raises blood pressure and the risk of heart disease and stroke",
+    "WHO guidelines on physical activity and sedentary behaviour (2020): adults 150-300 minutes of moderate activity a week (more gives more benefit) plus muscle-strengthening on 2 or more days; older adults add balance training on 3 or more days; pregnant and postpartum women at least 150 minutes of moderate activity a week"
+  ],
+  "review": [
+    "Hub page for the new Well-being section. CONTENT_SPEC allows at most 2 link blocks, so it links to sleep-well and move-daily; sleep-well links on to evening-routine, and move-daily links on to heart-food. The section page (#/wellbeing) lists all pages anyway. If you would rather the hub link all four, it needs 4 link blocks (a spec exception, as child-meals asked for 3).",
+    "The four steps are one-line summaries of the four pages, each with its 'why'. The tea line follows Mo's change: no tea for 1 to 2 hours before bed.",
+    "When the stress and CBT pages are added, add one line here only if wanted (e.g. a step 'Look after your mind'); the section list does the linking.",
+    "Home tab rule (Mo): lifestyle tips only. Added the closing link 'If you feel unwell, go to Health and tap What is wrong?' (opens the What is wrong? screen)."
+  ]
+}

@@ -40,11 +40,20 @@ export default {
   {
    "id": "awd",
    "active": true,
-   "version": 1,
-   "history": [],
+   "version": 2,
+   "history": [
+    {
+     "version": 1,
+     "until": "2026-10-07",
+     "topics": [
+      "diarrhoea"
+     ]
+    }
+   ],
    "definition": "Three or more loose or watery stools in 24 hours, without visible blood.",
    "topics": [
-    "diarrhoea"
+    "diarrhoea",
+    "diarrhoea-adult"
    ],
    "symptoms": [
     "diarrhoea"
@@ -59,11 +68,20 @@ export default {
   {
    "id": "bloody-diarrhoea",
    "active": true,
-   "version": 1,
-   "history": [],
+   "version": 2,
+   "history": [
+    {
+     "version": 1,
+     "until": "2026-10-07",
+     "topics": [
+      "diarrhoea"
+     ]
+    }
+   ],
    "definition": "Acute diarrhoea with visible blood in the stool.",
    "topics": [
-    "diarrhoea"
+    "diarrhoea",
+    "diarrhoea-adult"
    ],
    "symptoms": [
     "diarrhoea"
@@ -78,11 +96,20 @@ export default {
   {
    "id": "ari",
    "active": true,
-   "version": 1,
-   "history": [],
+   "version": 2,
+   "history": [
+    {
+     "version": 1,
+     "until": "2026-10-07",
+     "topics": [
+      "cough"
+     ]
+    }
+   ],
    "definition": "Cough or difficult breathing with fast breathing (IMCI cut-offs by age) or lower chest indrawing (ARI-pneumonia). Lay report, breathing not counted by a health worker.",
    "topics": [
-    "cough"
+    "cough",
+    "pneumonia-adult"
    ],
    "symptoms": [
     "breathing",
@@ -117,12 +144,22 @@ export default {
   {
    "id": "dog-bite",
    "active": true,
-   "version": 1,
-   "history": [],
+   "version": 2,
+   "history": [
+    {
+     "version": 1,
+     "until": "2026-10-07",
+     "topics": [
+      "first-aid",
+      "animal-illness"
+     ]
+    }
+   ],
    "definition": "Any person bitten or scratched by a dog or another animal that may carry rabies (possible rabies exposure).",
    "topics": [
     "first-aid",
-    "animal-illness"
+    "animal-illness",
+    "dog-bite"
    ],
    "symptoms": [
     "bite"
@@ -171,11 +208,20 @@ export default {
   {
    "id": "jaundice",
    "active": true,
-   "version": 1,
-   "history": [],
+   "version": 2,
+   "history": [
+    {
+     "version": 1,
+     "until": "2026-10-07",
+     "topics": [
+      "red-flags"
+     ]
+    }
+   ],
    "definition": "Acute onset of yellow eyes or skin, with no known other cause, in anyone older than one month (acute jaundice syndrome; hepatitis A or E are common causes).",
    "topics": [
-    "red-flags"
+    "red-flags",
+    "hepatitis"
    ],
    "symptoms": [
     "yellow"

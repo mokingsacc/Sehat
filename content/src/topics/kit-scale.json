@@ -84,58 +84,20 @@
       }
     },
     {
-      "id": "kit-scale.meaning",
-      "type": "step",
-      "icon": "growth",
+      "id": "kit-scale.meaning-page",
+      "type": "link",
+      "to": "topic/reading-muac",
+      "icon": "check",
       "title": {
-        "fa": "به چه چیز دقت کنید",
-        "ps": "څه ته پام وکړئ",
-        "en": "What to look for"
+        "fa": "وزن چه معنا دارد؟",
+        "ps": "وزن څه مانا لري؟",
+        "en": "What does the weight mean?"
       },
       "text": {
-        "fa": "طفل خورد باید هر ماه وزن بگیرد. جدول رشد کلینیک نشان می‌دهد که وزن برای عمرش درست است یا نه.",
-        "ps": "کوچنی ماشوم باید هره میاشت وزن واخلي. د کلینیک د ودې چارټ ښيي چې وزن یې د عمر سره سم دی که نه.",
-        "en": "A young child should gain weight each month. The clinic's growth chart shows if the weight is right for the age."
+        "fa": "صفحهٔ صحت را باز کنید: معنای عدد، چه وقت بروید، و بررسی آن.",
+        "ps": "د روغتیا پاڼه پرانیزئ: د شمېرې مانا، کله ولاړ شئ، او د هغې کتل.",
+        "en": "Open the Health page: what it means, when to go, and a checker."
       }
-    },
-    {
-      "id": "kit-scale.soon",
-      "type": "alert",
-      "level": "soon",
-      "title": {
-        "fa": "اگر طفل یکی از این‌ها را دارد، همین هفته به کلینیک بروید",
-        "ps": "که ماشوم له دې څخه یو ولري، په همدې اونۍ کلینیک ته ولاړ شئ",
-        "en": "Go to the clinic this week if the child:"
-      },
-      "items": [
-        {
-          "id": "kit-scale.soon.flat",
-          "icon": "growth",
-          "text": {
-            "fa": "۲ ماه است که وزن نگرفته",
-            "ps": "۲ میاشتې کېږي چې وزن یې نه دی اخیستی",
-            "en": "has not gained weight for 2 months"
-          }
-        },
-        {
-          "id": "kit-scale.soon.loss",
-          "icon": "weight-loss",
-          "text": {
-            "fa": "وزنش کم می‌شود",
-            "ps": "وزن یې کمېږي",
-            "en": "is losing weight"
-          }
-        },
-        {
-          "id": "kit-scale.soon.newborn",
-          "icon": "baby",
-          "text": {
-            "fa": "۳ هفته دارد و هنوز از وزن ولادت کمتر است",
-            "ps": "۳ اونۍ لري او لا هم د زېږون له وزن کم دی",
-            "en": "is 3 weeks old and still under the birth weight"
-          }
-        }
-      ]
     }
   ],
   "sources": [
@@ -148,6 +110,7 @@
     "Holding the child on a bathroom scale is rough (bathroom scales often read in steps of 0.1 to 0.5 kg); fine for trends in older children, not for newborns.",
     "'Not gaining for 2 months' and 'losing weight' = clinic this week (judgement call, consistent with growth.soon).",
     "Birth weight not regained by 3 weeks (NICE NG75); WHO materials often say 2 weeks.",
-    "Price 1,000 to 2,000 afghanis is an estimate."
+    "Price 1,000 to 2,000 afghanis is an estimate.",
+    "Home tab rule (Mo): 'What to look for' (weight gain) and the 'clinic this week' box moved to the Health page reading-muac; a link row 'What does the weight mean?' opens it."
   ]
 }

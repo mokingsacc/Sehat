@@ -125,6 +125,34 @@
       }
     },
     {
+      "id": "cough.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: شمردن نفس و انتی‌بیوتیک",
+        "ps": "په کلینیک کې: د ساه شمېرل او انټي بیوټیک",
+        "en": "At the clinic: breath count and antibiotics"
+      },
+      "text": {
+        "fa": "کارمند صحی نفس‌ها را می‌شمارد و به سینه نگاه می‌کند. برای سینه‌بغل شربت یا تابلیت انتی‌بیوتیک می‌دهد، معمولاً اموکسی‌سیلین، برای ۵ روز، رایگان. زکام انتی‌بیوتیک ضرورت ندارد.",
+        "ps": "روغتیايي کارکوونکی ساه شمېري او سینې ته ګوري. د سینه بغل لپاره د انټي بیوټیک شربت یا ګولۍ ورکوي، معمولاً اموکسي سیلین، د ۵ ورځو لپاره، وړیا. زکام انټي بیوټیک ته اړتیا نه لري.",
+        "en": "The health worker counts the breaths and looks at the chest. For pneumonia they give an antibiotic syrup or tablets, usually amoxicillin, for 5 days, free. A cold needs no antibiotic."
+      }
+    },
+    {
+      "id": "cough.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: اکسیجن برای سینه‌بغل شدید",
+        "ps": "په روغتون کې: د سخت سینه بغل لپاره اکسیجن",
+        "en": "At the hospital: oxygen for severe pneumonia"
+      },
+      "text": {
+        "fa": "طفلی که سینه‌اش داخل کشیده می‌شود یا علامت خطر دارد بستر می‌شود. شفاخانه اکسیجن و انتی‌بیوتیک پیچکاری می‌دهد و در تغذیه کمک می‌کند. اکسیجن است که جان طفل را نجات می‌دهد.",
+        "ps": "هغه ماشوم چې سینه یې دننه کښل کېږي یا د خطر نښه لري بستر کېږي. روغتون اکسیجن او پیچکاري انټي بیوټیک ورکوي او په تغذیه کې مرسته کوي. اکسیجن د ماشوم ژوند ژغوري.",
+        "en": "A child with chest indrawing or a danger sign is admitted. The hospital gives oxygen and antibiotics by injection and helps with feeding. Oxygen is what saves the child's life."
+      }
+    },
+    {
       "id": "cough.urgent",
       "type": "alert",
       "level": "urgent",
@@ -244,6 +272,15 @@
             "ps": "ښه نه کېږي، یا لا خرابېږي",
             "en": "is not getting better, or is getting worse"
           }
+        },
+        {
+          "id": "cough.soon.whoop",
+          "icon": "cough",
+          "text": {
+            "fa": "سرفه‌های طولانی پی‌درپی، بعد نفس عمیق صدادار یا استفراغ؛ شاید سیاه‌سرفه باشد",
+            "ps": "اوږد پرله پسې ټوخی، بیا ژوره غږېدونکې ساه یا کانګې؛ ښايي توره ټوخۍ وي",
+            "en": "coughs in long fits, then gasps or vomits; may be whooping cough"
+          }
         }
       ]
     },
@@ -282,7 +319,10 @@
     "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses",
     "WHO fact sheet: Pneumonia in children",
     "WHO fact sheet: Household air pollution",
-    "WHO fact sheet: Tuberculosis (2026)"
+    "WHO fact sheet: Tuberculosis (2026)",
+    "WHO IMCI Chart Booklet (2014): pneumonia treated with oral amoxicillin for 5 days; severe pneumonia referred for injectable antibiotics and oxygen",
+    "WHO Pocket Book of Hospital Care for Children (2013): severe pneumonia, oxygen therapy",
+    "Burden: Afghanistan MoPH NDSR week 33 2026: 1,671 pertussis cases in 2026 to date"
   ],
   "review": [
     "Fast-breathing counts are the IMCI cut-offs: under 2 months 60 or more; 2 to 12 months 50 or more; 12 months to 5 years 40 or more.",
@@ -290,6 +330,8 @@
     "Honey is advised only over 1 year (botulism risk under 1). The step does not give an amount.",
     "Dont item 'no cough medicines for babies and young children' does not give an age cut-off; WHO advises against cough and cold remedies in young children.",
     "Icon 'breathe' is used for stridor and wheeze; an icon showing noisy breathing would be better.",
-    "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. cough.urgent.breathing now means a baby under 2 months; the new cough.soon.fast is fast breathing alone at 2 months to 5 years."
+    "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. cough.urgent.breathing now means a baby under 2 months; the new cough.soon.fast is fast breathing alone at 2 months to 5 years.",
+    "IMCI 2014 says oral amoxicillin (twice daily, 5 days) is the first-line pneumonia antibiotic; the Afghan NSTG 2013 child chapter still named cotrimoxazole. Mo to confirm what Samangan BHCs give and whether to name it.",
+    "Whooping-cough item: Dari سیاه‌سرفه; Pashto wording (توره ټوخۍ / شدید ټوخی) to be confirmed by a native speaker."
   ]
 }

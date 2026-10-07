@@ -113,6 +113,34 @@
       }
     },
     {
+      "id": "anaemia.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ خون و تابلیت آهن",
+        "ps": "په کلینیک کې: د وینې معاینه او د اوسپنې ګولۍ",
+        "en": "At the clinic: blood test, iron tablets"
+      },
+      "text": {
+        "fa": "کارمند صحی پلک‌ها و کف دست را می‌بیند و شاید خون را با معاینهٔ نوک انگشت اندازه کند. تابلیت آهن و فولیک اسید را رایگان، برای ۳ ماه، و دوای کرم می‌دهد، و علت را جستجو می‌کند.",
+        "ps": "روغتیايي کارکوونکی باڼه او ورغوي ګوري او ښايي وینه د ګوتې په معاینه اندازه کړي. د اوسپنې او فولیک اسید ګولۍ وړیا، د ۳ میاشتو لپاره، او د چینجیو درمل ورکوي، او لامل یې لټوي.",
+        "en": "The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets free, for 3 months, plus worm medicine."
+      }
+    },
+    {
+      "id": "anaemia.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: کم‌خونی شدید",
+        "ps": "په روغتون کې: سخت د وینې کمښت",
+        "en": "At the hospital: severe anaemia"
+      },
+      "text": {
+        "fa": "کسی که بسیار رنگ‌پریده است با نفس‌تنگی، تپش قلب یا پاهای پندیده، یا خانم حاملهٔ نزدیک به ولادت، شاید در شفاخانه خون و جستجوی علت، مثل عادت ماهانهٔ زیاد، ضرورت داشته باشد.",
+        "ps": "هغه څوک چې ډېر رنګ الوتی وي له ساه لنډۍ، د زړه چټک ټکان یا پړسېدلو پښو سره، یا د زېږون ته نږدې امیندواره ښځه، ښايي په روغتون کې وینې او د لامل لټون ته اړتیا ولري، لکه ډېر میاشتني عادتونه.",
+        "en": "Someone very pale with breathlessness, a racing heart or swollen feet, or a pregnant woman near her time, may need blood in hospital and a search for the cause."
+      }
+    },
+    {
       "id": "anaemia.soon",
       "type": "alert",
       "level": "soon",
@@ -205,7 +233,10 @@
     "WHO fact sheet: Anaemia (2023/2025): signs, causes (iron deficiency, blood loss, parasitic infections)",
     "WHO recommendations on antenatal care for a positive pregnancy experience (2016): daily oral iron and folic acid; deworming in endemic areas",
     "WHO guideline: preventive chemotherapy to control soil-transmitted helminth infections in at-risk population groups (2017)",
-    "WHO/UNICEF Facts for Life, 4th ed. (2010): nutrition and safe motherhood"
+    "WHO/UNICEF Facts for Life, 4th ed. (2010): nutrition and safe motherhood",
+    "WHO guideline: daily iron supplementation in adult women and adolescent girls (2016); WHO ANC recommendations (2016): iron and folic acid, deworming",
+    "WHO Pocket Book (2013) and PCPNC (2015): severe anaemia (haemoglobin under 7 g/dl) referred for transfusion assessment",
+    "Afghanistan BPHS (2010): iron-folate at Health Post and above; haemoglobin testing at BHC/CHC; blood transfusion at district hospital and above"
   ],
   "review": [
     "Tea: 'one hour before or one hour after a meal' is standard public-health advice (tea tannins reduce non-haem iron absorption); I did not find an exact WHO interval. Please confirm you are happy with 1 hour.",
@@ -213,6 +244,8 @@
     "Tip says black stool from iron tablets is normal; the adult red-flags page lists 'vomiting blood or black stool' as urgent. Check you are happy with both, or add 'black, sticky stool when not taking iron' there.",
     "The iron-in-pregnancy step repeats the pregnancy-care step on purpose so this page stands alone.",
     "'Pale' is translated as white/pale (fa رنگ‌پریده, ps سپین); local speakers may say 'yellow' (زرد / ژېړ) for anaemic pallor; check with the translator.",
-    "Icons: causes uses 'warning'; worm medicine uses 'pill'; fainting uses 'sleepy'; black-stool tip uses 'iron-pill'."
+    "Icons: causes uses 'warning'; worm medicine uses 'pill'; fainting uses 'sleepy'; black-stool tip uses 'iron-pill'.",
+    "Finger-prick haemoglobin (HemoCue) is not available at every BHC; the text says 'may measure'.",
+    "The haemoglobin threshold for transfusion is not stated; signs are used instead."
   ]
 }

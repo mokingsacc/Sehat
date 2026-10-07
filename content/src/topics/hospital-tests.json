@@ -1,0 +1,177 @@
+{
+  "id": "hospital-tests",
+  "section": "everyone",
+  "title": {
+    "fa": "معاینات معمول",
+    "ps": "عامې معاینې",
+    "en": "Common tests"
+  },
+  "summary": {
+    "fa": "معاینهٔ خون، ادرار، اکسری، التراسوند و قلب: چطور است",
+    "ps": "د وینې، تشو متیازو، اکسرې، الټراساونډ او زړه معاینې: څنګه وي",
+    "en": "Blood, urine, X-ray, ultrasound and heart tests: what they are like"
+  },
+  "image": "hospital-tests",
+  "blocks": [
+    {
+      "id": "hospital-tests.lead",
+      "type": "lead",
+      "text": {
+        "fa": "معاینات به داکتر کمک می‌کند که علت مریضی را پیدا کند. بیشتر آن‌ها زود و بی‌خطر است. همیشه می‌توانید بپرسید که معاینه برای چیست.",
+        "ps": "معاینې له ډاکټر سره مرسته کوي چې د ناروغۍ علت پیدا کړي. ډېرې یې ژر او بې‌خطره دي. تل پوښتلی شئ چې معاینه د څه لپاره ده.",
+        "en": "Tests help the doctor find the cause of an illness. Most are quick and safe. You can always ask what a test is for."
+      }
+    },
+    {
+      "id": "hospital-tests.blood",
+      "type": "step",
+      "icon": "bleeding",
+      "title": {
+        "fa": "معاینهٔ خون",
+        "ps": "د وینې معاینه",
+        "en": "Blood test"
+      },
+      "text": {
+        "fa": "یک سوزن خورد به نوک انگشت، یا کمی خون از بازو با سوزن. یک لحظه درد می‌کند. بدن این خون کم را زود دوباره می‌سازد.",
+        "ps": "د ګوتې پر سر یوه کوچنۍ ستنه، یا له مټ څخه په ستنې لږه وینه. یوه شېبه درد کوي. بدن دا لږه وینه ژر بېرته جوړوي.",
+        "en": "A prick on the finger, or a little blood from the arm with a needle. It stings for a moment. The body soon replaces this small amount."
+      },
+      "picture": "hosp-blood-test"
+    },
+    {
+      "id": "hospital-tests.quick",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "معاینات سریع: ملاریا، قند و غیره",
+        "ps": "چټکې معاینې: ملاریا، شکره او نور",
+        "en": "Quick tests: malaria, sugar and more"
+      },
+      "text": {
+        "fa": "یک قطره خون از انگشت روی یک وسیلهٔ خورد معاینه گذاشته می‌شود. جواب در چند دقیقه می‌آید، تا تداوی همان روز شروع شود.",
+        "ps": "د ګوتې یو څاڅکی وینه پر یوې کوچنۍ معاینې اچول کېږي. ځواب په څو دقیقو کې راځي، څو درملنه همغه ورځ پیل شي.",
+        "en": "A drop of blood from the finger goes on a small test. The answer comes in minutes, so treatment can start the same day."
+      }
+    },
+    {
+      "id": "hospital-tests.urine",
+      "type": "step",
+      "icon": "urine-blood",
+      "title": {
+        "fa": "معاینهٔ ادرار",
+        "ps": "د تشو متیازو معاینه",
+        "en": "Urine test"
+      },
+      "text": {
+        "fa": "در یک ظرف خورد و پاک ادرار می‌کنید. این معاینه عفونت، قند، و در حاملگی علایم خطر را نشان داده می‌تواند.",
+        "ps": "په یوه کوچني پاک لوښي کې تشې متیازې کوئ. دا معاینه انتان، شکره، او په امیندوارۍ کې د خطر نښې ښودلی شي.",
+        "en": "You pass urine into a small clean pot. It can show infection, sugar, and in pregnancy, signs of danger."
+      }
+    },
+    {
+      "id": "hospital-tests.xray",
+      "type": "step",
+      "icon": "lungs",
+      "title": {
+        "fa": "اکسری",
+        "ps": "اکسرې",
+        "en": "X-ray"
+      },
+      "text": {
+        "fa": "عکس استخوان یا سینه. چند ثانیه وقت می‌گیرد و درد ندارد. کمی شعاع دارد، پس اگر ممکن است حامله باشید، به کارمندان بگویید.",
+        "ps": "د هډوکو یا سینې عکس. څو ثانیې وخت نیسي او درد نه لري. لږې وړانګې لري، نو که کېدای شي امیندواره یاست، کارکوونکو ته ووایاست.",
+        "en": "A picture of the bones or the chest. It takes seconds and does not hurt. It uses a little radiation, so tell the staff if you may be pregnant."
+      }
+    },
+    {
+      "id": "hospital-tests.ultrasound",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "التراسوند",
+        "ps": "الټراساونډ",
+        "en": "Ultrasound scan"
+      },
+      "text": {
+        "fa": "یک ژل سرد و یک وسیلهٔ نرم روی پوست، داخل بدن را نشان می‌دهد. بی‌خطر است، در حاملگی هم، و طفل را نشان داده می‌تواند.",
+        "ps": "سړه جیل او یوه نرمه اله پر پوستکي د بدن دننه ښيي. بې‌خطره ده، په امیندوارۍ کې هم، او ماشوم ښودلی شي.",
+        "en": "Cool jelly and a smooth tool on the skin show pictures of the inside. It is safe, also in pregnancy, and can show the baby."
+      },
+      "picture": "hosp-ultrasound"
+    },
+    {
+      "id": "hospital-tests.ecg",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "نوار قلب",
+        "ps": "د زړه نوار",
+        "en": "Heart tracing (ECG)"
+      },
+      "text": {
+        "fa": "چند چسپک خورد روی سینه، دست‌ها و پاها، ضربان قلب را ثبت می‌کند. چند دقیقه وقت می‌گیرد و درد ندارد.",
+        "ps": "څو کوچني سرېښناک ټکي پر سینه، لاسونو او پښو د زړه درزا ثبتوي. څو دقیقې وخت نیسي او درد نه لري.",
+        "en": "Small stickers on the chest, arms and legs record the heartbeat. It takes a few minutes and does not hurt."
+      }
+    },
+    {
+      "id": "hospital-tests.scanners",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "ماشین‌های کلان‌تر عکس‌برداری، به نام سی تی سکن و ام آر آی، بیشتر در شهرهای کلان مثل مزار شریف و کابل است.",
+        "ps": "لوی د عکس اخیستلو ماشینونه، چې سي ټي سکن او ایم ار ای نومېږي، ډېری په لویو ښارونو لکه مزار شریف او کابل کې دي.",
+        "en": "Bigger scanners, called CT and MRI, are found mostly in big cities like Mazar-i-Sharif and Kabul."
+      }
+    },
+    {
+      "id": "hospital-tests.tb",
+      "type": "link",
+      "to": "topic/tb",
+      "icon": "cough",
+      "title": {
+        "fa": "سرفهٔ طولانی؟ معاینهٔ توبرکلوز رایگان است",
+        "ps": "اوږد ټوخی؟ د نري رنځ معاینه وړیا ده",
+        "en": "Long cough? TB test is free"
+      },
+      "text": {
+        "fa": "سرفهٔ ۲ هفته یا بیشتر، معاینهٔ توبرکلوز لازم دارد. معاینه و تداوی رایگان است.",
+        "ps": "۲ اونۍ یا ډېر ټوخی د نري رنځ معاینې ته اړتیا لري. معاینه او درملنه وړیا ده.",
+        "en": "A cough for 2 weeks or more needs a TB test. Testing and treatment are free."
+      }
+    },
+    {
+      "id": "hospital-tests.kit",
+      "type": "link",
+      "to": "kit",
+      "icon": "thermometer",
+      "title": {
+        "fa": "معایناتی که در خانه می‌توانید",
+        "ps": "هغه معاینې چې په کور کې یې کولی شئ",
+        "en": "Checks you can do at home"
+      },
+      "text": {
+        "fa": "ترمامتر و چند وسیلهٔ ساده کمک می‌کند بدانید چه وقت بروید. بکس صحی خانه را ببینید.",
+        "ps": "ترمامیټر او څو ساده سامانونه مرسته کوي چې پوه شئ کله ولاړ شئ. د کور روغتیايي بکس وګورئ.",
+        "en": "A thermometer and a few simple tools help you know when to go. See the home health kit."
+      }
+    }
+  ],
+  "sources": [
+    "NHS (nhs.uk) health A to Z: Blood tests, Urine tests, X-ray, Ultrasound scan, Electrocardiogram (ECG), CT scan, MRI scan",
+    "WHO Malaria rapid diagnostic tests: how to use (2018) and WHO Guidelines for malaria (2024): test before treating",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): one ultrasound scan before 24 weeks; ultrasound is safe in pregnancy",
+    "WHO Communicating radiation risks in paediatric imaging (2016) and WHO fact sheet Ionizing radiation and health effects (2023): small doses, ask about pregnancy",
+    "WHO consolidated guidelines on tuberculosis, Module 3: diagnosis (2024): sputum and rapid molecular tests; MoPH 13 Nov 2025: TB tests free",
+    "WHO recommendations on antenatal care (2016): urine testing in pregnancy (protein, bacteriuria)"
+  ],
+  "review": [
+    "'The body soon replaces this small amount': added because fear of 'losing blood' is a common reason to refuse tests. Check it reads naturally.",
+    "Quick tests: malaria RDT answer in about 15 to 20 minutes; the text says 'in minutes'. Malaria is seasonal in the northern plains (May to November); check whether RDTs are used in Samangan clinics.",
+    "X-ray: 'a little radiation, so tell the staff if you may be pregnant' as Mo asked; it does not say X-rays are forbidden in pregnancy.",
+    "Ultrasound: 'safe, also in pregnancy, and can show the baby'. Families may ask the sex of the baby; not mentioned.",
+    "ECG: 'stickers on the chest, arms and legs': a woman may be shy about the chest; a female staff member may be asked for (covered on the 'When you arrive' page).",
+    "CT and MRI in Dari/Pashto are written as spoken: سی تی سکن، ام آر آی / سي ټي سکن، ایم ار ای. Check the everyday words.",
+    "Icons: blood test uses 'bleeding' (drop), quick tests 'drops', urine 'urine-blood' (cup), X-ray 'lungs', ultrasound 'pregnant', ECG 'heart'. Wanted: 'test-tube', 'x-ray', 'ultrasound', 'ecg'."
+  ]
+}

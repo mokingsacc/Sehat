@@ -1,0 +1,270 @@
+{
+  "id": "hospital-stay",
+  "section": "everyone",
+  "title": {
+    "fa": "ماندن در شفاخانه و رفتن به خانه",
+    "ps": "په روغتون کې پاتې کېدل او کور ته تلل",
+    "en": "Staying in hospital and going home"
+  },
+  "summary": {
+    "fa": "ماندن با طفل، اجازه برای تداوی، دواها و مراجعهٔ بعدی",
+    "ps": "له ماشوم سره پاتې کېدل، درملنې ته اجازه، درمل او بیا کتنه",
+    "en": "Staying with your child, agreeing to treatment, medicines and follow-up"
+  },
+  "image": "hospital-stay",
+  "blocks": [
+    {
+      "id": "hospital-stay.lead",
+      "type": "lead",
+      "text": {
+        "fa": "گاهی داکتر می‌خواهد که مریض در شفاخانه بماند. این بهترین مراقبت است، و بیشتر مریضان صحتمند به خانه برمی‌گردند.",
+        "ps": "کله ناکله ډاکټر غواړي چې ناروغ په روغتون کې پاتې شي. دا تر ټولو ښه پاملرنه ده، او ډېری ناروغان روغ کور ته ستنېږي.",
+        "en": "Sometimes the doctor asks the patient to stay in hospital. This gives the best care, and most people go home well."
+      }
+    },
+    {
+      "id": "hospital-stay.admission",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "بستر شدن در شفاخانه",
+        "ps": "په روغتون کې بستر کېدل",
+        "en": "Staying in hospital"
+      },
+      "text": {
+        "fa": "مریض یک بستر می‌گیرد و کارمندان بارها او را معاینه می‌کنند. معمولاً یک نفر از فامیل می‌تواند برای کمک بماند. دربارهٔ قواعد ملاقات بپرسید.",
+        "ps": "ناروغ ته بستر ورکول کېږي، او کارکوونکي یې ډېر ځله ګوري. معمولاً د کورنۍ یو غړی د مرستې لپاره پاتې کېدای شي. د لیدنې د مقرراتو په اړه وپوښتئ.",
+        "en": "The patient gets a bed, and staff check them often. Usually one family member can stay to help. Ask about the rules for visitors."
+      }
+    },
+    {
+      "id": "hospital-stay.child",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "با طفل خود بمانید",
+        "ps": "له خپل ماشوم سره پاتې شئ",
+        "en": "Stay with your child"
+      },
+      "text": {
+        "fa": "مادر یا پدر می‌تواند با طفل مریض بماند. شیردهی را ادامه دهید، طفل را آرام کنید، و هر تغییری را به نرس بگویید.",
+        "ps": "مور یا پلار کولی شي له ناروغ ماشوم سره پاتې شي. تي ورکول ته دوام ورکړئ، ماشوم ته ډاډ ورکړئ، او هر بدلون نرس ته ووایاست.",
+        "en": "A mother or father can stay with a sick child. Keep breastfeeding, comfort the child, and tell the nurse about any change."
+      },
+      "picture": "hosp-stay-child"
+    },
+    {
+      "id": "hospital-stay.consent",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "پیش از اجازه دادن بپرسید",
+        "ps": "له اجازې مخکې وپوښتئ",
+        "en": "Ask before you agree"
+      },
+      "text": {
+        "fa": "پیش از عملیات یا تداوی کلان، می‌توانید بپرسید: این چیست، چرا لازم است، و چه خطرهایی دارد؟ بعد با هم تصمیم بگیرید.",
+        "ps": "له عملیات یا لویې درملنې مخکې، پوښتلی شئ: دا څه دي، ولې پکار دي، او څه خطرونه لري؟ بیا یوځای پرېکړه وکړئ.",
+        "en": "Before an operation or a big treatment, you can ask: what is it, why is it needed, and what are the risks? Then decide together."
+      }
+    },
+    {
+      "id": "hospital-stay.medicines",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "دواها را دقیق طوری که گفته‌اند بدهید",
+        "ps": "درمل دقیق لکه څنګه چې ویل شوي ورکړئ",
+        "en": "Give medicines exactly as told"
+      },
+      "text": {
+        "fa": "بپرسید چقدر، روزی چند بار، و برای چند روز. از کارمندان بخواهید که به شما نشان بدهند، یا روی قطی نشانی بگذارند.",
+        "ps": "وپوښتئ څومره، په ورځ کې څو ځله، او د څو ورځو لپاره. له کارکوونکو وغواړئ چې درته وښيي، یا پر قطۍ نښه کېږدي.",
+        "en": "Ask how much, how many times a day, and for how many days. Ask the staff to show you, or to mark it on the box."
+      }
+    },
+    {
+      "id": "hospital-stay.antibiotics",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "انتی‌بیوتیک را تا آخر بدهید",
+        "ps": "انټي بیوټیک تر پایه ورکړئ",
+        "en": "Finish all the antibiotics"
+      },
+      "text": {
+        "fa": "تا تمام شدن آن ادامه دهید، حتی وقتی مریض بهتر شد. اگر زود قطع کنید، ممکن است مریضی برگردد.",
+        "ps": "تر پای پورې یې دوام ورکړئ، که څه هم ناروغ ښه شي. که وخته یې پرېږدئ، کېدای شي ناروغي بېرته راشي.",
+        "en": "Keep giving them until they are finished, even when the person feels better. Stopping early can bring the illness back."
+      }
+    },
+    {
+      "id": "hospital-stay.follow-up",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "مراجعهٔ بعدی را فراموش نکنید",
+        "ps": "بیا کتنه مه هېروئ",
+        "en": "Keep the follow-up visit"
+      },
+      "text": {
+        "fa": "بپرسید چه وقت دوباره بیایید، و ورقهٔ رخصتی را نگه دارید. آن را با دواها در مراجعهٔ بعدی بیاورید.",
+        "ps": "وپوښتئ چې کله بېرته راشئ، او د رخصتۍ پاڼه وساتئ. هغه او درمل په بله کتنه کې له ځان سره راوړئ.",
+        "en": "Ask when to come back, and keep the discharge paper. Bring it, and the medicines, to the next visit."
+      }
+    },
+    {
+      "id": "hospital-stay.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "بعد از رفتن به خانه، اگر مریض یکی از این حالت‌ها را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "کور ته له تللو وروسته، که ناروغ له دې حالتونو څخه یو ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "After going home, go to hospital now, day or night, if the patient:"
+      },
+      "items": [
+        {
+          "id": "hospital-stay.urgent.worse",
+          "icon": "warning",
+          "text": {
+            "fa": "به جای بهتر شدن، بدتر می‌شود",
+            "ps": "د ښه کېدو پر ځای بدتر کېږي",
+            "en": "gets worse instead of better"
+          }
+        },
+        {
+          "id": "hospital-stay.urgent.drink",
+          "icon": "vomit",
+          "text": {
+            "fa": "چیزی نوشیده نمی‌تواند، یا هر چیز را استفراغ می‌کند",
+            "ps": "څه نشي څښلای، یا هر څه کانګې کوي",
+            "en": "cannot drink, or vomits everything"
+          }
+        },
+        {
+          "id": "hospital-stay.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "به سختی نفس می‌کشد",
+            "ps": "په سختۍ ساه اخلي",
+            "en": "struggles to breathe"
+          }
+        },
+        {
+          "id": "hospital-stay.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است، یا تشنج می‌کند",
+            "ps": "ډېر خوب وړي، یا اختلاج کوي",
+            "en": "is very sleepy, or has a fit"
+          }
+        },
+        {
+          "id": "hospital-stay.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی زیاد دارد، بعد از ولادت هم",
+            "ps": "ډېره وینه ترې بهېږي، له زېږون وروسته هم",
+            "en": "has heavy bleeding, also after a birth"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hospital-stay.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این‌ها را دیدید، امروز به کلینیک بروید:",
+        "ps": "که له دې څخه یو مو ولید، نن کلینیک ته ولاړ شئ:",
+        "en": "If you notice any of these, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "hospital-stay.soon.wound",
+          "icon": "wound",
+          "text": {
+            "fa": "زخمی که سرخ، پندیده، آب‌دار یا بدبو است",
+            "ps": "ټپ چې سور، پړسېدلی، اوبه ترې راځي یا بد بوی لري",
+            "en": "a wound that is red, swollen, leaking or smells bad"
+          }
+        },
+        {
+          "id": "hospital-stay.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تبی که دوباره می‌آید",
+            "ps": "تبه چې بېرته راځي",
+            "en": "a fever that comes back"
+          }
+        },
+        {
+          "id": "hospital-stay.soon.rash",
+          "icon": "rash",
+          "text": {
+            "fa": "دانه‌های پوستی بعد از یک دوای نو",
+            "ps": "د نوي درمل وروسته پر پوستکي دانې",
+            "en": "a rash after a new medicine"
+          }
+        },
+        {
+          "id": "hospital-stay.soon.unsure",
+          "icon": "pill",
+          "text": {
+            "fa": "مطمئن نیستید که دوا را چطور بدهید",
+            "ps": "ډاډه نه یاست چې درمل څنګه ورکړئ",
+            "en": "you are not sure how to give the medicine"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hospital-stay.child-signs",
+      "type": "link",
+      "to": "topic/danger-child",
+      "icon": "warning",
+      "title": {
+        "fa": "علایمی که طفل فوراً کمک لازم دارد",
+        "ps": "هغه نښې چې ماشوم ته سمدستي مرسته پکار ده",
+        "en": "Signs a child needs help now"
+      },
+      "text": {
+        "fa": "علایم خطر را بشناسید، تا اگر در خانه دیده شد، زود برگردید.",
+        "ps": "د خطر نښې وپېژنئ، څو که په کور کې ښکاره شوې، ژر بېرته راشئ.",
+        "en": "Know the danger signs, so you come back quickly if they appear at home."
+      }
+    },
+    {
+      "id": "hospital-stay.after-birth",
+      "type": "link",
+      "to": "topic/after-birth",
+      "icon": "midwife",
+      "title": {
+        "fa": "بعد از ولادت یا سزارین",
+        "ps": "له زېږون یا سزارین وروسته",
+        "en": "After a birth or caesarean"
+      },
+      "text": {
+        "fa": "مادر چطور استراحت کند و غذا بخورد، و علایمی که می‌گوید دوباره بروید.",
+        "ps": "مور څنګه آرام وکړي او خواړه وخوري، او هغه نښې چې وايي بېرته ولاړ شئ.",
+        "en": "How the mother should rest and eat, and the signs that mean go back."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Pocket Book of Hospital Care for Children, 2nd ed. (2013): mother stays with the child, continue breastfeeding, discharge and follow-up, when to return",
+    "WHO Patients' Rights (Declaration on the Promotion of Patients' Rights in Europe, 1994; WHO Patient safety curriculum guide 2011, topic 8: engaging patients and carers): information and consent",
+    "WHO fact sheet Antimicrobial resistance (2023) and WHO 'Antibiotics: handle with care' patient messages: take antibiotics as prescribed",
+    "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
+    "WHO PCPNC (2015) sheets D and K: postpartum danger signs and when to return",
+    "NHS (nhs.uk): Consent to treatment; Leaving hospital (discharge letter, medicines, follow-up)"
+  ],
+  "review": [
+    "Consent is framed as 'you can ask what, why and the risks, then decide together' (families decide together). It does not say the patient can refuse; add 'You can say no, or ask for time' if you want that explicit.",
+    "'Usually one family member can stay': check visiting rules in Samangan hospitals (and whether only women may stay on women's wards).",
+    "Antibiotics: WHO now says take them 'as prescribed' rather than always 'finish the course'; the brief asked for 'finish antibiotics', and for the short courses given here the two match. Step icon is 'check' (an 'antibiotic' icon would be better).",
+    "Red box items follow IMCI 'return immediately' signs plus postpartum bleeding; the amber box covers wound infection, returning fever, a rash after a new medicine (face swelling or hard breathing is on the severe allergy page) and doubt about medicine doses.",
+    "Follow-up step: 'Keep the follow-up visit' is مراجعهٔ بعدی را فراموش نکنید / بیا کتنه مه هېروئ ('do not forget the next visit'). Check it sounds natural.",
+    "Discharge paper: ورقهٔ رخصتی / د رخصتۍ پاڼه. Check the local word."
+  ]
+}

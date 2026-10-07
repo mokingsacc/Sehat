@@ -1,0 +1,310 @@
+{
+  "id": "diarrhoea-adult",
+  "section": "everyone",
+  "title": {
+    "fa": "اسهال در بزرگسالان",
+    "ps": "په لویانو کې نس ناستی",
+    "en": "Diarrhoea in adults"
+  },
+  "summary": {
+    "fa": "بعد از هر اسهال او آر اس. خون یا ضعف شدید: بروید.",
+    "ps": "له هر نس ناستي وروسته او آر اس. وینه یا سخته کمزوري: ولاړ شئ.",
+    "en": "ORS after every loose stool. Blood or great weakness: go."
+  },
+  "image": "diarrhoea-adult",
+  "blocks": [
+    {
+      "id": "diarrhoea-adult.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اسهال آبکی در تابستان و بعد از سیلاب، از راه آب و دست‌های ناپاک سرایت می‌کند. می‌تواند یک بزرگسال را در یک روز خشک کند، و کولرا می‌تواند در چند ساعت بکشد. او آر اس، اگر فوراً شروع شود، جان نجات می‌دهد.",
+        "ps": "اوبلن نس ناستی په دوبي او له سېلاب وروسته، د ناپاکو اوبو او لاسونو له لارې خپرېږي. کولای شي یو لوی کس په یوه ورځ کې وچ کړي، او کولرا کولای شي په څو ساعتونو کې ووژني. او آر اس، که سمدستي پیل شي، ژوند ژغوري.",
+        "en": "Watery diarrhoea spreads in summer and after floods, through dirty water and hands. It can dry out an adult in a day, and cholera can kill within hours. ORS, started at once, saves lives."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.anim-ors",
+      "type": "anim",
+      "anim": "ors"
+    },
+    {
+      "id": "diarrhoea-adult.anim-water",
+      "type": "anim",
+      "anim": "water"
+    },
+    {
+      "id": "diarrhoea-adult.ors",
+      "type": "step",
+      "icon": "ors",
+      "title": {
+        "fa": "بعد از هر اسهال او آر اس بنوشید",
+        "ps": "له هر نس ناستي وروسته او آر اس وڅښئ",
+        "en": "Drink ORS after every stool"
+      },
+      "text": {
+        "fa": "یک پاکت را در یک لیتر آب پاک حل کنید. بعد از هر اسهال یک گیلاس پر یا بیشتر، با جرعه‌های کوچک بنوشید. تا بند شدن اسهال ادامه دهید.",
+        "ps": "یوه کڅوړه په یو لیټر پاکو اوبو کې حل کړئ. له هر نس ناستي وروسته یو ډک ګیلاس یا ډېر، په کوچنیو غوړپونو وڅښئ. تر هغه دوام ورکړئ چې نس ناستی ودرېږي.",
+        "en": "Mix one packet in a litre of clean water. Drink a full cup or more after every loose stool, in small sips. Keep going until the diarrhoea stops."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.fluids",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "نوشیدنی‌ها و غذای دیگر",
+        "ps": "نور څښاک او خواړه",
+        "en": "Other drinks and food"
+      },
+      "text": {
+        "fa": "اگر او آر اس نیست، آب پاک، آب برنج، شوربا یا چای کم‌رنگ با کمی نمک بنوشید. خوردن غذای سبک را ادامه دهید. مادران شیرده شیردهی را ادامه دهند.",
+        "ps": "که او آر اس نه وي، پاکې اوبه، د وریجو اوبه، ښوروا یا کمرنګه چای له لږې مالګې سره وڅښئ. د سپکو خوړو خوړلو ته دوام ورکړئ. تي ورکوونکې میندې تي ورکول ته دوام ورکړي.",
+        "en": "If no ORS, drink clean water, rice water, soup or weak tea with a little salt. Keep eating light food. Breastfeeding mothers keep breastfeeding."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.watch",
+      "type": "step",
+      "icon": "eye-sunken",
+      "title": {
+        "fa": "مراقب خشک شدن بدن باشید",
+        "ps": "د بدن د وچېدو څارنه وکړئ",
+        "en": "Watch for drying out"
+      },
+      "text": {
+        "fa": "دهن خشک، تشنگی زیاد، ادرار کم و تیره، چشم‌های فرورفته، سرچرخی هنگام ایستادن. این‌ها یعنی بدن خشک می‌شود: بیشتر بنوشید و به کلینیک برسید.",
+        "ps": "وچه خوله، ډېره تنده، لږې تیارې متیازې، ننوتلې سترګې، په ودرېدو کې سرګرځېدل. دا یعنې بدن وچېږي: ډېر وڅښئ او کلینیک ته ورسېږئ.",
+        "en": "Dry mouth, great thirst, little dark urine, sunken eyes, dizziness on standing. These mean the body is drying out: drink more and get to the clinic."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.hygiene",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "جلو سرایت را بگیرید",
+        "ps": "د خپرېدو مخه ونیسئ",
+        "en": "Stop it spreading"
+      },
+      "text": {
+        "fa": "بعد از تشناب و پیش از غذا دست‌ها را با صابون بشویید. آب را بجوشانید یا کلورین بزنید. لباس و بستر مریض را جداگانه، دور از منبع آب بشویید.",
+        "ps": "له تشناب وروسته او له خوړو مخکې لاسونه په صابون ومینځئ. اوبه وایشوئ یا کلورین ورواچوئ. د ناروغ جامې او بستره جلا، د اوبو له سرچینې لرې ومینځئ.",
+        "en": "Wash hands with soap after the toilet and before food. Boil or chlorinate water. Wash the sick person's clothes and bedding separately, away from the water source."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.report",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "در مورد دیگران به کارمند صحی بگویید",
+        "ps": "د نورو په اړه روغتیايي کارکوونکي ته ووایاست",
+        "en": "Tell the health worker about others"
+      },
+      "text": {
+        "fa": "اگر چند نفر در قریه اسهال آبکی دارند، فوراً به کارمند صحی یا کلینیک بگویید. شاید کولرا باشد، و تمام قریه حفاظت شده می‌تواند.",
+        "ps": "که په کلي کې څو کسان اوبلن نس ناستی لري، سمدستي روغتیايي کارکوونکي یا کلینیک ته ووایاست. ښايي کولرا وي، او ټول کلی ساتل کېدای شي.",
+        "en": "If several people in the village have watery diarrhoea, tell the health worker or the clinic at once. It may be cholera, and the whole village can be protected."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: او آر اس و معاینه",
+        "ps": "په کلینیک کې: او آر اس او معاینه",
+        "en": "At the clinic: ORS and a check"
+      },
+      "text": {
+        "fa": "کارمند صحی می‌بیند که بدن چقدر خشک شده و او آر اس رایگان می‌دهد. اسهال آبکی انتی‌بیوتیک ضرورت ندارد. خون در مدفوع با تب انتی‌بیوتیک (سیپروفلوکساسین) می‌گیرد.",
+        "ps": "روغتیايي کارکوونکی ګوري چې بدن څومره وچ شوی او او آر اس وړیا ورکوي. اوبلن نس ناستی انټي بیوټیک ته اړتیا نه لري. په ډکو کې وینه له تبې سره انټي بیوټیک (سیپروفلوکساسین) اخلي.",
+        "en": "The health worker checks how dry the body is and gives ORS, free. Watery diarrhoea needs no antibiotic. Blood in the stool with fever gets an antibiotic (ciprofloxacin)."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: سیروم",
+        "ps": "په روغتون کې: سیروم",
+        "en": "At the hospital: fluids by drip"
+      },
+      "text": {
+        "fa": "کسی که نمی‌تواند بنوشد، بسیار ضعیف است یا کولرا دارد، به تیزی سیروم می‌گیرد، بعد او آر اس. برای کولرا انتی‌بیوتیک هم داده می‌شود. اکثر مردم در یکی دو روز به خانه برمی‌گردند.",
+        "ps": "هغه څوک چې نه شي څښلای، ډېر کمزوری دی یا کولرا لري، ژر سیروم اخلي، بیا او آر اس. کولرا ته انټي بیوټیک هم ورکول کېږي. ډېری خلک په یوه دوه ورځو کې کور ته ستنېږي.",
+        "en": "A person who cannot drink, is very weak or has cholera gets fluids fast by drip, then ORS. Cholera also gets an antibiotic. Most are home within a day or two."
+      }
+    },
+    {
+      "id": "diarrhoea-adult.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "diarrhoea-adult.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "نمی‌تواند بنوشد، یا همه چیز را استفراغ می‌کند",
+            "ps": "نه شي څښلای، یا هر څه کانګې کوي",
+            "en": "cannot drink, or vomits everything"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.urgent.weak",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بسیار ضعیف، سرچرخ، گیج یا به سختی بیدار می‌شود",
+            "ps": "ډېر کمزوری، سرګرځېدلی، ګډوډ یا په سختۍ ویښېږي",
+            "en": "very weak, dizzy, confused or hard to wake"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.urgent.rice",
+          "icon": "water",
+          "text": {
+            "fa": "مدفوع آبکی مثل آب برنج، چند بار در ساعت",
+            "ps": "اوبلنې ډکې لکه د وریجو اوبه، په ساعت کې څو ځله",
+            "en": "watery stool like rice water, many times an hour"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.urgent.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "۸ ساعت یا بیشتر ادرار نکرده",
+            "ps": "۸ ساعته یا ډېر یې متیازې نه دي کړې",
+            "en": "no urine for 8 hours or more"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.urgent.risk",
+          "icon": "pregnant",
+          "text": {
+            "fa": "خانم حامله یا شخص پیری که بدنش خشک می‌شود",
+            "ps": "امیندواره ښځه یا زوړ کس چې بدن یې وچېږي",
+            "en": "a pregnant woman or an old person who is drying out"
+          }
+        }
+      ]
+    },
+    {
+      "id": "diarrhoea-adult.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "diarrhoea-adult.soon.blood",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "خون در مدفوع",
+            "ps": "په ډکو کې وینه",
+            "en": "blood in the stool"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "اسهال با تب",
+            "ps": "نس ناستی له تبې سره",
+            "en": "diarrhoea with fever"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.soon.days",
+          "icon": "calendar",
+          "text": {
+            "fa": "اسهال بیش از ۳ روز",
+            "ps": "له ۳ ورځو زیات نس ناستی",
+            "en": "diarrhoea for more than 3 days"
+          }
+        },
+        {
+          "id": "diarrhoea-adult.soon.pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "severe belly pain"
+          }
+        }
+      ]
+    },
+    {
+      "id": "diarrhoea-adult.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "diarrhoea-adult.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "برای اسهال آبکی از دکان انتی‌بیوتیک یا دوای بندکنندهٔ اسهال نگیرید.",
+            "ps": "د اوبلن نس ناستي لپاره له دوکان څخه انټي بیوټیک یا د نس ناستي درېدونکي درمل مه اخلئ.",
+            "en": "Do not take antibiotics or stopping medicines from a shop for watery diarrhoea."
+          }
+        },
+        {
+          "id": "diarrhoea-adult.dont.stop",
+          "icon": "no-drink",
+          "text": {
+            "fa": "به خاطر اسهال نوشیدن و خوردن را قطع نکنید.",
+            "ps": "د نس ناستي له امله څښل او خوړل مه پرېږدئ.",
+            "en": "Do not stop drinking or eating because of the diarrhoea."
+          }
+        },
+        {
+          "id": "diarrhoea-adult.dont.stream",
+          "icon": "water",
+          "text": {
+            "fa": "لباس مریض را در جویی که دیگران از آن می‌نوشند نشویید.",
+            "ps": "د ناروغ جامې په هغه ویاله کې مه مینځئ چې نور ترې اوبه څښي.",
+            "en": "Do not wash the sick person's clothes in the stream others drink from."
+          }
+        }
+      ]
+    },
+    {
+      "id": "diarrhoea-adult.packets",
+      "type": "tip",
+      "icon": "ors",
+      "text": {
+        "fa": "در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را رایگان دارد.",
+        "ps": "په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې وړیا لري.",
+        "en": "Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them free."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Diarrhoeal disease (7 Mar 2024): dehydration, ORS, safe water and hand washing",
+    "WHO fact sheet: Cholera (2024): rice-water stool, rapid dehydration, oral and intravenous rehydration, antibiotics for severe cases, outbreak reporting",
+    "WHO Pocket Book of Hospital Care for Children (2013) and WHO The treatment of diarrhoea: a manual (2005): assessment of dehydration, Plans A, B and C, antibiotics only for bloody diarrhoea and suspected cholera",
+    "Afghanistan National Standard Treatment Guidelines (2013): acute watery diarrhoea and cholera managed with ORS, no antibiotics at primary level; dysentery treated with ciprofloxacin or cotrimoxazole",
+    "Afghanistan BPHS (2010): ORS and chlorine at Health Post; intravenous fluids and ciprofloxacin at Comprehensive Health Centre and above",
+    "Burden: Afghanistan MoPH NDSR weekly report, week 33 2026: 1,606,681 acute watery diarrhoea cases, 97,964 with dehydration and 50 deaths, 462,264 bloody diarrhoea cases in 2026 to date; WHO Afghanistan outbreak situation report week 48 2025: AWD outbreaks in the north-east and east",
+    "WHO/UNICEF Facts for Life (2010): diarrhoea; hygiene"
+  ],
+  "review": [
+    "Ciprofloxacin named for bloody diarrhoea with fever (NSTG 2013, WHO); confirm this is still the local first choice and that naming is wanted.",
+    "'Cholera also gets an antibiotic' (single-dose doxycycline or azithromycin in WHO guidance) is kept generic.",
+    "'No urine for 8 hours' as an adult danger sign is a practical threshold, not a WHO number; Mo to adjust.",
+    "ORS amount for adults ('a full cup or more after every loose stool') follows WHO's adult guidance of at least 200-400 ml per stool, simplified; the children's topic has the exact child amounts.",
+    "ORS 'free at the health post': BPHS Health Post kit; confirm CHWs in Samangan are still supplied (about 600 facilities closed nationally by August 2026).",
+    "Pashto 'د نس ناستي درېدونکي درمل' (anti-diarrhoeal medicines) to be checked for natural wording.",
+    "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
+  ]
+}

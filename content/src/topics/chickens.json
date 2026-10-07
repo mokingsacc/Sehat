@@ -1,0 +1,198 @@
+{
+  "id": "chickens",
+  "section": "everyone",
+  "title": {
+    "fa": "مرغداری در خانه",
+    "ps": "په کور کې چرګان ساتل",
+    "en": "Backyard chickens"
+  },
+  "summary": {
+    "fa": "چند مرغ صحتمند برای اطفال تخم، و برای خانواده پول می‌دهد.",
+    "ps": "څو روغې چرګې ماشومانو ته هګۍ او کورنۍ ته پیسې ورکوي.",
+    "en": "A few healthy hens give eggs for the children and money."
+  },
+  "image": "chickens",
+  "blocks": [
+    {
+      "id": "chickens.lead",
+      "type": "lead",
+      "text": {
+        "fa": "چند مرغ نزدیک خانه بیشتر روزها تخم می‌کنند. روزی یک تخم مرغ یکی از بهترین غذاها برای طفل کوچک است.",
+        "ps": "د کور تر څنګ څو چرګې ډېری ورځې هګۍ اچوي. په ورځ کې یوه هګۍ د کوچني ماشوم لپاره له تر ټولو ښو خوړو څخه ده.",
+        "en": "A few hens near the house lay eggs on most days. One egg a day is one of the best foods for a young child."
+      }
+    },
+    {
+      "id": "chickens.coop",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "یک لانهٔ امن و خشک",
+        "ps": "خوندي او وچه کوټه",
+        "en": "A safe, dry coop"
+      },
+      "text": {
+        "fa": "مرغ‌ها را در یک لانهٔ کوچک گلی یا چوبی، کمی بالاتر از زمین، با یک چوب برای نشستن نگه دارید. شب دروازه‌اش را ببندید تا روباه و سگ نیاید.",
+        "ps": "چرګې په یوه کوچنۍ خټینه یا لرګینه کوټه کې، له ځمکې لږ پورته، د کښېناستو له لرګي سره وساتئ. شپه یې دروازه وتړئ چې لومبړ او سپی رانه شي.",
+        "en": "Keep hens in a small mud or wooden coop, raised off the ground, with a perch. Close the door at night against foxes and dogs."
+      },
+      "picture": "food-chicken-coop"
+    },
+    {
+      "id": "chickens.water",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب پاک، لانهٔ پاک",
+        "ps": "پاکې اوبه، پاکه کوټه",
+        "en": "Clean water, clean coop"
+      },
+      "text": {
+        "fa": "هر روز در ظرف پاک آب تازه بدهید. هر هفته فضلهٔ مرغ را پاک کنید و بگذارید با کود دیگر بپوسد، بعد به باغچه بدهید.",
+        "ps": "هره ورځ په پاک لوښي کې تازه اوبه ورکړئ. هره اونۍ د چرګانو غول پاک کړئ او پرېږدئ چې له نورې سرې سره ورست شي، بیا یې باغچې ته ورکړئ.",
+        "en": "Give fresh water every day in a clean dish. Sweep out droppings each week and let them rot with other manure before using them on the garden."
+      }
+    },
+    {
+      "id": "chickens.feed",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "پس‌ماندهٔ غذا و دانه بدهید",
+        "ps": "د خوړو پاتې شوني او دانه ورکړئ",
+        "en": "Feed scraps and grain"
+      },
+      "text": {
+        "fa": "مرغ‌ها پس‌ماندهٔ آشپزخانه، علف باغچه، حشره و کمی دانه می‌خورند. پوست تخم مرغ کوبیده کمک می‌کند پوست تخم‌ها محکم شود.",
+        "ps": "چرګې د پخلنځي پاتې شوني، د باغچې واښه، حشرې او لږه دانه خوري. میده شوي د هګۍ پوستکي مرسته کوي چې د هګیو پوستکی کلک شي.",
+        "en": "Hens eat kitchen scraps, garden weeds, insects and some grain. Crushed eggshell helps them lay eggs with strong shells."
+      }
+    },
+    {
+      "id": "chickens.vaccine",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "مرغ‌ها را برای مرض نیوکاسل واکسین کنید",
+        "ps": "چرګان د نیوکاسل د ناروغۍ پر ضد واکسین کړئ",
+        "en": "Vaccinate against Newcastle disease"
+      },
+      "text": {
+        "fa": "مرض نیوکاسل می‌تواند در چند روز تمام مرغ‌های شما را بکشد. از داکتر حیوانات یا یک مؤسسه واکسین بخواهید. اکثراً قطرهٔ چشم است و هر ۴ ماه داده می‌شود.",
+        "ps": "د نیوکاسل ناروغي کولای شي په څو ورځو کې ستاسو ټول چرګان ووژني. د څارویو له ډاکټر یا له یوې مؤسسې واکسین وغواړئ. اکثره د سترګو څاڅکي وي او هرو ۴ میاشتو کې ورکول کېږي.",
+        "en": "Newcastle disease can kill all your hens in days. Ask the animal doctor or an aid group for the vaccine. It is usually eye drops, given every 4 months."
+      }
+    },
+    {
+      "id": "chickens.eggs",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "اول تخم برای اطفال",
+        "ps": "لومړی هګۍ د ماشومانو لپاره",
+        "en": "Eggs for the children first"
+      },
+      "text": {
+        "fa": "پیش از فروش تخم، چند تا را برای اطفال کوچک و زنان حامله نگه دارید. تخم را آن‌قدر بپزید که زردی‌اش سفت شود، تا میکروب بمیرد.",
+        "ps": "د هګیو تر پلور مخکې، څو یې د کوچنیو ماشومانو او امیندوارو ښځو لپاره وساتئ. هګۍ دومره پخې کړئ چې ژېړ یې کلک شي، چې میکروب ووژل شي.",
+        "en": "Before selling eggs, keep some for young children and pregnant women. Cook eggs until the yolk is firm, to kill germs."
+      }
+    },
+    {
+      "id": "chickens.hands",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "بعد از مرغ‌ها دست بشویید",
+        "ps": "له چرګانو وروسته لاسونه ومینځئ",
+        "en": "Wash hands after the hens"
+      },
+      "text": {
+        "fa": "فضلهٔ مرغ میکروب اسهال دارد. بعد از کار در لانهٔ مرغ دست‌ها را با صابون بشویید، و مرغ‌ها را از طفل و غذایش دور نگه دارید.",
+        "ps": "د چرګانو غول د نس ناستې میکروب لري. د چرګانو له کوټې وروسته لاسونه په صابون ومینځئ، او چرګان له ماشوم او د هغه له خوړو لرې وساتئ.",
+        "en": "Chicken droppings carry germs that cause diarrhoea. Wash hands with soap after the coop, and keep hens away from babies and their food."
+      }
+    },
+    {
+      "id": "chickens.illness",
+      "type": "link",
+      "to": "topic/animal-illness",
+      "icon": "animals",
+      "title": {
+        "fa": "مریضی‌هایی که از حیوانات می‌آید",
+        "ps": "له څارویو راتلونکې ناروغۍ",
+        "en": "Illness from animals"
+      },
+      "text": {
+        "fa": "کدام مریضی حیوانات به انسان می‌رسد، و چه وقت به شفاخانه بروید.",
+        "ps": "د څارویو کومې ناروغۍ انسان ته رسي، او کله روغتون ته ولاړ شئ.",
+        "en": "Which animal illnesses spread to people, and when to go to hospital."
+      }
+    },
+    {
+      "id": "chickens.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "chickens.dont.sick",
+          "icon": "no",
+          "text": {
+            "fa": "مرغی را که مریض بوده یا مرده نخورید و نفروشید؛ مریضی می‌تواند به انسان برسد",
+            "ps": "هغه چرګه چې ناروغه وه یا مړه شوې مه خورئ او مه یې پلورئ؛ ناروغي انسان ته رسېدای شي",
+            "en": "eat or sell hens that were sick or died: illness can pass to people"
+          }
+        },
+        {
+          "id": "chickens.dont.bare",
+          "icon": "handwash",
+          "text": {
+            "fa": "مرغ مرده را با دست خالی نگیرید؛ با خلطه بگیرید و عمیق دفن کنید",
+            "ps": "مړه مرغه په لوڅ لاس مه نیسئ؛ په کڅوړه یې ونیسئ او ژوره یې ښخه کړئ",
+            "en": "touch dead birds with bare hands; use a bag and bury them deep"
+          }
+        },
+        {
+          "id": "chickens.dont.house",
+          "icon": "sleep",
+          "text": {
+            "fa": "نگذارید مرغ‌ها در اتاقی بخوابند که مردم در آن زندگی می‌کنند یا می‌خوابند",
+            "ps": "مه پرېږدئ چې چرګان په هغه کوټه کې ویده شي چې خلک پکې اوسېږي یا ویده کېږي",
+            "en": "let hens sleep in the rooms where people live or sleep"
+          }
+        }
+      ]
+    },
+    {
+      "id": "chickens.many-die",
+      "type": "tip",
+      "icon": "phone",
+      "text": {
+        "fa": "اگر مرغ‌های زیاد ناگهان مریض شوند یا بمیرند، همان روز به داکتر حیوانات خبر بدهید.",
+        "ps": "که ډېر چرګان ناڅاپه ناروغه شي یا مړه شي، په همغه ورځ د څارویو ډاکټر ته خبر ورکړئ.",
+        "en": "If many hens fall ill or die suddenly, tell the animal doctor the same day."
+      }
+    }
+  ],
+  "sources": [
+    "Alders R, dos Anjos F, Bagnol B et al. Controlling Newcastle disease in village chickens: a training manual. ACIAR Monograph 86 (2002): I-2 vaccine by eye drop, revaccinate every 4 months, housing reduces spread",
+    "FAO Animal Production and Health Paper 161: Newcastle disease control in rural poultry (technology review)",
+    "FAO in Afghanistan: Life-changing hens and eggs for rural Afghan women (poultry package: pullets, feed, coop materials, feeders and drinkers)",
+    "Afghanaid: What is a self-help group? (vocational training from tailoring to poultry rearing)",
+    "WHO guideline for complementary feeding (2023): daily animal-source foods such as eggs",
+    "WHO Five Keys to Safer Food (2006): cook thoroughly, eggs",
+    "WHO fact sheet: Avian influenza A (H5N1): avoid contact with sick or dead poultry; do not eat sick or dead birds"
+  ],
+  "review": [
+    "Newcastle vaccine: thermostable I-2 eye-drop vaccine every 4 months is the ACIAR/FAO village model. Check with the Samangan livestock directorate or DCA/FAO/Afghanaid vets which vaccine (I-2, LaSota) and schedule are actually available.",
+    "Bird flu is not named, to keep the page calm; the dont items and the 'many hens die' tip carry the message. The animal-illness page does not cover birds; Mo may want a bird flu line there.",
+    "Chicken droppings and child diarrhoea/gut damage: supported by WASH research (e.g. animal faeces in the yard and environmental enteropathy). Keep 'keep hens away from babies and their food'.",
+    "Local Dari name for Newcastle disease may differ (some areas say رانیخت or ترانیخت?). Native speakers and a vet to confirm; Pashto uses the same borrowed name.",
+    "Icons: eggs step uses 'baby' (wanted 'egg'); coop uses 'house' (wanted 'chicken'); link uses 'animals'.",
+    "Words to check: Dari لانهٔ مرغ (coop), فضله (droppings), مؤسسه (aid group); Pashto غول (droppings), لومبړ (fox), کوټه for coop, مؤسسه."
+  ]
+}

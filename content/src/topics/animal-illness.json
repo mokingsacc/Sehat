@@ -113,6 +113,34 @@
       }
     },
     {
+      "id": "animal-illness.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: تب مالت و سیاه‌زخم",
+        "ps": "په کلینیک کې: د مالټا تبه او تور زخم",
+        "en": "At the clinic: Malta fever and anthrax"
+      },
+      "text": {
+        "fa": "تب مالت با معاینهٔ خون تایید و با دو انتی‌بیوتیک برای حدود ۶ هفته (داکسی‌سایکلین با یک دوای دیگر) علاج می‌شود. سیاه‌زخم جلدی با انتی‌بیوتیک مثل پنسیلین علاج می‌شود. دورهٔ کامل را تمام کنید.",
+        "ps": "د مالټا تبه د وینې په معاینه تاییدېږي او په دوو انټي بیوټیکونو شاوخوا ۶ اونۍ (ډاکسي سایکلین له بل درمل سره) علاجېږي. د پوستکي تور زخم په انټي بیوټیک لکه پنسلین علاجېږي. بشپړه دوره پای ته ورسوئ.",
+        "en": "Malta fever is confirmed by a blood test and cured with two antibiotics for about 6 weeks (doxycycline with another). Skin anthrax is cured with antibiotics such as penicillin."
+      }
+    },
+    {
+      "id": "animal-illness.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: تب کانگو",
+        "ps": "په روغتون کې: د کانګو تبه",
+        "en": "At the hospital: Congo fever"
+      },
+      "text": {
+        "fa": "تب کانگو در اتاق جداگانه در شفاخانهٔ حوزوی یا شفاخانهٔ امراض ساری تداوی می‌شود، با سیروم، خون و یک دوای ضد ویروس (ریباویرین). رسیدن زود شانس زنده ماندن را بالا می‌برد. مراقبان دستکش و ماسک می‌پوشند.",
+        "ps": "د کانګو تبه په جلا کوټه کې په سیمه ییز یا د ساري ناروغیو روغتون کې درملنه کېږي، په سیروم، وینه او یو ضد ویروسي درمل (ریباویرین). ژر رسېدل د ژوندي پاتې کېدو چانس لوړوي. پالونکي دستکشې او ماسکونه اغوندي.",
+        "en": "Congo fever is treated in an isolation room at the regional or infectious diseases hospital, with fluids, blood and an antiviral medicine (ribavirin). Early arrival improves survival. Carers wear gloves and masks."
+      }
+    },
+    {
       "id": "animal-illness.urgent",
       "type": "alert",
       "level": "urgent",
@@ -263,7 +291,10 @@
     "WHO Afghanistan: Vigilance and preventive measures needed during Eid al-Adha (CCHF)",
     "WHO fact sheet: Brucellosis (2020): unpasteurised milk and cheese, animal births and afterbirths",
     "WHO/WOAH/FAO Anthrax in humans and animals, 4th ed. (2008): do not eat or handle animals that died suddenly; cutaneous anthrax eschar",
-    "Burden: MoPH NDSR week 33 2026 (CCHF outbreak in Samangan; anthrax outbreaks in Balkh and Jawzjan); WHO outbreak sitrep week 48 2025 (1,468 CCHF cases, 101 deaths); Akbarian et al. PLoS NTD 2015 (brucellosis and Q fever, Herat)"
+    "Burden: MoPH NDSR week 33 2026 (CCHF outbreak in Samangan; anthrax outbreaks in Balkh and Jawzjan); WHO outbreak sitrep week 48 2025 (1,468 CCHF cases, 101 deaths); Akbarian et al. PLoS NTD 2015 (brucellosis and Q fever, Herat)",
+    "WHO fact sheet: Brucellosis (2020): diagnosis by blood test, prolonged combination antibiotics (doxycycline plus rifampicin or streptomycin); WHO fact sheet: Anthrax (2024): cutaneous anthrax curable with antibiotics",
+    "WHO fact sheet: Crimean-Congo haemorrhagic fever (2022): supportive care, ribavirin used, isolation and protection of health workers and carers",
+    "Afghanistan BPHS (2010): doxycycline at BHC, penicillin at BHC; Afghanistan National Essential Medicines List (2014): ribavirin on the hospital list; WHO Afghanistan outbreak report week 48 2025: 1,468 CCHF cases and 101 deaths in 2025 (Balkh among the highest), peak around Eid al-Adha"
   ],
   "review": [
     "Local disease names to confirm: Dari 'تب کانگو' (CCHF), 'تب مالت' (brucellosis), 'سیاه‌زخم' (anthrax); Pashto 'د کانګو تبه', 'د مالټا تبه', 'تور زخم'. Pashto 'کنه/کنې' for tick.",
@@ -271,6 +302,9 @@
     "Gloves or plastic bags at slaughter: check this is practical and culturally acceptable at home slaughter, including at Eid.",
     "Icon wanted: 'gloves'; 'handwash' used for the slaughter step. 'animals' is used twice.",
     "The anthrax black sore is placed under 'clinic today' (soon). Swelling of the face or neck with a black sore would be urgent; consider adding it.",
-    "Prolonged or recurrent fever with joint pain is a simplified brucellosis presentation for families."
+    "Prolonged or recurrent fever with joint pain is a simplified brucellosis presentation for families.",
+    "Ribavirin for CCHF: WHO says evidence is uncertain but it is widely used in Afghanistan (national CCHF guideline); Mo to decide whether to keep the name.",
+    "Brucellosis regimen (6 weeks of two drugs) follows WHO; the second drug is not named because rifampicin is reserved for TB in many programmes.",
+    "CCHF isolation beds: Balkh Regional Hospital in Mazar and the infectious diseases hospital in Kabul; confirm whether Aybak provincial hospital can isolate and treat."
   ]
 }

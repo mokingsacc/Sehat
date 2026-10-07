@@ -242,6 +242,34 @@
       }
     },
     {
+      "id": "red-flags.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: چرا آنجا بروید",
+        "ps": "په روغتون کې: ولې هلته ولاړ شئ",
+        "en": "At the hospital: why go there"
+      },
+      "text": {
+        "fa": "سکته، حملهٔ قلبی، مننژیت یا خونریزی داخلی به معاینات و تداوی‌هایی ضرورت دارد که فقط شفاخانه دارد: اسکن، خون، اکسیجن، دوای پیچکاری و عملیات. ساعت‌های اول تعیین می‌کند چقدر نجات می‌یابد.",
+        "ps": "سکته، د زړه حمله، مننژیت یا دننه وینه بهېدل هغو معایناتو او درملنو ته اړتیا لري چې یوازې روغتون یې لري: سکن، وینه، اکسیجن، پیچکاري درمل او عملیات. لومړي ساعتونه ټاکي چې څومره ژغورل کېږي.",
+        "en": "A stroke, heart attack, meningitis or bleeding inside needs tests and treatments only a hospital has: scans, blood, oxygen, injected medicines and surgery. The first hours decide how much is saved."
+      }
+    },
+    {
+      "id": "red-flags.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: علایم همین هفته",
+        "ps": "په کلینیک کې: د همدې اونۍ نښې",
+        "en": "At the clinic: the this-week signs"
+      },
+      "text": {
+        "fa": "برای علایم زرد، کلینیک شما را معاینه می‌کند، بلغم را برای توبرکلوز، خون و ادرار را معاینه می‌کند، و اگر غده یا خونریزی ضرورت داشته باشد برای اسکن به شفاخانه می‌فرستد. اگر زود پیدا شود، تداوی آسان‌تر است.",
+        "ps": "د ژېړو نښو لپاره، کلینیک تاسو معاینه کوي، بلغم د نري رنځ لپاره، وینه او متیازې معاینه کوي، او که غوټه یا وینه بهېدل اړتیا ولري د سکن لپاره روغتون ته مو لېږي. که ژر وموندل شي، درملنه یې اسانه ده.",
+        "en": "For the amber signs, the clinic examines you, tests sputum for TB, checks blood and urine, and sends you for hospital scans if needed. Found early, most are easier to treat."
+      }
+    },
+    {
       "id": "red-flags.dont",
       "type": "dont",
       "title": {
@@ -278,7 +306,9 @@
     "WHO Package of Essential Noncommunicable Disease Interventions (PEN) implementation tools (2013): referral criteria",
     "WHO Guide to cancer early diagnosis (2017) and WHO Regional Office for Africa: warning signs of cancer (2017)",
     "WHO mhGAP Intervention Guide 2.0 (2016): self-harm and suicide",
-    "IFRC International First Aid, Resuscitation and Education Guidelines (2020)"
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020)",
+    "WHO IMAI District Clinician Manual (2011): emergency management of shock, stroke, chest pain, meningitis, gastrointestinal bleeding",
+    "WHO PEN (2020): referral criteria for suspected heart attack and stroke; WHO TB screening (2021)"
   ],
   "review": [
     "'Thoughts of ending one's life' is a step ('If someone talks of suicide': stay with them, remove poisons and weapons, take them to hospital now) rather than a 9th item in the red list, because the spec allows at most 8 alert items and the step gives the actions (mhGAP). Move it into the alert if you prefer.",
@@ -287,6 +317,8 @@
     "'Blood in the sputum' is in the 'this week' list (TB); heavy coughing of blood should go to hospital now. Decide whether to add that.",
     "'Yellow eyes' is 'this week'; yellow eyes with fever, confusion or belly pain needs hospital now (partly covered by the red list).",
     "Icons: trouble swallowing uses 'no-drink' (a 'swallow' icon would be better); yellow eyes uses 'jaundice'; confusion uses 'sleepy'; vomiting blood uses 'vomit'.",
-    "fa uses everyday Afghan words: الاشه (jaw), گیچی (confusion), شخی گردن (stiff neck), دریور (driver); check with the translator."
+    "fa uses everyday Afghan words: الاشه (jaw), گیچی (confusion), شخی گردن (stiff neck), دریور (driver); check with the translator.",
+    "CT scanning is at Balkh Regional Hospital (Mazar), not Aybak; 'scans' is kept generic.",
+    "Clot-dissolving stroke treatment is probably not available regionally; the text does not promise it."
   ]
 }

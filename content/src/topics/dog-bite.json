@@ -1,0 +1,291 @@
+{
+  "id": "dog-bite",
+  "section": "everyone",
+  "title": {
+    "fa": "گزیدن سگ و هاری",
+    "ps": "د سپي چیچل او لېونتوب (هاري)",
+    "en": "Dog bites and rabies"
+  },
+  "summary": {
+    "fa": "جای گزیدگی را ۱۵ دقیقه بشویید، بعد امروز برای واکسین هاری بروید.",
+    "ps": "د چیچلو ځای ۱۵ دقیقې ومینځئ، بیا نن د هاري د واکسین لپاره ولاړ شئ.",
+    "en": "Wash the bite 15 minutes, then go for rabies vaccine today."
+  },
+  "image": "dog-bite",
+  "blocks": [
+    {
+      "id": "dog-bite.lead",
+      "type": "lead",
+      "text": {
+        "fa": "هاری از راه گزیدن یا لیسیدن سگ، شغال، روباه، پشک یا حیوان مریض دیگر سرایت می‌کند. وقتی مریضی شروع شد همیشه می‌کشد، اما واکسین بعد از گزیدگی، اگر زود شروع شود، همیشه از آن جلوگیری می‌کند.",
+        "ps": "لېونتوب (هاري) د ناروغ سپي، ګیدړ، لومړ، پیشو یا بل څاروي د چیچلو یا څټلو له لارې خپرېږي. کله چې ناروغي پیل شي تل وژونکې ده، خو له چیچلو وروسته واکسین، که ژر پیل شي، تل یې مخه نیسي.",
+        "en": "Rabies is passed by the bite or lick of a sick dog, jackal, fox, cat or other animal. Once the illness starts it always kills, but the vaccine after a bite prevents it every time if started early."
+      }
+    },
+    {
+      "id": "dog-bite.wash",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "۱۵ دقیقه بشویید",
+        "ps": "۱۵ دقیقې یې ومینځئ",
+        "en": "Wash for 15 minutes"
+      },
+      "text": {
+        "fa": "فوراً جای گزیدگی را با صابون و آب روان زیاد، یک ۱۵ دقیقهٔ کامل بشویید. این کار مقدار زیاد ویروس را می‌شوید. بعد با پارچهٔ پاک بپوشانید.",
+        "ps": "سمدستي د چیچلو ځای په صابون او ډېرو بهېدونکو اوبو پوره ۱۵ دقیقې ومینځئ. دا کار ډېر ویروس مینځي. بیا یې په پاک ټوکر وپوښئ.",
+        "en": "Straight away, wash the bite with soap and lots of running water for a full 15 minutes. This washes out much of the virus. Then cover it with a clean cloth."
+      }
+    },
+    {
+      "id": "dog-bite.go",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "همان روز برای واکسین بروید",
+        "ps": "په همغه ورځ د واکسین لپاره ولاړ شئ",
+        "en": "Go the same day for the vaccine"
+      },
+      "text": {
+        "fa": "امروز به کلینیک یا شفاخانه بروید، حتی برای گزیدگی یا خراش کوچک از سگی که سالم به نظر می‌رسید. واکسین چند پیچکاری در حدود ۲ هفته است؛ همه را تمام کنید.",
+        "ps": "نن کلینیک یا روغتون ته ولاړ شئ، حتی د داسې سپي د کوچني چیچلو یا ګرولو لپاره چې روغ ښکارېده. واکسین څو پیچکارۍ دي چې شاوخوا ۲ اونۍ دوام کوي؛ ټولې بشپړې کړئ.",
+        "en": "Go to the clinic or hospital today, even for a small bite or scratch from a dog that looked well. The vaccine is several injections over about 2 weeks; finish them all."
+      }
+    },
+    {
+      "id": "dog-bite.animal",
+      "type": "step",
+      "icon": "dog",
+      "title": {
+        "fa": "اگر می‌توانید حیوان را زیر نظر بگیرید",
+        "ps": "که کولای شئ څاروی وڅارئ",
+        "en": "Watch the animal if you can"
+      },
+      "text": {
+        "fa": "اگر سگ خانگی است، آن را بسته نگه دارید و ۱۰ روز زیر نظر بگیرید. اگر سالم ماند، به کارمند صحی بگویید. حیوان وحشی یا حیوانی که ناپدید شود، هار حساب می‌شود.",
+        "ps": "که کورنی سپی وي، تړلی یې وساتئ او ۱۰ ورځې یې وڅارئ. که روغ پاتې شو، روغتیايي کارکوونکي ته ووایاست. وحشي څاروی یا هغه چې ورک شي، لېونی ګڼل کېږي.",
+        "en": "A pet dog: keep it tied and watch it for 10 days. If it stays well, tell the health worker. A wild animal or one that disappears counts as rabid."
+      }
+    },
+    {
+      "id": "dog-bite.children",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "به اطفال در مورد سگ‌ها یاد بدهید",
+        "ps": "ماشومانو ته د سپیو په اړه ورزده کړئ",
+        "en": "Teach children about dogs"
+      },
+      "text": {
+        "fa": "اطفال بیشتر از همه گزیده می‌شوند، اکثراً در روی. به آن‌ها یاد بدهید که سگ‌های بیگانه را آزار ندهند، دنبال نکنند و غذا ندهند، و هر گزیدگی یا خراش را به شما بگویند.",
+        "ps": "ماشومان تر ټولو ډېر چیچل کېږي، ډېری وخت پر مخ. ورته ورزده کړئ چې پردي سپي مه ځوروي، مه یې تعقیبوي او خواړه مه ورکوي، او هر چیچل یا ګرول تاسو ته ووایي.",
+        "en": "Children are bitten most, often on the face. Teach them not to tease, chase or feed strange dogs, and to tell you about every bite or scratch."
+      }
+    },
+    {
+      "id": "dog-bite.dogs",
+      "type": "step",
+      "icon": "animals",
+      "title": {
+        "fa": "سگ‌های خود را واکسین کنید",
+        "ps": "خپل سپي واکسین کړئ",
+        "en": "Vaccinate your own dogs"
+      },
+      "text": {
+        "fa": "اگر در قریهٔ شما روز واکسین سگ‌ها برگزار می‌شود، سگ‌های خود را ببرید. سگ واکسین‌شده هاری را سرایت نمی‌دهد. سگ‌ها را از اطفال خواب دور نگه دارید.",
+        "ps": "که ستاسو په کلي کې د سپیو د واکسین ورځ وي، خپل سپي یوسئ. واکسین شوی سپی لېونتوب نه خپروي. سپي له ویده ماشومانو لرې وساتئ.",
+        "en": "If your village has a dog vaccination day, take your dogs. Vaccinated dogs cannot pass rabies. Keep dogs away from sleeping children."
+      }
+    },
+    {
+      "id": "dog-bite.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: مراقبت زخم و واکسین",
+        "ps": "په کلینیک کې: د زخم پاملرنه او واکسین",
+        "en": "At the clinic: wound care and vaccines"
+      },
+      "text": {
+        "fa": "کارمند صحی زخم را دوباره می‌شوید و واکسین هاری و پیچکاری تیتانوس می‌دهد، و برای گزیدگی عمیق یا در دست انتی‌بیوتیک هم. واکسین هاری در مراکز دولتی رایگان است.",
+        "ps": "روغتیايي کارکوونکی زخم بیا مینځي او د هاري واکسین او د تیټانوس پیچکاري ورکوي، او د ژور یا د لاس د چیچلو لپاره انټي بیوټیک هم. د هاري واکسین په دولتي مرکزونو کې وړیا دی.",
+        "en": "The health worker washes the wound again and gives rabies vaccine and a tetanus injection, plus an antibiotic for deep or hand bites. Rabies vaccine is free at government centres."
+      }
+    },
+    {
+      "id": "dog-bite.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: سیروم برای گزیدگی عمیق",
+        "ps": "په روغتون کې: د ژور چیچلو لپاره سیروم",
+        "en": "At the hospital: serum for deep bites"
+      },
+      "text": {
+        "fa": "برای گزیدگی عمیق یا متعدد، یا گزیدگی در سر، گردن یا دست‌ها، شفاخانه در روز اول سیروم ضد هاری را هم دور زخم پیچکاری می‌کند. بپرسید که در کجا نگهداری می‌شود.",
+        "ps": "د ژور یا ډېرو چیچلو، یا پر سر، غاړه یا لاسونو د چیچلو لپاره، روغتون په لومړۍ ورځ د هاري ضد سیروم هم د زخم شاوخوا پیچکاري کوي. وپوښتئ چې چېرته ساتل کېږي.",
+        "en": "For deep or many bites, or bites on the head, neck or hands, the hospital also injects rabies serum around the wound on day one. Ask where it is kept."
+      }
+    },
+    {
+      "id": "dog-bite.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "dog-bite.urgent.deep",
+          "icon": "wound",
+          "text": {
+            "fa": "گزیدگی عمیق، گزیدگی‌های متعدد، یا گزیدگی در سر، گردن یا دست‌ها",
+            "ps": "ژور چیچل، ډېر چیچل، یا پر سر، غاړه یا لاسونو چیچل",
+            "en": "a deep bite, many bites, or a bite on the head, neck or hands"
+          }
+        },
+        {
+          "id": "dog-bite.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی از گزیدگی که با فشار بند نمی‌شود",
+            "ps": "له چیچلو څخه وینه بهېدل چې په فشار نه درېږي",
+            "en": "bleeding from a bite that does not stop with pressure"
+          }
+        },
+        {
+          "id": "dog-bite.urgent.wild",
+          "icon": "animals",
+          "text": {
+            "fa": "گزیدگی حیوان وحشی، یا سگی که بعد مرد یا ناپدید شد",
+            "ps": "د وحشي څاروي چیچل، یا داسې سپی چې بیا مړ شو یا ورک شو",
+            "en": "a bite from a wild animal, or a dog that then died or disappeared"
+          }
+        },
+        {
+          "id": "dog-bite.urgent.rabies",
+          "icon": "convulsion",
+          "text": {
+            "fa": "هفته‌ها بعد از گزیدگی: تب، ترس از آب، تشنج، رفتار عجیب",
+            "ps": "له چیچلو څو اونۍ وروسته: تبه، له اوبو وېره، اختلاج، عجیب چلند",
+            "en": "weeks after a bite: fever, fear of water, spasms, strange behaviour"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dog-bite.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "dog-bite.soon.any",
+          "icon": "dog",
+          "text": {
+            "fa": "هر گزیدگی یا خراش از سگ، پشک، شغال یا روباه",
+            "ps": "د سپي، پیشو، ګیدړ یا لومړ هر ډول چیچل یا ګرول",
+            "en": "any bite or scratch from a dog, cat, jackal or fox"
+          }
+        },
+        {
+          "id": "dog-bite.soon.lick",
+          "icon": "wound",
+          "text": {
+            "fa": "حیوانی زخم، دهن یا چشم را لیسیده",
+            "ps": "څاروي زخم، خوله یا سترګې څټلې دي",
+            "en": "an animal licked a cut, or the mouth or eyes"
+          }
+        },
+        {
+          "id": "dog-bite.soon.infected",
+          "icon": "fever",
+          "text": {
+            "fa": "گزیدگی که سرخ، پندیده، داغ است یا چرک دارد",
+            "ps": "هغه چیچل چې سور، پړسېدلی، تود وي یا چرک ولري",
+            "en": "a bite that is red, swollen, hot or has pus"
+          }
+        },
+        {
+          "id": "dog-bite.soon.missed",
+          "icon": "syringe",
+          "text": {
+            "fa": "یک پیچکاری واکسین قضا شده",
+            "ps": "د واکسین یوه پیچکاري پاتې شوې",
+            "en": "a vaccine injection was missed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dog-bite.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "dog-bite.dont.chilli",
+          "icon": "no",
+          "text": {
+            "fa": "روی گزیدگی مرچ، تیل خاک، گیاه، خاک یا سرمه نگذارید.",
+            "ps": "پر چیچلي ځای مرچ، خاورین تېل، بوټي، خاوره یا رانجه مه ږدئ.",
+            "en": "Do not put chilli, kerosene, herbs, soil or kohl on the bite."
+          }
+        },
+        {
+          "id": "dog-bite.dont.wait",
+          "icon": "clock",
+          "text": {
+            "fa": "برای واکسین منتظر نمانید که ببینید سگ مریض می‌شود یا نه.",
+            "ps": "د واکسین لپاره انتظار مه کوئ چې وګورئ سپی ناروغېږي که نه.",
+            "en": "Do not wait to see if the dog gets sick; go for the vaccine."
+          }
+        },
+        {
+          "id": "dog-bite.dont.stitch",
+          "icon": "wound",
+          "text": {
+            "fa": "زخم گزیدگی را در خانه بخیه نزنید و محکم نبندید.",
+            "ps": "د چیچلو زخم په کور کې مه ګنډئ او کلک مه تړئ.",
+            "en": "Do not stitch or close a bite wound tightly at home."
+          }
+        }
+      ]
+    },
+    {
+      "id": "dog-bite.card",
+      "type": "tip",
+      "icon": "card",
+      "text": {
+        "fa": "کارت واکسین را نگه دارید و در تاریخ‌های نوشته‌شده برای هر پیچکاری برگردید. دوره فقط وقتی حفاظت می‌کند که تمام شود.",
+        "ps": "د واکسین کارت وساتئ او په لیکل شویو نېټو کې د هرې پیچکارۍ لپاره بېرته راشئ. دوره یوازې هغه وخت ساتنه کوي چې بشپړه شي.",
+        "en": "Keep the vaccine card and go back for every injection on the dates written. The course only protects if it is completed."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Rabies (17 Sep 2026): wound washing 15 minutes with soap and water, post-exposure prophylaxis, nearly 100 percent fatal once symptoms start, children most often bitten, dog vaccination",
+    "WHO fact sheet: Animal bites (12 Jan 2024): first aid, tetanus, antibiotics for high-risk bites, medical care the same day",
+    "WHO Rabies vaccines and immunoglobulins: WHO position paper (April 2018): exposure categories, abridged vaccine schedules (1 week intradermal or 2 weeks intramuscular), rabies immunoglobulin for severe (category III) exposures, 10-day observation of dogs and cats",
+    "WHO Expert Consultation on Rabies, third report, TRS 1012 (2018)",
+    "Afghanistan National Essential Medicines List (2014): rabies immunoglobulin and rabies vaccine (hospital level); BPHS (2010): tetanus toxoid and antibiotics at Basic Health Centre and above",
+    "Burden and access: Afghanistan MoPH data reported by Pajhwok (19 Jan 2024): 33,089 animal bites and 18 rabies deaths in a year, vaccine free at the Antani infectious diseases hospital in Kabul and provincial centres, with shortages; MoPH NDSR week 33 2026: dog bite and suspected rabies reports continue",
+    "WHO/UNICEF Facts for Life (2010): injury prevention"
+  ],
+  "review": [
+    "Where rabies vaccine and rabies immunoglobulin (serum) are actually held in Samangan (Aybak provincial hospital? Balkh Regional Hospital in Mazar?) is unknown; the text says 'ask where it is kept'. Mo or a local contact should fill this in and the clinic finder should mark it.",
+    "'Several injections over about 2 weeks' covers both WHO 2018 schedules (1-week intradermal, 2-week intramuscular); Afghanistan has used a 4-dose intramuscular course. Adjust once the local schedule is known.",
+    "'Free at government centres' is based on MoPH statements (Pajhwok 2024) but shortages of over 70 percent were reported in 2023; consider 'should be free'.",
+    "Antibiotic for deep/hand bites follows the WHO animal bites fact sheet; the medicine (usually amoxicillin-clavulanate) is not named.",
+    "Watching a pet dog for 10 days does not replace starting the vaccine; the step says to still go the same day. Check the wording cannot be heard as 'wait and see'.",
+    "The first-aid topic already has a short bite step and animal-illness has a dog tip; this topic goes deeper. Keep all three consistent if wording changes.",
+    "Pashto لېونتوب (هاري) and Dari هاری: confirm the words villagers use for rabies."
+  ]
+}

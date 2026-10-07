@@ -1,0 +1,170 @@
+{
+  "id": "garden-water",
+  "section": "everyone",
+  "title": {
+    "fa": "صرفه‌جویی آب در باغچه",
+    "ps": "په باغچه کې د اوبو سپما",
+    "en": "Save water in the garden"
+  },
+  "summary": {
+    "fa": "کاه، قطره از بوتل و آب دادن درست: حاصل بیشتر با آب کمتر.",
+    "ps": "بوس، د بوتل څاڅکي او سمې اوبه: په لږو اوبو ډېر حاصل.",
+    "en": "Straw, bottle drips and smart watering: more food from less water."
+  },
+  "image": "garden-water",
+  "blocks": [
+    {
+      "id": "garden-water.lead",
+      "type": "lead",
+      "text": {
+        "fa": "آب در سمنگان قیمتی است. این راه‌های ساده از خانواده‌های دیگر کمک می‌کند باغچه با آب کمتر و کار کمتر سبز شود.",
+        "ps": "په سمنګان کې اوبه قیمتي دي. د نورو کورنیو دا ساده لارې مرسته کوي چې باغچه په لږو اوبو او لږ کار شنه شي.",
+        "en": "Water is precious in Samangan. These simple ways from other families help the garden grow with less water and less work."
+      }
+    },
+    {
+      "id": "garden-water.mulch",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "خاک را با کاه بپوشانید",
+        "ps": "خاوره په بوس پټه کړئ",
+        "en": "Cover the soil with straw"
+      },
+      "text": {
+        "fa": "کاه، برگ خشک یا علف کهنه را به ضخامت یک کف دست دور نباتات هموار کنید. خاک را نمناک و سرد نگه می‌دارد و نمی‌گذارد علف هرزه سبز شود.",
+        "ps": "بوس، وچې پاڼې یا زاړه واښه د یوه لاس په پنډوالي د بوټو شاوخوا هوار کړئ. خاوره لنده او سړه ساتي او نه پرېږدي چې ناکاره واښه شنه شي.",
+        "en": "Spread straw, dry leaves or old grass around the plants, about a hand thick. It keeps the soil damp and cool, and stops weeds."
+      },
+      "picture": "food-mulch"
+    },
+    {
+      "id": "garden-water.bottle",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب قطره‌قطره از بوتل",
+        "ps": "له بوتل څخه څاڅکي اوبه",
+        "en": "Drip water from a bottle"
+      },
+      "text": {
+        "fa": "در سرپوش یک بوتل سوراخ کوچک بکنید. بوتل را پر کنید و سرچپه کنار نبات در خاک فرو کنید. آب آهسته‌آهسته به ریشه می‌رسد.",
+        "ps": "د بوتل په سرپوښ کې کوچنی سوری وکړئ. بوتل ډک کړئ او سرچپه یې د بوټي تر څنګ په خاوره کې ښخ کړئ. اوبه ورو ورو ریښو ته رسېږي.",
+        "en": "Make a small hole in a bottle lid. Fill the bottle and push it, lid down, into the soil beside the plant. Water drips slowly to the roots."
+      },
+      "picture": "food-bottle-drip"
+    },
+    {
+      "id": "garden-water.time",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "صبح وقت یا شام آب بدهید",
+        "ps": "سهار وختي یا ماښام اوبه ورکړئ",
+        "en": "Water early or late"
+      },
+      "text": {
+        "fa": "صبح وقت یا شام آب بدهید، نه در چاشت. آب کمتر در آفتاب خشک می‌شود و بیشتر به ریشه می‌رسد.",
+        "ps": "سهار وختي یا ماښام اوبه ورکړئ، نه د غرمې. لږې اوبه په لمر کې وچېږي او ډېرې ریښو ته رسي.",
+        "en": "Water in the early morning or the evening, not at midday. Less water dries up in the sun, so more reaches the roots."
+      }
+    },
+    {
+      "id": "garden-water.roots",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "به ریشه آب بدهید، نه به برگ",
+        "ps": "ریښو ته اوبه ورکړئ، نه پاڼو ته",
+        "en": "Water the roots, not the leaves"
+      },
+      "text": {
+        "fa": "آب را آهسته پای هر نبات بریزید. هر چند روز یک بار آب عمیق، از کمی آب هر روز بهتر است.",
+        "ps": "اوبه ورو د هر بوټي په بېخ کې واچوئ. په څو ورځو کې یو ځل ژورې اوبه، تر هره ورځ لږو اوبو ښې دي.",
+        "en": "Pour water slowly at the foot of each plant. A deep drink every few days is better than a little every day."
+      }
+    },
+    {
+      "id": "garden-water.reuse",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "آب شستشو را با احتیاط دوباره استفاده کنید",
+        "ps": "د مینځلو اوبه په احتیاط بیا وکاروئ",
+        "en": "Reuse washing water with care"
+      },
+      "text": {
+        "fa": "آبی که برنج یا ترکاری را با آن شسته‌اید برای نبات خوب است. آب صابون را فقط پای درخت بریزید، هرگز روی برگی که خورده می‌شود نریزید؛ صابون و کثافت می‌تواند مردم را مریض کند.",
+        "ps": "هغه اوبه چې وریجې یا سبزي پرې مینځل شوې، د بوټو لپاره ښې دي. د صابون اوبه یوازې د ونو بېخ ته واچوئ، هېڅکله یې پر هغو پاڼو مه اچوئ چې خوړل کېږي؛ صابون او خیرې خلک ناروغه کولای شي.",
+        "en": "Water from rinsing rice or vegetables is good for plants. Soapy water may go around trees, never on leaves you eat: soap and dirt can make people ill."
+      }
+    },
+    {
+      "id": "garden-water.shade",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "در گرمی به نهال‌ها سایه بدهید",
+        "ps": "په ګرمۍ کې ځوانو بوټو ته سیوری ورکړئ",
+        "en": "Shade young plants in the heat"
+      },
+      "text": {
+        "fa": "در هفته‌های خیلی گرم، در چاشت یک تکهٔ کهنه یا بوریا روی نهال‌های جوان بیندازید. لوبیای بلند یا جواری می‌تواند به سبزی‌های کوچک سایه بدهد.",
+        "ps": "په ډېرو ګرمو اونیو کې، د غرمې پر مهال زوړ ټوکر یا بوریا پر ځوانو بوټو واچوئ. لوړه لوبیا یا جوار کولای شي وړو سبزیو ته سیوری ورکړي.",
+        "en": "In the hottest weeks, put an old cloth or reed mat over young plants at midday. Tall beans or maize can shade small greens."
+      }
+    },
+    {
+      "id": "garden-water.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "garden-water.dont.dirty",
+          "icon": "no",
+          "text": {
+            "fa": "آبی را که با آن طفل یا تکهٔ طفل را شسته‌اید استفاده نکنید؛ میکروب دارد",
+            "ps": "هغه اوبه مه کاروئ چې ماشوم یا د ماشوم ټوکران پرې مینځل شوي؛ میکروب لري",
+            "en": "use water from washing a child's bottom or nappies: it carries germs"
+          }
+        },
+        {
+          "id": "garden-water.dont.open",
+          "icon": "baby",
+          "text": {
+            "fa": "سطل یا حوض آب را سرباز نگذارید؛ طفل کوچک ممکن است در آن غرق شود",
+            "ps": "د اوبو سطل یا حوض بې سرپوښه مه پرېږدئ؛ کوچنی ماشوم پکې ډوبېدای شي",
+            "en": "leave buckets or pools of water uncovered: a small child can drown"
+          }
+        }
+      ]
+    },
+    {
+      "id": "garden-water.rain",
+      "type": "tip",
+      "icon": "water",
+      "text": {
+        "fa": "آب باران و برف بام را در بشکه‌های سرپوشیده برای باغچه جمع کنید.",
+        "ps": "د بام د باران او واورې اوبه په پوښلو ډرمونو کې د باغچې لپاره راټولې کړئ.",
+        "en": "Catch rain and melting snow from the roof in covered drums for the garden."
+      }
+    }
+  ],
+  "sources": [
+    "FAO in Afghanistan (2016): Home garden success story (training in irrigation, weeding and pest management)",
+    "Afghanaid (2023): Kitchen gardens (sprinklers and plastic tunnels for women's gardens)",
+    "WHO Guidelines for the safe use of wastewater, excreta and greywater, Vol. 4: Excreta and greywater use in agriculture (2006): greywater on crops, avoid contact with edible parts of crops eaten raw",
+    "WHO/UNICEF Facts for Life (2010): child injury, keep water containers covered"
+  ],
+  "review": [
+    "Mulch, bottle drip, watering time and reuse of rinsing water are standard home-garden water-saving practice; no single FAO Afghanistan source gives them all. Please ask a local extension worker whether straw is easy to spare (it is also animal fodder in winter).",
+    "Greywater: WHO greywater guidance is about health risk to people eating raw crops. The page allows soapy water around trees only, and never water from washing a child's bottom or nappies.",
+    "The 'buckets or pools uncovered' item links water-saving to drowning prevention (see child-safety and drowning). Remove if it feels off-topic.",
+    "Icon wanted: 'sun' or 'shade' for the shade step ('check' used). 'water' is used for mulch, bottle, roots and the tip.",
+    "Words to check: Dari کاه (straw), بوریا (reed mat), جواری (maize), سرچپه; Pashto بوس (straw), کیارۍ, سرچپه, حوض."
+  ]
+}

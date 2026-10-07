@@ -657,7 +657,9 @@
       "fa": ["دود", "دود بخاری", "بخاری", "صندلی", "ذغال", "دود صندلی", "زغال", "گاز ذغال", "گاز گرفتگی", "گاز زد", "گاز گرفت", "بوی گاز", "منقل", "سردرد در اتاق گرم", "سرچرخی در اتاق بخاری", "دودکش", "زمستان", "خانه گرم", "سر درد در اتاق بخاری", "همه سردرد داریم", "همه خانواده سردرد", "سرچرخی و قی در اتاق گرم"],
       "ps": ["لوګی", "بخارۍ", "صندلي", "سکاره", "ګاز", "د سکرو ګاز", "ګاز ونیو", "ژمی", "ګرم کور", "د بخارۍ نل", "ټول کور سر درد لري", "په ګرمه کوټه کې سر درد"],
       "lat": ["dud", "dood", "bukhari", "sandali", "zoghal", "zughal", "gaz", "gaz gereft", "gaz zad", "lugi", "sakara", "manqal"],
-      "en": ["smoke", "stove", "stove fumes", "sandali", "charcoal", "coal fumes", "carbon monoxide", "gas heater", "fumes", "gassed", "heater", "chimney", "winter", "warm home", "headache in heated room", "smoky room", "whole family has headache", "everyone has a headache in the room"],
+      "en": ["smoke", "stove", "stove fumes", "sandali", "charcoal", "coal fumes", "carbon monoxide", "gas heater", "fumes", "gassed", "heater", "chimney", "winter", "warm home", "headache in heated room", "smoky room", "whole family has headache", "everyone has a headache in the room"]
+    },
+    "fumes-poisoning": {
       "danger": ["گاز گرفتگی", "گاز گرفت", "گاز زد", "د سکرو ګاز", "ګاز ونیو", "carbon monoxide", "gassed", "coal fumes", "gaz gereft", "بخاری دود کرده", "اتاق پر از دود"]
     },
     "animal-illness": {

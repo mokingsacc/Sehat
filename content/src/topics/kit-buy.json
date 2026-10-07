@@ -83,6 +83,21 @@
       }
     },
     {
+      "id": "kit-buy.co-alarm",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "آتش یا بخاری در خانه: زنگ خطر گاز",
+        "ps": "په کور کې اور یا بخاري: د ګاز د خطر زنګ",
+        "en": "Fire or heater indoors: a gas alarm"
+      },
+      "text": {
+        "fa": "زنگ خطر بتری‌دار وقتی گاز زهری زیاد شود، زنگ می‌زند. آن را در اتاق خواب، به بلندی سر و ۱ تا ۳ متر دور از بخاری، به دیوار بزنید.",
+        "ps": "د بېټرۍ زنګ، کله چې زهرجن ګاز زیات شي، زنګ وهي. د خوب په کوټه کې، د سر په لوړوالي او له بخارۍ ۱ تر ۳ متره لرې، پر دېوال یې ولګوئ.",
+        "en": "A battery alarm beeps when the poison gas builds up. Fix it on the wall of the sleeping room, at head height, 1 to 3 metres from the stove."
+      }
+    },
+    {
       "id": "kit-buy.shop",
       "type": "step",
       "icon": "money",
@@ -139,27 +154,8 @@
             "ps": "د ښیښې سیمابي ترمامیټر مه اخلئ؛ ماتېږي او سیماب زهر دی.",
             "en": "Do not buy a glass mercury thermometer; it breaks, and mercury is poison."
           }
-        },
-        {
-          "id": "kit-buy.dont.medicine",
-          "icon": "pill",
-          "text": {
-            "fa": "به خاطر عدد خانه، دوا را خودتان تغییر ندهید؛ از کلینیک بپرسید.",
-            "ps": "د کور د یوې شمېرې له امله درمل مه بدلوئ؛ له کلینیک وپوښتئ.",
-            "en": "Do not change medicine because of a home reading; ask the clinic."
-          }
         }
       ]
-    },
-    {
-      "id": "kit-buy.look",
-      "type": "tip",
-      "icon": "warning",
-      "text": {
-        "fa": "ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.",
-        "ps": "ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.",
-        "en": "A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says."
-      }
     }
   ],
   "sources": [
@@ -168,11 +164,14 @@
     "WHO Replacement of mercury thermometers and sphygmomanometers in health care: technical guidance (2011)",
     "WHO/UNICEF Joint statement: Clinical management of acute diarrhoea, ORS and zinc (2004)",
     "WHO guideline: Updates on the management of severe acute malnutrition in infants and children (2013): MUAC",
-    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020): self-monitoring of blood glucose for people on insulin"
+    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020): self-monitoring of blood glucose for people on insulin",
+    "BS EN 50291 and BS EN 50292 (UK/Europe) and UL 2034 (US): battery carbon monoxide alarms and where to fit them; UK Smoke and Carbon Monoxide Alarm Regulations 2022"
   ],
   "review": [
     "Prices are rough guesses for Samangan in 2026 (afghanis), written in docs/HOME_KIT.md; check at a pharmacy in Aybak before release. They are not in this overview page.",
     "'BP machine for over 40, pregnancy, diabetes, past high BP' is a judgement call; WHO does not advise every family to own one.",
-    "'The test strips cost the most' (sugar meter): ongoing cost matters more than the meter."
+    "'The test strips cost the most' (sugar meter): ongoing cost matters more than the meter.",
+    "CO alarm (kit-buy.co-alarm): placement follows BS EN 50292 / UK fire service advice (same room as the stove or heater, 1 to 3 metres from it, on a wall at head height in a sleeping room). Families sleep on the floor: 'head height' may need to be 'just above where heads lie'. Check. A test mark (EN 50291, UL 2034) is not named on the page because the text has no Latin letters; it is in docs/HOME_KIT.md.",
+    "Home tab rule (Mo): the tip 'A machine can be wrong. If someone looks very ill, go to a health worker' is now the opening line of each Health reading page; 'Do not change medicine because of a home reading' moved with the BP and sugar readings (their own Do-not lines). The 'Check a reading' link stays: it opens the Health checker."
   ]
 }

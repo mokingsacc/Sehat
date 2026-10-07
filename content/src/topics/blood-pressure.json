@@ -113,6 +113,34 @@
       }
     },
     {
+      "id": "blood-pressure.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: اندازه‌گیری و تابلیت روزانه",
+        "ps": "په کلینیک کې: اندازه کول او ورځنۍ ګولۍ",
+        "en": "At the clinic: measurement and daily tablets"
+      },
+      "text": {
+        "fa": "کارمند صحی فشار شما را در دو مراجعه اندازه می‌کند و شکر و ادرار را معاینه می‌کند. اگر بلند بماند، یک تابلیت روزانه، مثل املودیپین، می‌دهد و هر چند ماه شما را می‌بیند.",
+        "ps": "روغتیايي کارکوونکی ستاسو فشار په دوو لیدنو کې اندازه کوي او شکره او متیازې معاینه کوي. که لوړ پاتې شي، ورځنۍ ګولۍ، لکه املوډیپین، ورکوي او هر څو میاشتې مو ویني.",
+        "en": "The health worker measures your pressure on two visits and checks sugar and urine. If it stays high, they give a daily tablet, such as amlodipine, and see you every few months."
+      }
+    },
+    {
+      "id": "blood-pressure.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: سکته یا حملهٔ قلبی",
+        "ps": "په روغتون کې: سکته یا د زړه حمله",
+        "en": "At the hospital: stroke or heart attack"
+      },
+      "text": {
+        "fa": "برای سکته یا حملهٔ قلبی، شفاخانه اکسیجن، دوای رقیق‌کنندهٔ خون، تداوی فشار و قلب می‌دهد و توان‌بخشی را شروع می‌کند. رسیدن در چند ساعت اول مغز و عضلهٔ قلب را نجات می‌دهد.",
+        "ps": "د سکتې یا د زړه حملې لپاره، روغتون اکسیجن، د وینې نرموونکي درمل، د فشار او زړه درملنه ورکوي او بیا رغونه پیلوي. په لومړیو څو ساعتونو کې رسېدل مغز او د زړه عضله ژغوري.",
+        "en": "For a stroke or heart attack, the hospital gives oxygen, blood-thinning medicines, treatment for the pressure and the heart, and starts rehabilitation. Arriving within hours saves brain and heart muscle."
+      }
+    },
+    {
       "id": "blood-pressure.urgent",
       "type": "alert",
       "level": "urgent",
@@ -176,7 +204,9 @@
     "WHO HEARTS technical package for cardiovascular disease management in primary health care (2018): healthy-lifestyle counselling, adherence",
     "WHO guideline for the pharmacological treatment of hypertension in adults (2021)",
     "WHO Package of Essential Noncommunicable Disease Interventions (PEN) 2013, Protocols 1 and 2: salt, diet, activity, tobacco",
-    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): blood pressure at antenatal contacts"
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): blood pressure at antenatal contacts",
+    "WHO guideline for the pharmacological treatment of hypertension in adults (2021): confirm on repeat visits, start a calcium-channel blocker, thiazide or ACE inhibitor; WHO PEN (2020)",
+    "Afghanistan BPHS (2010): atenolol, methyldopa and nifedipine at CHC; Afghanistan National Essential Medicines List (2014); WHO HEARTS technical package (2020)"
   ],
   "review": [
     "Walking 'about half an hour every day' is based on WHO's 150 minutes a week.",
@@ -184,6 +214,8 @@
     "Pregnancy: says blood pressure should be checked 'at every visit' (WHO ANC 2016).",
     "Urgent alert uses the WHO stroke signs (face, arm or leg, speech), plus chest pain and severe headache with blurred vision. Icons: 'stroke-face' is used for both the face and the arm or leg item; 'talk' is used for speech.",
     "Naswar is grouped with smoking as harmful to the heart and blood vessels; this is a general tobacco message.",
-    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
+    "Amlodipine is WHO's example first-line drug (2021); the BPHS 2010 CHC list had nifedipine/atenolol/methyldopa instead. Mo to confirm what is stocked and whether to name a drug.",
+    "'Blood-thinning medicines' (aspirin for heart attack and ischaemic stroke after a scan) are generic here; thrombolysis is not promised."
   ]
 }

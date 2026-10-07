@@ -68,18 +68,19 @@
       }
     },
     {
-      "id": "kit-oximeter.numbers",
-      "type": "step",
-      "icon": "lungs",
+      "id": "kit-oximeter.meaning-page",
+      "type": "link",
+      "to": "topic/reading-spo2",
+      "icon": "check",
       "title": {
-        "fa": "عددها چه معنا دارند",
-        "ps": "شمېرې څه مانا لري",
-        "en": "What the numbers mean"
+        "fa": "عدد من چه معنا دارد؟",
+        "ps": "زما شمېره څه مانا لري؟",
+        "en": "What does my reading mean?"
       },
       "text": {
-        "fa": "۹۵ تا ۱۰۰ عادی است. ۹۳ یا ۹۴ پایین است: دوباره اندازه کنید و اگر مریض است امروز به کلینیک بروید. ۹۲ یا کمتر: همین حالا شفاخانه.",
-        "ps": "۹۵ تر ۱۰۰ عادي دي. ۹۳ یا ۹۴ ټیټ دی: بیا یې اندازه کړئ، او که ناروغ وي نن کلینیک ته ولاړ شئ. ۹۲ یا کم: همدا اوس روغتون.",
-        "en": "95 to 100 is normal. 93 or 94 is low: measure again, and go to the clinic today if unwell. 92 or less: hospital now."
+        "fa": "صفحهٔ صحت را باز کنید: معنای عدد، چه وقت بروید، و بررسی آن.",
+        "ps": "د روغتیا پاڼه پرانیزئ: د شمېرې مانا، کله ولاړ شئ، او د هغې کتل.",
+        "en": "Open the Health page: what it means, when to go, and a checker."
       }
     },
     {
@@ -111,86 +112,6 @@
         "ps": "له کارولو وروسته یې په لوند ټوکر یا الکولو پاک کړئ. که ډېر وخت یې نه کاروئ، بیټرۍ یې وباسئ.",
         "en": "Wipe it with a damp cloth or alcohol after use. Take the batteries out if you will not use it for a long time."
       }
-    },
-    {
-      "id": "kit-oximeter.check",
-      "type": "link",
-      "to": "tool/reading/spo2",
-      "icon": "lungs",
-      "title": {
-        "fa": "عدد اکسیجن را معاینه کنید",
-        "ps": "د اکسیجن شمېره وګورئ",
-        "en": "Check an oxygen reading"
-      },
-      "text": {
-        "fa": "عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.",
-        "ps": "شمېره ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.",
-        "en": "Put in the number and hear what it means and what to do."
-      }
-    },
-    {
-      "id": "kit-oximeter.urgent",
-      "type": "alert",
-      "level": "urgent",
-      "title": {
-        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
-        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
-        "en": "Go to hospital now, day or night, if:"
-      },
-      "items": [
-        {
-          "id": "kit-oximeter.urgent.low",
-          "icon": "lungs",
-          "text": {
-            "fa": "عدد ۹۲ یا کمتر است",
-            "ps": "شمېره ۹۲ یا کمه ده",
-            "en": "the number is 92 or less"
-          }
-        },
-        {
-          "id": "kit-oximeter.urgent.breath",
-          "icon": "breathing-fast",
-          "text": {
-            "fa": "نفس کشیدن یا گپ زدن سخت است، هر عددی که باشد",
-            "ps": "ساه اخیستل یا خبرې کول ګران دي، هره شمېره چې وي",
-            "en": "it is hard to breathe or to talk, whatever the number"
-          }
-        },
-        {
-          "id": "kit-oximeter.urgent.blue",
-          "icon": "breathe",
-          "text": {
-            "fa": "لب‌ها یا روی کبود یا خاکستری معلوم می‌شود",
-            "ps": "شونډې یا مخ شین یا خړ ښکاري",
-            "en": "the lips or face look blue or grey"
-          }
-        },
-        {
-          "id": "kit-oximeter.urgent.child",
-          "icon": "chest-indrawing",
-          "text": {
-            "fa": "وقت نفس کشیدن، پایین سینهٔ طفل به داخل کشیده می‌شود",
-            "ps": "د ساه اخیستو پر وخت د ماشوم د سینې لاندې برخه ننوځي",
-            "en": "a child's lower chest pulls in when breathing in"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kit-oximeter.breaths",
-      "type": "link",
-      "to": "tool/breaths",
-      "icon": "breathing-fast",
-      "title": {
-        "fa": "برای اطفال: نفس‌ها را بشمارید",
-        "ps": "د ماشومانو لپاره: ساه وشمېرئ",
-        "en": "For children: count the breaths"
-      },
-      "text": {
-        "fa": "برای طفل خورد، شمردن نفس‌ها در یک دقیقه اکثراً بهتر از این گیره است.",
-        "ps": "د کوچني ماشوم لپاره، په یوه دقیقه کې د ساه شمېرل اکثره له دې چپړکي ښه دي.",
-        "en": "For a small child, counting breaths for one minute is often better than this clip."
-      }
     }
   ],
   "sources": [
@@ -205,6 +126,7 @@
     "Samangan altitude: Aybak about 900 m, mountain villages up to about 2,500 m. Normal SpO2 is slightly lower at altitude; thresholds not adjusted. Check.",
     "Henna on nails is common and lowers or blocks readings: included.",
     "Price 700 to 1,500 afghanis is an estimate (about 10 to 20 US dollars).",
-    "Title 'oxygen finger clip' used instead of 'pulse oximeter' (not an everyday word). Check local name."
+    "Title 'oxygen finger clip' used instead of 'pulse oximeter' (not an everyday word). Check local name.",
+    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-spo2: kit-oximeter.numbers, kit-oximeter.urgent, kit-oximeter.check, kit-oximeter.breaths. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen)."
   ]
 }

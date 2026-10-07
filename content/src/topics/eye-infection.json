@@ -1,0 +1,292 @@
+{
+  "id": "eye-infection",
+  "section": "everyone",
+  "title": {
+    "fa": "چشم سرخ و چرکی",
+    "ps": "سرې او چرکنې سترګې",
+    "en": "Red, sticky eyes"
+  },
+  "summary": {
+    "fa": "چشم سرخ یا چرکی زود سرایت می‌کند. روی پاک و مرهم کلینیک کمک می‌کند.",
+    "ps": "سرې یا چرکنې سترګې ژر خپرېږي. پاک مخ او د کلینیک ملهم مرسته کوي.",
+    "en": "Red or sticky eyes spread fast. Clean faces and clinic ointment help."
+  },
+  "image": "eye-infection",
+  "blocks": [
+    {
+      "id": "eye-infection.lead",
+      "type": "lead",
+      "text": {
+        "fa": "چشم سرخ و چرکی زیاد دیده می‌شود، مخصوصاً در اطفال، در تابستان و جایی که مگس زیاد است. اکثرشان با پاک کردن و مرهم کلینیک جور می‌شوند، اما بعضی عفونت‌ها می‌توانند بینایی را ببرند.",
+        "ps": "سرې او چرکنې سترګې ډېرې لیدل کېږي، په تېره بیا په ماشومانو کې، په دوبي کې او هلته چې مچان ډېر وي. ډېری یې په پاکولو او د کلینیک په ملهم جوړېږي، خو ځینې انتانات لید وړلای شي.",
+        "en": "Red, sticky eyes are common, especially in children, in summer and where flies are many. Most get better with cleaning and ointment from the clinic, but some infections can take the sight."
+      }
+    },
+    {
+      "id": "eye-infection.clean",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "چشم‌ها را آهسته پاک کنید",
+        "ps": "سترګې ورو ورو پاکې کړئ",
+        "en": "Clean the eyes gently"
+      },
+      "text": {
+        "fa": "دست‌ها را بشویید. با یک تکهٔ پاک و تر از گوشهٔ داخلی چشم به طرف بیرون پاک کنید، برای هر چشم یک قسمت تازه. بعد دوباره دست‌ها را بشویید.",
+        "ps": "لاسونه ومینځئ. په یوه پاکه لمده ټوټه د سترګې له دننه کونج څخه بهر خوا ته پاکه کړئ، د هرې سترګې لپاره نوې برخه. وروسته بیا لاسونه ومینځئ.",
+        "en": "Wash your hands. Wipe from the inner corner outwards with a clean wet cloth, a fresh part for each eye. Wash hands again after."
+      }
+    },
+    {
+      "id": "eye-infection.faces",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "روی پاک جلو تراخم را می‌گیرد",
+        "ps": "پاک مخ د تراخم مخه نیسي",
+        "en": "Clean faces stop trachoma"
+      },
+      "text": {
+        "fa": "روی اطفال را هر روز با صابون بشویید، و مگس‌ها را از روی دور کنید. روی ناپاک مرض چشم تراخم را سرایت می‌دهد، که در پیری کور می‌کند.",
+        "ps": "د ماشومانو مخ هره ورځ په صابون ومینځئ، او مچان له مخ څخه لرې کړئ. ناپاک مخ د تراخم د سترګو ناروغي خپروي، چې په زړښت کې ړندوي.",
+        "en": "Wash children's faces with soap every day, and keep flies off the face. A dirty face passes the trachoma eye disease, which can blind in old age."
+      }
+    },
+    {
+      "id": "eye-infection.separate",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "دستمال را شریک نکنید",
+        "ps": "دسمال مه شریکوئ",
+        "en": "Do not share cloths"
+      },
+      "text": {
+        "fa": "هر کس دستمال و رومال خودش را داشته باشد. میل سرمه را شریک نکنید. دستمال شخص مریض را جداگانه بشویید.",
+        "ps": "هر څوک خپل دسمال او ټوکر ولري. د رانجو میله مه شریکوئ. د ناروغ کس ټوکر جلا ومینځئ.",
+        "en": "Each person has their own towel and cloth. Do not share kohl sticks. Wash the sick person's cloth separately."
+      }
+    },
+    {
+      "id": "eye-infection.newborn",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "چشم‌های نوزاد",
+        "ps": "د نوي زېږېدلي ماشوم سترګې",
+        "en": "A newborn's eyes"
+      },
+      "text": {
+        "fa": "نوزادی که در چشمش چرک است، همان روز به کلینیک ضرورت دارد. مرهم چشمی که در وقت ولادت داده می‌شود، از این جلوگیری می‌کند.",
+        "ps": "هغه نوی زېږېدلی ماشوم چې په سترګو کې یې چرک وي، په همغه ورځ کلینیک ته اړتیا لري. هغه ملهم چې د زېږون پر وخت ورکول کېږي، له دې څخه مخنیوی کوي.",
+        "en": "A newborn with pus in the eyes needs the clinic the same day. The eye ointment given at birth helps prevent this."
+      }
+    },
+    {
+      "id": "eye-infection.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: مرهم یا قطرهٔ چشم",
+        "ps": "په کلینیک کې: د سترګو ملهم یا څاڅکي",
+        "en": "At the clinic: eye ointment or drops"
+      },
+      "text": {
+        "fa": "کارمند صحی چشم را می‌بیند و مرهم چشمی تتراسایکلین یا قطرهٔ دیگر می‌دهد، در کلینیک‌های دولتی رایگان. برای تراخم شاید به تمام قریه تابلیت ازیترومایسین داده شود.",
+        "ps": "روغتیايي کارکوونکی سترګه ګوري او د ټټراسایکلین د سترګو ملهم یا نور څاڅکي ورکوي، په دولتي کلینیکونو کې وړیا. د تراخم لپاره ښايي ټول کلي ته د ازیترومایسین ګولۍ ورکړل شي.",
+        "en": "The health worker looks at the eye and gives tetracycline eye ointment or other drops, free at government clinics. For trachoma the whole village may be given azithromycin tablets."
+      }
+    },
+    {
+      "id": "eye-infection.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: داکتر چشم",
+        "ps": "په روغتون کې: د سترګو ډاکټر",
+        "en": "At the hospital: the eye doctor"
+      },
+      "text": {
+        "fa": "برای درد، لکهٔ سفید، کم‌دیدن یا ضربه، داکتر چشم با چراغ معاینه می‌کند. زخم چشم تداوی شده می‌تواند و مژه‌های برگشته پیش از آنکه بینایی را ببرند عملیات می‌شوند.",
+        "ps": "د درد، سپین داغ، کم لید یا ټپ لپاره، د سترګو ډاکټر په څراغ معاینه کوي. د سترګې زخم درملنه کېدای شي او ننوتلي باڼه مخکې له دې چې لید یوسي عملیات کېږي.",
+        "en": "For pain, a white spot, poor sight or an injury, the eye doctor checks with a lamp. Ulcers can be treated and turned-in eyelashes operated on before they take the sight."
+      }
+    },
+    {
+      "id": "eye-infection.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "eye-infection.urgent.spot",
+          "icon": "eye",
+          "text": {
+            "fa": "لکهٔ سفید یا کدر روی سیاهی چشم",
+            "ps": "د سترګې پر تور باندې سپین یا خړ داغ",
+            "en": "a white or cloudy spot on the black of the eye"
+          }
+        },
+        {
+          "id": "eye-infection.urgent.pain",
+          "icon": "headache",
+          "text": {
+            "fa": "درد شدید چشم با استفراغ یا سردرد",
+            "ps": "د سترګې سخت درد له کانګو یا سردرد سره",
+            "en": "severe eye pain with vomiting or a headache"
+          }
+        },
+        {
+          "id": "eye-infection.urgent.sight",
+          "icon": "eye-blurred",
+          "text": {
+            "fa": "ناگهان بینایی رفته، یا به تیزی کم می‌شود",
+            "ps": "ناڅاپه لید تللی، یا په چټکۍ کمېږي",
+            "en": "sudden loss of sight, or sight getting worse fast"
+          }
+        },
+        {
+          "id": "eye-infection.urgent.injury",
+          "icon": "wound",
+          "text": {
+            "fa": "چیزی در چشم رفته، چشم بریده یا مادهٔ کیمیاوی پاشیده",
+            "ps": "څه شی سترګې ته ننوتلی، سترګه پرې شوې یا کیمیاوي ماده ورباندې شیندل شوې",
+            "en": "something in the eye, a cut, or a chemical splash"
+          }
+        },
+        {
+          "id": "eye-infection.urgent.lid",
+          "icon": "swelling",
+          "text": {
+            "fa": "پلک سرخ و پندیده همراه با تب",
+            "ps": "سور او پړسېدلی باڼه له تبې سره",
+            "en": "a red, swollen eyelid with fever"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eye-infection.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "eye-infection.soon.pus",
+          "icon": "eye",
+          "text": {
+            "fa": "چرک یا ترشح چسپناک از چشم",
+            "ps": "له سترګې څخه چرک یا سریښناکه ماده",
+            "en": "pus or sticky discharge from the eye"
+          }
+        },
+        {
+          "id": "eye-infection.soon.newborn",
+          "icon": "newborn-warm",
+          "text": {
+            "fa": "نوزاد با هر مقدار چرک در چشم",
+            "ps": "نوی زېږېدلی ماشوم چې په سترګو کې یې چرک وي",
+            "en": "a newborn with any pus in the eyes"
+          }
+        },
+        {
+          "id": "eye-infection.soon.week",
+          "icon": "clock",
+          "text": {
+            "fa": "چشم سرخ بیش از یک هفته",
+            "ps": "سرې سترګې له یوې اونۍ څخه زیات",
+            "en": "red eyes for more than a week"
+          }
+        },
+        {
+          "id": "eye-infection.soon.lashes",
+          "icon": "eye",
+          "text": {
+            "fa": "مژه‌ها برگشته و چشم را می‌خراشند",
+            "ps": "باڼه ننوتلي او سترګه ګروي",
+            "en": "eyelashes turned in and rubbing the eye"
+          }
+        },
+        {
+          "id": "eye-infection.soon.child",
+          "icon": "eye-blurred",
+          "text": {
+            "fa": "طفلی که به نظر خوب نمی‌بیند",
+            "ps": "هغه ماشوم چې ښکاري ښه نه ویني",
+            "en": "a child who does not seem to see well"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eye-infection.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "eye-infection.dont.kohl",
+          "icon": "no",
+          "text": {
+            "fa": "سرمه، شیر مادر، گیاه یا ادرار در چشم نریزید.",
+            "ps": "رانجه، د مور شیدې، بوټي یا متیازې په سترګه کې مه اچوئ.",
+            "en": "Do not put kohl, breast milk, herbs or urine in the eye."
+          }
+        },
+        {
+          "id": "eye-infection.dont.drops",
+          "icon": "pill",
+          "text": {
+            "fa": "بدون معاینهٔ کلینیک قطرهٔ دکان را استفاده نکنید؛ بعضی چشم را خراب می‌کنند.",
+            "ps": "د کلینیک له معاینې پرته د دوکان څاڅکي مه کاروئ؛ ځینې سترګې ته زیان رسوي.",
+            "en": "Do not use shop drops without a clinic check; some harm the eye."
+          }
+        },
+        {
+          "id": "eye-infection.dont.patch",
+          "icon": "eye",
+          "text": {
+            "fa": "چشم چرکی را با پارچهٔ سخت نبندید.",
+            "ps": "چرکنه سترګه په کلک ټوکر مه تړئ.",
+            "en": "Do not cover a sticky eye with a tight patch."
+          }
+        }
+      ]
+    },
+    {
+      "id": "eye-infection.samangan",
+      "type": "tip",
+      "icon": "window",
+      "text": {
+        "fa": "سمنگان یکی از چند جای افغانستان است که هنوز تراخم در آن دیده می‌شود. روی پاک، آب پاک و تشناب بینایی اطفال را حفاظت می‌کند.",
+        "ps": "سمنګان د افغانستان له هغو لږو ځایونو څخه دی چې تراخم لا هم پکې لیدل کېږي. پاک مخ، پاکې اوبه او تشناب د ماشومانو لید ساتي.",
+        "en": "Samangan is one of the few places in Afghanistan where trachoma is still found. Clean faces, clean water and latrines protect the children's sight."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Trachoma (7 Sep 2026): SAFE strategy (surgery for trichiasis, antibiotics, facial cleanliness, environmental improvement); blindness from repeated infection",
+    "WHO IMCI Chart Booklet (2014): young infant with eye discharge, tetracycline eye ointment; measles with eye complications; refer clouding of the cornea",
+    "WHO Pocket Book of Hospital Care for Children (2013): conjunctivitis and ophthalmia neonatorum; eye care in measles",
+    "WHO Model List of Essential Medicines (2023) and Afghanistan National Essential Medicines List (2014): tetracycline eye ointment, azithromycin; BPHS (2010) Health Post drug list includes tetracycline eye ointment",
+    "Trachoma prevalence surveys in Afghanistan (2018-2019, Tropical Data / Global Trachoma Mapping Project method): active trachoma (TF) 5.9 percent in children 1-9 in the Aybak, Dara-i-Sufi Payin and Feroz Nakhchir evaluation unit, Samangan; one of only three Afghan evaluation units needing antibiotic mass treatment (see research report)",
+    "WHO/UNICEF Facts for Life (2010): hygiene"
+  ],
+  "review": [
+    "Trachoma in Samangan: based on the 2018-2019 survey papers summarised in the research report; confirm whether any azithromycin mass treatment has actually been run in Samangan before saying 'may be given'.",
+    "Clinic block names tetracycline eye ointment (Health Post list, BPHS 2010) and azithromycin; remove the names if Mo prefers 'an eye ointment'.",
+    "Eye doctor: an ophthalmologist is unlikely to be at Aybak provincial hospital; the realistic referral is Balkh Regional Hospital in Mazar-i-Sharif. Wording says 'the eye doctor' without a place.",
+    "'Shop drops can harm the eye' refers to steroid-containing drops sold over the counter; evidence is general, not Afghanistan-specific.",
+    "Trichiasis item placed under 'this clinic today' list; WHO treats it as needing surgery (not urgent, but soon). Fine to move to a 'this week' list if the topic gets one.",
+    "Dari تراخم, Pashto تراخم: formal words; ask the translator what villagers call it."
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "id": "food-store",
+  "section": "everyone",
+  "title": {
+    "fa": "نگهداری و خشک کردن غذا",
+    "ps": "د خوړو ساتل او وچول",
+    "en": "Store and dry food safely"
+  },
+  "summary": {
+    "fa": "خشک، سربسته و پوشیده: غذایی که تمام زمستان سالم می‌ماند.",
+    "ps": "وچ، تړلي او پوښلي: هغه خواړه چې ټول ژمی روغ پاتې کېږي.",
+    "en": "Dry, sealed and covered: food that lasts the winter and stays safe."
+  },
+  "image": "food-store",
+  "blocks": [
+    {
+      "id": "food-store.lead",
+      "type": "lead",
+      "text": {
+        "fa": "نگهداری خوب یعنی غذا برای تمام زمستان، و غذای کمتر که به پوپنک، موش و مگس از بین برود. غذای پوپنک‌زده می‌تواند خانواده را مریض کند.",
+        "ps": "ښه ساتنه یعنې د ټول ژمي لپاره خواړه، او لږ خواړه چې په پوپنک، موږکانو او مچانو ضایع شي. پوپنک وهلي خواړه کولای شي کورنۍ ناروغه کړي.",
+        "en": "Good storage means food for the whole winter, and less lost to mould, mice and flies. Mouldy food can make the family ill."
+      }
+    },
+    {
+      "id": "food-store.dry",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "میوه و ترکاری را پاک خشک کنید",
+        "ps": "مېوه او سبزي پاکې وچې کړئ",
+        "en": "Dry fruit and vegetables cleanly"
+      },
+      "text": {
+        "fa": "آن‌ها را قاش کنید و روی تکهٔ پاک یا پتنوس، بالاتر از زمین، هموار کنید. با تکهٔ نازک از مگس و گرد بپوشانید. شب داخل ببرید.",
+        "ps": "ټوټې یې کړئ او پر پاک ټوکر یا پتنوس، له ځمکې پورته، هوارې کړئ. د مچانو او ګرد په وړاندې یې په نري ټوکر وپوښئ. شپه یې دننه یوسئ.",
+        "en": "Slice and spread them on a clean cloth or tray, raised off the ground. Cover with thin cloth against flies and dust. Bring them inside at night."
+      },
+      "picture": "food-drying-rack"
+    },
+    {
+      "id": "food-store.keep-dry",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "خوب خشک کنید، بعد نگه دارید",
+        "ps": "ښه یې وچ کړئ، بیا یې وساتئ",
+        "en": "Dry well, then store"
+      },
+      "text": {
+        "fa": "آن‌قدر خشک کنید که وقتی فشار می‌دهید آب نکشد. در بانکه یا خلطهٔ پاک و سربسته، در جای خشک نگه دارید و هر چند هفته ببینید.",
+        "ps": "دومره یې وچ کړئ چې کله یې کېکاږئ اوبه ترې ونه وځي. په پاکو او تړلو بانکو یا کڅوړو کې په وچ ځای کې یې وساتئ، او هرو څو اونیو کې یې وګورئ.",
+        "en": "Dry until no juice comes out when you press. Keep in clean, closed jars or bags in a dry place, and check them every few weeks."
+      }
+    },
+    {
+      "id": "food-store.grain",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "غله: خشک، بلند و سربسته",
+        "ps": "غله: وچه، لوړه او تړلې",
+        "en": "Grain: dry, raised and sealed"
+      },
+      "text": {
+        "fa": "غله را اول در آفتاب خوب خشک کنید. آن را در بشکه یا قوطی سربسته، بالای خشت، دور از دیوار نمناک، موش و حشره نگه دارید.",
+        "ps": "غله لومړی په لمر کې ښه وچه کړئ. په تړلي ډرم یا ټین کې، پر خښتو، له لوندو دېوالونو، موږکانو او حشرو لرې یې وساتئ.",
+        "en": "Sun-dry grain well first. Keep it in a sealed drum or tin, raised on bricks, away from damp walls, mice and insects."
+      },
+      "picture": "food-grain-bin"
+    },
+    {
+      "id": "food-store.mould",
+      "type": "step",
+      "icon": "poison",
+      "title": {
+        "fa": "غله و مغز پوپنک‌زده را دور بریزید",
+        "ps": "پوپنک وهلې غله او مغزونه وغورځوئ",
+        "en": "Throw away mouldy grain and nuts"
+      },
+      "text": {
+        "fa": "غله، چارمغز، پسته یا میوهٔ خشک که پوپنک سبز، سیاه یا خاکستری زده، حتی پخته هم خورده نشود. پوپنک زهری می‌سازد که به جگر ضرر می‌رساند.",
+        "ps": "هغه غله، غوزان، پسته یا وچه مېوه چې شین، تور یا خړ پوپنک یې وهلی وي، پخه هم باید ونه خوړل شي. پوپنک داسې زهر جوړوي چې ځیګر ته زیان رسوي.",
+        "en": "Grain, nuts or dried fruit with green, black or grey mould must not be eaten, even cooked. Mould makes a poison that harms the liver."
+      }
+    },
+    {
+      "id": "food-store.winter",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "کچالو، پیاز و زردک برای زمستان",
+        "ps": "کچالو، پیاز او ګازرې د ژمي لپاره",
+        "en": "Potatoes, onions and carrots for winter"
+      },
+      "text": {
+        "fa": "کچالو را در جای سرد و تاریک که یخ نزند نگه دارید. پیاز خشک را جایی آویزان کنید که هوا جریان دارد. زردک را در ریگ نمناک دفن کنید. هر کدام که پوسید، بیرون کنید.",
+        "ps": "کچالو په سړه او تیاره ځای کې وساتئ چې کنګل نه شي. وچ پیاز هلته ځوړند کړئ چې هوا پکې چلېږي. ګازرې په لنده شګه کې ښخې کړئ. هر یو چې ورست شو، لرې یې کړئ.",
+        "en": "Keep potatoes in a cool, dark place that does not freeze. Hang dried onions where air moves. Bury carrots in damp sand. Remove any that rot."
+      }
+    },
+    {
+      "id": "food-store.cover",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب پاک، غذای پوشیده",
+        "ps": "پاکې اوبه، پوښلي خواړه",
+        "en": "Clean water, covered food"
+      },
+      "text": {
+        "fa": "با آب پاک غذا بپزید و ترکاری را با آن بشویید. غذای پخته و آب را از مگس بپوشانید؛ مگس میکروب اسهال را می‌آورد.",
+        "ps": "په پاکو اوبو پخلی وکړئ او سبزي پرې ومینځئ. پاخه خواړه او اوبه له مچانو پټ کړئ؛ مچان د نس ناستې میکروب راوړي.",
+        "en": "Cook with clean water and wash vegetables in it. Cover cooked food and water from flies; flies carry germs that cause diarrhoea."
+      }
+    },
+    {
+      "id": "food-store.hygiene",
+      "type": "link",
+      "to": "topic/hygiene",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست، آب و غذای پاک",
+        "ps": "پاک لاسونه، اوبه او خواړه",
+        "en": "Clean hands, water and food"
+      },
+      "text": {
+        "fa": "چطور آب نوشیدنی را پاک کنید، و عادت‌های دیگر که جلوی اسهال را می‌گیرد.",
+        "ps": "د څښلو اوبه څنګه پاکې کړئ، او نور عادتونه چې د نس ناستې مخه نیسي.",
+        "en": "How to make drinking water safe, and other habits that stop diarrhoea."
+      }
+    },
+    {
+      "id": "food-store.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "food-store.dont.animals",
+          "icon": "animals",
+          "text": {
+            "fa": "غلهٔ پوپنک‌زده را به حیوانات ندهید؛ زهر آن به شیر و تخم می‌رسد",
+            "ps": "پوپنک وهلې غله څارویو ته مه ورکوئ؛ زهر یې شیدو او هګیو ته رسي",
+            "en": "feed mouldy grain to animals: the poison passes into milk and eggs"
+          }
+        },
+        {
+          "id": "food-store.dont.seed",
+          "icon": "poison",
+          "text": {
+            "fa": "تخم کشت را که رنگ گلابی یا سرخ دارد نخورید و آرد نکنید؛ به آن دوای زهری زده‌اند",
+            "ps": "د کرنې هغه تخم چې ګلابي یا سور رنګ لري مه خورئ او مه یې اوړه کوئ؛ زهرجن درمل ورته وهل شوي",
+            "en": "eat or grind seed grain coloured pink or red: it is treated with poison"
+          }
+        },
+        {
+          "id": "food-store.dont.bags",
+          "icon": "poison",
+          "text": {
+            "fa": "غذا را در خلطه یا بشکهٔ کهنهٔ دوای زهری یا کود نگه ندارید؛ زهر در آن می‌ماند",
+            "ps": "خواړه د زهرجنو درملو یا سرې په زړو کڅوړو یا ډرمونو کې مه ساتئ؛ زهر پکې پاتې کېږي",
+            "en": "store food in old poison or fertiliser bags or drums: poison stays inside"
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-store.green-potato",
+      "type": "tip",
+      "icon": "warning",
+      "text": {
+        "fa": "پیش از پختن، قسمت‌های سبز و جوانهٔ کچالو را ببرید و دور کنید. تلخ است و می‌تواند مریض کند.",
+        "ps": "د پخلي مخکې د کچالو شنې برخې او ټوکې پرې کړئ او لرې یې کړئ. تریخې دي او ناروغه کولای شي.",
+        "en": "Cut away green parts and sprouts of potatoes before cooking. They are bitter and can make you ill."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Mycotoxins (2 Oct 2023): inspect grains, dried fruit and nuts for mould and discard any that look mouldy, discoloured or shrivelled; store dry, free of insects and not too warm; aflatoxins damage the liver and can cause liver cancer",
+    "FAO: Prevention of post-harvest food losses: fruits, vegetables and root crops. A training manual (1989): drying, storage of potatoes (dark, cool), onions (cured, ventilated) and roots",
+    "FAO/SDC: Technical manual for the construction and use of family-sized metal silos to store cereals and grain legumes (2008); FAO family silo programme in Afghanistan",
+    "FAO: Small solar dryers for rural communities: a guide to construction and use; Kitinoja and Kader, Small-scale postharvest handling practices (4th ed., 2002)",
+    "FAO in Afghanistan (2016): home garden success story (drying and processing for the off season)",
+    "WHO Five Keys to Safer Food (2006): keep clean, use safe water, protect food from flies and pests"
+  ],
+  "review": [
+    "Aflatoxin message: 'harms the liver' is the WHO wording; I did not add stunting or cancer to keep it short and not frightening. 'Even cooked' is right: aflatoxins survive cooking.",
+    "'The poison passes into milk and eggs': aflatoxin M1 in milk is well documented; carry-over into eggs is smaller. Mo to confirm the wording.",
+    "Pink or red seed grain: treated seed (fungicide, historically mercury) has caused mass poisoning when eaten (Iraq 1971-72). Ask the local agriculture office which seed dressings are used in Samangan and their colour.",
+    "Green potatoes (glycoalkaloids): general food-safety advice, not from a WHO family message. Keep or drop.",
+    "No alert box: acute aflatoxin poisoning is rare. If Mo wants one: 'several people with yellow eyes, vomiting and a swollen belly after eating stored grain = hospital now'.",
+    "Carrots in damp sand and onions hung in air are common traditional practice; check what Samangan families already do (pits, clamps).",
+    "Icons wanted: 'sun' or 'drying' (check used), 'grain' (house used). Step pictures: food-drying-rack, food-grain-bin.",
+    "Words to check: Dari پوپنک~زده (mouldy), بانکه (jar), خلطه (bag), پتنوس (tray), تخم کشت (seed grain); Pashto پوپنک وهلی (mouldy), غوزان (walnuts), ټین (tin), ټوکې (sprouts), پتنوس."
+  ]
+}

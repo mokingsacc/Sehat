@@ -288,11 +288,13 @@ const normSlot = (s) => (LANGS.includes(s) ? s + '-f' : SLOTS.includes(s) ? s : 
 const PACKS = ['urgent', 'children', 'women', 'everyone'];
 const URGENT_TOPICS = ['danger-child', 'pregnancy-danger', 'red-flags', 'first-aid'];
 const SECTIONS = ['children', 'women', 'everyone'];
-// topic lists in book.sections: the three sections, plus "kit" (the home health kit page) and "emergency" (the Emergency screen)
-const LISTS = [...SECTIONS, 'kit', 'emergency'];
+// topic lists in book.sections: the three sections, "emergency" (the Emergency screen), and the lists with their own page and
+// lists with their own page (config.lists in content/src/config.json): kit (home health kit), safety (home safety), hospital, food (food and garden), wellbeing
+const PAGE_LISTS = ['kit', 'safety', 'hospital', 'food', 'wellbeing'];
+const LISTS = [...SECTIONS, 'emergency', ...PAGE_LISTS];
 // same as tools/validate.py: where a "link" block can go
 const TOOLS = ['breaths', 'reading', 'reading/temp', 'reading/bp', 'reading/sugar', 'reading/spo2', 'reading/muac'];
-const LINK_RE = /^(tool\/([a-z0-9/-]+)|topic\/([a-z0-9-]+)|kit|family|near|growth|growth\/measure|share)$/;
+const LINK_RE = /^(tool\/([a-z0-9/-]+)|topic\/([a-z0-9-]+)|kit|family|near|growth|growth\/measure|share|ask|emergency)$/;
 const ID_RE = /^[a-z0-9-]+(\.[a-z0-9-]+)*$/;
 // same list as tools/validate.py
 const ICONS = `clinic hospital car phone calendar clock moon family talk card check no warning money house
@@ -300,8 +302,8 @@ baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash th
 pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
 heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect`.split(/\s+/);
 const ICON_SET = new Set(ICONS);
-const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip', link: 'link to a tool or another page', anim: 'animation (picture story)' };
-const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', sendApp: 'Send the app to another phone (Android app only)' };
+const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip', link: 'link to a tool or another page', anim: 'animation (picture story)', clinic: 'what the clinic or hospital does' };
+const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', firstAid: 'CPR and first aid', children: 'Children (big picture button)', adults: 'Adults (big picture button)', share: 'Share Sehat', wellbeing: 'Well-being', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', safety: 'Home safety', hospital: 'Going to the clinic or hospital', food: 'Food and garden', sendApp: 'Send the app to another phone (Android app only)' };
 const STATUSES = ['open', 'unknown', 'closed'];
 const URL_KEYS = ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl'];
 const MAX_AUDIO = 1_900_000; // D1 keeps at most 2 MB in one row
@@ -311,19 +313,71 @@ const AUDIO_FILE_EXT = { 'audio/mpeg': 'mp3', 'audio/mp4': 'm4a', 'audio/webm': 
 const audioType = (t) => AUDIO_TYPES[String(t || '').split(';')[0].trim().toLowerCase()] || null;
 const AUDIO_EXT = { mp3: 'audio/mpeg', m4a: 'audio/mp4', mp4: 'audio/mp4', aac: 'audio/mp4', webm: 'audio/webm', ogg: 'audio/ogg', opus: 'audio/ogg', oga: 'audio/ogg' };
 
+// D1 keeps at most 2,000,000 bytes in one row, and the book is bigger than that. A big book is kept in pieces:
+// the row <name> holds a header "~pieces:<id>:<n>" on its first line and then piece 0, and the rows
+// <name>#<id>#1 … #<n-1> hold the rest. The pieces are written before the row that points to them, under a new id
+// each time, so a reader never sees half of a save; pieces of older saves are removed afterwards.
+const PIECE_MARK = '~pieces:'; // a JSON text never starts with ~ (and SQLite text must not hold a NUL character)
+const PIECE_CHARS = 600000; // at most 1.8 MB a row even if every character took 3 bytes (Dari and Pashto take 2)
+const MAX_DOC_BYTES = 8_000_000; // the whole book; content/book.json is about 2.2 MB
+const MAX_DOC_TEXT = '8 MB';
+function splitBody(s) {
+  const out = [];
+  for (let i = 0; i < s.length;) {
+    let j = Math.min(s.length, i + PIECE_CHARS);
+    if (j < s.length && /[\uD800-\uDBFF]/.test(s[j - 1])) j--; // never cut a character in two
+    out.push(s.slice(i, j)); i = j;
+  }
+  return out.length ? out : [''];
+}
+// the stored text of a row (r), with its pieces joined
+async function docBody(env, name, r) {
+  if (!r || typeof r.body !== 'string' || !r.body.startsWith(PIECE_MARK)) return r ? r.body : null;
+  const nl = r.body.indexOf('\n'), [id, n] = r.body.slice(PIECE_MARK.length, nl).split(':');
+  const rows = ((await env.DB.prepare('SELECT name, body FROM content WHERE name LIKE ?').bind(`${name}#${id}#%`).all()) || {}).results || [];
+  const by = new Map(rows.map((x) => [x.name, x.body]));
+  let s = r.body.slice(nl + 1);
+  for (let i = 1; i < +n; i++) {
+    const p = by.get(`${name}#${id}#${i}`);
+    if (typeof p !== 'string') throw new Error(`The stored book "${name}" is incomplete (part ${i + 1} of ${n} is missing). Save or publish again.`);
+    s += p;
+  }
+  return s;
+}
 async function getDoc(env, name) {
   const r = await env.DB.prepare('SELECT body, version, built, updated_ts FROM content WHERE name = ?').bind(name).first();
   if (!r) return null;
+  const body = await docBody(env, name, r);
   let book = null; // parsed only when needed (the free plan allows little CPU time per request)
-  return { get book() { return book || (book = JSON.parse(r.body)); }, body: r.body, version: r.version, built: r.built, ts: r.updated_ts };
+  return { get book() { return book || (book = JSON.parse(body)); }, body, version: r.version, built: r.built, ts: r.updated_ts };
 }
-async function putDoc(env, name, book, body, ts) {
-  await env.DB.prepare(`INSERT INTO content (name, body, version, built, updated_ts) VALUES (?1, ?2, ?3, ?4, ?5)
-    ON CONFLICT(name) DO UPDATE SET body = ?2, version = ?3, built = ?4, updated_ts = ?5`)
-    .bind(name, body || JSON.stringify(book), book.version || null, book.built || null, ts || Date.now()).run();
+// Write a book: pieces first, then the row (only when its updated_ts is still rev, if rev is given). True when saved.
+async function writeDoc(env, name, book, body, ts, rev) {
+  const parts = splitBody(body || JSON.stringify(book));
+  let main = parts[0], id = '';
+  if (parts.length > 1) {
+    id = [...crypto.getRandomValues(new Uint8Array(6))].map((x) => x.toString(16).padStart(2, '0')).join('');
+    for (let i = 1; i < parts.length; i++) {
+      await env.DB.prepare('INSERT OR REPLACE INTO content (name, body, version, built, updated_ts) VALUES (?, ?, NULL, NULL, ?)').bind(`${name}#${id}#${i}`, parts[i], ts).run();
+    }
+    main = `${PIECE_MARK}${id}:${parts.length}\n${parts[0]}`;
+  }
+  let ok = true;
+  if (rev == null) {
+    await env.DB.prepare(`INSERT INTO content (name, body, version, built, updated_ts) VALUES (?1, ?2, ?3, ?4, ?5)
+      ON CONFLICT(name) DO UPDATE SET body = ?2, version = ?3, built = ?4, updated_ts = ?5`)
+      .bind(name, main, book.version || null, book.built || null, ts).run();
+  } else {
+    const r = await env.DB.prepare('UPDATE content SET body = ?, version = ?, built = ?, updated_ts = ? WHERE name = ? AND updated_ts = ?')
+      .bind(main, book.version || null, book.built || null, ts, name, +rev).run();
+    ok = !!(r && r.meta && Number.isFinite(r.meta.changes) ? r.meta.changes : r && Number.isFinite(r.changes) ? r.changes : 1);
+  }
+  // saved: remove the pieces of older saves; not saved (someone else saved first): remove the pieces just written
+  if (ok) await env.DB.prepare('DELETE FROM content WHERE name LIKE ? AND name NOT LIKE ?').bind(`${name}#%`, id ? `${name}#${id}#%` : '\u0001').run();
+  else if (id) await env.DB.prepare('DELETE FROM content WHERE name LIKE ?').bind(`${name}#${id}#%`).run();
+  return ok;
 }
-// D1 keeps at most 2,000,000 bytes in one row; Dari and Pashto take about 1.3 bytes a character, so count bytes
-const MAX_ROW_BYTES = 1_900_000;
+async function putDoc(env, name, book, body, ts) { await writeDoc(env, name, book, body, ts || Date.now()); }
 const bytesOf = (s) => new TextEncoder().encode(s).length;
 // The app's own book, from APP_URL (Import and "Bring in app changes")
 async function appBook(env) {
@@ -354,11 +408,7 @@ async function appVersion(env) {
 // Returns the new rev, or null when someone else saved first.
 async function putDraft(env, book, body, rev) {
   const ts = Math.max(Date.now(), (+rev || 0) + 1);
-  if (rev == null) { await putDoc(env, 'draft', book, body, ts); return ts; }
-  const r = await env.DB.prepare('UPDATE content SET body = ?, version = ?, built = ?, updated_ts = ? WHERE name = ? AND updated_ts = ?')
-    .bind(body, book.version || null, book.built || null, ts, 'draft', +rev).run();
-  const n = r && r.meta && Number.isFinite(r.meta.changes) ? r.meta.changes : r && Number.isFinite(r.changes) ? r.changes : 1;
-  return n ? ts : null;
+  return (await writeDoc(env, 'draft', book, body, ts, rev)) ? ts : null;
 }
 const STALE = 'Someone else (or this editor open in another window) saved a change to the book after you opened it, so your last change was NOT saved. Reload the page to get the newest version, then make your change again.';
 
@@ -372,11 +422,11 @@ async function publicBook(env, path) {
   if (path === '/content/overlay.json') { // what new app versions download: only the editor's changes (js/overlay.js)
     const r = await env.DB.prepare("SELECT body FROM content WHERE name = 'overlay'").first();
     if (!r) return json({ error: 'nothing published yet' }, 404, h);
-    return new Response(r.body, { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
+    return new Response(await docBody(env, 'overlay', r), { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
   }
   const r = await env.DB.prepare("SELECT body FROM content WHERE name = 'published'").first();
   if (!r) return json({ error: 'nothing published yet' }, 404, h);
-  return new Response(r.body, { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
+  return new Response(await docBody(env, 'published', r), { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
 }
 
 async function serveAudio(env, url) {
@@ -420,7 +470,7 @@ function rebuildNarration(b) {
     n[tid + '.title'] = sayL(t.title);
     for (const bl of t.blocks) {
       if (!bl || !bl.id) continue;
-      if (bl.type === 'step' || bl.type === 'link') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));
+      if (bl.type === 'step' || bl.type === 'link' || bl.type === 'clinic') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));
       else if (bl.type === 'lead' || bl.type === 'tip') n[bl.id] = sayL(bl.text);
       else if (bl.type === 'anim') { if (hasText(bl.title)) n[bl.id] = sayL(bl.title); } // without a title it reads anim.<name>.title
       else if (bl.type === 'alert' || bl.type === 'dont') {
@@ -435,7 +485,7 @@ function rebuildNarration(b) {
   b.narration = n;
   // recording order: interface lines, then page by page; an animation's lines follow the first page that shows it
   const order = Object.keys(n).filter((k) => k.startsWith('ui.')), seen = new Set(order), owner = {};
-  for (const sec of ['children', 'women', 'everyone', 'kit']) for (const tid of b.sections[sec] || []) {
+  for (const sec of ['children', 'women', 'everyone', ...[...PAGE_LISTS].sort()]) for (const tid of b.sections[sec] || []) {
     const ids = Object.keys(n).filter((k) => k === tid + '.title' || k.startsWith(tid + '.')), t = b.topics[tid] || {};
     for (const bl of [...(t.blocks || []), ...(t.anims || [])]) if (bl && bl.type === 'anim') ids.push(...animBlockIds(b, bl).filter((k) => k in n && k.startsWith('anim.')));
     for (const k of ids) if (!seen.has(k)) { seen.add(k); order.push(k); if (!(k in owner)) owner[k] = tid; }
@@ -520,7 +570,7 @@ async function adminApi(req, env, url, op, me) {
     for (const s of SECTIONS) if (!Array.isArray(b.sections[s])) b.sections[s] = [];
     rebuildNarration(b);
     const body = JSON.stringify(b);
-    if (bytesOf(body) > MAX_ROW_BYTES) return json({ error: 'The book has become too big to store (over 1.9 MB). Shorten or remove something first.' }, 422);
+    if (bytesOf(body) > MAX_DOC_BYTES) return json({ error: `The book has become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something first.` }, 422);
     const rev = await putDraft(env, b, body, d0.ts);
     if (!rev) return json({ error: STALE, conflict: true }, 409);
     await putDoc(env, 'base', a.book);
@@ -621,7 +671,7 @@ async function adminApi(req, env, url, op, me) {
     for (const u of units) if (u.k.startsWith('topic:') && u.v) { const tid = u.k.slice(6); for (const id of Object.keys(out.narration)) if (OV.topicSay(tid, id)) say[id] = out.narration[id]; }
     const overlay = JSON.stringify({ format: OV.FORMAT, version: out.version, built: out.built, app: baseDoc && baseDoc.book ? baseDoc.book.version || null : null, units, say, audio: ovAudio });
     const body = JSON.stringify(out);
-    if (bytesOf(body) > MAX_ROW_BYTES || bytesOf(overlay) > MAX_ROW_BYTES) return json({ error: 'Not published: the book has become too big to store (over 1.9 MB). Shorten or remove something.', errors: [], warnings: res.warnings }, 422);
+    if (bytesOf(body) > MAX_DOC_BYTES || bytesOf(overlay) > MAX_DOC_BYTES) return json({ error: `Not published: the book has become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something.`, errors: [], warnings: res.warnings }, 422);
     await putDoc(env, 'overlay', out, overlay);
     await putDoc(env, 'published', out, body);
     await log('publish', 'version ' + out.version);
@@ -650,10 +700,9 @@ async function adminApi(req, env, url, op, me) {
       const old = b.topics[t.id];
       if (!old && (b.retired || []).includes(t.id)) return json({ error: `The id "${t.id}" was used before. Choose another id.` }, 400);
       if (!old) b.sections[t.section].push(t.id);
-      else if (old.section !== t.section && !(b.sections.kit || []).includes(t.id)) { // kit pages stay on the kit page only
+      else if (old.section !== t.section) { // a page only on a list page (kit, hospital ...) stays there only
         const ol = b.sections[old.section] || [], i = ol.indexOf(t.id);
-        if (i >= 0) ol.splice(i, 1);
-        if (!b.sections[t.section].includes(t.id)) b.sections[t.section].push(t.id);
+        if (i >= 0) { ol.splice(i, 1); if (!b.sections[t.section].includes(t.id)) b.sections[t.section].push(t.id); }
       }
       b.topics[t.id] = t;
     } else if (m.part === 'deleteTopic') {
@@ -694,7 +743,7 @@ async function adminApi(req, env, url, op, me) {
     for (const [k, j] of before) if (OV.jsonOf(OV.getUnit(b, k)) !== j) b.edits[k] = stamp;
     rebuildNarration(b);
     const body = JSON.stringify(b);
-    if (bytesOf(body) > MAX_ROW_BYTES) return json({ error: 'Not saved: the book has become too big to store (over 1.9 MB). Shorten or remove something, for example a very long text.' }, 422);
+    if (bytesOf(body) > MAX_DOC_BYTES) return json({ error: `Not saved: the book has become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something, for example a very long text.` }, 422);
     const rev = await putDraft(env, b, body, m.rev != null ? +m.rev : null);
     if (!rev) return json({ error: STALE, conflict: true }, 409);
     const PART = { topic: 'topic', deleteTopic: 'deleted topic', sections: 'topic order', home: 'home screen', ui: 'words', facilities: 'places', search: 'search words' };
@@ -814,11 +863,12 @@ function checkBook(b) {
       else if (ty === 'link') {
         checkIcon(w, bl.icon, false, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid);
         const m = LINK_RE.exec(String(bl.to || ''));
-        if (!m) E(`${w}: choose where it goes (a tool, another topic, the home kit, the family record or the clinic finder).`, tid);
+        if (!m) E(`${w}: choose where it goes (a tool, another topic, the home kit, the family record, the clinic finder, What is wrong? or the Emergency screen).`, tid);
         else if (m[2] && !TOOLS.includes(m[2])) E(`${w}: "${m[2]}" is not one of the app's tools.`, tid);
         else if (m[3] && !(b.topics || {})[m[3]]) E(`${w}: it goes to the topic "${m[3]}", which does not exist.`, tid);
       }
       else if (ty === 'anim') checkAnim(w, bl, tid);
+      else if (ty === 'clinic') { checkIcon(w, bl.icon, false, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid); }
       else {
         if (ty === 'alert' && !['urgent', 'soon'].includes(bl.level)) E(`${w}: choose how urgent it is (red or amber).`, tid);
         checkL(`${w} title`, bl.title, 16, tid);
@@ -834,7 +884,8 @@ function checkBook(b) {
     });
     if ((counts.anim || 0) > 2) W(`${name}: has ${counts.anim} animations. Try to keep it to 2 or fewer.`, tid);
     if ((counts.lead || 0) !== 1) E(`${name}: must have exactly one opening sentence (lead); it has ${counts.lead || 0}.`, tid);
-    if (!((counts.step || 0) >= 2 && (counts.step || 0) <= 8)) W(`${name}: has ${counts.step || 0} steps (aim for 3 to 7).`, tid);
+    if (!((counts.step || 0) >= (counts.alert ? 1 : 2) && (counts.step || 0) <= 8)) // a reading page (what a number means) is one step and its alert boxes
+      W(`${name}: has ${counts.step || 0} steps (aim for 3 to 7).`, tid);
     if (!Array.isArray(t.sources) || !t.sources.filter((s) => String(s).trim()).length) E(`${name}: add at least one source (where the advice comes from).`, tid);
   }
   function checkVaccines(d) {
@@ -860,6 +911,8 @@ function checkBook(b) {
   for (const id of Object.keys(b.topics || {})) if (!listed.has(id)) W(`Topic "${id}" is not in any section, so nobody can open it.`, id);
   // home screen
   if (!Array.isArray((b.config || {}).home) || !b.config.home.length) W('The home screen has no parts switched on.');
+  // Mo's rule: the Home tab's lists (config.lists ... tab "house") give no medical advice; urgent signs live on the Health side
+  for (const [name, l] of Object.entries((b.config || {}).lists || {})) if (l && l.tab === 'house') for (const tid of (b.sections || {})[name] || []) for (const bl of (((b.topics || {})[tid] || {}).blocks || [])) if (bl.type === 'alert' || bl.type === 'clinic') W(`${bl.id}: this page is on the Home tab (${name}), which gives no medical advice. Move the box to a Health page and link to it with a red link row.`, tid);
   // words on buttons and spoken interface lines
   for (const [k, L] of Object.entries(b.ui || {})) {
     const empty = LANGS.filter((lg) => !String((L && L[lg]) || '').trim());
@@ -1063,13 +1116,13 @@ body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[rea
 function adminClient(cfg) {
   const LANGS = ['fa', 'ps', 'en'], LN = { fa: 'Dari', ps: 'Pashto', en: 'English' }, SECS = { children: 'Children', women: "Women's health", everyone: 'Everyone' };
   // other topic lists: the home health kit page and the Emergency screen's list of all emergencies (topics keep their own section too)
-  const LISTN = { ...SECS, kit: 'Home health kit page (only there, not in the lists above)', emergency: 'Emergency screen: all emergencies (also in their section)' };
+  const LISTN = { ...SECS, kit: 'Home health kit page (only there, not in the lists above)', safety: 'Home safety page (also in their section, shown there as a group)', hospital: 'Going to the clinic or hospital page', food: 'Food and garden page', emergency: 'Emergency screen: all emergencies (also in their section)' };
   const $ = (s) => document.querySelector(s), main = $('#main');
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const L0 = () => ({ fa: '', ps: '', en: '' });
   const hasL = (x) => !!x && typeof x === 'object' && LANGS.some((lg) => String(x[lg] || '').trim());
   // where a link block can go: the app's tools, the home kit, the family record, the clinic finder, any topic
-  const linkTargets = () => [...cfg.tools.map((x) => ['tool/' + x, 'Tool: ' + x]), ['kit', 'Home health kit page'], ['family', 'My family (vaccine card)'], ['near', 'Nearest clinic'], ['growth', 'Growth tracker (charts)'], ['growth/measure', 'How to measure at home'], ['share', 'Share Sehat'],
+  const linkTargets = () => [...cfg.tools.map((x) => ['tool/' + x, 'Tool: ' + x]), ['kit', 'Home health kit page'], ['family', 'My family (vaccine card)'], ['near', 'Nearest clinic'], ['growth', 'Growth tracker (charts)'], ['growth/measure', 'How to measure at home'], ['share', 'Share Sehat'], ['ask', 'What is wrong? (symptom search)'], ['emergency', 'Emergency screen'],
     ...Object.keys(D.topics).sort().map((x) => ['topic/' + x, 'Topic: ' + ((D.topics[x].title && D.topics[x].title.en) || x)])];
   let D = null, PUB = null, AU = {}, DIRTY = false, CUR = null, CHECK = null, Q = { words: '', audio: '', places: '' };
   // REV: the draft's save time this page last saw (a save based on an older one is refused); APP: the app's version when newer than the draft's start
@@ -1235,7 +1288,7 @@ function adminClient(cfg) {
     const P = `topic:blocks|${i}|`, ty = b.type;
     let h = `<div class="c blk ${esc(ty)} ${esc(b.level || '')}"><div class="bh"><b>${i + 1}. ${esc(cfg.types[ty] || ty)}</b><span class="s grow">${esc(b.id)}</span><button class="sm" data-act="bmove" data-i="${i}" data-d="-1"${i ? '' : ' disabled'} aria-label="up">↑</button><button class="sm" data-act="bmove" data-i="${i}" data-d="1"${i < n - 1 ? '' : ' disabled'} aria-label="down">↓</button><button class="sm danger" data-act="bdel" data-i="${i}">Delete</button></div>`;
     if (ty === 'alert') h += `<label><span>How urgent</span><select data-f="${P}level">${opts([['urgent', 'Red: go to hospital now, day or night'], ['soon', 'Amber: go to the clinic today']], b.level)}</select></label>`;
-    if (ty === 'step' || ty === 'tip' || ty === 'link') h += iconPick(P + 'icon', b.icon, ty !== 'step');
+    if (ty === 'step' || ty === 'tip' || ty === 'link' || ty === 'clinic') h += iconPick(P + 'icon', b.icon, ty !== 'step');
     if (ty === 'link') h += `<label><span>Goes to</span><select data-f="${P}to">${opts(linkTargets(), b.to || '', b.to ? '' : 'choose…')}</select></label>`;
     if (ty === 'anim') {
       const A = D.anims || {}, G = A.groups || {}, names = [...Object.keys(G).map((g) => [g, g + ' (asks who needs help first)']), ...Object.keys(A.ids || {}).map((n) => [n, n])];
@@ -1243,8 +1296,9 @@ function adminClient(cfg) {
       if (G[b.anim]) h += `<label><span>Go straight to</span><select data-f="${P}pick" data-opt>${opts(G[b.anim], b.pick || '', '(ask who needs help)')}</select></label>`;
       h += `</div><p class="s">The page shows a still picture with a play button. Its title is the animation's own title; its scenes are edited under Words (lines starting anim.).</p>`;
     }
-    if (ty !== 'anim' && (b.title !== undefined || ['step', 'alert', 'dont', 'link'].includes(ty))) h += `<div class="l">Title</div>${tri(P + 'title', b.title, 1)}`;
-    if (['lead', 'step', 'tip', 'link'].includes(ty)) h += `<div class="l">Text</div>${tri(P + 'text', b.text, 3)}`;
+    if (ty === 'clinic') h += '<p class="s">Start the title with the place: "At the clinic:" or "At the hospital:" (the icon is a clinic or hospital building when none is chosen).</p>';
+    if (ty !== 'anim' && (b.title !== undefined || ['step', 'alert', 'dont', 'link', 'clinic'].includes(ty))) h += `<div class="l">Title</div>${tri(P + 'title', b.title, 1)}`;
+    if (['lead', 'step', 'tip', 'link', 'clinic'].includes(ty)) h += `<div class="l">Text</div>${tri(P + 'text', b.text, 3)}`;
     if (ty === 'step' || ty === 'link') h += `<label><span>Picture under it (optional)</span><select data-f="${P}picture" data-opt>${opts((D.pictures || []).map((x) => [x, x.replace(/^img\/pics\/|\.svg$/g, '')]), b.picture || '', '(none)')}</select></label>${b.picture && cfg.appUrl ? `<img class="pimg" src="${esc(cfg.appUrl + '/' + b.picture)}" alt="">` : ''}`;
     if (ty !== 'anim' || hasL(b.title)) h += audioBox(b.id);
     if (Array.isArray(b.items)) {
@@ -1322,6 +1376,7 @@ function adminClient(cfg) {
     if (ty === 'lead') return { id, type: 'lead', text: L0() };
     if (ty === 'step') return { id, type: 'step', icon: 'check', title: L0(), text: L0() };
     if (ty === 'tip') return { id, type: 'tip', icon: 'check', text: L0() };
+    if (ty === 'clinic') return { id, type: 'clinic', title: { fa: 'در کلینیک: ', ps: 'په کلینیک کې: ', en: 'At the clinic: ' }, text: L0() };
     const b = { id, type: ty, title: L0(), items: [] };
     if (ty === 'alert') b.level = 'urgent';
     b.items.push({ id: newId(id + '.item'), icon: ty === 'dont' ? 'no' : 'warning', text: L0() });

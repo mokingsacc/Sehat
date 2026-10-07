@@ -1,0 +1,298 @@
+{
+  "id": "hepatitis",
+  "section": "everyone",
+  "title": {
+    "fa": "زردی (هپاتیت)",
+    "ps": "ژېړی (هیپاتیت)",
+    "en": "Yellow eyes (hepatitis)"
+  },
+  "summary": {
+    "fa": "چشم‌های زرد یعنی جگر مریض است. در کلینیک معاینه شوید.",
+    "ps": "ژېړې سترګې یعنې ځیګر ناروغ دی. په کلینیک کې معاینه شئ.",
+    "en": "Yellow eyes mean the liver is ill. Get a clinic check."
+  },
+  "image": "hepatitis",
+  "blocks": [
+    {
+      "id": "hepatitis.lead",
+      "type": "lead",
+      "text": {
+        "fa": "زردی، یعنی چشم و پوست زرد با ادرار تیره، یعنی جگر التهاب دارد. اکثراً یک ویروس از آب یا غذای ناپاک است که با استراحت می‌گذرد. بعضی انواع از راه خون سرایت می‌کنند و معاینه و تداوی ضرورت دارند.",
+        "ps": "ژېړی، یعنې ژېړې سترګې او پوستکی له تیارو متیازو سره، یعنې ځیګر پړسوب لري. ډېری وخت یو ویروس دی چې له ناپاکو اوبو یا خوړو څخه راځي او په آرام تېرېږي. ځینې ډولونه یې د وینې له لارې خپرېږي او معاینې او درملنې ته اړتیا لري.",
+        "en": "Jaundice, yellow eyes and skin with dark urine, means the liver is inflamed. Most often it is a virus from dirty water or food and passes with rest. Some types spread by blood and need testing and treatment."
+      }
+    },
+    {
+      "id": "hepatitis.signs",
+      "type": "step",
+      "icon": "jaundice",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "خستگی، بی‌اشتهایی، دل‌بدی، درد زیر قبرغه‌های راست، بعد چشم و پوست زرد، ادرار تیره و مدفوع کم‌رنگ. شاید اول تب بیاید.",
+        "ps": "ستړیا، بې اشتهايي، زړه بدوالی، د ښي پښتیو لاندې درد، بیا ژېړې سترګې او پوستکی، تیارې متیازې او کمرنګه ډکې. ښايي لومړی تبه راشي.",
+        "en": "Tiredness, poor appetite, feeling sick, pain under the right ribs, then yellow eyes and skin, dark urine and pale stool. Fever may come first."
+      }
+    },
+    {
+      "id": "hepatitis.rest",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "استراحت، مایعات و غذای ساده",
+        "ps": "آرام، مایعات او ساده خواړه",
+        "en": "Rest, fluids and simple food"
+      },
+      "text": {
+        "fa": "در خانه استراحت کنید. آب پاک و او آر اس زیاد بنوشید. غذای ساده را کم‌کم بخورید. اکثر مردم در چند هفته بهتر می‌شوند.",
+        "ps": "په کور کې آرام وکړئ. ډېرې پاکې اوبه او او آر اس وڅښئ. ساده خواړه لږ لږ وخورئ. ډېری خلک په څو اونیو کې ښه کېږي.",
+        "en": "Rest at home. Drink plenty of clean water and ORS. Eat small simple meals. Most people are better in a few weeks."
+      }
+    },
+    {
+      "id": "hepatitis.nomeds",
+      "type": "step",
+      "icon": "no",
+      "title": {
+        "fa": "بدون کلینیک هیچ دوایی نخورید",
+        "ps": "له کلینیک پرته هېڅ درمل مه خورئ",
+        "en": "No medicines without the clinic"
+      },
+      "text": {
+        "fa": "جگر مریض بسیاری از دواها را تحمل نمی‌کند. هیچ تابلیت، گیاه یا پیچکاری نگیرید، مگر اینکه کارمند صحی بدهد. پاراسیتامول فقط آن طور که می‌گوید.",
+        "ps": "ناروغ ځیګر ډېر درمل نه شي زغملای. هېڅ ګولۍ، بوټي یا پیچکاري مه اخلئ، مګر دا چې روغتیايي کارکوونکی یې درکړي. پاراسیټامول یوازې هغسې چې هغه وايي.",
+        "en": "A sick liver cannot handle many medicines. Take no tablets, herbs or injections unless the health worker gives them. Paracetamol only as they say."
+      }
+    },
+    {
+      "id": "hepatitis.spread",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "جلو سرایت در خانه را بگیرید",
+        "ps": "په کور کې د خپرېدو مخه ونیسئ",
+        "en": "Stop it spreading at home"
+      },
+      "text": {
+        "fa": "بعد از تشناب و پیش از غذا دست‌ها را با صابون بشویید. آب نوشیدنی را بجوشانید. مریض تا جور شدن گیلاس و بشقاب خودش را استفاده کند.",
+        "ps": "له تشناب وروسته او له خوړو مخکې لاسونه په صابون ومینځئ. د څښاک اوبه وایشوئ. ناروغ تر روغېدو پورې خپل ګیلاس او کاسه وکاروي.",
+        "en": "Wash hands with soap after the toilet and before food. Boil drinking water. The sick person uses their own cup and plate until well."
+      }
+    },
+    {
+      "id": "hepatitis.blood",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "انواع خونی: پل و سوزن",
+        "ps": "د وینې ډولونه: پاکي او ستنې",
+        "en": "Blood types: razors and needles"
+      },
+      "text": {
+        "fa": "هپاتیت ب و سی از راه خون سرایت می‌کنند: پل مشترک، سوزن، پیچکاری ناپاک و از مادر به طفل. فقط سوزن نو و پل خود را استفاده کنید؛ به نوزاد واکسین وقت تولد را بدهید.",
+        "ps": "هیپاتیت ب او سي د وینې له لارې خپرېږي: ګډه پاکي، ستنې، ناپاکه پیچکاري او له مور څخه ماشوم ته. یوازې نوې ستنې او خپله پاکي وکاروئ؛ نوي زېږېدلي ماشوم ته د زېږون واکسین ورکړئ.",
+        "en": "Hepatitis B and C spread by blood: shared razors, needles, unclean injections and from mother to baby. Use only new needles and your own razor; give babies the birth vaccine."
+      }
+    },
+    {
+      "id": "hepatitis.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه و معاینهٔ خون",
+        "ps": "په کلینیک کې: معاینه او د وینې معاینه",
+        "en": "At the clinic: check and blood test"
+      },
+      "text": {
+        "fa": "کارمند صحی شکم را معاینه می‌کند و شاید خون را برای هپاتیت ب و سی معاینه کند. برای انواع آبی دوایی نیست؛ در مورد استراحت، مایعات و پرهیز مشوره می‌دهد.",
+        "ps": "روغتیايي کارکوونکی نس معاینه کوي او ښايي وینه د هیپاتیت ب او سي لپاره معاینه کړي. د اوبو ډولونو لپاره درمل نشته؛ د آرام، مایعاتو او پرهېز په اړه مشوره ورکوي.",
+        "en": "The health worker examines the belly and may test the blood for hepatitis B and C. For the water-borne types there is no medicine; they advise rest, fluids and what to avoid."
+      }
+    },
+    {
+      "id": "hepatitis.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: تداوی هپاتیت ب و سی",
+        "ps": "په روغتون کې: د هیپاتیت ب او سي درملنه",
+        "en": "At the hospital: hepatitis B, C treatment"
+      },
+      "text": {
+        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، رایگان در شفاخانهٔ امراض ساری کابل و بعضی شفاخانه‌های ولایتی. شخص گیج یا دارای خونریزی بستر می‌شود.",
+        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، وړیا د کابل د ساري ناروغیو په روغتون او ځینو ولایتي روغتونونو کې. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
+        "en": "Hepatitis C is cured with tablets and hepatitis B controlled, free at the infectious diseases hospital in Kabul and some provincial hospitals. A confused or bleeding person is admitted."
+      }
+    },
+    {
+      "id": "hepatitis.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "hepatitis.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "چشم‌های زرد و گیج، بسیار خواب‌آلود یا بی‌هوش",
+            "ps": "ژېړې سترګې او ګډوډ، ډېر خوبولی یا بې هوښه",
+            "en": "yellow eyes and confused, very sleepy or unconscious"
+          }
+        },
+        {
+          "id": "hepatitis.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "چشم‌های زرد با خونریزی، استفراغ خون یا مدفوع سیاه",
+            "ps": "ژېړې سترګې له وینې بهېدلو، د وینې کانګو یا تورو ډکو سره",
+            "en": "yellow eyes with bleeding, vomiting blood or black stool"
+          }
+        },
+        {
+          "id": "hepatitis.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "خانم حامله با چشم‌های زرد",
+            "ps": "امیندواره ښځه له ژېړو سترګو سره",
+            "en": "a pregnant woman with yellow eyes"
+          }
+        },
+        {
+          "id": "hepatitis.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "مایعات را نگه نمی‌تواند، یا ادرار کم کرده",
+            "ps": "مایعات نه شي ساتلای، یا لږې متیازې یې کړې دي",
+            "en": "cannot keep fluids down, or has passed little urine"
+          }
+        },
+        {
+          "id": "hepatitis.urgent.newborn",
+          "icon": "newborn-warm",
+          "text": {
+            "fa": "نوزاد زرد در روز اول، یا با کف دست و پای زرد",
+            "ps": "نوی زېږېدلی ماشوم چې په لومړۍ ورځ ژېړ وي، یا ورغوي او تلي یې ژېړ وي",
+            "en": "a newborn yellow on the first day, or with yellow palms and soles"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hepatitis.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "hepatitis.soon.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "چشم یا پوست زرد، یا ادرار تیره",
+            "ps": "ژېړې سترګې یا پوستکی، یا تیارې متیازې",
+            "en": "yellow eyes or skin, or dark urine"
+          }
+        },
+        {
+          "id": "hepatitis.soon.long",
+          "icon": "clock",
+          "text": {
+            "fa": "چشم‌های زرد بیش از ۲ هفته، یا برگشته",
+            "ps": "ژېړې سترګې له ۲ اونیو زیات، یا بېرته راغلې",
+            "en": "yellow eyes for more than 2 weeks, or coming back"
+          }
+        },
+        {
+          "id": "hepatitis.soon.household",
+          "icon": "family",
+          "text": {
+            "fa": "یکی از اهل خانه هپاتیت ب یا سی دارد: معاینه شوید",
+            "ps": "د کور یو غړی هیپاتیت ب یا سي لري: معاینه شئ",
+            "en": "a household member with hepatitis B or C: get tested"
+          }
+        },
+        {
+          "id": "hepatitis.soon.needle",
+          "icon": "syringe",
+          "text": {
+            "fa": "پیچکاری یا بریدگی با سوزن یا پل استعمال‌شده",
+            "ps": "په کارول شوې ستنه یا پاکي پیچکاري یا پرې کېدل",
+            "en": "an injection or cut with a used needle or razor"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hepatitis.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "hepatitis.dont.cures",
+          "icon": "pill",
+          "text": {
+            "fa": "برای زردی از دکان یا تعویذگر دوا نگیرید؛ به جگر ضرر می‌رساند.",
+            "ps": "د ژېړي لپاره له دوکان یا تعویذګر څخه درمل مه اخلئ؛ ځیګر ته زیان رسوي.",
+            "en": "Do not take shop or healer cures for jaundice; they can harm the liver."
+          }
+        },
+        {
+          "id": "hepatitis.dont.share",
+          "icon": "no",
+          "text": {
+            "fa": "پل، برس دندان یا سوزن را شریک نکنید.",
+            "ps": "پاکي، د غاښونو برس یا ستنه مه شریکوئ.",
+            "en": "Do not share razors, toothbrushes or needles."
+          }
+        },
+        {
+          "id": "hepatitis.dont.breastfeed",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "شیردهی را قطع نکنید؛ مادر مبتلا به زردی می‌تواند شیر بدهد.",
+            "ps": "تي ورکول مه پرېږدئ؛ ژېړي لرونکې مور کولای شي شیدې ورکړي.",
+            "en": "Do not stop breastfeeding; a mother with jaundice can keep feeding."
+          }
+        }
+      ]
+    },
+    {
+      "id": "hepatitis.vaccine",
+      "type": "tip",
+      "icon": "syringe",
+      "text": {
+        "fa": "واکسین هپاتیت ب جزء واکسین‌های معمول اطفال است. کارت طفل را ببینید؛ دوز اول باید در وقت تولد باشد.",
+        "ps": "د هیپاتیت ب واکسین د ماشومانو د معمولو واکسینونو برخه ده. د ماشوم کارت وګورئ؛ لومړی ډوز باید د زېږون پر وخت وي.",
+        "en": "The hepatitis B vaccine is part of the children's routine vaccines. Check the child's card; the first dose should be at birth."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheets: Hepatitis A, Hepatitis E, Hepatitis B, Hepatitis C (28 Jul 2026 updates): transmission, symptoms, no specific treatment for A and E, danger of hepatitis E in pregnancy, curative treatment for C and long-term treatment for B, birth-dose vaccine",
+    "WHO Guidelines for the prevention, diagnosis, care and treatment for people with chronic hepatitis B infection (2024); WHO Updated recommendations on treatment of adolescents and children with chronic HCV infection (2022)",
+    "WHO Pocket Book of Hospital Care for Children (2013): jaundice; WHO IMCI Chart Booklet (2014): jaundice in the young infant (yellow palms and soles, or jaundice under 24 hours, refer urgently)",
+    "WHO Afghanistan news (27 Jul 2025): 67,230 hepatitis B and 27,937 hepatitis C infections confirmed from 2023 to the first quarter of 2025; free testing and treatment at the Kabul infectious diseases hospital and expansion to provinces",
+    "Afghanistan MoPH NDSR weekly report, week 33 2026: 7,270 acute hepatitis cases and 51 deaths in 2026 to date; Afghanistan EPI schedule: hepatitis B birth dose (content/src/vaccines.json)",
+    "WHO/UNICEF Facts for Life (2010): hygiene"
+  ],
+  "review": [
+    "'Free hepatitis B and C treatment at the Kabul infectious diseases hospital and some provincial hospitals' comes from WHO Afghanistan (July 2025); confirm whether Balkh Regional Hospital or Samangan provincial hospital now offers it.",
+    "A pregnant woman with jaundice is put in the urgent (hospital now) list because hepatitis E kills up to 1 in 4 pregnant women (WHO); Mo to confirm this urgency level.",
+    "The newborn jaundice item repeats the IMCI rule already in the newborn topic; keep both consistent.",
+    "'Paracetamol only as they say' is deliberately cautious; Mo may prefer no mention of paracetamol in liver disease.",
+    "Breastfeeding with hepatitis B is safe when the baby is vaccinated (WHO); the do-not item does not go into this detail.",
+    "Dari زردی / Pashto ژېړی are the everyday words for jaundice; هپاتیت/هیپاتیت added in brackets."
+  ]
+}

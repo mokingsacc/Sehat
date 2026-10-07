@@ -1,0 +1,281 @@
+{
+  "id": "dengue",
+  "section": "everyone",
+  "title": {
+    "fa": "تب دنگی",
+    "ps": "ډینګي تبه",
+    "en": "Dengue fever"
+  },
+  "summary": {
+    "fa": "تب پشه‌ای شرق کشور. خونریزی یا استفراغ یعنی همین حالا شفاخانه.",
+    "ps": "د ختیځ د ماشي تبه. وینه بهېدل یا کانګې یعنې همدا اوس روغتون.",
+    "en": "Mosquito fever of the east. Bleeding or vomiting means hospital now."
+  },
+  "image": "dengue",
+  "blocks": [
+    {
+      "id": "dengue.lead",
+      "type": "lead",
+      "text": {
+        "fa": "دنگی از راه پشهٔ راه‌راهی سرایت می‌کند که در روز می‌گزد، بیشتر در ننگرهار و شرق، در آخر تابستان و خزان. اکثر مردم با استراحت و مایعات جور می‌شوند، اما بعضی وقتی تب پایین می‌آید بسیار مریض می‌شوند.",
+        "ps": "ډینګي د هغه کرښو لرونکي ماشي له لارې خپرېږي چې د ورځې چیچي، ډېری په ننګرهار او ختیځ کې، د دوبي په پای او مني کې. ډېری خلک په آرام او مایعاتو جوړېږي، خو ځینې کله چې تبه ښکته کېږي ډېر ناروغېږي.",
+        "en": "Dengue is spread by a striped mosquito that bites in the daytime, mostly in Nangarhar and the east, in late summer and autumn. Most people recover with rest and fluids, but some become very ill as the fever falls."
+      }
+    },
+    {
+      "id": "dengue.signs",
+      "type": "step",
+      "icon": "fever",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "تب بلند ناگهانی با سردرد شدید، درد پشت چشم‌ها، درد عضلات و مفاصل، و گاهی دانه‌های جلدی. حدود یک هفته دوام می‌کند.",
+        "ps": "ناڅاپي لوړه تبه له سخت سردرد، د سترګو شا درد، د عضلاتو او بندونو درد، او کله کله دانو سره. شاوخوا یوه اونۍ دوام کوي.",
+        "en": "Sudden high fever with a bad headache, pain behind the eyes, muscle and joint pain, and sometimes a rash. It lasts about a week."
+      }
+    },
+    {
+      "id": "dengue.fluids",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "استراحت کنید و زیاد بنوشید",
+        "ps": "آرام وکړئ او ډېر وڅښئ",
+        "en": "Rest and drink a lot"
+      },
+      "text": {
+        "fa": "آب، او آر اس، شوربا و آب میوه را زیاد بار بنوشید. استراحت کنید. مریض را از نزدیک زیر نظر بگیرید، مخصوصاً در روزهای ۳ تا ۷ که تب پایین می‌آید.",
+        "ps": "اوبه، او آر اس، ښوروا او د مېوې اوبه ډېر ځله وڅښئ. آرام وکړئ. ناروغ له نږدې وڅارئ، په تېره بیا په ۳ تر ۷ ورځو کې چې تبه ښکته کېږي.",
+        "en": "Drink water, ORS, soup and juice often. Rest. Watch the sick person closely, especially on days 3 to 7 when the fever comes down."
+      }
+    },
+    {
+      "id": "dengue.paracetamol",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "برای درد فقط پاراسیتامول",
+        "ps": "د درد لپاره یوازې پاراسیټامول",
+        "en": "Only paracetamol for the pain"
+      },
+      "text": {
+        "fa": "فقط دوای تبی را بخورید که کارمند صحی داده (پاراسیتامول). اسپرین، آیبوپروفن یا دیکلوفیناک نخورید؛ در دنگی خونریزی می‌آورند.",
+        "ps": "یوازې هغه د تبې درمل وخورئ چې روغتیايي کارکوونکي درکړي (پاراسیټامول). اسپرین، آیبوپروفن یا ډیکلوفیناک مه خورئ؛ په ډینګي کې وینه بهول راولي.",
+        "en": "Use only the fever medicine the health worker gives (paracetamol). Do not take aspirin, ibuprofen or diclofenac; in dengue they can cause bleeding."
+      }
+    },
+    {
+      "id": "dengue.mosquito",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "جلو گزیدن پشه در روز را بگیرید",
+        "ps": "د ورځې د ماشي د چیچلو مخه ونیسئ",
+        "en": "Stop daytime mosquito bites"
+      },
+      "text": {
+        "fa": "این پشه در آب پاک قطی‌ها، تانکرها، تایرها و کولرها تخم می‌گذارد. هفته‌وار آن‌ها را خالی و پاک کنید. در روز هم از پشه‌خانه و لباس پوشیده کار بگیرید.",
+        "ps": "دا ماشی د لوښو، ټانکونو، ټایرونو او کولرونو په پاکو اوبو کې هګۍ اچوي. هره اونۍ یې تش او پاک کړئ. د ورځې هم له جالۍ او پوښلو جامو کار واخلئ.",
+        "en": "This mosquito breeds in clean water in pots, tanks, tyres and coolers. Empty and scrub them weekly. Use nets and covering clothes in the daytime too."
+      }
+    },
+    {
+      "id": "dengue.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه و مشوره",
+        "ps": "په کلینیک کې: معاینه او مشوره",
+        "en": "At the clinic: check and advice"
+      },
+      "text": {
+        "fa": "کارمند صحی دنگی و دلایل دیگر تب، و علایم خطر را معاینه می‌کند. دوایی که ویروس را بکشد وجود ندارد؛ در مورد مایعات، پاراسیتامول و وقت برگشتن مشوره می‌دهد.",
+        "ps": "روغتیايي کارکوونکی ډینګي او د تبې نور لاملونه، او د خطر نښې معاینه کوي. داسې درمل نشته چې ویروس ووژني؛ د مایعاتو، پاراسیټامول او د بېرته راتګ د وخت په اړه مشوره ورکوي.",
+        "en": "The health worker checks for dengue and other causes of fever, and for warning signs. There is no medicine that kills the virus; they advise fluids, paracetamol and when to come back."
+      }
+    },
+    {
+      "id": "dengue.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: مایعات از راه رگ",
+        "ps": "په روغتون کې: د رګ له لارې مایعات",
+        "en": "At the hospital: fluids by drip"
+      },
+      "text": {
+        "fa": "کسی که علایم خطر دارد بستر می‌شود. شفاخانه سیروم می‌دهد، هر چند ساعت خون را معاینه می‌کند و مراقب خونریزی است. این مراقبت تقریباً همهٔ کسانی را که به وقت می‌رسند نجات می‌دهد.",
+        "ps": "هغه څوک چې د خطر نښې لري بستر کېږي. روغتون سیروم ورکوي، هر څو ساعته وینه معاینه کوي او وینه بهېدل څاري. دا پاملرنه تقریباً ټول هغه کسان ژغوري چې پر وخت ورسېږي.",
+        "en": "A person with warning signs is admitted. The hospital gives fluids by drip, checks the blood every few hours and watches for bleeding. This care saves almost everyone treated in time."
+      }
+    },
+    {
+      "id": "dengue.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "dengue.urgent.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم یا استفراغ پی‌درپی",
+            "ps": "د نس سخت درد یا پرله پسې کانګې",
+            "en": "severe belly pain, or vomiting again and again"
+          }
+        },
+        {
+          "id": "dengue.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی از بینی یا بیره، خون در استفراغ یا مدفوع",
+            "ps": "له پوزې یا ورۍ وینه بهېدل، په کانګو یا ډکو کې وینه",
+            "en": "bleeding from the nose or gums, blood in vomit or stool"
+          }
+        },
+        {
+          "id": "dengue.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بسیار خواب‌آلود، بی‌قرار یا گیج",
+            "ps": "ډېر خوبولی، بې قراره یا ګډوډ",
+            "en": "very sleepy, restless or confused"
+          }
+        },
+        {
+          "id": "dengue.urgent.cold",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس تیز، یا دست و پای سرد",
+            "ps": "چټکه ساه، یا سړې لاسونه او پښې",
+            "en": "fast breathing, or cold hands and feet"
+          }
+        },
+        {
+          "id": "dengue.urgent.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "۶ ساعت ادرار نکرده",
+            "ps": "۶ ساعته یې متیازې نه دي کړې",
+            "en": "has passed no urine for 6 hours"
+          }
+        },
+        {
+          "id": "dengue.urgent.spots",
+          "icon": "rash",
+          "text": {
+            "fa": "دانه‌های بسیار کوچک سرخ یا بنفش زیر پوست",
+            "ps": "د پوستکي لاندې ډېر کوچني سره یا بنفش ټکي",
+            "en": "tiny red or purple spots under the skin"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dengue.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "dengue.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تب بلند با سردرد و درد پشت چشم‌ها",
+            "ps": "لوړه تبه له سردرد او د سترګو شا درد سره",
+            "en": "high fever with headache and pain behind the eyes"
+          }
+        },
+        {
+          "id": "dengue.soon.travel",
+          "icon": "calendar",
+          "text": {
+            "fa": "تب در ظرف ۲ هفته بعد از بودن در ننگرهار یا شرق",
+            "ps": "په ننګرهار یا ختیځ کې له اوسېدو وروسته په ۲ اونیو کې تبه",
+            "en": "fever within 2 weeks of being in Nangarhar or the east"
+          }
+        },
+        {
+          "id": "dengue.soon.risk",
+          "icon": "pregnant",
+          "text": {
+            "fa": "تب در خانم حامله، طفل شیرخوار یا شخص پیر",
+            "ps": "په امیندوارې ښځې، تي روي ماشوم یا زاړه کس کې تبه",
+            "en": "fever in a pregnant woman, a baby or an old person"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dengue.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "dengue.dont.nsaid",
+          "icon": "no",
+          "text": {
+            "fa": "برای تب اسپرین، آیبوپروفن یا دیکلوفیناک نخورید.",
+            "ps": "د تبې لپاره اسپرین، آیبوپروفن یا ډیکلوفیناک مه خورئ.",
+            "en": "Do not take aspirin, ibuprofen or diclofenac for the fever."
+          }
+        },
+        {
+          "id": "dengue.dont.shop",
+          "icon": "syringe",
+          "text": {
+            "fa": "از دکان انتی‌بیوتیک یا پیچکاری نگیرید؛ به دنگی کمک نمی‌کند.",
+            "ps": "له دوکان څخه انټي بیوټیک یا پیچکاري مه اخلئ؛ له ډینګي سره مرسته نه کوي.",
+            "en": "Do not take antibiotics or injections from a shop; they do not help dengue."
+          }
+        },
+        {
+          "id": "dengue.dont.relax",
+          "icon": "clock",
+          "text": {
+            "fa": "وقتی تب پایین آمد خاطرجمع نشوید؛ روزهای خطرناک تازه شروع می‌شوند.",
+            "ps": "کله چې تبه ښکته شي ډاډه مه کېږئ؛ خطرناکې ورځې نوې پیلېږي.",
+            "en": "Do not relax when the fever drops; the dangerous days are just starting."
+          }
+        }
+      ]
+    },
+    {
+      "id": "dengue.east",
+      "type": "tip",
+      "icon": "people",
+      "text": {
+        "fa": "دنگی در سال‌های اخیر در افغانستان پخش شده، بیشتر در ننگرهار، با واقعاتی در ولایات دیگر. اگر در شرق بوده‌اید و تب گرفتید، در کلینیک بگویید.",
+        "ps": "ډینګي په وروستیو کلونو کې په افغانستان کې خپور شوی، ډېری په ننګرهار کې، په نورو ولایتونو کې هم پېښې شته. که په ختیځ کې وئ او تبه مو ونیوله، په کلینیک کې یې ووایاست.",
+        "en": "Dengue has spread in Afghanistan in recent years, mostly in Nangarhar, with cases in other provinces. If you have been in the east and get fever, say so at the clinic."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Dengue and severe dengue (21 Aug 2025): symptoms, warning signs, no specific treatment, paracetamol and avoidance of NSAIDs, mosquito control",
+    "WHO Guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever (July 2025): warning signs, fluid management, avoid NSAIDs and corticosteroids",
+    "WHO Afghanistan Infectious Disease Outbreaks Situation Report, week 48 2025: 5,828 dengue cases and 3 deaths in 2025, almost all in Nangarhar; MoPH NDSR week 33 2026: 767 cases in 2026 to date",
+    "WHO/UNICEF Facts for Life (2010): hygiene and environment"
+  ],
+  "review": [
+    "Dengue is essentially an eastern (Nangarhar) problem; for Samangan this topic matters for travellers and returnees. Mo may decide to shorten it or keep it only in the symptom finder.",
+    "Paracetamol is named because WHO's own patient advice names it and warns against NSAIDs; no dose is given. Confirm this is acceptable.",
+    "'Has passed no urine for 6 hours' is a WHO warning sign (reduced urine output); exact hours vary by source (4-6 hours).",
+    "'Dengue has spread in recent years' deliberately gives no year; the first large Afghan outbreak was reported from Nangarhar around 2022-2023 but the exact date was not verified.",
+    "Striped daytime mosquito (Aedes) breeding sites listed from the WHO fact sheet; coolers may be rare in Samangan villages.",
+    "Dari تب دنگی / Pashto ډینګي تبه: confirm the words used locally (some say 'دینگی')."
+  ]
+}

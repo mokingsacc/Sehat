@@ -1,0 +1,240 @@
+{
+  "id": "hospital-arrive",
+  "section": "everyone",
+  "title": {
+    "fa": "وقتی می‌رسید",
+    "ps": "کله چې ورسېږئ",
+    "en": "When you arrive"
+  },
+  "summary": {
+    "fa": "ثبت نام، چه کسی اول دیده می‌شود، و چطور بگویید که عاجل است",
+    "ps": "نوم لیکنه، څوک لومړی کتل کېږي، او څنګه ووایئ چې بیړنی دی",
+    "en": "Registration, who is seen first, and how to say it is urgent"
+  },
+  "image": "hospital-arrive",
+  "blocks": [
+    {
+      "id": "hospital-arrive.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در کلینیک و شفاخانه، کارمندان اول مریض‌ترین‌ها را می‌بینند. اگر بدانید کار چطور پیش می‌رود، انتظار آسان‌تر می‌شود.",
+        "ps": "په کلینیک او روغتون کې کارکوونکي لومړی تر ټولو ناروغ کسان ګوري. که پوه شئ چې کار څنګه کېږي، انتظار اسانه کېږي.",
+        "en": "At a clinic or hospital, staff see the sickest people first. Knowing how it works makes the wait easier."
+      }
+    },
+    {
+      "id": "hospital-arrive.register",
+      "type": "step",
+      "icon": "card",
+      "title": {
+        "fa": "اول، ثبت نام",
+        "ps": "لومړی، نوم لیکنه",
+        "en": "First, registration"
+      },
+      "text": {
+        "fa": "نام، عمر و قریهٔ مریض را بگویید، و کارت‌ها و معرفی‌نامه را نشان دهید. شاید به شما یک نمبر یا کارت بدهند.",
+        "ps": "د ناروغ نوم، عمر او کلی ووایاست، او کارتونه او معرفي لیک وښایئ. کېدای شي تاسو ته یوه نمبره یا کارت درکړي.",
+        "en": "Give the patient's name, age and village, and show your cards and referral letter. You may be given a number or a card."
+      }
+    },
+    {
+      "id": "hospital-arrive.triage",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "نرس می‌بیند که چه کسی مریض‌تر است",
+        "ps": "نرس ګوري چې څوک ډېر ناروغ دی",
+        "en": "A nurse checks who is sickest"
+      },
+      "text": {
+        "fa": "نرس یا داکتر به زودی نفس، تب و علایم دیگر را معاینه می‌کند، تا مریض‌ترین‌ها اول دیده شوند.",
+        "ps": "نرس یا ډاکټر ژر ساه، تبه او نورې نښې ګوري، څو تر ټولو ناروغ کسان لومړی وکتل شي.",
+        "en": "A nurse or doctor quickly checks breathing, temperature and other signs, so that the sickest can be seen first."
+      },
+      "picture": "hosp-triage"
+    },
+    {
+      "id": "hospital-arrive.waiting",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "انتظار به معنای بی‌توجهی نیست",
+        "ps": "انتظار د بې‌پروايۍ مانا نه لري",
+        "en": "Waiting is not being ignored"
+      },
+      "text": {
+        "fa": "اگر دیگران پیش از شما می‌روند، شاید مریض‌تر باشند. نوبت شما هم می‌رسد. مریض را گرم نگه دارید، و اگر منع نکرده‌اند، کم کم آب بدهید.",
+        "ps": "که نور له تاسو مخکې ځي، کېدای شي ډېر ناروغ وي. ستاسو نوبت هم راځي. ناروغ ګرم وساتئ، او که منع شوي نه وي، ورو ورو اوبه ورکړئ.",
+        "en": "If others go before you, they may be sicker. Your turn will come. Keep the sick person warm, and give sips of drink unless told not to."
+      }
+    },
+    {
+      "id": "hospital-arrive.worse",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "بدتر شد؟ فوراً بگویید",
+        "ps": "بدتر شو؟ سمدستي ووایاست",
+        "en": "Getting worse? Say so at once"
+      },
+      "text": {
+        "fa": "آرام منتظر نمانید. نزد نرس بروید و علامت خطر را بلند بگویید، مثلاً: «طفلم تشنج کرد.»",
+        "ps": "چوپ انتظار مه کوئ. نرس ته ورشئ او د خطر نښه په لوړ غږ ووایاست، د بېلګې په توګه: «زما ماشوم اختلاج وکړ.»",
+        "en": "Do not wait quietly. Go to the nurse and say the danger sign out loud, for example: 'My child has had a fit.'"
+      }
+    },
+    {
+      "id": "hospital-arrive.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر مریض یکی از این حالت‌ها را دارد، فوراً و با صدای بلند به کارمندان بگویید:",
+        "ps": "که ناروغ له دې حالتونو څخه یو ولري، سمدستي او په لوړ غږ کارکوونکو ته ووایاست:",
+        "en": "Tell the staff at once, out loud, if the sick person:"
+      },
+      "items": [
+        {
+          "id": "hospital-arrive.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "به سختی نفس می‌کشد، یا کبود می‌شود",
+            "ps": "په سختۍ ساه اخلي، یا شین کېږي",
+            "en": "struggles to breathe, or turns blue"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.fit",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج می‌کند",
+            "ps": "اختلاج کوي",
+            "en": "has a fit"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است، یا بیدار نمی‌شود",
+            "ps": "ډېر خوب وړي، یا نه راویښېږي",
+            "en": "is very sleepy, or cannot be woken"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون زیاد از او می‌رود",
+            "ps": "ډېره وینه ترې بهېږي",
+            "en": "is bleeding a lot"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "چیزی نوشیده نمی‌تواند، یا شیر خورده نمی‌تواند",
+            "ps": "څه نشي څښلای، یا تی نشي رودلای",
+            "en": "cannot drink or breastfeed"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله است، و خونریزی، سردرد شدید یا درد شکم دارد",
+            "ps": "امیندواره ده، او وینه بهېدل، سخت سر درد یا د نس درد لري",
+            "en": "is pregnant, with bleeding, a bad headache or belly pain"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.chest",
+          "icon": "heart",
+          "text": {
+            "fa": "درد سینه دارد، یا رویش کج شده یا بازویش ضعیف است",
+            "ps": "د سینې درد لري، یا مخ یې کوږ شوی یا لاس یې کمزوری دی",
+            "en": "has chest pain, a drooping face or a weak arm"
+          }
+        }
+      ]
+    },
+    {
+      "id": "hospital-arrive.questions",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "با احترام و واضح سوال کنید",
+        "ps": "په درناوي او روښانه پوښتنه وکړئ",
+        "en": "Ask questions, kindly and clearly"
+      },
+      "text": {
+        "fa": "می‌توانید بپرسید: مریضی چیست، چه می‌کنید، و ما در خانه چه کنیم؟ اگر نفهمیدید، دوباره بپرسید.",
+        "ps": "پوښتلی شئ: ناروغي څه ده، تاسو به څه کوئ، او موږ په کور کې څه وکړو؟ که پوه نه شوئ، بیا وپوښتئ.",
+        "en": "You can ask: what is the illness, what will you do, and what should we do at home? If you do not understand, ask again."
+      }
+    },
+    {
+      "id": "hospital-arrive.women",
+      "type": "step",
+      "icon": "midwife",
+      "title": {
+        "fa": "زنان می‌توانند کارمند زن بخواهند",
+        "ps": "ښځې کولی شي ښځینه کارکوونکې وغواړي",
+        "en": "Women can ask for a woman"
+      },
+      "text": {
+        "fa": "زن می‌تواند، اگر باشد، داکتر، نرس یا قابلهٔ زن بخواهد. در حالت عاجل، بگذارید اولین کارمند صحی کمک کند: منتظر نمانید.",
+        "ps": "ښځه کولی شي، که وي، ښځینه ډاکټره، نرسه یا قابله وغواړي. په بیړني حالت کې پرېږدئ چې لومړنی روغتیايي کارکوونکی مرسته وکړي: انتظار مه کوئ.",
+        "en": "A woman can ask for a woman doctor, nurse or midwife, where there is one. In an emergency, let the first health worker help: do not wait."
+      }
+    },
+    {
+      "id": "hospital-arrive.child-signs",
+      "type": "link",
+      "to": "topic/danger-child",
+      "icon": "warning",
+      "title": {
+        "fa": "علایم خطر در اطفال",
+        "ps": "په ماشومانو کې د خطر نښې",
+        "en": "Danger signs in children"
+      },
+      "text": {
+        "fa": "علایمی را یاد بگیرید که باید بلند بگویید، تا کارمندان بدانند طفل اول کمک لازم دارد.",
+        "ps": "هغه نښې زده کړئ چې باید په لوړ غږ یې ووایئ، څو کارکوونکي پوه شي چې ماشوم ته لومړی مرسته پکار ده.",
+        "en": "Learn the signs to say out loud, so the staff know a child needs help first."
+      }
+    },
+    {
+      "id": "hospital-arrive.adult-signs",
+      "type": "link",
+      "to": "topic/red-flags",
+      "icon": "heart",
+      "title": {
+        "fa": "علایم خطر در بزرگسالان",
+        "ps": "په لویانو کې د خطر نښې",
+        "en": "Danger signs in adults"
+      },
+      "text": {
+        "fa": "درد سینه، علایم سکته، خونریزی زیاد و غیره: علایمی که اول کمک لازم دارد.",
+        "ps": "د سینې درد، د سکتې نښې، ډېره وینه بهېدنه او نور: هغه نښې چې لومړی مرسته غواړي.",
+        "en": "Chest pain, stroke signs, heavy bleeding and more: the signs that need help first."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Emergency Triage Assessment and Treatment (ETAT) manual for participants (2005) and WHO/ICRC Basic Emergency Care (2018): triage, the sickest are seen first",
+    "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
+    "WHO Patients for Patient Safety: 'Speak up' and WHO Global Patient Safety Action Plan 2021-2030 (patients and families asking questions)",
+    "WHO PCPNC (2015) sheet B2 / Quick check: women with danger signs are seen first",
+    "UK Home Office CPIN Afghanistan (Oct 2025): male doctors may treat women in emergencies (via research/moph-guidance.md section 5)"
+  ],
+  "review": [
+    "The red box title is not the glossary wording ('go to hospital now') because the family is already at the clinic or hospital: 'Tell the staff at once, out loud'. Its items repeat the ETAT emergency signs (airway/breathing, convulsions, coma, shock/bleeding), the IMCI general danger signs and the pregnancy and adult red flags.",
+    "'Triage' is not used in Dari or Pashto (no everyday word); it is described instead.",
+    "'Give sips of drink unless told not to': a child who may need an operation or is very drowsy should not drink; 'unless told not to' covers this. Breastfed babies should keep breastfeeding; not said here for length.",
+    "Women step: 'A woman can ask for a woman doctor, nurse or midwife, where there is one. In an emergency, let the first health worker help: do not wait.' Under current rules male doctors may treat women in emergencies (CPIN Oct 2025). Please check this is acceptable locally and the wording is respectful.",
+    "Questions step is based on WHO patient-safety 'speak up' advice; worded as 'You can ask' so it does not sound like a challenge to staff.",
+    "Registration may cost a fee at some facilities (user charges); not mentioned.",
+    "Icons: triage uses 'people' (a 'nurse with clipboard' icon would be better)."
+  ]
+}

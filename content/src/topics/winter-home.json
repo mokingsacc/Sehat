@@ -113,61 +113,37 @@
       }
     },
     {
-      "id": "winter-home.urgent",
-      "type": "alert",
-      "level": "urgent",
+      "id": "winter-home.fumes",
+      "type": "link",
+      "to": "topic/fumes-poisoning",
+      "icon": "headache",
       "title": {
-        "fa": "همه را به هوای آزاد ببرید و همین حالا به شفاخانه بروید، شب باشد یا روز، اگر:",
-        "ps": "ټول خلاصې هوا ته وباسئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که چېرې:",
-        "en": "Get everyone into fresh air and go to hospital now, day or night, if:"
+        "fa": "کنار آتش سردردی دارید یا خواب‌آلود هستید؟",
+        "ps": "اور ته نږدې سر درد لرئ یا خوب درځي؟",
+        "en": "Headache or sleepy by the fire?"
       },
-      "items": [
-        {
-          "id": "winter-home.urgent.headache",
-          "icon": "headache",
-          "text": {
-            "fa": "کسی در اتاق گرم سردردی، سرچرخی یا استفراغ دارد",
-            "ps": "څوک په ګرمه کوټه کې سر درد، سرګرځېدل یا کانګې لري",
-            "en": "someone in a heated room has headache, dizziness or vomiting"
-          }
-        },
-        {
-          "id": "winter-home.urgent.sleepy",
-          "icon": "sleepy",
-          "text": {
-            "fa": "کسی خیلی خواب‌آلود یا گیج است یا به سختی بیدار می‌شود",
-            "ps": "څوک ډېر خوب وړی یا ګډوډ دی یا په سختۍ ویښېږي",
-            "en": "someone is very sleepy, confused or hard to wake"
-          }
-        },
-        {
-          "id": "winter-home.urgent.faint",
-          "icon": "convulsion",
-          "text": {
-            "fa": "کسی بیهوش می‌شود یا تشنج می‌کند",
-            "ps": "څوک بې هوښه کېږي یا اختلاج کوي",
-            "en": "someone faints or has fits"
-          }
-        },
-        {
-          "id": "winter-home.urgent.family",
-          "icon": "family",
-          "text": {
-            "fa": "چند نفر خانواده هم‌زمان مریض می‌شوند",
-            "ps": "د کورنۍ څو کسان په یو وخت ناروغه کېږي",
-            "en": "several family members feel ill at the same time"
-          }
-        },
-        {
-          "id": "winter-home.urgent.breathing",
-          "icon": "breathing-fast",
-          "text": {
-            "fa": "طفل تند یا به سختی نفس می‌کشد",
-            "ps": "ماشوم چټک یا په سختۍ سا اخلي",
-            "en": "a child breathes fast or with difficulty"
-          }
-        }
-      ]
+      "text": {
+        "fa": "همه را فوراً به هوای تازه ببرید. بعد این صفحه را باز کنید: همین حالا چه کنید، قدم به قدم.",
+        "ps": "ټول سمدستي تازه هوا ته وباسئ. بیا دا پاڼه پرانیزئ: همدا اوس څه وکړئ، ګام په ګام.",
+        "en": "Take everyone into fresh air at once. Then open this page: what to do now, step by step."
+      },
+      "urgent": true
+    },
+    {
+      "id": "winter-home.cough",
+      "type": "link",
+      "to": "topic/cough",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "طفل سرفه می‌کند یا تند نفس می‌کشد؟",
+        "ps": "ماشوم ټوخی کوي یا چټکه ساه اخلي؟",
+        "en": "Child coughing or breathing fast?"
+      },
+      "text": {
+        "fa": "دود می‌تواند سینه‌بغل بیاورد. صفحهٔ سرفه را باز کنید تا نفس‌ها را بشمارید و ببینید چه وقت بروید.",
+        "ps": "لوګی سینه بغل راوستلای شي. د ټوخي پاڼه پرانیزئ چې ساه وشمېرئ او وګورئ کله ولاړ شئ.",
+        "en": "Smoke can lead to pneumonia. Open the cough page to count the breaths and see when to go."
+      }
     },
     {
       "id": "winter-home.dont",
@@ -215,16 +191,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "winter-home.first-aid",
-      "type": "tip",
-      "icon": "card",
-      "text": {
-        "fa": "برای کمک‌های اولیه در مسمومیت با گاز ذغال، صفحهٔ کمک‌های اولیه را ببینید.",
-        "ps": "د سکرو د ګاز د زهرجنېدو لپاره، د لومړنیو مرستو پاڼه وګورئ.",
-        "en": "For help after coal or stove fume poisoning, see the First aid page."
-      }
     }
   ],
   "sources": [
@@ -232,12 +198,19 @@
     "WHO guidelines for indoor air quality: household fuel combustion (2014)",
     "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses; injury prevention",
     "IFRC International first aid, resuscitation and education guidelines (2020): carbon monoxide",
-    "Burden: WHO Afghanistan outbreak sitrep week 48 2025 (Samangan highest ARI-pneumonia incidence, 717.3/10,000); MoPH CO poisoning figures via KabulNow 11 Jan 2025; GBD 2019 air pollution in Afghanistan (IJERPH 2024)"
+    "Burden: WHO Afghanistan outbreak sitrep week 48 2025 (Samangan highest ARI-pneumonia incidence, 717.3/10,000); MoPH CO poisoning figures via KabulNow 11 Jan 2025; GBD 2019 air pollution in Afghanistan (IJERPH 2024)",
+    "WHO guidelines for indoor air quality: selected pollutants (2010), carbon monoxide; standard emergency management of carbon monoxide poisoning (high-flow oxygen)",
+    "Burden: Afghan media and MoPH reports, winter 2024-25: about 24 deaths and 900 people treated for stove gas poisoning (see research report)"
   ],
   "review": [
     "The sandali advice (take the coals out from under it before sleep, never sleep with the head under it) is general carbon monoxide safety, not WHO wording. Check it is acceptable when families depend on the sandali through the night.",
     "Leaving a window slightly open in severe cold has to be balanced against keeping babies warm. Check the wording is right for Samangan winters.",
-    "The urgent signs of CO poisoning are adapted from first-aid sources, not a WHO caregiver chart. The 'sleep' step repeats the message of first-aid.fumes on purpose (the main killer); the 'children' and 'tobacco' steps overlap cough.smoke. Trim if the repetition is unwanted.",
-    "Pashto for sandali written 'صندلۍ'; confirm the local form."
+    "Pashto for sandali written 'صندلۍ'; confirm the local form.",
+    "Home safety section (2026-10-07): the carbon monoxide urgent box (winter-home.urgent) moved to home-safety, so the signs are in one place all year; this page links there (winter-home.fumes) and says 'fresh air, then hospital now'. winter-home.urgent.breathing (a child breathes fast) is replaced by a link to the cough page, which uses the IMCI rules agreed at the integration merge. The 'see the First aid page' tip is replaced by the same link.",
+    "The 'sleep' step repeats first-aid.fumes on purpose (the main killer); the 'children' and 'tobacco' steps overlap cough.smoke. Trim if the repetition is unwanted.",
+    "Hyperbaric oxygen is not available in the region; only normal oxygen is mentioned.",
+    "'Pregnant women and children are checked first' reflects their higher risk; wording should not suggest others can wait.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: winter-home.hospital. Urgent signs are reached through the red link to the Health side.",
+    "Home tab rule (Mo): the link 'Headache or sleepy by the fire?' is now a red link to the Health page fumes-poisoning, and no longer says 'go to hospital now' itself."
   ]
 }

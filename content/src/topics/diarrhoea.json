@@ -23,6 +23,16 @@
       }
     },
     {
+      "id": "diarrhoea.anim-ors",
+      "type": "anim",
+      "anim": "ors"
+    },
+    {
+      "id": "diarrhoea.anim-water",
+      "type": "anim",
+      "anim": "water"
+    },
+    {
       "id": "diarrhoea.mix",
       "type": "step",
       "icon": "ors",
@@ -95,6 +105,34 @@
         "fa": "بعد از تشناب و پیش از غذا، دست‌ها را با صابون بشویید. آب پاک یا جوش‌داده بنوشید و واکسین روتا ویروس را بگیرید.",
         "ps": "له تشناب وروسته او له خوړو مخکې لاسونه په صابون ووینځئ. پاکې یا ایشول شوې اوبه وڅښئ، او د روټا ویروس واکسین وکړئ.",
         "en": "Wash hands with soap after the toilet and before food. Drink clean or boiled water, and get the rotavirus vaccine."
+      }
+    },
+    {
+      "id": "diarrhoea.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: او آر اس، زنک و معاینه",
+        "ps": "په کلینیک کې: او آر اس، زنک او معاینه",
+        "en": "At the clinic: ORS, zinc, a check"
+      },
+      "text": {
+        "fa": "کارمند صحی می‌بیند طفل چقدر خشک شده، او آر اس و زنک را رایگان می‌دهد و طرز دادنش را نشان می‌دهد. انتی‌بیوتیک فقط برای خون در مدفوع یا کولرا است.",
+        "ps": "روغتیايي کارکوونکی ګوري چې ماشوم څومره وچ شوی، او آر اس او زنک وړیا ورکوي او د ورکولو لار یې ښيي. انټي بیوټیک یوازې د ډکو کې وینې یا کولرا لپاره دی.",
+        "en": "The health worker checks how dry the child is, gives ORS and zinc free, and shows how to give them. Antibiotics are only for blood in the stool or cholera."
+      }
+    },
+    {
+      "id": "diarrhoea.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: مایعات از راه رگ",
+        "ps": "په روغتون کې: د رګ له لارې مایعات",
+        "en": "At the hospital: fluids by drip"
+      },
+      "text": {
+        "fa": "طفلی که نمی‌تواند بنوشد یا بسیار خشک شده، به تیزی سیروم یا مایعات از راه نل بینی می‌گیرد. بعد دوباره او آر اس و زنک. اکثر اطفال در ظرف یک روز بهتر می‌شوند.",
+        "ps": "هغه ماشوم چې نه شي څښلای یا ډېر وچ شوی، ژر سیروم یا د پوزې د نل له لارې مایعات اخلي. بیا بېرته او آر اس او زنک. ډېری ماشومان په یوه ورځ کې ښه کېږي.",
+        "en": "A child who cannot drink or is very dry gets fluids by drip or through a tube in the nose. Then ORS and zinc again. Most children are better within a day."
       }
     },
     {
@@ -256,7 +294,9 @@
     "WHO Pocket Book of Hospital Care for Children (2013): Chart 15, Plan A",
     "WHO/UNICEF Facts for Life (2010): diarrhoea; hygiene",
     "WHO/UNICEF joint statement: clinical management of acute diarrhoea (2004)",
-    "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet"
+    "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet",
+    "WHO IMCI Chart Booklet (2014): Plan B (ORS at the clinic) and Plan C (intravenous or nasogastric rehydration); zinc; antibiotics only for dysentery and suspected cholera",
+    "Afghanistan BPHS (2010): ORS and zinc at Health Post level; intravenous fluids at CHC and hospitals"
   ],
   "review": [
     "Sunken eyes and slow skin pinch are in the urgent (hospital now) alert as requested. In IMCI, either sign with restlessness or eager drinking is 'some dehydration' (Plan B at the clinic); with lethargy, poor drinking or a very slow pinch it is severe. Consider moving sunken eyes to the soon alert.",
@@ -264,6 +304,9 @@
     "No home-made sugar-salt recipe is given; the app relies on ORS packets. Consider whether families can get packets in Samangan or whether a fallback recipe is needed (WHO 2005 manual not verified).",
     "How families measure one litre locally (for example a 1 litre bottle) is not explained; consider adding a picture.",
     "ORS volumes and zinc doses are WHO caregiver numbers: ORS 50 to 100 ml under 2 years, 100 to 200 ml from 2 years; zinc 10 mg a day under 6 months, 20 mg from 6 months, 10 to 14 days.",
-    "Dari 'آب جوش‌داده' and Pashto 'ایشول شوې اوبه' mean boiled water; the English says 'clean or boiled water' (boiled and cooled is implied)."
+    "Dari 'آب جوش‌داده' and Pashto 'ایشول شوې اوبه' mean boiled water; the English says 'clean or boiled water' (boiled and cooled is implied).",
+    "'ORS and zinc free': both are in the BPHS Health Post kit; confirm CHW supply in Samangan in 2026.",
+    "The children's ciprofloxacin for dysentery is not named here (it is named in the adult diarrhoea topic); keep consistent if Mo wants names.",
+    "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
   ]
 }

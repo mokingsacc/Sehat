@@ -1,0 +1,308 @@
+{
+  "id": "malaria",
+  "section": "everyone",
+  "title": {
+    "fa": "ملاریا",
+    "ps": "ملاریا",
+    "en": "Malaria"
+  },
+  "summary": {
+    "fa": "تب با لرزه؟ امروز در کلینیک معاینهٔ رایگان ملاریا بگیرید.",
+    "ps": "تبه له لړزې سره؟ نن په کلینیک کې د ملاریا وړیا معاینه وکړئ.",
+    "en": "Fever with shivering? Get a free malaria test today."
+  },
+  "image": "malaria",
+  "blocks": [
+    {
+      "id": "malaria.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ملاریا از گزیدن پشه‌ای می‌آید که شب می‌گزد، بیشتر در ماه‌های گرم و در شرق و جنوب کشور. تب با لرزه و عرق می‌دهد. یک معاینهٔ تیز خون آن را نشان می‌دهد و دوا آن را علاج می‌کند.",
+        "ps": "ملاریا د هغه ماشي له چیچلو څخه راځي چې د شپې چیچي، ډېری په تودو میاشتو کې او د هېواد په ختیځ او سویل کې. تبه له لړزې او خولو سره پیدا کوي. د وینې یوه چټکه معاینه یې ښيي او درمل یې علاجوي.",
+        "en": "Malaria comes from the bite of a mosquito that bites at night, mostly in the warm months and in the east and south of the country. It causes fever with shivering and sweats. A quick blood test shows it and medicine cures it."
+      }
+    },
+    {
+      "id": "malaria.test",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "تب؟ معاینه شوید",
+        "ps": "تبه؟ معاینه وکړئ",
+        "en": "Fever? Get the test"
+      },
+      "text": {
+        "fa": "هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه می‌گیرد و رایگان است.",
+        "ps": "په تودو میاشتو کې هره تبه، یا ختیځ یا سویل ته له سفر وروسته، په همغه ورځ د ملاریا د وینې معاینې ته اړتیا لري. معاینه ۱۵ دقیقې نیسي او وړیا ده.",
+        "en": "Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes and is free."
+      }
+    },
+    {
+      "id": "malaria.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "تمام دوا را تمام کنید",
+        "ps": "ټول درمل بشپړ کړئ",
+        "en": "Finish all the medicine"
+      },
+      "text": {
+        "fa": "دوای ملاریا را دقیقاً همان طور که کارمند صحی گفته بخورید، تا تمام شود، حتی وقتی تب رفته. قطع زود باعث برگشتن مریضی می‌شود.",
+        "ps": "د ملاریا درمل په بشپړ ډول هغسې وخورئ لکه روغتیايي کارکوونکي چې ویلي، تر هغه چې خلاص شي، حتی کله چې تبه تللې وي. وخته پرېښودل ناروغي بېرته راولي.",
+        "en": "Take the malaria medicine exactly as the health worker says, until it is finished, even when the fever has gone. Stopping early lets the illness come back."
+      }
+    },
+    {
+      "id": "malaria.net",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "زیر پشه‌خانه بخوابید",
+        "ps": "د ماشي تر جالۍ لاندې ویده شئ",
+        "en": "Sleep under a bed net"
+      },
+      "text": {
+        "fa": "همه، مخصوصاً اطفال و خانم‌های حامله، در ماه‌های گرم هر شب زیر پشه‌خانهٔ دواپاشی‌شده بخوابند. آن را زیر توشک کنید؛ سوراخ‌ها را دوخته کنید.",
+        "ps": "ټول، په تېره بیا ماشومان او امیندوارې ښځې، په تودو میاشتو کې هره شپه د درمل شوې جالۍ لاندې ویده شي. تر توشک لاندې یې کړئ؛ سوري یې وګنډئ.",
+        "en": "Everyone, especially children and pregnant women, should sleep under a treated bed net every night in the warm months. Tuck it in; repair holes."
+      }
+    },
+    {
+      "id": "malaria.home",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "پشه‌های کمتر در اطراف خانه",
+        "ps": "د کور شاوخوا لږ ماشان",
+        "en": "Fewer mosquitoes around the home"
+      },
+      "text": {
+        "fa": "پشه در آب ایستاده تخم می‌گذارد. قطی‌ها و تایرها را خالی کنید، ظرف‌های آب را بپوشانید و آبخور حیوانات را پاک نگه دارید. شام دست و پا را بپوشانید.",
+        "ps": "ماشي په ولاړو اوبو کې هګۍ اچوي. قطۍ او ټایرونه تش کړئ، د اوبو لوښي وپوښئ، او د څارویو د اوبو ځایونه پاک وساتئ. ماښام لاس او پښې وپوښئ.",
+        "en": "Mosquitoes breed in still water. Empty tins and tyres, cover water pots, and keep animals' water troughs clean. Cover arms and legs in the evening."
+      }
+    },
+    {
+      "id": "malaria.pregnant",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "خانم‌های حامله و اطفال کوچک",
+        "ps": "امیندوارې ښځې او کوچني ماشومان",
+        "en": "Pregnant women and small children"
+      },
+      "text": {
+        "fa": "ملاریا در حاملگی و در اطفال کوچک خطرناک‌تر است. خانم حامله‌ای که تب دارد باید همان روز معاینه شود و زیر پشه‌خانه بخوابد.",
+        "ps": "ملاریا په امیندوارۍ او په کوچنیو ماشومانو کې ډېره خطرناکه ده. هغه امیندواره ښځه چې تبه لري باید په همغه ورځ معاینه شي او د جالۍ لاندې ویده شي.",
+        "en": "Malaria is more dangerous in pregnancy and in small children. A pregnant woman with fever must be tested the same day, and should sleep under a net."
+      }
+    },
+    {
+      "id": "malaria.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ تیز و تابلیت",
+        "ps": "په کلینیک کې: چټکه معاینه او ګولۍ",
+        "en": "At the clinic: rapid test and tablets"
+      },
+      "text": {
+        "fa": "یک قطره خون از انگشت روی نوار معاینه می‌رود. اگر مثبت باشد، کارمند صحی تابلیت ملاریا (کلوروکین برای نوع عام، به اضافهٔ یک دوای دیگر) رایگان می‌دهد. همه را تمام کنید.",
+        "ps": "د ګوتې د وینې یو څاڅکی د معاینې پر پټۍ اچول کېږي. که مثبت وي، روغتیايي کارکوونکی د ملاریا ګولۍ (د عام ډول لپاره کلوروکین، له یو بل درمل سره) وړیا ورکوي. ټولې یې بشپړې کړئ.",
+        "en": "A drop of blood from the finger goes on a test strip. If positive, the health worker gives malaria tablets (chloroquine for the common type, plus another medicine) free. Finish them all."
+      }
+    },
+    {
+      "id": "malaria.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: ملاریای شدید، پیچکاری",
+        "ps": "په روغتون کې: سخته ملاریا، پیچکاري",
+        "en": "At the hospital: severe malaria, injections"
+      },
+      "text": {
+        "fa": "کسی که بسیار خواب‌آلود است، تشنج می‌کند، تیز نفس می‌کشد، زرد یا بسیار ضعیف است، ملاریای شدید دارد. شفاخانه دوای ملاریا را با پیچکاری یا سیروم (آرتیسونات)، مایعات و گاهی خون می‌دهد.",
+        "ps": "هغه څوک چې ډېر خوبولی وي، اختلاج کوي، چټکه ساه اخلي، ژېړ یا ډېر کمزوری وي، سخته ملاریا لري. روغتون د ملاریا درمل په پیچکارۍ یا سیروم (آرټیسونېټ)، مایعات او کله کله وینه ورکوي.",
+        "en": "A person who is very drowsy, fitting, breathing fast, yellow or very weak has severe malaria. The hospital gives malaria medicine by injection or drip (artesunate), fluids, and sometimes blood."
+      }
+    },
+    {
+      "id": "malaria.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "malaria.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "تب و بسیار خواب‌آلود، گیج یا بی‌هوش",
+            "ps": "تبه او ډېر خوبولی، ګډوډ یا بې هوښه",
+            "en": "fever and very sleepy, confused or unconscious"
+          }
+        },
+        {
+          "id": "malaria.urgent.fits",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تب با تشنج",
+            "ps": "تبه له اختلاج سره",
+            "en": "fever with fits (convulsions)"
+          }
+        },
+        {
+          "id": "malaria.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "تب و نمی‌تواند بنوشد، یا همه چیز را استفراغ می‌کند",
+            "ps": "تبه او نه شي څښلای، یا هر څه کانګې کوي",
+            "en": "fever and cannot drink, or vomits everything"
+          }
+        },
+        {
+          "id": "malaria.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تب با نفس تیز یا مشکل",
+            "ps": "تبه له چټکې یا سختې ساه سره",
+            "en": "fever with fast or difficult breathing"
+          }
+        },
+        {
+          "id": "malaria.urgent.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "تب با چشم‌های زرد یا ادرار تیره",
+            "ps": "تبه له ژېړو سترګو یا تیارو متیازو سره",
+            "en": "fever with yellow eyes or dark urine"
+          }
+        },
+        {
+          "id": "malaria.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "خانم حامله با تب بلند",
+            "ps": "امیندواره ښځه له لوړې تبې سره",
+            "en": "a pregnant woman with high fever"
+          }
+        }
+      ]
+    },
+    {
+      "id": "malaria.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "malaria.soon.shiver",
+          "icon": "fever",
+          "text": {
+            "fa": "تب با لرزه، عرق یا سردرد",
+            "ps": "تبه له لړزې، خولو یا سردرد سره",
+            "en": "fever with shivering, sweats or headache"
+          }
+        },
+        {
+          "id": "malaria.soon.travel",
+          "icon": "calendar",
+          "text": {
+            "fa": "تب در ظرف یک ماه بعد از سفر به شرق یا جنوب",
+            "ps": "ختیځ یا سویل ته له سفر وروسته په یوه میاشت کې تبه",
+            "en": "fever within a month of travel to the east or south"
+          }
+        },
+        {
+          "id": "malaria.soon.returns",
+          "icon": "clock",
+          "text": {
+            "fa": "تبی که هر یک یا دو روز برمی‌گردد",
+            "ps": "هغه تبه چې هره یوه یا دوه ورځې بېرته راځي",
+            "en": "fever that keeps coming back every day or two"
+          }
+        },
+        {
+          "id": "malaria.soon.child",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل با تب بیش از ۲ روز",
+            "ps": "ماشوم له ۲ ورځو زیاتې تبې سره",
+            "en": "a child with fever for more than 2 days"
+          }
+        }
+      ]
+    },
+    {
+      "id": "malaria.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "malaria.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "بدون معاینه از دکان تابلیت ملاریا نخرید؛ دوای غلط وقت را ضایع می‌کند.",
+            "ps": "له معاینې پرته له دوکان څخه د ملاریا ګولۍ مه اخلئ؛ غلط درمل وخت ضایع کوي.",
+            "en": "Do not buy malaria tablets from a shop without a test."
+          }
+        },
+        {
+          "id": "malaria.dont.stop",
+          "icon": "no",
+          "text": {
+            "fa": "وقتی تب رفت تابلیت‌ها را قطع نکنید.",
+            "ps": "کله چې تبه ولاړه شي ګولۍ مه پرېږدئ.",
+            "en": "Do not stop the tablets when the fever goes."
+          }
+        },
+        {
+          "id": "malaria.dont.share",
+          "icon": "syringe",
+          "text": {
+            "fa": "تابلیت‌های باقی‌مانده را به کسان دیگری که تب دارند ندهید.",
+            "ps": "پاتې ګولۍ نورو تبه لرونکو ته مه ورکوئ.",
+            "en": "Do not share unfinished tablets with others who have fever."
+          }
+        }
+      ]
+    },
+    {
+      "id": "malaria.samangan",
+      "type": "tip",
+      "icon": "window",
+      "text": {
+        "fa": "در سمنگان ملاریا کم است. اکثر واقعات در کسانی است که در شرق یا جنوب کار کرده یا سفر کرده‌اند؛ به کارمند صحی بگویید کجا بوده‌اید.",
+        "ps": "په سمنګان کې ملاریا لږه ده. ډېری پېښې په هغو کسانو کې دي چې په ختیځ یا سویل کې یې کار کړی یا سفر کړی؛ روغتیايي کارکوونکي ته ووایاست چې چېرته وئ.",
+        "en": "In Samangan malaria is uncommon. Most cases are in people who worked or travelled in the east or south; tell the health worker where you have been."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Malaria (4 Dec 2025): transmission, symptoms, test before treatment, severe malaria signs, bed nets, risk in pregnancy and children",
+    "WHO Guidelines for malaria (2025 edition): parasitological confirmation by rapid test or microscopy; chloroquine plus primaquine for P. vivax where chloroquine still works; injectable artesunate for severe malaria; insecticide-treated nets",
+    "WHO Afghanistan Infectious Disease Outbreaks Situation Report, week 48 2025: 77,303 confirmed cases in 2025, highest incidence in Nuristan, Kunar, Laghman and Nangarhar; MoPH NDSR week 33 2026: 38,553 cases in 2026 to date, rising since week 9",
+    "WHO EMRO Afghanistan malaria programme pages (2026): about 95 percent of cases are P. vivax; transmission concentrated in the east and south-east, low in the north",
+    "Afghanistan BPHS (2010) and IPEHS (2019): rapid diagnostic tests from community to CHC level; chloroquine and sulfadoxine-pyrimethamine at Health Post, quinine injection at CHC, artesunate and primaquine at district hospital and above; Afghanistan National Essential Medicines List (2014)",
+    "Leslie T et al., G6PD deficiency in Afghanistan (PLoS Med 2010 and later): about 14 percent of Pashtun men, so primaquine needs care"
+  ],
+  "review": [
+    "Chloroquine named as the common-type (P. vivax) medicine with 'another medicine' (primaquine, 14 days) following WHO 2025 and Afghanistan's national policy; Mo should confirm the current national malaria treatment guideline (chloroquine resistance, primaquine and G6PD testing) and whether naming is wanted.",
+    "P. falciparum is treated with an artemisinin combination (artemether-lumefantrine); it is not named to keep the block short. Artemether-lumefantrine was not on the 2014 EML list that was read.",
+    "'In Samangan malaria is uncommon' is based on WHO EMRO stratification (north = low transmission) and provincial surveillance data; check the latest Samangan case counts (NDSR) before publishing.",
+    "'Any fever in the warm months needs a test' is WHO's rule for endemic areas; for Samangan Mo may prefer 'fever after travel' only.",
+    "Rapid test 'free': under BPHS/EPHS. Confirm RDT stock at Samangan BHCs.",
+    "Severe malaria block names artesunate (district hospital level per IPEHS); if Mo prefers, say 'malaria medicine by injection'.",
+    "Pashto 'د ماشي جالۍ' for bed net (Dari پشه‌خانه) to be checked by a native speaker."
+  ]
+}

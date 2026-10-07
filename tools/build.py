@@ -54,13 +54,17 @@ def icon(name):
     return name if exists(f"img/icons/{name}.svg") else "_dot"
 
 # sections: configured order first, then any extra topics by their own "section" field.
-# "kit" (the home health kit screen) lists its own topics; they are not added again to children / adults.
+# The lists with their own page (config.lists: kit, safety, hospital, food) list their own topics; a topic in one of them is
+# not added automatically to the children / adults lists (it shows there only when sections.json lists it there too).
 sections = {}
 for sec, ids in sections_cfg.items():
+    if sec.startswith("_"): continue
     sections[sec] = [i for i in ids if i in topics or (i == "vaccines" and vaccines)]
+page_lists = set(config.get("lists") or {}) | {"kit"}
+in_page_list = {tid for sec in page_lists for tid in sections.get(sec, [])}
 for tid, t in topics.items():
     sec = t.get("section")
-    if tid in sections.get("kit", []): continue
+    if tid in in_page_list: continue
     if sec in sections and tid not in sections[sec]:
         sections[sec].append(tid)
         print("auto-added", tid, "to", sec)
@@ -88,7 +92,9 @@ for tid, t in topics.items():
         if b.get("icon"): b["icon"] = icon(b["icon"])
         ty = b["type"]
         if b.get("picture"): b["picture"] = f"img/pics/{b['picture']}.svg"
-        if ty in ("step", "link"):
+        if ty == "clinic" and not b.get("icon"):  # what the clinic or the hospital does: a building icon
+            b["icon"] = icon("hospital" if b["title"]["en"].lower().startswith("at the hospital") else "clinic")
+        if ty in ("step", "link", "clinic"):
             say(b["id"], {lg: (b["title"][lg].rstrip(".:،") + ". " + b["text"][lg]) for lg in LANGS})
         elif ty in ("lead", "tip"):
             say(b["id"], b["text"])
@@ -197,7 +203,7 @@ order, owner = [], {}
 for k in ui["say"]: order.append(k)
 for k in narr:
     if k.startswith("ui.") and k not in order: order.append(k)
-for sec in ("children", "women", "everyone", "kit"):
+for sec in ("children", "women", "everyone", *sorted(page_lists)):
     for tid in sections.get(sec, []):
         ids = [k for k in narr if k == f"{tid}.title" or k.startswith(tid + ".")]
         t = out_topics.get(tid) or {}

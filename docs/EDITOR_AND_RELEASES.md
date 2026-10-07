@@ -64,3 +64,7 @@ There are a few extra rules:
 - `js/overlay.js` is shared by the app and the server (`server/worker.js` imports it, so a change there also redeploys the server). Keep it plain ES2018 for old phones.
 - A new kind of content outside these units (for example a new top-level book field that editors can change) needs a unit kind in `unitKeys`, `getUnit` and `setUnit`. Otherwise editor changes to it are not sent.
 - `tools/build.py` versions the book by a hash of its content, not by the build time (L10). Rebuilding the same content keeps the same `version` and `built`, so phones do not download an update that changes nothing, and `built` only moves forward when the release really changes.
+- The server keeps each book (draft, base, published, overlay) in the D1 table `content`. D1 holds at most 2 MB in one row, and the book is bigger than that since content merge 2 (about 2.2 MB). So `writeDoc` in `server/worker.js` splits a big book into pieces of at most 600,000 characters.
+  - The row `<name>` starts with `~pieces:<id>:<n>`, and the rows `<name>#<id>#1`, `#2` and so on hold the rest.
+  - The pieces are written before the row that points to them, under a new id each time. So nobody ever reads half a save. Pieces from older or refused saves are deleted afterwards.
+  - The whole book may be up to 8 MB. Always read a stored book with `getDoc` or `docBody`, never by selecting `body` directly.

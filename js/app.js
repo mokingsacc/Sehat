@@ -63,6 +63,7 @@ const I = {
   // people without faces (no eyes or features): a woman in a headscarf, a man in a pakol hat
   woman: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4.5c-6.4 0-10.5 4.8-10.5 10.8v4.2c0 2.2-1.2 3.6-3.5 5.2C8 33 7 38.5 6.5 44h35c-.5-5.5-1.5-11-4.5-19.3-2.3-1.6-3.5-3-3.5-5.2v-4.2c0-6-4.1-10.8-10.5-10.8z" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="24" cy="16" r="6.3" fill="currentColor"/></svg>',
   man: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 44c0-9.5 7.2-16 16-16s16 6.5 16 16z" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="24" cy="17.5" r="7.5" fill="currentColor"/><path d="M15 11c0-3.8 4-6.5 9-6.5s9 2.7 9 6.5v1.8H15z" fill="currentColor" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+  share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="currentColor"/><circle cx="6" cy="12" r="3" fill="currentColor"/><circle cx="18" cy="19" r="3" fill="currentColor"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>',
   plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
 };
 const ic = (name, cls = 'ic') => { const u = `url('img/icons/${esc(name || '_dot')}.svg')`; return `<span class="${cls}" style="-webkit-mask-image:${u};mask-image:${u}" aria-hidden="true"></span>`; };
@@ -329,12 +330,22 @@ function dialog(html, onMount) {
 
 /* ---------- layout pieces ---------- */
 function listenBar(ids) { S.queueIds = ids; return `<button class="listen" data-action="listen"><span class="pp">${I.play}</span><span class="lt">${esc(T('listenPage'))}</span><span class="prog"></span></button>`; }
-function top(title, { back = '#/home', right = '' } = {}) {
-  return `<div class="top">${back ? `<a class="round" href="${back}" aria-label="${esc(T('back'))}">${I.back}</a>` : ''}<h1>${esc(title)}</h1>${right}</div>`;
+// the small "listen to this page" button in the header; updateListenBar() drives both kinds
+function listenIcon(ids) { S.queueIds = ids; return `<button class="listen hl-ic" data-action="listen" aria-label="${esc(T('listenPage'))}"><span class="pp">${I.play}</span><span class="lt"></span><span class="prog"></span></button>`; }
+// top(title, {back, right, listen}): the bar at the top of a screen. render() adds the red Emergency button
+// (and on the three tab screens the settings gear) to the first .top or .topic-hero of every screen outside the emergency flow.
+function top(title, { back = '#/home', right = '', listen = null } = {}) {
+  return `<div class="top">${back ? `<a class="round" href="${back}" aria-label="${esc(T('back'))}">${I.back}</a>` : ''}<h1>${esc(title)}</h1>${listen ? listenIcon(listen) : ''}${right}</div>`;
 }
+// the big title of a screen with its speaker (the tab screens and the lists start with it)
+function titleRow(title, sayId) { return `<div class="title-row" data-block="${esc(sayId)}"><h1>${esc(title)}</h1>${spk(sayId)}</div>`; }
+const emPill = () => `<a class="empill" href="#/emergency" data-action="emergency">${I.warn}<span>${esc(T('emergency'))}</span></a>`;
+const gearBtn = () => `<a class="round gear" href="#/settings" aria-label="${esc(T('settings'))}">${I.gear}</a>`;
+// bottom bar: three tabs, each a picture icon and a name; tapping one also says its name
+const TABS = [['health', '#/home', 'heart', 'health'], ['house', '#/house', 'house', 'house'], ['family', '#/family', 'family', 'family']];
 function nav(active) {
-  const item = (k, href, icon, label) => `<a href="${href}"${k === active ? ' aria-current="page"' : ''}>${icon}<span>${esc(label)}</span></a>`;
-  return `<nav class="nav">${item('home', '#/home', I.home, T('home'))}${item('children', '#/children', I.child, T('children'))}${item('adults', '#/adults', I.adults, T('adults'))}${item('family', '#/family', I.book, T('family'))}${item('settings', '#/settings', I.gear, T('settings'))}</nav>`;
+  active = { home: 'health', children: 'health', adults: 'health' }[active] || active; // older screens name the old tabs
+  return `<nav class="nav">${TABS.map(([k, href, icon, label]) => `<a href="${href}" data-tabsay="ui.tab.${k}"${k === active ? ' aria-current="page"' : ''}><span class="tabic">${ic(icon)}</span><span>${esc(T(label))}</span></a>`).join('')}</nav>`;
 }
 function langPill() {
   return `<div class="langpill" role="group" aria-label="${esc(T('language'))}">${['fa', 'ps'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div>`;
@@ -373,89 +384,171 @@ function nextDueAll() {
   return best;
 }
 
+// a big button: picture or icon, a title (and a short line), and a big speaker (home screens: docs/HOME_LAYOUT.md)
+function bigBtn(cls, href, visual, title, sub, sayId, ids, action) {
+  ids.push(sayId);
+  const open = href ? `<a href="${href}" class="grow"${action ? ` data-action="${action}"` : ''}>` : `<button type="button" class="grow" data-action="${action}">`;
+  return `<div class="hbtn ${cls}" data-block="${esc(sayId)}">${open}<span class="hv">${visual}</span><span class="tx"><span class="t">${esc(title)}</span>${sub ? `<span class="s">${esc(sub)}</span>` : ''}</span>${href ? '</a>' : '</button>'}${spk(sayId)}</div>`;
+}
+const picImg = (src) => `<img src="${esc(src)}" alt="" loading="lazy">`;
+// a list from config.lists as a big picture row
+function listBtn(name, ids) { const c = LISTS()[name]; return c && listOf(name).length ? bigBtn('list', '#/s/' + name, picImg(listPic(c)), T(c.title), T(c.sub), c.say, ids) : ''; }
+// the tab screens: no back button, the app's name on the left of the bar
+const tabTop = (ids) => top(T('appName'), { back: '', listen: ids });
+
+// Health (the start screen, #/home): config.home, top to bottom
 function screenHome() {
-  const b = S.book, ids = ['ui.home'];
-  const mods = (b.config && b.config.home) || ['emergency', 'install', 'ask', 'nextVaccine', 'sections', 'quick', 'tools', 'kit', 'near', 'feedback', 'disclaimer'];
-  let html = top(T('appName'), { back: '', right: langPill() });
+  const b = S.book, ids = ['ui.tab.health'], cfg = b.config || {};
+  const mods = cfg.home || ['nextVaccine', 'emergency', 'firstAid', 'ask', 'children', 'adults', 'hospital', 'share', 'feedback'];
+  let html = tabTop(ids);
   let shareShown = false;
-  const bar = listenBar(ids); // the Emergency button, when it is first, goes above the "listen to this page" bar
-  if (mods[0] !== 'emergency') html += bar;
   const M = {
-    emergency() { // big, red, first: age picker, then the first-aid pages for that age
-      if (!(b.config && b.config.emergency && b.config.emergency.length)) return '';
-      ids.push('ui.emergency');
-      return `<div class="embtn" data-block="ui.emergency"><a href="#/emergency" class="grow" data-action="emergency">${I.warn.replace('<svg', '<svg class="ew"')}<span class="tx"><span class="t">${esc(T('emergency'))}</span><span class="s">${esc(T('emergencySub'))}</span></span></a>${spk('ui.emergency')}</div>`;
+    // only when a vaccine is due within 7 days or is late: a slim strip (the full card is in Family)
+    nextVaccine() {
+      const k = nextDueAll(); if (!k || k.done) return '';
+      const days = Math.ceil((k.due - Date.now()) / DAY); if (days > 7) return '';
+      ids.push(k.visit.id);
+      const when = days < 0 ? T('overdue') : days === 0 ? T('dueToday') : T('dueIn', { n: num(days) });
+      return `<div class="vstrip${days < 0 ? ' late' : ''}" data-block="${esc(k.visit.id)}">${ic('calendar')}<a class="grow" href="#/family">${esc(k.kid.name)} · ${esc(T('nextVaccine'))}: ${esc(L(k.visit.age))} · ${esc(when)}</a>${spk(k.visit.id)}</div>`;
     },
-    install() {
-      if (!(S.installEvt || (platform() === 'ios' && !isStandalone()))) return '';
-      ids.push('ui.install');
-      return `<div class="banner" data-block="ui.install">${ic('phone')}<button class="grow" data-action="install" style="text-align:start"><div class="t">${esc(T('install'))}</div><div class="s">${esc(T('installSub'))}</div></button>${spk('ui.install')}</div>`;
+    // the biggest thing on the screen: red, one word; opens "who needs help?" and reads it aloud
+    emergency() { return (cfg.emergency || []).length ? bigBtn('em', '#/emergency', I.warn, T('emergency'), '', 'ui.emergency', ids, 'emergency') : ''; },
+    firstAid() { const f = cfg.firstAid; return f ? bigBtn('fa', '#/firstaid', picImg(topicPic(b.topics[f.image])), T(f.title), T(f.sub), f.say, ids) : ''; },
+    ask() { return bigBtn('ask', '#/ask', I.mic, T('ask'), T('askSub'), 'ui.ask', ids); },
+    children() { return bigBtn('sec', '#/children', picImg('img/app/home-children.svg'), T('children'), T('childrenSub'), 'ui.children', ids); },
+    adults() { return bigBtn('sec adult', '#/adults', picImg('img/app/home-adults.svg'), T('adults'), T('adultsSub'), 'ui.adults', ids); },
+    sections() { return M.children() + M.adults(); },
+    // Share Sehat (config.shareCard: the share screen, when this version has it); otherwise the phone's own share sheet
+    share() {
+      if (shareShown) return ''; shareShown = true;
+      const c = cfg.shareCard || {}, and = typeof SH !== 'undefined' ? SH.homeSay() === c.say : !!window.FHBAndroid;
+      const say = and ? c.say : c.webSay || c.say, sub = and ? c.sub : c.webSub || c.sub;
+      if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share', c.href, I.share, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
+      return bigBtn('share', '', I.share, T('share'), T('shareSub'), 'ui.share', ids, 'share');
     },
-    share() { if (shareShown) return ''; shareShown = true; ids.push(SH.homeSay()); return SH.homeCard(); }, // Share Sehat (js/share.js)
+    feedback() { return bigBtn('fbk', '#/feedback', ic('talk'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids); },
+    install() { return S.installEvt || (platform() === 'ios' && !isStandalone()) ? bigBtn('inst', '', ic('phone'), T('install'), T('installSub'), 'ui.install', ids, 'install') : ''; },
     sendApp() { return M.share(); }, // the older name of the same card
     growth() { ids.push('ui.growth'); return `<div class="grid2">${GR.homeTile()}</div>`; }, // growth tracker tile (js/growth.js)
-    ask() {
-      ids.push('ui.ask');
-      return `<div class="askcard" data-block="ui.ask"><a href="#/ask" class="grow"><div class="t">${esc(T('ask'))}</div><div class="s">${esc(T('askSub'))}</div></a><a href="#/ask" class="mic" aria-label="${esc(T('ask'))}">${I.mic}</a>${spk('ui.ask')}</div>`;
-    },
-    nextVaccine() { const k = nextDueAll(); if (!k || k.done) return ''; ids.push(k.visit.id); return nextCard(k, true); },
-    sections() {
-      const card = (href, img, title, sub, sayId, cls) => `<div class="hero-card ${cls}"><a href="${href}" class="pic" tabindex="-1" aria-hidden="true"><img src="${img}" alt=""></a><div class="row"><a href="${href}" class="grow"><div class="t">${esc(title)}</div><div class="s">${esc(sub)}</div></a>${spk(sayId)}</div></div>`;
-      const nC = b.sections.children.length, nA = new Set([...b.sections.women, ...b.sections.everyone]).size;
-      ids.push('ui.children', 'ui.adults');
-      return card('#/children', 'img/app/home-children.svg', T('children'), T('topicsCount', { n: num(nC) }), 'ui.children', '') + card('#/adults', 'img/app/home-adults.svg', T('adults'), T('topicsCount', { n: num(nA) }), 'ui.adults', 'adult');
-    },
-    quick() {
-      const q = (href, icon, title, sayId, cls = '') => `<div class="quick ${cls}"><a href="${href}" style="display:contents">${ic(icon)}<span class="t">${esc(title)}</span></a>${spk(sayId)}</div>`;
-      let h = '<div class="grid2">';
-      if (b.topics.vaccines) h += q('#/topic/vaccines', 'syringe', T('vaccines'), 'vaccines.title');
-      if (b.topics['danger-child']) h += q('#/topic/danger-child', 'warning', L(b.topics['danger-child'].title), 'danger-child.title', 'danger');
-      h += q('#/family', 'card', T('myFamily'), 'ui.family');
-      if (b.topics['first-aid']) h += q('#/topic/first-aid', 'wound', L(b.topics['first-aid'].title), 'first-aid.title');
-      return h + '</div>';
-    },
-    near() { ids.push('ui.near'); return `<div class="banner" data-block="ui.near">${ic('hospital')}<a class="grow" href="#/near"><div class="t">${esc(T('near'))}</div><div class="s">${esc(T('nearSub'))}</div></a>${spk('ui.near')}</div>`; },
-    feedback() { ids.push('ui.feedback'); return `<div class="banner fbk" data-block="ui.feedback">${ic('talk')}<a class="grow" href="#/feedback"><div class="t">${esc(T('feedback'))}</div><div class="s">${esc(T('feedbackSub'))}</div></a>${spk('ui.feedback')}</div>`; },
+    near() { return bigBtn('near', '#/near', ic('hospital'), T('near'), T('nearSub'), 'ui.near', ids); },
     disclaimer() { ids.push('ui.disclaimer'); return disclaimer(); },
-    tools() { ids.push('ui.breaths', 'ui.reading'); return TL.homeTools(); }, // breathing counter, "what does the number mean?"
-    kit() { ids.push('ui.kit'); return TL.homeKit(); }, // home health kit
   };
-  for (const m of mods) if (M[m]) { html += M[m](); if (m === 'emergency' && m === mods[0]) html += bar; }
-  return { html, nav: 'home' };
+  for (const m of mods) html += M[m] ? M[m]() : listBtn(m, ids);
+  return { html, nav: 'health' };
 }
 
-function topicCard(tid) {
+// Home (#/house): the house and everyday life. config.house: lists from config.lists (home safety, food and garden, well-being, home kit)
+function screenHouse() {
+  const ids = ['ui.tab.house', 'ui.house'];
+  let html = tabTop(ids) + titleRow(T('house'), 'ui.house');
+  for (const m of (S.book.config && S.book.config.house) || ['safety', 'food', 'wellbeing', 'kit']) html += listBtn(m, ids);
+  track('view', { p: 'house' });
+  return { html, nav: 'house' };
+}
+
+// a topic's picture: its own, or (for the pages that share a general picture) the first step picture
+function topicPic(t) {
+  if (!t) return 'img/app/placeholder.svg';
+  if (!/-generic\.svg$/.test(t.image)) return t.image;
+  const b = (t.blocks || []).find((x) => x.picture); return b ? b.picture : t.image;
+}
+// a topic in a list: a big row with its picture, title, a short line and a big speaker
+function topicRow(tid) {
   const t = S.book.topics[tid]; if (!t) return '';
-  const adult = isAdultTopic(t) ? ' adult' : '';
-  return `<div class="tcard${adult}"><a class="pic" href="#/topic/${tid}" tabindex="-1" aria-hidden="true"><img src="${esc(t.image)}" alt="" loading="lazy"></a><div class="row"><a href="#/topic/${tid}" style="flex:1 1 auto"><div class="t">${esc(L(t.title))}</div><div class="s">${esc(L(t.summary))}</div></a>${spk(tid + '.title')}</div></div>`;
+  const href = `#/topic/${tid}`;
+  return `<div class="trow${isAdultTopic(t) ? ' adult' : ''}" data-block="${esc(tid)}.title"><a class="grow" href="${href}"><span class="tp"><img src="${esc(topicPic(t))}" alt="" loading="lazy"></span><span class="tx"><span class="t">${esc(L(t.title))}</span><span class="s">${esc(L(t.summary))}</span></span></a>${spk(tid + '.title')}</div>`;
 }
-// first-aid and emergency pages (sections.emergency) are listed in their own group at the end of a list
-const emSet = () => new Set(S.book.sections.emergency || []);
-function emGroup(list, ids) {
-  if (!list.length) return '';
-  ids.push('ui.emergencyList', ...list.map((t) => t + '.title'));
-  return `<div class="group-h em" data-block="ui.emergencyList"><a class="t" href="#/emergency">${esc(T('emergency'))}</a><span class="ln"></span>${spk('ui.emergencyList')}</div><div class="tlist">${list.map(topicCard).join('')}</div>`;
+const topicCard = topicRow; // js/tools.js lists topics with it too
+// tool rows (growth chart, breathing counter, "what does the number mean?"); growth shows once this version has it
+const TOOL_ROWS = {
+  growth: ['#/growth', 'growth', 'growth', 'growthSub', 'ui.growth'],
+  breaths: ['#/tool/breaths', 'breathing-fast', 'breaths', '', 'ui.breaths'],
+  reading: ['#/tool/reading', 'bp', 'reading', '', 'ui.reading'],
+};
+function toolRow(x, ids) {
+  const r = TOOL_ROWS[x]; if (!r || !S.book.ui[r[2]] || !S.book.narration[r[4]]) return '';
+  if (x === 'growth' && !(S.book.ui.growth && S.book.narration['ui.growth'])) return '';
+  ids.push(r[4]);
+  return `<div class="trow tool" data-block="${esc(r[4])}"><a class="grow" href="${r[0]}"><span class="tp ticon">${ic(r[1])}</span><span class="tx"><span class="t">${esc(T(r[2]))}</span>${r[3] && S.book.ui[r[3]] ? `<span class="s">${esc(T(r[3]))}</span>` : ''}</span></a>${spk(r[4])}</div>`;
 }
-function screenChildren() {
-  const em = emSet(), all = S.book.sections.children, main = all.filter((t) => !em.has(t));
-  const ids = ['ui.children', ...main.map((t) => t + '.title')];
-  let html = `<div class="blk lead" data-block="ui.children"><div class="body">${esc(L(S.book.narration['ui.children']))}</div>${spk('ui.children')}</div>`;
-  html += `<div class="tlist">${main.map(topicCard).join('')}</div>` + emGroup(all.filter((t) => em.has(t)), ids);
-  return { html: top(T('children')) + listenBar(ids) + html, nav: 'children' };
+// a group heading inside a list: its title and a big speaker
+const groupHead = (title, sayId, cls = '') => `<div class="group-h${cls}" data-block="${esc(sayId)}"><h2 class="t">${esc(title)}</h2>${spk(sayId)}</div>`;
+
+/* ---------- Children and Adults (#/children, #/adults): config.listGroups, in order ---------- */
+// a group: {title, say, topics} (or rest: true, every topic of the section not shown anywhere else) or {tools: [...]}
+function sectionTopics(which) { const s = S.book.sections; return which === 'children' ? s.children : [...new Set([...s.women, ...s.everyone])]; }
+// topics people reach from somewhere else: the emergency and first-aid pages, and the lists with their own page
+function shownElsewhere() {
+  const g = new Set(S.book.sections.emergency || []);
+  for (const n of Object.keys(LISTS())) for (const t of listOf(n)) g.add(t);
+  for (const t of ((S.book.config && S.book.config.firstAid) || {}).topics || []) g.add(t);
+  return g;
 }
-function screenAdults() {
-  const s = S.book.sections, em = emSet(), every = s.everyone.filter((t) => !em.has(t));
-  const ids = ['ui.adults', 'ui.women', ...s.women.map((t) => t + '.title'), 'ui.everyone', ...every.map((t) => t + '.title')];
-  let html = `<div class="blk lead" data-block="ui.adults"><div class="body">${esc(L(S.book.narration['ui.adults']))}</div>${spk('ui.adults')}</div>`;
-  const group = (key, list) => `<div class="group-h" data-block="ui.${key}"><span class="t">${esc(T(key))}</span><span class="ln"></span>${spk('ui.' + key)}</div><div class="tlist">${list.map(topicCard).join('')}</div>`;
-  html += group('women', s.women) + group('everyone', every) + emGroup(s.everyone.filter((t) => em.has(t)), ids);
-  return { html: top(T('adults')) + listenBar(ids) + html, nav: 'adults', adult: true };
+function screenGroups(which) {
+  const b = S.book, groups = ((b.config && b.config.listGroups) || {})[which] || [{ rest: true, title: which, say: 'ui.' + which }];
+  const all = sectionTopics(which), placed = new Set();
+  for (const g of groups) for (const t of g.topics || []) placed.add(t);
+  const away = shownElsewhere(), ids = ['ui.' + which];
+  let body = '';
+  for (const g of groups) {
+    if (g.tools) { body += g.tools.map((x) => toolRow(x, ids)).join(''); continue; }
+    const list = (g.rest ? all.filter((t) => !placed.has(t) && (!away.has(t) || (g.include || []).includes(t))) : g.topics || []).filter((t) => b.topics[t]);
+    if (!list.length) continue;
+    ids.push(g.say, ...list.map((t) => t + '.title'));
+    body += groupHead(T(g.title), g.say, g.danger ? ' danger' : '') + list.map(topicRow).join('');
+  }
+  const html = top('', { back: '#/home', listen: ids }) + titleRow(T(which), 'ui.' + which) + body + disclaimer();
+  return { html, nav: 'health', adult: which === 'adults' };
+}
+function screenChildren() { return screenGroups('children'); }
+function screenAdults() { return screenGroups('adults'); }
+
+/* ---------- lists with their own page (#/s/<name>): config.lists + sections.json (kit, home safety, hospital, food and garden, well-being) ---------- */
+const LISTS = () => (S.book.config && S.book.config.lists) || {};
+const listOf = (name) => ((S.book.sections || {})[name] || []).filter((t) => S.book.topics[t]);
+const listPic = (c) => (c && S.book.topics[c.image] ? topicPic(S.book.topics[c.image]) : 'img/app/placeholder.svg');
+const listTab = (name) => ((LISTS()[name] || {}).tab === 'health' ? 'health' : 'house');
+// the list page a topic belongs to when its own section list does not show it (kit and hospital pages, most food pages)
+const ownList = (tid, t) => (S.book.sections[t.section] || []).includes(tid) ? null : Object.keys(LISTS()).find((n) => listOf(n).includes(tid)) || null;
+const LB = { back: null }; // where a list page goes back to (the screen it was opened from)
+function screenList(name) {
+  const c = LISTS()[name]; if (!c) return screenHome();
+  const list = listOf(name), tab = listTab(name), ids = [c.say];
+  let body = (c.tools || []).map((x) => toolRow(x, ids)).join('');
+  if (c.near) { ids.push('ui.near'); body += `<div class="trow tool near" data-block="ui.near"><a class="grow" href="#/near"><span class="tp ticon">${ic('hospital')}</span><span class="tx"><span class="t">${esc(T('near'))}</span><span class="s">${esc(T('nearSub'))}</span></span></a>${spk('ui.near')}</div>`; }
+  ids.push(...list.map((t) => t + '.title'));
+  body += list.map(topicRow).join('');
+  if (!list.length) body += `<div class="empty">${ic(c.icon || 'check')}<p>${esc(T('comingSoon'))}</p></div>`;
+  const back = LB.back || (tab === 'health' ? '#/home' : '#/house');
+  const html = top('', { back, listen: ids }) + `<div class="lhero"><img src="${esc(listPic(c))}" alt=""></div>` + titleRow(T(c.title), c.say) + body + disclaimer();
+  return { html, nav: tab, adult: !c.child };
+}
+
+/* ---------- CPR and first aid (#/firstaid): CPR by age, then every first-aid page as a picture ---------- */
+function picTile(tid, cls = '') {
+  const t = S.book.topics[tid]; if (!t) return '';
+  return `<div class="ptile${cls}" data-block="${esc(tid)}.title"><a href="#/topic/${esc(tid)}"><span class="pp"><img src="${esc(topicPic(t))}" alt="" loading="lazy"></span><span class="t">${esc(L(t.title))}</span></a>${spk(tid + '.title')}</div>`;
+}
+function ageCard(x, href) {
+  return `<div class="em-age" data-block="ui.${esc(x.label)}"><a href="${href}"><span class="em-pic"${x.anim ? ` data-poster="${esc(x.anim)}" data-scene="0"` : ''}>${x.anim ? '' : ic(x.icon)}</span><span class="t">${esc(T(x.label + 'Short'))}</span></a>${spk('ui.' + x.label)}</div>`;
+}
+function screenFirstAid() {
+  const b = S.book, f = (b.config && b.config.firstAid) || {}, ages = emAges(), cpr = new Set(ages.map((x) => x.cpr));
+  const list = [...(f.topics || []), ...(b.sections.emergency || []).filter((t) => !cpr.has(t))].filter((t, i, a) => b.topics[t] && a.indexOf(t) === i);
+  const ids = [f.say, 'ui.cprWho', ...ages.map((x) => 'ui.' + x.label), 'ui.firstAidAll', ...list.map((t) => t + '.title')];
+  let html = top('', { back: '#/home', listen: ids }) + titleRow(T(f.title || 'firstAid'), f.say);
+  html += groupHead(T('notBreathing'), 'ui.cprWho', ' danger') + `<div class="em-ages">${ages.map((x) => ageCard(x, '#/topic/' + x.cpr)).join('')}</div>`;
+  html += groupHead(T('firstAidAll'), 'ui.firstAidAll') + `<div class="ptiles">${list.map((t) => picTile(t)).join('')}</div>` + disclaimer();
+  track('view', { p: 'firstaid' });
+  return { html, nav: 'health' };
 }
 
 function blockHtml(b, n) {
   if (b.type === 'lead') return `<div class="blk lead" data-block="${esc(b.id)}"><div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
   if (b.type === 'step') return `<div class="blk step${b.picture ? ' haspic' : ''}" data-block="${esc(b.id)}">${b.picture ? `<img class="fig" src="${esc(b.picture)}" alt="" loading="lazy">` : ''}<div class="pic">${ic(b.icon)}</div><div class="body"><div class="h"><span class="num">${num(n)}</span><span>${esc(L(b.title))}</span></div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
-  if (b.type === 'link') return TL.linkBlock(b); // opens a tool, the home kit or another topic
+  if (b.type === 'link') { const h = TL.linkBlock(b); return b.urgent ? h.replace('class="blk link"', 'class="blk link urgent"') : h; } // opens a tool, the home kit or another topic; urgent: a red row to the Health side
+  // what the clinic or the hospital does for this problem: a building icon, no number
+  if (b.type === 'clinic') return `<div class="blk clinic" data-block="${esc(b.id)}"><div class="pic">${ic(b.icon || 'clinic')}</div><div class="body"><div class="h">${esc(L(b.title))}</div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
   if (b.type === 'anim') return animBlock(b); // a still picture with a play button: opens the animation player
   if (b.type === 'tip') return `<div class="blk tip" data-block="${esc(b.id)}">${ic(b.icon || 'check')}<div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
   if (b.type === 'alert' || b.type === 'dont') {
@@ -501,38 +594,42 @@ async function openAnim(name, pick) {
 }
 
 /* ---------- the Emergency screen: who needs help, then that age's first-aid pages ---------- */
+// Few words, big targets, pictures first. Opened by a tap on an Emergency button, it reads itself aloud.
 const EM = { speak: false, back: null };
 const emAges = () => (S.book.config && S.book.config.emergency) || [];
-function emCarRow(text) { return `<div class="em-car" data-block="ui.emergency">${ic('car')}<div class="body">${esc(text)}</div>${spk('ui.emergency')}</div>`; }
+function emCarRow() { return `<div class="em-car" data-block="ui.sendForCar">${ic('car')}<div class="body">${esc(T('sendForCar'))}</div>${spk('ui.sendForCar')}</div>`; }
 function screenEmergency(age) {
   const b = S.book, a = emAges().find((x) => x.id === age);
-  if (EM.speak) { EM.speak = false; setTimeout(() => { if (hasAudio('ui.emergency') || ttsVoice()) play(['ui.emergency'], { quiet: true }); }, 0); }
   if (!a) {
     const ids = ['ui.emergency', 'ui.emergencyWho'];
-    let html = top(T('emergency')) + listenBar(ids) + emCarRow(L(b.narration['ui.emergency']));
+    if (EM.speak) { EM.speak = false; setTimeout(() => { if (hasAudio('ui.emergency') || ttsVoice()) play(['ui.emergency', 'ui.emergencyWho'], { quiet: true }); }, 0); }
+    let html = top(T('emergency'), { back: '#/home', listen: ids }) + emCarRow() + nearRow();
+    ids.splice(1, 0, 'ui.sendForCar', 'ui.near');
     html += `<div class="em-who" data-block="ui.emergencyWho"><h2>${esc(T('emergencyWho'))}</h2>${spk('ui.emergencyWho')}</div>`;
-    html += `<div class="em-ages">${emAges().map((x) => `<a class="em-age" href="#/emergency/${esc(x.id)}"><span class="em-pic"${x.anim ? ` data-poster="${esc(x.anim)}" data-scene="0"` : ''}>${x.anim ? '' : ic(x.icon)}</span><span class="row">${ic(x.icon)}<span class="t">${esc(T(x.label))}</span></span></a>`).join('')}</div>`;
+    html += `<div class="em-ages">${emAges().map((x) => ageCard(x, '#/emergency/' + x.id)).join('')}</div>`;
+    ids.push(...emAges().map((x) => 'ui.' + x.label));
     const all = (b.sections.emergency || []).filter((t) => b.topics[t]);
-    if (all.length) { html += `<details class="em-all"><summary>${esc(T('allEmergencies'))}</summary>${all.map(emRow).join('')}</details>`; }
-    html += nearBanner();
-    return { html, nav: 'home' };
+    if (all.length) html += `<details class="em-all"><summary>${esc(T('allEmergencies'))}</summary>${all.map(emRow).join('')}</details>`;
+    return { html, nav: 'health' };
   }
+  EM.speak = false;
   const cpr = b.topics[a.cpr], list = (a.topics || []).filter((t) => b.topics[t]);
-  const ids = ['ui.emergency', ...(cpr ? [a.cpr + '.title'] : []), ...list.map((t) => t + '.title')];
-  let html = top(T(a.label), { back: '#/emergency' }) + listenBar(ids) + emCarRow(T('sendForCar'));
+  const ids = [...(cpr ? [a.cpr + '.title'] : []), 'ui.sendForCar', ...list.map((t) => t + '.title')];
+  let html = top(T(a.label + 'Short'), { back: '#/emergency', listen: ids });
   if (cpr) {
-    html += `<div class="em-cpr" data-block="${esc(a.cpr)}.title"><a class="grow" href="#/topic/${esc(a.cpr)}">${ic('breathe')}<span class="tx"><span class="t">${esc(T('notBreathing'))}</span><span class="s">${esc(L(cpr.title))}</span></span></a>${spk(a.cpr + '.title')}`;
+    html += `<div class="em-cpr" data-block="${esc(a.cpr)}.title"><a class="grow" href="#/topic/${esc(a.cpr)}">${ic('breathe')}<span class="t">${esc(T('notBreathing'))}</span></a>${spk(a.cpr + '.title')}`;
     if (a.anim) html += `<button class="em-watch" data-action="anim" data-anim="cpr" data-variant="${esc(a.anim)}">${I.play}<span>${esc(T('watchHow'))}</span></button>`;
     html += `</div>`;
   }
-  if (list.length) html += `<div class="group-h"><span class="t">${esc(T('otherEmergencies'))}</span><span class="ln"></span></div>${list.map(emRow).join('')}`;
-  html += nearBanner();
-  return { html, nav: 'home', adult: a.id === 'adult' };
+  html += emCarRow().replace('em-car"', 'em-car slim"');
+  if (list.length) html += `<div class="ptiles">${list.map((t) => picTile(t, isAdultTopic(b.topics[t]) ? ' adult' : '')).join('')}</div>`;
+  return { html, nav: 'health', adult: a.id === 'adult' };
 }
 function emRow(tid) {
   const t = S.book.topics[tid];
-  return `<div class="erow${isAdultTopic(t) ? ' adult' : ''}" data-block="${esc(tid)}.title"><a class="grow" href="#/topic/${esc(tid)}"><img src="${esc(t.image)}" alt="" loading="lazy"><span class="t">${esc(L(t.title))}</span></a>${spk(tid + '.title')}</div>`;
+  return `<div class="erow${isAdultTopic(t) ? ' adult' : ''}" data-block="${esc(tid)}.title"><a class="grow" href="#/topic/${esc(tid)}"><img src="${esc(topicPic(t))}" alt="" loading="lazy"><span class="t">${esc(L(t.title))}</span></a>${spk(tid + '.title')}</div>`;
 }
+function nearRow() { return `<div class="em-near" data-block="ui.near">${ic('hospital')}<a class="grow" href="#/near">${esc(T('near'))}</a>${spk('ui.near')}</div>`; }
 function nearBanner() { return `<div class="banner" data-block="ui.near">${ic('hospital')}<a class="grow" href="#/near"><div class="t">${esc(T('near'))}</div><div class="s">${esc(T('nearSub'))}</div></a>${spk('ui.near')}</div>`; }
 
 function screenTopic(tid) {
@@ -545,13 +642,14 @@ function screenTopic(tid) {
   for (const b of t.blocks) { if (b.type === 'step') n++; body += blockHtml(b, n); ids.push(...blockIds(b)); }
   const rc = reportCards(svFor('topics', [tid])); body += rc.html; ids.push(...rc.ids);
   ids.push('ui.disclaimer');
-  const kit = TL.isKitTopic(tid), back = kit ? '#/kit' : EM.back || (t.section === 'children' ? '#/children' : '#/adults');
-  let html = `<div class="topic-hero"><img src="${esc(t.image)}" alt=""><a class="round" href="${back}" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
+  const own = ownList(tid, t), back = EM.back || (own ? '#/s/' + own : t.section === 'children' ? '#/children' : '#/adults');
+  const from = /^#\/s\/([\w-]+)/.exec(back || ''), tab = from && LISTS()[from[1]] && listOf(from[1]).includes(tid) ? listTab(from[1]) : own && !/^#\/(emergency|firstaid|children|adults)/.test(back) ? listTab(own) : 'health';
+  let html = `<div class="topic-hero"><img src="${esc(topicPic(t))}" alt=""><a class="round" href="${back}" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
   html += `<div class="title-row" data-block="${tid}.title"><h1>${esc(L(t.title))}</h1>${spk(tid + '.title')}</div>`;
   html += listenBar(ids) + body + disclaimer();
   if (t.sources && t.sources.length) html += `<details class="sources"><summary>${esc(T('sources'))}</summary><ul>${t.sources.map((s) => `<li dir="ltr">${esc(s)}</li>`).join('')}</ul></details>`;
   track('view', { p: 'topic/' + tid });
-  return { html, nav: kit ? 'home' : t.section === 'children' ? 'children' : 'adults', adult: isAdultTopic(t) };
+  return { html, nav: tab, adult: isAdultTopic(t) };
 }
 
 function screenVaccines(v) {
@@ -783,6 +881,9 @@ function screenSettings() {
   html += `</div><div class="panel">`;
   html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
   html += SH.settingsRow(); // Share Sehat (js/share.js): the app file, the link, the QR code
+  ids.push('ui.feedback');
+  html += `<div class="srow" data-block="ui.feedback">${ic('talk')}<a class="grow" href="#/feedback"><div class="t">${esc(T('feedback'))}</div><div class="s">${esc(T('feedbackSub'))}</div></a>${spk('ui.feedback')}</div>`;
+  if (S.installEvt || (platform() === 'ios' && !isStandalone())) { ids.push('ui.install'); html += `<div class="srow" data-block="ui.install">${ic('phone')}<button class="grow" data-action="install" style="text-align:start"><div class="t">${esc(T('install'))}</div><div class="s">${esc(T('installSub'))}</div></button>${spk('ui.install')}</div>`; }
   html += `<div class="srow">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div><button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
   html += `<a class="srow" href="#/privacy">${ic('check')}<div class="grow"><div class="t">${esc(T('privacy'))}</div><div class="s">${esc(T('privacySub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
   if (SV()) {
@@ -1059,7 +1160,10 @@ function render() {
   else if (r[0] === 'ask') out = screenAsk();
   else if (r[0] === 'feedback') out = screenFeedback();
   else if (r[0] === 'near') out = screenNear();
-  else if (r[0] === 'kit') out = TL.screenKit();
+  else if (r[0] === 's') out = screenList(r[1]);
+  else if (r[0] === 'house') out = screenHouse();
+  else if (r[0] === 'firstaid') out = screenFirstAid();
+  else if (LISTS()[r[0]]) { history.replaceState(null, '', '#/s/' + r[0]); r = route(); out = screenList(r[1]); } // old addresses: #/kit, #/safety ...
   else if (r[0] === 'emergency') out = screenEmergency(r[1]);
   else if (r[0] === 'tool') out = TL.screenTool(r[1], r[2]) || screenHome();
   else if (r[0] === 'growth') out = GR.screen(r[1]);
@@ -1067,6 +1171,12 @@ function render() {
   else out = screenHome();
   } catch (err) { if (r[0] === 'home') throw err; r = ['home']; out = screenHome(); }
   app.innerHTML = `<main class="page${out.adult ? ' adult' : ''}">${out.html}</main>${out.nav ? nav(out.nav) : ''}`;
+  // the red Emergency button on every screen outside the emergency flow (and the setup screens); the gear on the tab screens
+  const inEm = r[0] === 'emergency' || (r[0] === 'topic' && /^#\/emergency/.test(EM.back || ''));
+  if (out.nav && !inEm) {
+    const host = $('main .top, main .topic-hero', app);
+    if (host) host.insertAdjacentHTML('beforeend', emPill() + (['home', 'house', 'family'].includes(r[0] || 'home') && host.matches('.top') ? gearBtn() : ''));
+  }
   if (P.on) updateListenBar();
   lastPage = r.join('/') || 'home';
   Stats.page(!S.lang ? ['welcome'] : !S.voice ? ['voice'] : r[0] !== 'privacy' && Stats.showConsent() ? ['consent'] : r);
@@ -1080,10 +1190,14 @@ function render() {
 let lastHash = location.hash;
 addEventListener('hashchange', () => {
   if (AN.ctl && AN.ctl.close) AN.ctl.close(); // leaving the page closes the animation player too
-  // a page opened from the Emergency screen goes back there
+  // a page opened from the Emergency screen or a list (children, adults, #/s/...) goes back there
   const now = location.hash.split('/');
-  if (now[1] === 'topic') { if (lastHash.startsWith('#/emergency')) EM.back = lastHash; } else EM.back = null;
+  if (now[1] === 'topic') { if (/^#\/(emergency|s\/|children|adults|firstaid)/.test(lastHash)) EM.back = lastHash; } else EM.back = null;
+  // a list page goes back to the screen it was opened from (Health, Home, Children, Adults); from a topic it keeps that
+  const was = lastHash.split('/')[1];
+  if (now[1] === 's') { if (was !== 'topic' && was !== 's') LB.back = lastHash || '#/home'; } else if (now[1] !== 'topic') LB.back = null;
   stopAudio(); render();
+  if (S.tabSay) { const id = S.tabSay; S.tabSay = null; if (hasAudio(id) || ttsVoice()) play([id], { quiet: true }); }
   const r = route(); if (r[0] !== 'topic' && r[0] !== 'family') track('view', { p: r[0] || 'home' });
   if (location.hash.split('/')[1] !== lastHash.split('/')[1] || location.hash !== lastHash) scrollTo(0, 0);
   lastHash = location.hash;
@@ -1093,6 +1207,7 @@ addEventListener('hashchange', () => {
 document.addEventListener('click', async (e) => {
   const t = e.target.closest('button, a, [data-block]'); if (!t) return;
   const d = t.dataset;
+  if (d.tabsay) { const id = d.tabsay; if (t.getAttribute('aria-current') === 'page') play([id], { quiet: true }); else S.tabSay = id; return; }
   if (d.say) { e.preventDefault(); if (P.on && P.ids.length === 1 && P.ids[0] === d.say) stopAudio(); else play([d.say]); return; }
   if (d.sayLang) { e.preventDefault(); const prev = S.lang; S.lang = d.sayLang; play(['ui.welcome'], { slot: slotOf(d.sayLang) }); S.lang = prev; return; }
   if (d.sample) { e.preventDefault(); const sl = slotOf(S.lang, d.sample); if (P.on && P.strict && P.slot === sl) stopAudio(); else play([sampleId(sl)], { slot: sl, strict: true }); return; }

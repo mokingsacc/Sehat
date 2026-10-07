@@ -1,0 +1,306 @@
+{
+  "id": "urine-infection",
+  "section": "women",
+  "title": {
+    "fa": "سوزش ادرار (عفونت)",
+    "ps": "د متیازو سوزش (انتان)",
+    "en": "Burning urine (infection)"
+  },
+  "summary": {
+    "fa": "سوزش هنگام ادرار قابل تداوی است. در حاملگی همان روز بروید.",
+    "ps": "د متیازو پر وخت سوزش د درملنې وړ دی. په امیندوارۍ کې په همغه ورځ ولاړ شئ.",
+    "en": "Burning when passing urine is treatable. In pregnancy, go the same day."
+  },
+  "image": "urine-infection",
+  "blocks": [
+    {
+      "id": "urine-infection.lead",
+      "type": "lead",
+      "text": {
+        "fa": "عفونت مثانه سوزش هنگام ادرار، ادرار مکرر، و ادرار کدر یا بدبو می‌آورد. در زنان زیاد است. انتی‌بیوتیک کلینیک آن را علاج می‌کند؛ اگر تداوی نشود به گرده‌ها می‌رسد و در حاملگی به طفل ضرر می‌رساند.",
+        "ps": "د مثانې انتان د متیازو پر وخت سوزش، ډېر ځله متیازې، او خړې یا بدبویه متیازې راولي. په ښځو کې ډېر دی. د کلینیک انټي بیوټیک یې علاجوي؛ که درملنه نه شي پښتورګو ته رسېږي او په امیندوارۍ کې ماشوم ته زیان رسوي.",
+        "en": "A bladder infection causes burning when passing urine, going often, and cloudy or smelly urine. It is common in women. Clinic antibiotics cure it; untreated it can reach the kidneys and, in pregnancy, harm the baby."
+      }
+    },
+    {
+      "id": "urine-infection.signs",
+      "type": "step",
+      "icon": "urine-blood",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "سوزش یا درد هنگام ادرار، ضرورت مکرر یا عاجل به ادرار، درد پایین شکم، ادرار کدر، بدبو یا خونی. اطفال شاید فقط تب یا استفراغ داشته باشند.",
+        "ps": "د متیازو پر وخت سوزش یا درد، ډېر ځله یا بېړنۍ اړتیا، د نس په ښکتنۍ برخه کې درد، خړې، بدبویه یا وینه لرونکې متیازې. ماشومان ښايي یوازې تبه یا کانګې ولري.",
+        "en": "Burning or pain when passing urine, needing to go often or urgently, pain low in the belly, cloudy, smelly or bloody urine. Children may only have fever or vomiting."
+      }
+    },
+    {
+      "id": "urine-infection.drink",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب زیاد بنوشید",
+        "ps": "ډېرې اوبه وڅښئ",
+        "en": "Drink plenty of water"
+      },
+      "text": {
+        "fa": "آب پاک را زیاد بنوشید و ادرار را نگه ندارید. بعد از نزدیکی ادرار کنید. شرمگاه را پاک نگه دارید و از پیش به پس پاک کنید.",
+        "ps": "پاکې اوبه ډېر وڅښئ او متیازې مه ساتئ. له کوروالي وروسته متیازې وکړئ. شرمګاه پاکه وساتئ او له مخې خوا شا ته یې پاکه کړئ.",
+        "en": "Drink clean water often and do not hold urine in. Pass urine after sex. Keep the private area clean, wiping from front to back."
+      }
+    },
+    {
+      "id": "urine-infection.pregnant",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "در حاملگی: همان روز بروید",
+        "ps": "په امیندوارۍ کې: په همغه ورځ ولاړ شئ",
+        "en": "In pregnancy: go the same day"
+      },
+      "text": {
+        "fa": "در حاملگی عفونت شاید علامت نداشته باشد اما ولادت زودرس می‌آورد. در معاینات حاملگی معاینهٔ ادرار را بخواهید، و اگر سوزش یا تب دارید همان روز بروید.",
+        "ps": "په امیندوارۍ کې انتان ښايي نښه ونه لري خو وختي زېږون راولي. د امیندوارۍ په معایناتو کې د متیازو معاینه وغواړئ، او که سوزش یا تبه لرئ په همغه ورځ ولاړ شئ.",
+        "en": "In pregnancy an infection may have no signs but can bring early labour. Ask for the urine test at antenatal visits, and go the same day if you have burning or fever."
+      }
+    },
+    {
+      "id": "urine-infection.finish",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "انتی‌بیوتیک را تمام کنید",
+        "ps": "انټي بیوټیک بشپړ کړئ",
+        "en": "Finish the antibiotic"
+      },
+      "text": {
+        "fa": "تمام تابلیت‌هایی را که کارمند صحی داده بخورید، حتی وقتی سوزش بعد از یک روز بند شد. اگر در ۲ روز بهتر نشد، برگردید.",
+        "ps": "ټولې هغه ګولۍ وخورئ چې روغتیايي کارکوونکي درکړي، حتی کله چې سوزش له یوې ورځې وروسته ودرېږي. که په ۲ ورځو کې ښه نه شو، بېرته راشئ.",
+        "en": "Take all the tablets the health worker gives, even when the burning stops after a day. Go back if it is not better in 2 days."
+      }
+    },
+    {
+      "id": "urine-infection.others",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "مردان و اطفال",
+        "ps": "نارینه او ماشومان",
+        "en": "Men and children"
+      },
+      "text": {
+        "fa": "سوزش ادرار در مرد، یا تب با استفراغ در طفل کوچک، هم به کلینیک ضرورت دارد؛ علتش شاید فرق کند. اطفال با عفونت‌های تکراری به معاینهٔ شفاخانه ضرورت دارند.",
+        "ps": "په نارینه کې د متیازو سوزش، یا په کوچني ماشوم کې تبه له کانګو سره، هم کلینیک ته اړتیا لري؛ لامل یې ښايي توپیر ولري. تکراري انتان لرونکي ماشومان د روغتون معاینې ته اړتیا لري.",
+        "en": "Burning urine in a man, or fever with vomiting in a small child, needs the clinic too; the cause may be different. Children with repeated infections need a hospital check."
+      }
+    },
+    {
+      "id": "urine-infection.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ ادرار و انتی‌بیوتیک",
+        "ps": "په کلینیک کې: د متیازو معاینه او انټي بیوټیک",
+        "en": "At the clinic: urine test and antibiotics"
+      },
+      "text": {
+        "fa": "کارمند صحی ادرار را با نوار معاینه می‌کند و یک دورهٔ کوتاه تابلیت انتی‌بیوتیک (مانند نیتروفورانتوئین یا اموکسی‌سیلین) می‌دهد، و در حاملگی دوای بی‌خطر را انتخاب می‌کند.",
+        "ps": "روغتیايي کارکوونکی متیازې په پټۍ معاینه کوي او د انټي بیوټیک ګولیو لنډه دوره (لکه نایټروفورانټوین یا اموکسي سیلین) ورکوي، او په امیندوارۍ کې بې خطره درمل غوره کوي.",
+        "en": "The health worker tests the urine with a strip and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy."
+      }
+    },
+    {
+      "id": "urine-infection.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: عفونت گرده",
+        "ps": "په روغتون کې: د پښتورګو انتان",
+        "en": "At the hospital: a kidney infection"
+      },
+      "text": {
+        "fa": "تب با درد کمر و استفراغ یعنی عفونت به گرده‌ها رسیده. شفاخانه انتی‌بیوتیک پیچکاری و سیروم می‌دهد، و گرده‌ها را با التراسوند معاینه می‌کند.",
+        "ps": "تبه له ملا درد او کانګو سره یعنې انتان پښتورګو ته رسېدلی. روغتون پیچکاري انټي بیوټیک او سیروم ورکوي، او پښتورګي په الټراساونډ معاینه کوي.",
+        "en": "Fever with back pain and vomiting means the infection has reached the kidneys. The hospital gives antibiotics by injection and fluids by drip, and checks the kidneys with an ultrasound scan."
+      }
+    },
+    {
+      "id": "urine-infection.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "urine-infection.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "سوزش ادرار با تب بلند، لرزه و درد کمر",
+            "ps": "د متیازو سوزش له لوړې تبې، لړزې او ملا درد سره",
+            "en": "burning urine with high fever, shivering and back pain"
+          }
+        },
+        {
+          "id": "urine-infection.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "استفراغ و مایعات را نگه نمی‌تواند",
+            "ps": "کانګې او مایعات نه شي ساتلای",
+            "en": "vomiting and cannot keep fluids down"
+          }
+        },
+        {
+          "id": "urine-infection.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله، با تب، درد شکم یا دردهای ولادت",
+            "ps": "امیندواره، له تبې، د نس درد یا د زېږون دردونو سره",
+            "en": "pregnant, with fever, belly pain or contractions"
+          }
+        },
+        {
+          "id": "urine-infection.urgent.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "۱۲ ساعت ادرار نکرده، یا درد شدید در پهلو",
+            "ps": "۱۲ ساعته یې متیازې نه دي کړې، یا په اړخ کې سخت درد",
+            "en": "no urine passed for 12 hours, or severe pain in the side"
+          }
+        },
+        {
+          "id": "urine-infection.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیج یا بسیار خواب‌آلود همراه با عفونت ادرار",
+            "ps": "ګډوډ یا ډېر خوبولی له متیازو انتان سره",
+            "en": "confused or very drowsy with a urine infection"
+          }
+        }
+      ]
+    },
+    {
+      "id": "urine-infection.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "urine-infection.soon.burning",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "سوزش یا درد هنگام ادرار",
+            "ps": "د متیازو پر وخت سوزش یا درد",
+            "en": "burning or pain when passing urine"
+          }
+        },
+        {
+          "id": "urine-infection.soon.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "هر سوزش یا ادرار کدر در حاملگی",
+            "ps": "په امیندوارۍ کې هر سوزش یا خړې متیازې",
+            "en": "any burning or cloudy urine in pregnancy"
+          }
+        },
+        {
+          "id": "urine-infection.soon.blood",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون در ادرار",
+            "ps": "په متیازو کې وینه",
+            "en": "blood in the urine"
+          }
+        },
+        {
+          "id": "urine-infection.soon.child",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل با تب بدون علت واضح، یا ادرار بدبو",
+            "ps": "ماشوم له تبې پرته له څرګند لامل، یا بدبویه متیازې",
+            "en": "a child with fever and no clear cause, or smelly urine"
+          }
+        },
+        {
+          "id": "urine-infection.soon.nobetter",
+          "icon": "clock",
+          "text": {
+            "fa": "۲ روز بعد از شروع تابلیت‌ها بهتر نشده",
+            "ps": "د ګولیو له پیل ۲ ورځې وروسته ښه نه شوی",
+            "en": "not better 2 days after starting the tablets"
+          }
+        }
+      ]
+    },
+    {
+      "id": "urine-infection.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "urine-infection.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "از دکان انتی‌بیوتیک نخرید؛ بعضی در حاملگی خطرناک‌اند.",
+            "ps": "له دوکان څخه انټي بیوټیک مه اخلئ؛ ځینې په امیندوارۍ کې خطرناک دي.",
+            "en": "Do not buy antibiotics from a shop; some are unsafe in pregnancy."
+          }
+        },
+        {
+          "id": "urine-infection.dont.drinkless",
+          "icon": "no-drink",
+          "text": {
+            "fa": "برای اینکه کمتر ادرار کنید کمتر ننوشید؛ بیشتر بنوشید.",
+            "ps": "د دې لپاره چې لږې متیازې وکړئ لږ مه څښئ؛ ډېر وڅښئ.",
+            "en": "Do not drink less to pass less urine; drink more."
+          }
+        },
+        {
+          "id": "urine-infection.dont.herbs",
+          "icon": "no",
+          "text": {
+            "fa": "گیاه یا آب نمک را داخل شرمگاه استفاده نکنید.",
+            "ps": "بوټي یا مالګینې اوبه د شرمګاه دننه مه کاروئ.",
+            "en": "Do not use herbs or salt water inside the private parts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "urine-infection.female",
+      "type": "tip",
+      "icon": "midwife",
+      "text": {
+        "fa": "خانم می‌تواند کارمند صحی زن یا قابله را بخواهد. سوزش ادرار شرم ندارد؛ عام است و زود تداوی می‌شود.",
+        "ps": "ښځه کولای شي ښځینه روغتیايي کارکوونکې یا قابله وغواړي. د متیازو سوزش د شرم خبره نه ده؛ عام دی او ژر درملنه کېږي.",
+        "en": "A woman can ask for a female health worker or midwife. Burning urine is nothing to be ashamed of; it is common and quickly treated."
+      }
+    }
+  ],
+  "sources": [
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): urine testing for asymptomatic bacteriuria and a 7-day antibiotic course to prevent preterm birth and kidney infection",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): burning on urination in pregnancy, treat and refer if fever, flank pain or vomiting",
+    "WHO AWaRe antibiotic book (2022): lower urinary tract infection (nitrofurantoin, trimethoprim-sulfamethoxazole, amoxicillin-clavulanate) and upper urinary tract infection (injectable options)",
+    "WHO Pocket Book of Hospital Care for Children (2013): urinary tract infection in children",
+    "Afghanistan BPHS (2010): amoxicillin and cotrimoxazole at Basic Health Centre; nitrofurantoin at district hospital level; Afghanistan National Essential Medicines List (2014): nitrofurantoin",
+    "Burden: no Afghanistan-specific data on urinary infection were found; MICS 2022-23 and AHS 2018 show low antenatal care coverage in Samangan (ANC4+ 18 percent), so screening in pregnancy is often missed"
+  ],
+  "review": [
+    "Antibiotic names (nitrofurantoin, amoxicillin) follow WHO AWaRe and the Afghan lists; nitrofurantoin was in the district-hospital list of BPHS 2010, not BHC, so BHCs may give cotrimoxazole or amoxicillin instead. Mo to confirm or remove names.",
+    "Urine dipstick availability at BHC level is not guaranteed; the text says 'tests the urine with a strip'.",
+    "'No urine for 12 hours' as an adult danger sign is practical wording, not a WHO figure.",
+    "The 'after sex' advice and 'inside the private parts' do-not item need a check for acceptable Dari/Pashto wording when narrated aloud.",
+    "Section is 'women' although men and children are mentioned; the symptom finder should link it from 'burning urine' for everyone."
+  ]
+}

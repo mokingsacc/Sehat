@@ -145,6 +145,20 @@
       }
     },
     {
+      "id": "first-aid.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: چه کمکی می‌کنند",
+        "ps": "په روغتون کې: څه مرسته کوي",
+        "en": "At the hospital: what they can do"
+      },
+      "text": {
+        "fa": "کلینیک تداوی اول و پیچکاری تیتانوس می‌دهد و واقعات جدی را به شفاخانه می‌فرستد. شفاخانه زخم‌ها را بخیه می‌کند، استخوان را جابه‌جا می‌کند، سوختگی را تداوی می‌کند، اکسیجن و خون می‌دهد و برای بعضی زهرها پادزهر دارد.",
+        "ps": "کلینیک لومړنۍ درملنه او د تیټانوس پیچکاري ورکوي او جدي پېښې روغتون ته لېږي. روغتون زخمونه ګنډي، هډوکي ځای پر ځای کوي، سوځېدنه درملنه کوي، اکسیجن او وینه ورکوي او د ځینو زهرو لپاره ضد زهر لري.",
+        "en": "The clinic gives first treatment and a tetanus injection and sends serious cases on. The hospital stitches wounds, sets bones, treats burns, gives oxygen and blood, and has antidotes for some poisons."
+      }
+    },
+    {
       "id": "first-aid.dont",
       "type": "dont",
       "title": {
@@ -274,16 +288,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "first-aid.tip-poison",
-      "type": "tip",
-      "icon": "poison",
-      "text": {
-        "fa": "تیل خاک، دواها و زهرها را بلند و دور از دست اطفال نگه دارید، و هرگز در بوتل آب نریزید.",
-        "ps": "خاورین تېل، درمل او زهر لوړ او د ماشومانو له لاسه لرې کېږدئ، او هېڅکله یې د اوبو په بوتل کې مه اچوئ.",
-        "en": "Keep kerosene, medicines and poisons high up and out of children's reach, and never in water bottles."
-      }
     }
   ],
   "sources": [
@@ -292,7 +296,8 @@
     "WHO fact sheet: Burns (October 2023)",
     "WHO fact sheet: Rabies (wound washing with soap and water for 15 minutes, post-exposure vaccine)",
     "WHO guidelines for indoor air quality: selected pollutants (2010): carbon monoxide; WHO guidelines for indoor air quality: household fuel combustion (2014)",
-    "WHO/UNICEF World report on child injury prevention (2008): poisoning and burns prevention"
+    "WHO/UNICEF World report on child injury prevention (2008): poisoning and burns prevention",
+    "WHO/IFRC first aid guidance (IFRC 2020); Afghanistan BPHS (2010): tetanus prophylaxis and wound care at BHC and CHC; EPHS: surgery, blood transfusion at district and provincial hospitals"
   ],
   "review": [
     "Burns: cooling time is 20 minutes as briefed (UK/Australian practice). IFRC/Red Cross 2020 says at least 10 minutes and ILCOR 2021 gives no set time; WHO warns against long cooling because of hypothermia. Consider adding 'keep a baby warm while cooling'.",
@@ -305,6 +310,8 @@
     "Icons: the head injury uses 'headache' (would prefer 'head-injury'); the 'dont' items all use 'no'.",
     "The urgent alert names the genitals (fa اعضای تناسلی, ps تناسلي غړي). Check whether there is a gentler village word.",
     "Length: this is the longest topic (about 325 English and 355 Dari words), so it is near the 2.5-minute limit.",
-    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
+    "Home safety section (2026-10-07): the poison storage tip (first-aid.tip-poison) is removed; storage is now on the safe-storage page. first-aid.fumes and first-aid.urgent.fumes stay as hub summaries; the full CO signs are on home-safety.",
+    "Blood transfusion and antidotes are provincial/regional hospital services; Aybak provincial hospital capacity should be confirmed."
   ]
 }

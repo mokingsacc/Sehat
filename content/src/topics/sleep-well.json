@@ -1,0 +1,184 @@
+{
+  "id": "sleep-well",
+  "section": "everyone",
+  "title": {
+    "fa": "خواب خوب",
+    "ps": "ښه خوب",
+    "en": "Sleep well"
+  },
+  "summary": {
+    "fa": "وقت خواب منظم، اتاق تاریک و آرام، و شب‌های گرم و بی‌خطر.",
+    "ps": "د خوب منظم وخت، تیاره او ارامه کوټه، او ګرمې او خوندي شپې.",
+    "en": "A regular bedtime, a dark quiet room, and warm, safe nights."
+  },
+  "image": "sleep-well",
+  "blocks": [
+    {
+      "id": "sleep-well.lead",
+      "type": "lead",
+      "text": {
+        "fa": "خواب خوب به جسم کمک می‌کند جور شود، ذهن آرام بماند و اطفال رشد کنند. این کارها به خانواده‌های دیگر کمک کرده که عمیق بخوابند.",
+        "ps": "ښه خوب له بدن سره مرسته کوي چې روغ شي، ذهن ارام پاتې شي او ماشومان وده وکړي. دې کارونو له نورو کورنیو سره مرسته کړې چې ژور خوب وکړي.",
+        "en": "Good sleep helps the body heal, the mind stay calm and children grow. These things help other families sleep deeply."
+      }
+    },
+    {
+      "id": "sleep-well.time",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "هر شب تقریباً در یک وقت",
+        "ps": "هره شپه نږدې په یو وخت",
+        "en": "About the same time every night"
+      },
+      "text": {
+        "fa": "هر روز تقریباً در یک وقت بخوابید و بیدار شوید. بدن شما یاد می‌گیرد که چه وقت، وقت خواب است.",
+        "ps": "هره ورځ نږدې په یو وخت ویده او ویښ شئ. ستاسو بدن زده کوي چې د خوب وخت کله دی.",
+        "en": "Go to bed and get up at about the same time each day. Your body learns when it is time to sleep."
+      }
+    },
+    {
+      "id": "sleep-well.hours",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "به اندازهٔ کافی بخوابید",
+        "ps": "په کافي اندازه ویده شئ",
+        "en": "Enough hours of sleep"
+      },
+      "text": {
+        "fa": "بیشتر بزرگسالان به ۷ تا ۹ ساعت خواب نیاز دارند. اطفال به خواب بیشتر نیاز دارند، پس آن‌ها را زود بخوابانید.",
+        "ps": "ډېری لویان ۷ تر ۹ ساعته خوب ته اړتیا لري. ماشومان ډېر خوب ته اړتیا لري، نو هغوی وختي ویده کړئ.",
+        "en": "Most adults need 7 to 9 hours of sleep. Children need more, so put them to bed early."
+      }
+    },
+    {
+      "id": "sleep-well.dark",
+      "type": "step",
+      "icon": "window",
+      "title": {
+        "fa": "اتاق تاریک و آرام",
+        "ps": "تیاره او ارامه کوټه",
+        "en": "A dark, quiet room"
+      },
+      "text": {
+        "fa": "کلکین را بپوشانید، چراغ‌های روشن را خاموش کنید و صدا را کم نگه دارید. تاریکی به بدن می‌فهماند که شب است.",
+        "ps": "کړکۍ پټه کړئ، روښانه څراغونه مړه کړئ او غږ کم وساتئ. تیاره بدن ته ورښيي چې شپه ده.",
+        "en": "Cover the window, put out bright lights and keep noise low. Darkness tells the body that it is night."
+      }
+    },
+    {
+      "id": "sleep-well.warm",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "اتاق خیلی گرم نباشد، لحاف گرم باشد",
+        "ps": "کوټه ډېره ګرمه نه وي، بړستن ګرمه وي",
+        "en": "Not too hot, with warm bedding"
+      },
+      "text": {
+        "fa": "اتاقی که خیلی گرم نباشد، اما سرد هم نباشد، به خواب کمک می‌کند. لحاف گرم استفاده کنید و اطفال کوچک و کلان‌سالان را خوب بپوشانید؛ زود سرد می‌شوند.",
+        "ps": "هغه کوټه چې ډېره ګرمه نه وي، خو سړه هم نه وي، له خوب سره مرسته کوي. ګرمې بړستنې وکاروئ، او کوچني ماشومان او زاړه خلک ښه پټ کړئ؛ ژر سړېږي.",
+        "en": "A room that is cool but not cold helps sleep. Use warm quilts, and keep small children and old people well covered: they get cold fast."
+      }
+    },
+    {
+      "id": "sleep-well.fire",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "پیش از خواب آتش را خاموش کنید",
+        "ps": "له خوب مخکې اور مړ کړئ",
+        "en": "Put fires out before sleep"
+      },
+      "text": {
+        "fa": "هرگز در اتاق بسته با بخاری، ذغال صندلی یا بخاری گازی روشن نخوابید. گاز زهری آن‌ها بو ندارد و می‌تواند بکشد.",
+        "ps": "هېڅکله په تړلې کوټه کې د بلې بخارۍ، د صندلۍ د سکرو یا ګازي بخارۍ سره ویده مه شئ. د دوی زهرجن ګاز بوی نه لري او وژلای شي.",
+        "en": "Never sleep in a closed room with a bukhari, sandali coals or a gas heater burning. Their poison gas has no smell and can kill."
+      }
+    },
+    {
+      "id": "sleep-well.day",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "روشنی روز و کار در روز",
+        "ps": "د ورځې رڼا او فعالیت",
+        "en": "Daylight and activity by day"
+      },
+      "text": {
+        "fa": "صبح در روشنی بیرون بروید و در طول روز فعال باشید. کوشش کنید بعد از چاشت زیاد نخوابید.",
+        "ps": "سهار رڼا ته ووځئ او د ورځې فعال اوسئ. هڅه وکړئ چې د ماسپښین ډېر ویده نه شئ.",
+        "en": "Go out in the morning light and keep active in the day. Try not to sleep long in the afternoon."
+      }
+    },
+    {
+      "id": "sleep-well.evening",
+      "type": "link",
+      "to": "topic/evening-routine",
+      "icon": "moon",
+      "title": {
+        "fa": "شب، پیش از خواب",
+        "ps": "ماښام، له خوب مخکې",
+        "en": "The evening before sleep"
+      },
+      "text": {
+        "fa": "غذای شب زودتر و سبک‌تر، چای نخوردن پیش از خواب، کنار گذاشتن تیلفون، و روشنی کم.",
+        "ps": "د شپې وختي او سپکه ډوډۍ، له خوب مخکې چای نه څښل، ټیلیفون یوې خوا ته ایښودل، او کمه رڼا.",
+        "en": "An earlier, lighter dinner, no tea before bed, the phone put away, and soft light."
+      }
+    },
+    {
+      "id": "sleep-well.fumes",
+      "type": "link",
+      "to": "topic/home-safety",
+      "icon": "stove",
+      "title": {
+        "fa": "خانهٔ بی‌خطر: دود و گاز",
+        "ps": "خوندي کور: لوګی او ګاز",
+        "en": "Safe home: fumes and gas"
+      },
+      "text": {
+        "fa": "شب بدون گاز زهری گرم بمانید، و علایم خطر آن را بشناسید.",
+        "ps": "د شپې پرته له زهرجن ګازه ګرم پاتې شئ، او د هغه د خطر نښې وپېژنئ.",
+        "en": "Keep warm at night without poison gas, and know its warning signs."
+      }
+    },
+    {
+      "id": "sleep-well.ask",
+      "type": "link",
+      "to": "ask",
+      "icon": "talk",
+      "title": {
+        "fa": "حالتان خوب نیست؟",
+        "ps": "ځان ناروغه احساسوئ؟",
+        "en": "Feeling unwell?"
+      },
+      "text": {
+        "fa": "اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.",
+        "ps": "که ځان ناروغه احساسوئ، د روغتیا برخې ته ولاړ شئ او «څه ستونزه لرئ؟» ووهئ.",
+        "en": "If you feel unwell, go to Health and tap What is wrong?"
+      }
+    }
+  ],
+  "sources": [
+    "NHS: How to get to sleep, and Insomnia (nhs.uk): regular sleep times; dark, quiet, cool bedroom; no caffeine or big meals late; no screens before bed; sleeping pills only short term and can be addictive",
+    "CDC: Sleep, Tips for better sleep (2024): same bedtime and wake time; quiet, dark, relaxing bedroom at a comfortable temperature; remove electronic devices; avoid large meals and caffeine before bed; be active by day",
+    "American Academy of Sleep Medicine: Healthy sleep habits (sleepeducation.org), and Watson et al., AASM/SRS consensus, J Clin Sleep Med 2015: adults need 7 or more hours; if you cannot sleep, get up and do something calm in dim light",
+    "Paruthi et al., AASM consensus on children's sleep, J Clin Sleep Med 2016: children need more sleep than adults (9-12 hours at 6-12 years)",
+    "WHO fact sheet: Household air pollution (2024); this book's 'Safe home: fumes and gas' and 'Safe warm home in winter' pages (carbon monoxide from heaters, sandali coals and stoves)",
+    "WHO fact sheet: Opioid overdose (2023): opioids slow and can stop breathing",
+    "NHS: Sleep apnoea (nhs.uk): loud snoring, pauses in breathing, daytime sleepiness; see a doctor"
+  ],
+  "review": [
+    "Mo's 'strict bedtime: go to bed at the exact same time' is softened to 'about the same time' (CDC, NHS, AASM all say regular, not exact).",
+    "Mo's 'dark, quiet and cold room' is made safe for Samangan winters: 'cool but not cold', warm quilts, small children and old people well covered, and the step 'Put fires out before sleep' uses the same words as winter-home.sleep (never sleep in a closed room with a bukhari, sandali coals or a gas heater burning). Link to home-safety for carbon monoxide.",
+    "The link to topic/home-safety needs the Home safety draft (content/drafts/home-safety/home-safety.json) merged first. If this section is merged before it, point the link to topic/winter-home (same title idea: 'Safe warm home in winter'); the validator fails on a link to a missing topic.",
+    "Hours: adults 7 to 9 (AASM/SRS 2015 says 7 or more; NHS and CDC say 7 to 9). Children only 'need more', with no numbers, to keep it short.",
+    "Dont items: sleeping tablets (benzodiazepines are sold without prescription in Afghan bazaars) and opium or medicine to make a child sleep (a known practice in parts of Afghanistan). Please confirm both fit and are not too strong.",
+    "Soon alert uses 'this week', not 'today' (CONTENT_SPEC allows this where clinically right): possible sleep apnoea, daytime sleepiness, nocturia (diabetes, prostate, heart), chronic insomnia. Sadness or worry with poor sleep for 2 weeks is already 'clinic today' on the stress page, which evening-routine links to.",
+    "Icons: no 'snore' icon, 'breathe' used; 'clock' used for passing urine at night (wanted: a night or toilet icon).",
+    "Words to check: Dari خُرخُر (snoring), کلان‌سالان (old people), بعد از چاشت (afternoon), لحاف; Pashto خرهار (snoring), بړستن (quilt), ماسپښین.",
+    "Home tab rule (Mo): removed the 'Do not' box (sleeping tablets, opium for children) and the 'clinic this week' box (snoring with pauses, sleepy by day, waking to pass urine, a month of poor sleep). Ends with 'If you feel unwell, go to Health and tap What is wrong?'."
+  ]
+}

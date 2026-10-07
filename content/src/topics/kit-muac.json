@@ -68,18 +68,19 @@
       }
     },
     {
-      "id": "kit-muac.colours",
-      "type": "step",
-      "icon": "growth",
+      "id": "kit-muac.meaning-page",
+      "type": "link",
+      "to": "topic/reading-muac",
+      "icon": "check",
       "title": {
-        "fa": "رنگ‌ها چه معنا دارند",
-        "ps": "رنګونه څه مانا لري",
-        "en": "What the colours mean"
+        "fa": "رنگ فیته چه معنا دارد؟",
+        "ps": "د فیتې رنګ څه مانا لري؟",
+        "en": "What does the colour mean?"
       },
       "text": {
-        "fa": "سبز خوب است. زرد یعنی لاغر است: همین هفته به کلینیک بروید. سرخ یعنی خیلی لاغر است: امروز به کلینیک بروید.",
-        "ps": "شین ښه دی. ژېړ یعنې ډنګر دی: په همدې اونۍ کلینیک ته ولاړ شئ. سور یعنې ډېر ډنګر دی: نن کلینیک ته ولاړ شئ.",
-        "en": "Green is good. Yellow means too thin: go to the clinic this week. Red means very thin: go to the clinic today."
+        "fa": "صفحهٔ صحت را باز کنید: معنای عدد، چه وقت بروید، و بررسی آن.",
+        "ps": "د روغتیا پاڼه پرانیزئ: د شمېرې مانا، کله ولاړ شئ، او د هغې کتل.",
+        "en": "Open the Health page: what it means, when to go, and a checker."
       }
     },
     {
@@ -96,61 +97,6 @@
         "ps": "په لوند ټوکر یې پاکه کړئ. هواره او وچه یې وساتئ. اوږده شوې یا شلېدلې فیته غلطه پایله ورکوي.",
         "en": "Wipe it with a damp cloth. Keep it flat and dry. A stretched or torn tape gives wrong results."
       }
-    },
-    {
-      "id": "kit-muac.check",
-      "type": "link",
-      "to": "tool/reading/muac",
-      "icon": "muac",
-      "title": {
-        "fa": "رنگ را معاینه کنید",
-        "ps": "رنګ وګورئ",
-        "en": "Check a colour"
-      },
-      "text": {
-        "fa": "رنگی را که دیدید انتخاب کنید و بشنوید چه باید کرد.",
-        "ps": "هغه رنګ وټاکئ چې ولیدئ، او واورئ چې څه باید وکړئ.",
-        "en": "Choose the colour you saw, and hear what to do."
-      }
-    },
-    {
-      "id": "kit-muac.urgent",
-      "type": "alert",
-      "level": "urgent",
-      "title": {
-        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
-        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
-        "en": "Go to hospital now, day or night, if the child:"
-      },
-      "items": [
-        {
-          "id": "kit-muac.urgent.feet",
-          "icon": "swollen-feet",
-          "text": {
-            "fa": "هر دو پایش پندیده است",
-            "ps": "دواړه پښې یې پړسېدلې دي",
-            "en": "has swelling of both feet"
-          }
-        },
-        {
-          "id": "kit-muac.urgent.eat",
-          "icon": "bowl-food",
-          "text": {
-            "fa": "لاغر است و هیچ چیز نمی‌خورد یا نمی‌نوشد",
-            "ps": "ډنګر دی او هېڅ نه خوري او نه څښي",
-            "en": "is thin and will not eat or drink anything"
-          }
-        },
-        {
-          "id": "kit-muac.urgent.sleepy",
-          "icon": "sleepy",
-          "text": {
-            "fa": "لاغر است و خیلی ضعیف یا خواب‌آلود است",
-            "ps": "ډنګر دی او ډېر کمزوری یا خوب وړی دی",
-            "en": "is thin and very weak or sleepy"
-          }
-        }
-      ]
     },
     {
       "id": "kit-muac.age",
@@ -175,6 +121,7 @@
     "Yellow = clinic 'this week' (moderate acute malnutrition), not 'today'.",
     "Price: often free from nutrition programmes; 'very little' in pharmacies.",
     "Local word for the MUAC tape: 'فیتهٔ بازو' / 'د مټ فیته' chosen; nutrition workers may say 'موک' or 'مواک'.",
-    "Red = clinic today (outpatient, MoPH IMAM 2018); growth.json now says the same (growth.today) and keeps hospital now for swelling of both feet, not eating, or very thin and very weak, sleepy or sick."
+    "Red = clinic today (outpatient, MoPH IMAM 2018); growth.json now says the same (growth.today) and keeps hospital now for swelling of both feet, not eating, or very thin and very weak, sleepy or sick.",
+    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-muac: kit-muac.colours, kit-muac.urgent, kit-muac.check. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen)."
   ]
 }

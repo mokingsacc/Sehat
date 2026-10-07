@@ -1,0 +1,198 @@
+{
+  "id": "road-safety",
+  "section": "everyone",
+  "title": {
+    "fa": "بی‌خطر در سرک",
+    "ps": "په سړک کې خوندي",
+    "en": "Safe on the road"
+  },
+  "summary": {
+    "fa": "موترسایکل، موتر، راه رفتن در شب و اطفال نزدیک موتر.",
+    "ps": "موټرسایکل، موټر، د شپې تګ او موټر ته نږدې ماشومان.",
+    "en": "Motorbikes, cars, walking at night and children near vehicles."
+  },
+  "image": "road-safety",
+  "blocks": [
+    {
+      "id": "road-safety.lead",
+      "type": "lead",
+      "text": {
+        "fa": "حادثه‌های سرک اطفال و مردان جوان زیادی را زخمی می‌کند و می‌کشد. چند عادت ساده هنگام پیاده رفتن، روی موترسایکل و در موتر، خانوادهٔ شما را بی‌خطر نگه می‌دارد.",
+        "ps": "د سړک پېښې ډېر ماشومان او ځوانان ټپي کوي او وژني. په پلي تګ، موټرسایکل او موټر کې څو ساده عادتونه ستاسو کورنۍ خوندي ساتي.",
+        "en": "Road crashes hurt and kill many children and young men. Simple habits on foot, on a motorbike and in a car keep your family safe."
+      }
+    },
+    {
+      "id": "road-safety.helmet",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "در هر سفر موترسایکل، کلاه ایمنی",
+        "ps": "د موټرسایکل په هر سفر کې د ساتنې خولۍ",
+        "en": "A helmet on every motorbike ride"
+      },
+      "text": {
+        "fa": "راننده و هر سواری کلاه ایمنی بپوشند و بند آن را زیر زنخ ببندند. برای طفل خورد بهتر است اصلاً سوار موترسایکل نشود.",
+        "ps": "چلوونکی او هر سپرلی دې د ساتنې خولۍ په سر کړي او تسمه یې د زنې لاندې وتړي. د کوچني ماشوم لپاره ښه دا ده چې هېڅ په موټرسایکل سپور نه شي.",
+        "en": "The rider and every passenger wear a helmet, fastened under the chin. A small child is safest not on a motorbike at all."
+      }
+    },
+    {
+      "id": "road-safety.belts",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "کمربند ایمنی، و اطفال در چوکی عقب",
+        "ps": "د امنیت کمربند، او ماشومان شاته څوکۍ کې",
+        "en": "Seat belts, and children in the back"
+      },
+      "text": {
+        "fa": "همه در موتر کمربند ایمنی ببندند. اطفال در چوکی عقب بنشینند، هرگز در بغل کسی در چوکی پیش.",
+        "ps": "په موټر کې هر څوک دې د امنیت کمربند وتړي. ماشومان دې شاته څوکۍ کې کېني، هېڅکله دې مخکې د چا په غېږ کې نه کېني.",
+        "en": "Everyone in a car wears a seat belt. Children sit in the back seat, never on someone's lap in the front."
+      }
+    },
+    {
+      "id": "road-safety.roof",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "روی بام یا پشت موتر سوار نشوید",
+        "ps": "د موټر پر بام یا شا مه سپرېږئ",
+        "en": "Never ride on the roof or back"
+      },
+      "text": {
+        "fa": "روی بام موتر یا بس، یا در پشت باز موتر باربری سوار نشوید. مردم از آن می‌افتند و سخت زخمی می‌شوند.",
+        "ps": "د موټر یا بس پر بام، یا د بار موټر په خلاصه شا کې مه سپرېږئ. خلک ترې لوېږي او سخت ټپي کېږي.",
+        "en": "Do not ride on the roof of a car or bus, or in the open back of a pickup or truck. People fall off and are badly hurt."
+      }
+    },
+    {
+      "id": "road-safety.yard",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "پیش از حرکت، پشت موتر را ببینید",
+        "ps": "له حرکت مخکې د موټر شا وګورئ",
+        "en": "Look behind before you move off"
+      },
+      "text": {
+        "fa": "اطفال خورد پشت موتر و تراکتور بازی می‌کنند. پیش از حرکت دور موتر بگردید و ببینید، و وقتی موتر حرکت می‌کند اطفال را بگیرید.",
+        "ps": "کوچني ماشومان د موټر او ټراکټور شاته لوبې کوي. له حرکت مخکې د موټر شاوخوا وګرځئ او وګورئ، او کله چې موټر خوځېږي ماشومان ونیسئ.",
+        "en": "Small children play behind cars and tractors. Walk round and look before you move, and hold children while vehicles move."
+      }
+    },
+    {
+      "id": "road-safety.night",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "در شب دیده شوید",
+        "ps": "د شپې ځان ښکاره کړئ",
+        "en": "Be seen at night"
+      },
+      "text": {
+        "fa": "وقتی شب پیاده می‌روید، چراغ دستی ببرید و لباس روشن بپوشید. در کنار سرک، رو به روی موترها راه بروید.",
+        "ps": "کله چې د شپې پلی ځئ، لاسي څراغ یوسئ او روښانه جامې واغوندئ. د سړک په غاړه، د موټرو مخ ته روان شئ.",
+        "en": "When you walk at night, carry a torch and wear light clothes. Walk at the side of the road, facing the traffic."
+      }
+    },
+    {
+      "id": "road-safety.driver",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "آهسته و آرام رانندگی کنید",
+        "ps": "ورو او آرام موټر چلوئ",
+        "en": "Drive slowly and rested"
+      },
+      "text": {
+        "fa": "نزدیک قریه، مکتب و حیوانات آهسته برانید. وقتی خیلی خسته هستید رانندگی نکنید، و هنگام رانندگی هرگز از تلیفون استفاده نکنید.",
+        "ps": "کلي، ښوونځي او څارویو ته نږدې ورو چلوئ. کله چې ډېر ستړي یاست موټر مه چلوئ، او د چلولو پر وخت هېڅکله ټیلیفون مه کاروئ.",
+        "en": "Slow down near villages, schools and animals. Do not drive when very tired, and never use a phone while driving."
+      }
+    },
+    {
+      "id": "road-safety.crash",
+      "type": "link",
+      "to": "topic/falls-fractures",
+      "icon": "stiff-neck",
+      "title": {
+        "fa": "بعد از حادثه: گردن را محافظت کنید",
+        "ps": "له پېښې وروسته: غاړه وساتئ",
+        "en": "After a crash: protect the neck"
+      },
+      "text": {
+        "fa": "شخص را بی‌حرکت نگه دارید مگر اینکه در خطر باشد، و کسی را برای آوردن موتر بفرستید. صفحه را باز کنید.",
+        "ps": "کس مه خوځوئ مګر دا چې په خطر کې وي، او یو څوک د موټر راوړلو لپاره ولېږئ. پاڼه پرانیزئ.",
+        "en": "Keep the person still unless they are in danger, and send for a car. Open the page."
+      },
+      "urgent": true
+    },
+    {
+      "id": "road-safety.bleeding",
+      "type": "link",
+      "to": "topic/bleeding",
+      "icon": "bleeding",
+      "title": {
+        "fa": "خونریزی شدید؟",
+        "ps": "ډېره وینه بهېږي؟",
+        "en": "Heavy bleeding?"
+      },
+      "text": {
+        "fa": "با یک تکهٔ پاک روی زخم محکم فشار دهید و ادامه دهید. صفحه را باز کنید.",
+        "ps": "په پاک ټوکر پر ټپ کلک فشار ورکړئ او دوام ورکړئ. پاڼه پرانیزئ.",
+        "en": "Press hard on the wound with a clean cloth and keep pressing. Open the page."
+      },
+      "urgent": true
+    },
+    {
+      "id": "road-safety.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "road-safety.dont.child-drive",
+          "icon": "no",
+          "text": {
+            "fa": "نگذارید اطفال موترسایکل، تراکتور یا موتر برانند",
+            "ps": "مه پرېږدئ چې ماشومان موټرسایکل، ټراکټور یا موټر وچلوي",
+            "en": "let children drive a motorbike, tractor or car"
+          }
+        },
+        {
+          "id": "road-safety.dont.overload",
+          "icon": "no",
+          "text": {
+            "fa": "بیشتر از جای موترسایکل، آدم سوار نکنید",
+            "ps": "په موټرسایکل له ځای څخه زیات خلک مه سپروئ",
+            "en": "carry more people on a motorbike than it has seats for"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO Global status report on road safety 2023, and WHO fact sheet: Road traffic injuries (2023)",
+    "WHO Helmets: a road safety manual for decision-makers and practitioners, 2nd edition (2023)",
+    "WHO Seat-belts and child restraints: a road safety manual (2009)",
+    "WHO Pedestrian safety: a road safety manual, 2nd edition (2023): visibility at night, walking facing traffic",
+    "WHO/UNICEF World report on child injury prevention (2008): road traffic injuries, children in driveways and yards",
+    "WHO Speed management: a road safety manual, 2nd edition (2023); WHO Mobile phone use: a growing problem of driver distraction (2011)"
+  ],
+  "review": [
+    "New page. child-safety.road (hold children's hands, no playing by the road) stays on child-safety unchanged, so this page has a different child message: look behind before moving off (small children run over in yards and driveways).",
+    "'A small child is safest not on a motorbike at all' is strict: families do ride with children. WHO has no lay rule; some countries ban children under a set age as passengers. Soften to 'hold a small child safely between two adults, with a helmet if you can get one' if you prefer.",
+    "No child car seats: they are rarely available or affordable. 'Children in the back, never on a lap in the front' is the WHO minimum.",
+    "Walking 'facing the traffic' means on the left side of the road in Afghanistan (traffic drives on the right).",
+    "'Many children and young men': road traffic injury is the leading killer of people aged 5 to 29 worldwide (WHO 2023); no Afghan figure is given.",
+    "The urgent box overlaps falls-fractures.urgent and head-injury, in a road-crash form, so this page says when to go.",
+    "Words to check (Dari / Pashto): کلاه ایمنی / د ساتنې خولۍ (helmet), کمربند ایمنی / د امنیت کمربند (seat belt), موتر باربری / د بار موټر (pickup or truck), تراکتور / ټراکټور, سواری / سپرلی (passenger), چوکی عقب / شاته څوکۍ (back seat).",
+    "Icons: wanted 'motorbike', 'helmet' and 'road'; used warning and car.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: road-safety.urgent. Urgent signs are reached through the red link to the Health side."
+  ]
+}

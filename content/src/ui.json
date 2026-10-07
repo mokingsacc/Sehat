@@ -887,9 +887,39 @@
    "en": "Home health kit"
   },
   "kitSub": {
-   "fa": "چه بخرید، چطور استفاده کنید، عددها چه معنا دارند",
-   "ps": "څه واخلئ، څنګه یې وکاروئ، شمېرې څه مانا لري",
-   "en": "What to buy, how to use it, what the numbers mean"
+   "fa": "چه بخرید و چطور استفاده کنید",
+   "ps": "څه واخلئ او څنګه یې وکاروئ",
+   "en": "What to buy and how to use it"
+  },
+  "homeSafety": {
+   "fa": "خانهٔ بی‌خطر",
+   "ps": "خوندي کور",
+   "en": "Home safety"
+  },
+  "homeSafetySub": {
+   "fa": "دود، گاز، برق، آتش، زهر، گزیدن و سرک",
+   "ps": "لوګی، ګاز، برېښنا، اور، زهر، چیچل او سړک",
+   "en": "Fumes, gas, electricity, fire, poisons, bites and roads"
+  },
+  "hospital": {
+   "fa": "رفتن به کلینیک یا شفاخانه",
+   "ps": "کلینیک یا روغتون ته تلل",
+   "en": "Going to the clinic or hospital"
+  },
+  "hospitalSub": {
+   "fa": "کدام جای، چه ببرید، معاینات و تداوی",
+   "ps": "کوم ځای، څه یوسئ، معاینې او درملنې",
+   "en": "Which place, what to take, tests and treatments"
+  },
+  "food": {
+   "fa": "غذا و باغچه",
+   "ps": "خواړه او باغچه",
+   "en": "Food and garden"
+  },
+  "foodSub": {
+   "fa": "کشت، نگهداری و پختن غذای خوب؛ مرغ، بز و درآمد.",
+   "ps": "د ښو خوړو کرل، ساتل او پخول؛ چرګان، وزې او عاید.",
+   "en": "Grow, store and cook good food; chickens, goats and earning."
   },
   "start": {
    "fa": "شروع",
@@ -1140,6 +1170,96 @@
    "fa": "بلی، می‌گویم",
    "ps": "هو، وایم یې",
    "en": "Yes, I will speak"
+  },
+  "health": {
+   "fa": "صحت",
+   "ps": "روغتیا",
+   "en": "Health"
+  },
+  "house": {
+   "fa": "خانه",
+   "ps": "کور",
+   "en": "Home"
+  },
+  "cprFirstAid": {
+   "fa": "احیا و کمک‌های اولیه",
+   "ps": "بیا ژوندي کول او لومړنۍ مرستې",
+   "en": "CPR and first aid"
+  },
+  "cprFirstAidSub": {
+   "fa": "نفس نمی‌کشد، خونریزی، سوختگی، گیر کردن در گلو و بیشتر",
+   "ps": "ساه نه اخلي، وینه بهېدل، سوځېدل، په ستوني کې بندېدل او نور",
+   "en": "Not breathing, bleeding, burns, choking and more"
+  },
+  "firstAidAll": {
+   "fa": "کمک اول برای هر حادثه",
+   "ps": "د هرې پېښې لپاره لومړنۍ مرسته",
+   "en": "First aid for each accident"
+  },
+  "childrenSub": {
+   "fa": "مریضی‌ها، علایم خطر و رشد طفل",
+   "ps": "ناروغۍ، د خطر نښې او د ماشوم وده",
+   "en": "Illnesses, danger signs and growth"
+  },
+  "adultsSub": {
+   "fa": "مریضی‌ها، علایم خطر و صحت زنان",
+   "ps": "ناروغۍ، د خطر نښې او د ښځو روغتیا",
+   "en": "Illnesses, danger signs and women's health"
+  },
+  "commonIllness": {
+   "fa": "مریضی‌های عام",
+   "ps": "عامې ناروغۍ",
+   "en": "Common illnesses"
+  },
+  "everydayCare": {
+   "fa": "مراقبت روزمره",
+   "ps": "ورځنۍ پاملرنه",
+   "en": "Everyday care"
+  },
+  "homeReadings": {
+   "fa": "عدد ماشین‌ها",
+   "ps": "د ماشینونو شمېرې",
+   "en": "Home readings"
+  },
+  "womenHealth": {
+   "fa": "صحت زنان",
+   "ps": "د ښځو روغتیا",
+   "en": "Women's health"
+  },
+  "wellbeing": {
+   "fa": "زندگی صحتمند",
+   "ps": "روغ ژوند",
+   "en": "Well-being"
+  },
+  "wellbeingSub": {
+   "fa": "خواب، شب‌های آرام، غذا برای قلب و تحرک هر روزه.",
+   "ps": "خوب، ارام ماښامونه، د زړه لپاره خواړه او هره ورځ حرکت.",
+   "en": "Sleep, calm evenings, food for the heart and moving every day."
+  },
+  "ageNewbornShort": {
+   "fa": "نوزاد",
+   "ps": "نوی زېږېدلی",
+   "en": "Newborn"
+  },
+  "ageBabyShort": {
+   "fa": "شیرخوار",
+   "ps": "تي رودونکی",
+   "en": "Baby"
+  },
+  "ageChildShort": {
+   "fa": "طفل",
+   "ps": "ماشوم",
+   "en": "Child"
+  },
+  "ageAdultShort": {
+   "fa": "بزرگسال",
+   "ps": "لوی کس",
+   "en": "Adult"
+  },
+  "comingSoon": {
+   "fa": "به زودی",
+   "ps": "ډېر ژر",
+   "en": "Coming soon"
   }
  },
  "say": {
@@ -1269,9 +1389,24 @@
    "en": "Put in the number from a thermometer, blood pressure machine, sugar meter or oxygen clip, and hear what it means."
   },
   "ui.kit": {
-   "fa": "بکس صحی خانه: برای خانواده چه بخرید، چطور استفاده کنید و عددها چه معنا دارند.",
-   "ps": "د کور روغتیايي بکس: کورنۍ ته څه واخلئ، څنګه یې وکاروئ، او شمېرې څه مانا لري.",
-   "en": "Home health kit: what to buy for your family, how to use it, and what the numbers mean."
+   "fa": "بکس صحی خانه: برای خانواده چه بخرید و چطور استفاده کنید.",
+   "ps": "د کور روغتیايي بکس: کورنۍ ته څه واخلئ او څنګه یې وکاروئ.",
+   "en": "Home health kit: what to buy for your family, and how to use it."
+  },
+  "ui.homeSafety": {
+   "fa": "خانهٔ بی‌خطر: راه‌های ساده برای حفاظت خانواده از دود، گاز، برق، آتش، زهر، گزیدن و حادثهٔ سرک.",
+   "ps": "خوندي کور: د کورنۍ د ساتنې ساده لارې، له لوګي، ګاز، برېښنا، اور، زهرو، چیچلو او د سړک له پېښو.",
+   "en": "Home safety: simple ways to keep your family safe from fumes, gas, electricity, fire, poisons, bites and road accidents."
+  },
+  "ui.hospital": {
+   "fa": "رفتن به کلینیک یا شفاخانه. شش صفحهٔ کوتاه: کدام جای چه کار می‌کند، آماده شدن، وقتی می‌رسید، معاینات، تداوی، و رفتن به خانه.",
+   "ps": "کلینیک یا روغتون ته تلل. شپږ لنډې پاڼې: کوم ځای څه کوي، چمتو کېدل، کله چې ورسېږئ، معاینې، درملنې، او کور ته تلل.",
+   "en": "Going to the clinic or hospital. Six short pages: which place does what, getting ready, arriving, tests, treatments, and going home."
+  },
+  "ui.food": {
+   "fa": "غذا و باغچه: کشت ترکاری، صرفه‌جویی آب، غذای اطفال، نگهداری غذا، مرغ، بز و گوسفند، و درآمد از خانه.",
+   "ps": "خواړه او باغچه: د سبزیو کرل، د اوبو سپما، د ماشومانو خواړه، د خوړو ساتل، چرګان، وزې او پسونه، او له کوره عاید.",
+   "en": "Food and garden: growing vegetables, saving water, food for children, storing food, chickens, goats and sheep, and earning from home."
   },
   "ui.br.intro": {
    "fa": "بشمارید که طفل در یک دقیقه چند بار نفس می‌کشد. نفس تیز می‌تواند علامت سینه‌بغل باشد. اول عمر طفل را انتخاب کنید.",
@@ -1742,6 +1877,91 @@
    "fa": "برای فهمیدن گپ شما، گوشی آواز شما را از راه انترنت به خدمت گفتار گوگل می‌فرستد. این برنامه آواز شما را ذخیره نمی‌کند. می‌توانید به جای آن بنویسید یا یک تصویر را انتخاب کنید.",
    "ps": "ستاسو د خبرو د پوهېدو لپاره، ټیلیفون ستاسو غږ د انټرنېټ له لارې د ګوګل د خبرو خدمت ته لېږي. دا اپ ستاسو غږ نه ساتي. تاسو کولی شئ پر ځای یې ولیکئ یا یو انځور وټاکئ.",
    "en": "To understand what you say, the phone sends your voice over the internet to Google's speech service. This app does not keep your voice. You can type or pick a picture instead."
+  },
+  "ui.tab.health": {
+   "fa": "صحت",
+   "ps": "روغتیا",
+   "en": "Health"
+  },
+  "ui.tab.house": {
+   "fa": "خانه",
+   "ps": "کور",
+   "en": "Home"
+  },
+  "ui.tab.family": {
+   "fa": "خانواده",
+   "ps": "کورنۍ",
+   "en": "Family"
+  },
+  "ui.house": {
+   "fa": "خانه: خانهٔ بی‌خطر، غذا و باغچه، زندگی صحتمند، و بکس صحی خانه.",
+   "ps": "کور: خوندي کور، خواړه او باغچه، روغ ژوند، او د کور روغتیايي بکس.",
+   "en": "Home: home safety, food and garden, well-being, and the home health kit."
+  },
+  "ui.cprFirstAid": {
+   "fa": "احیا و کمک‌های اولیه: اگر کسی نفس نمی‌کشد، سن او را انتخاب کنید. پایین‌تر، کمک اول برای هر حادثه، قدم به قدم.",
+   "ps": "بیا ژوندي کول او لومړنۍ مرستې: که څوک ساه نه اخلي، د هغه عمر وټاکئ. لاندې، د هرې پېښې لپاره لومړنۍ مرسته، ګام په ګام.",
+   "en": "CPR and first aid: if someone is not breathing, choose their age. Below, first aid for each accident, step by step."
+  },
+  "ui.cprWho": {
+   "fa": "کسی نفس نمی‌کشد؟ سن او را انتخاب کنید: نوزاد، شیرخوار، طفل یا بزرگسال.",
+   "ps": "څوک ساه نه اخلي؟ د هغه عمر وټاکئ: نوی زېږېدلی، تي رودونکی، ماشوم یا لوی کس.",
+   "en": "Someone not breathing? Choose their age: newborn, baby, child or adult."
+  },
+  "ui.firstAidAll": {
+   "fa": "کمک اول برای هر حادثه. روی یک تصویر بزنید.",
+   "ps": "د هرې پېښې لپاره لومړنۍ مرسته. پر یوه انځور ټک وکړئ.",
+   "en": "First aid for each accident. Tap a picture."
+  },
+  "ui.dangerSigns": {
+   "fa": "علایم خطر: چه وقت فوراً به کلینیک یا شفاخانه بروید.",
+   "ps": "د خطر نښې: کله چې سمدستي کلینیک یا روغتون ته ولاړ شئ.",
+   "en": "Danger signs: when to go to the clinic or hospital at once."
+  },
+  "ui.commonIllness": {
+   "fa": "مریضی‌های عام: در خانه چه کنید، و چه وقت به کلینیک بروید.",
+   "ps": "عامې ناروغۍ: په کور کې څه وکړئ، او کله کلینیک ته ولاړ شئ.",
+   "en": "Common illnesses: what to do at home, and when to go to the clinic."
+  },
+  "ui.everydayCare": {
+   "fa": "مراقبت روزمره: هر روز خانوادهٔ خود را صحتمند نگه دارید.",
+   "ps": "ورځنۍ پاملرنه: هره ورځ خپله کورنۍ روغه وساتئ.",
+   "en": "Everyday care: keeping your family healthy every day."
+  },
+  "ui.homeReadings": {
+   "fa": "عدد ماشین‌های خانه: ترمامتر، فشار خون، قند، اکسیجن و فیتهٔ بازو چه می‌گویند.",
+   "ps": "د کور د ماشینونو شمېرې: ترمامیټر، د وینې فشار، شکره، اکسیجن او د مټ فیته څه وايي.",
+   "en": "Home readings: what the thermometer, blood pressure, sugar, oxygen clip and arm tape tell you."
+  },
+  "ui.wellbeing": {
+   "fa": "زندگی صحتمند: خواب خوب، شب پیش از خواب، غذا برای قلب صحتمند، و تحرک هر روزه.",
+   "ps": "روغ ژوند: ښه خوب، ماښام له خوب مخکې، د روغ زړه لپاره خواړه، او هره ورځ حرکت.",
+   "en": "Well-being: sleep well, the evening before sleep, food for a healthy heart, and moving every day."
+  },
+  "ui.sendForCar": {
+   "fa": "همین حالا کسی را برای آوردن موتر بفرستید.",
+   "ps": "همدا اوس یو څوک د موټر راوستلو لپاره ولېږئ.",
+   "en": "Send someone for a car now."
+  },
+  "ui.ageNewborn": {
+   "fa": "نوزاد، همین حالا به دنیا آمده",
+   "ps": "نوی زېږېدلی ماشوم، همدا اوس زېږېدلی",
+   "en": "Newborn, just born"
+  },
+  "ui.ageBaby": {
+   "fa": "شیرخوار کمتر از ۱ سال",
+   "ps": "له ۱ کال کم ماشوم",
+   "en": "Baby under 1 year"
+  },
+  "ui.ageChild": {
+   "fa": "طفل، از ۱ سال تا بلوغ",
+   "ps": "ماشوم، له ۱ کال تر بلوغ پورې",
+   "en": "Child, 1 year to puberty"
+  },
+  "ui.ageAdult": {
+   "fa": "بزرگسال یا نوجوان",
+   "ps": "لوی کس یا ځوان",
+   "en": "Adult or teenager"
   }
  },
  "months": {

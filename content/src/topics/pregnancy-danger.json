@@ -239,6 +239,34 @@
       }
     },
     {
+      "id": "pregnancy-danger.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: در راه، کلینیک کمک می‌کند",
+        "ps": "په کلینیک کې: په لاره کې کلینیک مرسته کوي",
+        "en": "At the clinic: help on the way"
+      },
+      "text": {
+        "fa": "اگر شفاخانه دور است، در نزدیک‌ترین کلینیک توقف کنید. قابله اولین پیچکاری برای خونریزی یا تشنج و اولین انتی‌بیوتیک را می‌دهد، و با شما می‌رود یا پیش از رسیدن زنگ می‌زند.",
+        "ps": "که روغتون لرې وي، په نږدې کلینیک کې ودرېږئ. قابله د وینې بهېدلو یا اختلاج لپاره لومړۍ پیچکاري او لومړی انټي بیوټیک ورکوي، او درسره ځي یا مخکې له رسېدو زنګ وهي.",
+        "en": "If the hospital is far, stop at the nearest clinic. The midwife gives the first injection for bleeding or fits and the first antibiotic, and goes with you or calls ahead."
+      }
+    },
+    {
+      "id": "pregnancy-danger.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: کمک عاجل برای مادر",
+        "ps": "په روغتون کې: مور ته بېړنۍ مرسته",
+        "en": "At the hospital: fast help for mothers"
+      },
+      "text": {
+        "fa": "برای خونریزی: سیروم، دوای جمع شدن رحم، و خون. برای تشنج: پیچکاری مگنیزیم و ولادت طفل، در صورت ضرورت با عملیات سزارین. برای عفونت: انتی‌بیوتیک پیچکاری.",
+        "ps": "د وینې بهېدلو لپاره: سیروم، د رحم د ټینګېدو درمل، او وینه. د اختلاج لپاره: د مګنیزیم پیچکاري او د ماشوم زېږول، که اړتیا وي په سزارین عملیات. د انتان لپاره: پیچکاري انټي بیوټیک.",
+        "en": "For bleeding: fluids by drip, medicine to contract the womb, and blood. For fits: magnesium injections and delivering the baby, by caesarean if needed. For infection: antibiotics by injection."
+      }
+    },
+    {
       "id": "pregnancy-danger.dont",
       "type": "dont",
       "title": {
@@ -281,7 +309,10 @@
   "sources": [
     "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): sheet M2 Care during pregnancy (danger signs, signs of labour, birth and emergency plan); sheet M4 Care for the mother after birth",
     "WHO Counselling for maternal and newborn health care: a handbook for building skills (2013): Session 7 birth and emergency planning; Session 8 danger signs during pregnancy",
-    "WHO recommendations on antenatal care for a positive pregnancy experience (2016)"
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016)",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015), section B: emergency treatments (oxytocin, magnesium sulfate, antibiotics, rapid referral)",
+    "WHO recommendations for the prevention and treatment of postpartum haemorrhage (2012) and for prevention and treatment of pre-eclampsia and eclampsia (2011)",
+    "Afghanistan BPHS (2010): oxytocin and magnesium sulfate at Basic Health Centre and above; comprehensive emergency obstetric care (caesarean, blood) at district hospital and above (IPEHS 2019)"
   ],
   "review": [
     "'The baby moves less, or not at all' is in the 'clinic today' (amber) list as requested; WHO counselling materials vary and UK practice treats reduced movements as same-day urgent. Consider moving it to the red list.",
@@ -290,6 +321,8 @@
     "'Feeling ill' uses the generic 'warning' icon.",
     "fa/ps use a polite term for vagina (fa راه تناسلی, ps تناسلي لار); ask the local translator whether a gentler village word is better.",
     "Tip names the husband and mother-in-law as the people to tell; check this suits the cultural tone.",
-    "Claude moved \"baby moves less or not at all\" from clinic-today to hospital-now (UK practice: same-day urgent)."
+    "Claude moved \"baby moves less or not at all\" from clinic-today to hospital-now (UK practice: same-day urgent).",
+    "'The midwife goes with you or calls ahead' describes good practice (PCPNC referral), not a guarantee; wording may need softening.",
+    "Magnesium sulfate and oxytocin are in the BHC list; confirm midwives at Samangan BHCs are stocked and trained to give the loading dose before referral."
   ]
 }

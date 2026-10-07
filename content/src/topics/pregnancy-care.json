@@ -128,6 +128,34 @@
       }
     },
     {
+      "id": "pregnancy-care.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: در هر معاینهٔ حاملگی",
+        "ps": "په کلینیک کې: په هره امیندوارۍ معاینه کې",
+        "en": "At the clinic: at each antenatal visit"
+      },
+      "text": {
+        "fa": "قابله فشار خون، وزن و رشد و ضربان قلب طفل را معاینه می‌کند، خون را برای کم‌خونی و ادرار را برای عفونت معاینه می‌کند، آهن، فولیک اسید و واکسین تیتانوس می‌دهد، و برای ولادت پلان می‌کند.",
+        "ps": "قابله د وینې فشار، وزن او د ماشوم وده او د زړه ټکان معاینه کوي، وینه د وینې کمښت او متیازې د انتان لپاره معاینه کوي، اوسپنه، فولیک اسید او د تیټانوس واکسین ورکوي، او د زېږون پلان جوړوي.",
+        "en": "The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid and the tetanus vaccine, and plans the birth."
+      }
+    },
+    {
+      "id": "pregnancy-care.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: ولادت در شفاخانه",
+        "ps": "په روغتون کې: په روغتون کې زېږون",
+        "en": "At the hospital: giving birth there"
+      },
+      "text": {
+        "fa": "در ولادت در کلینیک یا شفاخانه، قابله مادر و طفل را زیر نظر می‌گیرد، بعد از ولادت پیچکاری جلوگیری از خونریزی شدید را می‌دهد، در صورت ضرورت به نفس کشیدن طفل کمک می‌کند، و می‌تواند داکتر را برای سزارین بخواهد.",
+        "ps": "په کلینیک یا روغتون کې زېږون کې، قابله مور او ماشوم څاري، له زېږون وروسته د ډېرې وینې بهېدلو د مخنیوي پیچکاري ورکوي، که اړتیا وي له ماشوم سره په ساه اخیستلو کې مرسته کوي، او کولای شي د سزارین لپاره ډاکټر وغواړي.",
+        "en": "At a clinic or hospital birth, a midwife watches mother and baby, gives an injection to prevent heavy bleeding, helps the baby breathe if needed, and can send you for a caesarean."
+      }
+    },
+    {
       "id": "pregnancy-care.urgent",
       "type": "alert",
       "level": "urgent",
@@ -227,7 +255,10 @@
   "sources": [
     "WHO recommendations on antenatal care for a positive pregnancy experience (2016): first contact before 12 weeks, 8 contacts, daily iron and folic acid, tetanus vaccination, healthy eating, tobacco and second-hand smoke",
     "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): sheet M2 Care during pregnancy (eat more, rest, avoid heavy work, signs of labour, danger signs)",
-    "WHO/UNICEF Facts for Life, 4th ed. (2010): safe motherhood"
+    "WHO/UNICEF Facts for Life, 4th ed. (2010): safe motherhood",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): content of contacts (blood pressure, haemoglobin, urine, iron and folic acid, tetanus toxoid, birth planning)",
+    "WHO recommendations: intrapartum care for a positive childbirth experience (2018); PCPNC (2015): active management of the third stage (oxytocin), newborn resuscitation",
+    "Afghanistan BPHS (2010): antenatal and delivery care at BHC/CHC with midwives; caesarean at district hospital (EPHS)"
   ],
   "review": [
     "Visits: '3 months' used for the WHO 'before 12 weeks'; '8 visits are best' for the WHO 8 contacts (2016). Afghanistan services may still teach 4 visits; check local wording.",
@@ -235,6 +266,8 @@
     "Iron step adds 'take them with water, not tea' (tea reduces iron absorption); links with the anaemia page.",
     "Labour signs are a step (PCPNC M2 wording) rather than an alert, so normal labour is not shown in red.",
     "A short red alert (4 key danger signs) is repeated here so the page is safe on its own; the full list is on the danger-signs page.",
-    "Naswar uses the generic 'no' icon; a 'naswar' or 'tobacco' icon would be better."
+    "Naswar uses the generic 'no' icon; a 'naswar' or 'tobacco' icon would be better.",
+    "Caesarean is only at district hospital level and above; a BHC/CHC birth offers referral, not surgery. The wording 'can get a doctor for a caesarean' assumes transfer; Mo may prefer 'can send you to the hospital for a caesarean'.",
+    "Urine testing for infection at antenatal visits may not be available at every BHC; keep as 'tests'."
   ]
 }

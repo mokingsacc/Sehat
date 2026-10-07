@@ -1,0 +1,219 @@
+{
+  "id": "fire-safety",
+  "section": "everyone",
+  "title": {
+    "fa": "جلوگیری از آتش‌سوزی در خانه",
+    "ps": "په کور کې د اور مخنیوی",
+    "en": "Fire safety at home"
+  },
+  "summary": {
+    "fa": "تنور، چراغ، تیل خاک و شمع: از آتش‌سوزی و سوختگی جلوگیری کنید.",
+    "ps": "تنور، څراغ، خاورین تېل او شمع: د اور او سوځېدنې مخه ونیسئ.",
+    "en": "Tandoor, lamps, kerosene and candles: prevent fires and burns."
+  },
+  "image": "fire-safety",
+  "blocks": [
+    {
+      "id": "fire-safety.lead",
+      "type": "lead",
+      "text": {
+        "fa": "آتش از تنور، بخاری، چراغ تیلی، شمع و گاز شروع می‌شود. بیشتر سوختگی‌ها در خانه، به اطفال و زنانی که پخت‌وپز می‌کنند، رخ می‌دهد. چند عادت ساده و یک پلان، خانوادهٔ شما را بی‌خطر نگه می‌دارد.",
+        "ps": "اور له تنور، بخارۍ، د تېلو څراغ، شمع او ګاز څخه پیلېږي. ډېرې سوځېدنې په کور کې، ماشومانو او هغو ښځو ته چې پخلی کوي، پېښېږي. څو ساده عادتونه او یو پلان ستاسو کورنۍ خوندي ساتي.",
+        "en": "Fires start from tandoors, stoves, kerosene lamps, candles and gas. Most burns happen at home, to children and to women cooking. A few habits and a plan keep your family safe."
+      }
+    },
+    {
+      "id": "fire-safety.scarf",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "چادر را نزدیک آتش جمع کنید",
+        "ps": "اور ته نږدې خپل څادر ټول کړئ",
+        "en": "Tuck in your scarf at the fire"
+      },
+      "text": {
+        "fa": "وقتی در تنور نان می‌پزید یا پخت‌وپز می‌کنید، چادر و آستین‌های گشاد را جمع کنید. چوب، تکه و سوخت را از شعله دور نگه دارید.",
+        "ps": "کله چې په تنور کې ډوډۍ پخوئ یا پخلی کوئ، خپل څادر او پراخې لستوڼې ټولې کړئ. لرګي، ټوکر او سونګ له لمبو لرې وساتئ.",
+        "en": "When you bake at the tandoor or cook, tuck in your chador and loose sleeves. Keep wood, cloth and fuel away from the flames."
+      }
+    },
+    {
+      "id": "fire-safety.lamps",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "چراغ و شمع: محکم و زیر نظر",
+        "ps": "څراغ او شمع: ټینګ او تر نظر لاندې",
+        "en": "Lamps and candles: firm and watched"
+      },
+      "text": {
+        "fa": "چراغ و شمع را روی جای محکم و هموار، دور از پرده و بستر بگذارید. پیش از خواب یا بیرون رفتن خاموش‌شان کنید.",
+        "ps": "څراغ او شمع په ټینګ او هوار ځای، له پردو او بستري لرې کېږدئ. له خوب یا وتلو مخکې یې مړ کړئ.",
+        "en": "Stand lamps and candles on a firm, flat place, away from curtains and bedding. Put them out before you sleep or go out."
+      }
+    },
+    {
+      "id": "fire-safety.kerosene",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "چراغ و بخاری تیلی را سرد پر کنید",
+        "ps": "د تېلو څراغ او بخاري سړه ډکه کړئ",
+        "en": "Fill kerosene lamps and stoves cold"
+      },
+      "text": {
+        "fa": "آن‌ها را در بیرون، در روشنی روز و فقط وقتی سرد هستند پر کنید. تیل خاک و پطرول را در ظرف بسته، دور از آتش نگه دارید.",
+        "ps": "بهر، د ورځې په رڼا کې او یوازې کله چې سړه وي، ډک یې کړئ. خاورین تېل او پطرول په تړلي لوښي کې، له اوره لرې وساتئ.",
+        "en": "Fill them outside, in daylight, and only when cold. Keep kerosene and petrol in a closed can, away from the fire."
+      }
+    },
+    {
+      "id": "fire-safety.ready",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "ریگ یا آب آماده نگه دارید",
+        "ps": "شګه یا اوبه چمتو وساتئ",
+        "en": "Keep sand or water ready"
+      },
+      "text": {
+        "fa": "یک سطل ریگ یا آب نزدیک تنور و بخاری بگذارید. اگر دیگ روغن آتش گرفت، آتش زیرش را خاموش کنید و سرپوش بگذارید.",
+        "ps": "یو سطل شګه یا اوبه تنور او بخارۍ ته نږدې کېږدئ. که د غوړیو کټوي اور واخیست، لاندې اور یې بند کړئ او سرپوښ پرې کېږدئ.",
+        "en": "Keep a bucket of sand or water near the tandoor and stove. If a pan of oil catches fire, turn off the heat and cover it with a lid."
+      },
+      "picture": "fire-oil-lid"
+    },
+    {
+      "id": "fire-safety.way-out",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "راه بیرون را بدانید",
+        "ps": "د وتلو لار وپېژنئ",
+        "en": "Know your way out"
+      },
+      "text": {
+        "fa": "جلوی دروازه‌ها را خالی نگه دارید و راه بیرون را بدانید. اگر آتش گرفت، فریاد بزنید تا همه بیدار شوند و زیر دود خم‌شده فوراً بیرون شوید.",
+        "ps": "د دروازو مخه خالي وساتئ او د وتلو لار وپېژنئ. که اور ولګېد، چیغې ووهئ چې ټول راویښ شي او د لوګي لاندې ټیټ سمدستي بهر ووځئ.",
+        "en": "Keep doors clear and know your way out. If there is a fire, shout to wake everyone and get out at once, keeping low under the smoke."
+      }
+    },
+    {
+      "id": "fire-safety.burns",
+      "type": "link",
+      "to": "topic/burns",
+      "icon": "burn",
+      "title": {
+        "fa": "لباس آتش گرفته یا سوختگی؟",
+        "ps": "جامې اور اخیستي یا سوځېدنه؟",
+        "en": "Clothes on fire, or a burn?"
+      },
+      "text": {
+        "fa": "بایستید، به زمین بیفتید و غلت بزنید، بعد سوختگی را با آب سرد کنید. صفحهٔ سوختگی را باز کنید.",
+        "ps": "ودرېږئ، پر ځمکه ولوېږئ او ورغړېږئ، بیا سوځېدنه په اوبو سړه کړئ. د سوځېدنې پاڼه پرانیزئ.",
+        "en": "Stop, drop and roll, then cool the burn with water. Open the burns page."
+      },
+      "urgent": true
+    },
+    {
+      "id": "fire-safety.children",
+      "type": "link",
+      "to": "topic/child-safety",
+      "icon": "baby",
+      "title": {
+        "fa": "اطفال و چیزهای داغ",
+        "ps": "ماشومان او ګرم شیان",
+        "en": "Children and hot things"
+      },
+      "text": {
+        "fa": "چای داغ، دیگ، تنور و صندلی: چطور اطفال خورد را بی‌خطر نگه دارید. صفحه را باز کنید.",
+        "ps": "ګرمه چای، کټوګان، تنور او صندلۍ: څنګه کوچني ماشومان خوندي وساتئ. پاڼه پرانیزئ.",
+        "en": "Hot tea, pots, the tandoor and the sandali: how to keep small children safe. Open the page."
+      }
+    },
+    {
+      "id": "fire-safety.smoke-em",
+      "type": "link",
+      "to": "emergency",
+      "icon": "warning",
+      "urgent": true,
+      "title": {
+        "fa": "دود تنفس کرده یا در آتش صدمه دیده؟",
+        "ps": "لوګی یې تنفس کړی، یا په اور کې ټپي شوی؟",
+        "en": "Breathed smoke, or hurt in a fire?"
+      },
+      "text": {
+        "fa": "صفحهٔ حالت عاجل را باز کنید: همین حالا چه کنید، قدم به قدم.",
+        "ps": "د بیړني حالت پاڼه پرانیزئ: همدا اوس څه وکړئ، ګام په ګام.",
+        "en": "Open the Emergency page: what to do now, step by step."
+      }
+    },
+    {
+      "id": "fire-safety.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "fire-safety.dont.water",
+          "icon": "no",
+          "text": {
+            "fa": "روی روغن یا تیل خاک سوزان آب نریزید",
+            "ps": "پر بلو غوړیو یا خاورینو تېلو اوبه مه اچوئ",
+            "en": "throw water on burning oil or kerosene"
+          }
+        },
+        {
+          "id": "fire-safety.dont.petrol",
+          "icon": "no",
+          "text": {
+            "fa": "برای روشن کردن آتش، تیل خاک یا پطرول رویش نریزید",
+            "ps": "د اور بلولو لپاره پرې خاورین تېل یا پطرول مه اچوئ",
+            "en": "pour kerosene or petrol on a fire to light it"
+          }
+        },
+        {
+          "id": "fire-safety.dont.back",
+          "icon": "no",
+          "text": {
+            "fa": "برای وسایل دوباره داخل خانهٔ آتش‌گرفته نروید",
+            "ps": "د سامان لپاره بېرته اور اخیستي کور ته مه ننوځئ",
+            "en": "go back into a burning house for belongings"
+          }
+        },
+        {
+          "id": "fire-safety.dont.matches",
+          "icon": "no",
+          "text": {
+            "fa": "نگذارید اطفال با گوگرد یا لایتر بازی کنند",
+            "ps": "مه پرېږدئ چې ماشومان له اورلګیت یا لایټر سره لوبې وکړي",
+            "en": "let children play with matches or lighters"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Burns (2023): risk factors (open fires, kerosene lamps and stoves, loose clothing, women cooking, children)",
+    "WHO A WHO plan for burn prevention and care (2008)",
+    "WHO/UNICEF World report on child injury prevention (2008): burns",
+    "WHO guidelines for indoor air quality: household fuel combustion (2014): kerosene",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): burns, smoke inhalation",
+    "UK Home Office 'Fire Kills' and UK fire and rescue services: pan fires (turn off the heat, cover, never water), candles, escape plan, keep low under smoke, do not go back in",
+    "US National Fire Protection Association (NFPA): home fire escape planning; stop, drop and roll"
+  ],
+  "review": [
+    "New page. 'Stop, drop and roll' stays on burns (burns.stop); this page only links to it.",
+    "Children and hot things stay on child-safety (child-safety.fire, unchanged). burns.prevent repeated it and is removed from burns (burns now links here). This page links back to child-safety for children.",
+    "Pan of oil on fire: UK fire services say turn off the heat and cover with a lid or fire blanket, never water, and do not carry the pan. Some now say a damp tea towel; the text says a lid only. Check.",
+    "'Most burns happen at home, to children and to women cooking' summarises the WHO burns fact sheet (burns occur mainly at home; women and children at highest risk in low-income countries). It is not a number.",
+    "'Tuck in your chador' (scarf catching fire at the tandoor): check the words and tone with local women; the picture or narration must not sound like blame.",
+    "Sand for a fire: ready sand or water near the tandoor is common fire-service advice where there are no extinguishers. Water is not for oil, kerosene or electrical fires (dont list; electric-shock.dont.water says the electrical part).",
+    "Urgent box: smoke inhalation, CO signs after a fire, and big burns, in short form. Full burn signs are on burns.",
+    "Words to check (Dari / Pashto): چراغ تیلی / د تېلو څراغ (kerosene lamp), شمع, تیل خاک / خاورین تېل, پطرول, ریگ / شګه (sand), سرپوش / سرپوښ (lid), گوگرد / اورلګیت (matches), لایتر / لایټر (lighter), آستین گشاد / پراخې لستوڼې (loose sleeves).",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: fire-safety.urgent. Urgent signs are reached through the red link to the Health side."
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "id": "home-safety",
+  "section": "everyone",
+  "title": {
+    "fa": "خانهٔ بی‌خطر: دود و گاز",
+    "ps": "خوندي کور: لوګی او ګاز",
+    "en": "Safe home: fumes and gas"
+  },
+  "summary": {
+    "fa": "گاز زهری آتش، موتر و جنراتور، و بالون گاز: بی‌خطر بمانید.",
+    "ps": "د اور، موټر او جنراتور زهرجن ګاز، او د ګاز بالون: خوندي اوسئ.",
+    "en": "Poison gas from fires, cars and generators, and gas bottles: stay safe."
+  },
+  "image": "home-safety",
+  "blocks": [
+    {
+      "id": "home-safety.lead",
+      "type": "lead",
+      "text": {
+        "fa": "دود آتش، بخاری، موتر و جنراتور گاز زهری دارد که نه بو دارد و نه رنگ. این گاز می‌تواند تمام خانواده را در خواب بکشد. گاز پخت‌وپز هم ممکن است نشت کند و آتش بگیرد.",
+        "ps": "د اور، بخارۍ، موټر او جنراتور لوګی زهرجن ګاز لري چې نه بوی لري او نه رنګ. دا ګاز ټوله کورنۍ په خوب کې وژلای شي. د پخلي ګاز هم کېدای شي ووځي او اور واخلي.",
+        "en": "Fires, heaters and engines give off a poison gas with no smell or colour. It can kill a family in their sleep. Cooking gas can leak and burn."
+      }
+    },
+    {
+      "id": "home-safety.engines",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "موتر، جنراتور و آتش: فقط در هوای آزاد",
+        "ps": "موټر، جنراتور او اور: یوازې په خلاصه هوا کې",
+        "en": "Engines and fires: only in open air"
+      },
+      "text": {
+        "fa": "جنراتور، موتر یا موترسایکل را هرگز در داخل خانه یا نزدیک کلکین روشن نکنید. هرگز در اتاق بسته تنور یا آتش پخت‌وپز روشن نکنید.",
+        "ps": "جنراتور، موټر یا موټرسایکل هېڅکله په کور دننه یا کړکۍ ته نږدې مه چالانوئ. هېڅکله په تړلې کوټه کې تنور یا د پخلي اور مه بلوئ.",
+        "en": "Never run a generator, car or motorbike indoors or by a window. Never use a tandoor or cooking fire in a closed room."
+      }
+    },
+    {
+      "id": "home-safety.winter",
+      "type": "link",
+      "to": "topic/winter-home",
+      "icon": "stove",
+      "title": {
+        "fa": "صندلی، منقل و بخاری در زمستان",
+        "ps": "صندلۍ، منقل او بخاري په ژمي کې",
+        "en": "Sandali, brazier and heater in winter"
+      },
+      "text": {
+        "fa": "نل بخاری، هوای تازه، و خاموش کردن آتش پیش از خواب.",
+        "ps": "د بخارۍ نل، تازه هوا، او له خوب مخکې د اور مړ کول.",
+        "en": "Stove pipes, fresh air, and putting fires out before sleep."
+      }
+    },
+    {
+      "id": "home-safety.out",
+      "type": "step",
+      "icon": "window",
+      "title": {
+        "fa": "نزدیک آتش مریض شدید؟ بیرون بروید",
+        "ps": "اور ته نږدې ناروغه شوئ؟ بهر ووځئ",
+        "en": "Feel ill near a fire? Go outside"
+      },
+      "text": {
+        "fa": "همه را فوراً به هوای تازه ببرید و دروازه و کلکین را باز کنید. آتش یا جنراتور را فقط اگر بی‌خطر است خاموش کنید.",
+        "ps": "ټول سمدستي تازه هوا ته وباسئ او دروازې او کړکۍ خلاصې کړئ. اور یا جنراتور یوازې هغه وخت بند کړئ چې خوندي وي.",
+        "en": "Take everyone into fresh air at once, and open doors and windows. Turn off the fire or engine only if it is safe."
+      },
+      "picture": "home-co-fresh-air"
+    },
+    {
+      "id": "home-safety.fumes-em",
+      "type": "link",
+      "to": "topic/fumes-poisoning",
+      "icon": "warning",
+      "urgent": true,
+      "title": {
+        "fa": "کسی از دود یا گاز مریض شده؟",
+        "ps": "څوک له لوګي یا ګاز ناروغه شوی؟",
+        "en": "Someone feels ill from fumes?"
+      },
+      "text": {
+        "fa": "صفحهٔ صحت را باز کنید: همین حالا چه کنید، قدم به قدم.",
+        "ps": "د روغتیا پاڼه پرانیزئ: همدا اوس څه وکړئ، ګام په ګام.",
+        "en": "Open the Health page: what to do now, step by step."
+      }
+    },
+    {
+      "id": "home-safety.alarm",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "اگر بتوانید، زنگ خطر گاز",
+        "ps": "که کولای شئ، د ګاز د خطر زنګ",
+        "en": "A gas alarm, if you can"
+      },
+      "text": {
+        "fa": "یک آلهٔ کوچک بتری‌دار وقتی گاز زهری زیاد شود، بلند زنگ می‌زند. یکی را جایی بگذارید که مردم می‌خوابند.",
+        "ps": "یوه کوچنۍ بېټرۍ لرونکې آله، کله چې زهرجن ګاز زیات شي، په لوړ غږ زنګ وهي. یوه یې هلته کېږدئ چې خلک ویده کېږي.",
+        "en": "A battery alarm beeps loudly when the poison gas builds up. Put one where people sleep."
+      }
+    },
+    {
+      "id": "home-safety.gas-store",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "بالون گاز: ایستاده و در هوای آزاد",
+        "ps": "د ګاز بالون: ولاړ او په خلاصه هوا کې",
+        "en": "Gas bottle: upright, in the open air"
+      },
+      "text": {
+        "fa": "بالون را ایستاده، در بیرون یا جای پرهوا، دور از تنور، شعله و آفتاب داغ بگذارید.",
+        "ps": "بالون ولاړ، بهر یا په هوادار ځای کې، له تنور، لمبو او ګرم لمر لرې کېږدئ.",
+        "en": "Stand it upright, outside or in an airy place, away from the tandoor, flames and hot sun."
+      }
+    },
+    {
+      "id": "home-safety.valve",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "شیر بالون را هر بار ببندید",
+        "ps": "د بالون شیر هر ځل بند کړئ",
+        "en": "Close the valve every time"
+      },
+      "text": {
+        "fa": "بعد از پخت‌وپز و شب‌ها شیر بالون را ببندید. اگر پایپ یا رگلاتور ترک دارد یا کهنه است، عوضش کنید.",
+        "ps": "له پخلي وروسته او د شپې د بالون شیر بند کړئ. که پایپ یا ریګولېټر چاود یا زوړ وي، بدل یې کړئ.",
+        "en": "Close the valve after cooking and at night. Change the pipe or regulator if it is cracked or old."
+      },
+      "picture": "home-gas-valve"
+    },
+    {
+      "id": "home-safety.soapy",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "نشت گاز را با آب صابون ببینید",
+        "ps": "د ګاز وتل د صابون په اوبو وګورئ",
+        "en": "Check for leaks with soapy water"
+      },
+      "text": {
+        "fa": "آب صابون را با برس روی جاهای وصل بمالید. حباب یعنی نشت گاز: شیر را ببندید و ترمیمش کنید. هرگز از شعله استفاده نکنید.",
+        "ps": "د صابون اوبه په برس د نښلېدو پر ځایونو ووهئ. پوکڼۍ د ګاز وتل ښيي: شیر بند کړئ او جوړ یې کړئ. هېڅکله لمبه مه کاروئ.",
+        "en": "Brush soapy water on the joints. Bubbles mean a leak: close the valve and get it mended. Never use a flame."
+      },
+      "picture": "home-gas-soapy"
+    },
+    {
+      "id": "home-safety.smell",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "بوی گاز می‌آید؟ نه شعله، نه سویچ",
+        "ps": "د ګاز بوی درځي؟ نه لمبه، نه سویچ",
+        "en": "Smell gas? No flame, no switch"
+      },
+      "text": {
+        "fa": "شعله روشن نکنید و در داخل به سویچ یا تلیفون دست نزنید. شیر را ببندید، دروازه و کلکین را باز کنید و همه را بیرون ببرید. اگر آتش گرفت، دور بمانید.",
+        "ps": "لمبه مه بلوئ او دننه سویچ یا ټیلیفون ته لاس مه وړئ. شیر بند کړئ، دروازې او کړکۍ خلاصې کړئ او ټول بهر وباسئ. که اور ولګېد، لرې پاتې شئ.",
+        "en": "Do not light a flame, or use a switch or phone inside. Close the valve, open doors and windows, and get everyone out. If it burns, keep away."
+      }
+    },
+    {
+      "id": "home-safety.burns",
+      "type": "link",
+      "to": "topic/burns",
+      "icon": "burn",
+      "title": {
+        "fa": "از آتش یا گاز سوخته است؟",
+        "ps": "په اور یا ګاز سوځېدلی؟",
+        "en": "Burned by fire or gas?"
+      },
+      "text": {
+        "fa": "اول چه کنید و چه وقت به شفاخانه بروید.",
+        "ps": "لومړی څه وکړئ او کله روغتون ته ولاړ شئ.",
+        "en": "What to do first, and when to go to hospital."
+      },
+      "urgent": true
+    },
+    {
+      "id": "home-safety.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "home-safety.dont.seller",
+          "icon": "no",
+          "text": {
+            "fa": "گاز را از فروشندهٔ ناشناس نخرید و بالون زنگ‌زده یا ضربه‌خورده را استفاده نکنید",
+            "ps": "ګاز له ناپېژندل شوي پلورونکي مه اخلئ، او زنګ وهلی یا ټکول شوی بالون مه کاروئ",
+            "en": "buy gas from unknown sellers, or use a rusty or dented bottle"
+          }
+        },
+        {
+          "id": "home-safety.dont.children",
+          "icon": "no",
+          "text": {
+            "fa": "نگذارید اطفال با بالون، شیر گاز یا اجاق بازی کنند",
+            "ps": "مه پرېږدئ چې ماشومان د ګاز له بالون، شیر یا اجاق سره لوبې وکړي",
+            "en": "let children play with the gas bottle, valve or cooker"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO guidelines for indoor air quality: selected pollutants (2010): carbon monoxide",
+    "WHO guidelines for indoor air quality: household fuel combustion (2014)",
+    "WHO fact sheet: Household air pollution (2024)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): poisoning by gases and fumes (fresh air, emergency care)",
+    "UK Health Security Agency: Carbon monoxide, general information and incident management (symptoms, several people or pets ill, better away from the home; 100% oxygen in hospital); NHS: Carbon monoxide poisoning",
+    "US CDC: Carbon monoxide poisoning prevention, and US CPSC: portable generator safety (never indoors or in a garage, outside and away from doors and windows)",
+    "UK Gas Safe Register and HSE: what to do if you smell gas (no naked flames or switches, turn off at the valve, open doors and windows, leave)",
+    "Liquid Gas UK / UKLPG Code of Practice 7: storage of LPG cylinders (upright, outdoors or well ventilated, away from heat), leak checks with leak-detection (soapy) fluid, never a flame",
+    "UK government (Smoke and Carbon Monoxide Alarm Regulations 2022) and BS EN 50291: battery CO alarms in rooms with a fuel-burning appliance"
+  ],
+  "review": [
+    "Split from the brief: fumes, gas and electricity on one page came to about 13 steps (about 4 minutes of narration), over the 2.5-minute limit. Electricity is now its own page, electric-safety, in the new Home safety section, and this page is titled 'Safe home: fumes and gas'.",
+    "The carbon monoxide urgent box moved here from winter-home (winter-home.urgent), so that the signs live in one place all year. Its title and two items keep the same words; 'headache' now says 'near a fire, heater or engine' instead of 'in a heated room'; 'animals ill' and 'better outside, ill again inside' are new (UKHSA/NHS recognition clues). The old winter-home.urgent.breathing (child breathes fast) is not CO; winter-home now links to the cough page for it.",
+    "'Feel better outside and ill again inside' is in the hospital-now box. Check you are happy for this clue alone to mean hospital now.",
+    "No winter repeat: sandali, brazier, gas heater, stove pipe and 'put fires out before sleep' stay on winter-home, linked from here. first-aid.fumes and first-aid.urgent.fumes also stay as one-line summaries on the First aid hub page.",
+    "The 'engines' step says 'indoors or by a window', not 'in a courtyard' (a walled courtyard is open air). The brief's 'engine running in a closed yard' is covered by 'indoors'.",
+    "Length: about 360 English and 390 Dari words, a little over the 2.5-minute aim (first-aid is about 340 Dari words). To shorten, drop the 'alarm' step (the alarm is also in kit-buy) or the dont list.",
+    "Dont list cut to 2 items for length. 'Fight a big gas fire: get out and keep away' is now the end of the 'smell' step; 'change the bottle away from flames' was dropped (the 'gas-store' step keeps the bottle away from the tandoor and flames).",
+    "Gas bottle 'outside or in an airy place': UK practice keeps LPG cylinders outdoors, but in Afghan kitchens the bottle usually stands next to the cooker. Check the wording is practical. LPG is heavier than air and collects near the floor; this is not said.",
+    "'No phones inside' when you smell gas is common gas-company advice; the spark risk from a phone is very small. Drop it if it confuses (people need the phone to call for help: they can call once outside).",
+    "CO alarm: a battery alarm marked EN 50291 (Europe) or UL 2034 (US). Cheap unbranded alarms sold online may not work. Price and placement are in kit-buy-change.json and docs/HOME_KIT.md.",
+    "Oxygen at hospital: 'clears the poison gas from the blood' is a lay simplification (oxygen speeds CO elimination).",
+    "Words to check (Dari / Pashto): بالون گاز / د ګاز بالون (gas cylinder), شیر بالون / د بالون شیر (valve), رگلاتور / ریګولېټر, پایپ, حباب / پوکڼۍ (bubbles), زنگ خطر گاز / د ګاز د خطر زنګ (CO alarm), اجاق / اجاق (cooker), جنراتور, گراج، گدام / ګراج، ګودام, ضربه‌خورده / ټکول شوی (dented).",
+    "Icons: wanted 'gas', 'alarm' and 'engine'; used stove, warning and car.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: home-safety.urgent, home-safety.oxygen. Urgent signs are reached through the red link to the Health side.",
+    "The red link 'Someone feels ill from fumes?' opens the new Health page fumes-poisoning (the urgent box and the oxygen tip moved there)."
+  ]
+}

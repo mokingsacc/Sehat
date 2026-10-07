@@ -1,0 +1,194 @@
+{
+  "id": "reading-bp",
+  "section": "everyone",
+  "title": {
+    "fa": "عدد فشار خون چه معنا دارد",
+    "ps": "د وینې د فشار شمېرې څه مانا لري",
+    "en": "Blood pressure: what the numbers mean"
+  },
+  "summary": {
+    "fa": "عادی، بلند، خیلی بلند، در حاملگی، و چه وقت بروید.",
+    "ps": "عادي، لوړ، ډېر لوړ، په امیندوارۍ کې، او کله ولاړ شئ.",
+    "en": "Normal, high, very high, in pregnancy, and when to go."
+  },
+  "image": "reading-bp",
+  "blocks": [
+    {
+      "id": "reading-bp.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.",
+        "ps": "ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.",
+        "en": "A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says."
+      }
+    },
+    {
+      "id": "reading-bp.check",
+      "type": "link",
+      "to": "tool/reading/bp",
+      "icon": "bp",
+      "title": {
+        "fa": "فشار خون را معاینه کنید",
+        "ps": "د وینې فشار وګورئ",
+        "en": "Check a blood pressure"
+      },
+      "text": {
+        "fa": "هر دو عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.",
+        "ps": "دواړه شمېرې ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.",
+        "en": "Put in both numbers and hear what they mean and what to do."
+      }
+    },
+    {
+      "id": "reading-bp.numbers",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "عددها چه معنا دارند",
+        "ps": "شمېرې څه مانا لري",
+        "en": "What the numbers mean"
+      },
+      "text": {
+        "fa": "عدد بالا اول گفته می‌شود. در خانه، کمتر از ۱۳۵ بر ۸۵ عادی است. در حاملگی، ۱۴۰ بر ۹۰ یا بیشتر بلند است.",
+        "ps": "پورتنۍ شمېره لومړی ویل کېږي. په کور کې، له ۱۳۵ پر ۸۵ کم عادي دی. په امیندوارۍ کې، ۱۴۰ پر ۹۰ یا ډېر لوړ دی.",
+        "en": "The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high."
+      }
+    },
+    {
+      "id": "reading-bp.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "reading-bp.urgent.very-high",
+          "icon": "bp",
+          "text": {
+            "fa": "دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است",
+            "ps": "دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی",
+            "en": "it is 180 over 120 or more, two times"
+          }
+        },
+        {
+          "id": "reading-bp.urgent.signs",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "بلند است، با درد سینه، ضعف، مشکل گپ زدن یا سردرد شدید",
+            "ps": "لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې یا سخت سر درد سره",
+            "en": "high, with chest pain, weakness, trouble speaking or a bad headache"
+          }
+        },
+        {
+          "id": "reading-bp.urgent.pregnant-very-high",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله است و ۱۶۰ بر ۱۱۰ یا بیشتر دارد",
+            "ps": "امیندواره ده او ۱۶۰ پر ۱۱۰ یا ډېر لري",
+            "en": "pregnant, and 160 over 110 or more"
+          }
+        },
+        {
+          "id": "reading-bp.urgent.pregnant-signs",
+          "icon": "headache",
+          "text": {
+            "fa": "حامله، ۱۴۰ بر ۹۰ یا بیشتر، با سردرد، تاری چشم یا پندیدگی",
+            "ps": "امیندواره، ۱۴۰ پر ۹۰ یا ډېر، له سر درد، د سترګو تتوالي یا پړسوب سره",
+            "en": "pregnant, 140 over 90 or more, with headache, blurred vision or swelling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-bp.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، امروز به کلینیک بروید",
+        "ps": "که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "reading-bp.soon.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله است و ۱۴۰ بر ۹۰ یا بیشتر دارد",
+            "ps": "امیندواره ده او ۱۴۰ پر ۹۰ یا ډېر لري",
+            "en": "pregnant, and 140 over 90 or more"
+          }
+        },
+        {
+          "id": "reading-bp.soon.low",
+          "icon": "warning",
+          "text": {
+            "fa": "عدد بالا کمتر از ۹۰ است، با سرچرخی یا بیهوش شدن",
+            "ps": "پورتنۍ شمېره له ۹۰ کمه ده، له سر ګرځېدو یا بې هوښۍ سره",
+            "en": "the top number is under 90, with dizziness or fainting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-bp.week",
+      "type": "tip",
+      "icon": "calendar",
+      "text": {
+        "fa": "در خانه اکثراً ۱۳۵ بر ۸۵ یا بیشتر است؟ همین هفته با یادداشت‌ها به کلینیک بروید. شاید دوا ضرورت باشد.",
+        "ps": "په کور کې اکثره ۱۳۵ پر ۸۵ یا ډېر وي؟ په همدې اونۍ کې له یادښتونو سره کلینیک ته ولاړ شئ. کېدای شي درملو ته اړتیا وي.",
+        "en": "Often 135 over 85 or more at home? Go to the clinic this week with your notes. You may need medicine."
+      }
+    },
+    {
+      "id": "reading-bp.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "reading-bp.dont.stop",
+          "icon": "pill",
+          "text": {
+            "fa": "به خاطر یک عدد، دوای خود را قطع یا تغییر ندهید.",
+            "ps": "د یوې شمېرې له امله خپل درمل مه بندوئ او مه بدلوئ.",
+            "en": "Do not stop or change your medicine because of one reading."
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-bp.more",
+      "type": "link",
+      "to": "topic/blood-pressure",
+      "icon": "check",
+      "title": {
+        "fa": "فشار خون بلند",
+        "ps": "د وینې لوړ فشار",
+        "en": "High blood pressure"
+      },
+      "text": {
+        "fa": "اکثراً علامه ندارد. فشار خود را اندازه کنید، نمک کم بخورید، دوا را هر روز بخورید.",
+        "ps": "اکثره نښې نه لري. فشار مو اندازه کړئ، لږه مالګه وخورئ، درمل هره ورځ وخورئ.",
+        "en": "Often no signs. Get checked, eat less salt, take medicine daily."
+      }
+    }
+  ],
+  "sources": [
+    "WHO HEARTS technical package: Evidence-based protocols and Technology modules (2018, 2020): validated automated upper-arm devices, correct cuff, seated rest, two readings",
+    "WHO Technical specifications for automated non-invasive blood pressure measuring devices with cuff (2020)",
+    "WHO Guideline for the pharmacological treatment of hypertension in adults (2021)",
+    "ISH 2020 Global Hypertension Practice Guidelines (Unger et al., Hypertension 2020): home BP 135/85 or more = hypertension; measurement conditions",
+    "NICE NG136 Hypertension in adults (2019, updated 2023): home average 135/85 or more; 180/120 or more same-day assessment",
+    "NICE NG133 Hypertension in pregnancy (2019, updated 2023): 140/90 hypertension, 160/110 severe; symptoms of pre-eclampsia",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016) and PCPNC (2015): BP at every visit; severe headache, blurred vision = danger signs",
+    "STRIDE BP and validatebp.org lists of clinically validated devices"
+  ],
+  "review": [
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-bp. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+  ]
+}

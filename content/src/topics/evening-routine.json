@@ -1,0 +1,189 @@
+{
+  "id": "evening-routine",
+  "section": "everyone",
+  "title": {
+    "fa": "شب، پیش از خواب",
+    "ps": "ماښام، له خوب مخکې",
+    "en": "The evening before sleep"
+  },
+  "summary": {
+    "fa": "غذای شب زودتر و سبک‌تر، چای نخوردن پیش از خواب، تیلفون دور، روشنی کم.",
+    "ps": "د شپې وختي او سپکه ډوډۍ، له خوب مخکې چای نه، ټیلیفون لرې، کمه رڼا.",
+    "en": "An earlier, lighter dinner, no tea before bed, phone away, soft light."
+  },
+  "image": "evening-routine",
+  "blocks": [
+    {
+      "id": "evening-routine.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کارهایی که شب‌ها می‌کنیم، روی خواب ما اثر دارد. بسیاری از خانواده‌ها با چند تغییر کوچک بهتر می‌خوابند.",
+        "ps": "هغه کارونه چې ماښام یې کوو، زموږ پر خوب اغېز لري. ډېرې کورنۍ په څو کوچنیو بدلونونو ښه ویده کېږي.",
+        "en": "What we do in the evening changes how we sleep. Many families sleep better after a few small changes."
+      }
+    },
+    {
+      "id": "evening-routine.meal",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذای شب سبک‌تر و کمی زودتر",
+        "ps": "د شپې ډوډۍ سپکه او لږ وختي",
+        "en": "A lighter dinner, a little earlier"
+      },
+      "text": {
+        "fa": "اگر بتوانید، غذای شب را ۲ تا ۳ ساعت یا بیشتر پیش از خواب تمام کنید و سبک بخورید. شکم پر، بدن را وقتی باید آرام شود مصروف نگه می‌دارد.",
+        "ps": "که کولای شئ، د شپې ډوډۍ له خوب ۲ تر ۳ ساعته یا ډېر مخکې وخورئ او سپکه یې وساتئ. ډکه ګېډه بدن هغه وخت بوخت ساتي چې باید ارام شي.",
+        "en": "If you can, finish the evening meal 2 to 3 hours or more before sleep, and keep it light. A full stomach keeps the body busy when it should rest."
+      }
+    },
+    {
+      "id": "evening-routine.tea",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "پیش از خواب چای نخورید",
+        "ps": "له خوب مخکې چای مه څښئ",
+        "en": "No tea before bed"
+      },
+      "text": {
+        "fa": "از ۱ تا ۲ ساعت پیش از خواب، دیگر چای نخورید. چای کافئین دارد که آدم را بیدار نگه می‌دارد.",
+        "ps": "له خوب ۱ تر ۲ ساعته مخکې، نور چای مه څښئ. چای کافین لري چې انسان ویښ ساتي.",
+        "en": "Stop drinking tea 1 to 2 hours before bed. Tea has caffeine, which keeps you awake."
+      }
+    },
+    {
+      "id": "evening-routine.phone",
+      "type": "step",
+      "icon": "phone",
+      "title": {
+        "fa": "تیلفون را کنار بگذارید",
+        "ps": "ټیلیفون یوې خوا ته کېږدئ",
+        "en": "Put the phone away"
+      },
+      "text": {
+        "fa": "۳۰ تا ۶۰ دقیقه پیش از خواب، تیلفون را دور از دست بگذارید. روشنی تیز و خبرهای آن ذهن را بیدار نگه می‌دارد.",
+        "ps": "له خوب ۳۰ تر ۶۰ دقیقې مخکې، ټیلیفون له لاسه لرې کېږدئ. د هغه تېزه رڼا او خبرونه ذهن ویښ ساتي.",
+        "en": "Put the phone out of reach 30 to 60 minutes before sleep. Its bright light and busy news keep the mind awake."
+      }
+    },
+    {
+      "id": "evening-routine.light",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "بعد از غروب، روشنی کم و زرد",
+        "ps": "له لمر لوېدو وروسته، کمه او ژېړه رڼا",
+        "en": "Soft, warm light after sunset"
+      },
+      "text": {
+        "fa": "بعد از تاریکی، چراغ کم‌نور زرد یا سرخ روشن کنید، نه چراغ سفید و تیز. روشنی سفید و تیز به بدن می‌گوید که هنوز روز است.",
+        "ps": "له تیارې وروسته، کم رڼا ژېړ یا سور څراغ ولګوئ، نه سپین او تېز. سپینه او تېزه رڼا بدن ته وايي چې لا ورځ ده.",
+        "en": "After dark, use a dim yellow or red lamp, not a bright white one. Bright white light tells the body it is still day."
+      },
+      "picture": "well-warm-light"
+    },
+    {
+      "id": "evening-routine.calm",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "هر شب همان کارهای آرام",
+        "ps": "هره شپه هماغه ارام کارونه",
+        "en": "The same calm steps each night"
+      },
+      "text": {
+        "fa": "دست و روی را بشویید، آرام بنشینید، و آهسته با خانواده گپ بزنید. انجام همین کارها هر شب به بدن می‌فهماند که وقت خواب است.",
+        "ps": "لاس او مخ ومینځئ، ارام کېنئ، او له کورنۍ سره ورو خبرې وکړئ. هره شپه د همدې کارونو کول بدن ته ورښيي چې د خوب وخت دی.",
+        "en": "Wash, sit quietly, and talk softly with the family. Doing the same things each night tells the body that sleep is coming."
+      }
+    },
+    {
+      "id": "evening-routine.awake",
+      "type": "tip",
+      "icon": "sleep",
+      "text": {
+        "fa": "خواب‌تان نمی‌برد؟ بلند شوید و در روشنی کم آرام بنشینید. وقتی خواب‌تان آمد، دوباره بخوابید.",
+        "ps": "خوب نه درځي؟ پاڅئ او په کمه رڼا کې ارام کېنئ. کله چې خوب درغی، بېرته ویده شئ.",
+        "en": "Cannot sleep? Get up and sit quietly in dim light. Go back to bed when you feel sleepy."
+      }
+    },
+    {
+      "id": "evening-routine.night-mode",
+      "type": "tip",
+      "icon": "phone",
+      "text": {
+        "fa": "اگر تیلفون شما تنظیم روشنی شب یا روشنی زرد دارد، شب‌ها آن را روشن کنید.",
+        "ps": "که ستاسو ټیلیفون د شپې یا ژېړې رڼا تنظیم لري، ماښام یې چالان کړئ.",
+        "en": "If your phone has a night or yellow light setting, turn it on in the evening."
+      }
+    },
+    {
+      "id": "evening-routine.sleep",
+      "type": "link",
+      "to": "topic/sleep-well",
+      "icon": "sleep",
+      "title": {
+        "fa": "خواب خوب",
+        "ps": "ښه خوب",
+        "en": "Sleep well"
+      },
+      "text": {
+        "fa": "وقت خواب منظم، اتاق تاریک و آرام، و گرم ماندن بی‌خطر در شب.",
+        "ps": "د خوب منظم وخت، تیاره او ارامه کوټه، او د شپې په خوندي ډول ګرم پاتې کېدل.",
+        "en": "A regular bedtime, a dark quiet room, and keeping warm safely at night."
+      }
+    },
+    {
+      "id": "evening-routine.worry",
+      "type": "link",
+      "to": "topic/stress",
+      "icon": "sad",
+      "title": {
+        "fa": "تشویش خواب را از شما گرفته؟",
+        "ps": "اندېښنې مو ویښ ساتي؟",
+        "en": "Worries keeping you awake?"
+      },
+      "text": {
+        "fa": "راه‌های ساده برای آرام کردن ذهن، و چه وقت کمک بگیرید.",
+        "ps": "د ذهن د ارامولو ساده لارې، او کله مرسته وغواړئ.",
+        "en": "Simple ways to calm the mind, and when to get help."
+      }
+    },
+    {
+      "id": "evening-routine.ask",
+      "type": "link",
+      "to": "ask",
+      "icon": "talk",
+      "title": {
+        "fa": "حالتان خوب نیست؟",
+        "ps": "ځان ناروغه احساسوئ؟",
+        "en": "Feeling unwell?"
+      },
+      "text": {
+        "fa": "اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.",
+        "ps": "که ځان ناروغه احساسوئ، د روغتیا برخې ته ولاړ شئ او «څه ستونزه لرئ؟» ووهئ.",
+        "en": "If you feel unwell, go to Health and tap What is wrong?"
+      }
+    }
+  ],
+  "sources": [
+    "NHS: How to get to sleep, and Insomnia (nhs.uk): regular sleep times; dark, quiet, cool bedroom; no caffeine or big meals late; no screens before bed; sleeping pills only short term and can be addictive",
+    "CDC: Sleep, Tips for better sleep (2024): same bedtime and wake time; quiet, dark, relaxing bedroom at a comfortable temperature; remove electronic devices; avoid large meals and caffeine before bed; be active by day",
+    "American Academy of Sleep Medicine: Healthy sleep habits (sleepeducation.org), and Watson et al., AASM/SRS consensus, J Clin Sleep Med 2015: adults need 7 or more hours; if you cannot sleep, get up and do something calm in dim light",
+    "Fujiwara et al., Am J Gastroenterol 2005 (dinner less than 3 hours before bed linked to reflux); evidence that an earlier dinner lowers night-time heart rate or improves sleep is small and mixed (see review)",
+    "Drake et al., J Clin Sleep Med 2013 (caffeine even 6 hours before bed disturbed sleep); Gardiner et al., Sleep Med Rev 2023 (meta-analysis: caffeine shortens and lightens sleep)",
+    "Chang et al., PNAS 2015 (light-emitting screens before bed delay melatonin and sleepiness); Brown et al., PLoS Biol 2022 (expert consensus: dim light in the 3 hours before bed)"
+  ],
+  "review": [
+    "Food timing: Mo's 'stop eating at least 4 hours before bed to let your heart rate drop' is given as a gentle tip: 'if you can, finish the evening meal 2 to 3 hours or more before sleep, and keep it light'. The evidence is modest: NHS and CDC advise against large meals close to bedtime, and dinner less than 3 hours before bed is linked to reflux (Fujiwara 2005). Studies that late eating raises night-time heart rate or worsens sleep are small and mixed, so the page does not claim a heart-rate effect; it says 'a full stomach keeps the body busy when it should rest'.",
+    "Tea, as Mo changed it: 'no tea for 1 to 2 hours before bed, because tea has caffeine, which keeps you awake'. Nothing on afternoon tea or coffee timing, and no line about children and tea (the food and garden pages cover that). Honest note: caffeine lasts longer than 2 hours (half-life about 5 hours; Drake 2013 found sleep disturbed even 6 hours after caffeine), so 1 to 2 hours is a minimum. Tea has less caffeine than coffee.",
+    "Screens: Mo's 'lower cortisol' is not stated; the evidence is for bright screen light delaying melatonin and sleepiness (Chang 2015) and for arousing content. The page says 'its bright light and busy news keep the mind awake'. Advice is about phones only, as many homes have little electricity; TVs are not mentioned.",
+    "Light: 'red or amber lights after sunset instead of blue light' becomes 'a dim yellow or red lamp, not a bright white one' (many homes use white LED solar lamps). Step picture well-warm-light.",
+    "Prayer removed from the calm activities (Mo: the app has no religious content). The step now reads 'Wash, sit quietly, and talk softly with the family'.",
+    "Two tips: getting up when you cannot sleep (AASM stimulus control, a CBT-for-insomnia element; may move to the CBT pages later) and the phone's night-light setting.",
+    "Links: sleep-well, and the existing stress page (worry keeping you awake). When the new stress management and CBT pages exist, the second link can point to them.",
+    "Words to check: Dari کافئین, Pashto کافین (caffeine); Dari تنظیم روشنی شب (night light setting); Pashto چالان کړئ (turn on).",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: . Urgent signs are reached through the red link to the Health side."
+  ]
+}

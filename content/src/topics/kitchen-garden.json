@@ -1,0 +1,188 @@
+{
+  "id": "kitchen-garden",
+  "section": "everyone",
+  "title": {
+    "fa": "باغچهٔ خانه در زمین خشک",
+    "ps": "په وچه ځمکه کې د کور باغچه",
+    "en": "A kitchen garden in dry land"
+  },
+  "summary": {
+    "fa": "یک باغچهٔ کوچک کنار خانه، خانواده را در تمام سال غذا می‌دهد.",
+    "ps": "د کور تر څنګ یوه کوچنۍ باغچه کورنۍ ته ټول کال خواړه ورکوي.",
+    "en": "A small plot by the house feeds the family all year."
+  },
+  "image": "kitchen-garden",
+  "blocks": [
+    {
+      "id": "kitchen-garden.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بسیاری از مادران در یک قطعهٔ کوچک کنار خانه ترکاری می‌کارند. حتی چند متر زمین برای اطفال غذای تازه می‌دهد، و کمی هم برای فروش.",
+        "ps": "ډېرې میندې د کور تر څنګ په یوه کوچنۍ ټوټه ځمکه کې سبزي کري. حتی څو متره ځمکه ماشومانو ته تازه خواړه ورکوي، او لږ څه د پلور لپاره هم.",
+        "en": "Many mothers grow vegetables in a small plot by the house. Even a few metres of ground gives fresh food for the children, and some to sell."
+      }
+    },
+    {
+      "id": "kitchen-garden.place",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "یک جا نزدیک خانه انتخاب کنید",
+        "ps": "د کور تر څنګ یو ځای غوره کړئ",
+        "en": "Choose a spot near the house"
+      },
+      "text": {
+        "fa": "یک جای آفتابی نزدیک آب و آشپزخانه انتخاب کنید. دیوار گلی یا چپر، حیوانات و مرغ‌ها را بیرون نگه می‌دارد.",
+        "ps": "یو لمرین ځای اوبو او پخلنځي ته نږدې غوره کړئ. د خټې دېوال یا کټاره څاروي او چرګان بهر ساتي.",
+        "en": "Pick a sunny spot close to water and the kitchen. A mud wall or fence keeps animals and chickens out."
+      }
+    },
+    {
+      "id": "kitchen-garden.soil",
+      "type": "step",
+      "icon": "animals",
+      "title": {
+        "fa": "به خاک قوت بدهید",
+        "ps": "خاورې ته ځواک ورکړئ",
+        "en": "Feed the soil"
+      },
+      "text": {
+        "fa": "سرگین کهنه و پوسیدهٔ حیوانات و پوست ترکاری را با خاک مخلوط کنید. خاک قوی آب را بیشتر نگه می‌دارد و حاصل بیشتر می‌دهد.",
+        "ps": "د څارویو زوړ او ورست سره او د سبزیو پوستکي له خاورې سره ګډ کړئ. ښه خاوره اوبه ډېرې ساتي او ډېر حاصل ورکوي.",
+        "en": "Mix old, rotted animal dung and vegetable peelings into the soil. Rich soil holds water longer and grows more food."
+      }
+    },
+    {
+      "id": "kitchen-garden.spring",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "کشت بهار و تابستان",
+        "ps": "د پسرلي او اوړي کرنه",
+        "en": "Spring and summer crops"
+      },
+      "text": {
+        "fa": "بعد از آخرین یخبندان، بادنجان رومی، بامیه، لوبیا و کدو بکارید. سبزی‌های برگی مثل پالک و گشنیز در بهار و خزان زود سبز می‌شوند.",
+        "ps": "له وروستۍ پرخې وروسته، رومي بانجان، بامیه، لوبیا او کدو وکرئ. پاڼه لرونکې سبزۍ لکه پالک او دانیا په پسرلي او مني کې ژر شنې کېږي.",
+        "en": "After the last frost, sow tomatoes, okra, beans and pumpkin. Leafy greens like spinach and coriander grow fast in spring and autumn."
+      }
+    },
+    {
+      "id": "kitchen-garden.autumn",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "خزان: پیاز و سبزی زمستان",
+        "ps": "مني: پیاز او د ژمي سبزي",
+        "en": "Autumn: onions and winter greens"
+      },
+      "text": {
+        "fa": "در خزان، پیاز و سیر را برای سال آینده بکارید، و پالک و گندنه هم بکارید. یک پوش پلاستیکی روی یک کرد کوچک، سبزی را در زمستان هم سبز نگه می‌دارد.",
+        "ps": "په مني کې د راتلونکي کال لپاره پیاز او هوږه وکرئ، او پالک او ګندنه هم وکرئ. پر یوه کوچنۍ کیارۍ پلاستیکي پوښ په ژمي کې هم سبزي شنه ساتي.",
+        "en": "In autumn, plant onions and garlic for next year, and sow spinach and leeks. A plastic cover over a small bed keeps greens growing in winter."
+      }
+    },
+    {
+      "id": "kitchen-garden.orange",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "غذای نارنجی و سبز تیره بکارید",
+        "ps": "نارنجي او تک شین خواړه وکرئ",
+        "en": "Grow orange and dark green food"
+      },
+      "text": {
+        "fa": "زردک، کدو، زردآلو و سبزی‌های سبز تیره چشم اطفال را صحتمند نگه می‌دارد و کمک می‌کند با مریضی مقابله کنند. هر فصل کمی از آن‌ها بکارید.",
+        "ps": "ګازرې، کدو، زردالو او تکې شنې پاڼې د ماشومانو سترګې روغې ساتي او له ناروغۍ سره په مقابله کې ورسره مرسته کوي. هر موسم یې لږ څه وکرئ.",
+        "en": "Carrots, pumpkin, apricots and dark green leaves keep children's eyes healthy and help them fight illness. Grow some every season."
+      }
+    },
+    {
+      "id": "kitchen-garden.trees",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "یک درخت میوه بشانید",
+        "ps": "د مېوې یوه ونه کېنوئ",
+        "en": "Plant a fruit tree"
+      },
+      "text": {
+        "fa": "توت، زردآلو و انار در زمین خشک خوب رشد می‌کنند. در آخر زمستان نهال بشانید و هفته‌ای یک بار عمیق آب بدهید. درخت سال‌ها خانواده را غذا می‌دهد.",
+        "ps": "توت، زردالو او انار په وچه ځمکه کې ښه وده کوي. د ژمي په پای کې نیالګی کېنوئ او په اونۍ کې یو ځل ژورې اوبه ورکړئ. ونه به کلونه کورنۍ ته خواړه ورکوي.",
+        "en": "Mulberry, apricot and pomegranate grow well in dry land. Plant in late winter and water deeply once a week. The tree feeds the family for years."
+      }
+    },
+    {
+      "id": "kitchen-garden.water",
+      "type": "link",
+      "to": "topic/garden-water",
+      "icon": "water",
+      "title": {
+        "fa": "صرفه‌جویی آب در باغچه",
+        "ps": "په باغچه کې د اوبو سپما",
+        "en": "Save water in the garden"
+      },
+      "text": {
+        "fa": "کاه روی خاک، آبیاری قطره‌ای با بوتل، و بهترین وقت آب دادن.",
+        "ps": "پر خاوره بوس، د بوتل څاڅکي، او د اوبو ورکولو تر ټولو ښه وخت.",
+        "en": "Straw on the soil, a bottle drip, and the best time to water."
+      }
+    },
+    {
+      "id": "kitchen-garden.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "kitchen-garden.dont.dung",
+          "icon": "warning",
+          "text": {
+            "fa": "سرگین تازه را روی سبزی‌ای که خام خورده می‌شود نریزید؛ میکروب اسهال دارد",
+            "ps": "تازه سره پر هغو سبزیو مه اچوئ چې اومې خوړل کېږي؛ د نس ناستې میکروب لري",
+            "en": "put fresh dung on greens eaten raw: it carries germs that cause diarrhoea"
+          }
+        },
+        {
+          "id": "kitchen-garden.dont.spray",
+          "icon": "poison",
+          "text": {
+            "fa": "دوای زهری زراعتی را نزدیک خانه، اطفال، غذا یا چاه استفاده نکنید",
+            "ps": "زراعتي زهرجن درمل کور، ماشومانو، خوړو یا څاه ته نږدې مه کاروئ",
+            "en": "use farm poison sprays near the house, the children, food or the well"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kitchen-garden.seeds",
+      "type": "tip",
+      "icon": "money",
+      "text": {
+        "fa": "تخم بهترین نباتات خود را نگه دارید، خوب خشک کنید و با همسایه‌ها شریک کنید.",
+        "ps": "د خپلو تر ټولو ښو بوټو تخم وساتئ، ښه یې وچ کړئ او له ګاونډیانو سره یې شریک کړئ.",
+        "en": "Keep seeds from your best plants, dry them well, and share them with neighbours."
+      }
+    }
+  ],
+  "sources": [
+    "FAO in Afghanistan (2016): Home garden success story, Badakhshan (vegetables, irrigation, drying and processing for the off season)",
+    "FAO: Improve maternal health (MDG 5) brief, az957e: home gardens; dark green leafy and orange (beta-carotene-rich) vegetables and fruit",
+    "World Bank (2019): Afghan women grow their income through kitchen gardening (National Horticulture and Livestock Project, Panjshir): summer crops, winter micro-greenhouses for leek, onion and cress",
+    "Afghanaid (2023, updated 2024): Kitchen gardens: how Afghan women are growing a greener future (spinach, coriander, radish, lettuce; plastic tunnels; selling the surplus)",
+    "WHO Guidelines for the safe use of wastewater, excreta and greywater, Vol. 4 (2006): untreated excreta and fresh manure on crops eaten raw",
+    "WHO Five Keys to Safer Food (2006)"
+  ],
+  "review": [
+    "Crop calendar is general for a dry, cold-winter, hot-summer climate like Samangan (spring sowing after frost; onions, garlic, spinach and leeks in autumn; fruit trees planted while dormant in late winter). Please ask a local agriculture extension worker (or FAO/Afghanaid staff in Samangan) to confirm months and varieties, especially at higher villages.",
+    "Vitamin A message is kept to 'keeps children's eyes healthy and helps them fight illness' (no numbers). Carrots, pumpkin, apricots and dark green leaves are the vitamin-A-rich crops Mo listed.",
+    "'Water deeply once a week' is for a young fruit tree in the dry season; very hot months may need more. Check locally.",
+    "Seed saving: works for local open-pollinated seed; seed from bought hybrid seed may not breed true. Left out to keep it short.",
+    "Ash in the soil was left out on purpose (Samangan soils are likely already alkaline).",
+    "Icons wanted: 'plant' or 'sprout' (used house, animals, calendar, food-iron), 'sun'. The dung dont item uses 'warning'.",
+    "Words to check: Dari کرد (garden bed), چپر (fence), پوش پلاستیکی; Pashto کیارۍ (garden bed), کټاره (fence), سره (manure), بوس (straw), پرخه (frost), دانیا (coriander), هوږه (garlic), ګندنه (leek)."
+  ]
+}

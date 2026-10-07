@@ -1,0 +1,171 @@
+{
+  "id": "reading-temp",
+  "section": "everyone",
+  "title": {
+    "fa": "عدد ترمامتر چه معنا دارد",
+    "ps": "د ترمامیټر شمېره څه مانا لري",
+    "en": "Temperature: what the number means"
+  },
+  "summary": {
+    "fa": "عادی، تب، خیلی سرد، و چه وقت بروید.",
+    "ps": "عادي، تبه، ډېر سوړ، او کله ولاړ شئ.",
+    "en": "Normal, fever, too cold, and when to go."
+  },
+  "image": "reading-temp",
+  "blocks": [
+    {
+      "id": "reading-temp.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.",
+        "ps": "ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.",
+        "en": "A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says."
+      }
+    },
+    {
+      "id": "reading-temp.check",
+      "type": "link",
+      "to": "tool/reading/temp",
+      "icon": "thermometer",
+      "title": {
+        "fa": "درجهٔ تب را معاینه کنید",
+        "ps": "د تبې درجه وګورئ",
+        "en": "Check a temperature"
+      },
+      "text": {
+        "fa": "عدد و اینکه برای کیست را وارد کنید و بشنوید چه باید کرد.",
+        "ps": "شمېره او دا چې د چا ده ورکړئ، او واورئ چې څه باید وکړئ.",
+        "en": "Put in the number and who it is, and hear what to do."
+      }
+    },
+    {
+      "id": "reading-temp.numbers",
+      "type": "step",
+      "icon": "fever",
+      "title": {
+        "fa": "عددها چه معنا دارند",
+        "ps": "شمېرې څه مانا لري",
+        "en": "What the numbers mean"
+      },
+      "text": {
+        "fa": "۳۶ تا ۳۷ و ۴ دهم عادی است. ۳۷ و نیم یا بیشتر تب است. در طفل کوچک، کمتر از ۳۶ و نیم زیاد سرد است.",
+        "ps": "۳۶ تر ۳۷ اعشاریه ۴ عادي دي. ۳۷ نیم یا ډېر تبه ده. په کوچني ماشوم کې، له ۳۶ نیم کم ډېر سوړ دی.",
+        "en": "36 to 37.4 is normal. 37.5 or more is a fever. In a young baby, under 36.5 is too cold."
+      }
+    },
+    {
+      "id": "reading-temp.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "reading-temp.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل کمتر از ۳ ماه، ۳۷ و نیم یا بیشتر دارد",
+            "ps": "تر ۳ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري",
+            "en": "a baby under 3 months has 37.5 or more"
+          }
+        },
+        {
+          "id": "reading-temp.urgent.cold",
+          "icon": "newborn-warm",
+          "text": {
+            "fa": "طفل کوچک کمتر از ۳۵ و نیم دارد، یا بعد از گرم کردن هم سرد است",
+            "ps": "کوچنی ماشوم له ۳۵ نیم کم لري، یا له ګرمولو وروسته هم سوړ پاتې کېږي",
+            "en": "a young baby has under 35.5, or stays cold after warming"
+          }
+        },
+        {
+          "id": "reading-temp.urgent.signs",
+          "icon": "warning",
+          "text": {
+            "fa": "تب با یکی از علایم خطر همراه است",
+            "ps": "تبه د خطر له یوې نښې سره ده",
+            "en": "there is fever with any danger sign"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-temp.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، امروز به کلینیک بروید",
+        "ps": "که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "reading-temp.soon.days",
+          "icon": "calendar",
+          "text": {
+            "fa": "تب بیشتر از ۲ روز دوام کرده",
+            "ps": "تبه له ۲ ورځو زیاته دوام کړې",
+            "en": "a fever lasts more than 2 days"
+          }
+        },
+        {
+          "id": "reading-temp.soon.high",
+          "icon": "fever",
+          "text": {
+            "fa": "طفل ۳۹ یا بیشتر دارد",
+            "ps": "ماشوم ۳۹ یا ډېر لري",
+            "en": "a child has 39 or more"
+          }
+        },
+        {
+          "id": "reading-temp.soon.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "زن حامله تب دارد",
+            "ps": "امیندواره ښځه تبه لري",
+            "en": "a pregnant woman has a fever"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-temp.touch",
+      "type": "tip",
+      "icon": "fever",
+      "text": {
+        "fa": "ترمامتر ندارید؟ سینه یا شکم را با پشت دست لمس کنید. اگر داغ بود، تب حساب می‌شود.",
+        "ps": "ترمامیټر نه لرئ؟ سینه یا خېټه د لاس په شا لمس کړئ. که ګرم وي، تبه شمېرل کېږي.",
+        "en": "No thermometer? Feel the chest or belly with the back of your hand. Feeling hot counts as a fever."
+      }
+    },
+    {
+      "id": "reading-temp.more",
+      "type": "link",
+      "to": "topic/fever",
+      "icon": "check",
+      "title": {
+        "fa": "تب",
+        "ps": "تبه",
+        "en": "Fever"
+      },
+      "text": {
+        "fa": "مایعات بدهید، لباس سبک بپوشانید و بدانید چه وقت بروید.",
+        "ps": "اوبلنې ورکړئ، سپکې جامې ورته واغوندئ او پوه شئ چې کله ولاړ شئ.",
+        "en": "Give fluids, dress lightly, and know when to go."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): fever = history of fever, feels hot, or axillary temperature 37.5 C or above; young infant: fever 37.5 C or above or low body temperature below 35.5 C = very severe disease",
+    "WHO Thermal protection of the newborn: a practical guide (1997): normal 36.5 to 37.5 C; rewarm and recheck",
+    "NICE NG143 Fever in under 5s: assessment and initial management (2019, updated 2021): electronic thermometer in the axilla under 4 weeks; under 3 months with 38 C or more is high risk",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): fever in pregnancy",
+    "WHO Replacement of mercury thermometers and sphygmomanometers in health care (2011)"
+  ],
+  "review": [
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-thermometer. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+  ]
+}

@@ -114,6 +114,34 @@
       }
     },
     {
+      "id": "growth.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: وزن، فیتهٔ بازو و مشوره",
+        "ps": "په کلینیک کې: تول، د مټ فیته او مشوره",
+        "en": "At the clinic: weight, arm band, advice"
+      },
+      "text": {
+        "fa": "کارمند صحی طفل را وزن و قد می‌کند، بازو را با فیتهٔ رنگی معاینه می‌کند و در مورد تغذیه مشوره می‌دهد. طفل بسیار لاغر خمیر مخصوص بادام‌زمینی رایگان می‌گیرد. صفحهٔ طفل لاغر را ببینید.",
+        "ps": "روغتیايي کارکوونکی ماشوم تلي او قد یې اندازه کوي، مټ یې په رنګه فیته معاینه کوي او د تغذیې په اړه مشوره ورکوي. ډېر ډنګر ماشوم د ممپلي ځانګړې خمیره وړیا اخلي. د ډنګر ماشوم پاڼه وګورئ.",
+        "en": "The health worker weighs the child, checks the arm with the coloured band, and advises on feeding. A very thin child gets special peanut paste, free. See the Thin child page."
+      }
+    },
+    {
+      "id": "growth.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: طفلی که بسیار عقب است",
+        "ps": "په روغتون کې: هغه ماشوم چې ډېر وروسته دی",
+        "en": "At the hospital: a child far behind"
+      },
+      "text": {
+        "fa": "طفلی که در راه رفتن، گپ زدن، دیدن یا شنیدن بسیار عقب است، توسط داکتر شفاخانه برای علت‌های قابل تداوی، مثل کم‌شنوایی یا کم‌خونی، معاینه می‌شود و فامیل در مورد بازی مشوره می‌گیرد.",
+        "ps": "هغه ماشوم چې په تګ، خبرو، لیدلو یا اورېدلو کې ډېر وروسته دی، د روغتون ډاکټر د درملنې وړ لاملونو لپاره، لکه کم اورېدل یا د وینې کمښت، معاینه کوي او کورنۍ د لوبو په اړه مشوره اخلي.",
+        "en": "A child far behind in walking, talking, seeing or hearing is checked by the hospital doctor for treatable causes, like poor hearing or anaemia, and the family gets advice on play."
+      }
+    },
+    {
       "id": "growth.urgent",
       "type": "alert",
       "level": "urgent",
@@ -257,7 +285,9 @@
     "WHO Motor Development Study: windows of achievement for six gross motor milestones (2006)",
     "WHO guideline: Vitamin A supplementation in infants and children 6 to 59 months of age (2011)",
     "WHO guideline: Preventive chemotherapy to control soil-transmitted helminth infections (2017)",
-    "WHO IMCI Chart Booklet (2014): check for acute malnutrition"
+    "WHO IMCI Chart Booklet (2014): check for acute malnutrition",
+    "WHO IMCI Chart Booklet (2014): check for acute malnutrition and anaemia; WHO guideline on wasting and nutritional oedema (2023)",
+    "WHO/UNICEF Care for Child Development (2012); WHO Nurturing care framework (2018)"
   ],
   "review": [
     "Milestone ages are given as 'most children' by these ages, as requested (smile about 6 weeks, head 3 to 4 months, sit 6 to 8 months, first words about 12 months, walk 12 to 18 months, short sentences by 2 years). WHO motor windows are wider (sitting alone 4 to 9 months, walking alone 8 to 18 months); check that the wording will not alarm parents of normal children.",
@@ -265,6 +295,7 @@
     "Vitamin A from 6 months and deworming from 1 year follow WHO; Afghanistan may give vitamin A through polio campaigns. Dari 'ویتامین ای' and Pashto 'ویټامین اې' (vitamin A) need a native-speaker check.",
     "Monthly weighing 'especially in the first 2 years' assumes monthly growth monitoring under 2 in Afghan clinics; check the national growth monitoring schedule.",
     "Hearing item uses icon 'talk'; an 'ear' icon would be better.",
-    "Very thin (severe wasting) follows MoPH IMAM 2018 and WHO SAM 2013, and matches the home kit (kit-muac, the MUAC checker in js/tools.js): very thin or a red MUAC = clinic today (outpatient treatment with therapeutic food, OPD-SAM); swelling of both feet, will not eat or drink, or very thin and very weak, sleepy or sick = hospital now (inpatient). New: growth.today (clinic today box) and the growth.home-care tip; growth.urgent.thin now needs 'very weak, sleepy or sick' as well. Chosen by the merge (2026-10-07); Mo to confirm. 'Every week' for outpatient visits is IMAM practice (weekly or every 2 weeks); check locally."
+    "Very thin (severe wasting) follows MoPH IMAM 2018 and WHO SAM 2013, and matches the home kit (kit-muac, the MUAC checker in js/tools.js): very thin or a red MUAC = clinic today (outpatient treatment with therapeutic food, OPD-SAM); swelling of both feet, will not eat or drink, or very thin and very weak, sleepy or sick = hospital now (inpatient). New: growth.today (clinic today box) and the growth.home-care tip; growth.urgent.thin now needs 'very weak, sleepy or sick' as well. Chosen by the merge (2026-10-07); Mo to confirm. 'Every week' for outpatient visits is IMAM practice (weekly or every 2 weeks); check locally.",
+    "Developmental assessment at district hospital level is limited in Afghanistan; the block promises only a check for treatable causes and advice."
   ]
 }

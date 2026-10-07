@@ -1,0 +1,204 @@
+{
+  "id": "child-meals",
+  "section": "children",
+  "title": {
+    "fa": "غذای باغچه برای طفل",
+    "ps": "د ماشوم لپاره د باغچې خواړه",
+    "en": "Garden food for your child"
+  },
+  "summary": {
+    "fa": "از ۶ ماهگی: هر روز لیتی غلیظ، تخم مرغ، ترکاری و میوه.",
+    "ps": "له ۶ میاشتو: هره ورځ پنډه لېټی، هګۍ، سبزي او مېوه.",
+    "en": "From 6 months: thick porridge, egg, vegetables and fruit every day."
+  },
+  "image": "child-meals",
+  "blocks": [
+    {
+      "id": "child-meals.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در ۶ ماهگی طفل شما به چیزی بیشتر از شیر مادر نیاز دارد. غذای باغچه و مرغ‌های خودتان می‌تواند آنچه را طفل برای رشد لازم دارد بدهد.",
+        "ps": "په ۶ میاشتو کې ستاسو ماشوم د مور تر شیدو ډېرو شیانو ته اړتیا لري. ستاسو د خپلې باغچې او چرګانو خواړه کولای شي ماشوم ته هغه څه ورکړي چې د ودې لپاره یې غواړي.",
+        "en": "At 6 months your baby needs more than breast milk. Food from your own garden and hens can give your child what they need to grow."
+      }
+    },
+    {
+      "id": "child-meals.start",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "از ۶ ماهگی شروع کنید، شیر مادر را ادامه دهید",
+        "ps": "له ۶ میاشتو پیل وکړئ، تی ورکول مه پرېږدئ",
+        "en": "Start at 6 months, keep breastfeeding"
+      },
+      "text": {
+        "fa": "با ۲ یا ۳ قاشق غذای نرم، روزی دو بار شروع کنید و آهسته‌آهسته زیادتر بدهید. شیر مادر را بار بار، تا ۲ سالگی یا بیشتر، ادامه دهید.",
+        "ps": "په ورځ کې دوه ځله، په ۲ یا ۳ کاشوغو نرمو خوړو پیل وکړئ او ورو ورو یې زیات کړئ. ډېر ځله تی ورکړئ، تر ۲ کلنۍ یا ډېر وخت پورې.",
+        "en": "Begin with 2 or 3 spoons of soft food, twice a day, and slowly give more. Keep breastfeeding often, to 2 years or more."
+      }
+    },
+    {
+      "id": "child-meals.thick",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "لیتی غلیظ، با کمی روغن",
+        "ps": "پنډه لېټی، له لږ غوړیو سره",
+        "en": "Thick porridge, with oil added"
+      },
+      "text": {
+        "fa": "لیتی را آن‌قدر غلیظ بسازید که روی قاشق بماند؛ لیتی آبکی شکم را پر می‌کند ولی قوت کم دارد. کمی روغن، و تخم مرغ، لوبیا یا ترکاری کوبیده در آن مخلوط کنید.",
+        "ps": "لېټی دومره پنډه کړئ چې پر کاشوغې پاتې شي؛ اوبلنه لېټی ګېډه ډکوي خو ځواک یې لږ دی. لږ غوړي، او میده شوې هګۍ، لوبیا یا سبزي ورګډې کړئ.",
+        "en": "Make porridge thick enough to stay on the spoon; watery porridge fills the belly but feeds little. Stir in a little oil, and mashed egg, beans or vegetables."
+      },
+      "picture": "food-thick-porridge"
+    },
+    {
+      "id": "child-meals.egg",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "هر روز تخم مرغ یا غذای حیوانی",
+        "ps": "هره ورځ هګۍ یا حیواني خواړه",
+        "en": "An egg or animal food every day"
+      },
+      "text": {
+        "fa": "اگر بتوانید، هر روز تخم مرغ، جگر، گوشت یا ماست بدهید. این‌ها آهن و قوتی دارند که غذای نباتی به تنهایی ندارد.",
+        "ps": "که کولای شئ، هره ورځ هګۍ، ځیګر، غوښه یا مستې ورکړئ. دا هغه اوسپنه او ځواک لري چې یوازې نباتي خواړه یې نه لري.",
+        "en": "If you can, give egg, liver, meat or yoghurt every day. They give iron and strength that plant foods alone cannot."
+      }
+    },
+    {
+      "id": "child-meals.iron",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "غذای پر آهن همراه میوه",
+        "ps": "اوسپنه لرونکي خواړه له مېوې سره",
+        "en": "Iron foods with fruit"
+      },
+      "text": {
+        "fa": "لوبیا، دال و سبزی‌های سبز تیره آهن دارند. همراه آن‌ها بادنجان رومی، زردآلو یا انار بدهید؛ به بدن کمک می‌کند آهن را بگیرد.",
+        "ps": "لوبیا، دال او تکې شنې پاڼې اوسپنه لري. ورسره رومي بانجان، زردالو یا انار ورکړئ؛ له بدن سره مرسته کوي چې اوسپنه واخلي.",
+        "en": "Beans, lentils and dark green leaves have iron. Give tomato, apricot or pomegranate with them: it helps the body take in the iron."
+      }
+    },
+    {
+      "id": "child-meals.often",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "طفل روزی چند بار غذا بخورد",
+        "ps": "ماشوم په ورځ کې څو ځله خواړه وخوري",
+        "en": "How often a child eats"
+      },
+      "text": {
+        "fa": "از ۶ تا ۸ ماهگی، روزی ۲ تا ۳ بار غذا. از ۹ ماهگی تا ۲ سالگی، روزی ۳ تا ۴ بار غذا، و ۱ تا ۲ بار خوراک سبک مثل میوه یا نان.",
+        "ps": "له ۶ تر ۸ میاشتو، په ورځ کې ۲ تر ۳ ځله خواړه. له ۹ میاشتو تر ۲ کلنۍ، په ورځ کې ۳ تر ۴ ځله خواړه، او ۱ تر ۲ ځله سپک خواړه لکه مېوه یا ډوډۍ.",
+        "en": "From 6 to 8 months, 2 to 3 meals a day. From 9 months to 2 years, 3 to 4 meals, and 1 to 2 snacks like fruit or bread."
+      }
+    },
+    {
+      "id": "child-meals.clean",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست پاک، غذای تازه",
+        "ps": "پاک لاسونه، تازه خواړه",
+        "en": "Clean hands, fresh food"
+      },
+      "text": {
+        "fa": "پیش از پختن و غذا دادن، دست‌ها را با صابون بشویید. غذا را تازه بپزید، یا سرپوشیده نگه دارید و تا ۲ ساعت استفاده کنید.",
+        "ps": "د پخلي او خواړو ورکولو مخکې لاسونه په صابون ومینځئ. خواړه تازه پاخه کړئ، یا یې پټ وساتئ او تر ۲ ساعتونو پورې یې وکاروئ.",
+        "en": "Wash hands with soap before cooking and feeding. Cook food fresh, or keep it covered and use it within 2 hours."
+      }
+    },
+    {
+      "id": "child-meals.breastfeeding",
+      "type": "link",
+      "to": "topic/breastfeeding",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیر مادر و غذای اول",
+        "ps": "د مور شیدې او لومړني خواړه",
+        "en": "Breastfeeding and first foods"
+      },
+      "text": {
+        "fa": "تا ۶ ماه فقط شیر مادر، و چیزهایی که نباید به شیرخوار داد.",
+        "ps": "تر ۶ میاشتو یوازې د مور شیدې، او هغه څه چې تي خوړونکي ماشوم ته باید ور نه کړل شي.",
+        "en": "Only breast milk to 6 months, and what not to give a baby."
+      }
+    },
+    {
+      "id": "child-meals.growth",
+      "type": "link",
+      "to": "topic/growth",
+      "icon": "growth",
+      "title": {
+        "fa": "آیا طفل شما خوب رشد می‌کند؟",
+        "ps": "ایا ستاسو ماشوم ښه وده کوي؟",
+        "en": "Is your child growing well?"
+      },
+      "text": {
+        "fa": "هر ماه وزن کنید، و ببینید طفل لاغر چه وقت باید به کلینیک برود.",
+        "ps": "هره میاشت وزن وکړئ، او وګورئ چې ډنګر ماشوم کله کلینیک ته اړتیا لري.",
+        "en": "Weigh every month, and see when a thin child needs the clinic."
+      }
+    },
+    {
+      "id": "child-meals.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "child-meals.dont.sweets",
+          "icon": "sugar",
+          "text": {
+            "fa": "شیرینی، بیسکویت یا نوشابهٔ گازدار ندهید؛ شکم را پر می‌کند اما قوت نمی‌دهد",
+            "ps": "خوږې، بسکیټ یا ګازدار څښاک مه ورکوئ؛ ګېډه ډکوي خو ځواک نه ورکوي",
+            "en": "give sweets, biscuits or fizzy drinks: they fill the belly but do not feed"
+          }
+        },
+        {
+          "id": "child-meals.dont.tea",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "به شیرخوار و طفل کوچک چای ندهید؛ آهن غذا را کم می‌کند",
+            "ps": "تي خوړونکي او کوچني ماشوم ته چای مه ورکوئ؛ د خوړو اوسپنه کموي",
+            "en": "give tea to babies and small children: it takes away the iron in food"
+          }
+        }
+      ]
+    },
+    {
+      "id": "child-meals.bowl",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "به طفل کوچک کاسهٔ جدا بدهید و با او بنشینید. با مهربانی تشویق کنید؛ هرگز زور نکنید.",
+        "ps": "کوچني ماشوم ته جلا کاسه ورکړئ او ورسره کېنئ. په مینه یې وهڅوئ؛ هېڅکله زور مه کوئ.",
+        "en": "Give a small child their own bowl and sit with them. Encourage gently; never force."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guideline for complementary feeding of infants and young children 6-23 months of age (2023): daily animal-source foods, fruit and vegetables, pulses; avoid foods and drinks high in sugar and salt; responsive feeding",
+    "WHO fact sheet: Infant and young child feeding (2026): start at 6 months with small amounts; 2-3 meals a day at 6-8 months, 3-4 meals at 9-23 months, plus 1-2 snacks; breastfeed to 2 years or beyond",
+    "WHO/UNICEF Facts for Life (2010): nutrition and growth (thick foods, add oil, own bowl, active feeding)",
+    "FAO/WHO Vitamin and mineral requirements in human nutrition, 2nd ed. (2004): vitamin C raises iron absorption from plant foods; tea polyphenols lower it",
+    "WHO Five Keys to Safer Food (2006): do not leave cooked food at room temperature for more than 2 hours"
+  ],
+  "review": [
+    "Meal numbers match the existing breastfeeding page (breastfeeding.meals), from the WHO IYCF fact sheet.",
+    "'Thick enough to stay on the spoon' and 'add a little oil' are standard WHO/UNICEF counselling cards; 'yoghurt' is used as the dairy example because the goats-sheep page says to boil milk.",
+    "Section 'children' (red colour, children's audio pack) though it is listed in the Food and garden section; also proposed for the children list in sections-change.json. Section 'everyone' would make it teal.",
+    "Tea dont item: WHO 2023 advises against sugary drinks; 'no tea for babies and small children' is common Afghan counselling and fits the anaemia page (tea between meals). Confirm.",
+    "Step pictures: food-thick-porridge (a spoon held level with thick porridge staying on it).",
+    "Words to check: Dari لیتی (porridge), نوشابهٔ گازدار (fizzy drink); Pashto لېټی، اوبلنه (watery), ګازدار څښاک.",
+    "Content merge 2: the anaemia link (child-meals.anaemia) was dropped so the page keeps 2 links (breastfeeding, growth). The tea 'do not' item still points the same way as the anaemia page."
+  ]
+}

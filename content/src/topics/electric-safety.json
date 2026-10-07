@@ -1,0 +1,226 @@
+{
+  "id": "electric-safety",
+  "section": "everyone",
+  "title": {
+    "fa": "برق بی‌خطر در خانه",
+    "ps": "په کور کې خوندي برېښنا",
+    "en": "Safe electricity at home"
+  },
+  "summary": {
+    "fa": "سیم لچ، آب، سیم‌کشی خودسر، بتری سولر و جنراتور: بی‌خطر بمانید.",
+    "ps": "لوڅ سیمونه، اوبه، په خپل سر نښلول، د سولر بېټرۍ او جنراتور: خوندي اوسئ.",
+    "en": "Bare wires, water, hook-ups, solar batteries and generators: stay safe."
+  },
+  "image": "electric-safety",
+  "blocks": [
+    {
+      "id": "electric-safety.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سیم لچ، آب و سیم‌کشی خودسر می‌تواند در یک لحظه بکشد. اطفال بیشتر از همه در خطر هستند.",
+        "ps": "لوڅ سیمونه، اوبه او په خپل سر نښلول شوي سیمونه په یوه شېبه کې وژلای شي. ماشومان تر ټولو ډېر په خطر کې دي.",
+        "en": "Bare wires, water and home-made hook-ups can kill in a second. Children are most at risk."
+      }
+    },
+    {
+      "id": "electric-safety.wires",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "سیم لچ و پلگ شکسته را ترمیم کنید",
+        "ps": "لوڅ سیمونه او مات پلګونه جوړ کړئ",
+        "en": "Mend bare wires and broken plugs"
+      },
+      "text": {
+        "fa": "سیم لچ، پلگ ترک‌خورده و ساکت شکسته را ترمیم کنید یا از مستری برق بخواهید. پلگ‌های زیاد را در یک ساکت نزنید.",
+        "ps": "لوڅ سیمونه، چاود پلګونه او مات ساکټونه جوړ کړئ یا له برېښنا مستري وغواړئ. ډېر پلګونه په یوه ساکټ کې مه لګوئ.",
+        "en": "Mend bare wires, cracked plugs and broken sockets, or ask an electrician. Do not put many plugs into one socket."
+      }
+    },
+    {
+      "id": "electric-safety.dry",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "دست خشک، زمین خشک",
+        "ps": "وچ لاسونه، وچه ځمکه",
+        "en": "Dry hands, dry floor"
+      },
+      "text": {
+        "fa": "به سویچ و پلگ فقط با دست خشک و روی زمین خشک دست بزنید. سیم‌ها را از زمین و آب دور نگه دارید.",
+        "ps": "سویچ او پلګ ته یوازې په وچو لاسونو او پر وچه ځمکه ولاړ لاس وړئ. سیمونه له ځمکې او اوبو لرې وساتئ.",
+        "en": "Touch switches and plugs only with dry hands, standing on a dry floor. Keep wires off the ground and away from water."
+      }
+    },
+    {
+      "id": "electric-safety.children",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "اطفال را از ساکت دور نگه دارید",
+        "ps": "ماشومان له ساکټونو لرې وساتئ",
+        "en": "Keep children away from sockets"
+      },
+      "text": {
+        "fa": "ساکت‌های پایین را بپوشانید یا با تیپ بند کنید. به اطفال بیاموزید که هرگز به سیم دست نزنند و چیزی در ساکت نکنند.",
+        "ps": "ټیټ ساکټونه پټ کړئ یا یې په ټیپ بند کړئ. ماشومانو ته ور زده کړئ چې هېڅکله سیم ته لاس ور نه وړي او په ساکټ کې څه ونه منډي.",
+        "en": "Cover low sockets, or tape them shut. Teach children never to touch wires or push things into sockets."
+      },
+      "picture": "home-socket"
+    },
+    {
+      "id": "electric-safety.hookup",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "سیم‌کشی خودسر نکنید",
+        "ps": "په خپل سر سیمونه مه نښلوئ",
+        "en": "No home-made hook-ups"
+      },
+      "text": {
+        "fa": "هرگز خودتان سیم را به لین برق وصل نکنید، و سیم‌ها را فقط با تاب دادن به هم وصل نکنید. از مستری برق بخواهید که خانه را بی‌خطر وصل کند.",
+        "ps": "هېڅکله پخپله سیم د برېښنا له لین سره مه نښلوئ، او سیمونه یوازې په تاوولو سره مه نښلوئ. له برېښنا مستري وغواړئ چې کور په خوندي ډول ونښلوي.",
+        "en": "Never hook a wire onto the power line yourself, or join wires just by twisting them. Ask an electrician to connect the house safely."
+      }
+    },
+    {
+      "id": "electric-safety.solar",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "پلیت آفتابی و بتری",
+        "ps": "د لمر پلېټ او بېټرۍ",
+        "en": "Solar panels and batteries"
+      },
+      "text": {
+        "fa": "بتری را در یک جعبهٔ خشک و هوادار، دور از اطفال بگذارید. نگذارید فلز به هر دو سر آن بخورد. آب بتری تیزاب است و پوست و چشم را می‌سوزاند.",
+        "ps": "بېټرۍ په یوه وچ او هوادار صندوق کې، له ماشومانو لرې کېږدئ. مه پرېږدئ چې فلز د هغې دواړو سرونو ته ولګېږي. د بېټرۍ اوبه تېزاب دي او پوستکی او سترګې سوځوي.",
+        "en": "Keep the battery in a dry, airy box, away from children. Never let metal touch both ends. Battery water is acid and burns skin and eyes."
+      }
+    },
+    {
+      "id": "electric-safety.generator",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "جنراتور: فقط در بیرون",
+        "ps": "جنراتور: یوازې بهر",
+        "en": "Generator: outside only"
+      },
+      "text": {
+        "fa": "جنراتور را در بیرون و دور از دروازه و کلکین روشن کنید؛ دود آن گاز زهری است. پطرول را در ظرف بسته و دور از خانه نگه دارید.",
+        "ps": "جنراتور بهر، له دروازو او کړکیو لرې چالان کړئ؛ لوګی یې زهرجن ګاز دی. پطرول په تړلي لوښي کې او له کوره لرې وساتئ.",
+        "en": "Run a generator outside, far from doors and windows: its smoke is poison gas. Keep petrol in a closed can, away from the house."
+      }
+    },
+    {
+      "id": "electric-safety.storm",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "بعد از توفان، از سیم‌ها دور بمانید",
+        "ps": "له توفان وروسته، له سیمونو لرې اوسئ",
+        "en": "After a storm, keep away from wires"
+      },
+      "text": {
+        "fa": "بعد از توفان یا سیلاب، سیم‌های افتاده یا آویزان ممکن است هنوز برق داشته باشند. اطفال را دور نگه دارید و به ادارهٔ برق خبر بدهید.",
+        "ps": "له توفان یا سېلاب وروسته، لوېدلي یا ځوړند سیمونه کېدای شي لا برېښنا ولري. ماشومان لرې وساتئ او د برېښنا ادارې ته خبر ورکړئ.",
+        "en": "Fallen or hanging wires may still carry power after a storm or flood. Keep children far away and tell the power company."
+      }
+    },
+    {
+      "id": "electric-safety.shock",
+      "type": "link",
+      "to": "topic/electric-shock",
+      "icon": "warning",
+      "title": {
+        "fa": "کسی را برق گرفته؟",
+        "ps": "څوک برېښنا نیولی؟",
+        "en": "Someone had a shock?"
+      },
+      "text": {
+        "fa": "اول برق را قطع کنید. تا وصل است به او دست نزنید؛ سیم را با چوب خشک دور کنید. صفحه را باز کنید.",
+        "ps": "لومړی برېښنا بنده کړئ. تر څو وصل وي لاس مه ورته وړئ؛ سیم په وچ لرګي لرې کړئ. پاڼه پرانیزئ.",
+        "en": "Turn off the power first. Never touch them while they are connected: push the wire away with dry wood. Open the page."
+      },
+      "urgent": true
+    },
+    {
+      "id": "electric-safety.cpr",
+      "type": "link",
+      "to": "topic/unconscious",
+      "icon": "breathe",
+      "title": {
+        "fa": "بعد از برق‌گرفتگی نفس نمی‌کشد؟",
+        "ps": "د برېښنا له وهلو وروسته ساه نه اخلي؟",
+        "en": "Not breathing after a shock?"
+      },
+      "text": {
+        "fa": "وقتی برق قطع شد، فشار سینه را شروع کنید. این صفحه نشان می‌دهد که برای هر سن چطور.",
+        "ps": "کله چې برېښنا بنده شوه، د سینې فشار پیل کړئ. دا پاڼه د هر عمر لپاره ښيي چې څنګه.",
+        "en": "When the power is off, start chest pushes. The page shows how for each age."
+      },
+      "urgent": true
+    },
+    {
+      "id": "electric-safety.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "electric-safety.dont.washing",
+          "icon": "no",
+          "text": {
+            "fa": "لباس تر را روی سیم برق آویزان نکنید",
+            "ps": "لندې جامې د برېښنا پر سیم مه ځړوئ",
+            "en": "hang wet washing on electric wires"
+          }
+        },
+        {
+          "id": "electric-safety.dont.rug",
+          "icon": "no",
+          "text": {
+            "fa": "سیم را زیر قالین یا بوریا نکشید، آنجا کهنه می‌شود",
+            "ps": "سیمونه د غالۍ یا بوریا لاندې مه تېروئ، هلته زړېږي",
+            "en": "run wires under rugs or mats, where they wear out"
+          }
+        },
+        {
+          "id": "electric-safety.dont.kite",
+          "icon": "no",
+          "text": {
+            "fa": "نزدیک لین برق گدی‌پران بازی نکنید یا بالای درخت نروید",
+            "ps": "د برېښنا لین ته نږدې پتنګ مه الوزوئ او ونو ته مه ختئ",
+            "en": "fly kites or climb trees near power lines"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): electrical injuries (switch off first; prevention)",
+    "European Resuscitation Council Guidelines 2025: Special circumstances, electrocution",
+    "WHO/UNICEF World report on child injury prevention (2008): burns and electrical injury",
+    "Electrical Safety First (UK): overloaded sockets, damaged plugs and cables, cables under rugs, wet hands",
+    "UK HSE: lead-acid battery safety (acid burns, short circuits, ventilation); and electrical safety in the home",
+    "US CPSC / CDC: portable generator safety (outdoors only, away from doors and windows; fuel stored away from the home)",
+    "Energy Networks Association (UK) 'Look out, look up' and US OSHA/utility advice: kites and trees near power lines; treat fallen lines as live"
+  ],
+  "review": [
+    "New page: the brief's electricity section, split from home-safety to keep each page under 2.5 minutes. The shock first aid itself stays on electric-shock (linked), so it is not repeated here.",
+    "electric-shock.prevent (tip) is moved here: its 'keep wires off the ground and away from water' is in the 'dry' step and 'cover sockets, no touching plugs' in the 'children' step.",
+    "Fallen wires: the prevention step here says 'keep children far away and tell the power company'. electric-shock.line keeps the emergency rule (at least 20 steps away). Some overlap is left on purpose.",
+    "Socket covers: in the UK plug-in covers are not advised because UK sockets have shutters. Afghan sockets (types C and F) usually have no shutters, so covering or taping low sockets is advised. Check.",
+    "Home-made or illegal hook-ups (sometimes called کُنده): worded as safety only, not as a legal matter.",
+    "Solar: lead-acid batteries give off hydrogen when charging, hence 'airy box'. 'Battery water is acid' matches eye-chemical.",
+    "Generator distance: CDC/CPSC say at least 20 feet (about 6 metres) from the house; the text says 'far from doors and windows' with no number.",
+    "Urgent box repeats electric-shock.urgent.shock in a short form, so this page says when to go. The 'why' (electricity can harm the heart) is on electric-shock.",
+    "Words to check (Dari / Pashto): سیم لچ / لوڅ سیم (bare wire), مستری برق / برېښنا مستري (electrician), ساکت / ساکټ, پلگ / پلګ, تیپ / ټیپ (tape), سیم‌کشی خودسر / په خپل سر نښلول (illegal hook-up), لین برق / د برېښنا لین, پلیت آفتابی / د لمر پلېټ (solar panel), بتری / بېټرۍ, جنراتور, پطرول, ادارهٔ برق / د برېښنا اداره (DABS, برشنا), گدی‌پران / پتنګ (kite), بوریا (mat).",
+    "Icons: wanted 'socket', 'plug', 'solar' and 'generator'; used warning, water, baby and house.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: electric-safety.urgent. Urgent signs are reached through the red link to the Health side."
+  ]
+}

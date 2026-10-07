@@ -122,9 +122,37 @@
         "en": "Make time for peace"
       },
       "text": {
-        "fa": "کارهایی را بکنید که به شما آرامش می‌دهد، مثل وقت گذراندن با خانواده، نماز یا قدم زدن.",
-        "ps": "هغه کارونه وکړئ چې تاسو ته ارامي درکوي، لکه له کورنۍ سره وخت تېرول، لمونځ یا ګرځېدل.",
-        "en": "Do what gives you peace, such as time with family, prayer or a walk."
+        "fa": "کارهایی را بکنید که به شما آرامش می‌دهد، مثل وقت گذراندن با خانواده یا قدم زدن.",
+        "ps": "هغه کارونه وکړئ چې تاسو ته ارامي درکوي، لکه له کورنۍ سره وخت تېرول یا ګرځېدل.",
+        "en": "Do what gives you peace, such as time with family or a walk."
+      }
+    },
+    {
+      "id": "stress.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: گپ زدن و دوا",
+        "ps": "په کلینیک کې: خبرې او درمل",
+        "en": "At the clinic: talking and medicine"
+      },
+      "text": {
+        "fa": "کارمند صحی گوش می‌دهد، مطمئن می‌شود که بدن سالم است و راه‌های سادهٔ مقابله را یاد می‌دهد. برای غم یا تشویش شدیدی که هفته‌ها دوام کند، مشوره و در صورت ضرورت دوای روزانه داده می‌تواند.",
+        "ps": "روغتیايي کارکوونکی اوري، ډاډ ترلاسه کوي چې بدن روغ دی او د مقابلې ساده لارې ورزده کوي. د هغه ژور غم یا اندېښنې لپاره چې اونۍ دوام کوي، مشوره او که اړتیا وي ورځني درمل ورکولای شي.",
+        "en": "The health worker listens, checks the body is well, and teaches simple ways to cope. For deep sadness or worry lasting weeks, they can give counselling and, if needed, a daily medicine."
+      }
+    },
+    {
+      "id": "stress.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: کمک تخصصی",
+        "ps": "په روغتون کې: تخصصي مرسته",
+        "en": "At the hospital: specialist help"
+      },
+      "text": {
+        "fa": "کسی که به خودش آسیب رسانده، هیچ خورده یا خوابیده نمی‌تواند، یا صداهایی می‌شنود، در شفاخانه دیده می‌شود، جایی که داکتران آموزش‌دیدهٔ صحت روانی دواهای مؤثر دارند. رایگان است.",
+        "ps": "هغه څوک چې ځان ته یې زیان رسولی، هېڅ نه شي خوړلای یا ویده کېدلای، یا غږونه اوري، په روغتون کې کتل کېږي، چېرته چې د رواني روغتیا روزل شوي ډاکټران اغېزمن درمل لري. وړیا دي.",
+        "en": "Someone who has tried to harm themselves, cannot eat or sleep, or hears voices is seen at the hospital, where doctors trained in mental health have medicines that work. It is free."
       }
     },
     {
@@ -219,16 +247,22 @@
   "sources": [
     "WHO Doing What Matters in Times of Stress: an illustrated guide (2020): grounding, unhooking, acting on your values, being kind, making room",
     "WHO mhGAP Intervention Guide 2.0 (2016): depression, self-harm and suicide, substance use; psychoeducation on sleep and social support",
-    "WHO fact sheet: Suicide (2025): restricting access to means, talking about suicide"
+    "WHO fact sheet: Suicide (2025): restricting access to means, talking about suicide",
+    "WHO mhGAP Intervention Guide 2.0 (2016): depression (psychosocial interventions first, antidepressants such as fluoxetine or amitriptyline when indicated), psychosis, self-harm",
+    "WHO Doing What Matters in Times of Stress (2020)",
+    "Afghanistan BPHS (2010): psychosocial counsellors at CHC, amitriptyline at CHC, fluoxetine and haloperidol at district hospital; IPEHS (2019): depression care initiated at CHC",
+    "Burden: Afghanistan National Mental Health Survey (2017): major depressive episode 11.7 percent, PTSD 5.3 percent; psychological distress lowest in the north (34 percent)"
   ],
   "review": [
     "The urgent alert title differs from the standard wording, as briefed: 'tell someone now and go to the clinic or hospital, day or night', rather than hospital only.",
     "The 'clinic today' alert covers 2 weeks of low mood, poor function and drug use. 'This week' might be more realistic, but the standard amber wording was kept.",
     "Added a tip for family members: take it seriously, stay with them, keep poisons and medicines away, get help (WHO means restriction).",
     "Sleep step: 'avoid a lot of tea in the evening' was added because of the caffeine in tea.",
-    "Prayer is listed, as briefed, as one thing that can give peace; it makes no religious claim.",
+    "Prayer removed from the peace step (Mo: the app has no religious content). It now reads \"time with family or a walk\".",
     "The unhooking step uses the WHO 'notice and name' method: 'I am having a worried thought.' Check that it makes sense when heard in Dari or Pashto.",
     "The unhooking step uses the 'sad' icon (closest); a 'thought' icon would suit better.",
-    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
+    "Psychosocial counsellors exist at CHC level on paper (BPHS); confirm they are in post in Samangan.",
+    "'It is free' refers to government services; private psychiatrists in Mazar charge fees."
   ]
 }

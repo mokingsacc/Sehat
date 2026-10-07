@@ -1,0 +1,140 @@
+{
+  "id": "fumes-poisoning",
+  "section": "everyone",
+  "title": {
+    "fa": "مسمومیت با دود و گاز",
+    "ps": "د لوګي او ګاز زهري کېدل",
+    "en": "Poisoned by fumes or gas"
+  },
+  "summary": {
+    "fa": "نزدیک آتش یا بخاری مریض شدید؟ بیرون بروید و به شفاخانه بروید.",
+    "ps": "د اور یا بخارۍ ترڅنګ ناروغه شوئ؟ بهر ووځئ او روغتون ته ولاړ شئ.",
+    "en": "Ill near a fire or heater? Get out and go to hospital."
+  },
+  "image": "fumes-poisoning",
+  "blocks": [
+    {
+      "id": "fumes-poisoning.lead",
+      "type": "lead",
+      "text": {
+        "fa": "دود آتش، بخاری، موتر و جنراتور گاز زهری دارد که نه بو دارد و نه رنگ. این گاز می‌تواند تمام خانواده را در خواب بکشد. گاز پخت‌وپز هم ممکن است نشت کند و آتش بگیرد.",
+        "ps": "د اور، بخارۍ، موټر او جنراتور لوګی زهرجن ګاز لري چې نه بوی لري او نه رنګ. دا ګاز ټوله کورنۍ په خوب کې وژلای شي. د پخلي ګاز هم کېدای شي ووځي او اور واخلي.",
+        "en": "Fires, heaters and engines give off a poison gas with no smell or colour. It can kill a family in their sleep. Cooking gas can leak and burn."
+      }
+    },
+    {
+      "id": "fumes-poisoning.out",
+      "type": "step",
+      "icon": "window",
+      "title": {
+        "fa": "نزدیک آتش مریض شدید؟ بیرون بروید",
+        "ps": "اور ته نږدې ناروغه شوئ؟ بهر ووځئ",
+        "en": "Feel ill near a fire? Go outside"
+      },
+      "text": {
+        "fa": "همه را فوراً به هوای تازه ببرید و دروازه و کلکین را باز کنید. آتش یا جنراتور را فقط اگر بی‌خطر است خاموش کنید.",
+        "ps": "ټول سمدستي تازه هوا ته وباسئ او دروازې او کړکۍ خلاصې کړئ. اور یا جنراتور یوازې هغه وخت بند کړئ چې خوندي وي.",
+        "en": "Take everyone into fresh air at once, and open doors and windows. Turn off the fire or engine only if it is safe."
+      },
+      "picture": "home-co-fresh-air"
+    },
+    {
+      "id": "fumes-poisoning.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "همه را به هوای آزاد ببرید و همین حالا به شفاخانه بروید، شب باشد یا روز، اگر:",
+        "ps": "ټول خلاصې هوا ته وباسئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که چېرې:",
+        "en": "Get everyone into fresh air and go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "fumes-poisoning.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "کسی نزدیک آتش، بخاری یا جنراتور سردردی، سرچرخی یا استفراغ دارد",
+            "ps": "څوک اور، بخارۍ یا جنراتور ته نږدې سر درد، سرګرځېدل یا کانګې لري",
+            "en": "someone near a fire, heater or engine has a headache, dizziness or vomiting"
+          }
+        },
+        {
+          "id": "fumes-poisoning.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "کسی خیلی خواب‌آلود یا گیج است یا به سختی بیدار می‌شود",
+            "ps": "څوک ډېر خوب وړی یا ګډوډ دی یا په سختۍ ویښېږي",
+            "en": "someone is very sleepy, confused or hard to wake"
+          }
+        },
+        {
+          "id": "fumes-poisoning.urgent.faint",
+          "icon": "convulsion",
+          "text": {
+            "fa": "کسی بیهوش می‌شود یا تشنج می‌کند",
+            "ps": "څوک بې هوښه کېږي یا اختلاج کوي",
+            "en": "someone faints or has fits"
+          }
+        },
+        {
+          "id": "fumes-poisoning.urgent.family",
+          "icon": "family",
+          "text": {
+            "fa": "چند نفر یا حیوانات خانه هم‌زمان مریض می‌شوند",
+            "ps": "څو کسان یا د کور څاروي په یو وخت ناروغه کېږي",
+            "en": "several people, or the animals, fall ill at the same time"
+          }
+        },
+        {
+          "id": "fumes-poisoning.urgent.outside",
+          "icon": "house",
+          "text": {
+            "fa": "در بیرون بهتر می‌شوند و در داخل خانه دوباره مریض می‌شوند",
+            "ps": "بهر ښه کېږي، او کور ته چې راشي بیا ناروغه کېږي",
+            "en": "they feel better outside, and ill again back inside"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fumes-poisoning.oxygen",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه اکسیجن می‌دهند تا گاز زهری از خون پاک شود. حتی اگر در بیرون بهتر شدند، بروید.",
+        "ps": "په روغتون کې اکسیجن ورکوي چې زهرجن ګاز له وینې پاک شي. که بهر ښه هم شي، بیا هم ولاړ شئ.",
+        "en": "At hospital they give oxygen to clear the poison gas from the blood. Go even if they feel better outside."
+      }
+    },
+    {
+      "id": "fumes-poisoning.prevent",
+      "type": "link",
+      "to": "topic/home-safety",
+      "icon": "house",
+      "title": {
+        "fa": "خانهٔ بی‌خطر: دود و گاز",
+        "ps": "خوندي کور: لوګی او ګاز",
+        "en": "Safe home: fumes and gas"
+      },
+      "text": {
+        "fa": "گاز زهری آتش، موتر و جنراتور، و بالون گاز: بی‌خطر بمانید.",
+        "ps": "د اور، موټر او جنراتور زهرجن ګاز، او د ګاز بالون: خوندي اوسئ.",
+        "en": "Poison gas from fires, cars and generators, and gas bottles: stay safe."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guidelines for indoor air quality: selected pollutants (2010): carbon monoxide",
+    "WHO guidelines for indoor air quality: household fuel combustion (2014)",
+    "WHO fact sheet: Household air pollution (2024)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): poisoning by gases and fumes (fresh air, emergency care)",
+    "UK Health Security Agency: Carbon monoxide, general information and incident management (symptoms, several people or pets ill, better away from the home; 100% oxygen in hospital); NHS: Carbon monoxide poisoning",
+    "US CDC: Carbon monoxide poisoning prevention, and US CPSC: portable generator safety (never indoors or in a garage, outside and away from doors and windows)",
+    "UK Gas Safe Register and HSE: what to do if you smell gas (no naked flames or switches, turn off at the valve, open doors and windows, leave)",
+    "Liquid Gas UK / UKLPG Code of Practice 7: storage of LPG cylinders (upright, outdoors or well ventilated, away from heat), leak checks with leak-detection (soapy) fluid, never a flame",
+    "UK government (Smoke and Carbon Monoxide Alarm Regulations 2022) and BS EN 50291: battery CO alarms in rooms with a fuel-burning appliance"
+  ],
+  "review": [
+    "New Health emergency page (Mo's Home tab rule): the 'go to hospital now' box and the oxygen tip moved here word for word from home-safety, with its lead and its 'Feel ill near a fire? Go outside' step (also kept on home-safety as a safety action). Block ids changed, so these clips need recording again. Picture: a copy of the home-safety picture until one is drawn.",
+    "Search: the danger phrases for carbon monoxide ('gas gerefti', 'coal fumes' ...) are on winter-home in content/src/search-phrases.json; they should move to this page (the search worker owns that file)."
+  ]
+}

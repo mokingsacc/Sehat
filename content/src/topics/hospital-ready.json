@@ -1,0 +1,163 @@
+{
+  "id": "hospital-ready",
+  "section": "everyone",
+  "title": {
+    "fa": "آماده شدن برای رفتن",
+    "ps": "د تګ لپاره چمتو کېدل",
+    "en": "Getting ready to go"
+  },
+  "summary": {
+    "fa": "چه چیزی ببرید، و چه کسی همراه شما برود",
+    "ps": "څه یوسئ، او څوک درسره ولاړ شي",
+    "en": "What to take, and who goes with you"
+  },
+  "image": "hospital-ready",
+  "blocks": [
+    {
+      "id": "hospital-ready.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کمی پلان، رفتن را آسان‌تر می‌کند. اما در حالت عاجل، برای جمع کردن سامان منتظر نمانید: همین حالا بروید، فامیل می‌تواند چیزها را بعداً بیاورد.",
+        "ps": "لږ پلان تګ اسانه کوي. خو په بیړني حالت کې د سامان د راټولولو انتظار مه کوئ: همدا اوس ولاړ شئ، کورنۍ کولی شي شیان وروسته راوړي.",
+        "en": "A little planning makes the visit easier. But in an emergency, do not wait to pack: go now, and family can bring things later."
+      }
+    },
+    {
+      "id": "hospital-ready.papers",
+      "type": "step",
+      "icon": "card",
+      "title": {
+        "fa": "کارت‌ها و کاغذها",
+        "ps": "کارتونه او کاغذونه",
+        "en": "Cards and papers"
+      },
+      "text": {
+        "fa": "کارت صحی، کارت واکسین یا کارت حاملگی، نتیجهٔ معاینات قبلی، و اگر کارمند صحی معرفی‌نامه داده، آن را هم ببرید.",
+        "ps": "روغتیايي کارت، د واکسین کارت یا د امیندوارۍ کارت، د مخکنیو معایناتو پایلې، او که روغتیايي کارکوونکي معرفي لیک درکړی وي، هغه هم یوسئ.",
+        "en": "Take the health card, vaccine card or pregnancy card, any old test results, and the referral letter if the health worker gave you one."
+      }
+    },
+    {
+      "id": "hospital-ready.medicines",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "دواهایی که می‌خورید",
+        "ps": "هغه درمل چې یې خورئ",
+        "en": "The medicines you take"
+      },
+      "text": {
+        "fa": "همهٔ دواها را با قطی‌شان، یا عکس آن‌ها را ببرید. اگر کدام دوا کسی را مریض ساخته، به داکتر بگویید.",
+        "ps": "ټول درمل له قطیو سره، یا د هغوی عکس یوسئ. که کوم درمل څوک ناروغ کړی وي، ډاکټر ته ووایاست.",
+        "en": "Take all medicines in their boxes, or a photo of them. Tell the doctor if a medicine has ever made someone ill."
+      }
+    },
+    {
+      "id": "hospital-ready.money",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "پول و گوشی چارج‌شده",
+        "ps": "پیسې او چارج شوی ټیلیفون",
+        "en": "Money and a charged phone"
+      },
+      "text": {
+        "fa": "برای کرایه، دوا و معاینات پول ببرید. گوشی را چارج کنید و شمارهٔ فامیل و یک دریور را ثبت کنید.",
+        "ps": "د کرایې، درملو او معایناتو لپاره پیسې یوسئ. ټیلیفون چارج کړئ، او د کورنۍ او یو موټر چلوونکي شمېرې ثبت کړئ.",
+        "en": "Take money for transport, medicines and tests. Charge the phone, and save the numbers of family and a driver."
+      }
+    },
+    {
+      "id": "hospital-ready.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "لباس گرم و کمپل",
+        "ps": "ګرمې جامې او کمپله",
+        "en": "Warm clothes and a blanket"
+      },
+      "text": {
+        "fa": "اتاق انتظار و شب‌ها ممکن است سرد باشد. لباس گرم و کمپل ببرید. برای طفل شیرخوار، کلاه، جوراب و تکه‌های پاک ببرید.",
+        "ps": "د انتظار کوټې او شپې کېدای شي سړې وي. ګرمې جامې او کمپله یوسئ. د تي خوړونکي ماشوم لپاره خولۍ، جرابې او پاک ټوکران یوسئ.",
+        "en": "Waiting rooms and nights can be cold. Take warm clothes and a blanket. For a baby, take a hat, socks and clean cloths."
+      }
+    },
+    {
+      "id": "hospital-ready.food",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "آب، غذا و پیاله",
+        "ps": "اوبه، خواړه او پیاله",
+        "en": "Water, food and a cup"
+      },
+      "text": {
+        "fa": "آب پاک، کمی غذا، و پیاله و قاشق ببرید. انتظار ممکن است طولانی باشد، و اکثراً فامیل برای مریض غذا می‌آورد.",
+        "ps": "پاکې اوبه، څه خواړه، او پیاله او کاچوغه یوسئ. انتظار کېدای شي اوږد وي، او اکثره کورنۍ ناروغ ته خواړه راوړي.",
+        "en": "Take clean water, some food, and a cup and spoon. The wait can be long, and families often bring food for the patient."
+      }
+    },
+    {
+      "id": "hospital-ready.companion",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "با یک همراه بروید",
+        "ps": "له یو ملګري سره ولاړ شئ",
+        "en": "Go with someone"
+      },
+      "text": {
+        "fa": "یک نفر از فامیل می‌تواند کمک کند و از طرف شما گپ بزند. اگر زن برای سفر به محرم ضرورت دارد، از پیش تعیین کنید که چه کسی همراهش می‌رود، پیش از آنکه کار عاجل شود.",
+        "ps": "د کورنۍ یو غړی مرسته کولی شي او ستاسو په استازیتوب خبرې کولی شي. که ښځه د سفر لپاره محرم ته اړتیا ولري، له مخکې وټاکئ چې څوک به ورسره ځي، مخکې له دې چې کار بیړنی شي.",
+        "en": "A family member can help, and speak for you. If a woman needs a mahram to travel, decide early who will go, before it is urgent."
+      }
+    },
+    {
+      "id": "hospital-ready.family-record",
+      "type": "link",
+      "to": "family",
+      "icon": "card",
+      "title": {
+        "fa": "«خانوادهٔ من» را نشان دهید",
+        "ps": "«زما کورنۍ» وښایئ",
+        "en": "Show 'My family' on this phone"
+      },
+      "text": {
+        "fa": "تاریخ واکسین‌ها و وزن‌هایی که در این برنامه ثبت کرده‌اید، به کارمند صحی کمک می‌کند.",
+        "ps": "د واکسینونو نېټې او وزنونه چې په دې اپ کې مو ثبت کړي، له روغتیايي کارکوونکي سره مرسته کوي.",
+        "en": "The vaccine dates and weights you saved in this app can help the health worker."
+      }
+    },
+    {
+      "id": "hospital-ready.birth",
+      "type": "link",
+      "to": "topic/pregnancy-danger",
+      "icon": "pregnant",
+      "title": {
+        "fa": "حامله هستید؟ ولادت را از پیش پلان کنید",
+        "ps": "امیندواره یاست؟ زېږون له مخکې پلان کړئ",
+        "en": "Pregnant? Plan the birth early"
+      },
+      "text": {
+        "fa": "برای ولادت، موتر، پول و همراه را پلان کنید. علایم خطری را یاد بگیرید که می‌گوید همین حالا بروید.",
+        "ps": "د زېږون لپاره موټر، پیسې او ملګری پلان کړئ. د خطر هغه نښې زده کړئ چې وايي همدا اوس ولاړ شئ.",
+        "en": "Plan transport, money and a companion for the birth. Learn the danger signs that mean go now."
+      }
+    }
+  ],
+  "sources": [
+    "WHO PCPNC (2015) sheet M2 and WHO/UNICEF Facts for Life (2010): birth and emergency preparedness (transport, money, companion, papers)",
+    "WHO Thermal protection of the newborn: a practical guide (1997): keep babies warm, hat and socks",
+    "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
+    "NHS (nhs.uk): Going into hospital: what to take (medicines in their boxes, a list of allergies)",
+    "UK Home Office CPIN Afghanistan: healthcare and medical treatment (Oct 2025): mahram requirements for women's travel (via research/moph-guidance.md section 5)"
+  ],
+  "review": [
+    "Mahram: worded neutrally and practically ('If a woman needs a mahram to travel, decide early who will go'). The point is to avoid delay in an emergency. Check the tone with local women.",
+    "Referral letter: Dari معرفی‌نامه, Pashto معرفي لیک. Health workers may say ورقهٔ راجعت or 'ریفر'. Native speakers to choose the everyday word; it is also used on the 'When you arrive' page.",
+    "'Families often bring food for the patient' reflects common practice in Afghan public hospitals; check for Samangan.",
+    "'Tell the doctor if a medicine has ever made someone ill' is the plain-words version of 'drug allergies'.",
+    "'Pregnancy card' / کارت حاملگی / د امیندوارۍ کارت: the MCH handbook (health passport) may be what women have. Use the local name.",
+    "The 'My family' link goes to the child record in this app (vaccine dates and weights)."
+  ]
+}

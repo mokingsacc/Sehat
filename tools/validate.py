@@ -10,13 +10,20 @@ ICONS = set("""clinic hospital car phone calendar clock moon family talk card ch
 baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash thermometer fever cough breathing-fast chest-indrawing no-drink vomit convulsion sleepy stool-blood eye-sunken skin-pinch growth muac swollen-feet milestones jaundice syringe drops pill rash toys-play
 pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
 heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect""".split())
-TYPES = {"lead", "step", "alert", "dont", "tip", "link", "anim"}
-# "link" blocks open another screen of the app: a tool, a topic, the home kit, the family record or the clinic finder
+TYPES = {"lead", "step", "alert", "dont", "tip", "link", "anim", "clinic"}
+# "clinic": what the clinic or the hospital actually does for this problem (title "At the clinic: ..." / "At the hospital: ...", and a text)
+# "link" blocks open another screen of the app: a tool, a topic, the home kit, the family record, the clinic finder,
+# "What is wrong?" (ask) or the Emergency screen; urgent: true draws it as a red row (the Home tab's way to the Health side)
+TOOL_ROWS = {"growth", "breaths", "reading"}  # tool rows in lists (growth: the growth chart, once this version has it)
 TOOLS = {"breaths", "reading", "reading/temp", "reading/bp", "reading/sugar", "reading/spo2", "reading/muac"}
-LINK_RE = re.compile(r'^(tool/(?P<tool>[a-z0-9/-]+)|topic/(?P<topic>[a-z0-9-]+)|kit|family|near|growth|growth/measure|share)$')
+LINK_RE = re.compile(r'^(tool/(?P<tool>[a-z0-9/-]+)|topic/(?P<topic>[a-z0-9-]+)|kit|family|near|growth|growth/measure|share|ask|emergency)$')
 SECTIONS = {"children", "women", "everyone"}
-# lists in content/src/sections.json: the three sections, plus "kit" (the home health kit page) and "emergency" (the Emergency screen)
-SECTION_LISTS = SECTIONS | {"kit", "emergency"}
+# lists in content/src/sections.json: the three sections, "emergency" (the Emergency screen), and the lists with their own page
+# and home card named in config.lists ("kit" the home health kit, "safety" home safety, "hospital", "food" food and garden)
+try: CONFIG_LISTS = json.load(open(os.path.join(ROOT, "content/src/config.json"), encoding="utf-8")).get("lists") or {}
+except Exception: CONFIG_LISTS = {}
+PAGE_LISTS = set(CONFIG_LISTS) | {"kit"}
+SECTION_LISTS = SECTIONS | {"emergency"} | PAGE_LISTS
 ANIM_FILES, ANIM_GROUPS, ANIM_TEXT = set(ANIM.names()), ANIM.groups(), ANIM.narration()
 ID_RE = re.compile(r'^[a-z0-9-]+(\.[a-z0-9-]+)*$')
 LANGS = ("fa", "ps", "en")
@@ -95,10 +102,13 @@ def check_topic(f, d):
         elif t == "link":
             check_icon(f, w, b.get("icon"), required=False); check_L(f, w + ".title", b.get("title"), 7); check_L(f, w + ".text", b.get("text"), 32)
             m = LINK_RE.match(str(b.get("to", "")))
-            if not m: err(f, f"{w}: 'to' must be tool/<name>, topic/<id>, kit, family or near")
+            if not m: err(f, f"{w}: 'to' must be tool/<name>, topic/<id>, kit, family, near, ask or emergency")
+            if b.get("urgent") not in (None, True, False): err(f, f"{w}: urgent must be true or false")
             elif m.group("tool") and m.group("tool") not in TOOLS: err(f, f"{w}: unknown tool {m.group('tool')!r}")
             elif m.group("topic") and not os.path.exists(os.path.join(ROOT, "content/src/topics", m.group("topic") + ".json")) and m.group("topic") != "vaccines":
                 err(f, f"{w}: link to unknown topic {m.group('topic')!r}")
+        elif t == "clinic":
+            check_icon(f, w, b.get("icon"), required=False); check_L(f, w + ".title", b.get("title"), 7); check_L(f, w + ".text", b.get("text"), 32)
         if t == "anim": check_anim(f, w, b)
         if t in ("step", "link") and b.get("picture") is not None:
             if not ID_RE.match(str(b["picture"])) or not os.path.exists(os.path.join(ROOT, "img/pics", str(b["picture"]) + ".svg")):
@@ -115,11 +125,15 @@ def check_topic(f, d):
                 check_icon(f, iw, it.get("icon")); check_L(f, iw + ".text", it.get("text"), 14)
     if counts.get("anim", 0) > 2: warn(f, f"{counts['anim']} animations (aim for at most 2 per topic)")
     if counts.get("lead", 0) != 1: err(f, "exactly one lead block")
-    if not (2 <= counts.get("step", 0) <= 8): warn(f, f"{counts.get('step',0)} steps (aim 3-7)")
+    lo = 1 if counts.get("alert", 0) else 2  # a reading page (what a number means) is one step and its alert boxes
+    if not (lo <= counts.get("step", 0) <= 8): warn(f, f"{counts.get('step',0)} steps (aim 3-7)")
     if not d.get("sources"): err(f, "sources missing")
     try: kit = json.load(open(os.path.join(ROOT, "content/src/sections.json"), encoding="utf-8")).get("kit", [])
     except Exception: kit = []
     if tid in kit and d.get("section") not in ("children", "everyone"): err(f, "home kit topics use section children or everyone")
+    # red links to the emergency pages and the closing "What is wrong?" link do not count
+    plain = sum(1 for b in d.get("blocks", []) if b.get("type") == "link" and not b.get("urgent") and b.get("to") != "ask")
+    if plain > 2: warn(f, f"{plain} links (aim for at most 2 per topic)")
 
 def check_vaccines(f, d):
     check_L(f, "title", d.get("title")); check_L(f, "summary", d.get("summary"))
@@ -250,6 +264,64 @@ def check_anims_and_lists():
         if a.get("anim") is not None and a["anim"] not in cpr_variants | ANIM_FILES: err(fc, f"{w}: unknown animation {a['anim']!r}")
         for t in a.get("topics") or []:
             if t not in topic_ids: err(fc, f"{w}: unknown topic {t!r}")
+    # the list pages (#/s/<name>) and their home cards
+    known_mods = {"emergency", "firstAid", "install", "ask", "nextVaccine", "sections", "children", "adults", "share", "near", "sendApp", "feedback", "disclaimer"}
+    for m in cfg.get("home") or []:
+        if m not in known_mods and m not in PAGE_LISTS: err(fc, f"home: unknown module {m!r}")
+        if m in PAGE_LISTS and m not in CONFIG_LISTS: err(fc, f"home: {m!r} needs an entry in config.lists")
+    for k, v in CONFIG_LISTS.items():
+        w = f"lists.{k}"
+        if not ID_RE.match(k) or "." in k or k in SECTIONS | {"emergency"}: err(fc, f"{w}: bad list name"); continue
+        if not secs.get(k): err(fc, f"{w}: content/src/sections.json has no topics for {k!r}")
+        for key in ("title", "sub"):
+            if v.get(key) not in ui["text"]: err(fu, f"text.{v.get(key)} missing ({w}.{key})")
+        if v.get("say") not in ui["say"]: err(fu, f"say.{v.get('say')} missing ({w}.say)")
+        if v.get("image") not in topic_ids: err(fc, f"{w}: image must be a topic id (its picture is used), not {v.get('image')!r}")
+        if v.get("icon") is not None and v["icon"] not in ICONS: err(fc, f"{w}: unknown icon {v['icon']!r}")
+        for x in v.get("tools") or []:
+            if x not in TOOL_ROWS: err(fc, f"{w}: unknown tool {x!r}")
+        if v.get("tab") not in ("health", "house"): err(fc, f"{w}: tab must be health or house")
+        if v.get("near") not in (None, True, False): err(fc, f"{w}: near must be true or false")
+    # the Home tab (#/house): lists only, and no medical advice on their pages (Mo's rule: urgent signs live on the Health side)
+    for m in cfg.get("house") or []:
+        if m not in CONFIG_LISTS: err(fc, f"house: {m!r} needs an entry in config.lists")
+        elif CONFIG_LISTS[m].get("tab") != "house": err(fc, f"house: list {m!r} has tab {CONFIG_LISTS[m].get('tab')!r}, not 'house'")
+    for k, v in CONFIG_LISTS.items():
+        if v.get("tab") != "house": continue
+        for t in secs.get(k) or []:
+            try: td = json.load(open(os.path.join(ROOT, "content/src/topics", t + ".json"), encoding="utf-8"))
+            except Exception: continue
+            for b in td.get("blocks", []):
+                if b.get("type") in ("alert", "clinic"): err(f"content/src/topics/{t}.json", f"{b.get('id')}: the Home tab ({k}) gives no medical advice: no '{b['type']}' blocks; link to the Health page instead")
+    fa = cfg.get("firstAid")
+    if fa is not None:
+        if fa.get("title") not in ui["text"] or fa.get("sub") not in ui["text"]: err(fu, "firstAid: title and sub must be ui.text keys")
+        if fa.get("say") not in ui["say"]: err(fu, f"say.{fa.get('say')} missing (firstAid.say)")
+        if fa.get("image") not in topic_ids: err(fc, "firstAid: image must be a topic id")
+        for t in fa.get("topics") or []:
+            if t not in topic_ids: err(fc, f"firstAid: unknown topic {t!r}")
+        for k in ("notBreathing", "firstAidAll") + tuple(a.get("label", "") + "Short" for a in cfg.get("emergency") or []):
+            if k not in ui["text"]: err(fu, f"text.{k} missing (the CPR and first aid screen needs it)")
+        for k in ("ui.cprWho", "ui.firstAidAll") + tuple("ui." + a.get("label", "") for a in cfg.get("emergency") or []):
+            if k not in ui["say"]: err(fu, f"say.{k} missing (the CPR and first aid screen needs it)")
+    sc = cfg.get("shareCard")
+    if sc is not None and not (str(sc.get("href", "")).startswith("#/") and sc.get("title") and sc.get("say")): err(fc, "shareCard: needs href (#/...), title and say")
+    # the Children and Adults screens: groups in order
+    for which, groups in (cfg.get("listGroups") or {}).items():
+        if which not in ("children", "adults"): err(fc, f"listGroups: unknown screen {which!r}"); continue
+        rests = 0
+        for n, g in enumerate(groups):
+            w = f"listGroups.{which}[{n}]"
+            if "tools" in g:
+                for x in g["tools"]:
+                    if x not in TOOL_ROWS: err(fc, f"{w}: unknown tool {x!r}")
+                continue
+            if g.get("title") not in ui["text"]: err(fu, f"text.{g.get('title')} missing ({w}.title)")
+            if g.get("say") not in ui["say"]: err(fu, f"say.{g.get('say')} missing ({w}.say)")
+            if g.get("rest"): rests += 1
+            for t in (g.get("topics") or []) + (g.get("include") or []):
+                if t not in topic_ids: err(fc, f"{w}: unknown topic {t!r}")
+        if rests != 1: warn(fc, f"listGroups.{which}: give exactly one group rest: true, so that every topic is shown")
     if "emergency" in (cfg.get("home") or []):
         for k in ("emergency", "emergencySub", "emergencyWho", "notBreathing", "otherEmergencies", "sendForCar"):
             if k not in ui["text"]: err(fu, f"text.{k} missing (the Emergency button needs it)")

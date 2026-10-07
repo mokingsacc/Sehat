@@ -185,13 +185,19 @@
       }
     },
     {
-      "id": "drowning.prevent",
-      "type": "tip",
+      "id": "drowning.safety",
+      "type": "link",
+      "to": "topic/child-safety",
       "icon": "water",
+      "title": {
+        "fa": "اطفال را نزدیک آب حفاظت کنید",
+        "ps": "ماشومان اوبو ته نږدې وساتئ",
+        "en": "Keep children safe near water"
+      },
       "text": {
-        "fa": "چاه و ذخیرهٔ آب را بپوشانید و اطفال خورد را هرگز نزدیک آب تنها نگذارید.",
-        "ps": "څاګانې او د اوبو ټانکۍ پټې کړئ او کوچني ماشومان هېڅکله اوبو ته نږدې یوازې مه پرېږدئ.",
-        "en": "Cover wells and water tanks, and never leave small children alone near water."
+        "fa": "پوشاندن چاه و ذخیرهٔ آب، و راه‌های دیگر حفاظت اطفال. صفحه را باز کنید.",
+        "ps": "د څاګانو او ټانکیو پټول، او د ماشومانو د ساتنې نورې لارې. پاڼه پرانیزئ.",
+        "en": "Covering wells and tanks, and other ways to keep children safe. Open the page."
       }
     }
   ],
@@ -204,6 +210,7 @@
   "review": [
     "5 rescue breaths first for drowned adults as well as children (ERC). AHA also puts breaths first in drowning.",
     "All drowning victims go to hospital now (IFRC); this matches child-safety.urgent.water.",
-    "'Reach or throw, don't go' rescue message (IFRC/RLSS). Rescue entry is not taught."
+    "'Reach or throw, don't go' rescue message (IFRC/RLSS). Rescue entry is not taught.",
+    "Home safety section (2026-10-07): drowning.prevent repeated child-safety.water. It is replaced by a link to child-safety (drowning.safety)."
   ]
 }

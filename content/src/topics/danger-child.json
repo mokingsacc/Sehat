@@ -310,6 +310,34 @@
         "ps": "د ماشوم روغتیايي کارت او هغه درمل چې خوړلي یې دي، له ځان سره یوسئ.",
         "en": "Take the child's health card and any medicines the child has had."
       }
+    },
+    {
+      "id": "danger-child.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: اگر شفاخانه دور است",
+        "ps": "په کلینیک کې: که روغتون لرې وي",
+        "en": "At the clinic: when hospital is far"
+      },
+      "text": {
+        "fa": "اگر شفاخانه دور است، در راه به نزدیک‌ترین کلینیک یا کارمند صحی بروید. آن‌ها دوای اول و اگر داشته باشند اکسیجن می‌دهند، و در پیدا کردن موتر کمک می‌کنند.",
+        "ps": "که روغتون لرې وي، په لاره کې نږدې کلینیک یا روغتیايي کارکوونکي ته ولاړ شئ. هغوی لومړي درمل او که ولري اکسیجن ورکوي، او د موټر په برابرولو کې مرسته کوي.",
+        "en": "If the hospital is far, go to the nearest clinic or health worker on the way. They give the first medicine and oxygen if they have it, and help arrange transport."
+      }
+    },
+    {
+      "id": "danger-child.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: کمک عاجل برای طفل",
+        "ps": "په روغتون کې: ماشوم ته بېړنۍ مرسته",
+        "en": "At the hospital: fast help for children"
+      },
+      "text": {
+        "fa": "طفلی که علامت خطر دارد فوراً دیده می‌شود. شفاخانه اکسیجن، سیروم، انتی‌بیوتیک پیچکاری، شکر اگر کم باشد، و دوای بند کردن تشنج می‌دهد. دقیقه‌ها مهم‌اند.",
+        "ps": "هغه ماشوم چې د خطر نښه لري سمدستي کتل کېږي. روغتون اکسیجن، سیروم، پیچکاري انټي بیوټیک، بوره که کمه وي، او د اختلاج د درولو درمل ورکوي. دقیقې مهمې دي.",
+        "en": "A child with a danger sign is seen at once. The hospital gives oxygen, fluids by drip, antibiotics by injection, sugar if low, and medicine to stop fits. Minutes matter."
+      }
     }
   ],
   "sources": [
@@ -317,13 +345,17 @@
     "WHO IMCI Chart Booklet (2014): sick young infant up to 2 months, very severe disease",
     "WHO recommendations on postnatal care of the mother and newborn (2013), recommendation 4: newborn danger signs",
     "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet, danger signs and referral",
-    "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses"
+    "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses",
+    "WHO Pocket Book of Hospital Care for Children (2013), chapter 1: emergency triage, assessment and treatment (oxygen, fluids, glucose, anticonvulsants, antibiotics)",
+    "WHO IMCI Chart Booklet (2014): urgent referral with pre-referral treatment (first dose of antibiotic, prevent low blood sugar, keep warm)"
   ],
   "review": [
     "Fever threshold for young infants is not given as a number here ('has a fever, or the body feels cold'); WHO uses 37.5 C or more (axillary) and below 35.5 C.",
     "'Keep a young baby warm' tells families to cover the baby; this is for small or young babies with cold or normal temperature, not for an older child with high fever. Check that this reads correctly.",
     "Soon alert: 'fever for more than 2 days' follows the IMCI caregiver 'return if not better' advice; the CHW guide uses fever for 7 days or more as a referral sign.",
     "Dari 'مدفوع' (stool) is formal; a native reviewer may prefer a more everyday Afghan word.",
-    "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. danger-child.urgent.breathing now means severe difficulty or stridor; fast breathing alone moved to the new danger-child.soon.fast; the under-2-months box keeps 60 or more = hospital."
+    "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. danger-child.urgent.breathing now means severe difficulty or stridor; fast breathing alone moved to the new danger-child.soon.fast; the under-2-months box keeps 60 or more = hospital.",
+    "'Oxygen if they have it' at clinic level: BPHS 2010 lists oxygen at CHC, not BHC; wording is deliberately conditional.",
+    "'Sugar if low' and 'medicine to stop fits' summarise ETAT; check the Dari/Pashto do not sound like advice to give sugar at home for every sick child."
   ]
 }

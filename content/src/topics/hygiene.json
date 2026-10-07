@@ -23,6 +23,16 @@
       }
     },
     {
+      "id": "hygiene.anim-handwashing",
+      "type": "anim",
+      "anim": "handwashing"
+    },
+    {
+      "id": "hygiene.anim-spread",
+      "type": "anim",
+      "anim": "spread"
+    },
+    {
       "id": "hygiene.hands",
       "type": "step",
       "icon": "handwash",
@@ -128,6 +138,20 @@
       }
     },
     {
+      "id": "hygiene.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: کلورین و مشوره",
+        "ps": "په کلینیک کې: کلورین او مشوره",
+        "en": "At the clinic: chlorine and advice"
+      },
+      "text": {
+        "fa": "پوستهٔ صحی و کلینیک می‌توانند برای آب نوشیدنی تابلیت یا محلول کلورین بدهند، مخصوصاً بعد از سیلاب یا در وقت شیوع اسهال، و کارمند صحی قریه می‌تواند طرز پاک کردن آب را نشان بدهد.",
+        "ps": "روغتیايي پوسته او کلینیک کولای شي د څښاک اوبو لپاره د کلورین ګولۍ یا محلول ورکړي، په تېره بیا له سېلاب وروسته یا د نس ناستي د خپرېدو پر وخت، او د کلي روغتیايي کارکوونکی کولای شي د اوبو د پاکولو لار وښيي.",
+        "en": "The health post and clinic can give chlorine tablets or solution for drinking water, especially after floods or in diarrhoea outbreaks, and the village health worker shows how to make water safe."
+      }
+    },
+    {
       "id": "hygiene.tip-ash",
       "type": "tip",
       "icon": "handwash",
@@ -142,7 +166,8 @@
     "WHO/UNICEF Facts for Life (2010): Hygiene key messages (handwashing with soap or ash, latrines, safe water, food)",
     "WHO Guidelines for drinking-water quality, 4th edition (2022): household water treatment (boiling, chlorination) and safe storage",
     "WHO Guidelines on sanitation and health (2018)",
-    "WHO Five Keys to Safer Food (2006)"
+    "WHO Five Keys to Safer Food (2006)",
+    "Afghanistan BPHS (2010): chlorine solution in the Health Post kit; WHO Guidelines for drinking-water quality (2017): household water treatment"
   ],
   "review": [
     "Latrine distance from wells and springs is not given as a number (Sphere uses at least 30 metres). Add it if wanted.",
@@ -151,6 +176,8 @@
     "There is no alert block, because the danger signs for diarrhoea are on the children's diarrhoea page.",
     "Icons: the latrine uses 'house' (would prefer 'latrine'), and the ladle step uses 'cup-spoon'.",
     "Afghan Dari uses تشناب for both toilet and latrine; check that this fits a village pit latrine.",
-    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
+    "Chlorine supply at health posts depends on outbreak response stocks (WHO/UNICEF); 'can give' is conditional on purpose.",
+    "Content merge 2: animation(s) handwashing, spread shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
   ]
 }

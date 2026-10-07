@@ -1,0 +1,154 @@
+{
+  "id": "move-daily",
+  "section": "everyone",
+  "title": {
+    "fa": "تحرک هر روزه",
+    "ps": "هره ورځ حرکت",
+    "en": "Moving every day"
+  },
+  "summary": {
+    "fa": "چقدر تحرک لازم است، قدم زدن بعد از غذا، حرکت‌های قوت در خانه.",
+    "ps": "څومره حرکت ته اړتیا ده، له ډوډۍ وروسته ګرځېدل، په کور کې د ځواک حرکتونه.",
+    "en": "How much to move, walks after meals, strength moves at home."
+  },
+  "image": "move-daily",
+  "blocks": [
+    {
+      "id": "move-daily.lead",
+      "type": "lead",
+      "text": {
+        "fa": "تحرک هر روزه قلب، عضلات و روحیه را قوی نگه می‌دارد و به خواب کمک می‌کند. کار در خانه و در زمین هم حساب می‌شود.",
+        "ps": "هره ورځ حرکت زړه، عضلې او روحیه پیاوړې ساتي او له خوب سره مرسته کوي. په کور او پټي کې کار هم حسابېږي.",
+        "en": "Moving every day keeps the heart, muscles and mood strong, and helps you sleep. Work in the house and the fields counts too."
+      }
+    },
+    {
+      "id": "move-daily.how-much",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "نیم ساعت، بیشتر روزها",
+        "ps": "نیم ساعت، ډېری ورځې",
+        "en": "Half an hour, most days"
+      },
+      "text": {
+        "fa": "بزرگسالان: حد اقل روزی ۳۰ دقیقه، ۵ روز در هفته، طوری تحرک کنید که نفس تندتر شود اما هنوز بتوانید گپ بزنید. تا یک ساعت در روز از آن هم بهتر است.",
+        "ps": "لویان: لږ تر لږه په ورځ کې ۳۰ دقیقې، په اونۍ کې ۵ ورځې، داسې حرکت وکړئ چې ساه مو چټکه شي خو بیا هم خبرې کولای شئ. په ورځ کې تر یو ساعت پورې لا ښه ده.",
+        "en": "Adults: at least 30 minutes a day, 5 days a week, moving so you breathe faster but can still talk. Up to an hour a day is even better."
+      }
+    },
+    {
+      "id": "move-daily.housework",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "کار خانه و پیاده‌روی حساب است",
+        "ps": "د کور کار او ګرځېدل حسابېږي",
+        "en": "Housework and walking count"
+      },
+      "text": {
+        "fa": "پیاده‌روی تند، آوردن آب، جاروب کردن، خمیر کردن و کار باغچه همه حساب می‌شوند. زنان می‌توانند با هم قدم بزنند یا در خانه تحرک کنند.",
+        "ps": "چټک ګرځېدل، اوبه راوړل، جارو کول، اوړه اغږل او د باغچې کار ټول حسابېږي. ښځې کولای شي یوځای وګرځي، یا په کور کې حرکت وکړي.",
+        "en": "Brisk walking, carrying water, sweeping, kneading dough and garden work all count. Women can walk together, or move at home."
+      }
+    },
+    {
+      "id": "move-daily.after-meals",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "کمی قدم زدن بعد از غذا",
+        "ps": "له ډوډۍ وروسته لږ ګرځېدل",
+        "en": "A short walk after meals"
+      },
+      "text": {
+        "fa": "بعد از غذا، ۱۰ تا ۱۵ دقیقه قدم بزنید، حتی در حویلی، یا چند بار بنشینید و بلند شوید. این کار به بدن کمک می‌کند شکر غذا را مصرف کند.",
+        "ps": "له ډوډۍ وروسته، ۱۰ تر ۱۵ دقیقې وګرځئ، حتی په انګړ کې، یا څو ځله کېنئ او پاڅئ. دا کار له بدن سره مرسته کوي چې د خوړو شکره وکاروي.",
+        "en": "After eating, walk for 10 to 15 minutes, even around the yard, or sit down and stand up a few times. It helps the body use the sugar from the meal."
+      },
+      "picture": "well-walk-after-meal"
+    },
+    {
+      "id": "move-daily.strength",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "حرکت‌های قوت، هفته‌ای ۲ روز",
+        "ps": "د ځواک حرکتونه، په اونۍ کې ۲ ورځې",
+        "en": "Strength moves, 2 days a week"
+      },
+      "text": {
+        "fa": "روی یک بالشت بنشینید و ۱۰ بار بدون کمک دست‌ها بلند شوید. بعد دست‌ها را به دیوار بگذارید و ۱۰ بار بدن را به دیوار نزدیک و دور کنید. این را ۲ یا ۳ دور تکرار کنید.",
+        "ps": "پر یوه بالښت کېنئ او ۱۰ ځله پرته له لاسونو پاڅئ. بیا لاسونه پر دېوال کېږدئ او ۱۰ ځله ځان دېوال ته نږدې او لرې کړئ. دا ۲ یا ۳ ځله تکرار کړئ.",
+        "en": "Sit on a cushion and stand up 10 times without your hands. Then push away from a wall 10 times. Do this 2 or 3 times."
+      },
+      "picture": "well-strength-home"
+    },
+    {
+      "id": "move-daily.balance",
+      "type": "step",
+      "icon": "foot",
+      "title": {
+        "fa": "کلان‌سالان: تعادل را تمرین کنید",
+        "ps": "زاړه خلک: د انډول تمرین وکړئ",
+        "en": "Older people: practise balance"
+      },
+      "text": {
+        "fa": "دیوار را بگیرید و روی یک پا بایستید تا ۱۰ بشمارید، بعد روی پای دیگر. اگر بیشتر روزها این کار را بکنید، از افتادن جلوگیری می‌کند.",
+        "ps": "دېوال ونیسئ او پر یوه پښه ودرېږئ تر ۱۰ پورې وشمېرئ، بیا پر بله پښه. که ډېری ورځې یې وکړئ، د لوېدو مخه نیسي.",
+        "en": "Hold a wall and stand on one foot while you count to 10, then on the other foot. Doing this most days helps prevent falls."
+      },
+      "picture": "well-balance"
+    },
+    {
+      "id": "move-daily.food",
+      "type": "link",
+      "to": "topic/heart-food",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذا برای قلب صحتمند",
+        "ps": "د روغ زړه لپاره خواړه",
+        "en": "Food for a healthy heart"
+      },
+      "text": {
+        "fa": "شکر، نوشابهٔ شیرین، سرخ کردن و نمک کمتر، با غذاهایی که دارید.",
+        "ps": "لږه بوره، خواږه څښاکونه، سره کول او مالګه، په هغو خوړو چې لرئ یې.",
+        "en": "Less sugar, sweet drinks, frying and salt, using foods you already have."
+      }
+    },
+    {
+      "id": "move-daily.ask",
+      "type": "link",
+      "to": "ask",
+      "icon": "talk",
+      "title": {
+        "fa": "حالتان خوب نیست؟",
+        "ps": "ځان ناروغه احساسوئ؟",
+        "en": "Feeling unwell?"
+      },
+      "text": {
+        "fa": "اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.",
+        "ps": "که ځان ناروغه احساسوئ، د روغتیا برخې ته ولاړ شئ او «څه ستونزه لرئ؟» ووهئ.",
+        "en": "If you feel unwell, go to Health and tap What is wrong?"
+      }
+    }
+  ],
+  "sources": [
+    "WHO guidelines on physical activity and sedentary behaviour (2020): adults 150-300 minutes of moderate activity a week (more gives more benefit) plus muscle-strengthening on 2 or more days; older adults add balance training on 3 or more days; pregnant and postpartum women at least 150 minutes of moderate activity a week",
+    "Buffey et al., Sports Med 2022 (meta-analysis: light walking after meals lowers blood sugar); Reynolds et al., Diabetologia 2016 (10-minute walks after meals)",
+    "Sherrington et al., Cochrane Review 2019: exercise with balance training prevents falls in older people",
+    "NHS: Angina, and Heart attack (nhs.uk): chest pain on exertion that eases with rest needs a doctor soon; chest pain lasting more than a few minutes needs emergency care"
+  ],
+  "review": [
+    "Amount: WHO 2020 says adults 150 to 300 minutes of moderate activity a week (more is better), plus muscle-strengthening on 2 or more days. Mo's 'around 6 hours a week' fits the top of that; the page says 'at least 30 minutes a day, 5 days a week ... up to an hour a day is even better' and uses the talk test for 'moderate'.",
+    "Mo's 'walk or do air squats briefly after meals' is kept as 'walk 10 to 15 minutes, even around the yard, or sit down and stand up a few times' (Buffey 2022: light walking after meals lowers blood sugar). 'Squat' became 'sit down and stand up', which is easier to picture by ear.",
+    "Strength at home: sit-to-stand from a cushion and wall push-ups, 10 each, 2 or 3 rounds, 2 days a week (WHO 2020). Step pictures well-walk-after-meal, well-strength-home. No strength icon exists; 'people' used.",
+    "Women who may not go out: 'housework and walking count' (carrying water, sweeping, kneading dough, garden work) and 'women can walk together, or move at home'. Check this is acceptable wording for Samangan.",
+    "Older people: balance on one foot holding a wall (WHO 2020 for 65+, 3 or more days a week; Cochrane 2019 falls). Step picture well-balance.",
+    "Pregnancy: 'walking and daily work at a comfortable pace are good; do not start new hard exercise or lift heavy loads'. WHO 2020 recommends at least 150 minutes of moderate activity in pregnancy for women without complications; the heavy-lifting line is common counselling, not WHO wording. Pregnancy danger signs stay on pregnancy-danger (not linked here, to keep 1 link).",
+    "Safety alert is amber, 'clinic today': chest pain or tightness on exertion that eases with rest (possible angina), feeling faint or dizzy, much more breathless than usual, a very fast or uneven heartbeat. Chest pain lasting more than a few minutes, even at rest, is in a tip as 'hospital now, day or night', matching blood-pressure.urgent.chest. Please check this split, and whether exertional chest pain should be urgent (red) for this setting, where a clinic visit 'today' is hard.",
+    "One link only (heart-food), to keep the narration near 2.5 minutes. Diabetes could be a second link (walking after meals).",
+    "Words to check: Dari تحرک (being active), بالشت (cushion)، حویلی، کلان‌سالان، تعادل، سرچرخی، ضربان قلب؛ Pashto انډول (balance)، اوړه اغږل (kneading dough)، انګړ، درزا (heartbeat)، بالښت.",
+    "Home tab rule (Mo): removed the pregnancy step (limits in pregnancy), the 'clinic today' box (chest pain, faint, breathless, fast heartbeat) and the heart-attack tip. Ends with 'If you feel unwell, go to Health and tap What is wrong?'."
+  ]
+}

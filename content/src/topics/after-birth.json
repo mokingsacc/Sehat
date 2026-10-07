@@ -221,6 +221,34 @@
       }
     },
     {
+      "id": "after-birth.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینات بعد از ولادت",
+        "ps": "په کلینیک کې: له زېږون وروسته معاینې",
+        "en": "At the clinic: the postnatal checks"
+      },
+      "text": {
+        "fa": "قابله خونریزی، فشار خون، تب، پستان‌ها و زخم شما را معاینه می‌کند، در مورد روحیه و ادرار می‌پرسد، آهن می‌دهد، طفل را معاینه می‌کند و به سوال‌ها جواب می‌دهد. معاینه رایگان است.",
+        "ps": "قابله ستاسو وینه بهېدل، د وینې فشار، تبه، تیونه او زخم معاینه کوي، د روحیې او متیازو په اړه پوښتي، اوسپنه ورکوي، ماشوم معاینه کوي او پوښتنو ته ځواب وايي. معاینه وړیا ده.",
+        "en": "The midwife checks your bleeding, blood pressure, temperature, breasts and wound, asks about your mood and urine, gives iron, checks the baby and answers questions. Checks are free."
+      }
+    },
+    {
+      "id": "after-birth.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: خونریزی یا عفونت",
+        "ps": "په روغتون کې: وینه بهېدل یا انتان",
+        "en": "At the hospital: bleeding or infection"
+      },
+      "text": {
+        "fa": "برای خونریزی شدید شفاخانه سیروم و دوای جمع شدن رحم می‌دهد، باقی‌ماندهٔ جفت را بیرون می‌کند و خون می‌دهد. برای تب و ترشح بدبو انتی‌بیوتیک پیچکاری می‌دهد.",
+        "ps": "د ډېرې وینې بهېدلو لپاره روغتون سیروم او د رحم د ټینګېدو درمل ورکوي، د پاتې شوي ځولې برخه باسي او وینه ورکوي. د تبې او بدبویه مادې لپاره پیچکاري انټي بیوټیک ورکوي.",
+        "en": "For heavy bleeding the hospital gives fluids, medicine to contract the womb, removes any afterbirth left inside, and gives blood. For fever and bad-smelling discharge it gives antibiotics by injection."
+      }
+    },
+    {
       "id": "after-birth.spacing",
       "type": "tip",
       "icon": "family",
@@ -236,7 +264,9 @@
     "WHO recommendations on postnatal care of the mother and newborn (2013): postnatal contacts within 24 hours, day 3, days 7 to 14, and 6 weeks",
     "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022)",
     "WHO Report of a technical consultation on birth spacing (2005): at least 24 months before the next pregnancy",
-    "WHO Thinking Healthy: psychological intervention for perinatal depression (2015)"
+    "WHO Thinking Healthy: psychological intervention for perinatal depression (2015)",
+    "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022): content of postnatal contacts",
+    "WHO PCPNC (2015): postpartum haemorrhage and puerperal sepsis management; WHO recommendations for the prevention and treatment of maternal peripartum infections (2015)"
   ],
   "review": [
     "BIRTH-SPACING TIP: keep or remove? It says 'Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births.' (WHO 2005 advises at least 24 months after a live birth.) It deliberately does not name contraception; check community acceptability in Samangan.",
@@ -244,6 +274,8 @@
     "Iron for 3 months after birth follows PCPNC; the WHO 2016 postpartum iron recommendation says 6 to 12 weeks. No dose given ('as given by the clinic').",
     "Low mood: 'thoughts of harming yourself or your baby' is in the red list and 'very sad or worried most of the time' in the amber list; check the tone of these sensitive items in fa/ps.",
     "Check-ups: 'first day' means within 24 hours of birth (WHO 2013); stated for both mother and baby.",
-    "Icons: calf uses 'swelling' (a 'leg' icon would be better); pain passing urine uses 'urine-blood' (a plain 'urine' icon would be better); breast pain uses 'breastfeed'; spacing tip uses 'family'."
+    "Icons: calf uses 'swelling' (a 'leg' icon would be better); pain passing urine uses 'urine-blood' (a plain 'urine' icon would be better); breast pain uses 'breastfeed'; spacing tip uses 'family'.",
+    "Postpartum vitamin A is deliberately not mentioned (WHO 2011: not recommended).",
+    "'Removes any afterbirth left inside' is plain wording for manual removal/evacuation; check it is acceptable when narrated."
   ]
 }

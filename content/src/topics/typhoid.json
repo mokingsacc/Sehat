@@ -1,0 +1,297 @@
+{
+  "id": "typhoid",
+  "section": "everyone",
+  "title": {
+    "fa": "محرقه (تیفویید)",
+    "ps": "محرقه (ټایفایډ)",
+    "en": "Typhoid fever"
+  },
+  "summary": {
+    "fa": "تب چند روزه از آب یا غذای ناپاک. با انتی‌بیوتیک علاج می‌شود.",
+    "ps": "له ناپاکو اوبو یا خوړو څخه د څو ورځو تبه. په انټي بیوټیک علاج کېږي.",
+    "en": "Days of fever from dirty water or food. Antibiotics cure it."
+  },
+  "image": "typhoid",
+  "blocks": [
+    {
+      "id": "typhoid.lead",
+      "type": "lead",
+      "text": {
+        "fa": "محرقه از آب یا غذایی می‌آید که با مدفوع شخص مریض ناپاک شده. تب روز به روز بالا می‌رود، با سردرد، خستگی، درد شکم و گاهی اسهال یا قبضیت. به انتی‌بیوتیک از کلینیک ضرورت دارد.",
+        "ps": "محرقه له هغو اوبو یا خوړو څخه راځي چې د ناروغ کس په ډکو ناپاک شوي وي. تبه ورځ تر بلې لوړېږي، له سردرد، ستړیا، د نس درد او کله کله نس ناستي یا قبضیت سره. له کلینیک څخه انټي بیوټیک ته اړتیا لري.",
+        "en": "Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic."
+      }
+    },
+    {
+      "id": "typhoid.signs",
+      "type": "step",
+      "icon": "fever",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "تبی که در چند روز بالا می‌رود و نمی‌رود، با سردرد، ضعف، بی‌اشتهایی، درد شکم، و اسهال یا قبضیت. اطفال شاید فقط تب داشته باشند.",
+        "ps": "هغه تبه چې په څو ورځو کې لوړېږي او نه ځي، له سردرد، کمزورۍ، بې اشتهايۍ، د نس درد، او نس ناستي یا قبضیت سره. ماشومان ښايي یوازې تبه ولري.",
+        "en": "Fever that rises over several days and does not go, with headache, weakness, poor appetite, belly pain, and diarrhoea or constipation. Children may only have fever."
+      }
+    },
+    {
+      "id": "typhoid.go",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "تب بیش از ۳ روز: بروید",
+        "ps": "له ۳ ورځو زیاته تبه: ولاړ شئ",
+        "en": "Fever over 3 days: go"
+      },
+      "text": {
+        "fa": "اگر تب بیش از ۳ روز دوام کرد، یا زودتر اگر مریض بسیار ناخوش است، به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.",
+        "ps": "که تبه له ۳ ورځو زیات دوام وکړي، یا ژر تر ژره که ناروغ ډېر ناجوړه وي، کلینیک ته ولاړ شئ. محرقه د وینې معاینې او انټي بیوټیک ته اړتیا لري؛ پخپله نه ځي.",
+        "en": "Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself."
+      }
+    },
+    {
+      "id": "typhoid.fluids",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "مایعات و غذای نرم",
+        "ps": "مایعات او نرم خواړه",
+        "en": "Fluids and soft food"
+      },
+      "text": {
+        "fa": "آب، او آر اس و شوربای زیاد بدهید. خوردن غذای نرم را ادامه دهید. پاراسیتامول از کلینیک تب را پایین می‌آورد.",
+        "ps": "ډېرې اوبه، او آر اس او ښوروا ورکړئ. د نرمو خوړو خوړلو ته دوام ورکړئ. له کلینیک څخه پاراسیټامول تبه ښکته کوي.",
+        "en": "Give plenty of water, ORS and soup. Keep eating soft food. Paracetamol from the clinic can bring the fever down."
+      }
+    },
+    {
+      "id": "typhoid.finish",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "تمام دوره را تمام کنید",
+        "ps": "ټوله دوره بشپړه کړئ",
+        "en": "Finish the whole course"
+      },
+      "text": {
+        "fa": "انتی‌بیوتیک را تمام روزهایی که کارمند صحی گفته بخورید، حتی وقتی تب رفته. قطع زود تب را برمی‌گرداند و دوا را بی‌اثر می‌کند.",
+        "ps": "انټي بیوټیک ټولې هغه ورځې وخورئ چې روغتیايي کارکوونکي ویلي، حتی کله چې تبه تللې وي. وخته پرېښودل تبه بېرته راولي او درمل بې اغېزې کوي.",
+        "en": "Take the antibiotic for all the days the health worker says, even when the fever has gone. Stopping early brings the fever back and makes the medicine stop working."
+      }
+    },
+    {
+      "id": "typhoid.prevent",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "جلو سرایت را بگیرید",
+        "ps": "د خپرېدو مخه ونیسئ",
+        "en": "Stop it spreading"
+      },
+      "text": {
+        "fa": "آب نوشیدنی را بجوشانید یا کلورین بزنید. بعد از تشناب و پیش از غذا دست‌ها را با صابون بشویید. شخص مریض تا جور شدن برای دیگران غذا نپزد.",
+        "ps": "د څښاک اوبه وایشوئ یا کلورین ورواچوئ. له تشناب وروسته او له خوړو مخکې لاسونه په صابون ومینځئ. ناروغ کس تر روغېدو پورې نورو ته خواړه مه پخوي.",
+        "en": "Boil or chlorinate drinking water. Wash hands with soap after the toilet and before food. The sick person should not cook for others until well."
+      }
+    },
+    {
+      "id": "typhoid.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ خون و انتی‌بیوتیک",
+        "ps": "په کلینیک کې: د وینې معاینه او انټي بیوټیک",
+        "en": "At the clinic: blood test and antibiotics"
+      },
+      "text": {
+        "fa": "کارمند صحی ملاریا و محرقه را معاینه می‌کند و انتی‌بیوتیک محرقه (مانند سیپروفلوکساسین، ازیترومایسین یا سفیکسیم) می‌دهد. واقعات شدید به شفاخانه می‌روند.",
+        "ps": "روغتیايي کارکوونکی ملاریا او محرقه معاینه کوي او د محرقې انټي بیوټیک (لکه سیپروفلوکساسین، ازیترومایسین یا سفیکسیم) ورکوي. سختې پېښې روغتون ته ځي.",
+        "en": "The health worker tests for malaria and typhoid and gives a typhoid antibiotic (such as ciprofloxacin, azithromycin or cefixime). Severe cases go to the hospital."
+      }
+    },
+    {
+      "id": "typhoid.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: انتی‌بیوتیک پیچکاری و سیروم",
+        "ps": "په روغتون کې: پیچکاري انټي بیوټیک او سیروم",
+        "en": "At the hospital: injected antibiotics and fluids"
+      },
+      "text": {
+        "fa": "مریض بسیار ناخوش انتی‌بیوتیک پیچکاری (سفتریاکسون) و سیروم می‌گیرد، و از نظر خونریزی یا سوراخ شدن روده، که عملیات ضرورت دارد، زیر نظر گرفته می‌شود. معاینهٔ خون محرقه را تایید می‌کند.",
+        "ps": "ډېر ناجوړه ناروغ پیچکاري انټي بیوټیک (سفټریاکسون) او سیروم اخلي، او د وینې بهېدلو یا د کولمو د سوري کېدو لپاره، چې عملیات ته اړتیا لري، څارل کېږي. د وینې معاینه محرقه تاییدوي.",
+        "en": "A very ill person gets antibiotics by injection (ceftriaxone), fluids by drip, and is watched for bleeding or a hole in the gut, which needs surgery. Blood tests confirm typhoid."
+      }
+    },
+    {
+      "id": "typhoid.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "typhoid.urgent.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "تب با درد شدید ناگهانی شکم یا شکم سخت",
+            "ps": "تبه له ناڅاپي سخت د نس درد یا کلک نس سره",
+            "en": "fever with sudden severe belly pain or a hard belly"
+          }
+        },
+        {
+          "id": "typhoid.urgent.blood",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "تب با خون در مدفوع یا مدفوع سیاه",
+            "ps": "تبه له ډکو کې وینې یا تورو ډکو سره",
+            "en": "fever with blood in the stool or black stool"
+          }
+        },
+        {
+          "id": "typhoid.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "تب و گیج، بسیار خواب‌آلود یا بی‌هوش",
+            "ps": "تبه او ګډوډ، ډېر خوبولی یا بې هوښه",
+            "en": "fever and confused, very sleepy or unconscious"
+          }
+        },
+        {
+          "id": "typhoid.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "تب و نمی‌تواند بنوشد یا مایعات را نگه دارد",
+            "ps": "تبه او نه شي څښلای یا مایعات نه شي ساتلای",
+            "en": "fever and cannot drink or keep fluids down"
+          }
+        },
+        {
+          "id": "typhoid.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تب با نفس تیز یا درد سینه",
+            "ps": "تبه له چټکې ساه یا د سینې درد سره",
+            "en": "fever with fast breathing or chest pain"
+          }
+        }
+      ]
+    },
+    {
+      "id": "typhoid.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "typhoid.soon.days",
+          "icon": "calendar",
+          "text": {
+            "fa": "تب بیش از ۳ روز",
+            "ps": "له ۳ ورځو زیاته تبه",
+            "en": "fever for more than 3 days"
+          }
+        },
+        {
+          "id": "typhoid.soon.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "تب با درد شکم، اسهال یا قبضیت",
+            "ps": "تبه له د نس درد، نس ناستي یا قبضیت سره",
+            "en": "fever with belly pain, diarrhoea or constipation"
+          }
+        },
+        {
+          "id": "typhoid.soon.family",
+          "icon": "family",
+          "text": {
+            "fa": "تب در چند نفر که آب یا غذای مشترک دارند",
+            "ps": "په څو کسانو کې تبه چې ګډې اوبه یا خواړه لري",
+            "en": "fever in several people who share water or food"
+          }
+        },
+        {
+          "id": "typhoid.soon.back",
+          "icon": "clock",
+          "text": {
+            "fa": "تبی که بعد از ختم انتی‌بیوتیک برگشته",
+            "ps": "هغه تبه چې د انټي بیوټیک له پای ته رسېدو وروسته بېرته راغلې",
+            "en": "fever that came back after the antibiotics ended"
+          }
+        }
+      ]
+    },
+    {
+      "id": "typhoid.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "typhoid.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "برای تب از دکان انتی‌بیوتیک نخرید؛ بسیاری از آن‌ها دیگر بر محرقه اثر نمی‌کنند.",
+            "ps": "د تبې لپاره له دوکان څخه انټي بیوټیک مه اخلئ؛ ډېری یې نور پر محرقه اغېز نه کوي.",
+            "en": "Do not buy shop antibiotics for fever; many no longer work for typhoid."
+          }
+        },
+        {
+          "id": "typhoid.dont.stop",
+          "icon": "no",
+          "text": {
+            "fa": "وقتی تب پایین آمد دوا را قطع نکنید.",
+            "ps": "کله چې تبه ښکته شي درمل مه پرېږدئ.",
+            "en": "Do not stop the medicine when the fever drops."
+          }
+        },
+        {
+          "id": "typhoid.dont.water",
+          "icon": "water",
+          "text": {
+            "fa": "از جوی یا چاه روباز بدون جوشاندن یا کلورین آب ننوشید.",
+            "ps": "له ویالې یا خلاصې څاه څخه له ایشولو یا کلورین پرته اوبه مه څښئ.",
+            "en": "Do not drink from streams or open wells without boiling or chlorine."
+          }
+        }
+      ]
+    },
+    {
+      "id": "typhoid.season",
+      "type": "tip",
+      "icon": "water",
+      "text": {
+        "fa": "محرقه بیشتر در تابستان و بعد از سیلاب سرایت می‌کند، وقتی چاه‌ها ناپاک می‌شوند. در آن وقت‌ها هر روز آب را بجوشانید.",
+        "ps": "محرقه ډېری په دوبي او له سېلاب وروسته خپرېږي، کله چې څاګانې ناپاکې شي. په هغه وختونو کې هره ورځ اوبه وایشوئ.",
+        "en": "Typhoid spreads most in summer and after floods, when wells get dirty. Boil water then, every day."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Typhoid (30 Mar 2023): transmission, symptoms, antibiotic treatment, growing resistance, prevention by safe water, sanitation and hand washing",
+    "WHO Pocket Book of Hospital Care for Children (2013): typhoid fever (fluoroquinolone or third-generation cephalosporin; complications: bleeding, perforation)",
+    "WHO AWaRe antibiotic book (2022): enteric (typhoid) fever, oral and injectable options",
+    "Afghanistan BPHS (2010): ciprofloxacin and ceftriaxone at Comprehensive Health Centre and above; Afghanistan National Essential Medicines List (2014): azithromycin, ciprofloxacin, ceftriaxone",
+    "Burden: Afghanistan MoPH NDSR weekly report, week 33 2026: 49,868 typhoid cases reported in 2026 to date",
+    "WHO/UNICEF Facts for Life (2010): hygiene"
+  ],
+  "review": [
+    "Antibiotic names (ciprofloxacin, azithromycin, cefixime; ceftriaxone injection) follow the WHO Pocket Book and AWaRe book; resistance to fluoroquinolones is high in the region, so Mo should confirm what Samangan clinics actually use, or replace with 'an antibiotic'. Cefixime was not confirmed on the 2014 EML.",
+    "'Blood test': most clinics use the Widal test, which is unreliable; blood culture is only at larger hospitals. The text just says 'a blood test'.",
+    "'Fever over 3 days: go to the clinic' is a practical threshold for adults; IMCI uses 7 days for referral of fever in children but the child topic covers that.",
+    "Typhoid vaccine campaigns were not confirmed for Afghanistan, so no vaccine claim is made.",
+    "Dari محرقه and Pashto محرقه are the common words; تیفویید/ټایفایډ added in brackets."
+  ]
+}

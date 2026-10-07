@@ -1,0 +1,189 @@
+{
+  "id": "hospital-places",
+  "section": "everyone",
+  "title": {
+    "fa": "کدام کلینیک یا شفاخانه؟",
+    "ps": "کوم کلینیک یا روغتون؟",
+    "en": "Which clinic or hospital?"
+  },
+  "summary": {
+    "fa": "از کارمند صحی قریه تا شفاخانه‌های کلان: کدام جای چه کار می‌کند",
+    "ps": "د کلي له روغتیايي کارکوونکي تر لویو روغتونونو: کوم ځای څه کوي",
+    "en": "From the village health worker to the big hospitals: who does what"
+  },
+  "image": "hospital-places",
+  "blocks": [
+    {
+      "id": "hospital-places.lead",
+      "type": "lead",
+      "text": {
+        "fa": "خدمات صحی در سمنگان زینه به زینه است، از قریهٔ شما تا شفاخانه‌های کلان. اگر بدانید کدام جای چه کار می‌کند، وقت و پول شما ضایع نمی‌شود و جان‌ها نجات می‌یابد.",
+        "ps": "په سمنګان کې روغتیايي خدمتونه پوړ په پوړ دي، ستاسو له کلي نیولې تر لویو روغتونونو پورې. که پوه شئ چې کوم ځای څه کوي، وخت او پیسې مو نه ضایع کېږي او ژوند ژغورل کېږي.",
+        "en": "Health care in Samangan has steps, from your village up to the big hospitals. Knowing which place does what saves time and money, and saves lives."
+      }
+    },
+    {
+      "id": "hospital-places.village",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "در قریه: کارمند صحی",
+        "ps": "په کلي کې: روغتیايي کارکوونکی",
+        "en": "In the village: the health worker"
+      },
+      "text": {
+        "fa": "کارمند صحی قریه او آر اس، زنک، تابلیت آهن و دواهای ساده می‌دهد، رشد اطفال را معاینه می‌کند و می‌گوید بعد کجا بروید.",
+        "ps": "د کلي روغتیايي کارکوونکی او آر اس، زنک، د اوسپنې ګولۍ او ساده درمل ورکوي، د ماشومانو وده ګوري، او درته وايي چې بیا چېرته ولاړ شئ.",
+        "en": "The community health worker gives ORS, zinc, iron tablets and simple medicines, checks children's growth, and tells you where to go next."
+      }
+    },
+    {
+      "id": "hospital-places.clinic",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "کلینیک خورد: مرکز صحی فرعی یا اساسی",
+        "ps": "کوچنی کلینیک: فرعي یا اساسي روغتیايي مرکز",
+        "en": "Small clinic: sub-centre or basic centre"
+      },
+      "text": {
+        "fa": "نرس‌ها و قابله‌ها واکسین می‌دهند، زنان حامله را معاینه می‌کنند و در ولادت عادی کمک می‌کنند. مریضی‌های عام را تداوی می‌کنند و دوای توبرکلوز می‌دهند.",
+        "ps": "نرسان او قابلې واکسین ورکوي، امیندوارې ښځې معاینه کوي او په عادي زېږون کې مرسته کوي. عامې ناروغۍ درملنه کوي او د نري رنځ درمل ورکوي.",
+        "en": "Nurses and midwives give vaccines, check pregnant women and help with normal births. They treat common illnesses and give TB medicine."
+      }
+    },
+    {
+      "id": "hospital-places.chc",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "کلینیک کلان: مرکز صحی جامع",
+        "ps": "لوی کلینیک: جامع روغتیايي مرکز",
+        "en": "Bigger clinic: comprehensive health centre"
+      },
+      "text": {
+        "fa": "داکتران، اکثراً یک داکتر زن هم، و لابراتوار برای معاینات. بسیاری از آن‌ها چند بستر برای ماندن کوتاه دارند و در ولادت‌های مشکل کمک می‌کنند.",
+        "ps": "ډاکټران، اکثره یوه ښځینه ډاکټره هم، او د معایناتو لپاره لابراتوار. ډېری یې د لنډ پاتې کېدو لپاره څو بسترې لري، او په سختو زېږونونو کې مرسته کوي.",
+        "en": "Doctors, often a woman doctor too, and a laboratory for tests. Many have a few beds for a short stay, and help with harder births."
+      }
+    },
+    {
+      "id": "hospital-places.district",
+      "type": "step",
+      "icon": "hospital",
+      "title": {
+        "fa": "شفاخانهٔ ولسوالی",
+        "ps": "د ولسوالۍ روغتون",
+        "en": "District hospital"
+      },
+      "text": {
+        "fa": "عملیات، از جمله ولادت با عملیات سزارین، اکسری، خون دادن به مریض، و بستر برای ماندن. بعضی ولسوالی‌های سمنگان شفاخانه دارند.",
+        "ps": "عملیات، د سزارین زېږون په ګډون، اکسرې، ناروغ ته وینه ورکول، او د پاتې کېدو لپاره بستر. د سمنګان ځینې ولسوالۍ روغتون لري.",
+        "en": "Operations, including caesarean birth, X-ray, blood transfusion, and beds to stay in. Some districts of Samangan have one."
+      }
+    },
+    {
+      "id": "hospital-places.aybak",
+      "type": "step",
+      "icon": "hospital",
+      "title": {
+        "fa": "شفاخانهٔ ولایتی در ایبک",
+        "ps": "په ایبک کې ولایتي روغتون",
+        "en": "Provincial hospital in Aybak"
+      },
+      "text": {
+        "fa": "شفاخانهٔ اصلی سمنگان، که شب و روز باز است. داکتران متخصص، عملیات، اکسری، التراسوند، لابراتوار، و خون برای مریض.",
+        "ps": "د سمنګان اصلي روغتون، چې شپه او ورځ خلاص وي. متخصص ډاکټران، عملیات، اکسرې، الټراساونډ، لابراتوار، او د ناروغ لپاره وینه.",
+        "en": "The main hospital of Samangan, open day and night. Specialist doctors, operations, X-ray, ultrasound, laboratory, and blood for transfusion."
+      }
+    },
+    {
+      "id": "hospital-places.regional",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "مزار شریف یا کابل",
+        "ps": "مزار شریف یا کابل",
+        "en": "Mazar-i-Sharif or Kabul"
+      },
+      "text": {
+        "fa": "برای مشکلات جدی یا نادر، ممکن است داکتر شما را به شفاخانهٔ حوزوی مزار شریف، یا به کابل بفرستد.",
+        "ps": "د جدي یا نادرو ستونزو لپاره، کېدای شي ډاکټر تاسو د مزار شریف حوزوي روغتون، یا کابل ته ولېږي.",
+        "en": "For serious or rare problems, the doctor may send you on to the regional hospital in Mazar-i-Sharif, or to Kabul."
+      }
+    },
+    {
+      "id": "hospital-places.emergency",
+      "type": "tip",
+      "icon": "warning",
+      "text": {
+        "fa": "در حالت عاجل، همین حالا به شفاخانه بروید، شب باشد یا روز. اگر کلینیک خیلی نزدیک‌تر است، آنجا تداوی را شروع می‌کنند و شما را به شفاخانه می‌فرستند.",
+        "ps": "په بیړني حالت کې، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که کلینیک ډېر نږدې وي، هلته درملنه پیلوي او تاسو روغتون ته لېږي.",
+        "en": "In an emergency, go to a hospital now, day or night. If a clinic is much closer, it can start treatment and send you on."
+      }
+    },
+    {
+      "id": "hospital-places.near",
+      "type": "link",
+      "to": "near",
+      "icon": "hospital",
+      "title": {
+        "fa": "نزدیک‌ترین کلینیک را پیدا کنید",
+        "ps": "تر ټولو نږدې کلینیک پیدا کړئ",
+        "en": "Find the nearest clinic"
+      },
+      "text": {
+        "fa": "کلینیک‌ها و شفاخانه‌های نزدیک خود را در این گوشی ببینید. از مردم محل هم بپرسید، چون این فهرست کامل نیست.",
+        "ps": "خپل نږدې کلینیکونه او روغتونونه په دې ټیلیفون کې وګورئ. له سیمې خلکو هم وپوښتئ، ځکه دا لست بشپړ نه دی.",
+        "en": "See the clinics and hospitals near you on this phone. Ask local people too, because the list is not complete."
+      }
+    },
+    {
+      "id": "hospital-places.cost",
+      "type": "tip",
+      "icon": "money",
+      "text": {
+        "fa": "واکسین‌ها، و معاینه و دوای توبرکلوز، رایگان است. برای خدمات دیگر بپرسید چقدر خرچ دارد، و کمی پول با خود ببرید.",
+        "ps": "واکسینونه، او د نري رنځ معاینه او درمل، وړیا دي. د نورو خدمتونو لپاره وپوښتئ چې څومره لګښت لري، او څه پیسې له ځان سره یوسئ.",
+        "en": "Vaccines, and TB tests and medicine, are free. For other care, ask what it will cost, and take some money with you."
+      }
+    },
+    {
+      "id": "hospital-places.vaccines",
+      "type": "link",
+      "to": "topic/vaccines",
+      "icon": "syringe",
+      "title": {
+        "fa": "واکسین رایگان است",
+        "ps": "واکسین وړیا دی",
+        "en": "Vaccines are free"
+      },
+      "text": {
+        "fa": "واکسین در کلینیک داده می‌شود. ببینید طفل شما کدام واکسین‌ها را و چه وقت لازم دارد.",
+        "ps": "واکسین په کلینیک کې ورکول کېږي. وګورئ چې ستاسو ماشوم ته کوم واکسینونه او کله پکار دي.",
+        "en": "Vaccines are given at the clinic. See which vaccines your child needs, and when."
+      }
+    }
+  ],
+  "sources": [
+    "Afghanistan MoPH, Basic Package of Health Services (BPHS), 2010 revision: services and staff at health posts, sub-centres, BHCs, CHCs and district hospitals (summarised in research/moph-guidance.md and research/facilities.md)",
+    "Afghanistan MoPH, Essential Package of Hospital Services (EPHS), 2005: district, provincial and regional hospitals",
+    "MoPH Sehatmandi Samangan semi-annual review (Sept 2019) and MMRCA HER project documents (2023-2026): Samangan facility counts and BPHS/EPHS implementer",
+    "Afghanistan MoPH, National Health Policy 2025-2030 (p. 12: user charges at health facilities); MoPH statement 13 Nov 2025: TB tests and treatment free at 3,189 centres",
+    "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
+    "research/facilities.md (7 Oct 2026): referral path health post > sub-centre/BHC > CHC or district hospital > Aybak provincial hospital > Mazar-i-Sharif regional hospital or Kabul"
+  ],
+  "review": [
+    "Samangan set-up as given by Mo: MMRCA runs BPHS/EPHS with 3 district hospitals, 4 CHCs, 14 BHCs, 21 sub-centres and 1 mobile team, plus about 188 health posts (MoPH 2019) and the provincial hospital in Aybak. The counts are NOT narrated (they change, and a third of northern facilities closed in 2025); the page says 'some districts of Samangan have a district hospital'. Add the names (Bazar-e-Sokhta, Dehi, Do-Ab) if you are sure they are open and are district hospitals.",
+    "The research note says the 2019 count of '3 hospitals' may or may not include the Aybak provincial hospital. Confirm with MMRCA.",
+    "Services per level follow BPHS 2010 / EPHS 2005 as policy, not as proof for each facility: sub-centre and BHC = vaccines, antenatal care, normal births, common illness, TB DOTS; CHC = doctors (male and female), laboratory, a few beds, basic emergency obstetric care; district hospital = surgery including caesarean, X-ray, blood transfusion, inpatient beds. Please check that each Samangan district hospital really does caesareans and transfusion; if not, change 'Operations, including caesarean birth' to 'Most can do operations ...'.",
+    "Sub-centres: BPHS gives them a nurse and a midwife; the text groups them with BHCs ('nurses and midwives ... normal births'). Check that sub-centres in Samangan do deliveries.",
+    "Aybak provincial hospital: its laboratory collapsed in the 3 Nov 2025 earthquake (facilities.md). Check that a lab, ultrasound and blood bank are working before release, and whether it is truly open day and night.",
+    "'Vaccines, and TB tests and medicine, are free': the only 'free' claims (NEPI; MoPH 13 Nov 2025). The National Health Policy 2025-2030 allows user charges, so nothing else is called free. MoPH reported '3,205 free operations' at Aybak in 2025, but that is not stated here.",
+    "Emergency tip: 'If a clinic is much closer, it can start treatment and send you on' follows IMCI pre-referral treatment. Some may prefer simply 'go to hospital'.",
+    "Health post: the text does not mention antibiotics (BPHS 2010 lists none at health posts) or family planning (local restrictions). 'Community health worker' is کارمند صحی قریه / د کلي روغتیايي کارکوونکی; MoPH documents use کارکن صحی جامعه / د ټولنې روغتیايي کارکوونکی. Native speakers to choose.",
+    "Facility names: مرکز صحی فرعی / فرعي روغتیايي مرکز (sub-centre), مرکز صحی اساسی / اساسي روغتیايي مرکز (BHC), مرکز صحی جامع / جامع روغتیايي مرکز (CHC), شفاخانهٔ ولسوالی / د ولسوالۍ روغتون, شفاخانهٔ ولایتی / ولایتي روغتون, شفاخانهٔ حوزوی / حوزوي روغتون. Check these match what people say locally.",
+    "Icons: health post uses 'house' (a 'health post' icon would be better); CHC uses 'clinic' again.",
+    "The 'near' link says the list is not complete: facilities.json has almost no public facilities in rural Samangan yet."
+  ]
+}

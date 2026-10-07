@@ -128,6 +128,20 @@
       }
     },
     {
+      "id": "breastfeeding.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: کمک برای شیردهی",
+        "ps": "په کلینیک کې: د تي ورکولو لپاره مرسته",
+        "en": "At the clinic: help with breastfeeding"
+      },
+      "text": {
+        "fa": "اگر طفل خوب نمی‌چسپد، پستان درد دارد یا شیر کم به نظر می‌رسد، قابله یک بار شیردهی را می‌بیند و طرز گرفتن و چسپاندن طفل را نشان می‌دهد. نوک ترک‌خورده و بندش شیر تداوی می‌شود. زود بپرسید.",
+        "ps": "که ماشوم ښه نه نښلي، تی درد کوي یا شیدې لږې ښکاري، قابله یو ځل تي ورکول ګوري او د ماشوم د نیولو او نښلولو لار ښيي. چاودلی تی او بند شوي شیدې درملنه کېږي. ژر وپوښتئ.",
+        "en": "If the baby is not attaching, the breast hurts or milk seems little, the midwife watches a feed and shows positioning and attachment. Cracked nipples and blocked ducts are treated. Ask early."
+      }
+    },
+    {
       "id": "breastfeeding.dont",
       "type": "dont",
       "title": {
@@ -199,13 +213,16 @@
     "WHO/UNICEF Facts for Life (2010): breastfeeding; nutrition and growth",
     "WHO recommendations on postnatal care of the mother and newborn (2013), recommendation 5",
     "WHO IMCI Chart Booklet (2014): counsel the mother, feeding recommendations",
-    "WHO guideline for complementary feeding of infants and young children 6 to 23 months (2023)"
+    "WHO guideline for complementary feeding of infants and young children 6 to 23 months (2023)",
+    "WHO Guideline: counselling of women to improve breastfeeding practices (2018)",
+    "WHO/UNICEF Baby-friendly Hospital Initiative implementation guidance (2018): help mothers initiate and maintain breastfeeding, manage common difficulties"
   ],
   "review": [
     "'The first yellow milk is like the baby's first vaccine' is a common WHO/UNICEF counselling phrase, written as a comparison ('like'), not a medical claim.",
     "Meal numbers follow the WHO IYCF fact sheet: 6 to 8 months 2 to 3 meals; 9 to 23 months 3 to 4 meals plus 1 to 2 snacks.",
     "Local food names (Dari لیتی/شوله, Pashto لېټی/شوله for thick porridge) need a native-speaker check for Samangan.",
     "Dont item about cow's or goat's milk before 6 months was added to the requested list (animal milk); WHO allows animal milk only from 6 months in non-breastfed children.",
-    "Dont item 'do not stop breastfeeding when the mother or baby is sick' is general WHO advice; it does not cover rare cases where a doctor advises otherwise."
+    "Dont item 'do not stop breastfeeding when the mother or baby is sick' is general WHO advice; it does not cover rare cases where a doctor advises otherwise.",
+    "Breast abscess (hot, swollen, painful lump with fever) is in after-birth.soon; it needs a clinic the same day and sometimes drainage at hospital. Add a hospital block here if Mo wants it."
   ]
 }

@@ -271,9 +271,9 @@
     "en": "Boil it: wait until big bubbles roll, then keep it boiling for 1 minute. Let it cool with the lid on."
   },
   "anim.water.s3": {
-    "fa": "هیزم کم است؟ از تابلیت‌های کلورین که کلینیک یا کارکن صحی می‌دهد کار بگیرید. بپرسید یک تابلیت برای چند لیتر آب است؛ مثلاً یک تابلیت کلان برای یک گیلن ۲۰ لیتره.",
-    "ps": "لرګي کم دي؟ د کلورین هغه ټابلیټونه وکاروئ چې کلینیک یا روغتیايي کارکوونکی یې ورکوي. وپوښتئ چې یو ټابلیټ د څو لیټرو اوبو لپاره دی؛ د بېلګې په توګه یو لوی ټابلیټ د ۲۰ لیټره ګیلن لپاره.",
-    "en": "Short of firewood? Use the chlorine tablets the clinic or health worker gives out. Ask how much water one tablet is for: for example, one big tablet for a 20-litre jerrycan."
+    "fa": "هیزم کم است؟ از تابلیت‌های کلورین که کلینیک یا کارکن صحی می‌دهد کار بگیرید. به اندازه‌ای که روی پاکت نوشته شده استفاده کنید؛ از کارکن صحی بخواهید آن را برایتان بخواند.",
+    "ps": "لرګي کم دي؟ د کلورین هغه ټابلیټونه وکاروئ چې کلینیک یا روغتیايي کارکوونکی یې ورکوي. په هغه اندازه یې وکاروئ چې پر پاکټ لیکل شوې ده؛ له روغتیايي کارکوونکي وغواړئ چې درته یې ولولي.",
+    "en": "Short of firewood? Use the chlorine tablets the clinic or health worker gives out. Follow the dose on the packet; ask the health worker to read it to you."
   },
   "anim.water.s4": {
     "fa": "سرپوش را ببندید، تکانش دهید و پیش از نوشیدن ۳۰ دقیقه صبر کنید. بوی کم کلورین عادی است؛ یعنی تابلیت کار کرده است.",
@@ -351,9 +351,9 @@
     "en": "Wash before breastfeeding your baby."
   },
   "anim.handwashing.s6": {
-    "fa": "دست‌ها را تر کنید، صابون یا خاکستر بزنید و حدود ۲۰ ثانیه بمالید: کف دست، پشت دست، میان انگشتان، شست‌ها و ناخن‌ها.",
-    "ps": "لاسونه لانده کړئ، صابون یا ایرې پرې ووهئ او شاوخوا ۲۰ ثانیې یې وموږئ: ورغوي، د لاس شا، د ګوتو منځ، غټې ګوتې او نوکان.",
-    "en": "Wet your hands, add soap or ash, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails."
+    "fa": "دست‌ها را تر کنید، صابون بزنید، یا اگر صابون نیست خاکستر، و حدود ۲۰ ثانیه بمالید: کف دست، پشت دست، میان انگشتان، شست‌ها و ناخن‌ها.",
+    "ps": "لاسونه لانده کړئ، صابون پرې ووهئ، یا که صابون نه وي ایرې، او شاوخوا ۲۰ ثانیې یې وموږئ: ورغوي، د لاس شا، د ګوتو منځ، غټې ګوتې او نوکان.",
+    "en": "Wet your hands, add soap, or ash if there is no soap, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails."
   },
   "anim.handwashing.s7": {
     "fa": "زیر آب روان آب بکشید. دست‌ها را تکان دهید تا خشک شوند، یا با تکهٔ پاک خشک کنید.",
@@ -376,9 +376,9 @@
     "en": "Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves."
   },
   "anim.ors.s3": {
-    "fa": "پاکت ندارید؟ ۶ قاشق چای‌خوری هموار بوره و نیم قاشق چای‌خوری هموار نمک را در ۱ لیتر آب پاک حل کنید. دقیق اندازه کنید: نمک زیاد ضرر دارد.",
-    "ps": "پاکټ نشته؟ ۶ هوارې د چای کاچوغې بوره او نیمه هواره د چای کاچوغه مالګه په ۱ لیټر پاکو اوبو کې حل کړئ. په دقت یې اندازه کړئ: ډېره مالګه زیان لري.",
-    "en": "No packet? Mix 6 level teaspoons of sugar and half a level teaspoon of salt into 1 litre of clean water. Measure carefully: too much salt is harmful."
+    "fa": "پاکت ندارید؟ فعلاً آب برنج یا شوربا بدهید و برای گرفتن پاکت او آر اس به کلینیک بروید. همیشه چند پاکت را در خانه نگه دارید.",
+    "ps": "پاکټ نشته؟ اوس لپاره د وریجو اوبه یا ښوروا ورکړئ او د او آر اس د پاکټ لپاره کلینیک ته ولاړ شئ. تل څو پاکټونه په کور کې وساتئ.",
+    "en": "No packet? For now give rice water or soup, and go to the clinic for ORS packets. Always keep a few packets at home."
   },
   "anim.ors.s4": {
     "fa": "کم‌کم و پی‌درپی با قاشق یا پیاله بدهید. اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید و بعد آهسته‌تر بدهید. هر روز تازه بسازید.",

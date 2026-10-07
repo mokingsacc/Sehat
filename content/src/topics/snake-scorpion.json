@@ -99,6 +99,34 @@
       }
     },
     {
+      "id": "snake-scorpion.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ اول، بعد شفاخانه",
+        "ps": "په کلینیک کې: لومړۍ معاینه، بیا روغتون",
+        "en": "At the clinic: first check, then hospital"
+      },
+      "text": {
+        "fa": "پوستهٔ صحی یا کلینیک زخم را پاک می‌کند، دوای درد و پیچکاری تیتانوس می‌دهد، و مارگزیده را به شفاخانه می‌فرستد. سیروم ضد گژدم شاید در مرکز صحی باشد؛ بپرسید.",
+        "ps": "روغتیايي پوسته یا کلینیک زخم پاکوي، د درد درمل او د تیټانوس پیچکاري ورکوي، او د مار چیچلی روغتون ته لېږي. د لړم ضد سیروم ښايي په روغتیايي مرکز کې وي؛ وپوښتئ.",
+        "en": "The health post or clinic cleans the wound, gives pain medicine and a tetanus injection, and sends snake bites on to the hospital. Scorpion antivenom may be at the health centre; ask."
+      }
+    },
+    {
+      "id": "snake-scorpion.antivenom",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: سیروم ضد زهر",
+        "ps": "په روغتون کې: د زهرو ضد سیروم",
+        "en": "At the hospital: antivenom"
+      },
+      "text": {
+        "fa": "شفاخانه شخص را چند ساعت زیر نظر می‌گیرد، خون را معاینه می‌کند و اگر علایم زهر باشد سیروم ضد زهر را از راه رگ می‌دهد. پندیدگی، خونریزی و مشکل نفس را تداوی می‌کند. بپرسید کدام شفاخانه سیروم ضد زهر دارد.",
+        "ps": "روغتون کس څو ساعته څاري، وینه معاینه کوي او که د زهرو نښې وي د زهرو ضد سیروم د رګ له لارې ورکوي. پړسوب، وینه بهېدل او د ساه ستونزه درملنه کوي. وپوښتئ چې کوم روغتون د زهرو ضد سیروم لري.",
+        "en": "The hospital watches for hours, checks the blood, and gives antivenom by drip if there are signs of poisoning. It treats swelling, bleeding and breathing trouble. Ask which hospital holds antivenom."
+      }
+    },
+    {
       "id": "snake-scorpion.urgent",
       "type": "alert",
       "level": "urgent",
@@ -212,23 +240,19 @@
       ]
     },
     {
-      "id": "snake-scorpion.hospital",
-      "type": "tip",
-      "icon": "hospital",
-      "text": {
-        "fa": "در شفاخانه علایم زهر را زیر نظر می‌گیرند و می‌توانند دوای ضد زهر مار بدهند؛ تنها دوایی که زهر مار را خنثی می‌کند.",
-        "ps": "په روغتون کې د زهرو نښې څاري او کولی شي د مار د زهرو ضد درمل ورکړي؛ یوازینی درمل چې د مار زهر بې‌اغېزه کوي.",
-        "en": "At hospital they watch for signs of poisoning and can give antivenom, the only medicine that stops snake poison."
-      }
-    },
-    {
-      "id": "snake-scorpion.prevent",
-      "type": "tip",
+      "id": "snake-scorpion.safety",
+      "type": "link",
+      "to": "topic/bite-safety",
       "icon": "foot",
+      "title": {
+        "fa": "مار و گژدم را دور نگه دارید",
+        "ps": "مار او لړم لرې وساتئ",
+        "en": "Keep snakes and scorpions away"
+      },
       "text": {
-        "fa": "شب چراغ دستی ببرید و بوت بپوشید. پیش از پوشیدن، بوت و بستر را بتکانید.",
-        "ps": "د شپې لاسي څراغ له ځان سره ولرئ او بوټونه واغوندئ. د اغوستلو مخکې، بوټونه او بستره وڅنډئ.",
-        "en": "At night, carry a torch and wear shoes. Shake out shoes and bedding before use."
+        "fa": "بوت، بستر، چراغ دستی در شب و حویلی پاک: عادت‌های ساده‌ای که از گزیدن جلوگیری می‌کند. صفحه را باز کنید.",
+        "ps": "بوټونه، بستره، د شپې لاسي څراغ او پاک انګړ: ساده عادتونه چې د چیچلو مخه نیسي. پاڼه پرانیزئ.",
+        "en": "Shoes, bedding, a torch at night and a clear yard: simple habits that prevent bites. Open the page."
       }
     }
   ],
@@ -237,7 +261,9 @@
     "WHO Snakebite envenoming: a strategy for prevention and control (2019) and WHO fact sheet: Snakebite envenoming (2023)",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): snakebite, scorpion sting",
     "European Resuscitation Council Guidelines 2025: First Aid",
-    "WHO Regional Office for the Eastern Mediterranean: scorpion sting management (antivenom and supportive care in children)"
+    "WHO Regional Office for the Eastern Mediterranean: scorpion sting management (antivenom and supportive care in children)",
+    "WHO Guidelines for the management of snakebites, 2nd edition (WHO SEARO, 2016): observation, antivenom indications, tetanus prophylaxis",
+    "Afghanistan National Essential Medicines List (2014): scorpion antivenom and snake antivenom (hospital list); BPHS (2010): tetanus prophylaxis at CHC level"
   ],
   "review": [
     "No pressure-immobilisation bandage. WHO SEARO 2016 allows it only for neurotoxic elapid bites and not for vipers. Central Asian vipers (Echis, Macrovipera, Gloydius) and the Central Asian cobra both occur in northern Afghanistan. A simple 'no tight bands' message is safer.",
@@ -245,6 +271,10 @@
     "Scorpion: any sting in a child is urgent because severe envenoming (Mesobuthus, Androctonus and Hottentotta species in the region) is worst in young children. Adults with local pain only may not need hospital. That is not stated, so families do not have to decide.",
     "Antivenom availability in Samangan is unknown. Confirm which hospital stocks snake and scorpion antivenom and add the place name.",
     "Dont 'wait before going to hospital' replaces an earlier draft that named traditional healers, to avoid sounding disrespectful. Name them if that is clearer.",
-    "Pashto زبېښل (suck), Dari گژدم and Pashto لړم: check."
+    "Pashto زبېښل (suck), Dari گژدم and Pashto لړم: check.",
+    "Home safety section (2026-10-07): snake-scorpion.prevent moved to the new bite-safety page and is replaced by a link to it (snake-scorpion.safety). The draft addition content/drafts/additions/snake-scorpion.json (clinic blocks) does not touch these blocks.",
+    "Where snake antivenom is actually stocked for Samangan (Aybak provincial hospital or only Balkh Regional Hospital in Mazar) is unknown; the block says 'ask which hospital holds antivenom'. Fill this in and mark it in the clinic finder.",
+    "Scorpion antivenom is on the Afghan EML 2014 but its level (CHC or hospital) was not found, hence 'may be at the health centre; ask'.",
+    "Content merge 2: the tip snake-scorpion.hospital ('At hospital they watch for signs of poisoning and can give antivenom') was removed because snake-scorpion.clinic and snake-scorpion.antivenom now say the same in more detail. The id is retired."
   ]
 }

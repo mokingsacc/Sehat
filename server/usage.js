@@ -39,8 +39,10 @@ const SECS = DEFS.sections || {};
 const KIT = SECS.kit || [];
 const TOPIC_SEC = new Map();
 for (const sec of ['children', 'women', 'everyone']) for (const t of SECS[sec] || []) if (!TOPIC_SEC.has(t)) TOPIC_SEC.set(t, sec);
-const TOOL_PAGES = ['family', 'ask', 'near', 'kit', 'breaths', 'growth'], TOOL_PREFIX = ['tool', 'reading', 'kit', 'growth', 'family'];
-const APP_PAGES = ['home', 'children', 'adults', 'settings', 'feedback', 'privacy', 'consent', 'welcome', 'voice', 'studio', 'share'];
+// pages only on a list page of their own (home safety, hospital, food and garden, well-being) count with "everyone"
+for (const sec of ['safety', 'hospital', 'food', 'wellbeing']) for (const t of SECS[sec] || []) if (!TOPIC_SEC.has(t)) TOPIC_SEC.set(t, 'everyone');
+const TOOL_PAGES = ['family', 'ask', 'near', 'kit', 's/kit', 'breaths', 'growth'], TOOL_PREFIX = ['tool', 'reading', 'kit', 'growth', 'family'];
+const APP_PAGES = ['home', 'house', 'firstaid', 'children', 'adults', 'settings', 'feedback', 'privacy', 'consent', 'welcome', 'voice', 'studio', 'share', 's'];
 export const GROUPS = [
   ['emergencies', 'Emergencies and danger signs'], ['children', 'Children'], ['women', 'Women and pregnancy'], ['everyone', 'Everyone (adults)'],
   ['tools', 'Tools (family record, search, clinic map, home kit)'], ['app', 'Home, menus and settings'], ['other', 'Other pages'],
@@ -68,9 +70,9 @@ export const GRP_SQL = `(CASE WHEN page = '_day' THEN '_day' WHEN substr(page, 1
   WHEN ${HEAD} IN (${inList(APP_PAGES)}) THEN 'app' ELSE 'other' END)`;
 
 const APP_NAMES = {
-  home: 'Home', children: 'Children: list of topics', adults: 'Adults: list of topics', family: 'My family: everyone', 'family/person': 'My family: one person', 'family/add': 'My family: add a person', 'family/edit': 'My family: change a person', 'family/vacc': 'My family: vaccines', 'family/weight': 'My family: adult weight', 'family/meds': 'My family: medicines', 'family/med-add': 'My family: add a medicine', 'family/notes': "My family: doctor's notes", 'family/note-add': "My family: record the doctor", 'family/readings': 'My family: saved readings', 'family/copy': 'My family: copy to another phone', ask: 'Ask: symptom search',
+  home: 'Health (the start screen)', children: 'Children: list of topics', adults: 'Adults: list of topics', family: 'My family: everyone', 'family/person': 'My family: one person', 'family/add': 'My family: add a person', 'family/edit': 'My family: change a person', 'family/vacc': 'My family: vaccines', 'family/weight': 'My family: adult weight', 'family/meds': 'My family: medicines', 'family/med-add': 'My family: add a medicine', 'family/notes': "My family: doctor's notes", 'family/note-add': "My family: record the doctor", 'family/readings': 'My family: saved readings', 'family/copy': 'My family: copy to another phone', ask: 'Ask: symptom search',
   emergency: 'Emergency button: who needs help?', 'emergency/newborn': 'Emergency: newborn', 'emergency/baby': 'Emergency: baby under 1', 'emergency/child': 'Emergency: child', 'emergency/adult': 'Emergency: adult or teenager',
-  near: 'Nearest clinic and map', kit: 'Home health kit', breaths: 'Breathing counter', 'tool/breaths': 'Breathing counter', settings: 'Settings', feedback: 'Send feedback', privacy: 'Privacy page',
+  near: 'Nearest clinic and map', kit: 'Home health kit', 's/kit': 'Home health kit', 's/safety': 'Home safety: list of topics', 's/hospital': 'Going to the clinic or hospital: list of topics', 's/food': 'Food and garden: list of topics', 's/wellbeing': 'Well-being: list of topics', house: 'Home tab (house and everyday life)', firstaid: 'CPR and first aid', breaths: 'Breathing counter', 'tool/breaths': 'Breathing counter', settings: 'Settings', feedback: 'Send feedback', privacy: 'Privacy page',
   consent: 'First-open question about counts', welcome: 'Choose language', voice: 'Choose voice', studio: 'Recording studio',
   growth: 'Growth tracker: charts', 'growth/add': 'Growth tracker: add a measurement', 'growth/result': 'Growth tracker: result', 'growth/measure': 'How to measure at home', share: 'Share Sehat',
 };

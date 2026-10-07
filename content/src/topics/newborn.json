@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "newborn.anim-nappies",
+      "type": "anim",
+      "anim": "nappies"
+    },
+    {
       "id": "newborn.warm",
       "type": "step",
       "icon": "newborn-warm",
@@ -125,6 +130,34 @@
         "fa": "طفل کوچک یا کم‌وزن را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید. پدر یا مادرکلان هم می‌توانند کمک کنند.",
         "ps": "کوچنی یا کم وزنه ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ. پلار یا انا هم مرسته کولای شي.",
         "en": "Keep a small baby skin to skin on the mother's chest, day and night. The father or grandmother can help too."
+      }
+    },
+    {
+      "id": "newborn.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ نوزاد",
+        "ps": "په کلینیک کې: د نوي زېږېدلي ماشوم معاینه",
+        "en": "At the clinic: the newborn check"
+      },
+      "text": {
+        "fa": "قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد و روی ناف دوای کلرهگزیدین می‌مالد. معاینه رایگان است.",
+        "ps": "قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي او پر نامه کلورهګزیډین درمل مږي. معاینه وړیا ده.",
+        "en": "The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord. Checks are free."
+      }
+    },
+    {
+      "id": "newborn.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: نوزاد مریض",
+        "ps": "په روغتون کې: ناروغ نوی زېږېدلی ماشوم",
+        "en": "At the hospital: a sick newborn"
+      },
+      "text": {
+        "fa": "نوزادی که علامت خطر دارد شاید عفونت جدی داشته باشد. شفاخانه چند روز انتی‌بیوتیک پیچکاری می‌دهد، طفل را گرم نگه می‌دارد، در شیردهی کمک می‌کند و در صورت ضرورت اکسیجن می‌دهد.",
+        "ps": "هغه نوی زېږېدلی ماشوم چې د خطر نښه لري ښايي جدي انتان ولري. روغتون څو ورځې پیچکاري انټي بیوټیک ورکوي، ماشوم تود ساتي، په تي ورکولو کې مرسته کوي او که اړتیا وي اکسیجن ورکوي.",
+        "en": "A newborn with a danger sign may have a serious infection. The hospital gives antibiotics by injection for several days, keeps the baby warm, helps with feeding and gives oxygen if needed."
       }
     },
     {
@@ -266,7 +299,10 @@
     "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): sheets J10 and M6, care of the baby after birth",
     "WHO/UNICEF Caring for the newborn at home (2015)",
     "WHO Kangaroo mother care: a practical guide (2003) and WHO recommendations for care of the preterm or low-birth-weight infant (2022)",
-    "WHO IMCI Chart Booklet (2014): sick young infant up to 2 months"
+    "WHO IMCI Chart Booklet (2014): sick young infant up to 2 months",
+    "WHO recommendations on postnatal care of the mother and newborn (2013): content of postnatal contacts; chlorhexidine for cord care where harmful substances are traditionally applied",
+    "WHO Guideline: managing possible serious bacterial infection in young infants when referral is not feasible (2015) and WHO Pocket Book (2013): injectable antibiotics for neonatal sepsis",
+    "Afghanistan BPHS (2010): chlorhexidine in the Health Post and BHC lists; ampicillin and gentamicin injections at BHC and above"
   ],
   "review": [
     "Cord care: Afghanistan's national policy on chlorhexidine for cord care was not confirmed. The text says 'put nothing on the cord; use only the medicine the health worker gives you' so it works whether or not chlorhexidine is given. Please check the MoPH policy and, if chlorhexidine 7.1% gel is routine, consider naming it.",
@@ -275,6 +311,9 @@
     "Postnatal check times follow WHO 2013 (within 24 hours, day 3, day 7 to 14, 6 weeks); check against the Afghan BPHS postnatal schedule.",
     "Urgent item 'feels hot, or feels cold to touch' stands in for WHO's 37.5 C or more and below 35.5 C; families mostly have no thermometer.",
     "Small baby step says 'father or grandmother can help'; WHO kangaroo care allows other family members to give skin-to-skin contact. Check cultural fit for fathers in Samangan.",
-    "Jaundice: soon alert sends any yellow skin or eyes to the clinic today (PCPNC M6 says 'seek care'); yellow on day 1 or yellow palms and soles are in the urgent alert, per WHO 2013."
+    "Jaundice: soon alert sends any yellow skin or eyes to the clinic today (PCPNC M6 says 'seek care'); yellow on day 1 or yellow palms and soles are in the urgent alert, per WHO 2013.",
+    "Chlorhexidine on the cord: on the BPHS 2010 Health Post list and WHO-conditional; confirm it is current Afghan national policy before promising it.",
+    "'Checks are free': BPHS user-fee ban; confirm locally.",
+    "Content merge 2: animation(s) nappies shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
   ]
 }

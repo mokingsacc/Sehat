@@ -1,0 +1,298 @@
+{
+  "id": "asthma",
+  "section": "everyone",
+  "title": {
+    "fa": "نفس‌تنگی (آسم)",
+    "ps": "ساه لنډي (آسم)",
+    "en": "Asthma and tight breathing"
+  },
+  "summary": {
+    "fa": "خس‌خس سینه و تنگی نفس با انهیلر (پف) کلینیک کنترول می‌شود.",
+    "ps": "د سینې شڼا او ساه لنډي د کلینیک په انهیلر (پف) کنټرولېږي.",
+    "en": "Wheezing and tight chest can be controlled with a clinic inhaler."
+  },
+  "image": "asthma",
+  "blocks": [
+    {
+      "id": "asthma.lead",
+      "type": "lead",
+      "text": {
+        "fa": "آسم باعث خس‌خس نفس و تنگی سینه می‌شود، اکثراً در شب، در هوای سرد یا دود. با انهیلر، یک پف که از آن نفس می‌کشید، کنترول می‌شود، تا طفل یا بزرگسال عادی زندگی و کار کند.",
+        "ps": "آسم ساه شڼېدونکې او سینه تنګه کوي، ډېری د شپې، په سړه هوا یا لوګي کې. په انهیلر، یو پف چې ترې ساه اخلئ، کنټرولېږي، تر څو ماشوم یا لوی کس عادي ژوند او کار وکړي.",
+        "en": "Asthma makes breathing whistle and the chest feel tight, often at night, in cold air or smoke. It can be controlled with an inhaler, a pump you breathe in from, so a child or adult can live and work normally."
+      }
+    },
+    {
+      "id": "asthma.signs",
+      "type": "step",
+      "icon": "lungs",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "سرفه و نفس خس‌خس‌دار که می‌آید و می‌رود، و در شب، بعد از دویدن، در سردی یا دود بدتر می‌شود. بین حمله‌ها شخص شاید سالم به نظر برسد.",
+        "ps": "ټوخی او شڼېدونکې ساه چې راځي او ځي، او د شپې، له منډې وروسته، په سړه هوا یا لوګي کې بدترېږي. د حملو ترمنځ کس ښايي روغ ښکاري.",
+        "en": "Cough and whistling breathing that comes and goes, worse at night, after running, in cold or smoke. Between attacks the person may seem well."
+      }
+    },
+    {
+      "id": "asthma.inhaler",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "انهیلر را درست استعمال کنید",
+        "ps": "انهیلر سم وکاروئ",
+        "en": "Use the inhaler as taught"
+      },
+      "text": {
+        "fa": "انهیلر فوری در چند دقیقه راه نفس را باز می‌کند. انهیلر روزانهٔ پیشگیری جلو حمله‌ها را می‌گیرد. دقیقاً همان طور که کارمند صحی نشان داد استعمال کنید، و انهیلر فوری را همراه داشته باشید.",
+        "ps": "ژر اغېزه کوونکی انهیلر په څو دقیقو کې د ساه لاره خلاصوي. ورځنی مخنیوونکی انهیلر د حملو مخه نیسي. دقیقاً هغسې یې وکاروئ چې روغتیايي کارکوونکي ښودلي، او ژر اغېزه کوونکی انهیلر له ځان سره وساتئ.",
+        "en": "The reliever inhaler opens the airways in minutes. A daily preventer inhaler stops attacks. Use them exactly as the health worker showed, and keep the reliever with you."
+      }
+    },
+    {
+      "id": "asthma.triggers",
+      "type": "step",
+      "icon": "smoke",
+      "title": {
+        "fa": "از دود و گرد و خاک دوری کنید",
+        "ps": "له لوګي او دوړو ډډه وکړئ",
+        "en": "Avoid smoke and dust"
+      },
+      "text": {
+        "fa": "دود تنباکو، بخاری و صندلی، گرد و خاک، هوای سرد و بوهای تند حمله می‌آورند. در خانه سگرت نکشید؛ از بخاری با دودکش کار بگیرید؛ در باد سرد دهن را بپوشانید.",
+        "ps": "د تنباکو، بخارۍ او صندلۍ لوګی، دوړې، سړه هوا او تېز بویونه حملې راولي. په کور کې سګرټ مه څکوئ؛ د دودکش سره بخارۍ وکاروئ؛ په سړه هوا کې خوله وپوښئ.",
+        "en": "Tobacco, stove and sandali smoke, dust, cold air and strong smells bring on attacks. No smoking in the house; use a stove with a pipe; cover the mouth in cold wind."
+      }
+    },
+    {
+      "id": "asthma.attack",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "در حمله: بنشینید، انهیلر فوری",
+        "ps": "په حمله کې: کېنئ، ژر اغېزه کوونکی انهیلر",
+        "en": "In an attack: sit up, reliever"
+      },
+      "text": {
+        "fa": "راست بنشینید، آرام باشید، لباس را شل کنید. انهیلر فوری را همان طور که یاد گرفتید بگیرید. اگر در چند دقیقه کمک نکرد، یا شخص گپ زده نمی‌تواند، همین حالا به شفاخانه بروید.",
+        "ps": "نېغ کېنئ، آرام اوسئ، جامې سستې کړئ. ژر اغېزه کوونکی انهیلر هغسې واخلئ چې درته ښودل شوي. که په څو دقیقو کې مرسته ونه کړي، یا کس خبرې نه شي کولای، همدا اوس روغتون ته ولاړ شئ.",
+        "en": "Sit upright, stay calm, loosen clothes. Take the reliever inhaler as taught. If it does not help within a few minutes, or the person cannot speak, go to hospital now."
+      }
+    },
+    {
+      "id": "asthma.copd",
+      "type": "step",
+      "icon": "lungs",
+      "title": {
+        "fa": "سرفهٔ دایمی در سگرت‌کشان",
+        "ps": "په سګرټ څکوونکو کې اوږد ټوخی",
+        "en": "Long cough in smokers"
+      },
+      "text": {
+        "fa": "سگرت‌کشان و کسانی که سال‌ها دود بخاری را نفس کشیده‌اند، می‌توانند مرض شش با نفس‌تنگی و سرفهٔ هر روزه بگیرند. دوری از دود آن را آهسته می‌کند؛ انهیلر کمک می‌کند. معاینه شوید.",
+        "ps": "سګرټ څکوونکي او هغه کسان چې کلونه یې د بخارۍ لوګی ساه کړی، د سږو ناروغي له ساه لنډۍ او ورځني ټوخي سره اخیستلای شي. له لوګي لرې والی یې ورو کوي؛ انهیلر مرسته کوي. معاینه شئ.",
+        "en": "Smokers and people who have breathed stove smoke for years can get a lung disease (COPD) with breathlessness and daily cough. Avoiding smoke slows it; inhalers help. Get checked."
+      }
+    },
+    {
+      "id": "asthma.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: انهیلر و آموزش",
+        "ps": "په کلینیک کې: انهیلر او ښوونه",
+        "en": "At the clinic: inhaler and teaching"
+      },
+      "text": {
+        "fa": "کارمند صحی به سینه گوش می‌دهد و مطمئن می‌شود که سینه‌بغل یا توبرکلوز نیست. انهیلر سالبوتامول می‌دهد، طرز استعمالش را نشان می‌دهد و شاید انهیلر روزانهٔ پیشگیری هم اضافه کند.",
+        "ps": "روغتیايي کارکوونکی سینې ته غوږ نیسي او ډاډ ترلاسه کوي چې سینه بغل یا نری رنځ نه دی. د سالبوتامول انهیلر ورکوي، د کارولو لار یې ښيي او ښايي ورځنی مخنیوونکی انهیلر هم ورزیات کړي.",
+        "en": "The health worker listens to the chest and rules out pneumonia or TB. They give a salbutamol inhaler, show how to use it, and may add a daily preventer inhaler."
+      }
+    },
+    {
+      "id": "asthma.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: حملهٔ شدید: اکسیجن",
+        "ps": "په روغتون کې: سخته حمله: اکسیجن",
+        "en": "At the hospital: severe attack, oxygen"
+      },
+      "text": {
+        "fa": "در حملهٔ شدید شفاخانه اکسیجن، سالبوتامول از راه ماسک (بخار) و تابلیت یا پیچکاری استرویید می‌دهد، و تا آسان شدن نفس زیر نظر می‌گیرد. حمله می‌تواند کشنده باشد؛ منتظر نمانید.",
+        "ps": "په سخته حمله کې روغتون اکسیجن، سالبوتامول د ماسک له لارې (بخار) او د سټرایډ ګولۍ یا پیچکاري ورکوي، او تر هغه څاري چې ساه اسانه شي. حمله وژونکې کېدای شي؛ انتظار مه کوئ.",
+        "en": "In a bad attack the hospital gives oxygen, salbutamol through a mask (nebuliser) and steroid tablets or injection, and watches until breathing is easy. Attacks can be fatal; do not wait."
+      }
+    },
+    {
+      "id": "asthma.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "asthma.urgent.speak",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "آن قدر نفس‌تنگ که نمی‌تواند یک جملهٔ کامل بگوید",
+            "ps": "دومره ساه لنډی چې یوه بشپړه جمله نه شي ویلای",
+            "en": "so breathless they cannot speak a full sentence"
+          }
+        },
+        {
+          "id": "asthma.urgent.blue",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "لب‌ها یا روی کبود یا خاکستری",
+            "ps": "شنې یا خړې شونډې یا مخ",
+            "en": "blue or grey lips or face"
+          }
+        },
+        {
+          "id": "asthma.urgent.indrawing",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "سینه یا گردن با هر نفس به شدت داخل کشیده می‌شود",
+            "ps": "سینه یا غاړه د هرې ساه سره په سختۍ دننه کښل کېږي",
+            "en": "the chest or neck pulls in hard with each breath"
+          }
+        },
+        {
+          "id": "asthma.urgent.reliever",
+          "icon": "no",
+          "text": {
+            "fa": "انهیلر فوری کمک نمی‌کند، یا وجود ندارد",
+            "ps": "ژر اغېزه کوونکی انهیلر مرسته نه کوي، یا نشته",
+            "en": "the reliever inhaler is not helping, or there is none"
+          }
+        },
+        {
+          "id": "asthma.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بسیار خواب‌آلود، گیج یا از نفس کشیدن خسته و بی‌حال",
+            "ps": "ډېر خوبولی، ګډوډ یا له ساه اخیستلو ستړی او بې حاله",
+            "en": "very sleepy, confused or exhausted from breathing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "asthma.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "asthma.soon.wheeze",
+          "icon": "lungs",
+          "text": {
+            "fa": "نفس خس‌خس‌داری که بار بار برمی‌گردد",
+            "ps": "شڼېدونکې ساه چې بیا بیا راګرځي",
+            "en": "whistling breathing that comes back again and again"
+          }
+        },
+        {
+          "id": "asthma.soon.night",
+          "icon": "moon",
+          "text": {
+            "fa": "سرفه‌ای که شب بیدارشان می‌کند، بیش از یک بار در هفته",
+            "ps": "هغه ټوخی چې د شپې یې ویښوي، په اونۍ کې له یو ځل زیات",
+            "en": "cough that wakes them at night, more than once a week"
+          }
+        },
+        {
+          "id": "asthma.soon.often",
+          "icon": "breathe",
+          "text": {
+            "fa": "اکثر روزها به انهیلر فوری ضرورت دارد",
+            "ps": "ډېری ورځې ژر اغېزه کوونکي انهیلر ته اړتیا لري",
+            "en": "needs the reliever inhaler most days"
+          }
+        },
+        {
+          "id": "asthma.soon.effort",
+          "icon": "walk",
+          "text": {
+            "fa": "در بالا رفتن یا کار خانه نفس‌تنگ می‌شود",
+            "ps": "په لوړه ختلو یا د کور په کار کې ساه لنډېږي",
+            "en": "breathless walking uphill or doing housework"
+          }
+        }
+      ]
+    },
+    {
+      "id": "asthma.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "asthma.dont.stop",
+          "icon": "no",
+          "text": {
+            "fa": "وقتی خوب هستید انهیلر روزانهٔ پیشگیری را قطع نکنید.",
+            "ps": "کله چې ښه یاست ورځنی مخنیوونکی انهیلر مه پرېږدئ.",
+            "en": "Do not stop the daily preventer inhaler when you feel well."
+          }
+        },
+        {
+          "id": "asthma.dont.steroid",
+          "icon": "pill",
+          "text": {
+            "fa": "برای نفس‌تنگی از دکان تابلیت یا پیچکاری استرویید نخرید.",
+            "ps": "د ساه لنډۍ لپاره له دوکان څخه د سټرایډ ګولۍ یا پیچکاري مه اخلئ.",
+            "en": "Do not buy steroid tablets or injections from a shop for breathing."
+          }
+        },
+        {
+          "id": "asthma.dont.smoke",
+          "icon": "smoke",
+          "text": {
+            "fa": "در کنار شخص مبتلا به آسم، مخصوصاً طفل، سگرت نکشید.",
+            "ps": "د آسم لرونکي کس، په تېره بیا ماشوم، تر څنګ سګرټ مه څکوئ.",
+            "en": "Do not smoke around a person with asthma, especially a child."
+          }
+        }
+      ]
+    },
+    {
+      "id": "asthma.spacer",
+      "type": "tip",
+      "icon": "cup-spoon",
+      "text": {
+        "fa": "طفل می‌تواند انهیلر را با یک محفظه (اسپیسر) استعمال کند؛ کلینیک می‌تواند آن را از یک بوتل پلاستیکی پاک بسازد و نشان بدهد.",
+        "ps": "ماشوم کولای شي انهیلر له یوه سپېسر سره وکاروي؛ کلینیک کولای شي له یوه پاک پلاستیکي بوتل څخه یې جوړ کړي او درته وښيي.",
+        "en": "A child can use an inhaler with a spacer; the clinic can make one from a clean plastic bottle and show you how."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Asthma (28 Apr 2026): symptoms, triggers, inhaled reliever and preventer medicines, spacers, access to inhalers",
+    "WHO fact sheet: Chronic obstructive pulmonary disease (10 Jun 2026): tobacco and household smoke as causes, inhaled treatment",
+    "WHO Package of Essential Noncommunicable disease interventions for primary health care (WHO PEN, 2020): asthma and COPD protocol (inhaled salbutamol, inhaled corticosteroid, oxygen and systemic steroids for severe attacks)",
+    "WHO Pocket Book of Hospital Care for Children (2013): wheeze and asthma, salbutamol by spacer or nebuliser, oxygen",
+    "Afghanistan IPEHS (2019): asthma and COPD management with inhalers from Basic Health Centre level; BPHS (2010): salbutamol at BHC, oxygen at CHC; Afghanistan National Essential Medicines List (2014): salbutamol inhaler",
+    "WHO guidelines for indoor air quality: household fuel combustion (2014)"
+  ],
+  "review": [
+    "Preventer (inhaled steroid, beclometasone) availability at BHC level is uncertain: salbutamol inhaler is on the 2014 EML, beclometasone inhaler was not confirmed. Text says 'may add'.",
+    "Salbutamol named in the clinic block; remove if Mo prefers 'a reliever inhaler'.",
+    "Home-made bottle spacer: WHO Pocket Book 2013 describes it; the tip asks the clinic to make and demonstrate it rather than the family.",
+    "COPD step included because of very high solid-fuel smoke exposure in Samangan households (about 36 percent cook with straw/shrubs, IPC 2025); 'COPD' kept in brackets in English only.",
+    "Dari نفس‌تنگی is also used for ordinary breathlessness; the title keeps آسم in brackets. Pashto ساه لنډي likewise. Translator to confirm what villagers call asthma (some say 'ضیق‌النفس').",
+    "Attack step says 'go to hospital now if the reliever does not help within a few minutes'; WHO advises seeking urgent care if no response, exact minutes not fixed."
+  ]
+}

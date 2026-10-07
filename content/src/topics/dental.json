@@ -1,0 +1,289 @@
+{
+  "id": "dental",
+  "section": "everyone",
+  "title": {
+    "fa": "دندان و دندان‌درد",
+    "ps": "غاښونه او د غاښ درد",
+    "en": "Teeth and toothache"
+  },
+  "summary": {
+    "fa": "دندان‌ها را روزی دو بار پاک کنید. روی پندیده با دندان‌درد به کلینیک ضرورت دارد.",
+    "ps": "غاښونه په ورځ کې دوه ځله پاک کړئ. له غاښ درد سره پړسېدلی مخ کلینیک ته اړتیا لري.",
+    "en": "Clean teeth twice daily. Toothache with a swollen face needs the clinic."
+  },
+  "image": "dental",
+  "blocks": [
+    {
+      "id": "dental.lead",
+      "type": "lead",
+      "text": {
+        "fa": "دندان‌های خراب در اطفال و بزرگسالان افغانستان بسیار زیاد است و تقریباً هیچ وقت تداوی نمی‌شود. پاک کردن دندان‌ها، شکر و چای شیرین کمتر، و تداوی زود جلو درد و افتادن دندان‌ها را می‌گیرد.",
+        "ps": "خراب غاښونه د افغانستان په ماشومانو او لویانو کې ډېر دي او تقریباً هېڅکله درملنه نه کېږي. د غاښونو پاکول، لږ بوره او خوږ چای، او ژر درملنه د درد او د غاښونو د لوېدو مخه نیسي.",
+        "en": "Rotten teeth are very common in Afghan children and adults, and almost never treated. Cleaning teeth, less sugar and sweet tea, and early treatment stop pain and loss of teeth."
+      }
+    },
+    {
+      "id": "dental.brush",
+      "type": "step",
+      "icon": "tooth",
+      "title": {
+        "fa": "دندان‌ها را روزی دو بار پاک کنید",
+        "ps": "غاښونه په ورځ کې دوه ځله پاک کړئ",
+        "en": "Clean teeth twice a day"
+      },
+      "text": {
+        "fa": "با برس و کریم دندان فلوراید، یا مسواک پاک. صبح و پیش از خواب پاک کنید. به اطفال تا حدود ۸ سالگی کمک کنید.",
+        "ps": "په برس او د فلورایډ کریم، یا پاک مسواک. سهار او له خوب مخکې یې پاک کړئ. له ماشومانو سره تر ۸ کلنۍ پورې مرسته وکړئ.",
+        "en": "Use a brush with fluoride toothpaste, or a clean miswak. Clean in the morning and before sleep. Help children until they are about 8."
+      }
+    },
+    {
+      "id": "dental.sugar",
+      "type": "step",
+      "icon": "no",
+      "title": {
+        "fa": "شکر و چای شیرین کمتر",
+        "ps": "لږ بوره او خوږ چای",
+        "en": "Less sugar and sweet tea"
+      },
+      "text": {
+        "fa": "شیرینی، بسکویت، نوشابه و چای شیرین زیاد دندان‌ها را خراب می‌کند. بین غذاها آب، میوه و غذای ساده بدهید.",
+        "ps": "خواږه، بسکویټ، سوډا او ډېر خوږ چای غاښونه خرابوي. د خوړو ترمنځ اوبه، مېوه او ساده خواړه ورکړئ.",
+        "en": "Sweets, biscuits, fizzy drinks and many cups of sweet tea rot the teeth. Give water, fruit and plain food between meals."
+      }
+    },
+    {
+      "id": "dental.baby",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "دندان‌های شیری را حفاظت کنید",
+        "ps": "د شیدو غاښونه وساتئ",
+        "en": "Protect baby teeth"
+      },
+      "text": {
+        "fa": "نگذارید طفل با بوتل شیر یا چای شیرین بخوابد. دندان‌های اول را با تکهٔ پاک پاک کنید. دندان‌های شیری مهم‌اند: جای دندان‌های دایمی را نگه می‌دارند.",
+        "ps": "مه پرېږدئ چې ماشوم د شیدو یا خوږ چای له بوتل سره ویده شي. لومړي غاښونه په پاکه ټوټه پاک کړئ. د شیدو غاښونه مهم دي: د دایمي غاښونو ځای ساتي.",
+        "en": "Do not let a baby sleep with a bottle of milk or sweet tea. Wipe the first teeth with a clean cloth. Baby teeth matter: they hold the place for adult teeth."
+      }
+    },
+    {
+      "id": "dental.pain",
+      "type": "step",
+      "icon": "tooth",
+      "title": {
+        "fa": "دندان‌درد: در خانه چه کنید",
+        "ps": "د غاښ درد: په کور کې څه وکړئ",
+        "en": "Toothache: what to do at home"
+      },
+      "text": {
+        "fa": "با آب گرم و نمک غرغره کنید. دندان را پاک نگه دارید. دوای درد از کلینیک کمک می‌کند. همین هفته به کلینیک بروید؛ دندان خود به خود جور نمی‌شود.",
+        "ps": "په تودو مالګینو اوبو خوله ومینځئ. غاښ پاک وساتئ. له کلینیک څخه د درد درمل مرسته کوي. په همدې اونۍ کې کلینیک ته ولاړ شئ؛ غاښ پخپله نه جوړېږي.",
+        "en": "Rinse with warm salt water. Keep the tooth clean. A pain medicine from the clinic can help. Go to the clinic this week; the tooth will not heal by itself."
+      }
+    },
+    {
+      "id": "dental.naswar",
+      "type": "step",
+      "icon": "no",
+      "title": {
+        "fa": "نسوار و سگرت دهن را خراب می‌کند",
+        "ps": "نسوار او سګرټ خوله خرابوي",
+        "en": "Naswar and smoking harm the mouth"
+      },
+      "text": {
+        "fa": "نسوار و سگرت باعث مرض بیره، افتادن دندان و سرطان دهن می‌شود. ترک کردن بهترین کاری است که برای دهن خود کرده می‌توانید.",
+        "ps": "نسوار او سګرټ د ورۍ ناروغي، د غاښونو لوېدل او د خولې سرطان رامنځته کوي. پرېښودل یې تر ټولو ښه کار دی چې د خپلې خولې لپاره یې کولای شئ.",
+        "en": "Naswar and cigarettes cause gum disease, loss of teeth and mouth cancer. Stopping is the best thing you can do for your mouth."
+      }
+    },
+    {
+      "id": "dental.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه و دوا",
+        "ps": "په کلینیک کې: معاینه او درمل",
+        "en": "At the clinic: check and medicine"
+      },
+      "text": {
+        "fa": "کارمند صحی دهن را می‌بیند، دوای درد می‌دهد و اگر بیره یا روی پندیده باشد، یک انتی‌بیوتیک مانند پنسیلین یا اموکسی‌سیلین می‌دهد. بعد شما را به داکتر دندان می‌فرستد.",
+        "ps": "روغتیايي کارکوونکی خوله ګوري، د درد درمل ورکوي او که وري یا مخ پړسېدلی وي، یو انټي بیوټیک لکه پنسلین یا اموکسي سیلین ورکوي. بیا مو د غاښونو ډاکټر ته لېږي.",
+        "en": "The health worker looks in the mouth, gives pain medicine and, if the gum or face is swollen, an antibiotic such as penicillin or amoxicillin. Then they send you to a dentist."
+      }
+    },
+    {
+      "id": "dental.dentist",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: داکتر دندان",
+        "ps": "په روغتون کې: د غاښونو ډاکټر",
+        "en": "At the hospital: the dentist"
+      },
+      "text": {
+        "fa": "داکتر دندان شفاخانهٔ ولسوالی دندان را پر می‌کند یا دندان خراب را می‌کشد. داکتران دندان خصوصی در ایبک هم این کار را می‌کنند، با پول. تداوی زود دندان را نجات می‌دهد.",
+        "ps": "د ولسوالۍ د روغتون د غاښونو ډاکټر غاښ ډکوي یا خراب غاښ باسي. په ایبک کې خصوصي د غاښونو ډاکټران هم دا کار کوي، په پیسو. ژر درملنه غاښ ژغوري.",
+        "en": "The district hospital dentist can fill a tooth or take out a rotten one. Private dentists in Aybak do this too, for a fee. Early treatment saves the tooth."
+      }
+    },
+    {
+      "id": "dental.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "dental.urgent.face",
+          "icon": "swelling",
+          "text": {
+            "fa": "دندان‌درد با روی یا گردن پندیده و تب",
+            "ps": "د غاښ درد له پړسېدلي مخ یا غاړې او تبې سره",
+            "en": "toothache with a swollen face or neck and fever"
+          }
+        },
+        {
+          "id": "dental.urgent.swallow",
+          "icon": "choking",
+          "text": {
+            "fa": "پندیدگی که بلعیدن یا نفس کشیدن را سخت می‌کند",
+            "ps": "پړسوب چې تېرول یا ساه اخیستل سختوي",
+            "en": "swelling that makes swallowing or breathing hard"
+          }
+        },
+        {
+          "id": "dental.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی از دهن که بند نمی‌شود",
+            "ps": "له خولې څخه وینه بهېدل چې نه درېږي",
+            "en": "bleeding from the mouth that does not stop"
+          }
+        },
+        {
+          "id": "dental.urgent.knocked",
+          "icon": "wound",
+          "text": {
+            "fa": "دندان دایمی افتاده؛ آن را در شیر بگذارید و فوراً بروید",
+            "ps": "دایمي غاښ لوېدلی؛ په شیدو کې یې کېږدئ او سمدستي ولاړ شئ",
+            "en": "an adult tooth knocked out; keep it in milk, go at once"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dental.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین هفته به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، همدا اونۍ کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic this week if someone has:"
+      },
+      "items": [
+        {
+          "id": "dental.soon.ache",
+          "icon": "tooth",
+          "text": {
+            "fa": "دندان‌درد، یا دندانی با سوراخ یا لکهٔ سیاه",
+            "ps": "د غاښ درد، یا داسې غاښ چې سوری یا تور داغ لري",
+            "en": "toothache, or a tooth with a hole or black spot"
+          }
+        },
+        {
+          "id": "dental.soon.gums",
+          "icon": "bleeding",
+          "text": {
+            "fa": "بیره‌ای که خون می‌دهد یا پندیده است",
+            "ps": "وري چې وینه کوي یا پړسېدلې وي",
+            "en": "gums that bleed or are swollen"
+          }
+        },
+        {
+          "id": "dental.soon.patch",
+          "icon": "lump",
+          "text": {
+            "fa": "زخم یا لکهٔ سفید در دهن بیش از ۲ هفته",
+            "ps": "په خوله کې زخم یا سپین داغ له ۲ اونیو زیات",
+            "en": "a sore or white patch in the mouth for over 2 weeks"
+          }
+        },
+        {
+          "id": "dental.soon.child",
+          "icon": "baby",
+          "text": {
+            "fa": "دندان‌های طفل که قهوه‌ای یا شکسته‌اند",
+            "ps": "د ماشوم غاښونه چې نسواري یا مات دي",
+            "en": "a child's teeth that are brown or broken"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dental.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "dental.dont.aspirin",
+          "icon": "no",
+          "text": {
+            "fa": "روی دندان دردناک اسپرین، تنباکو یا نسوار نگذارید.",
+            "ps": "پر دردناک غاښ اسپرین، تنباکو یا نسوار مه ږدئ.",
+            "en": "Do not put aspirin, tobacco or naswar on an aching tooth."
+          }
+        },
+        {
+          "id": "dental.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "برای دندان‌درد از دکان انتی‌بیوتیک نگیرید؛ دندان را جور نمی‌کند.",
+            "ps": "د غاښ درد لپاره له دوکان څخه انټي بیوټیک مه اخلئ؛ غاښ نه جوړوي.",
+            "en": "Do not take shop antibiotics for toothache; they do not fix the tooth."
+          }
+        },
+        {
+          "id": "dental.dont.pliers",
+          "icon": "wound",
+          "text": {
+            "fa": "نگذارید شخص بی‌تجربه دندان را با انبور بکشد.",
+            "ps": "مه پرېږدئ چې ناپوه کس غاښ په انبور وباسي.",
+            "en": "Do not let an untrained person pull a tooth with pliers."
+          }
+        }
+      ]
+    },
+    {
+      "id": "dental.pregnancy",
+      "type": "tip",
+      "icon": "pregnant",
+      "text": {
+        "fa": "خانم‌های حامله: دندان‌ها را خوب پاک کنید و به داکتر دندان بروید؛ مرض بیره در حاملگی زیاد است.",
+        "ps": "امیندوارې ښځې: غاښونه ښه پاک کړئ او د غاښونو ډاکټر ته ولاړ شئ؛ د ورۍ ناروغي په امیندوارۍ کې ډېره ده.",
+        "en": "Pregnant women: clean teeth well and see the dentist; gum disease is common in pregnancy."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Oral health (17 Mar 2025): tooth decay, gum disease, oral cancer; fluoride toothpaste twice daily; limit sugar; tobacco",
+    "WHO Global oral health status report (2022): burden of untreated caries in children and adults; Afghanistan country profile",
+    "Afghanistan National Standard Treatment Guidelines for primary level (2013), dental chapter (as far as readable): acute dental infection managed with analgesia and penicillin V, then referral to a dentist",
+    "Afghanistan BPHS (2010) and EPHS (2005): dental care is a hospital-level service (district hospital dentist); Afghanistan National Essential Medicines List (2014): penicillin V, amoxicillin, paracetamol",
+    "International Association of Dental Traumatology guidelines (2020): avulsed permanent tooth, store in milk and seek care immediately",
+    "Burden: survey of schoolchildren in Kabul (2019) reporting dental caries in about 79 percent with over 99 percent untreated (see research report for the reference)"
+  ],
+  "review": [
+    "Antibiotic names (penicillin V / amoxicillin) come from the NSTG 2013 dental chapter and the EML 2014; Mo to confirm they are what Samangan clinics actually give, or replace with 'an antibiotic'.",
+    "Dentist availability: a district hospital dentist is in the EPHS package but may not be in post at Aybak or Do-Ab; Aybak private dentists are in facilities.json. Check before publishing 'the district hospital dentist'.",
+    "Knocked-out adult tooth kept in milk (IADT 2020): keep only if Mo agrees it is realistic here.",
+    "Fluoride toothpaste availability in villages is uncertain; miswak kept as an alternative.",
+    "Kabul schoolchildren caries figure is from a single 2019 survey; the lead says 'very common' without a number on purpose.",
+    "Dari کریم دندان (toothpaste) and بیره (gum) are everyday Afghan words; Pashto ورۍ (gum) to be checked."
+  ]
+}

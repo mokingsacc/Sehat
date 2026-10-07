@@ -228,13 +228,19 @@
       }
     },
     {
-      "id": "falls-fractures.prevent",
-      "type": "tip",
+      "id": "falls-fractures.safety",
+      "type": "link",
+      "to": "topic/child-safety",
       "icon": "house",
+      "title": {
+        "fa": "جلوگیری از افتادن از بام",
+        "ps": "له بام څخه د لوېدو مخنیوی",
+        "en": "Prevent falls from roofs"
+      },
       "text": {
-        "fa": "دور بام‌های هموار دیوار کوتاه بسازید و نگذارید اطفال روی بام بازی کنند یا بخوابند.",
-        "ps": "د هوارو بامونو شاوخوا ټیټ دېوال جوړ کړئ او مه پرېږدئ چې ماشومان پر بام لوبې وکړي یا ویده شي.",
-        "en": "Build a low wall round flat roofs, and do not let children play or sleep on the roof."
+        "fa": "دیوار دور بام‌های هموار و زینه‌ها، و راه‌های دیگر حفاظت اطفال. صفحه را باز کنید.",
+        "ps": "د هوارو بامونو او زینو شاوخوا دېوال، او د ماشومانو د ساتنې نورې لارې. پاڼه پرانیزئ.",
+        "en": "Walls round flat roofs and stairs, and other ways to keep children safe. Open the page."
       }
     }
   ],
@@ -249,6 +255,7 @@
     "Moving the person on a door or board: transport in villages is by car or pickup, so this is a practical 'log-roll onto a board' message without the log-roll detail. Check it is safe to teach without training.",
     "Bonesetters (شکسته‌بند / ماتې تړونکی) are widely used in Afghanistan. Tight traditional binding can cause compartment syndrome and gangrene. The dont item is worded respectfully; check the tone with local staff.",
     "Ice or cold for 20 minutes: ERC/IFRC suggest cold for closed injuries (no set time; 20 minutes is common teaching).",
-    "Pashto 'د ملا تیر' for spine and 'ماتې تړونکی' for bonesetter: check."
+    "Pashto 'د ملا تیر' for spine and 'ماتې تړونکی' for bonesetter: check.",
+    "Home safety section (2026-10-07): falls-fractures.prevent repeated child-safety.roof. It is replaced by a link to child-safety (falls-fractures.safety)."
   ]
 }

@@ -204,13 +204,19 @@
       }
     },
     {
-      "id": "electric-shock.prevent",
-      "type": "tip",
+      "id": "electric-shock.safety",
+      "type": "link",
+      "to": "topic/electric-safety",
       "icon": "house",
+      "title": {
+        "fa": "جلوگیری از برق‌گرفتگی در خانه",
+        "ps": "په کور کې د برېښنا وهلو مخنیوی",
+        "en": "Prevent shocks at home"
+      },
       "text": {
-        "fa": "سیم‌ها را از زمین و آب دور نگه دارید، ساکت‌ها را بپوشانید و نگذارید اطفال به پلگ دست بزنند.",
-        "ps": "سیمونه له ځمکې او اوبو لرې وساتئ، ساکټونه پټ کړئ او مه پرېږدئ چې ماشومان پلګونو ته لاس ور وړي.",
-        "en": "Keep wires off the ground and away from water, cover sockets, and do not let children touch plugs."
+        "fa": "سیم، ساکت، بتری سولر و جنراتور: چطور خانواده را بی‌خطر نگه دارید. صفحه را باز کنید.",
+        "ps": "سیمونه، ساکټونه، د سولر بېټرۍ او جنراتور: څنګه خپله کورنۍ خوندي وساتئ. پاڼه پرانیزئ.",
+        "en": "Wires, sockets, solar batteries and generators: how to keep your family safe. Open the page."
       }
     }
   ],
@@ -223,6 +229,7 @@
   "review": [
     "'At least 20 steps' for high-voltage lines stands in for the 18 metres in UK/IFRC teaching.",
     "Hospital after any strong shock: ERC/IFRC advise review for high-voltage injury, burns, loss of consciousness or arrhythmia. A small tingle from a household plug with no symptoms does not need hospital. Alert title says 'a strong shock'.",
-    "Dari 'لچ' (bare), 'سویچ', 'ساکت' and Pashto 'ساکټ', 'سویچ', 'پلګ' are loan words. Check the everyday terms."
+    "Dari 'لچ' (bare), 'سویچ', 'ساکت' and Pashto 'ساکټ', 'سویچ', 'پلګ' are loan words. Check the everyday terms.",
+    "Home safety section (2026-10-07): electric-shock.prevent moved to the new electric-safety page and is replaced by a link to it (electric-shock.safety)."
   ]
 }

@@ -1,0 +1,316 @@
+{
+  "id": "epilepsy",
+  "section": "everyone",
+  "title": {
+    "fa": "مرگی (صرع)",
+    "ps": "مرګی (صرع)",
+    "en": "Fits (epilepsy)"
+  },
+  "summary": {
+    "fa": "تشنج‌های تکراری با دوای روزانهٔ کلینیک کنترول می‌شود.",
+    "ps": "تکراري اختلاجونه د کلینیک په ورځني درمل کنټرولېږي.",
+    "en": "Repeated fits can be controlled with daily medicine from the clinic."
+  },
+  "image": "epilepsy",
+  "blocks": [
+    {
+      "id": "epilepsy.lead",
+      "type": "lead",
+      "text": {
+        "fa": "مرگی تشنج‌های تکراری است: شخص می‌افتد، می‌لرزد، شاید زبانش را گاز بگیرد یا خودش را تر کند، بعد می‌خوابد. جن یا نفرین نیست و با تماس سرایت نمی‌کند. دوای روزانه در اکثر مردم تشنج را بند می‌کند.",
+        "ps": "مرګی تکراري اختلاجونه دي: کس لوېږي، رپېږي، ښايي ژبه وچیچي یا ځان لوند کړي، بیا ویده کېږي. پېری یا ښېراوې نه دي او په لمس نه خپرېږي. ورځني درمل په ډېری خلکو کې اختلاج دروي.",
+        "en": "Epilepsy is repeated fits: the person falls, shakes, may bite the tongue or wet themselves, then sleeps. It is not a spirit or a curse and does not pass by touch. Daily medicine stops the fits in most people."
+      }
+    },
+    {
+      "id": "epilepsy.during",
+      "type": "step",
+      "icon": "convulsion",
+      "title": {
+        "fa": "در وقت تشنج: او را در امان نگه دارید",
+        "ps": "د اختلاج پر وخت: خوندي یې وساتئ",
+        "en": "During a fit: keep them safe"
+      },
+      "text": {
+        "fa": "شخص را به پهلو روی زمین بخوابانید، دور از آتش، آب و چیزهای تیز. چیز نرمی زیر سرش بگذارید. او را محکم نگیرید. وقت را یادداشت کنید.",
+        "ps": "کس پر ځمکه په اړخ څملوئ، له اور، اوبو او تېرو شیانو لرې. د سر لاندې یې نرم شی کېږدئ. کلک یې مه نیسئ. وخت په یاد وساتئ.",
+        "en": "Lay the person on their side on the ground, away from fire, water and sharp things. Put something soft under the head. Do not hold them down. Note the time."
+      }
+    },
+    {
+      "id": "epilepsy.mouth",
+      "type": "step",
+      "icon": "no",
+      "title": {
+        "fa": "هیچ چیز در دهن نگذارید",
+        "ps": "په خوله کې هېڅ شی مه ږدئ",
+        "en": "Nothing in the mouth"
+      },
+      "text": {
+        "fa": "هرگز قاشق، پارچه، انگشت یا آب در دهن نگذارید؛ دندان را می‌شکند یا راه نفس را می‌بندد. شخص زبانش را بلعیده نمی‌تواند.",
+        "ps": "هېڅکله کاشوغه، ټوکر، ګوتې یا اوبه په خوله کې مه اچوئ؛ غاښ ماتوي یا د ساه لاره بندوي. کس خپله ژبه نه شي تېرولای.",
+        "en": "Never put a spoon, cloth, fingers or water in the mouth; it can break teeth or block breathing. The person cannot swallow the tongue."
+      }
+    },
+    {
+      "id": "epilepsy.after",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "بعد از تشنج",
+        "ps": "له اختلاج وروسته",
+        "en": "After the fit"
+      },
+      "text": {
+        "fa": "اکثر تشنج‌ها در چند دقیقه خود به خود بند می‌شوند. بگذارید شخص به پهلو استراحت کند تا کاملاً بیدار شود. پیشش بمانید. بعد برای معاینه به کلینیک بروید.",
+        "ps": "ډېری اختلاجونه په څو دقیقو کې پخپله درېږي. پرېږدئ چې کس په اړخ آرام وکړي تر څو پوره ویښ شي. ورسره پاتې شئ. بیا د معاینې لپاره کلینیک ته ولاړ شئ.",
+        "en": "Most fits stop by themselves within a few minutes. Let the person rest on their side until fully awake. Stay with them. Then go to the clinic for a check."
+      }
+    },
+    {
+      "id": "epilepsy.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "دوا را هر روز بخورید",
+        "ps": "درمل هره ورځ وخورئ",
+        "en": "Take the medicine every day"
+      },
+      "text": {
+        "fa": "دوای مرگی فقط وقتی اثر می‌کند که هر روز، برای سال‌ها خورده شود. هرگز ناگهان قطع نکنید؛ دوز فراموش‌شده تشنج را برمی‌گرداند. پیش از تمام شدن، دوای بعدی را بگیرید.",
+        "ps": "د مرګي درمل یوازې هغه وخت اغېز کوي چې هره ورځ، د کلونو لپاره وخوړل شي. هېڅکله یې ناڅاپه مه پرېږدئ؛ پاتې ډوز اختلاج بېرته راولي. له خلاصېدو مخکې راتلونکي درمل واخلئ.",
+        "en": "Epilepsy medicine works only if taken every single day, for years. Never stop suddenly; missed doses bring fits back. Get the next supply before it runs out."
+      }
+    },
+    {
+      "id": "epilepsy.safety",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "با مرگی در امان زندگی کنید",
+        "ps": "له مرګي سره خوندي ژوند وکړئ",
+        "en": "Live safely with epilepsy"
+      },
+      "text": {
+        "fa": "تنها آب‌بازی یا غسل نکنید، به بام نروید، و کنار آتش روباز یا ماشین کار نکنید. وقتی می‌پزید کسی نزدیک باشد. خوب بخوابید؛ خستگی تشنج می‌آورد. اطفال به مکتب رفته می‌توانند.",
+        "ps": "یوازې لامبو یا غسل مه کوئ، بام ته مه خېژئ، او د خلاص اور یا ماشین تر څنګ کار مه کوئ. چې پخلی کوئ څوک نږدې وي. ښه ویده شئ؛ ستړیا اختلاج راولي. ماشومان ښوونځي ته تللای شي.",
+        "en": "Do not swim or bathe alone, climb roofs, or work next to open fire or machines. Cook with someone nearby. Sleep well; tiredness brings fits on. Children can go to school."
+      }
+    },
+    {
+      "id": "epilepsy.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه و دوای روزانه",
+        "ps": "په کلینیک کې: معاینه او ورځني درمل",
+        "en": "At the clinic: check and daily medicine"
+      },
+      "text": {
+        "fa": "کارمند صحی می‌پرسد تشنج چه شکلی است و تب یا ضربه را رد می‌کند. دوای مرگی (فنوباربیتال یا کاربامازپین) در مرکز صحی یا شفاخانه شروع می‌شود، بعد از کلینیک گرفته می‌شود.",
+        "ps": "روغتیايي کارکوونکی پوښتي چې اختلاج څنګه ښکاري او تبه یا ټپ ردوي. د مرګي درمل (فینوباربیټال یا کاربامازېپین) په روغتیايي مرکز یا روغتون کې پیلېږي، بیا له کلینیک څخه اخیستل کېږي.",
+        "en": "The health worker asks what the fits look like and rules out fever or injury. Epilepsy medicine (phenobarbital or carbamazepine) is started at a health centre or hospital, then collected locally."
+      }
+    },
+    {
+      "id": "epilepsy.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: تشنج طولانی",
+        "ps": "په روغتون کې: اوږد اختلاج",
+        "en": "At the hospital: a long fit"
+      },
+      "text": {
+        "fa": "تشنجی که بیش از ۵ دقیقه دوام کند، یا تشنج‌های پشت سر هم، حالت عاجل است. شفاخانه برای بند کردن آن دوایی با پیچکاری یا از راه مقعد، و اکسیجن می‌دهد و علت را جستجو می‌کند.",
+        "ps": "هغه اختلاج چې له ۵ دقیقو زیات دوام وکړي، یا پرله پسې اختلاجونه، بېړنی حالت دی. روغتون د درولو لپاره یې په پیچکارۍ یا د مقعد له لارې درمل، او اکسیجن ورکوي او لامل یې لټوي.",
+        "en": "A fit over 5 minutes, or fits one after another, is an emergency. The hospital gives medicine by injection or into the rectum to stop it, oxygen, and looks for the cause."
+      }
+    },
+    {
+      "id": "epilepsy.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "epilepsy.urgent.long",
+          "icon": "clock",
+          "text": {
+            "fa": "تشنجی که بیش از ۵ دقیقه دوام کند",
+            "ps": "هغه اختلاج چې له ۵ دقیقو زیات دوام وکړي",
+            "en": "a fit lasting more than 5 minutes"
+          }
+        },
+        {
+          "id": "epilepsy.urgent.second",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج دوم پیش از بیدار شدن از اولی",
+            "ps": "دویم اختلاج مخکې له دې چې له لومړي ویښ شي",
+            "en": "a second fit before waking from the first"
+          }
+        },
+        {
+          "id": "epilepsy.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تشنج با تب یا گردن شخ",
+            "ps": "اختلاج له تبې یا کلکې غاړې سره",
+            "en": "a fit with fever or a stiff neck"
+          }
+        },
+        {
+          "id": "epilepsy.urgent.head",
+          "icon": "headache",
+          "text": {
+            "fa": "تشنج بعد از ضربه به سر",
+            "ps": "له سر ټپي کېدو وروسته اختلاج",
+            "en": "a fit after a head injury"
+          }
+        },
+        {
+          "id": "epilepsy.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "تشنج در خانم حامله یا مادر تازه ولادت‌کرده",
+            "ps": "په امیندوارې ښځې یا نوې مور کې اختلاج",
+            "en": "a fit in a pregnant woman or new mother"
+          }
+        },
+        {
+          "id": "epilepsy.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "بد نفس می‌کشد، یا بعد از ختم لرزش هنوز بی‌هوش است",
+            "ps": "ساه یې خرابه ده، یا د رپېدو له درېدو وروسته لا هم بې هوښه دی",
+            "en": "breathing badly, or still unconscious after the shaking stops"
+          }
+        }
+      ]
+    },
+    {
+      "id": "epilepsy.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "epilepsy.soon.first",
+          "icon": "convulsion",
+          "text": {
+            "fa": "اولین تشنج، بعد از اینکه شخص به حال آمد",
+            "ps": "لومړی اختلاج، کله چې کس ځان ته راشي",
+            "en": "a first fit, once the person has recovered"
+          }
+        },
+        {
+          "id": "epilepsy.soon.back",
+          "icon": "calendar",
+          "text": {
+            "fa": "تشنج‌هایی که با وجود دوا برمی‌گردند",
+            "ps": "اختلاجونه چې د درملو سره سره بېرته راځي",
+            "en": "fits coming back despite the medicine"
+          }
+        },
+        {
+          "id": "epilepsy.soon.supply",
+          "icon": "pill",
+          "text": {
+            "fa": "دوا رو به تمام شدن است، یا عوارض دارد",
+            "ps": "درمل خلاصېدو ته نږدې دي، یا اړخیزې اغېزې لري",
+            "en": "medicine about to run out, or side effects"
+          }
+        },
+        {
+          "id": "epilepsy.soon.child",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل مبتلا به تشنج که خوب یاد نمی‌گیرد یا رشد نمی‌کند",
+            "ps": "د اختلاج لرونکی ماشوم چې ښه نه زده کوي یا نه لویېږي",
+            "en": "a child with fits who is not learning or growing well"
+          }
+        }
+      ]
+    },
+    {
+      "id": "epilepsy.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "epilepsy.dont.mouth",
+          "icon": "no",
+          "text": {
+            "fa": "هیچ چیز در دهن نگذارید و آن را به زور باز نکنید.",
+            "ps": "هېڅ شی په خوله کې مه اچوئ او په زور یې مه خلاصوئ.",
+            "en": "Do not put anything in the mouth or force it open."
+          }
+        },
+        {
+          "id": "epilepsy.dont.hold",
+          "icon": "people",
+          "text": {
+            "fa": "شخص را محکم نگیرید، سرش داد نزنید و آب نپاشید.",
+            "ps": "کس کلک مه نیسئ، ورباندې مه چیغې وهئ او اوبه مه شیندئ.",
+            "en": "Do not hold the person down, shout at them or splash water."
+          }
+        },
+        {
+          "id": "epilepsy.dont.stop",
+          "icon": "pill",
+          "text": {
+            "fa": "وقتی تشنج مدتی نیامده دوا را قطع نکنید.",
+            "ps": "کله چې اختلاج یو څه وخت نه وي راغلی درمل مه پرېږدئ.",
+            "en": "Do not stop the medicine when fits have gone for a while."
+          }
+        },
+        {
+          "id": "epilepsy.dont.exclude",
+          "icon": "heart",
+          "text": {
+            "fa": "شخص مبتلا به مرگی را از مکتب، کار یا ازدواج باز ندارید.",
+            "ps": "د مرګي لرونکی کس له ښوونځي، کار یا واده مه منع کوئ.",
+            "en": "Do not keep a person with epilepsy from school, work or marriage."
+          }
+        }
+      ]
+    },
+    {
+      "id": "epilepsy.family",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "به فامیل و همسایه‌ها یاد بدهید چه کنند. ترس و شرم مانع گرفتن دوایی می‌شود که اثر می‌کند.",
+        "ps": "کورنۍ او ګاونډیانو ته ورزده کړئ چې څه وکړي. وېره او شرم خلک له هغو درملو منع کوي چې اغېز کوي.",
+        "en": "Teach the family and neighbours what to do. Fear and shame stop people getting medicine that works."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Epilepsy (7 Feb 2024): up to 70 percent of people can be seizure-free with low-cost daily medicine; stigma; first aid",
+    "WHO mhGAP Intervention Guide, version 2.0 (2016) and mhGAP guideline update (2023): epilepsy module (first aid during a seizure, danger signs, phenobarbital, carbamazepine, phenytoin or valproate by non-specialist health workers, status epilepticus referral)",
+    "WHO Pocket Book of Hospital Care for Children (2013): convulsions, rectal or intravenous diazepam if a seizure lasts over 5 minutes",
+    "Afghanistan IPEHS (2019): epilepsy treatment initiated at district or provincial hospital and continued at CHC level; BPHS (2010): phenobarbital and carbamazepine in the CHC drug list; Afghanistan National Essential Medicines List (2014)",
+    "Burden: Afghanistan mental health survey (2017) and GBD estimates place epilepsy among the common neurological conditions; no Samangan-specific data (see research report)"
+  ],
+  "review": [
+    "Medicine names (phenobarbital, carbamazepine) follow BPHS 2010 CHC list and mhGAP; valproate is at district hospital level. Remove names if Mo prefers.",
+    "Where treatment is started: IPEHS 2019 says district/provincial hospital, mhGAP allows trained non-specialists at primary care. Text says 'health centre or hospital'.",
+    "'It is not a spirit or a curse' addresses common beliefs; check it reads as respectful and Islamic-neutral in Dari and Pashto.",
+    "'Do not keep a person with epilepsy from school, work or marriage' touches social norms; Mo may soften or remove it.",
+    "'Into the rectum' (rectal diazepam) is said plainly in the hospital block; adjust if felt inappropriate for narration.",
+    "A fit in pregnancy (eclampsia) is already in pregnancy-danger; included here so a listener on this page still goes now.",
+    "Dari مرگی and Pashto مرګی are the common words; صرع added in brackets."
+  ]
+}

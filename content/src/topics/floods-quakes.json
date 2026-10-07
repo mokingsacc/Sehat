@@ -113,70 +113,21 @@
       }
     },
     {
-      "id": "floods-quakes.urgent",
-      "type": "alert",
-      "level": "urgent",
+      "id": "floods-quakes.hurt-em",
+      "type": "link",
+      "to": "emergency",
+      "icon": "warning",
+      "urgent": true,
       "title": {
-        "fa": "اگر کسی بعد از سیلاب یا زلزله این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
-        "ps": "که څوک له سېلاب یا زلزلې وروسته دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
-        "en": "Go to hospital now, day or night, if after a flood or earthquake someone:"
+        "fa": "کسی زخمی شده یا زیر آوار مانده؟",
+        "ps": "څوک ټپي شوی یا د خاورو لاندې پاتې دی؟",
+        "en": "Someone hurt or trapped?"
       },
-      "items": [
-        {
-          "id": "floods-quakes.urgent.trapped",
-          "icon": "house",
-          "text": {
-            "fa": "زیر دیوار یا سقف افتاده گیر مانده بود",
-            "ps": "د لوېدلي دېوال یا چت لاندې بند پاتې شوی و",
-            "en": "was trapped under a fallen wall or roof"
-          }
-        },
-        {
-          "id": "floods-quakes.urgent.bleeding",
-          "icon": "bleeding",
-          "text": {
-            "fa": "خونریزی شدید دارد",
-            "ps": "ډېره وینه ترې بهېږي",
-            "en": "is bleeding heavily"
-          }
-        },
-        {
-          "id": "floods-quakes.urgent.head",
-          "icon": "sleepy",
-          "text": {
-            "fa": "سرش ضربه خورده و استفراغ می‌کند یا خواب‌آلود است",
-            "ps": "سر یې ټکر خوړلی او کانګې کوي یا خوب وړی دی",
-            "en": "hit their head and vomits or is sleepy"
-          }
-        },
-        {
-          "id": "floods-quakes.urgent.breathing",
-          "icon": "breathe",
-          "text": {
-            "fa": "به سختی نفس می‌کشد یا درد سینه دارد",
-            "ps": "په سختۍ سا اخلي یا د سینې درد لري",
-            "en": "has trouble breathing or chest pain"
-          }
-        },
-        {
-          "id": "floods-quakes.urgent.limb",
-          "icon": "wound",
-          "text": {
-            "fa": "نمی‌تواند دست یا پا را حرکت دهد",
-            "ps": "لاس یا پښه نه شي خوځولای",
-            "en": "cannot move an arm or leg"
-          }
-        },
-        {
-          "id": "floods-quakes.urgent.water",
-          "icon": "water",
-          "text": {
-            "fa": "از آب سیلاب بیرون کشیده شده است",
-            "ps": "د سېلاب له اوبو ایستل شوی",
-            "en": "was pulled out of flood water"
-          }
-        }
-      ]
+      "text": {
+        "fa": "صفحهٔ حالت عاجل را باز کنید: همین حالا چه کنید، قدم به قدم.",
+        "ps": "د بیړني حالت پاڼه پرانیزئ: همدا اوس څه وکړئ، ګام په ګام.",
+        "en": "Open the Emergency page: what to do now, step by step."
+      }
     },
     {
       "id": "floods-quakes.dont",
@@ -232,11 +183,14 @@
     "WHO fact sheet / technical note: Flooding and communicable diseases (diarrhoea, safe water)",
     "WHO/UNICEF Facts for Life (2010): emergencies",
     "IFRC International first aid, resuscitation and education guidelines (2020): crush injury, head injury, drowning",
-    "Local events: 3 Nov 2025 M6.2 earthquake (Balkh-Samangan border); spring floods in Feroz Nakhchir and Khuram wa Sarbagh 2026 (see research_notes samangan_profile.md)"
+    "Local events: 3 Nov 2025 M6.2 earthquake (Balkh-Samangan border); spring floods in Feroz Nakhchir and Khuram wa Sarbagh 2026 (see research_notes samangan_profile.md)",
+    "WHO/PAHO guidance on crush syndrome after earthquakes (fluids to protect the kidneys); WHO fact sheet: Drowning (2024): medical review after any submersion"
   ],
   "review": [
     "Drop, cover, hold on (IFRC) versus leaving a single-storey mud-brick house quickly: in rural Afghan adobe homes, some agencies advise getting out at once if you are by the door on the ground floor. Choose the message for Samangan.",
     "The lead names Samangan. Keep it if the book is Samangan-only; otherwise make it general.",
-    "'Trapped under a wall or roof' is urgent even if the person looks well (crush injury). Check the urgent level."
+    "'Trapped under a wall or roof' is urgent even if the person looks well (crush injury). Check the urgent level.",
+    "Crush syndrome and secondary drowning explained in plain words; the Dari/Pashto also mention fluids, oxygen and wound care at the hospital.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: floods-quakes.hospital, floods-quakes.urgent. Urgent signs are reached through the red link to the Health side."
   ]
 }

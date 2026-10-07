@@ -1,0 +1,143 @@
+{
+  "id": "home-earning",
+  "section": "everyone",
+  "title": {
+    "fa": "درآمد از خانه",
+    "ps": "له کوره عاید",
+    "en": "Earning from home"
+  },
+  "summary": {
+    "fa": "پول کم ولی پیوسته از لبنیات، تخم، ترکاری و خیاطی.",
+    "ps": "له لبنیاتو، هګیو، سبزیو او خیاطۍ لږې خو دوامداره پیسې.",
+    "en": "Small, steady money from dairy, eggs, vegetables and sewing."
+  },
+  "image": "home-earning",
+  "blocks": [
+    {
+      "id": "home-earning.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بسیاری از زنان از خانه کمی پول به دست می‌آورند. با چیزی که دارید کوچک شروع کنید و حساب هر پول را نگه دارید.",
+        "ps": "ډېرې ښځې له کوره لږې پیسې ګټي. په هغه څه چې لرئ یې کوچنی پیل وکړئ او د هرې پیسې حساب وساتئ.",
+        "en": "Many women earn a little money from home. Start small with what you already have, and keep track of every coin."
+      }
+    },
+    {
+      "id": "home-earning.dairy",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "ماست و قروت",
+        "ps": "مستې او قروت",
+        "en": "Yoghurt and qurut"
+      },
+      "text": {
+        "fa": "ماست و قروت را از شیر جوشانده، با ظرف و دست پاک بسازید. لبنیات پاک و خوش‌مزه مشتری را دوباره می‌آورد.",
+        "ps": "مستې او قروت له ایشول شویو شیدو، په پاکو لوښو او لاسونو جوړ کړئ. پاک او خوندور لبنیات پېرودونکي بیا راولي.",
+        "en": "Make yoghurt and qurut from boiled milk, with clean pots and hands. Clean, tasty dairy brings buyers back."
+      }
+    },
+    {
+      "id": "home-earning.sell",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "تخم و ترکاری بفروشید",
+        "ps": "هګۍ او سبزي وپلورئ",
+        "en": "Sell eggs and vegetables"
+      },
+      "text": {
+        "fa": "وقتی اطفال سیر خوردند، باقی را بفروشید: تخم، سبزی، میوهٔ خشک. با همسایه‌ها یکجا بفروشید تا در بازار قیمت بهتر بگیرید.",
+        "ps": "کله چې ماشومان موړ شول، پاتې یې وپلورئ: هګۍ، سبزي، وچه مېوه. له ګاونډیانو سره یوځای وپلورئ چې په بازار کې ښه بیه ترلاسه کړئ.",
+        "en": "When the children have had enough, sell the rest: eggs, greens, dried fruit. Sell together with neighbours to get a better price in the bazaar."
+      }
+    },
+    {
+      "id": "home-earning.sew",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "خیاطی و خامک‌دوزی",
+        "ps": "خیاطي او خامک دوزي",
+        "en": "Tailoring and embroidery"
+      },
+      "text": {
+        "fa": "خیاطی و خامک‌دوزی را می‌شود بین کارهای دیگر انجام داد. پیش از ساختن زیاد، از همسایه‌ها و دکان‌ها بپرسید چه می‌خواهند.",
+        "ps": "خیاطي او خامک دوزي د نورو کارونو ترمنځ کېدای شي. له ډېر جوړولو مخکې، له ګاونډیانو او دوکانونو وپوښتئ چې څه غواړي.",
+        "en": "Sewing and khamak embroidery fit between other work. Ask neighbours and shops what they want before you make a lot."
+      }
+    },
+    {
+      "id": "home-earning.notebook",
+      "type": "step",
+      "icon": "card",
+      "title": {
+        "fa": "یک کتابچهٔ پول داشته باشید",
+        "ps": "د پیسو یوه کتابچه ولرئ",
+        "en": "Keep a money notebook"
+      },
+      "text": {
+        "fa": "هر روز بنویسید یا نشانی بگذارید که چه خرج کردید و چه به دست آوردید. طفلی که نوشتن می‌داند می‌تواند کمک کند. بعد می‌بینید کدام کار واقعاً پول می‌آورد.",
+        "ps": "هره ورځ ولیکئ یا نښه کېږدئ چې څه مو لګولي او څه مو ګټلي. هغه ماشوم چې لیکل زده لري مرسته کولای شي. بیا به ووینئ چې کوم کار رښتیا پیسې راوړي.",
+        "en": "Each day, write or mark what you spent and what you earned. A child who can write can help. Then you see what really brings money."
+      },
+      "picture": "food-money-notebook"
+    },
+    {
+      "id": "home-earning.group",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "در یک گروه پس‌انداز کنید",
+        "ps": "په یوه ډله کې پس انداز وکړئ",
+        "en": "Save together in a group"
+      },
+      "text": {
+        "fa": "در یک گروه پس‌انداز، ۱۰ تا ۲۵ زن هر هفته هر کدام کمی پول می‌گذارند. اعضا می‌توانند برای بز، تخم یا یک حالت عاجل قرض بگیرند.",
+        "ps": "د پس انداز په یوه ډله کې، له ۱۰ تر ۲۵ ښځې هره اونۍ هره یوه لږې پیسې ږدي. غړي کولای شي د وزې، تخم یا یوې بیړنۍ پېښې لپاره پور واخلي.",
+        "en": "In a savings group, 10 to 25 women each put in a little money every week. Members can borrow for a goat, seeds or an emergency."
+      }
+    },
+    {
+      "id": "home-earning.transport",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "پول کلینیک را جدا نگه دارید",
+        "ps": "د کلینیک پیسې جلا وساتئ",
+        "en": "Keep money aside for the clinic"
+      },
+      "text": {
+        "fa": "کمی پول را برای کرایهٔ موتر تا کلینیک یا شفاخانه جدا نگه دارید. در حالت عاجل وقت قرض گرفتن نیست.",
+        "ps": "لږې پیسې د کلینیک یا روغتون تر موټر کرایې لپاره جلا وساتئ. په بیړني حالت کې د پور اخیستلو وخت نه وي.",
+        "en": "Keep a little money aside for a car to the clinic or hospital. In an emergency there is no time to borrow."
+      }
+    },
+    {
+      "id": "home-earning.family",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "دربارهٔ برنامهٔ خود با خانواده گپ بزنید. وقتی همه کمک کنند، کار بهتر پیش می‌رود.",
+        "ps": "د خپل پلان په اړه له کورنۍ سره خبرې وکړئ. کله چې ټول مرسته وکړي، کار ښه پرمخ ځي.",
+        "en": "Talk with the family about your plans. Work goes better when everyone helps."
+      }
+    }
+  ],
+  "sources": [
+    "Afghanaid: What is a self-help group? (groups of 10-25 women saving weekly, rotating loans, literacy and numeracy, vocational training from tailoring to poultry rearing; dressmaking and dairy processing)",
+    "Afghanaid / UK Aid Match (25 Sep 2023): By her side: dairy production and selling to neighbours",
+    "Afghanaid (2023): Kitchen gardens: selling surplus vegetables in the market and to neighbours",
+    "World Bank (2019): Afghan women grow their income through kitchen gardening (selling to locals and village markets; pickles)",
+    "FAO in Afghanistan (2016): home garden success story (income from vegetables and processing)",
+    "CONTENT_SPEC golden rule 6: plan money and transport ahead for emergencies"
+  ],
+  "review": [
+    "Kept short and practical, as Mo asked. No figures for income.",
+    "Savings groups: described without interest (Islamic-neutral; Afghan self-help groups usually lend without interest). 10 to 25 members is Afghanaid's figure.",
+    "'Earn from home' and 'sell together with neighbours': check what is acceptable for women in Samangan villages now (selling through a male relative or a woman trader may be the norm). The text avoids saying who goes to the bazaar.",
+    "The transport-money step ties the page back to health (golden rule 6). Drop if it feels off-topic.",
+    "Icons wanted: 'needle' or 'sewing' (people used), 'notebook' (card used). Step picture: food-money-notebook.",
+    "Words to check: Dari خامک~دوزی, لبنیات, کتابچه, گروه پس~انداز; Pashto خامک دوزي, د پس انداز ډله (or سپما), پېرودونکي (buyers), موړ (full)."
+  ]
+}

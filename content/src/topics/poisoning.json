@@ -232,6 +232,22 @@
         "ps": "که چا په قصد زهر خوړلي، ورسره پاتې شئ او روغتون ته یې یوسئ. وروسته په نرمۍ یې حال وپوښتئ.",
         "en": "If someone took poison on purpose, stay with them and take them to hospital. Later, gently ask how they feel."
       }
+    },
+    {
+      "id": "poisoning.storage",
+      "type": "link",
+      "to": "topic/safe-storage",
+      "icon": "house",
+      "title": {
+        "fa": "جلوگیری از مسمومیت در خانه",
+        "ps": "په کور کې د زهري کېدو مخنیوی",
+        "en": "Prevent poisoning at home"
+      },
+      "text": {
+        "fa": "دوا، تیل خاک و دوای زراعتی را قفل کنید و هر کدام را در بوتل خودش نگه دارید. صفحه را باز کنید.",
+        "ps": "درمل، خاورین تېل او د کرنې درمل تړلي وساتئ او هر یو په خپل بوتل کې کېږدئ. پاڼه پرانیزئ.",
+        "en": "Lock away medicines, kerosene and farm sprays, and keep each in its own bottle. Open the page."
+      }
     }
   ],
   "sources": [
@@ -247,6 +263,7 @@
     "Organophosphate signs are simplified to 'sweat, drool or twitch'. Small pupils are left out because they are hard to judge.",
     "Rat poison: Afghan rat poisons may be anticoagulants (bleeding days later), zinc or aluminium phosphide ('rice tablet', highly lethal), or others. Phosphide poisoning gives off a gas. Consider adding 'keep the room aired' if it is common locally.",
     "Iron tablets are given as an example of a delayed-harm medicine (pregnancy iron is in many homes).",
-    "Self-harm by poisoning (pesticides) is a major cause of suicide in the region. The link block goes to the Stress page. Check the tone."
+    "Self-harm by poisoning (pesticides) is a major cause of suicide in the region. The link block goes to the Stress page. Check the tone.",
+    "Home safety section (2026-10-07): new link poisoning.storage to the safe-storage page (prevention was not on this page before)."
   ]
 }

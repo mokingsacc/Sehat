@@ -1,0 +1,200 @@
+{
+  "id": "safe-storage",
+  "section": "everyone",
+  "title": {
+    "fa": "نگهداری بی‌خطر دوا و زهر",
+    "ps": "د درملو او زهرو خوندي ساتل",
+    "en": "Store medicines and poisons safely"
+  },
+  "summary": {
+    "fa": "دوا، تیل خاک، دوای زراعتی و زهر موش: قفل کنید.",
+    "ps": "درمل، خاورین تېل، د کرنې درمل او د موږکانو زهر: تړلي یې وساتئ.",
+    "en": "Medicines, kerosene, farm sprays and rat poison: lock them away."
+  },
+  "image": "safe-storage",
+  "blocks": [
+    {
+      "id": "safe-storage.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اطفال اکثراً دوا، تیل خاک یا دوای زراعتی را در خانه پیدا می‌کنند و می‌خورند. نگهداری بی‌خطر جلوی بیشتر این مسمومیت‌ها را می‌گیرد.",
+        "ps": "ماشومان اکثره په کور کې درمل، خاورین تېل یا د کرنې درمل پیدا کوي او خوري یې. خوندي ساتل د دې ډېرو زهري کېدو مخه نیسي.",
+        "en": "Children often find medicines, kerosene or farm sprays at home and drink or eat them. Storing them safely prevents most of these poisonings."
+      }
+    },
+    {
+      "id": "safe-storage.lock",
+      "type": "step",
+      "icon": "poison",
+      "title": {
+        "fa": "زهر و دوا را قفل کنید",
+        "ps": "زهر او درمل تړلي وساتئ",
+        "en": "Lock away poisons and medicines"
+      },
+      "text": {
+        "fa": "دوا، تیل خاک، زهر موش و دوای زراعتی را بلند، در صندوق یا الماری قفل‌دار نگه دارید. کلید پیش یکی از بزرگان خانه باشد.",
+        "ps": "درمل، خاورین تېل، د موږکانو زهر او د کرنې درمل لوړ، په قلف لرونکي صندوق یا المارۍ کې وساتئ. کیلي دې د کور له یو مشر سره وي.",
+        "en": "Keep medicines, kerosene, rat poison and farm sprays high up, in a locked box or cupboard. An adult keeps the key."
+      }
+    },
+    {
+      "id": "safe-storage.bottle",
+      "type": "step",
+      "icon": "poison",
+      "title": {
+        "fa": "هر کدام را در بوتل خودش نگه دارید",
+        "ps": "هر یو په خپل بوتل کې وساتئ",
+        "en": "Keep each in its own bottle"
+      },
+      "text": {
+        "fa": "هرگز تیل خاک، دوای زراعتی یا دوا را در بوتل آب یا جوس نریزید. اطفال و بزرگان به اشتباه از آن می‌نوشند.",
+        "ps": "هېڅکله خاورین تېل، د کرنې درمل یا نور درمل د اوبو یا جوس په بوتل کې مه اچوئ. ماشومان او لویان یې په غلطۍ څښي.",
+        "en": "Never pour kerosene, sprays or medicines into a water or juice bottle. Children and adults drink from them by mistake."
+      }
+    },
+    {
+      "id": "safe-storage.sprays",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "دوای زراعتی را بیرون از خانه نگه دارید",
+        "ps": "د کرنې درمل له کوره بهر وساتئ",
+        "en": "Store farm sprays outside the house"
+      },
+      "text": {
+        "fa": "دوای زراعتی را در گدام یا صندوق قفل‌دار در بیرون، دور از غذا، آب و حیوانات نگه دارید. فقط به اندازهٔ ضرورت بخرید.",
+        "ps": "د کرنې درمل له کوره بهر په قلف لرونکي ګودام یا صندوق کې، له خوړو، اوبو او څارویو لرې وساتئ. یوازې د اړتیا په اندازه یې واخلئ.",
+        "en": "Keep farm sprays in a locked shed or box outside, away from food, water and animals. Buy only as much as you need."
+      }
+    },
+    {
+      "id": "safe-storage.empty",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "ظرف دوای زراعتی را دوباره به کار نبرید",
+        "ps": "د کرنې درملو خالي لوښي بیا مه کاروئ",
+        "en": "Never reuse spray containers"
+      },
+      "text": {
+        "fa": "در بوتل یا خلطهٔ خالی دوای زراعتی آب، روغن یا غذا نگه ندارید. سه بار بشویید، سوراخ کنید و دور از آب زیر خاک کنید.",
+        "ps": "د کرنې درملو په خالي بوتلونو یا کڅوړو کې اوبه، غوړي یا خواړه مه ساتئ. درې ځله یې ومینځئ، سوري یې کړئ او له اوبو لرې یې ښخ کړئ.",
+        "en": "Do not keep water, oil or food in empty spray bottles or bags. Rinse them three times, make holes in them, and bury them far from water."
+      }
+    },
+    {
+      "id": "safe-storage.after",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "بعد از دواپاشی بشویید",
+        "ps": "له درملو شيندلو وروسته ومینځئ",
+        "en": "Wash after spraying"
+      },
+      "text": {
+        "fa": "بعد از دواپاشی دست، رو و لباس خود را بشویید. اطفال و حیوانات را تا خشک شدن دوا از زمین دور نگه دارید.",
+        "ps": "له درملو شيندلو وروسته لاسونه، مخ او جامې ومینځئ. ماشومان او څاروي تر هغه له پټي لرې وساتئ چې درمل وچ شي.",
+        "en": "After spraying, wash your hands, face and clothes. Keep children and animals out of the field until the spray has dried."
+      }
+    },
+    {
+      "id": "safe-storage.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "دوا را هرگز شیرینی نگویید",
+        "ps": "درملو ته هېڅکله خواږه مه وایئ",
+        "en": "Medicines: never call them sweets"
+      },
+      "text": {
+        "fa": "دوا را در پاکت خودش با نامش نگه دارید. آن را شیرینی نگویید، و دواهای کهنه را به دواخانه یا کلینیک پس ببرید.",
+        "ps": "درمل په خپلو پاکټونو کې د نوم سره وساتئ. خواږه یې مه بولئ، او زاړه درمل درملتون یا کلینیک ته بېرته یوسئ.",
+        "en": "Keep medicines in their packets, with their names. Do not call them sweets, and take old medicines back to the pharmacy or clinic."
+      }
+    },
+    {
+      "id": "safe-storage.poisoning",
+      "type": "link",
+      "to": "topic/poisoning",
+      "icon": "poison",
+      "title": {
+        "fa": "کسی زهر خورده است؟",
+        "ps": "چا زهر خوړلي؟",
+        "en": "Someone swallowed poison?"
+      },
+      "text": {
+        "fa": "او را به استفراغ وادار نکنید. بوتل را بگیرید و همین حالا به شفاخانه بروید، شب باشد یا روز. صفحه را باز کنید.",
+        "ps": "کانګې ورته مه راولئ. بوتل واخلئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. پاڼه پرانیزئ.",
+        "en": "Do not make them vomit. Take the bottle and go to hospital now, day or night. Open the page."
+      },
+      "urgent": true
+    },
+    {
+      "id": "safe-storage.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "safe-storage.dont.bag",
+          "icon": "no",
+          "text": {
+            "fa": "دوا را در بکس دستی یا جیبی که طفل به آن می‌رسد نگه ندارید",
+            "ps": "درمل په داسې بکس یا جېب کې مه ساتئ چې ماشوم ورته رسېږي",
+            "en": "keep medicines in a handbag or pocket a child can reach"
+          }
+        },
+        {
+          "id": "safe-storage.dont.room",
+          "icon": "no",
+          "text": {
+            "fa": "دوای زراعتی یا تیل خاک را جایی که مردم می‌خوابند، پخت‌وپز می‌کنند یا غذا می‌خورند نگه ندارید",
+            "ps": "د کرنې درمل یا خاورین تېل هلته مه ساتئ چې خلک پکې ویده کېږي، پخلی کوي یا ډوډۍ خوري",
+            "en": "keep sprays or kerosene where people sleep, cook or eat"
+          }
+        },
+        {
+          "id": "safe-storage.dont.hands",
+          "icon": "no",
+          "text": {
+            "fa": "با دست لچ دواپاشی نکنید و نگذارید اطفال کمک کنند",
+            "ps": "په لوڅو لاسونو درمل مه شيندئ او مه پرېږدئ چې ماشومان مرسته وکړي",
+            "en": "spray with bare hands, or let children help"
+          }
+        }
+      ]
+    },
+    {
+      "id": "safe-storage.protect",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "قفل کردن دوای زراعتی و دوا، کسی از خانواده را هم که روزهای بسیار سختی دارد، محافظت می‌کند.",
+        "ps": "د کرنې درملو او نورو درملو تړلي ساتل د کورنۍ هغه غړی هم ساتي چې ډېر سخت وخت تېروي.",
+        "en": "Locking sprays and medicines away also protects anyone in the family who is going through a very hard time."
+      }
+    }
+  ],
+  "sources": [
+    "WHO/UNICEF World report on child injury prevention (2008): poisoning (safe storage, original containers, child-resistant packaging)",
+    "WHO Safer access to pesticides for suicide prevention: experiences from community interventions (2016): lockable storage boxes",
+    "WHO and FAO Preventing suicide: a resource for pesticide registrars and regulators (2019)",
+    "FAO/WHO International Code of Conduct on Pesticide Management (2014)",
+    "FAO Guidelines on management options for empty pesticide containers (2008): never reuse, triple rinse, puncture",
+    "WHO Clinical management of acute pesticide intoxication: prevention of suicidal behaviours (2008)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): poisoning"
+  ],
+  "review": [
+    "New page. child-safety.poison is moved here (safe-storage.lock), with 'in a locked box or cupboard; an adult keeps the key' added and the bottle rule given its own step (safe-storage.bottle). first-aid.tip-poison (the same storage message) is removed from first-aid.",
+    "Empty containers: FAO advises triple rinsing (rinse water into the sprayer), puncturing, and returning to a collection scheme, or burying away from water where there is none. Burning is not advised. 'Rinse three times, make holes, bury far from water' is the village version. Check.",
+    "After spraying: re-entry times differ by product; 'until the spray has dried' is the usual minimum on labels.",
+    "'Never call medicines sweets' is common child-safety advice (iron tablets look like sweets and are very dangerous for children; see poisoning.later).",
+    "The last tip is about suicide prevention (WHO: locking pesticides away saves lives). It does not use the word suicide. Check the tone; poisoning.purpose already links to the Stress page.",
+    "Urgent box: short form of the poisoning signs, so the page says when to go; the full list is on poisoning.",
+    "Words to check (Dari / Pashto): الماری / المارۍ (cupboard), صندوق قفل‌دار / قلف لرونکی صندوق (locked box), دوای زراعتی / د کرنې درمل (farm spray), دواپاشی / درمل شيندل (spraying), خلطه / کڅوړه (bag), دواخانه / درملتون (pharmacy).",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: safe-storage.urgent. Urgent signs are reached through the red link to the Health side."
+  ]
+}

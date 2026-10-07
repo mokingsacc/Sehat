@@ -2108,3 +2108,145 @@ Numbers read back by the number pad (say.ui.num.*):
 </details>
 
 Words to check: Dari طفل شیرخوار (baby), چاشت (midday), وقت خواب, خورده شد (taken), گپ‌های داکتر, اندازهٔ وزن به قد; the Afghan hundreds دوصد، سه‌صد، پنج‌صد (not دویست، سیصد، پانصد) and هژده (18); "اعشاریه" for the decimal point in both languages (or should the pad say "و نیم" for .5?). Pashto تی خور ماشوم (baby), غرمه, د خوب وخت, وخوړل شو, the numbers 21 to 29 (یوویشت، دوه ویشت، درویشت، څلېرویشت ...), the unit-first forms 31 to 99 (پنځه اویا = 75), and "سل او" / "دوه سوه او" before a remainder (e.g. 120 = سل او شل).
+
+## Content merge 2
+
+Merged on 2026-10-07: home safety, going to the clinic or hospital, food and garden, well-being, the regional illnesses with the new "clinic" block (what the clinic or hospital will do), the list screen `#/s/<list>`, the second batch of animations, and Mo's three tabs (Health, Home, Family) with the red Emergency button in every header. The screen layout is described in docs/HOME_LAYOUT.md.
+
+### Defaults chosen (please check)
+
+- Animations, narration only (the pictures were not changed):
+  - Chlorine tablets: "Follow the dose on the packet; ask the health worker to read it to you." No dose is given in the app.
+  - Ash: offered only "if there is no soap".
+  - ORS: packet only. "No packet? For now give rice water or soup, and go to the clinic for ORS packets." There is no home-made sugar-salt recipe.
+  - **The pictures do not match yet.** The water animation still shows a badge in scene 3, and the ORS animation still shows teaspoons in scene 3. Someone needs to redraw these scenes.
+- Dog bite: the full text is in `dog-bite`. `bite-safety` and `animal-illness` link to it.
+- `child-meals` keeps only its links to breastfeeding and growth.
+- Held back:
+  - `birth-spacing` is not merged (research §11.1 item 7).
+  - The malaria disease-watch question stays inactive.
+
+### Well-being (Home tab, list `wellbeing`)
+
+- The five pages are: wellbeing, sleep-well, evening-routine, heart-food and move-daily.
+- **Prayer removed:**
+  - from the calm activities on `evening-routine` (`evening-routine.calm`)
+  - from `stress.peace`
+  - The review notes say so.
+- `stress` stays under Adults, not in the Home list. It has medical alerts and clinic boxes, and the Home tab has none (see below). Please confirm, or say if it should be rewritten as lifestyle only.
+
+### Mo's Home-tab rule: what was removed or moved
+
+Rule: no medical advice on the Home tab. `tools/validate.py` now fails if a page in a Home list has an alert or clinic box. The book editor warns.
+
+**Removed from Home pages:**
+
+| Page | What was removed |
+|---|---|
+| home-safety | `.urgent`, `.oxygen` (both moved, see below) |
+| electric-safety | `.urgent` |
+| fire-safety | `.urgent` |
+| child-safety | `.hospital`, `.urgent`, the first-aid tip |
+| safe-storage | `.urgent` |
+| bite-safety | `.urgent` |
+| road-safety | `.urgent` |
+| winter-home | `.hospital` |
+| floods-quakes | `.hospital`, `.urgent` |
+| sleep-well | `.dont` (sleeping tablets), `.soon` (chest pain, sleep apnoea, waking to pass urine, poor sleep for a month) |
+| move-daily | `.pregnant` (pregnancy limits), `.soon`, `.heart-attack` |
+
+**What replaced them:**
+
+- **Red link rows to the matching Health page:**
+  - `home-safety.fumes-em` and `winter-home.fumes` go to Fumes poisoning.
+  - `fire-safety.smoke-em` and `floods-quakes.hurt-em` go to Emergency.
+  - `child-safety.hurt` goes to First aid.
+  - Existing links now drawn red: home-safety and fire-safety to burns; electric-safety to electric shock and CPR; safe-storage to poisoning; bite-safety to snake and scorpion and to dog bite; road-safety to crash and bleeding.
+- **Well-being pages:** each now ends with "Feeling unwell? If you feel unwell, go to Health and tap What is wrong?" (`<page>.ask`).
+
+**New Health page `fumes-poisoning`** ("Poisoned by fumes or gas"):
+
+- It is in the Emergency list (baby, child and adult) and in the everyone section.
+- It holds the old home-safety lead, the "get out" step, the urgent box and the oxygen tip, with renamed ids.
+- It links back to home safety.
+- The picture is a copy of the home-safety picture.
+- **Symptom finder:** the `danger` phrases in `content/src/search-phrases.json` moved from `winter-home` to a new `fumes-poisoning` entry, as agreed with the coordinator. Typing "carbon monoxide" or "گاز گرفتگی" now opens Fumes poisoning with the red badge.
+  - Four expectations in `tools/search-tests.json` are now out of date. They were left for the search worker:
+    - Two carbon-monoxide queries still expect winter-home.
+    - "خارش" and "دندانم درد میکند" expect "nothing found", but now find the new scabies and dental pages.
+
+**Home health kit:** the kit pages keep "how to use" and "what to buy". What each reading means, when to go, and the checker moved to five new Health pages:
+
+| Device | New Health page | Its checker | Its "more" link |
+|---|---|---|---|
+| Thermometer | `reading-temp` | `tool/reading/temp` | fever |
+| BP machine | `reading-bp` | `tool/reading/bp` | blood pressure |
+| Glucometer | `reading-sugar` | `tool/reading/sugar` | diabetes |
+| Oximeter | `reading-spo2` | `tool/reading/spo2` | breathing counter |
+| Arm tape and scale | `reading-muac` | `tool/reading/muac` | growth |
+
+- Each reading page:
+  - starts with the old "kit-buy look" line
+  - opens its checker with the device already chosen
+  - then has the moved number, urgent, soon and tip boxes
+  - ends with a "do not" line and its "more" link
+- Each kit page has a link "What does my reading mean?" next to "how to use". The arm tape page says "colour" and the scale page says "weight".
+- Removed from `kit-buy`: `.look` (now the reading pages' first line) and `.dont.medicine`.
+- The reading pages appear under Children and Adults as "Home readings".
+- **Please check that these pages read well on their own.**
+
+### Layout changes Mo should know about
+
+- The language switch moved out of the header into Settings, to make room for the Emergency button at 320 px. The disclaimer and "about" are in Settings.
+- "Send for a car" is the first line of the Emergency page.
+- Lists show each page's picture in a big row with a speaker.
+
+### Book editor: bigger book
+
+- With this merge the book is about 2.2 MB. One D1 row holds at most 2 MB, so the editor could no longer save it.
+- The server now keeps a big book in several rows, each under 2 MB. The whole book may be up to 8 MB. See docs/EDITOR_AND_RELEASES.md.
+- Nothing changes for editors. Tested with the editor tests, which now include import, save, a stale save, publish, and the published book and overlay served whole.
+- **Not tested on the real server.** Importing and publishing a book this size uses more processing time per request, and the free Cloudflare plan allows very little. If Import or Publish starts failing with a time limit, the server needs the paid plan or a lighter import.
+
+### Words for native speakers
+
+- **Tab names:**
+  - Health: صحت / روغتیا
+  - Home: خانه / کور (Mo asked to check this word)
+  - Family: unchanged
+- **Big buttons:**
+  - CPR and first aid: احیا و کمک‌های اولیه / بیا ژوندي کول او لومړنۍ مرستې
+  - Well-being: زندگی صحتمند / روغ ژوند
+- **Short age labels on Emergency:**
+  - Dari: نوزاد، شیرخوار، طفل، بزرگسال
+  - Pashto: نوی زېږېدلی، تي رودونکی، ماشوم، لوی کس
+- **Group headings:**
+  - Common illnesses: مریضی‌های عام / عامې ناروغۍ
+  - Everyday care: مراقبت روزمره / ورځنۍ پاملرنه
+  - Home readings: عدد ماشین‌ها / د ماشینونو شمېرې
+  - Women's health: صحت زنان / د ښځو روغتیا
+- **New link texts:**
+  - "What does my reading mean?": عدد من چه معنا دارد؟ / زما شمېره څه مانا لري؟
+  - "Feeling unwell?": حالتان خوب نیست؟ / ځان ناروغه احساسوئ؟
+  - "Someone feels ill from fumes?": کسی از دود یا گاز مریض شده؟ / څوک له لوګي یا ګاز ناروغه شوی؟
+  - "Headache or sleepy by the fire?": کنار آتش سردردی دارید یا خواب‌آلود هستید؟ / اور ته نږدې سر درد لرئ یا خوب درځي؟
+  - "Send someone for a car now.": همین حالا کسی را برای آوردن موتر بفرستید. / همدا اوس یو څوک د موټر راوستلو لپاره ولېږئ.
+
+### Regional illnesses: the claims that matter most
+
+These are items 1 to 12 of research §11.1 (research/regional-burden-and-treatment.md). They need Mo's decision:
+
+1. Amoxicillin named for child pneumonia (`cough.clinic`, `danger-child.clinic`).
+2. Vivax malaria: chloroquine plus a 14-day medicine (primaquine) without G6PD testing.
+3. Malnutrition: the special peanut paste (RUTF) "free", and whether an outpatient malnutrition site is open.
+4. Rabies: the injection schedule, rabies serum (RIG) location, and "free".
+5. Where antivenom is held (snake and scorpion).
+6. Congo fever (CCHF): ribavirin named, and the isolation site.
+7. `birth-spacing` (held, not in the app).
+8. A pregnant woman with yellow eyes goes to hospital now; the sites treating hepatitis B and C; paracetamol in hepatitis.
+9. Trachoma: azithromycin for the whole village, and the eye doctor referral.
+10. Typhoid: antibiotics named.
+11. Urine infection: nitrofurantoin or amoxicillin "safe in pregnancy".
+12. Dengue: "paracetamol only".
+
+Three clinic boxes listed in the research were removed again by the Home-tab rule: `winter-home.hospital`, `child-safety.hospital` and `floods-quakes.hospital`.

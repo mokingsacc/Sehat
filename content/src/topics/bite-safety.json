@@ -1,0 +1,154 @@
+{
+  "id": "bite-safety",
+  "section": "everyone",
+  "title": {
+    "fa": "دوری از مار، گژدم و سگ",
+    "ps": "له مار، لړم او سپي ځان ساتل",
+    "en": "Keep snakes, scorpions and dogs away"
+  },
+  "summary": {
+    "fa": "عادت‌های ساده در خانه و در شب، از گزیدن جلوگیری می‌کند.",
+    "ps": "په کور کې او د شپې ساده عادتونه د چیچلو مخه نیسي.",
+    "en": "Simple habits at home and at night prevent bites and stings."
+  },
+  "image": "bite-safety",
+  "blocks": [
+    {
+      "id": "bite-safety.lead",
+      "type": "lead",
+      "text": {
+        "fa": "مار و گژدم در انبار چوب، زیر سنگ، درز دیوار و در بستر پنهان می‌شوند، بیشتر در ماه‌های گرم. چند عادت ساده آن‌ها را از خانوادهٔ شما دور نگه می‌دارد.",
+        "ps": "مار او لړم د لرګیو په ډېرانو، د تیږو لاندې، په درزونو او بستره کې پټېږي، په تېره بیا په ګرمو میاشتو کې. څو ساده عادتونه یې ستاسو له کورنۍ لرې ساتي.",
+        "en": "Snakes and scorpions hide in wood piles, under stones, in cracks and in bedding, most of all in the warm months. A few habits keep them away from your family."
+      }
+    },
+    {
+      "id": "bite-safety.shake",
+      "type": "step",
+      "icon": "foot",
+      "title": {
+        "fa": "بوت و بستر را بتکانید",
+        "ps": "بوټونه او بستره وڅنډئ",
+        "en": "Shake out shoes and bedding"
+      },
+      "text": {
+        "fa": "پیش از استفاده، بوت، لباس و بستر را بتکانید. گژدم‌ها، بیشتر شب‌ها، در داخل آن‌ها پنهان می‌شوند.",
+        "ps": "د کارولو مخکې بوټونه، جامې او بستره وڅنډئ. لړمان، په تېره د شپې، په کې پټېږي.",
+        "en": "Shake out shoes, clothes and bedding before you use them. Scorpions hide inside, most of all at night."
+      },
+      "picture": "bite-shake-shoe"
+    },
+    {
+      "id": "bite-safety.night",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "شب: چراغ دستی و بوت",
+        "ps": "د شپې: لاسي څراغ او بوټونه",
+        "en": "At night: a torch and shoes"
+      },
+      "text": {
+        "fa": "وقتی شب بیرون می‌روید، چراغ دستی ببرید و بوت بسته بپوشید. مارها در شب‌های گرم بیرون می‌آیند.",
+        "ps": "کله چې د شپې بهر ځئ، لاسي څراغ له ځان سره یوسئ او تړلي بوټونه واغوندئ. مارونه په ګرمو شپو کې ګرځي.",
+        "en": "When you go out at night, carry a torch and wear closed shoes. Snakes move about on warm nights."
+      }
+    },
+    {
+      "id": "bite-safety.reach",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "پیش از دست زدن، نگاه کنید",
+        "ps": "لاس وړلو مخکې وګورئ",
+        "en": "Look before you reach"
+      },
+      "text": {
+        "fa": "دست لچ را در انبار چوب، سوراخ، زیر سنگ یا گوشه‌های تاریک نکنید. چیزها را با چوب حرکت دهید و اگر می‌توانید دستکش بپوشید.",
+        "ps": "لوڅ لاس د لرګیو په ډېر، سوري، د تیږو لاندې یا تیارو ګوټونو کې مه منډئ. شیان په لښتي وخوځوئ او که کولای شئ دستکشې واغوندئ.",
+        "en": "Do not put bare hands into wood piles, holes, under stones or into dark corners. Move things with a stick, and wear gloves if you can."
+      }
+    },
+    {
+      "id": "bite-safety.sleep",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "اگر بتوانید، بالاتر از زمین بخوابید",
+        "ps": "که کولای شئ، له ځمکې پورته ویده شئ",
+        "en": "Sleep off the floor if you can"
+      },
+      "text": {
+        "fa": "مار و گژدم به بستری که روی زمین است می‌خزند. اگر بتوانید، روی چارپایی، دور از دیوار بخوابید و پشه‌خانه را زیر بستر بزنید.",
+        "ps": "مار او لړم هغې بستري ته ننوځي چې پر ځمکه وي. که کولای شئ، پر کټ، له دېوال لرې ویده شئ او پشه خانه د بستري لاندې ټینګه کړئ.",
+        "en": "Snakes and scorpions crawl into beds on the floor. If you can, sleep on a raised bed, away from the wall, with a net tucked in."
+      }
+    },
+    {
+      "id": "bite-safety.yard",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "خانه و حویلی را پاک نگه دارید",
+        "ps": "کور او انګړ پاک وساتئ",
+        "en": "Keep the house and yard clear"
+      },
+      "text": {
+        "fa": "درز دیوار و زمین را پر کنید. چوب، سنگ و کثافات را از خانه دور نگه دارید و غله را بپوشانید تا موش نیاید.",
+        "ps": "د دېوالونو او ځمکې درزونه ډک کړئ. لرګي، تیږې او کثافات له کوره لرې وساتئ، او غله پټه کړئ چې موږکان رانشي.",
+        "en": "Fill cracks in walls and floors. Keep wood, stones and rubbish away from the house, and cover grain so mice do not come."
+      }
+    },
+    {
+      "id": "bite-safety.bitten",
+      "type": "link",
+      "to": "topic/snake-scorpion",
+      "icon": "insect",
+      "title": {
+        "fa": "مار گزیده یا گژدم زده؟",
+        "ps": "مار چیچلی یا لړم وهلی؟",
+        "en": "Bitten or stung?"
+      },
+      "text": {
+        "fa": "آرام بمانید، انگشتر را بکشید و همین حالا به شفاخانه بروید. نه بریدن، نه مکیدن، نه بستن محکم. صفحه را باز کنید.",
+        "ps": "آرام اوسئ، ګوتمۍ وباسئ او همدا اوس روغتون ته ولاړ شئ. نه پرې کول، نه زبېښل، نه کلک تړل. پاڼه پرانیزئ.",
+        "en": "Keep still, take off rings, and go to hospital now. No cutting, sucking or tight bands. Open the page."
+      },
+      "urgent": true
+    },
+    {
+      "id": "bite-safety.dog-bite",
+      "type": "link",
+      "to": "topic/dog-bite",
+      "icon": "dog",
+      "title": {
+        "fa": "سگ‌ها و هاری",
+        "ps": "سپي او هاري",
+        "en": "Dogs and rabies"
+      },
+      "text": {
+        "fa": "به اطفال دربارهٔ سگ‌ها بیاموزید و سگ‌های خود را واکسین کنید. هر گزیدگی یا خراش: ۱۵ دقیقه بشویید و همان روز برای واکسین هاری بروید. صفحه را باز کنید.",
+        "ps": "ماشومانو ته د سپیو په اړه ور زده کړئ او خپل سپي واکسین کړئ. هر چیچل یا ګروول: ۱۵ دقیقې یې ومینځئ او په همغه ورځ د هاري واکسین ته ولاړ شئ. پاڼه پرانیزئ.",
+        "en": "Teach children about dogs and vaccinate your own. Any bite or scratch: wash it for 15 minutes and go for rabies vaccine the same day. Open the page."
+      },
+      "urgent": true
+    }
+  ],
+  "sources": [
+    "WHO Guidelines for the management of snakebites, 2nd edition (WHO SEARO, 2016): prevention (footwear, torch at night, sleeping on a raised bed under a tucked-in net, not putting hands into holes or wood piles, clearing rubbish near the house)",
+    "WHO fact sheet: Snakebite envenoming (2023)",
+    "WHO Regional Office for the Eastern Mediterranean: scorpion sting prevention and management",
+    "WHO fact sheet: Rabies (2024) and WHO Expert Consultation on Rabies, third report (TRS 1012, 2018): dog vaccination, bite prevention teaching for children",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): bites and stings"
+  ],
+  "review": [
+    "New page. snake-scorpion.prevent (tip) is moved here (the 'shake' and 'night' steps); snake-scorpion now links here.",
+    "Raised bed and tucked net: WHO SEARO snakebite prevention. A charpai (چارپایی / کټ) is common in summer. Check the words.",
+    "'Snakes move about on warm nights': general. Local snakes (Echis, Macrovipera, cobra) are mostly active at dusk and night in the warm season.",
+    "Urgent box: a snake bite always, a scorpion sting in a child, a deep animal bite or one on the face, head or hands (matches snake-scorpion.urgent and dog-bite.urgent.deep).",
+    "No dont list (optional): the steps already say what not to do.",
+    "Words to check (Dari / Pashto): انبار چوب / د لرګیو ډېر (wood pile), چارپایی / کټ (raised bed), پشه‌خانه / پشه خانه (net), توله / بچي (puppies), شغال / ګیدړ (jackal), روباه / لومړ (fox), خراش / ګروول (scratch).",
+    "Icons: wanted 'snake' and 'torch'; used warning and moon.",
+    "Content merge 2: dog-bite is now in the book. Its two prevention steps (dog-bite.children, dog-bite.dogs) are the fuller text, so bite-safety.dogs (step) and bite-safety.rabies (tip) were dropped before release and replaced by one link, bite-safety.dog-bite, to the dog-bite page (new wording built from those two blocks: check fa/ps). Lost detail: 'do not touch a dog that is eating or has puppies' is no longer on either page; add it to dog-bite.children if wanted.",
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: bite-safety.urgent. Urgent signs are reached through the red link to the Health side."
+  ]
+}

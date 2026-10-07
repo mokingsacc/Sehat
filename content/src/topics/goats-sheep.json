@@ -1,0 +1,176 @@
+{
+  "id": "goats-sheep",
+  "section": "everyone",
+  "title": {
+    "fa": "بز و گوسفند در خانه",
+    "ps": "په کور کې وزې او پسونه",
+    "en": "Goats and sheep at home"
+  },
+  "summary": {
+    "fa": "شیر برای خانواده، با جوشاندن و دست پاک بی‌خطر.",
+    "ps": "د کورنۍ لپاره شیدې، په ایشولو او پاکو لاسونو خوندي.",
+    "en": "Milk for the family, kept safe by boiling and clean hands."
+  },
+  "image": "goats-sheep",
+  "blocks": [
+    {
+      "id": "goats-sheep.lead",
+      "type": "lead",
+      "text": {
+        "fa": "یک بز یا چند گوسفند برای خانواده شیر، ماست و قروت می‌دهد. چند عادت ساده شیر را بی‌خطر و خانواده را صحتمند نگه می‌دارد.",
+        "ps": "یوه وزه یا څو پسونه کورنۍ ته شیدې، مستې او قروت ورکوي. څو ساده عادتونه شیدې خوندي او کورنۍ روغه ساتي.",
+        "en": "A goat or a few sheep give milk, yoghurt and qurut for the family. A few simple habits keep the milk safe and the family well."
+      }
+    },
+    {
+      "id": "goats-sheep.boil",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "شیر را همیشه بجوشانید",
+        "ps": "شیدې تل وایشوئ",
+        "en": "Always boil the milk"
+      },
+      "text": {
+        "fa": "شیر را پیش از نوشیدن یا ساختن ماست و قروت خوب بجوشانید. شیر خام می‌تواند تب مالت بیاورد، یک مریضی طولانی با تب و درد.",
+        "ps": "شیدې د څښلو یا د مستو او قروتو له جوړولو مخکې ښې وایشوئ. اومې شیدې کولای شي د مالټا تبه راولي، چې اوږده ناروغي ده له تبې او درد سره.",
+        "en": "Bring milk to a full boil before drinking it or making yoghurt and qurut. Raw milk can give Malta fever, a long illness with fever and pain."
+      }
+    },
+    {
+      "id": "goats-sheep.milking",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "دوشیدن پاک",
+        "ps": "په پاکو لاسونو لوشل",
+        "en": "Clean milking"
+      },
+      "text": {
+        "fa": "پیش از دوشیدن، دست‌ها و پستان حیوان را بشویید. در یک ظرف پاک بدوشید و آن را سرپوشیده نگه دارید.",
+        "ps": "د لوشلو مخکې خپل لاسونه او د څاروي غولانځه ومینځئ. په پاک لوښي کې یې ولوشئ او پوښلی یې وساتئ.",
+        "en": "Wash your hands and the animal's udder before milking. Milk into a clean pot and keep it covered."
+      }
+    },
+    {
+      "id": "goats-sheep.hands",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "بعد از حیوانات دست بشویید",
+        "ps": "له څارویو وروسته لاسونه ومینځئ",
+        "en": "Wash hands after the animals"
+      },
+      "text": {
+        "fa": "بعد از غذا دادن، دوشیدن یا پاک کردن حیوانات، پیش از خوردن، پختن یا بغل کردن طفل، دست‌ها را با صابون بشویید.",
+        "ps": "د څارویو له خوړو ورکولو، لوشلو یا پاکولو وروسته، مخکې له دې چې وخورئ، پخلی وکړئ یا ماشوم په غېږ کې ونیسئ، لاسونه په صابون ومینځئ.",
+        "en": "After feeding, milking or cleaning the animals, wash hands with soap before you eat, cook or hold a baby."
+      }
+    },
+    {
+      "id": "goats-sheep.sleep",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "حیوانات بیرون از اتاق خواب",
+        "ps": "څاروي د خوب له کوټې بهر",
+        "en": "Animals out of sleeping rooms"
+      },
+      "text": {
+        "fa": "حیوانات را در طویلهٔ جدا نگه دارید، نه جایی که خانواده می‌خوابد یا می‌پزد، حتی در زمستان. سرگین و کنهٔ آن‌ها میکروب را نزدیک اطفال می‌آورد.",
+        "ps": "څاروي په جلا غوجل کې وساتئ، نه هلته چې کورنۍ ویده کېږي یا پخلی کوي، حتی په ژمي کې. د هغوی ډکي او کنې میکروب ماشومانو ته نږدې راوړي.",
+        "en": "Keep animals in their own shed, not where the family sleeps or cooks, even in winter. Their dung and ticks bring germs close to the children."
+      }
+    },
+    {
+      "id": "goats-sheep.birth",
+      "type": "step",
+      "icon": "animals",
+      "title": {
+        "fa": "وقت زاییدن احتیاط کنید",
+        "ps": "د زېږون پر وخت احتیاط وکړئ",
+        "en": "Take care at lambing time"
+      },
+      "text": {
+        "fa": "وقتی به زاییدن حیوان کمک می‌کنید، دستکش یا خلطهٔ پلاستیکی بپوشید، و چیزی را که بعد از زاییدن بیرون می‌آید دفن کنید؛ می‌تواند مریضی داشته باشد. اطفال و زنان حامله را دور نگه دارید.",
+        "ps": "د زېږون په مرسته کې دستکشې یا پلاستیکي کڅوړې واغوندئ، او هغه څه چې له زېږون وروسته راوځي ښخ کړئ؛ ناروغي لرلای شي. ماشومان او امیندوارې ښځې لرې وساتئ.",
+        "en": "Wear gloves or plastic bags to help a birth, and bury what comes out after it; it can carry illness. Keep children and pregnant women away."
+      }
+    },
+    {
+      "id": "goats-sheep.vet",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "واکسین از داکتر حیوانات",
+        "ps": "د څارویو له ډاکټر واکسین",
+        "en": "Vaccines from the animal doctor"
+      },
+      "text": {
+        "fa": "از داکتر حیوانات دربارهٔ واکسین رمه بپرسید. حیوانات صحتمند شیر بیشتر می‌دهند و مریضی کمتر به انسان می‌رسانند.",
+        "ps": "د څارویو له ډاکټر څخه د رمې د واکسین په اړه وپوښتئ. روغ څاروي ډېرې شیدې ورکوي او انسان ته لږه ناروغي رسوي.",
+        "en": "Ask the animal doctor about vaccines for your flock. Healthy animals give more milk and pass less illness to people."
+      }
+    },
+    {
+      "id": "goats-sheep.illness",
+      "type": "link",
+      "to": "topic/animal-illness",
+      "icon": "animals",
+      "title": {
+        "fa": "مریضی‌هایی که از حیوانات می‌آید",
+        "ps": "له څارویو راتلونکې ناروغۍ",
+        "en": "Illness from animals"
+      },
+      "text": {
+        "fa": "تب کانگو، تب مالت و سیاه‌زخم: علایم، و چه وقت به شفاخانه بروید.",
+        "ps": "د کانګو تبه، د مالټا تبه او تور زخم: نښې، او کله روغتون ته ولاړ شئ.",
+        "en": "Congo fever, Malta fever and anthrax: the signs, and when to go to hospital."
+      }
+    },
+    {
+      "id": "goats-sheep.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "goats-sheep.dont.raw",
+          "icon": "milk",
+          "text": {
+            "fa": "به اطفال شیر خام، یا پنیر تازه که از شیر خام ساخته شده، ندهید",
+            "ps": "ماشومانو ته اومې شیدې، یا له اومو شیدو جوړ تازه پنیر مه ورکوئ",
+            "en": "give children raw milk, or fresh cheese made from raw milk"
+          }
+        },
+        {
+          "id": "goats-sheep.dont.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "به طفل کمتر از ۶ ماه شیر حیوان ندهید",
+            "ps": "له ۶ میاشتو کم عمر ماشوم ته د څاروي شیدې مه ورکوئ",
+            "en": "give animal milk to a baby under 6 months"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Brucellosis (29 July 2020): most human cases from unpasteurised milk or cheese from infected goats or sheep; pasteurise or boil milk; hygiene and protection when handling animals and afterbirths; vaccinate livestock",
+    "WHO/WOAH/FAO: Brucellosis in humans and animals (2006)",
+    "WHO fact sheet: Infant and young child feeding (2026); breastfeeding page: no animal milk before 6 months",
+    "Afghanaid / UK Aid Match (25 Sep 2023): By her side: livestock and dairy for rural women (milk, yoghurt, cheese; selling to neighbours)",
+    "WHO/UNICEF Facts for Life (2010): hygiene, keep animals away from living areas"
+  ],
+  "review": [
+    "This page repeats animal-illness.milk (boil all milk) on purpose so it stands alone; the link goes to the full signs.",
+    "Qurut: boiling the milk before making yoghurt and qurut is the safe message. Qurut is dried and salted and made from yoghurt; risk from qurut made from raw-milk yoghurt is lower but not zero. Keep the simple 'always boil'.",
+    "Lambing step repeats animal-illness.birth with 'children and pregnant women away' added (brucellosis and Q fever from afterbirths; pregnant women also risk toxoplasmosis and listeria). Mo to confirm.",
+    "'Even in winter': families often bring animals indoors in the cold. Check this does not sound unrealistic; a shared wall or a partition may be the practical advice.",
+    "Livestock vaccines (brucellosis, anthrax, PPR, sheep pox) are named only as 'vaccines for your flock'.",
+    "Words to check: Dari طویله (shed), رمه (flock), پستان (udder); Pashto غوجل (shed), غولانځه (udder), لوشل (milking), رمه."
+  ]
+}

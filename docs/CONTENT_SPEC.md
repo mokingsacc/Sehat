@@ -170,3 +170,12 @@ into `book.json` as `search`, keeping only keys that open something, and `tools/
   danger) and prints top-1 / top-3. Run it after changing phrases; add a query for every miss you fix.
 - Later, a downloaded meaning model can be plugged in with `addRanker({ weight, rank(query, lang) → [{ id, score }] })`;
   `rankAsync()` blends it in, and danger results from the word list always stay first.
+
+## Addendum: content merge 2 (2026-10-07)
+- "clinic": what the clinic or hospital actually does for this problem. `{"id", "type": "clinic", "icon" (optional; default "hospital" when the English title starts "At the hospital", else "clinic"), "title" (starts "At the clinic: ..." or "At the hospital: ...", at most 7 words), "text" (at most 32 words)}`. Shown with a green building icon and no number; read aloud like a step (title, then text). Not allowed on Home tab pages.
+- Link targets added: `ask` (What is wrong?) and `emergency` (the Emergency screen). `"urgent": true` on a link draws it as a red row: use it for a way from a Home page to a Health emergency page. Red links and the closing `ask` link do not count towards the 2-links-per-topic aim.
+- Lists with their own page: `config.lists` (`kit`, `safety`, `hospital`, `food`, `wellbeing`) and the same names in `sections.json`. A topic only in such a list is not added to the children or adults lists by `tools/build.py`. `"tab"`: `health` or `house`.
+- **Mo's rule for the Home tab** (lists with `"tab": "house"`): no medical advice. No `alert` or `clinic` blocks; urgent signs live on Health pages and the Home page links there with a red link. Well-being pages end with a link to `ask`. Kit pages link to their device's Health reading page (`reading-*`).
+- The Children and Adults screens are built from `config.listGroups` (groups of topics, tool rows, and one `rest` group); the Health tab from `config.home`, the Home tab from `config.house`, CPR and first aid from `config.firstAid`. See docs/HOME_LAYOUT.md.
+- Topics with a general picture (`img/topics/children-generic.svg`, `adults-generic.svg`) show their first step picture in lists and at the top of the page.
+- No religious content anywhere (Mo, 2026-10-07): prayer was removed from the calm activities on the stress and evening-routine pages.

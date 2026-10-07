@@ -3,20 +3,78 @@
   "analyticsUrl": "https://sehat.mobinkingsacc.workers.dev/e",
   "_note": "appUrl: the public address people open (used by Share). analyticsUrl: the Cloudflare Worker /e endpoint from server/README.md. Empty analyticsUrl = counts stay queued on the phone and nothing is sent.",
   "home": [
-    "emergency",
-    "install",
-    "ask",
     "nextVaccine",
-    "sections",
-    "quick",
-    "tools",
-    "kit",
-    "near",
+    "emergency",
+    "firstAid",
+    "ask",
+    "children",
+    "adults",
+    "hospital",
     "share",
-    "feedback",
-    "disclaimer"
+    "feedback"
   ],
-  "_home": "Order of the blocks on the home screen. Remove a name to hide it. Available: emergency (the big red Emergency button: age picker, then first-aid pages), install, ask, nextVaccine, sections, quick, tools (breathing counter and 'what does the number mean?'), kit (home health kit), near, share (the Share Sehat card; 'sendApp' is its older name), growth (the growth tracker tile), feedback, disclaimer.",
+  "_home": "The Health tab (#/home, the screen the app opens on), top to bottom; remove a name to hide it. Available: nextVaccine (a slim strip, only when a vaccine is due within 7 days or late), emergency (the big red button: who needs help, then that age's first aid), firstAid (CPR by age and every first-aid page: config.firstAid), ask (What is wrong?), children, adults (big picture buttons: config.listGroups), share (Share Sehat: config.shareCard), feedback, install, sendApp, near, disclaimer, and the name of any list in 'lists' (a big picture button that opens its page). See docs/HOME_LAYOUT.md.",
+  "lists": {
+    "kit": {
+      "title": "kit",
+      "sub": "kitSub",
+      "say": "ui.kit",
+      "image": "kit-buy",
+      "icon": "check",
+      "tab": "house"
+    },
+    "safety": {
+      "title": "homeSafety",
+      "sub": "homeSafetySub",
+      "say": "ui.homeSafety",
+      "image": "home-safety",
+      "icon": "house",
+      "tab": "house"
+    },
+    "hospital": {
+      "title": "hospital",
+      "sub": "hospitalSub",
+      "say": "ui.hospital",
+      "image": "hospital-places",
+      "icon": "hospital",
+      "tab": "health",
+      "near": true
+    },
+    "food": {
+      "title": "food",
+      "sub": "foodSub",
+      "say": "ui.food",
+      "image": "kitchen-garden",
+      "icon": "bowl-food",
+      "tab": "house"
+    },
+    "wellbeing": {
+      "title": "wellbeing",
+      "sub": "wellbeingSub",
+      "say": "ui.wellbeing",
+      "image": "wellbeing",
+      "icon": "heart",
+      "tab": "house"
+    }
+  },
+  "_lists": "Topic lists with their own page (#/s/<name>; the old #/<name> still works). The topics are in content/src/sections.json under the same name. title, sub = ui.text keys; say = the narrated line (ui.say); image = the topic whose picture the button and page show; icon = the icon for an empty list; tab = the bottom tab it belongs to (health or house); tools = tool rows at the top (growth, breaths, reading); near = true: a 'Nearest clinic' row at the top. Topics only in a list (not in their section's list) are not added to the children or adults lists by tools/build.py. Mo's rule: the Home tab lists (house) give no medical advice; urgent signs live on the Health side and Home pages link there.",
+  "house": [
+    "safety",
+    "food",
+    "wellbeing",
+    "kit"
+  ],
+  "_house": "The Home tab (#/house: the house and everyday life), top to bottom: names of lists in 'lists'.",
+  "firstAid": {
+    "title": "cprFirstAid",
+    "sub": "cprFirstAidSub",
+    "say": "ui.cprFirstAid",
+    "image": "first-aid",
+    "topics": [
+      "first-aid"
+    ]
+  },
+  "_firstAid": "The CPR and first aid screen (#/firstaid): CPR by age (the ages of 'emergency'), then 'topics' and every page of sections.emergency that is not a CPR page, as pictures.",
   "shareCard": {
     "href": "#/share",
     "title": "shareApp",
@@ -25,7 +83,117 @@
     "webSub": "shareWebSub",
     "webSay": "ui.share-web"
   },
-  "_shareCard": "The Share Sehat card on the home screen: opens the share screen (js/share.js). title/sub are ui text keys, say is the narration id; webSub/webSay are used in a browser instead of the Android app.",
+  "_shareCard": "The Share Sehat button on the Health tab: it opens href with these ui keys once this version of the app has them (the Share Sehat screen); until then it opens the phone's share sheet (ui.share).",
+  "listGroups": {
+    "children": [
+      {
+        "title": "dangerSigns",
+        "say": "ui.dangerSigns",
+        "danger": true,
+        "topics": [
+          "danger-child"
+        ]
+      },
+      {
+        "tools": [
+          "growth",
+          "breaths"
+        ]
+      },
+      {
+        "title": "commonIllness",
+        "say": "ui.commonIllness",
+        "topics": [
+          "fever",
+          "cough",
+          "diarrhoea",
+          "measles",
+          "worms",
+          "malnutrition"
+        ]
+      },
+      {
+        "title": "homeReadings",
+        "say": "ui.homeReadings",
+        "topics": [
+          "reading-temp",
+          "reading-muac"
+        ]
+      },
+      {
+        "title": "everydayCare",
+        "say": "ui.everydayCare",
+        "rest": true,
+        "include": [
+          "child-meals"
+        ]
+      }
+    ],
+    "adults": [
+      {
+        "title": "dangerSigns",
+        "say": "ui.dangerSigns",
+        "danger": true,
+        "topics": [
+          "red-flags",
+          "pregnancy-danger"
+        ]
+      },
+      {
+        "tools": [
+          "reading"
+        ]
+      },
+      {
+        "title": "homeReadings",
+        "say": "ui.homeReadings",
+        "topics": [
+          "reading-bp",
+          "reading-sugar",
+          "reading-spo2",
+          "reading-temp"
+        ]
+      },
+      {
+        "title": "commonIllness",
+        "say": "ui.commonIllness",
+        "topics": [
+          "tb",
+          "blood-pressure",
+          "diabetes",
+          "asthma",
+          "epilepsy",
+          "pneumonia-adult",
+          "diarrhoea-adult",
+          "typhoid",
+          "hepatitis",
+          "malaria",
+          "dengue",
+          "leishmaniasis",
+          "scabies",
+          "eye-infection",
+          "dental",
+          "dog-bite"
+        ]
+      },
+      {
+        "title": "womenHealth",
+        "say": "ui.women",
+        "topics": [
+          "pregnancy-care",
+          "after-birth",
+          "anaemia",
+          "urine-infection"
+        ]
+      },
+      {
+        "title": "everydayCare",
+        "say": "ui.everydayCare",
+        "rest": true
+      }
+    ]
+  },
+  "_listGroups": "The Children and Adults screens (#/children, #/adults), group by group in order. A group: title (ui.text key), say (its narrated line), topics (in order), danger = red heading; rest = true: every topic of the section (children; women and everyone) not in another group, not on the Emergency or first-aid screens and not in a list with its own page; tools = tool rows (growth, breaths, reading). include (with rest): topics shown in the rest group even though they also have a list page (child-meals is on Food and garden too).",
   "quickTools": [
     {
       "id": "growth",
@@ -68,7 +236,8 @@
     "eye-chemical",
     "low-sugar",
     "asthma-attack",
-    "nosebleed"
+    "nosebleed",
+    "fumes-poisoning"
   ],
   "_urgentTopics": "Topics whose narration downloads first (the 'urgent' audio pack), together with the interface lines, every topic title and every red 'go to hospital now' box. The other clips download in packs by section: children, women, everyone.",
   "consentMode": "ask",
@@ -99,6 +268,7 @@
         "drowning",
         "burns",
         "poisoning",
+        "fumes-poisoning",
         "danger-child"
       ]
     },
@@ -119,6 +289,7 @@
         "falls-fractures",
         "head-injury",
         "poisoning",
+        "fumes-poisoning",
         "snake-scorpion",
         "electric-shock",
         "heat-stroke",
@@ -145,6 +316,7 @@
         "falls-fractures",
         "head-injury",
         "poisoning",
+        "fumes-poisoning",
         "snake-scorpion",
         "electric-shock",
         "drowning",

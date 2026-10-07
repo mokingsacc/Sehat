@@ -17,27 +17,27 @@
       "source": {"title": "WHO Vaccine-Preventable Diseases Surveillance Standards: Measles (2018)", "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"}
     },
     {
-      "id": "awd", "active": true, "version": 1, "history": [],
+      "id": "awd", "active": true, "version": 2, "history": [{"version": 1, "until": "2026-10-07", "topics": ["diarrhoea"]}],
       "name": {"fa": "اسهال آبکی حاد", "ps": "حاد اوبلن نس ناستی", "en": "Acute watery diarrhoea"},
       "ask": {"fa": "سه بار یا بیشتر اسهال آبکی در یک روز، بدون خون.", "ps": "په یوه ورځ کې درې ځله یا ډېر اوبلن نس ناستی، بې له وینې.", "en": "Three or more watery stools in one day, with no blood."},
       "definition": "Three or more loose or watery stools in 24 hours, without visible blood.",
-      "topics": ["diarrhoea"], "symptoms": ["diarrhoea"],
+      "topics": ["diarrhoea", "diarrhoea-adult"], "symptoms": ["diarrhoea"],
       "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
     },
     {
-      "id": "bloody-diarrhoea", "active": true, "version": 1, "history": [],
+      "id": "bloody-diarrhoea", "active": true, "version": 2, "history": [{"version": 1, "until": "2026-10-07", "topics": ["diarrhoea"]}],
       "name": {"fa": "اسهال خونی", "ps": "وینه لرونکی نس ناستی", "en": "Bloody diarrhoea"},
       "ask": {"fa": "اسهال، و در مدفوع خون دیده می‌شود.", "ps": "نس ناستی، او په ډکو متیازو کې وینه ښکاري.", "en": "Diarrhoea, with blood in the stool."},
       "definition": "Acute diarrhoea with visible blood in the stool.",
-      "topics": ["diarrhoea"], "symptoms": ["diarrhoea"],
+      "topics": ["diarrhoea", "diarrhoea-adult"], "symptoms": ["diarrhoea"],
       "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
     },
     {
-      "id": "ari", "active": true, "version": 1, "history": [],
+      "id": "ari", "active": true, "version": 2, "history": [{"version": 1, "until": "2026-10-07", "topics": ["cough"]}],
       "name": {"fa": "سینه‌بغل / التهاب حاد تنفسی", "ps": "سینه بغل / حاد تنفسي انتان", "en": "Acute respiratory infection / pneumonia"},
       "ask": {"fa": "سرفه، همراه با نفس تیز یا نفس کشیدن به سختی.", "ps": "ټوخی، له ژر ژر یا سخت سا اخیستلو سره.", "en": "Cough with fast or difficult breathing."},
       "definition": "Cough or difficult breathing with fast breathing (IMCI cut-offs by age) or lower chest indrawing (ARI-pneumonia). Lay report, breathing not counted by a health worker.",
-      "topics": ["cough"], "symptoms": ["breathing", "cough"],
+      "topics": ["cough", "pneumonia-adult"], "symptoms": ["breathing", "cough"],
       "source": {"title": "WHO IMCI Chart Booklet (2014) and WHO EMRO Afghanistan outbreak situation reports (ARI-pneumonia)", "url": "https://www.emro.who.int/images/stories/afghanistan/Afghanistan-Outbreaks-Situation-report-week-43-2025.pdf"}
     },
     {
@@ -49,11 +49,11 @@
       "source": {"title": "WHO fact sheet: Crimean-Congo haemorrhagic fever; WHO EMRO Afghanistan outbreak situation reports (suspected CCHF)", "url": "https://www.who.int/news-room/fact-sheets/detail/crimean-congo-haemorrhagic-fever"}
     },
     {
-      "id": "dog-bite", "active": true, "version": 1, "history": [],
+      "id": "dog-bite", "active": true, "version": 2, "history": [{"version": 1, "until": "2026-10-07", "topics": ["first-aid", "animal-illness"]}],
       "name": {"fa": "گزیدن سگ (خطر هاری)", "ps": "د سپي چیچل (د هاري خطر)", "en": "Dog bite (rabies exposure)"},
       "ask": {"fa": "گزیدن یا پنجه زدن سگ یا حیوان دیگر.", "ps": "د سپي یا بل څاروي چیچل یا منګول وهل.", "en": "A bite or scratch from a dog or another animal."},
       "definition": "Any person bitten or scratched by a dog or another animal that may carry rabies (possible rabies exposure).",
-      "topics": ["first-aid", "animal-illness"], "symptoms": ["bite"],
+      "topics": ["first-aid", "animal-illness", "dog-bite"], "symptoms": ["bite"],
       "source": {"title": "WHO fact sheet: Rabies; WHO Expert Consultation on Rabies, third report (2018)", "url": "https://www.who.int/news-room/fact-sheets/detail/rabies"}
     },
     {
@@ -73,11 +73,11 @@
       "source": {"title": "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021)", "url": "https://www.who.int/publications/i/item/9789240022676"}
     },
     {
-      "id": "jaundice", "active": true, "version": 1, "history": [],
+      "id": "jaundice", "active": true, "version": 2, "history": [{"version": 1, "until": "2026-10-07", "topics": ["red-flags"]}],
       "name": {"fa": "زردی حاد (هپاتیت؟)", "ps": "حاد ژېړی (هیپاټایټس؟)", "en": "Acute jaundice (hepatitis?)"},
       "ask": {"fa": "چشم یا پوست تازه زرد شده است (نه نوزاد).", "ps": "سترګې یا پوستکی تازه ژېړ شوي (نوی زېږېدلی ماشوم نه).", "en": "Eyes or skin have recently turned yellow (not a newborn baby)."},
       "definition": "Acute onset of yellow eyes or skin, with no known other cause, in anyone older than one month (acute jaundice syndrome; hepatitis A or E are common causes).",
-      "topics": ["red-flags"], "symptoms": ["yellow"],
+      "topics": ["red-flags", "hepatitis"], "symptoms": ["yellow"],
       "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions (acute jaundice syndrome)", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
     },
     {

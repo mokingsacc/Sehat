@@ -1,0 +1,279 @@
+{
+  "id": "scabies",
+  "section": "everyone",
+  "title": {
+    "fa": "گری (خارش پوست)",
+    "ps": "ګرګین (د پوستکي خارښت)",
+    "en": "Scabies (itchy skin)"
+  },
+  "summary": {
+    "fa": "خارشی که شب بدتر است و در فامیل سرایت می‌کند. کلینیک کریم دارد.",
+    "ps": "هغه خارښت چې د شپې بدترېږي او په کورنۍ کې خپرېږي. کلینیک کریم لري.",
+    "en": "Night itching that spreads in the family. The clinic has a cream."
+  },
+  "image": "scabies",
+  "blocks": [
+    {
+      "id": "scabies.lead",
+      "type": "lead",
+      "text": {
+        "fa": "گری یک جانور بسیار کوچک است که در پوست زندگی می‌کند و خارش شدید می‌دهد، که شب بدتر است. از راه تماس پوست و لحاف و بستر مشترک سرایت می‌کند. تمام اهل خانه باید یکجا تداوی شوند.",
+        "ps": "ګرګین یو ډېر کوچنی موجود دی چې په پوستکي کې ژوند کوي او سخت خارښت پیدا کوي، چې د شپې بدترېږي. د پوستکي د تماس او ګډې بسترې له لارې خپرېږي. د کور ټول غړي باید یوځای درملنه شي.",
+        "en": "Scabies is a tiny mite that lives in the skin and causes strong itching, worst at night. It spreads by skin contact and shared bedding. The whole household must be treated at the same time."
+      }
+    },
+    {
+      "id": "scabies.signs",
+      "type": "step",
+      "icon": "rash",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "خارش، که شب بدتر است، با دانه‌های کوچک یا خط‌های باریک بین انگشتان، روی بند دست، کمر و شرمگاه. طفل شیرخوار آن را روی کف دست، کف پا و سر می‌گیرد.",
+        "ps": "خارښت، چې د شپې بدترېږي، له کوچنیو دانو یا نریو کرښو سره د ګوتو ترمنځ، پر مړوند، ملا او شرمګاه. تي روی ماشوم یې پر ورغوو، تلو او سر اخلي.",
+        "en": "Itching, worse at night, with small bumps or thin lines between the fingers, on wrists, waist and private parts. Babies get it on palms, soles and head."
+      }
+    },
+    {
+      "id": "scabies.all",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "همه را یکجا تداوی کنید",
+        "ps": "ټول یوځای درملنه کړئ",
+        "en": "Treat everyone together"
+      },
+      "text": {
+        "fa": "همهٔ کسانی که در خانه می‌خوابند در یک روز کریم را استعمال کنند، حتی آن‌هایی که هنوز خارش ندارند. در غیر آن فوراً برمی‌گردد.",
+        "ps": "ټول هغه کسان چې په کور کې ویده کېږي په یوه ورځ کریم وکاروي، حتی هغه چې لا خارښت نه لري. که نه، سمدستي بېرته راځي.",
+        "en": "Everyone who sleeps in the house uses the cream on the same day, even those who do not itch yet. Otherwise it comes straight back."
+      }
+    },
+    {
+      "id": "scabies.cream",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "کریم را درست استعمال کنید",
+        "ps": "کریم سم وکاروئ",
+        "en": "Use the cream the right way"
+      },
+      "text": {
+        "fa": "آن را از گردن تا پایین به تمام بدن بمالید، در اطفال شیرخوار به سر هم. تا وقتی که کارمند صحی گفته بگذارید، بعد بشویید. خارش شاید ۲ هفتهٔ دیگر هم بماند.",
+        "ps": "له غاړې ښکته یې پر ټول بدن ومږئ، په تي رویو ماشومانو کې پر سر هم. تر هغه وخته یې پرېږدئ چې روغتیايي کارکوونکي ویلي، بیا یې ومینځئ. خارښت ښايي ۲ نورې اونۍ هم پاتې شي.",
+        "en": "Put it on the whole body from the neck down, babies on the head too. Leave it as long as the health worker says, then wash. Itching can last 2 more weeks."
+      }
+    },
+    {
+      "id": "scabies.wash",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "لباس و بستر را بشویید",
+        "ps": "جامې او بستره ومینځئ",
+        "en": "Wash clothes and bedding"
+      },
+      "text": {
+        "fa": "در روز تداوی، لباس، روجایی و روی لحاف را با آب داغ بشویید و در آفتاب خشک کنید. چیزهایی که شسته نمی‌شوند را ۳ روز در خریطهٔ بسته بگذارید.",
+        "ps": "د درملنې په ورځ، جامې، څادرونه او د بړستنو پوښونه په تودو اوبو ومینځئ او په لمر کې یې وچ کړئ. هغه شیان چې نه مینځل کېږي، ۳ ورځې په تړلې کڅوړه کې کېږدئ.",
+        "en": "On the day of treatment, wash clothes, sheets and quilt covers in hot water and dry them in the sun. Things that cannot be washed: seal in a bag for 3 days."
+      }
+    },
+    {
+      "id": "scabies.scratch",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "نگذارید زخم‌ها چرک کنند",
+        "ps": "مه پرېږدئ چې زخمونه چرک ونیسي",
+        "en": "Stop the sores getting infected"
+      },
+      "text": {
+        "fa": "ناخن‌ها را کوتاه نگه دارید. پوست را هر روز با صابون بشویید. زخم‌های خراشیده می‌توانند چرک کنند و بعد به گرده‌ها ضرر برسانند؛ علایم را در پایین ببینید.",
+        "ps": "نوکان لنډ وساتئ. پوستکی هره ورځ په صابون ومینځئ. ګرول شوي زخمونه چرک نیولای شي او بیا پښتورګو ته زیان رسوي؛ نښې لاندې وګورئ.",
+        "en": "Keep nails short. Wash the skin with soap daily. Scratched sores can get infected and then harm the kidneys; see the signs below."
+      }
+    },
+    {
+      "id": "scabies.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: کریم ضد گری",
+        "ps": "په کلینیک کې: د ګرګین ضد کریم",
+        "en": "At the clinic: an anti-scabies cream"
+      },
+      "text": {
+        "fa": "کارمند صحی پوست را معاینه می‌کند و برای تمام اهل خانه کریم یا لوشن می‌دهد، مانند پرمترین یا بنزیل بنزوات. اگر زخم‌ها چرک دارند، انتی‌بیوتیک هم اضافه می‌شود.",
+        "ps": "روغتیايي کارکوونکی پوستکی معاینه کوي او د کور ټولو غړو لپاره کریم یا لوشن ورکوي، لکه پرمترین یا بنزایل بنزوایټ. که زخمونه چرک لري، انټي بیوټیک هم ورزیاتېږي.",
+        "en": "The health worker checks the skin and gives a cream or lotion for the whole household, such as permethrin or benzyl benzoate. If sores have pus, an antibiotic is added."
+      }
+    },
+    {
+      "id": "scabies.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: گری شدید یا عوارض",
+        "ps": "په روغتون کې: سخت ګرګین یا اختلاطات",
+        "en": "At the hospital: severe scabies or complications"
+      },
+      "text": {
+        "fa": "گری با پوستهٔ ضخیم، یا طفلی که بعد از زخم‌های چرکی روی پندیده و ادرار تیره دارد، به شفاخانه ضرورت دارد. شاید تابلیت ضد گری و تداوی گرده بگیرد.",
+        "ps": "ګرګین له پنډو پوړونو سره، یا هغه ماشوم چې له چرکنو زخمونو وروسته پړسېدلی مخ او تیاره متیازې لري، روغتون ته اړتیا لري. ښايي د ګرګین ګولۍ او د پښتورګو درملنه ترلاسه کړي.",
+        "en": "Thick crusted scabies, or a child with a puffy face and dark urine after infected sores, needs the hospital. They may get scabies tablets and treatment for the kidneys."
+      }
+    },
+    {
+      "id": "scabies.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "scabies.urgent.puffy",
+          "icon": "swelling",
+          "text": {
+            "fa": "روی پندیده یا پاهای پندیده بعد از زخم‌های پوستی",
+            "ps": "له پوستکي زخمونو وروسته پړسېدلی مخ یا پړسېدلې پښې",
+            "en": "a puffy face or swollen legs after skin sores"
+          }
+        },
+        {
+          "id": "scabies.urgent.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "ادرار تیره یا سرخ، یا ادرار بسیار کم",
+            "ps": "تیاره یا سرې متیازې، یا ډېرې لږې متیازې",
+            "en": "dark or red urine, or passing very little urine"
+          }
+        },
+        {
+          "id": "scabies.urgent.spread",
+          "icon": "fever",
+          "text": {
+            "fa": "تب با یک قسمت پوست داغ، سرخ و در حال پخش شدن",
+            "ps": "تبه له داسې پوستکي سره چې تود، سور او خپرېدونکی وي",
+            "en": "fever with a hot, red, spreading area of skin"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scabies.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "scabies.soon.itch",
+          "icon": "rash",
+          "text": {
+            "fa": "خارشی که شب بدتر است، در بیش از یک نفر",
+            "ps": "هغه خارښت چې د شپې بدترېږي، په یوه کس کې نه بلکې په ډېرو کې",
+            "en": "itching worse at night, in more than one person"
+          }
+        },
+        {
+          "id": "scabies.soon.pus",
+          "icon": "wound",
+          "text": {
+            "fa": "زخم‌هایی با چرک یا پوستهٔ زرد",
+            "ps": "زخمونه له چرک یا ژېړو پوړونو سره",
+            "en": "sores with pus or yellow crusts"
+          }
+        },
+        {
+          "id": "scabies.soon.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل شیرخوار با دانه‌ها روی کف دست، کف پا یا سر",
+            "ps": "تي روی ماشوم چې پر ورغوو، تلو یا سر دانې لري",
+            "en": "a baby with bumps on the palms, soles or head"
+          }
+        },
+        {
+          "id": "scabies.soon.still",
+          "icon": "clock",
+          "text": {
+            "fa": "خارشی که ۴ هفته بعد از تداوی هنوز هست",
+            "ps": "هغه خارښت چې له درملنې ۴ اونۍ وروسته لا هم شته",
+            "en": "itching that is still there 4 weeks after treatment"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scabies.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "scabies.dont.kerosene",
+          "icon": "no",
+          "text": {
+            "fa": "تیل خاک، پترول، تیزاب بطری یا دوای حشرات را روی پوست نمالید.",
+            "ps": "خاورین تېل، پټرول، د بطرۍ تېزاب یا د حشراتو درمل پر پوستکي مه مږئ.",
+            "en": "Do not put kerosene, petrol, battery acid or pesticide on the skin."
+          }
+        },
+        {
+          "id": "scabies.dont.one",
+          "icon": "family",
+          "text": {
+            "fa": "فقط کسی را که خارش دارد تداوی نکنید.",
+            "ps": "یوازې هغه کس مه درملنه کوئ چې خارښت لري.",
+            "en": "Do not treat only the person who itches."
+          }
+        },
+        {
+          "id": "scabies.dont.steroid",
+          "icon": "pill",
+          "text": {
+            "fa": "برای خارش کریم‌های استرویید دکان را استعمال نکنید؛ گری را بدتر می‌کند.",
+            "ps": "د خارښت لپاره د دوکان سټرایډ کریمونه مه کاروئ؛ ګرګین بدتروي.",
+            "en": "Do not use shop steroid creams for itching; they make scabies worse."
+          }
+        }
+      ]
+    },
+    {
+      "id": "scabies.shame",
+      "type": "tip",
+      "icon": "people",
+      "text": {
+        "fa": "گری نشانهٔ ناپاکی نیست. هر جا که مردم نزدیک هم می‌خوابند و در کمپ‌های شلوغ سرایت می‌کند. هر کس می‌تواند بگیرد.",
+        "ps": "ګرګین د ناپاکۍ نښه نه ده. هر چېرته چې خلک یو بل ته نږدې ویده کېږي او په ګڼو کمپونو کې خپرېږي. هر څوک یې اخیستلای شي.",
+        "en": "Scabies is not about being dirty. It spreads wherever people sleep close together, and in crowded camps. Anyone can get it."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Scabies (31 May 2023): signs, household transmission, treat all household contacts at the same time, permethrin, benzyl benzoate, ivermectin; complications (impetigo, kidney disease)",
+    "WHO Pocket Book of Hospital Care for Children (2013): skin conditions, scabies and infected sores",
+    "WHO Model List of Essential Medicines (2023): permethrin 5 percent cream, benzyl benzoate lotion, oral ivermectin; Afghanistan National Essential Medicines List (2014): permethrin, benzyl benzoate",
+    "Burden: Afghanistan MoPH National Disease Surveillance and Response weekly report, week 33 2026: 16,057 scabies outbreak cases in 2026 to date, outbreaks in Badakhshan, Farah and Herat; frequent outbreaks in returnee and displacement sites",
+    "WHO/UNICEF Facts for Life (2010): hygiene"
+  ],
+  "review": [
+    "Oral ivermectin is on the WHO EML but is not confirmed on the Afghan EML 2014; the hospital block therefore says 'scabies tablets'. Confirm what Balkh Regional Hospital uses for crusted scabies.",
+    "Lindane appears in the BPHS 2010 district hospital list but is toxic and outdated; deliberately not mentioned.",
+    "How long to leave the cream on (permethrin overnight, benzyl benzoate 24 hours) is left to the health worker; no timing is given.",
+    "'Seal unwashable items in a bag for 3 days' follows the WHO fact sheet (mites die within about 72 hours away from skin).",
+    "Kidney complication (post-streptococcal glomerulonephritis after infected scabies) is from the WHO fact sheet; the urgent list uses plain signs (puffy face, dark urine).",
+    "Local names: Dari گری (some say خارشک), Pashto ګرګین; the translator should confirm the words used in Samangan."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "id": "reading-muac",
+  "section": "children",
+  "title": {
+    "fa": "فیتهٔ بازو و وزن: معنای آن",
+    "ps": "د مټ فیته او وزن: مانا یې",
+    "en": "Arm tape and weight readings"
+  },
+  "summary": {
+    "fa": "رنگ‌های فیته، وزن گرفتن، و چه وقت بروید.",
+    "ps": "د فیتې رنګونه، وزن اخیستل، او کله ولاړ شئ.",
+    "en": "The tape colours, weight gain, and when to go."
+  },
+  "image": "reading-muac",
+  "blocks": [
+    {
+      "id": "reading-muac.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.",
+        "ps": "ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.",
+        "en": "A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says."
+      }
+    },
+    {
+      "id": "reading-muac.check",
+      "type": "link",
+      "to": "tool/reading/muac",
+      "icon": "muac",
+      "title": {
+        "fa": "رنگ را معاینه کنید",
+        "ps": "رنګ وګورئ",
+        "en": "Check a colour"
+      },
+      "text": {
+        "fa": "رنگی را که دیدید انتخاب کنید و بشنوید چه باید کرد.",
+        "ps": "هغه رنګ وټاکئ چې ولیدئ، او واورئ چې څه باید وکړئ.",
+        "en": "Choose the colour you saw, and hear what to do."
+      }
+    },
+    {
+      "id": "reading-muac.colours",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "رنگ‌ها چه معنا دارند",
+        "ps": "رنګونه څه مانا لري",
+        "en": "What the colours mean"
+      },
+      "text": {
+        "fa": "سبز خوب است. زرد یعنی لاغر است: همین هفته به کلینیک بروید. سرخ یعنی خیلی لاغر است: امروز به کلینیک بروید.",
+        "ps": "شین ښه دی. ژېړ یعنې ډنګر دی: په همدې اونۍ کلینیک ته ولاړ شئ. سور یعنې ډېر ډنګر دی: نن کلینیک ته ولاړ شئ.",
+        "en": "Green is good. Yellow means too thin: go to the clinic this week. Red means very thin: go to the clinic today."
+      }
+    },
+    {
+      "id": "reading-muac.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "reading-muac.urgent.feet",
+          "icon": "swollen-feet",
+          "text": {
+            "fa": "هر دو پایش پندیده است",
+            "ps": "دواړه پښې یې پړسېدلې دي",
+            "en": "has swelling of both feet"
+          }
+        },
+        {
+          "id": "reading-muac.urgent.eat",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "لاغر است و هیچ چیز نمی‌خورد یا نمی‌نوشد",
+            "ps": "ډنګر دی او هېڅ نه خوري او نه څښي",
+            "en": "is thin and will not eat or drink anything"
+          }
+        },
+        {
+          "id": "reading-muac.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "لاغر است و خیلی ضعیف یا خواب‌آلود است",
+            "ps": "ډنګر دی او ډېر کمزوری یا خوب وړی دی",
+            "en": "is thin and very weak or sleepy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-muac.weight",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "به چه چیز دقت کنید",
+        "ps": "څه ته پام وکړئ",
+        "en": "What to look for"
+      },
+      "text": {
+        "fa": "طفل خورد باید هر ماه وزن بگیرد. جدول رشد کلینیک نشان می‌دهد که وزن برای عمرش درست است یا نه.",
+        "ps": "کوچنی ماشوم باید هره میاشت وزن واخلي. د کلینیک د ودې چارټ ښيي چې وزن یې د عمر سره سم دی که نه.",
+        "en": "A young child should gain weight each month. The clinic's growth chart shows if the weight is right for the age."
+      }
+    },
+    {
+      "id": "reading-muac.weight-soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این‌ها را دارد، همین هفته به کلینیک بروید",
+        "ps": "که ماشوم له دې څخه یو ولري، په همدې اونۍ کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic this week if the child:"
+      },
+      "items": [
+        {
+          "id": "reading-muac.weight-soon.flat",
+          "icon": "growth",
+          "text": {
+            "fa": "۲ ماه است که وزن نگرفته",
+            "ps": "۲ میاشتې کېږي چې وزن یې نه دی اخیستی",
+            "en": "has not gained weight for 2 months"
+          }
+        },
+        {
+          "id": "reading-muac.weight-soon.loss",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "وزنش کم می‌شود",
+            "ps": "وزن یې کمېږي",
+            "en": "is losing weight"
+          }
+        },
+        {
+          "id": "reading-muac.weight-soon.newborn",
+          "icon": "baby",
+          "text": {
+            "fa": "۳ هفته دارد و هنوز از وزن ولادت کمتر است",
+            "ps": "۳ اونۍ لري او لا هم د زېږون له وزن کم دی",
+            "en": "is 3 weeks old and still under the birth weight"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-muac.more",
+      "type": "link",
+      "to": "topic/growth",
+      "icon": "check",
+      "title": {
+        "fa": "رشد و انکشاف طفل",
+        "ps": "د ماشوم وده او پرمختګ",
+        "en": "Growth and development"
+      },
+      "text": {
+        "fa": "طفل را هر ماه وزن کنید و هر روز با او بازی کنید و گپ بزنید.",
+        "ps": "ماشوم هره میاشت وزن کړئ او هره ورځ ورسره لوبې او خبرې وکړئ.",
+        "en": "Weigh your child every month; play and talk every day."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guideline: Updates on the management of severe acute malnutrition in infants and children (2013): MUAC below 115 mm = severe acute malnutrition, 6 to 59 months",
+    "WHO/UNICEF Joint statement: WHO child growth standards and the identification of severe acute malnutrition (2009)",
+    "WHO IMCI Chart Booklet (2014): check for acute malnutrition; MUAC 115 to 125 mm = moderate; oedema of both feet = complicated severe acute malnutrition",
+    "WHO guideline on the prevention and management of wasting and nutritional oedema in infants and children under 5 years (2023)",
+    "UNICEF / ALIMA Family MUAC approach: mothers measuring their own children",
+    "WHO Child Growth Standards (2006) and WHO/UNICEF growth monitoring and promotion",
+    "WHO IMCI Chart Booklet (2014): assess growth; feeding problems",
+    "NICE NG75 Faltering growth: recognition and management in children (2017): concern if birth weight not regained by 3 weeks"
+  ],
+  "review": [
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-muac (and the weight parts of kit-scale). The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+  ]
+}

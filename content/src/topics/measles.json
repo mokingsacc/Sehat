@@ -98,6 +98,20 @@
       }
     },
     {
+      "id": "measles.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: سرخکان شدید",
+        "ps": "په روغتون کې: سخت شری",
+        "en": "At the hospital: severe measles"
+      },
+      "text": {
+        "fa": "طفل مبتلا به سرخکان با علامت خطر بستر می‌شود. شفاخانه ویتامین الف، اکسیجن برای سینه‌بغل، انتی‌بیوتیک برای عفونت چشم، گوش یا سینه، و مایعات و غذا برای اسهال و زخم دهن می‌دهد.",
+        "ps": "په شري اخته ماشوم له د خطر نښې سره بستر کېږي. روغتون ویټامین الف، د سینه بغل لپاره اکسیجن، د سترګو، غوږ یا سینې انتان لپاره انټي بیوټیک، او د نس ناستي او د خولې زخمونو لپاره مایعات او خواړه ورکوي.",
+        "en": "A child with severe measles is admitted. The hospital gives vitamin A, oxygen for pneumonia, antibiotics for eye, ear or chest infection, and fluids and food for diarrhoea and mouth sores."
+      }
+    },
+    {
       "id": "measles.urgent",
       "type": "alert",
       "level": "urgent",
@@ -256,13 +270,15 @@
     "WHO IMCI Chart Booklet (2014): measles classification (severe complicated, eye or mouth complications), counsel the mother",
     "WHO/UNICEF Facts for Life (2010): immunization",
     "Afghanistan schedule: measles vaccine at 9 and 18 months (UNICEF Afghanistan 2023, via Saeedzai et al. 2025; see research_notes content_facts.md)",
-    "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report week 48 2025 (96,554 cases, 546 deaths in 2025)"
+    "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report week 48 2025 (96,554 cases, 546 deaths in 2025)",
+    "WHO Pocket Book of Hospital Care for Children (2013): severe complicated measles (vitamin A, treatment of pneumonia, eye and mouth complications, nutrition)"
   ],
   "review": [
     "Vitamin A is written 'ویتامین الف' (Dari) and 'ویټامین الف' (Pashto) because Latin letters are not allowed; check what clinics in Samangan actually say.",
     "The soon item 'still has fever three days after the rash began' is a pragmatic sign of complications (pneumonia, ear infection), not a direct IMCI rule. Keep or remove.",
     "The cloudy cornea item reads 'has a white or cloudy patch on the eye' (Dari and Pashto say 'the dark part of the eye has gone cloudy or white'); check that families will understand it.",
     "Icon wanted: 'mouth' for mouth sores; 'tooth' used instead.",
-    "Isolation advice is limited to keeping newborns and pregnant women away. No isolation period is stated. fever.json already has a short measles step and soon item; this page gives the fuller home care and complications."
+    "Isolation advice is limited to keeping newborns and pregnant women away. No isolation period is stated. fever.json already has a short measles step and soon item; this page gives the fuller home care and complications.",
+    "None beyond the existing measles review notes."
   ]
 }

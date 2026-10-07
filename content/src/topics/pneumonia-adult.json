@@ -1,0 +1,307 @@
+{
+  "id": "pneumonia-adult",
+  "section": "everyone",
+  "title": {
+    "fa": "سینه‌بغل در بزرگسالان",
+    "ps": "په لویانو کې سینه بغل",
+    "en": "Chest infection in adults"
+  },
+  "summary": {
+    "fa": "سرفه، تب و نفس تیز امروز به کلینیک ضرورت دارد.",
+    "ps": "ټوخی، تبه او چټکه ساه نن کلینیک ته اړتیا لري.",
+    "en": "Cough, fever and fast breathing need the clinic today."
+  },
+  "image": "pneumonia-adult",
+  "blocks": [
+    {
+      "id": "pneumonia-adult.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سینه‌بغل در زمستان بسیاری از بزرگسالان را می‌کشد، مخصوصاً پیران، سگرت‌کشان و کسانی که مریضی دیگری دارند. سرفه با تب و نفس تیز یا مشکل به انتی‌بیوتیک از کلینیک ضرورت دارد، و گاهی به اکسیجن در شفاخانه.",
+        "ps": "سینه بغل په ژمي کې ډېر لویان وژني، په تېره بیا زاړه خلک، سګرټ څکوونکي او هغه چې بله ناروغي لري. ټوخی له تبې او چټکې یا سختې ساه سره له کلینیک څخه انټي بیوټیک ته اړتیا لري، او کله کله په روغتون کې اکسیجن ته.",
+        "en": "Chest infections kill many adults in winter, especially old people, smokers and those with other illnesses. A cough with fever and fast or difficult breathing needs antibiotics from the clinic, and sometimes oxygen in hospital."
+      }
+    },
+    {
+      "id": "pneumonia-adult.signs",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "زکام یا سینه‌بغل؟",
+        "ps": "زکام که سینه بغل؟",
+        "en": "Cold or chest infection?"
+      },
+      "text": {
+        "fa": "زکام، آب‌ریزش بینی و سرفهٔ خفیف است. سینه‌بغل تب، سرفه با بلغم غلیظ یا زنگ‌رنگ، نفس تیز، درد سینه هنگام نفس کشیدن و خستگی شدید می‌آورد.",
+        "ps": "زکام د پوزې بهېدل او سپک ټوخی دی. سینه بغل تبه، ټوخی له پنډو یا زنګ رنګه بلغم سره، چټکه ساه، د ساه اخیستلو پر وخت د سینې درد او سخته ستړیا راولي.",
+        "en": "A cold is a runny nose and mild cough. A chest infection brings fever, cough with thick or rusty sputum, fast breathing, chest pain on breathing, and great tiredness."
+      }
+    },
+    {
+      "id": "pneumonia-adult.home",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "مراقبت در خانه تا رسیدن به کلینیک",
+        "ps": "تر کلینیک پورې په کور کې پاملرنه",
+        "en": "Care at home while you go"
+      },
+      "text": {
+        "fa": "استراحت کنید، مایعات گرم را زیاد بار بنوشید و خوردن را ادامه دهید. به جای دراز کشیدن بنشینید. پاراسیتامول از کلینیک به تب و درد کمک می‌کند. سگرت نکشید.",
+        "ps": "آرام وکړئ، تودې مایعات ډېر ځله وڅښئ او خوړلو ته دوام ورکړئ. د څملاستو پر ځای کېنئ. له کلینیک څخه پاراسیټامول له تبې او درد سره مرسته کوي. سګرټ مه څکوئ.",
+        "en": "Rest, drink warm fluids often, and keep eating. Sit up rather than lie flat. Paracetamol from the clinic helps fever and pain. Do not smoke."
+      }
+    },
+    {
+      "id": "pneumonia-adult.smoke",
+      "type": "step",
+      "icon": "smoke",
+      "title": {
+        "fa": "دود به شش‌ها ضرر می‌رساند",
+        "ps": "لوګی سږو ته زیان رسوي",
+        "en": "Smoke harms the lungs"
+      },
+      "text": {
+        "fa": "دود بخاری، صندلی، سگرت و نسوار سینه‌بغل را بیشتر و بدتر می‌کند. اتاق را هوا بدهید؛ مریض را از دود دور نگه دارید.",
+        "ps": "د بخارۍ، صندلۍ، سګرټ او نسوارو لوګی سینه بغل ډېروي او بدتروي. کوټې ته هوا ورکړئ؛ ناروغ له لوګي لرې وساتئ.",
+        "en": "Smoke from the stove, sandali, cigarettes and naswar makes chest infections more likely and worse. Ventilate the room; keep the sick person away from smoke."
+      }
+    },
+    {
+      "id": "pneumonia-adult.elderly",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "پیران و مریضان دایمی",
+        "ps": "زاړه خلک او اوږدمهاله ناروغان",
+        "en": "Old people and the long-term ill"
+      },
+      "text": {
+        "fa": "در پیران، سینه‌بغل شاید فقط با گیجی، ضعف یا افتادن، بدون تب زیاد معلوم شود. آن‌ها را زود به کلینیک ببرید. مریضان شکر، قلب یا شش هم.",
+        "ps": "په زړو خلکو کې سینه بغل ښايي یوازې په ګډوډۍ، کمزورۍ یا لوېدو، له ډېرې تبې پرته ښکاره شي. هغوی ژر کلینیک ته یوسئ. د شکرې، زړه یا سږو ناروغان هم.",
+        "en": "In old people, pneumonia may show only as confusion, weakness or falling, without much fever. Take them to the clinic early. People with diabetes, heart or lung disease too."
+      }
+    },
+    {
+      "id": "pneumonia-adult.tb",
+      "type": "step",
+      "icon": "lungs",
+      "title": {
+        "fa": "سرفهٔ بیش از ۲ هفته: معاینهٔ توبرکلوز",
+        "ps": "له ۲ اونیو زیات ټوخی: د نري رنځ معاینه",
+        "en": "Cough over 2 weeks: TB test"
+      },
+      "text": {
+        "fa": "سرفه‌ای که بیش از ۲ هفته دوام می‌کند، با عرق شبانه یا کاهش وزن، به معاینهٔ رایگان توبرکلوز ضرورت دارد. صفحهٔ توبرکلوز را ببینید.",
+        "ps": "هغه ټوخی چې له ۲ اونیو زیات دوام کوي، له شپې خولو یا د وزن کمښت سره، د نري رنځ وړیا معاینې ته اړتیا لري. د نري رنځ پاڼه وګورئ.",
+        "en": "A cough that lasts more than 2 weeks, with night sweats or weight loss, needs a free TB test. See the TB page."
+      }
+    },
+    {
+      "id": "pneumonia-adult.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه و انتی‌بیوتیک",
+        "ps": "په کلینیک کې: معاینه او انټي بیوټیک",
+        "en": "At the clinic: check and antibiotics"
+      },
+      "text": {
+        "fa": "کارمند صحی نفس‌ها را می‌شمارد، به سینه گوش می‌دهد و شاید اکسیجن را با یک گیرهٔ انگشتی معاینه کند. برای سینه‌بغل انتی‌بیوتیک می‌دهد، معمولاً اموکسی‌سیلین، برای چند روز.",
+        "ps": "روغتیايي کارکوونکی ساه شمېري، سینې ته غوږ نیسي او ښايي اکسیجن د ګوتې په یوه کلیپ معاینه کړي. د سینه بغل لپاره انټي بیوټیک ورکوي، معمولاً اموکسي سیلین، د څو ورځو لپاره.",
+        "en": "The health worker counts the breathing, listens to the chest and may check the oxygen with a finger clip. For pneumonia they give an antibiotic, usually amoxicillin, to take for several days."
+      }
+    },
+    {
+      "id": "pneumonia-adult.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: اکسیجن و پیچکاری",
+        "ps": "په روغتون کې: اکسیجن او پیچکاري",
+        "en": "At the hospital: oxygen and injections"
+      },
+      "text": {
+        "fa": "شخص نفس‌تنگ، گیج یا بسیار ضعیف، یا کسی که اکسیجنش کم است، بستر می‌شود. شفاخانه اکسیجن، انتی‌بیوتیک پیچکاری، سیروم و عکس سینه می‌دهد. اکسیجن در سینه‌بغل شدید جان نجات می‌دهد.",
+        "ps": "ساه لنډی، ګډوډ یا ډېر کمزوری کس، یا هغه چې اکسیجن یې کم وي، بستر کېږي. روغتون اکسیجن، پیچکاري انټي بیوټیک، سیروم او د سینې عکس ورکوي. اکسیجن په سخت سینه بغل کې ژوند ژغوري.",
+        "en": "A breathless, confused or very weak person, or one with low oxygen, is admitted. The hospital gives oxygen, antibiotics by injection, fluids and an X-ray. Oxygen saves lives in severe pneumonia."
+      }
+    },
+    {
+      "id": "pneumonia-adult.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone has:"
+      },
+      "items": [
+        {
+          "id": "pneumonia-adult.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس تیز یا مشکل، یا نمی‌تواند یک جملهٔ کامل بگوید",
+            "ps": "چټکه یا سخته ساه، یا نه شي کولای یوه بشپړه جمله ووايي",
+            "en": "fast or difficult breathing, or cannot speak a full sentence"
+          }
+        },
+        {
+          "id": "pneumonia-adult.urgent.blue",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "لب‌های کبود یا خاکستری",
+            "ps": "شنې یا خړې شونډې",
+            "en": "blue or grey lips"
+          }
+        },
+        {
+          "id": "pneumonia-adult.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیج، بسیار خواب‌آلود یا به سختی بیدار می‌شود",
+            "ps": "ګډوډ، ډېر خوبولی یا په سختۍ ویښېږي",
+            "en": "confused, very sleepy or hard to wake"
+          }
+        },
+        {
+          "id": "pneumonia-adult.urgent.chest",
+          "icon": "heart",
+          "text": {
+            "fa": "درد سینه با نفس‌تنگی",
+            "ps": "د سینې درد له ساه لنډۍ سره",
+            "en": "chest pain with breathlessness"
+          }
+        },
+        {
+          "id": "pneumonia-adult.urgent.blood",
+          "icon": "bleeding",
+          "text": {
+            "fa": "سرفه با خون",
+            "ps": "د وینې ټوخی",
+            "en": "coughing up blood"
+          }
+        },
+        {
+          "id": "pneumonia-adult.urgent.fever",
+          "icon": "thermometer",
+          "text": {
+            "fa": "تب بلند با لرزه که پایین نمی‌آید",
+            "ps": "لوړه تبه له لړزې سره چې نه ښکته کېږي",
+            "en": "high fever with shaking chills that does not come down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pneumonia-adult.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "pneumonia-adult.soon.days",
+          "icon": "fever",
+          "text": {
+            "fa": "سرفه با تب بیش از ۲ روز",
+            "ps": "ټوخی له تبې سره له ۲ ورځو زیات",
+            "en": "cough with fever for more than 2 days"
+          }
+        },
+        {
+          "id": "pneumonia-adult.soon.sputum",
+          "icon": "cough",
+          "text": {
+            "fa": "سرفه با بلغم غلیظ زرد، سبز یا زنگ‌رنگ",
+            "ps": "ټوخی له پنډ ژېړ، شین یا زنګ رنګه بلغم سره",
+            "en": "cough with thick yellow, green or rusty sputum"
+          }
+        },
+        {
+          "id": "pneumonia-adult.soon.elderly",
+          "icon": "people",
+          "text": {
+            "fa": "شخص پیر یا مریض دایمی با سرفهٔ نو و ضعف",
+            "ps": "زوړ یا اوږدمهاله ناروغ کس له نوي ټوخي او کمزورۍ سره",
+            "en": "an old or long-term ill person with a new cough and weakness"
+          }
+        },
+        {
+          "id": "pneumonia-adult.soon.weeks",
+          "icon": "calendar",
+          "text": {
+            "fa": "سرفه بیش از ۲ هفته: معاینهٔ توبرکلوز",
+            "ps": "له ۲ اونیو زیات ټوخی: د نري رنځ معاینه",
+            "en": "cough for more than 2 weeks: TB test"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pneumonia-adult.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "pneumonia-adult.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "برای سرفه از دکان انتی‌بیوتیک یا پیچکاری نخرید.",
+            "ps": "د ټوخي لپاره له دوکان څخه انټي بیوټیک یا پیچکاري مه اخلئ.",
+            "en": "Do not buy antibiotics or injections from a shop for a cough."
+          }
+        },
+        {
+          "id": "pneumonia-adult.dont.stop",
+          "icon": "no",
+          "text": {
+            "fa": "وقتی بهتر شدید انتی‌بیوتیک را زود قطع نکنید.",
+            "ps": "کله چې ښه شئ انټي بیوټیک وخته مه پرېږدئ.",
+            "en": "Do not stop the antibiotic early when you feel better."
+          }
+        },
+        {
+          "id": "pneumonia-adult.dont.smoke",
+          "icon": "smoke",
+          "text": {
+            "fa": "در وقت مریضی سگرت نکشید و در دود بخاری ننشینید.",
+            "ps": "د ناروغۍ پر وخت سګرټ مه څکوئ او د بخارۍ په لوګي کې مه کېنئ.",
+            "en": "Do not smoke or sit in stove smoke while ill."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pneumonia-adult.samangan",
+      "type": "tip",
+      "icon": "window",
+      "text": {
+        "fa": "سمنگان در سال ۲۰۲۵ (۱۴۰۴) بلندترین میزان سینه‌بغل را در کشور داشت. لباس گرم، بخاری با دودکش، و هوای تازه در اتاق تمام فامیل را حفاظت می‌کند.",
+        "ps": "سمنګان په ۲۰۲۵ (۱۴۰۴) کال کې په هېواد کې د سینه بغل تر ټولو لوړه کچه درلوده. ګرمې جامې، د دودکش سره بخارۍ، او په کوټه کې تازه هوا ټوله کورنۍ ساتي.",
+        "en": "Samangan had the highest rate of chest infections in the country in 2025. Warm clothes, a stove with a pipe, and fresh air in the room protect the whole family."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Pneumonia (11 Nov 2022): causes, risk factors including indoor smoke, antibiotic treatment, oxygen for severe cases",
+    "WHO AWaRe antibiotic book (2022): community-acquired pneumonia in adults, amoxicillin as first choice, injectable options for severe cases; WHO IMAI District Clinician Manual (2011): severe respiratory distress, oxygen therapy",
+    "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021): cough of 2 weeks or more as a TB screening symptom",
+    "WHO guidelines for indoor air quality: household fuel combustion (2014): solid fuel smoke and pneumonia",
+    "Afghanistan BPHS (2010): amoxicillin at Basic Health Centre and above, oxygen at Comprehensive Health Centre and hospitals; Afghanistan National Essential Medicines List (2014)",
+    "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report, week 48 2025: 1,300,544 acute respiratory infection/pneumonia cases and 2,693 deaths in 2025, highest incidence in Samangan (717.3 per 10,000); MoPH NDSR week 33 2026: severe acute respiratory infection concentrated in Bamyan, Balkh and Herat"
+  ],
+  "review": [
+    "Amoxicillin named as the usual adult pneumonia antibiotic (WHO AWaRe 2022, BPHS BHC list); the adult chapter of the Afghan NSTG 2013 could not be read, so Mo should confirm what Samangan clinics actually give (cotrimoxazole is also common).",
+    "'Samangan had the highest rate of chest infections in 2025' is from the WHO Afghanistan surveillance report (week 48 2025, incidence 717.3 per 10,000); surveillance incidence partly reflects reporting, so Mo may prefer softer wording.",
+    "Finger clip (pulse oximeter) at clinic level is not guaranteed in BHCs; the text says 'may check'.",
+    "Blue or grey lips (cyanosis) is a WHO emergency sign; wording for 'grey' in Pashto to be checked.",
+    "'High fever with shaking chills that does not come down' is a practical sign, not a WHO classification.",
+    "Dari سینه‌بغل is used for pneumonia per the glossary; for a milder 'chest infection' the same word is used."
+  ]
+}
