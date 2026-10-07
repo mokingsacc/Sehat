@@ -7,9 +7,9 @@
     "en": "Malaria"
   },
   "summary": {
-    "fa": "تب با لرزه؟ امروز در کلینیک معاینهٔ رایگان ملاریا بگیرید.",
-    "ps": "تبه له لړزې سره؟ نن په کلینیک کې د ملاریا وړیا معاینه وکړئ.",
-    "en": "Fever with shivering? Get a free malaria test today."
+    "fa": "تب با لرزه؟ امروز در کلینیک معاینهٔ ملاریا بگیرید.",
+    "ps": "تبه له لړزې سره؟ نن په کلینیک کې د ملاریا معاینه وکړئ.",
+    "en": "Fever with shivering? Get a malaria test today."
   },
   "image": "malaria",
   "blocks": [
@@ -32,9 +32,9 @@
         "en": "Fever? Get the test"
       },
       "text": {
-        "fa": "هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه می‌گیرد و رایگان است.",
-        "ps": "په تودو میاشتو کې هره تبه، یا ختیځ یا سویل ته له سفر وروسته، په همغه ورځ د ملاریا د وینې معاینې ته اړتیا لري. معاینه ۱۵ دقیقې نیسي او وړیا ده.",
-        "en": "Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes and is free."
+        "fa": "هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه وقت می‌گیرد.",
+        "ps": "په تودو میاشتو کې هره تبه، یا ختیځ یا سویل ته له سفر وروسته، په همغه ورځ د ملاریا د وینې معاینې ته اړتیا لري. معاینه ۱۵ دقیقې نیسي.",
+        "en": "Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes."
       }
     },
     {
@@ -106,9 +106,9 @@
         "en": "At the clinic: rapid test and tablets"
       },
       "text": {
-        "fa": "یک قطره خون از انگشت روی نوار معاینه می‌رود. اگر مثبت باشد، کارمند صحی تابلیت ملاریا (کلوروکین برای نوع عام، به اضافهٔ یک دوای دیگر) رایگان می‌دهد. همه را تمام کنید.",
-        "ps": "د ګوتې د وینې یو څاڅکی د معاینې پر پټۍ اچول کېږي. که مثبت وي، روغتیايي کارکوونکی د ملاریا ګولۍ (د عام ډول لپاره کلوروکین، له یو بل درمل سره) وړیا ورکوي. ټولې یې بشپړې کړئ.",
-        "en": "A drop of blood from the finger goes on a test strip. If positive, the health worker gives malaria tablets (chloroquine for the common type, plus another medicine) free. Finish them all."
+        "fa": "یک قطره خون از انگشت روی نوار معاینه می‌رود. اگر مثبت باشد، کارمند صحی تابلیت ملاریا (کلوروکین برای نوع عام، به اضافهٔ یک دوای دیگر) می‌دهد. همه را تمام کنید.",
+        "ps": "د ګوتې د وینې یو څاڅکی د معاینې پر پټۍ اچول کېږي. که مثبت وي، روغتیايي کارکوونکی د ملاریا ګولۍ (د عام ډول لپاره کلوروکین، له یو بل درمل سره) ورکوي. ټولې یې بشپړې کړئ.",
+        "en": "A drop of blood from the finger goes on a test strip. If positive, the health worker gives malaria tablets (chloroquine for the common type, plus another medicine). Finish them all."
       }
     },
     {
@@ -303,6 +303,7 @@
     "'Any fever in the warm months needs a test' is WHO's rule for endemic areas; for Samangan Mo may prefer 'fever after travel' only.",
     "Rapid test 'free': under BPHS/EPHS. Confirm RDT stock at Samangan BHCs.",
     "Severe malaria block names artesunate (district hospital level per IPEHS); if Mo prefers, say 'malaria medicine by injection'.",
-    "Pashto 'د ماشي جالۍ' for bed net (Dari پشه‌خانه) to be checked by a native speaker."
+    "Pashto 'د ماشي جالۍ' for bed net (Dari پشه‌خانه) to be checked by a native speaker.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

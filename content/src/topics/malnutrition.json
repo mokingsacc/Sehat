@@ -7,9 +7,9 @@
     "en": "Thin child (malnutrition)"
   },
   "summary": {
-    "fa": "طفل بسیار لاغر در کلینیک رایگان تداوی می‌شود.",
-    "ps": "ډېر ډنګر ماشوم په کلینیک کې وړیا درملنه کېږي.",
-    "en": "A very thin child can be treated free at the clinic."
+    "fa": "طفل بسیار لاغر در کلینیک تداوی می‌شود.",
+    "ps": "ډېر ډنګر ماشوم په کلینیک کې درملنه کېږي.",
+    "en": "A very thin child can be treated at the clinic."
   },
   "image": "malnutrition",
   "blocks": [
@@ -17,9 +17,9 @@
       "id": "malnutrition.lead",
       "type": "lead",
       "text": {
-        "fa": "وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند و تداوی رایگان است.",
-        "ps": "کله چې ماشوم ډېر ډنګر وي، یا دواړه پښې یې پړسېدلې وي، بدن یې کمزوری وي او یوه ساده ناروغي یې وژلای شي. کلینیک دا حالت درملنه کوي او درملنه وړیا ده.",
-        "en": "When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this, and treatment is free."
+        "fa": "وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند.",
+        "ps": "کله چې ماشوم ډېر ډنګر وي، یا دواړه پښې یې پړسېدلې وي، بدن یې کمزوری وي او یوه ساده ناروغي یې وژلای شي. کلینیک دا حالت درملنه کوي.",
+        "en": "When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this."
       }
     },
     {
@@ -91,9 +91,9 @@
         "en": "At the clinic: weighing and special paste"
       },
       "text": {
-        "fa": "کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، یک خمیر مخصوص از بادام‌زمینی می‌گیرد که به خانه ببرد، رایگان، با معاینهٔ هفته‌وار.",
-        "ps": "روغتیايي کارکوونکی ماشوم تلي او د ناروغۍ لپاره یې معاینه کوي. هغه ډېر ډنګر ماشوم چې لا هم ښه خوري، د ممپلي یوه ځانګړې خمیره اخلي چې کور ته یې یوسي، وړیا، د اونیزې معاینې سره.",
-        "en": "The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, free, with weekly checks."
+        "fa": "کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، یک خمیر مخصوص از بادام‌زمینی می‌گیرد که به خانه ببرد، با معاینهٔ هفته‌وار.",
+        "ps": "روغتیايي کارکوونکی ماشوم تلي او د ناروغۍ لپاره یې معاینه کوي. هغه ډېر ډنګر ماشوم چې لا هم ښه خوري، د ممپلي یوه ځانګړې خمیره اخلي چې کور ته یې یوسي، د اونیزې معاینې سره.",
+        "en": "The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, with weekly checks."
       }
     },
     {
@@ -280,6 +280,7 @@
     "Hospital block mentions antibiotics: WHO 2023 recommends antibiotics for children admitted with complicated SAM; for uncomplicated SAM it is a clinician decision, so the clinic block does not promise them.",
     "'Weekly checks' reflects standard CMAM follow-up; confirm local schedule (some sites fortnightly).",
     "Dari سوءتغذی and Pashto خوارځواکي are the formal words; a translator should check whether villagers say something simpler (e.g. کم‌غذایی / لاغری).",
-    "Icon wanted: a 'thin child' or 'swollen feet' icon on the summary; used muac and swollen-feet."
+    "Icon wanted: a 'thin child' or 'swollen feet' icon on the summary; used muac and swollen-feet.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

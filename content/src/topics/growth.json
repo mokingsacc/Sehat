@@ -32,9 +32,9 @@
         "en": "Weigh your child every month"
       },
       "text": {
-        "fa": "طفل را هر ماه برای وزن کردن به کلینیک ببرید، مخصوصاً در ۲ سال اول. کارت رشد را نگه دارید و هر بار با خود ببرید.",
-        "ps": "ماشوم هره میاشت د وزن لپاره کلینیک ته بوځئ، په ځانګړې توګه په لومړیو ۲ کلونو کې. د ودې کارت وساتئ او هر ځل یې له ځان سره یوسئ.",
-        "en": "Take your child to the clinic to be weighed every month, especially in the first 2 years. Keep the growth card and bring it every time."
+        "fa": "طفل را هر ماه برای وزن کردن به کلینیک یا پوستهٔ صحی ببرید، مخصوصاً در ۲ سال اول. کارت رشد را هر بار با خود ببرید.",
+        "ps": "ماشوم هره میاشت د وزن لپاره کلینیک یا روغتیايي پوستې ته بوځئ، په ځانګړې توګه په لومړیو ۲ کلونو کې. د ودې کارت هر ځل له ځان سره یوسئ.",
+        "en": "Take your child to be weighed every month at the clinic or the health post, especially in the first 2 years. Bring the growth card every time."
       }
     },
     {
@@ -108,9 +108,9 @@
         "en": "Vitamin A and worm medicine"
       },
       "text": {
-        "fa": "کلینیک از ۶ ماهگی ویتامین ای، و از ۱ سالگی دوای ضد کرم می‌دهد. از کارمند صحی بپرسید چه وقت بگیرید.",
-        "ps": "کلینیک له ۶ میاشتو ویټامین اې، او له ۱ کال د چینجیو درمل ورکوي. له روغتیايي کارکوونکي وپوښتئ چې کله یې واخلئ.",
-        "en": "From 6 months the clinic gives vitamin A, and from 1 year worm medicine. Ask the health worker when they are due."
+        "fa": "از ۶ ماهگی، طفل هر ۶ ماه ویتامین ای لازم دارد: در کلینیک، یا وقتی تیم واکسین می‌آید. دوای ضد کرم از ۱ سالگی شروع می‌شود.",
+        "ps": "له ۶ میاشتو، ماشوم هرو ۶ میاشتو کې ویټامین اې ته اړتیا لري: په کلینیک کې، یا کله چې د واکسین ټیم راځي. د چینجیو درمل له ۱ کلنۍ پیلېږي.",
+        "en": "From 6 months, your child needs vitamin A every 6 months: at the clinic, or when the vaccination team comes. Worm medicine starts at 1 year."
       }
     },
     {
@@ -122,9 +122,9 @@
         "en": "At the clinic: weight, arm band, advice"
       },
       "text": {
-        "fa": "کارمند صحی طفل را وزن و قد می‌کند، بازو را با فیتهٔ رنگی معاینه می‌کند و در مورد تغذیه مشوره می‌دهد. طفل بسیار لاغر خمیر مخصوص بادام‌زمینی رایگان می‌گیرد. صفحهٔ طفل لاغر را ببینید.",
-        "ps": "روغتیايي کارکوونکی ماشوم تلي او قد یې اندازه کوي، مټ یې په رنګه فیته معاینه کوي او د تغذیې په اړه مشوره ورکوي. ډېر ډنګر ماشوم د ممپلي ځانګړې خمیره وړیا اخلي. د ډنګر ماشوم پاڼه وګورئ.",
-        "en": "The health worker weighs the child, checks the arm with the coloured band, and advises on feeding. A very thin child gets special peanut paste, free. See the Thin child page."
+        "fa": "کارمند صحی طفل را وزن و قد می‌کند، بازو را با فیتهٔ رنگی معاینه می‌کند و در مورد تغذیه مشوره می‌دهد. طفل بسیار لاغر خمیر مخصوص بادام‌زمینی می‌گیرد. صفحهٔ طفل لاغر را ببینید.",
+        "ps": "روغتیايي کارکوونکی ماشوم تلي او قد یې اندازه کوي، مټ یې په رنګه فیته معاینه کوي او د تغذیې په اړه مشوره ورکوي. ډېر ډنګر ماشوم د ممپلي ځانګړې خمیره اخلي. د ډنګر ماشوم پاڼه وګورئ.",
+        "en": "The health worker weighs the child, checks the arm with the coloured band, and advises on feeding. A very thin child gets special peanut paste. See the Thin child page."
       }
     },
     {
@@ -296,6 +296,7 @@
     "Monthly weighing 'especially in the first 2 years' assumes monthly growth monitoring under 2 in Afghan clinics; check the national growth monitoring schedule.",
     "Hearing item uses icon 'talk'; an 'ear' icon would be better.",
     "Very thin (severe wasting) follows MoPH IMAM 2018 and WHO SAM 2013, and matches the home kit (kit-muac, the MUAC checker in js/tools.js): very thin or a red MUAC = clinic today (outpatient treatment with therapeutic food, OPD-SAM); swelling of both feet, will not eat or drink, or very thin and very weak, sleepy or sick = hospital now (inpatient). New: growth.today (clinic today box) and the growth.home-care tip; growth.urgent.thin now needs 'very weak, sleepy or sick' as well. Chosen by the merge (2026-10-07); Mo to confirm. 'Every week' for outpatient visits is IMAM practice (weekly or every 2 weeks); check locally.",
-    "Developmental assessment at district hospital level is limited in Afghanistan; the block promises only a check for treatable causes and advice."
+    "Developmental assessment at district hospital level is limited in Afghanistan; the block promises only a check for treatable causes and advice.",
+    "Content pass 3 (MoPH fixes): weighing at 'the clinic or the health post'; vitamin A 'every 6 months: at the clinic, or when the vaccination team comes' (it mostly comes with campaigns and CHWs); 'free' removed from the paste (Mo's rule: 'free' only for vaccines and TB). The very thin child already goes to the clinic today unless weak, sleepy or sick (IMAM 2018)."
   ]
 }

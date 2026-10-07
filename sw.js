@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.07-e27a8f';
+const VERSION = '2026.10.07-6b604c';
 const PRECACHE = [
  "./",
  "index.html",
@@ -25,6 +25,7 @@ const PRECACHE = [
  "js/stats.js",
  "js/tools.js",
  "js/zip.js",
+ "anim/breathe.js",
  "anim/cpr-adult.js",
  "anim/cpr-baby.js",
  "anim/cpr-child.js",
@@ -137,6 +138,7 @@ const PRECACHE = [
  "img/topics/anaemia.svg",
  "img/topics/animal-illness.svg",
  "img/topics/asthma.svg",
+ "img/topics/birth-plan.svg",
  "img/topics/bite-safety.svg",
  "img/topics/blood-pressure.svg",
  "img/topics/breastfeeding.svg",
@@ -194,6 +196,11 @@ const PRECACHE = [
  "img/topics/malaria.svg",
  "img/topics/malnutrition.svg",
  "img/topics/measles.svg",
+ "img/topics/mind-body.svg",
+ "img/topics/mind-calm.svg",
+ "img/topics/mind-cycle.svg",
+ "img/topics/mind-problems.svg",
+ "img/topics/mind-routine.svg",
  "img/topics/move-daily.svg",
  "img/topics/newborn.svg",
  "img/topics/pneumonia-adult.svg",

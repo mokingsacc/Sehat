@@ -625,6 +625,23 @@
     {"q": "طفلم تب و لرز دارد", "lang": "fa", "want": "fever", "set": "new", "note": "child fever with chills: fever first, malaria second (malaria is rare in Samangan)"},
     {"q": "ماشوم تبه او لړزه لري", "lang": "ps", "want": "fever", "set": "new", "note": "child fever with chills: fever first, malaria second (malaria is rare in Samangan)"},
     {"q": "my child has fever and chills", "lang": "en", "want": "fever", "set": "new", "note": "child fever with chills: fever first, malaria second (malaria is rare in Samangan)"},
-    {"q": "تب و لرز دارم ملاریا", "lang": "fa", "want": "malaria", "set": "new"}
+    {"q": "تب و لرز دارم ملاریا", "lang": "fa", "want": "malaria", "set": "new"},
+    {"q": "پلان ولادت عروسم", "lang": "fa", "want": "birth-plan", "set": "new", "note": "content pass 3"},
+    {"q": "د زېږون لپاره چمتووالی", "lang": "ps", "want": "birth-plan", "set": "new", "note": "content pass 3"},
+    {"q": "what to pack for giving birth", "lang": "en", "want": "birth-plan", "set": "new", "note": "content pass 3"},
+    {"q": "breathing exercise for stress", "lang": "en", "want": "mind-calm", "set": "new", "note": "content pass 3"},
+    {"q": "چطور خود را آرام کنم", "lang": "fa", "want": "mind-calm", "set": "new", "note": "content pass 3"},
+    {"q": "د ساه تمرین", "lang": "ps", "want": "mind-calm", "set": "new", "note": "content pass 3"},
+    {"q": "زیاد فکر می‌کنم", "lang": "fa", "want": "mind-cycle", "set": "new", "note": "content pass 3"},
+    {"q": "negative thinking", "lang": "en", "want": "mind-cycle", "set": "new", "note": "content pass 3"},
+    {"q": "مشکلات زیاد دارم", "lang": "fa", "want": "mind-problems", "set": "new", "note": "content pass 3"},
+    {"q": "ډېرې ستونزې لرم", "lang": "ps", "want": "mind-problems", "set": "new", "note": "content pass 3"},
+    {"q": "too many problems at home", "lang": "en", "want": "mind-problems", "set": "new", "note": "content pass 3"},
+    {"q": "حوصله ندارم", "lang": "fa", "want": "mind-routine", "set": "new", "note": "content pass 3"},
+    {"q": "no motivation to do anything", "lang": "en", "want": "mind-routine", "set": "new", "note": "content pass 3"},
+    {"q": "signs of stress in the body", "lang": "en", "want": "mind-body", "set": "new", "note": "content pass 3"},
+    {"q": "د رواني فشار نښې", "lang": "ps", "want": "mind-body", "set": "new", "note": "content pass 3"},
+    {"q": "ناف نوزاد را چه کنم", "lang": "fa", "want": "newborn", "set": "new", "note": "content pass 3"},
+    {"q": "cord care newborn", "lang": "en", "want": "newborn", "set": "new", "note": "content pass 3"}
   ]
 }

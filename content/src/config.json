@@ -181,9 +181,22 @@
         "say": "ui.women",
         "topics": [
           "pregnancy-care",
+          "birth-plan",
           "after-birth",
           "anaemia",
           "urine-infection"
+        ]
+      },
+      {
+        "title": "mindStress",
+        "say": "ui.mindStress",
+        "topics": [
+          "stress",
+          "mind-body",
+          "mind-cycle",
+          "mind-calm",
+          "mind-problems",
+          "mind-routine"
         ]
       },
       {

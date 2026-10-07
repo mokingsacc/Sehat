@@ -133,9 +133,9 @@
         "en": "At the clinic: breath count and antibiotics"
       },
       "text": {
-        "fa": "کارمند صحی نفس‌ها را می‌شمارد و به سینه نگاه می‌کند. برای سینه‌بغل شربت یا تابلیت انتی‌بیوتیک می‌دهد، معمولاً اموکسی‌سیلین، برای ۵ روز، رایگان. زکام انتی‌بیوتیک ضرورت ندارد.",
-        "ps": "روغتیايي کارکوونکی ساه شمېري او سینې ته ګوري. د سینه بغل لپاره د انټي بیوټیک شربت یا ګولۍ ورکوي، معمولاً اموکسي سیلین، د ۵ ورځو لپاره، وړیا. زکام انټي بیوټیک ته اړتیا نه لري.",
-        "en": "The health worker counts the breaths and looks at the chest. For pneumonia they give an antibiotic syrup or tablets, usually amoxicillin, for 5 days, free. A cold needs no antibiotic."
+        "fa": "کارمند صحی نفس‌ها را می‌شمارد و به سینه نگاه می‌کند. برای سینه‌بغل شربت یا تابلیت انتی‌بیوتیک می‌دهد، معمولاً اموکسی‌سیلین، برای ۵ روز. زکام انتی‌بیوتیک ضرورت ندارد.",
+        "ps": "روغتیايي کارکوونکی ساه شمېري او سینې ته ګوري. د سینه بغل لپاره د انټي بیوټیک شربت یا ګولۍ ورکوي، معمولاً اموکسي سیلین، د ۵ ورځو لپاره. زکام انټي بیوټیک ته اړتیا نه لري.",
+        "en": "The health worker counts the breaths and looks at the chest. For pneumonia they give an antibiotic syrup or tablets, usually amoxicillin, for 5 days. A cold needs no antibiotic."
       }
     },
     {
@@ -285,6 +285,16 @@
       ]
     },
     {
+      "id": "cough.chw",
+      "type": "tip",
+      "icon": "clinic",
+      "text": {
+        "fa": "اگر طفل هیچ‌یک از این علایم را ندارد، کارمند صحی قریه می‌تواند نفس‌ها را بشمارد و بگوید کجا بروید.",
+        "ps": "که ماشوم له دې نښو څخه هېڅ یوه نه لري، د کلي روغتیايي کارکوونکی کولای شي ساه وشمېري او ووايي چې چېرته ولاړ شئ.",
+        "en": "If your child has none of these signs, the village health worker can count the breaths and tell you where to go."
+      }
+    },
+    {
       "id": "cough.dont",
       "type": "dont",
       "title": {
@@ -332,6 +342,7 @@
     "Icon 'breathe' is used for stridor and wheeze; an icon showing noisy breathing would be better.",
     "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. cough.urgent.breathing now means a baby under 2 months; the new cough.soon.fast is fast breathing alone at 2 months to 5 years.",
     "IMCI 2014 says oral amoxicillin (twice daily, 5 days) is the first-line pneumonia antibiotic; the Afghan NSTG 2013 child chapter still named cotrimoxazole. Mo to confirm what Samangan BHCs give and whether to name it.",
-    "Whooping-cough item: Dari سیاه‌سرفه; Pashto wording (توره ټوخۍ / شدید ټوخی) to be confirmed by a native speaker."
+    "Whooping-cough item: Dari سیاه‌سرفه; Pashto wording (توره ټوخۍ / شدید ټوخی) to be confirmed by a native speaker.",
+    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check. 'free' removed from the clinic box (Mo's rule)."
   ]
 }

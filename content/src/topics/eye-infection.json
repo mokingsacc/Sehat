@@ -91,9 +91,9 @@
         "en": "At the clinic: eye ointment or drops"
       },
       "text": {
-        "fa": "کارمند صحی چشم را می‌بیند و مرهم چشمی تتراسایکلین یا قطرهٔ دیگر می‌دهد، در کلینیک‌های دولتی رایگان. برای تراخم شاید به تمام قریه تابلیت ازیترومایسین داده شود.",
-        "ps": "روغتیايي کارکوونکی سترګه ګوري او د ټټراسایکلین د سترګو ملهم یا نور څاڅکي ورکوي، په دولتي کلینیکونو کې وړیا. د تراخم لپاره ښايي ټول کلي ته د ازیترومایسین ګولۍ ورکړل شي.",
-        "en": "The health worker looks at the eye and gives tetracycline eye ointment or other drops, free at government clinics. For trachoma the whole village may be given azithromycin tablets."
+        "fa": "کارمند صحی چشم را می‌بیند و مرهم چشمی تتراسایکلین یا قطرهٔ دیگر می‌دهد. برای تراخم شاید به تمام قریه تابلیت ازیترومایسین داده شود.",
+        "ps": "روغتیايي کارکوونکی سترګه ګوري او د ټټراسایکلین د سترګو ملهم یا نور څاڅکي ورکوي. د تراخم لپاره ښايي ټول کلي ته د ازیترومایسین ګولۍ ورکړل شي.",
+        "en": "The health worker looks at the eye and gives tetracycline eye ointment or other drops. For trachoma the whole village may be given azithromycin tablets."
       }
     },
     {
@@ -287,6 +287,7 @@
     "Eye doctor: an ophthalmologist is unlikely to be at Aybak provincial hospital; the realistic referral is Balkh Regional Hospital in Mazar-i-Sharif. Wording says 'the eye doctor' without a place.",
     "'Shop drops can harm the eye' refers to steroid-containing drops sold over the counter; evidence is general, not Afghanistan-specific.",
     "Trichiasis item placed under 'this clinic today' list; WHO treats it as needing surgery (not urgent, but soon). Fine to move to a 'this week' list if the topic gets one.",
-    "Dari تراخم, Pashto تراخم: formal words; ask the translator what villagers call it."
+    "Dari تراخم, Pashto تراخم: formal words; ask the translator what villagers call it.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

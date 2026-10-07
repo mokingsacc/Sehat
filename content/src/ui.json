@@ -1226,6 +1226,11 @@
    "ps": "د ښځو روغتیا",
    "en": "Women's health"
   },
+  "mindStress": {
+   "fa": "ذهن و فشار روحی",
+   "ps": "ذهن او رواني فشار",
+   "en": "Mind and stress"
+  },
   "wellbeing": {
    "fa": "زندگی صحتمند",
    "ps": "روغ ژوند",
@@ -1307,6 +1312,11 @@
    "fa": "صحت زنان: حاملگی، ولادت و بعد از ولادت.",
    "ps": "د ښځو روغتیا: امیندواري، زېږون او له زېږون وروسته.",
    "en": "Women's health: pregnancy, birth and after birth."
+  },
+  "ui.mindStress": {
+   "fa": "ذهن و فشار روحی: راه‌های ساده برای آرام شدن، و چه وقت کمک بگیرید.",
+   "ps": "ذهن او رواني فشار: د ارامېدو ساده لارې، او کله مرسته وغواړئ.",
+   "en": "Mind and stress: simple ways to feel calmer, and when to get help."
   },
   "ui.everyone": {
    "fa": "برای همه، مردان و زنان: علایم خطر و امراض عام.",

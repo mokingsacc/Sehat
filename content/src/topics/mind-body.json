@@ -1,0 +1,242 @@
+{
+  "id": "mind-body",
+  "section": "everyone",
+  "title": {
+    "fa": "فشار روحی با ما چه می‌کند",
+    "ps": "رواني فشار له موږ سره څه کوي",
+    "en": "What stress does to us"
+  },
+  "summary": {
+    "fa": "فشار روحی در بدن، ذهن و کارهای ما دیده می‌شود.",
+    "ps": "رواني فشار په بدن، ذهن او زموږ په کړنو کې ښکاري.",
+    "en": "Stress shows in the body, the mind and what we do."
+  },
+  "image": "mind-body",
+  "blocks": [
+    {
+      "id": "mind-body.lead",
+      "type": "lead",
+      "text": {
+        "fa": "وقتی زندگی سخت است، بدن و ذهن واکنش نشان می‌دهند. شناختن این علایم کمک می‌کند بدانید که این فشار روحی است و بهتر شده می‌تواند.",
+        "ps": "کله چې ژوند سخت وي، بدن او ذهن غبرګون ښيي. د دې نښو پېژندل مرسته کوي چې پوه شئ دا رواني فشار دی او ښه کېدای شي.",
+        "en": "When life is hard, the body and the mind react. Knowing the signs helps you see that this is stress, and that it can get better."
+      }
+    },
+    {
+      "id": "mind-body.body",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "در بدن",
+        "ps": "په بدن کې",
+        "en": "In the body"
+      },
+      "text": {
+        "fa": "قلب تیز می‌زند، نفس تیز می‌شود و عضلات سخت می‌شوند. سردردی، شکم‌دردی، خستگی و بی‌خوابی عام است.",
+        "ps": "زړه ګړندی درزا کوي، ساه ګړندۍ کېږي او عضلات کلک کېږي. سر درد، د ګېډې درد، ستړیا او بې خوبي عامې دي.",
+        "en": "The heart beats fast, breathing is quick and muscles are tight. Headache, stomach ache, tiredness and poor sleep are common."
+      }
+    },
+    {
+      "id": "mind-body.mind",
+      "type": "step",
+      "icon": "sad",
+      "title": {
+        "fa": "در ذهن",
+        "ps": "په ذهن کې",
+        "en": "In the mind"
+      },
+      "text": {
+        "fa": "فکرهای پریشان دور می‌زنند. شاید غمگین، قهر یا ترسیده باشید و فکر کردن یا تصمیم گرفتن برایتان سخت شود.",
+        "ps": "اندېښمن فکرونه بیا بیا راګرځي. ښايي خپه، غوسه یا وېرېدلي اوسئ او فکر کول یا پرېکړه کول درته سخت شي.",
+        "en": "Worried thoughts go round and round. You may feel sad, angry or afraid, and find it hard to think or decide."
+      }
+    },
+    {
+      "id": "mind-body.actions",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "در کارهای ما",
+        "ps": "زموږ په کړنو کې",
+        "en": "In what we do"
+      },
+      "text": {
+        "fa": "شاید از مردم دوری کنیم، کارهایی را که خوش داریم بس کنیم، بالای خانواده چیغ بزنیم، یا سگرت و نسوار بیشتر استفاده کنیم.",
+        "ps": "ښايي له خلکو لرې شو، هغه کارونه پرېږدو چې خوښوو یې، پر کورنۍ چیغې ووهو، یا ډېر سګرټ او نسوار وکاروو.",
+        "en": "We may stay away from people, stop doing things we enjoy, shout at the family, or smoke or use naswar more."
+      }
+    },
+    {
+      "id": "mind-body.normal",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "این یک واکنش عادی است",
+        "ps": "دا یو عادي غبرګون دی",
+        "en": "This is a normal reaction"
+      },
+      "text": {
+        "fa": "فشار روحی زنگ خطر بدن است. ضعف نیست و دیوانگی هم نیست. مهارت‌های کوچک روزانه این زنگ را آرام کرده می‌تواند.",
+        "ps": "رواني فشار د بدن د خطر زنګ دی. کمزوري نه ده او لېونتوب هم نه دی. کوچني ورځني مهارتونه کولای شي دا زنګ ارام کړي.",
+        "en": "Stress is the body's alarm. It is not weakness and not madness. Small daily skills can turn the alarm down."
+      }
+    },
+    {
+      "id": "mind-body.check",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "بدن را هم معاینه کنید",
+        "ps": "بدن هم معاینه کړئ",
+        "en": "Let the body be checked too"
+      },
+      "text": {
+        "fa": "سردردی، درد سینه یا کم شدن وزن علت‌های دیگر هم داشته می‌تواند. اگر دردی تازه یا شدید است، پیش کارمند صحی بروید.",
+        "ps": "سر درد، د سینې درد یا د وزن کمېدل نور لاملونه هم لرلای شي. که درد نوی یا سخت وي، روغتیايي کارکوونکي ته ورشئ.",
+        "en": "Headache, chest pain or weight loss can have other causes. If a pain is new or strong, see a health worker."
+      }
+    },
+    {
+      "id": "mind-body.calm",
+      "type": "link",
+      "to": "topic/mind-calm",
+      "icon": "breathe",
+      "title": {
+        "fa": "آرام کردن بدن: نفس آهسته",
+        "ps": "بدن ارامول: ورو ساه",
+        "en": "Calm the body: slow breathing"
+      },
+      "text": {
+        "fa": "نفس آهسته و حس کردن زمین، قدم به قدم، برای آرام کردن زنگ خطر.",
+        "ps": "ورو ساه او د ځمکې احساس، ګام په ګام، د خطر د زنګ د ارامولو لپاره.",
+        "en": "Slow breathing and grounding, step by step, to turn the alarm down."
+      }
+    },
+    {
+      "id": "mind-body.cycle",
+      "type": "link",
+      "to": "topic/mind-cycle",
+      "icon": "talk",
+      "title": {
+        "fa": "فکر، احساس و عمل",
+        "ps": "فکر، احساس او عمل",
+        "en": "Thoughts, feelings and actions"
+      },
+      "text": {
+        "fa": "یک فکر پریشان چطور بزرگ می‌شود، و چطور این چرخه را بشکنید.",
+        "ps": "یو اندېښمن فکر څنګه لوییږي، او دا څرخ څنګه مات کړئ.",
+        "en": "How a worried thought can grow, and how to break the cycle."
+      }
+    },
+    {
+      "id": "mind-body.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز",
+        "ps": "له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Any of these? Tell someone you trust, go to a health worker now, day or night"
+      },
+      "items": [
+        {
+          "id": "mind-body.urgent.end-life",
+          "icon": "warning",
+          "text": {
+            "fa": "فکر پایان دادن به زندگی خود را دارید",
+            "ps": "د خپل ژوند د پای ته رسولو فکرونه لرئ",
+            "en": "you have thoughts of ending your life"
+          }
+        },
+        {
+          "id": "mind-body.urgent.self-harm",
+          "icon": "warning",
+          "text": {
+            "fa": "به خود آسیب رسانده‌اید، یا قصد آن را دارید",
+            "ps": "ځان ته مو زیان رسولی، یا یې اراده لرئ",
+            "en": "you have hurt yourself, or are planning to"
+          }
+        },
+        {
+          "id": "mind-body.urgent.hurt-others",
+          "icon": "people",
+          "text": {
+            "fa": "حس می‌کنید شاید به کسی دیگر آسیب برسانید",
+            "ps": "احساس کوئ چې ښايي بل چا ته زیان ورسوئ",
+            "en": "you feel you might hurt someone else"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-body.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این حالات را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If any of these is true for you, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "mind-body.soon.weeks",
+          "icon": "sad",
+          "text": {
+            "fa": "۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید",
+            "ps": "۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست",
+            "en": "you have felt low or worried most days for 2 weeks or more"
+          }
+        },
+        {
+          "id": "mind-body.soon.fear",
+          "icon": "heart",
+          "text": {
+            "fa": "حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید",
+            "ps": "د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي",
+            "en": "sudden attacks of fear, with a racing heart, keep coming back"
+          }
+        },
+        {
+          "id": "mind-body.soon.daily",
+          "icon": "family",
+          "text": {
+            "fa": "کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید",
+            "ps": "خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی",
+            "en": "you cannot do your daily work or care for your family"
+          }
+        },
+        {
+          "id": "mind-body.soon.drugs",
+          "icon": "no",
+          "text": {
+            "fa": "برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید",
+            "ps": "د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ",
+            "en": "you use opium, pills or other drugs to cope"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-body.children",
+      "type": "tip",
+      "icon": "baby",
+      "text": {
+        "fa": "اطفال هم فشار روحی را نشان می‌دهند: شب‌ادراری، چسپیدن به مادر، قهر یا بی‌خوابی. با آن‌ها نرم باشید و کارهای روزانهٔ شان را منظم نگه دارید.",
+        "ps": "ماشومان هم رواني فشار ښيي: د شپې متیازې، له مور سره نښتل، غوسه یا بې خوبي. ورسره نرم اوسئ او ورځني کارونه یې منظم وساتئ.",
+        "en": "Children show stress too: wetting the bed, clinging, anger or poor sleep. Be gentle, and keep their daily routine."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Doing What Matters in Times of Stress: an illustrated guide (2020): grounding, unhooking from difficult thoughts, acting on your values, being kind, making room",
+    "WHO mhGAP Intervention Guide 2.0 (2016): psychoeducation for stress and low mood; self-harm and suicide (ask, stay with the person, remove means, refer)",
+    "WHO Problem Management Plus (PM+): individual psychological help for adults impaired by distress in communities exposed to adversity (2016, generic field-trial version 1.1, 2018): managing stress (slow breathing), managing problems, get going keep doing (behavioural activation), strengthening social support",
+    "Afghanistan National Mental Health Survey (2017) and MoPH Mental Health Strategy: psychosocial counsellors at CHCs, mental health care at district and provincial hospitals"
+  ],
+  "review": [
+    "New page (content pass 3), Health > Adults > Mind and stress. Plain words, no diagnosis labels ('stress', 'low mood', 'worry'), no religious content.",
+    "'It is not weakness and not madness' (ضعف / دیوانگی; کمزوري / لېونتوب) is meant to lift stigma; check that it does not sound blunt in Dari and Pashto.",
+    "Children's signs follow WHO DWMS and the WHO/UNICEF psychosocial guidance for children; there is no separate children's stress page yet.",
+    "Every Mind page ends with the same red box (thoughts of ending life, self-harm, hurting others: tell someone you trust and go to a health worker now, day or night) and amber box (low or worried 2 weeks or more, attacks of fear that keep coming, cannot do daily work, drugs to cope: clinic today), with the page's own ids, as briefed. The red title does not say 'hospital': a health worker at the clinic or hospital, whichever is nearer. The stress page keeps its own boxes. First attacks of fear with chest pain may be the heart: chest pain is on the red-flags page. No hotline is given (moph-guidance.md item 11: 120 Youth Health Line not confirmed for Samangan)."
+  ]
+}

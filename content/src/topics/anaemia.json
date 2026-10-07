@@ -121,9 +121,9 @@
         "en": "At the clinic: blood test, iron tablets"
       },
       "text": {
-        "fa": "کارمند صحی پلک‌ها و کف دست را می‌بیند و شاید خون را با معاینهٔ نوک انگشت اندازه کند. تابلیت آهن و فولیک اسید را رایگان، برای ۳ ماه، و دوای کرم می‌دهد، و علت را جستجو می‌کند.",
-        "ps": "روغتیايي کارکوونکی باڼه او ورغوي ګوري او ښايي وینه د ګوتې په معاینه اندازه کړي. د اوسپنې او فولیک اسید ګولۍ وړیا، د ۳ میاشتو لپاره، او د چینجیو درمل ورکوي، او لامل یې لټوي.",
-        "en": "The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets free, for 3 months, plus worm medicine."
+        "fa": "کارمند صحی پلک‌ها و کف دست را می‌بیند و شاید خون را با معاینهٔ نوک انگشت اندازه کند. تابلیت آهن و فولیک اسید را برای ۳ ماه، و دوای کرم می‌دهد، و علت را جستجو می‌کند.",
+        "ps": "روغتیايي کارکوونکی باڼه او ورغوي ګوري او ښايي وینه د ګوتې په معاینه اندازه کړي. د اوسپنې او فولیک اسید ګولۍ د ۳ میاشتو لپاره، او د چینجیو درمل ورکوي، او لامل یې لټوي.",
+        "en": "The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets for 3 months, plus worm medicine."
       }
     },
     {
@@ -246,6 +246,7 @@
     "'Pale' is translated as white/pale (fa رنگ‌پریده, ps سپین); local speakers may say 'yellow' (زرد / ژېړ) for anaemic pallor; check with the translator.",
     "Icons: causes uses 'warning'; worm medicine uses 'pill'; fainting uses 'sleepy'; black-stool tip uses 'iron-pill'.",
     "Finger-prick haemoglobin (HemoCue) is not available at every BHC; the text says 'may measure'.",
-    "The haemoglobin threshold for transfusion is not stated; signs are used instead."
+    "The haemoglobin threshold for transfusion is not stated; signs are used instead.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

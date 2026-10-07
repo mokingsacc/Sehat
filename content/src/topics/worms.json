@@ -7,9 +7,9 @@
     "en": "Worms in the belly"
   },
   "summary": {
-    "fa": "کرم‌ها طفل را ضعیف و رنگ‌پریده می‌کنند. دوای کرم در کلینیک رایگان است.",
-    "ps": "چینجي ماشوم کمزوری او رنګ الوتی کوي. د چینجیو درمل په کلینیک کې وړیا دي.",
-    "en": "Worms make children weak and pale. Clinic worm medicine is free."
+    "fa": "کرم‌ها طفل را ضعیف و رنگ‌پریده می‌کنند. کلینیک دوای کرم می‌دهد.",
+    "ps": "چینجي ماشوم کمزوری او رنګ الوتی کوي. کلینیک د چینجیو درمل ورکوي.",
+    "en": "Worms make children weak and pale. The clinic gives worm medicine."
   },
   "image": "worms",
   "blocks": [
@@ -47,9 +47,9 @@
         "en": "Worm medicine from 1 year"
       },
       "text": {
-        "fa": "از ۱ سالگی، کلینیک هر ۶ ماه یک تابلیت کرم می‌دهد، رایگان. در وقت واکسین یا وزن‌کردن آن را بخواهید.",
-        "ps": "له ۱ کلنۍ څخه، کلینیک هرو ۶ میاشتو کې د چینجیو یوه ګولۍ ورکوي، وړیا. د واکسین یا تلو پر وخت یې وغواړئ.",
-        "en": "From 1 year old, the clinic gives a worm tablet every 6 months, free. Ask for it at the vaccine or weighing visit."
+        "fa": "از ۱ سالگی، کلینیک هر ۶ ماه یک تابلیت کرم می‌دهد. در وقت واکسین یا وزن‌کردن آن را بخواهید.",
+        "ps": "له ۱ کلنۍ څخه، کلینیک هرو ۶ میاشتو کې د چینجیو یوه ګولۍ ورکوي. د واکسین یا تلو پر وخت یې وغواړئ.",
+        "en": "From 1 year old, the clinic gives a worm tablet every 6 months. Ask for it at the vaccine or weighing visit."
       }
     },
     {
@@ -251,6 +251,7 @@
     "'Every 6 months from 1 year, free': IMCI 2014 and the BPHS schedule; Afghanistan's mass deworming has mostly been school-based, so confirm that BHCs stock mebendazole/albendazole for under-fives in Samangan.",
     "Urgent item 'vomits worms' is meant to catch ascaris intestinal obstruction (Pocket Book 2013); keep or soften as Mo prefers.",
     "'Worm medicine for a baby under 1 year' do-not item: WHO deworming starts at 12 months; wording leaves the decision to the health worker.",
-    "Dari کرم‌های شکم and Pashto د نس چینجي are everyday words; Pashto spelling چینجي (plural) to be checked by a native speaker."
+    "Dari کرم‌های شکم and Pashto د نس چینجي are everyday words; Pashto spelling چینجي (plural) to be checked by a native speaker.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

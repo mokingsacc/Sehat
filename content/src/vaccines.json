@@ -344,6 +344,15 @@
       }
     },
     {
+      "id": "vaccines.birth-day",
+      "icon": "newborn-warm",
+      "text": {
+        "fa": "طفلی که در خانه به دنیا آمده، باید در ۲۴ ساعت اول برای واکسین هپاتیت ب و معاینه به کلینیک برده شود.",
+        "ps": "هغه ماشوم چې په کور کې زېږېدلی، باید په لومړیو ۲۴ ساعتونو کې د هیپاټایټس ب واکسین او معاینې لپاره کلینیک ته بوتلل شي.",
+        "en": "A baby born at home should go to the clinic within 24 hours, for the hepatitis B vaccine and a check."
+      }
+    },
+    {
       "id": "vaccines.card",
       "icon": "card",
       "text": {
@@ -359,6 +368,15 @@
         "fa": "اگر واکسینی مانده است، باز هم بروید؛ هیچ وقت دیر نیست. کارمند صحی واکسین‌هایی را که طفل هنوز لازم دارد، می‌دهد.",
         "ps": "که کوم واکسین پاتې شوی وي، بیا هم ولاړ شئ؛ هېڅکله ناوخته نه دی. روغتیايي کارکوونکی به هغه واکسینونه ورکړي چې ماشوم ته لا پکار دي.",
         "en": "If a vaccine was missed, go anyway; it is never too late. The health worker will give the ones your child still needs."
+      }
+    },
+    {
+      "id": "vaccines.campaign",
+      "icon": "syringe",
+      "text": {
+        "fa": "قطرهٔ پولیو، و گاهی ویتامین ای یا واکسین سرخکان، در کمپاین‌ها هم داده می‌شود. طفل را ببرید، و باز هم به هر نوبت کلینیک بروید.",
+        "ps": "د پولیو څاڅکي، او کله کله ویټامین اې یا د شري واکسین، په کمپاینونو کې هم ورکول کېږي. ماشوم بوځئ، او بیا هم د کلینیک هرې ټاکلې لیدنې ته ولاړ شئ.",
+        "en": "Polio drops, and sometimes vitamin A or measles vaccine, are also given in campaigns. Take your child, and still go to every clinic visit."
       }
     },
     {
@@ -385,12 +403,12 @@
     "title": {
       "fa": "واکسین تیتانوس برای زنان",
       "ps": "د ښځو لپاره د ټیټانوس واکسین",
-      "en": "Tetanus vaccine for women (Td)"
+      "en": "Tetanus vaccine for women (TT or Td)"
     },
     "text": {
-      "fa": "هر زن ۱۵ تا ۴۹ ساله و هر زن حامله باید ۵ نوبت این واکسین را بگیرد. این واکسین مادر و نوزاد را از تیتانوس و خناق محافظت می‌کند.",
-      "ps": "هره ۱۵ تر ۴۹ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.",
-      "en": "Every woman aged 15 to 49, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria."
+      "fa": "هر زن ۱۵ تا ۴۵ ساله و هر زن حامله باید ۵ نوبت این واکسین را بگیرد. این واکسین مادر و نوزاد را از تیتانوس و خناق محافظت می‌کند.",
+      "ps": "هره ۱۵ تر ۴۵ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.",
+      "en": "Every woman aged 15 to 45, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria."
     },
     "doses": [
       {
@@ -449,8 +467,10 @@
     "OPV at 9 months was in the 2017 EPI table but not in the 2023 UNICEF description; it is left out. Please confirm.",
     "Women's vaccine: the 2017 Afghan EPI review lists tetanus toxoid (TT1 to TT5); whether Afghanistan now uses Td is not confirmed. Written as 'tetanus vaccine' in Dari and Pashto, with '(Td)' only in the English title, and Td protects against diphtheria too. Dose 2 is 'at least 4 weeks' after dose 1 (the 2017 review says 'after one month').",
     "'It is never too late to catch up' is broadly true, but rotavirus has an upper age limit and some doses are not given to older children; the note adds that the health worker will give the ones the child still needs.",
-    "Hepatitis B birth dose is best within 24 hours of birth; not stated here (the newborn topic says go to the clinic as soon as you can if born at home).",
     "Vaccine names in Dari/Pashto (پنتاوالان، نوموکوک، روتا ویروس، بی سی جی) are transliterations; check they match the words on the Afghan vaccine card.",
-    "PCV protects against pneumonia, meningitis and ear infections; written as 'pneumonia' for simplicity."
+    "PCV protects against pneumonia, meningitis and ear infections; written as 'pneumonia' for simplicity.",
+    "Content pass 3 (MoPH fixes): the women's vaccine age band is now 15 to 45 (BPHS 2010, 'TT to women 15-45'); the CHW manual (2005) says 14-49 and WHO says 15-49. Please match the Afghan TT/Td card. The English title says 'TT or Td' because MoPH's switch to Td is not documented.",
+    "Content pass 3: new note vaccines.birth-day (born at home: clinic within 24 hours for hepatitis B, WUENIC 'within 24 hours of delivery') and vaccines.campaign (polio drops, sometimes vitamin A or measles, in campaigns; still go to the clinic visits). Campaigns have been site-based since September 2024.",
+    "Content pass 3: IPV2 at 9 months is still unconfirmed (moph-guidance.md item 1): no public MoPH or UNICEF Afghanistan source gives its age. Do not record the 9-month clip until NEPI or UNICEF confirms."
   ]
 }

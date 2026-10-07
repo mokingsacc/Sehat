@@ -116,9 +116,9 @@
         "en": "At the clinic: ORS, zinc, a check"
       },
       "text": {
-        "fa": "کارمند صحی می‌بیند طفل چقدر خشک شده، او آر اس و زنک را رایگان می‌دهد و طرز دادنش را نشان می‌دهد. انتی‌بیوتیک فقط برای خون در مدفوع یا کولرا است.",
-        "ps": "روغتیايي کارکوونکی ګوري چې ماشوم څومره وچ شوی، او آر اس او زنک وړیا ورکوي او د ورکولو لار یې ښيي. انټي بیوټیک یوازې د ډکو کې وینې یا کولرا لپاره دی.",
-        "en": "The health worker checks how dry the child is, gives ORS and zinc free, and shows how to give them. Antibiotics are only for blood in the stool or cholera."
+        "fa": "کارمند صحی می‌بیند طفل چقدر خشک شده، او آر اس و زنک را می‌دهد و طرز دادنش را نشان می‌دهد. انتی‌بیوتیک فقط برای خون در مدفوع یا کولرا است.",
+        "ps": "روغتیايي کارکوونکی ګوري چې ماشوم څومره وچ شوی، او آر اس او زنک ورکوي او د ورکولو لار یې ښيي. انټي بیوټیک یوازې د ډکو کې وینې یا کولرا لپاره دی.",
+        "en": "The health worker checks how dry the child is, gives ORS and zinc, and shows how to give them. Antibiotics are only for blood in the stool or cholera."
       }
     },
     {
@@ -241,6 +241,16 @@
       ]
     },
     {
+      "id": "diarrhoea.chw",
+      "type": "tip",
+      "icon": "clinic",
+      "text": {
+        "fa": "اگر طفل هیچ‌یک از این علایم را ندارد، اول پیش کارمند صحی قریه یا به پوستهٔ صحی بروید. آن‌ها او آر اس و زنک دارند.",
+        "ps": "که ماشوم له دې نښو څخه هېڅ یوه نه لري، لومړی د کلي روغتیايي کارکوونکي یا روغتیايي پوستې ته ولاړ شئ. هغوی او آر اس او زنک لري.",
+        "en": "If your child has none of these signs, go first to the village health worker or the health post. They have ORS and zinc."
+      }
+    },
+    {
       "id": "diarrhoea.dont",
       "type": "dont",
       "title": {
@@ -307,6 +317,7 @@
     "Dari 'آب جوش‌داده' and Pashto 'ایشول شوې اوبه' mean boiled water; the English says 'clean or boiled water' (boiled and cooled is implied).",
     "'ORS and zinc free': both are in the BPHS Health Post kit; confirm CHW supply in Samangan in 2026.",
     "The children's ciprofloxacin for dysentery is not named here (it is named in the adult diarrhoea topic); keep consistent if Mo wants names.",
-    "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
+    "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...).",
+    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check. 'free' removed from the clinic box (Mo's rule)."
   ]
 }

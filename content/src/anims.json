@@ -434,5 +434,40 @@
     "fa": "صابون، آب پاک، غذای پوشیده، تشناب سرپوش‌دار، سرفه در آرنج و پشه‌خانه. عادت‌های کوچکی که همهٔ خانواده را صحتمندتر نگه می‌دارد.",
     "ps": "صابون، پاکې اوبه، پټ خواړه، سرپوښ لرونکی تشناب، په څنګله کې ټوخی او پشه‌خانه. واړه عادتونه چې ټوله کورنۍ روغه ساتي.",
     "en": "Soap, safe water, covered food, a covered latrine, an elbow for coughs, and a bed net. Small habits that keep the whole family healthier."
+  },
+  "anim.breathe.title": {
+    "fa": "نفس آهسته",
+    "ps": "ورو ساه اخیستل",
+    "en": "Slow breathing"
+  },
+  "anim.breathe.s1": {
+    "fa": "راحت بنشینید، پاها صاف روی زمین و دست‌ها آرام. شانه‌ها را رها کنید.",
+    "ps": "په ارامۍ کېنئ، پښې په ځمکه سمې او لاسونه ارام. اوږې خوشې کړئ.",
+    "en": "Sit comfortably, with your feet flat on the floor and your hands resting. Let your shoulders drop."
+  },
+  "anim.breathe.s2": {
+    "fa": "اول، همهٔ هوا را آهسته بیرون کنید، مثل این‌که بالای چای داغ پف می‌کنید.",
+    "ps": "لومړی، ټوله هوا ورو وباسئ، لکه پر ګرم چای چې پوکې کوئ.",
+    "en": "First, breathe all the air out slowly, as if blowing on hot tea."
+  },
+  "anim.breathe.s3": {
+    "fa": "حالا از راه بینی آهسته نفس بکشید، همان‌طور که دایره بزرگ می‌شود. یک، دو، سه.",
+    "ps": "اوس د پوزې له لارې ورو ساه واخلئ، لکه څنګه چې کړۍ لوییږي. یو، دوه، درې.",
+    "en": "Now breathe in slowly through your nose, as the circle grows. One, two, three."
+  },
+  "anim.breathe.s4": {
+    "fa": "و از راه دهن آهسته نفس را بیرون کنید، همان‌طور که کوچک می‌شود. یک، دو، سه، چهار.",
+    "ps": "او د خولې له لارې ورو ساه وباسئ، لکه څنګه چې کوچنۍ کېږي. یو، دوه، درې، څلور.",
+    "en": "And breathe out slowly through your mouth, as it gets smaller. One, two, three, four."
+  },
+  "anim.breathe.s5": {
+    "fa": "دوباره، همراه دایره. داخل، دو، سه. بیرون، دو، سه، چهار.",
+    "ps": "بیا، له کړۍ سره. دننه، دوه، درې. بهر، دوه، درې، څلور.",
+    "en": "Again, with the circle. In, two, three. Out, two, three, four."
+  },
+  "anim.breathe.s6": {
+    "fa": "حدود دو دقیقه همراه دایره نفس بکشید. بعد پاها را به زمین فشار دهید و سه چیز دور و بر خود را ببینید.",
+    "ps": "شاوخوا دوه دقیقې له کړۍ سره ساه واخلئ. بیا پښې په ځمکه کېکاږئ او خپل شاوخوا درې شیان وګورئ.",
+    "en": "Keep breathing with the circle for about two minutes. Then press your feet into the floor, and notice three things around you."
   }
 }

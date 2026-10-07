@@ -155,9 +155,9 @@
         "en": "Check-ups for mother and baby"
       },
       "text": {
-        "fa": "مادر و طفل باید در روز اول، روز ۳، بین روز ۷ و ۱۴، و در ۶ هفتگی معاینه شوند.",
-        "ps": "مور او ماشوم باید په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینه شي.",
-        "en": "Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks."
+        "fa": "مادر و طفل باید در روز اول، روز ۳، بین روز ۷ و ۱۴، و در ۶ هفتگی معاینه شوند. کارمند صحی قریه هم می‌تواند به خانه بیاید.",
+        "ps": "مور او ماشوم باید په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینه شي. د کلي روغتیايي کارکوونکی هم کولای شي کور ته راشي.",
+        "en": "Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks. The village health worker can also visit at home."
       }
     },
     {
@@ -229,9 +229,9 @@
         "en": "At the clinic: the postnatal checks"
       },
       "text": {
-        "fa": "قابله خونریزی، فشار خون، تب، پستان‌ها و زخم شما را معاینه می‌کند، در مورد روحیه و ادرار می‌پرسد، آهن می‌دهد، طفل را معاینه می‌کند و به سوال‌ها جواب می‌دهد. معاینه رایگان است.",
-        "ps": "قابله ستاسو وینه بهېدل، د وینې فشار، تبه، تیونه او زخم معاینه کوي، د روحیې او متیازو په اړه پوښتي، اوسپنه ورکوي، ماشوم معاینه کوي او پوښتنو ته ځواب وايي. معاینه وړیا ده.",
-        "en": "The midwife checks your bleeding, blood pressure, temperature, breasts and wound, asks about your mood and urine, gives iron, checks the baby and answers questions. Checks are free."
+        "fa": "قابله خونریزی، فشار خون، تب، پستان‌ها و زخم شما را معاینه می‌کند، در مورد روحیه و ادرار می‌پرسد، آهن می‌دهد، طفل را معاینه می‌کند و به سوال‌ها جواب می‌دهد.",
+        "ps": "قابله ستاسو وینه بهېدل، د وینې فشار، تبه، تیونه او زخم معاینه کوي، د روحیې او متیازو په اړه پوښتي، اوسپنه ورکوي، ماشوم معاینه کوي او پوښتنو ته ځواب وايي.",
+        "en": "The midwife checks your bleeding, blood pressure, temperature, breasts and wound, asks about your mood and urine, gives iron, checks the baby and answers questions."
       }
     },
     {
@@ -276,6 +276,7 @@
     "Check-ups: 'first day' means within 24 hours of birth (WHO 2013); stated for both mother and baby.",
     "Icons: calf uses 'swelling' (a 'leg' icon would be better); pain passing urine uses 'urine-blood' (a plain 'urine' icon would be better); breast pain uses 'breastfeed'; spacing tip uses 'family'.",
     "Postpartum vitamin A is deliberately not mentioned (WHO 2011: not recommended).",
-    "'Removes any afterbirth left inside' is plain wording for manual removal/evacuation; check it is acceptable when narrated."
+    "'Removes any afterbirth left inside' is plain wording for manual removal/evacuation; check it is acceptable when narrated.",
+    "Content pass 3 (MoPH fixes): checks step adds 'the village health worker can also visit at home' (IPEHS 2019 postnatal home visit within 24 hours; CBHC 2015); 'Checks are free' removed (Mo's rule)."
   ]
 }

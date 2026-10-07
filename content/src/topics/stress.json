@@ -136,9 +136,9 @@
         "en": "At the clinic: talking and medicine"
       },
       "text": {
-        "fa": "کارمند صحی گوش می‌دهد، مطمئن می‌شود که بدن سالم است و راه‌های سادهٔ مقابله را یاد می‌دهد. برای غم یا تشویش شدیدی که هفته‌ها دوام کند، مشوره و در صورت ضرورت دوای روزانه داده می‌تواند.",
-        "ps": "روغتیايي کارکوونکی اوري، ډاډ ترلاسه کوي چې بدن روغ دی او د مقابلې ساده لارې ورزده کوي. د هغه ژور غم یا اندېښنې لپاره چې اونۍ دوام کوي، مشوره او که اړتیا وي ورځني درمل ورکولای شي.",
-        "en": "The health worker listens, checks the body is well, and teaches simple ways to cope. For deep sadness or worry lasting weeks, they can give counselling and, if needed, a daily medicine."
+        "fa": "کارمند صحی گوش می‌دهد، مطمئن می‌شود که بدن سالم است و راه‌های سادهٔ مقابله را یاد می‌دهد. بعضی مراکز صحی مشاور دارند. برای غم یا تشویش شدیدی که هفته‌ها دوام کند، دوا هم داده می‌شود.",
+        "ps": "روغتیايي کارکوونکی اوري، ډاډ ترلاسه کوي چې بدن روغ دی او د مقابلې ساده لارې ورزده کوي. ځینې روغتیايي مرکزونه سلاکار لري. د هغه ژور غم یا اندېښنې لپاره چې اونۍ دوام کوي، درمل هم ورکول کېږي.",
+        "en": "The health worker listens, checks the body is well, and teaches simple ways to cope. Some health centres have a counsellor. For deep sadness or worry lasting weeks, medicine can help too."
       }
     },
     {
@@ -150,9 +150,9 @@
         "en": "At the hospital: specialist help"
       },
       "text": {
-        "fa": "کسی که به خودش آسیب رسانده، هیچ خورده یا خوابیده نمی‌تواند، یا صداهایی می‌شنود، در شفاخانه دیده می‌شود، جایی که داکتران آموزش‌دیدهٔ صحت روانی دواهای مؤثر دارند. رایگان است.",
-        "ps": "هغه څوک چې ځان ته یې زیان رسولی، هېڅ نه شي خوړلای یا ویده کېدلای، یا غږونه اوري، په روغتون کې کتل کېږي، چېرته چې د رواني روغتیا روزل شوي ډاکټران اغېزمن درمل لري. وړیا دي.",
-        "en": "Someone who has tried to harm themselves, cannot eat or sleep, or hears voices is seen at the hospital, where doctors trained in mental health have medicines that work. It is free."
+        "fa": "کسی که به خودش آسیب رسانده، هیچ خورده یا خوابیده نمی‌تواند، یا صداهایی می‌شنود، در شفاخانه دیده می‌شود، جایی که داکتران آموزش‌دیدهٔ صحت روانی دواهای مؤثر دارند.",
+        "ps": "هغه څوک چې ځان ته یې زیان رسولی، هېڅ نه شي خوړلای یا ویده کېدلای، یا غږونه اوري، په روغتون کې کتل کېږي، چېرته چې د رواني روغتیا روزل شوي ډاکټران اغېزمن درمل لري.",
+        "en": "Someone who has tried to harm themselves, cannot eat or sleep, or hears voices is seen at the hospital, where doctors trained in mental health have medicines that work."
       }
     },
     {
@@ -263,6 +263,7 @@
     "The unhooking step uses the 'sad' icon (closest); a 'thought' icon would suit better.",
     "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
     "Psychosocial counsellors exist at CHC level on paper (BPHS); confirm they are in post in Samangan.",
-    "'It is free' refers to government services; private psychiatrists in Mazar charge fees."
+    "'It is free' refers to government services; private psychiatrists in Mazar charge fees.",
+    "Content pass 3: 'It is free' removed from the hospital box (Mo's rule); the clinic box now says 'Some health centres have a counsellor' (MH Strategy: psychosocial counsellors at CHCs) and was shortened. No prayer line on this page (checked)."
   ]
 }

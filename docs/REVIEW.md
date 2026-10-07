@@ -3056,3 +3056,1223 @@ Choices to check: a child who cannot drink or breastfeed goes to the child dange
 </details>
 
 Latin-letter spellings (`lat`, e.g. "ishal", "sulfa", "kazhdum") are in the same file; please add the spellings people actually type in text messages.
+
+## Content pass 3
+
+Done on 2026-10-07: the MoPH fixes from `research/moph-guidance.md` section 6, a new **Birth plan** page (Health > Adults > Women's health, after pregnancy care), the **newborn** page widened into "the first weeks", and a new **Mind and stress** group on the Adults screen (the stress page plus five new pages and a breathing pacer animation). Every new line is in Dari, Pashto and English with its own narration id, and needs recording.
+
+### Medical points for Mo to check
+
+1. **Cord care (newborn.cord):** now "put nothing on the cord except chlorhexidine, the cord medicine from the midwife or village health worker; keep the cord dry". Basis: the MoPH CBHC Strategy 2015-2020 has CHWs handing out chlorhexidine; WHO 2022 recommends it for home births where newborn deaths are high (Afghanistan is near WHO's threshold); dry cord care otherwise. Whether CHWs in Samangan still have it is not confirmed. If not, go back to "put nothing on the cord".
+2. **Newborn danger signs (newborn.urgent):** WHO IMCI young-infant signs, each "hospital now". Added numbers: 60 breaths a minute; 37.5 or more, or below 35.5, beside "feels hot or cold". New item: redness spreading from the cord onto the belly skin. A red or pus-draining cord stays amber ("clinic today"), because IMCI treats it as a local infection. The brief listed umbilical redness as "go now", so please confirm this split.
+3. **Hepatitis B birth dose:** "on the first day; if born at home, to the clinic within 24 hours" (newborn.vaccines, new note vaccines.birth-day).
+4. **Postnatal checks:** "first day, day 3, about one week (day 7 to 14), 6 weeks" (WHO 2013). WHO 2022 has the third contact at day 4 to 7. The village health worker home visit is from IPEHS 2019 and CBHC 2015.
+5. **Women's tetanus vaccine:** the age band is now 15 to 45, from BPHS 2010. The CHW manual says 14 to 49 and WHO says 15 to 49. The English title is "TT or Td". Please match the Afghan card.
+6. **IPV2 at 9 months:** still unconfirmed and not changed. Do not record that clip until NEPI or UNICEF confirms.
+7. **"Free":** now said only for vaccines and TB (Mo's rule; the National Health Policy 2025-2030 brings in user charges). It was removed from 25 lines on 18 pages; see the list below.
+   - Kept: rabies vaccine "free at government centres" (dog-bite.clinic), because it is a vaccine. Please confirm that rabies vaccine is really free in Samangan, or remove that line too.
+   - Kept: TB lines and the hospital-places lines on vaccines and TB.
+8. **Village health worker or health post as the first stop:** new tips on diarrhoea, cough and fever ("if your child has none of these signs..."), and new lines on growth, newborn and after-birth.
+   - Health posts have ORS, zinc and paracetamol but no oral antibiotics (BPHS 2010), so the cough tip only says the CHW "can count the breaths and tell you where to go".
+9. **Vitamin A:** "every 6 months: at the clinic, or when the vaccination team comes" (growth.vitamin-a). New vaccines note: polio drops, and sometimes vitamin A or measles vaccine, are also given in campaigns; still go to every clinic visit.
+10. **Very thin child:** this was already right before this pass. Very thin but eating goes to the clinic today; very thin and weak, sleepy or sick goes to hospital now (IMAM 2018).
+11. **Birth plan:**
+    - Red items repeat pregnancy-danger word for word, plus "labour pains for more than 12 hours" (PCPNC).
+    - "Within a day" for a home birth.
+    - "Stay with relatives near the clinic in the last weeks" stands in for a maternity waiting home.
+    - "Who decides if it happens at night" is from PCPNC and the Herat near-miss study.
+12. **Mind pages:**
+    - Each page has the same red box: thoughts of ending life, self-harm, or hurting others means "tell someone you trust, go to a health worker now, day or night".
+    - Each page has the same amber box: low or worried 2 weeks or more, attacks of fear that keep coming back, cannot do daily work, drugs to cope. These mean "clinic today".
+    - No hotline is given (the 120 Youth Health Line is not confirmed for Samangan).
+    - No diagnosis words are used ("depression", "panic disorder"). No religious content.
+13. **Breathing:**
+    - The breathing method is WHO PM+: breathe out first, in for 3 and out for 4, about 2 minutes.
+    - There is a dizziness tip.
+    - The pacer animation `anim.breathe` grows the circle for 3 s and shrinks it for 4 s. Its last scene keeps going until the person taps Done.
+14. **Stress page:** the clinic box now says "Some health centres have a counsellor" (MoPH Mental Health Strategy: counsellors at CHCs). "It is free" was removed from the hospital box. There is no prayer line on this page (checked).
+15. **Not changed (moph-guidance items 10, 11, 13 to 16):**
+    - CCHF terms: still to be compared with the MoPH brochure.
+    - Emergency numbers: none until the Samangan PHD confirms them.
+    - TB, ANC and maternal vitamin A wording: these already agree with MoPH.
+    - Vocabulary: use the Health Promotion Strategy register when native speakers review.
+
+### Language points for native speakers
+
+- Village health worker and health post wording:
+  - Dari: کارمند صحی قریه and پوستهٔ صحی.
+  - Pashto: د کلي روغتیايي کارکوونکی and روغتیايي پوسته.
+  - These are as elsewhere in the book. MoPH documents use کارکن صحی جامعه and د ټولنې روغتیایي کارکوونکی.
+- Colostrum: آغوز (Dari), فله (Pashto).
+- Honey and ghee: ګبین and غوړي (Pashto).
+- Chlorhexidine: کلرهگزیدین / کلورهګزیډین.
+- Low mood: دل‌تنگی (Dari) and خپګان (Pashto), as headings.
+- "Not weakness and not madness": ضعف / دیوانگی and کمزوري / لېونتوب. Check that they do not sound blunt.
+- The "notice the thought" sentence: «من این فکر را دارم که...» / «زه دا فکر لرم چې...».
+- "As if blowing on hot tea".
+- Phone credit: "با پول" (Dari) and "له کارت سره" (Pashto).
+- The leaking roof: چکه می‌کند / څاڅي.
+- Circle (pacer): دایره / کړۍ.
+- Mind and stress heading: ذهن و فشار روحی / ذهن او رواني فشار.
+
+### MoPH mismatches (moph-guidance.md section 6): what was done
+
+| # | Item | Status |
+|---|---|---|
+| 1 | IPV2 at 9 months | Unchanged. The review note says do not record the clip until NEPI or UNICEF confirms the age. |
+| 2 | Td age band | Changed to 15 to 45 (BPHS). The title says "TT or Td". |
+| 3 | Campaigns | New note `vaccines.campaign`. |
+| 4 | "Free" | Now only for vaccines and TB. Removed from 25 lines on 18 pages, including the regional-illness merge pages (malaria, leishmaniasis, hepatitis, eye infection, malnutrition, worms, anaemia, adult diarrhoea) and the kit pages. |
+| 5 | HepB within 24 hours | `newborn.vaccines` and the new note `vaccines.birth-day`. |
+| 6 | Very thin child | Already fixed before this pass: very thin but eating goes to the clinic today; weak, sleepy or sick goes to hospital. |
+| 7 | Vitamin A | Now "at the clinic, or when the vaccination team comes". |
+| 8 | CHW or health post | Added to diarrhoea, cough, fever, growth, newborn and after-birth. |
+| 9 | Chlorhexidine | Now named in `newborn.cord` (see point 1). |
+| 10 | CCHF terms | Not changed. Still needs comparing with the MoPH brochure. |
+| 11 | Emergency numbers | Not changed. None are given until the Samangan PHD confirms them. |
+| 12 | Stress counsellor | Added "Some health centres have a counsellor". |
+| 13 to 15 | TB, ANC, maternal vitamin A | Already agree with MoPH. |
+| 16 | Vocabulary | For native review. |
+
+### Changed lines in existing pages
+
+Each line shows the new English, Dari and Pashto (and the old English where it changed). Recordings of these ids need redoing.
+
+<details><summary>All changed lines (21 pages)</summary>
+
+
+**vaccines**
+
+- `vaccines.birth-day (new)`
+  - en: A baby born at home should go to the clinic within 24 hours, for the hepatitis B vaccine and a check.
+  - fa: طفلی که در خانه به دنیا آمده، باید در ۲۴ ساعت اول برای واکسین هپاتیت ب و معاینه به کلینیک برده شود.
+  - ps: هغه ماشوم چې په کور کې زېږېدلی، باید په لومړیو ۲۴ ساعتونو کې د هیپاټایټس ب واکسین او معاینې لپاره کلینیک ته بوتلل شي.
+- `vaccines.campaign (new)`
+  - en: Polio drops, and sometimes vitamin A or measles vaccine, are also given in campaigns. Take your child, and still go to every clinic visit.
+  - fa: قطرهٔ پولیو، و گاهی ویتامین ای یا واکسین سرخکان، در کمپاین‌ها هم داده می‌شود. طفل را ببرید، و باز هم به هر نوبت کلینیک بروید.
+  - ps: د پولیو څاڅکي، او کله کله ویټامین اې یا د شري واکسین، په کمپاینونو کې هم ورکول کېږي. ماشوم بوځئ، او بیا هم د کلینیک هرې ټاکلې لیدنې ته ولاړ شئ.
+- `vaccines.td.(title)`
+  - en (was): Tetanus vaccine for women (Td)
+  - en: Tetanus vaccine for women (TT or Td)
+  - fa: واکسین تیتانوس برای زنان
+  - ps: د ښځو لپاره د ټیټانوس واکسین
+- `vaccines.td`
+  - en (was): Every woman aged 15 to 49, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria.
+  - en: Every woman aged 15 to 45, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria.
+  - fa: هر زن ۱۵ تا ۴۵ ساله و هر زن حامله باید ۵ نوبت این واکسین را بگیرد. این واکسین مادر و نوزاد را از تیتانوس و خناق محافظت می‌کند.
+  - ps: هره ۱۵ تر ۴۵ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.
+
+**newborn**
+
+- `newborn.title`
+  - en (was): Newborn care
+  - en: Newborn care: the first weeks
+  - fa: مراقبت از نوزاد: هفته‌های اول
+  - ps: د نوي زېږېدلي ماشوم پاملرنه: لومړۍ اونۍ
+- `newborn.summary`
+  - en (was): Keep your new baby warm, fed and clean, and get checks.
+  - en: Warmth, breast milk only, cord care, vaccines and danger signs.
+  - fa: گرمی، فقط شیر مادر، مراقبت ناف، واکسین و علایم خطر.
+  - ps: ګرمي، یوازې د مور شیدې، د نوم پاملرنه، واکسین او د خطر نښې.
+- `newborn.warm`
+  - en (was): Dry the baby at once and lay the baby on the mother's bare chest. Cover them both with a warm cloth.
+  - en: Dry the baby at once and lay the baby on the mother's bare chest, skin to skin. Cover them both, and put a cap on the baby.
+  - fa: طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر، پوست به پوست، بگذارید. هر دو را بپوشانید و به سر طفل کلاه بگذارید.
+  - ps: ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه، پوستکی له پوستکي سره، کېږدئ. دواړه پټ کړئ او د ماشوم پر سر خولۍ کېږدئ.
+- `newborn.breastfeed`
+  - en (was): Start breastfeeding within one hour of birth. Then feed whenever the baby wants, day and night.
+  - en: Start within one hour of birth. Then give only breast milk, whenever the baby wants, day and night. No water or other milk is needed.
+  - fa: در ساعت اول بعد از ولادت شیر بدهید. بعد فقط شیر مادر، هر وقت طفل خواست، شب و روز. آب و شیر دیگر لازم نیست.
+  - ps: د زېږون په لومړي ساعت کې تی ورکړئ. بیا یوازې د مور شیدې، هر کله چې ماشوم وغواړي، شپه او ورځ. اوبو او نورو شیدو ته اړتیا نشته.
+- `newborn.cord`
+  - en (was): Put nothing on the cord. Use only the medicine the health worker gives you.
+  - en: Put nothing on the cord except chlorhexidine, the cord medicine from the midwife or village health worker. Use it as they show you, and keep the cord dry.
+  - fa: روی ناف هیچ چیز نگذارید، به جز کلرهگزیدین، دوای نافی که قابله یا کارمند صحی قریه می‌دهد. آن را همان‌طور که نشان می‌دهند بمالید و ناف را خشک نگه دارید.
+  - ps: پر نوم هېڅ شی مه لګوئ، پرته له کلورهګزیډین، د نوم هغه درمل چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي. هغسې یې ولګوئ لکه چې دوی یې ښيي، او نوم وچ وساتئ.
+- `newborn.vaccines`
+  - en (was): The baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, go to the clinic as soon as you can.
+  - en: On the first day the baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, take the baby to the clinic within 24 hours.
+  - fa: طفل در روز اول به واکسین توبرکلوز، قطرهٔ پولیو و واکسین هپاتیت ب ضرورت دارد. اگر در خانه به دنیا آمده، در ۲۴ ساعت اول او را به کلینیک ببرید.
+  - ps: ماشوم په لومړۍ ورځ د نري رنځ واکسین، د پولیو څاڅکو او د هیپاټایټس ب واکسین ته اړتیا لري. که په کور کې زېږېدلی، په لومړیو ۲۴ ساعتونو کې یې کلینیک ته بوځئ.
+- `newborn.checks`
+  - en (was): Go for checks on the first day, on day 3, between day 7 and 14, and at 6 weeks.
+  - en: Go for checks on the first day, on day 3, at about one week (day 7 to 14), and at 6 weeks. The village health worker can also visit you at home.
+  - fa: در روز اول، روز سوم، حدود یک هفتگی (روز ۷ تا ۱۴) و در ۶ هفتگی برای معاینه بروید. کارمند صحی قریه هم می‌تواند به خانهٔ شما بیاید.
+  - ps: په لومړۍ ورځ، درېیمه ورځ، شاوخوا یوه اونۍ وروسته (۷ تر ۱۴ ورځو) او په ۶ اونیو کې معاینې ته ولاړ شئ. د کلي روغتیايي کارکوونکی هم کولای شي ستاسو کور ته راشي.
+- `newborn.small`
+  - en (was): Keep a small baby skin to skin on the mother's chest, day and night. The father or grandmother can help too.
+  - en: Keep a small baby skin to skin on the mother's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth.
+  - fa: طفل کوچک را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید و هر ۲ تا ۳ ساعت شیر بدهید. پاهای سرد یعنی طفل گرمی بیشتر می‌خواهد.
+  - ps: کوچنی ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ او هرو ۲ تر ۳ ساعتونو کې تی ورکړئ. سړې پښې دا معنا لري چې ماشوم نوره ګرمي غواړي.
+- `newborn.breaths.(title) (new)`
+  - en: Count the baby's breaths
+  - fa: نفس‌های طفل را بشمارید
+  - ps: د ماشوم ساګانې وشمېرئ
+- `newborn.breaths (new)`
+  - en: When the baby is calm, the phone times one minute while you tap each breath. 60 or more is too fast.
+  - fa: وقتی طفل آرام است، تیلفون یک دقیقه را حساب می‌کند و شما با هر نفس یک بار دست می‌زنید. ۶۰ یا بیشتر زیاد تیز است.
+  - ps: کله چې ماشوم ارام وي، ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره یو ځل ټک وهئ. ۶۰ یا ډېر ډېر ګړندي دي.
+- `newborn.clinic`
+  - en (was): The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord. Checks are free.
+  - en: The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord.
+  - fa: قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد و روی ناف دوای کلرهگزیدین می‌مالد.
+  - ps: قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي او پر نامه کلورهګزیډین درمل مږي.
+- `newborn.urgent.breathing`
+  - en (was): breathes fast or with difficulty
+  - en: breathes 60 or more times a minute, or with difficulty
+  - fa: در یک دقیقه ۶۰ بار یا بیشتر نفس می‌کشد، یا به سختی نفس می‌کشد
+  - ps: په یوه دقیقه کې ۶۰ ځله یا ډېر ساه اخلي، یا په سختۍ ساه اخلي
+- `newborn.urgent.temperature`
+  - en (was): feels hot, or feels cold to touch
+  - en: temperature 37.5 or more, or below 35.5; or feels hot or cold
+  - fa: حرارت ۳۷ و نیم درجه یا بیشتر، یا کمتر از ۳۵ و نیم دارد؛ یا داغ یا سرد است
+  - ps: تودوخه یې ۳۷ نیم درجې یا ډېره، یا له ۳۵ نیم کمه ده؛ یا ګرم یا سوړ دی
+- `newborn.urgent.cord-skin (new)`
+  - en: has redness spreading from the cord onto the belly skin
+  - fa: سرخی از ناف به پوست شکم پهن شده است
+  - ps: سوروالی له نوم څخه د ګېډې پوستکي ته خپور شوی دی
+- `newborn.dont.(title) (new)`
+  - en: Do not:
+  - fa: این کارها را نکنید:
+  - ps: دا کارونه مه کوئ:
+- `newborn.dont.first-milk (new)`
+  - en: Do not throw away the first yellow milk. It protects the baby.
+  - fa: شیر زرد اول (آغوز) را دور نریزید. طفل را محافظت می‌کند.
+  - ps: لومړنۍ ژېړې شیدې (فله) مه توئ کوئ. ماشوم ساتي.
+- `newborn.dont.other-feeds (new)`
+  - en: Do not give water, tea, honey or ghee. Breast milk is enough.
+  - fa: آب، چای، عسل یا روغن ندهید. شیر مادر کافی است.
+  - ps: اوبه، چای، ګبین یا غوړي مه ورکوئ. د مور شیدې بس دي.
+- `newborn.dont.cord (new)`
+  - en: Do not put oil, ash or anything else on the cord.
+  - fa: روی ناف روغن، خاکستر یا هیچ چیز دیگر نگذارید.
+  - ps: پر نوم غوړي، ایره یا بل هېڅ شی مه لګوئ.
+- `newborn.dont.night (new)`
+  - en: Do not wait until morning if a danger sign starts at night.
+  - fa: اگر علامت خطر در شب شروع شد، تا صبح صبر نکنید.
+  - ps: که د خطر نښه د شپې پیل شوه، تر سهاره صبر مه کوئ.
+
+**growth**
+
+- `growth.weigh`
+  - en (was): Take your child to the clinic to be weighed every month, especially in the first 2 years. Keep the growth card and bring it every time.
+  - en: Take your child to be weighed every month at the clinic or the health post, especially in the first 2 years. Bring the growth card every time.
+  - fa: طفل را هر ماه برای وزن کردن به کلینیک یا پوستهٔ صحی ببرید، مخصوصاً در ۲ سال اول. کارت رشد را هر بار با خود ببرید.
+  - ps: ماشوم هره میاشت د وزن لپاره کلینیک یا روغتیايي پوستې ته بوځئ، په ځانګړې توګه په لومړیو ۲ کلونو کې. د ودې کارت هر ځل له ځان سره یوسئ.
+- `growth.vitamin-a`
+  - en (was): From 6 months the clinic gives vitamin A, and from 1 year worm medicine. Ask the health worker when they are due.
+  - en: From 6 months, your child needs vitamin A every 6 months: at the clinic, or when the vaccination team comes. Worm medicine starts at 1 year.
+  - fa: از ۶ ماهگی، طفل هر ۶ ماه ویتامین ای لازم دارد: در کلینیک، یا وقتی تیم واکسین می‌آید. دوای ضد کرم از ۱ سالگی شروع می‌شود.
+  - ps: له ۶ میاشتو، ماشوم هرو ۶ میاشتو کې ویټامین اې ته اړتیا لري: په کلینیک کې، یا کله چې د واکسین ټیم راځي. د چینجیو درمل له ۱ کلنۍ پیلېږي.
+- `growth.clinic`
+  - en (was): The health worker weighs the child, checks the arm with the coloured band, and advises on feeding. A very thin child gets special peanut paste, free. See the Thin child page.
+  - en: The health worker weighs the child, checks the arm with the coloured band, and advises on feeding. A very thin child gets special peanut paste. See the Thin child page.
+  - fa: کارمند صحی طفل را وزن و قد می‌کند، بازو را با فیتهٔ رنگی معاینه می‌کند و در مورد تغذیه مشوره می‌دهد. طفل بسیار لاغر خمیر مخصوص بادام‌زمینی می‌گیرد. صفحهٔ طفل لاغر را ببینید.
+  - ps: روغتیايي کارکوونکی ماشوم تلي او قد یې اندازه کوي، مټ یې په رنګه فیته معاینه کوي او د تغذیې په اړه مشوره ورکوي. ډېر ډنګر ماشوم د ممپلي ځانګړې خمیره اخلي. د ډنګر ماشوم پاڼه وګورئ.
+
+**diarrhoea**
+
+- `diarrhoea.clinic`
+  - en (was): The health worker checks how dry the child is, gives ORS and zinc free, and shows how to give them. Antibiotics are only for blood in the stool or cholera.
+  - en: The health worker checks how dry the child is, gives ORS and zinc, and shows how to give them. Antibiotics are only for blood in the stool or cholera.
+  - fa: کارمند صحی می‌بیند طفل چقدر خشک شده، او آر اس و زنک را می‌دهد و طرز دادنش را نشان می‌دهد. انتی‌بیوتیک فقط برای خون در مدفوع یا کولرا است.
+  - ps: روغتیايي کارکوونکی ګوري چې ماشوم څومره وچ شوی، او آر اس او زنک ورکوي او د ورکولو لار یې ښيي. انټي بیوټیک یوازې د ډکو کې وینې یا کولرا لپاره دی.
+- `diarrhoea.chw (new)`
+  - en: If your child has none of these signs, go first to the village health worker or the health post. They have ORS and zinc.
+  - fa: اگر طفل هیچ‌یک از این علایم را ندارد، اول پیش کارمند صحی قریه یا به پوستهٔ صحی بروید. آن‌ها او آر اس و زنک دارند.
+  - ps: که ماشوم له دې نښو څخه هېڅ یوه نه لري، لومړی د کلي روغتیايي کارکوونکي یا روغتیايي پوستې ته ولاړ شئ. هغوی او آر اس او زنک لري.
+
+**cough**
+
+- `cough.clinic`
+  - en (was): The health worker counts the breaths and looks at the chest. For pneumonia they give an antibiotic syrup or tablets, usually amoxicillin, for 5 days, free. A cold needs no antibiotic.
+  - en: The health worker counts the breaths and looks at the chest. For pneumonia they give an antibiotic syrup or tablets, usually amoxicillin, for 5 days. A cold needs no antibiotic.
+  - fa: کارمند صحی نفس‌ها را می‌شمارد و به سینه نگاه می‌کند. برای سینه‌بغل شربت یا تابلیت انتی‌بیوتیک می‌دهد، معمولاً اموکسی‌سیلین، برای ۵ روز. زکام انتی‌بیوتیک ضرورت ندارد.
+  - ps: روغتیايي کارکوونکی ساه شمېري او سینې ته ګوري. د سینه بغل لپاره د انټي بیوټیک شربت یا ګولۍ ورکوي، معمولاً اموکسي سیلین، د ۵ ورځو لپاره. زکام انټي بیوټیک ته اړتیا نه لري.
+- `cough.chw (new)`
+  - en: If your child has none of these signs, the village health worker can count the breaths and tell you where to go.
+  - fa: اگر طفل هیچ‌یک از این علایم را ندارد، کارمند صحی قریه می‌تواند نفس‌ها را بشمارد و بگوید کجا بروید.
+  - ps: که ماشوم له دې نښو څخه هېڅ یوه نه لري، د کلي روغتیايي کارکوونکی کولای شي ساه وشمېري او ووايي چې چېرته ولاړ شئ.
+
+**fever**
+
+- `fever.chw (new)`
+  - en: If your child has none of these signs, the village health worker or the health post can check the child and give fever medicine.
+  - fa: اگر طفل هیچ‌یک از این علایم را ندارد، کارمند صحی قریه یا پوستهٔ صحی می‌تواند طفل را ببیند و دوای تب بدهد.
+  - ps: که ماشوم له دې نښو څخه هېڅ یوه نه لري، د کلي روغتیايي کارکوونکی یا روغتیايي پوسته کولای شي ماشوم وګوري او د تبې درمل ورکړي.
+
+**after-birth**
+
+- `after-birth.checks`
+  - en (was): Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks.
+  - en: Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks. The village health worker can also visit at home.
+  - fa: مادر و طفل باید در روز اول، روز ۳، بین روز ۷ و ۱۴، و در ۶ هفتگی معاینه شوند. کارمند صحی قریه هم می‌تواند به خانه بیاید.
+  - ps: مور او ماشوم باید په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینه شي. د کلي روغتیايي کارکوونکی هم کولای شي کور ته راشي.
+- `after-birth.clinic`
+  - en (was): The midwife checks your bleeding, blood pressure, temperature, breasts and wound, asks about your mood and urine, gives iron, checks the baby and answers questions. Checks are free.
+  - en: The midwife checks your bleeding, blood pressure, temperature, breasts and wound, asks about your mood and urine, gives iron, checks the baby and answers questions.
+  - fa: قابله خونریزی، فشار خون، تب، پستان‌ها و زخم شما را معاینه می‌کند، در مورد روحیه و ادرار می‌پرسد، آهن می‌دهد، طفل را معاینه می‌کند و به سوال‌ها جواب می‌دهد.
+  - ps: قابله ستاسو وینه بهېدل، د وینې فشار، تبه، تیونه او زخم معاینه کوي، د روحیې او متیازو په اړه پوښتي، اوسپنه ورکوي، ماشوم معاینه کوي او پوښتنو ته ځواب وايي.
+
+**pregnancy-care**
+
+- `pregnancy-care.tetanus`
+  - en (was): The tetanus (TT or Td) vaccine protects you and your newborn baby. Ask the clinic how many doses you need.
+  - en: The tetanus vaccine (TT or Td) protects you and your newborn baby. Ask the clinic how many doses you need.
+  - fa: واکسین تیتانوس، شما و نوزاد شما را محافظت می‌کند. از کلینیک بپرسید که چند بار لازم است.
+  - ps: د تېتانوس واکسین تاسو او ستاسو نوی زېږېدلی ماشوم ساتي. له کلینیک وپوښتئ چې څو ځله پکار دی.
+
+**stress**
+
+- `stress.clinic`
+  - en (was): The health worker listens, checks the body is well, and teaches simple ways to cope. For deep sadness or worry lasting weeks, they can give counselling and, if needed, a daily medicine.
+  - en: The health worker listens, checks the body is well, and teaches simple ways to cope. Some health centres have a counsellor. For deep sadness or worry lasting weeks, medicine can help too.
+  - fa: کارمند صحی گوش می‌دهد، مطمئن می‌شود که بدن سالم است و راه‌های سادهٔ مقابله را یاد می‌دهد. بعضی مراکز صحی مشاور دارند. برای غم یا تشویش شدیدی که هفته‌ها دوام کند، دوا هم داده می‌شود.
+  - ps: روغتیايي کارکوونکی اوري، ډاډ ترلاسه کوي چې بدن روغ دی او د مقابلې ساده لارې ورزده کوي. ځینې روغتیايي مرکزونه سلاکار لري. د هغه ژور غم یا اندېښنې لپاره چې اونۍ دوام کوي، درمل هم ورکول کېږي.
+- `stress.hospital`
+  - en (was): Someone who has tried to harm themselves, cannot eat or sleep, or hears voices is seen at the hospital, where doctors trained in mental health have medicines that work. It is free.
+  - en: Someone who has tried to harm themselves, cannot eat or sleep, or hears voices is seen at the hospital, where doctors trained in mental health have medicines that work.
+  - fa: کسی که به خودش آسیب رسانده، هیچ خورده یا خوابیده نمی‌تواند، یا صداهایی می‌شنود، در شفاخانه دیده می‌شود، جایی که داکتران آموزش‌دیدهٔ صحت روانی دواهای مؤثر دارند.
+  - ps: هغه څوک چې ځان ته یې زیان رسولی، هېڅ نه شي خوړلای یا ویده کېدلای، یا غږونه اوري، په روغتون کې کتل کېږي، چېرته چې د رواني روغتیا روزل شوي ډاکټران اغېزمن درمل لري.
+
+**malnutrition**
+
+- `malnutrition.summary`
+  - en (was): A very thin child can be treated free at the clinic.
+  - en: A very thin child can be treated at the clinic.
+  - fa: طفل بسیار لاغر در کلینیک تداوی می‌شود.
+  - ps: ډېر ډنګر ماشوم په کلینیک کې درملنه کېږي.
+- `malnutrition.lead`
+  - en (was): When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this, and treatment is free.
+  - en: When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this.
+  - fa: وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند.
+  - ps: کله چې ماشوم ډېر ډنګر وي، یا دواړه پښې یې پړسېدلې وي، بدن یې کمزوری وي او یوه ساده ناروغي یې وژلای شي. کلینیک دا حالت درملنه کوي.
+- `malnutrition.clinic`
+  - en (was): The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, free, with weekly checks.
+  - en: The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, with weekly checks.
+  - fa: کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، یک خمیر مخصوص از بادام‌زمینی می‌گیرد که به خانه ببرد، با معاینهٔ هفته‌وار.
+  - ps: روغتیايي کارکوونکی ماشوم تلي او د ناروغۍ لپاره یې معاینه کوي. هغه ډېر ډنګر ماشوم چې لا هم ښه خوري، د ممپلي یوه ځانګړې خمیره اخلي چې کور ته یې یوسي، د اونیزې معاینې سره.
+
+**malaria**
+
+- `malaria.summary`
+  - en (was): Fever with shivering? Get a free malaria test today.
+  - en: Fever with shivering? Get a malaria test today.
+  - fa: تب با لرزه؟ امروز در کلینیک معاینهٔ ملاریا بگیرید.
+  - ps: تبه له لړزې سره؟ نن په کلینیک کې د ملاریا معاینه وکړئ.
+- `malaria.test`
+  - en (was): Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes and is free.
+  - en: Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes.
+  - fa: هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه وقت می‌گیرد.
+  - ps: په تودو میاشتو کې هره تبه، یا ختیځ یا سویل ته له سفر وروسته، په همغه ورځ د ملاریا د وینې معاینې ته اړتیا لري. معاینه ۱۵ دقیقې نیسي.
+- `malaria.clinic`
+  - en (was): A drop of blood from the finger goes on a test strip. If positive, the health worker gives malaria tablets (chloroquine for the common type, plus another medicine) free. Finish them all.
+  - en: A drop of blood from the finger goes on a test strip. If positive, the health worker gives malaria tablets (chloroquine for the common type, plus another medicine). Finish them all.
+  - fa: یک قطره خون از انگشت روی نوار معاینه می‌رود. اگر مثبت باشد، کارمند صحی تابلیت ملاریا (کلوروکین برای نوع عام، به اضافهٔ یک دوای دیگر) می‌دهد. همه را تمام کنید.
+  - ps: د ګوتې د وینې یو څاڅکی د معاینې پر پټۍ اچول کېږي. که مثبت وي، روغتیايي کارکوونکی د ملاریا ګولۍ (د عام ډول لپاره کلوروکین، له یو بل درمل سره) ورکوي. ټولې یې بشپړې کړئ.
+
+**worms**
+
+- `worms.summary`
+  - en (was): Worms make children weak and pale. Clinic worm medicine is free.
+  - en: Worms make children weak and pale. The clinic gives worm medicine.
+  - fa: کرم‌ها طفل را ضعیف و رنگ‌پریده می‌کنند. کلینیک دوای کرم می‌دهد.
+  - ps: چینجي ماشوم کمزوری او رنګ الوتی کوي. کلینیک د چینجیو درمل ورکوي.
+- `worms.medicine`
+  - en (was): From 1 year old, the clinic gives a worm tablet every 6 months, free. Ask for it at the vaccine or weighing visit.
+  - en: From 1 year old, the clinic gives a worm tablet every 6 months. Ask for it at the vaccine or weighing visit.
+  - fa: از ۱ سالگی، کلینیک هر ۶ ماه یک تابلیت کرم می‌دهد. در وقت واکسین یا وزن‌کردن آن را بخواهید.
+  - ps: له ۱ کلنۍ څخه، کلینیک هرو ۶ میاشتو کې د چینجیو یوه ګولۍ ورکوي. د واکسین یا تلو پر وخت یې وغواړئ.
+
+**anaemia**
+
+- `anaemia.clinic`
+  - en (was): The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets free, for 3 months, plus worm medicine.
+  - en: The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets for 3 months, plus worm medicine.
+  - fa: کارمند صحی پلک‌ها و کف دست را می‌بیند و شاید خون را با معاینهٔ نوک انگشت اندازه کند. تابلیت آهن و فولیک اسید را برای ۳ ماه، و دوای کرم می‌دهد، و علت را جستجو می‌کند.
+  - ps: روغتیايي کارکوونکی باڼه او ورغوي ګوري او ښايي وینه د ګوتې په معاینه اندازه کړي. د اوسپنې او فولیک اسید ګولۍ د ۳ میاشتو لپاره، او د چینجیو درمل ورکوي، او لامل یې لټوي.
+
+**eye-infection**
+
+- `eye-infection.clinic`
+  - en (was): The health worker looks at the eye and gives tetracycline eye ointment or other drops, free at government clinics. For trachoma the whole village may be given azithromycin tablets.
+  - en: The health worker looks at the eye and gives tetracycline eye ointment or other drops. For trachoma the whole village may be given azithromycin tablets.
+  - fa: کارمند صحی چشم را می‌بیند و مرهم چشمی تتراسایکلین یا قطرهٔ دیگر می‌دهد. برای تراخم شاید به تمام قریه تابلیت ازیترومایسین داده شود.
+  - ps: روغتیايي کارکوونکی سترګه ګوري او د ټټراسایکلین د سترګو ملهم یا نور څاڅکي ورکوي. د تراخم لپاره ښايي ټول کلي ته د ازیترومایسین ګولۍ ورکړل شي.
+
+**hepatitis**
+
+- `hepatitis.hospital`
+  - en (was): Hepatitis C is cured with tablets and hepatitis B controlled, free at the infectious diseases hospital in Kabul and some provincial hospitals. A confused or bleeding person is admitted.
+  - en: Hepatitis C is cured with tablets and hepatitis B controlled, at the infectious diseases hospital in Kabul and some provincial hospitals. A confused or bleeding person is admitted.
+  - fa: هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، در شفاخانهٔ امراض ساری کابل و بعضی شفاخانه‌های ولایتی. شخص گیج یا دارای خونریزی بستر می‌شود.
+  - ps: هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، د کابل د ساري ناروغیو په روغتون او ځینو ولایتي روغتونونو کې. ګډوډ یا وینه بهېدونکی کس بستر کېږي.
+
+**leishmaniasis**
+
+- `leishmaniasis.treatment`
+  - en (was): Salak is confirmed by scraping the sore and looking under a microscope. Treatment is weekly injections of a medicine (glucantime) into the sore for several weeks, free at government centres.
+  - en: Salak is confirmed by scraping the sore and looking under a microscope. Treatment is weekly injections of a medicine (glucantime) into the sore for several weeks.
+  - fa: سالک با تراشیدن زخم و دیدن زیر میکروسکوپ تایید می‌شود. تداوی پیچکاری هفته‌وار یک دوا (گلوکانتیم) در داخل زخم برای چند هفته است. هر نوبت را حاضر شوید.
+  - ps: سالک د زخم په تراشلو او د مایکروسکوپ لاندې کتلو تاییدېږي. درملنه د څو اونیو لپاره په زخم کې د یوه درمل (ګلوکانتیم) اونیزه پیچکاري ده. هره لیدنه حاضر شئ.
+
+**diarrhoea-adult**
+
+- `diarrhoea-adult.clinic`
+  - en (was): The health worker checks how dry the body is and gives ORS, free. Watery diarrhoea needs no antibiotic. Blood in the stool with fever gets an antibiotic (ciprofloxacin).
+  - en: The health worker checks how dry the body is and gives ORS. Watery diarrhoea needs no antibiotic. Blood in the stool with fever gets an antibiotic (ciprofloxacin).
+  - fa: کارمند صحی می‌بیند که بدن چقدر خشک شده و او آر اس می‌دهد. اسهال آبکی انتی‌بیوتیک ضرورت ندارد. خون در مدفوع با تب انتی‌بیوتیک (سیپروفلوکساسین) می‌گیرد.
+  - ps: روغتیايي کارکوونکی ګوري چې بدن څومره وچ شوی او او آر اس ورکوي. اوبلن نس ناستی انټي بیوټیک ته اړتیا نه لري. په ډکو کې وینه له تبې سره انټي بیوټیک (سیپروفلوکساسین) اخلي.
+- `diarrhoea-adult.packets`
+  - en (was): Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them free.
+  - en: Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
+  - fa: در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را دارد.
+  - ps: په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې لري.
+
+**kit-buy**
+
+- `kit-buy.children`
+  - en (was): For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Clinics often give it free.
+  - en: For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Ask the clinic for one.
+  - fa: برای اطفال ۶ ماهه تا ۵ ساله، فیتهٔ رنگهٔ بازو نشان می‌دهد که طفل زیاد لاغر است یا نه. از کلینیک یکی بخواهید.
+  - ps: د ۶ میاشتو څخه تر ۵ کلونو ماشومانو لپاره، رنګه د مټ فیته ښيي چې ماشوم ډېر ډنګر دی که نه. له کلینیک یې وغواړئ.
+
+**kit-first-aid**
+
+- `kit-first-aid.ors`
+  - en (was): For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. Often free at the clinic.
+  - en: For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. The clinic and the health post have it.
+  - fa: برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. کلینیک و پوستهٔ صحی آن را دارند.
+  - ps: د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. کلینیک او روغتیايي پوسته یې لري.
+
+**kit-muac**
+
+- `kit-muac.get`
+  - en (was): Ask the clinic or the nutrition worker; they often give it free. In a pharmacy it costs very little.
+  - en: Ask the clinic or the nutrition worker; they often have one. In a pharmacy it costs very little.
+  - fa: از کلینیک یا کارمند تغذیه بپرسید؛ اکثراً آن را دارند. در دواخانه هم خیلی ارزان است.
+  - ps: له کلینیک یا د تغذیې له کارکوونکي وپوښتئ؛ اکثره یې لري. په درملتون کې هم ډېره ارزانه ده.
+
+**kit-scale**
+
+- `kit-scale.summary`
+  - en (was): Not needed by every family: the clinic weighs children free.
+  - en: Not needed by every family: the clinic weighs children.
+  - fa: برای هر خانواده لازم نیست: کلینیک اطفال را وزن می‌کند.
+  - ps: هرې کورنۍ ته اړین نه دی: کلینیک ماشومان تلي.
+- `kit-scale.lead`
+  - en (was): The clinic weighs children for free. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight.
+  - en: The clinic weighs children at every visit. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight.
+  - fa: کلینیک اطفال را در هر مراجعه وزن می‌کند. ترازو در خانه لازم نیست، اما برای نوزاد کوچک یا طفلی که وزن نمی‌گیرد کمک می‌کند.
+  - ps: کلینیک ماشومان په هره لیدنه کې تلي. په کور کې تله اړینه نه ده، خو د کوچني ماشوم یا هغه ماشوم لپاره چې وزن نه اخلي مرسته کوي.
+
+</details>
+
+### New pages: every line
+
+<details><summary>birth-plan: Birth plan: get ready early</summary>
+
+- `birth-plan.title`
+  - en: Birth plan: get ready early
+  - fa: پلان ولادت: از پیش آماده شوید
+  - ps: د زېږون پلان: له مخکې چمتو شئ
+- `birth-plan.summary`
+  - en: Where to give birth, who goes, money, a car, what to take.
+  - fa: جای ولادت، همراه، پول، موتر، و چه چیزهایی ببرید.
+  - ps: د زېږون ځای، ملګری، پیسې، موټر، او څه شی یوسئ.
+- `birth-plan.lead`
+  - en: Make the birth plan with your family early in pregnancy. Then, when labour starts or a danger sign comes, nobody loses time.
+  - fa: پلان ولادت را در اوایل حاملگی با خانواده بسازید. آن وقت، وقتی دردهای ولادت شروع شود یا علامت خطر پیدا شود، هیچ‌کس وقت را ضایع نمی‌کند.
+  - ps: د زېږون پلان د امیندوارۍ په لومړیو کې له کورنۍ سره جوړ کړئ. بیا، کله چې د زېږون دردونه پیل شي یا د خطر نښه راشي، هېڅوک وخت نه ضایع کوي.
+- `birth-plan.where.(title)`
+  - en: Choose where to give birth
+  - fa: جای ولادت را انتخاب کنید
+  - ps: د زېږون ځای وټاکئ
+- `birth-plan.where`
+  - en: Plan to give birth at a clinic or hospital, with a midwife or doctor. At your pregnancy check, ask which place is best for you.
+  - fa: پلان کنید که در کلینیک یا شفاخانه، با قابله یا داکتر، ولادت کنید. در معاینهٔ حاملگی بپرسید کدام جای برای شما بهتر است.
+  - ps: پلان وکړئ چې په کلینیک یا روغتون کې، د قابلې یا ډاکټر په مرسته، وزېږوئ. د امیندوارۍ په معاینه کې وپوښتئ چې کوم ځای ستاسو لپاره ښه دی.
+- `birth-plan.who.(title)`
+  - en: Decide early who will go
+  - fa: از پیش تعیین کنید چه کسی همراه برود
+  - ps: له مخکې وټاکئ چې څوک به ورسره ځي
+- `birth-plan.who`
+  - en: Agree now who goes with her: a woman to stay with her, and a man of the family for the road. Agree who decides if it happens at night.
+  - fa: از همین حالا فیصله کنید چه کسی با او برود: یک زن که پیش او بماند، و یک مرد خانواده برای راه. فیصله کنید اگر شب شد، چه کسی تصمیم می‌گیرد.
+  - ps: همدا اوس پرېکړه وکړئ چې څوک به ورسره ځي: یوه ښځه چې ورسره پاتې شي، او د کورنۍ یو سړی د لارې لپاره. پرېکړه وکړئ که د شپې وشو، څوک به پرېکړه کوي.
+- `birth-plan.money-car.(title)`
+  - en: Money and a car, ready ahead
+  - fa: پول و موتر، از پیش آماده
+  - ps: پیسې او موټر، له مخکې چمتو
+- `birth-plan.money-car`
+  - en: Put a little money aside each month for the car and the costs. Agree with a driver who can come day or night, and find a second one too.
+  - fa: هر ماه کمی پول برای موتر و مصارف کنار بگذارید. با یک دریور گپ بزنید که شب یا روز بیاید، و یک دریور دوم هم پیدا کنید.
+  - ps: هره میاشت لږې پیسې د موټر او لګښتونو لپاره یوې خوا ته کېږدئ. له یو موټر چلوونکي سره خبره وکړئ چې د شپې یا ورځې راشي، او دویم هم پیدا کړئ.
+- `birth-plan.phone.(title)`
+  - en: Save the phone numbers
+  - fa: شماره‌های تیلفون را ثبت کنید
+  - ps: د ټیلیفون شمېرې ثبت کړئ
+- `birth-plan.phone`
+  - en: Save the numbers of both drivers, the midwife or village health worker, and the clinic. Keep the phone charged, with money on it.
+  - fa: شمارهٔ هر دو دریور، قابله یا کارمند صحی قریه و کلینیک را در تیلفون ثبت کنید. تیلفون را چارج و با پول نگه دارید.
+  - ps: د دواړو موټر چلوونکو، قابلې یا د کلي روغتیايي کارکوونکي او کلینیک شمېرې په ټیلیفون کې ثبت کړئ. ټیلیفون چارج او له کارت سره وساتئ.
+- `birth-plan.bag.(title)`
+  - en: Pack a bag for the birth
+  - fa: یک بکس برای ولادت آماده کنید
+  - ps: د زېږون لپاره یوه کڅوړه چمتو کړئ
+- `birth-plan.bag`
+  - en: Pack clean cloths, warm clothes and a cap for the baby, a blanket, her clinic card and ID card, food and water.
+  - fa: تکه‌های پاک، لباس گرم و کلاه برای طفل، یک کمپل، کارت کلینیک و تذکرهٔ مادر، غذا و آب را آماده کنید.
+  - ps: پاک ټوکران، د ماشوم لپاره ګرمې جامې او خولۍ، یو کمپله، د مور د کلینیک کارت او تذکره، خواړه او اوبه چمتو کړئ.
+- `birth-plan.go.(title)`
+  - en: Go when labour starts
+  - fa: وقتی ولادت شروع شد، بروید
+  - ps: کله چې زېږون پیل شو، ولاړ شئ
+- `birth-plan.go`
+  - en: Go when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Do not wait at home.
+  - fa: وقتی درد هر ۲۰ دقیقه یا زودتر می‌آید، آب ولادت می‌آید، یا ترشح چسپناک خون‌آلود می‌آید، بروید. در خانه منتظر نمانید.
+  - ps: کله چې درد هر ۲۰ دقیقې یا ژر ژر راځي، د زېږون اوبه راځي، یا سرېښناکې وینې لړلې اوبه راځي، ولاړ شئ. په کور کې انتظار مه باسئ.
+- `birth-plan.home.(title)`
+  - en: If the birth happens at home
+  - fa: اگر ولادت در خانه شد
+  - ps: که زېږون په کور کې وشو
+- `birth-plan.home`
+  - en: Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day.
+  - fa: فوراً یک قابلهٔ آموزش‌دیده را بخواهید. اتاق را گرم و پاک نگه دارید و مادر و طفل را در روز اول به کلینیک ببرید.
+  - ps: سمدلاسه یوه روزل شوې قابله راوغواړئ. کوټه ګرمه او پاکه وساتئ او مور او ماشوم په لومړۍ ورځ کلینیک ته بوځئ.
+- `birth-plan.danger.(title)`
+  - en: All the danger signs in pregnancy
+  - fa: همهٔ علایم خطر در حاملگی
+  - ps: د امیندوارۍ د خطر ټولې نښې
+- `birth-plan.danger`
+  - en: Learn them together with your husband and mother-in-law, so everyone knows when to go.
+  - fa: آن‌ها را با شوهر و خشوی خود یکجا یاد بگیرید، تا همه بدانند چه وقت باید بروند.
+  - ps: له خپل مېړه او خواښې سره یې یوځای زده کړئ، چې ټول پوه شي کله باید ولاړ شي.
+- `birth-plan.near.(title)`
+  - en: Find the nearest clinic
+  - fa: نزدیک‌ترین کلینیک را پیدا کنید
+  - ps: تر ټولو نږدې کلینیک پیدا کړئ
+- `birth-plan.near`
+  - en: See the clinics and hospitals near you, to choose where to give birth.
+  - fa: کلینیک‌ها و شفاخانه‌های نزدیک خود را ببینید، تا جای ولادت را انتخاب کنید.
+  - ps: خپل نږدې کلینیکونه او روغتونونه وګورئ، چې د زېږون ځای وټاکئ.
+- `birth-plan.clinic.(title)`
+  - en: At the clinic: planning the birth
+  - fa: در کلینیک: پلان ولادت
+  - ps: په کلینیک کې: د زېږون پلان
+- `birth-plan.clinic`
+  - en: At each pregnancy check the midwife examines you and the baby, helps you make the plan, and tells you where to go if the birth may be difficult.
+  - fa: قابله در هر معاینهٔ حاملگی شما و طفل را معاینه می‌کند، در ساختن پلان کمک می‌کند و می‌گوید اگر ولادت مشکل باشد، کجا بروید.
+  - ps: قابله د امیندوارۍ په هره معاینه کې تاسو او ماشوم معاینه کوي، د پلان په جوړولو کې مرسته کوي او وايي که زېږون ستونزمن وي، چېرته ولاړ شئ.
+- `birth-plan.urgent.(title)`
+  - en: If you have any of these signs, go to hospital now, day or night
+  - fa: اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز
+  - ps: که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `birth-plan.urgent.bleeding`
+  - en: Bleeding from the vagina
+  - fa: خونریزی از راه تناسلی
+  - ps: له تناسلي لارې وینه بهېدل
+- `birth-plan.urgent.fits`
+  - en: Fits, or being unconscious
+  - fa: تشنج، یا بیهوشی
+  - ps: اختلاج، یا بې هوښي
+- `birth-plan.urgent.headache`
+  - en: Severe headache with blurred vision
+  - fa: سردرد شدید همراه با تاری دید
+  - ps: سخت سر درد، له تت لید سره
+- `birth-plan.urgent.fever-weak`
+  - en: Fever, and too weak to get out of bed
+  - fa: تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید
+  - ps: تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ
+- `birth-plan.urgent.belly-pain`
+  - en: Severe belly pain
+  - fa: درد شدید شکم
+  - ps: د نس سخت درد
+- `birth-plan.urgent.long-labour`
+  - en: Labour pains for more than 12 hours, and the baby is not born
+  - fa: دردهای ولادت بیشتر از ۱۲ ساعت دوام کرده و طفل به دنیا نیامده
+  - ps: د زېږون دردونه له ۱۲ ساعتونو زیات دوام کوي او ماشوم نه دی زېږېدلی
+- `birth-plan.far`
+  - en: If the road is long, or snow may close it, she can stay with relatives near the clinic in the last weeks before the birth.
+  - fa: اگر راه دور است، یا برف آن را بسته کرده می‌تواند، او می‌تواند در هفته‌های آخر پیش خویشاوندان نزدیک کلینیک بماند.
+  - ps: که لاره اوږده وي، یا واوره یې بندولای شي، هغه کولای شي په وروستیو اونیو کې د کلینیک سره نږدې له خپلوانو سره پاتې شي.
+- `birth-plan.tell`
+  - en: Tell the whole family the plan, and keep the money, the bag and the phone numbers where everyone can find them.
+  - fa: پلان را به تمام خانواده بگویید، و پول، بکس و شماره‌های تیلفون را جایی بگذارید که همه پیدا کرده بتوانند.
+  - ps: پلان ټولې کورنۍ ته ووایاست، او پیسې، کڅوړه او د ټیلیفون شمېرې داسې ځای کېږدئ چې ټول یې پیدا کړای شي.
+
+</details>
+
+<details><summary>mind-body: What stress does to us</summary>
+
+- `mind-body.title`
+  - en: What stress does to us
+  - fa: فشار روحی با ما چه می‌کند
+  - ps: رواني فشار له موږ سره څه کوي
+- `mind-body.summary`
+  - en: Stress shows in the body, the mind and what we do.
+  - fa: فشار روحی در بدن، ذهن و کارهای ما دیده می‌شود.
+  - ps: رواني فشار په بدن، ذهن او زموږ په کړنو کې ښکاري.
+- `mind-body.lead`
+  - en: When life is hard, the body and the mind react. Knowing the signs helps you see that this is stress, and that it can get better.
+  - fa: وقتی زندگی سخت است، بدن و ذهن واکنش نشان می‌دهند. شناختن این علایم کمک می‌کند بدانید که این فشار روحی است و بهتر شده می‌تواند.
+  - ps: کله چې ژوند سخت وي، بدن او ذهن غبرګون ښيي. د دې نښو پېژندل مرسته کوي چې پوه شئ دا رواني فشار دی او ښه کېدای شي.
+- `mind-body.body.(title)`
+  - en: In the body
+  - fa: در بدن
+  - ps: په بدن کې
+- `mind-body.body`
+  - en: The heart beats fast, breathing is quick and muscles are tight. Headache, stomach ache, tiredness and poor sleep are common.
+  - fa: قلب تیز می‌زند، نفس تیز می‌شود و عضلات سخت می‌شوند. سردردی، شکم‌دردی، خستگی و بی‌خوابی عام است.
+  - ps: زړه ګړندی درزا کوي، ساه ګړندۍ کېږي او عضلات کلک کېږي. سر درد، د ګېډې درد، ستړیا او بې خوبي عامې دي.
+- `mind-body.mind.(title)`
+  - en: In the mind
+  - fa: در ذهن
+  - ps: په ذهن کې
+- `mind-body.mind`
+  - en: Worried thoughts go round and round. You may feel sad, angry or afraid, and find it hard to think or decide.
+  - fa: فکرهای پریشان دور می‌زنند. شاید غمگین، قهر یا ترسیده باشید و فکر کردن یا تصمیم گرفتن برایتان سخت شود.
+  - ps: اندېښمن فکرونه بیا بیا راګرځي. ښايي خپه، غوسه یا وېرېدلي اوسئ او فکر کول یا پرېکړه کول درته سخت شي.
+- `mind-body.actions.(title)`
+  - en: In what we do
+  - fa: در کارهای ما
+  - ps: زموږ په کړنو کې
+- `mind-body.actions`
+  - en: We may stay away from people, stop doing things we enjoy, shout at the family, or smoke or use naswar more.
+  - fa: شاید از مردم دوری کنیم، کارهایی را که خوش داریم بس کنیم، بالای خانواده چیغ بزنیم، یا سگرت و نسوار بیشتر استفاده کنیم.
+  - ps: ښايي له خلکو لرې شو، هغه کارونه پرېږدو چې خوښوو یې، پر کورنۍ چیغې ووهو، یا ډېر سګرټ او نسوار وکاروو.
+- `mind-body.normal.(title)`
+  - en: This is a normal reaction
+  - fa: این یک واکنش عادی است
+  - ps: دا یو عادي غبرګون دی
+- `mind-body.normal`
+  - en: Stress is the body's alarm. It is not weakness and not madness. Small daily skills can turn the alarm down.
+  - fa: فشار روحی زنگ خطر بدن است. ضعف نیست و دیوانگی هم نیست. مهارت‌های کوچک روزانه این زنگ را آرام کرده می‌تواند.
+  - ps: رواني فشار د بدن د خطر زنګ دی. کمزوري نه ده او لېونتوب هم نه دی. کوچني ورځني مهارتونه کولای شي دا زنګ ارام کړي.
+- `mind-body.check.(title)`
+  - en: Let the body be checked too
+  - fa: بدن را هم معاینه کنید
+  - ps: بدن هم معاینه کړئ
+- `mind-body.check`
+  - en: Headache, chest pain or weight loss can have other causes. If a pain is new or strong, see a health worker.
+  - fa: سردردی، درد سینه یا کم شدن وزن علت‌های دیگر هم داشته می‌تواند. اگر دردی تازه یا شدید است، پیش کارمند صحی بروید.
+  - ps: سر درد، د سینې درد یا د وزن کمېدل نور لاملونه هم لرلای شي. که درد نوی یا سخت وي، روغتیايي کارکوونکي ته ورشئ.
+- `mind-body.calm.(title)`
+  - en: Calm the body: slow breathing
+  - fa: آرام کردن بدن: نفس آهسته
+  - ps: بدن ارامول: ورو ساه
+- `mind-body.calm`
+  - en: Slow breathing and grounding, step by step, to turn the alarm down.
+  - fa: نفس آهسته و حس کردن زمین، قدم به قدم، برای آرام کردن زنگ خطر.
+  - ps: ورو ساه او د ځمکې احساس، ګام په ګام، د خطر د زنګ د ارامولو لپاره.
+- `mind-body.cycle.(title)`
+  - en: Thoughts, feelings and actions
+  - fa: فکر، احساس و عمل
+  - ps: فکر، احساس او عمل
+- `mind-body.cycle`
+  - en: How a worried thought can grow, and how to break the cycle.
+  - fa: یک فکر پریشان چطور بزرگ می‌شود، و چطور این چرخه را بشکنید.
+  - ps: یو اندېښمن فکر څنګه لوییږي، او دا څرخ څنګه مات کړئ.
+- `mind-body.urgent.(title)`
+  - en: Any of these? Tell someone you trust, go to a health worker now, day or night
+  - fa: یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز
+  - ps: له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ
+- `mind-body.urgent.end-life`
+  - en: you have thoughts of ending your life
+  - fa: فکر پایان دادن به زندگی خود را دارید
+  - ps: د خپل ژوند د پای ته رسولو فکرونه لرئ
+- `mind-body.urgent.self-harm`
+  - en: you have hurt yourself, or are planning to
+  - fa: به خود آسیب رسانده‌اید، یا قصد آن را دارید
+  - ps: ځان ته مو زیان رسولی، یا یې اراده لرئ
+- `mind-body.urgent.hurt-others`
+  - en: you feel you might hurt someone else
+  - fa: حس می‌کنید شاید به کسی دیگر آسیب برسانید
+  - ps: احساس کوئ چې ښايي بل چا ته زیان ورسوئ
+- `mind-body.soon.(title)`
+  - en: If any of these is true for you, go to the clinic today
+  - fa: اگر یکی از این حالات را دارید، امروز به کلینیک بروید
+  - ps: که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ
+- `mind-body.soon.weeks`
+  - en: you have felt low or worried most days for 2 weeks or more
+  - fa: ۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید
+  - ps: ۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست
+- `mind-body.soon.fear`
+  - en: sudden attacks of fear, with a racing heart, keep coming back
+  - fa: حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید
+  - ps: د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي
+- `mind-body.soon.daily`
+  - en: you cannot do your daily work or care for your family
+  - fa: کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید
+  - ps: خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی
+- `mind-body.soon.drugs`
+  - en: you use opium, pills or other drugs to cope
+  - fa: برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید
+  - ps: د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ
+- `mind-body.children`
+  - en: Children show stress too: wetting the bed, clinging, anger or poor sleep. Be gentle, and keep their daily routine.
+  - fa: اطفال هم فشار روحی را نشان می‌دهند: شب‌ادراری، چسپیدن به مادر، قهر یا بی‌خوابی. با آن‌ها نرم باشید و کارهای روزانهٔ شان را منظم نگه دارید.
+  - ps: ماشومان هم رواني فشار ښيي: د شپې متیازې، له مور سره نښتل، غوسه یا بې خوبي. ورسره نرم اوسئ او ورځني کارونه یې منظم وساتئ.
+
+</details>
+
+<details><summary>mind-cycle: Thoughts, feelings and actions</summary>
+
+- `mind-cycle.title`
+  - en: Thoughts, feelings and actions
+  - fa: فکر، احساس و عمل
+  - ps: فکر، احساس او عمل
+- `mind-cycle.summary`
+  - en: How a worried thought can grow, and how to break the cycle.
+  - fa: یک فکر پریشان چطور بزرگ می‌شود، و چطور این چرخه را بشکنید.
+  - ps: یو اندېښمن فکر څنګه لوییږي، او دا څرخ څنګه مات کړئ.
+- `mind-cycle.lead`
+  - en: What we think changes how we feel and what we do, and what we do changes our thoughts again. A small change anywhere in this cycle can help.
+  - fa: آنچه فکر می‌کنیم، بالای احساس و کارهای ما اثر می‌کند، و کارهای ما دوباره بالای فکرهای ما اثر می‌کند. یک تغییر کوچک در هر جای این چرخه کمک کرده می‌تواند.
+  - ps: هغه څه چې فکر یې کوو، زموږ پر احساس او کړنو اغېز کوي، او زموږ کړنې بیا زموږ پر فکرونو اغېز کوي. د دې څرخ په هر ځای کې یو کوچنی بدلون مرسته کولای شي.
+- `mind-cycle.example.(title)`
+  - en: An everyday example
+  - fa: یک مثال روزمره
+  - ps: یوه ورځنۍ بېلګه
+- `mind-cycle.example`
+  - en: A neighbour walks past without greeting you. You think: 'She is angry with me.' You feel hurt, and you stay at home alone.
+  - fa: همسایه بدون سلام از کنار شما می‌گذرد. فکر می‌کنید: «از من قهر است.» دل‌تان می‌شکند و تنها در خانه می‌مانید.
+  - ps: یوه ګاونډۍ پرته له سلام څخه تېرېږي. فکر کوئ: «له ما خفه ده.» زړه مو ماتېږي او یوازې په کور کې پاتې کېږئ.
+- `mind-cycle.grows.(title)`
+  - en: The cycle can grow
+  - fa: این چرخه بزرگ‌تر می‌شود
+  - ps: دا څرخ لوییږي
+- `mind-cycle.grows`
+  - en: Alone at home, more sad thoughts come: 'Nobody likes me.' You feel worse, and do even less. The cycle turns again.
+  - fa: تنها در خانه، فکرهای غمگین بیشتری می‌آید: «هیچ‌کس مرا دوست ندارد.» حال‌تان بدتر می‌شود و کمتر کار می‌کنید. چرخه دوباره دور می‌خورد.
+  - ps: په کور کې یوازې، نور خواشیني فکرونه راځي: «هېڅوک ما نه خوښوي.» حال مو بدتر کېږي او لا لږ کار کوئ. څرخ بیا ګرځي.
+- `mind-cycle.notice.(title)`
+  - en: Notice the thought
+  - fa: فکر را بشناسید
+  - ps: فکر وپېژنئ
+- `mind-cycle.notice`
+  - en: Stop and say to yourself: 'I am having the thought that she is angry with me.' A thought is not always the truth.
+  - fa: دست نگه دارید و به خود بگویید: «من این فکر را دارم که او از من قهر است.» فکر همیشه حقیقت نیست.
+  - ps: ودرېږئ او ځان ته ووایاست: «زه دا فکر لرم چې هغه له ما خفه ده.» فکر تل حقیقت نه وي.
+- `mind-cycle.other.(title)`
+  - en: Look for other reasons
+  - fa: دلیل‌های دیگر را پیدا کنید
+  - ps: نور دلیلونه ولټوئ
+- `mind-cycle.other`
+  - en: Ask: what else could be true? Maybe she was tired, or worried about her own child. What would I say to a friend?
+  - fa: از خود بپرسید: دیگر چه چیزی درست بوده می‌تواند؟ شاید او خسته بود، یا در فکر طفل خود بود. به یک دوست چه می‌گفتم؟
+  - ps: له ځانه وپوښتئ: بل څه ریښتیا کېدای شي؟ ښايي هغه ستړې وه، یا د خپل ماشوم په فکر کې وه. یو ملګري ته به مې څه ویلي وای؟
+- `mind-cycle.act.(title)`
+  - en: Change one small action
+  - fa: یک کار کوچک را تغییر دهید
+  - ps: یو کوچنی کار بدل کړئ
+- `mind-cycle.act`
+  - en: Do something different: greet her first next time, or visit a friend. A small action brings new thoughts and better feelings.
+  - fa: کاری دیگر بکنید: دفعهٔ بعد شما اول سلام بدهید، یا به دیدن یک دوست بروید. یک کار کوچک فکرهای تازه و احساس بهتر می‌آورد.
+  - ps: بل کار وکړئ: بل ځل تاسو لومړی سلام ورکړئ، یا یو ملګري ته ورشئ. یو کوچنی کار نوي فکرونه او ښه احساس راوړي.
+- `mind-cycle.practise.(title)`
+  - en: Practise each evening
+  - fa: هر شام تمرین کنید
+  - ps: هر ماښام تمرین وکړئ
+- `mind-cycle.practise`
+  - en: Think of one moment today that upset you. Name the thought, the feeling and what you did. Then find one other way.
+  - fa: یک لحظهٔ امروز را که شما را ناراحت کرد به یاد بیاورید. فکر، احساس و کاری را که کردید نام بگیرید. بعد یک راه دیگر پیدا کنید.
+  - ps: د نن هغه یوه شېبه را په یاد کړئ چې تاسو یې خفه کړي یاست. فکر، احساس او هغه کار چې وکړ، نوم یې واخلئ. بیا بله لاره پیدا کړئ.
+- `mind-cycle.calm.(title)`
+  - en: Calm the body: slow breathing
+  - fa: آرام کردن بدن: نفس آهسته
+  - ps: بدن ارامول: ورو ساه
+- `mind-cycle.calm`
+  - en: When feelings are very strong, calm the body first.
+  - fa: وقتی احساسات خیلی شدید است، اول بدن را آرام کنید.
+  - ps: کله چې احساسات ډېر سخت وي، لومړی بدن ارام کړئ.
+- `mind-cycle.problems.(title)`
+  - en: Solving problems in small steps
+  - fa: حل مشکل‌ها قدم به قدم
+  - ps: د ستونزو حل ګام په ګام
+- `mind-cycle.problems`
+  - en: When the worry is a real problem, plan one small step.
+  - fa: وقتی پریشانی یک مشکل واقعی است، یک قدم کوچک را پلان کنید.
+  - ps: کله چې اندېښنه یوه ریښتینې ستونزه وي، یو کوچنی ګام پلان کړئ.
+- `mind-cycle.urgent.(title)`
+  - en: Any of these? Tell someone you trust, go to a health worker now, day or night
+  - fa: یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز
+  - ps: له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ
+- `mind-cycle.urgent.end-life`
+  - en: you have thoughts of ending your life
+  - fa: فکر پایان دادن به زندگی خود را دارید
+  - ps: د خپل ژوند د پای ته رسولو فکرونه لرئ
+- `mind-cycle.urgent.self-harm`
+  - en: you have hurt yourself, or are planning to
+  - fa: به خود آسیب رسانده‌اید، یا قصد آن را دارید
+  - ps: ځان ته مو زیان رسولی، یا یې اراده لرئ
+- `mind-cycle.urgent.hurt-others`
+  - en: you feel you might hurt someone else
+  - fa: حس می‌کنید شاید به کسی دیگر آسیب برسانید
+  - ps: احساس کوئ چې ښايي بل چا ته زیان ورسوئ
+- `mind-cycle.soon.(title)`
+  - en: If any of these is true for you, go to the clinic today
+  - fa: اگر یکی از این حالات را دارید، امروز به کلینیک بروید
+  - ps: که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ
+- `mind-cycle.soon.weeks`
+  - en: you have felt low or worried most days for 2 weeks or more
+  - fa: ۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید
+  - ps: ۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست
+- `mind-cycle.soon.fear`
+  - en: sudden attacks of fear, with a racing heart, keep coming back
+  - fa: حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید
+  - ps: د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي
+- `mind-cycle.soon.daily`
+  - en: you cannot do your daily work or care for your family
+  - fa: کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید
+  - ps: خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی
+- `mind-cycle.soon.drugs`
+  - en: you use opium, pills or other drugs to cope
+  - fa: برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید
+  - ps: د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ
+- `mind-cycle.fault`
+  - en: It is not your fault that hard thoughts come. You cannot stop them, but you can choose what to do next.
+  - fa: آمدن فکرهای سخت تقصیر شما نیست. جلوی آن‌ها را گرفته نمی‌توانید، اما انتخاب کرده می‌توانید که بعد چه کنید.
+  - ps: دا ستاسو تقصیر نه دی چې سخت فکرونه راځي. نشئ کولای چې ودرېږئ یې، خو کولای شئ وټاکئ چې بیا څه کوئ.
+
+</details>
+
+<details><summary>mind-calm: Calm the body: slow breathing</summary>
+
+- `mind-calm.title`
+  - en: Calm the body: slow breathing
+  - fa: آرام کردن بدن: نفس آهسته
+  - ps: بدن ارامول: ورو ساه
+- `mind-calm.summary`
+  - en: Slow breathing and grounding, step by step, in a few minutes.
+  - fa: نفس آهسته و حس کردن زمین، قدم به قدم، در چند دقیقه.
+  - ps: ورو ساه او د ځمکې احساس، ګام په ګام، په څو دقیقو کې.
+- `mind-calm.lead`
+  - en: When stress is strong, calm the body first. These exercises take a few minutes, and you can do them anywhere, sitting or standing.
+  - fa: وقتی فشار روحی زیاد است، اول بدن را آرام کنید. این تمرین‌ها چند دقیقه وقت می‌گیرد و هر جا، نشسته یا ایستاده، انجام شده می‌تواند.
+  - ps: کله چې رواني فشار زیات وي، لومړی بدن ارام کړئ. دا تمرینونه څو دقیقې وخت نیسي او هر چېرې، ناست یا ولاړ، کېدای شي.
+- `mind-calm.sit.(title)`
+  - en: Sit and drop your shoulders
+  - fa: بنشینید و شانه‌ها را رها کنید
+  - ps: کېنئ او اوږې خوشې کړئ
+- `mind-calm.sit`
+  - en: Sit with your feet flat on the floor and your hands resting. Let your shoulders drop. Close your eyes, or look down.
+  - fa: بنشینید، پاها را صاف روی زمین بگذارید و دست‌ها را آرام بگذارید. شانه‌ها را رها کنید. چشم‌ها را ببندید، یا پایین ببینید.
+  - ps: کېنئ، پښې په ځمکه سمې کېږدئ او لاسونه ارام کېږدئ. اوږې خوشې کړئ. سترګې پټې کړئ، یا ښکته وګورئ.
+- `mind-calm.out.(title)`
+  - en: First, breathe all the air out
+  - fa: اول، همهٔ هوا را بیرون کنید
+  - ps: لومړی، ټوله هوا وباسئ
+- `mind-calm.out`
+  - en: Breathe out slowly, as if blowing on hot tea. Then let the air come back in by itself.
+  - fa: آهسته نفس را بیرون کنید، مثل این‌که بالای چای داغ پف می‌کنید. بعد بگذارید هوا خودش داخل شود.
+  - ps: ورو ساه وباسئ، لکه پر ګرم چای چې پوکې کوئ. بیا پرېږدئ چې هوا پخپله دننه شي.
+- `mind-calm.count.(title)`
+  - en: In for 3, out for 4
+  - fa: داخل با ۳، بیرون با ۴
+  - ps: دننه په ۳، بهر په ۴
+- `mind-calm.count`
+  - en: Breathe in through the nose, counting 1, 2, 3. Breathe out through the mouth, counting 1, 2, 3, 4. Let the belly rise and fall.
+  - fa: از راه بینی نفس بکشید و بشمارید: ۱، ۲، ۳. از راه دهن نفس را بیرون کنید و بشمارید: ۱، ۲، ۳، ۴. بگذارید شکم بالا و پایین شود.
+  - ps: د پوزې له لارې ساه واخلئ او وشمېرئ: ۱، ۲، ۳. د خولې له لارې ساه وباسئ او وشمېرئ: ۱، ۲، ۳، ۴. پرېږدئ چې ګېډه پورته او ښکته شي.
+- `mind-calm.repeat.(title)`
+  - en: Keep going for 2 minutes
+  - fa: ۲ دقیقه ادامه دهید
+  - ps: ۲ دقیقې دوام ورکړئ
+- `mind-calm.repeat`
+  - en: Keep breathing like this for about 2 minutes, or 10 breaths. Do it each day, and whenever you feel stress rising.
+  - fa: حدود ۲ دقیقه، یا ۱۰ نفس، همین‌طور ادامه دهید. هر روز، و هر وقت حس کردید فشار بالا می‌رود، این کار را بکنید.
+  - ps: شاوخوا ۲ دقیقې، یا ۱۰ ساګانې، همداسې دوام ورکړئ. هره ورځ، او هر کله چې احساس کړئ رواني فشار لوړېږي، دا کار وکړئ.
+- `mind-calm.feet.(title)`
+  - en: Feel your feet on the ground
+  - fa: پاها را روی زمین حس کنید
+  - ps: پښې په ځمکه احساس کړئ
+- `mind-calm.feet`
+  - en: Press your feet into the floor, and press your hands together. Feel the floor holding you up.
+  - fa: پاها را به زمین فشار دهید، و دست‌ها را به هم فشار دهید. حس کنید که زمین شما را نگه داشته است.
+  - ps: پښې په ځمکه کېکاږئ، او لاسونه یو بل ته کېکاږئ. احساس کړئ چې ځمکه تاسو ساتي.
+- `mind-calm.notice.(title)`
+  - en: Notice 3 things around you
+  - fa: ۳ چیز دور و بر خود را ببینید
+  - ps: خپل شاوخوا ۳ شیان وګورئ
+- `mind-calm.notice`
+  - en: Name 3 things you can see, 3 you can hear, and 3 you can touch. This brings the mind back to here and now.
+  - fa: ۳ چیزی را که می‌بینید، ۳ چیزی را که می‌شنوید و ۳ چیزی را که لمس کرده می‌توانید، نام بگیرید. این کار ذهن را به همین جا و همین حالا برمی‌گرداند.
+  - ps: ۳ شیان چې وینئ یې، ۳ چې اورئ یې او ۳ چې لمس کولای شئ یې، نوم یې واخلئ. دا کار ذهن بېرته همدې ځای او همدې شېبې ته راولي.
+- `mind-calm.problems.(title)`
+  - en: Solving problems in small steps
+  - fa: حل مشکل‌ها قدم به قدم
+  - ps: د ستونزو حل ګام په ګام
+- `mind-calm.problems`
+  - en: When you feel calmer, take one problem and plan a small step.
+  - fa: وقتی آرام‌تر شدید، یک مشکل را بگیرید و یک قدم کوچک را پلان کنید.
+  - ps: کله چې ارام شوئ، یوه ستونزه واخلئ او یو کوچنی ګام پلان کړئ.
+- `mind-calm.urgent.(title)`
+  - en: Any of these? Tell someone you trust, go to a health worker now, day or night
+  - fa: یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز
+  - ps: له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ
+- `mind-calm.urgent.end-life`
+  - en: you have thoughts of ending your life
+  - fa: فکر پایان دادن به زندگی خود را دارید
+  - ps: د خپل ژوند د پای ته رسولو فکرونه لرئ
+- `mind-calm.urgent.self-harm`
+  - en: you have hurt yourself, or are planning to
+  - fa: به خود آسیب رسانده‌اید، یا قصد آن را دارید
+  - ps: ځان ته مو زیان رسولی، یا یې اراده لرئ
+- `mind-calm.urgent.hurt-others`
+  - en: you feel you might hurt someone else
+  - fa: حس می‌کنید شاید به کسی دیگر آسیب برسانید
+  - ps: احساس کوئ چې ښايي بل چا ته زیان ورسوئ
+- `mind-calm.soon.(title)`
+  - en: If any of these is true for you, go to the clinic today
+  - fa: اگر یکی از این حالات را دارید، امروز به کلینیک بروید
+  - ps: که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ
+- `mind-calm.soon.weeks`
+  - en: you have felt low or worried most days for 2 weeks or more
+  - fa: ۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید
+  - ps: ۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست
+- `mind-calm.soon.fear`
+  - en: sudden attacks of fear, with a racing heart, keep coming back
+  - fa: حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید
+  - ps: د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي
+- `mind-calm.soon.daily`
+  - en: you cannot do your daily work or care for your family
+  - fa: کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید
+  - ps: خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی
+- `mind-calm.soon.drugs`
+  - en: you use opium, pills or other drugs to cope
+  - fa: برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید
+  - ps: د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ
+- `mind-calm.dizzy`
+  - en: If you feel dizzy, breathe more gently and more slowly. Breathing out should feel easy.
+  - fa: اگر سرتان چرخ خورد، آرام‌تر و آهسته‌تر نفس بکشید. بیرون کردن نفس باید آسان باشد.
+  - ps: که سر مو وګرځېد، نوره هم نرمه او ورو ساه واخلئ. ساه ایستل باید اسانه وي.
+- `mind-calm.children`
+  - en: Teach this to your children too. Breathing slowly together at bedtime helps everyone sleep.
+  - fa: این را به اطفال خود هم یاد بدهید. نفس آهسته کشیدن با هم در وقت خواب، به خواب همه کمک می‌کند.
+  - ps: دا خپلو ماشومانو ته هم وروښیئ. د خوب پر وخت یوځای ورو ساه اخیستل د ټولو له خوب سره مرسته کوي.
+
+</details>
+
+<details><summary>mind-problems: Solving problems in small steps</summary>
+
+- `mind-problems.title`
+  - en: Solving problems in small steps
+  - fa: حل مشکل‌ها قدم به قدم
+  - ps: د ستونزو حل ګام په ګام
+- `mind-problems.summary`
+  - en: Many problems? Take one at a time, with a small plan.
+  - fa: مشکل‌های زیاد یکجا؟ یکی‌یکی، با یک پلان کوچک.
+  - ps: ډېرې ستونزې یوځای؟ یوه یوه، په یوه کوچني پلان.
+- `mind-problems.lead`
+  - en: When many problems come at once, the mind can freeze. Taking them one at a time, in small steps, makes them easier to face.
+  - fa: وقتی مشکل‌های زیاد یکجا می‌آیند، ذهن گیر می‌ماند. اگر آن‌ها را یکی‌یکی و قدم به قدم پیش ببرید، آسان‌تر می‌شوند.
+  - ps: کله چې ډېرې ستونزې یوځای راشي، ذهن بند پاتې کېږي. که هغه یوه یوه او ګام په ګام مخته یوسئ، اسانه کېږي.
+- `mind-problems.list.(title)`
+  - en: List your problems
+  - fa: مشکل‌های خود را بشمارید
+  - ps: خپلې ستونزې وشمېرئ
+- `mind-problems.list`
+  - en: Say them out loud, or ask someone to write them down. Then sort them: ones you can change, and ones you cannot.
+  - fa: آن‌ها را بلند بگویید، یا از کسی بخواهید بنویسد. بعد جدا کنید: آن‌هایی که تغییر داده می‌توانید، و آن‌هایی که نمی‌توانید.
+  - ps: په لوړ غږ یې ووایاست، یا له چا وغواړئ چې ویې لیکي. بیا یې جلا کړئ: هغه چې بدلولای یې شئ، او هغه چې نه یې شئ بدلولای.
+- `mind-problems.pick.(title)`
+  - en: Pick one small problem
+  - fa: یک مشکل کوچک را انتخاب کنید
+  - ps: یوه کوچنۍ ستونزه وټاکئ
+- `mind-problems.pick`
+  - en: Start with one you can change and that is not too big. Say it in a few words, like: 'The roof leaks when it rains.'
+  - fa: با مشکلی شروع کنید که تغییر داده می‌توانید و خیلی بزرگ نیست. آن را در چند کلمه بگویید، مثلاً: «وقتی باران می‌بارد، بام چکه می‌کند.»
+  - ps: په هغې ستونزې پیل وکړئ چې بدلولای یې شئ او ډېره لویه نه وي. په څو کلمو یې ووایاست، لکه: «کله چې باران وورېږي، بام څاڅي.»
+- `mind-problems.ideas.(title)`
+  - en: Think of many ways
+  - fa: راه‌های زیاد را فکر کنید
+  - ps: ډېرې لارې فکر کړئ
+- `mind-problems.ideas`
+  - en: Think of every possible way, even ones that seem strange. Ask family or a neighbour for ideas too.
+  - fa: هر راه ممکن را فکر کنید، حتی آن‌هایی که عجیب به نظر می‌رسند. از خانواده یا همسایه هم نظر بخواهید.
+  - ps: هره ممکنه لاره فکر کړئ، حتی هغه چې عجیبه ښکاري. له کورنۍ یا ګاونډي هم نظر وغواړئ.
+- `mind-problems.choose.(title)`
+  - en: Choose the best way
+  - fa: بهترین راه را انتخاب کنید
+  - ps: تر ټولو ښه لاره وټاکئ
+- `mind-problems.choose`
+  - en: For each way, ask: will it help? Can I do it? Pick one or two ways that are good and possible.
+  - fa: برای هر راه بپرسید: آیا کمک می‌کند؟ آیا از دستم پوره است؟ یکی دو راه را انتخاب کنید که خوب و ممکن باشند.
+  - ps: د هرې لارې لپاره وپوښتئ: ایا مرسته کوي؟ ایا زه یې کولای شم؟ یوه یا دوه لارې وټاکئ چې ښې او شونې وي.
+- `mind-problems.plan.(title)`
+  - en: Make a small plan
+  - fa: یک پلان کوچک بسازید
+  - ps: یو کوچنی پلان جوړ کړئ
+- `mind-problems.plan`
+  - en: Decide what you will do, when, and who can help. Break it into small steps you can do this week.
+  - fa: تصمیم بگیرید چه می‌کنید، چه وقت، و چه کسی کمک کرده می‌تواند. آن را به قدم‌های کوچکی تقسیم کنید که همین هفته انجام شود.
+  - ps: پرېکړه وکړئ چې څه به کوئ، کله، او څوک مرسته کولای شي. هغه په کوچنیو ګامونو ووېشئ چې همدا اونۍ ترسره شي.
+- `mind-problems.review.(title)`
+  - en: Look back, then try again
+  - fa: نتیجه را ببینید و باز کوشش کنید
+  - ps: پایله وګورئ او بیا هڅه وکړئ
+- `mind-problems.review`
+  - en: After a few days, ask: what worked? If it did not work, try another way. Each small step counts.
+  - fa: بعد از چند روز بپرسید: چه چیز کار داد؟ اگر کار نداد، راه دیگری را امتحان کنید. هر قدم کوچک حساب می‌شود.
+  - ps: له څو ورځو وروسته وپوښتئ: څه ګټور و؟ که ګټور نه و، بله لاره وازمویئ. هر کوچنی ګام حسابېږي.
+- `mind-problems.cannot.(title)`
+  - en: For what you cannot change
+  - fa: برای چیزهایی که تغییر داده نمی‌توانید
+  - ps: د هغو شیانو لپاره چې نه یې شئ بدلولای
+- `mind-problems.cannot`
+  - en: Some problems cannot be solved now. Then turn to what you can do: rest, talk with someone, and be kind to yourself.
+  - fa: بعضی مشکل‌ها حالا حل نمی‌شوند. آن وقت به کارهایی رو بیاورید که از دست‌تان پوره است: استراحت، گپ زدن با کسی و مهربانی با خود.
+  - ps: ځینې ستونزې اوس نه حل کېږي. بیا هغو کارونو ته مخه کړئ چې کولای یې شئ: ارام، له چا سره خبرې او له ځان سره مهرباني.
+- `mind-problems.calm.(title)`
+  - en: Calm the body: slow breathing
+  - fa: آرام کردن بدن: نفس آهسته
+  - ps: بدن ارامول: ورو ساه
+- `mind-problems.calm`
+  - en: Too upset to think? Calm the body first, then come back.
+  - fa: آن‌قدر ناراحت هستید که فکر کرده نمی‌توانید؟ اول بدن را آرام کنید، بعد برگردید.
+  - ps: دومره خفه یاست چې فکر نشئ کولای؟ لومړی بدن ارام کړئ، بیا راوګرځئ.
+- `mind-problems.urgent.(title)`
+  - en: Any of these? Tell someone you trust, go to a health worker now, day or night
+  - fa: یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز
+  - ps: له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ
+- `mind-problems.urgent.end-life`
+  - en: you have thoughts of ending your life
+  - fa: فکر پایان دادن به زندگی خود را دارید
+  - ps: د خپل ژوند د پای ته رسولو فکرونه لرئ
+- `mind-problems.urgent.self-harm`
+  - en: you have hurt yourself, or are planning to
+  - fa: به خود آسیب رسانده‌اید، یا قصد آن را دارید
+  - ps: ځان ته مو زیان رسولی، یا یې اراده لرئ
+- `mind-problems.urgent.hurt-others`
+  - en: you feel you might hurt someone else
+  - fa: حس می‌کنید شاید به کسی دیگر آسیب برسانید
+  - ps: احساس کوئ چې ښايي بل چا ته زیان ورسوئ
+- `mind-problems.soon.(title)`
+  - en: If any of these is true for you, go to the clinic today
+  - fa: اگر یکی از این حالات را دارید، امروز به کلینیک بروید
+  - ps: که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ
+- `mind-problems.soon.weeks`
+  - en: you have felt low or worried most days for 2 weeks or more
+  - fa: ۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید
+  - ps: ۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست
+- `mind-problems.soon.fear`
+  - en: sudden attacks of fear, with a racing heart, keep coming back
+  - fa: حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید
+  - ps: د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي
+- `mind-problems.soon.daily`
+  - en: you cannot do your daily work or care for your family
+  - fa: کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید
+  - ps: خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی
+- `mind-problems.soon.drugs`
+  - en: you use opium, pills or other drugs to cope
+  - fa: برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید
+  - ps: د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ
+- `mind-problems.share`
+  - en: Problems feel lighter when shared. Ask someone you trust to help you with the plan.
+  - fa: مشکل‌ها وقتی با کسی شریک شوند، سبک‌تر می‌شوند. از کسی که اعتماد دارید بخواهید در پلان کمک کند.
+  - ps: ستونزې چې شریکې شي، سپکې کېږي. له یو باوري کس وغواړئ چې په پلان کې مرسته وکړي.
+
+</details>
+
+<details><summary>mind-routine: Low mood: sleep and daily routine</summary>
+
+- `mind-routine.title`
+  - en: Low mood: sleep and daily routine
+  - fa: دل‌تنگی: خواب و برنامهٔ روزانه
+  - ps: خپګان: خوب او ورځنی پروګرام
+- `mind-routine.summary`
+  - en: When you feel low, small planned activities and regular sleep help.
+  - fa: وقتی دل‌تنگ هستید، کارهای کوچک پلان‌شده و خواب منظم کمک می‌کند.
+  - ps: کله چې خپه یاست، کوچني پلان شوي کارونه او منظم خوب مرسته کوي.
+- `mind-routine.lead`
+  - en: Low mood makes us do less, and doing less makes the mood lower. Doing small things, step by step, can lift it again.
+  - fa: دل‌تنگی باعث می‌شود کمتر کار کنیم، و کمتر کار کردن دل‌تنگی را بیشتر می‌کند. انجام کارهای کوچک، قدم به قدم، حال را دوباره بهتر کرده می‌تواند.
+  - ps: خپګان موږ دې ته اړ باسي چې لږ کار وکړو، او لږ کار خپګان زیاتوي. کوچني کارونه، ګام په ګام، حال بیا ښه کولای شي.
+- `mind-routine.wake.(title)`
+  - en: Get up at the same time
+  - fa: هر روز در یک وقت بیدار شوید
+  - ps: هره ورځ په یو وخت راویښ شئ
+- `mind-routine.wake`
+  - en: Get up at about the same time every day, even after a bad night. Get daylight in the morning, and keep day sleeps short.
+  - fa: هر روز تقریباً در یک وقت بیدار شوید، حتی بعد از یک شب بد. صبح‌ها در روشنی آفتاب باشید و خواب روز را کوتاه نگه دارید.
+  - ps: هره ورځ نږدې په یو وخت راویښ شئ، حتی له یوې بدې شپې وروسته. سهار د لمر په رڼا کې اوسئ او د ورځې خوب لنډ وساتئ.
+- `mind-routine.plan.(title)`
+  - en: Plan one good thing a day
+  - fa: هر روز یک کار خوب را پلان کنید
+  - ps: هره ورځ یو ښه کار پلان کړئ
+- `mind-routine.plan`
+  - en: Choose small things you used to enjoy, or that matter to you: tea with a neighbour, the garden, playing with a child.
+  - fa: کارهای کوچکی را انتخاب کنید که پیش از این خوش داشتید، یا برای شما مهم است: چای با همسایه، باغچه، بازی با طفل.
+  - ps: هغه کوچني کارونه وټاکئ چې مخکې مو خوښېدل، یا تاسو ته مهم دي: له ګاونډي سره چای، باغچه، له ماشوم سره لوبې.
+- `mind-routine.small.(title)`
+  - en: Start very small
+  - fa: خیلی کوچک شروع کنید
+  - ps: ډېر کوچنی پیل وکړئ
+- `mind-routine.small`
+  - en: Do it even if you do not feel like it. Start with 5 or 10 minutes. The good feeling often comes after you start, not before.
+  - fa: حتی اگر دل‌تان نمی‌خواهد، آن را انجام دهید. با ۵ یا ۱۰ دقیقه شروع کنید. احساس خوب اکثراً بعد از شروع می‌آید، نه پیش از آن.
+  - ps: که زړه مو نه غواړي هم، ویې کړئ. په ۵ یا ۱۰ دقیقو پیل وکړئ. ښه احساس اکثره له پیل وروسته راځي، نه مخکې.
+- `mind-routine.people.(title)`
+  - en: Stay close to people
+  - fa: با مردم نزدیک بمانید
+  - ps: له خلکو سره نږدې پاتې شئ
+- `mind-routine.people`
+  - en: Sit with family, visit a friend, or help a neighbour. Being with others lifts the mood, even if you talk little.
+  - fa: با خانواده بنشینید، به دیدن یک دوست بروید، یا به همسایه کمک کنید. بودن با دیگران حال را بهتر می‌کند، حتی اگر کم گپ بزنید.
+  - ps: له کورنۍ سره کېنئ، یو ملګري ته ورشئ، یا له ګاونډي سره مرسته وکړئ. له نورو سره اوسېدل حال ښه کوي، حتی که لږې خبرې وکړئ.
+- `mind-routine.move.(title)`
+  - en: Move your body each day
+  - fa: هر روز بدن را حرکت دهید
+  - ps: هره ورځ بدن وخوځوئ
+- `mind-routine.move`
+  - en: A walk, housework or work in the field all help. Moving the body is one of the best things for low mood.
+  - fa: قدم زدن، کار خانه یا کار در زمین همه کمک می‌کند. حرکت بدن یکی از بهترین چیزها برای دل‌تنگی است.
+  - ps: ګرځېدل، د کور کار یا په ځمکه کې کار ټول مرسته کوي. د بدن حرکت د خپګان لپاره یو له غوره شیانو څخه دی.
+- `mind-routine.night.(title)`
+  - en: A calm evening for sleep
+  - fa: یک شام آرام برای خواب
+  - ps: د خوب لپاره ارام ماښام
+- `mind-routine.night`
+  - en: No tea for a few hours before bed, and put the phone away. If you cannot sleep, get up, do something calm, then try again.
+  - fa: چند ساعت پیش از خواب چای نخورید و تیلفون را کنار بگذارید. اگر خواب‌تان نبرد، برخیزید، یک کار آرام بکنید، بعد دوباره کوشش کنید.
+  - ps: له خوب څو ساعته مخکې چای مه څښئ او ټیلیفون یوې خوا ته کېږدئ. که خوب مو نه راځي، پاڅئ، یو ارام کار وکړئ، بیا بیا هڅه وکړئ.
+- `mind-routine.sleep.(title)`
+  - en: Sleep well
+  - fa: خواب خوب
+  - ps: ښه خوب
+- `mind-routine.sleep`
+  - en: A regular bedtime, a dark quiet room, and keeping warm safely at night.
+  - fa: وقت خواب منظم، اتاق تاریک و آرام، و گرم ماندن بی‌خطر در شب.
+  - ps: د خوب منظم وخت، تیاره او ارامه کوټه، او د شپې په خوندي ډول ګرم پاتې کېدل.
+- `mind-routine.cycle.(title)`
+  - en: Thoughts, feelings and actions
+  - fa: فکر، احساس و عمل
+  - ps: فکر، احساس او عمل
+- `mind-routine.cycle`
+  - en: Sad thoughts that go round and round? See how to break the cycle.
+  - fa: فکرهای غمگینی که دور می‌زنند؟ ببینید این چرخه را چطور بشکنید.
+  - ps: خواشیني فکرونه چې بیا بیا راګرځي؟ وګورئ چې دا څرخ څنګه مات کړئ.
+- `mind-routine.dont.(title)`
+  - en: Do not:
+  - fa: این کارها را نکنید:
+  - ps: دا کارونه مه کوئ:
+- `mind-routine.dont.pills`
+  - en: Do not use opium, hashish or bazaar sleeping pills; they make things worse.
+  - fa: تریاک، چرس یا تابلیت خواب بازار را استفاده نکنید؛ حال را بدتر می‌کنند.
+  - ps: اپین، چرس یا د بازار د خوب ګولۍ مه کاروئ؛ حال نور هم خرابوي.
+- `mind-routine.dont.bed`
+  - en: Do not stay in bed all day. It makes low mood heavier.
+  - fa: تمام روز در بستر نمانید. دل‌تنگی را سنگین‌تر می‌کند.
+  - ps: ټوله ورځ په بستر کې مه پاتې کېږئ. خپګان درنوي.
+- `mind-routine.urgent.(title)`
+  - en: Any of these? Tell someone you trust, go to a health worker now, day or night
+  - fa: یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز
+  - ps: له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ
+- `mind-routine.urgent.end-life`
+  - en: you have thoughts of ending your life
+  - fa: فکر پایان دادن به زندگی خود را دارید
+  - ps: د خپل ژوند د پای ته رسولو فکرونه لرئ
+- `mind-routine.urgent.self-harm`
+  - en: you have hurt yourself, or are planning to
+  - fa: به خود آسیب رسانده‌اید، یا قصد آن را دارید
+  - ps: ځان ته مو زیان رسولی، یا یې اراده لرئ
+- `mind-routine.urgent.hurt-others`
+  - en: you feel you might hurt someone else
+  - fa: حس می‌کنید شاید به کسی دیگر آسیب برسانید
+  - ps: احساس کوئ چې ښايي بل چا ته زیان ورسوئ
+- `mind-routine.soon.(title)`
+  - en: If any of these is true for you, go to the clinic today
+  - fa: اگر یکی از این حالات را دارید، امروز به کلینیک بروید
+  - ps: که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ
+- `mind-routine.soon.weeks`
+  - en: you have felt low or worried most days for 2 weeks or more
+  - fa: ۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید
+  - ps: ۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست
+- `mind-routine.soon.fear`
+  - en: sudden attacks of fear, with a racing heart, keep coming back
+  - fa: حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید
+  - ps: د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي
+- `mind-routine.soon.daily`
+  - en: you cannot do your daily work or care for your family
+  - fa: کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید
+  - ps: خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی
+- `mind-routine.soon.drugs`
+  - en: you use opium, pills or other drugs to cope
+  - fa: برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید
+  - ps: د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ
+- `mind-routine.praise`
+  - en: Each evening, remember one thing you did today, however small. That is a success.
+  - fa: هر شام، یک کاری را که امروز کردید به یاد بیاورید، هر قدر هم کوچک باشد. این یک موفقیت است.
+  - ps: هر ماښام، هغه یو کار را په یاد کړئ چې نن مو وکړ، که هر څومره کوچنی وي. دا یوه بریا ده.
+
+</details>
+
+<details><summary>Breathing pacer animation (anim.breathe)</summary>
+
+- `anim.breathe.title`
+  - en: Slow breathing
+  - fa: نفس آهسته
+  - ps: ورو ساه اخیستل
+- `anim.breathe.s1`
+  - en: Sit comfortably, with your feet flat on the floor and your hands resting. Let your shoulders drop.
+  - fa: راحت بنشینید، پاها صاف روی زمین و دست‌ها آرام. شانه‌ها را رها کنید.
+  - ps: په ارامۍ کېنئ، پښې په ځمکه سمې او لاسونه ارام. اوږې خوشې کړئ.
+- `anim.breathe.s2`
+  - en: First, breathe all the air out slowly, as if blowing on hot tea.
+  - fa: اول، همهٔ هوا را آهسته بیرون کنید، مثل این‌که بالای چای داغ پف می‌کنید.
+  - ps: لومړی، ټوله هوا ورو وباسئ، لکه پر ګرم چای چې پوکې کوئ.
+- `anim.breathe.s3`
+  - en: Now breathe in slowly through your nose, as the circle grows. One, two, three.
+  - fa: حالا از راه بینی آهسته نفس بکشید، همان‌طور که دایره بزرگ می‌شود. یک، دو، سه.
+  - ps: اوس د پوزې له لارې ورو ساه واخلئ، لکه څنګه چې کړۍ لوییږي. یو، دوه، درې.
+- `anim.breathe.s4`
+  - en: And breathe out slowly through your mouth, as it gets smaller. One, two, three, four.
+  - fa: و از راه دهن آهسته نفس را بیرون کنید، همان‌طور که کوچک می‌شود. یک، دو، سه، چهار.
+  - ps: او د خولې له لارې ورو ساه وباسئ، لکه څنګه چې کوچنۍ کېږي. یو، دوه، درې، څلور.
+- `anim.breathe.s5`
+  - en: Again, with the circle. In, two, three. Out, two, three, four.
+  - fa: دوباره، همراه دایره. داخل، دو، سه. بیرون، دو، سه، چهار.
+  - ps: بیا، له کړۍ سره. دننه، دوه، درې. بهر، دوه، درې، څلور.
+- `anim.breathe.s6`
+  - en: Keep breathing with the circle for about two minutes. Then press your feet into the floor, and notice three things around you.
+  - fa: حدود دو دقیقه همراه دایره نفس بکشید. بعد پاها را به زمین فشار دهید و سه چیز دور و بر خود را ببینید.
+  - ps: شاوخوا دوه دقیقې له کړۍ سره ساه واخلئ. بیا پښې په ځمکه کېکاږئ او خپل شاوخوا درې شیان وګورئ.
+
+</details>
+
+Adults screen group: `text.mindStress` Mind and stress / ذهن و فشار روحی / ذهن او رواني فشار; `say.ui.mindStress` Mind and stress: simple ways to feel calmer, and when to get help. / ذهن و فشار روحی: راه‌های ساده برای آرام شدن، و چه وقت کمک بگیرید. / ذهن او رواني فشار: د ارامېدو ساده لارې، او کله مرسته وغواړئ.
+
+### Search phrases (content/src/search-phrases.json)
+
+- birth-plan fa added: پلان ولادت · آمادگی برای ولادت · آمادگی ولادت · کجا ولادت کنم · جای ولادت · بکس ولادت · چه چیزهایی برای ولادت ببرم · موتر برای ولادت · پول ولادت · ولادت در خانه · قابله برای ولادت · همراه زن در ولادت · عروسم نزدیک ولادت است
+- birth-plan ps added: د زېږون پلان · د زېږون چمتووالی · چېرته وزېږوم · د زېږون ځای · د زېږون کڅوړه · د زېږون لپاره موټر · په کور کې زېږون · د زېږون لپاره پیسې
+- birth-plan lat added: plan e weladat · plan weladat · weladat dar khana · jay weladat · da zezhun plan
+- birth-plan en added: birth plan · where to give birth · home birth · getting ready for birth · hospital bag · what to take for the birth · transport for labour · delivery plan · birth preparedness · money for the birth
+- mind-body fa added: علایم فشار روحی · فشار روحی چیست · فشار روحی و بدن · از پریشانی بدنم درد می‌کند · از غصه سرم درد می‌کند · اثر فشار روحی
+- mind-body ps added: د رواني فشار نښې · رواني فشار څه دی · له اندېښنې بدن مې درد کوي · د رواني فشار اغېز
+- mind-body lat added: alaem feshar rohi · feshar rohi chist
+- mind-body en added: signs of stress · what is stress · stress symptoms · stress and the body · body pains from stress · effects of stress
+- mind-cycle fa added: فکرهای منفی · فکر منفی · فکرهای بد · فکرهای بد از سرم نمی‌رود · زیاد فکر می‌کنم · فکر زیاد · فکرهای پریشان · فکر و احساس
+- mind-cycle ps added: منفي فکرونه · بد فکرونه · ډېر فکر کوم · فکرونه مې نه ځي · فکر او احساس
+- mind-cycle lat added: manfi
+- mind-cycle en added: negative thoughts · negative thinking · overthinking · thinking too much · bad thoughts · cbt · cognitive behavioural therapy · thoughts feelings and actions · worry cycle
+- mind-calm fa added: تمرین نفس · تمرین تنفس · نفس عمیق · نفس آهسته · آرام شدن · چطور آرام شوم · آرامش ذهن · خود را آرام کنم
+- mind-calm ps added: د ساه تمرین · ورو ساه · ژوره ساه · ارامېدل · څنګه ارام شم
+- mind-calm lat added: tamrin nafas · nafas amiq · aram shodan
+- mind-calm en added: breathing exercise · slow breathing · deep breathing · how to calm down · calm down · relaxation · relax · grounding · calm my mind
+- mind-problems fa added: حل مشکل · حل مشکلات · مشکلات زیاد دارم · مشکلات زندگی · چطور مشکل را حل کنم · از مشکلات خسته شدم
+- mind-problems ps added: د ستونزو حل · ډېرې ستونزې لرم · د ژوند ستونزې · ستونزه څنګه حل کړم
+- mind-problems lat added: hal e mushkil · mushkilat ziyad · mushkilat
+- mind-problems en added: problem solving · too many problems · solve problems · life problems · overwhelmed · how to solve a problem
+- mind-routine fa added: بی‌حوصلگی · حوصله ندارم · هیچ کاری دلم نمی‌خواهد · تمام روز در بستر هستم · برنامه روزانه · انرژی ندارم · از هیچ چیز خوشم نمی‌آید
+- mind-routine ps added: حوصله نه لرم · زړه مې هېڅ نه غواړي · ورځنی پروګرام · ټوله ورځ په بستر کې یم
+- mind-routine lat added: hawsala nadaram · bihawsalagi · barnama rozana
+- mind-routine en added: low mood · no motivation · no energy · daily routine · stay in bed all day · nothing feels good · lost interest in everything
+- newborn fa added: مراقبت ناف · ناف نوزاد · کلرهگزیدین · هفته اول نوزاد · آغوز · شیر اول مادر
+- newborn ps added: د نوم پاملرنه · د نوي ماشوم لومړۍ اونۍ · فله
+- newborn lat added: naf e nawzad
+- newborn en added: cord care · umbilical cord · chlorhexidine · first week with a new baby · colostrum · postnatal check
+- pregnancy-care fa removed (moved to birth-plan): ولادت در خانه · پلان ولادت · کجا ولادت کنم
+- pregnancy-care ps removed (moved to birth-plan): د زېږون پلان
+- pregnancy-care en removed (moved to birth-plan): birth plan · where to give birth · home birth

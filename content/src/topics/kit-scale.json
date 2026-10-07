@@ -7,9 +7,9 @@
     "en": "Weighing a child at home"
   },
   "summary": {
-    "fa": "برای هر خانواده لازم نیست: کلینیک اطفال را مفت وزن می‌کند.",
-    "ps": "هرې کورنۍ ته اړین نه دی: کلینیک ماشومان وړیا تلي.",
-    "en": "Not needed by every family: the clinic weighs children free."
+    "fa": "برای هر خانواده لازم نیست: کلینیک اطفال را وزن می‌کند.",
+    "ps": "هرې کورنۍ ته اړین نه دی: کلینیک ماشومان تلي.",
+    "en": "Not needed by every family: the clinic weighs children."
   },
   "image": "kit-scale",
   "blocks": [
@@ -17,9 +17,9 @@
       "id": "kit-scale.lead",
       "type": "lead",
       "text": {
-        "fa": "کلینیک اطفال را مفت وزن می‌کند. ترازو در خانه لازم نیست، اما برای نوزاد کوچک یا طفلی که وزن نمی‌گیرد کمک می‌کند.",
-        "ps": "کلینیک ماشومان وړیا تلي. په کور کې تله اړینه نه ده، خو د کوچني ماشوم یا هغه ماشوم لپاره چې وزن نه اخلي مرسته کوي.",
-        "en": "The clinic weighs children for free. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight."
+        "fa": "کلینیک اطفال را در هر مراجعه وزن می‌کند. ترازو در خانه لازم نیست، اما برای نوزاد کوچک یا طفلی که وزن نمی‌گیرد کمک می‌کند.",
+        "ps": "کلینیک ماشومان په هره لیدنه کې تلي. په کور کې تله اړینه نه ده، خو د کوچني ماشوم یا هغه ماشوم لپاره چې وزن نه اخلي مرسته کوي.",
+        "en": "The clinic weighs children at every visit. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight."
       }
     },
     {
@@ -111,6 +111,7 @@
     "'Not gaining for 2 months' and 'losing weight' = clinic this week (judgement call, consistent with growth.soon).",
     "Birth weight not regained by 3 weeks (NICE NG75); WHO materials often say 2 weeks.",
     "Price 1,000 to 2,000 afghanis is an estimate.",
-    "Home tab rule (Mo): 'What to look for' (weight gain) and the 'clinic this week' box moved to the Health page reading-muac; a link row 'What does the weight mean?' opens it."
+    "Home tab rule (Mo): 'What to look for' (weight gain) and the 'clinic this week' box moved to the Health page reading-muac; a link row 'What does the weight mean?' opens it.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

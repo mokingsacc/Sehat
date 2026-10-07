@@ -1,0 +1,280 @@
+{
+  "id": "birth-plan",
+  "section": "women",
+  "title": {
+    "fa": "پلان ولادت: از پیش آماده شوید",
+    "ps": "د زېږون پلان: له مخکې چمتو شئ",
+    "en": "Birth plan: get ready early"
+  },
+  "summary": {
+    "fa": "جای ولادت، همراه، پول، موتر، و چه چیزهایی ببرید.",
+    "ps": "د زېږون ځای، ملګری، پیسې، موټر، او څه شی یوسئ.",
+    "en": "Where to give birth, who goes, money, a car, what to take."
+  },
+  "image": "birth-plan",
+  "blocks": [
+    {
+      "id": "birth-plan.lead",
+      "type": "lead",
+      "text": {
+        "fa": "پلان ولادت را در اوایل حاملگی با خانواده بسازید. آن وقت، وقتی دردهای ولادت شروع شود یا علامت خطر پیدا شود، هیچ‌کس وقت را ضایع نمی‌کند.",
+        "ps": "د زېږون پلان د امیندوارۍ په لومړیو کې له کورنۍ سره جوړ کړئ. بیا، کله چې د زېږون دردونه پیل شي یا د خطر نښه راشي، هېڅوک وخت نه ضایع کوي.",
+        "en": "Make the birth plan with your family early in pregnancy. Then, when labour starts or a danger sign comes, nobody loses time."
+      }
+    },
+    {
+      "id": "birth-plan.where",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "جای ولادت را انتخاب کنید",
+        "ps": "د زېږون ځای وټاکئ",
+        "en": "Choose where to give birth"
+      },
+      "text": {
+        "fa": "پلان کنید که در کلینیک یا شفاخانه، با قابله یا داکتر، ولادت کنید. در معاینهٔ حاملگی بپرسید کدام جای برای شما بهتر است.",
+        "ps": "پلان وکړئ چې په کلینیک یا روغتون کې، د قابلې یا ډاکټر په مرسته، وزېږوئ. د امیندوارۍ په معاینه کې وپوښتئ چې کوم ځای ستاسو لپاره ښه دی.",
+        "en": "Plan to give birth at a clinic or hospital, with a midwife or doctor. At your pregnancy check, ask which place is best for you."
+      }
+    },
+    {
+      "id": "birth-plan.who",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "از پیش تعیین کنید چه کسی همراه برود",
+        "ps": "له مخکې وټاکئ چې څوک به ورسره ځي",
+        "en": "Decide early who will go"
+      },
+      "text": {
+        "fa": "از همین حالا فیصله کنید چه کسی با او برود: یک زن که پیش او بماند، و یک مرد خانواده برای راه. فیصله کنید اگر شب شد، چه کسی تصمیم می‌گیرد.",
+        "ps": "همدا اوس پرېکړه وکړئ چې څوک به ورسره ځي: یوه ښځه چې ورسره پاتې شي، او د کورنۍ یو سړی د لارې لپاره. پرېکړه وکړئ که د شپې وشو، څوک به پرېکړه کوي.",
+        "en": "Agree now who goes with her: a woman to stay with her, and a man of the family for the road. Agree who decides if it happens at night."
+      }
+    },
+    {
+      "id": "birth-plan.money-car",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "پول و موتر، از پیش آماده",
+        "ps": "پیسې او موټر، له مخکې چمتو",
+        "en": "Money and a car, ready ahead"
+      },
+      "text": {
+        "fa": "هر ماه کمی پول برای موتر و مصارف کنار بگذارید. با یک دریور گپ بزنید که شب یا روز بیاید، و یک دریور دوم هم پیدا کنید.",
+        "ps": "هره میاشت لږې پیسې د موټر او لګښتونو لپاره یوې خوا ته کېږدئ. له یو موټر چلوونکي سره خبره وکړئ چې د شپې یا ورځې راشي، او دویم هم پیدا کړئ.",
+        "en": "Put a little money aside each month for the car and the costs. Agree with a driver who can come day or night, and find a second one too."
+      }
+    },
+    {
+      "id": "birth-plan.phone",
+      "type": "step",
+      "icon": "phone",
+      "title": {
+        "fa": "شماره‌های تیلفون را ثبت کنید",
+        "ps": "د ټیلیفون شمېرې ثبت کړئ",
+        "en": "Save the phone numbers"
+      },
+      "text": {
+        "fa": "شمارهٔ هر دو دریور، قابله یا کارمند صحی قریه و کلینیک را در تیلفون ثبت کنید. تیلفون را چارج و با پول نگه دارید.",
+        "ps": "د دواړو موټر چلوونکو، قابلې یا د کلي روغتیايي کارکوونکي او کلینیک شمېرې په ټیلیفون کې ثبت کړئ. ټیلیفون چارج او له کارت سره وساتئ.",
+        "en": "Save the numbers of both drivers, the midwife or village health worker, and the clinic. Keep the phone charged, with money on it."
+      }
+    },
+    {
+      "id": "birth-plan.bag",
+      "type": "step",
+      "icon": "birth-plan",
+      "title": {
+        "fa": "یک بکس برای ولادت آماده کنید",
+        "ps": "د زېږون لپاره یوه کڅوړه چمتو کړئ",
+        "en": "Pack a bag for the birth"
+      },
+      "text": {
+        "fa": "تکه‌های پاک، لباس گرم و کلاه برای طفل، یک کمپل، کارت کلینیک و تذکرهٔ مادر، غذا و آب را آماده کنید.",
+        "ps": "پاک ټوکران، د ماشوم لپاره ګرمې جامې او خولۍ، یو کمپله، د مور د کلینیک کارت او تذکره، خواړه او اوبه چمتو کړئ.",
+        "en": "Pack clean cloths, warm clothes and a cap for the baby, a blanket, her clinic card and ID card, food and water."
+      }
+    },
+    {
+      "id": "birth-plan.go",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "وقتی ولادت شروع شد، بروید",
+        "ps": "کله چې زېږون پیل شو، ولاړ شئ",
+        "en": "Go when labour starts"
+      },
+      "text": {
+        "fa": "وقتی درد هر ۲۰ دقیقه یا زودتر می‌آید، آب ولادت می‌آید، یا ترشح چسپناک خون‌آلود می‌آید، بروید. در خانه منتظر نمانید.",
+        "ps": "کله چې درد هر ۲۰ دقیقې یا ژر ژر راځي، د زېږون اوبه راځي، یا سرېښناکې وینې لړلې اوبه راځي، ولاړ شئ. په کور کې انتظار مه باسئ.",
+        "en": "Go when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Do not wait at home."
+      }
+    },
+    {
+      "id": "birth-plan.home",
+      "type": "step",
+      "icon": "midwife",
+      "title": {
+        "fa": "اگر ولادت در خانه شد",
+        "ps": "که زېږون په کور کې وشو",
+        "en": "If the birth happens at home"
+      },
+      "text": {
+        "fa": "فوراً یک قابلهٔ آموزش‌دیده را بخواهید. اتاق را گرم و پاک نگه دارید و مادر و طفل را در روز اول به کلینیک ببرید.",
+        "ps": "سمدلاسه یوه روزل شوې قابله راوغواړئ. کوټه ګرمه او پاکه وساتئ او مور او ماشوم په لومړۍ ورځ کلینیک ته بوځئ.",
+        "en": "Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day."
+      }
+    },
+    {
+      "id": "birth-plan.danger",
+      "type": "link",
+      "to": "topic/pregnancy-danger",
+      "icon": "warning",
+      "title": {
+        "fa": "همهٔ علایم خطر در حاملگی",
+        "ps": "د امیندوارۍ د خطر ټولې نښې",
+        "en": "All the danger signs in pregnancy"
+      },
+      "text": {
+        "fa": "آن‌ها را با شوهر و خشوی خود یکجا یاد بگیرید، تا همه بدانند چه وقت باید بروند.",
+        "ps": "له خپل مېړه او خواښې سره یې یوځای زده کړئ، چې ټول پوه شي کله باید ولاړ شي.",
+        "en": "Learn them together with your husband and mother-in-law, so everyone knows when to go."
+      }
+    },
+    {
+      "id": "birth-plan.near",
+      "type": "link",
+      "to": "near",
+      "icon": "clinic",
+      "title": {
+        "fa": "نزدیک‌ترین کلینیک را پیدا کنید",
+        "ps": "تر ټولو نږدې کلینیک پیدا کړئ",
+        "en": "Find the nearest clinic"
+      },
+      "text": {
+        "fa": "کلینیک‌ها و شفاخانه‌های نزدیک خود را ببینید، تا جای ولادت را انتخاب کنید.",
+        "ps": "خپل نږدې کلینیکونه او روغتونونه وګورئ، چې د زېږون ځای وټاکئ.",
+        "en": "See the clinics and hospitals near you, to choose where to give birth."
+      }
+    },
+    {
+      "id": "birth-plan.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: پلان ولادت",
+        "ps": "په کلینیک کې: د زېږون پلان",
+        "en": "At the clinic: planning the birth"
+      },
+      "text": {
+        "fa": "قابله در هر معاینهٔ حاملگی شما و طفل را معاینه می‌کند، در ساختن پلان کمک می‌کند و می‌گوید اگر ولادت مشکل باشد، کجا بروید.",
+        "ps": "قابله د امیندوارۍ په هره معاینه کې تاسو او ماشوم معاینه کوي، د پلان په جوړولو کې مرسته کوي او وايي که زېږون ستونزمن وي، چېرته ولاړ شئ.",
+        "en": "At each pregnancy check the midwife examines you and the baby, helps you make the plan, and tells you where to go if the birth may be difficult."
+      }
+    },
+    {
+      "id": "birth-plan.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you have any of these signs, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "birth-plan.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی از راه تناسلی",
+            "ps": "له تناسلي لارې وینه بهېدل",
+            "en": "Bleeding from the vagina"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.fits",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج، یا بیهوشی",
+            "ps": "اختلاج، یا بې هوښي",
+            "en": "Fits, or being unconscious"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردرد شدید همراه با تاری دید",
+            "ps": "سخت سر درد، له تت لید سره",
+            "en": "Severe headache with blurred vision"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.fever-weak",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
+            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
+            "en": "Fever, and too weak to get out of bed"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "Severe belly pain"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.long-labour",
+          "icon": "clock",
+          "text": {
+            "fa": "دردهای ولادت بیشتر از ۱۲ ساعت دوام کرده و طفل به دنیا نیامده",
+            "ps": "د زېږون دردونه له ۱۲ ساعتونو زیات دوام کوي او ماشوم نه دی زېږېدلی",
+            "en": "Labour pains for more than 12 hours, and the baby is not born"
+          }
+        }
+      ]
+    },
+    {
+      "id": "birth-plan.far",
+      "type": "tip",
+      "icon": "house",
+      "text": {
+        "fa": "اگر راه دور است، یا برف آن را بسته کرده می‌تواند، او می‌تواند در هفته‌های آخر پیش خویشاوندان نزدیک کلینیک بماند.",
+        "ps": "که لاره اوږده وي، یا واوره یې بندولای شي، هغه کولای شي په وروستیو اونیو کې د کلینیک سره نږدې له خپلوانو سره پاتې شي.",
+        "en": "If the road is long, or snow may close it, she can stay with relatives near the clinic in the last weeks before the birth."
+      }
+    },
+    {
+      "id": "birth-plan.tell",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "پلان را به تمام خانواده بگویید، و پول، بکس و شماره‌های تیلفون را جایی بگذارید که همه پیدا کرده بتوانند.",
+        "ps": "پلان ټولې کورنۍ ته ووایاست، او پیسې، کڅوړه او د ټیلیفون شمېرې داسې ځای کېږدئ چې ټول یې پیدا کړای شي.",
+        "en": "Tell the whole family the plan, and keep the money, the bag and the phone numbers where everyone can find them."
+      }
+    }
+  ],
+  "sources": [
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): birth preparedness and complication readiness at every contact; skilled care at birth",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 3rd ed. 2015): C2 and C14 'Develop a birth and emergency plan' (where, who goes, transport, money, things to take, a decision-maker), labour signs, danger signs, home birth with a skilled attendant",
+    "WHO recommendations on health promotion interventions for maternal and newborn health (2015): birth preparedness and complication readiness; maternity waiting homes near a facility for women who live far",
+    "Afghanistan MoPH: BPHS 2010 and IPEHS 2019 (skilled birth attendance at health facilities, four antenatal visits that include birth planning); see research/moph-guidance.md section 5",
+    "research/what-saves-lives.md: birth preparedness interventions reduce neonatal deaths by about 18% (Soubeiga et al., BMC Pregnancy Childbirth 2014); Herat near-miss study: no birth plan predicted a delayed decision"
+  ],
+  "review": [
+    "New page (content pass 3), Health > Adults > Women's health, next to pregnancy-care. It expands the four plan steps already on pregnancy-danger; those stay where they are.",
+    "Who goes with her: 'a woman to stay with her, and a man of the family for the road' reflects the mahram rule for travel (UK CPIN 2025) without naming it; 'who decides if it happens at night' is from PCPNC C2 and the Herat near-miss study (research/what-saves-lives.md). Check the cultural fit.",
+    "The long-labour item (more than 12 hours) is from PCPNC (labour longer than 12 hours: refer urgently). The other red items repeat pregnancy-danger exactly, so the recordings match.",
+    "'Stay with relatives near the clinic in the last weeks' stands in for WHO maternity waiting homes; Samangan has none that we know of. Check that it is realistic.",
+    "'Within a day' for a home birth matches the newborn page (hepatitis B within 24 hours, IPEHS postnatal visit within 24 hours).",
+    "'With money on it' (Dari 'با پول', Pashto 'له کارت سره') means phone credit; check the everyday word (کریدیت / کارت).",
+    "The bag list names the ID card (تذکره); some women have none. The clinic card is the antenatal card.",
+    "Icons: birth-plan for the bag, midwife for the home birth, clock for labour."
+  ]
+}

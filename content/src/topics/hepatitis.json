@@ -120,9 +120,9 @@
         "en": "At the hospital: hepatitis B, C treatment"
       },
       "text": {
-        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، رایگان در شفاخانهٔ امراض ساری کابل و بعضی شفاخانه‌های ولایتی. شخص گیج یا دارای خونریزی بستر می‌شود.",
-        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، وړیا د کابل د ساري ناروغیو په روغتون او ځینو ولایتي روغتونونو کې. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
-        "en": "Hepatitis C is cured with tablets and hepatitis B controlled, free at the infectious diseases hospital in Kabul and some provincial hospitals. A confused or bleeding person is admitted."
+        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، در شفاخانهٔ امراض ساری کابل و بعضی شفاخانه‌های ولایتی. شخص گیج یا دارای خونریزی بستر می‌شود.",
+        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، د کابل د ساري ناروغیو په روغتون او ځینو ولایتي روغتونونو کې. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
+        "en": "Hepatitis C is cured with tablets and hepatitis B controlled, at the infectious diseases hospital in Kabul and some provincial hospitals. A confused or bleeding person is admitted."
       }
     },
     {
@@ -293,6 +293,7 @@
     "The newborn jaundice item repeats the IMCI rule already in the newborn topic; keep both consistent.",
     "'Paracetamol only as they say' is deliberately cautious; Mo may prefer no mention of paracetamol in liver disease.",
     "Breastfeeding with hepatitis B is safe when the baby is vaccinated (WHO); the do-not item does not go into this detail.",
-    "Dari زردی / Pashto ژېړی are the everyday words for jaundice; هپاتیت/هیپاتیت added in brackets."
+    "Dari زردی / Pashto ژېړی are the everyday words for jaundice; هپاتیت/هیپاتیت added in brackets.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

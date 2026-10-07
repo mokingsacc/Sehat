@@ -47,9 +47,9 @@
         "en": "Small children: an arm tape"
       },
       "text": {
-        "fa": "برای اطفال ۶ ماهه تا ۵ ساله، فیتهٔ رنگهٔ بازو نشان می‌دهد که طفل زیاد لاغر است یا نه. کلینیک‌ها اکثراً آن را مفت می‌دهند.",
-        "ps": "د ۶ میاشتو څخه تر ۵ کلونو ماشومانو لپاره، رنګه د مټ فیته ښيي چې ماشوم ډېر ډنګر دی که نه. کلینیکونه اکثره دا وړیا ورکوي.",
-        "en": "For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Clinics often give it free."
+        "fa": "برای اطفال ۶ ماهه تا ۵ ساله، فیتهٔ رنگهٔ بازو نشان می‌دهد که طفل زیاد لاغر است یا نه. از کلینیک یکی بخواهید.",
+        "ps": "د ۶ میاشتو څخه تر ۵ کلونو ماشومانو لپاره، رنګه د مټ فیته ښيي چې ماشوم ډېر ډنګر دی که نه. له کلینیک یې وغواړئ.",
+        "en": "For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Ask the clinic for one."
       }
     },
     {
@@ -172,6 +172,7 @@
     "'BP machine for over 40, pregnancy, diabetes, past high BP' is a judgement call; WHO does not advise every family to own one.",
     "'The test strips cost the most' (sugar meter): ongoing cost matters more than the meter.",
     "CO alarm (kit-buy.co-alarm): placement follows BS EN 50292 / UK fire service advice (same room as the stove or heater, 1 to 3 metres from it, on a wall at head height in a sleeping room). Families sleep on the floor: 'head height' may need to be 'just above where heads lie'. Check. A test mark (EN 50291, UL 2034) is not named on the page because the text has no Latin letters; it is in docs/HOME_KIT.md.",
-    "Home tab rule (Mo): the tip 'A machine can be wrong. If someone looks very ill, go to a health worker' is now the opening line of each Health reading page; 'Do not change medicine because of a home reading' moved with the BP and sugar readings (their own Do-not lines). The 'Check a reading' link stays: it opens the Health checker."
+    "Home tab rule (Mo): the tip 'A machine can be wrong. If someone looks very ill, go to a health worker' is now the opening line of each Health reading page; 'Do not change medicine because of a home reading' moved with the BP and sugar readings (their own Do-not lines). The 'Check a reading' link stays: it opens the Health checker.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

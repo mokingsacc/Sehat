@@ -1,0 +1,287 @@
+{
+  "id": "mind-routine",
+  "section": "everyone",
+  "title": {
+    "fa": "دل‌تنگی: خواب و برنامهٔ روزانه",
+    "ps": "خپګان: خوب او ورځنی پروګرام",
+    "en": "Low mood: sleep and daily routine"
+  },
+  "summary": {
+    "fa": "وقتی دل‌تنگ هستید، کارهای کوچک پلان‌شده و خواب منظم کمک می‌کند.",
+    "ps": "کله چې خپه یاست، کوچني پلان شوي کارونه او منظم خوب مرسته کوي.",
+    "en": "When you feel low, small planned activities and regular sleep help."
+  },
+  "image": "mind-routine",
+  "blocks": [
+    {
+      "id": "mind-routine.lead",
+      "type": "lead",
+      "text": {
+        "fa": "دل‌تنگی باعث می‌شود کمتر کار کنیم، و کمتر کار کردن دل‌تنگی را بیشتر می‌کند. انجام کارهای کوچک، قدم به قدم، حال را دوباره بهتر کرده می‌تواند.",
+        "ps": "خپګان موږ دې ته اړ باسي چې لږ کار وکړو، او لږ کار خپګان زیاتوي. کوچني کارونه، ګام په ګام، حال بیا ښه کولای شي.",
+        "en": "Low mood makes us do less, and doing less makes the mood lower. Doing small things, step by step, can lift it again."
+      }
+    },
+    {
+      "id": "mind-routine.wake",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "هر روز در یک وقت بیدار شوید",
+        "ps": "هره ورځ په یو وخت راویښ شئ",
+        "en": "Get up at the same time"
+      },
+      "text": {
+        "fa": "هر روز تقریباً در یک وقت بیدار شوید، حتی بعد از یک شب بد. صبح‌ها در روشنی آفتاب باشید و خواب روز را کوتاه نگه دارید.",
+        "ps": "هره ورځ نږدې په یو وخت راویښ شئ، حتی له یوې بدې شپې وروسته. سهار د لمر په رڼا کې اوسئ او د ورځې خوب لنډ وساتئ.",
+        "en": "Get up at about the same time every day, even after a bad night. Get daylight in the morning, and keep day sleeps short."
+      }
+    },
+    {
+      "id": "mind-routine.plan",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "هر روز یک کار خوب را پلان کنید",
+        "ps": "هره ورځ یو ښه کار پلان کړئ",
+        "en": "Plan one good thing a day"
+      },
+      "text": {
+        "fa": "کارهای کوچکی را انتخاب کنید که پیش از این خوش داشتید، یا برای شما مهم است: چای با همسایه، باغچه، بازی با طفل.",
+        "ps": "هغه کوچني کارونه وټاکئ چې مخکې مو خوښېدل، یا تاسو ته مهم دي: له ګاونډي سره چای، باغچه، له ماشوم سره لوبې.",
+        "en": "Choose small things you used to enjoy, or that matter to you: tea with a neighbour, the garden, playing with a child."
+      }
+    },
+    {
+      "id": "mind-routine.small",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "خیلی کوچک شروع کنید",
+        "ps": "ډېر کوچنی پیل وکړئ",
+        "en": "Start very small"
+      },
+      "text": {
+        "fa": "حتی اگر دل‌تان نمی‌خواهد، آن را انجام دهید. با ۵ یا ۱۰ دقیقه شروع کنید. احساس خوب اکثراً بعد از شروع می‌آید، نه پیش از آن.",
+        "ps": "که زړه مو نه غواړي هم، ویې کړئ. په ۵ یا ۱۰ دقیقو پیل وکړئ. ښه احساس اکثره له پیل وروسته راځي، نه مخکې.",
+        "en": "Do it even if you do not feel like it. Start with 5 or 10 minutes. The good feeling often comes after you start, not before."
+      }
+    },
+    {
+      "id": "mind-routine.people",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "با مردم نزدیک بمانید",
+        "ps": "له خلکو سره نږدې پاتې شئ",
+        "en": "Stay close to people"
+      },
+      "text": {
+        "fa": "با خانواده بنشینید، به دیدن یک دوست بروید، یا به همسایه کمک کنید. بودن با دیگران حال را بهتر می‌کند، حتی اگر کم گپ بزنید.",
+        "ps": "له کورنۍ سره کېنئ، یو ملګري ته ورشئ، یا له ګاونډي سره مرسته وکړئ. له نورو سره اوسېدل حال ښه کوي، حتی که لږې خبرې وکړئ.",
+        "en": "Sit with family, visit a friend, or help a neighbour. Being with others lifts the mood, even if you talk little."
+      }
+    },
+    {
+      "id": "mind-routine.move",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "هر روز بدن را حرکت دهید",
+        "ps": "هره ورځ بدن وخوځوئ",
+        "en": "Move your body each day"
+      },
+      "text": {
+        "fa": "قدم زدن، کار خانه یا کار در زمین همه کمک می‌کند. حرکت بدن یکی از بهترین چیزها برای دل‌تنگی است.",
+        "ps": "ګرځېدل، د کور کار یا په ځمکه کې کار ټول مرسته کوي. د بدن حرکت د خپګان لپاره یو له غوره شیانو څخه دی.",
+        "en": "A walk, housework or work in the field all help. Moving the body is one of the best things for low mood."
+      }
+    },
+    {
+      "id": "mind-routine.night",
+      "type": "step",
+      "icon": "sleep",
+      "title": {
+        "fa": "یک شام آرام برای خواب",
+        "ps": "د خوب لپاره ارام ماښام",
+        "en": "A calm evening for sleep"
+      },
+      "text": {
+        "fa": "چند ساعت پیش از خواب چای نخورید و تیلفون را کنار بگذارید. اگر خواب‌تان نبرد، برخیزید، یک کار آرام بکنید، بعد دوباره کوشش کنید.",
+        "ps": "له خوب څو ساعته مخکې چای مه څښئ او ټیلیفون یوې خوا ته کېږدئ. که خوب مو نه راځي، پاڅئ، یو ارام کار وکړئ، بیا بیا هڅه وکړئ.",
+        "en": "No tea for a few hours before bed, and put the phone away. If you cannot sleep, get up, do something calm, then try again."
+      }
+    },
+    {
+      "id": "mind-routine.sleep",
+      "type": "link",
+      "to": "topic/sleep-well",
+      "icon": "sleep",
+      "title": {
+        "fa": "خواب خوب",
+        "ps": "ښه خوب",
+        "en": "Sleep well"
+      },
+      "text": {
+        "fa": "وقت خواب منظم، اتاق تاریک و آرام، و گرم ماندن بی‌خطر در شب.",
+        "ps": "د خوب منظم وخت، تیاره او ارامه کوټه، او د شپې په خوندي ډول ګرم پاتې کېدل.",
+        "en": "A regular bedtime, a dark quiet room, and keeping warm safely at night."
+      }
+    },
+    {
+      "id": "mind-routine.cycle",
+      "type": "link",
+      "to": "topic/mind-cycle",
+      "icon": "talk",
+      "title": {
+        "fa": "فکر، احساس و عمل",
+        "ps": "فکر، احساس او عمل",
+        "en": "Thoughts, feelings and actions"
+      },
+      "text": {
+        "fa": "فکرهای غمگینی که دور می‌زنند؟ ببینید این چرخه را چطور بشکنید.",
+        "ps": "خواشیني فکرونه چې بیا بیا راګرځي؟ وګورئ چې دا څرخ څنګه مات کړئ.",
+        "en": "Sad thoughts that go round and round? See how to break the cycle."
+      }
+    },
+    {
+      "id": "mind-routine.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "mind-routine.dont.pills",
+          "icon": "no",
+          "text": {
+            "fa": "تریاک، چرس یا تابلیت خواب بازار را استفاده نکنید؛ حال را بدتر می‌کنند.",
+            "ps": "اپین، چرس یا د بازار د خوب ګولۍ مه کاروئ؛ حال نور هم خرابوي.",
+            "en": "Do not use opium, hashish or bazaar sleeping pills; they make things worse."
+          }
+        },
+        {
+          "id": "mind-routine.dont.bed",
+          "icon": "sleep",
+          "text": {
+            "fa": "تمام روز در بستر نمانید. دل‌تنگی را سنگین‌تر می‌کند.",
+            "ps": "ټوله ورځ په بستر کې مه پاتې کېږئ. خپګان درنوي.",
+            "en": "Do not stay in bed all day. It makes low mood heavier."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-routine.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز",
+        "ps": "له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Any of these? Tell someone you trust, go to a health worker now, day or night"
+      },
+      "items": [
+        {
+          "id": "mind-routine.urgent.end-life",
+          "icon": "warning",
+          "text": {
+            "fa": "فکر پایان دادن به زندگی خود را دارید",
+            "ps": "د خپل ژوند د پای ته رسولو فکرونه لرئ",
+            "en": "you have thoughts of ending your life"
+          }
+        },
+        {
+          "id": "mind-routine.urgent.self-harm",
+          "icon": "warning",
+          "text": {
+            "fa": "به خود آسیب رسانده‌اید، یا قصد آن را دارید",
+            "ps": "ځان ته مو زیان رسولی، یا یې اراده لرئ",
+            "en": "you have hurt yourself, or are planning to"
+          }
+        },
+        {
+          "id": "mind-routine.urgent.hurt-others",
+          "icon": "people",
+          "text": {
+            "fa": "حس می‌کنید شاید به کسی دیگر آسیب برسانید",
+            "ps": "احساس کوئ چې ښايي بل چا ته زیان ورسوئ",
+            "en": "you feel you might hurt someone else"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-routine.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این حالات را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If any of these is true for you, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "mind-routine.soon.weeks",
+          "icon": "sad",
+          "text": {
+            "fa": "۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید",
+            "ps": "۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست",
+            "en": "you have felt low or worried most days for 2 weeks or more"
+          }
+        },
+        {
+          "id": "mind-routine.soon.fear",
+          "icon": "heart",
+          "text": {
+            "fa": "حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید",
+            "ps": "د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي",
+            "en": "sudden attacks of fear, with a racing heart, keep coming back"
+          }
+        },
+        {
+          "id": "mind-routine.soon.daily",
+          "icon": "family",
+          "text": {
+            "fa": "کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید",
+            "ps": "خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی",
+            "en": "you cannot do your daily work or care for your family"
+          }
+        },
+        {
+          "id": "mind-routine.soon.drugs",
+          "icon": "no",
+          "text": {
+            "fa": "برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید",
+            "ps": "د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ",
+            "en": "you use opium, pills or other drugs to cope"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-routine.praise",
+      "type": "tip",
+      "icon": "heart",
+      "text": {
+        "fa": "هر شام، یک کاری را که امروز کردید به یاد بیاورید، هر قدر هم کوچک باشد. این یک موفقیت است.",
+        "ps": "هر ماښام، هغه یو کار را په یاد کړئ چې نن مو وکړ، که هر څومره کوچنی وي. دا یوه بریا ده.",
+        "en": "Each evening, remember one thing you did today, however small. That is a success."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Problem Management Plus (PM+): individual psychological help for adults impaired by distress in communities exposed to adversity (2016, generic field-trial version 1.1, 2018): managing stress (slow breathing), managing problems, get going keep doing (behavioural activation), strengthening social support",
+    "WHO mhGAP Intervention Guide 2.0 (2016), depression: regular sleep, daily activity and social contact; NHS Insomnia (nhs.uk): fixed wake time, no caffeine late, get up if you cannot sleep",
+    "WHO Doing What Matters in Times of Stress: an illustrated guide (2020): grounding, unhooking from difficult thoughts, acting on your values, being kind, making room",
+    "WHO mhGAP Intervention Guide 2.0 (2016): psychoeducation for stress and low mood; self-harm and suicide (ask, stay with the person, remove means, refer)"
+  ],
+  "review": [
+    "New page (content pass 3): WHO PM+ 'get going, keep doing' (behavioural activation: plan small pleasant and useful activities, start small, act before the mood lifts) with sleep habits for low mood. No diagnosis word ('depression') is used.",
+    "Links: sleep-well is a Home tab page (lifestyle, no medical advice); linking to it from the Health side is fine.",
+    "The 'do not' item names hashish (چرس) and sleeping pills from the bazaar: both are common in the research notes. Check the tone.",
+    "'Low mood' is دل‌تنگی (Dari) and خپګان (Pashto), the words the search list already uses for the stress page; check they fit as a heading.",
+    "Every Mind page ends with the same red box (thoughts of ending life, self-harm, hurting others: tell someone you trust and go to a health worker now, day or night) and amber box (low or worried 2 weeks or more, attacks of fear that keep coming, cannot do daily work, drugs to cope: clinic today), with the page's own ids, as briefed. The red title does not say 'hospital': a health worker at the clinic or hospital, whichever is nearer. The stress page keeps its own boxes. First attacks of fear with chest pain may be the heart: chest pain is on the red-flags page. No hotline is given (moph-guidance.md item 11: 120 Youth Health Line not confirmed for Samangan)."
+  ]
+}

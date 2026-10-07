@@ -259,10 +259,10 @@
       "danger": ["نوزاد شیر نمی‌خورد", "نوزاد تب دارد", "newborn not feeding", "newborn fever", "طفل دو ماهه تب دارد", "دوه میاشتنی ماشوم تبه لري", "two month old has fever"]
     },
     "newborn": {
-      "fa": ["نوزاد", "طفل نوزاد", "طفل تازه تولد", "مراقبت نوزاد", "مراقبت از نوزاد", "طفل نو", "طفل خورد و کم وزن", "طفل پیش از وقت", "نوزاد کوچک", "گرم نگهداشتن نوزاد", "چهل روز", "چله طفل", "چشم نوزاد چرک کرده", "دانه‌های چرکی نوزاد"],
-      "ps": ["نوی زېږېدلی ماشوم", "نوی ماشوم", "د نوي ماشوم پاملرنه", "کوچنی نوی ماشوم", "د نوي ماشوم سترګې زوه کوي"],
-      "lat": ["nawzad", "nozad", "tefl nawzad", "tefle naw", "nawe mashum", "nawai mashum"],
-      "en": ["newborn", "new baby", "newborn care", "newborn baby", "small baby", "premature", "premature baby", "low birth weight", "skin to skin", "sticky eyes newborn", "pus in newborn eyes"]
+      "fa": ["نوزاد", "طفل نوزاد", "طفل تازه تولد", "مراقبت نوزاد", "مراقبت از نوزاد", "طفل نو", "طفل خورد و کم وزن", "طفل پیش از وقت", "نوزاد کوچک", "گرم نگهداشتن نوزاد", "چهل روز", "چله طفل", "چشم نوزاد چرک کرده", "دانه‌های چرکی نوزاد", "مراقبت ناف", "ناف نوزاد", "کلرهگزیدین", "هفته اول نوزاد", "آغوز", "شیر اول مادر"],
+      "ps": ["نوی زېږېدلی ماشوم", "نوی ماشوم", "د نوي ماشوم پاملرنه", "کوچنی نوی ماشوم", "د نوي ماشوم سترګې زوه کوي", "د نوم پاملرنه", "د نوي ماشوم لومړۍ اونۍ", "فله"],
+      "lat": ["nawzad", "nozad", "tefl nawzad", "tefle naw", "nawe mashum", "nawai mashum", "naf e nawzad"],
+      "en": ["newborn", "new baby", "newborn care", "newborn baby", "small baby", "premature", "premature baby", "low birth weight", "skin to skin", "sticky eyes newborn", "pus in newborn eyes", "cord care", "umbilical cord", "chlorhexidine", "first week with a new baby", "colostrum", "postnatal check"]
     },
     "newborn.cord": {
       "fa": ["ناف", "ناف طفل", "ناف سرخ", "ناف بو میدهد", "ناف چرک کرده", "بند ناف", "ناف نوزاد"],
@@ -542,10 +542,16 @@
       "danger": ["خونریزی در حاملگی", "حامله است خون میاید", "تشنج در حاملگی", "طفل در شکم حرکت نمیکند", "په امیندوارۍ کې وینه", "ماشوم په نس کې نه خوځیږي", "pregnant bleeding", "bleeding in pregnancy", "pregnant and bleeding", "bleeding while pregnant", "baby not moving", "fits in pregnancy", "eclampsia", "miscarriage", "hamila khun"]
     },
     "pregnancy-care": {
-      "fa": ["حاملگی", "حامله هستم", "حامله", "امیدوار است", "دو جانه", "مراقبت حاملگی", "معاینه حاملگی", "کلینیک در حاملگی", "غذا در حاملگی", "استراحت در حاملگی", "قابله", "ولادت در خانه", "پلان ولادت", "کجا ولادت کنم", "در حاملگی چه بخورم", "خوراک در حاملگی"],
-      "ps": ["امیندواري", "امیندواره یم", "امیندواره ده", "بلاربه", "دوه ځانه", "د امیندوارۍ پاملرنه", "قابله", "د زېږون پلان"],
+      "fa": ["حاملگی", "حامله هستم", "حامله", "امیدوار است", "دو جانه", "مراقبت حاملگی", "معاینه حاملگی", "کلینیک در حاملگی", "غذا در حاملگی", "استراحت در حاملگی", "قابله", "در حاملگی چه بخورم", "خوراک در حاملگی"],
+      "ps": ["امیندواري", "امیندواره یم", "امیندواره ده", "بلاربه", "دوه ځانه", "د امیندوارۍ پاملرنه", "قابله"],
       "lat": ["hamelagi", "hamilagi", "hamila", "hamela", "umidwar", "do jana", "amindwari", "umindwari", "blarba", "qabila"],
-      "en": ["pregnant", "pregnancy", "i am pregnant", "antenatal", "antenatal care", "pregnancy check up", "food in pregnancy", "rest in pregnancy", "midwife", "birth plan", "where to give birth", "home birth"]
+      "en": ["pregnant", "pregnancy", "i am pregnant", "antenatal", "antenatal care", "pregnancy check up", "food in pregnancy", "rest in pregnancy", "midwife"]
+    },
+    "birth-plan": {
+      "fa": ["پلان ولادت", "آمادگی برای ولادت", "آمادگی ولادت", "کجا ولادت کنم", "جای ولادت", "بکس ولادت", "چه چیزهایی برای ولادت ببرم", "موتر برای ولادت", "پول ولادت", "ولادت در خانه", "قابله برای ولادت", "همراه زن در ولادت", "عروسم نزدیک ولادت است"],
+      "ps": ["د زېږون پلان", "د زېږون چمتووالی", "چېرته وزېږوم", "د زېږون ځای", "د زېږون کڅوړه", "د زېږون لپاره موټر", "په کور کې زېږون", "د زېږون لپاره پیسې"],
+      "lat": ["plan e weladat", "plan weladat", "weladat dar khana", "jay weladat", "da zezhun plan"],
+      "en": ["birth plan", "where to give birth", "home birth", "getting ready for birth", "hospital bag", "what to take for the birth", "transport for labour", "delivery plan", "birth preparedness", "money for the birth"]
     },
     "pregnancy-care.iron": {
       "fa": ["تابلیت آهن حاملگی", "آهن و فولیک اسید", "فولیک اسید"],
@@ -640,6 +646,36 @@
       "ps": ["خوب نه راځي", "بې خوبي"],
       "lat": ["bikhabi"],
       "en": ["can't sleep", "insomnia", "sleep problems"]
+    },
+    "mind-body": {
+      "fa": ["علایم فشار روحی", "فشار روحی چیست", "فشار روحی و بدن", "از پریشانی بدنم درد می‌کند", "از غصه سرم درد می‌کند", "اثر فشار روحی"],
+      "ps": ["د رواني فشار نښې", "رواني فشار څه دی", "له اندېښنې بدن مې درد کوي", "د رواني فشار اغېز"],
+      "lat": ["alaem feshar rohi", "feshar rohi chist"],
+      "en": ["signs of stress", "what is stress", "stress symptoms", "stress and the body", "body pains from stress", "effects of stress"]
+    },
+    "mind-cycle": {
+      "fa": ["فکرهای منفی", "فکر منفی", "فکرهای بد", "فکرهای بد از سرم نمی‌رود", "زیاد فکر می‌کنم", "فکر زیاد", "فکرهای پریشان", "فکر و احساس"],
+      "ps": ["منفي فکرونه", "بد فکرونه", "ډېر فکر کوم", "فکرونه مې نه ځي", "فکر او احساس"],
+      "lat": ["manfi"],
+      "en": ["negative thoughts", "negative thinking", "overthinking", "thinking too much", "bad thoughts", "cbt", "cognitive behavioural therapy", "thoughts feelings and actions", "worry cycle"]
+    },
+    "mind-calm": {
+      "fa": ["تمرین نفس", "تمرین تنفس", "نفس عمیق", "نفس آهسته", "آرام شدن", "چطور آرام شوم", "آرامش ذهن", "خود را آرام کنم"],
+      "ps": ["د ساه تمرین", "ورو ساه", "ژوره ساه", "ارامېدل", "څنګه ارام شم"],
+      "lat": ["tamrin nafas", "nafas amiq", "aram shodan"],
+      "en": ["breathing exercise", "slow breathing", "deep breathing", "how to calm down", "calm down", "relaxation", "relax", "grounding", "calm my mind"]
+    },
+    "mind-problems": {
+      "fa": ["حل مشکل", "حل مشکلات", "مشکلات زیاد دارم", "مشکلات زندگی", "چطور مشکل را حل کنم", "از مشکلات خسته شدم"],
+      "ps": ["د ستونزو حل", "ډېرې ستونزې لرم", "د ژوند ستونزې", "ستونزه څنګه حل کړم"],
+      "lat": ["hal e mushkil", "mushkilat ziyad", "mushkilat"],
+      "en": ["problem solving", "too many problems", "solve problems", "life problems", "overwhelmed", "how to solve a problem"]
+    },
+    "mind-routine": {
+      "fa": ["بی‌حوصلگی", "حوصله ندارم", "هیچ کاری دلم نمی‌خواهد", "تمام روز در بستر هستم", "برنامه روزانه", "انرژی ندارم", "از هیچ چیز خوشم نمی‌آید"],
+      "ps": ["حوصله نه لرم", "زړه مې هېڅ نه غواړي", "ورځنی پروګرام", "ټوله ورځ په بستر کې یم"],
+      "lat": ["hawsala nadaram", "bihawsalagi", "barnama rozana"],
+      "en": ["low mood", "no motivation", "no energy", "daily routine", "stay in bed all day", "nothing feels good", "lost interest in everything"]
     },
     "hygiene": {
       "fa": ["شستن دست", "دست شستن", "صابون", "آب پاک", "آب جوش داده", "آب صحی", "آب آشامیدنی", "کلورین", "تشناب", "بیت الخلا", "مگس", "غذای پاک", "پاکی", "صفایی"],

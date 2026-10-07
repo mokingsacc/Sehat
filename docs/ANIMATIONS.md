@@ -15,6 +15,7 @@ Short narrated picture stories, made of hand-written SVG and CSS (transform and 
 | CPR: baby under 1 year | `anim.cpr-baby` | 7 | v1 | `anim/cpr-baby.js` | 26.1 KB | 5.6 KB |
 | CPR: child, 1 year to puberty | `anim.cpr-child` | 7 | v1 | `anim/cpr-child.js` | 25.3 KB | 5.1 KB |
 | CPR: adult | `anim.cpr-adult` | 7 | v1 | `anim/cpr-adult.js` | 26.4 KB | 5.8 KB |
+| Slow breathing (the breathing pacer on the mind-calm page; content pass 3) | `anim.breathe` | 6 | v1 | `anim/breathe.js` | 5.5 KB | 1.5 KB |
 | player (all animations, with the age picker) | | | | `js/anim.js` | 25.6 KB | 8.4 KB |
 
 Sizes are raw bytes / gzip -9. The v2 files are larger raw because of the shading, textures and hands, but every one is under 15 KB gzipped, which is what goes over the wire and into the cache. herd (92 KB) and handwashing (87 KB) are a little over the 60 to 80 KB raw guide; their gzip size is fine.

@@ -2,14 +2,14 @@
   "id": "newborn",
   "section": "children",
   "title": {
-    "fa": "مراقبت از نوزاد",
-    "ps": "د نوي زېږېدلي ماشوم پاملرنه",
-    "en": "Newborn care"
+    "fa": "مراقبت از نوزاد: هفته‌های اول",
+    "ps": "د نوي زېږېدلي ماشوم پاملرنه: لومړۍ اونۍ",
+    "en": "Newborn care: the first weeks"
   },
   "summary": {
-    "fa": "نوزاد را گرم، سیر و پاک نگه دارید و به معاینه ببرید.",
-    "ps": "نوی زېږېدلی ماشوم ګرم، موړ او پاک وساتئ او معاینې ته یې بوځئ.",
-    "en": "Keep your new baby warm, fed and clean, and get checks."
+    "fa": "گرمی، فقط شیر مادر، مراقبت ناف، واکسین و علایم خطر.",
+    "ps": "ګرمي، یوازې د مور شیدې، د نوم پاملرنه، واکسین او د خطر نښې.",
+    "en": "Warmth, breast milk only, cord care, vaccines and danger signs."
   },
   "image": "newborn",
   "blocks": [
@@ -37,9 +37,9 @@
         "en": "Dry the baby, hold skin to skin"
       },
       "text": {
-        "fa": "طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر بگذارید. هر دو را با تکهٔ گرم بپوشانید.",
-        "ps": "ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه یې کېږدئ. دواړه په ګرم ټوکر پټ کړئ.",
-        "en": "Dry the baby at once and lay the baby on the mother's bare chest. Cover them both with a warm cloth."
+        "fa": "طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر، پوست به پوست، بگذارید. هر دو را بپوشانید و به سر طفل کلاه بگذارید.",
+        "ps": "ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه، پوستکی له پوستکي سره، کېږدئ. دواړه پټ کړئ او د ماشوم پر سر خولۍ کېږدئ.",
+        "en": "Dry the baby at once and lay the baby on the mother's bare chest, skin to skin. Cover them both, and put a cap on the baby."
       }
     },
     {
@@ -52,9 +52,9 @@
         "en": "Breastfeed in the first hour"
       },
       "text": {
-        "fa": "در ساعت اول بعد از ولادت شیردهی را شروع کنید. بعد هر وقت طفل خواست، شب و روز شیر بدهید.",
-        "ps": "د زېږون په لومړي ساعت کې تی ورکول پیل کړئ. بیا هر کله چې ماشوم وغواړي، شپه او ورځ تی ورکړئ.",
-        "en": "Start breastfeeding within one hour of birth. Then feed whenever the baby wants, day and night."
+        "fa": "در ساعت اول بعد از ولادت شیر بدهید. بعد فقط شیر مادر، هر وقت طفل خواست، شب و روز. آب و شیر دیگر لازم نیست.",
+        "ps": "د زېږون په لومړي ساعت کې تی ورکړئ. بیا یوازې د مور شیدې، هر کله چې ماشوم وغواړي، شپه او ورځ. اوبو او نورو شیدو ته اړتیا نشته.",
+        "en": "Start within one hour of birth. Then give only breast milk, whenever the baby wants, day and night. No water or other milk is needed."
       }
     },
     {
@@ -82,9 +82,9 @@
         "en": "Keep the cord clean and dry"
       },
       "text": {
-        "fa": "روی ناف هیچ چیز نگذارید. فقط دوایی را بمالید که کارمند صحی داده است.",
-        "ps": "پر نوم هېڅ شی مه لګوئ. یوازې هغه درمل پرې ولګوئ چې روغتیايي کارکوونکي درکړي وي.",
-        "en": "Put nothing on the cord. Use only the medicine the health worker gives you."
+        "fa": "روی ناف هیچ چیز نگذارید، به جز کلرهگزیدین، دوای نافی که قابله یا کارمند صحی قریه می‌دهد. آن را همان‌طور که نشان می‌دهند بمالید و ناف را خشک نگه دارید.",
+        "ps": "پر نوم هېڅ شی مه لګوئ، پرته له کلورهګزیډین، د نوم هغه درمل چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي. هغسې یې ولګوئ لکه چې دوی یې ښيي، او نوم وچ وساتئ.",
+        "en": "Put nothing on the cord except chlorhexidine, the cord medicine from the midwife or village health worker. Use it as they show you, and keep the cord dry."
       }
     },
     {
@@ -97,9 +97,9 @@
         "en": "Birth vaccines"
       },
       "text": {
-        "fa": "طفل باید واکسین توبرکلوز، قطرهٔ پولیو و واکسین هپاتیت ب را بگیرد. اگر در خانه به دنیا آمده، هر چه زودتر به کلینیک ببرید.",
-        "ps": "ماشوم ته باید د نري رنځ واکسین، د پولیو څاڅکي او د هیپاټایټس ب واکسین ورکړل شي. که په کور کې زېږېدلی، ژر تر ژره یې کلینیک ته بوځئ.",
-        "en": "The baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, go to the clinic as soon as you can."
+        "fa": "طفل در روز اول به واکسین توبرکلوز، قطرهٔ پولیو و واکسین هپاتیت ب ضرورت دارد. اگر در خانه به دنیا آمده، در ۲۴ ساعت اول او را به کلینیک ببرید.",
+        "ps": "ماشوم په لومړۍ ورځ د نري رنځ واکسین، د پولیو څاڅکو او د هیپاټایټس ب واکسین ته اړتیا لري. که په کور کې زېږېدلی، په لومړیو ۲۴ ساعتونو کې یې کلینیک ته بوځئ.",
+        "en": "On the first day the baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, take the baby to the clinic within 24 hours."
       }
     },
     {
@@ -112,9 +112,9 @@
         "en": "Four checks for mother and baby"
       },
       "text": {
-        "fa": "در روز اول، روز سوم، بین روز ۷ و ۱۴، و در ۶ هفتگی برای معاینه بروید.",
-        "ps": "په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینې ته ولاړ شئ.",
-        "en": "Go for checks on the first day, on day 3, between day 7 and 14, and at 6 weeks."
+        "fa": "در روز اول، روز سوم، حدود یک هفتگی (روز ۷ تا ۱۴) و در ۶ هفتگی برای معاینه بروید. کارمند صحی قریه هم می‌تواند به خانهٔ شما بیاید.",
+        "ps": "په لومړۍ ورځ، درېیمه ورځ، شاوخوا یوه اونۍ وروسته (۷ تر ۱۴ ورځو) او په ۶ اونیو کې معاینې ته ولاړ شئ. د کلي روغتیايي کارکوونکی هم کولای شي ستاسو کور ته راشي.",
+        "en": "Go for checks on the first day, on day 3, at about one week (day 7 to 14), and at 6 weeks. The village health worker can also visit you at home."
       }
     },
     {
@@ -127,9 +127,25 @@
         "en": "Small babies need extra care"
       },
       "text": {
-        "fa": "طفل کوچک یا کم‌وزن را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید. پدر یا مادرکلان هم می‌توانند کمک کنند.",
-        "ps": "کوچنی یا کم وزنه ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ. پلار یا انا هم مرسته کولای شي.",
-        "en": "Keep a small baby skin to skin on the mother's chest, day and night. The father or grandmother can help too."
+        "fa": "طفل کوچک را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید و هر ۲ تا ۳ ساعت شیر بدهید. پاهای سرد یعنی طفل گرمی بیشتر می‌خواهد.",
+        "ps": "کوچنی ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ او هرو ۲ تر ۳ ساعتونو کې تی ورکړئ. سړې پښې دا معنا لري چې ماشوم نوره ګرمي غواړي.",
+        "en": "Keep a small baby skin to skin on the mother's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth."
+      }
+    },
+    {
+      "id": "newborn.breaths",
+      "type": "link",
+      "to": "tool/breaths",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس‌های طفل را بشمارید",
+        "ps": "د ماشوم ساګانې وشمېرئ",
+        "en": "Count the baby's breaths"
+      },
+      "text": {
+        "fa": "وقتی طفل آرام است، تیلفون یک دقیقه را حساب می‌کند و شما با هر نفس یک بار دست می‌زنید. ۶۰ یا بیشتر زیاد تیز است.",
+        "ps": "کله چې ماشوم ارام وي، ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره یو ځل ټک وهئ. ۶۰ یا ډېر ډېر ګړندي دي.",
+        "en": "When the baby is calm, the phone times one minute while you tap each breath. 60 or more is too fast."
       }
     },
     {
@@ -141,9 +157,9 @@
         "en": "At the clinic: the newborn check"
       },
       "text": {
-        "fa": "قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد و روی ناف دوای کلرهگزیدین می‌مالد. معاینه رایگان است.",
-        "ps": "قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي او پر نامه کلورهګزیډین درمل مږي. معاینه وړیا ده.",
-        "en": "The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord. Checks are free."
+        "fa": "قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد و روی ناف دوای کلرهگزیدین می‌مالد.",
+        "ps": "قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي او پر نامه کلورهګزیډین درمل مږي.",
+        "en": "The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord."
       }
     },
     {
@@ -192,9 +208,9 @@
           "id": "newborn.urgent.breathing",
           "icon": "breathing-fast",
           "text": {
-            "fa": "تیز تیز یا به سختی نفس می‌کشد",
-            "ps": "ژر ژر یا په سختۍ سا اخلي",
-            "en": "breathes fast or with difficulty"
+            "fa": "در یک دقیقه ۶۰ بار یا بیشتر نفس می‌کشد، یا به سختی نفس می‌کشد",
+            "ps": "په یوه دقیقه کې ۶۰ ځله یا ډېر ساه اخلي، یا په سختۍ ساه اخلي",
+            "en": "breathes 60 or more times a minute, or with difficulty"
           }
         },
         {
@@ -210,9 +226,9 @@
           "id": "newborn.urgent.temperature",
           "icon": "thermometer",
           "text": {
-            "fa": "بدنش داغ است، یا سرد است",
-            "ps": "بدن یې ډېر ګرم دی، یا سوړ دی",
-            "en": "feels hot, or feels cold to touch"
+            "fa": "حرارت ۳۷ و نیم درجه یا بیشتر، یا کمتر از ۳۵ و نیم دارد؛ یا داغ یا سرد است",
+            "ps": "تودوخه یې ۳۷ نیم درجې یا ډېره، یا له ۳۵ نیم کمه ده؛ یا ګرم یا سوړ دی",
+            "en": "temperature 37.5 or more, or below 35.5; or feels hot or cold"
           }
         },
         {
@@ -231,6 +247,15 @@
             "fa": "در روز اول زرد شده، یا کف دست و پایش زرد است",
             "ps": "په لومړۍ ورځ ژېړ شوی، یا د لاسونو او پښو تلي یې ژېړ دي",
             "en": "is yellow on the first day, or has yellow palms and soles"
+          }
+        },
+        {
+          "id": "newborn.urgent.cord-skin",
+          "icon": "cord",
+          "text": {
+            "fa": "سرخی از ناف به پوست شکم پهن شده است",
+            "ps": "سوروالی له نوم څخه د ګېډې پوستکي ته خپور شوی دی",
+            "en": "has redness spreading from the cord onto the belly skin"
           }
         }
       ]
@@ -284,6 +309,53 @@
       ]
     },
     {
+      "id": "newborn.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "newborn.dont.first-milk",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "شیر زرد اول (آغوز) را دور نریزید. طفل را محافظت می‌کند.",
+            "ps": "لومړنۍ ژېړې شیدې (فله) مه توئ کوئ. ماشوم ساتي.",
+            "en": "Do not throw away the first yellow milk. It protects the baby."
+          }
+        },
+        {
+          "id": "newborn.dont.other-feeds",
+          "icon": "no-drink",
+          "text": {
+            "fa": "آب، چای، عسل یا روغن ندهید. شیر مادر کافی است.",
+            "ps": "اوبه، چای، ګبین یا غوړي مه ورکوئ. د مور شیدې بس دي.",
+            "en": "Do not give water, tea, honey or ghee. Breast milk is enough."
+          }
+        },
+        {
+          "id": "newborn.dont.cord",
+          "icon": "cord",
+          "text": {
+            "fa": "روی ناف روغن، خاکستر یا هیچ چیز دیگر نگذارید.",
+            "ps": "پر نوم غوړي، ایره یا بل هېڅ شی مه لګوئ.",
+            "en": "Do not put oil, ash or anything else on the cord."
+          }
+        },
+        {
+          "id": "newborn.dont.night",
+          "icon": "moon",
+          "text": {
+            "fa": "اگر علامت خطر در شب شروع شد، تا صبح صبر نکنید.",
+            "ps": "که د خطر نښه د شپې پیل شوه، تر سهاره صبر مه کوئ.",
+            "en": "Do not wait until morning if a danger sign starts at night."
+          }
+        }
+      ]
+    },
+    {
       "id": "newborn.jaundice",
       "type": "tip",
       "icon": "jaundice",
@@ -302,18 +374,24 @@
     "WHO IMCI Chart Booklet (2014): sick young infant up to 2 months",
     "WHO recommendations on postnatal care of the mother and newborn (2013): content of postnatal contacts; chlorhexidine for cord care where harmful substances are traditionally applied",
     "WHO Guideline: managing possible serious bacterial infection in young infants when referral is not feasible (2015) and WHO Pocket Book (2013): injectable antibiotics for neonatal sepsis",
-    "Afghanistan BPHS (2010): chlorhexidine in the Health Post and BHC lists; ampicillin and gentamicin injections at BHC and above"
+    "Afghanistan BPHS (2010): chlorhexidine in the Health Post and BHC lists; ampicillin and gentamicin injections at BHC and above",
+    "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022): at least 4 postnatal contacts (first 24 hours, day 2 to 3, day 4 to 7, week 6); dry cord care, chlorhexidine for home births in settings with high neonatal mortality; exclusive breastfeeding",
+    "WHO IMCI Chart Booklet (2014), sick young infant: very severe disease (not feeding well, convulsions, fast breathing 60 or more, severe chest indrawing, temperature 37.5 or more or below 35.5, movement only when stimulated); severe jaundice (palms and soles)",
+    "Afghanistan CBHC Strategy 2015-2020 (pp. 10-11): community health workers distribute chlorhexidine digluconate for newborn cord care; IPEHS 2019: postnatal home visit within 24 hours",
+    "WHO/UNICEF WUENIC Afghanistan (2026): hepatitis B birth dose within 24 hours of delivery"
   ],
   "review": [
-    "Cord care: Afghanistan's national policy on chlorhexidine for cord care was not confirmed. The text says 'put nothing on the cord; use only the medicine the health worker gives you' so it works whether or not chlorhexidine is given. Please check the MoPH policy and, if chlorhexidine 7.1% gel is routine, consider naming it.",
     "Pashto word for the umbilical cord/navel (نوم) needs a native speaker check; the Dari uses ناف.",
-    "Birth vaccines step names BCG as 'TB vaccine' for the ear; hepatitis B birth dose is best within 24 hours. Check that 'if born at home, go to the clinic as soon as you can' fits local practice.",
     "Postnatal check times follow WHO 2013 (within 24 hours, day 3, day 7 to 14, 6 weeks); check against the Afghan BPHS postnatal schedule.",
     "Urgent item 'feels hot, or feels cold to touch' stands in for WHO's 37.5 C or more and below 35.5 C; families mostly have no thermometer.",
     "Small baby step says 'father or grandmother can help'; WHO kangaroo care allows other family members to give skin-to-skin contact. Check cultural fit for fathers in Samangan.",
     "Jaundice: soon alert sends any yellow skin or eyes to the clinic today (PCPNC M6 says 'seek care'); yellow on day 1 or yellow palms and soles are in the urgent alert, per WHO 2013.",
-    "Chlorhexidine on the cord: on the BPHS 2010 Health Post list and WHO-conditional; confirm it is current Afghan national policy before promising it.",
-    "'Checks are free': BPHS user-fee ban; confirm locally.",
-    "Content merge 2: animation(s) nappies shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
+    "Content merge 2: animation(s) nappies shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...).",
+    "Content pass 3, cord care: the step now names chlorhexidine, 'the cord medicine from the midwife or village health worker', and says otherwise keep the cord dry and put nothing on it. Basis: MoPH CBHC Strategy 2015-2020 has CHWs distributing chlorhexidine for cord care (moph-guidance.md, item 9) and WHO 2022 recommends it for home births where neonatal mortality is high (Afghanistan's NMR, about 33 per 1,000, is near WHO's threshold of 30); dry cord care for facility births. Current supply in Samangan is not confirmed: if CHWs no longer have it, change the step back to 'put nothing on the cord'.",
+    "Content pass 3, danger signs: the urgent box now has WHO IMCI numbers (60 breaths a minute; 37.5 or more, or below 35.5) next to 'feels hot or cold' for families without a thermometer, and a new item 'redness spreading from the cord onto the belly skin'. IMCI treats a red or pus-draining cord as a local infection (clinic, amber), which stays in the 'clinic today' box; only spreading redness is red. Please confirm this split.",
+    "Content pass 3: birth vaccines 'on the first day; if born at home, within 24 hours' (WUENIC: hepatitis B within 24 hours). 'Checks are free' was removed (Mo's rule: 'free' only for vaccines and TB).",
+    "Content pass 3: the 'first yellow milk' item uses آغوز (Dari) and فله (Pashto) for colostrum: check the words families in Samangan use. 'Honey or ghee' are the common pre-lacteal feeds named in the research; check.",
+    "Content pass 3: postnatal checks 'first day, day 3, about one week (day 7 to 14), 6 weeks' (WHO 2013; WHO 2022 says day 4 to 7 for the third contact). The CHW home visit is from IPEHS 2019 and CBHC 2015.",
+    "Content pass 3: small-baby step now says feed every 2 to 3 hours and 'cold feet mean the baby needs more warmth' (PCPNC J10); the father-or-grandmother line was dropped for length."
   ]
 }

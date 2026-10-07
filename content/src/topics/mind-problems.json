@@ -1,0 +1,255 @@
+{
+  "id": "mind-problems",
+  "section": "everyone",
+  "title": {
+    "fa": "حل مشکل‌ها قدم به قدم",
+    "ps": "د ستونزو حل ګام په ګام",
+    "en": "Solving problems in small steps"
+  },
+  "summary": {
+    "fa": "مشکل‌های زیاد یکجا؟ یکی‌یکی، با یک پلان کوچک.",
+    "ps": "ډېرې ستونزې یوځای؟ یوه یوه، په یوه کوچني پلان.",
+    "en": "Many problems? Take one at a time, with a small plan."
+  },
+  "image": "mind-problems",
+  "blocks": [
+    {
+      "id": "mind-problems.lead",
+      "type": "lead",
+      "text": {
+        "fa": "وقتی مشکل‌های زیاد یکجا می‌آیند، ذهن گیر می‌ماند. اگر آن‌ها را یکی‌یکی و قدم به قدم پیش ببرید، آسان‌تر می‌شوند.",
+        "ps": "کله چې ډېرې ستونزې یوځای راشي، ذهن بند پاتې کېږي. که هغه یوه یوه او ګام په ګام مخته یوسئ، اسانه کېږي.",
+        "en": "When many problems come at once, the mind can freeze. Taking them one at a time, in small steps, makes them easier to face."
+      }
+    },
+    {
+      "id": "mind-problems.list",
+      "type": "step",
+      "icon": "card",
+      "title": {
+        "fa": "مشکل‌های خود را بشمارید",
+        "ps": "خپلې ستونزې وشمېرئ",
+        "en": "List your problems"
+      },
+      "text": {
+        "fa": "آن‌ها را بلند بگویید، یا از کسی بخواهید بنویسد. بعد جدا کنید: آن‌هایی که تغییر داده می‌توانید، و آن‌هایی که نمی‌توانید.",
+        "ps": "په لوړ غږ یې ووایاست، یا له چا وغواړئ چې ویې لیکي. بیا یې جلا کړئ: هغه چې بدلولای یې شئ، او هغه چې نه یې شئ بدلولای.",
+        "en": "Say them out loud, or ask someone to write them down. Then sort them: ones you can change, and ones you cannot."
+      }
+    },
+    {
+      "id": "mind-problems.pick",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "یک مشکل کوچک را انتخاب کنید",
+        "ps": "یوه کوچنۍ ستونزه وټاکئ",
+        "en": "Pick one small problem"
+      },
+      "text": {
+        "fa": "با مشکلی شروع کنید که تغییر داده می‌توانید و خیلی بزرگ نیست. آن را در چند کلمه بگویید، مثلاً: «وقتی باران می‌بارد، بام چکه می‌کند.»",
+        "ps": "په هغې ستونزې پیل وکړئ چې بدلولای یې شئ او ډېره لویه نه وي. په څو کلمو یې ووایاست، لکه: «کله چې باران وورېږي، بام څاڅي.»",
+        "en": "Start with one you can change and that is not too big. Say it in a few words, like: 'The roof leaks when it rains.'"
+      }
+    },
+    {
+      "id": "mind-problems.ideas",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "راه‌های زیاد را فکر کنید",
+        "ps": "ډېرې لارې فکر کړئ",
+        "en": "Think of many ways"
+      },
+      "text": {
+        "fa": "هر راه ممکن را فکر کنید، حتی آن‌هایی که عجیب به نظر می‌رسند. از خانواده یا همسایه هم نظر بخواهید.",
+        "ps": "هره ممکنه لاره فکر کړئ، حتی هغه چې عجیبه ښکاري. له کورنۍ یا ګاونډي هم نظر وغواړئ.",
+        "en": "Think of every possible way, even ones that seem strange. Ask family or a neighbour for ideas too."
+      }
+    },
+    {
+      "id": "mind-problems.choose",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "بهترین راه را انتخاب کنید",
+        "ps": "تر ټولو ښه لاره وټاکئ",
+        "en": "Choose the best way"
+      },
+      "text": {
+        "fa": "برای هر راه بپرسید: آیا کمک می‌کند؟ آیا از دستم پوره است؟ یکی دو راه را انتخاب کنید که خوب و ممکن باشند.",
+        "ps": "د هرې لارې لپاره وپوښتئ: ایا مرسته کوي؟ ایا زه یې کولای شم؟ یوه یا دوه لارې وټاکئ چې ښې او شونې وي.",
+        "en": "For each way, ask: will it help? Can I do it? Pick one or two ways that are good and possible."
+      }
+    },
+    {
+      "id": "mind-problems.plan",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "یک پلان کوچک بسازید",
+        "ps": "یو کوچنی پلان جوړ کړئ",
+        "en": "Make a small plan"
+      },
+      "text": {
+        "fa": "تصمیم بگیرید چه می‌کنید، چه وقت، و چه کسی کمک کرده می‌تواند. آن را به قدم‌های کوچکی تقسیم کنید که همین هفته انجام شود.",
+        "ps": "پرېکړه وکړئ چې څه به کوئ، کله، او څوک مرسته کولای شي. هغه په کوچنیو ګامونو ووېشئ چې همدا اونۍ ترسره شي.",
+        "en": "Decide what you will do, when, and who can help. Break it into small steps you can do this week."
+      }
+    },
+    {
+      "id": "mind-problems.review",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "نتیجه را ببینید و باز کوشش کنید",
+        "ps": "پایله وګورئ او بیا هڅه وکړئ",
+        "en": "Look back, then try again"
+      },
+      "text": {
+        "fa": "بعد از چند روز بپرسید: چه چیز کار داد؟ اگر کار نداد، راه دیگری را امتحان کنید. هر قدم کوچک حساب می‌شود.",
+        "ps": "له څو ورځو وروسته وپوښتئ: څه ګټور و؟ که ګټور نه و، بله لاره وازمویئ. هر کوچنی ګام حسابېږي.",
+        "en": "After a few days, ask: what worked? If it did not work, try another way. Each small step counts."
+      }
+    },
+    {
+      "id": "mind-problems.cannot",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "برای چیزهایی که تغییر داده نمی‌توانید",
+        "ps": "د هغو شیانو لپاره چې نه یې شئ بدلولای",
+        "en": "For what you cannot change"
+      },
+      "text": {
+        "fa": "بعضی مشکل‌ها حالا حل نمی‌شوند. آن وقت به کارهایی رو بیاورید که از دست‌تان پوره است: استراحت، گپ زدن با کسی و مهربانی با خود.",
+        "ps": "ځینې ستونزې اوس نه حل کېږي. بیا هغو کارونو ته مخه کړئ چې کولای یې شئ: ارام، له چا سره خبرې او له ځان سره مهرباني.",
+        "en": "Some problems cannot be solved now. Then turn to what you can do: rest, talk with someone, and be kind to yourself."
+      }
+    },
+    {
+      "id": "mind-problems.calm",
+      "type": "link",
+      "to": "topic/mind-calm",
+      "icon": "breathe",
+      "title": {
+        "fa": "آرام کردن بدن: نفس آهسته",
+        "ps": "بدن ارامول: ورو ساه",
+        "en": "Calm the body: slow breathing"
+      },
+      "text": {
+        "fa": "آن‌قدر ناراحت هستید که فکر کرده نمی‌توانید؟ اول بدن را آرام کنید، بعد برگردید.",
+        "ps": "دومره خفه یاست چې فکر نشئ کولای؟ لومړی بدن ارام کړئ، بیا راوګرځئ.",
+        "en": "Too upset to think? Calm the body first, then come back."
+      }
+    },
+    {
+      "id": "mind-problems.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز",
+        "ps": "له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Any of these? Tell someone you trust, go to a health worker now, day or night"
+      },
+      "items": [
+        {
+          "id": "mind-problems.urgent.end-life",
+          "icon": "warning",
+          "text": {
+            "fa": "فکر پایان دادن به زندگی خود را دارید",
+            "ps": "د خپل ژوند د پای ته رسولو فکرونه لرئ",
+            "en": "you have thoughts of ending your life"
+          }
+        },
+        {
+          "id": "mind-problems.urgent.self-harm",
+          "icon": "warning",
+          "text": {
+            "fa": "به خود آسیب رسانده‌اید، یا قصد آن را دارید",
+            "ps": "ځان ته مو زیان رسولی، یا یې اراده لرئ",
+            "en": "you have hurt yourself, or are planning to"
+          }
+        },
+        {
+          "id": "mind-problems.urgent.hurt-others",
+          "icon": "people",
+          "text": {
+            "fa": "حس می‌کنید شاید به کسی دیگر آسیب برسانید",
+            "ps": "احساس کوئ چې ښايي بل چا ته زیان ورسوئ",
+            "en": "you feel you might hurt someone else"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-problems.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این حالات را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If any of these is true for you, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "mind-problems.soon.weeks",
+          "icon": "sad",
+          "text": {
+            "fa": "۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید",
+            "ps": "۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست",
+            "en": "you have felt low or worried most days for 2 weeks or more"
+          }
+        },
+        {
+          "id": "mind-problems.soon.fear",
+          "icon": "heart",
+          "text": {
+            "fa": "حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید",
+            "ps": "د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي",
+            "en": "sudden attacks of fear, with a racing heart, keep coming back"
+          }
+        },
+        {
+          "id": "mind-problems.soon.daily",
+          "icon": "family",
+          "text": {
+            "fa": "کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید",
+            "ps": "خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی",
+            "en": "you cannot do your daily work or care for your family"
+          }
+        },
+        {
+          "id": "mind-problems.soon.drugs",
+          "icon": "no",
+          "text": {
+            "fa": "برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید",
+            "ps": "د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ",
+            "en": "you use opium, pills or other drugs to cope"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-problems.share",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "مشکل‌ها وقتی با کسی شریک شوند، سبک‌تر می‌شوند. از کسی که اعتماد دارید بخواهید در پلان کمک کند.",
+        "ps": "ستونزې چې شریکې شي، سپکې کېږي. له یو باوري کس وغواړئ چې په پلان کې مرسته وکړي.",
+        "en": "Problems feel lighter when shared. Ask someone you trust to help you with the plan."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Problem Management Plus (PM+): individual psychological help for adults impaired by distress in communities exposed to adversity (2016, generic field-trial version 1.1, 2018): managing stress (slow breathing), managing problems, get going keep doing (behavioural activation), strengthening social support",
+    "WHO Doing What Matters in Times of Stress: an illustrated guide (2020): grounding, unhooking from difficult thoughts, acting on your values, being kind, making room",
+    "WHO mhGAP Intervention Guide 2.0 (2016): psychoeducation for stress and low mood; self-harm and suicide (ask, stay with the person, remove means, refer)"
+  ],
+  "review": [
+    "New page (content pass 3): WHO PM+ 'managing problems' in its seven steps (list, sort solvable and unsolvable, pick one, brainstorm, choose, plan, review), in plain words. 'Ask someone to write them down' is for people who do not read.",
+    "The example problem is a leaking roof: practical and common, with no blame. Check the Dari and Pashto for 'leaks' (چکه می‌کند / څاڅي).",
+    "7 steps (the aim is 3 to 7).",
+    "Every Mind page ends with the same red box (thoughts of ending life, self-harm, hurting others: tell someone you trust and go to a health worker now, day or night) and amber box (low or worried 2 weeks or more, attacks of fear that keep coming, cannot do daily work, drugs to cope: clinic today), with the page's own ids, as briefed. The red title does not say 'hospital': a health worker at the clinic or hospital, whichever is nearer. The stress page keeps its own boxes. First attacks of fear with chest pain may be the heart: chest pain is on the red-flags page. No hotline is given (moph-guidance.md item 11: 120 Youth Health Line not confirmed for Samangan)."
+  ]
+}

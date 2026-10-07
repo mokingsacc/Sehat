@@ -32,9 +32,9 @@
         "en": "ORS packets"
       },
       "text": {
-        "fa": "برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. اکثراً در کلینیک مفت است.",
-        "ps": "د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. اکثره په کلینیک کې وړیا دی.",
-        "en": "For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. Often free at the clinic."
+        "fa": "برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. کلینیک و پوستهٔ صحی آن را دارند.",
+        "ps": "د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. کلینیک او روغتیايي پوسته یې لري.",
+        "en": "For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. The clinic and the health post have it."
       }
     },
     {
@@ -169,6 +169,7 @@
     "'Keep at least 4 ORS packets' is a judgement call.",
     "Zinc dose is the WHO caregiver message already used on the Diarrhoea page.",
     "'Sticking plasters, scissors, a torch' are common first-aid kit contents (IFRC), not essential.",
-    "No paracetamol in the list on purpose (no doses in the app). Consider adding 'paracetamol syrup or tablets, as the clinic tells you'."
+    "No paracetamol in the list on purpose (no doses in the app). Consider adding 'paracetamol syrup or tablets, as the clinic tells you'.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

@@ -106,9 +106,9 @@
         "en": "At the clinic: injections into the sore"
       },
       "text": {
-        "fa": "سالک با تراشیدن زخم و دیدن زیر میکروسکوپ تایید می‌شود. تداوی پیچکاری هفته‌وار یک دوا (گلوکانتیم) در داخل زخم برای چند هفته است، در مراکز دولتی رایگان. هر نوبت را حاضر شوید.",
-        "ps": "سالک د زخم په تراشلو او د مایکروسکوپ لاندې کتلو تاییدېږي. درملنه د څو اونیو لپاره په زخم کې د یوه درمل (ګلوکانتیم) اونیزه پیچکاري ده، په دولتي مرکزونو کې وړیا. هره لیدنه حاضر شئ.",
-        "en": "Salak is confirmed by scraping the sore and looking under a microscope. Treatment is weekly injections of a medicine (glucantime) into the sore for several weeks, free at government centres."
+        "fa": "سالک با تراشیدن زخم و دیدن زیر میکروسکوپ تایید می‌شود. تداوی پیچکاری هفته‌وار یک دوا (گلوکانتیم) در داخل زخم برای چند هفته است. هر نوبت را حاضر شوید.",
+        "ps": "سالک د زخم په تراشلو او د مایکروسکوپ لاندې کتلو تاییدېږي. درملنه د څو اونیو لپاره په زخم کې د یوه درمل (ګلوکانتیم) اونیزه پیچکاري ده. هره لیدنه حاضر شئ.",
+        "en": "Salak is confirmed by scraping the sore and looking under a microscope. Treatment is weekly injections of a medicine (glucantime) into the sore for several weeks."
       }
     },
     {
@@ -276,6 +276,7 @@
     "Two soon alerts are used (infected sore: today; possible salak: this week). Check this is acceptable for the app layout.",
     "Advice to cover sores to stop sandfly spread applies to the anthroponotic (L. tropica) form, which made up 92% of 2024 cases.",
     "'Glucantime' (meglumine antimoniate) named because it is the brand people know; confirm Samangan CL treatment centres (Aybak) and their supply in 2026 (shortages were reported nationally).",
-    "Weekly intralesional injections 'for several weeks' follows WHO EMRO 2014; exact schedule left to the clinic."
+    "Weekly intralesional injections 'for several weeks' follows WHO EMRO 2014; exact schedule left to the clinic.",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

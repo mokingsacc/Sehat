@@ -299,6 +299,16 @@
       ]
     },
     {
+      "id": "fever.chw",
+      "type": "tip",
+      "icon": "clinic",
+      "text": {
+        "fa": "اگر طفل هیچ‌یک از این علایم را ندارد، کارمند صحی قریه یا پوستهٔ صحی می‌تواند طفل را ببیند و دوای تب بدهد.",
+        "ps": "که ماشوم له دې نښو څخه هېڅ یوه نه لري، د کلي روغتیايي کارکوونکی یا روغتیايي پوسته کولای شي ماشوم وګوري او د تبې درمل ورکړي.",
+        "en": "If your child has none of these signs, the village health worker or the health post can check the child and give fever medicine."
+      }
+    },
+    {
       "id": "fever.measles",
       "type": "tip",
       "icon": "syringe",
@@ -331,6 +341,7 @@
     "fever.check text changed (same id): its clip must be re-recorded.",
     "fever.urgent.cold added: under 2 months and feels cold = hospital now (IMCI low body temperature, matches danger-child.young.temperature).",
     "Sore-throat item uses the 'no-drink' icon (no throat icon exists); IMCI treats streptococcal sore throat with an antibiotic.",
-    "Malaria testing at BHC level in Samangan (low-transmission province) may not be routine; the text says 'may test'."
+    "Malaria testing at BHC level in Samangan (low-transmission province) may not be routine; the text says 'may test'.",
+    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check."
   ]
 }

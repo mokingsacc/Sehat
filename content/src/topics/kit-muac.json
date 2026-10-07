@@ -32,9 +32,9 @@
         "en": "Where to get one"
       },
       "text": {
-        "fa": "از کلینیک یا کارمند تغذیه بپرسید؛ اکثراً مفت می‌دهند. در دواخانه هم خیلی ارزان است.",
-        "ps": "له کلینیک یا د تغذیې له کارکوونکي وپوښتئ؛ اکثره یې وړیا ورکوي. په درملتون کې هم ډېره ارزانه ده.",
-        "en": "Ask the clinic or the nutrition worker; they often give it free. In a pharmacy it costs very little."
+        "fa": "از کلینیک یا کارمند تغذیه بپرسید؛ اکثراً آن را دارند. در دواخانه هم خیلی ارزان است.",
+        "ps": "له کلینیک یا د تغذیې له کارکوونکي وپوښتئ؛ اکثره یې لري. په درملتون کې هم ډېره ارزانه ده.",
+        "en": "Ask the clinic or the nutrition worker; they often have one. In a pharmacy it costs very little."
       }
     },
     {
@@ -122,6 +122,7 @@
     "Price: often free from nutrition programmes; 'very little' in pharmacies.",
     "Local word for the MUAC tape: 'فیتهٔ بازو' / 'د مټ فیته' chosen; nutrition workers may say 'موک' or 'مواک'.",
     "Red = clinic today (outpatient, MoPH IMAM 2018); growth.json now says the same (growth.today) and keeps hospital now for swelling of both feet, not eating, or very thin and very weak, sleepy or sick.",
-    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-muac: kit-muac.colours, kit-muac.urgent, kit-muac.check. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen)."
+    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-muac: kit-muac.colours, kit-muac.urgent, kit-muac.check. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen).",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }

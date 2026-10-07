@@ -1,0 +1,257 @@
+{
+  "id": "mind-cycle",
+  "section": "everyone",
+  "title": {
+    "fa": "فکر، احساس و عمل",
+    "ps": "فکر، احساس او عمل",
+    "en": "Thoughts, feelings and actions"
+  },
+  "summary": {
+    "fa": "یک فکر پریشان چطور بزرگ می‌شود، و چطور این چرخه را بشکنید.",
+    "ps": "یو اندېښمن فکر څنګه لوییږي، او دا څرخ څنګه مات کړئ.",
+    "en": "How a worried thought can grow, and how to break the cycle."
+  },
+  "image": "mind-cycle",
+  "blocks": [
+    {
+      "id": "mind-cycle.lead",
+      "type": "lead",
+      "text": {
+        "fa": "آنچه فکر می‌کنیم، بالای احساس و کارهای ما اثر می‌کند، و کارهای ما دوباره بالای فکرهای ما اثر می‌کند. یک تغییر کوچک در هر جای این چرخه کمک کرده می‌تواند.",
+        "ps": "هغه څه چې فکر یې کوو، زموږ پر احساس او کړنو اغېز کوي، او زموږ کړنې بیا زموږ پر فکرونو اغېز کوي. د دې څرخ په هر ځای کې یو کوچنی بدلون مرسته کولای شي.",
+        "en": "What we think changes how we feel and what we do, and what we do changes our thoughts again. A small change anywhere in this cycle can help."
+      }
+    },
+    {
+      "id": "mind-cycle.example",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "یک مثال روزمره",
+        "ps": "یوه ورځنۍ بېلګه",
+        "en": "An everyday example"
+      },
+      "text": {
+        "fa": "همسایه بدون سلام از کنار شما می‌گذرد. فکر می‌کنید: «از من قهر است.» دل‌تان می‌شکند و تنها در خانه می‌مانید.",
+        "ps": "یوه ګاونډۍ پرته له سلام څخه تېرېږي. فکر کوئ: «له ما خفه ده.» زړه مو ماتېږي او یوازې په کور کې پاتې کېږئ.",
+        "en": "A neighbour walks past without greeting you. You think: 'She is angry with me.' You feel hurt, and you stay at home alone."
+      }
+    },
+    {
+      "id": "mind-cycle.grows",
+      "type": "step",
+      "icon": "sad",
+      "title": {
+        "fa": "این چرخه بزرگ‌تر می‌شود",
+        "ps": "دا څرخ لوییږي",
+        "en": "The cycle can grow"
+      },
+      "text": {
+        "fa": "تنها در خانه، فکرهای غمگین بیشتری می‌آید: «هیچ‌کس مرا دوست ندارد.» حال‌تان بدتر می‌شود و کمتر کار می‌کنید. چرخه دوباره دور می‌خورد.",
+        "ps": "په کور کې یوازې، نور خواشیني فکرونه راځي: «هېڅوک ما نه خوښوي.» حال مو بدتر کېږي او لا لږ کار کوئ. څرخ بیا ګرځي.",
+        "en": "Alone at home, more sad thoughts come: 'Nobody likes me.' You feel worse, and do even less. The cycle turns again."
+      }
+    },
+    {
+      "id": "mind-cycle.notice",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "فکر را بشناسید",
+        "ps": "فکر وپېژنئ",
+        "en": "Notice the thought"
+      },
+      "text": {
+        "fa": "دست نگه دارید و به خود بگویید: «من این فکر را دارم که او از من قهر است.» فکر همیشه حقیقت نیست.",
+        "ps": "ودرېږئ او ځان ته ووایاست: «زه دا فکر لرم چې هغه له ما خفه ده.» فکر تل حقیقت نه وي.",
+        "en": "Stop and say to yourself: 'I am having the thought that she is angry with me.' A thought is not always the truth."
+      }
+    },
+    {
+      "id": "mind-cycle.other",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "دلیل‌های دیگر را پیدا کنید",
+        "ps": "نور دلیلونه ولټوئ",
+        "en": "Look for other reasons"
+      },
+      "text": {
+        "fa": "از خود بپرسید: دیگر چه چیزی درست بوده می‌تواند؟ شاید او خسته بود، یا در فکر طفل خود بود. به یک دوست چه می‌گفتم؟",
+        "ps": "له ځانه وپوښتئ: بل څه ریښتیا کېدای شي؟ ښايي هغه ستړې وه، یا د خپل ماشوم په فکر کې وه. یو ملګري ته به مې څه ویلي وای؟",
+        "en": "Ask: what else could be true? Maybe she was tired, or worried about her own child. What would I say to a friend?"
+      }
+    },
+    {
+      "id": "mind-cycle.act",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "یک کار کوچک را تغییر دهید",
+        "ps": "یو کوچنی کار بدل کړئ",
+        "en": "Change one small action"
+      },
+      "text": {
+        "fa": "کاری دیگر بکنید: دفعهٔ بعد شما اول سلام بدهید، یا به دیدن یک دوست بروید. یک کار کوچک فکرهای تازه و احساس بهتر می‌آورد.",
+        "ps": "بل کار وکړئ: بل ځل تاسو لومړی سلام ورکړئ، یا یو ملګري ته ورشئ. یو کوچنی کار نوي فکرونه او ښه احساس راوړي.",
+        "en": "Do something different: greet her first next time, or visit a friend. A small action brings new thoughts and better feelings."
+      }
+    },
+    {
+      "id": "mind-cycle.practise",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "هر شام تمرین کنید",
+        "ps": "هر ماښام تمرین وکړئ",
+        "en": "Practise each evening"
+      },
+      "text": {
+        "fa": "یک لحظهٔ امروز را که شما را ناراحت کرد به یاد بیاورید. فکر، احساس و کاری را که کردید نام بگیرید. بعد یک راه دیگر پیدا کنید.",
+        "ps": "د نن هغه یوه شېبه را په یاد کړئ چې تاسو یې خفه کړي یاست. فکر، احساس او هغه کار چې وکړ، نوم یې واخلئ. بیا بله لاره پیدا کړئ.",
+        "en": "Think of one moment today that upset you. Name the thought, the feeling and what you did. Then find one other way."
+      }
+    },
+    {
+      "id": "mind-cycle.calm",
+      "type": "link",
+      "to": "topic/mind-calm",
+      "icon": "breathe",
+      "title": {
+        "fa": "آرام کردن بدن: نفس آهسته",
+        "ps": "بدن ارامول: ورو ساه",
+        "en": "Calm the body: slow breathing"
+      },
+      "text": {
+        "fa": "وقتی احساسات خیلی شدید است، اول بدن را آرام کنید.",
+        "ps": "کله چې احساسات ډېر سخت وي، لومړی بدن ارام کړئ.",
+        "en": "When feelings are very strong, calm the body first."
+      }
+    },
+    {
+      "id": "mind-cycle.problems",
+      "type": "link",
+      "to": "topic/mind-problems",
+      "icon": "card",
+      "title": {
+        "fa": "حل مشکل‌ها قدم به قدم",
+        "ps": "د ستونزو حل ګام په ګام",
+        "en": "Solving problems in small steps"
+      },
+      "text": {
+        "fa": "وقتی پریشانی یک مشکل واقعی است، یک قدم کوچک را پلان کنید.",
+        "ps": "کله چې اندېښنه یوه ریښتینې ستونزه وي، یو کوچنی ګام پلان کړئ.",
+        "en": "When the worry is a real problem, plan one small step."
+      }
+    },
+    {
+      "id": "mind-cycle.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز",
+        "ps": "له دې څخه یو هم لرئ؟ یو باوري کس ته ووایاست او همدا اوس روغتیايي کارکوونکي ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Any of these? Tell someone you trust, go to a health worker now, day or night"
+      },
+      "items": [
+        {
+          "id": "mind-cycle.urgent.end-life",
+          "icon": "warning",
+          "text": {
+            "fa": "فکر پایان دادن به زندگی خود را دارید",
+            "ps": "د خپل ژوند د پای ته رسولو فکرونه لرئ",
+            "en": "you have thoughts of ending your life"
+          }
+        },
+        {
+          "id": "mind-cycle.urgent.self-harm",
+          "icon": "warning",
+          "text": {
+            "fa": "به خود آسیب رسانده‌اید، یا قصد آن را دارید",
+            "ps": "ځان ته مو زیان رسولی، یا یې اراده لرئ",
+            "en": "you have hurt yourself, or are planning to"
+          }
+        },
+        {
+          "id": "mind-cycle.urgent.hurt-others",
+          "icon": "people",
+          "text": {
+            "fa": "حس می‌کنید شاید به کسی دیگر آسیب برسانید",
+            "ps": "احساس کوئ چې ښايي بل چا ته زیان ورسوئ",
+            "en": "you feel you might hurt someone else"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-cycle.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این حالات را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې حالتونو څخه یو هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If any of these is true for you, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "mind-cycle.soon.weeks",
+          "icon": "sad",
+          "text": {
+            "fa": "۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید",
+            "ps": "۲ اونۍ یا ډېر، ډېرې ورځې خپه یا اندېښمن یاست",
+            "en": "you have felt low or worried most days for 2 weeks or more"
+          }
+        },
+        {
+          "id": "mind-cycle.soon.fear",
+          "icon": "heart",
+          "text": {
+            "fa": "حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید",
+            "ps": "د ناڅاپي وېرې حملې، د زړه له ګړندۍ درزا سره، بیا بیا راځي",
+            "en": "sudden attacks of fear, with a racing heart, keep coming back"
+          }
+        },
+        {
+          "id": "mind-cycle.soon.daily",
+          "icon": "family",
+          "text": {
+            "fa": "کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید",
+            "ps": "خپل ورځني کارونه یا د کورنۍ پاملرنه نشئ کولی",
+            "en": "you cannot do your daily work or care for your family"
+          }
+        },
+        {
+          "id": "mind-cycle.soon.drugs",
+          "icon": "no",
+          "text": {
+            "fa": "برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید",
+            "ps": "د زغملو لپاره اپین، ګولۍ یا نور نشه يي توکي کاروئ",
+            "en": "you use opium, pills or other drugs to cope"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mind-cycle.fault",
+      "type": "tip",
+      "icon": "heart",
+      "text": {
+        "fa": "آمدن فکرهای سخت تقصیر شما نیست. جلوی آن‌ها را گرفته نمی‌توانید، اما انتخاب کرده می‌توانید که بعد چه کنید.",
+        "ps": "دا ستاسو تقصیر نه دی چې سخت فکرونه راځي. نشئ کولای چې ودرېږئ یې، خو کولای شئ وټاکئ چې بیا څه کوئ.",
+        "en": "It is not your fault that hard thoughts come. You cannot stop them, but you can choose what to do next."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Doing What Matters in Times of Stress: an illustrated guide (2020): grounding, unhooking from difficult thoughts, acting on your values, being kind, making room",
+    "WHO Problem Management Plus (PM+): individual psychological help for adults impaired by distress in communities exposed to adversity (2016, generic field-trial version 1.1, 2018): managing stress (slow breathing), managing problems, get going keep doing (behavioural activation), strengthening social support",
+    "Beck JS, Cognitive Behavior Therapy: Basics and Beyond (3rd ed. 2020): the thought-feeling-behaviour cycle; WHO Thinking Healthy (2015), a manual of psychosocial management of perinatal depression using CBT for community health workers (Pakistan)",
+    "WHO mhGAP Intervention Guide 2.0 (2016): psychoeducation for stress and low mood; self-harm and suicide (ask, stay with the person, remove means, refer)"
+  ],
+  "review": [
+    "New page (content pass 3): the CBT cycle in one everyday story (a neighbour who does not greet you), as Mo asked. The story was chosen to be harmless and common for women and men; check that it rings true in Samangan villages.",
+    "'I am having the thought that...' is the WHO DWMS 'notice and name' step; check that it makes sense heard once in Dari and Pashto.",
+    "WHO Thinking Healthy (CBT by lady health workers in rural Pakistan) is the closest tested model for this region.",
+    "Every Mind page ends with the same red box (thoughts of ending life, self-harm, hurting others: tell someone you trust and go to a health worker now, day or night) and amber box (low or worried 2 weeks or more, attacks of fear that keep coming, cannot do daily work, drugs to cope: clinic today), with the page's own ids, as briefed. The red title does not say 'hospital': a health worker at the clinic or hospital, whichever is nearer. The stress page keeps its own boxes. First attacks of fear with chest pain may be the heart: chest pain is on the red-flags page. No hotline is given (moph-guidance.md item 11: 120 Youth Health Line not confirmed for Samangan)."
+  ]
+}

@@ -116,9 +116,9 @@
         "en": "At the clinic: ORS and a check"
       },
       "text": {
-        "fa": "کارمند صحی می‌بیند که بدن چقدر خشک شده و او آر اس رایگان می‌دهد. اسهال آبکی انتی‌بیوتیک ضرورت ندارد. خون در مدفوع با تب انتی‌بیوتیک (سیپروفلوکساسین) می‌گیرد.",
-        "ps": "روغتیايي کارکوونکی ګوري چې بدن څومره وچ شوی او او آر اس وړیا ورکوي. اوبلن نس ناستی انټي بیوټیک ته اړتیا نه لري. په ډکو کې وینه له تبې سره انټي بیوټیک (سیپروفلوکساسین) اخلي.",
-        "en": "The health worker checks how dry the body is and gives ORS, free. Watery diarrhoea needs no antibiotic. Blood in the stool with fever gets an antibiotic (ciprofloxacin)."
+        "fa": "کارمند صحی می‌بیند که بدن چقدر خشک شده و او آر اس می‌دهد. اسهال آبکی انتی‌بیوتیک ضرورت ندارد. خون در مدفوع با تب انتی‌بیوتیک (سیپروفلوکساسین) می‌گیرد.",
+        "ps": "روغتیايي کارکوونکی ګوري چې بدن څومره وچ شوی او او آر اس ورکوي. اوبلن نس ناستی انټي بیوټیک ته اړتیا نه لري. په ډکو کې وینه له تبې سره انټي بیوټیک (سیپروفلوکساسین) اخلي.",
+        "en": "The health worker checks how dry the body is and gives ORS. Watery diarrhoea needs no antibiotic. Blood in the stool with fever gets an antibiotic (ciprofloxacin)."
       }
     },
     {
@@ -283,9 +283,9 @@
       "type": "tip",
       "icon": "ors",
       "text": {
-        "fa": "در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را رایگان دارد.",
-        "ps": "په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې وړیا لري.",
-        "en": "Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them free."
+        "fa": "در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را دارد.",
+        "ps": "په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې لري.",
+        "en": "Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them."
       }
     }
   ],
@@ -305,6 +305,7 @@
     "ORS amount for adults ('a full cup or more after every loose stool') follows WHO's adult guidance of at least 200-400 ml per stool, simplified; the children's topic has the exact child amounts.",
     "ORS 'free at the health post': BPHS Health Post kit; confirm CHWs in Samangan are still supplied (about 600 facilities closed nationally by August 2026).",
     "Pashto 'د نس ناستي درېدونکي درمل' (anti-diarrhoeal medicines) to be checked for natural wording.",
-    "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
+    "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...).",
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
   ]
 }
