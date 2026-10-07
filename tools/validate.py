@@ -387,6 +387,60 @@ def check_ui_features():
                 if part == "say" and (not ID_RE.match(k) or not k.startswith("ui.")): err(f, f"say.{k}: narration ids look like ui.<name>")
                 check_L(f, f"{part}.{k}", L, 45 if part == "say" else None)
 check_ui_features()
+# picture-step animations (js/steps.js, docs/STEPS_PLAYER.md): anim/steps/<name>.json and its pictures
+STEP_MOTIONS = {"loop", "swap", "fade", "move", "xfade"}
+STEP_OVERLAYS = {"ring", "arrow", "guide", "dot", "depth", "tick", "cross", "shade", "icon", "waves", "counter", "timer"}
+def check_steps():
+    live = ANIM.steps_live()
+    for name in live:
+        if not os.path.exists(ANIM.steps_path(name)): err(os.path.join(ROOT, "js/anim.js"), f"STEPS lists {name!r} but anim/steps/{name}.json is missing")
+    for f in sorted(glob.glob(os.path.join(ROOT, "anim/steps/*.json"))):
+        name = os.path.basename(f)[:-5]
+        try: d = json.load(open(f, encoding="utf-8"))
+        except Exception as e: err(f, f"invalid JSON: {e}"); continue
+        W, H = d.get("w"), d.get("h")
+        if not (isinstance(W, int) and isinstance(H, int) and W > 0 and H > 0): err(f, "w and h (picture size in pixels) missing"); continue
+        if name in live and not str(d.get("approved") or "").strip():
+            err(f, "is live (STEPS in js/anim.js) but has no \"approved\" note: only pictures Mo has approved go live")
+        pdir = os.path.join(ROOT, (d.get("dir") or f"img/steps/{name}/"))
+        layers = {}
+        for fr, v in (d.get("frames") or {}).items():
+            for L in (v.get("layers") if isinstance(v, dict) else v) or []:
+                layers.setdefault(fr, set()).add(L.get("id"))
+                if not os.path.exists(os.path.join(pdir, str(L.get("src")))): err(f, f"frame {fr}: picture {L.get('src')} missing in {os.path.relpath(pdir, ROOT)}")
+                b = L.get("box")
+                if b is not None and not (len(b) == 4 and b[0] >= 0 and b[1] >= 0 and b[0] + b[2] <= W + 1 and b[1] + b[3] <= H + 1): err(f, f"frame {fr} layer {L.get('id')}: box {b} outside the {W}x{H} picture")
+        if not layers: err(f, "no frames"); continue
+        for n, sc in enumerate(d.get("scenes") or []):
+            w = f"scenes[{n}]"
+            if not str(sc.get("id", "")).startswith(f"anim.{name}.s") and name in live: err(f, f"{w}: id should be anim.{name}.s<n> (the narration id)")
+            if sc.get("frame") not in layers: err(f, f"{w}: unknown frame {sc.get('frame')!r}"); continue
+            ids = {m.get("id") for m in sc.get("motions") or [] if m.get("id")}
+            for m in sc.get("motions") or []:
+                if m.get("type") not in STEP_MOTIONS: err(f, f"{w}: unknown motion type {m.get('type')!r} ({sorted(STEP_MOTIONS)})"); continue
+                if m.get("type") == "xfade":
+                    if m.get("to") not in layers: err(f, f"{w}: xfade to unknown frame {m.get('to')!r}")
+                    continue
+                refs = m.get("layers") or ([m["layer"]] if m.get("layer") else [])
+                if m.get("type") == "swap":
+                    if not m.get("under") or not m.get("layer"): err(f, f"{w}: a swap needs layer (the down version) and under (the up version)")
+                    else: refs = refs + [m["under"]]
+                for ref in refs:
+                    fr, ly = (ref.split(".", 1) if "." in ref else (m.get("frame") or sc["frame"], ref))
+                    if ly not in layers.get(fr, set()): err(f, f"{w}: motion on unknown layer {fr}.{ly}")
+                if m.get("follow") and m["follow"] not in ids: err(f, f"{w}: follows unknown motion {m['follow']!r}")
+                if m.get("type") in ("loop", "swap") and not m.get("follow") and not m.get("rate"): err(f, f"{w}: a {m['type']} needs a rate (per minute)")
+            for o in sc.get("overlays") or []:
+                if o.get("type") not in STEP_OVERLAYS: err(f, f"{w}: unknown overlay type {o.get('type')!r} ({sorted(STEP_OVERLAYS)})"); continue
+                if o.get("follow") and o["follow"] not in ids: err(f, f"{w}: overlay follows unknown motion {o['follow']!r}")
+                need = {"ring": ("x", "y"), "arrow": ("from", "to"), "guide": ("from", "to"), "depth": ("x", "y1", "y2"), "tick": ("x", "y"), "cross": ("x", "y"), "shade": ("x", "y"), "dot": ("x", "y"), "icon": ("name", "x", "y"), "waves": ("x", "y")}.get(o["type"], ())
+                for k in need:
+                    if o.get(k) is None: err(f, f"{w}: {o['type']} needs {k}")
+                if o.get("label") is not None and isinstance(o["label"], dict): check_L(f, f"{w}.label", o["label"])
+                if o["type"] == "icon" and o.get("name") and not os.path.exists(os.path.join(ROOT, "img/icons", o["name"] + ".svg")): err(f, f"{w}: no icon img/icons/{o['name']}.svg")
+        kb = sum(os.path.getsize(p) for p in glob.glob(os.path.join(pdir, "*.webp"))) / 1024
+        if name not in live: print(f"anim/steps/{name}.json: not live (not in STEPS in js/anim.js), {kb:.0f} KB of pictures")
+check_steps()
 # Old Android phones (Chrome/WebView before 80) cannot run ?? or ?. and then the app never opens
 def check_old_phone_js():
     strip = re.compile(r"""//[^\n]*|/\*.*?\*/|'(?:\\.|[^'\\\n])*'|"(?:\\.|[^"\\\n])*"|`(?:\\.|[^`\\])*`""", re.S)

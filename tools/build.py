@@ -243,6 +243,20 @@ for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js
 # when it is there and falls back to the SVG version when it is not, so precache whatever exists (sub-folders are listed
 # explicitly because these globs do not recurse). anim/*-3d.js (an earlier plan) is still left out.
 pre = [p for p in pre if not p.startswith("js/sw") and not p.endswith("-3d.js")]
+# picture-step animations (js/steps.js, docs/STEPS_PLAYER.md): only live ones (STEPS in js/anim.js, approved by Mo).
+# Their JSON is always precached; their pictures too unless the JSON says "offline": "pack" (then the service worker
+# keeps each picture the first time it is shown). CPR must work offline at once, so CPR uses the default (precache).
+for name in ANIM.steps_live():
+    jp = f"anim/steps/{name}.json"
+    if not exists(jp): print("WARNING", name, "is in STEPS (js/anim.js) but", jp, "is missing"); continue
+    pre.append(jp)
+    sd = load(J(jp))
+    if sd.get("offline") == "pack": continue
+    d = (sd.get("dir") or f"img/steps/{name}/").rstrip("/")
+    for fr in (sd.get("frames") or {}).values():
+        for L in (fr.get("layers") if isinstance(fr, dict) else fr) or []:
+            f = f"{d}/{L['src']}"
+            if exists(f) and f not in pre: pre.append(f)
 
 # version = hash of all precached content (not of the build time: rebuilding the same content keeps the same version,
 # so phones do not download an "update" that changes nothing)

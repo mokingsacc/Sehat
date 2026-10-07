@@ -7,9 +7,25 @@ NARRATION = os.path.join(ROOT, "content/src/anims.json")
 
 
 def names():
-    """Animation files: anim/<name>.js (anim/demo.html is a preview page, not an animation).
+    """Animation files: anim/<name>.js (anim/demo.html is a preview page, not an animation), plus picture-step
+    animations that are live (listed in STEPS in js/anim.js, with anim/steps/<name>.json).
     anim/*-3d.js are 3D versions that js/anim.js may load itself later; they are not animations of their own."""
-    return sorted(os.path.basename(p)[:-3] for p in glob.glob(os.path.join(ROOT, "anim/*.js")) if not p.endswith("-3d.js"))
+    js = {os.path.basename(p)[:-3] for p in glob.glob(os.path.join(ROOT, "anim/*.js")) if not p.endswith("-3d.js")}
+    return sorted(js | {n for n in steps_live() if os.path.exists(steps_path(n))})
+
+
+def steps_path(name):
+    return os.path.join(ROOT, "anim/steps", name + ".json")
+
+
+def steps_live():
+    """Names in STEPS in js/anim.js: picture-step versions (js/steps.js) the app plays. Empty until Mo approves."""
+    try:
+        src = open(os.path.join(ROOT, "js/anim.js"), encoding="utf-8").read()
+    except OSError:
+        return []
+    m = re.search(r"export const STEPS\s*=\s*\[(.*?)\]", src, re.S)
+    return re.findall(r"['\"]([a-z0-9-]+)['\"]", m.group(1)) if m else []
 
 
 def narration():
@@ -46,7 +62,13 @@ def groups():
 
 
 def scene_ids(name):
-    """The narration ids of an animation's scenes, in order (anim.<name>.s1, ...)."""
+    """The narration ids of an animation's scenes, in order (anim.<name>.s1, ...). A live picture-step version
+    (anim/steps/<name>.json) is what plays, so its scenes count."""
+    if name in steps_live() and os.path.exists(steps_path(name)):
+        try:
+            return [sc["id"] for sc in json.load(open(steps_path(name), encoding="utf-8")).get("scenes") or [] if sc.get("id")]
+        except (OSError, ValueError, TypeError):
+            return []
     p = os.path.join(ROOT, "anim", name + ".js")
     if not os.path.exists(p): return []
     src = open(p, encoding="utf-8").read()

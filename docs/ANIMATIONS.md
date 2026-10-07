@@ -22,6 +22,8 @@ Sizes are raw bytes / gzip -9. The v2 files are larger raw because of the shadin
 
 **CPR is being rebuilt in 3D** (a separate worker, three.js clay-style figures, `js/cine/`, `anim/cine/`, `docs/CINE_KIT.md`). The SVG `anim/cpr-*.js` files above are left exactly as they are (with the baby two-thumb picture and the "if you are alone" scenes): the player plays `anim/cine/<name>.js` when it exists and falls back to them otherwise.
 
+**Picture steps** (2026-10-07): approved still pictures in layers (Mo's ChatGPT frames), animated with camera moves, drawn overlays, counters and moving hand layers: `js/steps.js`, `anim/steps/<name>.json`, `img/steps/<name>/`, `tools/steps_images.py`, `docs/STEPS_PLAYER.md`. The player plays them before the cine and SVG versions for names listed in `STEPS` in `js/anim.js`; that list stays empty until Mo approves the pictures.
+
 CPR is one entry for the app, `cpr`, a *group*: opening it first shows an age picker (Newborn, Baby, Child, Adult: four big picture cards, each with its name and a speaker button; the question "Who needs help?" is read aloud), then plays the chosen variant.
 
 Text for every scene, in Dari, Pashto and English: `content/drafts/anim-narration.json` (`{id: {fa, ps, en}}`). It is a draft until Mo and a Dari and a Pashto reader have checked it (see "Review" at the end).

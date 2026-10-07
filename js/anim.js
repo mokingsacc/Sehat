@@ -12,6 +12,8 @@
 // 'stopped'), or play() returned true and the app later calls ctl.narrationEnded().
 // If play() returns nothing (no clip, no voice), a timer is used instead: about 6 s, longer
 // for long lines (scene.ms, opts.sceneMs). Reduced motion: scenes show as still key frames.
+// Three kinds of animation share this player: SVG (anim/<name>.js), cine (anim/cine/<name>.js, CINE) and
+// picture steps (anim/steps/<name>.json via js/steps.js, STEPS); docs/STEPS_PLAYER.md.
 // See docs/ANIMATIONS.md for the data format and the wiring into js/app.js.
 
 const ANIM_BASE = new URL('../anim/', import.meta.url);
@@ -50,6 +52,12 @@ export const animGroup = (name) => GROUPS[String(name).replace(/^anim\./, '')] |
 // mount(stage, {lang, still}) -> {show(i), destroy()} and poster(i). Used instead of anim/<name>.js when it loads;
 // if it is missing or fails, the SVG version plays. opts.cine === false forces the SVG version.
 export const CINE = ['cpr-newborn', 'cpr-baby', 'cpr-child', 'cpr-adult'];
+
+// Picture-step versions (js/steps.js, docs/STEPS_PLAYER.md): anim/steps/<name>.json with layered pictures in
+// img/steps/<name>/, played before the cine and SVG versions. A name goes in this list only when Mo has approved
+// its pictures; useSteps(name) adds one at run time (previews). opts.steps === false skips them.
+export const STEPS = [];
+export function useSteps(...names) { names.forEach((n) => { if (STEPS.indexOf(n) < 0) STEPS.push(n); }); }
 
 const IC = {
   spk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
@@ -148,9 +156,15 @@ function injectCss(id, css) {
   const s = document.createElement('style'); s.id = id; s.textContent = css; document.head.appendChild(s);
 }
 
-export async function loadAnimation(name, plain) {
+export async function loadAnimation(name, plain, noSteps) {
   name = String(name).replace(/^anim\./, '');
   if (!/^[a-z0-9-]+$/.test(name)) throw new Error('bad animation id ' + name);
+  if (!noSteps && STEPS.includes(name)) {
+    // a picture-step version; if its data is missing or broken, the cine or SVG version plays
+    if (!cache.has('steps:' + name)) cache.set('steps:' + name, import('./steps.js').then((m) => m.loadSteps(name)).catch(() => null));
+    const s = await cache.get('steps:' + name);
+    if (s) { injectCss('anim-css', CSS); return s; }
+  }
   if (!plain && CINE.includes(name)) {
     if (!cache.has('cine:' + name)) cache.set('cine:' + name, import(new URL('cine/' + name + '.js', ANIM_BASE).href).then((m) => m.default, () => null));
     const c = await cache.get('cine:' + name);
@@ -188,7 +202,7 @@ function camStyle(d, sc) {
 }
 
 export async function mountAnimation(el, name, opts = {}) {
-  const d = await loadAnimation(name, opts.cine === false);
+  const d = await loadAnimation(name, opts.cine === false, opts.steps === false);
   const lg = opts.lang || 'fa';
   const rtl = lg !== 'en';
   const reduce = () => !!opts.still || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -222,7 +236,9 @@ export async function mountAnimation(el, name, opts = {}) {
     speakingUI(false);
     clear();
     const minMs = opts.minMs != null ? opts.minMs : 3500;
-    const wait = Math.max(extra, minMs - (Date.now() - st.t0));
+    // a picture-step scene may still be counting (e.g. 30 pushes): let it finish first
+    const left = st.cine && st.cine.left ? st.cine.left() : 0;
+    const wait = Math.max(extra, minMs - (Date.now() - st.t0), left + (left ? 500 : 0));
     st.timer = setTimeout(function tick() {
       if (token !== st.token || st.dead) return;
       if (document.hidden) { st.timer = setTimeout(tick, 1000); return; }

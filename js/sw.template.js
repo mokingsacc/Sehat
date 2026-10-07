@@ -3,6 +3,7 @@ const VERSION = '__VERSION__';
 const PRECACHE = __PRECACHE__;
 const SHELL = 'fhb-shell-' + VERSION;
 const AUDIO = 'fhb-audio-v1';
+const STEPS = 'fhb-steps-v1'; // pictures of picture-step animations that are not precached (js/steps.js)
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(SHELL).then((c) => c.addAll(PRECACHE.map((p) => new Request(p, { cache: 'reload' })))).then(() => self.skipWaiting()));
@@ -39,6 +40,17 @@ self.addEventListener('fetch', (e) => {
       if (res.ok && res.status === 200) e.waitUntil(c.put(req.url, res.clone()).catch(() => {}));
       return res;
     }));
+    return;
+  }
+  if (path.includes('/img/steps/')) {
+    // precached (live CPR) from the shell; others ("offline": "pack") from the phone once shown, else fetched and kept
+    e.respondWith(caches.open(SHELL).then((c) => c.match(req, { ignoreSearch: true })).then((hit) => hit || caches.open(STEPS).then(async (c) => {
+      const kept = await c.match(req.url);
+      if (kept) return kept;
+      const res = await fetch(req);
+      if (res.ok && res.status === 200) e.waitUntil(c.put(req.url, res.clone()).catch(() => {}));
+      return res;
+    })));
     return;
   }
   if (req.mode === 'navigate') {
