@@ -250,5 +250,93 @@
   "input_tokens": 29050,
   "audio_tokens": 81860,
   "estimated_usd": 0.25
+ },
+ {
+  "when": "2026-10-07 22:34",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/r4o2eq1pyh0zqx5f7z4oa8ofp1ojkmtqiswg",
+  "made": 297,
+  "input_tokens": 21899,
+  "audio_tokens": 38828,
+  "estimated_usd": 0.12
+ },
+ {
+  "when": "2026-10-07 22:40",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/s3tnxf291d8ztbrllhy30afxi0difidojry5",
+  "made": 295,
+  "input_tokens": 30509,
+  "audio_tokens": 89038,
+  "estimated_usd": 0.27
+ },
+ {
+  "when": "2026-10-07 22:45",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/fqqmzrbb0mnzw0uyxba6nt03u1gu8yi4f3ug",
+  "made": 299,
+  "input_tokens": 29445,
+  "audio_tokens": 79912,
+  "estimated_usd": 0.25
+ },
+ {
+  "when": "2026-10-07 22:53",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/9cg7zi530p77pilevd7dejt0vmmmhrw8skci",
+  "made": 223,
+  "input_tokens": 22704,
+  "audio_tokens": 65158,
+  "estimated_usd": 0.2
+ },
+ {
+  "when": "2026-10-07 22:56",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/dwspj5jokq1bz3rz4l0qjd2te54nuuasxbd5",
+  "made": 7,
+  "input_tokens": 602,
+  "audio_tokens": 2448,
+  "estimated_usd": 0.01
+ },
+ {
+  "when": "2026-10-07 22:59",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/1wtr745bu9fib5qbae22dtpvmkx7c1ek7qrw",
+  "made": 2,
+  "input_tokens": 113,
+  "audio_tokens": 256,
+  "estimated_usd": 0.0
+ },
+ {
+  "when": "2026-10-07 22:59",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "copied": 710,
+  "check": [
+   "ps-f/ui.tab.house.mp3: 7.7s, expected about 0s; listen to it"
+  ],
+  "note": "end of run; each batch above has its own tokens and cost"
+ },
+ {
+  "when": "2026-10-07 23:01",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/nleqmgm0tmlwjdi5up7n35ufiutyvz6hhszt",
+  "made": 0,
+  "input_tokens": 56,
+  "audio_tokens": 334,
+  "estimated_usd": 0.0
+ },
+ {
+  "when": "2026-10-07 23:03",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/6w6nhkp4df9k7r8hezneyq3d470c2427fi66",
+  "made": 1,
+  "input_tokens": 56,
+  "audio_tokens": 27,
+  "estimated_usd": 0.0
+ },
+ {
+  "when": "2026-10-07 23:03",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "copied": 0,
+  "check": [],
+  "note": "end of run; each batch above has its own tokens and cost"
  }
 ]
