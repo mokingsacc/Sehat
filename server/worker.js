@@ -555,14 +555,28 @@ async function adminApi(req, env, url, op, me) {
     } else if (m.part === 'ui') {
       for (const [k, L] of Object.entries(m.text || {})) if (b.ui[k]) b.ui[k] = cleanL(L);
       for (const [k, L] of Object.entries(m.say || {})) if ((k.startsWith('ui.') || k.startsWith('anim.')) && b.narration[k]) b.narration[k] = cleanL(L);
+    } else if (m.part === 'search') {
+      // the symptom finder's words for one topic (js/search.js): lists of short phrases per language, and danger words
+      const t = b.topics[m.id];
+      if (!t || typeof m.value !== 'object' || !m.value) return json({ error: 'No such topic.' }, 400);
+      const clean = {};
+      for (const k of ['fa', 'ps', 'lat', 'en', 'danger']) {
+        const L = Array.isArray(m.value[k]) ? [...new Set(m.value[k].filter((x) => typeof x === 'string').map((x) => x.trim().slice(0, 80)).filter(Boolean))].slice(0, 300) : [];
+        if (L.length) clean[k] = L;
+      }
+      const old = (b.search && b.search.pages && b.search.pages[m.id]) || {};
+      if (old.urgent) clean.urgent = true;
+      b.search = b.search || { version: 1, pages: {} };
+      b.search.pages = b.search.pages || {};
+      if (Object.keys(clean).length) b.search.pages[m.id] = clean; else delete b.search.pages[m.id];
     } else if (m.part === 'facilities') {
       if (!Array.isArray(m.value)) return json({ error: 'Nothing to save.' }, 400);
       b.facilities = { ...(b.facilities || {}), facilities: m.value, updated: new Date().toISOString().slice(0, 10) };
     } else return json({ error: 'Unknown change.' }, 400);
     rebuildNarration(b);
     await putDoc(env, 'draft', b);
-    const PART = { topic: 'topic', deleteTopic: 'deleted topic', sections: 'topic order', home: 'home screen', ui: 'words', facilities: 'places' };
-    await log('save', PART[m.part] + (m.part === 'topic' ? ' ' + m.value.id : m.part === 'deleteTopic' ? ' ' + m.id : ''));
+    const PART = { topic: 'topic', deleteTopic: 'deleted topic', sections: 'topic order', home: 'home screen', ui: 'words', facilities: 'places', search: 'search words' };
+    await log('save', PART[m.part] + (m.part === 'topic' ? ' ' + m.value.id : m.part === 'deleteTopic' || m.part === 'search' ? ' ' + m.id : ''));
     return json({ ok: true, sections: b.sections });
   }
   return json({ error: 'Unknown action.' }, 404);
@@ -965,6 +979,7 @@ function adminClient(cfg) {
     if (p.startsWith('topic:')) { const t = D.topics[p.slice(6)]; return t ? { part: 'topic', value: t, retired: D.retired || [] } : null; }
     if (p === 'ui') { const say = {}; for (const k in D.narration) if (k.startsWith('ui.') || k.startsWith('anim.')) say[k] = D.narration[k]; return { part: 'ui', text: D.ui, say }; }
     if (p === 'fac') return { part: 'facilities', value: D.facilities.facilities };
+    if (p.startsWith('search:')) { const id = p.slice(7); return { part: 'search', id, value: ((D.search && D.search.pages) || {})[id] || {} }; }
     if (p === 'sections') return { part: 'sections', value: D.sections };
     if (p === 'home') return { part: 'home', value: D.config.home };
     return null;
@@ -1010,7 +1025,8 @@ function adminClient(cfg) {
     }).join('');
     return `<details class="au"><summary>Recordings: ${LANGS.map((lg) => LN[lg] + ' ' + ['f', 'm'].map((v) => VN[v] + (has(lg + '-' + v) ? ' ✓' : ' –')).join(' ')).join(' · ')}</summary>${cells}</details>`;
   }
-  function getRoot(r) { return r === 'topic' ? D.topics[CUR] : r === 'ui' ? D.ui : r === 'say' ? D.narration : r === 'fac' ? D.facilities.facilities : null; }
+  function getRoot(r) { return r === 'topic' ? D.topics[CUR] : r === 'ui' ? D.ui : r === 'say' ? D.narration : r === 'fac' ? D.facilities.facilities : r === 'search' ? searchPages() : null; }
+  function searchPages() { if (!D.search) D.search = { version: 1, pages: {} }; if (!D.search.pages) D.search.pages = {}; return D.search.pages; }
   function setField(el) {
     const [root, path] = el.dataset.f.split(/:(.*)/s);
     const ks = path.split('|'); let o = getRoot(root);
@@ -1021,7 +1037,7 @@ function adminClient(cfg) {
     const last = ks[ks.length - 1];
     if (v === '' && 'opt' in el.dataset) delete o[last]; else o[last] = v;
     if (last === 'anim') delete o.pick; // a new animation: choose its variant again
-    queueSave(root === 'topic' ? 'topic:' + CUR : root === 'fac' ? 'fac' : 'ui');
+    queueSave(root === 'topic' ? 'topic:' + CUR : root === 'fac' ? 'fac' : root === 'search' ? 'search:' + ks[0] : 'ui');
   }
   function updPub() {
     $('#pubinfo').textContent = PUB ? ` · Published ${PUB.version}${DIRTY ? ' · the draft has changes not yet published' : ' · nothing new to publish'}` : ' · nothing published yet';
@@ -1072,8 +1088,18 @@ function adminClient(cfg) {
     t.blocks.forEach((b, i) => { h += blockCard(b, i, t.blocks.length); });
     h += `<div class="c"><div class="l">Add a block at the end</div><div class="hrow"><select id="newtype" style="width:auto">${opts(Object.entries(cfg.types), 'step')}</select><button data-act="badd">Add block</button></div></div>
       <div class="c"><div class="l">Sources (one per line)</div><textarea data-f="topic:sources" data-list rows="3" dir="ltr">${esc((t.sources || []).join('\n'))}</textarea></div>
+      ${vSearch(tid)}
       <p><button class="danger" data-act="tdel">Delete this topic</button></p>`;
     return h;
+  }
+  // the words people may type or say to find this topic in the app's search ("What is wrong?"). Sections of a topic,
+  // tools and screens have their own words in content/src/search-phrases.json (edited in the app files for now).
+  function vSearch(tid) {
+    const e = ((D.search && D.search.pages) || {})[tid] || {};
+    const box = (k, label, dir) => `<label><span>${label}</span><textarea data-f="search:${esc(tid)}|${k}" data-list rows="4" dir="${dir}">${esc((e[k] || []).join('\n'))}</textarea></label>`;
+    return `<details class="c"><summary class="l">Search words (${['fa', 'ps', 'lat', 'en', 'danger'].reduce((n, k) => n + (e[k] || []).length, 0)})</summary>
+      <p class="s">One word or short phrase per line, the way people really say it: everyday words, local names, common misspellings. Start a line with ? if a native speaker should check it. "Danger words" put this page first with a red Emergency badge: use them only for real emergencies.</p>
+      <div class="tri">${box('fa', 'Dari', 'rtl')}${box('ps', 'Pashto', 'rtl')}</div><div class="tri">${box('lat', 'Dari or Pashto in English letters', 'ltr')}${box('en', 'English', 'ltr')}</div>${box('danger', 'Danger words (any language)', 'auto')}</details>`;
   }
   function blockCard(b, i, n) {
     const P = `topic:blocks|${i}|`, ty = b.type;

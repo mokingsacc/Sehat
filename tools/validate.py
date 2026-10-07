@@ -257,6 +257,49 @@ def check_anims_and_lists():
             if k not in ui["say"]: err(fu, f"say.{k} missing (the Emergency button needs it)")
 check_anims_and_lists()
 
+# the symptom finder's word list (js/search.js): every key must open something, every list is plain phrases, and
+# "danger" (the red Emergency badge) is only for urgent pages
+def check_search():
+    f = os.path.join(ROOT, "content/src/search-phrases.json")
+    if not os.path.exists(f): return
+    try: d = json.load(open(f, encoding="utf-8"))
+    except Exception as e: err(f, f"invalid JSON: {e}"); return
+    topics = {}
+    for x in glob.glob(os.path.join(ROOT, "content/src/topics/*.json")):
+        try: topics[os.path.basename(x)[:-5]] = json.load(open(x, encoding="utf-8"))
+        except Exception: pass
+    try: emerg = set(json.load(open(os.path.join(ROOT, "content/src/sections.json"), encoding="utf-8")).get("emergency") or [])
+    except Exception: emerg = set()
+    screens = {"emergency", "kit", "near", "family", "children", "adults"}
+    tools = {"tool/" + t for t in TOOLS}
+    urgent_pages = emerg | {"emergency"} | {t for t, x in topics.items() if any(b.get("type") == "alert" and b.get("level") == "urgent" for b in x.get("blocks") or [])}
+    review, n = 0, 0
+    for k, e in (d.get("pages") or {}).items():
+        tid = k.split(".")[0]
+        if k in screens or k in tools or k in topics or k == "vaccines": pass
+        elif tid in topics and any(b.get("id") == k for b in topics[tid].get("blocks") or []): pass
+        else: err(f, f"{k}: opens nothing (not a topic, a topic's block id, a tool or a screen)"); continue
+        for fld, v in e.items():
+            if fld == "urgent":
+                if v is not True: err(f, f"{k}.urgent: use true or leave it out")
+                elif tid not in urgent_pages: err(f, f"{k}.urgent: only for urgent pages (Emergency section, or a page with an urgent alert)")
+                continue
+            if fld not in ("fa", "ps", "lat", "en", "danger"): err(f, f"{k}: unknown field {fld!r} (fa, ps, lat, en, danger, urgent)"); continue
+            if not isinstance(v, list) or not all(isinstance(x, str) and x.strip() for x in v): err(f, f"{k}.{fld}: must be a list of phrases"); continue
+            if fld == "danger" and v and tid not in urgent_pages: err(f, f"{k}.danger: the red badge is only for urgent pages (Emergency section, or a page with an urgent alert)")
+            seen = set()
+            for x in v:
+                n += 1; review += x.startswith("?")
+                y = x.lstrip("?").strip()
+                if y in seen: warn(f, f"{k}.{fld}: {y!r} twice")
+                seen.add(y)
+                if k.startswith("tool/reading") and re.search(r"[0-9۰-۹٠-٩]", y): warn(f, f"{k}.{fld}: {y!r} has a number (readings are found by js/search.js NUM_HINTS)")
+                if fld == "danger" and len(y.split()) == 1 and len(y) <= 2: warn(f, f"{k}.danger: {y!r} is very short for a red badge")
+                if fld in ("fa", "ps") and re.search(r"[A-Za-z]", y): warn(f, f"{k}.{fld}: {y!r} has Latin letters (put it under lat or en)")
+                if fld == "lat" and re.search(r"[\u0600-\u06ff]", y): warn(f, f"{k}.lat: {y!r} has Arabic letters")
+    print(f"search-phrases.json: {len(d.get('pages') or {})} pages, {n} phrases, {review} marked ? for native review")
+check_search()
+
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst
 E, W = show(errors), show(warnings)

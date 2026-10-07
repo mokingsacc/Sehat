@@ -11,6 +11,7 @@ ui.women	د ښځو روغتیا: امیندواري، زېږون او له زې�
 ui.everyone	د ټولو لپاره، نارینه او ښځې: د خطر نښې او عامې ناروغۍ.	For everyone, men and women: danger signs and common illnesses.
 ui.settings	تنظیمات: ژبه، د غږ چټکتیا، د غږونو ښکته کول او د کتاب تازه کول.	Settings: language, voice speed, downloading audio and updating the book.
 ui.ask	څه ستونزه لرئ؟ د مایکروفون تڼۍ ووهئ او ووایئ، یا ولیکئ، یا یو انځور وټاکئ.	What is wrong? Tap the microphone and say it, or write it, or pick a picture.
+ui.askNone	د دې کلمو لپاره پاڼه ونه موندل شوه. نورې کلمې وازمویئ، یا یو انځور وټاکئ. که اندېښنه لرئ، روغتیايي کارکوونکي ته ولاړ شئ. په بیړني حالت کې، سره «بیړنی حالت» تڼۍ ووهئ.	No page was found for these words. Try other words, or pick a picture. If you are worried, see a health worker. In an emergency, tap the red Emergency button.
 ui.feedback	موږ ته ووایئ چې څه ښه کړو. سور تڼۍ ووهئ او خبرې وکړئ، یا ولیکئ.	Tell us what we can improve. Tap the red button and talk, or write.
 ui.near	دا پاڼه تاسو ته نږدې روغتون او کلینیک ښيي. خپل ځای پیدا کړئ.	This page shows the nearest hospital and clinic. Find where you are.
 ui.voice	هغه غږ وټاکئ چې خوښ مو دی: د ښځې غږ یا د سړي غږ. د اورېدو لپاره، د سپیکر تڼۍ ووهئ.	Choose the voice you like: a woman's voice or a man's voice. Tap the speaker to listen.

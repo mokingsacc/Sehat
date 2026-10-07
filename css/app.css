@@ -467,3 +467,11 @@ img{max-width:100%;display:block}
 .anim-block .poster .play svg{width:36px;height:36px;fill:#fff}
 .anim-block .row{display:flex;align-items:center;gap:10px;padding:10px 12px;width:100%}
 .anim-block .t{flex:1 1 auto;font-weight:700;font-size:18px;line-height:1.4}
+/* symptom finder results (js/search-ui.js): red badge on emergency pages, icon cards for tools and screens */
+.rcard.danger{border:2px solid var(--red);background:var(--red-t)}
+.rbadge{display:inline-flex;align-items:center;gap:4px;align-self:flex-start;background:var(--red);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:1px 10px 1px 8px;margin-bottom:3px}
+.rbadge svg{width:15px;height:15px}
+.rcard .rt .rbadge{color:#fff;font-size:13px;line-height:1.5}
+.askbox input{min-width:0} /* a long placeholder or query must not push the microphone off a narrow phone */
+.rcard .rimg .ricon{display:flex;align-items:center;justify-content:center;aspect-ratio:9/5;color:var(--red)}
+.rcard .rimg .ricon .ic,.rcard .rimg .ricon svg{width:34px;height:34px}

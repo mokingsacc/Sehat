@@ -2,6 +2,7 @@
 import { toJalali, fromJalali, monthLength } from './jalali.js';
 import { makeZip } from './zip.js';
 import { initTools } from './tools.js';
+import { initFinder } from './search-ui.js'; // the symptom finder's results (js/search.js ranks the pages)
 import * as Stats from './stats.js';
 import { openAnimation, animPoster } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md)
 
@@ -953,10 +954,17 @@ function screenAsk() {
   html += `<h2 class="sub-h">${esc(T('orPick'))}</h2><div class="symgrid">${(S.book.symptoms || []).map((s) => `<button class="sym" data-sym="${esc(s.id)}">${ic(s.icon)}<span>${esc(L(s.label))}</span></button>`).join('')}</div>`;
   return { html, nav: 'home' };
 }
-function askResults(symId) {
+function askResults(symId, live) {
   let syms = [], blocks = [];
   if (symId) syms = (S.book.symptoms || []).filter((s) => s.id === symId);
-  else if (ASK.q) ({ syms, blocks } = findSymptoms(ASK.q));
+  else if (ASK.q) {
+    // typed or said: js/search.js ranks the pages (live while typing). The disease-watch signal and report cards
+    // still come from the symptom list, and only once the search is sent.
+    if (live) return FD.results(ASK.q, true);
+    const top3 = findSymptoms(ASK.q).syms.slice(0, 3).map((s) => s.id);
+    svSignal(top3);
+    return FD.results(ASK.q) + reportCards(svFor('symptoms', top3)).html;
+  }
   else return '';
   const topicsSeen = new Set(); let out = '';
   for (const s of syms.slice(0, 3)) {
@@ -1080,6 +1088,7 @@ let lastPage = 'home';
 
 /* ---------- tools: breathing counter, reading checker, home health kit (js/tools.js) ---------- */
 const TL = initTools({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, topicCard, render: () => render() });
+const FD = initFinder({ S, esc, T, L, ic, I, spk, isAdultTopic });
 
 /* ---------- router & rendering ---------- */
 function route() { return (location.hash || '#/home').slice(2).split('/'); }
@@ -1112,6 +1121,8 @@ function render() {
   Stats.page(!S.lang ? ['welcome'] : !S.voice ? ['voice'] : r[0] !== 'privacy' && Stats.showConsent() ? ['consent'] : r);
   if (r[0] === 'topic' && r[2]) setTimeout(() => { const el = document.querySelector(`[data-block="${CSS.escape(decodeURIComponent(r[2]))}"]`); if (el) { el.scrollIntoView({ block: 'center' }); el.classList.add('speaking'); setTimeout(() => el.classList.remove('speaking'), 2500); } }, 60);
   const af = $('#askform'); if (af) af.addEventListener('submit', (e) => { e.preventDefault(); ASK.q = $('#askq').value; $('#askres').innerHTML = askResults(); $('#askq').blur(); });
+  // live results while typing; the cards are redrawn only when they change (fast on slow phones)
+  if (af) { $('#askq').addEventListener('input', (e) => { ASK.q = e.target.value; FD.show($('#askres'), askResults(null, true)); }); setTimeout(FD.warm, 30); }
   const ff = $('#fbform'); if (ff) ff.addEventListener('submit', (e) => { e.preventDefault(); fbSubmit(ff.text.value.trim()); });
   fillPosters();
 }

@@ -130,3 +130,43 @@ Each visit is narrated as one clip: the age, then each vaccine and what it prote
 - Section "emergency" in `content/src/sections.json`: every first-aid and emergency topic, most urgent first. The topics keep their own section ("children" or "everyone", and also listed there); the children and adults lists show them in an "Emergency" group at the end, and the Emergency screen lists them under "All emergencies".
 - `config.emergency` (content/src/config.json): the Emergency screen, opened by the big red home button (home module `"emergency"`, first in `config.home`). One row per age: `{"id", "label" (a ui.text key), "icon", "cpr" (the "not breathing" page, shown first in red), "anim" (the CPR variant its "Watch how" button plays), "topics" (the "Other emergencies" for that age, in order)}`. See docs/EMERGENCIES.md section 4.
 - `config.urgentTopics` includes all emergency topics, so their narration is in the "urgent" audio pack that downloads first.
+
+## Addendum: search words for the symptom finder (2026-10-07)
+
+The "What is wrong?" screen ranks pages with `js/search.js` (fully offline, no advice: it only chooses which existing
+page, section, tool or screen to open). Its word list is `content/src/search-phrases.json`; `tools/build.py` copies it
+into `book.json` as `search`, keeping only keys that open something, and `tools/validate.py` checks it.
+
+```json
+{ "version": 1, "pages": {
+  "diarrhoea":       { "fa": ["اسهال", "شکم روش"], "ps": ["نس ناستی"], "lat": ["ishal"], "en": ["diarrhoea", "loose stools"] },
+  "diarrhoea.zinc":  { "fa": ["زنک"], "en": ["zinc"] },
+  "pregnancy-danger":{ "urgent": true, "fa": ["…"], "danger": ["خونریزی در حاملگی", "په امیندوارۍ کې وینه", "bleeding in pregnancy"] },
+  "tool/breaths":    { "fa": ["نفس طفل را بشمارید"], "en": ["count breaths"] },
+  "near":            { "fa": ["نزدیک ترین کلینیک"], "en": ["nearest clinic"] } } }
+```
+
+- **Keys**: a topic id; a block id of a topic (`"<topic>.<block>"`: the result opens the topic at that block); a tool
+  (`tool/breaths`, `tool/reading`, `tool/reading/temp|bp|sugar|spo2|muac`); or a screen (`emergency`, `kit`, `near`,
+  `family`, `children`, `adults`).
+- **fa / ps / lat / en**: lists of short phrases (1–6 words) the way people really say or type them: everyday words,
+  local disease names (sulfa, zukam, garmi, salak…), body part + complaint ("کمرم درد می‌کند"), mothers' descriptions,
+  polite women's-health words, common misspellings. `lat` = Dari or Pashto in English letters. All lists are searched
+  whatever the app language. Do not put numbers in reading-tool phrases: typed readings ("140/90", "تب ۳۹") are
+  recognised by `NUM_HINTS` in `js/search.js`.
+- Start a phrase with **?** when a native speaker should check it (it still works). New Dari and Pashto phrases go to
+  `docs/REVIEW.md` ("Smart search phrases").
+- **danger**: phrases that put this page first with a red Emergency badge (not breathing, fits, heavy bleeding, snake
+  bite…). Each word must be typed as listed (Dari/Pashto endings allowed), so write the common forms. Only for urgent
+  pages: the Emergency section, the Emergency screen, or a topic with an `urgent` alert block (`validate.py` refuses
+  others).
+- **urgent: true**: the page gets the red badge whenever it is the best match (the Emergency section topics have this
+  automatically). Same pages only. Use it for pages that are all danger signs (pregnancy-danger, danger-child).
+- Pages without phrases are still found by their own title, summary, step titles and red-box lines (weaker), so a new
+  topic is findable at once; add phrases to make it findable by everyday words.
+- The editor (server/worker.js, a topic's "Search words" box) edits a topic's lists in the draft book. Section, tool
+  and screen keys are edited in this file.
+- Test: `node tools/search_eval.mjs` runs the queries in `tools/search-tests.json` (fa, ps, Latin, English, typos,
+  danger) and prints top-1 / top-3. Run it after changing phrases; add a query for every miss you fix.
+- Later, a downloaded meaning model can be plugged in with `addRanker({ weight, rank(query, lang) → [{ id, score }] })`;
+  `rankAsync()` blends it in, and danger results from the word list always stay first.

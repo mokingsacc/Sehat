@@ -171,6 +171,19 @@ if syndromes and districts:
         "province": districts["province"], "districts": districts["districts"], "provinces": districts["provinces"],
     }
 
+# the symptom finder's word list (js/search.js): everyday words and phrases per page, section, tool and screen.
+# Only keys that open something in this book are kept; a leading "?" marks a phrase waiting for native review.
+SEARCH_SCREENS = {"emergency", "kit", "near", "family", "children", "adults"}
+SEARCH_TOOLS = {"tool/breaths", "tool/reading", "tool/reading/temp", "tool/reading/bp", "tool/reading/sugar", "tool/reading/spo2", "tool/reading/muac"}
+def search_key_ok(k):
+    if k in SEARCH_SCREENS or k in SEARCH_TOOLS or k in out_topics: return True
+    tid = k.split(".")[0]
+    return tid in out_topics and any(b.get("id") == k for b in out_topics[tid].get("blocks") or [])
+if os.path.exists(J("content/src/search-phrases.json")):
+    sp = load(J("content/src/search-phrases.json"))
+    book["search"] = {"version": sp.get("version", 1), "pages": {
+        k: {f: v for f, v in e.items() if v} for k, e in sp["pages"].items() if search_key_ok(k)}}
+
 # narration scripts for the people recording audio
 # (an animation's lines come right after the first page that shows it, and go in that page's audio pack)
 order, owner = [], {}
