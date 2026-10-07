@@ -4,9 +4,9 @@ name: Android app
 on:
   push:
     branches: [main]
-    # only when something that goes into the APK changes
+    # only when something that goes into the APK changes (not audio/: the APK has no clips, it downloads them from the website)
     paths: ["android/**", "index.html", "manifest.webmanifest", "sw.js", "css/**", "js/**", "fonts/**", "img/**", "anim/**",
-            "audio/**", "content/book.json", "content/version.json", ".github/workflows/android.yml"]
+            "content/book.json", "content/version.json", ".github/workflows/android.yml"]
   workflow_dispatch:
 permissions:
   contents: write   # to create the release

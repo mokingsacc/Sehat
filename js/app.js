@@ -97,9 +97,12 @@ async function clipUrl(id, slot = slotOf(), strict = false) {
 async function getClip(src) {
   let c = null;
   try { c = await caches.open(AUDIO_CACHE); const hit = await c.match(src); if (hit) return await hit.blob(); } catch {}
+  if (navigator.onLine === false) return null; // no internet: straight to the fallback (other voice, phone speech, note)
+  // a weak signal must not leave the speaker silent for long: give up after 12 s and use the fallback
+  const ac = window.AbortController ? new AbortController() : null, tm = ac ? setTimeout(() => ac.abort(), 12000) : 0;
   try {
-    const r = await fetch(src); if (!r.ok) return null;
-    const blob = await r.blob();
+    const r = await fetch(src, ac ? { signal: ac.signal } : {}); if (!r.ok) return null;
+    const blob = await r.blob(); clearTimeout(tm);
     // with the service worker running, it keeps the clip itself
     if (c && !(navigator.serviceWorker && navigator.serviceWorker.controller)) c.put(src, new Response(blob, { headers: { 'Content-Type': blob.type || 'audio/mpeg' } })).catch(() => {});
     DL.have.add(abs(src)); packsUI();
@@ -725,18 +728,37 @@ function readDate(form, prefix) {
 // The app shell (code, pictures, words) is precached by the service worker; audio never is.
 // After the voice step the "urgent" pack downloads quietly, then children, women, everyone (book.packs),
 // two clips at a time, skipping clips already on the phone, so it resumes after a lost signal or a closed app.
-// On saveData or 2G only the urgent pack downloads by itself; Settings shows the rest with a Download button.
+// On saveData, 2G or mobile data only the urgent pack downloads by itself; Settings shows the rest with a Download button.
+// Inside the urgent pack the Emergency screen and CPR come first (urgentFirst).
 const PACKS = ['urgent', 'children', 'women', 'everyone'];
 const DL = { run: 0, active: false, slot: null, cur: null, again: false, waiting: false, full: false, retry: null, wait: 15000, have: new Set() };
 const abs = (u) => new URL(u, location.href).href;
-const slowNet = () => { const c = navigator.connection; return !!(c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || ''))); };
+// slow or paid-for internet (data saver, 2G, or mobile data): only the urgent pack downloads by itself; Wi-Fi gets everything
+const slowNet = () => { const c = navigator.connection; return !!(c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || '') || /^(cellular|wimax|bluetooth)$/.test(c.type || ''))); };
+// download order inside the urgent pack: the Emergency screen, CPR and its films first, then the other emergency pages,
+// then the other urgent pages and red boxes, then page titles, then the rest of the interface
+function urgentFirst(list) {
+  const b = S.book, cfg = b.config || {}, em = cfg.emergency || [];
+  const cpr = new Set(em.map((a) => a.cpr).filter(Boolean));
+  const emUi = new Set(['ui.emergency', 'ui.emergencyWho', 'ui.sendForCar', 'ui.near', 'ui.cprFirstAid'].concat(em.map((a) => 'ui.' + a.label)));
+  const emPages = new Set([].concat(...em.map((a) => a.topics || []), (b.sections || {}).emergency || [], (cfg.firstAid || {}).topics || []));
+  const rank = (id) => {
+    const tid = id.split('.')[0];
+    if (emUi.has(id) || cpr.has(tid) || /^anim\.cpr[-.]/.test(id)) return 0;
+    if (emPages.has(tid)) return 1;
+    if (id.startsWith('ui.')) return 4;
+    if (id === tid + '.title') return 3;
+    return 2;
+  };
+  return list.map((id, i) => [rank(id), i, id]).sort((x, y) => x[0] - y[0] || x[1] - y[1]).map((x) => x[2]); // stable on old WebViews too
+}
 function packList(slot) {
   const b = S.book, ids = (b.packs && b.packs.ids) || { everyone: b.order || Object.keys(b.narration) };
   const size = (sl, p) => (b.packs && b.packs.size && b.packs.size[sl] && b.packs.size[sl][p]) || [0, 0];
   const sib = slotsFor(slot)[1];
   return PACKS.map((p) => {
     const urls = []; let own = 0, other = 0;
-    for (const id of ids[p] || []) {
+    for (const id of p === 'urgent' ? urgentFirst(ids[p] || []) : ids[p] || []) {
       const a = clipSrc(id, slot), o = a ? null : clipSrc(id, sib);
       if (a) { urls.push(a); own++; } else if (o) { urls.push(o); other++; } // a clip missing in this voice comes from the other voice
     }
@@ -837,10 +859,13 @@ async function persistOnce(force) {
   store.set('persistAsked', true);
   try { if (await navigator.storage.persist()) store.set('persisted', true); } catch {}
 }
+// the voice chosen for this language: each language remembers its own; a language not chosen yet starts with the woman's voice
+const voiceFor = (lang) => store.get('voiceBy', {})[lang] || (lang === S.lang && S.voice) || 'f';
 // change language or voice: start the new voice's urgent pack, offer to delete the old voice's clips
 async function setVoice(lang, voice) {
   const old = S.lang && S.voice ? slotOf() : null;
   S.lang = lang; S.voice = voice === 'm' ? 'm' : 'f'; store.set('lang', S.lang); store.set('voice', S.voice);
+  store.set('voiceBy', Object.assign(store.get('voiceBy', {}), { [lang]: S.voice })); // each language keeps its own voice
   const now = slotOf();
   if (old === now) return;
   track('voice', { to: now }); store.set('dlAuto', true);
@@ -878,7 +903,7 @@ function screenSettings() {
   html += `<div class="panel">`;
   html += `<div class="srow">${ic('talk')}<div class="grow"><div class="t">${esc(T('language'))}</div></div><div class="seg">${['fa', 'ps', 'en'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div></div>`;
   html += `<div class="srow">${ic('clock')}<div class="grow"><div class="t">${esc(T('speed'))}</div></div><div class="seg"><button data-speed="1" aria-pressed="${S.speed === 1}">${esc(T('normal'))}</button><button data-speed="0.85" aria-pressed="${S.speed !== 1}">${esc(T('slower'))}</button></div></div>`;
-  html += `</div><div class="panel" id="voicepanel"><h2>${esc(T('voices'))}</h2>${voiceCards('data-voice')}<div id="packs">${packsHtml()}</div>`;
+  html += `</div><div class="panel" id="voicepanel"><h2>${esc(T('voices'))}</h2><p class="muted">${esc(T('voiceFor', { lang: S.book.langNames[S.lang] || S.lang }))}</p>${voiceCards('data-voice')}<div id="packs">${packsHtml()}</div>`;
   html += `<div class="srow">${ic('no')}<button class="grow" data-action="delvoices" style="text-align:start"><div class="t">${esc(T('deleteVoices'))}</div><div class="s">${esc(T('deleteVoicesSub'))}</div></button></div><p class="muted" id="storage"></p>`;
   html += `</div><div class="panel">`;
   html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
@@ -1257,12 +1282,12 @@ document.addEventListener('click', async (e) => {
   if (d.sample) { e.preventDefault(); const sl = slotOf(S.lang, d.sample); if (P.on && P.strict && P.slot === sl) stopAudio(); else play([sampleId(sl)], { slot: sl, strict: true }); return; }
   if (d.setlang) {
     stopAudio(); track('lang', { to: d.setlang });
-    if (S.voice) setVoice(d.setlang, S.voice); else { S.lang = d.setlang; store.set('lang', S.lang); }
+    if (S.voice) setVoice(d.setlang, voiceFor(d.setlang)); else { S.lang = d.setlang; store.set('lang', S.lang); }
     location.hash = '#/home'; render(); return;
   }
   if (d.setvoice) { stopAudio(); await setVoice(S.lang, d.setvoice); persistOnce(); location.hash = '#/home'; render(); return; }
   if (d.voice) { stopAudio(); await setVoice(S.lang, d.voice); render(); return; }
-  if (d.lang) { stopAudio(); await setVoice(d.lang, S.voice); render(); return; }
+  if (d.lang) { stopAudio(); await setVoice(d.lang, voiceFor(d.lang)); render(); return; }
   if (d.speed) { S.speed = +d.speed; store.set('speed', S.speed); render(); return; }
   if (d.kid) { S.kid = d.kid; saveKids(); render(); return; }
   if (d.dlpack) { if (!navigator.onLine) { toast(T('offlineNow')); return; } wantPack(slotOf(), d.dlpack); persistOnce(); t.disabled = true; t.textContent = T('downloading'); DL.full = false; startDownloads(); return; }
@@ -1346,9 +1371,16 @@ function goodBook(b) {
 }
 // addresses (stats, feedback, share, contentUrl) always come from the app itself, not from the downloaded book
 // book.audio is keyed by slot ("fa-f"); a book from before voices (keyed "fa") counts as the woman's voice
+// The Android app carries no narration (it stays a small file to pass from phone to phone): its clips come from the
+// website (config.appUrl) and are kept on the phone like on the website (packs, or the first time each one plays).
+const IN_APK = location.hostname === 'appassets.androidplatform.net';
 function normBook(b) {
   const a = b.audio && typeof b.audio === 'object' ? b.audio : {};
   for (const lg of ['fa', 'ps', 'en']) if (a[lg] && typeof a[lg] === 'object') { a[lg + '-f'] = { ...a[lg], ...(a[lg + '-f'] || {}) }; delete a[lg]; }
+  const site = (S.shipped && S.shipped.config.appUrl) || (b.config && b.config.appUrl) || '';
+  if (IN_APK && /^https:\/\//.test(site)) {
+    for (const sl of Object.keys(a)) for (const id of Object.keys(a[sl] || {})) if (/^audio\//.test(a[sl][id])) a[sl][id] = new URL(a[sl][id], site).href;
+  }
   b.audio = a; return b;
 }
 // the shipped book with the overlay laid over it; false (and the book unchanged) when the result would not work

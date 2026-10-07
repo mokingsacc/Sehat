@@ -4336,3 +4336,26 @@ For Mo to check (medical):
    The timer runs in real time, so it shows only the first seconds of the minute.
 5. Posters: the Emergency "Baby" card and the CPR age picker show s1's still picture: the whole rug, the mother, the
    ring on the feet and the tap lines. The topic page poster is s5, as in the demo.
+
+## AI narration in the app: four voices, only the chosen one downloads (7 Oct 2026)
+
+All 2,468 narration lines now have clips in four voices (Dari and Pashto, woman and man; MP3 16 kHz mono 24 kbit/s,
+about 65 MB per voice, 260 MB for all four on the website). Nothing about audio is precached: the phone downloads only
+the chosen language and voice. Inside the urgent pack the Emergency screen, the four CPR pages and the CPR films come
+first (about 3 MB), then the other emergency pages (about 12 MB), then the other red boxes, page titles and the
+interface (about 11 MB). On mobile data, 2G or data saver only the urgent pack downloads by itself; the other packs
+have a Download button in Settings (Wi-Fi gets every pack). A clip not on the phone yet plays from the internet when
+tapped and is kept. Offline and not downloaded: the other voice, then the phone's speech, then the usual "not recorded
+yet" note. Each language now remembers its own voice; a language not chosen yet starts with the woman's voice. The
+Android app carries no clips (still about 1.6 MB) and downloads the chosen voice from the website the same way.
+
+For Mo to check:
+1. Language (new Settings line above the voice buttons, `voiceFor`): Dari "صدا به زبان {lang}", Pashto "په {lang} ژبه
+   غږ" ("Voice in Dari" / "Voice in Pashto").
+2. Data: on mobile data a new phone downloads about 26 MB for the urgent pack by itself (the Emergency and CPR part,
+   about 3 MB, comes first). If that is too much for Samangan data plans, the urgent pack can download by itself only
+   on Wi-Fi, or only its Emergency and CPR part.
+3. The Android file has no voices, so a phone that gets the app by Bluetooth and never goes online hears no narration
+   (only the phone's speech, which usually has no Dari or Pashto). Bundling the Emergency and CPR clips in the woman's
+   voice for both languages would add about 6 MB to the APK.
+4. The narration is computer speech (Gemini): native speakers should listen to the emergency and CPR clips first.

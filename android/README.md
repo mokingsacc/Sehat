@@ -11,7 +11,11 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 ## How it works
 - The web app is copied into the APK (`app/src/main/assets/www/`) by `sync-web.sh`, which Gradle runs before every
   build. It copies `index.html`, `manifest.webmanifest`, `sw.js`, `css/`, `js/`, `fonts/`, `img/` (not `img/_preview`),
-  `content/book.json`, `content/version.json` and `audio/` (when it has clips). Run `python3 tools/build.py` first, as usual.
+  `content/book.json` and `content/version.json`. Run `python3 tools/build.py` first, as usual.
+- **No narration in the APK** (it stays a small file, about 1.6 MB, to pass from phone to phone). The app downloads the
+  chosen voice from the website (`appUrl` in `config.json`), the urgent pack first (Emergency and CPR first of all), and
+  keeps each clip on the phone; a clip that is not on the phone yet plays from the internet the first time and is kept.
+  Offline and not downloaded: the speaker falls back to the other voice, then to the phone's own speech, then a short note.
 - The WebView opens `https://appassets.androidplatform.net/assets/index.html`, served from the APK by
   `androidx.webkit.WebViewAssetLoader`. It is a secure https origin, so localStorage, IndexedDB, Cache Storage,
   `fetch()` of relative files, the microphone and location all work as on a website.

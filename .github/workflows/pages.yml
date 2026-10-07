@@ -21,7 +21,8 @@ jobs:
           cp -r index.html manifest.webmanifest sw.js css js fonts img content site/
           [ -d anim ] && cp -r anim site/ && rm -f site/anim/demo.html || true   # explainer animations (js/anim.js plays them), with anim/cine/
           find site -name '*.cjs' -delete   # local screenshot helpers, not part of the app
-          [ -d audio ] && cp -r audio site/ || true
+          [ -d audio ] && cp -r audio site/ || true   # narration clips (about 65 MB per voice; phones download only their own voice)
+          rm -f site/audio/*.json site/audio/*/*.json   # the voice tool's notes (tts-manifest.json, tts-usage.json), not part of the app
           rm -rf site/img/_preview site/content/src site/content/scripts site/js/sw.template.js
           touch site/.nojekyll
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0

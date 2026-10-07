@@ -21,8 +21,9 @@ self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
-  // narration uploaded in the dashboard editor lives on the worker: <worker>/a/<lang>-<voice>/<id>?v=<hash> (older: /a/<lang>/<id>)
-  const remoteClip = url.origin !== self.location.origin && /^\/a\/(fa|ps|en)(-[fm])?\/[^/]+$/.test(url.pathname);
+  // narration uploaded in the dashboard editor lives on the worker: <worker>/a/<lang>-<voice>/<id>?v=<hash> (older: /a/<lang>/<id>);
+  // the Android app gets the book's own clips from the website: <appUrl>/audio/<lang>-<voice>/<id>.mp3?v=<hash>
+  const remoteClip = url.origin !== self.location.origin && (/^\/a\/(fa|ps|en)(-[fm])?\/[^/]+$/.test(url.pathname) || /\/audio\/(fa|ps|en)-[fm]\/[^/]+$/.test(url.pathname));
   if (url.origin !== self.location.origin && !remoteClip) return;
   const path = url.pathname;
 
@@ -36,7 +37,8 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(caches.open(AUDIO).then(async (c) => {
       const hit = await c.match(req.url);
       if (hit) return hit;
-      const res = await fetch(req);
+      // offline and not on the phone: a plain "not here" answer (the app then uses the other voice or the phone's speech)
+      const res = await fetch(req).catch(() => new Response('', { status: 504, statusText: 'offline' }));
       if (res.ok && res.status === 200) e.waitUntil(c.put(req.url, res.clone()).catch(() => {}));
       return res;
     }));
