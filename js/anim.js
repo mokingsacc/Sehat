@@ -51,12 +51,13 @@ export const animGroup = (name) => GROUPS[String(name).replace(/^anim\./, '')] |
 // "Cine" versions (the js/cine kit, docs/CINE_KIT.md): anim/cine/<name>.js, a module with cine: true, scenes and
 // mount(stage, {lang, still}) -> {show(i), destroy()} and poster(i). Used instead of anim/<name>.js when it loads;
 // if it is missing or fails, the SVG version plays. opts.cine === false forces the SVG version.
-export const CINE = ['cpr-newborn', 'cpr-baby', 'cpr-child', 'cpr-adult'];
+// Mo rejected the cine CPR films on 7 Oct 2026 (anim/cine is not shipped), so no name is listed here.
+export const CINE = [];
 
 // Picture-step versions (js/steps.js, docs/STEPS_PLAYER.md): anim/steps/<name>.json with layered pictures in
 // img/steps/<name>/, played before the cine and SVG versions. A name goes in this list only when Mo has approved
 // its pictures; useSteps(name) adds one at run time (previews). opts.steps === false skips them.
-// cpr-baby: approved by Mo on 7 Oct 2026 (demo version); the other ages keep their cine / SVG versions.
+// cpr-baby: approved by Mo on 7 Oct 2026 (demo version); the other ages keep their SVG versions.
 export const STEPS = ['cpr-baby'];
 export function useSteps(...names) { names.forEach((n) => { if (STEPS.indexOf(n) < 0) STEPS.push(n); }); }
 
