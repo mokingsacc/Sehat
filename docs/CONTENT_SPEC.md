@@ -170,6 +170,12 @@ into `book.json` as `search`, keeping only keys that open something, and `tools/
   danger) and prints top-1 / top-3. Run it after changing phrases; add a query for every miss you fix.
 - Later, a downloaded meaning model can be plugged in with `addRanker({ weight, rank(query, lang) → [{ id, score }] })`;
   `rankAsync()` blends it in, and danger results from the word list always stay first.
+- Where words point (2026-10-07): symptoms and danger words go to Health pages only (Home pages carry no medical
+  advice), e.g. carbon monoxide to `fumes-poisoning`, not `winter-home`. "What does my reading mean" words go to the
+  Health reading pages (`reading-bp`, `reading-sugar`, `reading-spo2`, `reading-temp`, `reading-muac`); typed numbers
+  open the reading checker first and that reading page second. Kit pages keep only buying and using words. Adult pages
+  (`diarrhoea-adult`, `pneumonia-adult`) need adult words in each phrase ("کلان", "پدرم", "adult"), so a child's
+  symptoms still open the children's page.
 
 ## Addendum: content merge 2 (2026-10-07)
 - "clinic": what the clinic or hospital actually does for this problem. `{"id", "type": "clinic", "icon" (optional; default "hospital" when the English title starts "At the hospital", else "clinic"), "title" (starts "At the clinic: ..." or "At the hospital: ...", at most 7 words), "text" (at most 32 words)}`. Shown with a green building icon and no number; read aloud like a step (title, then text). Not allowed on Home tab pages.

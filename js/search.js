@@ -472,8 +472,13 @@ export function createSearch(book, opts = {}) {
     if (hints.length) {
       const best = Math.max(2, ...res.map((x) => x.score));
       for (const id of hints) {
-        const r = res.find((x) => x.id === id);
-        if (r) r.score = best + 1; else res.push({ id, target: null, route: routeOf(id), score: best + 1, danger: false });
+        // the reading checker first, then the page that explains the numbers ("reading-bp"), when the book has it
+        const page = 'reading-' + id.split('/')[2];
+        for (const [k, sc] of [[id, best + 1], [page, best + 0.5]]) {
+          if (k === page && !topics[page]) continue;
+          const r = res.find((x) => x.id === k);
+          if (r) r.score = Math.max(r.score, sc); else res.push({ id: k, target: null, route: routeOf(k), score: sc, danger: false });
+        }
       }
     }
     return order(res, limit);

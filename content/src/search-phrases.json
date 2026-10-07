@@ -132,10 +132,10 @@
       "en": ["bee sting", "wasp sting", "stung by a bee"]
     },
     "asthma-attack": {
-      "fa": ["استما", "حمله استما", "نفس تنگی", "نفس تنگی شدید", "نفسش تنگ است", "خس خس سینه", "سینه‌اش خس خس میکند", "دمه", "پف استما", "اسپری استما", "پمپ نفس", "نفس گرفته نمی‌تواند"],
-      "ps": ["ساه لنډي", "د ساه لنډۍ حمله", "استما", "سینه یې خړهار کوي", "ساه یې لنډه ده", "ساه نشي اخیستلی", "پمپ"],
-      "lat": ["astma", "asthma", "dama", "nafas tangi", "nafas tang", "nafasesh tang", "khes khes", "khis khis", "saa landi", "sah landi", "pump"],
-      "en": ["asthma", "asthma attack", "wheeze", "wheezing", "inhaler", "puffer", "blue inhaler", "short of breath", "shortness of breath", "breathless", "tight chest", "cannot breathe", "can't breathe", "struggling to breathe", "hard to breathe"],
+      "fa": ["حمله استما", "نفس تنگی", "نفس تنگی شدید", "نفسش تنگ است", "خس خس سینه", "سینه‌اش خس خس میکند", "پمپ نفس", "نفس گرفته نمی‌تواند"],
+      "ps": ["ساه لنډي", "د ساه لنډۍ حمله", "سینه یې خړهار کوي", "ساه یې لنډه ده", "ساه نشي اخیستلی", "پمپ"],
+      "lat": ["astma", "dama", "nafas tangi", "nafas tang", "nafasesh tang", "khes khes", "khis khis", "saa landi", "sah landi", "pump"],
+      "en": ["asthma attack", "wheeze", "wheezing", "puffer", "short of breath", "shortness of breath", "breathless", "tight chest", "cannot breathe", "can't breathe", "struggling to breathe", "hard to breathe"],
       "danger": ["حمله استما", "نفس تنگی شدید", "نفس گرفته نمی‌تواند", "ساه نشي اخیستلی", "asthma attack", "cannot breathe", "can't breathe", "struggling to breathe"]
     },
     "head-injury": {
@@ -212,10 +212,10 @@
       "en": ["first aid", "what to do first", "accident", "injury", "injured", "wound", "car accident", "road accident"]
     },
     "first-aid.bite": {
-      "fa": ["سگ گزید", "گزیدن سگ", "سگ دیوانه", "هاری", "گربه گزید", "حیوان گزید", "شادی گزید"],
-      "ps": ["سپي وچیچه", "د سپي چیچل", "لېونی سپی", "پیشو وچیچه", "څاروي وچیچه"],
+      "fa": ["گربه گزید", "حیوان گزید", "شادی گزید"],
+      "ps": ["لېونی سپی", "پیشو وچیچه", "څاروي وچیچه"],
       "lat": ["sag gazid", "sag", "hari", "sag-e dewana", "spi wachicha", "spay", "lewanai spi"],
-      "en": ["dog bite", "bitten by a dog", "dog bit", "rabies", "mad dog", "animal bite", "cat bite", "monkey bite"]
+      "en": ["animal bite", "cat bite", "monkey bite"]
     },
     "first-aid.head": {
       "fa": ["ضربه خفیف به سر"],
@@ -238,10 +238,10 @@
       "danger": ["خودکشی", "ځان وژنه", "suicide", "kill myself", "khodkushi", "kill himself", "kill herself", "want to die", "wants to die", "میخواهم بمیرم", "نمی‌خواهم زنده باشم", "نه غواړم ژوندی اوسم", "?نمیخوام زنده باشم"]
     },
     "red-flags.soon": {
-      "fa": ["غده", "غده بزرگ میشود", "لاغر شدن بی دلیل", "خون در ادرار", "خون در مدفوع", "چشم زرد", "یرقان", "زردی", "قورت دادن مشکل"],
-      "ps": ["غوټه", "بې دلیله ډنګرېدل", "په متیازو کې وینه", "ژېړې سترګې", "ژېړی"],
+      "fa": ["غده", "غده بزرگ میشود", "لاغر شدن بی دلیل", "خون در ادرار", "خون در مدفوع", "یرقان", "قورت دادن مشکل"],
+      "ps": ["غوټه", "بې دلیله ډنګرېدل", "په متیازو کې وینه"],
       "lat": ["ghudda", "yaraqan", "zardi", "chashm zard", "zhera"],
-      "en": ["lump", "growing lump", "weight loss", "losing weight", "blood in urine", "blood in stool", "yellow eyes", "jaundice adult", "hard to swallow", "trouble swallowing"]
+      "en": ["lump", "growing lump", "weight loss", "losing weight", "blood in urine", "blood in stool", "hard to swallow", "trouble swallowing"]
     },
     "danger-child": {
       "urgent": true,
@@ -380,17 +380,15 @@
       "danger": ["تشنج با تب", "تب و تشنج", "تبه او اختلاج", "fever fit", "febrile seizure", "febrile convulsion", "fit with fever", "seizure with fever", "tab tashannuj"]
     },
     "seizures": {
-      "fa": ["تشنج", "تشنج کرد", "مرگی", "صرع", "حمله مرگی", "کف از دهن", "کف دهان", "دندان‌هایش قفل شد", "بدنش شخ شد و لرزید", "لرزیدن و تکان خوردن", "به زمین افتاد و لرزید", "دوای مرگی", "مریض مرگی", "غش و لرزه", "لرزه میکند و بیهوش شد", "لرزید و بیهوش شد", "چشم‌هایش بالا رفت", "چشمانش چپه شد"],
+      "fa": ["تشنج", "تشنج کرد", "حمله مرگی", "کف از دهن", "کف دهان", "دندان‌هایش قفل شد", "بدنش شخ شد و لرزید", "لرزیدن و تکان خوردن", "به زمین افتاد و لرزید", "غش و لرزه", "لرزه میکند و بیهوش شد", "لرزید و بیهوش شد", "چشم‌هایش بالا رفت", "چشمانش چپه شد"],
       "ps": ["اختلاج", "اختلاج کوي", "مرګي", "مرګي لري", "په ځمکه ولوېد او لړزېده", "خوله یې ځګ وکړ", "بدن یې شخ شو", "د مرګي دوا", "رېږدي او بې هوښه شو", "سترګې یې واوښتې", "ټکان وهي", "ټکانونه"],
       "lat": ["tashannuj", "tashanoj", "tashanuj", "tashnuj", "margi", "mergi", "sar", "ikhtilaj", "akhtilaj", "kaf dahan", "hamla margi"],
-      "en": ["fit", "fits", "seizure", "seizures", "convulsion", "convulsions", "epilepsy", "epileptic", "shaking and jerking", "foaming at mouth", "stiff and shaking", "having a fit", "shaking and not answering", "shaking and unconscious", "eyes rolled back", "eyes rolled up"],
+      "en": ["fit", "fits", "seizure", "seizures", "convulsion", "convulsions", "shaking and jerking", "foaming at mouth", "stiff and shaking", "having a fit", "shaking and not answering", "shaking and unconscious", "eyes rolled back", "eyes rolled up"],
       "danger": ["تشنج", "تشنج کرد", "حمله مرگی", "اختلاج", "مرګي", "fit", "fits", "seizure", "seizures", "convulsion", "convulsions", "having a fit", "tashannuj", "tashanuj", "ikhtilaj", "margi"]
     },
     "seizures.epilepsy": {
-      "fa": ["دوای مرگی", "دوای صرع", "دوای مرگی تمام شد"],
       "ps": ["د مرګي دوا"],
-      "lat": ["dawaye margi"],
-      "en": ["epilepsy medicine", "epilepsy tablets", "ran out of epilepsy medicine"]
+      "lat": ["dawaye margi"]
     },
     "measles": {
       "fa": ["سرخکان", "سرخک", "دانه", "دانه زده", "دانه‌های سرخ", "جانش دانه زده", "تب و دانه", "دانه و تب", "سرخکان طفل", "چشم‌هایش سرخ و دانه"],
@@ -399,16 +397,16 @@
       "en": ["measles", "rash", "red rash", "spots", "red spots", "rash all over", "fever and rash", "red eyes and rash", "child with rash"]
     },
     "growth": {
-      "fa": ["رشد", "رشد طفل", "وزن طفل", "وزن نمی‌گیرد", "طفلم لاغر است", "لاغر", "طفل لاغر", "کم وزن", "سوء تغذی", "سوءتغذیه", "طفلم گپ نمیزند", "راه نمیرود", "دیر راه رفتن", "دیر گپ زدن", "نمی‌شنود", "خوب نمی‌بیند", "پاهایش پندیده", "رشد نمیکند"],
-      "ps": ["وده", "د ماشوم وده", "وزن نه اخلي", "ډنګر", "ډنګر ماشوم", "خوارځواکي", "خبرې نه کوي", "نه ګرځي", "نه اوري", "پښې یې پړسیدلې", "وده نه کوي"],
+      "fa": ["رشد", "رشد طفل", "وزن طفل", "وزن نمی‌گیرد", "کم وزن", "طفلم گپ نمیزند", "راه نمیرود", "دیر راه رفتن", "دیر گپ زدن", "نمی‌شنود", "خوب نمی‌بیند", "پاهایش پندیده", "رشد نمیکند"],
+      "ps": ["وده", "د ماشوم وده", "وزن نه اخلي", "خوارځواکي", "خبرې نه کوي", "نه ګرځي", "نه اوري", "پښې یې پړسیدلې", "وده نه کوي"],
       "lat": ["rushd", "roshd", "wazn", "laghar", "lagar", "sue taghzia", "sutaghzia", "dangar", "khwarzwaki", "wada"],
-      "en": ["growth", "weight", "not gaining weight", "child losing weight", "thin child", "too thin", "underweight", "malnutrition", "malnourished", "swollen feet", "milestones", "late walking", "not talking", "not walking yet", "development", "delayed development", "not growing"]
+      "en": ["growth", "weight", "not gaining weight", "child losing weight", "underweight", "malnourished", "swollen feet", "milestones", "late walking", "not talking", "not walking yet", "development", "delayed development", "not growing"]
     },
     "growth.vitamin-a": {
-      "fa": ["ویتامین ای", "ویتامین آ", "دوای کرم", "کرم شکم طفل", "دوای کرمک"],
-      "ps": ["ویټامین اې", "د چینجیو دوا", "چینجي"],
+      "fa": ["ویتامین ای", "ویتامین آ"],
+      "ps": ["ویټامین اې", "د چینجیو دوا"],
       "lat": ["vitamin a", "dawaye kerm", "kerm"],
-      "en": ["vitamin a", "worm medicine", "deworming", "worms child"]
+      "en": ["vitamin a"]
     },
     "growth.later": {
       "fa": ["کی راه میرود", "کی گپ میزند", "اولین کلمه"],
@@ -423,10 +421,10 @@
       "en": ["muac", "arm tape", "arm band", "upper arm tape", "mid upper arm circumference", "how to use arm tape"]
     },
     "tool/reading/muac": {
-      "fa": ["فیته سرخ نشان داد", "فیته زرد نشان داد", "رنگ فیته چه معنا دارد", "فیته سبز"],
+      "fa": ["فیته سرخ نشان داد", "فیته زرد نشان داد", "فیته سبز"],
       "ps": ["فیته سره ښکاري", "فیته ژېړه ښکاري"],
       "lat": ["fita surkh", "fita zard"],
-      "en": ["tape shows red", "tape shows yellow", "muac red", "muac yellow", "arm tape colour meaning"]
+      "en": ["tape shows red", "tape shows yellow", "muac red", "muac yellow"]
     },
     "kit-thermometer": {
       "fa": ["ترمامتر", "ترمومتر", "تب سنج", "چطور تب را اندازه کنم", "اندازه کردن تب", "ترمامتر دیجیتل", "تب را بگیرم"],
@@ -435,10 +433,10 @@
       "en": ["thermometer", "digital thermometer", "take temperature", "measure temperature", "how to measure fever", "how to use a thermometer", "armpit temperature"]
     },
     "tool/reading/temp": {
-      "fa": ["ترمامتر چه نشان میدهد", "عدد ترمامتر", "عدد تب چه معنا دارد"],
+      "fa": ["ترمامتر چه نشان میدهد", "عدد ترمامتر"],
       "ps": ["ترمامیټر څه ښیي"],
       "lat": [],
-      "en": ["temperature reading", "what does the temperature mean", "thermometer says", "check a temperature", "temperature number"]
+      "en": ["temperature reading", "thermometer says", "check a temperature", "temperature number"]
     },
     "kit-bp": {
       "fa": ["ماشین فشار", "فشار سنج", "آله فشار", "فشار را چطور بگیرم", "اندازه فشار", "فشار گرفتن در خانه"],
@@ -447,10 +445,10 @@
       "en": ["blood pressure machine", "bp machine", "bp monitor", "measure blood pressure", "how to check bp", "blood pressure cuff"]
     },
     "tool/reading/bp": {
-      "fa": ["عدد فشار", "فشارم چند است", "فشار چه معنا دارد", "عدد فشار چه معنا دارد"],
+      "fa": ["عدد فشار", "فشارم چند است"],
       "ps": ["د فشار شمېره"],
       "lat": [],
-      "en": ["blood pressure reading", "what does my blood pressure mean", "check blood pressure number", "bp number", "bp reading meaning"]
+      "en": ["blood pressure reading", "check blood pressure number", "bp number"]
     },
     "kit-glucometer": {
       "fa": ["ماشین شکر", "ماشین قند", "گلوکومتر", "قند سنج", "شکر را چطور اندازه کنم", "سوزن شکر"],
@@ -459,20 +457,19 @@
       "en": ["glucometer", "sugar meter", "glucose meter", "blood sugar machine", "test strips", "how to test sugar", "finger prick"]
     },
     "tool/reading/sugar": {
-      "fa": ["عدد شکر", "عدد شکر چه معنا دارد", "شکرم خوب است یا نه"],
+      "fa": ["عدد شکر"],
       "ps": ["د شکرې شمېره"],
       "lat": [],
-      "en": ["blood sugar reading", "what does my sugar number mean", "mmol", "mg/dl", "sugar number", "sugar reading meaning"]
+      "en": ["blood sugar reading", "mmol", "mg/dl", "sugar number"]
     },
     "kit-oximeter": {
       "fa": ["اکسیجن سنج", "گیره اکسیجن", "اکسیمتر", "پالس اکسیمتر"],
       "ps": ["د اکسیجن چپړکی", "اکسیمیټر"],
       "lat": ["oximeter", "oksimetr", "oxygen"],
-      "en": ["oximeter", "pulse oximeter", "oxygen meter", "oxygen clip", "finger clip", "oxygen level"]
+      "en": ["oximeter", "pulse oximeter", "oxygen meter", "oxygen clip", "finger clip"]
     },
     "tool/reading/spo2": {
-      "fa": ["اکسیجن پایین", "عدد اکسیجن", "عدد اکسیجن چه معنا دارد"],
-      "ps": ["اکسیجن ټیټ دی"],
+      "fa": ["اکسیجن پایین", "عدد اکسیجن"],
       "lat": [],
       "en": ["oxygen reading", "saturation", "oxygen low", "oxygen number"]
     },
@@ -538,10 +535,10 @@
     },
     "pregnancy-danger": {
       "urgent": true,
-      "fa": ["علایم خطر حاملگی", "خونریزی در حاملگی", "خون آمدن در حاملگی", "حامله است خون میاید", "?خونریزی از پایین", "تشنج در حاملگی", "سردرد شدید حامله", "حامله سردرد و تاری چشم", "چشمم تار میبیند", "طفل در شکم حرکت نمیکند", "طفل تکان نمیخورد", "طفل در شکم کم حرکت میکند", "آب آمد", "آب کیسه ریخت", "ورم دست و پا در حاملگی", "رویش پندیده حامله", "درد شدید شکم حاملگی", "تب در حاملگی", "سوزش ادرار", "سوزش ادرار حامله", "سقط", "بچه انداخت", "حامله طفل حرکت نمیکند", "حامله هستم خونریزی دارم", "ماهه حامله طفل تکان نمیخورد"],
-      "ps": ["د امیندوارۍ د خطر نښې", "په امیندوارۍ کې وینه", "امیندواره ده وینه ورځي", "په امیندوارۍ کې اختلاج", "امیندواره سخت سر درد", "سترګې یې تتې ګوري", "ماشوم په نس کې نه خوځیږي", "ماشوم لږ خوځیږي", "اوبه یې ماتې شوې", "د لاسونو او پښو پړسوب", "امیندواره سخت نس درد", "امیندواره تبه لري", "متیازې سوځي", "سقط"],
+      "fa": ["علایم خطر حاملگی", "خونریزی در حاملگی", "خون آمدن در حاملگی", "حامله است خون میاید", "?خونریزی از پایین", "تشنج در حاملگی", "سردرد شدید حامله", "حامله سردرد و تاری چشم", "چشمم تار میبیند", "طفل در شکم حرکت نمیکند", "طفل تکان نمیخورد", "طفل در شکم کم حرکت میکند", "آب آمد", "آب کیسه ریخت", "ورم دست و پا در حاملگی", "رویش پندیده حامله", "درد شدید شکم حاملگی", "تب در حاملگی", "سوزش ادرار حامله", "سقط", "بچه انداخت", "حامله طفل حرکت نمیکند", "حامله هستم خونریزی دارم", "ماهه حامله طفل تکان نمیخورد"],
+      "ps": ["د امیندوارۍ د خطر نښې", "په امیندوارۍ کې وینه", "امیندواره ده وینه ورځي", "په امیندوارۍ کې اختلاج", "امیندواره سخت سر درد", "سترګې یې تتې ګوري", "ماشوم په نس کې نه خوځیږي", "ماشوم لږ خوځیږي", "اوبه یې ماتې شوې", "د لاسونو او پښو پړسوب", "امیندواره سخت نس درد", "امیندواره تبه لري", "سقط"],
       "lat": ["hamila khun", "hamela khun", "khunrezi hamelagi", "tifl harakat namekona", "ab amad", "saqt", "amindwara wina", "umindwara wina", "sozish idrar", "sozesh adrar"],
-      "en": ["bleeding in pregnancy", "pregnant bleeding", "pregnant and bleeding", "bleeding while pregnant", "vaginal bleeding pregnant", "spotting", "miscarriage", "fits in pregnancy", "eclampsia", "pregnant headache", "blurred vision pregnant", "baby not moving", "baby moving less", "reduced baby movements", "waters broke", "water broke", "swollen face pregnant", "swelling in pregnancy", "pregnant severe belly pain", "fever in pregnancy", "burning urine", "burning when passing urine", "pregnancy danger signs"],
+      "en": ["bleeding in pregnancy", "pregnant bleeding", "pregnant and bleeding", "bleeding while pregnant", "vaginal bleeding pregnant", "spotting", "miscarriage", "fits in pregnancy", "eclampsia", "pregnant headache", "blurred vision pregnant", "baby not moving", "baby moving less", "reduced baby movements", "waters broke", "water broke", "swollen face pregnant", "swelling in pregnancy", "pregnant severe belly pain", "fever in pregnancy", "pregnancy danger signs"],
       "danger": ["خونریزی در حاملگی", "حامله است خون میاید", "تشنج در حاملگی", "طفل در شکم حرکت نمیکند", "په امیندوارۍ کې وینه", "ماشوم په نس کې نه خوځیږي", "pregnant bleeding", "bleeding in pregnancy", "pregnant and bleeding", "bleeding while pregnant", "baby not moving", "fits in pregnancy", "eclampsia", "miscarriage", "hamila khun"]
     },
     "pregnancy-care": {
@@ -606,10 +603,7 @@
       "en": ["tea with meals", "tea and iron"]
     },
     "anaemia.worms": {
-      "fa": ["کرم", "کرم شکم", "کرمک", "دوای کرم"],
-      "ps": ["چینجي", "د نس چینجي"],
-      "lat": ["kerm", "kirm"],
-      "en": ["worms", "intestinal worms", "worm medicine"]
+      "lat": ["kerm", "kirm"]
     },
     "anaemia.black-stool": {
       "fa": ["مدفوع سیاه از آهن", "آهن مدفوع را سیاه میکند"],
@@ -654,13 +648,17 @@
       "en": ["hygiene", "hand washing", "wash hands", "washing hands", "soap", "clean water", "boil water", "drinking water", "safe water", "chlorine", "latrine", "toilet", "flies", "food safety", "clean food"]
     },
     "winter-home": {
-      "fa": ["دود", "دود بخاری", "بخاری", "صندلی", "ذغال", "دود صندلی", "زغال", "گاز ذغال", "گاز گرفتگی", "گاز زد", "گاز گرفت", "بوی گاز", "منقل", "سردرد در اتاق گرم", "سرچرخی در اتاق بخاری", "دودکش", "زمستان", "خانه گرم", "سر درد در اتاق بخاری", "همه سردرد داریم", "همه خانواده سردرد", "سرچرخی و قی در اتاق گرم"],
-      "ps": ["لوګی", "بخارۍ", "صندلي", "سکاره", "ګاز", "د سکرو ګاز", "ګاز ونیو", "ژمی", "ګرم کور", "د بخارۍ نل", "ټول کور سر درد لري", "په ګرمه کوټه کې سر درد"],
-      "lat": ["dud", "dood", "bukhari", "sandali", "zoghal", "zughal", "gaz", "gaz gereft", "gaz zad", "lugi", "sakara", "manqal"],
+      "fa": ["دود", "دود بخاری", "بخاری", "صندلی", "ذغال", "دود صندلی", "زغال", "منقل", "دودکش", "زمستان", "خانه گرم"],
+      "ps": ["لوګی", "بخارۍ", "صندلي", "سکاره", "ژمی", "ګرم کور", "د بخارۍ نل"],
+      "lat": ["dud", "dood", "bukhari", "sandali", "zoghal", "zughal", "gaz", "lugi", "sakara", "manqal"],
       "en": ["smoke", "stove", "stove fumes", "sandali", "charcoal", "coal fumes", "carbon monoxide", "gas heater", "fumes", "gassed", "heater", "chimney", "winter", "warm home", "headache in heated room", "smoky room", "whole family has headache", "everyone has a headache in the room"]
     },
     "fumes-poisoning": {
-      "danger": ["گاز گرفتگی", "گاز گرفت", "گاز زد", "د سکرو ګاز", "ګاز ونیو", "carbon monoxide", "gassed", "coal fumes", "gaz gereft", "بخاری دود کرده", "اتاق پر از دود"]
+      "fa": ["مسمومیت با دود", "مسمومیت گاز", "گاز ذغال", "دود بخاری مریض کرد", "سردرد در اتاق گرم", "سرچرخی در اتاق بخاری", "سر درد در اتاق بخاری", "همه سردرد داریم", "همه خانواده سردرد", "سرچرخی و قی در اتاق گرم", "کنار بخاری خواب آلود", "دود جنراتور مریض کرد"],
+      "ps": ["د لوګي زهري کېدل", "د ګاز زهري کېدل", "ټول کور سر درد لري", "په ګرمه کوټه کې سر درد", "د بخارۍ لوګي ناروغه کړ"],
+      "lat": ["gaz gereft", "gaz zad", "gaz gerefta", "masmumiat gaz"],
+      "en": ["carbon monoxide poisoning", "co poisoning", "fumes poisoning", "headache near the heater", "everyone has a headache by the fire", "sleepy by the stove"],
+      "danger": ["گاز گرفتگی", "گاز گرفت", "گاز زد", "د سکرو ګاز", "ګاز ونیو", "carbon monoxide", "gassed", "coal fumes", "gaz gereft", "بخاری دود کرده", "اتاق پر از دود", "همه خانواده سردرد", "ټول کور سر درد لري"]
     },
     "animal-illness": {
       "fa": ["تب کریمه کانگو", "کانگو", "تب کانگو", "تب مالت", "مالت", "بروسلوز", "سیاه زخم", "کنه", "کنه گزید", "شیر خام", "گوسفند", "گاو", "بز", "ذبح", "قربانی", "حیوان مریض", "گوشت حیوان مریض", "تب و خونریزی", "تب بعد از قربانی"],
@@ -676,7 +674,7 @@
       "en": ["leishmaniasis", "leishmania", "salak", "sandfly", "sand fly", "sore that won't heal", "sore not healing", "skin sore", "ulcer on face", "oriental sore"]
     },
     "child-safety": {
-      "fa": ["حفاظت طفل", "طفل را از حادثه حفاظت", "چاه را بپوشانید", "دوا را دور از طفل", "ماین", "مهمات", "انفجار", "جاده", "موتر طفل را زد", "بام بدون دیوار"],
+      "fa": ["حفاظت طفل", "طفل را از حادثه حفاظت", "چاه را بپوشانید", "ماین", "مهمات", "انفجار", "جاده", "موتر طفل را زد", "بام بدون دیوار"],
       "ps": ["د ماشوم ساتنه", "ماشومان له پېښو وساتئ", "ماین", "چاودنه", "سړک"],
       "lat": ["main", "mahimmat", "infijar", "hefazat tefl"],
       "en": ["child safety", "prevent injury", "childproof", "landmine", "mine", "explosive", "unexploded", "road safety", "keep children safe", "accident prevention"]
@@ -686,6 +684,270 @@
       "ps": ["سېلاب", "زلزله", "کور ونړېد", "دېوال ولوېد", "لاندې پاتې شو"],
       "lat": ["sailab", "selab", "zelzela", "zalzala", "zilzila"],
       "en": ["flood", "floods", "earthquake", "quake", "house collapsed", "trapped under rubble", "disaster", "landslide"]
+    },
+    "scabies": {
+      "fa": ["گری", "خارش", "خارش پوست", "خارش شب", "جانم خارش میکند", "بدنم میخارد", "تمام فامیل خارش دارند", "دانه های خارش دار", "خارش بین انگشتان", "?کچلی خارش"],
+      "ps": ["ګرګین", "خارښت", "بدن مې خاریږي", "د شپې خارښت", "ټوله کورنۍ خارښت لري", "د ګوتو ترمنځ خارښت"],
+      "lat": ["kharish", "garri", "gari", "khoresh", "kharesh", "garagin", "kharkhat"],
+      "en": ["scabies", "itching", "itchy skin", "itch at night", "whole family itching", "itchy rash between fingers"]
+    },
+    "malaria": {
+      "fa": ["ملاریا", "تب لرزه", "تب نوبتی", "پشه گزید تب", "?تب لرز"],
+      "ps": ["ملاریا", "تبه او لړزه", "لړزانده تبه", "د ملاریا معاینه", "د ملاریا ټیسټ"],
+      "lat": ["malaria", "malarya", "tab o larz", "tab larza", "taba aw larza"],
+      "en": ["malaria", "fever and shivering", "fever with chills", "shaking fever", "malaria test"]
+    },
+    "typhoid": {
+      "fa": ["محرقه", "تب محرقه", "تیفویید", "تیفوئید", "تب چند روزه", "تب دوامدار", "تب از آب ناپاک"],
+      "ps": ["محرقه", "ټایفایډ", "ټایفوېډ", "څو ورځې تبه", "اوږده تبه"],
+      "lat": ["mohreqa", "muhriqa", "mahraqa", "tifoid", "taifoid", "typhoid"],
+      "en": ["typhoid", "typhoid fever", "enteric fever", "fever for many days", "fever for a week"]
+    },
+    "dengue": {
+      "fa": ["دنگی", "تب دنگی", "دنگو", "تب استخوان شکن"],
+      "ps": ["ډینګي", "ډینګي تبه"],
+      "lat": ["dengue", "dengi", "dangi"],
+      "en": ["dengue", "dengue fever", "break bone fever"]
+    },
+    "dental": {
+      "fa": ["دندان", "دندان درد", "دندانم درد میکند", "درد دندان", "کرم دندان", "دندان خراب", "دندان پوسیده", "روی پندیده از دندان", "بیره پندیده", "مسواک", "دندان طفل", "نسوار"],
+      "ps": ["غاښ", "د غاښ درد", "غاښ مې خوږیږي", "غاښ درد", "خراب غاښ", "د غاښ چینجی", "مسواک", "نسوار"],
+      "lat": ["dandan dard", "dandan", "ghash dard", "ghakh dard", "ghas", "dandanam dard"],
+      "en": ["toothache", "tooth ache", "tooth pain", "teeth", "bad tooth", "rotten tooth", "swollen gum", "brush teeth", "dentist"]
+    },
+    "diarrhoea-adult": {
+      "fa": ["اسهال بزرگسال", "اسهال کلان", "اسهال کلان ها", "اسهال پدرم", "اسهال مادرم", "اسهال شوهرم", "اسهال در بزرگسالان"],
+      "ps": ["په لویانو کې نس ناستی", "د لویانو نس ناستی", "پلار مې نس ناستی لري"],
+      "lat": ["eshal daram", "ishal daram", "nas nasti laram"],
+      "en": ["adult diarrhoea", "diarrhea in adults", "diarrhoea in adults", "my husband has diarrhoea", "runny stomach adult"]
+    },
+    "dog-bite": {
+      "fa": ["سگ گزید", "گزیدن سگ", "سگ دیوانه", "سگ هار", "هاری", "واکسین هاری", "سگ پایم را گزید", "پشک گزید", "شغال گزید"],
+      "ps": ["سپي وچیچه", "د سپي چیچل", "لېونی سپی", "هاري", "د هاري واکسین", "سپي پښه وچیچله"],
+      "lat": ["sag gazid", "sag gazida", "hari", "sapi wachicha", "dog bit"],
+      "en": ["dog bite", "dog bit", "bitten by a dog", "rabies", "rabies vaccine", "mad dog", "cat bite"]
+    },
+    "epilepsy": {
+      "fa": ["مرگی", "صرع", "مرگی دارد", "دوای مرگی", "حمله مرگی", "میرگی", "غش مرگی", "دوای صرع", "دوای مرگی تمام شد", "مریض مرگی"],
+      "ps": ["مرګی", "صرع", "مرګي لري", "د مرګي درمل", "میرګی"],
+      "lat": ["margi", "mergi", "sara", "sar'a", "marghi"],
+      "en": ["epilepsy", "epileptic", "epilepsy medicine", "fits again and again", "repeated fits", "epilepsy tablets", "ran out of epilepsy medicine"]
+    },
+    "eye-infection": {
+      "fa": ["چشم سرخ", "چشمم سرخ است", "چشم چرک", "چشمانش چسپیده", "چشم درد و سرخی", "چرک چشم", "تراخم", "چشم طفل سرخ"],
+      "ps": ["سرې سترګې", "سترګې مې سرې دي", "چرکنې سترګې", "سترګې یې سره نښتې", "تراخم"],
+      "lat": ["chashm surkh", "cheshm sorkh", "sre starge", "starge sre"],
+      "en": ["red eye", "red eyes", "sticky eyes", "pink eye", "eye infection", "pus from eye", "trachoma"]
+    },
+    "hepatitis": {
+      "fa": ["زردی", "یرقان", "هپاتیت", "چشمش زرد شده", "چشمانم زرد", "زردی کلان", "ادرار تیره", "جگر", "چشم زرد", "چشمانش زرد شده", "رنگ چشمش زرد"],
+      "ps": ["ژېړی", "یرقان", "هیپاتیت", "سترګې یې ژیړې دي", "ژیړې سترګې", "ینه", "ژېړې سترګې"],
+      "lat": ["zardi", "yaraqan", "yarqan", "hepatit", "zhera", "zheray"],
+      "en": ["hepatitis", "jaundice in adults", "yellow eyes", "yellow skin", "liver", "dark urine", "jaundice adult"]
+    },
+    "malnutrition": {
+      "fa": ["طفل لاغر", "سوء تغذی", "سوتغذی", "کم غذایی", "طفلم خیلی لاغر است", "طفل پندیده پاها", "طفل وزن نمیگیرد", "پوست و استخوان", "سوءتغذیه"],
+      "ps": ["ډنګر ماشوم", "خوارځواکي", "ماشوم ډېر ډنګر دی", "کمزوری ماشوم", "د ماشوم پښې پړسیدلې"],
+      "lat": ["laghar", "su taghzi", "sue taghzia", "dangar", "khwar zwaki"],
+      "en": ["malnutrition", "very thin child", "skinny child", "severe malnutrition", "child not growing thin", "wasting", "too thin"]
+    },
+    "pneumonia-adult": {
+      "fa": ["سینه بغل کلان", "سینه بغل بزرگسال", "سینه بغل پدرم", "سینه بغل مادرم", "سرفه و تب کلان ها", "سرفه با بلغم کلان"],
+      "ps": ["په لویانو کې سینه بغل", "د پلار سینه بغل", "د لویانو ټوخی او تبه"],
+      "lat": ["sina baghal", "sinabaghal kalan", "sena baghal"],
+      "en": ["adult pneumonia", "pneumonia in adults", "chest infection adult", "cough and fever adult", "adult cough with phlegm"]
+    },
+    "urine-infection": {
+      "fa": ["سوزش ادرار", "ادرارم میسوزد", "سوزش پیشاب", "پیشابم میسوزد", "ادرار با درد", "زیاد ادرار میکنم", "عفونت ادرار", "مثانه"],
+      "ps": ["متیازې سوځي", "د متیازو سوزش", "د متیازو انتان", "متیازې په درد کیږي"],
+      "lat": ["sozesh edrar", "peshab mesoza", "mutyaze sozi", "sozish"],
+      "en": ["burning urine", "urine infection", "uti", "pain passing urine", "burning when peeing", "bladder infection", "burning when passing urine"]
+    },
+    "worms": {
+      "fa": ["کرم", "کرم شکم", "کرمک", "کرم در غایطه", "دوای کرم", "کرم دارد", "کرمهای شکم", "مقعد میخارد", "کرم شکم طفل", "دوای کرمک"],
+      "ps": ["چینجي", "د نس چینجي", "په غایطه کې چینجي", "د چینجو درمل", "چینجي لري"],
+      "lat": ["kirm", "kerm", "kirmak", "chinji", "chenji"],
+      "en": ["worms", "worm", "worms in stool", "worm medicine", "deworming", "itchy bottom", "intestinal worms", "worms child"]
+    },
+    "asthma": {
+      "fa": ["آسم", "استما", "نفس تنگی همیشگی", "اسپری آسم", "پف آسم", "خس خس سینه", "دمه", "سرفه سگرت", "پف استما", "اسپری استما"],
+      "ps": ["آسم", "استما", "ساه لنډي", "د آسم سپری", "خس خس"],
+      "lat": ["asm", "astma", "nafas tangi", "dama"],
+      "en": ["asthma", "inhaler", "wheeze", "wheezy chest", "tight chest", "copd", "smoker's cough", "blue inhaler"]
+    },
+    "chickens": {
+      "fa": ["مرغ", "مرغداری", "مرغ خانگی", "تخم مرغ", "لانه مرغ", "مرض نیوکاسل", "مرغ مریض", "چوچه"],
+      "ps": ["چرګان", "چرګه", "هګۍ", "د چرګانو ساتل", "د چرګانو ناروغي"],
+      "lat": ["murgh", "morgh", "charga", "chargan", "tokhm e murgh"],
+      "en": ["chickens", "hens", "eggs", "keeping chickens", "sick chicken", "newcastle disease", "poultry"]
+    },
+    "child-meals": {
+      "fa": ["غذای طفل", "غذای کمکی", "طفل چه بخورد", "غذای طفل شش ماهه", "فرنی طفل", "حریره", "طفل غذا نمیخورد خوب", "غذای مقوی طفل"],
+      "ps": ["د ماشوم خواړه", "ماشوم څه وخوري", "د شپږو میاشتو ماشوم خواړه", "مرسته کوونکي خواړه"],
+      "lat": ["ghaza e tifl", "ghizai tifl", "da mashoom khwara"],
+      "en": ["child food", "first foods", "weaning", "what should my child eat", "baby food", "food for toddler", "porridge"]
+    },
+    "food-store": {
+      "fa": ["نگهداری غذا", "خشک کردن میوه", "خشک کردن ترکاری", "غله پوپنک زده", "غذای زمستان", "کچالو زمستان", "غذا خراب شد"],
+      "ps": ["د خوړو ساتل", "مېوه وچول", "د ژمي خواړه", "پوپنک وهلی غله"],
+      "lat": ["negahdari ghaza", "khoshk kardan"],
+      "en": ["store food", "dry fruit", "drying vegetables", "mouldy grain", "food for winter", "keep food safe"]
+    },
+    "garden-water": {
+      "fa": ["آب باغچه", "صرفه جویی آب", "آبیاری", "کم آبی باغچه", "آب دادن نباتات", "خشکسالی"],
+      "ps": ["د اوبو سپما", "باغچې ته اوبه", "اوبه ورکول", "وچکالي"],
+      "lat": ["ab e baghcha", "abyari"],
+      "en": ["save water", "watering the garden", "drought", "drip watering", "irrigation"]
+    },
+    "goats-sheep": {
+      "fa": ["بز", "گوسفند", "شیر بز", "جوشاندن شیر", "شیر خام", "بره", "چوپانی"],
+      "ps": ["وزې", "پسونه", "د وزې شیدې", "شیدې وایشوئ", "خامې شیدې"],
+      "lat": ["boz", "gosfand", "wuza", "pasuna"],
+      "en": ["goats", "sheep", "goat milk", "boil milk", "raw milk", "lambing"]
+    },
+    "home-earning": {
+      "fa": ["درآمد", "پول پیدا کردن", "کار در خانه", "خیاطی", "خامک دوزی", "قروت", "فروش تخم", "پس انداز"],
+      "ps": ["عاید", "پیسې ګټل", "له کوره کار", "خیاطي", "پس انداز"],
+      "lat": ["daramad", "paisa", "kar dar khana"],
+      "en": ["earn money", "income", "work from home", "sewing", "savings group", "money"]
+    },
+    "kitchen-garden": {
+      "fa": ["باغچه", "باغچه خانه", "ترکاری کاشتن", "سبزی کاشتن", "کشت ترکاری", "درخت میوه", "تخم ترکاری"],
+      "ps": ["باغچه", "د کور باغچه", "سبزي کرل", "د مېوې ونه"],
+      "lat": ["baghcha", "tarkari kashtan"],
+      "en": ["kitchen garden", "vegetable garden", "grow vegetables", "garden", "fruit tree", "plant seeds"]
+    },
+    "bite-safety": {
+      "fa": ["دور نگه داشتن مار", "جلوگیری از گزیدن مار", "گژدم در بوت", "مار در خانه", "گژدم در خانه", "سگ را دور", "بوت را تکان بدهید"],
+      "ps": ["له مار ځان ساتل", "په کور کې مار", "په بوټ کې لړم", "له سپي ځان ساتل"],
+      "lat": ["mar dar khana", "gazhdum dar boot"],
+      "en": ["keep snakes away", "prevent snake bite", "scorpion in shoe", "snake in the house", "prevent dog bites"]
+    },
+    "electric-safety": {
+      "fa": ["سیم برق", "سیم لچ", "برق بی خطر", "ساکت برق", "سولر", "باتری سولر", "جنراتور", "لین برق", "سیم کشی"],
+      "ps": ["د برېښنا سیم", "لوڅ سیم", "خوندي برېښنا", "سولر", "جنراتور"],
+      "lat": ["sim e barq", "solar", "generator", "jenerator"],
+      "en": ["electric safety", "bare wire", "socket", "solar battery", "generator", "wiring"]
+    },
+    "fire-safety": {
+      "fa": ["آتش سوزی", "جلوگیری از آتش", "چراغ تیل", "تیل خاک", "شمع", "تندور", "خانه آتش گرفت", "آتش در خانه"],
+      "ps": ["اور لګېدنه", "د اور مخنیوی", "د تېلو څراغ", "تنور", "کور اور واخیست"],
+      "lat": ["atash sozi", "atesh", "tandoor", "or lagedana"],
+      "en": ["fire safety", "house fire", "kerosene lamp", "candle", "tandoor", "prevent fire"]
+    },
+    "home-safety": {
+      "fa": ["بوی گاز", "بالون گاز", "سلندر گاز", "گاز بو میدهد", "دود در خانه", "دود جنراتور", "دود موتر", "والو گاز"],
+      "ps": ["د ګاز بوی", "د ګاز بوتل", "ګاز بوی کوي", "په کور کې لوګی"],
+      "lat": ["boy e gaz", "balon gaz", "gas cylinder"],
+      "en": ["gas smell", "gas bottle", "gas cylinder", "smell gas", "fumes", "generator fumes", "gas leak"]
+    },
+    "road-safety": {
+      "fa": ["حادثه ترافیکی", "تصادف موتر", "موتر سایکل", "کلاه ایمنی", "کمربند", "حادثه سرک", "موتر زد"],
+      "ps": ["ترافیکي پېښه", "د موټر ټکر", "موټر سایکل", "خولۍ", "د سړک پېښه"],
+      "lat": ["tasadof", "hadesa", "motorcycle", "motor saikal"],
+      "en": ["road safety", "car crash", "road accident", "motorbike", "helmet", "seat belt", "hit by a car"]
+    },
+    "safe-storage": {
+      "fa": ["نگهداری دوا", "دوا را قفل کنید", "زهر را دور", "دوای زراعتی", "سپری زراعتی", "بوتل تیل", "دوا دور از طفل", "جای دوا"],
+      "ps": ["د درملو ساتل", "زهر لرې وساتئ", "د کرنې سپری", "درمل له ماشومانو لرې"],
+      "lat": ["negahdari dawa", "dawa", "spray"],
+      "en": ["store medicines", "lock away poison", "farm spray", "pesticide", "keep medicine from children", "safe storage"]
+    },
+    "hospital-arrive": {
+      "fa": ["در شفاخانه چه کنم", "رسیدن به شفاخانه", "ثبت نام شفاخانه", "نوبت", "انتظار در شفاخانه", "داکتر زن", "نرس"],
+      "ps": ["روغتون ته ورسیدو", "په روغتون کې څه وکړو", "نوبت", "ښځینه ډاکټره"],
+      "lat": ["dar shafakhana", "nobat", "rughtun"],
+      "en": ["arrive at hospital", "at the hospital", "waiting at the clinic", "registration", "triage", "female doctor"]
+    },
+    "hospital-places": {
+      "fa": ["کدام شفاخانه", "کدام کلینیک", "شفاخانه ولایتی", "شفاخانه مزار", "کارمند صحی قریه", "مرکز صحی", "کدام شفاخانه بروم"],
+      "ps": ["کوم روغتون", "کوم کلینیک", "د ایبک روغتون", "روغتیایي مرکز"],
+      "lat": ["kodam shafakhana", "aybak hospital", "shifakhana"],
+      "en": ["which hospital", "which clinic", "aybak hospital", "provincial hospital", "health centre", "community health worker"]
+    },
+    "hospital-ready": {
+      "fa": ["چه چیز با خود ببریم", "آماده رفتن شفاخانه", "رفتن به شفاخانه", "چه ببرم شفاخانه", "تذکره", "همراه"],
+      "ps": ["روغتون ته څه یوسو", "روغتون ته تلل", "چمتو کېدل"],
+      "lat": ["chi bebarem", "shafakhana raftan"],
+      "en": ["what to take to hospital", "going to hospital", "hospital bag", "get ready for hospital"]
+    },
+    "hospital-stay": {
+      "fa": ["بستر در شفاخانه", "بستری", "رخصت از شفاخانه", "ماندن در شفاخانه", "بعد از شفاخانه", "موافقه عملیات"],
+      "ps": ["په روغتون کې پاتې کېدل", "بستري", "له روغتون رخصت", "کور ته تلل"],
+      "lat": ["bistari", "bestari", "rokhsat"],
+      "en": ["staying in hospital", "admitted", "discharge", "after hospital", "follow up visit", "consent"]
+    },
+    "hospital-tests": {
+      "fa": ["آزمایش خون", "معاینه خون", "معاینه ادرار", "اکسری", "التراسوند", "ایکو", "معاینه قلب", "لابراتوار"],
+      "ps": ["د وینې معاینه", "د متیازو معاینه", "اکسرې", "التراساؤنډ", "لابراتوار"],
+      "lat": ["azmayesh", "x ray", "eksray", "ultrasound", "laboratoar"],
+      "en": ["blood test", "urine test", "x-ray", "xray", "ultrasound", "ecg", "lab test"]
+    },
+    "hospital-treatments": {
+      "fa": ["سیروم", "پیچکاری", "عملیات", "بخیه", "خون دادن", "سزارین", "اکسیجن شفاخانه", "نیبولایزر", "گچ"],
+      "ps": ["ډرپ", "پیچکاري", "عملیات", "ګنډل", "وینه ورکول", "سیزیرین"],
+      "lat": ["serum", "pichkari", "amaliat", "bakhya", "sezarin"],
+      "en": ["drip", "injection", "operation", "stitches", "blood transfusion", "caesarean", "c-section", "nebuliser", "plaster cast"]
+    },
+    "reading-temp": {
+      "fa": ["عدد تب چه معنا دارد", "تب چند درجه است", "حرارت نورمال چند است", "حرارت بدن نورمال", "تب بلند چند است"],
+      "ps": ["د تبې شمېره څه مانا لري", "نورماله تبه څو ده"],
+      "lat": ["daraja tab"],
+      "en": ["what does the temperature mean", "normal temperature", "how high is a fever", "fever number meaning"]
+    },
+    "reading-bp": {
+      "fa": ["فشار چه معنا دارد", "عدد فشار چه معنا دارد", "فشار نورمال چند است", "فشار بلند چند است", "فشار پایین چند است", "فشار در حاملگی چند باشد"],
+      "ps": ["د فشار شمېره څه مانا لري", "نورمال فشار څو دی"],
+      "lat": ["feshar normal"],
+      "en": ["what does my blood pressure mean", "bp reading meaning", "normal blood pressure", "high blood pressure numbers", "blood pressure numbers"]
+    },
+    "reading-sugar": {
+      "fa": ["عدد شکر چه معنا دارد", "شکرم خوب است یا نه", "شکر نورمال چند است", "قند نورمال چند است", "شکر پایین چند است"],
+      "ps": ["د شکرې شمېره څه مانا لري", "نورماله شکره څو ده"],
+      "lat": ["shakar normal"],
+      "en": ["what does my sugar number mean", "sugar reading meaning", "normal blood sugar", "normal sugar level", "low sugar number"]
+    },
+    "reading-spo2": {
+      "fa": ["عدد اکسیجن چه معنا دارد", "اکسیجن نورمال چند است", "اکسیجن پایین چند است"],
+      "ps": ["د اکسیجن شمېره څه مانا لري", "اکسیجن ټیټ دی"],
+      "lat": ["oxygen normal"],
+      "en": ["normal oxygen level", "oxygen level", "what does the oxygen number mean", "low oxygen number"]
+    },
+    "reading-muac": {
+      "fa": ["رنگ فیته چه معنا دارد", "فیته بازو چه معنا دارد", "وزن طفل زیاد نمیشود"],
+      "ps": ["د فیتې رنګ څه مانا لري"],
+      "lat": ["fita rang"],
+      "en": ["arm tape colour meaning", "muac meaning", "weight gain child"]
+    },
+    "wellbeing": {
+      "fa": ["زندگی صحتمند", "عادت های خوب", "صحتمند ماندن", "چطور صحتمند باشم", "عادت روزانه"],
+      "ps": ["روغ ژوند", "روغ پاتې کېدل", "ښه عادتونه"],
+      "lat": ["zindagi sehatmand"],
+      "en": ["healthy living", "healthy habits", "well-being", "wellbeing", "stay healthy"]
+    },
+    "sleep-well": {
+      "fa": ["خواب کافی", "وقت خواب", "چند ساعت خواب", "ساعت خواب", "خواب منظم"],
+      "ps": ["آرام خوب", "د خوب وخت", "څو ساعته خوب"],
+      "lat": ["khaw e khob"],
+      "en": ["sleep well", "good sleep", "how much sleep", "sleep routine", "bedtime"]
+    },
+    "evening-routine": {
+      "fa": ["پیش از خواب", "شب پیش از خواب", "چای شب", "موبایل پیش از خواب", "نان شب زود"],
+      "ps": ["له خوب مخکې", "د شپې چای", "د ماښام ډوډۍ"],
+      "lat": ["pesh az khob"],
+      "en": ["before bed", "evening routine", "tea before bed", "phone at night", "dinner time"]
+    },
+    "heart-food": {
+      "fa": ["غذای صحتمند", "غذا برای قلب", "کم نمک", "کم شکر", "روغن کم", "غذای سالم"],
+      "ps": ["روغ خواړه", "د زړه لپاره خواړه", "لږ مالګه", "لږه بوره"],
+      "lat": ["ghaza e sehatmand"],
+      "en": ["healthy food", "heart healthy food", "less salt", "less sugar", "healthy diet"]
+    },
+    "move-daily": {
+      "fa": ["ورزش", "پیاده روی", "تحرک", "قدم زدن", "ورزش در خانه"],
+      "ps": ["ورزش", "پلی ګرځېدل", "حرکت"],
+      "lat": ["warzish", "worzesh", "payada rawi"],
+      "en": ["exercise", "walking", "physical activity", "keep active", "be active"]
     }
   }
 }

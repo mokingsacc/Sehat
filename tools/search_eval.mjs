@@ -4,7 +4,8 @@
 // Uses content/book.json, with the phrases taken fresh from content/src/search-phrases.json (no build needed).
 // Three sets: "core" (written with the phrase list), "hard" (written afterwards without looking at the phrases:
 // longer sentences, other word orders, family words, typos; later used for tuning) and "fresh" (written last, after
-// all tuning; first run: top-1 83.2%, top-3 96.0%). New phrases should be tested with a new untouched set.
+// all tuning; first run: top-1 83.2%, top-3 96.0%), and "new" (the topics added in content merge 2). New phrases
+// should be tested with a new untouched set.
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
