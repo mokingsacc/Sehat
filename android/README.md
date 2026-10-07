@@ -12,10 +12,12 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 - The web app is copied into the APK (`app/src/main/assets/www/`) by `sync-web.sh`, which Gradle runs before every
   build. It copies `index.html`, `manifest.webmanifest`, `sw.js`, `css/`, `js/`, `fonts/`, `img/` (not `img/_preview`),
   `content/book.json` and `content/version.json`. Run `python3 tools/build.py` first, as usual.
-- **No narration in the APK** (it stays a small file, about 1.6 MB, to pass from phone to phone). The app downloads the
-  chosen voice from the website (`appUrl` in `config.json`), the urgent pack first (Emergency and CPR first of all), and
-  keeps each clip on the phone; a clip that is not on the phone yet plays from the internet the first time and is kept.
-  Offline and not downloaded: the speaker falls back to the other voice, then to the phone's own speech, then a short note.
+- **Narration in the APK: only Emergency and CPR, woman's voice, Dari and Pashto** (`book.bundle`, listed by
+  `tools/build.py` from the same order as the app's downloads; 220 clips, about 6.3 MB), so a phone that gets the app
+  by Bluetooth and never goes online still hears emergencies. The app plays these from inside the APK and never
+  downloads them. Everything else comes from the website (`appUrl` in `config.json`) for the chosen voice only and is
+  kept on the phone; a man's voice downloads its own clips and, offline, falls back to the bundled woman's clips.
+  Offline and not on the phone: the other voice, then the phone's own speech, then a short note.
 - The WebView opens `https://appassets.androidplatform.net/assets/index.html`, served from the APK by
   `androidx.webkit.WebViewAssetLoader`. It is a secure https origin, so localStorage, IndexedDB, Cache Storage,
   `fetch()` of relative files, the microphone and location all work as on a website.

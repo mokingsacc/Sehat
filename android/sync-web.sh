@@ -19,8 +19,26 @@ if [ -f "$WEB/content/who-growth.json" ]; then cp "$WEB/content/who-growth.json"
 for d in css js fonts img anim; do if [ -d "$WEB/$d" ]; then cp -R "$WEB/$d" "$OUT/$d"; fi; done
 rm -rf "$OUT/img/_preview" "$OUT/js/sw.template.js" "$OUT/anim/demo.html"
 find "$OUT" -name '*.cjs' -delete   # local screenshot helpers (anim/cine/shots.cjs), not part of the app
-# No narration in the APK (audio/ is about 260 MB for four voices): the app downloads only the chosen voice from the
-# website (config.appUrl), the urgent pack first, and keeps each clip on the phone (js/app.js, normBook and startDownloads).
+# Narration: only the Emergency and CPR clips in the woman's voice of Dari and Pashto (book.bundle, listed by
+# tools/build.py; about 3 MB each), so a phone that gets the app by Bluetooth and never goes online still hears
+# emergencies. Everything else (audio/ is about 260 MB for four voices) comes from the website (config.appUrl) for the
+# chosen voice only, and is kept on the phone (js/app.js: bundledIn, normBook, startDownloads).
+python3 - "$WEB" "$OUT" <<'PY'
+import json, os, shutil, sys
+web, out = sys.argv[1], sys.argv[2]
+b = json.load(open(os.path.join(web, "content/book.json"), encoding="utf-8"))
+bu, n, size, missing = b.get("bundle") or {}, 0, 0, []
+for sl in bu.get("slots", []):
+    for i in bu.get("ids", []):
+        u = (b.get("audio", {}).get(sl) or {}).get(i)
+        if not u or not u.startswith("audio/"): continue
+        rel = u.split("?")[0]; src = os.path.join(web, rel)
+        if not os.path.isfile(src): missing.append(rel); continue
+        os.makedirs(os.path.dirname(os.path.join(out, rel)), exist_ok=True)
+        shutil.copyfile(src, os.path.join(out, rel)); n += 1; size += os.path.getsize(src)
+print(f"sync-web: {n} Emergency and CPR clips ({size / 1e6:.1f} MB) in {' '.join(bu.get('slots', [])) or 'no voice'}")
+if missing: print("sync-web: warning, clips listed in book.bundle are missing:", ", ".join(missing[:10]), file=sys.stderr)
+PY
 # no hidden files (.DS_Store, .gitkeep) in the APK
 find "$OUT" -name '.*' -type f -delete
 

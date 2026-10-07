@@ -4,7 +4,8 @@ name: Android app
 on:
   push:
     branches: [main]
-    # only when something that goes into the APK changes (not audio/: the APK has no clips, it downloads them from the website)
+    # only when something that goes into the APK changes (its Emergency and CPR clips are listed in content/book.json,
+    # so a changed clip changes book.json; the other clips are not in the APK)
     paths: ["android/**", "index.html", "manifest.webmanifest", "sw.js", "css/**", "js/**", "fonts/**", "img/**", "anim/**",
             "content/book.json", "content/version.json", ".github/workflows/android.yml"]
   workflow_dispatch:

@@ -97,14 +97,15 @@ async function clipUrl(id, slot = slotOf(), strict = false) {
 async function getClip(src) {
   let c = null;
   try { c = await caches.open(AUDIO_CACHE); const hit = await c.match(src); if (hit) return await hit.blob(); } catch {}
-  if (navigator.onLine === false) return null; // no internet: straight to the fallback (other voice, phone speech, note)
+  const inApp = BUNDLED.has(src); // a file inside the Android app: always there, never kept twice
+  if (navigator.onLine === false && !inApp) return null; // no internet: straight to the fallback (other voice, phone speech, note)
   // a weak signal must not leave the speaker silent for long: give up after 12 s and use the fallback
   const ac = window.AbortController ? new AbortController() : null, tm = ac ? setTimeout(() => ac.abort(), 12000) : 0;
   try {
     const r = await fetch(src, ac ? { signal: ac.signal } : {}); if (!r.ok) return null;
     const blob = await r.blob(); clearTimeout(tm);
     // with the service worker running, it keeps the clip itself
-    if (c && !(navigator.serviceWorker && navigator.serviceWorker.controller)) c.put(src, new Response(blob, { headers: { 'Content-Type': blob.type || 'audio/mpeg' } })).catch(() => {});
+    if (c && !inApp && !(navigator.serviceWorker && navigator.serviceWorker.controller)) c.put(src, new Response(blob, { headers: { 'Content-Type': blob.type || 'audio/mpeg' } })).catch(() => {});
     DL.have.add(abs(src)); packsUI();
     return blob;
   } catch { return null; }
@@ -728,12 +729,13 @@ function readDate(form, prefix) {
 // The app shell (code, pictures, words) is precached by the service worker; audio never is.
 // After the voice step the "urgent" pack downloads quietly, then children, women, everyone (book.packs),
 // two clips at a time, skipping clips already on the phone, so it resumes after a lost signal or a closed app.
-// On saveData, 2G or mobile data only the urgent pack downloads by itself; Settings shows the rest with a Download button.
+// On saveData, 2G or mobile data only the Emergency and CPR part of the urgent pack downloads by itself; Settings shows
+// the rest with a Download button.
 // Inside the urgent pack the Emergency screen and CPR come first (urgentFirst).
 const PACKS = ['urgent', 'children', 'women', 'everyone'];
 const DL = { run: 0, active: false, slot: null, cur: null, again: false, waiting: false, full: false, retry: null, wait: 15000, have: new Set() };
 const abs = (u) => new URL(u, location.href).href;
-// slow or paid-for internet (data saver, 2G, or mobile data): only the urgent pack downloads by itself; Wi-Fi gets everything
+// slow or paid-for internet (data saver, 2G, or mobile data): only Emergency and CPR download by themselves; Wi-Fi gets everything
 const slowNet = () => { const c = navigator.connection; return !!(c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || '') || /^(cellular|wimax|bluetooth)$/.test(c.type || ''))); };
 // download order inside the urgent pack: the Emergency screen, CPR and its films first, then the other emergency pages,
 // then the other urgent pages and red boxes, then page titles, then the rest of the interface
@@ -742,38 +744,44 @@ function urgentFirst(list) {
   const cpr = new Set(em.map((a) => a.cpr).filter(Boolean));
   const emUi = new Set(['ui.emergency', 'ui.emergencyWho', 'ui.sendForCar', 'ui.near', 'ui.cprFirstAid'].concat(em.map((a) => 'ui.' + a.label)));
   const emPages = new Set([].concat(...em.map((a) => a.topics || []), (b.sections || {}).emergency || [], (cfg.firstAid || {}).topics || []));
+  const first = new Set((b.packs && b.packs.first) || []); // the same part, as tools/build.py lists it (book.packs.first)
   const rank = (id) => {
     const tid = id.split('.')[0];
-    if (emUi.has(id) || cpr.has(tid) || /^anim\.cpr[-.]/.test(id)) return 0;
+    if (first.has(id) || emUi.has(id) || cpr.has(tid) || /^anim\.cpr[-.]/.test(id)) return 0;
     if (emPages.has(tid)) return 1;
     if (id.startsWith('ui.')) return 4;
     if (id === tid + '.title') return 3;
     return 2;
   };
-  return list.map((id, i) => [rank(id), i, id]).sort((x, y) => x[0] - y[0] || x[1] - y[1]).map((x) => x[2]); // stable on old WebViews too
+  const out = list.map((id, i) => [rank(id), i, id]).sort((x, y) => x[0] - y[0] || x[1] - y[1]); // stable on old WebViews too
+  return { ids: out.map((x) => x[2]), first: new Set(out.filter((x) => !x[0]).map((x) => x[2])) };
 }
 function packList(slot) {
   const b = S.book, ids = (b.packs && b.packs.ids) || { everyone: b.order || Object.keys(b.narration) };
   const size = (sl, p) => (b.packs && b.packs.size && b.packs.size[sl] && b.packs.size[sl][p]) || [0, 0];
   const sib = slotsFor(slot)[1];
   return PACKS.map((p) => {
-    const urls = []; let own = 0, other = 0;
-    for (const id of p === 'urgent' ? urgentFirst(ids[p] || []) : ids[p] || []) {
+    const urls = [], first = new Set(); let own = 0, other = 0;
+    const order = p === 'urgent' ? urgentFirst(ids[p] || []) : { ids: ids[p] || [], first: new Set() };
+    for (const id of order.ids) {
       const a = clipSrc(id, slot), o = a ? null : clipSrc(id, sib);
       if (a) { urls.push(a); own++; } else if (o) { urls.push(o); other++; } // a clip missing in this voice comes from the other voice
+      if ((a || o) && order.first.has(id)) first.add(a || o);
     }
     const [b1, n1] = size(slot, p), [b2, n2] = size(sib, p);
-    return { id: p, urls: [...new Set(urls)], bytes: (n1 ? (b1 / n1) * own : 0) + (n2 ? (b2 / n2) * other : 0) };
+    // first: the Emergency and CPR part of the urgent pack (the only part that downloads by itself on mobile data)
+    return { id: p, urls: [...new Set(urls)], first, bytes: (n1 ? (b1 / n1) * own : 0) + (n2 ? (b2 / n2) * other : 0) };
   });
 }
 const wantStore = () => store.get('dlWant', {});
 function wanted(slot) {
   const asked = wantStore()[slot] || [];
   if (!store.get('dlAuto', true)) return new Set(asked); // after "Delete voices": only what the person asks for
-  return new Set([...(slowNet() ? ['urgent'] : PACKS), ...asked]);
+  return new Set([...(slowNet() ? ['first'] : PACKS), ...asked]); // 'first': only the Emergency and CPR part of the urgent pack
 }
 function wantPack(slot, p) { const w = wantStore(); w[slot] = [...new Set([...(w[slot] || []), p])]; store.set('dlWant', w); }
-async function refreshHave() { try { const c = await caches.open(AUDIO_CACHE); DL.have = new Set((await c.keys()).map((r) => r.url)); } catch {} return DL.have; }
+const bundledHave = () => [...BUNDLED].map(abs); // clips inside the Android app count as on the phone: never downloaded
+async function refreshHave() { try { const c = await caches.open(AUDIO_CACHE); DL.have = new Set((await c.keys()).map((r) => r.url).concat(bundledHave())); } catch {} return DL.have; }
 function stopDownloads() { DL.run++; DL.active = false; DL.cur = null; DL.waiting = false; clearTimeout(DL.retry); DL.wait = 15000; }
 async function startDownloads() {
   if (!S.book || !S.lang || !S.voice || !('caches' in window)) return;
@@ -785,9 +793,14 @@ async function startDownloads() {
     const c = await caches.open(AUDIO_CACHE); await refreshHave();
     for (const pack of packList(slot)) {
       if (run !== DL.run) return;
-      const todo = pack.urls.filter((u) => !DL.have.has(abs(u)));
+      let todo = pack.urls.filter((u) => !DL.have.has(abs(u)));
       if (!todo.length) continue;
-      if (!wanted(slot).has(pack.id)) { complete = false; continue; }
+      if (!wanted(slot).has(pack.id)) {
+        complete = false;
+        if (!(pack.id === 'urgent' && wanted(slot).has('first'))) continue;
+        todo = todo.filter((u) => pack.first.has(u)); // mobile data: only Emergency and CPR by itself
+        if (!todo.length) continue;
+      }
       if (!navigator.onLine) { failed = true; break; }
       DL.cur = pack.id; packsUI();
       let i = 0;
@@ -876,7 +889,7 @@ async function offerDeleteOld(old, now) {
   if (store.get('keepSlots', []).includes(old)) return;
   await refreshHave();
   const keep = new Set(packList(now).flatMap((p) => p.urls.map(abs))), urls = []; let bytes = 0;
-  for (const p of packList(old)) for (const u of p.urls) { const a = abs(u); if (DL.have.has(a) && !keep.has(a)) { urls.push(a); bytes += p.urls.length ? p.bytes / p.urls.length : 0; } }
+  for (const p of packList(old)) for (const u of p.urls) { const a = abs(u); if (DL.have.has(a) && !keep.has(a) && !BUNDLED.has(u)) { urls.push(a); bytes += p.urls.length ? p.bytes / p.urls.length : 0; } }
   if (!urls.length) return;
   const name = `${S.book.langNames[old.slice(0, 2)]} · ${T(old.endsWith('-m') ? 'man' : 'woman')}`;
   dialog(`<h2>${esc(T('voices'))}</h2><p style="font-size:18px">${esc(T('deleteOldVoiceQ', { name, n: bytes ? mbText(bytes) : T('clips', { n: num(urls.length) }) }))}</p>
@@ -893,7 +906,7 @@ async function deleteVoices() {
   if (!confirm(T('deleteVoicesQ'))) return;
   stopDownloads(); store.set('dlAuto', false); store.set('dlWant', {}); store.set('keepSlots', []);
   try { await caches.delete(AUDIO_CACHE); } catch {}
-  DL.have = new Set(); render();
+  DL.have = new Set(bundledHave()); render();
 }
 async function showStorage() { const t = await storageText(); const el = $('#storage'); if (el) el.textContent = t; }
 function screenSettings() {
@@ -1374,12 +1387,21 @@ function goodBook(b) {
 // The Android app carries no narration (it stays a small file to pass from phone to phone): its clips come from the
 // website (config.appUrl) and are kept on the phone like on the website (packs, or the first time each one plays).
 const IN_APK = location.hostname === 'appassets.androidplatform.net';
+// Except the Emergency and CPR clips in the woman's voice of Dari and Pashto (book.bundle, copied in by
+// android/sync-web.sh): those play from inside the app, so a phone that never goes online still hears emergencies.
+// Only the exact files built with this app count (same ?v= hash); a newer clip from an update comes from the website.
+let BUNDLED = new Set();
+function bundledIn(b) {
+  const out = new Set(), bu = IN_APK && b && b.bundle, a = (b && b.audio) || {};
+  if (bu) for (const sl of bu.slots || []) for (const id of bu.ids || []) { const u = a[sl] && a[sl][id]; if (typeof u === 'string' && /^audio\//.test(u)) out.add(u); }
+  return out;
+}
 function normBook(b) {
   const a = b.audio && typeof b.audio === 'object' ? b.audio : {};
   for (const lg of ['fa', 'ps', 'en']) if (a[lg] && typeof a[lg] === 'object') { a[lg + '-f'] = { ...a[lg], ...(a[lg + '-f'] || {}) }; delete a[lg]; }
   const site = (S.shipped && S.shipped.config.appUrl) || (b.config && b.config.appUrl) || '';
   if (IN_APK && /^https:\/\//.test(site)) {
-    for (const sl of Object.keys(a)) for (const id of Object.keys(a[sl] || {})) if (/^audio\//.test(a[sl][id])) a[sl][id] = new URL(a[sl][id], site).href;
+    for (const sl of Object.keys(a)) for (const id of Object.keys(a[sl] || {})) if (/^audio\//.test(a[sl][id]) && !BUNDLED.has(a[sl][id])) a[sl][id] = new URL(a[sl][id], site).href;
   }
   b.audio = a; return b;
 }
@@ -1417,7 +1439,7 @@ async function remoteUpdate() {
 async function start() {
   await REC.init();
   let txt;
-  try { txt = await (await fetch('content/book.json')).text(); S.book = normBook(JSON.parse(txt)); }
+  try { txt = await (await fetch('content/book.json')).text(); const raw = JSON.parse(txt); BUNDLED = bundledIn(raw); S.book = normBook(raw); }
   catch { $('#app').innerHTML = '<p style="padding:40px;text-align:center">⚠︎</p>'; return; }
   S.shippedBook = JSON.parse(txt); // kept as it came, to lay a newer overlay over it later
   S.shipped = { version: S.book.version, built: S.book.built, config: S.book.config || {} };

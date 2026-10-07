@@ -31,6 +31,8 @@ self.addEventListener('fetch', (e) => {
     e.respondWith(fetch(req, { cache: 'no-store' }).catch(() => caches.match(req, { ignoreSearch: true })));
     return;
   }
+  // inside the Android app the book's own clips (Emergency and CPR, woman's voice) are files in the app: no second copy
+  if (!remoteClip && path.includes('/audio/') && self.location.hostname === 'appassets.androidplatform.net') return;
   if (path.includes('/audio/') || remoteClip) {
     // audio clips (never precached): from the phone if downloaded, otherwise fetch once and keep.
     // The app downloads them in packs (urgent first) for the voice the person chose; see startDownloads() in js/app.js.

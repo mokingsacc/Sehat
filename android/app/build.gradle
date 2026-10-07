@@ -79,7 +79,7 @@ dependencies {
 
 // Copy the web app into src/main/assets/www before every build.
 def syncWeb = tasks.register('syncWeb', Exec) {
-    description = 'Copies the web app (index.html, js, css, content, img, anim; not audio) into the APK assets.'
+    description = 'Copies the web app (index.html, js, css, content, img, anim, the Emergency and CPR clips of book.bundle) into the APK assets.'
     commandLine 'bash', rootProject.file('sync-web.sh').absolutePath
     outputs.upToDateWhen { false }
 }

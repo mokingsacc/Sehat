@@ -4359,3 +4359,16 @@ For Mo to check:
    (only the phone's speech, which usually has no Dari or Pashto). Bundling the Emergency and CPR clips in the woman's
    voice for both languages would add about 6 MB to the APK.
 4. The narration is computer speech (Gemini): native speakers should listen to the emergency and CPR clips first.
+
+## Narration follow-up: less data, emergencies inside the Android app (7 Oct 2026)
+
+Defaults chosen for Mo overnight (easy to reverse):
+1. On mobile data, 2G or data saver only the Emergency and CPR part (the Emergency screen, the 4 CPR pages and the CPR
+   films: 110 clips, about 3 MB per voice) downloads by itself. The rest of the urgent pack and the other packs wait for
+   Wi-Fi or a tap on Download in Settings. To go back: in `js/app.js` `wanted()`, use `'urgent'` instead of `'first'`.
+2. The Android app now carries those 110 clips in the woman's voice of Dari and of Pashto (220 clips, about 6.3 MB;
+   `book.bundle`, listed by `tools/build.py` in the same order as the downloads and copied by `android/sync-web.sh`). A
+   phone that gets the app by Bluetooth and never goes online still hears emergencies and the CPR films. The app plays
+   them from inside the APK and never downloads them. With the man's voice the app downloads the man's clips and, when
+   offline, falls back to the woman's clips inside the app. To change the voices inside: `BUNDLE_SLOTS` in
+   `tools/build.py`; to drop them: set it to `()`.

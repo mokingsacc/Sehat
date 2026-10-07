@@ -12,6 +12,7 @@ LANGS = ("fa", "ps", "en")
 AUDIO_EXT = (".mp3", ".m4a", ".ogg", ".opus", ".webm")
 VOICES = ("f", "m")  # f = a woman's voice, m = a man's voice
 PACKS = ("urgent", "children", "women", "everyone")
+BUNDLE_SLOTS = ("fa-f", "ps-f")  # voices whose Emergency and CPR clips go inside the Android app (android/sync-web.sh)
 
 ui = load(J("content/src/ui.json"))
 # feature files content/src/ui-<feature>.json ({"text": {...}, "say": {...}}) add their buttons and narrated lines to ui.json's
@@ -233,7 +234,16 @@ for k in order + [k for k in narr if k not in order]:
 # size of each pack per voice: [bytes, clips] (the phone shows it in Settings before downloading)
 pack_size = {slot: {p: [sum(audio_bytes[slot].get(k, 0) for k in ids), sum(1 for k in ids if k in audio[slot])] for p, ids in pack_ids.items()}
              for slot in audio if audio[slot]}
-book["packs"] = {"order": list(PACKS), "ids": pack_ids, "size": pack_size}
+# "first": the Emergency and CPR part of the urgent pack (the Emergency screen, the CPR pages, the CPR films), in pack
+# order. Same rule as rank 0 of urgentFirst() in js/app.js. On mobile data only this part downloads by itself, and the
+# Android app carries it in the woman's voice of Dari and Pashto (book.bundle) so it speaks emergencies with no internet.
+em = config.get("emergency") or []
+em_cpr = {a["cpr"] for a in em if a.get("cpr")}
+em_ui = {"ui.emergency", "ui.emergencyWho", "ui.sendForCar", "ui.near", "ui.cprFirstAid"} | {"ui." + a["label"] for a in em if a.get("label")}
+first_ids = [k for k in pack_ids["urgent"] if k in em_ui or k.split(".")[0] in em_cpr or re.match(r"anim\.cpr[-.]", k)]
+first_size = {slot: [sum(audio_bytes[slot].get(k, 0) for k in first_ids), sum(1 for k in first_ids if k in audio[slot])] for slot in audio if audio[slot]}
+book["packs"] = {"order": list(PACKS), "ids": pack_ids, "size": pack_size, "first": first_ids, "firstSize": first_size}
+book["bundle"] = {"slots": [s for s in BUNDLE_SLOTS if audio.get(s)], "ids": first_ids}
 
 # precache list: everything the app needs offline except audio
 pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json",) if exists(p)]  # WHO growth tables (js/growth.js)
@@ -320,5 +330,6 @@ print(f"version {version}: {len(out_topics)} topics, {len(narr)} narration clips
       f"{len(pre)} precached files")
 for slot in audio:
     if audio[slot]: print(f"  audio {slot}: {len(audio[slot])} clips, " + ", ".join(f"{p} {pack_size[slot][p][1]} clips {pack_size[slot][p][0] / 1e6:.1f} MB" for p in PACKS))
-print("  packs (clips each voice needs): " + ", ".join(f"{p} {len(pack_ids[p])}" for p in PACKS))
+print("  packs (clips each voice needs): " + ", ".join(f"{p} {len(pack_ids[p])}" for p in PACKS) + f"; Emergency and CPR first: {len(first_ids)} clips, "
+      + ", ".join(f"{sl} {first_size[sl][0] / 1e6:.1f} MB" for sl in first_size) + "; in the Android app: " + " ".join(book["bundle"]["slots"]))
 if missing_icons: print("missing icons (shown as dots):", " ".join(missing_icons))

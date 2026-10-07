@@ -1,7 +1,8 @@
 // Narration clips at 360 px in Dari and Pashto, woman's and man's voice: each speaker plays the clip of the chosen voice
 // (Emergency, a topic, the Home page, the baby CPR film), a clip played once still plays offline, a clip not on the phone
-// falls back quietly when offline, the urgent pack downloads Emergency and CPR first, and the Android app (no clips inside)
-// gets its clips from the website. No console errors anywhere.
+// falls back quietly when offline, the urgent pack downloads Emergency and CPR first, on mobile data only that part
+// downloads by itself, and the Android app plays its own Emergency and CPR clips (woman's voice) and gets the rest from
+// the website. No console errors anywhere.
 // Needs Playwright with Chromium and the audio/ folder:  node tools/test_voices.cjs
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path'), http = require('http');
@@ -148,11 +149,13 @@ async function go(p, base, hash) { await p.goto(base + 'index.html' + hash); awa
     await p.addInitScript(() => { Object.defineProperty(navigator, 'connection', { configurable: true, value: { type: 'cellular', effectiveType: '4g', saveData: false, addEventListener() {} } }); });
     await p.addInitScript(hooks, ['fa', 'm', CV, true]);
     await go(p, BASE, '#/settings');
-    const urgent = book.packs.ids.urgent.length;
-    await p.waitForFunction((n) => window.__fetched.length >= n, urgent, { timeout: 60000 }).catch(() => {});
+    const firstN = book.packs.first.length, first = new Set(book.packs.first);
+    await p.waitForFunction((n) => window.__fetched.length >= n, firstN, { timeout: 60000 }).catch(() => {});
     await p.waitForTimeout(1500);
-    const n = await p.evaluate(() => window.__fetched.length);
-    ok(n === urgent, 'mobile data: only the urgent pack downloads by itself', { n, urgent });
+    const got = await p.evaluate(() => window.__fetched.slice()), n = got.length;
+    ok(n === firstN && got.every((u) => u.includes('/audio/fa-m/') && first.has(u.split('/').pop().replace(/\.mp3$/, ''))),
+      'mobile data: only the Emergency and CPR part downloads by itself', { n, firstN });
+    ok(!!(await p.$('#packs [data-pack=urgent] [data-dlpack=urgent]')), 'mobile data: the rest of the urgent pack has a Download button');
     ok(!!(await p.$('#packs [data-pack=children] [data-dlpack=children]')), 'mobile data: the children pack has a Download button');
     await p.click('#packs [data-dlpack=children]');
     await p.waitForFunction((n) => window.__fetched.length > n + 50, n, { timeout: 20000 }).catch(() => {});
@@ -163,32 +166,69 @@ async function go(p, base, hash) { await p.goto(base + 'index.html' + hash); awa
     await ctx.close();
   }
 
-  // the Android app: the page is https://appassets.androidplatform.net/assets/ (no clips inside); clips come from appUrl
+  // the Android app: the page is https://appassets.androidplatform.net/assets/. Inside: only the Emergency and CPR clips
+  // in the woman's voice of Dari and Pashto (book.bundle); every other clip comes from the website (appUrl).
   {
     const APK = 'https://appassets.androidplatform.net/assets/', SITE = book.config.appUrl;
-    const ctx = await b.newContext({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true, serviceWorkers: 'block' });
-    let offline = false; const siteHits = [];
-    await ctx.route('**/*', (route) => {
-      const u = route.request().url();
-      const local = u.startsWith(APK) ? u.slice(APK.length) : u.startsWith(SITE) ? u.slice(SITE.length) : null;
-      if (local === null) return route.fulfill({ status: 204, body: '' });
-      if (u.startsWith(APK) && /^audio\//.test(local)) return route.fulfill({ status: 404, body: '' }); // nothing bundled
-      if (u.startsWith(SITE)) { if (offline) return route.abort('internetdisconnected'); siteHits.push(local); }
-      const f = file('/' + local);
-      if (!f) return route.fulfill({ status: 404, body: '' });
-      route.fulfill({ status: 200, body: fs.readFileSync(f), headers: { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', 'access-control-allow-origin': '*' } });
-    });
-    const p = await ctx.newPage(); const errs = [];
-    p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); }); p.on('pageerror', (e) => errs.push(String(e)));
-    await p.addInitScript(hooks, ['fa', 'm', CV, false]);
-    await go(p, APK, '#/emergency');
-    await tapAndCheck(p, '.em-who .spk', 'fa-m', 'apk', SITE);
-    ok(siteHits.some((h) => h.startsWith('audio/fa-m/ui.emergencyWho.mp3')), 'apk: clip came from the website', siteHits.slice(-3));
-    offline = true;
-    await go(p, APK, '#/home'); await go(p, APK, '#/emergency');
-    await tapAndCheck(p, '.em-who .spk', 'fa-m', 'apk offline, played before', SITE);
-    ok(!errs.length, 'apk: no console errors', errs);
-    await ctx.close();
+    const inApk = new Set(); for (const sl of book.bundle.slots) for (const id of book.bundle.ids) if (book.audio[sl][id]) inApk.add(clipPath(sl, id));
+    ok(book.bundle.slots.join() === 'fa-f,ps-f' && inApk.size > 100, 'apk: Emergency and CPR clips of fa-f and ps-f are listed', book.bundle.slots);
+    for (const [lg, v, auto] of [['fa', 'f', true], ['ps', 'f', false], ['fa', 'm', false]]) {
+      const L = `apk ${lg}-${v}`;
+      const ctx = await b.newContext({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true, serviceWorkers: 'block' });
+      let offline = false; const siteHits = [], apkHits = [];
+      await ctx.route('**/*', (route) => {
+        const u = route.request().url();
+        const local = u.startsWith(APK) ? u.slice(APK.length).split('?')[0] : u.startsWith(SITE) ? u.slice(SITE.length).split('?')[0] : null;
+        if (local === null) return route.fulfill({ status: 204, body: '' });
+        if (u.startsWith(APK) && /^audio\//.test(local)) { if (!inApk.has(local)) return route.fulfill({ status: 404, body: '' }); apkHits.push(local); } // only the bundled clips are in the app
+        if (u.startsWith(SITE)) { if (offline) return route.abort('internetdisconnected'); siteHits.push(local); }
+        const f = file('/' + local);
+        if (!f) return route.fulfill({ status: 404, body: '' });
+        route.fulfill({ status: 200, body: fs.readFileSync(f), headers: { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream', 'access-control-allow-origin': '*' } });
+      });
+      const p = await ctx.newPage(); const errs = [];
+      p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); }); p.on('pageerror', (e) => errs.push(String(e)));
+      // mobile data, and a switch for "no internet" (the files inside the app still load then)
+      await p.addInitScript(() => {
+        Object.defineProperty(navigator, 'connection', { configurable: true, value: { type: 'cellular', effectiveType: '4g', saveData: false, addEventListener() {} } });
+        Object.defineProperty(Navigator.prototype, 'onLine', { configurable: true, get: () => localStorage.getItem('t.off') !== '1' });
+      });
+      await p.addInitScript(hooks, [lg, v, CV, auto]);
+      const goOffline = async () => { offline = true; await p.evaluate(() => localStorage.setItem('t.off', '1')); };
+      if (v === 'f') {
+        await go(p, APK, '#/emergency');
+        await tapAndCheck(p, '.em-who .spk', `${lg}-f`, L + ' (inside the app)', APK);
+        if (auto) { await p.waitForTimeout(3000); ok(!siteHits.some((h) => h.startsWith('audio/')), L + ': on mobile data nothing downloads (Emergency and CPR are inside)', siteHits.filter((h) => h.startsWith('audio/')).slice(0, 3)); }
+        await goOffline();
+        await go(p, APK, '#/emergency/baby');
+        const cprId = book.config.emergency.find((a) => a.id === 'baby').cpr + '.title';
+        await tapAndCheck(p, `main .spk[data-say="${cprId}"]`, `${lg}-f`, L + ' offline, never played (inside the app)', APK);
+        await go(p, APK, '#/home'); await go(p, APK, '#/emergency');
+        await tapAndCheck(p, '.em-who .spk', `${lg}-f`, L + ' offline again', APK);
+        await go(p, APK, '#/emergency/baby'); // the baby CPR film narrates offline
+        const n0 = await p.evaluate(() => window.__played); await p.click('.em-watch');
+        await p.waitForFunction((n) => window.__played > n, n0, { timeout: 10000 }).catch(() => {});
+        ok(await p.evaluate((n) => window.__played > n, n0), L + ': offline, the baby CPR film narrates');
+        ok(!siteHits.some((h) => h.startsWith('audio/')), L + ': no clip came from the website', siteHits.filter((h) => h.startsWith('audio/')).slice(0, 3));
+      } else {
+        await go(p, APK, '#/emergency');
+        await tapAndCheck(p, '.em-who .spk', `${lg}-m`, L + ' (from the website)', SITE);
+        ok(siteHits.some((h) => h === `audio/${lg}-m/ui.emergencyWho.mp3`), L + ': the man\'s clip came from the website', siteHits.slice(-3));
+        await goOffline();
+        await go(p, APK, '#/home'); await go(p, APK, '#/emergency');
+        await tapAndCheck(p, '.em-who .spk', `${lg}-m`, L + ' offline, played before', SITE);
+        await go(p, APK, '#/emergency/baby');
+        const cprId = book.config.emergency.find((a) => a.id === 'baby').cpr + '.title';
+        const n0 = await p.evaluate(() => [window.__looked.length, window.__played]);
+        await p.click(`main .spk[data-say="${cprId}"]`);
+        await p.waitForFunction((n) => window.__played > n, n0[1], { timeout: 8000 }).catch(() => {});
+        const lk = await p.evaluate((n) => window.__looked.slice(n), n0[0]);
+        ok(lk[0] === new URL(clipPath(`${lg}-m`, cprId), SITE).href && lk[1] === new URL(clipPath(`${lg}-f`, cprId), APK).href, L + ': offline, not downloaded: falls back to the woman\'s clip inside the app', lk);
+        ok(await p.evaluate((n) => window.__played > n, n0[1]), L + ': offline, the fallback plays');
+      }
+      ok(!errs.length, L + ': no console errors', errs);
+      await ctx.close();
+    }
   }
   await b.close(); server.close();
   console.log(`voice tests: ${pass} passed, ${fail} failed`);
