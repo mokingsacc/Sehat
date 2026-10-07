@@ -16,6 +16,7 @@ const S = {
   voice: store.get('voice', null), // 'f' = a woman's voice, 'm' = a man's voice
   speed: store.get('speed', 1),
   stats: store.get('stats', true),
+  watch: store.get('watch', true), // "Help watch for outbreaks" (also needs stats on)
   kids: store.get('kids', []),
   kid: store.get('kid', null),
   queueIds: [],
@@ -190,6 +191,7 @@ const REC = {
 /* ---------- anonymous usage counts ---------- */
 const A = {
   iid: store.get('iid', null), q: store.get('q', []), visibleSince: Date.now(), timer: null,
+  rq: store.get('rq', []), // disease-watch reports and search signals, sent to <stats server>/r
 };
 function track(t, data = {}) {
   if (!S.stats) return;
@@ -202,6 +204,7 @@ function payload(events) {
   return JSON.stringify({ iid: A.iid, v: S.book && S.book.version, lang: S.lang, standalone: isStandalone(), plat: platform(), events });
 }
 async function flush(beacon) {
+  flushReports(beacon);
   const url = S.book && S.book.config && S.book.config.analyticsUrl;
   if (!url || !S.stats || !A.q.length || !navigator.onLine) return;
   const batch = A.q.slice(0, 200);
@@ -225,6 +228,98 @@ document.addEventListener('visibilitychange', () => {
 });
 addEventListener('online', () => { flush(); sendFeedback(); clearTimeout(DL.retry); DL.wait = 15000; startDownloads(); });
 addEventListener('offline', () => packsUI());
+
+/* ---------- disease watch: "does someone in your home have this now?" ---------- */
+// Definitions come from content/src/syndromes.json (book.surveillance). A "yes" asks the district once (kept on
+// the phone) and an age group, then queues one report: syndrome, definition version, district, age group, day,
+// a random report id and the random install id. No names, no GPS, no free text. The same syndrome from this phone
+// counts once per 14 days. Symptom-finder searches that match a syndrome are queued as a weaker "search" signal
+// (once per syndrome per day). Everything waits in the queue offline and is sent to <stats server>/r.
+const SV = () => (S.book && S.book.surveillance) || null;
+const watching = () => !!(S.stats && S.watch && SV());
+const svSyn = (id) => (SV() ? SV().syndromes.find((x) => x.id === id) : null);
+const pad2 = (n) => String(n).padStart(2, '0');
+const localDay = (d = new Date()) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+const dayDiff = (a, b) => Math.round((Date.parse(b + 'T12:00:00Z') - Date.parse(a + 'T12:00:00Z')) / DAY);
+const randId = () => (crypto.randomUUID ? crypto.randomUUID() : [...crypto.getRandomValues(new Uint8Array(16))].map((x) => x.toString(16).padStart(2, '0')).join(''));
+const reportUrl = () => { const u = String((S.book && S.book.config && S.book.config.analyticsUrl) || '').trim(); return u ? u.replace(/\/e\/?$/, '') + '/r' : ''; };
+function svRecent(sid) { const last = store.get('svSent', {})[sid]; return !!last && dayDiff(last, localDay()) < ((SV() && SV().dedupeDays) || 14); }
+function svAskable(sid) {
+  if (!watching() || !svSyn(sid) || svRecent(sid)) return false;
+  const no = store.get('svNo', {})[sid]; return !(no && Date.now() - no < 3 * DAY); // after "no", ask again in 3 days
+}
+const svFor = (key, ids) => (SV() ? SV().syndromes.filter((x) => (x[key] || []).some((i) => ids.includes(i))).map((x) => x.id) : []);
+const placeName = (id) => { const sv = SV(); const p = sv && [...sv.districts, ...sv.provinces].find((x) => x.id === id); return p ? L(p.name) : ''; };
+function sayRow(id, cls = 'rq') { return `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(L(S.book.narration[id]))}</div>${spk(id)}</div>`; }
+// the question cards for these syndromes (only those that can be asked now); returns html and the narration ids
+function reportCards(sids) {
+  const list = sids.filter(svAskable).slice(0, 3), ids = [];
+  const html = list.map((sid) => {
+    ids.push('ui.syn.' + sid, 'ui.report');
+    return `<div class="report" data-report="${esc(sid)}">${sayRow('ui.syn.' + sid, 'rq sign')}${sayRow('ui.report', 'rq q')}<div class="row2"><button class="sbtn yes" data-rep="yes" data-syn="${esc(sid)}">${esc(T('reportYes'))}</button><button class="sbtn no" data-rep="no" data-syn="${esc(sid)}">${esc(T('reportNo'))}</button></div></div>`;
+  }).join('');
+  return { html, ids };
+}
+// a dialog with big choice buttons; resolves with the chosen value, or null when closed
+function choose(html) {
+  return new Promise((res) => {
+    dialog(html, (w) => w.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-pick]');
+      if (b) { w.remove(); res(b.dataset.pick); } else if (e.target === w || e.target.closest('[data-close]')) res(null);
+    }));
+  });
+}
+async function svPickDistrict(force) {
+  const sv = SV(); let d = store.get('district', null);
+  if (d && !force && [...sv.districts, ...sv.provinces].some((x) => x.id === d)) return d;
+  const btn = (x) => `<button data-pick="${esc(x.id)}">${esc(L(x.name))}</button>`;
+  d = await choose(`<h2>${esc(L(sv.province.name))}</h2>${sayRow('ui.district', 'dq')}<div class="places">${sv.districts.map(btn).join('')}<button data-pick="__other" class="other">${esc(T('otherProvince'))}</button></div><button class="btn ghost" data-close>${esc(T('cancel'))}</button>`);
+  if (d === '__other') d = await choose(`<h2>${esc(T('chooseProvince'))}</h2>${sayRow('ui.province', 'dq')}<div class="places">${sv.provinces.map(btn).join('')}</div><button class="btn ghost" data-close>${esc(T('cancel'))}</button>`);
+  if (d) store.set('district', d);
+  return d;
+}
+async function svYes(sid, card) {
+  if (!svAskable(sid)) return;
+  const d = await svPickDistrict(false); if (!d) return;
+  const a = await choose(`${sayRow('ui.ageGroup', 'dq')}<div class="places one">${SV().ageGroups.map((x) => `<button data-pick="${esc(x.id)}">${esc(L(x.name))}</button>`).join('')}</div><button class="btn ghost" data-close>${esc(T('cancel'))}</button>`);
+  if (!a || !svQueue(sid, d, a)) return;
+  if (card) { card.classList.add('done'); card.innerHTML = sayRow('ui.reportThanks'); }
+  if (hasAudio('ui.reportThanks') || ttsVoice()) play(['ui.reportThanks']);
+}
+function svQueue(sid, d, a) {
+  const syn = svSyn(sid); if (!syn || !watching() || svRecent(sid)) return false;
+  const day = localDay();
+  A.rq.push({ k: 'r', id: randId(), s: sid, dv: syn.version, d, a, day });
+  if (A.rq.length > 300) A.rq = A.rq.slice(-300);
+  store.set('rq', A.rq);
+  const sent = store.get('svSent', {}); sent[sid] = day; store.set('svSent', sent);
+  setTimeout(flushReports, 500);
+  return true;
+}
+// a symptom-finder search or picture that matches a syndrome: a weaker signal, once per syndrome per day
+function svSignal(symIds) {
+  if (!watching()) return;
+  const day = localDay(), seen = store.get('svSig', {}); let added = false;
+  for (const sid of svFor('symptoms', symIds)) {
+    if (seen[sid] === day) continue;
+    seen[sid] = day; added = true;
+    A.rq.push({ k: 's', s: sid, dv: svSyn(sid).version, d: store.get('district', null), day });
+  }
+  if (!added) return;
+  if (A.rq.length > 300) A.rq = A.rq.slice(-300);
+  store.set('svSig', seen); store.set('rq', A.rq);
+}
+async function flushReports(beacon) {
+  const url = reportUrl();
+  if (!url || !watching() || !A.rq.length || !navigator.onLine) return;
+  const batch = A.rq.slice(0, 100), body = JSON.stringify({ iid: A.iid, v: S.book && S.book.version, items: batch });
+  const done = () => { A.rq = A.rq.slice(batch.length); store.set('rq', A.rq); };
+  if (beacon && navigator.sendBeacon) { if (navigator.sendBeacon(url, new Blob([body], { type: 'text/plain' }))) done(); return; }
+  try {
+    const r = await fetch(url, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' }, keepalive: true });
+    if (r.ok) { done(); if (A.rq.length) setTimeout(flushReports, 1000); }
+  } catch {}
+}
 
 /* ---------- toast & dialog ---------- */
 let toastT;
@@ -366,6 +461,7 @@ function screenTopic(tid) {
   const ids = [tid + '.title'];
   let n = 0, body = '';
   for (const b of t.blocks) { if (b.type === 'step') n++; body += blockHtml(b, n); ids.push(...blockIds(b)); }
+  const rc = reportCards(svFor('topics', [tid])); body += rc.html; ids.push(...rc.ids);
   ids.push('ui.disclaimer');
   const back = t.section === 'children' ? '#/children' : '#/adults';
   let html = `<div class="topic-hero"><img src="${esc(t.image)}" alt=""><a class="round" href="${back}" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
@@ -669,7 +765,7 @@ async function deleteVoices() {
 }
 async function showStorage() { const t = await storageText(); const el = $('#storage'); if (el) el.textContent = t; }
 function screenSettings() {
-  const ids = ['ui.settings', 'ui.share', 'ui.disclaimer'];
+  const ids = ['ui.settings', 'ui.share', 'ui.watch', 'ui.disclaimer'];
   let html = top(T('settings')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.settings"><div class="body">${esc(L(S.book.narration['ui.settings']))}</div>${spk('ui.settings')}</div>`;
   html += `<div class="panel">`;
@@ -682,6 +778,10 @@ function screenSettings() {
   html += `<div class="srow" data-block="ui.share">${ic('people')}<button class="grow" data-action="share" style="text-align:start"><div class="t">${esc(T('share'))}</div><div class="s">${esc(T('shareSub'))}</div></button>${spk('ui.share')}</div>`;
   if (window.FHBAndroid) { ids.push('ui.sendApp'); html += `<div class="srow" data-block="ui.sendApp">${ic('phone')}<button class="grow" data-action="sendapp" style="text-align:start"><div class="t">${esc(T('sendApp'))}</div><div class="s">${esc(T('sendAppSub'))}</div></button>${spk('ui.sendApp')}</div>`; }
   html += `<div class="srow">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div><button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
+  if (SV()) {
+    html += `<div class="srow watch" data-block="ui.watch">${ic('people')}<div class="grow"><div class="t">${esc(T('watch'))}</div><div class="s">${esc(L(S.book.narration['ui.watch']))}</div>${S.stats ? '' : `<div class="s warnline">${esc(T('watchNeedsStats'))}</div>`}</div>${spk('ui.watch')}<button class="toggle" data-action="watch" aria-pressed="${watching()}" aria-label="${esc(T('watch'))}"${S.stats ? '' : ' disabled'}></button></div>`;
+    if (watching()) { const d = store.get('district', null); html += `<div class="srow">${ic('house')}<div class="grow"><div class="t">${esc(T('myDistrict'))}</div><div class="s" id="mydistrict">${esc(d ? placeName(d) : T('notChosen'))}</div></div><button class="sbtn" data-action="district">${esc(T('change'))}</button></div>`; }
+  }
   html += `<a class="srow" href="#/studio">${ic('talk')}<div class="grow"><div class="t">${esc(T('recordMode'))}</div><div class="s">${esc(T('recordModeSub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
   html += `</div>` + disclaimer();
   html += `<p class="muted center" dir="ltr">Sehat · ${esc(S.book.version)}<br>Content based on WHO guidance (IMCI, PCPNC, Facts for Life). Draft for review. Icons: Health Icons (MIT). Font: Noto Naskh Arabic (OFL).</p>`;
@@ -800,6 +900,9 @@ function askResults(symId) {
     out += `<a class="hit" href="#/topic/${tid}/${encodeURIComponent(b.id)}"><span class="ht">${esc(L(t.title))}</span><span class="hx">${esc(txt.length > 110 ? txt.slice(0, 110) + '…' : txt)}</span></a>`;
   }
   track('ask', { p: syms[0] ? syms[0].id : symId || 'none:' + ASK.q.slice(0, 60) });
+  const top3 = syms.slice(0, 3).map((s) => s.id);
+  svSignal(top3);
+  if (out) out += reportCards(svFor('symptoms', top3)).html;
   return out ? `<h2 class="sub-h">${esc(T('results'))}</h2>${out}` : `<div class="blk tip"><div class="body">${esc(T('noResults'))}</div></div>`;
 }
 function resultCard(tid) {
@@ -960,6 +1063,12 @@ document.addEventListener('click', async (e) => {
   if (d.kid) { S.kid = d.kid; saveKids(); render(); return; }
   if (d.visit) { const k = S.kids.find((x) => x.id === S.kid); const vis = S.book.topics.vaccines.visits.find((x) => x.id === d.visit); if (k && vis) visitDialog(k, vis); return; }
   if (d.dlpack) { if (!navigator.onLine) { toast(T('offlineNow')); return; } wantPack(slotOf(), d.dlpack); persistOnce(); t.disabled = true; t.textContent = T('downloading'); DL.full = false; startDownloads(); return; }
+  if (d.rep) {
+    const card = t.closest('.report');
+    if (d.rep === 'no') { const no = store.get('svNo', {}); no[d.syn] = Date.now(); store.set('svNo', no); if (card) card.remove(); toast(T('thanks')); }
+    else svYes(d.syn, card);
+    return;
+  }
   if (d.sym) { ASK.q = ''; const q = $('#askq'); if (q) q.value = ''; $('#askres').innerHTML = askResults(d.sym); $('#askres').scrollIntoView({ behavior: 'smooth' }); return; }
   if (d.studioslot) { ST.slot = d.studioslot; store.set('studioSlot', ST.slot); render(); return; }
   switch (d.action) {
@@ -970,7 +1079,9 @@ document.addEventListener('click', async (e) => {
     case 'install': doInstall(); return;
     case 'sendapp': track('sendapp'); try { window.FHBAndroid.shareApp(); } catch {} return;
     case 'share': doShare(); return;
-    case 'stats': S.stats = !S.stats; store.set('stats', S.stats); if (!S.stats) { A.q = []; store.set('q', []); } render(); return;
+    case 'stats': S.stats = !S.stats; store.set('stats', S.stats); if (!S.stats) { A.q = []; store.set('q', []); A.rq = []; store.set('rq', []); } render(); return;
+    case 'watch': if (!S.stats) return; S.watch = !S.watch; store.set('watch', S.watch); if (!S.watch) { A.rq = []; store.set('rq', []); } render(); return;
+    case 'district': if (await svPickDistrict(true)) render(); return;
     case 'checkupd': checkUpdate(true); return;
     case 'srec': studioRecord(); return;
     case 'snext': ST.i++; store.set('studioI', ST.i); render(); return;
@@ -1041,6 +1152,10 @@ function normBook(b) {
   b.audio = a; return b;
 }
 function useBook(b) {
+  // a book published from the editor before a feature existed keeps the app's own words and disease-watch lists
+  if (S.shipped.surveillance && !b.surveillance) b.surveillance = S.shipped.surveillance;
+  for (const [k, v] of Object.entries(S.shipped.say || {})) if (b.narration && !b.narration[k]) b.narration[k] = v;
+  if (b.ui) for (const [k, v] of Object.entries(S.shipped.ui || {})) if (!b.ui[k]) b.ui[k] = v;
   const c = { ...(b.config || {}) };
   for (const k of ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl']) c[k] = S.shipped.config[k];
   b.config = c; S.book = normBook(b);
@@ -1066,7 +1181,8 @@ async function start() {
   await REC.init();
   try { S.book = normBook(await (await fetch('content/book.json')).json()); }
   catch { $('#app').innerHTML = '<p style="padding:40px;text-align:center">⚠︎</p>'; return; }
-  S.shipped = { version: S.book.version, built: S.book.built, config: S.book.config || {} };
+  S.shipped = { version: S.book.version, built: S.book.built, config: S.book.config || {}, surveillance: S.book.surveillance || null, ui: S.book.ui,
+    say: Object.fromEntries(Object.entries(S.book.narration).filter(([k]) => k.startsWith('ui.'))) };
   if (contentUrl()) { const rb = await savedRemote(); if (goodBook(rb) && isNewer(rb, S.book)) useBook(rb); }
   if (!S.kid && S.kids[0]) S.kid = S.kids[0].id;
   render();

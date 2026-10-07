@@ -15,6 +15,22 @@ ui.feedback	موږ ته ووایئ چې څه ښه کړو. سور تڼۍ ووهئ
 ui.near	دا پاڼه تاسو ته نږدې روغتون او کلینیک ښيي. خپل ځای پیدا کړئ.	This page shows the nearest hospital and clinic. Find where you are.
 ui.voice	هغه غږ وټاکئ چې خوښ مو دی: د ښځې غږ یا د سړي غږ. د اورېدو لپاره، د سپیکر تڼۍ ووهئ.	Choose the voice you like: a woman's voice or a man's voice. Tap the speaker to listen.
 ui.sendApp	دا اپ په بلوتوث د کورنۍ او ګاونډیانو ټیلیفون ته ولېږئ. انټرنېټ ته اړتیا نشته.	Send this app to your family's and neighbours' phones by Bluetooth. No internet needed.
+ui.report	ایا ستاسو په کور کې څوک همدا اوس دا ناروغي لري؟	Does someone in your home have this now?
+ui.district	چېرته اوسېږئ؟ خپله ولسوالي وټاکئ. دا یوازې یو ځل پوښتل کېږي او په همدې ټیلیفون کې پاتې کېږي.	Where do you live? Choose your district. You are asked only once, and it stays on this phone.
+ui.province	په کوم ولایت کې اوسېږئ؟	Which province do you live in?
+ui.ageGroup	ناروغ څو کلن دی؟	How old is the sick person?
+ui.reportThanks	مننه. دا له روغتیايي کارکوونکو سره مرسته کوي چې ساري ناروغۍ ژر وویني. دا هېچا ته خبر نه ورکوي؛ که د خطر نښې وي، همدا اوس روغتون ته ولاړ شئ.	Thank you. This helps health workers see illnesses that spread early. It does not call anyone: if there are danger signs, go to hospital now.
+ui.watch	که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي او د عمر ډله لېږل کېږي. هېڅ نوم نه لېږل کېږي. روغتیايي کارکوونکي په دې شمېر ساري ناروغۍ ژر پیدا کوي.	If you say that someone at home has an illness that spreads, only the illness, your district and an age group are sent. No names are sent. Health workers use these numbers to find outbreaks early.
+ui.syn.measles	تبه او په ټول بدن سرې دانې؛ کېدای شي شري وي.	Fever and a red rash all over the body; it may be measles.
+ui.syn.awd	په یوه ورځ کې درې ځله یا ډېر اوبلن نس ناستی، بې له وینې.	Three or more watery stools in one day, with no blood.
+ui.syn.bloody-diarrhoea	نس ناستی، او په ډکو متیازو کې وینه ښکاري.	Diarrhoea, with blood in the stool.
+ui.syn.ari	ټوخی، له ژر ژر یا سخت سا اخیستلو سره.	Cough with fast or difficult breathing.
+ui.syn.cchf	ناڅاپي تبه او له پوزې، ورېژو یا پوستکي لاندې وینه بهېدل.	Sudden fever with bleeding from the nose, gums or under the skin.
+ui.syn.dog-bite	د سپي یا بل څاروي چیچل یا منګول وهل.	A bite or scratch from a dog or another animal.
+ui.syn.tb	۲ اونۍ یا ډېر ټوخی.	A cough for 2 weeks or more.
+ui.syn.jaundice	سترګې یا پوستکی تازه ژېړ شوي (نوی زېږېدلی ماشوم نه).	Eyes or skin have recently turned yellow (not a newborn baby).
+ui.syn.meningitis	تبه له شخې غاړې سره.	Fever with a stiff neck.
+ui.syn.leishmaniasis	د پوستکي زخم چې له دوو اونیو وروسته نه دی جوړ شوی.	A skin sore that has not healed after two weeks.
 vaccines.title	واکسینونه	Vaccines
 vaccines.lead	واکسین ستاسو ماشوم له خطرناکو ناروغیو ساتي. ستاسو ماشوم باید تر ۲ کلنۍ پورې ۶ ځله واکسین ته بوتلل شي.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	د زېږون پر وخت: د بي سي جي واکسین، د نری رنځ پر وړاندې؛ د پولیو څاڅکي، د پولیو (ګوډوالی) پر وړاندې؛ د هیپاټایټس ب واکسین، د هیپاټایټس ب، چې د ځیګر ناروغي ده پر وړاندې.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.

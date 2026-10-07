@@ -268,3 +268,25 @@ img{max-width:100%;display:block}
 .studio-slots button svg{width:28px;height:28px;flex:0 0 auto;color:var(--teal)}
 .studio-slots button[aria-pressed=true]{background:var(--teal);color:#fff;border-color:var(--teal);font-weight:700}
 .studio-slots button[aria-pressed=true] svg{color:#fff}
+
+/* disease watch: "does someone in your home have this now?" and the district / age choices */
+.report{background:var(--teal-t);border:2px solid var(--teal);border-radius:var(--r);padding:10px 12px;margin:12px 0}
+.report .rq{display:flex;align-items:center;gap:10px;padding:4px 0}
+.report .rq .body{flex:1 1 auto;min-width:0;font-size:16.5px;line-height:1.6}
+.report .rq.q .body{font-weight:700;font-size:18px}
+.report .row2{margin-top:8px}
+.report .row2 button{flex:1 1 0;min-height:52px;font-size:18px}
+.report .sbtn.no{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
+.report.done{background:var(--green-t);border-color:var(--green)}
+.dq{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700;line-height:1.55;margin:4px 0 8px}
+.dq .body{flex:1 1 auto;min-width:0}
+.places{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0}
+.places.one{grid-template-columns:1fr}
+.places button{background:var(--card);border:1.5px solid var(--line);border-radius:14px;min-height:56px;padding:8px 10px;font-size:16.5px;font-weight:600;line-height:1.35}
+.places button:active{background:var(--teal-t);border-color:var(--teal)}
+.places button.other{border-style:dashed;color:var(--teal-d)}
+.srow.watch{align-items:flex-start}
+.srow.watch>.ic{flex:0 0 auto;margin-top:8px}
+.srow.watch .toggle,.srow.watch .spk{align-self:center}
+.srow .warnline{color:var(--amber);font-weight:600}
+.toggle[disabled]{opacity:.45}

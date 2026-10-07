@@ -15,6 +15,22 @@ ui.feedback	به ما بگویید چه چیزی را بهتر بسازیم. د�
 ui.near	این صفحه نزدیک‌ترین شفاخانه و کلینیک را به شما نشان می‌دهد. جای خود را پیدا کنید.	This page shows the nearest hospital and clinic. Find where you are.
 ui.voice	صدایی را که دوست دارید انتخاب کنید: صدای زن یا صدای مرد. برای شنیدن، دکمۀ بلندگو را بزنید.	Choose the voice you like: a woman's voice or a man's voice. Tap the speaker to listen.
 ui.sendApp	این برنامه را با بلوتوث به تلفن خانواده و همسایه‌ها بفرستید. انترنت لازم نیست.	Send this app to your family's and neighbours' phones by Bluetooth. No internet needed.
+ui.report	آیا کسی در خانهٔ شما همین حالا این مریضی را دارد؟	Does someone in your home have this now?
+ui.district	در کجا زندگی می‌کنید؟ ولسوالی خود را انتخاب کنید. این فقط یک بار پرسیده می‌شود و در همین گوشی می‌ماند.	Where do you live? Choose your district. You are asked only once, and it stays on this phone.
+ui.province	در کدام ولایت زندگی می‌کنید؟	Which province do you live in?
+ui.ageGroup	مریض چند ساله است؟	How old is the sick person?
+ui.reportThanks	تشکر. این به کارمندان صحی کمک می‌کند تا مریضی‌های واگیر را زود ببینند. این کسی را خبر نمی‌کند؛ اگر علایم خطر هست، همین حالا به شفاخانه بروید.	Thank you. This helps health workers see illnesses that spread early. It does not call anyone: if there are danger signs, go to hospital now.
+ui.watch	اگر بگویید که کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی و گروه سنی فرستاده می‌شود. هیچ نامی فرستاده نمی‌شود. کارمندان صحی با این شمار، مریضی‌های واگیر را زود پیدا می‌کنند.	If you say that someone at home has an illness that spreads, only the illness, your district and an age group are sent. No names are sent. Health workers use these numbers to find outbreaks early.
+ui.syn.measles	تب و دانه‌های سرخ در تمام بدن؛ شاید سرخکان باشد.	Fever and a red rash all over the body; it may be measles.
+ui.syn.awd	سه بار یا بیشتر اسهال آبکی در یک روز، بدون خون.	Three or more watery stools in one day, with no blood.
+ui.syn.bloody-diarrhoea	اسهال، و در مدفوع خون دیده می‌شود.	Diarrhoea, with blood in the stool.
+ui.syn.ari	سرفه، همراه با نفس تیز یا نفس کشیدن به سختی.	Cough with fast or difficult breathing.
+ui.syn.cchf	تب ناگهانی همراه با خونریزی از بینی، بیره یا زیر پوست.	Sudden fever with bleeding from the nose, gums or under the skin.
+ui.syn.dog-bite	گزیدن یا پنجه زدن سگ یا حیوان دیگر.	A bite or scratch from a dog or another animal.
+ui.syn.tb	سرفه ۲ هفته یا بیشتر.	A cough for 2 weeks or more.
+ui.syn.jaundice	چشم یا پوست تازه زرد شده است (نه نوزاد).	Eyes or skin have recently turned yellow (not a newborn baby).
+ui.syn.meningitis	تب همراه با شخی گردن.	Fever with a stiff neck.
+ui.syn.leishmaniasis	زخم پوست که بعد از دو هفته جور نشده است.	A skin sore that has not healed after two weeks.
 vaccines.title	واکسین‌ها	Vaccines
 vaccines.lead	واکسین طفل شما را از مرض‌های خطرناک محافظت می‌کند. طفل شما تا ۲ سالگی ۶ بار باید برای واکسین برود.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	هنگام ولادت: واکسین بی سی جی، برای توبرکلوز (سل)؛ قطرهٔ پولیو، برای فلج اطفال (پولیو)؛ واکسین هپاتیت ب، برای هپاتیت ب، که یک مرض جگر است.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.

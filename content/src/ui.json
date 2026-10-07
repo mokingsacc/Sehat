@@ -810,6 +810,56 @@
    "fa": "با بلوتوث، بدون انترنت",
    "ps": "په بلوتوث، بې انټرنېټه",
    "en": "By Bluetooth, no internet needed"
+  },
+  "reportYes": {
+   "fa": "بلی",
+   "ps": "هو",
+   "en": "Yes"
+  },
+  "reportNo": {
+   "fa": "نخیر",
+   "ps": "نه",
+   "en": "No"
+  },
+  "otherProvince": {
+   "fa": "ولایت دیگر",
+   "ps": "بل ولایت",
+   "en": "Another province"
+  },
+  "chooseProvince": {
+   "fa": "ولایت را انتخاب کنید",
+   "ps": "ولایت وټاکئ",
+   "en": "Choose the province"
+  },
+  "watch": {
+   "fa": "کمک برای دیدن مریضی‌های واگیر",
+   "ps": "د ساري ناروغیو په لیدو کې مرسته",
+   "en": "Help watch for outbreaks"
+  },
+  "watchNeedsStats": {
+   "fa": "اول «شمار استفاده» را روشن کنید",
+   "ps": "لومړی «د کارونې شمېر» روښانه کړئ",
+   "en": "Turn on usage counts first"
+  },
+  "myDistrict": {
+   "fa": "ولسوالی من",
+   "ps": "زما ولسوالي",
+   "en": "My district"
+  },
+  "notChosen": {
+   "fa": "انتخاب نشده",
+   "ps": "نه دی ټاکل شوی",
+   "en": "Not chosen"
+  },
+  "change": {
+   "fa": "تغییر",
+   "ps": "بدلول",
+   "en": "Change"
+  },
+  "thanks": {
+   "fa": "تشکر",
+   "ps": "مننه",
+   "en": "Thank you"
   }
  },
  "say": {
@@ -892,6 +942,36 @@
    "fa": "این برنامه را با بلوتوث به تلفن خانواده و همسایه‌ها بفرستید. انترنت لازم نیست.",
    "ps": "دا اپ په بلوتوث د کورنۍ او ګاونډیانو ټیلیفون ته ولېږئ. انټرنېټ ته اړتیا نشته.",
    "en": "Send this app to your family's and neighbours' phones by Bluetooth. No internet needed."
+  },
+  "ui.report": {
+   "fa": "آیا کسی در خانهٔ شما همین حالا این مریضی را دارد؟",
+   "ps": "ایا ستاسو په کور کې څوک همدا اوس دا ناروغي لري؟",
+   "en": "Does someone in your home have this now?"
+  },
+  "ui.district": {
+   "fa": "در کجا زندگی می‌کنید؟ ولسوالی خود را انتخاب کنید. این فقط یک بار پرسیده می‌شود و در همین گوشی می‌ماند.",
+   "ps": "چېرته اوسېږئ؟ خپله ولسوالي وټاکئ. دا یوازې یو ځل پوښتل کېږي او په همدې ټیلیفون کې پاتې کېږي.",
+   "en": "Where do you live? Choose your district. You are asked only once, and it stays on this phone."
+  },
+  "ui.province": {
+   "fa": "در کدام ولایت زندگی می‌کنید؟",
+   "ps": "په کوم ولایت کې اوسېږئ؟",
+   "en": "Which province do you live in?"
+  },
+  "ui.ageGroup": {
+   "fa": "مریض چند ساله است؟",
+   "ps": "ناروغ څو کلن دی؟",
+   "en": "How old is the sick person?"
+  },
+  "ui.reportThanks": {
+   "fa": "تشکر. این به کارمندان صحی کمک می‌کند تا مریضی‌های واگیر را زود ببینند. این کسی را خبر نمی‌کند؛ اگر علایم خطر هست، همین حالا به شفاخانه بروید.",
+   "ps": "مننه. دا له روغتیايي کارکوونکو سره مرسته کوي چې ساري ناروغۍ ژر وویني. دا هېچا ته خبر نه ورکوي؛ که د خطر نښې وي، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Thank you. This helps health workers see illnesses that spread early. It does not call anyone: if there are danger signs, go to hospital now."
+  },
+  "ui.watch": {
+   "fa": "اگر بگویید که کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی و گروه سنی فرستاده می‌شود. هیچ نامی فرستاده نمی‌شود. کارمندان صحی با این شمار، مریضی‌های واگیر را زود پیدا می‌کنند.",
+   "ps": "که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي او د عمر ډله لېږل کېږي. هېڅ نوم نه لېږل کېږي. روغتیايي کارکوونکي په دې شمېر ساري ناروغۍ ژر پیدا کوي.",
+   "en": "If you say that someone at home has an illness that spreads, only the illness, your district and an age group are sent. No names are sent. Health workers use these numbers to find outbreaks early."
   }
  },
  "months": {

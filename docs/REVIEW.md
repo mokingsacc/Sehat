@@ -35,3 +35,26 @@
 - child-safety: burn threshold vs first-aid page; anyone pulled from water to hospital; check explosive-remnant message against ICRC/UNMAS.
 - floods-quakes: "drop, cover, hold on" vs "get out at once" for single-storey mud-brick; lead names Samangan; crush injury urgency.
 - leishmaniasis: local names; "not healed after 2 weeks" threshold; harmful practices listed (acid, battery water, hot metal) unsourced.
+
+## Disease watch (community surveillance): for Mo and native speakers
+Medical and public-health points (definitions are in content/src/syndromes.json, versioned; methods at /watch/methods):
+- Syndromes asked in the app: suspected measles (fever + red rash all over), acute watery diarrhoea (3+ watery stools a day, no blood), bloody diarrhoea, ARI/pneumonia (cough with fast or difficult breathing), suspected CCHF (sudden fever + bleeding from nose, gums or under the skin), dog bite / rabies exposure, cough 2 weeks or more (presumptive TB), acute jaundice (recent yellow eyes or skin, not a newborn), suspected meningitis (fever + stiff neck), cutaneous leishmaniasis (sore not healed after 2 weeks).
+- Defined but NOT asked: suspected malaria (no malaria page; "fever without other cause" cannot be judged by families) and acute flaccid paralysis (no page on sudden floppy weakness). Turn on ("active": true) only after adding content.
+- Where the question shows: measles + meningitis on Fever; measles on Measles; both diarrhoeas on Diarrhoea; ARI on Cough; CCHF + dog bite on Illness from animals; dog bite on First aid; TB on TB; jaundice + meningitis on Danger signs in adults; leishmaniasis on Salak; and under symptom-finder results (rash, diarrhoea, breathing, cough, animals, bite, long cough, yellow, fever, sore). Check this is not too many questions on Fever and Danger signs in adults.
+- Alert rules v2026-10-07.1: any single suspected CCHF (or AFP); measles 2+ in one district in one week; any syndrome 3+ in a district-week and at least 2x the mean of the previous 4 weeks. Check against what the provincial DEWS team uses.
+- One phone counts each syndrome once per 14 days (undercounts several sick people in one home). After "No" the question returns after 3 days.
+- Age groups: under 5, 5 to 14, 15 and over.
+- Source links (WHO VPD surveillance standards page, WHO EWARN guidelines 2012, WHO fact sheets, WHO TB screening guideline 9789240022676, WHO EMRO Afghanistan situation report) were not opened from here: check they still resolve.
+- Who sees the data: everyone with a dashboard key sees exact weekly counts by district and age on /watch; shareable exports hide counts 1 to 4. Decide whether viewers should only see the shareable view.
+
+New Dari / Pashto lines to check (simple wording, Persian digits):
+- ui.report: آیا کسی در خانهٔ شما همین حالا این مریضی را دارد؟ / ایا ستاسو په کور کې څوک همدا اوس دا ناروغي لري؟
+- ui.district: در کجا زندگی می‌کنید؟ ولسوالی خود را انتخاب کنید. این فقط یک بار پرسیده می‌شود و در همین گوشی می‌ماند. / چېرته اوسېږئ؟ خپله ولسوالي وټاکئ. دا یوازې یو ځل پوښتل کېږي او په همدې ټیلیفون کې پاتې کېږي.
+- ui.province: در کدام ولایت زندگی می‌کنید؟ / په کوم ولایت کې اوسېږئ؟
+- ui.ageGroup: مریض چند ساله است؟ / ناروغ څو کلن دی؟
+- ui.reportThanks: تشکر. این به کارمندان صحی کمک می‌کند تا مریضی‌های واگیر را زود ببینند. این کسی را خبر نمی‌کند؛ اگر علایم خطر هست، همین حالا به شفاخانه بروید. / مننه. دا له روغتیايي کارکوونکو سره مرسته کوي چې ساري ناروغۍ ژر وویني. دا هېچا ته خبر نه ورکوي؛ که د خطر نښې وي، همدا اوس روغتون ته ولاړ شئ.
+- ui.watch (Settings explanation): اگر بگویید که کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی و گروه سنی فرستاده می‌شود. هیچ نامی فرستاده نمی‌شود. کارمندان صحی با این شمار، مریضی‌های واگیر را زود پیدا می‌کنند. / که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي او د عمر ډله لېږل کېږي. هېڅ نوم نه لېږل کېږي. روغتیايي کارکوونکي په دې شمېر ساري ناروغۍ ژر پیدا کوي.
+- Buttons and labels: بلی / هو (Yes); نخیر / نه (No); ولایت دیگر / بل ولایت; ولایت را انتخاب کنید / ولایت وټاکئ; کمک برای دیدن مریضی‌های واگیر / د ساري ناروغیو په لیدو کې مرسته; اول «شمار استفاده» را روشن کنید / لومړی «د کارونې شمېر» روښانه کړئ; ولسوالی من / زما ولسوالي; انتخاب نشده / نه دی ټاکل شوی; تغییر / بدلول; تشکر / مننه.
+- The ten sign lines (ui.syn.<id>, the "ask" text in syndromes.json), e.g. measles «تب و دانه‌های سرخ در تمام بدن؛ شاید سرخکان باشد.» / «تبه او په ټول بدن سرې دانې؛ کېدای شي شري وي.»; dog bite uses منګول وهل for "scratch"; jaundice says «نه نوزاد» / «نوی زېږېدلی ماشوم نه»; AWD «اسهال آبکی» / «اوبلن نس ناستی».
+- Syndrome names (dashboard-only in English, but fa/ps kept in syndromes.json) and age groups: طفل زیر ۵ سال / له ۵ کلونو کم ماشوم; طفل بزرگتر (۵ تا ۱۴ سال) / لوی ماشوم (۵ تر ۱۴ کلونو); بزرگسال (۱۵ سال و بیشتر) / لوی (۱۵ کلن او پورته).
+- Place names in content/src/districts.json: «شهر ایبک» vs «اطراف ایبک (قریه‌ها)» (is splitting Aybak city from its villages how people think of it?), دره صوف پایین/بالا, فیروز نخچیر, حضرت سلطان, خرم و سارباغ (ps خرم او سارباغ), روی دوآب; Pashto spellings of provinces (کونړ, لوګر, ننګرهار, ارزګان, میدان وردګ, غزني, دایکندي).

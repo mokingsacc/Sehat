@@ -44,3 +44,49 @@ CREATE TABLE IF NOT EXISTS audit (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   ts INTEGER, who TEXT, role TEXT, action TEXT, detail TEXT
 );
+-- ===== Disease watch (server/surveillance.js). Append-only: the code only INSERTs; the triggers refuse UPDATE and DELETE. =====
+-- One row per report from a phone: "someone in my home has this now". No names, no GPS, no free text.
+CREATE TABLE IF NOT EXISTS surv_reports (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT,
+  rid TEXT NOT NULL UNIQUE,      -- random report id made on the phone (the same report sent twice is ignored)
+  iid TEXT NOT NULL,             -- the app's random install id
+  syndrome TEXT NOT NULL,        -- id from content/src/syndromes.json
+  def_version INTEGER NOT NULL,  -- version of that syndrome's case definition on the phone
+  place TEXT NOT NULL,           -- district or province id from content/src/districts.json
+  age TEXT NOT NULL,             -- 'u5', '5-14' or '15+'
+  day TEXT NOT NULL,             -- YYYY-MM-DD on the phone (no time)
+  week TEXT NOT NULL,            -- ISO week of day, e.g. 2026-W41
+  app_version TEXT,
+  received_ts INTEGER NOT NULL,  -- when the server stored it (ms)
+  dup_of TEXT                    -- rid of an earlier counted report, same install and syndrome within 14 days (then not counted)
+);
+CREATE INDEX IF NOT EXISTS surv_rep_week ON surv_reports(week, syndrome, place);
+CREATE INDEX IF NOT EXISTS surv_rep_iid ON surv_reports(iid, syndrome, day);
+-- Symptom-finder searches that match a syndrome: a weaker signal, at most one per install, syndrome and day.
+CREATE TABLE IF NOT EXISTS surv_signals (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT,
+  iid TEXT NOT NULL, syndrome TEXT NOT NULL, def_version INTEGER, place TEXT,
+  day TEXT NOT NULL, week TEXT NOT NULL, app_version TEXT, received_ts INTEGER NOT NULL,
+  UNIQUE (iid, syndrome, day)
+);
+CREATE INDEX IF NOT EXISTS surv_sig_week ON surv_signals(week, syndrome);
+-- Corrections are new rows, never edits: void or restore one report ('report:<rid>') or every report of an install ('install:<iid>').
+CREATE TABLE IF NOT EXISTS surv_corrections (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts INTEGER NOT NULL, who TEXT NOT NULL, role TEXT,
+  target TEXT NOT NULL, action TEXT NOT NULL, reason TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS surv_cor_target ON surv_corrections(target, seq);
+-- Every export downloaded: who, when, what, how many rows and the SHA-256 printed in the file.
+CREATE TABLE IF NOT EXISTS surv_exports (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts INTEGER NOT NULL, who TEXT, role TEXT, kind TEXT, level TEXT, params TEXT, row_count INTEGER, sha256 TEXT
+);
+CREATE TRIGGER IF NOT EXISTS surv_reports_no_update BEFORE UPDATE ON surv_reports BEGIN SELECT RAISE(ABORT, 'surv_reports is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_reports_no_delete BEFORE DELETE ON surv_reports BEGIN SELECT RAISE(ABORT, 'surv_reports is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_signals_no_update BEFORE UPDATE ON surv_signals BEGIN SELECT RAISE(ABORT, 'surv_signals is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_signals_no_delete BEFORE DELETE ON surv_signals BEGIN SELECT RAISE(ABORT, 'surv_signals is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_corrections_no_update BEFORE UPDATE ON surv_corrections BEGIN SELECT RAISE(ABORT, 'surv_corrections is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_corrections_no_delete BEFORE DELETE ON surv_corrections BEGIN SELECT RAISE(ABORT, 'surv_corrections is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_exports_no_update BEFORE UPDATE ON surv_exports BEGIN SELECT RAISE(ABORT, 'surv_exports is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS surv_exports_no_delete BEFORE DELETE ON surv_exports BEGIN SELECT RAISE(ABORT, 'surv_exports is append-only'); END;

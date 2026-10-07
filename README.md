@@ -57,6 +57,11 @@ wrangler deploy
 2. Put `https://family-health-book.<your-subdomain>.workers.dev/e` in `content/src/config.json` as `analyticsUrl`, rebuild and publish.
 3. Your dashboard: `https://family-health-book.<your-subdomain>.workers.dev/dashboard?key=<your secret word>`.
 
+## Disease watch (community surveillance)
+On pages about illnesses that spread (measles, diarrhoea, cough, Congo fever, dog bites, TB, jaundice, meningitis, salak) and under matching symptom-finder results, the app asks "Does someone in your home have this now?" (spoken, with Yes / No). Yes asks the district once (kept on the phone) and an age group, then queues a report: illness, definition version, district, age group, day, random ids. No names, GPS or free text. Settings has a "Help watch for outbreaks" switch (on by default; nothing is sent when it or "Usage counts" is off). Reports go to the same server as the usage counts (`.../r`).
+- Definitions, triggers and alert rules: `content/src/syndromes.json` (versioned); places: `content/src/districts.json`. `build.py` copies them to `server/surveillance-defs.js`.
+- Dashboard: `/watch?key=...` (weekly counts by illness, district and age, baseline, alerts, auditable CSV/JSON exports), methods at `/watch/methods`. Server code: `server/surveillance.js`; wiring: `server/SURVEILLANCE_WIRING.md`.
+
 ## Edit the book from your phone (no programming)
 The same Cloudflare server has an editor. You change words, steps, danger signs, the home screen, the clinic list and recordings, press **Publish**, and phones take the new book the next time they have internet (and keep it for offline use). The book built into the app stays as the fallback.
 

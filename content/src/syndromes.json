@@ -1,0 +1,122 @@
+{
+  "_note": "Community disease watch: the illnesses the app asks about, their case definitions, and the alert rules the dashboard uses. Versioned: change 'version' of a syndrome whenever its definition, its 'ask' wording or its triggers change, and change 'alertRules.version' whenever a rule changes. Old versions stay listed in 'history' so old reports can still be read. 'ask' is narrated (clip id ui.syn.<id>). 'topics' = topic pages that show the question; 'symptoms' = symptom-finder pictures/searches that show the question and count as a weaker 'search' signal. 'active': false = defined for the dashboard but not asked in the app (no app content for it yet). Run tools/validate.py and tools/build.py after any change (build.py also writes server/surveillance-defs.js).",
+  "version": "2026-10-07.1",
+  "ageGroups": [
+    {"id": "u5", "name": {"fa": "طفل زیر ۵ سال", "ps": "له ۵ کلونو کم ماشوم", "en": "Child under 5"}},
+    {"id": "5-14", "name": {"fa": "طفل بزرگتر (۵ تا ۱۴ سال)", "ps": "لوی ماشوم (۵ تر ۱۴ کلونو)", "en": "Older child (5 to 14)"}},
+    {"id": "15+", "name": {"fa": "بزرگسال (۱۵ سال و بیشتر)", "ps": "لوی (۱۵ کلن او پورته)", "en": "Adult (15 and over)"}}
+  ],
+  "dedupeDays": 14,
+  "syndromes": [
+    {
+      "id": "measles", "active": true, "version": 1, "history": [],
+      "name": {"fa": "سرخکان (مشکوک)", "ps": "شری (شکمن)", "en": "Suspected measles"},
+      "ask": {"fa": "تب و دانه‌های سرخ در تمام بدن؛ شاید سرخکان باشد.", "ps": "تبه او په ټول بدن سرې دانې؛ کېدای شي شري وي.", "en": "Fever and a red rash all over the body; it may be measles."},
+      "definition": "Any person with fever and a maculopapular (non-vesicular) rash, or in whom a health worker suspects measles. App wording: fever and a red rash all over the body.",
+      "topics": ["measles", "fever"], "symptoms": ["rash"],
+      "source": {"title": "WHO Vaccine-Preventable Diseases Surveillance Standards: Measles (2018)", "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"}
+    },
+    {
+      "id": "awd", "active": true, "version": 1, "history": [],
+      "name": {"fa": "اسهال آبکی حاد", "ps": "حاد اوبلن نس ناستی", "en": "Acute watery diarrhoea"},
+      "ask": {"fa": "سه بار یا بیشتر اسهال آبکی در یک روز، بدون خون.", "ps": "په یوه ورځ کې درې ځله یا ډېر اوبلن نس ناستی، بې له وینې.", "en": "Three or more watery stools in one day, with no blood."},
+      "definition": "Three or more loose or watery stools in 24 hours, without visible blood.",
+      "topics": ["diarrhoea"], "symptoms": ["diarrhoea"],
+      "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
+    },
+    {
+      "id": "bloody-diarrhoea", "active": true, "version": 1, "history": [],
+      "name": {"fa": "اسهال خونی", "ps": "وینه لرونکی نس ناستی", "en": "Bloody diarrhoea"},
+      "ask": {"fa": "اسهال، و در مدفوع خون دیده می‌شود.", "ps": "نس ناستی، او په ډکو متیازو کې وینه ښکاري.", "en": "Diarrhoea, with blood in the stool."},
+      "definition": "Acute diarrhoea with visible blood in the stool.",
+      "topics": ["diarrhoea"], "symptoms": ["diarrhoea"],
+      "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
+    },
+    {
+      "id": "ari", "active": true, "version": 1, "history": [],
+      "name": {"fa": "سینه‌بغل / التهاب حاد تنفسی", "ps": "سینه بغل / حاد تنفسي انتان", "en": "Acute respiratory infection / pneumonia"},
+      "ask": {"fa": "سرفه، همراه با نفس تیز یا نفس کشیدن به سختی.", "ps": "ټوخی، له ژر ژر یا سخت سا اخیستلو سره.", "en": "Cough with fast or difficult breathing."},
+      "definition": "Cough or difficult breathing with fast breathing (IMCI cut-offs by age) or lower chest indrawing (ARI-pneumonia). Lay report, breathing not counted by a health worker.",
+      "topics": ["cough"], "symptoms": ["breathing", "cough"],
+      "source": {"title": "WHO IMCI Chart Booklet (2014) and WHO EMRO Afghanistan outbreak situation reports (ARI-pneumonia)", "url": "https://www.emro.who.int/images/stories/afghanistan/Afghanistan-Outbreaks-Situation-report-week-43-2025.pdf"}
+    },
+    {
+      "id": "cchf", "active": true, "version": 1, "history": [],
+      "name": {"fa": "تب کانگو (مشکوک)", "ps": "کانګو تبه (شکمنه)", "en": "Suspected CCHF (Congo fever)"},
+      "ask": {"fa": "تب ناگهانی همراه با خونریزی از بینی، بیره یا زیر پوست.", "ps": "ناڅاپي تبه او له پوزې، ورېژو یا پوستکي لاندې وینه بهېدل.", "en": "Sudden fever with bleeding from the nose, gums or under the skin."},
+      "definition": "Sudden onset of fever with bleeding (nose, gums, skin, vomit or stool), especially after a tick bite or contact with animal blood or a sick person. Immediately notifiable.",
+      "topics": ["animal-illness"], "symptoms": ["animals"],
+      "source": {"title": "WHO fact sheet: Crimean-Congo haemorrhagic fever; WHO EMRO Afghanistan outbreak situation reports (suspected CCHF)", "url": "https://www.who.int/news-room/fact-sheets/detail/crimean-congo-haemorrhagic-fever"}
+    },
+    {
+      "id": "dog-bite", "active": true, "version": 1, "history": [],
+      "name": {"fa": "گزیدن سگ (خطر هاری)", "ps": "د سپي چیچل (د هاري خطر)", "en": "Dog bite (rabies exposure)"},
+      "ask": {"fa": "گزیدن یا پنجه زدن سگ یا حیوان دیگر.", "ps": "د سپي یا بل څاروي چیچل یا منګول وهل.", "en": "A bite or scratch from a dog or another animal."},
+      "definition": "Any person bitten or scratched by a dog or another animal that may carry rabies (possible rabies exposure).",
+      "topics": ["first-aid", "animal-illness"], "symptoms": ["bite"],
+      "source": {"title": "WHO fact sheet: Rabies; WHO Expert Consultation on Rabies, third report (2018)", "url": "https://www.who.int/news-room/fact-sheets/detail/rabies"}
+    },
+    {
+      "id": "malaria", "active": false, "version": 1, "history": [],
+      "name": {"fa": "ملاریا (مشکوک)", "ps": "ملاریا (شکمنه)", "en": "Suspected malaria"},
+      "ask": {"fa": "تب و لرزه که دوباره و دوباره می‌آید.", "ps": "تبه او لړزه چې بیا بیا راځي.", "en": "Fever and shivering that keep coming back."},
+      "definition": "Fever in a person living in or coming from a malaria area, with no other obvious cause. Not asked in the app yet: the book has no malaria page, and 'fever with no other cause' cannot be told apart by families.",
+      "topics": [], "symptoms": [],
+      "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
+    },
+    {
+      "id": "tb", "active": true, "version": 1, "history": [],
+      "name": {"fa": "سرفهٔ بیشتر از ۲ هفته (توبرکلوز؟)", "ps": "له ۲ اونیو زیات ټوخی (نری رنځ؟)", "en": "Cough 2 weeks or more (presumptive TB)"},
+      "ask": {"fa": "سرفه ۲ هفته یا بیشتر.", "ps": "۲ اونۍ یا ډېر ټوخی.", "en": "A cough for 2 weeks or more."},
+      "definition": "Cough lasting 2 weeks or more (presumptive tuberculosis, needs testing). Not an outbreak disease; shown for trends only.",
+      "topics": ["tb"], "symptoms": ["longcough"],
+      "source": {"title": "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021)", "url": "https://www.who.int/publications/i/item/9789240022676"}
+    },
+    {
+      "id": "jaundice", "active": true, "version": 1, "history": [],
+      "name": {"fa": "زردی حاد (هپاتیت؟)", "ps": "حاد ژېړی (هیپاټایټس؟)", "en": "Acute jaundice (hepatitis?)"},
+      "ask": {"fa": "چشم یا پوست تازه زرد شده است (نه نوزاد).", "ps": "سترګې یا پوستکی تازه ژېړ شوي (نوی زېږېدلی ماشوم نه).", "en": "Eyes or skin have recently turned yellow (not a newborn baby)."},
+      "definition": "Acute onset of yellow eyes or skin, with no known other cause, in anyone older than one month (acute jaundice syndrome; hepatitis A or E are common causes).",
+      "topics": ["red-flags"], "symptoms": ["yellow"],
+      "source": {"title": "WHO (2012) Outbreak surveillance and response in humanitarian emergencies: guidelines for EWARN implementation, standard case definitions (acute jaundice syndrome)", "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"}
+    },
+    {
+      "id": "meningitis", "active": true, "version": 1, "history": [],
+      "name": {"fa": "مننژیت (مشکوک)", "ps": "مننژیت (شکمن)", "en": "Suspected meningitis"},
+      "ask": {"fa": "تب همراه با شخی گردن.", "ps": "تبه له شخې غاړې سره.", "en": "Fever with a stiff neck."},
+      "definition": "Sudden fever with a stiff neck, or with altered consciousness or other meningeal signs (bulging fontanelle in infants).",
+      "topics": ["fever", "red-flags"], "symptoms": ["fever"],
+      "source": {"title": "WHO Vaccine-Preventable Diseases Surveillance Standards: Meningitis (2018)", "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"}
+    },
+    {
+      "id": "leishmaniasis", "active": true, "version": 1, "history": [],
+      "name": {"fa": "سالک (لیشمانیای جلدی)", "ps": "سالک (د پوستکي لیشمانیا)", "en": "Cutaneous leishmaniasis (salak)"},
+      "ask": {"fa": "زخم پوست که بعد از دو هفته جور نشده است.", "ps": "د پوستکي زخم چې له دوو اونیو وروسته نه دی جوړ شوی.", "en": "A skin sore that has not healed after two weeks."},
+      "definition": "A papule, nodule or ulcer of the skin that has not healed after 2 weeks in a person living in or coming from an area where leishmaniasis occurs.",
+      "topics": ["leishmaniasis"], "symptoms": ["sore"],
+      "source": {"title": "WHO fact sheet: Leishmaniasis; WHO Manual for case management of cutaneous leishmaniasis in the WHO Eastern Mediterranean Region (2014)", "url": "https://www.who.int/news-room/fact-sheets/detail/leishmaniasis"}
+    },
+    {
+      "id": "afp", "active": false, "version": 1, "history": [],
+      "name": {"fa": "فلج شل حاد (پولیو؟)", "ps": "حاد شل فلج (پولیو؟)", "en": "Acute flaccid paralysis (polio?)"},
+      "ask": {"fa": "دست یا پای طفل ناگهان سست شده و حرکت نمی‌کند.", "ps": "د ماشوم لاس یا پښه ناڅاپه سسته شوې او نه خوځېږي.", "en": "A child's arm or leg has suddenly gone floppy and will not move."},
+      "definition": "Any child under 15 with sudden onset of floppy (flaccid) weakness or paralysis of an arm or leg, or any person in whom a health worker suspects polio. Immediately notifiable. Not asked in the app yet: the book has no page on sudden weakness; add one before turning this on.",
+      "topics": [], "symptoms": [],
+      "source": {"title": "WHO Vaccine-Preventable Diseases Surveillance Standards: Poliomyelitis (2018)", "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"}
+    }
+  ],
+  "alertRules": {
+    "version": "2026-10-07.1",
+    "unit": "one syndrome in one district in one ISO week (Monday to Sunday, by the report day on the phone), all age groups together; de-duplicated and voided reports are not counted",
+    "baselineWeeks": 4,
+    "rules": [
+      {"id": "single", "kind": "any", "syndromes": ["cchf", "afp"], "min": 1,
+       "text": "Any single report of suspected CCHF or acute flaccid paralysis in a district in a week."},
+      {"id": "measles-cluster", "kind": "any", "syndromes": ["measles"], "min": 2,
+       "text": "Two or more suspected measles reports in the same district in the same week."},
+      {"id": "rise", "kind": "rise", "syndromes": "*", "min": 3, "ratio": 2,
+       "text": "Three or more reports of one syndrome in a district in a week AND at least twice the baseline (the mean weekly count of the previous 4 weeks)."}
+    ]
+  },
+  "suppression": {"minCell": 5, "text": "In shareable exports any count from 1 to 4 is shown as '<5'. Zero is shown as 0."}
+}

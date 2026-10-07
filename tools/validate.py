@@ -113,6 +113,68 @@ for f in allfiles:
     if os.path.basename(f) == "vaccines.json": check_vaccines(f, d)
     else: check_topic(f, d)
 
+# disease watch: content/src/syndromes.json and content/src/districts.json
+def check_surveillance():
+    f = os.path.join(ROOT, "content/src/syndromes.json"); fd = os.path.join(ROOT, "content/src/districts.json")
+    if not os.path.exists(f): return
+    try:
+        d = json.load(open(f, encoding="utf-8"))
+        places = json.load(open(fd, encoding="utf-8")) if os.path.exists(fd) else None
+    except Exception as e:
+        err(f, f"invalid JSON: {e}"); return
+    if places is None: err(fd, "missing: the disease watch needs the list of districts"); return
+    topic_ids = {os.path.basename(x)[:-5] for x in glob.glob(os.path.join(ROOT, "content/src/topics/*.json"))}
+    try: sym_ids = {x["id"] for x in json.load(open(os.path.join(ROOT, "content/src/symptoms.json"), encoding="utf-8"))["symptoms"]}
+    except Exception: sym_ids = set()
+    if not isinstance(d.get("version"), str) or not d["version"]: err(f, "version missing")
+    ages = d.get("ageGroups") or []
+    if not ages: err(f, "ageGroups missing")
+    for n, a in enumerate(ages):
+        if not ID_RE.match(str(a.get("id", "")).replace("+", "")): err(f, f"ageGroups[{n}]: bad id")
+        check_L(f, f"ageGroups[{n}].name", a.get("name"))
+    seen = set()
+    for n, x in enumerate(d.get("syndromes") or []):
+        w = f"syndromes[{n}]"; sid = x.get("id")
+        if not isinstance(sid, str) or not ID_RE.match(sid) or "." in sid: err(f, f"{w}: bad id {sid!r}"); continue
+        if sid in seen: err(f, f"{w}: duplicate syndrome {sid}")
+        seen.add(sid)
+        if not isinstance(x.get("version"), int) or x["version"] < 1: err(f, f"{w}: version must be a whole number from 1")
+        if not isinstance(x.get("history", []), list): err(f, f"{w}: history must be a list")
+        if not isinstance(x.get("active"), bool): err(f, f"{w}: active must be true or false")
+        check_L(f, w + ".name", x.get("name")); check_L(f, w + ".ask", x.get("ask"), 16)
+        if not str(x.get("definition", "")).strip(): err(f, f"{w}: case definition text missing")
+        src = x.get("source") or {}
+        if not src.get("title") or not str(src.get("url", "")).startswith("https://"): err(f, f"{w}: source needs a title and an https link")
+        for t in x.get("topics", []):
+            if t not in topic_ids: err(f, f"{w}: unknown topic {t!r}")
+        for y in x.get("symptoms", []):
+            if y not in sym_ids: err(f, f"{w}: unknown symptom {y!r}")
+        if x.get("active") and not (x.get("topics") or x.get("symptoms")): warn(f, f"{w}: active but no topic or symptom shows the question")
+    rules = d.get("alertRules") or {}
+    if not rules.get("version"): err(f, "alertRules.version missing")
+    if not isinstance(rules.get("baselineWeeks"), int) or rules["baselineWeeks"] < 1: err(f, "alertRules.baselineWeeks must be a whole number")
+    rseen = set()
+    for n, r in enumerate(rules.get("rules") or []):
+        w = f"alertRules.rules[{n}]"
+        if r.get("id") in rseen or not r.get("id"): err(f, f"{w}: missing or duplicate id")
+        rseen.add(r.get("id"))
+        if r.get("kind") not in ("any", "rise"): err(f, f"{w}: kind must be 'any' or 'rise'")
+        sy = r.get("syndromes")
+        if sy != "*" and (not isinstance(sy, list) or any(s not in seen for s in sy)): err(f, f"{w}: syndromes must be '*' or a list of known syndrome ids")
+        if not isinstance(r.get("min"), int) or r["min"] < 1: err(f, f"{w}: min must be a whole number from 1")
+        if r.get("kind") == "rise" and not (isinstance(r.get("ratio"), (int, float)) and r["ratio"] > 0): err(f, f"{w}: ratio missing")
+        if not r.get("text"): err(f, f"{w}: plain-words text missing")
+    if not isinstance((d.get("suppression") or {}).get("minCell"), int): err(f, "suppression.minCell missing")
+    pseen = set()
+    for key in ("districts", "provinces"):
+        for n, p in enumerate(places.get(key) or []):
+            w = f"{key}[{n}]"
+            if not isinstance(p.get("id"), str) or not ID_RE.match(p["id"]) or p["id"] in pseen: err(fd, f"{w}: bad or duplicate id {p.get('id')!r}")
+            pseen.add(p.get("id")); check_L(fd, w + ".name", p.get("name"))
+    if not places.get("districts"): err(fd, "districts missing")
+    if not places.get("version"): err(fd, "version missing")
+check_surveillance()
+
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst
 E, W = show(errors), show(warnings)

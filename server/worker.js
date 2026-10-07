@@ -3,6 +3,7 @@
 // the people page /people?key=...); other people get their own key from /people, used in the same ?key= links;
 // var "APP_URL" (the app's public address, for "Import from app"); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
 import ABOUT from './about.js';
+import * as SURV from './surveillance.js';
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const TYPES = new Set(['install', 'open', 'view', 'play', 'time', 'lang', 'voice', 'share', 'a2hs', 'a2hs-prompt', 'kid', 'dose', 'ask', 'feedback', 'near']);
 const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : null);
@@ -15,15 +16,17 @@ export default {
     const path = url.pathname;
     if (req.method === 'OPTIONS') return new Response(null, { headers: CORS });
     if (req.method === 'POST' && path === '/e') return ingest(req, env);
+    if (req.method === 'POST' && path === '/r') return SURV.ingest(req, env);
     if (req.method === 'POST' && path === '/feedback') return saveFeedback(req, env);
     // public, read-only: the published book and uploaded narration (never the draft)
     if (req.method === 'GET' && (path === '/content/version.json' || path === '/content/book.json')) return publicBook(env, path);
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
     // everything below needs a key: the owner's DASH_KEY, or a person's own key (made on /people)
-    const isAdmin = path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
+    const isAdmin = path === '/watch' || path.startsWith('/watch/') || path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
     if (!isAdmin) return new Response('ok', { headers: CORS });
     const me = await whoIs(env, url.searchParams.get('key'));
     if (!me) return NOT_FOUND(); // wrong, removed or missing key: the same answer as a page that does not exist
+    if (path === '/watch' || path.startsWith('/watch/')) return SURV.handle(req, env, url, me);
     if (path === '/people' || path.startsWith('/people/')) {
       if (me.role !== 'owner') return NOT_FOUND();
       if (path === '/people') return new Response(peoplePage(url.searchParams.get('key'), me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -180,7 +183,7 @@ function page(s, key, me) {
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px;border-top:1px solid #E6E1D8}th{color:#6B655E;font-weight:600}a{color:#B6322D}</style>
 <h1>Sehat · usage (last ${s.days} days)</h1>
 <p class="s" id="who">Signed in as <b>${e(signedIn(me))}</b>${me.role === 'viewer' ? ' (you can look at everything here, but not change the book)' : ''}</p>
-<p><a href="/admin?key=${e(key)}" style="font-weight:700">${me.role === 'viewer' ? 'See the book (view only) →' : 'Edit the book →'}</a> &nbsp; ${me.role === 'owner' ? `<a href="/people?key=${e(key)}" style="font-weight:700">People →</a> &nbsp; ` : ''}<a href="/about?key=${e(key)}" style="font-weight:700">About this app →</a></p>
+<p><a href="/admin?key=${e(key)}" style="font-weight:700">${me.role === 'viewer' ? 'See the book (view only) →' : 'Edit the book →'}</a> &nbsp; ${me.role === 'owner' ? `<a href="/people?key=${e(key)}" style="font-weight:700">People →</a> &nbsp; ` : ''}<a href="/watch?key=${e(key)}" style="font-weight:700">Disease watch →</a> &nbsp; <a href="/about?key=${e(key)}" style="font-weight:700">About this app →</a></p>
 <p class="s">Anonymous counts only. Phones send them when they next have internet, so recent days fill in late. <a href="?key=${e(key)}&days=7">7 days</a> · <a href="?key=${e(key)}&days=30">30 days</a> · <a href="?key=${e(key)}&days=365">1 year</a></p>
 <div class="g">${kpi('Installs (all time)', s.installs, `+${s.newInstalls} in this period`)}${kpi('Active last 7 days', s.active7, `${s.activeN} in this period`)}${kpi('Times opened', s.opens)}${kpi('Minutes spent', s.minutes, `average visit ${Math.floor(s.avgSessionSec / 60)}m ${s.avgSessionSec % 60}s`)}${kpi('Audio plays', s.plays)}${kpi('On home screen', hs, `${s.shares} shares`)}</div>
 <div class="c" style="margin-top:12px"><div class="l">People using it each day</div><div class="chart">${bars || '<span class="s">No data yet</span>'}</div></div>
