@@ -6,7 +6,7 @@ keep_names = false
 
 [vars]
 # The public address of the app (the GitHub Pages address), without a slash at the end.
-# "Import from app" in /admin copies the book from <APP_URL>/content/book.json.
+# The editor at /admin shows <APP_URL>/content/book.json with the editor's changes laid over it.
 APP_URL = ""
 # Daily budgets that keep the free database within its limits (100,000 rows written a day, 500 MB in all).
 # When one is used up the server answers "try later" (429) and the phones keep their data and send it the next day.

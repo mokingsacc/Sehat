@@ -17,11 +17,25 @@ CREATE TABLE IF NOT EXISTS feedback (
   iid TEXT, ts INTEGER, lang TEXT, version TEXT, page TEXT,
   text TEXT, audio BLOB, type TEXT, status TEXT DEFAULT 'new'
 );
--- Book content edited at /admin: one row 'draft' (being edited) and one row 'published' (what phones download).
+-- Book content published from /admin: the row 'overlay' is what phones download (the editor's changes, js/overlay.js).
+-- Rows 'draft', 'base' and 'published' hold whole books from before 8 October 2026 (read once to move an old draft over).
+-- A big text is kept in pieces: rows '<name>#<id>#<n>' (server/worker.js writeDoc).
 CREATE TABLE IF NOT EXISTS content (
-  name TEXT PRIMARY KEY,         -- 'draft' or 'published'
-  body TEXT NOT NULL,            -- the whole book as JSON (same shape as content/book.json)
+  name TEXT PRIMARY KEY,         -- 'overlay', or an old 'draft', 'base' or 'published'
+  body TEXT NOT NULL,            -- JSON
   version TEXT, built TEXT, updated_ts INTEGER
+);
+-- The editor's changes, one row per changed part ("unit") of the book: the editor page lays them over the app's own
+-- newest book, and Publish sends them to phones as the overlay. The server never reads or writes the whole book.
+-- Keys starting with # are the editor's own notes: #retired (ids never to be used again), #rev (time of the last change),
+-- #legacy (an old draft was moved over).
+CREATE TABLE IF NOT EXISTS edit_unit (
+  k TEXT PRIMARY KEY,            -- topic:<id>, list:<name>, home, ui:<key>, say:<key>, facilities, search:<id>
+  v TEXT NOT NULL,               -- the editor's version as JSON ('null' = removed)
+  base TEXT NOT NULL DEFAULT '', -- fingerprint of the app's version it was edited from
+  ts INTEGER NOT NULL,           -- when it was last saved
+  say TEXT,                      -- topics: their spoken lines as JSON, made from the topic when it is saved
+  err TEXT                       -- the check of this part when it was saved: {"errors":[...],"warnings":[...]}
 );
 -- Narration clips uploaded in the editor, served at /a/<slot>/<id>?v=<hash>.
 -- "lang" holds the slot: language and voice, e.g. fa-f (Dari, woman) or ps-m (Pashto, man). Older rows with just "fa" count as fa-f.

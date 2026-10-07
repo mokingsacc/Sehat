@@ -74,12 +74,12 @@ One-time setup, on a computer, in `server/`:
 
 Every time, on your phone:
 1. Open `https://family-health-book.<your-subdomain>.workers.dev/admin?key=<your secret word>` (bookmark it).
-2. The first time only: press **Import from app** (copies the book that is in the app now).
+2. The editor opens the book that is in the app now, with your own changes on top. Nothing to import.
 3. Edit. Each topic shows Dari, Pashto and English side by side; use ↑ ↓ to reorder, **Add block** / **Add item** / **Delete** to change blocks, **Recordings** under any text to upload an mp3/m4a/webm/ogg clip for each voice (Dari woman, Dari man, Pashto woman, Pashto man; up to 1.9 MB). Other tabs: Home screen (switch parts on and off), Words (buttons and spoken lines), Places (paste a Google Maps link or "36.26, 68.01" to add a clinic), Audio. Changes save by themselves.
 4. Press **Publish**. If something is missing (for example an empty Pashto text) you see a list in plain words and nothing is sent; fix it and press Publish again.
-5. **Revert draft** throws away unpublished changes. The dashboard has a **Summarise feedback** button (needs `ANTHROPIC_API_KEY`).
+5. **Revert draft** throws away unpublished changes; **Start again from the app** throws away all your changes. The dashboard has a **Summarise feedback** button (needs `ANTHROPIC_API_KEY`).
 
-Good to know: ids of blocks never change when you edit text (recordings are linked to them). Phones lay only your changes over the book built into their app, so a new app release and your published changes do not undo each other. When the app has a newer version, the editor shows **Bring in app changes**: it brings the new text into your draft and keeps your own changes. How this works: `docs/EDITOR_AND_RELEASES.md`. If two people edit at once, a save made on an old copy is refused with a message to reload, so nothing is overwritten without warning.
+Good to know: ids of blocks never change when you edit text (recordings are linked to them). The editor keeps only what you changed. Phones, and the editor itself, lay those changes over the book built into the app, so a new app release and your published changes do not undo each other, and there is nothing to bring in after an app update: **Check for problems** and **Publish** always work on the app's newest book. How this works: `docs/EDITOR_AND_RELEASES.md`. If two people change the same page at once, a save made on an old copy is refused with a message to reload, so nothing is overwritten without warning.
 
 ### Give other people access
 Your secret word (`DASH_KEY`) is the owner's key: it always works and can do everything. Other people get their own link instead of your word.

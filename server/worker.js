@@ -1,11 +1,13 @@
 // Cloudflare Worker: receives anonymous usage counts from the app, shows Mo a dashboard, and holds the book editor.
 // Bindings: D1 database "DB"; secret "DASH_KEY" (the owner's long random word; the dashboard is /dashboard?key=..., the editor /admin?key=...,
 // the people page /people?key=...); other people get their own key from /people, used in the same ?key= links;
-// var "APP_URL" (the app's public address, for "Import from app"); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
+// var "APP_URL" (the app's public address: the editor page lays the editor's changes over <APP_URL>/content/book.json); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
 import ABOUT from './about.js';
 import * as SURV from './surveillance.js';
 import * as USAGE from './usage.js';
 import * as OV from '../js/overlay.js'; // editor changes as an overlay on the app's own book (docs/EDITOR_AND_RELEASES.md)
+import { editorCore } from './editor-core.js'; // the editor's rules, shared with the editor page
+const CORE = editorCore();
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : null);
 const json = (o, status = 200, headers = {}) => new Response(JSON.stringify(o), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } });
@@ -279,33 +281,13 @@ function dashClient(key) {
 // JSON that is safe inside a <script> tag
 const scriptJson = (o) => JSON.stringify(o).replace(/</g, '\\u003c').replace(/[\u2028\u2029]/g, (c) => '\\u' + c.charCodeAt(0).toString(16));
 
-/* ================= book content: draft, published, audio ================= */
-const LANGS = ['fa', 'ps', 'en'];
-// Narration "slots": one per language and voice (f = a woman's voice, m = a man's voice), e.g. fa-m.
-// Old uploads and old books used the bare language ("fa"); that is read as the woman's voice ("fa-f").
-const SLOTS = LANGS.flatMap((lg) => [lg + '-f', lg + '-m']);
+/* ================= book content: the editor's changes, the published overlay, audio ================= */
+// The editor keeps only what it changed, one row per unit (js/overlay.js) in the table edit_unit. The editor page
+// downloads the app's own book itself and lays those units over it, the same way phones do. So the draft always
+// starts from the app's newest book, and no request here reads, parses or writes the whole 2 MB book: the free plan
+// allows about 10 ms of computer time per request (docs/EDITOR_AND_RELEASES.md).
+const { LANGS, SLOTS, ID_RE, ICONS, BLOCK_TYPES, HOME_MODULES, STATUSES, TOOLS } = CORE;
 const normSlot = (s) => (LANGS.includes(s) ? s + '-f' : SLOTS.includes(s) ? s : null);
-const PACKS = ['urgent', 'children', 'women', 'everyone'];
-const URGENT_TOPICS = ['danger-child', 'pregnancy-danger', 'red-flags', 'first-aid'];
-const SECTIONS = ['children', 'women', 'everyone'];
-// topic lists in book.sections: the three sections, "emergency" (the Emergency screen), and the lists with their own page and
-// lists with their own page (config.lists in content/src/config.json): kit (home health kit), safety (home safety), hospital, food (food and garden), wellbeing
-const PAGE_LISTS = ['kit', 'safety', 'hospital', 'food', 'wellbeing'];
-const LISTS = [...SECTIONS, 'emergency', ...PAGE_LISTS];
-// same as tools/validate.py: where a "link" block can go
-const TOOLS = ['breaths', 'reading', 'reading/temp', 'reading/bp', 'reading/sugar', 'reading/spo2', 'reading/muac'];
-const LINK_RE = /^(tool\/([a-z0-9/-]+)|topic\/([a-z0-9-]+)|kit|family|near|growth|growth\/measure|share|ask|emergency)$/;
-const ID_RE = /^[a-z0-9-]+(\.[a-z0-9-]+)*$/;
-// same list as tools/validate.py
-const ICONS = `clinic hospital car phone calendar clock moon family talk card check no warning money house
-baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash thermometer fever cough breathing-fast chest-indrawing no-drink vomit convulsion sleepy stool-blood eye-sunken skin-pinch growth muac swollen-feet milestones jaundice syringe drops pill rash toys-play
-pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
-heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect`.split(/\s+/);
-const ICON_SET = new Set(ICONS);
-const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip', link: 'link to a tool or another page', anim: 'animation (picture story)', clinic: 'what the clinic or hospital does' };
-const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', firstAid: 'CPR and first aid', children: 'Children (big picture button)', adults: 'Adults (big picture button)', share: 'Share Sehat', wellbeing: 'Well-being', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', safety: 'Home safety', hospital: 'Going to the clinic or hospital', food: 'Food and garden', sendApp: 'Send the app to another phone (Android app only)' };
-const STATUSES = ['open', 'unknown', 'closed'];
-const URL_KEYS = ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl'];
 const MAX_AUDIO = 1_900_000; // D1 keeps at most 2 MB in one row
 const AUDIO_TYPES = { 'audio/mpeg': 'audio/mpeg', 'audio/mp3': 'audio/mpeg', 'audio/mp4': 'audio/mp4', 'audio/x-m4a': 'audio/mp4', 'audio/m4a': 'audio/mp4', 'audio/aac': 'audio/mp4', 'audio/webm': 'audio/webm', 'video/webm': 'audio/webm', 'audio/ogg': 'audio/ogg', 'application/ogg': 'audio/ogg', 'audio/opus': 'audio/ogg' };
 const AUDIO_FILE_EXT = { 'audio/mpeg': 'mp3', 'audio/mp4': 'm4a', 'audio/webm': 'webm', 'audio/ogg': 'ogg' };
@@ -313,14 +295,15 @@ const AUDIO_FILE_EXT = { 'audio/mpeg': 'mp3', 'audio/mp4': 'm4a', 'audio/webm': 
 const audioType = (t) => AUDIO_TYPES[String(t || '').split(';')[0].trim().toLowerCase()] || null;
 const AUDIO_EXT = { mp3: 'audio/mpeg', m4a: 'audio/mp4', mp4: 'audio/mp4', aac: 'audio/mp4', webm: 'audio/webm', ogg: 'audio/ogg', opus: 'audio/ogg', oga: 'audio/ogg' };
 
-// D1 keeps at most 2,000,000 bytes in one row, and the book is bigger than that. A big book is kept in pieces:
+// D1 keeps at most 2,000,000 bytes in one row. A big text (the overlay, or an old whole book) is kept in pieces:
 // the row <name> holds a header "~pieces:<id>:<n>" on its first line and then piece 0, and the rows
 // <name>#<id>#1 … #<n-1> hold the rest. The pieces are written before the row that points to them, under a new id
 // each time, so a reader never sees half of a save; pieces of older saves are removed afterwards.
 const PIECE_MARK = '~pieces:'; // a JSON text never starts with ~ (and SQLite text must not hold a NUL character)
 const PIECE_CHARS = 600000; // at most 1.8 MB a row even if every character took 3 bytes (Dari and Pashto take 2)
-const MAX_DOC_BYTES = 8_000_000; // the whole book; content/book.json is about 2.2 MB
+const MAX_DOC_BYTES = 8_000_000; // all the editor's changes together
 const MAX_DOC_TEXT = '8 MB';
+const MAX_UNIT_BYTES = 1_800_000; // one topic (one row)
 function splitBody(s) {
   const out = [];
   for (let i = 0; i < s.length;) {
@@ -344,16 +327,9 @@ async function docBody(env, name, r) {
   }
   return s;
 }
-async function getDoc(env, name) {
-  const r = await env.DB.prepare('SELECT body, version, built, updated_ts FROM content WHERE name = ?').bind(name).first();
-  if (!r) return null;
-  const body = await docBody(env, name, r);
-  let book = null; // parsed only when needed (the free plan allows little CPU time per request)
-  return { get book() { return book || (book = JSON.parse(body)); }, body, version: r.version, built: r.built, ts: r.updated_ts };
-}
-// Write a book: pieces first, then the row (only when its updated_ts is still rev, if rev is given). True when saved.
-async function writeDoc(env, name, book, body, ts, rev) {
-  const parts = splitBody(body || JSON.stringify(book));
+// Write a text: pieces first, then the row. meta gives the row's version and built.
+async function writeDoc(env, name, meta, body, ts) {
+  const parts = splitBody(body);
   let main = parts[0], id = '';
   if (parts.length > 1) {
     id = [...crypto.getRandomValues(new Uint8Array(6))].map((x) => x.toString(16).padStart(2, '0')).join('');
@@ -362,71 +338,83 @@ async function writeDoc(env, name, book, body, ts, rev) {
     }
     main = `${PIECE_MARK}${id}:${parts.length}\n${parts[0]}`;
   }
-  let ok = true;
-  if (rev == null) {
-    await env.DB.prepare(`INSERT INTO content (name, body, version, built, updated_ts) VALUES (?1, ?2, ?3, ?4, ?5)
-      ON CONFLICT(name) DO UPDATE SET body = ?2, version = ?3, built = ?4, updated_ts = ?5`)
-      .bind(name, main, book.version || null, book.built || null, ts).run();
-  } else {
-    const r = await env.DB.prepare('UPDATE content SET body = ?, version = ?, built = ?, updated_ts = ? WHERE name = ? AND updated_ts = ?')
-      .bind(main, book.version || null, book.built || null, ts, name, +rev).run();
-    ok = !!(r && r.meta && Number.isFinite(r.meta.changes) ? r.meta.changes : r && Number.isFinite(r.changes) ? r.changes : 1);
-  }
-  // saved: remove the pieces of older saves; not saved (someone else saved first): remove the pieces just written
-  if (ok) await env.DB.prepare('DELETE FROM content WHERE name LIKE ? AND name NOT LIKE ?').bind(`${name}#%`, id ? `${name}#${id}#%` : '\u0001').run();
-  else if (id) await env.DB.prepare('DELETE FROM content WHERE name LIKE ?').bind(`${name}#${id}#%`).run();
-  return ok;
+  await env.DB.prepare(`INSERT INTO content (name, body, version, built, updated_ts) VALUES (?1, ?2, ?3, ?4, ?5)
+    ON CONFLICT(name) DO UPDATE SET body = ?2, version = ?3, built = ?4, updated_ts = ?5`)
+    .bind(name, main, (meta && meta.version) || null, (meta && meta.built) || null, ts).run();
+  // remove the pieces of older saves
+  await env.DB.prepare('DELETE FROM content WHERE name LIKE ? AND name NOT LIKE ?').bind(`${name}#%`, id ? `${name}#${id}#%` : '\u0001').run();
 }
-async function putDoc(env, name, book, body, ts) { await writeDoc(env, name, book, body, ts || Date.now()); }
 const bytesOf = (s) => new TextEncoder().encode(s).length;
-// The app's own book, from APP_URL (Import and "Bring in app changes")
-async function appBook(env) {
-  const base = String(env.APP_URL || '').trim().replace(/\/+$/, '');
-  if (!/^https?:\/\//.test(base)) return { error: 'The server does not know the app address yet. Put it in server/wrangler.toml as APP_URL (for example https://yourname.github.io/family-health-book) and deploy again.', status: 400 };
-  let b;
-  try {
-    const r = await fetch(base + '/content/book.json', { headers: { Accept: 'application/json' }, cf: { cacheTtl: 0 } });
-    if (!r.ok) return { error: `Could not download the book from ${base}/content/book.json (the app's server answered ${r.status}). Check APP_URL.`, status: 502 };
-    b = await r.json();
-  } catch (e) { return { error: `Could not download the book from ${base}/content/book.json: ${e.message}`, status: 502 }; }
-  const bad = bookShapeError(b);
-  if (bad) return { error: `The file at ${base}/content/book.json is not usable: ${bad}.`, status: 502 };
-  normAudio(b);
-  return { book: b };
-}
-// the app's current version (for "the app has a newer version than your draft"); null when it cannot be read
+// the app's current version, from APP_URL (to publish against the app's newest book); null when it cannot be read
 async function appVersion(env) {
   const base = String(env.APP_URL || '').trim().replace(/\/+$/, '');
   if (!/^https?:\/\//.test(base)) return null;
   try {
-    const r = await fetch(base + '/content/version.json', { cf: { cacheTtl: 0 }, ...(typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? { signal: AbortSignal.timeout(4000) } : {}) });
+    const r = await fetch(base + '/content/version.json?t=' + Date.now(), { cf: { cacheTtl: 0 }, ...(typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? { signal: AbortSignal.timeout(4000) } : {}) });
     const v = r.ok ? await r.json() : null;
     return v && typeof v.version === 'string' ? { version: v.version, built: v.built || null } : null;
   } catch { return null; }
 }
-// Save the draft only if nobody else saved it since this editor loaded it (rev = the draft's last save time).
-// Returns the new rev, or null when someone else saved first.
-async function putDraft(env, book, body, rev) {
-  const ts = Math.max(Date.now(), (+rev || 0) + 1);
-  return (await writeDoc(env, 'draft', book, body, ts, rev)) ? ts : null;
+const STALE = 'Someone else (or this editor open in another window) saved a change to the same part of the book after you opened it, so your last change was NOT saved. Reload the page to get the newest version, then make your change again.';
+const RELOAD = 'The editor was updated. Reload the page (your saved changes are kept).';
+
+// the editor's rows: units, and the notes #retired, #rev, #legacy
+const UNIT_COLS = 'k, v, base, ts';
+async function unitRows(env, cols = UNIT_COLS) { return ((await env.DB.prepare(`SELECT ${cols} FROM edit_unit`).all()) || {}).results || []; }
+async function note(env, k) { return env.DB.prepare('SELECT v, ts FROM edit_unit WHERE k = ?').bind(k).first(); }
+const putNote = (env, k, v, ts) => env.DB.prepare('INSERT INTO edit_unit (k, v, base, ts) VALUES (?1, ?2, \'\', ?3) ON CONFLICT(k) DO UPDATE SET v = ?2, ts = ?3').bind(k, v, ts);
+const isNote = (k) => k.startsWith('#');
+// the saved time of each of these units (0 when the editor has not changed it)
+async function savedTimes(env, keys) {
+  const out = {};
+  for (let i = 0; i < keys.length; i += 90) { // D1 takes at most 100 values in one query
+    const part = keys.slice(i, i + 90);
+    const rows = ((await env.DB.prepare(`SELECT k, ts FROM edit_unit WHERE k IN (${part.map(() => '?').join(',')})`).bind(...part).all()) || {}).results || [];
+    for (const r of rows) out[r.k] = r.ts;
+  }
+  return out;
 }
-const STALE = 'Someone else (or this editor open in another window) saved a change to the book after you opened it, so your last change was NOT saved. Reload the page to get the newest version, then make your change again.';
+// one unit row; topics also keep their spoken lines (for the overlay's "say"), and every part keeps its own check, made
+// now while it is at hand, so that Publish does not have to read the changes again
+function unitStmt(env, k, v, base, ts, ignore) {
+  const say = k.startsWith('topic:') && v ? JSON.stringify(CORE.topicNarration(k.slice(6), v)) : null;
+  const b = { topics: {}, sections: {}, ui: {}, narration: {}, config: {} };
+  if (v !== null && v !== undefined) OV.setUnit(b, k, v);
+  const c = CORE.checkBook(b, true), err = c.errors.length || c.warnings.length ? JSON.stringify(c) : null;
+  return env.DB.prepare(`INSERT INTO edit_unit (k, v, base, ts, say, err) VALUES (?1, ?2, ?3, ?4, ?5, ?6) ON CONFLICT(k) DO ${ignore ? 'NOTHING' : 'UPDATE SET v = ?2, base = ?3, ts = ?4, say = ?5, err = ?6'}`)
+    .bind(k, JSON.stringify(v === undefined ? null : v), base, ts, say, err);
+}
+const FP_RE = /^[0-9a-f]{8}$/;
+const UNIT_RE = /^(topic:[a-z0-9-]+|list:[a-z0-9-]+|home|ui:[A-Za-z0-9_.-]{1,80}|say:[a-z0-9.-]{1,120}|facilities|search:[a-z0-9-]+)$/;
+// check and clean the units an editor page sends: { k: value }; returns { units: [[k, v, value text]], error }
+function cleanUnits(units) {
+  const out = [];
+  if (!units || typeof units !== 'object' || Array.isArray(units)) return { error: 'Nothing to save.' };
+  const keys = Object.keys(units);
+  if (keys.length > 400) return { error: 'Too many changes at once. Reload the page and try again.' };
+  for (const k of keys) {
+    if (!UNIT_RE.test(k)) return { error: `"${k}" is not a part of the book the editor can change.` };
+    const r = CORE.cleanUnit(k, units[k]);
+    if (r.error) return { error: r.error };
+    const text = JSON.stringify(r.v);
+    if (text.length > MAX_UNIT_BYTES / 3 && bytesOf(text) > MAX_UNIT_BYTES) return { error: `Not saved: ${CORE.unitName(k)} has become too big to store. Shorten it, for example a very long text.` };
+    out.push([k, r.v, text]);
+  }
+  return { units: out };
+}
 
 async function publicBook(env, path) {
   const h = { ...CORS, 'Cache-Control': 'no-cache' };
   if (path === '/content/version.json') {
-    const r = await env.DB.prepare("SELECT version, built FROM content WHERE name = 'published'").first();
+    const r = (await env.DB.prepare("SELECT version, built FROM content WHERE name = 'overlay'").first()) || (await env.DB.prepare("SELECT version, built FROM content WHERE name = 'published'").first());
     if (!r) return json({ error: 'nothing published yet' }, 404, h);
     return json({ version: r.version, built: r.built }, 200, h);
   }
-  if (path === '/content/overlay.json') { // what new app versions download: only the editor's changes (js/overlay.js)
-    const r = await env.DB.prepare("SELECT body FROM content WHERE name = 'overlay'").first();
-    if (!r) return json({ error: 'nothing published yet' }, 404, h);
-    return new Response(await docBody(env, 'overlay', r), { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
-  }
-  const r = await env.DB.prepare("SELECT body FROM content WHERE name = 'published'").first();
+  // what phones download: only the editor's changes (js/overlay.js); the whole book is only kept for apps from before 7 October
+  const name = path === '/content/overlay.json' ? 'overlay' : 'published';
+  const r = await env.DB.prepare('SELECT body FROM content WHERE name = ?').bind(name).first();
   if (!r) return json({ error: 'nothing published yet' }, 404, h);
-  return new Response(await docBody(env, 'published', r), { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
+  return new Response(await docBody(env, name, r), { headers: { 'Content-Type': 'application/json; charset=utf-8', ...h } });
 }
 
 async function serveAudio(env, url) {
@@ -439,146 +427,46 @@ async function serveAudio(env, url) {
   return new Response(new Uint8Array(row.data), { headers: { ...CORS, 'Content-Type': row.type || 'audio/mpeg', 'Cache-Control': fresh ? 'public, max-age=31536000, immutable' : 'no-cache' } });
 }
 
-// Is this a whole book (the shape of content/book.json)? Used for Import.
-function bookShapeError(b) {
-  if (!b || typeof b !== 'object') return 'it is not a book file';
-  for (const k of ['topics', 'sections', 'narration', 'ui', 'audio', 'config']) if (!b[k] || typeof b[k] !== 'object') return `it has no "${k}" part`;
-  if (!SECTIONS.every((s) => Array.isArray(b.sections[s]))) return 'its section lists are missing';
-  return null;
+// the server's own check of the editor's changes: each part was checked on its own when it was saved
+function changesCheck(rows) {
+  const errors = [], warnings = [];
+  for (const r of rows) if (r.err && !isNote(r.k)) { const c = JSON.parse(r.err); errors.push(...(c.errors || [])); warnings.push(...(c.warnings || [])); }
+  return { errors, warnings };
 }
 
-const sayL = (L) => Object.fromEntries(LANGS.map((lg) => [lg, String((L && L[lg]) || '').trim()]));
-const hasText = (L) => !!L && typeof L === 'object' && LANGS.some((lg) => String(L[lg] || '').trim());
-// Explainer animations (book.anims, written by tools/build.py): the narration ids an animation or a group needs,
-// and those an "anim" block brings to its page (same as tools/anims.py needed_ids and block_ids).
-function animNeeded(b, name) {
-  const A = b.anims || {}, g = (A.groups || {})[name];
-  if (g) return [`anim.${name}.title`, `anim.${name}.ask`, ...g.map((v) => `anim.${v}.label`), ...g.flatMap((v) => animNeeded(b, v))];
-  return (A.ids || {})[name] || [`anim.${name}.title`];
-}
-function animBlockIds(b, bl) {
-  const g = ((b.anims || {}).groups || {})[bl.anim];
-  if (bl.pick && g) return [`anim.${bl.anim}.title`, `anim.${bl.anim}.ask`, ...g.map((v) => `anim.${v}.label`), ...animNeeded(b, bl.pick)];
-  return animNeeded(b, bl.anim);
-}
-// Same as tools/build.py: the narration text of every block, and the recording order for the studio.
-function rebuildNarration(b) {
-  const old = b.narration || {}, n = {};
-  for (const k in old) if (k.startsWith('ui.')) n[k] = old[k];
-  for (const [tid, t] of Object.entries(b.topics)) {
-    if (tid === 'vaccines' || !Array.isArray(t.blocks)) continue;
-    n[tid + '.title'] = sayL(t.title);
-    for (const bl of t.blocks) {
-      if (!bl || !bl.id) continue;
-      if (bl.type === 'step' || bl.type === 'link' || bl.type === 'clinic') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));
-      else if (bl.type === 'lead' || bl.type === 'tip') n[bl.id] = sayL(bl.text);
-      else if (bl.type === 'anim') { if (hasText(bl.title)) n[bl.id] = sayL(bl.title); } // without a title it reads anim.<name>.title
-      else if (bl.type === 'alert' || bl.type === 'dont') {
-        n[bl.id] = sayL(bl.title);
-        for (const it of bl.items || []) if (it && it.id) n[it.id] = sayL(it.text);
-      }
-    }
-  }
-  for (const k in old) if (k.split('.')[0] === 'vaccines' && b.topics.vaccines) n[k] = old[k];
-  // the animations' own lines (scenes, titles, picker) come from the app's build and are edited under Words
-  for (const k in old) if (k.startsWith('anim.')) n[k] = old[k];
-  b.narration = n;
-  // recording order: interface lines, then page by page; an animation's lines follow the first page that shows it
-  const order = Object.keys(n).filter((k) => k.startsWith('ui.')), seen = new Set(order), owner = {};
-  for (const sec of ['children', 'women', 'everyone', ...[...PAGE_LISTS].sort()]) for (const tid of b.sections[sec] || []) {
-    const ids = Object.keys(n).filter((k) => k === tid + '.title' || k.startsWith(tid + '.')), t = b.topics[tid] || {};
-    for (const bl of [...(t.blocks || []), ...(t.anims || [])]) if (bl && bl.type === 'anim') ids.push(...animBlockIds(b, bl).filter((k) => k in n && k.startsWith('anim.')));
-    for (const k of ids) if (!seen.has(k)) { seen.add(k); order.push(k); if (!(k in owner)) owner[k] = tid; }
-  }
-  for (const k of Object.keys(n)) if (k.startsWith('anim.') && !seen.has(k)) { seen.add(k); order.push(k); }
-  b.order = order;
-  normAudio(b);
-  b.packs = { ...(b.packs || {}), order: PACKS, ids: packIds(b, owner) };
-  return b;
-}
-// book.audio is keyed by slot ("fa-f"); an older book keyed by language gets its clips moved to the woman's voice.
-function normAudio(b) {
-  const a = b.audio && typeof b.audio === 'object' ? b.audio : {};
-  for (const lg of LANGS) if (a[lg] && typeof a[lg] === 'object') { a[lg + '-f'] = { ...a[lg], ...(a[lg + '-f'] || {}) }; delete a[lg]; }
-  for (const s of SLOTS) a[s] = a[s] || {};
-  b.audio = a;
-  return b;
-}
-// Same rule as tools/build.py: which audio pack each clip downloads in (urgent first, then children, women, everyone).
-function packIds(b, owner = {}) {
-  const urgentTopics = new Set((b.config && Array.isArray(b.config.urgentTopics) && b.config.urgentTopics) || URGENT_TOPICS);
-  const urgentIds = new Set();
-  for (const t of Object.values(b.topics || {})) for (const bl of (t && t.blocks) || []) {
-    if (bl && bl.type === 'alert' && bl.level === 'urgent') { urgentIds.add(bl.id); for (const it of bl.items || []) urgentIds.add(it.id); }
-  }
-  const ids = Object.fromEntries(PACKS.map((p) => [p, []]));
-  const keys = [...(b.order || []), ...Object.keys(b.narration || {}).filter((k) => !(b.order || []).includes(k))];
-  for (const k of keys) {
-    const tid = owner[k] || k.split('.')[0];
-    const p = k.startsWith('ui.') || urgentTopics.has(tid) || k === tid + '.title' || urgentIds.has(k) ? 'urgent'
-      : PACKS.slice(1).find((sec) => ((b.sections || {})[sec] || []).includes(tid)) || 'everyone';
-    ids[p].push(k);
-  }
-  return ids;
-}
-
-const cleanL = (L) => Object.fromEntries(LANGS.map((lg) => [lg, typeof (L && L[lg]) === 'string' ? L[lg] : '']));
-
-/* ---------- editor API (owner and editors; viewers only reach "state") ---------- */
+/* ---------- editor API (owner and editors; viewers only reach "state" and "legacy") ---------- */
 async function adminApi(req, env, url, op, me) {
   const log = (action, detail) => audit(env, me, action, detail);
   const post = req.method === 'POST';
   if (op === 'state') {
-    const d = await getDoc(env, 'draft');
-    const p = await env.DB.prepare("SELECT version, built, updated_ts FROM content WHERE name = 'published'").first();
+    // small: the editor's own changes, never the whole book (the page downloads the app's book itself)
+    const rows = await unitRows(env);
+    const p = await env.DB.prepare("SELECT version, built, updated_ts FROM content WHERE name = 'overlay'").first();
     const audio = audioRows((await env.DB.prepare('SELECT lang, id, hash, type, size, ts FROM audio ORDER BY lang, id').all()).results);
     const lastAudio = Math.max(0, ...audio.map((a) => a.ts || 0));
-    const dirty = !!d && (!p || d.ts > p.updated_ts || lastAudio > p.updated_ts);
-    // the app version the draft started from, and the app's version now: when the app is newer, the editor offers "Bring in app changes"
-    const base = d ? await env.DB.prepare("SELECT version, built FROM content WHERE name = 'base'").first() : null;
-    const app = d ? await appVersion(env) : null;
-    const rest = JSON.stringify({ published: p ? { version: p.version, built: p.built, ts: p.updated_ts } : null, audio, dirty, rev: d ? d.ts : null,
-      base: base ? { version: base.version, built: base.built } : null, app, appNewer: !!(app && (!base || app.version !== base.version)) });
-    return new Response(`{"draft":${d ? d.body : 'null'},${rest.slice(1)}`, { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+    const notes = Object.fromEntries(rows.filter((r) => isNote(r.k)).map((r) => [r.k, r]));
+    const rev = notes['#rev'] ? notes['#rev'].ts : 0;
+    const dirty = (!p && rows.some((r) => !isNote(r.k))) || (!!p && (rev > p.updated_ts || lastAudio > p.updated_ts));
+    // a draft kept the old way (the whole book, before 8 October 2026): the page moves its changes over once
+    let legacy = null;
+    if (!notes['#legacy']) {
+      const d = await env.DB.prepare("SELECT version, updated_ts FROM content WHERE name = 'draft'").first();
+      const bs = d ? await env.DB.prepare("SELECT version FROM content WHERE name = 'base'").first() : null;
+      if (d) legacy = { version: d.version, ts: d.updated_ts, base: !!bs };
+    }
+    const units = rows.filter((r) => !isNote(r.k)).map((r) => `{"k":${JSON.stringify(r.k)},"v":${r.v},"base":${JSON.stringify(r.base || '')},"ts":${+r.ts || 0}}`).join(',');
+    const rest = JSON.stringify({ retired: notes['#retired'] ? JSON.parse(notes['#retired'].v) : [], rev, dirty, legacy, old: notes['#legacy'] ? JSON.parse(notes['#legacy'].v) : null,
+      published: p ? { version: p.version, built: p.built, ts: p.updated_ts } : null, audio });
+    return new Response(`{"units":[${units}],${rest.slice(1)}`, { headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
+  }
+  if (op === 'legacy') {
+    // the old whole draft (or the app book it started from), as it was stored, for the page to move its changes over
+    const name = url.searchParams.get('doc') === 'base' ? 'base' : 'draft';
+    const r = await env.DB.prepare('SELECT body FROM content WHERE name = ?').bind(name).first();
+    if (!r) return json({ error: 'There is no old draft.' }, 404);
+    return new Response(await docBody(env, name, r), { headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
   }
   if (!post) return json({ error: 'Use POST' }, 405);
-
-  if (op === 'import') {
-    const a = await appBook(env);
-    if (a.error) return json({ error: a.error }, a.status);
-    const b = a.book;
-    await putDoc(env, 'base', b); // what the draft starts from: publish sends phones only what differs from it
-    b.retired = []; b.edits = {};
-    rebuildNarration(b);
-    await putDoc(env, 'draft', b);
-    await log('import', 'from the app, version ' + (b.version || '?'));
-    return json({ ok: true, from: b.version, topics: Object.keys(b.topics).length });
-  }
-  if (op === 'rebase') {
-    // "Bring in app changes": a new app release comes into the draft; the editor's own changes are kept
-    const a = await appBook(env);
-    if (a.error) return json({ error: a.error }, a.status);
-    const d0 = await getDoc(env, 'draft');
-    if (!d0) return json({ error: 'There is no draft yet. Press "Import from app" first.' }, 400);
-    const m = await req.json().catch(() => ({}));
-    if (m && m.rev != null && +m.rev !== d0.ts) return json({ error: STALE, conflict: true }, 409);
-    const base = await getDoc(env, 'base'), draft = d0.book;
-    const r = OV.rebase(a.book, draft, base ? base.book : null);
-    const b = r.book;
-    b.retired = draft.retired || []; b.edits = draft.edits || {};
-    if (!base) for (const k of r.kept) if (!b.edits[k]) b.edits[k] = 0; // a draft from before: nobody can tell who changed these
-    for (const s of SECTIONS) if (!Array.isArray(b.sections[s])) b.sections[s] = [];
-    rebuildNarration(b);
-    const body = JSON.stringify(b);
-    if (bytesOf(body) > MAX_DOC_BYTES) return json({ error: `The book has become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something first.` }, 422);
-    const rev = await putDraft(env, b, body, d0.ts);
-    if (!rev) return json({ error: STALE, conflict: true }, 409);
-    await putDoc(env, 'base', a.book);
-    const name = (k) => (k.startsWith('topic:') ? 'topic ' + k.slice(6) : k.startsWith('list:') ? 'topic list ' + k.slice(5) : k.startsWith('ui:') ? 'words ' + k.slice(3) : k.startsWith('say:') ? 'spoken line ' + k.slice(4) : k.startsWith('search:') ? 'search words ' + k.slice(7) : k);
-    await log('bring in app changes', `app version ${a.book.version || '?'}; kept ${r.kept.length} of your changes`);
-    return json({ ok: true, from: a.book.version, rev, kept: r.kept.map(name), both: r.both.map(name), knownBase: !!base });
-  }
-
   if (op === 'audio' || op === 'audio-delete') {
     // slot=fa-m, or lang=fa&voice=m (voice f = woman, m = man; without a voice: the woman's voice)
     const q = url.searchParams, id = q.get('id') || '';
@@ -587,11 +475,10 @@ async function adminApi(req, env, url, op, me) {
     const legacy = slot.endsWith('-f') ? slot.slice(0, 2) : slot;
     if (op === 'audio-delete') {
       await env.DB.prepare('DELETE FROM audio WHERE id = ? AND lang IN (?, ?)').bind(id, slot, legacy).run();
+      await putNote(env, '#rev', 'null', Date.now()).run(); // phones stop playing it after the next Publish
       await log('audio delete', `${slot} ${id}`);
       return json({ ok: true });
     }
-    const d = await getDoc(env, 'draft');
-    if (!d || !d.book.narration[id]) return json({ error: `"${id}" is not a block in the draft. Wait for "Saved" and try again.` }, 400);
     const data = new Uint8Array(await req.arrayBuffer());
     if (!data.length) return json({ error: 'The file is empty.' }, 400);
     if (data.length > MAX_AUDIO) return json({ error: `The file is ${(data.length / 1e6).toFixed(1)} MB. The limit is 1.9 MB: record a shorter clip, or save it as mp3 or m4a at a lower quality.` }, 400);
@@ -604,151 +491,124 @@ async function adminApi(req, env, url, op, me) {
     await log('audio upload', `${slot} ${id}`);
     return json({ ok: true, hash, slot, url: `/a/${slot}/${id}?v=${hash}` });
   }
+  const m = await req.json().catch(() => null);
+  if (!m || typeof m !== 'object') return json({ error: 'Nothing to do.' }, 400);
+
+  if (op === 'save') {
+    // { units: { key: value }, drop: [keys back to the app's own version], prev: { key: saved time this page knew },
+    //   base: { key: fingerprint of the app's version }, retire: [ids never to be used again] }
+    if (m.part) return json({ error: RELOAD, conflict: true }, 409); // a page from before this version
+    const c = cleanUnits(m.units || {});
+    if (c.error) return json({ error: c.error }, c.error === RELOAD ? 409 : 400);
+    const drop = Array.isArray(m.drop) ? m.drop.filter((k) => typeof k === 'string' && UNIT_RE.test(k)).slice(0, 400) : [];
+    const keys = [...c.units.map((u) => u[0]), ...drop];
+    if (!keys.length && !(Array.isArray(m.retire) && m.retire.length)) return json({ ok: true, ts: {}, rev: 0 });
+    // optimistic locking, part by part: each change must start from the version this page last saw
+    const now = await savedTimes(env, keys), prev = (m.prev && typeof m.prev === 'object') ? m.prev : {};
+    for (const k of keys) if ((+prev[k] || 0) !== (now[k] || 0)) return json({ error: STALE, conflict: true, k }, 409);
+    const ts = Math.max(Date.now(), ...keys.map((k) => (now[k] || 0) + 1)), base = (m.base && typeof m.base === 'object') ? m.base : {};
+    const st = c.units.map(([k, v]) => unitStmt(env, k, v, FP_RE.test(base[k]) ? base[k] : '', ts));
+    for (const k of drop) st.push(env.DB.prepare('DELETE FROM edit_unit WHERE k = ?').bind(k));
+    if (Array.isArray(m.retire) && m.retire.length) {
+      const old = await note(env, '#retired'), ids = new Set(old ? JSON.parse(old.v) : []);
+      for (const x of m.retire.slice(0, 2000)) if (typeof x === 'string' && ID_RE.test(x)) ids.add(x);
+      st.push(putNote(env, '#retired', JSON.stringify([...ids]), ts));
+    }
+    st.push(putNote(env, '#rev', 'null', ts));
+    await env.DB.batch(st);
+    await log('save', keys.slice(0, 6).map(CORE.unitName).join(', ') + (keys.length > 6 ? ` and ${keys.length - 6} more` : ''));
+    return json({ ok: true, ts: Object.fromEntries(c.units.map((u) => [u[0], ts])), rev: ts });
+  }
+
+  if (op === 'migrate') {
+    // the page moves a draft kept the old way over: { units: [{ k, v, base, ts }], retire, done, from, undated: [keys] }
+    // (replace: the editor chose to keep the undated parts as its changes). A part that cannot be used is left out.
+    const now = Date.now(), st = [];
+    let saved = 0;
+    if (Array.isArray(m.units) && m.units.length > 60) return json({ error: 'Too many parts at once.' }, 413);
+    for (const u of Array.isArray(m.units) ? m.units : []) {
+      if (!u || typeof u.k !== 'string' || !UNIT_RE.test(u.k)) continue;
+      const c = cleanUnits({ [u.k]: u.v });
+      if (c.error) continue;
+      // a change from the old draft never replaces a change made here since, unless the editor asked for it
+      st.push(unitStmt(env, u.k, c.units[0][1], FP_RE.test(u.base) ? u.base : '', Math.min(now, Math.max(0, +u.ts || 0)) || now, !m.replace));
+      saved++;
+    }
+    if (Array.isArray(m.retire) && m.retire.length) {
+      const old = await note(env, '#retired'), ids = new Set(old ? JSON.parse(old.v) : []);
+      for (const x of m.retire.slice(0, 5000)) if (typeof x === 'string' && ID_RE.test(x)) ids.add(x);
+      st.push(putNote(env, '#retired', JSON.stringify([...ids]), now));
+    }
+    if (m.done) st.push(putNote(env, '#legacy', JSON.stringify({ from: String(m.from || '').slice(0, 40), at: now, undated: Array.isArray(m.undated) ? m.undated.filter((k) => typeof k === 'string' && UNIT_RE.test(k)).slice(0, 5000) : [] }), now));
+    if (saved) st.push(putNote(env, '#rev', 'null', now));
+    if (st.length) await env.DB.batch(st);
+    if (m.done || saved) await log('move old draft', `${saved} changes${m.done ? ', done' : ''}`);
+    return json({ ok: true, saved });
+  }
 
   if (op === 'map') {
-    const { text } = await req.json().catch(() => ({}));
-    const found = await placeFromText(String(text || ''));
+    const found = await placeFromText(String(m.text || ''));
     return found ? json(found) : json({ error: 'Could not find a place in that. Open the link in Google Maps, press and hold on the place until a red pin appears, then copy the two numbers (like 36.2650, 68.0177) and paste them here.' }, 400);
   }
 
-  const d = await getDoc(env, 'draft');
+  if (op === 'import') {
+    // "Start again from the app": forget every change made here (uploaded recordings are kept)
+    const now = Date.now();
+    await env.DB.batch([env.DB.prepare("DELETE FROM edit_unit WHERE k NOT LIKE '#%'"), putNote(env, '#rev', 'null', now),
+      env.DB.prepare("INSERT INTO edit_unit (k, v, base, ts) VALUES ('#legacy', '{\"from\":\"\",\"undated\":[]}', '', ?1) ON CONFLICT(k) DO NOTHING").bind(now)]);
+    await log('import', 'start again from the app');
+    return json({ ok: true });
+  }
+  if (op === 'rebase') return json({ error: RELOAD, conflict: true }, 409); // the draft always starts from the app's newest book now
+  if (op === 'forget-old') {
+    const old = await note(env, '#legacy');
+    if (old) { const o = JSON.parse(old.v); o.undated = []; await putNote(env, '#legacy', JSON.stringify(o), old.ts).run(); }
+    return json({ ok: true });
+  }
+
   if (op === 'revert') {
-    const p = await getDoc(env, 'published');
-    if (!p) return json({ error: 'Nothing has been published yet, so there is nothing to go back to. Use "Import from app" to start again.' }, 400);
-    // same time stamp: the draft is not 'changed'; an editor open elsewhere still holds the old save time, so its next save is refused
-    await putDoc(env, 'draft', p.book, p.body, p.ts);
+    // back to what was published last: the units of the published overlay
+    const p = await env.DB.prepare("SELECT body, version, updated_ts FROM content WHERE name = 'overlay'").first();
+    if (!p) return json({ error: 'Nothing has been published yet, so there is nothing to go back to. Use "Start again from the app" instead.' }, 400);
+    const ov = JSON.parse(await docBody(env, 'overlay', p));
+    const st = [env.DB.prepare("DELETE FROM edit_unit WHERE k NOT LIKE '#%'")];
+    for (const u of ov.units || []) if (u && typeof u.k === 'string' && UNIT_RE.test(u.k)) st.push(unitStmt(env, u.k, u.v, FP_RE.test(u.base) ? u.base : '', +u.ts || p.updated_ts));
+    // the same time as the publish: the draft is not "changed"; a page open elsewhere still has newer save times, so its next save is refused
+    st.push(putNote(env, '#rev', 'null', p.updated_ts));
+    await env.DB.batch(st);
     await log('revert', 'draft back to ' + p.version);
     return json({ ok: true, version: p.version });
   }
-  if (!d) return json({ error: 'There is no draft yet. Press "Import from app" first.' }, 400);
-  const b = d.book;
 
-  if (op === 'check') return json(checkBook(b));
-
-  if (op === 'publish') {
-    const res = checkBook(b);
+  if (op === 'check' || op === 'publish') {
+    // the server's own check of every changed part (the page checks the whole book, laid over the app, before this)
+    const rows = await unitRows(env, 'k, v, base, ts, say, err');
+    const res = changesCheck(rows);
+    if (op === 'check') return json(res);
     if (res.errors.length) return json({ error: 'Not published: please fix the problems listed.', ...res }, 422);
-    const out = b; // the parsed copy of the draft; the stored draft itself is not changed
-    rebuildNarration(out);
-    // narration clips: the app's own files stay as they are; uploaded clips point to this server
-    const origin = url.origin;
-    normAudio(out);
-    for (const s of SLOTS) {
-      const a = out.audio[s];
-      for (const k of Object.keys(a)) if (/\/a\/(fa|ps|en)(-[fm])?\//.test(a[k]) && !a[k].startsWith('audio/')) delete a[k];
-    }
-    // pack sizes: the app's own clips as built; each upload adds its size (or replaces an app clip of average size)
-    const size = JSON.parse(JSON.stringify((out.packs && out.packs.size) || {}));
-    const packOf = {};
-    for (const [p, ids] of Object.entries(out.packs.ids)) for (const k of ids) packOf[k] = p;
-    const rows = audioRows((await env.DB.prepare('SELECT lang, id, hash, size FROM audio').all()).results);
-    const ovAudio = {}; // for the overlay: each uploaded clip with a fingerprint of the text it was published with
+    // publish against the app's newest book: a page that has an older one gets it first and checks again
+    const app = await appVersion(env), asked = (m.app && typeof m.app.version === 'string') ? m.app.version : null;
+    if (app && asked && app.version !== asked && !m.sure) return json({ error: `The app has just been updated (version ${app.version}). Your changes are laid over the new version and checked again.`, appChanged: app }, 409);
+    // the overlay: each changed unit with the fingerprint of the app version it was edited from and its save time
+    // (js/overlay.js). Put together as text from the stored rows, without reading the whole book.
+    const now = new Date(), units = [], say = [], clips = {};
     for (const r of rows) {
-      if (!out.narration[r.id]) continue;
-      (ovAudio[r.lang] = ovAudio[r.lang] || {})[r.id] = [`${origin}/a/${r.lang}/${r.id}?v=${r.hash}`, OV.hash(String(out.narration[r.id][r.lang.slice(0, 2)] || ''))];
-      const p = packOf[r.id];
-      if (p) {
-        const bySlot = (size[r.lang] = size[r.lang] || {}), z = (bySlot[p] = bySlot[p] || [0, 0]);
-        if (out.audio[r.lang][r.id]) z[0] += (r.size || 0) - (z[1] ? z[0] / z[1] : 0);
-        else { z[0] += r.size || 0; z[1] += 1; }
-        z[0] = Math.max(0, Math.round(z[0]));
-      }
-      out.audio[r.lang][r.id] = `${origin}/a/${r.lang}/${r.id}?v=${r.hash}`;
+      if (isNote(r.k)) continue;
+      units.push(`{"k":${JSON.stringify(r.k)},"v":${r.v},"base":${JSON.stringify(r.base || '')},"ts":${+r.ts || 0}}`);
+      if (r.say && r.say !== '{}') say.push(r.say.slice(1, -1));
     }
-    out.packs = { ...out.packs, size };
-    const now = new Date();
-    out.built = now.toISOString();
-    out.version = now.toISOString().slice(0, 10).replace(/-/g, '.') + '-e' + now.toISOString().slice(11, 19).replace(/:/g, '');
-    // the overlay new app versions download: only the units that differ from the app book the draft started from,
-    // each with that start's fingerprint and the time it was last saved (js/overlay.js, docs/EDITOR_AND_RELEASES.md)
-    let baseDoc = await getDoc(env, 'base');
-    if (!baseDoc) { // a draft from before overlays: start from the app as it is now (the same as the old whole-book publish for today's app)
-      const a = await appBook(env);
-      if (a.book) { await putDoc(env, 'base', a.book); baseDoc = { book: a.book }; }
+    // uploaded clips, each with a fingerprint of the text it goes with (the page sends them: it has the whole book)
+    const hashes = (m.audio && typeof m.audio === 'object') ? m.audio : {};
+    for (const r of audioRows((await env.DB.prepare('SELECT lang, id, hash FROM audio').all()).results)) {
+      const th = hashes[r.lang] && hashes[r.lang][r.id];
+      if (typeof th === 'string' && FP_RE.test(th)) (clips[r.lang] = clips[r.lang] || {})[r.id] = [`${url.origin}/a/${r.lang}/${r.id}?v=${r.hash}`, th];
     }
-    const units = OV.diffUnits(out, baseDoc ? baseDoc.book : null, out.edits || {});
-    const say = {};
-    for (const u of units) if (u.k.startsWith('topic:') && u.v) { const tid = u.k.slice(6); for (const id of Object.keys(out.narration)) if (OV.topicSay(tid, id)) say[id] = out.narration[id]; }
-    const overlay = JSON.stringify({ format: OV.FORMAT, version: out.version, built: out.built, app: baseDoc && baseDoc.book ? baseDoc.book.version || null : null, units, say, audio: ovAudio });
-    const body = JSON.stringify(out);
-    if (bytesOf(body) > MAX_DOC_BYTES || bytesOf(overlay) > MAX_DOC_BYTES) return json({ error: `Not published: the book has become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something.`, errors: [], warnings: res.warnings }, 422);
-    await putDoc(env, 'overlay', out, overlay);
-    await putDoc(env, 'published', out, body);
-    await log('publish', 'version ' + out.version);
-    const app = await appVersion(env), warnings = [...res.warnings];
-    if (app && baseDoc && baseDoc.book && app.version !== baseDoc.book.version) warnings.unshift({ msg: `The app has a newer version (${app.version}) than the one this draft started from (${baseDoc.book.version || '?'}). Phones keep the app's newer text wherever you did not change it. To edit the newest text, press "Bring in app changes" (your changes are kept).` });
-    return json({ ok: true, version: out.version, built: out.built, warnings, units: units.length });
-  }
-
-  if (op === 'save') {
-    const m = await req.json().catch(() => null);
-    if (!m || typeof m !== 'object') return json({ error: 'Nothing to save.' }, 400);
-    // optimistic locking: the editor sends the save time of the draft it last loaded or saved (rev)
-    if (m.rev != null && +m.rev !== d.ts) return json({ error: STALE, conflict: true }, 409);
-    // which units this change can touch, and how they were before (to stamp the ones that really change: docs/EDITOR_AND_RELEASES.md)
-    const lists = LISTS.map((s) => 'list:' + s);
-    const cand = m.part === 'topic' ? ['topic:' + (m.value && m.value.id), ...lists] : m.part === 'deleteTopic' ? ['topic:' + m.id, ...lists] : m.part === 'sections' ? lists
-      : m.part === 'home' ? ['home'] : m.part === 'facilities' ? ['facilities'] : m.part === 'search' ? ['search:' + m.id] : m.part === 'ui' ? [...Object.keys(m.text || {}).map((k) => 'ui:' + k), ...Object.keys(m.say || {}).map((k) => 'say:' + k)] : [];
-    const before = new Map(cand.map((k) => [k, OV.jsonOf(OV.getUnit(b, k))]));
-    const retire = (ids) => { b.retired = [...new Set([...(b.retired || []), ...ids.filter((x) => typeof x === 'string')])]; };
-    if (Array.isArray(m.retired)) retire(m.retired);
-    if (m.part === 'topic') {
-      const t = m.value;
-      if (!t || typeof t.id !== 'string' || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(t.id) || t.id === 'vaccines') return json({ error: 'The topic id must be small English letters, numbers and hyphens, like "skin-infection".' }, 400);
-      if (!SECTIONS.includes(t.section)) return json({ error: 'Choose a section: children, women or everyone.' }, 400);
-      if (!Array.isArray(t.blocks)) return json({ error: 'The topic has no blocks.' }, 400);
-      const old = b.topics[t.id];
-      if (!old && (b.retired || []).includes(t.id)) return json({ error: `The id "${t.id}" was used before. Choose another id.` }, 400);
-      if (!old) b.sections[t.section].push(t.id);
-      else if (old.section !== t.section) { // a page only on a list page (kit, hospital ...) stays there only
-        const ol = b.sections[old.section] || [], i = ol.indexOf(t.id);
-        if (i >= 0) { ol.splice(i, 1); if (!b.sections[t.section].includes(t.id)) b.sections[t.section].push(t.id); }
-      }
-      b.topics[t.id] = t;
-    } else if (m.part === 'deleteTopic') {
-      const t = b.topics[m.id];
-      if (!t || m.id === 'vaccines') return json({ error: 'No such topic.' }, 400);
-      retire([m.id, m.id + '.title', ...(t.blocks || []).flatMap((x) => [x.id, ...(x.items || []).map((i) => i.id)])]);
-      delete b.topics[m.id];
-      for (const s of LISTS) if (Array.isArray(b.sections[s])) b.sections[s] = b.sections[s].filter((x) => x !== m.id);
-    } else if (m.part === 'sections') {
-      const v = m.value || {};
-      for (const s of LISTS) if (Array.isArray(v[s])) b.sections[s] = [...new Set(v[s].filter((x) => b.topics[x]))];
-    } else if (m.part === 'home') {
-      if (!Array.isArray(m.value)) return json({ error: 'Nothing to save.' }, 400);
-      b.config.home = [...new Set(m.value.filter((x) => HOME_MODULES[x]))];
-    } else if (m.part === 'ui') {
-      for (const [k, L] of Object.entries(m.text || {})) if (b.ui[k]) b.ui[k] = cleanL(L);
-      for (const [k, L] of Object.entries(m.say || {})) if ((k.startsWith('ui.') || k.startsWith('anim.')) && b.narration[k]) b.narration[k] = cleanL(L);
-    } else if (m.part === 'search') {
-      // the symptom finder's words for one topic (js/search.js): lists of short phrases per language, and danger words
-      const t = b.topics[m.id];
-      if (!t || typeof m.value !== 'object' || !m.value) return json({ error: 'No such topic.' }, 400);
-      const clean = {};
-      for (const k of ['fa', 'ps', 'lat', 'en', 'danger']) {
-        const L = Array.isArray(m.value[k]) ? [...new Set(m.value[k].filter((x) => typeof x === 'string').map((x) => x.trim().slice(0, 80)).filter(Boolean))].slice(0, 300) : [];
-        if (L.length) clean[k] = L;
-      }
-      const old = (b.search && b.search.pages && b.search.pages[m.id]) || {};
-      if (old.urgent) clean.urgent = true;
-      b.search = b.search || { version: 1, pages: {} };
-      b.search.pages = b.search.pages || {};
-      if (Object.keys(clean).length) b.search.pages[m.id] = clean; else delete b.search.pages[m.id];
-    } else if (m.part === 'facilities') {
-      if (!Array.isArray(m.value)) return json({ error: 'Nothing to save.' }, 400);
-      b.facilities = { ...(b.facilities || {}), facilities: m.value, updated: new Date().toISOString().slice(0, 10) };
-    } else return json({ error: 'Unknown change.' }, 400);
-    const stamp = Date.now();
-    b.edits = b.edits || {};
-    for (const [k, j] of before) if (OV.jsonOf(OV.getUnit(b, k)) !== j) b.edits[k] = stamp;
-    rebuildNarration(b);
-    const body = JSON.stringify(b);
-    if (bytesOf(body) > MAX_DOC_BYTES) return json({ error: `Not saved: the book has become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something, for example a very long text.` }, 422);
-    const rev = await putDraft(env, b, body, m.rev != null ? +m.rev : null);
-    if (!rev) return json({ error: STALE, conflict: true }, 409);
-    const PART = { topic: 'topic', deleteTopic: 'deleted topic', sections: 'topic order', home: 'home screen', ui: 'words', facilities: 'places', search: 'search words' };
-    await log('save', PART[m.part] + (m.part === 'topic' ? ' ' + m.value.id : m.part === 'deleteTopic' || m.part === 'search' ? ' ' + m.id : ''));
-    return json({ ok: true, sections: b.sections, rev });
+    const built = now.toISOString(), version = built.slice(0, 10).replace(/-/g, '.') + '-e' + built.slice(11, 19).replace(/:/g, '');
+    const overlay = `{"format":${OV.FORMAT},"version":${JSON.stringify(version)},"built":${JSON.stringify(built)},"app":${JSON.stringify(asked || (app && app.version) || null)},"units":[${units.join(',')}],"say":{${say.join(',')}},"audio":${JSON.stringify(clips)}}`;
+    if (overlay.length > MAX_DOC_BYTES / 3 && bytesOf(overlay) > MAX_DOC_BYTES) return json({ error: `Not published: the changes have become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something.`, errors: [], warnings: res.warnings }, 422);
+    await writeDoc(env, 'overlay', { version, built }, overlay, now.getTime());
+    await log('publish', 'version ' + version);
+    return json({ ok: true, version, built, warnings: res.warnings, units: units.length });
   }
   return json({ error: 'Unknown action.' }, 404);
 }
@@ -799,140 +659,6 @@ async function placeFromText(text) {
     return null;
   }
   return null;
-}
-
-/* ---------- the same rules as tools/validate.py, in plain words ---------- */
-function checkBook(b) {
-  const errors = [], warnings = [], seen = new Map();
-  const LN = { fa: 'Dari', ps: 'Pashto', en: 'English' };
-  const E = (msg, topic) => errors.push(topic ? { msg, topic } : { msg }), W = (msg, topic) => warnings.push(topic ? { msg, topic } : { msg });
-  const checkL = (where, L, maxw, tid) => {
-    if (!L || typeof L !== 'object') { E(`${where}: the text is missing.`, tid); return; }
-    for (const lg of LANGS) {
-      const v = L[lg];
-      if (typeof v !== 'string' || !v.trim()) { E(`${where}: the ${LN[lg]} text is empty.`, tid); continue; }
-      if (lg !== 'en') {
-        if (/[0-9]/.test(v)) W(`${where}: the ${LN[lg]} text has English digits (0-9). Use ۰-۹.`, tid);
-        if (/[A-Za-z]{2,}/.test(v)) W(`${where}: the ${LN[lg]} text has English letters in it.`, tid);
-        if (lg === 'fa' && /[ټډړږښګڼېۍ]/.test(v)) W(`${where}: the Dari text has Pashto-only letters.`, tid);
-      }
-      if (maxw && lg === 'en') { const n = v.trim().split(/\s+/).length; if (n > maxw) W(`${where}: ${n} English words. Try to keep it to ${maxw} or fewer.`, tid); }
-    }
-  };
-  const regId = (where, id, tid) => {
-    if (typeof id !== 'string' || !ID_RE.test(id)) { E(`${where}: the id "${id ?? ''}" is not allowed (small English letters, numbers, hyphens and dots only).`, tid); return; }
-    if (seen.has(id) && seen.get(id) !== where) E(`${where}: the id "${id}" is used twice (also at ${seen.get(id)}).`, tid);
-    seen.set(id, where);
-  };
-  const checkIcon = (where, ic, required, tid) => {
-    if (ic == null || ic === '') { if (required) E(`${where}: choose an icon.`, tid); return; }
-    if (!ICON_SET.has(ic)) E(`${where}: "${ic}" is not one of the app's icons.`, tid);
-  };
-  // pictures and animations the app has (written by tools/build.py); a book from before they existed has none
-  const PICS = new Set(Array.isArray(b.pictures) ? b.pictures : []), AN = b.anims || {}, AG = AN.groups || {}, AIDS = AN.ids || {};
-  function checkAnim(w, bl, tid) {
-    if (typeof bl.anim !== 'string' || !(AIDS[bl.anim] || AG[bl.anim])) { E(`${w}: choose one of the app's animations.`, tid); return; }
-    if (bl.pick != null && bl.pick !== '' && !(AG[bl.anim] || []).includes(bl.pick)) E(`${w}: "${bl.pick}" is not one of the choices of "${bl.anim}".`, tid);
-    if (bl.title != null && hasText(bl.title)) checkL(`${w} title`, bl.title, 7, tid);
-    const need = bl.pick ? [...animNeeded(b, bl.anim).slice(0, 2 + (AG[bl.anim] || []).length), ...animNeeded(b, bl.pick)] : animNeeded(b, bl.anim);
-    const miss = need.filter((k) => !(b.narration || {})[k]);
-    if (miss.length) E(`${w}: the spoken lines of this animation are not in the book yet (${miss.slice(0, 3).join(', ')}${miss.length > 3 ? ' …' : ''}). They come with the app's own build.`, tid);
-  }
-  for (const [key, t] of Object.entries(b.topics || {})) {
-    if (key === 'vaccines') { checkVaccines(t); continue; }
-    const tid = t && t.id, name = `Topic "${(t && t.title && t.title.en) || key}"`;
-    if (!tid || !ID_RE.test(tid) || tid !== key) { E(`${name}: the topic id is missing or wrong.`, key); continue; }
-    if (!SECTIONS.includes(t.section)) E(`${name}: choose a section (children, women or everyone).`, tid);
-    checkL(`${name} › title`, t.title, 6, tid);
-    checkL(`${name} › summary`, t.summary, 12, tid);
-    if (t.icon) checkIcon(`${name} › icon`, t.icon, false, tid);
-    const blocks = t.blocks;
-    if (!Array.isArray(blocks) || !blocks.length) { E(`${name}: has no blocks.`, tid); continue; }
-    if (blocks[0].type !== 'lead') E(`${name}: the first block must be the opening sentence (lead).`, tid);
-    const counts = {};
-    blocks.forEach((bl, n) => {
-      const ty = bl.type, w = `${name} › block ${n + 1} (${BLOCK_TYPES[ty] || ty})`;
-      counts[ty] = (counts[ty] || 0) + 1;
-      if (!BLOCK_TYPES[ty]) { E(`${w}: unknown kind of block.`, tid); return; }
-      regId(w, bl.id, tid);
-      if (typeof bl.id === 'string' && !bl.id.startsWith(tid + '.')) E(`${w}: its id must start with "${tid}."`, tid);
-      if ((ty === 'step' || ty === 'link') && bl.picture != null && bl.picture !== '' && !PICS.has(bl.picture)) E(`${w}: there is no picture called "${bl.picture}" in the app.`, tid);
-      if (ty === 'lead') checkL(`${w} text`, bl.text, 45, tid);
-      else if (ty === 'step') { checkIcon(w, bl.icon, true, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid); }
-      else if (ty === 'tip') { checkIcon(w, bl.icon, false, tid); checkL(`${w} text`, bl.text, 32, tid); }
-      else if (ty === 'link') {
-        checkIcon(w, bl.icon, false, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid);
-        const m = LINK_RE.exec(String(bl.to || ''));
-        if (!m) E(`${w}: choose where it goes (a tool, another topic, the home kit, the family record, the clinic finder, What is wrong? or the Emergency screen).`, tid);
-        else if (m[2] && !TOOLS.includes(m[2])) E(`${w}: "${m[2]}" is not one of the app's tools.`, tid);
-        else if (m[3] && !(b.topics || {})[m[3]]) E(`${w}: it goes to the topic "${m[3]}", which does not exist.`, tid);
-      }
-      else if (ty === 'anim') checkAnim(w, bl, tid);
-      else if (ty === 'clinic') { checkIcon(w, bl.icon, false, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid); }
-      else {
-        if (ty === 'alert' && !['urgent', 'soon'].includes(bl.level)) E(`${w}: choose how urgent it is (red or amber).`, tid);
-        checkL(`${w} title`, bl.title, 16, tid);
-        if (!Array.isArray(bl.items) || !bl.items.length) { E(`${w}: has no items.`, tid); return; }
-        bl.items.forEach((it, m) => {
-          const iw = `${w} › item ${m + 1}`;
-          regId(iw, it.id, tid);
-          if (typeof it.id === 'string' && !it.id.startsWith((bl.id || '') + '.')) E(`${iw}: its id must start with "${bl.id}."`, tid);
-          checkIcon(iw, it.icon, true, tid);
-          checkL(iw, it.text, 14, tid);
-        });
-      }
-    });
-    if ((counts.anim || 0) > 2) W(`${name}: has ${counts.anim} animations. Try to keep it to 2 or fewer.`, tid);
-    if ((counts.lead || 0) !== 1) E(`${name}: must have exactly one opening sentence (lead); it has ${counts.lead || 0}.`, tid);
-    if (!((counts.step || 0) >= (counts.alert ? 1 : 2) && (counts.step || 0) <= 8)) // a reading page (what a number means) is one step and its alert boxes
-      W(`${name}: has ${counts.step || 0} steps (aim for 3 to 7).`, tid);
-    if (!Array.isArray(t.sources) || !t.sources.filter((s) => String(s).trim()).length) E(`${name}: add at least one source (where the advice comes from).`, tid);
-  }
-  function checkVaccines(d) {
-    const v = 'Vaccines page';
-    checkL(`${v} › title`, d.title); checkL(`${v} › summary`, d.summary);
-    const lead = d.lead || {}; regId(`${v} › opening`, lead.id); checkL(`${v} › opening`, lead.text);
-    let last = -1;
-    (d.visits || []).forEach((x, n) => {
-      const w = `${v} › visit ${n + 1}`; regId(w, x.id); checkL(`${w} age`, x.age);
-      if (!Number.isInteger(x.ageDays) || (x.ageDays <= last && n > 0)) E(`${w}: the ages must go up from one visit to the next.`);
-      last = Number.isInteger(x.ageDays) ? x.ageDays : last;
-      (x.doses || []).forEach((dz, m) => { const dw = `${w} › vaccine ${m + 1}`; if (!ID_RE.test(dz.id || '')) E(`${dw}: bad id.`); checkL(`${dw} name`, dz.name); checkL(`${dw} protects against`, dz.protects); });
-    });
-    (d.notes || []).forEach((x, n) => { regId(`${v} › note ${n + 1}`, x.id); checkIcon(`${v} › note ${n + 1}`, x.icon, false); checkL(`${v} › note ${n + 1}`, x.text); });
-    (d.anims || []).forEach((x, n) => { const w = `${v} › animation ${n + 1}`; regId(w, x.id); if (x.type !== 'anim') E(`${w}: must be an animation.`); checkAnim(w, x); });
-    if (d.women) { regId(`${v} › women's part`, d.women.id); checkL(`${v} › women's part title`, d.women.title); checkL(`${v} › women's part text`, d.women.text); (d.women.doses || []).forEach((x, n) => checkL(`${v} › women's dose ${n + 1}`, x.when)); }
-  }
-  // section lists
-  const listed = new Set();
-  for (const s of LISTS) for (const id of (b.sections || {})[s] || []) { listed.add(id); if (!b.topics[id]) E(`The ${s} list names "${id}", but there is no such topic.`); }
-  // the Emergency screen: each age's "not breathing" page and its other pages
-  for (const a of (b.config || {}).emergency || []) for (const id of [a.cpr, ...(a.topics || [])]) if (id && !b.topics[id]) E(`The Emergency screen (${a.id}) names "${id}", but there is no such topic.`);
-  for (const id of Object.keys(b.topics || {})) if (!listed.has(id)) W(`Topic "${id}" is not in any section, so nobody can open it.`, id);
-  // home screen
-  if (!Array.isArray((b.config || {}).home) || !b.config.home.length) W('The home screen has no parts switched on.');
-  // Mo's rule: the Home tab's lists (config.lists ... tab "house") give no medical advice; urgent signs live on the Health side
-  for (const [name, l] of Object.entries((b.config || {}).lists || {})) if (l && l.tab === 'house') for (const tid of (b.sections || {})[name] || []) for (const bl of (((b.topics || {})[tid] || {}).blocks || [])) if (bl.type === 'alert' || bl.type === 'clinic') W(`${bl.id}: this page is on the Home tab (${name}), which gives no medical advice. Move the box to a Health page and link to it with a red link row.`, tid);
-  // words on buttons and spoken interface lines
-  for (const [k, L] of Object.entries(b.ui || {})) {
-    const empty = LANGS.filter((lg) => !String((L && L[lg]) || '').trim());
-    if (empty.length && empty.length < 3) W(`Words "${k}": the ${empty.map((x) => LN[x]).join(' and ')} text is empty.`);
-    for (const ph of String((L && L.en) || '').match(/\{\w+\}/g) || []) for (const lg of ['fa', 'ps']) if (L[lg] && !L[lg].includes(ph)) E(`Words "${k}": the ${LN[lg]} text must keep ${ph} (the app puts a number there).`);
-  }
-  for (const [k, L] of Object.entries(b.narration || {})) if (k.startsWith('ui.')) checkL(`Spoken line "${k}"`, L);
-  // places
-  const fids = new Set(), ftypes = Object.keys(b.ui || {}).filter((k) => k.startsWith('ft_')).map((k) => k.slice(3)), svcs = Object.keys(b.ui || {}).filter((k) => k.startsWith('svc_')).map((k) => k.slice(4));
-  ((b.facilities || {}).facilities || []).forEach((f, n) => {
-    const w = `Place ${n + 1} "${(f.name && f.name.en) || f.id || ''}"`;
-    if (typeof f.id !== 'string' || !ID_RE.test(f.id)) E(`${w}: bad id.`); else if (fids.has(f.id)) E(`${w}: the id "${f.id}" is used twice.`);
-    fids.add(f.id);
-    checkL(`${w} › name`, f.name);
-    if (typeof f.lat !== 'number' || typeof f.lon !== 'number' || !isFinite(f.lat) || !isFinite(f.lon) || Math.abs(f.lat) > 90 || Math.abs(f.lon) > 180) E(`${w}: the location is wrong. Latitude must be a number between -90 and 90 and longitude between -180 and 180 (Samangan is about 36, 68).`);
-    if (!STATUSES.includes(f.status)) E(`${w}: status must be open, unknown or closed.`);
-    if (ftypes.length && !ftypes.includes(f.type || 'other')) E(`${w}: "${f.type}" is not a known type of place.`);
-    for (const s of f.services || []) if (svcs.length && !svcs.includes(s)) E(`${w}: "${s}" is not a known service.`);
-  });
-  return { errors, warnings };
 }
 
 /* ---------- AI summary of feedback (Anthropic Messages API) ---------- */
@@ -1106,17 +832,20 @@ details.au{margin-top:8px;font-size:14px}details.au summary{color:#1F6F7A;cursor
 body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[readonly],body.ro input[readonly]{background:#F6F3EE}</style>
 <header><div class="hrow"><h1 class="grow">Sehat · editor</h1><a href="/dashboard?key=${k}" class="s">Usage dashboard</a>${me.role === 'owner' ? `<a href="/people?key=${k}" class="s">People</a>` : ''}${me.role === 'viewer' ? '' : '<button class="primary" data-act="publish">Publish</button>'}</div>
 <div class="hrow"><span id="st" class="st">Loading…</span><span class="s" id="pubinfo"></span><span class="s" id="who" style="margin-left:auto">Signed in as <b>${esc(signedIn(me))}</b></span></div>
-<nav><a href="#topics">Topics</a><a href="#home">Home screen</a><a href="#words">Words</a><a href="#places">Places</a><a href="#audio">Audio</a><a href="#publish">Publish &amp; import</a></nav></header>
+<nav><a href="#topics">Topics</a><a href="#home">Home screen</a><a href="#words">Words</a><a href="#places">Places</a><a href="#audio">Audio</a><a href="#publish">Publish</a></nav></header>
 <main id="main"></main>
 <script>var __name = (f) => f; ${parseLatLon.toString()}
+const OVC = (${OV.overlayCore.toString()})(), CORE = (${editorCore.toString()})();
 (${adminClient.toString()})(${scriptJson(cfg)});</script></html>`;
 }
 
-// Runs in Mo's browser. Keeps the draft in memory, saves each change to the server a moment after typing stops.
+// Runs in Mo's browser. The draft is the app's own newest book (downloaded from the app's address) with the editor's
+// changes laid over it, exactly as phones do it (OVC = js/overlay.js). Each change is saved a moment after typing stops,
+// as the parts of the book it touched; the server never handles the whole book (docs/EDITOR_AND_RELEASES.md).
 function adminClient(cfg) {
   const LANGS = ['fa', 'ps', 'en'], LN = { fa: 'Dari', ps: 'Pashto', en: 'English' }, SECS = { children: 'Children', women: "Women's health", everyone: 'Everyone' };
   // other topic lists: the home health kit page and the Emergency screen's list of all emergencies (topics keep their own section too)
-  const LISTN = { ...SECS, kit: 'Home health kit page (only there, not in the lists above)', safety: 'Home safety page (also in their section, shown there as a group)', hospital: 'Going to the clinic or hospital page', food: 'Food and garden page', emergency: 'Emergency screen: all emergencies (also in their section)' };
+  const LISTN = { ...SECS, kit: 'Home health kit page (only there, not in the lists above)', safety: 'Home safety page (also in their section, shown there as a group)', hospital: 'Going to the clinic or hospital page', food: 'Food and garden page', wellbeing: 'Well-being page', emergency: 'Emergency screen: all emergencies (also in their section)' };
   const $ = (s) => document.querySelector(s), main = $('#main');
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const L0 = () => ({ fa: '', ps: '', en: '' });
@@ -1125,9 +854,11 @@ function adminClient(cfg) {
   const linkTargets = () => [...cfg.tools.map((x) => ['tool/' + x, 'Tool: ' + x]), ['kit', 'Home health kit page'], ['family', 'My family (vaccine card)'], ['near', 'Nearest clinic'], ['growth', 'Growth tracker (charts)'], ['growth/measure', 'How to measure at home'], ['share', 'Share Sehat'], ['ask', 'What is wrong? (symptom search)'], ['emergency', 'Emergency screen'],
     ...Object.keys(D.topics).sort().map((x) => ['topic/' + x, 'Topic: ' + ((D.topics[x].title && D.topics[x].title.en) || x)])];
   let D = null, PUB = null, AU = {}, DIRTY = false, CUR = null, CHECK = null, Q = { words: '', audio: '', places: '' };
-  // REV: the draft's save time this page last saw (a save based on an older one is refused); APP: the app's version when newer than the draft's start
-  let REV = null, APP = null, BASE = null;
-  const pending = new Set(); let timer = null, chain = Promise.resolve(), saveErr = false;
+  // APP: the app's own book; UNITS: the editor's changes { key: { v, base, ts } } (ts: the save time this page last saw,
+  // a save that starts from an older one is refused); SUPER: changes the app made again later (phones show the app's version);
+  // RET: ids never to be used again; OLD: what is left of a draft kept the old way
+  let APP = null, UNITS = {}, SUPER = [], RET = [], OLD = null;
+  const pending = new Set(), retQ = new Set(); let timer = null, chain = Promise.resolve(), saveErr = false;
   // viewers: the same pages, but nothing can be typed or pressed (the server refuses every change anyway)
   const RO = cfg.role === 'viewer';
   if (RO) document.body.classList.add('ro');
@@ -1142,39 +873,112 @@ function adminClient(cfg) {
     return j;
   }
   function status(t, cls) { const el = $('#st'); el.textContent = t; el.className = 'st ' + (cls || ''); }
+  // the app's own book, straight from the app's address (version: a newer one the page has just heard of)
+  async function getApp(version) {
+    if (!cfg.appUrl) throw new Error('The server does not know the app address yet. Put it in server/wrangler.toml as APP_URL and deploy again.');
+    const r = await fetch(cfg.appUrl + '/content/book.json' + (version ? '?v=' + encodeURIComponent(version) : ''), { cache: version ? 'no-store' : 'no-cache' });
+    if (!r.ok) throw new Error(`Could not download the app's book from ${cfg.appUrl} (it answered ${r.status}). Check the internet connection and press Try again.`);
+    const b = await r.json();
+    if (!b || !b.topics || !b.sections || !b.narration || !b.ui || !b.config) throw new Error(`The file at ${cfg.appUrl}/content/book.json is not the app's book.`);
+    APP = CORE.normAudio(b);
+  }
+  // the draft: the app's book with the editor's changes laid over it, the same way phones do it
+  function build() { const r = CORE.draftOf(APP, UNITS, OVC, RET); D = r.book; SUPER = r.superseded; }
+  function takeState(s) {
+    UNITS = {}; for (const u of s.units) UNITS[u.k] = { v: u.v, base: u.base, ts: u.ts };
+    RET = s.retired || []; PUB = s.published; DIRTY = s.dirty; OLD = s.old; AU = {};
+    for (const a of s.audio) AU[a.lang + '/' + a.id] = a;
+  }
   async function load() {
     try {
-      const s = await api('state');
-      D = s.draft; PUB = s.published; DIRTY = s.dirty; AU = {}; REV = s.rev; BASE = s.base; APP = s.appNewer ? s.app : null;
-      for (const a of s.audio) AU[a.lang + '/' + a.id] = a;
-      status(RO ? 'View only' : D ? 'All changes saved' : 'No draft yet', 'ok'); render();
-    } catch (e) { status(e.message, 'err'); }
+      status('Loading…');
+      const all = await Promise.all([api('state'), APP ? null : getApp()]), s = all[0];
+      takeState(s);
+      if (s.legacy && !RO) { await moveOld(s.legacy); takeState(await api('state')); }
+      build();
+      status(RO ? 'View only' : 'All changes saved', 'ok'); render();
+    } catch (e) {
+      status(e.message, 'err');
+      if (!D) main.innerHTML = `<div class="c"><p class="msg bad">${esc(e.message)}</p><button data-act="reload">Try again</button></div>`;
+    }
+  }
+  // The app may have been updated since this page opened. Before a check or a publish the page asks, and lays the
+  // changes over the newest app book (nothing to press). Returns the new version, or null when nothing changed.
+  async function ensureApp(version) {
+    let v = version ? { version } : null;
+    if (!v) { try { const r = await fetch(cfg.appUrl + '/content/version.json?t=' + Date.now(), { cache: 'no-store' }); v = r.ok ? await r.json() : null; } catch (e) { v = null; } }
+    if (!v || typeof v.version !== 'string' || v.version === APP.version) return null;
+    await getApp(v.version); build();
+    return APP.version;
   }
 
-  /* ---- saving ---- */
-  function bodyFor(p) {
-    if (p.startsWith('topic:')) { const t = D.topics[p.slice(6)]; return t ? { part: 'topic', value: t, retired: D.retired || [] } : null; }
-    if (p === 'ui') { const say = {}; for (const k in D.narration) if (k.startsWith('ui.') || k.startsWith('anim.')) say[k] = D.narration[k]; return { part: 'ui', text: D.ui, say }; }
-    if (p === 'fac') return { part: 'facilities', value: D.facilities.facilities };
-    if (p.startsWith('search:')) { const id = p.slice(7); return { part: 'search', id, value: ((D.search && D.search.pages) || {})[id] || {} }; }
-    if (p === 'sections') return { part: 'sections', value: D.sections };
-    if (p === 'home') return { part: 'home', value: D.config.home };
-    return null;
+  /* ---- a draft kept the old way (the whole book, before 8 October 2026) ---- */
+  // Changes with a save time move over once (CORE.oldChanges); the other differences from the app (mostly older app
+  // text) are listed on the Publish page, where they can be kept too.
+  async function oldDraft(doc) {
+    const r = await fetch('/admin/api/legacy?doc=' + doc + '&key=' + encodeURIComponent(cfg.key), { cache: 'no-store' });
+    return r.ok ? r.json() : null;
   }
-  function queueSave(p) { if (RO) return; pending.add(p); DIRTY = true; status('Saving…'); clearTimeout(timer); timer = setTimeout(flush, 900); }
+  async function moveOld(L) {
+    status('Moving your earlier draft over…');
+    const old = await oldDraft('draft');
+    if (!old || !old.topics) return api('migrate', { units: [], done: true, from: L.version || '', undated: [] });
+    const base = L.base ? await oldDraft('base') : null;
+    const c = CORE.oldChanges(old, base, APP, OVC);
+    RET = [...new Set([...RET, ...(old.retired || [])])];
+    const parts = chunks(c.dated);
+    for (let i = 0; i < parts.length; i++) {
+      const last = i === parts.length - 1;
+      await api('migrate', { units: parts[i], done: last, from: old.version || L.version || '', undated: last ? c.undated : [], retire: last ? RET : [] });
+    }
+  }
+  // a few parts at a time, so that each request stays small for the server
+  function chunks(units) {
+    const out = [[]]; let size = 0;
+    for (const u of units) {
+      const n = JSON.stringify(u).length;
+      if (out[out.length - 1].length && (size + n > 25000 || out[out.length - 1].length >= 40)) { out.push([]); size = 0; }
+      out[out.length - 1].push(u); size += n;
+    }
+    return out;
+  }
+  async function keepOld() {
+    const old = await oldDraft('draft');
+    if (!old) throw new Error('The earlier draft is no longer there.');
+    const now = Date.now(), units = OLD.undated.map((k) => ({ k, v: OVC.getUnit(old, k) === undefined ? null : OVC.getUnit(old, k), base: OVC.fp(OVC.getUnit(APP, k)), ts: now }));
+    const parts = chunks(units);
+    let saved = 0;
+    for (let i = 0; i < parts.length; i++) {
+      status(`Keeping your earlier changes… ${Math.round((100 * i) / parts.length)}%`);
+      saved += (await api('migrate', { units: parts[i], replace: true, done: i === parts.length - 1, from: OLD.from, undated: [] })).saved;
+    }
+    return saved;
+  }
+
+  /* ---- saving: the parts of the book (units) a change touched ---- */
+  // A part that is the same as the app's own again is dropped, so it follows the app from then on.
+  function queueSave(k) { if (RO) return; pending.add(k); DIRTY = true; status('Saving…'); clearTimeout(timer); timer = setTimeout(flush, 900); }
   function flush() {
     clearTimeout(timer);
-    const parts = [...pending]; pending.clear();
+    const keys = [...pending], ret = [...retQ]; pending.clear(); retQ.clear();
     chain = chain.then(async () => {
-      for (const p of parts) {
-        const b = bodyFor(p); if (!b) continue;
-        b.rev = REV;
-        try { const r = await api('save', b); if (r.sections) D.sections = r.sections; if (r.rev) REV = r.rev; saveErr = false; }
-        catch (e) {
-          saveErr = true; pending.add(p); status('Not saved: ' + e.message, 'err');
-          if (e.data && e.data.conflict && confirm(e.message + '\n\nLoad the newest version now?')) { pending.clear(); saveErr = false; await load(); }
-          return;
-        }
+      if (!keys.length && !ret.length) return;
+      const body = { units: {}, drop: [], prev: {}, base: {}, retire: ret };
+      for (const k of keys) {
+        const v = OVC.getUnit(D, k), a = OVC.getUnit(APP, k);
+        if (OVC.jsonOf(v) === OVC.jsonOf(a)) { if (UNITS[k]) { body.drop.push(k); body.prev[k] = UNITS[k].ts; } continue; }
+        body.units[k] = v === undefined ? null : v; body.base[k] = OVC.fp(a); body.prev[k] = UNITS[k] ? UNITS[k].ts : 0;
+      }
+      try {
+        const r = await api('save', body);
+        for (const k of body.drop) delete UNITS[k];
+        for (const k of Object.keys(body.units)) UNITS[k] = { v: JSON.parse(JSON.stringify(body.units[k])), base: body.base[k], ts: r.ts[k] };
+        SUPER = SUPER.filter((k) => !(k in body.units) && body.drop.indexOf(k) < 0);
+        saveErr = false;
+      } catch (e) {
+        saveErr = true; keys.forEach((k) => pending.add(k)); ret.forEach((x) => retQ.add(x)); status('Not saved: ' + e.message, 'err');
+        if (e.data && e.data.conflict && confirm(e.message + '\n\nLoad the newest version now?')) { pending.clear(); retQ.clear(); saveErr = false; await load(); }
+        return;
       }
       if (!pending.size) status('All changes saved', 'ok');
       updPub();
@@ -1217,9 +1021,17 @@ function adminClient(cfg) {
     if ('num' in el.dataset) v = v.trim() === '' ? null : Number(v.replace(',', '.'));
     if ('list' in el.dataset) v = v.split('\n').map((s) => s.trim()).filter(Boolean);
     const last = ks[ks.length - 1];
+    if (root === 'topic' && ks.length === 1 && last === 'section' && o.section !== v) moveSection(CUR, o.section, v);
     if (v === '' && 'opt' in el.dataset) delete o[last]; else o[last] = v;
     if (last === 'anim') delete o.pick; // a new animation: choose its variant again
-    queueSave(root === 'topic' ? 'topic:' + CUR : root === 'fac' ? 'fac' : root === 'search' ? 'search:' + ks[0] : 'ui');
+    queueSave(root === 'topic' ? 'topic:' + CUR : root === 'fac' ? 'facilities' : root === 'search' ? 'search:' + ks[0] : root === 'say' ? 'say:' + ks[0] : 'ui:' + ks[0]);
+  }
+  // a topic moved to another section moves between the lists; a page only on a list page (kit, hospital ...) stays there only
+  function moveSection(tid, from, to) {
+    const ol = D.sections[from] || [], i = ol.indexOf(tid);
+    if (i < 0 || !Array.isArray(D.sections[to])) return;
+    ol.splice(i, 1); if (D.sections[to].indexOf(tid) < 0) D.sections[to].push(tid);
+    queueSave('list:' + from); queueSave('list:' + to);
   }
   function updPub() {
     $('#pubinfo').textContent = PUB ? ` · Published ${PUB.version}${DIRTY ? ' · the draft has changes not yet published' : ' · nothing new to publish'}` : ' · nothing published yet';
@@ -1231,13 +1043,13 @@ function adminClient(cfg) {
     const tab = r[0] === 'topic' ? 'topics' : r[0] || 'topics';
     document.querySelectorAll('nav a').forEach((a) => a.classList.toggle('on', a.getAttribute('href') === '#' + tab));
     updPub();
+    const sup = SUPER.map((k) => CORE.unitName(k));
     const note = (RO ? '<p class="msg good">You can view but not edit. Ask Mo for an editor link if you need to change the book.</p>' : '')
-      + (APP && D && !RO ? `<div class="msg bad">The app has a newer version (${esc(APP.version)}) than the one this draft started from${BASE ? ` (${esc(BASE.version)})` : ''}. Phones keep the app's newer text wherever you did not change it, but here you still see the older text. <button class="primary sm" data-act="rebase">Bring in app changes</button> (your own changes are kept)</div>` : '');
-    if (!D) { main.innerHTML = note + (RO ? '<div class="c"><p>There is no draft of the book yet.</p></div>' : vStart()); return; }
+      + (sup.length ? `<div class="msg bad">The app changed ${sup.length === 1 ? 'one part' : sup.length + ' parts'} again after you edited ${sup.length === 1 ? 'it' : 'them'}, so phones show the app's version, and so does this page: ${esc(sup.slice(0, 8).join(', '))}${sup.length > 8 ? ` and ${sup.length - 8} more` : ''}. To use your version again, change it here.</div>` : '');
+    if (!D) return;
     main.innerHTML = note + (r[0] === 'topic' ? vTopic(decodeURIComponent(r[1] || '')) : tab === 'home' ? vHome() : tab === 'words' ? vWords() : tab === 'places' ? vPlaces() : tab === 'audio' ? vAudio() : tab === 'publish' ? vPublish() : vTopics());
     lock(main);
   }
-  const vStart = () => `<div class="c"><h2>Start here</h2><p>There is no draft yet. Press the button to copy the book that is inside the app now${cfg.appUrl ? ` (${esc(cfg.appUrl)})` : ''}. Then edit it and press Publish.</p><button class="primary" data-act="import">Import from app</button>${cfg.appUrl ? '' : '<p class="msg bad">APP_URL is not set in server/wrangler.toml, so Import cannot work yet.</p>'}${vChecks()}</div>`;
 
   function vTopics() {
     let h = '<p class="s">Tap a topic to edit it. Use the arrows to change the order in the app.</p>';
@@ -1353,22 +1165,32 @@ function adminClient(cfg) {
   function vChecks() {
     if (!CHECK) return '';
     const li = (x) => `<li>${esc(x.msg)}${x.topic && D && D.topics[x.topic] && x.topic !== 'vaccines' ? ` <a href="#topic/${esc(x.topic)}">open</a>` : ''}</li>`;
-    return `${CHECK.ok ? `<div class="msg good">${esc(CHECK.ok)}</div>` : ''}${CHECK.error ? `<div class="msg bad">${esc(CHECK.error)}</div>` : ''}
+    return `${CHECK.note ? `<div class="msg good">${esc(CHECK.note)}</div>` : ''}${CHECK.ok ? `<div class="msg good">${esc(CHECK.ok)}</div>` : ''}${CHECK.error ? `<div class="msg bad">${esc(CHECK.error)}</div>` : ''}
       ${CHECK.errors && CHECK.errors.length ? `<div class="l">Problems to fix before publishing (${CHECK.errors.length})</div><ul class="errs">${CHECK.errors.map(li).join('')}</ul>` : ''}
       ${CHECK.warnings && CHECK.warnings.length ? `<details><summary class="s">Suggestions (${CHECK.warnings.length}), these do not stop publishing</summary><ul class="errs">${CHECK.warnings.map(li).join('')}</ul></details>` : ''}`;
   }
   function vPublish() {
-    return `<div class="c"><div class="l">Publish</div><p>Publishing sends the draft to every phone the next time it has internet. The book is checked first; if something is wrong you will see what to fix, and nothing is sent.</p>
+    const n = Object.keys(UNITS).length, old = OLD && OLD.undated && OLD.undated.length ? OLD.undated : null;
+    return `<div class="c"><div class="l">Publish</div><p>Publishing sends your changes to every phone the next time it has internet. The book is checked first; if something is wrong you will see what to fix, and nothing is sent.</p>
+      <p class="s">What you see here is always the app's newest book (version ${esc(APP ? APP.version : '?')}) with your ${n === 1 ? 'one change' : n + ' changes'} on top. When the app is updated, your changes stay on top of the new version by themselves.</p>
       <button data-act="check">Check for problems</button> <button class="primary" data-act="publish">Publish</button>${vChecks()}</div>
+      ${old ? `<div class="c"><div class="l">Your earlier draft</div><p>Your draft from before this editor was updated had ${old.length} other ${old.length === 1 ? 'part' : 'parts'} that differed from the app, with no record of when they were changed. Most are the app's older text, so they are not used. If you changed some of them yourself, you can keep them all as your changes.</p>
+        <details><summary class="s">Show them</summary><p class="s">${esc(old.map((k) => CORE.unitName(k)).join(', '))}</p></details>
+        <p><button data-act="old-keep">Keep them as my changes</button> <button data-act="old-forget">Forget them</button></p></div>` : ''}
       <div class="c"><div class="l">Go back</div><p><b>Revert draft</b> throws away all changes made since the last Publish.</p><button class="danger" data-act="revert">Revert draft</button>
-      <p><b>Bring in app changes</b> brings a newer version of the app's own book into the draft. Pages you changed here keep your version; everything else takes the app's newest text. Use it after the app itself has been updated.</p><button data-act="rebase">Bring in app changes</button>
-      <p><b>Import from app</b> replaces the whole draft with the book that is inside the app now${cfg.appUrl ? ` (${esc(cfg.appUrl)})` : ''}, and throws away your changes. Use it once at the start, or to start again. Uploaded recordings are kept.</p><button class="danger" data-act="import">Import from app</button></div>`;
+      <p><b>Start again from the app</b> throws away all your changes, so the draft is the app's own book${cfg.appUrl ? ` (${esc(cfg.appUrl)})` : ''}. Uploaded recordings are kept.</p><button class="danger" data-act="import">Start again from the app</button></div>`;
   }
 
   /* ---- actions ---- */
   const move = (arr, i, d) => { const j = i + d; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; };
   const topicChanged = () => { queueSave('topic:' + CUR); render(); };
-  const retire = (...ids) => { D.retired = [...new Set([...(D.retired || []), ...ids])]; };
+  const retire = (...ids) => { D.retired = [...new Set([...(D.retired || []), ...ids])]; for (const x of ids) if (x) retQ.add(x); };
+  // a uploaded clip's text fingerprint, so a phone plays it only while the text is the one it was recorded for
+  const clipHashes = () => {
+    const h = {};
+    for (const k of Object.keys(AU)) { const i = k.indexOf('/'), slot = k.slice(0, i), id = k.slice(i + 1), n = D.narration[id]; if (n) (h[slot] = h[slot] || {})[id] = OVC.hash(String(n[slot.slice(0, 2)] || '')); }
+    return h;
+  };
   const newBlock = (tid, ty) => {
     const id = newId(`${tid}.${ty === 'alert' ? 'urgent' : ty}`);
     if (ty === 'link') return { id, type: 'link', to: '', icon: 'check', title: L0(), text: L0() };
@@ -1382,11 +1204,36 @@ function adminClient(cfg) {
     b.items.push({ id: newId(id + '.item'), icon: ty === 'dont' ? 'no' : 'warning', text: L0() });
     return b;
   };
+  // Check: the whole draft, on the app's newest book (brought in first when the app was updated)
+  async function check() {
+    await flush(); if (saveErr) return null;
+    const nv = await ensureApp();
+    const res = CORE.checkBook(D);
+    if (nv) res.note = `The app was updated to version ${nv}. Your changes are now laid over it, and this check is on the new version.`;
+    return res;
+  }
   async function publish() {
-    if (!confirm('Publish the draft? Phones will get it the next time they have internet.')) return;
-    await flush(); status('Publishing…');
-    try { const r = await api('publish', {}); PUB = { version: r.version, built: r.built }; DIRTY = false; CHECK = { ok: `Published as version ${r.version}. Phones will pick it up the next time they are online.`, warnings: r.warnings }; status('Published', 'ok'); }
-    catch (e) { CHECK = { error: e.message, ...(e.data || {}) }; status('Not published', 'err'); }
+    if (!confirm('Publish your changes? Phones will get them the next time they have internet.')) return;
+    status('Checking…');
+    try {
+      let res = await check(); if (!res) return;
+      for (let tries = 0; ; tries++) {
+        if (res.errors.length) { CHECK = { ...res, error: 'Not published: please fix the problems listed.' }; status('Not published', 'err'); break; }
+        status('Publishing…');
+        try {
+          const r = await api('publish', { app: { version: APP.version, built: APP.built }, audio: clipHashes(), sure: tries > 0 });
+          PUB = { version: r.version, built: r.built }; DIRTY = false;
+          CHECK = { note: res.note, ok: `Published as version ${r.version}. Phones will pick it up the next time they are online.`, warnings: res.warnings };
+          status('Published', 'ok'); break;
+        } catch (e) {
+          // the app was updated a moment ago: lay the changes over the new version, check again, then publish
+          if (!(e.data && e.data.appChanged) || tries) throw e;
+          const nv = await ensureApp(e.data.appChanged.version);
+          res = CORE.checkBook(D);
+          if (nv) res.note = `The app was updated to version ${nv}. Your changes are now laid over it, and the check was made on the new version.`;
+        }
+      }
+    } catch (e) { CHECK = { error: e.message, ...(e.data || {}) }; status('Not published', 'err'); }
     location.hash = '#publish'; render();
   }
   async function upload(el) {
@@ -1413,38 +1260,41 @@ function adminClient(cfg) {
     if (el.dataset.f && el.tagName === 'SELECT') { setField(el); if (el.dataset.f.startsWith('topic:')) { const y = scrollY; render(); scrollTo(0, y); } }
     else if (el.dataset.up) upload(el);
     else if (el.dataset.home) { const h = D.config.home = (D.config.home || []).filter((m) => m !== el.dataset.home); if (el.checked) h.push(el.dataset.home); queueSave('home'); render(); }
-    else if (el.dataset.svc) { const f = D.facilities.facilities[+el.dataset.svc]; f.services = [...el.closest('.chk').querySelectorAll('input:checked')].map((x) => x.value); queueSave('fac'); }
+    else if (el.dataset.svc) { const f = D.facilities.facilities[+el.dataset.svc]; f.services = [...el.closest('.chk').querySelectorAll('input:checked')].map((x) => x.value); queueSave('facilities'); }
   });
   document.addEventListener('click', async (e) => {
-    const b = e.target.closest('[data-act]'); if (!b || RO) return;
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    if (b.dataset.act === 'reload') return location.reload();
+    if (RO) return;
     const d = b.dataset, i = +d.i, t = D && D.topics[CUR];
     switch (d.act) {
       case 'publish': return publish();
-      case 'check': await flush(); try { CHECK = await api('check', {}); if (!CHECK.errors.length) CHECK.ok = 'No problems found. You can publish.'; } catch (err) { CHECK = { error: err.message }; } return render();
+      case 'check':
+        status('Checking…');
+        try { const res = await check(); if (!res) return; CHECK = res; if (!CHECK.errors.length) CHECK.ok = 'No problems found. You can publish.'; status('All changes saved', 'ok'); } catch (err) { CHECK = { error: err.message }; }
+        return render();
       case 'import':
-        if (D && !confirm('Replace the whole draft with the book inside the app now? Changes you have not published will be lost.')) return;
-        status('Importing…');
-        try { const r = await api('import', {}); CHECK = { ok: `Imported ${r.topics} topics from the app (version ${r.from}).` }; await load(); } catch (err) { status(err.message, 'err'); alert(err.message); }
+        if (!confirm('Throw away all your changes and start again from the app\'s own book? Changes you have not published will be lost.')) return;
+        status('Starting again…');
+        try { pending.clear(); retQ.clear(); await api('import', {}); CHECK = { ok: `The draft is now the app's own book (version ${APP.version}).` }; await load(); } catch (err) { status(err.message, 'err'); alert(err.message); }
         return;
-      case 'rebase':
-        await flush(); if (saveErr) return;
-        status('Bringing in the app\'s changes…');
-        try {
-          const r = await api('rebase', { rev: REV });
-          const list = (a) => a.slice(0, 12).join(', ') + (a.length > 12 ? ` and ${a.length - 12} more` : '');
-          CHECK = { ok: `The draft now has the app's version ${r.from}. ${r.kept.length ? `Your changes kept (${r.kept.length}): ${list(r.kept)}.` : 'You had no changes of your own.'}${r.both.length ? ` Also changed in the app (check these, your version was kept): ${list(r.both)}.` : ''}${r.knownBase ? '' : ' (This draft is older than this feature, so every page that differs from the app was kept as yours. Use "Import from app" if you want the app\'s version of all of them.)'}` };
-          await load(); location.hash = '#publish'; render();
-        } catch (err) { status(err.message, 'err'); alert(err.message); if (err.data && err.data.conflict) await load(); }
+      case 'old-keep':
+        if (!confirm('Keep all of them as your changes? Where they differ from the app, phones will then show these older versions.')) return;
+        await flush(); status('Keeping your earlier changes…');
+        try { const n = await keepOld(); CHECK = { ok: `Kept ${n} parts of your earlier draft as your changes.` }; await load(); } catch (err) { status(err.message, 'err'); alert(err.message); }
+        return;
+      case 'old-forget':
+        try { await api('forget-old', {}); OLD = null; render(); } catch (err) { alert(err.message); }
         return;
       case 'revert':
         if (!confirm('Throw away all changes since the last Publish?')) return;
-        try { pending.clear(); await api('revert', {}); CHECK = { ok: 'The draft is now the same as the published book.' }; await load(); } catch (err) { status(err.message, 'err'); alert(err.message); }
+        try { pending.clear(); retQ.clear(); await api('revert', {}); CHECK = { ok: 'The draft is now the same as what was published.' }; await load(); } catch (err) { status(err.message, 'err'); alert(err.message); }
         return;
       case 'adel':
         if (!confirm('Remove this uploaded recording?')) return;
         try { await api(`audio-delete?slot=${d.slot}&id=${encodeURIComponent(d.id)}`, {}); delete AU[d.slot + '/' + d.id]; DIRTY = true; rerenderKeepOpen(d.id); } catch (err) { alert(err.message); }
         return;
-      case 'tmove': move(D.sections[d.sec], i, +d.d); queueSave('sections'); return render();
+      case 'tmove': move(D.sections[d.sec], i, +d.d); queueSave('list:' + d.sec); return render();
       case 'hmove': { const on = (D.config.home || []).filter((m) => cfg.home[m]); move(on, i, +d.d); D.config.home = on; queueSave('home'); return render(); }
       case 'tnew': {
         const id = $('#nt-id').value.trim().toLowerCase(), en = $('#nt-en').value.trim();
@@ -1454,13 +1304,17 @@ function adminClient(cfg) {
         D.topics[id] = { id, section: sec, title: { fa: '', ps: '', en }, summary: L0(), image: $('#nt-img').value, ...(icon ? { icon } : {}), blocks: [], sources: [] };
         D.topics[id].blocks.push(newBlock(id, 'lead'));
         if (!D.sections[sec].includes(id)) D.sections[sec].push(id);
-        CUR = id; queueSave('topic:' + id); location.hash = '#topic/' + id; return;
+        CUR = id; queueSave('topic:' + id); queueSave('list:' + sec); location.hash = '#topic/' + id; return;
       }
-      case 'tdel':
+      case 'tdel': {
+        // pages the Emergency screen opens are never removed from phones, so they cannot be deleted here either
+        if (((D.config && D.config.emergency) || []).some((a) => a.cpr === CUR || (a.topics || []).indexOf(CUR) >= 0)) return alert('The Emergency screen opens this page, so it cannot be deleted. You can change its text.');
         if (!confirm('Delete this whole topic? It will disappear from phones when you Publish.')) return;
-        await flush();
-        try { const r = await api('save', { part: 'deleteTopic', id: CUR }); D.sections = r.sections; retire(CUR); delete D.topics[CUR]; DIRTY = true; location.hash = '#topics'; } catch (err) { alert(err.message); }
-        return;
+        retire(CUR, CUR + '.title', ...(t.blocks || []).flatMap((x) => [x.id, ...(x.items || []).map((it) => it.id)]));
+        delete D.topics[CUR];
+        for (const s of Object.keys(D.sections)) if (Array.isArray(D.sections[s]) && D.sections[s].indexOf(CUR) >= 0) { D.sections[s] = D.sections[s].filter((x) => x !== CUR); queueSave('list:' + s); }
+        queueSave('topic:' + CUR); location.hash = '#topics'; return;
+      }
       case 'bmove': move(t.blocks, i, +d.d); return topicChanged();
       case 'bdel': if (!confirm('Delete this block?')) return; { const bl = t.blocks[i]; retire(bl.id, ...(bl.items || []).map((x) => x.id)); t.blocks.splice(i, 1); } return topicChanged();
       case 'badd': t.blocks.push(newBlock(CUR, $('#newtype').value)); topicChanged(); return scrollTo(0, document.body.scrollHeight);
@@ -1476,9 +1330,9 @@ function adminClient(cfg) {
         const F = D.facilities.facilities, ids = new Set(F.map((f) => f.id));
         let id = en.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'place'; if (ids.has(id)) { let n = 2; while (ids.has(id + '-' + n)) n++; id += '-' + n; }
         F.unshift({ id, name: { fa: '', ps: '', en }, type: 'other', district: '', lat: p.lat, lon: p.lon, services: [], phone: '', status: 'open', source: 'Added in the editor ' + new Date().toISOString().slice(0, 10) });
-        queueSave('fac'); Q.places = ''; render(); const first = document.querySelector('#list-places details'); if (first) first.open = true; return;
+        queueSave('facilities'); Q.places = ''; render(); const first = document.querySelector('#list-places details'); if (first) first.open = true; return;
       }
-      case 'fdel': if (!confirm('Delete this place?')) return; D.facilities.facilities.splice(i, 1); queueSave('fac'); return render();
+      case 'fdel': if (!confirm('Delete this place?')) return; D.facilities.facilities.splice(i, 1); queueSave('facilities'); return render();
     }
   });
   addEventListener('hashchange', () => { render(); scrollTo(0, 0); });
