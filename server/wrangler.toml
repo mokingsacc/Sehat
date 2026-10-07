@@ -1,6 +1,8 @@
 name = "sehat"
 main = "worker.js"
 compatibility_date = "2026-09-01"
+# The dashboard pages send some functions to the browser as text, so the bundler must not wrap them in __name() helpers.
+keep_names = false
 
 [vars]
 # The public address of the app (the GitHub Pages address), without a slash at the end.

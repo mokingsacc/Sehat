@@ -196,7 +196,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;p
 <div class="c" style="grid-column:1/-1"><div class="l">Feedback from users (newest first)</div>${s.feedback.length ? s.feedback.map((f) => `<div style="border-top:1px solid #E6E1D8;padding:8px 0"><div class="s">${e(new Date(f.ts).toISOString().slice(0, 16).replace('T', ' '))} · ${e(f.lang)} · from ${e(f.page)}</div>${f.text ? `<div dir="auto" style="font-size:16px">${e(f.text)}</div>` : ''}${f.has_audio ? `<audio controls preload="none" src="/fb-audio/${f.id}?key=${e(key)}"></audio>` : ''}</div>`).join('') : '<span class="s">No feedback yet</span>'}<p class="s">Download all as JSON: <a href="/feedback.json?key=${e(key)}">feedback.json</a> (paste it to Claude to summarise what to improve).</p></div>
 <div class="c"><div class="l">What people searched for ("none:" = nothing found, a topic to add)</div>${table(s.asks, 'p', 'n', 'Search', 'Times')}</div>
 <div class="c"><div class="l">Book version on phones</div>${table(s.versions, 'version', 'n', 'Version', 'Phones')}<div class="l" style="margin-top:12px">New installs per day</div>${table(s.installsPerDay, 'day', 'n', 'Day', 'Installs')}</div></div>
-<script>(${dashClient.toString()})(${scriptJson(key)})</script>`;
+<script>var __name = (f) => f; (${dashClient.toString()})(${scriptJson(key)})</script>`;
 }
 
 function dashClient(key) {
@@ -750,7 +750,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;p
 <li><b>Viewer</b>: dashboard, About, feedback and voice notes, the AI summary, and can look at the book in the editor. Cannot change anything.</li>
 <li><b>Editor</b>: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot see this page or give anyone access.</li>
 <li><b>Owner</b> (you): everything, including this page.</li></ul></div>
-<script>(${peopleClient.toString()})(${scriptJson({ key })})</script></html>`;
+<script>var __name = (f) => f; (${peopleClient.toString()})(${scriptJson({ key })})</script></html>`;
 }
 
 // Runs in Mo's browser on /people.
@@ -830,7 +830,7 @@ body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[rea
 <div class="hrow"><span id="st" class="st">Loading…</span><span class="s" id="pubinfo"></span><span class="s" id="who" style="margin-left:auto">Signed in as <b>${esc(signedIn(me))}</b></span></div>
 <nav><a href="#topics">Topics</a><a href="#home">Home screen</a><a href="#words">Words</a><a href="#places">Places</a><a href="#audio">Audio</a><a href="#publish">Publish &amp; import</a></nav></header>
 <main id="main"></main>
-<script>${parseLatLon.toString()}
+<script>var __name = (f) => f; ${parseLatLon.toString()}
 (${adminClient.toString()})(${scriptJson(cfg)});</script></html>`;
 }
 
