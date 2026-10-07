@@ -1,6 +1,7 @@
 // Cloudflare Worker: receives anonymous usage counts from the app, shows Mo a dashboard, and holds the book editor.
 // Bindings: D1 database "DB"; secret "DASH_KEY" (any long random word; the dashboard is /dashboard?key=..., the editor /admin?key=...);
 // var "APP_URL" (the app's public address, for "Import from app"); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
+import ABOUT from './about.js';
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const TYPES = new Set(['install', 'open', 'view', 'play', 'time', 'lang', 'voice', 'share', 'a2hs', 'a2hs-prompt', 'kid', 'dose', 'ask', 'feedback', 'near']);
 const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : null);
@@ -19,7 +20,7 @@ export default {
     if (req.method === 'GET' && (path === '/content/version.json' || path === '/content/book.json')) return publicBook(env, path);
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
     // everything below needs the secret word
-    const isAdmin = path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary';
+    const isAdmin = path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary';
     if (isAdmin && !authed(env, url)) return NOT_FOUND();
     if (path.startsWith('/fb-audio/')) {
       const row = await env.DB.prepare('SELECT audio, type FROM feedback WHERE id = ?').bind(+path.split('/')[2]).first();
@@ -33,6 +34,10 @@ export default {
       const s = await stats(env, +(url.searchParams.get('days') || 30));
       if (path === '/stats.json') return Response.json(s);
       return new Response(page(s, url.searchParams.get('key')), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+    }
+    if (path === '/about') {
+      const k = encodeURIComponent(url.searchParams.get('key') || '');
+      return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · about</title><body style="margin:0;padding:16px;background:#FAF8F4"><p style="font-family:system-ui,sans-serif"><a href="/dashboard?key=${k}" style="color:#B6322D">← Dashboard</a></p>${ABOUT}</body>`, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
     }
     if (path === '/ai/summary') return req.method === 'POST' ? aiSummary(env) : json({ error: 'Use POST' }, 405);
     if (path === '/admin') return new Response(adminPage(url.searchParams.get('key'), env), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -116,7 +121,7 @@ function page(s, key) {
 .b i{display:block;background:#1F6F7A;border-radius:4px 4px 0 0;min-height:2px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px}
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px;border-top:1px solid #E6E1D8}th{color:#6B655E;font-weight:600}a{color:#B6322D}</style>
 <h1>Sehat · usage (last ${s.days} days)</h1>
-<p><a href="/admin?key=${e(key)}" style="font-weight:700">Edit the book →</a></p>
+<p><a href="/admin?key=${e(key)}" style="font-weight:700">Edit the book →</a> &nbsp; <a href="/about?key=${e(key)}" style="font-weight:700">About this app →</a></p>
 <p class="s">Anonymous counts only. Phones send them when they next have internet, so recent days fill in late. <a href="?key=${e(key)}&days=7">7 days</a> · <a href="?key=${e(key)}&days=30">30 days</a> · <a href="?key=${e(key)}&days=365">1 year</a></p>
 <div class="g">${kpi('Installs (all time)', s.installs, `+${s.newInstalls} in this period`)}${kpi('Active last 7 days', s.active7, `${s.activeN} in this period`)}${kpi('Times opened', s.opens)}${kpi('Minutes spent', s.minutes, `average visit ${Math.floor(s.avgSessionSec / 60)}m ${s.avgSessionSec % 60}s`)}${kpi('Audio plays', s.plays)}${kpi('On home screen', hs, `${s.shares} shares`)}</div>
 <div class="c" style="margin-top:12px"><div class="l">People using it each day</div><div class="chart">${bars || '<span class="s">No data yet</span>'}</div></div>
