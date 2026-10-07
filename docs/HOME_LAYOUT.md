@@ -14,10 +14,10 @@ Each tab is a picture icon (`heart`, `house`, `family`) with its name under it. 
 
 ## The header (every screen)
 
-- Tab screens: the app's name, a small dark **Listen to this page** button (plays every narrated line of the screen in order; it turns into a stop button while playing), the red **Emergency** button and the **settings gear**.
+- Tab screens: the app's name, a small dark **Listen to this page** button (plays every narrated line of the screen in order; it turns into a stop button while playing), the red **Emergency** button and the **settings gear**. The Health tab leaves out the small Emergency button: its big red Emergency card is right below.
 - Other screens: a back button, the title, the Listen button and the red Emergency button.
 - Topic pages keep their big picture at the top: the back button sits on one corner of the picture and the red Emergency button on the other.
-- **The red Emergency button** (warning icon and the word) is on every screen except the emergency flow itself (`#/emergency`, `#/emergency/<age>` and the pages opened from them) and the first-run screens (language, voice, the usage question). `render()` in `js/app.js` adds it to the first `.top` or `.topic-hero` of the screen, so screens written by other modules (tools, growth, share) get it too. At 320 px it shrinks its padding but keeps the word.
+- **The red Emergency button** (warning icon and the word) is on every screen except the emergency flow itself (`#/emergency`, `#/emergency/<age>` and the pages opened from them), the first-run screens (language, voice, the usage question) and the Health tab, which has the big Emergency card. `render()` in `js/app.js` adds it to the first `.top` or `.topic-hero` of the screen, so screens written by other modules (tools, growth, share) get it too. At 320 px it shrinks its padding but keeps the word.
 - Language: chosen at first run and changed in Settings (the header has no room for the language pill next to the Emergency button at 320 px).
 
 ## Health (`#/home`)
@@ -37,6 +37,8 @@ Top to bottom (`config.home`; remove a name to hide it):
 Also available for `config.home`: `install`, `sendApp`, `near`, `disclaimer`, `sections` (children and adults together) and the name of any list in `config.lists`.
 
 Sizes: every button is one column, at least 100 px tall (the Emergency button 132 px), with a 72 px picture or icon tile, a 21 px bold title, and a 56 px speaker. At 320 px the tiles shrink to 60 px and the title to about 20 px.
+
+Titles that fit: a big title never breaks a word in two and never runs into its speaker. When a word does not fit (a narrow phone, a wide font, or the phone's large-text setting), `fitText()` in `js/app.js` makes that title a little smaller, down to 70%, after every screen is drawn, when the screen turns and when the font arrives. The header shrinks the app's name and the Emergency word together. `tools/test_layout.cjs` checks the three tabs at 320, 360 and 412 px in fa, ps and en, at normal size and with text 15% and 30% bigger.
 
 ## Children (`#/children`) and Adults (`#/adults`)
 

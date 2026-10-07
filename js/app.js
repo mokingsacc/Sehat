@@ -401,7 +401,7 @@ function screenHome() {
   const b = S.book, ids = ['ui.tab.health'], cfg = b.config || {};
   const mods = cfg.home || ['nextVaccine', 'emergency', 'firstAid', 'ask', 'children', 'adults', 'hospital', 'share', 'feedback'];
   let html = tabTop(ids);
-  let shareShown = false;
+  let shareShown = false, emCard = false;
   const M = {
     // only when a vaccine is due within 7 days or is late: a slim strip (the full card is in Family)
     nextVaccine() {
@@ -412,7 +412,7 @@ function screenHome() {
       return `<div class="vstrip${days < 0 ? ' late' : ''}" data-block="${esc(k.visit.id)}">${ic('calendar')}<a class="grow" href="#/family">${esc(k.kid.name)} · ${esc(T('nextVaccine'))}: ${esc(L(k.visit.age))} · ${esc(when)}</a>${spk(k.visit.id)}</div>`;
     },
     // the biggest thing on the screen: red, one word; opens "who needs help?" and reads it aloud
-    emergency() { return (cfg.emergency || []).length ? bigBtn('em', '#/emergency', I.warn, T('emergency'), '', 'ui.emergency', ids, 'emergency') : ''; },
+    emergency() { if ((cfg.emergency || []).length) emCard = true; return (cfg.emergency || []).length ? bigBtn('em', '#/emergency', I.warn, T('emergency'), '', 'ui.emergency', ids, 'emergency') : ''; },
     firstAid() { const f = cfg.firstAid; return f ? bigBtn('fa', '#/firstaid', picImg(topicPic(b.topics[f.image])), T(f.title), T(f.sub), f.say, ids) : ''; },
     ask() { return bigBtn('ask', '#/ask', I.mic, T('ask'), T('askSub'), 'ui.ask', ids); },
     children() { return bigBtn('sec', '#/children', picImg('img/app/home-children.svg'), T('children'), T('childrenSub'), 'ui.children', ids); },
@@ -434,7 +434,7 @@ function screenHome() {
     disclaimer() { ids.push('ui.disclaimer'); return disclaimer(); },
   };
   for (const m of mods) html += M[m] ? M[m]() : listBtn(m, ids);
-  return { html, nav: 'health' };
+  return { html, nav: 'health', healthTab: true, emCard };
 }
 
 // Home (#/house): the house and everyday life. config.house: lists from config.lists (home safety, food and garden, well-being, home kit)
@@ -1138,6 +1138,45 @@ const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, h
 const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText });
 const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, disclaimer, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP, render: () => render() });
 
+/* ---------- titles that fit ----------
+   A big title never breaks a word in two and never runs into its speaker button: on a narrow phone, with a wide
+   font or with the phone's large-text setting, the title gets a little smaller instead (down to 70%). The header
+   (app name, Listen, Emergency, settings) shrinks its name and the Emergency word together. */
+const FIT_SEL = 'main .hbtn .t, main .trow .t, main .title-row h1, main .sbig .t, main .tcard .t';
+function wordsWidth(el) { // the widest word, in px
+  let max = 0; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) {
+    const re = /\S+/g; let m;
+    while ((m = re.exec(n.nodeValue))) { const rg = document.createRange(); rg.setStart(n, m.index); rg.setEnd(n, m.index + m[0].length); let x = 0; const rs = rg.getClientRects(); for (let i = 0; i < rs.length; i++) x += rs[i].width; if (x > max) max = x; }
+  }
+  return max;
+}
+function roomOf(el) { const cs = getComputedStyle(el); return el.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0); }
+function fitText() {
+  try {
+    const els = document.querySelectorAll(FIT_SEL);
+    for (let i = 0; i < els.length; i++) {
+      const el = els[i]; if (el.style.fontSize) el.style.fontSize = ''; // (no write when nothing was shrunk: long lists stay fast)
+      if (!el.clientWidth) continue;
+      let size = parseFloat(getComputedStyle(el).fontSize); const min = size * 0.7;
+      while (size > min && wordsWidth(el) > roomOf(el) + 0.5) { size -= 1; el.style.fontSize = size + 'px'; }
+    }
+    const top = document.querySelector('main .top'); if (!top) return;
+    const h = top.querySelector('h1'), pill = top.querySelector('.empill span');
+    if (!h) return;
+    if (h.style.fontSize) h.style.fontSize = ''; if (pill && pill.parentNode.style.fontSize) pill.parentNode.style.fontSize = '';
+    let hs = parseFloat(getComputedStyle(h).fontSize), ps = pill ? parseFloat(getComputedStyle(pill).fontSize) : 0;
+    const hmin = hs * 0.7, pmin = ps * 0.75;
+    while (wordsWidth(h) > roomOf(h) + 0.5 && (hs > hmin || ps > pmin)) {
+      if (hs > hmin) { hs -= 1; h.style.fontSize = hs + 'px'; }
+      if (pill && ps > pmin) { ps -= 1; pill.parentNode.style.fontSize = ps + 'px'; }
+    }
+  } catch (e) {}
+}
+let fitT = 0;
+addEventListener('resize', () => { clearTimeout(fitT); fitT = setTimeout(fitText, 120); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitText); // the Dari and Pashto font arrives after the first paint
+
 /* ---------- router & rendering ---------- */
 function route() { return (location.hash || '#/home').slice(2).split('/'); }
 function render() {
@@ -1171,11 +1210,12 @@ function render() {
   else out = screenHome();
   } catch (err) { if (r[0] === 'home') throw err; r = ['home']; out = screenHome(); }
   app.innerHTML = `<main class="page${out.adult ? ' adult' : ''}">${out.html}</main>${out.nav ? nav(out.nav) : ''}`;
-  // the red Emergency button on every screen outside the emergency flow (and the setup screens); the gear on the tab screens
+  // the red Emergency button on every screen outside the emergency flow (and the setup screens), except the Health tab,
+  // whose big red Emergency card is right below; the gear on the tab screens
   const inEm = r[0] === 'emergency' || (r[0] === 'topic' && /^#\/emergency/.test(EM.back || ''));
   if (out.nav && !inEm) {
     const host = $('main .top, main .topic-hero', app);
-    if (host) host.insertAdjacentHTML('beforeend', emPill() + (['home', 'house', 'family'].includes(r[0] || 'home') && host.matches('.top') ? gearBtn() : ''));
+    if (host) host.insertAdjacentHTML('beforeend', (out.emCard ? '' : emPill()) + ((out.healthTab || ['house', 'family'].includes(r[0])) && host.matches('.top') ? gearBtn() : ''));
   }
   if (P.on) updateListenBar();
   lastPage = r.join('/') || 'home';
@@ -1186,6 +1226,7 @@ function render() {
   if (af) { $('#askq').addEventListener('input', (e) => { ASK.q = e.target.value; FD.show($('#askres'), askResults(null, true)); }); setTimeout(FD.warm, 30); }
   const ff = $('#fbform'); if (ff) ff.addEventListener('submit', (e) => { e.preventDefault(); fbSubmit(ff.text.value.trim()); });
   fillPosters();
+  fitText();
 }
 let lastHash = location.hash;
 addEventListener('hashchange', () => {
