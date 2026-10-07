@@ -59,6 +59,8 @@ def pick_model(key):
 
 
 USAGE = {"requests": 0, "in": 0, "out": 0}
+STOP = threading.Event()  # set on the first error, so queued requests are not sent (and not paid for)
+CURRENT = {"model": MODEL}  # the model actually used, once picked
 LOCK = threading.Lock()
 
 
@@ -66,7 +68,7 @@ def tts(text, lang, voice, key):
     body = {"contents": [{"parts": [{"text": f"{STYLE[lang]}\n\n{text}"}]}],
             "generationConfig": {"responseModalities": ["AUDIO"],
                                  "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": VOICES[voice]}}}}}
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{CURRENT['model']}:generateContent"
     req = urllib.request.Request(url, json.dumps(body).encode(), {"Content-Type": "application/json", "x-goog-api-key": key})
     for attempt in range(6):
         try:
@@ -138,7 +140,10 @@ def main():
     ap.add_argument("--jobs", type=int, default=int(os.environ.get("GEMINI_JOBS", "3")), help="requests at the same time (1 on the free tier)")
     a = ap.parse_args()
     key = os.environ.get("GEMINI_API_KEY") or (None if a.estimate else sys.exit("Set GEMINI_API_KEY first."))
+    for tool in ("ffmpeg", "ffprobe"):
+        if not a.estimate and not shutil.which(tool): sys.exit(f"{tool} is not installed; install ffmpeg first (nothing was sent to Gemini).")
     model = MODEL if a.estimate else pick_model(key)
+    CURRENT["model"] = model
     if not a.estimate: print(f"model {model}, {a.jobs} at a time")
     made = skipped = human = copied = 0; todo_chars = todo_clips = 0; flags = []
     stopped = None
@@ -158,7 +163,7 @@ def main():
             for r in rows:
                 text = r["text"].strip()
                 if not text: continue
-                h = hashlib.sha1(f"{model}|{VOICES[voice]}|{STYLE[lang]}|{text}|{' '.join(MP3)}".encode()).hexdigest()[:12]
+                h = hashlib.sha1(f"{VOICES[voice]}|{STYLE[lang]}|{text}|{' '.join(MP3)}".encode()).hexdigest()[:12]
                 out = os.path.join(d, r["id"] + ".mp3")
                 others = [f for f in files if os.path.splitext(f)[0] == r["id"] and f != r["id"] + ".mp3"]
                 if (r["id"] + ".mp3" in files and r["id"] not in man) or others: human += 1; continue  # a person's recording: keep it
@@ -174,6 +179,7 @@ def main():
 
             def one(item):
                 h, (i, out, text, _) = item
+                if STOP.is_set(): return "skip"
                 flag = make(text, lang, voice, key, out)
                 with LOCK:
                     man[i] = h; json.dump(man, open(man_p, "w", encoding="utf-8"), indent=0, sort_keys=True)
@@ -183,11 +189,14 @@ def main():
                 futs = [ex.submit(one, it) for it in new]
                 for f in futs:
                     try:
-                        fl = f.result(); made += 1
+                        fl = f.result()
+                        if fl == "skip": continue
+                        made += 1
                         if fl: flags.append(fl)
                     except DailyLimit as e:
-                        stopped = str(e)[:300]
-                        for g in futs: g.cancel()
+                        stopped = stopped or "the daily limit was reached: " + str(e)[:200]; STOP.set()
+                    except BaseException as e:  # any failure: stop sending, keep what was made
+                        stopped = stopped or f"{type(e).__name__}: {str(e)[:300]}"; STOP.set()
             for i, out, h in same:  # identical wording: one request, many clips
                 src = jobs[h][1]
                 if man.get(jobs[h][0]) == h and os.path.exists(src):
@@ -208,7 +217,7 @@ def main():
     print(f"made {made}, copied {copied} identical lines, skipped {skipped} unchanged, kept {human} human recordings.")
     print(f"{USAGE['requests']} requests, {USAGE['out']} audio tokens, about ${cost:.2f} (estimate; see audio/tts-usage.json).")
     for fl in flags: print("  listen to:", fl)
-    if stopped: print("Stopped: the daily limit was reached. Everything made so far is kept; run the same command again tomorrow, or turn on billing for the key.")
+    if stopped: print(f"Stopped early ({stopped}). Everything made so far is kept; fix the cause (or wait for the daily limit to reset, or turn on billing) and run the same command again: finished clips are skipped.")
     print("Now run: python3 tools/build.py")
 
 
