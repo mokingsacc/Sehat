@@ -827,7 +827,7 @@ textarea[dir=rtl]{font-family:"Noto Naskh Arabic",Tahoma,sans-serif;font-size:18
 .bh{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.blk.alert{border-left:6px solid #B6322D}.blk.alert.soon{border-left-color:#C98A00}.blk.dont{border-left:6px solid #6B655E}.blk.lead{border-left:6px solid #1F6F7A}
 .item{border:1px dashed #E6E1D8;border-radius:12px;padding:8px;margin:8px 0}.icp{width:28px;height:28px;vertical-align:middle}.ipick{display:flex;gap:8px;align-items:center}.ipick select{width:auto;min-width:160px}
 details.au{margin-top:8px;font-size:14px}details.au summary{color:#1F6F7A;cursor:pointer}.auc{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0;border-top:1px solid #F0ECE4}.auc audio{height:34px;max-width:220px}
-.msg{padding:10px;border-radius:12px;margin:8px 0}.msg.bad{background:#FBEDEC;color:#8E2420}.msg.good{background:#E8F3F1;color:#14535B}ul.errs li{margin:6px 0}.pimg{max-width:160px;max-height:110px;border-radius:10px;border:1px solid #E6E1D8}
+.msg{padding:10px;border-radius:12px;margin:8px 0}.msg.bad{background:#FBEDEC;color:#8E2420}.msg.good{background:#E8F3F1;color:#14535B}ul.errs li,ul.sup li{margin:6px 0}.pimg{max-width:160px;max-height:110px;border-radius:10px;border:1px solid #E6E1D8}
 .chk{display:flex;flex-wrap:wrap;gap:6px 14px}.chk label{display:flex;gap:6px;align-items:center;margin:0}.chk input{width:auto}
 body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[readonly],body.ro input[readonly]{background:#F6F3EE}</style>
 <header><div class="hrow"><h1 class="grow">Sehat · editor</h1><a href="/dashboard?key=${k}" class="s">Usage dashboard</a>${me.role === 'owner' ? `<a href="/people?key=${k}" class="s">People</a>` : ''}${me.role === 'viewer' ? '' : '<button class="primary" data-act="publish">Publish</button>'}</div>
@@ -1045,7 +1045,7 @@ function adminClient(cfg) {
     updPub();
     const sup = SUPER.map((k) => CORE.unitName(k));
     const note = (RO ? '<p class="msg good">You can view but not edit. Ask Mo for an editor link if you need to change the book.</p>' : '')
-      + (sup.length ? `<div class="msg bad">The app changed ${sup.length === 1 ? 'one part' : sup.length + ' parts'} again after you edited ${sup.length === 1 ? 'it' : 'them'}, so phones show the app's version, and so does this page: ${esc(sup.slice(0, 8).join(', '))}${sup.length > 8 ? ` and ${sup.length - 8} more` : ''}. To use your version again, change it here.</div>` : '');
+      + (sup.length ? `<div class="msg bad">The app changed ${sup.length === 1 ? 'one part' : sup.length + ' parts'} again after you edited ${sup.length === 1 ? 'it' : 'them'}, so phones show the app's version, and so does this page. Your version is kept until you choose:<ul class="sup">${SUPER.map((k) => `<li>${esc(CORE.unitName(k))} <button class="sm" data-act="sup-mine" data-k="${esc(k)}">Use my version</button> <button class="sm" data-act="sup-app" data-k="${esc(k)}">Keep the app's</button></li>`).join('')}</ul>${sup.length > 1 ? '<p><button class="sm" data-act="sup-mine" data-k="*">Use my version for all</button> <button class="sm" data-act="sup-app" data-k="*">Keep the app\'s for all</button></p>' : ''}</div>` : '');
     if (!D) return;
     main.innerHTML = note + (r[0] === 'topic' ? vTopic(decodeURIComponent(r[1] || '')) : tab === 'home' ? vHome() : tab === 'words' ? vWords() : tab === 'places' ? vPlaces() : tab === 'audio' ? vAudio() : tab === 'publish' ? vPublish() : vTopics());
     lock(main);
@@ -1283,6 +1283,21 @@ function adminClient(cfg) {
         await flush(); status('Keeping your earlier changes…');
         try { const n = await keepOld(); CHECK = { ok: `Kept ${n} parts of your earlier draft as your changes.` }; await load(); } catch (err) { status(err.message, 'err'); alert(err.message); }
         return;
+      // a part both the app and the editor changed, the app later: use the editor's version after all, or let it go
+      case 'sup-mine': case 'sup-app': {
+        const ks = (d.k === '*' ? SUPER.slice() : [d.k]).filter((k) => UNITS[k]); if (!ks.length) return;
+        if (d.act === 'sup-mine' && !confirm('Phones will show your version, without the app\'s later changes to ' + (ks.length === 1 ? 'this part' : 'these parts') + '. Use your version?')) return;
+        await flush(); status('Saving…');
+        const body = { units: {}, drop: [], prev: {}, base: {}, retire: [] };
+        for (const k of ks) { body.prev[k] = UNITS[k].ts; if (d.act === 'sup-app') body.drop.push(k); else { body.units[k] = UNITS[k].v; body.base[k] = OVC.fp(OVC.getUnit(APP, k)); } }
+        try {
+          const r = await api('save', body);
+          for (const k of body.drop) delete UNITS[k];
+          for (const k of Object.keys(body.units)) UNITS[k] = { v: body.units[k], base: body.base[k], ts: r.ts[k] };
+          build(); CHECK = null; status('All changes saved', 'ok'); updPub();
+        } catch (err) { status('Not saved: ' + err.message, 'err'); alert(err.message); }
+        return render();
+      }
       case 'old-forget':
         try { await api('forget-old', {}); OLD = null; render(); } catch (err) { alert(err.message); }
         return;

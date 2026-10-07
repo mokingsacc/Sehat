@@ -53,7 +53,7 @@ The editor works the same way as the phones. The server keeps only the editor's 
 - **The draft always starts from the app's newest book.** When the app is updated, the editor's changes are on top of the new version the next time the page opens. There is no "Bring in app changes" step any more.
 - **Check for problems** and **Publish** first ask the app for its version. If it changed while the page was open, the page downloads the new book and lays the changes over it before it checks. Nothing to press.
 - **Publish** also tells the server which app version it checked. If the server sees a newer one, it refuses once with that version. The page then brings it in, checks again and publishes.
-- If the app changed a unit again after the editor changed it, phones show the app's version (the rules above). The editor shows the same, with a message naming those units. Changing the unit again makes the editor's version win.
+- If the app changed a unit again after the editor changed it, phones show the app's version (the rules above). The editor shows the same, with a message naming those units and, for each, two buttons: **Use my version** (saves the editor's kept version again with the app's new fingerprint, so phones show it; it asks first, because the app's later changes to that part are then not shown) and **Keep the app's** (forgets the editor's version of that part). Changing the unit again also makes the editor's version win.
 - A topic the editor added stays in its list even when a later app release changes that list.
 - What you see in the editor is what phones on the newest app will show.
 
