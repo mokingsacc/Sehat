@@ -23,8 +23,10 @@ export default {
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
     // everything below needs a key: the owner's DASH_KEY, or a person's own key (made on /people)
     const isAdmin = path === '/watch' || path.startsWith('/watch/') || path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
+    if (req.method === 'GET' && path === '/') return signIn(false);
     if (!isAdmin) return new Response('ok', { headers: CORS });
     const me = await whoIs(env, url.searchParams.get('key'));
+    if (!me && path === '/dashboard') return signIn(url.searchParams.has('key'));
     if (!me) return NOT_FOUND(); // wrong, removed or missing key: the same answer as a page that does not exist
     if (path === '/watch' || path.startsWith('/watch/')) return SURV.handle(req, env, url, me);
     if (path === '/people' || path.startsWith('/people/')) {
@@ -75,10 +77,11 @@ function sameText(a, b) {
   return d === 0;
 }
 async function whoIs(env, key) {
+  key = String(key || '').trim(); // a pasted password often carries a space or line break
   if (!key || key.length > 200) return null;
   const h = await sha256(key);
   // hashes are always 64 characters, so comparing them takes the same time whatever the key is
-  if (env.DASH_KEY && sameText(h, await sha256(env.DASH_KEY))) return { id: 0, name: 'Owner', role: 'owner' };
+  if (env.DASH_KEY && sameText(h, await sha256(String(env.DASH_KEY).trim()))) return { id: 0, name: 'Owner', role: 'owner' };
   let row;
   try { row = await env.DB.prepare('SELECT id, name, role, key_hash, last_used FROM people WHERE key_hash = ? AND revoked = 0').bind(h).first(); }
   catch { return null; } // the people table is not made yet (schema.sql not run again): only the owner can sign in
@@ -1151,4 +1154,16 @@ function adminClient(cfg) {
   });
   addEventListener('hashchange', () => { render(); scrollTo(0, 0); });
   load();
+}
+
+// a plain sign-in box, so nobody has to build the ?key= link by hand
+function signIn(failed) {
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · sign in</title>
+<body style="margin:0;background:#FAF8F4;font-family:system-ui,sans-serif;color:#22201D"><form action="/dashboard" method="get" style="max-width:360px;margin:12vh auto;padding:24px;background:#fff;border:1px solid #E6E1D8;border-radius:14px">
+<h1 style="margin:0 0 4px;font-size:22px">Sehat <span style="color:#B6322D">صحت</span></h1><p style="margin:0 0 16px;color:#6B655E">Dashboard sign in</p>
+<label for="key" style="font-weight:600">Password or personal key</label>
+<input id="key" name="key" type="password" autocomplete="current-password" required style="display:block;width:100%;box-sizing:border-box;margin:6px 0 12px;padding:12px;font-size:17px;border:1px solid #CFC8BC;border-radius:10px">
+${failed ? '<p style="color:#B6322D;margin:0 0 12px">That password did not work. Check it and try again.</p>' : ''}
+<button style="width:100%;padding:12px;font-size:17px;font-weight:700;color:#fff;background:#B6322D;border:0;border-radius:10px">Open dashboard</button>
+<p style="color:#6B655E;font-size:13px">After it opens, bookmark the page so you don't need to type this again.</p></form></body>`, { status: failed ? 401 : 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
 }
