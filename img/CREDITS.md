@@ -4,7 +4,9 @@ All pictures in `img/` are flat SVG, drawn for this app. No raster images, no we
 
 ## Scenes and app pictures
 
-`img/topics/*.svg` (27 topic scenes), `img/app/icon.svg`, `img/app/home-children.svg`, `img/app/home-adults.svg` and `img/app/welcome.svg` were drawn new for this project and carry no third-party licence.
+`img/topics/*.svg` (the topic scenes), `img/app/icon.svg`, `img/app/home-children.svg`, `img/app/home-adults.svg` and `img/app/welcome.svg`, and the step and row pictures in `img/pics/` were drawn new for this project and carry no third-party licence.
+
+In the October 2026 picture pass, 20 topic scenes were redrawn so each list row shows its own subject at thumbnail size (the subject large and in the middle third, where the list rows crop): `fever`, `cough`, `diarrhoea`, `measles`, `worms`, `malnutrition`, `vaccines`, `newborn`, `tb`, `blood-pressure`, `diabetes`, `asthma`, `pneumonia-adult`, `diarrhoea-adult`, `typhoid`, `red-flags`, `pregnancy-care`, `stress`, `fumes-poisoning` and `wellbeing`. Five small scenes were added for the tool and link rows that still show an icon tile: `img/pics/row-growth.svg`, `row-breaths.svg`, `row-reading.svg`, `row-share.svg` and `row-feedback.svg`. They use the same parts, palette and faceless figures as the other scenes, and contain no text.
 
 ## Icons (`img/icons/`, 48x48, single `currentColor`)
 
