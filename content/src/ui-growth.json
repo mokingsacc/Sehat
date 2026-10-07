@@ -1,0 +1,372 @@
+{
+ "_note": "Growth tracker (js/growth.js, js/growth-calc.js): buttons (text) and narrated lines (say). Merged into ui.json by tools/build.py. Medical defaults: docs/REVIEW.md, 'Growth tracker and Share Sehat'.",
+ "text": {
+  "growth": {
+   "fa": "رشد",
+   "ps": "وده",
+   "en": "Growth"
+  },
+  "growthSub": {
+   "fa": "وزن، قد و فیتهٔ بازو، با جدول",
+   "ps": "وزن، قد او د مټ فیته، له چارټ سره",
+   "en": "Weight, length and arm tape, with charts"
+  },
+  "addMeasure": {
+   "fa": "اندازهٔ تازه",
+   "ps": "نوې اندازه",
+   "en": "Add a measurement"
+  },
+  "gDate": {
+   "fa": "تاریخ",
+   "ps": "نېټه",
+   "en": "Date"
+  },
+  "gWeight": {
+   "fa": "وزن (کیلو)",
+   "ps": "وزن (کیلو)",
+   "en": "Weight (kg)"
+  },
+  "gLength": {
+   "fa": "قد (سانتی‌متر)",
+   "ps": "قد (سانتي متره)",
+   "en": "Length or height (cm)"
+  },
+  "cm": {
+   "fa": "سانتی‌متر",
+   "ps": "سانتي متره",
+   "en": "cm"
+  },
+  "lying": {
+   "fa": "خوابیده",
+   "ps": "پرېوتی",
+   "en": "Lying down"
+  },
+  "standing": {
+   "fa": "ایستاده",
+   "ps": "ولاړ",
+   "en": "Standing"
+  },
+  "muacColour": {
+   "fa": "رنگ فیتهٔ بازو",
+   "ps": "د مټ د فیتې رنګ",
+   "en": "Arm tape colour"
+  },
+  "notMeasured": {
+   "fa": "اندازه نشده",
+   "ps": "نه دی اندازه شوی",
+   "en": "Not measured"
+  },
+  "chartWfa": {
+   "fa": "وزن به عمر",
+   "ps": "وزن د عمر سره",
+   "en": "Weight for age"
+  },
+  "chartLfa": {
+   "fa": "قد به عمر",
+   "ps": "قد د عمر سره",
+   "en": "Length for age"
+  },
+  "chartWfl": {
+   "fa": "وزن به قد",
+   "ps": "وزن د قد سره",
+   "en": "Weight for length"
+  },
+  "axisMonths": {
+   "fa": "عمر به ماه",
+   "ps": "عمر په میاشتو",
+   "en": "Age in months"
+  },
+  "axisCm": {
+   "fa": "قد به سانتی‌متر",
+   "ps": "قد په سانتي متره",
+   "en": "Length in cm"
+  },
+  "legendGood": {
+   "fa": "خوب",
+   "ps": "ښه",
+   "en": "Good"
+  },
+  "legendLow": {
+   "fa": "کم",
+   "ps": "کم",
+   "en": "Low"
+  },
+  "legendVeryLow": {
+   "fa": "خیلی کم",
+   "ps": "ډېر کم",
+   "en": "Very low"
+  },
+  "legendHeavy": {
+   "fa": "زیاد چاق",
+   "ps": "ډېر چاغ",
+   "en": "Too heavy"
+  },
+  "legendChild": {
+   "fa": "طفل شما",
+   "ps": "ستاسو ماشوم",
+   "en": "Your child"
+  },
+  "lastCheck": {
+   "fa": "آخرین اندازه",
+   "ps": "وروستۍ اندازه",
+   "en": "Last measurement"
+  },
+  "measurements": {
+   "fa": "اندازه‌ها",
+   "ps": "اندازې",
+   "en": "Measurements"
+  },
+  "howMeasure": {
+   "fa": "در خانه چطور اندازه کنیم",
+   "ps": "په کور کې څنګه اندازه وکړو",
+   "en": "How to measure at home"
+  },
+  "howMeasureSub": {
+   "fa": "وزن، قد خوابیده، قد ایستاده و فیتهٔ بازو",
+   "ps": "وزن، پرېوتی قد، ولاړ قد او د مټ فیته",
+   "en": "Weight, length, height and arm tape"
+  },
+  "needOne": {
+   "fa": "وزن یا قد را بنویسید",
+   "ps": "وزن یا قد ولیکئ",
+   "en": "Write the weight or the length"
+  },
+  "badNumber": {
+   "fa": "لطفاً عدد را ببینید",
+   "ps": "مهرباني وکړئ شمېره وګورئ",
+   "en": "Please check the number"
+  },
+  "noMeasures": {
+   "fa": "هنوز اندازه‌ای ثبت نشده است",
+   "ps": "تر اوسه هېڅ اندازه نه ده ثبت شوې",
+   "en": "No measurements yet"
+  },
+  "deleteMeasureQ": {
+   "fa": "این اندازه حذف شود؟",
+   "ps": "دا اندازه ړنګه شي؟",
+   "en": "Delete this measurement?"
+  },
+  "seeCharts": {
+   "fa": "جدول رشد را ببینید",
+   "ps": "د ودې چارټ وګورئ",
+   "en": "See the growth charts"
+  },
+  "result": {
+   "fa": "نتیجه",
+   "ps": "پایله",
+   "en": "Result"
+  },
+  "lvMonth": {
+   "fa": "همین ماه کلینیک",
+   "ps": "په دې میاشت کلینیک",
+   "en": "Clinic this month"
+  },
+  "lvGood": {
+   "fa": "خوب رشد می‌کند",
+   "ps": "ښه وده کوي",
+   "en": "Growing well"
+  }
+ },
+ "say": {
+  "ui.growth": {
+   "fa": "هر بار که طفل را اندازه می‌کنید، وزن و قد او را اینجا بنویسید. برنامه نشان می‌دهد که طفل خوب رشد می‌کند یا نه، و چه وقت به کلینیک بروید. این معلومات فقط در همین گوشی می‌ماند.",
+   "ps": "هر ځل چې ماشوم اندازه کوئ، وزن او قد یې دلته ولیکئ. اپ ښيي چې ماشوم ښه وده کوي که نه، او کله کلینیک ته ولاړ شئ. دا معلومات یوازې په همدې ټیلیفون کې پاتې کېږي.",
+   "en": "Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only."
+  },
+  "ui.gr.add": {
+   "fa": "تاریخ، وزن به کیلو و قد به سانتی‌متر را بنویسید. اگر فقط یکی از آن‌ها را دارید، مشکلی نیست.",
+   "ps": "نېټه، وزن په کیلو او قد په سانتي متره ولیکئ. که یوازې یو یې لرئ، هم سمه ده.",
+   "en": "Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine."
+  },
+  "ui.gr.pos": {
+   "fa": "طفل کمتر از ۲ سال را خوابیده اندازه کنید. از ۲ سالگی به بعد، ایستاده اندازه کنید. بگویید چطور اندازه کردید.",
+   "ps": "له ۲ کلونو کم ماشوم پرېوتی اندازه کړئ. له ۲ کلنۍ وروسته، ولاړ اندازه کړئ. ووایئ چې څنګه مو اندازه کړ.",
+   "en": "Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured."
+  },
+  "ui.gr.muac": {
+   "fa": "اگر فیتهٔ بازو دارید و طفل ۶ ماهه یا بزرگ‌تر است، رنگی را که دیدید انتخاب کنید.",
+   "ps": "که د مټ فیته لرئ او ماشوم ۶ میاشتنی یا لوی دی، هغه رنګ وټاکئ چې ولیدئ.",
+   "en": "If you have an arm tape and the child is 6 months or older, choose the colour you saw."
+  },
+  "ui.gr.charts": {
+   "fa": "در جدول، سبز خوب است، زرد کم است و سرخ خیلی کم است. نقطه‌ها و خط، طفل شماست. خطی که در میان سبز بالا می‌رود، خوب است.",
+   "ps": "په چارټ کې شین ښه دی، ژېړ کم دی او سور ډېر کم دی. ټکي او کرښه ستاسو ماشوم دی. هغه کرښه چې د شین په منځ کې پورته ځي، ښه ده.",
+   "en": "On the chart, green is good, yellow is low and red is very low. The dots and the line are your child. A line that rises inside the green is good."
+  },
+  "ui.gr.wfl-lines": {
+   "fa": "در این جدول، خط‌های نقطه‌چین بالا یعنی وزن طفل برای قدش زیاد است.",
+   "ps": "په دې چارټ کې، پورته ټکي ټکي کرښې دا مانا لري چې د ماشوم وزن د قد لپاره ډېر دی.",
+   "en": "On this chart, the dashed lines at the top mean too heavy for the length."
+  },
+  "ui.gr.show": {
+   "fa": "این گوشی را به کلینیک ببرید و این عددها را به کارمند صحی نشان دهید.",
+   "ps": "دا ټیلیفون کلینیک ته یوسئ او دا شمېرې روغتیايي کارکوونکي ته وښایئ.",
+   "en": "Take this phone to the clinic and show the health worker these numbers."
+  },
+  "ui.gr.r.ok": {
+   "fa": "خوب رشد می‌کند. خوب غذا بدهید و ماه آینده دوباره اندازه کنید.",
+   "ps": "ښه وده کوي. ښه خواړه ورکړئ او بله میاشت بیا اندازه یې کړئ.",
+   "en": "Growing well. Keep feeding well, and measure again next month."
+  },
+  "ui.gr.r.thin3": {
+   "fa": "برای قدش خیلی لاغر است: امروز به کلینیک بروید.",
+   "ps": "د خپل قد لپاره ډېر ډنګر دی: نن کلینیک ته ولاړ شئ.",
+   "en": "Very thin for the length: go to the clinic today."
+  },
+  "ui.gr.r.muac-red": {
+   "fa": "فیتهٔ بازو سرخ است: خیلی لاغر است. امروز به کلینیک بروید.",
+   "ps": "د مټ فیته سره ده: ډېر ډنګر دی. نن کلینیک ته ولاړ شئ.",
+   "en": "The arm tape is red: very thin. Go to the clinic today."
+  },
+  "ui.gr.r.thin2": {
+   "fa": "برای قدش کمی لاغر است: همین هفته به کلینیک بروید.",
+   "ps": "د خپل قد لپاره لږ ډنګر دی: په همدې اونۍ کلینیک ته ولاړ شئ.",
+   "en": "A little thin for the length: go to the clinic this week."
+  },
+  "ui.gr.r.muac-yellow": {
+   "fa": "فیتهٔ بازو زرد است: لاغر است. همین هفته به کلینیک بروید.",
+   "ps": "د مټ فیته ژېړه ده: ډنګر دی. په همدې اونۍ کلینیک ته ولاړ شئ.",
+   "en": "The arm tape is yellow: too thin. Go to the clinic this week."
+  },
+  "ui.gr.r.light3": {
+   "fa": "برای عمرش خیلی کم‌وزن است: همین هفته برای معاینه به کلینیک بروید.",
+   "ps": "د خپل عمر لپاره ډېر کم وزن لري: په همدې اونۍ د معاینې لپاره کلینیک ته ولاړ شئ.",
+   "en": "Very light for age: go to the clinic this week for a check."
+  },
+  "ui.gr.r.light2": {
+   "fa": "برای عمرش کمی کم‌وزن است: همین هفته برای معاینه به کلینیک بروید.",
+   "ps": "د خپل عمر لپاره لږ کم وزن لري: په همدې اونۍ د معاینې لپاره کلینیک ته ولاړ شئ.",
+   "en": "A little light for age: go to the clinic this week for a check."
+  },
+  "ui.gr.r.falling": {
+   "fa": "وزنش از دفعهٔ قبل کم شده است: همین هفته به کلینیک بروید.",
+   "ps": "وزن یې له تېر ځل راکم شوی دی: په همدې اونۍ کلینیک ته ولاړ شئ.",
+   "en": "The weight has gone down since the last time: go to the clinic this week."
+  },
+  "ui.gr.r.flat": {
+   "fa": "وزنش از دفعهٔ قبل زیاد نشده است: همین هفته به کلینیک بروید.",
+   "ps": "وزن یې له تېر ځل نه دی زیات شوی: په همدې اونۍ کلینیک ته ولاړ شئ.",
+   "en": "The weight has not gone up since the last time: go to the clinic this week."
+  },
+  "ui.gr.r.short3": {
+   "fa": "برای عمرش خیلی کوتاه‌قد است: همین ماه برای معاینه به کلینیک بروید.",
+   "ps": "د خپل عمر لپاره ډېر لنډ قد لري: په همدې میاشت د معاینې لپاره کلینیک ته ولاړ شئ.",
+   "en": "Very short for age: go to the clinic this month for a check."
+  },
+  "ui.gr.r.short2": {
+   "fa": "برای عمرش کمی کوتاه‌قد است: همین ماه که به کلینیک می‌روید، بگویید.",
+   "ps": "د خپل عمر لپاره لږ لنډ قد لري: په همدې میاشت چې کلینیک ته ځئ، ورته ووایئ.",
+   "en": "A little short for age: tell the clinic when you go this month."
+  },
+  "ui.gr.r.heavy3": {
+   "fa": "برای قدش خیلی چاق است: همین ماه برای مشوره دربارهٔ غذا به کلینیک بروید.",
+   "ps": "د خپل قد لپاره ډېر چاغ دی: په همدې میاشت د خوړو د مشورې لپاره کلینیک ته ولاړ شئ.",
+   "en": "Very heavy for the length: go to the clinic this month for advice on food."
+  },
+  "ui.gr.r.heavy2": {
+   "fa": "برای قدش کمی چاق است: همین ماه از کلینیک دربارهٔ غذا بپرسید.",
+   "ps": "د خپل قد لپاره لږ چاغ دی: په همدې میاشت له کلینیک څخه د خوړو په اړه وپوښتئ.",
+   "en": "A little heavy for the length: ask the clinic about food this month."
+  },
+  "ui.gr.r.check": {
+   "fa": "این عدد عجیب به نظر می‌رسد. عدد را ببینید و دوباره اندازه کنید.",
+   "ps": "دا شمېره عجیبه ښکاري. شمېره وګورئ او بیا اندازه یې کړئ.",
+   "en": "This number looks unusual. Check the number and measure again."
+  },
+  "ui.gr.why.thin3": {
+   "fa": "در کلینیک، کارمند صحی طفل را دوباره اندازه می‌کند و او را برای مریضی و پندیدگی معاینه می‌کند.",
+   "ps": "په کلینیک کې روغتیايي کارکوونکی ماشوم بیا اندازه کوي او د ناروغۍ او پړسوب لپاره یې ګوري.",
+   "en": "At the clinic, the health worker will measure your child again and check for illness and swelling."
+  },
+  "ui.gr.why.thin2": {
+   "fa": "کلینیک طفل را معاینه می‌کند، در غذا دادن کمک می‌کند و شاید غذای اضافی بدهد.",
+   "ps": "کلینیک ماشوم ګوري، د خواړو په ورکولو کې مرسته کوي او ښايي اضافي خواړه ورکړي.",
+   "en": "The clinic will check your child, help you with feeding, and may give extra food."
+  },
+  "ui.gr.why.light": {
+   "fa": "کلینیک دوباره وزن و اندازه می‌کند، مریضی را جستجو می‌کند و در غذا دادن کمک می‌کند.",
+   "ps": "کلینیک بیا وزن او اندازه کوي، ناروغي لټوي او د خواړو په ورکولو کې مرسته کوي.",
+   "en": "The clinic will weigh and measure again, look for illness, and help with feeding."
+  },
+  "ui.gr.why.falter": {
+   "fa": "طفل خورد باید هر ماه وزن بگیرد. کلینیک مریضی را جستجو می‌کند و می‌بیند طفل چطور غذا می‌خورد.",
+   "ps": "کوچنی ماشوم باید هره میاشت وزن واخلي. کلینیک ناروغي لټوي او ګوري چې ماشوم څنګه خواړه خوري.",
+   "en": "A young child should gain weight every month. The clinic will look for illness and check how the child eats."
+  },
+  "ui.gr.why.short": {
+   "fa": "کم رشد کردن قد در چند ماه پیدا می‌شود. کلینیک غذا و صحت طفل را می‌بیند و به شما مشوره می‌دهد.",
+   "ps": "د قد ورو وده په څو میاشتو کې پیدا کېږي. کلینیک د ماشوم خواړه او روغتیا ګوري او تاسو ته مشوره درکوي.",
+   "en": "Growing slowly in length happens over months. The clinic will check the child's food and health, and advise you."
+  },
+  "ui.gr.why.heavy": {
+   "fa": "کلینیک طفل را معاینه می‌کند و دربارهٔ غذای صحی و بازی و تحرک مشوره می‌دهد.",
+   "ps": "کلینیک ماشوم ګوري او د روغو خوړو، لوبو او ګرځېدو په اړه مشوره ورکوي.",
+   "en": "The clinic will check your child and advise on healthy food and active play."
+  },
+  "ui.gr.adj-standing": {
+   "fa": "طفل کمتر از ۲ سال ایستاده اندازه شد: برنامه مثل کلینیک ۰٫۷ سانتی‌متر اضافه می‌کند.",
+   "ps": "له ۲ کلونو کم ماشوم ولاړ اندازه شو: اپ د کلینیک په څېر ۰٫۷ سانتي متره زیاتوي.",
+   "en": "Measured standing before 2 years: the app adds 0.7 cm, as the clinic does."
+  },
+  "ui.gr.adj-lying": {
+   "fa": "طفل ۲ ساله یا بزرگ‌تر خوابیده اندازه شد: برنامه مثل کلینیک ۰٫۷ سانتی‌متر کم می‌کند.",
+   "ps": "۲ کلن یا لوی ماشوم پرېوتی اندازه شو: اپ د کلینیک په څېر ۰٫۷ سانتي متره کموي.",
+   "en": "Measured lying down from 2 years: the app takes away 0.7 cm, as the clinic does."
+  },
+  "ui.gr.nolength": {
+   "fa": "قد را هم بنویسید، تا ببینید طفل برای قدش لاغر است یا نه.",
+   "ps": "قد هم ولیکئ، څو وګورئ چې ماشوم د خپل قد لپاره ډنګر دی که نه.",
+   "en": "Add the length too, to see if your child is thin for the length."
+  },
+  "ui.gr.over5": {
+   "fa": "این جدول‌ها برای اطفال کمتر از ۵ سال است. برای طفل بزرگ‌تر، از کلینیک بپرسید.",
+   "ps": "دا چارټونه له ۵ کلونو د کمو ماشومانو لپاره دي. د لوی ماشوم لپاره له کلینیک وپوښتئ.",
+   "en": "These charts are for children under 5 years. For an older child, ask the clinic."
+  },
+  "ui.gr.baddate": {
+   "fa": "این تاریخ پیش از تولد طفل است. لطفاً تاریخ را ببینید.",
+   "ps": "دا نېټه د ماشوم له زېږون مخکې ده. مهرباني وکړئ نېټه وګورئ.",
+   "en": "This date is before the child was born. Please check the date."
+  },
+  "ui.gr.m.lead": {
+   "fa": "می‌توانید در خانه اندازه کنید. هر بار به یک شکل اندازه کنید و عدد را فوراً بنویسید.",
+   "ps": "په کور کې یې اندازه کولای شئ. هر ځل په یو ډول اندازه کړئ او شمېره سمدستي ولیکئ.",
+   "en": "You can measure at home. Measure the same way each time, and write the number down straight away."
+  },
+  "ui.gr.m.hang": {
+   "fa": "وزن با ترازوی آویزان: طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید.",
+   "ps": "وزن په ځوړنده تله: ماشوم په سپکو جامو د تلې په کڅوړه کې کېږدئ. صبر وکړئ چې ارام شي، بیا شمېره ولولئ.",
+   "en": "Weight with a hanging scale: put the baby in the sling with light clothes. Wait until the baby is still, then read the number."
+  },
+  "ui.gr.m.hold": {
+   "fa": "وزن با ترازوی عادی: اول خود را وزن کنید، بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.",
+   "ps": "وزن په عادي تله: لومړی ځان وتلئ، بیا ماشوم په غېږ کې ونیسئ او بیا ځان وتلئ. لومړۍ شمېره له دویمې کمه کړئ: دا د ماشوم وزن دی.",
+   "en": "Weight with a bathroom scale: weigh yourself, then weigh yourself holding the baby. Take the first number from the second: that is the baby's weight."
+  },
+  "ui.gr.m.length1": {
+   "fa": "قد، کمتر از ۲ سال: دو نفر لازم است. طفل را روی زمین هموار به پشت بخوابانید، طوری که سرش به دیوار برسد. یک نفر سر طفل را آرام نگه دارد.",
+   "ps": "قد، له ۲ کلونو کم: دوه کسان پکار دي. ماشوم پر هوارې ځمکې په شا څملوئ، داسې چې سر یې دېوال ته ورسېږي. یو کس د ماشوم سر په ارامۍ ونیسي.",
+   "en": "Length, under 2 years: two people are needed. Lay the baby on its back on a flat floor, with the top of the head against a wall. One person holds the head still."
+  },
+  "ui.gr.m.length2": {
+   "fa": "نفر دوم پاهای طفل را آرام راست کند و یک کتاب را صاف به کف پاهایش بگذارد. جای کتاب را روی زمین نشانی کنید و از دیوار تا نشانی را با متر اندازه کنید.",
+   "ps": "دویم کس د ماشوم پښې په نرمۍ سمې کړي او یو کتاب د پښو تلو ته برابر ونیسي. د کتاب ځای پر ځمکه نښه کړئ او له دېوال تر نښې پورې په متر اندازه کړئ.",
+   "en": "The second person gently straightens the legs and holds a book flat against the soles of the feet. Mark the floor at the book, and measure from the wall to the mark."
+  },
+  "ui.gr.m.height": {
+   "fa": "قد، از ۲ سالگی: بوت و کلاه را بکشید. طفل راست بایستد، طوری که پاشنه‌ها و پشتش به دیوار بچسپد و به پیش رو ببیند. یک کتاب را صاف روی سرش به دیوار بگذارید، زیر کتاب روی دیوار نشانی کنید و از زمین تا نشانی را اندازه کنید.",
+   "ps": "قد، له ۲ کلنۍ: بوټونه او خولۍ لرې کړئ. ماشوم سم ودرېږي، داسې چې پوندې او شا یې له دېوال سره ولګېږي او مخ ته وګوري. یو کتاب پر سر یې د دېوال سره برابر کېږدئ، د کتاب لاندې پر دېوال نښه کړئ او له ځمکې تر نښې پورې اندازه کړئ.",
+   "en": "Height, from 2 years: take off shoes and hats. The child stands straight with heels and back against a wall, looking ahead. Put a book flat on the head against the wall, mark the wall under it, and measure from the floor to the mark."
+  },
+  "ui.gr.m.muac": {
+   "fa": "فیتهٔ بازو، از ۶ ماهگی: وسط بازوی چپ را پیدا کنید، فیته را آرام بپیچانید، نه سخت، و رنگ را در کلکین فیته ببینید.",
+   "ps": "د مټ فیته، له ۶ میاشتو: د کیڼ مټ منځ پیدا کړئ، فیته په نرمۍ تاو کړئ، نه ټینګه، او په کړکۍ کې رنګ وګورئ.",
+   "en": "Arm tape, from 6 months: find the middle of the left upper arm, wrap the tape gently, not tight, and read the colour in the window."
+  },
+  "ui.gr.m.exact": {
+   "fa": "عددهای خانه دقیق نیستند. اگر نتیجه شما را نگران می‌کند، کلینیک دوباره اندازه می‌کند.",
+   "ps": "د کور شمېرې دقیقې نه دي. که پایله مو اندېښمن کړي، کلینیک به بیا اندازه وکړي.",
+   "en": "Numbers from home are not exact. If a result worries you, the clinic will measure again."
+  }
+ }
+}

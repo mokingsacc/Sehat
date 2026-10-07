@@ -12,11 +12,30 @@
     "tools",
     "kit",
     "near",
-    "sendApp",
+    "share",
     "feedback",
     "disclaimer"
   ],
-  "_home": "Order of the blocks on the home screen. Remove a name to hide it. Available: emergency (the big red Emergency button: age picker, then first-aid pages), install, ask, nextVaccine, sections, quick, tools (breathing counter and 'what does the number mean?'), kit (home health kit), near, sendApp, feedback, disclaimer.",
+  "_home": "Order of the blocks on the home screen. Remove a name to hide it. Available: emergency (the big red Emergency button: age picker, then first-aid pages), install, ask, nextVaccine, sections, quick, tools (breathing counter and 'what does the number mean?'), kit (home health kit), near, share (the Share Sehat card; 'sendApp' is its older name), growth (the growth tracker tile), feedback, disclaimer.",
+  "shareCard": {
+    "href": "#/share",
+    "title": "shareApp",
+    "sub": "shareAppSub",
+    "say": "ui.share-app",
+    "webSub": "shareWebSub",
+    "webSay": "ui.share-web"
+  },
+  "_shareCard": "The Share Sehat card on the home screen: opens the share screen (js/share.js). title/sub are ui text keys, say is the narration id; webSub/webSay are used in a browser instead of the Android app.",
+  "quickTools": [
+    {
+      "id": "growth",
+      "href": "#/growth",
+      "icon": "growth",
+      "label": "growth",
+      "say": "ui.growth"
+    }
+  ],
+  "_quickTools": "Tool rows added by features (id, link, icon, ui text key for the label, narration id). growth: the growth tracker (js/growth.js).",
   "feedbackUrl": "https://sehat.mobinkingsacc.workers.dev/feedback",
   "_feedbackUrl": "The Cloudflare Worker /feedback address (same server as analyticsUrl).",
   "contentUrl": "https://sehat.mobinkingsacc.workers.dev",

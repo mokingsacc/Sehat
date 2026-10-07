@@ -39,8 +39,8 @@ const SECS = DEFS.sections || {};
 const KIT = SECS.kit || [];
 const TOPIC_SEC = new Map();
 for (const sec of ['children', 'women', 'everyone']) for (const t of SECS[sec] || []) if (!TOPIC_SEC.has(t)) TOPIC_SEC.set(t, sec);
-const TOOL_PAGES = ['family', 'ask', 'near', 'kit', 'breaths'], TOOL_PREFIX = ['tool', 'reading', 'kit'];
-const APP_PAGES = ['home', 'children', 'adults', 'settings', 'feedback', 'privacy', 'consent', 'welcome', 'voice', 'studio'];
+const TOOL_PAGES = ['family', 'ask', 'near', 'kit', 'breaths', 'growth'], TOOL_PREFIX = ['tool', 'reading', 'kit', 'growth'];
+const APP_PAGES = ['home', 'children', 'adults', 'settings', 'feedback', 'privacy', 'consent', 'welcome', 'voice', 'studio', 'share'];
 export const GROUPS = [
   ['emergencies', 'Emergencies and danger signs'], ['children', 'Children'], ['women', 'Women and pregnancy'], ['everyone', 'Everyone (adults)'],
   ['tools', 'Tools (family record, search, clinic map, home kit)'], ['app', 'Home, menus and settings'], ['other', 'Other pages'],
@@ -72,9 +72,13 @@ const APP_NAMES = {
   emergency: 'Emergency button: who needs help?', 'emergency/newborn': 'Emergency: newborn', 'emergency/baby': 'Emergency: baby under 1', 'emergency/child': 'Emergency: child', 'emergency/adult': 'Emergency: adult or teenager',
   near: 'Nearest clinic and map', kit: 'Home health kit', breaths: 'Breathing counter', 'tool/breaths': 'Breathing counter', settings: 'Settings', feedback: 'Send feedback', privacy: 'Privacy page',
   consent: 'First-open question about counts', welcome: 'Choose language', voice: 'Choose voice', studio: 'Recording studio',
+  growth: 'Growth tracker: charts', 'growth/add': 'Growth tracker: add a measurement', 'growth/result': 'Growth tracker: result', 'growth/measure': 'How to measure at home', share: 'Share Sehat',
 };
 const ACT_NAMES = {
   'act/share': 'Shared the app link', 'act/sendapp': 'Sent the app file', 'act/a2hs': 'Added to home screen', 'act/kid': 'Added a child', 'act/dose': 'Marked a vaccine given',
+  'act/tool-share-nearby': 'Sent the app file: nearby phones', 'act/tool-share-whatsapp': 'Sent the app file: WhatsApp', 'act/tool-share-telegram': 'Sent the app file: Telegram', 'act/tool-share-imo': 'Sent the app file: IMO',
+  'act/tool-share-messenger': 'Sent the app file: Messenger', 'act/tool-share-other': 'Sent the app file: other app', 'act/tool-share-link': 'Shared the link', 'act/tool-share-copy': 'Copied the link',
+  'act/tool-growth-add': 'Added a growth measurement',
   'act/feedback': 'Sent feedback', 'act/near': 'Found their place for the clinic list', 'act/voice': 'Changed voice', 'act/lang': 'Changed language',
 };
 export function pageName(p) {

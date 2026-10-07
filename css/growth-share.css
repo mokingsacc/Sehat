@@ -1,0 +1,89 @@
+/* Growth tracker (js/growth.js) and Share Sehat (js/share.js). Loaded after css/app.css.
+   No CSS "inset" or newer selectors: old Android WebViews must show these pages too. */
+
+/* ---------- growth: chart, tabs, legend ---------- */
+.gtabs{display:flex;gap:6px;margin:14px 0 8px;overflow-x:auto}
+.gtabs button{flex:1 1 0;min-height:52px;border-radius:14px;border:2px solid var(--line);background:var(--card);font-size:15px;font-weight:700;line-height:1.25;padding:4px 6px}
+.gtabs button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 8px 10px;margin-bottom:12px}
+.gchart{width:100%;direction:ltr}
+.gsvg{display:block;width:100%;height:auto}
+.gsvg .tk{font-size:14px;fill:#4A4540;font-family:inherit}
+.gsvg .un{font-size:14px;fill:#4A4540;font-weight:700;font-family:inherit}
+.gaxis{text-align:center;font-size:14px;color:var(--mute);margin:-2px 0 6px}
+.glegend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:14.5px;margin:4px 0 8px}
+.glegend .lg{display:inline-flex;align-items:center;gap:6px}
+.glegend i{display:inline-block;width:22px;height:14px;border-radius:4px}
+.glegend i.good{background:#CFE9D6;border:1.5px solid #2E7D4F}
+.glegend i.low{background:#F8E39A;border:1.5px solid #B8860B}
+.glegend i.vlow{background:#F3C6C1;border:1.5px solid #B6322D}
+.glegend i.heavy{height:0;border-top:3px dashed #B8860B;border-radius:0}
+.glegend i.kid{width:14px;height:14px;border-radius:999px;background:#22201D}
+.gnote{font-size:15.5px;line-height:1.6;padding:6px 2px;border-top:1px solid var(--line)}
+
+/* growth: the list of measurements, the form, the result */
+.grow-row{display:flex;align-items:center;gap:6px;border-top:1px solid var(--line)}
+.grow-row .gr-open{flex:1 1 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;padding:10px 2px;text-align:start;min-height:52px}
+.grow-row .d{font-size:15px;color:var(--mute)}
+.grow-row .v{font-size:17px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.grow-row .swatch{width:26px;height:18px}
+.gr-del{width:44px;height:44px;border-radius:999px;font-size:26px;line-height:1;color:var(--mute);flex:0 0 auto}
+.gpos{font-size:15.5px;line-height:1.6;margin:6px 0}
+.gseg{width:100%;margin:4px 0 6px}
+.gseg button{flex:1 1 0;min-height:52px;font-size:17px}
+.gmuac{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 6px}
+.gmuac button{display:flex;align-items:center;gap:10px;min-height:56px;border:2px solid var(--line);border-radius:14px;background:var(--card);padding:6px 12px;font-size:16.5px;font-weight:700;text-align:start}
+.gmuac button[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 3px var(--line)}
+.gmuac .swatch{width:34px;height:22px;flex:0 0 auto}
+#grform .btn.big{margin-top:16px}
+.gsum{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:10px 14px;margin-bottom:12px}
+.gwho{font-size:15px;color:var(--mute)}
+.gvals{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:17px;margin:2px 0 6px}
+.gvals b{font-size:30px;line-height:1.2}
+.gvals .swatch{width:36px;height:24px}
+.gstat{display:flex;flex-direction:column;gap:6px}
+.gs{display:flex;justify-content:space-between;align-items:center;gap:10px;border-radius:12px;padding:6px 10px;font-size:15.5px;background:#EEEAE5}
+.gs b{font-size:16.5px}
+.gs.good{background:#DDF0E4;color:#1F5E3A}.gs.low{background:#FBF0D2;color:#6E5000}.gs.vlow{background:#F7E3E1;color:#8E2622}.gs.high{background:#FBF0D2;color:#6E5000}
+.verdict.ok{--v:var(--green);--vt:var(--green-t)}
+.grv .vb{padding:8px 12px}
+.grv .trow{padding:4px 0}
+.grv .trow.why{font-weight:500;font-size:16.5px;border-top:1px solid rgba(0,0,0,.08);padding-top:8px;margin-top:4px}
+.gpanel .gline{display:flex;flex-direction:column;gap:2px;width:100%;text-align:start;border-radius:14px;padding:8px 12px;margin:6px 0 2px;background:var(--green-t);border:2px solid var(--green)}
+.gpanel .gline.today{background:var(--amber-t);border-color:var(--amber)}
+.gpanel .gline.soon{background:#FDF6E3;border-color:#C08A1A}
+.gpanel .gline.watch{background:var(--teal-t);border-color:var(--teal)}
+.gpanel .gline.check{background:#EEEAE5;border-color:#5B5550}
+.gpanel .gline span{font-size:15.5px;line-height:1.5}
+.gbtns{display:flex;gap:8px;margin-bottom:10px}
+.gbtns .btn{flex:1 1 0;margin-top:8px;min-height:54px;font-size:15.5px;padding:0 8px}
+.gbtns .btn .ic{width:22px;height:22px}
+.gstep .body .h{flex-wrap:wrap}
+
+/* ---------- Share Sehat: the home card ---------- */
+.sharecard{display:flex;align-items:center;gap:10px;background:#FBF0D2;border:2px solid #E6C770;border-radius:24px;padding:14px 12px;margin:4px 0 14px}
+.sharecard .grow{flex:1 1 auto;display:flex;align-items:center;gap:12px;min-height:84px;min-width:0}
+.sharecard .spic{width:96px;flex:0 0 auto}
+.sharecard .spic svg{display:block;width:100%;height:auto}
+.sharecard .tx{display:flex;flex-direction:column;min-width:0}
+.sharecard .t{font-size:24px;font-weight:800;line-height:1.3;color:#5E4300}
+.sharecard .s{font-size:15px;line-height:1.45;color:#6E5000}
+.sharecard .spk{width:56px;height:56px;color:#9A6F00}
+.sharecard .spk svg{width:26px;height:26px}
+
+/* the share screen: big buttons, each with a big speaker */
+.srowbig{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sbig{flex:1 1 auto;display:flex;align-items:center;gap:14px;min-height:76px;border-radius:20px;background:var(--c,var(--teal));color:#fff;padding:10px 16px;text-align:start;min-width:0}
+.sbig svg,.sbig .ic{width:36px;height:36px;flex:0 0 auto}
+.sbig .tx{display:flex;flex-direction:column;min-width:0}
+.sbig .t{font-size:21px;font-weight:800;line-height:1.3}
+.sbig .s{font-size:14px;opacity:.95;line-height:1.4;overflow-wrap:anywhere}
+.srowbig.off .sbig{background:#E9E5DF;color:#8A847C}
+.spk.big{width:56px;height:56px}
+.spk.big svg{width:26px;height:26px}
+.qrcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:10px 14px 6px;margin:14px 0 12px;text-align:center}
+.qrcard h2{font-size:19px;margin:4px 0 6px}
+.qrbox{width:220px;max-width:80%;margin:0 auto;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.qrbox svg{display:block;width:100%;height:auto}
+.qrurl{font-size:14.5px;color:var(--mute);margin:6px 0 4px;overflow-wrap:anywhere}
+.qrcard .trow{text-align:start;font-size:15.5px;line-height:1.6;padding:6px 0;border-top:1px solid var(--line)}

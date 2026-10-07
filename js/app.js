@@ -3,6 +3,8 @@ import { toJalali, fromJalali, monthLength } from './jalali.js';
 import { makeZip } from './zip.js';
 import { initTools } from './tools.js';
 import { initFinder } from './search-ui.js'; // the symptom finder's results (js/search.js ranks the pages)
+import { initGrowth } from './growth.js'; // growth tracker: #/growth (charts, results, how to measure)
+import { initShare } from './share.js'; // Share Sehat: #/share (the app file on Android, the link and a QR code on the web)
 import * as Stats from './stats.js';
 import { openAnimation, animPoster } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md)
 
@@ -363,6 +365,7 @@ function screenHome() {
   const b = S.book, ids = ['ui.home'];
   const mods = (b.config && b.config.home) || ['emergency', 'install', 'ask', 'nextVaccine', 'sections', 'quick', 'tools', 'kit', 'near', 'feedback', 'disclaimer'];
   let html = top(T('appName'), { back: '', right: langPill() });
+  let shareShown = false;
   const bar = listenBar(ids); // the Emergency button, when it is first, goes above the "listen to this page" bar
   if (mods[0] !== 'emergency') html += bar;
   const M = {
@@ -376,11 +379,9 @@ function screenHome() {
       ids.push('ui.install');
       return `<div class="banner" data-block="ui.install">${ic('phone')}<button class="grow" data-action="install" style="text-align:start"><div class="t">${esc(T('install'))}</div><div class="s">${esc(T('installSub'))}</div></button>${spk('ui.install')}</div>`;
     },
-    sendApp() {
-      if (!window.FHBAndroid) return '';
-      ids.push('ui.sendApp');
-      return `<div class="banner" data-block="ui.sendApp">${ic('phone')}<button class="grow" data-action="sendapp" style="text-align:start"><div class="t">${esc(T('sendApp'))}</div><div class="s">${esc(T('sendAppSub'))}</div></button>${spk('ui.sendApp')}</div>`;
-    },
+    share() { if (shareShown) return ''; shareShown = true; ids.push(SH.homeSay()); return SH.homeCard(); }, // Share Sehat (js/share.js)
+    sendApp() { return M.share(); }, // the older name of the same card
+    growth() { ids.push('ui.growth'); return `<div class="grid2">${GR.homeTile()}</div>`; }, // growth tracker tile (js/growth.js)
     ask() {
       ids.push('ui.ask');
       return `<div class="askcard" data-block="ui.ask"><a href="#/ask" class="grow"><div class="t">${esc(T('ask'))}</div><div class="s">${esc(T('askSub'))}</div></a><a href="#/ask" class="mic" aria-label="${esc(T('ask'))}">${I.mic}</a>${spk('ui.ask')}</div>`;
@@ -611,8 +612,7 @@ function screenFamily() {
     }
     html += `</div>`;
   }
-  const ws = (k.weights || []).slice().sort((a, b) => (a.d < b.d ? 1 : -1));
-  html += `<div class="panel"><h2>${esc(T('weights'))}</h2>${ws.map((w) => `<div class="wrow"><span>${esc(fmtDate(w.d))}</span><b>${num(w.kg)} ${esc(T('kg'))}</b></div>`).join('')}<button class="btn ghost" data-action="addweight" style="margin:10px 0">${I.plus.replace('<svg', '<svg style="width:20px;height:20px"')} ${esc(T('addWeight'))}</button></div>`;
+  html += GR.familyPanel(k); // weight, length, arm tape and the latest result (js/growth.js)
   html += `<p class="muted center">${esc(L(S.book.narration['ui.family']))}</p>`;
   track('view', { p: 'family' });
   return { html, nav: 'family' };
@@ -665,21 +665,6 @@ function visitDialog(k, vis) {
     const f = $('#vform', w);
     f.addEventListener('submit', (e) => { e.preventDefault(); k.given = k.given || {}; k.given[vis.id] = readDate(f, 'g'); saveKids(); track('dose', { v: vis.id }); w.remove(); render(); });
     const u = $('[data-action=ungive]', w); if (u) u.addEventListener('click', () => { delete k.given[vis.id]; saveKids(); w.remove(); render(); });
-  });
-}
-function weightDialog(k) {
-  dialog(`<form class="form" id="wform"><h2>${esc(T('addWeight'))}</h2>
-    <label>${esc(T('weights'))} (${esc(T('kg'))})</label><input name="kg" inputmode="decimal" required placeholder="${num('7.5')}">
-    <label>${esc(T('day'))}</label>${dateSelects('w', todayISO())}
-    <button class="btn" type="submit">${esc(T('save'))}</button><button class="btn ghost" type="button" data-close>${esc(T('cancel'))}</button></form>`, (w) => {
-    const f = $('#wform', w);
-    f.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const raw = f.kg.value.replace(/[۰-۹]/g, (d) => DIG.indexOf(d)).replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٫,،]/g, '.');
-      const kg = Math.round(parseFloat(raw) * 10) / 10; if (!(kg > 0.5 && kg < 150)) return;
-      k.weights = k.weights || []; k.weights.push({ d: readDate(f, 'w'), kg }); saveKids(); w.remove(); render();
-    });
-    setTimeout(() => f.kg.focus(), 50);
   });
 }
 
@@ -834,7 +819,7 @@ async function deleteVoices() {
 }
 async function showStorage() { const t = await storageText(); const el = $('#storage'); if (el) el.textContent = t; }
 function screenSettings() {
-  const ids = ['ui.settings', 'ui.share', 'ui.watch', 'ui.disclaimer'];
+  const ids = ['ui.settings', SH.homeSay(), 'ui.watch', 'ui.disclaimer'];
   let html = top(T('settings')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.settings"><div class="body">${esc(L(S.book.narration['ui.settings']))}</div>${spk('ui.settings')}</div>`;
   html += `<div class="panel">`;
@@ -844,8 +829,7 @@ function screenSettings() {
   html += `<div class="srow">${ic('no')}<button class="grow" data-action="delvoices" style="text-align:start"><div class="t">${esc(T('deleteVoices'))}</div><div class="s">${esc(T('deleteVoicesSub'))}</div></button></div><p class="muted" id="storage"></p>`;
   html += `</div><div class="panel">`;
   html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} ${esc(S.book.version)} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
-  html += `<div class="srow" data-block="ui.share">${ic('people')}<button class="grow" data-action="share" style="text-align:start"><div class="t">${esc(T('share'))}</div><div class="s">${esc(T('shareSub'))}</div></button>${spk('ui.share')}</div>`;
-  if (window.FHBAndroid) { ids.push('ui.sendApp'); html += `<div class="srow" data-block="ui.sendApp">${ic('phone')}<button class="grow" data-action="sendapp" style="text-align:start"><div class="t">${esc(T('sendApp'))}</div><div class="s">${esc(T('sendAppSub'))}</div></button>${spk('ui.sendApp')}</div>`; }
+  html += SH.settingsRow(); // Share Sehat (js/share.js): the app file, the link, the QR code
   html += `<div class="srow">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div><button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
   html += `<a class="srow" href="#/privacy">${ic('check')}<div class="grow"><div class="t">${esc(T('privacy'))}</div><div class="s">${esc(T('privacySub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
   if (SV()) {
@@ -1089,6 +1073,8 @@ let lastPage = 'home';
 /* ---------- tools: breathing counter, reading checker, home health kit (js/tools.js) ---------- */
 const TL = initTools({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, topicCard, render: () => render() });
 const FD = initFinder({ S, esc, T, L, ic, I, spk, isAdultTopic });
+const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, store, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, topicCard, render: () => render() });
+const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText });
 
 /* ---------- router & rendering ---------- */
 function route() { return (location.hash || '#/home').slice(2).split('/'); }
@@ -1114,6 +1100,8 @@ function render() {
   else if (r[0] === 'kit') out = TL.screenKit();
   else if (r[0] === 'emergency') out = screenEmergency(r[1]);
   else if (r[0] === 'tool') out = TL.screenTool(r[1], r[2]) || screenHome();
+  else if (r[0] === 'growth') out = GR.screen(r[1]);
+  else if (r[0] === 'share') out = SH.screen();
   else out = screenHome();
   app.innerHTML = `<main class="page${out.adult ? ' adult' : ''}">${out.html}</main>${out.nav ? nav(out.nav) : ''}`;
   if (P.on) updateListenBar();
@@ -1169,10 +1157,9 @@ document.addEventListener('click', async (e) => {
     case 'listen': if (P.on && P.ids.length > 1) stopAudio(); else play(S.queueIds); return;
     case 'addkid': kidDialog(null); return;
     case 'editkid': kidDialog(S.kids.find((x) => x.id === S.kid)); return;
-    case 'addweight': weightDialog(S.kids.find((x) => x.id === S.kid)); return;
+    case 'addweight': location.hash = '#/growth/add'; return;
     case 'install': doInstall(); return;
-    case 'sendapp': track('sendapp'); try { window.FHBAndroid.shareApp(); } catch {} return;
-    case 'share': doShare(); return;
+    case 'sendapp': case 'share': location.hash = '#/share'; return; // one sharing feature: the Share Sehat screen (js/share.js)
     case 'stats': S.stats = !S.stats; if (!S.stats) { A.rq = []; store.set('rq', []); } render(); return;
     case 'watch': if (!S.stats) return; S.watch = !S.watch; store.set('watch', S.watch); if (!S.watch) { A.rq = []; store.set('rq', []); } render(); return;
     case 'district': if (await svPickDistrict(true)) render(); return;
@@ -1201,12 +1188,6 @@ addEventListener('appinstalled', () => { S.installEvt = null; track('a2hs'); per
 async function doInstall() {
   if (S.installEvt) { S.installEvt.prompt(); const c = await S.installEvt.userChoice; track('a2hs-prompt', { ok: c.outcome }); S.installEvt = null; render(); return; }
   dialog(`<h2>${esc(T('install'))}</h2><p style="font-size:18px">${esc(T('installIos'))}</p><button class="btn" data-close>${esc(T('close'))}</button>`);
-}
-async function doShare() {
-  const url = (S.book.config && S.book.config.appUrl) || location.href.split('#')[0];
-  track('share');
-  if (navigator.share) { try { await navigator.share({ title: T('appName'), text: T('shareText'), url }); return; } catch {} }
-  try { await navigator.clipboard.writeText(T('shareText') + ' ' + url); toast(T('copied')); } catch { prompt('', url); }
 }
 async function checkUpdate(manual) {
   if (!navigator.onLine) { if (manual) toast(T('offlineNow')); return; }

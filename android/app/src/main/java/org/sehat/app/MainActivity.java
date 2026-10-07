@@ -336,24 +336,75 @@ public class MainActivity extends Activity {
         }
     }
 
-    /** Copies the installed APK to the cache and opens the share sheet (Bluetooth, Quick Share, Files, ShareIt ...). */
+    /** The installed APK copied to the cache as sehat.apk (made again only when the app was updated). */
+    private synchronized File apkCopy() throws IOException {
+        File apk = new File(getApplicationInfo().sourceDir);
+        File dir = shareDir();
+        File out = new File(dir, ShareTargets.fileName());
+        if (ShareTargets.stale(out.exists(), out.length(), out.lastModified(), apk.length(), apk.lastModified())) {
+            File[] old = dir.listFiles();
+            if (old != null) for (File f : old) //noinspection ResultOfMethodCallIgnored
+                f.delete();
+            File tmp = new File(dir, "sehat.apk.part");
+            copy(new FileInputStream(apk), tmp);
+            if (!tmp.renameTo(out)) throw new IOException("rename failed");
+        }
+        return out;
+    }
+
+    /** Copies the installed APK to the cache and opens the share sheet (Quick Share, Bluetooth, Files, ShareIt ...). */
     void shareApk() {
         new Thread(() -> {
             try {
-                File apk = new File(getApplicationInfo().sourceDir);
-                File dir = shareDir();
-                File out = new File(dir, "sehat.apk");
-                if (!out.exists() || out.length() != apk.length() || out.lastModified() < apk.lastModified()) {
-                    File[] old = dir.listFiles();
-                    if (old != null) for (File f : old) //noinspection ResultOfMethodCallIgnored
-                        f.delete();
-                    copy(new FileInputStream(apk), out);
-                }
-                send(out, APK_MIME, "فرستادن برنامهٔ صحت · د صحت اپ لېږل");
+                send(apkCopy(), APK_MIME, "فرستادن برنامهٔ صحت · د صحت اپ لېږل");
             } catch (Exception e) {
                 runOnUiThread(() -> Toast.makeText(this, "Could not share the app: " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
         }).start();
+    }
+
+    /**
+     * Sends the APK straight to one messaging app (ShareTargets.PACKAGES). Returns false when that app is not on the
+     * phone or takes none of the file types; the page then opens the share sheet instead.
+     */
+    boolean shareApkTo(String pkg) {
+        if (!ShareTargets.allowed(pkg) || !installed(pkg)) return false;
+        try {
+            File apk = apkCopy();
+            Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".files", apk);
+            for (String mime : ShareTargets.MIMES) {
+                Intent send = new Intent(Intent.ACTION_SEND);
+                send.setType(mime);
+                send.setPackage(pkg);
+                send.putExtra(Intent.EXTRA_STREAM, uri);
+                send.setClipData(ClipData.newRawUri(apk.getName(), uri));
+                send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+                if (getPackageManager().queryIntentActivities(send, 0).isEmpty()) continue;
+                grantUriPermission(pkg, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                runOnUiThread(() -> {
+                    try {
+                        startActivity(send);
+                    } catch (ActivityNotFoundException | SecurityException e) {
+                        shareApk();   // the app refused after all: offer every way
+                    }
+                });
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+
+    /** Whether a listed messaging app is on this phone (Android 11+ needs the <queries> in AndroidManifest.xml). */
+    boolean installed(String pkg) {
+        if (!ShareTargets.allowed(pkg)) return false;
+        try {
+            getPackageManager().getPackageInfo(pkg, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     /** Called from the page as window.FHBAndroid. Methods run on a background thread. */
@@ -368,9 +419,28 @@ public class MainActivity extends Activity {
             return versionName();
         }
 
+        /** Opens the share sheet with the APK: Quick Share / Nearby Share and Bluetooth show nearby phones there. */
         @JavascriptInterface
         public void shareApp() {
             shareApk();
+        }
+
+        /** Sends the APK to one listed messaging app (com.whatsapp, org.telegram.messenger ...); false = not possible. */
+        @JavascriptInterface
+        public boolean shareAppTo(String pkg) {
+            return shareApkTo(pkg);
+        }
+
+        /** Whether a listed messaging app is installed (other packages always answer false). */
+        @JavascriptInterface
+        public boolean isInstalled(String pkg) {
+            return installed(pkg);
+        }
+
+        /** Size of the APK in bytes, to tell people how big the file is. */
+        @JavascriptInterface
+        public long apkSize() {
+            return new File(getApplicationInfo().sourceDir).length();
         }
 
         /** Shares a file made by the page (e.g. the recordings zip). base64 = the file's bytes. */

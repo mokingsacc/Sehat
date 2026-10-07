@@ -38,6 +38,22 @@
       }
     },
     {
+      "id": "growth.track",
+      "type": "link",
+      "to": "growth",
+      "icon": "growth",
+      "title": {
+        "fa": "رشد طفل خود را دنبال کنید",
+        "ps": "د خپل ماشوم وده وڅارئ",
+        "en": "Track your child's growth"
+      },
+      "text": {
+        "fa": "هر وزن و قد را در برنامه بنویسید و جدول رشد را ببینید.",
+        "ps": "هر وزن او قد په اپ کې ولیکئ او د ودې چارټ وګورئ.",
+        "en": "Write each weight and length in the app and see the growth chart."
+      }
+    },
+    {
       "id": "growth.early",
       "type": "step",
       "icon": "milestones",

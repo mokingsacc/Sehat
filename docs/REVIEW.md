@@ -1742,3 +1742,157 @@ Section lines (from sections-change.json, for content/src/ui.json):
 - say.ui.food (narrated): غذا و باغچه: کشت ترکاری، صرفه‌جویی آب، غذای اطفال، نگهداری غذا، مرغ، بز و گوسفند، و درآمد از خانه. / خواړه او باغچه: د سبزیو کرل، د اوبو سپما، د ماشومانو خواړه، د خوړو ساتل، چرګان، وزې او پسونه، او له کوره عاید. (Food and garden: growing vegetables, saving water, food for children, storing food, chickens, goats and sheep, and earning from home.)
 
 Words to check across the section: Dari پوپنک‌زده (mouldy), باغچه، کرد (garden bed), چپر، لیتی، فضله، لانهٔ مرغ، طویله، خامک‌دوزی، گروه پس‌انداز، مرض نیوکاسل; Pashto کیارۍ، کټاره، سره (manure)، بوس (straw)، پرخه (frost)، غول (droppings)، غولانځه (udder)، غوجل (shed)، لومبړ (fox)، پوپنک وهلی، د پس انداز ډله (or سپما).
+
+## Growth tracker and Share Sehat
+
+For Mo and native speakers. Code: js/growth.js, js/growth-calc.js, js/share.js, js/qr.js. Strings: content/src/ui-growth.json and content/src/ui-share.json (merged into ui.json by tools/build.py).
+
+### Growth tracker: medical defaults (please check)
+- Source: WHO Child Growth Standards 2006, LMS tables for boys and girls 0 to 5 years (weight-for-age, length/height-for-age, weight-for-length 45 to 110 cm under 2 years, weight-for-height 65 to 120 cm from 2 years), taken from WHO's own anthro package data (github.com/WorldHealthOrganization/anthro) by tools/make_who_growth.py into content/who-growth.json (31 KB, precached, works offline). Z-scores use the WHO formula, with WHO's "restricted" method beyond ±3 SD for weight indicators. Checked against WHO reference rows; error under 0.005 SD.
+- Length lying down under 2 years, standing from 2 years. If measured the other way, 0.7 cm is added (standing under 2) or taken away (lying from 2), as WHO does, and the app says so.
+- After each measurement the app speaks one plain result (worst first, at most 3 findings):
+  1. Weight-for-length/height below −3 SD, or a red arm tape (from 6 months): "very thin", go to the clinic TODAY, plus the hospital-now signs from the Growth topic (both feet swollen, very thin and weak, cannot eat or drink).
+  2. Weight-for-length/height −3 to −2 SD, or a yellow arm tape: "a little thin", clinic THIS WEEK.
+  3. Weight lower (by 0.1 kg or more) than at a visit 2 or more weeks before: "weight is going down", clinic THIS WEEK.
+  4. Weight not up by 0.1 kg since a visit 2 weeks (under 6 months), 4 weeks (6 to 23 months) or 8 weeks (2 to 5 years) before: "weight is not going up", clinic THIS WEEK.
+  5. Weight-for-age below −2 SD (below −3 "very light"), only when not already thin: clinic THIS WEEK for a check.
+  6. Length/height-for-age below −2 SD (below −3 "very short"): tell the clinic at the next visit, this month.
+  7. Weight-for-length/height above +2 SD (above +3 "very heavy"): ask the clinic about food, this month.
+  8. Numbers outside WHO's plausible ranges (WAZ below −6 or above 5, HAZ below −6 or above 6, WHZ below −5 or above 5), or a date before birth: "please measure again".
+  9. Otherwise: "growing well".
+- The app never names a disease. Every "go to the clinic" line says why and what the clinic does (weigh again, check for illness, food advice or special food).
+- Charts: green band −2 to +2 SD, yellow −3 to −2, red below −3; weight-for-length also shows +2 and +3 as dashed lines. Over 5 years the app keeps the numbers but has no WHO chart and says so.
+- Entries are kept on the phone with the child in My family (old weight entries are kept and shown).
+- Usage counts: the growth pages count as tool pages (growth, growth/add, growth/result, growth/measure), with act counts for "measurement saved" and the result level.
+
+### Share Sehat: defaults
+- Home card and Settings row open #/share. In the Android app: Nearby (Android share sheet with the APK, for Quick Share or Bluetooth), WhatsApp, Telegram, IMO and Messenger buttons that send the APK file straight to that app (greyed out when not on the phone), and Other apps. File size is shown. In a browser: share the link https://mokingsacc.github.io/Sehat/ (Web Share, WhatsApp, Telegram, copy), and on Android browsers a button to download the APK.
+- A QR code of the link is drawn on the phone, works offline.
+- "How to install the file you received" has 4 narrated steps with a picture, plus a line for iPhones (use the website).
+- Each share tap is counted (share or sendapp, plus which way).
+
+<details><summary>Growth tracker: every new line (fa / ps / en)</summary>
+
+- text.growth: رشد / وده (Growth)
+- text.growthSub: وزن، قد و فیتهٔ بازو، با جدول / وزن، قد او د مټ فیته، له چارټ سره (Weight, length and arm tape, with charts)
+- text.addMeasure: اندازهٔ تازه / نوې اندازه (Add a measurement)
+- text.gDate: تاریخ / نېټه (Date)
+- text.gWeight: وزن (کیلو) / وزن (کیلو) (Weight (kg))
+- text.gLength: قد (سانتی‌متر) / قد (سانتي متره) (Length or height (cm))
+- text.cm: سانتی‌متر / سانتي متره (cm)
+- text.lying: خوابیده / پرېوتی (Lying down)
+- text.standing: ایستاده / ولاړ (Standing)
+- text.muacColour: رنگ فیتهٔ بازو / د مټ د فیتې رنګ (Arm tape colour)
+- text.notMeasured: اندازه نشده / نه دی اندازه شوی (Not measured)
+- text.chartWfa: وزن به عمر / وزن د عمر سره (Weight for age)
+- text.chartLfa: قد به عمر / قد د عمر سره (Length for age)
+- text.chartWfl: وزن به قد / وزن د قد سره (Weight for length)
+- text.axisMonths: عمر به ماه / عمر په میاشتو (Age in months)
+- text.axisCm: قد به سانتی‌متر / قد په سانتي متره (Length in cm)
+- text.legendGood: خوب / ښه (Good)
+- text.legendLow: کم / کم (Low)
+- text.legendVeryLow: خیلی کم / ډېر کم (Very low)
+- text.legendHeavy: زیاد چاق / ډېر چاغ (Too heavy)
+- text.legendChild: طفل شما / ستاسو ماشوم (Your child)
+- text.lastCheck: آخرین اندازه / وروستۍ اندازه (Last measurement)
+- text.measurements: اندازه‌ها / اندازې (Measurements)
+- text.howMeasure: در خانه چطور اندازه کنیم / په کور کې څنګه اندازه وکړو (How to measure at home)
+- text.howMeasureSub: وزن، قد خوابیده، قد ایستاده و فیتهٔ بازو / وزن، پرېوتی قد، ولاړ قد او د مټ فیته (Weight, length, height and arm tape)
+- text.needOne: وزن یا قد را بنویسید / وزن یا قد ولیکئ (Write the weight or the length)
+- text.badNumber: لطفاً عدد را ببینید / مهرباني وکړئ شمېره وګورئ (Please check the number)
+- text.noMeasures: هنوز اندازه‌ای ثبت نشده است / تر اوسه هېڅ اندازه نه ده ثبت شوې (No measurements yet)
+- text.deleteMeasureQ: این اندازه حذف شود؟ / دا اندازه ړنګه شي؟ (Delete this measurement?)
+- text.seeCharts: جدول رشد را ببینید / د ودې چارټ وګورئ (See the growth charts)
+- text.result: نتیجه / پایله (Result)
+- text.lvMonth: همین ماه کلینیک / په دې میاشت کلینیک (Clinic this month)
+- text.lvGood: خوب رشد می‌کند / ښه وده کوي (Growing well)
+- say.ui.growth (narrated): هر بار که طفل را اندازه می‌کنید، وزن و قد او را اینجا بنویسید. برنامه نشان می‌دهد که طفل خوب رشد می‌کند یا نه، و چه وقت به کلینیک بروید. این معلومات فقط در همین گوشی می‌ماند. / هر ځل چې ماشوم اندازه کوئ، وزن او قد یې دلته ولیکئ. اپ ښيي چې ماشوم ښه وده کوي که نه، او کله کلینیک ته ولاړ شئ. دا معلومات یوازې په همدې ټیلیفون کې پاتې کېږي. (Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.)
+- say.ui.gr.add (narrated): تاریخ، وزن به کیلو و قد به سانتی‌متر را بنویسید. اگر فقط یکی از آن‌ها را دارید، مشکلی نیست. / نېټه، وزن په کیلو او قد په سانتي متره ولیکئ. که یوازې یو یې لرئ، هم سمه ده. (Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.)
+- say.ui.gr.pos (narrated): طفل کمتر از ۲ سال را خوابیده اندازه کنید. از ۲ سالگی به بعد، ایستاده اندازه کنید. بگویید چطور اندازه کردید. / له ۲ کلونو کم ماشوم پرېوتی اندازه کړئ. له ۲ کلنۍ وروسته، ولاړ اندازه کړئ. ووایئ چې څنګه مو اندازه کړ. (Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.)
+- say.ui.gr.muac (narrated): اگر فیتهٔ بازو دارید و طفل ۶ ماهه یا بزرگ‌تر است، رنگی را که دیدید انتخاب کنید. / که د مټ فیته لرئ او ماشوم ۶ میاشتنی یا لوی دی، هغه رنګ وټاکئ چې ولیدئ. (If you have an arm tape and the child is 6 months or older, choose the colour you saw.)
+- say.ui.gr.charts (narrated): در جدول، سبز خوب است، زرد کم است و سرخ خیلی کم است. نقطه‌ها و خط، طفل شماست. خطی که در میان سبز بالا می‌رود، خوب است. / په چارټ کې شین ښه دی، ژېړ کم دی او سور ډېر کم دی. ټکي او کرښه ستاسو ماشوم دی. هغه کرښه چې د شین په منځ کې پورته ځي، ښه ده. (On the chart, green is good, yellow is low and red is very low. The dots and the line are your child. A line that rises inside the green is good.)
+- say.ui.gr.wfl-lines (narrated): در این جدول، خط‌های نقطه‌چین بالا یعنی وزن طفل برای قدش زیاد است. / په دې چارټ کې، پورته ټکي ټکي کرښې دا مانا لري چې د ماشوم وزن د قد لپاره ډېر دی. (On this chart, the dashed lines at the top mean too heavy for the length.)
+- say.ui.gr.show (narrated): این گوشی را به کلینیک ببرید و این عددها را به کارمند صحی نشان دهید. / دا ټیلیفون کلینیک ته یوسئ او دا شمېرې روغتیايي کارکوونکي ته وښایئ. (Take this phone to the clinic and show the health worker these numbers.)
+- say.ui.gr.r.ok (narrated): خوب رشد می‌کند. خوب غذا بدهید و ماه آینده دوباره اندازه کنید. / ښه وده کوي. ښه خواړه ورکړئ او بله میاشت بیا اندازه یې کړئ. (Growing well. Keep feeding well, and measure again next month.)
+- say.ui.gr.r.thin3 (narrated): برای قدش خیلی لاغر است: امروز به کلینیک بروید. / د خپل قد لپاره ډېر ډنګر دی: نن کلینیک ته ولاړ شئ. (Very thin for the length: go to the clinic today.)
+- say.ui.gr.r.muac-red (narrated): فیتهٔ بازو سرخ است: خیلی لاغر است. امروز به کلینیک بروید. / د مټ فیته سره ده: ډېر ډنګر دی. نن کلینیک ته ولاړ شئ. (The arm tape is red: very thin. Go to the clinic today.)
+- say.ui.gr.r.thin2 (narrated): برای قدش کمی لاغر است: همین هفته به کلینیک بروید. / د خپل قد لپاره لږ ډنګر دی: په همدې اونۍ کلینیک ته ولاړ شئ. (A little thin for the length: go to the clinic this week.)
+- say.ui.gr.r.muac-yellow (narrated): فیتهٔ بازو زرد است: لاغر است. همین هفته به کلینیک بروید. / د مټ فیته ژېړه ده: ډنګر دی. په همدې اونۍ کلینیک ته ولاړ شئ. (The arm tape is yellow: too thin. Go to the clinic this week.)
+- say.ui.gr.r.light3 (narrated): برای عمرش خیلی کم‌وزن است: همین هفته برای معاینه به کلینیک بروید. / د خپل عمر لپاره ډېر کم وزن لري: په همدې اونۍ د معاینې لپاره کلینیک ته ولاړ شئ. (Very light for age: go to the clinic this week for a check.)
+- say.ui.gr.r.light2 (narrated): برای عمرش کمی کم‌وزن است: همین هفته برای معاینه به کلینیک بروید. / د خپل عمر لپاره لږ کم وزن لري: په همدې اونۍ د معاینې لپاره کلینیک ته ولاړ شئ. (A little light for age: go to the clinic this week for a check.)
+- say.ui.gr.r.falling (narrated): وزنش از دفعهٔ قبل کم شده است: همین هفته به کلینیک بروید. / وزن یې له تېر ځل راکم شوی دی: په همدې اونۍ کلینیک ته ولاړ شئ. (The weight has gone down since the last time: go to the clinic this week.)
+- say.ui.gr.r.flat (narrated): وزنش از دفعهٔ قبل زیاد نشده است: همین هفته به کلینیک بروید. / وزن یې له تېر ځل نه دی زیات شوی: په همدې اونۍ کلینیک ته ولاړ شئ. (The weight has not gone up since the last time: go to the clinic this week.)
+- say.ui.gr.r.short3 (narrated): برای عمرش خیلی کوتاه‌قد است: همین ماه برای معاینه به کلینیک بروید. / د خپل عمر لپاره ډېر لنډ قد لري: په همدې میاشت د معاینې لپاره کلینیک ته ولاړ شئ. (Very short for age: go to the clinic this month for a check.)
+- say.ui.gr.r.short2 (narrated): برای عمرش کمی کوتاه‌قد است: همین ماه که به کلینیک می‌روید، بگویید. / د خپل عمر لپاره لږ لنډ قد لري: په همدې میاشت چې کلینیک ته ځئ، ورته ووایئ. (A little short for age: tell the clinic when you go this month.)
+- say.ui.gr.r.heavy3 (narrated): برای قدش خیلی چاق است: همین ماه برای مشوره دربارهٔ غذا به کلینیک بروید. / د خپل قد لپاره ډېر چاغ دی: په همدې میاشت د خوړو د مشورې لپاره کلینیک ته ولاړ شئ. (Very heavy for the length: go to the clinic this month for advice on food.)
+- say.ui.gr.r.heavy2 (narrated): برای قدش کمی چاق است: همین ماه از کلینیک دربارهٔ غذا بپرسید. / د خپل قد لپاره لږ چاغ دی: په همدې میاشت له کلینیک څخه د خوړو په اړه وپوښتئ. (A little heavy for the length: ask the clinic about food this month.)
+- say.ui.gr.r.check (narrated): این عدد عجیب به نظر می‌رسد. عدد را ببینید و دوباره اندازه کنید. / دا شمېره عجیبه ښکاري. شمېره وګورئ او بیا اندازه یې کړئ. (This number looks unusual. Check the number and measure again.)
+- say.ui.gr.why.thin3 (narrated): در کلینیک، کارمند صحی طفل را دوباره اندازه می‌کند و او را برای مریضی و پندیدگی معاینه می‌کند. / په کلینیک کې روغتیايي کارکوونکی ماشوم بیا اندازه کوي او د ناروغۍ او پړسوب لپاره یې ګوري. (At the clinic, the health worker will measure your child again and check for illness and swelling.)
+- say.ui.gr.why.thin2 (narrated): کلینیک طفل را معاینه می‌کند، در غذا دادن کمک می‌کند و شاید غذای اضافی بدهد. / کلینیک ماشوم ګوري، د خواړو په ورکولو کې مرسته کوي او ښايي اضافي خواړه ورکړي. (The clinic will check your child, help you with feeding, and may give extra food.)
+- say.ui.gr.why.light (narrated): کلینیک دوباره وزن و اندازه می‌کند، مریضی را جستجو می‌کند و در غذا دادن کمک می‌کند. / کلینیک بیا وزن او اندازه کوي، ناروغي لټوي او د خواړو په ورکولو کې مرسته کوي. (The clinic will weigh and measure again, look for illness, and help with feeding.)
+- say.ui.gr.why.falter (narrated): طفل خورد باید هر ماه وزن بگیرد. کلینیک مریضی را جستجو می‌کند و می‌بیند طفل چطور غذا می‌خورد. / کوچنی ماشوم باید هره میاشت وزن واخلي. کلینیک ناروغي لټوي او ګوري چې ماشوم څنګه خواړه خوري. (A young child should gain weight every month. The clinic will look for illness and check how the child eats.)
+- say.ui.gr.why.short (narrated): کم رشد کردن قد در چند ماه پیدا می‌شود. کلینیک غذا و صحت طفل را می‌بیند و به شما مشوره می‌دهد. / د قد ورو وده په څو میاشتو کې پیدا کېږي. کلینیک د ماشوم خواړه او روغتیا ګوري او تاسو ته مشوره درکوي. (Growing slowly in length happens over months. The clinic will check the child's food and health, and advise you.)
+- say.ui.gr.why.heavy (narrated): کلینیک طفل را معاینه می‌کند و دربارهٔ غذای صحی و بازی و تحرک مشوره می‌دهد. / کلینیک ماشوم ګوري او د روغو خوړو، لوبو او ګرځېدو په اړه مشوره ورکوي. (The clinic will check your child and advise on healthy food and active play.)
+- say.ui.gr.adj-standing (narrated): طفل کمتر از ۲ سال ایستاده اندازه شد: برنامه مثل کلینیک ۰٫۷ سانتی‌متر اضافه می‌کند. / له ۲ کلونو کم ماشوم ولاړ اندازه شو: اپ د کلینیک په څېر ۰٫۷ سانتي متره زیاتوي. (Measured standing before 2 years: the app adds 0.7 cm, as the clinic does.)
+- say.ui.gr.adj-lying (narrated): طفل ۲ ساله یا بزرگ‌تر خوابیده اندازه شد: برنامه مثل کلینیک ۰٫۷ سانتی‌متر کم می‌کند. / ۲ کلن یا لوی ماشوم پرېوتی اندازه شو: اپ د کلینیک په څېر ۰٫۷ سانتي متره کموي. (Measured lying down from 2 years: the app takes away 0.7 cm, as the clinic does.)
+- say.ui.gr.nolength (narrated): قد را هم بنویسید، تا ببینید طفل برای قدش لاغر است یا نه. / قد هم ولیکئ، څو وګورئ چې ماشوم د خپل قد لپاره ډنګر دی که نه. (Add the length too, to see if your child is thin for the length.)
+- say.ui.gr.over5 (narrated): این جدول‌ها برای اطفال کمتر از ۵ سال است. برای طفل بزرگ‌تر، از کلینیک بپرسید. / دا چارټونه له ۵ کلونو د کمو ماشومانو لپاره دي. د لوی ماشوم لپاره له کلینیک وپوښتئ. (These charts are for children under 5 years. For an older child, ask the clinic.)
+- say.ui.gr.baddate (narrated): این تاریخ پیش از تولد طفل است. لطفاً تاریخ را ببینید. / دا نېټه د ماشوم له زېږون مخکې ده. مهرباني وکړئ نېټه وګورئ. (This date is before the child was born. Please check the date.)
+- say.ui.gr.m.lead (narrated): می‌توانید در خانه اندازه کنید. هر بار به یک شکل اندازه کنید و عدد را فوراً بنویسید. / په کور کې یې اندازه کولای شئ. هر ځل په یو ډول اندازه کړئ او شمېره سمدستي ولیکئ. (You can measure at home. Measure the same way each time, and write the number down straight away.)
+- say.ui.gr.m.hang (narrated): وزن با ترازوی آویزان: طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید. / وزن په ځوړنده تله: ماشوم په سپکو جامو د تلې په کڅوړه کې کېږدئ. صبر وکړئ چې ارام شي، بیا شمېره ولولئ. (Weight with a hanging scale: put the baby in the sling with light clothes. Wait until the baby is still, then read the number.)
+- say.ui.gr.m.hold (narrated): وزن با ترازوی عادی: اول خود را وزن کنید، بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است. / وزن په عادي تله: لومړی ځان وتلئ، بیا ماشوم په غېږ کې ونیسئ او بیا ځان وتلئ. لومړۍ شمېره له دویمې کمه کړئ: دا د ماشوم وزن دی. (Weight with a bathroom scale: weigh yourself, then weigh yourself holding the baby. Take the first number from the second: that is the baby's weight.)
+- say.ui.gr.m.length1 (narrated): قد، کمتر از ۲ سال: دو نفر لازم است. طفل را روی زمین هموار به پشت بخوابانید، طوری که سرش به دیوار برسد. یک نفر سر طفل را آرام نگه دارد. / قد، له ۲ کلونو کم: دوه کسان پکار دي. ماشوم پر هوارې ځمکې په شا څملوئ، داسې چې سر یې دېوال ته ورسېږي. یو کس د ماشوم سر په ارامۍ ونیسي. (Length, under 2 years: two people are needed. Lay the baby on its back on a flat floor, with the top of the head against a wall. One person holds the head still.)
+- say.ui.gr.m.length2 (narrated): نفر دوم پاهای طفل را آرام راست کند و یک کتاب را صاف به کف پاهایش بگذارد. جای کتاب را روی زمین نشانی کنید و از دیوار تا نشانی را با متر اندازه کنید. / دویم کس د ماشوم پښې په نرمۍ سمې کړي او یو کتاب د پښو تلو ته برابر ونیسي. د کتاب ځای پر ځمکه نښه کړئ او له دېوال تر نښې پورې په متر اندازه کړئ. (The second person gently straightens the legs and holds a book flat against the soles of the feet. Mark the floor at the book, and measure from the wall to the mark.)
+- say.ui.gr.m.height (narrated): قد، از ۲ سالگی: بوت و کلاه را بکشید. طفل راست بایستد، طوری که پاشنه‌ها و پشتش به دیوار بچسپد و به پیش رو ببیند. یک کتاب را صاف روی سرش به دیوار بگذارید، زیر کتاب روی دیوار نشانی کنید و از زمین تا نشانی را اندازه کنید. / قد، له ۲ کلنۍ: بوټونه او خولۍ لرې کړئ. ماشوم سم ودرېږي، داسې چې پوندې او شا یې له دېوال سره ولګېږي او مخ ته وګوري. یو کتاب پر سر یې د دېوال سره برابر کېږدئ، د کتاب لاندې پر دېوال نښه کړئ او له ځمکې تر نښې پورې اندازه کړئ. (Height, from 2 years: take off shoes and hats. The child stands straight with heels and back against a wall, looking ahead. Put a book flat on the head against the wall, mark the wall under it, and measure from the floor to the mark.)
+- say.ui.gr.m.muac (narrated): فیتهٔ بازو، از ۶ ماهگی: وسط بازوی چپ را پیدا کنید، فیته را آرام بپیچانید، نه سخت، و رنگ را در کلکین فیته ببینید. / د مټ فیته، له ۶ میاشتو: د کیڼ مټ منځ پیدا کړئ، فیته په نرمۍ تاو کړئ، نه ټینګه، او په کړکۍ کې رنګ وګورئ. (Arm tape, from 6 months: find the middle of the left upper arm, wrap the tape gently, not tight, and read the colour in the window.)
+- say.ui.gr.m.exact (narrated): عددهای خانه دقیق نیستند. اگر نتیجه شما را نگران می‌کند، کلینیک دوباره اندازه می‌کند. / د کور شمېرې دقیقې نه دي. که پایله مو اندېښمن کړي، کلینیک به بیا اندازه وکړي. (Numbers from home are not exact. If a result worries you, the clinic will measure again.)
+- growth.track (link in the Growth topic): رشد طفل خود را دنبال کنید — هر وزن و قد را در برنامه بنویسید و جدول رشد را ببینید. / د خپل ماشوم وده وڅارئ — هر وزن او قد په اپ کې ولیکئ او د ودې چارټ وګورئ. (Track your child's growth — Write each weight and length in the app and see the growth chart.)
+
+</details>
+
+<details><summary>Share Sehat: every new line (fa / ps / en)</summary>
+
+- text.shareApp: صحت را شریک کنید / صحت شریک کړئ (Share Sehat)
+- text.shareAppSub: از گوشی به گوشی، بدون انترنت / له ټیلیفون نه ټیلیفون ته، بې انټرنېټه (Phone to phone, no internet needed)
+- text.shareWebSub: لینک را به خانواده و دوستان بفرستید / لینک کورنۍ او ملګرو ته ولېږئ (Send the link to family and friends)
+- text.nearby: گوشی‌های نزدیک / نږدې ټیلیفونونه (Nearby phones)
+- text.nearbySub: Quick Share یا بلوتوث / Quick Share یا بلوتوث (Quick Share or Bluetooth)
+- text.sendFile: فرستادن فایل برنامه / د اپ فایل لېږل (Send the app file)
+- text.otherApps: برنامه‌های دیگر / نور اپونه (Other apps)
+- text.notOnPhone: در این گوشی نیست / په دې ټیلیفون کې نشته (Not on this phone)
+- text.shareLink: فرستادن لینک / لینک لېږل (Share the link)
+- text.copyLink: کاپی کردن لینک / لینک کاپي کول (Copy the link)
+- text.qrTitle: با کمره باز کنید / په کمره یې خلاص کړئ (Open with the camera)
+- text.installHelp: فایلی را که گرفتید چطور نصب کنید / هغه فایل چې درته راغلی څنګه نصب کړئ (How to install the file you received)
+- text.getApk: گرفتن فایل برنامهٔ اندروید / د اندروید اپ فایل اخیستل (Get the Android app file)
+- text.cantSend: این برنامه فایل را نگرفت. راه دیگری را انتخاب کنید. / دې اپ فایل وانه خیست. بله لار وټاکئ. (This app could not take the file. Choose another way.)
+- text.fileSize: فایل حدود {n} است / فایل شاوخوا {n} دی (The file is about {n})
+- text.appWhatsApp: واتساپ / واټساپ (WhatsApp)
+- text.appTelegram: تلگرام / ټلګرام (Telegram)
+- text.appImo: ایمو / ایمو (IMO)
+- text.appMessenger: مسنجر / مسنجر (Messenger)
+- say.ui.share-app (narrated): صحت را با خانواده و دوستان شریک کنید. آن را از گوشی به گوشی بفرستید، حتی بدون انترنت. / صحت له کورنۍ او ملګرو سره شریک کړئ. له یوه ټیلیفون څخه یې بل ته ولېږئ، حتی بې انټرنېټه. (Share Sehat with family and friends. Send it from phone to phone, even without internet.)
+- say.ui.share-web (narrated): صحت را با خانواده و دوستان شریک کنید. لینک را برایشان بفرستید، یا بگذارید با کمرهٔ گوشی باز کنند. / صحت له کورنۍ او ملګرو سره شریک کړئ. لینک ورته ولېږئ، یا پرېږدئ چې د ټیلیفون په کمره یې خلاص کړي. (Share Sehat with family and friends. Send them the link, or let them open it with the phone camera.)
+- say.ui.sh.nearby (narrated): «گوشی‌های نزدیک» را بزنید. یک فهرست باز می‌شود: Quick Share یا بلوتوث را انتخاب کنید، گوشی‌های نزدیک خودشان پیدا می‌شوند. بلوتوث گوشی دیگر باید روشن باشد. / «نږدې ټیلیفونونه» ووهئ. یو لېست خلاصېږي: Quick Share یا بلوتوث وټاکئ، نږدې ټیلیفونونه پخپله ښکاري. د بل ټیلیفون بلوتوث باید روښانه وي. (Tap Nearby phones. A list opens: choose Quick Share or Bluetooth, and the phones near you appear by themselves. The other phone must have Bluetooth on.)
+- say.ui.sh.apps (narrated): یا فایل برنامه را در واتساپ، تلگرام، ایمو یا مسنجر بفرستید. برنامه‌هایی که در این گوشی نیستند، خاکستری هستند. / یا د اپ فایل په واټساپ، ټلګرام، ایمو یا مسنجر کې ولېږئ. هغه اپونه چې په دې ټیلیفون کې نشته، خړ دي. (Or send the app file in WhatsApp, Telegram, IMO or Messenger. Apps that are not on this phone are grey.)
+- say.ui.sh.web (narrated): لینک صحت را به خانواده و دوستان بفرستید. یک بار با انترنت باز کنند، بعد بدون انترنت هم کار می‌کند. / د صحت لینک کورنۍ او ملګرو ته ولېږئ. یو ځل یې له انټرنېټ سره خلاص کړي، بیا بې انټرنېټه هم کار کوي. (Send the Sehat link to family and friends. They open it once with internet, and then it works without internet.)
+- say.ui.sh.qr (narrated): گوشی دیگر می‌تواند با گرفتن کمره به طرف این مربع، صحت را باز کند. / بل ټیلیفون کولای شي چې د دې څلورګوټي لور ته د کمرې په نیولو صحت خلاص کړي. (Another phone can open Sehat by pointing its camera at this square.)
+- say.ui.sh.apk (narrated): در اندروید می‌توانید فایل برنامه را هم بگیرید و بعد بدون انترنت به گوشی‌های دیگر بفرستید. / په اندروید کې کولای شئ د اپ فایل هم واخلئ او بیا یې بې انټرنېټه نورو ټیلیفونونو ته ولېږئ. (On Android you can also get the app file, and then send it to other phones without internet.)
+- say.ui.sh.b.nearby (narrated): گوشی‌های نزدیک: با Quick Share یا بلوتوث بفرستید. / نږدې ټیلیفونونه: په Quick Share یا بلوتوث یې ولېږئ. (Nearby phones: send by Quick Share or Bluetooth.)
+- say.ui.sh.b.whatsapp (narrated): در واتساپ بفرستید. / په واټساپ کې یې ولېږئ. (Send in WhatsApp.)
+- say.ui.sh.b.telegram (narrated): در تلگرام بفرستید. / په ټلګرام کې یې ولېږئ. (Send in Telegram.)
+- say.ui.sh.b.imo (narrated): در ایمو بفرستید. / په ایمو کې یې ولېږئ. (Send in IMO.)
+- say.ui.sh.b.messenger (narrated): در مسنجر بفرستید. / په مسنجر کې یې ولېږئ. (Send in Messenger.)
+- say.ui.sh.b.other (narrated): برنامه‌های دیگر: هر راه دیگری را برای فرستادن انتخاب کنید. / نور اپونه: د لېږلو بله هره لار وټاکئ. (Other apps: choose any other way to send.)
+- say.ui.sh.b.link (narrated): لینک را بفرستید. / لینک ولېږئ. (Share the link.)
+- say.ui.sh.b.copy (narrated): لینک را کاپی کنید و بعد در پیام بگذارید. / لینک کاپي کړئ او بیا یې په پیغام کې کېږدئ. (Copy the link, then paste it in a message.)
+- say.ui.sh.b.apk (narrated): فایل برنامهٔ اندروید را بگیرید. / د اندروید اپ فایل واخلئ. (Get the Android app file.)
+- say.ui.sh.i1 (narrated): فایل sehat.apk را که گرفتید باز کنید، مثلاً در واتساپ یا در «فایل‌ها»ی گوشی. / هغه sehat.apk فایل چې درته راغلی خلاص کړئ، د بېلګې په توګه په واټساپ یا د ټیلیفون په «فایلونو» کې. (Open the file sehat.apk that you received, for example in WhatsApp or in the phone's Files app.)
+- say.ui.sh.i2 (narrated): اگر گوشی پرسید، «تنظیمات» را بزنید و اجازهٔ نصب از این منبع را روشن کنید. بعد برگردید. / که ټیلیفون وپوښتل، «تنظیمات» ووهئ او له دې سرچینې د نصبولو اجازه روښانه کړئ. بیا شاته راشئ. (If the phone asks, tap Settings and allow installing apps from this source. Then go back.)
+- say.ui.sh.i3 (narrated): «نصب» را بزنید. اگر گوشی دربارهٔ برنامهٔ ناشناس هشدار داد، «More details» و بعد «Install anyway» را بزنید. / «نصب» ووهئ. که ټیلیفون د ناپېژندل شوي اپ په اړه خبرداری ورکړ، «More details» او بیا «Install anyway» ووهئ. (Tap Install. If the phone warns about an unknown app, tap More details, then Install anyway.)
+- say.ui.sh.i4 (narrated): صحت را باز کنید. بدون انترنت کار می‌کند. / صحت خلاص کړئ. بې انټرنېټه کار کوي. (Open Sehat. It works without internet.)
+- say.ui.sh.iphone (narrated): آیفون نمی‌تواند این فایل را نصب کند. در آیفون، لینک را باز کنید. / آیفون دا فایل نشي نصبولای. په آیفون کې لینک خلاص کړئ. (iPhones cannot install this file. On an iPhone, open the link instead.)
+
+</details>
+
+Words to check: Dari فیتهٔ بازو (arm tape, MUAC), خوابیده / ایستاده (lying / standing), جدول رشد; Pashto د مټ فیته, پرېوتی / ولاړ, د ودې چارټ. "Quick Share" and "sehat.apk" are left in Latin letters on purpose (that is what the phone shows).

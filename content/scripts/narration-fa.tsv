@@ -118,6 +118,67 @@ ui.privacy.stop	هر وقت بخواهید، می‌توانید فرستادن 
 ui.emergency	حالت عاجل. اول کسی را برای آوردن موتر بفرستید. بعد، سن مریض را انتخاب کنید و مشکل را بزنید.	Emergency. First, send someone for a car. Then choose the person's age and tap the problem.
 ui.emergencyWho	چه کسی کمک می‌خواهد؟ نوزاد، شیرخوار کمتر از ۱ سال، طفل، یا بزرگسال؟	Who needs help? A newborn, a baby under 1, a child, or an adult?
 ui.emergencyList	حالات عاجل: کمک اول، قدم به قدم.	Emergencies: first aid, step by step.
+ui.growth	هر بار که طفل را اندازه می‌کنید، وزن و قد او را اینجا بنویسید. برنامه نشان می‌دهد که طفل خوب رشد می‌کند یا نه، و چه وقت به کلینیک بروید. این معلومات فقط در همین گوشی می‌ماند.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
+ui.gr.add	تاریخ، وزن به کیلو و قد به سانتی‌متر را بنویسید. اگر فقط یکی از آن‌ها را دارید، مشکلی نیست.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
+ui.gr.pos	طفل کمتر از ۲ سال را خوابیده اندازه کنید. از ۲ سالگی به بعد، ایستاده اندازه کنید. بگویید چطور اندازه کردید.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.
+ui.gr.muac	اگر فیتهٔ بازو دارید و طفل ۶ ماهه یا بزرگ‌تر است، رنگی را که دیدید انتخاب کنید.	If you have an arm tape and the child is 6 months or older, choose the colour you saw.
+ui.gr.charts	در جدول، سبز خوب است، زرد کم است و سرخ خیلی کم است. نقطه‌ها و خط، طفل شماست. خطی که در میان سبز بالا می‌رود، خوب است.	On the chart, green is good, yellow is low and red is very low. The dots and the line are your child. A line that rises inside the green is good.
+ui.gr.wfl-lines	در این جدول، خط‌های نقطه‌چین بالا یعنی وزن طفل برای قدش زیاد است.	On this chart, the dashed lines at the top mean too heavy for the length.
+ui.gr.show	این گوشی را به کلینیک ببرید و این عددها را به کارمند صحی نشان دهید.	Take this phone to the clinic and show the health worker these numbers.
+ui.gr.r.ok	خوب رشد می‌کند. خوب غذا بدهید و ماه آینده دوباره اندازه کنید.	Growing well. Keep feeding well, and measure again next month.
+ui.gr.r.thin3	برای قدش خیلی لاغر است: امروز به کلینیک بروید.	Very thin for the length: go to the clinic today.
+ui.gr.r.muac-red	فیتهٔ بازو سرخ است: خیلی لاغر است. امروز به کلینیک بروید.	The arm tape is red: very thin. Go to the clinic today.
+ui.gr.r.thin2	برای قدش کمی لاغر است: همین هفته به کلینیک بروید.	A little thin for the length: go to the clinic this week.
+ui.gr.r.muac-yellow	فیتهٔ بازو زرد است: لاغر است. همین هفته به کلینیک بروید.	The arm tape is yellow: too thin. Go to the clinic this week.
+ui.gr.r.light3	برای عمرش خیلی کم‌وزن است: همین هفته برای معاینه به کلینیک بروید.	Very light for age: go to the clinic this week for a check.
+ui.gr.r.light2	برای عمرش کمی کم‌وزن است: همین هفته برای معاینه به کلینیک بروید.	A little light for age: go to the clinic this week for a check.
+ui.gr.r.falling	وزنش از دفعهٔ قبل کم شده است: همین هفته به کلینیک بروید.	The weight has gone down since the last time: go to the clinic this week.
+ui.gr.r.flat	وزنش از دفعهٔ قبل زیاد نشده است: همین هفته به کلینیک بروید.	The weight has not gone up since the last time: go to the clinic this week.
+ui.gr.r.short3	برای عمرش خیلی کوتاه‌قد است: همین ماه برای معاینه به کلینیک بروید.	Very short for age: go to the clinic this month for a check.
+ui.gr.r.short2	برای عمرش کمی کوتاه‌قد است: همین ماه که به کلینیک می‌روید، بگویید.	A little short for age: tell the clinic when you go this month.
+ui.gr.r.heavy3	برای قدش خیلی چاق است: همین ماه برای مشوره دربارهٔ غذا به کلینیک بروید.	Very heavy for the length: go to the clinic this month for advice on food.
+ui.gr.r.heavy2	برای قدش کمی چاق است: همین ماه از کلینیک دربارهٔ غذا بپرسید.	A little heavy for the length: ask the clinic about food this month.
+ui.gr.r.check	این عدد عجیب به نظر می‌رسد. عدد را ببینید و دوباره اندازه کنید.	This number looks unusual. Check the number and measure again.
+ui.gr.why.thin3	در کلینیک، کارمند صحی طفل را دوباره اندازه می‌کند و او را برای مریضی و پندیدگی معاینه می‌کند.	At the clinic, the health worker will measure your child again and check for illness and swelling.
+ui.gr.why.thin2	کلینیک طفل را معاینه می‌کند، در غذا دادن کمک می‌کند و شاید غذای اضافی بدهد.	The clinic will check your child, help you with feeding, and may give extra food.
+ui.gr.why.light	کلینیک دوباره وزن و اندازه می‌کند، مریضی را جستجو می‌کند و در غذا دادن کمک می‌کند.	The clinic will weigh and measure again, look for illness, and help with feeding.
+ui.gr.why.falter	طفل خورد باید هر ماه وزن بگیرد. کلینیک مریضی را جستجو می‌کند و می‌بیند طفل چطور غذا می‌خورد.	A young child should gain weight every month. The clinic will look for illness and check how the child eats.
+ui.gr.why.short	کم رشد کردن قد در چند ماه پیدا می‌شود. کلینیک غذا و صحت طفل را می‌بیند و به شما مشوره می‌دهد.	Growing slowly in length happens over months. The clinic will check the child's food and health, and advise you.
+ui.gr.why.heavy	کلینیک طفل را معاینه می‌کند و دربارهٔ غذای صحی و بازی و تحرک مشوره می‌دهد.	The clinic will check your child and advise on healthy food and active play.
+ui.gr.adj-standing	طفل کمتر از ۲ سال ایستاده اندازه شد: برنامه مثل کلینیک ۰٫۷ سانتی‌متر اضافه می‌کند.	Measured standing before 2 years: the app adds 0.7 cm, as the clinic does.
+ui.gr.adj-lying	طفل ۲ ساله یا بزرگ‌تر خوابیده اندازه شد: برنامه مثل کلینیک ۰٫۷ سانتی‌متر کم می‌کند.	Measured lying down from 2 years: the app takes away 0.7 cm, as the clinic does.
+ui.gr.nolength	قد را هم بنویسید، تا ببینید طفل برای قدش لاغر است یا نه.	Add the length too, to see if your child is thin for the length.
+ui.gr.over5	این جدول‌ها برای اطفال کمتر از ۵ سال است. برای طفل بزرگ‌تر، از کلینیک بپرسید.	These charts are for children under 5 years. For an older child, ask the clinic.
+ui.gr.baddate	این تاریخ پیش از تولد طفل است. لطفاً تاریخ را ببینید.	This date is before the child was born. Please check the date.
+ui.gr.m.lead	می‌توانید در خانه اندازه کنید. هر بار به یک شکل اندازه کنید و عدد را فوراً بنویسید.	You can measure at home. Measure the same way each time, and write the number down straight away.
+ui.gr.m.hang	وزن با ترازوی آویزان: طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید.	Weight with a hanging scale: put the baby in the sling with light clothes. Wait until the baby is still, then read the number.
+ui.gr.m.hold	وزن با ترازوی عادی: اول خود را وزن کنید، بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.	Weight with a bathroom scale: weigh yourself, then weigh yourself holding the baby. Take the first number from the second: that is the baby's weight.
+ui.gr.m.length1	قد، کمتر از ۲ سال: دو نفر لازم است. طفل را روی زمین هموار به پشت بخوابانید، طوری که سرش به دیوار برسد. یک نفر سر طفل را آرام نگه دارد.	Length, under 2 years: two people are needed. Lay the baby on its back on a flat floor, with the top of the head against a wall. One person holds the head still.
+ui.gr.m.length2	نفر دوم پاهای طفل را آرام راست کند و یک کتاب را صاف به کف پاهایش بگذارد. جای کتاب را روی زمین نشانی کنید و از دیوار تا نشانی را با متر اندازه کنید.	The second person gently straightens the legs and holds a book flat against the soles of the feet. Mark the floor at the book, and measure from the wall to the mark.
+ui.gr.m.height	قد، از ۲ سالگی: بوت و کلاه را بکشید. طفل راست بایستد، طوری که پاشنه‌ها و پشتش به دیوار بچسپد و به پیش رو ببیند. یک کتاب را صاف روی سرش به دیوار بگذارید، زیر کتاب روی دیوار نشانی کنید و از زمین تا نشانی را اندازه کنید.	Height, from 2 years: take off shoes and hats. The child stands straight with heels and back against a wall, looking ahead. Put a book flat on the head against the wall, mark the wall under it, and measure from the floor to the mark.
+ui.gr.m.muac	فیتهٔ بازو، از ۶ ماهگی: وسط بازوی چپ را پیدا کنید، فیته را آرام بپیچانید، نه سخت، و رنگ را در کلکین فیته ببینید.	Arm tape, from 6 months: find the middle of the left upper arm, wrap the tape gently, not tight, and read the colour in the window.
+ui.gr.m.exact	عددهای خانه دقیق نیستند. اگر نتیجه شما را نگران می‌کند، کلینیک دوباره اندازه می‌کند.	Numbers from home are not exact. If a result worries you, the clinic will measure again.
+ui.share-app	صحت را با خانواده و دوستان شریک کنید. آن را از گوشی به گوشی بفرستید، حتی بدون انترنت.	Share Sehat with family and friends. Send it from phone to phone, even without internet.
+ui.share-web	صحت را با خانواده و دوستان شریک کنید. لینک را برایشان بفرستید، یا بگذارید با کمرهٔ گوشی باز کنند.	Share Sehat with family and friends. Send them the link, or let them open it with the phone camera.
+ui.sh.nearby	«گوشی‌های نزدیک» را بزنید. یک فهرست باز می‌شود: Quick Share یا بلوتوث را انتخاب کنید، گوشی‌های نزدیک خودشان پیدا می‌شوند. بلوتوث گوشی دیگر باید روشن باشد.	Tap Nearby phones. A list opens: choose Quick Share or Bluetooth, and the phones near you appear by themselves. The other phone must have Bluetooth on.
+ui.sh.apps	یا فایل برنامه را در واتساپ، تلگرام، ایمو یا مسنجر بفرستید. برنامه‌هایی که در این گوشی نیستند، خاکستری هستند.	Or send the app file in WhatsApp, Telegram, IMO or Messenger. Apps that are not on this phone are grey.
+ui.sh.web	لینک صحت را به خانواده و دوستان بفرستید. یک بار با انترنت باز کنند، بعد بدون انترنت هم کار می‌کند.	Send the Sehat link to family and friends. They open it once with internet, and then it works without internet.
+ui.sh.qr	گوشی دیگر می‌تواند با گرفتن کمره به طرف این مربع، صحت را باز کند.	Another phone can open Sehat by pointing its camera at this square.
+ui.sh.apk	در اندروید می‌توانید فایل برنامه را هم بگیرید و بعد بدون انترنت به گوشی‌های دیگر بفرستید.	On Android you can also get the app file, and then send it to other phones without internet.
+ui.sh.b.nearby	گوشی‌های نزدیک: با Quick Share یا بلوتوث بفرستید.	Nearby phones: send by Quick Share or Bluetooth.
+ui.sh.b.whatsapp	در واتساپ بفرستید.	Send in WhatsApp.
+ui.sh.b.telegram	در تلگرام بفرستید.	Send in Telegram.
+ui.sh.b.imo	در ایمو بفرستید.	Send in IMO.
+ui.sh.b.messenger	در مسنجر بفرستید.	Send in Messenger.
+ui.sh.b.other	برنامه‌های دیگر: هر راه دیگری را برای فرستادن انتخاب کنید.	Other apps: choose any other way to send.
+ui.sh.b.link	لینک را بفرستید.	Share the link.
+ui.sh.b.copy	لینک را کاپی کنید و بعد در پیام بگذارید.	Copy the link, then paste it in a message.
+ui.sh.b.apk	فایل برنامهٔ اندروید را بگیرید.	Get the Android app file.
+ui.sh.i1	فایل sehat.apk را که گرفتید باز کنید، مثلاً در واتساپ یا در «فایل‌ها»ی گوشی.	Open the file sehat.apk that you received, for example in WhatsApp or in the phone's Files app.
+ui.sh.i2	اگر گوشی پرسید، «تنظیمات» را بزنید و اجازهٔ نصب از این منبع را روشن کنید. بعد برگردید.	If the phone asks, tap Settings and allow installing apps from this source. Then go back.
+ui.sh.i3	«نصب» را بزنید. اگر گوشی دربارهٔ برنامهٔ ناشناس هشدار داد، «More details» و بعد «Install anyway» را بزنید.	Tap Install. If the phone warns about an unknown app, tap More details, then Install anyway.
+ui.sh.i4	صحت را باز کنید. بدون انترنت کار می‌کند.	Open Sehat. It works without internet.
+ui.sh.iphone	آیفون نمی‌تواند این فایل را نصب کند. در آیفون، لینک را باز کنید.	iPhones cannot install this file. On an iPhone, open the link instead.
 ui.syn.measles	تب و دانه‌های سرخ در تمام بدن؛ شاید سرخکان باشد.	Fever and a red rash all over the body; it may be measles.
 ui.syn.awd	سه بار یا بیشتر اسهال آبکی در یک روز، بدون خون.	Three or more watery stools in one day, with no blood.
 ui.syn.bloody-diarrhoea	اسهال، و در مدفوع خون دیده می‌شود.	Diarrhoea, with blood in the stool.
@@ -547,6 +608,7 @@ measles.after	بعد از سرخکان طفل تا چند هفته ضعیف می
 growth.title	رشد و انکشاف طفل	Growth and development
 growth.lead	طفل صحتمند هر ماه بزرگ‌تر می‌شود و چیزهای تازه یاد می‌گیرد. وزن کردن، بازی و گپ زدن به شما کمک می‌کند ببینید طفل خوب رشد می‌کند.	A healthy child grows and learns new things every month. Weighing, playing and talking help you see that your child is growing well.
 growth.weigh	طفل را هر ماه وزن کنید. طفل را هر ماه برای وزن کردن به کلینیک ببرید، مخصوصاً در ۲ سال اول. کارت رشد را نگه دارید و هر بار با خود ببرید.	Weigh your child every month. Take your child to the clinic to be weighed every month, especially in the first 2 years. Keep the growth card and bring it every time.
+growth.track	رشد طفل خود را دنبال کنید. هر وزن و قد را در برنامه بنویسید و جدول رشد را ببینید.	Track your child's growth. Write each weight and length in the app and see the growth chart.
 growth.early	ماه‌های اول: چه ببینید. بیشتر اطفال حدود ۶ هفتگی می‌خندند، تا ۳ یا ۴ ماهگی سر خود را نگه می‌دارند، و تا ۶ یا ۸ ماهگی می‌نشینند.	First months: what to expect. Most babies smile at about 6 weeks, hold up their head by 3 to 4 months, and sit by 6 to 8 months.
 growth.later	سال‌های اول: چه ببینید. بیشتر اطفال حدود ۱۲ ماهگی اولین کلمه‌ها را می‌گویند، بین ۱۲ تا ۱۸ ماهگی راه می‌روند، و تا ۲ سالگی جمله‌های کوتاه می‌گویند.	First years: what to expect. Most children say first words at about 12 months, walk between 12 and 18 months, and say short sentences by 2 years.
 growth.play	هر روز بازی کنید و گپ بزنید. از روز ولادت، هر روز با طفل گپ بزنید، لالایی بخوانید و بازی کنید. پدر، پدرکلان و مادرکلان هم کمک کنند.	Play and talk every day. From birth, talk, sing and play with your baby every day. Fathers and grandparents can help too.

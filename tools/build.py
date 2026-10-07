@@ -14,6 +14,13 @@ VOICES = ("f", "m")  # f = a woman's voice, m = a man's voice
 PACKS = ("urgent", "children", "women", "everyone")
 
 ui = load(J("content/src/ui.json"))
+# feature files content/src/ui-<feature>.json ({"text": {...}, "say": {...}}) add their buttons and narrated lines to ui.json's
+for f in sorted(glob.glob(J("content/src/ui-*.json"))):
+    extra = load(f)
+    for part in ("text", "say"):
+        for k, v in (extra.get(part) or {}).items():
+            if k in ui[part]: print(f"WARNING {os.path.basename(f)}: {part}.{k} is also in ui.json (ui.json wins)")
+            else: ui[part][k] = v
 sections_cfg = load(J("content/src/sections.json"))
 config = load(J("content/src/config.json"))
 config["contentUrl"] = (config.get("contentUrl") or "").strip().rstrip("/")
@@ -223,7 +230,7 @@ pack_size = {slot: {p: [sum(audio_bytes[slot].get(k, 0) for k in ids), sum(1 for
 book["packs"] = {"order": list(PACKS), "ids": pack_ids, "size": pack_size}
 
 # precache list: everything the app needs offline except audio
-pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"]
+pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json",) if exists(p)]  # WHO growth tables (js/growth.js)
 for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png"):
     pre += sorted(os.path.relpath(p, ROOT) for p in glob.glob(J(pat)))
 # js/cine/*.js is the CPR drawing kit and anim/cine/*.js the CPR versions built with it: js/anim.js loads anim/cine/<name>.js

@@ -268,7 +268,7 @@ const SECTIONS = ['children', 'women', 'everyone'];
 const LISTS = [...SECTIONS, 'kit', 'emergency'];
 // same as tools/validate.py: where a "link" block can go
 const TOOLS = ['breaths', 'reading', 'reading/temp', 'reading/bp', 'reading/sugar', 'reading/spo2', 'reading/muac'];
-const LINK_RE = /^(tool\/([a-z0-9/-]+)|topic\/([a-z0-9-]+)|kit|family|near)$/;
+const LINK_RE = /^(tool\/([a-z0-9/-]+)|topic\/([a-z0-9-]+)|kit|family|near|growth|growth\/measure|share)$/;
 const ID_RE = /^[a-z0-9-]+(\.[a-z0-9-]+)*$/;
 // same list as tools/validate.py
 const ICONS = `clinic hospital car phone calendar clock moon family talk card check no warning money house
@@ -947,7 +947,7 @@ function adminClient(cfg) {
   const L0 = () => ({ fa: '', ps: '', en: '' });
   const hasL = (x) => !!x && typeof x === 'object' && LANGS.some((lg) => String(x[lg] || '').trim());
   // where a link block can go: the app's tools, the home kit, the family record, the clinic finder, any topic
-  const linkTargets = () => [...cfg.tools.map((x) => ['tool/' + x, 'Tool: ' + x]), ['kit', 'Home health kit page'], ['family', 'My family (vaccine card)'], ['near', 'Nearest clinic'],
+  const linkTargets = () => [...cfg.tools.map((x) => ['tool/' + x, 'Tool: ' + x]), ['kit', 'Home health kit page'], ['family', 'My family (vaccine card)'], ['near', 'Nearest clinic'], ['growth', 'Growth tracker (charts)'], ['growth/measure', 'How to measure at home'], ['share', 'Share Sehat'],
     ...Object.keys(D.topics).sort().map((x) => ['topic/' + x, 'Topic: ' + ((D.topics[x].title && D.topics[x].title.en) || x)])];
   let D = null, PUB = null, AU = {}, DIRTY = false, CUR = null, CHECK = null, Q = { words: '', audio: '', places: '' };
   const pending = new Set(); let timer = null, chain = Promise.resolve(), saveErr = false;

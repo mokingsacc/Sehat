@@ -36,16 +36,15 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 | `FHBAndroid.shareApp()` | opens the share sheet with the installed APK (`sehat.apk`) |
 | `FHBAndroid.shareFile(base64, name, mime)` | shares a file made by the page (used by the `navigator.share` shim) |
 | `FHBAndroid.shareText(title, text)` | shares text |
+| `FHBAndroid.shareAppTo(pkg)` | sends the APK straight to one messaging app (WhatsApp, Telegram, IMO, Messenger; only the packages listed in `ShareTargets.java` and in the manifest `<queries>`); falls back to the share sheet |
+| `FHBAndroid.isInstalled(pkg)` | `true` if that messaging app is on the phone (used to grey out its button) |
+| `FHBAndroid.apkSize()` | size of the APK in bytes, shown on the share screen |
 
-### The one-line change in the web app (`js/app.js`)
-To show a "Send this app to another phone" button in Settings, add this line in `screenSettings()` right after the
-line that adds the `ui.share` row:
-```js
-  if (window.FHBAndroid) html += `<div class="srow">${ic('phone')}<button class="grow" onclick="FHBAndroid.shareApp()" style="text-align:start"><div class="t">این برنامه را به تلفن دیگر بفرستید · دا اپ بل تلیفون ته ولېږئ</div></button></div>`;
-```
-(Better later: put the label in `content/src/ui.json` and use `T('sendApp')`. Have a Dari and a Pashto speaker check the
-wording.) Even without this line, the existing **Share** button already sends the APK inside the Android app while
-`appUrl` is empty.
+### Share Sehat (`js/share.js`, route `#/share`)
+The web app's **Share Sehat** screen (home card and Settings row) uses these calls: a Nearby button (`shareApp()`, the
+Android share sheet with Quick Share and Bluetooth), one button per messaging app (`shareAppTo(pkg)`, greyed out when
+`isInstalled(pkg)` is false), and an "Other apps" button. In a browser the same screen shares the web link and shows an
+offline QR code.
 
 ## Getting the APK (no programming)
 Every push to `main` (and the **Run workflow** button under **Actions → Android app**) builds a signed `sehat.apk`.

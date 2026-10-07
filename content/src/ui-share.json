@@ -1,0 +1,207 @@
+{
+ "_note": "Share Sehat (js/share.js, js/qr.js, the Android bridge in android/): buttons (text) and narrated lines (say). Merged into ui.json by tools/build.py.",
+ "text": {
+  "shareApp": {
+   "fa": "صحت را شریک کنید",
+   "ps": "صحت شریک کړئ",
+   "en": "Share Sehat"
+  },
+  "shareAppSub": {
+   "fa": "از گوشی به گوشی، بدون انترنت",
+   "ps": "له ټیلیفون نه ټیلیفون ته، بې انټرنېټه",
+   "en": "Phone to phone, no internet needed"
+  },
+  "shareWebSub": {
+   "fa": "لینک را به خانواده و دوستان بفرستید",
+   "ps": "لینک کورنۍ او ملګرو ته ولېږئ",
+   "en": "Send the link to family and friends"
+  },
+  "nearby": {
+   "fa": "گوشی‌های نزدیک",
+   "ps": "نږدې ټیلیفونونه",
+   "en": "Nearby phones"
+  },
+  "nearbySub": {
+   "fa": "Quick Share یا بلوتوث",
+   "ps": "Quick Share یا بلوتوث",
+   "en": "Quick Share or Bluetooth"
+  },
+  "sendFile": {
+   "fa": "فرستادن فایل برنامه",
+   "ps": "د اپ فایل لېږل",
+   "en": "Send the app file"
+  },
+  "otherApps": {
+   "fa": "برنامه‌های دیگر",
+   "ps": "نور اپونه",
+   "en": "Other apps"
+  },
+  "notOnPhone": {
+   "fa": "در این گوشی نیست",
+   "ps": "په دې ټیلیفون کې نشته",
+   "en": "Not on this phone"
+  },
+  "shareLink": {
+   "fa": "فرستادن لینک",
+   "ps": "لینک لېږل",
+   "en": "Share the link"
+  },
+  "copyLink": {
+   "fa": "کاپی کردن لینک",
+   "ps": "لینک کاپي کول",
+   "en": "Copy the link"
+  },
+  "qrTitle": {
+   "fa": "با کمره باز کنید",
+   "ps": "په کمره یې خلاص کړئ",
+   "en": "Open with the camera"
+  },
+  "installHelp": {
+   "fa": "فایلی را که گرفتید چطور نصب کنید",
+   "ps": "هغه فایل چې درته راغلی څنګه نصب کړئ",
+   "en": "How to install the file you received"
+  },
+  "getApk": {
+   "fa": "گرفتن فایل برنامهٔ اندروید",
+   "ps": "د اندروید اپ فایل اخیستل",
+   "en": "Get the Android app file"
+  },
+  "cantSend": {
+   "fa": "این برنامه فایل را نگرفت. راه دیگری را انتخاب کنید.",
+   "ps": "دې اپ فایل وانه خیست. بله لار وټاکئ.",
+   "en": "This app could not take the file. Choose another way."
+  },
+  "fileSize": {
+   "fa": "فایل حدود {n} است",
+   "ps": "فایل شاوخوا {n} دی",
+   "en": "The file is about {n}"
+  },
+  "appWhatsApp": {
+   "fa": "واتساپ",
+   "ps": "واټساپ",
+   "en": "WhatsApp"
+  },
+  "appTelegram": {
+   "fa": "تلگرام",
+   "ps": "ټلګرام",
+   "en": "Telegram"
+  },
+  "appImo": {
+   "fa": "ایمو",
+   "ps": "ایمو",
+   "en": "IMO"
+  },
+  "appMessenger": {
+   "fa": "مسنجر",
+   "ps": "مسنجر",
+   "en": "Messenger"
+  }
+ },
+ "say": {
+  "ui.share-app": {
+   "fa": "صحت را با خانواده و دوستان شریک کنید. آن را از گوشی به گوشی بفرستید، حتی بدون انترنت.",
+   "ps": "صحت له کورنۍ او ملګرو سره شریک کړئ. له یوه ټیلیفون څخه یې بل ته ولېږئ، حتی بې انټرنېټه.",
+   "en": "Share Sehat with family and friends. Send it from phone to phone, even without internet."
+  },
+  "ui.share-web": {
+   "fa": "صحت را با خانواده و دوستان شریک کنید. لینک را برایشان بفرستید، یا بگذارید با کمرهٔ گوشی باز کنند.",
+   "ps": "صحت له کورنۍ او ملګرو سره شریک کړئ. لینک ورته ولېږئ، یا پرېږدئ چې د ټیلیفون په کمره یې خلاص کړي.",
+   "en": "Share Sehat with family and friends. Send them the link, or let them open it with the phone camera."
+  },
+  "ui.sh.nearby": {
+   "fa": "«گوشی‌های نزدیک» را بزنید. یک فهرست باز می‌شود: Quick Share یا بلوتوث را انتخاب کنید، گوشی‌های نزدیک خودشان پیدا می‌شوند. بلوتوث گوشی دیگر باید روشن باشد.",
+   "ps": "«نږدې ټیلیفونونه» ووهئ. یو لېست خلاصېږي: Quick Share یا بلوتوث وټاکئ، نږدې ټیلیفونونه پخپله ښکاري. د بل ټیلیفون بلوتوث باید روښانه وي.",
+   "en": "Tap Nearby phones. A list opens: choose Quick Share or Bluetooth, and the phones near you appear by themselves. The other phone must have Bluetooth on."
+  },
+  "ui.sh.apps": {
+   "fa": "یا فایل برنامه را در واتساپ، تلگرام، ایمو یا مسنجر بفرستید. برنامه‌هایی که در این گوشی نیستند، خاکستری هستند.",
+   "ps": "یا د اپ فایل په واټساپ، ټلګرام، ایمو یا مسنجر کې ولېږئ. هغه اپونه چې په دې ټیلیفون کې نشته، خړ دي.",
+   "en": "Or send the app file in WhatsApp, Telegram, IMO or Messenger. Apps that are not on this phone are grey."
+  },
+  "ui.sh.web": {
+   "fa": "لینک صحت را به خانواده و دوستان بفرستید. یک بار با انترنت باز کنند، بعد بدون انترنت هم کار می‌کند.",
+   "ps": "د صحت لینک کورنۍ او ملګرو ته ولېږئ. یو ځل یې له انټرنېټ سره خلاص کړي، بیا بې انټرنېټه هم کار کوي.",
+   "en": "Send the Sehat link to family and friends. They open it once with internet, and then it works without internet."
+  },
+  "ui.sh.qr": {
+   "fa": "گوشی دیگر می‌تواند با گرفتن کمره به طرف این مربع، صحت را باز کند.",
+   "ps": "بل ټیلیفون کولای شي چې د دې څلورګوټي لور ته د کمرې په نیولو صحت خلاص کړي.",
+   "en": "Another phone can open Sehat by pointing its camera at this square."
+  },
+  "ui.sh.apk": {
+   "fa": "در اندروید می‌توانید فایل برنامه را هم بگیرید و بعد بدون انترنت به گوشی‌های دیگر بفرستید.",
+   "ps": "په اندروید کې کولای شئ د اپ فایل هم واخلئ او بیا یې بې انټرنېټه نورو ټیلیفونونو ته ولېږئ.",
+   "en": "On Android you can also get the app file, and then send it to other phones without internet."
+  },
+  "ui.sh.b.nearby": {
+   "fa": "گوشی‌های نزدیک: با Quick Share یا بلوتوث بفرستید.",
+   "ps": "نږدې ټیلیفونونه: په Quick Share یا بلوتوث یې ولېږئ.",
+   "en": "Nearby phones: send by Quick Share or Bluetooth."
+  },
+  "ui.sh.b.whatsapp": {
+   "fa": "در واتساپ بفرستید.",
+   "ps": "په واټساپ کې یې ولېږئ.",
+   "en": "Send in WhatsApp."
+  },
+  "ui.sh.b.telegram": {
+   "fa": "در تلگرام بفرستید.",
+   "ps": "په ټلګرام کې یې ولېږئ.",
+   "en": "Send in Telegram."
+  },
+  "ui.sh.b.imo": {
+   "fa": "در ایمو بفرستید.",
+   "ps": "په ایمو کې یې ولېږئ.",
+   "en": "Send in IMO."
+  },
+  "ui.sh.b.messenger": {
+   "fa": "در مسنجر بفرستید.",
+   "ps": "په مسنجر کې یې ولېږئ.",
+   "en": "Send in Messenger."
+  },
+  "ui.sh.b.other": {
+   "fa": "برنامه‌های دیگر: هر راه دیگری را برای فرستادن انتخاب کنید.",
+   "ps": "نور اپونه: د لېږلو بله هره لار وټاکئ.",
+   "en": "Other apps: choose any other way to send."
+  },
+  "ui.sh.b.link": {
+   "fa": "لینک را بفرستید.",
+   "ps": "لینک ولېږئ.",
+   "en": "Share the link."
+  },
+  "ui.sh.b.copy": {
+   "fa": "لینک را کاپی کنید و بعد در پیام بگذارید.",
+   "ps": "لینک کاپي کړئ او بیا یې په پیغام کې کېږدئ.",
+   "en": "Copy the link, then paste it in a message."
+  },
+  "ui.sh.b.apk": {
+   "fa": "فایل برنامهٔ اندروید را بگیرید.",
+   "ps": "د اندروید اپ فایل واخلئ.",
+   "en": "Get the Android app file."
+  },
+  "ui.sh.i1": {
+   "fa": "فایل sehat.apk را که گرفتید باز کنید، مثلاً در واتساپ یا در «فایل‌ها»ی گوشی.",
+   "ps": "هغه sehat.apk فایل چې درته راغلی خلاص کړئ، د بېلګې په توګه په واټساپ یا د ټیلیفون په «فایلونو» کې.",
+   "en": "Open the file sehat.apk that you received, for example in WhatsApp or in the phone's Files app."
+  },
+  "ui.sh.i2": {
+   "fa": "اگر گوشی پرسید، «تنظیمات» را بزنید و اجازهٔ نصب از این منبع را روشن کنید. بعد برگردید.",
+   "ps": "که ټیلیفون وپوښتل، «تنظیمات» ووهئ او له دې سرچینې د نصبولو اجازه روښانه کړئ. بیا شاته راشئ.",
+   "en": "If the phone asks, tap Settings and allow installing apps from this source. Then go back."
+  },
+  "ui.sh.i3": {
+   "fa": "«نصب» را بزنید. اگر گوشی دربارهٔ برنامهٔ ناشناس هشدار داد، «More details» و بعد «Install anyway» را بزنید.",
+   "ps": "«نصب» ووهئ. که ټیلیفون د ناپېژندل شوي اپ په اړه خبرداری ورکړ، «More details» او بیا «Install anyway» ووهئ.",
+   "en": "Tap Install. If the phone warns about an unknown app, tap More details, then Install anyway."
+  },
+  "ui.sh.i4": {
+   "fa": "صحت را باز کنید. بدون انترنت کار می‌کند.",
+   "ps": "صحت خلاص کړئ. بې انټرنېټه کار کوي.",
+   "en": "Open Sehat. It works without internet."
+  },
+  "ui.sh.iphone": {
+   "fa": "آیفون نمی‌تواند این فایل را نصب کند. در آیفون، لینک را باز کنید.",
+   "ps": "آیفون دا فایل نشي نصبولای. په آیفون کې لینک خلاص کړئ.",
+   "en": "iPhones cannot install this file. On an iPhone, open the link instead."
+  }
+ }
+}

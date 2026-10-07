@@ -13,7 +13,7 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
 TYPES = {"lead", "step", "alert", "dont", "tip", "link", "anim"}
 # "link" blocks open another screen of the app: a tool, a topic, the home kit, the family record or the clinic finder
 TOOLS = {"breaths", "reading", "reading/temp", "reading/bp", "reading/sugar", "reading/spo2", "reading/muac"}
-LINK_RE = re.compile(r'^(tool/(?P<tool>[a-z0-9/-]+)|topic/(?P<topic>[a-z0-9-]+)|kit|family|near)$')
+LINK_RE = re.compile(r'^(tool/(?P<tool>[a-z0-9/-]+)|topic/(?P<topic>[a-z0-9-]+)|kit|family|near|growth|growth/measure|share)$')
 SECTIONS = {"children", "women", "everyone"}
 # lists in content/src/sections.json: the three sections, plus "kit" (the home health kit page) and "emergency" (the Emergency screen)
 SECTION_LISTS = SECTIONS | {"kit", "emergency"}
@@ -299,6 +299,22 @@ def check_search():
                 if fld == "lat" and re.search(r"[\u0600-\u06ff]", y): warn(f, f"{k}.lat: {y!r} has Arabic letters")
     print(f"search-phrases.json: {len(d.get('pages') or {})} pages, {n} phrases, {review} marked ? for native review")
 check_search()
+def check_ui_features():
+    # content/src/ui-<feature>.json: extra buttons (text) and narrated lines (say) that tools/build.py adds to ui.json's
+    fu = os.path.join(ROOT, "content/src/ui.json")
+    try: base = json.load(open(fu, encoding="utf-8"))
+    except Exception: return
+    seen = {part: set(base.get(part) or {}) for part in ("text", "say")}
+    for f in sorted(glob.glob(os.path.join(ROOT, "content/src/ui-*.json"))):
+        try: d = json.load(open(f, encoding="utf-8"))
+        except Exception as e: err(f, f"invalid JSON: {e}"); continue
+        for part in ("text", "say"):
+            for k, L in (d.get(part) or {}).items():
+                if k in seen[part]: err(f, f"{part}.{k} is defined twice (ui.json or another ui-*.json)")
+                seen[part].add(k)
+                if part == "say" and (not ID_RE.match(k) or not k.startswith("ui.")): err(f, f"say.{k}: narration ids look like ui.<name>")
+                check_L(f, f"{part}.{k}", L, 45 if part == "say" else None)
+check_ui_features()
 
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst

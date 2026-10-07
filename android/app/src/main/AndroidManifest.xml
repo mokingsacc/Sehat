@@ -18,6 +18,21 @@
     <uses-feature android:name="android.hardware.location.network" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
+    <!-- Share Sehat sends the app file straight to these messaging apps when they are on the phone (ShareTargets.java).
+         Android 11+ hides other apps unless they are listed here. -->
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.whatsapp.w4b" />
+        <package android:name="org.telegram.messenger" />
+        <package android:name="org.telegram.messenger.web" />
+        <package android:name="org.thunderdog.challegram" />
+        <package android:name="com.imo.android.imoim" />
+        <package android:name="com.imo.android.imoimbeta" />
+        <package android:name="com.imo.android.imoimlite" />
+        <package android:name="com.facebook.orca" />
+        <package android:name="com.facebook.mlite" />
+    </queries>
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
