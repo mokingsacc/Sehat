@@ -4276,3 +4276,37 @@ Adults screen group: `text.mindStress` Mind and stress / ذهن و فشار رو
 - pregnancy-care fa removed (moved to birth-plan): ولادت در خانه · پلان ولادت · کجا ولادت کنم
 - pregnancy-care ps removed (moved to birth-plan): د زېږون پلان
 - pregnancy-care en removed (moved to birth-plan): birth plan · where to give birth · home birth
+
+## Picture-step player (2026-10-07, worker steps-player)
+
+The engine for Mo's ChatGPT pictures. Nothing medical is live: `STEPS` in `js/anim.js` is empty, so no topic uses
+it yet.
+
+- What it is: `js/steps.js` plays `anim/steps/<name>.json` with layered WebP pictures from `img/steps/<name>/` inside the usual
+  animation player. It provides:
+  - camera paths;
+  - push loops with full recoil, and "slow, then full speed";
+  - up/down layer swaps, fades, moves and cross-fades;
+  - rings, arrows, dotted guides, dots, depth brackets, shades, ticks and crosses, crossed app icons and waves;
+  - counters and timers in Persian digits.
+
+  Pictures are never flipped, and reduced motion shows the key frame with every overlay. Format and steps:
+  `docs/STEPS_PLAYER.md`.
+- Pictures in: `tools/steps_images.py` takes the briefs' file names (or ChatGPT's step-NN-LL names). It checks sizes and
+  transparency and removes stray detached bits; on Mo's frame it removed the sleeve fragment at x 1444-1516,
+  y 688-804. It trims and writes WebP under 60 KB a layer. Mo's first frame: 43 + 13 + 17 = 73 KB.
+- Going live: Mo approves, then `"approved"` in the JSON (the validator refuses a live animation without it), then
+  the name in `STEPS`, then build. A live animation's JSON and pictures are precached, which is what CPR needs.
+- Demo (not in the app): `/home/claude/steps-demo/demo/`. Strip: `previews/steps/cpr-baby-strip.png` and
+  `cpr-baby-press-vs-rest.png`.
+
+For Mo to check (medical):
+1. The ring and arrow on the baby frame: centred on the thumbs, on the lower half of the breastbone just below the
+   nipple line (dotted line across the nipples first).
+2. How pressing looks seen from above: the hands shrink about 2% toward the feet (the thumbs move about 4 px), a
+   shadow under the thumbs, and the chest darkens slightly on each push, then comes fully back.
+3. Timing: 3 slow pushes (40 a minute), then 110 a minute to 30. Each push is 40% going down, a short hold, 40%
+   coming up and a short rest.
+4. Mo's picture itself: the two-thumb grip, the fingers round the chest, and the mother's position at the feet.
+
+For a Dari and Pashto reader: the demo's own test lines in `demo/anim/narration.json` (demo only, not in the app).
