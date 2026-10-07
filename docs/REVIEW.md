@@ -1896,3 +1896,18 @@ For Mo and native speakers. Code: js/growth.js, js/growth-calc.js, js/share.js, 
 </details>
 
 Words to check: Dari فیتهٔ بازو (arm tape, MUAC), خوابیده / ایستاده (lying / standing), جدول رشد; Pashto د مټ فیته, پرېوتی / ولاړ, د ودې چارټ. "Quick Share" and "sehat.apk" are left in Latin letters on purpose (that is what the phone shows).
+
+## Audit fixes (2026-10-07): points for Mo
+
+These came from fixing the 7 October audit (`audit/AUDIT-2026-10-07.md`, section "Audit fixes"). There are new and changed lines to check, and one rule to confirm.
+
+- **say.ui.micNotice** (narrated, shown once before the first use of the microphone in "What is wrong?"): tells people that the phone sends their voice over the internet to Google's speech service and that the app does not keep it. Dari: «برای فهمیدن گپ شما، گوشی آواز شما را از راه انترنت به خدمت گفتار گوگل می‌فرستد. این برنامه آواز شما را ذخیره نمی‌کند. می‌توانید به جای آن بنویسید یا یک تصویر را انتخاب کنید.» Pashto: «ستاسو د خبرو د پوهېدو لپاره، ټیلیفون ستاسو غږ د انټرنېټ له لارې د ګوګل د خبرو خدمت ته لېږي. دا اپ ستاسو غږ نه ساتي. تاسو کولی شئ پر ځای یې ولیکئ یا یو انځور وټاکئ.»
+- **text.micUse**: بلی، می‌گویم / هو، وایم یې (Yes, I will speak). This is the button under that notice.
+- **text.dueTomorrow**: فردا / سبا (tomorrow). This is the vaccine card when the next visit is due tomorrow.
+- **say.ui.privacy.watch** (changed): it now says that reports also carry a random number that changes every month, so that one report is not counted twice. Dari: «همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود». Pashto: «له یوې بې‌نومې شمېرې سره چې هره میاشت بدلېږي، څو یو خبر دوه ځله ونه شمېرل شي».
+- **The "app did not open" message** in `index.html`. It shows only when the phone's browser is too old to run the app, so it has no narration (the app cannot run to play it). Dari: «صحت باز نشد. لطفاً Chrome و Android System WebView را از Play Store تازه کنید و دوباره کوشش کنید.» Pashto: «صحت خلاص نه شو. مهرباني وکړئ Chrome او Android System WebView له Play Store څخه تازه کړئ او بیا هڅه وکړئ.» Button: دوباره · بیا · Try again.
+- **Disease-watch limits** (`server/surveillance.js`):
+  - One phone can send at most 10 reports for any one day of illness. More are refused.
+  - When more than 30 reports come from one district on one day, the extra reports are held, not counted, until you restore them on the watch page.
+  - Please say if these numbers are wrong for a real outbreak in a big district such as Aybak.
+- **Vaccine "due" day.** It is now worked out from the phone's own calendar day, not UTC time. "Today", "tomorrow" and "in N days" should now match what a family expects at any hour.
