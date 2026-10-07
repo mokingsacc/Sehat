@@ -1,6 +1,6 @@
 {
   "appUrl": "https://mokingsacc.github.io/Sehat/",
-  "analyticsUrl": "",
+  "analyticsUrl": "https://sehat.mobinkingsacc.workers.dev/e",
   "_note": "appUrl: the public address people open (used by Share). analyticsUrl: the Cloudflare Worker /e endpoint from server/README.md. Empty analyticsUrl = counts stay queued on the phone and nothing is sent.",
   "home": [
     "install",
@@ -14,9 +14,9 @@
     "disclaimer"
   ],
   "_home": "Order of the blocks on the home screen. Remove a name to hide it. Available: install, ask, nextVaccine, sections, quick, near, feedback, disclaimer.",
-  "feedbackUrl": "",
+  "feedbackUrl": "https://sehat.mobinkingsacc.workers.dev/feedback",
   "_feedbackUrl": "The Cloudflare Worker /feedback address (same server as analyticsUrl).",
-  "contentUrl": "",
+  "contentUrl": "https://sehat.mobinkingsacc.workers.dev",
   "_contentUrl": "The Cloudflare Worker address (no /e at the end), e.g. https://family-health-book.<you>.workers.dev. When set, phones also download the book published from the dashboard editor (/admin) when they are online. Empty = only the book built into the app.",
   "urgentTopics": [
     "danger-child",
