@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS events (
 CREATE INDEX IF NOT EXISTS ev_day ON events(day);
 CREATE INDEX IF NOT EXISTS ev_t ON events(t, day);
 CREATE INDEX IF NOT EXISTS ev_iid ON events(iid, ts);
+CREATE INDEX IF NOT EXISTS ev_ts ON events(ts);
 CREATE TABLE IF NOT EXISTS feedback (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   iid TEXT, ts INTEGER, lang TEXT, version TEXT, page TEXT,
@@ -62,6 +63,7 @@ CREATE TABLE IF NOT EXISTS surv_reports (
 );
 CREATE INDEX IF NOT EXISTS surv_rep_week ON surv_reports(week, syndrome, place);
 CREATE INDEX IF NOT EXISTS surv_rep_iid ON surv_reports(iid, syndrome, day);
+CREATE INDEX IF NOT EXISTS surv_rep_recv ON surv_reports(received_ts, place);
 -- Symptom-finder searches that match a syndrome: a weaker signal, at most one per install, syndrome and day.
 CREATE TABLE IF NOT EXISTS surv_signals (
   seq INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -114,3 +116,8 @@ CREATE TABLE IF NOT EXISTS installs_daily (
 CREATE TABLE IF NOT EXISTS usage_seen (nonce TEXT PRIMARY KEY, ts INTEGER NOT NULL);
 -- Flood protection: posts per minute to /u, /i and /e (old minutes deleted by the daily cron).
 CREATE TABLE IF NOT EXISTS usage_rate (bucket INTEGER PRIMARY KEY, n INTEGER NOT NULL);
+-- Flood protection: rows (or bytes) written per UTC day by each anonymous endpoint, e.g. 'r:2026-10-07' (server/usage.js spend).
+-- Keeps a flood from filling the database or using up the free plan's daily writes. No id or address is kept. Old days deleted by the cron.
+CREATE TABLE IF NOT EXISTS limits_daily (k TEXT PRIMARY KEY, n INTEGER NOT NULL);
+-- Feedback list: newest first.
+CREATE INDEX IF NOT EXISTS fb_ts ON feedback(ts);

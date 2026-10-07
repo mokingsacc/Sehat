@@ -238,14 +238,21 @@ for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js
 # explicitly because these globs do not recurse). anim/*-3d.js (an earlier plan) is still left out.
 pre = [p for p in pre if not p.startswith("js/sw") and not p.endswith("-3d.js")]
 
-# version = hash of all precached content
+# version = hash of all precached content (not of the build time: rebuilding the same content keeps the same version,
+# so phones do not download an "update" that changes nothing)
 hsh = hashlib.sha1()
-book_bytes = json.dumps(book, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
+book_bytes = json.dumps(dict(book, built=""), ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode()
 hsh.update(book_bytes)
 for p in pre:
     if p in ("./", "content/book.json"): continue
     hsh.update(p.encode()); hsh.update(open(J(p), "rb").read())
 version = datetime.date.today().strftime("%Y.%m.%d") + "-" + hsh.hexdigest()[:6]
+try:
+    prev = json.load(open(J("content/book.json"), encoding="utf-8"))
+    if str(prev.get("version", "")).endswith("-" + hsh.hexdigest()[:6]) and prev.get("built"):
+        version, book["built"] = prev["version"], prev["built"]
+except (OSError, ValueError):
+    pass
 book["version"] = version
 
 os.makedirs(J("content"), exist_ok=True)

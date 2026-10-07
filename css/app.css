@@ -64,7 +64,7 @@ img{max-width:100%;display:block}
 .quick{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:6px;min-height:118px;position:relative}
 .quick .ic{width:40px;height:40px;color:var(--accent)}
 .quick .t{font-size:17px;font-weight:700;line-height:1.35;padding-inline-end:46px}
-.quick .spk{position:absolute;inset-inline-end:8px;bottom:8px;width:42px;height:42px}
+.quick .spk{position:absolute;right:8px;inset-inline-end:8px;bottom:8px;width:42px;height:42px}
 .quick.danger{background:var(--red);border-color:var(--red);color:#fff}.quick.danger .ic{color:#fff}
 
 /* section list */
@@ -76,14 +76,15 @@ img{max-width:100%;display:block}
 .tcard .pic{aspect-ratio:9/5;background:var(--accent-t)}
 .tcard .pic img{width:100%;height:100%;object-fit:cover}
 .tcard .row{display:flex;align-items:flex-start;gap:6px;padding:8px 10px 10px}
+.tcard .row>a{min-width:0;overflow-wrap:anywhere}
 .tcard .t{font-size:16px;font-weight:700;line-height:1.35;flex:1 1 auto}
 .tcard .s{font-size:12.5px;color:var(--mute);line-height:1.45;margin-top:2px}
-.tcard .spk{width:42px;height:42px}
+.tcard .spk{width:42px;height:42px;flex:0 0 auto}
 
 /* topic */
 .topic-hero{margin:0 -16px 10px;position:relative;background:var(--accent-t)}
 .topic-hero img{width:100%;aspect-ratio:9/5;object-fit:cover}
-.topic-hero .round{position:absolute;top:12px;inset-inline-start:12px}
+.topic-hero .round{position:absolute;top:12px;left:12px;inset-inline-start:12px}
 .title-row{display:flex;align-items:center;gap:10px;margin:4px 0 10px}
 .title-row h1{font-size:25px;line-height:1.35;margin:0;flex:1 1 auto}
 .blk{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;transition:box-shadow .2s}
@@ -174,9 +175,10 @@ img{max-width:100%;display:block}
 .sbtn{background:var(--teal);color:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14.5px;min-height:42px}
 .sbtn.ok{background:var(--green-t);color:var(--green)}
 .toggle{width:52px;height:32px;border-radius:999px;background:var(--line);position:relative;flex:0 0 auto}
-.toggle::after{content:"";position:absolute;top:4px;inset-inline-start:4px;width:24px;height:24px;border-radius:999px;background:#fff;transition:inset-inline-start .15s}
+.toggle::before{content:"";position:absolute;top:-6px;bottom:-6px;left:-4px;right:-4px} /* a 44 px tall touch area */
+.toggle::after{content:"";position:absolute;top:4px;left:4px;inset-inline-start:4px;width:24px;height:24px;border-radius:999px;background:#fff;transition:inset-inline-start .15s}
 .toggle[aria-pressed=true]{background:var(--green)}
-.toggle[aria-pressed=true]::after{inset-inline-start:24px}
+.toggle[aria-pressed=true]::after{left:24px;inset-inline-start:24px}
 
 /* banner */
 .banner{display:flex;align-items:center;gap:12px;background:var(--teal);color:#fff;border-radius:18px;padding:10px 12px;margin-bottom:12px;width:100%;text-align:start}
@@ -216,7 +218,7 @@ img{max-width:100%;display:block}
 
 #toast{position:fixed;left:50%;bottom:calc(92px + var(--safe-b));transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:14px;font-size:15.5px;opacity:0;pointer-events:none;transition:all .25s;z-index:30;max-width:90vw;text-align:center}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.dialog-wrap{position:fixed;inset:0;background:rgba(34,32,29,.45);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.dialog-wrap{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;background:rgba(34,32,29,.45);z-index:40;display:flex;align-items:flex-end;justify-content:center}
 .dialog{background:var(--bg);width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:18px 16px calc(20px + var(--safe-b));max-height:92vh;overflow:auto}
 .dialog h2{margin:0 0 6px;font-size:21px}
 .muted{color:var(--mute);font-size:14px}
@@ -229,7 +231,7 @@ img{max-width:100%;display:block}
 .mic{width:54px;height:54px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .mic svg{width:26px;height:26px}.mic.on{animation:pulse 1s infinite;background:#7A1F1B}
 .askbox{display:flex;gap:8px;margin-bottom:12px}
-.askbox input{flex:1;font:inherit;font-size:19px;padding:10px 14px;border:2px solid var(--line);border-radius:16px;min-height:56px;background:#fff;color:var(--ink)}
+.askbox input{flex:1;min-width:0;width:100%;font:inherit;font-size:19px;padding:10px 14px;border:2px solid var(--line);border-radius:16px;min-height:56px;background:#fff;color:var(--ink)}
 .sub-h{font-size:17px;margin:14px 0 8px}
 .symgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .sym{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:14px;font-weight:600;line-height:1.35;min-height:96px;text-align:center}
@@ -240,7 +242,7 @@ img{max-width:100%;display:block}
 .rcard .rt{flex:1;display:flex;flex-direction:column}.rcard .rt span{font-size:13px;color:var(--mute);line-height:1.45}
 .hit{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 12px;margin-bottom:8px}
 .hit .ht{display:block;font-size:13px;color:var(--accent);font-weight:700}.hit .hx{font-size:15px}
-.banner.fbk{background:var(--amber)}
+.banner.fbk{background:#866000} /* darker than --amber: the small text keeps 5:1 contrast */
 .banner a.grow{color:#fff}
 .fac{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;margin:10px 0}
 .fh{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:17px}
@@ -316,7 +318,7 @@ img{max-width:100%;display:block}
 .pick .pbody .t{font-size:20px;font-weight:700;line-height:1.35;flex:1 1 0;min-width:0}
 .pick .pbody .s{flex:1 0 100%;font-size:13.5px;color:var(--mute);padding-inline-start:66px;margin-top:-6px}
 .pick .pbody:active{border-color:var(--accent);background:var(--accent-t)}
-.pick>.spk{position:absolute;top:50%;inset-inline-end:10px;transform:translateY(-50%)}
+.pick>.spk{position:absolute;top:50%;right:10px;inset-inline-end:10px;transform:translateY(-50%)}
 .agechip{display:flex;align-items:center;gap:10px;background:var(--accent-t);border-radius:16px;padding:8px 12px;margin:0 0 10px;font-weight:700;font-size:17px}
 .agechip .ic{width:34px;height:34px;color:var(--accent);flex:0 0 auto}
 .agechip span{flex:1 1 auto}
@@ -329,7 +331,7 @@ img{max-width:100%;display:block}
 .clock svg{width:100%;height:100%;transform:rotate(-90deg)}
 .clock .trk{fill:none;stroke:var(--line);stroke-width:8}
 .clock .arc{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;stroke-dasharray:289;transition:stroke-dashoffset .2s linear}
-.clock>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.clock>div{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
 .clock b{font-size:44px}
 .clock span{font-size:13px;color:var(--mute)}
 .tapbig{width:min(76vw,300px);height:min(76vw,300px);border-radius:999px;background:var(--accent);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 10px 28px rgba(182,50,45,.35),inset 0 -8px 0 rgba(0,0,0,.12);touch-action:manipulation;user-select:none;-webkit-user-select:none}
@@ -383,7 +385,7 @@ img{max-width:100%;display:block}
 .dev .dbody{display:flex;flex-direction:column;width:100%;background:var(--card);border:2px solid var(--line);border-radius:18px;overflow:hidden;text-align:start;height:100%}
 .dev .dbody img{width:100%;aspect-ratio:9/5;object-fit:cover;background:var(--teal-t)}
 .dev .dbody .t{font-size:16.5px;font-weight:700;line-height:1.35;padding:8px 10px 12px;padding-inline-end:52px;min-height:58px}
-.dev>.spk{position:absolute;bottom:8px;inset-inline-end:8px;width:42px;height:42px}
+.dev>.spk{position:absolute;bottom:8px;right:8px;inset-inline-end:8px;width:42px;height:42px}
 .dev .dbody:active{border-color:var(--accent)}
 .vals{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 10px}
 .val{flex:1 1 0;max-width:180px;display:flex;flex-direction:column;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:6px 8px;min-height:92px;justify-content:center}
@@ -463,7 +465,7 @@ img{max-width:100%;display:block}
 .anim-block{flex-direction:column;padding:0;overflow:hidden;gap:0}
 .anim-block .poster{position:relative;display:block;width:100%;aspect-ratio:3/2;background:var(--accent-t)}
 .anim-block .poster .anim-svg{width:100%;height:100%;display:block}
-.anim-block .poster .play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:999px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(34,32,29,.28);border:4px solid #fff}
+.anim-block .poster .play{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;margin:auto;width:76px;height:76px;border-radius:999px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(34,32,29,.28);border:4px solid #fff}
 .anim-block .poster .play svg{width:36px;height:36px;fill:#fff}
 .anim-block .row{display:flex;align-items:center;gap:10px;padding:10px 12px;width:100%}
 .anim-block .t{flex:1 1 auto;font-weight:700;font-size:18px;line-height:1.4}
@@ -475,3 +477,12 @@ img{max-width:100%;display:block}
 .askbox input{min-width:0} /* a long placeholder or query must not push the microphone off a narrow phone */
 .rcard .rimg .ricon{display:flex;align-items:center;justify-content:center;aspect-ratio:9/5;color:var(--red)}
 .rcard .rimg .ricon .ic,.rcard .rimg .ricon svg{width:34px;height:34px}
+
+/* Older Android WebViews (before Chrome 87) do not know inset-inline-*: the physical left/right above are for them,
+   and these turn them round for right-to-left pages. Newer phones use inset-inline-* and give the same result. */
+[dir=rtl] .quick .spk,[dir=rtl] .dev>.spk{right:auto;left:8px}
+[dir=rtl] .pick>.spk{right:auto;left:10px}
+[dir=rtl] .topic-hero .round{left:auto;right:12px}
+[dir=rtl] .toggle::after{left:auto;right:4px}
+[dir=rtl] .toggle[aria-pressed=true]::after{left:auto;right:24px}
+.askbox .mic{flex:0 0 auto}

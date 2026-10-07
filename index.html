@@ -17,9 +17,33 @@
 <link rel="stylesheet" href="css/growth-share.css">
 </head>
 <body>
-<div id="app" aria-live="polite"><div class="boot"><div class="boot-book"></div></div></div>
+<div id="app"><div class="boot"><div class="boot-book"></div></div></div>
 <div id="toast" role="status"></div>
+<script>
+// Old phones: if the app cannot start (its code is too new for this browser), say how to fix it instead of
+// showing the loading book forever. Plain ES5 on purpose. js/app.js sets window.SEHAT_STARTED as it starts.
+(function () {
+  var shown = false;
+  window.sehatBootFail = function () {
+    var app = document.getElementById('app');
+    if (shown || !app || !app.querySelector('.boot')) return;
+    shown = true;
+    var d = document.createElement('div');
+    d.className = 'bootfail';
+    d.style.cssText = 'padding:24px 20px;text-align:center;line-height:1.8;font-size:18px;max-width:520px;margin:0 auto';
+    d.innerHTML = '<p dir="rtl" lang="fa-AF">صحت باز نشد. لطفاً Chrome و Android System WebView را از Play Store تازه کنید و دوباره کوشش کنید.</p>' +
+      '<p dir="rtl" lang="ps">صحت خلاص نه شو. مهرباني وکړئ Chrome او Android System WebView له Play Store څخه تازه کړئ او بیا هڅه وکړئ.</p>' +
+      '<p dir="ltr" lang="en">Sehat did not open. Please update Chrome and Android System WebView from the Play Store, then try again.</p>' +
+      '<p><button type="button" style="font-size:18px;padding:10px 22px;border-radius:12px;border:0;background:#B6322D;color:#fff">دوباره · بیا · Try again</button></p>';
+    d.getElementsByTagName('button')[0].onclick = function () { location.reload(); };
+    app.appendChild(d);
+  };
+  window.addEventListener('error', function () { if (!window.SEHAT_STARTED) setTimeout(window.sehatBootFail, 0); });
+  setTimeout(function () { if (!window.SEHAT_STARTED) window.sehatBootFail(); }, 20000);
+})();
+</script>
 <script type="module" src="js/app.js"></script>
+<script nomodule>window.sehatBootFail();</script>
 <noscript>این برنامه به جاوااسکریپت نیاز دارد. · دې اپ ته جاوا سکریپټ اړین دی.</noscript>
 </body>
 </html>

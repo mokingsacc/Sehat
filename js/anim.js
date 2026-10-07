@@ -18,7 +18,7 @@ const ANIM_BASE = new URL('../anim/', import.meta.url);
 const cache = new Map();
 const DIG = '۰۱۲۳۴۵۶۷۸۹';
 const num = (n, lg) => (lg === 'en' ? String(n) : String(n).replace(/\d/g, (d) => DIG[d]));
-const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 // labels the player needs; the app may pass opts.t(key) (its own T) to override
 const LBL = {
@@ -192,11 +192,11 @@ export async function mountAnimation(el, name, opts = {}) {
   const lg = opts.lang || 'fa';
   const rtl = lg !== 'en';
   const reduce = () => !!opts.still || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const adult = opts.adult ?? !!d.adult;
-  const L = (k) => (opts.t && opts.t(k) && opts.t(k) !== k ? opts.t(k) : (LBL[k][lg] ?? LBL[k].en));
+  const adult = opts.adult != null ? opts.adult : !!d.adult;
+  const L = (k) => (opts.t && opts.t(k) && opts.t(k) !== k ? opts.t(k) : (LBL[k][lg] != null ? LBL[k][lg] : LBL[k].en));
   const text = (id) => {
     if (opts.text) return opts.text(id) || '';
-    const n = opts.narration && opts.narration[id]; return n ? (n[lg] ?? n.en ?? '') : '';
+    const n = opts.narration && opts.narration[id]; return n ? (n[lg] != null ? n[lg] : n.en != null ? n.en : '') : '';
   };
   const titleId = d.id + '.title';
   const n = d.scenes.length;
@@ -221,7 +221,7 @@ export async function mountAnimation(el, name, opts = {}) {
     if (token !== st.token || st.dead) return;
     speakingUI(false);
     clear();
-    const minMs = opts.minMs ?? 3500;
+    const minMs = opts.minMs != null ? opts.minMs : 3500;
     const wait = Math.max(extra, minMs - (Date.now() - st.t0));
     st.timer = setTimeout(function tick() {
       if (token !== st.token || st.dead) return;
@@ -340,10 +340,10 @@ export async function mountPicker(el, name, opts = {}) {
   const g = animGroup(name); if (!g) throw new Error('no animation group ' + name);
   const lg = opts.lang || 'fa';
   const rtl = lg !== 'en';
-  const L = (k) => (opts.t && opts.t(k) && opts.t(k) !== k ? opts.t(k) : (LBL[k][lg] ?? LBL[k].en));
+  const L = (k) => (opts.t && opts.t(k) && opts.t(k) !== k ? opts.t(k) : (LBL[k][lg] != null ? LBL[k][lg] : LBL[k].en));
   const text = (id) => {
     if (opts.text) return opts.text(id) || '';
-    const n = opts.narration && opts.narration[id]; return n ? (n[lg] ?? n.en ?? '') : '';
+    const n = opts.narration && opts.narration[id]; return n ? (n[lg] != null ? n[lg] : n.en != null ? n.en : '') : '';
   };
   const posters = await Promise.all(g.items.map((it) => animPoster(it.anim, it.poster || 0)));
   let dead = false;

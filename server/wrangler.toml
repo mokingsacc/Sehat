@@ -8,6 +8,13 @@ keep_names = false
 # The public address of the app (the GitHub Pages address), without a slash at the end.
 # "Import from app" in /admin copies the book from <APP_URL>/content/book.json.
 APP_URL = ""
+# Daily budgets that keep the free database within its limits (100,000 rows written a day, 500 MB in all).
+# When one is used up the server answers "try later" (429) and the phones keep their data and send it the next day.
+# Defaults are in server/usage.js DAY_LIMITS; to change one, add it here, for example:
+# USAGE_ROWS_PER_DAY = "40000"            # usage-count rows
+# SURV_ROWS_PER_DAY = "10000"             # disease reports
+# FEEDBACK_PER_DAY = "300"                # feedback messages
+# FEEDBACK_AUDIO_BYTES_PER_DAY = "5000000"  # voice-note bytes
 
 [[d1_databases]]
 binding = "DB"

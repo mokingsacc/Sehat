@@ -61,16 +61,16 @@ Mothers, fathers and grandparents in rural Samangan, many with little or no read
 - **Privacy (what the code does):**
   - No account and no sign-in. The child record (names, birth dates, vaccines) stays on the phone and is never sent.
   - Location is used on the phone only, to sort clinics by distance. It is not sent.
-  - Usage counts are anonymous and can be switched off in Settings (this also deletes unsent counts). They contain a random install number made on the phone, language, phone type (iPhone, Android or other), app version, whether it is on the home screen, and events: app opened, pages viewed, clips played, minutes used, language or voice changed, shared, a vaccine visit ticked (for example "6 weeks", no child details), nearest-clinic used (not where). For the symptom finder it sends the matched symptom, or, when nothing matched, the first 60 characters of what was typed.
-  - Feedback is sent only when a person presses Send: the text (up to 2,000 characters) or voice note, with the install number, language, app version, page and time.
+  - Usage counts are anonymous and can be switched off in Settings (this also deletes unsent counts). They are added up on the phone and sent as one total per day: language, phone type (iPhone, Android or other), app version, district if chosen, pages opened and minutes on them, clips played, and events (shared, a vaccine visit ticked with no child details, nearest-clinic used but not where). There is no install number. For the symptom finder only the matched symptom is counted; when nothing matched, nothing typed is sent.
+  - Feedback is sent only when a person presses Send: the text (up to 2,000 characters) or voice note (up to about 1 MB, audio only), with language, app version and page. It carries no install number, so it cannot be linked to the phone's other messages. The server stamps its own time and deletes voice notes after 90 days.
   - The server does not store IP addresses. The dashboard and editor need a secret key.
-  - When Mo presses "Summarise feedback", written feedback and failed searches from the last 60 days are sent to Anthropic's AI service. Voice notes are not sent.
-  - Speaking into the symptom finder uses the phone browser's own speech recognition, which needs internet; that audio does not go to Sehat's server.
+  - When Mo presses "Summarise feedback", written feedback from the last 60 days is sent to Anthropic's AI service. Typed searches are never sent, and voice notes are not sent.
+  - Speaking into the symptom finder uses the phone browser's own speech recognition, which needs internet; that audio does not go to Sehat's server. The app says so before the first use.
 
 ## What it costs to run
 
 - **App hosting:** GitHub Pages, free.
-- **Server, dashboard and editor:** Cloudflare Workers free plan (100,000 requests a day) with its free database (5 GB, 100,000 rows written a day). Enough for village scale.
+- **Server, dashboard and editor:** Cloudflare Workers free plan (100,000 requests a day) with its free database (500 MB, 100,000 rows written and 5 million rows read a day). Enough for village scale. The server keeps daily budgets under these limits (usage rows, disease reports, feedback and voice-note bytes) and answers "try later" when one is used up, so one busy or misused phone cannot fill the database; the budgets can be raised in `server/wrangler.toml` [vars].
 - **AI feedback summary:** an Anthropic API key; estimated at pennies a week at village scale.
 - **Android app:** built automatically on each update; no app-store fees, since it is shared as a file.
 - There is no paid staff. The real costs are people's time: recording, review and field work.

@@ -4,6 +4,9 @@ name: Android app
 on:
   push:
     branches: [main]
+    # only when something that goes into the APK changes
+    paths: ["android/**", "index.html", "manifest.webmanifest", "sw.js", "css/**", "js/**", "fonts/**", "img/**", "anim/**",
+            "audio/**", "content/book.json", "content/version.json", ".github/workflows/android.yml"]
   workflow_dispatch:
 permissions:
   contents: write   # to create the release
@@ -75,9 +78,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: v${{ steps.apk.outputs.version }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
           if gh release view "$TAG" > /dev/null 2>&1; then
-            gh release upload "$TAG" out/sehat.apk --clobber
+            # The release for this content already exists. Replace its APK only when the Android code itself changed
+            # (same content, new app code) or someone ran this by hand; otherwise keep the APK people already have.
+            CHANGED=$(gh api "repos/$GITHUB_REPOSITORY/compare/$BEFORE...$GITHUB_SHA" --jq '.files[].filename' 2>/dev/null | grep -c '^android/' || true)
+            if [ "$EVENT" = workflow_dispatch ] || [ "${CHANGED:-0}" -gt 0 ]; then
+              gh release upload "$TAG" out/sehat.apk --clobber
+              echo "Replaced the APK of release $TAG." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "Release $TAG already has an APK for this content and the Android code did not change: kept it." >> "$GITHUB_STEP_SUMMARY"
+            fi
           else
             gh release create "$TAG" out/sehat.apk --target "$GITHUB_SHA" --title "Sehat $TAG" \
               --notes "Android app (sehat.apk) for book version ${TAG#v}. Install it on a phone, then send it to other phones from the app (no internet needed)."

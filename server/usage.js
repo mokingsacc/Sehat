@@ -95,10 +95,24 @@ async function underLimit(env, now) {
   const r = await env.DB.prepare('INSERT INTO usage_rate (bucket, n) VALUES (?, 1) ON CONFLICT(bucket) DO UPDATE SET n = n + 1 RETURNING n').bind(Math.floor(now / 60000)).first();
   return !r || r.n <= lim;
 }
-const UPSERT = `INSERT INTO usage_daily (day, district, lang, platform, version, cv, page, seconds, opens, plays, search_opens, devices, standalone)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(day, district, lang, platform, version, cv, page) DO UPDATE SET
+// Flood protection by the day: rows (or bytes) each anonymous endpoint may write per UTC day, all phones together.
+// A day's allowance used up = "busy" (HTTP 429) until 00:00 UTC; the phones keep what they have and send it later.
+// Allowances can be raised in wrangler.toml [vars] (for example on a paid Cloudflare plan); see docs/ABOUT.md.
+export const DAY_LIMITS = { u: ['USAGE_ROWS_PER_DAY', 40000], r: ['SURV_ROWS_PER_DAY', 10000], fb: ['FEEDBACK_PER_DAY', 300], fba: ['FEEDBACK_AUDIO_BYTES_PER_DAY', 5_000_000] };
+export async function spend(env, kind, n, now = Date.now()) {
+  const [name, dflt] = DAY_LIMITS[kind], max = +env[name] > 0 ? +env[name] : dflt;
+  try {
+    const r = await env.DB.prepare('INSERT INTO limits_daily (k, n) VALUES (?, ?) ON CONFLICT(k) DO UPDATE SET n = n + excluded.n RETURNING n').bind(kind + ':' + dayOf(now), n).first();
+    return !r || +r.n <= max;
+  } catch { return true; } // the table is not made yet (schema.sql not run again): no daily limit
+}
+// all the rows of one post in ONE statement (a JSON array of rows): the free plan allows 50 queries per request
+const UPSERT_MANY = `INSERT INTO usage_daily (day, district, lang, platform, version, cv, page, seconds, opens, plays, search_opens, devices, standalone)
+  SELECT ${Array.from({ length: 13 }, (_, i) => `json_extract(value, '$[${i}]')`).join(', ')} FROM json_each(?) WHERE true
+  ON CONFLICT(day, district, lang, platform, version, cv, page) DO UPDATE SET
   seconds = seconds + excluded.seconds, opens = opens + excluded.opens, plays = plays + excluded.plays, search_opens = search_opens + excluded.search_opens,
   devices = devices + excluded.devices, standalone = standalone + excluded.standalone`;
+const upsertDaily = (env, rows) => env.DB.prepare(UPSERT_MANY).bind(JSON.stringify(rows));
 const INSTALL = `INSERT INTO installs_daily (day, lang, platform, version, n, standalone) VALUES (?, ?, ?, ?, ?, ?)
   ON CONFLICT(day, lang, platform, version) DO UPDATE SET n = n + excluded.n, standalone = standalone + excluded.standalone`;
 
@@ -137,16 +151,17 @@ export async function upload(req, env) {
   if (why) return reply(400, { error: why }); // the phone drops a refused day and does not send it again
   try {
     if (!(await underLimit(env, now))) return reply(429, { error: 'busy, try later' });
-    if (b.n) { const r = await env.DB.prepare('INSERT OR IGNORE INTO usage_seen (nonce, ts) VALUES (?, ?)').bind(b.n, now).run(); if (!changes(r)) return reply(200, { ok: true, duplicate: true }); }
     const pages = { ...b.pages };
     if (!pages._day) { // older phones may not send the day total: make it from the pages
       const v = Object.values(pages); pages._day = [Math.min(MAX_SECS, v.reduce((a, x) => a + x[0], 0)), 1, v.reduce((a, x) => a + x[2], 0), 0];
     }
     const key = [b.day, b.d && b.d !== 'none' ? b.d : 'none', b.lang, b.plat, b.v, b.cv];
-    const stmts = Object.entries(pages).filter(([id, v]) => id === '_day' || v.some((x) => x > 0))
-      .map(([id, v]) => env.DB.prepare(UPSERT).bind(...key, id, v[0], v[1], v[2], v[3], 1, b.sa ? 1 : 0));
-    await env.DB.batch(stmts);
-    return reply(200, { ok: true, pages: stmts.length });
+    const rows = Object.entries(pages).filter(([id, v]) => id === '_day' || v.some((x) => x > 0))
+      .map(([id, v]) => [...key, id, v[0], v[1], v[2], v[3], 1, b.sa ? 1 : 0]);
+    if (!(await spend(env, 'u', rows.length + 1, now))) return reply(429, { error: 'busy today, try tomorrow' });
+    if (b.n) { const r = await env.DB.prepare('INSERT OR IGNORE INTO usage_seen (nonce, ts) VALUES (?, ?)').bind(b.n, now).run(); if (!changes(r)) return reply(200, { ok: true, duplicate: true }); }
+    await upsertDaily(env, rows).run();
+    return reply(200, { ok: true, pages: rows.length });
   } catch (e) { return reply(503, { error: 'not ready: ' + (e && e.message) }); } // tables not made yet: the phone tries again later
 }
 
@@ -158,6 +173,7 @@ export async function install(req, env) {
   const now = nowMs(env);
   try {
     if (!(await underLimit(env, now))) return reply(429, { error: 'busy, try later' });
+    if (!(await spend(env, 'u', 1, now))) return reply(429, { error: 'busy today, try tomorrow' });
     await env.DB.prepare(INSTALL).bind(dayOf(now), b.lang, b.plat, b.v, 1, b.sa ? 1 : 0).run();
     return reply(200, { ok: true });
   } catch (e) { return reply(503, { error: 'not ready' }); }
@@ -193,15 +209,18 @@ export async function legacy(req, env) {
   if (!b || typeof b !== 'object' || !Array.isArray(b.events)) return reply(400, 'bad');
   const now = nowMs(env), { days, installs } = foldLegacy(b, now);
   const lang = LANGS.has(b.lang) ? b.lang : 'fa', plat = PLATS.has(b.plat) ? b.plat : 'other', v = typeof b.v === 'string' && VER_RE.test(b.v) ? b.v : 'old', sa = b.standalone ? 1 : 0;
-  const stmts = [];
+  const rows = [], stmts = [];
   for (const [day, pages] of Object.entries(days)) {
     if (!pages._day) pages._day = [0, 0, 0, 0];
-    for (const [page, c] of Object.entries(pages)) stmts.push(env.DB.prepare(UPSERT).bind(day, 'none', lang, plat, v, 'legacy', page, c[0], c[1], c[2], c[3], 1, sa));
+    for (const [page, c] of Object.entries(pages)) rows.push([day, 'none', lang, plat, v, 'legacy', page, c[0], c[1], c[2], c[3], 1, sa]);
   }
+  if (rows.length) stmts.push(upsertDaily(env, rows));
+  // a post covers at most a few days (events older than a year are dated today), so this stays a few statements
   for (const [day, n] of Object.entries(installs)) stmts.push(env.DB.prepare(INSTALL).bind(day, lang, plat, v, n, sa * n));
   try {
     if (!(await underLimit(env, now))) return reply(429, 'busy');
-    if (stmts.length) await env.DB.batch(stmts);
+    if (stmts.length && !(await spend(env, 'u', rows.length + stmts.length, now))) return reply(429, 'busy');
+    if (stmts.length) await env.DB.batch(stmts.slice(0, 40));
   } catch { return reply(503, 'not ready'); }
   return reply(200, 'ok');
 }
@@ -215,6 +234,7 @@ export async function cleanup(env, now = nowMs(env)) {
   await run('rawEventsDeleted', 'DELETE FROM events WHERE ts < ?', now - RAW_DAYS * DAY);
   await run('uploadIdsDeleted', 'DELETE FROM usage_seen WHERE ts < ?', now - SEEN_DAYS * DAY);
   await run('rateRowsDeleted', 'DELETE FROM usage_rate WHERE bucket < ?', Math.floor(now / 60000) - 120);
+  await run('dayLimitRowsDeleted', "DELETE FROM limits_daily WHERE substr(k, instr(k, ':') + 1) < ?", dayOf(now - 3 * DAY));
   return out;
 }
 

@@ -210,9 +210,9 @@ export default {
     "en": "Usage counts, only if you agree: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
    },
    "ui.privacy.watch": {
-    "fa": "دیدن مریضی‌های واگیر: اگر بگویید کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی، گروه سنی و روز فرستاده می‌شود.",
-    "ps": "د ساري ناروغیو لیدل: که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي، د عمر ډله او ورځ لېږل کېږي.",
-    "en": "Disease watch: if you say someone at home has an illness that spreads, only the illness, your district, an age group and the day are sent."
+    "fa": "دیدن مریضی‌های واگیر: اگر بگویید کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی، گروه سنی و روز فرستاده می‌شود، همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود.",
+    "ps": "د ساري ناروغیو لیدل: که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي، د عمر ډله او ورځ لېږل کېږي، له یوې بې‌نومې شمېرې سره چې هره میاشت بدلېږي، څو یو خبر دوه ځله ونه شمېرل شي.",
+    "en": "Disease watch: if you say someone at home has an illness that spreads, only the illness, your district, an age group and the day are sent, with a random number that changes every month so one report is not counted twice."
    },
    "ui.privacy.voice": {
     "fa": "نظر شما: پیش از ثبت صدای شما، از شما می‌پرسیم. پیام‌ها به شما وصل نیستند. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند. لطفاً نام یا شمارۀ تلیفون نگویید و ننویسید؛ برنامه شمارۀ تلیفون را از نوشته پاک می‌کند.",

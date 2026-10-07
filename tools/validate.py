@@ -315,6 +315,15 @@ def check_ui_features():
                 if part == "say" and (not ID_RE.match(k) or not k.startswith("ui.")): err(f, f"say.{k}: narration ids look like ui.<name>")
                 check_L(f, f"{part}.{k}", L, 45 if part == "say" else None)
 check_ui_features()
+# Old Android phones (Chrome/WebView before 80) cannot run ?? or ?. and then the app never opens
+def check_old_phone_js():
+    strip = re.compile(r"""//[^\n]*|/\*.*?\*/|'(?:\\.|[^'\\\n])*'|"(?:\\.|[^"\\\n])*"|`(?:\\.|[^`\\])*`""", re.S)
+    for f in sorted(glob.glob(os.path.join(ROOT, "js", "**", "*.js"), recursive=True)) + sorted(glob.glob(os.path.join(ROOT, "anim", "**", "*.js"), recursive=True)) + [os.path.join(ROOT, "sw.js")]:
+        if not os.path.exists(f): continue
+        code = strip.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), open(f, encoding="utf-8").read())
+        for m in re.finditer(r"\?\?|\?\.(?!\d)", code):
+            err(f, f"line {code.count(chr(10), 0, m.start()) + 1}: {m.group(0)!r} does not work on old Android phones")
+check_old_phone_js()
 
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst

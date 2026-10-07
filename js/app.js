@@ -7,11 +7,13 @@ import { initGrowth } from './growth.js'; // growth tracker: #/growth (charts, r
 import { initShare } from './share.js'; // Share Sehat: #/share (the app file on Android, the link and a QR code on the web)
 import * as Stats from './stats.js';
 import { openAnimation, animPoster } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md)
+import { applyOverlay, FORMAT as OV_FORMAT } from './overlay.js'; // changes published from the editor (docs/EDITOR_AND_RELEASES.md)
+window.SEHAT_STARTED = true; // index.html shows an "update your browser" message if the app never gets this far
 
 /* ---------- small helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const store = {
   get(k, d) { try { const v = localStorage.getItem('fhb.' + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
   set(k, v) { try { localStorage.setItem('fhb.' + k, JSON.stringify(v)); } catch {} },
@@ -34,11 +36,11 @@ const RTL = (lg) => lg !== 'en';
 const DIG = '۰۱۲۳۴۵۶۷۸۹';
 const num = (n) => (S.lang === 'en' ? String(n) : String(n).replace(/\d/g, (d) => DIG[d]));
 const T = (key, vars) => {
-  const L = S.book.ui[key]; let s = L ? (L[S.lang] ?? L.en) : key;
+  const L = S.book.ui[key]; let s = L ? (L[S.lang] == null ? L.en : L[S.lang]) : key;
   if (vars) for (const k in vars) s = s.replace('{' + k + '}', vars[k]);
   return s;
 };
-const L = (obj) => (obj ? (obj[S.lang] ?? obj.en ?? '') : '');
+const L = (obj) => (obj ? (obj[S.lang] != null ? obj[S.lang] : obj.en != null ? obj.en : '') : ''); // plain checks: old Android phones cannot read newer syntax
 const isAdultTopic = (t) => t && (t.section === 'women' || t.section === 'everyone');
 
 /* ---------- icons (app chrome) ---------- */
@@ -204,11 +206,11 @@ const A = {
   rq: store.get('rq', []), // disease-watch reports and search signals, sent to <stats server>/r
 };
 function track(t, data = {}) { Stats.event(t, data); }
-function flush(beacon) { flushReports(beacon); Stats.send(); }
+function flush() { flushReports(); Stats.send(); }
 function isStandalone() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
 function platform() { const u = navigator.userAgent; return /iPhone|iPad|iPod/.test(u) ? 'ios' : /Android/.test(u) ? 'android' : 'other'; }
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden') { stopAudio(); flushReports(true); }
+  if (document.visibilityState === 'hidden') { stopAudio(); flushReports(); }
   else if (!DL.active) startDownloads();
 });
 addEventListener('online', () => { flush(); sendFeedback(); clearTimeout(DL.retry); DL.wait = 15000; startDownloads(); });
@@ -294,16 +296,24 @@ function svSignal(symIds) {
   if (A.rq.length > 300) A.rq = A.rq.slice(-300);
   store.set('svSig', seen); store.set('rq', A.rq);
 }
-async function flushReports(beacon) {
+// Reports leave the phone only when the server has answered "ok" (a beacon only means "queued by the browser", so it is
+// not used). Sending again is safe: each report has its own id and the server ignores one it already has.
+let rqSending = false;
+async function flushReports() {
   const url = reportUrl();
-  if (!url || !watching() || !A.rq.length || !navigator.onLine) return;
-  const batch = A.rq.slice(0, 100), body = JSON.stringify({ iid: Stats.watchId(), v: S.book && S.book.version, items: batch });
-  const done = () => { A.rq = A.rq.slice(batch.length); store.set('rq', A.rq); };
-  if (beacon && navigator.sendBeacon) { if (navigator.sendBeacon(url, new Blob([body], { type: 'text/plain' }))) done(); return; }
+  if (rqSending || !url || !watching() || !A.rq.length || !navigator.onLine) return;
+  rqSending = true;
+  const batch = A.rq.slice(0, 50), body = JSON.stringify({ iid: Stats.watchId(), v: S.book && S.book.version, items: batch });
+  let more = false;
   try {
-    const r = await fetch(url, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' }, keepalive: true });
-    if (r.ok) { done(); if (A.rq.length) setTimeout(flushReports, 1000); }
-  } catch {}
+    // keepalive: the request still finishes when the app is closed or goes to the background
+    const r = await fetch(url, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' }, keepalive: body.length < 60000 });
+    if (r.ok || r.status === 400) { // 400: the server can never use this batch, so it is not sent again
+      const sent = new Set(batch);
+      A.rq = A.rq.filter((x) => !sent.has(x)); store.set('rq', A.rq); more = A.rq.length > 0;
+    }
+  } catch {} finally { rqSending = false; }
+  if (more) setTimeout(flushReports, 1000);
 }
 
 /* ---------- toast & dialog ---------- */
@@ -388,7 +398,7 @@ function screenHome() {
     },
     nextVaccine() { const k = nextDueAll(); if (!k || k.done) return ''; ids.push(k.visit.id); return nextCard(k, true); },
     sections() {
-      const card = (href, img, title, sub, sayId, cls) => `<div class="hero-card ${cls}"><a href="${href}" class="pic"><img src="${img}" alt=""></a><div class="row"><a href="${href}" class="grow"><div class="t">${esc(title)}</div><div class="s">${esc(sub)}</div></a>${spk(sayId)}</div></div>`;
+      const card = (href, img, title, sub, sayId, cls) => `<div class="hero-card ${cls}"><a href="${href}" class="pic" tabindex="-1" aria-hidden="true"><img src="${img}" alt=""></a><div class="row"><a href="${href}" class="grow"><div class="t">${esc(title)}</div><div class="s">${esc(sub)}</div></a>${spk(sayId)}</div></div>`;
       const nC = b.sections.children.length, nA = new Set([...b.sections.women, ...b.sections.everyone]).size;
       ids.push('ui.children', 'ui.adults');
       return card('#/children', 'img/app/home-children.svg', T('children'), T('topicsCount', { n: num(nC) }), 'ui.children', '') + card('#/adults', 'img/app/home-adults.svg', T('adults'), T('topicsCount', { n: num(nA) }), 'ui.adults', 'adult');
@@ -415,7 +425,7 @@ function screenHome() {
 function topicCard(tid) {
   const t = S.book.topics[tid]; if (!t) return '';
   const adult = isAdultTopic(t) ? ' adult' : '';
-  return `<div class="tcard${adult}"><a class="pic" href="#/topic/${tid}"><img src="${esc(t.image)}" alt="" loading="lazy"></a><div class="row"><a href="#/topic/${tid}" style="flex:1 1 auto"><div class="t">${esc(L(t.title))}</div><div class="s">${esc(L(t.summary))}</div></a>${spk(tid + '.title')}</div></div>`;
+  return `<div class="tcard${adult}"><a class="pic" href="#/topic/${tid}" tabindex="-1" aria-hidden="true"><img src="${esc(t.image)}" alt="" loading="lazy"></a><div class="row"><a href="#/topic/${tid}" style="flex:1 1 auto"><div class="t">${esc(L(t.title))}</div><div class="s">${esc(L(t.summary))}</div></a>${spk(tid + '.title')}</div></div>`;
 }
 // first-aid and emergency pages (sections.emergency) are listed in their own group at the end of a list
 const emSet = () => new Set(S.book.sections.emergency || []);
@@ -524,8 +534,9 @@ function emRow(tid) {
 function nearBanner() { return `<div class="banner" data-block="ui.near">${ic('hospital')}<a class="grow" href="#/near"><div class="t">${esc(T('near'))}</div><div class="s">${esc(T('nearSub'))}</div></a>${spk('ui.near')}</div>`; }
 
 function screenTopic(tid) {
-  const t = S.book.topics[tid];
-  if (!t) return screenHome();
+  // own topics only: "#/topic/constructor" must not reach the object's built-in properties
+  const t = Object.prototype.hasOwnProperty.call(S.book.topics, tid) ? S.book.topics[tid] : null;
+  if (!t || typeof t !== 'object') return screenHome();
   if (tid === 'vaccines') return screenVaccines(t);
   const ids = [tid + '.title'];
   let n = 0, body = '';
@@ -561,7 +572,7 @@ function screenVaccines(v) {
 
 /* ---------- family record ---------- */
 const DAY = 864e5;
-const todayISO = () => new Date().toISOString().slice(0, 10);
+const todayISO = () => localDay(); // the phone's own date (not UTC: before 04:30 in Kabul UTC is still yesterday)
 function fmtDate(iso) {
   const d = new Date(iso + 'T12:00:00'); const j = toJalali(d);
   return `${num(j.jd)} ${S.book.months[S.lang][j.jm - 1]} ${num(j.jy)}`;
@@ -583,9 +594,9 @@ function nextDue(k) {
 }
 function nextCard(n, withName) {
   if (n.done) return `<div class="next ok">${I.check.replace('<svg', '<svg style="width:28px;height:28px"')}<div style="flex:1"><div class="t">${esc(T('allDone'))}</div></div></div>`;
-  const days = Math.ceil((n.due - Date.now()) / DAY);
-  const when = days < 0 ? T('overdue') : days === 0 ? T('dueToday') : T('dueIn', { n: num(days) });
-  const iso = n.due.toISOString().slice(0, 10);
+  // whole calendar days from today to the due day (the label changes at midnight, not at noon)
+  const iso = localDay(n.due), days = dayDiff(localDay(), iso);
+  const when = days < 0 ? T('overdue') : days === 0 ? T('dueToday') : days === 1 ? T('dueTomorrow') : T('dueIn', { n: num(days) });
   const cls = days < 0 ? '' : days <= 14 ? '' : 'later';
   return `<div class="next ${cls}" data-block="${esc(n.visit.id)}">${ic('calendar')}<a href="#/family" style="flex:1"><div class="t">${withName && n.kid ? esc(n.kid.name) + ' · ' : ''}${esc(T('nextVaccine'))}: ${esc(L(n.visit.age))}</div><div class="s">${esc(fmtDate(iso))} · ${esc(when)}</div></a>${spk(n.visit.id)}</div>`;
 }
@@ -606,7 +617,7 @@ function screenFamily() {
     html += `<div class="panel"><h2>${esc(T('vaccineCard'))}</h2><p class="muted" style="margin:0 0 4px">${esc(T('tapToMark'))}</p>`;
     const dob = new Date(k.dob + 'T12:00:00');
     for (const vis of v.visits) {
-      const g = k.given && k.given[vis.id]; const due = new Date(dob.getTime() + vis.ageDays * DAY).toISOString().slice(0, 10);
+      const g = k.given && k.given[vis.id]; const due = localDay(new Date(dob.getTime() + vis.ageDays * DAY));
       const isNext = n && !n.done && n.visit.id === vis.id;
       html += `<button class="vrow ${g ? 'done' : isNext ? 'due' : ''}" data-visit="${esc(vis.id)}"><span class="ck">${g ? I.check : ''}</span><span style="flex:1"><div class="a">${esc(L(vis.age))}</div><div class="d">${g ? esc(T('given')) + ' · ' + esc(fmtDate(g)) : esc(fmtDate(due))} · ${esc(vis.doses.map((d) => L(d.name)).join('، '))}</div></span></button>`;
     }
@@ -828,7 +839,7 @@ function screenSettings() {
   html += `</div><div class="panel" id="voicepanel"><h2>${esc(T('voices'))}</h2>${voiceCards('data-voice')}<div id="packs">${packsHtml()}</div>`;
   html += `<div class="srow">${ic('no')}<button class="grow" data-action="delvoices" style="text-align:start"><div class="t">${esc(T('deleteVoices'))}</div><div class="s">${esc(T('deleteVoicesSub'))}</div></button></div><p class="muted" id="storage"></p>`;
   html += `</div><div class="panel">`;
-  html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} ${esc(S.book.version)} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
+  html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
   html += SH.settingsRow(); // Share Sehat (js/share.js): the app file, the link, the QR code
   html += `<div class="srow">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div><button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
   html += `<a class="srow" href="#/privacy">${ic('check')}<div class="grow"><div class="t">${esc(T('privacy'))}</div><div class="s">${esc(T('privacySub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
@@ -838,7 +849,7 @@ function screenSettings() {
   }
   html += `<a class="srow" href="#/studio">${ic('talk')}<div class="grow"><div class="t">${esc(T('recordMode'))}</div><div class="s">${esc(T('recordModeSub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
   html += `</div>` + disclaimer();
-  html += `<p class="muted center" dir="ltr">Sehat · ${esc(S.book.version)}<br>Content based on WHO guidance (IMCI, PCPNC, Facts for Life). Draft for review. Icons: Health Icons (MIT). Font: Noto Naskh Arabic (OFL).</p>`;
+  html += `<p class="muted center" dir="ltr">Sehat · ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''}<br>Content based on WHO guidance (IMCI, PCPNC, Facts for Life). Draft for review. Icons: Health Icons (MIT). Font: Noto Naskh Arabic (OFL).</p>`;
   setTimeout(async () => { await refreshHave(); packsUI(); showStorage(); }, 0);
   return { html, nav: 'settings', adult: true };
 }
@@ -967,11 +978,17 @@ function askResults(symId, live) {
 }
 function resultCard(tid) {
   const t = S.book.topics[tid]; if (!t) return '';
-  return `<div class="rcard${isAdultTopic(t) ? ' adult' : ''}"><a href="#/topic/${tid}" class="rimg"><img src="${esc(t.image)}" alt=""></a><a href="#/topic/${tid}" class="rt"><b>${esc(L(t.title))}</b><span>${esc(L(t.summary))}</span></a>${spk(tid + '.title')}</div>`;
+  return `<div class="rcard${isAdultTopic(t) ? ' adult' : ''}"><a href="#/topic/${tid}" class="rimg" tabindex="-1" aria-hidden="true"><img src="${esc(t.image)}" alt=""></a><a href="#/topic/${tid}" class="rt"><b>${esc(L(t.title))}</b><span>${esc(L(t.summary))}</span></a>${spk(tid + '.title')}</div>`;
 }
-function startMic(btn) {
+async function startMic(btn) {
   const R = window.SpeechRecognition || window.webkitSpeechRecognition; if (!R) return;
   if (!navigator.onLine) { toast(T('micOffline')); return; }
+  // speaking uses the phone's internet speech service (the voice goes to Google): say so once, before the first use
+  if (!store.get('micOk', false)) {
+    const ok = await choose(`<h2>${esc(T('ask'))}</h2>${sayRow('ui.micNotice', 'dq')}<div class="places one"><button data-pick="yes">${esc(T('micUse'))}</button></div><button class="btn ghost" data-close>${esc(T('cancel'))}</button>`);
+    if (ok !== 'yes') return;
+    store.set('micOk', true);
+  }
   const r = new R(); r.lang = { fa: 'fa-IR', ps: 'ps-AF', en: 'en-GB' }[S.lang] || 'fa-IR'; r.interimResults = true; r.maxAlternatives = 3;
   btn.classList.add('on'); toast(T('listening'));
   r.onresult = (e) => { const txt = [...e.results].map((x) => x[0].transcript).join(' '); $('#askq').value = txt; if (e.results[e.results.length - 1].isFinal) { ASK.q = txt; $('#askres').innerHTML = askResults(); } };
@@ -987,7 +1004,7 @@ function screenFeedback() {
   let html = top(T('feedback')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.feedback"><div class="body">${esc(L(S.book.narration['ui.feedback']))}</div>${spk('ui.feedback')}</div>`;
   html += `<div class="center"><button class="recbig${FB.on ? ' on' : ''}" data-action="fbrec" aria-label="${esc(T('fbRecord'))}">${FB.on ? I.stop.replace('<svg', '<svg fill="#fff"') : I.mic}</button><div class="muted">${FB.on ? esc(T('recording')) : FB.blob ? esc(T('fbRecorded')) + ' ✓' : esc(T('fbRecord'))}</div>${FB.blob && !FB.on ? `<button class="sbtn" data-action="fbplay" style="margin-top:6px">${esc(T('play'))} ▶</button>` : ''}</div>`;
-  html += `<form class="form" id="fbform"><label>${esc(T('fbWrite'))}</label><p class="muted warnline fbwarn">${esc(T('fbNoNames'))}</p><textarea name="text" rows="4" maxlength="2000" style="font:inherit;font-size:18px;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px"></textarea><button class="btn" type="submit">${esc(T('fbSend'))}</button></form>`;
+  html += `<form class="form" id="fbform"><label for="fbtext">${esc(T('fbWrite'))}</label><p class="muted warnline fbwarn" id="fbwarn">${esc(T('fbNoNames'))}</p><textarea name="text" id="fbtext" aria-describedby="fbwarn" rows="4" maxlength="2000" style="font:inherit;font-size:18px;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px"></textarea><button class="btn" type="submit">${esc(T('fbSend'))}</button></form>`;
   return { html, nav: 'home' };
 }
 async function fbRecord() {
@@ -1015,7 +1032,7 @@ async function sendFeedback() {
     if (it.blob) { const buf = new Uint8Array(await it.blob.arrayBuffer()); let s = ''; for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode(...buf.subarray(i, i + 0x8000)); audio = btoa(s); }
     try {
       const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ v: S.book.version, lang: it.lang, ts: it.ts, text: Stats.cleanText(it.text), page: it.page, type: it.type, audio }) });
-      if (r.ok) await REC.del(k);
+      if (r.ok || r.status === 400) await REC.del(k); // 400: the server cannot use it (for example an empty note), so it is not kept
     } catch { return; }
   }
 }
@@ -1040,7 +1057,7 @@ function screenNear() {
   html += `<button class="btn" data-action="locate">${ic('house')} ${esc(NEAR.busy ? T('locating') : T('findMe'))}</button>`;
   if (!list.length) { html += `<p class="muted center">${esc(T('noFacilities'))}</p>`; return { html, nav: 'home' }; }
   const me = NEAR.pos;
-  const rows = list.map((f) => ({ f, d: me ? distKm(me, f) : null, b: me ? bearing(me, f) : 0 })).sort((a, b) => (a.d ?? 0) - (b.d ?? 0) || 0);
+  const rows = list.map((f) => ({ f, d: me ? distKm(me, f) : null, b: me ? bearing(me, f) : 0 })).sort((a, b) => (a.d || 0) - (b.d || 0));
   // hospitals and maternity first, whatever the distance; then the nearest other clinics and doctors
   const isMain = (f) => /hospital|maternity|chc|bhc/.test(f.type || '');
   const main = rows.filter((r) => isMain(r.f)).slice(0, 6), other = rows.filter((r) => !isMain(r.f)).slice(0, 12);
@@ -1084,6 +1101,7 @@ function render() {
   document.documentElement.lang = S.lang || 'fa';
   document.documentElement.dir = RTL(S.lang || 'fa') ? 'rtl' : 'ltr';
   let r = route(), out;
+  try { // a broken link or page must never leave the app stuck on the loading screen
   if (!S.lang) out = screenWelcome();
   else if (!S.voice) out = screenVoice();
   else if (r[0] !== 'privacy' && Stats.showConsent()) out = Stats.screenConsent();
@@ -1103,6 +1121,7 @@ function render() {
   else if (r[0] === 'growth') out = GR.screen(r[1]);
   else if (r[0] === 'share') out = SH.screen();
   else out = screenHome();
+  } catch (err) { if (r[0] === 'home') throw err; r = ['home']; out = screenHome(); }
   app.innerHTML = `<main class="page${out.adult ? ' adult' : ''}">${out.html}</main>${out.nav ? nav(out.nav) : ''}`;
   if (P.on) updateListenBar();
   lastPage = r.join('/') || 'home';
@@ -1203,11 +1222,13 @@ async function checkUpdate(manual) {
 }
 
 /* ---------- content published from the dashboard editor (config.contentUrl) ---------- */
-// The book that came with the app is always the fallback. A newer book from contentUrl is kept in Cache Storage
-// and used from then on, also offline. "Newer" = a different version built later than the book in use.
-const RB = { cache: 'fhb-content', key: 'content/remote-book.json' };
+// The editor publishes an "overlay": only the parts it changed, each with a fingerprint of the app text it started
+// from and the time it was saved (js/overlay.js, docs/EDITOR_AND_RELEASES.md). The phone keeps the overlay in Cache
+// Storage and lays it over the book that came with the app, every time the app starts, also offline. So a new app
+// release keeps the editor's changes, and a publish does not undo the release's own fixes.
+const RB = { cache: 'fhb-content', key: 'content/overlay.json', old: 'content/remote-book.json' };
 const contentUrl = () => String((S.shipped && S.shipped.config && S.shipped.config.contentUrl) || '').trim().replace(/\/+$/, '');
-const isNewer = (b, than) => !!b && typeof b.version === 'string' && b.version !== than.version && Date.parse(b.built) > Date.parse(than.built);
+const goodOverlay = (o) => !!o && o.format === OV_FORMAT && typeof o.version === 'string' && Array.isArray(o.units);
 function goodBook(b) {
   try {
     if (!b || typeof b.version !== 'string' || isNaN(Date.parse(b.built))) return false;
@@ -1228,38 +1249,45 @@ function normBook(b) {
   for (const lg of ['fa', 'ps', 'en']) if (a[lg] && typeof a[lg] === 'object') { a[lg + '-f'] = { ...a[lg], ...(a[lg + '-f'] || {}) }; delete a[lg]; }
   b.audio = a; return b;
 }
-function useBook(b) {
-  // a book published from the editor before a feature existed keeps the app's own words and disease-watch lists
-  if (S.shipped.surveillance && !b.surveillance) b.surveillance = S.shipped.surveillance;
-  for (const [k, v] of Object.entries(S.shipped.say || {})) if (b.narration && !b.narration[k]) b.narration[k] = v;
-  if (b.ui) for (const [k, v] of Object.entries(S.shipped.ui || {})) if (!b.ui[k]) b.ui[k] = v;
+// the shipped book with the overlay laid over it; false (and the book unchanged) when the result would not work
+function useOverlay(ov) {
+  if (!goodOverlay(ov)) return false;
+  let b;
+  try { b = normBook(applyOverlay(S.shippedBook, ov).book); } catch { return false; }
+  if (!goodBook(b)) return false;
   const c = { ...(b.config || {}) };
-  for (const k of ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl']) c[k] = S.shipped.config[k];
-  b.config = c; S.book = normBook(b);
+  for (const k of ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl']) c[k] = S.shipped.config[k]; // addresses always come from the app itself
+  b.config = c; S.book = b; S.overlay = ov.version;
+  return true;
 }
-async function savedRemote() {
-  try { const r = await (await caches.open(RB.cache)).match(RB.key); return r ? await r.json() : null; } catch { return null; }
+async function savedOverlay() {
+  try {
+    const c = await caches.open(RB.cache);
+    c.delete(RB.old).catch(() => {}); // the whole book that older app versions kept: no longer used
+    const r = await c.match(RB.key); return r ? await r.json() : null;
+  } catch { return null; }
 }
 async function remoteUpdate() {
   const base = contentUrl(); if (!base) return false;
   const v = await (await fetch(base + '/content/version.json', { cache: 'no-store' })).json();
-  if (!isNewer(v, S.book)) return false;
-  const r = await fetch(base + '/content/book.json', { cache: 'no-store' }); if (!r.ok) return false;
-  const txt = await r.text(); const b = JSON.parse(txt);
-  if (!goodBook(b) || !isNewer(b, S.book)) return false;
+  if (!v || typeof v.version !== 'string' || v.version === S.overlay) return false;
+  const r = await fetch(base + '/content/overlay.json', { cache: 'no-store' }); if (!r.ok) return false;
+  const txt = await r.text(); const ov = JSON.parse(txt);
+  if (!useOverlay(ov)) return false;
   try { await (await caches.open(RB.cache)).put(RB.key, new Response(txt, { headers: { 'Content-Type': 'application/json' } })); } catch {}
-  useBook(b); render(); toast(T('updated'));
+  render(); toast(T('updated'));
   startDownloads();
   return true;
 }
 /* ---------- start ---------- */
 async function start() {
   await REC.init();
-  try { S.book = normBook(await (await fetch('content/book.json')).json()); }
+  let txt;
+  try { txt = await (await fetch('content/book.json')).text(); S.book = normBook(JSON.parse(txt)); }
   catch { $('#app').innerHTML = '<p style="padding:40px;text-align:center">⚠︎</p>'; return; }
-  S.shipped = { version: S.book.version, built: S.book.built, config: S.book.config || {}, surveillance: S.book.surveillance || null, ui: S.book.ui,
-    say: Object.fromEntries(Object.entries(S.book.narration).filter(([k]) => k.startsWith('ui.'))) };
-  if (contentUrl()) { const rb = await savedRemote(); if (goodBook(rb) && isNewer(rb, S.book)) useBook(rb); }
+  S.shippedBook = JSON.parse(txt); // kept as it came, to lay a newer overlay over it later
+  S.shipped = { version: S.book.version, built: S.book.built, config: S.book.config || {} };
+  if (contentUrl()) { const ov = await savedOverlay(); if (ov) useOverlay(ov); }
   Stats.init({ S, store, T, L, esc, spk, ic, I, top, listenBar, choose, sayRow, stopAudio, render: () => render(), isStandalone, platform, localDay, randId, isPlaying: () => P.on });
   if (!S.kid && S.kids[0]) S.kid = S.kids[0].id;
   render();
@@ -1280,4 +1308,4 @@ async function start() {
   if (navigator.connection && navigator.connection.addEventListener) navigator.connection.addEventListener('change', () => { if (!DL.active) startDownloads(); packsUI(); });
   flush(); sendFeedback();
 }
-start();
+start().catch((e) => { console.error(e); if (window.sehatBootFail) window.sehatBootFail(); });

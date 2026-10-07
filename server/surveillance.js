@@ -9,6 +9,7 @@
 // (this file only ever INSERTs into them; schema.sql adds triggers that refuse UPDATE and DELETE).
 // A wrong report is not changed: a correction row voids (or restores) it, with who, when and why.
 import DEFS from './surveillance-defs.js';
+import { spend } from './usage.js';
 
 export { DEFS };
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
@@ -22,6 +23,12 @@ const MIN_CELL = (DEFS.suppression && DEFS.suppression.minCell) || 5;
 const DEDUPE_DAYS = DEFS.dedupeDays || 14;
 const RULES = DEFS.alertRules;
 const MAX_BODY = 64_000, MAX_ITEMS = 100, MAX_AGE_DAYS = 90;
+// Plausibility limits (the reports are anonymous, so anyone could send made-up ones; see the methods page):
+// one install may send at most PHONE_DAY_MAX reports for one day of illness (more are refused); after PLACE_DAY_MAX reports from one
+// district in one day, further reports are kept but held by an automatic correction until the owner restores them.
+export const PHONE_DAY_MAX = 10, PLACE_DAY_MAX = 30;
+const SYSTEM = { name: 'automatic check', role: 'system' };
+const iso = (ms) => { const d = new Date(+ms); return isNaN(d) ? '' : d.toISOString(); };
 const ID_RE = /^[A-Za-z0-9_-]{8,64}$/;
 const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
 const WEEK_RE = /^(\d{4})-W(\d{2})$/;
@@ -81,6 +88,8 @@ export function checkItem(it, now) {
   } else if (it.d != null && (typeof it.d !== 'string' || !PLACES.has(it.d))) return 'unknown district';
   return null;
 }
+// A whole post is a fixed handful of queries, however many items it has (the free plan allows 50 per request):
+// the items go to the database as one JSON value each for reports, signals and holds.
 export async function ingest(req, env) {
   let b;
   try { const txt = await req.text(); if (txt.length > MAX_BODY) throw 0; b = JSON.parse(txt); } catch { return new Response('bad', { status: 400, headers: CORS }); }
@@ -88,35 +97,82 @@ export async function ingest(req, env) {
     return new Response('bad', { status: 400, headers: CORS });
   }
   const now = nowMs(env), app = typeof b.v === 'string' ? b.v.slice(0, 32) : null;
-  const res = { ok: true, reports: 0, duplicates: 0, signals: 0, rejected: [] };
-  for (let i = 0; i < b.items.length; i++) {
-    const it = b.items[i], why = checkItem(it, now);
-    if (why) { res.rejected.push({ i, why }); continue; }
-    const week = isoWeek(it.day);
-    if (it.k === 's') {
-      const r = await env.DB.prepare('INSERT OR IGNORE INTO surv_signals (iid, syndrome, def_version, place, day, week, app_version, received_ts) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
-        .bind(b.iid, it.s, it.dv, it.d || null, it.day, week, app, now).run();
-      if (changes(r)) res.signals++;
-      continue;
+  const res = { ok: true, reports: 0, duplicates: 0, held: 0, signals: 0, rejected: [] };
+  const reps = [], sigs = [];
+  b.items.forEach((it, i) => {
+    const why = checkItem(it, now);
+    if (why) res.rejected.push({ i, why }); else (it.k === 'r' ? reps : sigs).push({ i, it });
+  });
+  if (!reps.length && !sigs.length) return jsonRes(res, 200, CORS);
+  // a day's allowance for all phones together; when it is used up the phone keeps its queue and tries later
+  if (!(await spend(env, 'r', reps.length + sigs.length, now))) return jsonRes({ ok: false, error: 'busy today, try later' }, 429, CORS);
+  const day0 = Date.parse(dayOf(now) + 'T00:00:00Z');
+  if (reps.length) {
+    const ids = JSON.stringify(reps.map((x) => x.it.id)), places = JSON.stringify([...new Set(reps.map((x) => x.it.d))]), days = JSON.stringify([...new Set(reps.map((x) => x.it.day))]);
+    const [seen, prior, mine, perPlace] = await Promise.all([
+      env.DB.prepare('SELECT rid FROM surv_reports WHERE rid IN (SELECT value FROM json_each(?))').bind(ids).all(),
+      // earlier counted reports of this install (not duplicates, not voided): a new one within 14 days is a duplicate
+      env.DB.prepare(`SELECT rid, syndrome, day, seq FROM surv_reports WHERE iid = ? AND dup_of IS NULL AND ${NOT_VOIDED} ORDER BY day, seq`).bind(b.iid).all(),
+      // reports this install already sent for the same days of illness (a phone that was offline for weeks sends many days at once)
+      env.DB.prepare('SELECT day, COUNT(*) n FROM surv_reports WHERE iid = ? AND day IN (SELECT value FROM json_each(?)) GROUP BY day').bind(b.iid, days).all(),
+      env.DB.prepare('SELECT place, COUNT(*) n FROM surv_reports WHERE received_ts >= ? AND place IN (SELECT value FROM json_each(?)) GROUP BY place').bind(day0, places).all(),
+    ]);
+    const known = new Set(((seen && seen.results) || []).map((r) => r.rid));
+    const counted = ((prior && prior.results) || []).map((r) => ({ rid: r.rid, s: r.syndrome, day: r.day }));
+    const placeN = new Map(((perPlace && perPlace.results) || []).map((r) => [r.place, +r.n]));
+    const phoneN = new Map(((mine && mine.results) || []).map((r) => [r.day, +r.n]));
+    const rows = [], holds = [];
+    for (const { i, it } of reps) {
+      if (known.has(it.id)) continue; // a resent report id changes nothing
+      known.add(it.id);
+      const pn = phoneN.get(it.day) || 0;
+      if (pn >= PHONE_DAY_MAX) { res.rejected.push({ i, why: 'too many reports from this phone for one day' }); continue; }
+      phoneN.set(it.day, pn + 1);
+      const t = Date.parse(it.day + 'T00:00:00Z');
+      const prev = counted.filter((c) => c.s === it.s && Math.abs(Date.parse(c.day + 'T00:00:00Z') - t) / DAY < DEDUPE_DAYS).sort((a, c) => (a.day < c.day ? -1 : a.day > c.day ? 1 : 0))[0];
+      if (!prev) counted.push({ rid: it.id, s: it.s, day: it.day });
+      rows.push({ rid: it.id, s: it.s, dv: it.dv, d: it.d, a: it.a, day: it.day, w: isoWeek(it.day), dup: prev ? prev.rid : null });
+      const n = (placeN.get(it.d) || 0) + 1; placeN.set(it.d, n);
+      if (prev) res.duplicates++; else if (n > PLACE_DAY_MAX) { res.held++; holds.push({ t: 'report:' + it.id, why: `more than ${PLACE_DAY_MAX} reports from ${placeName(it.d)} on ${dayOf(now)} (UTC): held for checking` }); } else res.reports++;
     }
-    // the same install and syndrome within 14 days of a counted report is kept but marked as a duplicate
-    const prev = await env.DB.prepare(`SELECT rid FROM surv_reports WHERE iid = ? AND syndrome = ? AND dup_of IS NULL AND rid <> ?
-      AND ABS(julianday(day) - julianday(?)) < ? ORDER BY day, seq LIMIT 1`).bind(b.iid, it.s, it.id, it.day, DEDUPE_DAYS).first();
-    const r = await env.DB.prepare(`INSERT OR IGNORE INTO surv_reports (rid, iid, syndrome, def_version, place, age, day, week, app_version, received_ts, dup_of)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(it.id, b.iid, it.s, it.dv, it.d, it.a, it.day, week, app, now, prev ? prev.rid : null).run();
-    if (changes(r)) { if (prev) res.duplicates++; else res.reports++; } // a resent report id changes nothing
+    const stmts = [];
+    if (rows.length) stmts.push(env.DB.prepare(`INSERT OR IGNORE INTO surv_reports (rid, iid, syndrome, def_version, place, age, day, week, app_version, received_ts, dup_of)
+      SELECT json_extract(value, '$.rid'), ?, json_extract(value, '$.s'), json_extract(value, '$.dv'), json_extract(value, '$.d'), json_extract(value, '$.a'),
+        json_extract(value, '$.day'), json_extract(value, '$.w'), ?, ?, json_extract(value, '$.dup') FROM json_each(?)`).bind(b.iid, app, now, JSON.stringify(rows)));
+    if (holds.length) stmts.push(env.DB.prepare(`INSERT INTO surv_corrections (ts, who, role, target, action, reason)
+      SELECT ?, ?, ?, json_extract(value, '$.t'), 'void', json_extract(value, '$.why') FROM json_each(?)`).bind(now, SYSTEM.name, SYSTEM.role, JSON.stringify(holds)));
+    if (stmts.length) await env.DB.batch(stmts);
+  }
+  if (sigs.length) {
+    const rows = sigs.map(({ it }) => ({ s: it.s, dv: it.dv, d: it.d || null, day: it.day, w: isoWeek(it.day) }));
+    const r = await env.DB.prepare(`INSERT OR IGNORE INTO surv_signals (iid, syndrome, def_version, place, day, week, app_version, received_ts)
+      SELECT ?, json_extract(value, '$.s'), json_extract(value, '$.dv'), json_extract(value, '$.d'), json_extract(value, '$.day'), json_extract(value, '$.w'), ?, ? FROM json_each(?)`)
+      .bind(b.iid, app, now, JSON.stringify(rows)).run();
+    res.signals = changes(r);
   }
   return jsonRes(res, 200, CORS);
 }
 const changes = (r) => !r || !r.meta ? (r && Number.isFinite(r.changes) ? r.changes : 1) : r.meta.changes;
 
 /* ---------------- counting ---------------- */
-// Reports that count: not a duplicate, and not voided by the latest correction for that report or that install.
-const COUNTED = `dup_of IS NULL
-  AND rid NOT IN (SELECT substr(target, 8) FROM surv_corrections c WHERE target LIKE 'report:%' AND action = 'void'
-    AND seq = (SELECT MAX(seq) FROM surv_corrections c2 WHERE c2.target = c.target))
-  AND iid NOT IN (SELECT substr(target, 9) FROM surv_corrections c WHERE target LIKE 'install:%' AND action = 'void'
-    AND seq = (SELECT MAX(seq) FROM surv_corrections c2 WHERE c2.target = c.target))`;
+// Reports that count: not voided by the latest correction for that report or that install, and not a duplicate,
+// unless the report it duplicates was voided (then it counts in its place: a wrong tap followed by a real case).
+const VOIDED_RIDS = `SELECT substr(target, 8) FROM surv_corrections c WHERE target LIKE 'report:%' AND action = 'void'
+    AND seq = (SELECT MAX(seq) FROM surv_corrections c2 WHERE c2.target = c.target)`;
+const VOIDED_IIDS = `SELECT substr(target, 9) FROM surv_corrections c WHERE target LIKE 'install:%' AND action = 'void'
+    AND seq = (SELECT MAX(seq) FROM surv_corrections c2 WHERE c2.target = c.target)`;
+const NOT_VOIDED = `rid NOT IN (${VOIDED_RIDS}) AND iid NOT IN (${VOIDED_IIDS})`;
+// reports whose latest correction is a hold by the automatic check (too many from one district in one day)
+const HELD_RIDS = `SELECT substr(target, 8) FROM surv_corrections c WHERE target LIKE 'report:%' AND action = 'void' AND role = 'system'
+    AND seq = (SELECT MAX(seq) FROM surv_corrections c2 WHERE c2.target = c.target)`;
+async function heldList(env) {
+  try {
+    return ((await env.DB.prepare(`SELECT date(received_ts / 1000, 'unixepoch') d, place, COUNT(*) n FROM surv_reports WHERE rid IN (${HELD_RIDS})
+      GROUP BY d, place ORDER BY d DESC, n DESC LIMIT 30`).all()).results || []).map((r) => ({ ...r, n: +r.n }));
+  } catch { return []; }
+}
+const COUNTED = `${NOT_VOIDED}
+  AND (dup_of IS NULL OR dup_of IN (${VOIDED_RIDS}))`;
 
 export function parseQuery(url, env) {
   const p = url.searchParams, cur = isoWeek(dayOf(nowMs(env)));
@@ -210,14 +266,15 @@ export async function buildExport(env, q, kind, level) {
     columns = ['seq', 'rid', 'iid', 'syndrome', 'def_version', 'place', 'age_group', 'day', 'week', 'app_version', 'received_utc', 'dup_of', 'counted'];
     const counted = new Set(((await env.DB.prepare(`SELECT rid FROM surv_reports WHERE week >= ? AND week <= ? AND ${COUNTED}`).bind(q.from, q.to).all()).results || []).map((r) => r.rid));
     rows = (((await env.DB.prepare(`SELECT * FROM surv_reports WHERE week >= ? AND week <= ?${filt(q)} ORDER BY seq`).bind(q.from, q.to, ...fargs(q)).all()).results) || [])
-      .map((r) => ({ seq: r.seq, rid: r.rid, iid: r.iid, syndrome: r.syndrome, def_version: r.def_version, place: r.place, age_group: r.age, day: r.day, week: r.week, app_version: r.app_version || '', received_utc: new Date(r.received_ts).toISOString(), dup_of: r.dup_of || '', counted: counted.has(r.rid) ? 'yes' : r.dup_of ? 'no (duplicate)' : 'no (voided)' }));
+      .map((r) => ({ seq: r.seq, rid: r.rid, iid: r.iid, syndrome: r.syndrome, def_version: r.def_version, place: r.place, age_group: r.age, day: r.day, week: r.week, app_version: r.app_version || '', received_utc: iso(r.received_ts), dup_of: r.dup_of || '', counted: counted.has(r.rid) ? 'yes' : r.dup_of ? 'no (duplicate)' : 'no (voided)' }));
   } else if (kind === 'corrections') {
     columns = ['seq', 'time_utc', 'who', 'role', 'target', 'action', 'reason'];
-    rows = (((await env.DB.prepare('SELECT * FROM surv_corrections ORDER BY seq').all()).results) || []).map((r) => ({ seq: r.seq, time_utc: new Date(r.ts).toISOString(), who: r.who, role: r.role || '', target: r.target, action: r.action, reason: r.reason }));
+    rows = (((await env.DB.prepare('SELECT * FROM surv_corrections ORDER BY seq').all()).results) || []).map((r) => ({ seq: r.seq, time_utc: iso(r.ts), who: r.who, role: r.role || '', target: r.target, action: r.action, reason: r.reason }));
   } else return null;
   return { columns, rows, share };
 }
-const csvCell = (v) => { let s = String(v ?? ''); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+// line breaks inside a cell become spaces, so every row is one line and `grep -v "^#"` keeps every row
+const csvCell = (v) => { let s = String(v ?? '').replace(/[\r\n]+/g, ' '); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return /[",]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
 export const csvBody = (columns, rows) => [columns.join(','), ...rows.map((r) => columns.map((c) => csvCell(r[c])).join(','))].join('\n') + '\n';
 
 export async function exportData(env, url, me, format) {
@@ -263,11 +320,26 @@ export async function correct(req, env, url, me) {
   const type = req.headers.get('Content-Type') || '';
   if (type.includes('application/json')) b = await req.json().catch(() => ({}));
   else { const f = await req.formData().catch(() => null); if (f) for (const [k, v] of f) b[k] = String(v); }
-  const kind = b.target_type === 'install' ? 'install' : b.target_type === 'report' ? 'report' : null;
+  const kind = b.target_type === 'install' ? 'install' : b.target_type === 'report' ? 'report' : b.target_type === 'received' ? 'received' : null;
   const id = String(b.target || '').trim(), action = b.action === 'restore' ? 'restore' : b.action === 'void' ? 'void' : null;
-  const reason = String(b.reason || '').trim().slice(0, 300);
+  // one line of plain text: control characters (line breaks) would break the corrections CSV
+  const reason = String(b.reason || '').replace(/[\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, 300);
   const back = (msg, status = 400) => (type.includes('application/json') ? jsonRes(msg.error ? msg : { ok: true, ...msg }, status)
     : new Response(null, { status: 303, headers: { Location: `/watch?key=${encodeURIComponent(url.searchParams.get('key') || '')}&msg=${encodeURIComponent(msg.error || msg.done)}` } }));
+  if (kind === 'received') {
+    // many reports at once: every report received on one day (UTC), optionally only one place, one syndrome or only those held by the automatic check
+    if (!DAY_RE.test(id) || !action || reason.length < 3) return back({ error: 'Give the day the reports arrived (YYYY-MM-DD), void or restore, and a reason.' });
+    const t0 = Date.parse(id + 'T00:00:00Z');
+    if (!Number.isFinite(t0)) return back({ error: 'That day does not exist.' });
+    const place = PLACES.has(b.place) ? b.place : null, syndrome = SYN.has(b.syndrome) ? b.syndrome : null, heldOnly = b.held === '1' || b.held === true;
+    const where = `received_ts >= ? AND received_ts < ?${place ? ' AND place = ?' : ''}${syndrome ? ' AND syndrome = ?' : ''}${heldOnly ? ` AND rid IN (${HELD_RIDS})` : ''}`;
+    const args = [t0, t0 + DAY, ...(place ? [place] : []), ...(syndrome ? [syndrome] : [])];
+    const r = await env.DB.prepare(`INSERT INTO surv_corrections (ts, who, role, target, action, reason) SELECT ?, ?, ?, 'report:' || rid, ?, ? FROM surv_reports WHERE ${where} ORDER BY seq`)
+      .bind(nowMs(env), me.name, me.role, action, reason, ...args).run();
+    const n = changes(r);
+    if (!n) return back({ error: 'No report matches that day and choice.' });
+    return back({ done: `Saved: ${action} ${n} report${n === 1 ? '' : 's'} received on ${id}${place ? ' from ' + placeName(place) : ''}${syndrome ? ' (' + synName(syndrome) + ')' : ''}.` }, 200);
+  }
   if (!kind || !ID_RE.test(id) || !action || reason.length < 3) return back({ error: 'Give a report id or install id, void or restore, and a reason.' });
   const col = kind === 'report' ? 'rid' : 'iid';
   const found = await env.DB.prepare(`SELECT COUNT(*) n FROM surv_reports WHERE ${col} = ?`).bind(id).first();
@@ -303,6 +375,9 @@ export async function watchPage(env, url, me) {
     const g = grid.get(id); g.weeks[r.week] = (g.weeks[r.week] || 0) + r.n; g.ages[r.age] = (g.ages[r.age] || 0) + r.n; g.total += r.n;
   }
   const sigBy = new Map(); for (const s of w.signals) sigBy.set(s.syndrome, (sigBy.get(s.syndrome) || 0) + s.n);
+  // in the shareable view a hidden count (1 to 4) gets one fixed bar height, so the bar does not give the number away
+  const barH = (n, max) => (!n ? 2 : share && sup(n) !== n ? 30 : Math.max(6, (n / max) * 100));
+  const held = await heldList(env);
   const lines = [...grid.values()].sort((a, b) => a.syndrome.localeCompare(b.syndrome) || b.total - a.total);
   const shown = weeks.slice(-12);
   const qs = (extra) => `?key=${k}&from=${q.from}&to=${q.to}${q.syndrome ? '&syndrome=' + q.syndrome : ''}${q.place ? '&place=' + q.place : ''}${extra || ''}`;
@@ -312,7 +387,7 @@ export async function watchPage(env, url, me) {
     const alertWeeks = new Set(al.filter((a) => a.syndrome === s.id).map((a) => a.week));
     const max = Math.max(1, ...by);
     return `<div class="c"><div class="l">${e(s.en)}</div><div class="v">${e(show(by.reduce((a, b) => a + b, 0)))}</div><div class="s">reports, ${e(q.from)} to ${e(q.to)} · ${e(show(sigBy.get(s.id) || 0))} searches</div>
-      <div class="mini" title="reports per week">${by.map((n, i) => `<i class="${n ? (alertWeeks.has(weeks[i]) ? 'hot' : '') : 'z'}" style="height:${n ? Math.max(6, (n / max) * 100) : 2}%" title="${e(weeks[i])}: ${e(show(n))}"></i>`).join('')}</div></div>`;
+      <div class="mini" title="reports per week">${by.map((n, i) => `<i class="${n ? (alertWeeks.has(weeks[i]) ? 'hot' : '') : 'z'}" style="height:${barH(n, max)}%" title="${e(weeks[i])}: ${e(show(n))}"></i>`).join('')}</div></div>`;
   }).join('');
   const msg = url.searchParams.get('msg');
   const exp = (fmt, kind, level) => `<a href="/watch/export.${fmt}${qs(`&kind=${kind}&level=${level}`)}">${fmt.toUpperCase()}</a>`;
@@ -327,8 +402,9 @@ ${caveatBox()}
 <label class="l">From week <input name="from" value="${e(q.from)}" size="9" pattern="\\d{4}-W\\d{2}"></label> <label class="l">to <input name="to" value="${e(q.to)}" size="9" pattern="\\d{4}-W\\d{2}"></label>
 <select name="syndrome">${synOpts}</select> <select name="place">${placeOpts}</select> <label class="l"><input type="checkbox" name="share" value="1"${share ? ' checked' : ''}> shareable view (counts under ${MIN_CELL} hidden)</label> <button>Show</button>
 <div class="s">ISO weeks, Monday to Sunday, by the day the report was made on the phone. Definitions ${e(DEFS.version)} · alert rules ${e(RULES.version)}.</div></form>
+${held.length ? `<div class="c warn"><b>Held by the automatic check.</b> When more than ${PLACE_DAY_MAX} reports arrive from one district in one day, the extra reports are kept but not counted until the owner looks at them (someone may be sending made-up reports).<ul>${held.map((h) => `<li>${e(h.d)} · ${e(placeName(h.place))}: ${e(h.n)} report${h.n === 1 ? '' : 's'} held</li>`).join('')}</ul>${me.role === 'owner' ? '<div class="s">If they are real, restore them below ("Reports received on a day", tick "only held reports").</div>' : ''}</div>` : ''}
 <h2>Alerts</h2>
-<div class="c alert">${al.length ? al.map((a) => `<div class="al"><b>${e(a.week)}</b> (from ${e(weekStart(a.week))}) · <b>${e(synName(a.syndrome))}</b> · ${e(placeName(a.place))}: ${e(show(a.reports))} report${a.reports === 1 ? '' : 's'}, baseline ${e(share && a.baseline_sum > 0 && a.baseline_sum < MIN_CELL ? 'suppressed' : a.baseline)}<div class="s">Rule "${e(a.rule)}": ${e(a.rule_text)}</div></div>`).join('') : '<span class="s">No alerts in these weeks.</span>'}
+<div class="c alert">${al.length ? al.map((a) => `<div class="al"><b>${e(a.week)}</b> (from ${e(weekStart(a.week))}) · <b>${e(synName(a.syndrome))}</b> · ${e(placeName(a.place))}: ${e(show(a.reports))} ${share && sup(a.reports) !== a.reports ? 'report(s)' : a.reports === 1 ? 'report' : 'reports'}, baseline ${e(share && a.baseline_sum > 0 && a.baseline_sum < MIN_CELL ? 'suppressed' : a.baseline)}<div class="s">Rule "${e(a.rule)}": ${e(a.rule_text)}</div></div>`).join('') : '<span class="s">No alerts in these weeks.</span>'}
 <div class="s" style="margin-top:8px">An alert means "look into this": call the district health team or the clinic to check. It is not a confirmed outbreak.</div></div>
 <h2>Reports per week</h2><div class="g">${perSyn}</div>
 <h2>By syndrome and place (latest ${shown.length} weeks)</h2>
@@ -343,8 +419,10 @@ ${lines.length ? lines.map((g) => `<tr><td>${e(synName(g.syndrome))}</td><td>${e
 ${me.role === 'owner' ? `<div style="margin-top:8px"><b>Full, owner only</b> (all numbers, not for sharing): weekly counts ${exp('csv', 'counts', 'full')} ${exp('json', 'counts', 'full')} · alerts ${exp('csv', 'alerts', 'full')} ${exp('json', 'alerts', 'full')} · every report ${exp('csv', 'raw', 'full')} ${exp('json', 'raw', 'full')} · corrections ${exp('csv', 'corrections', 'full')} ${exp('json', 'corrections', 'full')}</div>` : ''}
 <div class="s" style="margin-top:6px">Every file states the query, when it was made, the number of rows, the definition and rule versions, and a SHA-256 of its rows, so anyone can check it was not changed. Each download is logged.</div></div>
 ${me.role === 'owner' ? `<h2>Correct a report (owner only)</h2>
-<form class="c" method="post" action="/watch/correct?key=${e(key)}"><div class="s">Reports are never changed or deleted. A correction is a new row that voids (or restores) one report, or every report from one install (for example a test phone). Corrections are listed in their own export.</div>
-<select name="target_type"><option value="report">Report id</option><option value="install">Install id</option></select> <input name="target" placeholder="id" size="38" required> <select name="action"><option value="void">Void</option><option value="restore">Restore</option></select> <input name="reason" placeholder="Reason (required)" size="30" required minlength="3"> <button>Save correction</button></form>` : ''}`,
+<form class="c" method="post" action="/watch/correct?key=${e(k)}"><div class="s">Reports are never changed or deleted. A correction is a new row that voids (or restores) one report, or every report from one install (for example a test phone). Corrections are listed in their own export.</div>
+<select name="target_type"><option value="report">Report id</option><option value="install">Install id</option></select> <input name="target" placeholder="id" size="38" required> <select name="action"><option value="void">Void</option><option value="restore">Restore</option></select> <input name="reason" placeholder="Reason (required)" size="30" required minlength="3"> <button>Save correction</button></form>
+<form class="c" method="post" action="/watch/correct?key=${e(k)}"><input type="hidden" name="target_type" value="received"><div class="s"><b>Reports received on a day</b> (many at once, for example a flood of made-up reports): every report that arrived on that day (UTC), from one place and of one illness if you choose.</div>
+<input name="target" placeholder="YYYY-MM-DD" size="11" required pattern="\\d{4}-\\d{2}-\\d{2}"> <select name="place">${placeOpts}</select> <select name="syndrome">${synOpts}</select> <label class="l"><input type="checkbox" name="held" value="1"> only held reports</label> <select name="action"><option value="void">Void</option><option value="restore">Restore</option></select> <input name="reason" placeholder="Reason (required)" size="30" required minlength="3"> <button>Save correction</button></form>` : ''}`,
   { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
 }
 
@@ -372,7 +450,14 @@ ${RULES.rules.map((r) => `<li><b>${e(r.id)}</b>: ${e(r.text)}</li>`).join('')}
 <h2>De-duplication</h2><div class="c"><ul>
 <li>On the phone: the same syndrome from the same phone is reported at most once per ${DEDUPE_DAYS} days (the question is not shown again in that time).</li>
 <li>On the server: a report with the same install id and syndrome within ${DEDUPE_DAYS} days of an earlier counted report is stored but marked as a duplicate and not counted. A report id that was already received (the phone sent it twice) is ignored.</li>
-<li>Corrections: reports are never edited or deleted (the database refuses it). The owner can add a correction row that voids or restores one report, or every report from one install, with a reason. The latest correction for a report or install wins. All corrections are exported with who, when and why.</li></ul></div>
+<li>A duplicate of a report that was later voided counts in its place (for example a wrong tap followed by a real case from the same phone).</li>
+<li>Corrections: reports are never edited or deleted (the database refuses it). The owner can add a correction row that voids or restores one report, every report from one install, or every report received on one day (optionally one place and one illness), with a reason. The latest correction for a report or install wins. All corrections are exported with who, when and why.</li></ul></div>
+<h2>Checks against made-up reports</h2><div class="c"><ul>
+<li>Reports are anonymous, so anyone could send well-formed but made-up ones. Each field must come from the fixed lists, and the server refuses anything else.</li>
+<li>One install (the phone's random id, which changes every month) can send at most ${PHONE_DAY_MAX} reports for any one day of illness; more are refused.</li>
+<li>When more than ${PLACE_DAY_MAX} reports arrive from one district in one day (UTC), the extra reports are kept but held by an automatic correction (who: "automatic check") and not counted. The watch page lists them, and the owner can restore them all at once if they are real.</li>
+<li>All phones together can send a fixed number of reports and searches a day; above that the server answers "busy" and phones keep their reports and try again later.</li>
+<li>The server keeps no internet address, so there is no limit per address.</li></ul></div>
 <h2>Small numbers</h2><div class="c"><ul><li>${e((DEFS.suppression || {}).text || '')}</li><li>In shareable alert exports a baseline built from fewer than ${MIN_CELL} reports is shown as "suppressed".</li>
 <li>The page itself shows exact counts to signed-in people; tick "shareable view" before taking a screenshot to share. Full exports (owner only) show every number and are not for sharing.</li>
 <li>Limitation: totals and neighbouring cells are suppressed independently, so in rare cases a hidden cell could be worked out from others. Check before publishing tables.</li></ul></div>

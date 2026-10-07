@@ -51,7 +51,7 @@ Phones send anonymous counts (a random install id, language, phone type, pages o
 wrangler login
 wrangler d1 create fhb            # copy the database_id into wrangler.toml
 wrangler d1 execute fhb --remote --file=schema.sql
-wrangler secret put DASH_KEY      # type a long secret word
+wrangler secret put DASH_KEY      # type a long secret word: letters, digits, - and _ only (other signs work, but are easy to mistype in a link)
 wrangler deploy
 ```
 2. Put `https://family-health-book.<your-subdomain>.workers.dev/e` in `content/src/config.json` as `analyticsUrl`, rebuild and publish.
@@ -79,7 +79,7 @@ Every time, on your phone:
 4. Press **Publish**. If something is missing (for example an empty Pashto text) you see a list in plain words and nothing is sent; fix it and press Publish again.
 5. **Revert draft** throws away unpublished changes. The dashboard has a **Summarise feedback** button (needs `ANTHROPIC_API_KEY`).
 
-Good to know: ids of blocks never change when you edit text (recordings are linked to them). A phone uses whichever book is newer: the one you published, or the one built into the app. If the app is rebuilt later with other changes, press **Import from app** and redo your edits, or the newer built-in book will win until you publish again.
+Good to know: ids of blocks never change when you edit text (recordings are linked to them). Phones lay only your changes over the book built into their app, so a new app release and your published changes do not undo each other. When the app has a newer version, the editor shows **Bring in app changes**: it brings the new text into your draft and keeps your own changes. How this works: `docs/EDITOR_AND_RELEASES.md`. If two people edit at once, a save made on an old copy is refused with a message to reload, so nothing is overwritten without warning.
 
 ### Give other people access
 Your secret word (`DASH_KEY`) is the owner's key: it always works and can do everything. Other people get their own link instead of your word.
