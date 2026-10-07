@@ -119,6 +119,217 @@ ui.emergency	بیړنی حالت. لومړی یو څوک د موټر راوست�
 ui.emergencyWho	څوک مرستې ته اړتیا لري؟ نوی زېږېدلی ماشوم، له ۱ کال کم ماشوم، ماشوم، که لوی کس؟	Who needs help? A newborn, a baby under 1, a child, or an adult?
 ui.emergencyList	بیړني حالات: لومړنۍ مرسته، ګام په ګام.	Emergencies: first aid, step by step.
 ui.micNotice	ستاسو د خبرو د پوهېدو لپاره، ټیلیفون ستاسو غږ د انټرنېټ له لارې د ګوګل د خبرو خدمت ته لېږي. دا اپ ستاسو غږ نه ساتي. تاسو کولی شئ پر ځای یې ولیکئ یا یو انځور وټاکئ.	To understand what you say, the phone sends your voice over the internet to Google's speech service. This app does not keep your voice. You can type or pick a picture instead.
+ui.fam.lead	د خپلې کورنۍ روغتیايي معلومات دلته وساتئ: واکسین، وزن، درمل او د ډاکټر خبرې. یو کس ووهئ چې د هغه معلومات ووینئ. هر څه یوازې په همدې ټیلیفون کې پاتې کېږي.	Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone.
+ui.fam.add	یو کس زیات کړئ: تی خور ماشوم، ماشوم، ښځه یا سړی.	Add a person: a baby, a child, a woman or a man.
+ui.fam.who	دا څوک دی؟ یو انځور ووهئ.	Who is this? Tap a picture.
+ui.fam.pic.baby	تی خور ماشوم، له یوه کاله کم.	A baby, under one year old.
+ui.fam.pic.child	ماشوم.	A child.
+ui.fam.pic.woman	ښځه.	A woman.
+ui.fam.pic.man	سړی.	A man.
+ui.fam.sex	ماشوم هلک دی که نجلۍ؟	Is the child a boy or a girl?
+ui.fam.boy	هلک.	Boy.
+ui.fam.girl	نجلۍ.	Girl.
+ui.fam.name	مایکروفون ووهئ او نوم ووایاست. د پای لپاره بیا یې ووهئ.	Tap the microphone and say the name. Tap again to stop.
+ui.fam.name-type	تاسو کولای شئ نوم ولیکئ هم. اړینه نه ده.	You can also write the name. You can skip this.
+ui.fam.dob	ماشوم کله زېږېدلی؟ ورځ، میاشت او کال وټاکئ.	When was the child born? Choose the day, the month and the year.
+ui.fam.save	ثبت یې کړئ.	Save.
+ui.fam.delete	دا کس او د هغه ټول معلومات ړنګ کړئ.	Delete this person and all their records.
+ui.fam.need-pic	مهرباني وکړئ لومړی یو انځور ووهئ.	Please tap a picture first.
+ui.fam.need-name	مهرباني وکړئ نوم ووایاست، یا یې ولیکئ.	Please say the name, or write it.
+ui.fam.rec-again	بیا ثبت کړئ.	Record again.
+ui.fam.row.vacc	واکسینونه: کوم ورکړل شوي، او کوم یو بل دی.	Vaccines: which ones are given, and which one is next.
+ui.fam.row.td	د ښځو لپاره د ټیټانوس واکسین: پنځه ډوزه، هغه او د هغې نوي زېږېدلي ماشومان ساتي.	Tetanus vaccine for women: five doses protect her and her newborn babies.
+ui.fam.row.growth	وده: وزن او قد، د ودې له چارټ سره.	Growth: weight and length, with the growth chart.
+ui.fam.row.weight	وزن: وزن ولیکئ او ووینئ چې د قد لپاره روغ دی که نه.	Weight: write the weight, and see if it is healthy for the height.
+ui.fam.row.meds	درمل: ثبت کړئ چې کوم درمل او کله یې وخوري. کله چې اپ خلاص وي، درته یې وریادوي.	Medicines: record what to take and when. When the app is open, it reminds you.
+ui.fam.row.notes	د ډاکټر خبرې: د ډاکټر خبره ثبت کړئ چې په کور کې یې بیا واورئ.	Doctor's notes: record what the doctor said, to listen again at home.
+ui.fam.row.readings	د وینې فشار او شکر هغه اندازې چې تاسو ثبت کړې دي.	Blood pressure and sugar readings that you saved.
+ui.fam.row.edit	نوم، انځور یا د زېږون نېټه بدله کړئ.	Change the name, the picture or the birth date.
+ui.fam.vacc	کله چې ماشوم د یوې لیدنې واکسینونه واخیستل، هغه لیدنه ووهئ. اپ ښيي چې بل کوم دی.	Tap a visit when the child gets those vaccines. The app shows which one is next.
+ui.fam.td.tap	کله چې یو ډوز واخیست، هغه ووهئ. د هغې د واکسین کارت هم وساتئ.	Tap a dose when she gets it. Keep her vaccine card too.
+ui.fam.td1	لومړی ډوز: په لومړي ځل چې کلینیک ته ورځئ.	Dose 1: at the first clinic visit.
+ui.fam.td2	دویم ډوز: لږ تر لږه ۴ اونۍ له لومړي ډوز وروسته.	Dose 2: at least 4 weeks after dose 1.
+ui.fam.td3	درېیم ډوز: له دویم ډوز ۶ میاشتې وروسته.	Dose 3: 6 months after dose 2.
+ui.fam.td4	څلورم ډوز: له درېیم ډوز ۱ کال وروسته.	Dose 4: 1 year after dose 3.
+ui.fam.td5	پنځم ډوز: له څلورم ډوز ۱ کال وروسته.	Dose 5: 1 year after dose 4.
+ui.fam.td.done	ټول پنځه ډوزه ورکړل شوي. د واکسین کارت ښه وساتئ.	All five doses are given. Keep the vaccine card safe.
+ui.fam.w.lead	هر ځل چې وزن کوئ، وزن ولیکئ. قد یو ځل ولیکئ. اپ ښيي چې وزن د قد لپاره روغ دی که نه.	Write the weight each time you weigh. Write the height once. The app shows if the weight is healthy for the height.
+ui.fam.w.height	قد په سانتي متره. د دېوال سره ولاړ او بې بوټو اندازه کړئ.	Height in centimetres. Measure standing against a wall, without shoes.
+ui.fam.w.weight	وزن په کیلو. په سپکو جامو کې وزن کړئ.	Weight in kilos. Weigh in light clothes.
+ui.fam.w.preg	ایا اوس امیندواره ده؟ که هو، ووهئ.	Is she pregnant now? Tap if yes.
+ui.fam.bmi.vthin	د دې قد لپاره ډېر ډنګر دی. همدا اونۍ کلینیک ته ولاړ شئ. ډېر ډنګروالی کېدای شي له ناروغۍ لکه نری رنځ، یا له لږو خوړو وي. کلینیک معاینه او مرسته کوي.	Very thin for this height. Go to the clinic this week. Being very thin can come from an illness, like TB, or from too little food. The clinic can check and help.
+ui.fam.bmi.thin	د دې قد لپاره لږ ډنګر دی. ډېر ځله خواړه وخورئ: ډوډۍ، لوبیا، غوړي، او هګۍ یا شیدې. که وزن کمېدو ته دوام ورکړ، کلینیک ته ولاړ شئ.	A little thin for this height. Eat more often: bread, beans, oil, and eggs or milk. If the weight keeps going down, go to the clinic.
+ui.fam.bmi.ok	د دې قد لپاره روغ وزن دی.	A healthy weight for this height.
+ui.fam.bmi.heavy	د دې قد لپاره لږ چاغ دی. هره ورځ پلی ولاړ شئ، او بوره، غوړي او سپینه ډوډۍ لږ وخورئ. کلینیک کولای شي د وینې فشار او شکر وګوري.	A little heavy for this height. Walk every day, and eat less sugar, oil and white bread. The clinic can check blood pressure and sugar.
+ui.fam.bmi.vheavy	د دې قد لپاره ډېر چاغ دی. دا د لوړ فشار او شکرې ناروغۍ خطر زیاتوي. له کلینیک وغواړئ چې د وینې فشار او شکر وګوري.	Very heavy for this height. This makes high blood pressure and diabetes more likely. Ask the clinic to check blood pressure and sugar.
+ui.fam.bmi.preg	په امیندوارۍ کې وزن پورته ځي. کلینیک یې په هره لیدنه کې ګوري، نو اپ یې په اړه نظر نه ورکوي.	In pregnancy the weight goes up. The clinic checks it at each visit, so the app does not judge it.
+ui.fam.w.loss	وزن په تېرو څو میاشتو کې ډېر کم شوی. پرته له هڅې د وزن کمېدل کېدای شي د ناروغۍ لکه نری رنځ یا شکرې نښه وي. همدا اونۍ کلینیک ته ولاړ شئ.	The weight has gone down a lot in the last months. Losing weight without trying can be a sign of an illness, like TB or diabetes. Go to the clinic this week.
+ui.fam.med.lead	هر هغه درمل چې ډاکټر یا روغتیايي کارکوونکي درکړی ثبت کړئ: څه درمل دی او څنګه وخوړل شي.	Record each medicine that a doctor or health worker gave: what it is, and how to take it.
+ui.fam.med.safe	یوازې هغه درمل ورکړئ چې ډاکټر یا روغتیايي کارکوونکي ویلي دي. درمل له نورو سره شریک نه کړئ.	Give only the medicine that a doctor or health worker said to give. Do not share medicine with other people.
+ui.fam.med.rec	مایکروفون ووهئ او د درملو نوم، اندازه او د خوړلو طریقه ووایاست.	Tap the microphone and say the medicine's name, how much to take, and how to take it.
+ui.fam.med.photo	تاسو کولای شئ د درملو د قطۍ یا د ډاکټر د نسخې انځور واخلئ.	You can take a photo of the medicine box or the doctor's paper.
+ui.fam.med.text	تاسو کولای شئ ویې لیکئ هم. اړینه نه ده.	You can also write it. You can skip this.
+ui.fam.med.times	کله باید وخوړل شي؟ هر وخت ووهئ. که اپ په هغه وخت کې خلاص وي، درته یې وریادوي.	When should it be taken? Tap each time. If the app is open at that time, it reminds you.
+ui.fam.t.morning	سهار.	In the morning.
+ui.fam.t.noon	غرمه.	At midday.
+ui.fam.t.evening	ماښام.	In the evening.
+ui.fam.t.night	د خوب پر وخت.	At bedtime.
+ui.fam.med.days	د څو ورځو لپاره؟ اړینه نه ده.	For how many days? You can skip this.
+ui.fam.med.delete	دا درمل ړنګ کړئ.	Delete this medicine.
+ui.fam.rem	د درملو وخت دی.	It is time for the medicine.
+ui.fam.b.taken	کله چې وخوړل شو، دلته ووهئ.	Tap here when it is taken.
+ui.fam.b.later	پنځلس دقیقې وروسته بیا را یې وریاد کړه.	Remind me again in fifteen minutes.
+ui.fam.note.lead	د ډاکټر یا روغتیايي کارکوونکي خبره ثبت کړئ چې په کور کې یې بیا واورئ.	Record what the doctor or health worker said, so you can listen again at home.
+ui.fam.note.ask	لومړی له ډاکټر وپوښتئ: ایا ستاسو خبره ثبتولای شم؟ یوازې که ډاکټر هو وویل، ثبت یې کړئ.	First ask the doctor: may I record what you say? Record only if the doctor says yes.
+ui.fam.note.rec	د پیل لپاره مایکروفون ووهئ. د پای لپاره بیا یې ووهئ.	Tap the microphone to start. Tap again to stop.
+ui.fam.note.text	تاسو کولای شئ یو لنډ یادښت ولیکئ هم. اړینه نه ده.	You can also write a short note. You can skip this.
+ui.fam.note.date	د لیدنې ورځ.	The day of the visit.
+ui.fam.rd.lead	دا د وینې فشار او شکر هغه اندازې دي چې تاسو له «دا شمېره څه مانا لري؟» څخه ثبت کړې. ډاکټر ته یې وښایئ.	These are the blood pressure and sugar readings you saved from 'What does the number mean?'. Show them to the doctor.
+ui.fam.rd.open	یوه نوې اندازه وګورئ.	Check a new reading.
+ui.fam.rd.save	دا اندازه زما په کورنۍ کې ثبت کړئ چې ډاکټر ته یې وښایئ.	Save this reading in My family, to show the doctor.
+ui.fam.rd.who	دا د چا اندازه ده؟ هغه کس ووهئ.	Whose reading is this? Tap the person.
+ui.fam.saved	ثبت شو.	Saved.
+ui.fam.copy	د خپلې کورنۍ معلومات بل ټیلیفون ته کاپي کړئ.	Copy your family's records to another phone.
+ui.fam.copy.lead	ستاسو د کورنۍ ټول معلومات، له غږونو او انځورونو سره، په یوه فایل کې راټولېږي. فایل خپل بل ټیلیفون ته ولېږئ. هلته صحت خلاص کړئ، زما کورنۍ ته ولاړ شئ او «معلومات له فایل څخه واخلئ» ووهئ.	This puts all your family's records in one file, with the voice recordings and the photos. Send the file to your other phone. There, open Sehat, go to My family, and tap 'Get records from a file'.
+ui.fam.copy.private	په دې فایل کې ستاسو د کورنۍ روغتیايي معلومات دي. یوازې خپل ټیلیفون، یا هغه چا ته یې ولېږئ چې باور پرې لرئ.	This file has your family's health records. Send it only to your own phone, or to someone you trust.
+ui.fam.x.nearby	فایل له Quick Share یا بلوتوث سره نږدې ټیلیفون ته ولېږئ.	Send the file to a phone nearby, with Quick Share or Bluetooth.
+ui.fam.x.whatsapp	فایل په واټساپ ولېږئ.	Send the file with WhatsApp.
+ui.fam.x.telegram	فایل په ټیلیګرام ولېږئ.	Send the file with Telegram.
+ui.fam.x.imo	فایل په ایمو ولېږئ.	Send the file with IMO.
+ui.fam.x.messenger	فایل په مسنجر ولېږئ.	Send the file with Messenger.
+ui.fam.x.other	فایل په بل اپ ولېږئ.	Send the file with another app.
+ui.fam.x.save	فایل په دې ټیلیفون کې خوندي کړئ، بیا یې ولېږئ.	Save the file on this phone, then send it.
+ui.fam.x.import	معلومات له هغه فایل څخه واخلئ چې تاسو ته لېږل شوی. له دې ټیلیفون څخه هېڅ نه ورکېږي.	Get records from a file that was sent to you. Nothing on this phone is lost.
+ui.fam.x.done	معلومات اوس په دې ټیلیفون کې دي.	The records are now on this phone.
+ui.fam.x.bad	دا فایل د صحت د کورنۍ د معلوماتو فایل نه دی.	This file is not a Sehat family records file.
+ui.fam.storage	ستاسو د کورنۍ معلومات، له غږونو او انځورونو سره، د ټیلیفون دومره ځای نیسي:	Your family's records, with recordings and photos, use this much space on the phone:
+ui.fam.np	شمېره په لویو تڼیو ووهئ. ټیلیفون هره شمېره وايي. کله چې سمه وه، «سمه ده» ووهئ.	Type the number with the big buttons. The phone says each number. Tap OK when it is right.
+ui.fam.np.ok	سمه ده، دا شمېره سمه ده.	OK, this number is right.
+ui.fam.none	تر اوسه هېڅوک نه دي زیات شوي. د پیل لپاره «یو کس زیات کړئ» ووهئ.	No one is added yet. Tap 'Add a person' to start.
+ui.num.0	صفر	zero
+ui.num.1	یو	one
+ui.num.2	دوه	two
+ui.num.3	درې	three
+ui.num.4	څلور	four
+ui.num.5	پنځه	five
+ui.num.6	شپږ	six
+ui.num.7	اووه	seven
+ui.num.8	اته	eight
+ui.num.9	نهه	nine
+ui.num.10	لس	ten
+ui.num.11	یوولس	eleven
+ui.num.12	دولس	twelve
+ui.num.13	دیارلس	thirteen
+ui.num.14	څوارلس	fourteen
+ui.num.15	پنځلس	fifteen
+ui.num.16	شپاړس	sixteen
+ui.num.17	اوولس	seventeen
+ui.num.18	اتلس	eighteen
+ui.num.19	نولس	nineteen
+ui.num.20	شل	twenty
+ui.num.21	یوویشت	twenty-one
+ui.num.22	دوه ویشت	twenty-two
+ui.num.23	درویشت	twenty-three
+ui.num.24	څلېرویشت	twenty-four
+ui.num.25	پنځه ویشت	twenty-five
+ui.num.26	شپږویشت	twenty-six
+ui.num.27	اوه ویشت	twenty-seven
+ui.num.28	اته ویشت	twenty-eight
+ui.num.29	نهه ویشت	twenty-nine
+ui.num.30	دېرش	thirty
+ui.num.31	یو دېرش	thirty-one
+ui.num.32	دوه دېرش	thirty-two
+ui.num.33	درې دېرش	thirty-three
+ui.num.34	څلور دېرش	thirty-four
+ui.num.35	پنځه دېرش	thirty-five
+ui.num.36	شپږ دېرش	thirty-six
+ui.num.37	اووه دېرش	thirty-seven
+ui.num.38	اته دېرش	thirty-eight
+ui.num.39	نهه دېرش	thirty-nine
+ui.num.40	څلوېښت	forty
+ui.num.41	یو څلوېښت	forty-one
+ui.num.42	دوه څلوېښت	forty-two
+ui.num.43	درې څلوېښت	forty-three
+ui.num.44	څلور څلوېښت	forty-four
+ui.num.45	پنځه څلوېښت	forty-five
+ui.num.46	شپږ څلوېښت	forty-six
+ui.num.47	اووه څلوېښت	forty-seven
+ui.num.48	اته څلوېښت	forty-eight
+ui.num.49	نهه څلوېښت	forty-nine
+ui.num.50	پنځوس	fifty
+ui.num.51	یو پنځوس	fifty-one
+ui.num.52	دوه پنځوس	fifty-two
+ui.num.53	درې پنځوس	fifty-three
+ui.num.54	څلور پنځوس	fifty-four
+ui.num.55	پنځه پنځوس	fifty-five
+ui.num.56	شپږ پنځوس	fifty-six
+ui.num.57	اووه پنځوس	fifty-seven
+ui.num.58	اته پنځوس	fifty-eight
+ui.num.59	نهه پنځوس	fifty-nine
+ui.num.60	شپېته	sixty
+ui.num.61	یو شپېته	sixty-one
+ui.num.62	دوه شپېته	sixty-two
+ui.num.63	درې شپېته	sixty-three
+ui.num.64	څلور شپېته	sixty-four
+ui.num.65	پنځه شپېته	sixty-five
+ui.num.66	شپږ شپېته	sixty-six
+ui.num.67	اووه شپېته	sixty-seven
+ui.num.68	اته شپېته	sixty-eight
+ui.num.69	نهه شپېته	sixty-nine
+ui.num.70	اویا	seventy
+ui.num.71	یو اویا	seventy-one
+ui.num.72	دوه اویا	seventy-two
+ui.num.73	درې اویا	seventy-three
+ui.num.74	څلور اویا	seventy-four
+ui.num.75	پنځه اویا	seventy-five
+ui.num.76	شپږ اویا	seventy-six
+ui.num.77	اووه اویا	seventy-seven
+ui.num.78	اته اویا	seventy-eight
+ui.num.79	نهه اویا	seventy-nine
+ui.num.80	اتیا	eighty
+ui.num.81	یو اتیا	eighty-one
+ui.num.82	دوه اتیا	eighty-two
+ui.num.83	درې اتیا	eighty-three
+ui.num.84	څلور اتیا	eighty-four
+ui.num.85	پنځه اتیا	eighty-five
+ui.num.86	شپږ اتیا	eighty-six
+ui.num.87	اووه اتیا	eighty-seven
+ui.num.88	اته اتیا	eighty-eight
+ui.num.89	نهه اتیا	eighty-nine
+ui.num.90	نوي	ninety
+ui.num.91	یو نوي	ninety-one
+ui.num.92	دوه نوي	ninety-two
+ui.num.93	درې نوي	ninety-three
+ui.num.94	څلور نوي	ninety-four
+ui.num.95	پنځه نوي	ninety-five
+ui.num.96	شپږ نوي	ninety-six
+ui.num.97	اووه نوي	ninety-seven
+ui.num.98	اته نوي	ninety-eight
+ui.num.99	نهه نوي	ninety-nine
+ui.num.100	سل	one hundred
+ui.num.100and	سل او	one hundred and
+ui.num.200	دوه سوه	two hundred
+ui.num.200and	دوه سوه او	two hundred and
+ui.num.300	درې سوه	three hundred
+ui.num.300and	درې سوه او	three hundred and
+ui.num.400	څلور سوه	four hundred
+ui.num.400and	څلور سوه او	four hundred and
+ui.num.500	پنځه سوه	five hundred
+ui.num.500and	پنځه سوه او	five hundred and
+ui.num.600	شپږ سوه	six hundred
+ui.num.600and	شپږ سوه او	six hundred and
+ui.num.700	اووه سوه	seven hundred
+ui.num.700and	اووه سوه او	seven hundred and
+ui.num.800	اته سوه	eight hundred
+ui.num.800and	اته سوه او	eight hundred and
+ui.num.900	نهه سوه	nine hundred
+ui.num.900and	نهه سوه او	nine hundred and
+ui.num.point	اعشاریه	point
+ui.num.kg	کیلو	kilos
+ui.num.cm	سانتي متره	centimetres
+ui.num.days	ورځې	days
+ui.num.mb	میګابایټ	megabytes
+ui.num.kb	کیلوبایټ	kilobytes
 ui.growth	هر ځل چې ماشوم اندازه کوئ، وزن او قد یې دلته ولیکئ. اپ ښيي چې ماشوم ښه وده کوي که نه، او کله کلینیک ته ولاړ شئ. دا معلومات یوازې په همدې ټیلیفون کې پاتې کېږي.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
 ui.gr.add	نېټه، وزن په کیلو او قد په سانتي متره ولیکئ. که یوازې یو یې لرئ، هم سمه ده.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
 ui.gr.pos	له ۲ کلونو کم ماشوم پرېوتی اندازه کړئ. له ۲ کلنۍ وروسته، ولاړ اندازه کړئ. ووایئ چې څنګه مو اندازه کړ.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.

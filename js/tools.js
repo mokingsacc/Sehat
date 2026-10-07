@@ -329,6 +329,11 @@ export function initTools(ctx) {
       html += sayRow('ui.rd.note', 'blk tip note');
       ids = [v.say, ...extra, clinic, 'ui.rd.note'];
       html = html.replace('<div class="bigread', listenBar(ids) + '<div class="bigread');
+      // blood pressure and sugar can be kept on a person's family record, to show the doctor (js/family.js)
+      if (ctx.saveReading && (RD.dev === 'bp' || RD.dev === 'sugar') && v.lv !== 'check' && S.book.narration['ui.fam.rd.save']) {
+        html += `<div class="srowbig"><button type="button" class="sbig" data-rd="save" style="--c:#2F6F7E">${ic('family')}<span class="tx"><span class="t">${esc(T('saveToFamily'))}</span></span></button>${spk('ui.fam.rd.save').replace('class="spk', 'class="spk big')}</div>`;
+        ids.push('ui.fam.rd.save');
+      }
       html += `<div class="row2"><button class="btn" data-rd="again">${esc(T('anotherReading'))}</button><a class="btn ghost" href="#/topic/${DEV[RD.dev].topic}">${esc(T('howToUse'))}</a></div>`;
       if (v.lv === 'urgent' || v.lv === 'today') html += `<a class="btn ghost" href="#/near">${ic('hospital')} ${esc(T('near'))}</a>`;
     }
@@ -428,6 +433,11 @@ export function initTools(ctx) {
     if (d.rdSign) { RD.signs.has(d.rdSign) ? RD.signs.delete(d.rdSign) : RD.signs.add(d.rdSign); const on = RD.signs.has(d.rdSign); t.setAttribute('aria-pressed', on); t.parentElement.classList.toggle('on', on); return; }
     if (d.rd === 'next') { rdNext(); return; }
     if (d.rd === 'result') { rdResult(); return; }
+    if (d.rd === 'save') {
+      const v = verdict();
+      ctx.saveReading(RD.dev === 'bp' ? { k: 'bp', s: parse(RD.a), dia: parse(RD.b), who: RD.who || '', lv: v.lv } : { k: 'sugar', v: RD.a === 'HI' || RD.a === 'LO' ? RD.a : parse(RD.a), unit: RD.unit, lv: v.lv });
+      return;
+    }
     if (d.rd === 'again') { stopAudio(); Object.assign(RD, { phase: 'val', a: '', b: '', field: 'a', colour: null, signs: new Set() }); rerender(); return; }
   });
 

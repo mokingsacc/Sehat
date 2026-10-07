@@ -24,3 +24,32 @@ export function makeZip(files) {
   e.setUint32(12, csize, true); e.setUint32(16, offset, true);
   return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type: 'application/zip' });
 }
+
+// Minimal ZIP reader (stored files, and deflated ones where the phone has DecompressionStream), for importing the
+// family records file. bytes: Uint8Array. Returns [{name, data: Uint8Array}], or null when it is not a zip.
+export async function readZip(bytes) {
+  const v = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), dec = new TextDecoder();
+  let e = -1;
+  for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65557); i--) if (v.getUint32(i, true) === 0x06054b50) { e = i; break; }
+  if (e < 0) return null;
+  const count = v.getUint16(e + 10, true); let p = v.getUint32(e + 16, true);
+  const out = [];
+  for (let k = 0; k < count; k++) {
+    if (p + 46 > bytes.length || v.getUint32(p, true) !== 0x02014b50) return null;
+    const method = v.getUint16(p + 10, true), csize = v.getUint32(p + 20, true), size = v.getUint32(p + 24, true);
+    const nlen = v.getUint16(p + 28, true), xlen = v.getUint16(p + 30, true), clen = v.getUint16(p + 32, true), off = v.getUint32(p + 42, true);
+    const name = dec.decode(bytes.subarray(p + 46, p + 46 + nlen));
+    p += 46 + nlen + xlen + clen;
+    if (off + 30 > bytes.length || v.getUint32(off, true) !== 0x04034b50) return null;
+    const start = off + 30 + v.getUint16(off + 26, true) + v.getUint16(off + 28, true);
+    const raw = bytes.subarray(start, start + csize);
+    if (method === 0) out.push({ name, data: raw });
+    else if (method === 8 && typeof DecompressionStream !== 'undefined') {
+      const ds = new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+      const data = new Uint8Array(await new Response(ds).arrayBuffer());
+      if (data.length !== size) return null;
+      out.push({ name, data });
+    } else return null;
+  }
+  return out;
+}

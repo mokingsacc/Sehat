@@ -119,6 +119,217 @@ ui.emergency	حالت عاجل. اول کسی را برای آوردن موتر 
 ui.emergencyWho	چه کسی کمک می‌خواهد؟ نوزاد، شیرخوار کمتر از ۱ سال، طفل، یا بزرگسال؟	Who needs help? A newborn, a baby under 1, a child, or an adult?
 ui.emergencyList	حالات عاجل: کمک اول، قدم به قدم.	Emergencies: first aid, step by step.
 ui.micNotice	برای فهمیدن گپ شما، گوشی آواز شما را از راه انترنت به خدمت گفتار گوگل می‌فرستد. این برنامه آواز شما را ذخیره نمی‌کند. می‌توانید به جای آن بنویسید یا یک تصویر را انتخاب کنید.	To understand what you say, the phone sends your voice over the internet to Google's speech service. This app does not keep your voice. You can type or pick a picture instead.
+ui.fam.lead	معلومات صحی خانوادهٔ خود را اینجا نگه دارید: واکسین، وزن، دوا و گپ‌های داکتر. یک نفر را بزنید تا معلومات او را ببینید. همه چیز فقط در همین گوشی می‌ماند.	Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone.
+ui.fam.add	یک نفر را اضافه کنید: طفل شیرخوار، طفل، زن یا مرد.	Add a person: a baby, a child, a woman or a man.
+ui.fam.who	این کیست؟ یک عکس را بزنید.	Who is this? Tap a picture.
+ui.fam.pic.baby	طفل شیرخوار، کمتر از یک سال.	A baby, under one year old.
+ui.fam.pic.child	طفل.	A child.
+ui.fam.pic.woman	زن.	A woman.
+ui.fam.pic.man	مرد.	A man.
+ui.fam.sex	طفل بچه است یا دختر؟	Is the child a boy or a girl?
+ui.fam.boy	بچه.	Boy.
+ui.fam.girl	دختر.	Girl.
+ui.fam.name	میکروفون را بزنید و نام را بگویید. برای ختم، دوباره بزنید.	Tap the microphone and say the name. Tap again to stop.
+ui.fam.name-type	می‌توانید نام را بنویسید هم. لازم نیست.	You can also write the name. You can skip this.
+ui.fam.dob	طفل چه وقت تولد شده؟ روز، ماه و سال را انتخاب کنید.	When was the child born? Choose the day, the month and the year.
+ui.fam.save	ثبت کنید.	Save.
+ui.fam.delete	این نفر و همهٔ معلومات او را حذف کنید.	Delete this person and all their records.
+ui.fam.need-pic	لطفاً اول یک عکس را بزنید.	Please tap a picture first.
+ui.fam.need-name	لطفاً نام را بگویید، یا آن را بنویسید.	Please say the name, or write it.
+ui.fam.rec-again	دوباره ثبت کنید.	Record again.
+ui.fam.row.vacc	واکسین‌ها: کدام‌ها داده شده، و کدام بعدی است.	Vaccines: which ones are given, and which one is next.
+ui.fam.row.td	واکسین تیتانوس برای زنان: پنج نوبت، او و نوزادانش را محافظت می‌کند.	Tetanus vaccine for women: five doses protect her and her newborn babies.
+ui.fam.row.growth	رشد: وزن و قد، با جدول رشد.	Growth: weight and length, with the growth chart.
+ui.fam.row.weight	وزن: وزن را بنویسید و ببینید که برای قد صحتمند است یا نه.	Weight: write the weight, and see if it is healthy for the height.
+ui.fam.row.meds	دواها: ثبت کنید چه دوا و چه وقت بخورد. وقتی برنامه باز است، یادتان می‌دهد.	Medicines: record what to take and when. When the app is open, it reminds you.
+ui.fam.row.notes	گپ‌های داکتر: گپ داکتر را ثبت کنید تا در خانه دوباره بشنوید.	Doctor's notes: record what the doctor said, to listen again at home.
+ui.fam.row.readings	اندازه‌های فشار خون و شکر که ثبت کرده‌اید.	Blood pressure and sugar readings that you saved.
+ui.fam.row.edit	نام، عکس یا تاریخ تولد را تغییر دهید.	Change the name, the picture or the birth date.
+ui.fam.vacc	وقتی طفل واکسین‌های یک نوبت را گرفت، آن نوبت را بزنید. برنامه نشان می‌دهد که بعدی کدام است.	Tap a visit when the child gets those vaccines. The app shows which one is next.
+ui.fam.td.tap	وقتی یک نوبت را گرفت، آن را بزنید. کارت واکسین او را هم نگه دارید.	Tap a dose when she gets it. Keep her vaccine card too.
+ui.fam.td1	نوبت اول: در اولین مراجعه به کلینیک.	Dose 1: at the first clinic visit.
+ui.fam.td2	نوبت دوم: حداقل ۴ هفته بعد از نوبت اول.	Dose 2: at least 4 weeks after dose 1.
+ui.fam.td3	نوبت سوم: ۶ ماه بعد از نوبت دوم.	Dose 3: 6 months after dose 2.
+ui.fam.td4	نوبت چهارم: ۱ سال بعد از نوبت سوم.	Dose 4: 1 year after dose 3.
+ui.fam.td5	نوبت پنجم: ۱ سال بعد از نوبت چهارم.	Dose 5: 1 year after dose 4.
+ui.fam.td.done	هر پنج نوبت داده شده. کارت واکسین را خوب نگه دارید.	All five doses are given. Keep the vaccine card safe.
+ui.fam.w.lead	هر بار که وزن می‌کنید، وزن را بنویسید. قد را یک بار بنویسید. برنامه نشان می‌دهد که وزن برای قد صحتمند است یا نه.	Write the weight each time you weigh. Write the height once. The app shows if the weight is healthy for the height.
+ui.fam.w.height	قد به سانتی‌متر. ایستاده کنار دیوار و بدون بوت اندازه کنید.	Height in centimetres. Measure standing against a wall, without shoes.
+ui.fam.w.weight	وزن به کیلو. با لباس سبک وزن کنید.	Weight in kilos. Weigh in light clothes.
+ui.fam.w.preg	آیا حالا حامله است؟ اگر بلی، بزنید.	Is she pregnant now? Tap if yes.
+ui.fam.bmi.vthin	برای این قد خیلی لاغر است. همین هفته به کلینیک بروید. لاغری زیاد می‌تواند از مریضی مثل توبرکلوز، یا از غذای کم باشد. کلینیک معاینه و کمک می‌کند.	Very thin for this height. Go to the clinic this week. Being very thin can come from an illness, like TB, or from too little food. The clinic can check and help.
+ui.fam.bmi.thin	برای این قد کمی لاغر است. بیشتر غذا بخورید: نان، لوبیا، روغن، و تخم یا شیر. اگر وزن کم شدن را ادامه داد، به کلینیک بروید.	A little thin for this height. Eat more often: bread, beans, oil, and eggs or milk. If the weight keeps going down, go to the clinic.
+ui.fam.bmi.ok	برای این قد وزن صحتمند است.	A healthy weight for this height.
+ui.fam.bmi.heavy	برای این قد کمی چاق است. هر روز پیاده بروید، و شکر، روغن و نان سفید کمتر بخورید. کلینیک می‌تواند فشار خون و شکر را ببیند.	A little heavy for this height. Walk every day, and eat less sugar, oil and white bread. The clinic can check blood pressure and sugar.
+ui.fam.bmi.vheavy	برای این قد خیلی چاق است. این خطر فشار بلند و مرض شکر را زیاد می‌کند. از کلینیک بخواهید فشار خون و شکر را ببیند.	Very heavy for this height. This makes high blood pressure and diabetes more likely. Ask the clinic to check blood pressure and sugar.
+ui.fam.bmi.preg	در وقت حاملگی وزن بالا می‌رود. کلینیک آن را در هر مراجعه می‌بیند، پس برنامه دربارهٔ آن نظر نمی‌دهد.	In pregnancy the weight goes up. The clinic checks it at each visit, so the app does not judge it.
+ui.fam.w.loss	وزن در چند ماه گذشته خیلی کم شده. کم شدن وزن بدون کوشش می‌تواند نشانهٔ مریضی مثل توبرکلوز یا مرض شکر باشد. همین هفته به کلینیک بروید.	The weight has gone down a lot in the last months. Losing weight without trying can be a sign of an illness, like TB or diabetes. Go to the clinic this week.
+ui.fam.med.lead	هر دوایی را که داکتر یا کارمند صحی داده ثبت کنید: چه دوا است و چطور خورده شود.	Record each medicine that a doctor or health worker gave: what it is, and how to take it.
+ui.fam.med.safe	فقط دوایی را بدهید که داکتر یا کارمند صحی گفته است. دوا را با دیگران شریک نکنید.	Give only the medicine that a doctor or health worker said to give. Do not share medicine with other people.
+ui.fam.med.rec	میکروفون را بزنید و نام دوا، اندازهٔ آن و طریقهٔ خوردن را بگویید.	Tap the microphone and say the medicine's name, how much to take, and how to take it.
+ui.fam.med.photo	می‌توانید از قطی دوا یا نسخهٔ داکتر عکس بگیرید.	You can take a photo of the medicine box or the doctor's paper.
+ui.fam.med.text	می‌توانید آن را بنویسید هم. لازم نیست.	You can also write it. You can skip this.
+ui.fam.med.times	چه وقت باید خورده شود؟ هر وقت را بزنید. اگر برنامه در آن وقت باز باشد، یادتان می‌دهد.	When should it be taken? Tap each time. If the app is open at that time, it reminds you.
+ui.fam.t.morning	صبح.	In the morning.
+ui.fam.t.noon	چاشت.	At midday.
+ui.fam.t.evening	شام.	In the evening.
+ui.fam.t.night	وقت خواب.	At bedtime.
+ui.fam.med.days	برای چند روز؟ لازم نیست.	For how many days? You can skip this.
+ui.fam.med.delete	این دوا را حذف کنید.	Delete this medicine.
+ui.fam.rem	وقت دوا است.	It is time for the medicine.
+ui.fam.b.taken	وقتی خورده شد، اینجا را بزنید.	Tap here when it is taken.
+ui.fam.b.later	پانزده دقیقه بعد دوباره یادم بده.	Remind me again in fifteen minutes.
+ui.fam.note.lead	گپ داکتر یا کارمند صحی را ثبت کنید تا در خانه دوباره بشنوید.	Record what the doctor or health worker said, so you can listen again at home.
+ui.fam.note.ask	اول از داکتر بپرسید: آیا می‌توانم گپ شما را ثبت کنم؟ فقط اگر داکتر بلی گفت، ثبت کنید.	First ask the doctor: may I record what you say? Record only if the doctor says yes.
+ui.fam.note.rec	برای شروع، میکروفون را بزنید. برای ختم، دوباره بزنید.	Tap the microphone to start. Tap again to stop.
+ui.fam.note.text	می‌توانید یک یادداشت کوتاه بنویسید هم. لازم نیست.	You can also write a short note. You can skip this.
+ui.fam.note.date	روز مراجعه.	The day of the visit.
+ui.fam.rd.lead	این‌ها اندازه‌های فشار خون و شکر است که از «این عدد چه معنی دارد؟» ثبت کرده‌اید. آن‌ها را به داکتر نشان دهید.	These are the blood pressure and sugar readings you saved from 'What does the number mean?'. Show them to the doctor.
+ui.fam.rd.open	یک اندازهٔ تازه را ببینید.	Check a new reading.
+ui.fam.rd.save	این اندازه را در خانوادهٔ من ثبت کنید تا به داکتر نشان دهید.	Save this reading in My family, to show the doctor.
+ui.fam.rd.who	این اندازهٔ کیست؟ آن نفر را بزنید.	Whose reading is this? Tap the person.
+ui.fam.saved	ثبت شد.	Saved.
+ui.fam.copy	معلومات خانوادهٔ خود را به گوشی دیگر کاپی کنید.	Copy your family's records to another phone.
+ui.fam.copy.lead	همهٔ معلومات خانوادهٔ شما، با صداها و عکس‌ها، در یک فایل جمع می‌شود. فایل را به گوشی دیگر خود بفرستید. در آنجا صحت را باز کنید، به خانوادهٔ من بروید و «معلومات را از فایل بگیرید» را بزنید.	This puts all your family's records in one file, with the voice recordings and the photos. Send the file to your other phone. There, open Sehat, go to My family, and tap 'Get records from a file'.
+ui.fam.copy.private	در این فایل معلومات صحی خانوادهٔ شما است. آن را فقط به گوشی خود، یا به کسی که به او اعتماد دارید بفرستید.	This file has your family's health records. Send it only to your own phone, or to someone you trust.
+ui.fam.x.nearby	فایل را با Quick Share یا بلوتوث به گوشی نزدیک بفرستید.	Send the file to a phone nearby, with Quick Share or Bluetooth.
+ui.fam.x.whatsapp	فایل را با واتساپ بفرستید.	Send the file with WhatsApp.
+ui.fam.x.telegram	فایل را با تلگرام بفرستید.	Send the file with Telegram.
+ui.fam.x.imo	فایل را با ایمو بفرستید.	Send the file with IMO.
+ui.fam.x.messenger	فایل را با مسنجر بفرستید.	Send the file with Messenger.
+ui.fam.x.other	فایل را با برنامهٔ دیگر بفرستید.	Send the file with another app.
+ui.fam.x.save	فایل را در این گوشی ذخیره کنید، بعد آن را بفرستید.	Save the file on this phone, then send it.
+ui.fam.x.import	معلومات را از فایلی که برای شما فرستاده شده بگیرید. چیزی از این گوشی پاک نمی‌شود.	Get records from a file that was sent to you. Nothing on this phone is lost.
+ui.fam.x.done	معلومات حالا در این گوشی است.	The records are now on this phone.
+ui.fam.x.bad	این فایل، فایل معلومات خانوادهٔ صحت نیست.	This file is not a Sehat family records file.
+ui.fam.storage	معلومات خانوادهٔ شما، با صداها و عکس‌ها، این قدر جای گوشی را گرفته:	Your family's records, with recordings and photos, use this much space on the phone:
+ui.fam.np	عدد را با دکمه‌های کلان بزنید. گوشی هر عدد را می‌گوید. وقتی درست بود، «درست است» را بزنید.	Type the number with the big buttons. The phone says each number. Tap OK when it is right.
+ui.fam.np.ok	درست است، این عدد درست است.	OK, this number is right.
+ui.fam.none	هنوز کسی اضافه نشده. برای شروع «یک نفر را اضافه کنید» را بزنید.	No one is added yet. Tap 'Add a person' to start.
+ui.num.0	صفر	zero
+ui.num.1	یک	one
+ui.num.2	دو	two
+ui.num.3	سه	three
+ui.num.4	چهار	four
+ui.num.5	پنج	five
+ui.num.6	شش	six
+ui.num.7	هفت	seven
+ui.num.8	هشت	eight
+ui.num.9	نه	nine
+ui.num.10	ده	ten
+ui.num.11	یازده	eleven
+ui.num.12	دوازده	twelve
+ui.num.13	سیزده	thirteen
+ui.num.14	چهارده	fourteen
+ui.num.15	پانزده	fifteen
+ui.num.16	شانزده	sixteen
+ui.num.17	هفده	seventeen
+ui.num.18	هژده	eighteen
+ui.num.19	نزده	nineteen
+ui.num.20	بیست	twenty
+ui.num.21	بیست و یک	twenty-one
+ui.num.22	بیست و دو	twenty-two
+ui.num.23	بیست و سه	twenty-three
+ui.num.24	بیست و چهار	twenty-four
+ui.num.25	بیست و پنج	twenty-five
+ui.num.26	بیست و شش	twenty-six
+ui.num.27	بیست و هفت	twenty-seven
+ui.num.28	بیست و هشت	twenty-eight
+ui.num.29	بیست و نه	twenty-nine
+ui.num.30	سی	thirty
+ui.num.31	سی و یک	thirty-one
+ui.num.32	سی و دو	thirty-two
+ui.num.33	سی و سه	thirty-three
+ui.num.34	سی و چهار	thirty-four
+ui.num.35	سی و پنج	thirty-five
+ui.num.36	سی و شش	thirty-six
+ui.num.37	سی و هفت	thirty-seven
+ui.num.38	سی و هشت	thirty-eight
+ui.num.39	سی و نه	thirty-nine
+ui.num.40	چهل	forty
+ui.num.41	چهل و یک	forty-one
+ui.num.42	چهل و دو	forty-two
+ui.num.43	چهل و سه	forty-three
+ui.num.44	چهل و چهار	forty-four
+ui.num.45	چهل و پنج	forty-five
+ui.num.46	چهل و شش	forty-six
+ui.num.47	چهل و هفت	forty-seven
+ui.num.48	چهل و هشت	forty-eight
+ui.num.49	چهل و نه	forty-nine
+ui.num.50	پنجاه	fifty
+ui.num.51	پنجاه و یک	fifty-one
+ui.num.52	پنجاه و دو	fifty-two
+ui.num.53	پنجاه و سه	fifty-three
+ui.num.54	پنجاه و چهار	fifty-four
+ui.num.55	پنجاه و پنج	fifty-five
+ui.num.56	پنجاه و شش	fifty-six
+ui.num.57	پنجاه و هفت	fifty-seven
+ui.num.58	پنجاه و هشت	fifty-eight
+ui.num.59	پنجاه و نه	fifty-nine
+ui.num.60	شصت	sixty
+ui.num.61	شصت و یک	sixty-one
+ui.num.62	شصت و دو	sixty-two
+ui.num.63	شصت و سه	sixty-three
+ui.num.64	شصت و چهار	sixty-four
+ui.num.65	شصت و پنج	sixty-five
+ui.num.66	شصت و شش	sixty-six
+ui.num.67	شصت و هفت	sixty-seven
+ui.num.68	شصت و هشت	sixty-eight
+ui.num.69	شصت و نه	sixty-nine
+ui.num.70	هفتاد	seventy
+ui.num.71	هفتاد و یک	seventy-one
+ui.num.72	هفتاد و دو	seventy-two
+ui.num.73	هفتاد و سه	seventy-three
+ui.num.74	هفتاد و چهار	seventy-four
+ui.num.75	هفتاد و پنج	seventy-five
+ui.num.76	هفتاد و شش	seventy-six
+ui.num.77	هفتاد و هفت	seventy-seven
+ui.num.78	هفتاد و هشت	seventy-eight
+ui.num.79	هفتاد و نه	seventy-nine
+ui.num.80	هشتاد	eighty
+ui.num.81	هشتاد و یک	eighty-one
+ui.num.82	هشتاد و دو	eighty-two
+ui.num.83	هشتاد و سه	eighty-three
+ui.num.84	هشتاد و چهار	eighty-four
+ui.num.85	هشتاد و پنج	eighty-five
+ui.num.86	هشتاد و شش	eighty-six
+ui.num.87	هشتاد و هفت	eighty-seven
+ui.num.88	هشتاد و هشت	eighty-eight
+ui.num.89	هشتاد و نه	eighty-nine
+ui.num.90	نود	ninety
+ui.num.91	نود و یک	ninety-one
+ui.num.92	نود و دو	ninety-two
+ui.num.93	نود و سه	ninety-three
+ui.num.94	نود و چهار	ninety-four
+ui.num.95	نود و پنج	ninety-five
+ui.num.96	نود و شش	ninety-six
+ui.num.97	نود و هفت	ninety-seven
+ui.num.98	نود و هشت	ninety-eight
+ui.num.99	نود و نه	ninety-nine
+ui.num.100	صد	one hundred
+ui.num.100and	صد و	one hundred and
+ui.num.200	دوصد	two hundred
+ui.num.200and	دوصد و	two hundred and
+ui.num.300	سه‌صد	three hundred
+ui.num.300and	سه‌صد و	three hundred and
+ui.num.400	چهارصد	four hundred
+ui.num.400and	چهارصد و	four hundred and
+ui.num.500	پنج‌صد	five hundred
+ui.num.500and	پنج‌صد و	five hundred and
+ui.num.600	شش‌صد	six hundred
+ui.num.600and	شش‌صد و	six hundred and
+ui.num.700	هفت‌صد	seven hundred
+ui.num.700and	هفت‌صد و	seven hundred and
+ui.num.800	هشت‌صد	eight hundred
+ui.num.800and	هشت‌صد و	eight hundred and
+ui.num.900	نه‌صد	nine hundred
+ui.num.900and	نه‌صد و	nine hundred and
+ui.num.point	اعشاریه	point
+ui.num.kg	کیلو	kilos
+ui.num.cm	سانتی‌متر	centimetres
+ui.num.days	روز	days
+ui.num.mb	میگابایت	megabytes
+ui.num.kb	کیلوبایت	kilobytes
 ui.growth	هر بار که طفل را اندازه می‌کنید، وزن و قد او را اینجا بنویسید. برنامه نشان می‌دهد که طفل خوب رشد می‌کند یا نه، و چه وقت به کلینیک بروید. این معلومات فقط در همین گوشی می‌ماند.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
 ui.gr.add	تاریخ، وزن به کیلو و قد به سانتی‌متر را بنویسید. اگر فقط یکی از آن‌ها را دارید، مشکلی نیست.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
 ui.gr.pos	طفل کمتر از ۲ سال را خوابیده اندازه کنید. از ۲ سالگی به بعد، ایستاده اندازه کنید. بگویید چطور اندازه کردید.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.

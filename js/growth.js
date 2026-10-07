@@ -22,7 +22,10 @@ export function initGrowth(ctx) {
       .catch(() => { G.loading = null; G.failed = true; });
     return G.loading;
   }
-  const kidNow = () => S.kids.find((x) => x.id === S.kid) || S.kids[0] || null;
+  // children only (adults' weight is on their family record); names from js/family.js (a voice-only person has none typed)
+  const kids = () => (ctx.children ? ctx.children() : S.kids);
+  const nameOf = (k) => (ctx.nameOf ? ctx.nameOf(k) : k.name);
+  const kidNow = () => { const ks = kids(); return ks.find((x) => x.id === S.kid) || ks[0] || null; };
   // every entry gets an id once (older weight-only entries had none)
   function entriesOf(k) {
     k.weights = k.weights || [];
@@ -141,8 +144,8 @@ export function initGrowth(ctx) {
     return { html: top(T('growth')) + sayRow('ui.growth', 'blk lead trow') + `<p class="muted center">${esc(T('noChildren'))}</p><button class="btn" data-action="addkid">${I.plus.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('addChild'))}</button>`, nav: 'family' };
   }
   function kidChips(k) {
-    if (S.kids.length < 2) return '';
-    return `<div class="chips">${S.kids.map((x) => `<button class="chip" data-kid="${esc(x.id)}" aria-pressed="${x.id === k.id}">${esc(x.name)}</button>`).join('')}</div>`;
+    const ks = kids(); if (ks.length < 2) return '';
+    return `<div class="chips">${ks.map((x) => `<button class="chip" data-kid="${esc(x.id)}" aria-pressed="${x.id === k.id}">${esc(nameOf(x))}</button>`).join('')}</div>`;
   }
   function entryRow(k, e) {
     const parts = [];
@@ -156,7 +159,7 @@ export function initGrowth(ctx) {
     loadWho();
     const list = entriesOf(k), age = ageDays(k.dob, todayISO());
     const ids = ['ui.growth'];
-    let html = top(T('growth') + ' · ' + k.name, { back: '#/family' }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
+    let html = top(T('growth') + ' · ' + nameOf(k), { back: '#/family/person' }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
     html += `<a class="btn big" href="#/growth/add">${I.plus.replace('<svg', '<svg style="width:26px;height:26px"')} ${esc(T('addMeasure'))}</a>`;
     if (age > 1826) { ids.push('ui.gr.over5'); html += sayRow('ui.gr.over5', 'blk tip trow'); }
     else if (G.who) {
@@ -182,11 +185,16 @@ export function initGrowth(ctx) {
     const f = G.form && G.form.kid === k.id ? G.form : (G.form = { kid: k.id, pos: age < 731 ? 'lying' : 'standing', muac: null });
     const ids = ['ui.gr.add', 'ui.gr.pos'];
     let html = top(T('addMeasure'), { back: '#/growth' }) + listenBar(ids);
-    html += `<div class="agechip">${ic('baby')}<span>${esc(k.name)} · ${esc(ctx.ageText(k.dob))}</span></div>`;
+    html += `<div class="agechip">${ic('baby')}<span>${esc(nameOf(k))} · ${esc(ctx.ageText(k.dob))}</span></div>`;
     html += sayRow('ui.gr.add', 'blk lead trow');
     html += `<div class="form" id="grform"><label>${esc(T('gDate'))}</label>${dateSelects('g', todayISO())}`;
-    html += `<label for="gr-kg">${esc(T('gWeight'))}</label><input id="gr-kg" name="kg" inputmode="decimal" autocomplete="off" placeholder="${esc(dec(num('7.5')))}">`;
-    html += `<label for="gr-cm">${esc(T('gLength'))}</label><input id="gr-cm" name="cm" inputmode="decimal" autocomplete="off" placeholder="${esc(dec(num('68.5')))}">`;
+    if (ctx.NP) { // the big number pad, which says each number (js/numpad.js)
+      html += ctx.NP.field('gr-kg', { label: T('gWeight'), say: 'ui.fam.w.weight', unit: 'kg', dec: 1, digits: 2, value: f.kg == null ? null : f.kg, onDone: (v) => { f.kg = v; } });
+      html += ctx.NP.field('gr-cm', { label: T('gLength'), say: 'ui.num.cm', unit: 'cm', dec: 1, value: f.cm == null ? null : f.cm, onDone: (v) => { f.cm = v; } });
+    } else {
+      html += `<label for="gr-kg">${esc(T('gWeight'))}</label><input id="gr-kg" name="kg" inputmode="decimal" autocomplete="off" placeholder="${esc(dec(num('7.5')))}">`;
+      html += `<label for="gr-cm">${esc(T('gLength'))}</label><input id="gr-cm" name="cm" inputmode="decimal" autocomplete="off" placeholder="${esc(dec(num('68.5')))}">`;
+    }
     html += sayRow('ui.gr.pos', 'trow gpos');
     html += `<div class="seg gseg">${['lying', 'standing'].map((p) => `<button type="button" data-gr-pos="${p}" aria-pressed="${f.pos === p}">${esc(T(p))}</button>`).join('')}</div>`;
     if (age >= 183) {
@@ -201,7 +209,7 @@ export function initGrowth(ctx) {
   }
   function save() {
     const k = kidNow(), box = $('#grform'); if (!k || !box) return;
-    const kg = parseNum($('#gr-kg').value), cm = parseNum($('#gr-cm').value);
+    const kg = ctx.NP ? ctx.NP.get('gr-kg') : parseNum($('#gr-kg').value), cm = ctx.NP ? ctx.NP.get('gr-cm') : parseNum($('#gr-cm').value);
     if (kg == null && cm == null) { toast(T('needOne')); return; }
     if ((kg != null && !(kg >= 0.5 && kg <= 80)) || (cm != null && !(cm >= 35 && cm <= 160))) { toast(T('badNumber')); return; }
     const sel = (n) => box.querySelector(`[name="${n}"]`);
@@ -213,7 +221,7 @@ export function initGrowth(ctx) {
     if (cm != null) { e.cm = Math.round(cm * 10) / 10; e.pos = G.form.pos; }
     if (G.form.muac && ageDays(k.dob, d) >= 183) e.muac = G.form.muac;
     k.weights = k.weights || []; k.weights.push(e); saveKids();
-    G.form = null; G.last = e.id; ctx.store.set('grLast', e.id); G.speak = true;
+    G.form = null; if (ctx.NP) { ctx.NP.set('gr-kg', null); ctx.NP.set('gr-cm', null); } G.last = e.id; ctx.store.set('grLast', e.id); G.speak = true;
     track('tool', { p: 'growth-add' });
     location.hash = '#/growth/result';
   }
@@ -231,7 +239,7 @@ export function initGrowth(ctx) {
     if (e.kg > 0) parts.push(`<b>${esc(fmt(e.kg))}</b> ${esc(T('kg'))}`);
     if (e.cm > 0) parts.push(`<b>${esc(fmt(e.cm))}</b> ${esc(T('cm'))} <small>${esc(e.pos ? T(e.pos) : '')}</small>`);
     if (e.muac) parts.push(`<i class="swatch ${{ g: 'green', y: 'yellow', r: 'red' }[e.muac]}"></i>`);
-    html += `<div class="gsum"><div class="gwho">${esc(k.name)} · ${esc(fmtDate(e.d))}</div><div class="gvals">${parts.join('<span class="sep"></span>')}</div>`;
+    html += `<div class="gsum"><div class="gwho">${esc(nameOf(k))} · ${esc(fmtDate(e.d))}</div><div class="gvals">${parts.join('<span class="sep"></span>')}</div>`;
     const st = [['wfa', 'chartWfa', z.wfa], ['lfa', 'chartLfa', z.lhfa], ['wfl', 'chartWfl', z.wfl]].map(([ind, key, v]) => [key, status(ind, v)]).filter(([, s]) => s);
     if (st.length) html += `<div class="gstat">${st.map(([key, [cls, word]]) => `<span class="gs ${cls}"><span>${esc(T(key))}</span><b>${esc(word)}</b></span>`).join('')}</div>`;
     html += `</div>`;

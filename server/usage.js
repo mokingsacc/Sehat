@@ -39,7 +39,7 @@ const SECS = DEFS.sections || {};
 const KIT = SECS.kit || [];
 const TOPIC_SEC = new Map();
 for (const sec of ['children', 'women', 'everyone']) for (const t of SECS[sec] || []) if (!TOPIC_SEC.has(t)) TOPIC_SEC.set(t, sec);
-const TOOL_PAGES = ['family', 'ask', 'near', 'kit', 'breaths', 'growth'], TOOL_PREFIX = ['tool', 'reading', 'kit', 'growth'];
+const TOOL_PAGES = ['family', 'ask', 'near', 'kit', 'breaths', 'growth'], TOOL_PREFIX = ['tool', 'reading', 'kit', 'growth', 'family'];
 const APP_PAGES = ['home', 'children', 'adults', 'settings', 'feedback', 'privacy', 'consent', 'welcome', 'voice', 'studio', 'share'];
 export const GROUPS = [
   ['emergencies', 'Emergencies and danger signs'], ['children', 'Children'], ['women', 'Women and pregnancy'], ['everyone', 'Everyone (adults)'],
@@ -68,7 +68,7 @@ export const GRP_SQL = `(CASE WHEN page = '_day' THEN '_day' WHEN substr(page, 1
   WHEN ${HEAD} IN (${inList(APP_PAGES)}) THEN 'app' ELSE 'other' END)`;
 
 const APP_NAMES = {
-  home: 'Home', children: 'Children: list of topics', adults: 'Adults: list of topics', family: 'My family: vaccine card and weights', ask: 'Ask: symptom search',
+  home: 'Home', children: 'Children: list of topics', adults: 'Adults: list of topics', family: 'My family: everyone', 'family/person': 'My family: one person', 'family/add': 'My family: add a person', 'family/edit': 'My family: change a person', 'family/vacc': 'My family: vaccines', 'family/weight': 'My family: adult weight', 'family/meds': 'My family: medicines', 'family/med-add': 'My family: add a medicine', 'family/notes': "My family: doctor's notes", 'family/note-add': "My family: record the doctor", 'family/readings': 'My family: saved readings', 'family/copy': 'My family: copy to another phone', ask: 'Ask: symptom search',
   emergency: 'Emergency button: who needs help?', 'emergency/newborn': 'Emergency: newborn', 'emergency/baby': 'Emergency: baby under 1', 'emergency/child': 'Emergency: child', 'emergency/adult': 'Emergency: adult or teenager',
   near: 'Nearest clinic and map', kit: 'Home health kit', breaths: 'Breathing counter', 'tool/breaths': 'Breathing counter', settings: 'Settings', feedback: 'Send feedback', privacy: 'Privacy page',
   consent: 'First-open question about counts', welcome: 'Choose language', voice: 'Choose voice', studio: 'Recording studio',
@@ -79,6 +79,9 @@ const ACT_NAMES = {
   'act/tool-share-nearby': 'Sent the app file: nearby phones', 'act/tool-share-whatsapp': 'Sent the app file: WhatsApp', 'act/tool-share-telegram': 'Sent the app file: Telegram', 'act/tool-share-imo': 'Sent the app file: IMO',
   'act/tool-share-messenger': 'Sent the app file: Messenger', 'act/tool-share-other': 'Sent the app file: other app', 'act/tool-share-link': 'Shared the link', 'act/tool-share-copy': 'Copied the link',
   'act/tool-growth-add': 'Added a growth measurement',
+  'act/tool-family-add-baby': 'Added a person: baby', 'act/tool-family-add-child': 'Added a person: child', 'act/tool-family-add-woman': 'Added a person: woman', 'act/tool-family-add-man': 'Added a person: man',
+  'act/tool-family-weight': 'Wrote an adult weight', 'act/tool-family-med': 'Added a medicine', 'act/tool-family-note': "Recorded the doctor's words", 'act/tool-family-reading-bp': 'Saved a blood pressure reading', 'act/tool-family-reading-sugar': 'Saved a sugar reading',
+  'act/tool-family-copy-sheet': 'Copied family records: share sheet', 'act/tool-family-copy-app': 'Copied family records: messaging app', 'act/tool-family-copy-web': 'Copied family records: browser share', 'act/tool-family-copy-save': 'Copied family records: saved file', 'act/tool-family-import': 'Got family records from a file',
   'act/feedback': 'Sent feedback', 'act/near': 'Found their place for the clinic list', 'act/voice': 'Changed voice', 'act/lang': 'Changed language',
 };
 export function pageName(p) {

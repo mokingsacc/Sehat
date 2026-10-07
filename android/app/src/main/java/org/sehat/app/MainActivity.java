@@ -12,6 +12,7 @@ import android.graphics.Insets;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
 import android.webkit.PermissionRequest;
 import android.webkit.RenderProcessGoneDetail;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -51,12 +53,15 @@ public class MainActivity extends Activity {
     private static final String APK_MIME = "application/vnd.android.package-archive";
     private static final int REQ_MIC = 1;
     private static final int REQ_LOCATION = 2;
+    private static final int REQ_FILES = 3;
     private static final int THEME_COLOR = 0xFFB6322D;
     private static final int PAGE_COLOR = 0xFFFBFAF7;
 
     private WebView web;
     private WebViewAssetLoader assetLoader;
     private PermissionRequest pendingMic;
+    private ValueCallback<Uri[]> pendingFiles;   // a file chooser the page opened (family records: a photo, a records file)
+    private Uri cameraUri;                       // where the camera writes a new photo
     private String pendingGeoOrigin;
     private GeolocationPermissions.Callback pendingGeoCallback;
     private Object backCallback;           // OnBackInvokedCallback on Android 13+
@@ -254,6 +259,54 @@ public class MainActivity extends Activity {
             requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQ_MIC);
         }
 
+        /** <input type="file">: the phone's file picker; for pictures also the camera (no camera permission needed). */
+        @Override
+        public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback, FileChooserParams params) {
+            if (pendingFiles != null) pendingFiles.onReceiveValue(null);
+            pendingFiles = callback;
+            cameraUri = null;
+            boolean image = false;
+            for (String t : params.getAcceptTypes()) if (t != null && t.startsWith("image")) image = true;
+            Intent pick;
+            try {
+                pick = params.createIntent();
+            } catch (Exception e) {
+                pick = new Intent(Intent.ACTION_GET_CONTENT).setType("*/*");
+            }
+            pick.addCategory(Intent.CATEGORY_OPENABLE);
+            Intent chooser = Intent.createChooser(pick, null);
+            if (image) {
+                try {
+                    File dir = new File(getCacheDir(), "photos");
+                    if (!dir.isDirectory()) //noinspection ResultOfMethodCallIgnored
+                        dir.mkdirs();
+                    File[] old = dir.listFiles();
+                    if (old != null) for (File f : old) //noinspection ResultOfMethodCallIgnored
+                        f.delete();
+                    File out = new File(dir, "photo-" + System.currentTimeMillis() + ".jpg");
+                    cameraUri = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".files", out);
+                    Intent cam = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    cam.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri);
+                    cam.setClipData(ClipData.newRawUri("photo", cameraUri));
+                    cam.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    if (cam.resolveActivity(getPackageManager()) != null) {
+                        if (params.isCaptureEnabled()) chooser = cam;
+                        else chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cam});
+                    }
+                } catch (Exception e) {
+                    cameraUri = null;
+                }
+            }
+            try {
+                startActivityForResult(chooser, REQ_FILES);
+                return true;
+            } catch (ActivityNotFoundException e) {
+                pendingFiles = null;
+                cameraUri = null;
+                return false;
+            }
+        }
+
         @Override
         public void onPermissionRequestCanceled(PermissionRequest request) {
             if (request == pendingMic) pendingMic = null;
@@ -277,6 +330,22 @@ public class MainActivity extends Activity {
             pendingGeoOrigin = null;
             pendingGeoCallback = null;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != REQ_FILES) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+        if (pendingFiles == null) return;
+        Uri[] result = null;
+        if (resultCode == RESULT_OK) {
+            if (data != null && (data.getData() != null || data.getClipData() != null)) result = WebChromeClient.FileChooserParams.parseResult(resultCode, data);
+            else if (cameraUri != null) result = new Uri[]{cameraUri};
+        }
+        pendingFiles.onReceiveValue(result);
+        pendingFiles = null;
     }
 
     @Override
@@ -370,30 +439,45 @@ public class MainActivity extends Activity {
     boolean shareApkTo(String pkg) {
         if (!ShareTargets.allowed(pkg) || !installed(pkg)) return false;
         try {
-            File apk = apkCopy();
-            Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".files", apk);
-            for (String mime : ShareTargets.MIMES) {
-                Intent send = new Intent(Intent.ACTION_SEND);
-                send.setType(mime);
-                send.setPackage(pkg);
-                send.putExtra(Intent.EXTRA_STREAM, uri);
-                send.setClipData(ClipData.newRawUri(apk.getName(), uri));
-                send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
-                if (getPackageManager().queryIntentActivities(send, 0).isEmpty()) continue;
-                grantUriPermission(pkg, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                runOnUiThread(() -> {
-                    try {
-                        startActivity(send);
-                    } catch (ActivityNotFoundException | SecurityException e) {
-                        shareApk();   // the app refused after all: offer every way
-                    }
-                });
-                return true;
-            }
+            return sendTo(apkCopy(), ShareTargets.MIMES, pkg, this::shareApk);
         } catch (Exception e) {
             return false;
         }
+    }
+
+    /** Sends one file straight to one listed app, trying each type in turn; false when that app takes none of them. */
+    private boolean sendTo(File file, String[] mimes, String pkg, Runnable fallback) {
+        Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".files", file);
+        for (String mime : mimes) {
+            Intent send = new Intent(Intent.ACTION_SEND);
+            send.setType(mime);
+            send.setPackage(pkg);
+            send.putExtra(Intent.EXTRA_STREAM, uri);
+            send.setClipData(ClipData.newRawUri(file.getName(), uri));
+            send.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (getPackageManager().queryIntentActivities(send, 0).isEmpty()) continue;
+            grantUriPermission(pkg, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            runOnUiThread(() -> {
+                try {
+                    startActivity(send);
+                } catch (ActivityNotFoundException | SecurityException e) {
+                    fallback.run();   // the app refused after all: offer every way
+                }
+            });
+            return true;
+        }
         return false;
+    }
+
+    /** A file made by the page, written to the share folder (only a plain file name is kept). */
+    private File pageFile(String base64, String name) throws IOException {
+        String safe = (name == null ? "" : name).replaceAll("[^A-Za-z0-9._-]", "_");
+        if (safe.isEmpty() || safe.startsWith(".")) safe = "file" + safe;
+        File out = new File(shareDir(), safe);
+        try (OutputStream o = new FileOutputStream(out)) {
+            o.write(Base64.decode(base64, Base64.DEFAULT));
+        }
+        return out;
     }
 
     /** Whether a listed messaging app is on this phone (Android 11+ needs the <queries> in AndroidManifest.xml). */
@@ -447,14 +531,22 @@ public class MainActivity extends Activity {
         @JavascriptInterface
         public boolean shareFile(String base64, String name, String mime) {
             try {
-                String safe = (name == null ? "" : name).replaceAll("[^A-Za-z0-9._-]", "_");
-                if (safe.isEmpty() || safe.startsWith(".")) safe = "file" + safe;
-                File out = new File(shareDir(), safe);
-                try (OutputStream o = new FileOutputStream(out)) {
-                    o.write(Base64.decode(base64, Base64.DEFAULT));
-                }
-                send(out, mime == null || mime.isEmpty() ? "application/octet-stream" : mime, safe);
+                File out = pageFile(base64, name);
+                send(out, mime == null || mime.isEmpty() ? "application/octet-stream" : mime, out.getName());
                 return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        /** Sends a file made by the page (the family records file) straight to one listed messaging app. */
+        @JavascriptInterface
+        public boolean shareFileTo(String base64, String name, String mime, String pkg) {
+            if (!ShareTargets.allowed(pkg) || !installed(pkg)) return false;
+            try {
+                File out = pageFile(base64, name);
+                String m = mime == null || mime.isEmpty() ? "application/octet-stream" : mime;
+                return sendTo(out, new String[]{m, "application/octet-stream", "*/*"}, pkg, () -> send(out, m, out.getName()));
             } catch (Exception e) {
                 return false;
             }

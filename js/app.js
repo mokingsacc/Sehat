@@ -5,6 +5,8 @@ import { initTools } from './tools.js';
 import { initFinder } from './search-ui.js'; // the symptom finder's results (js/search.js ranks the pages)
 import { initGrowth } from './growth.js'; // growth tracker: #/growth (charts, results, how to measure)
 import { initShare } from './share.js'; // Share Sehat: #/share (the app file on Android, the link and a QR code on the web)
+import { initFamily } from './family.js'; // family records: #/family (people, vaccines, weight, medicines, doctor's notes, readings)
+import { initNumpad } from './numpad.js'; // the big number pad that says each number
 import * as Stats from './stats.js';
 import { openAnimation, animPoster } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md)
 import { applyOverlay, FORMAT as OV_FORMAT } from './overlay.js'; // changes published from the editor (docs/EDITOR_AND_RELEASES.md)
@@ -584,6 +586,7 @@ function ageText(dobISO) {
   return T('ageYears', { n: num(Math.floor(days / 365.25)) });
 }
 function nextDue(k) {
+  if (k.pic === 'woman' || k.pic === 'man') return null; // adults: the women's tetanus vaccine is on their own record
   const v = S.book.topics.vaccines; if (!v || !k.dob) return null;
   const dob = new Date(k.dob + 'T12:00:00');
   for (const vis of v.visits) {
@@ -598,36 +601,9 @@ function nextCard(n, withName) {
   const iso = localDay(n.due), days = dayDiff(localDay(), iso);
   const when = days < 0 ? T('overdue') : days === 0 ? T('dueToday') : days === 1 ? T('dueTomorrow') : T('dueIn', { n: num(days) });
   const cls = days < 0 ? '' : days <= 14 ? '' : 'later';
-  return `<div class="next ${cls}" data-block="${esc(n.visit.id)}">${ic('calendar')}<a href="#/family" style="flex:1"><div class="t">${withName && n.kid ? esc(n.kid.name) + ' · ' : ''}${esc(T('nextVaccine'))}: ${esc(L(n.visit.age))}</div><div class="s">${esc(fmtDate(iso))} · ${esc(when)}</div></a>${spk(n.visit.id)}</div>`;
+  return `<div class="next ${cls}" data-block="${esc(n.visit.id)}">${ic('calendar')}<a href="#/family" style="flex:1"><div class="t">${withName && n.kid ? esc(FM.nameOf(n.kid)) + ' · ' : ''}${esc(T('nextVaccine'))}: ${esc(L(n.visit.age))}</div><div class="s">${esc(fmtDate(iso))} · ${esc(when)}</div></a>${spk(n.visit.id)}</div>`;
 }
 function saveKids() { store.set('kids', S.kids); store.set('kid', S.kid); }
-
-function screenFamily() {
-  const v = S.book.topics.vaccines;
-  const ids = ['ui.family'];
-  let html = top(T('myFamily')) + listenBar(ids);
-  html += `<div class="blk lead" data-block="ui.family"><div class="body">${esc(L(S.book.narration['ui.family']))}</div>${spk('ui.family')}</div>`;
-  html += `<div class="chips">${S.kids.map((k) => `<button class="chip" data-kid="${k.id}" aria-pressed="${k.id === S.kid}">${esc(k.name)}</button>`).join('')}<button class="chip add" data-action="addkid">+ ${esc(T('addChild'))}</button></div>`;
-  const k = S.kids.find((x) => x.id === S.kid) || S.kids[0];
-  if (!k) { html += `<p class="muted center">${esc(T('noChildren'))}</p>`; return { html, nav: 'family' }; }
-  S.kid = k.id;
-  html += `<div class="kid"><div class="av">${esc(k.name.slice(0, 1))}</div><div style="flex:1"><div class="n">${esc(k.name)}</div><div class="m">${esc(fmtDate(k.dob))} · ${esc(T(k.sex === 'f' ? 'girl' : 'boy'))} · ${esc(ageText(k.dob))}</div></div><button class="round" data-action="editkid" aria-label="${esc(T('edit'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></div>`;
-  const n = nextDue(k); if (n) { html += nextCard(n, false); if (!n.done) ids.push(n.visit.id); }
-  if (v) {
-    html += `<div class="panel"><h2>${esc(T('vaccineCard'))}</h2><p class="muted" style="margin:0 0 4px">${esc(T('tapToMark'))}</p>`;
-    const dob = new Date(k.dob + 'T12:00:00');
-    for (const vis of v.visits) {
-      const g = k.given && k.given[vis.id]; const due = localDay(new Date(dob.getTime() + vis.ageDays * DAY));
-      const isNext = n && !n.done && n.visit.id === vis.id;
-      html += `<button class="vrow ${g ? 'done' : isNext ? 'due' : ''}" data-visit="${esc(vis.id)}"><span class="ck">${g ? I.check : ''}</span><span style="flex:1"><div class="a">${esc(L(vis.age))}</div><div class="d">${g ? esc(T('given')) + ' · ' + esc(fmtDate(g)) : esc(fmtDate(due))} · ${esc(vis.doses.map((d) => L(d.name)).join('، '))}</div></span></button>`;
-    }
-    html += `</div>`;
-  }
-  html += GR.familyPanel(k); // weight, length, arm tape and the latest result (js/growth.js)
-  html += `<p class="muted center">${esc(L(S.book.narration['ui.family']))}</p>`;
-  track('view', { p: 'family' });
-  return { html, nav: 'family' };
-}
 
 function dateSelects(prefix, iso) {
   const j = toJalali(iso ? new Date(iso + 'T12:00:00') : new Date());
@@ -645,40 +621,6 @@ function readDate(form, prefix) {
   const g = fromJalali(jy, jm, jd);
   return `${g.getFullYear()}-${String(g.getMonth() + 1).padStart(2, '0')}-${String(g.getDate()).padStart(2, '0')}`;
 }
-function kidDialog(k) {
-  const isNew = !k; k = k || { id: 'k' + Date.now().toString(36), name: '', sex: 'm', dob: todayISO(), given: {}, weights: [] };
-  dialog(`<form class="form" id="kidform"><h2>${esc(isNew ? T('addChild') : T('edit'))}</h2>
-    <label>${esc(T('childName'))}</label><input name="name" required maxlength="40" value="${esc(k.name)}" autocomplete="off">
-    <label>${esc(T('birthDate'))}</label>${dateSelects('b', k.dob)}
-    <div class="row2" style="margin-top:12px"><button type="button" class="chip" data-sex="m" aria-pressed="${k.sex !== 'f'}" style="flex:1">${esc(T('boy'))}</button><button type="button" class="chip" data-sex="f" aria-pressed="${k.sex === 'f'}" style="flex:1">${esc(T('girl'))}</button></div>
-    <button class="btn" type="submit">${esc(T('save'))}</button>
-    ${isNew ? '' : `<button class="btn danger" type="button" data-action="delkid">${esc(T('delete'))}</button>`}
-    <button class="btn ghost" type="button" data-close>${esc(T('cancel'))}</button></form>`, (w) => {
-    const f = $('#kidform', w); let sex = k.sex;
-    $$('[data-sex]', w).forEach((b) => b.addEventListener('click', () => { sex = b.dataset.sex; $$('[data-sex]', w).forEach((x) => x.setAttribute('aria-pressed', x === b)); }));
-    f.addEventListener('submit', (e) => {
-      e.preventDefault(); const name = f.name.value.trim(); if (!name) return;
-      Object.assign(k, { name, sex, dob: readDate(f, 'b') });
-      if (isNew) S.kids.push(k); S.kid = k.id; saveKids(); track('kid', { n: S.kids.length }); w.remove(); render();
-    });
-    const del = $('[data-action=delkid]', w);
-    if (del) del.addEventListener('click', () => { if (confirm(T('deleteChildQ'))) { S.kids = S.kids.filter((x) => x.id !== k.id); S.kid = S.kids[0] ? S.kids[0].id : null; saveKids(); w.remove(); render(); } });
-    if (isNew) setTimeout(() => f.name.focus(), 50);
-  });
-}
-function visitDialog(k, vis) {
-  const g = k.given && k.given[vis.id];
-  dialog(`<form class="form" id="vform"><h2>${esc(L(vis.age))}</h2><p class="muted">${esc(vis.doses.map((d) => L(d.name)).join('، '))}</p>
-    <label>${esc(T('given'))}</label>${dateSelects('g', g || todayISO())}
-    <button class="btn" type="submit">${I.check.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('given'))}</button>
-    ${g ? `<button class="btn danger" type="button" data-action="ungive">${esc(T('notGiven'))}</button>` : ''}
-    <button class="btn ghost" type="button" data-close>${esc(T('cancel'))}</button></form>`, (w) => {
-    const f = $('#vform', w);
-    f.addEventListener('submit', (e) => { e.preventDefault(); k.given = k.given || {}; k.given[vis.id] = readDate(f, 'g'); saveKids(); track('dose', { v: vis.id }); w.remove(); render(); });
-    const u = $('[data-action=ungive]', w); if (u) u.addEventListener('click', () => { delete k.given[vis.id]; saveKids(); w.remove(); render(); });
-  });
-}
-
 /* ---------- smart downloads: only the chosen voice, pack by pack, most important first ---------- */
 // The app shell (code, pictures, words) is precached by the service worker; audio never is.
 // After the voice step the "urgent" pack downloads quietly, then children, women, everyone (book.packs),
@@ -1088,10 +1030,12 @@ function locate() {
 let lastPage = 'home';
 
 /* ---------- tools: breathing counter, reading checker, home health kit (js/tools.js) ---------- */
-const TL = initTools({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, topicCard, render: () => render() });
+const TL = initTools({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, topicCard, saveReading: (r) => FM.saveReading(r), render: () => render() });
 const FD = initFinder({ S, esc, T, L, ic, I, spk, isAdultTopic });
-const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, store, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, topicCard, render: () => render() });
+const NP = initNumpad({ S, esc, T, L, num, I, spk, play, dialog, toast });
+const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, store, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, topicCard, NP, nameOf: (k) => FM.nameOf(k), children: () => FM.children(), render: () => render() });
 const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText });
+const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, disclaimer, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP, render: () => render() });
 
 /* ---------- router & rendering ---------- */
 function route() { return (location.hash || '#/home').slice(2).split('/'); }
@@ -1109,7 +1053,7 @@ function render() {
   else if (r[0] === 'topic') out = screenTopic(r[1]);
   else if (r[0] === 'children') out = screenChildren();
   else if (r[0] === 'adults') out = screenAdults();
-  else if (r[0] === 'family') out = screenFamily();
+  else if (r[0] === 'family') out = FM.screen(r[1]);
   else if (r[0] === 'settings') out = screenSettings();
   else if (r[0] === 'studio') out = screenStudio();
   else if (r[0] === 'ask') out = screenAsk();
@@ -1162,7 +1106,6 @@ document.addEventListener('click', async (e) => {
   if (d.lang) { stopAudio(); await setVoice(d.lang, S.voice); render(); return; }
   if (d.speed) { S.speed = +d.speed; store.set('speed', S.speed); render(); return; }
   if (d.kid) { S.kid = d.kid; saveKids(); render(); return; }
-  if (d.visit) { const k = S.kids.find((x) => x.id === S.kid); const vis = S.book.topics.vaccines.visits.find((x) => x.id === d.visit); if (k && vis) visitDialog(k, vis); return; }
   if (d.dlpack) { if (!navigator.onLine) { toast(T('offlineNow')); return; } wantPack(slotOf(), d.dlpack); persistOnce(); t.disabled = true; t.textContent = T('downloading'); DL.full = false; startDownloads(); return; }
   if (d.rep) {
     const card = t.closest('.report');
@@ -1174,8 +1117,8 @@ document.addEventListener('click', async (e) => {
   if (d.studioslot) { ST.slot = d.studioslot; store.set('studioSlot', ST.slot); render(); return; }
   switch (d.action) {
     case 'listen': if (P.on && P.ids.length > 1) stopAudio(); else play(S.queueIds); return;
-    case 'addkid': kidDialog(null); return;
-    case 'editkid': kidDialog(S.kids.find((x) => x.id === S.kid)); return;
+    case 'addkid': location.hash = '#/family/add'; return;
+    case 'editkid': location.hash = '#/family/edit'; return;
     case 'addweight': location.hash = '#/growth/add'; return;
     case 'install': doInstall(); return;
     case 'sendapp': case 'share': location.hash = '#/share'; return; // one sharing feature: the Share Sehat screen (js/share.js)

@@ -25,6 +25,7 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
   sheet; sharing the app's own address (when `appUrl` in `config.json` is empty) **sends the APK**; other links are
   shared as text. It also adds the class `fhb-android` to `<html>`.
 - Back button walks back through the pages. Map directions and phone numbers open in Google Maps / the dialer.
+- File inputs (`<input type="file">`) open the phone's file picker; a picture input with `capture` opens the camera (no camera permission is asked: the camera app takes the photo). Used by the family records (medicine photos, "Get records from a file").
 - Asks for microphone permission (recording studio, spoken feedback) and location (nearest clinic) only when the
   page asks for them.
 
@@ -39,6 +40,7 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 | `FHBAndroid.shareAppTo(pkg)` | sends the APK straight to one messaging app (WhatsApp, Telegram, IMO, Messenger; only the packages listed in `ShareTargets.java` and in the manifest `<queries>`); falls back to the share sheet |
 | `FHBAndroid.isInstalled(pkg)` | `true` if that messaging app is on the phone (used to grey out its button) |
 | `FHBAndroid.apkSize()` | size of the APK in bytes, shown on the share screen |
+| `FHBAndroid.shareFileTo(base64, name, mime, pkg)` | sends a file made by the page (the family records file) straight to one listed messaging app; false = not possible |
 
 ### Share Sehat (`js/share.js`, route `#/share`)
 The web app's **Share Sehat** screen (home card and Settings row) uses these calls: a Nearby button (`shareApp()`, the

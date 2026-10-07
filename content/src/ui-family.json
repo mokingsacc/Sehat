@@ -1,0 +1,1447 @@
+{
+ "_note": "Family records (js/family.js, js/family-data.js, js/numpad.js): buttons (text) and narrated lines (say), and the numbers the number pad reads back (ui.num.*). Merged into ui.json by tools/build.py. Defaults: docs/REVIEW.md, 'Family records'.",
+ "text": {
+  "famPeople": {
+   "fa": "خانوادهٔ من",
+   "ps": "زما کورنۍ",
+   "en": "My family"
+  },
+  "addPerson": {
+   "fa": "یک نفر را اضافه کنید",
+   "ps": "یو کس زیات کړئ",
+   "en": "Add a person"
+  },
+  "editPerson": {
+   "fa": "تغییر",
+   "ps": "بدلون",
+   "en": "Change"
+  },
+  "whoIsThis": {
+   "fa": "این کیست؟",
+   "ps": "دا څوک دی؟",
+   "en": "Who is this?"
+  },
+  "picBaby": {
+   "fa": "طفل شیرخوار",
+   "ps": "تی خور ماشوم",
+   "en": "Baby"
+  },
+  "picChild": {
+   "fa": "طفل",
+   "ps": "ماشوم",
+   "en": "Child"
+  },
+  "picWoman": {
+   "fa": "زن",
+   "ps": "ښځه",
+   "en": "Woman"
+  },
+  "picMan": {
+   "fa": "مرد",
+   "ps": "سړی",
+   "en": "Man"
+  },
+  "sayName": {
+   "fa": "نام را بگویید",
+   "ps": "نوم ووایاست",
+   "en": "Say the name"
+  },
+  "writeName": {
+   "fa": "یا نام را بنویسید (لازم نیست)",
+   "ps": "یا نوم ولیکئ (اړینه نه ده)",
+   "en": "Or write the name (you can skip this)"
+  },
+  "recTap": {
+   "fa": "بزنید و گپ بزنید",
+   "ps": "ووهئ او خبرې وکړئ",
+   "en": "Tap and speak"
+  },
+  "recStop": {
+   "fa": "بس",
+   "ps": "بس",
+   "en": "Stop"
+  },
+  "recAgain": {
+   "fa": "دوباره ثبت کنید",
+   "ps": "بیا ثبت کړئ",
+   "en": "Record again"
+  },
+  "recPlay": {
+   "fa": "بشنوید",
+   "ps": "واورئ",
+   "en": "Listen"
+  },
+  "recNone": {
+   "fa": "ثبت نشده",
+   "ps": "نه دی ثبت شوی",
+   "en": "No recording"
+  },
+  "birthDay": {
+   "fa": "تاریخ تولد",
+   "ps": "د زېږون نېټه",
+   "en": "Birth date"
+  },
+  "rowVaccines": {
+   "fa": "واکسین‌ها",
+   "ps": "واکسینونه",
+   "en": "Vaccines"
+  },
+  "rowTd": {
+   "fa": "واکسین تیتانوس",
+   "ps": "د ټیټانوس واکسین",
+   "en": "Tetanus vaccine (Td)"
+  },
+  "rowGrowth": {
+   "fa": "رشد",
+   "ps": "وده",
+   "en": "Growth"
+  },
+  "rowWeight": {
+   "fa": "وزن",
+   "ps": "وزن",
+   "en": "Weight"
+  },
+  "rowMeds": {
+   "fa": "دواها",
+   "ps": "درمل",
+   "en": "Medicines"
+  },
+  "rowNotes": {
+   "fa": "گپ‌های داکتر",
+   "ps": "د ډاکټر خبرې",
+   "en": "Doctor's notes"
+  },
+  "rowReadings": {
+   "fa": "فشار خون و شکر",
+   "ps": "د وینې فشار او شکر",
+   "en": "Blood pressure and sugar"
+  },
+  "nextDose": {
+   "fa": "بعدی: {x}",
+   "ps": "بل: {x}",
+   "en": "Next: {x}"
+  },
+  "tdDose": {
+   "fa": "نوبت {n}",
+   "ps": "ډوز {n}",
+   "en": "Dose {n}"
+  },
+  "tdFrom": {
+   "fa": "از {d}",
+   "ps": "له {d} څخه",
+   "en": "From {d}"
+  },
+  "tdDone": {
+   "fa": "هر ۵ نوبت گرفته شد",
+   "ps": "ټول ۵ ډوزونه اخیستل شوي",
+   "en": "All 5 doses given"
+  },
+  "heightCm": {
+   "fa": "قد (سانتی‌متر)",
+   "ps": "قد (سانتي متره)",
+   "en": "Height (cm)"
+  },
+  "weightKg": {
+   "fa": "وزن (کیلو)",
+   "ps": "وزن (کیلو)",
+   "en": "Weight (kg)"
+  },
+  "bmiWord": {
+   "fa": "وزن به اندازهٔ قد",
+   "ps": "د قد په اندازه وزن",
+   "en": "Weight for height"
+  },
+  "pregnantNow": {
+   "fa": "حالا حامله است",
+   "ps": "اوس امیندواره ده",
+   "en": "Pregnant now"
+  },
+  "noWeights": {
+   "fa": "هنوز وزن نوشته نشده",
+   "ps": "تر اوسه وزن نه دی لیکل شوی",
+   "en": "No weight written yet"
+  },
+  "addMed": {
+   "fa": "دوا اضافه کنید",
+   "ps": "درمل زیات کړئ",
+   "en": "Add a medicine"
+  },
+  "medPhoto": {
+   "fa": "عکس دوا",
+   "ps": "د درملو انځور",
+   "en": "Photo of the medicine"
+  },
+  "takePhoto": {
+   "fa": "عکس بگیرید",
+   "ps": "انځور واخلئ",
+   "en": "Take a photo"
+  },
+  "medWrite": {
+   "fa": "یا بنویسید (لازم نیست)",
+   "ps": "یا یې ولیکئ (اړینه نه ده)",
+   "en": "Or write it (you can skip this)"
+  },
+  "medTimes": {
+   "fa": "چه وقت بخورد",
+   "ps": "کله یې وخوري",
+   "en": "When to take it"
+  },
+  "tMorning": {
+   "fa": "صبح",
+   "ps": "سهار",
+   "en": "Morning"
+  },
+  "tNoon": {
+   "fa": "چاشت",
+   "ps": "غرمه",
+   "en": "Midday"
+  },
+  "tEvening": {
+   "fa": "شام",
+   "ps": "ماښام",
+   "en": "Evening"
+  },
+  "tNight": {
+   "fa": "وقت خواب",
+   "ps": "د خوب وخت",
+   "en": "Bedtime"
+  },
+  "medDays": {
+   "fa": "برای چند روز",
+   "ps": "د څو ورځو لپاره",
+   "en": "For how many days"
+  },
+  "daysWord": {
+   "fa": "روز",
+   "ps": "ورځې",
+   "en": "days"
+  },
+  "daysLeft": {
+   "fa": "{n} روز مانده",
+   "ps": "{n} ورځې پاتې",
+   "en": "{n} days left"
+  },
+  "medDone": {
+   "fa": "تمام شد",
+   "ps": "خلاص شو",
+   "en": "Finished"
+  },
+  "noMeds": {
+   "fa": "هنوز دوا ثبت نشده",
+   "ps": "تر اوسه درمل نه دي ثبت شوي",
+   "en": "No medicines yet"
+  },
+  "medTime": {
+   "fa": "وقت دوا",
+   "ps": "د درملو وخت",
+   "en": "Time for medicine"
+  },
+  "taken": {
+   "fa": "خورده شد",
+   "ps": "وخوړل شو",
+   "en": "Taken"
+  },
+  "takenAt": {
+   "fa": "امروز خورده شد",
+   "ps": "نن وخوړل شو",
+   "en": "Taken today"
+  },
+  "later": {
+   "fa": "بعداً",
+   "ps": "وروسته",
+   "en": "Later"
+  },
+  "addNote": {
+   "fa": "گپ داکتر را ثبت کنید",
+   "ps": "د ډاکټر خبره ثبت کړئ",
+   "en": "Record what the doctor said"
+  },
+  "noteWrite": {
+   "fa": "یا یادداشت بنویسید (لازم نیست)",
+   "ps": "یا یادښت ولیکئ (اړینه نه ده)",
+   "en": "Or write a note (you can skip this)"
+  },
+  "visitDay": {
+   "fa": "روز مراجعه",
+   "ps": "د لیدنې ورځ",
+   "en": "Day of the visit"
+  },
+  "noNotes": {
+   "fa": "هنوز یادداشتی نیست",
+   "ps": "تر اوسه یادښت نشته",
+   "en": "No notes yet"
+  },
+  "noReadings": {
+   "fa": "هنوز اندازه‌ای ثبت نشده",
+   "ps": "تر اوسه اندازه نه ده ثبت شوې",
+   "en": "No readings saved yet"
+  },
+  "checkReading": {
+   "fa": "دیدن یک اندازه",
+   "ps": "د یوې اندازې کتل",
+   "en": "Check a reading"
+  },
+  "saveToFamily": {
+   "fa": "در خانوادهٔ من ثبت کنید",
+   "ps": "زما په کورنۍ کې یې ثبت کړئ",
+   "en": "Save in My family"
+  },
+  "whoseReading": {
+   "fa": "این اندازهٔ کیست؟",
+   "ps": "دا د چا اندازه ده؟",
+   "en": "Whose reading is this?"
+  },
+  "savedOk": {
+   "fa": "ثبت شد",
+   "ps": "ثبت شو",
+   "en": "Saved"
+  },
+  "copyRecords": {
+   "fa": "معلومات را به گوشی دیگر کاپی کنید",
+   "ps": "معلومات بل ټیلیفون ته کاپي کړئ",
+   "en": "Copy records to another phone"
+  },
+  "copyRecordsSub": {
+   "fa": "یک فایل با همه چیز، با صدا و عکس",
+   "ps": "یو فایل له ټولو سره، غږونه او انځورونه هم",
+   "en": "One file with everything, voices and photos too"
+  },
+  "getRecords": {
+   "fa": "معلومات را از فایل بگیرید",
+   "ps": "معلومات له فایل څخه واخلئ",
+   "en": "Get records from a file"
+  },
+  "saveFile": {
+   "fa": "فایل را ذخیره کنید",
+   "ps": "فایل خوندي کړئ",
+   "en": "Save the file"
+  },
+  "sendFileTo": {
+   "fa": "فایل را بفرستید",
+   "ps": "فایل ولېږئ",
+   "en": "Send the file"
+  },
+  "storageUse": {
+   "fa": "در این گوشی: {n}",
+   "ps": "په دې ټیلیفون کې: {n}",
+   "en": "On this phone: {n}"
+  },
+  "importDone": {
+   "fa": "{n} نفر اضافه یا تازه شد",
+   "ps": "{n} کسان زیات یا تازه شول",
+   "en": "{n} people added or updated"
+  },
+  "importBad": {
+   "fa": "این فایل معلومات صحت نیست",
+   "ps": "دا د صحت د معلوماتو فایل نه دی",
+   "en": "This is not a Sehat records file"
+  },
+  "deletePersonQ": {
+   "fa": "این نفر و همهٔ معلومات او حذف شود؟",
+   "ps": "دا کس او د هغه ټول معلومات ړنګ شي؟",
+   "en": "Delete this person and all their records?"
+  },
+  "deleteThisQ": {
+   "fa": "حذف شود؟",
+   "ps": "ړنګ شي؟",
+   "en": "Delete this?"
+  },
+  "needPic": {
+   "fa": "اول یک عکس را بزنید",
+   "ps": "لومړی یو انځور ووهئ",
+   "en": "Tap a picture first"
+  },
+  "needNameRec": {
+   "fa": "نام را بگویید یا بنویسید",
+   "ps": "نوم ووایاست یا یې ولیکئ",
+   "en": "Say the name or write it"
+  },
+  "needRec": {
+   "fa": "ثبت کنید، بنویسید یا عکس بگیرید",
+   "ps": "ثبت یې کړئ، ولیکئ یې یا انځور واخلئ",
+   "en": "Record it, write it or take a photo"
+  },
+  "npOk": {
+   "fa": "درست است",
+   "ps": "سمه ده",
+   "en": "OK"
+  },
+  "npType": {
+   "fa": "عدد را بزنید",
+   "ps": "شمېره ووهئ",
+   "en": "Type the number"
+  },
+  "personN": {
+   "fa": "{x} {n}",
+   "ps": "{x} {n}",
+   "en": "{x} {n}"
+  },
+  "noPeople": {
+   "fa": "هنوز کسی اضافه نشده",
+   "ps": "تر اوسه هېڅوک نه دي زیات شوي",
+   "en": "No one added yet"
+  },
+  "adultAge": {
+   "fa": "بزرگسال",
+   "ps": "لوی سړی یا ښځه",
+   "en": "Adult"
+  }
+ },
+ "say": {
+  "ui.fam.lead": {
+   "fa": "معلومات صحی خانوادهٔ خود را اینجا نگه دارید: واکسین، وزن، دوا و گپ‌های داکتر. یک نفر را بزنید تا معلومات او را ببینید. همه چیز فقط در همین گوشی می‌ماند.",
+   "ps": "د خپلې کورنۍ روغتیايي معلومات دلته وساتئ: واکسین، وزن، درمل او د ډاکټر خبرې. یو کس ووهئ چې د هغه معلومات ووینئ. هر څه یوازې په همدې ټیلیفون کې پاتې کېږي.",
+   "en": "Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone."
+  },
+  "ui.fam.add": {
+   "fa": "یک نفر را اضافه کنید: طفل شیرخوار، طفل، زن یا مرد.",
+   "ps": "یو کس زیات کړئ: تی خور ماشوم، ماشوم، ښځه یا سړی.",
+   "en": "Add a person: a baby, a child, a woman or a man."
+  },
+  "ui.fam.who": {
+   "fa": "این کیست؟ یک عکس را بزنید.",
+   "ps": "دا څوک دی؟ یو انځور ووهئ.",
+   "en": "Who is this? Tap a picture."
+  },
+  "ui.fam.pic.baby": {
+   "fa": "طفل شیرخوار، کمتر از یک سال.",
+   "ps": "تی خور ماشوم، له یوه کاله کم.",
+   "en": "A baby, under one year old."
+  },
+  "ui.fam.pic.child": {
+   "fa": "طفل.",
+   "ps": "ماشوم.",
+   "en": "A child."
+  },
+  "ui.fam.pic.woman": {
+   "fa": "زن.",
+   "ps": "ښځه.",
+   "en": "A woman."
+  },
+  "ui.fam.pic.man": {
+   "fa": "مرد.",
+   "ps": "سړی.",
+   "en": "A man."
+  },
+  "ui.fam.sex": {
+   "fa": "طفل بچه است یا دختر؟",
+   "ps": "ماشوم هلک دی که نجلۍ؟",
+   "en": "Is the child a boy or a girl?"
+  },
+  "ui.fam.boy": {
+   "fa": "بچه.",
+   "ps": "هلک.",
+   "en": "Boy."
+  },
+  "ui.fam.girl": {
+   "fa": "دختر.",
+   "ps": "نجلۍ.",
+   "en": "Girl."
+  },
+  "ui.fam.name": {
+   "fa": "میکروفون را بزنید و نام را بگویید. برای ختم، دوباره بزنید.",
+   "ps": "مایکروفون ووهئ او نوم ووایاست. د پای لپاره بیا یې ووهئ.",
+   "en": "Tap the microphone and say the name. Tap again to stop."
+  },
+  "ui.fam.name-type": {
+   "fa": "می‌توانید نام را بنویسید هم. لازم نیست.",
+   "ps": "تاسو کولای شئ نوم ولیکئ هم. اړینه نه ده.",
+   "en": "You can also write the name. You can skip this."
+  },
+  "ui.fam.dob": {
+   "fa": "طفل چه وقت تولد شده؟ روز، ماه و سال را انتخاب کنید.",
+   "ps": "ماشوم کله زېږېدلی؟ ورځ، میاشت او کال وټاکئ.",
+   "en": "When was the child born? Choose the day, the month and the year."
+  },
+  "ui.fam.save": {
+   "fa": "ثبت کنید.",
+   "ps": "ثبت یې کړئ.",
+   "en": "Save."
+  },
+  "ui.fam.delete": {
+   "fa": "این نفر و همهٔ معلومات او را حذف کنید.",
+   "ps": "دا کس او د هغه ټول معلومات ړنګ کړئ.",
+   "en": "Delete this person and all their records."
+  },
+  "ui.fam.need-pic": {
+   "fa": "لطفاً اول یک عکس را بزنید.",
+   "ps": "مهرباني وکړئ لومړی یو انځور ووهئ.",
+   "en": "Please tap a picture first."
+  },
+  "ui.fam.need-name": {
+   "fa": "لطفاً نام را بگویید، یا آن را بنویسید.",
+   "ps": "مهرباني وکړئ نوم ووایاست، یا یې ولیکئ.",
+   "en": "Please say the name, or write it."
+  },
+  "ui.fam.rec-again": {
+   "fa": "دوباره ثبت کنید.",
+   "ps": "بیا ثبت کړئ.",
+   "en": "Record again."
+  },
+  "ui.fam.row.vacc": {
+   "fa": "واکسین‌ها: کدام‌ها داده شده، و کدام بعدی است.",
+   "ps": "واکسینونه: کوم ورکړل شوي، او کوم یو بل دی.",
+   "en": "Vaccines: which ones are given, and which one is next."
+  },
+  "ui.fam.row.td": {
+   "fa": "واکسین تیتانوس برای زنان: پنج نوبت، او و نوزادانش را محافظت می‌کند.",
+   "ps": "د ښځو لپاره د ټیټانوس واکسین: پنځه ډوزه، هغه او د هغې نوي زېږېدلي ماشومان ساتي.",
+   "en": "Tetanus vaccine for women: five doses protect her and her newborn babies."
+  },
+  "ui.fam.row.growth": {
+   "fa": "رشد: وزن و قد، با جدول رشد.",
+   "ps": "وده: وزن او قد، د ودې له چارټ سره.",
+   "en": "Growth: weight and length, with the growth chart."
+  },
+  "ui.fam.row.weight": {
+   "fa": "وزن: وزن را بنویسید و ببینید که برای قد صحتمند است یا نه.",
+   "ps": "وزن: وزن ولیکئ او ووینئ چې د قد لپاره روغ دی که نه.",
+   "en": "Weight: write the weight, and see if it is healthy for the height."
+  },
+  "ui.fam.row.meds": {
+   "fa": "دواها: ثبت کنید چه دوا و چه وقت بخورد. وقتی برنامه باز است، یادتان می‌دهد.",
+   "ps": "درمل: ثبت کړئ چې کوم درمل او کله یې وخوري. کله چې اپ خلاص وي، درته یې وریادوي.",
+   "en": "Medicines: record what to take and when. When the app is open, it reminds you."
+  },
+  "ui.fam.row.notes": {
+   "fa": "گپ‌های داکتر: گپ داکتر را ثبت کنید تا در خانه دوباره بشنوید.",
+   "ps": "د ډاکټر خبرې: د ډاکټر خبره ثبت کړئ چې په کور کې یې بیا واورئ.",
+   "en": "Doctor's notes: record what the doctor said, to listen again at home."
+  },
+  "ui.fam.row.readings": {
+   "fa": "اندازه‌های فشار خون و شکر که ثبت کرده‌اید.",
+   "ps": "د وینې فشار او شکر هغه اندازې چې تاسو ثبت کړې دي.",
+   "en": "Blood pressure and sugar readings that you saved."
+  },
+  "ui.fam.row.edit": {
+   "fa": "نام، عکس یا تاریخ تولد را تغییر دهید.",
+   "ps": "نوم، انځور یا د زېږون نېټه بدله کړئ.",
+   "en": "Change the name, the picture or the birth date."
+  },
+  "ui.fam.vacc": {
+   "fa": "وقتی طفل واکسین‌های یک نوبت را گرفت، آن نوبت را بزنید. برنامه نشان می‌دهد که بعدی کدام است.",
+   "ps": "کله چې ماشوم د یوې لیدنې واکسینونه واخیستل، هغه لیدنه ووهئ. اپ ښيي چې بل کوم دی.",
+   "en": "Tap a visit when the child gets those vaccines. The app shows which one is next."
+  },
+  "ui.fam.td.tap": {
+   "fa": "وقتی یک نوبت را گرفت، آن را بزنید. کارت واکسین او را هم نگه دارید.",
+   "ps": "کله چې یو ډوز واخیست، هغه ووهئ. د هغې د واکسین کارت هم وساتئ.",
+   "en": "Tap a dose when she gets it. Keep her vaccine card too."
+  },
+  "ui.fam.td1": {
+   "fa": "نوبت اول: در اولین مراجعه به کلینیک.",
+   "ps": "لومړی ډوز: په لومړي ځل چې کلینیک ته ورځئ.",
+   "en": "Dose 1: at the first clinic visit."
+  },
+  "ui.fam.td2": {
+   "fa": "نوبت دوم: حداقل ۴ هفته بعد از نوبت اول.",
+   "ps": "دویم ډوز: لږ تر لږه ۴ اونۍ له لومړي ډوز وروسته.",
+   "en": "Dose 2: at least 4 weeks after dose 1."
+  },
+  "ui.fam.td3": {
+   "fa": "نوبت سوم: ۶ ماه بعد از نوبت دوم.",
+   "ps": "درېیم ډوز: له دویم ډوز ۶ میاشتې وروسته.",
+   "en": "Dose 3: 6 months after dose 2."
+  },
+  "ui.fam.td4": {
+   "fa": "نوبت چهارم: ۱ سال بعد از نوبت سوم.",
+   "ps": "څلورم ډوز: له درېیم ډوز ۱ کال وروسته.",
+   "en": "Dose 4: 1 year after dose 3."
+  },
+  "ui.fam.td5": {
+   "fa": "نوبت پنجم: ۱ سال بعد از نوبت چهارم.",
+   "ps": "پنځم ډوز: له څلورم ډوز ۱ کال وروسته.",
+   "en": "Dose 5: 1 year after dose 4."
+  },
+  "ui.fam.td.done": {
+   "fa": "هر پنج نوبت داده شده. کارت واکسین را خوب نگه دارید.",
+   "ps": "ټول پنځه ډوزه ورکړل شوي. د واکسین کارت ښه وساتئ.",
+   "en": "All five doses are given. Keep the vaccine card safe."
+  },
+  "ui.fam.w.lead": {
+   "fa": "هر بار که وزن می‌کنید، وزن را بنویسید. قد را یک بار بنویسید. برنامه نشان می‌دهد که وزن برای قد صحتمند است یا نه.",
+   "ps": "هر ځل چې وزن کوئ، وزن ولیکئ. قد یو ځل ولیکئ. اپ ښيي چې وزن د قد لپاره روغ دی که نه.",
+   "en": "Write the weight each time you weigh. Write the height once. The app shows if the weight is healthy for the height."
+  },
+  "ui.fam.w.height": {
+   "fa": "قد به سانتی‌متر. ایستاده کنار دیوار و بدون بوت اندازه کنید.",
+   "ps": "قد په سانتي متره. د دېوال سره ولاړ او بې بوټو اندازه کړئ.",
+   "en": "Height in centimetres. Measure standing against a wall, without shoes."
+  },
+  "ui.fam.w.weight": {
+   "fa": "وزن به کیلو. با لباس سبک وزن کنید.",
+   "ps": "وزن په کیلو. په سپکو جامو کې وزن کړئ.",
+   "en": "Weight in kilos. Weigh in light clothes."
+  },
+  "ui.fam.w.preg": {
+   "fa": "آیا حالا حامله است؟ اگر بلی، بزنید.",
+   "ps": "ایا اوس امیندواره ده؟ که هو، ووهئ.",
+   "en": "Is she pregnant now? Tap if yes."
+  },
+  "ui.fam.bmi.vthin": {
+   "fa": "برای این قد خیلی لاغر است. همین هفته به کلینیک بروید. لاغری زیاد می‌تواند از مریضی مثل توبرکلوز، یا از غذای کم باشد. کلینیک معاینه و کمک می‌کند.",
+   "ps": "د دې قد لپاره ډېر ډنګر دی. همدا اونۍ کلینیک ته ولاړ شئ. ډېر ډنګروالی کېدای شي له ناروغۍ لکه نری رنځ، یا له لږو خوړو وي. کلینیک معاینه او مرسته کوي.",
+   "en": "Very thin for this height. Go to the clinic this week. Being very thin can come from an illness, like TB, or from too little food. The clinic can check and help."
+  },
+  "ui.fam.bmi.thin": {
+   "fa": "برای این قد کمی لاغر است. بیشتر غذا بخورید: نان، لوبیا، روغن، و تخم یا شیر. اگر وزن کم شدن را ادامه داد، به کلینیک بروید.",
+   "ps": "د دې قد لپاره لږ ډنګر دی. ډېر ځله خواړه وخورئ: ډوډۍ، لوبیا، غوړي، او هګۍ یا شیدې. که وزن کمېدو ته دوام ورکړ، کلینیک ته ولاړ شئ.",
+   "en": "A little thin for this height. Eat more often: bread, beans, oil, and eggs or milk. If the weight keeps going down, go to the clinic."
+  },
+  "ui.fam.bmi.ok": {
+   "fa": "برای این قد وزن صحتمند است.",
+   "ps": "د دې قد لپاره روغ وزن دی.",
+   "en": "A healthy weight for this height."
+  },
+  "ui.fam.bmi.heavy": {
+   "fa": "برای این قد کمی چاق است. هر روز پیاده بروید، و شکر، روغن و نان سفید کمتر بخورید. کلینیک می‌تواند فشار خون و شکر را ببیند.",
+   "ps": "د دې قد لپاره لږ چاغ دی. هره ورځ پلی ولاړ شئ، او بوره، غوړي او سپینه ډوډۍ لږ وخورئ. کلینیک کولای شي د وینې فشار او شکر وګوري.",
+   "en": "A little heavy for this height. Walk every day, and eat less sugar, oil and white bread. The clinic can check blood pressure and sugar."
+  },
+  "ui.fam.bmi.vheavy": {
+   "fa": "برای این قد خیلی چاق است. این خطر فشار بلند و مرض شکر را زیاد می‌کند. از کلینیک بخواهید فشار خون و شکر را ببیند.",
+   "ps": "د دې قد لپاره ډېر چاغ دی. دا د لوړ فشار او شکرې ناروغۍ خطر زیاتوي. له کلینیک وغواړئ چې د وینې فشار او شکر وګوري.",
+   "en": "Very heavy for this height. This makes high blood pressure and diabetes more likely. Ask the clinic to check blood pressure and sugar."
+  },
+  "ui.fam.bmi.preg": {
+   "fa": "در وقت حاملگی وزن بالا می‌رود. کلینیک آن را در هر مراجعه می‌بیند، پس برنامه دربارهٔ آن نظر نمی‌دهد.",
+   "ps": "په امیندوارۍ کې وزن پورته ځي. کلینیک یې په هره لیدنه کې ګوري، نو اپ یې په اړه نظر نه ورکوي.",
+   "en": "In pregnancy the weight goes up. The clinic checks it at each visit, so the app does not judge it."
+  },
+  "ui.fam.w.loss": {
+   "fa": "وزن در چند ماه گذشته خیلی کم شده. کم شدن وزن بدون کوشش می‌تواند نشانهٔ مریضی مثل توبرکلوز یا مرض شکر باشد. همین هفته به کلینیک بروید.",
+   "ps": "وزن په تېرو څو میاشتو کې ډېر کم شوی. پرته له هڅې د وزن کمېدل کېدای شي د ناروغۍ لکه نری رنځ یا شکرې نښه وي. همدا اونۍ کلینیک ته ولاړ شئ.",
+   "en": "The weight has gone down a lot in the last months. Losing weight without trying can be a sign of an illness, like TB or diabetes. Go to the clinic this week."
+  },
+  "ui.fam.med.lead": {
+   "fa": "هر دوایی را که داکتر یا کارمند صحی داده ثبت کنید: چه دوا است و چطور خورده شود.",
+   "ps": "هر هغه درمل چې ډاکټر یا روغتیايي کارکوونکي درکړی ثبت کړئ: څه درمل دی او څنګه وخوړل شي.",
+   "en": "Record each medicine that a doctor or health worker gave: what it is, and how to take it."
+  },
+  "ui.fam.med.safe": {
+   "fa": "فقط دوایی را بدهید که داکتر یا کارمند صحی گفته است. دوا را با دیگران شریک نکنید.",
+   "ps": "یوازې هغه درمل ورکړئ چې ډاکټر یا روغتیايي کارکوونکي ویلي دي. درمل له نورو سره شریک نه کړئ.",
+   "en": "Give only the medicine that a doctor or health worker said to give. Do not share medicine with other people."
+  },
+  "ui.fam.med.rec": {
+   "fa": "میکروفون را بزنید و نام دوا، اندازهٔ آن و طریقهٔ خوردن را بگویید.",
+   "ps": "مایکروفون ووهئ او د درملو نوم، اندازه او د خوړلو طریقه ووایاست.",
+   "en": "Tap the microphone and say the medicine's name, how much to take, and how to take it."
+  },
+  "ui.fam.med.photo": {
+   "fa": "می‌توانید از قطی دوا یا نسخهٔ داکتر عکس بگیرید.",
+   "ps": "تاسو کولای شئ د درملو د قطۍ یا د ډاکټر د نسخې انځور واخلئ.",
+   "en": "You can take a photo of the medicine box or the doctor's paper."
+  },
+  "ui.fam.med.text": {
+   "fa": "می‌توانید آن را بنویسید هم. لازم نیست.",
+   "ps": "تاسو کولای شئ ویې لیکئ هم. اړینه نه ده.",
+   "en": "You can also write it. You can skip this."
+  },
+  "ui.fam.med.times": {
+   "fa": "چه وقت باید خورده شود؟ هر وقت را بزنید. اگر برنامه در آن وقت باز باشد، یادتان می‌دهد.",
+   "ps": "کله باید وخوړل شي؟ هر وخت ووهئ. که اپ په هغه وخت کې خلاص وي، درته یې وریادوي.",
+   "en": "When should it be taken? Tap each time. If the app is open at that time, it reminds you."
+  },
+  "ui.fam.t.morning": {
+   "fa": "صبح.",
+   "ps": "سهار.",
+   "en": "In the morning."
+  },
+  "ui.fam.t.noon": {
+   "fa": "چاشت.",
+   "ps": "غرمه.",
+   "en": "At midday."
+  },
+  "ui.fam.t.evening": {
+   "fa": "شام.",
+   "ps": "ماښام.",
+   "en": "In the evening."
+  },
+  "ui.fam.t.night": {
+   "fa": "وقت خواب.",
+   "ps": "د خوب پر وخت.",
+   "en": "At bedtime."
+  },
+  "ui.fam.med.days": {
+   "fa": "برای چند روز؟ لازم نیست.",
+   "ps": "د څو ورځو لپاره؟ اړینه نه ده.",
+   "en": "For how many days? You can skip this."
+  },
+  "ui.fam.med.delete": {
+   "fa": "این دوا را حذف کنید.",
+   "ps": "دا درمل ړنګ کړئ.",
+   "en": "Delete this medicine."
+  },
+  "ui.fam.rem": {
+   "fa": "وقت دوا است.",
+   "ps": "د درملو وخت دی.",
+   "en": "It is time for the medicine."
+  },
+  "ui.fam.b.taken": {
+   "fa": "وقتی خورده شد، اینجا را بزنید.",
+   "ps": "کله چې وخوړل شو، دلته ووهئ.",
+   "en": "Tap here when it is taken."
+  },
+  "ui.fam.b.later": {
+   "fa": "پانزده دقیقه بعد دوباره یادم بده.",
+   "ps": "پنځلس دقیقې وروسته بیا را یې وریاد کړه.",
+   "en": "Remind me again in fifteen minutes."
+  },
+  "ui.fam.note.lead": {
+   "fa": "گپ داکتر یا کارمند صحی را ثبت کنید تا در خانه دوباره بشنوید.",
+   "ps": "د ډاکټر یا روغتیايي کارکوونکي خبره ثبت کړئ چې په کور کې یې بیا واورئ.",
+   "en": "Record what the doctor or health worker said, so you can listen again at home."
+  },
+  "ui.fam.note.ask": {
+   "fa": "اول از داکتر بپرسید: آیا می‌توانم گپ شما را ثبت کنم؟ فقط اگر داکتر بلی گفت، ثبت کنید.",
+   "ps": "لومړی له ډاکټر وپوښتئ: ایا ستاسو خبره ثبتولای شم؟ یوازې که ډاکټر هو وویل، ثبت یې کړئ.",
+   "en": "First ask the doctor: may I record what you say? Record only if the doctor says yes."
+  },
+  "ui.fam.note.rec": {
+   "fa": "برای شروع، میکروفون را بزنید. برای ختم، دوباره بزنید.",
+   "ps": "د پیل لپاره مایکروفون ووهئ. د پای لپاره بیا یې ووهئ.",
+   "en": "Tap the microphone to start. Tap again to stop."
+  },
+  "ui.fam.note.text": {
+   "fa": "می‌توانید یک یادداشت کوتاه بنویسید هم. لازم نیست.",
+   "ps": "تاسو کولای شئ یو لنډ یادښت ولیکئ هم. اړینه نه ده.",
+   "en": "You can also write a short note. You can skip this."
+  },
+  "ui.fam.note.date": {
+   "fa": "روز مراجعه.",
+   "ps": "د لیدنې ورځ.",
+   "en": "The day of the visit."
+  },
+  "ui.fam.rd.lead": {
+   "fa": "این‌ها اندازه‌های فشار خون و شکر است که از «این عدد چه معنی دارد؟» ثبت کرده‌اید. آن‌ها را به داکتر نشان دهید.",
+   "ps": "دا د وینې فشار او شکر هغه اندازې دي چې تاسو له «دا شمېره څه مانا لري؟» څخه ثبت کړې. ډاکټر ته یې وښایئ.",
+   "en": "These are the blood pressure and sugar readings you saved from 'What does the number mean?'. Show them to the doctor."
+  },
+  "ui.fam.rd.open": {
+   "fa": "یک اندازهٔ تازه را ببینید.",
+   "ps": "یوه نوې اندازه وګورئ.",
+   "en": "Check a new reading."
+  },
+  "ui.fam.rd.save": {
+   "fa": "این اندازه را در خانوادهٔ من ثبت کنید تا به داکتر نشان دهید.",
+   "ps": "دا اندازه زما په کورنۍ کې ثبت کړئ چې ډاکټر ته یې وښایئ.",
+   "en": "Save this reading in My family, to show the doctor."
+  },
+  "ui.fam.rd.who": {
+   "fa": "این اندازهٔ کیست؟ آن نفر را بزنید.",
+   "ps": "دا د چا اندازه ده؟ هغه کس ووهئ.",
+   "en": "Whose reading is this? Tap the person."
+  },
+  "ui.fam.saved": {
+   "fa": "ثبت شد.",
+   "ps": "ثبت شو.",
+   "en": "Saved."
+  },
+  "ui.fam.copy": {
+   "fa": "معلومات خانوادهٔ خود را به گوشی دیگر کاپی کنید.",
+   "ps": "د خپلې کورنۍ معلومات بل ټیلیفون ته کاپي کړئ.",
+   "en": "Copy your family's records to another phone."
+  },
+  "ui.fam.copy.lead": {
+   "fa": "همهٔ معلومات خانوادهٔ شما، با صداها و عکس‌ها، در یک فایل جمع می‌شود. فایل را به گوشی دیگر خود بفرستید. در آنجا صحت را باز کنید، به خانوادهٔ من بروید و «معلومات را از فایل بگیرید» را بزنید.",
+   "ps": "ستاسو د کورنۍ ټول معلومات، له غږونو او انځورونو سره، په یوه فایل کې راټولېږي. فایل خپل بل ټیلیفون ته ولېږئ. هلته صحت خلاص کړئ، زما کورنۍ ته ولاړ شئ او «معلومات له فایل څخه واخلئ» ووهئ.",
+   "en": "This puts all your family's records in one file, with the voice recordings and the photos. Send the file to your other phone. There, open Sehat, go to My family, and tap 'Get records from a file'."
+  },
+  "ui.fam.copy.private": {
+   "fa": "در این فایل معلومات صحی خانوادهٔ شما است. آن را فقط به گوشی خود، یا به کسی که به او اعتماد دارید بفرستید.",
+   "ps": "په دې فایل کې ستاسو د کورنۍ روغتیايي معلومات دي. یوازې خپل ټیلیفون، یا هغه چا ته یې ولېږئ چې باور پرې لرئ.",
+   "en": "This file has your family's health records. Send it only to your own phone, or to someone you trust."
+  },
+  "ui.fam.x.nearby": {
+   "fa": "فایل را با Quick Share یا بلوتوث به گوشی نزدیک بفرستید.",
+   "ps": "فایل له Quick Share یا بلوتوث سره نږدې ټیلیفون ته ولېږئ.",
+   "en": "Send the file to a phone nearby, with Quick Share or Bluetooth."
+  },
+  "ui.fam.x.whatsapp": {
+   "fa": "فایل را با واتساپ بفرستید.",
+   "ps": "فایل په واټساپ ولېږئ.",
+   "en": "Send the file with WhatsApp."
+  },
+  "ui.fam.x.telegram": {
+   "fa": "فایل را با تلگرام بفرستید.",
+   "ps": "فایل په ټیلیګرام ولېږئ.",
+   "en": "Send the file with Telegram."
+  },
+  "ui.fam.x.imo": {
+   "fa": "فایل را با ایمو بفرستید.",
+   "ps": "فایل په ایمو ولېږئ.",
+   "en": "Send the file with IMO."
+  },
+  "ui.fam.x.messenger": {
+   "fa": "فایل را با مسنجر بفرستید.",
+   "ps": "فایل په مسنجر ولېږئ.",
+   "en": "Send the file with Messenger."
+  },
+  "ui.fam.x.other": {
+   "fa": "فایل را با برنامهٔ دیگر بفرستید.",
+   "ps": "فایل په بل اپ ولېږئ.",
+   "en": "Send the file with another app."
+  },
+  "ui.fam.x.save": {
+   "fa": "فایل را در این گوشی ذخیره کنید، بعد آن را بفرستید.",
+   "ps": "فایل په دې ټیلیفون کې خوندي کړئ، بیا یې ولېږئ.",
+   "en": "Save the file on this phone, then send it."
+  },
+  "ui.fam.x.import": {
+   "fa": "معلومات را از فایلی که برای شما فرستاده شده بگیرید. چیزی از این گوشی پاک نمی‌شود.",
+   "ps": "معلومات له هغه فایل څخه واخلئ چې تاسو ته لېږل شوی. له دې ټیلیفون څخه هېڅ نه ورکېږي.",
+   "en": "Get records from a file that was sent to you. Nothing on this phone is lost."
+  },
+  "ui.fam.x.done": {
+   "fa": "معلومات حالا در این گوشی است.",
+   "ps": "معلومات اوس په دې ټیلیفون کې دي.",
+   "en": "The records are now on this phone."
+  },
+  "ui.fam.x.bad": {
+   "fa": "این فایل، فایل معلومات خانوادهٔ صحت نیست.",
+   "ps": "دا فایل د صحت د کورنۍ د معلوماتو فایل نه دی.",
+   "en": "This file is not a Sehat family records file."
+  },
+  "ui.fam.storage": {
+   "fa": "معلومات خانوادهٔ شما، با صداها و عکس‌ها، این قدر جای گوشی را گرفته:",
+   "ps": "ستاسو د کورنۍ معلومات، له غږونو او انځورونو سره، د ټیلیفون دومره ځای نیسي:",
+   "en": "Your family's records, with recordings and photos, use this much space on the phone:"
+  },
+  "ui.fam.np": {
+   "fa": "عدد را با دکمه‌های کلان بزنید. گوشی هر عدد را می‌گوید. وقتی درست بود، «درست است» را بزنید.",
+   "ps": "شمېره په لویو تڼیو ووهئ. ټیلیفون هره شمېره وايي. کله چې سمه وه، «سمه ده» ووهئ.",
+   "en": "Type the number with the big buttons. The phone says each number. Tap OK when it is right."
+  },
+  "ui.fam.np.ok": {
+   "fa": "درست است، این عدد درست است.",
+   "ps": "سمه ده، دا شمېره سمه ده.",
+   "en": "OK, this number is right."
+  },
+  "ui.fam.none": {
+   "fa": "هنوز کسی اضافه نشده. برای شروع «یک نفر را اضافه کنید» را بزنید.",
+   "ps": "تر اوسه هېڅوک نه دي زیات شوي. د پیل لپاره «یو کس زیات کړئ» ووهئ.",
+   "en": "No one is added yet. Tap 'Add a person' to start."
+  },
+  "ui.num.0": {
+   "fa": "صفر",
+   "ps": "صفر",
+   "en": "zero"
+  },
+  "ui.num.1": {
+   "fa": "یک",
+   "ps": "یو",
+   "en": "one"
+  },
+  "ui.num.2": {
+   "fa": "دو",
+   "ps": "دوه",
+   "en": "two"
+  },
+  "ui.num.3": {
+   "fa": "سه",
+   "ps": "درې",
+   "en": "three"
+  },
+  "ui.num.4": {
+   "fa": "چهار",
+   "ps": "څلور",
+   "en": "four"
+  },
+  "ui.num.5": {
+   "fa": "پنج",
+   "ps": "پنځه",
+   "en": "five"
+  },
+  "ui.num.6": {
+   "fa": "شش",
+   "ps": "شپږ",
+   "en": "six"
+  },
+  "ui.num.7": {
+   "fa": "هفت",
+   "ps": "اووه",
+   "en": "seven"
+  },
+  "ui.num.8": {
+   "fa": "هشت",
+   "ps": "اته",
+   "en": "eight"
+  },
+  "ui.num.9": {
+   "fa": "نه",
+   "ps": "نهه",
+   "en": "nine"
+  },
+  "ui.num.10": {
+   "fa": "ده",
+   "ps": "لس",
+   "en": "ten"
+  },
+  "ui.num.11": {
+   "fa": "یازده",
+   "ps": "یوولس",
+   "en": "eleven"
+  },
+  "ui.num.12": {
+   "fa": "دوازده",
+   "ps": "دولس",
+   "en": "twelve"
+  },
+  "ui.num.13": {
+   "fa": "سیزده",
+   "ps": "دیارلس",
+   "en": "thirteen"
+  },
+  "ui.num.14": {
+   "fa": "چهارده",
+   "ps": "څوارلس",
+   "en": "fourteen"
+  },
+  "ui.num.15": {
+   "fa": "پانزده",
+   "ps": "پنځلس",
+   "en": "fifteen"
+  },
+  "ui.num.16": {
+   "fa": "شانزده",
+   "ps": "شپاړس",
+   "en": "sixteen"
+  },
+  "ui.num.17": {
+   "fa": "هفده",
+   "ps": "اوولس",
+   "en": "seventeen"
+  },
+  "ui.num.18": {
+   "fa": "هژده",
+   "ps": "اتلس",
+   "en": "eighteen"
+  },
+  "ui.num.19": {
+   "fa": "نزده",
+   "ps": "نولس",
+   "en": "nineteen"
+  },
+  "ui.num.20": {
+   "fa": "بیست",
+   "ps": "شل",
+   "en": "twenty"
+  },
+  "ui.num.21": {
+   "fa": "بیست و یک",
+   "ps": "یوویشت",
+   "en": "twenty-one"
+  },
+  "ui.num.22": {
+   "fa": "بیست و دو",
+   "ps": "دوه ویشت",
+   "en": "twenty-two"
+  },
+  "ui.num.23": {
+   "fa": "بیست و سه",
+   "ps": "درویشت",
+   "en": "twenty-three"
+  },
+  "ui.num.24": {
+   "fa": "بیست و چهار",
+   "ps": "څلېرویشت",
+   "en": "twenty-four"
+  },
+  "ui.num.25": {
+   "fa": "بیست و پنج",
+   "ps": "پنځه ویشت",
+   "en": "twenty-five"
+  },
+  "ui.num.26": {
+   "fa": "بیست و شش",
+   "ps": "شپږویشت",
+   "en": "twenty-six"
+  },
+  "ui.num.27": {
+   "fa": "بیست و هفت",
+   "ps": "اوه ویشت",
+   "en": "twenty-seven"
+  },
+  "ui.num.28": {
+   "fa": "بیست و هشت",
+   "ps": "اته ویشت",
+   "en": "twenty-eight"
+  },
+  "ui.num.29": {
+   "fa": "بیست و نه",
+   "ps": "نهه ویشت",
+   "en": "twenty-nine"
+  },
+  "ui.num.30": {
+   "fa": "سی",
+   "ps": "دېرش",
+   "en": "thirty"
+  },
+  "ui.num.31": {
+   "fa": "سی و یک",
+   "ps": "یو دېرش",
+   "en": "thirty-one"
+  },
+  "ui.num.32": {
+   "fa": "سی و دو",
+   "ps": "دوه دېرش",
+   "en": "thirty-two"
+  },
+  "ui.num.33": {
+   "fa": "سی و سه",
+   "ps": "درې دېرش",
+   "en": "thirty-three"
+  },
+  "ui.num.34": {
+   "fa": "سی و چهار",
+   "ps": "څلور دېرش",
+   "en": "thirty-four"
+  },
+  "ui.num.35": {
+   "fa": "سی و پنج",
+   "ps": "پنځه دېرش",
+   "en": "thirty-five"
+  },
+  "ui.num.36": {
+   "fa": "سی و شش",
+   "ps": "شپږ دېرش",
+   "en": "thirty-six"
+  },
+  "ui.num.37": {
+   "fa": "سی و هفت",
+   "ps": "اووه دېرش",
+   "en": "thirty-seven"
+  },
+  "ui.num.38": {
+   "fa": "سی و هشت",
+   "ps": "اته دېرش",
+   "en": "thirty-eight"
+  },
+  "ui.num.39": {
+   "fa": "سی و نه",
+   "ps": "نهه دېرش",
+   "en": "thirty-nine"
+  },
+  "ui.num.40": {
+   "fa": "چهل",
+   "ps": "څلوېښت",
+   "en": "forty"
+  },
+  "ui.num.41": {
+   "fa": "چهل و یک",
+   "ps": "یو څلوېښت",
+   "en": "forty-one"
+  },
+  "ui.num.42": {
+   "fa": "چهل و دو",
+   "ps": "دوه څلوېښت",
+   "en": "forty-two"
+  },
+  "ui.num.43": {
+   "fa": "چهل و سه",
+   "ps": "درې څلوېښت",
+   "en": "forty-three"
+  },
+  "ui.num.44": {
+   "fa": "چهل و چهار",
+   "ps": "څلور څلوېښت",
+   "en": "forty-four"
+  },
+  "ui.num.45": {
+   "fa": "چهل و پنج",
+   "ps": "پنځه څلوېښت",
+   "en": "forty-five"
+  },
+  "ui.num.46": {
+   "fa": "چهل و شش",
+   "ps": "شپږ څلوېښت",
+   "en": "forty-six"
+  },
+  "ui.num.47": {
+   "fa": "چهل و هفت",
+   "ps": "اووه څلوېښت",
+   "en": "forty-seven"
+  },
+  "ui.num.48": {
+   "fa": "چهل و هشت",
+   "ps": "اته څلوېښت",
+   "en": "forty-eight"
+  },
+  "ui.num.49": {
+   "fa": "چهل و نه",
+   "ps": "نهه څلوېښت",
+   "en": "forty-nine"
+  },
+  "ui.num.50": {
+   "fa": "پنجاه",
+   "ps": "پنځوس",
+   "en": "fifty"
+  },
+  "ui.num.51": {
+   "fa": "پنجاه و یک",
+   "ps": "یو پنځوس",
+   "en": "fifty-one"
+  },
+  "ui.num.52": {
+   "fa": "پنجاه و دو",
+   "ps": "دوه پنځوس",
+   "en": "fifty-two"
+  },
+  "ui.num.53": {
+   "fa": "پنجاه و سه",
+   "ps": "درې پنځوس",
+   "en": "fifty-three"
+  },
+  "ui.num.54": {
+   "fa": "پنجاه و چهار",
+   "ps": "څلور پنځوس",
+   "en": "fifty-four"
+  },
+  "ui.num.55": {
+   "fa": "پنجاه و پنج",
+   "ps": "پنځه پنځوس",
+   "en": "fifty-five"
+  },
+  "ui.num.56": {
+   "fa": "پنجاه و شش",
+   "ps": "شپږ پنځوس",
+   "en": "fifty-six"
+  },
+  "ui.num.57": {
+   "fa": "پنجاه و هفت",
+   "ps": "اووه پنځوس",
+   "en": "fifty-seven"
+  },
+  "ui.num.58": {
+   "fa": "پنجاه و هشت",
+   "ps": "اته پنځوس",
+   "en": "fifty-eight"
+  },
+  "ui.num.59": {
+   "fa": "پنجاه و نه",
+   "ps": "نهه پنځوس",
+   "en": "fifty-nine"
+  },
+  "ui.num.60": {
+   "fa": "شصت",
+   "ps": "شپېته",
+   "en": "sixty"
+  },
+  "ui.num.61": {
+   "fa": "شصت و یک",
+   "ps": "یو شپېته",
+   "en": "sixty-one"
+  },
+  "ui.num.62": {
+   "fa": "شصت و دو",
+   "ps": "دوه شپېته",
+   "en": "sixty-two"
+  },
+  "ui.num.63": {
+   "fa": "شصت و سه",
+   "ps": "درې شپېته",
+   "en": "sixty-three"
+  },
+  "ui.num.64": {
+   "fa": "شصت و چهار",
+   "ps": "څلور شپېته",
+   "en": "sixty-four"
+  },
+  "ui.num.65": {
+   "fa": "شصت و پنج",
+   "ps": "پنځه شپېته",
+   "en": "sixty-five"
+  },
+  "ui.num.66": {
+   "fa": "شصت و شش",
+   "ps": "شپږ شپېته",
+   "en": "sixty-six"
+  },
+  "ui.num.67": {
+   "fa": "شصت و هفت",
+   "ps": "اووه شپېته",
+   "en": "sixty-seven"
+  },
+  "ui.num.68": {
+   "fa": "شصت و هشت",
+   "ps": "اته شپېته",
+   "en": "sixty-eight"
+  },
+  "ui.num.69": {
+   "fa": "شصت و نه",
+   "ps": "نهه شپېته",
+   "en": "sixty-nine"
+  },
+  "ui.num.70": {
+   "fa": "هفتاد",
+   "ps": "اویا",
+   "en": "seventy"
+  },
+  "ui.num.71": {
+   "fa": "هفتاد و یک",
+   "ps": "یو اویا",
+   "en": "seventy-one"
+  },
+  "ui.num.72": {
+   "fa": "هفتاد و دو",
+   "ps": "دوه اویا",
+   "en": "seventy-two"
+  },
+  "ui.num.73": {
+   "fa": "هفتاد و سه",
+   "ps": "درې اویا",
+   "en": "seventy-three"
+  },
+  "ui.num.74": {
+   "fa": "هفتاد و چهار",
+   "ps": "څلور اویا",
+   "en": "seventy-four"
+  },
+  "ui.num.75": {
+   "fa": "هفتاد و پنج",
+   "ps": "پنځه اویا",
+   "en": "seventy-five"
+  },
+  "ui.num.76": {
+   "fa": "هفتاد و شش",
+   "ps": "شپږ اویا",
+   "en": "seventy-six"
+  },
+  "ui.num.77": {
+   "fa": "هفتاد و هفت",
+   "ps": "اووه اویا",
+   "en": "seventy-seven"
+  },
+  "ui.num.78": {
+   "fa": "هفتاد و هشت",
+   "ps": "اته اویا",
+   "en": "seventy-eight"
+  },
+  "ui.num.79": {
+   "fa": "هفتاد و نه",
+   "ps": "نهه اویا",
+   "en": "seventy-nine"
+  },
+  "ui.num.80": {
+   "fa": "هشتاد",
+   "ps": "اتیا",
+   "en": "eighty"
+  },
+  "ui.num.81": {
+   "fa": "هشتاد و یک",
+   "ps": "یو اتیا",
+   "en": "eighty-one"
+  },
+  "ui.num.82": {
+   "fa": "هشتاد و دو",
+   "ps": "دوه اتیا",
+   "en": "eighty-two"
+  },
+  "ui.num.83": {
+   "fa": "هشتاد و سه",
+   "ps": "درې اتیا",
+   "en": "eighty-three"
+  },
+  "ui.num.84": {
+   "fa": "هشتاد و چهار",
+   "ps": "څلور اتیا",
+   "en": "eighty-four"
+  },
+  "ui.num.85": {
+   "fa": "هشتاد و پنج",
+   "ps": "پنځه اتیا",
+   "en": "eighty-five"
+  },
+  "ui.num.86": {
+   "fa": "هشتاد و شش",
+   "ps": "شپږ اتیا",
+   "en": "eighty-six"
+  },
+  "ui.num.87": {
+   "fa": "هشتاد و هفت",
+   "ps": "اووه اتیا",
+   "en": "eighty-seven"
+  },
+  "ui.num.88": {
+   "fa": "هشتاد و هشت",
+   "ps": "اته اتیا",
+   "en": "eighty-eight"
+  },
+  "ui.num.89": {
+   "fa": "هشتاد و نه",
+   "ps": "نهه اتیا",
+   "en": "eighty-nine"
+  },
+  "ui.num.90": {
+   "fa": "نود",
+   "ps": "نوي",
+   "en": "ninety"
+  },
+  "ui.num.91": {
+   "fa": "نود و یک",
+   "ps": "یو نوي",
+   "en": "ninety-one"
+  },
+  "ui.num.92": {
+   "fa": "نود و دو",
+   "ps": "دوه نوي",
+   "en": "ninety-two"
+  },
+  "ui.num.93": {
+   "fa": "نود و سه",
+   "ps": "درې نوي",
+   "en": "ninety-three"
+  },
+  "ui.num.94": {
+   "fa": "نود و چهار",
+   "ps": "څلور نوي",
+   "en": "ninety-four"
+  },
+  "ui.num.95": {
+   "fa": "نود و پنج",
+   "ps": "پنځه نوي",
+   "en": "ninety-five"
+  },
+  "ui.num.96": {
+   "fa": "نود و شش",
+   "ps": "شپږ نوي",
+   "en": "ninety-six"
+  },
+  "ui.num.97": {
+   "fa": "نود و هفت",
+   "ps": "اووه نوي",
+   "en": "ninety-seven"
+  },
+  "ui.num.98": {
+   "fa": "نود و هشت",
+   "ps": "اته نوي",
+   "en": "ninety-eight"
+  },
+  "ui.num.99": {
+   "fa": "نود و نه",
+   "ps": "نهه نوي",
+   "en": "ninety-nine"
+  },
+  "ui.num.100": {
+   "fa": "صد",
+   "ps": "سل",
+   "en": "one hundred"
+  },
+  "ui.num.100and": {
+   "fa": "صد و",
+   "ps": "سل او",
+   "en": "one hundred and"
+  },
+  "ui.num.200": {
+   "fa": "دوصد",
+   "ps": "دوه سوه",
+   "en": "two hundred"
+  },
+  "ui.num.200and": {
+   "fa": "دوصد و",
+   "ps": "دوه سوه او",
+   "en": "two hundred and"
+  },
+  "ui.num.300": {
+   "fa": "سه‌صد",
+   "ps": "درې سوه",
+   "en": "three hundred"
+  },
+  "ui.num.300and": {
+   "fa": "سه‌صد و",
+   "ps": "درې سوه او",
+   "en": "three hundred and"
+  },
+  "ui.num.400": {
+   "fa": "چهارصد",
+   "ps": "څلور سوه",
+   "en": "four hundred"
+  },
+  "ui.num.400and": {
+   "fa": "چهارصد و",
+   "ps": "څلور سوه او",
+   "en": "four hundred and"
+  },
+  "ui.num.500": {
+   "fa": "پنج‌صد",
+   "ps": "پنځه سوه",
+   "en": "five hundred"
+  },
+  "ui.num.500and": {
+   "fa": "پنج‌صد و",
+   "ps": "پنځه سوه او",
+   "en": "five hundred and"
+  },
+  "ui.num.600": {
+   "fa": "شش‌صد",
+   "ps": "شپږ سوه",
+   "en": "six hundred"
+  },
+  "ui.num.600and": {
+   "fa": "شش‌صد و",
+   "ps": "شپږ سوه او",
+   "en": "six hundred and"
+  },
+  "ui.num.700": {
+   "fa": "هفت‌صد",
+   "ps": "اووه سوه",
+   "en": "seven hundred"
+  },
+  "ui.num.700and": {
+   "fa": "هفت‌صد و",
+   "ps": "اووه سوه او",
+   "en": "seven hundred and"
+  },
+  "ui.num.800": {
+   "fa": "هشت‌صد",
+   "ps": "اته سوه",
+   "en": "eight hundred"
+  },
+  "ui.num.800and": {
+   "fa": "هشت‌صد و",
+   "ps": "اته سوه او",
+   "en": "eight hundred and"
+  },
+  "ui.num.900": {
+   "fa": "نه‌صد",
+   "ps": "نهه سوه",
+   "en": "nine hundred"
+  },
+  "ui.num.900and": {
+   "fa": "نه‌صد و",
+   "ps": "نهه سوه او",
+   "en": "nine hundred and"
+  },
+  "ui.num.point": {
+   "fa": "اعشاریه",
+   "ps": "اعشاریه",
+   "en": "point"
+  },
+  "ui.num.kg": {
+   "fa": "کیلو",
+   "ps": "کیلو",
+   "en": "kilos"
+  },
+  "ui.num.cm": {
+   "fa": "سانتی‌متر",
+   "ps": "سانتي متره",
+   "en": "centimetres"
+  },
+  "ui.num.days": {
+   "fa": "روز",
+   "ps": "ورځې",
+   "en": "days"
+  },
+  "ui.num.mb": {
+   "fa": "میگابایت",
+   "ps": "میګابایټ",
+   "en": "megabytes"
+  },
+  "ui.num.kb": {
+   "fa": "کیلوبایت",
+   "ps": "کیلوبایټ",
+   "en": "kilobytes"
+  }
+ }
+}
