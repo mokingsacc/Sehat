@@ -15,6 +15,13 @@ phones. It uses no canvas, no video and no libraries, and it works offline.
 name is in `STEPS` in `js/anim.js` **and** its JSON has an `"approved"` note (tools/validate.py refuses a live
 animation without one). Until then the app keeps playing the SVG version.
 
+**Live now:** `cpr-baby` (approved by Mo on 7 Oct 2026, demo version). All 7 narrated scenes come from Mo's one
+frame: s3, s5 and s6 as he approved them; s1 (ring on the feet, tap and call lines), s2 (zoom out, the call for help,
+car and hospital icons), s4 (face and chest, breath lines beside the head, 1–5 breath counter, the chest lighting up
+with each breath) and s7 (a call for help, pushes with a 1-minute clock, then the way to the hospital) are made with
+camera moves and overlays. Frame `kneel` is the rescuer's body layer without her arms. The newborn, child and adult
+CPR keep their cine / SVG versions.
+
 ## How it plugs into the player
 
 `js/anim.js` plays three kinds of animation behind one API (`openAnimation`, `mountAnimation`, `animPoster`,
@@ -204,10 +211,10 @@ frame of scene `poster`, without counters and labels.
 ## Demo
 
 `/home/claude/steps-demo/demo/` is a publish-ready folder: `index.html`, the player, Mo's first ChatGPT frame and a
-grey-box test animation. It shows the CPR baby step (scenes s3, s5 and s6: look at the chest for 10 s with a timer;
-where the thumbs go, with a dotted nipple line, a ring and an arrow, then the hands fading in; 3 slow pushes, then
-110 a minute to 30, with the press shadow and the chest darkening), the grey-box test of every motion and overlay,
-and the picker. It is marked **"Placeholder pictures, not medically approved"**. `?lang=ps&a=cpr-baby&s=1&still=1&fps=1`
+grey-box test animation. It shows the live baby CPR (all 7 scenes, the same JSON as the app; s3, s5 and s6: look at
+the chest for 10 s with a timer; where the thumbs go, with a dotted nipple line, a ring and an arrow, then the hands
+fading in; 3 slow pushes, then 110 a minute to 30, with the press shadow and the chest darkening), the grey-box test
+of every motion and overlay, and the picker. It is marked **"Approved by Mo 7 Oct (demo version)"**. `?lang=ps&a=cpr-baby&s=1&still=1&fps=1`
 opens a language, animation, scene, still mode and the fps meter. In the console, `__demo.ctl` is the player.
 
 ## Testing

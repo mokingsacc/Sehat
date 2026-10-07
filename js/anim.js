@@ -56,7 +56,8 @@ export const CINE = ['cpr-newborn', 'cpr-baby', 'cpr-child', 'cpr-adult'];
 // Picture-step versions (js/steps.js, docs/STEPS_PLAYER.md): anim/steps/<name>.json with layered pictures in
 // img/steps/<name>/, played before the cine and SVG versions. A name goes in this list only when Mo has approved
 // its pictures; useSteps(name) adds one at run time (previews). opts.steps === false skips them.
-export const STEPS = [];
+// cpr-baby: approved by Mo on 7 Oct 2026 (demo version); the other ages keep their cine / SVG versions.
+export const STEPS = ['cpr-baby'];
 export function useSteps(...names) { names.forEach((n) => { if (STEPS.indexOf(n) < 0) STEPS.push(n); }); }
 
 const IC = {

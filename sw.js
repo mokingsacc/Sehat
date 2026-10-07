@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.07-775076';
+const VERSION = '2026.10.07-22da97';
 const PRECACHE = [
  "./",
  "index.html",
@@ -295,7 +295,11 @@ const PRECACHE = [
  "img/app/apple-touch-icon.png",
  "img/app/icon-192.png",
  "img/app/icon-512.png",
- "img/app/icon-maskable-512.png"
+ "img/app/icon-maskable-512.png",
+ "anim/steps/cpr-baby.json",
+ "img/steps/cpr-baby/thumbs-bg.webp",
+ "img/steps/cpr-baby/thumbs-body.webp",
+ "img/steps/cpr-baby/thumbs-arms.webp"
 ];
 const SHELL = 'fhb-shell-' + VERSION;
 const AUDIO = 'fhb-audio-v1';

@@ -4310,3 +4310,29 @@ For Mo to check (medical):
 4. Mo's picture itself: the two-thumb grip, the fingers round the chest, and the mother's position at the feet.
 
 For a Dari and Pashto reader: the demo's own test lines in `demo/anim/narration.json` (demo only, not in the app).
+
+## Baby CPR goes live as picture steps (7 Oct 2026)
+
+Mo approved the baby CPR picture demo ("this animation is good enough"), so `cpr-baby` now plays the picture-step
+version in the app: `anim/steps/cpr-baby.json` (`"approved": "2026-10-07, Mo (demo version)"`), its 3 pictures
+(73 KB, precached, so it works offline the first time), and `STEPS = ['cpr-baby']` in `js/anim.js`. The narration
+is unchanged: the scenes use the existing ids `anim.cpr-baby.s1` to `s7`. The newborn, child and adult CPR keep their
+current versions. If the JSON or a picture fails to load, the old version plays. Strip of all 7 scenes in Dari:
+`previews/steps/cpr-baby-live-strip.png`. The demo folder shows the same 7 scenes.
+
+There is still only one picture. s3, s5 and s6 are the scenes Mo approved and have not changed (the thumb ring stays
+on the lower half of the breastbone, just below the nipple line). The other four scenes reuse the picture:
+
+For Mo to check (medical):
+1. s1 (tap the foot, call): a ring on the feet, small tap lines beside the soles and call lines from the mother's
+   head. The mother is shown without her arms (the body layer alone), so no hand touches the foot.
+2. s2 (shout for help, send for a car): the camera zooms out, call lines go up from the mother's head, then a car,
+   an arrow and a hospital appear.
+3. s4 (5 gentle breaths): the camera moves to the face and chest. Breath lines sit beside the head (no mouth or face
+   is drawn), a breath counter counts 1 to 5 (one breath every 2 s), and a ring on the chest stays still while the
+   chest lights up a little and the picture swells about 1% with each breath.
+4. s7 (alone: 1 minute, then carry): call lines, then pushes with a clock icon and a timer counting from 0:00. After
+   14 pushes (about 8 s) the timer goes, the camera zooms out and a curved arrow points from the baby to a hospital.
+   The timer runs in real time, so it shows only the first seconds of the minute.
+5. Posters: the Emergency "Baby" card and the CPR age picker show s1's still picture: the whole rug, the mother, the
+   ring on the feet and the tap lines. The topic page poster is s5, as in the demo.

@@ -1,0 +1,698 @@
+{
+ "v": 1,
+ "id": "anim.cpr-baby",
+ "w": 960,
+ "h": 720,
+ "adult": true,
+ "approved": "2026-10-07, Mo (demo version)",
+ "offline": "precache",
+ "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2, s4 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). Coordinates are in the 960x720 picture.",
+ "poster": 4,
+ "frames": {
+  "baby": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "thumbs-bg.webp",
+     "v": "2431f830",
+     "kb": 43.1
+    }
+   ]
+  },
+  "kneel": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "thumbs-bg.webp",
+     "v": "2431f830",
+     "kb": 43.1
+    },
+    {
+     "id": "body",
+     "src": "thumbs-body.webp",
+     "v": "54fa7665",
+     "kb": 12.9,
+     "box": [
+      428,
+      312,
+      506,
+      408
+     ]
+    }
+   ]
+  },
+  "thumbs": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "thumbs-bg.webp",
+     "v": "2431f830",
+     "kb": 43.1
+    },
+    {
+     "id": "body",
+     "src": "thumbs-body.webp",
+     "v": "54fa7665",
+     "kb": 12.9,
+     "box": [
+      428,
+      312,
+      506,
+      408
+     ]
+    },
+    {
+     "id": "arms",
+     "src": "thumbs-arms.webp",
+     "v": "b02c85a9",
+     "kb": 16.5,
+     "box": [
+      143,
+      266,
+      523,
+      454
+     ]
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "anim.cpr-baby.s1",
+   "frame": "kneel",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 470,
+      "cy": 440,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2600
+    ],
+    "hold": [
+     300
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 411,
+     "y": 548,
+     "rx": 82,
+     "ry": 44,
+     "at": 1500
+    },
+    {
+     "type": "waves",
+     "x": 372,
+     "y": 572,
+     "angle": 125,
+     "size": 34,
+     "count": 2,
+     "spread": 70,
+     "width": 5,
+     "ms": 900,
+     "at": 2600
+    },
+    {
+     "type": "waves",
+     "x": 450,
+     "y": 574,
+     "angle": 55,
+     "size": 34,
+     "count": 2,
+     "spread": 70,
+     "width": 5,
+     "ms": 900,
+     "at": 2600
+    },
+    {
+     "type": "waves",
+     "x": 716,
+     "y": 330,
+     "angle": -150,
+     "size": 64,
+     "count": 3,
+     "spread": 70,
+     "ms": 1300,
+     "at": 3600
+    }
+   ],
+   "key": {
+    "cam": 0
+   }
+  },
+  {
+   "id": "anim.cpr-baby.s2",
+   "frame": "kneel",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     {
+      "cx": 470,
+      "cy": 440,
+      "w": 640
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 772,
+     "y": 300,
+     "angle": -90,
+     "size": 70,
+     "count": 3,
+     "spread": 80,
+     "ms": 1200,
+     "at": 300
+    },
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 626,
+     "y": 150,
+     "r": 62,
+     "at": 2600
+    },
+    {
+     "type": "arrow",
+     "from": [
+      698,
+      150
+     ],
+     "to": [
+      772,
+      150
+     ],
+     "width": 12,
+     "at": 3300
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 846,
+     "y": 150,
+     "r": 62,
+     "at": 3900
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-baby.s3",
+   "frame": "baby",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     [
+      190,
+      110,
+      560
+     ]
+    ],
+    "ms": [
+     3000
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 413,
+     "y": 272,
+     "rx": 118,
+     "ry": 92,
+     "at": 1600
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 10,
+     "at": 1200,
+     "pos": "top-end",
+     "wait": true
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-baby.s4",
+   "frame": "baby",
+   "ms": 13000,
+   "cam": {
+    "path": [
+     [
+      190,
+      110,
+      560
+     ],
+     {
+      "cx": 413,
+      "cy": 200,
+      "w": 480
+     }
+    ],
+    "ms": [
+     2200
+    ]
+   },
+   "motions": [
+    {
+     "id": "breath",
+     "type": "loop",
+     "layer": "bg",
+     "s": 1.012,
+     "origin": [
+      413,
+      300
+     ],
+     "ease": "breath",
+     "rate": 30,
+     "count": 5,
+     "at": 2600
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 413,
+     "y": 282,
+     "rx": 100,
+     "ry": 62,
+     "at": 1600,
+     "pulse": false
+    },
+    {
+     "type": "shade",
+     "x": 413,
+     "y": 280,
+     "rx": 112,
+     "ry": 76,
+     "max": 0.32,
+     "color": "255,238,205",
+     "follow": "breath"
+    },
+    {
+     "type": "waves",
+     "x": 540,
+     "y": 172,
+     "angle": 180,
+     "size": 58,
+     "count": 3,
+     "spread": 60,
+     "width": 6,
+     "ms": 2000,
+     "at": 1950,
+     "until": 12300
+    },
+    {
+     "type": "counter",
+     "follow": "breath",
+     "of": 5,
+     "icon": "breath",
+     "pos": "top-end"
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "anim.cpr-baby.s5",
+   "frame": "baby",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     [
+      230,
+      140,
+      380
+     ],
+     [
+      150,
+      70,
+      620
+     ]
+    ],
+    "ms": [
+     2600,
+     9000
+    ],
+    "hold": [
+     0,
+     4200
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "thumbs",
+     "at": 3300,
+     "ms": 900
+    },
+    {
+     "id": "push",
+     "type": "loop",
+     "frame": "thumbs",
+     "layer": "arms",
+     "sx": 0.98,
+     "sy": 0.99,
+     "origin": [
+      413,
+      720
+     ],
+     "ease": "push",
+     "at": 5200,
+     "count": 30,
+     "rate": 110,
+     "slow": {
+      "count": 3,
+      "rate": 40
+     }
+    },
+    {
+     "type": "loop",
+     "frame": "thumbs",
+     "layer": "body",
+     "s": 0.994,
+     "origin": [
+      700,
+      720
+     ],
+     "follow": "push"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "guide",
+     "from": [
+      330,
+      262
+     ],
+     "to": [
+      500,
+      262
+     ],
+     "at": 300,
+     "until": 5600
+    },
+    {
+     "type": "ring",
+     "x": 413,
+     "y": 287,
+     "rx": 40,
+     "ry": 30,
+     "at": 1300,
+     "until": 5600,
+     "dim": true
+    },
+    {
+     "type": "arrow",
+     "from": [
+      565,
+      192
+     ],
+     "to": [
+      460,
+      274
+     ],
+     "width": 12,
+     "at": 2000,
+     "until": 5600
+    },
+    {
+     "type": "shade",
+     "frame": "thumbs",
+     "above": "bg",
+     "x": 413,
+     "y": 282,
+     "rx": 105,
+     "ry": 85,
+     "max": 0.22,
+     "follow": "push"
+    },
+    {
+     "type": "shade",
+     "frame": "thumbs",
+     "above": "bg",
+     "x": 413,
+     "y": 290,
+     "rx": 34,
+     "ry": 24,
+     "max": 0.38,
+     "follow": "push"
+    },
+    {
+     "type": "counter",
+     "follow": "push",
+     "of": 30,
+     "pos": "top-end"
+    }
+   ],
+   "key": {
+    "cam": 1
+   }
+  },
+  {
+   "id": "anim.cpr-baby.s6",
+   "frame": "thumbs",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      60,
+      30,
+      840
+     ],
+     [
+      150,
+      70,
+      620
+     ]
+    ],
+    "ms": [
+     6000
+    ]
+   },
+   "motions": [
+    {
+     "id": "push",
+     "type": "loop",
+     "frame": "thumbs",
+     "layer": "arms",
+     "sx": 0.98,
+     "sy": 0.99,
+     "origin": [
+      413,
+      720
+     ],
+     "ease": "push",
+     "at": 800,
+     "count": 30,
+     "rate": 110
+    },
+    {
+     "type": "loop",
+     "frame": "thumbs",
+     "layer": "body",
+     "s": 0.994,
+     "origin": [
+      700,
+      720
+     ],
+     "follow": "push"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "shade",
+     "frame": "thumbs",
+     "above": "bg",
+     "x": 413,
+     "y": 282,
+     "rx": 105,
+     "ry": 85,
+     "max": 0.22,
+     "follow": "push"
+    },
+    {
+     "type": "shade",
+     "frame": "thumbs",
+     "above": "bg",
+     "x": 413,
+     "y": 290,
+     "rx": 34,
+     "ry": 24,
+     "max": 0.38,
+     "follow": "push"
+    },
+    {
+     "type": "counter",
+     "follow": "push",
+     "of": 30,
+     "pos": "top-end"
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-baby.s7",
+   "frame": "thumbs",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      60,
+      30,
+      840
+     ],
+     [
+      150,
+      70,
+      620
+     ],
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2500,
+     1500
+    ],
+    "hold": [
+     0,
+     6900
+    ]
+   },
+   "motions": [
+    {
+     "id": "push",
+     "type": "loop",
+     "frame": "thumbs",
+     "layer": "arms",
+     "sx": 0.98,
+     "sy": 0.99,
+     "origin": [
+      413,
+      720
+     ],
+     "ease": "push",
+     "at": 1800,
+     "count": 14,
+     "rate": 110
+    },
+    {
+     "type": "loop",
+     "frame": "thumbs",
+     "layer": "body",
+     "s": 0.994,
+     "origin": [
+      700,
+      720
+     ],
+     "follow": "push"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "shade",
+     "frame": "thumbs",
+     "above": "bg",
+     "x": 413,
+     "y": 282,
+     "rx": 105,
+     "ry": 85,
+     "max": 0.22,
+     "follow": "push"
+    },
+    {
+     "type": "shade",
+     "frame": "thumbs",
+     "above": "bg",
+     "x": 413,
+     "y": 290,
+     "rx": 34,
+     "ry": 24,
+     "max": 0.38,
+     "follow": "push"
+    },
+    {
+     "type": "waves",
+     "x": 772,
+     "y": 300,
+     "angle": -90,
+     "size": 70,
+     "count": 3,
+     "spread": 80,
+     "ms": 1200,
+     "at": 200,
+     "until": 2900
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 205,
+     "y": 238,
+     "r": 50,
+     "at": 1500,
+     "until": 9400
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 60,
+     "at": 1800,
+     "pos": "top-end",
+     "until": 9400
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 850,
+     "y": 150,
+     "r": 62,
+     "at": 10200
+    },
+    {
+     "type": "arrow",
+     "from": [
+      540,
+      268
+     ],
+     "to": [
+      782,
+      176
+     ],
+     "bend": -25,
+     "width": 14,
+     "at": 10600
+    }
+   ]
+  }
+ ]
+}
