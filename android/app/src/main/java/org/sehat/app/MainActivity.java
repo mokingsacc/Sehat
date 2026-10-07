@@ -45,6 +45,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.List;
 
 /** One WebView showing the bundled web app at https://appassets.androidplatform.net/assets/index.html. */
 public class MainActivity extends Activity {
@@ -446,7 +448,7 @@ public class MainActivity extends Activity {
     }
 
     /** Sends one file straight to one listed app, trying each type in turn; false when that app takes none of them. */
-    private boolean sendTo(File file, String[] mimes, String pkg, Runnable fallback) {
+    private boolean sendTo(File file, List<String> mimes, String pkg, Runnable fallback) {
         Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".files", file);
         for (String mime : mimes) {
             Intent send = new Intent(Intent.ACTION_SEND);
@@ -546,7 +548,7 @@ public class MainActivity extends Activity {
             try {
                 File out = pageFile(base64, name);
                 String m = mime == null || mime.isEmpty() ? "application/octet-stream" : mime;
-                return sendTo(out, new String[]{m, "application/octet-stream", "*/*"}, pkg, () -> send(out, m, out.getName()));
+                return sendTo(out, Arrays.asList(m, "application/octet-stream", "*/*"), pkg, () -> send(out, m, out.getName()));
             } catch (Exception e) {
                 return false;
             }
