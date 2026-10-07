@@ -36,9 +36,14 @@ PRICE_OUT = float(os.environ.get("GEMINI_PRICE_OUT", "10"))
 AUDIO_TOKENS_PER_SEC = 25  # how Gemini counts audio
 CHARS_PER_SEC = 12  # slow, clear Dari or Pashto; used to spot clips that came back far too short or long
 VOICES = {"f": os.environ.get("GEMINI_VOICE_F", "Kore"), "m": os.environ.get("GEMINI_VOICE_M", "Charon")}
+# The model speaks only what follows "#### TRANSCRIPT"; a plain "Read this aloud: ..." line got read out too (7 Oct 2026)
 STYLE = {
-    "fa": "Read this aloud in Dari, the Persian spoken in Afghanistan, with a Kabul accent. Speak slowly, clearly and warmly, like a kind village health worker talking to a family:",
-    "ps": "Read this aloud in Pashto, as spoken in northern Afghanistan. Speak slowly, clearly and warmly, like a kind village health worker talking to a family:",
+    "fa": "### DIRECTOR'S NOTES\nLanguage: Dari, the Persian spoken in Afghanistan. Accent: Kabul, Afghan (not Iranian).\n"
+          "Style: slow, clear and warm, like a kind village health worker talking to a family.\n"
+          "Only speak the transcript below; never read these notes aloud.\n\n#### TRANSCRIPT",
+    "ps": "### DIRECTOR'S NOTES\nLanguage: Pashto, as spoken in northern Afghanistan.\n"
+          "Style: slow, clear and warm, like a kind village health worker talking to a family.\n"
+          "Only speak the transcript below; never read these notes aloud.\n\n#### TRANSCRIPT",
 }
 SAMPLE = ["ui.welcome", "ui.home", "danger-child.lead", "diarrhoea.lead", "vaccines.title", "red-flags.lead"]
 
