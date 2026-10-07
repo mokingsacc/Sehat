@@ -1,0 +1,234 @@
+{
+  "id": "nosebleed",
+  "section": "everyone",
+  "title": {
+    "fa": "خون آمدن از بینی",
+    "ps": "له پوزې وینه راتلل",
+    "en": "Nosebleed"
+  },
+  "summary": {
+    "fa": "به پیش خم بنشینید و قسمت نرم بینی را ۱۰ دقیقه فشار دهید.",
+    "ps": "مخ ته کوږ کېنئ او د پوزې نرمه برخه ۱۰ دقیقې ټینګه کړئ.",
+    "en": "Lean forward and pinch the soft nose for 10 minutes."
+  },
+  "image": "nosebleed",
+  "blocks": [
+    {
+      "id": "nosebleed.lead",
+      "type": "lead",
+      "text": {
+        "fa": "خون آمدن از بینی زیاد است، خصوصاً در هوای خشک، سرد یا گرد‌آلود. بیشتر آن با فشار ساده بند می‌شود.",
+        "ps": "له پوزې وینه راتلل عام دي، په ځانګړې توګه په وچه، یخه یا دوړه لرونکې هوا کې. ډېری یې په ساده فشار درېږي.",
+        "en": "Nosebleeds are common, most of all in dry, cold or dusty weather. Most stop with simple pressure."
+      }
+    },
+    {
+      "id": "nosebleed.forward",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "بنشینید، به پیش خم شوید",
+        "ps": "کېنئ، مخ ته کوږ شئ",
+        "en": "Sit up and lean forward"
+      },
+      "text": {
+        "fa": "راست بنشینید و به پیش خم شوید تا خون از بینی بیرون شود، نه به گلو. خون را تف کنید؛ قورت ندهید.",
+        "ps": "نېغ کېنئ او مخ ته کوږ شئ چې وینه له پوزې بهر شي، نه ستوني ته. وینه وتوکئ؛ مه یې تېروئ.",
+        "en": "Sit up and lean forward, so blood runs out of the nose, not down the throat. Spit out blood; do not swallow it."
+      },
+      "picture": "em-nosebleed-pinch"
+    },
+    {
+      "id": "nosebleed.pinch",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "قسمت نرم بینی را ۱۰ دقیقه فشار دهید",
+        "ps": "د پوزې نرمه برخه ۱۰ دقیقې ټینګه کړئ",
+        "en": "Pinch the soft part for 10 minutes"
+      },
+      "text": {
+        "fa": "قسمت نرم بینی را، پایین‌تر از استخوان، ۱۰ دقیقه بدون رها کردن فشار دهید. از راه دهان نفس بکشید.",
+        "ps": "د پوزې نرمه برخه، له هډوکي لاندې، ۱۰ دقیقې پرته له پرېښودو ټینګه کړئ. له خولې ساه واخلئ.",
+        "en": "Pinch the soft part of the nose, below the bone, for 10 minutes without letting go. Breathe through the mouth."
+      }
+    },
+    {
+      "id": "nosebleed.again",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "هنوز خون می‌آید؟ باز ۱۰ دقیقه",
+        "ps": "لا هم وینه راځي؟ بیا ۱۰ دقیقې",
+        "en": "Still bleeding? 10 more minutes"
+      },
+      "text": {
+        "fa": "اگر هنوز خون می‌آید، باز ۱۰ دقیقهٔ دیگر فشار دهید. یک تکهٔ تر و سرد روی بینی شاید کمک کند.",
+        "ps": "که لا هم وینه راځي، بیا ۱۰ نورې دقیقې یې ټینګه کړئ. پر پوزه سوړ او لوند ټوکر کېدای شي مرسته وکړي.",
+        "en": "If it still bleeds, pinch again for 10 more minutes. A cold wet cloth on the nose may help."
+      }
+    },
+    {
+      "id": "nosebleed.after",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "بعد از آن، به بینی آرامش دهید",
+        "ps": "وروسته، پوزې ته آرام ورکړئ",
+        "en": "Afterwards, rest the nose"
+      },
+      "text": {
+        "fa": "تا یک روز بینی را به زور پاک نکنید، انگشت نزنید و چیز سنگین بلند نکنید. ناخن اطفال را کوتاه نگه دارید.",
+        "ps": "تر یوې ورځې پوزه په زور مه پاکوئ، ګوته پکې مه وهئ او دروند شی مه پورته کوئ. د ماشومانو نوکان لنډ وساتئ.",
+        "en": "For a day, do not blow or pick the nose, or lift heavy things. Keep children's nails short."
+      }
+    },
+    {
+      "id": "nosebleed.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "nosebleed.urgent.not-stopping",
+          "icon": "clock",
+          "text": {
+            "fa": "بعد از ۲۰ دقیقه فشار، خون بند نمی‌شود",
+            "ps": "له ۲۰ دقیقو فشار وروسته وینه نه درېږي",
+            "en": "bleeding does not stop after 20 minutes of pinching"
+          }
+        },
+        {
+          "id": "nosebleed.urgent.heavy",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون بسیار زیاد است، یا سرش می‌چرخد",
+            "ps": "وینه ډېره زیاته ده، یا سر یې ګرځي",
+            "en": "the bleeding is very heavy, or they feel faint"
+          }
+        },
+        {
+          "id": "nosebleed.urgent.head",
+          "icon": "headache",
+          "text": {
+            "fa": "بعد از ضربهٔ سخت به سر شروع شد",
+            "ps": "په سر له سخت ټکر وروسته پیل شوه",
+            "en": "it started after a hard blow to the head"
+          }
+        },
+        {
+          "id": "nosebleed.urgent.gums",
+          "icon": "bleeding",
+          "text": {
+            "fa": "از بیره هم خون می‌آید یا بدنش زود کبود می‌شود",
+            "ps": "له ورېژو هم وینه راځي یا بدن یې ژر شین کېږي",
+            "en": "they also bleed from the gums or bruise easily"
+          }
+        },
+        {
+          "id": "nosebleed.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "همراه خون، تب دارد",
+            "ps": "له وینې سره تبه لري",
+            "en": "they have a fever with the bleeding"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nosebleed.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این حالت را دارد، همین هفته به کلینیک بروید:",
+        "ps": "که دا حالت ولري، همدا اونۍ کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic this week if:"
+      },
+      "items": [
+        {
+          "id": "nosebleed.soon.again",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون آمدن از بینی بار بار می‌آید",
+            "ps": "له پوزې وینه بیا بیا راځي",
+            "en": "nosebleeds keep coming back"
+          }
+        },
+        {
+          "id": "nosebleed.soon.bp",
+          "icon": "bp",
+          "text": {
+            "fa": "شخص فشار خون بلند دارد یا دوای رقیق‌کنندهٔ خون می‌خورد",
+            "ps": "کس د وینې لوړ فشار لري یا د وینې نرموونکي درمل خوري",
+            "en": "the person has high blood pressure or takes blood-thinning medicine"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nosebleed.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "nosebleed.dont.head-back",
+          "icon": "no",
+          "text": {
+            "fa": "سر را به عقب نبرید",
+            "ps": "سر شاته مه کوئ",
+            "en": "tip the head back"
+          }
+        },
+        {
+          "id": "nosebleed.dont.stuff",
+          "icon": "no",
+          "text": {
+            "fa": "پنبه، کاغذ یا گیاه را در عمق بینی نکنید",
+            "ps": "مالوچ، کاغذ یا بوټي د پوزې ژورو ته مه ننباسئ",
+            "en": "push cotton, paper or herbs deep into the nose"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nosebleed.congo",
+      "type": "tip",
+      "icon": "insect",
+      "text": {
+        "fa": "تب با خون آمدن از بینی، بیره یا زیر پوست ممکن است تب کانگو باشد. همین حالا به شفاخانه بروید و از تماس با حیوان یا کنه بگویید.",
+        "ps": "تبه له پوزې، ورېژو یا پوستکي لاندې له وینې سره کېدای شي د کانګو تبه وي. همدا اوس روغتون ته ولاړ شئ او د څارویو یا کنې د تماس په اړه ووایئ.",
+        "en": "Fever with bleeding from the nose, gums or under the skin can be Congo fever. Go to hospital now, and say if there was contact with animals or ticks."
+      }
+    },
+    {
+      "id": "nosebleed.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه می‌توانند بینی را برای بند کردن خون پر کنند و علت‌های دیگر را معاینه کنند.",
+        "ps": "په روغتون کې کولی شي د وینې د درولو لپاره پوزه ډکه کړي او نور لاملونه معاینه کړي.",
+        "en": "At hospital they can pack the nose to stop the bleeding, and check for other causes."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: nosebleed (lean forward, pinch the soft part for 10 to 15 minutes, seek help if over 20 minutes)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): nosebleed",
+    "WHO fact sheet: Crimean-Congo haemorrhagic fever (2022)"
+  ],
+  "review": [
+    "ERC 2025: pinch for 10 to 15 minutes, seek medical help if bleeding goes on for more than 20 minutes. Here: 10 minutes, then 10 more, then hospital.",
+    "The Congo fever tip links to the animal-illness page (CCHF is endemic in Afghanistan, with peaks around Eid al-Adha). It overlaps animal-illness.urgent.bleeding on purpose.",
+    "'This week' for recurrent nosebleeds, as in the red-flags soon alert.",
+    "Dari 'دوای رقیق‌کنندهٔ خون' and Pashto 'د وینې نرموونکي درمل' for blood thinners: check."
+  ]
+}

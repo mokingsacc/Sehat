@@ -1,0 +1,210 @@
+{
+  "id": "kit-oximeter",
+  "section": "everyone",
+  "title": {
+    "fa": "گیرهٔ اکسیجن انگشت",
+    "ps": "د ګوتې د اکسیجن چپړکی",
+    "en": "Oxygen finger clip"
+  },
+  "summary": {
+    "fa": "اکسیجن خون را نشان می‌دهد. مفید است، اما غلط هم می‌کند.",
+    "ps": "د وینې اکسیجن ښيي. ګټور دی، خو غلطي هم کوي.",
+    "en": "Shows oxygen in the blood. Useful, but it can be wrong."
+  },
+  "image": "kit-oximeter",
+  "blocks": [
+    {
+      "id": "kit-oximeter.lead",
+      "type": "lead",
+      "text": {
+        "fa": "این گیرهٔ کوچک روی انگشت نشان می‌دهد چقدر اکسیجن در خون است. کمک می‌کند، اما غلط هم می‌کند، پس همیشه خود مریض را هم ببینید.",
+        "ps": "دا کوچنی چپړکی پر ګوته ښيي چې په وینه کې څومره اکسیجن دی. مرسته کوي، خو غلطي هم کوي، نو تل پخپله ناروغ ته هم وګورئ.",
+        "en": "This small clip on the finger shows how much oxygen is in the blood. It can help, but it can be wrong, so always look at the person too."
+      }
+    },
+    {
+      "id": "kit-oximeter.buy",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "چه بخرید",
+        "ps": "څه واخلئ",
+        "en": "What to buy"
+      },
+      "text": {
+        "fa": "یک گیرهٔ اکسیجن انگشت، حدود ۷۰۰ تا ۱۵۰۰ افغانی. بیشتر آن‌ها برای کلان‌سالان ساخته شده و روی اطفال خورد خوب کار نمی‌کند.",
+        "ps": "د ګوتې د اکسیجن چپړکی، شاوخوا ۷۰۰ تر ۱۵۰۰ افغانۍ. ډېری یې د لویانو لپاره جوړ شوي او پر وړو ماشومانو ښه کار نه کوي.",
+        "en": "A fingertip oxygen clip, about 700 to 1,500 afghanis. Most are made for adults and do not work well on small children."
+      }
+    },
+    {
+      "id": "kit-oximeter.warm",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست گرم، پاک و آرام",
+        "ps": "ګرم، پاک او ارام لاس",
+        "en": "A warm, clean, still hand"
+      },
+      "text": {
+        "fa": "اول دست را گرم کنید. خینه یا رنگ ناخن را از همان انگشت پاک کنید. دست را روی سینه بگذارید و آرام نگه دارید.",
+        "ps": "لومړی لاس ګرم کړئ. له هغې ګوتې نکریزې یا د نوکانو رنګ لرې کړئ. لاس پر سینه کېږدئ او ارام یې ونیسئ.",
+        "en": "Warm the hand first. Take henna or nail polish off that finger. Rest the hand on the chest and keep it still."
+      }
+    },
+    {
+      "id": "kit-oximeter.wait",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "یک دقیقه صبر کنید",
+        "ps": "یوه دقیقه صبر وکړئ",
+        "en": "Wait one minute"
+      },
+      "text": {
+        "fa": "یک دقیقهٔ کامل صبر کنید. عدد اکسیجن را که کنار نشان فیصد است بخوانید، نه عدد ضربان قلب را. عددی را که ثابت می‌ماند بنویسید.",
+        "ps": "یوه بشپړه دقیقه صبر وکړئ. د اکسیجن هغه شمېره ولولئ چې د سلنې نښې ته نږدې ده، نه د زړه د ټکان شمېره. هغه شمېره ولیکئ چې ثابته پاتې کېږي.",
+        "en": "Wait a full minute. Read the oxygen number next to the % sign, not the heart number. Write the number that stays."
+      }
+    },
+    {
+      "id": "kit-oximeter.numbers",
+      "type": "step",
+      "icon": "lungs",
+      "title": {
+        "fa": "عددها چه معنا دارند",
+        "ps": "شمېرې څه مانا لري",
+        "en": "What the numbers mean"
+      },
+      "text": {
+        "fa": "۹۵ تا ۱۰۰ عادی است. ۹۳ یا ۹۴ پایین است: دوباره اندازه کنید و اگر مریض است امروز به کلینیک بروید. ۹۲ یا کمتر: همین حالا شفاخانه.",
+        "ps": "۹۵ تر ۱۰۰ عادي دي. ۹۳ یا ۹۴ ټیټ دی: بیا یې اندازه کړئ، او که ناروغ وي نن کلینیک ته ولاړ شئ. ۹۲ یا کم: همدا اوس روغتون.",
+        "en": "95 to 100 is normal. 93 or 94 is low: measure again, and go to the clinic today if unwell. 92 or less: hospital now."
+      }
+    },
+    {
+      "id": "kit-oximeter.limits",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "ممکن است غلط باشد",
+        "ps": "کېدای شي غلط وي",
+        "en": "It can be wrong"
+      },
+      "text": {
+        "fa": "روی پوست تیره‌تر، با دست سرد، یا اگر دست تکان بخورد، ممکن است اکسیجن را بیشتر از حقیقت نشان دهد. به نفس کشیدن و حال مریض اعتماد کنید.",
+        "ps": "پر تیاره پوستکي، له سړو لاسونو سره، یا که لاس وخوځېږي، کېدای شي له اصلي څخه ډېر اکسیجن وښيي. پر ساه اخیستلو او د ناروغ پر حال باور وکړئ.",
+        "en": "On darker skin, with cold hands, or if the hand moves, it can show more oxygen than there really is. Trust the breathing and how the person looks."
+      }
+    },
+    {
+      "id": "kit-oximeter.clean",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "پاک نگه دارید",
+        "ps": "پاک یې وساتئ",
+        "en": "Keep it clean"
+      },
+      "text": {
+        "fa": "بعد از استفاده با تکهٔ نم‌دار یا الکول پاک کنید. اگر برای مدت زیاد استفاده نمی‌کنید، بتری‌ها را بیرون کنید.",
+        "ps": "له کارولو وروسته یې په لوند ټوکر یا الکولو پاک کړئ. که ډېر وخت یې نه کاروئ، بیټرۍ یې وباسئ.",
+        "en": "Wipe it with a damp cloth or alcohol after use. Take the batteries out if you will not use it for a long time."
+      }
+    },
+    {
+      "id": "kit-oximeter.check",
+      "type": "link",
+      "to": "tool/reading/spo2",
+      "icon": "lungs",
+      "title": {
+        "fa": "عدد اکسیجن را معاینه کنید",
+        "ps": "د اکسیجن شمېره وګورئ",
+        "en": "Check an oxygen reading"
+      },
+      "text": {
+        "fa": "عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.",
+        "ps": "شمېره ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.",
+        "en": "Put in the number and hear what it means and what to do."
+      }
+    },
+    {
+      "id": "kit-oximeter.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "kit-oximeter.urgent.low",
+          "icon": "lungs",
+          "text": {
+            "fa": "عدد ۹۲ یا کمتر است",
+            "ps": "شمېره ۹۲ یا کمه ده",
+            "en": "the number is 92 or less"
+          }
+        },
+        {
+          "id": "kit-oximeter.urgent.breath",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس کشیدن یا گپ زدن سخت است، هر عددی که باشد",
+            "ps": "ساه اخیستل یا خبرې کول ګران دي، هره شمېره چې وي",
+            "en": "it is hard to breathe or to talk, whatever the number"
+          }
+        },
+        {
+          "id": "kit-oximeter.urgent.blue",
+          "icon": "breathe",
+          "text": {
+            "fa": "لب‌ها یا روی کبود یا خاکستری معلوم می‌شود",
+            "ps": "شونډې یا مخ شین یا خړ ښکاري",
+            "en": "the lips or face look blue or grey"
+          }
+        },
+        {
+          "id": "kit-oximeter.urgent.child",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "وقت نفس کشیدن، پایین سینهٔ طفل به داخل کشیده می‌شود",
+            "ps": "د ساه اخیستو پر وخت د ماشوم د سینې لاندې برخه ننوځي",
+            "en": "a child's lower chest pulls in when breathing in"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-oximeter.breaths",
+      "type": "link",
+      "to": "tool/breaths",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "برای اطفال: نفس‌ها را بشمارید",
+        "ps": "د ماشومانو لپاره: ساه وشمېرئ",
+        "en": "For children: count the breaths"
+      },
+      "text": {
+        "fa": "برای طفل خورد، شمردن نفس‌ها در یک دقیقه اکثراً بهتر از این گیره است.",
+        "ps": "د کوچني ماشوم لپاره، په یوه دقیقه کې د ساه شمېرل اکثره له دې چپړکي ښه دي.",
+        "en": "For a small child, counting breaths for one minute is often better than this clip."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Pocket Book of Hospital Care for Children, 2nd ed. (2013) and WHO Oxygen therapy for children (2016): SpO2 under 90 % = give oxygen; higher threshold at low altitude for some signs; altitude above 2,500 m changes thresholds",
+    "WHO Clinical management of COVID-19: living guideline (2023): SpO2 under 90 % = severe; pulse oximetry at home",
+    "NHS England / NICE COVID-19 home pulse oximetry guidance (2020 to 2021): 93 to 94 % seek advice; 92 % or less urgent",
+    "US FDA safety communication: pulse oximeter accuracy and limitations (2021, 2025 draft guidance on skin pigmentation)",
+    "Sjoding MW et al. Racial bias in pulse oximetry measurement. N Engl J Med 2020;383:2477-8"
+  ],
+  "review": [
+    "Thresholds: 95 to 100 normal; 93 to 94 = measure again, clinic today if unwell; 92 or less = hospital now. WHO uses under 90 % for oxygen; 92 % is the NHS home-monitoring cut-off, chosen here to allow for overestimation on darker skin. Judgement call.",
+    "Samangan altitude: Aybak about 900 m, mountain villages up to about 2,500 m. Normal SpO2 is slightly lower at altitude; thresholds not adjusted. Check.",
+    "Henna on nails is common and lowers or blocks readings: included.",
+    "Price 700 to 1,500 afghanis is an estimate (about 10 to 20 US dollars).",
+    "Title 'oxygen finger clip' used instead of 'pulse oximeter' (not an everyday word). Check local name."
+  ]
+}

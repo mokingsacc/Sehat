@@ -4,8 +4,8 @@
 // var "APP_URL" (the app's public address, for "Import from app"); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
 import ABOUT from './about.js';
 import * as SURV from './surveillance.js';
+import * as USAGE from './usage.js';
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
-const TYPES = new Set(['install', 'open', 'view', 'play', 'time', 'lang', 'voice', 'share', 'a2hs', 'a2hs-prompt', 'kid', 'dose', 'ask', 'feedback', 'near']);
 const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : null);
 const json = (o, status = 200, headers = {}) => new Response(JSON.stringify(o), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } });
 const NOT_FOUND = () => new Response('Not found', { status: 404 });
@@ -15,20 +15,27 @@ export default {
     const url = new URL(req.url);
     const path = url.pathname;
     if (req.method === 'OPTIONS') return new Response(null, { headers: CORS });
-    if (req.method === 'POST' && path === '/e') return ingest(req, env);
+    if (req.method === 'POST' && path === '/u') return USAGE.upload(req, env); // one finished day from one phone (no id)
+    if (req.method === 'POST' && path === '/i') return USAGE.install(req, env); // one install (no id)
+    if (req.method === 'POST' && path === '/e') return USAGE.legacy(req, env); // old app versions: folded into the daily totals
     if (req.method === 'POST' && path === '/r') return SURV.ingest(req, env);
     if (req.method === 'POST' && path === '/feedback') return saveFeedback(req, env);
     // public, read-only: the published book and uploaded narration (never the draft)
     if (req.method === 'GET' && (path === '/content/version.json' || path === '/content/book.json')) return publicBook(env, path);
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
+    if (req.method === 'GET' && path === '/privacy') return new Response(USAGE.privacyPage(url.searchParams.get('key')), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
     // everything below needs a key: the owner's DASH_KEY, or a person's own key (made on /people)
-    const isAdmin = path === '/watch' || path.startsWith('/watch/') || path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
+    const isAdmin = path === '/watch' || path.startsWith('/watch/') || path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/usage.csv' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
     if (req.method === 'GET' && path === '/') return signIn(false);
     if (!isAdmin) return new Response('ok', { headers: CORS });
     const me = await whoIs(env, url.searchParams.get('key'));
     if (!me && path === '/dashboard') return signIn(url.searchParams.has('key'));
     if (!me) return NOT_FOUND(); // wrong, removed or missing key: the same answer as a page that does not exist
-    if (path === '/watch' || path.startsWith('/watch/')) return SURV.handle(req, env, url, me);
+    if (path === '/watch' || path.startsWith('/watch/')) {
+      // access log: who looked at or downloaded disease-watch data (the methods page holds no data)
+      if (req.method === 'GET' && path !== '/watch/methods') await audit(env, me, path === '/watch' ? 'view disease watch' : 'export disease watch', (path.slice(7) || 'page') + ' ' + accessDetail(url));
+      return SURV.handle(req, env, url, me);
+    }
     if (path === '/people' || path.startsWith('/people/')) {
       if (me.role !== 'owner') return NOT_FOUND();
       if (path === '/people') return new Response(peoplePage(url.searchParams.get('key'), me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -38,19 +45,32 @@ export default {
     if (path.startsWith('/fb-audio/')) {
       const row = await env.DB.prepare('SELECT audio, type FROM feedback WHERE id = ?').bind(+path.split('/')[2]).first();
       if (!row || !row.audio) return NOT_FOUND();
+      await audit(env, me, 'listen voice note', '#' + (+path.split('/')[2]));
       return new Response(new Uint8Array(row.audio), { headers: { 'Content-Type': row.type || 'audio/webm' } });
     }
     if (path === '/feedback.json') {
+      await audit(env, me, 'export feedback', 'feedback.json');
       return Response.json((await env.DB.prepare('SELECT id, ts, lang, version, page, text, type, (audio IS NOT NULL) has_audio FROM feedback ORDER BY ts DESC LIMIT 500').all()).results);
     }
-    if (path === '/dashboard' || path === '/stats.json') {
-      const s = await stats(env, +(url.searchParams.get('days') || 30));
+    if (path === '/dashboard' || path === '/stats.json' || path === '/usage.csv') {
+      const q = USAGE.parseQuery(url, env), raw = await USAGE.load(env, q), v = raw.ok ? USAGE.view(raw, q) : null;
+      if (path === '/usage.csv') {
+        if (!v) return new Response('The usage tables are not made yet: run schema.sql again (see server/README.md).', { status: 503 });
+        const c = USAGE.csv(v);
+        await audit(env, me, 'export usage csv', `${accessDetail(url)} rows=${c.rows}`);
+        return new Response(c.text, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': `attachment; filename="sehat-usage-${q.from}-to-${q.today}${q.district ? '-' + q.district : ''}.csv"`, 'Cache-Control': 'no-store' } });
+      }
+      const s = await stats(env, q.days);
+      if (v) v.kpi.installs += s.installsLegacy; // installs counted by old app versions (install id) plus the new one-time pings
+      s.usage = v ? USAGE.toJson(v) : { error: 'run schema.sql again' };
+      delete s.installsLegacy;
+      await audit(env, me, path === '/stats.json' ? 'export stats.json' : 'view dashboard', accessDetail(url));
       if (path === '/stats.json') return Response.json(s);
-      return new Response(page(s, url.searchParams.get('key'), me), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+      return new Response(page(s, url.searchParams.get('key'), me, v, q, raw), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
     }
     if (path === '/about') {
       const k = encodeURIComponent(url.searchParams.get('key') || '');
-      return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · about</title><body style="margin:0;padding:16px;background:#FAF8F4"><p style="font-family:system-ui,sans-serif"><a href="/dashboard?key=${k}" style="color:#B6322D">← Dashboard</a></p>${ABOUT}</body>`, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+      return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · about</title><body style="margin:0;padding:16px;background:#FAF8F4"><p style="font-family:system-ui,sans-serif"><a href="/dashboard?key=${k}" style="color:#B6322D">← Dashboard</a> &nbsp; <a href="/privacy" style="color:#B6322D">Privacy: what the app sends and keeps →</a></p>${ABOUT}</body>`, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
     }
     if (path === '/ai/summary') return req.method === 'POST' ? aiSummary(env) : json({ error: 'Use POST' }, 405);
     if (path === '/admin') return new Response(adminPage(url.searchParams.get('key'), env, me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -61,7 +81,19 @@ export default {
     }
     return NOT_FOUND();
   },
+  // daily clean-up (wrangler.toml [triggers] crons): voice notes after 90 days, old raw events after 12 months
+  async scheduled(event, env, ctx) {
+    const job = (async () => {
+      const out = await USAGE.cleanup(env, Number.isFinite(event && event.scheduledTime) ? event.scheduledTime : Date.now());
+      await audit(env, { name: 'system', role: 'cron' }, 'retention clean-up', Object.entries(out).map(([k, n]) => `${k} ${n}`).join(', '));
+      return out;
+    })();
+    if (ctx && ctx.waitUntil) ctx.waitUntil(job);
+    return job;
+  },
 };
+// what a person asked for, for the access log (never their key)
+const accessDetail = (url) => [...url.searchParams].filter(([k]) => k !== 'key').map(([k, v]) => `${k}=${String(v).slice(0, 40)}`).join(' ').slice(0, 150) || 'default view';
 
 /* ================= who is signed in: the owner, or a person with their own key ================= */
 const ROLES = { editor: 'Editor', viewer: 'Viewer' }; // the owner is not a row in "people": it is DASH_KEY
@@ -101,7 +133,7 @@ async function audit(env, me, action, detail = '') {
       await env.DB.prepare('UPDATE audit SET ts = ? WHERE id = ?').bind(now, last.id).run();
     } else {
       await env.DB.prepare('INSERT INTO audit (ts, who, role, action, detail) VALUES (?, ?, ?, ?, ?)').bind(now, me.name, me.role, action, d).run();
-      if (last && last.id % 50 === 0) await env.DB.prepare('DELETE FROM audit WHERE id < ?').bind(last.id - 2000).run(); // keep it small
+      if (last && last.id % 50 === 0) await env.DB.prepare('DELETE FROM audit WHERE id < ?').bind(last.id - 20000).run(); // keep the last 20,000 lines (views and downloads are logged too)
     }
   } catch {} // never stop a save because the log could not be written
 }
@@ -110,92 +142,101 @@ function newKey() {
   return btoa(String.fromCharCode(...b)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-async function ingest(req, env) {
-  let b;
-  try { const txt = await req.text(); if (txt.length > 200000) throw 0; b = JSON.parse(txt); } catch { return new Response('bad', { status: 400, headers: CORS }); }
-  const iid = clip(b.iid, 64); if (!iid || !Array.isArray(b.events)) return new Response('bad', { status: 400, headers: CORS });
-  const now = Date.now();
-  const stmts = [env.DB.prepare(`INSERT INTO installs (iid, first_ts, last_ts, lang, plat, standalone, version) VALUES (?1, ?2, ?2, ?3, ?4, ?5, ?6)
-    ON CONFLICT(iid) DO UPDATE SET last_ts = ?2, lang = ?3, plat = ?4, standalone = ?5, version = ?6`)
-    .bind(iid, now, clip(b.lang, 4), clip(b.plat, 10), b.standalone ? 1 : 0, clip(b.v, 32))];
-  for (const e of b.events.slice(0, 200)) {
-    if (!e || !TYPES.has(e.t)) continue;
-    const ts = Number.isFinite(e.ts) && e.ts > 1.7e12 && e.ts < now + 864e5 ? e.ts : now;
-    const ms = e.t === 'time' && Number.isFinite(e.ms) ? Math.min(Math.max(e.ms | 0, 0), 4 * 3600e3) : null;
-    stmts.push(env.DB.prepare('INSERT INTO events (iid, t, p, l, ms, ts, day) VALUES (?, ?, ?, ?, ?, ?, ?)')
-      .bind(iid, e.t, clip(e.p || e.id || e.v || e.to || e.ok, 80), clip(e.l, 4), ms, ts, new Date(ts).toISOString().slice(0, 10)));
-  }
-  await env.DB.batch(stmts);
-  return new Response('ok', { headers: CORS });
-}
-
+// phone-number-like runs of 7 or more digits (Latin, Persian or Arabic, with spaces, dashes or dots between) are removed
+const stripNumbers = (t) => String(t).replace(/[+\uFF0B]?[0-9\u06F0-\u06F9\u0660-\u0669](?:[\s\-\u2013.()]*[0-9\u06F0-\u06F9\u0660-\u0669]){6,}/g, '…');
 async function saveFeedback(req, env) {
   let b;
   try { const txt = await req.text(); if (txt.length > 3_000_000) throw 0; b = JSON.parse(txt); } catch { return new Response('bad', { status: 400, headers: CORS }); }
   let audio = null;
   if (typeof b.audio === 'string' && b.audio) { try { const bin = atob(b.audio); audio = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) audio[i] = bin.charCodeAt(i); } catch { audio = null; } }
-  if (!audio && !(b.text || '').trim()) return new Response('empty', { status: 400, headers: CORS });
-  await env.DB.prepare('INSERT INTO feedback (iid, ts, lang, version, page, text, audio, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
-    .bind(clip(b.iid, 64), Number.isFinite(b.ts) ? b.ts : Date.now(), clip(b.lang, 4), clip(b.v, 32), clip(b.page, 80), clip(b.text, 2000), audio, clip(b.type, 40)).run();
+  const text = stripNumbers(clip(b.text, 2000) || '');
+  if (!audio && !text.trim()) return new Response('empty', { status: 400, headers: CORS });
+  // not linked to any id; the time is when the server received it (the voice is deleted 90 days after that, see USAGE.cleanup)
+  await env.DB.prepare('INSERT INTO feedback (iid, ts, lang, version, page, text, audio, type) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)')
+    .bind(Date.now(), clip(b.lang, 4), clip(b.v, 32), clip(b.page, 80), text, audio, clip(b.type, 40)).run();
   return new Response('ok', { headers: CORS });
 }
 
+// The older app versions' raw events (kept 12 months, then deleted by the cron) and the feedback list.
+// Counts from 1 to 4 are shown as "<5"; searches typed fewer than 5 times are not shown at all.
 async function stats(env, days) {
   const since = Date.now() - days * 864e5, d7 = Date.now() - 7 * 864e5;
   const one = async (sql, ...a) => (await env.DB.prepare(sql).bind(...a).first()) || {};
   const all = async (sql, ...a) => (await env.DB.prepare(sql).bind(...a).all()).results || [];
+  const lt = (n) => (n > 0 && n < USAGE.MIN_CELL ? USAGE.LT : n);
+  const ltRows = (rows, k = 'n') => rows.map((r) => ({ ...r, [k]: lt(r[k]) }));
+  const installs = (await one('SELECT COUNT(*) n FROM installs')).n || 0, activeN = (await one('SELECT COUNT(DISTINCT iid) n FROM events WHERE ts >= ?', since)).n || 0;
+  const hs = await one('SELECT SUM(standalone) s, COUNT(*) n FROM installs');
+  const asks = await all("SELECT p, COUNT(*) n FROM events WHERE t = 'ask' AND ts >= ? GROUP BY p ORDER BY n DESC LIMIT 30", since);
   return {
-    days,
-    installs: (await one('SELECT COUNT(*) n FROM installs')).n || 0,
-    newInstalls: (await one('SELECT COUNT(*) n FROM installs WHERE first_ts >= ?', since)).n || 0,
-    active7: (await one('SELECT COUNT(DISTINCT iid) n FROM events WHERE ts >= ?', d7)).n || 0,
-    activeN: (await one('SELECT COUNT(DISTINCT iid) n FROM events WHERE ts >= ?', since)).n || 0,
-    opens: (await one("SELECT COUNT(*) n FROM events WHERE t = 'open' AND ts >= ?", since)).n || 0,
-    minutes: Math.round(((await one("SELECT SUM(ms) s FROM events WHERE t = 'time' AND ts >= ?", since)).s || 0) / 60000),
-    avgSessionSec: Math.round(((await one("SELECT AVG(ms) a FROM events WHERE t = 'time' AND ts >= ?", since)).a || 0) / 1000),
-    plays: (await one("SELECT COUNT(*) n FROM events WHERE t = 'play' AND ts >= ?", since)).n || 0,
-    shares: (await one("SELECT COUNT(*) n FROM events WHERE t = 'share' AND ts >= ?", since)).n || 0,
-    homeScreen: (await one('SELECT SUM(standalone) s, COUNT(*) n FROM installs')),
-    perDay: await all("SELECT day, COUNT(DISTINCT iid) users, SUM(t = 'play') plays FROM events WHERE ts >= ? GROUP BY day ORDER BY day", since),
-    installsPerDay: await all("SELECT date(first_ts / 1000, 'unixepoch') day, COUNT(*) n FROM installs WHERE first_ts >= ? GROUP BY day ORDER BY day", since),
-    langs: await all('SELECT lang, COUNT(*) n FROM installs GROUP BY lang ORDER BY n DESC'),
-    plats: await all('SELECT plat, COUNT(*) n FROM installs GROUP BY plat ORDER BY n DESC'),
-    pages: await all("SELECT p, COUNT(*) n FROM events WHERE t = 'view' AND ts >= ? GROUP BY p ORDER BY n DESC LIMIT 25", since),
-    clips: await all("SELECT p, COUNT(*) n FROM events WHERE t = 'play' AND ts >= ? GROUP BY p ORDER BY n DESC LIMIT 15", since),
-    versions: await all('SELECT version, COUNT(*) n FROM installs GROUP BY version ORDER BY n DESC LIMIT 6'),
-    asks: await all("SELECT p, COUNT(*) n FROM events WHERE t = 'ask' AND ts >= ? GROUP BY p ORDER BY n DESC LIMIT 30", since),
+    days, installsLegacy: installs,
+    installs: lt(installs),
+    newInstalls: lt((await one('SELECT COUNT(*) n FROM installs WHERE first_ts >= ?', since)).n || 0),
+    active7: lt((await one('SELECT COUNT(DISTINCT iid) n FROM events WHERE ts >= ?', d7)).n || 0),
+    activeN: lt(activeN),
+    opens: lt((await one("SELECT COUNT(*) n FROM events WHERE t = 'open' AND ts >= ?", since)).n || 0),
+    minutes: activeN < USAGE.MIN_CELL && activeN ? USAGE.LT : Math.round(((await one("SELECT SUM(ms) s FROM events WHERE t = 'time' AND ts >= ?", since)).s || 0) / 60000),
+    avgSessionSec: activeN < USAGE.MIN_CELL && activeN ? USAGE.LT : Math.round(((await one("SELECT AVG(ms) a FROM events WHERE t = 'time' AND ts >= ?", since)).a || 0) / 1000),
+    plays: lt((await one("SELECT COUNT(*) n FROM events WHERE t = 'play' AND ts >= ?", since)).n || 0),
+    shares: lt((await one("SELECT COUNT(*) n FROM events WHERE t = 'share' AND ts >= ?", since)).n || 0),
+    homeScreen: { s: (hs.n || 0) < USAGE.MIN_CELL && hs.n ? USAGE.LT : hs.s || 0, n: lt(hs.n || 0) },
+    perDay: (await all("SELECT day, COUNT(DISTINCT iid) users, SUM(t = 'play') plays FROM events WHERE ts >= ? GROUP BY day ORDER BY day", since)).map((r) => ({ day: r.day, users: lt(r.users), plays: r.users < USAGE.MIN_CELL ? lt(r.plays) : r.plays })),
+    installsPerDay: ltRows(await all("SELECT date(first_ts / 1000, 'unixepoch') day, COUNT(*) n FROM installs WHERE first_ts >= ? GROUP BY day ORDER BY day", since)),
+    langs: ltRows(await all('SELECT lang, COUNT(*) n FROM installs GROUP BY lang ORDER BY n DESC')),
+    plats: ltRows(await all('SELECT plat, COUNT(*) n FROM installs GROUP BY plat ORDER BY n DESC')),
+    pages: ltRows(await all("SELECT p, COUNT(*) n FROM events WHERE t = 'view' AND ts >= ? GROUP BY p ORDER BY n DESC LIMIT 25", since)),
+    clips: ltRows(await all("SELECT p, COUNT(*) n FROM events WHERE t = 'play' AND ts >= ? GROUP BY p ORDER BY n DESC LIMIT 15", since)),
+    versions: ltRows(await all('SELECT version, COUNT(*) n FROM installs GROUP BY version ORDER BY n DESC LIMIT 6')),
+    asks: asks.filter((r) => r.n >= USAGE.MIN_CELL || !String(r.p).startsWith('none:')).map((r) => ({ ...r, n: lt(r.n) })),
+    asksHidden: asks.filter((r) => r.n < USAGE.MIN_CELL && String(r.p).startsWith('none:')).length,
     feedback: await all('SELECT id, ts, lang, page, text, type, (audio IS NOT NULL) has_audio FROM feedback ORDER BY ts DESC LIMIT 100'),
   };
 }
 
 // "Sara · viewer" (shown at the top of every page)
 const signedIn = (me) => (me.role === 'owner' ? 'the owner' : `${me.name} · ${me.role}`);
-function page(s, key, me) {
+function page(s, key, me, v, q, raw) {
   const e = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const kpi = (l, v, sub) => `<div class="k"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${sub || ''}</div></div>`;
-  const max = Math.max(1, ...s.perDay.map((r) => r.users));
-  const bars = s.perDay.map((r) => `<div class="b" title="${e(r.day)}: ${r.users} users"><i style="height:${(r.users / max) * 100}%"></i><span>${e(r.day.slice(5))}</span></div>`).join('');
+  const kpi = (l, val, sub) => `<div class="k"><div class="l">${l}</div><div class="v${val === USAGE.LT ? ' lt' : ''}">${e(val)}</div><div class="s">${sub || ''}</div></div>`;
+  const num = (x) => (typeof x === 'number' ? x : 0);
+  const max = Math.max(1, ...s.perDay.map((r) => num(r.users)));
+  const bars = s.perDay.map((r) => `<div class="b" title="${e(r.day)}: ${e(r.users)} users"><i style="height:${(num(r.users) / max) * 100}%"></i><span>${e(r.day.slice(5))}</span></div>`).join('');
   const table = (rows, a, b, h1, h2) => `<table><tr><th>${h1}</th><th>${h2}</th></tr>${rows.map((r) => `<tr><td>${e(r[a])}</td><td>${e(r[b])}</td></tr>`).join('')}</table>`;
-  const hs = s.homeScreen.n ? Math.round((100 * (s.homeScreen.s || 0)) / s.homeScreen.n) + '%' : '–';
+  const hs = typeof s.homeScreen.n === 'number' && s.homeScreen.n && typeof s.homeScreen.s === 'number' ? Math.round((100 * s.homeScreen.s) / s.homeScreen.n) + '%' : '–';
+  const k = e(key), where = q.district ? USAGE.placeName(q.district) : 'all districts';
+  const LN = { fa: 'Dari', ps: 'Pashto', en: 'English' }, PL = { android: 'Android', ios: 'iPhone', other: 'Other' };
+  const fb = (f) => `<div style="border-top:1px solid #E6E1D8;padding:8px 0"><div class="s">${e(new Date(f.ts).toISOString().slice(0, 16).replace('T', ' '))} · ${e(f.lang)} · from ${e(f.page)}</div>${f.text ? `<div dir="auto" style="font-size:16px">${e(f.text)}</div>` : ''}${f.has_audio ? `<audio controls preload="none" src="/fb-audio/${f.id}?key=${k}"></audio>` : /^audio\//.test(f.type || '') ? `<div class="s"><i>Voice note deleted (voice notes are kept ${USAGE.AUDIO_DAYS} days).</i></div>` : ''}</div>`;
   return `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · usage</title>
-<style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:24px;max-width:1200px;margin:auto}h1{font-size:22px}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.k,.c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px}
+<style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:16px;max-width:1200px;margin:auto}h1{font-size:22px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.k,.c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px;min-width:0}
 .l{font-size:13px;color:#6B655E}.v{font-size:30px;font-weight:700;color:#1F6F7A}.s{font-size:12px;color:#6B655E}
-.chart{display:flex;align-items:flex-end;gap:3px;height:160px;margin-top:10px}.b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;font-size:9px;color:#6B655E;text-align:center}
-.b i{display:block;background:#1F6F7A;border-radius:4px 4px 0 0;min-height:2px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px}
-table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px;border-top:1px solid #E6E1D8}th{color:#6B655E;font-weight:600}a{color:#B6322D}</style>
-<h1>Sehat · usage (last ${s.days} days)</h1>
-<p class="s" id="who">Signed in as <b>${e(signedIn(me))}</b>${me.role === 'viewer' ? ' (you can look at everything here, but not change the book)' : ''}</p>
-<p><a href="/admin?key=${e(key)}" style="font-weight:700">${me.role === 'viewer' ? 'See the book (view only) →' : 'Edit the book →'}</a> &nbsp; ${me.role === 'owner' ? `<a href="/people?key=${e(key)}" style="font-weight:700">People →</a> &nbsp; ` : ''}<a href="/watch?key=${e(key)}" style="font-weight:700">Disease watch →</a> &nbsp; <a href="/about?key=${e(key)}" style="font-weight:700">About this app →</a></p>
-<p class="s">Anonymous counts only. Phones send them when they next have internet, so recent days fill in late. <a href="?key=${e(key)}&days=7">7 days</a> · <a href="?key=${e(key)}&days=30">30 days</a> · <a href="?key=${e(key)}&days=365">1 year</a></p>
-<div class="g">${kpi('Installs (all time)', s.installs, `+${s.newInstalls} in this period`)}${kpi('Active last 7 days', s.active7, `${s.activeN} in this period`)}${kpi('Times opened', s.opens)}${kpi('Minutes spent', s.minutes, `average visit ${Math.floor(s.avgSessionSec / 60)}m ${s.avgSessionSec % 60}s`)}${kpi('Audio plays', s.plays)}${kpi('On home screen', hs, `${s.shares} shares`)}</div>
-<div class="c" style="margin-top:12px"><div class="l">People using it each day</div><div class="chart">${bars || '<span class="s">No data yet</span>'}</div></div>
+.chart{display:flex;align-items:flex-end;gap:3px;height:160px;margin-top:10px}.b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;font-size:9px;color:#6B655E;text-align:center;min-width:0;overflow:hidden}
+.b i{display:block;background:#1F6F7A;border-radius:4px 4px 0 0;min-height:2px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:12px;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px;border-top:1px solid #E6E1D8}th{color:#6B655E;font-weight:600}a{color:#B6322D}
+details.old>summary{cursor:pointer;font-weight:700;padding:4px 0}${USAGE.CSS}</style>
+<h1>Sehat · usage</h1>
+<p class="s" id="who">Signed in as <b>${e(signedIn(me))}</b>${me.role === 'viewer' ? ' (you can look at everything here, but not change the book)' : ''}. What you open and download here is written in the access log.</p>
+<p><a href="/admin?key=${k}" style="font-weight:700">${me.role === 'viewer' ? 'See the book (view only) →' : 'Edit the book →'}</a> &nbsp; ${me.role === 'owner' ? `<a href="/people?key=${k}" style="font-weight:700">People and access log →</a> &nbsp; ` : ''}<a href="/watch?key=${k}" style="font-weight:700">Disease watch →</a> &nbsp; <a href="/about?key=${k}" style="font-weight:700">About this app →</a> &nbsp; <a href="/privacy?key=${k}" style="font-weight:700">Privacy →</a></p>
+${USAGE.filterForm(q, key)}
+<p class="s">Counts from phones whose family agreed to send them (daily totals, no install id). Phones send each finished day when they next have internet, so recent days fill in late. Showing <b>${e(where)}</b>, last ${q.days} days. Installs are not split by district.</p>
+${v ? '' : `<p class="warnbox">The tables for the new counts are not in the database yet. On your computer, in the server folder, run <code>wrangler d1 execute fhb --remote --file=schema.sql</code> (safe to run again: it only adds what is missing).</p>`}
+${v ? `<div class="g">${USAGE.kpiTiles(v, kpi)}</div>
+<div class="c" style="margin-top:12px"><div class="l">Phones using it each day · ${e(where)}</div><div class="chart">${USAGE.dailyChart(v) || '<span class="s">No data yet</span>'}</div><div class="s">A striped bar = fewer than 5 phones that day (the exact number is hidden).</div></div>
+${USAGE.section(v, key)}
+<div class="two"><div class="c"><div class="l">Language (phone-days)</div>${USAGE.smallTable(v.langs, 'Language', 'Phone-days', (x) => LN[x] || x)}<div class="l" style="margin-top:12px">Phone type (phone-days)</div>${USAGE.smallTable(v.plats, 'Type', 'Phone-days', (x) => PL[x] || x)}</div>
+<div class="c"><div class="l">App version (phone-days)</div>${USAGE.smallTable(v.versions, 'Version', 'Phone-days')}<div class="l" style="margin-top:12px">Consent wording the counts were sent under</div>${USAGE.smallTable(v.cvs, 'Version', 'Phone-days', (x) => (x === 'legacy' ? 'older app (no question asked)' : x))}</div>
+<div class="c"><div class="l">New installs per day (all districts)</div>${USAGE.smallTable(v.installsPerDay.map((r) => ({ k: r.day, n: r.n })).reverse().slice(0, 31), 'Day', 'Installs')}</div></div>` : ''}
+<div class="two">
+<div class="c" style="grid-column:1/-1"><div class="l">Summary of feedback and empty searches (AI)</div><p class="s">Sends the written feedback and the searches that found nothing (older app versions only) from the last 60 days to Claude (Anthropic) and shows the main themes and suggested changes. Voice notes are not sent.</p><button id="aib" style="font:inherit;padding:8px 14px;border-radius:10px;border:1px solid #1F6F7A;background:#1F6F7A;color:#fff">Summarise feedback</button><div id="aio" dir="auto" style="white-space:pre-wrap;margin-top:10px;font-size:15px"></div></div>
+<div class="c" style="grid-column:1/-1"><div class="l">Feedback from users (newest first)</div><p class="s">Not linked to any phone. Phone numbers are removed from the text. Voice notes are deleted ${USAGE.AUDIO_DAYS} days after they arrive.</p>${s.feedback.length ? s.feedback.map(fb).join('') : '<span class="s">No feedback yet</span>'}<p class="s">Download all as JSON: <a href="/feedback.json?key=${k}">feedback.json</a> (paste it to Claude to summarise what to improve).</p></div></div>
+<details class="c old" style="margin-top:12px"><summary>Older app versions: raw events (deleted after 12 months)</summary>
+<p class="s">Before October 2026 the app sent every page view with a random install number. Those rows are still here until they are 12 months old; new phones send only daily totals (above). Counts 1 to 4 show as "&lt;5"; searches typed fewer than 5 times are hidden${s.asksHidden ? ` (${s.asksHidden} hidden)` : ''}.</p>
+<div class="g">${kpi('Installs (old app)', s.installs, `+${e(s.newInstalls)} in this period`)}${kpi('Active last 7 days', s.active7, `${e(s.activeN)} in this period`)}${kpi('Times opened', s.opens)}${kpi('Minutes spent', s.minutes, typeof s.avgSessionSec === 'number' ? `average visit ${Math.floor(s.avgSessionSec / 60)}m ${s.avgSessionSec % 60}s` : '')}${kpi('Audio plays', s.plays)}${kpi('On home screen', hs, `${e(s.shares)} shares`)}</div>
+<div class="c" style="margin-top:12px"><div class="l">People using it each day (old app)</div><div class="chart">${bars || '<span class="s">No data</span>'}</div></div>
 <div class="two"><div class="c"><div class="l">Most opened pages</div>${table(s.pages, 'p', 'n', 'Page', 'Views')}</div><div class="c"><div class="l">Most played clips</div>${table(s.clips, 'p', 'n', 'Clip', 'Plays')}</div>
 <div class="c"><div class="l">Language</div>${table(s.langs, 'lang', 'n', 'Language', 'Phones')}<div class="l" style="margin-top:12px">Phone type</div>${table(s.plats, 'plat', 'n', 'Type', 'Phones')}</div>
-<div class="c" style="grid-column:1/-1"><div class="l">Summary of feedback and empty searches (AI)</div><p class="s">Sends the written feedback and the searches that found nothing from the last 60 days to Claude (Anthropic) and shows the main themes and suggested changes. Voice notes are not sent.</p><button id="aib" style="font:inherit;padding:8px 14px;border-radius:10px;border:1px solid #1F6F7A;background:#1F6F7A;color:#fff">Summarise feedback</button><div id="aio" dir="auto" style="white-space:pre-wrap;margin-top:10px;font-size:15px"></div></div>
-<div class="c" style="grid-column:1/-1"><div class="l">Feedback from users (newest first)</div>${s.feedback.length ? s.feedback.map((f) => `<div style="border-top:1px solid #E6E1D8;padding:8px 0"><div class="s">${e(new Date(f.ts).toISOString().slice(0, 16).replace('T', ' '))} · ${e(f.lang)} · from ${e(f.page)}</div>${f.text ? `<div dir="auto" style="font-size:16px">${e(f.text)}</div>` : ''}${f.has_audio ? `<audio controls preload="none" src="/fb-audio/${f.id}?key=${e(key)}"></audio>` : ''}</div>`).join('') : '<span class="s">No feedback yet</span>'}<p class="s">Download all as JSON: <a href="/feedback.json?key=${e(key)}">feedback.json</a> (paste it to Claude to summarise what to improve).</p></div>
 <div class="c"><div class="l">What people searched for ("none:" = nothing found, a topic to add)</div>${table(s.asks, 'p', 'n', 'Search', 'Times')}</div>
-<div class="c"><div class="l">Book version on phones</div>${table(s.versions, 'version', 'n', 'Version', 'Phones')}<div class="l" style="margin-top:12px">New installs per day</div>${table(s.installsPerDay, 'day', 'n', 'Day', 'Installs')}</div></div>
+<div class="c"><div class="l">Book version on phones</div>${table(s.versions, 'version', 'n', 'Version', 'Phones')}<div class="l" style="margin-top:12px">New installs per day</div>${table(s.installsPerDay, 'day', 'n', 'Day', 'Installs')}</div></div></details>
 <script>var __name = (f) => f; (${dashClient.toString()})(${scriptJson(key)})</script>`;
 }
 
@@ -223,6 +264,11 @@ const normSlot = (s) => (LANGS.includes(s) ? s + '-f' : SLOTS.includes(s) ? s : 
 const PACKS = ['urgent', 'children', 'women', 'everyone'];
 const URGENT_TOPICS = ['danger-child', 'pregnancy-danger', 'red-flags', 'first-aid'];
 const SECTIONS = ['children', 'women', 'everyone'];
+// topic lists in book.sections: the three sections, plus "kit" (the home health kit page) and "emergency" (the Emergency screen)
+const LISTS = [...SECTIONS, 'kit', 'emergency'];
+// same as tools/validate.py: where a "link" block can go
+const TOOLS = ['breaths', 'reading', 'reading/temp', 'reading/bp', 'reading/sugar', 'reading/spo2', 'reading/muac'];
+const LINK_RE = /^(tool\/([a-z0-9/-]+)|topic\/([a-z0-9-]+)|kit|family|near)$/;
 const ID_RE = /^[a-z0-9-]+(\.[a-z0-9-]+)*$/;
 // same list as tools/validate.py
 const ICONS = `clinic hospital car phone calendar clock moon family talk card check no warning money house
@@ -230,8 +276,8 @@ baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash th
 pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
 heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect`.split(/\s+/);
 const ICON_SET = new Set(ICONS);
-const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip' };
-const HOME_MODULES = { install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note' };
+const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip', link: 'link to a tool or another page', anim: 'animation (picture story)' };
+const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', sendApp: 'Send the app to another phone (Android app only)' };
 const STATUSES = ['open', 'unknown', 'closed'];
 const URL_KEYS = ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl'];
 const MAX_AUDIO = 1_900_000; // D1 keeps at most 2 MB in one row
@@ -281,6 +327,19 @@ function bookShapeError(b) {
 }
 
 const sayL = (L) => Object.fromEntries(LANGS.map((lg) => [lg, String((L && L[lg]) || '').trim()]));
+const hasText = (L) => !!L && typeof L === 'object' && LANGS.some((lg) => String(L[lg] || '').trim());
+// Explainer animations (book.anims, written by tools/build.py): the narration ids an animation or a group needs,
+// and those an "anim" block brings to its page (same as tools/anims.py needed_ids and block_ids).
+function animNeeded(b, name) {
+  const A = b.anims || {}, g = (A.groups || {})[name];
+  if (g) return [`anim.${name}.title`, `anim.${name}.ask`, ...g.map((v) => `anim.${v}.label`), ...g.flatMap((v) => animNeeded(b, v))];
+  return (A.ids || {})[name] || [`anim.${name}.title`];
+}
+function animBlockIds(b, bl) {
+  const g = ((b.anims || {}).groups || {})[bl.anim];
+  if (bl.pick && g) return [`anim.${bl.anim}.title`, `anim.${bl.anim}.ask`, ...g.map((v) => `anim.${v}.label`), ...animNeeded(b, bl.pick)];
+  return animNeeded(b, bl.anim);
+}
 // Same as tools/build.py: the narration text of every block, and the recording order for the studio.
 function rebuildNarration(b) {
   const old = b.narration || {}, n = {};
@@ -290,8 +349,9 @@ function rebuildNarration(b) {
     n[tid + '.title'] = sayL(t.title);
     for (const bl of t.blocks) {
       if (!bl || !bl.id) continue;
-      if (bl.type === 'step') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));
+      if (bl.type === 'step' || bl.type === 'link') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));
       else if (bl.type === 'lead' || bl.type === 'tip') n[bl.id] = sayL(bl.text);
+      else if (bl.type === 'anim') { if (hasText(bl.title)) n[bl.id] = sayL(bl.title); } // without a title it reads anim.<name>.title
       else if (bl.type === 'alert' || bl.type === 'dont') {
         n[bl.id] = sayL(bl.title);
         for (const it of bl.items || []) if (it && it.id) n[it.id] = sayL(it.text);
@@ -299,14 +359,20 @@ function rebuildNarration(b) {
     }
   }
   for (const k in old) if (k.split('.')[0] === 'vaccines' && b.topics.vaccines) n[k] = old[k];
+  // the animations' own lines (scenes, titles, picker) come from the app's build and are edited under Words
+  for (const k in old) if (k.startsWith('anim.')) n[k] = old[k];
   b.narration = n;
-  const order = Object.keys(n).filter((k) => k.startsWith('ui.')), seen = new Set(order);
-  for (const sec of SECTIONS) for (const tid of b.sections[sec] || []) for (const k of Object.keys(n)) {
-    if ((k === tid + '.title' || k.startsWith(tid + '.')) && !seen.has(k)) { seen.add(k); order.push(k); }
+  // recording order: interface lines, then page by page; an animation's lines follow the first page that shows it
+  const order = Object.keys(n).filter((k) => k.startsWith('ui.')), seen = new Set(order), owner = {};
+  for (const sec of ['children', 'women', 'everyone', 'kit']) for (const tid of b.sections[sec] || []) {
+    const ids = Object.keys(n).filter((k) => k === tid + '.title' || k.startsWith(tid + '.')), t = b.topics[tid] || {};
+    for (const bl of [...(t.blocks || []), ...(t.anims || [])]) if (bl && bl.type === 'anim') ids.push(...animBlockIds(b, bl).filter((k) => k in n && k.startsWith('anim.')));
+    for (const k of ids) if (!seen.has(k)) { seen.add(k); order.push(k); if (!(k in owner)) owner[k] = tid; }
   }
+  for (const k of Object.keys(n)) if (k.startsWith('anim.') && !seen.has(k)) { seen.add(k); order.push(k); }
   b.order = order;
   normAudio(b);
-  b.packs = { ...(b.packs || {}), order: PACKS, ids: packIds(b) };
+  b.packs = { ...(b.packs || {}), order: PACKS, ids: packIds(b, owner) };
   return b;
 }
 // book.audio is keyed by slot ("fa-f"); an older book keyed by language gets its clips moved to the woman's voice.
@@ -318,7 +384,7 @@ function normAudio(b) {
   return b;
 }
 // Same rule as tools/build.py: which audio pack each clip downloads in (urgent first, then children, women, everyone).
-function packIds(b) {
+function packIds(b, owner = {}) {
   const urgentTopics = new Set((b.config && Array.isArray(b.config.urgentTopics) && b.config.urgentTopics) || URGENT_TOPICS);
   const urgentIds = new Set();
   for (const t of Object.values(b.topics || {})) for (const bl of (t && t.blocks) || []) {
@@ -327,7 +393,7 @@ function packIds(b) {
   const ids = Object.fromEntries(PACKS.map((p) => [p, []]));
   const keys = [...(b.order || []), ...Object.keys(b.narration || {}).filter((k) => !(b.order || []).includes(k))];
   for (const k of keys) {
-    const tid = k.split('.')[0];
+    const tid = owner[k] || k.split('.')[0];
     const p = k.startsWith('ui.') || urgentTopics.has(tid) || k === tid + '.title' || urgentIds.has(k) ? 'urgent'
       : PACKS.slice(1).find((sec) => ((b.sections || {})[sec] || []).includes(tid)) || 'everyone';
     ids[p].push(k);
@@ -468,7 +534,7 @@ async function adminApi(req, env, url, op, me) {
       const old = b.topics[t.id];
       if (!old && (b.retired || []).includes(t.id)) return json({ error: `The id "${t.id}" was used before. Choose another id.` }, 400);
       if (!old) b.sections[t.section].push(t.id);
-      else if (old.section !== t.section) {
+      else if (old.section !== t.section && !(b.sections.kit || []).includes(t.id)) { // kit pages stay on the kit page only
         const ol = b.sections[old.section] || [], i = ol.indexOf(t.id);
         if (i >= 0) ol.splice(i, 1);
         if (!b.sections[t.section].includes(t.id)) b.sections[t.section].push(t.id);
@@ -479,16 +545,16 @@ async function adminApi(req, env, url, op, me) {
       if (!t || m.id === 'vaccines') return json({ error: 'No such topic.' }, 400);
       retire([m.id, m.id + '.title', ...(t.blocks || []).flatMap((x) => [x.id, ...(x.items || []).map((i) => i.id)])]);
       delete b.topics[m.id];
-      for (const s of SECTIONS) b.sections[s] = b.sections[s].filter((x) => x !== m.id);
+      for (const s of LISTS) if (Array.isArray(b.sections[s])) b.sections[s] = b.sections[s].filter((x) => x !== m.id);
     } else if (m.part === 'sections') {
       const v = m.value || {};
-      for (const s of SECTIONS) if (Array.isArray(v[s])) b.sections[s] = [...new Set(v[s].filter((x) => b.topics[x]))];
+      for (const s of LISTS) if (Array.isArray(v[s])) b.sections[s] = [...new Set(v[s].filter((x) => b.topics[x]))];
     } else if (m.part === 'home') {
       if (!Array.isArray(m.value)) return json({ error: 'Nothing to save.' }, 400);
       b.config.home = [...new Set(m.value.filter((x) => HOME_MODULES[x]))];
     } else if (m.part === 'ui') {
       for (const [k, L] of Object.entries(m.text || {})) if (b.ui[k]) b.ui[k] = cleanL(L);
-      for (const [k, L] of Object.entries(m.say || {})) if (k.startsWith('ui.') && b.narration[k]) b.narration[k] = cleanL(L);
+      for (const [k, L] of Object.entries(m.say || {})) if ((k.startsWith('ui.') || k.startsWith('anim.')) && b.narration[k]) b.narration[k] = cleanL(L);
     } else if (m.part === 'facilities') {
       if (!Array.isArray(m.value)) return json({ error: 'Nothing to save.' }, 400);
       b.facilities = { ...(b.facilities || {}), facilities: m.value, updated: new Date().toISOString().slice(0, 10) };
@@ -576,6 +642,16 @@ function checkBook(b) {
     if (ic == null || ic === '') { if (required) E(`${where}: choose an icon.`, tid); return; }
     if (!ICON_SET.has(ic)) E(`${where}: "${ic}" is not one of the app's icons.`, tid);
   };
+  // pictures and animations the app has (written by tools/build.py); a book from before they existed has none
+  const PICS = new Set(Array.isArray(b.pictures) ? b.pictures : []), AN = b.anims || {}, AG = AN.groups || {}, AIDS = AN.ids || {};
+  function checkAnim(w, bl, tid) {
+    if (typeof bl.anim !== 'string' || !(AIDS[bl.anim] || AG[bl.anim])) { E(`${w}: choose one of the app's animations.`, tid); return; }
+    if (bl.pick != null && bl.pick !== '' && !(AG[bl.anim] || []).includes(bl.pick)) E(`${w}: "${bl.pick}" is not one of the choices of "${bl.anim}".`, tid);
+    if (bl.title != null && hasText(bl.title)) checkL(`${w} title`, bl.title, 7, tid);
+    const need = bl.pick ? [...animNeeded(b, bl.anim).slice(0, 2 + (AG[bl.anim] || []).length), ...animNeeded(b, bl.pick)] : animNeeded(b, bl.anim);
+    const miss = need.filter((k) => !(b.narration || {})[k]);
+    if (miss.length) E(`${w}: the spoken lines of this animation are not in the book yet (${miss.slice(0, 3).join(', ')}${miss.length > 3 ? ' …' : ''}). They come with the app's own build.`, tid);
+  }
   for (const [key, t] of Object.entries(b.topics || {})) {
     if (key === 'vaccines') { checkVaccines(t); continue; }
     const tid = t && t.id, name = `Topic "${(t && t.title && t.title.en) || key}"`;
@@ -594,9 +670,18 @@ function checkBook(b) {
       if (!BLOCK_TYPES[ty]) { E(`${w}: unknown kind of block.`, tid); return; }
       regId(w, bl.id, tid);
       if (typeof bl.id === 'string' && !bl.id.startsWith(tid + '.')) E(`${w}: its id must start with "${tid}."`, tid);
+      if ((ty === 'step' || ty === 'link') && bl.picture != null && bl.picture !== '' && !PICS.has(bl.picture)) E(`${w}: there is no picture called "${bl.picture}" in the app.`, tid);
       if (ty === 'lead') checkL(`${w} text`, bl.text, 45, tid);
       else if (ty === 'step') { checkIcon(w, bl.icon, true, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid); }
       else if (ty === 'tip') { checkIcon(w, bl.icon, false, tid); checkL(`${w} text`, bl.text, 32, tid); }
+      else if (ty === 'link') {
+        checkIcon(w, bl.icon, false, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid);
+        const m = LINK_RE.exec(String(bl.to || ''));
+        if (!m) E(`${w}: choose where it goes (a tool, another topic, the home kit, the family record or the clinic finder).`, tid);
+        else if (m[2] && !TOOLS.includes(m[2])) E(`${w}: "${m[2]}" is not one of the app's tools.`, tid);
+        else if (m[3] && !(b.topics || {})[m[3]]) E(`${w}: it goes to the topic "${m[3]}", which does not exist.`, tid);
+      }
+      else if (ty === 'anim') checkAnim(w, bl, tid);
       else {
         if (ty === 'alert' && !['urgent', 'soon'].includes(bl.level)) E(`${w}: choose how urgent it is (red or amber).`, tid);
         checkL(`${w} title`, bl.title, 16, tid);
@@ -610,6 +695,7 @@ function checkBook(b) {
         });
       }
     });
+    if ((counts.anim || 0) > 2) W(`${name}: has ${counts.anim} animations. Try to keep it to 2 or fewer.`, tid);
     if ((counts.lead || 0) !== 1) E(`${name}: must have exactly one opening sentence (lead); it has ${counts.lead || 0}.`, tid);
     if (!((counts.step || 0) >= 2 && (counts.step || 0) <= 8)) W(`${name}: has ${counts.step || 0} steps (aim for 3 to 7).`, tid);
     if (!Array.isArray(t.sources) || !t.sources.filter((s) => String(s).trim()).length) E(`${name}: add at least one source (where the advice comes from).`, tid);
@@ -626,11 +712,14 @@ function checkBook(b) {
       (x.doses || []).forEach((dz, m) => { const dw = `${w} › vaccine ${m + 1}`; if (!ID_RE.test(dz.id || '')) E(`${dw}: bad id.`); checkL(`${dw} name`, dz.name); checkL(`${dw} protects against`, dz.protects); });
     });
     (d.notes || []).forEach((x, n) => { regId(`${v} › note ${n + 1}`, x.id); checkIcon(`${v} › note ${n + 1}`, x.icon, false); checkL(`${v} › note ${n + 1}`, x.text); });
+    (d.anims || []).forEach((x, n) => { const w = `${v} › animation ${n + 1}`; regId(w, x.id); if (x.type !== 'anim') E(`${w}: must be an animation.`); checkAnim(w, x); });
     if (d.women) { regId(`${v} › women's part`, d.women.id); checkL(`${v} › women's part title`, d.women.title); checkL(`${v} › women's part text`, d.women.text); (d.women.doses || []).forEach((x, n) => checkL(`${v} › women's dose ${n + 1}`, x.when)); }
   }
   // section lists
   const listed = new Set();
-  for (const s of SECTIONS) for (const id of (b.sections || {})[s] || []) { listed.add(id); if (!b.topics[id]) E(`The ${s} list names "${id}", but there is no such topic.`); }
+  for (const s of LISTS) for (const id of (b.sections || {})[s] || []) { listed.add(id); if (!b.topics[id]) E(`The ${s} list names "${id}", but there is no such topic.`); }
+  // the Emergency screen: each age's "not breathing" page and its other pages
+  for (const a of (b.config || {}).emergency || []) for (const id of [a.cpr, ...(a.topics || [])]) if (id && !b.topics[id]) E(`The Emergency screen (${a.id}) names "${id}", but there is no such topic.`);
   for (const id of Object.keys(b.topics || {})) if (!listed.has(id)) W(`Topic "${id}" is not in any section, so nobody can open it.`, id);
   // home screen
   if (!Array.isArray((b.config || {}).home) || !b.config.home.length) W('The home screen has no parts switched on.');
@@ -745,7 +834,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;p
 <button class="primary" id="p-add">Make their link</button><div id="p-out"></div></div>
 <div class="c"><div class="l">People with access</div><div id="p-list" class="s">Loading…</div>
 <p class="s">Your own link (your secret word) always works and is not listed here. Removing access works at once: their link stops working.</p></div>
-<div class="c"><div class="l">Who changed what (last 50)</div><div id="p-log" class="s">Loading…</div></div>
+<div class="c"><div class="l">Who changed, viewed or downloaded what (last 50)</div><div id="p-log" class="s">Loading…</div></div>
 <div class="c"><div class="l">What each role can do</div><ul class="s">
 <li><b>Viewer</b>: dashboard, About, feedback and voice notes, the AI summary, and can look at the book in the editor. Cannot change anything.</li>
 <li><b>Editor</b>: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot see this page or give anyone access.</li>
@@ -807,7 +896,7 @@ function peopleClient(cfg) {
 /* ================= the editor page (/admin?key=...) ================= */
 function adminPage(key, env, me) {
   const k = encodeURIComponent(key), esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const cfg = { key, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES };
+  const cfg = { key, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES, tools: TOOLS };
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · editor</title>
 <style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;font-size:16px}h1{font-size:20px;margin:0}h2{font-size:20px;margin:16px 0 8px}
 header{position:sticky;top:0;z-index:5;background:#FBFAF7;border-bottom:1px solid #E6E1D8;padding:10px 14px}.hrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -837,9 +926,15 @@ body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[rea
 // Runs in Mo's browser. Keeps the draft in memory, saves each change to the server a moment after typing stops.
 function adminClient(cfg) {
   const LANGS = ['fa', 'ps', 'en'], LN = { fa: 'Dari', ps: 'Pashto', en: 'English' }, SECS = { children: 'Children', women: "Women's health", everyone: 'Everyone' };
+  // other topic lists: the home health kit page and the Emergency screen's list of all emergencies (topics keep their own section too)
+  const LISTN = { ...SECS, kit: 'Home health kit page (only there, not in the lists above)', emergency: 'Emergency screen: all emergencies (also in their section)' };
   const $ = (s) => document.querySelector(s), main = $('#main');
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const L0 = () => ({ fa: '', ps: '', en: '' });
+  const hasL = (x) => !!x && typeof x === 'object' && LANGS.some((lg) => String(x[lg] || '').trim());
+  // where a link block can go: the app's tools, the home kit, the family record, the clinic finder, any topic
+  const linkTargets = () => [...cfg.tools.map((x) => ['tool/' + x, 'Tool: ' + x]), ['kit', 'Home health kit page'], ['family', 'My family (vaccine card)'], ['near', 'Nearest clinic'],
+    ...Object.keys(D.topics).sort().map((x) => ['topic/' + x, 'Topic: ' + ((D.topics[x].title && D.topics[x].title.en) || x)])];
   let D = null, PUB = null, AU = {}, DIRTY = false, CUR = null, CHECK = null, Q = { words: '', audio: '', places: '' };
   const pending = new Set(); let timer = null, chain = Promise.resolve(), saveErr = false;
   // viewers: the same pages, but nothing can be typed or pressed (the server refuses every change anyway)
@@ -868,7 +963,7 @@ function adminClient(cfg) {
   /* ---- saving ---- */
   function bodyFor(p) {
     if (p.startsWith('topic:')) { const t = D.topics[p.slice(6)]; return t ? { part: 'topic', value: t, retired: D.retired || [] } : null; }
-    if (p === 'ui') { const say = {}; for (const k in D.narration) if (k.startsWith('ui.')) say[k] = D.narration[k]; return { part: 'ui', text: D.ui, say }; }
+    if (p === 'ui') { const say = {}; for (const k in D.narration) if (k.startsWith('ui.') || k.startsWith('anim.')) say[k] = D.narration[k]; return { part: 'ui', text: D.ui, say }; }
     if (p === 'fac') return { part: 'facilities', value: D.facilities.facilities };
     if (p === 'sections') return { part: 'sections', value: D.sections };
     if (p === 'home') return { part: 'home', value: D.config.home };
@@ -925,6 +1020,7 @@ function adminClient(cfg) {
     if ('list' in el.dataset) v = v.split('\n').map((s) => s.trim()).filter(Boolean);
     const last = ks[ks.length - 1];
     if (v === '' && 'opt' in el.dataset) delete o[last]; else o[last] = v;
+    if (last === 'anim') delete o.pick; // a new animation: choose its variant again
     queueSave(root === 'topic' ? 'topic:' + CUR : root === 'fac' ? 'fac' : 'ui');
   }
   function updPub() {
@@ -946,10 +1042,11 @@ function adminClient(cfg) {
 
   function vTopics() {
     let h = '<p class="s">Tap a topic to edit it. Use the arrows to change the order in the app.</p>';
-    for (const sec of Object.keys(SECS)) {
+    for (const sec of Object.keys(LISTN)) {
       const list = D.sections[sec] || [];
-      h += `<div class="c"><div class="l">${SECS[sec]}</div>${list.map((tid, i) => { const t = D.topics[tid] || {}; const label = `${esc((t.title && t.title.en) || tid)} <span class="s" dir="rtl">${esc((t.title && t.title.fa) || '')}</span>`;
-        return `<div class="row">${tid === 'vaccines' ? `<span class="grow">${label} <span class="s">(vaccine page: changed in the app files)</span></span>` : `<a class="grow" href="#topic/${esc(tid)}">${label}${t.section !== sec ? ` <span class="s">(also in ${SECS[t.section] || t.section})</span>` : ''}</a>`}<button class="sm" data-act="tmove" data-sec="${sec}" data-i="${i}" data-d="-1"${i ? '' : ' disabled'} aria-label="up">↑</button><button class="sm" data-act="tmove" data-sec="${sec}" data-i="${i}" data-d="1"${i < list.length - 1 ? '' : ' disabled'} aria-label="down">↓</button></div>`; }).join('')}</div>`;
+      if (!SECS[sec] && !list.length) continue;
+      h += `<div class="c"><div class="l">${LISTN[sec]}</div>${list.map((tid, i) => { const t = D.topics[tid] || {}; const label = `${esc((t.title && t.title.en) || tid)} <span class="s" dir="rtl">${esc((t.title && t.title.fa) || '')}</span>`;
+        return `<div class="row">${tid === 'vaccines' ? `<span class="grow">${label} <span class="s">(vaccine page: changed in the app files)</span></span>` : `<a class="grow" href="#topic/${esc(tid)}">${label}${SECS[sec] && t.section !== sec ? ` <span class="s">(also in ${SECS[t.section] || t.section})</span>` : ''}</a>`}<button class="sm" data-act="tmove" data-sec="${sec}" data-i="${i}" data-d="-1"${i ? '' : ' disabled'} aria-label="up">↑</button><button class="sm" data-act="tmove" data-sec="${sec}" data-i="${i}" data-d="1"${i < list.length - 1 ? '' : ' disabled'} aria-label="down">↓</button></div>`; }).join('')}</div>`;
     }
     h += `<div class="c"><div class="l">Add a new topic</div>
       <label><span>Short id: small English letters and hyphens, like "skin-infection". It can never be changed.</span><input id="nt-id" autocapitalize="off" autocomplete="off"></label>
@@ -982,10 +1079,18 @@ function adminClient(cfg) {
     const P = `topic:blocks|${i}|`, ty = b.type;
     let h = `<div class="c blk ${esc(ty)} ${esc(b.level || '')}"><div class="bh"><b>${i + 1}. ${esc(cfg.types[ty] || ty)}</b><span class="s grow">${esc(b.id)}</span><button class="sm" data-act="bmove" data-i="${i}" data-d="-1"${i ? '' : ' disabled'} aria-label="up">↑</button><button class="sm" data-act="bmove" data-i="${i}" data-d="1"${i < n - 1 ? '' : ' disabled'} aria-label="down">↓</button><button class="sm danger" data-act="bdel" data-i="${i}">Delete</button></div>`;
     if (ty === 'alert') h += `<label><span>How urgent</span><select data-f="${P}level">${opts([['urgent', 'Red: go to hospital now, day or night'], ['soon', 'Amber: go to the clinic today']], b.level)}</select></label>`;
-    if (ty === 'step' || ty === 'tip') h += iconPick(P + 'icon', b.icon, ty === 'tip');
-    if (b.title !== undefined || ['step', 'alert', 'dont'].includes(ty)) h += `<div class="l">Title</div>${tri(P + 'title', b.title, 1)}`;
-    if (['lead', 'step', 'tip'].includes(ty)) h += `<div class="l">Text</div>${tri(P + 'text', b.text, 3)}`;
-    h += audioBox(b.id);
+    if (ty === 'step' || ty === 'tip' || ty === 'link') h += iconPick(P + 'icon', b.icon, ty !== 'step');
+    if (ty === 'link') h += `<label><span>Goes to</span><select data-f="${P}to">${opts(linkTargets(), b.to || '', b.to ? '' : 'choose…')}</select></label>`;
+    if (ty === 'anim') {
+      const A = D.anims || {}, G = A.groups || {}, names = [...Object.keys(G).map((g) => [g, g + ' (asks who needs help first)']), ...Object.keys(A.ids || {}).map((n) => [n, n])];
+      h += `<div class="g3"><label><span>Animation</span><select data-f="${P}anim">${opts(names, b.anim || '', b.anim ? '' : 'choose…')}</select></label>`;
+      if (G[b.anim]) h += `<label><span>Go straight to</span><select data-f="${P}pick" data-opt>${opts(G[b.anim], b.pick || '', '(ask who needs help)')}</select></label>`;
+      h += `</div><p class="s">The page shows a still picture with a play button. Its title is the animation's own title; its scenes are edited under Words (lines starting anim.).</p>`;
+    }
+    if (ty !== 'anim' && (b.title !== undefined || ['step', 'alert', 'dont', 'link'].includes(ty))) h += `<div class="l">Title</div>${tri(P + 'title', b.title, 1)}`;
+    if (['lead', 'step', 'tip', 'link'].includes(ty)) h += `<div class="l">Text</div>${tri(P + 'text', b.text, 3)}`;
+    if (ty === 'step' || ty === 'link') h += `<label><span>Picture under it (optional)</span><select data-f="${P}picture" data-opt>${opts((D.pictures || []).map((x) => [x, x.replace(/^img\/pics\/|\.svg$/g, '')]), b.picture || '', '(none)')}</select></label>${b.picture && cfg.appUrl ? `<img class="pimg" src="${esc(cfg.appUrl + '/' + b.picture)}" alt="">` : ''}`;
+    if (ty !== 'anim' || hasL(b.title)) h += audioBox(b.id);
     if (Array.isArray(b.items)) {
       b.items.forEach((it, j) => {
         h += `<div class="item"><div class="bh"><span>Item ${j + 1}</span><span class="s grow">${esc(it.id)}</span><button class="sm" data-act="imove" data-i="${i}" data-j="${j}" data-d="-1"${j ? '' : ' disabled'} aria-label="up">↑</button><button class="sm" data-act="imove" data-i="${i}" data-j="${j}" data-d="1"${j < b.items.length - 1 ? '' : ' disabled'} aria-label="down">↓</button><button class="sm danger" data-act="idel" data-i="${i}" data-j="${j}">Delete</button></div>${iconPick(`${P}items|${j}|icon`, it.icon)}${tri(`${P}items|${j}|text`, it.text, 2)}${audioBox(it.id)}</div>`;
@@ -1004,7 +1109,7 @@ function adminClient(cfg) {
   const match = (q, ...xs) => !q || xs.some((x) => String(typeof x === 'object' && x ? Object.values(x).join(' ') : x ?? '').toLowerCase().includes(q.toLowerCase()));
   function vWords() { return `<div class="c"><input id="q-words" placeholder="Search the words" value="${esc(Q.words)}"><p class="s">Buttons and labels in the app, and the lines the app speaks. Keep {n} where you see it: the app puts a number there.</p></div><div id="list-words">${wordsList()}</div>`; }
   function wordsList() {
-    const q = Q.words, keys = Object.keys(D.ui).filter((k) => match(q, k, D.ui[k])), says = Object.keys(D.narration).filter((k) => k.startsWith('ui.') && match(q, k, D.narration[k]));
+    const q = Q.words, keys = Object.keys(D.ui).filter((k) => match(q, k, D.ui[k])), says = Object.keys(D.narration).filter((k) => (k.startsWith('ui.') || k.startsWith('anim.')) && match(q, k, D.narration[k]));
     return `<h2>Spoken lines</h2>${says.map((k) => `<div class="c"><div class="l">${esc(k)}</div>${tri('say:' + k, D.narration[k], 2)}${audioBox(k)}</div>`).join('') || '<p class="s">None found.</p>'}
       <h2>Buttons and labels</h2>${keys.map((k) => `<div class="c"><div class="l">${esc(k)}</div>${tri('ui:' + k, D.ui[k], 1)}</div>`).join('') || '<p class="s">None found.</p>'}`;
   }
@@ -1055,6 +1160,8 @@ function adminClient(cfg) {
   const retire = (...ids) => { D.retired = [...new Set([...(D.retired || []), ...ids])]; };
   const newBlock = (tid, ty) => {
     const id = newId(`${tid}.${ty === 'alert' ? 'urgent' : ty}`);
+    if (ty === 'link') return { id, type: 'link', to: '', icon: 'check', title: L0(), text: L0() };
+    if (ty === 'anim') { const g = Object.keys((D.anims || {}).groups || {})[0] || Object.keys((D.anims || {}).ids || {})[0] || ''; return { id, type: 'anim', anim: g }; }
     if (ty === 'lead') return { id, type: 'lead', text: L0() };
     if (ty === 'step') return { id, type: 'step', icon: 'check', title: L0(), text: L0() };
     if (ty === 'tip') return { id, type: 'tip', icon: 'check', text: L0() };

@@ -1,0 +1,250 @@
+{
+  "id": "snake-scorpion",
+  "section": "everyone",
+  "title": {
+    "fa": "مارگزیدگی و نیش گژدم",
+    "ps": "د مار او لړم چیچل",
+    "en": "Snake and scorpion bites"
+  },
+  "summary": {
+    "fa": "آرام و بی‌حرکت بمانید، به شفاخانه بروید. نبرید، نمکید، محکم نبندید.",
+    "ps": "ارام او بې‌حرکته اوسئ، روغتون ته ولاړ شئ. مه یې پرې کوئ، مه یې زبېښئ، کلک یې مه تړئ.",
+    "en": "Keep still and go to hospital. No cutting, sucking or tight bands."
+  },
+  "image": "snake-scorpion",
+  "blocks": [
+    {
+      "id": "snake-scorpion.lead",
+      "type": "lead",
+      "text": {
+        "fa": "مار و گژدم در سمنگان می‌توانند خطرناک باشند، خصوصاً برای اطفال. زود رسیدن به شفاخانه جان را نجات می‌دهد.",
+        "ps": "په سمنګان کې مار او لړم خطرناک کېدای شي، په ځانګړې توګه د ماشومانو لپاره. ژر روغتون ته رسېدل ژوند ژغوري.",
+        "en": "Snakes and scorpions in Samangan can be dangerous, most of all for children. Getting to hospital fast saves lives."
+      }
+    },
+    {
+      "id": "snake-scorpion.away",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "دور شوید و آرام بمانید",
+        "ps": "لرې شئ او ارام اوسئ",
+        "en": "Move away and stay calm"
+      },
+      "text": {
+        "fa": "از مار دور شوید. کوشش نکنید آن را بگیرید یا بکشید. شخص را آرام و بی‌حرکت خوابیده نگه دارید.",
+        "ps": "له مار لرې شئ. هڅه مه کوئ چې ونیسئ یا یې ووژنئ. کس ارام او بې‌حرکته غځېدلی وساتئ.",
+        "en": "Move away from the snake. Do not try to catch or kill it. Keep the person calm, lying still."
+      }
+    },
+    {
+      "id": "snake-scorpion.still",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "جای گزیدگی را بی‌حرکت نگه دارید",
+        "ps": "چیچل شوې برخه بې‌حرکته وساتئ",
+        "en": "Keep the bitten part still"
+      },
+      "text": {
+        "fa": "قبل از پندیدن، انگشتر، چوری و بوت را بکشید. دست یا پا را بی‌حرکت نگه دارید، اگر ممکن است با یک تخته.",
+        "ps": "مخکې له پړسېدو، ګوتمۍ، بنګړي او بوټونه وباسئ. لاس یا پښه بې‌حرکته وساتئ، که کېږي په یوه تخته.",
+        "en": "Before it swells, take off rings, bangles and shoes. Keep the arm or leg still, with a splint if you can."
+      },
+      "picture": "em-snakebite-splint"
+    },
+    {
+      "id": "snake-scorpion.carry",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "او را به شفاخانه ببرید",
+        "ps": "روغتون ته یې یوسئ",
+        "en": "Carry them to hospital"
+      },
+      "text": {
+        "fa": "همین حالا به شفاخانه بروید، شب باشد یا روز. شخص را بردارید یا با موتر ببرید: راه رفتن زهر را زودتر پخش می‌کند.",
+        "ps": "همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. کس په غېږ یا په موټر کې یوسئ: تګ زهر ژر خپروي.",
+        "en": "Go to hospital now, day or night. Carry the person or take a car: walking spreads the poison faster."
+      }
+    },
+    {
+      "id": "snake-scorpion.side",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "اگر استفراغ کرد یا خواب‌آلود شد",
+        "ps": "که کانګې کوي یا خوب وړی شو",
+        "en": "If vomiting or drowsy"
+      },
+      "text": {
+        "fa": "اگر استفراغ می‌کند یا خواب‌آلود می‌شود، او را به پهلوی چپ بخوابانید. نفسش را ببینید و اگر بند شد، فشار سینه را شروع کنید.",
+        "ps": "که کانګې کوي یا خوب وړی کېږي، پر چپ اړخ یې وغځوئ. ساه یې وګورئ، او که ودرېده، د سینې فشار پیل کړئ.",
+        "en": "If they vomit or get drowsy, lay them on their left side. Watch the breathing, and start chest pushes if it stops."
+      }
+    },
+    {
+      "id": "snake-scorpion.scorpion",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "نیش گژدم",
+        "ps": "د لړم چیچل",
+        "en": "Scorpion sting"
+      },
+      "text": {
+        "fa": "جای نیش را بشویید و یک تکهٔ تر و سرد رویش بگذارید. طفلی که گژدم نیش زده، باید همین حالا به شفاخانه برود.",
+        "ps": "د چیچلو ځای ومینځئ او یو لوند او سوړ ټوکر پرې کېږدئ. هغه ماشوم چې لړم چیچلی، باید همدا اوس روغتون ته یوړل شي.",
+        "en": "Wash the sting and put a cold wet cloth on it. A child stung by a scorpion must go to hospital now."
+      }
+    },
+    {
+      "id": "snake-scorpion.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "بعد از هر مارگزیدگی همین حالا به شفاخانه بروید، شب باشد یا روز. زودتر بروید اگر:",
+        "ps": "د مار له هر چیچلو وروسته همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. ژر ولاړ شئ که:",
+        "en": "After any snake bite, go to hospital now, day or night. Hurry if:"
+      },
+      "items": [
+        {
+          "id": "snake-scorpion.urgent.child-scorpion",
+          "icon": "baby",
+          "text": {
+            "fa": "گژدم طفلی را نیش زده",
+            "ps": "لړم ماشوم چیچلی",
+            "en": "a scorpion has stung a child"
+          }
+        },
+        {
+          "id": "snake-scorpion.urgent.swelling",
+          "icon": "swelling",
+          "text": {
+            "fa": "جای گزیدگی پندیده، خون می‌دهد یا پوست تیره می‌شود",
+            "ps": "د چیچلو ځای پړسېږي، وینه ورکوي یا پوستکی تور کېږي",
+            "en": "the bite swells, bleeds, or the skin goes dark"
+          }
+        },
+        {
+          "id": "snake-scorpion.urgent.eyelids",
+          "icon": "eye",
+          "text": {
+            "fa": "پلک‌ها پایین می‌افتد، یا گپ زدن یا قورت دادن سخت است",
+            "ps": "پلکونه یې ښکته کېږي، یا خبرې یا تېرول ورته سخت دي",
+            "en": "eyelids droop, or speaking or swallowing is hard"
+          }
+        },
+        {
+          "id": "snake-scorpion.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "از بیره، بینی یا در ادرار خون می‌آید",
+            "ps": "له ورېژو، پوزې یا په تشو متیازو کې وینه راځي",
+            "en": "there is bleeding from gums or nose, or in urine"
+          }
+        },
+        {
+          "id": "snake-scorpion.urgent.sweating",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "عرق زیاد، استفراغ، لرزه یا نفس تیز دارد",
+            "ps": "ډېرې خولې، کانګې، لړزه یا چټکه ساه لري",
+            "en": "there is heavy sweating, vomiting, shaking or fast breathing"
+          }
+        },
+        {
+          "id": "snake-scorpion.urgent.drowsy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خواب‌آلود یا ضعیف می‌شود",
+            "ps": "خوب وړی یا کمزوری کېږي",
+            "en": "the person gets drowsy or weak"
+          }
+        }
+      ]
+    },
+    {
+      "id": "snake-scorpion.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "snake-scorpion.dont.cut",
+          "icon": "no",
+          "text": {
+            "fa": "جای گزیدگی را نبرید و زهر را نمکید",
+            "ps": "د چیچلو ځای مه پرې کوئ او زهر مه زبېښئ",
+            "en": "cut the bite or suck out the poison"
+          }
+        },
+        {
+          "id": "snake-scorpion.dont.band",
+          "icon": "no",
+          "text": {
+            "fa": "بند یا ریسمان محکم دور دست یا پا نبندید",
+            "ps": "د لاس یا پښې شاوخوا کلک تړونی یا رسۍ مه تړئ",
+            "en": "tie a tight band or rope round the limb"
+          }
+        },
+        {
+          "id": "snake-scorpion.dont.things",
+          "icon": "no",
+          "text": {
+            "fa": "یخ، گیاه، سرگین یا آهن داغ رویش نگذارید",
+            "ps": "یخ، بوټي، ډیران یا ګرمه اوسپنه پرې مه ږدئ",
+            "en": "put ice, herbs, dung or a hot iron on it"
+          }
+        },
+        {
+          "id": "snake-scorpion.dont.wait",
+          "icon": "no",
+          "text": {
+            "fa": "پیش از رفتن به شفاخانه منتظر نمانید",
+            "ps": "روغتون ته له تګ مخکې انتظار مه باسئ",
+            "en": "wait before going to hospital"
+          }
+        }
+      ]
+    },
+    {
+      "id": "snake-scorpion.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه علایم زهر را زیر نظر می‌گیرند و می‌توانند دوای ضد زهر مار بدهند؛ تنها دوایی که زهر مار را خنثی می‌کند.",
+        "ps": "په روغتون کې د زهرو نښې څاري او کولی شي د مار د زهرو ضد درمل ورکړي؛ یوازینی درمل چې د مار زهر بې‌اغېزه کوي.",
+        "en": "At hospital they watch for signs of poisoning and can give antivenom, the only medicine that stops snake poison."
+      }
+    },
+    {
+      "id": "snake-scorpion.prevent",
+      "type": "tip",
+      "icon": "foot",
+      "text": {
+        "fa": "شب چراغ دستی ببرید و بوت بپوشید. پیش از پوشیدن، بوت و بستر را بتکانید.",
+        "ps": "د شپې لاسي څراغ له ځان سره ولرئ او بوټونه واغوندئ. د اغوستلو مخکې، بوټونه او بستره وڅنډئ.",
+        "en": "At night, carry a torch and wear shoes. Shake out shoes and bedding before use."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Guidelines for the management of snakebites, 2nd edition (WHO SEARO, 2016): first aid (reassure, immobilise, remove rings, no tourniquet, no cutting or suction, transport fast)",
+    "WHO Snakebite envenoming: a strategy for prevention and control (2019) and WHO fact sheet: Snakebite envenoming (2023)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): snakebite, scorpion sting",
+    "European Resuscitation Council Guidelines 2025: First Aid",
+    "WHO Regional Office for the Eastern Mediterranean: scorpion sting management (antivenom and supportive care in children)"
+  ],
+  "review": [
+    "No pressure-immobilisation bandage. WHO SEARO 2016 allows it only for neurotoxic elapid bites and not for vipers. Central Asian vipers (Echis, Macrovipera, Gloydius) and the Central Asian cobra both occur in northern Afghanistan. A simple 'no tight bands' message is safer.",
+    "Left lateral position if vomiting (WHO SEARO).",
+    "Scorpion: any sting in a child is urgent because severe envenoming (Mesobuthus, Androctonus and Hottentotta species in the region) is worst in young children. Adults with local pain only may not need hospital. That is not stated, so families do not have to decide.",
+    "Antivenom availability in Samangan is unknown. Confirm which hospital stocks snake and scorpion antivenom and add the place name.",
+    "Dont 'wait before going to hospital' replaces an earlier draft that named traditional healers, to avoid sounding disrespectful. Name them if that is clearer.",
+    "Pashto زبېښل (suck), Dari گژدم and Pashto لړم: check."
+  ]
+}

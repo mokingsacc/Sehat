@@ -1,0 +1,209 @@
+{
+  "id": "drowning",
+  "section": "everyone",
+  "title": {
+    "fa": "غرق شدن در آب",
+    "ps": "په اوبو کې ډوبېدل",
+    "en": "Drowning"
+  },
+  "summary": {
+    "fa": "با احتیاط نجات دهید، اول ۵ بار نفس بدهید، بعد فشار سینه.",
+    "ps": "په احتیاط یې وژغورئ، لومړی ۵ ځله ساه ورکړئ، بیا د سینې فشار.",
+    "en": "Rescue safely, give 5 breaths first, then chest pushes."
+  },
+  "image": "drowning",
+  "blocks": [
+    {
+      "id": "drowning.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اطفال در جوی، چاه، حوض و حتی سطل زود و بی‌صدا غرق می‌شوند. در غرق شدن اول نفس بند می‌شود، پس اول نفس بدهید.",
+        "ps": "ماشومان په ویالو، څاګانو، حوضونو او حتی سطلونو کې ژر او بې‌غږه ډوبېږي. په ډوبېدو کې لومړی ساه بندېږي، نو لومړی ساه ورکړئ.",
+        "en": "Children drown fast and quietly in canals, wells, ponds and even buckets. In drowning, breathing stops first, so breaths come first."
+      }
+    },
+    {
+      "id": "drowning.rescue",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "بدون رفتن در آب نجات دهید",
+        "ps": "پرته له اوبو ته ورتلو یې وژغورئ",
+        "en": "Rescue without going in"
+      },
+      "text": {
+        "fa": "خودتان در آب تیز یا چاه نپرید. با چوب، ریسمان یا چادر دست برسانید، یا چیزی که روی آب می‌ماند بیندازید، و بلند کمک بخواهید.",
+        "ps": "پخپله چټکو اوبو یا څاه ته مه ورټوپ کېږئ. په لرګي، رسۍ یا چادر لاس ورورسوئ، یا داسې شی ورواچوئ چې پر اوبو پاتې کېږي، او په لوړ غږ مرسته وغواړئ.",
+        "en": "Do not jump into fast water or a well yourself. Reach with a stick, rope or scarf, or throw something that floats, and shout for help."
+      }
+    },
+    {
+      "id": "drowning.check",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "نفسش را ببینید",
+        "ps": "ساه یې وګورئ",
+        "en": "Check breathing"
+      },
+      "text": {
+        "fa": "او را به پشت روی زمین بخوابانید. سرش را به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "په شا یې په ځمکه وغځوئ. سر یې شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
+        "en": "Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for 10 seconds."
+      }
+    },
+    {
+      "id": "drowning.breaths",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "نفس نمی‌کشد: اول ۵ بار نفس بدهید",
+        "ps": "ساه نه اخلي: لومړی ۵ ځله ساه ورکړئ",
+        "en": "Not breathing: 5 breaths first"
+      },
+      "text": {
+        "fa": "۵ بار در دهانش پف کنید و ببینید که سینه‌اش بالا می‌آید. برای شیرخوار، دهان و بینی را بپوشانید. برای بزرگسال هم همین‌طور.",
+        "ps": "۵ ځله یې په خوله کې پو کړئ او وګورئ چې سینه یې پورته کېږي. د تي خوړونکي ماشوم خوله او پوزه وپوښئ. د لویانو لپاره هم همداسې.",
+        "en": "Give 5 breaths into the mouth, watching the chest rise. For a baby, cover the mouth and nose. Do the same for adults."
+      }
+    },
+    {
+      "id": "drowning.cpr",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "بعد ۳۰ فشار، ۲ نفس",
+        "ps": "بیا ۳۰ فشارونه، ۲ ساه",
+        "en": "Then 30 pushes, 2 breaths"
+      },
+      "text": {
+        "fa": "فشار سینه را شروع کنید: ۳۰ فشار، بعد ۲ نفس، بار بار. ادامه دهید تا نفس بکشد یا کمک برسد.",
+        "ps": "د سینې فشار پیل کړئ: ۳۰ فشارونه، بیا ۲ ساه، بیا بیا. دوام ورکړئ تر څو ساه واخلي یا مرسته ورسېږي.",
+        "en": "Start pushing on the chest: 30 pushes, then 2 breaths, again and again. Keep going until they breathe or help arrives."
+      }
+    },
+    {
+      "id": "drowning.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "گرم نگه دارید",
+        "ps": "ګرم یې وساتئ",
+        "en": "Keep them warm"
+      },
+      "text": {
+        "fa": "شاید آب از دهانش بیرون شود: سرش را به یک طرف بچرخانید و ادامه دهید. لباس تر را بکشید و او را در کمپل خشک بپیچانید.",
+        "ps": "کېدای شي اوبه یې له خولې راووځي: سر یې یوې خوا ته واړوئ او دوام ورکړئ. لندې جامې یې وباسئ او په وچو کمپلو کې یې ونغاړئ.",
+        "en": "Water may come out of the mouth: turn the head to the side and carry on. Take off wet clothes and wrap them in dry blankets."
+      }
+    },
+    {
+      "id": "drowning.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "بعد از هر غرق شدن، همین حالا به شفاخانه بروید، شب باشد یا روز. خصوصاً اگر:",
+        "ps": "له هر ډوبېدو وروسته، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په ځانګړې توګه که:",
+        "en": "After any drowning, go to hospital now, day or night. Most of all if they:"
+      },
+      "items": [
+        {
+          "id": "drowning.urgent.needed-help",
+          "icon": "heart",
+          "text": {
+            "fa": "نفس دادن یا فشار سینه لازم داشت",
+            "ps": "ساه ورکولو یا د سینې فشار ته یې اړتیا درلوده",
+            "en": "needed breaths or chest pushes"
+          }
+        },
+        {
+          "id": "drowning.urgent.cough",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "سرفه می‌کند، یا تیز یا به سختی نفس می‌کشد",
+            "ps": "ټوخی کوي، یا چټکه یا په سختۍ ساه اخلي",
+            "en": "cough, or breathe fast or with difficulty"
+          }
+        },
+        {
+          "id": "drowning.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خواب‌آلود یا گیج است، یا استفراغ می‌کند",
+            "ps": "خوب وړی یا ګډوډ دی، یا کانګې کوي",
+            "en": "are sleepy, confused or vomiting"
+          }
+        },
+        {
+          "id": "drowning.urgent.cold",
+          "icon": "thermometer",
+          "text": {
+            "fa": "سرد است و می‌لرزد، یا رنگش بسیار پریده است",
+            "ps": "یخ دی او رپېږي، یا رنګ یې ډېر الوتی دی",
+            "en": "are cold and shivering, or very pale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "drowning.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "drowning.dont.upside-down",
+          "icon": "no",
+          "text": {
+            "fa": "او را سرچپه نکنید و برای بیرون کردن آب، شکمش را فشار ندهید",
+            "ps": "سرچپه یې مه ځړوئ او د اوبو ایستلو لپاره یې ګېډه مه کېکاږئ",
+            "en": "hold them upside down or press the belly to get water out"
+          }
+        },
+        {
+          "id": "drowning.dont.jump",
+          "icon": "no",
+          "text": {
+            "fa": "برای نجات در چاه یا آب تیز نپرید",
+            "ps": "د ژغورلو لپاره څاه یا چټکو اوبو ته مه ټوپ کوئ",
+            "en": "jump into a well or fast water to rescue someone"
+          }
+        }
+      ]
+    },
+    {
+      "id": "drowning.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "حتی اگر خوب معلوم شود، مشکل نفس ممکن است چند ساعت بعد شروع شود. در شفاخانه نفسش را زیر نظر می‌گیرند و اکسیجن می‌دهند.",
+        "ps": "که روغ هم ښکاري، د ساه ستونزه کېدای شي څو ساعته وروسته پیل شي. په روغتون کې یې ساه څاري او اکسیجن ورکوي.",
+        "en": "Even if they seem well, breathing problems can start hours later. At hospital they watch the breathing and give oxygen."
+      }
+    },
+    {
+      "id": "drowning.prevent",
+      "type": "tip",
+      "icon": "water",
+      "text": {
+        "fa": "چاه و ذخیرهٔ آب را بپوشانید و اطفال خورد را هرگز نزدیک آب تنها نگذارید.",
+        "ps": "څاګانې او د اوبو ټانکۍ پټې کړئ او کوچني ماشومان هېڅکله اوبو ته نږدې یوازې مه پرېږدئ.",
+        "en": "Cover wells and water tanks, and never leave small children alone near water."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: Special circumstances, drowning (5 initial rescue breaths for all ages)",
+    "ILCOR 2025 Consensus on Science: drowning",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): drowning, every drowning victim needs medical care",
+    "WHO fact sheet: Drowning (2024) and WHO Preventing drowning: an implementation guide (2017)"
+  ],
+  "review": [
+    "5 rescue breaths first for drowned adults as well as children (ERC). AHA also puts breaths first in drowning.",
+    "All drowning victims go to hospital now (IFRC); this matches child-safety.urgent.water.",
+    "'Reach or throw, don't go' rescue message (IFRC/RLSS). Rescue entry is not taught."
+  ]
+}

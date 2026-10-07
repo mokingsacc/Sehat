@@ -27,14 +27,61 @@
       "type": "step",
       "icon": "thermometer",
       "title": {
-        "fa": "چطور بفهمید طفل تب دارد",
-        "ps": "څنګه پوه شئ چې تبه لري",
-        "en": "How to tell if there is fever"
+        "fa": "با پشت دست لمس کنید",
+        "ps": "د لاس په شا یې لمس کړئ",
+        "en": "Feel with the back of your hand"
       },
       "text": {
-        "fa": "با پشت دست، شکم یا گردن طفل را لمس کنید. اگر ترمامتر دارید، ۳۷ و نیم درجه یا بیشتر تب است.",
-        "ps": "د لاس په شا د ماشوم خېټه یا غاړه لمس کړئ. که ترمامیټر لرئ، ۳۷ نیم درجې یا ډېر تبه ده.",
-        "en": "Feel the belly or neck with the back of your hand. If you have a thermometer, 37.5 degrees or more is a fever."
+        "fa": "پشت دست خود را روی سینه، شکم یا گردن طفل بگذارید. اگر از پوست خودتان گرم‌تر بود، تب است.",
+        "ps": "د خپل لاس شا د ماشوم پر سینه، خېټه یا غاړه کېږدئ. که ستاسو له پوستکي ګرم وي، تبه ده.",
+        "en": "Put the back of your hand on the child's chest, belly or neck. If it feels hotter than your own skin, it is a fever."
+      },
+      "picture": "fever-touch"
+    },
+    {
+      "id": "fever.before",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "تب پیش از این هم حساب است",
+        "ps": "مخکنۍ تبه هم شمېرل کېږي",
+        "en": "Fever earlier also counts"
+      },
+      "text": {
+        "fa": "اگر طفل در همین مریضی پیش از این داغ بود، تب حساب می‌شود، حتی اگر حالا سرد باشد. به کارمند صحی بگویید.",
+        "ps": "که ماشوم په همدې ناروغۍ کې مخکې ګرم و، تبه شمېرل کېږي، که څه هم اوس سوړ وي. روغتیايي کارکوونکي ته ووایئ.",
+        "en": "If the child was hot earlier in this illness, it counts as a fever, even if the child feels cool now. Tell the health worker."
+      }
+    },
+    {
+      "id": "fever.thermometer",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "با ترمامتر: زیر بغل",
+        "ps": "په ترمامیټر: د تخرګ لاندې",
+        "en": "With a thermometer: under the arm"
+      },
+      "text": {
+        "fa": "اگر ترمامتر دارید، آن را زیر بغل بگذارید. ۳۷ و نیم درجه یا بیشتر تب است.",
+        "ps": "که ترمامیټر لرئ، د تخرګ لاندې یې کېږدئ. ۳۷ نیم درجې یا ډېر تبه ده.",
+        "en": "If you have a thermometer, put it under the arm. 37.5 degrees or more is a fever."
+      }
+    },
+    {
+      "id": "fever.kit",
+      "type": "link",
+      "to": "topic/kit-thermometer",
+      "icon": "thermometer",
+      "title": {
+        "fa": "طرز استفادهٔ ترمامتر",
+        "ps": "د ترمامیټر د کارولو لار",
+        "en": "How to use a thermometer"
+      },
+      "text": {
+        "fa": "چه بخرید، چطور اندازه کنید و هر عدد چه معنا دارد.",
+        "ps": "څه واخلئ، څنګه یې اندازه کړئ، او هره شمېره څه مانا لري.",
+        "en": "What to buy, how to measure, and what each number means."
       }
     },
     {
@@ -99,6 +146,15 @@
             "fa": "کمتر از ۲ ماه عمر دارد و تب دارد",
             "ps": "تر ۲ میاشتو کم عمر لري او تبه لري",
             "en": "is under 2 months old and has any fever"
+          }
+        },
+        {
+          "id": "fever.urgent.cold",
+          "icon": "newborn-warm",
+          "text": {
+            "fa": "کمتر از ۲ ماه عمر دارد و بدنش سرد است",
+            "ps": "تر ۲ میاشتو کم عمر لري او بدن یې سوړ دی",
+            "en": "is under 2 months old and feels cold to touch"
           }
         },
         {
@@ -217,6 +273,7 @@
     }
   ],
   "sources": [
+    "WHO IMCI Chart Booklet (2014): fever = history of fever, or feels hot, or temperature 37.5 C or above (axillary)",
     "WHO IMCI Chart Booklet (2014): fever, measles, ear problem, general danger signs, when to return",
     "WHO Pocket Book of Hospital Care for Children (2013): fever, meningitis",
     "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses; immunization",
@@ -229,6 +286,9 @@
     "Soon alert 'fever and red rash all over (measles)': IMCI measles with complications (mouth ulcers, eye pus, clouding of the cornea) or with a danger sign is severe; those are covered by the danger signs here only in part.",
     "Pain on passing urine uses icon 'urine-blood'; ear pain uses 'warning'. Icons wanted: 'urine' and 'ear'.",
     "Step 'Dress the child lightly' uses icon 'fever'; an icon of light clothing would be better.",
-    "Tip on measles isolation: keeping a child with a rash away from babies and pregnant women is general public health advice, not an IMCI caregiver message."
+    "Tip on measles isolation: keeping a child with a rash away from babies and pregnant women is general public health advice, not an IMCI caregiver message.",
+    "Fever by touch (added): 'back of the hand on the chest, belly or neck; hotter than your own skin'. IMCI counts 'feels hot' or 'history of fever'. Studies show touch detects fever fairly well but misses some; the thermometer step follows.",
+    "fever.check text changed (same id): its clip must be re-recorded.",
+    "fever.urgent.cold added: under 2 months and feels cold = hospital now (IMCI low body temperature, matches danger-child.young.temperature)."
   ]
 }

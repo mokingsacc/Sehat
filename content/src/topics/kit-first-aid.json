@@ -1,0 +1,174 @@
+{
+  "id": "kit-first-aid",
+  "section": "everyone",
+  "title": {
+    "fa": "وسایل کمک‌های اولیه در خانه",
+    "ps": "په کور کې د لومړنیو مرستو سامان",
+    "en": "First-aid things at home"
+  },
+  "summary": {
+    "fa": "او آر اس، زنک، صابون، تکهٔ پاک و بنداژ: هر کدام برای چیست.",
+    "ps": "او آر اس، زنک، صابون، پاک ټوکر او بنداژ: هر یو د څه لپاره دی.",
+    "en": "ORS, zinc, soap, clean cloth and bandages: what each is for."
+  },
+  "image": "kit-first-aid",
+  "blocks": [
+    {
+      "id": "kit-first-aid.lead",
+      "type": "lead",
+      "text": {
+        "fa": "یک قطی کوچک وسایل کمک‌های اولیه را در جای پاک و خشک، بلند و دور از دست اطفال نگه دارید. هر چند ماه آن را ببینید.",
+        "ps": "د لومړنیو مرستو یو کوچنی قطي په پاک او وچ ځای کې، لوړ او د ماشومانو له لاسه لرې وساتئ. هرو څو میاشتو کې یې وګورئ.",
+        "en": "Keep a small box of first-aid things in a clean, dry place, high up and away from children. Check it every few months."
+      }
+    },
+    {
+      "id": "kit-first-aid.ors",
+      "type": "step",
+      "icon": "ors",
+      "title": {
+        "fa": "پاکت‌های او آر اس",
+        "ps": "د او آر اس پاکټونه",
+        "en": "ORS packets"
+      },
+      "text": {
+        "fa": "برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. اکثراً در کلینیک مفت است.",
+        "ps": "د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. اکثره په کلینیک کې وړیا دی.",
+        "en": "For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. Often free at the clinic."
+      }
+    },
+    {
+      "id": "kit-first-aid.zinc",
+      "type": "step",
+      "icon": "zinc",
+      "title": {
+        "fa": "تابلیت زنک",
+        "ps": "د زنک ګولۍ",
+        "en": "Zinc tablets"
+      },
+      "text": {
+        "fa": "برای طفل اسهالی، برای ۱۰ تا ۱۴ روز: زیر ۶ ماه، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام.",
+        "ps": "د نس ناستې لرونکي ماشوم لپاره، ۱۰ تر ۱۴ ورځو: تر ۶ میاشتو کم، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه.",
+        "en": "For a child with diarrhoea, for 10 to 14 days: under 6 months, 10 mg a day; from 6 months, 20 mg a day."
+      }
+    },
+    {
+      "id": "kit-first-aid.soap",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "صابون",
+        "ps": "صابون",
+        "en": "Soap"
+      },
+      "text": {
+        "fa": "برای شستن دست، زخم و گزیدگی. جای گزیدن حیوان را ۱۵ دقیقه با صابون و آب روان بشویید.",
+        "ps": "د لاسونو، ټپونو او چیچلو د مینځلو لپاره. د څاروي د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ.",
+        "en": "For washing hands, cuts and bites. Wash an animal bite with soap and running water for 15 minutes."
+      }
+    },
+    {
+      "id": "kit-first-aid.cloth",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "تکهٔ پاک و بنداژ",
+        "ps": "پاک ټوکر او بنداژ",
+        "en": "Clean cloth and bandages"
+      },
+      "text": {
+        "fa": "تکهٔ نخی پاک و بنداژ، برای فشار دادن روی خونریزی و پوشاندن سوختگی و زخم. آن‌ها را در خلطهٔ پلاستیکی پاک نگه دارید.",
+        "ps": "پاک پنبه یي ټوکر او د بنداژ کړۍ، په وینه بهېدو د فشار لپاره او د سوځېدنې او ټپونو د پټولو لپاره. په پاکه پلاستیکي کڅوړه کې یې وساتئ.",
+        "en": "Clean cotton cloth and bandage rolls, to press on bleeding and to cover burns and wounds. Keep them in a clean plastic bag."
+      }
+    },
+    {
+      "id": "kit-first-aid.more",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "این‌ها هم به کار می‌آید",
+        "ps": "دا هم په کار دي",
+        "en": "Also useful"
+      },
+      "text": {
+        "fa": "ترمامتر، چسپ زخم، قیچی، چراغ دستی، و شمارهٔ تلفن یک دریور و کلینیک.",
+        "ps": "ترمامیټر، د ټپ پلستر، قیچي، لاسي څراغ، او د یوه موټروان او کلینیک د ټیلیفون شمېرې.",
+        "en": "A thermometer, sticking plasters, scissors, a torch, and the phone numbers of a driver and the clinic."
+      }
+    },
+    {
+      "id": "kit-first-aid.check",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "هر چند ماه ببینید",
+        "ps": "هرو څو میاشتو کې یې وګورئ",
+        "en": "Check every few months"
+      },
+      "text": {
+        "fa": "پاکت‌های تر و هر چیزی که تاریخش گذشته را دور بیندازید. هر چه را استفاده کردید دوباره بگذارید.",
+        "ps": "لوند پاکټونه او هر هغه څه چې نېټه یې تېره شوې وغورځوئ. هر څه چې مو کارولي بېرته یې کېږدئ.",
+        "en": "Throw away wet packets and anything past its date. Put back what you used."
+      }
+    },
+    {
+      "id": "kit-first-aid.page",
+      "type": "link",
+      "to": "topic/first-aid",
+      "icon": "wound",
+      "title": {
+        "fa": "کمک‌های اولیه: چه کنید",
+        "ps": "لومړنۍ مرستې: څه وکړئ",
+        "en": "First aid: what to do"
+      },
+      "text": {
+        "fa": "سوختگی، خونریزی، گیر کردن در گلو، گزیدگی و زهر: قدم‌های اول.",
+        "ps": "سوځېدنه، وینه بهېدل، په ستوني کې بندېدل، چیچل او زهر: لومړني ګامونه.",
+        "en": "Burns, bleeding, choking, bites and poisoning: the first steps."
+      }
+    },
+    {
+      "id": "kit-first-aid.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "kit-first-aid.dont.bottles",
+          "icon": "poison",
+          "text": {
+            "fa": "دوا یا تیل خاک را در بوتل نوشیدنی یا جایی که دست اطفال می‌رسد نگه ندارید.",
+            "ps": "درمل یا خاورین تېل د څښاک په بوتلونو کې یا هلته مه ساتئ چې د ماشومانو لاس ورته رسېږي.",
+            "en": "Do not keep medicines or kerosene in drink bottles or where children can reach."
+          }
+        },
+        {
+          "id": "kit-first-aid.dont.old",
+          "icon": "pill",
+          "text": {
+            "fa": "دوای کهنه، یا دوایی را که برای کس دیگر داده شده، استفاده نکنید.",
+            "ps": "زاړه درمل، یا هغه درمل چې بل چا ته ورکړل شوي، مه کاروئ.",
+            "en": "Do not use old medicines, or medicines given for someone else."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO/UNICEF Joint statement: Clinical management of acute diarrhoea (2004): low-osmolarity ORS and zinc 10 to 14 days (10 mg under 6 months, 20 mg from 6 months)",
+    "WHO/UNICEF Facts for Life (2010): diarrhoea, injury prevention",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020)",
+    "WHO Rabies fact sheet: wash bite wounds with soap and water for 15 minutes",
+    "WHO Model List of Essential Medicines (2023): ORS, zinc"
+  ],
+  "review": [
+    "'Keep at least 4 ORS packets' is a judgement call.",
+    "Zinc dose is the WHO caregiver message already used on the Diarrhoea page.",
+    "'Sticking plasters, scissors, a torch' are common first-aid kit contents (IFRC), not essential.",
+    "No paracetamol in the list on purpose (no doses in the app). Consider adding 'paracetamol syrup or tablets, as the clinic tells you'."
+  ]
+}

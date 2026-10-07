@@ -1,0 +1,255 @@
+{
+  "id": "bleeding",
+  "section": "everyone",
+  "title": {
+    "fa": "خونریزی شدید",
+    "ps": "سخته وینه بهېدنه",
+    "en": "Severe bleeding"
+  },
+  "summary": {
+    "fa": "محکم فشار دهید و ادامه دهید. بند محکم فقط برای دست یا پا.",
+    "ps": "کلک فشار ورکړئ او دوام ورکړئ. کلک تړل یوازې د لاس یا پښې لپاره.",
+    "en": "Press hard and keep pressing. Tie a band only on a limb."
+  },
+  "image": "bleeding",
+  "blocks": [
+    {
+      "id": "bleeding.lead",
+      "type": "lead",
+      "text": {
+        "fa": "خونریزی زیاد می‌تواند در چند دقیقه کشنده باشد. فشار محکم روی زخم بیشتر خونریزی‌ها را بند می‌کند.",
+        "ps": "ډېره وینه بهېدنه کولی شي په څو دقیقو کې ووژني. په ټپ باندې کلک فشار ډېری وینې دروي.",
+        "en": "Heavy bleeding can kill in minutes. Firm pressure on the wound stops most bleeding."
+      }
+    },
+    {
+      "id": "bleeding.press",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "روی زخم محکم فشار دهید",
+        "ps": "په ټپ کلک فشار ورکړئ",
+        "en": "Press hard on the wound"
+      },
+      "text": {
+        "fa": "یک تکهٔ پاک روی زخم بگذارید و با دست‌ها محکم فشار دهید. اگر خریطهٔ پلاستیکی دارید، آن را به دست کنید.",
+        "ps": "یو پاک ټوکر په ټپ کېږدئ او په لاسونو کلک فشار ورکړئ. که پلاستیکي کڅوړه لرئ، په لاس یې کړئ.",
+        "en": "Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands."
+      },
+      "picture": "em-bleeding-press"
+    },
+    {
+      "id": "bleeding.keep",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "فشار را ادامه دهید، برندارید",
+        "ps": "فشار ته دوام ورکړئ، مه یې پورته کوئ",
+        "en": "Keep pressing, do not lift"
+      },
+      "text": {
+        "fa": "حداقل ۱۰ دقیقه بدون برداشتن برای دیدن، فشار دهید. اگر خون از تکه گذشت، تکهٔ دیگر بالایش بگذارید و محکم‌تر فشار دهید.",
+        "ps": "لږ تر لږه ۱۰ دقیقې فشار ورکړئ او د کتلو لپاره یې مه پورته کوئ. که وینه له ټوکر تېره شوه، بل ټوکر پرې کېږدئ او کلک فشار ورکړئ.",
+        "en": "Press for at least 10 minutes without lifting to look. If blood soaks through, put more cloth on top and press harder."
+      }
+    },
+    {
+      "id": "bleeding.bandage",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "یک بانداژ محکم ببندید",
+        "ps": "کلک بنداژ وتړئ",
+        "en": "Tie a firm bandage"
+      },
+      "text": {
+        "fa": "یک تکهٔ دراز را محکم روی تکهٔ زخم بپیچانید تا فشار بماند. ببینید که انگشتان دست یا پا گلابی و گرم بمانند.",
+        "ps": "یو اوږد ټوکر د ټپ پر ټوکر کلک تاو کړئ چې فشار پاتې شي. وګورئ چې د لاس یا پښې ګوتې ګلابي او ګرمې پاتې شي.",
+        "en": "Wrap a long cloth tightly over the pad to keep the pressure on. Check the fingers or toes stay pink and warm."
+      }
+    },
+    {
+      "id": "bleeding.tourniquet",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "خون زیاد از دست یا پا: بالای زخم ببندید",
+        "ps": "له لاس یا پښې ډېره وینه: له ټپ پورته یې وتړئ",
+        "en": "Arm or leg still pouring? Tie above"
+      },
+      "text": {
+        "fa": "اگر باز هم خون زیاد از دست یا پا می‌ریزد، یک تکهٔ پهن را یک کف دست بالاتر از زخم بسیار محکم ببندید. با یک چوب بپیچانید تا خون بند شود.",
+        "ps": "که بیا هم له لاس یا پښې ډېره وینه بهېږي، یو پلن ټوکر یو ورغوی له ټپ پورته ډېر کلک وتړئ. په یوه لرګي یې تاو کړئ تر څو وینه ودرېږي.",
+        "en": "If blood still pours from an arm or leg, tie a wide cloth very tight a hand's width above the wound. Twist it with a stick until the bleeding stops."
+      },
+      "picture": "em-bleeding-tourniquet"
+    },
+    {
+      "id": "bleeding.time",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "وقت را یاد کنید، سست نکنید",
+        "ps": "وخت په یاد ولرئ، مه یې سستوئ",
+        "en": "Note the time, do not loosen"
+      },
+      "text": {
+        "fa": "وقتی را که بستید به یاد داشته باشید و به شفاخانه بگویید. خودتان آن را سست نکنید. همین حالا به شفاخانه بروید.",
+        "ps": "هغه وخت چې مو وتاړه په یاد ولرئ او روغتون ته یې ووایئ. پخپله یې مه سستوئ. همدا اوس روغتون ته ولاړ شئ.",
+        "en": "Remember the time you tied it and tell the hospital. Do not loosen it yourself. Go to hospital now."
+      }
+    },
+    {
+      "id": "bleeding.lie",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "بخوابانید، گرم نگه دارید",
+        "ps": "ویې غځوئ، ګرم یې وساتئ",
+        "en": "Lay them down, keep them warm"
+      },
+      "text": {
+        "fa": "او را خوابیده و با کمپل گرم نگه دارید. به او غذا ندهید.",
+        "ps": "غځېدلی او په کمپله ګرم یې وساتئ. خواړه مه ورکوئ.",
+        "en": "Keep them lying down and warm with a blanket. Do not give food."
+      }
+    },
+    {
+      "id": "bleeding.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "bleeding.urgent.not-stopping",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون با فشار بند نمی‌شود",
+            "ps": "وینه په فشار نه درېږي",
+            "en": "bleeding does not stop with pressure"
+          }
+        },
+        {
+          "id": "bleeding.urgent.spurting",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون فواره می‌زند یا جاری است",
+            "ps": "وینه فواره کوي یا روانه ده",
+            "en": "blood spurts or pours out"
+          }
+        },
+        {
+          "id": "bleeding.urgent.band",
+          "icon": "warning",
+          "text": {
+            "fa": "بالای زخم بند بسته‌اید",
+            "ps": "له ټپ پورته مو کلک تړلی",
+            "en": "you have tied a band above the wound"
+          }
+        },
+        {
+          "id": "bleeding.urgent.shock",
+          "icon": "sleepy",
+          "text": {
+            "fa": "شخص رنگ‌پریده، سرد، عرق‌کرده یا گیج است",
+            "ps": "کس رنګ الوتی، یخ، خولې او یا ګډوډ دی",
+            "en": "the person is pale, cold, sweaty or confused"
+          }
+        },
+        {
+          "id": "bleeding.urgent.deep",
+          "icon": "wound",
+          "text": {
+            "fa": "زخم عمیق است، یا در گردن، سینه یا شکم است",
+            "ps": "ټپ ژور دی، یا په غاړه، سینه یا ګېډه کې دی",
+            "en": "the wound is deep, or on the neck, chest or belly"
+          }
+        },
+        {
+          "id": "bleeding.urgent.object",
+          "icon": "warning",
+          "text": {
+            "fa": "چیزی در زخم فرو رفته است",
+            "ps": "څه شی په ټپ کې ننوتلی",
+            "en": "something is stuck in the wound"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bleeding.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "bleeding.dont.ash",
+          "icon": "no",
+          "text": {
+            "fa": "خاکستر، گل یا سرگین را روی زخم نگذارید",
+            "ps": "ایرې، خټې یا ډیران په ټپ مه اچوئ",
+            "en": "put ash, mud or dung on a wound"
+          }
+        },
+        {
+          "id": "bleeding.dont.wire",
+          "icon": "no",
+          "text": {
+            "fa": "برای بستن، تار نازک یا سیم استفاده نکنید",
+            "ps": "د تړلو لپاره نری تار یا سیم مه کاروئ",
+            "en": "use thin string or wire as a band"
+          }
+        },
+        {
+          "id": "bleeding.dont.neck",
+          "icon": "no",
+          "text": {
+            "fa": "گردن، سر یا تنه را با بند نبندید",
+            "ps": "غاړه، سر یا تنه په کلک تړونکي مه تړئ",
+            "en": "tie a band round the neck, head or body"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bleeding.object",
+      "type": "tip",
+      "icon": "wound",
+      "text": {
+        "fa": "اگر چیزی در زخم فرو رفته، آن را نکشید. دور آن فشار دهید، نه روی آن.",
+        "ps": "که څه شی په ټپ کې ننوتلی، مه یې باسئ. شاوخوا یې فشار ورکړئ، نه پرې.",
+        "en": "If something is stuck in the wound, leave it in. Press around it, not on it."
+      }
+    },
+    {
+      "id": "bleeding.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه زخم را می‌دوزند، سیروم یا خون می‌دهند و پیچکاری تیتانوس می‌زنند.",
+        "ps": "په روغتون کې ټپ ګنډي، سیروم یا وینه ورکوي او د تیتانوس پیچکاري ورکوي.",
+        "en": "At hospital they close the wound, give fluids or blood, and an injection against tetanus."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: life-threatening bleeding (direct pressure; tourniquet for life-threatening limb bleeding)",
+    "ILCOR 2025 Consensus on Science: first aid, haemorrhage control and improvised tourniquets",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): severe bleeding",
+    "WHO Basic Emergency Care: approach to the acutely ill and injured (WHO/ICRC, 2018): haemorrhage control"
+  ],
+  "review": [
+    "Tourniquet only for life-threatening bleeding from an arm or leg that pressure does not stop (ERC/ILCOR 2025). Families have no commercial tourniquet, so the text describes an improvised one: a wide cloth tied a hand's width above the wound and tightened by twisting a stick (windlass). ILCOR says improvised tourniquets often fail and must be wide and tightened with a windlass. Check that this is safe to teach without hands-on training.",
+    "'Do not loosen it yourself' and 'note the time' follow ERC/ICRC teaching.",
+    "No haemostatic dressings (not available in villages).",
+    "Raising the legs for shock is left out to keep it simple. ILCOR allows passive leg raising when there is no injury.",
+    "Pashto 'سیروم' and Dari 'سیروم' for IV fluids: check the everyday word."
+  ]
+}

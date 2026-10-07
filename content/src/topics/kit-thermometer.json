@@ -1,0 +1,220 @@
+{
+  "id": "kit-thermometer",
+  "section": "children",
+  "title": {
+    "fa": "استفاده از ترمامتر",
+    "ps": "د ترمامیټر کارول",
+    "en": "Using a thermometer"
+  },
+  "summary": {
+    "fa": "دیجیتل بخرید، زیر بغل اندازه کنید، عددها را بشناسید.",
+    "ps": "ډیجیټل واخلئ، د تخرګ لاندې یې اندازه کړئ، شمېرې وپېژنئ.",
+    "en": "Buy a digital one, measure under the arm, know the numbers."
+  },
+  "image": "kit-thermometer",
+  "blocks": [
+    {
+      "id": "kit-thermometer.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ترمامتر به شما دقیق می‌گوید که تب هست یا نه. برای نوزادان و اطفال، زیر بغل اندازه کنید.",
+        "ps": "ترمامیټر تاسو ته په ډاډ سره وايي چې تبه شته که نه. د نویو زېږېدلو او ماشومانو لپاره، د تخرګ لاندې یې اندازه کړئ.",
+        "en": "A thermometer tells you for sure if there is a fever. For babies and children, measure under the arm."
+      }
+    },
+    {
+      "id": "kit-thermometer.buy",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "چه بخرید",
+        "ps": "څه واخلئ",
+        "en": "What to buy"
+      },
+      "text": {
+        "fa": "یک ترمامتر دیجیتل که صدا می‌دهد، به قیمت حدود ۱۰۰ تا ۲۵۰ افغانی. ترمامتر شیشه‌ای سیماب‌دار نخرید.",
+        "ps": "یو ډیجیټل ترمامیټر چې غږ کوي، شاوخوا ۱۰۰ تر ۲۵۰ افغانۍ. د ښیښې سیمابي ترمامیټر مه اخلئ.",
+        "en": "A digital thermometer that beeps, for about 100 to 250 afghanis. Do not buy a glass mercury one."
+      }
+    },
+    {
+      "id": "kit-thermometer.armpit",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "زیر بغل بگذارید",
+        "ps": "د تخرګ لاندې یې کېږدئ",
+        "en": "Put it under the arm"
+      },
+      "text": {
+        "fa": "سر آن را پاک کنید و روشن کنید. سرش را در بغل خشک، روی پوست بگذارید و بازو را به بدن نزدیک نگه دارید.",
+        "ps": "سر یې پاک کړئ او روښانه یې کړئ. سر یې په وچ تخرګ کې پر پوستکي کېږدئ، او مټ له بدن سره نږدې ونیسئ.",
+        "en": "Wipe the tip and turn it on. Put the tip in the dry armpit, on the skin, and hold the arm close to the body."
+      }
+    },
+    {
+      "id": "kit-thermometer.wait",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "منتظر صدا بمانید",
+        "ps": "د غږ انتظار وکړئ",
+        "en": "Wait for the beep"
+      },
+      "text": {
+        "fa": "تا وقتی صدا بدهد بازو را آرام نگه دارید، بعد عدد را ببینید. بعد از حمام یا کمپل ضخیم، ۲۰ دقیقه صبر کنید.",
+        "ps": "تر هغه چې غږ وکړي مټ ارام ونیسئ، بیا شمېره ولولئ. له لمبلو یا درنو کمپلو وروسته ۲۰ دقیقې صبر وکړئ.",
+        "en": "Keep the arm still until it beeps, then read the number. Wait 20 minutes after a bath or heavy blankets."
+      }
+    },
+    {
+      "id": "kit-thermometer.numbers",
+      "type": "step",
+      "icon": "fever",
+      "title": {
+        "fa": "عددها چه معنا دارند",
+        "ps": "شمېرې څه مانا لري",
+        "en": "What the numbers mean"
+      },
+      "text": {
+        "fa": "۳۶ تا ۳۷ و ۴ دهم عادی است. ۳۷ و نیم یا بیشتر تب است. در طفل کوچک، کمتر از ۳۶ و نیم زیاد سرد است.",
+        "ps": "۳۶ تر ۳۷ اعشاریه ۴ عادي دي. ۳۷ نیم یا ډېر تبه ده. په کوچني ماشوم کې، له ۳۶ نیم کم ډېر سوړ دی.",
+        "en": "36 to 37.4 is normal. 37.5 or more is a fever. In a young baby, under 36.5 is too cold."
+      }
+    },
+    {
+      "id": "kit-thermometer.clean",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "پاک کنید و نگه دارید",
+        "ps": "پاک یې کړئ او وې ساتئ",
+        "en": "Clean it and keep it safe"
+      },
+      "text": {
+        "fa": "بعد از هر بار، سر آن را با آب و صابون یا الکول پاک کنید. آن را در آب نیندازید. در قطی‌اش نگه دارید.",
+        "ps": "له هر ځل وروسته، سر یې په اوبو او صابون یا الکولو پاک کړئ. په اوبو کې یې مه اچوئ. په خپل قطي کې یې وساتئ.",
+        "en": "After each use, wipe the tip with soap and water or alcohol. Do not put it under water. Keep it in its box."
+      }
+    },
+    {
+      "id": "kit-thermometer.check",
+      "type": "link",
+      "to": "tool/reading/temp",
+      "icon": "thermometer",
+      "title": {
+        "fa": "درجهٔ تب را معاینه کنید",
+        "ps": "د تبې درجه وګورئ",
+        "en": "Check a temperature"
+      },
+      "text": {
+        "fa": "عدد و اینکه برای کیست را وارد کنید و بشنوید چه باید کرد.",
+        "ps": "شمېره او دا چې د چا ده ورکړئ، او واورئ چې څه باید وکړئ.",
+        "en": "Put in the number and who it is, and hear what to do."
+      }
+    },
+    {
+      "id": "kit-thermometer.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "kit-thermometer.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل کمتر از ۳ ماه، ۳۷ و نیم یا بیشتر دارد",
+            "ps": "تر ۳ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري",
+            "en": "a baby under 3 months has 37.5 or more"
+          }
+        },
+        {
+          "id": "kit-thermometer.urgent.cold",
+          "icon": "newborn-warm",
+          "text": {
+            "fa": "طفل کوچک کمتر از ۳۵ و نیم دارد، یا بعد از گرم کردن هم سرد است",
+            "ps": "کوچنی ماشوم له ۳۵ نیم کم لري، یا له ګرمولو وروسته هم سوړ پاتې کېږي",
+            "en": "a young baby has under 35.5, or stays cold after warming"
+          }
+        },
+        {
+          "id": "kit-thermometer.urgent.signs",
+          "icon": "warning",
+          "text": {
+            "fa": "تب با یکی از علایم خطر همراه است",
+            "ps": "تبه د خطر له یوې نښې سره ده",
+            "en": "there is fever with any danger sign"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-thermometer.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، امروز به کلینیک بروید",
+        "ps": "که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "kit-thermometer.soon.days",
+          "icon": "calendar",
+          "text": {
+            "fa": "تب بیشتر از ۲ روز دوام کرده",
+            "ps": "تبه له ۲ ورځو زیاته دوام کړې",
+            "en": "a fever lasts more than 2 days"
+          }
+        },
+        {
+          "id": "kit-thermometer.soon.high",
+          "icon": "fever",
+          "text": {
+            "fa": "طفل ۳۹ یا بیشتر دارد",
+            "ps": "ماشوم ۳۹ یا ډېر لري",
+            "en": "a child has 39 or more"
+          }
+        },
+        {
+          "id": "kit-thermometer.soon.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "زن حامله تب دارد",
+            "ps": "امیندواره ښځه تبه لري",
+            "en": "a pregnant woman has a fever"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-thermometer.touch",
+      "type": "tip",
+      "icon": "fever",
+      "text": {
+        "fa": "ترمامتر ندارید؟ سینه یا شکم را با پشت دست لمس کنید. اگر داغ بود، تب حساب می‌شود.",
+        "ps": "ترمامیټر نه لرئ؟ سینه یا خېټه د لاس په شا لمس کړئ. که ګرم وي، تبه شمېرل کېږي.",
+        "en": "No thermometer? Feel the chest or belly with the back of your hand. Feeling hot counts as a fever."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): fever = history of fever, feels hot, or axillary temperature 37.5 C or above; young infant: fever 37.5 C or above or low body temperature below 35.5 C = very severe disease",
+    "WHO Thermal protection of the newborn: a practical guide (1997): normal 36.5 to 37.5 C; rewarm and recheck",
+    "NICE NG143 Fever in under 5s: assessment and initial management (2019, updated 2021): electronic thermometer in the axilla under 4 weeks; under 3 months with 38 C or more is high risk",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): fever in pregnancy",
+    "WHO Replacement of mercury thermometers and sphygmomanometers in health care (2011)"
+  ],
+  "review": [
+    "Under 3 months: 37.5 C or more = hospital now. IMCI uses 37.5 C for the young infant (to 2 months); NICE uses 38 C and 'under 3 months'. Mo asked for under-3-month thresholds, so this page and the reading checker use 'under 3 months' with the IMCI 37.5 C. fever.urgent.baby still says 'under 2 months' (IMCI).",
+    "Low temperature: under 35.5 C = hospital now (IMCI). 35.5 to 36.4 C = warm skin to skin and recheck in 1 hour (WHO thermal protection); says 'stays cold after warming' in the urgent item.",
+    "'A child has 39 or more: clinic today' is a judgement call (NICE: 3 to 6 months with 39 C or more is amber). Not in IMCI.",
+    "Price 100 to 250 afghanis is an estimate (about 1.5 to 3.5 US dollars).",
+    "'Wait 20 minutes after a bath or heavy blankets' is common practice, not a WHO number.",
+    "Pashto decimal '۳۷ اعشاریه ۴' and Dari '۳۷ و ۴ دهم': check what sounds natural when read aloud."
+  ]
+}

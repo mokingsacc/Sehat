@@ -19,6 +19,18 @@
       "en": "Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age."
     }
   },
+  "anims": [
+    {
+      "id": "vaccines.anim-vaccines",
+      "type": "anim",
+      "anim": "vaccines"
+    },
+    {
+      "id": "vaccines.anim-herd",
+      "type": "anim",
+      "anim": "herd"
+    }
+  ],
   "visits": [
     {
       "id": "vaccines.birth",

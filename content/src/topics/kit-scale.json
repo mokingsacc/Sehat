@@ -1,0 +1,153 @@
+{
+  "id": "kit-scale",
+  "section": "children",
+  "title": {
+    "fa": "وزن کردن طفل در خانه",
+    "ps": "په کور کې د ماشوم تلل",
+    "en": "Weighing a child at home"
+  },
+  "summary": {
+    "fa": "برای هر خانواده لازم نیست: کلینیک اطفال را مفت وزن می‌کند.",
+    "ps": "هرې کورنۍ ته اړین نه دی: کلینیک ماشومان وړیا تلي.",
+    "en": "Not needed by every family: the clinic weighs children free."
+  },
+  "image": "kit-scale",
+  "blocks": [
+    {
+      "id": "kit-scale.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کلینیک اطفال را مفت وزن می‌کند. ترازو در خانه لازم نیست، اما برای نوزاد کوچک یا طفلی که وزن نمی‌گیرد کمک می‌کند.",
+        "ps": "کلینیک ماشومان وړیا تلي. په کور کې تله اړینه نه ده، خو د کوچني ماشوم یا هغه ماشوم لپاره چې وزن نه اخلي مرسته کوي.",
+        "en": "The clinic weighs children for free. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight."
+      }
+    },
+    {
+      "id": "kit-scale.buy",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "اگر می‌خواهید بخرید",
+        "ps": "که یې اخلئ",
+        "en": "If you want one"
+      },
+      "text": {
+        "fa": "ترازوی طفل، آویزان یا دیجیتل، حدود ۱۰۰۰ تا ۲۰۰۰ افغانی است. ترازوی عادی خانه هم برای اطفال بزرگ‌تر کار می‌دهد.",
+        "ps": "د ماشوم تله، ځوړنده یا ډیجیټل، شاوخوا ۱۰۰۰ تر ۲۰۰۰ افغانۍ ده. د کور عادي تله هم د لویو ماشومانو لپاره کار کوي.",
+        "en": "A baby scale, hanging or digital, costs about 1,000 to 2,000 afghanis. A normal bathroom scale also works for older children."
+      }
+    },
+    {
+      "id": "kit-scale.hold",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "با ترازوی عادی",
+        "ps": "په عادي تله",
+        "en": "With a normal scale"
+      },
+      "text": {
+        "fa": "اول خود را وزن کنید. بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.",
+        "ps": "لومړی ځان وتلئ. بیا ماشوم په غېږ کې ونیسئ او بیا ځان وتلئ. لومړۍ شمېره له دویمې کمه کړئ: دا د ماشوم وزن دی.",
+        "en": "Weigh yourself. Then weigh yourself holding the child. Take the first number from the second: that is the child's weight."
+      }
+    },
+    {
+      "id": "kit-scale.same",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "هر بار به یک شکل وزن کنید",
+        "ps": "هر ځل په یو ډول یې وتلئ",
+        "en": "Weigh the same way each time"
+      },
+      "text": {
+        "fa": "با لباس سبک، پیش از شیر یا غذا، در همان وقت روز، و ترازو روی زمین هموار و سخت باشد.",
+        "ps": "په سپکو جامو، د تي یا خوړو مخکې، د ورځې په همغه وخت، او تله پر هوارې او کلکې ځمکې وي.",
+        "en": "Use light clothes, weigh before a feed, at the same time of day, with the scale on a flat, hard floor."
+      }
+    },
+    {
+      "id": "kit-scale.family",
+      "type": "link",
+      "to": "family",
+      "icon": "card",
+      "title": {
+        "fa": "در «خانوادهٔ من» بنویسید",
+        "ps": "په «زما کورنۍ» کې یې ولیکئ",
+        "en": "Write it in My family"
+      },
+      "text": {
+        "fa": "وزن را در صفحهٔ طفل خود در این برنامه اضافه کنید و در کلینیک نشان دهید.",
+        "ps": "وزن په دې اپ کې د خپل ماشوم پاڼې ته ور زیات کړئ او کلینیک ته یې وښایئ.",
+        "en": "Add the weight to your child's page in the app, and show it at the clinic."
+      }
+    },
+    {
+      "id": "kit-scale.meaning",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "به چه چیز دقت کنید",
+        "ps": "څه ته پام وکړئ",
+        "en": "What to look for"
+      },
+      "text": {
+        "fa": "طفل خورد باید هر ماه وزن بگیرد. جدول رشد کلینیک نشان می‌دهد که وزن برای عمرش درست است یا نه.",
+        "ps": "کوچنی ماشوم باید هره میاشت وزن واخلي. د کلینیک د ودې چارټ ښيي چې وزن یې د عمر سره سم دی که نه.",
+        "en": "A young child should gain weight each month. The clinic's growth chart shows if the weight is right for the age."
+      }
+    },
+    {
+      "id": "kit-scale.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این‌ها را دارد، همین هفته به کلینیک بروید",
+        "ps": "که ماشوم له دې څخه یو ولري، په همدې اونۍ کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic this week if the child:"
+      },
+      "items": [
+        {
+          "id": "kit-scale.soon.flat",
+          "icon": "growth",
+          "text": {
+            "fa": "۲ ماه است که وزن نگرفته",
+            "ps": "۲ میاشتې کېږي چې وزن یې نه دی اخیستی",
+            "en": "has not gained weight for 2 months"
+          }
+        },
+        {
+          "id": "kit-scale.soon.loss",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "وزنش کم می‌شود",
+            "ps": "وزن یې کمېږي",
+            "en": "is losing weight"
+          }
+        },
+        {
+          "id": "kit-scale.soon.newborn",
+          "icon": "baby",
+          "text": {
+            "fa": "۳ هفته دارد و هنوز از وزن ولادت کمتر است",
+            "ps": "۳ اونۍ لري او لا هم د زېږون له وزن کم دی",
+            "en": "is 3 weeks old and still under the birth weight"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO Child Growth Standards (2006) and WHO/UNICEF growth monitoring and promotion",
+    "WHO IMCI Chart Booklet (2014): assess growth; feeding problems",
+    "NICE NG75 Faltering growth: recognition and management in children (2017): concern if birth weight not regained by 3 weeks"
+  ],
+  "review": [
+    "Mo asked for a scale 'if sensible'. Written as optional: the clinic weighs for free. Remove the page if it encourages unnecessary spending.",
+    "Holding the child on a bathroom scale is rough (bathroom scales often read in steps of 0.1 to 0.5 kg); fine for trends in older children, not for newborns.",
+    "'Not gaining for 2 months' and 'losing weight' = clinic this week (judgement call, consistent with growth.soon).",
+    "Birth weight not regained by 3 weeks (NICE NG75); WHO materials often say 2 weeks.",
+    "Price 1,000 to 2,000 afghanis is an estimate."
+  ]
+}

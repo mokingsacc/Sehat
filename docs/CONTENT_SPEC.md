@@ -113,3 +113,20 @@ Extra topics may be added later from research on the commonest illnesses in Sama
 }
 ```
 Each visit is narrated as one clip: the age, then each vaccine and what it protects against.
+
+## Addendum: link blocks, step pictures and the home kit (2026-10-07)
+- "link": a tappable card that opens a tool or another page: `{"id": "cough.counter", "type": "link", "to": "tool/breaths", "icon": "breathing-fast", "title": {...}, "text": {...}}`. "to" is one of `tool/breaths`, `tool/reading`, `tool/reading/temp`, `tool/reading/bp`, `tool/reading/sugar`, `tool/reading/spo2`, `tool/reading/muac`, `topic/<topic-id>`, `kit`, `family`, `near`. Title at most 7 words, text at most 32. It is read aloud like a step (title, then text). Optional, at most 2 per topic.
+- "picture" (optional) on a "step" or "link": the name of a wide no-face picture in `img/pics/<name>.svg` (360 x 200), shown under the step. Use it only where a picture explains the action better than words.
+- Section "kit" in `content/src/sections.json`: the home health kit topics (`kit-*`). They show only on the kit page (`#/kit`), not in the children or adults lists. Their "section" is "children" or "everyone" for the colour and audio pack. See docs/HOME_KIT.md.
+
+## Addendum: animations and the Emergency screen (2026-10-07)
+- "anim": a short narrated picture story (see docs/ANIMATIONS.md): `{"id": "<topic-id>.anim", "type": "anim", "anim": "<name>", "pick": "<variant>"}`.
+  - "anim" is a file in `anim/` (`vaccines`, `herd`, ...) or a group (`cpr`, which first asks who needs help).
+  - "pick" (optional, groups only) goes straight to one variant, e.g. `"anim": "cpr", "pick": "cpr-baby"` on the baby CPR page.
+  - "title" (optional, max 7 words) is shown and read by the block's speaker. Without it the block uses the animation's own title (`anim.<name>.title`), so nothing new needs recording.
+  - The page shows one still scene with a big play button; tapping opens the full-screen player, which reads each scene aloud and moves on by itself.
+  - The scene lines live in `content/src/anims.json` (`anim.<name>.title`, `anim.<name>.s1` ...; groups also `anim.<group>.ask` and `anim.<variant>.label`). They are narrated, recorded in the studio right after the first page that shows the animation, and go in that page's audio pack. The validator checks that every scene of an animation used in a topic has its line.
+  - At most 2 per topic; put it after the lead. The vaccines page has its own list: `"anims": [ ... ]` in `content/src/vaccines.json`, shown after the lead.
+- Section "emergency" in `content/src/sections.json`: every first-aid and emergency topic, most urgent first. The topics keep their own section ("children" or "everyone", and also listed there); the children and adults lists show them in an "Emergency" group at the end, and the Emergency screen lists them under "All emergencies".
+- `config.emergency` (content/src/config.json): the Emergency screen, opened by the big red home button (home module `"emergency"`, first in `config.home`). One row per age: `{"id", "label" (a ui.text key), "icon", "cpr" (the "not breathing" page, shown first in red), "anim" (the CPR variant its "Watch how" button plays), "topics" (the "Other emergencies" for that age, in order)}`. See docs/EMERGENCIES.md section 4.
+- `config.urgentTopics` includes all emergency topics, so their narration is in the "urgent" audio pack that downloads first.

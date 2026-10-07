@@ -1,0 +1,178 @@
+{
+  "id": "kit-buy",
+  "section": "everyone",
+  "title": {
+    "fa": "بکس صحی خانه: چه بخریم",
+    "ps": "د کور روغتیايي بکس: څه واخلو",
+    "en": "Home health kit: what to buy"
+  },
+  "summary": {
+    "fa": "کدام چیزها کمک می‌کند، چه کسی ضرورت دارد و چه چیزی را نخرید.",
+    "ps": "کوم شیان مرسته کوي، چا ته اړین دي، او څه مه اخلئ.",
+    "en": "Which things help, who needs them, and what not to buy."
+  },
+  "image": "kit-buy",
+  "blocks": [
+    {
+      "id": "kit-buy.lead",
+      "type": "lead",
+      "text": {
+        "fa": "چند چیز ساده در خانه کمک می‌کند از خانوادهٔ خود مراقبت کنید و بدانید چه وقت به کلینیک بروید. فقط چیزی را بخرید که خانواده‌تان ضرورت دارد.",
+        "ps": "په کور کې څو ساده شیان مرسته کوي چې د کورنۍ پاملرنه وکړئ او پوه شئ چې کله کلینیک ته ولاړ شئ. یوازې هغه څه واخلئ چې کورنۍ مو ورته اړتیا لري.",
+        "en": "A few simple things at home help you care for your family and know when to go to the clinic. Buy only what your family needs."
+      }
+    },
+    {
+      "id": "kit-buy.every",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "هر خانه: ترمامتر و کمک‌های اولیه",
+        "ps": "هر کور: ترمامیټر او لومړنۍ مرستې",
+        "en": "Every home: thermometer and first aid"
+      },
+      "text": {
+        "fa": "ترمامتر دیجیتل، او آر اس، زنک، صابون، تکهٔ پاک و بنداژ در هر خانه به کار می‌آید.",
+        "ps": "ډیجیټل ترمامیټر، او آر اس، زنک، صابون، پاک ټوکر او بنداژ په هر کور کې په کار راځي.",
+        "en": "A digital thermometer, ORS, zinc, soap, clean cloth and bandages are useful in every home."
+      }
+    },
+    {
+      "id": "kit-buy.children",
+      "type": "step",
+      "icon": "muac",
+      "title": {
+        "fa": "اطفال خورد: فیتهٔ بازو",
+        "ps": "واړه ماشومان: د مټ فیته",
+        "en": "Small children: an arm tape"
+      },
+      "text": {
+        "fa": "برای اطفال ۶ ماهه تا ۵ ساله، فیتهٔ رنگهٔ بازو نشان می‌دهد که طفل زیاد لاغر است یا نه. کلینیک‌ها اکثراً آن را مفت می‌دهند.",
+        "ps": "د ۶ میاشتو څخه تر ۵ کلونو ماشومانو لپاره، رنګه د مټ فیته ښيي چې ماشوم ډېر ډنګر دی که نه. کلینیکونه اکثره دا وړیا ورکوي.",
+        "en": "For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Clinics often give it free."
+      }
+    },
+    {
+      "id": "kit-buy.bp",
+      "type": "step",
+      "icon": "bp",
+      "title": {
+        "fa": "بالای ۴۰ سال یا حامله: ماشین فشار",
+        "ps": "له ۴۰ کلونو پورته یا امیندواره: د فشار ماشین",
+        "en": "Over 40 or pregnant: a BP machine"
+      },
+      "text": {
+        "fa": "اگر کسی بالای ۴۰ سال است، حامله است، مرض شکر دارد، یا قبلاً فشار بلند داشته، یک ماشین فشار بازو بخرید.",
+        "ps": "که څوک له ۴۰ کلونو پورته وي، امیندواره وي، د شکرې ناروغي ولري، یا یې مخکې لوړ فشار درلود، د مټ د فشار ماشین واخلئ.",
+        "en": "Buy an upper-arm machine if someone is over 40, pregnant, has diabetes, or has had high blood pressure."
+      }
+    },
+    {
+      "id": "kit-buy.sugar",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "فقط برای مرض شکر: ماشین قند",
+        "ps": "یوازې د شکرې لپاره: د شکرې ماشین",
+        "en": "Diabetes only: a sugar meter"
+      },
+      "text": {
+        "fa": "ماشین قند برای کسانی است که مرض شکر دارند و کلینیک مشوره داده است. بیشترین خرچ آن، نوارهای معاینه است.",
+        "ps": "د شکرې ماشین د هغو کسانو لپاره دی چې د شکرې ناروغي لري او کلینیک ورته مشوره ورکړې وي. ډېر لګښت یې د معاینې پټۍ دي.",
+        "en": "A sugar meter is for people with diabetes, when the clinic advises it. The test strips cost the most."
+      }
+    },
+    {
+      "id": "kit-buy.shop",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "از دواخانهٔ قابل اعتماد بخرید",
+        "ps": "له باوري درملتون څخه یې واخلئ",
+        "en": "Buy from a trusted pharmacy"
+      },
+      "text": {
+        "fa": "از دواخانه‌دار یا کارمند صحی بپرسید کدام نوع خوب است. تاریخ را ببینید، رسید را نگه دارید و بتری اضافه بخرید.",
+        "ps": "له درملپلورونکي یا روغتیايي کارکوونکي وپوښتئ چې کوم ډول ښه دی. نېټه وګورئ، رسید وساتئ، او اضافي بیټرۍ واخلئ.",
+        "en": "Ask the pharmacist or health worker which kind is good. Check the date, keep the receipt, and buy spare batteries."
+      }
+    },
+    {
+      "id": "kit-buy.check",
+      "type": "link",
+      "to": "tool/reading",
+      "icon": "check",
+      "title": {
+        "fa": "یک عدد را معاینه کنید",
+        "ps": "یوه شمېره وګورئ",
+        "en": "Check a reading"
+      },
+      "text": {
+        "fa": "عدد یک وسیله را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.",
+        "ps": "د یوه سامان شمېره ورکړئ، او واورئ چې څه مانا لري او څه باید وکړئ.",
+        "en": "Put in the number from a device, and hear what it means and what to do."
+      }
+    },
+    {
+      "id": "kit-buy.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "kit-buy.dont.wrist",
+          "icon": "bp",
+          "text": {
+            "fa": "ماشین فشار مچ دست نخرید؛ اکثراً غلط نشان می‌دهد.",
+            "ps": "د مړوند د فشار ماشین مه اخلئ؛ ډېر ځله غلط ښيي.",
+            "en": "Do not buy a wrist blood pressure machine; it is often wrong."
+          }
+        },
+        {
+          "id": "kit-buy.dont.mercury",
+          "icon": "poison",
+          "text": {
+            "fa": "ترمامتر شیشه‌ای سیماب‌دار نخرید؛ می‌شکند و سیماب زهر است.",
+            "ps": "د ښیښې سیمابي ترمامیټر مه اخلئ؛ ماتېږي او سیماب زهر دی.",
+            "en": "Do not buy a glass mercury thermometer; it breaks, and mercury is poison."
+          }
+        },
+        {
+          "id": "kit-buy.dont.medicine",
+          "icon": "pill",
+          "text": {
+            "fa": "به خاطر عدد خانه، دوا را خودتان تغییر ندهید؛ از کلینیک بپرسید.",
+            "ps": "د کور د یوې شمېرې له امله درمل مه بدلوئ؛ له کلینیک وپوښتئ.",
+            "en": "Do not change medicine because of a home reading; ask the clinic."
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-buy.look",
+      "type": "tip",
+      "icon": "warning",
+      "text": {
+        "fa": "ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.",
+        "ps": "ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.",
+        "en": "A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says."
+      }
+    }
+  ],
+  "sources": [
+    "WHO HEARTS technical package, module Evidence-based treatment protocols and Technology (2018, 2020): use validated automated upper-arm BP devices",
+    "WHO Technical specifications for automated non-invasive blood pressure measuring devices with cuff (2020)",
+    "WHO Replacement of mercury thermometers and sphygmomanometers in health care: technical guidance (2011)",
+    "WHO/UNICEF Joint statement: Clinical management of acute diarrhoea, ORS and zinc (2004)",
+    "WHO guideline: Updates on the management of severe acute malnutrition in infants and children (2013): MUAC",
+    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020): self-monitoring of blood glucose for people on insulin"
+  ],
+  "review": [
+    "Prices are rough guesses for Samangan in 2026 (afghanis), written in docs/HOME_KIT.md; check at a pharmacy in Aybak before release. They are not in this overview page.",
+    "'BP machine for over 40, pregnancy, diabetes, past high BP' is a judgement call; WHO does not advise every family to own one.",
+    "'The test strips cost the most' (sugar meter): ongoing cost matters more than the meter."
+  ]
+}

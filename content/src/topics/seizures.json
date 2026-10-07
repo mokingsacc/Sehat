@@ -1,0 +1,299 @@
+{
+  "id": "seizures",
+  "section": "everyone",
+  "title": {
+    "fa": "تشنج (مرگی)",
+    "ps": "اختلاج (مرګي)",
+    "en": "Fits (seizures)"
+  },
+  "summary": {
+    "fa": "او را از آسیب حفظ کنید، وقت تشنج را ببینید، بعد به پهلو بخوابانید.",
+    "ps": "له زیان یې وساتئ، د اختلاج وخت وګورئ، بیا یې پر اړخ څملوئ.",
+    "en": "Keep them safe, time the fit, then lay them on their side."
+  },
+  "image": "seizures",
+  "blocks": [
+    {
+      "id": "seizures.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در تشنج، شخص ممکن است بیفتد، بدنش شخ شود و بلرزد، و جواب ندهد. بیشتر تشنج‌ها در چند دقیقه خودبخود تمام می‌شوند. کار شما حفاظت اوست.",
+        "ps": "په اختلاج کې کس کېدای شي ولوېږي، بدن یې کلک شي او ولړزېږي، او ځواب ورنه کړي. ډېری اختلاجونه په څو دقیقو کې پخپله ودرېږي. ستاسو دنده د هغه ساتنه ده.",
+        "en": "In a fit, a person may fall, go stiff, shake and not answer. Most fits stop by themselves within a few minutes. Your job is to keep them safe."
+      }
+    },
+    {
+      "id": "seizures.safe",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "جای را بی‌خطر کنید",
+        "ps": "ځای خوندي کړئ",
+        "en": "Make the place safe"
+      },
+      "text": {
+        "fa": "آتش، بخاری، چای داغ، آب و چیزهای تیز را دور کنید. شخص را تکان ندهید، مگر اینکه در خطر باشد.",
+        "ps": "اور، بخاري، ګرمه چای، اوبه او تېره شیان لرې کړئ. کس مه خوځوئ، مګر دا چې په خطر کې وي.",
+        "en": "Move away fire, the stove, hot tea, water and sharp things. Do not move the person unless they are in danger."
+      }
+    },
+    {
+      "id": "seizures.head",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "زیر سرش چیز نرم بگذارید",
+        "ps": "تر سر لاندې یې نرم شی کېږدئ",
+        "en": "Cushion the head"
+      },
+      "text": {
+        "fa": "چیزی نرم مانند تکهٔ قات‌شده زیر سرش بگذارید. لباس تنگ دور گردنش را سست کنید.",
+        "ps": "یو نرم شی لکه قات شوی ټوکر یې تر سر لاندې کېږدئ. د غاړې شاوخوا تنګې جامې یې سستې کړئ.",
+        "en": "Put something soft, like a folded cloth, under the head. Loosen tight clothes around the neck."
+      },
+      "picture": "em-seizure-cushion"
+    },
+    {
+      "id": "seizures.time",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "وقت تشنج را ببینید",
+        "ps": "د اختلاج وخت وګورئ",
+        "en": "Time the fit"
+      },
+      "text": {
+        "fa": "وقتی شروع شد، به ساعت یا تلفن ببینید. اگر بیشتر از ۵ دقیقه دوام کرد، یک نفر را برای موتر بفرستید و به شفاخانه بروید.",
+        "ps": "کله چې پیل شي، ساعت یا ټیلیفون ته وګورئ. که له ۵ دقیقو زیات دوام وکړي، یو څوک د موټر لپاره ولېږئ او روغتون ته ولاړ شئ.",
+        "en": "Look at a clock or phone when it starts. If it lasts more than 5 minutes, send for a car and go to hospital."
+      }
+    },
+    {
+      "id": "seizures.side",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "بعد از آن، به پهلو بخوابانید",
+        "ps": "وروسته، پر اړخ یې څملوئ",
+        "en": "Afterwards, lay them on their side"
+      },
+      "text": {
+        "fa": "وقتی لرزه تمام شد، او را به پهلو بچرخانید، سرش به عقب، تا آب دهان بیرون شود. پیشش بمانید تا کاملاً بیدار شود.",
+        "ps": "کله چې لړزه ودرېږي، پر اړخ یې واړوئ، سر یې شاته، چې لاړې بهر ووځي. ورسره پاتې شئ تر څو بشپړ ویښ شي.",
+        "en": "When the shaking stops, roll them onto their side, head back, so saliva can run out. Stay until they are fully awake."
+      }
+    },
+    {
+      "id": "seizures.epilepsy",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "مرگی: دوا را ادامه دهید",
+        "ps": "مرګي: درملو ته دوام ورکړئ",
+        "en": "Epilepsy: keep taking the medicine"
+      },
+      "text": {
+        "fa": "اگر شخص مرگی دارد، دوای کلینیک را هر روز بدهید، حتی وقتی تشنج ندارد. هرگز دوا را ناگهان قطع نکنید.",
+        "ps": "که کس مرګي لري، د کلینیک درمل هره ورځ ورکړئ، حتی کله چې اختلاج نه لري. هېڅکله درمل ناڅاپه مه بندوئ.",
+        "en": "If the person has epilepsy, give the clinic's medicine every day, even when there are no fits. Never stop it suddenly."
+      }
+    },
+    {
+      "id": "seizures.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "seizures.urgent.long",
+          "icon": "clock",
+          "text": {
+            "fa": "تشنج بیشتر از ۵ دقیقه دوام کند",
+            "ps": "اختلاج له ۵ دقیقو زیات دوام وکړي",
+            "en": "the fit lasts more than 5 minutes"
+          }
+        },
+        {
+          "id": "seizures.urgent.repeated",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج‌ها پشت سر هم بیایند",
+            "ps": "اختلاجونه یو په بل پسې راشي",
+            "en": "fits come one after another"
+          }
+        },
+        {
+          "id": "seizures.urgent.first",
+          "icon": "warning",
+          "text": {
+            "fa": "این اولین تشنج اوست",
+            "ps": "دا یې لومړی اختلاج دی",
+            "en": "it is their first fit ever"
+          }
+        },
+        {
+          "id": "seizures.urgent.not-waking",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بعد از تشنج درست بیدار نمی‌شود",
+            "ps": "له اختلاج وروسته سم نه راویښېږي",
+            "en": "they do not wake up properly afterwards"
+          }
+        },
+        {
+          "id": "seizures.urgent.injury",
+          "icon": "wound",
+          "text": {
+            "fa": "زخمی شد، یا تشنج در آب شد",
+            "ps": "ټپي شو، یا اختلاج په اوبو کې وشو",
+            "en": "they were hurt, or the fit happened in water"
+          }
+        },
+        {
+          "id": "seizures.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "بعد از تشنج به سختی نفس می‌کشد",
+            "ps": "له اختلاج وروسته په سختۍ ساه اخلي",
+            "en": "breathing is difficult after the fit"
+          }
+        },
+        {
+          "id": "seizures.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "زن حامله است یا تازه ولادت کرده است",
+            "ps": "ښځه امیندواره ده یا نوی یې زېږون کړی",
+            "en": "she is pregnant or has just given birth"
+          }
+        },
+        {
+          "id": "seizures.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "شیرخوار یا طفل تشنج کرده است",
+            "ps": "تي خوړونکي ماشوم یا ماشوم اختلاج کړی",
+            "en": "a baby or child has a fit"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seizures.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این حالت را دارد، امروز به کلینیک بروید:",
+        "ps": "که دا حالت ولري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "seizures.soon.more-fits",
+          "icon": "convulsion",
+          "text": {
+            "fa": "کسی که مرگی دارد، از معمول بیشتر تشنج می‌کند",
+            "ps": "هغه څوک چې مرګي لري، له معمول زیات اختلاج کوي",
+            "en": "someone with epilepsy has more fits than usual"
+          }
+        },
+        {
+          "id": "seizures.soon.medicine",
+          "icon": "pill",
+          "text": {
+            "fa": "دوای مرگی تمام شده است",
+            "ps": "د مرګي درمل ختم شوي",
+            "en": "the epilepsy medicine has run out"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seizures.dont",
+      "type": "dont",
+      "title": {
+        "fa": "هنگام تشنج این کارها را نکنید:",
+        "ps": "د اختلاج پر مهال دا کارونه مه کوئ:",
+        "en": "During a fit, do not:"
+      },
+      "items": [
+        {
+          "id": "seizures.dont.mouth",
+          "icon": "no",
+          "text": {
+            "fa": "چیزی در دهانش نگذارید، حتی قاشق یا انگشت",
+            "ps": "هېڅ شی یې په خوله کې مه ږدئ، حتی کاچوغه یا ګوته",
+            "en": "put anything in the mouth, not even a spoon or finger"
+          }
+        },
+        {
+          "id": "seizures.dont.hold",
+          "icon": "no",
+          "text": {
+            "fa": "او را محکم نگیرید و لرزه را بند نکنید",
+            "ps": "کلک یې مه نیسئ او لړزه یې مه ودروئ",
+            "en": "hold them down or try to stop the shaking"
+          }
+        },
+        {
+          "id": "seizures.dont.drink",
+          "icon": "no",
+          "text": {
+            "fa": "تا کاملاً بیدار نشده، آب، غذا یا دوا ندهید",
+            "ps": "تر څو بشپړ ویښ شوی نه وي، اوبه، خواړه یا درمل مه ورکوئ",
+            "en": "give water, food or medicine until fully awake"
+          }
+        },
+        {
+          "id": "seizures.dont.water",
+          "icon": "no",
+          "text": {
+            "fa": "بر او آب سرد نریزید و چیزی را به او بو ندهید",
+            "ps": "پرې سړې اوبه مه اچوئ او هېڅ شی مه ور بویوئ",
+            "en": "pour cold water on them or make them smell things"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seizures.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه تشنج طولانی را با دوا بند می‌کنند و علت را پیدا می‌کنند. تشنج در حاملگی برای مادر و طفل تداوی عاجل لازم دارد.",
+        "ps": "په روغتون کې اوږد اختلاج په درملو دروي او لامل یې پیدا کوي. په امیندوارۍ کې اختلاج د مور او ماشوم لپاره بېړنۍ درملنې ته اړتیا لري.",
+        "en": "At hospital they stop a long fit with medicine and find the cause. A fit in pregnancy needs urgent care for mother and baby."
+      }
+    },
+    {
+      "id": "seizures.not-curse",
+      "type": "tip",
+      "icon": "talk",
+      "text": {
+        "fa": "مرگی یک مریضی مغز است که تداوی دارد. کسانی که مرگی دارند می‌توانند مکتب بروند، کار کنند و عروسی کنند.",
+        "ps": "مرګي د دماغ یوه ناروغي ده چې درملنه لري. هغه کسان چې مرګي لري ښوونځي ته تللی، کار کولی او واده کولی شي.",
+        "en": "Epilepsy is an illness of the brain that can be treated. People with epilepsy can go to school, work and marry."
+      }
+    }
+  ],
+  "sources": [
+    "WHO mhGAP Intervention Guide 2.0 (2016): epilepsy module, first aid for a convulsion, when to refer, keep medicine going",
+    "WHO fact sheet: Epilepsy (2024)",
+    "European Resuscitation Council Guidelines 2025: First Aid (seizures)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): seizures",
+    "WHO recommendations for prevention and treatment of pre-eclampsia and eclampsia (2011): fits in pregnancy",
+    "WHO IMCI Chart Booklet (2014): convulsions are a general danger sign in children"
+  ],
+  "review": [
+    "Any fit in a baby or child is 'hospital now' (IMCI danger sign). This matches danger-child.urgent.convulsion. Fever fits have their own page (fever-fits).",
+    "5 minutes: the mhGAP/ERC threshold for status epilepticus and for referral.",
+    "A known epileptic with a short, typical fit who wakes fully does not need hospital. The text covers this because only the listed situations are urgent.",
+    "Dont 'make them smell things' covers the custom of holding a shoe or onion under the nose. Check which local practices are common and whether to name them.",
+    "The stigma tip ('can go to school, work and marry') follows mhGAP's psychoeducation messages. It makes no religious claim. The id is 'not-curse', but the text does not say 'curse'.",
+    "Dari مرگی and Pashto مرګي for epilepsy: check local terms (e.g. 'صرع' is formal)."
+  ]
+}

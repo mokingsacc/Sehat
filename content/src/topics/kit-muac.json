@@ -1,0 +1,180 @@
+{
+  "id": "kit-muac",
+  "section": "children",
+  "title": {
+    "fa": "فیتهٔ بازو برای لاغری طفل",
+    "ps": "د ډنګر ماشوم لپاره د مټ فیته",
+    "en": "Arm tape for thin children"
+  },
+  "summary": {
+    "fa": "ببینید طفل ۶ ماهه تا ۵ ساله زیاد لاغر است یا نه.",
+    "ps": "وګورئ چې د ۶ میاشتو تر ۵ کلونو ماشوم ډېر ډنګر دی که نه.",
+    "en": "Is a child from 6 months to 5 years too thin?"
+  },
+  "image": "kit-muac",
+  "blocks": [
+    {
+      "id": "kit-muac.lead",
+      "type": "lead",
+      "text": {
+        "fa": "این فیتهٔ رنگه زود نشان می‌دهد که طفل ۶ ماهه تا ۵ ساله زیاد لاغر است یا نه. ماهی یک بار اندازه کنید.",
+        "ps": "دا رنګه فیته ژر ښيي چې د ۶ میاشتو تر ۵ کلونو ماشوم ډېر ډنګر دی که نه. په میاشت کې یو ځل یې اندازه کړئ.",
+        "en": "This coloured tape shows quickly if a child from 6 months to 5 years is too thin. Measure once a month."
+      }
+    },
+    {
+      "id": "kit-muac.get",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "از کجا پیدا کنید",
+        "ps": "له کومه یې پیدا کړئ",
+        "en": "Where to get one"
+      },
+      "text": {
+        "fa": "از کلینیک یا کارمند تغذیه بپرسید؛ اکثراً مفت می‌دهند. در دواخانه هم خیلی ارزان است.",
+        "ps": "له کلینیک یا د تغذیې له کارکوونکي وپوښتئ؛ اکثره یې وړیا ورکوي. په درملتون کې هم ډېره ارزانه ده.",
+        "en": "Ask the clinic or the nutrition worker; they often give it free. In a pharmacy it costs very little."
+      }
+    },
+    {
+      "id": "kit-muac.arm",
+      "type": "step",
+      "icon": "muac",
+      "title": {
+        "fa": "وسط بازوی چپ را پیدا کنید",
+        "ps": "د کیڼ مټ منځ پیدا کړئ",
+        "en": "Find the middle of the left arm"
+      },
+      "text": {
+        "fa": "بازو را خم کنید. نقطهٔ وسط شانه و آرنج را پیدا کنید. بعد بازو را آزاد و آویزان بگذارید.",
+        "ps": "مټ کوږ کړئ. د اوږې او څنګل ترمنځ نیمایي ځای پیدا کړئ. بیا مټ ازاد او ځوړند پرېږدئ.",
+        "en": "Bend the arm. Find the point halfway between the shoulder and the elbow. Then let the arm hang loose."
+      }
+    },
+    {
+      "id": "kit-muac.wrap",
+      "type": "step",
+      "icon": "muac",
+      "title": {
+        "fa": "آرام بپیچانید و رنگ را ببینید",
+        "ps": "په نرمۍ یې تاو کړئ او رنګ وګورئ",
+        "en": "Wrap it gently and read the colour"
+      },
+      "text": {
+        "fa": "فیته را در همان جا دور بازو بپیچانید، نه سخت و نه شل. رنگی را که در کلکین فیته دیده می‌شود ببینید.",
+        "ps": "فیته په همغه ځای د مټ شاوخوا تاو کړئ، نه ټینګه او نه سسته. هغه رنګ وګورئ چې د فیتې په کړکۍ کې ښکاري.",
+        "en": "Put the tape around the arm at that point, not tight and not loose. Look at the colour in the window."
+      }
+    },
+    {
+      "id": "kit-muac.colours",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "رنگ‌ها چه معنا دارند",
+        "ps": "رنګونه څه مانا لري",
+        "en": "What the colours mean"
+      },
+      "text": {
+        "fa": "سبز خوب است. زرد یعنی لاغر است: همین هفته به کلینیک بروید. سرخ یعنی خیلی لاغر است: امروز به کلینیک بروید.",
+        "ps": "شین ښه دی. ژېړ یعنې ډنګر دی: په همدې اونۍ کلینیک ته ولاړ شئ. سور یعنې ډېر ډنګر دی: نن کلینیک ته ولاړ شئ.",
+        "en": "Green is good. Yellow means too thin: go to the clinic this week. Red means very thin: go to the clinic today."
+      }
+    },
+    {
+      "id": "kit-muac.keep",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "صاف و پاک نگه دارید",
+        "ps": "هوار او پاک یې وساتئ",
+        "en": "Keep it flat and clean"
+      },
+      "text": {
+        "fa": "با تکهٔ نم‌دار پاک کنید. صاف و خشک نگه دارید. فیتهٔ کش‌شده یا پاره، نتیجهٔ غلط می‌دهد.",
+        "ps": "په لوند ټوکر یې پاکه کړئ. هواره او وچه یې وساتئ. اوږده شوې یا شلېدلې فیته غلطه پایله ورکوي.",
+        "en": "Wipe it with a damp cloth. Keep it flat and dry. A stretched or torn tape gives wrong results."
+      }
+    },
+    {
+      "id": "kit-muac.check",
+      "type": "link",
+      "to": "tool/reading/muac",
+      "icon": "muac",
+      "title": {
+        "fa": "رنگ را معاینه کنید",
+        "ps": "رنګ وګورئ",
+        "en": "Check a colour"
+      },
+      "text": {
+        "fa": "رنگی را که دیدید انتخاب کنید و بشنوید چه باید کرد.",
+        "ps": "هغه رنګ وټاکئ چې ولیدئ، او واورئ چې څه باید وکړئ.",
+        "en": "Choose the colour you saw, and hear what to do."
+      }
+    },
+    {
+      "id": "kit-muac.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "kit-muac.urgent.feet",
+          "icon": "swollen-feet",
+          "text": {
+            "fa": "هر دو پایش پندیده است",
+            "ps": "دواړه پښې یې پړسېدلې دي",
+            "en": "has swelling of both feet"
+          }
+        },
+        {
+          "id": "kit-muac.urgent.eat",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "لاغر است و هیچ چیز نمی‌خورد یا نمی‌نوشد",
+            "ps": "ډنګر دی او هېڅ نه خوري او نه څښي",
+            "en": "is thin and will not eat or drink anything"
+          }
+        },
+        {
+          "id": "kit-muac.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "لاغر است و خیلی ضعیف یا خواب‌آلود است",
+            "ps": "ډنګر دی او ډېر کمزوری یا خوب وړی دی",
+            "en": "is thin and very weak or sleepy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-muac.age",
+      "type": "tip",
+      "icon": "baby",
+      "text": {
+        "fa": "این فیته برای اطفال ۶ ماهه تا ۵ ساله است. نوزادان کوچک‌تر را در کلینیک وزن می‌کنند.",
+        "ps": "دا فیته د ۶ میاشتو تر ۵ کلونو ماشومانو لپاره ده. تر دې واړه ماشومان په کلینیک کې تلل کېږي.",
+        "en": "The tape is for children from 6 months to 5 years. Younger babies are weighed at the clinic instead."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guideline: Updates on the management of severe acute malnutrition in infants and children (2013): MUAC below 115 mm = severe acute malnutrition, 6 to 59 months",
+    "WHO/UNICEF Joint statement: WHO child growth standards and the identification of severe acute malnutrition (2009)",
+    "WHO IMCI Chart Booklet (2014): check for acute malnutrition; MUAC 115 to 125 mm = moderate; oedema of both feet = complicated severe acute malnutrition",
+    "WHO guideline on the prevention and management of wasting and nutritional oedema in infants and children under 5 years (2023)",
+    "UNICEF / ALIMA Family MUAC approach: mothers measuring their own children"
+  ],
+  "review": [
+    "Bands: red under 11.5 cm, yellow 11.5 to 12.4 cm, green 12.5 cm or more (WHO 2013, IMCI 2014).",
+    "Yellow = clinic 'this week' (moderate acute malnutrition), not 'today'.",
+    "Price: often free from nutrition programmes; 'very little' in pharmacies.",
+    "Local word for the MUAC tape: 'فیتهٔ بازو' / 'د مټ فیته' chosen; nutrition workers may say 'موک' or 'مواک'.",
+    "Red = clinic today (outpatient, MoPH IMAM 2018); growth.json now says the same (growth.today) and keeps hospital now for swelling of both feet, not eating, or very thin and very weak, sleepy or sick."
+  ]
+}

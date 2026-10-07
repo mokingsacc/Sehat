@@ -1,0 +1,227 @@
+{
+  "id": "cpr-baby",
+  "section": "children",
+  "title": {
+    "fa": "شیرخواری که نفس نمی‌کشد",
+    "ps": "تي خوړونکی ماشوم چې ساه نه اخلي",
+    "en": "Baby not breathing (under 1)"
+  },
+  "summary": {
+    "fa": "کمتر از ۱ سال: اول ۵ بار نفس، بعد با دو شست سینه را فشار دهید.",
+    "ps": "له ۱ کال کم: لومړی ۵ ځله ساه، بیا په دواړو غټو ګوتو سینه کېکاږئ.",
+    "en": "Under 1 year: 5 breaths first, then push with two thumbs."
+  },
+  "image": "cpr-baby",
+  "blocks": [
+    {
+      "id": "cpr-baby.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اگر شیرخوار بیدار نمی‌شود و عادی نفس نمی‌کشد، همین حالا شروع کنید. نفس دادن و فشار دادن شما، مغز را تا رسیدن کمک زنده نگه می‌دارد.",
+        "ps": "که تي خوړونکی ماشوم نه راویښېږي او په عادي ډول ساه نه اخلي، سمدستي پیل وکړئ. ستاسو ساه ورکول او فشار ورکول، تر څو مرسته رسېږي، دماغ ژوندی ساتي.",
+        "en": "If a baby does not wake and is not breathing normally, start at once. Your breaths and pushes keep the brain alive until help comes."
+      }
+    },
+    {
+      "id": "cpr-baby.anim",
+      "type": "anim",
+      "anim": "cpr",
+      "pick": "cpr-baby"
+    },
+    {
+      "id": "cpr-baby.check",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "بیدارش کنید و کمک بخواهید",
+        "ps": "راویښ یې کړئ او مرسته وغواړئ",
+        "en": "Check and shout for help"
+      },
+      "text": {
+        "fa": "به کف پایش آهسته بزنید و نامش را صدا کنید. اگر جواب نداد، بلند کمک بخواهید و یک نفر را برای آوردن موتر بفرستید.",
+        "ps": "د پښو په تلي یې ورو ووهئ او نوم یې واخلئ. که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ او یو څوک د موټر راوړلو لپاره ولېږئ.",
+        "en": "Tap the soles of the feet and call the baby's name. If there is no answer, shout for help and send someone for a car."
+      }
+    },
+    {
+      "id": "cpr-baby.airway",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "راه نفس را باز کنید",
+        "ps": "د ساه لاره خلاصه کړئ",
+        "en": "Open the airway, look for breathing"
+      },
+      "text": {
+        "fa": "شیرخوار را به پشت روی زمین سخت بخوابانید. سرش را راست نگه دارید، زیاد به عقب نبرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې نېغ وساتئ، ډېر یې شاته مه کوئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
+        "en": "Lay the baby on its back on a firm floor. Keep the head straight, not bent back, lift the chin, and watch the chest for 10 seconds."
+      }
+    },
+    {
+      "id": "cpr-baby.breaths",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "اول ۵ بار نفس بدهید",
+        "ps": "لومړی ۵ ځله ساه ورکړئ",
+        "en": "Give 5 breaths first"
+      },
+      "text": {
+        "fa": "دهان و بینی شیرخوار را با دهان خود بپوشانید. آهسته پف کنید، فقط آن‌قدر که سینه‌اش بالا بیاید، ۵ بار.",
+        "ps": "د ماشوم خوله او پوزه په خپله خوله وپوښئ. ورو پو کړئ، یوازې دومره چې سینه یې پورته شي، ۵ ځله.",
+        "en": "Cover the baby's mouth and nose with your mouth. Blow gently, just enough to make the chest rise, 5 times."
+      },
+      "picture": "em-cpr-baby-breaths"
+    },
+    {
+      "id": "cpr-baby.thumbs",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "با دو شست فشار دهید",
+        "ps": "په دواړو غټو ګوتو فشار ورکړئ",
+        "en": "Push with two thumbs"
+      },
+      "text": {
+        "fa": "سینه را با هر دو دست بگیرید و هر دو شست را در وسط استخوان سینه بگذارید. یک سوم سینه، حدود ۴ سانتی‌متر، پایین فشار دهید.",
+        "ps": "سینه په دواړو لاسونو ونیسئ او دواړه غټې ګوتې د سینې د هډوکي په منځ کې کېږدئ. د سینې درېیمه برخه، شاوخوا ۴ سانتي متره، لاندې فشار ورکړئ.",
+        "en": "Hold the chest in both hands with both thumbs on the middle of the breastbone. Push down a third of the chest, about 4 centimetres."
+      },
+      "picture": "em-cpr-baby-thumbs"
+    },
+    {
+      "id": "cpr-baby.rhythm",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "۳۰ فشار، بعد ۲ نفس",
+        "ps": "۳۰ فشارونه، بیا ۲ ساه",
+        "en": "30 pushes, then 2 breaths"
+      },
+      "text": {
+        "fa": "تیز فشار دهید، تقریباً ۲ بار در هر ثانیه، و بگذارید سینه دوباره بالا بیاید. بعد از ۳۰ فشار، ۲ بار نفس بدهید و باز فشار دهید.",
+        "ps": "چټک فشار ورکړئ، په هره ثانیه کې شاوخوا ۲ ځله، او پرېږدئ چې سینه بېرته پورته شي. له ۳۰ فشارونو وروسته ۲ ځله ساه ورکړئ او بیا فشار ورکړئ.",
+        "en": "Push fast, about 2 times every second, and let the chest come back up. After 30 pushes give 2 breaths, then push again."
+      }
+    },
+    {
+      "id": "cpr-baby.keep-going",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "توقف نکنید",
+        "ps": "مه درېږئ",
+        "en": "Do not stop"
+      },
+      "text": {
+        "fa": "ادامه دهید تا شیرخوار گریه کند، تکان بخورد یا نفس بکشد، یا کارمند صحی کار را به دست بگیرد. در موتر هم ادامه دهید.",
+        "ps": "دوام ورکړئ تر څو ماشوم وژاړي، وخوځېږي یا ساه واخلي، یا روغتیايي کارکوونکی کار پر غاړه واخلي. په موټر کې هم دوام ورکړئ.",
+        "en": "Keep going until the baby cries, moves or breathes, or a health worker takes over. Keep going in the car too."
+      }
+    },
+    {
+      "id": "cpr-baby.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "حتی اگر شیرخوار خوب معلوم شود، همین حالا به شفاخانه بروید، شب باشد یا روز، اگر:",
+        "ps": "که ماشوم روغ هم ښکاري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که:",
+        "en": "Go to hospital now, day or night, even if the baby seems well, if it:"
+      },
+      "items": [
+        {
+          "id": "cpr-baby.urgent.needed-help",
+          "icon": "heart",
+          "text": {
+            "fa": "نفس دادن یا فشار سینه لازم داشت",
+            "ps": "ساه ورکولو یا د سینې فشار ته یې اړتیا درلوده",
+            "en": "needed breaths or chest pushes"
+          }
+        },
+        {
+          "id": "cpr-baby.urgent.stopped",
+          "icon": "breathe",
+          "text": {
+            "fa": "حتی برای مدت کوتاه نفسش بند شد",
+            "ps": "که څه هم لږ وخت، ساه یې بنده شوه",
+            "en": "stopped breathing, even for a short time"
+          }
+        },
+        {
+          "id": "cpr-baby.urgent.colour",
+          "icon": "sleepy",
+          "text": {
+            "fa": "کبود یا خاکستری شد، یا بدنش سست شد",
+            "ps": "شین یا خړ شو، یا بدن یې سست شو",
+            "en": "turned blue or grey, or went floppy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cpr-baby.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "cpr-baby.dont.shake",
+          "icon": "no",
+          "text": {
+            "fa": "شیرخوار را تکان ندهید",
+            "ps": "ماشوم مه ښوروئ",
+            "en": "shake the baby"
+          }
+        },
+        {
+          "id": "cpr-baby.dont.upside-down",
+          "icon": "no",
+          "text": {
+            "fa": "شیرخوار را از پاها سرچپه آویزان نکنید",
+            "ps": "ماشوم له پښو سرچپه مه ځړوئ",
+            "en": "hold the baby upside down by the feet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cpr-baby.alone",
+      "type": "tip",
+      "icon": "people",
+      "text": {
+        "fa": "اگر تنها هستید، اول ۱ دقیقه این کار را بکنید، بعد شیرخوار را با خود بردارید و برای کمک بروید.",
+        "ps": "که یوازې یاست، لومړی ۱ دقیقه دا کار وکړئ، بیا ماشوم له ځان سره واخلئ او د مرستې لپاره ولاړ شئ.",
+        "en": "If you are alone, do this for 1 minute first, then carry the baby with you to get help."
+      }
+    },
+    {
+      "id": "cpr-baby.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه به او اکسیجن می‌دهند، قلبش را معاینه می‌کنند و علت را پیدا می‌کنند.",
+        "ps": "په روغتون کې ورته اکسیجن ورکوي، زړه یې معاینه کوي او لامل یې پیدا کوي.",
+        "en": "At hospital they give oxygen, check the heart and find out what caused it."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: Basic Life Support and Paediatric Life Support (lay rescuer sequences)",
+    "American Heart Association 2025 Guidelines for CPR and ECC: Adult and Pediatric Basic Life Support",
+    "ILCOR 2025 International Consensus on CPR and ECC Science with Treatment Recommendations",
+    "Resuscitation Council UK 2025: Paediatric out-of-hospital basic life support algorithm",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): resuscitation",
+    "WHO Pocket book of hospital care for children, 2nd edition (2013): chart 3, infant airway position"
+  ],
+  "review": [
+    "Two thumbs, not two fingers. ERC/RCUK 2025 replaced the two-finger method with the two-thumb encircling method for infants. AHA 2025 allows two thumbs or the heel of one hand. Two thumbs used here, and the picture shows it.",
+    "Ratio 30:2 after 5 first breaths. ERC 2025 uses 15:2 for trained rescuers. RCUK 2025 allows lay bystanders 30:2 or 15:2. 30:2 was chosen so every age uses one number, the same as the adult page and the animation. Change to 15:2 if you prefer.",
+    "Depth 'a third of the chest, about 4 cm' (ERC/AHA).",
+    "Lone rescuer: 1 minute of CPR, then carry the baby to get help (ERC/RCUK). There is no ambulance number, so 'send someone for a car'.",
+    "Response check by tapping the soles of the feet is common teaching. ERC says 'stimulate', with no set method."
+  ]
+}

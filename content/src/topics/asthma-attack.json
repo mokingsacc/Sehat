@@ -1,0 +1,194 @@
+{
+  "id": "asthma-attack",
+  "section": "everyone",
+  "title": {
+    "fa": "حملهٔ نفس‌تنگی (استما)",
+    "ps": "د ساه لنډۍ حمله",
+    "en": "Asthma attack"
+  },
+  "summary": {
+    "fa": "بنشانید، اسپری آبی را بزنید، اگر زود بهتر نشد، به شفاخانه بروید.",
+    "ps": "کېنوئ یې، شین پف وکاروئ، که ژر ښه نه شو، روغتون ته ولاړ شئ.",
+    "en": "Sit them up, use the blue inhaler, go if not better fast."
+  },
+  "image": "asthma-attack",
+  "blocks": [
+    {
+      "id": "asthma-attack.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در حملهٔ نفس‌تنگی، راه‌های نفس تنگ می‌شوند. شخص سرفه و خس‌خس می‌کند و خوب نفس کشیده نمی‌تواند. کمک زود با اسپری اکثراً فایده می‌کند.",
+        "ps": "د ساه لنډۍ په حمله کې د ساه لارې تنګېږي. کس ټوخی او خرخر کوي او ښه ساه نشي اخیستلی. په پف سره ژره مرسته اکثره ګټه کوي.",
+        "en": "In an asthma attack the airways tighten. The person coughs, wheezes and cannot breathe well. Quick help with their inhaler usually works."
+      }
+    },
+    {
+      "id": "asthma-attack.sit",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "بنشانید، آرام بمانید",
+        "ps": "کېنوئ یې، ارام اوسئ",
+        "en": "Sit them up, stay calm"
+      },
+      "text": {
+        "fa": "کمکش کنید که راست بنشیند، کمی به پیش خم. لباس تنگ را سست کنید. آرام گپ بزنید؛ ترس آن را بدتر می‌کند.",
+        "ps": "مرسته ورسره وکړئ چې نېغ کېني، لږ مخ ته کوږ. تنګې جامې یې سستې کړئ. په ارامۍ خبرې وکړئ؛ وېره یې بدتروي.",
+        "en": "Help them sit up, leaning slightly forward. Loosen tight clothes. Speak calmly; fear makes it worse."
+      }
+    },
+    {
+      "id": "asthma-attack.inhaler",
+      "type": "step",
+      "icon": "lungs",
+      "title": {
+        "fa": "اسپری آبی را بزنید",
+        "ps": "شین پف وکاروئ",
+        "en": "Use the blue reliever inhaler"
+      },
+      "text": {
+        "fa": "اسپری آبی را همان‌طور بزنید که کلینیک یاد داده، اگر فاصله‌دهنده دارد با آن. پف‌ها را یکی یکی بزنید.",
+        "ps": "شین پف هماغسې وکاروئ لکه کلینیک چې در زده کړي، که فاصله ورکوونکی لري له هغه سره. پفونه یو یو وکړئ.",
+        "en": "Use the blue reliever inhaler as the clinic showed you, with a spacer if they have one. Give the puffs one at a time."
+      },
+      "picture": "em-asthma-spacer"
+    },
+    {
+      "id": "asthma-attack.worse",
+      "type": "step",
+      "icon": "hospital",
+      "title": {
+        "fa": "بهتر نشد؟ ادامه دهید و بروید",
+        "ps": "ښه نه شو؟ دوام ورکړئ او ولاړ شئ",
+        "en": "Not better? Keep going and go"
+      },
+      "text": {
+        "fa": "اگر بعد از پف‌هایی که کلینیک گفته بهتر نشد یا بدتر شد، همین حالا به شفاخانه بروید، شب باشد یا روز. در راه هم اسپری را بزنید.",
+        "ps": "که له هغو پفونو وروسته چې کلینیک ویلي ښه نه شو یا بدتر شو، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې هم پف وکاروئ.",
+        "en": "If they are not better after the puffs the clinic advised, or get worse, go to hospital now. Keep using the inhaler on the way."
+      }
+    },
+    {
+      "id": "asthma-attack.smoke",
+      "type": "step",
+      "icon": "smoke",
+      "title": {
+        "fa": "از دود و گرد دور نگه دارید",
+        "ps": "له لوګي او دوړو لرې یې وساتئ",
+        "en": "Keep away from smoke and dust"
+      },
+      "text": {
+        "fa": "دود آتش، بخاری و تنباکو و گرد و خاک می‌تواند حمله را شروع کند. شخص، خصوصاً طفل را از آن‌ها دور نگه دارید.",
+        "ps": "د اور، بخارۍ او تنباکو لوګی او دوړې کولی شي حمله پیل کړي. کس، په ځانګړې توګه ماشوم، ترې لرې وساتئ.",
+        "en": "Smoke from fires, stoves and tobacco, and dust, can start an attack. Keep the person, most of all a child, away from them."
+      }
+    },
+    {
+      "id": "asthma-attack.plan",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "از کلینیک پلان بخواهید",
+        "ps": "له کلینیک پلان وغواړئ",
+        "en": "Ask the clinic for a plan"
+      },
+      "text": {
+        "fa": "هر کسی که نفس‌تنگی دارد، باید در خانه اسپری داشته باشد و بداند چه وقت آن را بزند. از کلینیک بخواهید که به شما نشان بدهد.",
+        "ps": "هر څوک چې د ساه لنډۍ لري، باید په کور کې پف ولري او پوه شي چې کله یې وکاروي. له کلینیک وغواړئ چې تاسو ته یې وښيي.",
+        "en": "Everyone with asthma should keep an inhaler at home and know when to use it. Ask the clinic to show you."
+      }
+    },
+    {
+      "id": "asthma-attack.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی که نفس‌تنگی دارد این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که د ساه لنډۍ ناروغ دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone with asthma:"
+      },
+      "items": [
+        {
+          "id": "asthma-attack.urgent.speak",
+          "icon": "talk",
+          "text": {
+            "fa": "از تنگی نفس گپ زده، غذا خورده یا شیر خورده نمی‌تواند",
+            "ps": "د ساه لنډۍ له امله خبرې، خواړه یا تي رودل نشي کولی",
+            "en": "is too breathless to talk, eat or breastfeed"
+          }
+        },
+        {
+          "id": "asthma-attack.urgent.blue",
+          "icon": "breathe",
+          "text": {
+            "fa": "لب یا صورتش کبود یا خاکستری می‌شود",
+            "ps": "شونډې یا مخ یې شین یا خړ کېږي",
+            "en": "has lips or face turning blue or grey"
+          }
+        },
+        {
+          "id": "asthma-attack.urgent.chest",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "پایین سینه‌اش به داخل کش می‌شود",
+            "ps": "د سینې لاندې برخه یې ننوځي",
+            "en": "has the lower chest pulling in"
+          }
+        },
+        {
+          "id": "asthma-attack.urgent.drowsy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خواب‌آلود، گیج یا بسیار خسته است",
+            "ps": "خوب وړی، ګډوډ یا ډېر ستړی دی",
+            "en": "is drowsy, confused or exhausted"
+          }
+        },
+        {
+          "id": "asthma-attack.urgent.not-better",
+          "icon": "lungs",
+          "text": {
+            "fa": "بعد از اسپری بهتر نشد",
+            "ps": "له پف وروسته ښه نه شو",
+            "en": "is not better after the inhaler"
+          }
+        }
+      ]
+    },
+    {
+      "id": "asthma-attack.bottle",
+      "type": "tip",
+      "icon": "lungs",
+      "text": {
+        "fa": "فاصله‌دهنده ندارید؟ اسپری را در سوراخی در ته یک بوتل پلاستیکی پاک جا کنید و از دهن بوتل نفس بکشید.",
+        "ps": "فاصله ورکوونکی نه لرئ؟ پف د یوه پاک پلاستیکي بوتل د تل په سوري کې ننباسئ، او د بوتل له خولې ساه واخلئ.",
+        "en": "No spacer? Push the inhaler into a hole cut in the bottom of a clean plastic bottle, and breathe through the bottle's neck."
+      }
+    },
+    {
+      "id": "asthma-attack.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه اکسیجن و دواهای قوی‌تر برای باز کردن راه نفس می‌دهند.",
+        "ps": "په روغتون کې اکسیجن او د ساه د لارو د خلاصولو لپاره قوي درمل ورکوي.",
+        "en": "At hospital they give oxygen and stronger medicines to open the airways."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Package of Essential Noncommunicable Disease Interventions (WHO PEN, 2020): asthma, acute attack and referral",
+    "WHO Pocket book of hospital care for children, 2nd edition (2013): wheeze and asthma, home-made spacer from a 500 ml plastic bottle",
+    "Global Initiative for Asthma (GINA) 2025: action plan for worsening asthma",
+    "European Resuscitation Council Guidelines 2025: First Aid: asthma (help with own reliever inhaler)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): asthma",
+    "WHO IMCI Chart Booklet (2014): chest indrawing"
+  ],
+  "review": [
+    "No puff numbers: the spec allows no medicine doses. UK teaching for an attack is 1 puff every 30 to 60 seconds up to 10 puffs. The text says 'the puffs the clinic advised'. Decide whether to give the number.",
+    "'Blue inhaler' assumes salbutamol inhalers are blue in Afghanistan. Check.",
+    "Home-made spacer from a plastic bottle is in the WHO pocket book.",
+    "Dari 'اسپری' and 'فاصله‌دهنده', Pashto 'پف' and 'فاصله ورکوونکی' for inhaler and spacer: check local words.",
+    "No 'dont' block."
+  ]
+}

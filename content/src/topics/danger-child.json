@@ -72,9 +72,9 @@
           "id": "danger-child.urgent.breathing",
           "icon": "breathing-fast",
           "text": {
-            "fa": "تیز تیز یا به سختی نفس می‌کشد",
-            "ps": "ژر ژر یا په سختۍ سا اخلي",
-            "en": "breathes fast or with difficulty"
+            "fa": "به سختی زیاد نفس می‌کشد، یا در حالت آرام نفسش صدا می‌کند",
+            "ps": "په ډېره سختۍ سا اخلي، یا په آرامه حالت کې یې سا غږ کوي",
+            "en": "struggles to breathe, or breathing is noisy when calm"
           }
         },
         {
@@ -164,6 +164,22 @@
       ]
     },
     {
+      "id": "danger-child.counter",
+      "type": "link",
+      "to": "tool/breaths",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس‌ها را با گوشی بشمارید",
+        "ps": "ساه په ټیلیفون وشمېرئ",
+        "en": "Count breaths with the phone"
+      },
+      "text": {
+        "fa": "گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.",
+        "ps": "ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.",
+        "en": "The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast."
+      }
+    },
+    {
       "id": "danger-child.soon",
       "type": "alert",
       "level": "soon",
@@ -173,6 +189,15 @@
         "en": "If your child has any of these signs, go to the clinic today:"
       },
       "items": [
+        {
+          "id": "danger-child.soon.fast",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز نفس می‌کشد، اما هیچ یک از علایم رفتن به شفاخانه را ندارد",
+            "ps": "ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري",
+            "en": "breathes fast, but has none of the hospital signs"
+          }
+        },
         {
           "id": "danger-child.soon.worse",
           "icon": "warning",
@@ -295,10 +320,10 @@
     "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses"
   ],
   "review": [
-    "Urgent alert puts fast breathing alone in 'hospital now'. IMCI classes fast breathing without chest indrawing or a danger sign as pneumonia treated at the clinic with oral amoxicillin. Kept as urgent because families cannot easily separate fast from difficult breathing and Afghan clinics may be far; consider moving to the soon alert.",
     "Fever threshold for young infants is not given as a number here ('has a fever, or the body feels cold'); WHO uses 37.5 C or more (axillary) and below 35.5 C.",
     "'Keep a young baby warm' tells families to cover the baby; this is for small or young babies with cold or normal temperature, not for an older child with high fever. Check that this reads correctly.",
     "Soon alert: 'fever for more than 2 days' follows the IMCI caregiver 'return if not better' advice; the CHW guide uses fever for 7 days or more as a referral sign.",
-    "Dari 'مدفوع' (stool) is formal; a native reviewer may prefer a more everyday Afghan word."
+    "Dari 'مدفوع' (stool) is formal; a native reviewer may prefer a more everyday Afghan word.",
+    "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. danger-child.urgent.breathing now means severe difficulty or stridor; fast breathing alone moved to the new danger-child.soon.fast; the under-2-months box keeps 60 or more = hospital."
   ]
 }

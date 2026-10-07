@@ -19,6 +19,8 @@ jobs:
         run: |
           mkdir site
           cp -r index.html manifest.webmanifest sw.js css js fonts img content site/
+          [ -d anim ] && cp -r anim site/ && rm -f site/anim/demo.html || true   # explainer animations (js/anim.js plays them), with anim/cine/
+          find site -name '*.cjs' -delete   # local screenshot helpers, not part of the app
           [ -d audio ] && cp -r audio site/ || true
           rm -rf site/img/_preview site/content/src site/content/scripts site/js/sw.template.js
           touch site/.nojekyll

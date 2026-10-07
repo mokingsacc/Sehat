@@ -1,0 +1,243 @@
+{
+  "id": "choking",
+  "section": "everyone",
+  "title": {
+    "fa": "بند شدن گلو: طفل بالای ۱ سال و بزرگسال",
+    "ps": "د ستوني بندېدل: له ۱ کال لوی ماشوم او لوی کس",
+    "en": "Choking: child over 1, adult"
+  },
+  "summary": {
+    "fa": "۵ ضربه به پشت، بعد ۵ فشار به شکم. تکرار کنید تا باز شود.",
+    "ps": "شا ته ۵ ګوزارونه، بیا پر ګېډه ۵ فشارونه. تکرار یې کړئ تر څو خلاص شي.",
+    "en": "5 back blows, then 5 belly pushes. Repeat until it clears."
+  },
+  "image": "choking",
+  "blocks": [
+    {
+      "id": "choking.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کسی که هنگام خوردن ناگهان گپ زده، سرفه کرده یا نفس کشیده نمی‌تواند، گلویش بند شده است. شاید گلوی خود را بگیرد. فوراً عمل کنید.",
+        "ps": "هغه څوک چې د خوړلو پر مهال ناڅاپه خبرې، ټوخی یا ساه نشي کولی، ستونی یې بند شوی. کېدای شي خپل ستونی ونیسي. سمدستي کار وکړئ.",
+        "en": "Someone who suddenly cannot speak, cough or breathe while eating is choking. They may hold their throat. Act at once."
+      }
+    },
+    {
+      "id": "choking.cough",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "اگر سرفه می‌تواند، بگویید سرفه کند",
+        "ps": "که ټوخی کولی شي، ټوخي ته یې وهڅوئ",
+        "en": "If they can cough, let them cough"
+      },
+      "text": {
+        "fa": "اگر سرفه کرده یا گپ زده می‌تواند، بگویید محکم سرفه کند. پیشش بمانید. هنوز به پشتش نزنید.",
+        "ps": "که ټوخی یا خبرې کولی شي، ورته ووایئ چې کلک ټوخی وکړي. ورسره پاتې شئ. لا یې شا مه وهئ.",
+        "en": "If they can cough or speak, tell them to keep coughing hard. Stay with them. Do not hit their back yet."
+      }
+    },
+    {
+      "id": "choking.back",
+      "type": "step",
+      "icon": "choking",
+      "title": {
+        "fa": "۵ ضربه به پشت",
+        "ps": "شا ته ۵ ګوزارونه",
+        "en": "5 blows on the back"
+      },
+      "text": {
+        "fa": "پهلو و پشت سرش بایستید و او را به پیش خم کنید، سینه‌اش را با یک دست بگیرید. با قسمت پایین کف دست، ۵ ضربهٔ محکم بین دو شانه‌اش بزنید.",
+        "ps": "د هغه تر څنګ او شا ودرېږئ، مخ ته یې کوږ کړئ او سینه یې په یوه لاس ونیسئ. د ورغوي په لاندې برخه د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ.",
+        "en": "Stand to the side and behind. Lean them forward, holding the chest with one hand. Give 5 firm blows between the shoulder blades with the heel of your hand."
+      },
+      "picture": "em-choking-adult-back"
+    },
+    {
+      "id": "choking.belly",
+      "type": "step",
+      "icon": "belly-pain",
+      "title": {
+        "fa": "۵ فشار به شکم",
+        "ps": "پر ګېډه ۵ فشارونه",
+        "en": "5 pushes on the belly"
+      },
+      "text": {
+        "fa": "پشت سرش بایستید و دست‌ها را دور کمرش بگیرید. مشت خود را بالای نافش بگذارید، با دست دیگر بگیرید و ۵ بار تیز به داخل و بالا بکشید.",
+        "ps": "شا ته یې ودرېږئ او لاسونه یې د ملا شاوخوا تاو کړئ. خپل موټی د نوم پورته کېږدئ، په بل لاس یې ونیسئ او ۵ ځله په چټکۍ سره ننه او پورته یې راکاږئ.",
+        "en": "Stand behind, arms round the waist. Put a fist above the navel, hold it with the other hand, and pull sharply in and up, 5 times."
+      },
+      "picture": "em-choking-adult-belly"
+    },
+    {
+      "id": "choking.repeat",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "تکرار کنید تا بیرون شود",
+        "ps": "تکرار یې کړئ تر څو ووځي",
+        "en": "Repeat until it comes out"
+      },
+      "text": {
+        "fa": "باز ۵ ضربه به پشت و ۵ فشار به شکم بدهید تا غذا بیرون شود. برای طفل خورد، پشت سرش زانو بزنید.",
+        "ps": "بیا بیا شا ته ۵ ګوزارونه او پر ګېډه ۵ فشارونه ورکړئ تر څو خواړه ووځي. د کوچني ماشوم لپاره، شا ته یې په زنګنونو کېنئ.",
+        "en": "Keep giving 5 back blows and 5 belly pushes until the food comes out. For a small child, kneel behind them."
+      }
+    },
+    {
+      "id": "choking.pregnant",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "زن حامله یا شخص بسیار چاق: فشار سینه",
+        "ps": "امیندواره یا ډېر چاغ کس: د سینې فشار",
+        "en": "Pregnant or very large: chest pushes"
+      },
+      "text": {
+        "fa": "اگر زن حامله است یا دست‌ها دور کمرش نمی‌رسد، مشت خود را به جای شکم روی پایین استخوان سینه بگذارید و ۵ بار به عقب بکشید.",
+        "ps": "که ښځه امیندواره وي یا لاسونه مو د ملا شاوخوا نه رسېږي، خپل موټی د ګېډې پر ځای د سینې د هډوکي په لاندې برخه کېږدئ او ۵ ځله شاته یې راکاږئ.",
+        "en": "If she is pregnant, or you cannot reach round the waist, put your fist on the lower breastbone instead and pull straight back 5 times."
+      }
+    },
+    {
+      "id": "choking.collapse",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "اگر بی‌هوش شد، فشار سینه",
+        "ps": "که بې‌هوښه شو، د سینې فشار",
+        "en": "If they collapse, start chest pushes"
+      },
+      "text": {
+        "fa": "اگر دیگر جواب نمی‌دهد، او را روی زمین بخوابانید و یک نفر را برای آوردن موتر بفرستید. فشار سینه را شروع کنید؛ به طفل اول ۵ بار نفس بدهید.",
+        "ps": "که نور ځواب نه ورکوي، په ځمکه یې وغځوئ او یو څوک د موټر راوړلو لپاره ولېږئ. د سینې فشار پیل کړئ؛ ماشوم ته لومړی ۵ ځله ساه ورکړئ.",
+        "en": "If they stop responding, lay them down and send for a car. Start chest pushes; give a child 5 breaths first."
+      }
+    },
+    {
+      "id": "choking.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شخص این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که کس دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if the person:"
+      },
+      "items": [
+        {
+          "id": "choking.urgent.thrusts",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "به شکم یا سینه‌اش فشار داده شد",
+            "ps": "پر ګېډه یا سینه یې فشار ورکړل شو",
+            "en": "was given belly or chest pushes"
+          }
+        },
+        {
+          "id": "choking.urgent.cough",
+          "icon": "cough",
+          "text": {
+            "fa": "هنوز سرفه می‌کند، درد دارد یا قورت داده نمی‌تواند",
+            "ps": "لا هم ټوخی کوي، درد لري یا تېرولی نشي",
+            "en": "still coughs, has pain, or cannot swallow"
+          }
+        },
+        {
+          "id": "choking.urgent.noisy",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "با صدا یا به سختی نفس می‌کشد",
+            "ps": "په غږ یا په سختۍ ساه اخلي",
+            "en": "breathes noisily or with difficulty"
+          }
+        },
+        {
+          "id": "choking.urgent.unconscious",
+          "icon": "sleepy",
+          "text": {
+            "fa": "حتی برای مدت کوتاه بی‌هوش شد",
+            "ps": "که څه هم لږ وخت، بې‌هوښه شو",
+            "en": "was unconscious, even for a short time"
+          }
+        }
+      ]
+    },
+    {
+      "id": "choking.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "choking.dont.water",
+          "icon": "no",
+          "text": {
+            "fa": "آب یا نان ندهید تا غذا پایین برود",
+            "ps": "اوبه یا ډوډۍ مه ورکوئ چې خواړه ښکته شي",
+            "en": "give water or bread to push the food down"
+          }
+        },
+        {
+          "id": "choking.dont.finger",
+          "icon": "no",
+          "text": {
+            "fa": "بدون دیدن، انگشت در دهانش نچرخانید",
+            "ps": "پرته له لیدو، ګوته یې په خوله کې مه ګرځوئ",
+            "en": "sweep a finger in the mouth without seeing"
+          }
+        },
+        {
+          "id": "choking.dont.baby",
+          "icon": "no",
+          "text": {
+            "fa": "شکم شیرخوار کمتر از ۱ سال را فشار ندهید",
+            "ps": "د له ۱ کال کم ماشوم ګېډه مه کېکاږئ",
+            "en": "push on the belly of a baby under 1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "choking.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "فشار شکم ممکن است به داخل بدن آسیب برساند. در شفاخانه این را و غذایی را که شاید در شش‌ها مانده باشد، معاینه می‌کنند.",
+        "ps": "د ګېډې فشار کېدای شي د بدن دننه ته زیان ورسوي. په روغتون کې دا او هغه خواړه چې کېدای شي په سږو کې پاتې وي، معاینه کوي.",
+        "en": "Belly pushes can hurt the inside of the body. At hospital they check for this, and for food left in the lungs."
+      }
+    },
+    {
+      "id": "choking.baby-page",
+      "type": "link",
+      "to": "topic/choking-baby",
+      "icon": "baby",
+      "title": {
+        "fa": "شیرخوار کمتر از ۱ سال؟",
+        "ps": "له ۱ کال کم ماشوم؟",
+        "en": "Baby under 1 year?"
+      },
+      "text": {
+        "fa": "صفحهٔ شیرخوار را باز کنید: ضربه به پشت و فشار به سینه، هرگز به شکم.",
+        "ps": "د ماشوم پاڼه پرانیزئ: شا ته ګوزارونه او پر سینه فشار، هېڅکله پر ګېډه نه.",
+        "en": "Open the baby page: back blows and chest pushes, never the belly."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: Basic Life Support and Paediatric Life Support, foreign-body airway obstruction",
+    "American Heart Association 2025 Guidelines: adult and pediatric foreign-body airway obstruction (back blows and abdominal thrusts for adults and children; back blows and chest thrusts for infants)",
+    "Resuscitation Council UK 2025: Paediatric choking algorithm",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking"
+  ],
+  "review": [
+    "Replaces the short first-aid.choking step (see EMERGENCIES.md for the proposed change to first-aid).",
+    "AHA 2025 now matches ERC: 5 back blows then 5 abdominal thrusts, repeated, for adults and children over 1.",
+    "Pregnant or very large: chest thrusts on the lower breastbone (ERC/AHA). The text says 'pull straight back'.",
+    "Unconscious choking: start CPR (ERC: 30 compressions; children: 5 rescue breaths first).",
+    "Pashto نوم for navel: check (it was flagged on the newborn page too)."
+  ]
+}

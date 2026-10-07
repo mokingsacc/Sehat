@@ -860,6 +860,276 @@
    "fa": "تشکر",
    "ps": "مننه",
    "en": "Thank you"
+  },
+  "breaths": {
+   "fa": "شمردن نفس",
+   "ps": "د ساه شمېرل",
+   "en": "Count breaths"
+  },
+  "breathsSub": {
+   "fa": "آیا طفل تیز نفس می‌کشد؟",
+   "ps": "ایا ماشوم چټکه ساه اخلي؟",
+   "en": "Is the child breathing fast?"
+  },
+  "reading": {
+   "fa": "عدد ماشین چه می‌گوید؟",
+   "ps": "د ماشین شمېره څه وايي؟",
+   "en": "What does the number mean?"
+  },
+  "readingSub": {
+   "fa": "ترمامتر، فشار، قند، اکسیجن، فیتهٔ بازو",
+   "ps": "ترمامیټر، فشار، شکره، اکسیجن، د مټ فیته",
+   "en": "Thermometer, blood pressure, sugar, oxygen, arm tape"
+  },
+  "kit": {
+   "fa": "بکس صحی خانه",
+   "ps": "د کور روغتیايي بکس",
+   "en": "Home health kit"
+  },
+  "kitSub": {
+   "fa": "چه بخرید، چطور استفاده کنید، عددها چه معنا دارند",
+   "ps": "څه واخلئ، څنګه یې وکاروئ، شمېرې څه مانا لري",
+   "en": "What to buy, how to use it, what the numbers mean"
+  },
+  "start": {
+   "fa": "شروع",
+   "ps": "پیل",
+   "en": "Start"
+  },
+  "tapBreath": {
+   "fa": "با هر نفس بزنید",
+   "ps": "له هرې ساه سره ټک کړئ",
+   "en": "Tap at each breath"
+  },
+  "seconds": {
+   "fa": "ثانیه",
+   "ps": "ثانیې",
+   "en": "seconds"
+  },
+  "breathsMin": {
+   "fa": "{n} نفس در یک دقیقه",
+   "ps": "په یوه دقیقه کې {n} ساه",
+   "en": "{n} breaths in one minute"
+  },
+  "fastFrom": {
+   "fa": "تیز برای این عمر: {n} یا بیشتر",
+   "ps": "د دې عمر لپاره چټکه: {n} یا ډېر",
+   "en": "Fast for this age: {n} or more"
+  },
+  "countAgain": {
+   "fa": "دوباره بشمارید",
+   "ps": "بیا یې وشمېرئ",
+   "en": "Count again"
+  },
+  "otherAge": {
+   "fa": "تغییر عمر",
+   "ps": "عمر بدلول",
+   "en": "Change age"
+  },
+  "undo": {
+   "fa": "یکی کم کن",
+   "ps": "یوه کمه کړه",
+   "en": "Take one away"
+  },
+  "showMeaning": {
+   "fa": "معنای آن را نشان بده",
+   "ps": "مانا یې وښیه",
+   "en": "Show the meaning"
+  },
+  "lvUrgent": {
+   "fa": "همین حالا شفاخانه",
+   "ps": "همدا اوس روغتون",
+   "en": "Hospital now"
+  },
+  "lvToday": {
+   "fa": "امروز کلینیک",
+   "ps": "نن کلینیک",
+   "en": "Clinic today"
+  },
+  "lvSoon": {
+   "fa": "این هفته کلینیک",
+   "ps": "په دې اونۍ کلینیک",
+   "en": "Clinic this week"
+  },
+  "lvWatch": {
+   "fa": "در خانه مراقبت کنید",
+   "ps": "په کور کې پاملرنه وکړئ",
+   "en": "Care at home and watch"
+  },
+  "lvOk": {
+   "fa": "عادی",
+   "ps": "عادي",
+   "en": "Normal"
+  },
+  "lvCheck": {
+   "fa": "دوباره اندازه کنید",
+   "ps": "بیا یې اندازه کړئ",
+   "en": "Measure again"
+  },
+  "bpTop": {
+   "fa": "عدد بالا",
+   "ps": "پورتنۍ",
+   "en": "Top"
+  },
+  "bpBottom": {
+   "fa": "عدد پایین",
+   "ps": "لاندېنۍ",
+   "en": "Bottom"
+  },
+  "anotherReading": {
+   "fa": "عدد دیگر",
+   "ps": "بله شمېره",
+   "en": "Another reading"
+  },
+  "howToUse": {
+   "fa": "طرز استفاده",
+   "ps": "د کارولو لار",
+   "en": "How to use it"
+  },
+  "sugarGood": {
+   "fa": "خوب پیش از صبحانه: {a}. دو ساعت بعد از غذا: کمتر از {b}.",
+   "ps": "له ناشتې مخکې ښه: {a}. له خوړو دوه ساعته وروسته: له {b} کم.",
+   "en": "Good before breakfast: {a}. Two hours after food: under {b}."
+  },
+  "fToC": {
+   "fa": "{f} درجهٔ فارنهایت یعنی {c} درجهٔ سانتی‌گراد",
+   "ps": "{f} درجې فارنهایټ یعنې {c} درجې سانتي ګراد",
+   "en": "{f} °F is {c} °C"
+  },
+  "red": {
+   "fa": "سرخ",
+   "ps": "سور",
+   "en": "Red"
+  },
+  "yellow": {
+   "fa": "زرد",
+   "ps": "ژېړ",
+   "en": "Yellow"
+  },
+  "green": {
+   "fa": "سبز",
+   "ps": "شین",
+   "en": "Green"
+  },
+  "tools": {
+   "fa": "وسایل",
+   "ps": "وسایل",
+   "en": "Tools"
+  },
+  "consentTitle": {
+   "fa": "کمک به بهتر شدن صحت",
+   "ps": "د صحت په ښه کولو کې مرسته",
+   "en": "Help make Sehat better"
+  },
+  "consentYes": {
+   "fa": "بلی، شمار را بفرست",
+   "ps": "هو، شمېر ولېږه",
+   "en": "Yes, send counts"
+  },
+  "consentNo": {
+   "fa": "نخیر، نفرست",
+   "ps": "نه، مه یې لېږه",
+   "en": "No, do not send"
+  },
+  "consentOk": {
+   "fa": "خوب است",
+   "ps": "سمه ده",
+   "en": "OK"
+  },
+  "consentOff": {
+   "fa": "نفرست",
+   "ps": "مه یې لېږه",
+   "en": "Do not send"
+  },
+  "skip": {
+   "fa": "حالا نه",
+   "ps": "اوس نه",
+   "en": "Skip"
+  },
+  "privacy": {
+   "fa": "حریم خصوصی",
+   "ps": "شخصي حریم",
+   "en": "Privacy"
+  },
+  "privacySub": {
+   "fa": "چه چیز فرستاده می‌شود و چه در گوشی می‌ماند",
+   "ps": "څه لېږل کېږي او څه په ټیلیفون کې پاتې کېږي",
+   "en": "What is sent and what stays on your phone"
+  },
+  "usageNowOn": {
+   "fa": "شمار استفاده: روشن",
+   "ps": "د کارونې شمېر: روښانه",
+   "en": "Usage counts: on"
+  },
+  "usageNowOff": {
+   "fa": "شمار استفاده: خاموش",
+   "ps": "د کارونې شمېر: بند",
+   "en": "Usage counts: off"
+  },
+  "fbNoNames": {
+   "fa": "لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.",
+   "ps": "مهرباني وکړئ نوم یا د ټیلیفون شمېره مه لیکئ او مه یې وایئ.",
+   "en": "Please do not write or say names or phone numbers."
+  },
+  "emergency": {
+   "fa": "حالت عاجل",
+   "ps": "بیړنی حالت",
+   "en": "Emergency"
+  },
+  "emergencySub": {
+   "fa": "کمک اول، قدم به قدم، برای هر سن",
+   "ps": "لومړنۍ مرسته، ګام په ګام، د هر عمر لپاره",
+   "en": "First aid, step by step, for every age"
+  },
+  "emergencyWho": {
+   "fa": "چه کسی کمک می‌خواهد؟",
+   "ps": "څوک مرستې ته اړتیا لري؟",
+   "en": "Who needs help?"
+  },
+  "ageNewborn": {
+   "fa": "نوزاد، همین حالا به دنیا آمده",
+   "ps": "نوی زېږېدلی ماشوم، همدا اوس زېږېدلی",
+   "en": "Newborn, just born"
+  },
+  "ageBaby": {
+   "fa": "شیرخوار کمتر از ۱ سال",
+   "ps": "له ۱ کال کم ماشوم",
+   "en": "Baby under 1 year"
+  },
+  "ageChild": {
+   "fa": "طفل، از ۱ سال تا بلوغ",
+   "ps": "ماشوم، له ۱ کال تر بلوغ پورې",
+   "en": "Child, 1 year to puberty"
+  },
+  "ageAdult": {
+   "fa": "بزرگسال یا نوجوان",
+   "ps": "لوی کس یا ځوان",
+   "en": "Adult or teenager"
+  },
+  "notBreathing": {
+   "fa": "نفس نمی‌کشد",
+   "ps": "ساه نه اخلي",
+   "en": "Not breathing"
+  },
+  "otherEmergencies": {
+   "fa": "حالات عاجل دیگر",
+   "ps": "نور بیړني حالات",
+   "en": "Other emergencies"
+  },
+  "sendForCar": {
+   "fa": "همین حالا کسی را برای آوردن موتر بفرستید.",
+   "ps": "همدا اوس یو څوک د موټر راوستلو لپاره ولېږئ.",
+   "en": "Send someone for a car now."
+  },
+  "watchHow": {
+   "fa": "ببینید چطور",
+   "ps": "وګورئ څنګه",
+   "en": "Watch how"
+  },
+  "allEmergencies": {
+   "fa": "همهٔ حالات عاجل",
+   "ps": "ټول بیړني حالات",
+   "en": "All emergencies"
   }
  },
  "say": {
@@ -972,6 +1242,486 @@
    "fa": "اگر بگویید که کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی و گروه سنی فرستاده می‌شود. هیچ نامی فرستاده نمی‌شود. کارمندان صحی با این شمار، مریضی‌های واگیر را زود پیدا می‌کنند.",
    "ps": "که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي او د عمر ډله لېږل کېږي. هېڅ نوم نه لېږل کېږي. روغتیايي کارکوونکي په دې شمېر ساري ناروغۍ ژر پیدا کوي.",
    "en": "If you say that someone at home has an illness that spreads, only the illness, your district and an age group are sent. No names are sent. Health workers use these numbers to find outbreaks early."
+  },
+  "ui.breaths": {
+   "fa": "نفس‌های طفل را بشمارید تا ببینید تیز نفس می‌کشد یا نه.",
+   "ps": "د ماشوم ساه وشمېرئ، چې وګورئ چټکه ساه اخلي که نه.",
+   "en": "Count a child's breaths, to see if the breathing is fast."
+  },
+  "ui.reading": {
+   "fa": "عدد ترمامتر، ماشین فشار، ماشین قند یا گیرهٔ اکسیجن را وارد کنید و بشنوید چه معنا دارد.",
+   "ps": "د ترمامیټر، د فشار ماشین، د شکرې ماشین یا د اکسیجن چپړکي شمېره ورکړئ، او واورئ چې څه مانا لري.",
+   "en": "Put in the number from a thermometer, blood pressure machine, sugar meter or oxygen clip, and hear what it means."
+  },
+  "ui.kit": {
+   "fa": "بکس صحی خانه: برای خانواده چه بخرید، چطور استفاده کنید و عددها چه معنا دارند.",
+   "ps": "د کور روغتیايي بکس: کورنۍ ته څه واخلئ، څنګه یې وکاروئ، او شمېرې څه مانا لري.",
+   "en": "Home health kit: what to buy for your family, how to use it, and what the numbers mean."
+  },
+  "ui.br.intro": {
+   "fa": "بشمارید که طفل در یک دقیقه چند بار نفس می‌کشد. نفس تیز می‌تواند علامت سینه‌بغل باشد. اول عمر طفل را انتخاب کنید.",
+   "ps": "وشمېرئ چې ماشوم په یوه دقیقه کې څو ځله ساه اخلي. چټکه ساه د سینه بغل نښه کېدای شي. لومړی د ماشوم عمر وټاکئ.",
+   "en": "Count how many times the child breathes in one minute. Fast breathing can be a sign of pneumonia. First, choose the child's age."
+  },
+  "ui.who.young": {
+   "fa": "طفل کمتر از ۲ ماه",
+   "ps": "تر ۲ میاشتو کم ماشوم",
+   "en": "Baby under 2 months"
+  },
+  "ui.who.infant": {
+   "fa": "طفل ۲ تا ۱۲ ماهه",
+   "ps": "د ۲ تر ۱۲ میاشتو ماشوم",
+   "en": "Baby from 2 to 12 months"
+  },
+  "ui.who.child": {
+   "fa": "طفل ۱ تا ۵ ساله",
+   "ps": "د ۱ تر ۵ کلونو ماشوم",
+   "en": "Child from 1 to 5 years"
+  },
+  "ui.who.older": {
+   "fa": "طفل بالای ۵ سال، یا بزرگسال",
+   "ps": "له ۵ کلونو پورته ماشوم، یا لوی کس",
+   "en": "Child over 5, or adult"
+  },
+  "ui.who.baby3m": {
+   "fa": "طفل کمتر از ۳ ماه",
+   "ps": "تر ۳ میاشتو کم ماشوم",
+   "en": "Baby under 3 months"
+  },
+  "ui.who.child3m": {
+   "fa": "طفل ۳ ماهه تا ۵ ساله",
+   "ps": "د ۳ میاشتو تر ۵ کلونو ماشوم",
+   "en": "Child from 3 months to 5 years"
+  },
+  "ui.who.pregnant": {
+   "fa": "زن حامله",
+   "ps": "امیندواره ښځه",
+   "en": "Pregnant woman"
+  },
+  "ui.who.adult": {
+   "fa": "بزرگسال، غیر حامله",
+   "ps": "لوی کس، چې امیندواره نه وي",
+   "en": "Adult, not pregnant"
+  },
+  "ui.who.under5": {
+   "fa": "طفل کمتر از ۵ سال",
+   "ps": "تر ۵ کلونو کم ماشوم",
+   "en": "Child under 5"
+  },
+  "ui.br.calm": {
+   "fa": "صبر کنید تا طفل آرام یا خواب باشد. وقتی گریه می‌کند یا شیر می‌خورد، نشمارید.",
+   "ps": "صبر وکړئ چې ماشوم ارام یا ویده شي. کله چې ژاړي یا تی رودي، مه یې شمېرئ.",
+   "en": "Wait until the child is calm or asleep. Do not count while the child cries or feeds."
+  },
+  "ui.br.uncover": {
+   "fa": "لباس را بالا کنید تا سینه و شکم را ببینید. طفل کوچک را گرم نگه دارید.",
+   "ps": "جامې پورته کړئ چې سینه او خېټه ووینئ. کوچنی ماشوم ګرم وساتئ.",
+   "en": "Lift the clothes so you can see the chest and belly. Keep a small baby warm."
+  },
+  "ui.br.watch": {
+   "fa": "شکم یا سینه را ببینید. هر بار که بالا می‌آید، یک نفس است.",
+   "ps": "خېټې یا سینې ته وګورئ. هر ځل چې پورته شي، یوه ساه ده.",
+   "en": "Watch the belly or chest. Each time it rises, that is one breath."
+  },
+  "ui.br.start": {
+   "fa": "دکمهٔ شروع را بزنید. بعد هر بار که شکم بالا می‌آید، دکمهٔ کلان را بزنید. گوشی می‌گوید که دقیقه تمام شد.",
+   "ps": "د پیل تڼۍ کېکاږئ. بیا هر ځل چې خېټه پورته شي، لویه تڼۍ ټک کړئ. ټیلیفون درته وايي چې دقیقه پوره شوه.",
+   "en": "Press start. Then tap the big button each time the belly rises. The phone tells you when the minute is over."
+  },
+  "ui.br.v.fast-young": {
+   "fa": "برای طفل کمتر از ۲ ماه، این نفس تیز است. می‌تواند یک مریضی خطرناک باشد. همین حالا به شفاخانه بروید، شب باشد یا روز. طفل را در راه گرم نگه دارید.",
+   "ps": "د ۲ میاشتو څخه کم ماشوم لپاره دا چټکه ساه ده. کېدای شي سخته ناروغي وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. ماشوم په لاره کې ګرم وساتئ.",
+   "en": "This is fast breathing for a baby under 2 months. It can be a serious infection. Go to hospital now, day or night. Keep the baby warm on the way."
+  },
+  "ui.br.v.fast": {
+   "fa": "برای این عمر، این نفس تیز است. می‌تواند سینه‌بغل باشد. امروز به کلینیک بروید؛ شاید طفل به دوا ضرورت داشته باشد. شیر و مایعات را ادامه دهید.",
+   "ps": "د دې عمر لپاره دا چټکه ساه ده. کېدای شي سینه بغل وي. نن کلینیک ته ولاړ شئ؛ کېدای شي ماشوم درملو ته اړتیا ولري. تی او اوبلنې ورکول دوام کړئ.",
+   "en": "This is fast breathing for the child's age. It can be pneumonia. Go to the clinic today: the child may need medicine. Keep breastfeeding and giving drinks."
+  },
+  "ui.br.v.ok": {
+   "fa": "برای این عمر، این نفس تیز نیست. باز هم علایم خطر پایین را ببینید. اگر طفل مریض معلوم می‌شود، بعداً دوباره بشمارید.",
+   "ps": "د دې عمر لپاره دا چټکه ساه نه ده. بیا هم لاندې د خطر نښې وګورئ. که ماشوم ناروغ ښکاري، وروسته بیا وشمېرئ.",
+   "en": "This is not fast breathing for this age. Still look for the danger signs below. If the child seems ill, count again later."
+  },
+  "ui.br.v.fast-older": {
+   "fa": "این نفس تیز است. امروز به کلینیک بروید. اگر نفس کشیدن یا گپ زدن سخت است، یا لب‌ها کبود می‌شود، همین حالا به شفاخانه بروید.",
+   "ps": "دا چټکه ساه ده. نن کلینیک ته ولاړ شئ. که ساه اخیستل یا خبرې کول ګران وي، یا شونډې شنې شي، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "This is fast breathing. Go to the clinic today. Go to hospital now if it is hard to breathe or talk, or the lips turn blue."
+  },
+  "ui.br.v.veryfast": {
+   "fa": "این نفس خیلی تیز است. همین حالا به شفاخانه بروید، شب باشد یا روز.",
+   "ps": "دا ډېره چټکه ساه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+   "en": "This is very fast breathing. Go to hospital now, day or night."
+  },
+  "ui.br.v.slow": {
+   "fa": "نفس‌ها خیلی کم است. با دقت یک دقیقهٔ کامل دوباره بشمارید. اگر نفس واقعاً این قدر آهسته است، برای مدتی قطع می‌شود، یا مریض به سختی بیدار می‌شود، همین حالا به شفاخانه بروید.",
+   "ps": "ساه ډېره لږه ده. په پام سره یوه بشپړه دقیقه بیا وشمېرئ. که ساه رښتیا دومره ورو وي، څه وخت ودرېږي، یا ناروغ په سختۍ ویښېږي، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Very few breaths. Count again carefully for a full minute. If the breathing is really this slow, stops for a while, or the person is hard to wake, go to hospital now."
+  },
+  "ui.br.check": {
+   "fa": "حالا این علایم خطر را ببینید. اگر یکی از آن‌ها را دیدید، همین حالا به شفاخانه بروید، شب باشد یا روز. اگر علامتی را می‌بینید، روی آن بزنید.",
+   "ps": "اوس دا د خطر نښې وګورئ. که له دې څخه یوه هم ووینئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که کومه نښه وینئ، پرې ټک کړئ.",
+   "en": "Now look for these danger signs. If you see any one of them, go to hospital now, day or night. Tap a sign if you see it."
+  },
+  "ui.br.indrawing": {
+   "fa": "کشیده شدن سینه: وقتی طفل نفس می‌کشد، پایین سینه زیر قبرغه‌ها به داخل می‌رود، به جای اینکه بیرون بیاید. این یعنی همین حالا به شفاخانه بروید.",
+   "ps": "د سینې ننوتل: کله چې ماشوم ساه اخلي، د سینې لاندې برخه د پوښتیو لاندې ننوځي، د دې پر ځای چې بهر راشي. دا پدې مانا چې همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Chest indrawing: when the child breathes in, the lower chest sinks in under the ribs, instead of moving out. This means go to hospital now."
+  },
+  "ui.br.v.danger": {
+   "fa": "شما یک علامت خطر را می‌بینید. همین حالا به شفاخانه بروید، شب باشد یا روز.",
+   "ps": "تاسو د خطر یوه نښه وینئ. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+   "en": "You see a danger sign. Go to hospital now, day or night."
+  },
+  "ui.br.clinic": {
+   "fa": "در کلینیک، کارمند صحی نفس‌ها را دوباره می‌شمارد، سینه را می‌بیند و اگر لازم بود دوای سینه‌بغل می‌دهد.",
+   "ps": "په کلینیک کې روغتیايي کارکوونکی بیا ساه شمېري، سینې ته ګوري، او که اړتیا وي د سینه بغل درمل ورکوي.",
+   "en": "At the clinic, the health worker will count the breathing again, look at the chest, and give medicine for pneumonia if needed."
+  },
+  "ui.rd.intro": {
+   "fa": "وسیله‌ای را که استفاده کردید انتخاب کنید. بعد انتخاب کنید برای چه کسی بود، و عدد را وارد کنید.",
+   "ps": "هغه سامان وټاکئ چې مو کارولی. بیا وټاکئ چې د چا لپاره و، او شمېره ورکړئ.",
+   "en": "Choose the device you used. Then choose who was checked, and put in the number."
+  },
+  "ui.rd.who": {
+   "fa": "برای چه کسی اندازه کردید؟",
+   "ps": "د چا لپاره مو اندازه کړه؟",
+   "en": "Who was checked?"
+  },
+  "ui.rd.enter.temp": {
+   "fa": "عدد ترمامتر را بنویسید.",
+   "ps": "د ترمامیټر شمېره ولیکئ.",
+   "en": "Type the number on the thermometer."
+  },
+  "ui.rd.enter.bp": {
+   "fa": "اول عدد بالا، بعد عدد پایین را بنویسید.",
+   "ps": "لومړی پورتنۍ شمېره، بیا لاندېنۍ شمېره ولیکئ.",
+   "en": "Type the top number, then the bottom number."
+  },
+  "ui.rd.enter.sugar": {
+   "fa": "واحدی را که ماشین شما نشان می‌دهد انتخاب کنید، بعد عدد را بنویسید.",
+   "ps": "هغه واحد وټاکئ چې ستاسو ماشین یې ښيي، بیا شمېره ولیکئ.",
+   "en": "Choose the unit shown on your meter, then type the number."
+  },
+  "ui.rd.enter.spo2": {
+   "fa": "عدد اکسیجن را بنویسید، همان که کنار نشان فیصد است.",
+   "ps": "د اکسیجن شمېره ولیکئ، هغه چې د سلنې نښې ته نږدې ده.",
+   "en": "Type the oxygen number, the one next to the % sign."
+  },
+  "ui.rd.enter.muac": {
+   "fa": "فیته کدام رنگ را نشان داد؟",
+   "ps": "فیتې کوم رنګ وښود؟",
+   "en": "Which colour did the tape show?"
+  },
+  "ui.rd.signs": {
+   "fa": "آیا مریض حالا یکی از این‌ها را دارد؟ روی آنچه می‌بینید بزنید. اگر هیچ کدام نیست، دکمهٔ پایین را بزنید.",
+   "ps": "ایا ناروغ اوس له دې څخه کوم یو لري؟ پر هغو ټک کړئ چې یې وینئ. که هېڅ نه وي، لاندې تڼۍ کېکاږئ.",
+   "en": "Does the person have any of these now? Tap the ones you see. If none, press the button below."
+  },
+  "ui.rd.note": {
+   "fa": "این تشخیص نیست. فقط کارمند صحی می‌تواند بگوید چه مشکلی است. اگر مریض خیلی مریض معلوم می‌شود، هر عددی که باشد، بروید.",
+   "ps": "دا تشخیص نه دی. یوازې روغتیايي کارکوونکی ویلای شي چې څه ستونزه ده. که ناروغ ډېر ناروغ ښکاري، هره شمېره چې وي، ولاړ شئ.",
+   "en": "This is not a diagnosis. Only a health worker can say what is wrong. If the person looks very ill, go, whatever the number."
+  },
+  "ui.rd.check": {
+   "fa": "این عدد غلط معلوم می‌شود. وسیله را ببینید و دوباره اندازه کنید.",
+   "ps": "دا شمېره غلطه ښکاري. سامان وګورئ او بیا یې اندازه کړئ.",
+   "en": "This number looks wrong. Check the device and measure again."
+  },
+  "ui.rd.bp-order": {
+   "fa": "عددها را ببینید. عدد بالا همیشه از عدد پایین بزرگ‌تر است.",
+   "ps": "شمېرې وګورئ. پورتنۍ شمېره تل له لاندېنۍ لویه وي.",
+   "en": "Check the numbers. The top number is always bigger than the bottom number."
+  },
+  "ui.rd.v.sign": {
+   "fa": "این علامت خطر است، هر عددی که باشد. همین حالا به شفاخانه بروید، شب باشد یا روز.",
+   "ps": "دا د خطر نښه ده، هره شمېره چې وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+   "en": "This is a danger sign, whatever the number. Go to hospital now, day or night."
+  },
+  "ui.rd.v.temp-baby-fever": {
+   "fa": "هر تب در طفل کمتر از ۳ ماه خطرناک است. همین حالا به شفاخانه بروید، شب باشد یا روز. در راه شیر دادن را ادامه دهید.",
+   "ps": "تر ۳ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.",
+   "en": "Any fever in a baby under 3 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way."
+  },
+  "ui.rd.v.temp-baby-cold": {
+   "fa": "این طفل زیاد سرد است. طفل را پوست به پوست روی سینهٔ مادر بگذارید، سرش را بپوشانید و همین حالا به شفاخانه بروید.",
+   "ps": "دا ماشوم ډېر سوړ دی. ماشوم پوستکی په پوستکي د مور پر سینه کېږدئ، سر یې پټ کړئ، او همدا اوس روغتون ته ولاړ شئ.",
+   "en": "This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now."
+  },
+  "ui.rd.v.temp-baby-cool": {
+   "fa": "کمی سرد است. طفل را پوست به پوست بگیرید، سرش را بپوشانید و بعد از ۱ ساعت دوباره اندازه کنید. اگر هنوز کمتر از ۳۶ و نیم است، یا خوب شیر نمی‌خورد، امروز به کلینیک بروید.",
+   "ps": "لږ سوړ دی. ماشوم پوستکی په پوستکي ونیسئ، سر یې پټ کړئ، او ۱ ساعت وروسته بیا یې اندازه کړئ. که لا هم له ۳۶ نیم کم وي، یا ښه تی نه رودي، نن کلینیک ته ولاړ شئ.",
+   "en": "A little cold. Hold the baby skin to skin, cover the head, and measure again in 1 hour. If still under 36.5, or the baby feeds poorly, go to the clinic today."
+  },
+  "ui.rd.v.temp-baby-ok": {
+   "fa": "برای طفل عادی است. طفل را گرم نگه دارید و بار بار شیر بدهید. اگر طفل مریض معلوم می‌شود، داغ یا سرد است یا خوب شیر نمی‌خورد، دوباره اندازه کنید.",
+   "ps": "د ماشوم لپاره عادي ده. ماشوم ګرم وساتئ او ډېر ځله تی ورکړئ. که ماشوم ناروغ ښکاري، ګرم یا سوړ وي، یا ښه تی نه رودي، بیا یې اندازه کړئ.",
+   "en": "Normal for a baby. Keep the baby warm and breastfeed often. If the baby seems ill, feels hot or cold, or feeds poorly, measure again."
+  },
+  "ui.rd.v.temp-cold": {
+   "fa": "درجهٔ حرارت خیلی پایین است. مریض را با کمپل گرم کنید و همین حالا به شفاخانه بروید.",
+   "ps": "د بدن تودوخه ډېره ټیټه ده. ناروغ په کمپلو ګرم کړئ او همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Very low temperature. Warm the person with blankets and go to hospital now."
+  },
+  "ui.rd.v.temp-low": {
+   "fa": "عدد پایین است. ببینید ترمامتر خوب زیر بغل بود، گرم نگه دارید و بعد از ۳۰ دقیقه دوباره اندازه کنید. اگر پایین ماند، یا مریض ضعیف یا خواب‌آلود است، امروز به کلینیک بروید.",
+   "ps": "شمېره ټیټه ده. وګورئ چې ترمامیټر ښه د تخرګ لاندې و، ګرم یې وساتئ، او ۳۰ دقیقې وروسته بیا یې اندازه کړئ. که ټیټه پاتې شوه، یا ناروغ کمزوری یا خوب وړی وي، نن کلینیک ته ولاړ شئ.",
+   "en": "A low reading. Check the thermometer was deep under the arm, keep warm, and measure again in 30 minutes. If it stays low, or the person is weak or sleepy, go to the clinic today."
+  },
+  "ui.rd.v.temp-ok": {
+   "fa": "تب نیست. اگر مریض به نظر می‌رسد، علایم خطر را زیر نظر بگیرید و بعداً دوباره اندازه کنید.",
+   "ps": "تبه نشته. که ناروغ ښکاري، د خطر نښو ته پام وکړئ او وروسته بیا یې اندازه کړئ.",
+   "en": "No fever. If the person seems ill, watch for danger signs and measure again later."
+  },
+  "ui.rd.v.temp-child-fever": {
+   "fa": "این تب است. مایعات و شیر بیشتر بدهید و لباس سبک بپوشانید. اگر تب بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر طفل خیلی مریض معلوم می‌شود، امروز بروید.",
+   "ps": "دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ماشوم ډېر ناروغ ښکاري، نن ولاړ شئ.",
+   "en": "This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill."
+  },
+  "ui.rd.v.temp-fever": {
+   "fa": "این تب است. استراحت کنید و زیاد مایعات بنوشید. اگر بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر مریض خیلی بد است، امروز بروید.",
+   "ps": "دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ناروغ ډېر خراب وي، نن ولاړ شئ.",
+   "en": "This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell."
+  },
+  "ui.rd.v.temp-high": {
+   "fa": "تب بلند است. زیاد مایعات بدهید و لباس سبک بپوشانید. امروز به کلینیک بروید.",
+   "ps": "لوړه تبه ده. ډېرې اوبلنې ورکړئ او سپکې جامې واغوندئ. نن کلینیک ته ولاړ شئ.",
+   "en": "A high fever. Give plenty to drink and dress lightly. Go to the clinic today."
+  },
+  "ui.rd.v.temp-very-high": {
+   "fa": "تب خیلی بلند است. مایعات بدهید، لباس سبک بپوشانید و همین حالا به شفاخانه بروید.",
+   "ps": "ډېره لوړه تبه ده. اوبلنې ورکړئ، سپکې جامې واغوندئ، او همدا اوس روغتون ته ولاړ شئ.",
+   "en": "A very high fever. Give drinks, dress lightly, and go to hospital now."
+  },
+  "ui.rd.v.temp-pregnant": {
+   "fa": "تب در حاملگی باید معاینه شود. زیاد مایعات بنوشید و امروز به کلینیک بروید. اگر درد شکم، خونریزی، یا آنقدر ضعف دارید که بلند شده نمی‌توانید، همین حالا به شفاخانه بروید.",
+   "ps": "په امیندوارۍ کې تبه باید معاینه شي. ډېرې اوبلنې وڅښئ او نن کلینیک ته ولاړ شئ. که د خېټې درد، وینه بهېدل وي، یا دومره کمزورې یاست چې نشئ پورته کېدای، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is belly pain, bleeding, or you are too weak to get up."
+  },
+  "ui.rd.v.bp-very-high": {
+   "fa": "خیلی بلند است. ۵ دقیقه آرام بنشینید و یک بار دیگر اندازه کنید. اگر هنوز ۱۸۰ بر ۱۲۰ یا بیشتر است، همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.",
+   "ps": "ډېر لوړ دی. ۵ دقیقې ارام کېنئ او یو ځل بیا یې اندازه کړئ. که لا هم ۱۸۰ پر ۱۲۰ یا ډېر وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. خپل درمل له ځان سره یوسئ.",
+   "en": "Very high. Sit quietly for 5 minutes and measure once more. If it is still 180 over 120 or more, go to hospital now, day or night. Take your medicines with you."
+  },
+  "ui.rd.v.bp-high": {
+   "fa": "بلند است. ۵ دقیقه استراحت کنید و دوباره اندازه کنید. اگر بلند ماند، همین هفته با یادداشت‌های خود به کلینیک بروید. اگر دوا دارید، هر روز بخورید.",
+   "ps": "لوړ دی. ۵ دقیقې ارام وکړئ او بیا یې اندازه کړئ. که لوړ پاتې شو، په همدې اونۍ کې له خپلو یادښتونو سره کلینیک ته ولاړ شئ. که درمل لرئ، هره ورځ یې وخورئ.",
+   "en": "High. Rest 5 minutes and measure again. If it stays high, go to the clinic this week and take your readings. If you have medicine, keep taking it every day."
+  },
+  "ui.rd.v.bp-ok": {
+   "fa": "برای اندازهٔ خانه عادی است. نمک کم بخورید و هر روز پیاده‌روی کنید. هر وقت کلینیک گفت دوباره اندازه کنید.",
+   "ps": "د کور د اندازې لپاره عادي دی. لږ مالګه وخورئ او هره ورځ پلی وګرځئ. کله چې کلینیک ووایي بیا یې اندازه کړئ.",
+   "en": "Normal for a home reading. Keep eating less salt and walking every day. Check again as the clinic tells you."
+  },
+  "ui.rd.v.bp-low": {
+   "fa": "عدد پایین است. اگر مریض خوب است، شاید برای او عادی باشد. اگر دوای فشار می‌خورد، همین هفته به کلینیک بگویید.",
+   "ps": "شمېره ټیټه ده. که ناروغ ښه وي، کېدای شي د هغه لپاره عادي وي. که د فشار درمل خوري، په همدې اونۍ کې کلینیک ته ووایئ.",
+   "en": "A low reading. If the person feels well, this can be normal for them. If they take blood pressure medicine, tell the clinic this week."
+  },
+  "ui.rd.v.bp-low-faint": {
+   "fa": "فشار پایین با سرچرخی یا بیهوش شدن. دراز بکشید، پاها را بلند کنید و آب بنوشید. امروز به کلینیک بروید. اگر دوباره بیهوش شد یا گیج شد، همین حالا به شفاخانه بروید.",
+   "ps": "ټیټ فشار له سر ګرځېدو یا بې هوښۍ سره. وغځېږئ، پښې پورته کړئ، او اوبه وڅښئ. نن کلینیک ته ولاړ شئ. که بیا بې هوښه شو یا ګډوډ شو، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Low blood pressure with dizziness or fainting. Lie down, raise the legs, and drink water. Go to the clinic today. If they faint again or become confused, go to hospital now."
+  },
+  "ui.rd.v.bp-normal-sign": {
+   "fa": "عدد بلند نیست، اما این علامت باید معاینه شود. امروز به کلینیک بروید.",
+   "ps": "شمېره لوړه نه ده، خو دا نښه باید معاینه شي. نن کلینیک ته ولاړ شئ.",
+   "en": "The number is not high, but this sign needs a check. Go to the clinic today."
+  },
+  "ui.rd.v.bp-preg-severe": {
+   "fa": "فشار خیلی بلند در حاملگی برای مادر و طفل خطرناک است. می‌تواند مرض فشار حاملگی (پری‌اکلامپسی) باشد. همین حالا به شفاخانه بروید، شب باشد یا روز.",
+   "ps": "په امیندوارۍ کې ډېر لوړ فشار مور او ماشوم ته خطرناک دی. کېدای شي د امیندوارۍ د فشار ناروغي (پري اکلامپسیا) وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+   "en": "Very high blood pressure in pregnancy is dangerous for mother and baby. It can be pre-eclampsia. Go to hospital now, day or night."
+  },
+  "ui.rd.v.bp-preg-signs": {
+   "fa": "فشار بلند در حاملگی با این علایم می‌تواند پری‌اکلامپسی باشد که تشنج می‌آورد. همین حالا به شفاخانه بروید، شب باشد یا روز.",
+   "ps": "په امیندوارۍ کې لوړ فشار له دې نښو سره کېدای شي پري اکلامپسیا وي چې اختلاج راولي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+   "en": "High blood pressure in pregnancy with these signs can be pre-eclampsia, which can cause fits. Go to hospital now, day or night."
+  },
+  "ui.rd.v.bp-preg-high": {
+   "fa": "فشار بلند در حاملگی. امروز به کلینیک بروید، حتی اگر خوب هستید. اگر سردرد شدید، تاری چشم، پندیدگی روی یا دست‌ها، یا درد شکم شروع شد، همین حالا به شفاخانه بروید.",
+   "ps": "په امیندوارۍ کې لوړ فشار. نن کلینیک ته ولاړ شئ، که څه هم ښه یاست. که سخت سر درد، د سترګو تتوالی، د مخ یا لاسونو پړسوب، یا د خېټې درد پیل شي، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "High blood pressure in pregnancy. Go to the clinic today, even if you feel well. Go to hospital now if a bad headache, blurred vision, swelling of the face or hands, or belly pain start."
+  },
+  "ui.rd.v.bp-preg-ok": {
+   "fa": "برای حاملگی عادی است. در هر مراجعهٔ حاملگی فشار را اندازه کنید. اگر سردرد شدید، تاری چشم یا پندیدگی روی شروع شد، به شفاخانه بروید.",
+   "ps": "د امیندوارۍ لپاره عادي دی. د امیندوارۍ په هره کتنه کې یې اندازه کړئ. که سخت سر درد، د سترګو تتوالی یا د مخ پړسوب پیل شي، روغتون ته ولاړ شئ.",
+   "en": "Normal for pregnancy. Have it checked at every pregnancy visit. Go to hospital if a bad headache, blurred vision or swelling of the face start."
+  },
+  "ui.rd.v.sugar-very-low": {
+   "fa": "قند خیلی پایین است. اگر قورت داده می‌تواند، همین حالا شکر بدهید: حدود ۳ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد همین حالا به شفاخانه بروید، حتی اگر بهتر شد: قند خیلی پایین می‌تواند دوباره پایین شود.",
+   "ps": "شکره ډېره ټیټه ده. که تېرولای شي، همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. بیا همدا اوس روغتون ته ولاړ شئ، که ښه هم شي: ډېره ټیټه شکره بیا راتلای شي.",
+   "en": "Very low sugar. If they can swallow, give sugar now: about 3 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back."
+  },
+  "ui.rd.v.sugar-low": {
+   "fa": "قند پایین است. همین حالا شکر بدهید: حدود ۳ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید. اگر قند دوباره پایین شد، امروز به کلینیک بروید؛ شاید دوا باید تغییر کند.",
+   "ps": "شکره ټیټه ده. همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. که شکره بیا ټیټه شوه، نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.",
+   "en": "Low sugar. Give sugar now: about 3 teaspoons in a glass of water, then some food. Measure again in 15 minutes. If low sugar happens again, go to the clinic today: the medicine may need changing."
+  },
+  "ui.rd.v.sugar-low-sign": {
+   "fa": "قند پایین با گیجی یا تشنج حالت عاجل است. اگر قورت داده می‌تواند، شکر بدهید. اگر نه، چیزی به دهانش ندهید. همین حالا به شفاخانه بروید.",
+   "ps": "ټیټه شکره له ګډوډۍ یا اختلاج سره بیړنی حالت دی. که تېرولای شي، شکره ورکړئ. که نه، په خوله کې هېڅ مه ورکوئ. همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now."
+  },
+  "ui.rd.v.sugar-ok": {
+   "fa": "در اندازهٔ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.",
+   "ps": "په ښه اندازه کې ده. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.",
+   "en": "In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit."
+  },
+  "ui.rd.v.sugar-high": {
+   "fa": "از اندازهٔ لازم بلندتر است. دوا بخورید، آب بنوشید، شکر و نان سفید کمتر بخورید و پیاده‌روی کنید. اگر بیشتر عددها همین قدر بلند است، همین هفته به کلینیک بروید.",
+   "ps": "له اړتیا لوړه ده. درمل وخورئ، اوبه وڅښئ، شکره او سپینه ډوډۍ لږ وخورئ، او پلی وګرځئ. که ډېری شمېرې دومره لوړې وي، په همدې اونۍ کلینیک ته ولاړ شئ.",
+   "en": "Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week."
+  },
+  "ui.rd.v.sugar-very-high": {
+   "fa": "خیلی بلند است. آب بنوشید، دوای همیشگی را بخورید و امروز به کلینیک بروید. اگر استفراغ، خواب‌آلودگی زیاد، یا نفس تیز و عمیق است، همین حالا به شفاخانه بروید.",
+   "ps": "ډېره لوړه ده. اوبه وڅښئ، خپل معمول درمل وخورئ، او نن کلینیک ته ولاړ شئ. که کانګې، ډېر خوب وړتیا، یا چټکه او ژوره ساه وي، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Very high. Drink water, take your usual medicine, and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing."
+  },
+  "ui.rd.v.sugar-danger": {
+   "fa": "قند به اندازهٔ خطرناک بلند است. همین حالا به شفاخانه بروید، شب باشد یا روز. اگر می‌توانید، در راه آب بنوشید.",
+   "ps": "شکره په خطرناکه کچه لوړه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که کولای شئ، په لاره کې اوبه وڅښئ.",
+   "en": "Dangerously high sugar. Go to hospital now, day or night. Drink water on the way if you can."
+  },
+  "ui.rd.v.spo2-low": {
+   "fa": "اکسیجن پایین است. همین حالا به شفاخانه بروید، شب باشد یا روز. اگر دست سرد بود یا تکان می‌خورد، گرمش کنید و یک بار دیگر اندازه کنید، اما زیاد منتظر نمانید.",
+   "ps": "اکسیجن ټیټ دی. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که لاس سوړ و یا خوځېده، ګرم یې کړئ او یو ځل بیا یې اندازه کړئ، خو ډېر انتظار مه کوئ.",
+   "en": "Low oxygen. Go to hospital now, day or night. If the hand was cold or moving, warm it and measure once more, but do not wait long."
+  },
+  "ui.rd.v.spo2-lowish": {
+   "fa": "کمتر از عادی است. دست را گرم و آرام نگه دارید و دوباره اندازه کنید. اگر ۹۳ یا ۹۴ ماند، یا نفس تنگی دارد یا حالش خوب نیست، امروز به کلینیک بروید.",
+   "ps": "له عادي کم دی. لاس ګرم او ارام ونیسئ او بیا یې اندازه کړئ. که ۹۳ یا ۹۴ پاتې شو، یا ساه لنډي لري یا ښه نه دی، نن کلینیک ته ولاړ شئ.",
+   "en": "Lower than normal. Warm the hand, keep it still, and measure again. If it stays at 93 or 94, or the person is breathless or unwell, go to the clinic today."
+  },
+  "ui.rd.v.spo2-ok": {
+   "fa": "عادی است. اما گیره ممکن است غلط کند: اگر مریض تیز نفس می‌کشد، به سختی نفس می‌کشد یا خیلی بد معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.",
+   "ps": "عادي دی. خو چپړکی کېدای شي غلطي وکړي: که ناروغ چټکه ساه اخلي، په سختۍ ساه اخلي یا ډېر خراب ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.",
+   "en": "Normal. But the clip can be wrong: if the person breathes fast, struggles to breathe or looks very unwell, see a health worker, whatever the number."
+  },
+  "ui.rd.spo2-child": {
+   "fa": "گیره‌هایی که برای بزرگسالان ساخته شده، روی اطفال خورد اکثراً خوب کار نمی‌کند. نفس‌ها را هم بشمارید و کشیده شدن سینه را ببینید.",
+   "ps": "هغه چپړکي چې د لویانو لپاره جوړ شوي، پر وړو ماشومانو اکثره ښه کار نه کوي. ساه هم وشمېرئ او د سینې ننوتل وګورئ.",
+   "en": "Clips made for adults often do not work well on small children. Count the breaths and look for chest indrawing as well."
+  },
+  "ui.rd.v.muac-red": {
+   "fa": "سرخ یعنی طفل خیلی لاغر است. امروز به کلینیک یا مرکز تغذیه بروید؛ طفل به غذای مخصوص و دوا ضرورت دارد. اگر هر دو پایش پندیده یا هیچ نمی‌خورد، همین حالا به شفاخانه بروید.",
+   "ps": "سور یعنې ماشوم ډېر ډنګر دی. نن کلینیک یا د تغذیې مرکز ته ولاړ شئ؛ ماشوم ځانګړو خوړو او درملو ته اړتیا لري. که دواړه پښې یې پړسېدلې وي یا هېڅ نه خوري، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Red means the child is very thin. Go to the clinic or nutrition centre today: the child needs special food and medicine. Go to hospital now if both feet are swollen or the child will not eat."
+  },
+  "ui.rd.v.muac-yellow": {
+   "fa": "زرد یعنی طفل لاغر است. همین هفته برای غذا و مشوره به کلینیک بروید. هر روز وعده‌های غذا و شیر مادر را بیشتر کنید.",
+   "ps": "ژېړ یعنې ماشوم ډنګر دی. په همدې اونۍ د خوړو او مشورې لپاره کلینیک ته ولاړ شئ. هره ورځ د خوړو وعدې او د مور شیدې زیاتې کړئ.",
+   "en": "Yellow means the child is too thin. Go to the clinic this week for food and advice. Give more meals and breast milk every day."
+  },
+  "ui.rd.v.muac-green": {
+   "fa": "سبز خوب است. ماه آینده دوباره اندازه کنید و غذای خوب را ادامه دهید.",
+   "ps": "شین ښه دی. راتلونکې میاشت بیا یې اندازه کړئ او ښه خواړه ورکول دوام کړئ.",
+   "en": "Green is good. Measure again next month and keep giving good food."
+  },
+  "ui.rd.clinic.temp": {
+   "fa": "در کلینیک، کارمند صحی مریض را معاینه می‌کند، علت تب را پیدا می‌کند، شاید معاینهٔ ملاریا کند و اگر لازم بود دوا می‌دهد.",
+   "ps": "په کلینیک کې روغتیايي کارکوونکی ناروغ معاینه کوي، د تبې لامل پیدا کوي، کېدای شي د ملاریا معاینه وکړي، او که اړتیا وي درمل ورکوي.",
+   "en": "At the clinic, the health worker will examine the person, look for the cause of the fever, may test for malaria, and give medicine if needed."
+  },
+  "ui.rd.clinic.bp": {
+   "fa": "در کلینیک، دوباره فشار را اندازه می‌کنند، در حاملگی پیشاب را معاینه می‌کنند، و تصمیم می‌گیرند که دوا لازم است یا باید تغییر کند. یادداشت‌های خود را ببرید.",
+   "ps": "په کلینیک کې بیا فشار اندازه کوي، په امیندوارۍ کې تشې متیازې معاینه کوي، او پرېکړه کوي چې درملو ته اړتیا ده یا باید بدل شي. خپل یادښتونه یوسئ.",
+   "en": "At the clinic, they will measure again, test the urine in pregnancy, and decide if medicine is needed or should be changed. Take your readings."
+  },
+  "ui.rd.clinic.sugar": {
+   "fa": "در کلینیک، عددهای شما را می‌بینند، دوا و پاهای شما را معاینه می‌کنند و اگر لازم بود تداوی را تغییر می‌دهند. ماشین و یادداشت‌ها را ببرید.",
+   "ps": "په کلینیک کې ستاسو شمېرې ګوري، درمل او پښې مو معاینه کوي، او که اړتیا وي درملنه بدلوي. ماشین او یادښتونه یوسئ.",
+   "en": "At the clinic, they will look at your readings, check your medicine and your feet, and change the treatment if needed. Take your meter and your notes."
+  },
+  "ui.rd.clinic.spo2": {
+   "fa": "در کلینیک یا شفاخانه، نفس و اکسیجن را با ماشین خود معاینه می‌کنند و اگر لازم بود اکسیجن یا دوا می‌دهند.",
+   "ps": "په کلینیک یا روغتون کې ساه او اکسیجن په خپل ماشین معاینه کوي، او که اړتیا وي اکسیجن یا درمل ورکوي.",
+   "en": "At the clinic or hospital, they will check the breathing and the oxygen with their own machine, and give oxygen or medicine if needed."
+  },
+  "ui.rd.clinic.muac": {
+   "fa": "در کلینیک، طفل را وزن و اندازه می‌کنند، پندیدگی و مریضی را معاینه می‌کنند و اگر لازم بود غذای مخصوص و دوا می‌دهند.",
+   "ps": "په کلینیک کې ماشوم تلي او اندازه کوي، پړسوب او ناروغي معاینه کوي، او که اړتیا وي ځانګړي خواړه او درمل ورکوي.",
+   "en": "At the clinic, they will weigh and measure the child, check for swelling and illness, and give special food and medicine if needed."
+  },
+  "ui.rd.s.faint": {
+   "fa": "سرچرخی دارد، یا بیهوش شده",
+   "ps": "سر یې ګرځي، یا بې هوښه شوی",
+   "en": "dizzy, or has fainted"
+  },
+  "ui.rd.s.blue": {
+   "fa": "لب‌ها یا روی کبود یا خاکستری است",
+   "ps": "شونډې یا مخ شین یا خړ ښکاري",
+   "en": "lips or face look blue or grey"
+  },
+  "ui.rd.s.deep": {
+   "fa": "نفس تیز و عمیق می‌کشد",
+   "ps": "چټکه او ژوره ساه اخلي",
+   "en": "breathing fast and deep"
+  },
+  "ui.consent": {
+   "fa": "آیا صحت می‌تواند شمار استفاده از برنامه را بفرستد؟ فقط شمار فرستاده می‌شود: کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد، برای هر روز یکجا. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. این به ما کمک می‌کند کتاب را بهتر بسازیم و بدانیم که چطور به خانواده‌ها کمک می‌کند. اگر نخیر بگویید، برنامه کاملاً کار می‌کند. هر وقت بخواهید، می‌توانید این را در تنظیمات تغییر دهید.",
+   "ps": "ایا صحت کولای شي د اپ د کارونې شمېر ولېږي؟ یوازې شمېر لېږل کېږي: کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو، د هرې ورځې لپاره یوځای. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. دا له موږ سره مرسته کوي چې کتاب ښه کړو او پوه شو چې کورنیو ته څنګه ګټه رسوي. که نه ووایئ، اپ بشپړ کار کوي. هر وخت چې وغواړئ، دا په تنظیماتو کې بدلولای شئ.",
+   "en": "May Sehat send counts of how the app is used? Only numbers are sent: which pages were opened, for how many minutes, and how often audio played, added up for each day. No names, no phone numbers and no location. This helps us improve the book and learn how it helps families. The app works fully if you say no. You can change this at any time in Settings."
+  },
+  "ui.consentOn": {
+   "fa": "صحت شمار استفاده از برنامه را می‌فرستد تا کتاب را بهتر بسازیم و بدانیم که چطور به خانواده‌ها کمک می‌کند. فقط شمار فرستاده می‌شود: کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد، برای هر روز یکجا. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر این را نمی‌خواهید، «نفرست» را بزنید. هر وقت بخواهید، می‌توانید این را در تنظیمات تغییر دهید.",
+   "ps": "صحت د اپ د کارونې شمېر لېږي، څو کتاب ښه کړو او پوه شو چې کورنیو ته څنګه ګټه رسوي. یوازې شمېر لېږل کېږي: کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو، د هرې ورځې لپاره یوځای. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که دا نه غواړئ، «مه یې لېږه» ووهئ. هر وخت چې وغواړئ، دا په تنظیماتو کې بدلولای شئ.",
+   "en": "Sehat sends counts of how the app is used, to help us improve the book and learn how it helps families. Only numbers are sent: which pages were opened, for how many minutes, and how often audio played, added up for each day. No names, no phone numbers and no location. If you do not want this, tap Do not send. You can change this at any time in Settings."
+  },
+  "ui.consentDistrict": {
+   "fa": "در کدام ولسوالی زندگی می‌کنید؟ این به ما نشان می‌دهد که هر منطقه به چه چیز نیاز دارد. فقط نام ولسوالی فرستاده می‌شود، نه قریه و نه نام شما. می‌توانید از این بگذرید.",
+   "ps": "په کومه ولسوالۍ کې اوسېږئ؟ دا موږ ته ښيي چې هره سیمه څه ته اړتیا لري. یوازې د ولسوالۍ نوم لېږل کېږي، نه کلی او نه ستاسو نوم. کولای شئ دا پرېږدئ.",
+   "en": "Which district do you live in? This shows us what each area needs. Only the district is sent, never your village or your name. You can skip this."
+  },
+  "ui.fbVoiceAsk": {
+   "fa": "پیام صوتی شما به گروه صحت فرستاده می‌شود تا نظر شما را بشنوند. این پیام به شما یا گوشی شما وصل نیست و بعد از ۹۰ روز پاک می‌شود. لطفاً نام یا شمارۀ تلیفون نگویید.",
+   "ps": "ستاسو غږیز پیغام د صحت ډلې ته لېږل کېږي څو ستاسو نظر واوري. دا پیغام له تاسو یا ستاسو له ټیلیفون سره نه تړل کېږي، او له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ.",
+   "en": "Your voice message will be sent to the Sehat team so they can hear your idea. It is not linked to you or your phone, and it is deleted after 90 days. Please do not say names or phone numbers."
+  },
+  "ui.privacy.phone": {
+   "fa": "آنچه در گوشی شما می‌ماند: زبان شما، نام، تاریخ تولد و واکسین‌های اطفال شما، و تنظیمات. این‌ها هرگز فرستاده نمی‌شوند.",
+   "ps": "هغه څه چې ستاسو په ټیلیفون کې پاتې کېږي: ستاسو ژبه، د ماشومانو نومونه، د زېږېدو نېټې او واکسینونه، او تنظیمات. دا هېڅکله نه لېږل کېږي.",
+   "en": "What stays on your phone: your language, your children's names, birth dates and vaccines, and your settings. These are never sent."
+  },
+  "ui.privacy.counts": {
+   "fa": "شمار استفاده، فقط اگر قبول کنید: گوشی هر روز حساب می‌کند که کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد. این شمار را روزی یک بار می‌فرستد، با نام ولسوالی اگر آن را انتخاب کرده باشید. هیچ نام، شمارۀ تلیفون، جای شما یا شمارۀ گوشی فرستاده نمی‌شود. چیزی که در جستجو می‌نویسید فرستاده نمی‌شود.",
+   "ps": "د کارونې شمېر، یوازې که ومنئ: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.",
+   "en": "Usage counts, only if you agree: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
+  },
+  "ui.privacy.watch": {
+   "fa": "دیدن مریضی‌های واگیر: اگر بگویید کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی، گروه سنی و روز فرستاده می‌شود.",
+   "ps": "د ساري ناروغیو لیدل: که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي، د عمر ډله او ورځ لېږل کېږي.",
+   "en": "Disease watch: if you say someone at home has an illness that spreads, only the illness, your district, an age group and the day are sent."
+  },
+  "ui.privacy.voice": {
+   "fa": "نظر شما: پیش از ثبت صدای شما، از شما می‌پرسیم. پیام‌ها به شما وصل نیستند. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند. لطفاً نام یا شمارۀ تلیفون نگویید و ننویسید؛ برنامه شمارۀ تلیفون را از نوشته پاک می‌کند.",
+   "ps": "ستاسو نظر: ستاسو د غږ له ثبتولو مخکې پوښتنه کوو. پیغامونه له تاسو سره نه تړل کېږي. غږیز پیغامونه له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ او مه یې لیکئ؛ اپ د ټیلیفون شمېره له لیکنې څخه پاکوي.",
+   "en": "Your ideas: we ask before recording your voice. Messages are not linked to you. Voice messages are deleted after 90 days. Please do not say or write names or phone numbers; the app removes phone numbers from writing."
+  },
+  "ui.privacy.who": {
+   "fa": "فقط گروه صحت این شمار را می‌بیند، و هر بار که کسی آن را می‌بیند یا دانلود می‌کند، نوشته می‌شود. شمار کمتر از ۵ پنهان می‌شود تا هیچ خانواده‌ای شناخته نشود. معلومات مفصل کهنه بعد از ۱۲ ماه پاک می‌شود.",
+   "ps": "یوازې د صحت ډله دا شمېر ویني، او هر ځل چې څوک یې ګوري یا ښکته کوي، لیکل کېږي. له ۵ څخه کم شمېر پټېږي، څو هېڅ کورنۍ ونه پېژندل شي. زاړه تفصیلي معلومات له ۱۲ میاشتو وروسته پاکېږي.",
+   "en": "Only the Sehat team can see the numbers, and each time someone looks or downloads, it is written down. Numbers smaller than 5 are hidden, so no family can be recognised. Old detailed records are deleted after 12 months."
+  },
+  "ui.privacy.stop": {
+   "fa": "هر وقت بخواهید، می‌توانید فرستادن را در تنظیمات خاموش کنید. برنامه بدون آن هم همان طور کار می‌کند.",
+   "ps": "هر وخت چې وغواړئ، لېږل په تنظیماتو کې بندولای شئ. اپ له هغې پرته هم همداسې کار کوي.",
+   "en": "You can stop sending at any time in Settings. The app works the same without it."
+  },
+  "ui.emergency": {
+   "fa": "حالت عاجل. اول کسی را برای آوردن موتر بفرستید. بعد، سن مریض را انتخاب کنید و مشکل را بزنید.",
+   "ps": "بیړنی حالت. لومړی یو څوک د موټر راوستلو لپاره ولېږئ. بیا د ناروغ عمر وټاکئ او ستونزه ووهئ.",
+   "en": "Emergency. First, send someone for a car. Then choose the person's age and tap the problem."
+  },
+  "ui.emergencyWho": {
+   "fa": "چه کسی کمک می‌خواهد؟ نوزاد، شیرخوار کمتر از ۱ سال، طفل، یا بزرگسال؟",
+   "ps": "څوک مرستې ته اړتیا لري؟ نوی زېږېدلی ماشوم، له ۱ کال کم ماشوم، ماشوم، که لوی کس؟",
+   "en": "Who needs help? A newborn, a baby under 1, a child, or an adult?"
+  },
+  "ui.emergencyList": {
+   "fa": "حالات عاجل: کمک اول، قدم به قدم.",
+   "ps": "بیړني حالات: لومړنۍ مرسته، ګام په ګام.",
+   "en": "Emergencies: first aid, step by step."
   }
  },
  "months": {

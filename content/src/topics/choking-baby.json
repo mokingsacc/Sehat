@@ -1,0 +1,238 @@
+{
+  "id": "choking-baby",
+  "section": "children",
+  "title": {
+    "fa": "بند شدن گلوی شیرخوار",
+    "ps": "د تي خوړونکي ماشوم د ستوني بندېدل",
+    "en": "Choking baby (under 1)"
+  },
+  "summary": {
+    "fa": "کمتر از ۱ سال: ۵ ضربه به پشت، بعد ۵ فشار به سینه.",
+    "ps": "له ۱ کال کم: شا ته ۵ ګوزارونه، بیا پر سینه ۵ فشارونه.",
+    "en": "Under 1 year: 5 back blows, then 5 chest pushes."
+  },
+  "image": "choking-baby",
+  "blocks": [
+    {
+      "id": "choking-baby.lead",
+      "type": "lead",
+      "text": {
+        "fa": "شیرخواری که ناگهان گریه، سرفه یا نفس کشیده نمی‌تواند، شاید چیزی در گلویش گیر کرده باشد. فوراً عمل کنید.",
+        "ps": "هغه تي خوړونکی ماشوم چې ناڅاپه ژړا، ټوخی یا ساه نشي کولی، کېدای شي څه شی یې په ستوني کې بند وي. سمدستي کار وکړئ.",
+        "en": "A baby who suddenly cannot cry, cough or breathe may have something stuck in the throat. Act at once."
+      }
+    },
+    {
+      "id": "choking-baby.cough",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "اگر سرفه می‌کند، بگذارید سرفه کند",
+        "ps": "که ټوخی کوي، پرېږدئ چې ټوخی وکړي",
+        "en": "If coughing, let it cough"
+      },
+      "text": {
+        "fa": "اگر شیرخوار سرفه یا گریه می‌کند، هنوز هوا می‌گیرد. پیشش بمانید و ببینید. انگشت خود را برای جستجو داخل دهانش نکنید.",
+        "ps": "که ماشوم ټوخی کوي یا ژاړي، لا هم هوا اخلي. ورسره پاتې شئ او وګورئ. د لټولو لپاره خپله ګوته یې په خوله کې مه ننباسئ.",
+        "en": "If the baby is coughing or crying, it is still getting air. Stay and watch. Do not put your finger in the mouth to look."
+      }
+    },
+    {
+      "id": "choking-baby.back",
+      "type": "step",
+      "icon": "choking",
+      "title": {
+        "fa": "۵ ضربه به پشت",
+        "ps": "شا ته ۵ ګوزارونه",
+        "en": "5 blows on the back"
+      },
+      "text": {
+        "fa": "شیرخوار را روی بازوی خود رو به پایین بخوابانید، سرش پایین‌تر از بدن، و الاشه‌اش را بگیرید. با قسمت پایین کف دست، ۵ ضربهٔ محکم بین دو شانه‌اش بزنید.",
+        "ps": "ماشوم په خپل مټ باندې مخ ښکته وغځوئ، سر یې له بدن ټیټ، او ژامه یې ونیسئ. د ورغوي په لاندې برخه د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ.",
+        "en": "Lay the baby face down along your arm, head lower than the body, holding the jaw. Give 5 firm blows between the shoulder blades with the heel of your hand."
+      },
+      "picture": "em-choking-baby-back"
+    },
+    {
+      "id": "choking-baby.chest",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "۵ فشار به سینه",
+        "ps": "پر سینه ۵ فشارونه",
+        "en": "5 pushes on the chest"
+      },
+      "text": {
+        "fa": "شیرخوار را رو به بالا بچرخانید، سرش پایین‌تر. هر دو شست را در وسط استخوان سینه بگذارید و ۵ بار تیز به داخل فشار دهید.",
+        "ps": "ماشوم مخ پورته واړوئ، سر یې ټیټ. دواړه غټې ګوتې د سینې د هډوکي په منځ کې کېږدئ او ۵ ځله په چټکۍ سره ننه فشار ورکړئ.",
+        "en": "Turn the baby face up, head lower. Put both thumbs on the middle of the breastbone and push in sharply 5 times."
+      },
+      "picture": "em-choking-baby-chest"
+    },
+    {
+      "id": "choking-baby.repeat",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "تکرار کنید تا بیرون شود",
+        "ps": "تکرار یې کړئ تر څو ووځي",
+        "en": "Repeat until it comes out"
+      },
+      "text": {
+        "fa": "دهانش را ببینید. اگر چیزی به آسانی دیده می‌شود، بیرون کنید. اگر نه، باز ۵ ضربه به پشت و ۵ فشار به سینه بدهید.",
+        "ps": "خوله یې وګورئ. که څه شی په اسانۍ ښکاري، ویې باسئ. که نه، بیا شا ته ۵ ګوزارونه او پر سینه ۵ فشارونه ورکړئ.",
+        "en": "Look in the mouth. Take out anything you can see easily. If not, give 5 back blows and 5 chest pushes again."
+      }
+    },
+    {
+      "id": "choking-baby.limp",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "اگر بی‌هوش شد، نفس و فشار سینه",
+        "ps": "که بې‌هوښه شو، ساه او د سینې فشار",
+        "en": "If limp: breaths and chest pushes"
+      },
+      "text": {
+        "fa": "اگر شیرخوار دیگر جواب نمی‌دهد، او را روی زمین سخت بخوابانید. ۵ بار نفس بدهید و فشار سینه را شروع کنید. یک نفر را برای آوردن موتر بفرستید.",
+        "ps": "که ماشوم نور ځواب نه ورکوي، په کلکه ځمکه یې وغځوئ. ۵ ځله ساه ورکړئ او د سینې فشار پیل کړئ. یو څوک د موټر راوړلو لپاره ولېږئ.",
+        "en": "If the baby stops responding, lay it on a firm floor. Give 5 breaths and start chest pushes. Send someone for a car."
+      }
+    },
+    {
+      "id": "choking-baby.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شیرخوار این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که ماشوم دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if the baby:"
+      },
+      "items": [
+        {
+          "id": "choking-baby.urgent.thrusts",
+          "icon": "choking",
+          "text": {
+            "fa": "ضربه به پشت یا فشار سینه گرفت",
+            "ps": "شا ته ګوزارونه یا د سینې فشار ورکړل شو",
+            "en": "was given back blows or chest pushes"
+          }
+        },
+        {
+          "id": "choking-baby.urgent.noisy",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "بعد از آن هنوز سرفه می‌کند یا با صدا نفس می‌کشد",
+            "ps": "وروسته لا هم ټوخی کوي یا په غږ ساه اخلي",
+            "en": "still coughs or breathes noisily afterwards"
+          }
+        },
+        {
+          "id": "choking-baby.urgent.stuck",
+          "icon": "warning",
+          "text": {
+            "fa": "شاید هنوز چیزی در گلویش باشد",
+            "ps": "کېدای شي لا هم څه شی یې په ستوني کې وي",
+            "en": "may still have something in the throat"
+          }
+        },
+        {
+          "id": "choking-baby.urgent.limp",
+          "icon": "sleepy",
+          "text": {
+            "fa": "سست یا کبود شد",
+            "ps": "سست یا شین شو",
+            "en": "went limp or blue"
+          }
+        }
+      ]
+    },
+    {
+      "id": "choking-baby.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "choking-baby.dont.belly",
+          "icon": "no",
+          "text": {
+            "fa": "شکم شیرخوار را فشار ندهید",
+            "ps": "د تي خوړونکي ماشوم ګېډه مه کېکاږئ",
+            "en": "push on a baby's belly"
+          }
+        },
+        {
+          "id": "choking-baby.dont.finger",
+          "icon": "no",
+          "text": {
+            "fa": "بدون دیدن، انگشت در دهانش نچرخانید",
+            "ps": "پرته له لیدو، ګوته یې په خوله کې مه ګرځوئ",
+            "en": "sweep a finger in the mouth without seeing"
+          }
+        },
+        {
+          "id": "choking-baby.dont.upside-down",
+          "icon": "no",
+          "text": {
+            "fa": "شیرخوار را از پاها سرچپه آویزان نکنید",
+            "ps": "ماشوم له پښو سرچپه مه ځړوئ",
+            "en": "hold the baby upside down by the feet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "choking-baby.cpr",
+      "type": "link",
+      "to": "topic/cpr-baby",
+      "icon": "breathe",
+      "title": {
+        "fa": "سست شد؟ نفس و فشار سینه بدهید",
+        "ps": "سست شو؟ ساه او د سینې فشار ورکړئ",
+        "en": "Gone limp? Breaths and chest pushes"
+      },
+      "text": {
+        "fa": "صفحهٔ «شیرخواری که نفس نمی‌کشد» را باز کنید و قدم به قدم انجام دهید.",
+        "ps": "د «تي خوړونکی ماشوم چې ساه نه اخلي» پاڼه پرانیزئ او ګام په ګام یې وکړئ.",
+        "en": "Open the page Baby not breathing and follow it step by step."
+      }
+    },
+    {
+      "id": "choking-baby.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه شش‌ها را معاینه می‌کنند و اگر چیزی مانده باشد، بیرون می‌کنند.",
+        "ps": "په روغتون کې سږي معاینه کوي او که څه پاتې وي، بهر یې باسي.",
+        "en": "At hospital they check the lungs and can take out anything left inside."
+      }
+    },
+    {
+      "id": "choking-baby.prevent",
+      "type": "tip",
+      "icon": "bowl-food",
+      "text": {
+        "fa": "چارمغز، تخمه، نخود، سکه و بازیچه‌های خورد را از شیرخوار دور نگه دارید. غذای نرم و میده‌شده بدهید.",
+        "ps": "غوز، دانې، نخود، سکې او واړه لوبتکي له ماشوم لرې وساتئ. نرم او میده خواړه ورکړئ.",
+        "en": "Keep nuts, seeds, chickpeas, coins and small toys away from babies. Give soft, mashed food."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: Basic Life Support and Paediatric Life Support, foreign-body airway obstruction",
+    "American Heart Association 2025 Guidelines: adult and pediatric foreign-body airway obstruction (back blows and abdominal thrusts for adults and children; back blows and chest thrusts for infants)",
+    "Resuscitation Council UK 2025: Paediatric choking algorithm",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking"
+  ],
+  "review": [
+    "IMPORTANT: the brief said chest thrusts 'with two fingers'. ERC/RCUK 2025 now use the two-thumb method for infant chest thrusts and CPR. AHA 2025 uses the heel of one hand. Two thumbs are used here to match the baby CPR page. To keep two fingers instead, change the step text to: 'Put two fingers on the middle of the breastbone, just below the nipple line, and push in sharply 5 times.'",
+    "No abdominal thrusts under 1 year (all guidelines).",
+    "'Baby' means under 1 year. Older children go to the 'choking' page.",
+    "Hospital after any back blows or chest thrusts: RCUK/ERC advise a medical check after abdominal or chest thrusts. Back blows alone are included here because a baby's airway may be hurt and families find it hard to judge.",
+    "Pashto ژامه for jaw and Dari الاشه (as in red-flags): check."
+  ]
+}

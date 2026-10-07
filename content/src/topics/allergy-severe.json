@@ -1,0 +1,190 @@
+{
+  "id": "allergy-severe",
+  "section": "everyone",
+  "title": {
+    "fa": "حساسیت شدید",
+    "ps": "سخت حساسیت",
+    "en": "Severe allergic reaction"
+  },
+  "summary": {
+    "fa": "پندیدن و مشکل نفس بعد از غذا، نیش زنبور یا دوا.",
+    "ps": "له خوړو، د مچۍ له چیچلو یا درملو وروسته پړسوب او د ساه ستونزه.",
+    "en": "Swelling and trouble breathing after a food, sting or medicine."
+  },
+  "image": "allergy-severe",
+  "blocks": [
+    {
+      "id": "allergy-severe.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بعضی اشخاص در برابر یک غذا، نیش زنبور یا یک دوا یا پیچکاری، حساسیت شدید پیدا می‌کنند. در چند دقیقه ممکن است بپندند و به سختی نفس بکشند.",
+        "ps": "ځینې کسان د یوه خوړو، د مچۍ یا ډبرې د چیچلو، یا د یوه درمل یا پیچکارۍ په وړاندې سخت حساسیت کوي. په څو دقیقو کې کېدای شي وپړسېږي او په سختۍ ساه واخلي.",
+        "en": "A few people react badly to a food, a bee or wasp sting, or a medicine or injection. Within minutes they can swell up and struggle to breathe."
+      }
+    },
+    {
+      "id": "allergy-severe.signs",
+      "type": "step",
+      "icon": "swelling",
+      "title": {
+        "fa": "علایم خطر را بشناسید",
+        "ps": "د خطر نښې وپېژنئ",
+        "en": "Know the danger signs"
+      },
+      "text": {
+        "fa": "پندیدن لب، زبان یا صورت، تنگ شدن گلو، نفس با صدا یا سخت، دانه‌های خارش‌دار برجسته، یا بی‌هوش شدن.",
+        "ps": "د شونډو، ژبې یا مخ پړسوب، د ستوني تنګېدل، په غږ یا سخته ساه، پورته شوې خارښتناکې دانې، یا بې‌هوښه کېدل.",
+        "en": "Swollen lips, tongue or face, a tight throat, noisy or hard breathing, a raised itchy rash, or fainting."
+      }
+    },
+    {
+      "id": "allergy-severe.go",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "فوراً به شفاخانه بروید",
+        "ps": "سمدستي روغتون ته ولاړ شئ",
+        "en": "Go to hospital at once"
+      },
+      "text": {
+        "fa": "فوراً یک نفر را برای آوردن موتر بفرستید؛ این حالت زود بدتر می‌شود. اگر قلم پیچکاری حساسیت خود را دارد، کمکش کنید آن را به بیرون ران بزند.",
+        "ps": "سمدستي یو څوک د موټر راوړلو لپاره ولېږئ؛ دا حالت ژر بدترېږي. که د حساسیت خپل قلم پیچکاري لري، مرسته ورسره وکړئ چې د ورون بهرنۍ خوا ته یې ووهي.",
+        "en": "Send for a car straight away; this can get worse fast. If they have their own allergy pen, help them use it in the outer thigh."
+      }
+    },
+    {
+      "id": "allergy-severe.position",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "بنشانید یا بخوابانید",
+        "ps": "کېنوئ یې یا یې وغځوئ",
+        "en": "Sit them up, or lay them flat"
+      },
+      "text": {
+        "fa": "اگر نفس کشیدن سخت است، بگذارید بنشیند. اگر سرش می‌چرخد، او را هموار بخوابانید و پاهایش را بالا کنید. نگذارید بایستد یا راه برود.",
+        "ps": "که ساه اخیستل سخت وي، پرېږدئ چې کېني. که سر یې ګرځي، هوار یې وغځوئ او پښې یې پورته کړئ. مه پرېږدئ چې ودرېږي یا وګرځي.",
+        "en": "If breathing is hard, let them sit up. If they feel faint, lay them flat with the legs raised. Do not let them stand or walk."
+      }
+    },
+    {
+      "id": "allergy-severe.sting",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "نیش را بیرون کنید",
+        "ps": "نیش یې وباسئ",
+        "en": "Scrape out a bee sting"
+      },
+      "text": {
+        "fa": "بعد از نیش زنبور عسل، نیش را زود با ناخن یا یک کارت بتراشید و بیرون کنید.",
+        "ps": "د شاتو د مچۍ له چیچلو وروسته، نیش ژر په نوک یا کارت وګروئ او ویې باسئ.",
+        "en": "After a bee sting, scrape the sting out quickly with a fingernail or a card."
+      }
+    },
+    {
+      "id": "allergy-severe.cpr",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "اگر نفسش بند شد",
+        "ps": "که ساه یې ودرېده",
+        "en": "If they stop breathing"
+      },
+      "text": {
+        "fa": "اگر دیگر جواب نمی‌دهد و عادی نفس نمی‌کشد، فوراً فشار سینه را شروع کنید.",
+        "ps": "که نور ځواب نه ورکوي او په عادي ډول ساه نه اخلي، سمدستي د سینې فشار پیل کړئ.",
+        "en": "If they stop responding and are not breathing normally, start chest pushes at once."
+      }
+    },
+    {
+      "id": "allergy-severe.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر بعد از غذا، نیش یا دوا این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که له خوړو، چیچلو یا درملو وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if after a food, sting or medicine someone has:"
+      },
+      "items": [
+        {
+          "id": "allergy-severe.urgent.swelling",
+          "icon": "swelling",
+          "text": {
+            "fa": "پندیدن لب، زبان یا گلو",
+            "ps": "د شونډو، ژبې یا ستوني پړسوب",
+            "en": "swelling of the lips, tongue or throat"
+          }
+        },
+        {
+          "id": "allergy-severe.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس با صدا، خس‌خس یا نفس سخت",
+            "ps": "په غږ ساه، خرخر یا سخته ساه",
+            "en": "noisy breathing, wheeze or hard breathing"
+          }
+        },
+        {
+          "id": "allergy-severe.urgent.voice",
+          "icon": "no-drink",
+          "text": {
+            "fa": "صدای گرفته یا مشکل قورت دادن",
+            "ps": "ناست غږ یا د تېرولو ستونزه",
+            "en": "a hoarse voice or trouble swallowing"
+          }
+        },
+        {
+          "id": "allergy-severe.urgent.faint",
+          "icon": "sleepy",
+          "text": {
+            "fa": "سرچرخی، بی‌هوش شدن یا پوست رنگ‌پریده و سرد",
+            "ps": "د سر ګرځېدل، بې‌هوښه کېدل یا رنګ الوتی او یخ پوستکی",
+            "en": "dizziness, fainting, or pale, cold skin"
+          }
+        },
+        {
+          "id": "allergy-severe.urgent.rash",
+          "icon": "rash",
+          "text": {
+            "fa": "دانه در تمام بدن همراه با استفراغ یا درد شکم",
+            "ps": "په ټول بدن دانې له کانګو یا د ګېډې درد سره",
+            "en": "a rash all over with vomiting or belly pain"
+          }
+        }
+      ]
+    },
+    {
+      "id": "allergy-severe.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه پیچکاری ادرینالین، اکسیجن و دواهای دیگر می‌دهند. چند ساعت آنجا بمانید، چون ممکن است دوباره شروع شود.",
+        "ps": "په روغتون کې د اډرینالین پیچکاري، اکسیجن او نور درمل ورکوي. څو ساعته هلته پاتې شئ، ځکه کېدای شي بیا پیل شي.",
+        "en": "At hospital they give an adrenaline injection, oxygen and other medicines. Stay some hours, as it can come back."
+      }
+    },
+    {
+      "id": "allergy-severe.after",
+      "type": "tip",
+      "icon": "talk",
+      "text": {
+        "fa": "بعد از آن، همیشه به کارمند صحی بگویید که از چه شد، و از آن غذا، نیش یا دوا دوری کنید.",
+        "ps": "وروسته، تل روغتیايي کارکوونکي ته ووایئ چې له څه شو، او له هغو خوړو، چیچلو یا درملو ډډه وکړئ.",
+        "en": "Afterwards, always tell health workers what caused it, and avoid that food, sting or medicine."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: anaphylaxis (adrenaline auto-injector in the outer thigh; lie flat with legs raised or sit if breathing is hard; avoid standing)",
+    "World Allergy Organization Anaphylaxis Guidance (2020)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): severe allergic reaction",
+    "WHO Model List of Essential Medicines: adrenaline for anaphylaxis"
+  ],
+  "review": [
+    "Allergy pens (adrenaline auto-injectors) are rare in Afghanistan. The step mentions them only 'if they have their own'. No dose is given (the spec allows none).",
+    "Positioning follows ERC 2025: sit up if breathing is hard, lie flat with legs raised if faint, do not stand or walk.",
+    "Pashto 'مچۍ' (bee) and 'ډبره' (wasp) need checking; Dari uses 'زنبور' for both, with 'زنبور عسل' for honey bee.",
+    "No 'dont' block: the steps cover the main points."
+  ]
+}

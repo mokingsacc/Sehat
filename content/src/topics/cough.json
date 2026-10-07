@@ -80,7 +80,8 @@
         "fa": "وقتی طفل آرام است، یک دقیقهٔ کامل بشمارید که چند بار نفس می‌کشد. ببینید پایین سینه به داخل کشیده می‌شود یا نه.",
         "ps": "کله چې ماشوم آرام وي، یوه بشپړه دقیقه وشمېرئ چې څو ځله سا اخلي. وګورئ چې د سینې لاندې برخه ننوځي که نه.",
         "en": "When the child is calm, count the breaths for one full minute. Look to see if the lower chest pulls in."
-      }
+      },
+      "picture": "breath-watch"
     },
     {
       "id": "cough.fast-breathing",
@@ -90,6 +91,22 @@
         "fa": "نفس تیز یعنی: زیر ۲ ماه، ۶۰ بار یا بیشتر در یک دقیقه؛ از ۲ تا ۱۲ ماه، ۵۰ بار یا بیشتر؛ از ۱ تا ۵ سال، ۴۰ بار یا بیشتر.",
         "ps": "ژر ژر سا دا ده: تر ۲ میاشتو کم ماشوم، په یوه دقیقه کې ۶۰ ځله یا ډېر؛ له ۲ تر ۱۲ میاشتو، ۵۰ ځله یا ډېر؛ له ۱ تر ۵ کلونو، ۴۰ ځله یا ډېر.",
         "en": "Fast breathing is: under 2 months, 60 or more breaths a minute; 2 to 12 months, 50 or more; 1 to 5 years, 40 or more."
+      }
+    },
+    {
+      "id": "cough.counter",
+      "type": "link",
+      "to": "tool/breaths",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس‌ها را با گوشی بشمارید",
+        "ps": "ساه په ټیلیفون وشمېرئ",
+        "en": "Count breaths with the phone"
+      },
+      "text": {
+        "fa": "گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.",
+        "ps": "ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.",
+        "en": "The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast."
       }
     },
     {
@@ -121,9 +138,9 @@
           "id": "cough.urgent.breathing",
           "icon": "breathing-fast",
           "text": {
-            "fa": "تیز تیز یا به سختی نفس می‌کشد",
-            "ps": "ژر ژر یا په سختۍ سا اخلي",
-            "en": "breathes fast or with difficulty"
+            "fa": "کمتر از ۲ ماه عمر دارد و تیز تیز نفس می‌کشد: ۶۰ بار یا بیشتر در یک دقیقه",
+            "ps": "تر ۲ میاشتو کوچنی دی او ژر ژر سا اخلي: په یوه دقیقه کې ۶۰ ځله یا ډېر",
+            "en": "is under 2 months old and breathes 60 or more times a minute"
           }
         },
         {
@@ -183,6 +200,15 @@
         "en": "If your child has any of these signs, go to the clinic today:"
       },
       "items": [
+        {
+          "id": "cough.soon.fast",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز نفس می‌کشد، اما هیچ یک از علایم رفتن به شفاخانه را ندارد",
+            "ps": "ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري",
+            "en": "breathes fast, but has none of the hospital signs"
+          }
+        },
         {
           "id": "cough.soon.long",
           "icon": "calendar",
@@ -260,10 +286,10 @@
   ],
   "review": [
     "Fast-breathing counts are the IMCI cut-offs: under 2 months 60 or more; 2 to 12 months 50 or more; 12 months to 5 years 40 or more.",
-    "Fast breathing alone is in the urgent alert. IMCI treats fast breathing without chest indrawing or a danger sign as pneumonia at the clinic (oral amoxicillin). Kept as 'hospital now' for safety in a rural setting; consider moving to soon.",
     "Stridor is described as 'a harsh noise breathing in, even when calm'; wheeze as 'a whistling sound when breathing out' (soon alert). Wheeze is not an IMCI danger sign; it is included so families bring wheezy children to the clinic.",
     "Honey is advised only over 1 year (botulism risk under 1). The step does not give an amount.",
     "Dont item 'no cough medicines for babies and young children' does not give an age cut-off; WHO advises against cough and cold remedies in young children.",
-    "Icon 'breathe' is used for stridor and wheeze; an icon showing noisy breathing would be better."
+    "Icon 'breathe' is used for stridor and wheeze; an icon showing noisy breathing would be better.",
+    "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. cough.urgent.breathing now means a baby under 2 months; the new cough.soon.fast is fast breathing alone at 2 months to 5 years."
   ]
 }

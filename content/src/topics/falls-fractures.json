@@ -1,0 +1,254 @@
+{
+  "id": "falls-fractures",
+  "section": "everyone",
+  "title": {
+    "fa": "افتادن و شکستن استخوان",
+    "ps": "لوېدل او د هډوکي ماتېدل",
+    "en": "Falls and broken bones"
+  },
+  "summary": {
+    "fa": "بعد از افتادن از بام یا درخت: گردن و کمر را محافظت کنید.",
+    "ps": "له بام یا ونې څخه له لوېدو وروسته: غاړه او ملا وساتئ.",
+    "en": "Fell from a roof or tree? Protect the neck and back."
+  },
+  "image": "falls-fractures",
+  "blocks": [
+    {
+      "id": "falls-fractures.lead",
+      "type": "lead",
+      "text": {
+        "fa": "افتادن از بام‌های هموار، درخت و دیوار زیاد است. حرکت دادن می‌تواند آسیب گردن یا کمر را بدتر کند، پس شخص را فقط وقتی حرکت دهید که در خطر باشد.",
+        "ps": "له هوارو بامونو، ونو او دېوالونو لوېدل عام دي. خوځول کولی شي د غاړې یا ملا ټپ بدتر کړي، نو کس یوازې هغه وخت وخوځوئ چې په خطر کې وي.",
+        "en": "Falls from flat roofs, trees and walls are common. Moving the person can make a neck or back injury worse, so move them only if they are in danger."
+      }
+    },
+    {
+      "id": "falls-fractures.still",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "بی‌حرکت نگه دارید",
+        "ps": "بې‌حرکته یې وساتئ",
+        "en": "Keep them still"
+      },
+      "text": {
+        "fa": "بگویید که حرکت نکند. بالای سرش زانو بزنید و سرش را با دو دست، راست با بدن، بی‌حرکت نگه دارید تا کمک برسد.",
+        "ps": "ورته ووایئ چې ونه خوځېږي. د سر خوا ته یې په زنګنونو کېنئ او سر یې په دواړو لاسونو، له بدن سره نېغ، بې‌حرکته ونیسئ تر څو مرسته ورسېږي.",
+        "en": "Tell them not to move. Kneel at their head and hold it still with both hands, in line with the body, until help comes."
+      },
+      "picture": "em-spine-hold"
+    },
+    {
+      "id": "falls-fractures.signs",
+      "type": "step",
+      "icon": "stiff-neck",
+      "title": {
+        "fa": "علایم آسیب گردن یا کمر",
+        "ps": "د غاړې یا ملا د ټپ نښې",
+        "en": "Signs of a neck or back injury"
+      },
+      "text": {
+        "fa": "درد گردن یا کمر، بی‌حسی یا ضعف دست و پا، یا افتادن سخت بر سر: شاید ستون فقرات آسیب دیده باشد.",
+        "ps": "د غاړې یا ملا درد، د لاسونو یا پښو بې‌حسي یا کمزوري، یا پر سر سخت لوېدل: کېدای شي د ملا تیر ټپي وي.",
+        "en": "Neck or back pain, numb or weak arms or legs, or a hard fall onto the head: the spine may be hurt."
+      }
+    },
+    {
+      "id": "falls-fractures.carry",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "روی تختهٔ هموار ببرید",
+        "ps": "په هواره تخته یې یوسئ",
+        "en": "Carry them flat on a board"
+      },
+      "text": {
+        "fa": "برای رفتن به شفاخانه، با کمک چند نفر او را روی یک دروازه یا تختهٔ هموار بلغزانید، و سر، گردن و بدن را در یک خط نگه دارید.",
+        "ps": "روغتون ته د وړلو لپاره، د څو کسانو په مرسته یې په یوه دروازه یا هواره تخته وښویوئ، او سر، غاړه او بدن په یوه کرښه کې وساتئ.",
+        "en": "To go to hospital, slide them onto a door or flat board with several helpers, keeping the head, neck and body in one line."
+      }
+    },
+    {
+      "id": "falls-fractures.bone",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "دست یا پای شکسته را بی‌حرکت کنید",
+        "ps": "مات لاس یا پښه بې‌حرکته کړئ",
+        "en": "Broken arm or leg: keep it still"
+      },
+      "text": {
+        "fa": "درد، پندیدگی یا کج شدن یعنی استخوان شکسته است. آن را با یک چوب یا تکهٔ لوله‌شده ببندید، یا دست را از گردن آویزان کنید.",
+        "ps": "درد، پړسوب یا کوږوالی د هډوکي ماتېدل ښيي. له یوه لرګي یا تاو شوي ټوکر سره یې وتړئ، یا لاس په غاړه کې وځړوئ.",
+        "en": "Pain, swelling or a bent shape means a broken bone. Keep it still with a stick or rolled cloth tied alongside, or the arm in a sling."
+      }
+    },
+    {
+      "id": "falls-fractures.open",
+      "type": "step",
+      "icon": "bleeding",
+      "title": {
+        "fa": "استخوان از پوست بیرون شده",
+        "ps": "هډوکی له پوستکي وتلی",
+        "en": "Bone through the skin"
+      },
+      "text": {
+        "fa": "اگر استخوان از پوست بیرون شده، آن را با تکهٔ پاک بپوشانید و دورش فشار دهید تا خون بند شود. آن را به داخل فشار ندهید.",
+        "ps": "که هډوکی له پوستکي بهر وتلی وي، په پاک ټوکر یې وپوښئ او شاوخوا یې فشار ورکړئ چې وینه ودرېږي. بېرته یې مه ننباسئ.",
+        "en": "If bone shows through the skin, cover it with a clean cloth and press around it to stop bleeding. Do not push it back in."
+      }
+    },
+    {
+      "id": "falls-fractures.cold",
+      "type": "step",
+      "icon": "cool-water",
+      "title": {
+        "fa": "پندیدگی را سرد کنید",
+        "ps": "پړسوب سوړ کړئ",
+        "en": "Cool the swelling"
+      },
+      "text": {
+        "fa": "یک تکهٔ تر و سرد، یا یخ پیچیده در تکه، را ۲۰ دقیقه روی جای آسیب بگذارید تا درد و پندیدگی کم شود.",
+        "ps": "یو لوند او سوړ ټوکر، یا په ټوکر کې نغښتی یخ، ۲۰ دقیقې پر ټپي ځای کېږدئ چې درد او پړسوب کم شي.",
+        "en": "Put a cold wet cloth, or ice wrapped in cloth, on the hurt part for 20 minutes to ease pain and swelling."
+      }
+    },
+    {
+      "id": "falls-fractures.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر بعد از افتادن این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که له لوېدو وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if after a fall someone:"
+      },
+      "items": [
+        {
+          "id": "falls-fractures.urgent.height",
+          "icon": "house",
+          "text": {
+            "fa": "از بام یا جای بلند افتاده",
+            "ps": "له بام یا لوړ ځای لوېدلی",
+            "en": "fell from a roof or a high place"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.spine",
+          "icon": "stiff-neck",
+          "text": {
+            "fa": "درد گردن یا کمر، یا دست و پای بی‌حس یا ضعیف دارد",
+            "ps": "د غاړې یا ملا درد، یا بې‌حسه یا کمزوري لاسونه او پښې لري",
+            "en": "has neck or back pain, or numb or weak limbs"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.limb",
+          "icon": "wound",
+          "text": {
+            "fa": "دست یا پایش کج شده یا کار نمی‌کند",
+            "ps": "لاس یا پښه یې کږه شوې یا کار نه کوي",
+            "en": "has an arm or leg that is bent or cannot be used"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.open",
+          "icon": "bleeding",
+          "text": {
+            "fa": "استخوانش از پوست بیرون شده",
+            "ps": "هډوکی یې له پوستکي وتلی",
+            "en": "has bone showing through the skin"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.head",
+          "icon": "headache",
+          "text": {
+            "fa": "سرش خورده و خواب‌آلود است یا استفراغ می‌کند",
+            "ps": "سر یې لګېدلی او خوب وړی دی یا کانګې کوي",
+            "en": "hit their head and is sleepy or vomiting"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شکم یا سینه، یا مشکل نفس دارد",
+            "ps": "د ګېډې یا سینې درد، یا د ساه ستونزه لري",
+            "en": "has belly or chest pain, or trouble breathing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "falls-fractures.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "falls-fractures.dont.pull",
+          "icon": "no",
+          "text": {
+            "fa": "دست یا پای شکسته را برای راست کردن نکشید و نپیچانید",
+            "ps": "مات لاس یا پښه د نېغولو لپاره مه کاږئ او مه یې تاووئ",
+            "en": "pull or twist a broken arm or leg to straighten it"
+          }
+        },
+        {
+          "id": "falls-fractures.dont.sit-up",
+          "icon": "no",
+          "text": {
+            "fa": "کسی را که شاید گردنش آسیب دیده، ننشانید یا بلند نکنید",
+            "ps": "هغه څوک چې کېدای شي غاړه یې ټپي وي، مه کېنوئ او مه یې پورته کوئ",
+            "en": "sit up or lift someone who may have a neck injury"
+          }
+        },
+        {
+          "id": "falls-fractures.dont.bonesetter",
+          "icon": "no",
+          "text": {
+            "fa": "به جای شفاخانه، استخوان را نزد شکسته‌بند محکم نبندید",
+            "ps": "د روغتون پر ځای، هډوکی ماتې تړونکي ته د کلک تړلو لپاره مه وړئ",
+            "en": "have it tightly bound by a bonesetter instead of going to hospital"
+          }
+        }
+      ]
+    },
+    {
+      "id": "falls-fractures.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه عکس (اکسری) می‌گیرند، استخوان شکسته را جا می‌اندازند و گچ می‌گیرند، و خونریزی داخلی را معاینه می‌کنند.",
+        "ps": "په روغتون کې اکسرې اخلي، مات هډوکي ځای ته اړوي او پلستر کوي، او د دننه وینې بهېدنه معاینه کوي.",
+        "en": "At hospital they take an X-ray, set and plaster broken bones, and check for bleeding inside."
+      }
+    },
+    {
+      "id": "falls-fractures.prevent",
+      "type": "tip",
+      "icon": "house",
+      "text": {
+        "fa": "دور بام‌های هموار دیوار کوتاه بسازید و نگذارید اطفال روی بام بازی کنند یا بخوابند.",
+        "ps": "د هوارو بامونو شاوخوا ټیټ دېوال جوړ کړئ او مه پرېږدئ چې ماشومان پر بام لوبې وکړي یا ویده شي.",
+        "en": "Build a low wall round flat roofs, and do not let children play or sleep on the roof."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: suspected spinal injury (manual stabilisation; no routine collars), fractures (splinting), cold for closed injuries",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): spinal injury, fractures, sprains",
+    "WHO Basic Emergency Care (WHO/ICRC, 2018): trauma, spinal protection",
+    "WHO/UNICEF World report on child injury prevention (2008): falls"
+  ],
+  "review": [
+    "No neck collar (ERC/IFRC no longer advise lay rescuers to use collars). Manual hold of the head is taught instead.",
+    "Moving the person on a door or board: transport in villages is by car or pickup, so this is a practical 'log-roll onto a board' message without the log-roll detail. Check it is safe to teach without training.",
+    "Bonesetters (شکسته‌بند / ماتې تړونکی) are widely used in Afghanistan. Tight traditional binding can cause compartment syndrome and gangrene. The dont item is worded respectfully; check the tone with local staff.",
+    "Ice or cold for 20 minutes: ERC/IFRC suggest cold for closed injuries (no set time; 20 minutes is common teaching).",
+    "Pashto 'د ملا تیر' for spine and 'ماتې تړونکی' for bonesetter: check."
+  ]
+}

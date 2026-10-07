@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1F6F7A">
+<title>صحت · CPR (cine) · Sehat</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+.demo-opts{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;font-size:14px;color:var(--mute)}
+.demo-opts label{display:flex;align-items:center;gap:6px;min-height:44px}
+.demo-opts button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;min-height:44px;font:inherit}
+.demo-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.demo-pick button{display:block;padding:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--teal-t);font:inherit}
+.demo-pick b{display:block;padding:8px;background:var(--card)}
+</style>
+</head>
+<body>
+<div id="app" class="adult">
+  <div class="page">
+    <div class="top"><h1 id="h" style="flex:1;margin:0;font-size:22px">CPR</h1>
+      <div class="langpill" id="langs"><button data-lang="fa">دری</button><button data-lang="ps">پښتو</button><button data-lang="en">EN</button></div></div>
+    <div class="demo-opts">
+      <label><input type="checkbox" id="still"> <span>still pictures (reduced motion)</span></label>
+      <label><input type="checkbox" id="fps"> <span>fps</span></label>
+      <button id="group">CPR (age picker)</button>
+    </div>
+    <div class="demo-pick" id="cards"></div>
+  </div>
+</div>
+<script type="module">
+// Preview of the cine CPR versions inside the real player (js/anim.js). ?lang=fa|ps|en&a=cpr-adult&s=3 opens a scene,
+// &still=1 for reduced motion, &cinefps to show the frame rate, &auto=0 to stop the auto-advance.
+import { animPoster, openAnimation } from '../js/anim.js';
+const q = new URLSearchParams(location.search);
+let lang = q.get('lang') || 'fa';
+const N = await fetch('../content/drafts/anim-narration.json').then((r) => r.json());
+const txt = (id) => (N[id] ? N[id][lang] ?? N[id].en : '');
+const VERS = ['cpr-adult', 'cpr-child', 'cpr-baby', 'cpr-newborn'];
+function ttsVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const want = { fa: ['fa', 'prs'], ps: ['ps', 'pbt'], en: ['en'] }[lang];
+  return speechSynthesis.getVoices().find((v) => want.some((w) => v.lang.toLowerCase().startsWith(w))) || null;
+}
+function play(ids) {
+  const v = ttsVoice(); if (!v) return undefined;
+  speechSynthesis.cancel();
+  return ids.reduce((p, id) => p.then(() => new Promise((res) => { const u = new SpeechSynthesisUtterance(txt(id)); u.voice = v; u.lang = v.lang; u.onend = u.onerror = () => res(); speechSynthesis.speak(u); })), Promise.resolve());
+}
+const stop = () => { if ('speechSynthesis' in window) speechSynthesis.cancel(); };
+const opts = () => ({ lang, text: txt, play, stop, still: document.getElementById('still').checked || q.get('still') === '1', autoAdvance: q.get('auto') !== '0' });
+async function render() {
+  document.documentElement.lang = lang === 'en' ? 'en' : lang === 'ps' ? 'ps-AF' : 'fa-AF';
+  document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+  document.getElementById('h').textContent = txt('anim.cpr.title');
+  document.querySelectorAll('#langs button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  const cards = document.getElementById('cards'); cards.innerHTML = '';
+  for (const a of VERS) {
+    const b = document.createElement('button'); b.dataset.open = a;
+    b.innerHTML = `${await animPoster(a, 0)}<b>${txt('anim.' + a + '.label')}</b>`;
+    cards.appendChild(b);
+  }
+}
+document.getElementById('langs').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { lang = b.dataset.lang; render(); } });
+document.getElementById('cards').addEventListener('click', (e) => { const b = e.target.closest('[data-open]'); if (b) openAnimation('cpr', { ...opts(), pick: b.dataset.open }); });
+document.getElementById('group').addEventListener('click', () => openAnimation('cpr', opts()));
+document.getElementById('fps').addEventListener('change', (e) => { if (e.target.checked && !/cinefps/.test(location.search)) { history.replaceState(null, '', location.search + (location.search ? '&' : '?') + 'cinefps'); } });
+await render();
+if (q.get('a')) window.__ctl = await openAnimation('cpr', { ...opts(), pick: q.get('a'), start: Math.max(0, (+q.get('s') || 1) - 1) });
+document.title += ' ·';
+window.__ready = true;
+</script>
+</body>
+</html>

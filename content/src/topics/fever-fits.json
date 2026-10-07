@@ -1,0 +1,254 @@
+{
+  "id": "fever-fits",
+  "section": "children",
+  "title": {
+    "fa": "تشنج با تب در اطفال خورد",
+    "ps": "په کوچنیو ماشومانو کې له تبې سره اختلاج",
+    "en": "Fits with fever in young children"
+  },
+  "summary": {
+    "fa": "در طفل ۶ ماهه تا ۵ ساله زیاد است. ترسناک است، اما اکثراً بی‌ضرر.",
+    "ps": "له ۶ میاشتو تر ۵ کلونو ماشومانو کې عام دی. ډاروونکی دی، خو اکثره بې‌ضرره.",
+    "en": "Common from 6 months to 5 years. Frightening, but usually harmless."
+  },
+  "image": "fever-fits",
+  "blocks": [
+    {
+      "id": "fever-fits.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بعضی اطفال ۶ ماهه تا ۵ ساله وقتی تب می‌کنند، تشنج می‌کنند. این ترسناک است، اما اکثراً در چند دقیقه تمام می‌شود و ضرر نمی‌رساند.",
+        "ps": "ځینې ماشومان چې د ۶ میاشتو او ۵ کلونو ترمنځ وي، کله چې تبه شي، اختلاج کوي. دا ډاروونکی دی، خو اکثره په څو دقیقو کې ودرېږي او زیان نه رسوي.",
+        "en": "Some children aged 6 months to 5 years have a fit when they get a fever. It is frightening, but it usually stops within a few minutes and does no harm."
+      }
+    },
+    {
+      "id": "fever-fits.safe",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "طفل را در جای بی‌خطر بخوابانید",
+        "ps": "ماشوم په خوندي ځای کې وغځوئ",
+        "en": "Lay the child somewhere safe"
+      },
+      "text": {
+        "fa": "طفل را روی زمین، دور از آتش، بخاری و نوشیدنی داغ بخوابانید. طفل را محکم نگیرید و تکان ندهید.",
+        "ps": "ماشوم پر ځمکه، له اور، بخارۍ او ګرمو څښاکونو لرې وغځوئ. ماشوم کلک مه نیسئ او مه یې ښوروئ.",
+        "en": "Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them."
+      }
+    },
+    {
+      "id": "fever-fits.time",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "وقتش را ببینید",
+        "ps": "وخت یې وګورئ",
+        "en": "Time it"
+      },
+      "text": {
+        "fa": "ببینید که چه وقت شروع شد. اگر بیشتر از ۵ دقیقه دوام کرد، فوراً موتر بخواهید.",
+        "ps": "وګورئ چې کله پیل شو. که له ۵ دقیقو زیات دوام وکړي، سمدستي موټر راوغواړئ.",
+        "en": "Note when it starts. If it lasts more than 5 minutes, get a car at once."
+      }
+    },
+    {
+      "id": "fever-fits.side",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "بعد به پهلو",
+        "ps": "بیا پر اړخ",
+        "en": "Then lay them on their side"
+      },
+      "text": {
+        "fa": "وقتی لرزه تمام شد، طفل را به پهلو بخوابانید. طفل شاید مدتی خواب‌آلود باشد؛ نزدیکش بمانید.",
+        "ps": "کله چې لړزه ودرېږي، ماشوم پر اړخ وغځوئ. ماشوم کېدای شي یو څه وخت خوب وړی وي؛ ورته نږدې پاتې شئ.",
+        "en": "When the shaking stops, lay the child on their side. The child may be sleepy for a while; stay close."
+      }
+    },
+    {
+      "id": "fever-fits.cool",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "لباس سبک، نوشیدنی زیاد",
+        "ps": "سپکې جامې، ډېر څښاک",
+        "en": "Light clothes, plenty of drinks"
+      },
+      "text": {
+        "fa": "لباس و کمپل اضافی را دور کنید. وقتی بیدار شد، زیاد شیر مادر یا نوشیدنی بدهید.",
+        "ps": "اضافي جامې او کمپلې لرې کړئ. کله چې ویښ شو، ډېر ځله د مور شیدې یا څښاک ورکړئ.",
+        "en": "Take off extra clothes and blankets. When the child is awake, give breast milk or drinks often."
+      }
+    },
+    {
+      "id": "fever-fits.hospital-now",
+      "type": "step",
+      "icon": "hospital",
+      "title": {
+        "fa": "بعد از تشنج به شفاخانه بروید",
+        "ps": "له اختلاج وروسته روغتون ته ولاړ شئ",
+        "en": "Go to hospital after the fit"
+      },
+      "text": {
+        "fa": "هر طفلی که با تب تشنج کرده، باید همان وقت در شفاخانه دیده شود تا مریضی خطرناک مانند مننژیت را ببینند.",
+        "ps": "هر ماشوم چې له تبې سره یې اختلاج کړی، باید سمدستي په روغتون کې ولیدل شي، چې خطرناکه ناروغي لکه مننژیت وګوري.",
+        "en": "Every child who has had a fit with fever must be seen at hospital straight away, to look for a serious illness like meningitis."
+      }
+    },
+    {
+      "id": "fever-fits.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "بعد از تشنج تب، همین حالا به شفاخانه بروید، شب باشد یا روز، خصوصاً اگر طفل:",
+        "ps": "د تبې له اختلاج وروسته، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، په ځانګړې توګه که ماشوم:",
+        "en": "After a fever fit, go to hospital now, day or night. Go fast if the child:"
+      },
+      "items": [
+        {
+          "id": "fever-fits.urgent.long",
+          "icon": "clock",
+          "text": {
+            "fa": "بیشتر از ۵ دقیقه تشنج کرد",
+            "ps": "له ۵ دقیقو زیات اختلاج وکړ",
+            "en": "had a fit lasting more than 5 minutes"
+          }
+        },
+        {
+          "id": "fever-fits.urgent.neck",
+          "icon": "stiff-neck",
+          "text": {
+            "fa": "گردنش شخ است یا دانه‌های تیره دارد",
+            "ps": "غاړه یې کلکه ده یا تیاره دانې لري",
+            "en": "has a stiff neck or a dark rash"
+          }
+        },
+        {
+          "id": "fever-fits.urgent.not-waking",
+          "icon": "sleepy",
+          "text": {
+            "fa": "در یک ساعت درست بیدار نمی‌شود",
+            "ps": "په یوه ساعت کې سم نه راویښېږي",
+            "en": "does not wake up properly within an hour"
+          }
+        },
+        {
+          "id": "fever-fits.urgent.one-side",
+          "icon": "convulsion",
+          "text": {
+            "fa": "فقط یک طرف بدنش تشنج کرد",
+            "ps": "یوازې د بدن یوې خوا یې اختلاج وکړ",
+            "en": "had a fit on one side of the body only"
+          }
+        },
+        {
+          "id": "fever-fits.urgent.again",
+          "icon": "convulsion",
+          "text": {
+            "fa": "دوباره تشنج می‌کند",
+            "ps": "بیا اختلاج کوي",
+            "en": "has another fit"
+          }
+        },
+        {
+          "id": "fever-fits.urgent.young",
+          "icon": "baby",
+          "text": {
+            "fa": "کمتر از ۶ ماه عمر دارد",
+            "ps": "له ۶ میاشتو کم عمر لري",
+            "en": "is under 6 months old"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fever-fits.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "fever-fits.dont.mouth",
+          "icon": "no",
+          "text": {
+            "fa": "چیزی در دهان طفل نگذارید",
+            "ps": "هېڅ شی د ماشوم په خوله کې مه ږدئ",
+            "en": "put anything in the child's mouth"
+          }
+        },
+        {
+          "id": "fever-fits.dont.cold-water",
+          "icon": "no",
+          "text": {
+            "fa": "طفل را در آب سرد نیندازید و در تکهٔ تر نپیچانید",
+            "ps": "ماشوم په سړو اوبو کې مه اچوئ او په لوند ټوکر کې یې مه نغاړئ",
+            "en": "put the child in cold water or wrap them in wet cloths"
+          }
+        },
+        {
+          "id": "fever-fits.dont.drink",
+          "icon": "no",
+          "text": {
+            "fa": "تا کاملاً بیدار نشده، دوا یا نوشیدنی ندهید",
+            "ps": "تر څو بشپړ ویښ شوی نه وي، درمل یا څښاک مه ورکوئ",
+            "en": "give medicine or drinks until fully awake"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fever-fits.fever",
+      "type": "link",
+      "to": "topic/fever",
+      "icon": "fever",
+      "title": {
+        "fa": "مراقبت تب در خانه",
+        "ps": "په کور کې د تبې پاملرنه",
+        "en": "Caring for fever at home"
+      },
+      "text": {
+        "fa": "بعد از شفاخانه، صفحهٔ تب را برای مراقبت در خانه ببینید.",
+        "ps": "له روغتون وروسته، په کور کې د پاملرنې لپاره د تبې پاڼه وګورئ.",
+        "en": "After hospital, see the fever page for care at home."
+      }
+    },
+    {
+      "id": "fever-fits.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه علت تب را، مانند مکروب گوش، سینه یا مغز، پیدا و تداوی می‌کنند.",
+        "ps": "په روغتون کې د تبې لامل، لکه د غوږ، سینې یا دماغ انتان، پیدا کوي او درملنه یې کوي.",
+        "en": "At hospital they look for the cause of the fever, such as an ear, chest or brain infection, and treat it."
+      }
+    },
+    {
+      "id": "fever-fits.not-epilepsy",
+      "type": "tip",
+      "icon": "check",
+      "text": {
+        "fa": "تشنج تب، مرگی نیست و به مغز ضرر نمی‌رساند. اطفال تا حدود ۶ سالگی از آن خلاص می‌شوند.",
+        "ps": "د تبې اختلاج مرګي نه ده او دماغ ته زیان نه رسوي. ماشومان تر شاوخوا ۶ کلنۍ پورې ترې خلاصېږي.",
+        "en": "A fever fit is not epilepsy and does not harm the brain. Children grow out of it by about 6 years."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): convulsions are a general danger sign, refer urgently",
+    "WHO Pocket book of hospital care for children, 2nd edition (2013): febrile convulsions, meningitis",
+    "WHO mhGAP Intervention Guide 2.0 (2016): epilepsy module, febrile seizures",
+    "European Resuscitation Council Guidelines 2025: First Aid (seizures)"
+  ],
+  "review": [
+    "All fever fits are 'hospital now' here (IMCI general danger sign, and meningitis cannot be ruled out at home). UK practice sends a known simple febrile convulsion home after review. Decide whether a child with known fever fits who wakes fully could go to the clinic the same day.",
+    "No paracetamol advice: the spec allows no doses, and fever medicine does not prevent fever fits.",
+    "Tepid sponging and wet cloths are discouraged (WHO pocket book); the dont item covers this.",
+    "'Children grow out of it by about 6 years' and 'does not harm the brain' are reassurance from WHO/mhGAP and NICE patient advice. No numbers on recurrence are given.",
+    "Title is 6 English words."
+  ]
+}

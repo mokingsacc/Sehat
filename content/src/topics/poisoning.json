@@ -1,0 +1,252 @@
+{
+  "id": "poisoning",
+  "section": "everyone",
+  "title": {
+    "fa": "مسمومیت",
+    "ps": "مسمومیت",
+    "en": "Poisoning"
+  },
+  "summary": {
+    "fa": "تیل خاک، دوای زراعتی، دوا و زهر موش: اول چه کنید.",
+    "ps": "خاورین تېل، د کرنې درمل، درمل او د موږکانو زهر: لومړی څه وکړئ.",
+    "en": "Kerosene, farm sprays, medicines, rat poison: what to do first."
+  },
+  "image": "poisoning",
+  "blocks": [
+    {
+      "id": "poisoning.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اطفال اکثراً به اشتباه تیل خاک، دوا یا زهر را قورت می‌دهند. دوای زراعتی از راه پوست و هوا هم مسموم می‌کند. زود عمل کنید و به شفاخانه بروید.",
+        "ps": "ماشومان اکثره په غلطۍ خاورین تېل، درمل یا زهر تېروي. د کرنې درمل د پوستکي او هوا له لارې هم زهري کوي. ژر کار وکړئ او روغتون ته ولاړ شئ.",
+        "en": "Children often swallow kerosene, medicines or poison by mistake. Farm sprays can poison through the skin and air too. Act fast and go to hospital."
+      }
+    },
+    {
+      "id": "poisoning.no-vomit",
+      "type": "step",
+      "icon": "vomit",
+      "title": {
+        "fa": "استفراغ نکنانید",
+        "ps": "کانګو ته یې مه اړ باسئ",
+        "en": "Do not make them vomit"
+      },
+      "text": {
+        "fa": "هرگز کاری نکنید که استفراغ کند، و آب نمک یا روغن ندهید. تیل خاکی که استفراغ شود، به شش‌ها می‌رود و بسیار خطرناک است.",
+        "ps": "هېڅکله یې کانګو ته مه اړ باسئ، او مالګینې اوبه یا تېل مه ورکوئ. هغه خاورین تېل چې کانګې شي، سږو ته ځي او ډېر خطرناک دي.",
+        "en": "Never make them vomit, and give no salt water or oil. Kerosene that is vomited gets into the lungs and is very dangerous."
+      }
+    },
+    {
+      "id": "poisoning.spray",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دوای زراعتی روی پوست",
+        "ps": "د کرنې درمل پر پوستکي",
+        "en": "Farm spray on the skin"
+      },
+      "text": {
+        "fa": "شخص را به هوای تازه ببرید. لباسش را بکشید و پوست و موی او را با صابون و آب زیاد بشویید. دست خود را محافظت کنید.",
+        "ps": "کس تازه هوا ته وباسئ. جامې یې وباسئ او پوستکی او وېښتان یې په ډېرو اوبو او صابون ومینځئ. خپل لاسونه وساتئ.",
+        "en": "Move the person into fresh air. Take off their clothes and wash skin and hair with lots of soap and water. Protect your own hands."
+      }
+    },
+    {
+      "id": "poisoning.mouth",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "دهان را بشویید",
+        "ps": "خوله یې ومینځئ",
+        "en": "Rinse the mouth"
+      },
+      "text": {
+        "fa": "اگر بیدار است، دهانش را با آب بشوید و آب را بیرون بیندازد. چیز دیگری برای خوردن یا نوشیدن ندهید، مگر کارمند صحی بگوید.",
+        "ps": "که ویښ وي، خوله دې په اوبو ومینځي او اوبه دې بهر وغورځوي. بل څه د خوړلو یا څښلو لپاره مه ورکوئ، مګر دا چې روغتیايي کارکوونکی ووايي.",
+        "en": "If they are awake, let them rinse the mouth with water and spit it out. Give nothing else to eat or drink unless a health worker says so."
+      }
+    },
+    {
+      "id": "poisoning.bottle",
+      "type": "step",
+      "icon": "poison",
+      "title": {
+        "fa": "بوتل را به شفاخانه ببرید",
+        "ps": "بوتل روغتون ته یوسئ",
+        "en": "Take the bottle to hospital"
+      },
+      "text": {
+        "fa": "همین حالا به شفاخانه بروید، شب باشد یا روز. بوتل، پاکت یا تابلیت را با خود ببرید تا داکتر بداند که چه بوده است.",
+        "ps": "همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. بوتل، پاکټ یا ګولۍ له ځان سره یوسئ چې ډاکټر پوه شي چې څه وو.",
+        "en": "Go to hospital now, day or night. Take the bottle, packet or tablets with you, so the doctor knows what it was."
+      }
+    },
+    {
+      "id": "poisoning.side",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "اگر خواب‌آلود است، به پهلو",
+        "ps": "که خوب وړی وي، پر اړخ",
+        "en": "If drowsy, lay them on their side"
+      },
+      "text": {
+        "fa": "اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید.",
+        "ps": "که خوب وړی وي، پر اړخ یې وغځوئ. که ساه یې ودرېده، د سینې فشار پیل کړئ.",
+        "en": "If they are drowsy, lay them on their side. If breathing stops, start chest pushes."
+      }
+    },
+    {
+      "id": "poisoning.later",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "زهر موش و دوا: حتی اگر خوب است، بروید",
+        "ps": "د موږکانو زهر او درمل: که روغ هم وي، ولاړ شئ",
+        "en": "Rat poison, medicines: go even if well"
+      },
+      "text": {
+        "fa": "بعضی زهرهای موش و دواها، مانند تابلیت آهن، بعد از چند ساعت یا چند روز ضرر می‌رسانند. حتی اگر شخص خوب معلوم شود، به شفاخانه بروید.",
+        "ps": "ځینې د موږکانو زهر او درمل، لکه د اوسپنې ګولۍ، له څو ساعتونو یا ورځو وروسته زیان رسوي. که کس روغ هم ښکاري، روغتون ته ولاړ شئ.",
+        "en": "Some rat poisons and medicines, like iron tablets, do harm only after hours or days. Go to hospital even if the person seems well."
+      }
+    },
+    {
+      "id": "poisoning.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "بعد از هر مسمومیت همین حالا به شفاخانه بروید، شب باشد یا روز. زودتر بروید اگر:",
+        "ps": "له هر مسمومیت وروسته همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. ژر ولاړ شئ که:",
+        "en": "After any poisoning, go to hospital now, day or night. Hurry if they:"
+      },
+      "items": [
+        {
+          "id": "poisoning.urgent.kerosene",
+          "icon": "cough",
+          "text": {
+            "fa": "بعد از تیل خاک سرفه می‌کند، خفه می‌شود یا تیز نفس می‌کشد",
+            "ps": "له خاورینو تېلو وروسته ټوخی کوي، ساه یې بندېږي یا چټکه ساه اخلي",
+            "en": "cough, choke or breathe fast after kerosene"
+          }
+        },
+        {
+          "id": "poisoning.urgent.spray",
+          "icon": "drops",
+          "text": {
+            "fa": "بعد از دوای زراعتی عرق می‌کند، آب دهانش می‌ریزد یا عضلاتش می‌پرد",
+            "ps": "له کرنیزو درملو وروسته خولې کوي، لاړې یې بهېږي یا غړي یې رپېږي",
+            "en": "sweat, drool or twitch after a farm spray"
+          }
+        },
+        {
+          "id": "poisoning.urgent.drowsy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خواب‌آلود یا گیج است، یا تشنج می‌کند",
+            "ps": "خوب وړی یا ګډوډ دی، یا اختلاج کوي",
+            "en": "are drowsy or confused, or have a fit"
+          }
+        },
+        {
+          "id": "poisoning.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "از بیره یا بینی خون می‌دهد، یا بدنش زود کبود می‌شود",
+            "ps": "له ورېژو یا پوزې وینه ورکوي، یا بدن یې ژر شین کېږي",
+            "en": "bleed from gums or nose, or bruise easily"
+          }
+        },
+        {
+          "id": "poisoning.urgent.purpose",
+          "icon": "sad",
+          "text": {
+            "fa": "قصداً چیزی را خورده است",
+            "ps": "په قصد یې څه خوړلي",
+            "en": "took something on purpose"
+          }
+        }
+      ]
+    },
+    {
+      "id": "poisoning.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "poisoning.dont.milk",
+          "icon": "no",
+          "text": {
+            "fa": "شیر، روغن یا ماست را به عنوان علاج ندهید",
+            "ps": "شیدې، تېل یا مستې د علاج په توګه مه ورکوئ",
+            "en": "give milk, oil or yoghurt as a cure"
+          }
+        },
+        {
+          "id": "poisoning.dont.clothes",
+          "icon": "no",
+          "text": {
+            "fa": "به لباس آغشته به دوای زراعتی با دست برهنه دست نزنید",
+            "ps": "په لوڅو لاسونو د کرنې په درملو لړلو جامو ته لاس مه وړئ",
+            "en": "touch spray-soaked clothes with bare hands"
+          }
+        },
+        {
+          "id": "poisoning.dont.wait",
+          "icon": "no",
+          "text": {
+            "fa": "منتظر نمانید تا علایم پیدا شود",
+            "ps": "انتظار مه باسئ چې نښې ښکاره شي",
+            "en": "wait for signs to appear"
+          }
+        }
+      ]
+    },
+    {
+      "id": "poisoning.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه برای بعضی زهرها، مانند دوای زراعتی، دوای ضد دارند و می‌توانند در نفس کشیدن کمک کنند.",
+        "ps": "په روغتون کې د ځینو زهرو، لکه د کرنې درملو، ضد درمل لري او په ساه اخیستلو کې مرسته کولی شي.",
+        "en": "At hospital they have antidotes for some poisons, like farm sprays, and can help with breathing."
+      }
+    },
+    {
+      "id": "poisoning.purpose",
+      "type": "link",
+      "to": "topic/stress",
+      "icon": "talk",
+      "title": {
+        "fa": "قصداً خورده است؟",
+        "ps": "په قصد یې خوړلي؟",
+        "en": "Took it on purpose?"
+      },
+      "text": {
+        "fa": "اگر کسی قصداً زهر خورده، پیشش بمانید و به شفاخانه ببرید. بعداً به آرامی از احوالش بپرسید.",
+        "ps": "که چا په قصد زهر خوړلي، ورسره پاتې شئ او روغتون ته یې یوسئ. وروسته په نرمۍ یې حال وپوښتئ.",
+        "en": "If someone took poison on purpose, stay with them and take them to hospital. Later, gently ask how they feel."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Guidelines for the management of common childhood illnesses / Pocket book of hospital care for children, 2nd edition (2013): poisoning (do not induce vomiting; kerosene and pneumonitis; organophosphates)",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): poisoning, chemical exposure",
+    "European Resuscitation Council Guidelines 2025: First Aid: poisoning (no routine induced vomiting; do not give milk or water as antidote)",
+    "WHO Clinical management of acute pesticide intoxication: prevention of suicidal behaviours (2008)",
+    "WHO mhGAP Intervention Guide 2.0 (2016): self-harm",
+    "WHO/UNICEF World report on child injury prevention (2008): poisoning"
+  ],
+  "review": [
+    "Rinsing the mouth is reasonable for corrosives and pesticides. ERC 2025 advises against giving water or milk as a 'dilution' antidote. The text says 'give nothing else unless a health worker says so'.",
+    "Organophosphate signs are simplified to 'sweat, drool or twitch'. Small pupils are left out because they are hard to judge.",
+    "Rat poison: Afghan rat poisons may be anticoagulants (bleeding days later), zinc or aluminium phosphide ('rice tablet', highly lethal), or others. Phosphide poisoning gives off a gas. Consider adding 'keep the room aired' if it is common locally.",
+    "Iron tablets are given as an example of a delayed-harm medicine (pregnancy iron is in many homes).",
+    "Self-harm by poisoning (pesticides) is a major cause of suicide in the region. The link block goes to the Stress page. Check the tone."
+  ]
+}

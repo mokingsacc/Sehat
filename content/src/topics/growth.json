@@ -120,9 +120,9 @@
           "id": "growth.urgent.thin",
           "icon": "muac",
           "text": {
-            "fa": "خیلی لاغر و ضعیف است",
-            "ps": "ډېر ډنګر او کمزوری دی",
-            "en": "is very thin and weak"
+            "fa": "خیلی لاغر است و همچنان خیلی ضعیف، خواب‌آلود یا مریض است",
+            "ps": "ډېر ډنګر دی او ډېر کمزوری، خوب وړی یا ناروغ هم دی",
+            "en": "is very thin and also very weak, sleepy or sick"
           }
         },
         {
@@ -135,6 +135,46 @@
           }
         }
       ]
+    },
+    {
+      "id": "growth.today",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "growth.today.thin",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "خیلی لاغر است، اما هنوز می‌خورد و فعال است",
+            "ps": "ډېر ډنګر دی، خو لا هم خوري او فعال دی",
+            "en": "is very thin, but still eats and is active"
+          }
+        },
+        {
+          "id": "growth.today.muac",
+          "icon": "muac",
+          "text": {
+            "fa": "فیتهٔ بازو رنگ سرخ را نشان می‌دهد",
+            "ps": "د مټ فیته سور رنګ ښيي",
+            "en": "the arm tape shows red"
+          }
+        }
+      ]
+    },
+    {
+      "id": "growth.home-care",
+      "type": "tip",
+      "icon": "clinic",
+      "text": {
+        "fa": "کلینیک بیشتر اطفال خیلی لاغر را با غذای خاص در خانه تداوی می‌کند و هر هفته معاینه می‌کند.",
+        "ps": "کلینیک ډېری ډېر ډنګر ماشومان په کور کې په ځانګړي خواړو درملنه کوي او هره اونۍ یې ګوري.",
+        "en": "The clinic treats most very thin children at home with special food, and checks them every week."
+      }
     },
     {
       "id": "growth.soon",
@@ -206,9 +246,9 @@
   "review": [
     "Milestone ages are given as 'most children' by these ages, as requested (smile about 6 weeks, head 3 to 4 months, sit 6 to 8 months, first words about 12 months, walk 12 to 18 months, short sentences by 2 years). WHO motor windows are wider (sitting alone 4 to 9 months, walking alone 8 to 18 months); check that the wording will not alarm parents of normal children.",
     "Soon alert title says 'go to the clinic this week' rather than the standard 'today', because poor weight gain and slow development are not same-day problems. This differs from the glossary soon title; the red-flags topic does the same.",
-    "Urgent alert: 'very thin and weak' sends to hospital. IMCI treats severe acute malnutrition without complications or oedema as outpatient (OTP) care; with oedema of both feet, complications or no appetite it is referral. Consider whether 'very thin' alone should be soon.",
     "Vitamin A from 6 months and deworming from 1 year follow WHO; Afghanistan may give vitamin A through polio campaigns. Dari 'ویتامین ای' and Pashto 'ویټامین اې' (vitamin A) need a native-speaker check.",
     "Monthly weighing 'especially in the first 2 years' assumes monthly growth monitoring under 2 in Afghan clinics; check the national growth monitoring schedule.",
-    "Hearing item uses icon 'talk'; an 'ear' icon would be better."
+    "Hearing item uses icon 'talk'; an 'ear' icon would be better.",
+    "Very thin (severe wasting) follows MoPH IMAM 2018 and WHO SAM 2013, and matches the home kit (kit-muac, the MUAC checker in js/tools.js): very thin or a red MUAC = clinic today (outpatient treatment with therapeutic food, OPD-SAM); swelling of both feet, will not eat or drink, or very thin and very weak, sleepy or sick = hospital now (inpatient). New: growth.today (clinic today box) and the growth.home-care tip; growth.urgent.thin now needs 'very weak, sleepy or sick' as well. Chosen by the merge (2026-10-07); Mo to confirm. 'Every week' for outpatient visits is IMAM practice (weekly or every 2 weeks); check locally."
   ]
 }

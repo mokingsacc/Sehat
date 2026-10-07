@@ -21,6 +21,102 @@ ui.province	په کوم ولایت کې اوسېږئ؟	Which province do you liv
 ui.ageGroup	ناروغ څو کلن دی؟	How old is the sick person?
 ui.reportThanks	مننه. دا له روغتیايي کارکوونکو سره مرسته کوي چې ساري ناروغۍ ژر وویني. دا هېچا ته خبر نه ورکوي؛ که د خطر نښې وي، همدا اوس روغتون ته ولاړ شئ.	Thank you. This helps health workers see illnesses that spread early. It does not call anyone: if there are danger signs, go to hospital now.
 ui.watch	که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي او د عمر ډله لېږل کېږي. هېڅ نوم نه لېږل کېږي. روغتیايي کارکوونکي په دې شمېر ساري ناروغۍ ژر پیدا کوي.	If you say that someone at home has an illness that spreads, only the illness, your district and an age group are sent. No names are sent. Health workers use these numbers to find outbreaks early.
+ui.breaths	د ماشوم ساه وشمېرئ، چې وګورئ چټکه ساه اخلي که نه.	Count a child's breaths, to see if the breathing is fast.
+ui.reading	د ترمامیټر، د فشار ماشین، د شکرې ماشین یا د اکسیجن چپړکي شمېره ورکړئ، او واورئ چې څه مانا لري.	Put in the number from a thermometer, blood pressure machine, sugar meter or oxygen clip, and hear what it means.
+ui.kit	د کور روغتیايي بکس: کورنۍ ته څه واخلئ، څنګه یې وکاروئ، او شمېرې څه مانا لري.	Home health kit: what to buy for your family, how to use it, and what the numbers mean.
+ui.br.intro	وشمېرئ چې ماشوم په یوه دقیقه کې څو ځله ساه اخلي. چټکه ساه د سینه بغل نښه کېدای شي. لومړی د ماشوم عمر وټاکئ.	Count how many times the child breathes in one minute. Fast breathing can be a sign of pneumonia. First, choose the child's age.
+ui.who.young	تر ۲ میاشتو کم ماشوم	Baby under 2 months
+ui.who.infant	د ۲ تر ۱۲ میاشتو ماشوم	Baby from 2 to 12 months
+ui.who.child	د ۱ تر ۵ کلونو ماشوم	Child from 1 to 5 years
+ui.who.older	له ۵ کلونو پورته ماشوم، یا لوی کس	Child over 5, or adult
+ui.who.baby3m	تر ۳ میاشتو کم ماشوم	Baby under 3 months
+ui.who.child3m	د ۳ میاشتو تر ۵ کلونو ماشوم	Child from 3 months to 5 years
+ui.who.pregnant	امیندواره ښځه	Pregnant woman
+ui.who.adult	لوی کس، چې امیندواره نه وي	Adult, not pregnant
+ui.who.under5	تر ۵ کلونو کم ماشوم	Child under 5
+ui.br.calm	صبر وکړئ چې ماشوم ارام یا ویده شي. کله چې ژاړي یا تی رودي، مه یې شمېرئ.	Wait until the child is calm or asleep. Do not count while the child cries or feeds.
+ui.br.uncover	جامې پورته کړئ چې سینه او خېټه ووینئ. کوچنی ماشوم ګرم وساتئ.	Lift the clothes so you can see the chest and belly. Keep a small baby warm.
+ui.br.watch	خېټې یا سینې ته وګورئ. هر ځل چې پورته شي، یوه ساه ده.	Watch the belly or chest. Each time it rises, that is one breath.
+ui.br.start	د پیل تڼۍ کېکاږئ. بیا هر ځل چې خېټه پورته شي، لویه تڼۍ ټک کړئ. ټیلیفون درته وايي چې دقیقه پوره شوه.	Press start. Then tap the big button each time the belly rises. The phone tells you when the minute is over.
+ui.br.v.fast-young	د ۲ میاشتو څخه کم ماشوم لپاره دا چټکه ساه ده. کېدای شي سخته ناروغي وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. ماشوم په لاره کې ګرم وساتئ.	This is fast breathing for a baby under 2 months. It can be a serious infection. Go to hospital now, day or night. Keep the baby warm on the way.
+ui.br.v.fast	د دې عمر لپاره دا چټکه ساه ده. کېدای شي سینه بغل وي. نن کلینیک ته ولاړ شئ؛ کېدای شي ماشوم درملو ته اړتیا ولري. تی او اوبلنې ورکول دوام کړئ.	This is fast breathing for the child's age. It can be pneumonia. Go to the clinic today: the child may need medicine. Keep breastfeeding and giving drinks.
+ui.br.v.ok	د دې عمر لپاره دا چټکه ساه نه ده. بیا هم لاندې د خطر نښې وګورئ. که ماشوم ناروغ ښکاري، وروسته بیا وشمېرئ.	This is not fast breathing for this age. Still look for the danger signs below. If the child seems ill, count again later.
+ui.br.v.fast-older	دا چټکه ساه ده. نن کلینیک ته ولاړ شئ. که ساه اخیستل یا خبرې کول ګران وي، یا شونډې شنې شي، همدا اوس روغتون ته ولاړ شئ.	This is fast breathing. Go to the clinic today. Go to hospital now if it is hard to breathe or talk, or the lips turn blue.
+ui.br.v.veryfast	دا ډېره چټکه ساه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	This is very fast breathing. Go to hospital now, day or night.
+ui.br.v.slow	ساه ډېره لږه ده. په پام سره یوه بشپړه دقیقه بیا وشمېرئ. که ساه رښتیا دومره ورو وي، څه وخت ودرېږي، یا ناروغ په سختۍ ویښېږي، همدا اوس روغتون ته ولاړ شئ.	Very few breaths. Count again carefully for a full minute. If the breathing is really this slow, stops for a while, or the person is hard to wake, go to hospital now.
+ui.br.check	اوس دا د خطر نښې وګورئ. که له دې څخه یوه هم ووینئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که کومه نښه وینئ، پرې ټک کړئ.	Now look for these danger signs. If you see any one of them, go to hospital now, day or night. Tap a sign if you see it.
+ui.br.indrawing	د سینې ننوتل: کله چې ماشوم ساه اخلي، د سینې لاندې برخه د پوښتیو لاندې ننوځي، د دې پر ځای چې بهر راشي. دا پدې مانا چې همدا اوس روغتون ته ولاړ شئ.	Chest indrawing: when the child breathes in, the lower chest sinks in under the ribs, instead of moving out. This means go to hospital now.
+ui.br.v.danger	تاسو د خطر یوه نښه وینئ. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	You see a danger sign. Go to hospital now, day or night.
+ui.br.clinic	په کلینیک کې روغتیايي کارکوونکی بیا ساه شمېري، سینې ته ګوري، او که اړتیا وي د سینه بغل درمل ورکوي.	At the clinic, the health worker will count the breathing again, look at the chest, and give medicine for pneumonia if needed.
+ui.rd.intro	هغه سامان وټاکئ چې مو کارولی. بیا وټاکئ چې د چا لپاره و، او شمېره ورکړئ.	Choose the device you used. Then choose who was checked, and put in the number.
+ui.rd.who	د چا لپاره مو اندازه کړه؟	Who was checked?
+ui.rd.enter.temp	د ترمامیټر شمېره ولیکئ.	Type the number on the thermometer.
+ui.rd.enter.bp	لومړی پورتنۍ شمېره، بیا لاندېنۍ شمېره ولیکئ.	Type the top number, then the bottom number.
+ui.rd.enter.sugar	هغه واحد وټاکئ چې ستاسو ماشین یې ښيي، بیا شمېره ولیکئ.	Choose the unit shown on your meter, then type the number.
+ui.rd.enter.spo2	د اکسیجن شمېره ولیکئ، هغه چې د سلنې نښې ته نږدې ده.	Type the oxygen number, the one next to the % sign.
+ui.rd.enter.muac	فیتې کوم رنګ وښود؟	Which colour did the tape show?
+ui.rd.signs	ایا ناروغ اوس له دې څخه کوم یو لري؟ پر هغو ټک کړئ چې یې وینئ. که هېڅ نه وي، لاندې تڼۍ کېکاږئ.	Does the person have any of these now? Tap the ones you see. If none, press the button below.
+ui.rd.note	دا تشخیص نه دی. یوازې روغتیايي کارکوونکی ویلای شي چې څه ستونزه ده. که ناروغ ډېر ناروغ ښکاري، هره شمېره چې وي، ولاړ شئ.	This is not a diagnosis. Only a health worker can say what is wrong. If the person looks very ill, go, whatever the number.
+ui.rd.check	دا شمېره غلطه ښکاري. سامان وګورئ او بیا یې اندازه کړئ.	This number looks wrong. Check the device and measure again.
+ui.rd.bp-order	شمېرې وګورئ. پورتنۍ شمېره تل له لاندېنۍ لویه وي.	Check the numbers. The top number is always bigger than the bottom number.
+ui.rd.v.sign	دا د خطر نښه ده، هره شمېره چې وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	This is a danger sign, whatever the number. Go to hospital now, day or night.
+ui.rd.v.temp-baby-fever	تر ۳ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.	Any fever in a baby under 3 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
+ui.rd.v.temp-baby-cold	دا ماشوم ډېر سوړ دی. ماشوم پوستکی په پوستکي د مور پر سینه کېږدئ، سر یې پټ کړئ، او همدا اوس روغتون ته ولاړ شئ.	This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now.
+ui.rd.v.temp-baby-cool	لږ سوړ دی. ماشوم پوستکی په پوستکي ونیسئ، سر یې پټ کړئ، او ۱ ساعت وروسته بیا یې اندازه کړئ. که لا هم له ۳۶ نیم کم وي، یا ښه تی نه رودي، نن کلینیک ته ولاړ شئ.	A little cold. Hold the baby skin to skin, cover the head, and measure again in 1 hour. If still under 36.5, or the baby feeds poorly, go to the clinic today.
+ui.rd.v.temp-baby-ok	د ماشوم لپاره عادي ده. ماشوم ګرم وساتئ او ډېر ځله تی ورکړئ. که ماشوم ناروغ ښکاري، ګرم یا سوړ وي، یا ښه تی نه رودي، بیا یې اندازه کړئ.	Normal for a baby. Keep the baby warm and breastfeed often. If the baby seems ill, feels hot or cold, or feeds poorly, measure again.
+ui.rd.v.temp-cold	د بدن تودوخه ډېره ټیټه ده. ناروغ په کمپلو ګرم کړئ او همدا اوس روغتون ته ولاړ شئ.	Very low temperature. Warm the person with blankets and go to hospital now.
+ui.rd.v.temp-low	شمېره ټیټه ده. وګورئ چې ترمامیټر ښه د تخرګ لاندې و، ګرم یې وساتئ، او ۳۰ دقیقې وروسته بیا یې اندازه کړئ. که ټیټه پاتې شوه، یا ناروغ کمزوری یا خوب وړی وي، نن کلینیک ته ولاړ شئ.	A low reading. Check the thermometer was deep under the arm, keep warm, and measure again in 30 minutes. If it stays low, or the person is weak or sleepy, go to the clinic today.
+ui.rd.v.temp-ok	تبه نشته. که ناروغ ښکاري، د خطر نښو ته پام وکړئ او وروسته بیا یې اندازه کړئ.	No fever. If the person seems ill, watch for danger signs and measure again later.
+ui.rd.v.temp-child-fever	دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ماشوم ډېر ناروغ ښکاري، نن ولاړ شئ.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill.
+ui.rd.v.temp-fever	دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ناروغ ډېر خراب وي، نن ولاړ شئ.	This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell.
+ui.rd.v.temp-high	لوړه تبه ده. ډېرې اوبلنې ورکړئ او سپکې جامې واغوندئ. نن کلینیک ته ولاړ شئ.	A high fever. Give plenty to drink and dress lightly. Go to the clinic today.
+ui.rd.v.temp-very-high	ډېره لوړه تبه ده. اوبلنې ورکړئ، سپکې جامې واغوندئ، او همدا اوس روغتون ته ولاړ شئ.	A very high fever. Give drinks, dress lightly, and go to hospital now.
+ui.rd.v.temp-pregnant	په امیندوارۍ کې تبه باید معاینه شي. ډېرې اوبلنې وڅښئ او نن کلینیک ته ولاړ شئ. که د خېټې درد، وینه بهېدل وي، یا دومره کمزورې یاست چې نشئ پورته کېدای، همدا اوس روغتون ته ولاړ شئ.	Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is belly pain, bleeding, or you are too weak to get up.
+ui.rd.v.bp-very-high	ډېر لوړ دی. ۵ دقیقې ارام کېنئ او یو ځل بیا یې اندازه کړئ. که لا هم ۱۸۰ پر ۱۲۰ یا ډېر وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. خپل درمل له ځان سره یوسئ.	Very high. Sit quietly for 5 minutes and measure once more. If it is still 180 over 120 or more, go to hospital now, day or night. Take your medicines with you.
+ui.rd.v.bp-high	لوړ دی. ۵ دقیقې ارام وکړئ او بیا یې اندازه کړئ. که لوړ پاتې شو، په همدې اونۍ کې له خپلو یادښتونو سره کلینیک ته ولاړ شئ. که درمل لرئ، هره ورځ یې وخورئ.	High. Rest 5 minutes and measure again. If it stays high, go to the clinic this week and take your readings. If you have medicine, keep taking it every day.
+ui.rd.v.bp-ok	د کور د اندازې لپاره عادي دی. لږ مالګه وخورئ او هره ورځ پلی وګرځئ. کله چې کلینیک ووایي بیا یې اندازه کړئ.	Normal for a home reading. Keep eating less salt and walking every day. Check again as the clinic tells you.
+ui.rd.v.bp-low	شمېره ټیټه ده. که ناروغ ښه وي، کېدای شي د هغه لپاره عادي وي. که د فشار درمل خوري، په همدې اونۍ کې کلینیک ته ووایئ.	A low reading. If the person feels well, this can be normal for them. If they take blood pressure medicine, tell the clinic this week.
+ui.rd.v.bp-low-faint	ټیټ فشار له سر ګرځېدو یا بې هوښۍ سره. وغځېږئ، پښې پورته کړئ، او اوبه وڅښئ. نن کلینیک ته ولاړ شئ. که بیا بې هوښه شو یا ګډوډ شو، همدا اوس روغتون ته ولاړ شئ.	Low blood pressure with dizziness or fainting. Lie down, raise the legs, and drink water. Go to the clinic today. If they faint again or become confused, go to hospital now.
+ui.rd.v.bp-normal-sign	شمېره لوړه نه ده، خو دا نښه باید معاینه شي. نن کلینیک ته ولاړ شئ.	The number is not high, but this sign needs a check. Go to the clinic today.
+ui.rd.v.bp-preg-severe	په امیندوارۍ کې ډېر لوړ فشار مور او ماشوم ته خطرناک دی. کېدای شي د امیندوارۍ د فشار ناروغي (پري اکلامپسیا) وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	Very high blood pressure in pregnancy is dangerous for mother and baby. It can be pre-eclampsia. Go to hospital now, day or night.
+ui.rd.v.bp-preg-signs	په امیندوارۍ کې لوړ فشار له دې نښو سره کېدای شي پري اکلامپسیا وي چې اختلاج راولي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	High blood pressure in pregnancy with these signs can be pre-eclampsia, which can cause fits. Go to hospital now, day or night.
+ui.rd.v.bp-preg-high	په امیندوارۍ کې لوړ فشار. نن کلینیک ته ولاړ شئ، که څه هم ښه یاست. که سخت سر درد، د سترګو تتوالی، د مخ یا لاسونو پړسوب، یا د خېټې درد پیل شي، همدا اوس روغتون ته ولاړ شئ.	High blood pressure in pregnancy. Go to the clinic today, even if you feel well. Go to hospital now if a bad headache, blurred vision, swelling of the face or hands, or belly pain start.
+ui.rd.v.bp-preg-ok	د امیندوارۍ لپاره عادي دی. د امیندوارۍ په هره کتنه کې یې اندازه کړئ. که سخت سر درد، د سترګو تتوالی یا د مخ پړسوب پیل شي، روغتون ته ولاړ شئ.	Normal for pregnancy. Have it checked at every pregnancy visit. Go to hospital if a bad headache, blurred vision or swelling of the face start.
+ui.rd.v.sugar-very-low	شکره ډېره ټیټه ده. که تېرولای شي، همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. بیا همدا اوس روغتون ته ولاړ شئ، که ښه هم شي: ډېره ټیټه شکره بیا راتلای شي.	Very low sugar. If they can swallow, give sugar now: about 3 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back.
+ui.rd.v.sugar-low	شکره ټیټه ده. همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. که شکره بیا ټیټه شوه، نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.	Low sugar. Give sugar now: about 3 teaspoons in a glass of water, then some food. Measure again in 15 minutes. If low sugar happens again, go to the clinic today: the medicine may need changing.
+ui.rd.v.sugar-low-sign	ټیټه شکره له ګډوډۍ یا اختلاج سره بیړنی حالت دی. که تېرولای شي، شکره ورکړئ. که نه، په خوله کې هېڅ مه ورکوئ. همدا اوس روغتون ته ولاړ شئ.	Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now.
+ui.rd.v.sugar-ok	په ښه اندازه کې ده. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.	In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-high	له اړتیا لوړه ده. درمل وخورئ، اوبه وڅښئ، شکره او سپینه ډوډۍ لږ وخورئ، او پلی وګرځئ. که ډېری شمېرې دومره لوړې وي، په همدې اونۍ کلینیک ته ولاړ شئ.	Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week.
+ui.rd.v.sugar-very-high	ډېره لوړه ده. اوبه وڅښئ، خپل معمول درمل وخورئ، او نن کلینیک ته ولاړ شئ. که کانګې، ډېر خوب وړتیا، یا چټکه او ژوره ساه وي، همدا اوس روغتون ته ولاړ شئ.	Very high. Drink water, take your usual medicine, and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing.
+ui.rd.v.sugar-danger	شکره په خطرناکه کچه لوړه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که کولای شئ، په لاره کې اوبه وڅښئ.	Dangerously high sugar. Go to hospital now, day or night. Drink water on the way if you can.
+ui.rd.v.spo2-low	اکسیجن ټیټ دی. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که لاس سوړ و یا خوځېده، ګرم یې کړئ او یو ځل بیا یې اندازه کړئ، خو ډېر انتظار مه کوئ.	Low oxygen. Go to hospital now, day or night. If the hand was cold or moving, warm it and measure once more, but do not wait long.
+ui.rd.v.spo2-lowish	له عادي کم دی. لاس ګرم او ارام ونیسئ او بیا یې اندازه کړئ. که ۹۳ یا ۹۴ پاتې شو، یا ساه لنډي لري یا ښه نه دی، نن کلینیک ته ولاړ شئ.	Lower than normal. Warm the hand, keep it still, and measure again. If it stays at 93 or 94, or the person is breathless or unwell, go to the clinic today.
+ui.rd.v.spo2-ok	عادي دی. خو چپړکی کېدای شي غلطي وکړي: که ناروغ چټکه ساه اخلي، په سختۍ ساه اخلي یا ډېر خراب ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.	Normal. But the clip can be wrong: if the person breathes fast, struggles to breathe or looks very unwell, see a health worker, whatever the number.
+ui.rd.spo2-child	هغه چپړکي چې د لویانو لپاره جوړ شوي، پر وړو ماشومانو اکثره ښه کار نه کوي. ساه هم وشمېرئ او د سینې ننوتل وګورئ.	Clips made for adults often do not work well on small children. Count the breaths and look for chest indrawing as well.
+ui.rd.v.muac-red	سور یعنې ماشوم ډېر ډنګر دی. نن کلینیک یا د تغذیې مرکز ته ولاړ شئ؛ ماشوم ځانګړو خوړو او درملو ته اړتیا لري. که دواړه پښې یې پړسېدلې وي یا هېڅ نه خوري، همدا اوس روغتون ته ولاړ شئ.	Red means the child is very thin. Go to the clinic or nutrition centre today: the child needs special food and medicine. Go to hospital now if both feet are swollen or the child will not eat.
+ui.rd.v.muac-yellow	ژېړ یعنې ماشوم ډنګر دی. په همدې اونۍ د خوړو او مشورې لپاره کلینیک ته ولاړ شئ. هره ورځ د خوړو وعدې او د مور شیدې زیاتې کړئ.	Yellow means the child is too thin. Go to the clinic this week for food and advice. Give more meals and breast milk every day.
+ui.rd.v.muac-green	شین ښه دی. راتلونکې میاشت بیا یې اندازه کړئ او ښه خواړه ورکول دوام کړئ.	Green is good. Measure again next month and keep giving good food.
+ui.rd.clinic.temp	په کلینیک کې روغتیايي کارکوونکی ناروغ معاینه کوي، د تبې لامل پیدا کوي، کېدای شي د ملاریا معاینه وکړي، او که اړتیا وي درمل ورکوي.	At the clinic, the health worker will examine the person, look for the cause of the fever, may test for malaria, and give medicine if needed.
+ui.rd.clinic.bp	په کلینیک کې بیا فشار اندازه کوي، په امیندوارۍ کې تشې متیازې معاینه کوي، او پرېکړه کوي چې درملو ته اړتیا ده یا باید بدل شي. خپل یادښتونه یوسئ.	At the clinic, they will measure again, test the urine in pregnancy, and decide if medicine is needed or should be changed. Take your readings.
+ui.rd.clinic.sugar	په کلینیک کې ستاسو شمېرې ګوري، درمل او پښې مو معاینه کوي، او که اړتیا وي درملنه بدلوي. ماشین او یادښتونه یوسئ.	At the clinic, they will look at your readings, check your medicine and your feet, and change the treatment if needed. Take your meter and your notes.
+ui.rd.clinic.spo2	په کلینیک یا روغتون کې ساه او اکسیجن په خپل ماشین معاینه کوي، او که اړتیا وي اکسیجن یا درمل ورکوي.	At the clinic or hospital, they will check the breathing and the oxygen with their own machine, and give oxygen or medicine if needed.
+ui.rd.clinic.muac	په کلینیک کې ماشوم تلي او اندازه کوي، پړسوب او ناروغي معاینه کوي، او که اړتیا وي ځانګړي خواړه او درمل ورکوي.	At the clinic, they will weigh and measure the child, check for swelling and illness, and give special food and medicine if needed.
+ui.rd.s.faint	سر یې ګرځي، یا بې هوښه شوی	dizzy, or has fainted
+ui.rd.s.blue	شونډې یا مخ شین یا خړ ښکاري	lips or face look blue or grey
+ui.rd.s.deep	چټکه او ژوره ساه اخلي	breathing fast and deep
+ui.consent	ایا صحت کولای شي د اپ د کارونې شمېر ولېږي؟ یوازې شمېر لېږل کېږي: کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو، د هرې ورځې لپاره یوځای. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. دا له موږ سره مرسته کوي چې کتاب ښه کړو او پوه شو چې کورنیو ته څنګه ګټه رسوي. که نه ووایئ، اپ بشپړ کار کوي. هر وخت چې وغواړئ، دا په تنظیماتو کې بدلولای شئ.	May Sehat send counts of how the app is used? Only numbers are sent: which pages were opened, for how many minutes, and how often audio played, added up for each day. No names, no phone numbers and no location. This helps us improve the book and learn how it helps families. The app works fully if you say no. You can change this at any time in Settings.
+ui.consentOn	صحت د اپ د کارونې شمېر لېږي، څو کتاب ښه کړو او پوه شو چې کورنیو ته څنګه ګټه رسوي. یوازې شمېر لېږل کېږي: کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو، د هرې ورځې لپاره یوځای. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که دا نه غواړئ، «مه یې لېږه» ووهئ. هر وخت چې وغواړئ، دا په تنظیماتو کې بدلولای شئ.	Sehat sends counts of how the app is used, to help us improve the book and learn how it helps families. Only numbers are sent: which pages were opened, for how many minutes, and how often audio played, added up for each day. No names, no phone numbers and no location. If you do not want this, tap Do not send. You can change this at any time in Settings.
+ui.consentDistrict	په کومه ولسوالۍ کې اوسېږئ؟ دا موږ ته ښيي چې هره سیمه څه ته اړتیا لري. یوازې د ولسوالۍ نوم لېږل کېږي، نه کلی او نه ستاسو نوم. کولای شئ دا پرېږدئ.	Which district do you live in? This shows us what each area needs. Only the district is sent, never your village or your name. You can skip this.
+ui.fbVoiceAsk	ستاسو غږیز پیغام د صحت ډلې ته لېږل کېږي څو ستاسو نظر واوري. دا پیغام له تاسو یا ستاسو له ټیلیفون سره نه تړل کېږي، او له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ.	Your voice message will be sent to the Sehat team so they can hear your idea. It is not linked to you or your phone, and it is deleted after 90 days. Please do not say names or phone numbers.
+ui.privacy.phone	هغه څه چې ستاسو په ټیلیفون کې پاتې کېږي: ستاسو ژبه، د ماشومانو نومونه، د زېږېدو نېټې او واکسینونه، او تنظیمات. دا هېڅکله نه لېږل کېږي.	What stays on your phone: your language, your children's names, birth dates and vaccines, and your settings. These are never sent.
+ui.privacy.counts	د کارونې شمېر، یوازې که ومنئ: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.	Usage counts, only if you agree: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent.
+ui.privacy.watch	د ساري ناروغیو لیدل: که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي، د عمر ډله او ورځ لېږل کېږي.	Disease watch: if you say someone at home has an illness that spreads, only the illness, your district, an age group and the day are sent.
+ui.privacy.voice	ستاسو نظر: ستاسو د غږ له ثبتولو مخکې پوښتنه کوو. پیغامونه له تاسو سره نه تړل کېږي. غږیز پیغامونه له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ او مه یې لیکئ؛ اپ د ټیلیفون شمېره له لیکنې څخه پاکوي.	Your ideas: we ask before recording your voice. Messages are not linked to you. Voice messages are deleted after 90 days. Please do not say or write names or phone numbers; the app removes phone numbers from writing.
+ui.privacy.who	یوازې د صحت ډله دا شمېر ویني، او هر ځل چې څوک یې ګوري یا ښکته کوي، لیکل کېږي. له ۵ څخه کم شمېر پټېږي، څو هېڅ کورنۍ ونه پېژندل شي. زاړه تفصیلي معلومات له ۱۲ میاشتو وروسته پاکېږي.	Only the Sehat team can see the numbers, and each time someone looks or downloads, it is written down. Numbers smaller than 5 are hidden, so no family can be recognised. Old detailed records are deleted after 12 months.
+ui.privacy.stop	هر وخت چې وغواړئ، لېږل په تنظیماتو کې بندولای شئ. اپ له هغې پرته هم همداسې کار کوي.	You can stop sending at any time in Settings. The app works the same without it.
+ui.emergency	بیړنی حالت. لومړی یو څوک د موټر راوستلو لپاره ولېږئ. بیا د ناروغ عمر وټاکئ او ستونزه ووهئ.	Emergency. First, send someone for a car. Then choose the person's age and tap the problem.
+ui.emergencyWho	څوک مرستې ته اړتیا لري؟ نوی زېږېدلی ماشوم، له ۱ کال کم ماشوم، ماشوم، که لوی کس؟	Who needs help? A newborn, a baby under 1, a child, or an adult?
+ui.emergencyList	بیړني حالات: لومړنۍ مرسته، ګام په ګام.	Emergencies: first aid, step by step.
 ui.syn.measles	تبه او په ټول بدن سرې دانې؛ کېدای شي شري وي.	Fever and a red rash all over the body; it may be measles.
 ui.syn.awd	په یوه ورځ کې درې ځله یا ډېر اوبلن نس ناستی، بې له وینې.	Three or more watery stools in one day, with no blood.
 ui.syn.bloody-diarrhoea	نس ناستی، او په ډکو متیازو کې وینه ښکاري.	Diarrhoea, with blood in the stool.
@@ -45,6 +141,19 @@ vaccines.missed	که کوم واکسین پاتې شوی وي، بیا هم ول
 vaccines.mild-illness	هغه ماشوم چې لږ زکام یا نس ناستی لري، بیا هم واکسین کېدای شي.	A child with a mild cold or mild diarrhoea can still have vaccines.
 vaccines.normal	د واکسین وروسته لږه تبه یا د پښې درد عادي خبره ده، او په یوه دوه ورځو کې ښه کېږي.	A mild fever or a sore leg after a vaccine is normal, and gets better in a day or two.
 vaccines.td	د ښځو لپاره د ټیټانوس واکسین هره ۱۵ تر ۴۹ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.	Tetanus vaccine for women (Td) Every woman aged 15 to 49, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria.
+anim.vaccines.title	واکسین ولې مهم دی	Why vaccines matter
+anim.vaccines.s1	میکروبونه دومره واړه دي چې نه لیدل کېږي. ځینې میکروبونه د خطرناکو ناروغیو لکه شری، پولیو او توره ټوخي لامل کېږي.	Germs are too small to see. Some germs cause dangerous illnesses, like measles, polio and whooping cough.
+anim.vaccines.s2	واکسین بدن ته د تمرین په څېر دی. واکسین د میکروب کمزوری یا بې‌ضرره ډول بدن ته ښيي، چې بدن زده کړي څنګه ورسره مبارزه وکړي.	A vaccine is like practice for the body. It shows the body a weak or harmless form of a germ, so the body learns how to fight it.
+anim.vaccines.s3	وروسته که اصلي میکروب راشي، بدن یې پېژني او ژر ورسره مبارزه کوي. ماشوم اکثره روغ پاتې کېږي.	Later, if the real germ comes, the body knows it and fights it fast. The child usually stays well.
+anim.vaccines.s4	هغه ماشوم چې واکسین شوی، ښه ساتل کېږي. هغه ماشوم چې واکسین شوی نه وي، کېدای شي ډېر ناروغ شي، او ځینې د ټول عمر لپاره زیان ویني.	A vaccinated child is well protected. A child without vaccines can become very sick, and some are harmed for life.
+anim.vaccines.s5	د واکسین کارت ښه وساتئ او هر ځل یې له ځان سره یوسئ؛ په هغه کې لیکل شوي چې ستاسو ماشوم کوم واکسینونه اخیستي دي. واکسین په دولتي کلینیکونو کې وړیا دی.	Keep the vaccine card safe and bring it every time: it shows which vaccines your child has had. Vaccines are free at government clinics.
+anim.vaccines.s6	ستاسو ماشوم باید تر ۲ کلنۍ پورې ۶ ځله واکسین ته بوتلل شي. که یو ځل پاتې شوی وي، بیا هم ولاړ شئ؛ روغتیايي کارکوونکی به هغه واکسینونه ورکړي چې ماشوم ته لا پکار دي.	Your child needs 6 vaccine visits before 2 years of age. If a visit was missed, still go: the health worker will give the vaccines your child still needs.
+anim.herd.title	د ټولو ساتنه	Protecting everyone
+anim.herd.s1	شری له هغو ناروغیو څخه ده چې تر ټولو ژر خپرېږي. کله چې ناروغ کس ټوخی یا پرنجی کوي، یا ساه اخلي، د هوا له لارې خپرېږي.	Measles is one of the most catching illnesses. It spreads through the air when a sick person coughs, sneezes or breathes.
+anim.herd.s2	کله چې لږ خلک واکسین شوي وي، شری له یو کس نه بل ته ځي. ډېر ژر ډېر ماشومان ناروغه کېږي.	When few people are vaccinated, measles passes from one person to the next. Soon many children are sick.
+anim.herd.s3	کله چې ډېری خلک واکسین شوي وي، شری د تګ لاره نه پیدا کوي او خپرېدل یې ودرېږي.	When most people are vaccinated, measles cannot find a way through, and it stops.
+anim.herd.s4	دا کار هغه خلک هم ساتي چې واکسین نشي اخیستلی: هغه ماشومان چې لا ډېر واړه دي، او ځینې هغه کسان چې ډېر ناروغه دي.	This also protects people who cannot have the vaccine: babies who are too young, and some people who are very sick.
+anim.herd.s5	هر ماشوم د شري دوو واکسینونو ته اړتیا لري، په ۹ میاشتنۍ او ۱۸ میاشتنۍ کې. هر واکسین شوی ماشوم د ټول کلي په ساتنه کې مرسته کوي.	Every child needs two measles vaccines, at 9 months and at 18 months. Each vaccinated child helps protect the whole village.
 danger-child.title	په ماشومانو کې د خطر نښې	Danger signs in children
 danger-child.lead	ناروغ ماشوم ډېر ژر خرابېدای شي. که له دې نښو څخه مو یوه ولیده، انتظار مه باسئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	A sick child can get worse very fast. If you see any of these signs, do not wait: go to hospital now, day or night.
 danger-child.urgent	که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If your child has any of these signs, go to hospital now, day or night:
@@ -52,7 +161,7 @@ danger-child.urgent.drink	هېڅ نشي څښلای او تی نشي رودلای
 danger-child.urgent.vomit	هر څه چې خوري یا څښي، کانګې یې کوي	vomits everything, cannot keep anything down
 danger-child.urgent.convulsion	اختلاج یې کړی یا اوس اختلاج لري	has had convulsions (fits), or has them now
 danger-child.urgent.sleepy	ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی	is very sleepy and hard to wake, or unconscious
-danger-child.urgent.breathing	ژر ژر یا په سختۍ سا اخلي	breathes fast or with difficulty
+danger-child.urgent.breathing	په ډېره سختۍ سا اخلي، یا په آرامه حالت کې یې سا غږ کوي	struggles to breathe, or breathing is noisy when calm
 danger-child.urgent.chest	د سا اخیستو پر وخت یې د سینې لاندې برخه ننوځي	the lower chest pulls in when breathing in
 danger-child.young	که تر ۲ میاشتو کوچنی ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Baby under 2 months: go to hospital now, day or night, if the baby:
 danger-child.young.feed	ښه تی نه رودي، یا یې تی رودل بند کړي دي	is not feeding well, or has stopped feeding
@@ -62,7 +171,9 @@ danger-child.young.chest	د سا اخیستو پر وخت یې د سینې لا�
 danger-child.young.temperature	تبه لري، یا یې بدن سوړ دی	has a fever, or the body feels cold
 danger-child.young.move	یوازې هغه وخت خوځېږي چې لاس پرې ووهئ، یا هېڅ نه خوځېږي	moves only when touched, or does not move at all
 danger-child.young.yellow	د لاسونو او پښو تلي یې ژېړ دي، یا په لومړۍ ورځ ژېړ شوی	has yellow palms and soles, or turned yellow on the first day
+danger-child.counter	ساه په ټیلیفون وشمېرئ. ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 danger-child.soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
+danger-child.soon.fast	ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري	breathes fast, but has none of the hospital signs
 danger-child.soon.worse	ښه نه کېږي، یا لا خرابېږي	is not getting better, or is getting worse
 danger-child.soon.fever	له ۲ ورځو زیات وخت کېږي چې تبه لري	has had a fever for more than 2 days
 danger-child.soon.blood	په ډکو متیازو کې یې وینه ښکاري	has blood in the stool
@@ -72,6 +183,232 @@ danger-child.warm	کوچنی ماشوم ګرم وساتئ. کوچنی ماشوم
 danger-child.ors	نس ناستی: او آر اس ورکړئ. که ماشوم نس ناستی لري او څښلای شي، په لاره کې ورته لږ لږ او آر اس ورکړئ.	Diarrhoea: give sips of ORS. If the child has diarrhoea and can drink, give small sips of ORS on the way.
 danger-child.plan	له مخکې چمتو اوسئ. پوه شئ چې نږدې روغتون چېرته دی او څنګه ورته ورسېږئ. پیسې او د هغه چا د تلیفون شمېره چې موټر لري، چمتو وساتئ.	Plan before it happens. Know where the nearest hospital is and how to get there. Keep money and the phone number of someone with a car ready.
 danger-child.card	د ماشوم کارت یوسئ. د ماشوم روغتیايي کارت او هغه درمل چې خوړلي یې دي، له ځان سره یوسئ.	Take the child's card. Take the child's health card and any medicines the child has had.
+cpr-newborn.title	نوی زېږېدلی ماشوم چې ساه نه اخلي	Newborn not breathing at birth
+cpr-newborn.lead	ډېری نوي زېږېدلي ماشومان له زېږون سمدستي وروسته ژاړي او ساه اخلي. که ماشوم داسې ونه کړل، لومړۍ دقیقه تر ټولو مهمه ده. سمدستي کار وکړئ.	Most babies cry and breathe soon after birth. If a baby does not, the first minute matters most. Act at once.
+cpr-newborn.dry	ماشوم سمدستي وچ کړئ. ټول بدن او سر یې په ګرم او پاک ټوکر وچ کړئ. لوند ټوکر لرې کړئ او ماشوم په وچ ټوکر کې ونغاړئ.	Dry the baby at once. Dry the whole body and head with a warm, clean cloth. Throw away the wet cloth and wrap the baby in a dry one.
+cpr-newborn.rub	شا یې ومښئ. د وچولو پر مهال، شا یې ۲ یا ۳ ځله کلکه پورته او ښکته ومښئ. خوله او پوزه یې په پاک ټوکر پاکه کړئ.	Rub the back. While drying, rub the back firmly up and down 2 or 3 times. Wipe the mouth and nose with a clean cloth.
+cpr-newborn.head	ساه نه اخلي؟ سر یې لږ شاته کړئ. که لا هم نه ژاړي یا ساه نه اخلي، په شا یې په یوه هوار او ګرم ځای کې وغځوئ. سر یې لږ شاته کړئ، ډېر نه.	Not breathing? Tilt the head back slightly. If the baby still does not cry or breathe, lay it on its back on a flat, warm place. Tilt the head back just a little, not too far.
+cpr-newborn.breaths	۵ ځله ورو ساه ورکړئ. د ماشوم خوله او پوزه په خپله خوله وپوښئ. ۵ ځله یوازې د خپلې خولې په هوا ورو پو کړئ او وګورئ چې سینه یې پورته کېږي.	Give 5 gentle breaths. Cover the baby's mouth and nose with your mouth. Give 5 gentle puffs from your cheeks, and watch the chest rise.
+cpr-newborn.keep-breathing	ساه ورکولو ته دوام ورکړئ. په هرو ۱ تر ۲ ثانیو کې یوه ورو ساه ورکړئ تر څو ماشوم ساه واخلي یا وژاړي. د روغتون په لار کې هم دوام ورکړئ.	Keep breathing for the baby. Give one gentle breath every 1 to 2 seconds until the baby breathes or cries. Keep going on the way to hospital.
+cpr-newborn.warm	ماشوم ګرم وساتئ. کله چې ماشوم ساه واخیسته، پوستکی په پوستکي یې د مور پر سینه کېږدئ او په کمپله او خولۍ یې وپوښئ. د تي په رودلو کې ورسره مرسته وکړئ.	Keep the baby warm. When the baby breathes, put it skin to skin on the mother's chest, covered with a blanket and a hat. Help the baby breastfeed.
+cpr-newborn.urgent	که نوی زېږېدلی ماشوم دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if the newborn:
+cpr-newborn.urgent.needed-breaths	د ساه پیلولو لپاره یې ساه ورکولو ته اړتیا درلوده	needed breaths to start breathing
+cpr-newborn.urgent.breathing	چټکه ساه اخلي، کړېږي یا سینه یې ننوځي	breathes fast, grunts, or the chest pulls in
+cpr-newborn.urgent.floppy	سست دی یا تی نه روي	is floppy, or is not feeding
+cpr-newborn.urgent.colour	شین کېږي یا رنګ یې ډېر الوځي	turns blue or very pale
+cpr-newborn.dont	دا کارونه مه کوئ:	Do not:
+cpr-newborn.dont.upside-down	ماشوم سرچپه مه ځړوئ او مه یې وهئ	hold the baby upside down or slap it
+cpr-newborn.dont.cold-water	ماشوم په سړو اوبو کې مه اچوئ	put the baby in cold water
+cpr-newborn.hospital	په روغتون کې ماشوم ته اکسیجن ورکوي، ګرم یې ساتي او د انتان او د شکرې د کمښت لپاره یې معاینه کوي.	At hospital they give oxygen, keep the baby warm, and check for infection and low sugar.
+cpr-newborn.midwife	که امکان ولري، په کلینیک کې له قابلې سره زېږون وکړئ. قابله داسې وسیله لري چې د ماشوم په ساه اخیستلو کې مرسته کوي.	Give birth with a midwife at a clinic if you can. Midwives have a bag and mask to help babies breathe.
+anim.cpr.title	له هغه چا سره مرسته چې بې‌هوښه دی او ساه نه اخلي	Helping someone who is not breathing
+anim.cpr.ask	څوک مرستې ته اړتیا لري؟ نوی زېږېدلی ماشوم، تي خوړونکی ماشوم، ماشوم که لوی کس؟	Who needs help? A newborn, a baby, a child or an adult?
+anim.cpr-newborn.label	نوی زېږېدلی ماشوم	Newborn (just born)
+anim.cpr-baby.label	تي خوړونکی ماشوم (تر ۱ کال کم)	Baby (under 1 year)
+anim.cpr-child.label	ماشوم (له ۱ کال تر بلوغ پورې)	Child (1 year to puberty)
+anim.cpr-adult.label	لوی کس	Adult
+anim.cpr-newborn.title	نوی زېږېدلی ماشوم چې له زېږون وروسته ساه نه اخلي	A newborn who is not breathing
+anim.cpr-newborn.s1	کله چې ماشوم وزېږېد، ټول بدن یې په پاکه او وچه ټوټه ښه وچ کړئ او شا یې ورو وموږئ. ډېری نوي زېږېدلي ماشومان بیا ژاړي او ساه اخلي.	As soon as the baby is born, dry the whole body well with a clean, dry cloth, and rub the back gently. Most babies then cry and breathe.
+anim.cpr-newborn.s2	که ماشوم نه ژاړي یا ساه نه اخلي، په لوړ غږ مرسته وغواړئ. یو څوک ولېږئ چې روغتون ته د تګ لپاره موټر راولي. ماشوم ګرم وساتئ.	If the baby is not crying or breathing, shout for help. Send someone to bring a car to go to hospital. Keep the baby warm.
+anim.cpr-newborn.s3	ماشوم په شا څملوئ او سر یې لږ شاته کړئ. خوله او بیا پوزه یې په پاکه ټوټه ورو پاکه کړئ.	Lay the baby on its back with the head tilted back a little. Gently wipe the mouth, then the nose, with a clean cloth.
+anim.cpr-newborn.s4	یو ځل بیا یې شا یا د پښو تلي وموږئ. سینې ته یې وګورئ: ایا ساه اخلي؟	Rub the back or the soles of the feet once more. Look at the chest: is the baby breathing?
+anim.cpr-newborn.s5	که نه، خپله خوله د ماشوم پر خوله او پوزه کېږدئ او کوچني او ورو پو کړئ، شاوخوا هر ۱ تر ۲ ثانیو کې یو ځل. وګورئ چې سینه یې له هر پو سره پورته شي.	If not, cover the baby's mouth and nose with your mouth and give small, gentle puffs, about one every 1 to 2 seconds. Watch the chest rise with each puff.
+anim.cpr-newborn.s6	که یوازې یاست، لومړی په لوړ غږ مرسته وغواړئ. ۱ دقیقه پو کړئ. بیا ماشوم ګرم ونغاړئ او له ځانه سره یې د مرستې لپاره یوسئ.	If you are alone, first shout loudly for help. Give puffs for 1 minute. Then wrap the baby warmly and carry it with you to get help.
+anim.cpr-newborn.s7	تر هغه چې ماشوم ساه واخلي یا وژاړي، یا مرسته ورسېږي، پو کول دوام ورکړئ. بیا ماشوم لوڅ د مور پر سینه کېږدئ، پوښ یې کړئ، ګرم یې وساتئ او روغتون ته لاړ شئ.	Keep giving puffs until the baby breathes or cries, or help arrives. Then lay the baby skin to skin on the mother's chest, covered and warm, and go to hospital.
+cpr-baby.title	تي خوړونکی ماشوم چې ساه نه اخلي	Baby not breathing (under 1)
+cpr-baby.lead	که تي خوړونکی ماشوم نه راویښېږي او په عادي ډول ساه نه اخلي، سمدستي پیل وکړئ. ستاسو ساه ورکول او فشار ورکول، تر څو مرسته رسېږي، دماغ ژوندی ساتي.	If a baby does not wake and is not breathing normally, start at once. Your breaths and pushes keep the brain alive until help comes.
+cpr-baby.check	راویښ یې کړئ او مرسته وغواړئ. د پښو په تلي یې ورو ووهئ او نوم یې واخلئ. که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ او یو څوک د موټر راوړلو لپاره ولېږئ.	Check and shout for help. Tap the soles of the feet and call the baby's name. If there is no answer, shout for help and send someone for a car.
+cpr-baby.airway	د ساه لاره خلاصه کړئ. ماشوم په شا په کلکه ځمکه وغځوئ. سر یې نېغ وساتئ، ډېر یې شاته مه کوئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.	Open the airway, look for breathing. Lay the baby on its back on a firm floor. Keep the head straight, not bent back, lift the chin, and watch the chest for 10 seconds.
+cpr-baby.breaths	لومړی ۵ ځله ساه ورکړئ. د ماشوم خوله او پوزه په خپله خوله وپوښئ. ورو پو کړئ، یوازې دومره چې سینه یې پورته شي، ۵ ځله.	Give 5 breaths first. Cover the baby's mouth and nose with your mouth. Blow gently, just enough to make the chest rise, 5 times.
+cpr-baby.thumbs	په دواړو غټو ګوتو فشار ورکړئ. سینه په دواړو لاسونو ونیسئ او دواړه غټې ګوتې د سینې د هډوکي په منځ کې کېږدئ. د سینې درېیمه برخه، شاوخوا ۴ سانتي متره، لاندې فشار ورکړئ.	Push with two thumbs. Hold the chest in both hands with both thumbs on the middle of the breastbone. Push down a third of the chest, about 4 centimetres.
+cpr-baby.rhythm	۳۰ فشارونه، بیا ۲ ساه. چټک فشار ورکړئ، په هره ثانیه کې شاوخوا ۲ ځله، او پرېږدئ چې سینه بېرته پورته شي. له ۳۰ فشارونو وروسته ۲ ځله ساه ورکړئ او بیا فشار ورکړئ.	30 pushes, then 2 breaths. Push fast, about 2 times every second, and let the chest come back up. After 30 pushes give 2 breaths, then push again.
+cpr-baby.keep-going	مه درېږئ. دوام ورکړئ تر څو ماشوم وژاړي، وخوځېږي یا ساه واخلي، یا روغتیايي کارکوونکی کار پر غاړه واخلي. په موټر کې هم دوام ورکړئ.	Do not stop. Keep going until the baby cries, moves or breathes, or a health worker takes over. Keep going in the car too.
+cpr-baby.urgent	که ماشوم روغ هم ښکاري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که:	Go to hospital now, day or night, even if the baby seems well, if it:
+cpr-baby.urgent.needed-help	ساه ورکولو یا د سینې فشار ته یې اړتیا درلوده	needed breaths or chest pushes
+cpr-baby.urgent.stopped	که څه هم لږ وخت، ساه یې بنده شوه	stopped breathing, even for a short time
+cpr-baby.urgent.colour	شین یا خړ شو، یا بدن یې سست شو	turned blue or grey, or went floppy
+cpr-baby.dont	دا کارونه مه کوئ:	Do not:
+cpr-baby.dont.shake	ماشوم مه ښوروئ	shake the baby
+cpr-baby.dont.upside-down	ماشوم له پښو سرچپه مه ځړوئ	hold the baby upside down by the feet
+cpr-baby.alone	که یوازې یاست، لومړی ۱ دقیقه دا کار وکړئ، بیا ماشوم له ځان سره واخلئ او د مرستې لپاره ولاړ شئ.	If you are alone, do this for 1 minute first, then carry the baby with you to get help.
+cpr-baby.hospital	په روغتون کې ورته اکسیجن ورکوي، زړه یې معاینه کوي او لامل یې پیدا کوي.	At hospital they give oxygen, check the heart and find out what caused it.
+anim.cpr-baby.title	تي خوړونکی ماشوم چې ساه نه اخلي	A baby who is not breathing
+anim.cpr-baby.s1	د ماشوم پښه ورو وټکوئ او په لوړ غږ یې غږ کړئ. هېڅکله تي خوړونکی ماشوم مه ښوروئ.	Gently tap the baby's foot and call loudly. Never shake a baby.
+anim.cpr-baby.s2	که ماشوم هېڅ غبرګون ونه ښود، په لوړ غږ مرسته وغواړئ. یو څوک ولېږئ چې روغتون ته د تګ لپاره موټر راولي.	If the baby does not respond, shout for help. Send someone to bring a car to go to hospital.
+anim.cpr-baby.s3	ماشوم په شا څملوئ. سر یې سم وساتئ او زنه یې لږ پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ.	Lay the baby on its back. Keep the head level and lift the chin a little. Look at the chest for up to 10 seconds.
+anim.cpr-baby.s4	که ماشوم په عادي ډول ساه نه اخلي، ۵ ورو ساګانې ورکړئ: خپله خوله د هغه پر خوله او پوزه کېږدئ او پو کړئ څو یې سینه پورته شي.	If the baby is not breathing normally, give 5 gentle breaths: cover the baby's mouth and nose with your mouth and puff until the chest rises.
+anim.cpr-baby.s5	لاسونه مو د ماشوم د سینې شاوخوا ونیسئ او دواړه غټې ګوتې یو تر څنګ د سینې د هډوکي په لاندینۍ نیمایي کېږدئ. په غټو ګوتو ۳۰ ځله کېکاږئ: شاوخوا ۴ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله.	Put your hands around the baby's chest, with both thumbs side by side on the lower half of the breastbone. Push down with your thumbs 30 times: about 4 centimetres deep, 100 to 120 times a minute.
+anim.cpr-baby.s6	بیا ۲ ساه ورکړئ او بیا ۳۰ ځله کېکاږئ. دوام ورکړئ تر هغه چې ماشوم په عادي ډول ساه واخلي یا مرسته ورسېږي.	Then give 2 breaths and 30 pushes again. Keep going until the baby breathes normally or help arrives.
+anim.cpr-baby.s7	که یوازې یاست، لومړی په لوړ غږ مرسته وغواړئ. بیا ۱ دقیقه ساه ورکړئ او سینه کېکاږئ. بیا ماشوم له ځانه سره واخلئ او د مرستې لپاره لاړ شئ.	If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute. Then carry the baby with you to get help.
+cpr-child.title	له ۱ کال لوی ماشوم چې ساه نه اخلي	Child over 1 not breathing
+cpr-child.lead	که ماشوم نه راویښېږي او په عادي ډول ساه نه اخلي، سمدستي پیل وکړئ. په ماشومانو کې اکثره لومړی ساه بندېږي، نو لومړی ساه ورکړئ.	If a child does not wake and is not breathing normally, start at once. In children breathing usually stops first, so give breaths first.
+cpr-child.check	راویښ یې کړئ او مرسته وغواړئ. اوږې یې وټکوئ او نوم یې په لوړ غږ واخلئ. که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ او یو څوک د موټر راوړلو لپاره ولېږئ.	Check and shout for help. Tap the shoulders and call the child's name loudly. If there is no answer, shout for help and send someone for a car.
+cpr-child.airway	د ساه لاره خلاصه کړئ. ماشوم په شا په کلکه ځمکه وغځوئ. سر یې لږ شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.	Open the airway, look for breathing. Lay the child on its back on firm ground. Tilt the head back a little, lift the chin, and watch the chest for 10 seconds.
+cpr-child.breaths	لومړی ۵ ځله ساه ورکړئ. پوزه یې په دوو ګوتو بنده کړئ او خوله یې په خپله خوله وپوښئ. ورو پو کړئ تر څو سینه یې پورته شي، ۵ ځله.	Give 5 breaths first. Pinch the nose closed and cover the mouth with your mouth. Blow steadily until the chest rises, 5 times.
+cpr-child.hand	په یوه لاس فشار ورکړئ. د یوه لاس د ورغوي لاندې برخه د سینې د هډوکي په لاندینۍ نیمایي کېږدئ. د سینې درېیمه برخه، شاوخوا ۵ سانتي متره، لاندې فشار ورکړئ. لوی ماشوم ته کېدای شي دواړه لاسونه پکار وي.	Push with one hand. Put the heel of one hand on the lower half of the breastbone. Push down a third of the chest, about 5 centimetres. A big child may need two hands.
+cpr-child.rhythm	۳۰ فشارونه، بیا ۲ ساه. چټک فشار ورکړئ، په هره ثانیه کې شاوخوا ۲ ځله، او پرېږدئ چې سینه بېرته پورته شي. له ۳۰ فشارونو وروسته ۲ ځله ساه ورکړئ او بیا فشار ورکړئ.	30 pushes, then 2 breaths. Push fast, about 2 times every second, and let the chest come back up. After 30 pushes give 2 breaths, then push again.
+cpr-child.keep-going	مه درېږئ. دوام ورکړئ تر څو ماشوم وخوځېږي یا په عادي ډول ساه واخلي، یا روغتیايي کارکوونکی کار پر غاړه واخلي. په موټر کې هم دوام ورکړئ.	Do not stop. Keep going until the child moves or breathes normally, or a health worker takes over. Keep going in the car too.
+cpr-child.urgent	که ماشوم روغ هم ښکاري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که:	Go to hospital now, day or night, even if the child seems well, if they:
+cpr-child.urgent.needed-help	ساه ورکولو یا د سینې فشار ته یې اړتیا درلوده	needed breaths or chest pushes
+cpr-child.urgent.stopped	که څه هم لږ وخت، ساه یې بنده شوه	stopped breathing, even for a short time
+cpr-child.urgent.sleepy	وروسته خوب وړی یا ګډوډ دی	are sleepy or confused afterwards
+cpr-child.alone	که یوازې یاست، لومړی ۱ دقیقه دا کار وکړئ، بیا د مرستې لپاره ولاړ شئ یا په لوړ غږ چیغې ووهئ.	If you are alone, do this for 1 minute first, then go for help or shout loudly.
+cpr-child.hospital	په روغتون کې ورته اکسیجن ورکوي، زړه یې معاینه کوي او لامل یې پیدا کوي.	At hospital they give oxygen, check the heart and find out what caused it.
+anim.cpr-child.title	ماشوم چې ساه نه اخلي	A child who is not breathing
+anim.cpr-child.s1	ډاډه شئ چې خطر نشته. ماشوم ورو وټکوئ او نوم یې په لوړ غږ واخلئ.	Make sure it is safe. Tap the child and call their name loudly.
+anim.cpr-child.s2	که ماشوم ځواب ورنه کړ، په لوړ غږ مرسته وغواړئ. یو څوک ولېږئ چې روغتون ته د تګ لپاره موټر راولي.	If the child does not answer, shout for help. Send someone to bring a car to go to hospital.
+anim.cpr-child.s3	سر یې ورو شاته کړئ او زنه یې پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ. که ماشوم په عادي ډول ساه نه اخلي، همدا اوس پیل وکړئ.	Gently tilt the head back and lift the chin. Look at the chest for up to 10 seconds. If the child is not breathing normally, start now.
+anim.cpr-child.s4	۵ ساه ورکړئ: پوزه یې ونیسئ، خپله خوله د ماشوم پر خوله کېږدئ او ورو پو کړئ څو یې سینه پورته شي.	Give 5 breaths: pinch the nose, cover the child's mouth with your mouth, and blow gently until the chest rises.
+anim.cpr-child.s5	په یوه لاس ۳۰ ځله د سینې منځ کېکاږئ: شاوخوا ۵ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله.	Push on the centre of the chest 30 times with one hand: about 5 centimetres deep, 100 to 120 times a minute.
+anim.cpr-child.s6	بیا ۲ ساه ورکړئ او بیا ۳۰ ځله کېکاږئ. دوام ورکړئ تر هغه چې ماشوم په عادي ډول ساه واخلي یا مرسته ورسېږي.	Then give 2 breaths and 30 pushes again. Keep going until the child breathes normally or help arrives.
+anim.cpr-child.s7	که یوازې یاست، لومړی په لوړ غږ مرسته وغواړئ. بیا ۱ دقیقه ساه ورکړئ او سینه کېکاږئ، او له هغه وروسته د مرستې راوستو لپاره لاړ شئ.	If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute, and only then go to get help.
+choking-baby.title	د تي خوړونکي ماشوم د ستوني بندېدل	Choking baby (under 1)
+choking-baby.lead	هغه تي خوړونکی ماشوم چې ناڅاپه ژړا، ټوخی یا ساه نشي کولی، کېدای شي څه شی یې په ستوني کې بند وي. سمدستي کار وکړئ.	A baby who suddenly cannot cry, cough or breathe may have something stuck in the throat. Act at once.
+choking-baby.cough	که ټوخی کوي، پرېږدئ چې ټوخی وکړي. که ماشوم ټوخی کوي یا ژاړي، لا هم هوا اخلي. ورسره پاتې شئ او وګورئ. د لټولو لپاره خپله ګوته یې په خوله کې مه ننباسئ.	If coughing, let it cough. If the baby is coughing or crying, it is still getting air. Stay and watch. Do not put your finger in the mouth to look.
+choking-baby.back	شا ته ۵ ګوزارونه. ماشوم په خپل مټ باندې مخ ښکته وغځوئ، سر یې له بدن ټیټ، او ژامه یې ونیسئ. د ورغوي په لاندې برخه د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ.	5 blows on the back. Lay the baby face down along your arm, head lower than the body, holding the jaw. Give 5 firm blows between the shoulder blades with the heel of your hand.
+choking-baby.chest	پر سینه ۵ فشارونه. ماشوم مخ پورته واړوئ، سر یې ټیټ. دواړه غټې ګوتې د سینې د هډوکي په منځ کې کېږدئ او ۵ ځله په چټکۍ سره ننه فشار ورکړئ.	5 pushes on the chest. Turn the baby face up, head lower. Put both thumbs on the middle of the breastbone and push in sharply 5 times.
+choking-baby.repeat	تکرار یې کړئ تر څو ووځي. خوله یې وګورئ. که څه شی په اسانۍ ښکاري، ویې باسئ. که نه، بیا شا ته ۵ ګوزارونه او پر سینه ۵ فشارونه ورکړئ.	Repeat until it comes out. Look in the mouth. Take out anything you can see easily. If not, give 5 back blows and 5 chest pushes again.
+choking-baby.limp	که بې‌هوښه شو، ساه او د سینې فشار. که ماشوم نور ځواب نه ورکوي، په کلکه ځمکه یې وغځوئ. ۵ ځله ساه ورکړئ او د سینې فشار پیل کړئ. یو څوک د موټر راوړلو لپاره ولېږئ.	If limp: breaths and chest pushes. If the baby stops responding, lay it on a firm floor. Give 5 breaths and start chest pushes. Send someone for a car.
+choking-baby.urgent	که ماشوم دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if the baby:
+choking-baby.urgent.thrusts	شا ته ګوزارونه یا د سینې فشار ورکړل شو	was given back blows or chest pushes
+choking-baby.urgent.noisy	وروسته لا هم ټوخی کوي یا په غږ ساه اخلي	still coughs or breathes noisily afterwards
+choking-baby.urgent.stuck	کېدای شي لا هم څه شی یې په ستوني کې وي	may still have something in the throat
+choking-baby.urgent.limp	سست یا شین شو	went limp or blue
+choking-baby.dont	دا کارونه مه کوئ:	Do not:
+choking-baby.dont.belly	د تي خوړونکي ماشوم ګېډه مه کېکاږئ	push on a baby's belly
+choking-baby.dont.finger	پرته له لیدو، ګوته یې په خوله کې مه ګرځوئ	sweep a finger in the mouth without seeing
+choking-baby.dont.upside-down	ماشوم له پښو سرچپه مه ځړوئ	hold the baby upside down by the feet
+choking-baby.cpr	سست شو؟ ساه او د سینې فشار ورکړئ. د «تي خوړونکی ماشوم چې ساه نه اخلي» پاڼه پرانیزئ او ګام په ګام یې وکړئ.	Gone limp? Breaths and chest pushes. Open the page Baby not breathing and follow it step by step.
+choking-baby.hospital	په روغتون کې سږي معاینه کوي او که څه پاتې وي، بهر یې باسي.	At hospital they check the lungs and can take out anything left inside.
+choking-baby.prevent	غوز، دانې، نخود، سکې او واړه لوبتکي له ماشوم لرې وساتئ. نرم او میده خواړه ورکړئ.	Keep nuts, seeds, chickpeas, coins and small toys away from babies. Give soft, mashed food.
+fever-fits.title	په کوچنیو ماشومانو کې له تبې سره اختلاج	Fits with fever in young children
+fever-fits.lead	ځینې ماشومان چې د ۶ میاشتو او ۵ کلونو ترمنځ وي، کله چې تبه شي، اختلاج کوي. دا ډاروونکی دی، خو اکثره په څو دقیقو کې ودرېږي او زیان نه رسوي.	Some children aged 6 months to 5 years have a fit when they get a fever. It is frightening, but it usually stops within a few minutes and does no harm.
+fever-fits.safe	ماشوم په خوندي ځای کې وغځوئ. ماشوم پر ځمکه، له اور، بخارۍ او ګرمو څښاکونو لرې وغځوئ. ماشوم کلک مه نیسئ او مه یې ښوروئ.	Lay the child somewhere safe. Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them.
+fever-fits.time	وخت یې وګورئ. وګورئ چې کله پیل شو. که له ۵ دقیقو زیات دوام وکړي، سمدستي موټر راوغواړئ.	Time it. Note when it starts. If it lasts more than 5 minutes, get a car at once.
+fever-fits.side	بیا پر اړخ. کله چې لړزه ودرېږي، ماشوم پر اړخ وغځوئ. ماشوم کېدای شي یو څه وخت خوب وړی وي؛ ورته نږدې پاتې شئ.	Then lay them on their side. When the shaking stops, lay the child on their side. The child may be sleepy for a while; stay close.
+fever-fits.cool	سپکې جامې، ډېر څښاک. اضافي جامې او کمپلې لرې کړئ. کله چې ویښ شو، ډېر ځله د مور شیدې یا څښاک ورکړئ.	Light clothes, plenty of drinks. Take off extra clothes and blankets. When the child is awake, give breast milk or drinks often.
+fever-fits.hospital-now	له اختلاج وروسته روغتون ته ولاړ شئ. هر ماشوم چې له تبې سره یې اختلاج کړی، باید سمدستي په روغتون کې ولیدل شي، چې خطرناکه ناروغي لکه مننژیت وګوري.	Go to hospital after the fit. Every child who has had a fit with fever must be seen at hospital straight away, to look for a serious illness like meningitis.
+fever-fits.urgent	د تبې له اختلاج وروسته، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، په ځانګړې توګه که ماشوم:	After a fever fit, go to hospital now, day or night. Go fast if the child:
+fever-fits.urgent.long	له ۵ دقیقو زیات اختلاج وکړ	had a fit lasting more than 5 minutes
+fever-fits.urgent.neck	غاړه یې کلکه ده یا تیاره دانې لري	has a stiff neck or a dark rash
+fever-fits.urgent.not-waking	په یوه ساعت کې سم نه راویښېږي	does not wake up properly within an hour
+fever-fits.urgent.one-side	یوازې د بدن یوې خوا یې اختلاج وکړ	had a fit on one side of the body only
+fever-fits.urgent.again	بیا اختلاج کوي	has another fit
+fever-fits.urgent.young	له ۶ میاشتو کم عمر لري	is under 6 months old
+fever-fits.dont	دا کارونه مه کوئ:	Do not:
+fever-fits.dont.mouth	هېڅ شی د ماشوم په خوله کې مه ږدئ	put anything in the child's mouth
+fever-fits.dont.cold-water	ماشوم په سړو اوبو کې مه اچوئ او په لوند ټوکر کې یې مه نغاړئ	put the child in cold water or wrap them in wet cloths
+fever-fits.dont.drink	تر څو بشپړ ویښ شوی نه وي، درمل یا څښاک مه ورکوئ	give medicine or drinks until fully awake
+fever-fits.fever	په کور کې د تبې پاملرنه. له روغتون وروسته، په کور کې د پاملرنې لپاره د تبې پاڼه وګورئ.	Caring for fever at home. After hospital, see the fever page for care at home.
+fever-fits.hospital	په روغتون کې د تبې لامل، لکه د غوږ، سینې یا دماغ انتان، پیدا کوي او درملنه یې کوي.	At hospital they look for the cause of the fever, such as an ear, chest or brain infection, and treat it.
+fever-fits.not-epilepsy	د تبې اختلاج مرګي نه ده او دماغ ته زیان نه رسوي. ماشومان تر شاوخوا ۶ کلنۍ پورې ترې خلاصېږي.	A fever fit is not epilepsy and does not harm the brain. Children grow out of it by about 6 years.
+choking.title	د ستوني بندېدل: له ۱ کال لوی ماشوم او لوی کس	Choking: child over 1, adult
+choking.lead	هغه څوک چې د خوړلو پر مهال ناڅاپه خبرې، ټوخی یا ساه نشي کولی، ستونی یې بند شوی. کېدای شي خپل ستونی ونیسي. سمدستي کار وکړئ.	Someone who suddenly cannot speak, cough or breathe while eating is choking. They may hold their throat. Act at once.
+choking.cough	که ټوخی کولی شي، ټوخي ته یې وهڅوئ. که ټوخی یا خبرې کولی شي، ورته ووایئ چې کلک ټوخی وکړي. ورسره پاتې شئ. لا یې شا مه وهئ.	If they can cough, let them cough. If they can cough or speak, tell them to keep coughing hard. Stay with them. Do not hit their back yet.
+choking.back	شا ته ۵ ګوزارونه. د هغه تر څنګ او شا ودرېږئ، مخ ته یې کوږ کړئ او سینه یې په یوه لاس ونیسئ. د ورغوي په لاندې برخه د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ.	5 blows on the back. Stand to the side and behind. Lean them forward, holding the chest with one hand. Give 5 firm blows between the shoulder blades with the heel of your hand.
+choking.belly	پر ګېډه ۵ فشارونه. شا ته یې ودرېږئ او لاسونه یې د ملا شاوخوا تاو کړئ. خپل موټی د نوم پورته کېږدئ، په بل لاس یې ونیسئ او ۵ ځله په چټکۍ سره ننه او پورته یې راکاږئ.	5 pushes on the belly. Stand behind, arms round the waist. Put a fist above the navel, hold it with the other hand, and pull sharply in and up, 5 times.
+choking.repeat	تکرار یې کړئ تر څو ووځي. بیا بیا شا ته ۵ ګوزارونه او پر ګېډه ۵ فشارونه ورکړئ تر څو خواړه ووځي. د کوچني ماشوم لپاره، شا ته یې په زنګنونو کېنئ.	Repeat until it comes out. Keep giving 5 back blows and 5 belly pushes until the food comes out. For a small child, kneel behind them.
+choking.pregnant	امیندواره یا ډېر چاغ کس: د سینې فشار. که ښځه امیندواره وي یا لاسونه مو د ملا شاوخوا نه رسېږي، خپل موټی د ګېډې پر ځای د سینې د هډوکي په لاندې برخه کېږدئ او ۵ ځله شاته یې راکاږئ.	Pregnant or very large: chest pushes. If she is pregnant, or you cannot reach round the waist, put your fist on the lower breastbone instead and pull straight back 5 times.
+choking.collapse	که بې‌هوښه شو، د سینې فشار. که نور ځواب نه ورکوي، په ځمکه یې وغځوئ او یو څوک د موټر راوړلو لپاره ولېږئ. د سینې فشار پیل کړئ؛ ماشوم ته لومړی ۵ ځله ساه ورکړئ.	If they collapse, start chest pushes. If they stop responding, lay them down and send for a car. Start chest pushes; give a child 5 breaths first.
+choking.urgent	که کس دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if the person:
+choking.urgent.thrusts	پر ګېډه یا سینه یې فشار ورکړل شو	was given belly or chest pushes
+choking.urgent.cough	لا هم ټوخی کوي، درد لري یا تېرولی نشي	still coughs, has pain, or cannot swallow
+choking.urgent.noisy	په غږ یا په سختۍ ساه اخلي	breathes noisily or with difficulty
+choking.urgent.unconscious	که څه هم لږ وخت، بې‌هوښه شو	was unconscious, even for a short time
+choking.dont	دا کارونه مه کوئ:	Do not:
+choking.dont.water	اوبه یا ډوډۍ مه ورکوئ چې خواړه ښکته شي	give water or bread to push the food down
+choking.dont.finger	پرته له لیدو، ګوته یې په خوله کې مه ګرځوئ	sweep a finger in the mouth without seeing
+choking.dont.baby	د له ۱ کال کم ماشوم ګېډه مه کېکاږئ	push on the belly of a baby under 1
+choking.hospital	د ګېډې فشار کېدای شي د بدن دننه ته زیان ورسوي. په روغتون کې دا او هغه خواړه چې کېدای شي په سږو کې پاتې وي، معاینه کوي.	Belly pushes can hurt the inside of the body. At hospital they check for this, and for food left in the lungs.
+choking.baby-page	له ۱ کال کم ماشوم؟. د ماشوم پاڼه پرانیزئ: شا ته ګوزارونه او پر سینه فشار، هېڅکله پر ګېډه نه.	Baby under 1 year?. Open the baby page: back blows and chest pushes, never the belly.
+drowning.title	په اوبو کې ډوبېدل	Drowning
+drowning.lead	ماشومان په ویالو، څاګانو، حوضونو او حتی سطلونو کې ژر او بې‌غږه ډوبېږي. په ډوبېدو کې لومړی ساه بندېږي، نو لومړی ساه ورکړئ.	Children drown fast and quietly in canals, wells, ponds and even buckets. In drowning, breathing stops first, so breaths come first.
+drowning.rescue	پرته له اوبو ته ورتلو یې وژغورئ. پخپله چټکو اوبو یا څاه ته مه ورټوپ کېږئ. په لرګي، رسۍ یا چادر لاس ورورسوئ، یا داسې شی ورواچوئ چې پر اوبو پاتې کېږي، او په لوړ غږ مرسته وغواړئ.	Rescue without going in. Do not jump into fast water or a well yourself. Reach with a stick, rope or scarf, or throw something that floats, and shout for help.
+drowning.check	ساه یې وګورئ. په شا یې په ځمکه وغځوئ. سر یې شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.	Check breathing. Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for 10 seconds.
+drowning.breaths	ساه نه اخلي: لومړی ۵ ځله ساه ورکړئ. ۵ ځله یې په خوله کې پو کړئ او وګورئ چې سینه یې پورته کېږي. د تي خوړونکي ماشوم خوله او پوزه وپوښئ. د لویانو لپاره هم همداسې.	Not breathing: 5 breaths first. Give 5 breaths into the mouth, watching the chest rise. For a baby, cover the mouth and nose. Do the same for adults.
+drowning.cpr	بیا ۳۰ فشارونه، ۲ ساه. د سینې فشار پیل کړئ: ۳۰ فشارونه، بیا ۲ ساه، بیا بیا. دوام ورکړئ تر څو ساه واخلي یا مرسته ورسېږي.	Then 30 pushes, 2 breaths. Start pushing on the chest: 30 pushes, then 2 breaths, again and again. Keep going until they breathe or help arrives.
+drowning.warm	ګرم یې وساتئ. کېدای شي اوبه یې له خولې راووځي: سر یې یوې خوا ته واړوئ او دوام ورکړئ. لندې جامې یې وباسئ او په وچو کمپلو کې یې ونغاړئ.	Keep them warm. Water may come out of the mouth: turn the head to the side and carry on. Take off wet clothes and wrap them in dry blankets.
+drowning.urgent	له هر ډوبېدو وروسته، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په ځانګړې توګه که:	After any drowning, go to hospital now, day or night. Most of all if they:
+drowning.urgent.needed-help	ساه ورکولو یا د سینې فشار ته یې اړتیا درلوده	needed breaths or chest pushes
+drowning.urgent.cough	ټوخی کوي، یا چټکه یا په سختۍ ساه اخلي	cough, or breathe fast or with difficulty
+drowning.urgent.sleepy	خوب وړی یا ګډوډ دی، یا کانګې کوي	are sleepy, confused or vomiting
+drowning.urgent.cold	یخ دی او رپېږي، یا رنګ یې ډېر الوتی دی	are cold and shivering, or very pale
+drowning.dont	دا کارونه مه کوئ:	Do not:
+drowning.dont.upside-down	سرچپه یې مه ځړوئ او د اوبو ایستلو لپاره یې ګېډه مه کېکاږئ	hold them upside down or press the belly to get water out
+drowning.dont.jump	د ژغورلو لپاره څاه یا چټکو اوبو ته مه ټوپ کوئ	jump into a well or fast water to rescue someone
+drowning.hospital	که روغ هم ښکاري، د ساه ستونزه کېدای شي څو ساعته وروسته پیل شي. په روغتون کې یې ساه څاري او اکسیجن ورکوي.	Even if they seem well, breathing problems can start hours later. At hospital they watch the breathing and give oxygen.
+drowning.prevent	څاګانې او د اوبو ټانکۍ پټې کړئ او کوچني ماشومان هېڅکله اوبو ته نږدې یوازې مه پرېږدئ.	Cover wells and water tanks, and never leave small children alone near water.
+burns.title	د اور او ګرمو اوبو سوځېدنه	Burns and scalds
+burns.lead	ماشومان په تنور، ګرمه چای، کټوګانو او صندلۍ سوځي. په اوبو د سوځېدنې سمدستي سړول زیان کموي.	Children are burned by the tandoor, hot tea, cooking pots and the sandali. Cooling the burn with water at once lessens the harm.
+burns.stop	سوځېدل ودروئ. که جامې اور اخیستي وي: ودرېږئ، پر ځمکه ولوېږئ او ورغړېږئ، یا په پنډه کمپله یې ونغاړئ. کس له تودوخې لرې کړئ.	Stop the burning. If clothes are on fire: stop, drop to the ground and roll, or wrap in a thick blanket. Move the person away from the heat.
+burns.cool	په بهېدونکو اوبو یې سړه کړئ. ۲۰ دقیقې سړې، پاکې او بهېدونکې اوبه پر سوځېدلي ځای واچوئ. څومره ژر چې کېږي پیل یې کړئ؛ تر ۳ ساعتونو وروسته هم ګټه لري.	Cool with running water. Pour cool, clean running water over the burn for 20 minutes. Start as soon as you can; it still helps up to 3 hours later.
+burns.rings	ګوتمۍ او جامې لرې کړئ. د سړولو پر مهال، ګوتمۍ، بنګړي او د سوځېدلي ځای نږدې جامې لرې کړئ. هغه څه چې له پوستکي سره نښتي، مه یې باسئ.	Take off rings and clothes. While cooling, take off rings, bangles and clothes near the burn. Leave anything that is stuck to the skin.
+burns.cover	سست یې وپوښئ. سوځېدلی ځای په پاک پلاستیک یا پاک او وچ ټوکر سست وپوښئ. اوبلنې دانې مه چوي کوئ.	Cover loosely. Cover the burn loosely with clean plastic food wrap or a clean, dry cloth. Do not burst blisters.
+burns.warm	ماشومان ګرم وساتئ. یوازې سوځېدلی ځای سوړ کړئ او د ماشوم پاتې بدن نغښتی او ګرم وساتئ. که ماشوم ورپېد، سړول ودروئ.	Keep babies and children warm. Cool only the burn, and keep the rest of the child wrapped and warm. Stop cooling if the child shivers.
+burns.urgent	په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, for:
+burns.urgent.big	له هغه کس له ورغوي لویه سوځېدنه	a burn bigger than the person's palm
+burns.urgent.baby	په تي خوړونکي ماشوم کې هره سوځېدنه	any burn on a baby
+burns.urgent.place	په مخ، لاسونو، پښو، تناسلي غړو یا بندونو سوځېدنه	a burn on the face, hands, feet, genitals or joints
+burns.urgent.deep	ژوره سوځېدنه: سپین، نسواري یا تور پوستکی، یا بې‌درده	a deep burn: white, brown or black skin, or no pain
+burns.urgent.smoke	لوګی یې تنفس کړی، غږ یې ناست دی یا خوله یې سوځېدلې	breathed smoke, has a hoarse voice, or burns in the mouth
+burns.urgent.electric	د برېښنا یا کیمیاوي موادو سوځېدنه	an electrical or chemical burn
+burns.soon	که دا حالت ولري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if:
+burns.soon.blisters	سوځېدنه اوبلنې دانې لري	the burn has blisters
+burns.soon.infected	سوځېدنه سره، پړسېدلې، بدبويه یا زوه لرونکې شي	the burn gets red, swollen, smelly or has pus
+burns.soon.fever	له سوځېدنې وروسته تبه وکړي	there is fever after a burn
+burns.dont	په سوځېدلي ځای هېڅکله دا شیان مه لګوئ:	On a burn, never put:
+burns.dont.toothpaste	د غاښونو کریم، تېل، کوچ یا غوړي مه لګوئ	toothpaste, oil, butter or ghee
+burns.dont.egg	هګۍ، اوړه، خټې یا ډیران مه لګوئ	egg, flour, mud or dung
+burns.dont.ice	یخ یا یخې اوبه مه لګوئ	ice or ice-cold water
+burns.dont.cotton	مالوچ یا وړین ټوکر چې نښلي مه ږدئ	cotton wool or fluffy cloth that sticks
+burns.hospital	په روغتون کې سوځېدنه پاکوي او پټۍ کوي، سیروم او د درد درمل ورکوي او د انتان مخه نیسي.	At hospital they clean and dress the burn, give fluids and pain medicine, and prevent infection.
+burns.prevent	ماشومان له تنوره لرې وساتئ او ګرمه چای او کټوګان لوړ او د هغوی له لاسه لرې کېږدئ.	Keep children away from the tandoor, and put hot tea and pots up high, out of their reach.
+poisoning.title	مسمومیت	Poisoning
+poisoning.lead	ماشومان اکثره په غلطۍ خاورین تېل، درمل یا زهر تېروي. د کرنې درمل د پوستکي او هوا له لارې هم زهري کوي. ژر کار وکړئ او روغتون ته ولاړ شئ.	Children often swallow kerosene, medicines or poison by mistake. Farm sprays can poison through the skin and air too. Act fast and go to hospital.
+poisoning.no-vomit	کانګو ته یې مه اړ باسئ. هېڅکله یې کانګو ته مه اړ باسئ، او مالګینې اوبه یا تېل مه ورکوئ. هغه خاورین تېل چې کانګې شي، سږو ته ځي او ډېر خطرناک دي.	Do not make them vomit. Never make them vomit, and give no salt water or oil. Kerosene that is vomited gets into the lungs and is very dangerous.
+poisoning.spray	د کرنې درمل پر پوستکي. کس تازه هوا ته وباسئ. جامې یې وباسئ او پوستکی او وېښتان یې په ډېرو اوبو او صابون ومینځئ. خپل لاسونه وساتئ.	Farm spray on the skin. Move the person into fresh air. Take off their clothes and wash skin and hair with lots of soap and water. Protect your own hands.
+poisoning.mouth	خوله یې ومینځئ. که ویښ وي، خوله دې په اوبو ومینځي او اوبه دې بهر وغورځوي. بل څه د خوړلو یا څښلو لپاره مه ورکوئ، مګر دا چې روغتیايي کارکوونکی ووايي.	Rinse the mouth. If they are awake, let them rinse the mouth with water and spit it out. Give nothing else to eat or drink unless a health worker says so.
+poisoning.bottle	بوتل روغتون ته یوسئ. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. بوتل، پاکټ یا ګولۍ له ځان سره یوسئ چې ډاکټر پوه شي چې څه وو.	Take the bottle to hospital. Go to hospital now, day or night. Take the bottle, packet or tablets with you, so the doctor knows what it was.
+poisoning.side	که خوب وړی وي، پر اړخ. که خوب وړی وي، پر اړخ یې وغځوئ. که ساه یې ودرېده، د سینې فشار پیل کړئ.	If drowsy, lay them on their side. If they are drowsy, lay them on their side. If breathing stops, start chest pushes.
+poisoning.later	د موږکانو زهر او درمل: که روغ هم وي، ولاړ شئ. ځینې د موږکانو زهر او درمل، لکه د اوسپنې ګولۍ، له څو ساعتونو یا ورځو وروسته زیان رسوي. که کس روغ هم ښکاري، روغتون ته ولاړ شئ.	Rat poison, medicines: go even if well. Some rat poisons and medicines, like iron tablets, do harm only after hours or days. Go to hospital even if the person seems well.
+poisoning.urgent	له هر مسمومیت وروسته همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. ژر ولاړ شئ که:	After any poisoning, go to hospital now, day or night. Hurry if they:
+poisoning.urgent.kerosene	له خاورینو تېلو وروسته ټوخی کوي، ساه یې بندېږي یا چټکه ساه اخلي	cough, choke or breathe fast after kerosene
+poisoning.urgent.spray	له کرنیزو درملو وروسته خولې کوي، لاړې یې بهېږي یا غړي یې رپېږي	sweat, drool or twitch after a farm spray
+poisoning.urgent.drowsy	خوب وړی یا ګډوډ دی، یا اختلاج کوي	are drowsy or confused, or have a fit
+poisoning.urgent.bleeding	له ورېژو یا پوزې وینه ورکوي، یا بدن یې ژر شین کېږي	bleed from gums or nose, or bruise easily
+poisoning.urgent.purpose	په قصد یې څه خوړلي	took something on purpose
+poisoning.dont	دا کارونه مه کوئ:	Do not:
+poisoning.dont.milk	شیدې، تېل یا مستې د علاج په توګه مه ورکوئ	give milk, oil or yoghurt as a cure
+poisoning.dont.clothes	په لوڅو لاسونو د کرنې په درملو لړلو جامو ته لاس مه وړئ	touch spray-soaked clothes with bare hands
+poisoning.dont.wait	انتظار مه باسئ چې نښې ښکاره شي	wait for signs to appear
+poisoning.hospital	په روغتون کې د ځینو زهرو، لکه د کرنې درملو، ضد درمل لري او په ساه اخیستلو کې مرسته کولی شي.	At hospital they have antidotes for some poisons, like farm sprays, and can help with breathing.
+poisoning.purpose	په قصد یې خوړلي؟. که چا په قصد زهر خوړلي، ورسره پاتې شئ او روغتون ته یې یوسئ. وروسته په نرمۍ یې حال وپوښتئ.	Took it on purpose?. If someone took poison on purpose, stay with them and take them to hospital. Later, gently ask how they feel.
+seizures.title	اختلاج (مرګي)	Fits (seizures)
+seizures.lead	په اختلاج کې کس کېدای شي ولوېږي، بدن یې کلک شي او ولړزېږي، او ځواب ورنه کړي. ډېری اختلاجونه په څو دقیقو کې پخپله ودرېږي. ستاسو دنده د هغه ساتنه ده.	In a fit, a person may fall, go stiff, shake and not answer. Most fits stop by themselves within a few minutes. Your job is to keep them safe.
+seizures.safe	ځای خوندي کړئ. اور، بخاري، ګرمه چای، اوبه او تېره شیان لرې کړئ. کس مه خوځوئ، مګر دا چې په خطر کې وي.	Make the place safe. Move away fire, the stove, hot tea, water and sharp things. Do not move the person unless they are in danger.
+seizures.head	تر سر لاندې یې نرم شی کېږدئ. یو نرم شی لکه قات شوی ټوکر یې تر سر لاندې کېږدئ. د غاړې شاوخوا تنګې جامې یې سستې کړئ.	Cushion the head. Put something soft, like a folded cloth, under the head. Loosen tight clothes around the neck.
+seizures.time	د اختلاج وخت وګورئ. کله چې پیل شي، ساعت یا ټیلیفون ته وګورئ. که له ۵ دقیقو زیات دوام وکړي، یو څوک د موټر لپاره ولېږئ او روغتون ته ولاړ شئ.	Time the fit. Look at a clock or phone when it starts. If it lasts more than 5 minutes, send for a car and go to hospital.
+seizures.side	وروسته، پر اړخ یې څملوئ. کله چې لړزه ودرېږي، پر اړخ یې واړوئ، سر یې شاته، چې لاړې بهر ووځي. ورسره پاتې شئ تر څو بشپړ ویښ شي.	Afterwards, lay them on their side. When the shaking stops, roll them onto their side, head back, so saliva can run out. Stay until they are fully awake.
+seizures.epilepsy	مرګي: درملو ته دوام ورکړئ. که کس مرګي لري، د کلینیک درمل هره ورځ ورکړئ، حتی کله چې اختلاج نه لري. هېڅکله درمل ناڅاپه مه بندوئ.	Epilepsy: keep taking the medicine. If the person has epilepsy, give the clinic's medicine every day, even when there are no fits. Never stop it suddenly.
+seizures.urgent	په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if:
+seizures.urgent.long	اختلاج له ۵ دقیقو زیات دوام وکړي	the fit lasts more than 5 minutes
+seizures.urgent.repeated	اختلاجونه یو په بل پسې راشي	fits come one after another
+seizures.urgent.first	دا یې لومړی اختلاج دی	it is their first fit ever
+seizures.urgent.not-waking	له اختلاج وروسته سم نه راویښېږي	they do not wake up properly afterwards
+seizures.urgent.injury	ټپي شو، یا اختلاج په اوبو کې وشو	they were hurt, or the fit happened in water
+seizures.urgent.breathing	له اختلاج وروسته په سختۍ ساه اخلي	breathing is difficult after the fit
+seizures.urgent.pregnant	ښځه امیندواره ده یا نوی یې زېږون کړی	she is pregnant or has just given birth
+seizures.urgent.baby	تي خوړونکي ماشوم یا ماشوم اختلاج کړی	a baby or child has a fit
+seizures.soon	که دا حالت ولري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if:
+seizures.soon.more-fits	هغه څوک چې مرګي لري، له معمول زیات اختلاج کوي	someone with epilepsy has more fits than usual
+seizures.soon.medicine	د مرګي درمل ختم شوي	the epilepsy medicine has run out
+seizures.dont	د اختلاج پر مهال دا کارونه مه کوئ:	During a fit, do not:
+seizures.dont.mouth	هېڅ شی یې په خوله کې مه ږدئ، حتی کاچوغه یا ګوته	put anything in the mouth, not even a spoon or finger
+seizures.dont.hold	کلک یې مه نیسئ او لړزه یې مه ودروئ	hold them down or try to stop the shaking
+seizures.dont.drink	تر څو بشپړ ویښ شوی نه وي، اوبه، خواړه یا درمل مه ورکوئ	give water, food or medicine until fully awake
+seizures.dont.water	پرې سړې اوبه مه اچوئ او هېڅ شی مه ور بویوئ	pour cold water on them or make them smell things
+seizures.hospital	په روغتون کې اوږد اختلاج په درملو دروي او لامل یې پیدا کوي. په امیندوارۍ کې اختلاج د مور او ماشوم لپاره بېړنۍ درملنې ته اړتیا لري.	At hospital they stop a long fit with medicine and find the cause. A fit in pregnancy needs urgent care for mother and baby.
+seizures.not-curse	مرګي د دماغ یوه ناروغي ده چې درملنه لري. هغه کسان چې مرګي لري ښوونځي ته تللی، کار کولی او واده کولی شي.	Epilepsy is an illness of the brain that can be treated. People with epilepsy can go to school, work and marry.
 newborn.title	د نوي زېږېدلي ماشوم پاملرنه	Newborn care
 newborn.lead	د ژوند لومړۍ ورځې تر ټولو خطرناکې دي. ماشوم ګرم وساتئ، ډېر ځله تی ورکړئ او د خطر نښې وپېژنئ.	The first days of life are the most dangerous. Keep the baby warm, breastfeed often, and know the danger signs.
 newborn.warm	وچ یې کړئ او پر سینه یې کېږدئ. ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه یې کېږدئ. دواړه په ګرم ټوکر پټ کړئ.	Dry the baby, hold skin to skin. Dry the baby at once and lay the baby on the mother's bare chest. Cover them both with a warm cloth.
@@ -141,15 +478,17 @@ cough.soothe	ستونی او پوزه آرامه کړئ. تود څښاک ورک�
 cough.smoke	ماشوم له لوګي لرې وساتئ. ماشومان د بخارۍ او پخلي له لوګي لرې وساتئ. د کور دننه سګرټ مه څکوئ.	Keep children away from smoke. Keep children away from the stove and cooking smoke. Do not smoke inside the house.
 cough.watch	د ماشوم سا ته پام وکړئ. کله چې ماشوم آرام وي، یوه بشپړه دقیقه وشمېرئ چې څو ځله سا اخلي. وګورئ چې د سینې لاندې برخه ننوځي که نه.	Watch the breathing. When the child is calm, count the breaths for one full minute. Look to see if the lower chest pulls in.
 cough.fast-breathing	ژر ژر سا دا ده: تر ۲ میاشتو کم ماشوم، په یوه دقیقه کې ۶۰ ځله یا ډېر؛ له ۲ تر ۱۲ میاشتو، ۵۰ ځله یا ډېر؛ له ۱ تر ۵ کلونو، ۴۰ ځله یا ډېر.	Fast breathing is: under 2 months, 60 or more breaths a minute; 2 to 12 months, 50 or more; 1 to 5 years, 40 or more.
+cough.counter	ساه په ټیلیفون وشمېرئ. ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 cough.vaccines	واکسین له سینه بغل څخه ساتي. د سینه بغل، تورې ټوخلې او شري واکسینونه سږي ساتي. ډاډه شئ چې ماشوم مو ټول واکسینونه اخیستي دي.	Vaccines protect against pneumonia. Vaccines against pneumonia, whooping cough and measles protect the lungs. Make sure your child has all their vaccines.
 cough.urgent	که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If your child has any of these signs, go to hospital now, day or night:
-cough.urgent.breathing	ژر ژر یا په سختۍ سا اخلي	breathes fast or with difficulty
+cough.urgent.breathing	تر ۲ میاشتو کوچنی دی او ژر ژر سا اخلي: په یوه دقیقه کې ۶۰ ځله یا ډېر	is under 2 months old and breathes 60 or more times a minute
 cough.urgent.chest	د سا اخیستو پر وخت یې د سینې لاندې برخه ننوځي	the lower chest pulls in when breathing in
 cough.urgent.noise	په آرامۍ کې د سا اخیستو پر وخت زیږ غږ کوي	makes a harsh noise breathing in, even when calm
 cough.urgent.drink	هېڅ نشي څښلای او تی نشي رودلای	cannot drink or breastfeed
 cough.urgent.sleepy	ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی	is very sleepy and hard to wake, or unconscious
 cough.urgent.convulsion	اختلاج یې کړی یا اوس اختلاج لري	has had convulsions (fits), or has them now
 cough.soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
+cough.soon.fast	ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري	breathes fast, but has none of the hospital signs
 cough.soon.long	تر ۲ اونیو زیات ټوخی لري؛ د نري رنځ معاینه یې پکار ده	has coughed for more than 2 weeks; needs a TB check
 cough.soon.wheeze	د سا ایستلو پر وخت شپېلۍ غوندې غږ کوي	makes a whistling sound when breathing out
 cough.soon.fever	له ۲ ورځو زیات وخت کېږي چې تبه لري	has had a fever for more than 2 days
@@ -159,12 +498,16 @@ cough.dont.medicine	نوي زېږېدلي او کوچني ماشوم ته د ټ�
 cough.dont.antibiotic	د زکام لپاره انټي بیوټیک مه ورکوئ، مګر دا چې کلینیک درکړي وي.	Do not give antibiotics for a cold unless the clinic gives them.
 fever.title	تبه	Fever
 fever.lead	تبه دا ده چې بدن ګرم شي، ځکه له یوې ناروغۍ سره جګړه کوي. ماشوم ته ښه پام وکړئ او د خطر نښې وپېژنئ.	Fever means the body is hot because it is fighting an illness. Watch your child closely and know the danger signs.
-fever.check	څنګه پوه شئ چې تبه لري. د لاس په شا د ماشوم خېټه یا غاړه لمس کړئ. که ترمامیټر لرئ، ۳۷ نیم درجې یا ډېر تبه ده.	How to tell if there is fever. Feel the belly or neck with the back of your hand. If you have a thermometer, 37.5 degrees or more is a fever.
+fever.check	د لاس په شا یې لمس کړئ. د خپل لاس شا د ماشوم پر سینه، خېټه یا غاړه کېږدئ. که ستاسو له پوستکي ګرم وي، تبه ده.	Feel with the back of your hand. Put the back of your hand on the child's chest, belly or neck. If it feels hotter than your own skin, it is a fever.
+fever.before	مخکنۍ تبه هم شمېرل کېږي. که ماشوم په همدې ناروغۍ کې مخکې ګرم و، تبه شمېرل کېږي، که څه هم اوس سوړ وي. روغتیايي کارکوونکي ته ووایئ.	Fever earlier also counts. If the child was hot earlier in this illness, it counts as a fever, even if the child feels cool now. Tell the health worker.
+fever.thermometer	په ترمامیټر: د تخرګ لاندې. که ترمامیټر لرئ، د تخرګ لاندې یې کېږدئ. ۳۷ نیم درجې یا ډېر تبه ده.	With a thermometer: under the arm. If you have a thermometer, put it under the arm. 37.5 degrees or more is a fever.
+fever.kit	د ترمامیټر د کارولو لار. څه واخلئ، څنګه یې اندازه کړئ، او هره شمېره څه مانا لري.	How to use a thermometer. What to buy, how to measure, and what each number means.
 fever.fluids	ډېرې اوبلنې ورکړئ. ډېر ځله تی ورکړئ. لویو ماشومانو ته اوبه او نورې اوبلنې ورکړئ، او خواړه ورکول دوام ورکړئ.	Give more to drink. Breastfeed more often. Give older children water and other drinks, and keep giving food.
 fever.clothes	سپکې جامې ورته واغوندئ. سپکې جامې او نری ټوکر بس دي. ماشوم په درنو کمپلو کې مه نغاړئ.	Dress the child lightly. Light clothes and a thin cloth are enough. Do not wrap the child in heavy blankets.
 fever.medicine	درمل یوازې له کلینیک څخه. یوازې هغه درمل ورکړئ چې روغتیايي کارکوونکي درکړي، لکه څنګه چې یې ویلي. ماشوم ته هېڅکله اسپرین مه ورکوئ.	Medicine only from the clinic. Give only the medicine the health worker gives you, the way they explain. Never give aspirin to children.
 fever.urgent	که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If your child has any of these signs, go to hospital now, day or night:
 fever.urgent.baby	تر ۲ میاشتو کم عمر لري او تبه لري	is under 2 months old and has any fever
+fever.urgent.cold	تر ۲ میاشتو کم عمر لري او بدن یې سوړ دی	is under 2 months old and feels cold to touch
 fever.urgent.convulsion	اختلاج یې کړی یا اوس اختلاج لري	has had convulsions (fits), or has them now
 fever.urgent.neck	غاړه یې شخه ده	has a stiff neck
 fever.urgent.sleepy	ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی	is very sleepy and hard to wake, or unconscious
@@ -209,8 +552,12 @@ growth.play	هره ورځ لوبې او خبرې وکړئ. له زېږون څخ�
 growth.vitamin-a	ویټامین اې او د چینجیو درمل. کلینیک له ۶ میاشتو ویټامین اې، او له ۱ کال د چینجیو درمل ورکوي. له روغتیايي کارکوونکي وپوښتئ چې کله یې واخلئ.	Vitamin A and worm medicine. From 6 months the clinic gives vitamin A, and from 1 year worm medicine. Ask the health worker when they are due.
 growth.urgent	که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If your child has any of these signs, go to hospital now, day or night:
 growth.urgent.feet	دواړه پښې یې پړسېدلې دي	has swelling of both feet
-growth.urgent.thin	ډېر ډنګر او کمزوری دی	is very thin and weak
+growth.urgent.thin	ډېر ډنګر دی او ډېر کمزوری، خوب وړی یا ناروغ هم دی	is very thin and also very weak, sleepy or sick
 growth.urgent.eat	هېڅ شی نه خوري او نه څښي	will not eat or drink anything
+growth.today	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
+growth.today.thin	ډېر ډنګر دی، خو لا هم خوري او فعال دی	is very thin, but still eats and is active
+growth.today.muac	د مټ فیته سور رنګ ښيي	the arm tape shows red
+growth.home-care	کلینیک ډېری ډېر ډنګر ماشومان په کور کې په ځانګړي خواړو درملنه کوي او هره اونۍ یې ګوري.	The clinic treats most very thin children at home with special food, and checks them every week.
 growth.soon	که له دې نښو څخه مو یوه ولیده، په همدې اونۍ کې کلینیک ته ولاړ شئ	If you see any of these signs, go to the clinic this week:
 growth.soon.weight	وزن یې نه زیاتېږي یا کمېږي	is not gaining weight, or is losing weight
 growth.soon.milestones	په کښېناستو، ګرځېدو یا خبرو کې له خپلو همځولو ډېر وروسته دی	is far behind other children of the same age
@@ -234,9 +581,10 @@ child-safety.urgent.blast	د چاودنې له امله ټپي شوی	was hurt b
 child-safety.first-aid	له پېښې سمدستي وروسته د کار لپاره، د لومړنیو مرستو پاڼه وګورئ.	For what to do straight after an injury, see the First aid page.
 first-aid.title	لومړنۍ مرستې	First aid
 first-aid.lead	په بېړني حالت کې ارام اوسئ او ژر کار وکړئ. دا لومړني کارونه، تر څو چې مرسته رسېږي، د یو چا ژوند ژغورلی شي.	In an emergency, stay calm and act fast. These first steps can save a life while you get help.
+first-aid.cpr	بې‌هوښه دی یا ساه نه اخلي؟. پاڼه پرانیزئ. د هر عمر لپاره د سینې فشار پاڼې ته مو بیايي.	Unconscious or not breathing?. Open the page. It takes you to chest pushes for each age.
 first-aid.burn	سوځېدنه: په اوبو یې سړه کړئ. سوځېدلی ځای ۲۰ دقیقې د پاکو بهېدونکو اوبو لاندې ونیسئ. ګوتمۍ او تنګې جامې لرې کړئ، بیا یې په پاک ټوکر سست وپوښئ.	Burns: cool with water. Cool the burn under clean running water for 20 minutes. Take off rings and tight clothes, then cover loosely with a clean cloth.
 first-aid.bleeding	ډېره وینه بهېدل: کلک فشار ورکړئ. په پاک ټوکر په ټپ باندې کلک فشار ورکړئ. فشار ته دوام ورکړئ او د کتلو لپاره ټوکر مه پورته کوئ.	Heavy bleeding: press hard. Press hard on the wound with a clean cloth. Keep pressing, and do not lift the cloth to look.
-first-aid.choking	د ماشوم د ستوني بندېدل. که ماشوم ژړا، ټوخی یا ساه نشي کولی: د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ، بیا د تي خوړونکي ماشوم پر سینه ۵ ځله فشار ورکړئ، یا د لوی ماشوم پر ګېډه ۵ ځله. تکرار یې کړئ.	Choking child. If the child cannot cry, cough or breathe: 5 firm blows between the shoulders, then 5 chest pushes for a baby, or 5 belly pushes for an older child. Repeat.
+first-aid.choking	د ستوني بندېدل. که ټوخی یا ساه نه شي کولی: شا ته ګوزارونه، بیا فشار. پاڼه همدا اوس پرانیزئ.	Choking. Cannot cough or breathe? Back blows, then pushes. Open the page now.
 first-aid.poison	مسمومیت: روغتون ته ولاړ شئ. هڅه مه کوئ چې کانګې وکړي. همدا اوس روغتون ته ولاړ شئ او بوتل یا پاکټ له ځان سره یوسئ.	Poisoning: go to hospital. Do not make them vomit. Go to hospital now, and take the bottle or packet with you.
 first-aid.fumes	د بخارۍ او صندلۍ ګاز. هېڅکله په تړلې کوټه کې د سکرو له بلې صندلۍ یا بلې بخارۍ سره مه ویده کېږئ. که په ګرمه کوټه کې چا ته سر درد، سر ګرځېدل یا کانګې پیدا شوې، ټول همدا اوس تازه هوا ته وباسئ.	Stove and sandali fumes. Never sleep with a charcoal sandali or a stove burning in a closed room. Headache, dizziness or vomiting in a heated room: get everyone into fresh air now.
 first-aid.bite	د سپي یا بل څاروي چیچل. د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ. په همغه ورځ د هاري د واکسین لپاره کلینیک یا روغتون ته ولاړ شئ.	Dog or other animal bites. Wash the bite with soap and running water for 15 minutes. Go the same day to the clinic or hospital for rabies vaccine.
@@ -523,3 +871,428 @@ floods-quakes.dont.house	بېرته زیانمن کور ته مه ننوځئ	go 
 floods-quakes.dont.gas	که د ګاز بوی راځي، اور یا اورلګیت مه بلوئ	light a fire or match if you smell gas
 floods-quakes.dont.play	مه پرېږدئ چې ماشومان د سېلاب په اوبو کې لوبې وکړي	let children play in flood water
 floods-quakes.feelings	له پېښې وروسته وېره او بې خوبي عادي ده. یو له بل سره خبرې وکړئ او د رواني فشار پاڼه وګورئ.	After a disaster, fear and poor sleep are common. Talk together and see the Stress page.
+cpr-adult.title	لوی کس چې لوېدلی او ساه نه اخلي	Adult collapsed, not breathing
+cpr-adult.lead	کله چې د یوه لوی کس زړه ودرېږي، لوېږي، ځواب نه ورکوي او په عادي ډول ساه نه اخلي. د سینې سمدستي فشار کولی شي هغه ژوندی وساتي.	When an adult's heart stops, they fall, do not answer and stop breathing normally. Pushing on the chest at once can keep them alive.
+cpr-adult.safe	لومړی خطر، بیا کس وګورئ. وګورئ چې تاسو ته د برېښنا د سیم یا موټر په څېر خطر نه وي. اوږې یې وټکوئ او په لوړ غږ وپوښتئ: ښه یې؟	Check for danger, then the person. Check there is no danger to you, like electric wires or traffic. Tap the shoulders and shout: Are you all right?
+cpr-adult.help	مرسته وغواړئ، موټر راوغواړئ. په لوړ غږ مرسته وغواړئ. یو څوک د موټر راوړلو لپاره ولېږئ، او که ټیلیفون لرئ، روغتیايي کارکوونکي ته زنګ ووهئ.	Shout for help, send for a car. Shout for help. Send someone for a car to go to hospital, and if you have a phone, call the health worker.
+cpr-adult.breathing	وګورئ چې ساه اخلي که نه. سر یې شاته کړئ او زنه یې پورته کړئ. ۱۰ ثانیې یې سینې ته وګورئ. کله کله سخته ساه اخیستل، عادي ساه نه ده.	Look for normal breathing. Tilt the head back and lift the chin. Watch the chest for 10 seconds. Gasping now and then is not normal breathing.
+cpr-adult.push	د سینې منځ کلک کېکاږئ. د یوه لاس د ورغوي لاندې برخه د سینې په منځ کې کېږدئ، بل لاس پرې کېږدئ، لاسونه نېغ. ۵ تر ۶ سانتي متره لاندې فشار ورکړئ.	Push hard in the centre. Put the heel of one hand in the centre of the chest, the other hand on top, arms straight. Push down 5 to 6 centimetres.
+cpr-adult.rhythm	چټک او پرته له درېدو. په هره ثانیه کې شاوخوا ۲ ځله فشار ورکړئ او پرېږدئ چې سینه بېرته پورته شي. که پوهېږئ، له هرو ۳۰ فشارونو وروسته ۲ ځله ساه ورکړئ.	Fast, and without stopping. Push about 2 times every second and let the chest come back up. If you know how, give 2 breaths after every 30 pushes.
+cpr-adult.turns	وار په وار، دوام ورکړئ. دوام ورکړئ تر څو په هوښ راشي او په عادي ډول ساه واخلي، یا روغتیايي کارکوونکی کار پر غاړه واخلي. هر ۲ دقیقې له بل مرستندوی سره ځای بدل کړئ.	Take turns, keep going. Keep going until they wake and breathe normally, or a health worker takes over. Change with another helper every 2 minutes.
+cpr-adult.urgent	که کس دا حالت درلود، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if someone:
+cpr-adult.urgent.collapsed	ولوېد او په عادي ډول یې ساه نه اخیسته	collapsed and was not breathing normally
+cpr-adult.urgent.woke	د سینې له فشار وروسته په هوښ راغی، که څه هم اوس ښه دی	woke up after chest pushes, even if they seem well now
+cpr-adult.urgent.fainted	بې‌هوښه شو او ژر په هوښ رانغی	fainted and did not wake up quickly
+cpr-adult.anyone	د جامو له پاسه هم فشار ورکولی شئ. هر څوک، سړی یا ښځه، مرسته کولی او د یو چا ژوند ژغورلی شي.	You can push through clothes. Anyone, a man or a woman, can help and save a life.
+cpr-adult.hospital	د سینې درد، د مخ کوږېدل یا د لاس کمزوري کېدای شي زړه حمله یا سکته وي؛ د خطر نښو پاڼه وګورئ. په روغتون کې زړه بیا په کار اچوي او د لامل درملنه کوي.	Chest pain, a drooping face or a weak arm can mean a heart attack or stroke: see Danger signs. At hospital they restart the heart and treat the cause.
+anim.cpr-adult.title	لوی کس چې بې‌هوښه لوېدلی	An adult who has collapsed
+anim.cpr-adult.s1	لومړی ډاډه شئ چې ورنږدې کېدل خطر نه لري. د کس تر څنګ په زنګنونو کېنئ، اوږې یې وټکوئ او په لوړ غږ وپوښتئ: ښه یې؟	First make sure it is safe to go near. Kneel beside the person, tap their shoulders and shout: Are you all right?
+anim.cpr-adult.s2	که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ. هر څوک چې راشي، ولېږئ چې موټر راولي، څو کس روغتون ته یوسئ.	If there is no answer, shout for help. Send anyone who comes to bring a car to take the person to hospital.
+anim.cpr-adult.s3	سر یې شاته کړئ او زنه یې پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ. که په عادي ډول ساه نه اخلي، یا یوازې کله کله سخته ساه اخلي، د سینې کېکاږل پیل کړئ.	Tilt the head back and lift the chin. Look at the chest for up to 10 seconds. If they are not breathing normally, or only gasping, start pushing on the chest.
+anim.cpr-adult.s4	د یوه لاس د ورغوي لاندې برخه د سینې په منځ کې کېږدئ. بل لاس پرې کېږدئ او لاسونه مو نېغ وساتئ.	Put the heel of one hand in the centre of the chest and your other hand on top. Keep your arms straight.
+anim.cpr-adult.s5	۳۰ ځله کلک او چټک کېکاږئ: شاوخوا ۵ تر ۶ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله، یعنې په هره ثانیه کې شاوخوا ۲ ځله. هر ځل پرېږدئ چې سینه بېرته پورته راشي.	Push hard and fast 30 times: about 5 to 6 centimetres deep, 100 to 120 times a minute, about 2 pushes every second. Let the chest come back up each time.
+anim.cpr-adult.s6	که کولی شئ، ۲ ساه ورکړئ: سر یې شاته کړئ، پوزه یې ونیسئ او په خوله کې یې پو کړئ څو سینه پورته شي. که نه غواړئ، یوازې د سینې کېکاږل هم ښه دي.	If you are willing, give 2 breaths: tilt the head, pinch the nose and blow into the mouth until the chest rises. Pushing without breaths is also good.
+anim.cpr-adult.s7	دوام ورکړئ، ۳۰ ځله کېکاږل او ۲ ساه، یا یوازې کېکاږل، تر هغه چې کس په عادي ډول ساه واخلي یا مرسته ورسېږي. که څوک رانغی، دوام ورکړئ او بیا هم په لوړ غږ مرسته وغواړئ. که بل څوک هم مرسته کولی شي، هر ۲ دقیقې وار بدل کړئ.	Keep going, 30 pushes and 2 breaths, or pushes only, until the person breathes normally or help arrives. If nobody comes, keep going and keep shouting for help. If another person can help, take turns every 2 minutes.
+unconscious.title	بې‌هوښه، خو ساه اخلي	Unconscious but breathing
+unconscious.lead	هغه څوک چې نه راویښېږي خو ساه اخلي، کېدای شي په خپله ژبه یا کانګو خفه شي. پر اړخ څملول یې د ساه لاره خلاصه ساتي.	A person who will not wake but is breathing can choke on their tongue or vomit. Lying on the side keeps the airway open.
+unconscious.check	ساه یې وګورئ. اوږې یې وټکوئ او په لوړ غږ یې غږ کړئ. که ځواب یې ورنه کړ، سر یې شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.	Check breathing. Tap the shoulders and shout. If there is no answer, tilt the head back, lift the chin, and watch the chest for 10 seconds.
+unconscious.not-breathing	په عادي ډول ساه نه اخلي؟ سینه کېکاږئ. که په عادي ډول ساه نه اخلي، همدا اوس د سینې فشار پیل کړئ. د هغه د عمر ځانګړې پاڼه وګورئ.	Not breathing normally? Start CPR. If they are not breathing normally, start pushing on the chest now. See the page for their age.
+unconscious.cpr	لوی کس ساه نه اخلي؟. د لوی کس پاڼه پرانیزئ. د ماشوم یا تي خوړونکي لپاره، د هغوی پاڼه وګورئ.	Adult not breathing?. Open the adult page. For a child or baby, use the child or baby page.
+unconscious.roll	پر اړخ یې واړوئ. تر څنګ یې په زنګنونو کېنئ. نږدې لاس یې بهر ته کېږدئ، لرې زنګون یې پورته کوږ کړئ او خپل لوري ته یې پر اړخ واړوئ.	Roll them onto their side. Kneel beside them. Put the near arm out, bend the far knee up, and roll them towards you onto their side.
+unconscious.head	سر شاته، خوله ښکته. پورتنی لاس یې د مخ لاندې کېږدئ. سر یې شاته وساتئ چې خوله یې ښکته وي او کانګې بهر ووځي.	Head back, mouth down. Put their upper hand under the cheek. Keep the head tilted back so the mouth points down and vomit can run out.
+unconscious.baby	ماشوم پر اړخ په غېږ کې ونیسئ. تي خوړونکی ماشوم پر اړخ په خپله غېږ کې ونیسئ، سر یې له بدن لږ ټیټ، چې شیدې یا کانګې بهر ووځي.	Hold a baby on its side. Hold a baby in your arms on its side, head a little lower than the body, so milk or vomit can run out.
+unconscious.watch	ورسره پاتې شئ او ساه یې وګورئ. ورسره پاتې شئ او تر څو مرسته رسېږي، ساه یې وګورئ. که ساه یې ودرېده، په شا یې واړوئ او د سینې فشار پیل کړئ.	Stay and watch the breathing. Stay with them and keep checking the breathing until help comes. If breathing stops, roll them onto the back and start CPR.
+unconscious.urgent	که کس دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if someone:
+unconscious.urgent.not-waking	نه راویښېږي، که څه هم ساه اخلي	cannot be woken, even if breathing
+unconscious.urgent.fainted	بې‌هوښه شو او په یوه دقیقه کې په هوښ رانغی	fainted and did not wake within a minute
+unconscious.urgent.confused	ګډوډ دی، یا عجیبې خبرې یا کارونه کوي	is confused, or talks or acts strangely
+unconscious.dont	دا کارونه مه کوئ:	Do not:
+unconscious.dont.food	خواړه یا اوبه مه ورکوئ	give food or drink
+unconscious.dont.pillow	بالښت یې تر سر لاندې مه ږدئ	put a pillow under the head
+unconscious.dont.alone	په شا یې یوازې مه پرېږدئ	leave them alone lying on their back
+unconscious.neck	له لوېدو وروسته، څومره چې کېږي لږ یې وخوځوئ. که اړول یې اړین وي، سر او بدن یې په یوه نېغه کرښه کې وساتئ.	After a fall, move them as little as you can. If you must roll them, keep the head and body in a straight line.
+unconscious.hospital	په روغتون کې د بې‌هوښۍ لامل پیدا کوي او درملنه یې کوي، لکه د شکرې کمښت، مسمومیت یا وینه بهېدل.	At hospital they find out why the person is unconscious and treat it, for example low sugar, poisoning or bleeding.
+bleeding.title	سخته وینه بهېدنه	Severe bleeding
+bleeding.lead	ډېره وینه بهېدنه کولی شي په څو دقیقو کې ووژني. په ټپ باندې کلک فشار ډېری وینې دروي.	Heavy bleeding can kill in minutes. Firm pressure on the wound stops most bleeding.
+bleeding.press	په ټپ کلک فشار ورکړئ. یو پاک ټوکر په ټپ کېږدئ او په لاسونو کلک فشار ورکړئ. که پلاستیکي کڅوړه لرئ، په لاس یې کړئ.	Press hard on the wound. Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands.
+bleeding.keep	فشار ته دوام ورکړئ، مه یې پورته کوئ. لږ تر لږه ۱۰ دقیقې فشار ورکړئ او د کتلو لپاره یې مه پورته کوئ. که وینه له ټوکر تېره شوه، بل ټوکر پرې کېږدئ او کلک فشار ورکړئ.	Keep pressing, do not lift. Press for at least 10 minutes without lifting to look. If blood soaks through, put more cloth on top and press harder.
+bleeding.bandage	کلک بنداژ وتړئ. یو اوږد ټوکر د ټپ پر ټوکر کلک تاو کړئ چې فشار پاتې شي. وګورئ چې د لاس یا پښې ګوتې ګلابي او ګرمې پاتې شي.	Tie a firm bandage. Wrap a long cloth tightly over the pad to keep the pressure on. Check the fingers or toes stay pink and warm.
+bleeding.tourniquet	له لاس یا پښې ډېره وینه: له ټپ پورته یې وتړئ. که بیا هم له لاس یا پښې ډېره وینه بهېږي، یو پلن ټوکر یو ورغوی له ټپ پورته ډېر کلک وتړئ. په یوه لرګي یې تاو کړئ تر څو وینه ودرېږي.	Arm or leg still pouring? Tie above. If blood still pours from an arm or leg, tie a wide cloth very tight a hand's width above the wound. Twist it with a stick until the bleeding stops.
+bleeding.time	وخت په یاد ولرئ، مه یې سستوئ. هغه وخت چې مو وتاړه په یاد ولرئ او روغتون ته یې ووایئ. پخپله یې مه سستوئ. همدا اوس روغتون ته ولاړ شئ.	Note the time, do not loosen. Remember the time you tied it and tell the hospital. Do not loosen it yourself. Go to hospital now.
+bleeding.lie	ویې غځوئ، ګرم یې وساتئ. غځېدلی او په کمپله ګرم یې وساتئ. خواړه مه ورکوئ.	Lay them down, keep them warm. Keep them lying down and warm with a blanket. Do not give food.
+bleeding.urgent	په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if:
+bleeding.urgent.not-stopping	وینه په فشار نه درېږي	bleeding does not stop with pressure
+bleeding.urgent.spurting	وینه فواره کوي یا روانه ده	blood spurts or pours out
+bleeding.urgent.band	له ټپ پورته مو کلک تړلی	you have tied a band above the wound
+bleeding.urgent.shock	کس رنګ الوتی، یخ، خولې او یا ګډوډ دی	the person is pale, cold, sweaty or confused
+bleeding.urgent.deep	ټپ ژور دی، یا په غاړه، سینه یا ګېډه کې دی	the wound is deep, or on the neck, chest or belly
+bleeding.urgent.object	څه شی په ټپ کې ننوتلی	something is stuck in the wound
+bleeding.dont	دا کارونه مه کوئ:	Do not:
+bleeding.dont.ash	ایرې، خټې یا ډیران په ټپ مه اچوئ	put ash, mud or dung on a wound
+bleeding.dont.wire	د تړلو لپاره نری تار یا سیم مه کاروئ	use thin string or wire as a band
+bleeding.dont.neck	غاړه، سر یا تنه په کلک تړونکي مه تړئ	tie a band round the neck, head or body
+bleeding.object	که څه شی په ټپ کې ننوتلی، مه یې باسئ. شاوخوا یې فشار ورکړئ، نه پرې.	If something is stuck in the wound, leave it in. Press around it, not on it.
+bleeding.hospital	په روغتون کې ټپ ګنډي، سیروم یا وینه ورکوي او د تیتانوس پیچکاري ورکوي.	At hospital they close the wound, give fluids or blood, and an injection against tetanus.
+falls-fractures.title	لوېدل او د هډوکي ماتېدل	Falls and broken bones
+falls-fractures.lead	له هوارو بامونو، ونو او دېوالونو لوېدل عام دي. خوځول کولی شي د غاړې یا ملا ټپ بدتر کړي، نو کس یوازې هغه وخت وخوځوئ چې په خطر کې وي.	Falls from flat roofs, trees and walls are common. Moving the person can make a neck or back injury worse, so move them only if they are in danger.
+falls-fractures.still	بې‌حرکته یې وساتئ. ورته ووایئ چې ونه خوځېږي. د سر خوا ته یې په زنګنونو کېنئ او سر یې په دواړو لاسونو، له بدن سره نېغ، بې‌حرکته ونیسئ تر څو مرسته ورسېږي.	Keep them still. Tell them not to move. Kneel at their head and hold it still with both hands, in line with the body, until help comes.
+falls-fractures.signs	د غاړې یا ملا د ټپ نښې. د غاړې یا ملا درد، د لاسونو یا پښو بې‌حسي یا کمزوري، یا پر سر سخت لوېدل: کېدای شي د ملا تیر ټپي وي.	Signs of a neck or back injury. Neck or back pain, numb or weak arms or legs, or a hard fall onto the head: the spine may be hurt.
+falls-fractures.carry	په هواره تخته یې یوسئ. روغتون ته د وړلو لپاره، د څو کسانو په مرسته یې په یوه دروازه یا هواره تخته وښویوئ، او سر، غاړه او بدن په یوه کرښه کې وساتئ.	Carry them flat on a board. To go to hospital, slide them onto a door or flat board with several helpers, keeping the head, neck and body in one line.
+falls-fractures.bone	مات لاس یا پښه بې‌حرکته کړئ. درد، پړسوب یا کوږوالی د هډوکي ماتېدل ښيي. له یوه لرګي یا تاو شوي ټوکر سره یې وتړئ، یا لاس په غاړه کې وځړوئ.	Broken arm or leg: keep it still. Pain, swelling or a bent shape means a broken bone. Keep it still with a stick or rolled cloth tied alongside, or the arm in a sling.
+falls-fractures.open	هډوکی له پوستکي وتلی. که هډوکی له پوستکي بهر وتلی وي، په پاک ټوکر یې وپوښئ او شاوخوا یې فشار ورکړئ چې وینه ودرېږي. بېرته یې مه ننباسئ.	Bone through the skin. If bone shows through the skin, cover it with a clean cloth and press around it to stop bleeding. Do not push it back in.
+falls-fractures.cold	پړسوب سوړ کړئ. یو لوند او سوړ ټوکر، یا په ټوکر کې نغښتی یخ، ۲۰ دقیقې پر ټپي ځای کېږدئ چې درد او پړسوب کم شي.	Cool the swelling. Put a cold wet cloth, or ice wrapped in cloth, on the hurt part for 20 minutes to ease pain and swelling.
+falls-fractures.urgent	که له لوېدو وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if after a fall someone:
+falls-fractures.urgent.height	له بام یا لوړ ځای لوېدلی	fell from a roof or a high place
+falls-fractures.urgent.spine	د غاړې یا ملا درد، یا بې‌حسه یا کمزوري لاسونه او پښې لري	has neck or back pain, or numb or weak limbs
+falls-fractures.urgent.limb	لاس یا پښه یې کږه شوې یا کار نه کوي	has an arm or leg that is bent or cannot be used
+falls-fractures.urgent.open	هډوکی یې له پوستکي وتلی	has bone showing through the skin
+falls-fractures.urgent.head	سر یې لګېدلی او خوب وړی دی یا کانګې کوي	hit their head and is sleepy or vomiting
+falls-fractures.urgent.belly	د ګېډې یا سینې درد، یا د ساه ستونزه لري	has belly or chest pain, or trouble breathing
+falls-fractures.dont	دا کارونه مه کوئ:	Do not:
+falls-fractures.dont.pull	مات لاس یا پښه د نېغولو لپاره مه کاږئ او مه یې تاووئ	pull or twist a broken arm or leg to straighten it
+falls-fractures.dont.sit-up	هغه څوک چې کېدای شي غاړه یې ټپي وي، مه کېنوئ او مه یې پورته کوئ	sit up or lift someone who may have a neck injury
+falls-fractures.dont.bonesetter	د روغتون پر ځای، هډوکی ماتې تړونکي ته د کلک تړلو لپاره مه وړئ	have it tightly bound by a bonesetter instead of going to hospital
+falls-fractures.hospital	په روغتون کې اکسرې اخلي، مات هډوکي ځای ته اړوي او پلستر کوي، او د دننه وینې بهېدنه معاینه کوي.	At hospital they take an X-ray, set and plaster broken bones, and check for bleeding inside.
+falls-fractures.prevent	د هوارو بامونو شاوخوا ټیټ دېوال جوړ کړئ او مه پرېږدئ چې ماشومان پر بام لوبې وکړي یا ویده شي.	Build a low wall round flat roofs, and do not let children play or sleep on the roof.
+head-injury.title	سر ته ټکر	Head injury
+head-injury.lead	د سر ډېری ټکرونه سپک وي. خو د کوپړۍ دننه وینه بهېدل کېدای شي څو ساعته وروسته ښکاره شي، نو کس یوه ورځ له نږدې وڅارئ.	Most knocks to the head are mild. But bleeding inside the skull can show hours later, so watch the person closely for a day.
+head-injury.unconscious	که بې‌هوښه وي، غاړه یې وساتئ. که کس بې‌هوښه وي، کېدای شي غاړه یې هم ټپي وي. سر او غاړه یې بې‌حرکته وساتئ، ساه یې وګورئ او یو څوک د موټر راوړلو لپاره ولېږئ.	Knocked out? Protect the neck. If the person is unconscious, the neck may be hurt too. Keep the head and neck still, check breathing, and send for a car.
+head-injury.cut	د سر په ټپ فشار ورکړئ. د سر ټپ ډېره وینه ورکوي. ۱۰ دقیقې یې په پاک ټوکر کلک فشار ورکړئ.	Press on a bleeding scalp. A cut on the head bleeds a lot. Press on it firmly with a clean cloth for 10 minutes.
+head-injury.cold	پر پړسوب سوړ ټوکر. د پړسوب لپاره، ۲۰ دقیقې یو لوند او سوړ ټوکر پرې ونیسئ. پرېږدئ چې کس آرام وکړي.	A cold cloth on the bump. For a bump, hold a cold wet cloth on it for 20 minutes. Let the person rest.
+head-injury.watch	۲۴ ساعته یې وڅارئ. یو څوک دې ۲۴ ساعته ورسره پاتې شي. ویده کېدای شي، خو څو ځله یې راویښ کړئ چې وګورئ تاسو پېژني.	Watch for 24 hours. Someone should stay with them for 24 hours. They may sleep, but wake them a few times to check they know you.
+head-injury.child	تي خوړونکي او کوچني ماشومان. هغه تي خوړونکی ماشوم چې له لوړ ځای لوېدلی، یا هر ماشوم چې له لوېدو وروسته د تل په څېر نه وي، باید په روغتون کې ولیدل شي.	Babies and small children. A baby who falls from a height, or any child who is not their usual self after a fall, must be seen at hospital.
+head-injury.urgent	که سر ته له ټکر وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if after a head injury they:
+head-injury.urgent.knocked-out	که څه هم لږ وخت، بې‌هوښه شو	were knocked out, even for a moment
+head-injury.urgent.vomit	له یو ځل زیات یې کانګې وکړې	vomit more than once
+head-injury.urgent.drowsy	ډېر خوب وړی یا ګډوډ دی، یا په سختۍ راویښېږي	are very sleepy, confused or hard to wake
+head-injury.urgent.fit	اختلاج یې وکړ	have a fit
+head-injury.urgent.headache	سر درد لري چې بدترېږي	have a headache that gets worse
+head-injury.urgent.fluid	له پوزې یا غوږونو روڼې اوبه یا وینه راځي	have clear fluid or blood from the nose or ears
+head-injury.urgent.weak	لاس یا پښه یې کمزوري ده، یا خبرې یې ګډې وډې دي	have a weak arm or leg, or slurred speech
+head-injury.dont	دا کارونه مه کوئ:	Do not:
+head-injury.dont.alone	۲۴ ساعته یې یوازې مه پرېږدئ	leave them alone for 24 hours
+head-injury.dont.work	مه پرېږدئ چې په هماغه ورځ سخت کار وکړي یا موټر او موټرسایکل وچلوي	let them do hard work, or drive a car or motorbike, that day
+head-injury.hospital	په روغتون کې دماغ معاینه کوي او که اړتیا وي، د انځور یا عملیات لپاره یې لوی روغتون ته لېږي.	At hospital they check the brain, and if needed send them to a bigger hospital for a scan or an operation.
+electric-shock.title	د برېښنا وهل	Electric shock
+electric-shock.lead	لوڅ سیمونه، مات پلګونه او اوبو ته نږدې سیمونه کولی شي وژونکې برېښنا ورکړي. برېښنا له هغه تاسو ته هم رسېدلی شي، نو لومړی ځای خوندي کړئ.	Bare wires, broken plugs and wires near water can give a deadly shock. The power can pass into you too, so make it safe first.
+electric-shock.off	برېښنا بنده کړئ. سویچ یا عمومي سویچ بند کړئ، یا پلګ وباسئ. تر څو برېښنا بنده شوې نه وي، کس ته لاس مه وړئ.	Switch off the power. Turn off the switch or the main switch, or pull out the plug. Do not touch the person until the power is off.
+electric-shock.stick	بندولی یې نشئ؟ وچ لرګی. پر یوه وچ شي ودرېږئ. سیم په وچ لرګي یا لرګینې چوکۍ لرې کړئ. هېڅکله لوند یا فلزي شی مه کاروئ.	Cannot switch off? Use dry wood. Stand on something dry. Push the wire away with a dry wooden stick or chair. Never use anything wet or metal.
+electric-shock.line	د برېښنا لوی سیم: لرې پاتې شئ. که د برېښنا لوی سیم لوېدلی وي، لږ تر لږه ۲۰ قدمه لرې پاتې شئ او نور هم لرې وساتئ تر څو برېښنا پرې شي.	Big power line down: keep away. If a big power line has fallen, stay at least 20 steps away and keep others back until the power is cut.
+electric-shock.breathing	ساه یې وګورئ. کله چې خوندي شو، ساه یې وګورئ. که په عادي ډول ساه نه اخلي، د سینې فشار پیل کړئ او یو څوک د موټر راوړلو لپاره ولېږئ.	Check breathing. When it is safe, check breathing. If they are not breathing normally, start chest pushes and send for a car.
+electric-shock.burns	سوځېدنې سړې کړئ. برېښنا هلته سوځوي چې ننوځي او وځي. دا سوځېدنې ۲۰ دقیقې په اوبو سړې کړئ او سستې یې وپوښئ.	Cool the burns. Electricity burns where it goes in and comes out. Cool these burns with water for 20 minutes and cover them loosely.
+electric-shock.urgent	له سخت برېښنا وهلو وروسته، که روغ هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, after a strong shock, even if they seem well:
+electric-shock.urgent.unconscious	بې‌هوښه شو یا د سینې فشار ته یې اړتیا درلوده	was unconscious or needed chest pushes
+electric-shock.urgent.burns	سوځېدنه لري، که څه هم وړه وي	has burns, even small ones
+electric-shock.urgent.heart	د سینې درد لري، یا زړه یې چټک یا بې‌نظمه ټکان کوي	has chest pain, or a fast or uneven heartbeat
+electric-shock.urgent.numb	ګډوډ دی، یا بې‌حسي یا کمزوري لري	is confused, or has numbness or weakness
+electric-shock.urgent.lightning	آسماني برېښنا وهلی	was struck by lightning
+electric-shock.dont	دا کارونه مه کوئ:	Do not:
+electric-shock.dont.touch	تر څو برېښنا وصل وي، لاس مه ورته وړئ	touch them while the power is on
+electric-shock.dont.line	د برېښنا لوېدلي لوی سیم ته نږدې مه ځئ	go near a fallen power line
+electric-shock.dont.water	پر برېښنايي اور اوبه مه اچوئ	throw water on an electrical fire
+electric-shock.hospital	برېښنا کولی شي د بهر په یوه کوچنۍ نښه، زړه او د بدن دننه ته زیان ورسوي. په روغتون کې د زړه ټکان معاینه کوي.	Electricity can harm the heart and the inside of the body while leaving only small marks. At hospital they check the heartbeat.
+electric-shock.prevent	سیمونه له ځمکې او اوبو لرې وساتئ، ساکټونه پټ کړئ او مه پرېږدئ چې ماشومان پلګونو ته لاس ور وړي.	Keep wires off the ground and away from water, cover sockets, and do not let children touch plugs.
+snake-scorpion.title	د مار او لړم چیچل	Snake and scorpion bites
+snake-scorpion.lead	په سمنګان کې مار او لړم خطرناک کېدای شي، په ځانګړې توګه د ماشومانو لپاره. ژر روغتون ته رسېدل ژوند ژغوري.	Snakes and scorpions in Samangan can be dangerous, most of all for children. Getting to hospital fast saves lives.
+snake-scorpion.away	لرې شئ او ارام اوسئ. له مار لرې شئ. هڅه مه کوئ چې ونیسئ یا یې ووژنئ. کس ارام او بې‌حرکته غځېدلی وساتئ.	Move away and stay calm. Move away from the snake. Do not try to catch or kill it. Keep the person calm, lying still.
+snake-scorpion.still	چیچل شوې برخه بې‌حرکته وساتئ. مخکې له پړسېدو، ګوتمۍ، بنګړي او بوټونه وباسئ. لاس یا پښه بې‌حرکته وساتئ، که کېږي په یوه تخته.	Keep the bitten part still. Before it swells, take off rings, bangles and shoes. Keep the arm or leg still, with a splint if you can.
+snake-scorpion.carry	روغتون ته یې یوسئ. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. کس په غېږ یا په موټر کې یوسئ: تګ زهر ژر خپروي.	Carry them to hospital. Go to hospital now, day or night. Carry the person or take a car: walking spreads the poison faster.
+snake-scorpion.side	که کانګې کوي یا خوب وړی شو. که کانګې کوي یا خوب وړی کېږي، پر چپ اړخ یې وغځوئ. ساه یې وګورئ، او که ودرېده، د سینې فشار پیل کړئ.	If vomiting or drowsy. If they vomit or get drowsy, lay them on their left side. Watch the breathing, and start chest pushes if it stops.
+snake-scorpion.scorpion	د لړم چیچل. د چیچلو ځای ومینځئ او یو لوند او سوړ ټوکر پرې کېږدئ. هغه ماشوم چې لړم چیچلی، باید همدا اوس روغتون ته یوړل شي.	Scorpion sting. Wash the sting and put a cold wet cloth on it. A child stung by a scorpion must go to hospital now.
+snake-scorpion.urgent	د مار له هر چیچلو وروسته همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. ژر ولاړ شئ که:	After any snake bite, go to hospital now, day or night. Hurry if:
+snake-scorpion.urgent.child-scorpion	لړم ماشوم چیچلی	a scorpion has stung a child
+snake-scorpion.urgent.swelling	د چیچلو ځای پړسېږي، وینه ورکوي یا پوستکی تور کېږي	the bite swells, bleeds, or the skin goes dark
+snake-scorpion.urgent.eyelids	پلکونه یې ښکته کېږي، یا خبرې یا تېرول ورته سخت دي	eyelids droop, or speaking or swallowing is hard
+snake-scorpion.urgent.bleeding	له ورېژو، پوزې یا په تشو متیازو کې وینه راځي	there is bleeding from gums or nose, or in urine
+snake-scorpion.urgent.sweating	ډېرې خولې، کانګې، لړزه یا چټکه ساه لري	there is heavy sweating, vomiting, shaking or fast breathing
+snake-scorpion.urgent.drowsy	خوب وړی یا کمزوری کېږي	the person gets drowsy or weak
+snake-scorpion.dont	دا کارونه مه کوئ:	Do not:
+snake-scorpion.dont.cut	د چیچلو ځای مه پرې کوئ او زهر مه زبېښئ	cut the bite or suck out the poison
+snake-scorpion.dont.band	د لاس یا پښې شاوخوا کلک تړونی یا رسۍ مه تړئ	tie a tight band or rope round the limb
+snake-scorpion.dont.things	یخ، بوټي، ډیران یا ګرمه اوسپنه پرې مه ږدئ	put ice, herbs, dung or a hot iron on it
+snake-scorpion.dont.wait	روغتون ته له تګ مخکې انتظار مه باسئ	wait before going to hospital
+snake-scorpion.hospital	په روغتون کې د زهرو نښې څاري او کولی شي د مار د زهرو ضد درمل ورکړي؛ یوازینی درمل چې د مار زهر بې‌اغېزه کوي.	At hospital they watch for signs of poisoning and can give antivenom, the only medicine that stops snake poison.
+snake-scorpion.prevent	د شپې لاسي څراغ له ځان سره ولرئ او بوټونه واغوندئ. د اغوستلو مخکې، بوټونه او بستره وڅنډئ.	At night, carry a torch and wear shoes. Shake out shoes and bedding before use.
+heat-stroke.title	د ګرمۍ وهل	Heat stroke
+heat-stroke.lead	د اوړي په ګرمۍ کې په پټي کې کار، یا په ګرم موټر یا کوټه کې د ماشوم پاتې کېدل، کولی شي د ګرمۍ وهلو لامل شي. بدن ډېر ګرم کېږي او کېدای شي ووژني.	Field work in summer heat, or a child left in a hot car or room, can cause heat stroke. The body gets too hot, and this can kill.
+heat-stroke.signs	نښې وپېژنئ. ډېر تود پوستکی، سر درد، ګډوډي، عجیب چلند، بې‌هوښه کېدل یا اختلاج په ګرمۍ کې، د ګرمۍ وهلو نښې دي.	Know the signs. Very hot skin, headache, confusion, strange behaviour, fainting or a fit in the heat are signs of heat stroke.
+heat-stroke.shade	سیوري ته یې یوسئ. یو سوړ او سیوري ځای ته یې یوسئ. اضافي جامې یې وباسئ.	Move them into shade. Move them to a cool, shady place. Take off extra clothes.
+heat-stroke.cool	ټول بدن ژر سوړ کړئ. سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. یا یې تر غاړې پورې د سړو اوبو په لوښي کې وغځوئ او سر یې پورته ونیسئ.	Cool the whole body fast. Pour cool water all over the body and fan them. Or lay them in a tub of cool water up to the neck, holding the head up.
+heat-stroke.drink	که ویښ وي، اوبه غوړپ غوړپ. که بشپړ ویښ وي او تېرولی شي، غوړپ غوړپ سړې اوبه یا او آر اس ورکړئ. که خوب وړی وي، هېڅ شی یې په خوله کې مه اچوئ.	Sips of water if awake. If fully awake and able to swallow, give sips of cool water or ORS. If drowsy, give nothing by mouth.
+heat-stroke.go	په لاره کې هم یې سوړ کړئ. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په موټر کې هم اوبه پرې واچوئ او باد ورکړئ.	Keep cooling on the way. Go to hospital now, day or night. Keep pouring water and fanning in the car.
+heat-stroke.urgent	که په ګرمۍ کې دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if in the heat someone:
+heat-stroke.urgent.confused	ګډوډ دی یا عجیب چلند کوي	is confused or acts strangely
+heat-stroke.urgent.faint	بې‌هوښه کېږي یا اختلاج کوي	faints or has a fit
+heat-stroke.urgent.hot	پوستکی یې ډېر تود دی او حال یې خراب دی	has very hot skin and feels very unwell
+heat-stroke.urgent.baby	تي خوړونکی ماشوم یا زوړ کس دی او تود، سست یا خوب وړی دی	is a baby or an old person who is hot, floppy or drowsy
+heat-stroke.urgent.vomit	کانګې کوي او څښلی نشي	vomits and cannot drink
+heat-stroke.dont	دا کارونه مه کوئ:	Do not:
+heat-stroke.dont.car	په ګرمۍ کې ماشوم په ولاړ موټر یا تړلې کوټه کې یوازې مه پرېږدئ	leave a child alone in a parked car or closed room in the heat
+heat-stroke.dont.wrap	تود ماشوم په کمپلو کې مه نغاړئ	wrap a hot child in blankets
+heat-stroke.dont.drowsy	خوب وړي کس ته څښاک مه ورکوئ	give drinks to someone who is drowsy
+heat-stroke.exhaustion	په ګرمۍ کې ستړیا، تنده، خولې او سر درد: په سیوري کې آرام وکړئ او اوبه یا او آر اس وڅښئ. که په ۱ ساعت کې ښه نه شو، کلینیک ته ولاړ شئ.	Tired, thirsty, sweaty, headache in the heat: rest in shade and drink water or ORS. If not better in 1 hour, go to the clinic.
+heat-stroke.hospital	په روغتون کې بدن ژر سوړوي او د رګ له لارې سیروم ورکوي.	At hospital they cool the body fast and give fluids into a vein.
+cold-hypothermia.title	د یخنۍ وهل	Too cold (hypothermia)
+cold-hypothermia.lead	تي خوړونکي ماشومان، زاړه خلک او هر هغه څوک چې لوند شي یا په واوره کې پاتې شي، کېدای شي په خطرناک ډول یخ شي. ډېر یخ کس کېدای شي نور ونه رپېږي او خوب وړی او ګډوډ شي.	Babies, old people, and anyone wet or caught in snow can get dangerously cold. A very cold person may stop shivering and become sleepy and confused.
+cold-hypothermia.shelter	له یخنۍ یې وباسئ. یوې ګرمې کوټې ته یې راولئ، له باد لرې. ورو ورسره چلند وکړئ او غځېدلی یې وساتئ.	Get them out of the cold. Bring them into a warm room, out of the wind. Handle them gently and keep them lying down.
+cold-hypothermia.dry	لندې جامې وباسئ. لندې جامې یې وباسئ او پوستکی یې وچ کړئ. په وچو کمپلو کې یې ونغاړئ او سر یې په خولۍ یا شال پټ کړئ.	Take off wet clothes. Take off wet clothes and dry the skin. Wrap them in dry blankets, with a hat or scarf on the head.
+cold-hypothermia.baby	یخ ماشوم: پوستکی په پوستکي. یخ ماشوم پوستکی په پوستکي د مور پر سینه ونیسئ، په کمپلو یې وپوښئ او تی ورکړئ.	A cold baby: skin to skin. Hold a cold baby skin to skin on the mother's chest, cover them both with blankets, and breastfeed.
+cold-hypothermia.drink	که ویښ وي، ګرمه خوږه چای. که بشپړ ویښ وي او تېرولی شي، ګرمه او خوږه چای یا څښاک ورکړئ. د بدن تنه ګرمه کړئ، نه یوازې لاسونه او پښې.	Warm sweet drinks if awake. If fully awake and able to swallow, give warm, sweet tea or drinks. Warm the body, not just the hands and feet.
+cold-hypothermia.frostbite	یخ وهلې ګوتې. سپینې، کلکې او بې‌حسه ګوتې ۳۰ دقیقې په تودو، نه ډېرو ګرمو، اوبو کې ګرمې کړئ. مه یې مښئ.	Frozen fingers and toes. Warm white, hard, numb fingers or toes in warm, not hot, water for 30 minutes. Do not rub them.
+cold-hypothermia.urgent	که یخ کس دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if a cold person:
+cold-hypothermia.urgent.sleepy	خوب وړی یا ګډوډ دی، یا خبرې یې ګډې وډې دي	is sleepy or confused, or slurs their words
+cold-hypothermia.urgent.not-shivering	نور نه رپېږي خو لا هم یخ دی	has stopped shivering but is still cold
+cold-hypothermia.urgent.baby	تي خوړونکی ماشوم دی چې یخ، سست دی یا تی نه روي	is a baby who is cold, floppy or not feeding
+cold-hypothermia.urgent.fingers	ګوتې یې سپینې، خړې یا تورې پاتې کېږي	has fingers or toes that stay white, grey or black
+cold-hypothermia.urgent.breathing	ورو ساه اخلي یا بې‌هوښه دی	breathes slowly or is unconscious
+cold-hypothermia.dont	دا کارونه مه کوئ:	Do not:
+cold-hypothermia.dont.fire	د ژر ګرمېدو لپاره یې اور، بخارۍ یا صندلۍ ته مه نښلوئ	put them right next to a fire, stove or sandali to warm fast
+cold-hypothermia.dont.rub	یخ وهلی پوستکی مه مښئ او واوره پرې مه موښئ	rub frozen skin, or rub snow on it
+cold-hypothermia.dont.bottle	د ګرمو اوبو بوتل مستقیم پر پوستکي مه ږدئ	put a hot-water bottle straight onto the skin
+cold-hypothermia.not-dead	ډېر یخ کس چې مړ ښکاري، کېدای شي لا هم وژغورل شي. که ساه نه اخلي، د سینې فشار پیل کړئ او د روغتون په لاره کې دوام ورکړئ.	A very cold person who seems dead may still be saved. If not breathing, start chest pushes and keep going on the way to hospital.
+cold-hypothermia.hospital	په روغتون کې بدن له دننه په خوندي ډول ګرموي او د یخ وهلي پوستکي درملنه کوي.	At hospital they warm the body safely from the inside and treat frozen skin.
+eye-chemical.title	کیمیاوي مواد په سترګه کې	Chemical in the eye
+eye-chemical.lead	چونه، سمټ، د کرنې درمل، وایټکس او د بېټرۍ تېزاب کولی شي په څو ثانیو کې سترګه وسوځوي. په اوبو سمدستي مینځل سترګه ژغوري.	Lime, cement, farm sprays, bleach and battery acid can burn the eye in seconds. Washing at once with water saves sight.
+eye-chemical.wash	سمدستي یې په اوبو ومینځئ. سترګه خلاصه ونیسئ او پاکې اوبه ورو د پوزې له خوا کونج څخه بهر خوا ته واچوئ، ۲۰ دقیقې. هرې پاکې اوبه وکاروئ؛ انتظار مه باسئ.	Wash at once with water. Hold the eye open and pour clean water gently from the inner corner outwards, for 20 minutes. Use any clean water; do not wait.
+eye-chemical.tilt	سر کوږ کړئ. سر داسې کوږ کړئ چې ټپي سترګه ټیټه وي، چې اوبه بلې سترګې ته لاړې نه شي.	Tilt the head. Tilt the head so the hurt eye is lower, so the water does not run into the other eye.
+eye-chemical.powder	د چونې پوډر: لومړی یې پاک کړئ. که د چونې یا سمټو وچ پوډر پر مخ وي، لومړی یې ورو له پلکونو پاک کړئ، بیا په ډېرو اوبو ومینځئ.	Dry lime powder: brush off first. If dry lime or cement powder is on the face, gently brush it off the eyelids first, then wash with lots of water.
+eye-chemical.cover	وې پوښئ او روغتون ته ولاړ شئ. له مینځلو وروسته، سترګه په پاک ټوکر ورو وپوښئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. د هغو موادو بوتل یا نوم له ځان سره یوسئ.	Cover and go to hospital. After washing, cover the eye lightly with a clean cloth and go to hospital now. Take the bottle or the name of the chemical.
+eye-chemical.dust	دوړې یا شګه په سترګه کې. د دوړو یا شګو لپاره، سترګې رپ کړئ او په پاکو اوبو یې ومینځئ. مه یې مښئ. که له مینځلو وروسته لا هم درد کوي، نن کلینیک ته ولاړ شئ.	Dust or grit in the eye. For dust or sand, blink and wash with clean water. Do not rub. If it still hurts after washing, go to the clinic today.
+eye-chemical.urgent	په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if:
+eye-chemical.urgent.chemical	کیمیاوي مواد، چونه یا سمټ سترګې ته ولاړل	a chemical, lime or cement got into the eye
+eye-chemical.urgent.injury	سترګه ټکر شوه، ټپي شوه یا څه شی پکې ننوت	the eye was hit or cut, or something is stuck in it
+eye-chemical.urgent.sight	لید تت شوی یا له منځه تللی	sight is blurred or lost
+eye-chemical.urgent.pain	سخت درد لري، یا سترګه ډېره سره پاتې ده	there is strong pain, or the eye stays very red
+eye-chemical.dont	دا کارونه مه کوئ:	Do not:
+eye-chemical.dont.rub	سترګه مه مښئ	rub the eye
+eye-chemical.dont.milk	شیدې، چای، رانجه یا بوټي په سترګه کې مه اچوئ	put milk, tea, kohl or herbs in the eye
+eye-chemical.dont.remove	هغه شی چې په سترګه کې ننوتلی، مه یې باسئ	pull out something stuck in the eye
+eye-chemical.hospital	په روغتون کې د سترګې مینځل دوام ورکوي، لید معاینه کوي او د سترګې د ساتنې لپاره څاڅکي ورکوي.	At hospital they keep washing the eye, check the sight, and give drops to protect it.
+allergy-severe.title	سخت حساسیت	Severe allergic reaction
+allergy-severe.lead	ځینې کسان د یوه خوړو، د مچۍ یا ډبرې د چیچلو، یا د یوه درمل یا پیچکارۍ په وړاندې سخت حساسیت کوي. په څو دقیقو کې کېدای شي وپړسېږي او په سختۍ ساه واخلي.	A few people react badly to a food, a bee or wasp sting, or a medicine or injection. Within minutes they can swell up and struggle to breathe.
+allergy-severe.signs	د خطر نښې وپېژنئ. د شونډو، ژبې یا مخ پړسوب، د ستوني تنګېدل، په غږ یا سخته ساه، پورته شوې خارښتناکې دانې، یا بې‌هوښه کېدل.	Know the danger signs. Swollen lips, tongue or face, a tight throat, noisy or hard breathing, a raised itchy rash, or fainting.
+allergy-severe.go	سمدستي روغتون ته ولاړ شئ. سمدستي یو څوک د موټر راوړلو لپاره ولېږئ؛ دا حالت ژر بدترېږي. که د حساسیت خپل قلم پیچکاري لري، مرسته ورسره وکړئ چې د ورون بهرنۍ خوا ته یې ووهي.	Go to hospital at once. Send for a car straight away; this can get worse fast. If they have their own allergy pen, help them use it in the outer thigh.
+allergy-severe.position	کېنوئ یې یا یې وغځوئ. که ساه اخیستل سخت وي، پرېږدئ چې کېني. که سر یې ګرځي، هوار یې وغځوئ او پښې یې پورته کړئ. مه پرېږدئ چې ودرېږي یا وګرځي.	Sit them up, or lay them flat. If breathing is hard, let them sit up. If they feel faint, lay them flat with the legs raised. Do not let them stand or walk.
+allergy-severe.sting	نیش یې وباسئ. د شاتو د مچۍ له چیچلو وروسته، نیش ژر په نوک یا کارت وګروئ او ویې باسئ.	Scrape out a bee sting. After a bee sting, scrape the sting out quickly with a fingernail or a card.
+allergy-severe.cpr	که ساه یې ودرېده. که نور ځواب نه ورکوي او په عادي ډول ساه نه اخلي، سمدستي د سینې فشار پیل کړئ.	If they stop breathing. If they stop responding and are not breathing normally, start chest pushes at once.
+allergy-severe.urgent	که له خوړو، چیچلو یا درملو وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if after a food, sting or medicine someone has:
+allergy-severe.urgent.swelling	د شونډو، ژبې یا ستوني پړسوب	swelling of the lips, tongue or throat
+allergy-severe.urgent.breathing	په غږ ساه، خرخر یا سخته ساه	noisy breathing, wheeze or hard breathing
+allergy-severe.urgent.voice	ناست غږ یا د تېرولو ستونزه	a hoarse voice or trouble swallowing
+allergy-severe.urgent.faint	د سر ګرځېدل، بې‌هوښه کېدل یا رنګ الوتی او یخ پوستکی	dizziness, fainting, or pale, cold skin
+allergy-severe.urgent.rash	په ټول بدن دانې له کانګو یا د ګېډې درد سره	a rash all over with vomiting or belly pain
+allergy-severe.hospital	په روغتون کې د اډرینالین پیچکاري، اکسیجن او نور درمل ورکوي. څو ساعته هلته پاتې شئ، ځکه کېدای شي بیا پیل شي.	At hospital they give an adrenaline injection, oxygen and other medicines. Stay some hours, as it can come back.
+allergy-severe.after	وروسته، تل روغتیايي کارکوونکي ته ووایئ چې له څه شو، او له هغو خوړو، چیچلو یا درملو ډډه وکړئ.	Afterwards, always tell health workers what caused it, and avoid that food, sting or medicine.
+low-sugar.title	د شکرې په ناروغۍ کې د وینې د شکرې کمښت	Low sugar in diabetes
+low-sugar.lead	هغه کسان چې د شکرې ناروغۍ لپاره درمل یا انسولین اخلي، کېدای شي د وینې شکره یې کمه شي، په ځانګړې توګه که خواړه ونه خوري یا سخت کار وکړي. ژر راځي او کولی شي د بې‌هوښۍ یا اختلاج لامل شي.	People on medicine or insulin for diabetes can get low blood sugar, most of all if they miss a meal or work hard. It comes on fast and can cause fainting or fits.
+low-sugar.signs	نښې وپېژنئ. لړزه، خولې، لوږه، د زړه چټک ټکان، رنګ الوتل، عجیب چلند یا ګډوډي کېدای شي د شکرې د کمښت نښې وي.	Know the signs. Shaking, sweating, hunger, a fast heartbeat, pale skin, strange behaviour or confusion can mean low sugar.
+low-sugar.sugar	سمدستي بوره ورکړئ. که ویښ وي او تېرولی شي، د چای ۴ کاچوغې بوره په یوه ګیلاس اوبو کې، یا خوږ څښاک یا خواږه ورکړئ.	Give sugar at once. If they are awake and can swallow, give 4 teaspoons of sugar in a glass of water, or a sweet drink or sweets.
+low-sugar.wait	۱۵ دقیقې صبر، بیا خواړه. که په ۱۵ دقیقو کې ښه نه شو، بیا بوره ورکړئ. کله چې ښه شو، ډوډۍ یا خواړه ورکړئ چې شکره یې بیا کمه نشي.	Wait 15 minutes, then food. If not better in 15 minutes, give sugar again. When better, give bread or a meal so the sugar does not fall again.
+low-sugar.drowsy	خوب وړی یا بې‌هوښه: هېڅ شی یې په خوله کې مه اچوئ. که په سمه توګه تېرولی نشي، څښاک مه ورکوئ. پر اړخ یې وغځوئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	Drowsy or unconscious: nothing by mouth. If they cannot swallow safely, give no drinks. Lay them on their side and go to hospital now, day or night.
+low-sugar.prevent	مخنیوی یې وکړئ. کله چې د شکرې درمل خورئ، خواړه په خپل وخت وخورئ. لږه بوره یا خواږه له ځان سره ولرئ او نښې کورنۍ ته ووایئ.	Prevent it. Eat meals on time when taking diabetes medicine. Carry some sugar or sweets, and tell your family the signs.
+low-sugar.urgent	که د شکرې ناروغ دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if someone with diabetes:
+low-sugar.urgent.swallow	تېرولی نشي یا بې‌هوښه دی	cannot swallow, or is unconscious
+low-sugar.urgent.fit	اختلاج کوي	has a fit
+low-sugar.urgent.not-better	له دوه ځله بورې وروسته ښه نه شو	is not better after sugar twice
+low-sugar.urgent.overdose	ډېرې ګولۍ یا ډېر انسولین یې اخیستی	took too many diabetes tablets or too much insulin
+low-sugar.soon	که دا حالت ولري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if:
+low-sugar.soon.again	د شکرې کمښت بیا بیا راځي	low sugar keeps coming back
+low-sugar.soon.not-eating	د کانګو یا ناروغۍ له امله خواړه نشي خوړلی	they cannot eat because of vomiting or illness
+low-sugar.dont	دا کارونه مه کوئ:	Do not:
+low-sugar.dont.insulin	هغه چا ته چې شکره یې کمه ده، انسولین مه ورکوئ	give insulin to someone with low sugar
+low-sugar.dont.pour	د خوب وړي کس په خوله کې څښاک مه اچوئ	pour drinks into the mouth of someone drowsy
+low-sugar.diabetes	له شکرې ناروغۍ سره ژوند. د ورځنۍ پاملرنې او درملو لپاره د شکرې ناروغۍ پاڼه وګورئ.	Living with diabetes. See the diabetes page for daily care and medicines.
+low-sugar.hospital	په روغتون کې د رګ له لارې شکره ورکوي او د کمېدو لامل یې پیدا کوي.	At hospital they give sugar into a vein and find out why it fell.
+asthma-attack.title	د ساه لنډۍ حمله	Asthma attack
+asthma-attack.lead	د ساه لنډۍ په حمله کې د ساه لارې تنګېږي. کس ټوخی او خرخر کوي او ښه ساه نشي اخیستلی. په پف سره ژره مرسته اکثره ګټه کوي.	In an asthma attack the airways tighten. The person coughs, wheezes and cannot breathe well. Quick help with their inhaler usually works.
+asthma-attack.sit	کېنوئ یې، ارام اوسئ. مرسته ورسره وکړئ چې نېغ کېني، لږ مخ ته کوږ. تنګې جامې یې سستې کړئ. په ارامۍ خبرې وکړئ؛ وېره یې بدتروي.	Sit them up, stay calm. Help them sit up, leaning slightly forward. Loosen tight clothes. Speak calmly; fear makes it worse.
+asthma-attack.inhaler	شین پف وکاروئ. شین پف هماغسې وکاروئ لکه کلینیک چې در زده کړي، که فاصله ورکوونکی لري له هغه سره. پفونه یو یو وکړئ.	Use the blue reliever inhaler. Use the blue reliever inhaler as the clinic showed you, with a spacer if they have one. Give the puffs one at a time.
+asthma-attack.worse	ښه نه شو؟ دوام ورکړئ او ولاړ شئ. که له هغو پفونو وروسته چې کلینیک ویلي ښه نه شو یا بدتر شو، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې هم پف وکاروئ.	Not better? Keep going and go. If they are not better after the puffs the clinic advised, or get worse, go to hospital now. Keep using the inhaler on the way.
+asthma-attack.smoke	له لوګي او دوړو لرې یې وساتئ. د اور، بخارۍ او تنباکو لوګی او دوړې کولی شي حمله پیل کړي. کس، په ځانګړې توګه ماشوم، ترې لرې وساتئ.	Keep away from smoke and dust. Smoke from fires, stoves and tobacco, and dust, can start an attack. Keep the person, most of all a child, away from them.
+asthma-attack.plan	له کلینیک پلان وغواړئ. هر څوک چې د ساه لنډۍ لري، باید په کور کې پف ولري او پوه شي چې کله یې وکاروي. له کلینیک وغواړئ چې تاسو ته یې وښيي.	Ask the clinic for a plan. Everyone with asthma should keep an inhaler at home and know when to use it. Ask the clinic to show you.
+asthma-attack.urgent	که د ساه لنډۍ ناروغ دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if someone with asthma:
+asthma-attack.urgent.speak	د ساه لنډۍ له امله خبرې، خواړه یا تي رودل نشي کولی	is too breathless to talk, eat or breastfeed
+asthma-attack.urgent.blue	شونډې یا مخ یې شین یا خړ کېږي	has lips or face turning blue or grey
+asthma-attack.urgent.chest	د سینې لاندې برخه یې ننوځي	has the lower chest pulling in
+asthma-attack.urgent.drowsy	خوب وړی، ګډوډ یا ډېر ستړی دی	is drowsy, confused or exhausted
+asthma-attack.urgent.not-better	له پف وروسته ښه نه شو	is not better after the inhaler
+asthma-attack.bottle	فاصله ورکوونکی نه لرئ؟ پف د یوه پاک پلاستیکي بوتل د تل په سوري کې ننباسئ، او د بوتل له خولې ساه واخلئ.	No spacer? Push the inhaler into a hole cut in the bottom of a clean plastic bottle, and breathe through the bottle's neck.
+asthma-attack.hospital	په روغتون کې اکسیجن او د ساه د لارو د خلاصولو لپاره قوي درمل ورکوي.	At hospital they give oxygen and stronger medicines to open the airways.
+nosebleed.title	له پوزې وینه راتلل	Nosebleed
+nosebleed.lead	له پوزې وینه راتلل عام دي، په ځانګړې توګه په وچه، یخه یا دوړه لرونکې هوا کې. ډېری یې په ساده فشار درېږي.	Nosebleeds are common, most of all in dry, cold or dusty weather. Most stop with simple pressure.
+nosebleed.forward	کېنئ، مخ ته کوږ شئ. نېغ کېنئ او مخ ته کوږ شئ چې وینه له پوزې بهر شي، نه ستوني ته. وینه وتوکئ؛ مه یې تېروئ.	Sit up and lean forward. Sit up and lean forward, so blood runs out of the nose, not down the throat. Spit out blood; do not swallow it.
+nosebleed.pinch	د پوزې نرمه برخه ۱۰ دقیقې ټینګه کړئ. د پوزې نرمه برخه، له هډوکي لاندې، ۱۰ دقیقې پرته له پرېښودو ټینګه کړئ. له خولې ساه واخلئ.	Pinch the soft part for 10 minutes. Pinch the soft part of the nose, below the bone, for 10 minutes without letting go. Breathe through the mouth.
+nosebleed.again	لا هم وینه راځي؟ بیا ۱۰ دقیقې. که لا هم وینه راځي، بیا ۱۰ نورې دقیقې یې ټینګه کړئ. پر پوزه سوړ او لوند ټوکر کېدای شي مرسته وکړي.	Still bleeding? 10 more minutes. If it still bleeds, pinch again for 10 more minutes. A cold wet cloth on the nose may help.
+nosebleed.after	وروسته، پوزې ته آرام ورکړئ. تر یوې ورځې پوزه په زور مه پاکوئ، ګوته پکې مه وهئ او دروند شی مه پورته کوئ. د ماشومانو نوکان لنډ وساتئ.	Afterwards, rest the nose. For a day, do not blow or pick the nose, or lift heavy things. Keep children's nails short.
+nosebleed.urgent	په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if:
+nosebleed.urgent.not-stopping	له ۲۰ دقیقو فشار وروسته وینه نه درېږي	bleeding does not stop after 20 minutes of pinching
+nosebleed.urgent.heavy	وینه ډېره زیاته ده، یا سر یې ګرځي	the bleeding is very heavy, or they feel faint
+nosebleed.urgent.head	په سر له سخت ټکر وروسته پیل شوه	it started after a hard blow to the head
+nosebleed.urgent.gums	له ورېژو هم وینه راځي یا بدن یې ژر شین کېږي	they also bleed from the gums or bruise easily
+nosebleed.urgent.fever	له وینې سره تبه لري	they have a fever with the bleeding
+nosebleed.soon	که دا حالت ولري، همدا اونۍ کلینیک ته ولاړ شئ:	Go to the clinic this week if:
+nosebleed.soon.again	له پوزې وینه بیا بیا راځي	nosebleeds keep coming back
+nosebleed.soon.bp	کس د وینې لوړ فشار لري یا د وینې نرموونکي درمل خوري	the person has high blood pressure or takes blood-thinning medicine
+nosebleed.dont	دا کارونه مه کوئ:	Do not:
+nosebleed.dont.head-back	سر شاته مه کوئ	tip the head back
+nosebleed.dont.stuff	مالوچ، کاغذ یا بوټي د پوزې ژورو ته مه ننباسئ	push cotton, paper or herbs deep into the nose
+nosebleed.congo	تبه له پوزې، ورېژو یا پوستکي لاندې له وینې سره کېدای شي د کانګو تبه وي. همدا اوس روغتون ته ولاړ شئ او د څارویو یا کنې د تماس په اړه ووایئ.	Fever with bleeding from the nose, gums or under the skin can be Congo fever. Go to hospital now, and say if there was contact with animals or ticks.
+nosebleed.hospital	په روغتون کې کولی شي د وینې د درولو لپاره پوزه ډکه کړي او نور لاملونه معاینه کړي.	At hospital they can pack the nose to stop the bleeding, and check for other causes.
+kit-buy.title	د کور روغتیايي بکس: څه واخلو	Home health kit: what to buy
+kit-buy.lead	په کور کې څو ساده شیان مرسته کوي چې د کورنۍ پاملرنه وکړئ او پوه شئ چې کله کلینیک ته ولاړ شئ. یوازې هغه څه واخلئ چې کورنۍ مو ورته اړتیا لري.	A few simple things at home help you care for your family and know when to go to the clinic. Buy only what your family needs.
+kit-buy.every	هر کور: ترمامیټر او لومړنۍ مرستې. ډیجیټل ترمامیټر، او آر اس، زنک، صابون، پاک ټوکر او بنداژ په هر کور کې په کار راځي.	Every home: thermometer and first aid. A digital thermometer, ORS, zinc, soap, clean cloth and bandages are useful in every home.
+kit-buy.children	واړه ماشومان: د مټ فیته. د ۶ میاشتو څخه تر ۵ کلونو ماشومانو لپاره، رنګه د مټ فیته ښيي چې ماشوم ډېر ډنګر دی که نه. کلینیکونه اکثره دا وړیا ورکوي.	Small children: an arm tape. For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Clinics often give it free.
+kit-buy.bp	له ۴۰ کلونو پورته یا امیندواره: د فشار ماشین. که څوک له ۴۰ کلونو پورته وي، امیندواره وي، د شکرې ناروغي ولري، یا یې مخکې لوړ فشار درلود، د مټ د فشار ماشین واخلئ.	Over 40 or pregnant: a BP machine. Buy an upper-arm machine if someone is over 40, pregnant, has diabetes, or has had high blood pressure.
+kit-buy.sugar	یوازې د شکرې لپاره: د شکرې ماشین. د شکرې ماشین د هغو کسانو لپاره دی چې د شکرې ناروغي لري او کلینیک ورته مشوره ورکړې وي. ډېر لګښت یې د معاینې پټۍ دي.	Diabetes only: a sugar meter. A sugar meter is for people with diabetes, when the clinic advises it. The test strips cost the most.
+kit-buy.shop	له باوري درملتون څخه یې واخلئ. له درملپلورونکي یا روغتیايي کارکوونکي وپوښتئ چې کوم ډول ښه دی. نېټه وګورئ، رسید وساتئ، او اضافي بیټرۍ واخلئ.	Buy from a trusted pharmacy. Ask the pharmacist or health worker which kind is good. Check the date, keep the receipt, and buy spare batteries.
+kit-buy.check	یوه شمېره وګورئ. د یوه سامان شمېره ورکړئ، او واورئ چې څه مانا لري او څه باید وکړئ.	Check a reading. Put in the number from a device, and hear what it means and what to do.
+kit-buy.dont	دا کارونه مه کوئ:	Do not do these things:
+kit-buy.dont.wrist	د مړوند د فشار ماشین مه اخلئ؛ ډېر ځله غلط ښيي.	Do not buy a wrist blood pressure machine; it is often wrong.
+kit-buy.dont.mercury	د ښیښې سیمابي ترمامیټر مه اخلئ؛ ماتېږي او سیماب زهر دی.	Do not buy a glass mercury thermometer; it breaks, and mercury is poison.
+kit-buy.dont.medicine	د کور د یوې شمېرې له امله درمل مه بدلوئ؛ له کلینیک وپوښتئ.	Do not change medicine because of a home reading; ask the clinic.
+kit-buy.look	ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
+kit-thermometer.title	د ترمامیټر کارول	Using a thermometer
+kit-thermometer.lead	ترمامیټر تاسو ته په ډاډ سره وايي چې تبه شته که نه. د نویو زېږېدلو او ماشومانو لپاره، د تخرګ لاندې یې اندازه کړئ.	A thermometer tells you for sure if there is a fever. For babies and children, measure under the arm.
+kit-thermometer.buy	څه واخلئ. یو ډیجیټل ترمامیټر چې غږ کوي، شاوخوا ۱۰۰ تر ۲۵۰ افغانۍ. د ښیښې سیمابي ترمامیټر مه اخلئ.	What to buy. A digital thermometer that beeps, for about 100 to 250 afghanis. Do not buy a glass mercury one.
+kit-thermometer.armpit	د تخرګ لاندې یې کېږدئ. سر یې پاک کړئ او روښانه یې کړئ. سر یې په وچ تخرګ کې پر پوستکي کېږدئ، او مټ له بدن سره نږدې ونیسئ.	Put it under the arm. Wipe the tip and turn it on. Put the tip in the dry armpit, on the skin, and hold the arm close to the body.
+kit-thermometer.wait	د غږ انتظار وکړئ. تر هغه چې غږ وکړي مټ ارام ونیسئ، بیا شمېره ولولئ. له لمبلو یا درنو کمپلو وروسته ۲۰ دقیقې صبر وکړئ.	Wait for the beep. Keep the arm still until it beeps, then read the number. Wait 20 minutes after a bath or heavy blankets.
+kit-thermometer.numbers	شمېرې څه مانا لري. ۳۶ تر ۳۷ اعشاریه ۴ عادي دي. ۳۷ نیم یا ډېر تبه ده. په کوچني ماشوم کې، له ۳۶ نیم کم ډېر سوړ دی.	What the numbers mean. 36 to 37.4 is normal. 37.5 or more is a fever. In a young baby, under 36.5 is too cold.
+kit-thermometer.clean	پاک یې کړئ او وې ساتئ. له هر ځل وروسته، سر یې په اوبو او صابون یا الکولو پاک کړئ. په اوبو کې یې مه اچوئ. په خپل قطي کې یې وساتئ.	Clean it and keep it safe. After each use, wipe the tip with soap and water or alcohol. Do not put it under water. Keep it in its box.
+kit-thermometer.check	د تبې درجه وګورئ. شمېره او دا چې د چا ده ورکړئ، او واورئ چې څه باید وکړئ.	Check a temperature. Put in the number and who it is, and hear what to do.
+kit-thermometer.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
+kit-thermometer.urgent.baby	تر ۳ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري	a baby under 3 months has 37.5 or more
+kit-thermometer.urgent.cold	کوچنی ماشوم له ۳۵ نیم کم لري، یا له ګرمولو وروسته هم سوړ پاتې کېږي	a young baby has under 35.5, or stays cold after warming
+kit-thermometer.urgent.signs	تبه د خطر له یوې نښې سره ده	there is fever with any danger sign
+kit-thermometer.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
+kit-thermometer.soon.days	تبه له ۲ ورځو زیاته دوام کړې	a fever lasts more than 2 days
+kit-thermometer.soon.high	ماشوم ۳۹ یا ډېر لري	a child has 39 or more
+kit-thermometer.soon.pregnant	امیندواره ښځه تبه لري	a pregnant woman has a fever
+kit-thermometer.touch	ترمامیټر نه لرئ؟ سینه یا خېټه د لاس په شا لمس کړئ. که ګرم وي، تبه شمېرل کېږي.	No thermometer? Feel the chest or belly with the back of your hand. Feeling hot counts as a fever.
+kit-bp.title	د وینې د فشار ماشین	Blood pressure machine
+kit-bp.lead	د کور ماشین له ۴۰ کلونو پورته کسانو، امیندوارو ښځو، د شکرې ناروغانو او هغو ته چې مخکې یې لوړ فشار درلود مرسته کوي چې د کتنو ترمنځ خپل فشار وپېژني.	A home machine helps people over 40, pregnant women, people with diabetes, and anyone who has had high blood pressure know their numbers between visits.
+kit-bp.buy	د مټ ماشین واخلئ. داسې اتومات ماشین واخلئ چې د مټ کف ولري او طبي ازمویل شوی وي، نه د مړوند. شاوخوا ۱۵۰۰ تر ۳۰۰۰ افغانۍ.	Buy an upper-arm machine. Choose an automatic machine with a cuff for the upper arm, one that is clinically tested, not a wrist one. About 1,500 to 3,000 afghanis.
+kit-bp.cuff	د کف سمه اندازه. کف باید د مټ په اندازه وي. غټ مټ لوی کف غواړي، که نه شمېره له اصلي څخه لوړه ښيي.	The right cuff size. The cuff must fit the arm. A big arm needs a large cuff, or the number will be too high.
+kit-bp.rest	۵ دقیقې کېنئ او ارام شئ. تر هغه ۳۰ دقیقې مخکې چای، سګرټ او سخت کار مه کوئ. شا ته تکیه وکړئ، پښې پر ځمکه برابرې، او مټ د زړه په لوړوالي پر یو شي کېږدئ.	Sit and rest 5 minutes. No tea, smoking or hard work for 30 minutes before. Sit with your back supported, feet flat, and arm resting at heart height.
+kit-bp.measure	دوه ځله اندازه کړئ. کف پر لوڅ مټ وتړئ. خبرې مه کوئ. اندازه یې کړئ، ۱ دقیقه صبر وکړئ، بیا یې اندازه کړئ، او دواړه ولیکئ.	Measure two times. Put the cuff on the bare upper arm. Do not talk. Measure, wait 1 minute, measure again, and write down both.
+kit-bp.time	هره ورځ په یو وخت. کله چې کلینیک ووایي، هر سهار او ماښام په همغو وختونو کې اندازه کړئ. خپل یادښتونه هر ځل له ځان سره یوسئ.	Same time each day. When the clinic asks, measure every morning and evening at the same times. Take your notes to every visit.
+kit-bp.numbers	شمېرې څه مانا لري. پورتنۍ شمېره لومړی ویل کېږي. په کور کې، له ۱۳۵ پر ۸۵ کم عادي دی. په امیندوارۍ کې، ۱۴۰ پر ۹۰ یا ډېر لوړ دی.	What the numbers mean. The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high.
+kit-bp.check	د وینې فشار وګورئ. دواړه شمېرې ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.	Check a blood pressure. Put in both numbers and hear what they mean and what to do.
+kit-bp.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
+kit-bp.urgent.very-high	دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی	it is 180 over 120 or more, two times
+kit-bp.urgent.signs	لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې یا سخت سر درد سره	high, with chest pain, weakness, trouble speaking or a bad headache
+kit-bp.urgent.pregnant-very-high	امیندواره ده او ۱۶۰ پر ۱۱۰ یا ډېر لري	pregnant, and 160 over 110 or more
+kit-bp.urgent.pregnant-signs	امیندواره، ۱۴۰ پر ۹۰ یا ډېر، له سر درد، د سترګو تتوالي یا پړسوب سره	pregnant, 140 over 90 or more, with headache, blurred vision or swelling
+kit-bp.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
+kit-bp.soon.pregnant	امیندواره ده او ۱۴۰ پر ۹۰ یا ډېر لري	pregnant, and 140 over 90 or more
+kit-bp.soon.low	پورتنۍ شمېره له ۹۰ کمه ده، له سر ګرځېدو یا بې هوښۍ سره	the top number is under 90, with dizziness or fainting
+kit-bp.week	په کور کې اکثره ۱۳۵ پر ۸۵ یا ډېر وي؟ په همدې اونۍ کې له یادښتونو سره کلینیک ته ولاړ شئ. کېدای شي درملو ته اړتیا وي.	Often 135 over 85 or more at home? Go to the clinic this week with your notes. You may need medicine.
+kit-bp.dont	دا کارونه مه کوئ:	Do not do these things:
+kit-bp.dont.stop	د یوې شمېرې له امله خپل درمل مه بندوئ او مه بدلوئ.	Do not stop or change your medicine because of one reading.
+kit-bp.dont.clothes	پر پېړو جامو یا پر مړوند یې مه اندازه کوئ.	Do not measure over thick clothes, or on the wrist.
+kit-muac.title	د ډنګر ماشوم لپاره د مټ فیته	Arm tape for thin children
+kit-muac.lead	دا رنګه فیته ژر ښيي چې د ۶ میاشتو تر ۵ کلونو ماشوم ډېر ډنګر دی که نه. په میاشت کې یو ځل یې اندازه کړئ.	This coloured tape shows quickly if a child from 6 months to 5 years is too thin. Measure once a month.
+kit-muac.get	له کومه یې پیدا کړئ. له کلینیک یا د تغذیې له کارکوونکي وپوښتئ؛ اکثره یې وړیا ورکوي. په درملتون کې هم ډېره ارزانه ده.	Where to get one. Ask the clinic or the nutrition worker; they often give it free. In a pharmacy it costs very little.
+kit-muac.arm	د کیڼ مټ منځ پیدا کړئ. مټ کوږ کړئ. د اوږې او څنګل ترمنځ نیمایي ځای پیدا کړئ. بیا مټ ازاد او ځوړند پرېږدئ.	Find the middle of the left arm. Bend the arm. Find the point halfway between the shoulder and the elbow. Then let the arm hang loose.
+kit-muac.wrap	په نرمۍ یې تاو کړئ او رنګ وګورئ. فیته په همغه ځای د مټ شاوخوا تاو کړئ، نه ټینګه او نه سسته. هغه رنګ وګورئ چې د فیتې په کړکۍ کې ښکاري.	Wrap it gently and read the colour. Put the tape around the arm at that point, not tight and not loose. Look at the colour in the window.
+kit-muac.colours	رنګونه څه مانا لري. شین ښه دی. ژېړ یعنې ډنګر دی: په همدې اونۍ کلینیک ته ولاړ شئ. سور یعنې ډېر ډنګر دی: نن کلینیک ته ولاړ شئ.	What the colours mean. Green is good. Yellow means too thin: go to the clinic this week. Red means very thin: go to the clinic today.
+kit-muac.keep	هوار او پاک یې وساتئ. په لوند ټوکر یې پاکه کړئ. هواره او وچه یې وساتئ. اوږده شوې یا شلېدلې فیته غلطه پایله ورکوي.	Keep it flat and clean. Wipe it with a damp cloth. Keep it flat and dry. A stretched or torn tape gives wrong results.
+kit-muac.check	رنګ وګورئ. هغه رنګ وټاکئ چې ولیدئ، او واورئ چې څه باید وکړئ.	Check a colour. Choose the colour you saw, and hear what to do.
+kit-muac.urgent	که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if the child:
+kit-muac.urgent.feet	دواړه پښې یې پړسېدلې دي	has swelling of both feet
+kit-muac.urgent.eat	ډنګر دی او هېڅ نه خوري او نه څښي	is thin and will not eat or drink anything
+kit-muac.urgent.sleepy	ډنګر دی او ډېر کمزوری یا خوب وړی دی	is thin and very weak or sleepy
+kit-muac.age	دا فیته د ۶ میاشتو تر ۵ کلونو ماشومانو لپاره ده. تر دې واړه ماشومان په کلینیک کې تلل کېږي.	The tape is for children from 6 months to 5 years. Younger babies are weighed at the clinic instead.
+kit-glucometer.title	د وینې د شکرې ماشین	Blood sugar meter
+kit-glucometer.lead	د شکرې ماشین یوازې د هغو کسانو لپاره دی چې د شکرې ناروغي لري، په ځانګړي ډول که انسولین یا داسې ګولۍ کاروي چې شکره ډېره ټیټوي. لومړی له کلینیک وپوښتئ.	A sugar meter is only for people who have diabetes, most of all if they use insulin or tablets that can make sugar too low. Ask the clinic first.
+kit-glucometer.buy	څه واخلئ. یو ماشین له خپلو پټیو او ستنو سره، شاوخوا ۱۰۰۰ تر ۲۰۰۰ افغانۍ. پټۍ جلا پیسې لري؛ هغه ډول واخلئ چې ستاسو د ماشین لپاره جوړ شوی.	What to buy. A meter with its own strips and needles, about 1,000 to 2,000 afghanis. Strips cost extra; buy the kind made for your meter.
+kit-glucometer.wash	لاسونه ومینځئ او وچ یې کړئ. په صابون او تودو اوبو یې ومینځئ او ښه یې وچ کړئ. پر ګوته شکره یا خواړه غلطه او لوړه شمېره ښيي.	Wash and dry your hands. Wash with soap and warm water, and dry well. Sugar or food on the finger gives a wrong, high number.
+kit-glucometer.prick	د ګوتې څنګ ته ستن ووهئ. پټۍ په ماشین کې کېږدئ. د ګوتې د سر څنګ ته په نوې ستن ووهئ، او د وینې څاڅکی پټۍ ته ورسوئ.	Prick the side of a finger. Put a strip in the meter. Prick the side of a fingertip with a new needle, and touch the drop to the strip.
+kit-glucometer.write	ولیکئ یې. شمېره، ورځ، او دا چې له خوړو مخکې وه که وروسته، ولیکئ. په هره کتنه کې یې کلینیک ته وښایئ.	Write it down. Write the number, the day, and if it was before or after food. Show it at every clinic visit.
+kit-glucometer.numbers	شمېرې څه مانا لري. په ملي ګرام: له ۷۰ کم ټیټ دی، همدا اوس شکره ورکړئ. له ناشتې مخکې ۸۰ تر ۱۳۰ ښه دی. له ۲۵۰ پورته ډېر لوړ دی: نن کلینیک.	What the numbers mean. In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good. Over 250 is very high: clinic today.
+kit-glucometer.keep	پټۍ تړلې او وچې وساتئ. د پټیو قطي سمدستي وتړئ. له تودوخې او لمر لرې یې وساتئ. هره ستن یو ځل وکاروئ او له بل چا سره یې مه شریکوئ.	Keep strips closed and dry. Close the strip box at once. Keep it away from heat and sun. Use each needle once and never share them.
+kit-glucometer.check	د شکرې شمېره وګورئ. شمېره ورکړئ، او واورئ چې څه باید وکړئ.	Check a sugar reading. Put in the number, in mg/dL or mmol/L, and hear what to do.
+kit-glucometer.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
+kit-glucometer.urgent.low	شکره له ۵۴ کمه ده، یا له شکرې ورکولو وروسته هم ټیټه پاتې کېږي، یا ناروغ ګډوډ دی	sugar is under 54, or stays low after sugar, or the person is confused
+kit-glucometer.urgent.very-high	شکره له ۴۰۰ پورته ده، یا دومره لوړه ده چې ماشین یې نشي لوستلای	sugar is over 400, or too high for the meter to read
+kit-glucometer.urgent.vomit	لوړه شکره له کانګو، یا چټکې او ژورې ساه سره	high sugar with vomiting, or fast deep breathing
+kit-glucometer.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
+kit-glucometer.soon.high	شکره له ۲۵۰ پورته پاتې کېږي	sugar stays over 250
+kit-glucometer.soon.lows	شکره بیا بیا ټیټېږي	low sugar happens again and again
+kit-glucometer.mmol	که ستاسو ماشین ملي مول ښيي: له ۴ کم ټیټ دی، له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی، او له ۱۴ پورته ډېر لوړ دی.	If your meter shows mmol/L: under 4 is low, 4.4 to 7.2 before breakfast is good, and over 14 is very high.
+kit-glucometer.dont	دا کارونه مه کوئ:	Do not do these things:
+kit-glucometer.dont.dose	انسولین یا ګولۍ پخپله مه کموئ او مه زیاتوئ؛ له کلینیک وپوښتئ.	Do not change your insulin or tablets yourself; ask the clinic.
+kit-glucometer.dont.share	ستنې یا د ګوتې د وهلو قلم له هېچا سره مه شریکوئ.	Do not share needles or the finger pricker with anyone.
+kit-oximeter.title	د ګوتې د اکسیجن چپړکی	Oxygen finger clip
+kit-oximeter.lead	دا کوچنی چپړکی پر ګوته ښيي چې په وینه کې څومره اکسیجن دی. مرسته کوي، خو غلطي هم کوي، نو تل پخپله ناروغ ته هم وګورئ.	This small clip on the finger shows how much oxygen is in the blood. It can help, but it can be wrong, so always look at the person too.
+kit-oximeter.buy	څه واخلئ. د ګوتې د اکسیجن چپړکی، شاوخوا ۷۰۰ تر ۱۵۰۰ افغانۍ. ډېری یې د لویانو لپاره جوړ شوي او پر وړو ماشومانو ښه کار نه کوي.	What to buy. A fingertip oxygen clip, about 700 to 1,500 afghanis. Most are made for adults and do not work well on small children.
+kit-oximeter.warm	ګرم، پاک او ارام لاس. لومړی لاس ګرم کړئ. له هغې ګوتې نکریزې یا د نوکانو رنګ لرې کړئ. لاس پر سینه کېږدئ او ارام یې ونیسئ.	A warm, clean, still hand. Warm the hand first. Take henna or nail polish off that finger. Rest the hand on the chest and keep it still.
+kit-oximeter.wait	یوه دقیقه صبر وکړئ. یوه بشپړه دقیقه صبر وکړئ. د اکسیجن هغه شمېره ولولئ چې د سلنې نښې ته نږدې ده، نه د زړه د ټکان شمېره. هغه شمېره ولیکئ چې ثابته پاتې کېږي.	Wait one minute. Wait a full minute. Read the oxygen number next to the % sign, not the heart number. Write the number that stays.
+kit-oximeter.numbers	شمېرې څه مانا لري. ۹۵ تر ۱۰۰ عادي دي. ۹۳ یا ۹۴ ټیټ دی: بیا یې اندازه کړئ، او که ناروغ وي نن کلینیک ته ولاړ شئ. ۹۲ یا کم: همدا اوس روغتون.	What the numbers mean. 95 to 100 is normal. 93 or 94 is low: measure again, and go to the clinic today if unwell. 92 or less: hospital now.
+kit-oximeter.limits	کېدای شي غلط وي. پر تیاره پوستکي، له سړو لاسونو سره، یا که لاس وخوځېږي، کېدای شي له اصلي څخه ډېر اکسیجن وښيي. پر ساه اخیستلو او د ناروغ پر حال باور وکړئ.	It can be wrong. On darker skin, with cold hands, or if the hand moves, it can show more oxygen than there really is. Trust the breathing and how the person looks.
+kit-oximeter.clean	پاک یې وساتئ. له کارولو وروسته یې په لوند ټوکر یا الکولو پاک کړئ. که ډېر وخت یې نه کاروئ، بیټرۍ یې وباسئ.	Keep it clean. Wipe it with a damp cloth or alcohol after use. Take the batteries out if you will not use it for a long time.
+kit-oximeter.check	د اکسیجن شمېره وګورئ. شمېره ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.	Check an oxygen reading. Put in the number and hear what it means and what to do.
+kit-oximeter.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
+kit-oximeter.urgent.low	شمېره ۹۲ یا کمه ده	the number is 92 or less
+kit-oximeter.urgent.breath	ساه اخیستل یا خبرې کول ګران دي، هره شمېره چې وي	it is hard to breathe or to talk, whatever the number
+kit-oximeter.urgent.blue	شونډې یا مخ شین یا خړ ښکاري	the lips or face look blue or grey
+kit-oximeter.urgent.child	د ساه اخیستو پر وخت د ماشوم د سینې لاندې برخه ننوځي	a child's lower chest pulls in when breathing in
+kit-oximeter.breaths	د ماشومانو لپاره: ساه وشمېرئ. د کوچني ماشوم لپاره، په یوه دقیقه کې د ساه شمېرل اکثره له دې چپړکي ښه دي.	For children: count the breaths. For a small child, counting breaths for one minute is often better than this clip.
+kit-scale.title	په کور کې د ماشوم تلل	Weighing a child at home
+kit-scale.lead	کلینیک ماشومان وړیا تلي. په کور کې تله اړینه نه ده، خو د کوچني ماشوم یا هغه ماشوم لپاره چې وزن نه اخلي مرسته کوي.	The clinic weighs children for free. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight.
+kit-scale.buy	که یې اخلئ. د ماشوم تله، ځوړنده یا ډیجیټل، شاوخوا ۱۰۰۰ تر ۲۰۰۰ افغانۍ ده. د کور عادي تله هم د لویو ماشومانو لپاره کار کوي.	If you want one. A baby scale, hanging or digital, costs about 1,000 to 2,000 afghanis. A normal bathroom scale also works for older children.
+kit-scale.hold	په عادي تله. لومړی ځان وتلئ. بیا ماشوم په غېږ کې ونیسئ او بیا ځان وتلئ. لومړۍ شمېره له دویمې کمه کړئ: دا د ماشوم وزن دی.	With a normal scale. Weigh yourself. Then weigh yourself holding the child. Take the first number from the second: that is the child's weight.
+kit-scale.same	هر ځل په یو ډول یې وتلئ. په سپکو جامو، د تي یا خوړو مخکې، د ورځې په همغه وخت، او تله پر هوارې او کلکې ځمکې وي.	Weigh the same way each time. Use light clothes, weigh before a feed, at the same time of day, with the scale on a flat, hard floor.
+kit-scale.family	په «زما کورنۍ» کې یې ولیکئ. وزن په دې اپ کې د خپل ماشوم پاڼې ته ور زیات کړئ او کلینیک ته یې وښایئ.	Write it in My family. Add the weight to your child's page in the app, and show it at the clinic.
+kit-scale.meaning	څه ته پام وکړئ. کوچنی ماشوم باید هره میاشت وزن واخلي. د کلینیک د ودې چارټ ښيي چې وزن یې د عمر سره سم دی که نه.	What to look for. A young child should gain weight each month. The clinic's growth chart shows if the weight is right for the age.
+kit-scale.soon	که ماشوم له دې څخه یو ولري، په همدې اونۍ کلینیک ته ولاړ شئ	Go to the clinic this week if the child:
+kit-scale.soon.flat	۲ میاشتې کېږي چې وزن یې نه دی اخیستی	has not gained weight for 2 months
+kit-scale.soon.loss	وزن یې کمېږي	is losing weight
+kit-scale.soon.newborn	۳ اونۍ لري او لا هم د زېږون له وزن کم دی	is 3 weeks old and still under the birth weight
+kit-first-aid.title	په کور کې د لومړنیو مرستو سامان	First-aid things at home
+kit-first-aid.lead	د لومړنیو مرستو یو کوچنی قطي په پاک او وچ ځای کې، لوړ او د ماشومانو له لاسه لرې وساتئ. هرو څو میاشتو کې یې وګورئ.	Keep a small box of first-aid things in a clean, dry place, high up and away from children. Check it every few months.
+kit-first-aid.ors	د او آر اس پاکټونه. د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. اکثره په کلینیک کې وړیا دی.	ORS packets. For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. Often free at the clinic.
+kit-first-aid.zinc	د زنک ګولۍ. د نس ناستې لرونکي ماشوم لپاره، ۱۰ تر ۱۴ ورځو: تر ۶ میاشتو کم، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه.	Zinc tablets. For a child with diarrhoea, for 10 to 14 days: under 6 months, 10 mg a day; from 6 months, 20 mg a day.
+kit-first-aid.soap	صابون. د لاسونو، ټپونو او چیچلو د مینځلو لپاره. د څاروي د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ.	Soap. For washing hands, cuts and bites. Wash an animal bite with soap and running water for 15 minutes.
+kit-first-aid.cloth	پاک ټوکر او بنداژ. پاک پنبه یي ټوکر او د بنداژ کړۍ، په وینه بهېدو د فشار لپاره او د سوځېدنې او ټپونو د پټولو لپاره. په پاکه پلاستیکي کڅوړه کې یې وساتئ.	Clean cloth and bandages. Clean cotton cloth and bandage rolls, to press on bleeding and to cover burns and wounds. Keep them in a clean plastic bag.
+kit-first-aid.more	دا هم په کار دي. ترمامیټر، د ټپ پلستر، قیچي، لاسي څراغ، او د یوه موټروان او کلینیک د ټیلیفون شمېرې.	Also useful. A thermometer, sticking plasters, scissors, a torch, and the phone numbers of a driver and the clinic.
+kit-first-aid.check	هرو څو میاشتو کې یې وګورئ. لوند پاکټونه او هر هغه څه چې نېټه یې تېره شوې وغورځوئ. هر څه چې مو کارولي بېرته یې کېږدئ.	Check every few months. Throw away wet packets and anything past its date. Put back what you used.
+kit-first-aid.page	لومړنۍ مرستې: څه وکړئ. سوځېدنه، وینه بهېدل، په ستوني کې بندېدل، چیچل او زهر: لومړني ګامونه.	First aid: what to do. Burns, bleeding, choking, bites and poisoning: the first steps.
+kit-first-aid.dont	دا کارونه مه کوئ:	Do not do these things:
+kit-first-aid.dont.bottles	درمل یا خاورین تېل د څښاک په بوتلونو کې یا هلته مه ساتئ چې د ماشومانو لاس ورته رسېږي.	Do not keep medicines or kerosene in drink bottles or where children can reach.
+kit-first-aid.dont.old	زاړه درمل، یا هغه درمل چې بل چا ته ورکړل شوي، مه کاروئ.	Do not use old medicines, or medicines given for someone else.
+anim.water.title	د څښلو اوبو پاکول	Making water safe
+anim.water.s1	اوبه ښایي پاکې ښکاره شي، خو بیا هم پکې داسې میکروبونه وي چې ماشومانو ته اسهال ورکوي. میندو د اوبو د خوندي کولو څو اسانه لارې موندلې دي.	Water can look clear and still carry germs that give children diarrhoea. Mothers have found a few easy ways to make it safe.
+anim.water.s2	اوبه وخوټوئ: صبر وکړئ چې لویې بلبلې پورته شي، بیا یې ۱ دقیقه نوره په جوش کې پرېږدئ. سرپوښ ورباندې کېږدئ چې سړې شي.	Boil it: wait until big bubbles roll, then keep it boiling for 1 minute. Let it cool with the lid on.
+anim.water.s3	لرګي کم دي؟ د کلورین هغه ټابلیټونه وکاروئ چې کلینیک یا روغتیايي کارکوونکی یې ورکوي. وپوښتئ چې یو ټابلیټ د څو لیټرو اوبو لپاره دی؛ د بېلګې په توګه یو لوی ټابلیټ د ۲۰ لیټره ګیلن لپاره.	Short of firewood? Use the chlorine tablets the clinic or health worker gives out. Ask how much water one tablet is for: for example, one big tablet for a 20-litre jerrycan.
+anim.water.s4	سرپوښ یې وتړئ، وې خوځوئ او له څښلو مخکې ۳۰ دقیقې صبر وکړئ. د کلورین لږ بوی عادي دی؛ دا ښيي چې ټابلیټ کار کړی دی.	Close the lid, shake it, and wait 30 minutes before anyone drinks. A light chlorine smell is normal: it means the tablet is working.
+anim.water.s5	د څښلو اوبه پټې، په پاک لوښي کې او له ځمکې پورته وساتئ. لوښی هر څو ورځې وروسته په صابون ومینځئ.	Keep drinking water covered, in a clean container up off the floor. Wash the container with soap every few days.
+anim.water.s6	اوبه د لوښي له نل یا شونډې واچوئ. پیاله یا لاس په لوښي کې مه ننباسئ؛ دا کار میکروبونه بېرته اوبو ته راوړي.	Pour the water out from the tap or spout. Don't dip cups or hands into the pot: that brings the germs back in.
+anim.nappies.title	د ماشوم د کهنو مینځل	Washing cloth nappies
+anim.nappies.s1	د ټوکر کهنې بیا بیا کارولی شو. څو ساده عادتونه ماشوم او ټوله کورنۍ د اسهال له میکروبونو ساتي.	Cloth nappies can be used again and again. A few simple habits keep the baby and the whole family safe from diarrhoea germs.
+anim.nappies.s2	لومړی د ماشوم ډکې متیازې تشناب ته واچوئ او کهنه هم هلته پرېمینځئ. په ځمکه نه، او هېڅکله په ویاله یا کاریز کې نه.	First tip the poo into the latrine and rinse the nappy there. Not on the ground, and never in the stream or the water channel.
+anim.nappies.s3	بیا یې په ګرمو اوبو او صابون ومینځئ، ښه یې وموږئ او په پاکو اوبو کې یې پرېمینځئ.	Then wash it with soap in hot water, scrub it well, and rinse it in clean water.
+anim.nappies.s4	په لمر کې یې وځړوئ تر څو بشپړه وچه شي. لمر هم د میکروبونو په وژلو کې مرسته کوي.	Hang it in the sun until it is completely dry. The sun helps kill germs too.
+anim.nappies.s5	په پای کې خپل لاسونه په صابون ومینځئ. چټلې کهنې د مینځلو تر وخته په سرپوښ لرونکې سطل کې وساتئ.	Last, wash your hands with soap. Keep dirty nappies in a bucket with a lid until wash time.
+anim.handwashing.title	د لاسونو مینځل	Washing hands
+anim.handwashing.s1	ډېرې ناروغۍ د لاسونو له لارې خپرېږي. صابون او بهېدونکې اوبه میکروبونه مینځي. صابون نشته؟ پاکې ایرې هم کار کوي. څوک کولای شي اوبه درته واچوي.	Many illnesses travel on hands. Soap and running water wash the germs away. No soap? Clean ash works too. Someone can pour the water for you.
+anim.handwashing.s2	له تشناب وروسته، او د ماشوم له پاکولو وروسته، لاسونه ومینځئ.	Wash after using the toilet, and after cleaning a child's bottom.
+anim.handwashing.s3	د خوړو له تیارولو مخکې لاسونه ومینځئ.	Wash before you start preparing food.
+anim.handwashing.s4	د ډوډۍ له خوړلو او ماشوم ته د خوړو له ورکولو مخکې لاسونه ومینځئ. د ماشومانو لاسونه هم ومینځئ.	Wash before eating and before feeding a child. Wash the children's hands too.
+anim.handwashing.s5	ماشوم ته د تي ورکولو مخکې لاسونه ومینځئ.	Wash before breastfeeding your baby.
+anim.handwashing.s6	لاسونه لانده کړئ، صابون یا ایرې پرې ووهئ او شاوخوا ۲۰ ثانیې یې وموږئ: ورغوي، د لاس شا، د ګوتو منځ، غټې ګوتې او نوکان.	Wet your hands, add soap or ash, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails.
+anim.handwashing.s7	د بهېدونکو اوبو لاندې یې پرېمینځئ. لاسونه وښوروئ چې وچ شي، یا یې په پاک ټوکر وچ کړئ.	Rinse under running water. Shake your hands dry or use a clean cloth.
+anim.ors.title	په کور کې د او آر اس جوړول	Making ORS at home
+anim.ors.s1	اسهال د ماشوم له بدن څخه اوبه او مالګه باسي. څنګه چې اسهال پیل شي، او آر اس ورکړئ؛ هغه څه بېرته ډکوي چې له لاسه وتلي دي.	Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost.
+anim.ors.s2	لاسونه ومینځئ. یو پاک جګ تر ۱ لیټره پورې په ایشول شویو او سړو شویو اوبو ډک کړئ. ټول پاکټ پکې واچوئ او وې خوځوئ تر څو حل شي.	Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves.
+anim.ors.s3	پاکټ نشته؟ ۶ هوارې د چای کاچوغې بوره او نیمه هواره د چای کاچوغه مالګه په ۱ لیټر پاکو اوبو کې حل کړئ. په دقت یې اندازه کړئ: ډېره مالګه زیان لري.	No packet? Mix 6 level teaspoons of sugar and half a level teaspoon of salt into 1 litre of clean water. Measure carefully: too much salt is harmful.
+anim.ors.s4	لږ لږ او ژر ژر یې په کاچوغې یا پیالې ورکړئ. که ماشوم کانګې وکړې، ۱۰ دقیقې صبر وکړئ، بیا یې ورو ورو ورکړئ. هره ورځ یې تازه جوړ کړئ.	Give small sips often, with a spoon or a cup. If the child vomits, wait 10 minutes, then give it more slowly. Make it fresh each day.
+anim.ors.s5	تی ورکول او خواړه ورکول دوام ورکړئ. د کلینیک د زنک ټابلیټ، ورځې یو ځل د ۱۰ تر ۱۴ ورځو لپاره، ماشوم ژر جوړوي، حتی کله چې اسهال ودرېږي.	Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 10 to 14 days, help the child get well, even after the diarrhoea stops.
+anim.ors.s6	که ماشوم څښلی یا تی رودلی نشي، ډېر خوب وړی وي، په ډکو متیازو کې یې وینه وي، تبه ولري، یا ښه کېږي نه، ژر کلینیک ته لاړ شئ.	Go to the clinic quickly if the child cannot drink or breastfeed, is very sleepy, has blood in the poo, has a fever, or is not getting better.
+anim.spread.title	ناروغۍ څنګه خپرېږي	How illness spreads
+anim.spread.s1	میکروبونه دومره واړه دي چې نه لیدل کېږي. دوی د څو لارو له یوه کس څخه بل ته ځي. کله چې لارې وپېژنئ، بندولی یې شئ.	Germs are too small to see. They travel from person to person along a few paths. Once you know the paths, you can block them.
+anim.spread.s2	لاسونه: میکروبونه د لاسونو له لارې خوړو او خولې ته رسېږي. په صابون مینځل دا لار بندوي.	Hands: germs ride on our hands into food and mouths. Washing with soap blocks this path.
+anim.spread.s3	اوبه او خواړه: ناپاکې اوبه او لوڅ خواړه میکروب لېږدوي. اوبه پاکې کړئ، خواړه پټ کړئ او ښه یې پاخه کړئ.	Water and food: dirty water and uncovered food carry germs. Make water safe, cover food, and cook it well.
+anim.spread.s4	مچان: لومړی په ډکو متیازو کېني، بیا زموږ په خوړو. سرپوښ لرونکی تشناب وکاروئ او خواړه پټ وساتئ.	Flies: they sit on poo, then on our food. Use a latrine with a cover, and keep food covered.
+anim.spread.s5	ټوخی او هوا: ټوخی کوچني څاڅکي خپروي. په خپله څنګله کې ټوخی وکړئ، کوټې ته تازه هوا پرېږدئ او ماشومان واکسین کړئ.	Coughs and air: a cough sprays tiny drops. Cough into your elbow, let fresh air into the room, and get the children vaccinated.
+anim.spread.s6	غوماشې او شګلني مچان ماښام او شپه چیچي. دوی ملاریا او لیشمانیا خپروي؛ لیشمانیا هغه ټپ دی چې نه رغېږي. د درملو لرونکې پشه‌خانې لاندې ویده شئ او ماښام لاسونه او پښې پټې کړئ.	Mosquitoes and sandflies bite in the evening and at night. They spread malaria and leishmaniasis, the sore that does not heal. Sleep under a treated net, and cover arms and legs in the evening.
+anim.spread.s7	صابون، پاکې اوبه، پټ خواړه، سرپوښ لرونکی تشناب، په څنګله کې ټوخی او پشه‌خانه. واړه عادتونه چې ټوله کورنۍ روغه ساتي.	Soap, safe water, covered food, a covered latrine, an elbow for coughs, and a bed net. Small habits that keep the whole family healthier.

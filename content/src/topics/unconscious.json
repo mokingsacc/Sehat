@@ -1,0 +1,242 @@
+{
+  "id": "unconscious",
+  "section": "everyone",
+  "title": {
+    "fa": "بی‌هوش، اما نفس می‌کشد",
+    "ps": "بې‌هوښه، خو ساه اخلي",
+    "en": "Unconscious but breathing"
+  },
+  "summary": {
+    "fa": "او را به پهلو بخوابانید تا به آسانی نفس بکشد. برای همه سنین.",
+    "ps": "پر اړخ یې څملوئ چې په اسانۍ ساه واخلي. د ټولو عمرونو لپاره.",
+    "en": "Lay them on their side so they can breathe. All ages."
+  },
+  "image": "unconscious",
+  "blocks": [
+    {
+      "id": "unconscious.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کسی که بیدار نمی‌شود اما نفس می‌کشد، ممکن است با زبان یا استفراغ خود خفه شود. خواباندن به پهلو راه نفسش را باز نگه می‌دارد.",
+        "ps": "هغه څوک چې نه راویښېږي خو ساه اخلي، کېدای شي په خپله ژبه یا کانګو خفه شي. پر اړخ څملول یې د ساه لاره خلاصه ساتي.",
+        "en": "A person who will not wake but is breathing can choke on their tongue or vomit. Lying on the side keeps the airway open."
+      }
+    },
+    {
+      "id": "unconscious.check",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "نفسش را ببینید",
+        "ps": "ساه یې وګورئ",
+        "en": "Check breathing"
+      },
+      "text": {
+        "fa": "به شانه‌هایش بزنید و بلند صدا کنید. اگر جواب نداد، سرش را به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "اوږې یې وټکوئ او په لوړ غږ یې غږ کړئ. که ځواب یې ورنه کړ، سر یې شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
+        "en": "Tap the shoulders and shout. If there is no answer, tilt the head back, lift the chin, and watch the chest for 10 seconds."
+      }
+    },
+    {
+      "id": "unconscious.not-breathing",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "عادی نفس نمی‌کشد؟ سینه را فشار دهید",
+        "ps": "په عادي ډول ساه نه اخلي؟ سینه کېکاږئ",
+        "en": "Not breathing normally? Start CPR"
+      },
+      "text": {
+        "fa": "اگر عادی نفس نمی‌کشد، همین حالا فشار سینه را شروع کنید. صفحهٔ مخصوص سن او را ببینید.",
+        "ps": "که په عادي ډول ساه نه اخلي، همدا اوس د سینې فشار پیل کړئ. د هغه د عمر ځانګړې پاڼه وګورئ.",
+        "en": "If they are not breathing normally, start pushing on the chest now. See the page for their age."
+      }
+    },
+    {
+      "id": "unconscious.cpr",
+      "type": "link",
+      "to": "topic/cpr-adult",
+      "icon": "breathe",
+      "title": {
+        "fa": "بزرگسال نفس نمی‌کشد؟",
+        "ps": "لوی کس ساه نه اخلي؟",
+        "en": "Adult not breathing?"
+      },
+      "text": {
+        "fa": "صفحهٔ بزرگسال را باز کنید. برای طفل یا شیرخوار، صفحهٔ طفل یا شیرخوار را ببینید.",
+        "ps": "د لوی کس پاڼه پرانیزئ. د ماشوم یا تي خوړونکي لپاره، د هغوی پاڼه وګورئ.",
+        "en": "Open the adult page. For a child or baby, use the child or baby page."
+      }
+    },
+    {
+      "id": "unconscious.roll",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "او را به پهلو بچرخانید",
+        "ps": "پر اړخ یې واړوئ",
+        "en": "Roll them onto their side"
+      },
+      "text": {
+        "fa": "کنارش زانو بزنید. دست نزدیک را به طرف بیرون بگذارید، زانوی دور را بالا خم کنید و او را به طرف خود به پهلو بچرخانید.",
+        "ps": "تر څنګ یې په زنګنونو کېنئ. نږدې لاس یې بهر ته کېږدئ، لرې زنګون یې پورته کوږ کړئ او خپل لوري ته یې پر اړخ واړوئ.",
+        "en": "Kneel beside them. Put the near arm out, bend the far knee up, and roll them towards you onto their side."
+      }
+    },
+    {
+      "id": "unconscious.head",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "سر به عقب، دهان به پایین",
+        "ps": "سر شاته، خوله ښکته",
+        "en": "Head back, mouth down"
+      },
+      "text": {
+        "fa": "دست بالایی‌اش را زیر رخسارش بگذارید. سرش را به عقب نگه دارید تا دهانش به طرف پایین باشد و استفراغ بیرون شود.",
+        "ps": "پورتنی لاس یې د مخ لاندې کېږدئ. سر یې شاته وساتئ چې خوله یې ښکته وي او کانګې بهر ووځي.",
+        "en": "Put their upper hand under the cheek. Keep the head tilted back so the mouth points down and vomit can run out."
+      },
+      "picture": "em-recovery-position"
+    },
+    {
+      "id": "unconscious.baby",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "شیرخوار را به پهلو در بغل بگیرید",
+        "ps": "ماشوم پر اړخ په غېږ کې ونیسئ",
+        "en": "Hold a baby on its side"
+      },
+      "text": {
+        "fa": "شیرخوار را به پهلو در بغل خود بگیرید، سرش کمی پایین‌تر از بدن، تا شیر یا استفراغ بیرون شود.",
+        "ps": "تي خوړونکی ماشوم پر اړخ په خپله غېږ کې ونیسئ، سر یې له بدن لږ ټیټ، چې شیدې یا کانګې بهر ووځي.",
+        "en": "Hold a baby in your arms on its side, head a little lower than the body, so milk or vomit can run out."
+      },
+      "picture": "em-recovery-baby"
+    },
+    {
+      "id": "unconscious.watch",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "پیشش بمانید و نفسش را ببینید",
+        "ps": "ورسره پاتې شئ او ساه یې وګورئ",
+        "en": "Stay and watch the breathing"
+      },
+      "text": {
+        "fa": "پیشش بمانید و تا رسیدن کمک، نفسش را ببینید. اگر نفسش بند شد، او را به پشت بچرخانید و فشار سینه را شروع کنید.",
+        "ps": "ورسره پاتې شئ او تر څو مرسته رسېږي، ساه یې وګورئ. که ساه یې ودرېده، په شا یې واړوئ او د سینې فشار پیل کړئ.",
+        "en": "Stay with them and keep checking the breathing until help comes. If breathing stops, roll them onto the back and start CPR."
+      }
+    },
+    {
+      "id": "unconscious.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شخص این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که کس دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone:"
+      },
+      "items": [
+        {
+          "id": "unconscious.urgent.not-waking",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بیدار نمی‌شود، حتی اگر نفس می‌کشد",
+            "ps": "نه راویښېږي، که څه هم ساه اخلي",
+            "en": "cannot be woken, even if breathing"
+          }
+        },
+        {
+          "id": "unconscious.urgent.fainted",
+          "icon": "warning",
+          "text": {
+            "fa": "بی‌هوش شد و در یک دقیقه به هوش نیامد",
+            "ps": "بې‌هوښه شو او په یوه دقیقه کې په هوښ رانغی",
+            "en": "fainted and did not wake within a minute"
+          }
+        },
+        {
+          "id": "unconscious.urgent.confused",
+          "icon": "headache",
+          "text": {
+            "fa": "گیج است، یا عجیب گپ می‌زند یا رفتار می‌کند",
+            "ps": "ګډوډ دی، یا عجیبې خبرې یا کارونه کوي",
+            "en": "is confused, or talks or acts strangely"
+          }
+        }
+      ]
+    },
+    {
+      "id": "unconscious.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "unconscious.dont.food",
+          "icon": "no",
+          "text": {
+            "fa": "به او غذا یا آب ندهید",
+            "ps": "خواړه یا اوبه مه ورکوئ",
+            "en": "give food or drink"
+          }
+        },
+        {
+          "id": "unconscious.dont.pillow",
+          "icon": "no",
+          "text": {
+            "fa": "بالشت زیر سرش نگذارید",
+            "ps": "بالښت یې تر سر لاندې مه ږدئ",
+            "en": "put a pillow under the head"
+          }
+        },
+        {
+          "id": "unconscious.dont.alone",
+          "icon": "no",
+          "text": {
+            "fa": "او را تنها به پشت رها نکنید",
+            "ps": "په شا یې یوازې مه پرېږدئ",
+            "en": "leave them alone lying on their back"
+          }
+        }
+      ]
+    },
+    {
+      "id": "unconscious.neck",
+      "type": "tip",
+      "icon": "stiff-neck",
+      "text": {
+        "fa": "بعد از افتادن، او را تا ممکن است کم تکان بدهید. اگر باید بچرخانید، سر و بدنش را در یک خط راست نگه دارید.",
+        "ps": "له لوېدو وروسته، څومره چې کېږي لږ یې وخوځوئ. که اړول یې اړین وي، سر او بدن یې په یوه نېغه کرښه کې وساتئ.",
+        "en": "After a fall, move them as little as you can. If you must roll them, keep the head and body in a straight line."
+      }
+    },
+    {
+      "id": "unconscious.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه علت بی‌هوشی را پیدا و تداوی می‌کنند، مثلاً کمی شکر، مسمومیت یا خونریزی.",
+        "ps": "په روغتون کې د بې‌هوښۍ لامل پیدا کوي او درملنه یې کوي، لکه د شکرې کمښت، مسمومیت یا وینه بهېدل.",
+        "en": "At hospital they find out why the person is unconscious and treat it, for example low sugar, poisoning or bleeding."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid and Basic Life Support (recovery position for unresponsive, normally breathing people)",
+    "ILCOR 2025 Consensus on Science: first aid, recovery position",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): unresponsive and breathing normally",
+    "WHO Emergency Triage Assessment and Treatment (ETAT, 2016): positioning the unconscious child"
+  ],
+  "review": [
+    "ERC 2025: recovery position for adults and children who are unresponsive but breathing normally; keep checking breathing. Infants are held on their side with the head lower (common UK teaching).",
+    "Suspected spine injury: the tip says keep head and body in line. ERC allows the recovery position if the airway is at risk.",
+    "Every unconscious person goes to hospital now. A simple faint that wakes within a minute is not in the urgent list."
+  ]
+}

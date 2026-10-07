@@ -1,0 +1,228 @@
+{
+  "id": "electric-shock",
+  "section": "everyone",
+  "title": {
+    "fa": "برق‌گرفتگی",
+    "ps": "د برېښنا وهل",
+    "en": "Electric shock"
+  },
+  "summary": {
+    "fa": "اول برق را قطع کنید؛ تا برق وصل است، به او دست نزنید.",
+    "ps": "لومړی برېښنا بنده کړئ؛ تر څو برېښنا وصل وي، لاس مه ورته وړئ.",
+    "en": "Switch off first. Never touch them while the power is on."
+  },
+  "image": "electric-shock",
+  "blocks": [
+    {
+      "id": "electric-shock.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سیم لچ، پلگ شکسته و سیم نزدیک آب می‌تواند برق کشنده بدهد. برق از او به شما هم می‌رسد، پس اول جای را بی‌خطر کنید.",
+        "ps": "لوڅ سیمونه، مات پلګونه او اوبو ته نږدې سیمونه کولی شي وژونکې برېښنا ورکړي. برېښنا له هغه تاسو ته هم رسېدلی شي، نو لومړی ځای خوندي کړئ.",
+        "en": "Bare wires, broken plugs and wires near water can give a deadly shock. The power can pass into you too, so make it safe first."
+      }
+    },
+    {
+      "id": "electric-shock.off",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "برق را قطع کنید",
+        "ps": "برېښنا بنده کړئ",
+        "en": "Switch off the power"
+      },
+      "text": {
+        "fa": "سویچ یا سویچ عمومی را خاموش کنید، یا پلگ را بکشید. تا برق قطع نشده، به شخص دست نزنید.",
+        "ps": "سویچ یا عمومي سویچ بند کړئ، یا پلګ وباسئ. تر څو برېښنا بنده شوې نه وي، کس ته لاس مه وړئ.",
+        "en": "Turn off the switch or the main switch, or pull out the plug. Do not touch the person until the power is off."
+      }
+    },
+    {
+      "id": "electric-shock.stick",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "قطع کرده نمی‌توانید؟ چوب خشک",
+        "ps": "بندولی یې نشئ؟ وچ لرګی",
+        "en": "Cannot switch off? Use dry wood"
+      },
+      "text": {
+        "fa": "روی چیزی خشک بایستید. سیم را با یک چوب یا چوکی چوبی خشک دور کنید. هرگز چیز تر یا فلزی را استفاده نکنید.",
+        "ps": "پر یوه وچ شي ودرېږئ. سیم په وچ لرګي یا لرګینې چوکۍ لرې کړئ. هېڅکله لوند یا فلزي شی مه کاروئ.",
+        "en": "Stand on something dry. Push the wire away with a dry wooden stick or chair. Never use anything wet or metal."
+      },
+      "picture": "em-electric-stick"
+    },
+    {
+      "id": "electric-shock.line",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "سیم بزرگ برق: دور بمانید",
+        "ps": "د برېښنا لوی سیم: لرې پاتې شئ",
+        "en": "Big power line down: keep away"
+      },
+      "text": {
+        "fa": "اگر سیم بزرگ برق افتاده، حداقل ۲۰ قدم دور بمانید و دیگران را هم دور نگه دارید تا برق قطع شود.",
+        "ps": "که د برېښنا لوی سیم لوېدلی وي، لږ تر لږه ۲۰ قدمه لرې پاتې شئ او نور هم لرې وساتئ تر څو برېښنا پرې شي.",
+        "en": "If a big power line has fallen, stay at least 20 steps away and keep others back until the power is cut."
+      }
+    },
+    {
+      "id": "electric-shock.breathing",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "نفسش را ببینید",
+        "ps": "ساه یې وګورئ",
+        "en": "Check breathing"
+      },
+      "text": {
+        "fa": "وقتی بی‌خطر شد، نفسش را ببینید. اگر عادی نفس نمی‌کشد، فشار سینه را شروع کنید و یک نفر را برای آوردن موتر بفرستید.",
+        "ps": "کله چې خوندي شو، ساه یې وګورئ. که په عادي ډول ساه نه اخلي، د سینې فشار پیل کړئ او یو څوک د موټر راوړلو لپاره ولېږئ.",
+        "en": "When it is safe, check breathing. If they are not breathing normally, start chest pushes and send for a car."
+      }
+    },
+    {
+      "id": "electric-shock.burns",
+      "type": "step",
+      "icon": "cool-water",
+      "title": {
+        "fa": "سوختگی‌ها را سرد کنید",
+        "ps": "سوځېدنې سړې کړئ",
+        "en": "Cool the burns"
+      },
+      "text": {
+        "fa": "برق در جای داخل شدن و بیرون شدن می‌سوزاند. این سوختگی‌ها را ۲۰ دقیقه با آب سرد کنید و سست بپوشانید.",
+        "ps": "برېښنا هلته سوځوي چې ننوځي او وځي. دا سوځېدنې ۲۰ دقیقې په اوبو سړې کړئ او سستې یې وپوښئ.",
+        "en": "Electricity burns where it goes in and comes out. Cool these burns with water for 20 minutes and cover them loosely."
+      }
+    },
+    {
+      "id": "electric-shock.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "بعد از برق‌گرفتگی شدید، حتی اگر خوب است، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "له سخت برېښنا وهلو وروسته، که روغ هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, after a strong shock, even if they seem well:"
+      },
+      "items": [
+        {
+          "id": "electric-shock.urgent.unconscious",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بی‌هوش شد یا فشار سینه لازم داشت",
+            "ps": "بې‌هوښه شو یا د سینې فشار ته یې اړتیا درلوده",
+            "en": "was unconscious or needed chest pushes"
+          }
+        },
+        {
+          "id": "electric-shock.urgent.burns",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی دارد، حتی کوچک",
+            "ps": "سوځېدنه لري، که څه هم وړه وي",
+            "en": "has burns, even small ones"
+          }
+        },
+        {
+          "id": "electric-shock.urgent.heart",
+          "icon": "heart",
+          "text": {
+            "fa": "درد سینه دارد، یا قلبش تیز یا نامنظم می‌زند",
+            "ps": "د سینې درد لري، یا زړه یې چټک یا بې‌نظمه ټکان کوي",
+            "en": "has chest pain, or a fast or uneven heartbeat"
+          }
+        },
+        {
+          "id": "electric-shock.urgent.numb",
+          "icon": "warning",
+          "text": {
+            "fa": "گیج است، یا بی‌حسی یا ضعف دارد",
+            "ps": "ګډوډ دی، یا بې‌حسي یا کمزوري لري",
+            "en": "is confused, or has numbness or weakness"
+          }
+        },
+        {
+          "id": "electric-shock.urgent.lightning",
+          "icon": "warning",
+          "text": {
+            "fa": "برق آسمان او را زده است",
+            "ps": "آسماني برېښنا وهلی",
+            "en": "was struck by lightning"
+          }
+        }
+      ]
+    },
+    {
+      "id": "electric-shock.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "electric-shock.dont.touch",
+          "icon": "no",
+          "text": {
+            "fa": "تا برق وصل است، به او دست نزنید",
+            "ps": "تر څو برېښنا وصل وي، لاس مه ورته وړئ",
+            "en": "touch them while the power is on"
+          }
+        },
+        {
+          "id": "electric-shock.dont.line",
+          "icon": "no",
+          "text": {
+            "fa": "نزدیک سیم بزرگ افتادهٔ برق نروید",
+            "ps": "د برېښنا لوېدلي لوی سیم ته نږدې مه ځئ",
+            "en": "go near a fallen power line"
+          }
+        },
+        {
+          "id": "electric-shock.dont.water",
+          "icon": "no",
+          "text": {
+            "fa": "بر آتش برقی آب نریزید",
+            "ps": "پر برېښنايي اور اوبه مه اچوئ",
+            "en": "throw water on an electrical fire"
+          }
+        }
+      ]
+    },
+    {
+      "id": "electric-shock.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "برق می‌تواند با یک نشانهٔ کوچک بیرونی، به قلب و داخل بدن آسیب برساند. در شفاخانه ضربان قلب را معاینه می‌کنند.",
+        "ps": "برېښنا کولی شي د بهر په یوه کوچنۍ نښه، زړه او د بدن دننه ته زیان ورسوي. په روغتون کې د زړه ټکان معاینه کوي.",
+        "en": "Electricity can harm the heart and the inside of the body while leaving only small marks. At hospital they check the heartbeat."
+      }
+    },
+    {
+      "id": "electric-shock.prevent",
+      "type": "tip",
+      "icon": "house",
+      "text": {
+        "fa": "سیم‌ها را از زمین و آب دور نگه دارید، ساکت‌ها را بپوشانید و نگذارید اطفال به پلگ دست بزنند.",
+        "ps": "سیمونه له ځمکې او اوبو لرې وساتئ، ساکټونه پټ کړئ او مه پرېږدئ چې ماشومان پلګونو ته لاس ور وړي.",
+        "en": "Keep wires off the ground and away from water, cover sockets, and do not let children touch plugs."
+      }
+    }
+  ],
+  "sources": [
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): electrical injuries",
+    "European Resuscitation Council Guidelines 2025: First Aid",
+    "European Resuscitation Council Guidelines 2025: Special circumstances, electrocution and lightning",
+    "WHO/UNICEF World report on child injury prevention (2008)"
+  ],
+  "review": [
+    "'At least 20 steps' for high-voltage lines stands in for the 18 metres in UK/IFRC teaching.",
+    "Hospital after any strong shock: ERC/IFRC advise review for high-voltage injury, burns, loss of consciousness or arrhythmia. A small tingle from a household plug with no symptoms does not need hospital. Alert title says 'a strong shock'.",
+    "Dari 'لچ' (bare), 'سویچ', 'ساکت' and Pashto 'ساکټ', 'سویچ', 'پلګ' are loan words. Check the everyday terms."
+  ]
+}

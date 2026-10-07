@@ -23,6 +23,22 @@
       }
     },
     {
+      "id": "first-aid.cpr",
+      "type": "link",
+      "to": "topic/unconscious",
+      "icon": "breathe",
+      "title": {
+        "fa": "بی‌هوش است یا نفس نمی‌کشد؟",
+        "ps": "بې‌هوښه دی یا ساه نه اخلي؟",
+        "en": "Unconscious or not breathing?"
+      },
+      "text": {
+        "fa": "صفحه را باز کنید. شما را به صفحهٔ فشار سینه برای هر سن می‌برد.",
+        "ps": "پاڼه پرانیزئ. د هر عمر لپاره د سینې فشار پاڼې ته مو بیايي.",
+        "en": "Open the page. It takes you to chest pushes for each age."
+      }
+    },
+    {
       "id": "first-aid.burn",
       "type": "step",
       "icon": "cool-water",
@@ -54,17 +70,18 @@
     },
     {
       "id": "first-aid.choking",
-      "type": "step",
+      "type": "link",
+      "to": "topic/choking",
       "icon": "choking",
       "title": {
-        "fa": "بند شدن گلوی طفل",
-        "ps": "د ماشوم د ستوني بندېدل",
-        "en": "Choking child"
+        "fa": "بند شدن گلو",
+        "ps": "د ستوني بندېدل",
+        "en": "Choking"
       },
       "text": {
-        "fa": "اگر طفل گریه، سرفه یا نفس کشیده نتواند: ۵ ضربه محکم بین دو شانه‌اش بزنید، بعد برای شیرخوار ۵ بار سینه را فشار دهید، یا برای طفل بزرگ‌تر ۵ بار شکم را. تکرار کنید.",
-        "ps": "که ماشوم ژړا، ټوخی یا ساه نشي کولی: د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ، بیا د تي خوړونکي ماشوم پر سینه ۵ ځله فشار ورکړئ، یا د لوی ماشوم پر ګېډه ۵ ځله. تکرار یې کړئ.",
-        "en": "If the child cannot cry, cough or breathe: 5 firm blows between the shoulders, then 5 chest pushes for a baby, or 5 belly pushes for an older child. Repeat."
+        "fa": "اگر نمی‌تواند سرفه کند یا نفس بکشد: ضربه به پشت، بعد فشار. صفحه را همین حالا باز کنید.",
+        "ps": "که ټوخی یا ساه نه شي کولی: شا ته ګوزارونه، بیا فشار. پاڼه همدا اوس پرانیزئ.",
+        "en": "Cannot cough or breathe? Back blows, then pushes. Open the page now."
       }
     },
     {

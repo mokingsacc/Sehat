@@ -1,0 +1,198 @@
+{
+  "id": "cpr-adult",
+  "section": "everyone",
+  "title": {
+    "fa": "بزرگسالی که افتاده و نفس نمی‌کشد",
+    "ps": "لوی کس چې لوېدلی او ساه نه اخلي",
+    "en": "Adult collapsed, not breathing"
+  },
+  "summary": {
+    "fa": "تا رسیدن کمک، سینه را محکم و تیز فشار دهید.",
+    "ps": "تر څو مرسته رسېږي، سینه کلکه او چټکه کېکاږئ.",
+    "en": "Push hard and fast on the chest until help arrives."
+  },
+  "image": "cpr-adult",
+  "blocks": [
+    {
+      "id": "cpr-adult.lead",
+      "type": "lead",
+      "text": {
+        "fa": "وقتی قلب یک بزرگسال بند می‌شود، می‌افتد، جواب نمی‌دهد و عادی نفس نمی‌کشد. فشار دادن فوری سینه می‌تواند او را زنده نگه دارد.",
+        "ps": "کله چې د یوه لوی کس زړه ودرېږي، لوېږي، ځواب نه ورکوي او په عادي ډول ساه نه اخلي. د سینې سمدستي فشار کولی شي هغه ژوندی وساتي.",
+        "en": "When an adult's heart stops, they fall, do not answer and stop breathing normally. Pushing on the chest at once can keep them alive."
+      }
+    },
+    {
+      "id": "cpr-adult.anim",
+      "type": "anim",
+      "anim": "cpr",
+      "pick": "cpr-adult"
+    },
+    {
+      "id": "cpr-adult.safe",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "اول خطر، بعد شخص را ببینید",
+        "ps": "لومړی خطر، بیا کس وګورئ",
+        "en": "Check for danger, then the person"
+      },
+      "text": {
+        "fa": "ببینید که برای شما خطری مانند سیم برق یا موتر نباشد. به شانه‌هایش بزنید و بلند بپرسید: خوب هستی؟",
+        "ps": "وګورئ چې تاسو ته د برېښنا د سیم یا موټر په څېر خطر نه وي. اوږې یې وټکوئ او په لوړ غږ وپوښتئ: ښه یې؟",
+        "en": "Check there is no danger to you, like electric wires or traffic. Tap the shoulders and shout: Are you all right?"
+      }
+    },
+    {
+      "id": "cpr-adult.help",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "کمک بخواهید، موتر بخواهید",
+        "ps": "مرسته وغواړئ، موټر راوغواړئ",
+        "en": "Shout for help, send for a car"
+      },
+      "text": {
+        "fa": "بلند کمک بخواهید. یک نفر را برای آوردن موتر بفرستید، و اگر تلفن دارید، به کارمند صحی زنگ بزنید.",
+        "ps": "په لوړ غږ مرسته وغواړئ. یو څوک د موټر راوړلو لپاره ولېږئ، او که ټیلیفون لرئ، روغتیايي کارکوونکي ته زنګ ووهئ.",
+        "en": "Shout for help. Send someone for a car to go to hospital, and if you have a phone, call the health worker."
+      }
+    },
+    {
+      "id": "cpr-adult.breathing",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "نفس کشیدنش را ببینید",
+        "ps": "وګورئ چې ساه اخلي که نه",
+        "en": "Look for normal breathing"
+      },
+      "text": {
+        "fa": "سرش را به عقب ببرید و زنخش را بالا کنید. ۱۰ ثانیه سینه‌اش را ببینید. نفس سخت و گاه‌گاهی، نفس عادی نیست.",
+        "ps": "سر یې شاته کړئ او زنه یې پورته کړئ. ۱۰ ثانیې یې سینې ته وګورئ. کله کله سخته ساه اخیستل، عادي ساه نه ده.",
+        "en": "Tilt the head back and lift the chin. Watch the chest for 10 seconds. Gasping now and then is not normal breathing."
+      }
+    },
+    {
+      "id": "cpr-adult.push",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "وسط سینه را محکم فشار دهید",
+        "ps": "د سینې منځ کلک کېکاږئ",
+        "en": "Push hard in the centre"
+      },
+      "text": {
+        "fa": "قسمت پایین کف یک دست را در وسط سینه بگذارید، دست دیگر را روی آن، بازوها راست. ۵ تا ۶ سانتی‌متر پایین فشار دهید.",
+        "ps": "د یوه لاس د ورغوي لاندې برخه د سینې په منځ کې کېږدئ، بل لاس پرې کېږدئ، لاسونه نېغ. ۵ تر ۶ سانتي متره لاندې فشار ورکړئ.",
+        "en": "Put the heel of one hand in the centre of the chest, the other hand on top, arms straight. Push down 5 to 6 centimetres."
+      },
+      "picture": "em-cpr-adult-hands"
+    },
+    {
+      "id": "cpr-adult.rhythm",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "تیز و بدون توقف",
+        "ps": "چټک او پرته له درېدو",
+        "en": "Fast, and without stopping"
+      },
+      "text": {
+        "fa": "تقریباً ۲ بار در هر ثانیه فشار دهید و بگذارید سینه دوباره بالا بیاید. اگر بلد هستید، بعد از هر ۳۰ فشار ۲ بار نفس بدهید.",
+        "ps": "په هره ثانیه کې شاوخوا ۲ ځله فشار ورکړئ او پرېږدئ چې سینه بېرته پورته شي. که پوهېږئ، له هرو ۳۰ فشارونو وروسته ۲ ځله ساه ورکړئ.",
+        "en": "Push about 2 times every second and let the chest come back up. If you know how, give 2 breaths after every 30 pushes."
+      }
+    },
+    {
+      "id": "cpr-adult.turns",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "نوبت بگیرید، ادامه دهید",
+        "ps": "وار په وار، دوام ورکړئ",
+        "en": "Take turns, keep going"
+      },
+      "text": {
+        "fa": "ادامه دهید تا به هوش بیاید و عادی نفس بکشد، یا کارمند صحی کار را به دست بگیرد. هر ۲ دقیقه با کمک‌کنندهٔ دیگر جای خود را عوض کنید.",
+        "ps": "دوام ورکړئ تر څو په هوښ راشي او په عادي ډول ساه واخلي، یا روغتیايي کارکوونکی کار پر غاړه واخلي. هر ۲ دقیقې له بل مرستندوی سره ځای بدل کړئ.",
+        "en": "Keep going until they wake and breathe normally, or a health worker takes over. Change with another helper every 2 minutes."
+      }
+    },
+    {
+      "id": "cpr-adult.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شخص این حالت را داشت، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که کس دا حالت درلود، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone:"
+      },
+      "items": [
+        {
+          "id": "cpr-adult.urgent.collapsed",
+          "icon": "sleepy",
+          "text": {
+            "fa": "افتاد و عادی نفس نمی‌کشید",
+            "ps": "ولوېد او په عادي ډول یې ساه نه اخیسته",
+            "en": "collapsed and was not breathing normally"
+          }
+        },
+        {
+          "id": "cpr-adult.urgent.woke",
+          "icon": "heart",
+          "text": {
+            "fa": "بعد از فشار سینه به هوش آمد، حتی اگر حالا خوب است",
+            "ps": "د سینې له فشار وروسته په هوښ راغی، که څه هم اوس ښه دی",
+            "en": "woke up after chest pushes, even if they seem well now"
+          }
+        },
+        {
+          "id": "cpr-adult.urgent.fainted",
+          "icon": "warning",
+          "text": {
+            "fa": "بی‌هوش شد و زود به هوش نیامد",
+            "ps": "بې‌هوښه شو او ژر په هوښ رانغی",
+            "en": "fainted and did not wake up quickly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cpr-adult.anyone",
+      "type": "tip",
+      "icon": "people",
+      "text": {
+        "fa": "از روی لباس هم فشار داده می‌توانید. هر کس، مرد یا زن، می‌تواند کمک کند و جان کسی را نجات دهد.",
+        "ps": "د جامو له پاسه هم فشار ورکولی شئ. هر څوک، سړی یا ښځه، مرسته کولی او د یو چا ژوند ژغورلی شي.",
+        "en": "You can push through clothes. Anyone, a man or a woman, can help and save a life."
+      }
+    },
+    {
+      "id": "cpr-adult.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "درد سینه، کج شدن صورت یا ضعف دست ممکن است حملهٔ قلبی یا سکته باشد؛ صفحهٔ علایم خطر را ببینید. در شفاخانه قلب را دوباره به کار می‌اندازند و علت را تداوی می‌کنند.",
+        "ps": "د سینې درد، د مخ کوږېدل یا د لاس کمزوري کېدای شي زړه حمله یا سکته وي؛ د خطر نښو پاڼه وګورئ. په روغتون کې زړه بیا په کار اچوي او د لامل درملنه کوي.",
+        "en": "Chest pain, a drooping face or a weak arm can mean a heart attack or stroke: see Danger signs. At hospital they restart the heart and treat the cause."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: Basic Life Support and Paediatric Life Support (lay rescuer sequences)",
+    "American Heart Association 2025 Guidelines for CPR and ECC: Adult and Pediatric Basic Life Support",
+    "ILCOR 2025 International Consensus on CPR and ECC Science with Treatment Recommendations",
+    "Resuscitation Council UK 2025: Paediatric out-of-hospital basic life support algorithm",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): resuscitation",
+    "WHO fact sheet: Cardiovascular diseases (2025): heart attack and stroke warning signs"
+  ],
+  "review": [
+    "Matches the anim.cpr narration (hands-only first, ERC lay sequence). Breaths are optional: 'if you know how, 2 breaths after every 30 pushes' (ERC/AHA 2025).",
+    "No shock machine (AED) step: AEDs are not available in Samangan villages. Add one if clinics get them.",
+    "Tip 'anyone, a man or a woman, can help' is a cultural judgement call. The animation shows a man helping a man. Check the wording with local health workers.",
+    "Drowned adults get 5 breaths first: that is on the drowning page, not here.",
+    "Pregnant woman: no 'push the bump to the left' step, to keep it simple.",
+    "Hospital tip links to Danger signs in adults (red-flags) for heart attack and stroke, so these are not repeated here. It is 2 sentences and about 27 words."
+  ]
+}

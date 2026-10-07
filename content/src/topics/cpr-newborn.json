@@ -1,0 +1,235 @@
+{
+  "id": "cpr-newborn",
+  "section": "children",
+  "title": {
+    "fa": "نوزادی که بعد از ولادت نفس نمی‌کشد",
+    "ps": "نوی زېږېدلی ماشوم چې ساه نه اخلي",
+    "en": "Newborn not breathing at birth"
+  },
+  "summary": {
+    "fa": "در دقیقهٔ اول: خشک کنید، مالش دهید، گرم نگه دارید، بعد نفس بدهید.",
+    "ps": "په لومړۍ دقیقه کې: وچ یې کړئ، ومښئ، ګرم یې وساتئ، بیا ساه ورکړئ.",
+    "en": "In the first minute: dry, rub, keep warm, then give breaths."
+  },
+  "image": "cpr-newborn",
+  "blocks": [
+    {
+      "id": "cpr-newborn.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بیشتر نوزادان زود بعد از ولادت گریه می‌کنند و نفس می‌کشند. اگر نوزاد این کار را نکرد، دقیقهٔ اول از همه مهم‌تر است. فوراً عمل کنید.",
+        "ps": "ډېری نوي زېږېدلي ماشومان له زېږون سمدستي وروسته ژاړي او ساه اخلي. که ماشوم داسې ونه کړل، لومړۍ دقیقه تر ټولو مهمه ده. سمدستي کار وکړئ.",
+        "en": "Most babies cry and breathe soon after birth. If a baby does not, the first minute matters most. Act at once."
+      }
+    },
+    {
+      "id": "cpr-newborn.anim",
+      "type": "anim",
+      "anim": "cpr",
+      "pick": "cpr-newborn"
+    },
+    {
+      "id": "cpr-newborn.dry",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "نوزاد را فوراً خشک کنید",
+        "ps": "ماشوم سمدستي وچ کړئ",
+        "en": "Dry the baby at once"
+      },
+      "text": {
+        "fa": "تمام بدن و سر را با یک تکهٔ گرم و پاک خشک کنید. تکهٔ تر را دور کنید و نوزاد را در تکهٔ خشک بپیچانید.",
+        "ps": "ټول بدن او سر یې په ګرم او پاک ټوکر وچ کړئ. لوند ټوکر لرې کړئ او ماشوم په وچ ټوکر کې ونغاړئ.",
+        "en": "Dry the whole body and head with a warm, clean cloth. Throw away the wet cloth and wrap the baby in a dry one."
+      }
+    },
+    {
+      "id": "cpr-newborn.rub",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "پشتش را مالش دهید",
+        "ps": "شا یې ومښئ",
+        "en": "Rub the back"
+      },
+      "text": {
+        "fa": "وقت خشک کردن، پشتش را ۲ یا ۳ بار محکم بالا و پایین مالش دهید. دهان و بینی‌اش را با تکهٔ پاک پاک کنید.",
+        "ps": "د وچولو پر مهال، شا یې ۲ یا ۳ ځله کلکه پورته او ښکته ومښئ. خوله او پوزه یې په پاک ټوکر پاکه کړئ.",
+        "en": "While drying, rub the back firmly up and down 2 or 3 times. Wipe the mouth and nose with a clean cloth."
+      }
+    },
+    {
+      "id": "cpr-newborn.head",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "نفس نمی‌کشد؟ سرش را کمی عقب ببرید",
+        "ps": "ساه نه اخلي؟ سر یې لږ شاته کړئ",
+        "en": "Not breathing? Tilt the head back slightly"
+      },
+      "text": {
+        "fa": "اگر هنوز گریه نمی‌کند یا نفس نمی‌کشد، او را به پشت روی یک جای هموار و گرم بخوابانید. سرش را کمی به عقب ببرید، نه زیاد.",
+        "ps": "که لا هم نه ژاړي یا ساه نه اخلي، په شا یې په یوه هوار او ګرم ځای کې وغځوئ. سر یې لږ شاته کړئ، ډېر نه.",
+        "en": "If the baby still does not cry or breathe, lay it on its back on a flat, warm place. Tilt the head back just a little, not too far."
+      },
+      "picture": "em-cpr-newborn-breaths"
+    },
+    {
+      "id": "cpr-newborn.breaths",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "۵ بار آهسته نفس بدهید",
+        "ps": "۵ ځله ورو ساه ورکړئ",
+        "en": "Give 5 gentle breaths"
+      },
+      "text": {
+        "fa": "دهان و بینی نوزاد را با دهان خود بپوشانید. ۵ بار فقط با هوای دهان آهسته پف کنید و ببینید که سینه‌اش بالا می‌آید.",
+        "ps": "د ماشوم خوله او پوزه په خپله خوله وپوښئ. ۵ ځله یوازې د خپلې خولې په هوا ورو پو کړئ او وګورئ چې سینه یې پورته کېږي.",
+        "en": "Cover the baby's mouth and nose with your mouth. Give 5 gentle puffs from your cheeks, and watch the chest rise."
+      }
+    },
+    {
+      "id": "cpr-newborn.keep-breathing",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "به نفس دادن ادامه دهید",
+        "ps": "ساه ورکولو ته دوام ورکړئ",
+        "en": "Keep breathing for the baby"
+      },
+      "text": {
+        "fa": "هر ۱ تا ۲ ثانیه یک نفس آهسته بدهید تا نوزاد نفس بکشد یا گریه کند. در راه شفاخانه هم ادامه دهید.",
+        "ps": "په هرو ۱ تر ۲ ثانیو کې یوه ورو ساه ورکړئ تر څو ماشوم ساه واخلي یا وژاړي. د روغتون په لار کې هم دوام ورکړئ.",
+        "en": "Give one gentle breath every 1 to 2 seconds until the baby breathes or cries. Keep going on the way to hospital."
+      }
+    },
+    {
+      "id": "cpr-newborn.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "نوزاد را گرم نگه دارید",
+        "ps": "ماشوم ګرم وساتئ",
+        "en": "Keep the baby warm"
+      },
+      "text": {
+        "fa": "وقتی نوزاد نفس کشید، او را پوست به پوست روی سینهٔ مادر بگذارید و با کمپل و کلاه بپوشانید. در شیر خوردن کمکش کنید.",
+        "ps": "کله چې ماشوم ساه واخیسته، پوستکی په پوستکي یې د مور پر سینه کېږدئ او په کمپله او خولۍ یې وپوښئ. د تي په رودلو کې ورسره مرسته وکړئ.",
+        "en": "When the baby breathes, put it skin to skin on the mother's chest, covered with a blanket and a hat. Help the baby breastfeed."
+      }
+    },
+    {
+      "id": "cpr-newborn.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر نوزاد این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که نوی زېږېدلی ماشوم دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if the newborn:"
+      },
+      "items": [
+        {
+          "id": "cpr-newborn.urgent.needed-breaths",
+          "icon": "breathe",
+          "text": {
+            "fa": "برای شروع نفس، نفس دادن لازم داشت",
+            "ps": "د ساه پیلولو لپاره یې ساه ورکولو ته اړتیا درلوده",
+            "en": "needed breaths to start breathing"
+          }
+        },
+        {
+          "id": "cpr-newborn.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز نفس می‌کشد، ناله می‌کند یا سینه‌اش به داخل کش می‌شود",
+            "ps": "چټکه ساه اخلي، کړېږي یا سینه یې ننوځي",
+            "en": "breathes fast, grunts, or the chest pulls in"
+          }
+        },
+        {
+          "id": "cpr-newborn.urgent.floppy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "سست است یا شیر نمی‌خورد",
+            "ps": "سست دی یا تی نه روي",
+            "en": "is floppy, or is not feeding"
+          }
+        },
+        {
+          "id": "cpr-newborn.urgent.colour",
+          "icon": "warning",
+          "text": {
+            "fa": "کبود یا بسیار رنگ‌پریده می‌شود",
+            "ps": "شین کېږي یا رنګ یې ډېر الوځي",
+            "en": "turns blue or very pale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cpr-newborn.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "cpr-newborn.dont.upside-down",
+          "icon": "no",
+          "text": {
+            "fa": "نوزاد را سرچپه آویزان نکنید یا به او سیلی نزنید",
+            "ps": "ماشوم سرچپه مه ځړوئ او مه یې وهئ",
+            "en": "hold the baby upside down or slap it"
+          }
+        },
+        {
+          "id": "cpr-newborn.dont.cold-water",
+          "icon": "no",
+          "text": {
+            "fa": "نوزاد را در آب سرد نیندازید",
+            "ps": "ماشوم په سړو اوبو کې مه اچوئ",
+            "en": "put the baby in cold water"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cpr-newborn.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه به نوزاد اکسیجن می‌دهند، او را گرم نگه می‌دارند و برای مکروب و کمی شکر معاینه می‌کنند.",
+        "ps": "په روغتون کې ماشوم ته اکسیجن ورکوي، ګرم یې ساتي او د انتان او د شکرې د کمښت لپاره یې معاینه کوي.",
+        "en": "At hospital they give oxygen, keep the baby warm, and check for infection and low sugar."
+      }
+    },
+    {
+      "id": "cpr-newborn.midwife",
+      "type": "tip",
+      "icon": "midwife",
+      "text": {
+        "fa": "اگر ممکن است، در کلینیک با قابله ولادت کنید. قابله وسیله‌ای دارد که به نفس کشیدن نوزاد کمک می‌کند.",
+        "ps": "که امکان ولري، په کلینیک کې له قابلې سره زېږون وکړئ. قابله داسې وسیله لري چې د ماشوم په ساه اخیستلو کې مرسته کوي.",
+        "en": "Give birth with a midwife at a clinic if you can. Midwives have a bag and mask to help babies breathe."
+      }
+    }
+  ],
+  "sources": [
+    "WHO / American Academy of Pediatrics: Helping Babies Breathe, 2nd edition (2016): the Golden Minute (dry, keep warm, clear the airway if needed, stimulate, ventilate)",
+    "WHO recommendations on newborn health (2017) and WHO Guidelines on basic newborn resuscitation (2012)",
+    "European Resuscitation Council Guidelines 2025: Newborn Resuscitation and Support of Transition of Infants at Birth (5 inflation breaths, then ventilation about 30 a minute)",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): care of the newborn at birth"
+  ],
+  "review": [
+    "Family level, not health worker level. HBB assumes a bag and mask. Families at a home birth have none, so this page teaches mouth-to-mouth-and-nose breaths. Check this is acceptable.",
+    "No chest pushes for newborns. HBB at family level is breaths only, and the cpr-newborn animation is breaths only. Newborn life support adds 3 pushes to 1 breath only after 30 seconds of good breaths with a slow heart, which families cannot measure. The page says keep giving breaths until the baby breathes or cries, including on the way to hospital. Decide whether a chest-push line should be added.",
+    "'One breath every 1 to 2 seconds' = 30 to 60 a minute (HBB 40 a minute; ERC 2025 NLS about 30 a minute). It matches the animation narration.",
+    "Head 'tilted back a little' (HBB: head slightly extended, the 'sniffing' position), matching the animation.",
+    "No cord-clamping advice. HBB says clamp and cut the cord if ventilation is needed. Home births often wait for the midwife. Add a line if wanted.",
+    "Dont: slapping and holding upside down are harmful customs. Check whether a local custom (e.g. cold water, smoke, or calling into the ear) should be named.",
+    "Pashto 'کړېږي' for grunting and Dari 'ناله می‌کند': check with native speakers."
+  ]
+}

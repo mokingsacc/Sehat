@@ -1,0 +1,438 @@
+{
+  "_note": "Narration of the explainer animations (anim/*.js), ids anim.<name>.title, anim.<name>.s1 ... and for groups anim.<group>.ask and anim.<variant>.label. Copied from content/drafts/anim-narration.json; draft Dari and Pashto for native review, clinical lines for Mo (docs/ANIMATIONS.md, docs/REVIEW.md).",
+  "anim.vaccines.title": {
+    "fa": "چرا واکسین مهم است",
+    "ps": "واکسین ولې مهم دی",
+    "en": "Why vaccines matter"
+  },
+  "anim.vaccines.s1": {
+    "fa": "میکروب‌ها آن‌قدر کوچک هستند که دیده نمی‌شوند. بعضی میکروب‌ها سبب مریضی‌های خطرناک مانند سرخکان، پولیو و سیاه‌سرفه می‌شوند.",
+    "ps": "میکروبونه دومره واړه دي چې نه لیدل کېږي. ځینې میکروبونه د خطرناکو ناروغیو لکه شری، پولیو او توره ټوخي لامل کېږي.",
+    "en": "Germs are too small to see. Some germs cause dangerous illnesses, like measles, polio and whooping cough."
+  },
+  "anim.vaccines.s2": {
+    "fa": "واکسین برای بدن مانند تمرین است. واکسین شکل ضعیف یا بی‌ضرر میکروب را به بدن نشان می‌دهد، تا بدن یاد بگیرد با آن مبارزه کند.",
+    "ps": "واکسین بدن ته د تمرین په څېر دی. واکسین د میکروب کمزوری یا بې‌ضرره ډول بدن ته ښيي، چې بدن زده کړي څنګه ورسره مبارزه وکړي.",
+    "en": "A vaccine is like practice for the body. It shows the body a weak or harmless form of a germ, so the body learns how to fight it."
+  },
+  "anim.vaccines.s3": {
+    "fa": "بعداً اگر میکروب اصلی بیاید، بدن آن را می‌شناسد و زود با آن مبارزه می‌کند. طفل اکثراً صحتمند می‌ماند.",
+    "ps": "وروسته که اصلي میکروب راشي، بدن یې پېژني او ژر ورسره مبارزه کوي. ماشوم اکثره روغ پاتې کېږي.",
+    "en": "Later, if the real germ comes, the body knows it and fights it fast. The child usually stays well."
+  },
+  "anim.vaccines.s4": {
+    "fa": "طفلی که واکسین شده، خوب محافظت می‌شود. طفلی که واکسین نشده، ممکن است بسیار مریض شود، و بعضی‌ها برای تمام عمر آسیب می‌بینند.",
+    "ps": "هغه ماشوم چې واکسین شوی، ښه ساتل کېږي. هغه ماشوم چې واکسین شوی نه وي، کېدای شي ډېر ناروغ شي، او ځینې د ټول عمر لپاره زیان ویني.",
+    "en": "A vaccinated child is well protected. A child without vaccines can become very sick, and some are harmed for life."
+  },
+  "anim.vaccines.s5": {
+    "fa": "کارت واکسین را خوب نگه دارید و هر بار با خود ببرید؛ در آن نوشته است که طفل شما کدام واکسین‌ها را گرفته است. واکسین در کلینیک‌های دولتی رایگان است.",
+    "ps": "د واکسین کارت ښه وساتئ او هر ځل یې له ځان سره یوسئ؛ په هغه کې لیکل شوي چې ستاسو ماشوم کوم واکسینونه اخیستي دي. واکسین په دولتي کلینیکونو کې وړیا دی.",
+    "en": "Keep the vaccine card safe and bring it every time: it shows which vaccines your child has had. Vaccines are free at government clinics."
+  },
+  "anim.vaccines.s6": {
+    "fa": "طفل شما تا ۲ سالگی ۶ بار باید برای واکسین برود. اگر یک نوبت مانده است، باز هم بروید؛ کارمند صحی واکسین‌هایی را که طفل هنوز لازم دارد، می‌دهد.",
+    "ps": "ستاسو ماشوم باید تر ۲ کلنۍ پورې ۶ ځله واکسین ته بوتلل شي. که یو ځل پاتې شوی وي، بیا هم ولاړ شئ؛ روغتیايي کارکوونکی به هغه واکسینونه ورکړي چې ماشوم ته لا پکار دي.",
+    "en": "Your child needs 6 vaccine visits before 2 years of age. If a visit was missed, still go: the health worker will give the vaccines your child still needs."
+  },
+  "anim.herd.title": {
+    "fa": "محافظت از همه",
+    "ps": "د ټولو ساتنه",
+    "en": "Protecting everyone"
+  },
+  "anim.herd.s1": {
+    "fa": "سرخکان یکی از مریضی‌هایی است که از همه زودتر سرایت می‌کند. وقتی شخص مریض سرفه یا عطسه می‌کند یا نفس می‌کشد، از راه هوا پخش می‌شود.",
+    "ps": "شری له هغو ناروغیو څخه ده چې تر ټولو ژر خپرېږي. کله چې ناروغ کس ټوخی یا پرنجی کوي، یا ساه اخلي، د هوا له لارې خپرېږي.",
+    "en": "Measles is one of the most catching illnesses. It spreads through the air when a sick person coughs, sneezes or breathes."
+  },
+  "anim.herd.s2": {
+    "fa": "وقتی کم مردم واکسین شده باشند، سرخکان از یک نفر به نفر دیگر می‌رود. زود اطفال زیادی مریض می‌شوند.",
+    "ps": "کله چې لږ خلک واکسین شوي وي، شری له یو کس نه بل ته ځي. ډېر ژر ډېر ماشومان ناروغه کېږي.",
+    "en": "When few people are vaccinated, measles passes from one person to the next. Soon many children are sick."
+  },
+  "anim.herd.s3": {
+    "fa": "وقتی بیشتر مردم واکسین شده باشند، سرخکان راهی برای رفتن پیدا نمی‌کند و پخش آن متوقف می‌شود.",
+    "ps": "کله چې ډېری خلک واکسین شوي وي، شری د تګ لاره نه پیدا کوي او خپرېدل یې ودرېږي.",
+    "en": "When most people are vaccinated, measles cannot find a way through, and it stops."
+  },
+  "anim.herd.s4": {
+    "fa": "این کار کسانی را هم محافظت می‌کند که واکسین گرفته نمی‌توانند: نوزادانی که هنوز خیلی کوچک هستند، و بعضی کسانی که بسیار مریض هستند.",
+    "ps": "دا کار هغه خلک هم ساتي چې واکسین نشي اخیستلی: هغه ماشومان چې لا ډېر واړه دي، او ځینې هغه کسان چې ډېر ناروغه دي.",
+    "en": "This also protects people who cannot have the vaccine: babies who are too young, and some people who are very sick."
+  },
+  "anim.herd.s5": {
+    "fa": "هر طفل دو واکسین سرخکان لازم دارد، در ۹ ماهگی و ۱۸ ماهگی. هر طفلی که واکسین می‌شود، به محافظت تمام قریه کمک می‌کند.",
+    "ps": "هر ماشوم د شري دوو واکسینونو ته اړتیا لري، په ۹ میاشتنۍ او ۱۸ میاشتنۍ کې. هر واکسین شوی ماشوم د ټول کلي په ساتنه کې مرسته کوي.",
+    "en": "Every child needs two measles vaccines, at 9 months and at 18 months. Each vaccinated child helps protect the whole village."
+  },
+  "anim.cpr.title": {
+    "fa": "کمک به کسی که بی‌هوش است و نفس نمی‌کشد",
+    "ps": "له هغه چا سره مرسته چې بې‌هوښه دی او ساه نه اخلي",
+    "en": "Helping someone who is not breathing"
+  },
+  "anim.cpr.ask": {
+    "fa": "چه کسی کمک لازم دارد؟ نوزاد، شیرخوار، طفل یا بزرگسال؟",
+    "ps": "څوک مرستې ته اړتیا لري؟ نوی زېږېدلی ماشوم، تي خوړونکی ماشوم، ماشوم که لوی کس؟",
+    "en": "Who needs help? A newborn, a baby, a child or an adult?"
+  },
+  "anim.cpr-newborn.label": {
+    "fa": "نوزاد (تازه به دنیا آمده)",
+    "ps": "نوی زېږېدلی ماشوم",
+    "en": "Newborn (just born)"
+  },
+  "anim.cpr-baby.label": {
+    "fa": "شیرخوار (کمتر از ۱ سال)",
+    "ps": "تي خوړونکی ماشوم (تر ۱ کال کم)",
+    "en": "Baby (under 1 year)"
+  },
+  "anim.cpr-child.label": {
+    "fa": "طفل (از ۱ سال تا بلوغ)",
+    "ps": "ماشوم (له ۱ کال تر بلوغ پورې)",
+    "en": "Child (1 year to puberty)"
+  },
+  "anim.cpr-adult.label": {
+    "fa": "بزرگسال",
+    "ps": "لوی کس",
+    "en": "Adult"
+  },
+  "anim.cpr-newborn.title": {
+    "fa": "نوزادی که بعد از تولد نفس نمی‌کشد",
+    "ps": "نوی زېږېدلی ماشوم چې له زېږون وروسته ساه نه اخلي",
+    "en": "A newborn who is not breathing"
+  },
+  "anim.cpr-newborn.s1": {
+    "fa": "همین که طفل به دنیا آمد، تمام بدنش را با یک تکهٔ پاک و خشک خوب خشک کنید و پشتش را آهسته مالش دهید. بیشتر نوزادها بعد از این گریه می‌کنند و نفس می‌کشند.",
+    "ps": "کله چې ماشوم وزېږېد، ټول بدن یې په پاکه او وچه ټوټه ښه وچ کړئ او شا یې ورو وموږئ. ډېری نوي زېږېدلي ماشومان بیا ژاړي او ساه اخلي.",
+    "en": "As soon as the baby is born, dry the whole body well with a clean, dry cloth, and rub the back gently. Most babies then cry and breathe."
+  },
+  "anim.cpr-newborn.s2": {
+    "fa": "اگر نوزاد گریه نمی‌کند یا نفس نمی‌کشد، بلند کمک بخواهید. یک نفر را بفرستید که برای رفتن به شفاخانه موتر بیاورد. نوزاد را گرم نگه دارید.",
+    "ps": "که ماشوم نه ژاړي یا ساه نه اخلي، په لوړ غږ مرسته وغواړئ. یو څوک ولېږئ چې روغتون ته د تګ لپاره موټر راولي. ماشوم ګرم وساتئ.",
+    "en": "If the baby is not crying or breathing, shout for help. Send someone to bring a car to go to hospital. Keep the baby warm."
+  },
+  "anim.cpr-newborn.s3": {
+    "fa": "نوزاد را به پشت بخوابانید و سرش را کمی به عقب ببرید. دهان و بعد بینی‌اش را با یک تکهٔ پاک آهسته پاک کنید.",
+    "ps": "ماشوم په شا څملوئ او سر یې لږ شاته کړئ. خوله او بیا پوزه یې په پاکه ټوټه ورو پاکه کړئ.",
+    "en": "Lay the baby on its back with the head tilted back a little. Gently wipe the mouth, then the nose, with a clean cloth."
+  },
+  "anim.cpr-newborn.s4": {
+    "fa": "یک بار دیگر پشت یا کف پاهایش را مالش دهید. به سینه‌اش ببینید: آیا نفس می‌کشد؟",
+    "ps": "یو ځل بیا یې شا یا د پښو تلي وموږئ. سینې ته یې وګورئ: ایا ساه اخلي؟",
+    "en": "Rub the back or the soles of the feet once more. Look at the chest: is the baby breathing?"
+  },
+  "anim.cpr-newborn.s5": {
+    "fa": "اگر نه، دهان خود را روی دهان و بینی نوزاد بگذارید و پف‌های کوچک و آهسته بدهید، تقریباً هر ۱ تا ۲ ثانیه یک بار. ببینید که سینه با هر پف بالا بیاید.",
+    "ps": "که نه، خپله خوله د ماشوم پر خوله او پوزه کېږدئ او کوچني او ورو پو کړئ، شاوخوا هر ۱ تر ۲ ثانیو کې یو ځل. وګورئ چې سینه یې له هر پو سره پورته شي.",
+    "en": "If not, cover the baby's mouth and nose with your mouth and give small, gentle puffs, about one every 1 to 2 seconds. Watch the chest rise with each puff."
+  },
+  "anim.cpr-newborn.s6": {
+    "fa": "اگر تنها هستید، اول بلند کمک بخواهید. ۱ دقیقه پف کنید. بعد نوزاد را گرم بپیچانید و با خود ببرید تا کمک پیدا کنید.",
+    "ps": "که یوازې یاست، لومړی په لوړ غږ مرسته وغواړئ. ۱ دقیقه پو کړئ. بیا ماشوم ګرم ونغاړئ او له ځانه سره یې د مرستې لپاره یوسئ.",
+    "en": "If you are alone, first shout loudly for help. Give puffs for 1 minute. Then wrap the baby warmly and carry it with you to get help."
+  },
+  "anim.cpr-newborn.s7": {
+    "fa": "تا وقتی که نوزاد نفس بکشد یا گریه کند، یا کمک برسد، پف کردن را ادامه دهید. بعد نوزاد را برهنه روی سینهٔ مادر بگذارید، رویش را بپوشانید و گرم نگه دارید و به شفاخانه بروید.",
+    "ps": "تر هغه چې ماشوم ساه واخلي یا وژاړي، یا مرسته ورسېږي، پو کول دوام ورکړئ. بیا ماشوم لوڅ د مور پر سینه کېږدئ، پوښ یې کړئ، ګرم یې وساتئ او روغتون ته لاړ شئ.",
+    "en": "Keep giving puffs until the baby breathes or cries, or help arrives. Then lay the baby skin to skin on the mother's chest, covered and warm, and go to hospital."
+  },
+  "anim.cpr-baby.title": {
+    "fa": "شیرخواری که نفس نمی‌کشد",
+    "ps": "تي خوړونکی ماشوم چې ساه نه اخلي",
+    "en": "A baby who is not breathing"
+  },
+  "anim.cpr-baby.s1": {
+    "fa": "به پای شیرخوار آهسته بزنید و بلند صدا کنید. هرگز شیرخوار را تکان ندهید.",
+    "ps": "د ماشوم پښه ورو وټکوئ او په لوړ غږ یې غږ کړئ. هېڅکله تي خوړونکی ماشوم مه ښوروئ.",
+    "en": "Gently tap the baby's foot and call loudly. Never shake a baby."
+  },
+  "anim.cpr-baby.s2": {
+    "fa": "اگر شیرخوار هیچ واکنش نشان نداد، بلند کمک بخواهید. یک نفر را بفرستید که برای رفتن به شفاخانه موتر بیاورد.",
+    "ps": "که ماشوم هېڅ غبرګون ونه ښود، په لوړ غږ مرسته وغواړئ. یو څوک ولېږئ چې روغتون ته د تګ لپاره موټر راولي.",
+    "en": "If the baby does not respond, shout for help. Send someone to bring a car to go to hospital."
+  },
+  "anim.cpr-baby.s3": {
+    "fa": "شیرخوار را به پشت بخوابانید. سرش را راست نگه دارید و زنخش را کمی بالا کنید. تا ۱۰ ثانیه سینه‌اش را ببینید.",
+    "ps": "ماشوم په شا څملوئ. سر یې سم وساتئ او زنه یې لږ پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
+    "en": "Lay the baby on its back. Keep the head level and lift the chin a little. Look at the chest for up to 10 seconds."
+  },
+  "anim.cpr-baby.s4": {
+    "fa": "اگر شیرخوار عادی نفس نمی‌کشد، ۵ نفس آهسته بدهید: دهان خود را روی دهان و بینی او بگذارید و پف کنید تا سینه‌اش بالا بیاید.",
+    "ps": "که ماشوم په عادي ډول ساه نه اخلي، ۵ ورو ساګانې ورکړئ: خپله خوله د هغه پر خوله او پوزه کېږدئ او پو کړئ څو یې سینه پورته شي.",
+    "en": "If the baby is not breathing normally, give 5 gentle breaths: cover the baby's mouth and nose with your mouth and puff until the chest rises."
+  },
+  "anim.cpr-baby.s5": {
+    "fa": "دست‌هایتان را دور سینهٔ شیرخوار بگیرید و هر دو شست را پهلوی هم روی نیمهٔ پایینی استخوان سینه بگذارید. با شست‌ها ۳۰ بار فشار دهید: حدود ۴ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه.",
+    "ps": "لاسونه مو د ماشوم د سینې شاوخوا ونیسئ او دواړه غټې ګوتې یو تر څنګ د سینې د هډوکي په لاندینۍ نیمایي کېږدئ. په غټو ګوتو ۳۰ ځله کېکاږئ: شاوخوا ۴ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله.",
+    "en": "Put your hands around the baby's chest, with both thumbs side by side on the lower half of the breastbone. Push down with your thumbs 30 times: about 4 centimetres deep, 100 to 120 times a minute."
+  },
+  "anim.cpr-baby.s6": {
+    "fa": "بعد ۲ نفس بدهید و باز ۳۰ بار فشار دهید. ادامه دهید تا شیرخوار عادی نفس بکشد یا کمک برسد.",
+    "ps": "بیا ۲ ساه ورکړئ او بیا ۳۰ ځله کېکاږئ. دوام ورکړئ تر هغه چې ماشوم په عادي ډول ساه واخلي یا مرسته ورسېږي.",
+    "en": "Then give 2 breaths and 30 pushes again. Keep going until the baby breathes normally or help arrives."
+  },
+  "anim.cpr-baby.s7": {
+    "fa": "اگر تنها هستید، اول بلند کمک بخواهید. بعد ۱ دقیقه نفس بدهید و سینه را فشار دهید. بعد شیرخوار را با خود بگیرید و برای آوردن کمک بروید.",
+    "ps": "که یوازې یاست، لومړی په لوړ غږ مرسته وغواړئ. بیا ۱ دقیقه ساه ورکړئ او سینه کېکاږئ. بیا ماشوم له ځانه سره واخلئ او د مرستې لپاره لاړ شئ.",
+    "en": "If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute. Then carry the baby with you to get help."
+  },
+  "anim.cpr-child.title": {
+    "fa": "طفلی که نفس نمی‌کشد",
+    "ps": "ماشوم چې ساه نه اخلي",
+    "en": "A child who is not breathing"
+  },
+  "anim.cpr-child.s1": {
+    "fa": "مطمئن شوید که خطر نیست. به طفل آهسته بزنید و نامش را بلند صدا کنید.",
+    "ps": "ډاډه شئ چې خطر نشته. ماشوم ورو وټکوئ او نوم یې په لوړ غږ واخلئ.",
+    "en": "Make sure it is safe. Tap the child and call their name loudly."
+  },
+  "anim.cpr-child.s2": {
+    "fa": "اگر طفل جواب نداد، بلند کمک بخواهید. یک نفر را بفرستید که برای رفتن به شفاخانه موتر بیاورد.",
+    "ps": "که ماشوم ځواب ورنه کړ، په لوړ غږ مرسته وغواړئ. یو څوک ولېږئ چې روغتون ته د تګ لپاره موټر راولي.",
+    "en": "If the child does not answer, shout for help. Send someone to bring a car to go to hospital."
+  },
+  "anim.cpr-child.s3": {
+    "fa": "سرش را آهسته به عقب ببرید و زنخش را بالا کنید. تا ۱۰ ثانیه سینه‌اش را ببینید. اگر طفل عادی نفس نمی‌کشد، همین حالا شروع کنید.",
+    "ps": "سر یې ورو شاته کړئ او زنه یې پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ. که ماشوم په عادي ډول ساه نه اخلي، همدا اوس پیل وکړئ.",
+    "en": "Gently tilt the head back and lift the chin. Look at the chest for up to 10 seconds. If the child is not breathing normally, start now."
+  },
+  "anim.cpr-child.s4": {
+    "fa": "۵ نفس بدهید: بینی‌اش را بگیرید، دهان خود را روی دهان طفل بگذارید و آهسته پف کنید تا سینه‌اش بالا بیاید.",
+    "ps": "۵ ساه ورکړئ: پوزه یې ونیسئ، خپله خوله د ماشوم پر خوله کېږدئ او ورو پو کړئ څو یې سینه پورته شي.",
+    "en": "Give 5 breaths: pinch the nose, cover the child's mouth with your mouth, and blow gently until the chest rises."
+  },
+  "anim.cpr-child.s5": {
+    "fa": "با یک دست ۳۰ بار وسط سینه را فشار دهید: حدود ۵ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه.",
+    "ps": "په یوه لاس ۳۰ ځله د سینې منځ کېکاږئ: شاوخوا ۵ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله.",
+    "en": "Push on the centre of the chest 30 times with one hand: about 5 centimetres deep, 100 to 120 times a minute."
+  },
+  "anim.cpr-child.s6": {
+    "fa": "بعد ۲ نفس بدهید و باز ۳۰ بار فشار دهید. ادامه دهید تا طفل عادی نفس بکشد یا کمک برسد.",
+    "ps": "بیا ۲ ساه ورکړئ او بیا ۳۰ ځله کېکاږئ. دوام ورکړئ تر هغه چې ماشوم په عادي ډول ساه واخلي یا مرسته ورسېږي.",
+    "en": "Then give 2 breaths and 30 pushes again. Keep going until the child breathes normally or help arrives."
+  },
+  "anim.cpr-child.s7": {
+    "fa": "اگر تنها هستید، اول بلند کمک بخواهید. بعد ۱ دقیقه نفس بدهید و سینه را فشار دهید، و بعد از آن برای آوردن کمک بروید.",
+    "ps": "که یوازې یاست، لومړی په لوړ غږ مرسته وغواړئ. بیا ۱ دقیقه ساه ورکړئ او سینه کېکاږئ، او له هغه وروسته د مرستې راوستو لپاره لاړ شئ.",
+    "en": "If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute, and only then go to get help."
+  },
+  "anim.cpr-adult.title": {
+    "fa": "بزرگسالی که بی‌هوش افتاده",
+    "ps": "لوی کس چې بې‌هوښه لوېدلی",
+    "en": "An adult who has collapsed"
+  },
+  "anim.cpr-adult.s1": {
+    "fa": "اول مطمئن شوید که نزدیک رفتن خطر ندارد. کنار شخص زانو بزنید، به شانه‌هایش بزنید و بلند بپرسید: خوب هستی؟",
+    "ps": "لومړی ډاډه شئ چې ورنږدې کېدل خطر نه لري. د کس تر څنګ په زنګنونو کېنئ، اوږې یې وټکوئ او په لوړ غږ وپوښتئ: ښه یې؟",
+    "en": "First make sure it is safe to go near. Kneel beside the person, tap their shoulders and shout: Are you all right?"
+  },
+  "anim.cpr-adult.s2": {
+    "fa": "اگر جواب نداد، بلند کمک بخواهید. هر کسی که آمد، او را بفرستید که موتر بیاورد تا شخص را به شفاخانه ببرید.",
+    "ps": "که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ. هر څوک چې راشي، ولېږئ چې موټر راولي، څو کس روغتون ته یوسئ.",
+    "en": "If there is no answer, shout for help. Send anyone who comes to bring a car to take the person to hospital."
+  },
+  "anim.cpr-adult.s3": {
+    "fa": "سرش را به عقب ببرید و زنخش را بالا کنید. تا ۱۰ ثانیه سینه‌اش را ببینید. اگر عادی نفس نمی‌کشد، یا فقط گاه‌گاهی نفس سخت می‌کشد، فشار دادن سینه را شروع کنید.",
+    "ps": "سر یې شاته کړئ او زنه یې پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ. که په عادي ډول ساه نه اخلي، یا یوازې کله کله سخته ساه اخلي، د سینې کېکاږل پیل کړئ.",
+    "en": "Tilt the head back and lift the chin. Look at the chest for up to 10 seconds. If they are not breathing normally, or only gasping, start pushing on the chest."
+  },
+  "anim.cpr-adult.s4": {
+    "fa": "قسمت پایین کف یک دست را در وسط سینه بگذارید. دست دیگر را روی آن بگذارید و بازوهایتان را راست نگه دارید.",
+    "ps": "د یوه لاس د ورغوي لاندې برخه د سینې په منځ کې کېږدئ. بل لاس پرې کېږدئ او لاسونه مو نېغ وساتئ.",
+    "en": "Put the heel of one hand in the centre of the chest and your other hand on top. Keep your arms straight."
+  },
+  "anim.cpr-adult.s5": {
+    "fa": "۳۰ بار محکم و تیز فشار دهید: حدود ۵ تا ۶ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه، یعنی تقریباً ۲ بار در هر ثانیه. هر بار بگذارید سینه دوباره بالا بیاید.",
+    "ps": "۳۰ ځله کلک او چټک کېکاږئ: شاوخوا ۵ تر ۶ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله، یعنې په هره ثانیه کې شاوخوا ۲ ځله. هر ځل پرېږدئ چې سینه بېرته پورته راشي.",
+    "en": "Push hard and fast 30 times: about 5 to 6 centimetres deep, 100 to 120 times a minute, about 2 pushes every second. Let the chest come back up each time."
+  },
+  "anim.cpr-adult.s6": {
+    "fa": "اگر می‌توانید، ۲ نفس بدهید: سر را به عقب ببرید، بینی را بگیرید و در دهانش پف کنید تا سینه بالا بیاید. اگر نمی‌خواهید، تنها فشار دادن سینه هم خوب است.",
+    "ps": "که کولی شئ، ۲ ساه ورکړئ: سر یې شاته کړئ، پوزه یې ونیسئ او په خوله کې یې پو کړئ څو سینه پورته شي. که نه غواړئ، یوازې د سینې کېکاږل هم ښه دي.",
+    "en": "If you are willing, give 2 breaths: tilt the head, pinch the nose and blow into the mouth until the chest rises. Pushing without breaths is also good."
+  },
+  "anim.cpr-adult.s7": {
+    "fa": "ادامه دهید، ۳۰ فشار و ۲ نفس، یا تنها فشار، تا وقتی که شخص عادی نفس بکشد یا کمک برسد. اگر کسی نیامد، ادامه دهید و باز هم بلند کمک بخواهید. اگر کس دیگری هم کمک کرده می‌تواند، هر ۲ دقیقه نوبت را عوض کنید.",
+    "ps": "دوام ورکړئ، ۳۰ ځله کېکاږل او ۲ ساه، یا یوازې کېکاږل، تر هغه چې کس په عادي ډول ساه واخلي یا مرسته ورسېږي. که څوک رانغی، دوام ورکړئ او بیا هم په لوړ غږ مرسته وغواړئ. که بل څوک هم مرسته کولی شي، هر ۲ دقیقې وار بدل کړئ.",
+    "en": "Keep going, 30 pushes and 2 breaths, or pushes only, until the person breathes normally or help arrives. If nobody comes, keep going and keep shouting for help. If another person can help, take turns every 2 minutes."
+  },
+  "anim.water.title": {
+    "fa": "پاک کردن آب نوشیدنی",
+    "ps": "د څښلو اوبو پاکول",
+    "en": "Making water safe"
+  },
+  "anim.water.s1": {
+    "fa": "آب شاید صاف معلوم شود، اما باز هم میکروب‌هایی داشته باشد که اطفال را اسهال می‌سازد. مادرها چند راه آسان یافته‌اند تا آب را بی‌خطر بسازند.",
+    "ps": "اوبه ښایي پاکې ښکاره شي، خو بیا هم پکې داسې میکروبونه وي چې ماشومانو ته اسهال ورکوي. میندو د اوبو د خوندي کولو څو اسانه لارې موندلې دي.",
+    "en": "Water can look clear and still carry germs that give children diarrhoea. Mothers have found a few easy ways to make it safe."
+  },
+  "anim.water.s2": {
+    "fa": "آب را بجوشانید: صبر کنید تا حباب‌های کلان بالا بیایند، بعد بگذارید ۱ دقیقهٔ دیگر بجوشد. سرپوش را بگذارید تا سرد شود.",
+    "ps": "اوبه وخوټوئ: صبر وکړئ چې لویې بلبلې پورته شي، بیا یې ۱ دقیقه نوره په جوش کې پرېږدئ. سرپوښ ورباندې کېږدئ چې سړې شي.",
+    "en": "Boil it: wait until big bubbles roll, then keep it boiling for 1 minute. Let it cool with the lid on."
+  },
+  "anim.water.s3": {
+    "fa": "هیزم کم است؟ از تابلیت‌های کلورین که کلینیک یا کارکن صحی می‌دهد کار بگیرید. بپرسید یک تابلیت برای چند لیتر آب است؛ مثلاً یک تابلیت کلان برای یک گیلن ۲۰ لیتره.",
+    "ps": "لرګي کم دي؟ د کلورین هغه ټابلیټونه وکاروئ چې کلینیک یا روغتیايي کارکوونکی یې ورکوي. وپوښتئ چې یو ټابلیټ د څو لیټرو اوبو لپاره دی؛ د بېلګې په توګه یو لوی ټابلیټ د ۲۰ لیټره ګیلن لپاره.",
+    "en": "Short of firewood? Use the chlorine tablets the clinic or health worker gives out. Ask how much water one tablet is for: for example, one big tablet for a 20-litre jerrycan."
+  },
+  "anim.water.s4": {
+    "fa": "سرپوش را ببندید، تکانش دهید و پیش از نوشیدن ۳۰ دقیقه صبر کنید. بوی کم کلورین عادی است؛ یعنی تابلیت کار کرده است.",
+    "ps": "سرپوښ یې وتړئ، وې خوځوئ او له څښلو مخکې ۳۰ دقیقې صبر وکړئ. د کلورین لږ بوی عادي دی؛ دا ښيي چې ټابلیټ کار کړی دی.",
+    "en": "Close the lid, shake it, and wait 30 minutes before anyone drinks. A light chlorine smell is normal: it means the tablet is working."
+  },
+  "anim.water.s5": {
+    "fa": "آب نوشیدنی را سرپوشیده، در ظرف پاک و بالاتر از زمین نگه دارید. ظرف را هر چند روز با صابون بشویید.",
+    "ps": "د څښلو اوبه پټې، په پاک لوښي کې او له ځمکې پورته وساتئ. لوښی هر څو ورځې وروسته په صابون ومینځئ.",
+    "en": "Keep drinking water covered, in a clean container up off the floor. Wash the container with soap every few days."
+  },
+  "anim.water.s6": {
+    "fa": "آب را از شیر یا نول ظرف بریزید. پیاله یا دست را داخل ظرف نزنید؛ این کار میکروب‌ها را دوباره به آب می‌آورد.",
+    "ps": "اوبه د لوښي له نل یا شونډې واچوئ. پیاله یا لاس په لوښي کې مه ننباسئ؛ دا کار میکروبونه بېرته اوبو ته راوړي.",
+    "en": "Pour the water out from the tap or spout. Don't dip cups or hands into the pot: that brings the germs back in."
+  },
+  "anim.nappies.title": {
+    "fa": "شستن کهنه‌های طفل",
+    "ps": "د ماشوم د کهنو مینځل",
+    "en": "Washing cloth nappies"
+  },
+  "anim.nappies.s1": {
+    "fa": "کهنه‌های تکه‌یی را بارها می‌شود استفاده کرد. چند عادت ساده، طفل و همهٔ خانواده را از میکروب‌های اسهال دور نگه می‌دارد.",
+    "ps": "د ټوکر کهنې بیا بیا کارولی شو. څو ساده عادتونه ماشوم او ټوله کورنۍ د اسهال له میکروبونو ساتي.",
+    "en": "Cloth nappies can be used again and again. A few simple habits keep the baby and the whole family safe from diarrhoea germs."
+  },
+  "anim.nappies.s2": {
+    "fa": "اول پاخانهٔ طفل را در تشناب بیندازید و کهنه را همان‌جا آب بکشید. نه روی زمین، و هیچ‌گاه در جوی یا کاریز.",
+    "ps": "لومړی د ماشوم ډکې متیازې تشناب ته واچوئ او کهنه هم هلته پرېمینځئ. په ځمکه نه، او هېڅکله په ویاله یا کاریز کې نه.",
+    "en": "First tip the poo into the latrine and rinse the nappy there. Not on the ground, and never in the stream or the water channel."
+  },
+  "anim.nappies.s3": {
+    "fa": "بعد آن را با صابون در آب داغ بشویید، خوب بمالید و در آب پاک آب بکشید.",
+    "ps": "بیا یې په ګرمو اوبو او صابون ومینځئ، ښه یې وموږئ او په پاکو اوبو کې یې پرېمینځئ.",
+    "en": "Then wash it with soap in hot water, scrub it well, and rinse it in clean water."
+  },
+  "anim.nappies.s4": {
+    "fa": "آن را در آفتاب آویزان کنید تا کاملاً خشک شود. آفتاب هم به کشتن میکروب‌ها کمک می‌کند.",
+    "ps": "په لمر کې یې وځړوئ تر څو بشپړه وچه شي. لمر هم د میکروبونو په وژلو کې مرسته کوي.",
+    "en": "Hang it in the sun until it is completely dry. The sun helps kill germs too."
+  },
+  "anim.nappies.s5": {
+    "fa": "در آخر، دست‌های خود را با صابون بشویید. کهنه‌های چتل را تا وقت شستن در سطل سرپوش‌دار نگه دارید.",
+    "ps": "په پای کې خپل لاسونه په صابون ومینځئ. چټلې کهنې د مینځلو تر وخته په سرپوښ لرونکې سطل کې وساتئ.",
+    "en": "Last, wash your hands with soap. Keep dirty nappies in a bucket with a lid until wash time."
+  },
+  "anim.handwashing.title": {
+    "fa": "شستن دست‌ها",
+    "ps": "د لاسونو مینځل",
+    "en": "Washing hands"
+  },
+  "anim.handwashing.s1": {
+    "fa": "بسیاری از مریضی‌ها از راه دست‌ها پخش می‌شوند. صابون و آب روان میکروب‌ها را می‌شوید. صابون ندارید؟ خاکستر پاک هم کار می‌دهد. کسی می‌تواند برایتان آب بریزد.",
+    "ps": "ډېرې ناروغۍ د لاسونو له لارې خپرېږي. صابون او بهېدونکې اوبه میکروبونه مینځي. صابون نشته؟ پاکې ایرې هم کار کوي. څوک کولای شي اوبه درته واچوي.",
+    "en": "Many illnesses travel on hands. Soap and running water wash the germs away. No soap? Clean ash works too. Someone can pour the water for you."
+  },
+  "anim.handwashing.s2": {
+    "fa": "بعد از رفتن به تشناب، و بعد از پاک کردن طفل، دست‌ها را بشویید.",
+    "ps": "له تشناب وروسته، او د ماشوم له پاکولو وروسته، لاسونه ومینځئ.",
+    "en": "Wash after using the toilet, and after cleaning a child's bottom."
+  },
+  "anim.handwashing.s3": {
+    "fa": "پیش از آماده کردن غذا دست‌ها را بشویید.",
+    "ps": "د خوړو له تیارولو مخکې لاسونه ومینځئ.",
+    "en": "Wash before you start preparing food."
+  },
+  "anim.handwashing.s4": {
+    "fa": "پیش از نان خوردن و پیش از غذا دادن به طفل دست‌ها را بشویید. دست‌های اطفال را هم بشویید.",
+    "ps": "د ډوډۍ له خوړلو او ماشوم ته د خوړو له ورکولو مخکې لاسونه ومینځئ. د ماشومانو لاسونه هم ومینځئ.",
+    "en": "Wash before eating and before feeding a child. Wash the children's hands too."
+  },
+  "anim.handwashing.s5": {
+    "fa": "پیش از شیر دادن به طفل دست‌ها را بشویید.",
+    "ps": "ماشوم ته د تي ورکولو مخکې لاسونه ومینځئ.",
+    "en": "Wash before breastfeeding your baby."
+  },
+  "anim.handwashing.s6": {
+    "fa": "دست‌ها را تر کنید، صابون یا خاکستر بزنید و حدود ۲۰ ثانیه بمالید: کف دست، پشت دست، میان انگشتان، شست‌ها و ناخن‌ها.",
+    "ps": "لاسونه لانده کړئ، صابون یا ایرې پرې ووهئ او شاوخوا ۲۰ ثانیې یې وموږئ: ورغوي، د لاس شا، د ګوتو منځ، غټې ګوتې او نوکان.",
+    "en": "Wet your hands, add soap or ash, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails."
+  },
+  "anim.handwashing.s7": {
+    "fa": "زیر آب روان آب بکشید. دست‌ها را تکان دهید تا خشک شوند، یا با تکهٔ پاک خشک کنید.",
+    "ps": "د بهېدونکو اوبو لاندې یې پرېمینځئ. لاسونه وښوروئ چې وچ شي، یا یې په پاک ټوکر وچ کړئ.",
+    "en": "Rinse under running water. Shake your hands dry or use a clean cloth."
+  },
+  "anim.ors.title": {
+    "fa": "ساختن او آر اس در خانه",
+    "ps": "په کور کې د او آر اس جوړول",
+    "en": "Making ORS at home"
+  },
+  "anim.ors.s1": {
+    "fa": "اسهال آب و نمک بدن طفل را بیرون می‌کشد. همین که اسهال شروع شد، او آر اس بدهید؛ آنچه را از دست رفته دوباره پر می‌کند.",
+    "ps": "اسهال د ماشوم له بدن څخه اوبه او مالګه باسي. څنګه چې اسهال پیل شي، او آر اس ورکړئ؛ هغه څه بېرته ډکوي چې له لاسه وتلي دي.",
+    "en": "Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost."
+  },
+  "anim.ors.s2": {
+    "fa": "دست‌ها را بشویید. یک جگ پاک را تا ۱ لیتر از آب جوشانده و سرد شده پر کنید. تمام پاکت را بریزید و هم بزنید تا حل شود.",
+    "ps": "لاسونه ومینځئ. یو پاک جګ تر ۱ لیټره پورې په ایشول شویو او سړو شویو اوبو ډک کړئ. ټول پاکټ پکې واچوئ او وې خوځوئ تر څو حل شي.",
+    "en": "Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves."
+  },
+  "anim.ors.s3": {
+    "fa": "پاکت ندارید؟ ۶ قاشق چای‌خوری هموار بوره و نیم قاشق چای‌خوری هموار نمک را در ۱ لیتر آب پاک حل کنید. دقیق اندازه کنید: نمک زیاد ضرر دارد.",
+    "ps": "پاکټ نشته؟ ۶ هوارې د چای کاچوغې بوره او نیمه هواره د چای کاچوغه مالګه په ۱ لیټر پاکو اوبو کې حل کړئ. په دقت یې اندازه کړئ: ډېره مالګه زیان لري.",
+    "en": "No packet? Mix 6 level teaspoons of sugar and half a level teaspoon of salt into 1 litre of clean water. Measure carefully: too much salt is harmful."
+  },
+  "anim.ors.s4": {
+    "fa": "کم‌کم و پی‌درپی با قاشق یا پیاله بدهید. اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید و بعد آهسته‌تر بدهید. هر روز تازه بسازید.",
+    "ps": "لږ لږ او ژر ژر یې په کاچوغې یا پیالې ورکړئ. که ماشوم کانګې وکړې، ۱۰ دقیقې صبر وکړئ، بیا یې ورو ورو ورکړئ. هره ورځ یې تازه جوړ کړئ.",
+    "en": "Give small sips often, with a spoon or a cup. If the child vomits, wait 10 minutes, then give it more slowly. Make it fresh each day."
+  },
+  "anim.ors.s5": {
+    "fa": "شیر مادر و غذا را ادامه دهید. تابلیت زنک از کلینیک، روزی یک بار برای ۱۰ تا ۱۴ روز، به جور شدن طفل کمک می‌کند، حتی وقتی اسهال بند شد.",
+    "ps": "تی ورکول او خواړه ورکول دوام ورکړئ. د کلینیک د زنک ټابلیټ، ورځې یو ځل د ۱۰ تر ۱۴ ورځو لپاره، ماشوم ژر جوړوي، حتی کله چې اسهال ودرېږي.",
+    "en": "Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 10 to 14 days, help the child get well, even after the diarrhoea stops."
+  },
+  "anim.ors.s6": {
+    "fa": "اگر طفل نمی‌تواند بنوشد یا شیر بخورد، بسیار خواب‌آلود است، در پاخانه‌اش خون است، تب دارد یا بهتر نمی‌شود، زود به کلینیک بروید.",
+    "ps": "که ماشوم څښلی یا تی رودلی نشي، ډېر خوب وړی وي، په ډکو متیازو کې یې وینه وي، تبه ولري، یا ښه کېږي نه، ژر کلینیک ته لاړ شئ.",
+    "en": "Go to the clinic quickly if the child cannot drink or breastfeed, is very sleepy, has blood in the poo, has a fever, or is not getting better."
+  },
+  "anim.spread.title": {
+    "fa": "مریضی‌ها چگونه پخش می‌شوند",
+    "ps": "ناروغۍ څنګه خپرېږي",
+    "en": "How illness spreads"
+  },
+  "anim.spread.s1": {
+    "fa": "میکروب‌ها آن‌قدر کوچک‌اند که دیده نمی‌شوند. آن‌ها از چند راه از یک نفر به نفر دیگر می‌روند. وقتی راه‌ها را بشناسید، می‌توانید آن‌ها را ببندید.",
+    "ps": "میکروبونه دومره واړه دي چې نه لیدل کېږي. دوی د څو لارو له یوه کس څخه بل ته ځي. کله چې لارې وپېژنئ، بندولی یې شئ.",
+    "en": "Germs are too small to see. They travel from person to person along a few paths. Once you know the paths, you can block them."
+  },
+  "anim.spread.s2": {
+    "fa": "دست‌ها: میکروب‌ها با دست‌ها به غذا و دهان می‌رسند. شستن با صابون این راه را می‌بندد.",
+    "ps": "لاسونه: میکروبونه د لاسونو له لارې خوړو او خولې ته رسېږي. په صابون مینځل دا لار بندوي.",
+    "en": "Hands: germs ride on our hands into food and mouths. Washing with soap blocks this path."
+  },
+  "anim.spread.s3": {
+    "fa": "آب و غذا: آب ناپاک و غذای سرباز میکروب دارد. آب را پاک کنید، غذا را بپوشانید و خوب بپزید.",
+    "ps": "اوبه او خواړه: ناپاکې اوبه او لوڅ خواړه میکروب لېږدوي. اوبه پاکې کړئ، خواړه پټ کړئ او ښه یې پاخه کړئ.",
+    "en": "Water and food: dirty water and uncovered food carry germs. Make water safe, cover food, and cook it well."
+  },
+  "anim.spread.s4": {
+    "fa": "مگس‌ها: اول روی پاخانه می‌نشینند و بعد روی غذای ما. از تشناب سرپوش‌دار کار بگیرید و غذا را پوشیده نگه دارید.",
+    "ps": "مچان: لومړی په ډکو متیازو کېني، بیا زموږ په خوړو. سرپوښ لرونکی تشناب وکاروئ او خواړه پټ وساتئ.",
+    "en": "Flies: they sit on poo, then on our food. Use a latrine with a cover, and keep food covered."
+  },
+  "anim.spread.s5": {
+    "fa": "سرفه و هوا: سرفه قطره‌های ریز را پخش می‌کند. در آرنج خود سرفه کنید، بگذارید هوای تازه به اتاق بیاید و اطفال را واکسین کنید.",
+    "ps": "ټوخی او هوا: ټوخی کوچني څاڅکي خپروي. په خپله څنګله کې ټوخی وکړئ، کوټې ته تازه هوا پرېږدئ او ماشومان واکسین کړئ.",
+    "en": "Coughs and air: a cough sprays tiny drops. Cough into your elbow, let fresh air into the room, and get the children vaccinated."
+  },
+  "anim.spread.s6": {
+    "fa": "پشه و پشه‌خاکی شام و شب نیش می‌زنند. آن‌ها ملاریا و لیشمانیا را پخش می‌کنند؛ لیشمانیا زخمی است که جور نمی‌شود. زیر پشه‌خانهٔ دوادار بخوابید و شام‌ها دست و پا را بپوشانید.",
+    "ps": "غوماشې او شګلني مچان ماښام او شپه چیچي. دوی ملاریا او لیشمانیا خپروي؛ لیشمانیا هغه ټپ دی چې نه رغېږي. د درملو لرونکې پشه‌خانې لاندې ویده شئ او ماښام لاسونه او پښې پټې کړئ.",
+    "en": "Mosquitoes and sandflies bite in the evening and at night. They spread malaria and leishmaniasis, the sore that does not heal. Sleep under a treated net, and cover arms and legs in the evening."
+  },
+  "anim.spread.s7": {
+    "fa": "صابون، آب پاک، غذای پوشیده، تشناب سرپوش‌دار، سرفه در آرنج و پشه‌خانه. عادت‌های کوچکی که همهٔ خانواده را صحتمندتر نگه می‌دارد.",
+    "ps": "صابون، پاکې اوبه، پټ خواړه، سرپوښ لرونکی تشناب، په څنګله کې ټوخی او پشه‌خانه. واړه عادتونه چې ټوله کورنۍ روغه ساتي.",
+    "en": "Soap, safe water, covered food, a covered latrine, an elbow for coughs, and a bed net. Small habits that keep the whole family healthier."
+  }
+}

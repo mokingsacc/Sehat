@@ -1,0 +1,271 @@
+{
+  "id": "kit-bp",
+  "section": "everyone",
+  "title": {
+    "fa": "ماشین فشار خون",
+    "ps": "د وینې د فشار ماشین",
+    "en": "Blood pressure machine"
+  },
+  "summary": {
+    "fa": "چه کسی ضرورت دارد، چطور اندازه کنید، عددها چه معنا دارند.",
+    "ps": "چا ته اړین دی، څنګه یې اندازه کړئ، شمېرې څه مانا لري.",
+    "en": "Who needs one, how to measure, and what the numbers mean."
+  },
+  "image": "kit-bp",
+  "blocks": [
+    {
+      "id": "kit-bp.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ماشین خانه به کسانی که بالای ۴۰ سال، حامله، مریض شکر هستند یا قبلاً فشار بلند داشته‌اند کمک می‌کند تا بین مراجعه‌ها فشار خود را بدانند.",
+        "ps": "د کور ماشین له ۴۰ کلونو پورته کسانو، امیندوارو ښځو، د شکرې ناروغانو او هغو ته چې مخکې یې لوړ فشار درلود مرسته کوي چې د کتنو ترمنځ خپل فشار وپېژني.",
+        "en": "A home machine helps people over 40, pregnant women, people with diabetes, and anyone who has had high blood pressure know their numbers between visits."
+      }
+    },
+    {
+      "id": "kit-bp.buy",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "ماشین بازو بخرید",
+        "ps": "د مټ ماشین واخلئ",
+        "en": "Buy an upper-arm machine"
+      },
+      "text": {
+        "fa": "یک ماشین خودکار با کف بازو بخرید که از نظر طبی آزمایش شده باشد، نه ماشین مچ دست. حدود ۱۵۰۰ تا ۳۰۰۰ افغانی.",
+        "ps": "داسې اتومات ماشین واخلئ چې د مټ کف ولري او طبي ازمویل شوی وي، نه د مړوند. شاوخوا ۱۵۰۰ تر ۳۰۰۰ افغانۍ.",
+        "en": "Choose an automatic machine with a cuff for the upper arm, one that is clinically tested, not a wrist one. About 1,500 to 3,000 afghanis."
+      }
+    },
+    {
+      "id": "kit-bp.cuff",
+      "type": "step",
+      "icon": "bp",
+      "title": {
+        "fa": "اندازهٔ درست کف",
+        "ps": "د کف سمه اندازه",
+        "en": "The right cuff size"
+      },
+      "text": {
+        "fa": "کف باید اندازهٔ بازو باشد. بازوی چاق کف کلان می‌خواهد، ورنه عدد بیشتر از حقیقت نشان داده می‌شود.",
+        "ps": "کف باید د مټ په اندازه وي. غټ مټ لوی کف غواړي، که نه شمېره له اصلي څخه لوړه ښيي.",
+        "en": "The cuff must fit the arm. A big arm needs a large cuff, or the number will be too high."
+      }
+    },
+    {
+      "id": "kit-bp.rest",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "۵ دقیقه بنشینید و آرام بگیرید",
+        "ps": "۵ دقیقې کېنئ او ارام شئ",
+        "en": "Sit and rest 5 minutes"
+      },
+      "text": {
+        "fa": "۳۰ دقیقه پیش از آن چای، سگرت و کار سخت نکنید. پشت را تکیه دهید، پاها هموار روی زمین، و بازو به اندازهٔ قلب روی چیزی باشد.",
+        "ps": "تر هغه ۳۰ دقیقې مخکې چای، سګرټ او سخت کار مه کوئ. شا ته تکیه وکړئ، پښې پر ځمکه برابرې، او مټ د زړه په لوړوالي پر یو شي کېږدئ.",
+        "en": "No tea, smoking or hard work for 30 minutes before. Sit with your back supported, feet flat, and arm resting at heart height."
+      },
+      "picture": "bp-sit"
+    },
+    {
+      "id": "kit-bp.measure",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "دو بار اندازه کنید",
+        "ps": "دوه ځله اندازه کړئ",
+        "en": "Measure two times"
+      },
+      "text": {
+        "fa": "کف را روی بازوی برهنه ببندید. گپ نزنید. اندازه کنید، ۱ دقیقه صبر کنید، دوباره اندازه کنید و هر دو را بنویسید.",
+        "ps": "کف پر لوڅ مټ وتړئ. خبرې مه کوئ. اندازه یې کړئ، ۱ دقیقه صبر وکړئ، بیا یې اندازه کړئ، او دواړه ولیکئ.",
+        "en": "Put the cuff on the bare upper arm. Do not talk. Measure, wait 1 minute, measure again, and write down both."
+      }
+    },
+    {
+      "id": "kit-bp.time",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "هر روز یک وقت معین",
+        "ps": "هره ورځ په یو وخت",
+        "en": "Same time each day"
+      },
+      "text": {
+        "fa": "وقتی کلینیک می‌گوید، هر صبح و شام در همان وقت‌ها اندازه کنید. یادداشت‌ها را به هر مراجعه ببرید.",
+        "ps": "کله چې کلینیک ووایي، هر سهار او ماښام په همغو وختونو کې اندازه کړئ. خپل یادښتونه هر ځل له ځان سره یوسئ.",
+        "en": "When the clinic asks, measure every morning and evening at the same times. Take your notes to every visit."
+      }
+    },
+    {
+      "id": "kit-bp.numbers",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "عددها چه معنا دارند",
+        "ps": "شمېرې څه مانا لري",
+        "en": "What the numbers mean"
+      },
+      "text": {
+        "fa": "عدد بالا اول گفته می‌شود. در خانه، کمتر از ۱۳۵ بر ۸۵ عادی است. در حاملگی، ۱۴۰ بر ۹۰ یا بیشتر بلند است.",
+        "ps": "پورتنۍ شمېره لومړی ویل کېږي. په کور کې، له ۱۳۵ پر ۸۵ کم عادي دی. په امیندوارۍ کې، ۱۴۰ پر ۹۰ یا ډېر لوړ دی.",
+        "en": "The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high."
+      }
+    },
+    {
+      "id": "kit-bp.check",
+      "type": "link",
+      "to": "tool/reading/bp",
+      "icon": "bp",
+      "title": {
+        "fa": "فشار خون را معاینه کنید",
+        "ps": "د وینې فشار وګورئ",
+        "en": "Check a blood pressure"
+      },
+      "text": {
+        "fa": "هر دو عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.",
+        "ps": "دواړه شمېرې ورکړئ او واورئ چې څه مانا لري او څه باید وکړئ.",
+        "en": "Put in both numbers and hear what they mean and what to do."
+      }
+    },
+    {
+      "id": "kit-bp.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "kit-bp.urgent.very-high",
+          "icon": "bp",
+          "text": {
+            "fa": "دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است",
+            "ps": "دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی",
+            "en": "it is 180 over 120 or more, two times"
+          }
+        },
+        {
+          "id": "kit-bp.urgent.signs",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "بلند است، با درد سینه، ضعف، مشکل گپ زدن یا سردرد شدید",
+            "ps": "لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې یا سخت سر درد سره",
+            "en": "high, with chest pain, weakness, trouble speaking or a bad headache"
+          }
+        },
+        {
+          "id": "kit-bp.urgent.pregnant-very-high",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله است و ۱۶۰ بر ۱۱۰ یا بیشتر دارد",
+            "ps": "امیندواره ده او ۱۶۰ پر ۱۱۰ یا ډېر لري",
+            "en": "pregnant, and 160 over 110 or more"
+          }
+        },
+        {
+          "id": "kit-bp.urgent.pregnant-signs",
+          "icon": "headache",
+          "text": {
+            "fa": "حامله، ۱۴۰ بر ۹۰ یا بیشتر، با سردرد، تاری چشم یا پندیدگی",
+            "ps": "امیندواره، ۱۴۰ پر ۹۰ یا ډېر، له سر درد، د سترګو تتوالي یا پړسوب سره",
+            "en": "pregnant, 140 over 90 or more, with headache, blurred vision or swelling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-bp.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، امروز به کلینیک بروید",
+        "ps": "که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "kit-bp.soon.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله است و ۱۴۰ بر ۹۰ یا بیشتر دارد",
+            "ps": "امیندواره ده او ۱۴۰ پر ۹۰ یا ډېر لري",
+            "en": "pregnant, and 140 over 90 or more"
+          }
+        },
+        {
+          "id": "kit-bp.soon.low",
+          "icon": "warning",
+          "text": {
+            "fa": "عدد بالا کمتر از ۹۰ است، با سرچرخی یا بیهوش شدن",
+            "ps": "پورتنۍ شمېره له ۹۰ کمه ده، له سر ګرځېدو یا بې هوښۍ سره",
+            "en": "the top number is under 90, with dizziness or fainting"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-bp.week",
+      "type": "tip",
+      "icon": "calendar",
+      "text": {
+        "fa": "در خانه اکثراً ۱۳۵ بر ۸۵ یا بیشتر است؟ همین هفته با یادداشت‌ها به کلینیک بروید. شاید دوا ضرورت باشد.",
+        "ps": "په کور کې اکثره ۱۳۵ پر ۸۵ یا ډېر وي؟ په همدې اونۍ کې له یادښتونو سره کلینیک ته ولاړ شئ. کېدای شي درملو ته اړتیا وي.",
+        "en": "Often 135 over 85 or more at home? Go to the clinic this week with your notes. You may need medicine."
+      }
+    },
+    {
+      "id": "kit-bp.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "kit-bp.dont.stop",
+          "icon": "pill",
+          "text": {
+            "fa": "به خاطر یک عدد، دوای خود را قطع یا تغییر ندهید.",
+            "ps": "د یوې شمېرې له امله خپل درمل مه بندوئ او مه بدلوئ.",
+            "en": "Do not stop or change your medicine because of one reading."
+          }
+        },
+        {
+          "id": "kit-bp.dont.clothes",
+          "icon": "no",
+          "text": {
+            "fa": "روی لباس ضخیم یا روی مچ دست اندازه نکنید.",
+            "ps": "پر پېړو جامو یا پر مړوند یې مه اندازه کوئ.",
+            "en": "Do not measure over thick clothes, or on the wrist."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO HEARTS technical package: Evidence-based protocols and Technology modules (2018, 2020): validated automated upper-arm devices, correct cuff, seated rest, two readings",
+    "WHO Technical specifications for automated non-invasive blood pressure measuring devices with cuff (2020)",
+    "WHO Guideline for the pharmacological treatment of hypertension in adults (2021)",
+    "ISH 2020 Global Hypertension Practice Guidelines (Unger et al., Hypertension 2020): home BP 135/85 or more = hypertension; measurement conditions",
+    "NICE NG136 Hypertension in adults (2019, updated 2023): home average 135/85 or more; 180/120 or more same-day assessment",
+    "NICE NG133 Hypertension in pregnancy (2019, updated 2023): 140/90 hypertension, 160/110 severe; symptoms of pre-eclampsia",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016) and PCPNC (2015): BP at every visit; severe headache, blurred vision = danger signs",
+    "STRIDE BP and validatebp.org lists of clinically validated devices"
+  ],
+  "review": [
+    "Home normal = under 135/85 (ISH 2020, NICE). Clinic thresholds are 140/90. The checker uses 135/85 for adults and 140/90 in pregnancy.",
+    "180/120 or more 'two times' = hospital now, as Mo asked. NICE says same-day specialist review if there are symptoms or signs; without symptoms NICE allows prompt clinic review. Judgement call for a rural setting.",
+    "High with chest pain, weakness, trouble speaking or bad headache = hospital now (these are emergencies whatever the number).",
+    "Pregnancy: 140/90 or more = clinic today; 160/110 or more, or 140/90 with headache, blurred vision or swelling = hospital now (possible pre-eclampsia).",
+    "Low: top number under 90 with dizziness or fainting = clinic today; confusion or fainting again = hospital now (in the checker).",
+    "'Often 135/85 or more: clinic this week' is a judgement call.",
+    "Price 1,500 to 3,000 afghanis for a validated upper-arm machine is an estimate (about 20 to 45 US dollars). Cheaper unvalidated machines exist.",
+    "'Clinically tested' (validated) may mean nothing to buyers; pharmacists may not know. Consider naming validated brands available in Mazar or Aybak after checking validatebp.org.",
+    "Sitting on a chair at a table is shown in the picture; many homes sit on the floor. Floor sitting with back against a wall and arm on a cushion at heart height is acceptable; check the picture is understood."
+  ]
+}

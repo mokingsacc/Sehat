@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Build the app: merge content/src into content/book.json, index audio clips, write sw.js and narration scripts.
 Run from anywhere: python3 tools/build.py"""
-import json, os, glob, hashlib, datetime, re
+import json, os, glob, hashlib, datetime, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import anims as ANIM
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 J = lambda *p: os.path.join(ROOT, *p)
@@ -44,12 +46,14 @@ def icon(name):
     icon_names.add(name)
     return name if exists(f"img/icons/{name}.svg") else "_dot"
 
-# sections: configured order first, then any extra topics by their own "section" field
+# sections: configured order first, then any extra topics by their own "section" field.
+# "kit" (the home health kit screen) lists its own topics; they are not added again to children / adults.
 sections = {}
 for sec, ids in sections_cfg.items():
     sections[sec] = [i for i in ids if i in topics or (i == "vaccines" and vaccines)]
 for tid, t in topics.items():
     sec = t.get("section")
+    if tid in sections.get("kit", []): continue
     if sec in sections and tid not in sections[sec]:
         sections[sec].append(tid)
         print("auto-added", tid, "to", sec)
@@ -76,11 +80,15 @@ for tid, t in topics.items():
     for b in t["blocks"]:
         if b.get("icon"): b["icon"] = icon(b["icon"])
         ty = b["type"]
-        if ty == "step":
-            dot = {"fa": ".", "ps": ".", "en": "."}
+        if b.get("picture"): b["picture"] = f"img/pics/{b['picture']}.svg"
+        if ty in ("step", "link"):
             say(b["id"], {lg: (b["title"][lg].rstrip(".:،") + ". " + b["text"][lg]) for lg in LANGS})
         elif ty in ("lead", "tip"):
             say(b["id"], b["text"])
+        elif ty == "anim":
+            # the block's speaker reads only its title (default: the animation's own title, anim.<name>.title);
+            # the scenes are read by the player
+            if b.get("title"): say(b["id"], b["title"])
         elif ty in ("alert", "dont"):
             say(b["id"], b["title"])
             for it in b["items"]:
@@ -105,11 +113,18 @@ if vaccines:
     for n in v.get("notes", []):
         if n.get("icon"): n["icon"] = icon(n["icon"])
         say(n["id"], n["text"])
+    for b in v.get("anims") or []:
+        if b.get("title"): say(b["id"], b["title"])
     if v.get("women"):
         w = v["women"]
         say(w["id"], join(w["title"], w["text"]))
     v.pop("review", None)
     out_topics["vaccines"] = v
+
+# narration of the explainer animations (content/src/anims.json): every scene, title, picker question and label
+anim_text = ANIM.narration()
+for k, L in anim_text.items(): say(k, L)
+anim_groups = ANIM.groups()
 
 # audio index, one "slot" per language and voice: audio/<lang>-<f|m>/<id>.<ext> (f = woman, m = man).
 # The old layout audio/<lang>/ is still read, as the woman's voice of that language.
@@ -139,6 +154,10 @@ book = {
     "audio": audio,
     "symptoms": [dict(x, icon=icon(x.get("icon", "warning")), go=[g for g in x["go"] if g in out_topics]) for x in symptoms],
     "facilities": facilities,
+    # animations the player can open (anim/<name>.js), the groups with a picker (cpr) and each one's narration ids;
+    # the dashboard editor uses this to check "anim" blocks and to rebuild the recording order like this script does
+    "anims": {"groups": anim_groups, "ids": {n: ANIM.needed_ids(n) for n in ANIM.names()}},
+    "pictures": sorted(os.path.relpath(p, ROOT) for p in glob.glob(J("img/pics/*.svg"))),  # as step and link "picture" in this book
 }
 if syndromes and districts:
     sym_ids = {x["id"] for x in symptoms}
@@ -153,15 +172,21 @@ if syndromes and districts:
     }
 
 # narration scripts for the people recording audio
-order = []
+# (an animation's lines come right after the first page that shows it, and go in that page's audio pack)
+order, owner = [], {}
 for k in ui["say"]: order.append(k)
 for k in narr:
     if k.startswith("ui.") and k not in order: order.append(k)
-for sec in ("children", "women", "everyone"):
+for sec in ("children", "women", "everyone", "kit"):
     for tid in sections.get(sec, []):
         ids = [k for k in narr if k == f"{tid}.title" or k.startswith(tid + ".")]
+        t = out_topics.get(tid) or {}
+        for b in (t.get("blocks") or []) + (t.get("anims") or []):
+            if b.get("type") == "anim": ids += [k for k in ANIM.block_ids(b) if k in anim_text]
         for k in ids:
-            if k not in order: order.append(k)
+            if k not in order: order.append(k); owner.setdefault(k, tid)
+for k in anim_text:
+    if k not in order: order.append(k)
 book["order"] = order
 
 # audio packs: the phone downloads the chosen voice pack by pack, most important first.
@@ -175,7 +200,7 @@ for tid, t in out_topics.items():
             urgent_ids.add(b["id"]); urgent_ids.update(it["id"] for it in b.get("items", []))
 pack_ids = {p: [] for p in PACKS}
 for k in order + [k for k in narr if k not in order]:
-    tid = k.split(".")[0]
+    tid = owner.get(k) or k.split(".")[0]
     if k.startswith("ui.") or tid in urgent_topics or k == tid + ".title" or k in urgent_ids: p = "urgent"
     else: p = next((sec for sec in PACKS[1:] if tid in sections.get(sec, [])), "everyone")
     pack_ids[p].append(k)
@@ -186,9 +211,12 @@ book["packs"] = {"order": list(PACKS), "ids": pack_ids, "size": pack_size}
 
 # precache list: everything the app needs offline except audio
 pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"]
-for pat in ("css/*.css", "js/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/app/*.svg", "img/app/*.png"):
+for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png"):
     pre += sorted(os.path.relpath(p, ROOT) for p in glob.glob(J(pat)))
-pre = [p for p in pre if not p.startswith("js/sw")]
+# js/cine/*.js is the CPR drawing kit and anim/cine/*.js the CPR versions built with it: js/anim.js loads anim/cine/<name>.js
+# when it is there and falls back to the SVG version when it is not, so precache whatever exists (sub-folders are listed
+# explicitly because these globs do not recurse). anim/*-3d.js (an earlier plan) is still left out.
+pre = [p for p in pre if not p.startswith("js/sw") and not p.endswith("-3d.js")]
 
 # version = hash of all precached content
 hsh = hashlib.sha1()
@@ -221,6 +249,18 @@ if syndromes and districts:
     with open(J("server/surveillance-defs.js"), "w", encoding="utf-8") as fh:
         fh.write("// GENERATED by tools/build.py from content/src/syndromes.json and content/src/districts.json. Do not edit by hand.\n")
         fh.write("export default " + json.dumps(defs, ensure_ascii=False, indent=1) + ";\n")
+
+# the server's copy of the book's sections, English titles and privacy wording (server/usage.js imports it for the
+# "What people use" dashboard and the /privacy page)
+usage_defs = {"urgent": [t for t in (config.get("urgentTopics") or []) if t in out_topics],
+              "sections": {k: list(v) for k, v in sections.items()},
+              "titles": {tid: (t.get("title") or {}).get("en", tid) for tid, t in out_topics.items()},
+              "consentVersion": config.get("consentVersion"),
+              "privacy": {"ids": [k for k in ui["say"] if k.startswith("ui.privacy.")],
+                          "text": {k: v for k, v in ui["say"].items() if k.startswith("ui.privacy.")}}}
+with open(J("server/usage-defs.js"), "w", encoding="utf-8") as fh:
+    fh.write("// GENERATED by tools/build.py from content/src (sections, topic titles, privacy wording). Do not edit by hand.\n")
+    fh.write("export default " + json.dumps(usage_defs, ensure_ascii=False, indent=1) + ";\n")
 
 os.makedirs(J("content/scripts"), exist_ok=True)
 for lg in ("fa", "ps"):

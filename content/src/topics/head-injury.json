@@ -1,0 +1,227 @@
+{
+  "id": "head-injury",
+  "section": "everyone",
+  "title": {
+    "fa": "ضربه به سر",
+    "ps": "سر ته ټکر",
+    "en": "Head injury"
+  },
+  "summary": {
+    "fa": "بعد از ضربه به سر: چه کسی شفاخانه لازم دارد و چه را ببینید.",
+    "ps": "سر ته له ټکر وروسته: څوک روغتون ته اړتیا لري او څه وګورئ.",
+    "en": "After a knock to the head: who needs hospital, what to watch."
+  },
+  "image": "head-injury",
+  "blocks": [
+    {
+      "id": "head-injury.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بیشتر ضربه‌های سر خفیف هستند. اما خونریزی داخل کاسهٔ سر ممکن است چند ساعت بعد معلوم شود، پس شخص را یک روز از نزدیک ببینید.",
+        "ps": "د سر ډېری ټکرونه سپک وي. خو د کوپړۍ دننه وینه بهېدل کېدای شي څو ساعته وروسته ښکاره شي، نو کس یوه ورځ له نږدې وڅارئ.",
+        "en": "Most knocks to the head are mild. But bleeding inside the skull can show hours later, so watch the person closely for a day."
+      }
+    },
+    {
+      "id": "head-injury.unconscious",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "اگر بی‌هوش است، گردن را محافظت کنید",
+        "ps": "که بې‌هوښه وي، غاړه یې وساتئ",
+        "en": "Knocked out? Protect the neck"
+      },
+      "text": {
+        "fa": "اگر شخص بی‌هوش است، شاید گردنش هم آسیب دیده باشد. سر و گردن را بی‌حرکت نگه دارید، نفسش را ببینید و یک نفر را برای آوردن موتر بفرستید.",
+        "ps": "که کس بې‌هوښه وي، کېدای شي غاړه یې هم ټپي وي. سر او غاړه یې بې‌حرکته وساتئ، ساه یې وګورئ او یو څوک د موټر راوړلو لپاره ولېږئ.",
+        "en": "If the person is unconscious, the neck may be hurt too. Keep the head and neck still, check breathing, and send for a car."
+      }
+    },
+    {
+      "id": "head-injury.cut",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "روی زخم سر فشار دهید",
+        "ps": "د سر په ټپ فشار ورکړئ",
+        "en": "Press on a bleeding scalp"
+      },
+      "text": {
+        "fa": "زخم سر زیاد خون می‌دهد. ۱۰ دقیقه با تکهٔ پاک محکم رویش فشار دهید.",
+        "ps": "د سر ټپ ډېره وینه ورکوي. ۱۰ دقیقې یې په پاک ټوکر کلک فشار ورکړئ.",
+        "en": "A cut on the head bleeds a lot. Press on it firmly with a clean cloth for 10 minutes."
+      }
+    },
+    {
+      "id": "head-injury.cold",
+      "type": "step",
+      "icon": "cool-water",
+      "title": {
+        "fa": "تکهٔ سرد روی ورم",
+        "ps": "پر پړسوب سوړ ټوکر",
+        "en": "A cold cloth on the bump"
+      },
+      "text": {
+        "fa": "برای ورم، ۲۰ دقیقه یک تکهٔ تر و سرد رویش بگیرید. بگذارید شخص استراحت کند.",
+        "ps": "د پړسوب لپاره، ۲۰ دقیقې یو لوند او سوړ ټوکر پرې ونیسئ. پرېږدئ چې کس آرام وکړي.",
+        "en": "For a bump, hold a cold wet cloth on it for 20 minutes. Let the person rest."
+      }
+    },
+    {
+      "id": "head-injury.watch",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "۲۴ ساعت مراقب باشید",
+        "ps": "۲۴ ساعته یې وڅارئ",
+        "en": "Watch for 24 hours"
+      },
+      "text": {
+        "fa": "یک نفر ۲۴ ساعت پیش او بماند. می‌تواند بخوابد، اما چند بار بیدارش کنید تا ببینید شما را می‌شناسد.",
+        "ps": "یو څوک دې ۲۴ ساعته ورسره پاتې شي. ویده کېدای شي، خو څو ځله یې راویښ کړئ چې وګورئ تاسو پېژني.",
+        "en": "Someone should stay with them for 24 hours. They may sleep, but wake them a few times to check they know you."
+      }
+    },
+    {
+      "id": "head-injury.child",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "شیرخوار و اطفال خورد",
+        "ps": "تي خوړونکي او کوچني ماشومان",
+        "en": "Babies and small children"
+      },
+      "text": {
+        "fa": "شیرخواری که از بلندی افتاده، یا هر طفلی که بعد از افتادن مثل همیشه نیست، باید در شفاخانه دیده شود.",
+        "ps": "هغه تي خوړونکی ماشوم چې له لوړ ځای لوېدلی، یا هر ماشوم چې له لوېدو وروسته د تل په څېر نه وي، باید په روغتون کې ولیدل شي.",
+        "en": "A baby who falls from a height, or any child who is not their usual self after a fall, must be seen at hospital."
+      }
+    },
+    {
+      "id": "head-injury.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر بعد از ضربه به سر این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که سر ته له ټکر وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if after a head injury they:"
+      },
+      "items": [
+        {
+          "id": "head-injury.urgent.knocked-out",
+          "icon": "sleepy",
+          "text": {
+            "fa": "حتی برای مدت کوتاه بی‌هوش شد",
+            "ps": "که څه هم لږ وخت، بې‌هوښه شو",
+            "en": "were knocked out, even for a moment"
+          }
+        },
+        {
+          "id": "head-injury.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "بیشتر از یک بار استفراغ کرد",
+            "ps": "له یو ځل زیات یې کانګې وکړې",
+            "en": "vomit more than once"
+          }
+        },
+        {
+          "id": "head-injury.urgent.drowsy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بسیار خواب‌آلود یا گیج است، یا مشکل بیدار می‌شود",
+            "ps": "ډېر خوب وړی یا ګډوډ دی، یا په سختۍ راویښېږي",
+            "en": "are very sleepy, confused or hard to wake"
+          }
+        },
+        {
+          "id": "head-injury.urgent.fit",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرد",
+            "ps": "اختلاج یې وکړ",
+            "en": "have a fit"
+          }
+        },
+        {
+          "id": "head-injury.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردردی دارد که بدتر می‌شود",
+            "ps": "سر درد لري چې بدترېږي",
+            "en": "have a headache that gets worse"
+          }
+        },
+        {
+          "id": "head-injury.urgent.fluid",
+          "icon": "drops",
+          "text": {
+            "fa": "از بینی یا گوش، آب صاف یا خون می‌آید",
+            "ps": "له پوزې یا غوږونو روڼې اوبه یا وینه راځي",
+            "en": "have clear fluid or blood from the nose or ears"
+          }
+        },
+        {
+          "id": "head-injury.urgent.weak",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "دست یا پایش ضعیف است، یا گپ زدنش نامفهوم است",
+            "ps": "لاس یا پښه یې کمزوري ده، یا خبرې یې ګډې وډې دي",
+            "en": "have a weak arm or leg, or slurred speech"
+          }
+        }
+      ]
+    },
+    {
+      "id": "head-injury.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "head-injury.dont.alone",
+          "icon": "no",
+          "text": {
+            "fa": "او را ۲۴ ساعت تنها نگذارید",
+            "ps": "۲۴ ساعته یې یوازې مه پرېږدئ",
+            "en": "leave them alone for 24 hours"
+          }
+        },
+        {
+          "id": "head-injury.dont.work",
+          "icon": "no",
+          "text": {
+            "fa": "نگذارید همان روز کار سخت کند یا موتر و موترسایکل براند",
+            "ps": "مه پرېږدئ چې په هماغه ورځ سخت کار وکړي یا موټر او موټرسایکل وچلوي",
+            "en": "let them do hard work, or drive a car or motorbike, that day"
+          }
+        }
+      ]
+    },
+    {
+      "id": "head-injury.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه مغز را معاینه می‌کنند و اگر لازم باشد، برای عکس یا عملیات به شفاخانهٔ بزرگ‌تر می‌فرستند.",
+        "ps": "په روغتون کې دماغ معاینه کوي او که اړتیا وي، د انځور یا عملیات لپاره یې لوی روغتون ته لېږي.",
+        "en": "At hospital they check the brain, and if needed send them to a bigger hospital for a scan or an operation."
+      }
+    }
+  ],
+  "sources": [
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): head injury and concussion",
+    "European Resuscitation Council Guidelines 2025: First Aid: concussion and head injury",
+    "WHO Basic Emergency Care (WHO/ICRC, 2018): head injury, danger signs",
+    "WHO/UNICEF World report on child injury prevention (2008): falls"
+  ],
+  "review": [
+    "Replaces the short first-aid.head step; its 'watch for 24 hours' advice is kept.",
+    "'Wake them a few times' is common lay advice, not WHO wording. NICE no longer requires routine waking. Check whether to keep it.",
+    "Red flags follow NICE CG176 and IFRC (loss of consciousness, vomiting more than once, drowsiness, fit, worsening headache, fluid from nose or ears, weakness or speech change).",
+    "Hospital tip says 'send to a bigger hospital for a scan': CT may only be in Mazar-i-Sharif or Kabul. Check."
+  ]
+}

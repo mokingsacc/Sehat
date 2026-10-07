@@ -90,3 +90,27 @@ CREATE TRIGGER IF NOT EXISTS surv_corrections_no_update BEFORE UPDATE ON surv_co
 CREATE TRIGGER IF NOT EXISTS surv_corrections_no_delete BEFORE DELETE ON surv_corrections BEGIN SELECT RAISE(ABORT, 'surv_corrections is append-only'); END;
 CREATE TRIGGER IF NOT EXISTS surv_exports_no_update BEFORE UPDATE ON surv_exports BEGIN SELECT RAISE(ABORT, 'surv_exports is append-only'); END;
 CREATE TRIGGER IF NOT EXISTS surv_exports_no_delete BEFORE DELETE ON surv_exports BEGIN SELECT RAISE(ABORT, 'surv_exports is append-only'); END;
+-- ===== Usage counts v2 (server/usage.js). No install id: each phone adds up its own day and sends the totals once. =====
+-- One row per day x district x language x phone type x app version x consent wording x page. "devices" = phone-days
+-- (each phone sends a day once, so this counts phones on that day); "standalone" = of those, opened from the home screen.
+-- page: 'topic/<id>', 'home', 'ask', 'tool/...', 'act/<action>' (share, add child...), or '_day' = the whole app that day.
+CREATE TABLE IF NOT EXISTS usage_daily (
+  day TEXT NOT NULL, district TEXT NOT NULL, lang TEXT NOT NULL, platform TEXT NOT NULL, version TEXT NOT NULL,
+  cv TEXT NOT NULL,              -- version of the consent wording the phone agreed to ('legacy' = folded from an old app's /e)
+  page TEXT NOT NULL,
+  seconds INTEGER NOT NULL DEFAULT 0, opens INTEGER NOT NULL DEFAULT 0, plays INTEGER NOT NULL DEFAULT 0,
+  search_opens INTEGER NOT NULL DEFAULT 0, -- opened from the symptom search (the typed words are never sent)
+  devices INTEGER NOT NULL DEFAULT 0, standalone INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, district, lang, platform, version, cv, page)
+);
+CREATE INDEX IF NOT EXISTS usage_day_page ON usage_daily(page, day);
+-- Installs: one message on first use, with no id.
+CREATE TABLE IF NOT EXISTS installs_daily (
+  day TEXT NOT NULL, lang TEXT NOT NULL, platform TEXT NOT NULL, version TEXT NOT NULL,
+  n INTEGER NOT NULL DEFAULT 0, standalone INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, lang, platform, version)
+);
+-- Random ids of single uploads, so a day sent twice (lost answer) counts once. Not stored with the counts; deleted after 7 days.
+CREATE TABLE IF NOT EXISTS usage_seen (nonce TEXT PRIMARY KEY, ts INTEGER NOT NULL);
+-- Flood protection: posts per minute to /u, /i and /e (old minutes deleted by the daily cron).
+CREATE TABLE IF NOT EXISTS usage_rate (bucket INTEGER PRIMARY KEY, n INTEGER NOT NULL);

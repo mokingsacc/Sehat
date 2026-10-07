@@ -1,0 +1,228 @@
+{
+  "id": "cold-hypothermia",
+  "section": "everyone",
+  "title": {
+    "fa": "سرمازدگی",
+    "ps": "د یخنۍ وهل",
+    "en": "Too cold (hypothermia)"
+  },
+  "summary": {
+    "fa": "در سرما لرزه، کندی و گیجی: آهسته گرمش کنید.",
+    "ps": "په یخنۍ کې لړزه، سستي او ګډوډي: ورو یې ګرم کړئ.",
+    "en": "Shivering, slow or confused in the cold: warm them gently."
+  },
+  "image": "cold-hypothermia",
+  "blocks": [
+    {
+      "id": "cold-hypothermia.lead",
+      "type": "lead",
+      "text": {
+        "fa": "شیرخوار، اشخاص پیر و هر کسی که تر شده یا در برف مانده، ممکن است خطرناک سرد شوند. شخص بسیار سرد شاید دیگر نلرزد و خواب‌آلود و گیج شود.",
+        "ps": "تي خوړونکي ماشومان، زاړه خلک او هر هغه څوک چې لوند شي یا په واوره کې پاتې شي، کېدای شي په خطرناک ډول یخ شي. ډېر یخ کس کېدای شي نور ونه رپېږي او خوب وړی او ګډوډ شي.",
+        "en": "Babies, old people, and anyone wet or caught in snow can get dangerously cold. A very cold person may stop shivering and become sleepy and confused."
+      }
+    },
+    {
+      "id": "cold-hypothermia.shelter",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "از سرما بیرون کنید",
+        "ps": "له یخنۍ یې وباسئ",
+        "en": "Get them out of the cold"
+      },
+      "text": {
+        "fa": "او را به یک اتاق گرم، دور از باد بیاورید. آهسته با او رفتار کنید و خوابیده نگه دارید.",
+        "ps": "یوې ګرمې کوټې ته یې راولئ، له باد لرې. ورو ورسره چلند وکړئ او غځېدلی یې وساتئ.",
+        "en": "Bring them into a warm room, out of the wind. Handle them gently and keep them lying down."
+      }
+    },
+    {
+      "id": "cold-hypothermia.dry",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "لباس تر را بکشید",
+        "ps": "لندې جامې وباسئ",
+        "en": "Take off wet clothes"
+      },
+      "text": {
+        "fa": "لباس تر را بکشید و پوست را خشک کنید. او را در کمپل خشک بپیچانید و سرش را با کلاه یا شال بپوشانید.",
+        "ps": "لندې جامې یې وباسئ او پوستکی یې وچ کړئ. په وچو کمپلو کې یې ونغاړئ او سر یې په خولۍ یا شال پټ کړئ.",
+        "en": "Take off wet clothes and dry the skin. Wrap them in dry blankets, with a hat or scarf on the head."
+      }
+    },
+    {
+      "id": "cold-hypothermia.baby",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیرخوار سرد: پوست به پوست",
+        "ps": "یخ ماشوم: پوستکی په پوستکي",
+        "en": "A cold baby: skin to skin"
+      },
+      "text": {
+        "fa": "شیرخوار سرد را پوست به پوست روی سینهٔ مادر بگیرید، با کمپل بپوشانید و شیر بدهید.",
+        "ps": "یخ ماشوم پوستکی په پوستکي د مور پر سینه ونیسئ، په کمپلو یې وپوښئ او تی ورکړئ.",
+        "en": "Hold a cold baby skin to skin on the mother's chest, cover them both with blankets, and breastfeed."
+      }
+    },
+    {
+      "id": "cold-hypothermia.drink",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "اگر بیدار است، چای گرم و شیرین",
+        "ps": "که ویښ وي، ګرمه خوږه چای",
+        "en": "Warm sweet drinks if awake"
+      },
+      "text": {
+        "fa": "اگر کاملاً بیدار است و قورت داده می‌تواند، چای یا نوشیدنی گرم و شیرین بدهید. تنهٔ بدن را گرم کنید، نه فقط دست و پا را.",
+        "ps": "که بشپړ ویښ وي او تېرولی شي، ګرمه او خوږه چای یا څښاک ورکړئ. د بدن تنه ګرمه کړئ، نه یوازې لاسونه او پښې.",
+        "en": "If fully awake and able to swallow, give warm, sweet tea or drinks. Warm the body, not just the hands and feet."
+      }
+    },
+    {
+      "id": "cold-hypothermia.frostbite",
+      "type": "step",
+      "icon": "foot",
+      "title": {
+        "fa": "انگشت‌های یخ‌زده",
+        "ps": "یخ وهلې ګوتې",
+        "en": "Frozen fingers and toes"
+      },
+      "text": {
+        "fa": "انگشتان سفید، سخت و بی‌حس را ۳۰ دقیقه در آب گرم، نه داغ، گرم کنید. آن‌ها را مالش ندهید.",
+        "ps": "سپینې، کلکې او بې‌حسه ګوتې ۳۰ دقیقې په تودو، نه ډېرو ګرمو، اوبو کې ګرمې کړئ. مه یې مښئ.",
+        "en": "Warm white, hard, numb fingers or toes in warm, not hot, water for 30 minutes. Do not rub them."
+      }
+    },
+    {
+      "id": "cold-hypothermia.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شخص سرد این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که یخ کس دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if a cold person:"
+      },
+      "items": [
+        {
+          "id": "cold-hypothermia.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خواب‌آلود یا گیج است، یا گپ زدنش نامفهوم است",
+            "ps": "خوب وړی یا ګډوډ دی، یا خبرې یې ګډې وډې دي",
+            "en": "is sleepy or confused, or slurs their words"
+          }
+        },
+        {
+          "id": "cold-hypothermia.urgent.not-shivering",
+          "icon": "thermometer",
+          "text": {
+            "fa": "دیگر نمی‌لرزد اما هنوز سرد است",
+            "ps": "نور نه رپېږي خو لا هم یخ دی",
+            "en": "has stopped shivering but is still cold"
+          }
+        },
+        {
+          "id": "cold-hypothermia.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "شیرخواری است که سرد، سست است یا شیر نمی‌خورد",
+            "ps": "تي خوړونکی ماشوم دی چې یخ، سست دی یا تی نه روي",
+            "en": "is a baby who is cold, floppy or not feeding"
+          }
+        },
+        {
+          "id": "cold-hypothermia.urgent.fingers",
+          "icon": "foot",
+          "text": {
+            "fa": "انگشتانش سفید، خاکستری یا سیاه می‌مانند",
+            "ps": "ګوتې یې سپینې، خړې یا تورې پاتې کېږي",
+            "en": "has fingers or toes that stay white, grey or black"
+          }
+        },
+        {
+          "id": "cold-hypothermia.urgent.breathing",
+          "icon": "breathe",
+          "text": {
+            "fa": "آهسته نفس می‌کشد یا بی‌هوش است",
+            "ps": "ورو ساه اخلي یا بې‌هوښه دی",
+            "en": "breathes slowly or is unconscious"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cold-hypothermia.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "cold-hypothermia.dont.fire",
+          "icon": "no",
+          "text": {
+            "fa": "او را برای زود گرم شدن به آتش، بخاری یا صندلی نچسپانید",
+            "ps": "د ژر ګرمېدو لپاره یې اور، بخارۍ یا صندلۍ ته مه نښلوئ",
+            "en": "put them right next to a fire, stove or sandali to warm fast"
+          }
+        },
+        {
+          "id": "cold-hypothermia.dont.rub",
+          "icon": "no",
+          "text": {
+            "fa": "پوست یخ‌زده را مالش ندهید و برف رویش نمالید",
+            "ps": "یخ وهلی پوستکی مه مښئ او واوره پرې مه موښئ",
+            "en": "rub frozen skin, or rub snow on it"
+          }
+        },
+        {
+          "id": "cold-hypothermia.dont.bottle",
+          "icon": "no",
+          "text": {
+            "fa": "بوتل آب داغ را مستقیم روی پوست نگذارید",
+            "ps": "د ګرمو اوبو بوتل مستقیم پر پوستکي مه ږدئ",
+            "en": "put a hot-water bottle straight onto the skin"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cold-hypothermia.not-dead",
+      "type": "tip",
+      "icon": "heart",
+      "text": {
+        "fa": "شخص بسیار سرد که مرده معلوم می‌شود، شاید هنوز نجات یابد. اگر نفس نمی‌کشد، فشار سینه را شروع کنید و در راه شفاخانه ادامه دهید.",
+        "ps": "ډېر یخ کس چې مړ ښکاري، کېدای شي لا هم وژغورل شي. که ساه نه اخلي، د سینې فشار پیل کړئ او د روغتون په لاره کې دوام ورکړئ.",
+        "en": "A very cold person who seems dead may still be saved. If not breathing, start chest pushes and keep going on the way to hospital."
+      }
+    },
+    {
+      "id": "cold-hypothermia.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه بدن را بی‌خطر از داخل گرم می‌کنند و پوست یخ‌زده را تداوی می‌کنند.",
+        "ps": "په روغتون کې بدن له دننه په خوندي ډول ګرموي او د یخ وهلي پوستکي درملنه کوي.",
+        "en": "At hospital they warm the body safely from the inside and treat frozen skin."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: hypothermia and frostbite",
+    "European Resuscitation Council Guidelines 2025: Special circumstances, accidental hypothermia",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): hypothermia, frostbite",
+    "WHO Thermal protection of the newborn: a practical guide (1997) and WHO Kangaroo mother care (2003)"
+  ],
+  "review": [
+    "Frostbite rewarming in warm water for about 30 minutes follows ERC/ILCOR (only if there is no risk of it freezing again). The 37 to 39 C temperature is given as 'warm, not hot'.",
+    "'Warm sweet drinks if fully awake' (IFRC). No alcohol is mentioned because it is not culturally relevant.",
+    "'Seems dead may still be saved' is the ERC hypothermia message. Families are told to keep CPR going on the way to hospital.",
+    "Overlaps winter-home (CO) and newborn (keep warm), but the focus here is accidental cold."
+  ]
+}

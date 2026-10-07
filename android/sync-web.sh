@@ -15,8 +15,9 @@ rm -rf "$OUT"
 mkdir -p "$OUT/content"
 cp "$WEB/index.html" "$WEB/manifest.webmanifest" "$WEB/sw.js" "$OUT/"
 cp "$WEB/content/book.json" "$WEB/content/version.json" "$OUT/content/"
-for d in css js fonts img; do cp -R "$WEB/$d" "$OUT/$d"; done
-rm -rf "$OUT/img/_preview" "$OUT/js/sw.template.js"
+for d in css js fonts img anim; do if [ -d "$WEB/$d" ]; then cp -R "$WEB/$d" "$OUT/$d"; fi; done
+rm -rf "$OUT/img/_preview" "$OUT/js/sw.template.js" "$OUT/anim/demo.html"
+find "$OUT" -name '*.cjs' -delete   # local screenshot helpers (anim/cine/shots.cjs), not part of the app
 if [ -d "$WEB/audio" ] && [ -n "$(find "$WEB/audio" -type f ! -name '.*' -print -quit)" ]; then
   cp -R "$WEB/audio" "$OUT/audio"
 fi

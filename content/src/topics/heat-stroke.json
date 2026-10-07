@@ -1,0 +1,228 @@
+{
+  "id": "heat-stroke",
+  "section": "everyone",
+  "title": {
+    "fa": "گرمازدگی",
+    "ps": "د ګرمۍ وهل",
+    "en": "Heat stroke"
+  },
+  "summary": {
+    "fa": "در گرما داغ، گیج یا افتاده: او را زود سرد کنید.",
+    "ps": "په ګرمۍ کې تود، ګډوډ یا لوېدلی: ژر یې سوړ کړئ.",
+    "en": "Hot, confused or collapsed in the heat: cool them fast."
+  },
+  "image": "heat-stroke",
+  "blocks": [
+    {
+      "id": "heat-stroke.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کار در زمین در گرمی تابستان، یا ماندن طفل در موتر یا اتاق داغ، می‌تواند سبب گرمازدگی شود. بدن بیش از حد داغ می‌شود و ممکن است کشنده باشد.",
+        "ps": "د اوړي په ګرمۍ کې په پټي کې کار، یا په ګرم موټر یا کوټه کې د ماشوم پاتې کېدل، کولی شي د ګرمۍ وهلو لامل شي. بدن ډېر ګرم کېږي او کېدای شي ووژني.",
+        "en": "Field work in summer heat, or a child left in a hot car or room, can cause heat stroke. The body gets too hot, and this can kill."
+      }
+    },
+    {
+      "id": "heat-stroke.signs",
+      "type": "step",
+      "icon": "fever",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "پوست بسیار داغ، سردرد، گیجی، رفتار عجیب، بی‌هوش شدن یا تشنج در گرما، علامت گرمازدگی است.",
+        "ps": "ډېر تود پوستکی، سر درد، ګډوډي، عجیب چلند، بې‌هوښه کېدل یا اختلاج په ګرمۍ کې، د ګرمۍ وهلو نښې دي.",
+        "en": "Very hot skin, headache, confusion, strange behaviour, fainting or a fit in the heat are signs of heat stroke."
+      }
+    },
+    {
+      "id": "heat-stroke.shade",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "به سایه ببرید",
+        "ps": "سیوري ته یې یوسئ",
+        "en": "Move them into shade"
+      },
+      "text": {
+        "fa": "او را به یک جای سرد و سایه ببرید. لباس اضافی را بکشید.",
+        "ps": "یو سوړ او سیوري ځای ته یې یوسئ. اضافي جامې یې وباسئ.",
+        "en": "Move them to a cool, shady place. Take off extra clothes."
+      }
+    },
+    {
+      "id": "heat-stroke.cool",
+      "type": "step",
+      "icon": "cool-water",
+      "title": {
+        "fa": "تمام بدن را زود سرد کنید",
+        "ps": "ټول بدن ژر سوړ کړئ",
+        "en": "Cool the whole body fast"
+      },
+      "text": {
+        "fa": "آب سرد را روی تمام بدنش بریزید و باد بزنید. یا او را تا گردن در تشت آب سرد بخوابانید و سرش را بالا نگه دارید.",
+        "ps": "سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. یا یې تر غاړې پورې د سړو اوبو په لوښي کې وغځوئ او سر یې پورته ونیسئ.",
+        "en": "Pour cool water all over the body and fan them. Or lay them in a tub of cool water up to the neck, holding the head up."
+      },
+      "picture": "em-heat-cooling"
+    },
+    {
+      "id": "heat-stroke.drink",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "اگر بیدار است، آب جرعه‌جرعه",
+        "ps": "که ویښ وي، اوبه غوړپ غوړپ",
+        "en": "Sips of water if awake"
+      },
+      "text": {
+        "fa": "اگر کاملاً بیدار است و قورت داده می‌تواند، جرعه‌جرعه آب سرد یا او آر اس بدهید. اگر خواب‌آلود است، چیزی به دهانش ندهید.",
+        "ps": "که بشپړ ویښ وي او تېرولی شي، غوړپ غوړپ سړې اوبه یا او آر اس ورکړئ. که خوب وړی وي، هېڅ شی یې په خوله کې مه اچوئ.",
+        "en": "If fully awake and able to swallow, give sips of cool water or ORS. If drowsy, give nothing by mouth."
+      }
+    },
+    {
+      "id": "heat-stroke.go",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "در راه هم سرد کنید",
+        "ps": "په لاره کې هم یې سوړ کړئ",
+        "en": "Keep cooling on the way"
+      },
+      "text": {
+        "fa": "همین حالا به شفاخانه بروید، شب باشد یا روز. در موتر هم آب بریزید و باد بزنید.",
+        "ps": "همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په موټر کې هم اوبه پرې واچوئ او باد ورکړئ.",
+        "en": "Go to hospital now, day or night. Keep pouring water and fanning in the car."
+      }
+    },
+    {
+      "id": "heat-stroke.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر در گرما این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که په ګرمۍ کې دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if in the heat someone:"
+      },
+      "items": [
+        {
+          "id": "heat-stroke.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیج است یا عجیب رفتار می‌کند",
+            "ps": "ګډوډ دی یا عجیب چلند کوي",
+            "en": "is confused or acts strangely"
+          }
+        },
+        {
+          "id": "heat-stroke.urgent.faint",
+          "icon": "convulsion",
+          "text": {
+            "fa": "بی‌هوش می‌شود یا تشنج می‌کند",
+            "ps": "بې‌هوښه کېږي یا اختلاج کوي",
+            "en": "faints or has a fit"
+          }
+        },
+        {
+          "id": "heat-stroke.urgent.hot",
+          "icon": "fever",
+          "text": {
+            "fa": "پوستش بسیار داغ است و حالش بد است",
+            "ps": "پوستکی یې ډېر تود دی او حال یې خراب دی",
+            "en": "has very hot skin and feels very unwell"
+          }
+        },
+        {
+          "id": "heat-stroke.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "شیرخوار یا شخص پیر است و داغ، سست یا خواب‌آلود است",
+            "ps": "تي خوړونکی ماشوم یا زوړ کس دی او تود، سست یا خوب وړی دی",
+            "en": "is a baby or an old person who is hot, floppy or drowsy"
+          }
+        },
+        {
+          "id": "heat-stroke.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "استفراغ می‌کند و نوشیده نمی‌تواند",
+            "ps": "کانګې کوي او څښلی نشي",
+            "en": "vomits and cannot drink"
+          }
+        }
+      ]
+    },
+    {
+      "id": "heat-stroke.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "heat-stroke.dont.car",
+          "icon": "no",
+          "text": {
+            "fa": "در گرما طفل را در موتر ایستاده یا اتاق بسته تنها نگذارید",
+            "ps": "په ګرمۍ کې ماشوم په ولاړ موټر یا تړلې کوټه کې یوازې مه پرېږدئ",
+            "en": "leave a child alone in a parked car or closed room in the heat"
+          }
+        },
+        {
+          "id": "heat-stroke.dont.wrap",
+          "icon": "no",
+          "text": {
+            "fa": "طفل داغ را در کمپل نپیچانید",
+            "ps": "تود ماشوم په کمپلو کې مه نغاړئ",
+            "en": "wrap a hot child in blankets"
+          }
+        },
+        {
+          "id": "heat-stroke.dont.drowsy",
+          "icon": "no",
+          "text": {
+            "fa": "به شخص خواب‌آلود نوشیدنی ندهید",
+            "ps": "خوب وړي کس ته څښاک مه ورکوئ",
+            "en": "give drinks to someone who is drowsy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "heat-stroke.exhaustion",
+      "type": "tip",
+      "icon": "water",
+      "text": {
+        "fa": "خستگی، تشنگی، عرق و سردرد در گرما: در سایه استراحت کنید و آب یا او آر اس بنوشید. اگر در ۱ ساعت بهتر نشد، به کلینیک بروید.",
+        "ps": "په ګرمۍ کې ستړیا، تنده، خولې او سر درد: په سیوري کې آرام وکړئ او اوبه یا او آر اس وڅښئ. که په ۱ ساعت کې ښه نه شو، کلینیک ته ولاړ شئ.",
+        "en": "Tired, thirsty, sweaty, headache in the heat: rest in shade and drink water or ORS. If not better in 1 hour, go to the clinic."
+      }
+    },
+    {
+      "id": "heat-stroke.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه بدن را زود سرد می‌کنند و از راه رگ سیروم می‌دهند.",
+        "ps": "په روغتون کې بدن ژر سوړوي او د رګ له لارې سیروم ورکوي.",
+        "en": "At hospital they cool the body fast and give fluids into a vein."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: heat stroke (whole-body cold-water immersion where possible)",
+    "ILCOR 2025 Consensus on Science: cooling for exertional heat stroke",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): heat-related illness",
+    "WHO Heat and health fact sheet (2024) and WHO/WMO Heatwaves and health: guidance on warning-system development (2015)"
+  ],
+  "review": [
+    "Cold-water immersion up to the neck is the ILCOR/ERC first choice for heat stroke in adults. With an unconscious person or a child, someone must hold the head above water. Check this is safe to teach.",
+    "Heat exhaustion: 'not better in 1 hour, go to the clinic' is a judgement call (UK NHS uses 30 minutes for adults).",
+    "No temperature numbers, as families have no thermometer."
+  ]
+}

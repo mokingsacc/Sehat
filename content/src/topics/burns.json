@@ -1,0 +1,289 @@
+{
+  "id": "burns",
+  "section": "everyone",
+  "title": {
+    "fa": "سوختگی با آتش و آب داغ",
+    "ps": "د اور او ګرمو اوبو سوځېدنه",
+    "en": "Burns and scalds"
+  },
+  "summary": {
+    "fa": "۲۰ دقیقه با آب روان سرد کنید، سست بپوشانید، طفل را گرم نگه دارید.",
+    "ps": "۲۰ دقیقې په بهېدونکو اوبو یې سړه کړئ، سست یې وپوښئ، ماشوم ګرم وساتئ.",
+    "en": "Cool with running water for 20 minutes, cover loosely, keep warm."
+  },
+  "image": "burns",
+  "blocks": [
+    {
+      "id": "burns.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اطفال با تنور، چای داغ، دیگ و صندلی می‌سوزند. سرد کردن فوری سوختگی با آب، آسیب را کم می‌کند.",
+        "ps": "ماشومان په تنور، ګرمه چای، کټوګانو او صندلۍ سوځي. په اوبو د سوځېدنې سمدستي سړول زیان کموي.",
+        "en": "Children are burned by the tandoor, hot tea, cooking pots and the sandali. Cooling the burn with water at once lessens the harm."
+      }
+    },
+    {
+      "id": "burns.stop",
+      "type": "step",
+      "icon": "burn",
+      "title": {
+        "fa": "سوختن را بند کنید",
+        "ps": "سوځېدل ودروئ",
+        "en": "Stop the burning"
+      },
+      "text": {
+        "fa": "اگر لباس آتش گرفته: بایستید، به زمین بیفتید و غلت بزنید، یا با کمپل ضخیم بپوشانید. شخص را از گرمی دور کنید.",
+        "ps": "که جامې اور اخیستي وي: ودرېږئ، پر ځمکه ولوېږئ او ورغړېږئ، یا په پنډه کمپله یې ونغاړئ. کس له تودوخې لرې کړئ.",
+        "en": "If clothes are on fire: stop, drop to the ground and roll, or wrap in a thick blanket. Move the person away from the heat."
+      }
+    },
+    {
+      "id": "burns.cool",
+      "type": "step",
+      "icon": "cool-water",
+      "title": {
+        "fa": "با آب روان سرد کنید",
+        "ps": "په بهېدونکو اوبو یې سړه کړئ",
+        "en": "Cool with running water"
+      },
+      "text": {
+        "fa": "۲۰ دقیقه آب سرد، پاک و روان روی سوختگی بریزید. هرچه زودتر شروع کنید؛ تا ۳ ساعت بعد هم فایده دارد.",
+        "ps": "۲۰ دقیقې سړې، پاکې او بهېدونکې اوبه پر سوځېدلي ځای واچوئ. څومره ژر چې کېږي پیل یې کړئ؛ تر ۳ ساعتونو وروسته هم ګټه لري.",
+        "en": "Pour cool, clean running water over the burn for 20 minutes. Start as soon as you can; it still helps up to 3 hours later."
+      },
+      "picture": "em-burns-cool"
+    },
+    {
+      "id": "burns.rings",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "انگشتر و لباس را بکشید",
+        "ps": "ګوتمۍ او جامې لرې کړئ",
+        "en": "Take off rings and clothes"
+      },
+      "text": {
+        "fa": "وقت سرد کردن، انگشتر، چوری و لباس نزدیک سوختگی را بکشید. چیزی را که به پوست چسپیده، نکشید.",
+        "ps": "د سړولو پر مهال، ګوتمۍ، بنګړي او د سوځېدلي ځای نږدې جامې لرې کړئ. هغه څه چې له پوستکي سره نښتي، مه یې باسئ.",
+        "en": "While cooling, take off rings, bangles and clothes near the burn. Leave anything that is stuck to the skin."
+      }
+    },
+    {
+      "id": "burns.cover",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "سست بپوشانید",
+        "ps": "سست یې وپوښئ",
+        "en": "Cover loosely"
+      },
+      "text": {
+        "fa": "سوختگی را با پلاستیک پاک یا یک تکهٔ پاک و خشک سست بپوشانید. آبله‌ها را نترکانید.",
+        "ps": "سوځېدلی ځای په پاک پلاستیک یا پاک او وچ ټوکر سست وپوښئ. اوبلنې دانې مه چوي کوئ.",
+        "en": "Cover the burn loosely with clean plastic food wrap or a clean, dry cloth. Do not burst blisters."
+      }
+    },
+    {
+      "id": "burns.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "اطفال را گرم نگه دارید",
+        "ps": "ماشومان ګرم وساتئ",
+        "en": "Keep babies and children warm"
+      },
+      "text": {
+        "fa": "فقط جای سوختگی را سرد کنید و باقی بدن طفل را پیچانده و گرم نگه دارید. اگر طفل لرزید، سرد کردن را بس کنید.",
+        "ps": "یوازې سوځېدلی ځای سوړ کړئ او د ماشوم پاتې بدن نغښتی او ګرم وساتئ. که ماشوم ورپېد، سړول ودروئ.",
+        "en": "Cool only the burn, and keep the rest of the child wrapped and warm. Stop cooling if the child shivers."
+      }
+    },
+    {
+      "id": "burns.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, for:"
+      },
+      "items": [
+        {
+          "id": "burns.urgent.big",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی بزرگ‌تر از کف دست همان شخص",
+            "ps": "له هغه کس له ورغوي لویه سوځېدنه",
+            "en": "a burn bigger than the person's palm"
+          }
+        },
+        {
+          "id": "burns.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "هر سوختگی در شیرخوار",
+            "ps": "په تي خوړونکي ماشوم کې هره سوځېدنه",
+            "en": "any burn on a baby"
+          }
+        },
+        {
+          "id": "burns.urgent.place",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی روی صورت، دست، پا، اعضای تناسلی یا بندها",
+            "ps": "په مخ، لاسونو، پښو، تناسلي غړو یا بندونو سوځېدنه",
+            "en": "a burn on the face, hands, feet, genitals or joints"
+          }
+        },
+        {
+          "id": "burns.urgent.deep",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی عمیق: پوست سفید، قهوه‌ای یا سیاه، یا بی‌درد",
+            "ps": "ژوره سوځېدنه: سپین، نسواري یا تور پوستکی، یا بې‌درده",
+            "en": "a deep burn: white, brown or black skin, or no pain"
+          }
+        },
+        {
+          "id": "burns.urgent.smoke",
+          "icon": "smoke",
+          "text": {
+            "fa": "دود را نفس کشیده، صدایش گرفته یا دهانش سوخته",
+            "ps": "لوګی یې تنفس کړی، غږ یې ناست دی یا خوله یې سوځېدلې",
+            "en": "breathed smoke, has a hoarse voice, or burns in the mouth"
+          }
+        },
+        {
+          "id": "burns.urgent.electric",
+          "icon": "warning",
+          "text": {
+            "fa": "سوختگی با برق یا مواد کیمیاوی",
+            "ps": "د برېښنا یا کیمیاوي موادو سوځېدنه",
+            "en": "an electrical or chemical burn"
+          }
+        }
+      ]
+    },
+    {
+      "id": "burns.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این حالت را دارد، امروز به کلینیک بروید:",
+        "ps": "که دا حالت ولري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "burns.soon.blisters",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی آبله دارد",
+            "ps": "سوځېدنه اوبلنې دانې لري",
+            "en": "the burn has blisters"
+          }
+        },
+        {
+          "id": "burns.soon.infected",
+          "icon": "wound",
+          "text": {
+            "fa": "سوختگی سرخ، پندیده، بدبو یا چرک‌دار شود",
+            "ps": "سوځېدنه سره، پړسېدلې، بدبويه یا زوه لرونکې شي",
+            "en": "the burn gets red, swollen, smelly or has pus"
+          }
+        },
+        {
+          "id": "burns.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "بعد از سوختگی تب کند",
+            "ps": "له سوځېدنې وروسته تبه وکړي",
+            "en": "there is fever after a burn"
+          }
+        }
+      ]
+    },
+    {
+      "id": "burns.dont",
+      "type": "dont",
+      "title": {
+        "fa": "روی سوختگی هرگز این چیزها را نگذارید:",
+        "ps": "په سوځېدلي ځای هېڅکله دا شیان مه لګوئ:",
+        "en": "On a burn, never put:"
+      },
+      "items": [
+        {
+          "id": "burns.dont.toothpaste",
+          "icon": "no",
+          "text": {
+            "fa": "خمیر دندان، روغن، مسکه یا روغن زرد نمالید",
+            "ps": "د غاښونو کریم، تېل، کوچ یا غوړي مه لګوئ",
+            "en": "toothpaste, oil, butter or ghee"
+          }
+        },
+        {
+          "id": "burns.dont.egg",
+          "icon": "no",
+          "text": {
+            "fa": "تخم مرغ، آرد، گل یا سرگین نگذارید",
+            "ps": "هګۍ، اوړه، خټې یا ډیران مه لګوئ",
+            "en": "egg, flour, mud or dung"
+          }
+        },
+        {
+          "id": "burns.dont.ice",
+          "icon": "no",
+          "text": {
+            "fa": "یخ یا آب یخ نگذارید",
+            "ps": "یخ یا یخې اوبه مه لګوئ",
+            "en": "ice or ice-cold water"
+          }
+        },
+        {
+          "id": "burns.dont.cotton",
+          "icon": "no",
+          "text": {
+            "fa": "پنبه یا تکهٔ پشمی که می‌چسپد نگذارید",
+            "ps": "مالوچ یا وړین ټوکر چې نښلي مه ږدئ",
+            "en": "cotton wool or fluffy cloth that sticks"
+          }
+        }
+      ]
+    },
+    {
+      "id": "burns.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه سوختگی را پاک و پانسمان می‌کنند، سیروم و دوای درد می‌دهند و جلو مکروب را می‌گیرند.",
+        "ps": "په روغتون کې سوځېدنه پاکوي او پټۍ کوي، سیروم او د درد درمل ورکوي او د انتان مخه نیسي.",
+        "en": "At hospital they clean and dress the burn, give fluids and pain medicine, and prevent infection."
+      }
+    },
+    {
+      "id": "burns.prevent",
+      "type": "tip",
+      "icon": "stove",
+      "text": {
+        "fa": "اطفال را از تنور دور نگه دارید و چای و دیگ داغ را بلند و دور از دست‌شان بگذارید.",
+        "ps": "ماشومان له تنوره لرې وساتئ او ګرمه چای او کټوګان لوړ او د هغوی له لاسه لرې کېږدئ.",
+        "en": "Keep children away from the tandoor, and put hot tea and pots up high, out of their reach."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: thermal burns (cool with running water)",
+    "ILCOR Consensus on Science (2021 and 2025): cooling of thermal burns",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): burns",
+    "WHO fact sheet: Burns (2023)",
+    "WHO/UNICEF World report on child injury prevention (2008): burns"
+  ],
+  "review": [
+    "Replaces the short first-aid.burn step and first-aid.dont (see EMERGENCIES.md).",
+    "Cooling for 20 minutes matches first-aid.burn. IFRC says at least 10 minutes; ERC/ILCOR give no fixed time. 'Up to 3 hours later' is from Australian/UK burns teaching (cooling helps up to 3 hours), not a WHO text.",
+    "Size rule: 'bigger than the person's palm' (about 1% of the body). first-aid.urgent.big-burn says 'hand' and child-safety says 'palm'. Pick one wording for the whole book.",
+    "'Any burn on a baby' is urgent, as in first-aid.urgent.big-burn.",
+    "Cling film is used in UK first aid. 'Clean plastic' may not be available; 'clean, dry cloth' is the fallback.",
+    "Pashto 'اوبلنې دانې' for blisters and Dari 'آبله': check."
+  ]
+}

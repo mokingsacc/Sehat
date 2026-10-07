@@ -1,0 +1,210 @@
+{
+  "id": "eye-chemical",
+  "section": "everyone",
+  "title": {
+    "fa": "مواد کیمیاوی در چشم",
+    "ps": "کیمیاوي مواد په سترګه کې",
+    "en": "Chemical in the eye"
+  },
+  "summary": {
+    "fa": "چشم را ۲۰ دقیقه با آب پاک زیاد بشویید، بعد به شفاخانه بروید.",
+    "ps": "سترګه ۲۰ دقیقې په ډېرو پاکو اوبو ومینځئ، بیا روغتون ته ولاړ شئ.",
+    "en": "Wash the eye with lots of clean water for 20 minutes."
+  },
+  "image": "eye-chemical",
+  "blocks": [
+    {
+      "id": "eye-chemical.lead",
+      "type": "lead",
+      "text": {
+        "fa": "چونه، سمنت، دوای زراعتی، وایتکس و تیزاب بتری می‌توانند در چند ثانیه چشم را بسوزانند. شستن فوری با آب، چشم را نجات می‌دهد.",
+        "ps": "چونه، سمټ، د کرنې درمل، وایټکس او د بېټرۍ تېزاب کولی شي په څو ثانیو کې سترګه وسوځوي. په اوبو سمدستي مینځل سترګه ژغوري.",
+        "en": "Lime, cement, farm sprays, bleach and battery acid can burn the eye in seconds. Washing at once with water saves sight."
+      }
+    },
+    {
+      "id": "eye-chemical.wash",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "فوراً با آب بشویید",
+        "ps": "سمدستي یې په اوبو ومینځئ",
+        "en": "Wash at once with water"
+      },
+      "text": {
+        "fa": "چشم را باز نگه دارید و آب پاک را آهسته از گوشهٔ نزدیک بینی به طرف بیرون بریزید، ۲۰ دقیقه. هر آب پاک را استفاده کنید؛ منتظر نمانید.",
+        "ps": "سترګه خلاصه ونیسئ او پاکې اوبه ورو د پوزې له خوا کونج څخه بهر خوا ته واچوئ، ۲۰ دقیقې. هرې پاکې اوبه وکاروئ؛ انتظار مه باسئ.",
+        "en": "Hold the eye open and pour clean water gently from the inner corner outwards, for 20 minutes. Use any clean water; do not wait."
+      },
+      "picture": "em-eye-wash"
+    },
+    {
+      "id": "eye-chemical.tilt",
+      "type": "step",
+      "icon": "eye",
+      "title": {
+        "fa": "سر را کج کنید",
+        "ps": "سر کوږ کړئ",
+        "en": "Tilt the head"
+      },
+      "text": {
+        "fa": "سر را طوری کج کنید که چشم آسیب‌دیده پایین‌تر باشد، تا آب به چشم دیگر نرود.",
+        "ps": "سر داسې کوږ کړئ چې ټپي سترګه ټیټه وي، چې اوبه بلې سترګې ته لاړې نه شي.",
+        "en": "Tilt the head so the hurt eye is lower, so the water does not run into the other eye."
+      }
+    },
+    {
+      "id": "eye-chemical.powder",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "پودر چونه: اول پاک کنید",
+        "ps": "د چونې پوډر: لومړی یې پاک کړئ",
+        "en": "Dry lime powder: brush off first"
+      },
+      "text": {
+        "fa": "اگر پودر خشک چونه یا سمنت روی صورت است، اول آن را آهسته از پلک‌ها پاک کنید، بعد با آب زیاد بشویید.",
+        "ps": "که د چونې یا سمټو وچ پوډر پر مخ وي، لومړی یې ورو له پلکونو پاک کړئ، بیا په ډېرو اوبو ومینځئ.",
+        "en": "If dry lime or cement powder is on the face, gently brush it off the eyelids first, then wash with lots of water."
+      }
+    },
+    {
+      "id": "eye-chemical.cover",
+      "type": "step",
+      "icon": "hospital",
+      "title": {
+        "fa": "بپوشانید و به شفاخانه بروید",
+        "ps": "وې پوښئ او روغتون ته ولاړ شئ",
+        "en": "Cover and go to hospital"
+      },
+      "text": {
+        "fa": "بعد از شستن، چشم را با تکهٔ پاک آهسته بپوشانید و همین حالا به شفاخانه بروید، شب باشد یا روز. بوتل یا نام آن ماده را با خود ببرید.",
+        "ps": "له مینځلو وروسته، سترګه په پاک ټوکر ورو وپوښئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. د هغو موادو بوتل یا نوم له ځان سره یوسئ.",
+        "en": "After washing, cover the eye lightly with a clean cloth and go to hospital now. Take the bottle or the name of the chemical."
+      }
+    },
+    {
+      "id": "eye-chemical.dust",
+      "type": "step",
+      "icon": "eye",
+      "title": {
+        "fa": "گرد یا ریگ در چشم",
+        "ps": "دوړې یا شګه په سترګه کې",
+        "en": "Dust or grit in the eye"
+      },
+      "text": {
+        "fa": "برای گرد یا ریگ، پلک بزنید و با آب پاک بشویید. مالش ندهید. اگر بعد از شستن هنوز درد دارد، امروز به کلینیک بروید.",
+        "ps": "د دوړو یا شګو لپاره، سترګې رپ کړئ او په پاکو اوبو یې ومینځئ. مه یې مښئ. که له مینځلو وروسته لا هم درد کوي، نن کلینیک ته ولاړ شئ.",
+        "en": "For dust or sand, blink and wash with clean water. Do not rub. If it still hurts after washing, go to the clinic today."
+      }
+    },
+    {
+      "id": "eye-chemical.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "eye-chemical.urgent.chemical",
+          "icon": "eye",
+          "text": {
+            "fa": "مواد کیمیاوی، چونه یا سمنت در چشم رفت",
+            "ps": "کیمیاوي مواد، چونه یا سمټ سترګې ته ولاړل",
+            "en": "a chemical, lime or cement got into the eye"
+          }
+        },
+        {
+          "id": "eye-chemical.urgent.injury",
+          "icon": "wound",
+          "text": {
+            "fa": "به چشم ضربه خورد، زخمی شد یا چیزی در آن فرو رفت",
+            "ps": "سترګه ټکر شوه، ټپي شوه یا څه شی پکې ننوت",
+            "en": "the eye was hit or cut, or something is stuck in it"
+          }
+        },
+        {
+          "id": "eye-chemical.urgent.sight",
+          "icon": "eye-blurred",
+          "text": {
+            "fa": "دید تار شده یا از بین رفته",
+            "ps": "لید تت شوی یا له منځه تللی",
+            "en": "sight is blurred or lost"
+          }
+        },
+        {
+          "id": "eye-chemical.urgent.pain",
+          "icon": "eye",
+          "text": {
+            "fa": "درد شدید دارد، یا چشم بسیار سرخ مانده",
+            "ps": "سخت درد لري، یا سترګه ډېره سره پاتې ده",
+            "en": "there is strong pain, or the eye stays very red"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eye-chemical.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "eye-chemical.dont.rub",
+          "icon": "no",
+          "text": {
+            "fa": "چشم را مالش ندهید",
+            "ps": "سترګه مه مښئ",
+            "en": "rub the eye"
+          }
+        },
+        {
+          "id": "eye-chemical.dont.milk",
+          "icon": "no",
+          "text": {
+            "fa": "شیر، چای، سرمه یا گیاه در چشم نریزید",
+            "ps": "شیدې، چای، رانجه یا بوټي په سترګه کې مه اچوئ",
+            "en": "put milk, tea, kohl or herbs in the eye"
+          }
+        },
+        {
+          "id": "eye-chemical.dont.remove",
+          "icon": "no",
+          "text": {
+            "fa": "چیزی را که در چشم فرو رفته بیرون نکشید",
+            "ps": "هغه شی چې په سترګه کې ننوتلی، مه یې باسئ",
+            "en": "pull out something stuck in the eye"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eye-chemical.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه شستن چشم را ادامه می‌دهند، دید را معاینه می‌کنند و برای محافظت چشم قطره می‌دهند.",
+        "ps": "په روغتون کې د سترګې مینځل دوام ورکوي، لید معاینه کوي او د سترګې د ساتنې لپاره څاڅکي ورکوي.",
+        "en": "At hospital they keep washing the eye, check the sight, and give drops to protect it."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: chemical eye injury (irrigate with large volumes of clean water)",
+    "ILCOR Consensus on Science (2020 and 2025): chemical injuries to the eye",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): eye injuries, chemical burns",
+    "WHO Primary eye care training manual (WHO EMRO, 2018): chemical burns and foreign bodies"
+  ],
+  "review": [
+    "Irrigation time 20 minutes (ILCOR: large volumes of water, no fixed time; UK teaching 20 to 30 minutes for alkali).",
+    "Lime/whitewash (چونه) and cement are common alkali causes in Afghan building work. Brushing off dry powder first follows UK/IFRC teaching.",
+    "Kohl/surma (سرمه، رانجه) and milk are named as harmful customs. Check whether other local eye remedies should be named.",
+    "Dari 'وایتکس' and Pashto 'وایټکس' (brand name for bleach) and 'تیزاب بتری': check."
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "id": "kit-glucometer",
+  "section": "everyone",
+  "title": {
+    "fa": "ماشین قند خون",
+    "ps": "د وینې د شکرې ماشین",
+    "en": "Blood sugar meter"
+  },
+  "summary": {
+    "fa": "فقط برای مریض شکر: چطور معاینه کنید و چه کنید.",
+    "ps": "یوازې د شکرې ناروغانو لپاره: څنګه معاینه وکړئ او څه وکړئ.",
+    "en": "Only for people with diabetes: how to test and what to do."
+  },
+  "image": "kit-glucometer",
+  "blocks": [
+    {
+      "id": "kit-glucometer.lead",
+      "type": "lead",
+      "text": {
+        "fa": "ماشین قند فقط برای کسانی است که مرض شکر دارند، مخصوصاً اگر انسولین یا تابلیتی می‌خورند که قند را زیاد پایین می‌آورد. اول از کلینیک بپرسید.",
+        "ps": "د شکرې ماشین یوازې د هغو کسانو لپاره دی چې د شکرې ناروغي لري، په ځانګړي ډول که انسولین یا داسې ګولۍ کاروي چې شکره ډېره ټیټوي. لومړی له کلینیک وپوښتئ.",
+        "en": "A sugar meter is only for people who have diabetes, most of all if they use insulin or tablets that can make sugar too low. Ask the clinic first."
+      }
+    },
+    {
+      "id": "kit-glucometer.buy",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "چه بخرید",
+        "ps": "څه واخلئ",
+        "en": "What to buy"
+      },
+      "text": {
+        "fa": "یک ماشین با نوارها و سوزن‌های خودش، حدود ۱۰۰۰ تا ۲۰۰۰ افغانی. نوارها جدا پول دارد؛ نوعی را بخرید که برای ماشین شما ساخته شده.",
+        "ps": "یو ماشین له خپلو پټیو او ستنو سره، شاوخوا ۱۰۰۰ تر ۲۰۰۰ افغانۍ. پټۍ جلا پیسې لري؛ هغه ډول واخلئ چې ستاسو د ماشین لپاره جوړ شوی.",
+        "en": "A meter with its own strips and needles, about 1,000 to 2,000 afghanis. Strips cost extra; buy the kind made for your meter."
+      }
+    },
+    {
+      "id": "kit-glucometer.wash",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست‌ها را بشویید و خشک کنید",
+        "ps": "لاسونه ومینځئ او وچ یې کړئ",
+        "en": "Wash and dry your hands"
+      },
+      "text": {
+        "fa": "با صابون و آب گرم بشویید و خوب خشک کنید. شکر یا غذا روی انگشت، عدد غلط و بلند نشان می‌دهد.",
+        "ps": "په صابون او تودو اوبو یې ومینځئ او ښه یې وچ کړئ. پر ګوته شکره یا خواړه غلطه او لوړه شمېره ښيي.",
+        "en": "Wash with soap and warm water, and dry well. Sugar or food on the finger gives a wrong, high number."
+      }
+    },
+    {
+      "id": "kit-glucometer.prick",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "کنار انگشت را سوزن بزنید",
+        "ps": "د ګوتې څنګ ته ستن ووهئ",
+        "en": "Prick the side of a finger"
+      },
+      "text": {
+        "fa": "نوار را در ماشین بگذارید. کنار سر انگشت را با سوزن نو بزنید و قطرهٔ خون را به نوار بزنید.",
+        "ps": "پټۍ په ماشین کې کېږدئ. د ګوتې د سر څنګ ته په نوې ستن ووهئ، او د وینې څاڅکی پټۍ ته ورسوئ.",
+        "en": "Put a strip in the meter. Prick the side of a fingertip with a new needle, and touch the drop to the strip."
+      }
+    },
+    {
+      "id": "kit-glucometer.write",
+      "type": "step",
+      "icon": "card",
+      "title": {
+        "fa": "یادداشت کنید",
+        "ps": "ولیکئ یې",
+        "en": "Write it down"
+      },
+      "text": {
+        "fa": "عدد، روز، و اینکه پیش یا بعد از غذا بود را بنویسید. در هر مراجعه به کلینیک نشان دهید.",
+        "ps": "شمېره، ورځ، او دا چې له خوړو مخکې وه که وروسته، ولیکئ. په هره کتنه کې یې کلینیک ته وښایئ.",
+        "en": "Write the number, the day, and if it was before or after food. Show it at every clinic visit."
+      }
+    },
+    {
+      "id": "kit-glucometer.numbers",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "عددها چه معنا دارند",
+        "ps": "شمېرې څه مانا لري",
+        "en": "What the numbers mean"
+      },
+      "text": {
+        "fa": "به واحد ملی‌گرام: کمتر از ۷۰ پایین است، همین حالا شکر بدهید. ۸۰ تا ۱۳۰ پیش از صبحانه خوب است. بالای ۲۵۰ خیلی بلند است: امروز کلینیک.",
+        "ps": "په ملي ګرام: له ۷۰ کم ټیټ دی، همدا اوس شکره ورکړئ. له ناشتې مخکې ۸۰ تر ۱۳۰ ښه دی. له ۲۵۰ پورته ډېر لوړ دی: نن کلینیک.",
+        "en": "In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good. Over 250 is very high: clinic today."
+      }
+    },
+    {
+      "id": "kit-glucometer.keep",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "نوارها را بسته و خشک نگه دارید",
+        "ps": "پټۍ تړلې او وچې وساتئ",
+        "en": "Keep strips closed and dry"
+      },
+      "text": {
+        "fa": "قطی نوارها را فوراً ببندید. از گرمی و آفتاب دور نگه دارید. هر سوزن را یک بار استفاده کنید و با دیگران شریک نکنید.",
+        "ps": "د پټیو قطي سمدستي وتړئ. له تودوخې او لمر لرې یې وساتئ. هره ستن یو ځل وکاروئ او له بل چا سره یې مه شریکوئ.",
+        "en": "Close the strip box at once. Keep it away from heat and sun. Use each needle once and never share them."
+      }
+    },
+    {
+      "id": "kit-glucometer.check",
+      "type": "link",
+      "to": "tool/reading/sugar",
+      "icon": "sugar",
+      "title": {
+        "fa": "عدد قند را معاینه کنید",
+        "ps": "د شکرې شمېره وګورئ",
+        "en": "Check a sugar reading"
+      },
+      "text": {
+        "fa": "عدد را وارد کنید و بشنوید چه باید کرد.",
+        "ps": "شمېره ورکړئ، او واورئ چې څه باید وکړئ.",
+        "en": "Put in the number, in mg/dL or mmol/L, and hear what to do."
+      }
+    },
+    {
+      "id": "kit-glucometer.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "kit-glucometer.urgent.low",
+          "icon": "sugar",
+          "text": {
+            "fa": "قند کمتر از ۵۴ است، یا بعد از دادن شکر هم پایین می‌ماند، یا مریض گیج است",
+            "ps": "شکره له ۵۴ کمه ده، یا له شکرې ورکولو وروسته هم ټیټه پاتې کېږي، یا ناروغ ګډوډ دی",
+            "en": "sugar is under 54, or stays low after sugar, or the person is confused"
+          }
+        },
+        {
+          "id": "kit-glucometer.urgent.very-high",
+          "icon": "sugar",
+          "text": {
+            "fa": "قند بالای ۴۰۰ است، یا آنقدر بلند است که ماشین نمی‌خواند",
+            "ps": "شکره له ۴۰۰ پورته ده، یا دومره لوړه ده چې ماشین یې نشي لوستلای",
+            "en": "sugar is over 400, or too high for the meter to read"
+          }
+        },
+        {
+          "id": "kit-glucometer.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "قند بلند با استفراغ، یا نفس تیز و عمیق",
+            "ps": "لوړه شکره له کانګو، یا چټکې او ژورې ساه سره",
+            "en": "high sugar with vomiting, or fast deep breathing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-glucometer.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این‌ها بود، امروز به کلینیک بروید",
+        "ps": "که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "kit-glucometer.soon.high",
+          "icon": "sugar",
+          "text": {
+            "fa": "قند بالای ۲۵۰ باقی می‌ماند",
+            "ps": "شکره له ۲۵۰ پورته پاتې کېږي",
+            "en": "sugar stays over 250"
+          }
+        },
+        {
+          "id": "kit-glucometer.soon.lows",
+          "icon": "sugar",
+          "text": {
+            "fa": "قند بار بار پایین می‌شود",
+            "ps": "شکره بیا بیا ټیټېږي",
+            "en": "low sugar happens again and again"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kit-glucometer.mmol",
+      "type": "tip",
+      "icon": "sugar",
+      "text": {
+        "fa": "اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است، ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، و بالای ۱۴ خیلی بلند است.",
+        "ps": "که ستاسو ماشین ملي مول ښيي: له ۴ کم ټیټ دی، له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی، او له ۱۴ پورته ډېر لوړ دی.",
+        "en": "If your meter shows mmol/L: under 4 is low, 4.4 to 7.2 before breakfast is good, and over 14 is very high."
+      }
+    },
+    {
+      "id": "kit-glucometer.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "kit-glucometer.dont.dose",
+          "icon": "pill",
+          "text": {
+            "fa": "انسولین یا تابلیت را خودتان کم یا زیاد نکنید؛ از کلینیک بپرسید.",
+            "ps": "انسولین یا ګولۍ پخپله مه کموئ او مه زیاتوئ؛ له کلینیک وپوښتئ.",
+            "en": "Do not change your insulin or tablets yourself; ask the clinic."
+          }
+        },
+        {
+          "id": "kit-glucometer.dont.share",
+          "icon": "syringe",
+          "text": {
+            "fa": "سوزن یا قلم سوزن‌زن را با هیچ کس شریک نکنید.",
+            "ps": "ستنې یا د ګوتې د وهلو قلم له هېچا سره مه شریکوئ.",
+            "en": "Do not share needles or the finger pricker with anyone."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020): hypoglycaemia, self-monitoring for people on insulin",
+    "WHO Package of Essential Noncommunicable Disease Interventions (PEN) for primary health care (2020): diabetes protocol, hypoglycaemia (give sugar if able to swallow)",
+    "American Diabetes Association Standards of Care in Diabetes 2025, sections 6 (glycaemic goals 80 to 130 mg/dL fasting, under 180 after meals) and hypoglycaemia levels (under 70 and under 54 mg/dL)",
+    "International Diabetes Federation (IDF) Clinical Practice Recommendations for managing type 2 diabetes in primary care (2017)",
+    "WHO Global report on diabetes (2016)"
+  ],
+  "review": [
+    "mg/dL is used as the main unit because Afghan clinics and meters mostly use mg/dL (please confirm); mmol/L is in the tip and on the checker screen. 70 mg/dL = 3.9 mmol/L, 54 = 3.0, 130 = 7.2, 180 = 10, 250 = 13.9, 400 = 22.2.",
+    "Low under 70: 'give sugar now'. The checker says about 3 teaspoons of sugar in water and recheck in 15 minutes (the 15 g rule, ADA). diabetes.low-sugar gives no amount: decide whether to give the amount.",
+    "Very low under 54 = red in the checker (give sugar, hospital if not rising or confused).",
+    "Over 250 = clinic today; over 400 or meter 'HI' = hospital now (ADA advises urgent care for very high readings; 400 is a judgement call). With vomiting or deep fast breathing (possible DKA) = hospital now.",
+    "Meter price 1,000 to 2,000 afghanis and strip costs are estimates (strips about 15 to 35 afghanis each).",
+    "'Needles' is used for lancets; Dari 'سوزن' and Pashto 'ستن'."
+  ]
+}

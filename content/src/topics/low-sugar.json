@@ -1,0 +1,246 @@
+{
+  "id": "low-sugar",
+  "section": "everyone",
+  "title": {
+    "fa": "کم شدن شکر خون در مرض شکر",
+    "ps": "د شکرې په ناروغۍ کې د وینې د شکرې کمښت",
+    "en": "Low sugar in diabetes"
+  },
+  "summary": {
+    "fa": "لرزه، عرق یا گیجی: اگر قورت داده می‌تواند، زود بوره بدهید.",
+    "ps": "لړزه، خولې یا ګډوډي: که تېرولی شي، ژر بوره ورکړئ.",
+    "en": "Shaky, sweaty or confused: give sugar fast if they can swallow."
+  },
+  "image": "low-sugar",
+  "blocks": [
+    {
+      "id": "low-sugar.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کسانی که برای مرض شکر دوا یا انسولین می‌گیرند، ممکن است شکر خونشان کم شود، خصوصاً اگر غذا نخورند یا کار سخت کنند. زود می‌آید و می‌تواند سبب بی‌هوشی یا تشنج شود.",
+        "ps": "هغه کسان چې د شکرې ناروغۍ لپاره درمل یا انسولین اخلي، کېدای شي د وینې شکره یې کمه شي، په ځانګړې توګه که خواړه ونه خوري یا سخت کار وکړي. ژر راځي او کولی شي د بې‌هوښۍ یا اختلاج لامل شي.",
+        "en": "People on medicine or insulin for diabetes can get low blood sugar, most of all if they miss a meal or work hard. It comes on fast and can cause fainting or fits."
+      }
+    },
+    {
+      "id": "low-sugar.signs",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "لرزه، عرق، گرسنگی، تپش تیز قلب، رنگ‌پریدگی، رفتار عجیب یا گیجی ممکن است علامت کمی شکر باشد.",
+        "ps": "لړزه، خولې، لوږه، د زړه چټک ټکان، رنګ الوتل، عجیب چلند یا ګډوډي کېدای شي د شکرې د کمښت نښې وي.",
+        "en": "Shaking, sweating, hunger, a fast heartbeat, pale skin, strange behaviour or confusion can mean low sugar."
+      }
+    },
+    {
+      "id": "low-sugar.sugar",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "فوراً بوره بدهید",
+        "ps": "سمدستي بوره ورکړئ",
+        "en": "Give sugar at once"
+      },
+      "text": {
+        "fa": "اگر بیدار است و قورت داده می‌تواند، ۴ قاشق چای‌خوری بوره در یک گیلاس آب، یا یک نوشیدنی شیرین یا شیرینی بدهید.",
+        "ps": "که ویښ وي او تېرولی شي، د چای ۴ کاچوغې بوره په یوه ګیلاس اوبو کې، یا خوږ څښاک یا خواږه ورکړئ.",
+        "en": "If they are awake and can swallow, give 4 teaspoons of sugar in a glass of water, or a sweet drink or sweets."
+      }
+    },
+    {
+      "id": "low-sugar.wait",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "۱۵ دقیقه صبر، بعد غذا",
+        "ps": "۱۵ دقیقې صبر، بیا خواړه",
+        "en": "Wait 15 minutes, then food"
+      },
+      "text": {
+        "fa": "اگر در ۱۵ دقیقه بهتر نشد، باز بوره بدهید. وقتی بهتر شد، نان یا غذا بدهید تا شکر دوباره کم نشود.",
+        "ps": "که په ۱۵ دقیقو کې ښه نه شو، بیا بوره ورکړئ. کله چې ښه شو، ډوډۍ یا خواړه ورکړئ چې شکره یې بیا کمه نشي.",
+        "en": "If not better in 15 minutes, give sugar again. When better, give bread or a meal so the sugar does not fall again."
+      }
+    },
+    {
+      "id": "low-sugar.drowsy",
+      "type": "step",
+      "icon": "sleepy",
+      "title": {
+        "fa": "خواب‌آلود یا بی‌هوش: چیزی به دهانش ندهید",
+        "ps": "خوب وړی یا بې‌هوښه: هېڅ شی یې په خوله کې مه اچوئ",
+        "en": "Drowsy or unconscious: nothing by mouth"
+      },
+      "text": {
+        "fa": "اگر به‌خوبی قورت داده نمی‌تواند، نوشیدنی ندهید. او را به پهلو بخوابانید و همین حالا به شفاخانه بروید، شب باشد یا روز.",
+        "ps": "که په سمه توګه تېرولی نشي، څښاک مه ورکوئ. پر اړخ یې وغځوئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+        "en": "If they cannot swallow safely, give no drinks. Lay them on their side and go to hospital now, day or night."
+      }
+    },
+    {
+      "id": "low-sugar.prevent",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "جلوگیری کنید",
+        "ps": "مخنیوی یې وکړئ",
+        "en": "Prevent it"
+      },
+      "text": {
+        "fa": "وقتی دوای مرض شکر می‌خورید، غذا را به وقتش بخورید. کمی بوره یا شیرینی با خود داشته باشید و علایم را به خانواده بگویید.",
+        "ps": "کله چې د شکرې درمل خورئ، خواړه په خپل وخت وخورئ. لږه بوره یا خواږه له ځان سره ولرئ او نښې کورنۍ ته ووایئ.",
+        "en": "Eat meals on time when taking diabetes medicine. Carry some sugar or sweets, and tell your family the signs."
+      }
+    },
+    {
+      "id": "low-sugar.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی که مرض شکر دارد این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که د شکرې ناروغ دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone with diabetes:"
+      },
+      "items": [
+        {
+          "id": "low-sugar.urgent.swallow",
+          "icon": "sleepy",
+          "text": {
+            "fa": "قورت داده نمی‌تواند یا بی‌هوش است",
+            "ps": "تېرولی نشي یا بې‌هوښه دی",
+            "en": "cannot swallow, or is unconscious"
+          }
+        },
+        {
+          "id": "low-sugar.urgent.fit",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج می‌کند",
+            "ps": "اختلاج کوي",
+            "en": "has a fit"
+          }
+        },
+        {
+          "id": "low-sugar.urgent.not-better",
+          "icon": "sugar",
+          "text": {
+            "fa": "بعد از دو بار بوره بهتر نشد",
+            "ps": "له دوه ځله بورې وروسته ښه نه شو",
+            "en": "is not better after sugar twice"
+          }
+        },
+        {
+          "id": "low-sugar.urgent.overdose",
+          "icon": "pill",
+          "text": {
+            "fa": "تابلیت یا انسولین زیاد گرفته است",
+            "ps": "ډېرې ګولۍ یا ډېر انسولین یې اخیستی",
+            "en": "took too many diabetes tablets or too much insulin"
+          }
+        }
+      ]
+    },
+    {
+      "id": "low-sugar.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این حالت را دارد، امروز به کلینیک بروید:",
+        "ps": "که دا حالت ولري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if:"
+      },
+      "items": [
+        {
+          "id": "low-sugar.soon.again",
+          "icon": "sugar",
+          "text": {
+            "fa": "کمی شکر بار بار می‌آید",
+            "ps": "د شکرې کمښت بیا بیا راځي",
+            "en": "low sugar keeps coming back"
+          }
+        },
+        {
+          "id": "low-sugar.soon.not-eating",
+          "icon": "vomit",
+          "text": {
+            "fa": "به خاطر استفراغ یا مریضی غذا خورده نمی‌تواند",
+            "ps": "د کانګو یا ناروغۍ له امله خواړه نشي خوړلی",
+            "en": "they cannot eat because of vomiting or illness"
+          }
+        }
+      ]
+    },
+    {
+      "id": "low-sugar.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "low-sugar.dont.insulin",
+          "icon": "no",
+          "text": {
+            "fa": "به کسی که شکرش کم است انسولین ندهید",
+            "ps": "هغه چا ته چې شکره یې کمه ده، انسولین مه ورکوئ",
+            "en": "give insulin to someone with low sugar"
+          }
+        },
+        {
+          "id": "low-sugar.dont.pour",
+          "icon": "no",
+          "text": {
+            "fa": "در دهان شخص خواب‌آلود نوشیدنی نریزید",
+            "ps": "د خوب وړي کس په خوله کې څښاک مه اچوئ",
+            "en": "pour drinks into the mouth of someone drowsy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "low-sugar.diabetes",
+      "type": "link",
+      "to": "topic/diabetes",
+      "icon": "sugar",
+      "title": {
+        "fa": "زندگی با مرض شکر",
+        "ps": "له شکرې ناروغۍ سره ژوند",
+        "en": "Living with diabetes"
+      },
+      "text": {
+        "fa": "صفحهٔ مرض شکر را برای مراقبت روزانه و دواها ببینید.",
+        "ps": "د ورځنۍ پاملرنې او درملو لپاره د شکرې ناروغۍ پاڼه وګورئ.",
+        "en": "See the diabetes page for daily care and medicines."
+      }
+    },
+    {
+      "id": "low-sugar.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه از راه رگ شکر می‌دهند و علت کم شدن آن را پیدا می‌کنند.",
+        "ps": "په روغتون کې د رګ له لارې شکره ورکوي او د کمېدو لامل یې پیدا کوي.",
+        "en": "At hospital they give sugar into a vein and find out why it fell."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: First Aid: hypoglycaemia (15 to 20 g of glucose or sugar by mouth if able to swallow; repeat after 15 minutes; then a snack)",
+    "WHO Package of Essential Noncommunicable Disease Interventions (WHO PEN, 2020): diabetes, hypoglycaemia",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): low blood sugar",
+    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020)"
+  ],
+  "review": [
+    "The amount (4 teaspoons of sugar, about 16 g) is a number. Sugar is food, not medicine, but the spec only allows listed doses. ERC/IFRC give 15 to 20 g. Remove the number if you want: 'a glass of water with sugar stirred in'.",
+    "Repeat after 15 minutes (ERC). 'Not better after sugar twice' means hospital.",
+    "Overlaps diabetes.low-sugar (a short step). This page is the emergency version; diabetes.low-sugar could link here.",
+    "Dari 'بوره' (sugar) vs 'شکر' (blood sugar): check this reads clearly when heard."
+  ]
+}

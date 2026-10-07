@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#B6322D">
+<title>صحت · انیمیشن‌ها · Sehat animations</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<link rel="stylesheet" href="../css/app.css">
+<style>
+/* the topic block "anim" as proposed in docs/ANIMATIONS.md: a still poster with a big play button */
+.anim-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.anim-card .poster{position:relative;display:block;width:100%;background:var(--accent-t)}
+.anim-card .poster .play{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:999px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(34,32,29,.28)}
+.anim-card .poster .play svg{width:34px;height:34px;fill:#fff;margin-inline-start:4px}
+[dir=rtl] .anim-card .poster .play svg{transform:scaleX(-1);margin-inline-start:0;margin-inline-end:4px}
+.anim-card .row{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.anim-card .t{flex:1 1 auto;font-weight:700;font-size:18px;line-height:1.4}
+.anim-card .s{font-size:13.5px;color:var(--mute)}
+.demo-opts{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;font-size:14px;color:var(--mute)}
+.demo-opts label{display:flex;align-items:center;gap:6px;min-height:44px}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="page">
+    <div class="top">
+      <h1 id="h">انیمیشن‌ها</h1>
+      <div class="langpill" id="langs">
+        <button data-lang="fa">دری</button><button data-lang="ps">پښتو</button><button data-lang="en">EN</button>
+      </div>
+    </div>
+    <div class="demo-opts"><label><input type="checkbox" id="still"> <span id="stillL">still pictures (reduced motion)</span></label></div>
+    <div id="cards"></div>
+  </div>
+</div>
+<script type="module">
+import { animPoster, openAnimation } from '../js/anim.js';
+
+// [name, adult look, poster: [animation, scene index]]; 'cpr' is a group: it opens the age picker first
+const ANIMS = [['vaccines', false], ['herd', false], ['cpr', true, ['cpr-adult', 4]],
+  ['water', false, ['water', 1]], ['nappies', false, ['nappies', 3]], ['handwashing', false, ['handwashing', 5]], ['ors', false, ['ors', 2]], ['spread', false, ['spread', 6]]];
+const q = new URLSearchParams(location.search);
+let lang = q.get('lang') || 'fa';
+const N = await fetch('../content/drafts/anim-narration.json').then((r) => r.json());
+const txt = (id) => (N[id] ? N[id][lang] ?? N[id].en : '');
+const H = { fa: 'انیمیشن‌ها', ps: 'انیمیشنونه', en: 'Animations' };
+const SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>';
+
+// Narration for the demo: the phone's own voice when it has one for this language, else nothing
+// (the player then moves on by its timer). In the app, pass the app's play(ids) instead.
+function ttsVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const want = { fa: ['fa', 'prs'], ps: ['ps', 'pbt'], en: ['en'] }[lang];
+  return speechSynthesis.getVoices().find((v) => want.some((w) => v.lang.toLowerCase().startsWith(w))) || null;
+}
+function play(ids) {
+  const v = ttsVoice(); if (!v) return undefined;
+  speechSynthesis.cancel();
+  return ids.reduce((p, id) => p.then(() => new Promise((res) => {
+    const u = new SpeechSynthesisUtterance(txt(id)); u.voice = v; u.lang = v.lang;
+    u.onend = u.onerror = () => res(); speechSynthesis.speak(u);
+  })), Promise.resolve());
+}
+const stop = () => { if ('speechSynthesis' in window) speechSynthesis.cancel(); };
+
+async function render() {
+  document.documentElement.lang = lang === 'en' ? 'en' : lang === 'ps' ? 'ps-AF' : 'fa-AF';
+  document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+  document.getElementById('h').textContent = H[lang];
+  document.querySelectorAll('#langs button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  const cards = document.getElementById('cards');
+  cards.innerHTML = '';
+  for (const [name, adult, poster] of ANIMS) {
+    const c = document.createElement('div');
+    c.className = 'anim-card anim-poster' + (adult ? ' adult' : '');
+    c.innerHTML = `<button class="poster" data-open="${name}" aria-label="${txt('anim.' + name + '.title')}">${await (poster ? animPoster(...poster) : animPoster(name))}<span class="play">${PLAY}</span></button>
+      <div class="row"><span class="t">${txt('anim.' + name + '.title')}</span><button class="spk" data-say="anim.${name}.title" aria-label="listen">${SPK}</button></div>`;
+    cards.appendChild(c);
+  }
+}
+async function open(name, start = 0, pick = null) {
+  await openAnimation(name, { lang, text: txt, play, stop, still: document.getElementById('still').checked, start, pick });
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.lang) { lang = b.dataset.lang; render(); }
+  else if (b.dataset.open) open(b.dataset.open);
+  else if (b.dataset.say && b.closest('.anim-card')) play([b.dataset.say]);
+});
+await render();
+// ?a=vaccines&s=3 opens a scene; ?a=cpr opens the age picker; ?a=cpr-baby&s=2 opens one variant
+if (q.get('a')) open(q.get('a'), +(q.get('s') || 1) - 1);
+window.demoReady = true;
+</script>
+</body>
+</html>

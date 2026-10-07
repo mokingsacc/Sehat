@@ -2,14 +2,22 @@
 """Validate content/src/topics/*.json and content/src/vaccines.json against docs/CONTENT_SPEC.md.
 Usage: python3 tools/validate.py [file ...]   (no args = all)"""
 import json, re, sys, glob, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import anims as ANIM
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ICONS = set("""clinic hospital car phone calendar clock moon family talk card check no warning money house
 baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash thermometer fever cough breathing-fast chest-indrawing no-drink vomit convulsion sleepy stool-blood eye-sunken skin-pinch growth muac swollen-feet milestones jaundice syringe drops pill rash toys-play
 pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
 heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect""".split())
-TYPES = {"lead", "step", "alert", "dont", "tip"}
+TYPES = {"lead", "step", "alert", "dont", "tip", "link", "anim"}
+# "link" blocks open another screen of the app: a tool, a topic, the home kit, the family record or the clinic finder
+TOOLS = {"breaths", "reading", "reading/temp", "reading/bp", "reading/sugar", "reading/spo2", "reading/muac"}
+LINK_RE = re.compile(r'^(tool/(?P<tool>[a-z0-9/-]+)|topic/(?P<topic>[a-z0-9-]+)|kit|family|near)$')
 SECTIONS = {"children", "women", "everyone"}
+# lists in content/src/sections.json: the three sections, plus "kit" (the home health kit page) and "emergency" (the Emergency screen)
+SECTION_LISTS = SECTIONS | {"kit", "emergency"}
+ANIM_FILES, ANIM_GROUPS, ANIM_TEXT = set(ANIM.names()), ANIM.groups(), ANIM.narration()
 ID_RE = re.compile(r'^[a-z0-9-]+(\.[a-z0-9-]+)*$')
 LANGS = ("fa", "ps", "en")
 
@@ -46,6 +54,21 @@ def check_icon(f, where, ic, required=True):
         return
     if ic not in ICONS: err(f, f"{where}: unknown icon {ic!r}")
 
+anims_used = set()
+def check_anim(f, w, b):
+    """An "anim" block: a poster that opens the animation player (js/anim.js). anim = a file in anim/ or a group (cpr);
+    pick = one variant of the group, to go straight to it; title is optional (default: the animation's own title)."""
+    a, pick = b.get("anim"), b.get("pick")
+    if not isinstance(a, str) or (a not in ANIM_FILES and a not in ANIM_GROUPS):
+        err(f, f"{w}: unknown animation {a!r} (anim/<name>.js or one of the groups {sorted(ANIM_GROUPS)})"); return
+    if pick is not None and pick not in ANIM_GROUPS.get(a, []):
+        err(f, f"{w}: pick {pick!r} is not a variant of {a!r} ({ANIM_GROUPS.get(a, [])})")
+    if b.get("title") is not None: check_L(f, w + ".title", b["title"], 7)
+    for x in ([a] + ([pick] if pick else [])):
+        for i in ANIM.needed_ids(x):
+            if i not in ANIM_TEXT: err(f, f"{w}: narration {i} missing from content/src/anims.json")
+        anims_used.add(x)
+
 def check_topic(f, d):
     tid = d.get("id")
     if not tid or not ID_RE.match(tid): err(f, "bad or missing topic id"); return
@@ -69,6 +92,17 @@ def check_topic(f, d):
             check_icon(f, w, b.get("icon")); check_L(f, w + ".title", b.get("title"), 7); check_L(f, w + ".text", b.get("text"), 32)
         elif t == "tip":
             check_icon(f, w, b.get("icon"), required=False); check_L(f, w + ".text", b.get("text"), 32)
+        elif t == "link":
+            check_icon(f, w, b.get("icon"), required=False); check_L(f, w + ".title", b.get("title"), 7); check_L(f, w + ".text", b.get("text"), 32)
+            m = LINK_RE.match(str(b.get("to", "")))
+            if not m: err(f, f"{w}: 'to' must be tool/<name>, topic/<id>, kit, family or near")
+            elif m.group("tool") and m.group("tool") not in TOOLS: err(f, f"{w}: unknown tool {m.group('tool')!r}")
+            elif m.group("topic") and not os.path.exists(os.path.join(ROOT, "content/src/topics", m.group("topic") + ".json")) and m.group("topic") != "vaccines":
+                err(f, f"{w}: link to unknown topic {m.group('topic')!r}")
+        if t == "anim": check_anim(f, w, b)
+        if t in ("step", "link") and b.get("picture") is not None:
+            if not ID_RE.match(str(b["picture"])) or not os.path.exists(os.path.join(ROOT, "img/pics", str(b["picture"]) + ".svg")):
+                err(f, f"{w}: picture img/pics/{b['picture']}.svg not found")
         elif t in ("alert", "dont"):
             if t == "alert" and b.get("level") not in ("urgent", "soon"): err(f, f"{w}: level must be urgent or soon")
             check_L(f, w + ".title", b.get("title"), 16)
@@ -79,9 +113,13 @@ def check_topic(f, d):
                 reg_id(f, it.get("id"), iw)
                 if isinstance(it.get("id"), str) and not it["id"].startswith(b.get("id", "") + "."): err(f, f"{iw}: id must start with '{b.get('id')}.'")
                 check_icon(f, iw, it.get("icon")); check_L(f, iw + ".text", it.get("text"), 14)
+    if counts.get("anim", 0) > 2: warn(f, f"{counts['anim']} animations (aim for at most 2 per topic)")
     if counts.get("lead", 0) != 1: err(f, "exactly one lead block")
     if not (2 <= counts.get("step", 0) <= 8): warn(f, f"{counts.get('step',0)} steps (aim 3-7)")
     if not d.get("sources"): err(f, "sources missing")
+    try: kit = json.load(open(os.path.join(ROOT, "content/src/sections.json"), encoding="utf-8")).get("kit", [])
+    except Exception: kit = []
+    if tid in kit and d.get("section") not in ("children", "everyone"): err(f, "home kit topics use section children or everyone")
 
 def check_vaccines(f, d):
     check_L(f, "title", d.get("title")); check_L(f, "summary", d.get("summary"))
@@ -97,6 +135,11 @@ def check_vaccines(f, d):
             check_L(f, dw + ".name", dz.get("name")); check_L(f, dw + ".protects", dz.get("protects"))
     for n, x in enumerate(d.get("notes", [])):
         reg_id(f, x.get("id"), f"notes[{n}]"); check_icon(f, f"notes[{n}]", x.get("icon"), required=False); check_L(f, f"notes[{n}].text", x.get("text"))
+    for n, b in enumerate(d.get("anims") or []):
+        w = f"anims[{n}]"; reg_id(f, b.get("id"), w)
+        if b.get("type") != "anim": err(f, f"{w}: type must be anim")
+        if isinstance(b.get("id"), str) and not b["id"].startswith("vaccines."): err(f, f"{w}: id must start with 'vaccines.'")
+        check_anim(f, w, b)
     wm = d.get("women")
     if wm:
         reg_id(f, wm.get("id"), "women"); check_L(f, "women.title", wm.get("title")); check_L(f, "women.text", wm.get("text"))
@@ -174,6 +217,45 @@ def check_surveillance():
     if not places.get("districts"): err(fd, "districts missing")
     if not places.get("version"): err(fd, "version missing")
 check_surveillance()
+
+def check_anims_and_lists():
+    fa = os.path.join(ROOT, "content/src/anims.json")
+    for k, L in ANIM_TEXT.items():
+        if not ID_RE.match(k) or not k.startswith("anim."): err(fa, f"{k}: ids look like anim.<name>.s1")
+        check_L(fa, k, L)
+    for name in sorted(ANIM_FILES):
+        miss = [i for i in ANIM.needed_ids(name) if i not in ANIM_TEXT]
+        if miss and name not in anims_used: warn(fa, f"anim/{name}.js: no narration yet for {', '.join(miss[:4])}{' ...' if len(miss) > 4 else ''}")
+    topic_ids = {os.path.basename(x)[:-5] for x in glob.glob(os.path.join(ROOT, "content/src/topics/*.json"))} | {"vaccines"}
+    fs = os.path.join(ROOT, "content/src/sections.json")
+    try: secs = json.load(open(fs, encoding="utf-8"))
+    except Exception as e: err(fs, f"invalid JSON: {e}"); return
+    for k, ids in secs.items():
+        if k.startswith("_"): continue
+        if k not in SECTION_LISTS: err(fs, f"unknown list {k!r} (use {sorted(SECTION_LISTS)})"); continue
+        for t in ids:
+            if t not in topic_ids: err(fs, f"{k}: unknown topic {t!r}")
+    fc = os.path.join(ROOT, "content/src/config.json"); fu = os.path.join(ROOT, "content/src/ui.json")
+    try: cfg = json.load(open(fc, encoding="utf-8")); ui = json.load(open(fu, encoding="utf-8"))
+    except Exception as e: err(fc, f"invalid JSON: {e}"); return
+    for t in cfg.get("urgentTopics") or []:
+        if t not in topic_ids: err(fc, f"urgentTopics: unknown topic {t!r}")
+    cpr_variants = {v for g in ANIM_GROUPS.values() for v in g}
+    for n, a in enumerate(cfg.get("emergency") or []):
+        w = f"emergency[{n}]"
+        if not ID_RE.match(str(a.get("id", ""))): err(fc, f"{w}: bad id")
+        if a.get("label") not in ui["text"]: err(fc, f"{w}: label {a.get('label')!r} is not a ui.text key")
+        if a.get("icon") not in ICONS: err(fc, f"{w}: unknown icon {a.get('icon')!r}")
+        if a.get("cpr") not in topic_ids: err(fc, f"{w}: unknown 'not breathing' topic {a.get('cpr')!r}")
+        if a.get("anim") is not None and a["anim"] not in cpr_variants | ANIM_FILES: err(fc, f"{w}: unknown animation {a['anim']!r}")
+        for t in a.get("topics") or []:
+            if t not in topic_ids: err(fc, f"{w}: unknown topic {t!r}")
+    if "emergency" in (cfg.get("home") or []):
+        for k in ("emergency", "emergencySub", "emergencyWho", "notBreathing", "otherEmergencies", "sendForCar"):
+            if k not in ui["text"]: err(fu, f"text.{k} missing (the Emergency button needs it)")
+        for k in ("ui.emergency", "ui.emergencyWho"):
+            if k not in ui["say"]: err(fu, f"say.{k} missing (the Emergency button needs it)")
+check_anims_and_lists()
 
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst

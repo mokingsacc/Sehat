@@ -1,0 +1,194 @@
+{
+  "id": "cpr-child",
+  "section": "children",
+  "title": {
+    "fa": "طفل بالای ۱ سال که نفس نمی‌کشد",
+    "ps": "له ۱ کال لوی ماشوم چې ساه نه اخلي",
+    "en": "Child over 1 not breathing"
+  },
+  "summary": {
+    "fa": "از ۱ سال تا بالغ شدن: اول ۵ بار نفس، بعد سینه را فشار دهید.",
+    "ps": "له ۱ کلنۍ تر بلوغ پورې: لومړی ۵ ځله ساه، بیا سینه کېکاږئ.",
+    "en": "From 1 year to puberty: 5 breaths first, then chest pushes."
+  },
+  "image": "cpr-child",
+  "blocks": [
+    {
+      "id": "cpr-child.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اگر طفل بیدار نمی‌شود و عادی نفس نمی‌کشد، همین حالا شروع کنید. در اطفال اکثراً اول نفس بند می‌شود، پس اول نفس بدهید.",
+        "ps": "که ماشوم نه راویښېږي او په عادي ډول ساه نه اخلي، سمدستي پیل وکړئ. په ماشومانو کې اکثره لومړی ساه بندېږي، نو لومړی ساه ورکړئ.",
+        "en": "If a child does not wake and is not breathing normally, start at once. In children breathing usually stops first, so give breaths first."
+      }
+    },
+    {
+      "id": "cpr-child.anim",
+      "type": "anim",
+      "anim": "cpr",
+      "pick": "cpr-child"
+    },
+    {
+      "id": "cpr-child.check",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "بیدارش کنید و کمک بخواهید",
+        "ps": "راویښ یې کړئ او مرسته وغواړئ",
+        "en": "Check and shout for help"
+      },
+      "text": {
+        "fa": "به شانه‌هایش بزنید و نامش را بلند صدا کنید. اگر جواب نداد، بلند کمک بخواهید و یک نفر را برای آوردن موتر بفرستید.",
+        "ps": "اوږې یې وټکوئ او نوم یې په لوړ غږ واخلئ. که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ او یو څوک د موټر راوړلو لپاره ولېږئ.",
+        "en": "Tap the shoulders and call the child's name loudly. If there is no answer, shout for help and send someone for a car."
+      }
+    },
+    {
+      "id": "cpr-child.airway",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "راه نفس را باز کنید",
+        "ps": "د ساه لاره خلاصه کړئ",
+        "en": "Open the airway, look for breathing"
+      },
+      "text": {
+        "fa": "طفل را به پشت روی زمین سخت بخوابانید. سرش را کمی به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې لږ شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
+        "en": "Lay the child on its back on firm ground. Tilt the head back a little, lift the chin, and watch the chest for 10 seconds."
+      }
+    },
+    {
+      "id": "cpr-child.breaths",
+      "type": "step",
+      "icon": "breathe",
+      "title": {
+        "fa": "اول ۵ بار نفس بدهید",
+        "ps": "لومړی ۵ ځله ساه ورکړئ",
+        "en": "Give 5 breaths first"
+      },
+      "text": {
+        "fa": "بینی‌اش را با دو انگشت بند کنید و دهانش را با دهان خود بپوشانید. آرام پف کنید تا سینه‌اش بالا بیاید، ۵ بار.",
+        "ps": "پوزه یې په دوو ګوتو بنده کړئ او خوله یې په خپله خوله وپوښئ. ورو پو کړئ تر څو سینه یې پورته شي، ۵ ځله.",
+        "en": "Pinch the nose closed and cover the mouth with your mouth. Blow steadily until the chest rises, 5 times."
+      }
+    },
+    {
+      "id": "cpr-child.hand",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "با یک دست فشار دهید",
+        "ps": "په یوه لاس فشار ورکړئ",
+        "en": "Push with one hand"
+      },
+      "text": {
+        "fa": "قسمت پایین کف یک دست را روی نیمهٔ پایین استخوان سینه بگذارید. یک سوم سینه، حدود ۵ سانتی‌متر، پایین فشار دهید. طفل بزرگ شاید دو دست لازم داشته باشد.",
+        "ps": "د یوه لاس د ورغوي لاندې برخه د سینې د هډوکي په لاندینۍ نیمایي کېږدئ. د سینې درېیمه برخه، شاوخوا ۵ سانتي متره، لاندې فشار ورکړئ. لوی ماشوم ته کېدای شي دواړه لاسونه پکار وي.",
+        "en": "Put the heel of one hand on the lower half of the breastbone. Push down a third of the chest, about 5 centimetres. A big child may need two hands."
+      },
+      "picture": "em-cpr-child-hand"
+    },
+    {
+      "id": "cpr-child.rhythm",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "۳۰ فشار، بعد ۲ نفس",
+        "ps": "۳۰ فشارونه، بیا ۲ ساه",
+        "en": "30 pushes, then 2 breaths"
+      },
+      "text": {
+        "fa": "تیز فشار دهید، تقریباً ۲ بار در هر ثانیه، و بگذارید سینه دوباره بالا بیاید. بعد از ۳۰ فشار، ۲ بار نفس بدهید و باز فشار دهید.",
+        "ps": "چټک فشار ورکړئ، په هره ثانیه کې شاوخوا ۲ ځله، او پرېږدئ چې سینه بېرته پورته شي. له ۳۰ فشارونو وروسته ۲ ځله ساه ورکړئ او بیا فشار ورکړئ.",
+        "en": "Push fast, about 2 times every second, and let the chest come back up. After 30 pushes give 2 breaths, then push again."
+      }
+    },
+    {
+      "id": "cpr-child.keep-going",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "توقف نکنید",
+        "ps": "مه درېږئ",
+        "en": "Do not stop"
+      },
+      "text": {
+        "fa": "ادامه دهید تا طفل تکان بخورد یا عادی نفس بکشد، یا کارمند صحی کار را به دست بگیرد. در موتر هم ادامه دهید.",
+        "ps": "دوام ورکړئ تر څو ماشوم وخوځېږي یا په عادي ډول ساه واخلي، یا روغتیايي کارکوونکی کار پر غاړه واخلي. په موټر کې هم دوام ورکړئ.",
+        "en": "Keep going until the child moves or breathes normally, or a health worker takes over. Keep going in the car too."
+      }
+    },
+    {
+      "id": "cpr-child.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "حتی اگر طفل خوب معلوم شود، همین حالا به شفاخانه بروید، شب باشد یا روز، اگر:",
+        "ps": "که ماشوم روغ هم ښکاري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که:",
+        "en": "Go to hospital now, day or night, even if the child seems well, if they:"
+      },
+      "items": [
+        {
+          "id": "cpr-child.urgent.needed-help",
+          "icon": "heart",
+          "text": {
+            "fa": "نفس دادن یا فشار سینه لازم داشت",
+            "ps": "ساه ورکولو یا د سینې فشار ته یې اړتیا درلوده",
+            "en": "needed breaths or chest pushes"
+          }
+        },
+        {
+          "id": "cpr-child.urgent.stopped",
+          "icon": "breathe",
+          "text": {
+            "fa": "حتی برای مدت کوتاه نفسش بند شد",
+            "ps": "که څه هم لږ وخت، ساه یې بنده شوه",
+            "en": "stopped breathing, even for a short time"
+          }
+        },
+        {
+          "id": "cpr-child.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بعد از آن خواب‌آلود یا گیج است",
+            "ps": "وروسته خوب وړی یا ګډوډ دی",
+            "en": "are sleepy or confused afterwards"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cpr-child.alone",
+      "type": "tip",
+      "icon": "people",
+      "text": {
+        "fa": "اگر تنها هستید، اول ۱ دقیقه این کار را بکنید، بعد برای کمک بروید یا بلند صدا کنید.",
+        "ps": "که یوازې یاست، لومړی ۱ دقیقه دا کار وکړئ، بیا د مرستې لپاره ولاړ شئ یا په لوړ غږ چیغې ووهئ.",
+        "en": "If you are alone, do this for 1 minute first, then go for help or shout loudly."
+      }
+    },
+    {
+      "id": "cpr-child.hospital",
+      "type": "tip",
+      "icon": "hospital",
+      "text": {
+        "fa": "در شفاخانه به او اکسیجن می‌دهند، قلبش را معاینه می‌کنند و علت را پیدا می‌کنند.",
+        "ps": "په روغتون کې ورته اکسیجن ورکوي، زړه یې معاینه کوي او لامل یې پیدا کوي.",
+        "en": "At hospital they give oxygen, check the heart and find out what caused it."
+      }
+    }
+  ],
+  "sources": [
+    "European Resuscitation Council Guidelines 2025: Basic Life Support and Paediatric Life Support (lay rescuer sequences)",
+    "American Heart Association 2025 Guidelines for CPR and ECC: Adult and Pediatric Basic Life Support",
+    "ILCOR 2025 International Consensus on CPR and ECC Science with Treatment Recommendations",
+    "Resuscitation Council UK 2025: Paediatric out-of-hospital basic life support algorithm",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): resuscitation"
+  ],
+  "review": [
+    "Ages: 'child' = 1 year to puberty (ERC/AHA). From puberty, use the adult page.",
+    "Ratio 30:2 after 5 first breaths (RCUK 2025 allows lay rescuers 30:2 or 15:2; ERC 2025 trained rescuers use 15:2). See the note on cpr-baby.",
+    "Depth 'a third of the chest, about 5 cm' (ERC/AHA). One hand, or two hands for a big child."
+  ]
+}
