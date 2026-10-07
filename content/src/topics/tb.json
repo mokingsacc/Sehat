@@ -1,0 +1,204 @@
+{
+  "id": "tb",
+  "section": "everyone",
+  "title": {
+    "fa": "توبرکلوز (سل)",
+    "ps": "نری رنځ (توبرکلوز)",
+    "en": "TB (tuberculosis)"
+  },
+  "summary": {
+    "fa": "سرفه طولانی؟ معاینه شوید. توبرکلوز علاج دارد و تداوی‌اش رایگان است.",
+    "ps": "اوږد ټوخی؟ معاینه شئ. نری رنځ علاج لري او درملنه یې وړیا ده.",
+    "en": "Long cough? Get tested. TB is curable and treatment is free."
+  },
+  "image": "tb",
+  "blocks": [
+    {
+      "id": "tb.lead",
+      "type": "lead",
+      "text": {
+        "fa": "توبرکلوز مریضی‌ای است که وقتی شخص مریض سرفه می‌کند، از راه هوا سرایت می‌کند. با دوا علاج می‌شود.",
+        "ps": "نری رنځ یوه ناروغي ده چې کله ناروغ ټوخی کوي، د هوا له لارې خپرېږي. په درملو جوړېږي.",
+        "en": "TB is an illness that spreads through the air when a sick person coughs. It can be cured with medicine."
+      }
+    },
+    {
+      "id": "tb.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "برای معاینه توبرکلوز، اگر یکی از این علایم را دارید، امروز به کلینیک بروید",
+        "ps": "د نري رنځ د معاینې لپاره، که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "For a TB test, if you have any of these signs, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "tb.soon.cough",
+          "icon": "cough",
+          "text": {
+            "fa": "سرفه ۲ هفته یا بیشتر",
+            "ps": "۲ اونۍ یا ډېر ټوخی",
+            "en": "a cough for 2 weeks or more"
+          }
+        },
+        {
+          "id": "tb.soon.blood",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خون در بلغم",
+            "ps": "په بلغم کې وینه",
+            "en": "blood in your sputum"
+          }
+        },
+        {
+          "id": "tb.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تب یا عرق شبانه که خوب نمی‌شود",
+            "ps": "تبه یا د شپې خولې چې نه ښه کېږي",
+            "en": "fever or night sweats that do not go away"
+          }
+        },
+        {
+          "id": "tb.soon.weight",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "لاغر شدن بدون دلیل معلوم",
+            "ps": "بې له څرګند علت ډنګرېدل",
+            "en": "losing weight without a clear reason"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tb.free",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "معاینه و دوا رایگان است",
+        "ps": "معاینه او درمل وړیا دي",
+        "en": "Tests and medicine are free"
+      },
+      "text": {
+        "fa": "معاینه و تداوی توبرکلوز در کلینیک‌های دولتی رایگان است. توبرکلوز علاج می‌شود.",
+        "ps": "د نري رنځ معاینه او درملنه په دولتي کلینیکونو کې وړیا ده. نری رنځ روغېدای شي.",
+        "en": "TB tests and treatment are free at government clinics. TB can be cured."
+      }
+    },
+    {
+      "id": "tb.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "هر روز دوا بخورید",
+        "ps": "هره ورځ درمل وخورئ",
+        "en": "Take medicine every day"
+      },
+      "text": {
+        "fa": "دوا را هر روز تا آخر دوره بخورید، که معمولاً ۶ ماه است، حتی وقتی بهتر شدید. اگر زود قطع کنید، توبرکلوز برمی‌گردد و علاجش سخت‌تر می‌شود.",
+        "ps": "درمل هره ورځ د دورې تر پایه وخورئ، چې معمولاً ۶ میاشتې وي، که څه هم ښه شئ. که وخته یې پرېږدئ، نری رنځ بېرته راګرځي او درملنه یې سخته کېږي.",
+        "en": "Take it every day for the whole course, usually 6 months, even when you feel better. Stopping early can make TB come back, harder to treat."
+      }
+    },
+    {
+      "id": "tb.protect",
+      "type": "step",
+      "icon": "window",
+      "title": {
+        "fa": "از خانواده خود محافظت کنید",
+        "ps": "خپله کورنۍ وساتئ",
+        "en": "Protect your family"
+      },
+      "text": {
+        "fa": "وقت سرفه دهان خود را بپوشانید و کلکین‌ها را باز کنید. تا وقتی کارمند صحی بگوید دیگر سرایت نمی‌دهید، جدا بخوابید.",
+        "ps": "د ټوخي پر وخت خوله پټه کړئ او کړکۍ خلاصې کړئ. جلا ویده شئ، تر څو چې روغتیايي کارکوونکی ووايي چې نور ناروغي نه خپروئ.",
+        "en": "Cover your coughs and open the windows. Sleep apart until the health worker says you can no longer spread TB."
+      }
+    },
+    {
+      "id": "tb.family",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "همه خانواده را معاینه کنید",
+        "ps": "ټوله کورنۍ معاینه کړئ",
+        "en": "Check the whole family"
+      },
+      "text": {
+        "fa": "اطفال و همه کسانی که با مریض توبرکلوز زندگی می‌کنند، حتی اگر صحتمند معلوم شوند، باید در کلینیک معاینه شوند.",
+        "ps": "ماشومان او ټول هغه کسان چې د نري رنځ له ناروغ سره اوسېږي، که روغ هم ښکاري، باید په کلینیک کې معاینه شي.",
+        "en": "Children and everyone living with a person with TB should be checked at the clinic, even if they seem well."
+      }
+    },
+    {
+      "id": "tb.no-shame",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "توبرکلوز شرم نیست",
+        "ps": "نری رنځ شرم نه دی",
+        "en": "TB is not shameful"
+      },
+      "text": {
+        "fa": "هر کس ممکن است توبرکلوز بگیرد. مهربان باشید و کمک کنید که مریض دوایش را تمام کند.",
+        "ps": "هر څوک نری رنځ نیولی شي. مهربان اوسئ او مرسته وکړئ چې ناروغ خپل درمل بشپړ کړي.",
+        "en": "Anyone can get TB. Be kind, and help the person finish their medicine."
+      }
+    },
+    {
+      "id": "tb.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این حالات را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې حالتونو څخه یو هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you have any of these, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "tb.urgent.blood",
+          "icon": "bleeding",
+          "text": {
+            "fa": "سرفه کردن خون زیاد",
+            "ps": "په ټوخي کې ډېره وینه",
+            "en": "coughing up a lot of blood"
+          }
+        },
+        {
+          "id": "tb.urgent.breathing",
+          "icon": "lungs",
+          "text": {
+            "fa": "نفس‌تنگی شدید",
+            "ps": "د ساه سخته تنګي",
+            "en": "great difficulty breathing"
+          }
+        },
+        {
+          "id": "tb.urgent.weak",
+          "icon": "rest",
+          "text": {
+            "fa": "ضعف زیاد، طوری که از جا برخاسته نمی‌توانید",
+            "ps": "دومره کمزوري چې له ځایه نشئ پورته کېدای",
+            "en": "so weak you cannot get out of bed"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Tuberculosis (March 2026): symptoms, seek care for prolonged cough, fever and weight loss; TB is curable",
+    "WHO consolidated guidelines on tuberculosis, Module 4: treatment (2022 update): 6-month regimen for drug-susceptible TB",
+    "WHO consolidated guidelines on tuberculosis, Module 1: prevention (2024): household contact investigation and TB preventive treatment",
+    "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021): symptom screen (cough, fever, night sweats, weight loss)",
+    "WHO guidelines on tuberculosis infection prevention and control (2019): cough etiquette, ventilation, separation"
+  ],
+  "review": [
+    "'Usually 6 months': WHO also has 4-month regimens (children with non-severe TB; HPMZ for people aged 12 and over), and drug-resistant TB takes longer.",
+    "'Free at government clinics': please confirm this is still true in Samangan under the current health system.",
+    "Signs are in a 'clinic today' (amber) alert as a reason to test. A cough of 2 weeks or more is not an emergency, but 'today' is the standard amber wording.",
+    "Added an urgent alert (coughing up a lot of blood, great difficulty breathing, too weak to get out of bed). This was not in the brief.",
+    "'Sleep apart until the health worker says you can no longer spread TB' gives no fixed time on purpose.",
+    "'Check the whole family' does not mention preventive treatment for child contacts by name ('young children may be given medicine to protect them' could be added).",
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+  ]
+}

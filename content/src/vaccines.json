@@ -1,0 +1,444 @@
+{
+  "id": "vaccines",
+  "title": {
+    "fa": "واکسین‌ها",
+    "ps": "واکسینونه",
+    "en": "Vaccines"
+  },
+  "summary": {
+    "fa": "واکسین‌های رایگان، طفل شما را از مرض‌های خطرناک محافظت می‌کنند.",
+    "ps": "وړیا واکسینونه ستاسو ماشوم له خطرناکو ناروغیو ساتي.",
+    "en": "Free vaccines protect your child from serious diseases."
+  },
+  "image": "vaccines",
+  "lead": {
+    "id": "vaccines.lead",
+    "text": {
+      "fa": "واکسین طفل شما را از مرض‌های خطرناک محافظت می‌کند. طفل شما تا ۲ سالگی ۶ بار باید برای واکسین برود.",
+      "ps": "واکسین ستاسو ماشوم له خطرناکو ناروغیو ساتي. ستاسو ماشوم باید تر ۲ کلنۍ پورې ۶ ځله واکسین ته بوتلل شي.",
+      "en": "Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age."
+    }
+  },
+  "visits": [
+    {
+      "id": "vaccines.birth",
+      "ageDays": 0,
+      "age": {
+        "fa": "هنگام ولادت",
+        "ps": "د زېږون پر وخت",
+        "en": "At birth"
+      },
+      "doses": [
+        {
+          "id": "bcg",
+          "name": {
+            "fa": "واکسین بی سی جی",
+            "ps": "د بي سي جي واکسین",
+            "en": "BCG"
+          },
+          "protects": {
+            "fa": "توبرکلوز (سل)",
+            "ps": "نری رنځ",
+            "en": "tuberculosis (TB)"
+          }
+        },
+        {
+          "id": "opv0",
+          "name": {
+            "fa": "قطرهٔ پولیو",
+            "ps": "د پولیو څاڅکي",
+            "en": "Polio drops"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        },
+        {
+          "id": "hepb0",
+          "name": {
+            "fa": "واکسین هپاتیت ب",
+            "ps": "د هیپاټایټس ب واکسین",
+            "en": "Hepatitis B vaccine"
+          },
+          "protects": {
+            "fa": "هپاتیت ب، که یک مرض جگر است",
+            "ps": "هیپاټایټس ب، چې د ځیګر ناروغي ده",
+            "en": "hepatitis B, a liver disease"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vaccines.6w",
+      "ageDays": 42,
+      "age": {
+        "fa": "۶ هفتگی",
+        "ps": "۶ اونۍ",
+        "en": "6 weeks"
+      },
+      "doses": [
+        {
+          "id": "penta1",
+          "name": {
+            "fa": "واکسین پنتاوالان ۱",
+            "ps": "د پنټاوالانټ واکسین ۱",
+            "en": "Pentavalent 1"
+          },
+          "protects": {
+            "fa": "خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد",
+            "ps": "خناق، توره ټوخله، ټیټانوس، هیپاټایټس ب، او د هیب میکروب چې سینه بغل او مننژیت راولي",
+            "en": "diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis"
+          }
+        },
+        {
+          "id": "opv1",
+          "name": {
+            "fa": "قطرهٔ پولیو ۱",
+            "ps": "د پولیو څاڅکي ۱",
+            "en": "Polio drops 1"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        },
+        {
+          "id": "pcv1",
+          "name": {
+            "fa": "واکسین نوموکوک ۱",
+            "ps": "د نوموکوک واکسین ۱",
+            "en": "PCV 1 (pneumococcal)"
+          },
+          "protects": {
+            "fa": "سینه‌بغل",
+            "ps": "سینه بغل",
+            "en": "pneumonia"
+          }
+        },
+        {
+          "id": "rota1",
+          "name": {
+            "fa": "قطرهٔ روتا ویروس ۱",
+            "ps": "د روټا ویروس څاڅکي ۱",
+            "en": "Rotavirus drops 1"
+          },
+          "protects": {
+            "fa": "اسهال شدید",
+            "ps": "سخت نس ناستی",
+            "en": "severe diarrhoea"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vaccines.10w",
+      "ageDays": 70,
+      "age": {
+        "fa": "۱۰ هفتگی",
+        "ps": "۱۰ اونۍ",
+        "en": "10 weeks"
+      },
+      "doses": [
+        {
+          "id": "penta2",
+          "name": {
+            "fa": "واکسین پنتاوالان ۲",
+            "ps": "د پنټاوالانټ واکسین ۲",
+            "en": "Pentavalent 2"
+          },
+          "protects": {
+            "fa": "خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد",
+            "ps": "خناق، توره ټوخله، ټیټانوس، هیپاټایټس ب، او د هیب میکروب چې سینه بغل او مننژیت راولي",
+            "en": "diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis"
+          }
+        },
+        {
+          "id": "opv2",
+          "name": {
+            "fa": "قطرهٔ پولیو ۲",
+            "ps": "د پولیو څاڅکي ۲",
+            "en": "Polio drops 2"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        },
+        {
+          "id": "pcv2",
+          "name": {
+            "fa": "واکسین نوموکوک ۲",
+            "ps": "د نوموکوک واکسین ۲",
+            "en": "PCV 2 (pneumococcal)"
+          },
+          "protects": {
+            "fa": "سینه‌بغل",
+            "ps": "سینه بغل",
+            "en": "pneumonia"
+          }
+        },
+        {
+          "id": "rota2",
+          "name": {
+            "fa": "قطرهٔ روتا ویروس ۲",
+            "ps": "د روټا ویروس څاڅکي ۲",
+            "en": "Rotavirus drops 2"
+          },
+          "protects": {
+            "fa": "اسهال شدید",
+            "ps": "سخت نس ناستی",
+            "en": "severe diarrhoea"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vaccines.14w",
+      "ageDays": 98,
+      "age": {
+        "fa": "۱۴ هفتگی",
+        "ps": "۱۴ اونۍ",
+        "en": "14 weeks"
+      },
+      "doses": [
+        {
+          "id": "penta3",
+          "name": {
+            "fa": "واکسین پنتاوالان ۳",
+            "ps": "د پنټاوالانټ واکسین ۳",
+            "en": "Pentavalent 3"
+          },
+          "protects": {
+            "fa": "خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد",
+            "ps": "خناق، توره ټوخله، ټیټانوس، هیپاټایټس ب، او د هیب میکروب چې سینه بغل او مننژیت راولي",
+            "en": "diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis"
+          }
+        },
+        {
+          "id": "opv3",
+          "name": {
+            "fa": "قطرهٔ پولیو ۳",
+            "ps": "د پولیو څاڅکي ۳",
+            "en": "Polio drops 3"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        },
+        {
+          "id": "pcv3",
+          "name": {
+            "fa": "واکسین نوموکوک ۳",
+            "ps": "د نوموکوک واکسین ۳",
+            "en": "PCV 3 (pneumococcal)"
+          },
+          "protects": {
+            "fa": "سینه‌بغل",
+            "ps": "سینه بغل",
+            "en": "pneumonia"
+          }
+        },
+        {
+          "id": "ipv1",
+          "name": {
+            "fa": "پیچکاری پولیو ۱",
+            "ps": "د پولیو پیچکاري ۱",
+            "en": "Polio injection 1 (IPV)"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vaccines.9m",
+      "ageDays": 270,
+      "age": {
+        "fa": "۹ ماهگی",
+        "ps": "۹ میاشتې",
+        "en": "9 months"
+      },
+      "doses": [
+        {
+          "id": "measles1",
+          "name": {
+            "fa": "واکسین سرخکان ۱",
+            "ps": "د شري واکسین ۱",
+            "en": "Measles 1"
+          },
+          "protects": {
+            "fa": "سرخکان",
+            "ps": "شری",
+            "en": "measles"
+          }
+        },
+        {
+          "id": "ipv2",
+          "name": {
+            "fa": "پیچکاری پولیو ۲",
+            "ps": "د پولیو پیچکاري ۲",
+            "en": "Polio injection 2 (IPV)"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vaccines.18m",
+      "ageDays": 540,
+      "age": {
+        "fa": "۱۸ ماهگی",
+        "ps": "۱۸ میاشتې",
+        "en": "18 months"
+      },
+      "doses": [
+        {
+          "id": "measles2",
+          "name": {
+            "fa": "واکسین سرخکان ۲",
+            "ps": "د شري واکسین ۲",
+            "en": "Measles 2"
+          },
+          "protects": {
+            "fa": "سرخکان",
+            "ps": "شری",
+            "en": "measles"
+          }
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "vaccines.free",
+      "icon": "clinic",
+      "text": {
+        "fa": "واکسین در کلینیک‌های دولتی رایگان است.",
+        "ps": "واکسین په دولتي کلینیکونو کې وړیا دی.",
+        "en": "Vaccines are free at government clinics."
+      }
+    },
+    {
+      "id": "vaccines.card",
+      "icon": "card",
+      "text": {
+        "fa": "کارت واکسین را هر بار با خود ببرید و خوب نگه دارید.",
+        "ps": "د واکسین کارت هر ځل له ځان سره یوسئ او ښه یې وساتئ.",
+        "en": "Bring the vaccine card every time, and keep it safe."
+      }
+    },
+    {
+      "id": "vaccines.missed",
+      "icon": "calendar",
+      "text": {
+        "fa": "اگر واکسینی مانده است، باز هم بروید؛ هیچ وقت دیر نیست. کارمند صحی واکسین‌هایی را که طفل هنوز لازم دارد، می‌دهد.",
+        "ps": "که کوم واکسین پاتې شوی وي، بیا هم ولاړ شئ؛ هېڅکله ناوخته نه دی. روغتیايي کارکوونکی به هغه واکسینونه ورکړي چې ماشوم ته لا پکار دي.",
+        "en": "If a vaccine was missed, go anyway; it is never too late. The health worker will give the ones your child still needs."
+      }
+    },
+    {
+      "id": "vaccines.mild-illness",
+      "icon": "check",
+      "text": {
+        "fa": "طفلی که زکام یا اسهال خفیف دارد، باز هم می‌تواند واکسین شود.",
+        "ps": "هغه ماشوم چې لږ زکام یا نس ناستی لري، بیا هم واکسین کېدای شي.",
+        "en": "A child with a mild cold or mild diarrhoea can still have vaccines."
+      }
+    },
+    {
+      "id": "vaccines.normal",
+      "icon": "thermometer",
+      "text": {
+        "fa": "تب خفیف یا درد پا بعد از واکسین عادی است و در یکی دو روز خوب می‌شود.",
+        "ps": "د واکسین وروسته لږه تبه یا د پښې درد عادي خبره ده، او په یوه دوه ورځو کې ښه کېږي.",
+        "en": "A mild fever or a sore leg after a vaccine is normal, and gets better in a day or two."
+      }
+    }
+  ],
+  "women": {
+    "id": "vaccines.td",
+    "title": {
+      "fa": "واکسین تیتانوس برای زنان",
+      "ps": "د ښځو لپاره د ټیټانوس واکسین",
+      "en": "Tetanus vaccine for women (Td)"
+    },
+    "text": {
+      "fa": "هر زن ۱۵ تا ۴۹ ساله و هر زن حامله باید ۵ نوبت این واکسین را بگیرد. این واکسین مادر و نوزاد را از تیتانوس و خناق محافظت می‌کند.",
+      "ps": "هره ۱۵ تر ۴۹ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.",
+      "en": "Every woman aged 15 to 49, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria."
+    },
+    "doses": [
+      {
+        "id": "td1",
+        "when": {
+          "fa": "نوبت اول: در اولین مراجعه به کلینیک",
+          "ps": "لومړی ځل: په لومړي ځل چې کلینیک ته ورځئ",
+          "en": "Dose 1: at the first clinic visit"
+        }
+      },
+      {
+        "id": "td2",
+        "when": {
+          "fa": "نوبت دوم: حداقل ۴ هفته بعد از نوبت اول",
+          "ps": "دویم ځل: لږ تر لږه ۴ اونۍ له لومړي ځل وروسته",
+          "en": "Dose 2: at least 4 weeks after dose 1"
+        }
+      },
+      {
+        "id": "td3",
+        "when": {
+          "fa": "نوبت سوم: ۶ ماه بعد از نوبت دوم",
+          "ps": "درېیم ځل: له دویم ځل ۶ میاشتې وروسته",
+          "en": "Dose 3: 6 months after dose 2"
+        }
+      },
+      {
+        "id": "td4",
+        "when": {
+          "fa": "نوبت چهارم: ۱ سال بعد از نوبت سوم",
+          "ps": "څلورم ځل: له درېیم ځل ۱ کال وروسته",
+          "en": "Dose 4: 1 year after dose 3"
+        }
+      },
+      {
+        "id": "td5",
+        "when": {
+          "fa": "نوبت پنجم: ۱ سال بعد از نوبت چهارم",
+          "ps": "پنځم ځل: له څلورم ځل ۱ کال وروسته",
+          "en": "Dose 5: 1 year after dose 4"
+        }
+      }
+    ]
+  },
+  "sources": [
+    "UNICEF Afghanistan (2023), routine schedule as reported in Saeedzai et al., Global Health Action 2025 (PMC12616657)",
+    "WHO/UNICEF estimates of national immunization coverage (WUENIC), Afghanistan profile, July 2026",
+    "WHO EMRO Afghanistan EPI review report (2017): schedule and tetanus toxoid for women",
+    "CDC MMWR 12 Dec 2024: polio eradication progress, Afghanistan (IPV2 introduction)",
+    "WHO EMR Measles and Rubella Bulletin (2024): rubella vaccine not yet introduced in Afghanistan",
+    "WHO position papers on vaccines; WHO/UNICEF Facts for Life (2010): immunization"
+  ],
+  "review": [
+    "IPV2 (second polio injection) was introduced in 2020 or 2021 (WUENIC says 2020, CDC says 2021); its age in Afghanistan is not confirmed. Placed at 9 months with measles 1, as in many Gavi countries. Please confirm with the MoPH EPI schedule.",
+    "Measles vaccine is measles-only (no rubella) as far as known: the 2024 WHO EMR bulletin says Afghanistan has not introduced rubella vaccine. If MoPH has switched to MR, change 'measles' to 'measles and rubella'.",
+    "OPV at 9 months was in the 2017 EPI table but not in the 2023 UNICEF description; it is left out. Please confirm.",
+    "Women's vaccine: the 2017 Afghan EPI review lists tetanus toxoid (TT1 to TT5); whether Afghanistan now uses Td is not confirmed. Written as 'tetanus vaccine' in Dari and Pashto, with '(Td)' only in the English title, and Td protects against diphtheria too. Dose 2 is 'at least 4 weeks' after dose 1 (the 2017 review says 'after one month').",
+    "'It is never too late to catch up' is broadly true, but rotavirus has an upper age limit and some doses are not given to older children; the note adds that the health worker will give the ones the child still needs.",
+    "Hepatitis B birth dose is best within 24 hours of birth; not stated here (the newborn topic says go to the clinic as soon as you can if born at home).",
+    "Vaccine names in Dari/Pashto (پنتاوالان، نوموکوک، روتا ویروس، بی سی جی) are transliterations; check they match the words on the Afghan vaccine card.",
+    "PCV protects against pneumonia, meningitis and ear infections; written as 'pneumonia' for simplicity."
+  ]
+}

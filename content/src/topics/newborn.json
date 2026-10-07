@@ -1,0 +1,280 @@
+{
+  "id": "newborn",
+  "section": "children",
+  "title": {
+    "fa": "مراقبت از نوزاد",
+    "ps": "د نوي زېږېدلي ماشوم پاملرنه",
+    "en": "Newborn care"
+  },
+  "summary": {
+    "fa": "نوزاد را گرم، سیر و پاک نگه دارید و به معاینه ببرید.",
+    "ps": "نوی زېږېدلی ماشوم ګرم، موړ او پاک وساتئ او معاینې ته یې بوځئ.",
+    "en": "Keep your new baby warm, fed and clean, and get checks."
+  },
+  "image": "newborn",
+  "blocks": [
+    {
+      "id": "newborn.lead",
+      "type": "lead",
+      "text": {
+        "fa": "روزهای اول زندگی خطرناک‌ترین روزها است. طفل را گرم نگه دارید، زیاد شیر بدهید و علایم خطر را بشناسید.",
+        "ps": "د ژوند لومړۍ ورځې تر ټولو خطرناکې دي. ماشوم ګرم وساتئ، ډېر ځله تی ورکړئ او د خطر نښې وپېژنئ.",
+        "en": "The first days of life are the most dangerous. Keep the baby warm, breastfeed often, and know the danger signs."
+      }
+    },
+    {
+      "id": "newborn.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "خشک کنید و پوست به پوست بگیرید",
+        "ps": "وچ یې کړئ او پر سینه یې کېږدئ",
+        "en": "Dry the baby, hold skin to skin"
+      },
+      "text": {
+        "fa": "طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر بگذارید. هر دو را با تکهٔ گرم بپوشانید.",
+        "ps": "ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه یې کېږدئ. دواړه په ګرم ټوکر پټ کړئ.",
+        "en": "Dry the baby at once and lay the baby on the mother's bare chest. Cover them both with a warm cloth."
+      }
+    },
+    {
+      "id": "newborn.breastfeed",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "در ساعت اول شیر بدهید",
+        "ps": "په لومړي ساعت کې تی ورکړئ",
+        "en": "Breastfeed in the first hour"
+      },
+      "text": {
+        "fa": "در ساعت اول بعد از ولادت شیردهی را شروع کنید. بعد هر وقت طفل خواست، شب و روز شیر بدهید.",
+        "ps": "د زېږون په لومړي ساعت کې تی ورکول پیل کړئ. بیا هر کله چې ماشوم وغواړي، شپه او ورځ تی ورکړئ.",
+        "en": "Start breastfeeding within one hour of birth. Then feed whenever the baby wants, day and night."
+      }
+    },
+    {
+      "id": "newborn.bath",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "یک روز صبر کنید، بعد بشویید",
+        "ps": "یوه ورځ صبر وکړئ، بیا یې ووینځئ",
+        "en": "Wait a day before the bath"
+      },
+      "text": {
+        "fa": "طفل را تا ۲۴ ساعت بعد از ولادت نشویید. بعد با آب گرم بشویید و زود خشک کنید.",
+        "ps": "ماشوم د زېږون څخه تر ۲۴ ساعتونو پورې مه وینځئ. بیا یې په تودو اوبو ووینځئ او ژر یې وچ کړئ.",
+        "en": "Do not wash the baby for the first 24 hours. Then use warm water and dry the baby quickly."
+      }
+    },
+    {
+      "id": "newborn.cord",
+      "type": "step",
+      "icon": "cord",
+      "title": {
+        "fa": "ناف را پاک و خشک نگه دارید",
+        "ps": "نوم پاک او وچ وساتئ",
+        "en": "Keep the cord clean and dry"
+      },
+      "text": {
+        "fa": "روی ناف هیچ چیز نگذارید. فقط دوایی را بمالید که کارمند صحی داده است.",
+        "ps": "پر نوم هېڅ شی مه لګوئ. یوازې هغه درمل پرې ولګوئ چې روغتیايي کارکوونکي درکړي وي.",
+        "en": "Put nothing on the cord. Use only the medicine the health worker gives you."
+      }
+    },
+    {
+      "id": "newborn.vaccines",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "واکسین‌های ولادت",
+        "ps": "د زېږون واکسینونه",
+        "en": "Birth vaccines"
+      },
+      "text": {
+        "fa": "طفل باید واکسین توبرکلوز، قطرهٔ پولیو و واکسین هپاتیت ب را بگیرد. اگر در خانه به دنیا آمده، هر چه زودتر به کلینیک ببرید.",
+        "ps": "ماشوم ته باید د نري رنځ واکسین، د پولیو څاڅکي او د هیپاټایټس ب واکسین ورکړل شي. که په کور کې زېږېدلی، ژر تر ژره یې کلینیک ته بوځئ.",
+        "en": "The baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, go to the clinic as soon as you can."
+      }
+    },
+    {
+      "id": "newborn.checks",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "چهار معاینه برای مادر و طفل",
+        "ps": "د مور او ماشوم څلور معاینې",
+        "en": "Four checks for mother and baby"
+      },
+      "text": {
+        "fa": "در روز اول، روز سوم، بین روز ۷ و ۱۴، و در ۶ هفتگی برای معاینه بروید.",
+        "ps": "په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینې ته ولاړ شئ.",
+        "en": "Go for checks on the first day, on day 3, between day 7 and 14, and at 6 weeks."
+      }
+    },
+    {
+      "id": "newborn.small",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "طفل کوچک مراقبت بیشتر می‌خواهد",
+        "ps": "کوچنی ماشوم ډېره پاملرنه غواړي",
+        "en": "Small babies need extra care"
+      },
+      "text": {
+        "fa": "طفل کوچک یا کم‌وزن را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید. پدر یا مادرکلان هم می‌توانند کمک کنند.",
+        "ps": "کوچنی یا کم وزنه ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ. پلار یا انا هم مرسته کولای شي.",
+        "en": "Keep a small baby skin to skin on the mother's chest, day and night. The father or grandmother can help too."
+      }
+    },
+    {
+      "id": "newborn.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر نوزاد یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که نوی زېږېدلی ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your newborn has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "newborn.urgent.feed",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "خوب شیر نمی‌خورد یا شیر خوردن را بس کرده است",
+            "ps": "ښه تی نه رودي، یا یې تی رودل بند کړي دي",
+            "en": "is not feeding well, or has stopped feeding"
+          }
+        },
+        {
+          "id": "newborn.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج می‌کند",
+            "ps": "اختلاج کوي",
+            "en": "has convulsions (fits)"
+          }
+        },
+        {
+          "id": "newborn.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز یا به سختی نفس می‌کشد",
+            "ps": "ژر ژر یا په سختۍ سا اخلي",
+            "en": "breathes fast or with difficulty"
+          }
+        },
+        {
+          "id": "newborn.urgent.chest",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "وقت نفس کشیدن، پایین سینه‌اش سخت به داخل کشیده می‌شود",
+            "ps": "د سا اخیستو پر وخت یې د سینې لاندې برخه ډېره ننوځي",
+            "en": "the lower chest pulls in strongly when breathing in"
+          }
+        },
+        {
+          "id": "newborn.urgent.temperature",
+          "icon": "thermometer",
+          "text": {
+            "fa": "بدنش داغ است، یا سرد است",
+            "ps": "بدن یې ډېر ګرم دی، یا سوړ دی",
+            "en": "feels hot, or feels cold to touch"
+          }
+        },
+        {
+          "id": "newborn.urgent.move",
+          "icon": "sleepy",
+          "text": {
+            "fa": "فقط وقتی تکانش بدهید حرکت می‌کند، یا هیچ حرکت نمی‌کند",
+            "ps": "یوازې هغه وخت خوځېږي چې لاس پرې ووهئ، یا هېڅ نه خوځېږي",
+            "en": "moves only when touched, or does not move at all"
+          }
+        },
+        {
+          "id": "newborn.urgent.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "در روز اول زرد شده، یا کف دست و پایش زرد است",
+            "ps": "په لومړۍ ورځ ژېړ شوی، یا د لاسونو او پښو تلي یې ژېړ دي",
+            "en": "is yellow on the first day, or has yellow palms and soles"
+          }
+        }
+      ]
+    },
+    {
+      "id": "newborn.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر نوزاد یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که نوی زېږېدلی ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your newborn has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "newborn.soon.cord",
+          "icon": "cord",
+          "text": {
+            "fa": "نافش سرخ است، بوی بد می‌دهد یا چرک دارد",
+            "ps": "نوم یې سور دی، بد بوی لري یا زوه لري",
+            "en": "the cord is red, smells bad or has pus"
+          }
+        },
+        {
+          "id": "newborn.soon.eyes",
+          "icon": "eye",
+          "text": {
+            "fa": "از چشمانش چرک می‌آید",
+            "ps": "له سترګو یې زوه راځي",
+            "en": "has pus coming from the eyes"
+          }
+        },
+        {
+          "id": "newborn.soon.skin",
+          "icon": "rash",
+          "text": {
+            "fa": "روی پوستش دانه‌های چرکی دارد",
+            "ps": "پر پوستکي یې زوه لرونکې دانې دي",
+            "en": "has spots with pus on the skin"
+          }
+        },
+        {
+          "id": "newborn.soon.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "پوست یا چشمانش زرد شده است",
+            "ps": "پوستکی یا سترګې یې ژېړې شوې دي",
+            "en": "the skin or eyes look yellow"
+          }
+        }
+      ]
+    },
+    {
+      "id": "newborn.jaundice",
+      "type": "tip",
+      "icon": "jaundice",
+      "text": {
+        "fa": "برای دیدن زردی، طفل را در روشنی روز ببینید. پوست پیشانی را آهسته فشار دهید و وقتی رها کردید، رنگش را ببینید.",
+        "ps": "د ژېړتیا د لیدو لپاره ماشوم د ورځې په رڼا کې وګورئ. د تندي پوستکی ورو کېکاږئ او چې پرېږدئ یې، رنګ یې وګورئ.",
+        "en": "To check for yellow skin, look in daylight. Press the skin of the forehead gently, and look at the colour as you let go."
+      }
+    }
+  ],
+  "sources": [
+    "WHO recommendations on postnatal care of the mother and newborn (2013): recommendations 2 to 7",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): sheets J10 and M6, care of the baby after birth",
+    "WHO/UNICEF Caring for the newborn at home (2015)",
+    "WHO Kangaroo mother care: a practical guide (2003) and WHO recommendations for care of the preterm or low-birth-weight infant (2022)",
+    "WHO IMCI Chart Booklet (2014): sick young infant up to 2 months"
+  ],
+  "review": [
+    "Cord care: Afghanistan's national policy on chlorhexidine for cord care was not confirmed. The text says 'put nothing on the cord; use only the medicine the health worker gives you' so it works whether or not chlorhexidine is given. Please check the MoPH policy and, if chlorhexidine 7.1% gel is routine, consider naming it.",
+    "Pashto word for the umbilical cord/navel (نوم) needs a native speaker check; the Dari uses ناف.",
+    "Birth vaccines step names BCG as 'TB vaccine' for the ear; hepatitis B birth dose is best within 24 hours. Check that 'if born at home, go to the clinic as soon as you can' fits local practice.",
+    "Postnatal check times follow WHO 2013 (within 24 hours, day 3, day 7 to 14, 6 weeks); check against the Afghan BPHS postnatal schedule.",
+    "Urgent item 'feels hot, or feels cold to touch' stands in for WHO's 37.5 C or more and below 35.5 C; families mostly have no thermometer.",
+    "Small baby step says 'father or grandmother can help'; WHO kangaroo care allows other family members to give skin-to-skin contact. Check cultural fit for fathers in Samangan.",
+    "Jaundice: soon alert sends any yellow skin or eyes to the clinic today (PCPNC M6 says 'seek care'); yellow on day 1 or yellow palms and soles are in the urgent alert, per WHO 2013."
+  ]
+}

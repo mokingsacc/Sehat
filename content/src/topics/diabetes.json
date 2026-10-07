@@ -1,0 +1,207 @@
+{
+  "id": "diabetes",
+  "section": "everyone",
+  "title": {
+    "fa": "مرض شکر",
+    "ps": "د شکرې ناروغي",
+    "en": "Diabetes"
+  },
+  "summary": {
+    "fa": "علایم، معاینه، غذا، پیاده‌روی، دوا و مراقبت پاها",
+    "ps": "نښې، معاینه، خواړه، پلي ګرځېدل، درمل او د پښو پاملرنه",
+    "en": "Signs, testing, food, walking, medicine and foot care"
+  },
+  "image": "diabetes",
+  "blocks": [
+    {
+      "id": "diabetes.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در مرض شکر، قند خون زیاد می‌شود. با غذای خوب، پیاده‌روی هر روزه و دوا، می‌شود خوب زندگی کرد.",
+        "ps": "د شکرې په ناروغۍ کې په وینه کې شکره ډېرېږي. په ښو خوړو، هره ورځ پلي ګرځېدو او درملو، ښه ژوند کېدای شي.",
+        "en": "In diabetes there is too much sugar in the blood. With good food, daily walking and medicine, people can live well."
+      }
+    },
+    {
+      "id": "diabetes.test",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "علایم را بشناسید، معاینه شوید",
+        "ps": "نښې وپېژنئ، معاینه شئ",
+        "en": "Know the signs, get tested"
+      },
+      "text": {
+        "fa": "تشنگی زیاد، زیاد پیشاب کردن، لاغر شدن، خستگی، زخمی که دیر جور می‌شود یا تاری چشم: در کلینیک قند خون خود را معاینه کنید.",
+        "ps": "ډېره تنده، ډېرې متیازې کول، ډنګرېدل، ستړیا، ټپونه چې ناوخته جوړېږي یا تت لید: په کلینیک کې د وینې شکره معاینه کړئ.",
+        "en": "Very thirsty, passing urine often, weight loss, tiredness, slow-healing wounds or blurred vision: get a sugar test at the clinic."
+      }
+    },
+    {
+      "id": "diabetes.food",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "شکر و نان سفید کمتر بخورید",
+        "ps": "لږه بوره او سپینه ډوډۍ وخورئ",
+        "en": "Less sugar and white bread"
+      },
+      "text": {
+        "fa": "در چای شکر کمتر بیندازید و با چای شیرینی کمتر بخورید. نان سفید و برنج کمتر، و سبزی، دال و لوبیا بیشتر بخورید.",
+        "ps": "په چای کې لږه بوره واچوئ او له چای سره لږ خواږه وخورئ. سپینه ډوډۍ او وریجې لږې، او سبزي، دال او لوبیا ډېر وخورئ.",
+        "en": "Put less sugar in tea and eat fewer sweets with tea. Eat less white bread and rice, and more vegetables, lentils and beans."
+      }
+    },
+    {
+      "id": "diabetes.walk",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "هر روز پیاده‌روی کنید",
+        "ps": "هره ورځ پلي وګرځئ",
+        "en": "Walk every day"
+      },
+      "text": {
+        "fa": "هر روز حدود نیم ساعت با قدم‌های تند پیاده‌روی کنید. این کار قند خون را پایین می‌آورد.",
+        "ps": "هره ورځ نږدې نیم ساعت په چټکو ګامونو پلي وګرځئ. دا کار د وینې شکره کموي.",
+        "en": "Walk at a good pace for about half an hour every day. It lowers blood sugar."
+      }
+    },
+    {
+      "id": "diabetes.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "هر روز دوا بخورید",
+        "ps": "هره ورځ درمل وخورئ",
+        "en": "Take medicine every day"
+      },
+      "text": {
+        "fa": "دوای خود را هر روز همان‌طور که کلینیک گفته بخورید، حتی وقتی خوب هستید. برای معاینه منظم دوباره به کلینیک بروید.",
+        "ps": "خپل درمل هره ورځ لکه څنګه چې کلینیک ویلي وخورئ، که ښه هم یاست. د منظمې معاینې لپاره بېرته کلینیک ته ورشئ.",
+        "en": "Take your medicine every day as the clinic tells you, even when you feel well. Go back to the clinic for regular checks."
+      }
+    },
+    {
+      "id": "diabetes.feet",
+      "type": "step",
+      "icon": "foot",
+      "title": {
+        "fa": "هر روز پاهای خود را ببینید",
+        "ps": "هره ورځ خپلې پښې وګورئ",
+        "en": "Check your feet every day"
+      },
+      "text": {
+        "fa": "پاها را برای بریدگی، زخم یا سرخی ببینید. همیشه بوت بپوشید و پاها را پاک و خشک نگه دارید.",
+        "ps": "پښې د پرې کېدو، ټپونو یا سوروالي لپاره وګورئ. تل بوټونه په پښو کړئ او پښې پاکې او وچې وساتئ.",
+        "en": "Look for cuts, sores or redness. Always wear shoes, and keep your feet clean and dry."
+      }
+    },
+    {
+      "id": "diabetes.low-sugar",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "قند پایین: زود شکر بدهید",
+        "ps": "ټیټه شکره: ژر بوره ورکړئ",
+        "en": "Low sugar: give sugar fast"
+      },
+      "text": {
+        "fa": "عرق کردن، لرزیدن یا گیجی می‌تواند علامه پایین شدن قند باشد. اگر قورت داده بتواند، شکر، چای شیرین یا آب شیرین بدهید، بعد کمی غذا.",
+        "ps": "خوله کېدل، رېږدېدل یا ګډوډي کېدای شي د شکرې د ټیټېدو نښه وي. که تېرولی شي، بوره یا خوږ چای یا خوږې اوبه ورکړئ، بیا لږ خواړه.",
+        "en": "Sweating, shaking or confusion can mean low sugar. If they can swallow, give sugar or a sweet drink, then some food."
+      }
+    },
+    {
+      "id": "diabetes.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر شخص مبتلا به مرض شکر یکی از این حالات را دارد، امروز به کلینیک بروید",
+        "ps": "که د شکرې ناروغ له دې حالتونو څخه یو هم لري، نن کلینیک ته ولاړ شئ",
+        "en": "If a person with diabetes has any of these, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "diabetes.soon.foot-sore",
+          "icon": "foot",
+          "text": {
+            "fa": "بریدگی یا زخم تازه در پا",
+            "ps": "په پښه کې نوی پرې کېدل یا ټپ",
+            "en": "a new cut or sore on the foot"
+          }
+        },
+        {
+          "id": "diabetes.soon.wound",
+          "icon": "wound",
+          "text": {
+            "fa": "زخمی که جور نمی‌شود",
+            "ps": "ټپ چې نه جوړېږي",
+            "en": "a wound that is not healing"
+          }
+        },
+        {
+          "id": "diabetes.soon.low-again",
+          "icon": "sugar",
+          "text": {
+            "fa": "پایین شدن قند که بار بار تکرار می‌شود",
+            "ps": "د شکرې ټیټېدل چې بیا بیا کېږي",
+            "en": "low sugar that keeps coming back"
+          }
+        }
+      ]
+    },
+    {
+      "id": "diabetes.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شخص مبتلا به مرض شکر یکی از این حالات را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که د شکرې ناروغ له دې حالتونو څخه یو هم لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If a person with diabetes has any of these, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "diabetes.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیجی یا بیهوشی",
+            "ps": "ګډوډي یا بې هوښي",
+            "en": "confusion or unconsciousness"
+          }
+        },
+        {
+          "id": "diabetes.urgent.vomiting",
+          "icon": "vomit",
+          "text": {
+            "fa": "استفراغ و حال بسیار خراب",
+            "ps": "کانګې او ډېر خراب حال",
+            "en": "vomiting and feeling very unwell"
+          }
+        },
+        {
+          "id": "diabetes.urgent.foot-wound",
+          "icon": "foot",
+          "text": {
+            "fa": "زخم پا که سرخ، سیاه یا بدبو شده",
+            "ps": "د پښې ټپ چې سور، تور یا بدبویه شوی وي",
+            "en": "a foot wound that is red, black or smelly"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Diabetes (November 2024): symptoms, healthy diet, physical activity, foot care",
+    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020): lifestyle advice, foot care, hypoglycaemia",
+    "WHO Package of Essential Noncommunicable Disease Interventions (PEN) 2013, Protocols 2 and 3: diet, activity, foot care, hypoglycaemia (give sugar if able to swallow), referral",
+    "WHO guideline: Sugars intake for adults and children (2015)"
+  ],
+  "review": [
+    "Low sugar: sugar or a sweet drink is given only 'if they can swallow', and the drink is described as sweet tea or sugar water in fa/ps. No amount is given.",
+    "Added a 'clinic today' alert (a new cut or sore on the foot, a wound that is not healing, low sugar that keeps coming back). This was not in the brief.",
+    "Walking 'about half an hour every day' is based on WHO's 150 minutes a week.",
+    "Urgent 'confusion or unconsciousness' covers both high and low sugar. Fast or deep breathing (DKA) is not listed separately.",
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "id": "leishmaniasis",
+  "section": "everyone",
+  "title": {
+    "fa": "زخم سالک (لیشمانیا)",
+    "ps": "د سالک زخم (لیشمانیا)",
+    "en": "Salak sores (leishmaniasis)"
+  },
+  "summary": {
+    "fa": "گزیدن پشهٔ خاکی زخم‌های دیرجور می‌آورد. تداوی در کلینیک کمک می‌کند.",
+    "ps": "د شګو د ماشي چیچل ورو جوړېدونکي زخمونه راولي. د کلینیک درملنه مرسته کوي.",
+    "en": "Sandfly bites cause slow-healing sores. Clinic treatment helps."
+  },
+  "image": "leishmaniasis",
+  "blocks": [
+    {
+      "id": "leishmaniasis.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سالک با یک دانهٔ کوچک سرخ در جای گزیدن پشهٔ خاکی شروع می‌شود، اکثراً روی روی، دست یا پا. آهسته‌آهسته زخم می‌شود که ماه‌ها می‌ماند و جایش تمام عمر باقی می‌ماند.",
+        "ps": "سالک د شګو د ماشي د چیچلو په ځای کې په یوه کوچنۍ سره دانه پیلېږي، ډېری وخت په مخ، لاسونو یا پښو. ورو ورو په زخم بدلېږي چې څو میاشتې پاتې کېږي او داغ یې ټول عمر پاتې کېږي.",
+        "en": "Salak starts as a small red bump where a tiny sandfly has bitten, often on the face, hands or legs. It slowly becomes a sore that lasts for months and leaves a scar for life."
+      }
+    },
+    {
+      "id": "leishmaniasis.clinic",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "زود به کلینیک بروید",
+        "ps": "ژر کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic early"
+      },
+      "text": {
+        "fa": "سالک قابل تداوی است. تداوی زود کمک می‌کند که زخم زودتر جور شود و جایش کوچک‌تر بماند.",
+        "ps": "سالک د درملنې وړ دی. ژر درملنه مرسته کوي چې زخم ژر جوړ شي او داغ یې کوچنی پاتې شي.",
+        "en": "Salak can be treated. Early treatment helps the sore heal sooner and leave a smaller scar."
+      }
+    },
+    {
+      "id": "leishmaniasis.cover",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "زخم را پاک و پوشیده نگه دارید",
+        "ps": "زخم پاک او پټ وساتئ",
+        "en": "Keep the sore clean and covered"
+      },
+      "text": {
+        "fa": "زخم را آرام با صابون و آب پاک بشویید و با تکهٔ پاک بپوشانید. پوشاندن نمی‌گذارد پشهٔ خاکی مریضی را به دیگران برساند.",
+        "ps": "زخم په نرمۍ په صابون او پاکو اوبو ومینځئ او په پاک ټوکر یې پټ کړئ. پټول نه پرېږدي چې ماشي ناروغي نورو ته ورسوي.",
+        "en": "Wash the sore gently with soap and clean water, and cover it with a clean cloth. Covering stops sandflies carrying it to others."
+      }
+    },
+    {
+      "id": "leishmaniasis.net",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "زیر پشه‌خانه بخوابید",
+        "ps": "د پشه خانې لاندې ویده شئ",
+        "en": "Sleep under a bed net"
+      },
+      "text": {
+        "fa": "پشهٔ خاکی از شام تا صبح می‌گزد. به خصوص اطفال را زیر پشه‌خانهٔ دوادار بخوابانید.",
+        "ps": "د شګو ماشي له ماښام نه تر سهاره چیچي. په ځانګړي ډول ماشومان د درمل لرونکې پشه خانې لاندې ویده کړئ.",
+        "en": "Sandflies bite from evening until morning. Put children especially to sleep under a treated bed net."
+      }
+    },
+    {
+      "id": "leishmaniasis.evening",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "شام پوست را بپوشانید",
+        "ps": "ماښام پوستکی پټ کړئ",
+        "en": "Cover the skin in the evening"
+      },
+      "text": {
+        "fa": "شام لباس آستین‌دراز و پتلون بپوشید. بعد از غروب آفتاب دروازه و کلکین را ببندید یا جالی بزنید.",
+        "ps": "ماښام اوږدې لستوڼې جامې او پتلون واغوندئ. د لمر له لوېدو وروسته دروازې او کړکۍ وتړئ یا جالۍ پرې ولګوئ.",
+        "en": "In the evening wear long sleeves and trousers. After sunset, close doors and windows or put screens on them."
+      }
+    },
+    {
+      "id": "leishmaniasis.clean",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "اطراف خانه را پاک کنید",
+        "ps": "د کور شاوخوا پاک کړئ",
+        "en": "Clean around the house"
+      },
+      "text": {
+        "fa": "کثافات، سرگین حیوانات و خاک‌وخشت کهنه را از نزدیک خانه دور کنید، چون پشهٔ خاکی آنجا زیاد می‌شود. درزهای دیوار را پر کنید.",
+        "ps": "کثافات، د څارویو پاتې شوني او زاړه خښتې او خاوره د کور له شاوخوا لرې کړئ، ځکه ماشي هلته زیاتېږي. د دېوالونو درزونه ډک کړئ.",
+        "en": "Clear rubbish, animal dung and old rubble from near the house, because sandflies breed there. Fill cracks in the walls."
+      }
+    },
+    {
+      "id": "leishmaniasis.soon-infected",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر زخم این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که زخم دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if the sore:"
+      },
+      "items": [
+        {
+          "id": "leishmaniasis.soon-infected.red",
+          "icon": "wound",
+          "text": {
+            "fa": "سرخ، داغ و خیلی دردناک شده است",
+            "ps": "سور، ګرم او ډېر دردناک شوی دی",
+            "en": "has become red, hot and very painful"
+          }
+        },
+        {
+          "id": "leishmaniasis.soon-infected.pus",
+          "icon": "warning",
+          "text": {
+            "fa": "چرک یا بوی بد دارد",
+            "ps": "زوه یا بد بوی لري",
+            "en": "has pus or a bad smell"
+          }
+        },
+        {
+          "id": "leishmaniasis.soon-infected.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "همراه با تب است",
+            "ps": "له تبې سره یو ځای دی",
+            "en": "comes with a fever"
+          }
+        }
+      ]
+    },
+    {
+      "id": "leishmaniasis.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این حالت را دارید، همین هفته به کلینیک بروید:",
+        "ps": "که دا حالت لرئ، همدا اونۍ کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic this week if there is:"
+      },
+      "items": [
+        {
+          "id": "leishmaniasis.soon.not-healing",
+          "icon": "calendar",
+          "text": {
+            "fa": "زخمی که بعد از دو هفته جور نشده است",
+            "ps": "زخم چې له دوو اونیو وروسته نه دی جوړ شوی",
+            "en": "a sore that has not healed after two weeks"
+          }
+        },
+        {
+          "id": "leishmaniasis.soon.face",
+          "icon": "eye",
+          "text": {
+            "fa": "زخم در روی، نزدیک چشم یا روی بند",
+            "ps": "په مخ، سترګې ته نږدې یا په بند باندې زخم",
+            "en": "a sore on the face, near the eye or on a joint"
+          }
+        },
+        {
+          "id": "leishmaniasis.soon.many",
+          "icon": "rash",
+          "text": {
+            "fa": "زخم‌های زیاد، یا زخمی که بزرگ‌تر می‌شود",
+            "ps": "ډېر زخمونه، یا زخم چې لویېږي",
+            "en": "many sores, or a sore that keeps growing"
+          }
+        },
+        {
+          "id": "leishmaniasis.soon.child",
+          "icon": "baby",
+          "text": {
+            "fa": "زخم در نوزاد یا طفل خورد",
+            "ps": "په کوچني ماشوم کې زخم",
+            "en": "a sore on a baby or small child"
+          }
+        }
+      ]
+    },
+    {
+      "id": "leishmaniasis.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "leishmaniasis.dont.burn",
+          "icon": "burn",
+          "text": {
+            "fa": "تیزاب، آب بتری یا آهن داغ روی زخم نگذارید",
+            "ps": "تېزاب، د بېټرۍ اوبه یا ګرمه اوسپنه په زخم مه ږدئ",
+            "en": "put acid, battery water or hot metal on the sore"
+          }
+        },
+        {
+          "id": "leishmaniasis.dont.scratch",
+          "icon": "no",
+          "text": {
+            "fa": "زخم را نخارید و پوست آن را نکنید",
+            "ps": "زخم مه ګروئ او پوستکی یې مه لرې کوئ",
+            "en": "scratch or pick at the sore"
+          }
+        },
+        {
+          "id": "leishmaniasis.dont.injection",
+          "icon": "syringe",
+          "text": {
+            "fa": "بدون معاینهٔ کلینیک از دواخانه پیچکاری نخرید",
+            "ps": "د کلینیک له معاینې پرته له درملتون نه پیچکاري مه اخلئ",
+            "en": "buy injections from a shop without a clinic check"
+          }
+        }
+      ]
+    },
+    {
+      "id": "leishmaniasis.spread",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "سالک با دست زدن سرایت نمی‌کند، اما پشهٔ خاکی آن را از زخم یک نفر به دیگری می‌برد.",
+        "ps": "سالک په لاس وهلو نه خپرېږي، خو د شګو ماشی یې د یو کس له زخم نه بل ته وړي.",
+        "en": "Salak does not spread by touch, but sandflies carry it from one person's sore to another."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Leishmaniasis (12 Jan 2023)",
+    "WHO EMRO Manual for case management of cutaneous leishmaniasis in the WHO Eastern Mediterranean Region (2014)",
+    "WHO Control of the leishmaniases, TRS 949 (2010): personal protection, treated nets, covering lesions in anthroponotic CL",
+    "Burden: Rahimi et al., medRxiv 12 Aug 2026 (87,245 cases in 2024; Hazrat-e-Sultan, Samangan 234.5/10,000; Jawzjan highest province)"
+  ],
+  "review": [
+    "Local names: 'سالک' (Dari) and 'د سالک زخم' (Pashto) are assumed. Confirm what families in Samangan call it (e.g. 'Kabul sore'/'دانهٔ کابلی'). Sandfly is written 'پشهٔ خاکی' (Dari) and 'د شګو ماشی' (Pashto); bed net is 'پشه‌خانه' / 'پشه خانه'.",
+    "The 'not healed after two weeks' threshold for a clinic visit this week is pragmatic, not from WHO.",
+    "The harmful practices listed (acid, battery water, hot metal on the sore) are assumed from regional practice and are not sourced. Confirm they happen locally or replace them.",
+    "Two soon alerts are used (infected sore: today; possible salak: this week). Check this is acceptable for the app layout.",
+    "Advice to cover sores to stop sandfly spread applies to the anthroponotic (L. tropica) form, which made up 92% of 2024 cases."
+  ]
+}

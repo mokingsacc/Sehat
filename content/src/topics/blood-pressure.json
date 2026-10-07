@@ -1,0 +1,189 @@
+{
+  "id": "blood-pressure",
+  "section": "everyone",
+  "title": {
+    "fa": "فشار خون بلند",
+    "ps": "د وینې لوړ فشار",
+    "en": "High blood pressure"
+  },
+  "summary": {
+    "fa": "اکثراً علامه ندارد. فشار خود را اندازه کنید، نمک کم بخورید، دوا را هر روز بخورید.",
+    "ps": "اکثره نښې نه لري. فشار مو اندازه کړئ، لږه مالګه وخورئ، درمل هره ورځ وخورئ.",
+    "en": "Often no signs. Get checked, eat less salt, take medicine daily."
+  },
+  "image": "blood-pressure",
+  "blocks": [
+    {
+      "id": "blood-pressure.lead",
+      "type": "lead",
+      "text": {
+        "fa": "فشار خون بلند اکثراً هیچ علامه‌ای ندارد، اما می‌تواند سکته مغزی یا حمله قلبی بیاورد. تنها راه فهمیدن، اندازه کردن آن است.",
+        "ps": "د وینې لوړ فشار اکثره هېڅ نښه نه لري، خو د دماغ سکته یا د زړه حمله راوستلی شي. د پوهېدو یوازینۍ لار یې اندازه کول دي.",
+        "en": "High blood pressure usually has no signs, but it can cause a stroke or heart attack. The only way to know is to check it."
+      }
+    },
+    {
+      "id": "blood-pressure.check",
+      "type": "step",
+      "icon": "bp",
+      "title": {
+        "fa": "هر سال فشار خود را اندازه کنید",
+        "ps": "هر کال خپل فشار اندازه کړئ",
+        "en": "Check it every year"
+      },
+      "text": {
+        "fa": "بعد از ۴۰ سالگی، حد اقل سالی یک بار فشار خون خود را در کلینیک اندازه کنید. زنان حامله باید در هر مراجعه فشار خود را اندازه کنند.",
+        "ps": "له ۴۰ کلنۍ وروسته، لږ تر لږه په کال کې یو ځل خپل د وینې فشار په کلینیک کې اندازه کړئ. امیندوارې ښځې دې په هر ورتګ کې خپل فشار اندازه کړي.",
+        "en": "After age 40, have your blood pressure checked at the clinic at least once a year. Pregnant women should have it checked at every visit."
+      }
+    },
+    {
+      "id": "blood-pressure.salt",
+      "type": "step",
+      "icon": "salt",
+      "title": {
+        "fa": "نمک کمتر بخورید",
+        "ps": "لږه مالګه وخورئ",
+        "en": "Eat less salt"
+      },
+      "text": {
+        "fa": "در پخت‌وپز نمک کمتر بزنید. نان شور، ترشی و خوراکی‌های نمکی کمتر بخورید.",
+        "ps": "په پخلي کې لږه مالګه واچوئ. مالګینه ډوډۍ، اچار او مالګین خوراکونه لږ وخورئ.",
+        "en": "Use less salt in cooking. Eat less salty bread, pickles and salted snacks."
+      }
+    },
+    {
+      "id": "blood-pressure.food",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "روغن کمتر، سبزی بیشتر",
+        "ps": "لږ غوړي، ډېرې سبزي",
+        "en": "Less ghee, more vegetables"
+      },
+      "text": {
+        "fa": "غذا را با روغن و چربی کمتر پخته کنید. هر روز سبزی و میوه بیشتر بخورید.",
+        "ps": "په لږو غوړیو او وازدو پخلی وکړئ. هره ورځ ډېرې سبزي او مېوې وخورئ.",
+        "en": "Cook with less ghee and fat. Eat more vegetables and fruit every day."
+      }
+    },
+    {
+      "id": "blood-pressure.walk",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "هر روز پیاده‌روی کنید",
+        "ps": "هره ورځ پلي وګرځئ",
+        "en": "Walk every day"
+      },
+      "text": {
+        "fa": "هر روز حدود نیم ساعت با قدم‌های تند پیاده‌روی کنید.",
+        "ps": "هره ورځ نږدې نیم ساعت په چټکو ګامونو پلي وګرځئ.",
+        "en": "Walk at a good pace for about half an hour every day."
+      }
+    },
+    {
+      "id": "blood-pressure.tobacco",
+      "type": "step",
+      "icon": "no",
+      "title": {
+        "fa": "سگرت و نسوار را ترک کنید",
+        "ps": "سګرټ او نسوار پرېږدئ",
+        "en": "Stop smoking and naswar"
+      },
+      "text": {
+        "fa": "سگرت و نسوار به قلب و رگ‌ها ضرر می‌رساند. کلینیک می‌تواند در ترک آن کمک کند.",
+        "ps": "سګرټ او نسوار زړه او رګونو ته زیان رسوي. کلینیک یې په پرېښودو کې مرسته کولی شي.",
+        "en": "Smoking and naswar harm the heart and blood vessels. The clinic can help you stop."
+      }
+    },
+    {
+      "id": "blood-pressure.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "هر روز دوا بخورید",
+        "ps": "هره ورځ درمل وخورئ",
+        "en": "Take medicine every day"
+      },
+      "text": {
+        "fa": "اگر به شما دوا داده شد، هر روز بخورید. وقتی خوب هستید هم قطع نکنید، و پیش از تمام شدن، دوای بیشتر بگیرید.",
+        "ps": "که درمل درکړل شول، هره ورځ یې وخورئ. کله چې ښه یاست هم یې مه پرېږدئ، او مخکې له دې چې خلاص شي، نور واخلئ.",
+        "en": "If you are given medicine, take it every day. Do not stop when you feel well, and get more before it runs out."
+      }
+    },
+    {
+      "id": "blood-pressure.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این علایم پیدا شد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې نښو څخه یوه هم پیدا شوه، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If any of these signs appear, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "blood-pressure.urgent.face",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "کج شدن ناگهانی یک طرف روی",
+            "ps": "د مخ د یو اړخ ناڅاپه کږېدل",
+            "en": "one side of the face suddenly drooping"
+          }
+        },
+        {
+          "id": "blood-pressure.urgent.weak",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "ضعف ناگهانی دست یا پا",
+            "ps": "د لاس یا پښې ناڅاپي کمزوري",
+            "en": "sudden weakness of an arm or leg"
+          }
+        },
+        {
+          "id": "blood-pressure.urgent.speech",
+          "icon": "talk",
+          "text": {
+            "fa": "مشکل ناگهانی در گپ زدن یا فهمیدن",
+            "ps": "په خبرو کولو یا پوهېدو کې ناڅاپي ستونزه",
+            "en": "sudden trouble speaking or understanding"
+          }
+        },
+        {
+          "id": "blood-pressure.urgent.chest",
+          "icon": "heart",
+          "text": {
+            "fa": "درد یا فشار در سینه",
+            "ps": "د سینې درد یا فشار",
+            "en": "pain or tightness in the chest"
+          }
+        },
+        {
+          "id": "blood-pressure.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردردی شدید همراه با تاری چشم",
+            "ps": "سخت سر درد له تت لید سره",
+            "en": "a severe headache with blurred vision"
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Hypertension (September 2025): most people have no symptoms; seek care immediately for severe symptoms",
+    "WHO fact sheet: Cardiovascular diseases (July 2025): signs of heart attack and stroke",
+    "WHO HEARTS technical package for cardiovascular disease management in primary health care (2018): healthy-lifestyle counselling, adherence",
+    "WHO guideline for the pharmacological treatment of hypertension in adults (2021)",
+    "WHO Package of Essential Noncommunicable Disease Interventions (PEN) 2013, Protocols 1 and 2: salt, diet, activity, tobacco",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): blood pressure at antenatal contacts"
+  ],
+  "review": [
+    "Walking 'about half an hour every day' is based on WHO's 150 minutes a week.",
+    "Salty foods are those in the brief (salty bread, pickles, salted snacks). Consider adding local foods such as qurut (dried salted yoghurt) and salted chickpeas or nuts.",
+    "Pregnancy: says blood pressure should be checked 'at every visit' (WHO ANC 2016).",
+    "Urgent alert uses the WHO stroke signs (face, arm or leg, speech), plus chest pain and severe headache with blurred vision. Icons: 'stroke-face' is used for both the face and the arm or leg item; 'talk' is used for speech.",
+    "Naswar is grouped with smoking as harmful to the heart and blood vessels; this is a general tobacco message.",
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+  ]
+}

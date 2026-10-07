@@ -1,0 +1,242 @@
+{
+  "id": "floods-quakes",
+  "section": "everyone",
+  "title": {
+    "fa": "سیلاب و زلزله",
+    "ps": "سېلاب او زلزله",
+    "en": "Floods and earthquakes"
+  },
+  "summary": {
+    "fa": "از پیش آماده شوید و بدانید هنگام سیلاب یا زلزله چه کنید.",
+    "ps": "مخکې چمتو شئ او پوه شئ چې د سېلاب یا زلزلې پر وخت څه وکړئ.",
+    "en": "Get ready early, and know what to do in floods or earthquakes."
+  },
+  "image": "floods-quakes",
+  "blocks": [
+    {
+      "id": "floods-quakes.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سیلاب‌های بهاری و زلزله در سمنگان مردم را کشته است. اگر بدانید پیش از حادثه، هنگام حادثه و بعد از آن چه کنید، خانوادهٔ خود را نجات می‌دهید.",
+        "ps": "د پسرلي سېلابونو او زلزلو په سمنګان کې خلک وژلي دي. که پوه شئ چې د پېښې مخکې، پر وخت او وروسته څه وکړئ، خپله کورنۍ ژغورلای شئ.",
+        "en": "Spring floods and earthquakes have killed people in Samangan. Knowing what to do before, during and after can save your family."
+      }
+    },
+    {
+      "id": "floods-quakes.plan",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "پلان خانواده را بسازید",
+        "ps": "د کورنۍ پلان جوړ کړئ",
+        "en": "Make a family plan"
+      },
+      "text": {
+        "fa": "یک جای بلند و امن را برای جمع شدن تعیین کنید و بگویید چه کسی اطفال و پیرها را می‌برد. یک خریطه با آب، غذا، دوا و چراغ دستی آماده بگذارید.",
+        "ps": "یو لوړ او خوندي ځای د راټولېدو لپاره وټاکئ او ووایاست چې څوک ماشومان او زاړه وړي. یوه کڅوړه له اوبو، خوړو، درملو او لاسي څراغ سره چمتو وساتئ.",
+        "en": "Choose a safe high place to meet, and agree who will carry babies and old people. Keep a bag ready with water, food, medicines and a torch."
+      }
+    },
+    {
+      "id": "floods-quakes.quake",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "هنگام زلزله: بنشینید، بپوشانید، بگیرید",
+        "ps": "د زلزلې پر وخت: کېنئ، پټ شئ، ونیسئ",
+        "en": "In an earthquake: drop, cover, hold"
+      },
+      "text": {
+        "fa": "روی زمین بنشینید، سر خود را زیر میز محکم یا کنار دیوار داخلی بپوشانید و محکم بگیرید. تا زمین می‌لرزد بیرون ندوید.",
+        "ps": "پر ځمکه کېنئ، سر مو د کلک مېز لاندې یا د دننني دېوال تر څنګ پټ کړئ او ټینګ ونیسئ. تر څو چې ځمکه لړزېږي، بهر ته مه منډه کوئ.",
+        "en": "Drop to the ground, cover your head under a strong table or by an inside wall, and hold on. Do not run out while the ground shakes."
+      }
+    },
+    {
+      "id": "floods-quakes.after-quake",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "بعد از لرزه به جای باز بروید",
+        "ps": "له لړزې وروسته خلاص ځای ته ولاړ شئ",
+        "en": "After shaking, go to open ground"
+      },
+      "text": {
+        "fa": "وقتی لرزه تمام شد، به جای باز و دور از دیوار، درخت و سیم برق بروید. منتظر لرزه‌های بعدی باشید.",
+        "ps": "کله چې لړزه ودرېږي، داسې خلاص ځای ته ولاړ شئ چې له دېوالونو، ونو او د برېښنا له مزو لرې وي. د نورو لړزو لپاره چمتو اوسئ.",
+        "en": "When the shaking stops, go to an open place away from walls, trees and power lines. Expect more shaking."
+      }
+    },
+    {
+      "id": "floods-quakes.flood",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "هنگام سیلاب به بلندی بروید",
+        "ps": "د سېلاب پر وخت لوړ ځای ته ولاړ شئ",
+        "en": "In a flood, go high"
+      },
+      "text": {
+        "fa": "اگر آب بالا می‌آید یا از دره صدای غرش می‌شنوید، فوراً به جای بلند بروید. برای نجات اسباب منتظر نمانید.",
+        "ps": "که اوبه پورته کېږي یا له درې نه شور اورئ، سمدستي لوړ ځای ته ولاړ شئ. د سامان د ژغورلو لپاره انتظار مه باسئ.",
+        "en": "If water is rising or you hear a roar from the valley, go to high ground at once. Do not wait to save your belongings."
+      }
+    },
+    {
+      "id": "floods-quakes.crossing",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "از آب سیلاب عبور نکنید",
+        "ps": "له سېلاب نه مه تېرېږئ",
+        "en": "Never cross flood water"
+      },
+      "text": {
+        "fa": "از آب روان پیاده، سواره یا با موتر عبور نکنید، حتی اگر کم‌عمق معلوم شود. بعد از باران اطفال را از دریا دور نگه دارید.",
+        "ps": "له بهېدونکو اوبو پلي، سپاره یا په موټر مه تېرېږئ، که څه هم کمې ژورې ښکاري. له باران وروسته ماشومان له سیند لرې وساتئ.",
+        "en": "Do not walk, ride or drive through moving water, even if it looks shallow. After rain, keep children away from rivers."
+      }
+    },
+    {
+      "id": "floods-quakes.clean-water",
+      "type": "step",
+      "icon": "ors",
+      "title": {
+        "fa": "بعد از سیلاب آب را پاک کنید",
+        "ps": "له سېلاب وروسته اوبه پاکې کړئ",
+        "en": "After a flood, make water safe"
+      },
+      "text": {
+        "fa": "آب سیلاب اسهال را پخش می‌کند. آب نوشیدنی را بجوشانید، دست‌ها را با صابون بشویید و اگر طفل اسهال دارد «او آر اس» بدهید.",
+        "ps": "د سېلاب اوبه نس ناستی خپروي. د څښلو اوبه وایشوئ، لاسونه په صابون ومینځئ او که ماشوم نس ناستی لري، «او آر اس» ورکړئ.",
+        "en": "Flood water spreads diarrhoea. Boil drinking water, wash hands with soap, and give ORS if a child has diarrhoea."
+      }
+    },
+    {
+      "id": "floods-quakes.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی بعد از سیلاب یا زلزله این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک له سېلاب یا زلزلې وروسته دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if after a flood or earthquake someone:"
+      },
+      "items": [
+        {
+          "id": "floods-quakes.urgent.trapped",
+          "icon": "house",
+          "text": {
+            "fa": "زیر دیوار یا سقف افتاده گیر مانده بود",
+            "ps": "د لوېدلي دېوال یا چت لاندې بند پاتې شوی و",
+            "en": "was trapped under a fallen wall or roof"
+          }
+        },
+        {
+          "id": "floods-quakes.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی شدید دارد",
+            "ps": "ډېره وینه ترې بهېږي",
+            "en": "is bleeding heavily"
+          }
+        },
+        {
+          "id": "floods-quakes.urgent.head",
+          "icon": "sleepy",
+          "text": {
+            "fa": "سرش ضربه خورده و استفراغ می‌کند یا خواب‌آلود است",
+            "ps": "سر یې ټکر خوړلی او کانګې کوي یا خوب وړی دی",
+            "en": "hit their head and vomits or is sleepy"
+          }
+        },
+        {
+          "id": "floods-quakes.urgent.breathing",
+          "icon": "breathe",
+          "text": {
+            "fa": "به سختی نفس می‌کشد یا درد سینه دارد",
+            "ps": "په سختۍ سا اخلي یا د سینې درد لري",
+            "en": "has trouble breathing or chest pain"
+          }
+        },
+        {
+          "id": "floods-quakes.urgent.limb",
+          "icon": "wound",
+          "text": {
+            "fa": "نمی‌تواند دست یا پا را حرکت دهد",
+            "ps": "لاس یا پښه نه شي خوځولای",
+            "en": "cannot move an arm or leg"
+          }
+        },
+        {
+          "id": "floods-quakes.urgent.water",
+          "icon": "water",
+          "text": {
+            "fa": "از آب سیلاب بیرون کشیده شده است",
+            "ps": "د سېلاب له اوبو ایستل شوی",
+            "en": "was pulled out of flood water"
+          }
+        }
+      ]
+    },
+    {
+      "id": "floods-quakes.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "floods-quakes.dont.house",
+          "icon": "house",
+          "text": {
+            "fa": "دوباره به خانهٔ آسیب‌دیده داخل نشوید",
+            "ps": "بېرته زیانمن کور ته مه ننوځئ",
+            "en": "go back into a damaged house"
+          }
+        },
+        {
+          "id": "floods-quakes.dont.gas",
+          "icon": "stove",
+          "text": {
+            "fa": "اگر بوی گاز می‌آید، آتش یا گوگرد روشن نکنید",
+            "ps": "که د ګاز بوی راځي، اور یا اورلګیت مه بلوئ",
+            "en": "light a fire or match if you smell gas"
+          }
+        },
+        {
+          "id": "floods-quakes.dont.play",
+          "icon": "baby",
+          "text": {
+            "fa": "نگذارید اطفال در آب سیلاب بازی کنند",
+            "ps": "مه پرېږدئ چې ماشومان د سېلاب په اوبو کې لوبې وکړي",
+            "en": "let children play in flood water"
+          }
+        }
+      ]
+    },
+    {
+      "id": "floods-quakes.feelings",
+      "type": "tip",
+      "icon": "sad",
+      "text": {
+        "fa": "بعد از حادثه، ترس و بی‌خوابی عادی است. با هم صحبت کنید و صفحهٔ فشار روحی را ببینید.",
+        "ps": "له پېښې وروسته وېره او بې خوبي عادي ده. یو له بل سره خبرې وکړئ او د رواني فشار پاڼه وګورئ.",
+        "en": "After a disaster, fear and poor sleep are common. Talk together and see the Stress page."
+      }
+    }
+  ],
+  "sources": [
+    "IFRC Public awareness and public education for disaster risk reduction: key messages (2018): earthquake (drop, cover, hold on), floods",
+    "WHO fact sheet / technical note: Flooding and communicable diseases (diarrhoea, safe water)",
+    "WHO/UNICEF Facts for Life (2010): emergencies",
+    "IFRC International first aid, resuscitation and education guidelines (2020): crush injury, head injury, drowning",
+    "Local events: 3 Nov 2025 M6.2 earthquake (Balkh-Samangan border); spring floods in Feroz Nakhchir and Khuram wa Sarbagh 2026 (see research_notes samangan_profile.md)"
+  ],
+  "review": [
+    "Drop, cover, hold on (IFRC) versus leaving a single-storey mud-brick house quickly: in rural Afghan adobe homes, some agencies advise getting out at once if you are by the door on the ground floor. Choose the message for Samangan.",
+    "The lead names Samangan. Keep it if the book is Samangan-only; otherwise make it general.",
+    "'Trapped under a wall or roof' is urgent even if the person looks well (crush injury). Check the urgent level."
+  ]
+}

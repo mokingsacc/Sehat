@@ -1,0 +1,249 @@
+{
+  "id": "after-birth",
+  "section": "women",
+  "title": {
+    "fa": "بعد از ولادت",
+    "ps": "له زېږون وروسته",
+    "en": "After the birth"
+  },
+  "summary": {
+    "fa": "مراقبت و علایم خطر برای مادر بعد از ولادت",
+    "ps": "له زېږون وروسته د مور پاملرنه او د خطر نښې",
+    "en": "Care and danger signs for the mother after birth"
+  },
+  "image": "after-birth",
+  "blocks": [
+    {
+      "id": "after-birth.lead",
+      "type": "lead",
+      "text": {
+        "fa": "هفته‌های بعد از ولادت برای مادر هم وقت خطر است. استراحت کنید، خوب غذا بخورید و علایم خطر را بشناسید.",
+        "ps": "له زېږون وروسته اونۍ د مور لپاره هم د خطر وخت دی. آرام وکړئ، ښه خواړه وخورئ او د خطر نښې وپېژنئ.",
+        "en": "The weeks after birth are a risky time for the mother too. Rest, eat well, and know the danger signs."
+      }
+    },
+    {
+      "id": "after-birth.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you have any of these signs, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "after-birth.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی زیاد، یا خونریزی که بیشتر می‌شود",
+            "ps": "ډېره وینه بهېدل، یا وینه چې زیاتېږي",
+            "en": "Heavy bleeding, or bleeding that gets more"
+          }
+        },
+        {
+          "id": "after-birth.urgent.fits",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج",
+            "ps": "اختلاج",
+            "en": "Fits"
+          }
+        },
+        {
+          "id": "after-birth.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردرد شدید، یا تاری دید",
+            "ps": "سخت سر درد، یا تت لید",
+            "en": "Severe headache, or blurred vision"
+          }
+        },
+        {
+          "id": "after-birth.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس تند یا نفس کشیدن مشکل",
+            "ps": "چټکه یا سخته ساه اخیستل",
+            "en": "Fast or difficult breathing"
+          }
+        },
+        {
+          "id": "after-birth.urgent.fever-discharge",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، همراه با ترشح بدبو از راه تناسلی",
+            "ps": "تبه، له تناسلي لارې د بدبویه اوبو سره",
+            "en": "Fever with a bad-smelling discharge from the vagina"
+          }
+        },
+        {
+          "id": "after-birth.urgent.calf",
+          "icon": "swelling",
+          "text": {
+            "fa": "ساق پای دردناک و پندیده",
+            "ps": "دردناکه او پړسېدلې پنډۍ",
+            "en": "A painful, swollen calf (back of the lower leg)"
+          }
+        },
+        {
+          "id": "after-birth.urgent.harm",
+          "icon": "sad",
+          "text": {
+            "fa": "فکر آسیب زدن به خود یا به طفل",
+            "ps": "ځان یا ماشوم ته د زیان رسولو فکرونه",
+            "en": "Thoughts of harming yourself or your baby"
+          }
+        }
+      ]
+    },
+    {
+      "id": "after-birth.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If you have any of these signs, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "after-birth.soon.wound",
+          "icon": "wound",
+          "text": {
+            "fa": "درد، سرخی یا ریم در زخم یا بخیه‌ها",
+            "ps": "په ټپ یا ګنډلو ځایونو کې درد، سوروالی یا زوې",
+            "en": "Pain, redness or pus in a wound or stitches"
+          }
+        },
+        {
+          "id": "after-birth.soon.breast",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "پستان دردناک، سرخ یا داغ",
+            "ps": "دردناک، سور یا تود تی",
+            "en": "A breast that is painful, red or hot"
+          }
+        },
+        {
+          "id": "after-birth.soon.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "درد یا مشکل هنگام ادرار",
+            "ps": "د تشو متیازو پر وخت درد یا ستونزه",
+            "en": "Pain or trouble passing urine"
+          }
+        },
+        {
+          "id": "after-birth.soon.sad",
+          "icon": "sad",
+          "text": {
+            "fa": "بیشتر وقت خیلی غمگین یا پریشان هستید",
+            "ps": "ډېر وخت ډېره خپه یا اندېښمنه یاست",
+            "en": "Feeling very sad or worried most of the time"
+          }
+        }
+      ]
+    },
+    {
+      "id": "after-birth.checks",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "معاینه مادر و طفل",
+        "ps": "د مور او ماشوم معاینه",
+        "en": "Check-ups for mother and baby"
+      },
+      "text": {
+        "fa": "مادر و طفل باید در روز اول، روز ۳، بین روز ۷ و ۱۴، و در ۶ هفتگی معاینه شوند.",
+        "ps": "مور او ماشوم باید په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینه شي.",
+        "en": "Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks."
+      }
+    },
+    {
+      "id": "after-birth.rest-food",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "استراحت کنید و خوب غذا بخورید",
+        "ps": "آرام وکړئ او ښه خواړه وخورئ",
+        "en": "Rest and eat well"
+      },
+      "text": {
+        "fa": "بیشتر از معمول غذا بخورید و زیاد مایعات بنوشید. از فامیل بخواهید در کار خانه کمک کنند تا مادر استراحت کند.",
+        "ps": "تر معمول ډېر خواړه وخورئ او ډېرې اوبه وڅښئ. له کورنۍ وغواړئ چې د کور په کار کې مرسته وکړي، چې مور آرام وکړي.",
+        "en": "Eat more than usual and drink plenty. Ask the family to help with housework, so the mother can rest."
+      }
+    },
+    {
+      "id": "after-birth.iron",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "تا ۳ ماه آهن بخورید",
+        "ps": "تر ۳ میاشتو اوسپنه وخورئ",
+        "en": "Take iron for 3 months"
+      },
+      "text": {
+        "fa": "تابلیت آهن را تا ۳ ماه بعد از ولادت، طوری که کلینیک داده، بخورید. این کار خونی را که در ولادت از دست رفته جبران می‌کند.",
+        "ps": "د اوسپنې ګولۍ له زېږون وروسته تر ۳ میاشتو، لکه څنګه چې کلینیک درکړې، وخورئ. دا هغه وینه جبرانوي چې په زېږون کې ضایع شوې.",
+        "en": "Keep taking iron tablets for 3 months after birth, as given by the clinic. This rebuilds the blood lost in the birth."
+      }
+    },
+    {
+      "id": "after-birth.breastfeeding",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "زیاد شیر بدهید و کمک بگیرید",
+        "ps": "ډېر ځله تی ورکړئ، مرسته واخلئ",
+        "en": "Breastfeed often, and get help"
+      },
+      "text": {
+        "fa": "روز و شب زیاد شیر بدهید. اگر درد دارد یا طفل پستان را خوب نمی‌گیرد، از قابله کمک بخواهید.",
+        "ps": "د ورځې او شپې ډېر ځله تی ورکړئ. که درد کوي یا ماشوم تی سم نه نیسي، له قابلې مرسته وغواړئ.",
+        "en": "Breastfeed often, day and night. If it hurts or the baby does not latch well, ask the midwife for help."
+      }
+    },
+    {
+      "id": "after-birth.low-mood",
+      "type": "step",
+      "icon": "sad",
+      "title": {
+        "fa": "غم زیاد قابل تداوی است",
+        "ps": "ډېر خپګان درملنه لري",
+        "en": "Low mood can be treated"
+      },
+      "text": {
+        "fa": "چند روز غمگینی بعد از ولادت عادی است. اگر ۲ هفته بیشتر روزها غمگین هستید، این یک مریضی است و کلینیک کمک کرده می‌تواند.",
+        "ps": "له زېږون وروسته د څو ورځو خپګان عادي دی. که ۲ اونۍ ډېرې ورځې خپه یاست، دا یوه ناروغي ده او کلینیک مرسته کولای شي.",
+        "en": "Feeling sad for a few days after birth is common. Sad most days for 2 weeks is an illness; the clinic can help."
+      }
+    },
+    {
+      "id": "after-birth.spacing",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "صبر کردن دست کم ۲ سال پیش از حاملگی بعدی، برای صحت مادر و طفل بهتر است. کلینیک در مورد فاصله بین ولادت‌ها مشوره می‌دهد.",
+        "ps": "د بلې امیندوارۍ نه مخکې لږ تر لږه ۲ کاله صبر د مور او ماشوم روغتیا لپاره ښه دی. کلینیک د زېږونونو ترمنځ د واټن په اړه مشوره درکوي.",
+        "en": "Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): sheet M4 Care for the mother after birth (danger signs, rest, food, iron)",
+    "WHO recommendations on postnatal care of the mother and newborn (2013): postnatal contacts within 24 hours, day 3, days 7 to 14, and 6 weeks",
+    "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022)",
+    "WHO Report of a technical consultation on birth spacing (2005): at least 24 months before the next pregnancy",
+    "WHO Thinking Healthy: psychological intervention for perinatal depression (2015)"
+  ],
+  "review": [
+    "BIRTH-SPACING TIP: keep or remove? It says 'Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births.' (WHO 2005 advises at least 24 months after a live birth.) It deliberately does not name contraception; check community acceptability in Samangan.",
+    "Fever with bad-smelling discharge is in the red list as requested; PCPNC M4 lists smelly discharge alone as 'go promptly' and 'fever and too weak to get out of bed' as immediate.",
+    "Iron for 3 months after birth follows PCPNC; the WHO 2016 postpartum iron recommendation says 6 to 12 weeks. No dose given ('as given by the clinic').",
+    "Low mood: 'thoughts of harming yourself or your baby' is in the red list and 'very sad or worried most of the time' in the amber list; check the tone of these sensitive items in fa/ps.",
+    "Check-ups: 'first day' means within 24 hours of birth (WHO 2013); stated for both mother and baby.",
+    "Icons: calf uses 'swelling' (a 'leg' icon would be better); pain passing urine uses 'urine-blood' (a plain 'urine' icon would be better); breast pain uses 'breastfeed'; spacing tip uses 'family'."
+  ]
+}

@@ -1,0 +1,946 @@
+{
+ "_note": "App interface words. 'say' entries are narrated (they have a speaker button and an audio clip named after their id). Draft Dari and Pashto for native review.",
+ "text": {
+  "appName": {
+   "fa": "صحت",
+   "ps": "صحت",
+   "en": "Sehat"
+  },
+  "chooseLang": {
+   "fa": "زبان خود را انتخاب کنید",
+   "ps": "خپله ژبه وټاکئ",
+   "en": "Choose your language"
+  },
+  "children": {
+   "fa": "اطفال",
+   "ps": "ماشومان",
+   "en": "Children"
+  },
+  "adults": {
+   "fa": "بزرگسالان",
+   "ps": "لویان",
+   "en": "Adults"
+  },
+  "women": {
+   "fa": "زنان",
+   "ps": "ښځې",
+   "en": "Women"
+  },
+  "everyone": {
+   "fa": "برای همه",
+   "ps": "د ټولو لپاره",
+   "en": "For everyone"
+  },
+  "home": {
+   "fa": "خانه",
+   "ps": "کور",
+   "en": "Home"
+  },
+  "family": {
+   "fa": "خانواده",
+   "ps": "کورنۍ",
+   "en": "Family"
+  },
+  "settings": {
+   "fa": "تنظیمات",
+   "ps": "تنظیمات",
+   "en": "Settings"
+  },
+  "listenPage": {
+   "fa": "این صفحه را بشنوید",
+   "ps": "دا پاڼه واورئ",
+   "en": "Listen to this page"
+  },
+  "playing": {
+   "fa": "در حال خواندن…",
+   "ps": "لوستل کېږي…",
+   "en": "Playing…"
+  },
+  "stop": {
+   "fa": "توقف",
+   "ps": "ودرول",
+   "en": "Stop"
+  },
+  "back": {
+   "fa": "برگشت",
+   "ps": "شاته",
+   "en": "Back"
+  },
+  "listen": {
+   "fa": "بشنوید",
+   "ps": "واورئ",
+   "en": "Listen"
+  },
+  "vaccines": {
+   "fa": "جدول واکسین",
+   "ps": "د واکسین مهال‌وېش",
+   "en": "Vaccines"
+  },
+  "dangerSigns": {
+   "fa": "علایم خطر",
+   "ps": "د خطر نښې",
+   "en": "Danger signs"
+  },
+  "myFamily": {
+   "fa": "خانوادۀ من",
+   "ps": "زما کورنۍ",
+   "en": "My family"
+  },
+  "firstAid": {
+   "fa": "کمک‌های اولیه",
+   "ps": "لومړنۍ مرستې",
+   "en": "First aid"
+  },
+  "topicsCount": {
+   "fa": "{n} موضوع، همه با صدا",
+   "ps": "{n} موضوعګانې، ټول له غږ سره",
+   "en": "{n} topics, all with sound"
+  },
+  "noAudio": {
+   "fa": "صدای این بخش هنوز ثبت نشده است",
+   "ps": "د دې برخې غږ لا نه دی ثبت شوی",
+   "en": "This part has not been recorded yet"
+  },
+  "addChild": {
+   "fa": "طفل جدید",
+   "ps": "نوی ماشوم",
+   "en": "Add a child"
+  },
+  "childName": {
+   "fa": "نام طفل",
+   "ps": "د ماشوم نوم",
+   "en": "Child's name"
+  },
+  "birthDate": {
+   "fa": "تاریخ تولد",
+   "ps": "د زېږون نېټه",
+   "en": "Date of birth"
+  },
+  "day": {
+   "fa": "روز",
+   "ps": "ورځ",
+   "en": "Day"
+  },
+  "month": {
+   "fa": "ماه",
+   "ps": "میاشت",
+   "en": "Month"
+  },
+  "year": {
+   "fa": "سال",
+   "ps": "کال",
+   "en": "Year"
+  },
+  "boy": {
+   "fa": "پسر",
+   "ps": "هلک",
+   "en": "Boy"
+  },
+  "girl": {
+   "fa": "دختر",
+   "ps": "نجلۍ",
+   "en": "Girl"
+  },
+  "save": {
+   "fa": "ذخیره",
+   "ps": "خوندي کول",
+   "en": "Save"
+  },
+  "cancel": {
+   "fa": "لغو",
+   "ps": "لغوه",
+   "en": "Cancel"
+  },
+  "delete": {
+   "fa": "حذف",
+   "ps": "ړنګول",
+   "en": "Delete"
+  },
+  "edit": {
+   "fa": "ویرایش",
+   "ps": "سمول",
+   "en": "Edit"
+  },
+  "deleteChildQ": {
+   "fa": "معلومات این طفل حذف شود؟",
+   "ps": "د دې ماشوم معلومات ړنګ شي؟",
+   "en": "Delete this child's record?"
+  },
+  "nextVaccine": {
+   "fa": "واکسین بعدی",
+   "ps": "بل واکسین",
+   "en": "Next vaccine"
+  },
+  "overdue": {
+   "fa": "ناوقت شده است، هر چه زودتر به کلینیک بروید",
+   "ps": "ناوخته شوی، ژر تر ژره کلینیک ته ولاړ شئ",
+   "en": "Overdue: go to the clinic as soon as you can"
+  },
+  "dueIn": {
+   "fa": "تا {n} روز دیگر",
+   "ps": "{n} ورځې وروسته",
+   "en": "in {n} days"
+  },
+  "dueToday": {
+   "fa": "امروز",
+   "ps": "نن",
+   "en": "today"
+  },
+  "given": {
+   "fa": "زده شد",
+   "ps": "ووهل شو",
+   "en": "Given"
+  },
+  "notGiven": {
+   "fa": "هنوز نه",
+   "ps": "لا نه",
+   "en": "Not yet"
+  },
+  "tapToMark": {
+   "fa": "وقتی واکسین زده شد، روی آن بزنید",
+   "ps": "کله چې واکسین ووهل شو، پر هغه ټک وکړئ",
+   "en": "Tap a visit when the vaccines are given"
+  },
+  "allDone": {
+   "fa": "همه واکسین‌ها تکمیل است",
+   "ps": "ټول واکسینونه بشپړ دي",
+   "en": "All vaccines done"
+  },
+  "vaccineCard": {
+   "fa": "کارت واکسین",
+   "ps": "د واکسین کارټ",
+   "en": "Vaccine card"
+  },
+  "weights": {
+   "fa": "وزن",
+   "ps": "وزن",
+   "en": "Weight"
+  },
+  "kg": {
+   "fa": "کیلو",
+   "ps": "کیلو",
+   "en": "kg"
+  },
+  "addWeight": {
+   "fa": "ثبت وزن",
+   "ps": "وزن ثبتول",
+   "en": "Add weight"
+  },
+  "noChildren": {
+   "fa": "هنوز طفلی ثبت نشده است",
+   "ps": "تر اوسه کوم ماشوم نه دی ثبت شوی",
+   "en": "No children added yet"
+  },
+  "ageMonths": {
+   "fa": "{n} ماهه",
+   "ps": "{n} میاشتنی",
+   "en": "{n} months old"
+  },
+  "ageDays": {
+   "fa": "{n} روزه",
+   "ps": "{n} ورځنی",
+   "en": "{n} days old"
+  },
+  "ageYears": {
+   "fa": "{n} ساله",
+   "ps": "{n} کلن",
+   "en": "{n} years old"
+  },
+  "language": {
+   "fa": "زبان",
+   "ps": "ژبه",
+   "en": "Language"
+  },
+  "speed": {
+   "fa": "سرعت صدا",
+   "ps": "د غږ چټکتیا",
+   "en": "Voice speed"
+  },
+  "normal": {
+   "fa": "عادی",
+   "ps": "عادي",
+   "en": "Normal"
+  },
+  "slower": {
+   "fa": "آهسته",
+   "ps": "ورو",
+   "en": "Slower"
+  },
+  "audioPack": {
+   "fa": "صدای {lang}",
+   "ps": "د {lang} غږ",
+   "en": "{lang} audio"
+  },
+  "clips": {
+   "fa": "{n} کلیپ",
+   "ps": "{n} کلیپونه",
+   "en": "{n} clips"
+  },
+  "download": {
+   "fa": "دانلود",
+   "ps": "ښکته کول",
+   "en": "Download"
+  },
+  "downloaded": {
+   "fa": "در گوشی است",
+   "ps": "په ټیلیفون کې دی",
+   "en": "On this phone"
+  },
+  "downloading": {
+   "fa": "در حال دانلود…",
+   "ps": "ښکته کېږي…",
+   "en": "Downloading…"
+  },
+  "noClipsYet": {
+   "fa": "هنوز ثبت نشده",
+   "ps": "لا نه دی ثبت شوی",
+   "en": "Not recorded yet"
+  },
+  "checkUpdates": {
+   "fa": "بررسی",
+   "ps": "کتل",
+   "en": "Check"
+  },
+  "upToDate": {
+   "fa": "کتاب شما تازه است",
+   "ps": "ستاسو کتاب تازه دی",
+   "en": "Your book is up to date"
+  },
+  "updated": {
+   "fa": "کتاب تازه شد",
+   "ps": "کتاب تازه شو",
+   "en": "The book was updated"
+  },
+  "updateReady": {
+   "fa": "نسخۀ تازه آماده است. برای باز کردن بزنید",
+   "ps": "نوې نسخه چمتو ده. د خلاصولو لپاره ټک وکړئ",
+   "en": "A new version is ready. Tap to open it"
+  },
+  "offline": {
+   "fa": "بدون انترنت هم کار می‌کند",
+   "ps": "بې انټرنېټه هم کار کوي",
+   "en": "Works without internet"
+  },
+  "offlineNow": {
+   "fa": "الان انترنت نیست",
+   "ps": "اوس انټرنېټ نشته",
+   "en": "No internet right now"
+  },
+  "version": {
+   "fa": "نسخه",
+   "ps": "نسخه",
+   "en": "Version"
+  },
+  "share": {
+   "fa": "به دوستان بدهید",
+   "ps": "ملګرو ته یې ورکړئ",
+   "en": "Give it to friends"
+  },
+  "shareSub": {
+   "fa": "لینک را در واتساپ یا پیام بفرستید",
+   "ps": "لینک په واټساپ یا پیغام کې ولېږئ",
+   "en": "Send the link by WhatsApp or message"
+  },
+  "shareText": {
+   "fa": "صحت، کتاب صحت خانواده: با صدا به دری و پښتو، بدون انترنت. باز کنید و روی صفحۀ گوشی اضافه کنید:",
+   "ps": "صحت، د کورنۍ روغتیا کتاب: په دري او پښتو غږ سره، بې انټرنېټه. خلاص یې کړئ او د ټیلیفون پر پاڼه یې زیات کړئ:",
+   "en": "Sehat, the family health book: narrated in Dari and Pashto, works offline. Open it and add it to your home screen:"
+  },
+  "copied": {
+   "fa": "لینک کاپی شد",
+   "ps": "لینک کاپي شو",
+   "en": "Link copied"
+  },
+  "usageStats": {
+   "fa": "شمار استفاده",
+   "ps": "د کارونې شمېر",
+   "en": "Usage counts"
+  },
+  "usageStatsSub": {
+   "fa": "فقط شمار، بدون نام و بدون شماره",
+   "ps": "یوازې شمېر، بې نوم او بې شمېرې",
+   "en": "Counts only, no names or numbers"
+  },
+  "recordMode": {
+   "fa": "ثبت صدا برای گوینده",
+   "ps": "د ویونکي لپاره غږ ثبتول",
+   "en": "Record the narration"
+  },
+  "recordModeSub": {
+   "fa": "برای کسی که متن‌ها را می‌خواند",
+   "ps": "د هغه چا لپاره چې متنونه لولي",
+   "en": "For the person who reads the texts aloud"
+  },
+  "install": {
+   "fa": "روی صفحۀ گوشی اضافه کنید",
+   "ps": "د ټیلیفون پر پاڼه یې زیات کړئ",
+   "en": "Add to your home screen"
+  },
+  "installSub": {
+   "fa": "تا بدون انترنت هم باز شود",
+   "ps": "څو بې انټرنېټه هم خلاص شي",
+   "en": "So it opens without internet"
+  },
+  "installIos": {
+   "fa": "در سفاری دکمۀ شریک کردن را بزنید، بعد «Add to Home Screen» را انتخاب کنید",
+   "ps": "په سفاري کې د شریکولو تڼۍ ووهئ، بیا «Add to Home Screen» وټاکئ",
+   "en": "In Safari tap the Share button, then choose Add to Home Screen"
+  },
+  "about": {
+   "fa": "دربارۀ این کتاب",
+   "ps": "د دې کتاب په اړه",
+   "en": "About this book"
+  },
+  "sources": {
+   "fa": "منابع",
+   "ps": "سرچینې",
+   "en": "Sources"
+  },
+  "close": {
+   "fa": "بستن",
+   "ps": "بندول",
+   "en": "Close"
+  },
+  "studioTitle": {
+   "fa": "ثبت صدا",
+   "ps": "غږ ثبتول",
+   "en": "Record narration"
+  },
+  "studioHelp": {
+   "fa": "هر متن را آرام و واضح بخوانید. دکمۀ سرخ را بزنید، بخوانید، دوباره بزنید.",
+   "ps": "هر متن ورو او روښانه ولولئ. سور تڼۍ ووهئ، ولولئ، بیا یې ووهئ.",
+   "en": "Read each text slowly and clearly. Tap the red button, read, tap again."
+  },
+  "record": {
+   "fa": "ثبت",
+   "ps": "ثبت",
+   "en": "Record"
+  },
+  "recording": {
+   "fa": "در حال ثبت…",
+   "ps": "ثبتېږي…",
+   "en": "Recording…"
+  },
+  "play": {
+   "fa": "پخش",
+   "ps": "غږول",
+   "en": "Play"
+  },
+  "next": {
+   "fa": "بعدی",
+   "ps": "بل",
+   "en": "Next"
+  },
+  "previous": {
+   "fa": "قبلی",
+   "ps": "مخکنی",
+   "en": "Previous"
+  },
+  "recordedOf": {
+   "fa": "{a} از {b} ثبت شده",
+   "ps": "له {b} څخه {a} ثبت شوي",
+   "en": "{a} of {b} recorded"
+  },
+  "exportRec": {
+   "fa": "فرستادن صداها",
+   "ps": "غږونه لېږل",
+   "en": "Send recordings"
+  },
+  "exportRecSub": {
+   "fa": "یک فایل ساخته می‌شود؛ آن را به مسئول برنامه بفرستید",
+   "ps": "یوه فایل جوړېږي؛ د اپ مسؤل ته یې ولېږئ",
+   "en": "Makes one file; send it to the app's organiser"
+  },
+  "micDenied": {
+   "fa": "اجازۀ مایکروفون داده نشد",
+   "ps": "د مایکروفون اجازه ورنه کړل شوه",
+   "en": "Microphone permission was not given"
+  },
+  "studioReadThis": {
+   "fa": "این را بخوانید:",
+   "ps": "دا ولولئ:",
+   "en": "Read this:"
+  },
+  "ask": {
+   "fa": "چه مشکلی دارید؟",
+   "ps": "څه ستونزه لرئ؟",
+   "en": "What is wrong?"
+  },
+  "askSub": {
+   "fa": "بگویید یا بنویسید، مثلاً «طفلم تب دارد»",
+   "ps": "ووایئ یا ولیکئ، لکه «ماشوم مې تبه لري»",
+   "en": "Say it or write it, e.g. \"my child has a fever\""
+  },
+  "askPlaceholder": {
+   "fa": "اینجا بنویسید…",
+   "ps": "دلته ولیکئ…",
+   "en": "Type here…"
+  },
+  "orPick": {
+   "fa": "یا یک تصویر را انتخاب کنید",
+   "ps": "یا یو انځور وټاکئ",
+   "en": "Or pick a picture"
+  },
+  "results": {
+   "fa": "این صفحات کمک می‌کنند",
+   "ps": "دا پاڼې مرسته کوي",
+   "en": "These pages can help"
+  },
+  "noResults": {
+   "fa": "چیزی پیدا نشد. یک تصویر را انتخاب کنید یا به کلینیک بروید.",
+   "ps": "هېڅ ونه موندل شو. یو انځور وټاکئ یا کلینیک ته ولاړ شئ.",
+   "en": "Nothing found. Pick a picture, or go to the clinic."
+  },
+  "listening": {
+   "fa": "گوش می‌دهم… حالا بگویید",
+   "ps": "اورم… اوس ووایئ",
+   "en": "Listening… speak now"
+  },
+  "micOffline": {
+   "fa": "گفتن فقط با انترنت کار می‌کند. لطفاً بنویسید یا تصویر را انتخاب کنید.",
+   "ps": "خبرې یوازې له انټرنېټ سره کار کوي. مهرباني وکړئ ولیکئ یا انځور وټاکئ.",
+   "en": "Speaking needs internet. Please type or pick a picture."
+  },
+  "feedback": {
+   "fa": "نظر شما",
+   "ps": "ستاسو نظر",
+   "en": "Your ideas"
+  },
+  "feedbackSub": {
+   "fa": "بگویید چه چیزی را بهتر بسازیم",
+   "ps": "ووایئ چې څه ښه کړو",
+   "en": "Tell us what to improve"
+  },
+  "fbRecord": {
+   "fa": "پیام صوتی",
+   "ps": "غږیز پیغام",
+   "en": "Voice message"
+  },
+  "fbWrite": {
+   "fa": "یا بنویسید",
+   "ps": "یا ولیکئ",
+   "en": "Or write"
+  },
+  "fbSend": {
+   "fa": "فرستادن",
+   "ps": "لېږل",
+   "en": "Send"
+  },
+  "fbThanks": {
+   "fa": "تشکر! پیام شما ذخیره شد و وقتی انترنت باشد فرستاده می‌شود.",
+   "ps": "مننه! ستاسو پیغام خوندي شو او کله چې انټرنېټ وي لېږل کېږي.",
+   "en": "Thank you! Your message is saved and will be sent when there is internet."
+  },
+  "fbRecorded": {
+   "fa": "صدا ثبت شد",
+   "ps": "غږ ثبت شو",
+   "en": "Voice recorded"
+  },
+  "near": {
+   "fa": "نزدیک‌ترین کلینیک",
+   "ps": "نږدې کلینیک",
+   "en": "Nearest clinic"
+  },
+  "nearSub": {
+   "fa": "شفاخانه‌ها و کلینیک‌های نزدیک شما",
+   "ps": "ستاسو نږدې روغتونونه او کلینیکونه",
+   "en": "Hospitals and clinics near you"
+  },
+  "findMe": {
+   "fa": "جای من را پیدا کن",
+   "ps": "زما ځای پیدا کړه",
+   "en": "Find where I am"
+  },
+  "locating": {
+   "fa": "در حال پیدا کردن جای شما…",
+   "ps": "ستاسو ځای پیدا کېږي…",
+   "en": "Finding where you are…"
+  },
+  "locFail": {
+   "fa": "جای شما پیدا نشد. GPS گوشی را روشن کنید.",
+   "ps": "ستاسو ځای پیدا نشو. د ټیلیفون GPS روښانه کړئ.",
+   "en": "Could not find your location. Turn on the phone's GPS."
+  },
+  "km": {
+   "fa": "{n} کیلومتر",
+   "ps": "{n} کیلومتره",
+   "en": "{n} km"
+  },
+  "directions": {
+   "fa": "راه",
+   "ps": "لار",
+   "en": "Directions"
+  },
+  "noFacilities": {
+   "fa": "فهرست کلینیک‌ها هنوز اضافه نشده است",
+   "ps": "د کلینیکونو لست لا نه دی زیات شوی",
+   "en": "The clinic list has not been added yet"
+  },
+  "facType": {
+   "fa": "",
+   "ps": "",
+   "en": ""
+  },
+  "svc_emergency": {
+   "fa": "عاجل",
+   "ps": "بېړنی",
+   "en": "Emergency"
+  },
+  "svc_maternity": {
+   "fa": "ولادت",
+   "ps": "زېږون",
+   "en": "Births"
+  },
+  "svc_vaccines": {
+   "fa": "واکسین",
+   "ps": "واکسین",
+   "en": "Vaccines"
+  },
+  "svc_tb": {
+   "fa": "توبرکلوز",
+   "ps": "نری رنځ",
+   "en": "TB"
+  },
+  "svc_nutrition": {
+   "fa": "تغذی",
+   "ps": "تغذیه",
+   "en": "Nutrition"
+  },
+  "svc_rabies": {
+   "fa": "واکسین هاری",
+   "ps": "د لېونتوب واکسین",
+   "en": "Rabies vaccine"
+  },
+  "svc_lab": {
+   "fa": "لابراتوار",
+   "ps": "لابراتوار",
+   "en": "Lab"
+  },
+  "svc_xray": {
+   "fa": "اکسری",
+   "ps": "اکسرې",
+   "en": "X-ray"
+  },
+  "svc_surgery": {
+   "fa": "جراحی",
+   "ps": "جراحي",
+   "en": "Surgery"
+  },
+  "svc_blood": {
+   "fa": "بانک خون",
+   "ps": "د وینې بانک",
+   "en": "Blood bank"
+  },
+  "ft_provincial-hospital": {
+   "fa": "شفاخانۀ ولایتی",
+   "ps": "ولایتي روغتون",
+   "en": "Provincial hospital"
+  },
+  "ft_district-hospital": {
+   "fa": "شفاخانۀ ولسوالی",
+   "ps": "د ولسوالۍ روغتون",
+   "en": "District hospital"
+  },
+  "ft_chc": {
+   "fa": "کلینیک جامع صحی",
+   "ps": "جامع روغتیايي مرکز",
+   "en": "Comprehensive health centre"
+  },
+  "ft_bhc": {
+   "fa": "کلینیک صحی اساسی",
+   "ps": "اساسي روغتیايي مرکز",
+   "en": "Basic health centre"
+  },
+  "ft_shc": {
+   "fa": "مرکز صحی فرعی",
+   "ps": "فرعي روغتیايي مرکز",
+   "en": "Sub health centre"
+  },
+  "ft_health-post": {
+   "fa": "پوستۀ صحی",
+   "ps": "روغتیايي پوسته",
+   "en": "Health post"
+  },
+  "ft_maternity": {
+   "fa": "زایشگاه",
+   "ps": "زېږنتون",
+   "en": "Maternity"
+  },
+  "ft_private-hospital": {
+   "fa": "شفاخانۀ خصوصی",
+   "ps": "خصوصي روغتون",
+   "en": "Private hospital"
+  },
+  "ft_pharmacy": {
+   "fa": "دواخانه",
+   "ps": "درملتون",
+   "en": "Pharmacy"
+  },
+  "ft_other": {
+   "fa": "مرکز صحی",
+   "ps": "روغتیايي مرکز",
+   "en": "Health centre"
+  },
+  "mapCredit": {
+   "fa": "معلومات نقشه: © OpenStreetMap contributors",
+   "ps": "د نقشې معلومات: © OpenStreetMap contributors",
+   "en": "Map data: © OpenStreetMap contributors"
+  },
+  "nearIncomplete": {
+   "fa": "این فهرست هنوز کامل نیست. شفاخانه ولایتی ایبک و کلینیک‌های دولتی به‌زودی اضافه می‌شوند.",
+   "ps": "دا لېست لا بشپړ نه دی. د ایبک ولایتي روغتون او دولتي کلینیکونه به ژر ورزیات شي.",
+   "en": "This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon."
+  },
+  "nearHospitals": {
+   "fa": "شفاخانه‌ها",
+   "ps": "روغتونونه",
+   "en": "Hospitals"
+  },
+  "nearOther": {
+   "fa": "کلینیک‌ها و داکتران نزدیک",
+   "ps": "نږدې کلینیکونه او ډاکټران",
+   "en": "Nearby clinics and doctors"
+  },
+  "chooseVoice": {
+   "fa": "صدا را انتخاب کنید",
+   "ps": "غږ وټاکئ",
+   "en": "Choose a voice"
+  },
+  "voice": {
+   "fa": "صدا",
+   "ps": "غږ",
+   "en": "Voice"
+  },
+  "woman": {
+   "fa": "صدای زن",
+   "ps": "د ښځې غږ",
+   "en": "Woman's voice"
+  },
+  "man": {
+   "fa": "صدای مرد",
+   "ps": "د سړي غږ",
+   "en": "Man's voice"
+  },
+  "voices": {
+   "fa": "صداهای کتاب",
+   "ps": "د کتاب غږونه",
+   "en": "Voices of the book"
+  },
+  "packUrgent": {
+   "fa": "مهم‌ترین: علایم خطر و کمک‌های اولیه",
+   "ps": "تر ټولو مهم: د خطر نښې او لومړنۍ مرستې",
+   "en": "Most important: danger signs and first aid"
+  },
+  "mb": {
+   "fa": "{n} میگابایت",
+   "ps": "{n} میګابایټه",
+   "en": "{n} MB"
+  },
+  "notDownloaded": {
+   "fa": "هنوز در گوشی نیست",
+   "ps": "لا په ټیلیفون کې نشته",
+   "en": "Not on this phone yet"
+  },
+  "partDownloaded": {
+   "fa": "{n} در گوشی است",
+   "ps": "{n} په ټیلیفون کې دی",
+   "en": "{n} on this phone"
+  },
+  "queued": {
+   "fa": "در نوبت",
+   "ps": "په نوبت کې",
+   "en": "Waiting its turn"
+  },
+  "waitingNet": {
+   "fa": "منتظر انترنت",
+   "ps": "د انټرنېټ په تمه",
+   "en": "Waiting for internet"
+  },
+  "slowNet": {
+   "fa": "انترنت کند یا گران است. صداهای دیگر را وقتی انترنت خوب بود دانلود کنید.",
+   "ps": "انټرنېټ ورو یا ګران دی. نور غږونه هغه وخت ښکته کړئ چې انټرنېټ ښه وي.",
+   "en": "Slow or costly internet. Download the other voices when the internet is good."
+  },
+  "deleteVoices": {
+   "fa": "پاک کردن صداها",
+   "ps": "غږونه پاک کړئ",
+   "en": "Delete voices"
+  },
+  "deleteVoicesSub": {
+   "fa": "برای خالی کردن جای گوشی. کتاب باز هم کار می‌کند.",
+   "ps": "د ټیلیفون د ځای خالي کولو لپاره. کتاب بیا هم کار کوي.",
+   "en": "To free space on the phone. The book still works."
+  },
+  "deleteVoicesQ": {
+   "fa": "صداها از این گوشی پاک شوند؟ هر وقت خواستید دوباره دانلود کنید.",
+   "ps": "غږونه له دې ټیلیفون څخه پاک شي؟ هر وخت چې وغواړئ بیا یې ښکته کړئ.",
+   "en": "Delete the voices from this phone? You can download them again any time."
+  },
+  "deleteOldVoiceQ": {
+   "fa": "صدای قبلی ({name}) از گوشی پاک شود؟ {n} جای خالی می‌شود.",
+   "ps": "پخوانی غږ ({name}) له ټیلیفون څخه پاک شي؟ {n} ځای به خالي شي.",
+   "en": "Delete the old voice ({name}) from the phone? It frees {n}."
+  },
+  "keep": {
+   "fa": "نگه دارید",
+   "ps": "وې ساتئ",
+   "en": "Keep"
+  },
+  "storageInfo": {
+   "fa": "کتاب {used} جای گرفته · جای خالی: {free}",
+   "ps": "کتاب {used} ځای نیولی · خالي ځای: {free}",
+   "en": "The book uses {used} · Space left: {free}"
+  },
+  "gb": {
+   "fa": "{n} گیگابایت",
+   "ps": "{n} ګیګابایټه",
+   "en": "{n} GB"
+  },
+  "phoneFull": {
+   "fa": "جای گوشی پر است",
+   "ps": "د ټیلیفون ځای ډک دی",
+   "en": "The phone is full"
+  },
+  "sendApp": {
+   "fa": "این برنامه را به تلفن دیگر بفرستید",
+   "ps": "دا اپ بل ټیلیفون ته ولېږئ",
+   "en": "Send this app to another phone"
+  },
+  "sendAppSub": {
+   "fa": "با بلوتوث، بدون انترنت",
+   "ps": "په بلوتوث، بې انټرنېټه",
+   "en": "By Bluetooth, no internet needed"
+  }
+ },
+ "say": {
+  "ui.welcome": {
+   "fa": "به صحت خوش آمدید، کتاب صحت خانوادۀ شما. اگر دری می‌خواهید، دکمۀ دری را بزنید.",
+   "ps": "صحت ته ښه راغلاست، ستاسو د کورنۍ د روغتیا کتاب. که پښتو غواړئ، د پښتو تڼۍ ووهئ.",
+   "en": "Welcome to Sehat, your family health book. Tap your language."
+  },
+  "ui.home": {
+   "fa": "این کتاب به شما کمک می‌کند از صحت خانوادۀ خود مراقبت کنید. اطفال یا بزرگسالان را انتخاب کنید. هر جا بلندگو را دیدید، بزنید تا بشنوید.",
+   "ps": "دا کتاب له تاسو سره مرسته کوي چې د خپلې کورنۍ د روغتیا پاملرنه وکړئ. ماشومان یا لویان وټاکئ. هر چېرې چې ویاند ووینئ، ټک یې کړئ چې واورئ.",
+   "en": "This book helps you look after your family's health. Choose children or adults. Wherever you see a speaker, tap it to listen."
+  },
+  "ui.children": {
+   "fa": "بخش اطفال. روی هر موضوع بزنید تا باز شود. بلندگو نام موضوع را می‌خواند.",
+   "ps": "د ماشومانو برخه. پر هر موضوع ټک وکړئ چې خلاصه شي. ویاند د موضوع نوم لولي.",
+   "en": "Children's section. Tap a topic to open it. The speaker reads its name."
+  },
+  "ui.adults": {
+   "fa": "بخش بزرگسالان: صحت زنان، و علایم خطر و امراض عام برای همه.",
+   "ps": "د لویانو برخه: د ښځو روغتیا، او د ټولو لپاره د خطر نښې او عامې ناروغۍ.",
+   "en": "Adults' section: women's health, and danger signs and common illnesses for everyone."
+  },
+  "ui.family": {
+   "fa": "اینجا کارت واکسین اطفال خود را نگه دارید. همه چیز فقط در همین گوشی می‌ماند.",
+   "ps": "دلته د خپلو ماشومانو د واکسین کارټ وساتئ. هر څه یوازې په همدې ټیلیفون کې پاتې کېږي.",
+   "en": "Keep your children's vaccine card here. Everything stays on this phone only."
+  },
+  "ui.disclaimer": {
+   "fa": "این کتاب جای داکتر را نمی‌گیرد. در حالت خطر به نزدیک‌ترین کلینیک یا شفاخانه بروید.",
+   "ps": "دا کتاب د ډاکټر ځای نه نیسي. د خطر په وخت کې نږدې کلینیک یا روغتون ته ولاړ شئ.",
+   "en": "This book does not replace a doctor. In danger, go to the nearest clinic or hospital."
+  },
+  "ui.install": {
+   "fa": "این کتاب را روی صفحۀ گوشی خود اضافه کنید تا بدون انترنت هم باز شود.",
+   "ps": "دا کتاب د خپل ټیلیفون پر پاڼه زیات کړئ چې بې انټرنېټه هم خلاص شي.",
+   "en": "Add this book to your phone's home screen so it opens without internet."
+  },
+  "ui.share": {
+   "fa": "این کتاب را به خویشاوندان و همسایه‌ها بدهید. لینک را در واتساپ بفرستید.",
+   "ps": "دا کتاب خپلوانو او ګاونډیانو ته ورکړئ. لینک په واټساپ کې ولېږئ.",
+   "en": "Give this book to relatives and neighbours. Send the link on WhatsApp."
+  },
+  "ui.women": {
+   "fa": "صحت زنان: حاملگی، ولادت و بعد از ولادت.",
+   "ps": "د ښځو روغتیا: امیندواري، زېږون او له زېږون وروسته.",
+   "en": "Women's health: pregnancy, birth and after birth."
+  },
+  "ui.everyone": {
+   "fa": "برای همه، مردان و زنان: علایم خطر و امراض عام.",
+   "ps": "د ټولو لپاره، نارینه او ښځې: د خطر نښې او عامې ناروغۍ.",
+   "en": "For everyone, men and women: danger signs and common illnesses."
+  },
+  "ui.settings": {
+   "fa": "تنظیمات: زبان، سرعت صدا، دانلود صداها و تازه کردن کتاب.",
+   "ps": "تنظیمات: ژبه، د غږ چټکتیا، د غږونو ښکته کول او د کتاب تازه کول.",
+   "en": "Settings: language, voice speed, downloading audio and updating the book."
+  },
+  "ui.ask": {
+   "fa": "چه مشکلی دارید؟ دکمۀ مایکروفون را بزنید و بگویید، یا بنویسید، یا یک تصویر را انتخاب کنید.",
+   "ps": "څه ستونزه لرئ؟ د مایکروفون تڼۍ ووهئ او ووایئ، یا ولیکئ، یا یو انځور وټاکئ.",
+   "en": "What is wrong? Tap the microphone and say it, or write it, or pick a picture."
+  },
+  "ui.feedback": {
+   "fa": "به ما بگویید چه چیزی را بهتر بسازیم. دکمۀ سرخ را بزنید و صحبت کنید، یا بنویسید.",
+   "ps": "موږ ته ووایئ چې څه ښه کړو. سور تڼۍ ووهئ او خبرې وکړئ، یا ولیکئ.",
+   "en": "Tell us what we can improve. Tap the red button and talk, or write."
+  },
+  "ui.near": {
+   "fa": "این صفحه نزدیک‌ترین شفاخانه و کلینیک را به شما نشان می‌دهد. جای خود را پیدا کنید.",
+   "ps": "دا پاڼه تاسو ته نږدې روغتون او کلینیک ښيي. خپل ځای پیدا کړئ.",
+   "en": "This page shows the nearest hospital and clinic. Find where you are."
+  },
+  "ui.voice": {
+   "fa": "صدایی را که دوست دارید انتخاب کنید: صدای زن یا صدای مرد. برای شنیدن، دکمۀ بلندگو را بزنید.",
+   "ps": "هغه غږ وټاکئ چې خوښ مو دی: د ښځې غږ یا د سړي غږ. د اورېدو لپاره، د سپیکر تڼۍ ووهئ.",
+   "en": "Choose the voice you like: a woman's voice or a man's voice. Tap the speaker to listen."
+  },
+  "ui.sendApp": {
+   "fa": "این برنامه را با بلوتوث به تلفن خانواده و همسایه‌ها بفرستید. انترنت لازم نیست.",
+   "ps": "دا اپ په بلوتوث د کورنۍ او ګاونډیانو ټیلیفون ته ولېږئ. انټرنېټ ته اړتیا نشته.",
+   "en": "Send this app to your family's and neighbours' phones by Bluetooth. No internet needed."
+  }
+ },
+ "months": {
+  "fa": [
+   "حمل",
+   "ثور",
+   "جوزا",
+   "سرطان",
+   "اسد",
+   "سنبله",
+   "میزان",
+   "عقرب",
+   "قوس",
+   "جدی",
+   "دلو",
+   "حوت"
+  ],
+  "ps": [
+   "وری",
+   "غویی",
+   "غبرګولی",
+   "چنګاښ",
+   "زمری",
+   "وږی",
+   "تله",
+   "لړم",
+   "لیندۍ",
+   "مرغومی",
+   "سلواغه",
+   "کب"
+  ],
+  "en": [
+   "Hamal",
+   "Sawr",
+   "Jawza",
+   "Saratan",
+   "Asad",
+   "Sunbula",
+   "Mizan",
+   "Aqrab",
+   "Qaws",
+   "Jadi",
+   "Dalw",
+   "Hut"
+  ]
+ },
+ "langNames": {
+  "fa": "دری",
+  "ps": "پښتو",
+  "en": "English"
+ }
+}

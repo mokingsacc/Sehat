@@ -1,0 +1,196 @@
+{
+  "id": "child-safety",
+  "section": "children",
+  "title": {
+    "fa": "اطفال را از حادثه حفاظت کنید",
+    "ps": "ماشومان له پېښو وساتئ",
+    "en": "Keep children safe from injury"
+  },
+  "summary": {
+    "fa": "بیشتر حادثه‌های اطفال در خانه قابل جلوگیری است.",
+    "ps": "د ماشومانو ډېرې پېښې په کور کې مخنیوی کېدای شي.",
+    "en": "Most injuries to children can be prevented at home."
+  },
+  "image": "child-safety",
+  "blocks": [
+    {
+      "id": "child-safety.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اطفال هر روز غرق می‌شوند، می‌افتند، می‌سوزند یا مسموم می‌شوند، اکثراً نزدیک خانه. چند تغییر ساده و نظارت دقیق بر اطفال خورد بیشتر این حادثه‌ها را جلوگیری می‌کند.",
+        "ps": "ماشومان هره ورځ ډوبېږي، لوېږي، سوځي یا زهري کېږي، ډېری وخت کور ته نږدې. څو ساده بدلونونه او د کوچنیو ماشومانو ښه څارنه د دې پېښو ډېری مخه نیسي.",
+        "en": "Every day children drown, fall, get burned or are poisoned, often close to home. A few simple changes and watching small children closely prevent most of these injuries."
+      }
+    },
+    {
+      "id": "child-safety.water",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب را بپوشانید و اطفال را نظارت کنید",
+        "ps": "اوبه پټې کړئ او ماشومان وڅارئ",
+        "en": "Cover water and watch children"
+      },
+      "text": {
+        "fa": "چاه، ذخیرهٔ آب و سطل را بپوشانید. طفل خورد را حتی یک دقیقه تنها نزدیک دریا، جوی یا حوض نگذارید.",
+        "ps": "څاه، د اوبو ټانکي او سطلونه پټ کړئ. کوچنی ماشوم حتی یوه دقیقه هم د سیند، ویالې یا حوض تر څنګ یوازې مه پرېږدئ.",
+        "en": "Cover wells, water tanks and buckets. Never leave a small child alone near a river, canal or pond, even for a minute."
+      }
+    },
+    {
+      "id": "child-safety.fire",
+      "type": "step",
+      "icon": "burn",
+      "title": {
+        "fa": "آتش و چیزهای داغ را دور نگه دارید",
+        "ps": "اور او ګرم شیان لرې وساتئ",
+        "en": "Keep fire and hot things away"
+      },
+      "text": {
+        "fa": "اطفال را از تنور، بخاری، صندلی و دیگ‌های داغ دور نگه دارید. دستهٔ دیگ را به داخل بچرخانید و گوگرد را بلند بگذارید.",
+        "ps": "ماشومان له تنور، بخارۍ، صندلۍ او ګرمو کټوګانو لرې وساتئ. د کټو لاستی دننه وګرځوئ او اورلګیت لوړ کېږدئ.",
+        "en": "Keep children away from the tandoor, stove, sandali and hot pots. Turn pot handles inwards and keep matches up high."
+      }
+    },
+    {
+      "id": "child-safety.roof",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "از افتادن از بام جلوگیری کنید",
+        "ps": "د بام له سره د لوېدو مخه ونیسئ",
+        "en": "Prevent falls from roofs"
+      },
+      "text": {
+        "fa": "دور بام‌های هموار و زینه‌ها دیوار کوتاه یا کتاره بسازید. نگذارید اطفال خورد روی بام بی‌دیوار بازی کنند یا بخوابند.",
+        "ps": "د هوارو بامونو او زینو شاوخوا ټیټ دېوال یا کتاره جوړه کړئ. مه پرېږدئ چې کوچني ماشومان په بې دېواله بام لوبې وکړي یا ویده شي.",
+        "en": "Build a low wall or rail around flat roofs and stairs. Do not let small children play or sleep on a roof with no wall."
+      }
+    },
+    {
+      "id": "child-safety.poison",
+      "type": "step",
+      "icon": "poison",
+      "title": {
+        "fa": "زهر و دوا را قفل کنید",
+        "ps": "زهر او درمل تړلي وساتئ",
+        "en": "Lock away poisons and medicines"
+      },
+      "text": {
+        "fa": "دوا، تیل خاک، زهر موش و دوای زراعتی را بلند و قفل‌شده نگه دارید. هرگز آن‌ها را در بوتل نوشیدنی یا غذا نریزید.",
+        "ps": "درمل، خاورین تېل، د موږکانو زهر او د کرنې درمل لوړ او تړلي وساتئ. هېڅکله یې د څښاک یا خوړو په بوتلونو کې مه اچوئ.",
+        "en": "Keep medicines, kerosene, rat poison and farm sprays high and locked away. Never put them in drink or food bottles."
+      }
+    },
+    {
+      "id": "child-safety.metal",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "به چیز فلزی ناشناخته دست نزنید",
+        "ps": "ناپېژندل شوي فلزي شي ته لاس مه وړئ",
+        "en": "Never touch strange metal objects"
+      },
+      "text": {
+        "fa": "به اطفال بیاموزید که به چیزهای فلزی ناشناخته در زمین یا خرابه‌ها دست نزنند. دور شوند و به بزرگان بگویند.",
+        "ps": "ماشومانو ته ور زده کړئ چې په پټیو یا ورانو ځایونو کې ناپېژندل شوو فلزي شیانو ته لاس ور نه وړي. لرې دې شي او مشرانو ته دې ووايي.",
+        "en": "Teach children not to touch unknown metal objects in fields or ruins. They should move away and tell an adult."
+      }
+    },
+    {
+      "id": "child-safety.road",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "اطفال را از سرک دور نگه دارید",
+        "ps": "ماشومان له سړک لرې وساتئ",
+        "en": "Keep children away from the road"
+      },
+      "text": {
+        "fa": "نزدیک سرک دست اطفال خورد را بگیرید. اطفال نباید روی سرک یا کنار آن بازی کنند.",
+        "ps": "سړک ته نږدې د کوچنیو ماشومانو لاس ونیسئ. ماشومان باید په سړک یا د هغه تر څنګ لوبې ونه کړي.",
+        "en": "Hold small children's hands near the road. Children should never play on the road or beside it."
+      }
+    },
+    {
+      "id": "child-safety.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که ماشوم دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "child-safety.urgent.water",
+          "icon": "water",
+          "text": {
+            "fa": "از آب بیرون کشیده شده، حتی اگر خوب معلوم شود",
+            "ps": "له اوبو ایستل شوی، که څه هم روغ ښکاري",
+            "en": "was pulled out of water, even if they seem well"
+          }
+        },
+        {
+          "id": "child-safety.urgent.poison",
+          "icon": "poison",
+          "text": {
+            "fa": "دوا، تیل خاک یا زهر خورده است",
+            "ps": "درمل، خاورین تېل یا زهر یې خوړلي",
+            "en": "swallowed medicine, kerosene or poison"
+          }
+        },
+        {
+          "id": "child-safety.urgent.fall",
+          "icon": "sleepy",
+          "text": {
+            "fa": "از بلندی افتاده و استفراغ می‌کند یا خواب‌آلود است",
+            "ps": "له لوړ ځای لوېدلی او کانګې کوي یا خوب وړی دی",
+            "en": "fell from a height and vomits or is sleepy"
+          }
+        },
+        {
+          "id": "child-safety.urgent.burn",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی دارد که از کف دست طفل بزرگ‌تر است",
+            "ps": "داسې سوځېدلی چې د ماشوم له ورغوي لوی دی",
+            "en": "has a burn bigger than the child's palm"
+          }
+        },
+        {
+          "id": "child-safety.urgent.blast",
+          "icon": "wound",
+          "text": {
+            "fa": "در اثر انفجار زخمی شده است",
+            "ps": "د چاودنې له امله ټپي شوی",
+            "en": "was hurt by a blast or explosion"
+          }
+        }
+      ]
+    },
+    {
+      "id": "child-safety.first-aid",
+      "type": "tip",
+      "icon": "card",
+      "text": {
+        "fa": "برای کارهایی که بلافاصله بعد از حادثه باید کرد، صفحهٔ کمک‌های اولیه را ببینید.",
+        "ps": "له پېښې سمدستي وروسته د کار لپاره، د لومړنیو مرستو پاڼه وګورئ.",
+        "en": "For what to do straight after an injury, see the First aid page."
+      }
+    }
+  ],
+  "sources": [
+    "WHO/UNICEF World report on child injury prevention (2008): drowning, burns, falls, poisoning, road traffic",
+    "WHO fact sheet: Drowning (2024): cover wells and water containers, supervise young children",
+    "WHO fact sheet: Burns (2023)",
+    "WHO/UNICEF Facts for Life (2010): injury prevention",
+    "ICRC Afghanistan mine and explosive remnants risk awareness (2025 figures: children 66% of casualties)"
+  ],
+  "review": [
+    "The burn threshold 'bigger than the child's palm' is a common first-aid rule of thumb. Check it matches the first-aid topic's wording.",
+    "'Pulled out of water, even if they seem well': IFRC advises that every drowning victim gets medical care. Urgent level used.",
+    "The mine and explosive-remnant message is general risk education. Check it matches ICRC or UNMAS key messages used in Afghanistan.",
+    "No dont block was added because the steps already cover the harmful practices. Add one if the book style needs it."
+  ]
+}

@@ -1,0 +1,703 @@
+{
+  "updated": "2026-10-07",
+  "sources": [
+    "OpenStreetMap contributors, Health Facilities of Afghanistan, HOT/HDX export snapshot 2026-10-05 (ODbL 1.0): https://data.humdata.org/dataset/hotosm_afg_health_facilities",
+    "MoPH Sehatmandi Samangan provincial review (Sept 2019): facility names and counts, no coordinates",
+    "UNDP Afghanistan (Jan 2026): Bazar Sokhta and Do-Ab district hospitals operating",
+    "Düsseldorf University dissertation (2020-22 data): Mazar-i-Sharif Regional Hospital as Samangan's referral hospital"
+  ],
+  "facilities": [
+    {
+      "id": "ruyi-du-ab-hospital",
+      "name": {
+        "fa": "شفاخانه ولسوالی دوآب (احتمالاً)",
+        "ps": "د دوآب ولسوالۍ روغتون (احتمالاً)",
+        "en": "Hospital at Ruyi Du Ab district centre (probably Do-Ab District Hospital)"
+      },
+      "type": "district-hospital",
+      "district": "Ruyi Du Ab",
+      "lat": 35.55581,
+      "lon": 67.82836,
+      "services": [],
+      "phone": "",
+      "status": "open",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/14019162501; OSM name is only 'Hospital'; identity inferred; Do-Ab DH reported operating by UNDP Jan 2026",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-private-hospital",
+      "name": {
+        "fa": "شفاخانه شخصی",
+        "ps": "شخصي روغتون",
+        "en": "Private hospital (Aybak)"
+      },
+      "type": "private-hospital",
+      "district": "Aybak",
+      "lat": 36.26187,
+      "lon": 68.01338,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139282",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-arian-hospital",
+      "name": {
+        "fa": "شفاخانه آرین",
+        "ps": "آرین روغتون",
+        "en": "Arian Hospital"
+      },
+      "type": "private-hospital",
+      "district": "Aybak",
+      "lat": 36.26416,
+      "lon": 68.01196,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139286",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-faiz-clinic",
+      "name": {
+        "fa": "کلینیک فیض",
+        "ps": "فیض کلینیک",
+        "en": "Faiz Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26276,
+      "lon": 68.02133,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139284",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-alshifa-clinic",
+      "name": {
+        "fa": "کلینیک معالجوی الشفا",
+        "ps": "الشفا درملنیز کلینیک",
+        "en": "Al-Shifa Treatment Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26486,
+      "lon": 68.01865,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139291",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-ahmadshah-same",
+      "name": {
+        "fa": "دوکتور احمدشاه سامع",
+        "ps": "ډاکټر احمدشاه سامع",
+        "en": "Dr Ahmad Shah Same (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26275,
+      "lon": 68.01971,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139294",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-mohammad-azam-sahak",
+      "name": {
+        "fa": "داکتر محمد اعظم سهاک",
+        "ps": "ډاکټر محمد اعظم سهاک",
+        "en": "Dr Mohammad Azam Sahak (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26377,
+      "lon": 68.01636,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139299",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-jamaluddin-qarin",
+      "name": {
+        "fa": "الحاج دوکتور جمال‌الدین قرین",
+        "ps": "الحاج ډاکټر جمال‌الدین قرین",
+        "en": "Alhaj Dr Jamaluddin Qarin (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26454,
+      "lon": 68.01814,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139298",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-fateh-mohammad",
+      "name": {
+        "fa": "دوکتور فتح محمد",
+        "ps": "ډاکټر فتح محمد",
+        "en": "Dr Fateh Mohammad (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26599,
+      "lon": 68.01122,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139297",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-serajuddin-nazari",
+      "name": {
+        "fa": "دوکتور سراج‌الدین نظری",
+        "ps": "ډاکټر سراج‌الدین نظري",
+        "en": "Dr Serajuddin Nazari (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26629,
+      "lon": 68.01146,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139303",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-mohammadullah-moradi",
+      "name": {
+        "fa": "دوکتور محمدالله مرادی",
+        "ps": "ډاکټر محمدالله مرادي",
+        "en": "Dr Mohammadullah Moradi (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26725,
+      "lon": 68.01189,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139305",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dr-bazgul-jahangir",
+      "name": {
+        "fa": "داکتر بازگل جهانگیر",
+        "ps": "ډاکټر بازګل جهانګیر",
+        "en": "Dr Bazgul Jahangir (private doctor)"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.27312,
+      "lon": 68.02301,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139288",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-midwife-1",
+      "name": {
+        "fa": "قابله دیپلومه",
+        "ps": "ډیپلومه قابله",
+        "en": "Diploma midwife (private)"
+      },
+      "type": "maternity",
+      "district": "Aybak",
+      "lat": 36.26535,
+      "lon": 68.01197,
+      "services": [
+        "maternity"
+      ],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139287",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-midwife-parwin",
+      "name": {
+        "fa": "قابله دیپلومه پروین",
+        "ps": "ډیپلومه قابله پروین",
+        "en": "Diploma midwife Parwin (private)"
+      },
+      "type": "maternity",
+      "district": "Aybak",
+      "lat": 36.26649,
+      "lon": 68.01133,
+      "services": [
+        "maternity"
+      ],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139302",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-ultrasound-forotan-rahimi",
+      "name": {
+        "fa": "کلینیک تشخیصیه التراسوند فروتن رحیمی",
+        "ps": "د فروتن رحیمي د الټراساونډ تشخیصیه کلینیک",
+        "en": "Forotan Rahimi Ultrasound Diagnostic Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26482,
+      "lon": 68.01739,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139301",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-fawad-digital-xray",
+      "name": {
+        "fa": "فواد دیجیتال اکسری",
+        "ps": "فواد ډیجیټل اکسرې",
+        "en": "Fawad Digital X-ray"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26603,
+      "lon": 68.01097,
+      "services": [
+        "xray"
+      ],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139304",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-hamkar-xray",
+      "name": {
+        "fa": "اکسری همکار",
+        "ps": "همکار اکسرې",
+        "en": "Hamkar X-ray"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26639,
+      "lon": 68.01152,
+      "services": [
+        "xray"
+      ],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139307",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-medical-laboratory",
+      "name": {
+        "fa": "لابراتوار طبی",
+        "ps": "طبي لابراتوار",
+        "en": "Medical laboratory"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26671,
+      "lon": 68.01146,
+      "services": [
+        "lab"
+      ],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139308",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-physiotherapy-centre",
+      "name": {
+        "fa": "مرکز فزیوتراپی",
+        "ps": "د فزیوتراپۍ مرکز",
+        "en": "Physiotherapy centre"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26618,
+      "lon": 68.0114,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8855910850",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-alshifa-eye-centre",
+      "name": {
+        "fa": "مرکز صحی چشم الشفا",
+        "ps": "د الشفا د سترګو روغتیايي مرکز",
+        "en": "Al-Shifa Eye Health Centre"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26631,
+      "lon": 68.0112,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8855920855",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-1",
+      "name": {
+        "fa": "کلینیک دندان",
+        "ps": "د غاښونو کلینیک",
+        "en": "Dental clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26145,
+      "lon": 68.01339,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8856550771",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-2",
+      "name": {
+        "fa": "کلینیک دندان",
+        "ps": "د غاښونو کلینیک",
+        "en": "Dental clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26488,
+      "lon": 68.0171,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139296",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-nouri",
+      "name": {
+        "fa": "کلینیک دندان نوری",
+        "ps": "د نوري د غاښونو کلینیک",
+        "en": "Nouri Dental Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26436,
+      "lon": 68.0195,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139292",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-almakka",
+      "name": {
+        "fa": "کلینیک دندان المکه",
+        "ps": "د المکه د غاښونو کلینیک",
+        "en": "Al-Makka Dental Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26438,
+      "lon": 68.01679,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139293",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-jalalabad",
+      "name": {
+        "fa": "کلینیک دندان جلال‌آباد",
+        "ps": "د جلال‌آباد د غاښونو کلینیک",
+        "en": "Jalalabad Dental Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26474,
+      "lon": 68.01738,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139295",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-maiwand",
+      "name": {
+        "fa": "کلینیک دندان میوند",
+        "ps": "د میوند د غاښونو کلینیک",
+        "en": "Maiwand Dental Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26595,
+      "lon": 68.01091,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139285",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-insaf",
+      "name": {
+        "fa": "کلینیک دندان انصاف",
+        "ps": "د انصاف د غاښونو کلینیک",
+        "en": "Insaf Dental Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26642,
+      "lon": 68.01122,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8838139306",
+      "confidence": "low"
+    },
+    {
+      "id": "aybak-dental-labkhand-zeba",
+      "name": {
+        "fa": "کلینیک دندان لبخند زیبا",
+        "ps": "د لبخند زیبا د غاښونو کلینیک",
+        "en": "Labkhand-e Zeba Dental Clinic"
+      },
+      "type": "other",
+      "district": "Aybak",
+      "lat": 36.26914,
+      "lon": 68.00874,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/8861927135",
+      "confidence": "low"
+    },
+    {
+      "id": "mazar-regional-hospital",
+      "name": {
+        "fa": "شفاخانه حوزوی بلخ (مزارشریف)",
+        "ps": "د بلخ حوزوي روغتون (مزارشریف)",
+        "en": "Balkh Regional Hospital, Mazar-i-Sharif (main referral hospital)"
+      },
+      "type": "provincial-hospital",
+      "district": "Mazar-i-Sharif (Balkh)",
+      "lat": 36.71552,
+      "lon": 67.108,
+      "services": [],
+      "phone": "",
+      "status": "open",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm way/1343549487; OSM name 'Mazar-e-Sharif Regional Hospital'; operating 2020-22 per Düsseldorf neonatal study, no closure report found",
+      "confidence": "medium"
+    },
+    {
+      "id": "balkh-district-hospital",
+      "name": {
+        "fa": "شفاخانه ولسوالی بلخ",
+        "ps": "د بلخ ولسوالۍ روغتون",
+        "en": "Balkh District Hospital"
+      },
+      "type": "district-hospital",
+      "district": "Balkh (Balkh)",
+      "lat": 36.75109,
+      "lon": 66.89801,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm way/1332673310",
+      "confidence": "medium"
+    },
+    {
+      "id": "mazar-kesha-farabi-hospital",
+      "name": {
+        "fa": "شفاخانه کیشا فارابی",
+        "ps": "کیشا فارابي روغتون",
+        "en": "Kesha Farabi Hospital (private)"
+      },
+      "type": "private-hospital",
+      "district": "Mazar-i-Sharif (Balkh)",
+      "lat": 36.7161,
+      "lon": 67.10371,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/5700163285",
+      "confidence": "low"
+    },
+    {
+      "id": "mazar-aamoon-eye-centre",
+      "name": {
+        "fa": "مرکز چشم آمون",
+        "ps": "د آمون د سترګو مرکز",
+        "en": "Aamoon Ophthalmic Center"
+      },
+      "type": "other",
+      "district": "Mazar-i-Sharif (Balkh)",
+      "lat": 36.70351,
+      "lon": 67.11429,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/5614604624",
+      "confidence": "low"
+    },
+    {
+      "id": "mazar-parween-midwife-clinic",
+      "name": {
+        "fa": "کلینیک قابله پروین",
+        "ps": "د قابله پروین کلینیک",
+        "en": "Parween Midwife Clinic"
+      },
+      "type": "maternity",
+      "district": "Mazar-i-Sharif (Balkh)",
+      "lat": 36.71297,
+      "lon": 67.12005,
+      "services": [
+        "maternity"
+      ],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/4591597110",
+      "confidence": "low"
+    },
+    {
+      "id": "mazar-noor-khuda-clinic",
+      "name": {
+        "fa": "کلینیک نورخدا",
+        "ps": "نورخدا کلینیک",
+        "en": "Noor Khuda Clinic"
+      },
+      "type": "other",
+      "district": "Mazar-i-Sharif (Balkh)",
+      "lat": 36.74039,
+      "lon": 67.12156,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/14074311391",
+      "confidence": "low"
+    },
+    {
+      "id": "mazar-razavie-pharmacy",
+      "name": {
+        "fa": "دواخانه رضوی",
+        "ps": "رضوي درملتون",
+        "en": "Razavie Pharmacy"
+      },
+      "type": "pharmacy",
+      "district": "Mazar-i-Sharif (Balkh)",
+      "lat": 36.71711,
+      "lon": 67.12355,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/4591597198",
+      "confidence": "low"
+    },
+    {
+      "id": "pul-e-khumri-hospital",
+      "name": {
+        "fa": "شفاخانه پلخمری",
+        "ps": "د پلخمري روغتون",
+        "en": "Pul-e-Khumri Hospital (Baghlan provincial hospital, probable)"
+      },
+      "type": "provincial-hospital",
+      "district": "Pul-e-Khumri (Baghlan)",
+      "lat": 35.93814,
+      "lon": 68.71595,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm way/968572467; OSM names 'د پلخمري روغتون' / 'Pul e khumery Hospital'; provincial status inferred",
+      "confidence": "medium"
+    },
+    {
+      "id": "pul-e-khumri-nasaji-hospital",
+      "name": {
+        "fa": "شفاخانه نساجی و پوهنتون حکیم سنایی",
+        "ps": "د نساجۍ او حکیم سنايي پوهنتون روغتون",
+        "en": "Nasaji and Hakim Sanai University Hospital"
+      },
+      "type": "other",
+      "district": "Pul-e-Khumri (Baghlan)",
+      "lat": 35.94851,
+      "lon": 68.71243,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm node/11221694623",
+      "confidence": "low"
+    },
+    {
+      "id": "baghlan-jadid-district-hospital",
+      "name": {
+        "fa": "شفاخانه ولسوالی مرکزی بغلان",
+        "ps": "د بغلان مرکزي ولسوالۍ روغتون",
+        "en": "Central District Hospital, Baghlan-e-Jadid"
+      },
+      "type": "district-hospital",
+      "district": "Baghlan-e-Jadid (Baghlan)",
+      "lat": 36.18365,
+      "lon": 68.7523,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm way/1330342233",
+      "confidence": "low"
+    },
+    {
+      "id": "bamyan-hospital",
+      "name": {
+        "fa": "شفاخانه بامیان",
+        "ps": "د بامیان روغتون",
+        "en": "Bamyan Hospital"
+      },
+      "type": "provincial-hospital",
+      "district": "Bamyan (Bamyan)",
+      "lat": 34.83481,
+      "lon": 67.78035,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm way/1337690668; OSM has both 'Bamyan Hospital' and 'Old Bamyan Hospital'; which is the current provincial hospital is unverified",
+      "confidence": "low"
+    },
+    {
+      "id": "bamyan-old-hospital",
+      "name": {
+        "fa": "شفاخانه قدیم بامیان",
+        "ps": "د بامیان زوړ روغتون",
+        "en": "Old Bamyan Hospital"
+      },
+      "type": "other",
+      "district": "Bamyan (Bamyan)",
+      "lat": 34.82969,
+      "lon": 67.83471,
+      "services": [],
+      "phone": "",
+      "status": "unknown",
+      "source": "OpenStreetMap via HOT/HDX export 2026-10-05 (ODbL); osm way/669475976",
+      "confidence": "low"
+    }
+  ]
+}

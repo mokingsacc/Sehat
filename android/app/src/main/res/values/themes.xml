@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Sehat" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#B6322D</item>
+        <item name="android:colorPrimaryDark">#B6322D</item>
+        <item name="android:colorAccent">#B6322D</item>
+        <item name="android:statusBarColor">#B6322D</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:windowBackground">@color/page</item>
+    </style>
+</resources>

@@ -1,0 +1,304 @@
+{
+  "id": "danger-child",
+  "section": "children",
+  "title": {
+    "fa": "علایم خطر در اطفال",
+    "ps": "په ماشومانو کې د خطر نښې",
+    "en": "Danger signs in children"
+  },
+  "summary": {
+    "fa": "علایمی را بشناسید که باید فوراً به شفاخانه بروید.",
+    "ps": "هغه نښې وپېژنئ چې سمدلاسه روغتون ته د تګ غوښتنه کوي.",
+    "en": "Know the signs that mean go to hospital now."
+  },
+  "image": "danger-child",
+  "blocks": [
+    {
+      "id": "danger-child.lead",
+      "type": "lead",
+      "text": {
+        "fa": "طفل مریض می‌تواند خیلی زود بدتر شود. اگر یکی از این علایم را دیدید، منتظر نمانید و همین حالا به شفاخانه بروید، شب باشد یا روز.",
+        "ps": "ناروغ ماشوم ډېر ژر خرابېدای شي. که له دې نښو څخه مو یوه ولیده، انتظار مه باسئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+        "en": "A sick child can get worse very fast. If you see any of these signs, do not wait: go to hospital now, day or night."
+      }
+    },
+    {
+      "id": "danger-child.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "danger-child.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "نمی‌تواند چیزی بنوشد یا شیر مادر بخورد",
+            "ps": "هېڅ نشي څښلای او تی نشي رودلای",
+            "en": "cannot drink or breastfeed"
+          }
+        },
+        {
+          "id": "danger-child.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "هر چه می‌خورد یا می‌نوشد، استفراغ می‌کند",
+            "ps": "هر څه چې خوري یا څښي، کانګې یې کوي",
+            "en": "vomits everything, cannot keep anything down"
+          }
+        },
+        {
+          "id": "danger-child.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرده یا حالا تشنج دارد",
+            "ps": "اختلاج یې کړی یا اوس اختلاج لري",
+            "en": "has had convulsions (fits), or has them now"
+          }
+        },
+        {
+          "id": "danger-child.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است",
+            "ps": "ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی",
+            "en": "is very sleepy and hard to wake, or unconscious"
+          }
+        },
+        {
+          "id": "danger-child.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز یا به سختی نفس می‌کشد",
+            "ps": "ژر ژر یا په سختۍ سا اخلي",
+            "en": "breathes fast or with difficulty"
+          }
+        },
+        {
+          "id": "danger-child.urgent.chest",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "وقت نفس کشیدن، پایین سینه‌اش به داخل کشیده می‌شود",
+            "ps": "د سا اخیستو پر وخت یې د سینې لاندې برخه ننوځي",
+            "en": "the lower chest pulls in when breathing in"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.young",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل کمتر از ۲ ماهه یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که تر ۲ میاشتو کوچنی ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Baby under 2 months: go to hospital now, day or night, if the baby:"
+      },
+      "items": [
+        {
+          "id": "danger-child.young.feed",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "خوب شیر نمی‌خورد یا شیر خوردن را بس کرده است",
+            "ps": "ښه تی نه رودي، یا یې تی رودل بند کړي دي",
+            "en": "is not feeding well, or has stopped feeding"
+          }
+        },
+        {
+          "id": "danger-child.young.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج می‌کند",
+            "ps": "اختلاج کوي",
+            "en": "has convulsions (fits)"
+          }
+        },
+        {
+          "id": "danger-child.young.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز نفس می‌کشد: ۶۰ بار یا بیشتر در یک دقیقه",
+            "ps": "ژر ژر سا اخلي: په یوه دقیقه کې ۶۰ ځله یا ډېر",
+            "en": "breathes fast: 60 or more breaths a minute"
+          }
+        },
+        {
+          "id": "danger-child.young.chest",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "وقت نفس کشیدن، پایین سینه‌اش سخت به داخل کشیده می‌شود",
+            "ps": "د سا اخیستو پر وخت یې د سینې لاندې برخه ډېره ننوځي",
+            "en": "the lower chest pulls in strongly when breathing in"
+          }
+        },
+        {
+          "id": "danger-child.young.temperature",
+          "icon": "thermometer",
+          "text": {
+            "fa": "تب دارد، یا بدنش سرد است",
+            "ps": "تبه لري، یا یې بدن سوړ دی",
+            "en": "has a fever, or the body feels cold"
+          }
+        },
+        {
+          "id": "danger-child.young.move",
+          "icon": "sleepy",
+          "text": {
+            "fa": "فقط وقتی تکانش بدهید حرکت می‌کند، یا هیچ حرکت نمی‌کند",
+            "ps": "یوازې هغه وخت خوځېږي چې لاس پرې ووهئ، یا هېڅ نه خوځېږي",
+            "en": "moves only when touched, or does not move at all"
+          }
+        },
+        {
+          "id": "danger-child.young.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "کف دست و پایش زرد است، یا در روز اول زرد شده",
+            "ps": "د لاسونو او پښو تلي یې ژېړ دي، یا په لومړۍ ورځ ژېړ شوی",
+            "en": "has yellow palms and soles, or turned yellow on the first day"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "danger-child.soon.worse",
+          "icon": "warning",
+          "text": {
+            "fa": "بهتر نمی‌شود یا بدتر می‌شود",
+            "ps": "ښه نه کېږي، یا لا خرابېږي",
+            "en": "is not getting better, or is getting worse"
+          }
+        },
+        {
+          "id": "danger-child.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "بیشتر از ۲ روز است که تب دارد",
+            "ps": "له ۲ ورځو زیات وخت کېږي چې تبه لري",
+            "en": "has had a fever for more than 2 days"
+          }
+        },
+        {
+          "id": "danger-child.soon.blood",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "در مدفوعش خون دیده می‌شود",
+            "ps": "په ډکو متیازو کې یې وینه ښکاري",
+            "en": "has blood in the stool"
+          }
+        },
+        {
+          "id": "danger-child.soon.drinking",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "کم می‌نوشد یا کم می‌خورد",
+            "ps": "لږ څښي یا لږ خوري",
+            "en": "is drinking or eating poorly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.breastfeed",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "در راه شیر بدهید",
+        "ps": "په لاره کې تی ورکړئ",
+        "en": "Keep breastfeeding on the way"
+      },
+      "text": {
+        "fa": "اگر طفل می‌تواند بنوشد، در راه بار بار شیر بدهید.",
+        "ps": "که ماشوم څښلای شي، په لاره کې یې بیا بیا تی ورکړئ.",
+        "en": "If the child can drink, breastfeed often on the way."
+      }
+    },
+    {
+      "id": "danger-child.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "طفل کوچک را گرم نگه دارید",
+        "ps": "کوچنی ماشوم ګرم وساتئ",
+        "en": "Keep a young baby warm"
+      },
+      "text": {
+        "fa": "طفل کوچک را پوست به پوست روی سینهٔ مادر بگذارید. هر دو را با کمپل بپوشانید و سرش را هم بپوشانید.",
+        "ps": "کوچنی ماشوم د مور پر سینه پوستکی له پوستکي سره کېږدئ. دواړه په کمپله پټ کړئ، او سر یې هم پټ کړئ.",
+        "en": "Hold a young baby skin to skin on the mother's chest. Cover you both with a blanket, and cover the baby's head."
+      }
+    },
+    {
+      "id": "danger-child.ors",
+      "type": "step",
+      "icon": "ors",
+      "title": {
+        "fa": "اسهال: او آر اس بدهید",
+        "ps": "نس ناستی: او آر اس ورکړئ",
+        "en": "Diarrhoea: give sips of ORS"
+      },
+      "text": {
+        "fa": "اگر طفل اسهال دارد و می‌تواند بنوشد، در راه کم‌کم او آر اس بدهید.",
+        "ps": "که ماشوم نس ناستی لري او څښلای شي، په لاره کې ورته لږ لږ او آر اس ورکړئ.",
+        "en": "If the child has diarrhoea and can drink, give small sips of ORS on the way."
+      }
+    },
+    {
+      "id": "danger-child.plan",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "از پیش آماده باشید",
+        "ps": "له مخکې چمتو اوسئ",
+        "en": "Plan before it happens"
+      },
+      "text": {
+        "fa": "بدانید نزدیک‌ترین شفاخانه کجاست و چطور به آنجا بروید. پول و شمارهٔ تلفن کسی را که موتر دارد، آماده داشته باشید.",
+        "ps": "پوه شئ چې نږدې روغتون چېرته دی او څنګه ورته ورسېږئ. پیسې او د هغه چا د تلیفون شمېره چې موټر لري، چمتو وساتئ.",
+        "en": "Know where the nearest hospital is and how to get there. Keep money and the phone number of someone with a car ready."
+      }
+    },
+    {
+      "id": "danger-child.card",
+      "type": "step",
+      "icon": "card",
+      "title": {
+        "fa": "کارت طفل را ببرید",
+        "ps": "د ماشوم کارت یوسئ",
+        "en": "Take the child's card"
+      },
+      "text": {
+        "fa": "کارت صحی طفل و هر دوایی را که خورده است، با خود ببرید.",
+        "ps": "د ماشوم روغتیايي کارت او هغه درمل چې خوړلي یې دي، له ځان سره یوسئ.",
+        "en": "Take the child's health card and any medicines the child has had."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): general danger signs, cough or difficult breathing, when to return immediately",
+    "WHO IMCI Chart Booklet (2014): sick young infant up to 2 months, very severe disease",
+    "WHO recommendations on postnatal care of the mother and newborn (2013), recommendation 4: newborn danger signs",
+    "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet, danger signs and referral",
+    "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses"
+  ],
+  "review": [
+    "Urgent alert puts fast breathing alone in 'hospital now'. IMCI classes fast breathing without chest indrawing or a danger sign as pneumonia treated at the clinic with oral amoxicillin. Kept as urgent because families cannot easily separate fast from difficult breathing and Afghan clinics may be far; consider moving to the soon alert.",
+    "Fever threshold for young infants is not given as a number here ('has a fever, or the body feels cold'); WHO uses 37.5 C or more (axillary) and below 35.5 C.",
+    "'Keep a young baby warm' tells families to cover the baby; this is for small or young babies with cold or normal temperature, not for an older child with high fever. Check that this reads correctly.",
+    "Soon alert: 'fever for more than 2 days' follows the IMCI caregiver 'return if not better' advice; the CHW guide uses fever for 7 days or more as a referral sign.",
+    "Dari 'مدفوع' (stool) is formal; a native reviewer may prefer a more everyday Afghan word."
+  ]
+}

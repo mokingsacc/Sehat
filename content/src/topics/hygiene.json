@@ -1,0 +1,156 @@
+{
+  "id": "hygiene",
+  "section": "everyone",
+  "title": {
+    "fa": "دست، آب و غذای پاک",
+    "ps": "پاک لاسونه، اوبه او خواړه",
+    "en": "Clean hands, water and food"
+  },
+  "summary": {
+    "fa": "عادت‌های ساده که جلوی اسهال و مریضی‌های دیگر را می‌گیرد",
+    "ps": "ساده عادتونه چې د نس ناستې او نورو ناروغیو مخه نیسي",
+    "en": "Simple habits that stop diarrhoea and other illnesses spreading"
+  },
+  "image": "hygiene",
+  "blocks": [
+    {
+      "id": "hygiene.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اسهال و بسیاری مریضی‌های دیگر از راه دست، آب و غذای ناپاک سرایت می‌کند. عادت‌های ساده همه خانواده را محافظت می‌کند.",
+        "ps": "نس ناستی او ډېرې نورې ناروغۍ د ناپاکو لاسونو، اوبو او خوړو له لارې خپرېږي. ساده عادتونه ټوله کورنۍ ساتي.",
+        "en": "Diarrhoea and many other illnesses spread through dirty hands, water and food. Simple habits protect the whole family."
+      }
+    },
+    {
+      "id": "hygiene.hands",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست‌ها را با صابون بشویید",
+        "ps": "لاسونه په صابون ومینځئ",
+        "en": "Wash hands with soap"
+      },
+      "text": {
+        "fa": "بعد از تشناب، و بعد از پاک کردن طفل پس از رفع حاجت، دست‌ها را بشویید. همچنان پیش از پختن، پیش از خوردن و پیش از غذا دادن به طفل.",
+        "ps": "له تشناب وروسته، او د ماشوم له پاکولو وروسته، لاسونه ومینځئ. همدارنګه د پخلي، خوړلو او ماشوم ته د خواړو ورکولو مخکې.",
+        "en": "Wash after the toilet and after cleaning a child's bottom. Also before cooking, before eating and before feeding a child."
+      }
+    },
+    {
+      "id": "hygiene.safe-water",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "آب نوشیدنی را پاک کنید",
+        "ps": "د څښلو اوبه پاکې کړئ",
+        "en": "Make drinking water safe"
+      },
+      "text": {
+        "fa": "آب نوشیدنی را بجوشانید تا خوب به جوش بیاید، یا طوری که کارمند صحی نشان می‌دهد، کلورین بیندازید.",
+        "ps": "د څښلو اوبه تر هغه وایشوئ چې ښې په جوش راشي، یا لکه څنګه چې روغتیايي کارکوونکی درښيي، کلورین ورواچوئ.",
+        "en": "Bring drinking water to a full, bubbling boil, or add chlorine as the health worker shows you."
+      }
+    },
+    {
+      "id": "hygiene.store",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "آب را پاک نگه دارید",
+        "ps": "اوبه پاکې وساتئ",
+        "en": "Keep water clean"
+      },
+      "text": {
+        "fa": "آب را سرپوشیده نگه دارید. آن را بریزید یا با ملاقه پاک بردارید؛ هرگز دست یا پیاله را داخلش نکنید.",
+        "ps": "اوبه پټې وساتئ. اوبه ورڅخه توی کړئ یا په پاکه ملاقه یې واخلئ؛ هېڅکله پکې لاس یا پیاله مه ننباسئ.",
+        "en": "Keep water covered. Pour it out or use a clean ladle; never dip hands or cups in."
+      }
+    },
+    {
+      "id": "hygiene.containers",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "ظرف‌های آب را بشویید",
+        "ps": "د اوبو لوښي ومینځئ",
+        "en": "Wash water containers"
+      },
+      "text": {
+        "fa": "ظرف‌های آب و سرپوش آن‌ها را به‌طور منظم با صابون و آب پاک بشویید.",
+        "ps": "د اوبو لوښي او سرپوښونه یې په منظم ډول په صابون او پاکو اوبو ومینځئ.",
+        "en": "Scrub water containers and their lids regularly with soap and clean water."
+      }
+    },
+    {
+      "id": "hygiene.latrine",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "از تشناب پاک استفاده کنید",
+        "ps": "پاک تشناب وکاروئ",
+        "en": "Use a clean latrine"
+      },
+      "text": {
+        "fa": "همه باید از تشناب استفاده کنند و مدفوع اطفال را هم در آن بیندازند. تشناب را پاک و دور از چاه و چشمه نگه دارید.",
+        "ps": "ټول دې تشناب وکاروي او د ماشومانو غایطه مواد هم پکې واچوي. تشناب پاک او له څاه او چینې لرې وساتئ.",
+        "en": "Everyone should use a latrine, and put children's stools in it too. Keep it clean and well away from wells and springs."
+      }
+    },
+    {
+      "id": "hygiene.food",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذا را پاک نگه دارید",
+        "ps": "خواړه پاک وساتئ",
+        "en": "Keep food safe"
+      },
+      "text": {
+        "fa": "غذا را از مگس بپوشانید. گوشت را خوب پخته کنید و میوه و سبزی را با آب پاک بشویید.",
+        "ps": "خواړه له مچانو پټ کړئ. غوښه ښه پخه کړئ، او مېوې او سبزي په پاکو اوبو ومینځئ.",
+        "en": "Cover food from flies. Cook meat well, and wash fruit and vegetables with safe water."
+      }
+    },
+    {
+      "id": "hygiene.animals",
+      "type": "step",
+      "icon": "animals",
+      "title": {
+        "fa": "حیوانات را دور نگه دارید",
+        "ps": "څاروي لرې وساتئ",
+        "en": "Keep animals out"
+      },
+      "text": {
+        "fa": "حیوانات را از اتاق‌هایی که در آن زندگی می‌کنید، می‌خوابید و پخت‌وپز می‌کنید، دور نگه دارید.",
+        "ps": "څاروي له هغو کوټو لرې وساتئ چې پکې اوسېږئ، ویده کېږئ او پخلی کوئ.",
+        "en": "Keep animals out of the rooms where you live, sleep and cook."
+      }
+    },
+    {
+      "id": "hygiene.tip-ash",
+      "type": "tip",
+      "icon": "handwash",
+      "text": {
+        "fa": "صابون ندارید؟ دست‌ها را با خاکستر و آب بشویید.",
+        "ps": "صابون نه لرئ؟ لاسونه په ایرو او اوبو ومینځئ.",
+        "en": "No soap? Wash your hands with ash and water."
+      }
+    }
+  ],
+  "sources": [
+    "WHO/UNICEF Facts for Life (2010): Hygiene key messages (handwashing with soap or ash, latrines, safe water, food)",
+    "WHO Guidelines for drinking-water quality, 4th edition (2022): household water treatment (boiling, chlorination) and safe storage",
+    "WHO Guidelines on sanitation and health (2018)",
+    "WHO Five Keys to Safer Food (2006)"
+  ],
+  "review": [
+    "Latrine distance from wells and springs is not given as a number (Sphere uses at least 30 metres). Add it if wanted.",
+    "Chlorine says 'as the health worker shows you', with no dose.",
+    "Ash as a soap substitute is from Facts for Life 2010; the evidence for it is weak.",
+    "There is no alert block, because the danger signs for diarrhoea are on the children's diarrhoea page.",
+    "Icons: the latrine uses 'house' (would prefer 'latrine'), and the ladle step uses 'cup-spoon'.",
+    "Afghan Dari uses تشناب for both toilet and latrine; check that this fits a village pit latrine.",
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+  ]
+}

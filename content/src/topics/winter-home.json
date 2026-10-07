@@ -1,0 +1,243 @@
+{
+  "id": "winter-home",
+  "section": "everyone",
+  "title": {
+    "fa": "خانهٔ گرم و بی‌خطر در زمستان",
+    "ps": "په ژمي کې ګرم او خوندي کور",
+    "en": "Safe warm home in winter"
+  },
+  "summary": {
+    "fa": "دود و گاز بخاری به شش‌ها ضرر دارد و می‌تواند بکشد.",
+    "ps": "لوګی او د بخارۍ ګاز سږو ته زیان رسوي او وژلای شي.",
+    "en": "Smoke and stove fumes harm the lungs and can kill."
+  },
+  "image": "winter-home",
+  "blocks": [
+    {
+      "id": "winter-home.lead",
+      "type": "lead",
+      "text": {
+        "fa": "دود آتش، بخاری و صندلی اطفال را به سرفه و سینه‌بغل مریض می‌سازد. گاز زهری ذغال و بخاری گازی بوی ندارد و می‌تواند تمام خانواده را در خواب بکشد.",
+        "ps": "د اور، بخارۍ او صندلۍ لوګی ماشومان په ټوخي او سینه بغل ناروغه کوي. د سکرو او ګازي بخارۍ زهرجن ګاز بوی نه لري او ټوله کورنۍ په خوب کې وژلای شي.",
+        "en": "Smoke from fires, stoves and the sandali makes children ill with cough and pneumonia. The poison gas from coal and gas heaters has no smell and can kill a whole family in their sleep."
+      }
+    },
+    {
+      "id": "winter-home.chimney",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "از بخاری نل‌دار استفاده کنید",
+        "ps": "نل لرونکې بخاري وکاروئ",
+        "en": "Use a stove with a pipe"
+      },
+      "text": {
+        "fa": "بخاری بسته که نلش به بیرون می‌رود، دود را از اتاق دور نگه می‌دارد. پیش از زمستان ببینید که نل سوراخ یا بند نباشد.",
+        "ps": "تړلې بخاري چې نل یې بهر ته وځي، لوګی له کوټې لرې ساتي. له ژمي مخکې وګورئ چې نل سوری یا بند نه وي.",
+        "en": "A closed stove with a pipe to the outside keeps smoke out of the room. Before winter, check the pipe has no holes or blockage."
+      }
+    },
+    {
+      "id": "winter-home.air",
+      "type": "step",
+      "icon": "window",
+      "title": {
+        "fa": "هوای تازه را داخل کنید",
+        "ps": "تازه هوا ته لار ورکړئ",
+        "en": "Let fresh air in"
+      },
+      "text": {
+        "fa": "حتی در هوای سرد، کلکین یا دروازه را کمی باز بگذارید. هوای تازه دود و گاز را بیرون می‌برد.",
+        "ps": "حتی په سړه هوا کې کړکۍ یا دروازه لږ خلاصه پرېږدئ. تازه هوا لوګی او ګاز بهر باسي.",
+        "en": "Even in cold weather, leave a window or door a little open. Fresh air carries smoke and fumes out."
+      }
+    },
+    {
+      "id": "winter-home.sleep",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "پیش از خواب آتش را خاموش کنید",
+        "ps": "له خوب مخکې اور مړ کړئ",
+        "en": "Put fires out before sleep"
+      },
+      "text": {
+        "fa": "هرگز در اتاق بسته با منقل، ذغال یا بخاری گازی روشن نخوابید. پیش از خواب ذغال را از زیر صندلی بیرون کنید.",
+        "ps": "هېڅکله په تړلې کوټه کې د بل منقل، سکرو یا ګازي بخارۍ سره ویده مه شئ. له خوب مخکې سکاره د صندلۍ له لاندې وباسئ.",
+        "en": "Never sleep in a closed room with a brazier, coals or a gas heater burning. Take the coals out from under the sandali before sleep."
+      }
+    },
+    {
+      "id": "winter-home.children",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "اطفال را از دود دور نگه دارید",
+        "ps": "ماشومان له لوګي لرې وساتئ",
+        "en": "Keep children away from smoke"
+      },
+      "text": {
+        "fa": "اگر می‌توانید، در بیرون یا آشپزخانهٔ جدا پخت‌وپز کنید. هنگام پخت‌وپز نوزادان را از آتش دور نگه دارید.",
+        "ps": "که کولای شئ، بهر یا په جلا پخلنځي کې پخلی وکړئ. د پخلي پر وخت کوچني ماشومان له اور لرې وساتئ.",
+        "en": "If you can, cook outside or in a separate kitchen. Keep babies away from the fire while you cook."
+      }
+    },
+    {
+      "id": "winter-home.warm",
+      "type": "step",
+      "icon": "newborn-warm",
+      "title": {
+        "fa": "با لباس گرم شوید، نه با دود",
+        "ps": "په جامو ګرم شئ، نه په لوګي",
+        "en": "Keep warm with clothes, not smoke"
+      },
+      "text": {
+        "fa": "به اطفال چند لایه لباس، کلاه و جوراب بپوشانید. نوزاد را پوست به پوست با مادر و زیر کمپل گرم نگه دارید.",
+        "ps": "ماشومانو ته څو پوړه جامې، خولۍ او جرابې واغوندئ. نوی زېږېدلی ماشوم د مور سره پوستکي په پوستکي او د ګرم کمپلې لاندې وساتئ.",
+        "en": "Dress children in layers with a hat and socks. Keep a newborn skin to skin with the mother under a warm blanket."
+      }
+    },
+    {
+      "id": "winter-home.tobacco",
+      "type": "step",
+      "icon": "smoke",
+      "title": {
+        "fa": "در خانه سگرت نکشید",
+        "ps": "په کور کې سګرټ مه څکوئ",
+        "en": "No smoking in the house"
+      },
+      "text": {
+        "fa": "دود سگرت به شش‌های اطفال ضرر دارد. اگر سگرت می‌کشید، بیرون و دور از اطفال بکشید.",
+        "ps": "د سګرټو لوګی د ماشومانو سږو ته زیان رسوي. که سګرټ څکوئ، بهر او له ماشومانو لرې یې وڅکوئ.",
+        "en": "Tobacco smoke harms children's lungs. If you smoke, do it outside and away from children."
+      }
+    },
+    {
+      "id": "winter-home.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "همه را به هوای آزاد ببرید و همین حالا به شفاخانه بروید، شب باشد یا روز، اگر:",
+        "ps": "ټول خلاصې هوا ته وباسئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ، که چېرې:",
+        "en": "Get everyone into fresh air and go to hospital now, day or night, if:"
+      },
+      "items": [
+        {
+          "id": "winter-home.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "کسی در اتاق گرم سردردی، سرچرخی یا استفراغ دارد",
+            "ps": "څوک په ګرمه کوټه کې سر درد، سرګرځېدل یا کانګې لري",
+            "en": "someone in a heated room has headache, dizziness or vomiting"
+          }
+        },
+        {
+          "id": "winter-home.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "کسی خیلی خواب‌آلود یا گیج است یا به سختی بیدار می‌شود",
+            "ps": "څوک ډېر خوب وړی یا ګډوډ دی یا په سختۍ ویښېږي",
+            "en": "someone is very sleepy, confused or hard to wake"
+          }
+        },
+        {
+          "id": "winter-home.urgent.faint",
+          "icon": "convulsion",
+          "text": {
+            "fa": "کسی بیهوش می‌شود یا تشنج می‌کند",
+            "ps": "څوک بې هوښه کېږي یا اختلاج کوي",
+            "en": "someone faints or has fits"
+          }
+        },
+        {
+          "id": "winter-home.urgent.family",
+          "icon": "family",
+          "text": {
+            "fa": "چند نفر خانواده هم‌زمان مریض می‌شوند",
+            "ps": "د کورنۍ څو کسان په یو وخت ناروغه کېږي",
+            "en": "several family members feel ill at the same time"
+          }
+        },
+        {
+          "id": "winter-home.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "طفل تند یا به سختی نفس می‌کشد",
+            "ps": "ماشوم چټک یا په سختۍ سا اخلي",
+            "en": "a child breathes fast or with difficulty"
+          }
+        }
+      ]
+    },
+    {
+      "id": "winter-home.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "winter-home.dont.cooker",
+          "icon": "stove",
+          "text": {
+            "fa": "اتاق را با گاز پخت‌وپز گرم نکنید",
+            "ps": "کوټه د پخلي په ګاز مه ګرموئ",
+            "en": "heat a room with a gas cooker"
+          }
+        },
+        {
+          "id": "winter-home.dont.plastic",
+          "icon": "smoke",
+          "text": {
+            "fa": "پلاستیک، تایر یا کثافات را برای گرمی نسوزانید",
+            "ps": "د تودوخې لپاره پلاستیک، ټایر یا کثافات مه سوځوئ",
+            "en": "burn plastic, tyres or rubbish for heat"
+          }
+        },
+        {
+          "id": "winter-home.dont.pipe",
+          "icon": "window",
+          "text": {
+            "fa": "نل بخاری را برای نگه داشتن گرمی بند نکنید",
+            "ps": "د تودوخې ساتلو لپاره د بخارۍ نل مه بندوئ",
+            "en": "block the stove pipe to keep the heat in"
+          }
+        },
+        {
+          "id": "winter-home.dont.sandali",
+          "icon": "baby",
+          "text": {
+            "fa": "نگذارید اطفال سر خود را زیر صندلی کرده بخوابند",
+            "ps": "مه پرېږدئ چې ماشومان سر د صندلۍ لاندې کړي او ویده شي",
+            "en": "let children sleep with their head under the sandali"
+          }
+        }
+      ]
+    },
+    {
+      "id": "winter-home.first-aid",
+      "type": "tip",
+      "icon": "card",
+      "text": {
+        "fa": "برای کمک‌های اولیه در مسمومیت با گاز ذغال، صفحهٔ کمک‌های اولیه را ببینید.",
+        "ps": "د سکرو د ګاز د زهرجنېدو لپاره، د لومړنیو مرستو پاڼه وګورئ.",
+        "en": "For help after coal or stove fume poisoning, see the First aid page."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Household air pollution (2024)",
+    "WHO guidelines for indoor air quality: household fuel combustion (2014)",
+    "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses; injury prevention",
+    "IFRC International first aid, resuscitation and education guidelines (2020): carbon monoxide",
+    "Burden: WHO Afghanistan outbreak sitrep week 48 2025 (Samangan highest ARI-pneumonia incidence, 717.3/10,000); MoPH CO poisoning figures via KabulNow 11 Jan 2025; GBD 2019 air pollution in Afghanistan (IJERPH 2024)"
+  ],
+  "review": [
+    "The sandali advice (take the coals out from under it before sleep, never sleep with the head under it) is general carbon monoxide safety, not WHO wording. Check it is acceptable when families depend on the sandali through the night.",
+    "Leaving a window slightly open in severe cold has to be balanced against keeping babies warm. Check the wording is right for Samangan winters.",
+    "The urgent signs of CO poisoning are adapted from first-aid sources, not a WHO caregiver chart. The 'sleep' step repeats the message of first-aid.fumes on purpose (the main killer); the 'children' and 'tobacco' steps overlap cough.smoke. Trim if the repetition is unwanted.",
+    "Pashto for sandali written 'صندلۍ'; confirm the local form."
+  ]
+}

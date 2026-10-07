@@ -1,0 +1,214 @@
+{
+  "id": "growth",
+  "section": "children",
+  "title": {
+    "fa": "رشد و انکشاف طفل",
+    "ps": "د ماشوم وده او پرمختګ",
+    "en": "Growth and development"
+  },
+  "summary": {
+    "fa": "طفل را هر ماه وزن کنید و هر روز با او بازی کنید و گپ بزنید.",
+    "ps": "ماشوم هره میاشت وزن کړئ او هره ورځ ورسره لوبې او خبرې وکړئ.",
+    "en": "Weigh your child every month; play and talk every day."
+  },
+  "image": "growth",
+  "blocks": [
+    {
+      "id": "growth.lead",
+      "type": "lead",
+      "text": {
+        "fa": "طفل صحتمند هر ماه بزرگ‌تر می‌شود و چیزهای تازه یاد می‌گیرد. وزن کردن، بازی و گپ زدن به شما کمک می‌کند ببینید طفل خوب رشد می‌کند.",
+        "ps": "روغ ماشوم هره میاشت لویېږي او نوي شیان زده کوي. وزن کول، لوبې او خبرې مرسته کوي چې وګورئ ماشوم مو ښه وده کوي.",
+        "en": "A healthy child grows and learns new things every month. Weighing, playing and talking help you see that your child is growing well."
+      }
+    },
+    {
+      "id": "growth.weigh",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "طفل را هر ماه وزن کنید",
+        "ps": "ماشوم هره میاشت وزن کړئ",
+        "en": "Weigh your child every month"
+      },
+      "text": {
+        "fa": "طفل را هر ماه برای وزن کردن به کلینیک ببرید، مخصوصاً در ۲ سال اول. کارت رشد را نگه دارید و هر بار با خود ببرید.",
+        "ps": "ماشوم هره میاشت د وزن لپاره کلینیک ته بوځئ، په ځانګړې توګه په لومړیو ۲ کلونو کې. د ودې کارت وساتئ او هر ځل یې له ځان سره یوسئ.",
+        "en": "Take your child to the clinic to be weighed every month, especially in the first 2 years. Keep the growth card and bring it every time."
+      }
+    },
+    {
+      "id": "growth.early",
+      "type": "step",
+      "icon": "milestones",
+      "title": {
+        "fa": "ماه‌های اول: چه ببینید",
+        "ps": "لومړۍ میاشتې: څه وګورئ",
+        "en": "First months: what to expect"
+      },
+      "text": {
+        "fa": "بیشتر اطفال حدود ۶ هفتگی می‌خندند، تا ۳ یا ۴ ماهگی سر خود را نگه می‌دارند، و تا ۶ یا ۸ ماهگی می‌نشینند.",
+        "ps": "ډېری ماشومان شاوخوا په ۶ اونیو کې موسکا کوي، تر ۳ یا ۴ میاشتو خپل سر نیولای شي، او تر ۶ یا ۸ میاشتو کښېني.",
+        "en": "Most babies smile at about 6 weeks, hold up their head by 3 to 4 months, and sit by 6 to 8 months."
+      }
+    },
+    {
+      "id": "growth.later",
+      "type": "step",
+      "icon": "milestones",
+      "title": {
+        "fa": "سال‌های اول: چه ببینید",
+        "ps": "لومړي کلونه: څه وګورئ",
+        "en": "First years: what to expect"
+      },
+      "text": {
+        "fa": "بیشتر اطفال حدود ۱۲ ماهگی اولین کلمه‌ها را می‌گویند، بین ۱۲ تا ۱۸ ماهگی راه می‌روند، و تا ۲ سالگی جمله‌های کوتاه می‌گویند.",
+        "ps": "ډېری ماشومان شاوخوا په ۱۲ میاشتو کې لومړني ټکي وايي، د ۱۲ او ۱۸ میاشتو ترمنځ پر پښو ګرځي، او تر ۲ کلنۍ لنډې جملې وايي.",
+        "en": "Most children say first words at about 12 months, walk between 12 and 18 months, and say short sentences by 2 years."
+      }
+    },
+    {
+      "id": "growth.play",
+      "type": "step",
+      "icon": "toys-play",
+      "title": {
+        "fa": "هر روز بازی کنید و گپ بزنید",
+        "ps": "هره ورځ لوبې او خبرې وکړئ",
+        "en": "Play and talk every day"
+      },
+      "text": {
+        "fa": "از روز ولادت، هر روز با طفل گپ بزنید، لالایی بخوانید و بازی کنید. پدر، پدرکلان و مادرکلان هم کمک کنند.",
+        "ps": "له زېږون څخه، هره ورځ له ماشوم سره خبرې وکړئ، لالایي ورته ووایئ او لوبې ورسره وکړئ. پلار، نیکه او انا دې هم مرسته وکړي.",
+        "en": "From birth, talk, sing and play with your baby every day. Fathers and grandparents can help too."
+      }
+    },
+    {
+      "id": "growth.vitamin-a",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "ویتامین ای و دوای ضد کرم",
+        "ps": "ویټامین اې او د چینجیو درمل",
+        "en": "Vitamin A and worm medicine"
+      },
+      "text": {
+        "fa": "کلینیک از ۶ ماهگی ویتامین ای، و از ۱ سالگی دوای ضد کرم می‌دهد. از کارمند صحی بپرسید چه وقت بگیرید.",
+        "ps": "کلینیک له ۶ میاشتو ویټامین اې، او له ۱ کال د چینجیو درمل ورکوي. له روغتیايي کارکوونکي وپوښتئ چې کله یې واخلئ.",
+        "en": "From 6 months the clinic gives vitamin A, and from 1 year worm medicine. Ask the health worker when they are due."
+      }
+    },
+    {
+      "id": "growth.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "growth.urgent.feet",
+          "icon": "swollen-feet",
+          "text": {
+            "fa": "هر دو پایش پندیده است",
+            "ps": "دواړه پښې یې پړسېدلې دي",
+            "en": "has swelling of both feet"
+          }
+        },
+        {
+          "id": "growth.urgent.thin",
+          "icon": "muac",
+          "text": {
+            "fa": "خیلی لاغر و ضعیف است",
+            "ps": "ډېر ډنګر او کمزوری دی",
+            "en": "is very thin and weak"
+          }
+        },
+        {
+          "id": "growth.urgent.eat",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "هیچ چیز نمی‌خورد یا نمی‌نوشد",
+            "ps": "هېڅ شی نه خوري او نه څښي",
+            "en": "will not eat or drink anything"
+          }
+        }
+      ]
+    },
+    {
+      "id": "growth.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دیدید، همین هفته به کلینیک بروید",
+        "ps": "که له دې نښو څخه مو یوه ولیده، په همدې اونۍ کې کلینیک ته ولاړ شئ",
+        "en": "If you see any of these signs, go to the clinic this week:"
+      },
+      "items": [
+        {
+          "id": "growth.soon.weight",
+          "icon": "growth",
+          "text": {
+            "fa": "وزنش زیاد نمی‌شود یا کم می‌شود",
+            "ps": "وزن یې نه زیاتېږي یا کمېږي",
+            "en": "is not gaining weight, or is losing weight"
+          }
+        },
+        {
+          "id": "growth.soon.milestones",
+          "icon": "milestones",
+          "text": {
+            "fa": "در نشستن، راه رفتن یا گپ زدن از اطفال هم‌سن خیلی عقب است",
+            "ps": "په کښېناستو، ګرځېدو یا خبرو کې له خپلو همځولو ډېر وروسته دی",
+            "en": "is far behind other children of the same age"
+          }
+        },
+        {
+          "id": "growth.soon.see",
+          "icon": "eye",
+          "text": {
+            "fa": "به نظر می‌رسد خوب نمی‌بیند",
+            "ps": "داسې ښکاري چې ښه نه ویني",
+            "en": "does not seem to see well"
+          }
+        },
+        {
+          "id": "growth.soon.hear",
+          "icon": "talk",
+          "text": {
+            "fa": "به صدا یا آواز شما رو نمی‌گرداند",
+            "ps": "غږ ته یا ستاسو آواز ته مخ نه اړوي",
+            "en": "does not turn to sounds or to your voice"
+          }
+        }
+      ]
+    },
+    {
+      "id": "growth.food",
+      "type": "tip",
+      "icon": "bowl-food",
+      "text": {
+        "fa": "طفلی که خوب وزن نمی‌گیرد، به وعده‌های بیشتر غذا و شیر مادر نیاز دارد. از کارمند صحی مشوره بگیرید.",
+        "ps": "هغه ماشوم چې ښه وزن نه اخلي، ډېر ځله خواړو او د مور شیدو ته اړتیا لري. له روغتیايي کارکوونکي سره مشوره وکړئ.",
+        "en": "A child who is not gaining weight needs more meals and breast milk. Ask the health worker for advice."
+      }
+    }
+  ],
+  "sources": [
+    "WHO/UNICEF Facts for Life (2010): child development and early learning; nutrition and growth",
+    "WHO/UNICEF Care for Child Development (2012): play and communicate",
+    "WHO Motor Development Study: windows of achievement for six gross motor milestones (2006)",
+    "WHO guideline: Vitamin A supplementation in infants and children 6 to 59 months of age (2011)",
+    "WHO guideline: Preventive chemotherapy to control soil-transmitted helminth infections (2017)",
+    "WHO IMCI Chart Booklet (2014): check for acute malnutrition"
+  ],
+  "review": [
+    "Milestone ages are given as 'most children' by these ages, as requested (smile about 6 weeks, head 3 to 4 months, sit 6 to 8 months, first words about 12 months, walk 12 to 18 months, short sentences by 2 years). WHO motor windows are wider (sitting alone 4 to 9 months, walking alone 8 to 18 months); check that the wording will not alarm parents of normal children.",
+    "Soon alert title says 'go to the clinic this week' rather than the standard 'today', because poor weight gain and slow development are not same-day problems. This differs from the glossary soon title; the red-flags topic does the same.",
+    "Urgent alert: 'very thin and weak' sends to hospital. IMCI treats severe acute malnutrition without complications or oedema as outpatient (OTP) care; with oedema of both feet, complications or no appetite it is referral. Consider whether 'very thin' alone should be soon.",
+    "Vitamin A from 6 months and deworming from 1 year follow WHO; Afghanistan may give vitamin A through polio campaigns. Dari 'ویتامین ای' and Pashto 'ویټامین اې' (vitamin A) need a native-speaker check.",
+    "Monthly weighing 'especially in the first 2 years' assumes monthly growth monitoring under 2 in Afghan clinics; check the national growth monitoring schedule.",
+    "Hearing item uses icon 'talk'; an 'ear' icon would be better."
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "id": "animal-illness",
+  "section": "everyone",
+  "title": {
+    "fa": "مریضی‌هایی که از حیوانات می‌آید",
+    "ps": "له څارویو راتلونکې ناروغۍ",
+    "en": "Illness from animals"
+  },
+  "summary": {
+    "fa": "تب کانگو، تب مالت و سیاه‌زخم از مواشی می‌آید. خانواده را حفاظت کنید.",
+    "ps": "د کانګو تبه، د مالټا تبه او تور زخم له څارویو راځي. کورنۍ وساتئ.",
+    "en": "Congo fever, Malta fever and anthrax come from livestock. Protect your family."
+  },
+  "image": "animal-illness",
+  "blocks": [
+    {
+      "id": "animal-illness.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کنه، خون و شیر خام گوسفند، بز و گاو می‌تواند مریضی‌های خطرناک داشته باشد. احتیاط ساده هنگام دوشیدن، ذبح و کار با حیوانات تمام خانواده را حفاظت می‌کند.",
+        "ps": "کنې، وینه او اومې شیدې د پسونو، وزو او غواګانو کولای شي خطرناکې ناروغۍ ولري. د لوشلو، حلالولو او له څارویو سره د کار پر وخت ساده احتیاط ټوله کورنۍ ساتي.",
+        "en": "Ticks, blood and raw milk from sheep, goats and cattle can carry dangerous diseases. Simple care when you milk, slaughter and handle animals protects the whole family."
+      }
+    },
+    {
+      "id": "animal-illness.milk",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "همه شیر را بجوشانید",
+        "ps": "ټولې شیدې وایشوئ",
+        "en": "Boil all milk"
+      },
+      "text": {
+        "fa": "شیر را پیش از نوشیدن یا ساختن ماست، قروت و پنیر خوب بجوشانید. شیر خام می‌تواند تب مالت بیاورد.",
+        "ps": "شیدې د څښلو یا د مستو، قروتو او پنیرو له جوړولو مخکې ښې وایشوئ. اومې شیدې کولای شي د مالټا تبه راولي.",
+        "en": "Boil milk well before drinking it or making yoghurt, qurut or cheese. Raw milk can give Malta fever."
+      }
+    },
+    {
+      "id": "animal-illness.slaughter",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "هنگام ذبح دست‌ها را بپوشانید",
+        "ps": "د حلالولو پر وخت لاسونه پټ کړئ",
+        "en": "Cover your hands when slaughtering"
+      },
+      "text": {
+        "fa": "هنگام ذبح یا قطع کردن گوشت دستکش یا خریطهٔ پلاستیکی به دست کنید. بعد دست‌ها را با صابون بشویید.",
+        "ps": "د حلالولو یا د غوښې د ټوټه کولو پر وخت دستکشې یا پلاستیکي کڅوړې په لاسونو کړئ. وروسته لاسونه په صابون ومینځئ.",
+        "en": "Wear gloves or plastic bags on your hands when you slaughter or cut meat. Afterwards, wash your hands with soap."
+      }
+    },
+    {
+      "id": "animal-illness.ticks",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "هر روز بدن را برای کنه ببینید",
+        "ps": "هره ورځ بدن د کنو لپاره وګورئ",
+        "en": "Check for ticks every day"
+      },
+      "text": {
+        "fa": "نزدیک حیوانات لباس آستین‌دراز بپوشید و هر روز بدن خود و اطفال را ببینید. کنه را با تکه بگیرید و دور کنید، با دست خالی نگیرید.",
+        "ps": "د څارویو تر څنګ اوږدې لستوڼې جامې واغوندئ او هره ورځ خپل او د ماشومانو بدن وګورئ. کنه په ټوکر ونیسئ او لرې یې کړئ، په لوڅ لاس یې مه نیسئ.",
+        "en": "Wear long sleeves near animals and check your own and your children's bodies every day. Pull ticks off with a cloth, not bare hands."
+      }
+    },
+    {
+      "id": "animal-illness.dead",
+      "type": "step",
+      "icon": "animals",
+      "title": {
+        "fa": "حیوان مرده از مریضی را نخورید",
+        "ps": "له ناروغۍ مړ شوی څاروی مه خورئ",
+        "en": "Never eat animals that died sick"
+      },
+      "text": {
+        "fa": "گوشت حیوانی را که ناگهان مرده یا مریض بوده نخورید و پوستش را نکنید. آن را عمیق دفن کنید و به داکتر مواشی خبر بدهید.",
+        "ps": "د هغه څاروي غوښه مه خورئ او پوستکی یې مه باسئ چې ناڅاپه مړ شوی یا ناروغ و. ژور یې ښخ کړئ او د څارویو ډاکټر ته خبر ورکړئ.",
+        "en": "Do not eat or skin an animal that died suddenly or was sick. Bury it deep and tell the animal doctor."
+      }
+    },
+    {
+      "id": "animal-illness.birth",
+      "type": "step",
+      "icon": "animals",
+      "title": {
+        "fa": "هنگام زاییدن حیوان احتیاط کنید",
+        "ps": "د څاروي د زېږون پر وخت پام وکړئ",
+        "en": "Take care when animals give birth"
+      },
+      "text": {
+        "fa": "وقتی به زاییدن گوسفند یا بز کمک می‌کنید، دستکش بپوشید. چیزهایی را که بعد از زاییدن بیرون می‌آید دفن کنید.",
+        "ps": "کله چې د پسه یا وزې په زېږون کې مرسته کوئ، دستکشې واغوندئ. هغه څه چې له زېږون وروسته راوځي ښخ کړئ.",
+        "en": "Wear gloves when you help a sheep or goat give birth. Bury everything that comes out after the birth."
+      }
+    },
+    {
+      "id": "animal-illness.carers",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "از کسانی که مراقبت می‌کنند حفاظت کنید",
+        "ps": "پالونکي وساتئ",
+        "en": "Protect people who give care"
+      },
+      "text": {
+        "fa": "اگر کسی تب و خونریزی دارد، کسی که از او مراقبت می‌کند دستکش بپوشد و به خون یا استفراغ دست نزند. بعد دست‌ها را با صابون بشوید.",
+        "ps": "که څوک تبه او وینه بهېدل لري، پالونکی دې دستکشې واغوندي او وینې یا کانګو ته لاس ور نه وړي. وروسته دې لاسونه په صابون ومینځي.",
+        "en": "If someone has fever and bleeding, their carer should wear gloves and not touch blood or vomit. Then wash hands with soap."
+      }
+    },
+    {
+      "id": "animal-illness.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی که با حیوانات کار می‌کند این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که څوک چې له څارویو سره کار کوي دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if someone who works with animals has:"
+      },
+      "items": [
+        {
+          "id": "animal-illness.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تب بلند ناگهانی و درد بدن بعد از گزیدن کنه یا ذبح",
+            "ps": "ناڅاپي لوړه تبه او د بدن درد د کنې له چیچلو یا حلالولو وروسته",
+            "en": "sudden high fever and body pain after a tick bite or slaughter"
+          }
+        },
+        {
+          "id": "animal-illness.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "تب همراه با خونریزی از بینی، بیره یا زیر پوست",
+            "ps": "تبه او له پوزې، ورېژو یا پوستکي لاندې وینه بهېدل",
+            "en": "fever with bleeding from the nose, gums or under the skin"
+          }
+        },
+        {
+          "id": "animal-illness.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "استفراغ خون یا مدفوع سیاه",
+            "ps": "د وینې کانګې یا تورې ډکې متیازې",
+            "en": "vomiting blood or passing black stool"
+          }
+        },
+        {
+          "id": "animal-illness.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیجی یا خواب‌آلودگی زیاد",
+            "ps": "ګډوډي یا ډېر خوب وړتیا",
+            "en": "confusion or great sleepiness"
+          }
+        }
+      ]
+    },
+    {
+      "id": "animal-illness.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if someone has:"
+      },
+      "items": [
+        {
+          "id": "animal-illness.soon.black-sore",
+          "icon": "wound",
+          "text": {
+            "fa": "زخم بی‌درد با وسط سیاه بعد از کار با پوست یا گوشت حیوان",
+            "ps": "بې درده زخم چې منځ یې تور وي، د څاروي له پوستکي یا غوښې سره د کار وروسته",
+            "en": "a painless sore with a black centre after handling hides or meat"
+          }
+        },
+        {
+          "id": "animal-illness.soon.long-fever",
+          "icon": "thermometer",
+          "text": {
+            "fa": "تبی که بیش از یک هفته می‌آید و می‌رود، با درد بندها",
+            "ps": "تبه چې له یوې اونۍ زیاته راځي او ځي، د بندونو له درد سره",
+            "en": "fever that comes and goes for over a week, with joint pain"
+          }
+        },
+        {
+          "id": "animal-illness.soon.tick",
+          "icon": "insect",
+          "text": {
+            "fa": "کنه‌ای که بیرون نمی‌شود",
+            "ps": "کنه چې نه لرې کېږي",
+            "en": "a tick that will not come out of the skin"
+          }
+        }
+      ]
+    },
+    {
+      "id": "animal-illness.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "animal-illness.dont.children",
+          "icon": "baby",
+          "text": {
+            "fa": "نگذارید اطفال با خون یا پوست حیوان ذبح‌شده بازی کنند",
+            "ps": "مه پرېږدئ چې ماشومان د حلال شوي څاروي په وینه یا پوستکي لوبې وکړي",
+            "en": "let children play with blood or skins from slaughter"
+          }
+        },
+        {
+          "id": "animal-illness.dont.sell",
+          "icon": "money",
+          "text": {
+            "fa": "گوشت حیوان مریض را نفروشید و به کسی ندهید",
+            "ps": "د ناروغ څاروي غوښه مه پلورئ او چا ته یې مه ورکوئ",
+            "en": "sell or give away meat from a sick animal"
+          }
+        },
+        {
+          "id": "animal-illness.dont.waste",
+          "icon": "water",
+          "text": {
+            "fa": "باقی‌ماندهٔ ذبح را نزدیک خانه یا آب نیندازید",
+            "ps": "د حلالولو پاتې شوني د کور یا اوبو تر څنګ مه غورځوئ",
+            "en": "throw slaughter waste near the house or water"
+          }
+        }
+      ]
+    },
+    {
+      "id": "animal-illness.eid",
+      "type": "tip",
+      "icon": "calendar",
+      "text": {
+        "fa": "در عید قربان که حیوانات زیاد ذبح می‌شود، بیشتر احتیاط کنید.",
+        "ps": "د لوی اختر پر مهال چې ډېر څاروي حلالېږي، ډېر احتیاط وکړئ.",
+        "en": "Take extra care at Eid al-Adha, when many animals are slaughtered."
+      }
+    },
+    {
+      "id": "animal-illness.dog",
+      "type": "tip",
+      "icon": "dog",
+      "text": {
+        "fa": "گزیدن سگ می‌تواند هاری بیاورد. صفحهٔ کمک‌های اولیه را ببینید و همان روز برای واکسین بروید.",
+        "ps": "د سپي چیچل هاري راوستلای شي. د لومړنیو مرستو پاڼه وګورئ او په همغه ورځ واکسین ته ولاړ شئ.",
+        "en": "A dog bite can cause rabies. See the First aid page and go for the vaccine the same day."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Crimean-Congo haemorrhagic fever (20 Feb 2025): ticks, slaughter, gloves, light long clothing, caring for the sick",
+    "WHO Afghanistan: Vigilance and preventive measures needed during Eid al-Adha (CCHF)",
+    "WHO fact sheet: Brucellosis (2020): unpasteurised milk and cheese, animal births and afterbirths",
+    "WHO/WOAH/FAO Anthrax in humans and animals, 4th ed. (2008): do not eat or handle animals that died suddenly; cutaneous anthrax eschar",
+    "Burden: MoPH NDSR week 33 2026 (CCHF outbreak in Samangan; anthrax outbreaks in Balkh and Jawzjan); WHO outbreak sitrep week 48 2025 (1,468 CCHF cases, 101 deaths); Akbarian et al. PLoS NTD 2015 (brucellosis and Q fever, Herat)"
+  ],
+  "review": [
+    "Local disease names to confirm: Dari 'تب کانگو' (CCHF), 'تب مالت' (brucellosis), 'سیاه‌زخم' (anthrax); Pashto 'د کانګو تبه', 'د مالټا تبه', 'تور زخم'. Pashto 'کنه/کنې' for tick.",
+    "WHO says meat from slaughtered animals is not a CCHF risk after normal handling, so the topic gives no 'cook meat well' message for CCHF; the 'do not eat animals that died of illness' step is for anthrax.",
+    "Gloves or plastic bags at slaughter: check this is practical and culturally acceptable at home slaughter, including at Eid.",
+    "Icon wanted: 'gloves'; 'handwash' used for the slaughter step. 'animals' is used twice.",
+    "The anthrax black sore is placed under 'clinic today' (soon). Swelling of the face or neck with a black sore would be urgent; consider adding it.",
+    "Prolonged or recurrent fever with joint pain is a simplified brucellosis presentation for families."
+  ]
+}

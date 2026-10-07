@@ -1,0 +1,268 @@
+{
+  "id": "measles",
+  "section": "children",
+  "title": {
+    "fa": "سرخکان: مراقبت در خانه",
+    "ps": "شری: په کور کې پاملرنه",
+    "en": "Measles: care at home"
+  },
+  "summary": {
+    "fa": "سرخکان خطرناک است. طفل را غذا بدهید و علایم خطر را بشناسید.",
+    "ps": "شری خطرناکه ده. ماشوم ته خواړه ورکړئ او د خطر نښې وپېژنئ.",
+    "en": "Measles is dangerous. Keep feeding the child and know the danger signs."
+  },
+  "image": "measles",
+  "blocks": [
+    {
+      "id": "measles.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سرخکان با تب، سرفه، آب‌ریزش بینی و سرخی چشم شروع می‌شود، بعد دانه‌های سرخ از روی به تمام بدن پهن می‌شود. سرخکان می‌تواند سینه‌بغل، اسهال و کوری بیاورد، پس طفل به مراقبت کلینیک و خانه ضرورت دارد.",
+        "ps": "شری په تبه، ټوخي، د پوزې په بهېدو او سرو سترګو پیلېږي، بیا سرې دانې له مخ نه ټول بدن ته خپرېږي. شری کولای شي سینه بغل، نس ناستی او ړوندوالی راولي، نو ماشوم د کلینیک او کور پاملرنې ته اړتیا لري.",
+        "en": "Measles starts with fever, cough, runny nose and red eyes, then a red rash spreads from the face to the whole body. It can cause pneumonia, diarrhoea and blindness, so the child needs care from the clinic and at home."
+      }
+    },
+    {
+      "id": "measles.clinic",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "طفل را به کلینیک ببرید",
+        "ps": "ماشوم کلینیک ته یوسئ",
+        "en": "Take the child to the clinic"
+      },
+      "text": {
+        "fa": "کارمند صحی طفل را معاینه می‌کند و ویتامین الف می‌دهد. ویتامین الف چشم‌ها را حفاظت می‌کند و به جور شدن طفل کمک می‌کند.",
+        "ps": "روغتیايي کارکوونکی ماشوم معاینه کوي او ویټامین الف ورکوي. ویټامین الف سترګې ساتي او له ماشوم سره د روغېدو مرسته کوي.",
+        "en": "The health worker will check the child and give vitamin A. Vitamin A protects the eyes and helps the child get better."
+      }
+    },
+    {
+      "id": "measles.feed",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیردهی و غذا را ادامه دهید",
+        "ps": "تي او خواړه دوام ورکړئ",
+        "en": "Keep breastfeeding and feeding"
+      },
+      "text": {
+        "fa": "طفل را بیشتر شیر بدهید و در روز چند بار غذای کم‌کم بدهید. آب و مایعات زیاد مثل شوربا بدهید.",
+        "ps": "ماشوم ته ډېر ځله تی ورکړئ او په ورځ کې څو ځله لږ لږ خواړه ورکړئ. ډېرې اوبه او مایعات لکه ښوروا ورکړئ.",
+        "en": "Breastfeed more often and give small meals many times a day. Give plenty to drink, such as water and soup."
+      }
+    },
+    {
+      "id": "measles.eyes",
+      "type": "step",
+      "icon": "eye",
+      "title": {
+        "fa": "چشم‌ها را آرام پاک کنید",
+        "ps": "سترګې په نرمۍ پاکې کړئ",
+        "en": "Clean the eyes gently"
+      },
+      "text": {
+        "fa": "چشم‌ها را با تکهٔ پاک و آب جوشانده‌شده و سردشده پاک کنید. برای هر چشم یک جای پاک تکه را استفاده کنید.",
+        "ps": "سترګې په پاک ټوکر او ایشول شویو سړو اوبو پاکې کړئ. د هرې سترګې لپاره د ټوکر یوه پاکه برخه وکاروئ.",
+        "en": "Wipe the eyes with a clean cloth and boiled, cooled water. Use a clean part of the cloth for each eye."
+      }
+    },
+    {
+      "id": "measles.others",
+      "type": "step",
+      "icon": "family",
+      "title": {
+        "fa": "دیگران را حفاظت کنید",
+        "ps": "نور خلک وساتئ",
+        "en": "Protect other people"
+      },
+      "text": {
+        "fa": "سرخکان به آسانی سرایت می‌کند. نوزادان و زنان حامله را از طفل مریض دور نگه دارید.",
+        "ps": "شری ډېر ژر خپرېږي. نوي زېږېدلي ماشومان او امیندوارې ښځې له ناروغ ماشوم نه لرې وساتئ.",
+        "en": "Measles spreads very easily. Keep newborn babies and pregnant women away from the sick child."
+      }
+    },
+    {
+      "id": "measles.vaccine",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "دو واکسین طفل را حفاظت می‌کند",
+        "ps": "دوه واکسینونه ماشوم ساتي",
+        "en": "Two vaccines protect the child"
+      },
+      "text": {
+        "fa": "هر طفل در ۹ ماهگی و ۱۸ ماهگی واکسین سرخکان می‌گیرد. خواهر و برادرهای طفل را هم برای واکسین ببرید.",
+        "ps": "هر ماشوم په ۹ میاشتنۍ او ۱۸ میاشتنۍ کې د شري واکسین اخلي. د ماشوم خویندې او وروڼه هم واکسین ته یوسئ.",
+        "en": "Every child gets measles vaccine at 9 months and 18 months. Take the sick child's brothers and sisters for their vaccine too."
+      }
+    },
+    {
+      "id": "measles.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل مبتلا به سرخکان این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که په شري اخته ماشوم دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if the child with measles:"
+      },
+      "items": [
+        {
+          "id": "measles.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تند یا به سختی نفس می‌کشد",
+            "ps": "چټک یا په سختۍ سا اخلي",
+            "en": "breathes fast or with difficulty"
+          }
+        },
+        {
+          "id": "measles.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "نمی‌تواند چیزی بنوشد یا شیر بخورد",
+            "ps": "څه نه شي څښلای یا تی نه شي رودلای",
+            "en": "cannot drink or breastfeed"
+          }
+        },
+        {
+          "id": "measles.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج می‌کند",
+            "ps": "اختلاج کوي",
+            "en": "has fits (convulsions)"
+          }
+        },
+        {
+          "id": "measles.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است یا به سختی بیدار می‌شود",
+            "ps": "ډېر خوب وړی دی یا په سختۍ ویښېږي",
+            "en": "is very sleepy or hard to wake"
+          }
+        },
+        {
+          "id": "measles.urgent.cloudy-eye",
+          "icon": "eye",
+          "text": {
+            "fa": "سیاهی چشمش خیره یا سفید شده است",
+            "ps": "د سترګې تور یې خړ یا سپین شوی دی",
+            "en": "has a white or cloudy patch on the eye"
+          }
+        },
+        {
+          "id": "measles.urgent.mouth",
+          "icon": "tooth",
+          "text": {
+            "fa": "زخم‌های عمیق در دهان دارد و نمی‌تواند غذا بخورد",
+            "ps": "په خوله کې ژور زخمونه لري او خواړه نه شي خوړلای",
+            "en": "has deep mouth sores and cannot eat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measles.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل مبتلا به سرخکان این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که په شري اخته ماشوم دا نښې لري، نن کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic today if the child with measles:"
+      },
+      "items": [
+        {
+          "id": "measles.soon.pus",
+          "icon": "eye",
+          "text": {
+            "fa": "از چشم‌هایش چرک می‌آید",
+            "ps": "له سترګو یې زوه راځي",
+            "en": "has pus coming from the eyes"
+          }
+        },
+        {
+          "id": "measles.soon.mouth",
+          "icon": "tooth",
+          "text": {
+            "fa": "در دهانش زخم دارد",
+            "ps": "په خوله کې یې زخمونه دي",
+            "en": "has sores in the mouth"
+          }
+        },
+        {
+          "id": "measles.soon.diarrhoea",
+          "icon": "ors",
+          "text": {
+            "fa": "اسهال دارد",
+            "ps": "نس ناستی لري",
+            "en": "has diarrhoea"
+          }
+        },
+        {
+          "id": "measles.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "سه روز بعد از برآمدن دانه‌ها هنوز تب دارد",
+            "ps": "د دانو له راوتلو درې ورځې وروسته لا هم تبه لري",
+            "en": "still has fever three days after the rash began"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measles.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "measles.dont.stop-food",
+          "icon": "no",
+          "text": {
+            "fa": "شیر یا غذای طفل را قطع نکنید",
+            "ps": "تی او خواړه مه بندوئ",
+            "en": "stop breastfeeding or food"
+          }
+        },
+        {
+          "id": "measles.dont.eyes",
+          "icon": "eye",
+          "text": {
+            "fa": "سرمه، دوای گیاهی یا چیز دیگر در چشم‌ها نریزید",
+            "ps": "سترګو ته رانجه، بوټي یا بل څه مه اچوئ",
+            "en": "put kohl, herbs or anything else in the eyes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "measles.after",
+      "type": "tip",
+      "icon": "bowl-food",
+      "text": {
+        "fa": "بعد از سرخکان طفل تا چند هفته ضعیف می‌ماند. غذای بیشتر بدهید و رشد او را نظارت کنید.",
+        "ps": "له شري وروسته ماشوم څو اونۍ کمزوری وي. ډېر خواړه ورکړئ او د هغه وده وڅارئ.",
+        "en": "After measles a child stays weak for some weeks. Give extra food and watch the child's growth."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Measles (2024): vitamin A for all children with measles, nutrition, fluids, complications",
+    "WHO IMCI Chart Booklet (2014): measles classification (severe complicated, eye or mouth complications), counsel the mother",
+    "WHO/UNICEF Facts for Life (2010): immunization",
+    "Afghanistan schedule: measles vaccine at 9 and 18 months (UNICEF Afghanistan 2023, via Saeedzai et al. 2025; see research_notes content_facts.md)",
+    "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report week 48 2025 (96,554 cases, 546 deaths in 2025)"
+  ],
+  "review": [
+    "Vitamin A is written 'ویتامین الف' (Dari) and 'ویټامین الف' (Pashto) because Latin letters are not allowed; check what clinics in Samangan actually say.",
+    "The soon item 'still has fever three days after the rash began' is a pragmatic sign of complications (pneumonia, ear infection), not a direct IMCI rule. Keep or remove.",
+    "The cloudy cornea item reads 'has a white or cloudy patch on the eye' (Dari and Pashto say 'the dark part of the eye has gone cloudy or white'); check that families will understand it.",
+    "Icon wanted: 'mouth' for mouth sores; 'tooth' used instead.",
+    "Isolation advice is limited to keeping newborns and pregnant women away. No isolation period is stated. fever.json already has a short measles step and soon item; this page gives the fuller home care and complications."
+  ]
+}

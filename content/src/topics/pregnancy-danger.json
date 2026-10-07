@@ -1,0 +1,295 @@
+{
+  "id": "pregnancy-danger",
+  "section": "women",
+  "title": {
+    "fa": "علایم خطر در حاملگی",
+    "ps": "په امیندوارۍ کې د خطر نښې",
+    "en": "Danger signs in pregnancy"
+  },
+  "summary": {
+    "fa": "علایمی در حاملگی و بعد از ولادت که کمک فوری لازم دارد",
+    "ps": "په امیندوارۍ او له زېږون وروسته هغه نښې چې ژر مرستې ته اړتیا لري",
+    "en": "Signs in pregnancy and after birth that need help fast"
+  },
+  "image": "pregnancy-danger",
+  "blocks": [
+    {
+      "id": "pregnancy-danger.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بعضی علایم در حاملگی برای مادر و طفل خطرناک است. این علایم را همراه با فامیل خود یاد بگیرید تا زود اقدام کرده بتوانید.",
+        "ps": "په امیندوارۍ کې ځینې نښې د مور او ماشوم لپاره خطرناکې دي. دا نښې له خپلې کورنۍ سره زده کړئ، چې ژر عمل وکړای شئ.",
+        "en": "Some signs in pregnancy are dangerous for mother and baby. Learn them with your family, so you can act fast."
+      }
+    },
+    {
+      "id": "pregnancy-danger.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you have any of these signs, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "pregnancy-danger.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی از راه تناسلی",
+            "ps": "له تناسلي لارې وینه بهېدل",
+            "en": "Bleeding from the vagina"
+          }
+        },
+        {
+          "id": "pregnancy-danger.urgent.fits",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج، یا بیهوشی",
+            "ps": "اختلاج، یا بې هوښي",
+            "en": "Fits, or being unconscious"
+          }
+        },
+        {
+          "id": "pregnancy-danger.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردرد شدید همراه با تاری دید",
+            "ps": "سخت سر درد، له تت لید سره",
+            "en": "Severe headache with blurred vision"
+          }
+        },
+        {
+          "id": "pregnancy-danger.urgent.fever-weak",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
+            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
+            "en": "Fever, and too weak to get out of bed"
+          }
+        },
+        {
+          "id": "pregnancy-danger.urgent.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "Severe belly pain"
+          }
+        },
+        {
+          "id": "pregnancy-danger.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس تند یا نفس کشیدن مشکل",
+            "ps": "چټکه یا سخته ساه اخیستل",
+            "en": "Fast or difficult breathing"
+          }
+        },
+        {
+          "id": "pregnancy-danger.urgent.movement",
+          "icon": "baby-movement",
+          "text": {
+            "fa": "طفل در شکم کمتر حرکت می‌کند، یا هیچ حرکت نمی‌کند",
+            "ps": "ماشوم په نس کې لږ خوځېږي، یا هېڅ نه خوځېږي",
+            "en": "The baby moves less, or not at all"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pregnancy-danger.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If you have any of these signs, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "pregnancy-danger.soon.fever",
+          "icon": "thermometer",
+          "text": {
+            "fa": "تب",
+            "ps": "تبه",
+            "en": "Fever"
+          }
+        },
+        {
+          "id": "pregnancy-danger.soon.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شکم",
+            "ps": "د نس درد",
+            "en": "Belly pain"
+          }
+        },
+        {
+          "id": "pregnancy-danger.soon.ill",
+          "icon": "warning",
+          "text": {
+            "fa": "احساس ناجوری",
+            "ps": "د ناروغۍ احساس",
+            "en": "Feeling ill"
+          }
+        },
+        {
+          "id": "pregnancy-danger.soon.swelling",
+          "icon": "swelling",
+          "text": {
+            "fa": "پندیدگی انگشتان، روی یا پاها",
+            "ps": "د ګوتو، مخ یا پښو پړسوب",
+            "en": "Swelling of the fingers, face or legs"
+          }
+        },
+        {
+          "id": "pregnancy-danger.soon.waters",
+          "icon": "waters",
+          "text": {
+            "fa": "آب ولادت آمده، اما درد ولادت نیست",
+            "ps": "د زېږون اوبه راغلې، خو د زېږون دردونه نشته",
+            "en": "The waters break, but there are no labour pains"
+          }
+        },
+        {
+          "id": "pregnancy-danger.soon.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "سوزش هنگام ادرار",
+            "ps": "د تشو متیازو پر وخت سوځېدل",
+            "en": "Burning when passing urine"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pregnancy-danger.birth-plan",
+      "type": "step",
+      "icon": "birth-plan",
+      "title": {
+        "fa": "با فامیل پلان ولادت بسازید",
+        "ps": "له کورنۍ سره د زېږون پلان جوړ کړئ",
+        "en": "Make a birth plan together"
+      },
+      "text": {
+        "fa": "در اوایل حاملگی با فامیل خود گپ بزنید. فیصله کنید که در کجا ولادت می‌کنید و چه کسی با شما می‌رود.",
+        "ps": "د امیندوارۍ په لومړیو کې له خپلې کورنۍ سره خبرې وکړئ. پرېکړه وکړئ چې چېرته به زېږون کوئ او څوک به درسره ځي.",
+        "en": "Talk with your family early in pregnancy. Decide where you will give birth and who will go with you."
+      }
+    },
+    {
+      "id": "pregnancy-danger.money-car",
+      "type": "step",
+      "icon": "money",
+      "title": {
+        "fa": "پول و موتر را آماده کنید",
+        "ps": "پیسې او موټر چمتو کړئ",
+        "en": "Get money and transport ready"
+      },
+      "text": {
+        "fa": "از حالا کمی پول کنار بگذارید. با یک دریور گپ بزنید که شب یا روز شما را ببرد.",
+        "ps": "له اوس نه لږې پیسې خوندي کړئ. له یو موټر چلوونکي سره خبره وکړئ چې د شپې یا ورځې مو یوسي.",
+        "en": "Put some money aside now. Agree with a driver who can take you, day or night."
+      }
+    },
+    {
+      "id": "pregnancy-danger.phone",
+      "type": "step",
+      "icon": "phone",
+      "title": {
+        "fa": "شماره‌های تیلفون را آماده داشته باشید",
+        "ps": "د ټیلیفون شمېرې چمتو وساتئ",
+        "en": "Keep phone numbers ready"
+      },
+      "text": {
+        "fa": "شماره دریور، قابله و کلینیک را در تیلفون ثبت کنید. تیلفون را چارج نگه دارید.",
+        "ps": "د موټر چلوونکي، قابلې او کلینیک شمېرې په ټیلیفون کې ثبت کړئ. ټیلیفون چارج وساتئ.",
+        "en": "Save the numbers of the driver, the midwife and the clinic. Keep the phone charged."
+      }
+    },
+    {
+      "id": "pregnancy-danger.go-early",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "وقتی درد ولادت شروع شد، زود بروید",
+        "ps": "کله چې د زېږون درد پیل شو، ژر ولاړ شئ",
+        "en": "Go early when labour starts"
+      },
+      "text": {
+        "fa": "وقتی درد ولادت شروع شد یا آب آمد، به جایی بروید که برای ولادت پلان کرده‌اید. در خانه منتظر نمانید.",
+        "ps": "کله چې د زېږون درد پیل شو یا اوبه راغلې، هغه ځای ته ولاړ شئ چې د زېږون لپاره مو ټاکلی. په کور کې انتظار مه کوئ.",
+        "en": "When labour pains start or the waters break, go to the place you planned for the birth. Do not wait at home."
+      }
+    },
+    {
+      "id": "pregnancy-danger.six-weeks",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "تا ۶ هفته بعد از ولادت متوجه باشید",
+        "ps": "له زېږون وروسته تر ۶ اونیو پام وکړئ",
+        "en": "Watch until 6 weeks after birth"
+      },
+      "text": {
+        "fa": "این علایم خطر در حاملگی، در وقت ولادت و تا ۶ هفته بعد از ولادت مهم است.",
+        "ps": "دا د خطر نښې په امیندوارۍ کې، د زېږون پر مهال او له زېږون وروسته تر ۶ اونیو پورې مهمې دي.",
+        "en": "These danger signs matter in pregnancy, during the birth, and for 6 weeks after the birth."
+      }
+    },
+    {
+      "id": "pregnancy-danger.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید",
+        "ps": "دا کارونه مه کوئ",
+        "en": "Things not to do"
+      },
+      "items": [
+        {
+          "id": "pregnancy-danger.dont.night",
+          "icon": "moon",
+          "text": {
+            "fa": "اگر علامه خطر در شب شروع شد، تا صبح منتظر نمانید.",
+            "ps": "که د خطر نښه د شپې پیل شوه، تر سهاره انتظار مه کوئ.",
+            "en": "Do not wait until morning if a danger sign starts at night."
+          }
+        },
+        {
+          "id": "pregnancy-danger.dont.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "منتظر نمانید که خونریزی خودش بند شود.",
+            "ps": "انتظار مه کوئ چې وینه پخپله ودرېږي.",
+            "en": "Do not wait to see if bleeding stops by itself."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pregnancy-danger.family",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "این علایم را به شوهر و خشو خود هم بگویید، تا آن‌ها بدانند چه وقت باید بروند.",
+        "ps": "دا نښې خپل مېړه او خواښې ته هم ووایاست، چې دوی پوه شي کله باید ولاړ شي.",
+        "en": "Share these signs with your husband and mother-in-law, so they know when to go."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): sheet M2 Care during pregnancy (danger signs, signs of labour, birth and emergency plan); sheet M4 Care for the mother after birth",
+    "WHO Counselling for maternal and newborn health care: a handbook for building skills (2013): Session 7 birth and emergency planning; Session 8 danger signs during pregnancy",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016)"
+  ],
+  "review": [
+    "'The baby moves less, or not at all' is in the 'clinic today' (amber) list as requested; WHO counselling materials vary and UK practice treats reduced movements as same-day urgent. Consider moving it to the red list.",
+    "'Waters break, but no labour pains': PCPNC M2 says go as soon as possible if not in labour after 6 hours; simplified here to 'clinic today' with no 6-hour wait.",
+    "'Burning when passing urine' is not on the PCPNC M2 list; added as requested. Icon 'urine-blood' used (closest); a plain 'urine' icon would be better.",
+    "'Feeling ill' uses the generic 'warning' icon.",
+    "fa/ps use a polite term for vagina (fa راه تناسلی, ps تناسلي لار); ask the local translator whether a gentler village word is better.",
+    "Tip names the husband and mother-in-law as the people to tell; check this suits the cultural tone.",
+    "Claude moved \"baby moves less or not at all\" from clinic-today to hospital-now (UK practice: same-day urgent)."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "appUrl": "https://mokingsacc.github.io/Sehat/",
+  "analyticsUrl": "",
+  "_note": "appUrl: the public address people open (used by Share). analyticsUrl: the Cloudflare Worker /e endpoint from server/README.md. Empty analyticsUrl = counts stay queued on the phone and nothing is sent.",
+  "home": [
+    "install",
+    "ask",
+    "nextVaccine",
+    "sections",
+    "quick",
+    "near",
+    "sendApp",
+    "feedback",
+    "disclaimer"
+  ],
+  "_home": "Order of the blocks on the home screen. Remove a name to hide it. Available: install, ask, nextVaccine, sections, quick, near, feedback, disclaimer.",
+  "feedbackUrl": "",
+  "_feedbackUrl": "The Cloudflare Worker /feedback address (same server as analyticsUrl).",
+  "contentUrl": "",
+  "_contentUrl": "The Cloudflare Worker address (no /e at the end), e.g. https://family-health-book.<you>.workers.dev. When set, phones also download the book published from the dashboard editor (/admin) when they are online. Empty = only the book built into the app.",
+  "urgentTopics": [
+    "danger-child",
+    "pregnancy-danger",
+    "red-flags",
+    "first-aid"
+  ],
+  "_urgentTopics": "Topics whose narration downloads first (the 'urgent' audio pack), together with the interface lines, every topic title and every red 'go to hospital now' box. The other clips download in packs by section: children, women, everyone."
+}

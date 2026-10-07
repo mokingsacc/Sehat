@@ -1,0 +1,211 @@
+{
+  "id": "breastfeeding",
+  "section": "children",
+  "title": {
+    "fa": "شیر مادر و غذای طفل",
+    "ps": "د مور شیدې او د ماشوم خواړه",
+    "en": "Breastfeeding and food"
+  },
+  "summary": {
+    "fa": "تا ۶ ماه فقط شیر مادر، بعد غذای نرم هم بدهید.",
+    "ps": "تر ۶ میاشتو یوازې د مور شیدې، بیا نرم خواړه هم ورکړئ.",
+    "en": "Only breast milk for 6 months, then add soft foods."
+  },
+  "image": "breastfeeding",
+  "blocks": [
+    {
+      "id": "breastfeeding.lead",
+      "type": "lead",
+      "text": {
+        "fa": "شیر مادر بهترین غذا و نوشیدنی برای طفل شما است. طفل را از اسهال و سینه‌بغل محافظت می‌کند.",
+        "ps": "د مور شیدې ستاسو د ماشوم لپاره تر ټولو غوره خواړه او څښاک دي. ماشوم له نس ناستي او سینه بغل څخه ساتي.",
+        "en": "Breast milk is the best food and drink for your baby. It protects the baby from diarrhoea and pneumonia."
+      }
+    },
+    {
+      "id": "breastfeeding.first-hour",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "در ساعت اول شروع کنید",
+        "ps": "په لومړي ساعت کې پیل وکړئ",
+        "en": "Start in the first hour"
+      },
+      "text": {
+        "fa": "طفل را در ساعت اول بعد از ولادت به سینه بگذارید. شیر زرد اول مثل اولین واکسین طفل است؛ همه‌اش را بدهید.",
+        "ps": "ماشوم د زېږون په لومړي ساعت کې تي ته واچوئ. لومړۍ ژېړې شیدې د ماشوم د لومړي واکسین په څېر دي؛ ټولې یې ورکړئ.",
+        "en": "Put the baby to the breast within one hour of birth. The first yellow milk is like the baby's first vaccine; give all of it."
+      }
+    },
+    {
+      "id": "breastfeeding.only",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "تا ۶ ماه فقط شیر مادر",
+        "ps": "تر ۶ میاشتو یوازې د مور شیدې",
+        "en": "Only breast milk for 6 months"
+      },
+      "text": {
+        "fa": "آب، چای یا هیچ غذای دیگر ندهید. شیر مادر همهٔ آبی را که طفل لازم دارد، دارد، حتی در گرمی.",
+        "ps": "اوبه، چای یا بل هېڅ خواړه مه ورکوئ. د مور شیدې ټولې هغه اوبه لري چې ماشوم ته پکار دي، حتی په ګرمۍ کې.",
+        "en": "Give no water, tea or any other food or drink. Breast milk has all the water the baby needs, even in hot weather."
+      }
+    },
+    {
+      "id": "breastfeeding.often",
+      "type": "step",
+      "icon": "moon",
+      "title": {
+        "fa": "شب و روز شیر بدهید",
+        "ps": "شپه او ورځ تی ورکړئ",
+        "en": "Feed day and night"
+      },
+      "text": {
+        "fa": "در شبانه‌روز ۸ تا ۱۲ بار، هر وقت طفل خواست، شیر بدهید. هر چه طفل بیشتر شیر بخورد، شیر بیشتر می‌آید.",
+        "ps": "په یوه شپه او ورځ کې ۸ تر ۱۲ ځله، هر کله چې ماشوم وغواړي، تی ورکړئ. ماشوم چې څومره ډېر تی رودي، هومره ډېرې شیدې راځي.",
+        "en": "Breastfeed 8 to 12 times in a day and night, whenever the baby wants. The more the baby feeds, the more milk comes."
+      }
+    },
+    {
+      "id": "breastfeeding.attach",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "طفل را درست به سینه بگذارید",
+        "ps": "ماشوم سم تي ته واچوئ",
+        "en": "Help the baby attach well"
+      },
+      "text": {
+        "fa": "تمام بدن طفل را نزدیک و رو به سینه بگیرید. دهانش کاملاً باز باشد و بیشتر قسمت تیرهٔ دور نوک سینه را بگیرد.",
+        "ps": "د ماشوم ټول بدن ځان ته نږدې او تي ته مخامخ ونیسئ. خوله یې ښه خلاصه وي او د تي د سر شاوخوا تور ځای ډېر ونیسي.",
+        "en": "Hold the baby's whole body close, facing the breast. The mouth opens wide and takes in most of the dark skin around the nipple."
+      }
+    },
+    {
+      "id": "breastfeeding.food",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "از ۶ ماهگی غذای نرم هم بدهید",
+        "ps": "له ۶ میاشتو نرم خواړه هم ورکړئ",
+        "en": "From 6 months, add soft food"
+      },
+      "text": {
+        "fa": "لیتی یا شولهٔ غلیظ، ترکاری پخته و کوبیده، تخم مرغ، دال و گوشت نرم بدهید. شیر مادر را تا ۲ سالگی یا بیشتر ادامه دهید.",
+        "ps": "پنډه لېټی یا شوله، پخې او میده شوې سبزي، هګۍ، دال او نرمه غوښه ورکړئ. تر ۲ کلنۍ یا ډېر وخت پورې تی ورکول دوام ورکړئ.",
+        "en": "Give thick porridge, mashed cooked vegetables, egg, lentils and soft meat. Keep breastfeeding to 2 years or more."
+      }
+    },
+    {
+      "id": "breastfeeding.meals",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "روزانه چند بار غذا",
+        "ps": "په ورځ کې څو ځله خواړه",
+        "en": "How many meals a day"
+      },
+      "text": {
+        "fa": "از ۶ تا ۸ ماهگی، روزی ۲ تا ۳ بار غذا بدهید. از ۹ ماهگی، روزی ۳ تا ۴ بار غذا و ۱ تا ۲ بار خوراک سبک بدهید.",
+        "ps": "له ۶ تر ۸ میاشتو، په ورځ کې ۲ تر ۳ ځله خواړه ورکړئ. له ۹ میاشتو، په ورځ کې ۳ تر ۴ ځله خواړه او ۱ تر ۲ ځله سپک خواړه ورکړئ.",
+        "en": "From 6 to 8 months, give 2 to 3 meals a day. From 9 months, give 3 to 4 meals and 1 to 2 snacks a day."
+      }
+    },
+    {
+      "id": "breastfeeding.clean",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "دست و ظرف پاک",
+        "ps": "پاک لاسونه او لوښي",
+        "en": "Clean hands and dishes"
+      },
+      "text": {
+        "fa": "پیش از پختن غذا و غذا دادن، دست‌ها را با صابون بشویید. از پیاله و قاشق پاک استفاده کنید.",
+        "ps": "د خوړو له پخولو او ورکولو مخکې لاسونه په صابون ووینځئ. پاکه پیاله او کاشوغه وکاروئ.",
+        "en": "Wash your hands with soap before cooking and feeding. Use a clean cup and spoon."
+      }
+    },
+    {
+      "id": "breastfeeding.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "breastfeeding.dont.first-milk",
+          "icon": "no",
+          "text": {
+            "fa": "شیر زرد اول را دور نریزید.",
+            "ps": "لومړۍ ژېړې شیدې مه غورځوئ.",
+            "en": "Do not throw away the first yellow milk."
+          }
+        },
+        {
+          "id": "breastfeeding.dont.prelacteal",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "به نوزاد روغن زرد، آب بوره، چای یا عسل ندهید.",
+            "ps": "نوي زېږېدلي ماشوم ته غوړي، د بورې اوبه، چای یا شات مه ورکوئ.",
+            "en": "Do not give a newborn ghee, sugar water, tea or honey."
+          }
+        },
+        {
+          "id": "breastfeeding.dont.animal-milk",
+          "icon": "milk",
+          "text": {
+            "fa": "پیش از ۶ ماهگی شیر گاو یا بز ندهید.",
+            "ps": "تر ۶ میاشتو مخکې د غوا یا وزې شیدې مه ورکوئ.",
+            "en": "Do not give cow's or goat's milk before 6 months."
+          }
+        },
+        {
+          "id": "breastfeeding.dont.bottle",
+          "icon": "no",
+          "text": {
+            "fa": "از بوتل استفاده نکنید؛ اگر لازم شد، پیالهٔ پاک بکار ببرید.",
+            "ps": "بوتل مه کاروئ؛ که اړتیا وه، پاکه پیاله وکاروئ.",
+            "en": "Do not use a feeding bottle; if needed, use a clean cup."
+          }
+        },
+        {
+          "id": "breastfeeding.dont.sick",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "وقتی مادر یا طفل مریض است، شیردهی را بس نکنید.",
+            "ps": "کله چې مور یا ماشوم ناروغ وي، تی ورکول مه بندوئ.",
+            "en": "Do not stop breastfeeding when the mother or baby is sick."
+          }
+        }
+      ]
+    },
+    {
+      "id": "breastfeeding.illness",
+      "type": "tip",
+      "icon": "bowl-food",
+      "text": {
+        "fa": "وقتی طفل مریض است، بیشتر شیر بدهید. بعد از مریضی، تا وقتی که کاملاً خوب شود، بیشتر از معمول غذا بدهید.",
+        "ps": "کله چې ماشوم ناروغ وي، ډېر ځله تی ورکړئ. له ناروغۍ وروسته، تر هغه چې بشپړ روغ شي، تر عادي ډېر خواړه ورکړئ.",
+        "en": "When the child is sick, breastfeed more often. After the illness, give more food than usual until the child is fully well."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Infant and young child feeding (2026)",
+    "WHO/UNICEF Facts for Life (2010): breastfeeding; nutrition and growth",
+    "WHO recommendations on postnatal care of the mother and newborn (2013), recommendation 5",
+    "WHO IMCI Chart Booklet (2014): counsel the mother, feeding recommendations",
+    "WHO guideline for complementary feeding of infants and young children 6 to 23 months (2023)"
+  ],
+  "review": [
+    "'The first yellow milk is like the baby's first vaccine' is a common WHO/UNICEF counselling phrase, written as a comparison ('like'), not a medical claim.",
+    "Meal numbers follow the WHO IYCF fact sheet: 6 to 8 months 2 to 3 meals; 9 to 23 months 3 to 4 meals plus 1 to 2 snacks.",
+    "Local food names (Dari لیتی/شوله, Pashto لېټی/شوله for thick porridge) need a native-speaker check for Samangan.",
+    "Dont item about cow's or goat's milk before 6 months was added to the requested list (animal milk); WHO allows animal milk only from 6 months in non-breastfed children.",
+    "Dont item 'do not stop breastfeeding when the mother or baby is sick' is general WHO advice; it does not cover rare cases where a doctor advises otherwise."
+  ]
+}

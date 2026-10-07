@@ -1,0 +1,240 @@
+{
+  "id": "pregnancy-care",
+  "section": "women",
+  "title": {
+    "fa": "مراقبت در حاملگی",
+    "ps": "په امیندوارۍ کې پاملرنه",
+    "en": "Care in pregnancy"
+  },
+  "summary": {
+    "fa": "کلینیک، آهن، واکسین، غذا و استراحت در حاملگی",
+    "ps": "په امیندوارۍ کې کلینیک، اوسپنه، واکسین، خواړه او آرام",
+    "en": "Clinic visits, iron, vaccine, food and rest in pregnancy"
+  },
+  "image": "pregnancy-care",
+  "blocks": [
+    {
+      "id": "pregnancy-care.lead",
+      "type": "lead",
+      "text": {
+        "fa": "مراقبت خوب در حاملگی، مادر و طفل را صحتمند نگه می‌دارد. زود و بارها به کلینیک بروید.",
+        "ps": "په امیندوارۍ کې ښه پاملرنه مور او ماشوم روغ ساتي. کلینیک ته ژر او ډېر ځله ولاړ شئ.",
+        "en": "Good care in pregnancy keeps mother and baby healthy. Go to the clinic early and often."
+      }
+    },
+    {
+      "id": "pregnancy-care.visits",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "زود و بارها به کلینیک بروید",
+        "ps": "ژر او ډېر ځله کلینیک ته ولاړ شئ",
+        "en": "Visit the clinic early and often"
+      },
+      "text": {
+        "fa": "در ۳ ماه اول حاملگی به کلینیک بروید. دست کم ۴ بار بروید، و ۸ بار از همه بهتر است.",
+        "ps": "د امیندوارۍ په لومړیو ۳ میاشتو کې کلینیک ته ولاړ شئ. لږ تر لږه ۴ ځله ولاړ شئ، او ۸ ځله تر ټولو ښه دي.",
+        "en": "Go in the first 3 months of pregnancy. Go at least 4 times; 8 visits are best."
+      }
+    },
+    {
+      "id": "pregnancy-care.iron",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "هر روز آهن بخورید",
+        "ps": "هره ورځ اوسپنه وخورئ",
+        "en": "Take iron every day"
+      },
+      "text": {
+        "fa": "تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.",
+        "ps": "د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره.",
+        "en": "Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea."
+      }
+    },
+    {
+      "id": "pregnancy-care.tetanus",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "واکسین تیتانوس را بگیرید",
+        "ps": "د تېتانوس واکسین واخلئ",
+        "en": "Get the tetanus vaccine"
+      },
+      "text": {
+        "fa": "واکسین تیتانوس، شما و نوزاد شما را محافظت می‌کند. از کلینیک بپرسید که چند بار لازم است.",
+        "ps": "د تېتانوس واکسین تاسو او ستاسو نوی زېږېدلی ماشوم ساتي. له کلینیک وپوښتئ چې څو ځله پکار دی.",
+        "en": "The tetanus (TT or Td) vaccine protects you and your newborn baby. Ask the clinic how many doses you need."
+      }
+    },
+    {
+      "id": "pregnancy-care.food",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "هر روز یک وعده غذای اضافه بخورید",
+        "ps": "هره ورځ یو وخت اضافه خواړه وخورئ",
+        "en": "Eat one extra meal a day"
+      },
+      "text": {
+        "fa": "هر روز غذاهای مختلف بخورید: گوشت، تخم مرغ، لوبیا، سبزی، میوه، شیر و ماست.",
+        "ps": "هره ورځ بېلابېل خواړه وخورئ: غوښه، هګۍ، لوبیا، سبزي، مېوه، شیدې او مستې.",
+        "en": "Eat different foods each day: meat, eggs, beans, vegetables, fruit, milk and yoghurt."
+      }
+    },
+    {
+      "id": "pregnancy-care.rest",
+      "type": "step",
+      "icon": "rest",
+      "title": {
+        "fa": "بیشتر استراحت کنید، کار سنگین نکنید",
+        "ps": "ډېر آرام وکړئ، دروند کار مه کوئ",
+        "en": "Rest more, avoid heavy work"
+      },
+      "text": {
+        "fa": "در روز دراز بکشید و استراحت کنید. از فامیل بخواهید که در کارهای خیلی سنگین، مثل آوردن آب، کمک کنند.",
+        "ps": "د ورځې څملئ او آرام وکړئ. له کورنۍ وغواړئ چې په ډېرو درنو کارونو کې، لکه د اوبو راوړلو کې، مرسته وکړي.",
+        "en": "Lie down to rest during the day. Ask the family to help with very heavy work, like carrying water."
+      }
+    },
+    {
+      "id": "pregnancy-care.midwife",
+      "type": "step",
+      "icon": "midwife",
+      "title": {
+        "fa": "با قابله ماهر ولادت کنید",
+        "ps": "له روزل شوې قابلې سره زېږون وکړئ",
+        "en": "Give birth with a skilled midwife"
+      },
+      "text": {
+        "fa": "پلان کنید که در شفاخانه یا کلینیک، با قابله ماهر ولادت کنید. با فامیل خود پلان ولادت بسازید.",
+        "ps": "پلان وکړئ چې په روغتون یا کلینیک کې له روزل شوې قابلې سره زېږون وکړئ. له کورنۍ سره د زېږون پلان جوړ کړئ.",
+        "en": "Plan to give birth in a hospital or clinic with a skilled midwife. Make a birth plan with your family."
+      }
+    },
+    {
+      "id": "pregnancy-care.labour",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "علایم شروع ولادت را بشناسید",
+        "ps": "د زېږون د پیل نښې وپېژنئ",
+        "en": "Know the signs of labour"
+      },
+      "text": {
+        "fa": "وقتی درد هر ۲۰ دقیقه یا زودتر می‌آید، آب ولادت می‌آید، یا ترشح چسپناک خون‌آلود می‌آید، ولادت شروع شده است. آن وقت بروید.",
+        "ps": "کله چې درد هر ۲۰ دقیقې یا ژر ژر راځي، د زېږون اوبه راځي، یا سرېښناکې وینې لړلې اوبه راځي، زېږون پیل شوی دی. بیا ولاړ شئ.",
+        "en": "Labour has started when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Then go."
+      }
+    },
+    {
+      "id": "pregnancy-care.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you have any of these signs, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "pregnancy-care.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی از راه تناسلی",
+            "ps": "له تناسلي لارې وینه بهېدل",
+            "en": "Bleeding from the vagina"
+          }
+        },
+        {
+          "id": "pregnancy-care.urgent.fits",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج، یا بیهوشی",
+            "ps": "اختلاج، یا بې هوښي",
+            "en": "Fits, or being unconscious"
+          }
+        },
+        {
+          "id": "pregnancy-care.urgent.headache",
+          "icon": "eye-blurred",
+          "text": {
+            "fa": "سردرد شدید همراه با تاری دید",
+            "ps": "سخت سر درد، له تت لید سره",
+            "en": "Severe headache with blurred vision"
+          }
+        },
+        {
+          "id": "pregnancy-care.urgent.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "Severe belly pain"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pregnancy-care.dont",
+      "type": "dont",
+      "title": {
+        "fa": "در حاملگی از این چیزها دوری کنید",
+        "ps": "په امیندوارۍ کې له دې شیانو ډډه وکړئ",
+        "en": "Things to avoid in pregnancy"
+      },
+      "items": [
+        {
+          "id": "pregnancy-care.dont.smoking",
+          "icon": "smoke",
+          "text": {
+            "fa": "سگرت نکشید، و از دود سگرت دیگران دور باشید.",
+            "ps": "سګرټ مه څکوئ، او د نورو د سګرټو له لوګي لرې اوسئ.",
+            "en": "Do not smoke, and keep away from other people's cigarette smoke."
+          }
+        },
+        {
+          "id": "pregnancy-care.dont.naswar",
+          "icon": "no",
+          "text": {
+            "fa": "نصوار استفاده نکنید.",
+            "ps": "نسوار مه کاروئ.",
+            "en": "Do not use naswar."
+          }
+        },
+        {
+          "id": "pregnancy-care.dont.stove-smoke",
+          "icon": "stove",
+          "text": {
+            "fa": "در دود بخاری، تنور یا آتش ننشینید.",
+            "ps": "د بخارۍ، تنور یا اور په لوګي کې مه کېنئ.",
+            "en": "Do not sit in smoke from the stove, tandoor or fire."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pregnancy-care.danger-signs",
+      "type": "tip",
+      "icon": "pregnant",
+      "text": {
+        "fa": "همه علایم خطر حاملگی را در این کتاب، همراه با فامیل خود یاد بگیرید.",
+        "ps": "د امیندوارۍ د خطر ټولې نښې په دې کتاب کې له خپلې کورنۍ سره زده کړئ.",
+        "en": "Learn all the danger signs of pregnancy in this book, together with your family."
+      }
+    }
+  ],
+  "sources": [
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): first contact before 12 weeks, 8 contacts, daily iron and folic acid, tetanus vaccination, healthy eating, tobacco and second-hand smoke",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): sheet M2 Care during pregnancy (eat more, rest, avoid heavy work, signs of labour, danger signs)",
+    "WHO/UNICEF Facts for Life, 4th ed. (2010): safe motherhood"
+  ],
+  "review": [
+    "Visits: '3 months' used for the WHO 'before 12 weeks'; '8 visits are best' for the WHO 8 contacts (2016). Afghanistan services may still teach 4 visits; check local wording.",
+    "Tetanus: Afghanistan EPI documents still list a 5-dose TT series for women; whether it has switched to Td is unverified, so the English says 'TT or Td' and fa/ps just say 'tetanus vaccine'. The text says 'ask the clinic how many doses' rather than giving the schedule.",
+    "Iron step adds 'take them with water, not tea' (tea reduces iron absorption); links with the anaemia page.",
+    "Labour signs are a step (PCPNC M2 wording) rather than an alert, so normal labour is not shown in red.",
+    "A short red alert (4 key danger signs) is repeated here so the page is safe on its own; the full list is on the danger-signs page.",
+    "Naswar uses the generic 'no' icon; a 'naswar' or 'tobacco' icon would be better."
+  ]
+}

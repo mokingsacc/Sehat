@@ -1,0 +1,34 @@
+{
+  "children": [
+    "vaccines",
+    "danger-child",
+    "newborn",
+    "breastfeeding",
+    "diarrhoea",
+    "cough",
+    "fever",
+    "measles",
+    "growth",
+    "child-safety",
+    "first-aid"
+  ],
+  "women": [
+    "pregnancy-danger",
+    "pregnancy-care",
+    "after-birth",
+    "anaemia"
+  ],
+  "everyone": [
+    "red-flags",
+    "first-aid",
+    "tb",
+    "blood-pressure",
+    "diabetes",
+    "stress",
+    "hygiene",
+    "winter-home",
+    "animal-illness",
+    "leishmaniasis",
+    "floods-quakes"
+  ]
+}

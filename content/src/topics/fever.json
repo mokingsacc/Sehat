@@ -1,0 +1,234 @@
+{
+  "id": "fever",
+  "section": "children",
+  "title": {
+    "fa": "تب",
+    "ps": "تبه",
+    "en": "Fever"
+  },
+  "summary": {
+    "fa": "مایعات بدهید، لباس سبک بپوشانید و بدانید چه وقت بروید.",
+    "ps": "اوبلنې ورکړئ، سپکې جامې ورته واغوندئ او پوه شئ چې کله ولاړ شئ.",
+    "en": "Give fluids, dress lightly, and know when to go."
+  },
+  "image": "fever",
+  "blocks": [
+    {
+      "id": "fever.lead",
+      "type": "lead",
+      "text": {
+        "fa": "تب یعنی بدن داغ است، چون با یک مرض می‌جنگد. طفل را خوب زیر نظر بگیرید و علایم خطر را بشناسید.",
+        "ps": "تبه دا ده چې بدن ګرم شي، ځکه له یوې ناروغۍ سره جګړه کوي. ماشوم ته ښه پام وکړئ او د خطر نښې وپېژنئ.",
+        "en": "Fever means the body is hot because it is fighting an illness. Watch your child closely and know the danger signs."
+      }
+    },
+    {
+      "id": "fever.check",
+      "type": "step",
+      "icon": "thermometer",
+      "title": {
+        "fa": "چطور بفهمید طفل تب دارد",
+        "ps": "څنګه پوه شئ چې تبه لري",
+        "en": "How to tell if there is fever"
+      },
+      "text": {
+        "fa": "با پشت دست، شکم یا گردن طفل را لمس کنید. اگر ترمامتر دارید، ۳۷ و نیم درجه یا بیشتر تب است.",
+        "ps": "د لاس په شا د ماشوم خېټه یا غاړه لمس کړئ. که ترمامیټر لرئ، ۳۷ نیم درجې یا ډېر تبه ده.",
+        "en": "Feel the belly or neck with the back of your hand. If you have a thermometer, 37.5 degrees or more is a fever."
+      }
+    },
+    {
+      "id": "fever.fluids",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "مایعات بیشتر بدهید",
+        "ps": "ډېرې اوبلنې ورکړئ",
+        "en": "Give more to drink"
+      },
+      "text": {
+        "fa": "بیشتر شیر بدهید. به اطفال بزرگ‌تر آب و مایعات دیگر بدهید و غذا دادن را ادامه دهید.",
+        "ps": "ډېر ځله تی ورکړئ. لویو ماشومانو ته اوبه او نورې اوبلنې ورکړئ، او خواړه ورکول دوام ورکړئ.",
+        "en": "Breastfeed more often. Give older children water and other drinks, and keep giving food."
+      }
+    },
+    {
+      "id": "fever.clothes",
+      "type": "step",
+      "icon": "fever",
+      "title": {
+        "fa": "لباس سبک بپوشانید",
+        "ps": "سپکې جامې ورته واغوندئ",
+        "en": "Dress the child lightly"
+      },
+      "text": {
+        "fa": "لباس سبک و یک تکهٔ نازک کافی است. طفل را در کمپل‌های ضخیم نپیچانید.",
+        "ps": "سپکې جامې او نری ټوکر بس دي. ماشوم په درنو کمپلو کې مه نغاړئ.",
+        "en": "Light clothes and a thin cloth are enough. Do not wrap the child in heavy blankets."
+      }
+    },
+    {
+      "id": "fever.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "دوا فقط از کلینیک",
+        "ps": "درمل یوازې له کلینیک څخه",
+        "en": "Medicine only from the clinic"
+      },
+      "text": {
+        "fa": "فقط دوایی را بدهید که کارمند صحی داده، همان طور که گفته است. هرگز اسپرین به طفل ندهید.",
+        "ps": "یوازې هغه درمل ورکړئ چې روغتیايي کارکوونکي درکړي، لکه څنګه چې یې ویلي. ماشوم ته هېڅکله اسپرین مه ورکوئ.",
+        "en": "Give only the medicine the health worker gives you, the way they explain. Never give aspirin to children."
+      }
+    },
+    {
+      "id": "fever.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "fever.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "کمتر از ۲ ماه عمر دارد و تب دارد",
+            "ps": "تر ۲ میاشتو کم عمر لري او تبه لري",
+            "en": "is under 2 months old and has any fever"
+          }
+        },
+        {
+          "id": "fever.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرده یا حالا تشنج دارد",
+            "ps": "اختلاج یې کړی یا اوس اختلاج لري",
+            "en": "has had convulsions (fits), or has them now"
+          }
+        },
+        {
+          "id": "fever.urgent.neck",
+          "icon": "stiff-neck",
+          "text": {
+            "fa": "گردنش شخ است",
+            "ps": "غاړه یې شخه ده",
+            "en": "has a stiff neck"
+          }
+        },
+        {
+          "id": "fever.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است",
+            "ps": "ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی",
+            "en": "is very sleepy and hard to wake, or unconscious"
+          }
+        },
+        {
+          "id": "fever.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "نمی‌تواند چیزی بنوشد یا شیر مادر بخورد",
+            "ps": "هېڅ نشي څښلای او تی نشي رودلای",
+            "en": "cannot drink or breastfeed"
+          }
+        },
+        {
+          "id": "fever.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "هر چه می‌خورد یا می‌نوشد، استفراغ می‌کند",
+            "ps": "هر څه چې خوري یا څښي، کانګې یې کوي",
+            "en": "vomits everything, cannot keep anything down"
+          }
+        },
+        {
+          "id": "fever.urgent.rash",
+          "icon": "rash",
+          "text": {
+            "fa": "روی پوستش لکه‌های بنفش یا تیره پیدا شده",
+            "ps": "پر پوستکي یې بنفش یا تور داغونه راختلي",
+            "en": "has purple or dark spots on the skin"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fever.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "fever.soon.days",
+          "icon": "calendar",
+          "text": {
+            "fa": "بیشتر از ۲ روز است که تب دارد",
+            "ps": "له ۲ ورځو زیات وخت کېږي چې تبه لري",
+            "en": "has had a fever for more than 2 days"
+          }
+        },
+        {
+          "id": "fever.soon.measles",
+          "icon": "rash",
+          "text": {
+            "fa": "تب و دانه‌های سرخ در تمام بدن دارد؛ شاید سرخکان باشد",
+            "ps": "تبه او په ټول بدن سرې دانې لري؛ کېدای شي شري وي",
+            "en": "has fever and a red rash all over; it may be measles"
+          }
+        },
+        {
+          "id": "fever.soon.ear",
+          "icon": "warning",
+          "text": {
+            "fa": "گوشش درد می‌کند یا از گوشش چرک می‌آید",
+            "ps": "غوږ یې درد کوي یا له غوږه یې زوه راځي",
+            "en": "has ear pain or pus coming from the ear"
+          }
+        },
+        {
+          "id": "fever.soon.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "وقت پیشاب کردن درد دارد یا گریه می‌کند",
+            "ps": "د تشو متیازو پر وخت درد لري یا ژاړي",
+            "en": "has pain or cries when passing urine"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fever.measles",
+      "type": "tip",
+      "icon": "syringe",
+      "text": {
+        "fa": "سرخکان زود سرایت می‌کند. طفل دارای دانه را از نوزادان و زنان حامله دور نگه دارید، و همهٔ اطفال را واکسین سرخکان کنید.",
+        "ps": "شری ژر خپرېږي. دانې لرونکی ماشوم له نوو زېږېدلو ماشومانو او امیندوارو ښځو لرې وساتئ، او ټولو ماشومانو ته د شري واکسین ورکړئ.",
+        "en": "Measles spreads fast. Keep a child with a rash away from babies and pregnant women, and get every child the measles vaccine."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): fever, measles, ear problem, general danger signs, when to return",
+    "WHO Pocket Book of Hospital Care for Children (2013): fever, meningitis",
+    "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses; immunization",
+    "WHO fact sheet: Measles"
+  ],
+  "review": [
+    "Fever is defined as 37.5 C or more (IMCI, axillary). Written as '37 and a half degrees' in Dari and Pashto for the narrator.",
+    "No paracetamol dose is given; the step says 'medicine only from the clinic'. IMCI gives paracetamol in clinic for high fever (38.5 C or 39 C depending on edition); not needed here.",
+    "Urgent item 'purple or dark spots on the skin' is a lay description of a non-blanching (meningococcal) rash; the glass test is not explained to keep it short.",
+    "Soon alert 'fever and red rash all over (measles)': IMCI measles with complications (mouth ulcers, eye pus, clouding of the cornea) or with a danger sign is severe; those are covered by the danger signs here only in part.",
+    "Pain on passing urine uses icon 'urine-blood'; ear pain uses 'warning'. Icons wanted: 'urine' and 'ear'.",
+    "Step 'Dress the child lightly' uses icon 'fever'; an icon of light clothing would be better.",
+    "Tip on measles isolation: keeping a child with a rash away from babies and pregnant women is general public health advice, not an IMCI caregiver message."
+  ]
+}

@@ -1,0 +1,13 @@
+# local and generated files
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+audio-tts/
+# signing keys and secrets never go in this public repo
+*.jks
+*.keystore
+*.base64.txt
+signing-secrets.txt
+.dev.vars
+.wrangler/

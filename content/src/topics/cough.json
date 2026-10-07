@@ -1,0 +1,269 @@
+{
+  "id": "cough",
+  "section": "children",
+  "title": {
+    "fa": "سرفه، زکام و سینه‌بغل",
+    "ps": "ټوخی، زکام او سینه بغل",
+    "en": "Cough, cold and pneumonia"
+  },
+  "summary": {
+    "fa": "بیشتر سرفه‌ها در خانه خوب می‌شوند. علایم سینه‌بغل را بشناسید.",
+    "ps": "ډېری ټوخي په کور کې ښه کېږي. د سینه بغل نښې وپېژنئ.",
+    "en": "Most coughs get better at home. Know the signs of pneumonia."
+  },
+  "image": "cough",
+  "blocks": [
+    {
+      "id": "cough.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بیشتر سرفه‌ها و زکام‌ها در خانه خوب می‌شوند. اما نفس تیز یا مشکل می‌تواند علامت سینه‌بغل باشد و زود به داکتر نیاز دارد.",
+        "ps": "ډېری ټوخي او زکامونه په کور کې ښه کېږي. خو ژر ژر یا سخته سا کېدای شي د سینه بغل نښه وي، چې ژر ډاکټر ته اړتیا لري.",
+        "en": "Most coughs and colds get better at home. But fast or difficult breathing can be a sign of pneumonia, which needs a health worker quickly."
+      }
+    },
+    {
+      "id": "cough.feed",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "غذا و مایعات را ادامه دهید",
+        "ps": "خواړه او اوبلنې ورکړئ",
+        "en": "Keep feeding and give drinks"
+      },
+      "text": {
+        "fa": "بیشتر شیر بدهید. به اطفال بزرگ‌تر مایعات بیشتر و غذای نرم بدهید.",
+        "ps": "ډېر ځله تی ورکړئ. لویو ماشومانو ته ډېرې اوبلنې او نرم خواړه ورکړئ.",
+        "en": "Breastfeed more often. Give older children extra drinks and soft food."
+      }
+    },
+    {
+      "id": "cough.soothe",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "گلو و بینی را آرام کنید",
+        "ps": "ستونی او پوزه آرامه کړئ",
+        "en": "Soothe the throat, clear the nose"
+      },
+      "text": {
+        "fa": "نوشیدنی گرم بدهید؛ عسل فقط برای اطفال بالای ۱ سال. بینی بسته را با تکهٔ نرم و تر آهسته پاک کنید.",
+        "ps": "تود څښاک ورکړئ؛ شات یوازې له ۱ کال څخه لوی ماشوم ته. بنده پوزه په نرم او لوند ټوکر ورو پاکه کړئ.",
+        "en": "Give warm drinks; honey only for children over 1 year. Clean a blocked nose gently with a soft, wet cloth."
+      }
+    },
+    {
+      "id": "cough.smoke",
+      "type": "step",
+      "icon": "smoke",
+      "title": {
+        "fa": "طفل را از دود دور نگه دارید",
+        "ps": "ماشوم له لوګي لرې وساتئ",
+        "en": "Keep children away from smoke"
+      },
+      "text": {
+        "fa": "اطفال را از بخاری و دود آشپزی دور نگه دارید. در داخل خانه سگرت نکشید.",
+        "ps": "ماشومان د بخارۍ او پخلي له لوګي لرې وساتئ. د کور دننه سګرټ مه څکوئ.",
+        "en": "Keep children away from the stove and cooking smoke. Do not smoke inside the house."
+      }
+    },
+    {
+      "id": "cough.watch",
+      "type": "step",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس طفل را ببینید",
+        "ps": "د ماشوم سا ته پام وکړئ",
+        "en": "Watch the breathing"
+      },
+      "text": {
+        "fa": "وقتی طفل آرام است، یک دقیقهٔ کامل بشمارید که چند بار نفس می‌کشد. ببینید پایین سینه به داخل کشیده می‌شود یا نه.",
+        "ps": "کله چې ماشوم آرام وي، یوه بشپړه دقیقه وشمېرئ چې څو ځله سا اخلي. وګورئ چې د سینې لاندې برخه ننوځي که نه.",
+        "en": "When the child is calm, count the breaths for one full minute. Look to see if the lower chest pulls in."
+      }
+    },
+    {
+      "id": "cough.fast-breathing",
+      "type": "tip",
+      "icon": "clock",
+      "text": {
+        "fa": "نفس تیز یعنی: زیر ۲ ماه، ۶۰ بار یا بیشتر در یک دقیقه؛ از ۲ تا ۱۲ ماه، ۵۰ بار یا بیشتر؛ از ۱ تا ۵ سال، ۴۰ بار یا بیشتر.",
+        "ps": "ژر ژر سا دا ده: تر ۲ میاشتو کم ماشوم، په یوه دقیقه کې ۶۰ ځله یا ډېر؛ له ۲ تر ۱۲ میاشتو، ۵۰ ځله یا ډېر؛ له ۱ تر ۵ کلونو، ۴۰ ځله یا ډېر.",
+        "en": "Fast breathing is: under 2 months, 60 or more breaths a minute; 2 to 12 months, 50 or more; 1 to 5 years, 40 or more."
+      }
+    },
+    {
+      "id": "cough.vaccines",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "واکسین از سینه‌بغل محافظت می‌کند",
+        "ps": "واکسین له سینه بغل څخه ساتي",
+        "en": "Vaccines protect against pneumonia"
+      },
+      "text": {
+        "fa": "واکسین‌های سینه‌بغل، سیاه‌سرفه و سرخکان، شش‌ها را محافظت می‌کنند. همهٔ واکسین‌های طفل را تکمیل کنید.",
+        "ps": "د سینه بغل، تورې ټوخلې او شري واکسینونه سږي ساتي. ډاډه شئ چې ماشوم مو ټول واکسینونه اخیستي دي.",
+        "en": "Vaccines against pneumonia, whooping cough and measles protect the lungs. Make sure your child has all their vaccines."
+      }
+    },
+    {
+      "id": "cough.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "cough.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز یا به سختی نفس می‌کشد",
+            "ps": "ژر ژر یا په سختۍ سا اخلي",
+            "en": "breathes fast or with difficulty"
+          }
+        },
+        {
+          "id": "cough.urgent.chest",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "وقت نفس کشیدن، پایین سینه‌اش به داخل کشیده می‌شود",
+            "ps": "د سا اخیستو پر وخت یې د سینې لاندې برخه ننوځي",
+            "en": "the lower chest pulls in when breathing in"
+          }
+        },
+        {
+          "id": "cough.urgent.noise",
+          "icon": "breathe",
+          "text": {
+            "fa": "در حالت آرام، وقت نفس کشیدن صدای خشن می‌دهد",
+            "ps": "په آرامۍ کې د سا اخیستو پر وخت زیږ غږ کوي",
+            "en": "makes a harsh noise breathing in, even when calm"
+          }
+        },
+        {
+          "id": "cough.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "نمی‌تواند چیزی بنوشد یا شیر مادر بخورد",
+            "ps": "هېڅ نشي څښلای او تی نشي رودلای",
+            "en": "cannot drink or breastfeed"
+          }
+        },
+        {
+          "id": "cough.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است",
+            "ps": "ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی",
+            "en": "is very sleepy and hard to wake, or unconscious"
+          }
+        },
+        {
+          "id": "cough.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرده یا حالا تشنج دارد",
+            "ps": "اختلاج یې کړی یا اوس اختلاج لري",
+            "en": "has had convulsions (fits), or has them now"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cough.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "cough.soon.long",
+          "icon": "calendar",
+          "text": {
+            "fa": "بیشتر از ۲ هفته سرفه دارد؛ باید برای توبرکلوز معاینه شود",
+            "ps": "تر ۲ اونیو زیات ټوخی لري؛ د نري رنځ معاینه یې پکار ده",
+            "en": "has coughed for more than 2 weeks; needs a TB check"
+          }
+        },
+        {
+          "id": "cough.soon.wheeze",
+          "icon": "breathe",
+          "text": {
+            "fa": "وقت بیرون دادن نفس، صدای سوت می‌دهد",
+            "ps": "د سا ایستلو پر وخت شپېلۍ غوندې غږ کوي",
+            "en": "makes a whistling sound when breathing out"
+          }
+        },
+        {
+          "id": "cough.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "بیشتر از ۲ روز است که تب دارد",
+            "ps": "له ۲ ورځو زیات وخت کېږي چې تبه لري",
+            "en": "has had a fever for more than 2 days"
+          }
+        },
+        {
+          "id": "cough.soon.worse",
+          "icon": "warning",
+          "text": {
+            "fa": "بهتر نمی‌شود یا بدتر می‌شود",
+            "ps": "ښه نه کېږي، یا لا خرابېږي",
+            "en": "is not getting better, or is getting worse"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cough.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "cough.dont.medicine",
+          "icon": "pill",
+          "text": {
+            "fa": "به نوزاد و طفل کوچک شربت سرفه ندهید.",
+            "ps": "نوي زېږېدلي او کوچني ماشوم ته د ټوخي شربت مه ورکوئ.",
+            "en": "Do not give cough medicines to babies and young children."
+          }
+        },
+        {
+          "id": "cough.dont.antibiotic",
+          "icon": "pill",
+          "text": {
+            "fa": "برای زکام انتی‌بیوتیک ندهید، مگر اینکه کلینیک داده باشد.",
+            "ps": "د زکام لپاره انټي بیوټیک مه ورکوئ، مګر دا چې کلینیک درکړي وي.",
+            "en": "Do not give antibiotics for a cold unless the clinic gives them."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): cough or difficult breathing, fast breathing cut-offs, home care and when to return",
+    "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses",
+    "WHO fact sheet: Pneumonia in children",
+    "WHO fact sheet: Household air pollution",
+    "WHO fact sheet: Tuberculosis (2026)"
+  ],
+  "review": [
+    "Fast-breathing counts are the IMCI cut-offs: under 2 months 60 or more; 2 to 12 months 50 or more; 12 months to 5 years 40 or more.",
+    "Fast breathing alone is in the urgent alert. IMCI treats fast breathing without chest indrawing or a danger sign as pneumonia at the clinic (oral amoxicillin). Kept as 'hospital now' for safety in a rural setting; consider moving to soon.",
+    "Stridor is described as 'a harsh noise breathing in, even when calm'; wheeze as 'a whistling sound when breathing out' (soon alert). Wheeze is not an IMCI danger sign; it is included so families bring wheezy children to the clinic.",
+    "Honey is advised only over 1 year (botulism risk under 1). The step does not give an amount.",
+    "Dont item 'no cough medicines for babies and young children' does not give an age cut-off; WHO advises against cough and cold remedies in young children.",
+    "Icon 'breathe' is used for stridor and wheeze; an icon showing noisy breathing would be better."
+  ]
+}

@@ -1,0 +1,11 @@
+.gradle/
+build/
+app/build/
+local.properties
+# filled by sync-web.sh before every build; the web app itself lives in the folder above
+app/src/main/assets/www/
+# signing material never goes into the repository
+*.jks
+*.keystore
+keystore.properties
+signing/

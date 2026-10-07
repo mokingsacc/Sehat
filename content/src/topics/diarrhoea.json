@@ -1,0 +1,269 @@
+{
+  "id": "diarrhoea",
+  "section": "children",
+  "title": {
+    "fa": "اسهال و او آر اس",
+    "ps": "نس ناستی او او آر اس",
+    "en": "Diarrhoea and ORS"
+  },
+  "summary": {
+    "fa": "او آر اس و زنک بدهید و غذا دادن را ادامه دهید.",
+    "ps": "او آر اس او زنک ورکړئ، او خواړه ورکول دوام ورکړئ.",
+    "en": "Give ORS and zinc, and keep feeding."
+  },
+  "image": "diarrhoea",
+  "blocks": [
+    {
+      "id": "diarrhoea.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اسهال می‌تواند بدن طفل را خیلی زود بی‌آب کند. او آر اس و زنک بدهید و شیر و غذا را ادامه دهید.",
+        "ps": "نس ناستی کولای شي د ماشوم بدن ډېر ژر وچ کړي. او آر اس او زنک ورکړئ، او تی او خواړه مه بندوئ.",
+        "en": "Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding."
+      }
+    },
+    {
+      "id": "diarrhoea.mix",
+      "type": "step",
+      "icon": "ors",
+      "title": {
+        "fa": "او آر اس را درست آماده کنید",
+        "ps": "او آر اس سم جوړ کړئ",
+        "en": "Mix ORS the right way"
+      },
+      "text": {
+        "fa": "یک پاکت را در یک لیتر آب پاک حل کنید. هر روز تازه بسازید و باقی‌مانده را روز بعد دور بریزید.",
+        "ps": "یوه پاکټ په یوه لیټر پاکو اوبو کې حل کړئ. هره ورځ تازه جوړ کړئ او پاتې شوی یې بله ورځ وغورځوئ.",
+        "en": "Mix one packet in one litre of clean water. Make it fresh each day and throw away what is left the next day."
+      }
+    },
+    {
+      "id": "diarrhoea.give",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "بعد از هر اسهال، او آر اس بدهید",
+        "ps": "د هر نس ناستي وروسته او آر اس ورکړئ",
+        "en": "Give ORS after each loose stool"
+      },
+      "text": {
+        "fa": "به طفل زیر ۲ سال ۵۰ تا ۱۰۰ میلی‌لیتر، و به طفل ۲ سال و بالاتر ۱۰۰ تا ۲۰۰ میلی‌لیتر بدهید. با پیاله، کم‌کم بدهید.",
+        "ps": "تر ۲ کلنۍ کم ماشوم ته ۵۰ تر ۱۰۰ ملي لیټره، او ۲ کلن یا لوی ماشوم ته ۱۰۰ تر ۲۰۰ ملي لیټره ورکړئ. په پیاله یې لږ لږ ورکړئ.",
+        "en": "Under 2 years, give 50 to 100 ml; 2 years and over, give 100 to 200 ml. Give small sips from a cup."
+      }
+    },
+    {
+      "id": "diarrhoea.zinc",
+      "type": "step",
+      "icon": "zinc",
+      "title": {
+        "fa": "۱۰ تا ۱۴ روز زنک بدهید",
+        "ps": "۱۰ تر ۱۴ ورځې زنک ورکړئ",
+        "en": "Give zinc for 10 to 14 days"
+      },
+      "text": {
+        "fa": "به طفل زیر ۶ ماه روزانه ۱۰ میلی‌گرام، و از ۶ ماهگی روزانه ۲۰ میلی‌گرام بدهید. حتی وقتی اسهال بند شد، ادامه دهید.",
+        "ps": "تر ۶ میاشتو کم ماشوم ته ورځې ۱۰ ملي ګرامه، او له ۶ میاشتو ورځې ۲۰ ملي ګرامه ورکړئ. حتی چې نس ناستی ودرېږي، دوام ورکړئ.",
+        "en": "Under 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Keep giving it even after the diarrhoea stops."
+      }
+    },
+    {
+      "id": "diarrhoea.feed",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیر و غذا را ادامه دهید",
+        "ps": "تی او خواړه دوام ورکړئ",
+        "en": "Keep breastfeeding and feeding"
+      },
+      "text": {
+        "fa": "بیشتر و طولانی‌تر شیر بدهید. غذای نرم، شوربا و آب برنج هم بدهید.",
+        "ps": "ډېر ځله او ډېر وخت تی ورکړئ. نرم خواړه، ښوروا او د وریجو اوبه هم ورکړئ.",
+        "en": "Breastfeed more often and for longer. Also give soft food, soup and rice water."
+      }
+    },
+    {
+      "id": "diarrhoea.prevent",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "از اسهال جلوگیری کنید",
+        "ps": "د نس ناستي مخه ونیسئ",
+        "en": "Stop diarrhoea before it starts"
+      },
+      "text": {
+        "fa": "بعد از تشناب و پیش از غذا، دست‌ها را با صابون بشویید. آب پاک یا جوش‌داده بنوشید و واکسین روتا ویروس را بگیرید.",
+        "ps": "له تشناب وروسته او له خوړو مخکې لاسونه په صابون ووینځئ. پاکې یا ایشول شوې اوبه وڅښئ، او د روټا ویروس واکسین وکړئ.",
+        "en": "Wash hands with soap after the toilet and before food. Drink clean or boiled water, and get the rotavirus vaccine."
+      }
+    },
+    {
+      "id": "diarrhoea.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "diarrhoea.urgent.drink",
+          "icon": "no-drink",
+          "text": {
+            "fa": "نمی‌تواند چیزی بنوشد یا شیر مادر بخورد",
+            "ps": "هېڅ نشي څښلای او تی نشي رودلای",
+            "en": "cannot drink or breastfeed"
+          }
+        },
+        {
+          "id": "diarrhoea.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "هر چه می‌خورد یا می‌نوشد، استفراغ می‌کند",
+            "ps": "هر څه چې خوري یا څښي، کانګې یې کوي",
+            "en": "vomits everything, cannot keep anything down"
+          }
+        },
+        {
+          "id": "diarrhoea.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است",
+            "ps": "ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی",
+            "en": "is very sleepy and hard to wake, or unconscious"
+          }
+        },
+        {
+          "id": "diarrhoea.urgent.eyes",
+          "icon": "eye-sunken",
+          "text": {
+            "fa": "چشمانش گود رفته است",
+            "ps": "سترګې یې ننوتې دي",
+            "en": "has sunken eyes"
+          }
+        },
+        {
+          "id": "diarrhoea.urgent.skin",
+          "icon": "skin-pinch",
+          "text": {
+            "fa": "پوست شکمش را که بگیرید و رها کنید، خیلی آهسته برمی‌گردد",
+            "ps": "د خېټې پوستکی یې چې ونیسئ او پرېږدئ یې، ډېر ورو بېرته ځي",
+            "en": "pinched skin on the belly goes back very slowly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "diarrhoea.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "diarrhoea.soon.blood",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "در مدفوعش خون دیده می‌شود",
+            "ps": "په ډکو متیازو کې یې وینه ښکاري",
+            "en": "has blood in the stool"
+          }
+        },
+        {
+          "id": "diarrhoea.soon.long",
+          "icon": "calendar",
+          "text": {
+            "fa": "۱۴ روز یا بیشتر است که اسهال دارد",
+            "ps": "۱۴ ورځې یا ډېر وخت کېږي چې نس ناستی لري",
+            "en": "has had diarrhoea for 14 days or more"
+          }
+        },
+        {
+          "id": "diarrhoea.soon.worse",
+          "icon": "warning",
+          "text": {
+            "fa": "بهتر نمی‌شود یا بدتر می‌شود",
+            "ps": "ښه نه کېږي، یا لا خرابېږي",
+            "en": "is not getting better, or is getting worse"
+          }
+        },
+        {
+          "id": "diarrhoea.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تب کرده است",
+            "ps": "تبه یې پیدا شوې ده",
+            "en": "has started to have a fever"
+          }
+        }
+      ]
+    },
+    {
+      "id": "diarrhoea.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not do these things:"
+      },
+      "items": [
+        {
+          "id": "diarrhoea.dont.stop-food",
+          "icon": "no",
+          "text": {
+            "fa": "شیر مادر یا غذا را بند نکنید.",
+            "ps": "تی یا خواړه مه بندوئ.",
+            "en": "Do not stop breastfeeding or food."
+          }
+        },
+        {
+          "id": "diarrhoea.dont.medicine",
+          "icon": "pill",
+          "text": {
+            "fa": "دوا برای بند کردن اسهال ندهید؛ برای طفل ضرر دارد.",
+            "ps": "د نس ناستي د بندولو درمل مه ورکوئ؛ ماشوم ته زیان لري.",
+            "en": "Do not give medicines to stop diarrhoea; they can harm children."
+          }
+        },
+        {
+          "id": "diarrhoea.dont.antibiotic",
+          "icon": "pill",
+          "text": {
+            "fa": "انتی‌بیوتیک ندهید، مگر اینکه کلینیک داده باشد.",
+            "ps": "انټي بیوټیک مه ورکوئ، مګر دا چې کلینیک درکړي وي.",
+            "en": "Do not give antibiotics unless the clinic gives them."
+          }
+        }
+      ]
+    },
+    {
+      "id": "diarrhoea.vomit",
+      "type": "tip",
+      "icon": "vomit",
+      "text": {
+        "fa": "اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید. بعد دوباره او آر اس بدهید، اما آهسته‌تر.",
+        "ps": "که ماشوم کانګې وکړې، ۱۰ دقیقې انتظار وباسئ. بیا بېرته او آر اس ورکړئ، خو ورو ورو.",
+        "en": "If the child vomits, wait 10 minutes. Then give ORS again, but more slowly."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI Chart Booklet (2014): diarrhoea, Plan A, when to return immediately",
+    "WHO Pocket Book of Hospital Care for Children (2013): Chart 15, Plan A",
+    "WHO/UNICEF Facts for Life (2010): diarrhoea; hygiene",
+    "WHO/UNICEF joint statement: clinical management of acute diarrhoea (2004)",
+    "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet"
+  ],
+  "review": [
+    "Sunken eyes and slow skin pinch are in the urgent (hospital now) alert as requested. In IMCI, either sign with restlessness or eager drinking is 'some dehydration' (Plan B at the clinic); with lethargy, poor drinking or a very slow pinch it is severe. Consider moving sunken eyes to the soon alert.",
+    "Blood in the stool is in the soon alert (clinic today), as IMCI treats dysentery at the clinic. For babies under 2 months it is a referral sign; danger-child covers young infants generally.",
+    "No home-made sugar-salt recipe is given; the app relies on ORS packets. Consider whether families can get packets in Samangan or whether a fallback recipe is needed (WHO 2005 manual not verified).",
+    "How families measure one litre locally (for example a 1 litre bottle) is not explained; consider adding a picture.",
+    "ORS volumes and zinc doses are WHO caregiver numbers: ORS 50 to 100 ml under 2 years, 100 to 200 ml from 2 years; zinc 10 mg a day under 6 months, 20 mg from 6 months, 10 to 14 days.",
+    "Dari 'آب جوش‌داده' and Pashto 'ایشول شوې اوبه' mean boiled water; the English says 'clean or boiled water' (boiled and cooled is implied)."
+  ]
+}

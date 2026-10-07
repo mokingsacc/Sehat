@@ -1,0 +1,17 @@
+name = "sehat"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+# The public address of the app (the GitHub Pages address), without a slash at the end.
+# "Import from app" in /admin copies the book from <APP_URL>/content/book.json.
+APP_URL = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fhb"
+database_id = "PASTE-THE-ID-FROM-wrangler-d1-create"
+
+# Secrets (set with `wrangler secret put NAME`, never written here):
+#   DASH_KEY           the secret word for /dashboard and /admin
+#   ANTHROPIC_API_KEY  optional, for the "Summarise feedback" button

@@ -1,0 +1,293 @@
+{
+  "id": "first-aid",
+  "section": "everyone",
+  "title": {
+    "fa": "کمک‌های اولیه",
+    "ps": "لومړنۍ مرستې",
+    "en": "First aid"
+  },
+  "summary": {
+    "fa": "اولین کمک برای سوختگی، خونریزی، بند شدن گلو، مسمومیت و بیشتر",
+    "ps": "د سوځېدو، وینې بهېدو، ستوني بندېدو، مسمومیت او نورو لپاره لومړۍ مرسته",
+    "en": "What to do first for burns, bleeding, choking, poisoning and more"
+  },
+  "image": "first-aid",
+  "blocks": [
+    {
+      "id": "first-aid.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در حالت عاجل آرام بمانید و زود عمل کنید. این کارهای اول می‌تواند تا رسیدن کمک، جان کسی را نجات دهد.",
+        "ps": "په بېړني حالت کې ارام اوسئ او ژر کار وکړئ. دا لومړني کارونه، تر څو چې مرسته رسېږي، د یو چا ژوند ژغورلی شي.",
+        "en": "In an emergency, stay calm and act fast. These first steps can save a life while you get help."
+      }
+    },
+    {
+      "id": "first-aid.burn",
+      "type": "step",
+      "icon": "cool-water",
+      "title": {
+        "fa": "سوختگی: با آب سرد کنید",
+        "ps": "سوځېدنه: په اوبو یې سړه کړئ",
+        "en": "Burns: cool with water"
+      },
+      "text": {
+        "fa": "جای سوختگی را ۲۰ دقیقه زیر آب پاک و روان نگه دارید. انگشتر و لباس تنگ را بکشید، بعد آن را با یک تکه پاک، سست بپوشانید.",
+        "ps": "سوځېدلی ځای ۲۰ دقیقې د پاکو بهېدونکو اوبو لاندې ونیسئ. ګوتمۍ او تنګې جامې لرې کړئ، بیا یې په پاک ټوکر سست وپوښئ.",
+        "en": "Cool the burn under clean running water for 20 minutes. Take off rings and tight clothes, then cover loosely with a clean cloth."
+      }
+    },
+    {
+      "id": "first-aid.bleeding",
+      "type": "step",
+      "icon": "wound",
+      "title": {
+        "fa": "خونریزی زیاد: محکم فشار دهید",
+        "ps": "ډېره وینه بهېدل: کلک فشار ورکړئ",
+        "en": "Heavy bleeding: press hard"
+      },
+      "text": {
+        "fa": "با یک تکه پاک، محکم روی زخم فشار دهید. فشار را ادامه دهید و تکه را برای دیدن برندارید.",
+        "ps": "په پاک ټوکر په ټپ باندې کلک فشار ورکړئ. فشار ته دوام ورکړئ او د کتلو لپاره ټوکر مه پورته کوئ.",
+        "en": "Press hard on the wound with a clean cloth. Keep pressing, and do not lift the cloth to look."
+      }
+    },
+    {
+      "id": "first-aid.choking",
+      "type": "step",
+      "icon": "choking",
+      "title": {
+        "fa": "بند شدن گلوی طفل",
+        "ps": "د ماشوم د ستوني بندېدل",
+        "en": "Choking child"
+      },
+      "text": {
+        "fa": "اگر طفل گریه، سرفه یا نفس کشیده نتواند: ۵ ضربه محکم بین دو شانه‌اش بزنید، بعد برای شیرخوار ۵ بار سینه را فشار دهید، یا برای طفل بزرگ‌تر ۵ بار شکم را. تکرار کنید.",
+        "ps": "که ماشوم ژړا، ټوخی یا ساه نشي کولی: د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ، بیا د تي خوړونکي ماشوم پر سینه ۵ ځله فشار ورکړئ، یا د لوی ماشوم پر ګېډه ۵ ځله. تکرار یې کړئ.",
+        "en": "If the child cannot cry, cough or breathe: 5 firm blows between the shoulders, then 5 chest pushes for a baby, or 5 belly pushes for an older child. Repeat."
+      }
+    },
+    {
+      "id": "first-aid.poison",
+      "type": "step",
+      "icon": "poison",
+      "title": {
+        "fa": "مسمومیت: به شفاخانه بروید",
+        "ps": "مسمومیت: روغتون ته ولاړ شئ",
+        "en": "Poisoning: go to hospital"
+      },
+      "text": {
+        "fa": "کاری نکنید که استفراغ کند. همین حالا به شفاخانه بروید و بوتل یا پاکت را با خود ببرید.",
+        "ps": "هڅه مه کوئ چې کانګې وکړي. همدا اوس روغتون ته ولاړ شئ او بوتل یا پاکټ له ځان سره یوسئ.",
+        "en": "Do not make them vomit. Go to hospital now, and take the bottle or packet with you."
+      }
+    },
+    {
+      "id": "first-aid.fumes",
+      "type": "step",
+      "icon": "stove",
+      "title": {
+        "fa": "گاز بخاری و صندلی",
+        "ps": "د بخارۍ او صندلۍ ګاز",
+        "en": "Stove and sandali fumes"
+      },
+      "text": {
+        "fa": "هرگز در اتاق بسته با صندلی زغالی یا بخاری روشن نخوابید. اگر در اتاق گرم کسی سردرد شد، سرش چرخید یا استفراغ کرد، همه را همین حالا به هوای تازه ببرید.",
+        "ps": "هېڅکله په تړلې کوټه کې د سکرو له بلې صندلۍ یا بلې بخارۍ سره مه ویده کېږئ. که په ګرمه کوټه کې چا ته سر درد، سر ګرځېدل یا کانګې پیدا شوې، ټول همدا اوس تازه هوا ته وباسئ.",
+        "en": "Never sleep with a charcoal sandali or a stove burning in a closed room. Headache, dizziness or vomiting in a heated room: get everyone into fresh air now."
+      }
+    },
+    {
+      "id": "first-aid.bite",
+      "type": "step",
+      "icon": "dog",
+      "title": {
+        "fa": "گزیدن سگ یا حیوان دیگر",
+        "ps": "د سپي یا بل څاروي چیچل",
+        "en": "Dog or other animal bites"
+      },
+      "text": {
+        "fa": "جای گزیدگی را ۱۵ دقیقه با صابون و آب روان بشویید. همان روز برای واکسین هاری به کلینیک یا شفاخانه بروید.",
+        "ps": "د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ. په همغه ورځ د هاري د واکسین لپاره کلینیک یا روغتون ته ولاړ شئ.",
+        "en": "Wash the bite with soap and running water for 15 minutes. Go the same day to the clinic or hospital for rabies vaccine."
+      }
+    },
+    {
+      "id": "first-aid.head",
+      "type": "step",
+      "icon": "headache",
+      "title": {
+        "fa": "ضربه به سر: از نزدیک مراقب باشید",
+        "ps": "سر ته ټکر: ښه پام وساتئ",
+        "en": "Head injury: watch closely"
+      },
+      "text": {
+        "fa": "بعد از ضربه سخت به سر، بگذارید آن شخص استراحت کند. یک نفر ۲۴ ساعت پیش او بماند و مراقبش باشد.",
+        "ps": "په سر د کلک ټکر وروسته، پرېږدئ چې هغه کس آرام وکړي. یو څوک دې ۲۴ ساعته ورسره پاتې شي او پام یې وساتي.",
+        "en": "After a hard knock to the head, let the person rest. Someone should stay with them and watch them for 24 hours."
+      }
+    },
+    {
+      "id": "first-aid.dont",
+      "type": "dont",
+      "title": {
+        "fa": "روی سوختگی این چیزها را نگذارید",
+        "ps": "په سوځېدلي ځای دا شیان مه لګوئ",
+        "en": "On a burn, never put"
+      },
+      "items": [
+        {
+          "id": "first-aid.dont.toothpaste",
+          "icon": "no",
+          "text": {
+            "fa": "خمیر دندان را روی سوختگی نمالید",
+            "ps": "په سوځېدلي ځای د غاښونو کریم مه لګوئ",
+            "en": "toothpaste on a burn"
+          }
+        },
+        {
+          "id": "first-aid.dont.oil",
+          "icon": "no",
+          "text": {
+            "fa": "روغن، مسکه یا روغن زرد را روی سوختگی نمالید",
+            "ps": "په سوځېدلي ځای تېل، کوچ یا غوړي مه لګوئ",
+            "en": "oil, butter or ghee on a burn"
+          }
+        },
+        {
+          "id": "first-aid.dont.egg",
+          "icon": "no",
+          "text": {
+            "fa": "تخم مرغ یا آرد را روی سوختگی نمالید",
+            "ps": "په سوځېدلي ځای هګۍ یا اوړه مه لګوئ",
+            "en": "egg or flour on a burn"
+          }
+        },
+        {
+          "id": "first-aid.dont.ice",
+          "icon": "no",
+          "text": {
+            "fa": "یخ یا آب یخ را روی سوختگی نگذارید",
+            "ps": "په سوځېدلي ځای یخ یا یخې اوبه مه لګوئ",
+            "en": "ice or ice water on a burn"
+          }
+        }
+      ]
+    },
+    {
+      "id": "first-aid.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, for any of these"
+      },
+      "items": [
+        {
+          "id": "first-aid.urgent.big-burn",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی بزرگ‌تر از دست همان شخص، یا هر سوختگی در شیرخوار",
+            "ps": "له لاس څخه لویه سوځېدنه، یا په تي خوړونکي ماشوم کې هره سوځېدنه",
+            "en": "a burn bigger than the person's hand, or any burn on a baby"
+          }
+        },
+        {
+          "id": "first-aid.urgent.burn-place",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی روی صورت، دست‌ها یا اعضای تناسلی",
+            "ps": "په مخ، لاسونو یا تناسلي غړو سوځېدنه",
+            "en": "a burn on the face, hands or genitals"
+          }
+        },
+        {
+          "id": "first-aid.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی که بند نمی‌شود",
+            "ps": "وینه بهېدل چې نه درېږي",
+            "en": "bleeding that will not stop"
+          }
+        },
+        {
+          "id": "first-aid.urgent.unconscious",
+          "icon": "sleepy",
+          "text": {
+            "fa": "بیهوشی، یا کسی که بیدار نمی‌شود",
+            "ps": "بې هوښه کېدل، یا څوک چې نه راویښېږي",
+            "en": "someone unconscious who cannot be woken"
+          }
+        },
+        {
+          "id": "first-aid.urgent.poison",
+          "icon": "poison",
+          "text": {
+            "fa": "قورت دادن زهر، تیل خاک یا دوا",
+            "ps": "د زهرو، خاورینو تېلو یا درملو تېرول",
+            "en": "swallowed poison, kerosene or medicines"
+          }
+        },
+        {
+          "id": "first-aid.urgent.choking",
+          "icon": "choking",
+          "text": {
+            "fa": "بند شدن گلو که باز نمی‌شود",
+            "ps": "د ستوني بندېدل چې نه خلاصېږي",
+            "en": "choking that does not clear"
+          }
+        },
+        {
+          "id": "first-aid.urgent.head",
+          "icon": "headache",
+          "text": {
+            "fa": "ضربه به سر، و بعد استفراغ، خواب‌آلودگی زیاد یا تشنج",
+            "ps": "سر ته ټکر، او بیا کانګې، ډېر خوب وړل یا اختلاج",
+            "en": "a head injury, then vomiting, deep sleepiness or a fit"
+          }
+        },
+        {
+          "id": "first-aid.urgent.fumes",
+          "icon": "stove",
+          "text": {
+            "fa": "بیهوش شدن، گیجی یا خواب‌آلودگی زیاد بعد از گاز بخاری",
+            "ps": "د بخارۍ له ګاز وروسته بې هوښه کېدل، ګډوډي یا ډېر خوب وړل",
+            "en": "fainting, confusion or deep sleepiness after stove fumes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "first-aid.tip-poison",
+      "type": "tip",
+      "icon": "poison",
+      "text": {
+        "fa": "تیل خاک، دواها و زهرها را بلند و دور از دست اطفال نگه دارید، و هرگز در بوتل آب نریزید.",
+        "ps": "خاورین تېل، درمل او زهر لوړ او د ماشومانو له لاسه لرې کېږدئ، او هېڅکله یې د اوبو په بوتل کې مه اچوئ.",
+        "en": "Keep kerosene, medicines and poisons high up and out of children's reach, and never in water bottles."
+      }
+    }
+  ],
+  "sources": [
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): burns, bleeding, choking, poisoning, head injury",
+    "ILCOR Consensus on Science (2021): cooling of thermal burns with running water",
+    "WHO fact sheet: Burns (October 2023)",
+    "WHO fact sheet: Rabies (wound washing with soap and water for 15 minutes, post-exposure vaccine)",
+    "WHO guidelines for indoor air quality: selected pollutants (2010): carbon monoxide; WHO guidelines for indoor air quality: household fuel combustion (2014)",
+    "WHO/UNICEF World report on child injury prevention (2008): poisoning and burns prevention"
+  ],
+  "review": [
+    "Burns: cooling time is 20 minutes as briefed (UK/Australian practice). IFRC/Red Cross 2020 says at least 10 minutes and ILCOR 2021 gives no set time; WHO warns against long cooling because of hypothermia. Consider adding 'keep a baby warm while cooling'.",
+    "Choking: 'baby' means under 1 year. fa/ps say 'nursing baby' (fa شیرخوار, ps تي خوړونکی ماشوم) because the English age would push the step over length. No instructions for an unconscious choking child (CPR); the urgent alert sends them to hospital.",
+    "Urgent alert: 'a burn bigger than the person's hand' is a common lay rule for 'large' (as in NHS advice), not WHO wording.",
+    "Urgent alert: added 'fainting, confusion or deep sleepiness after stove fumes' (carbon monoxide). This was not in the brief.",
+    "Poisoning step tells them to go to hospital now, not just to take the bottle or packet, to match the urgent alert.",
+    "Dog bites: the title covers 'dog or other animal bites' (cats, foxes, jackals also carry rabies). The text says 'the clinic or hospital'. Please confirm where rabies vaccine is actually given in Samangan, as it may only be at the provincial hospital. Pashto uses هاري for rabies; check it with a Pashto speaker.",
+    "Head injury step: 'stay with them and watch for 24 hours' is a general lay rule, not from a specific WHO text.",
+    "Icons: the head injury uses 'headache' (would prefer 'head-injury'); the 'dont' items all use 'no'.",
+    "The urgent alert names the genitals (fa اعضای تناسلی, ps تناسلي غړي). Check whether there is a gentler village word.",
+    "Length: this is the longest topic (about 325 English and 355 Dari words), so it is near the 2.5-minute limit.",
+    "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording."
+  ]
+}

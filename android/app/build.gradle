@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+}
+
+// The web app lives one folder up (index.html, js/, content/ ...). Its content version becomes the app's versionName.
+def webRoot = rootProject.file('..')
+def contentVersion = new groovy.json.JsonSlurper().parse(new File(webRoot, 'content/version.json')).version as String
+
+// versionCode must grow with every release, or phones refuse the update. Default: minutes since 2020-01-01 (UTC)
+// at build time. Set VERSION_CODE to override.
+def minutesSince2020 = (System.currentTimeMillis() - java.time.Instant.parse('2020-01-01T00:00:00Z').toEpochMilli()).intdiv(60000L)
+def computedVersionCode = (System.getenv('VERSION_CODE') ?: String.valueOf(minutesSince2020)) as int
+
+// Release signing comes from environment variables (GitHub secrets) or ~/.gradle/gradle.properties. Never from this repo.
+def secret = { String name -> System.getenv(name) ?: (project.findProperty(name) as String) }
+def keystoreFile = secret('ANDROID_KEYSTORE_FILE')
+
+android {
+    namespace 'org.sehat.app'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'org.sehat.app'
+        minSdk 21
+        targetSdk 36
+        versionCode computedVersionCode
+        versionName contentVersion
+        resourceConfigurations += ['en', 'fa', 'ps']
+    }
+
+    signingConfigs {
+        release {
+            if (keystoreFile) {
+                storeFile file(keystoreFile)
+                storePassword secret('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias secret('ANDROID_KEY_ALIAS')
+                keyPassword secret('ANDROID_KEY_PASSWORD')
+                enableV1Signing true   // Android 5 and 6
+                enableV2Signing true
+                enableV3Signing true
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (keystoreFile) signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    // Smaller APK: no Google-only dependency metadata block, no stray library files.
+    dependenciesInfo {
+        includeInApk false
+        includeInBundle false
+    }
+    packaging {
+        resources {
+            excludes += ['META-INF/*.version', 'META-INF/**/*.version', 'META-INF/*.kotlin_module', 'kotlin/**', 'DebugProbesKt.bin']
+        }
+    }
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'   // WebViewAssetLoader, service worker interception
+    implementation 'androidx.core:core:1.13.1'       // FileProvider (sharing the APK)
+}
+
+// Copy the web app into src/main/assets/www before every build.
+def syncWeb = tasks.register('syncWeb', Exec) {
+    description = 'Copies the web app (index.html, js, css, content, img, audio ...) into the APK assets.'
+    commandLine 'bash', rootProject.file('sync-web.sh').absolutePath
+    outputs.upToDateWhen { false }
+}
+tasks.named('preBuild') { dependsOn syncWeb }

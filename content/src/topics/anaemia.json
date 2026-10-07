@@ -1,0 +1,218 @@
+{
+  "id": "anaemia",
+  "section": "women",
+  "title": {
+    "fa": "کم‌خونی",
+    "ps": "د وینې کمښت",
+    "en": "Anaemia (weak blood)"
+  },
+  "summary": {
+    "fa": "علایم کم‌خونی، غذاهای پر آهن، و وقت درست چای",
+    "ps": "د وینې د کمښت نښې، اوسپنه لرونکي خواړه، او د چای سم وخت",
+    "en": "Signs of anaemia, iron-rich foods, and the right time for tea"
+  },
+  "image": "anaemia",
+  "blocks": [
+    {
+      "id": "anaemia.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کم‌خونی یعنی خون ضعیف است، اکثراً به خاطر کمبود آهن. در زنان زیاد است، اما جلوگیری و تداوی می‌شود.",
+        "ps": "د وینې کمښت دا مانا چې وینه کمزورې ده، ډېری وخت د اوسپنې د کمښت له امله. په ښځو کې ډېر دی، خو مخنیوی او درملنه یې کېږي.",
+        "en": "Anaemia means the blood is weak, often from too little iron. It is common in women, but it can be prevented and treated."
+      }
+    },
+    {
+      "id": "anaemia.signs",
+      "type": "step",
+      "icon": "eye",
+      "title": {
+        "fa": "علایم را بشناسید",
+        "ps": "نښې وپېژنئ",
+        "en": "Know the signs"
+      },
+      "text": {
+        "fa": "خستگی، ضعف، سرچرخی و نفس‌تنگی. داخل پلک‌ها و کف دست‌ها رنگ‌پریده معلوم می‌شود.",
+        "ps": "ستړیا، کمزوري، سر ګرځېدل او ساه لنډي. د سترګو د پوټکو دننه او د لاسونو ورغوي سپین ښکاري.",
+        "en": "Feeling tired, weak or dizzy, and short of breath. The inside of the eyelids and the palms look pale."
+      }
+    },
+    {
+      "id": "anaemia.causes",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "علت‌ها را بدانید",
+        "ps": "لاملونه یې وپېژنئ",
+        "en": "Know the causes"
+      },
+      "text": {
+        "fa": "آهن کم در غذا، خونی که در عادت ماهوار و ولادت‌ها از دست می‌رود، و کرم‌های شکم.",
+        "ps": "په خوړو کې لږه اوسپنه، هغه وینه چې په میاشتنۍ عادت او زېږونونو کې ضایع کېږي، او د نس چینجي.",
+        "en": "Too little iron in food, blood lost in monthly periods and births, and worms in the belly."
+      }
+    },
+    {
+      "id": "anaemia.food",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "غذاهای پر آهن بخورید",
+        "ps": "اوسپنه لرونکي خواړه وخورئ",
+        "en": "Eat iron-rich foods"
+      },
+      "text": {
+        "fa": "گوشت، جگر، تخم مرغ، عدس، لوبیا و سبزی‌های سبز تیره مثل پالک بخورید. همراه آن میوه بخورید تا بدن آهن بیشتر بگیرد.",
+        "ps": "غوښه، ځیګر، هګۍ، دال، لوبیا او تکې شنې سبزۍ لکه پالک وخورئ. ورسره مېوه وخورئ، چې بدن ډېره اوسپنه واخلي.",
+        "en": "Eat meat, liver, eggs, lentils, beans and dark green leaves like spinach. Eat fruit with them to take in more iron."
+      }
+    },
+    {
+      "id": "anaemia.tea",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "چای را بین غذاها بنوشید",
+        "ps": "چای د خوړو ترمنځ وڅښئ",
+        "en": "Drink tea between meals"
+      },
+      "text": {
+        "fa": "چای نمی‌گذارد بدن آهن غذا را بگیرد. چای را یک ساعت پیش یا یک ساعت بعد از غذا بنوشید، نه همراه غذا.",
+        "ps": "چای بدن ته نه پرېږدي چې له خوړو اوسپنه واخلي. چای له ډوډۍ یو ساعت مخکې یا یو ساعت وروسته وڅښئ، نه له ډوډۍ سره.",
+        "en": "Tea stops the body taking iron from food. Drink tea one hour before or one hour after a meal, not with it."
+      }
+    },
+    {
+      "id": "anaemia.iron-pregnancy",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "تابلیت آهن در حاملگی",
+        "ps": "په امیندوارۍ کې د اوسپنې ګولۍ",
+        "en": "Iron tablets in pregnancy"
+      },
+      "text": {
+        "fa": "در حاملگی، تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.",
+        "ps": "په امیندوارۍ کې د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره.",
+        "en": "In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea."
+      }
+    },
+    {
+      "id": "anaemia.worms",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "کرم‌ها را تداوی کنید",
+        "ps": "چینجي درملنه کړئ",
+        "en": "Treat worms"
+      },
+      "text": {
+        "fa": "از کلینیک در مورد دوای کرم برای فامیل بپرسید. پیش از غذا و بعد از تشناب، دست‌ها را با صابون بشویید.",
+        "ps": "له کلینیک نه د کورنۍ لپاره د چینجو د درملو په اړه وپوښتئ. له ډوډۍ مخکې او له تشناب وروسته لاسونه په صابون ومینځئ.",
+        "en": "Ask the clinic about worm medicine for the family. Wash hands with soap before eating and after the toilet."
+      }
+    },
+    {
+      "id": "anaemia.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If you have any of these signs, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "anaemia.soon.very-pale",
+          "icon": "eye",
+          "text": {
+            "fa": "پوست، پلک‌ها یا کف دست خیلی رنگ‌پریده است",
+            "ps": "پوستکی، د سترګو پوټکي یا ورغوي ډېر سپین دي",
+            "en": "Very pale skin, eyelids or palms"
+          }
+        },
+        {
+          "id": "anaemia.soon.breathless-rest",
+          "icon": "breathe",
+          "text": {
+            "fa": "در وقت استراحت هم نفس‌تنگی دارید",
+            "ps": "د آرام پر وخت هم ساه لنډي لرئ",
+            "en": "Short of breath even when resting"
+          }
+        },
+        {
+          "id": "anaemia.soon.heavy-periods",
+          "icon": "bleeding",
+          "text": {
+            "fa": "عادت ماهوار خیلی زیاد",
+            "ps": "په میاشتنۍ عادت کې ډېره زیاته وینه",
+            "en": "Very heavy monthly periods"
+          }
+        }
+      ]
+    },
+    {
+      "id": "anaemia.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you have any of these signs, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "anaemia.urgent.fainting",
+          "icon": "sleepy",
+          "text": {
+            "fa": "ضعف کردن یا بیهوش شدن",
+            "ps": "بې هوښه کېدل",
+            "en": "Fainting"
+          }
+        },
+        {
+          "id": "anaemia.urgent.chest-pain",
+          "icon": "heart",
+          "text": {
+            "fa": "درد سینه",
+            "ps": "د سینې درد",
+            "en": "Chest pain"
+          }
+        },
+        {
+          "id": "anaemia.urgent.breathless-lying",
+          "icon": "lungs",
+          "text": {
+            "fa": "نفس‌تنگی در وقت دراز کشیدن",
+            "ps": "د څملاستو پر وخت ساه لنډي",
+            "en": "Short of breath when lying down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "anaemia.black-stool",
+      "type": "tip",
+      "icon": "iron-pill",
+      "text": {
+        "fa": "تابلیت آهن ممکن است مدفوع را سیاه کند. این عادی است.",
+        "ps": "د اوسپنې ګولۍ کېدای شي غایطه توره کړي. دا عادي خبره ده.",
+        "en": "Iron tablets can make the stool black. This is normal."
+      }
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Anaemia (2023/2025): signs, causes (iron deficiency, blood loss, parasitic infections)",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): daily oral iron and folic acid; deworming in endemic areas",
+    "WHO guideline: preventive chemotherapy to control soil-transmitted helminth infections in at-risk population groups (2017)",
+    "WHO/UNICEF Facts for Life, 4th ed. (2010): nutrition and safe motherhood"
+  ],
+  "review": [
+    "Tea: 'one hour before or one hour after a meal' is standard public-health advice (tea tannins reduce non-haem iron absorption); I did not find an exact WHO interval. Please confirm you are happy with 1 hour.",
+    "Worms: phrased as 'ask the clinic about worm medicine for the family' (no drug or dose). WHO advises periodic deworming for adolescent girls and women of reproductive age, and for pregnant women after the first trimester in endemic areas.",
+    "Tip says black stool from iron tablets is normal; the adult red-flags page lists 'vomiting blood or black stool' as urgent. Check you are happy with both, or add 'black, sticky stool when not taking iron' there.",
+    "The iron-in-pregnancy step repeats the pregnancy-care step on purpose so this page stands alone.",
+    "'Pale' is translated as white/pale (fa رنگ‌پریده, ps سپین); local speakers may say 'yellow' (زرد / ژېړ) for anaemic pallor; check with the translator.",
+    "Icons: causes uses 'warning'; worm medicine uses 'pill'; fainting uses 'sleepy'; black-stool tip uses 'iron-pill'."
+  ]
+}

@@ -1,0 +1,84 @@
+# Builds the Android app (android/), signs it with the release key from the repository secrets,
+# and publishes sehat.apk as a GitHub Release (tag v<content version>) and as a workflow artifact.
+name: Android app
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write   # to create the release
+concurrency: { group: android, cancel-in-progress: false }
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
+
+      - name: Install Android platform 36
+        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0" > /dev/null
+
+      - name: Check the signing secrets
+        env:
+          KS: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KS_PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PW: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          for v in KS KS_PW ALIAS KEY_PW; do
+            if [ -z "${!v}" ]; then echo "::error::Signing secrets are missing. See android/README.md, 'Signing secrets'."; exit 1; fi
+          done
+          printf '%s' "$KS" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      - name: Copy the web app into the APK
+        run: bash android/sync-web.sh
+
+      - name: Build the signed APK
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_FILE: ${{ runner.temp }}/release.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon --stacktrace assembleRelease
+
+      - name: Verify and name the APK
+        id: apk
+        run: |
+          VERSION=$(jq -r .version content/version.json)
+          APK=android/app/build/outputs/apk/release/app-release.apk
+          APKSIGNER=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)apksigner
+          "$APKSIGNER" verify --verbose --print-certs "$APK"
+          mkdir -p out
+          cp "$APK" out/sehat.apk
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "APK size: $(du -h out/sehat.apk | cut -f1), version $VERSION" >> "$GITHUB_STEP_SUMMARY"
+          rm -f "$RUNNER_TEMP/release.jks"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sehat-${{ steps.apk.outputs.version }}
+          path: out/sehat.apk
+          if-no-files-found: error
+
+      - name: Publish the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v${{ steps.apk.outputs.version }}
+        run: |
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" out/sehat.apk --clobber
+          else
+            gh release create "$TAG" out/sehat.apk --target "$GITHUB_SHA" --title "Sehat $TAG" \
+              --notes "Android app (sehat.apk) for book version ${TAG#v}. Install it on a phone, then send it to other phones from the app (no internet needed)."
+          fi

@@ -1,0 +1,292 @@
+{
+  "id": "red-flags",
+  "section": "everyone",
+  "title": {
+    "fa": "علایم خطر در بزرگسالان",
+    "ps": "په لویانو کې د خطر نښې",
+    "en": "Danger signs in adults"
+  },
+  "summary": {
+    "fa": "علایمی در بزرگسالان که شفاخانه یا کلینیک لازم دارد",
+    "ps": "په لویانو کې هغه نښې چې روغتون یا کلینیک ته اړتیا لري",
+    "en": "Signs in adults that need the hospital now, or the clinic soon"
+  },
+  "image": "red-flags",
+  "blocks": [
+    {
+      "id": "red-flags.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بعضی علایم در بزرگسالان خطر جانی دارد. کمک زود جان را نجات داده می‌تواند، پس زود اقدام کنید.",
+        "ps": "په لویانو کې ځینې نښې د ژوند لپاره خطر لري. ژر مرسته ژوند ژغورلای شي، نو ژر عمل وکړئ.",
+        "en": "Some signs in adults mean danger to life. Fast help can save a life, so act quickly."
+      }
+    },
+    {
+      "id": "red-flags.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر شما یا کس دیگری یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که تاسو یا بل څوک له دې نښو څخه یوه هم ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If you or anyone has one of these signs, go to hospital now, day or night"
+      },
+      "items": [
+        {
+          "id": "red-flags.urgent.chest-pain",
+          "icon": "heart",
+          "text": {
+            "fa": "درد شدید و فشارنده سینه که به بازو یا الاشه می‌رود، همراه با عرق",
+            "ps": "د سینې سخت او زبېښونکی درد چې لاس یا ژامې ته ځي، او خولې کېږي",
+            "en": "Crushing chest pain spreading to the arm or jaw, with sweating"
+          }
+        },
+        {
+          "id": "red-flags.urgent.stroke",
+          "icon": "stroke-face",
+          "text": {
+            "fa": "کج شدن روی، ضعف یک بازو، یا گپ زدن نامفهوم",
+            "ps": "د مخ کږېدل، د یو لاس کمزوري، یا ګډې وډې خبرې",
+            "en": "Face drooping, a weak arm, or slurred speech"
+          }
+        },
+        {
+          "id": "red-flags.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردرد ناگهانی، که شدیدترین سردرد عمر است",
+            "ps": "ناڅاپي سر درد، چې د ژوند تر ټولو سخت سر درد وي",
+            "en": "A sudden headache, the worst ever"
+          }
+        },
+        {
+          "id": "red-flags.urgent.fever-neck",
+          "icon": "stiff-neck",
+          "text": {
+            "fa": "تب بلند، همراه با شخی گردن یا لکه‌های تیره روی پوست",
+            "ps": "لوړه تبه، له شخې غاړې یا پر پوستکي له تیارو داغونو سره",
+            "en": "High fever with a stiff neck or a dark rash"
+          }
+        },
+        {
+          "id": "red-flags.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس‌تنگی شدید",
+            "ps": "سخته ساه لنډي",
+            "en": "Severe difficulty breathing"
+          }
+        },
+        {
+          "id": "red-flags.urgent.blood-vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "استفراغ خون، یا مدفوع سیاه (که از تابلیت آهن نباشد)",
+            "ps": "په کانګو کې وینه، یا توره غایطه (که د اوسپنې له ګولیو نه وي)",
+            "en": "Vomiting blood, or black stool (not from iron tablets)"
+          }
+        },
+        {
+          "id": "red-flags.urgent.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "Severe belly pain"
+          }
+        },
+        {
+          "id": "red-flags.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیچی، خواب‌آلودگی زیاد، یا بیهوشی",
+            "ps": "ګډوډ ذهن، ډېر خوب وړل، یا بې هوښي",
+            "en": "Confused, very drowsy, or unconscious"
+          }
+        }
+      ]
+    },
+    {
+      "id": "red-flags.suicide",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "اگر کسی از خودکشی گپ می‌زند",
+        "ps": "که څوک د ځان وژنې خبرې کوي",
+        "en": "If someone talks of suicide"
+      },
+      "text": {
+        "fa": "با او بمانید و با مهربانی گوش بدهید. زهر و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.",
+        "ps": "ورسره پاتې شئ او په مهربانۍ یې خبرې واورئ. زهر او وسلې لرې کړئ، او همدا اوس یې روغتون ته یوسئ، که شپه وي که ورځ.",
+        "en": "Stay with them and listen kindly. Remove poisons and weapons, and take them to hospital now, day or night."
+      }
+    },
+    {
+      "id": "red-flags.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین هفته به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اونۍ کلینیک ته ولاړ شئ",
+        "en": "If you have one of these signs, go to the clinic this week"
+      },
+      "items": [
+        {
+          "id": "red-flags.soon.cough",
+          "icon": "cough",
+          "text": {
+            "fa": "سرفه بیشتر از ۲ هفته، یا خون در بلغم",
+            "ps": "له ۲ اونیو ډېر ټوخی، یا په بلغم کې وینه",
+            "en": "Cough for more than 2 weeks, or blood in the sputum"
+          }
+        },
+        {
+          "id": "red-flags.soon.weight-loss",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "کم شدن وزن، بدون کدام دلیل",
+            "ps": "پرته له کوم دلیل د وزن کمېدل",
+            "en": "Losing weight without trying"
+          }
+        },
+        {
+          "id": "red-flags.soon.lump",
+          "icon": "lump",
+          "text": {
+            "fa": "غده‌ای که کلان می‌شود",
+            "ps": "غوټه چې لویېږي",
+            "en": "A lump that is growing"
+          }
+        },
+        {
+          "id": "red-flags.soon.blood-urine-stool",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "خون در ادرار یا مدفوع",
+            "ps": "په تشو متیازو یا غایطه کې وینه",
+            "en": "Blood in the urine or stool"
+          }
+        },
+        {
+          "id": "red-flags.soon.wound",
+          "icon": "wound",
+          "text": {
+            "fa": "زخمی که در ۲ هفته جور نمی‌شود",
+            "ps": "ټپ چې په ۲ اونیو کې نه جوړېږي",
+            "en": "A wound or sore that does not heal in 2 weeks"
+          }
+        },
+        {
+          "id": "red-flags.soon.yellow-eyes",
+          "icon": "jaundice",
+          "text": {
+            "fa": "زرد شدن چشم‌ها",
+            "ps": "د سترګو ژېړېدل",
+            "en": "Yellow eyes"
+          }
+        },
+        {
+          "id": "red-flags.soon.swallowing",
+          "icon": "no-drink",
+          "text": {
+            "fa": "مشکل در قورت دادن غذا",
+            "ps": "د خوړو په تېرولو کې ستونزه",
+            "en": "Trouble swallowing food"
+          }
+        }
+      ]
+    },
+    {
+      "id": "red-flags.transport",
+      "type": "step",
+      "icon": "car",
+      "title": {
+        "fa": "کمک بخواهید و زود موتر پیدا کنید",
+        "ps": "مرسته وغواړئ او ژر موټر پیدا کړئ",
+        "en": "Call for help, find transport early"
+      },
+      "text": {
+        "fa": "فوراً فامیل یا همسایه‌ها را صدا کنید. زود موتر پیدا کنید، پیش از آنکه شب یا راه خراب کار را مشکل کند.",
+        "ps": "سمدستي کورنۍ یا ګاونډیان راوبولئ. ژر موټر پیدا کړئ، مخکې له دې چې شپه یا خرابه لاره کار سخت کړي.",
+        "en": "Call family or neighbours at once. Find a car early, before night or bad roads make it hard."
+      }
+    },
+    {
+      "id": "red-flags.phone",
+      "type": "step",
+      "icon": "phone",
+      "title": {
+        "fa": "شماره‌های مهم تیلفون را نگه دارید",
+        "ps": "مهمې د ټیلیفون شمېرې وساتئ",
+        "en": "Keep important phone numbers"
+      },
+      "text": {
+        "fa": "شماره یک دریور، کلینیک و شفاخانه را در تیلفون ثبت کنید. آن‌ها را روی کاغذ هم بنویسید.",
+        "ps": "د یو موټر چلوونکي، کلینیک او روغتون شمېرې په ټیلیفون کې ثبت کړئ. په کاغذ یې هم ولیکئ.",
+        "en": "Save the numbers of a driver, the clinic and the hospital. Write them on paper too."
+      }
+    },
+    {
+      "id": "red-flags.time",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "وقت شروع علایم را به یاد داشته باشید",
+        "ps": "د نښو د پیل وخت په یاد وساتئ",
+        "en": "Remember when it started"
+      },
+      "text": {
+        "fa": "به داکتر بگویید که علایم چه وقت شروع شد. در سکته مغزی یا حمله قلبی، هر دقیقه مهم است.",
+        "ps": "ډاکټر ته ووایاست چې نښې کله پیل شوې. د دماغ په سکته یا د زړه په حمله کې هره دقیقه مهمه ده.",
+        "en": "Tell the doctor when the signs began. In a stroke or heart attack, every minute matters."
+      }
+    },
+    {
+      "id": "red-flags.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید",
+        "ps": "دا کارونه مه کوئ",
+        "en": "Things not to do"
+      },
+      "items": [
+        {
+          "id": "red-flags.dont.wait",
+          "icon": "clock",
+          "text": {
+            "fa": "منتظر نمانید که درد خودش تیر شود. همین حالا بروید.",
+            "ps": "انتظار مه کوئ چې درد پخپله تېر شي. همدا اوس ولاړ شئ.",
+            "en": "Do not wait for the pain to pass. Go now."
+          }
+        },
+        {
+          "id": "red-flags.dont.food-drowsy",
+          "icon": "no-drink",
+          "text": {
+            "fa": "به کسی که خیلی خواب‌آلود یا بیهوش است، غذا یا آب ندهید. ممکن است گلویش بند شود.",
+            "ps": "هغه چا ته چې ډېر خوب وړي یا بې هوښه دی، خواړه یا اوبه مه ورکوئ. کېدای شي ستونی یې بند شي.",
+            "en": "Do not give food or drink to someone very drowsy; they may choke."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO fact sheet: Cardiovascular diseases (2025): heart attack and stroke warning signs, seek care immediately",
+    "WHO fact sheet: Meningitis (2023): fever, stiff neck, rash",
+    "WHO fact sheet: Tuberculosis (2026): prolonged cough, blood in sputum, weight loss",
+    "WHO Package of Essential Noncommunicable Disease Interventions (PEN) implementation tools (2013): referral criteria",
+    "WHO Guide to cancer early diagnosis (2017) and WHO Regional Office for Africa: warning signs of cancer (2017)",
+    "WHO mhGAP Intervention Guide 2.0 (2016): self-harm and suicide",
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020)"
+  ],
+  "review": [
+    "'Thoughts of ending one's life' is a step ('If someone talks of suicide': stay with them, remove poisons and weapons, take them to hospital now) rather than a 9th item in the red list, because the spec allows at most 8 alert items and the step gives the actions (mhGAP). Move it into the alert if you prefer.",
+    "The amber list uses 'go to the clinic this week' in its title (the glossary only fixes 'today'); the fa/ps for 'this week' (همین هفته / همدا اونۍ) need the translator's check.",
+    "'Vomiting blood, or black stool' is urgent here, but the anaemia page tip says iron tablets make stool black and that is normal. Consider 'black, sticky stool (not from iron tablets)'.",
+    "'Blood in the sputum' is in the 'this week' list (TB); heavy coughing of blood should go to hospital now. Decide whether to add that.",
+    "'Yellow eyes' is 'this week'; yellow eyes with fever, confusion or belly pain needs hospital now (partly covered by the red list).",
+    "Icons: trouble swallowing uses 'no-drink' (a 'swallow' icon would be better); yellow eyes uses 'jaundice'; confusion uses 'sleepy'; vomiting blood uses 'vomit'.",
+    "fa uses everyday Afghan words: الاشه (jaw), گیچی (confusion), شخی گردن (stiff neck), دریور (driver); check with the translator."
+  ]
+}
