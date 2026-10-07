@@ -1,12 +1,12 @@
 // Cloudflare Worker: receives anonymous usage counts from the app, shows Mo a dashboard, and holds the book editor.
-// Bindings: D1 database "DB"; secret "DASH_KEY" (any long random word; the dashboard is /dashboard?key=..., the editor /admin?key=...);
+// Bindings: D1 database "DB"; secret "DASH_KEY" (the owner's long random word; the dashboard is /dashboard?key=..., the editor /admin?key=...,
+// the people page /people?key=...); other people get their own key from /people, used in the same ?key= links;
 // var "APP_URL" (the app's public address, for "Import from app"); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
 import ABOUT from './about.js';
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const TYPES = new Set(['install', 'open', 'view', 'play', 'time', 'lang', 'voice', 'share', 'a2hs', 'a2hs-prompt', 'kid', 'dose', 'ask', 'feedback', 'near']);
 const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : null);
 const json = (o, status = 200, headers = {}) => new Response(JSON.stringify(o), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } });
-const authed = (env, url) => !!env.DASH_KEY && url.searchParams.get('key') === env.DASH_KEY;
 const NOT_FOUND = () => new Response('Not found', { status: 404 });
 
 export default {
@@ -19,9 +19,17 @@ export default {
     // public, read-only: the published book and uploaded narration (never the draft)
     if (req.method === 'GET' && (path === '/content/version.json' || path === '/content/book.json')) return publicBook(env, path);
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
-    // everything below needs the secret word
-    const isAdmin = path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary';
-    if (isAdmin && !authed(env, url)) return NOT_FOUND();
+    // everything below needs a key: the owner's DASH_KEY, or a person's own key (made on /people)
+    const isAdmin = path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
+    if (!isAdmin) return new Response('ok', { headers: CORS });
+    const me = await whoIs(env, url.searchParams.get('key'));
+    if (!me) return NOT_FOUND(); // wrong, removed or missing key: the same answer as a page that does not exist
+    if (path === '/people' || path.startsWith('/people/')) {
+      if (me.role !== 'owner') return NOT_FOUND();
+      if (path === '/people') return new Response(peoplePage(url.searchParams.get('key'), me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+      if (!path.startsWith('/people/api/')) return NOT_FOUND();
+      try { return await peopleApi(req, env, url, path.slice(12), me); } catch (e) { return json({ error: 'Something went wrong on the server: ' + (e && e.message) }, 500); }
+    }
     if (path.startsWith('/fb-audio/')) {
       const row = await env.DB.prepare('SELECT audio, type FROM feedback WHERE id = ?').bind(+path.split('/')[2]).first();
       if (!row || !row.audio) return NOT_FOUND();
@@ -33,20 +41,68 @@ export default {
     if (path === '/dashboard' || path === '/stats.json') {
       const s = await stats(env, +(url.searchParams.get('days') || 30));
       if (path === '/stats.json') return Response.json(s);
-      return new Response(page(s, url.searchParams.get('key')), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+      return new Response(page(s, url.searchParams.get('key'), me), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
     }
     if (path === '/about') {
       const k = encodeURIComponent(url.searchParams.get('key') || '');
       return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · about</title><body style="margin:0;padding:16px;background:#FAF8F4"><p style="font-family:system-ui,sans-serif"><a href="/dashboard?key=${k}" style="color:#B6322D">← Dashboard</a></p>${ABOUT}</body>`, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
     }
     if (path === '/ai/summary') return req.method === 'POST' ? aiSummary(env) : json({ error: 'Use POST' }, 405);
-    if (path === '/admin') return new Response(adminPage(url.searchParams.get('key'), env), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+    if (path === '/admin') return new Response(adminPage(url.searchParams.get('key'), env, me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
     if (path.startsWith('/admin/api/')) {
-      try { return await adminApi(req, env, url, path.slice(11)); } catch (e) { return json({ error: 'Something went wrong on the server: ' + (e && e.message) }, 500); }
+      // viewers may read the draft (GET) but every change (POST) is refused
+      if (req.method !== 'GET' && !canEdit(me)) return json({ error: VIEW_ONLY }, 403);
+      try { return await adminApi(req, env, url, path.slice(11), me); } catch (e) { return json({ error: 'Something went wrong on the server: ' + (e && e.message) }, 500); }
     }
-    return new Response('ok', { headers: CORS });
+    return NOT_FOUND();
   },
 };
+
+/* ================= who is signed in: the owner, or a person with their own key ================= */
+const ROLES = { editor: 'Editor', viewer: 'Viewer' }; // the owner is not a row in "people": it is DASH_KEY
+const VIEW_ONLY = 'You can view but not edit. Ask Mo for an editor link if you need to change the book.';
+const canEdit = (me) => me.role === 'owner' || me.role === 'editor';
+const hex = (buf) => [...new Uint8Array(buf)].map((x) => x.toString(16).padStart(2, '0')).join('');
+const sha256 = async (text) => hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+// compares two strings of the same length without stopping at the first difference
+function sameText(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return d === 0;
+}
+async function whoIs(env, key) {
+  if (!key || key.length > 200) return null;
+  const h = await sha256(key);
+  // hashes are always 64 characters, so comparing them takes the same time whatever the key is
+  if (env.DASH_KEY && sameText(h, await sha256(env.DASH_KEY))) return { id: 0, name: 'Owner', role: 'owner' };
+  let row;
+  try { row = await env.DB.prepare('SELECT id, name, role, key_hash, last_used FROM people WHERE key_hash = ? AND revoked = 0').bind(h).first(); }
+  catch { return null; } // the people table is not made yet (schema.sql not run again): only the owner can sign in
+  if (!row || !sameText(row.key_hash, h) || !ROLES[row.role]) return null;
+  const now = Date.now();
+  if (!row.last_used || now - row.last_used > 60_000) { // at most one write a minute per person
+    try { await env.DB.prepare('UPDATE people SET last_used = ? WHERE id = ?').bind(now, row.id).run(); } catch {}
+  }
+  return { id: row.id, name: row.name, role: row.role };
+}
+// "who did what" for changes to the book; the same person repeating the same change within 10 minutes updates one line
+async function audit(env, me, action, detail = '') {
+  try {
+    const now = Date.now(), d = String(detail || '').slice(0, 200);
+    const last = await env.DB.prepare('SELECT id, ts, who, role, action, detail FROM audit ORDER BY id DESC LIMIT 1').first();
+    if (last && last.who === me.name && last.role === me.role && last.action === action && last.detail === d && now - last.ts < 600_000) {
+      await env.DB.prepare('UPDATE audit SET ts = ? WHERE id = ?').bind(now, last.id).run();
+    } else {
+      await env.DB.prepare('INSERT INTO audit (ts, who, role, action, detail) VALUES (?, ?, ?, ?, ?)').bind(now, me.name, me.role, action, d).run();
+      if (last && last.id % 50 === 0) await env.DB.prepare('DELETE FROM audit WHERE id < ?').bind(last.id - 2000).run(); // keep it small
+    }
+  } catch {} // never stop a save because the log could not be written
+}
+function newKey() {
+  const b = crypto.getRandomValues(new Uint8Array(32)); // 256 random bits
+  return btoa(String.fromCharCode(...b)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
 
 async function ingest(req, env) {
   let b;
@@ -106,7 +162,9 @@ async function stats(env, days) {
   };
 }
 
-function page(s, key) {
+// "Sara · viewer" (shown at the top of every page)
+const signedIn = (me) => (me.role === 'owner' ? 'the owner' : `${me.name} · ${me.role}`);
+function page(s, key, me) {
   const e = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const kpi = (l, v, sub) => `<div class="k"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${sub || ''}</div></div>`;
   const max = Math.max(1, ...s.perDay.map((r) => r.users));
@@ -121,7 +179,8 @@ function page(s, key) {
 .b i{display:block;background:#1F6F7A;border-radius:4px 4px 0 0;min-height:2px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:12px}
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px;border-top:1px solid #E6E1D8}th{color:#6B655E;font-weight:600}a{color:#B6322D}</style>
 <h1>Sehat · usage (last ${s.days} days)</h1>
-<p><a href="/admin?key=${e(key)}" style="font-weight:700">Edit the book →</a> &nbsp; <a href="/about?key=${e(key)}" style="font-weight:700">About this app →</a></p>
+<p class="s" id="who">Signed in as <b>${e(signedIn(me))}</b>${me.role === 'viewer' ? ' (you can look at everything here, but not change the book)' : ''}</p>
+<p><a href="/admin?key=${e(key)}" style="font-weight:700">${me.role === 'viewer' ? 'See the book (view only) →' : 'Edit the book →'}</a> &nbsp; ${me.role === 'owner' ? `<a href="/people?key=${e(key)}" style="font-weight:700">People →</a> &nbsp; ` : ''}<a href="/about?key=${e(key)}" style="font-weight:700">About this app →</a></p>
 <p class="s">Anonymous counts only. Phones send them when they next have internet, so recent days fill in late. <a href="?key=${e(key)}&days=7">7 days</a> · <a href="?key=${e(key)}&days=30">30 days</a> · <a href="?key=${e(key)}&days=365">1 year</a></p>
 <div class="g">${kpi('Installs (all time)', s.installs, `+${s.newInstalls} in this period`)}${kpi('Active last 7 days', s.active7, `${s.activeN} in this period`)}${kpi('Times opened', s.opens)}${kpi('Minutes spent', s.minutes, `average visit ${Math.floor(s.avgSessionSec / 60)}m ${s.avgSessionSec % 60}s`)}${kpi('Audio plays', s.plays)}${kpi('On home screen', hs, `${s.shares} shares`)}</div>
 <div class="c" style="margin-top:12px"><div class="l">People using it each day</div><div class="chart">${bars || '<span class="s">No data yet</span>'}</div></div>
@@ -272,8 +331,9 @@ function packIds(b) {
 
 const cleanL = (L) => Object.fromEntries(LANGS.map((lg) => [lg, typeof (L && L[lg]) === 'string' ? L[lg] : '']));
 
-/* ---------- editor API (all behind DASH_KEY) ---------- */
-async function adminApi(req, env, url, op) {
+/* ---------- editor API (owner and editors; viewers only reach "state") ---------- */
+async function adminApi(req, env, url, op, me) {
+  const log = (action, detail) => audit(env, me, action, detail);
   const post = req.method === 'POST';
   if (op === 'state') {
     const d = await getDoc(env, 'draft');
@@ -301,6 +361,7 @@ async function adminApi(req, env, url, op) {
     normAudio(b);
     rebuildNarration(b);
     await putDoc(env, 'draft', b);
+    await log('import', 'from the app, version ' + (b.version || '?'));
     return json({ ok: true, from: b.version, topics: Object.keys(b.topics).length });
   }
 
@@ -312,6 +373,7 @@ async function adminApi(req, env, url, op) {
     const legacy = slot.endsWith('-f') ? slot.slice(0, 2) : slot;
     if (op === 'audio-delete') {
       await env.DB.prepare('DELETE FROM audio WHERE id = ? AND lang IN (?, ?)').bind(id, slot, legacy).run();
+      await log('audio delete', `${slot} ${id}`);
       return json({ ok: true });
     }
     const d = await getDoc(env, 'draft');
@@ -325,6 +387,7 @@ async function adminApi(req, env, url, op) {
     const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', data))].map((x) => x.toString(16).padStart(2, '0')).join('').slice(0, 10);
     if (legacy !== slot) await env.DB.prepare('DELETE FROM audio WHERE lang = ? AND id = ?').bind(legacy, id).run();
     await env.DB.prepare('INSERT OR REPLACE INTO audio (lang, id, type, hash, data, size, ts) VALUES (?, ?, ?, ?, ?, ?, ?)').bind(slot, id, type, hash, data, data.length, Date.now()).run();
+    await log('audio upload', `${slot} ${id}`);
     return json({ ok: true, hash, slot, url: `/a/${slot}/${id}?v=${hash}` });
   }
 
@@ -339,6 +402,7 @@ async function adminApi(req, env, url, op) {
     const p = await getDoc(env, 'published');
     if (!p) return json({ error: 'Nothing has been published yet, so there is nothing to go back to. Use "Import from app" to start again.' }, 400);
     await putDoc(env, 'draft', p.book, p.body, p.ts); // same time stamp: the draft is not 'changed'
+    await log('revert', 'draft back to ' + p.version);
     return json({ ok: true, version: p.version });
   }
   if (!d) return json({ error: 'There is no draft yet. Press "Import from app" first.' }, 400);
@@ -381,6 +445,7 @@ async function adminApi(req, env, url, op) {
     const body = JSON.stringify(out);
     if (body.length > 1_900_000) return json({ error: 'Not published: the book has become too big to store (over 1.9 MB). Shorten or remove something.', errors: [], warnings: res.warnings }, 422);
     await putDoc(env, 'published', out, body);
+    await log('publish', 'version ' + out.version);
     return json({ ok: true, version: out.version, built: out.built, warnings: res.warnings });
   }
 
@@ -424,6 +489,8 @@ async function adminApi(req, env, url, op) {
     } else return json({ error: 'Unknown change.' }, 400);
     rebuildNarration(b);
     await putDoc(env, 'draft', b);
+    const PART = { topic: 'topic', deleteTopic: 'deleted topic', sections: 'topic order', home: 'home screen', ui: 'words', facilities: 'places' };
+    await log('save', PART[m.part] + (m.part === 'topic' ? ' ' + m.value.id : m.part === 'deleteTopic' ? ' ' + m.id : ''));
     return json({ ok: true, sections: b.sections });
   }
   return json({ error: 'Unknown action.' }, 404);
@@ -615,9 +682,126 @@ async function aiSummary(env) {
   return json({ text: text || '(The AI gave an empty answer. Try again.)', voiceNotes, counts: { feedback: written.length, searches: none.length } });
 }
 
+/* ================= People: who has access (owner only, /people?key=...) ================= */
+async function peopleApi(req, env, url, op, me) {
+  if (op === 'list' && req.method === 'GET') {
+    const people = (await env.DB.prepare('SELECT id, name, role, created, last_used, revoked FROM people ORDER BY revoked, created DESC').all()).results || [];
+    const log = (await env.DB.prepare('SELECT ts, who, role, action, detail FROM audit ORDER BY id DESC LIMIT 50').all()).results || [];
+    return json({ people, log });
+  }
+  if (req.method !== 'POST') return json({ error: 'Use POST' }, 405);
+  const b = await req.json().catch(() => ({}));
+  if (op === 'add') {
+    const name = String(b.name || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+    if (!name) return json({ error: 'Type the person\'s name.' }, 400);
+    if (!ROLES[b.role]) return json({ error: 'Choose what they can do: viewer or editor.' }, 400);
+    const key = newKey(), now = Date.now();
+    const r = await env.DB.prepare('INSERT INTO people (name, role, key_hash, created, last_used, revoked) VALUES (?, ?, ?, ?, NULL, 0)').bind(name, b.role, await sha256(key), now).run();
+    await audit(env, me, 'add person', `${name} (${b.role})`);
+    const id = Number((r && r.meta && r.meta.last_row_id) ?? (r && r.lastInsertRowid) ?? 0) || null;
+    // the key is in this answer only: it is never stored and cannot be shown again
+    return json({ ok: true, id, name, role: b.role, key, link: `${url.origin}/dashboard?key=${encodeURIComponent(key)}` });
+  }
+  const p = await env.DB.prepare('SELECT id, name, role, revoked FROM people WHERE id = ?').bind(+b.id || 0).first();
+  if (!p) return json({ error: 'No such person.' }, 404);
+  if (op === 'role') {
+    if (!ROLES[b.role]) return json({ error: 'Choose viewer or editor.' }, 400);
+    if (p.revoked) return json({ error: 'This person\'s access was removed. Add them again to give them a new link.' }, 400);
+    await env.DB.prepare('UPDATE people SET role = ? WHERE id = ?').bind(b.role, p.id).run();
+    if (b.role !== p.role) await audit(env, me, 'change role', `${p.name}: ${p.role} → ${b.role}`);
+    return json({ ok: true });
+  }
+  if (op === 'revoke') {
+    await env.DB.prepare('UPDATE people SET revoked = 1 WHERE id = ?').bind(p.id).run();
+    if (!p.revoked) await audit(env, me, 'remove access', p.name);
+    return json({ ok: true });
+  }
+  return json({ error: 'Unknown action.' }, 404);
+}
+
+function peoplePage(key, me) {
+  const k = encodeURIComponent(key);
+  return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · people</title>
+<style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:16px;max-width:900px;margin:auto;font-size:16px}h1{font-size:22px;margin:4px 0}
+.c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px;margin-top:12px}.l{font-size:13px;color:#6B655E;font-weight:600;margin:0 0 8px}.s{font-size:13px;color:#6B655E}a{color:#B6322D}
+button{font:inherit;font-size:15px;padding:8px 12px;border-radius:10px;border:1px solid #CFC8BC;background:#fff;color:#22201D;cursor:pointer}button.primary{background:#1F6F7A;border-color:#1F6F7A;color:#fff;font-weight:700}button.danger{color:#B6322D;border-color:#E3B4B1}button:disabled{opacity:.35}
+input,select{font:inherit;font-size:16px;width:100%;box-sizing:border-box;padding:8px;border:1px solid #CFC8BC;border-radius:10px;background:#fff;color:#22201D}label{display:block;margin:6px 0 10px}label>span{display:block;font-size:13px;color:#6B655E}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #E6E1D8;padding:10px 0}.row:first-of-type{border-top:0}.grow{flex:1;min-width:160px}.row select{width:auto}.off{opacity:.55}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:#E8F3F1;color:#14535B}.badge.editor{background:#FBEDEC;color:#8E2420}
+.msg{padding:12px;border-radius:12px;margin:10px 0}.msg.bad{background:#FBEDEC;color:#8E2420}.msg.good{background:#E8F3F1;color:#14535B}.copy{display:flex;gap:8px}.copy input{font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px 4px;border-top:1px solid #E6E1D8;vertical-align:top}th{color:#6B655E;font-weight:600}ul{padding-left:20px;margin:6px 0}li{margin:4px 0}</style>
+<p class="s"><a href="/dashboard?key=${k}">← Dashboard</a> &nbsp; <a href="/admin?key=${k}">Editor</a></p>
+<h1>Sehat · people</h1>
+<p class="s" id="who">Signed in as <b>${signedIn(me)}</b>. Only you can see this page.</p>
+<div class="c"><div class="l">Give someone access</div>
+<label><span>Name</span><input id="p-name" autocomplete="off" maxlength="60"></label>
+<label><span>What they can do</span><select id="p-role"><option value="viewer">Viewer: can look at the dashboard, feedback, voice notes and the AI summary</option><option value="editor">Editor: can also change, record and publish the book</option></select></label>
+<button class="primary" id="p-add">Make their link</button><div id="p-out"></div></div>
+<div class="c"><div class="l">People with access</div><div id="p-list" class="s">Loading…</div>
+<p class="s">Your own link (your secret word) always works and is not listed here. Removing access works at once: their link stops working.</p></div>
+<div class="c"><div class="l">Who changed what (last 50)</div><div id="p-log" class="s">Loading…</div></div>
+<div class="c"><div class="l">What each role can do</div><ul class="s">
+<li><b>Viewer</b>: dashboard, About, feedback and voice notes, the AI summary, and can look at the book in the editor. Cannot change anything.</li>
+<li><b>Editor</b>: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot see this page or give anyone access.</li>
+<li><b>Owner</b> (you): everything, including this page.</li></ul></div>
+<script>(${peopleClient.toString()})(${scriptJson({ key })})</script></html>`;
+}
+
+// Runs in Mo's browser on /people.
+function peopleClient(cfg) {
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const when = (ts) => (ts ? new Date(ts).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'never');
+  async function api(op, body) {
+    const r = await fetch('/people/api/' + op + '?key=' + encodeURIComponent(cfg.key), body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || 'The server answered ' + r.status);
+    return j;
+  }
+  const roleSel = (p) => `<select data-role="${p.id}" aria-label="Role for ${esc(p.name)}"><option value="viewer"${p.role === 'viewer' ? ' selected' : ''}>Viewer</option><option value="editor"${p.role === 'editor' ? ' selected' : ''}>Editor</option></select>`;
+  async function load() {
+    try {
+      const { people, log } = await api('list');
+      $('#p-list').innerHTML = people.length ? people.map((p) => `<div class="row${p.revoked ? ' off' : ''}"><div class="grow"><b style="font-size:16px;color:#22201D">${esc(p.name)}</b> <span class="badge ${esc(p.role)}">${esc(p.role)}</span>${p.revoked ? ' <b>access removed</b>' : ''}<div>Added ${esc(when(p.created))} · last used ${esc(when(p.last_used))}</div></div>${p.revoked ? '' : `${roleSel(p)}<button class="danger" data-revoke="${p.id}" data-name="${esc(p.name)}">Remove access</button>`}</div>`).join('') : 'Nobody yet. Add someone above.';
+      $('#p-log').innerHTML = log.length ? `<table><tr><th>When</th><th>Who</th><th>What</th></tr>${log.map((x) => `<tr><td>${esc(when(x.ts))}</td><td>${esc(x.role === 'owner' ? 'Owner' : x.who)}</td><td>${esc(x.action)}${x.detail ? ': ' + esc(x.detail) : ''}</td></tr>`).join('')}</table>` : 'No changes yet.';
+    } catch (e) { $('#p-list').innerHTML = `<div class="msg bad">${esc(e.message)}</div>`; }
+  }
+  $('#p-add').onclick = async () => {
+    const name = $('#p-name').value.trim(), role = $('#p-role').value, out = $('#p-out');
+    if (!name) { out.innerHTML = '<div class="msg bad">Type the person\'s name.</div>'; return; }
+    $('#p-add').disabled = true;
+    try {
+      const r = await api('add', { name, role });
+      out.innerHTML = `<div class="msg good"><b>Link for ${esc(r.name)} (${esc(r.role)})</b><div class="copy" style="margin:8px 0"><input id="p-link" readonly value="${esc(r.link)}"><button class="primary" id="p-copy">Copy</button></div>
+        <b>This link is shown only once.</b> Copy it now and send it to ${esc(r.name)} privately (for example on WhatsApp or Signal). Anyone who has the link gets this access, so they should not share it. If it is lost, remove their access and add them again.</div>`;
+      $('#p-copy').onclick = async () => {
+        const inp = $('#p-link'); inp.select();
+        try { await navigator.clipboard.writeText(inp.value); } catch { try { document.execCommand('copy'); } catch {} }
+        $('#p-copy').textContent = 'Copied';
+      };
+      $('#p-name').value = '';
+      load();
+    } catch (e) { out.innerHTML = `<div class="msg bad">${esc(e.message)}</div>`; }
+    $('#p-add').disabled = false;
+  };
+  document.addEventListener('change', async (e) => {
+    const id = e.target.dataset.role; if (!id) return;
+    try { await api('role', { id: +id, role: e.target.value }); } catch (err) { alert(err.message); }
+    load();
+  });
+  document.addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-revoke]'); if (!b) return;
+    if (!confirm(`Remove access for ${b.dataset.name}? Their link stops working at once.`)) return;
+    try { await api('revoke', { id: +b.dataset.revoke }); } catch (err) { alert(err.message); }
+    load();
+  });
+  load();
+}
+
 /* ================= the editor page (/admin?key=...) ================= */
-function adminPage(key, env) {
-  const cfg = { key, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES };
+function adminPage(key, env, me) {
+  const k = encodeURIComponent(key), esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const cfg = { key, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES };
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · editor</title>
 <style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;font-size:16px}h1{font-size:20px;margin:0}h2{font-size:20px;margin:16px 0 8px}
 header{position:sticky;top:0;z-index:5;background:#FBFAF7;border-bottom:1px solid #E6E1D8;padding:10px 14px}.hrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -634,9 +818,10 @@ textarea[dir=rtl]{font-family:"Noto Naskh Arabic",Tahoma,sans-serif;font-size:18
 .item{border:1px dashed #E6E1D8;border-radius:12px;padding:8px;margin:8px 0}.icp{width:28px;height:28px;vertical-align:middle}.ipick{display:flex;gap:8px;align-items:center}.ipick select{width:auto;min-width:160px}
 details.au{margin-top:8px;font-size:14px}details.au summary{color:#1F6F7A;cursor:pointer}.auc{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0;border-top:1px solid #F0ECE4}.auc audio{height:34px;max-width:220px}
 .msg{padding:10px;border-radius:12px;margin:8px 0}.msg.bad{background:#FBEDEC;color:#8E2420}.msg.good{background:#E8F3F1;color:#14535B}ul.errs li{margin:6px 0}.pimg{max-width:160px;max-height:110px;border-radius:10px;border:1px solid #E6E1D8}
-.chk{display:flex;flex-wrap:wrap;gap:6px 14px}.chk label{display:flex;gap:6px;align-items:center;margin:0}.chk input{width:auto}</style>
-<header><div class="hrow"><h1 class="grow">Sehat · editor</h1><a href="/dashboard?key=${encodeURIComponent(key)}" class="s">Usage dashboard</a><button class="primary" data-act="publish">Publish</button></div>
-<div class="hrow"><span id="st" class="st">Loading…</span><span class="s" id="pubinfo"></span></div>
+.chk{display:flex;flex-wrap:wrap;gap:6px 14px}.chk label{display:flex;gap:6px;align-items:center;margin:0}.chk input{width:auto}
+body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[readonly],body.ro input[readonly]{background:#F6F3EE}</style>
+<header><div class="hrow"><h1 class="grow">Sehat · editor</h1><a href="/dashboard?key=${k}" class="s">Usage dashboard</a>${me.role === 'owner' ? `<a href="/people?key=${k}" class="s">People</a>` : ''}${me.role === 'viewer' ? '' : '<button class="primary" data-act="publish">Publish</button>'}</div>
+<div class="hrow"><span id="st" class="st">Loading…</span><span class="s" id="pubinfo"></span><span class="s" id="who" style="margin-left:auto">Signed in as <b>${esc(signedIn(me))}</b></span></div>
 <nav><a href="#topics">Topics</a><a href="#home">Home screen</a><a href="#words">Words</a><a href="#places">Places</a><a href="#audio">Audio</a><a href="#publish">Publish &amp; import</a></nav></header>
 <main id="main"></main>
 <script>${parseLatLon.toString()}
@@ -651,6 +836,10 @@ function adminClient(cfg) {
   const L0 = () => ({ fa: '', ps: '', en: '' });
   let D = null, PUB = null, AU = {}, DIRTY = false, CUR = null, CHECK = null, Q = { words: '', audio: '', places: '' };
   const pending = new Set(); let timer = null, chain = Promise.resolve(), saveErr = false;
+  // viewers: the same pages, but nothing can be typed or pressed (the server refuses every change anyway)
+  const RO = cfg.role === 'viewer';
+  if (RO) document.body.classList.add('ro');
+  const lock = (el) => { if (RO && el) el.querySelectorAll('textarea, input:not([id^="q-"]), select').forEach((x) => { if (x.tagName === 'SELECT' || x.type === 'checkbox' || x.type === 'file') x.disabled = true; else x.readOnly = true; }); };
 
   async function api(op, body, type) {
     const sep = op.includes('?') ? '&' : '?';
@@ -666,7 +855,7 @@ function adminClient(cfg) {
       const s = await api('state');
       D = s.draft; PUB = s.published; DIRTY = s.dirty; AU = {};
       for (const a of s.audio) AU[a.lang + '/' + a.id] = a;
-      status(D ? 'All changes saved' : 'No draft yet', 'ok'); render();
+      status(RO ? 'View only' : D ? 'All changes saved' : 'No draft yet', 'ok'); render();
     } catch (e) { status(e.message, 'err'); }
   }
 
@@ -679,7 +868,7 @@ function adminClient(cfg) {
     if (p === 'home') return { part: 'home', value: D.config.home };
     return null;
   }
-  function queueSave(p) { pending.add(p); DIRTY = true; status('Saving…'); clearTimeout(timer); timer = setTimeout(flush, 900); }
+  function queueSave(p) { if (RO) return; pending.add(p); DIRTY = true; status('Saving…'); clearTimeout(timer); timer = setTimeout(flush, 900); }
   function flush() {
     clearTimeout(timer);
     const parts = [...pending]; pending.clear();
@@ -742,8 +931,10 @@ function adminClient(cfg) {
     const tab = r[0] === 'topic' ? 'topics' : r[0] || 'topics';
     document.querySelectorAll('nav a').forEach((a) => a.classList.toggle('on', a.getAttribute('href') === '#' + tab));
     updPub();
-    if (!D) { main.innerHTML = vStart(); return; }
-    main.innerHTML = r[0] === 'topic' ? vTopic(decodeURIComponent(r[1] || '')) : tab === 'home' ? vHome() : tab === 'words' ? vWords() : tab === 'places' ? vPlaces() : tab === 'audio' ? vAudio() : tab === 'publish' ? vPublish() : vTopics();
+    const note = RO ? '<p class="msg good">You can view but not edit. Ask Mo for an editor link if you need to change the book.</p>' : '';
+    if (!D) { main.innerHTML = note + (RO ? '<div class="c"><p>There is no draft of the book yet.</p></div>' : vStart()); return; }
+    main.innerHTML = note + (r[0] === 'topic' ? vTopic(decodeURIComponent(r[1] || '')) : tab === 'home' ? vHome() : tab === 'words' ? vWords() : tab === 'places' ? vPlaces() : tab === 'audio' ? vAudio() : tab === 'publish' ? vPublish() : vTopics());
+    lock(main);
   }
   const vStart = () => `<div class="c"><h2>Start here</h2><p>There is no draft yet. Press the button to copy the book that is inside the app now${cfg.appUrl ? ` (${esc(cfg.appUrl)})` : ''}. Then edit it and press Publish.</p><button class="primary" data-act="import">Import from app</button>${cfg.appUrl ? '' : '<p class="msg bad">APP_URL is not set in server/wrangler.toml, so Import cannot work yet.</p>'}${vChecks()}</div>`;
 
@@ -890,7 +1081,7 @@ function adminClient(cfg) {
   document.addEventListener('input', (e) => {
     const el = e.target;
     if (el.dataset.f && el.tagName !== 'SELECT') setField(el);
-    else if (el.id && el.id.startsWith('q-')) { const k = el.id.slice(2); Q[k] = el.value; $('#list-' + k).innerHTML = k === 'words' ? wordsList() : k === 'audio' ? audioList() : placesList(); }
+    else if (el.id && el.id.startsWith('q-')) { const k = el.id.slice(2); Q[k] = el.value; $('#list-' + k).innerHTML = k === 'words' ? wordsList() : k === 'audio' ? audioList() : placesList(); lock($('#list-' + k)); }
   });
   document.addEventListener('change', (e) => {
     const el = e.target;
@@ -900,7 +1091,7 @@ function adminClient(cfg) {
     else if (el.dataset.svc) { const f = D.facilities.facilities[+el.dataset.svc]; f.services = [...el.closest('.chk').querySelectorAll('input:checked')].map((x) => x.value); queueSave('fac'); }
   });
   document.addEventListener('click', async (e) => {
-    const b = e.target.closest('[data-act]'); if (!b) return;
+    const b = e.target.closest('[data-act]'); if (!b || RO) return;
     const d = b.dataset, i = +d.i, t = D && D.topics[CUR];
     switch (d.act) {
       case 'publish': return publish();

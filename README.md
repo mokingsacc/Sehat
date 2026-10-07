@@ -76,5 +76,18 @@ Every time, on your phone:
 
 Good to know: ids of blocks never change when you edit text (recordings are linked to them). A phone uses whichever book is newer: the one you published, or the one built into the app. If the app is rebuilt later with other changes, press **Import from app** and redo your edits, or the newer built-in book will win until you publish again.
 
+### Give other people access
+Your secret word (`DASH_KEY`) is the owner's key: it always works and can do everything. Other people get their own link instead of your word.
+1. Once, on a computer in `server/`: `wrangler d1 execute fhb --remote --file=schema.sql` (safe to run again; it only adds the new tables), then `wrangler deploy`.
+2. Open the dashboard with your own link and tap **People**. Type their name, choose **Viewer** or **Editor**, tap **Make their link**.
+3. Tap **Copy** and send the link to them privately. It is shown only once (only a scrambled copy is kept). They can bookmark it on their phone.
+
+What each role can do:
+- **Viewer**: dashboard, About, feedback and voice notes, the AI summary, and can look at the book in the editor. Cannot change anything.
+- **Editor**: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot open People.
+- **Owner** (you): everything, including People.
+
+On People you can change someone's role or tap **Remove access** (their link stops working at once). People also shows who changed what in the book (the last 50 changes). Lost link: remove access and add the person again.
+
 ## Licences
 Content is adapted from WHO guidance (IMCI, PCPNC, WHO antenatal care, Facts for Life, Doing What Matters) for non-commercial health education; some WHO source books are "all rights reserved", so ask WHO for permission before wide release (see docs). Icons adapted from Health Icons (MIT, see img/CREDITS.md). Font Noto Naskh Arabic (SIL OFL, fonts/OFL.txt).

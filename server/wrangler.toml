@@ -13,5 +13,5 @@ database_name = "fhb"
 database_id = "PASTE-THE-ID-FROM-wrangler-d1-create"
 
 # Secrets (set with `wrangler secret put NAME`, never written here):
-#   DASH_KEY           the secret word for /dashboard and /admin
+#   DASH_KEY           the owner's secret word for /dashboard, /admin and /people (other people get their own links from /people)
 #   ANTHROPIC_API_KEY  optional, for the "Summarise feedback" button

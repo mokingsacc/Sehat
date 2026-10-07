@@ -29,3 +29,18 @@ CREATE TABLE IF NOT EXISTS audio (
   type TEXT, hash TEXT, data BLOB, size INTEGER, ts INTEGER,
   PRIMARY KEY (lang, id)
 );
+-- People Mo has given their own link to (/people). The owner's DASH_KEY is not in here and always works.
+-- Only a SHA-256 hash of each personal key is kept, never the key itself.
+CREATE TABLE IF NOT EXISTS people (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  role TEXT NOT NULL,            -- 'editor' (can change and publish the book) or 'viewer' (can only look)
+  key_hash TEXT NOT NULL UNIQUE, -- hex SHA-256 of the personal key
+  created INTEGER, last_used INTEGER,
+  revoked INTEGER NOT NULL DEFAULT 0
+);
+-- Who changed the book, and when (shown to the owner on /people). Only names and actions, no content.
+CREATE TABLE IF NOT EXISTS audit (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts INTEGER, who TEXT, role TEXT, action TEXT, detail TEXT
+);
