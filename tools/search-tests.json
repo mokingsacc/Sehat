@@ -621,6 +621,10 @@
     {"q": "healthy food", "lang": "en", "want": "heart-food", "set": "new"},
     {"q": "چند ساعت خواب لازم است", "lang": "fa", "want": "sleep-well", "set": "new"},
     {"q": "tea before bed", "lang": "en", "want": "evening-routine", "set": "new"},
-    {"q": "healthy habits", "lang": "en", "want": "wellbeing", "set": "new"}
+    {"q": "healthy habits", "lang": "en", "want": "wellbeing", "set": "new"},
+    {"q": "طفلم تب و لرز دارد", "lang": "fa", "want": "fever", "set": "new", "note": "child fever with chills: fever first, malaria second (malaria is rare in Samangan)"},
+    {"q": "ماشوم تبه او لړزه لري", "lang": "ps", "want": "fever", "set": "new", "note": "child fever with chills: fever first, malaria second (malaria is rare in Samangan)"},
+    {"q": "my child has fever and chills", "lang": "en", "want": "fever", "set": "new", "note": "child fever with chills: fever first, malaria second (malaria is rare in Samangan)"},
+    {"q": "تب و لرز دارم ملاریا", "lang": "fa", "want": "malaria", "set": "new"}
   ]
 }

@@ -361,10 +361,10 @@
       "en": ["tb", "tuberculosis", "long cough", "cough for weeks", "cough for two weeks", "coughing blood", "coughing up blood", "blood in sputum", "night sweats", "weight loss and cough", "tb medicine", "cough for a month", "cough not getting better", "cough for weeks and weight loss"]
     },
     "fever": {
-      "fa": ["تب", "تب دارد", "تب کرده", "تبش بالا است", "تب بلند", "تب شدید", "طفلم تب دارد", "بچه تب دارد", "تب طفل", "جانش داغ است", "جانش گرم است", "بدنش داغ است", "جانش مثل آتش است", "داغ است", "حرارت", "حرارت بدن", "تب و لرزه", "لرزه", "تب دو روز", "گوش درد", "درد گوش", "چرک از گوش", "تب سه روز", "طفل داغ است", "بچه داغ است", "از صبح داغ است", "بچه تب کرده", "طفلم تب کرده", "تب کده"],
-      "ps": ["تبه", "تبه لري", "ماشوم تبه لري", "تبه یې ده", "بدن یې تود دی", "تود دی", "ګرم دی", "بدن یې سوځي", "لړزه", "تبه او لړزه", "د غوږ درد", "غوږ یې خوږیږي", "له غوږ نه زوه راځي"],
+      "fa": ["تب", "تب دارد", "تب کرده", "تبش بالا است", "تب بلند", "تب شدید", "طفلم تب دارد", "بچه تب دارد", "تب طفل", "جانش داغ است", "جانش گرم است", "بدنش داغ است", "جانش مثل آتش است", "داغ است", "حرارت", "حرارت بدن", "تب و لرزه", "لرزه", "تب دو روز", "گوش درد", "درد گوش", "چرک از گوش", "تب سه روز", "طفل داغ است", "بچه داغ است", "از صبح داغ است", "بچه تب کرده", "طفلم تب کرده", "تب کده", "طفل تب و لرز دارد", "بچه تب و لرز دارد", "طفلم تب و لرز دارد"],
+      "ps": ["تبه", "تبه لري", "ماشوم تبه لري", "تبه یې ده", "بدن یې تود دی", "تود دی", "ګرم دی", "بدن یې سوځي", "لړزه", "د غوږ درد", "غوږ یې خوږیږي", "له غوږ نه زوه راځي", "ماشوم تبه او لړزه لري"],
       "lat": ["tab", "tab dara", "tab kada", "tab karda", "tabe", "taba", "tabah", "taba lari", "jan garm", "janesh dagh", "jan dagh", "dagh", "hararat", "tab larza", "larza", "gosh dard", "ghwag dard", "tod", "bachem tab dara", "tabe bala"],
-      "en": ["fever", "high fever", "temperature", "high temperature", "hot", "feels hot", "hot body", "body is hot", "burning up", "baby burning up", "baby is hot", "child is hot", "shivering", "chills", "ear pain", "earache", "pus from ear", "fever for two days", "kid is hot", "very hot child"]
+      "en": ["fever", "high fever", "temperature", "high temperature", "hot", "feels hot", "hot body", "body is hot", "burning up", "baby burning up", "baby is hot", "child is hot", "shivering", "chills", "ear pain", "earache", "pus from ear", "fever for two days", "kid is hot", "very hot child", "child fever and chills", "child shivering with fever"]
     },
     "fever.soon": {
       "fa": ["گوش درد", "چرک گوش", "گوشش چرک میکند"],
