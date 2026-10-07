@@ -53,7 +53,7 @@ function measure(scale) {
   // 3. clipped single words (scrollWidth > clientWidth)
   for (const e of main.querySelectorAll('.t, h1, h2, .s, .empill span')) if (vis(e) && e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') probs.push(['clipped', e.className, e.textContent.slice(0, 30)]);
   // 4. a word split over two lines ("Emergen-cy")
-  for (const e of main.querySelectorAll('.t, h1, h2, .s, .empill span, .tx, .body')) {
+  for (const e of main.querySelectorAll('.t, h1, h2, .s, .empill span, .tx, .body, .pn')) {
     if (!vis(e)) continue; const w = document.createTreeWalker(e, NodeFilter.SHOW_TEXT); let n;
     while ((n = w.nextNode())) { const re = /\S+/g; let mm; while ((mm = re.exec(n.nodeValue))) { const rg = document.createRange(); rg.setStart(n, mm.index); rg.setEnd(n, mm.index + mm[0].length); const tops = new Set([...rg.getClientRects()].filter((r) => r.width > 0).map((r) => Math.round(r.top / 4))); if (tops.size > 1) probs.push(['word split', mm[0]]); } }
   }
@@ -98,6 +98,27 @@ function measure(scale) {
       }
     }
     ok(errs.length === 0, `${tag}: no page errors`, errs);
+    await ctx.close();
+  }
+  // a person's record in Family: long names in the bar and in the person header shrink or wrap between words, never mid-word
+  const NAMES = ['Zarghuna', 'Abdul Rahman', 'عبدالرحیم', 'سپوږمۍ ګلالۍ'];
+  for (const width of [320, 360]) for (const lang of ['fa', 'ps', 'en']) for (const name of NAMES) {
+    const ctx = await b.newContext({ viewport: { width, height: 800 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+    const p = await ctx.newPage(); const errs = [];
+    p.on('pageerror', (e) => errs.push('pageerror ' + e.message));
+    await p.route(/workers\.dev/, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
+    const kid = { ...KID, name, pic: 'child' };
+    await p.addInitScript(([lg, CV, k]) => { localStorage.setItem('fhb.lang', JSON.stringify(lg)); localStorage.setItem('fhb.voice', JSON.stringify('f')); localStorage.setItem('fhb.consent', JSON.stringify({ v: CV, ok: false, day: '2026-10-07' })); localStorage.setItem('fhb.kids', JSON.stringify([k])); localStorage.setItem('fhb.kid', JSON.stringify(k.id)); }, [lang, book.config.consentVersion, kid]);
+    await p.goto(BASE + 'index.html#/family/person'); await p.waitForSelector('main .phead', { timeout: 8000 }).catch(() => {});
+    await p.waitForTimeout(400);
+    const m = await p.evaluate(measure, 1);
+    const shown = await p.evaluate(() => [...document.querySelectorAll('main .top h1, main .phead .pn')].map((e) => e.textContent));
+    ok(shown.length === 2 && shown.every((t) => t === shown[0]) && shown[0] === name, `${lang}-${width} person "${name}": the name shows in the bar and the header`, shown);
+    const split = m.probs.filter((x) => x[0] === 'word split' || x[0] === 'header title spills' || x[0] === 'header pieces overlap');
+    ok(split.length === 0, `${lang}-${width} person "${name}": the name is not cut mid-word and stays in the bar`, split.slice(0, 4));
+    ok(m.scroll <= 0, `${lang}-${width} person "${name}": no sideways scroll`, m.scroll);
+    ok(errs.length === 0, `${lang}-${width} person "${name}": no page errors`, errs);
+    if (OUT) await p.screenshot({ path: `${OUT}/${lang}-${width}-person-${NAMES.indexOf(name)}.png` });
     await ctx.close();
   }
   await b.close(); server.close();

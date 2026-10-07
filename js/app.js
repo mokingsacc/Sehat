@@ -1144,7 +1144,7 @@ const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, t
    A big title never breaks a word in two and never runs into its speaker button: on a narrow phone, with a wide
    font or with the phone's large-text setting, the title gets a little smaller instead (down to 70%). The header
    (app name, Listen, Emergency, settings) shrinks its name and the Emergency word together. */
-const FIT_SEL = 'main .hbtn .t, main .trow .t, main .title-row h1, main .sbig .t, main .tcard .t';
+const FIT_SEL = 'main .hbtn .t, main .trow .t, main .title-row h1, main .sbig .t, main .tcard .t, main .pn'; // .pn: a person's name in Family
 function wordsWidth(el) { // the widest word, in px
   let max = 0; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
   while ((n = w.nextNode())) {
@@ -1153,14 +1153,14 @@ function wordsWidth(el) { // the widest word, in px
   }
   return max;
 }
-function roomOf(el) { const cs = getComputedStyle(el); return el.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0); }
+function roomOf(el) { const cs = getComputedStyle(el); return el.getBoundingClientRect().width - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0) - 1; } // 1 px to spare: a word that only just fits still wraps
 function fitText() {
   try {
     const els = document.querySelectorAll(FIT_SEL);
     for (let i = 0; i < els.length; i++) {
       const el = els[i]; if (el.style.fontSize) el.style.fontSize = ''; // (no write when nothing was shrunk: long lists stay fast)
       if (!el.clientWidth) continue;
-      let size = parseFloat(getComputedStyle(el).fontSize); const min = size * 0.7;
+      let size = parseFloat(getComputedStyle(el).fontSize); const min = size * (el.classList.contains('pn') ? 0.6 : 0.7); // a name may get a little smaller still
       while (size > min && wordsWidth(el) > roomOf(el) + 0.5) { size -= 1; el.style.fontSize = size + 'px'; }
     }
     const top = document.querySelector('main .top'); if (!top) return;
@@ -1168,7 +1168,7 @@ function fitText() {
     if (!h) return;
     if (h.style.fontSize) h.style.fontSize = ''; if (pill && pill.parentNode.style.fontSize) pill.parentNode.style.fontSize = '';
     let hs = parseFloat(getComputedStyle(h).fontSize), ps = pill ? parseFloat(getComputedStyle(pill).fontSize) : 0;
-    const hmin = hs * 0.7, pmin = ps * 0.75;
+    const hmin = hs * 0.6, pmin = ps * 0.75; // (a long name in the bar: smaller rather than cut in two)
     while (wordsWidth(h) > roomOf(h) + 0.5 && (hs > hmin || ps > pmin)) {
       if (hs > hmin) { hs -= 1; h.style.fontSize = hs + 'px'; }
       if (pill && ps > pmin) { ps -= 1; pill.parentNode.style.fontSize = ps + 'px'; }
@@ -1178,6 +1178,7 @@ function fitText() {
 let fitT = 0;
 addEventListener('resize', () => { clearTimeout(fitT); fitT = setTimeout(fitText, 120); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitText); // the Dari and Pashto font arrives after the first paint
+if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { clearTimeout(fitT); fitT = setTimeout(fitText, 60); }); // and a font that loads later (Latin names in the Dari and Pashto books)
 
 /* ---------- router & rendering ---------- */
 function route() { return (location.hash || '#/home').slice(2).split('/'); }

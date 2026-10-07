@@ -503,7 +503,7 @@ img{max-width:100%;display:block}
 
 /* header bar */
 .top{gap:8px;padding:10px 0 8px;min-height:64px}
-.top h1{font-size:20px;line-height:1.3;min-width:0;overflow-wrap:anywhere}
+.top h1{font-size:20px;line-height:1.3;min-width:0;overflow-wrap:break-word;word-wrap:break-word} /* wraps between words; fitText() shrinks a long name so it is never cut mid-word */
 .top .round{width:44px;height:44px}
 .top .spk{width:48px;height:48px}
 .listen.hl-ic{width:44px;height:44px;min-height:0;margin:0;padding:0;border-radius:999px;flex:0 0 auto;justify-content:center;background:var(--ink)}
