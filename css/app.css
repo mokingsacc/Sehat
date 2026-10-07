@@ -543,7 +543,7 @@ img{max-width:100%;display:block}
 .hbtn.em .spk,.hbtn.fa .spk{background:#fff;border-color:#fff;color:var(--red)}
 .hbtn.fa{background:var(--red-t);border-color:#EBC3BF}
 .hbtn.fa .t{color:var(--red-d)}
-.hbtn.fa .hv,.hbtn.list .hv{width:96px;height:72px;border-radius:14px}
+.hbtn.fa .hv,.hbtn.list .hv,.hbtn.pic .hv{width:96px;height:72px;border-radius:14px}
 .hbtn.ask .hv{background:var(--teal);color:#fff;border-radius:999px}
 .hbtn.ask .hv svg{width:36px;height:36px}
 .hbtn.sec{flex-wrap:wrap;padding:0;overflow:hidden;align-items:stretch}
@@ -558,7 +558,7 @@ img{max-width:100%;display:block}
 .hbtn.share .hv svg{width:36px;height:36px}
 .hbtn.fbk .hv{background:var(--amber-t);color:var(--amber)}
 .hbtn.near .hv{background:var(--teal-t);color:var(--teal)}
-@media (max-width:359px){.hbtn{padding:10px;gap:8px}.hbtn .grow{gap:10px}.hbtn .hv{width:60px;height:60px}.hbtn.fa .hv,.hbtn.list .hv{width:76px;height:60px}.hbtn .t{font-size:19.5px}.hbtn.em .t{font-size:29px}.hbtn.em .hv{width:68px;height:68px}.hbtn .s{font-size:13.5px}}
+@media (max-width:359px){.hbtn{padding:10px;gap:8px}.hbtn .grow{gap:10px}.hbtn .hv{width:60px;height:60px}.hbtn.fa .hv,.hbtn.list .hv,.hbtn.pic .hv{width:76px;height:60px}.hbtn .t{font-size:19.5px}.hbtn.em .t{font-size:29px}.hbtn.em .hv{width:68px;height:68px}.hbtn .s{font-size:13.5px}}
 /* a vaccine due within 7 days: a slim strip under the header */
 .vstrip{display:flex;align-items:center;gap:10px;background:var(--amber-t);border-radius:16px;padding:6px 8px 6px 12px;margin:0 0 12px;font-weight:700;font-size:15px;line-height:1.4}
 [dir=rtl] .vstrip{padding:6px 12px 6px 8px}

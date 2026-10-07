@@ -423,10 +423,11 @@ function screenHome() {
       if (shareShown) return ''; shareShown = true;
       const c = cfg.shareCard || {}, and = typeof SH !== 'undefined' ? SH.homeSay() === c.say : !!window.FHBAndroid;
       const say = and ? c.say : c.webSay || c.say, sub = and ? c.sub : c.webSub || c.sub;
-      if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share', c.href, I.share, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
-      return bigBtn('share', '', I.share, T('share'), T('shareSub'), 'ui.share', ids, 'share');
+      const pic = picImg('img/pics/row-share.svg'); // a small scene, cropped like the hospital and first-aid rows
+      if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share pic', c.href, pic, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
+      return bigBtn('share pic', '', pic, T('share'), T('shareSub'), 'ui.share', ids, 'share');
     },
-    feedback() { return bigBtn('fbk', '#/feedback', ic('talk'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids); },
+    feedback() { return bigBtn('fbk pic', '#/feedback', picImg('img/pics/row-feedback.svg'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids); },
     install() { return S.installEvt || (platform() === 'ios' && !isStandalone()) ? bigBtn('inst', '', ic('phone'), T('install'), T('installSub'), 'ui.install', ids, 'install') : ''; },
     sendApp() { return M.share(); }, // the older name of the same card
     growth() { ids.push('ui.growth'); return `<div class="grid2">${GR.homeTile()}</div>`; }, // growth tracker tile (js/growth.js)
@@ -460,16 +461,17 @@ function topicRow(tid) {
 }
 const topicCard = topicRow; // js/tools.js lists topics with it too
 // tool rows (growth chart, breathing counter, "what does the number mean?"); growth shows once this version has it
+// [href, icon, title, sub, sayId, picture]: the picture is a small scene cropped like a topic row's (the icon is the fallback)
 const TOOL_ROWS = {
-  growth: ['#/growth', 'growth', 'growth', 'growthSub', 'ui.growth'],
-  breaths: ['#/tool/breaths', 'breathing-fast', 'breaths', '', 'ui.breaths'],
-  reading: ['#/tool/reading', 'bp', 'reading', '', 'ui.reading'],
+  growth: ['#/growth', 'growth', 'growth', 'growthSub', 'ui.growth', 'img/pics/row-growth.svg'],
+  breaths: ['#/tool/breaths', 'breathing-fast', 'breaths', '', 'ui.breaths', 'img/pics/row-breaths.svg'],
+  reading: ['#/tool/reading', 'bp', 'reading', '', 'ui.reading', 'img/pics/row-reading.svg'],
 };
 function toolRow(x, ids) {
   const r = TOOL_ROWS[x]; if (!r || !S.book.ui[r[2]] || !S.book.narration[r[4]]) return '';
   if (x === 'growth' && !(S.book.ui.growth && S.book.narration['ui.growth'])) return '';
   ids.push(r[4]);
-  return `<div class="trow tool" data-block="${esc(r[4])}"><a class="grow" href="${r[0]}"><span class="tp ticon">${ic(r[1])}</span><span class="tx"><span class="t">${esc(T(r[2]))}</span>${r[3] && S.book.ui[r[3]] ? `<span class="s">${esc(T(r[3]))}</span>` : ''}</span></a>${spk(r[4])}</div>`;
+  return `<div class="trow tool" data-block="${esc(r[4])}"><a class="grow" href="${r[0]}">${r[5] ? `<span class="tp"><img src="${esc(r[5])}" alt="" loading="lazy"></span>` : `<span class="tp ticon">${ic(r[1])}</span>`}<span class="tx"><span class="t">${esc(T(r[2]))}</span>${r[3] && S.book.ui[r[3]] ? `<span class="s">${esc(T(r[3]))}</span>` : ''}</span></a>${spk(r[4])}</div>`;
 }
 // a group heading inside a list: its title and a big speaker
 const groupHead = (title, sayId, cls = '') => `<div class="group-h${cls}" data-block="${esc(sayId)}"><h2 class="t">${esc(title)}</h2>${spk(sayId)}</div>`;
