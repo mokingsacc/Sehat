@@ -141,6 +141,12 @@ function measure(MIN) {
     p.on('requestfailed', (r) => { const u = r.url(); if (/\/audio\//.test(u) || /net::ERR_ABORTED/.test(r.failure() && r.failure().errorText) && /\.mp3/.test(u)) return; prob('request', cur, `${r.failure() && r.failure().errorText} ${u.replace(BASE, '')}`, run); });
     p.on('response', (r) => { const u = r.url(); if (r.status() >= 400 && !/\/audio\/.*\.mp3/.test(u)) prob('request', cur, `${r.status()} ${u.replace(BASE, '')}`, run); });
     await p.route(/workers\.dev|\/e$|\/r$/, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
+    // 0. the first run (a phone with nothing saved): only the language screen; tools/test_firstrun.cjs tests the rest
+    await p.goto(BASE + 'index.html?first'); await p.waitForSelector('main .welcome [data-setlang]', { timeout: 15000 }); cur = '#/welcome';
+    if (await p.$('.voices, .consent, [data-consent], [data-cdist], .dialog-wrap')) prob('first-run', cur, 'a setup screen or question besides the language', run);
+    { const m = await p.evaluate(measure, MIN_SPK); screens++; checks += m.probs.length + 2; for (const [cat, d] of m.probs) prob(cat, cur, d, run); if (m.scroll > 0) prob('scroll', cur, `${m.scroll} px sideways`, run); }
+    if (OUT) await p.screenshot({ path: path.join(OUT, `${run}-_welcome.png`), fullPage: true });
+    // then the language is set; counts are on by default, and the crawl switches them off (no counts from tests)
     await p.addInitScript(([lg, CV]) => { if (!localStorage.getItem('fhb.lang')) { localStorage.setItem('fhb.lang', JSON.stringify(lg)); localStorage.setItem('fhb.voice', JSON.stringify('f')); localStorage.setItem('fhb.consent', JSON.stringify({ v: CV, ok: false, day: '2026-10-07' })); } window.confirm = () => true; }, [lang, book.config.consentVersion]);
     await p.goto(BASE + 'index.html#/home'); await p.waitForSelector('main .hbtn', { timeout: 15000 });
 

@@ -312,11 +312,11 @@ export default {
   "worms": "Worms in the belly",
   "vaccines": "Vaccines"
  },
- "consentVersion": "2026-10-07.1",
+ "consentVersion": "2026-10-08.1",
  "privacy": {
   "ids": [
    "ui.privacy.phone",
-   "ui.privacy.counts",
+   "ui.privacy.usage",
    "ui.privacy.watch",
    "ui.privacy.voice",
    "ui.privacy.who",
@@ -328,10 +328,10 @@ export default {
     "ps": "هغه څه چې ستاسو په ټیلیفون کې پاتې کېږي: ستاسو ژبه، د ماشومانو نومونه، د زېږېدو نېټې او واکسینونه، او تنظیمات. دا هېڅکله نه لېږل کېږي.",
     "en": "What stays on your phone: your language, your children's names, birth dates and vaccines, and your settings. These are never sent."
    },
-   "ui.privacy.counts": {
-    "fa": "شمار استفاده، فقط اگر قبول کنید: گوشی هر روز حساب می‌کند که کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد. این شمار را روزی یک بار می‌فرستد، با نام ولسوالی اگر آن را انتخاب کرده باشید. هیچ نام، شمارۀ تلیفون، جای شما یا شمارۀ گوشی فرستاده نمی‌شود. چیزی که در جستجو می‌نویسید فرستاده نمی‌شود.",
-    "ps": "د کارونې شمېر، یوازې که ومنئ: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.",
-    "en": "Usage counts, only if you agree: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
+   "ui.privacy.usage": {
+    "fa": "شمار استفاده: گوشی هر روز حساب می‌کند که کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد. این شمار را روزی یک بار می‌فرستد، با نام ولسوالی اگر آن را انتخاب کرده باشید. هیچ نام، شمارۀ تلیفون، جای شما یا شمارۀ گوشی فرستاده نمی‌شود. چیزی که در جستجو می‌نویسید فرستاده نمی‌شود.",
+    "ps": "د کارونې شمېر: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.",
+    "en": "Usage counts: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
    },
    "ui.privacy.watch": {
     "fa": "دیدن مریضی‌های واگیر: اگر بگویید کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی، گروه سنی و روز فرستاده می‌شود، همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود.",

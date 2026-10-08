@@ -253,10 +253,9 @@
     "fumes-poisoning"
   ],
   "_urgentTopics": "Topics whose narration downloads first (the 'urgent' audio pack), together with the interface lines, every topic title and every red 'go to hospital now' box. The other clips download in packs by section: children, women, everyone.",
-  "consentMode": "ask",
-  "_consentMode": "Usage counts: \"ask\" = one narrated yes/no screen on first open and nothing is sent unless they say yes; \"on\" = a one-time notice, and counts are sent unless they switch them off. Both modes have a switch in Settings. Disease-watch questions only show while counts are allowed.",
-  "consentVersion": "2026-10-07.1",
-  "_consentVersion": "Version of the consent wording (ui.consent, ui.consentOn, ui.privacy.*). Stored on the phone with the answer and sent with every upload. Change it when the wording changes: in \"ask\" mode every phone is asked again.",
+  "_usageCounts": "Usage counts are on by default (Mo, 2026-10-08): no question on first open, and the switch in Settings and on the Privacy page turns them off. Anonymous daily totals only: no names, no GPS, no install id. The disease watch is separate: off until switched on in Settings (phones that said yes to the old first-open question keep it), and it only works while counts are on.",
+  "consentVersion": "2026-10-08.1",
+  "_consentVersion": "Version of the privacy wording (ui.privacy.*, ui.set.stats). Sent with every upload, so the dashboard can tell which wording the counts came under. Change it when that wording changes. 2026-10-08.1: counts on by default, no first-open question.",
   "emergency": [
     {
       "id": "newborn",

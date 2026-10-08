@@ -1,34 +1,46 @@
 // Usage counts, version 2: added up on the phone and sent as one small total per finished day.
-// No install id, no typed text, no GPS. Nothing is counted or sent until the family allows it
-// (config.consentMode "ask": a narrated yes/no screen on first open; "on": a one-time notice, sent unless switched off).
+// No install id, no typed text, no names, no GPS. On by default (Mo, 2026-10-08: no question on first open); the switch in
+// Settings and on the Privacy page turns it off, and then what was not sent yet is deleted.
+// Until a district is chosen (the small question a day after the first open, Settings, or a disease-watch report), the
+// totals are sent without one.
 // Page time counts only while the page is on the screen, and stops 2 minutes after the last touch unless narration is playing.
 // js/app.js calls init(ctx) once the book has loaded, page(route) after every render, and event(type) where it used to track().
 let C = null; // helpers from app.js: S, store, T, L, esc, spk, ic, I, top, listenBar, disclaimer, choose, sayRow, render, isStandalone, platform, localDay, randId, isPlaying
 const IDLE_MS = 120000, TICK_MS = 5000, KEEP_DAYS = 60, MAX_PAGES = 80, DAY = 864e5, RETRY_MS = 10 * 60000;
 const SEG = /^[a-z0-9-]{1,30}$/;
 const ACTS = new Set(['share', 'sendapp', 'a2hs', 'kid', 'dose', 'feedback', 'near', 'voice', 'lang']);
-const U = { days: {}, cur: null, lastInput: Date.now(), lastTick: 0, timer: 0, saveT: 0, sending: false, retryT: 0, step: null, prevPage: null };
+const U = { days: {}, cur: null, lastInput: Date.now(), lastTick: 0, timer: 0, saveT: 0, sending: false, retryT: 0, prevPage: null };
 
-/* ---------- consent ---------- */
+/* ---------- on unless switched off ---------- */
+// config.consentVersion is sent with every upload, so the dashboard can tell which privacy wording the counts came under
 const cfg = () => {
   const c = (C && C.S.shipped && C.S.shipped.config) || {}; // from the app itself, never from a book downloaded later
-  return { mode: c.consentMode === 'on' ? 'on' : 'ask', v: String(c.consentVersion || '1').replace(/[^0-9A-Za-z._-]/g, '').slice(0, 20) || '1' };
+  return { v: String(c.consentVersion || '1').replace(/[^0-9A-Za-z._-]/g, '').slice(0, 20) || '1' };
 };
-const answer = () => (C ? C.store.get('consent', null) : null); // {ok, v, day}
+const answer = () => (C ? C.store.get('consent', null) : null); // {ok, v, day}: set by the switch (or by the old first-open question)
 export function allowed() {
   if (!C || !C.S.shipped) return false;
-  const a = answer(), f = cfg();
-  if (f.mode === 'on') return !a || a.ok !== false; // sent unless switched off
-  return !!(a && a.ok && a.v === f.v); // only after "yes" to this version of the wording
+  const a = answer();
+  return !a || a.ok !== false; // sent unless switched off
 }
-const needAnswer = () => { const a = answer(); return !a || a.v !== cfg().v; };
-export const showConsent = () => !!(C && C.S.shipped && C.S.lang && C.S.voice && (U.step === 'district' || needAnswer()));
 export function setConsent(ok) {
   if (!C) return;
   C.store.set('consent', { ok: !!ok, v: cfg().v, day: C.localDay() });
   C.store.set('stats', !!ok); // the old switch, kept in step
   if (!ok) { U.days = {}; save(true); } // stop sharing: what was not sent yet is deleted
   else { U.lastTick = Date.now(); send(); }
+}
+
+/* ---------- the district question: one small pop-up a day after the first open ---------- */
+// st: {first: time of the first open, n: times asked, t: time of the last ask, has: a district is chosen}.
+// Asked once 24 hours after the first open; after "Not now", once more 7 days later; then never again.
+export const ASK_FIRST = DAY, ASK_AGAIN = 7 * DAY;
+export function districtAskDue(st, now) {
+  if (!st || st.has || !(st.first > 0)) return false;
+  const n = st.n | 0;
+  if (n === 0) return now - st.first >= ASK_FIRST;
+  if (n === 1) return st.t > 0 && now - st.t >= ASK_AGAIN;
+  return false;
 }
 
 /* ---------- start ---------- */
@@ -176,53 +188,13 @@ export async function askVoice() {
   return ok === 'yes';
 }
 
-/* ---------- screens: the consent question and the privacy page ---------- */
-export function screenConsent() {
-  const { esc, T, L, spk, S } = C, f = cfg(), sayId = f.mode === 'on' ? 'ui.consentOn' : 'ui.consent';
-  const sv = S.book.surveillance;
-  let html = `<div class="welcome consent"><div class="top"><h1>${esc(T('consentTitle'))}</h1></div>`;
-  if (U.step === 'district' && sv) {
-    const btn = (x) => `<button data-cdist="${esc(x.id)}">${esc(L(x.name))}</button>`;
-    html += `<div class="blk lead" data-block="ui.consentDistrict"><div class="body">${esc(L(S.book.narration['ui.consentDistrict']))}</div>${spk('ui.consentDistrict')}</div>`;
-    html += U.provinces
-      ? `<h2 class="sub-h">${esc(T('chooseProvince'))}</h2><div class="places">${sv.provinces.map(btn).join('')}</div>`
-      : `<h2 class="sub-h">${esc(L(sv.province.name))}</h2><div class="places">${sv.districts.map(btn).join('')}<button data-cdist="__other" class="other">${esc(T('otherProvince'))}</button></div>`;
-    html += `<button class="btn ghost" data-cdist="__skip">${esc(T('skip'))}</button>`;
-  } else {
-    html += `<div class="blk lead" data-block="${sayId}"><div class="body">${esc(L(S.book.narration[sayId]))}</div>${spk(sayId)}</div>`;
-    html += f.mode === 'on'
-      ? `<button class="btn" data-consent="yes">${esc(T('consentOk'))}</button><button class="btn ghost" data-consent="no">${esc(T('consentOff'))}</button>`
-      : `<button class="btn" data-consent="yes">${esc(T('consentYes'))}</button><button class="btn ghost" data-consent="no">${esc(T('consentNo'))}</button>`;
-    html += `<a class="privlink" href="#/privacy" data-consent="read">${esc(T('privacy'))} · ${esc(T('privacySub'))}</a>`;
-  }
-  return { html: html + '</div>', nav: false };
-}
+/* ---------- the privacy page ---------- */
 export function screenPrivacy() {
   const { esc, T, L, spk, ic, S } = C;
   const ids = Object.keys(S.book.narration).filter((k) => k.startsWith('ui.privacy.'));
-  let html = C.top(T('privacy'), { back: needAnswer() && S.lang && S.voice ? '#/home' : '#/settings' }) + C.listenBar(ids);
+  let html = C.top(T('privacy'), { back: '#/settings' }) + C.listenBar(ids);
   for (const id of ids) html += `<div class="blk tip" data-block="${esc(id)}">${ic(id === 'ui.privacy.voice' ? 'talk' : id === 'ui.privacy.watch' ? 'people' : id === 'ui.privacy.phone' ? 'phone' : 'check')}<div class="body">${esc(L(S.book.narration[id]))}</div>${spk(id)}</div>`;
-  if (!needAnswer() && S.book.narration['ui.set.stats']) ids.push('ui.set.stats');
-  if (!needAnswer()) html += `<div class="panel"><div class="srow" data-block="ui.set.stats">${ic('card')}<div class="grow"><div class="t">${esc(T(allowed() ? 'usageNowOn' : 'usageNowOff'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div>${S.book.narration['ui.set.stats'] ? spk('ui.set.stats') : ''}<button class="toggle" data-action="stats" aria-pressed="${allowed()}" aria-label="${esc(T('usageStats'))}"></button></div></div>`;
-  return { html, nav: needAnswer() ? false : 'settings', adult: true };
+  if (S.book.narration['ui.set.stats']) ids.push('ui.set.stats');
+  html += `<div class="panel"><div class="srow" data-block="ui.set.stats">${ic('card')}<div class="grow"><div class="t">${esc(T(allowed() ? 'usageNowOn' : 'usageNowOff'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div>${S.book.narration['ui.set.stats'] ? spk('ui.set.stats') : ''}<button class="toggle" data-action="stats" aria-pressed="${allowed()}" aria-label="${esc(T('usageStats'))}"></button></div></div>`;
+  return { html, nav: 'settings', adult: true };
 }
-// buttons on the consent screen (app.js's own click handler ignores these)
-document.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-consent], [data-cdist]'); if (!t || !C) return;
-  const d = t.dataset;
-  if (d.consent === 'read') return; // the link opens the privacy page; the question waits
-  if (d.consent) {
-    e.preventDefault(); const yes = d.consent === 'yes';
-    setConsent(yes);
-    const dist = C.store.get('district', null), sv = C.S.book.surveillance;
-    U.step = yes && sv && !dist ? 'district' : null; U.provinces = false;
-    if (yes) { U.cur = null; page(['consent']); } // count from here on
-    C.stopAudio(); if (location.hash !== '#/home') location.hash = '#/home'; C.render(); scrollTo(0, 0); return;
-  }
-  if (d.cdist) {
-    e.preventDefault(); C.stopAudio();
-    if (d.cdist === '__other') { U.provinces = true; C.render(); scrollTo(0, 0); return; }
-    if (d.cdist !== '__skip') C.store.set('district', d.cdist);
-    U.step = null; U.provinces = false; C.render(); scrollTo(0, 0);
-  }
-});

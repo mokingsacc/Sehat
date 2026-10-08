@@ -701,11 +701,6 @@
    "ps": "نږدې کلینیکونه او ډاکټران",
    "en": "Nearby clinics and doctors"
   },
-  "chooseVoice": {
-   "fa": "صدا را انتخاب کنید",
-   "ps": "غږ وټاکئ",
-   "en": "Choose a voice"
-  },
   "voice": {
    "fa": "صدا",
    "ps": "غږ",
@@ -1051,35 +1046,10 @@
    "ps": "وسایل",
    "en": "Tools"
   },
-  "consentTitle": {
-   "fa": "کمک به بهتر شدن صحت",
-   "ps": "د صحت په ښه کولو کې مرسته",
-   "en": "Help make Sehat better"
-  },
-  "consentYes": {
-   "fa": "بلی، شمار را بفرست",
-   "ps": "هو، شمېر ولېږه",
-   "en": "Yes, send counts"
-  },
-  "consentNo": {
-   "fa": "نخیر، نفرست",
-   "ps": "نه، مه یې لېږه",
-   "en": "No, do not send"
-  },
-  "consentOk": {
-   "fa": "خوب است",
-   "ps": "سمه ده",
-   "en": "OK"
-  },
-  "consentOff": {
-   "fa": "نفرست",
-   "ps": "مه یې لېږه",
-   "en": "Do not send"
-  },
-  "skip": {
+  "notNow": {
    "fa": "حالا نه",
    "ps": "اوس نه",
-   "en": "Skip"
+   "en": "Not now"
   },
   "privacy": {
    "fa": "حریم خصوصی",
@@ -1828,16 +1798,6 @@
    "ps": "چټکه او ژوره ساه اخلي",
    "en": "breathing fast and deep"
   },
-  "ui.consent": {
-   "fa": "آیا صحت می‌تواند شمار استفاده از برنامه را بفرستد؟ فقط شمار فرستاده می‌شود: کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد، برای هر روز یکجا. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. این به ما کمک می‌کند کتاب را بهتر بسازیم و بدانیم که چطور به خانواده‌ها کمک می‌کند. اگر نخیر بگویید، برنامه کاملاً کار می‌کند. هر وقت بخواهید، می‌توانید این را در تنظیمات تغییر دهید.",
-   "ps": "ایا صحت کولای شي د اپ د کارونې شمېر ولېږي؟ یوازې شمېر لېږل کېږي: کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو، د هرې ورځې لپاره یوځای. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. دا له موږ سره مرسته کوي چې کتاب ښه کړو او پوه شو چې کورنیو ته څنګه ګټه رسوي. که نه ووایئ، اپ بشپړ کار کوي. هر وخت چې وغواړئ، دا په تنظیماتو کې بدلولای شئ.",
-   "en": "May Sehat send counts of how the app is used? Only numbers are sent: which pages were opened, for how many minutes, and how often audio played, added up for each day. No names, no phone numbers and no location. This helps us improve the book and learn how it helps families. The app works fully if you say no. You can change this at any time in Settings."
-  },
-  "ui.consentOn": {
-   "fa": "صحت شمار استفاده از برنامه را می‌فرستد تا کتاب را بهتر بسازیم و بدانیم که چطور به خانواده‌ها کمک می‌کند. فقط شمار فرستاده می‌شود: کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد، برای هر روز یکجا. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر این را نمی‌خواهید، «نفرست» را بزنید. هر وقت بخواهید، می‌توانید این را در تنظیمات تغییر دهید.",
-   "ps": "صحت د اپ د کارونې شمېر لېږي، څو کتاب ښه کړو او پوه شو چې کورنیو ته څنګه ګټه رسوي. یوازې شمېر لېږل کېږي: کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو، د هرې ورځې لپاره یوځای. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که دا نه غواړئ، «مه یې لېږه» ووهئ. هر وخت چې وغواړئ، دا په تنظیماتو کې بدلولای شئ.",
-   "en": "Sehat sends counts of how the app is used, to help us improve the book and learn how it helps families. Only numbers are sent: which pages were opened, for how many minutes, and how often audio played, added up for each day. No names, no phone numbers and no location. If you do not want this, tap Do not send. You can change this at any time in Settings."
-  },
   "ui.consentDistrict": {
    "fa": "در کدام ولسوالی زندگی می‌کنید؟ این به ما نشان می‌دهد که هر منطقه به چه چیز نیاز دارد. فقط نام ولسوالی فرستاده می‌شود، نه قریه و نه نام شما. می‌توانید از این بگذرید.",
    "ps": "په کومه ولسوالۍ کې اوسېږئ؟ دا موږ ته ښيي چې هره سیمه څه ته اړتیا لري. یوازې د ولسوالۍ نوم لېږل کېږي، نه کلی او نه ستاسو نوم. کولای شئ دا پرېږدئ.",
@@ -1853,10 +1813,10 @@
    "ps": "هغه څه چې ستاسو په ټیلیفون کې پاتې کېږي: ستاسو ژبه، د ماشومانو نومونه، د زېږېدو نېټې او واکسینونه، او تنظیمات. دا هېڅکله نه لېږل کېږي.",
    "en": "What stays on your phone: your language, your children's names, birth dates and vaccines, and your settings. These are never sent."
   },
-  "ui.privacy.counts": {
-   "fa": "شمار استفاده، فقط اگر قبول کنید: گوشی هر روز حساب می‌کند که کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد. این شمار را روزی یک بار می‌فرستد، با نام ولسوالی اگر آن را انتخاب کرده باشید. هیچ نام، شمارۀ تلیفون، جای شما یا شمارۀ گوشی فرستاده نمی‌شود. چیزی که در جستجو می‌نویسید فرستاده نمی‌شود.",
-   "ps": "د کارونې شمېر، یوازې که ومنئ: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.",
-   "en": "Usage counts, only if you agree: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
+  "ui.privacy.usage": {
+   "fa": "شمار استفاده: گوشی هر روز حساب می‌کند که کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد. این شمار را روزی یک بار می‌فرستد، با نام ولسوالی اگر آن را انتخاب کرده باشید. هیچ نام، شمارۀ تلیفون، جای شما یا شمارۀ گوشی فرستاده نمی‌شود. چیزی که در جستجو می‌نویسید فرستاده نمی‌شود.",
+   "ps": "د کارونې شمېر: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.",
+   "en": "Usage counts: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
   },
   "ui.privacy.watch": {
    "fa": "دیدن مریضی‌های واگیر: اگر بگویید کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی، گروه سنی و روز فرستاده می‌شود، همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود.",

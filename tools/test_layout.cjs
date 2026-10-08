@@ -82,7 +82,7 @@ function measure(scale) {
       if (scale !== 1 && !['health', 'home', 'family'].includes(name)) continue;
       if (kids && name !== 'family' && name !== 'health') continue;
       await p.goto(BASE + 'index.html' + hash); await p.waitForSelector('main .top, main .topic-hero', { timeout: 8000 }).catch(() => {});
-      if (await p.$('.consent')) { const no = await p.$('.consent [data-consent=no], .consent button.ghost, [data-action=consent-no]'); if (no) await no.click(); await p.waitForTimeout(150); await p.goto(BASE + 'index.html' + hash); }
+      ok(!(await p.$('.welcome, .voices, .consent, .dialog-wrap')), `${lang} ${width} ${name}: no setup screen or question once the language is chosen`);
       await p.waitForTimeout(300);
       await p.evaluate(() => { document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }); return Promise.race([new Promise((r) => setTimeout(r, 2500)), Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })))]); });
       await p.evaluate(measure, scale); await p.waitForTimeout(150); const m = await p.evaluate(measure, scale);

@@ -25,8 +25,8 @@ const S = {
   lang: store.get('lang', null),
   voice: store.get('voice', null), // 'f' = a woman's voice, 'm' = a man's voice
   speed: store.get('speed', 1),
-  get stats() { return Stats.allowed(); }, set stats(v) { Stats.setConsent(v); }, // usage counts allowed? (consent, js/stats.js)
-  watch: store.get('watch', true), // "Help watch for outbreaks" (also needs stats on)
+  get stats() { return Stats.allowed(); }, set stats(v) { Stats.setConsent(v); }, // usage counts: on unless switched off (js/stats.js)
+  watch: store.get('watch', null), // "Help watch for outbreaks" (also needs stats on): off until switched on (see start())
   kids: store.get('kids', []),
   kid: store.get('kid', null),
   queueIds: [],
@@ -217,20 +217,21 @@ function flush() { flushReports(); Stats.send(); }
 function isStandalone() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
 function platform() { const u = navigator.userAgent; return /iPhone|iPad|iPod/.test(u) ? 'ios' : /Android/.test(u) ? 'android' : 'other'; }
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden') { stopAudio(); flushReports(); }
-  else if (!DL.active) startDownloads();
+  if (document.visibilityState === 'hidden') { stopAudio(); flushReports(); clearTimeout(DQ.timer); }
+  else { if (!DL.active) startDownloads(); askDistrictSoon(); } // opened again: is the district question due?
 });
 addEventListener('online', () => { flush(); sendFeedback(); clearTimeout(DL.retry); DL.wait = 15000; startDownloads(); });
 addEventListener('offline', () => packsUI());
 
 /* ---------- disease watch: "does someone in your home have this now?" ---------- */
-// Definitions come from content/src/syndromes.json (book.surveillance). A "yes" asks the district once (kept on
-// the phone) and an age group, then queues one report: syndrome, definition version, district, age group, day,
+// Definitions come from content/src/syndromes.json (book.surveillance). Off until the family switches it on in Settings
+// (phones that said yes to the old first-open question keep it on). A "yes" asks the district, there and then, if none
+// is chosen yet (kept on the phone), and an age group, then queues one report: syndrome, definition version, district, age group, day,
 // a random report id and the random install id. No names, no GPS, no free text. The same syndrome from this phone
 // counts once per 14 days. Symptom-finder searches that match a syndrome are queued as a weaker "search" signal
 // (once per syndrome per day). Everything waits in the queue offline and is sent to <stats server>/r.
 const SV = () => (S.book && S.book.surveillance) || null;
-const watching = () => !!(S.stats && S.watch && SV());
+const watching = () => !!(S.stats && S.watch === true && SV());
 const svSyn = (id) => (SV() ? SV().syndromes.find((x) => x.id === id) : null);
 const pad2 = (n) => String(n).padStart(2, '0');
 const localDay = (d = new Date()) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
@@ -263,14 +264,40 @@ function choose(html) {
     }));
   });
 }
-async function svPickDistrict(force) {
+const knownPlace = (d) => { const sv = SV(); return !!(sv && d && [...sv.districts, ...sv.provinces].some((x) => x.id === d)); };
+// the district buttons (Samangan's districts, then "Another province"); say: the question read aloud; close: the button
+// that closes it (Cancel, or "Not now" for the question a day after the first open)
+async function svPickDistrict(force, say = 'ui.district', close = `<button class="btn ghost" data-close>${esc(T('cancel'))}</button>`) {
   const sv = SV(); let d = store.get('district', null);
-  if (d && !force && [...sv.districts, ...sv.provinces].some((x) => x.id === d)) return d;
+  if (!force && knownPlace(d)) return d;
   const btn = (x) => `<button data-pick="${esc(x.id)}">${esc(L(x.name))}</button>`;
-  d = await choose(`<h2>${esc(L(sv.province.name))}</h2>${sayRow('ui.district', 'dq')}<div class="places">${sv.districts.map(btn).join('')}<button data-pick="__other" class="other">${esc(T('otherProvince'))}</button></div><button class="btn ghost" data-close>${esc(T('cancel'))}</button>`);
-  if (d === '__other') d = await choose(`<h2>${esc(T('chooseProvince'))}</h2>${sayRow('ui.province', 'dq')}<div class="places">${sv.provinces.map(btn).join('')}</div><button class="btn ghost" data-close>${esc(T('cancel'))}</button>`);
+  d = await choose(`<h2>${esc(L(sv.province.name))}</h2>${sayRow(say, 'dq')}<div class="places">${sv.districts.map(btn).join('')}<button data-pick="__other" class="other">${esc(T('otherProvince'))}</button></div>${close}`);
+  if (d === '__other') d = await choose(`<h2>${esc(T('chooseProvince'))}</h2>${sayRow('ui.province', 'dq')}<div class="places">${sv.provinces.map(btn).join('')}</div>${close}`);
   if (d) store.set('district', d);
   return d;
+}
+// The district question, once: usage counts go without a district until one is chosen. Checked each time the app
+// opens; due 24 hours after the first open, and once more 7 days after "Not now", then never again (js/stats.js
+// districtAskDue). Never over the Emergency screen, an animation, another question, narration that is playing, or a
+// recording screen.
+const DQ = { timer: 0 };
+function askDistrictSoon() { clearTimeout(DQ.timer); DQ.timer = setTimeout(askDistrict, 2500); } // after the screen has settled
+function askDistrictSafe() {
+  const r = route();
+  if (!S.lang || document.visibilityState !== 'visible' || P.on || AN.ctl) return false;
+  if (r[0] === 'emergency' || (r[0] === 'topic' && /^#\/emergency/.test(EM.back || ''))) return false;
+  if (r[0] === 'studio' || r[0] === 'feedback' || (r[0] === 'family' && r[1] === 'voice')) return false; // never while recording
+  return !$('.dialog-wrap, .anim-overlay');
+}
+async function askDistrict() {
+  if (!SV() || !S.stats) return;
+  const st = store.get('distAsk', {}) || {};
+  if (!Stats.districtAskDue({ first: store.get('firstOpen', 0), n: st.n, t: st.t, has: knownPlace(store.get('district', null)) }, Date.now())) return;
+  if (!askDistrictSafe()) return; // not now: asked at a later opening
+  store.set('distAsk', { n: (st.n | 0) + 1, t: Date.now() }); // counted when shown, so it is never asked more often
+  const d = await svPickDistrict(true, 'ui.consentDistrict', `<button class="btn ghost notnow" data-close>${esc(T('notNow'))}</button>`);
+  stopAudio();
+  if (d) { toast(T('thanks')); if (route()[0] === 'settings') render(); }
 }
 async function svYes(sid, card) {
   if (!svAskable(sid)) return;
@@ -367,19 +394,14 @@ function screenWelcome() {
     <button class="en" data-setlang="en">English</button></div>`, nav: false };
 }
 
-// after the language: choose a woman's or a man's voice (each card has a speaker that plays a sample in that voice)
+// the woman's or the man's voice, in Settings (each card has a speaker that plays a sample in that voice). The first run
+// does not ask: it starts with the woman's voice (the voice the Android app carries for Emergency and CPR).
 const voiceCount = (lg, v) => Object.keys(S.book.audio[lg + '-' + v] || {}).length;
 function voiceCards(attr) {
   const lg = S.lang, sel = S.voice || (voiceCount(lg, 'm') > voiceCount(lg, 'f') ? 'm' : 'f');
   return `<div class="voices">${['f', 'm'].map((v) => `<div class="voicebtn"><button class="big" ${attr}="${v}" aria-pressed="${v === sel}">${v === 'f' ? I.woman : I.man}<span class="vt">${esc(T(v === 'f' ? 'woman' : 'man'))}</span>${voiceCount(lg, v) ? '' : `<span class="vs">${esc(T('noClipsYet'))}</span>`}</button><button class="spk" data-sample="${v}" aria-label="${esc(T('listen'))} · ${esc(T(v === 'f' ? 'woman' : 'man'))}">${I.spk}</button></div>`).join('')}</div>`;
 }
 function sampleId(slot) { return ['ui.welcome', 'ui.voice', 'ui.home'].find((id) => clipSrc(id, slot)) || 'ui.welcome'; }
-function screenVoice() {
-  let html = `<div class="welcome voicestep"><div class="top"><button class="round" data-action="relang" aria-label="${esc(T('back'))}">${I.back}</button><h1>${esc(T('chooseVoice'))}</h1></div>`;
-  if (S.book.narration['ui.voice']) html += `<div class="blk lead" data-block="ui.voice"><div class="body">${esc(L(S.book.narration['ui.voice']))}</div>${spk('ui.voice')}</div>`;
-  html += voiceCards('data-setvoice') + '</div>';
-  return { html, nav: false };
-}
 
 function nextDueAll() {
   const v = S.book.topics.vaccines; if (!v) return null;
@@ -1250,9 +1272,7 @@ function render() {
   document.documentElement.dir = RTL(S.lang || 'fa') ? 'rtl' : 'ltr';
   let r = route(), out;
   try { // a broken link or page must never leave the app stuck on the loading screen
-  if (!S.lang) out = screenWelcome();
-  else if (!S.voice) out = screenVoice();
-  else if (r[0] !== 'privacy' && Stats.showConsent()) out = Stats.screenConsent();
+  if (!S.lang) out = screenWelcome(); // the first run is only this: choose the language
   else if (r[0] === 'privacy') out = Stats.screenPrivacy();
   else if (r[0] === 'topic') out = screenTopic(r[1]);
   else if (r[0] === 'children') out = screenChildren();
@@ -1283,7 +1303,7 @@ function render() {
   }
   if (P.on) updateListenBar();
   lastPage = r.join('/') || 'home';
-  Stats.page(!S.lang ? ['welcome'] : !S.voice ? ['voice'] : r[0] !== 'privacy' && Stats.showConsent() ? ['consent'] : r);
+  Stats.page(!S.lang ? ['welcome'] : r);
   if (r[0] === 'topic' && r[2]) setTimeout(() => { const el = document.querySelector(`[data-block="${CSS.escape(decodeURIComponent(r[2]))}"]`); if (el) { el.scrollIntoView({ block: 'center' }); el.classList.add('speaking'); setTimeout(() => el.classList.remove('speaking'), 2500); } }, 60);
   const af = $('#askform'); if (af) af.addEventListener('submit', (e) => { e.preventDefault(); ASK.q = $('#askq').value; $('#askres').innerHTML = askResults(); $('#askq').blur(); });
   // live results while typing; the cards are redrawn only when they change (fast on slow phones)
@@ -1316,12 +1336,13 @@ document.addEventListener('click', async (e) => {
   if (d.say) { e.preventDefault(); if (P.on && P.ids.length === 1 && P.ids[0] === d.say) stopAudio(); else play([d.say]); return; }
   if (d.sayLang) { e.preventDefault(); const prev = S.lang; S.lang = d.sayLang; play(['ui.welcome'], { slot: slotOf(d.sayLang) }); S.lang = prev; return; }
   if (d.sample) { e.preventDefault(); const sl = slotOf(S.lang, d.sample); if (P.on && P.strict && P.slot === sl) stopAudio(); else play([sampleId(sl)], { slot: sl, strict: true }); return; }
-  if (d.setlang) {
+  if (d.setlang) { // the first run: the language, and straight to the Health tab
     stopAudio(); track('lang', { to: d.setlang });
-    if (S.voice) setVoice(d.setlang, voiceFor(d.setlang)); else { S.lang = d.setlang; store.set('lang', S.lang); }
+    const first = !S.voice;
+    setVoice(d.setlang, voiceFor(d.setlang)); // a language not chosen yet starts with the woman's voice
+    if (first) persistOnce();
     location.hash = '#/home'; render(); return;
   }
-  if (d.setvoice) { stopAudio(); await setVoice(S.lang, d.setvoice); persistOnce(); location.hash = '#/home'; render(); return; }
   if (d.voice) { stopAudio(); await setVoice(S.lang, d.voice); render(); return; }
   if (d.lang) { stopAudio(); await setVoice(d.lang, voiceFor(d.lang)); render(); return; }
   if (d.speed) { S.speed = +d.speed; store.set('speed', S.speed); render(); return; }
@@ -1355,7 +1376,6 @@ document.addEventListener('click', async (e) => {
     case 'fbrec': fbRecord(); return;
     case 'fbplay': if (FB.blob) { P.audio.src = URL.createObjectURL(FB.blob); P.audio.play(); } return;
     case 'locate': locate(); return;
-    case 'relang': stopAudio(); S.lang = null; store.set('lang', null); render(); return;
     case 'delvoices': deleteVoices(); return;
     case 'anim': e.preventDefault(); openAnim(d.anim, d.variant); return;
     case 'emergency': EM.speak = true; return; // the link opens #/emergency, which reads ui.emergency aloud
@@ -1469,7 +1489,11 @@ async function start() {
   if (contentUrl()) { const ov = await savedOverlay(); if (ov) useOverlay(ov); }
   Stats.init({ S, store, T, L, esc, spk, ic, I, top, listenBar, choose, sayRow, stopAudio, render: () => render(), isStandalone, platform, localDay, randId, isPlaying: () => P.on });
   if (!S.kid && S.kids[0]) S.kid = S.kids[0].id;
+  if (!store.get('firstOpen', 0)) store.set('firstOpen', Date.now()); // the district question waits a day from here
+  if (S.watch === null) { const a = store.get('consent', null); S.watch = !!(a && a.ok === true); store.set('watch', S.watch); } // kept on only where the family said yes to the old question
+  if (S.lang && !S.voice) setVoice(S.lang, voiceFor(S.lang)); // chose a language on an older app but never a voice
   render();
+  askDistrictSoon();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     try {
       S.swReg = await navigator.serviceWorker.register('sw.js');

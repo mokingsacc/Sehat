@@ -2,7 +2,7 @@
 
 A narrated, offline family health book for villages in Samangan, Afghanistan. Dari and Pashto, a speaker next to every block of text, a children's section (vaccines, danger signs, common illnesses) and an adults' section (women's health, red flags, common conditions), a private child vaccine record, and anonymous usage counts.
 
-It is a plain website (a "progressive web app"). People open the link once and add it to the home screen. The first visit downloads only the app itself (words, pictures, about 380 KB). People then choose their language and a woman's or a man's voice, and the voice downloads quietly in packs (see below). Everything works without internet after that. When the phone is online it quietly checks for a newer book.
+It is a plain website (a "progressive web app"). People open the link once and add it to the home screen. The first visit downloads only the app itself (words, pictures, about 380 KB). The first run is one screen: people choose their language, and the app opens (the woman's voice to start; the man's voice is in Settings). The voice downloads quietly in packs (see below). Everything works without internet after that. When the phone is online it quietly checks for a newer book.
 
 ## Folder map
 - `index.html`, `css/`, `js/` – the app. No build tools, no frameworks.
@@ -22,7 +22,7 @@ It is a plain website (a "progressive web app"). People open the link once and a
 Create an empty repository, push this folder, then Settings → Pages → Deploy from branch → `main`, folder `/`. The address will be `https://<user>.github.io/<repo>/`. Put it in `content/src/config.json` as `appUrl` and rebuild.
 
 ## Voices and downloads
-- Each language has two voices: a woman's and a man's. People choose on the first screen after the language (each choice has a speaker to hear a sample) and can change it in Settings; each language remembers its own choice (a language not chosen yet starts with the woman's voice). If a voice has no clips yet it can still be chosen; a missing clip plays in the other voice of the same language, or with the phone's own speech.
+- Each language has two voices: a woman's and a man's. The first run does not ask (it starts with the woman's voice, the one the Android app carries for Emergency and CPR); people change it in Settings (each choice has a speaker to hear a sample); each language remembers its own choice (a language not chosen yet starts with the woman's voice). If a voice has no clips yet it can still be chosen; a missing clip plays in the other voice of the same language, or with the phone's own speech.
 - Only the chosen voice downloads, in packs: **urgent** first (interface lines, every topic title, every red "go to hospital now" box, and the danger-sign, red-flag and first-aid topics, set in `config.json` as `urgentTopics`), then **children**, **women**, **everyone**. Inside the urgent pack the Emergency screen, the four CPR pages and the CPR films come first (about 3 MB), then the other emergency pages (`urgentFirst()` in `js/app.js`). Two clips at a time; if the signal drops or the app closes it carries on later from where it stopped.
 - On mobile data, "data saver" or 2G only the Emergency and CPR part of the urgent pack downloads by itself (`book.packs.first`, about 3 MB); the rest waits for Wi-Fi or a tap on Download. Settings shows each pack with its size, progress and a Download button, free space on the phone, and **Delete voices**. Any clip not yet on the phone plays from the internet when tapped and is then kept.
 - Size: clips are MP3, mono, 16 kHz, 24 kbps (plays on every iPhone and Android, old WebViews too; Opus would save only about a quarter and needs re-encoding). One voice of one language is about 65 MB for all 2,468 clips (urgent pack about 26 MB, of which Emergency and CPR about 3 MB); `tools/build.py` prints the sizes. The website holds all four voices (about 260 MB, well under the 1 GB Pages limit); `tts-manifest.json` and `tts-usage.json` are not published.
@@ -46,7 +46,7 @@ python3 tools/build.py
 `content/scripts/narration-fa.tsv` and `narration-ps.tsv` list every clip with its text, for printing or for a studio.
 
 ## Usage counts (Cloudflare, free)
-Phones send anonymous counts (a random install id, language, phone type, pages opened, clips played, minutes used) when they have internet. Names and the child record never leave the phone.
+Phones send anonymous daily totals (language, phone type, app version, district if chosen, pages opened, clips played, minutes used) when they have internet: no install id, no names, no GPS, and the child record never leaves the phone. Counts are on by default with no question on first open; the switch in Settings and on the Privacy page turns them off. A day after the first open, one small question asks for the district ("Not now" asks once more 7 days later, then never again); until then the totals go without a district.
 1. Make a free Cloudflare account. Install wrangler on a computer (`npm i -g wrangler`), then in `server/`:
 ```
 wrangler login
@@ -59,7 +59,7 @@ wrangler deploy
 3. Your dashboard: `https://family-health-book.<your-subdomain>.workers.dev/dashboard?key=<your secret word>`.
 
 ## Disease watch (community surveillance)
-On pages about illnesses that spread (measles, diarrhoea, cough, Congo fever, dog bites, TB, jaundice, meningitis, salak) and under matching symptom-finder results, the app asks "Does someone in your home have this now?" (spoken, with Yes / No). Yes asks the district once (kept on the phone) and an age group, then queues a report: illness, definition version, district, age group, day, random ids. No names, GPS or free text. Settings has a "Help watch for outbreaks" switch (on by default; nothing is sent when it or "Usage counts" is off). Reports go to the same server as the usage counts (`.../r`).
+On pages about illnesses that spread (measles, diarrhoea, cough, Congo fever, dog bites, TB, jaundice, meningitis, salak) and under matching symptom-finder results, the app asks "Does someone in your home have this now?" (spoken, with Yes / No). Yes asks the district if none is chosen yet (kept on the phone) and an age group, then queues a report: illness, definition version, district, age group, day, random ids. No names, GPS or free text. Settings has a "Help watch for outbreaks" switch: off by default (phones that said yes to the old first-open question keep it on), and nothing is sent when it or "Usage counts" is off. Reports go to the same server as the usage counts (`.../r`).
 - Definitions, triggers and alert rules: `content/src/syndromes.json` (versioned); places: `content/src/districts.json`. `build.py` copies them to `server/surveillance-defs.js`.
 - Dashboard: `/watch?key=...` (weekly counts by illness, district and age, baseline, alerts, auditable CSV/JSON exports), methods at `/watch/methods`. Server code: `server/surveillance.js`; wiring: `server/SURVEILLANCE_WIRING.md`.
 
