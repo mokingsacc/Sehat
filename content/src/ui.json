@@ -1984,9 +1984,9 @@
    "en": "Updating the book: when there is internet, the book gets its new pages by itself. Tap Check to look now. The book works without internet."
   },
   "ui.set.stats": {
-   "fa": "شمار استفاده: اگر این را روشن کنید، گوشی هر روز مجموع صفحه‌هایی را که باز شده‌اند می‌فرستد. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر خاموش باشد، کتاب همان طور کار می‌کند.",
-   "ps": "د کارونې شمېر: که دا روښانه کړئ، ټیلیفون هره ورځ د پرانیستل شویو پاڼو ټولګه لېږي. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که بند وي، کتاب همداسې کار کوي.",
-   "en": "Usage counts: if you turn this on, the phone sends daily totals of which pages were opened. No names, no phone numbers and no location are sent. The book works the same if it is off."
+   "fa": "شمار استفاده: وقتی این روشن است، گوشی هر روز مجموع صفحه‌هایی را که باز شده‌اند می‌فرستد. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر خاموش باشد، کتاب همان طور کار می‌کند.",
+   "ps": "د کارونې شمېر: کله چې دا روښانه وي، ټیلیفون هره ورځ د پرانیستل شویو پاڼو ټولګه لېږي. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که بند وي، کتاب همداسې کار کوي.",
+   "en": "Usage counts: while this is on, the phone sends daily totals of which pages were opened. No names, no phone numbers and no location are sent. The book works the same if it is off."
   },
   "ui.set.privacy": {
    "fa": "حریم خصوصی: چه چیز فرستاده می‌شود و چه در گوشی شما می‌ماند. برای خواندن یا شنیدن، اینجا را بزنید.",
