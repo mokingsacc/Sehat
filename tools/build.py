@@ -152,6 +152,27 @@ anim_text = ANIM.narration()
 for k, L in anim_text.items(): say(k, L)
 anim_groups = ANIM.groups()
 
+# "What is wrong?" picture tiles (content/src/symptoms.json): the speaker on each reads its label. "say" reuses a line
+# that already has these words (and its recordings); otherwise the label is its own line, ui.sym.<id>.
+# "pic" is the tile picture (tools/symptom_pics.py writes img/symptoms/<id>.webp); without it the tile shows the icon.
+def words_of(t): return " ".join(re.sub(r"[.,:!?\u060c\u061f]", " ", t or "").lower().split())
+def same_words(a, b): return words_of(a) == words_of(b)
+book_symptoms = []
+for x in symptoms:
+    sid = x.get("say")
+    if sid and sid not in narr: print("WARNING symptom", x["id"], "reuses unknown narration id", sid); sid = None
+    if sid and not all(same_words(narr[sid][lg], x["label"][lg]) for lg in LANGS):
+        print("WARNING symptom", x["id"], "reuses", sid, "but its words differ from the label: the tile has its own line now"); sid = None
+    if not sid: sid = f"ui.sym.{x['id']}"; say(sid, x["label"])
+    pic = x.get("pic")
+    if pic and not exists(pic): print("WARNING symptom", x["id"], "picture missing:", pic); pic = None
+    y = dict(x, icon=icon(x.get("icon", "warning")), say=sid, go=[g for g in x["go"] if g in out_topics])
+    if pic: y["pic"] = pic
+    else: y.pop("pic", None)
+    book_symptoms.append(y)
+# interface lines (ui.*) stay ahead of the page lines in the book, as the dashboard editor rebuilds them (server/editor-core.js)
+for k in [k for k in narr if not k.startswith("ui.")]: narr[k] = narr.pop(k)
+
 # audio index, one "slot" per language and voice: audio/<lang>-<f|m>/<id>.<ext> (f = woman, m = man).
 # The old layout audio/<lang>/ is still read, as the woman's voice of that language.
 audio, audio_bytes = {}, {}
@@ -178,7 +199,7 @@ book = {
     "topics": out_topics,
     "narration": narr,
     "audio": audio,
-    "symptoms": [dict(x, icon=icon(x.get("icon", "warning")), go=[g for g in x["go"] if g in out_topics]) for x in symptoms],
+    "symptoms": book_symptoms,
     "facilities": facilities,
     # animations the player can open (anim/<name>.js), the groups with a picker (cpr) and each one's narration ids;
     # the dashboard editor uses this to check "anim" blocks and to rebuild the recording order like this script does
@@ -259,7 +280,7 @@ book["bundle"] = {"slots": [s for s in BUNDLE_SLOTS if audio.get(s)], "ids": fir
 
 # precache list: everything the app needs offline except audio
 pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json",) if exists(p)]  # WHO growth tables (js/growth.js)
-for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png"):
+for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png", "img/symptoms/*.webp"):
     pre += sorted(os.path.relpath(p, ROOT) for p in glob.glob(J(pat)))
 # js/cine/*.js is the CPR drawing kit and anim/cine/*.js the CPR versions built with it: js/anim.js loads anim/cine/<name>.js
 # when it is there and falls back to the SVG version when it is not, so precache whatever exists (sub-folders are listed

@@ -1,5 +1,5 @@
 {
-  "_note": "Offline symptom finder. Each entry: words people might say or type (Dari, Pashto, English), the picture icon, and the pages to open. Add words freely; matching ignores spelling marks.",
+  "_note": "Offline symptom finder. Each entry: words people might say or type (Dari, Pashto, English), the picture icon, and the pages to open. Add words freely; matching ignores spelling marks. Optional: say = an existing narration id with the same words as the label (its speaker reuses that recording; otherwise the label is narrated as ui.sym.<id>); pic = the tile picture, img/symptoms/<id>.webp, set by tools/symptom_pics.py (without it the tile shows the icon).",
   "symptoms": [
     {
       "id": "notbreathing",
@@ -45,6 +45,7 @@
     {
       "id": "fever",
       "icon": "fever",
+      "say": "fever.title",
       "label": {
         "fa": "تب",
         "ps": "تبه",
@@ -399,6 +400,7 @@
     {
       "id": "chest",
       "icon": "heart",
+      "say": "anaemia.urgent.chest-pain",
       "label": {
         "fa": "درد سینه",
         "ps": "د سینې درد",
@@ -638,6 +640,7 @@
     {
       "id": "fits",
       "icon": "convulsion",
+      "say": "after-birth.urgent.fits",
       "label": {
         "fa": "تشنج",
         "ps": "اختلاج",
@@ -849,6 +852,7 @@
     {
       "id": "sugar",
       "icon": "sugar",
+      "say": "diabetes.title",
       "label": {
         "fa": "مرض شکر",
         "ps": "د شکرې ناروغي",

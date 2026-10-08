@@ -495,6 +495,35 @@ ui.fac.pul-e-khumri-nasaji-hospital	د نساجۍ او حکیم سنايي پو�
 ui.fac.baghlan-jadid-district-hospital	د بغلان مرکزي ولسوالۍ روغتون. د ولسوالۍ روغتون.	Central District Hospital, Baghlan-e-Jadid. District hospital.
 ui.fac.bamyan-hospital	د بامیان روغتون. ولایتي روغتون.	Bamyan Hospital. Provincial hospital.
 ui.fac.bamyan-old-hospital	د بامیان زوړ روغتون. روغتیايي مرکز.	Old Bamyan Hospital. Health centre.
+ui.sym.notbreathing	ساه نه اخلي یا بې‌هوښه دی	Not breathing or unconscious
+ui.sym.cough	ټوخی	Cough
+ui.sym.breathing	ساه لنډي	Breathing problems
+ui.sym.diarrhoea	نس ناستی	Diarrhoea
+ui.sym.vomiting	کانګې	Vomiting
+ui.sym.rash	دانې	Rash or spots
+ui.sym.sore	زخم او سالک	Sores and wounds
+ui.sym.pregnancy	امیندواري	Pregnancy
+ui.sym.bleeding	وینه بهېدل	Bleeding
+ui.sym.headache	سر درد	Headache
+ui.sym.belly	د نس درد	Belly pain
+ui.sym.back	ملا درد	Back pain
+ui.sym.burn	سوځېدنه	Burn
+ui.sym.fumes	ګاز او لوګی	Stove fumes
+ui.sym.bite	د سپي چیچل	Dog bite
+ui.sym.poison	زهر	Poisoning
+ui.sym.newborn	نوی زېږېدلی	Newborn baby
+ui.sym.feeding	شیدې او خواړه	Feeding
+ui.sym.thin	ډنګروالی	Thin or not growing
+ui.sym.yellow	ژېړی	Yellow skin or eyes
+ui.sym.tired	ستړیا او د وینې کمښت	Tired or pale
+ui.sym.pressure	د وینې فشار	Blood pressure
+ui.sym.mind	خپګان او اندېښنه	Sadness and worry
+ui.sym.longcough	اوږد ټوخی	Long cough or TB
+ui.sym.animals	څاروي او کنه	Animals and ticks
+ui.sym.disaster	زلزله او سېلاب	Earthquake and flood
+ui.sym.vaccine	واکسین	Vaccines
+ui.sym.choking	په ستوني کې بندېدل	Choking
+ui.sym.safety	د ماشومانو پېښې	Child accidents
 vaccines.title	واکسینونه	Vaccines
 vaccines.lead	واکسین ستاسو ماشوم له خطرناکو ناروغیو ساتي. ستاسو ماشوم باید تر ۲ کلنۍ پورې ۶ ځله واکسین ته بوتلل شي.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	د زېږون پر وخت: د بي سي جي واکسین، د نری رنځ پر وړاندې؛ د پولیو څاڅکي، د پولیو (ګوډوالی) پر وړاندې؛ د هیپاټایټس ب واکسین، د هیپاټایټس ب، چې د ځیګر ناروغي ده پر وړاندې.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.

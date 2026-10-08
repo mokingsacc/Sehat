@@ -1033,8 +1033,14 @@ function screenAsk() {
   const canMic = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
   html += `<form class="askbox" id="askform"><input id="askq" value="${esc(ASK.q)}" placeholder="${esc(T('askPlaceholder'))}" autocomplete="off" enterkeyhint="search">${canMic ? `<button type="button" class="mic" data-action="mic" aria-label="${esc(T('ask'))}">${I.mic}</button>` : ''}</form>`;
   html += `<div id="askres">${askResults()}</div>`;
-  html += groupHead(T('orPick'), 'ui.orPick', ' sayh') + `<div class="symgrid">${(S.book.symptoms || []).map((s) => `<button class="sym" data-sym="${esc(s.id)}">${ic(s.icon)}<span>${esc(L(s.label))}</span></button>`).join('')}</div>`;
+  html += groupHead(T('orPick'), 'ui.orPick', ' sayh') + `<div class="symgrid">${(S.book.symptoms || []).map(symTile).join('')}</div>`;
   return { html, nav: 'home' };
+}
+// a "What is wrong?" picture tile: tap the picture or the words to open it, the speaker on the picture's corner reads
+// the words (s.say). Its picture (s.pic, tools/symptom_pics.py) or, until there is one, its icon drawn large.
+function symTile(s) {
+  const say = s.say || 'ui.sym.' + s.id;
+  return `<div class="symt" data-block="${esc(say)}"><button class="sym" data-sym="${esc(s.id)}"><span class="pp">${s.pic ? `<img src="${esc(s.pic)}" alt="" loading="lazy">` : ic(s.icon)}</span><span class="t">${esc(L(s.label))}</span></button>${spk(say)}</div>`;
 }
 function askResults(symId, live) {
   let syms = [], blocks = [];

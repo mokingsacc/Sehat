@@ -495,6 +495,35 @@ ui.fac.pul-e-khumri-nasaji-hospital	شفاخانه نساجی و پوهنتون 
 ui.fac.baghlan-jadid-district-hospital	شفاخانه ولسوالی مرکزی بغلان. شفاخانۀ ولسوالی.	Central District Hospital, Baghlan-e-Jadid. District hospital.
 ui.fac.bamyan-hospital	شفاخانه بامیان. شفاخانۀ ولایتی.	Bamyan Hospital. Provincial hospital.
 ui.fac.bamyan-old-hospital	شفاخانه قدیم بامیان. مرکز صحی.	Old Bamyan Hospital. Health centre.
+ui.sym.notbreathing	نفس نمی‌کشد یا بی‌هوش است	Not breathing or unconscious
+ui.sym.cough	سرفه	Cough
+ui.sym.breathing	نفس تنگی	Breathing problems
+ui.sym.diarrhoea	اسهال	Diarrhoea
+ui.sym.vomiting	استفراغ	Vomiting
+ui.sym.rash	دانه پوست	Rash or spots
+ui.sym.sore	زخم و سالک	Sores and wounds
+ui.sym.pregnancy	حاملگی	Pregnancy
+ui.sym.bleeding	خونریزی	Bleeding
+ui.sym.headache	سردرد	Headache
+ui.sym.belly	شکم درد	Belly pain
+ui.sym.back	کمر درد	Back pain
+ui.sym.burn	سوختگی	Burn
+ui.sym.fumes	گاز و دود بخاری	Stove fumes
+ui.sym.bite	گزیدگی سگ	Dog bite
+ui.sym.poison	زهر	Poisoning
+ui.sym.newborn	نوزاد	Newborn baby
+ui.sym.feeding	شیر و غذا	Feeding
+ui.sym.thin	لاغری	Thin or not growing
+ui.sym.yellow	زردی	Yellow skin or eyes
+ui.sym.tired	خستگی و کم‌خونی	Tired or pale
+ui.sym.pressure	فشار خون	Blood pressure
+ui.sym.mind	غم و پریشانی	Sadness and worry
+ui.sym.longcough	سرفۀ طولانی	Long cough or TB
+ui.sym.animals	حیوانات و کنه	Animals and ticks
+ui.sym.disaster	زلزله و سیلاب	Earthquake and flood
+ui.sym.vaccine	واکسین	Vaccines
+ui.sym.choking	گیر کردن در گلو	Choking
+ui.sym.safety	حوادث اطفال	Child accidents
 vaccines.title	واکسین‌ها	Vaccines
 vaccines.lead	واکسین طفل شما را از مرض‌های خطرناک محافظت می‌کند. طفل شما تا ۲ سالگی ۶ بار باید برای واکسین برود.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	هنگام ولادت: واکسین بی سی جی، برای توبرکلوز (سل)؛ قطرهٔ پولیو، برای فلج اطفال (پولیو)؛ واکسین هپاتیت ب، برای هپاتیت ب، که یک مرض جگر است.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.
