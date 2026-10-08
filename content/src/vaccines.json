@@ -294,6 +294,19 @@
           }
         },
         {
+          "id": "opv4",
+          "name": {
+            "fa": "قطرهٔ پولیو ۴",
+            "ps": "د پولیو څاڅکي ۴",
+            "en": "Polio drops 4"
+          },
+          "protects": {
+            "fa": "فلج اطفال (پولیو)",
+            "ps": "پولیو (ګوډوالی)",
+            "en": "polio"
+          }
+        },
+        {
           "id": "ipv2",
           "name": {
             "fa": "پیچکاری پولیو ۲",
@@ -401,14 +414,14 @@
   "women": {
     "id": "vaccines.td",
     "title": {
-      "fa": "واکسین تیتانوس برای زنان",
-      "ps": "د ښځو لپاره د ټیټانوس واکسین",
-      "en": "Tetanus vaccine for women (TT or Td)"
+      "fa": "واکسین تیتانوس و خناق برای زنان",
+      "ps": "د ښځو لپاره د ټیټانوس او خناق واکسین",
+      "en": "Tetanus and diphtheria vaccine for women (Td)"
     },
     "text": {
-      "fa": "هر زن ۱۵ تا ۴۵ ساله و هر زن حامله باید ۵ نوبت این واکسین را بگیرد. این واکسین مادر و نوزاد را از تیتانوس و خناق محافظت می‌کند.",
-      "ps": "هره ۱۵ تر ۴۵ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.",
-      "en": "Every woman aged 15 to 45, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria."
+      "fa": "هر زن ۱۵ تا ۴۹ ساله و هر زن حامله تا ۵ نوبت این واکسین را لازم دارد؛ کلینیک کارتش را می‌بیند که چند نوبت دیگر لازم است. این واکسین مادر و نوزاد را از تیتانوس، و مادر را از خناق محافظت می‌کند.",
+      "ps": "هره ۱۵ تر ۴۹ کلنه ښځه او هره امیندواره ښځه تر ۵ ځلو پورې دا واکسین ته اړتیا لري؛ کلینیک یې کارت ګوري چې څو ځله نور پکار دي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس، او مور له خناق څخه ساتي.",
+      "en": "Every woman aged 15 to 49, and every pregnant woman, needs up to 5 doses; the clinic checks her card to see how many she still needs. It protects her and her newborn baby from tetanus, and her from diphtheria."
     },
     "doses": [
       {
@@ -459,7 +472,10 @@
     "WHO EMRO Afghanistan EPI review report (2017): schedule and tetanus toxoid for women",
     "CDC MMWR 12 Dec 2024: polio eradication progress, Afghanistan (IPV2 introduction)",
     "WHO EMR Measles and Rubella Bulletin (2024): rubella vaccine not yet introduced in Afghanistan",
-    "WHO position papers on vaccines; WHO/UNICEF Facts for Life (2010): immunization"
+    "WHO position papers on vaccines; WHO/UNICEF Facts for Life (2010): immunization",
+    "WHO/UNICEF WIISE immunization schedule as reported by Afghanistan for 2023, 2024 and 2025 (https://xmart-api-public.who.int/WIISE/AD_SCHEDULES?$filter=COUNTRY%20eq%20%27AFG%27%20and%20YEAR%20eq%202025): OPV dose 5 (counting the birth dose) and IPV 2 at 9 months with measles 1; Td (TD_S) for women 15 to 49 and pregnant women at the first contact, 5 doses",
+    "WHO/UNICEF WIISE vaccine introductions, Afghanistan: measles-rubella planned January 2028, HPV planned 2029",
+    "WHO Summary Table 1 (Dec 2025), footnote 5: Td in place of TT; 5 doses only if first vaccinated as an adult"
   ],
   "review": [
     "IPV2 (second polio injection) was introduced in 2020 or 2021 (WUENIC says 2020, CDC says 2021); its age in Afghanistan is not confirmed. Placed at 9 months with measles 1, as in many Gavi countries. Please confirm with the MoPH EPI schedule.",
@@ -471,6 +487,9 @@
     "PCV protects against pneumonia, meningitis and ear infections; written as 'pneumonia' for simplicity.",
     "Content pass 3 (MoPH fixes): the women's vaccine age band is now 15 to 45 (BPHS 2010, 'TT to women 15-45'); the CHW manual (2005) says 14-49 and WHO says 15-49. Please match the Afghan TT/Td card. The English title says 'TT or Td' because MoPH's switch to Td is not documented.",
     "Content pass 3: new note vaccines.birth-day (born at home: clinic within 24 hours for hepatitis B, WUENIC 'within 24 hours of delivery') and vaccines.campaign (polio drops, sometimes vitamin A or measles, in campaigns; still go to the clinic visits). Campaigns have been site-based since September 2024.",
-    "Content pass 3: IPV2 at 9 months is still unconfirmed (moph-guidance.md item 1): no public MoPH or UNICEF Afghanistan source gives its age. Do not record the 9-month clip until NEPI or UNICEF confirms."
+    "Content pass 3: IPV2 at 9 months is still unconfirmed (moph-guidance.md item 1): no public MoPH or UNICEF Afghanistan source gives its age. Do not record the 9-month clip until NEPI or UNICEF confirms.",
+    "Medical audit 2026-10-08 CH4: IPV2 at 9 months is now CONFIRMED (WIISE country reports 2022 to 2025), so the first and last review notes above are answered and the 9-month clip can be recorded. Polio drops at 9 months added as 'Polio drops 4' (Afghanistan's 2023, 2024 and 2025 reports list OPV dose 5 at 9 months, counting the birth dose; the app does not number the birth dose). This answers the third note. Check the number on a current Afghan vaccine card.",
+    "Medical audit 2026-10-08 CH9: still measles only; Afghanistan plans measles-rubella (MR) for January 2028 (it was August 2026) and HPV for girls in 2029; no typhoid vaccine. Update 'measles' to 'measles and rubella' when NEPI confirms.",
+    "Medical audit 2026-10-08 CH8 / MA9 and MA10: the women's vaccine is now 'Tetanus and diphtheria vaccine for women (Td)', ages 15 to 49 (Afghanistan's 2024 and 2025 reports to WHO, which use Td, TD_S), so the diphtheria sentence is right. 'Needs 5 doses' is now 'needs up to 5 doses; the clinic checks her card to see how many she still needs' (WHO: 5 doses only if first vaccinated as an adult). This replaces the 15 to 45 band of the content pass 3 note (BPHS 2010). If a current Afghan card still says TT, drop the diphtheria words instead."
   ]
 }

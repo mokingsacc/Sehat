@@ -544,9 +544,9 @@
    "en": "Vaccines: which ones are given, and which one is next."
   },
   "ui.fam.row.td": {
-   "fa": "واکسین تیتانوس برای زنان: پنج نوبت، او و نوزادانش را محافظت می‌کند.",
-   "ps": "د ښځو لپاره د ټیټانوس واکسین: پنځه ډوزه، هغه او د هغې نوي زېږېدلي ماشومان ساتي.",
-   "en": "Tetanus vaccine for women: five doses protect her and her newborn babies."
+   "fa": "واکسین تیتانوس برای زنان: تا پنج نوبت، او و نوزادانش را محافظت می‌کند.",
+   "ps": "د ښځو لپاره د ټیټانوس واکسین: تر پنځو ډوزونو پورې، هغه او د هغې نوي زېږېدلي ماشومان ساتي.",
+   "en": "Tetanus vaccine for women: up to five doses protect her and her newborn babies."
   },
   "ui.fam.row.growth": {
    "fa": "رشد: وزن و قد، با جدول رشد.",
