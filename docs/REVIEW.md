@@ -4834,3 +4834,19 @@ still asks for it there and then. The district question never shows over the Eme
   flagged this); (2) Dari «جستجو می‌کنید» and Pashto «لټوئ» for "look up", and «این از اول روشن است» / «دا له پیله روښانه دی».
 - Tests: tools/test_firstrun.cjs (96 checks) now also covers: the watch on for a new phone, a report sent end to end (no
   GPS or names in it), a symptom-picture signal, the Settings switch off staying off, and four kinds of older phone.
+
+## Dashboard v2 (8 October 2026)
+
+- What changed: every dashboard page now has one header with tabs, English / Dari / Pashto, and a sign-in page
+  (/signin) with a session cookie, CSRF checks and a strict CSP. New overview (/dashboard), Data for research (/data:
+  codebook, data versions, place codes, exports by day or ISO epi week, export history), audit log (/audit, append-only,
+  owner only) and a DHIS2 export for disease-watch counts. Old personal links still work. Details: docs/DASHBOARD.md.
+- Privacy: shareable usage exports hide a row unless some day in it had 5 or more phones; disease-watch counts 1-4 are
+  "<5"; DHIS2 values under 5 are left out; full files are owner only. District is the smallest place; no GPS anywhere.
+- To check: (1) the Dari and Pashto dashboard words in server/i18n.js (staff-facing, machine-written, not yet read by
+  a native speaker), and the province names built as "ولایت X" (Dari) and "X ولایت" (Pashto) in tools/build.py;
+  (2) official district codes: only Samangan AF20 and Aybak AF2001 are confirmed, the others are blank in exports
+  until checked (server/codes.js); (3) whether viewers should see free-text feedback (they still do, as before);
+  (4) DHIS2 codes are Sehat's own (SEHAT_...) until the HMIS team gives their UIDs (DHIS2_MAP in wrangler.toml).
+- Tests: tools/test_dashboard.mjs (176 checks), tools/test_editor.mjs (52), validate 0 errors. Screenshots:
+  previews/dashboard-v2/.
