@@ -57,9 +57,9 @@
         "en": "Make drinking water safe"
       },
       "text": {
-        "fa": "آب نوشیدنی را بجوشانید تا خوب به جوش بیاید، یا طوری که کارمند صحی نشان می‌دهد، کلورین بیندازید.",
-        "ps": "د څښلو اوبه تر هغه وایشوئ چې ښې په جوش راشي، یا لکه څنګه چې روغتیايي کارکوونکی درښيي، کلورین ورواچوئ.",
-        "en": "Bring drinking water to a full, bubbling boil, or add chlorine as the health worker shows you."
+        "fa": "آب نوشیدنی را بجوشانید تا خوب به جوش بیاید و ۱ دقیقه بجوشد، یا طوری که کارمند صحی نشان می‌دهد، کلورین بیندازید.",
+        "ps": "د څښلو اوبه تر هغه وایشوئ چې ښې په جوش راشي او ۱ دقیقه وایشي، یا لکه څنګه چې روغتیايي کارکوونکی درښيي، کلورین ورواچوئ.",
+        "en": "Bring drinking water to a full, rolling boil and keep it boiling for 1 minute, or add chlorine as the health worker shows you."
       }
     },
     {
@@ -167,7 +167,9 @@
     "WHO Guidelines for drinking-water quality, 4th edition (2022): household water treatment (boiling, chlorination) and safe storage",
     "WHO Guidelines on sanitation and health (2018)",
     "WHO Five Keys to Safer Food (2006)",
-    "Afghanistan BPHS (2010): chlorine solution in the Health Post kit; WHO Guidelines for drinking-water quality (2017): household water treatment"
+    "Afghanistan BPHS (2010): chlorine solution in the Health Post kit; WHO Guidelines for drinking-water quality (2017): household water treatment",
+    "WHO technical brief: Boil water (2015): bring water to a rolling boil; CDC: keep it boiling for 1 minute (the margin the water animation shows)",
+    "CDC 'When and how to wash your hands' and UNICEF handwashing guidance: scrub for at least 20 seconds (the whole WHO handwash takes 40 to 60 seconds)"
   ],
   "review": [
     "Latrine distance from wells and springs is not given as a number (Sphere uses at least 30 metres). Add it if wanted.",
@@ -178,6 +180,8 @@
     "Afghan Dari uses تشناب for both toilet and latrine; check that this fits a village pit latrine.",
     "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
     "Chlorine supply at health posts depends on outbreak response stocks (WHO/UNICEF); 'can give' is conditional on purpose.",
-    "Content merge 2: animation(s) handwashing, spread shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...)."
+    "Content merge 2: animation(s) handwashing, spread shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...).",
+    "Medical audit 2026-10-08 IL-17: hygiene.safe-water was 'a full, bubbling boil'; now 'a full, rolling boil and keep it boiling for 1 minute', the same as the water animation (anim.water.s2), whose picture has a 1-minute timer. WHO says a rolling boil; one minute more does no harm.",
+    "Medical audit 2026-10-08 IL-16: the handwashing animation (anim.handwashing.s6) now says 'at least 20 seconds' (was 'about 20 seconds') and cites CDC and UNICEF; the WHO poster gives 40 to 60 seconds for the whole handwash. docs/ANIMATIONS.md updated."
   ]
 }

@@ -17,9 +17,9 @@
       "id": "malaria.lead",
       "type": "lead",
       "text": {
-        "fa": "ملاریا از گزیدن پشه‌ای می‌آید که شب می‌گزد، بیشتر در ماه‌های گرم و در شرق و جنوب کشور. تب با لرزه و عرق می‌دهد. یک معاینهٔ تیز خون آن را نشان می‌دهد و دوا آن را علاج می‌کند.",
-        "ps": "ملاریا د هغه ماشي له چیچلو څخه راځي چې د شپې چیچي، ډېری په تودو میاشتو کې او د هېواد په ختیځ او سویل کې. تبه له لړزې او خولو سره پیدا کوي. د وینې یوه چټکه معاینه یې ښيي او درمل یې علاجوي.",
-        "en": "Malaria comes from the bite of a mosquito that bites at night, mostly in the warm months and in the east and south of the country. It causes fever with shivering and sweats. A quick blood test shows it and medicine cures it."
+        "fa": "ملاریا از گزیدن پشه‌ای می‌آید که شب می‌گزد، بیشتر در ماه‌های گرم و در شرق و جنوب شرق کشور. تب با لرزه و عرق می‌دهد. یک معاینهٔ تیز خون آن را نشان می‌دهد و دوا آن را علاج می‌کند.",
+        "ps": "ملاریا د هغه ماشي له چیچلو څخه راځي چې د شپې چیچي، ډېری په تودو میاشتو کې او د هېواد په ختیځ او سویل ختیځ کې. تبه له لړزې او خولو سره پیدا کوي. د وینې یوه چټکه معاینه یې ښيي او درمل یې علاجوي.",
+        "en": "Malaria comes from the bite of a mosquito that bites at night, mostly in the warm months and in the east and south-east of the country. It causes fever with shivering and sweats. A quick blood test shows it and medicine cures it."
       }
     },
     {
@@ -32,9 +32,9 @@
         "en": "Fever? Get the test"
       },
       "text": {
-        "fa": "هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه وقت می‌گیرد.",
-        "ps": "په تودو میاشتو کې هره تبه، یا ختیځ یا سویل ته له سفر وروسته، په همغه ورځ د ملاریا د وینې معاینې ته اړتیا لري. معاینه ۱۵ دقیقې نیسي.",
-        "en": "Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes."
+        "fa": "هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب شرق، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه وقت می‌گیرد.",
+        "ps": "په تودو میاشتو کې هره تبه، یا ختیځ یا سویل ختیځ ته له سفر وروسته، په همغه ورځ د ملاریا د وینې معاینې ته اړتیا لري. معاینه ۱۵ دقیقې نیسي.",
+        "en": "Any fever in the warm months, or after travel to the east or south-east, needs a malaria blood test the same day. The test takes 15 minutes."
       }
     },
     {
@@ -184,9 +184,9 @@
           "id": "malaria.urgent.pregnant",
           "icon": "pregnant",
           "text": {
-            "fa": "خانم حامله با تب بلند",
-            "ps": "امیندواره ښځه له لوړې تبې سره",
-            "en": "a pregnant woman with high fever"
+            "fa": "خانم حامله با تب، که آن‌قدر ضعف دارد که از بستر بلند شده نمی‌تواند",
+            "ps": "امیندواره ښځه له تبې سره، چې دومره کمزورې وي چې له بستره پاڅېدای نه شي",
+            "en": "a pregnant woman with fever who is too weak to get out of bed"
           }
         }
       ]
@@ -202,6 +202,15 @@
       },
       "items": [
         {
+          "id": "malaria.soon.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "خانم حامله با هر تب: برای معاینهٔ ملاریا",
+            "ps": "امیندواره ښځه له هرې تبې سره: د ملاریا د معاینې لپاره",
+            "en": "a pregnant woman with any fever, for the malaria test"
+          }
+        },
+        {
           "id": "malaria.soon.shiver",
           "icon": "fever",
           "text": {
@@ -214,9 +223,9 @@
           "id": "malaria.soon.travel",
           "icon": "calendar",
           "text": {
-            "fa": "تب در ظرف یک ماه بعد از سفر به شرق یا جنوب",
-            "ps": "ختیځ یا سویل ته له سفر وروسته په یوه میاشت کې تبه",
-            "en": "fever within a month of travel to the east or south"
+            "fa": "تب در ظرف یک ماه بعد از سفر به شرق یا جنوب شرق",
+            "ps": "ختیځ یا سویل ختیځ ته له سفر وروسته په یوه میاشت کې تبه",
+            "en": "fever within a month of travel to the east or south-east"
           }
         },
         {
@@ -254,7 +263,7 @@
           "text": {
             "fa": "بدون معاینه از دکان تابلیت ملاریا نخرید؛ دوای غلط وقت را ضایع می‌کند.",
             "ps": "له معاینې پرته له دوکان څخه د ملاریا ګولۍ مه اخلئ؛ غلط درمل وخت ضایع کوي.",
-            "en": "Do not buy malaria tablets from a shop without a test."
+            "en": "Do not buy shop malaria tablets without a test; wrong medicine wastes time."
           }
         },
         {
@@ -282,9 +291,9 @@
       "type": "tip",
       "icon": "window",
       "text": {
-        "fa": "در سمنگان ملاریا کم است. اکثر واقعات در کسانی است که در شرق یا جنوب کار کرده یا سفر کرده‌اند؛ به کارمند صحی بگویید کجا بوده‌اید.",
-        "ps": "په سمنګان کې ملاریا لږه ده. ډېری پېښې په هغو کسانو کې دي چې په ختیځ یا سویل کې یې کار کړی یا سفر کړی؛ روغتیايي کارکوونکي ته ووایاست چې چېرته وئ.",
-        "en": "In Samangan malaria is uncommon. Most cases are in people who worked or travelled in the east or south; tell the health worker where you have been."
+        "fa": "در سمنگان ملاریا کم است. اکثر واقعات در کسانی است که در شرق، مثل ننگرهار، کنر یا لغمان، کار کرده یا سفر کرده‌اند؛ به کارمند صحی بگویید کجا بوده‌اید.",
+        "ps": "په سمنګان کې ملاریا لږه ده. ډېری پېښې په هغو کسانو کې دي چې په ختیځ کې، لکه ننګرهار، کونړ یا لغمان، یې کار کړی یا سفر کړی؛ روغتیايي کارکوونکي ته ووایاست چې چېرته وئ.",
+        "en": "In Samangan malaria is uncommon. Most cases are in people who worked or travelled in the east, such as Nangarhar, Kunar or Laghman; tell the health worker where you have been."
       }
     }
   ],
@@ -294,7 +303,9 @@
     "WHO Afghanistan Infectious Disease Outbreaks Situation Report, week 48 2025: 77,303 confirmed cases in 2025, highest incidence in Nuristan, Kunar, Laghman and Nangarhar; MoPH NDSR week 33 2026: 38,553 cases in 2026 to date, rising since week 9",
     "WHO EMRO Afghanistan malaria programme pages (2026): about 95 percent of cases are P. vivax; transmission concentrated in the east and south-east, low in the north",
     "Afghanistan BPHS (2010) and IPEHS (2019): rapid diagnostic tests from community to CHC level; chloroquine and sulfadoxine-pyrimethamine at Health Post, quinine injection at CHC, artesunate and primaquine at district hospital and above; Afghanistan National Essential Medicines List (2014)",
-    "Leslie T et al., G6PD deficiency in Afghanistan (PLoS Med 2010 and later): about 14 percent of Pashtun men, so primaquine needs care"
+    "Leslie T et al., G6PD deficiency in Afghanistan (PLoS Med 2010 and later): about 14 percent of Pashtun men, so primaquine needs care",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 3rd ed., 2015), fever in pregnancy: fever over 38 is treated at the health centre; urgent referral for fever with fast breathing, stiff neck, lethargy or too weak to stand",
+    "WHO EMRO, Afghanistan malaria programme: about 90 percent of cases from six eastern and south-eastern provinces (Nangarhar, Laghman, Kunar, Nuristan, Khost, Paktika)"
   ],
   "review": [
     "Chloroquine named as the common-type (P. vivax) medicine with 'another medicine' (primaquine, 14 days) following WHO 2025 and Afghanistan's national policy; Mo should confirm the current national malaria treatment guideline (chloroquine resistance, primaquine and G6PD testing) and whether naming is wanted.",
@@ -304,6 +315,9 @@
     "Rapid test 'free': under BPHS/EPHS. Confirm RDT stock at Samangan BHCs.",
     "Severe malaria block names artesunate (district hospital level per IPEHS); if Mo prefers, say 'malaria medicine by injection'.",
     "Pashto 'د ماشي جالۍ' for bed net (Dari پشه‌خانه) to be checked by a native speaker.",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 MA5/IL-9: malaria.urgent.pregnant was 'a pregnant woman with high fever' (hospital now), while malaria.pregnant says 'tested the same day' and pregnancy-danger says fever = clinic today. Now red only with a red sign, in the words of pregnancy-danger.urgent.fever-weak ('a pregnant woman with fever who is too weak to get out of bed'; the other red items on this page apply to her too), and amber malaria.soon.pregnant 'a pregnant woman with any fever, for the malaria test' (PCPNC; WHO malaria fact sheet: pregnant women are a high-risk group and should be tested).",
+    "Medical audit 2026-10-08 IL-13: 'the east and south' became 'the east and south-east' in malaria.lead, malaria.test and malaria.soon.travel; malaria.samangan now names Nangarhar, Kunar or Laghman (WHO EMRO; WHO sitrep week 48 2025: highest incidence Nuristan, Kunar, Laghman, Nangarhar).",
+    "Medical audit 2026-10-08 IL-26: the English of malaria.dont.shop now says 'wrong medicine wastes time', as the Dari and Pashto already did (was 'Do not buy malaria tablets from a shop without a test.'). English only: no new recording."
   ]
 }

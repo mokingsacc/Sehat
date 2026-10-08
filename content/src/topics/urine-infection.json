@@ -157,9 +157,9 @@
           "id": "urine-infection.urgent.pregnant",
           "icon": "pregnant",
           "text": {
-            "fa": "حامله، با تب، درد شکم یا دردهای ولادت",
-            "ps": "امیندواره، له تبې، د نس درد یا د زېږون دردونو سره",
-            "en": "pregnant, with fever, belly pain or contractions"
+            "fa": "حامله، با سوزش ادرار و تب، درد کمر، استفراغ یا دردهای ولادت",
+            "ps": "امیندواره، د متیازو له سوزش او تبې، ملا درد، کانګو یا د زېږون دردونو سره",
+            "en": "pregnant, with burning urine and fever, back pain, vomiting or labour pains"
           }
         },
         {
@@ -295,7 +295,9 @@
     "WHO Pocket Book of Hospital Care for Children (2013): urinary tract infection in children",
     "Afghanistan BPHS (2010): amoxicillin and cotrimoxazole at Basic Health Centre; nitrofurantoin at district hospital level; Afghanistan National Essential Medicines List (2014): nitrofurantoin",
     "Burden: no Afghanistan-specific data on urinary infection were found; MICS 2022-23 and AHS 2018 show low antenatal care coverage in Samangan (ANC4+ 18 percent), so screening in pregnancy is often missed",
-    "WHO recommendations on antenatal care (2016), rec. B.1.2: for infection without symptoms in pregnancy, urine culture (or Gram stain) rather than a dipstick"
+    "WHO recommendations on antenatal care (2016), rec. B.1.2: for infection without symptoms in pregnancy, urine culture (or Gram stain) rather than a dipstick",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 3rd ed., 2015), fever in pregnancy: fever over 38 is treated at the health centre; urgent referral for fever with fast breathing, stiff neck, lethargy or too weak to stand",
+    "MSF Clinical guidelines: acute pyelonephritis (fever with flank pain needs injected antibiotics; pregnant women are referred)"
   ],
   "review": [
     "Antibiotic names (nitrofurantoin, amoxicillin) follow WHO AWaRe and the Afghan lists; nitrofurantoin was in the district-hospital list of BPHS 2010, not BHC, so BHCs may give cotrimoxazole or amoxicillin instead. Mo to confirm or remove names.",
@@ -303,6 +305,7 @@
     "'No urine for 12 hours' as an adult danger sign is practical wording, not a WHO figure.",
     "The 'after sex' advice and 'inside the private parts' do-not item need a check for acceptable Dari/Pashto wording when narrated aloud.",
     "Section is 'women' although men and children are mentioned; the symptom finder should link it from 'burning urine' for everyone.",
-    "Medical audit 2026-10-08 MA18: the clinic box no longer promises only a strip: 'tests the urine (with a strip, or in a laboratory where there is one)'. A strip is fine with symptoms; WHO prefers a laboratory test for the antenatal check. The drug names (MA17) are Mo's call and are unchanged."
+    "Medical audit 2026-10-08 MA18: the clinic box no longer promises only a strip: 'tests the urine (with a strip, or in a laboratory where there is one)'. A strip is fine with symptoms; WHO prefers a laboratory test for the antenatal check. The drug names (MA17) are Mo's call and are unchanged.",
+    "Medical audit 2026-10-08 MA5/IL-9: urine-infection.urgent.pregnant was 'pregnant, with fever, belly pain or contractions' (any fever or belly pain in pregnancy = hospital now). Now 'pregnant, with burning urine and fever, back pain, vomiting or labour pains' (PCPNC: treat at the health centre, refer for fever, flank pain or vomiting; kidney infection needs injected antibiotics, MSF). Plain fever in pregnancy is clinic today on every page (pregnancy-danger.soon.fever, malaria.soon.pregnant, dengue.soon.risk, reading-temp.soon.pregnant, the temperature checker); severe belly pain stays red on pregnancy-danger."
   ]
 }

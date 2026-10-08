@@ -395,6 +395,7 @@
               "pneumonia-adult.soon.sputum",
               "pneumonia-adult.soon.elderly",
               "pneumonia-adult.soon.weeks",
+              "pneumonia-adult.soon.blood",
               "asthma.soon.wheeze"
             ]
           }
@@ -449,7 +450,8 @@
           "Baby red: IMCI 2014 sick young infant: fast breathing 60+, severe chest indrawing, not feeding well, fever or low temperature, movement only when stimulated, convulsions.",
           "Child red: IMCI general danger signs and stridor in a calm child (severe pneumonia or very severe disease); chest indrawing RED by Mo's default (iCCM refers chest indrawing; the IMCI 2014 facility chart treats it as pneumonia with oral amoxicillin); blue lips (central cyanosis): WHO Pocket Book 2013.",
           "Child amber: fast breathing alone = clinic today (IMCI pneumonia: 50+ at 2-12 months, 40+ at 1-5 years); cough 14+ days (IMCI: assess for TB); wheeze (IMCI/Pocket Book); fever more than 2 days (app's existing line, Mo to confirm); not getting better; whooping cough (Pocket Book).",
-          "Older: WHO IMAI acute care: respiratory distress, cyanosis, confusion, chest pain with breathlessness, haemoptysis, high fever with rigors = refer; cough 2+ weeks = TB screen (WHO TB Module 2, 2021)."
+          "Older: WHO IMAI acute care: respiratory distress, cyanosis, confusion, chest pain with breathlessness, haemoptysis, high fever with rigors = refer; cough 2+ weeks = TB screen (WHO TB Module 2, 2021).",
+          "IL-7 (medical audit 2026-10-08): streaks of blood in the sputum = clinic today for a TB test (pneumonia-adult.soon.blood); a lot of blood = hospital now (pneumonia-adult.urgent.blood). WHO TB fact sheet 2026."
         ]
       }
     },
@@ -2616,7 +2618,7 @@
             ]
           },
           "older": {
-            "title": "red-flags.soon",
+            "title": "red-flags.today",
             "items": [
               "red-flags.soon.weight-loss",
               "tb.soon.weight",
@@ -2648,7 +2650,8 @@
         "_notes": [
           "Child red: WHO SAM 2013 / IMCI complicated severe acute malnutrition (bilateral pitting oedema; SAM with no appetite, lethargy, vomiting everything, fever or hypothermia).",
           "Child amber: MUAC red or very thin (IMCI uncomplicated SAM or MAM), weight loss, persistent diarrhoea.",
-          "Older: IMAI: severe weakness or confusion = refer; weight loss, cough, trouble swallowing = clinic this week (TB screening WHO 2021; IMAI)."
+          "Older: IMAI: severe weakness or confusion = refer; weight loss, cough, trouble swallowing = clinic this week (TB screening WHO 2021; IMAI).",
+          "Older amber box title is red-flags.today (clinic today), since it holds the TB signs tb.soon.cough and tb.soon.weight (clinic today on the TB page; medical audit 2026-10-08 IL-7)."
         ]
       }
     },
@@ -3391,10 +3394,7 @@
           "all": {
             "title": "falls-fractures.urgent",
             "items": [
-              {
-                "id": "ui.ask.trapped",
-                "icon": "house"
-              },
+              "falls-fractures.urgent.trapped",
               "falls-fractures.urgent.height",
               "falls-fractures.urgent.spine",
               "falls-fractures.urgent.limb",

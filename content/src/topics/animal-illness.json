@@ -62,9 +62,9 @@
         "en": "Check for ticks every day"
       },
       "text": {
-        "fa": "نزدیک حیوانات لباس آستین‌دراز بپوشید و هر روز بدن خود و اطفال را ببینید. کنه را با تکه بگیرید و دور کنید، با دست خالی نگیرید.",
-        "ps": "د څارویو تر څنګ اوږدې لستوڼې جامې واغوندئ او هره ورځ خپل او د ماشومانو بدن وګورئ. کنه په ټوکر ونیسئ او لرې یې کړئ، په لوڅ لاس یې مه نیسئ.",
-        "en": "Wear long sleeves near animals and check your own and your children's bodies every day. Pull ticks off with a cloth, not bare hands."
+        "fa": "نزدیک حیوانات لباس آستین‌دراز بپوشید و هر روز بدن خود و اطفال را ببینید. کنه را با موچینک، نزدیک پوست، آهسته بیرون بکشید و آن را له نکنید. بعد با صابون بشویید.",
+        "ps": "د څارویو تر څنګ اوږدې لستوڼې جامې واغوندئ او هره ورځ خپل او د ماشومانو بدن وګورئ. کنه په موچنۍ، پوستکي ته نږدې، ورو راوباسئ او مه یې ځپئ. بیا په صابون ومینځئ.",
+        "en": "Wear long sleeves near animals, and check your body and your children's every day. Pull ticks out slowly with tweezers close to the skin, without crushing them. Then wash with soap."
       }
     },
     {
@@ -77,9 +77,9 @@
         "en": "Never eat animals that died sick"
       },
       "text": {
-        "fa": "گوشت حیوانی را که ناگهان مرده یا مریض بوده نخورید و پوستش را نکنید. آن را عمیق دفن کنید و به داکتر مواشی خبر بدهید.",
-        "ps": "د هغه څاروي غوښه مه خورئ او پوستکی یې مه باسئ چې ناڅاپه مړ شوی یا ناروغ و. ژور یې ښخ کړئ او د څارویو ډاکټر ته خبر ورکړئ.",
-        "en": "Do not eat or skin an animal that died suddenly or was sick. Bury it deep and tell the animal doctor."
+        "fa": "حیوانی را که ناگهان مرده یا مریض بوده نخورید، پوستش را نکنید و آن را پاره نکنید. به داکتر مواشی خبر بدهید؛ او می‌گوید که آن را بسوزانید یا دفن کنید.",
+        "ps": "هغه څاروی چې ناڅاپه مړ شوی یا ناروغ و مه خورئ، پوستکی یې مه باسئ او مه یې څیرئ. د څارویو ډاکټر ته خبر ورکړئ؛ هغه به ووايي چې وسوځول شي که ښخ شي.",
+        "en": "Do not eat, skin or cut open an animal that died suddenly or was sick. Tell the animal doctor, who will say whether to burn or bury it."
       }
     },
     {
@@ -113,6 +113,21 @@
       }
     },
     {
+      "id": "animal-illness.death",
+      "type": "step",
+      "icon": "warning",
+      "title": {
+        "fa": "اگر کسی با تب و خونریزی فوت کند",
+        "ps": "که څوک له تبې او وینې بهېدو سره مړ شي",
+        "en": "If someone dies with fever and bleeding"
+      },
+      "text": {
+        "fa": "جسد را خودتان نشویید و آماده نکنید؛ خون می‌تواند مریضی را انتقال بدهد. فوراً به کلینیک خبر بدهید و بگذارید کارکنان آموزش‌دیده در دفن بی‌خطر کمک کنند.",
+        "ps": "جسد پخپله مه مینځئ او مه یې چمتو کوئ؛ وینه ناروغي لېږدولای شي. سمدستي کلینیک ته خبر ورکړئ او پرېږدئ چې روزل شوي کارکوونکي په خوندي ښخولو کې مرسته وکړي.",
+        "en": "Do not wash or prepare the body yourselves; the blood can pass the illness. Tell the clinic at once, and let trained staff help with a safe burial."
+      }
+    },
+    {
       "id": "animal-illness.clinic",
       "type": "clinic",
       "title": {
@@ -123,7 +138,7 @@
       "text": {
         "fa": "تب مالت با معاینهٔ خون تایید و با دو انتی‌بیوتیک برای حدود ۶ هفته (داکسی‌سایکلین با یک دوای دیگر) علاج می‌شود. سیاه‌زخم جلدی با انتی‌بیوتیک مثل پنسیلین علاج می‌شود. دورهٔ کامل را تمام کنید.",
         "ps": "د مالټا تبه د وینې په معاینه تاییدېږي او په دوو انټي بیوټیکونو شاوخوا ۶ اونۍ (ډاکسي سایکلین له بل درمل سره) علاجېږي. د پوستکي تور زخم په انټي بیوټیک لکه پنسلین علاجېږي. بشپړه دوره پای ته ورسوئ.",
-        "en": "Malta fever is confirmed by a blood test and cured with two antibiotics for about 6 weeks (doxycycline with another). Skin anthrax is cured with antibiotics such as penicillin."
+        "en": "Malta fever is confirmed by a blood test and cured with two antibiotics for about 6 weeks (doxycycline and another). Skin anthrax is cured with antibiotics like penicillin. Finish the whole course."
       }
     },
     {
@@ -224,6 +239,15 @@
             "ps": "کنه چې نه لرې کېږي",
             "en": "a tick that will not come out of the skin"
           }
+        },
+        {
+          "id": "animal-illness.soon.birds",
+          "icon": "cough",
+          "text": {
+            "fa": "تب یا سرفه در ظرف ۱۰ روز بعد از دست زدن به مرغ مریض یا مرده",
+            "ps": "د ناروغو یا مړو مرغانو له لاس وهلو وروسته په ۱۰ ورځو کې تبه یا ټوخی",
+            "en": "fever or cough within 10 days of touching sick or dead birds"
+          }
         }
       ]
     },
@@ -294,7 +318,11 @@
     "Burden: MoPH NDSR week 33 2026 (CCHF outbreak in Samangan; anthrax outbreaks in Balkh and Jawzjan); WHO outbreak sitrep week 48 2025 (1,468 CCHF cases, 101 deaths); Akbarian et al. PLoS NTD 2015 (brucellosis and Q fever, Herat)",
     "WHO fact sheet: Brucellosis (2020): diagnosis by blood test, prolonged combination antibiotics (doxycycline plus rifampicin or streptomycin); WHO fact sheet: Anthrax (2024): cutaneous anthrax curable with antibiotics",
     "WHO fact sheet: Crimean-Congo haemorrhagic fever (2022): supportive care, ribavirin used, isolation and protection of health workers and carers",
-    "Afghanistan BPHS (2010): doxycycline at BHC, penicillin at BHC; Afghanistan National Essential Medicines List (2014): ribavirin on the hospital list; WHO Afghanistan outbreak report week 48 2025: 1,468 CCHF cases and 101 deaths in 2025 (Balkh among the highest), peak around Eid al-Adha"
+    "Afghanistan BPHS (2010): doxycycline at BHC, penicillin at BHC; Afghanistan National Essential Medicines List (2014): ribavirin on the hospital list; WHO Afghanistan outbreak report week 48 2025: 1,468 CCHF cases and 101 deaths in 2025 (Balkh among the highest), peak around Eid al-Adha",
+    "WHO fact sheet: Crimean-Congo haemorrhagic fever (20 Feb 2025): remove ticks safely, gloves when handling animals, safe burial as infection control",
+    "MSF Clinical guidelines: viral haemorrhagic fevers (in the event of a death, do not wash the body; prompt, safe burial)",
+    "WHO/Europe, Anthrax: questions and answers (2016): do not open the carcass (spores form in air); burning is the best disposal",
+    "WHO fact sheet: Influenza (avian and other zoonotic) (21 Jan 2026): avoid sick or dead birds, report them to the vets; fever or cough after contact: tell the health service"
   ],
   "review": [
     "Local disease names to confirm: Dari 'تب کانگو' (CCHF), 'تب مالت' (brucellosis), 'سیاه‌زخم' (anthrax); Pashto 'د کانګو تبه', 'د مالټا تبه', 'تور زخم'. Pashto 'کنه/کنې' for tick.",
@@ -305,6 +333,12 @@
     "Prolonged or recurrent fever with joint pain is a simplified brucellosis presentation for families.",
     "Ribavirin for CCHF: WHO says evidence is uncertain but it is widely used in Afghanistan (national CCHF guideline); Mo to decide whether to keep the name.",
     "Brucellosis regimen (6 weeks of two drugs) follows WHO; the second drug is not named because rifampicin is reserved for TB in many programmes.",
-    "CCHF isolation beds: Balkh Regional Hospital in Mazar and the infectious diseases hospital in Kabul; confirm whether Aybak provincial hospital can isolate and treat."
+    "CCHF isolation beds: Balkh Regional Hospital in Mazar and the infectious diseases hospital in Kabul; confirm whether Aybak provincial hospital can isolate and treat.",
+    "Medical audit 2026-10-08 IL-3: new step animal-illness.death 'If someone dies with fever and bleeding: do not wash or prepare the body yourselves; tell the clinic at once and let trained staff help with a safe burial' (MSF VHF guidance; WHO safe burial). The words touch on the washing of the dead: Mo, check the wording with a religious adviser and against the MoPH CCHF brochure (not found online).",
+    "Medical audit 2026-10-08 IL-19: animal-illness.ticks was 'Pull ticks off with a cloth, not bare hands'; now 'Pull ticks out slowly with tweezers close to the skin, without crushing them. Then wash with soap.' (WHO CCHF: remove ticks safely). MoPH brochure not checked.",
+    "Medical audit 2026-10-08 IL-20: animal-illness.dead was 'Bury it deep and tell the animal doctor'; now 'Do not eat, skin or cut open... Tell the animal doctor, who will say whether to burn or bury it' (WHO/Europe anthrax: do not open the carcass; burning is best).",
+    "Medical audit 2026-10-08 IL-26: the English of animal-illness.clinic now ends 'Finish the whole course.', as the Dari and Pashto already did ('such as penicillin' became 'like penicillin' to keep the length). English only: no new recording.",
+    "Medical audit 2026-10-08 HM-06: new amber item animal-illness.soon.birds 'fever or cough within 10 days of touching sick or dead birds' (WHO avian influenza fact sheet; 10 days is the usual watch period after contact). The chickens page link promises bird illness advice; this is it.",
+    "Medical audit 2026-10-08 IL-21 (not changed): animal-illness.urgent.fever stays 'hospital now'. WHO Afghanistan says the nearest health centre; the red box rule in this app is hospital now, and the audit rates the app as one level stricter, not wrong."
   ]
 }

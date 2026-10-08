@@ -77,9 +77,9 @@
         "en": "A newborn's eyes"
       },
       "text": {
-        "fa": "نوزادی که در چشمش چرک است، همان روز به کلینیک ضرورت دارد. مرهم چشمی که در وقت ولادت داده می‌شود، از این جلوگیری می‌کند.",
-        "ps": "هغه نوی زېږېدلی ماشوم چې په سترګو کې یې چرک وي، په همغه ورځ کلینیک ته اړتیا لري. هغه ملهم چې د زېږون پر وخت ورکول کېږي، له دې څخه مخنیوی کوي.",
-        "en": "A newborn with pus in the eyes needs the clinic the same day. The eye ointment given at birth helps prevent this."
+        "fa": "نوزادی که در چشمش چرک است، همان روز به کلینیک ضرورت دارد.",
+        "ps": "هغه نوی زېږېدلی ماشوم چې په سترګو کې یې چرک وي، په همغه ورځ کلینیک ته اړتیا لري.",
+        "en": "A newborn with pus in the eyes needs the clinic the same day."
       }
     },
     {
@@ -267,9 +267,9 @@
       "type": "tip",
       "icon": "window",
       "text": {
-        "fa": "سمنگان یکی از چند جای افغانستان است که هنوز تراخم در آن دیده می‌شود. روی پاک، آب پاک و تشناب بینایی اطفال را حفاظت می‌کند.",
-        "ps": "سمنګان د افغانستان له هغو لږو ځایونو څخه دی چې تراخم لا هم پکې لیدل کېږي. پاک مخ، پاکې اوبه او تشناب د ماشومانو لید ساتي.",
-        "en": "Samangan is one of the few places in Afghanistan where trachoma is still found. Clean faces, clean water and latrines protect the children's sight."
+        "fa": "ایبک، دره صوف پایین و فیروز نخچیر با هم یکی از تنها سه ساحه در افغانستان است که تراخم آن‌قدر زیاد است که تمام قریه تداوی می‌شود. روی پاک، آب پاک و تشناب بینایی اطفال را حفاظت می‌کند.",
+        "ps": "ایبک، دره صوف پایین او فیروز نخچیر یوځای په افغانستان کې له یوازې درېیو سیمو څخه یوه ده چې تراخم پکې دومره زیات دی چې ټول کلي درملنه کېږي. پاک مخ، پاکې اوبه او تشناب د ماشومانو لید ساتي.",
+        "en": "Aybak, Dara-i-Suf Payin and Feroz Nakhchir together are one of only three areas in Afghanistan with enough trachoma to treat whole villages. Clean faces, water and latrines protect children's sight."
       }
     }
   ],
@@ -279,7 +279,8 @@
     "WHO Pocket Book of Hospital Care for Children (2013): conjunctivitis and ophthalmia neonatorum; eye care in measles",
     "WHO Model List of Essential Medicines (2023) and Afghanistan National Essential Medicines List (2014): tetracycline eye ointment, azithromycin; BPHS (2010) Health Post drug list includes tetracycline eye ointment",
     "Trachoma prevalence surveys in Afghanistan (2018-2019, Tropical Data / Global Trachoma Mapping Project method): active trachoma (TF) 5.9 percent in children 1-9 in the Aybak, Dara-i-Sufi Payin and Feroz Nakhchir evaluation unit, Samangan; one of only three Afghan evaluation units needing antibiotic mass treatment (see research report)",
-    "WHO/UNICEF Facts for Life (2010): hygiene"
+    "WHO/UNICEF Facts for Life (2010): hygiene",
+    "Prevalence of trachoma in 72 districts of Afghanistan, 2018-2019 (Ophthalmic Epidemiology 2023): Aybak, Dara-i-Suf Payin and Feroz Nakhchir (Samangan) TF 5.9%, one of three evaluation units needing mass drug administration"
   ],
   "review": [
     "Trachoma in Samangan: based on the 2018-2019 survey papers summarised in the research report; confirm whether any azithromycin mass treatment has actually been run in Samangan before saying 'may be given'.",
@@ -288,6 +289,8 @@
     "'Shop drops can harm the eye' refers to steroid-containing drops sold over the counter; evidence is general, not Afghanistan-specific.",
     "Trichiasis item placed under 'this clinic today' list; WHO treats it as needing surgery (not urgent, but soon). Fine to move to a 'this week' list if the topic gets one.",
     "Dari تراخم, Pashto تراخم: formal words; ask the translator what villagers call it.",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 IL-14: eye-infection.samangan was 'Samangan is one of the few places in Afghanistan where trachoma is still found'; now names Aybak, Dara-i-Suf Payin and Feroz Nakhchir as one of only three areas needing whole-village treatment (2018-2019 survey). Whether a treatment round has been run is still unknown.",
+    "Medical audit 2026-10-08 IL-15: 'The eye ointment given at birth helps prevent this' removed from eye-infection.newborn: no Afghan source confirms routine eye ointment at birth, and the newborn page does not list it. Add it back on both pages if MoPH practice is confirmed."
   ]
 }

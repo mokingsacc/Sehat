@@ -77,9 +77,9 @@
         "en": "Take the medicine every day"
       },
       "text": {
-        "fa": "دوای مرگی فقط وقتی اثر می‌کند که هر روز، برای سال‌ها خورده شود. هرگز ناگهان قطع نکنید؛ دوز فراموش‌شده تشنج را برمی‌گرداند. پیش از تمام شدن، دوای بعدی را بگیرید.",
-        "ps": "د مرګي درمل یوازې هغه وخت اغېز کوي چې هره ورځ، د کلونو لپاره وخوړل شي. هېڅکله یې ناڅاپه مه پرېږدئ؛ پاتې ډوز اختلاج بېرته راولي. له خلاصېدو مخکې راتلونکي درمل واخلئ.",
-        "en": "Epilepsy medicine works only if taken every single day, for years. Never stop suddenly; missed doses bring fits back. Get the next supply before it runs out."
+        "fa": "دوای مرگی را هر روز بخورید، اکثراً برای سال‌ها. هرگز خودتان آن را قطع نکنید؛ بعد از حدود ۲ سال بدون تشنج، کارمند صحی شاید آن را آهسته کم کند. دوز فراموش‌شده تشنج را برمی‌گرداند.",
+        "ps": "د مرګي درمل هره ورځ وخورئ، اکثره د کلونو لپاره. هېڅکله یې پخپله مه پرېږدئ؛ د شاوخوا ۲ کلونو له اختلاج پرته وروسته، روغتیايي کارکوونکی ښايي ورو ورو کم کړي. پاتې ډوز اختلاج بېرته راولي.",
+        "en": "Take epilepsy medicine every single day, often for years. Never stop it yourself; after about 2 years without fits the health worker may lower it slowly. Missed doses bring fits back."
       }
     },
     {
@@ -270,9 +270,9 @@
           "id": "epilepsy.dont.stop",
           "icon": "pill",
           "text": {
-            "fa": "وقتی تشنج مدتی نیامده دوا را قطع نکنید.",
-            "ps": "کله چې اختلاج یو څه وخت نه وي راغلی درمل مه پرېږدئ.",
-            "en": "Do not stop the medicine when fits have gone for a while."
+            "fa": "دوا را خودتان قطع نکنید، حتی وقتی تشنج بند شده باشد.",
+            "ps": "درمل پخپله مه پرېږدئ، که څه هم اختلاج ودرېدلی وي.",
+            "en": "Do not stop the medicine yourself, even when the fits have stopped."
           }
         },
         {
@@ -302,7 +302,8 @@
     "WHO mhGAP Intervention Guide, version 2.0 (2016) and mhGAP guideline update (2023): epilepsy module (first aid during a seizure, danger signs, phenobarbital, carbamazepine, phenytoin or valproate by non-specialist health workers, status epilepticus referral)",
     "WHO Pocket Book of Hospital Care for Children (2013): convulsions, rectal or intravenous diazepam if a seizure lasts over 5 minutes",
     "Afghanistan IPEHS (2019): epilepsy treatment initiated at district or provincial hospital and continued at CHC level; BPHS (2010): phenobarbital and carbamazepine in the CHC drug list; Afghanistan National Essential Medicines List (2014)",
-    "Burden: Afghanistan mental health survey (2017) and GBD estimates place epilepsy among the common neurological conditions; no Samangan-specific data (see research report)"
+    "Burden: Afghanistan mental health survey (2017) and GBD estimates place epilepsy among the common neurological conditions; no Samangan-specific data (see research report)",
+    "WHO fact sheet: Epilepsy (7 Feb 2024): stopping antiseizure medicine can be considered after 2 years without seizures"
   ],
   "review": [
     "Medicine names (phenobarbital, carbamazepine) follow BPHS 2010 CHC list and mhGAP; valproate is at district hospital level. Remove names if Mo prefers.",
@@ -311,6 +312,7 @@
     "'Do not keep a person with epilepsy from school, work or marriage' touches social norms; Mo may soften or remove it.",
     "'Into the rectum' (rectal diazepam) is said plainly in the hospital block; adjust if felt inappropriate for narration.",
     "A fit in pregnancy (eclampsia) is already in pregnancy-danger; included here so a listener on this page still goes now.",
-    "Dari مرگی and Pashto مرګی are the common words; صرع added in brackets."
+    "Dari مرگی and Pashto مرګی are the common words; صرع added in brackets.",
+    "Medical audit 2026-10-08 IL-22: epilepsy.medicine now says 'Never stop it yourself; after about 2 years without fits the health worker may lower it slowly' (WHO 2024), and epilepsy.dont.stop 'Do not stop the medicine yourself, even when the fits have stopped'. 'Get the next supply before it runs out' left epilepsy.medicine to keep the length; epilepsy.soon.supply still says it."
   ]
 }

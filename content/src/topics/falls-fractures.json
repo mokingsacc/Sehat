@@ -118,11 +118,20 @@
       "type": "alert",
       "level": "urgent",
       "title": {
-        "fa": "اگر بعد از افتادن این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
-        "ps": "که له لوېدو وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
-        "en": "Go to hospital now, day or night, if after a fall someone:"
+        "fa": "اگر بعد از افتادن یا فروریختن خانه این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که له لوېدو یا د کور له نړېدو وروسته دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "Go to hospital now, day or night, if after a fall or a house collapse someone:"
       },
       "items": [
+        {
+          "id": "falls-fractures.urgent.trapped",
+          "icon": "house",
+          "text": {
+            "fa": "زیر دیوار، سقف یا خاک گیر مانده بود، حتی اگر خوب معلوم شود",
+            "ps": "د دېوال، چت یا خاورو لاندې بند پاتې شوی و، که څه هم روغ ښکاري",
+            "en": "was trapped under a wall, roof or earth, even if they seem well"
+          }
+        },
         {
           "id": "falls-fractures.urgent.height",
           "icon": "house",
@@ -248,7 +257,8 @@
     "European Resuscitation Council Guidelines 2025: First Aid: suspected spinal injury (manual stabilisation; no routine collars), fractures (splinting), cold for closed injuries",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): spinal injury, fractures, sprains",
     "WHO Basic Emergency Care (WHO/ICRC, 2018): trauma, spinal protection",
-    "WHO/UNICEF World report on child injury prevention (2008): falls"
+    "WHO/UNICEF World report on child injury prevention (2008): falls",
+    "INSARAG Medical Working Group, The medical management of the entrapped patient with crush syndrome (v1.3, March 2023): trapped people may look stable, then get worse; crush syndrome can start after 1 hour of pressure; treat every trapped person as having crush injury"
   ],
   "review": [
     "No neck collar (ERC/IFRC no longer advise lay rescuers to use collars). Manual hold of the head is taught instead.",
@@ -256,6 +266,7 @@
     "Bonesetters (شکسته‌بند / ماتې تړونکی) are widely used in Afghanistan. Tight traditional binding can cause compartment syndrome and gangrene. The dont item is worded respectfully; check the tone with local staff.",
     "Ice or cold for 20 minutes: ERC/IFRC suggest cold for closed injuries (no set time; 20 minutes is common teaching).",
     "Pashto 'د ملا تیر' for spine and 'ماتې تړونکی' for bonesetter: check.",
-    "Home safety section (2026-10-07): falls-fractures.prevent repeated child-safety.roof. It is replaced by a link to child-safety (falls-fractures.safety)."
+    "Home safety section (2026-10-07): falls-fractures.prevent repeated child-safety.roof. It is replaced by a link to child-safety (falls-fractures.safety).",
+    "Medical audit 2026-10-08 HM-01: 'trapped under a wall, roof or earth: hospital now, even if they seem well' (falls-fractures.urgent.trapped) was lost from floods-quakes under the Home-tab rule; it now lives here, and floods-quakes.hurt-em opens this page. The urgent title now says 'after a fall or a house collapse'. The 'What is wrong?' Earthquake and flood page uses this line (it had its own ui.ask.trapped, now removed)."
   ]
 }

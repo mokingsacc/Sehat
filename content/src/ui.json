@@ -1679,9 +1679,9 @@
    "en": "A very high fever. Give drinks, dress lightly, and go to hospital now."
   },
   "ui.rd.v.temp-pregnant": {
-   "fa": "تب در حاملگی باید معاینه شود. زیاد مایعات بنوشید و امروز به کلینیک بروید. اگر درد شکم، خونریزی، یا آنقدر ضعف دارید که بلند شده نمی‌توانید، همین حالا به شفاخانه بروید.",
-   "ps": "په امیندوارۍ کې تبه باید معاینه شي. ډېرې اوبلنې وڅښئ او نن کلینیک ته ولاړ شئ. که د خېټې درد، وینه بهېدل وي، یا دومره کمزورې یاست چې نشئ پورته کېدای، همدا اوس روغتون ته ولاړ شئ.",
-   "en": "Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is belly pain, bleeding, or you are too weak to get up."
+   "fa": "تب در حاملگی باید معاینه شود. زیاد مایعات بنوشید و امروز به کلینیک بروید. اگر درد شدید شکم، خونریزی، یا آنقدر ضعف دارید که بلند شده نمی‌توانید، همین حالا به شفاخانه بروید.",
+   "ps": "په امیندوارۍ کې تبه باید معاینه شي. ډېرې اوبلنې وڅښئ او نن کلینیک ته ولاړ شئ. که د خېټې سخت درد، وینه بهېدل وي، یا دومره کمزورې یاست چې نشئ پورته کېدای، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is severe belly pain, bleeding, or you are too weak to get up."
   },
   "ui.rd.v.bp-very-high": {
    "fa": "خیلی بلند است. ۵ دقیقه آرام بنشینید و یک بار دیگر اندازه کنید. اگر هنوز ۱۸۰ بر ۱۲۰ یا بیشتر است، همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.",

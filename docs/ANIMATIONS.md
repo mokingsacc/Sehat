@@ -351,7 +351,7 @@ Sources: WHO/UNICEF JMP definition of safe disposal of child faeces (put or rins
 
 #### anim.handwashing: Washing hands
 
-Sources: WHO/UNICEF Facts for Life (2010), hygiene; UNICEF "Handwashing with soap" critical times; WHO Guidelines on hand hygiene in health care (2009) for the 20 seconds and the steps (also CDC "When and how to wash your hands"); WHO/UNICEF "Interim recommendations on obligatory hand hygiene" (2020) and the Cochrane review on ash for handwashing (Paludan-Müller et al., 2020) for ash.
+Sources: WHO/UNICEF Facts for Life (2010), hygiene; UNICEF "Handwashing with soap" critical times; CDC "When and how to wash your hands" and UNICEF handwashing guidance for scrubbing at least 20 seconds; WHO Guidelines on hand hygiene in health care (2009) for the steps (WHO's whole handwash takes 40 to 60 seconds; medical audit 2026-10-08 IL-16); WHO/UNICEF "Interim recommendations on obligatory hand hygiene" (2020) and the Cochrane review on ash for handwashing (Paludan-Müller et al., 2020) for ash.
 
 | id | picture | narration |
 | --- | --- | --- |
@@ -361,7 +361,7 @@ Sources: WHO/UNICEF Facts for Life (2010), hygiene; UNICEF "Handwashing with soa
 | `anim.handwashing.s3` | indoors, a woman washes at the clay water pot's tap; food waits on a low board (bowl, fruit, naan) | Wash before you start preparing food. |
 | `anim.handwashing.s4` | at the dastarkhan a seated mother pours water from an ewer over a child's hands into a basin; the grandmother waits by the food | Wash before eating and before feeding a child. Wash the children's hands too. |
 | `anim.handwashing.s5` | a daughter pours water for her mother; the baby lies nearby waiting to be fed | Wash before breastfeeding your baby. |
-| `anim.handwashing.s6` | close-up: two hands rub with lather (palms, backs, between the fingers, thumbs); a timer sweeps 20 seconds | Wet your hands, add soap, or ash if there is no soap, and rub for about 20 seconds: palms, backs, between the fingers, thumbs and nails. |
+| `anim.handwashing.s6` | close-up: two hands rub with lather (palms, backs, between the fingers, thumbs); a timer sweeps 20 seconds | Wet your hands, add soap, or ash if there is no soap, and rub for at least 20 seconds: palms, backs, between the fingers, thumbs and nails. |
 | `anim.handwashing.s7` | close-up: hands under a stream of poured water, drops fall; a clean cloth | Rinse under running water. Shake your hands dry or use a clean cloth. |
 
 #### anim.ors: Making ORS at home

@@ -62,9 +62,24 @@
         "en": "Use the cream the right way"
       },
       "text": {
-        "fa": "آن را از گردن تا پایین به تمام بدن بمالید، در اطفال شیرخوار به سر هم. تا وقتی که کارمند صحی گفته بگذارید، بعد بشویید. خارش شاید ۲ هفتهٔ دیگر هم بماند.",
-        "ps": "له غاړې ښکته یې پر ټول بدن ومږئ، په تي رویو ماشومانو کې پر سر هم. تر هغه وخته یې پرېږدئ چې روغتیايي کارکوونکي ویلي، بیا یې ومینځئ. خارښت ښايي ۲ نورې اونۍ هم پاتې شي.",
-        "en": "Put it on the whole body from the neck down, babies on the head too. Leave it as long as the health worker says, then wash. Itching can last 2 more weeks."
+        "fa": "کریم را به تمام بدن بمالید، به سر و پشت گوش‌ها هم، اما به روی نه. دست‌های طفل شیرخوار را بپوشانید تا کریم را نمکد. وقتی کارمند صحی گفت، آن را بشویید.",
+        "ps": "کریم پر ټول بدن ومږئ، پر سر او د غوږونو شا هم، خو پر مخ نه. د تي خوړونکي ماشوم لاسونه پټ کړئ چې کریم ونه چوسي. کله چې روغتیايي کارکوونکي وویل، ویې مینځئ.",
+        "en": "Cover the whole body, including the scalp and behind the ears, but not the face. Cover a baby's hands so it is not sucked. Wash it off when the health worker says."
+      }
+    },
+    {
+      "id": "scabies.again",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "بعد از یک هفته دوباره بمالید",
+        "ps": "له یوې اونۍ وروسته بیا یې ومږئ",
+        "en": "Use it again after one week"
+      },
+      "text": {
+        "fa": "بعد از یک هفته کریم را دوباره بمالید؛ بار اول تخم‌هایش را نمی‌کشد. خارش شاید ۲ هفتهٔ دیگر هم بماند.",
+        "ps": "له یوې اونۍ وروسته کریم بیا ومږئ؛ لومړی ځل یې هګۍ نه وژني. خارښت ښايي ۲ نورې اونۍ هم پاتې شي.",
+        "en": "Put the cream on again after one week; the first time does not kill the eggs. Itching can last 2 more weeks."
       }
     },
     {
@@ -266,7 +281,10 @@
     "WHO Pocket Book of Hospital Care for Children (2013): skin conditions, scabies and infected sores",
     "WHO Model List of Essential Medicines (2023): permethrin 5 percent cream, benzyl benzoate lotion, oral ivermectin; Afghanistan National Essential Medicines List (2014): permethrin, benzyl benzoate",
     "Burden: Afghanistan MoPH National Disease Surveillance and Response weekly report, week 33 2026: 16,057 scabies outbreak cases in 2026 to date, outbreaks in Badakhshan, Farah and Herat; frequent outbreaks in returnee and displacement sites",
-    "WHO/UNICEF Facts for Life (2010): hygiene"
+    "WHO/UNICEF Facts for Life (2010): hygiene",
+    "WHO fact sheet: Scabies (31 May 2023): treatment does not kill the eggs, so repeat it",
+    "MSF Essential drugs: permethrin 5% cream (whole body including the scalp and behind the ears, not the face; repeat after 7 days)",
+    "MSF Clinical guidelines: scabies (things that cannot be washed: sealed in a plastic bag for 72 hours)"
   ],
   "review": [
     "Oral ivermectin is on the WHO EML but is not confirmed on the Afghan EML 2014; the hospital block therefore says 'scabies tablets'. Confirm what Balkh Regional Hospital uses for crusted scabies.",
@@ -274,6 +292,8 @@
     "How long to leave the cream on (permethrin overnight, benzyl benzoate 24 hours) is left to the health worker; no timing is given.",
     "'Seal unwashable items in a bag for 3 days' follows the WHO fact sheet (mites die within about 72 hours away from skin).",
     "Kidney complication (post-streptococcal glomerulonephritis after infected scabies) is from the WHO fact sheet; the urgent list uses plain signs (puffy face, dark urine).",
-    "Local names: Dari گری (some say خارشک), Pashto ګرګین; the translator should confirm the words used in Samangan."
+    "Local names: Dari گری (some say خارشک), Pashto ګرګین; the translator should confirm the words used in Samangan.",
+    "Medical audit 2026-10-08 IL-5 and IL-11: scabies.cream was 'Put it on the whole body from the neck down, babies on the head too. Leave it as long as the health worker says, then wash. Itching can last 2 more weeks.' Now: whole body including the scalp and behind the ears, not the face; cover a baby's hands so the cream is not sucked; wash off when the health worker says (MSF permethrin). New step scabies.again: 'Put the cream on again after one week; the first time does not kill the eggs. Itching can last 2 more weeks.' (WHO; MSF repeat after 7 days).",
+    "Medical audit 2026-10-08 IL-10: 'seal in a bag for 3 days' (scabies.wash) is kept and now cited to MSF (72 hours). The WHO fact sheet says a week; the review note above wrongly gave WHO as the source."
   ]
 }

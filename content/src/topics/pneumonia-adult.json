@@ -175,9 +175,9 @@
           "id": "pneumonia-adult.urgent.blood",
           "icon": "bleeding",
           "text": {
-            "fa": "سرفه با خون",
-            "ps": "د وینې ټوخی",
-            "en": "coughing up blood"
+            "fa": "سرفه کردن خون زیاد",
+            "ps": "په ټوخي کې ډېره وینه",
+            "en": "coughing up a lot of blood"
           }
         },
         {
@@ -235,6 +235,15 @@
             "fa": "سرفه بیش از ۲ هفته: معاینهٔ توبرکلوز",
             "ps": "له ۲ اونیو زیات ټوخی: د نري رنځ معاینه",
             "en": "cough for more than 2 weeks: TB test"
+          }
+        },
+        {
+          "id": "pneumonia-adult.soon.blood",
+          "icon": "cough",
+          "text": {
+            "fa": "رگه‌های خون در بلغم: معاینهٔ توبرکلوز",
+            "ps": "په بلغم کې د وینې تارونه: د نري رنځ معاینه",
+            "en": "streaks of blood in the sputum: TB test"
           }
         }
       ]
@@ -294,7 +303,8 @@
     "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021): cough of 2 weeks or more as a TB screening symptom",
     "WHO guidelines for indoor air quality: household fuel combustion (2014): solid fuel smoke and pneumonia",
     "Afghanistan BPHS (2010): amoxicillin at Basic Health Centre and above, oxygen at Comprehensive Health Centre and hospitals; Afghanistan National Essential Medicines List (2014)",
-    "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report, week 48 2025: 1,300,544 acute respiratory infection/pneumonia cases and 2,693 deaths in 2025, highest incidence in Samangan (717.3 per 10,000); MoPH NDSR week 33 2026: severe acute respiratory infection concentrated in Bamyan, Balkh and Herat"
+    "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report, week 48 2025: 1,300,544 acute respiratory infection/pneumonia cases and 2,693 deaths in 2025, highest incidence in Samangan (717.3 per 10,000); MoPH NDSR week 33 2026: severe acute respiratory infection concentrated in Bamyan, Balkh and Herat",
+    "WHO fact sheet: Tuberculosis (24 Mar 2026): prolonged cough, sometimes with blood, chest pain, weakness or tiredness, weight loss, fever, night sweats; seek care"
   ],
   "review": [
     "Amoxicillin named as the usual adult pneumonia antibiotic (WHO AWaRe 2022, BPHS BHC list); the adult chapter of the Afghan NSTG 2013 could not be read, so Mo should confirm what Samangan clinics actually give (cotrimoxazole is also common).",
@@ -302,6 +312,7 @@
     "Finger clip (pulse oximeter) at clinic level is not guaranteed in BHCs; the text says 'may check'.",
     "Blue or grey lips (cyanosis) is a WHO emergency sign; wording for 'grey' in Pashto to be checked.",
     "'High fever with shaking chills that does not come down' is a practical sign, not a WHO classification.",
-    "Dari سینه‌بغل is used for pneumonia per the glossary; for a milder 'chest infection' the same word is used."
+    "Dari سینه‌بغل is used for pneumonia per the glossary; for a milder 'chest infection' the same word is used.",
+    "Medical audit 2026-10-08 IL-7: one rule for coughing blood on the pneumonia, TB and red-flags pages. pneumonia-adult.urgent.blood was 'coughing up blood' (hospital now); now 'coughing up a lot of blood' (same words as tb.urgent.blood). New amber pneumonia-adult.soon.blood 'streaks of blood in the sputum: TB test' (clinic today, like tb.soon.blood). Blood with breathlessness is covered by the breathing items."
   ]
 }

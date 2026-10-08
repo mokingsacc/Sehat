@@ -100,22 +100,38 @@
     {
       "id": "floods-quakes.clean-water",
       "type": "step",
-      "icon": "ors",
+      "icon": "water",
       "title": {
         "fa": "بعد از سیلاب آب را پاک کنید",
         "ps": "له سېلاب وروسته اوبه پاکې کړئ",
         "en": "After a flood, make water safe"
       },
       "text": {
-        "fa": "آب سیلاب اسهال را پخش می‌کند. آب نوشیدنی را بجوشانید، دست‌ها را با صابون بشویید و اگر طفل اسهال دارد «او آر اس» بدهید.",
-        "ps": "د سېلاب اوبه نس ناستی خپروي. د څښلو اوبه وایشوئ، لاسونه په صابون ومینځئ او که ماشوم نس ناستی لري، «او آر اس» ورکړئ.",
-        "en": "Flood water spreads diarrhoea. Boil drinking water, wash hands with soap, and give ORS if a child has diarrhoea."
+        "fa": "آب سیلاب اسهال را پخش می‌کند. آب نوشیدنی را بجوشانید و دست‌ها را با صابون بشویید.",
+        "ps": "د سېلاب اوبه نس ناستی خپروي. د څښلو اوبه وایشوئ او لاسونه په صابون ومینځئ.",
+        "en": "Flood water spreads diarrhoea. Boil drinking water and wash hands with soap."
+      }
+    },
+    {
+      "id": "floods-quakes.diarrhoea",
+      "type": "link",
+      "to": "topic/diarrhoea",
+      "icon": "ors",
+      "title": {
+        "fa": "طفل بعد از سیلاب اسهال دارد؟",
+        "ps": "ماشوم له سېلاب وروسته نس ناستی لري؟",
+        "en": "Child has diarrhoea after the flood?"
+      },
+      "text": {
+        "fa": "صفحه را باز کنید: نوشیدنی، غذا، و چه وقت به کلینیک بروید.",
+        "ps": "پاڼه پرانیزئ: څښاک، خواړه، او کله کلینیک ته ولاړ شئ.",
+        "en": "Open the page: drinks, food, and when to go to the clinic."
       }
     },
     {
       "id": "floods-quakes.hurt-em",
       "type": "link",
-      "to": "emergency",
+      "to": "topic/falls-fractures",
       "icon": "warning",
       "urgent": true,
       "title": {
@@ -124,9 +140,9 @@
         "en": "Someone hurt or trapped?"
       },
       "text": {
-        "fa": "صفحهٔ حالت عاجل را باز کنید: همین حالا چه کنید، قدم به قدم.",
-        "ps": "د بیړني حالت پاڼه پرانیزئ: همدا اوس څه وکړئ، ګام په ګام.",
-        "en": "Open the Emergency page: what to do now, step by step."
+        "fa": "این صفحه را باز کنید: همین حالا چه کنید و چه وقت به شفاخانه بروید.",
+        "ps": "دا پاڼه پرانیزئ: همدا اوس څه وکړئ او کله روغتون ته ولاړ شئ.",
+        "en": "Open the page: what to do now, and when to go to hospital."
       }
     },
     {
@@ -184,13 +200,16 @@
     "WHO/UNICEF Facts for Life (2010): emergencies",
     "IFRC International first aid, resuscitation and education guidelines (2020): crush injury, head injury, drowning",
     "Local events: 3 Nov 2025 M6.2 earthquake (Balkh-Samangan border); spring floods in Feroz Nakhchir and Khuram wa Sarbagh 2026 (see research_notes samangan_profile.md)",
-    "WHO/PAHO guidance on crush syndrome after earthquakes (fluids to protect the kidneys); WHO fact sheet: Drowning (2024): medical review after any submersion"
+    "WHO/PAHO guidance on crush syndrome after earthquakes (fluids to protect the kidneys); WHO fact sheet: Drowning (2024): medical review after any submersion",
+    "INSARAG Medical Working Group, The medical management of the entrapped patient with crush syndrome (v1.3, March 2023): trapped people may look stable, then get worse; crush syndrome can start after 1 hour of pressure; treat every trapped person as having crush injury"
   ],
   "review": [
     "Drop, cover, hold on (IFRC) versus leaving a single-storey mud-brick house quickly: in rural Afghan adobe homes, some agencies advise getting out at once if you are by the door on the ground floor. Choose the message for Samangan.",
     "The lead names Samangan. Keep it if the book is Samangan-only; otherwise make it general.",
     "'Trapped under a wall or roof' is urgent even if the person looks well (crush injury). Check the urgent level.",
     "Crush syndrome and secondary drowning explained in plain words; the Dari/Pashto also mention fluids, oxygen and wound care at the hospital.",
-    "Home tab rule (Mo): no medical advice on Home pages. Removed: floods-quakes.hospital, floods-quakes.urgent. Urgent signs are reached through the red link to the Health side."
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: floods-quakes.hospital, floods-quakes.urgent. Urgent signs are reached through the red link to the Health side.",
+    "Medical audit 2026-10-08 HM-01: the red link 'Someone hurt or trapped?' (floods-quakes.hurt-em) now opens Falls and broken bones, whose red box starts with 'was trapped under a wall, roof or earth, even if they seem well' (falls-fractures.urgent.trapped). The Emergency screen stays one tap away (the red Emergency button at the top of every page).",
+    "Medical audit 2026-10-08 HM-04: 'give ORS if a child has diarrhoea' removed from floods-quakes.clean-water (Mo's Home-tab rule: no treatment on Home pages; the diarrhoea page has ORS with zinc, feeding and the danger signs). New plain link floods-quakes.diarrhoea opens the diarrhoea page. The step icon is now 'water'."
   ]
 }

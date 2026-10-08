@@ -28,6 +28,16 @@
       "anim": "ors"
     },
     {
+      "id": "diarrhoea-adult.film",
+      "type": "tip",
+      "icon": "ors",
+      "text": {
+        "fa": "این فلم دربارهٔ طفل است. بزرگسالان هم او آر اس را به همین شکل می‌سازند و می‌نوشند؛ زنک فقط برای اطفال است.",
+        "ps": "دا فلم د ماشوم په اړه دی. لویان هم او آر اس په همدې ډول جوړوي او څښي؛ زنک یوازې د ماشومانو لپاره دی.",
+        "en": "This film shows a child. Adults make and drink ORS the same way; zinc is only for children."
+      }
+    },
+    {
       "id": "diarrhoea-adult.anim-water",
       "type": "anim",
       "anim": "water"
@@ -296,7 +306,8 @@
     "Afghanistan National Standard Treatment Guidelines (2013): acute watery diarrhoea and cholera managed with ORS, no antibiotics at primary level; dysentery treated with ciprofloxacin or cotrimoxazole",
     "Afghanistan BPHS (2010): ORS and chlorine at Health Post; intravenous fluids and ciprofloxacin at Comprehensive Health Centre and above",
     "Burden: Afghanistan MoPH NDSR weekly report, week 33 2026: 1,606,681 acute watery diarrhoea cases, 97,964 with dehydration and 50 deaths, 462,264 bloody diarrhoea cases in 2026 to date; WHO Afghanistan outbreak situation report week 48 2025: AWD outbreaks in the north-east and east",
-    "WHO/UNICEF Facts for Life (2010): diarrhoea; hygiene"
+    "WHO/UNICEF Facts for Life (2010): diarrhoea; hygiene",
+    "WHO fact sheet: Diarrhoeal disease (7 Mar 2024): zinc tablets for 10 to 14 days are a treatment for children"
   ],
   "review": [
     "Ciprofloxacin named for bloody diarrhoea with fever (NSTG 2013, WHO); confirm this is still the local first choice and that naming is wanted.",
@@ -306,6 +317,7 @@
     "ORS 'free at the health post': BPHS Health Post kit; confirm CHWs in Samangan are still supplied (about 600 facilities closed nationally by August 2026).",
     "Pashto 'د نس ناستي درېدونکي درمل' (anti-diarrhoeal medicines) to be checked for natural wording.",
     "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...).",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 IL-25: this page plays the child ORS film (anim.ors: 'a child's body', zinc, breastfeeding). New tip diarrhoea-adult.film right after it: 'This film shows a child. Adults make and drink ORS the same way; zinc is only for children.' An adult version of the film is not made."
   ]
 }

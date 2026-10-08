@@ -92,9 +92,9 @@
         "en": "Stop it spreading"
       },
       "text": {
-        "fa": "آب نوشیدنی را بجوشانید یا کلورین بزنید. بعد از تشناب و پیش از غذا دست‌ها را با صابون بشویید. شخص مریض تا جور شدن برای دیگران غذا نپزد.",
-        "ps": "د څښاک اوبه وایشوئ یا کلورین ورواچوئ. له تشناب وروسته او له خوړو مخکې لاسونه په صابون ومینځئ. ناروغ کس تر روغېدو پورې نورو ته خواړه مه پخوي.",
-        "en": "Boil or chlorinate drinking water. Wash hands with soap after the toilet and before food. The sick person should not cook for others until well."
+        "fa": "آب نوشیدنی را بجوشانید یا کلورین بزنید. بعد از تشناب و پیش از غذا دست‌ها را با صابون بشویید. شخص مریض تا وقتی کارمند صحی نگوید که بی‌خطر است، برای دیگران غذا نپزد.",
+        "ps": "د څښاک اوبه وایشوئ یا کلورین ورواچوئ. له تشناب وروسته او له خوړو مخکې لاسونه په صابون ومینځئ. ناروغ کس تر هغه وخته نورو ته خواړه مه پخوي چې روغتیايي کارکوونکی ووايي خطر نه لري.",
+        "en": "Boil or chlorinate drinking water. Wash hands with soap after the toilet and before food. The sick person must not cook for others until the health worker says it is safe."
       }
     },
     {
@@ -106,9 +106,9 @@
         "en": "At the clinic: blood test and antibiotics"
       },
       "text": {
-        "fa": "کارمند صحی ملاریا و محرقه را معاینه می‌کند و انتی‌بیوتیک محرقه (مانند سیپروفلوکساسین، ازیترومایسین یا سفیکسیم) می‌دهد. واقعات شدید به شفاخانه می‌روند.",
-        "ps": "روغتیايي کارکوونکی ملاریا او محرقه معاینه کوي او د محرقې انټي بیوټیک (لکه سیپروفلوکساسین، ازیترومایسین یا سفیکسیم) ورکوي. سختې پېښې روغتون ته ځي.",
-        "en": "The health worker tests for malaria and typhoid and gives a typhoid antibiotic (such as ciprofloxacin, azithromycin or cefixime). Severe cases go to the hospital."
+        "fa": "کارمند صحی ملاریا و محرقه را معاینه می‌کند و یک انتی‌بیوتیک برای محرقه (اکثراً ازیترومایسین) می‌دهد. واقعات شدید به شفاخانه می‌روند.",
+        "ps": "روغتیايي کارکوونکی ملاریا او محرقه معاینه کوي او د محرقې لپاره یو انټي بیوټیک (اکثره ازیترومایسین) ورکوي. سختې پېښې روغتون ته ځي.",
+        "en": "The health worker tests for malaria and typhoid and gives an antibiotic for typhoid (often azithromycin). Severe cases go to the hospital."
       }
     },
     {
@@ -285,13 +285,16 @@
     "WHO AWaRe antibiotic book (2022): enteric (typhoid) fever, oral and injectable options",
     "Afghanistan BPHS (2010): ciprofloxacin and ceftriaxone at Comprehensive Health Centre and above; Afghanistan National Essential Medicines List (2014): azithromycin, ciprofloxacin, ceftriaxone",
     "Burden: Afghanistan MoPH NDSR weekly report, week 33 2026: 49,868 typhoid cases reported in 2026 to date",
-    "WHO/UNICEF Facts for Life (2010): hygiene"
+    "WHO/UNICEF Facts for Life (2010): hygiene",
+    "MSF Clinical guidelines: enteric fevers (typhoid and paratyphoid), March 2024: azithromycin first line; fluoroquinolone resistance endemic in Asia; cefixime fails in XDR strains"
   ],
   "review": [
     "Antibiotic names (ciprofloxacin, azithromycin, cefixime; ceftriaxone injection) follow the WHO Pocket Book and AWaRe book; resistance to fluoroquinolones is high in the region, so Mo should confirm what Samangan clinics actually use, or replace with 'an antibiotic'. Cefixime was not confirmed on the 2014 EML.",
     "'Blood test': most clinics use the Widal test, which is unreliable; blood culture is only at larger hospitals. The text just says 'a blood test'.",
     "'Fever over 3 days: go to the clinic' is a practical threshold for adults; IMCI uses 7 days for referral of fever in children but the child topic covers that.",
     "Typhoid vaccine campaigns were not confirmed for Afghanistan, so no vaccine claim is made.",
-    "Dari محرقه and Pashto محرقه are the common words; تیفویید/ټایفایډ added in brackets."
+    "Dari محرقه and Pashto محرقه are the common words; تیفویید/ټایفایډ added in brackets.",
+    "Medical audit 2026-10-08 IL-6: typhoid.clinic was 'a typhoid antibiotic (such as ciprofloxacin, azithromycin or cefixime)'; now 'an antibiotic for typhoid (often azithromycin)' (MSF 2024; cefixime is not on Afghanistan's 2014 essential list). The hospital block still names ceftriaxone.",
+    "Medical audit 2026-10-08 IL-12: typhoid.prevent was 'should not cook for others until well'; now 'must not cook for others until the health worker says it is safe' (WHO: people can carry the germ after the symptoms go)."
   ]
 }

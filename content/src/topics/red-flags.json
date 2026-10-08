@@ -122,6 +122,45 @@
       }
     },
     {
+      "id": "red-flags.today",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If you have one of these signs, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "red-flags.today.cough",
+          "icon": "cough",
+          "text": {
+            "fa": "سرفه ۲ هفته یا بیشتر",
+            "ps": "۲ اونۍ یا ډېر ټوخی",
+            "en": "A cough for 2 weeks or more"
+          }
+        },
+        {
+          "id": "red-flags.today.blood",
+          "icon": "cough",
+          "text": {
+            "fa": "خون در بلغم",
+            "ps": "په بلغم کې وینه",
+            "en": "Blood in the sputum"
+          }
+        },
+        {
+          "id": "red-flags.today.yellow-eyes",
+          "icon": "jaundice",
+          "text": {
+            "fa": "زرد شدن چشم‌ها",
+            "ps": "د سترګو ژېړېدل",
+            "en": "Yellow eyes"
+          }
+        }
+      ]
+    },
+    {
       "id": "red-flags.soon",
       "type": "alert",
       "level": "soon",
@@ -131,15 +170,6 @@
         "en": "If you have one of these signs, go to the clinic this week"
       },
       "items": [
-        {
-          "id": "red-flags.soon.cough",
-          "icon": "cough",
-          "text": {
-            "fa": "سرفه بیشتر از ۲ هفته، یا خون در بلغم",
-            "ps": "له ۲ اونیو ډېر ټوخی، یا په بلغم کې وینه",
-            "en": "Cough for more than 2 weeks, or blood in the sputum"
-          }
-        },
         {
           "id": "red-flags.soon.weight-loss",
           "icon": "weight-loss",
@@ -174,15 +204,6 @@
             "fa": "زخمی که در ۲ هفته جور نمی‌شود",
             "ps": "ټپ چې په ۲ اونیو کې نه جوړېږي",
             "en": "A wound or sore that does not heal in 2 weeks"
-          }
-        },
-        {
-          "id": "red-flags.soon.yellow-eyes",
-          "icon": "jaundice",
-          "text": {
-            "fa": "زرد شدن چشم‌ها",
-            "ps": "د سترګو ژېړېدل",
-            "en": "Yellow eyes"
           }
         },
         {
@@ -259,9 +280,9 @@
       "id": "red-flags.clinic",
       "type": "clinic",
       "title": {
-        "fa": "در کلینیک: علایم همین هفته",
-        "ps": "په کلینیک کې: د همدې اونۍ نښې",
-        "en": "At the clinic: the this-week signs"
+        "fa": "در کلینیک: علایم زرد",
+        "ps": "په کلینیک کې: ژېړې نښې",
+        "en": "At the clinic: the amber signs"
       },
       "text": {
         "fa": "برای علایم زرد، کلینیک شما را معاینه می‌کند، بلغم را برای توبرکلوز، خون و ادرار را معاینه می‌کند، و اگر غده یا خونریزی ضرورت داشته باشد برای اسکن به شفاخانه می‌فرستد. اگر زود پیدا شود، تداوی آسان‌تر است.",
@@ -308,7 +329,10 @@
     "WHO mhGAP Intervention Guide 2.0 (2016): self-harm and suicide",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020)",
     "WHO IMAI District Clinician Manual (2011): emergency management of shock, stroke, chest pain, meningitis, gastrointestinal bleeding",
-    "WHO PEN (2020): referral criteria for suspected heart attack and stroke; WHO TB screening (2021)"
+    "WHO PEN (2020): referral criteria for suspected heart attack and stroke; WHO TB screening (2021)",
+    "WHO fact sheet: Tuberculosis (24 Mar 2026): prolonged cough, sometimes with blood, chest pain, weakness or tiredness, weight loss, fever, night sweats; seek care",
+    "WHO fact sheet: Hepatitis E (28 Jul 2026): consider hospital care for pregnant women; acute jaundice is an outbreak sign",
+    "App's own content/src/syndromes.json: acute jaundice is a reportable outbreak sign"
   ],
   "review": [
     "'Thoughts of ending one's life' is a step ('If someone talks of suicide': stay with them, remove poisons and weapons, take them to hospital now) rather than a 9th item in the red list, because the spec allows at most 8 alert items and the step gives the actions (mhGAP). Move it into the alert if you prefer.",
@@ -320,6 +344,8 @@
     "fa uses everyday Afghan words: الاشه (jaw), گیچی (confusion), شخی گردن (stiff neck), دریور (driver); check with the translator.",
     "CT scanning is at Balkh Regional Hospital (Mazar), not Aybak; 'scans' is kept generic.",
     "Clot-dissolving stroke treatment is probably not available regionally; the text does not promise it.",
-    "Medical audit 8 Oct 2026 (EM13): the chest pain item no longer reads as if pain, spreading and sweating are all needed: 'Crushing or pressing chest pain, or pain spreading to the arm, jaw or back' (WHO cardiovascular diseases fact sheet 2025: sweating may happen, it is not required). The item is also a sign chip in the breathing counter and the oxygen checker, and a line on the symptom pictures."
+    "Medical audit 8 Oct 2026 (EM13): the chest pain item no longer reads as if pain, spreading and sweating are all needed: 'Crushing or pressing chest pain, or pain spreading to the arm, jaw or back' (WHO cardiovascular diseases fact sheet 2025: sweating may happen, it is not required). The item is also a sign chip in the breathing counter and the oxygen checker, and a line on the symptom pictures.",
+    "Medical audit 2026-10-08 IL-7 and IL-8: red-flags.soon.cough ('Cough for more than 2 weeks, or blood in the sputum', clinic this week) and red-flags.soon.yellow-eyes ('Yellow eyes', clinic this week) moved to a new amber box red-flags.today 'If you have one of these signs, go to the clinic today': 'A cough for 2 weeks or more', 'Blood in the sputum' (the same words as tb.soon.cough and tb.soon.blood) and 'Yellow eyes' (same words as before). This matches the TB, pneumonia and hepatitis pages (clinic today). The this-week box keeps weight loss, a growing lump, blood in urine or stool, a sore that does not heal and trouble swallowing. The clinic block title now says 'the amber signs' (was 'the this-week signs'). The 'What is wrong?' Thin page (older) now uses the today title, as its box holds TB signs.",
+    "Two older review notes above ('Blood in the sputum' this week; 'Yellow eyes' this week) are answered by the IL-7 and IL-8 change."
   ]
 }

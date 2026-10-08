@@ -67,6 +67,15 @@
             "ps": "بې له څرګند علت ډنګرېدل",
             "en": "losing weight without a clear reason"
           }
+        },
+        {
+          "id": "tb.soon.chest",
+          "icon": "lungs",
+          "text": {
+            "fa": "درد سینه یا خستگی زیاد همراه با سرفه",
+            "ps": "د سینې درد یا ډېره ستړیا له ټوخي سره",
+            "en": "chest pain or great tiredness with the cough"
+          }
         }
       ]
     },
@@ -125,9 +134,9 @@
         "en": "Check the whole family"
       },
       "text": {
-        "fa": "اطفال و همه کسانی که با مریض توبرکلوز زندگی می‌کنند، حتی اگر صحتمند معلوم شوند، باید در کلینیک معاینه شوند.",
-        "ps": "ماشومان او ټول هغه کسان چې د نري رنځ له ناروغ سره اوسېږي، که روغ هم ښکاري، باید په کلینیک کې معاینه شي.",
-        "en": "Children and everyone living with a person with TB should be checked at the clinic, even if they seem well."
+        "fa": "همه کسانی که با مریض توبرکلوز زندگی می‌کنند، حتی اگر صحتمند معلوم شوند، باید معاینه شوند. اطفال کمتر از ۵ سال برای چند ماه هر روز یک دوای رایگان می‌گیرند تا توبرکلوز نگیرند؛ آن را تمام کنید.",
+        "ps": "ټول هغه کسان چې د نري رنځ له ناروغ سره اوسېږي، که روغ هم ښکاري، باید معاینه شي. تر ۵ کلونو کم ماشومان د څو میاشتو لپاره هره ورځ یو وړیا درمل اخلي چې نری رنځ ونه نیسي؛ هغه بشپړ کړئ.",
+        "en": "Everyone living with a person with TB should be checked, even if well. Children under 5 get a free daily medicine for some months so they do not get TB; finish it."
       }
     },
     {
@@ -221,7 +230,10 @@
     "WHO guidelines on tuberculosis infection prevention and control (2019): cough etiquette, ventilation, separation",
     "WHO consolidated guidelines on tuberculosis, Module 3: diagnosis (2024): rapid molecular tests (GeneXpert) as the initial test; Module 4: treatment (2022)",
     "Afghanistan National TB Programme via Pajhwok (13 Nov 2025): 51,419 cases notified in 2024, free diagnosis and treatment at 3,189 centres, 138 GeneXpert machines",
-    "Afghanistan IPEHS (2019): TB diagnosis and treatment from CHC level; drug-resistant TB management at provincial/regional hospitals"
+    "Afghanistan IPEHS (2019): TB diagnosis and treatment from CHC level; drug-resistant TB management at provincial/regional hospitals",
+    "WHO consolidated guidelines on tuberculosis, Module 1: TB preventive treatment (2020; 2nd ed. 2024), via the WHO TB Knowledge Sharing Platform: children under 5 living with a person with lung TB get preventive treatment (strong)",
+    "Afghanistan National TB Programme: household contact screening and isoniazid preventive therapy for under-5 contacts, 2011-2018 (86% started; Int J Tuberc Lung Dis 2020, MSH summary)",
+    "WHO fact sheet: Tuberculosis (24 Mar 2026): prolonged cough, sometimes with blood, chest pain, weakness or tiredness, weight loss, fever, night sweats; seek care"
   ],
   "review": [
     "'Usually 6 months': WHO also has 4-month regimens (children with non-severe TB; HPMZ for people aged 12 and over), and drug-resistant TB takes longer.",
@@ -232,6 +244,8 @@
     "'Check the whole family' does not mention preventive treatment for child contacts by name ('young children may be given medicine to protect them' could be added).",
     "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
     "'Result in a day or two' assumes smear microscopy or GeneXpert at a CHC; in villages far from a TB centre it can take longer.",
-    "Which Samangan facilities have GeneXpert is unknown; 'the machine test' is placed at the hospital."
+    "Which Samangan facilities have GeneXpert is unknown; 'the machine test' is placed at the hospital.",
+    "Medical audit 2026-10-08 IL-2: tb.family now adds 'Children under 5 get a free daily medicine for some months so they do not get TB; finish it' (WHO strong recommendation; the Afghan NTP already gives it). Was: 'Children and everyone living with a person with TB should be checked at the clinic, even if they seem well.' This answers the earlier review note on preventive treatment.",
+    "Medical audit 2026-10-08 IL-23: new amber item tb.soon.chest 'chest pain or great tiredness with the cough' (WHO TB fact sheet symptom list). IL-7: tb.soon.blood (clinic today) and tb.urgent.blood (a lot of blood, hospital now) are now the rule on the pneumonia and red-flags pages too."
   ]
 }

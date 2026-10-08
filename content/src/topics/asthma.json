@@ -106,9 +106,9 @@
         "en": "At the clinic: inhaler and teaching"
       },
       "text": {
-        "fa": "کارمند صحی به سینه گوش می‌دهد و مطمئن می‌شود که سینه‌بغل یا توبرکلوز نیست. انهیلر سالبوتامول می‌دهد، طرز استعمالش را نشان می‌دهد و شاید انهیلر روزانهٔ پیشگیری هم اضافه کند.",
-        "ps": "روغتیايي کارکوونکی سینې ته غوږ نیسي او ډاډ ترلاسه کوي چې سینه بغل یا نری رنځ نه دی. د سالبوتامول انهیلر ورکوي، د کارولو لار یې ښيي او ښايي ورځنی مخنیوونکی انهیلر هم ورزیات کړي.",
-        "en": "The health worker listens to the chest and rules out pneumonia or TB. They give a salbutamol inhaler, show how to use it, and may add a daily preventer inhaler."
+        "fa": "کارمند صحی سینه را برای سینه‌بغل یا توبرکلوز معاینه می‌کند، انهیلر سالبوتامول می‌دهد و طرز استعمالش را نشان می‌دهد. اکثر مردم انهیلر روزانهٔ پیشگیری هم ضرورت دارند؛ آن را بخواهید.",
+        "ps": "روغتیايي کارکوونکی سینه د سینه بغل یا نري رنځ لپاره معاینه کوي، د سالبوتامول انهیلر ورکوي او د کارولو لار یې ښيي. ډېری خلک ورځني مخنیوونکي انهیلر ته هم اړتیا لري؛ هغه وغواړئ.",
+        "en": "The health worker checks the chest for pneumonia or TB, gives a salbutamol inhaler and shows its use. Most people also need a daily preventer inhaler; ask for it."
       }
     },
     {
@@ -285,7 +285,9 @@
     "WHO Package of Essential Noncommunicable disease interventions for primary health care (WHO PEN, 2020): asthma and COPD protocol (inhaled salbutamol, inhaled corticosteroid, oxygen and systemic steroids for severe attacks)",
     "WHO Pocket Book of Hospital Care for Children (2013): wheeze and asthma, salbutamol by spacer or nebuliser, oxygen",
     "Afghanistan IPEHS (2019): asthma and COPD management with inhalers from Basic Health Centre level; BPHS (2010): salbutamol at BHC, oxygen at CHC; Afghanistan National Essential Medicines List (2014): salbutamol inhaler",
-    "WHO guidelines for indoor air quality: household fuel combustion (2014)"
+    "WHO guidelines for indoor air quality: household fuel combustion (2014)",
+    "GINA Summary Guide 2025: asthma should not be treated with the reliever alone; everyone aged 6 or more needs an inhaled steroid",
+    "Afghanistan National Licensed Medicines List (2014): beclometasone inhaler marked essential (R03B)"
   ],
   "review": [
     "Preventer (inhaled steroid, beclometasone) availability at BHC level is uncertain: salbutamol inhaler is on the 2014 EML, beclometasone inhaler was not confirmed. Text says 'may add'.",
@@ -293,6 +295,7 @@
     "Home-made bottle spacer: WHO Pocket Book 2013 describes it; the tip asks the clinic to make and demonstrate it rather than the family.",
     "COPD step included because of very high solid-fuel smoke exposure in Samangan households (about 36 percent cook with straw/shrubs, IPC 2025); 'COPD' kept in brackets in English only.",
     "Dari نفس‌تنگی is also used for ordinary breathlessness; the title keeps آسم in brackets. Pashto ساه لنډي likewise. Translator to confirm what villagers call asthma (some say 'ضیق‌النفس').",
-    "Attack step says 'go to hospital now if the reliever does not help within a few minutes'; WHO advises seeking urgent care if no response, exact minutes not fixed."
+    "Attack step says 'go to hospital now if the reliever does not help within a few minutes'; WHO advises seeking urgent care if no response, exact minutes not fixed.",
+    "Medical audit 2026-10-08 IL-4: asthma.clinic was '...and may add a daily preventer inhaler'; now 'Most people also need a daily preventer inhaler; ask for it' (GINA 2025; WHO names beclometasone, which is on Afghanistan's 2014 essential list). The reliever stays the attack medicine. Supply at Samangan BHCs is not confirmed."
   ]
 }

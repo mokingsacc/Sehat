@@ -120,9 +120,9 @@
         "en": "At the hospital: hepatitis B, C treatment"
       },
       "text": {
-        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، در شفاخانهٔ امراض ساری کابل و بعضی شفاخانه‌های ولایتی. شخص گیج یا دارای خونریزی بستر می‌شود.",
-        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، د کابل د ساري ناروغیو په روغتون او ځینو ولایتي روغتونونو کې. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
-        "en": "Hepatitis C is cured with tablets and hepatitis B controlled, at the infectious diseases hospital in Kabul and some provincial hospitals. A confused or bleeding person is admitted."
+        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، در شفاخانهٔ امراض ساری کابل؛ از کلینیک دربارهٔ یک شفاخانهٔ نزدیک‌تر بپرسید. شخص گیج یا دارای خونریزی بستر می‌شود.",
+        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، د کابل د ساري ناروغیو په روغتون کې؛ له کلینیک څخه د یوه نږدې روغتون په اړه وپوښتئ. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
+        "en": "Hepatitis C is cured with tablets and hepatitis B controlled at the infectious diseases hospital in Kabul; ask the clinic about a nearer one. A confused or bleeding person is admitted."
       }
     },
     {
@@ -294,6 +294,7 @@
     "'Paracetamol only as they say' is deliberately cautious; Mo may prefer no mention of paracetamol in liver disease.",
     "Breastfeeding with hepatitis B is safe when the baby is vaccinated (WHO); the do-not item does not go into this detail.",
     "Dari زردی / Pashto ژېړی are the everyday words for jaundice; هپاتیت/هیپاتیت added in brackets.",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 IL-24: hepatitis.hospital no longer says 'and some provincial hospitals' (the WHO Afghanistan item names only the Kabul hospital); it says 'ask the clinic about a nearer one'. IL-8: yellow eyes are clinic today here and now on red-flags too (red-flags.today.yellow-eyes). IL-1 (paracetamol) is Mo's call and is unchanged."
   ]
 }
