@@ -56,12 +56,12 @@ wrangler secret put DASH_KEY      # type a long secret word: letters, digits, - 
 wrangler deploy
 ```
 2. Put `https://family-health-book.<your-subdomain>.workers.dev/e` in `content/src/config.json` as `analyticsUrl`, rebuild and publish.
-3. Your dashboard: `https://family-health-book.<your-subdomain>.workers.dev/dashboard?key=<your secret word>`.
+3. Your dashboard: open `https://family-health-book.<your-subdomain>.workers.dev/dashboard` and sign in with your secret word. Pages, sign-in, the audit log, exports and the codebook: `docs/DASHBOARD.md`.
 
 ## Disease watch (community surveillance)
 On pages about illnesses that spread (measles, diarrhoea, cough, Congo fever, dog bites, TB, jaundice, meningitis, salak) and under matching symptom-finder results, the app asks "Does someone in your home have this now?" (spoken, with Yes / No). Yes asks the district if none is chosen yet (kept on the phone) and an age group, then queues a report: illness, definition version, district, age group, day, random ids. No names, GPS or free text. Settings has a "Help watch for outbreaks" switch: on for every phone (a phone whose family switched it off keeps it off), and nothing is sent when it or "Usage counts" is off. Matching symptom-finder searches also queue a weaker signal (illness, district if chosen, day). Reports go to the same server as the usage counts (`.../r`).
 - Definitions, triggers and alert rules: `content/src/syndromes.json` (versioned); places: `content/src/districts.json`. `build.py` copies them to `server/surveillance-defs.js`.
-- Dashboard: `/watch?key=...` (weekly counts by illness, district and age, baseline, alerts, auditable CSV/JSON exports), methods at `/watch/methods`. Server code: `server/surveillance.js`; wiring: `server/SURVEILLANCE_WIRING.md`.
+- Dashboard: `/watch` (weekly counts by illness, district and age, baseline, alerts, auditable CSV/JSON exports), methods at `/watch/methods`. Server code: `server/surveillance.js`; wiring: `server/SURVEILLANCE_WIRING.md`.
 
 ## Edit the book from your phone (no programming)
 The same Cloudflare server has an editor. You change words, steps, danger signs, the home screen, the clinic list and recordings, press **Publish**, and phones take the new book the next time they have internet (and keep it for offline use). The book built into the app stays as the fallback.
@@ -74,7 +74,7 @@ One-time setup, on a computer, in `server/`:
 5. In the app, put the server address (`https://family-health-book.<your-subdomain>.workers.dev`, without `/e`) in `content/src/config.json` as `contentUrl`, then `python3 tools/build.py` and publish the app once more. From then on, content changes need no rebuild.
 
 Every time, on your phone:
-1. Open `https://family-health-book.<your-subdomain>.workers.dev/admin?key=<your secret word>` (bookmark it).
+1. Open `https://family-health-book.<your-subdomain>.workers.dev/admin` and sign in (bookmark it).
 2. The editor opens the book that is in the app now, with your own changes on top. Nothing to import.
 3. Edit. Each topic shows Dari, Pashto and English side by side; use ↑ ↓ to reorder, **Add block** / **Add item** / **Delete** to change blocks, **Recordings** under any text to upload an mp3/m4a/webm/ogg clip for each voice (Dari woman, Dari man, Pashto woman, Pashto man; up to 1.9 MB). Other tabs: Home screen (switch parts on and off), Words (buttons and spoken lines), Places (paste a Google Maps link or "36.26, 68.01" to add a clinic), Audio. Changes save by themselves.
 4. Press **Publish**. If something is missing (for example an empty Pashto text) you see a list in plain words and nothing is sent; fix it and press Publish again.
@@ -85,15 +85,15 @@ Good to know: ids of blocks never change when you edit text (recordings are link
 ### Give other people access
 Your secret word (`DASH_KEY`) is the owner's key: it always works and can do everything. Other people get their own link instead of your word.
 1. Once, on a computer in `server/`: `wrangler d1 execute fhb --remote --file=schema.sql` (safe to run again; it only adds the new tables), then `wrangler deploy`.
-2. Open the dashboard with your own link and tap **People**. Type their name, choose **Viewer** or **Editor**, tap **Make their link**.
-3. Tap **Copy** and send the link to them privately. It is shown only once (only a scrambled copy is kept). They can bookmark it on their phone.
+2. Sign in to the dashboard and tap **People**. Type their name, choose **Viewer** or **Editor**, tap **Make their link**.
+3. Tap **Copy** and send the link to them privately. It is shown only once (only a scrambled copy is kept). Opening it signs them in on that device (for 14 days); after that they can sign in at `/signin` with the key in their link.
 
 What each role can do:
-- **Viewer**: dashboard, About, feedback and voice notes, the AI summary, and can look at the book in the editor. Cannot change anything.
-- **Editor**: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot open People.
-- **Owner** (you): everything, including People.
+- **Viewer**: overview, app use, disease watch, feedback and voice notes, the AI summary, shareable exports and the codebook, and can look at the book in the editor. Cannot change anything.
+- **Editor**: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot open People, the audit log or full exports.
+- **Owner** (you): everything, including People, the audit log (`/audit`), full exports and disease-watch corrections.
 
-On People you can change someone's role or tap **Remove access** (their link stops working at once). People also shows who changed what in the book (the last 50 changes). Lost link: remove access and add the person again.
+On People you can change someone's role or tap **Remove access** (their link stops working and they are signed out everywhere at once). Every sign-in, edit, publish, correction, export and role change is written in the append-only audit log at `/audit`, with before and after. Lost link: remove access and add the person again.
 
 ## Licences
 Content is adapted from WHO guidance (IMCI, PCPNC, WHO antenatal care, Facts for Life, Doing What Matters) for non-commercial health education; some WHO source books are "all rights reserved", so ask WHO for permission before wide release (see docs). Icons adapted from Health Icons (MIT, see img/CREDITS.md). Font Noto Naskh Arabic (SIL OFL, fonts/OFL.txt).

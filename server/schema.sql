@@ -135,3 +135,39 @@ CREATE TABLE IF NOT EXISTS usage_rate (bucket INTEGER PRIMARY KEY, n INTEGER NOT
 CREATE TABLE IF NOT EXISTS limits_daily (k TEXT PRIMARY KEY, n INTEGER NOT NULL);
 -- Feedback list: newest first.
 CREATE INDEX IF NOT EXISTS fb_ts ON feedback(ts);
+-- ===== Dashboard v2 (8 October 2026): sign-in sessions and the append-only audit log. Only new tables: nothing above changes. =====
+-- One row per sign-in (server/auth.js). The browser keeps a random token in a cookie; only its SHA-256 is stored here.
+-- A removed person, a changed role or a new DASH_KEY takes effect at once, because every request checks the person again.
+CREATE TABLE IF NOT EXISTS sessions (
+  id_hash TEXT PRIMARY KEY,      -- hex SHA-256 of the cookie token (the token itself is only in the browser)
+  person_id INTEGER NOT NULL,    -- people.id, or 0 for the owner (DASH_KEY)
+  owner_fp TEXT,                 -- owner only: a fingerprint of DASH_KEY at sign-in, so a new DASH_KEY ends every owner session
+  csrf TEXT NOT NULL,            -- random token that every change (POST) from this sign-in must carry
+  method TEXT,                   -- 'password' (the sign-in page) or 'link' (a personal ?key= link)
+  created INTEGER NOT NULL, last_seen INTEGER, expires INTEGER NOT NULL,
+  ended INTEGER                  -- when the person signed out
+);
+CREATE INDEX IF NOT EXISTS sessions_person ON sessions(person_id, expires);
+-- Who did what, when, with what before and after: every sign-in, view, export, edit, publish, correction and change of access.
+-- Append-only: the code only INSERTs, and the triggers refuse UPDATE and DELETE. The older table "audit" is kept, read-only.
+CREATE TABLE IF NOT EXISTS audit_log (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts INTEGER NOT NULL,           -- time in milliseconds since 1970 (UTC)
+  who TEXT NOT NULL,             -- the person's name ('Owner' for DASH_KEY, 'automatic' for the daily clean-up)
+  who_id INTEGER,                -- people.id (0 = owner, NULL = system or unknown)
+  role TEXT NOT NULL,            -- owner, editor, viewer, system, or 'none' for a failed sign-in
+  category TEXT NOT NULL,        -- sign-in, view, export, edit, publish, correction, people, system
+  action TEXT NOT NULL,          -- plain words, e.g. 'export usage csv', 'save', 'change role'
+  target TEXT,                   -- what it was about: a part of the book, a person, a report, a dataset
+  before TEXT,                   -- JSON: the state before the change (short values in full, long ones as length + SHA-256)
+  after TEXT,                    -- JSON: the state after the change
+  params TEXT,                   -- JSON: the filters of a view or an export
+  row_count INTEGER,             -- exports: number of data rows in the file
+  sha256 TEXT,                   -- exports: SHA-256 printed in the file
+  session TEXT                   -- first 12 characters of the sign-in's hash, linking the actions of one sign-in (never the token)
+);
+CREATE INDEX IF NOT EXISTS audit_log_ts ON audit_log(ts);
+CREATE INDEX IF NOT EXISTS audit_log_cat ON audit_log(category, seq);
+CREATE INDEX IF NOT EXISTS audit_log_who ON audit_log(who_id, seq);
+CREATE TRIGGER IF NOT EXISTS audit_log_no_update BEFORE UPDATE ON audit_log BEGIN SELECT RAISE(ABORT, 'audit_log is append-only'); END;
+CREATE TRIGGER IF NOT EXISTS audit_log_no_delete BEFORE DELETE ON audit_log BEGIN SELECT RAISE(ABORT, 'audit_log is append-only'); END;

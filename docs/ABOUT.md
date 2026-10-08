@@ -63,7 +63,7 @@ Mothers, fathers and grandparents in rural Samangan, many with little or no read
   - Location is used on the phone only, to sort clinics by distance. It is not sent.
   - Usage counts are anonymous and can be switched off in Settings (this also deletes unsent counts). They are added up on the phone and sent as one total per day: language, phone type (iPhone, Android or other), app version, district if chosen, pages opened and minutes on them, clips played, and events (shared, a vaccine visit ticked with no child details, nearest-clinic used but not where). There is no install number. For the symptom finder only the matched symptom is counted; when nothing matched, nothing typed is sent.
   - Feedback is sent only when a person presses Send: the text (up to 2,000 characters) or voice note (up to about 1 MB, audio only), with language, app version and page. It carries no install number, so it cannot be linked to the phone's other messages. The server stamps its own time and deletes voice notes after 90 days.
-  - The server does not store IP addresses. The dashboard and editor need a secret key.
+  - The server does not store IP addresses. The dashboard and editor need a sign-in, and every sign-in, change, correction and export is written in an append-only audit log.
   - When Mo presses "Summarise feedback", written feedback from the last 60 days is sent to Anthropic's AI service. Typed searches are never sent, and voice notes are not sent.
   - Speaking into the symptom finder uses the phone browser's own speech recognition, which needs internet; that audio does not go to Sehat's server. The app says so before the first use.
 

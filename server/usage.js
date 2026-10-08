@@ -10,6 +10,7 @@ import { DEFS as SDEFS } from './surveillance.js';
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const DAY = 864e5;
 export const MIN_CELL = 5; // fewer phone-days than this: shown as "<5"
+export const CONSENT_VERSION = DEFS.consentVersion || null; // the consent wording of the app build this server was deployed with
 export const AUDIO_DAYS = 90, RAW_DAYS = 365, SEEN_DAYS = 7;
 const MAX_BODY = 16_000, MAX_PAGES = 80, MAX_SECS = 86_400, MAX_OPENS = 1000, MAX_PLAYS = 5000, MAX_AGE_DAYS = 62;
 const PAGE_RE = /^(?:_day|[a-z0-9-]{1,30}(?:\/[a-z0-9-]{1,40}){0,2})$/;
@@ -346,12 +347,12 @@ details.sec{border-top:1px solid #E6E1D8;padding:6px 0}details.sec>summary{curso
 .small{font-size:12px;color:#6B655E}.k .v.lt{color:#8C857B}.warnbox{background:#FFF6E0;border:1px solid #EBCB7A;border-radius:12px;padding:10px;font-size:14px}
 .b.lt i{background:repeating-linear-gradient(45deg,#C9DCDA 0 3px,#fff 3px 6px)}`;
 
-export function filterForm(q, key) {
+export function filterForm(q) {
   const opts = [['', 'All districts'], ...[...PLACES.values()].filter((p) => p.province === 'Samangan').map((p) => [p.id, p.en]), ['none', 'Not chosen'],
     ...[...PLACES.values()].filter((p) => p.province !== 'Samangan').map((p) => [p.id, p.en])];
-  return `<form class="filt" method="get" action="/dashboard"><input type="hidden" name="key" value="${e(key)}">
-<label>Period<select name="days" onchange="this.form.submit()">${[[7, 'Last 7 days'], [30, 'Last 30 days'], [90, 'Last 90 days'], [365, 'Last year']].map(([v, l]) => `<option value="${v}"${q.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>
-<label>District<select name="district" onchange="this.form.submit()">${opts.map(([v, l]) => `<option value="${e(v)}"${q.district === v ? ' selected' : ''}>${e(l)}</option>`).join('')}</select></label>
+  return `<form class="filt" method="get" action="/usage">
+<label>Period<select name="days">${[[7, 'Last 7 days'], [30, 'Last 30 days'], [90, 'Last 90 days'], [365, 'Last year']].map(([v, l]) => `<option value="${v}"${q.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>
+<label>District<select name="district">${opts.map(([v, l]) => `<option value="${e(v)}"${q.district === v ? ' selected' : ''}>${e(l)}</option>`).join('')}</select></label>
 <button type="submit">Show</button></form>`;
 }
 export function kpiTiles(v, kpi) {
@@ -381,11 +382,10 @@ function pageRows(pages, withGroup) {
 const PAGE_HEAD = '<tr><th>Page</th><th class="num">Minutes</th><th class="num">Share</th><th class="num">Opens</th><th class="num">Min per open</th><th class="num">Plays</th><th class="num">From search</th><th class="num">Phone-days</th></tr>';
 const diffBar = (d) => { const w = Math.min(40, Math.abs(d) * 100 * 1.3); return `<span class="dv"><span class="z"></span><i style="${d >= 0 ? `left:50%;width:${w}px;background:#1F6F7A` : `right:50%;width:${w}px;background:#B6322D`}"></i></span>`; };
 
-export function section(v, key) {
+export function section(v) {
   const q = v.q, where = q.district ? placeName(q.district) : 'all districts';
   const maxS = Math.max(1, ...v.secs.map((x) => x.s));
-  const k = encodeURIComponent(key);
-  let h = `<div class="c" id="use" style="margin-top:12px"><div class="l" style="font-size:16px;font-weight:700;color:#22201D">What people use · ${e(where)} · last ${q.days} days</div>
+  let h = `<div class="card" id="use" style="margin-top:12px"><div class="l" style="font-size:16px;font-weight:700;color:#22201D">What people use · ${e(where)} · last ${q.days} days</div>
 <p class="s">Minutes count only while a page is on the screen, and stop 2 minutes after the last touch unless audio is playing. Phones send each finished day once, so the last day or two fill in late.
 <b>&lt;5</b> = fewer than 5 phone-days (one phone on one day), hidden so that no family can be recognised. A "phone-day" is one phone that used the page on one day.</p>`;
   if (!v.secs.length) h += '<p class="s">No counts from the new app yet for this choice.</p>';
@@ -404,7 +404,7 @@ ${v.allPages.length > 30 ? `<p class="small">${v.allPages.length - 30} more page
     const eg = v.areaGroups.get('');
     h += `<div class="l" style="margin-top:16px;font-size:15px;color:#22201D">By area: how each district splits its time</div>
 <p class="s">Each column adds up to 100%: the share of that area's minutes spent in each section. <b>Bold</b> = at least 1.5 times the share everywhere; grey = half or less.</p>
-<div class="tw"><table class="mx"><tr><th>Section</th>${areas.map((a) => `<th>${a.id ? `<a href="/dashboard?key=${k}&days=${q.days}&district=${encodeURIComponent(a.id)}#use">${e(a.name)}</a>` : e(a.name)}<div class="small">${hc(a.dd, fmtN(a.dd))} phone-days</div></th>`).join('')}</tr>
+<div class="tw"><table class="mx"><tr><th>Section</th>${areas.map((a) => `<th>${a.id ? `<a href="/usage?days=${q.days}&district=${encodeURIComponent(a.id)}#use">${e(a.name)}</a>` : e(a.name)}<div class="small">${hc(a.dd, fmtN(a.dd))} phone-days</div></th>`).join('')}</tr>
 ${v.matrix.rows.map((r) => `<tr><td>${e(r.name)}</td>${areas.map((a) => {
     const x = v.areaGroups.get(a.id).get(r.g), base = (eg.get(r.g) || { share: 0 }).share;
     if (!x) return '<td class="lo">–</td>';
@@ -414,7 +414,7 @@ ${v.matrix.rows.map((r) => `<tr><td>${e(r.name)}</td>${areas.map((a) => {
   }).join('')}</tr>`).join('')}</table></div>
 <div class="l" style="margin-top:14px">Top pages in each district</div>
 <div class="tw"><table><tr><th>District</th><th class="num">Phone-days</th><th class="num">Minutes</th><th>Most used (share of the district's time)</th></tr>
-${v.topPages.map((a) => `<tr><td><a href="/dashboard?key=${k}&days=${q.days}&district=${encodeURIComponent(a.id)}#use">${e(a.name)}</a></td><td class="num">${hc(a.dd, fmtN(a.dd))}</td><td class="num">${hc(a.dd, fmtN(a.minutes / 60))}</td>
+${v.topPages.map((a) => `<tr><td><a href="/usage?days=${q.days}&district=${encodeURIComponent(a.id)}#use">${e(a.name)}</a></td><td class="num">${hc(a.dd, fmtN(a.dd))}</td><td class="num">${hc(a.dd, fmtN(a.minutes / 60))}</td>
 <td>${small(a.dd) ? LTH : a.top.map((t) => `${e(t.name)} <span class="small">${fmtPct(t.share)}</span>`).join(' · ') || '<span class="small">pages each under 5 phone-days</span>'}</td></tr>`).join('')}</table></div>`;
   }
   if (v.compare) {
@@ -427,7 +427,7 @@ ${[...v.compare.groups.map((x) => ({ ...x, b: true })), ...v.compare.pages].map(
     h += `<div class="l" style="margin-top:14px">Things people did</div><div class="tw"><table><tr><th>Action</th><th class="num">Times</th><th class="num">Phone-days</th></tr>
 ${v.actions.map((x) => `<tr><td>${e(x.name)}</td><td class="num">${hc(x.dd, fmtN(x.o))}</td><td class="num">${hc(x.dd, fmtN(x.dd))}</td></tr>`).join('')}</table></div>`;
   }
-  h += `<p style="margin-top:12px"><a href="/usage.csv?key=${k}&days=${q.days}${q.district ? '&district=' + encodeURIComponent(q.district) : ''}" style="font-weight:700">Download as a spreadsheet (CSV) →</a> <span class="small">Same "&lt;5" rule. Every download is written in the access log.</span></p></div>`;
+  h += `<p style="margin-top:12px"><a href="/usage.csv?days=${q.days}${q.district ? '&district=' + encodeURIComponent(q.district) : ''}" style="font-weight:700">Download as a spreadsheet (CSV) →</a> <span class="small">Same "&lt;5" rule. Every download is written in the access log.</span></p></div>`;
   return h;
 }
 
@@ -451,14 +451,14 @@ export function csv(v) {
 }
 
 /* ---------------- the privacy page (public: /privacy) ---------------- */
-export function privacyPage(dashKey) {
+export function privacyPage() {
   const P = (DEFS.privacy && DEFS.privacy.text) || {}, ids = (DEFS.privacy && DEFS.privacy.ids) || Object.keys(P);
   const lang = (lg, dir, title) => `<section lang="${lg}" dir="${dir}" class="c"><h2>${title}</h2>${ids.map((id) => `<p>${e(P[id] && P[id][lg])}</p>`).join('')}</section>`;
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · privacy</title>
 <style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:16px;max-width:860px;margin:auto;font-size:17px;line-height:1.55}h1{font-size:24px;margin:6px 0}h2{font-size:18px;margin:0 0 6px}
 .c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px 16px;margin-top:12px}.s{font-size:14px;color:#6B655E}a{color:#B6322D}ul{padding-left:20px}li{margin:6px 0}
 [dir=rtl]{font-family:"Noto Naskh Arabic",Tahoma,system-ui,sans-serif;font-size:19px;line-height:1.9}</style>
-${dashKey ? `<p class="s"><a href="/dashboard?key=${e(encodeURIComponent(dashKey))}">← Dashboard</a></p>` : ''}
+<p class="s"><a href="/dashboard">← Dashboard (signed-in team only)</a></p>
 <h1>Sehat · privacy</h1>
 <p class="s">Sehat (صحت) is a free family health book for phones, for villages in Samangan, Afghanistan. This page says, in plain words, what the app sends, what it keeps, and who can see it. The same words are in the app (Settings → Privacy), with a speaker button to hear them.</p>
 <div class="c"><h2>In short</h2><ul>

@@ -5,15 +5,21 @@ export default {
  "ageGroups": [
   {
    "id": "u5",
-   "en": "Child under 5"
+   "en": "Child under 5",
+   "fa": "طفل زیر ۵ سال",
+   "ps": "له ۵ کلونو کم ماشوم"
   },
   {
    "id": "5-14",
-   "en": "Older child (5 to 14)"
+   "en": "Older child (5 to 14)",
+   "fa": "طفل بزرگتر (۵ تا ۱۴ سال)",
+   "ps": "لوی ماشوم (۵ تر ۱۴ کلونو)"
   },
   {
    "id": "15+",
-   "en": "Adult (15 and over)"
+   "en": "Adult (15 and over)",
+   "fa": "بزرگسال (۱۵ سال و بیشتر)",
+   "ps": "لوی (۱۵ کلن او پورته)"
   }
  ],
  "syndromes": [
@@ -35,6 +41,8 @@ export default {
     "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"
    },
    "en": "Suspected measles",
+   "fa": "سرخکان (مشکوک)",
+   "ps": "شری (شکمن)",
    "ask": "Fever and a red rash all over the body; it may be measles."
   },
   {
@@ -63,6 +71,8 @@ export default {
     "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"
    },
    "en": "Acute watery diarrhoea",
+   "fa": "اسهال آبکی حاد",
+   "ps": "حاد اوبلن نس ناستی",
    "ask": "Three or more watery stools in one day, with no blood."
   },
   {
@@ -91,6 +101,8 @@ export default {
     "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"
    },
    "en": "Bloody diarrhoea",
+   "fa": "اسهال خونی",
+   "ps": "وینه لرونکی نس ناستی",
    "ask": "Diarrhoea, with blood in the stool."
   },
   {
@@ -120,6 +132,8 @@ export default {
     "url": "https://www.emro.who.int/images/stories/afghanistan/Afghanistan-Outbreaks-Situation-report-week-43-2025.pdf"
    },
    "en": "Acute respiratory infection / pneumonia",
+   "fa": "سینه‌بغل / التهاب حاد تنفسی",
+   "ps": "سینه بغل / حاد تنفسي انتان",
    "ask": "Cough with fast or difficult breathing."
   },
   {
@@ -139,6 +153,8 @@ export default {
     "url": "https://www.who.int/news-room/fact-sheets/detail/crimean-congo-haemorrhagic-fever"
    },
    "en": "Suspected CCHF (Congo fever)",
+   "fa": "تب کانگو (مشکوک)",
+   "ps": "کانګو تبه (شکمنه)",
    "ask": "Sudden fever with bleeding from the nose, gums or under the skin."
   },
   {
@@ -169,6 +185,8 @@ export default {
     "url": "https://www.who.int/news-room/fact-sheets/detail/rabies"
    },
    "en": "Dog bite (rabies exposure)",
+   "fa": "گزیدن سگ (خطر هاری)",
+   "ps": "د سپي چیچل (د هاري خطر)",
    "ask": "A bite or scratch from a dog or another animal."
   },
   {
@@ -184,6 +202,8 @@ export default {
     "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"
    },
    "en": "Suspected malaria",
+   "fa": "ملاریا (مشکوک)",
+   "ps": "ملاریا (شکمنه)",
    "ask": "Fever and shivering that keep coming back."
   },
   {
@@ -203,6 +223,8 @@ export default {
     "url": "https://www.who.int/publications/i/item/9789240022676"
    },
    "en": "Cough 2 weeks or more (presumptive TB)",
+   "fa": "سرفهٔ بیشتر از ۲ هفته (توبرکلوز؟)",
+   "ps": "له ۲ اونیو زیات ټوخی (نری رنځ؟)",
    "ask": "A cough for 2 weeks or more."
   },
   {
@@ -231,6 +253,8 @@ export default {
     "url": "https://www.who.int/publications/i/item/outbreak-surveillance-and-response-in-humanitarian-emergencies-who-guidelines-for-ewarn-implementation"
    },
    "en": "Acute jaundice (hepatitis?)",
+   "fa": "زردی حاد (هپاتیت؟)",
+   "ps": "حاد ژېړی (هیپاټایټس؟)",
    "ask": "Eyes or skin have recently turned yellow (not a newborn baby)."
   },
   {
@@ -251,6 +275,8 @@ export default {
     "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"
    },
    "en": "Suspected meningitis",
+   "fa": "مننژیت (مشکوک)",
+   "ps": "مننژیت (شکمن)",
    "ask": "Fever with a stiff neck."
   },
   {
@@ -270,6 +296,8 @@ export default {
     "url": "https://www.who.int/news-room/fact-sheets/detail/leishmaniasis"
    },
    "en": "Cutaneous leishmaniasis (salak)",
+   "fa": "سالک (لیشمانیای جلدی)",
+   "ps": "سالک (د پوستکي لیشمانیا)",
    "ask": "A skin sore that has not healed after two weeks."
   },
   {
@@ -285,6 +313,8 @@ export default {
     "url": "https://www.who.int/teams/immunization-vaccines-and-biologicals/immunization-analysis-and-insights/surveillance/surveillance-for-vpds/vpd-surveillance-standards"
    },
    "en": "Acute flaccid paralysis (polio?)",
+   "fa": "فلج شل حاد (پولیو؟)",
+   "ps": "حاد شل فلج (پولیو؟)",
    "ask": "A child's arm or leg has suddenly gone floppy and will not move."
   }
  ],
@@ -331,206 +361,288 @@ export default {
   {
    "id": "aybak-city",
    "en": "Aybak city",
+   "fa": "شهر ایبک",
+   "ps": "د ایبک ښار",
    "province": "Samangan"
   },
   {
    "id": "aybak",
    "en": "Aybak district (villages)",
+   "fa": "اطراف ایبک (قریه‌ها)",
+   "ps": "د ایبک شاوخوا کلي",
    "province": "Samangan"
   },
   {
    "id": "dara-i-suf-payin",
    "en": "Dara-i-Suf Payin",
+   "fa": "دره صوف پایین",
+   "ps": "دره صوف پایین",
    "province": "Samangan"
   },
   {
    "id": "dara-i-suf-bala",
    "en": "Dara-i-Suf Bala",
+   "fa": "دره صوف بالا",
+   "ps": "دره صوف بالا",
    "province": "Samangan"
   },
   {
    "id": "feroz-nakhchir",
    "en": "Feroz Nakhchir",
+   "fa": "فیروز نخچیر",
+   "ps": "فیروز نخچیر",
    "province": "Samangan"
   },
   {
    "id": "hazrat-i-sultan",
    "en": "Hazrat-i-Sultan",
+   "fa": "حضرت سلطان",
+   "ps": "حضرت سلطان",
    "province": "Samangan"
   },
   {
    "id": "khuram-wa-sarbagh",
    "en": "Khuram wa Sarbagh",
+   "fa": "خرم و سارباغ",
+   "ps": "خرم او سارباغ",
    "province": "Samangan"
   },
   {
    "id": "ruyi-du-ab",
    "en": "Ruyi Du Ab",
+   "fa": "روی دوآب",
+   "ps": "روی دوآب",
    "province": "Samangan"
   },
   {
    "id": "p-badakhshan",
    "en": "Badakhshan (province)",
+   "fa": "ولایت بدخشان",
+   "ps": "بدخشان ولایت",
    "province": "Badakhshan"
   },
   {
    "id": "p-badghis",
    "en": "Badghis (province)",
+   "fa": "ولایت بادغیس",
+   "ps": "بادغیس ولایت",
    "province": "Badghis"
   },
   {
    "id": "p-baghlan",
    "en": "Baghlan (province)",
+   "fa": "ولایت بغلان",
+   "ps": "بغلان ولایت",
    "province": "Baghlan"
   },
   {
    "id": "p-balkh",
    "en": "Balkh (province)",
+   "fa": "ولایت بلخ",
+   "ps": "بلخ ولایت",
    "province": "Balkh"
   },
   {
    "id": "p-bamyan",
    "en": "Bamyan (province)",
+   "fa": "ولایت بامیان",
+   "ps": "بامیان ولایت",
    "province": "Bamyan"
   },
   {
    "id": "p-daykundi",
    "en": "Daykundi (province)",
+   "fa": "ولایت دایکندی",
+   "ps": "دایکندي ولایت",
    "province": "Daykundi"
   },
   {
    "id": "p-farah",
    "en": "Farah (province)",
+   "fa": "ولایت فراه",
+   "ps": "فراه ولایت",
    "province": "Farah"
   },
   {
    "id": "p-faryab",
    "en": "Faryab (province)",
+   "fa": "ولایت فاریاب",
+   "ps": "فاریاب ولایت",
    "province": "Faryab"
   },
   {
    "id": "p-ghazni",
    "en": "Ghazni (province)",
+   "fa": "ولایت غزنی",
+   "ps": "غزني ولایت",
    "province": "Ghazni"
   },
   {
    "id": "p-ghor",
    "en": "Ghor (province)",
+   "fa": "ولایت غور",
+   "ps": "غور ولایت",
    "province": "Ghor"
   },
   {
    "id": "p-helmand",
    "en": "Helmand (province)",
+   "fa": "ولایت هلمند",
+   "ps": "هلمند ولایت",
    "province": "Helmand"
   },
   {
    "id": "p-herat",
    "en": "Herat (province)",
+   "fa": "ولایت هرات",
+   "ps": "هرات ولایت",
    "province": "Herat"
   },
   {
    "id": "p-jowzjan",
    "en": "Jowzjan (province)",
+   "fa": "ولایت جوزجان",
+   "ps": "جوزجان ولایت",
    "province": "Jowzjan"
   },
   {
    "id": "p-kabul",
    "en": "Kabul (province)",
+   "fa": "ولایت کابل",
+   "ps": "کابل ولایت",
    "province": "Kabul"
   },
   {
    "id": "p-kandahar",
    "en": "Kandahar (province)",
+   "fa": "ولایت کندهار",
+   "ps": "کندهار ولایت",
    "province": "Kandahar"
   },
   {
    "id": "p-kapisa",
    "en": "Kapisa (province)",
+   "fa": "ولایت کاپیسا",
+   "ps": "کاپیسا ولایت",
    "province": "Kapisa"
   },
   {
    "id": "p-khost",
    "en": "Khost (province)",
+   "fa": "ولایت خوست",
+   "ps": "خوست ولایت",
    "province": "Khost"
   },
   {
    "id": "p-kunar",
    "en": "Kunar (province)",
+   "fa": "ولایت کنر",
+   "ps": "کونړ ولایت",
    "province": "Kunar"
   },
   {
    "id": "p-kunduz",
    "en": "Kunduz (province)",
+   "fa": "ولایت کندز",
+   "ps": "کندز ولایت",
    "province": "Kunduz"
   },
   {
    "id": "p-laghman",
    "en": "Laghman (province)",
+   "fa": "ولایت لغمان",
+   "ps": "لغمان ولایت",
    "province": "Laghman"
   },
   {
    "id": "p-logar",
    "en": "Logar (province)",
+   "fa": "ولایت لوگر",
+   "ps": "لوګر ولایت",
    "province": "Logar"
   },
   {
    "id": "p-nangarhar",
    "en": "Nangarhar (province)",
+   "fa": "ولایت ننگرهار",
+   "ps": "ننګرهار ولایت",
    "province": "Nangarhar"
   },
   {
    "id": "p-nimroz",
    "en": "Nimroz (province)",
+   "fa": "ولایت نیمروز",
+   "ps": "نیمروز ولایت",
    "province": "Nimroz"
   },
   {
    "id": "p-nuristan",
    "en": "Nuristan (province)",
+   "fa": "ولایت نورستان",
+   "ps": "نورستان ولایت",
    "province": "Nuristan"
   },
   {
    "id": "p-paktia",
    "en": "Paktia (province)",
+   "fa": "ولایت پکتیا",
+   "ps": "پکتیا ولایت",
    "province": "Paktia"
   },
   {
    "id": "p-paktika",
    "en": "Paktika (province)",
+   "fa": "ولایت پکتیکا",
+   "ps": "پکتیکا ولایت",
    "province": "Paktika"
   },
   {
    "id": "p-panjshir",
    "en": "Panjshir (province)",
+   "fa": "ولایت پنجشیر",
+   "ps": "پنجشیر ولایت",
    "province": "Panjshir"
   },
   {
    "id": "p-parwan",
    "en": "Parwan (province)",
+   "fa": "ولایت پروان",
+   "ps": "پروان ولایت",
    "province": "Parwan"
   },
   {
    "id": "p-sar-e-pol",
    "en": "Sar-e Pol (province)",
+   "fa": "ولایت سرپل",
+   "ps": "سرپل ولایت",
    "province": "Sar-e Pol"
   },
   {
    "id": "p-takhar",
    "en": "Takhar (province)",
+   "fa": "ولایت تخار",
+   "ps": "تخار ولایت",
    "province": "Takhar"
   },
   {
    "id": "p-uruzgan",
    "en": "Uruzgan (province)",
+   "fa": "ولایت ارزگان",
+   "ps": "ارزګان ولایت",
    "province": "Uruzgan"
   },
   {
    "id": "p-wardak",
    "en": "Wardak (province)",
+   "fa": "ولایت میدان وردک",
+   "ps": "میدان وردګ ولایت",
    "province": "Wardak"
   },
   {
    "id": "p-zabul",
    "en": "Zabul (province)",
+   "fa": "ولایت زابل",
+   "ps": "زابل ولایت",
    "province": "Zabul"
   }
  ]

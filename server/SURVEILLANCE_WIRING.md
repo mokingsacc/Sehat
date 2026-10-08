@@ -28,17 +28,17 @@ if (path === '/watch' || path.startsWith('/watch/')) return SURV.handle(req, env
 |---|---|---|---|
 | `GET /watch` (page: alerts, chart, table, searches) | yes | yes | yes (plus the correction form) |
 | `GET /watch/methods` | yes | yes | yes |
-| `GET /watch/export.csv` / `.json`, `kind=counts|alerts|signals`, `level=shareable` (default) | yes | yes | yes |
+| `GET /watch/export.csv` / `.json`, `kind=counts|alerts|signals|dhis2`, `level=shareable` (default) | yes | yes | yes |
 | same with `level=full` | 403 | 403 | yes |
 | `kind=raw` (every report) and `kind=corrections` | 403 | 403 | yes |
 | `POST /watch/correct` (void/restore a report or install, with a reason) | 403 | 403 | yes |
 
 Query parameters for the page and exports: `from`, `to` (ISO weeks like `2026-W41`), or `weeks` (default 12, max 104); optional `syndrome`, `place`.
 
-## 4. A link from the usage dashboard (in `page()`), next to "About this app →"
-```js
-<a href="/watch?key=${e(key)}" style="font-weight:700">Disease watch →</a>
-```
+## 4. Navigation
+Since 8 October 2026 every dashboard page shares one header (`server/ui.js` `shell()`), with a "Disease watch" tab. Pages need a
+sign-in (session cookie); `?key=` still works for scripts and old links. Corrections are POSTs that carry the session's CSRF
+token, and each one is also written in the audit log (`docs/DASHBOARD.md`).
 
 ## 5. Database
 Run `wrangler d1 execute fhb --remote --file=schema.sql` once more: it adds `surv_reports`, `surv_signals`, `surv_corrections`, `surv_exports` and triggers that refuse UPDATE and DELETE on them (append-only). Nothing else changes.

@@ -24,6 +24,8 @@ database_id = "PASTE-THE-ID-FROM-wrangler-d1-create"
 # Secrets (set with `wrangler secret put NAME`, never written here):
 #   DASH_KEY           the owner's secret word for /dashboard, /admin and /people (other people get their own links from /people)
 #   ANTHROPIC_API_KEY  optional, for the "Summarise feedback" button
+# Optional, not a secret: DHIS2_MAP, the HMIS team's own DHIS2 UIDs for the disease-watch DHIS2 export (docs/DASHBOARD.md), e.g. in [vars]:
+# DHIS2_MAP = '{"dataElements":{"measles":"uid"},"orgUnits":{"aybak":"uid"},"ages":{"u5":"uid"}}'
 
 # Daily clean-up at 03:17 UTC (server/usage.js cleanup): voice notes deleted 90 days after they arrive,
 # raw events from old app versions deleted after 12 months, old upload ids and flood counters removed.

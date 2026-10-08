@@ -1,17 +1,31 @@
-// Cloudflare Worker: receives anonymous usage counts from the app, shows Mo a dashboard, and holds the book editor.
-// Bindings: D1 database "DB"; secret "DASH_KEY" (the owner's long random word; the dashboard is /dashboard?key=..., the editor /admin?key=...,
-// the people page /people?key=...); other people get their own key from /people, used in the same ?key= links;
-// var "APP_URL" (the app's public address: the editor page lays the editor's changes over <APP_URL>/content/book.json); optional secret "ANTHROPIC_API_KEY" (for "Summarise feedback").
+// Cloudflare Worker: receives anonymous usage counts and disease-watch reports from the app, shows the dashboard, and holds the
+// book editor. Bindings: D1 database "DB"; secret "DASH_KEY" (the owner's password; other people get their own key from /people);
+// var "APP_URL" (the app's public address: the editor lays its changes over <APP_URL>/content/book.json); optional secret
+// "ANTHROPIC_API_KEY" (for "Summarise feedback"); optional var "DHIS2_MAP" (HMIS ids for the DHIS2 export, server/codes.js).
+// Signed-in pages (docs/DASHBOARD.md): /dashboard (overview), /usage, /watch, /inbox (feedback), /data (codebook and exports),
+// /admin (editor), /audit and /people (owner), /about. Sign-in is a session cookie (server/auth.js); every change carries a
+// CSRF token; every sign-in, view, export, edit, publish, correction and change of access goes in the append-only audit log.
 import ABOUT from './about.js';
 import * as SURV from './surveillance.js';
 import * as USAGE from './usage.js';
+import * as AUTH from './auth.js';
+import * as LOG from './auditlog.js';
+import * as HOME from './home.js';
+import * as DATA from './research.js';
+import { t, pickLang } from './i18n.js';
+import { shell, htmlResponse, newNonce, esc as hesc, scriptJson, CSS as UI_CSS, periodForm, when } from './ui.js';
 import * as OV from '../js/overlay.js'; // editor changes as an overlay on the app's own book (docs/EDITOR_AND_RELEASES.md)
 import { editorCore } from './editor-core.js'; // the editor's rules, shared with the editor page
 const CORE = editorCore();
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
 const clip = (s, n) => (typeof s === 'string' ? s.slice(0, n) : null);
-const json = (o, status = 200, headers = {}) => new Response(JSON.stringify(o), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } });
-const NOT_FOUND = () => new Response('Not found', { status: 404 });
+const json = (o, status = 200, headers = {}) => new Response(JSON.stringify(o), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', ...headers } });
+const NOT_FOUND = () => new Response('Not found', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+
+// pages a person opens in the browser (an old ?key= link to one of them signs in and comes back without the key)
+const PAGES = new Set(['/dashboard', '/usage', '/watch', '/watch/methods', '/inbox', '/data', '/admin', '/audit', '/people', '/about']);
+const SIGNED_IN = (p) => PAGES.has(p) || p.startsWith('/watch/') || p.startsWith('/fb-audio/') || p === '/feedback.json' || p === '/inbox/export.csv' || p === '/stats.json' || p === '/usage.csv'
+  || p.startsWith('/admin/') || p === '/ai/summary' || p.startsWith('/people/') || p.startsWith('/audit/') || p.startsWith('/data/');
 
 export default {
   async fetch(req, env) {
@@ -26,129 +40,190 @@ export default {
     // public, read-only: the published book and uploaded narration (never the draft)
     if (req.method === 'GET' && (path === '/content/version.json' || path === '/content/book.json' || path === '/content/overlay.json')) return publicBook(env, path);
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
-    if (req.method === 'GET' && path === '/privacy') return new Response(USAGE.privacyPage(url.searchParams.get('key')), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
-    // everything below needs a key: the owner's DASH_KEY, or a person's own key (made on /people)
-    const isAdmin = path === '/watch' || path.startsWith('/watch/') || path.startsWith('/fb-audio/') || path === '/feedback.json' || path === '/dashboard' || path === '/about' || path === '/stats.json' || path === '/usage.csv' || path === '/admin' || path.startsWith('/admin/') || path === '/ai/summary' || path === '/people' || path.startsWith('/people/');
-    if (req.method === 'GET' && path === '/') return signIn(false);
-    if (!isAdmin) return new Response('ok', { headers: CORS });
-    const me = await whoIs(env, url.searchParams.get('key'));
-    if (!me && path === '/dashboard') return signIn(url.searchParams.has('key'));
-    if (!me) return NOT_FOUND(); // wrong, removed or missing key: the same answer as a page that does not exist
-    if (path === '/watch' || path.startsWith('/watch/')) {
-      // access log: who looked at or downloaded disease-watch data (the methods page holds no data)
-      if (req.method === 'GET' && path !== '/watch/methods') await audit(env, me, path === '/watch' ? 'view disease watch' : 'export disease watch', (path.slice(7) || 'page') + ' ' + accessDetail(url));
-      return SURV.handle(req, env, url, me);
-    }
-    if (path === '/people' || path.startsWith('/people/')) {
-      if (me.role !== 'owner') return NOT_FOUND();
-      if (path === '/people') return new Response(peoplePage(url.searchParams.get('key'), me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
-      if (!path.startsWith('/people/api/')) return NOT_FOUND();
-      try { return await peopleApi(req, env, url, path.slice(12), me); } catch (e) { return json({ error: 'Something went wrong on the server: ' + (e && e.message) }, 500); }
-    }
-    if (path.startsWith('/fb-audio/')) {
-      const id = +path.split('/')[2];
-      const row = await env.DB.prepare('SELECT audio, type FROM feedback WHERE id = ?').bind(id).first();
-      if (!row || !row.audio) return NOT_FOUND();
-      await audit(env, me, 'listen voice note', '#' + id);
-      // only ever served as sound: a fixed audio type, never sniffed, never run as a page (an old row may hold any type)
-      const ct = audioType(row.type) || 'application/octet-stream';
-      return new Response(new Uint8Array(row.audio), { headers: { 'Content-Type': ct, 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; sandbox",
-        'Content-Disposition': `attachment; filename="voice-note-${id}.${AUDIO_FILE_EXT[ct] || 'bin'}"`, 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer' } });
-    }
-    if (path === '/feedback.json') {
-      await audit(env, me, 'export feedback', 'feedback.json');
-      return Response.json((await env.DB.prepare('SELECT id, ts, lang, version, page, text, type, (audio IS NOT NULL) has_audio FROM feedback ORDER BY ts DESC LIMIT 500').all()).results);
-    }
-    if (path === '/dashboard' || path === '/stats.json' || path === '/usage.csv') {
-      const q = USAGE.parseQuery(url, env), raw = await USAGE.load(env, q), v = raw.ok ? USAGE.view(raw, q) : null;
-      if (path === '/usage.csv') {
-        if (!v) return new Response('The usage tables are not made yet: run schema.sql again (see server/README.md).', { status: 503 });
-        const c = USAGE.csv(v);
-        await audit(env, me, 'export usage csv', `${accessDetail(url)} rows=${c.rows}`);
-        return new Response(c.text, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': `attachment; filename="sehat-usage-${q.from}-to-${q.today}${q.district ? '-' + q.district : ''}.csv"`, 'Cache-Control': 'no-store' } });
+    const lang = pickLang(url.searchParams.get('lang') || AUTH.langCookie(req));
+    const withLang = (res) => {
+      if (url.searchParams.has('lang') && pickLang(url.searchParams.get('lang')) === url.searchParams.get('lang')) {
+        const r = new Response(res.body, res); r.headers.append('Set-Cookie', AUTH.setLangCookie(url, lang)); return r;
       }
-      const s = await stats(env, q.days);
-      if (v) v.kpi.installs += s.installsLegacy; // installs counted by old app versions (install id) plus the new one-time pings
-      s.usage = v ? USAGE.toJson(v) : { error: 'run schema.sql again' };
-      delete s.installsLegacy;
-      await audit(env, me, path === '/stats.json' ? 'export stats.json' : 'view dashboard', accessDetail(url));
-      if (path === '/stats.json') return Response.json(s);
-      return new Response(page(s, url.searchParams.get('key'), me, v, q, raw), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+      return res;
+    };
+    if (req.method === 'GET' && path === '/privacy') return new Response(USAGE.privacyPage(), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer' } });
+    if (path === '/' || path === '/signin') return withLang(await signInRoute(req, env, url, lang));
+    if (path === '/signout') return signOut(req, env, url);
+    if (!SIGNED_IN(path)) return new Response('ok', { headers: CORS });
+
+    // who is asking: a session cookie, or (old links, scripts and tools) the key itself
+    let auth = await AUTH.fromCookie(req, env, url), via = auth ? 'cookie' : null;
+    const bearer = /^Bearer\s+(\S+)$/i.exec(req.headers.get('Authorization') || '');
+    const key = url.searchParams.get('key') || (bearer ? bearer[1] : '');
+    if (key) {
+      const p = await AUTH.keyPerson(env, key);
+      if (req.method === 'GET' && PAGES.has(path) && !bearer) {
+        // an old personal link: sign in, then the same page without the key in its address
+        if (!p) { if (await AUTH.tooManyFails(env)) return signInPage(url, lang, 'slow', 429); await AUTH.noteFail(env); await LOG.log(env, null, 'sign-in', 'sign in failed', { params: { via: 'link' } }); return signInPage(url, lang, 'bad', 401, path); }
+        const s = await AUTH.startSession(env, url, p, 'link', true);
+        await LOG.log(env, p, 'sign-in', 'sign in', { after: { method: 'link', role: p.role }, session: s.sid });
+        url.searchParams.delete('key');
+        return withLang(new Response(null, { status: 303, headers: { Location: path + (url.search || ''), 'Set-Cookie': s.cookie, 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' } }));
+      }
+      if (p) { auth = { me: p, csrf: null, sid: null }; via = 'key'; } else if (!auth) { await AUTH.noteFail(env); }
     }
-    if (path === '/about') {
-      const k = encodeURIComponent(url.searchParams.get('key') || '');
-      return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · about</title><body style="margin:0;padding:16px;background:#FAF8F4"><p style="font-family:system-ui,sans-serif"><a href="/dashboard?key=${k}" style="color:#B6322D">← Dashboard</a> &nbsp; <a href="/privacy" style="color:#B6322D">Privacy: what the app sends and keeps →</a></p>${ABOUT}</body>`, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+    if (!auth) {
+      if (req.method === 'GET' && PAGES.has(path)) return new Response(null, { status: 303, headers: { Location: '/signin?next=' + encodeURIComponent(path + url.search), 'Cache-Control': 'no-store' } });
+      if (path.startsWith('/fb-audio/')) return NOT_FOUND();
+      return json({ error: 'Please sign in again (reload the page).', signin: true }, 401);
     }
-    if (path === '/ai/summary') return req.method === 'POST' ? aiSummary(env) : json({ error: 'Use POST' }, 405);
-    if (path === '/admin') return new Response(adminPage(url.searchParams.get('key'), env, me), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
-    if (path.startsWith('/admin/api/')) {
-      // viewers may read the draft (GET) but every change (POST) is refused
-      if (req.method !== 'GET' && !canEdit(me)) return json({ error: VIEW_ONLY }, 403);
-      try { return await adminApi(req, env, url, path.slice(11), me); } catch (e) { return json({ error: 'Something went wrong on the server: ' + (e && e.message) }, 500); }
+    const me = auth.me;
+    // every change made from a page must carry this sign-in's CSRF token and come from this server's own page
+    if (via === 'cookie' && req.method !== 'GET' && req.method !== 'HEAD' && !(await AUTH.csrfOk(req, url, auth.csrf))) {
+      return json({ error: 'This page is out of date, or the request did not come from this site. Reload the page and try again.' }, 403);
     }
-    return NOT_FOUND();
+    const ctx = { lang, nonce: newNonce(), csrf: auth.csrf || '', sid: auth.sid, via };
+    try { return withLang(await route(req, env, url, path, me, ctx)); }
+    catch (e) { return json({ error: 'Something went wrong on the server: ' + (e && e.message) }, 500); }
   },
   // daily clean-up (wrangler.toml [triggers] crons): voice notes after 90 days, old raw events after 12 months
   async scheduled(event, env, ctx) {
     const job = (async () => {
       const out = await USAGE.cleanup(env, Number.isFinite(event && event.scheduledTime) ? event.scheduledTime : Date.now());
-      await audit(env, { name: 'system', role: 'cron' }, 'retention clean-up', Object.entries(out).map(([k, n]) => `${k} ${n}`).join(', '));
+      try { out.sessionsDeleted = await deleteOldSessions(env); } catch {}
+      await LOG.log(env, { id: null, name: 'automatic', role: 'system' }, 'system', 'retention clean-up', { after: out });
       return out;
     })();
     if (ctx && ctx.waitUntil) ctx.waitUntil(job);
     return job;
   },
 };
-// what a person asked for, for the access log (never their key)
-const accessDetail = (url) => [...url.searchParams].filter(([k]) => k !== 'key').map(([k, v]) => `${k}=${String(v).slice(0, 40)}`).join(' ').slice(0, 150) || 'default view';
+// sign-ins that ended or expired more than 90 days ago (the audit log keeps the sign-in itself)
+async function deleteOldSessions(env) {
+  const r = await env.DB.prepare('DELETE FROM sessions WHERE expires < ? OR (ended IS NOT NULL AND ended < ?)').bind(Date.now() - 90 * 864e5, Date.now() - 90 * 864e5).run();
+  return (r && r.meta && r.meta.changes) || 0;
+}
+// what a person asked for, for the audit log (never a key)
+const accessParams = (url) => Object.fromEntries([...url.searchParams].filter(([k]) => k !== 'key' && k !== 'lang').map(([k, v]) => [k, String(v).slice(0, 40)]));
 
-/* ================= who is signed in: the owner, or a person with their own key ================= */
-const ROLES = { editor: 'Editor', viewer: 'Viewer' }; // the owner is not a row in "people": it is DASH_KEY
+async function route(req, env, url, path, me, ctx) {
+  const L = (category, action, o = {}) => LOG.log(env, me, category, action, { session: ctx.sid, ...o });
+  if (path === '/dashboard') return HOME.overview(env, url, me, ctx);
+  if (path === '/watch' || path.startsWith('/watch/')) {
+    // access log: who looked at or downloaded disease-watch data (the methods page holds no data); exports log themselves
+    if (req.method === 'GET' && path === '/watch') await L('view', 'view disease watch', { params: accessParams(url) });
+    return SURV.handle(req, env, url, me, ctx);
+  }
+  if (path === '/people' || path.startsWith('/people/')) {
+    if (me.role !== 'owner') return NOT_FOUND();
+    if (path === '/people') { await L('view', 'view people'); return htmlResponse(peoplePage(url, me, ctx), ctx.nonce); }
+    if (!path.startsWith('/people/api/')) return NOT_FOUND();
+    return peopleApi(req, env, url, path.slice(12), me, ctx);
+  }
+  if (path === '/audit' || path.startsWith('/audit/')) {
+    if (me.role !== 'owner') return NOT_FOUND();
+    if (path === '/audit') { await L('view', 'view audit log', { params: accessParams(url) }); return LOG.page(env, url, me, ctx); }
+    if (path === '/audit/export.csv') return LOG.exportLog(env, url, me, 'csv', ctx.sid);
+    if (path === '/audit/export.json') return LOG.exportLog(env, url, me, 'json', ctx.sid);
+    return NOT_FOUND();
+  }
+  if (path === '/data') { await L('view', 'view data and codebook'); return DATA.page(env, url, me, ctx); }
+  if (path === '/data/export.csv' || path === '/data/export') return DATA.exportData(env, url, me, 'csv', ctx.sid);
+  if (path === '/data/export.json') return DATA.exportData(env, url, me, 'json', ctx.sid);
+  if (path === '/data/codebook.csv') return DATA.codebookFile(env, me, 'csv', ctx.sid);
+  if (path === '/data/codebook.json') return DATA.codebookFile(env, me, 'json', ctx.sid);
+  if (path.startsWith('/fb-audio/')) {
+    const id = +path.split('/')[2];
+    const row = await env.DB.prepare('SELECT audio, type FROM feedback WHERE id = ?').bind(id).first();
+    if (!row || !row.audio) return NOT_FOUND();
+    await L('view', 'listen voice note', { target: 'feedback #' + id });
+    // only ever served as sound: a fixed audio type, never sniffed, never run as a page (an old row may hold any type)
+    const ct = audioType(row.type) || 'application/octet-stream';
+    return new Response(new Uint8Array(row.audio), { headers: { 'Content-Type': ct, 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; sandbox",
+      'Content-Disposition': `attachment; filename="voice-note-${id}.${AUDIO_FILE_EXT[ct] || 'bin'}"`, 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer' } });
+  }
+  if (path === '/inbox') { await L('view', 'view feedback'); return inboxPage(env, url, me, ctx); }
+  if (path === '/feedback.json' || path === '/inbox/export.csv') return feedbackExport(env, me, path.endsWith('.csv') ? 'csv' : 'json', ctx);
+  if (path === '/usage' || path === '/stats.json' || path === '/usage.csv') {
+    const q = USAGE.parseQuery(url, env), raw = await USAGE.load(env, q), v = raw.ok ? USAGE.view(raw, q) : null;
+    if (path === '/usage.csv') {
+      if (!v) return new Response('The usage tables are not made yet: the next server update makes them (schema.sql).', { status: 503 });
+      const c = USAGE.csv(v);
+      await L('export', 'export usage csv', { target: 'usage summary', params: accessParams(url), rows: c.rows, sha256: await LOG.sha256(c.text) });
+      return new Response(c.text, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Content-Disposition': `attachment; filename="sehat-usage-${q.from}-to-${q.today}${q.district ? '-' + q.district : ''}.csv"`, 'Cache-Control': 'no-store' } });
+    }
+    const s = await stats(env, q.days);
+    if (v) v.kpi.installs += s.installsLegacy; // installs counted by old app versions (install id) plus the new one-time pings
+    s.usage = v ? USAGE.toJson(v) : { error: 'run schema.sql again' };
+    delete s.installsLegacy;
+    if (path === '/stats.json') { await L('export', 'export stats.json', { params: accessParams(url) }); return json(s); }
+    await L('view', 'view app use', { params: accessParams(url) });
+    return usagePage(s, url, me, v, q, ctx);
+  }
+  if (path === '/about') {
+    const body = `<p class="noprint"><a href="/privacy">Privacy: what the app sends and keeps →</a></p><div class="card">${ABOUT}</div>`;
+    return htmlResponse(shell({ ...ctx, url, me, title: t(ctx.lang, 'nav.about'), body }), ctx.nonce);
+  }
+  if (path === '/ai/summary') return req.method === 'POST' ? aiSummary(env, me, ctx) : json({ error: 'Use POST' }, 405);
+  if (path === '/admin') { await L('view', 'open editor'); return htmlResponse(adminPage(env, me, ctx), ctx.nonce, 200, { appUrl: appOrigin(env) }); }
+  if (path.startsWith('/admin/api/')) {
+    // viewers may read the draft (GET) but every change (POST) is refused
+    if (req.method !== 'GET' && !canEdit(me)) return json({ error: VIEW_ONLY }, 403);
+    return adminApi(req, env, url, path.slice(11), me, ctx);
+  }
+  return NOT_FOUND();
+}
+const appOrigin = (env) => { try { return new URL(String(env.APP_URL || '').trim()).origin; } catch { return ''; } };
+
+/* ================= sign in and out ================= */
+function signInPage(url, lang, msg, status = 200, next = '') {
+  const nonce = newNonce(), dir = lang === 'en' ? 'ltr' : 'rtl';
+  const nx = AUTH.safeNext(next || url.searchParams.get('next') || '');
+  const langs = ['en', 'fa', 'ps'].map((lg) => `<a href="/signin?lang=${lg}${nx !== '/dashboard' ? '&next=' + encodeURIComponent(nx) : ''}"${lg === lang ? ' aria-current="true"' : ''}>${{ en: 'English', fa: 'دری', ps: 'پښتو' }[lg]}</a>`).join('');
+  const m = msg ? `<p class="msg ${msg === 'out' ? 'good' : 'bad'}" role="alert">${hesc(t(lang, 'signin.' + msg))}</p>` : '';
+  return htmlResponse(`<!doctype html><html lang="${lang === 'en' ? 'en' : lang + '-AF'}" dir="${dir}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="color-scheme" content="light dark">
+<title>${hesc(t(lang, 'signin.title'))} · Sehat</title><style>${UI_CSS}.box{max-width:400px;margin:10vh auto 0;padding:24px}.box label{display:block;font-weight:600;margin:12px 0 6px}.box input[type=password]{width:100%;font-size:17px;padding:12px}
+.box .rem{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:14px;color:var(--ink2)}.box .rem input{margin-top:3px}.box button{width:100%;padding:12px;font-size:17px;margin-top:14px}</style></head><body>
+<main class="box card"><p class="langs" style="justify-content:flex-end;margin:0">${langs}</p><h1><span style="color:#B6322D">صحت</span> Sehat</h1><p class="s" style="margin-top:0">${hesc(t(lang, 'signin.sub'))}</p>${m}
+<form method="post" action="/signin"><input type="hidden" name="next" value="${hesc(nx)}"><input type="hidden" name="lang" value="${lang}">
+<label for="key">${hesc(t(lang, 'signin.key'))}</label><input id="key" name="key" type="password" autocomplete="current-password" required autofocus>
+<label class="rem"><input type="checkbox" name="remember" value="1"> ${hesc(t(lang, 'signin.remember'))}</label>
+<button class="primary" type="submit">${hesc(t(lang, 'signin.go'))}</button></form><p class="s">${hesc(t(lang, 'signin.note'))}</p></main></body></html>`, nonce, status);
+}
+async function signInRoute(req, env, url, lang) {
+  if (req.method === 'GET') {
+    const a = await AUTH.fromCookie(req, env, url);
+    if (a) return new Response(null, { status: 303, headers: { Location: AUTH.safeNext(url.searchParams.get('next')), 'Cache-Control': 'no-store' } });
+    // an old bookmark "/?key=..." or "/signin?key=...": treat it as a personal link to the overview
+    if (url.searchParams.get('key')) return new Response(null, { status: 303, headers: { Location: '/dashboard?key=' + encodeURIComponent(url.searchParams.get('key')), 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' } });
+    return signInPage(url, lang, url.searchParams.get('m') === 'out' ? 'out' : '');
+  }
+  if (req.method !== 'POST') return json({ error: 'Use POST' }, 405);
+  if (!AUTH.sameOrigin(req, url)) return json({ error: 'Sign in from this site’s own page.' }, 403);
+  let f; try { f = await req.formData(); } catch { return signInPage(url, lang, 'bad', 400); }
+  const lg = pickLang(String(f.get('lang') || lang)), next = AUTH.safeNext(String(f.get('next') || ''));
+  if (await AUTH.tooManyFails(env)) return signInPage(url, lg, 'slow', 429, next);
+  const p = await AUTH.keyPerson(env, String(f.get('key') || ''));
+  if (!p) { await AUTH.noteFail(env); await LOG.log(env, null, 'sign-in', 'sign in failed', { params: { via: 'password' } }); return signInPage(url, lg, 'bad', 401, next); }
+  const remember = f.get('remember') === '1';
+  const s = await AUTH.startSession(env, url, p, 'password', remember);
+  await LOG.log(env, p, 'sign-in', 'sign in', { after: { method: 'password', role: p.role, remember }, session: s.sid });
+  const h = new Headers({ Location: next, 'Cache-Control': 'no-store' });
+  h.append('Set-Cookie', s.cookie); h.append('Set-Cookie', AUTH.setLangCookie(url, lg));
+  return new Response(null, { status: 303, headers: h });
+}
+async function signOut(req, env, url) {
+  if (req.method !== 'POST') return new Response(null, { status: 303, headers: { Location: '/signin' } });
+  const a = await AUTH.fromCookie(req, env, url);
+  if (a) {
+    if (!(await AUTH.csrfOk(req, url, a.csrf))) return json({ error: 'Reload the page and try again.' }, 403);
+    await AUTH.endSession(env, a.idHash);
+    await LOG.log(env, a.me, 'sign-in', 'sign out', { session: a.sid });
+  }
+  return new Response(null, { status: 303, headers: { Location: '/signin?m=out', 'Set-Cookie': AUTH.clearCookie(url), 'Cache-Control': 'no-store' } });
+}
+
+/* ================= roles ================= */
+const ROLES = AUTH.ROLE_NAMES; // editor and viewer; the owner is not a row in "people": it is DASH_KEY
 const VIEW_ONLY = 'You can view but not edit. Ask Mo for an editor link if you need to change the book.';
 const canEdit = (me) => me.role === 'owner' || me.role === 'editor';
-const hex = (buf) => [...new Uint8Array(buf)].map((x) => x.toString(16).padStart(2, '0')).join('');
-const sha256 = async (text) => hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
-// compares two strings of the same length without stopping at the first difference
-function sameText(a, b) {
-  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
-  let d = 0;
-  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return d === 0;
-}
-async function whoIs(env, key) {
-  key = String(key || '').trim(); // a pasted password often carries a space or line break
-  if (!key || key.length > 200) return null;
-  const h = await sha256(key);
-  // hashes are always 64 characters, so comparing them takes the same time whatever the key is
-  if (env.DASH_KEY && sameText(h, await sha256(String(env.DASH_KEY).trim()))) return { id: 0, name: 'Owner', role: 'owner' };
-  let row;
-  try { row = await env.DB.prepare('SELECT id, name, role, key_hash, last_used FROM people WHERE key_hash = ? AND revoked = 0').bind(h).first(); }
-  catch { return null; } // the people table is not made yet (schema.sql not run again): only the owner can sign in
-  if (!row || !sameText(row.key_hash, h) || !ROLES[row.role]) return null;
-  const now = Date.now();
-  if (!row.last_used || now - row.last_used > 60_000) { // at most one write a minute per person
-    try { await env.DB.prepare('UPDATE people SET last_used = ? WHERE id = ?').bind(now, row.id).run(); } catch {}
-  }
-  return { id: row.id, name: row.name, role: row.role };
-}
-// "who did what" for changes to the book; the same person repeating the same change within 10 minutes updates one line
-async function audit(env, me, action, detail = '') {
-  try {
-    const now = Date.now(), d = String(detail || '').slice(0, 200);
-    const last = await env.DB.prepare('SELECT id, ts, who, role, action, detail FROM audit ORDER BY id DESC LIMIT 1').first();
-    if (last && last.who === me.name && last.role === me.role && last.action === action && last.detail === d && now - last.ts < 600_000) {
-      await env.DB.prepare('UPDATE audit SET ts = ? WHERE id = ?').bind(now, last.id).run();
-    } else {
-      await env.DB.prepare('INSERT INTO audit (ts, who, role, action, detail) VALUES (?, ?, ?, ?, ?)').bind(now, me.name, me.role, action, d).run();
-      if (last && last.id % 50 === 0) await env.DB.prepare('DELETE FROM audit WHERE id < ?').bind(last.id - 20000).run(); // keep the last 20,000 lines (views and downloads are logged too)
-    }
-  } catch {} // never stop a save because the log could not be written
-}
-function newKey() {
-  const b = crypto.getRandomValues(new Uint8Array(32)); // 256 random bits
-  return btoa(String.fromCharCode(...b)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
-
+const sha256 = AUTH.sha256;
 // phone-number-like runs of 7 or more digits (Latin, Persian or Arabic, with spaces, dashes or dots between) are removed
 const stripNumbers = (t) => String(t).replace(/[+\uFF0B]?[0-9\u06F0-\u06F9\u0660-\u0669](?:[\s\-\u2013.()]*[0-9\u06F0-\u06F9\u0660-\u0669]){6,}/g, '…');
 // a voice note is at most 2 minutes at a low bit rate (js/app.js): 1 MB is plenty and keeps the database small
@@ -219,68 +294,89 @@ async function stats(env, days) {
   };
 }
 
-// "Sara · viewer" (shown at the top of every page)
-const signedIn = (me) => (me.role === 'owner' ? 'the owner' : `${me.name} · ${me.role}`);
-function page(s, key, me, v, q, raw) {
-  const e = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ================= App use (/usage): the detailed usage tables, and the older app's raw events ================= */
+function usagePage(s, url, me, v, q, ctx) {
+  const lang = ctx.lang, e = hesc;
   const kpi = (l, val, sub) => `<div class="k"><div class="l">${l}</div><div class="v${val === USAGE.LT ? ' lt' : ''}">${e(val)}</div><div class="s">${sub || ''}</div></div>`;
   const num = (x) => (typeof x === 'number' ? x : 0);
   const max = Math.max(1, ...s.perDay.map((r) => num(r.users)));
   const bars = s.perDay.map((r) => `<div class="b" title="${e(r.day)}: ${e(r.users)} users"><i style="height:${(num(r.users) / max) * 100}%"></i><span>${e(r.day.slice(5))}</span></div>`).join('');
-  const table = (rows, a, b, h1, h2) => `<table><tr><th>${h1}</th><th>${h2}</th></tr>${rows.map((r) => `<tr><td>${e(r[a])}</td><td>${e(r[b])}</td></tr>`).join('')}</table>`;
+  const table = (rows, a, b, h1, h2) => `<div class="tw"><table><tr><th>${h1}</th><th class="n">${h2}</th></tr>${rows.map((r) => `<tr><td>${e(r[a])}</td><td class="n">${e(r[b])}</td></tr>`).join('')}</table></div>`;
   const hs = typeof s.homeScreen.n === 'number' && s.homeScreen.n && typeof s.homeScreen.s === 'number' ? Math.round((100 * s.homeScreen.s) / s.homeScreen.n) + '%' : '–';
-  const k = e(encodeURIComponent(key || '')), where = q.district ? USAGE.placeName(q.district) : 'all districts'; // a key with + & # % still works in links
+  const where = q.district ? USAGE.placeName(q.district) : 'all districts';
   const LN = { fa: 'Dari', ps: 'Pashto', en: 'English' }, PL = { android: 'Android', ios: 'iPhone', other: 'Other' };
-  const fb = (f) => `<div style="border-top:1px solid #E6E1D8;padding:8px 0"><div class="s">${e(isoTime(f.ts).slice(0, 16).replace('T', ' '))} · ${e(f.lang)} · from ${e(f.page)}</div>${f.text ? `<div dir="auto" style="font-size:16px">${e(f.text)}</div>` : ''}${f.has_audio ? `<audio controls preload="none" src="/fb-audio/${f.id}?key=${k}"></audio>` : /^audio\//.test(f.type || '') ? `<div class="s"><i>Voice note deleted (voice notes are kept ${USAGE.AUDIO_DAYS} days).</i></div>` : ''}</div>`;
-  return `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · usage</title>
-<style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:16px;max-width:1200px;margin:auto}h1{font-size:22px}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}.k,.c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px;min-width:0}
-.l{font-size:13px;color:#6B655E}.v{font-size:30px;font-weight:700;color:#1F6F7A}.s{font-size:12px;color:#6B655E}
-.chart{display:flex;align-items:flex-end;gap:3px;height:160px;margin-top:10px}.b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;font-size:9px;color:#6B655E;text-align:center;min-width:0;overflow:hidden}
-.b i{display:block;background:#1F6F7A;border-radius:4px 4px 0 0;min-height:2px}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:12px;margin-top:12px}
-table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px;border-top:1px solid #E6E1D8}th{color:#6B655E;font-weight:600}a{color:#B6322D}
-details.old>summary{cursor:pointer;font-weight:700;padding:4px 0}${USAGE.CSS}</style>
-<h1>Sehat · usage</h1>
-<p class="s" id="who">Signed in as <b>${e(signedIn(me))}</b>${me.role === 'viewer' ? ' (you can look at everything here, but not change the book)' : ''}. What you open and download here is written in the access log.</p>
-<p><a href="/admin?key=${k}" style="font-weight:700">${me.role === 'viewer' ? 'See the book (view only) →' : 'Edit the book →'}</a> &nbsp; ${me.role === 'owner' ? `<a href="/people?key=${k}" style="font-weight:700">People and access log →</a> &nbsp; ` : ''}<a href="/watch?key=${k}" style="font-weight:700">Disease watch →</a> &nbsp; <a href="/about?key=${k}" style="font-weight:700">About this app →</a> &nbsp; <a href="/privacy?key=${k}" style="font-weight:700">Privacy →</a></p>
-${USAGE.filterForm(q, key)}
-<p class="s">Counts from phones whose family agreed to send them (daily totals, no install id). Phones send each finished day when they next have internet, so recent days fill in late. Showing <b>${e(where)}</b>, last ${q.days} days. Installs are not split by district.</p>
-${v ? '' : `<p class="warnbox">The tables for the new counts are not in the database yet. On your computer, in the server folder, run <code>wrangler d1 execute fhb --remote --file=schema.sql</code> (safe to run again: it only adds what is missing).</p>`}
+  const places = SURV.DEFS.places.map((p) => ({ id: p.id, name: (p[lang] || p.en), province: p.province }));
+  const body = `<h1>${e(t(lang, 'nav.usage'))}</h1>
+<p class="lead">Counts from phones whose family agreed to send them (daily totals, no install id). Phones send each finished day when they next have internet, so recent days fill in late. Showing <b>${e(where)}</b>, last ${q.days} days. Installs are not split by district.</p>
+${periodForm('/usage', q, lang, places)}
+${v ? '' : '<div class="msg warn">The tables for the new counts are not in the database yet. The next server update makes them (schema.sql; safe to run again: it only adds what is missing).</div>'}
 ${v ? `<div class="g">${USAGE.kpiTiles(v, kpi)}</div>
-<div class="c" style="margin-top:12px"><div class="l">Phones using it each day · ${e(where)}</div><div class="chart">${USAGE.dailyChart(v) || '<span class="s">No data yet</span>'}</div><div class="s">A striped bar = fewer than 5 phones that day (the exact number is hidden).</div></div>
-${USAGE.section(v, key)}
-<div class="two"><div class="c"><div class="l">Language (phone-days)</div>${USAGE.smallTable(v.langs, 'Language', 'Phone-days', (x) => LN[x] || x)}<div class="l" style="margin-top:12px">Phone type (phone-days)</div>${USAGE.smallTable(v.plats, 'Type', 'Phone-days', (x) => PL[x] || x)}</div>
-<div class="c"><div class="l">App version (phone-days)</div>${USAGE.smallTable(v.versions, 'Version', 'Phone-days')}<div class="l" style="margin-top:12px">Consent wording the counts were sent under</div>${USAGE.smallTable(v.cvs, 'Version', 'Phone-days', (x) => (x === 'legacy' ? 'older app (no question asked)' : x))}</div>
-<div class="c"><div class="l">New installs per day (all districts)</div>${USAGE.smallTable(v.installsPerDay.map((r) => ({ k: r.day, n: r.n })).reverse().slice(0, 31), 'Day', 'Installs')}</div></div>` : ''}
-<div class="two">
-<div class="c" style="grid-column:1/-1"><div class="l">Summary of feedback (AI)</div><p class="s">Sends the written feedback from the last 60 days to Claude (Anthropic) and shows the main themes and suggested changes. Voice notes and searches are not sent.</p><button id="aib" style="font:inherit;padding:8px 14px;border-radius:10px;border:1px solid #1F6F7A;background:#1F6F7A;color:#fff">Summarise feedback</button><div id="aio" dir="auto" style="white-space:pre-wrap;margin-top:10px;font-size:15px"></div></div>
-<div class="c" style="grid-column:1/-1"><div class="l">Feedback from users (newest first)</div><p class="s">Not linked to any phone. Phone numbers are removed from the text. Voice notes are deleted ${USAGE.AUDIO_DAYS} days after they arrive.</p>${s.feedback.length ? s.feedback.map(fb).join('') : '<span class="s">No feedback yet</span>'}<p class="s">Download all as JSON: <a href="/feedback.json?key=${k}">feedback.json</a> (paste it to Claude to summarise what to improve).</p></div></div>
-<details class="c old" style="margin-top:12px"><summary>Older app versions: raw events (deleted after 12 months)</summary>
+<div class="card" style="margin-top:12px"><div class="l">Phones using it each day · ${e(where)}</div><div class="chartdiv" role="img" aria-label="Phones using the app each day">${USAGE.dailyChart(v) || '<span class="s">No data yet</span>'}</div><div class="s">A striped bar = fewer than 5 phones that day (the exact number is hidden).</div></div>
+${USAGE.section(v)}
+<div class="two"><div class="card"><div class="l">Language (phone-days)</div>${USAGE.smallTable(v.langs, 'Language', 'Phone-days', (x) => LN[x] || x)}<div class="l" style="margin-top:12px">Phone type (phone-days)</div>${USAGE.smallTable(v.plats, 'Type', 'Phone-days', (x) => PL[x] || x)}</div>
+<div class="card"><div class="l">App version (phone-days)</div>${USAGE.smallTable(v.versions, 'Version', 'Phone-days')}<div class="l" style="margin-top:12px">Consent wording the counts were sent under</div>${USAGE.smallTable(v.cvs, 'Version', 'Phone-days', (x) => (x === 'legacy' ? 'older app (no question asked)' : x))}</div>
+<div class="card"><div class="l">New installs per day (all districts)</div>${USAGE.smallTable(v.installsPerDay.map((r) => ({ k: r.day, n: r.n })).reverse().slice(0, 31), 'Day', 'Installs')}</div></div>` : ''}
+<p class="noprint" style="margin-top:12px">For research files (daily or epi-week rows, split by district, language, app build or consent wording, with a codebook): <a href="/data#exports">${e(t(lang, 'nav.data'))} →</a></p>
+<details class="card old" style="margin-top:12px"><summary>Older app versions: raw events (deleted after 12 months)</summary>
 <p class="s">Before October 2026 the app sent every page view with a random install number. Those rows are still here until they are 12 months old; new phones send only daily totals (above). Counts 1 to 4 show as "&lt;5"; searches typed fewer than 5 times are hidden${s.asksHidden ? ` (${s.asksHidden} hidden)` : ''}.</p>
 <div class="g">${kpi('Installs (old app)', s.installs, `+${e(s.newInstalls)} in this period`)}${kpi('Active last 7 days', s.active7, `${e(s.activeN)} in this period`)}${kpi('Times opened', s.opens)}${kpi('Minutes spent', s.minutes, typeof s.avgSessionSec === 'number' ? `average visit ${Math.floor(s.avgSessionSec / 60)}m ${s.avgSessionSec % 60}s` : '')}${kpi('Audio plays', s.plays)}${kpi('On home screen', hs, `${e(s.shares)} shares`)}</div>
-<div class="c" style="margin-top:12px"><div class="l">People using it each day (old app)</div><div class="chart">${bars || '<span class="s">No data</span>'}</div></div>
-<div class="two"><div class="c"><div class="l">Most opened pages</div>${table(s.pages, 'p', 'n', 'Page', 'Views')}</div><div class="c"><div class="l">Most played clips</div>${table(s.clips, 'p', 'n', 'Clip', 'Plays')}</div>
-<div class="c"><div class="l">Language</div>${table(s.langs, 'lang', 'n', 'Language', 'Phones')}<div class="l" style="margin-top:12px">Phone type</div>${table(s.plats, 'plat', 'n', 'Type', 'Phones')}</div>
-<div class="c"><div class="l">What people searched for ("none:" = nothing found, a topic to add)</div>${table(s.asks, 'p', 'n', 'Search', 'Times')}</div>
-<div class="c"><div class="l">Book version on phones</div>${table(s.versions, 'version', 'n', 'Version', 'Phones')}<div class="l" style="margin-top:12px">New installs per day</div>${table(s.installsPerDay, 'day', 'n', 'Day', 'Installs')}</div></div></details>
-<script>var __name = (f) => f; (${dashClient.toString()})(${scriptJson(key)})</script>`;
+<div class="card" style="margin-top:12px"><div class="l">People using it each day (old app)</div><div class="chartdiv">${bars || '<span class="s">No data</span>'}</div></div>
+<div class="two"><div class="card"><div class="l">Most opened pages</div>${table(s.pages, 'p', 'n', 'Page', 'Views')}</div><div class="card"><div class="l">Most played clips</div>${table(s.clips, 'p', 'n', 'Clip', 'Plays')}</div>
+<div class="card"><div class="l">Language</div>${table(s.langs, 'lang', 'n', 'Language', 'Phones')}<div class="l" style="margin-top:12px">Phone type</div>${table(s.plats, 'plat', 'n', 'Type', 'Phones')}</div>
+<div class="card"><div class="l">What people searched for ("none:" = nothing found, a topic to add)</div>${table(s.asks, 'p', 'n', 'Search', 'Times')}</div>
+<div class="card"><div class="l">Book version on phones</div>${table(s.versions, 'version', 'n', 'Version', 'Phones')}<div class="l" style="margin-top:12px">New installs per day</div>${table(s.installsPerDay, 'day', 'n', 'Day', 'Installs')}</div></div></details>`;
+  return htmlResponse(shell({ ...ctx, url, me, title: t(lang, 'nav.usage'), body, css: USAGE.CSS }), ctx.nonce);
 }
 
-function dashClient(key) {
+/* ================= Feedback (/inbox): the list, voice notes, the AI summary ================= */
+async function inboxPage(env, url, me, ctx) {
+  const lang = ctx.lang, e = hesc, p = url.searchParams;
+  const fl = ['fa', 'ps', 'en'].includes(p.get('fl')) ? p.get('fl') : '', voice = p.get('voice') === '1';
+  let list = [];
+  try {
+    list = ((await env.DB.prepare(`SELECT id, ts, lang, version, page, text, type, (audio IS NOT NULL) has_audio FROM feedback WHERE 1 = 1${fl ? ' AND lang = ?' : ''}${voice ? ' AND audio IS NOT NULL' : ''} ORDER BY ts DESC LIMIT 200`)
+      .bind(...(fl ? [fl] : [])).all()).results) || [];
+  } catch {}
+  const LN = { fa: 'Dari', ps: 'Pashto', en: 'English' };
+  const item = (f) => `<article style="border-top:1px solid var(--line);padding:10px 0"><div class="s">${e(when(f.ts))} UTC · ${e(LN[f.lang] || f.lang || '?')} · from <code>${e(f.page || '?')}</code> · app ${e(f.version || '?')} · #${f.id}</div>
+${f.text ? `<div dir="auto" style="font-size:16px;white-space:pre-wrap">${e(f.text)}</div>` : ''}${f.has_audio ? `<audio controls preload="none" src="/fb-audio/${f.id}"></audio>` : /^audio\//.test(f.type || '') ? `<div class="s"><i>Voice note deleted (voice notes are kept ${USAGE.AUDIO_DAYS} days).</i></div>` : ''}</article>`;
+  const body = `<h1>${e(t(lang, 'inbox.title'))}</h1><p class="lead">Not linked to any phone. Phone numbers are removed from the text. Voice notes are deleted ${USAGE.AUDIO_DAYS} days after they arrive. Listening to a voice note is written in the audit log.</p>
+<section class="card"><h2>${e(t(lang, 'inbox.ai'))}</h2><p class="s">Sends the written feedback from the last 60 days to Claude (Anthropic) and shows the main themes and suggested changes. Voice notes and searches are not sent. Each summary is written in the audit log.</p>
+<button id="aib" class="primary" type="button">${e(t(lang, 'inbox.aiBtn'))}</button><div id="aio" dir="auto" aria-live="polite" style="white-space:pre-wrap;margin-top:10px;font-size:15px"></div></section>
+<section class="card"><form class="filt noprint" method="get" action="/inbox"><label>${e(t(lang, 'language'))}<select name="fl"><option value="">${e(t(lang, 'all'))}</option>${['fa', 'ps', 'en'].map((x) => `<option value="${x}"${fl === x ? ' selected' : ''}>${LN[x]}</option>`).join('')}</select></label>
+<label style="flex-direction:row;gap:6px;align-items:center"><input type="checkbox" name="voice" value="1"${voice ? ' checked' : ''}> Voice notes only</label><button class="primary">${e(t(lang, 'show'))}</button>
+<a class="btn" href="/inbox/export.csv">${e(t(lang, 'download'))} CSV</a><a class="btn" href="/feedback.json">${e(t(lang, 'download'))} JSON</a></form>
+${list.length ? list.map(item).join('') : `<div class="empty">${e(t(lang, 'inbox.empty'))}</div>`}${list.length === 200 ? '<p class="s">The newest 200 are shown; the download has up to 500.</p>' : ''}</section>`;
+  return htmlResponse(shell({ ...ctx, url, me, title: t(lang, 'inbox.title'), body, script: `(${inboxClient.toString()})(${scriptJson({ csrf: ctx.csrf })})` }), ctx.nonce);
+}
+// Runs in the browser on /inbox.
+function inboxClient(cfg) {
   const btn = document.getElementById('aib'), out = document.getElementById('aio');
   btn.onclick = async () => {
     btn.disabled = true; out.textContent = 'Asking the AI. This can take up to a minute…';
     try {
-      const r = await fetch('/ai/summary?key=' + encodeURIComponent(key), { method: 'POST' });
+      const r = await fetch('/ai/summary', { method: 'POST', headers: { 'X-CSRF-Token': cfg.csrf } });
       const j = await r.json();
-      out.textContent = j.error || (j.text + (j.voiceNotes ? '\n\n' + j.voiceNotes + ' voice note(s): voice note, listen in the list below (not sent to the AI).' : ''));
+      out.textContent = j.error || (j.text + (j.voiceNotes ? '\n\n' + j.voiceNotes + ' voice note(s): listen in the list below (not sent to the AI).' : ''));
     } catch (e) { out.textContent = 'Could not reach the server: ' + e.message; }
     btn.disabled = false;
   };
 }
-// JSON that is safe inside a <script> tag
-const scriptJson = (o) => JSON.stringify(o).replace(/</g, '\\u003c').replace(/[\u2028\u2029]/g, (c) => '\\u' + c.charCodeAt(0).toString(16));
-
+async function feedbackExport(env, me, format, ctx) {
+  const rows = (await env.DB.prepare('SELECT id, ts, lang, version, page, text, type, (audio IS NOT NULL) has_audio FROM feedback ORDER BY ts DESC LIMIT 500').all()).results || [];
+  if (format === 'json') {
+    const body = JSON.stringify(rows);
+    await LOG.log(env, me, 'export', 'export feedback json', { target: 'feedback', rows: rows.length, sha256: await LOG.sha256(body), session: ctx.sid });
+    return new Response(body, { headers: { 'Content-Type': 'application/json; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store' } });
+  }
+  const cols = ['id', 'received_utc', 'lang', 'app_version', 'page', 'type', 'has_voice_note', 'text'];
+  const data = rows.map((r) => ({ id: r.id, received_utc: when(r.ts) ? new Date(+r.ts).toISOString() : '', lang: r.lang || '', app_version: r.version || '', page: r.page || '', type: r.type || '', has_voice_note: r.has_audio ? 1 : 0, text: r.text || '' }));
+  const body = DATA.csvBody(cols, data), hash = await LOG.sha256(body);
+  await LOG.log(env, me, 'export', 'export feedback csv', { target: 'feedback', rows: data.length, sha256: hash, session: ctx.sid });
+  const head = `# Sehat feedback (newest 500)\n# generated_utc: ${new Date().toISOString()}\n# row_count: ${data.length}\n# sha256: ${hash} (grep -v "^#" file.csv | sha256sum)\n# Free text written by app users: not for sharing outside the team.\n`;
+  return new Response(head + body, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Content-Disposition': `attachment; filename="sehat-feedback-${new Date().toISOString().slice(0, 10)}.csv"` } });
+}
 /* ================= book content: the editor's changes, the published overlay, audio ================= */
 // The editor keeps only what it changed, one row per unit (js/overlay.js) in the table edit_unit. The editor page
 // downloads the app's own book itself and lays those units over it, the same way phones do. So the draft always
@@ -365,12 +461,12 @@ async function note(env, k) { return env.DB.prepare('SELECT v, ts FROM edit_unit
 const putNote = (env, k, v, ts) => env.DB.prepare('INSERT INTO edit_unit (k, v, base, ts) VALUES (?1, ?2, \'\', ?3) ON CONFLICT(k) DO UPDATE SET v = ?2, ts = ?3').bind(k, v, ts);
 const isNote = (k) => k.startsWith('#');
 // the saved time of each of these units (0 when the editor has not changed it)
-async function savedTimes(env, keys) {
+async function savedTimes(env, keys, sizes) {
   const out = {};
   for (let i = 0; i < keys.length; i += 90) { // D1 takes at most 100 values in one query
     const part = keys.slice(i, i + 90);
-    const rows = ((await env.DB.prepare(`SELECT k, ts FROM edit_unit WHERE k IN (${part.map(() => '?').join(',')})`).bind(...part).all()) || {}).results || [];
-    for (const r of rows) out[r.k] = r.ts;
+    const rows = ((await env.DB.prepare(`SELECT k, ts, length(v) n FROM edit_unit WHERE k IN (${part.map(() => '?').join(',')})`).bind(...part).all()) || {}).results || [];
+    for (const r of rows) { out[r.k] = r.ts; if (sizes) sizes[r.k] = r.n; }
   }
   return out;
 }
@@ -435,8 +531,9 @@ function changesCheck(rows) {
 }
 
 /* ---------- editor API (owner and editors; viewers only reach "state" and "legacy") ---------- */
-async function adminApi(req, env, url, op, me) {
-  const log = (action, detail) => audit(env, me, action, detail);
+async function adminApi(req, env, url, op, me, ctx) {
+  // every change is written in the audit log: what part, and its state before and after
+  const log = (category, action, o = {}) => LOG.log(env, me, category, action, { session: ctx && ctx.sid, ...o });
   const post = req.method === 'POST';
   if (op === 'state') {
     // small: the editor's own changes, never the whole book (the page downloads the app's book itself)
@@ -473,10 +570,11 @@ async function adminApi(req, env, url, op, me) {
     const slot = normSlot(q.get('slot') || (q.get('lang') && q.get('voice') ? q.get('lang') + '-' + q.get('voice') : q.get('lang') || ''));
     if (!slot || !ID_RE.test(id)) return json({ error: 'Choose a language, a voice (woman or man) and a block for the recording.' }, 400);
     const legacy = slot.endsWith('-f') ? slot.slice(0, 2) : slot;
+    const had = await env.DB.prepare('SELECT hash, size FROM audio WHERE id = ? AND lang IN (?, ?) ORDER BY lang = ? DESC LIMIT 1').bind(id, slot, legacy, slot).first();
     if (op === 'audio-delete') {
       await env.DB.prepare('DELETE FROM audio WHERE id = ? AND lang IN (?, ?)').bind(id, slot, legacy).run();
       await putNote(env, '#rev', 'null', Date.now()).run(); // phones stop playing it after the next Publish
-      await log('audio delete', `${slot} ${id}`);
+      await log('edit', 'delete recording', { target: `${slot} ${id}`, before: had ? { hash: had.hash, bytes: had.size } : null, after: null });
       return json({ ok: true });
     }
     const data = new Uint8Array(await req.arrayBuffer());
@@ -488,7 +586,7 @@ async function adminApi(req, env, url, op, me) {
     const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', data))].map((x) => x.toString(16).padStart(2, '0')).join('').slice(0, 10);
     if (legacy !== slot) await env.DB.prepare('DELETE FROM audio WHERE lang = ? AND id = ?').bind(legacy, id).run();
     await env.DB.prepare('INSERT OR REPLACE INTO audio (lang, id, type, hash, data, size, ts) VALUES (?, ?, ?, ?, ?, ?, ?)').bind(slot, id, type, hash, data, data.length, Date.now()).run();
-    await log('audio upload', `${slot} ${id}`);
+    await log('edit', 'upload recording', { target: `${slot} ${id}`, before: had ? { hash: had.hash, bytes: had.size } : null, after: { hash, bytes: data.length, type } });
     return json({ ok: true, hash, slot, url: `/a/${slot}/${id}?v=${hash}` });
   }
   const m = await req.json().catch(() => null);
@@ -504,7 +602,7 @@ async function adminApi(req, env, url, op, me) {
     const keys = [...c.units.map((u) => u[0]), ...drop];
     if (!keys.length && !(Array.isArray(m.retire) && m.retire.length)) return json({ ok: true, ts: {}, rev: 0 });
     // optimistic locking, part by part: each change must start from the version this page last saw
-    const now = await savedTimes(env, keys), prev = (m.prev && typeof m.prev === 'object') ? m.prev : {};
+    const sizes = {}, now = await savedTimes(env, keys, sizes), prev = (m.prev && typeof m.prev === 'object') ? m.prev : {};
     for (const k of keys) if ((+prev[k] || 0) !== (now[k] || 0)) return json({ error: STALE, conflict: true, k }, 409);
     const ts = Math.max(Date.now(), ...keys.map((k) => (now[k] || 0) + 1)), base = (m.base && typeof m.base === 'object') ? m.base : {};
     const st = c.units.map(([k, v]) => unitStmt(env, k, v, FP_RE.test(base[k]) ? base[k] : '', ts));
@@ -516,7 +614,10 @@ async function adminApi(req, env, url, op, me) {
     }
     st.push(putNote(env, '#rev', 'null', ts));
     await env.DB.batch(st);
-    await log('save', keys.slice(0, 6).map(CORE.unitName).join(', ') + (keys.length > 6 ? ` and ${keys.length - 6} more` : ''));
+    // before: the saved time and size of each part; after: its new time, size and fingerprint (dropped = back to the app's own)
+    await log('edit', 'save', { target: keys.slice(0, 6).map(CORE.unitName).join(', ') + (keys.length > 6 ? ` and ${keys.length - 6} more` : ''),
+      before: keys.slice(0, 40).map((k) => ({ k, saved: now[k] || null, chars: sizes[k] || null })),
+      after: [...c.units.slice(0, 40).map(([k, , text]) => ({ k, saved: ts, chars: text.length, fp: OV.hash(text) })), ...drop.slice(0, 20).map((k) => ({ k, dropped: 'back to the app\'s version' }))] });
     return json({ ok: true, ts: Object.fromEntries(c.units.map((u) => [u[0], ts])), rev: ts });
   }
 
@@ -542,7 +643,7 @@ async function adminApi(req, env, url, op, me) {
     if (m.done) st.push(putNote(env, '#legacy', JSON.stringify({ from: String(m.from || '').slice(0, 40), at: now, undated: Array.isArray(m.undated) ? m.undated.filter((k) => typeof k === 'string' && UNIT_RE.test(k)).slice(0, 5000) : [] }), now));
     if (saved) st.push(putNote(env, '#rev', 'null', now));
     if (st.length) await env.DB.batch(st);
-    if (m.done || saved) await log('move old draft', `${saved} changes${m.done ? ', done' : ''}`);
+    if (m.done || saved) await log('edit', 'move old draft', { after: { saved, done: !!m.done } });
     return json({ ok: true, saved });
   }
 
@@ -553,10 +654,10 @@ async function adminApi(req, env, url, op, me) {
 
   if (op === 'import') {
     // "Start again from the app": forget every change made here (uploaded recordings are kept)
-    const now = Date.now();
+    const now = Date.now(), had = await env.DB.prepare("SELECT COUNT(*) n FROM edit_unit WHERE k NOT LIKE '#%'").first();
     await env.DB.batch([env.DB.prepare("DELETE FROM edit_unit WHERE k NOT LIKE '#%'"), putNote(env, '#rev', 'null', now),
       env.DB.prepare("INSERT INTO edit_unit (k, v, base, ts) VALUES ('#legacy', '{\"from\":\"\",\"undated\":[]}', '', ?1) ON CONFLICT(k) DO NOTHING").bind(now)]);
-    await log('import', 'start again from the app');
+    await log('edit', 'start again from the app', { before: { changedParts: had ? had.n : null }, after: { changedParts: 0 } });
     return json({ ok: true });
   }
   if (op === 'rebase') return json({ error: RELOAD, conflict: true }, 409); // the draft always starts from the app's newest book now
@@ -570,13 +671,13 @@ async function adminApi(req, env, url, op, me) {
     // back to what was published last: the units of the published overlay
     const p = await env.DB.prepare("SELECT body, version, updated_ts FROM content WHERE name = 'overlay'").first();
     if (!p) return json({ error: 'Nothing has been published yet, so there is nothing to go back to. Use "Start again from the app" instead.' }, 400);
-    const ov = JSON.parse(await docBody(env, 'overlay', p));
+    const ov = JSON.parse(await docBody(env, 'overlay', p)), had = await env.DB.prepare("SELECT COUNT(*) n FROM edit_unit WHERE k NOT LIKE '#%'").first();
     const st = [env.DB.prepare("DELETE FROM edit_unit WHERE k NOT LIKE '#%'")];
     for (const u of ov.units || []) if (u && typeof u.k === 'string' && UNIT_RE.test(u.k)) st.push(unitStmt(env, u.k, u.v, FP_RE.test(u.base) ? u.base : '', +u.ts || p.updated_ts));
     // the same time as the publish: the draft is not "changed"; a page open elsewhere still has newer save times, so its next save is refused
     st.push(putNote(env, '#rev', 'null', p.updated_ts));
     await env.DB.batch(st);
-    await log('revert', 'draft back to ' + p.version);
+    await log('edit', 'revert draft', { target: 'draft', before: { changedParts: had ? had.n : null }, after: { version: p.version, changedParts: (ov.units || []).length } });
     return json({ ok: true, version: p.version });
   }
 
@@ -606,8 +707,10 @@ async function adminApi(req, env, url, op, me) {
     const built = now.toISOString(), version = built.slice(0, 10).replace(/-/g, '.') + '-e' + built.slice(11, 19).replace(/:/g, '');
     const overlay = `{"format":${OV.FORMAT},"version":${JSON.stringify(version)},"built":${JSON.stringify(built)},"app":${JSON.stringify(asked || (app && app.version) || null)},"units":[${units.join(',')}],"say":{${say.join(',')}},"audio":${JSON.stringify(clips)}}`;
     if (overlay.length > MAX_DOC_BYTES / 3 && bytesOf(overlay) > MAX_DOC_BYTES) return json({ error: `Not published: the changes have become too big to store (over ${MAX_DOC_TEXT}). Shorten or remove something.`, errors: [], warnings: res.warnings }, 422);
+    const was = await env.DB.prepare("SELECT version, built FROM content WHERE name = 'overlay'").first();
     await writeDoc(env, 'overlay', { version, built }, overlay, now.getTime());
-    await log('publish', 'version ' + version);
+    await log('publish', 'publish', { target: 'overlay', before: was ? { version: was.version, built: was.built } : null,
+      after: { version, built, app: asked || (app && app.version) || null, units: units.length, clips: Object.values(clips).reduce((a, x) => a + Object.keys(x).length, 0), sha256: await LOG.sha256(overlay) } });
     return json({ ok: true, version, built, warnings: res.warnings, units: units.length });
   }
   return json({ error: 'Unknown action.' }, 404);
@@ -662,13 +765,15 @@ async function placeFromText(text) {
 }
 
 /* ---------- AI summary of feedback (Anthropic Messages API) ---------- */
-async function aiSummary(env) {
+async function aiSummary(env, me, ctx) {
   if (!env.ANTHROPIC_API_KEY) return json({ error: 'The AI summary needs an Anthropic API key, and none is set. Get a key at console.anthropic.com (API keys), then on your computer in the server folder run:\n\n  wrangler secret put ANTHROPIC_API_KEY\n\nand paste the key when asked. Then press the button again.' }, 400);
   const since = Date.now() - 60 * 864e5;
   const fb = (await env.DB.prepare('SELECT ts, lang, page, text, (audio IS NOT NULL) has_audio FROM feedback WHERE ts >= ? ORDER BY ts DESC LIMIT 300').bind(since).all()).results || [];
   // only the written feedback people chose to send; what people typed in the search box is never sent to the AI
   const written = fb.filter((f) => typeof f.text === 'string' && f.text.trim()), voiceNotes = fb.filter((f) => f.has_audio && !(typeof f.text === 'string' && f.text.trim())).length;
   if (!written.length) return json({ text: 'There is no written feedback in the last 60 days, so there is nothing to summarise yet.', voiceNotes, counts: { feedback: 0 } });
+  // the written feedback goes to a third party (Anthropic): logged like an export
+  await LOG.log(env, me, 'export', 'send feedback to AI summary', { target: 'Anthropic Messages API', params: { days: 60 }, rows: written.length, session: ctx && ctx.sid });
   const line = (s) => String(s).replace(/\s+/g, ' ').slice(0, 600);
   const content = `Written feedback from app users, newest first (${written.length} items; page = where in the app they pressed Feedback):\n` +
     written.map((f) => `- [${isoTime(f.ts).slice(0, 10)}, ${f.lang || '?'}, page ${f.page || '?'}] ${line(f.text)}`).join('\n') +
@@ -692,12 +797,15 @@ async function aiSummary(env) {
   return json({ text: text || '(The AI gave an empty answer. Try again.)', voiceNotes, counts: { feedback: written.length } });
 }
 
-/* ================= People: who has access (owner only, /people?key=...) ================= */
-async function peopleApi(req, env, url, op, me) {
+/* ================= People: who has access (owner only, /people) ================= */
+async function peopleApi(req, env, url, op, me, ctx) {
+  const log = (action, o) => LOG.log(env, me, 'people', action, { session: ctx.sid, ...o });
   if (op === 'list' && req.method === 'GET') {
-    const people = (await env.DB.prepare('SELECT id, name, role, created, last_used, revoked FROM people ORDER BY revoked, created DESC').all()).results || [];
-    const log = (await env.DB.prepare('SELECT ts, who, role, action, detail FROM audit ORDER BY id DESC LIMIT 50').all()).results || [];
-    return json({ people, log });
+    const people = (await env.DB.prepare(`SELECT p.id, p.name, p.role, p.created, p.last_used, p.revoked,
+      (SELECT COUNT(*) FROM sessions s WHERE s.person_id = p.id AND s.ended IS NULL AND s.expires > ?) open_sessions FROM people p ORDER BY p.revoked, p.created DESC`).bind(Date.now()).all().catch(() => env.DB.prepare('SELECT id, name, role, created, last_used, revoked FROM people ORDER BY revoked, created DESC').all())).results || [];
+    let log2 = [];
+    try { log2 = (await env.DB.prepare("SELECT ts, who, role, category, action, target, before, after FROM audit_log WHERE category IN ('people', 'sign-in', 'edit', 'publish', 'correction') ORDER BY seq DESC LIMIT 30").all()).results || []; } catch {}
+    return json({ people, log: log2 });
   }
   if (req.method !== 'POST') return json({ error: 'Use POST' }, 405);
   const b = await req.json().catch(() => ({}));
@@ -705,10 +813,10 @@ async function peopleApi(req, env, url, op, me) {
     const name = String(b.name || '').replace(/\s+/g, ' ').trim().slice(0, 60);
     if (!name) return json({ error: 'Type the person\'s name.' }, 400);
     if (!ROLES[b.role]) return json({ error: 'Choose what they can do: viewer or editor.' }, 400);
-    const key = newKey(), now = Date.now();
+    const key = AUTH.newKey(), now = Date.now();
     const r = await env.DB.prepare('INSERT INTO people (name, role, key_hash, created, last_used, revoked) VALUES (?, ?, ?, ?, NULL, 0)').bind(name, b.role, await sha256(key), now).run();
-    await audit(env, me, 'add person', `${name} (${b.role})`);
     const id = Number((r && r.meta && r.meta.last_row_id) ?? (r && r.lastInsertRowid) ?? 0) || null;
+    await log('add person', { target: `${name} (#${id})`, before: null, after: { name, role: b.role, active: true } });
     // the key is in this answer only: it is never stored and cannot be shown again
     return json({ ok: true, id, name, role: b.role, key, link: `${url.origin}/dashboard?key=${encodeURIComponent(key)}` });
   }
@@ -718,43 +826,33 @@ async function peopleApi(req, env, url, op, me) {
     if (!ROLES[b.role]) return json({ error: 'Choose viewer or editor.' }, 400);
     if (p.revoked) return json({ error: 'This person\'s access was removed. Add them again to give them a new link.' }, 400);
     await env.DB.prepare('UPDATE people SET role = ? WHERE id = ?').bind(b.role, p.id).run();
-    if (b.role !== p.role) await audit(env, me, 'change role', `${p.name}: ${p.role} → ${b.role}`);
+    if (b.role !== p.role) await log('change role', { target: `${p.name} (#${p.id})`, before: { role: p.role }, after: { role: b.role } });
     return json({ ok: true });
   }
   if (op === 'revoke') {
     await env.DB.prepare('UPDATE people SET revoked = 1 WHERE id = ?').bind(p.id).run();
-    if (!p.revoked) await audit(env, me, 'remove access', p.name);
+    await AUTH.endSessionsOf(env, p.id); // their open sign-ins end at once
+    if (!p.revoked) await log('remove access', { target: `${p.name} (#${p.id})`, before: { role: p.role, active: true }, after: { role: p.role, active: false } });
     return json({ ok: true });
   }
   return json({ error: 'Unknown action.' }, 404);
 }
 
-function peoplePage(key, me) {
-  const k = encodeURIComponent(key), esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · people</title>
-<style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:16px;max-width:900px;margin:auto;font-size:16px}h1{font-size:22px;margin:4px 0}
-.c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px;margin-top:12px}.l{font-size:13px;color:#6B655E;font-weight:600;margin:0 0 8px}.s{font-size:13px;color:#6B655E}a{color:#B6322D}
-button{font:inherit;font-size:15px;padding:8px 12px;border-radius:10px;border:1px solid #CFC8BC;background:#fff;color:#22201D;cursor:pointer}button.primary{background:#1F6F7A;border-color:#1F6F7A;color:#fff;font-weight:700}button.danger{color:#B6322D;border-color:#E3B4B1}button:disabled{opacity:.35}
-input,select{font:inherit;font-size:16px;width:100%;box-sizing:border-box;padding:8px;border:1px solid #CFC8BC;border-radius:10px;background:#fff;color:#22201D}label{display:block;margin:6px 0 10px}label>span{display:block;font-size:13px;color:#6B655E}
-.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #E6E1D8;padding:10px 0}.row:first-of-type{border-top:0}.grow{flex:1;min-width:160px}.row select{width:auto}.off{opacity:.55}
-.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:#E8F3F1;color:#14535B}.badge.editor{background:#FBEDEC;color:#8E2420}
-.msg{padding:12px;border-radius:12px;margin:10px 0}.msg.bad{background:#FBEDEC;color:#8E2420}.msg.good{background:#E8F3F1;color:#14535B}.copy{display:flex;gap:8px}.copy input{font-size:14px}
-table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:6px 4px;border-top:1px solid #E6E1D8;vertical-align:top}th{color:#6B655E;font-weight:600}ul{padding-left:20px;margin:6px 0}li{margin:4px 0}</style>
-<p class="s"><a href="/dashboard?key=${k}">← Dashboard</a> &nbsp; <a href="/admin?key=${k}">Editor</a></p>
-<h1>Sehat · people</h1>
-<p class="s" id="who">Signed in as <b>${esc(signedIn(me))}</b>. Only you can see this page.</p>
-<div class="c"><div class="l">Give someone access</div>
-<label><span>Name</span><input id="p-name" autocomplete="off" maxlength="60"></label>
-<label><span>What they can do</span><select id="p-role"><option value="viewer">Viewer: can look at the dashboard, feedback, voice notes and the AI summary</option><option value="editor">Editor: can also change, record and publish the book</option></select></label>
-<button class="primary" id="p-add">Make their link</button><div id="p-out"></div></div>
-<div class="c"><div class="l">People with access</div><div id="p-list" class="s">Loading…</div>
-<p class="s">Your own link (your secret word) always works and is not listed here. Removing access works at once: their link stops working.</p></div>
-<div class="c"><div class="l">Who changed, viewed or downloaded what (last 50)</div><div id="p-log" class="s">Loading…</div></div>
-<div class="c"><div class="l">What each role can do</div><ul class="s">
-<li><b>Viewer</b>: dashboard, About, feedback and voice notes, the AI summary, and can look at the book in the editor. Cannot change anything.</li>
-<li><b>Editor</b>: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot see this page or give anyone access.</li>
-<li><b>Owner</b> (you): everything, including this page.</li></ul></div>
-<script>var __name = (f) => f; (${peopleClient.toString()})(${scriptJson({ key })})</script></html>`;
+function peoplePage(url, me, ctx) {
+  const lang = ctx.lang, esc = hesc;
+  const body = `<h1>${esc(t(lang, 'nav.people'))}</h1><p class="lead">Give each person their own link, choose what they can do, and remove access at once. Only you can see this page. Every change here is written in the <a href="/audit?cat=people">audit log</a>, with before and after.</p>
+<div class="grid"><section class="card"><h2>Give someone access</h2>
+<label class="s" style="display:block;margin:6px 0 10px">Name<input id="p-name" autocomplete="off" maxlength="60" style="width:100%;display:block;margin-top:4px"></label>
+<label class="s" style="display:block;margin:6px 0 10px">What they can do<select id="p-role" style="width:100%;display:block;margin-top:4px"><option value="viewer">Viewer: can look at the dashboard, disease watch, feedback, voice notes, shareable exports and the AI summary</option><option value="editor">Editor: can also change, record and publish the book</option></select></label>
+<button class="primary" id="p-add" type="button">Make their link</button><div id="p-out"></div></section>
+<section class="card"><h2>What each role can do</h2><ul class="s" style="padding-inline-start:18px">
+<li><b>Viewer</b>: overview, app use, disease watch, feedback and voice notes, the AI summary, shareable (small counts hidden) exports and the codebook, and can look at the book in the editor. Cannot change anything.</li>
+<li><b>Editor</b>: everything a viewer can, plus edit, upload recordings, publish, revert and import. Cannot see this page, the audit log or full exports.</li>
+<li><b>Owner</b> (you): everything, including full exports, disease-watch corrections, the audit log and this page.</li></ul></section></div>
+<section class="card"><h2>People with access</h2><div id="p-list" class="s">Loading…</div>
+<p class="s">Your own password always works and is not listed here. Removing access works at once: their link stops working and they are signed out everywhere.</p></section>
+<section class="card"><h2>Recent changes and sign-ins</h2><div id="p-log" class="s">Loading…</div><p class="s"><a href="/audit">Full audit log →</a></p></section>`;
+  return shell({ ...ctx, url, me, title: t(lang, 'nav.people'), body, script: `(${peopleClient.toString()})(${scriptJson({ csrf: ctx.csrf })})` });
 }
 
 // Runs in Mo's browser on /people.
@@ -763,17 +861,18 @@ function peopleClient(cfg) {
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const when = (ts) => (ts ? new Date(ts).toLocaleString(undefined, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'never');
   async function api(op, body) {
-    const r = await fetch('/people/api/' + op + '?key=' + encodeURIComponent(cfg.key), body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const r = await fetch('/people/api/' + op, body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': cfg.csrf }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(j.error || 'The server answered ' + r.status);
     return j;
   }
+  const brief = (s) => { if (!s) return ''; try { const v = JSON.parse(s); return typeof v === 'string' ? v : JSON.stringify(v); } catch (e) { return s; } };
   const roleSel = (p) => `<select data-role="${p.id}" aria-label="Role for ${esc(p.name)}"><option value="viewer"${p.role === 'viewer' ? ' selected' : ''}>Viewer</option><option value="editor"${p.role === 'editor' ? ' selected' : ''}>Editor</option></select>`;
   async function load() {
     try {
       const { people, log } = await api('list');
-      $('#p-list').innerHTML = people.length ? people.map((p) => `<div class="row${p.revoked ? ' off' : ''}"><div class="grow"><b style="font-size:16px;color:#22201D">${esc(p.name)}</b> <span class="badge ${esc(p.role)}">${esc(p.role)}</span>${p.revoked ? ' <b>access removed</b>' : ''}<div>Added ${esc(when(p.created))} · last used ${esc(when(p.last_used))}</div></div>${p.revoked ? '' : `${roleSel(p)}<button class="danger" data-revoke="${p.id}" data-name="${esc(p.name)}">Remove access</button>`}</div>`).join('') : 'Nobody yet. Add someone above.';
-      $('#p-log').innerHTML = log.length ? `<table><tr><th>When</th><th>Who</th><th>What</th></tr>${log.map((x) => `<tr><td>${esc(when(x.ts))}</td><td>${esc(x.role === 'owner' ? 'Owner' : x.who)}</td><td>${esc(x.action)}${x.detail ? ': ' + esc(x.detail) : ''}</td></tr>`).join('')}</table>` : 'No changes yet.';
+      $('#p-list').innerHTML = people.length ? people.map((p) => `<div class="row" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid var(--line);padding:10px 0${p.revoked ? ';opacity:.55' : ''}"><div style="flex:1;min-width:180px"><b style="font-size:16px;color:var(--ink)">${esc(p.name)}</b> <span class="badge ${esc(p.role)}">${esc(p.role)}</span>${p.revoked ? ' <b>access removed</b>' : ''}<div>Added ${esc(when(p.created))} · last used ${esc(when(p.last_used))}${p.open_sessions ? ` · signed in on ${p.open_sessions} device${p.open_sessions === 1 ? '' : 's'}` : ''}</div></div>${p.revoked ? '' : `${roleSel(p)}<button data-revoke="${p.id}" data-name="${esc(p.name)}" style="color:var(--red)">Remove access</button>`}</div>`).join('') : '<div class="empty">Nobody yet. Add someone above.</div>';
+      $('#p-log').innerHTML = log.length ? `<div class="tw"><table><tr><th>When</th><th>Who</th><th>What</th><th>Before → after</th></tr>${log.map((x) => `<tr><td>${esc(when(x.ts))}</td><td>${esc(x.who)}</td><td>${esc(x.action)}${x.target ? ': ' + esc(x.target) : ''}</td><td>${x.before ? esc(brief(x.before).slice(0, 120)) + ' → ' : ''}${esc(brief(x.after).slice(0, 160))}</td></tr>`).join('')}</table></div>` : '<div class="empty">No changes yet.</div>';
     } catch (e) { $('#p-list').innerHTML = `<div class="msg bad">${esc(e.message)}</div>`; }
   }
   $('#p-add').onclick = async () => {
@@ -782,11 +881,11 @@ function peopleClient(cfg) {
     $('#p-add').disabled = true;
     try {
       const r = await api('add', { name, role });
-      out.innerHTML = `<div class="msg good"><b>Link for ${esc(r.name)} (${esc(r.role)})</b><div class="copy" style="margin:8px 0"><input id="p-link" readonly value="${esc(r.link)}"><button class="primary" id="p-copy">Copy</button></div>
-        <b>This link is shown only once.</b> Copy it now and send it to ${esc(r.name)} privately (for example on WhatsApp or Signal). Anyone who has the link gets this access, so they should not share it. If it is lost, remove their access and add them again.</div>`;
+      out.innerHTML = `<div class="msg good" style="margin-top:10px"><b>Link for ${esc(r.name)} (${esc(r.role)})</b><div style="display:flex;gap:8px;margin:8px 0"><input id="p-link" readonly value="${esc(r.link)}" style="flex:1;min-width:0;font-size:14px"><button class="primary" id="p-copy" type="button">Copy</button></div>
+        <b>This link is shown only once.</b> Copy it now and send it to ${esc(r.name)} privately (for example on WhatsApp or Signal). Opening it signs them in on that device; the key then leaves the address bar. Anyone who has the link gets this access, so they should not share it. If it is lost, remove their access and add them again.</div>`;
       $('#p-copy').onclick = async () => {
         const inp = $('#p-link'); inp.select();
-        try { await navigator.clipboard.writeText(inp.value); } catch { try { document.execCommand('copy'); } catch {} }
+        try { await navigator.clipboard.writeText(inp.value); } catch (e) { try { document.execCommand('copy'); } catch (e2) {} }
         $('#p-copy').textContent = 'Copied';
       };
       $('#p-name').value = '';
@@ -808,10 +907,11 @@ function peopleClient(cfg) {
   load();
 }
 
-/* ================= the editor page (/admin?key=...) ================= */
-function adminPage(key, env, me) {
-  const k = encodeURIComponent(key), esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const cfg = { key, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES, tools: TOOLS };
+/* ================= the editor page (/admin) ================= */
+function adminPage(env, me, ctx) {
+  const esc = hesc, who = me.role === 'owner' ? 'the owner' : `${me.name} · ${me.role}`;
+  // csrf: every save, upload and publish carries this sign-in's token (server/auth.js)
+  const cfg = { csrf: ctx.csrf, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES, tools: TOOLS };
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · editor</title>
 <style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;font-size:16px}h1{font-size:20px;margin:0}h2{font-size:20px;margin:16px 0 8px}
 header{position:sticky;top:0;z-index:5;background:#FBFAF7;border-bottom:1px solid #E6E1D8;padding:10px 14px}.hrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -830,11 +930,12 @@ details.au{margin-top:8px;font-size:14px}details.au summary{color:#1F6F7A;cursor
 .msg{padding:10px;border-radius:12px;margin:8px 0}.msg.bad{background:#FBEDEC;color:#8E2420}.msg.good{background:#E8F3F1;color:#14535B}ul.errs li,ul.sup li{margin:6px 0}.pimg{max-width:160px;max-height:110px;border-radius:10px;border:1px solid #E6E1D8}
 .chk{display:flex;flex-wrap:wrap;gap:6px 14px}.chk label{display:flex;gap:6px;align-items:center;margin:0}.chk input{width:auto}
 body.ro main [data-act],body.ro main label.btn{display:none}body.ro textarea[readonly],body.ro input[readonly]{background:#F6F3EE}</style>
-<header><div class="hrow"><h1 class="grow">Sehat · editor</h1><a href="/dashboard?key=${k}" class="s">Usage dashboard</a>${me.role === 'owner' ? `<a href="/people?key=${k}" class="s">People</a>` : ''}${me.role === 'viewer' ? '' : '<button class="primary" data-act="publish">Publish</button>'}</div>
-<div class="hrow"><span id="st" class="st">Loading…</span><span class="s" id="pubinfo"></span><span class="s" id="who" style="margin-left:auto">Signed in as <b>${esc(signedIn(me))}</b></span></div>
+<header><div class="hrow"><h1 class="grow">Sehat · editor</h1><a href="/dashboard" class="s">← Overview</a><a href="/watch" class="s">Disease watch</a>${me.role === 'owner' ? '<a href="/people" class="s">People</a><a href="/audit?cat=edit" class="s">Audit log</a>' : ''}${me.role === 'viewer' ? '' : '<button class="primary" data-act="publish">Publish</button>'}</div>
+<div class="hrow"><span id="st" class="st">Loading…</span><span class="s" id="pubinfo"></span><span class="s" id="who" style="margin-left:auto">Signed in as <b>${esc(who)}</b> · every save and publish is written in the audit log</span>
+<form method="post" action="/signout" style="margin:0"><input type="hidden" name="csrf" value="${esc(ctx.csrf)}"><button class="sm" type="submit">Sign out</button></form></div>
 <nav><a href="#topics">Topics</a><a href="#home">Home screen</a><a href="#words">Words</a><a href="#places">Places</a><a href="#audio">Audio</a><a href="#publish">Publish</a></nav></header>
 <main id="main"></main>
-<script>var __name = (f) => f; ${parseLatLon.toString()}
+<script nonce="${ctx.nonce}">var __name = (f) => f; ${parseLatLon.toString()}
 const OVC = (${OV.overlayCore.toString()})(), CORE = (${editorCore.toString()})();
 (${adminClient.toString()})(${scriptJson(cfg)});</script></html>`;
 }
@@ -865,9 +966,8 @@ function adminClient(cfg) {
   const lock = (el) => { if (RO && el) el.querySelectorAll('textarea, input:not([id^="q-"]), select').forEach((x) => { if (x.tagName === 'SELECT' || x.type === 'checkbox' || x.type === 'file') x.disabled = true; else x.readOnly = true; }); };
 
   async function api(op, body, type) {
-    const sep = op.includes('?') ? '&' : '?';
-    const opt = body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': type || 'application/json' }, body: type ? body : JSON.stringify(body) };
-    const r = await fetch('/admin/api/' + op + sep + 'key=' + encodeURIComponent(cfg.key), opt);
+    const opt = body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': type || 'application/json', 'X-CSRF-Token': cfg.csrf }, body: type ? body : JSON.stringify(body) };
+    const r = await fetch('/admin/api/' + op, opt);
     const j = await r.json().catch(() => ({}));
     if (!r.ok) { const e = new Error(j.error || 'The server answered ' + r.status); e.data = j; throw e; }
     return j;
@@ -916,7 +1016,7 @@ function adminClient(cfg) {
   // Changes with a save time move over once (CORE.oldChanges); the other differences from the app (mostly older app
   // text) are listed on the Publish page, where they can be kept too.
   async function oldDraft(doc) {
-    const r = await fetch('/admin/api/legacy?doc=' + doc + '&key=' + encodeURIComponent(cfg.key), { cache: 'no-store' });
+    const r = await fetch('/admin/api/legacy?doc=' + doc, { cache: 'no-store' });
     return r.ok ? r.json() : null;
   }
   async function moveOld(L) {
@@ -1352,16 +1452,4 @@ function adminClient(cfg) {
   });
   addEventListener('hashchange', () => { render(); scrollTo(0, 0); });
   load();
-}
-
-// a plain sign-in box, so nobody has to build the ?key= link by hand
-function signIn(failed) {
-  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · sign in</title>
-<body style="margin:0;background:#FAF8F4;font-family:system-ui,sans-serif;color:#22201D"><form action="/dashboard" method="get" style="max-width:360px;margin:12vh auto;padding:24px;background:#fff;border:1px solid #E6E1D8;border-radius:14px">
-<h1 style="margin:0 0 4px;font-size:22px">Sehat <span style="color:#B6322D">صحت</span></h1><p style="margin:0 0 16px;color:#6B655E">Dashboard sign in</p>
-<label for="key" style="font-weight:600">Password or personal key</label>
-<input id="key" name="key" type="password" autocomplete="current-password" required style="display:block;width:100%;box-sizing:border-box;margin:6px 0 12px;padding:12px;font-size:17px;border:1px solid #CFC8BC;border-radius:10px">
-${failed ? '<p style="color:#B6322D;margin:0 0 12px">That password did not work. Check it and try again.</p>' : ''}
-<button style="width:100%;padding:12px;font-size:17px;font-weight:700;color:#fff;background:#B6322D;border:0;border-radius:10px">Open dashboard</button>
-<p style="color:#6B655E;font-size:13px">After it opens, bookmark the page so you don't need to type this again.</p></form></body>`, { status: failed ? 401 : 200, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
 }

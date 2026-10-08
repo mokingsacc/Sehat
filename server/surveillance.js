@@ -10,6 +10,10 @@
 // A wrong report is not changed: a correction row voids (or restores) it, with who, when and why.
 import DEFS from './surveillance-defs.js';
 import { spend } from './usage.js';
+import { log as auditLog } from './auditlog.js';
+import { shell, htmlResponse } from './ui.js';
+import { t } from './i18n.js';
+import { pcodeOf, dhis2Names, dhis2Period, CODES_VERSION } from './codes.js';
 
 export { DEFS };
 const CORS = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' };
@@ -242,7 +246,7 @@ export const CAVEATS = [
   'Searches are a weaker signal than reports and are never added to them.',
   'Recent weeks fill in late, because phones send reports only when they have internet.',
 ];
-const KINDS = { counts: 'Weekly counts by syndrome, district and age group', alerts: 'Alerts (rules applied to weekly counts)', signals: 'Searches in the symptom finder that match a syndrome (weaker signal)', raw: 'Every report as received (owner only)', corrections: 'Every correction (owner only)' };
+const KINDS = { counts: 'Weekly counts by syndrome, district and age group', alerts: 'Alerts (rules applied to weekly counts)', signals: 'Searches in the symptom finder that match a syndrome (weaker signal)', dhis2: 'DHIS2 dataValueSet: weekly counts for the HMIS (by code)', raw: 'Every report as received (owner only)', corrections: 'Every correction (owner only)' };
 const OWNER_ONLY = new Set(['raw', 'corrections']);
 
 export async function buildExport(env, q, kind, level) {
@@ -251,13 +255,29 @@ export async function buildExport(env, q, kind, level) {
   if (kind === 'counts' || kind === 'alerts') {
     const w = await weekly(env, q);
     if (kind === 'counts') {
-      columns = ['week', 'week_start', 'syndrome', 'syndrome_name', 'place', 'place_name', 'province', 'age_group', 'reports'];
-      rows = w.rows.filter((r) => r.week >= q.from).map((r) => ({ week: r.week, week_start: weekStart(r.week), syndrome: r.syndrome, syndrome_name: synName(r.syndrome), place: r.place, place_name: placeName(r.place), province: provinceOf(r.place), age_group: r.age, reports: share ? sup(r.n) : r.n }));
+      columns = ['week', 'week_start', 'syndrome', 'syndrome_name', 'place', 'place_name', 'place_pcode', 'province', 'age_group', 'reports'];
+      rows = w.rows.filter((r) => r.week >= q.from).map((r) => ({ week: r.week, week_start: weekStart(r.week), syndrome: r.syndrome, syndrome_name: synName(r.syndrome), place: r.place, place_name: placeName(r.place), place_pcode: pcodeOf(r.place), province: provinceOf(r.place), age_group: r.age, reports: share ? sup(r.n) : r.n }));
     } else {
-      columns = ['week', 'week_start', 'syndrome', 'syndrome_name', 'place', 'place_name', 'reports', 'baseline', 'rule', 'rule_text'];
-      rows = alerts(w.rows, q).map((a) => ({ week: a.week, week_start: weekStart(a.week), syndrome: a.syndrome, syndrome_name: synName(a.syndrome), place: a.place, place_name: placeName(a.place), reports: share ? sup(a.reports) : a.reports,
+      columns = ['week', 'week_start', 'syndrome', 'syndrome_name', 'place', 'place_name', 'place_pcode', 'reports', 'baseline', 'rule', 'rule_text'];
+      rows = alerts(w.rows, q).map((a) => ({ week: a.week, week_start: weekStart(a.week), syndrome: a.syndrome, syndrome_name: synName(a.syndrome), place: a.place, place_name: placeName(a.place), place_pcode: pcodeOf(a.place), reports: share ? sup(a.reports) : a.reports,
         baseline: share && a.baseline_sum > 0 && a.baseline_sum < MIN_CELL ? 'suppressed' : a.baseline, rule: a.rule, rule_text: a.rule_text }));
     }
+  } else if (kind === 'dhis2') {
+    // a DHIS2 dataValueSet: one value per data element (illness), weekly period, org unit and category option combo (age group).
+    // Places that share an org unit (Aybak city and villages) are added together. Shareable: values under MIN_CELL are left out.
+    const w = await weekly(env, q), N = dhis2Names(env), sum = new Map();
+    for (const r of w.rows) {
+      if (r.week < q.from) continue;
+      const k = [N.dataElement(r.syndrome), dhis2Period(r.week), N.orgUnit(r.place), N.age(r.age)].join('|');
+      sum.set(k, (sum.get(k) || 0) + r.n);
+    }
+    columns = ['dataelement', 'period', 'orgunit', 'categoryoptioncombo', 'attributeoptioncombo', 'value', 'storedby', 'lastupdated', 'comment', 'followup'];
+    const stamp = new Date(nowMs(env)).toISOString().slice(0, 19);
+    rows = [...sum].filter(([, n]) => !share || n >= MIN_CELL).sort((a, b) => (a[0] < b[0] ? -1 : 1)).map(([k, n]) => {
+      const [de, pe, ou, co] = k.split('|');
+      return { dataelement: de, period: pe, orgunit: ou, categoryoptioncombo: co, attributeoptioncombo: '', value: n, storedby: 'sehat', lastupdated: stamp, comment: 'Sehat community reports (suspected, not confirmed)', followup: 'false' };
+    });
+    return { columns, rows, share, withheld: [...sum].filter(([, n]) => share && n < MIN_CELL).length };
   } else if (kind === 'signals') {
     const w = await weekly(env, q);
     columns = ['week', 'week_start', 'syndrome', 'syndrome_name', 'place', 'place_name', 'searches'];
@@ -277,7 +297,7 @@ export async function buildExport(env, q, kind, level) {
 const csvCell = (v) => { let s = String(v ?? '').replace(/[\r\n]+/g, ' '); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return /[",]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
 export const csvBody = (columns, rows) => [columns.join(','), ...rows.map((r) => columns.map((c) => csvCell(r[c])).join(','))].join('\n') + '\n';
 
-export async function exportData(env, url, me, format) {
+export async function exportData(env, url, me, format, ctx) {
   const kind = KINDS[url.searchParams.get('kind')] ? url.searchParams.get('kind') : 'counts';
   const level = url.searchParams.get('level') === 'full' ? 'full' : 'shareable';
   if ((level === 'full' || OWNER_ONLY.has(kind)) && me.role !== 'owner') return jsonRes({ error: 'Only the owner can download the full export. Shareable exports are open to everyone signed in.' }, 403);
@@ -285,14 +305,19 @@ export async function exportData(env, url, me, format) {
   const generated = new Date(nowMs(env)).toISOString();
   const query = { kind, level: OWNER_ONLY.has(kind) ? 'full' : level, from: q.from, to: q.to, syndrome: q.syndrome || 'all', place: q.place || 'all' };
   const suppression = ex.share ? `counts from 1 to ${MIN_CELL - 1} are shown as "<${MIN_CELL}"` : 'none (full export, not for sharing)';
-  const body = format === 'csv' ? csvBody(ex.columns, ex.rows) : JSON.stringify(ex.rows);
+  const dhis = kind === 'dhis2';
+  // a DHIS2 file is exactly what DHIS2 imports: no # lines in the CSV and only "dataValues" in the JSON (the hash and query
+  // are in the response headers, the audit log and surv_exports)
+  const body = format === 'csv' ? csvBody(ex.columns, ex.rows) : dhis ? JSON.stringify({ dataValues: ex.rows.map(({ dataelement, period, orgunit, categoryoptioncombo, value, comment }) => ({ dataElement: dataelement, period, orgUnit: orgunit, categoryOptionCombo: categoryoptioncombo, value: String(value), comment })) }, null, 1) : JSON.stringify(ex.rows);
   const hash = await sha256(body);
   try {
     await env.DB.prepare('INSERT INTO surv_exports (ts, who, role, kind, level, params, row_count, sha256) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
       .bind(nowMs(env), me.name, me.role, kind, query.level, JSON.stringify(query), ex.rows.length, hash).run();
   } catch {} // the export still works if the log table is missing
+  await auditLog(env, me, 'export', `export disease watch ${kind} ${format}`, { target: 'disease watch ' + kind, params: query, rows: ex.rows.length, sha256: hash, session: ctx && ctx.sid });
   const name = `sehat-watch-${kind}-${query.level}-${q.from}-to-${q.to}.${format}`;
-  const headers = { 'Cache-Control': 'no-store', 'Content-Disposition': `attachment; filename="${name}"` };
+  const headers = { 'Cache-Control': 'no-store', 'Content-Disposition': `attachment; filename="${name}"`, 'X-Content-Type-Options': 'nosniff', 'X-Sehat-Rows': String(ex.rows.length), 'X-Sehat-SHA256': hash };
+  if (dhis) return new Response(body, { headers: { 'Content-Type': format === 'csv' ? 'text/csv; charset=utf-8' : 'application/json; charset=utf-8', 'X-Sehat-Withheld-Cells': String(ex.withheld || 0), ...headers } });
   if (format === 'csv') {
     const v = versions(), meta = [
       'Sehat disease watch export: ' + KINDS[kind],
@@ -301,7 +326,7 @@ export async function exportData(env, url, me, format) {
       'row_count: ' + ex.rows.length,
       `case_definitions: ${v.definitions} (${Object.entries(v.syndromes).map(([k, x]) => `${k} v${x}`).join(', ')})`,
       'alert_rules: ' + v.alertRules,
-      'places: ' + v.places,
+      'places: ' + v.places + ' · codes: ' + CODES_VERSION + ' (place_pcode: official code where confirmed)',
       'suppression: ' + suppression,
       'sha256: ' + hash + ' (SHA-256 of every line below the # lines, i.e. grep -v "^#" file.csv | sha256sum)',
       ...CAVEATS.map((c) => 'caveat: ' + c),
@@ -314,7 +339,7 @@ export async function exportData(env, url, me, format) {
 }
 
 /* ---------------- corrections (owner only): append a row, never change a report ---------------- */
-export async function correct(req, env, url, me) {
+export async function correct(req, env, url, me, ctx) {
   if (me.role !== 'owner') return jsonRes({ error: 'Only the owner can correct reports.' }, 403);
   let b = {};
   const type = req.headers.get('Content-Type') || '';
@@ -325,7 +350,8 @@ export async function correct(req, env, url, me) {
   // one line of plain text: control characters (line breaks) would break the corrections CSV
   const reason = String(b.reason || '').replace(/[\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, 300);
   const back = (msg, status = 400) => (type.includes('application/json') ? jsonRes(msg.error ? msg : { ok: true, ...msg }, status)
-    : new Response(null, { status: 303, headers: { Location: `/watch?key=${encodeURIComponent(url.searchParams.get('key') || '')}&msg=${encodeURIComponent(msg.error || msg.done)}` } }));
+    : new Response(null, { status: 303, headers: { Location: `/watch?msg=${encodeURIComponent(msg.error || msg.done)}` } }));
+  const audit = (target, before, after) => auditLog(env, me, 'correction', 'disease watch correction', { target, before, after: { ...after, reason }, session: ctx && ctx.sid });
   if (kind === 'received') {
     // many reports at once: every report received on one day (UTC), optionally only one place, one syndrome or only those held by the automatic check
     if (!DAY_RE.test(id) || !action || reason.length < 3) return back({ error: 'Give the day the reports arrived (YYYY-MM-DD), void or restore, and a reason.' });
@@ -338,32 +364,33 @@ export async function correct(req, env, url, me) {
       .bind(nowMs(env), me.name, me.role, action, reason, ...args).run();
     const n = changes(r);
     if (!n) return back({ error: 'No report matches that day and choice.' });
+    await audit(`reports received ${id}${place ? ' from ' + place : ''}${syndrome ? ' (' + syndrome + ')' : ''}${heldOnly ? ', held only' : ''}`, null, { action, reports: n });
     return back({ done: `Saved: ${action} ${n} report${n === 1 ? '' : 's'} received on ${id}${place ? ' from ' + placeName(place) : ''}${syndrome ? ' (' + synName(syndrome) + ')' : ''}.` }, 200);
   }
   if (!kind || !ID_RE.test(id) || !action || reason.length < 3) return back({ error: 'Give a report id or install id, void or restore, and a reason.' });
   const col = kind === 'report' ? 'rid' : 'iid';
   const found = await env.DB.prepare(`SELECT COUNT(*) n FROM surv_reports WHERE ${col} = ?`).bind(id).first();
   if (!found || !found.n) return back({ error: `No report has that ${kind} id.` });
+  // the state before: the latest correction for this target (none = counted as received); the report itself is never changed
+  const last = await env.DB.prepare('SELECT action, who, ts FROM surv_corrections WHERE target = ? ORDER BY seq DESC LIMIT 1').bind(`${kind}:${id}`).first();
   await env.DB.prepare('INSERT INTO surv_corrections (ts, who, role, target, action, reason) VALUES (?, ?, ?, ?, ?, ?)')
     .bind(nowMs(env), me.name, me.role, `${kind}:${id}`, action, reason).run();
+  await audit(`${kind}:${id}`, last ? { state: last.action === 'void' ? 'voided' : 'restored', by: last.who, at: iso(last.ts) } : { state: 'as received' }, { action, reports: +found.n });
   return back({ done: `Saved: ${action} ${kind} ${id} (${found.n} report${found.n === 1 ? '' : 's'}).` }, 200);
 }
 
 /* ---------------- pages ---------------- */
-const STYLE = `<style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;padding:24px;max-width:1200px;margin:auto}h1{font-size:22px}h2{font-size:18px;margin:22px 0 8px}
-.c{background:#fff;border:1px solid #E6E1D8;border-radius:16px;padding:14px;margin-top:12px;overflow-x:auto}.l{font-size:13px;color:#6B655E}.s{font-size:12.5px;color:#6B655E}
-table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:5px 6px;border-top:1px solid #E6E1D8;white-space:nowrap}th{color:#6B655E;font-weight:600}td.n,th.n{text-align:right}
-a{color:#B6322D}.warn{background:#FBF0D2;border-color:#E9D49A}.alert{background:#F7E3E1;border-color:#E3B6B2}.al{padding:6px 0;border-top:1px solid #E3B6B2}.al:first-child{border-top:0}
-td.hot{background:#F7E3E1;font-weight:700;color:#8E2622}.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.mini{display:flex;align-items:flex-end;gap:2px;height:60px;margin-top:6px}.mini i{flex:1;background:#1F6F7A;border-radius:2px 2px 0 0;min-height:1px}.mini i.hot{background:#B6322D}.mini i.z{background:#E6E1D8}
-.v{font-size:26px;font-weight:700;color:#1F6F7A}ul{margin:6px 0;padding-left:20px}li{margin:3px 0}input,select,button{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid #E6E1D8}button{background:#1F6F7A;color:#fff;border-color:#1F6F7A}
-code{background:#F1EEE8;padding:1px 4px;border-radius:4px}</style>`;
-const signedIn = (me) => (me.role === 'owner' ? 'the owner' : `${me.name} · ${me.role}`);
-const head = (title) => `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${e(title)}</title>${STYLE}`;
+// page-only styles; the frame (header, navigation, cards, tables, colours, dark mode) is server/ui.js
+const WATCH_CSS = `.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px;overflow-x:auto}.l{font-size:13px;color:var(--ink2)}
+td,th{white-space:nowrap}.warn{background:var(--amberBg);border-color:var(--amber);color:var(--ink)}.alert{background:var(--redBg);border-color:var(--red)}.al{padding:6px 0;border-top:1px solid var(--line)}.al:first-child{border-top:0}
+td.hot{background:var(--redBg);font-weight:700;color:var(--red)}.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.mini{display:flex;align-items:flex-end;gap:2px;height:60px;margin-top:6px}.mini i{flex:1;background:var(--brand);border-radius:2px 2px 0 0;min-height:1px}.mini i.hot{background:var(--red)}.mini i.z{background:var(--line)}
+.v{font-size:26px;font-weight:700;color:var(--brand)}ul{margin:6px 0;padding-inline-start:20px}li{margin:3px 0}form.c input,form.c select,form.c button{margin:3px 0}h2{margin:22px 0 8px}`;
+const page = (ctx, url, me, title, body) => htmlResponse(shell({ ...ctx, url, me, title, body, css: WATCH_CSS, active: '/watch' }), ctx.nonce);
 const caveatBox = () => `<div class="c warn"><b>Read this first.</b><ul>${CAVEATS.map((c) => `<li>${e(c)}</li>`).join('')}<li>Each phone counts once per illness per ${DEDUPE_DAYS} days, so a second sick person in the same home is not counted.</li></ul></div>`;
 
-export async function watchPage(env, url, me) {
-  const key = url.searchParams.get('key') || '', k = encodeURIComponent(key);
+export async function watchPage(env, url, me, ctx) {
+  const csrf = `<input type="hidden" name="csrf" value="${e(ctx.csrf)}">`;
   const q = parseQuery(url, env), share = url.searchParams.get('share') === '1', show = share ? sup : (n) => n;
   const w = await weekly(env, q), weeks = weekRange(q.from, q.to), al = alerts(w.rows, q);
   const hot = new Set(al.map((a) => `${a.syndrome}|${a.place}|${a.week}`));
@@ -380,7 +407,7 @@ export async function watchPage(env, url, me) {
   const held = await heldList(env);
   const lines = [...grid.values()].sort((a, b) => a.syndrome.localeCompare(b.syndrome) || b.total - a.total);
   const shown = weeks.slice(-12);
-  const qs = (extra) => `?key=${k}&from=${q.from}&to=${q.to}${q.syndrome ? '&syndrome=' + q.syndrome : ''}${q.place ? '&place=' + q.place : ''}${extra || ''}`;
+  const qs = (extra) => `?from=${q.from}&to=${q.to}${q.syndrome ? '&syndrome=' + q.syndrome : ''}${q.place ? '&place=' + q.place : ''}${extra || ''}`;
   // per syndrome: weekly totals for a small chart
   const perSyn = DEFS.syndromes.filter((s) => s.active).map((s) => {
     const by = weeks.map((wk) => [...grid.values()].filter((g) => g.syndrome === s.id).reduce((t, g) => t + (g.weeks[wk] || 0), 0));
@@ -393,12 +420,12 @@ export async function watchPage(env, url, me) {
   const exp = (fmt, kind, level) => `<a href="/watch/export.${fmt}${qs(`&kind=${kind}&level=${level}`)}">${fmt.toUpperCase()}</a>`;
   const placeOpts = ['<option value="">All places</option>', ...DEFS.places.map((p) => `<option value="${e(p.id)}"${q.place === p.id ? ' selected' : ''}>${e(p.en)}</option>`)].join('');
   const synOpts = ['<option value="">All syndromes</option>', ...DEFS.syndromes.filter((s) => s.active).map((s) => `<option value="${e(s.id)}"${q.syndrome === s.id ? ' selected' : ''}>${e(s.en)}</option>`)].join('');
-  return new Response(`${head('Sehat · disease watch')}
-<h1>Sehat · disease watch</h1>
-<p class="s">Signed in as <b>${e(signedIn(me))}</b> · <a href="/dashboard?key=${k}">← Usage dashboard</a> · <a href="/watch/methods?key=${k}">Methods and definitions →</a></p>
+  return page(ctx, url, me, t(ctx.lang, 'nav.watch'), `
+<h1>${e(t(ctx.lang, 'nav.watch'))}</h1>
+<p class="lead">Weekly reports from families ("someone in my home has this now"), alerts, and auditable downloads. <a href="/watch/methods">Methods and definitions →</a></p>
 ${msg ? `<div class="c"><b>${e(msg)}</b></div>` : ''}
 ${caveatBox()}
-<form class="c" method="get" action="/watch"><input type="hidden" name="key" value="${e(key)}">
+<form class="c noprint" method="get" action="/watch">
 <label class="l">From week <input name="from" value="${e(q.from)}" size="9" pattern="\\d{4}-W\\d{2}"></label> <label class="l">to <input name="to" value="${e(q.to)}" size="9" pattern="\\d{4}-W\\d{2}"></label>
 <select name="syndrome">${synOpts}</select> <select name="place">${placeOpts}</select> <label class="l"><input type="checkbox" name="share" value="1"${share ? ' checked' : ''}> shareable view (counts under ${MIN_CELL} hidden)</label> <button>Show</button>
 <div class="s">ISO weeks, Monday to Sunday, by the day the report was made on the phone. Definitions ${e(DEFS.version)} · alert rules ${e(RULES.version)}.</div></form>
@@ -415,24 +442,22 @@ ${lines.length ? lines.map((g) => `<tr><td>${e(synName(g.syndrome))}</td><td>${e
 <div class="c"><table><tr><th>Week</th><th>Syndrome</th><th>Place</th><th class="n">Searches</th></tr>${w.signals.length ? w.signals.slice().reverse().slice(0, 200).map((s) => `<tr><td>${e(s.week)}</td><td>${e(synName(s.syndrome))}</td><td>${e(placeName(s.place))}</td><td class="n">${e(show(s.n))}</td></tr>`).join('') : '<tr><td colspan="4" class="s">No searches in these weeks.</td></tr>'}</table>
 <div class="s">A person tapping the "rash" picture or searching for a matching word, once per illness per phone per day. Place is the district the person chose earlier, if any.</div></div>
 <h2>Download</h2>
-<div class="c"><b>Shareable</b> (counts under ${MIN_CELL} hidden, safe to send to the health authorities): weekly counts ${exp('csv', 'counts', 'shareable')} ${exp('json', 'counts', 'shareable')} · alerts ${exp('csv', 'alerts', 'shareable')} ${exp('json', 'alerts', 'shareable')} · searches ${exp('csv', 'signals', 'shareable')} ${exp('json', 'signals', 'shareable')}
-${me.role === 'owner' ? `<div style="margin-top:8px"><b>Full, owner only</b> (all numbers, not for sharing): weekly counts ${exp('csv', 'counts', 'full')} ${exp('json', 'counts', 'full')} · alerts ${exp('csv', 'alerts', 'full')} ${exp('json', 'alerts', 'full')} · every report ${exp('csv', 'raw', 'full')} ${exp('json', 'raw', 'full')} · corrections ${exp('csv', 'corrections', 'full')} ${exp('json', 'corrections', 'full')}</div>` : ''}
-<div class="s" style="margin-top:6px">Every file states the query, when it was made, the number of rows, the definition and rule versions, and a SHA-256 of its rows, so anyone can check it was not changed. Each download is logged.</div></div>
+<div class="c"><b>Shareable</b> (counts under ${MIN_CELL} hidden, safe to send to the health authorities): weekly counts ${exp('csv', 'counts', 'shareable')} ${exp('json', 'counts', 'shareable')} · alerts ${exp('csv', 'alerts', 'shareable')} ${exp('json', 'alerts', 'shareable')} · searches ${exp('csv', 'signals', 'shareable')} ${exp('json', 'signals', 'shareable')} · DHIS2 import file ${exp('csv', 'dhis2', 'shareable')} ${exp('json', 'dhis2', 'shareable')}
+${me.role === 'owner' ? `<div style="margin-top:8px"><b>Full, owner only</b> (all numbers, not for sharing): weekly counts ${exp('csv', 'counts', 'full')} ${exp('json', 'counts', 'full')} · DHIS2 ${exp('csv', 'dhis2', 'full')} ${exp('json', 'dhis2', 'full')} · alerts ${exp('csv', 'alerts', 'full')} ${exp('json', 'alerts', 'full')} · every report ${exp('csv', 'raw', 'full')} ${exp('json', 'raw', 'full')} · corrections ${exp('csv', 'corrections', 'full')} ${exp('json', 'corrections', 'full')}</div>` : ''}
+<div class="s" style="margin-top:6px">Every file states the query, when it was made, the number of rows, the definition and rule versions, and a SHA-256 of its rows, so anyone can check it was not changed. Each download is written in the audit log. DHIS2 files hold only what DHIS2 imports (weekly period, data element, org unit and age group by code; see <a href="/data#codes">place codes</a>); their SHA-256 is in the audit log. More downloads: <a href="/data#exports">Data for research</a>.</div></div>
 ${me.role === 'owner' ? `<h2>Correct a report (owner only)</h2>
-<form class="c" method="post" action="/watch/correct?key=${e(k)}"><div class="s">Reports are never changed or deleted. A correction is a new row that voids (or restores) one report, or every report from one install (for example a test phone). Corrections are listed in their own export.</div>
+<form class="c" method="post" action="/watch/correct">${csrf}<div class="s">Reports are never changed or deleted. A correction is a new row that voids (or restores) one report, or every report from one install (for example a test phone). Corrections are listed in their own export.</div>
 <select name="target_type"><option value="report">Report id</option><option value="install">Install id</option></select> <input name="target" placeholder="id" size="38" required> <select name="action"><option value="void">Void</option><option value="restore">Restore</option></select> <input name="reason" placeholder="Reason (required)" size="30" required minlength="3"> <button>Save correction</button></form>
-<form class="c" method="post" action="/watch/correct?key=${e(k)}"><input type="hidden" name="target_type" value="received"><div class="s"><b>Reports received on a day</b> (many at once, for example a flood of made-up reports): every report that arrived on that day (UTC), from one place and of one illness if you choose.</div>
-<input name="target" placeholder="YYYY-MM-DD" size="11" required pattern="\\d{4}-\\d{2}-\\d{2}"> <select name="place">${placeOpts}</select> <select name="syndrome">${synOpts}</select> <label class="l"><input type="checkbox" name="held" value="1"> only held reports</label> <select name="action"><option value="void">Void</option><option value="restore">Restore</option></select> <input name="reason" placeholder="Reason (required)" size="30" required minlength="3"> <button>Save correction</button></form>` : ''}`,
-  { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+<form class="c" method="post" action="/watch/correct">${csrf}<input type="hidden" name="target_type" value="received"><div class="s"><b>Reports received on a day</b> (many at once, for example a flood of made-up reports): every report that arrived on that day (UTC), from one place and of one illness if you choose.</div>
+<input name="target" placeholder="YYYY-MM-DD" size="11" required pattern="\\d{4}-\\d{2}-\\d{2}"> <select name="place">${placeOpts}</select> <select name="syndrome">${synOpts}</select> <label class="l"><input type="checkbox" name="held" value="1"> only held reports</label> <select name="action"><option value="void">Void</option><option value="restore">Restore</option></select> <input name="reason" placeholder="Reason (required)" size="30" required minlength="3"> <button>Save correction</button></form>` : ''}`);
 }
 
-export function methodsPage(url, me) {
-  const k = encodeURIComponent(url.searchParams.get('key') || '');
+export function methodsPage(url, me, ctx) {
   const rows = DEFS.syndromes.map((s) => `<tr><td><b>${e(s.en)}</b><div class="s"><code>${e(s.id)}</code> v${e(s.version)}${s.active ? '' : ' · <b>not asked in the app yet</b>'}</div></td><td style="white-space:normal">${e(s.definition)}<div class="s">The app asks: "${e(s.ask)}" then "Does someone in your home have this now?"</div></td>
     <td style="white-space:normal">${s.topics.length ? 'Topic pages: ' + s.topics.map(e).join(', ') : ''}${s.symptoms.length ? '<br>Symptom finder: ' + s.symptoms.map(e).join(', ') : ''}</td><td style="white-space:normal"><a href="${e(s.source.url)}" rel="noopener">${e(s.source.title)}</a></td></tr>`).join('');
-  return new Response(`${head('Sehat · disease watch methods')}
+  return page(ctx, url, me, 'Disease watch methods', `
 <h1>Disease watch: methods and definitions</h1>
-<p class="s">Signed in as <b>${e(signedIn(me))}</b> · <a href="/watch?key=${k}">← Disease watch</a> · Case definitions ${e(DEFS.version)} · Alert rules ${e(RULES.version)} · Places ${e(DEFS.placesVersion)}</p>
+<p class="s"><a href="/watch">← Disease watch</a> · Case definitions ${e(DEFS.version)} · Alert rules ${e(RULES.version)} · Places ${e(DEFS.placesVersion)}</p>
 ${caveatBox()}
 <h2>What is collected</h2><div class="c"><ul>
 <li>On some topic pages (for example Measles) and under matching symptom-finder results, the app shows a sign in plain words and asks "Does someone in your home have this now?" with Yes and No. Everything is spoken aloud.</li>
@@ -470,19 +495,22 @@ ${RULES.rules.map((r) => `<li><b>${e(r.id)}</b>: ${e(r.text)}</li>`).join('')}
 <li>Undercounting in homes: one phone counts each illness once per ${DEDUPE_DAYS} days, whatever the number of sick people.</li>
 <li>Late and wrong dates: phones send when they get internet (sometimes days later), and the day comes from the phone's clock (reports more than ${MAX_AGE_DAYS} days old or in the future are refused).</li>
 <li>Place is the district the person chose, not where the illness was caught. People can choose wrongly or move.</li>
-<li>Small numbers: weekly counts per district are small, so a change of one or two reports can trigger or clear an alert.</li></ul></div>`,
-  { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+<li>Small numbers: weekly counts per district are small, so a change of one or two reports can trigger or clear an alert.</li></ul></div>
+<h2>DHIS2 (HMIS) export</h2><div class="c"><ul>
+<li>The DHIS2 file is a dataValueSet: one value per illness (data element <code>SEHAT_&lt;ILLNESS&gt;_SUSP</code>), ISO week (period <code>2026W41</code>), place (org unit: the official code where confirmed, else <code>SEHAT_&lt;PLACE&gt;</code>) and age group (category option combo <code>SEHAT_AGE_U5</code>, <code>SEHAT_AGE_5_14</code>, <code>SEHAT_AGE_15P</code>). Import with the ID scheme set to Code, or set DHIS2_MAP to the HMIS's own UIDs.</li>
+<li>Places that share an official code (Aybak city and the Aybak villages, both district 2001) are added together.</li>
+<li>The shareable file leaves out values under ${MIN_CELL} (the response header X-Sehat-Withheld-Cells says how many); the full file (owner only) has every value. These are community reports of suspected illness, not confirmed cases: keep them in their own data elements, never in the facility case counts.</li></ul></div>`);
 }
 
 /* ---------------- one entry point for every /watch path (the worker checks the key first) ---------------- */
 // viewer, editor and owner: /watch, /watch/methods, shareable exports. Owner only: full and raw exports, corrections.
-export async function handle(req, env, url, me) {
+export async function handle(req, env, url, me, ctx) {
   const path = url.pathname;
   if (!me || !['owner', 'editor', 'viewer'].includes(me.role)) return NOT_FOUND();
-  if (path === '/watch' && req.method === 'GET') return watchPage(env, url, me);
-  if (path === '/watch/methods' && req.method === 'GET') return methodsPage(url, me);
-  if (path === '/watch/export.csv' && req.method === 'GET') return exportData(env, url, me, 'csv');
-  if (path === '/watch/export.json' && req.method === 'GET') return exportData(env, url, me, 'json');
-  if (path === '/watch/correct' && req.method === 'POST') return correct(req, env, url, me);
+  if (path === '/watch' && req.method === 'GET') return watchPage(env, url, me, ctx);
+  if (path === '/watch/methods' && req.method === 'GET') return methodsPage(url, me, ctx);
+  if (path === '/watch/export.csv' && req.method === 'GET') return exportData(env, url, me, 'csv', ctx);
+  if (path === '/watch/export.json' && req.method === 'GET') return exportData(env, url, me, 'json', ctx);
+  if (path === '/watch/correct' && req.method === 'POST') return correct(req, env, url, me, ctx);
   return NOT_FOUND();
 }
