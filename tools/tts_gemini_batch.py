@@ -122,6 +122,7 @@ def main():
     print(f"model {model} (batch)")
     plan, copies, mans = {}, [], {}  # key -> (lang, voice, text); identical lines to copy; manifests per folder
     skipped = human = 0
+    hold = tuple(x for x in os.environ.get("GEMINI_TTS_HOLD", "").split(",") if x)  # id prefixes to leave for later
     for voice in ["f", "m"]:
         for lang in ["fa", "ps"]:
             rows = T.order(list(csv.DictReader(open(T.J("content", "scripts", f"narration-{lang}.tsv"), encoding="utf-8"), delimiter="\t")))
@@ -131,7 +132,7 @@ def main():
             files = set(os.listdir(d)); first = {}
             for r in rows:  # same rules as tools/tts_gemini.py
                 text = r["text"].strip()
-                if not text: continue
+                if not text or (hold and r["id"].startswith(hold)): continue
                 h = hashlib.sha1(f"{T.VOICES[voice]}|{T.STYLE[lang]}|{text}|{' '.join(T.MP3)}".encode()).hexdigest()[:12]
                 out = os.path.join(d, r["id"] + ".mp3")
                 others = [f for f in files if os.path.splitext(f)[0] == r["id"] and f != r["id"] + ".mp3"]
