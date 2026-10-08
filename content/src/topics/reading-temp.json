@@ -67,9 +67,9 @@
           "id": "reading-temp.urgent.baby",
           "icon": "baby",
           "text": {
-            "fa": "طفل کمتر از ۳ ماه، ۳۷ و نیم یا بیشتر دارد",
-            "ps": "تر ۳ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري",
-            "en": "a baby under 3 months has 37.5 or more"
+            "fa": "طفل کمتر از ۲ ماه، ۳۷ و نیم یا بیشتر دارد",
+            "ps": "تر ۲ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري",
+            "en": "a baby under 2 months has 37.5 or more"
           }
         },
         {
@@ -166,6 +166,7 @@
     "WHO Replacement of mercury thermometers and sphygmomanometers in health care (2011)"
   ],
   "review": [
+    "Fever age: Mo chose under 2 months (IMCI), 8 Oct 2026. reading-temp.urgent.baby says 'a baby under 2 months has 37.5 or more' (was under 3 months), the same age as the temperature checker (js/tools.js), danger-child.young.temperature and fever.urgent.baby. 37.5 C stays the threshold (IMCI young infant); the low-temperature rules did not change. NICE NG143 uses 38 C and under 3 months; kept in sources only.",
     "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-thermometer. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
   ]
 }

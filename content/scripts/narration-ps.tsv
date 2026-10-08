@@ -34,8 +34,8 @@ ui.who.young	تر ۲ میاشتو کم ماشوم	Baby under 2 months
 ui.who.infant	د ۲ تر ۱۲ میاشتو ماشوم	Baby from 2 to 12 months
 ui.who.child	د ۱ تر ۵ کلونو ماشوم	Child from 1 to 5 years
 ui.who.older	له ۵ کلونو پورته ماشوم، یا لوی کس	Child over 5, or adult
-ui.who.baby3m	تر ۳ میاشتو کم ماشوم	Baby under 3 months
-ui.who.child3m	د ۳ میاشتو تر ۵ کلونو ماشوم	Child from 3 months to 5 years
+ui.who.baby2m	تر ۲ میاشتو کم ماشوم	Baby under 2 months
+ui.who.child2m	د ۲ میاشتو تر ۵ کلونو ماشوم	Child from 2 months to 5 years
 ui.who.pregnant	امیندواره ښځه	Pregnant woman
 ui.who.adult	لوی کس، چې امیندواره نه وي	Adult, not pregnant
 ui.who.under5	تر ۵ کلونو کم ماشوم	Child under 5
@@ -65,7 +65,7 @@ ui.rd.note	دا تشخیص نه دی. یوازې روغتیايي کارکوون
 ui.rd.check	دا شمېره غلطه ښکاري. سامان وګورئ او بیا یې اندازه کړئ.	This number looks wrong. Check the device and measure again.
 ui.rd.bp-order	شمېرې وګورئ. پورتنۍ شمېره تل له لاندېنۍ لویه وي.	Check the numbers. The top number is always bigger than the bottom number.
 ui.rd.v.sign	دا د خطر نښه ده، هره شمېره چې وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	This is a danger sign, whatever the number. Go to hospital now, day or night.
-ui.rd.v.temp-baby-fever	تر ۳ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.	Any fever in a baby under 3 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
+ui.rd.v.temp-baby-fever	تر ۲ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.	Any fever in a baby under 2 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
 ui.rd.v.temp-baby-cold	دا ماشوم ډېر سوړ دی. ماشوم پوستکی په پوستکي د مور پر سینه کېږدئ، سر یې پټ کړئ، او همدا اوس روغتون ته ولاړ شئ.	This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now.
 ui.rd.v.temp-baby-cool	لږ سوړ دی. ماشوم پوستکی په پوستکي ونیسئ، سر یې پټ کړئ، او ۱ ساعت وروسته بیا یې اندازه کړئ. که لا هم له ۳۶ نیم کم وي، یا ښه تی نه رودي، نن کلینیک ته ولاړ شئ.	A little cold. Hold the baby skin to skin, cover the head, and measure again in 1 hour. If still under 36.5, or the baby feeds poorly, go to the clinic today.
 ui.rd.v.temp-baby-ok	د ماشوم لپاره عادي ده. ماشوم ګرم وساتئ او ډېر ځله تی ورکړئ. که ماشوم ناروغ ښکاري، ګرم یا سوړ وي، یا ښه تی نه رودي، بیا یې اندازه کړئ.	Normal for a baby. Keep the baby warm and breastfeed often. If the baby seems ill, feels hot or cold, or feeds poorly, measure again.
@@ -1391,7 +1391,7 @@ reading-temp.lead	ماشین هم غلطي کوي. که څوک ډېر ناروغ
 reading-temp.check	د تبې درجه وګورئ. شمېره او دا چې د چا ده ورکړئ، او واورئ چې څه باید وکړئ.	Check a temperature. Put in the number and who it is, and hear what to do.
 reading-temp.numbers	شمېرې څه مانا لري. ۳۶ تر ۳۷ اعشاریه ۴ عادي دي. ۳۷ نیم یا ډېر تبه ده. په کوچني ماشوم کې، له ۳۶ نیم کم ډېر سوړ دی.	What the numbers mean. 36 to 37.4 is normal. 37.5 or more is a fever. In a young baby, under 36.5 is too cold.
 reading-temp.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
-reading-temp.urgent.baby	تر ۳ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري	a baby under 3 months has 37.5 or more
+reading-temp.urgent.baby	تر ۲ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري	a baby under 2 months has 37.5 or more
 reading-temp.urgent.cold	کوچنی ماشوم له ۳۵ نیم کم لري، یا له ګرمولو وروسته هم سوړ پاتې کېږي	a young baby has under 35.5, or stays cold after warming
 reading-temp.urgent.signs	تبه د خطر له یوې نښې سره ده	there is fever with any danger sign
 reading-temp.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:

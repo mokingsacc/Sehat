@@ -166,17 +166,17 @@ export function initTools(ctx) {
 
   /* ======================= "What does the number mean?" ======================= */
   const DEV = {
-    temp: { topic: 'kit-thermometer', who: ['baby3m', 'child3m', 'older', 'pregnant'], enter: 'ui.rd.enter.temp', dot: true },
+    temp: { topic: 'kit-thermometer', who: ['baby2m', 'child2m', 'older', 'pregnant'], enter: 'ui.rd.enter.temp', dot: true },
     bp: { topic: 'kit-bp', who: ['adult', 'pregnant'], enter: 'ui.rd.enter.bp', two: true },
     sugar: { topic: 'kit-glucometer', who: null, enter: 'ui.rd.enter.sugar' },
     spo2: { topic: 'kit-oximeter', who: ['older', 'under5'], enter: 'ui.rd.enter.spo2' },
     muac: { topic: 'kit-muac', who: null, enter: 'ui.rd.enter.muac', colour: true },
   };
-  const WHO_ICON = { baby3m: 'newborn-warm', child3m: 'milestones', older: 'people', pregnant: 'pregnant', adult: 'people', under5: 'baby' };
+  const WHO_ICON = { baby2m: 'newborn-warm', child2m: 'milestones', older: 'people', pregnant: 'pregnant', adult: 'people', under5: 'baby' };
   // signs asked before the result: [narration id, kind]. kind u = hospital now whatever the number; other kinds change the verdict below
   const SIGNS = {
-    'temp/baby3m': [['newborn.urgent.feed', 'u'], ['newborn.urgent.convulsion', 'u'], ['newborn.urgent.move', 'u'], ['newborn.urgent.breathing', 'u']],
-    'temp/child3m': [['fever.urgent.convulsion', 'u'], ['fever.urgent.neck', 'u'], ['fever.urgent.sleepy', 'u'], ['fever.urgent.drink', 'u'], ['fever.urgent.vomit', 'u'], ['fever.urgent.rash', 'u']],
+    'temp/baby2m': [['newborn.urgent.feed', 'u'], ['newborn.urgent.convulsion', 'u'], ['newborn.urgent.move', 'u'], ['newborn.urgent.breathing', 'u']],
+    'temp/child2m': [['fever.urgent.convulsion', 'u'], ['fever.urgent.neck', 'u'], ['fever.urgent.sleepy', 'u'], ['fever.urgent.drink', 'u'], ['fever.urgent.vomit', 'u'], ['fever.urgent.rash', 'u']],
     'temp/older': [['red-flags.urgent.fever-neck', 'u'], ['red-flags.urgent.confused', 'u'], ['red-flags.urgent.breathing', 'u'], ['fever.urgent.convulsion', 'u']],
     'temp/pregnant': [['pregnancy-danger.urgent.fever-weak', 'u'], ['pregnancy-danger.urgent.belly-pain', 'u'], ['pregnancy-danger.urgent.bleeding', 'u'], ['pregnancy-danger.urgent.breathing', 'u'], ['pregnancy-danger.urgent.fits', 'u']],
     'bp/adult': [['blood-pressure.urgent.chest', 'u'], ['blood-pressure.urgent.face', 'u'], ['blood-pressure.urgent.weak', 'u'], ['blood-pressure.urgent.speech', 'u'], ['blood-pressure.urgent.headache', 'u'], ['red-flags.urgent.breathing', 'u'], ['red-flags.urgent.confused', 'u'], ['ui.rd.s.faint', 'faint']],
@@ -198,7 +198,7 @@ export function initTools(ctx) {
     const out = (lv, s) => ({ lv, say: s, c: t, f });
     if (!(t >= 30 && t <= 43.5)) return out('check', 'ui.rd.check');
     if (has('u')) return out('urgent', 'ui.rd.v.sign');
-    if (RD.who === 'baby3m') {                    // WHO IMCI young infant; Mo: any fever under 3 months = hospital
+    if (RD.who === 'baby2m') {                    // WHO IMCI young infant; Mo (8 Oct 2026): any fever under 2 months = hospital
       if (t >= 37.5) return out('urgent', 'ui.rd.v.temp-baby-fever');
       if (t < 35.5) return out('urgent', 'ui.rd.v.temp-baby-cold');   // IMCI: below 35.5 = very severe disease
       if (t < 36.5) return out('today', 'ui.rd.v.temp-baby-cool');    // WHO thermal protection: rewarm, recheck
@@ -209,7 +209,7 @@ export function initTools(ctx) {
     if (t >= 41) return out('urgent', 'ui.rd.v.temp-very-high');     // judgement call
     if (t < 37.5) return out('ok', 'ui.rd.v.temp-ok');               // IMCI fever = 37.5 or more
     if (RD.who === 'pregnant') return out('today', 'ui.rd.v.temp-pregnant');
-    if (RD.who === 'child3m') return t >= 39 ? out('today', 'ui.rd.v.temp-high') : out('watch', 'ui.rd.v.temp-child-fever');
+    if (RD.who === 'child2m') return t >= 39 ? out('today', 'ui.rd.v.temp-high') : out('watch', 'ui.rd.v.temp-child-fever');
     return t >= 39.5 ? out('today', 'ui.rd.v.temp-high') : out('watch', 'ui.rd.v.temp-fever');
   }
   function verdictBp() {
@@ -338,7 +338,7 @@ export function initTools(ctx) {
       if (v.lv === 'urgent' || v.lv === 'today') html += `<a class="btn ghost" href="#/near">${ic('hospital')} ${esc(T('near'))}</a>`;
     }
     track('view', { p: 'tool/reading/' + (RD.dev || '') + '/' + RD.phase });
-    return { html, nav: 'home', adult: RD.dev !== 'muac' && RD.who !== 'baby3m' && RD.who !== 'child3m' && RD.who !== 'under5' };
+    return { html, nav: 'home', adult: RD.dev !== 'muac' && RD.who !== 'baby2m' && RD.who !== 'child2m' && RD.who !== 'under5' };
   }
   const whoLine = () => (RD.who ? `<div class="agechip" data-block="ui.who.${RD.who}">${ic(WHO_ICON[RD.who])}<span>${esc(say('ui.who.' + RD.who))}</span></div>` : '');
   function rdReset(dev) { Object.assign(RD, { dev, who: null, phase: dev ? (DEV[dev].who ? 'who' : 'val') : 'dev', a: '', b: '', field: 'a', colour: null, signs: new Set() }); }

@@ -61,11 +61,11 @@ A number from 86 to 111 is taken as Fahrenheit and converted (the result shows b
 
 | Person | Reading (°C, under the arm) | Result |
 | --- | --- | --- |
-| Baby under 3 months | 37.5 or more | Hospital now |
+| Baby under 2 months | 37.5 or more | Hospital now |
 | | under 35.5 | Hospital now (skin to skin on the way) |
 | | 35.5 to 36.4 | Clinic today: skin to skin, cover the head, measure again in 1 hour |
 | | 36.5 to 37.4 | Normal |
-| Child 3 months to 5 years | 37.5 to 38.9 | Care at home and watch (drinks, back if over 2 days or very ill) |
+| Child 2 months to 5 years | 37.5 to 38.9 | Care at home and watch (drinks, back if over 2 days or very ill) |
 | | 39 or more | Clinic today |
 | Older child or adult | 37.5 to 39.4 | Care at home and watch |
 | | 39.5 or more | Clinic today |
@@ -144,7 +144,7 @@ Colour, not a number (children 6 to 59 months, left upper arm, halfway between s
 2. **Fast breathing under 2 months is red (hospital now),** as IMCI classes it as possible serious bacterial infection.
 3. **Older children and adults (optional age):** 30 or more = clinic today, 40 or more = hospital now. No single WHO cut-off exists for families. Age 5 to 12 normal is about 20 to 30; adult NEWS2 scores 21 to 24 as 2 and 25 or more as 3. 30 was chosen to be simple and safe. Mo may prefer to remove the adult option.
 4. **Very slow breathing** (under 30, 20, 15 and 10 for the four ages) gives "count again", then "hospital now" if it is really that slow. This is mostly there to catch miscounting.
-5. **Temperature under 3 months:** any 37.5 or more = hospital now (Mo's rule plus IMCI 37.5; NICE uses 38). 35.5 to 36.4 is "rewarm and recheck in 1 hour, clinic today if still low" (WHO thermal protection says cold stress). Under 35.5 = hospital (IMCI).
+5. **Temperature under 2 months:** any 37.5 or more = hospital now (IMCI young infant, 37.5; Mo chose under 2 months as per IMCI on 8 Oct 2026, was under 3 months; NICE uses 38 and under 3 months). 35.5 to 36.4 is "rewarm and recheck in 1 hour, clinic today if still low" (WHO thermal protection says cold stress). Under 35.5 = hospital (IMCI).
 6. **Fever in older children and adults:** child 39 or more = clinic today, older child or adult 39.5 or more = clinic today, 41 or more = hospital now. These numbers are judgement calls: IMCI does not grade fever height and NICE uses traffic lights on signs, not on height (except under 6 months). Fever lasting more than 2 days = clinic (IMCI return advice).
 7. **Fever in pregnancy = clinic today** whatever the number (PCPNC treats fever as needing assessment).
 8. **Adult BP 180/120 = hospital now after one repeat,** as Mo asked. NICE says same-day assessment and allows clinic review when there are no symptoms. In rural Samangan, the nearest place for a same-day check may be the hospital. Mo to confirm.
@@ -191,7 +191,7 @@ The sign chips in the tools reuse narration ids from existing topics (for exampl
 
 - the 2 to 12 month breathing count (55 = clinic today) and the under 2 month count (64 = hospital now);
 - pregnancy BP 148/96 with swelling (hospital now) and adult BP 150/95 (clinic this week);
-- a baby under 3 months at 37.8 (hospital now) and a child at 101.3 °F (converted to 38.5, care at home);
+- a baby under 2 months at 37.8 (hospital now) and a child at 101.3 °F (converted to 38.5, care at home);
 - sugar 3.1 mmol/L (clinic today) and HI (hospital now);
 - oxygen 93 in a child under 5 (clinic today) and a red MUAC (clinic today);
 - the cough link to the counter and back.

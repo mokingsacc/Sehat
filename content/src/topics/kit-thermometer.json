@@ -107,7 +107,7 @@
     "WHO Replacement of mercury thermometers and sphygmomanometers in health care (2011)"
   ],
   "review": [
-    "Under 3 months: 37.5 C or more = hospital now. IMCI uses 37.5 C for the young infant (to 2 months); NICE uses 38 C and 'under 3 months'. Mo asked for under-3-month thresholds, so this page and the reading checker use 'under 3 months' with the IMCI 37.5 C. fever.urgent.baby still says 'under 2 months' (IMCI).",
+    "Under 2 months: 37.5 C or more = hospital now. Mo chose under 2 months (IMCI), 8 Oct 2026: the reading checker (js/tools.js), reading-temp.urgent.baby, fever.urgent.baby and danger-child.young.temperature all use under 2 months with the IMCI young-infant 37.5 C (was 'under 3 months' here and in the checker). NICE uses 38 C and 'under 3 months'; kept in sources only.",
     "Low temperature: under 35.5 C = hospital now (IMCI). 35.5 to 36.4 C = warm skin to skin and recheck in 1 hour (WHO thermal protection); says 'stays cold after warming' in the urgent item.",
     "'A child has 39 or more: clinic today' is a judgement call (NICE: 3 to 6 months with 39 C or more is amber). Not in IMCI.",
     "Price 100 to 250 afghanis is an estimate (about 1.5 to 3.5 US dollars).",

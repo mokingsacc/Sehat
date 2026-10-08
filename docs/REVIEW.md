@@ -4850,3 +4850,31 @@ still asks for it there and then. The district question never shows over the Eme
   (4) DHIS2 codes are Sehat's own (SEHAT_...) until the HMIS team gives their UIDs (DHIS2_MAP in wrangler.toml).
 - Tests: tools/test_dashboard.mjs (176 checks), tools/test_editor.mjs (52), validate 0 errors. Screenshots:
   previews/dashboard-v2/.
+
+## Fever age: under 2 months everywhere (IMCI), 8 Oct 2026
+
+Mo chose (8 Oct 2026, 11:29 UK): "use 2 months as per IMCI". Any fever (37.5 C or more, under the arm) in a baby
+under 2 months = hospital now, in every place in the app. This replaces "under 3 months" in the temperature checker
+and the reading-temp page; the Danger signs in children page, Fever and Newborn already used under 2 months.
+37.5 C stays the threshold (IMCI young infant) and the low-temperature rules did not change (under 35.5 hospital now;
+35.5 to 36.4 skin to skin and recheck in 1 hour).
+
+- Temperature checker (`js/tools.js`): the age choices are now "Baby under 2 months" and "Child from 2 months to 5
+  years" (ids `baby2m` and `child2m`, were `baby3m` and `child3m`; nothing saved on the phone uses them, and usage
+  counts now record `baby2m`/`child2m` so readings after the change can be told apart).
+- Changed lines (fa, ps, en; clips still to make, the old clips of the two changed lines still say 3 months until then):
+  - `ui.who.baby2m` (new id, was `ui.who.baby3m`): Baby under 2 months / طفل کمتر از ۲ ماه / تر ۲ میاشتو کم ماشوم
+  - `ui.who.child2m` (new id, was `ui.who.child3m`): Child from 2 months to 5 years / طفل ۲ ماهه تا ۵ ساله / د ۲ میاشتو تر ۵ کلونو ماشوم
+  - `ui.rd.v.temp-baby-fever`: Any fever in a baby under 2 months is dangerous. Go to hospital now, day or night. Keep
+    breastfeeding on the way. / هر تب در طفل کمتر از ۲ ماه خطرناک است. ... / تر ۲ میاشتو کم ماشوم کې هره تبه خطرناکه ده. ...
+  - `reading-temp.urgent.baby`: a baby under 2 months has 37.5 or more / طفل کمتر از ۲ ماه، ۳۷ و نیم یا بیشتر دارد /
+    تر ۲ میاشتو کم ماشوم ۳۷ نیم یا ډېر لري
+- Notes updated: kit-thermometer and danger-child review notes ("Mo chose under 2 months (IMCI), 8 Oct 2026"), a new
+  reading-temp note, and docs/HOME_KIT.md (table, judgement call 5, testing line). The NICE NG143 source lines
+  ("under 3 months with 38 C or more is high risk") stay as sources. Unrelated 3-month facts (iron after birth,
+  anaemia tablets, first antenatal visit) did not change.
+
+For Mo to check:
+1. Babies aged 2 to 3 months with 37.5 to 38.9 now get "care at home and watch" (with the child danger signs asked
+   first), where before they got "hospital now". This is IMCI; NICE would still call 38 or more under 3 months high risk.
+2. Dari "طفل ۲ ماهه تا ۵ ساله" and Pashto "د ۲ میاشتو تر ۵ کلونو ماشوم" (same pattern as before, only the number changed).

@@ -1438,15 +1438,15 @@
    "ps": "له ۵ کلونو پورته ماشوم، یا لوی کس",
    "en": "Child over 5, or adult"
   },
-  "ui.who.baby3m": {
-   "fa": "طفل کمتر از ۳ ماه",
-   "ps": "تر ۳ میاشتو کم ماشوم",
-   "en": "Baby under 3 months"
+  "ui.who.baby2m": {
+   "fa": "طفل کمتر از ۲ ماه",
+   "ps": "تر ۲ میاشتو کم ماشوم",
+   "en": "Baby under 2 months"
   },
-  "ui.who.child3m": {
-   "fa": "طفل ۳ ماهه تا ۵ ساله",
-   "ps": "د ۳ میاشتو تر ۵ کلونو ماشوم",
-   "en": "Child from 3 months to 5 years"
+  "ui.who.child2m": {
+   "fa": "طفل ۲ ماهه تا ۵ ساله",
+   "ps": "د ۲ میاشتو تر ۵ کلونو ماشوم",
+   "en": "Child from 2 months to 5 years"
   },
   "ui.who.pregnant": {
    "fa": "زن حامله",
@@ -1594,9 +1594,9 @@
    "en": "This is a danger sign, whatever the number. Go to hospital now, day or night."
   },
   "ui.rd.v.temp-baby-fever": {
-   "fa": "هر تب در طفل کمتر از ۳ ماه خطرناک است. همین حالا به شفاخانه بروید، شب باشد یا روز. در راه شیر دادن را ادامه دهید.",
-   "ps": "تر ۳ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.",
-   "en": "Any fever in a baby under 3 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way."
+   "fa": "هر تب در طفل کمتر از ۲ ماه خطرناک است. همین حالا به شفاخانه بروید، شب باشد یا روز. در راه شیر دادن را ادامه دهید.",
+   "ps": "تر ۲ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.",
+   "en": "Any fever in a baby under 2 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way."
   },
   "ui.rd.v.temp-baby-cold": {
    "fa": "این طفل زیاد سرد است. طفل را پوست به پوست روی سینهٔ مادر بگذارید، سرش را بپوشانید و همین حالا به شفاخانه بروید.",

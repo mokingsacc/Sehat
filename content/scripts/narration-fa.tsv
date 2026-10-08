@@ -34,8 +34,8 @@ ui.who.young	طفل کمتر از ۲ ماه	Baby under 2 months
 ui.who.infant	طفل ۲ تا ۱۲ ماهه	Baby from 2 to 12 months
 ui.who.child	طفل ۱ تا ۵ ساله	Child from 1 to 5 years
 ui.who.older	طفل بالای ۵ سال، یا بزرگسال	Child over 5, or adult
-ui.who.baby3m	طفل کمتر از ۳ ماه	Baby under 3 months
-ui.who.child3m	طفل ۳ ماهه تا ۵ ساله	Child from 3 months to 5 years
+ui.who.baby2m	طفل کمتر از ۲ ماه	Baby under 2 months
+ui.who.child2m	طفل ۲ ماهه تا ۵ ساله	Child from 2 months to 5 years
 ui.who.pregnant	زن حامله	Pregnant woman
 ui.who.adult	بزرگسال، غیر حامله	Adult, not pregnant
 ui.who.under5	طفل کمتر از ۵ سال	Child under 5
@@ -65,7 +65,7 @@ ui.rd.note	این تشخیص نیست. فقط کارمند صحی می‌توا�
 ui.rd.check	این عدد غلط معلوم می‌شود. وسیله را ببینید و دوباره اندازه کنید.	This number looks wrong. Check the device and measure again.
 ui.rd.bp-order	عددها را ببینید. عدد بالا همیشه از عدد پایین بزرگ‌تر است.	Check the numbers. The top number is always bigger than the bottom number.
 ui.rd.v.sign	این علامت خطر است، هر عددی که باشد. همین حالا به شفاخانه بروید، شب باشد یا روز.	This is a danger sign, whatever the number. Go to hospital now, day or night.
-ui.rd.v.temp-baby-fever	هر تب در طفل کمتر از ۳ ماه خطرناک است. همین حالا به شفاخانه بروید، شب باشد یا روز. در راه شیر دادن را ادامه دهید.	Any fever in a baby under 3 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
+ui.rd.v.temp-baby-fever	هر تب در طفل کمتر از ۲ ماه خطرناک است. همین حالا به شفاخانه بروید، شب باشد یا روز. در راه شیر دادن را ادامه دهید.	Any fever in a baby under 2 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
 ui.rd.v.temp-baby-cold	این طفل زیاد سرد است. طفل را پوست به پوست روی سینهٔ مادر بگذارید، سرش را بپوشانید و همین حالا به شفاخانه بروید.	This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now.
 ui.rd.v.temp-baby-cool	کمی سرد است. طفل را پوست به پوست بگیرید، سرش را بپوشانید و بعد از ۱ ساعت دوباره اندازه کنید. اگر هنوز کمتر از ۳۶ و نیم است، یا خوب شیر نمی‌خورد، امروز به کلینیک بروید.	A little cold. Hold the baby skin to skin, cover the head, and measure again in 1 hour. If still under 36.5, or the baby feeds poorly, go to the clinic today.
 ui.rd.v.temp-baby-ok	برای طفل عادی است. طفل را گرم نگه دارید و بار بار شیر بدهید. اگر طفل مریض معلوم می‌شود، داغ یا سرد است یا خوب شیر نمی‌خورد، دوباره اندازه کنید.	Normal for a baby. Keep the baby warm and breastfeed often. If the baby seems ill, feels hot or cold, or feeds poorly, measure again.
@@ -1391,7 +1391,7 @@ reading-temp.lead	ماشین هم غلط می‌کند. اگر کسی خیلی �
 reading-temp.check	درجهٔ تب را معاینه کنید. عدد و اینکه برای کیست را وارد کنید و بشنوید چه باید کرد.	Check a temperature. Put in the number and who it is, and hear what to do.
 reading-temp.numbers	عددها چه معنا دارند. ۳۶ تا ۳۷ و ۴ دهم عادی است. ۳۷ و نیم یا بیشتر تب است. در طفل کوچک، کمتر از ۳۶ و نیم زیاد سرد است.	What the numbers mean. 36 to 37.4 is normal. 37.5 or more is a fever. In a young baby, under 36.5 is too cold.
 reading-temp.urgent	اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز	Go to hospital now, day or night, if:
-reading-temp.urgent.baby	طفل کمتر از ۳ ماه، ۳۷ و نیم یا بیشتر دارد	a baby under 3 months has 37.5 or more
+reading-temp.urgent.baby	طفل کمتر از ۲ ماه، ۳۷ و نیم یا بیشتر دارد	a baby under 2 months has 37.5 or more
 reading-temp.urgent.cold	طفل کوچک کمتر از ۳۵ و نیم دارد، یا بعد از گرم کردن هم سرد است	a young baby has under 35.5, or stays cold after warming
 reading-temp.urgent.signs	تب با یکی از علایم خطر همراه است	there is fever with any danger sign
 reading-temp.soon	اگر یکی از این‌ها بود، امروز به کلینیک بروید	Go to the clinic today if:
