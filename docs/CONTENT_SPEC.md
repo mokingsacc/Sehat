@@ -14,7 +14,7 @@ Two sections: children (اطفال / ماشومان) and adults (بزرگسال�
    - urgent (red): go to hospital NOW, day or night.
    - soon (amber): go to the clinic TODAY (or "this week" where clinically right, say so in the item).
 4. Base everything on WHO guidance (IMCI chart booklet and its caregiver counselling, WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), WHO ANC recommendations 2016, WHO/UNICEF Facts for Life, WHO Caring for the newborn at home, WHO Doing What Matters in Times of Stress, IFRC first aid guidelines for public first aid, WHO fact sheets). Put the sources in "sources".
-5. No medicine doses except these caregiver messages that WHO itself gives to families: ORS amounts, zinc for diarrhoea (10 mg/day under 6 months, 20 mg/day 6 months and over, for 10 to 14 days), iron and folic acid in pregnancy "as given by the clinic". Otherwise say "medicine from the clinic" or "ask the health worker".
+5. No medicine doses except these caregiver messages that WHO itself gives to families: ORS amounts, zinc for diarrhoea (from 2 months: 10 mg/day under 6 months, 20 mg/day 6 months and over, for 14 days, as in IMCI 2014; under 2 months only from the health worker), iron and folic acid in pregnancy "as given by the clinic". Otherwise say "medicine from the clinic" or "ask the health worker".
 6. Culturally right for rural northern Afghanistan: families, mothers-in-law and fathers decide together; say "tell the family" where helpful; respectful, never blaming; Islamic-neutral (no religious claims either way); transport is hard, so encourage planning ahead (money, car, a phone number) for pregnancy and emergencies.
 7. Don't invent statistics. If unsure of a fact, leave it out or put a note in "review".
 

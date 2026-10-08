@@ -32,9 +32,9 @@
         "en": "Take the child to the clinic"
       },
       "text": {
-        "fa": "کارمند صحی طفل را معاینه می‌کند و ویتامین الف می‌دهد. ویتامین الف چشم‌ها را حفاظت می‌کند و به جور شدن طفل کمک می‌کند.",
-        "ps": "روغتیايي کارکوونکی ماشوم معاینه کوي او ویټامین الف ورکوي. ویټامین الف سترګې ساتي او له ماشوم سره د روغېدو مرسته کوي.",
-        "en": "The health worker will check the child and give vitamin A. Vitamin A protects the eyes and helps the child get better."
+        "fa": "کارمند صحی طفل را معاینه می‌کند و ویتامین الف می‌دهد: یک نوبت در کلینیک، و یک نوبت که روز بعد در خانه بدهید. ویتامین الف چشم‌ها را حفاظت می‌کند و به جور شدن طفل کمک می‌کند.",
+        "ps": "روغتیايي کارکوونکی ماشوم معاینه کوي او ویټامین الف ورکوي: یو ځل په کلینیک کې، او یو ځل چې بله ورځ یې په کور کې ورکړئ. ویټامین الف سترګې ساتي او له ماشوم سره د روغېدو مرسته کوي.",
+        "en": "The health worker will check the child and give vitamin A: one dose at the clinic, and one to give at home the next day. Vitamin A protects the eyes and helps the child get better."
       }
     },
     {
@@ -123,11 +123,11 @@
       "items": [
         {
           "id": "measles.urgent.breathing",
-          "icon": "breathing-fast",
+          "icon": "chest-indrawing",
           "text": {
-            "fa": "تند یا به سختی نفس می‌کشد",
-            "ps": "چټک یا په سختۍ سا اخلي",
-            "en": "breathes fast or with difficulty"
+            "fa": "به سختی نفس می‌کشد، یا پایین سینه‌اش به داخل کشیده می‌شود",
+            "ps": "په سختۍ سا اخلي، یا د سینې لاندې برخه یې ننوځي",
+            "en": "struggles to breathe, or the lower chest pulls in"
           }
         },
         {
@@ -187,6 +187,15 @@
         "en": "Go to the clinic today if the child with measles:"
       },
       "items": [
+        {
+          "id": "measles.soon.fast",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز تیز نفس می‌کشد، اما هیچ یک از علایم رفتن به شفاخانه را ندارد",
+            "ps": "ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري",
+            "en": "breathes fast, but has none of the hospital signs"
+          }
+        },
         {
           "id": "measles.soon.pus",
           "icon": "eye",
@@ -271,7 +280,9 @@
     "WHO/UNICEF Facts for Life (2010): immunization",
     "Afghanistan schedule: measles vaccine at 9 and 18 months (UNICEF Afghanistan 2023, via Saeedzai et al. 2025; see research_notes content_facts.md)",
     "Burden: WHO Afghanistan Infectious Disease Outbreaks Situation Report week 48 2025 (96,554 cases, 546 deaths in 2025)",
-    "WHO Pocket Book of Hospital Care for Children (2013): severe complicated measles (vitamin A, treatment of pneumonia, eye and mouth complications, nutrition)"
+    "WHO Pocket Book of Hospital Care for Children (2013): severe complicated measles (vitamin A, treatment of pneumonia, eye and mouth complications, nutrition)",
+    "WHO fact sheet: Measles (2026): two doses of vitamin A for every suspected case under 5, on diagnosis and the next day",
+    "WHO/UNICEF WIISE vaccine introductions, Afghanistan: measles-rubella (MR) planned for January 2028, HPV for girls in 2029"
   ],
   "review": [
     "Vitamin A is written 'ویتامین الف' (Dari) and 'ویټامین الف' (Pashto) because Latin letters are not allowed; check what clinics in Samangan actually say.",
@@ -279,6 +290,9 @@
     "The cloudy cornea item reads 'has a white or cloudy patch on the eye' (Dari and Pashto say 'the dark part of the eye has gone cloudy or white'); check that families will understand it.",
     "Icon wanted: 'mouth' for mouth sores; 'tooth' used instead.",
     "Isolation advice is limited to keeping newborns and pregnant women away. No isolation period is stated. fever.json already has a short measles step and soon item; this page gives the fuller home care and complications.",
-    "None beyond the existing measles review notes."
+    "None beyond the existing measles review notes.",
+    "Medical audit 2026-10-08 CH6: 'breathes fast or with difficulty' was hospital now. Fast breathing alone is pneumonia, treated at the clinic with or without measles (IMCI 2014), as on cough.soon.fast and danger-child.soon.fast. The red item now reads 'struggles to breathe, or the lower chest pulls in' (same id, new clip); new amber item measles.soon.fast with the words of cough.soon.fast.",
+    "Medical audit 2026-10-08 CH11: measles.clinic now says two doses of vitamin A (one at the clinic, one at home the next day; WHO). The third dose for eye signs is given by the health worker and is not mentioned.",
+    "Medical audit 2026-10-08 CH9: the vaccine is still measles only. Afghanistan has told WHO it plans measles-rubella (MR) in January 2028 (the date slipped from August 2026) and HPV for girls in 2029; change 'measles' to 'measles and rubella' when NEPI confirms the switch."
   ]
 }

@@ -747,7 +747,7 @@
         ],
         "_notes": [
           "Child red: IMCI general danger signs (not able to drink, vomits everything, lethargic or unconscious, convulsions) and severe dehydration (sunken eyes with lethargy or not able to drink).",
-          "Child amber: IMCI some dehydration (restless, irritable; sunken eyes; drinks eagerly, thirsty) = clinic today. This tile follows IMCI (two signs for severe dehydration; audit CH7). The Diarrhoea topic page still lists 'sunken eyes' alone as hospital now: main to align it.",
+          "Child amber: IMCI some dehydration (restless, irritable; sunken eyes; drinks eagerly, thirsty) = clinic today. This tile follows IMCI (two signs for severe dehydration; audit CH7). The Diarrhoea topic page now agrees (audit CH7: diarrhoea.urgent.eyes and diarrhoea.soon.eyes).",
           "Child amber: blood in stool (IMCI dysentery), 14 days or more (IMCI persistent diarrhoea), fever, not getting better (IMCI mother's card: return if).",
           "Baby (under 2 months): IMCI 2014 sick young infant: not feeding well, movement only when stimulated, fever or low temperature, convulsions, severe dehydration, and blood in the stool (urgent referral) = hospital now; any diarrhoea or some dehydration = clinic today (IMCI treats young-infant dehydration at the facility; the IMCI zinc table starts at 2 months), so no home ORS or zinc step at this age, only keep breastfeeding. Medical audit 2026-10-08 CH3.",
           "Older: WHO IMAI: severe dehydration, cholera-like stool, no urine, at-risk adults; blood in stool, fever, more than 3 days, severe pain: clinic today."
@@ -1047,7 +1047,7 @@
         ],
         "_notes": [
           "Child red: petechial or purpuric rash (WHO Pocket Book 2013, meningococcal disease); severe complicated measles: clouding of the cornea, deep or extensive mouth ulcers, not able to drink (IMCI 2014 measles); struggling or noisy breathing and chest indrawing as on Cough (IMCI; chest indrawing RED by Mo's default); swelling of lips, tongue or throat (WHO BEC anaphylaxis).",
-          "Child amber: fast breathing alone = clinic today (IMCI pneumonia, with or without measles; audit CH6: the Measles page measles.urgent.breathing still says hospital, main to align), measles (fever with generalized rash), pus from the eyes (IMCI measles with eye complications), skin infection and scabies (WHO Pocket Book skin chapter).",
+          "Child amber: fast breathing alone = clinic today (IMCI pneumonia, with or without measles; audit CH6: the Measles page now agrees, measles.soon.fast), measles (fever with generalized rash), pus from the eyes (IMCI measles with eye complications), skin infection and scabies (WHO Pocket Book skin chapter).",
           "Baby: IMCI 2014 young infant: umbilicus redness extending to the skin = possible serious bacterial infection; skin pustules and red umbilicus = local bacterial infection (clinic).",
           "Older: neck stiffness with fever and dark rash (IMAI meningitis), anaphylaxis (BEC), dengue warning signs, CCHF bleeding, cellulitis with fever (IMAI)."
         ]

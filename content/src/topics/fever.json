@@ -238,6 +238,15 @@
             "ps": "پر پوستکي یې بنفش یا تور داغونه راختلي",
             "en": "has purple or dark spots on the skin"
           }
+        },
+        {
+          "id": "fever.urgent.breathing",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "به سختی نفس می‌کشد، پایین سینه‌اش به داخل کشیده می‌شود، یا در حالت آرام نفسش صدا می‌کند",
+            "ps": "په سختۍ سا اخلي، د سینې لاندې برخه یې ننوځي، یا په آرامه حالت کې یې سا غږ کوي",
+            "en": "struggles to breathe, the lower chest pulls in, or breathing is noisy when calm"
+          }
         }
       ]
     },
@@ -258,6 +267,15 @@
             "fa": "بیشتر از ۲ روز است که تب دارد",
             "ps": "له ۲ ورځو زیات وخت کېږي چې تبه لري",
             "en": "has had a fever for more than 2 days"
+          }
+        },
+        {
+          "id": "fever.soon.fast",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "تیز نفس می‌کشد: از ۲ تا ۱۲ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر",
+            "ps": "چټکه ساه اخلي: له ۲ تر ۱۲ میاشتو په یوه دقیقه کې ۵۰ ځله یا ډېر، له ۱ تر ۵ کلونو ۴۰ ځله یا ډېر",
+            "en": "breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years"
           }
         },
         {
@@ -299,6 +317,22 @@
       ]
     },
     {
+      "id": "fever.counter",
+      "type": "link",
+      "to": "tool/breaths",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس‌ها را با گوشی بشمارید",
+        "ps": "ساه په ټیلیفون وشمېرئ",
+        "en": "Count breaths with the phone"
+      },
+      "text": {
+        "fa": "گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.",
+        "ps": "ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.",
+        "en": "The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast."
+      }
+    },
+    {
       "id": "fever.chw",
       "type": "tip",
       "icon": "clinic",
@@ -327,7 +361,9 @@
     "WHO fact sheet: Measles",
     "WHO IMCI Chart Booklet (2014): fever classification, malaria test, ear problem (amoxicillin), sore throat; very severe febrile disease referred",
     "WHO Pocket Book of Hospital Care for Children (2013): meningitis, severe malaria, septicaemia",
-    "Burden: Afghanistan MoPH NDSR week 33 2026: 4,391 meningitis cases and 188 deaths in 2026 to date"
+    "Burden: Afghanistan MoPH NDSR week 33 2026: 4,391 meningitis cases and 188 deaths in 2026 to date",
+    "WHO IMCI Chart Booklet (2014): cough or difficult breathing (fast breathing 50+ at 2-12 months, 40+ at 1-5 years; chest indrawing; stridor in a calm child); counsel the mother: return immediately for fast or difficult breathing",
+    "UNICEF/WHO Facts for Life (2010): coughs, colds and more serious illnesses (go at once if breathing is hard or the lower chest sucks in)"
   ],
   "review": [
     "Fever is defined as 37.5 C or more (IMCI, axillary). Written as '37 and a half degrees' in Dari and Pashto for the narrator.",
@@ -342,6 +378,7 @@
     "fever.urgent.cold added: under 2 months and feels cold = hospital now (IMCI low body temperature, matches danger-child.young.temperature).",
     "Sore-throat item uses the 'no-drink' icon (no throat icon exists); IMCI treats streptococcal sore throat with an antibiotic.",
     "Malaria testing at BHC level in Samangan (low-transmission province) may not be routine; the text says 'may test'.",
-    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check."
+    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check.",
+    "Medical audit 2026-10-08 CH1: the page had no breathing sign. Red item fever.urgent.breathing (struggles to breathe, lower chest pulls in, or noisy breathing when calm; same signs as danger-child.urgent.breathing and danger-child.urgent.chest, one line to keep the red list short) and amber item fever.soon.fast (the IMCI fast-breathing cut-offs, same words as ui.ask.fast-child), with the breath-counter link fever.counter (same words as cough.counter). Chest indrawing stays red as on danger-child and cough until Mo decides CH5. The red list now has 9 items."
   ]
 }

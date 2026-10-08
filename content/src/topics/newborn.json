@@ -82,9 +82,9 @@
         "en": "Keep the cord clean and dry"
       },
       "text": {
-        "fa": "روی ناف هیچ چیز نگذارید، به جز کلرهگزیدین، دوای نافی که قابله یا کارمند صحی قریه می‌دهد. آن را همان‌طور که نشان می‌دهند بمالید و ناف را خشک نگه دارید.",
-        "ps": "پر نوم هېڅ شی مه لګوئ، پرته له کلورهګزیډین، د نوم هغه درمل چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي. هغسې یې ولګوئ لکه چې دوی یې ښيي، او نوم وچ وساتئ.",
-        "en": "Put nothing on the cord except chlorhexidine, the cord medicine from the midwife or village health worker. Use it as they show you, and keep the cord dry."
+        "fa": "اگر طفل در خانه به دنیا آمده، کلرهگزیدینی را که قابله یا کارمند صحی قریه می‌دهد، همان‌طور که نشان می‌دهند روی ناف بمالید. در غیر آن، روی ناف هیچ چیز نگذارید. ناف را پاک و خشک نگه دارید.",
+        "ps": "که ماشوم په کور کې زېږېدلی وي، هغه کلورهګزیډین چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي، هغسې پر نوم ولګوئ لکه چې دوی یې ښيي. که نه، پر نوم هېڅ شی مه لګوئ. نوم پاک او وچ وساتئ.",
+        "en": "If the baby was born at home, use the chlorhexidine the midwife or village health worker gives you, as they show you. Otherwise put nothing on the cord. Keep it clean and dry."
       }
     },
     {
@@ -157,9 +157,9 @@
         "en": "At the clinic: the newborn check"
       },
       "text": {
-        "fa": "قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد و روی ناف دوای کلرهگزیدین می‌مالد.",
-        "ps": "قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي او پر نامه کلورهګزیډین درمل مږي.",
-        "en": "The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord."
+        "fa": "قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد، و اگر طفل در خانه به دنیا آمده، دوای کلرهگزیدین را برای ناف می‌دهد.",
+        "ps": "قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي، او که ماشوم په کور کې زېږېدلی وي، د نامه لپاره کلورهګزیډین درمل ورکوي.",
+        "en": "The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines, and gives chlorhexidine for the cord if the baby was born at home."
       }
     },
     {
@@ -375,7 +375,7 @@
     "WHO recommendations on postnatal care of the mother and newborn (2013): content of postnatal contacts; chlorhexidine for cord care where harmful substances are traditionally applied",
     "WHO Guideline: managing possible serious bacterial infection in young infants when referral is not feasible (2015) and WHO Pocket Book (2013): injectable antibiotics for neonatal sepsis",
     "Afghanistan BPHS (2010): chlorhexidine in the Health Post and BHC lists; ampicillin and gentamicin injections at BHC and above",
-    "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022): at least 4 postnatal contacts (first 24 hours, day 2 to 3, day 4 to 7, week 6); dry cord care, chlorhexidine for home births in settings with high neonatal mortality; exclusive breastfeeding",
+    "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022): at least 4 postnatal contacts (first 24 hours, 48 to 72 hours, day 7 to 14, week 6); dry cord care, chlorhexidine for home births in settings with high neonatal mortality; exclusive breastfeeding",
     "WHO IMCI Chart Booklet (2014), sick young infant: very severe disease (not feeding well, convulsions, fast breathing 60 or more, severe chest indrawing, temperature 37.5 or more or below 35.5, movement only when stimulated); severe jaundice (palms and soles)",
     "Afghanistan CBHC Strategy 2015-2020 (pp. 10-11): community health workers distribute chlorhexidine digluconate for newborn cord care; IPEHS 2019: postnatal home visit within 24 hours",
     "WHO/UNICEF WUENIC Afghanistan (2026): hepatitis B birth dose within 24 hours of delivery"
@@ -392,6 +392,8 @@
     "Content pass 3: birth vaccines 'on the first day; if born at home, within 24 hours' (WUENIC: hepatitis B within 24 hours). 'Checks are free' was removed (Mo's rule: 'free' only for vaccines and TB).",
     "Content pass 3: the 'first yellow milk' item uses آغوز (Dari) and فله (Pashto) for colostrum: check the words families in Samangan use. 'Honey or ghee' are the common pre-lacteal feeds named in the research; check.",
     "Content pass 3: postnatal checks 'first day, day 3, about one week (day 7 to 14), 6 weeks' (WHO 2013; WHO 2022 says day 4 to 7 for the third contact). The CHW home visit is from IPEHS 2019 and CBHC 2015.",
-    "Content pass 3: small-baby step now says feed every 2 to 3 hours and 'cold feet mean the baby needs more warmth' (PCPNC J10); the father-or-grandmother line was dropped for length."
+    "Content pass 3: small-baby step now says feed every 2 to 3 hours and 'cold feet mean the baby needs more warmth' (PCPNC J10); the father-or-grandmother line was dropped for length.",
+    "Medical audit 2026-10-08 CH16: chlorhexidine on the cord only for babies born at home (WHO 2013 and 2022: home births where newborn deaths are high, which includes Afghanistan); a baby born in a clinic gets clean, dry cord care with nothing on it. Supply in Samangan still unconfirmed.",
+    "Medical audit 2026-10-08 CH17: the WHO 2022 source line now gives the contacts as first 24 hours, 48 to 72 hours, day 7 to 14 and week 6 (it said day 2 to 3 and day 4 to 7). The page text was already right."
   ]
 }

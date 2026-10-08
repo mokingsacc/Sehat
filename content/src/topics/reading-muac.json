@@ -89,6 +89,33 @@
             "ps": "ډنګر دی او ډېر کمزوری یا خوب وړی دی",
             "en": "is thin and very weak or sleepy"
           }
+        },
+        {
+          "id": "reading-muac.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "لاغر است و همه چیز را استفراغ می‌کند",
+            "ps": "ډنګر دی او هر څه کانګې کوي",
+            "en": "is thin and vomits everything"
+          }
+        },
+        {
+          "id": "reading-muac.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "لاغر است و تب بلند دارد (۳۹ یا بیشتر)، یا بدنش سرد است",
+            "ps": "ډنګر دی او لوړه تبه لري (۳۹ یا ډېر)، یا بدن یې سوړ دی",
+            "en": "is thin with a high fever (39 or more), or feels cold"
+          }
+        },
+        {
+          "id": "reading-muac.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرده یا حالا تشنج دارد",
+            "ps": "اختلاج یې کړی یا اوس اختلاج لري",
+            "en": "has had convulsions (fits), or has them now"
+          }
         }
       ]
     },
@@ -171,9 +198,11 @@
     "UNICEF / ALIMA Family MUAC approach: mothers measuring their own children",
     "WHO Child Growth Standards (2006) and WHO/UNICEF growth monitoring and promotion",
     "WHO IMCI Chart Booklet (2014): assess growth; feeding problems",
-    "NICE NG75 Faltering growth: recognition and management in children (2017): concern if birth weight not regained by 3 weeks"
+    "NICE NG75 Faltering growth: recognition and management in children (2017): concern if birth weight not regained by 3 weeks",
+    "Afghanistan MoPH IMAM guideline (2018), pp. 18, 22, 37, 46: inpatient criteria for a thin child (danger signs, no appetite, oedema)"
   ],
   "review": [
-    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-muac (and the weight parts of kit-scale). The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-muac (and the weight parts of kit-scale). The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture.",
+    "Medical audit 2026-10-08 CH20: the red box now has the same six signs as malnutrition.urgent (feet, will not eat or drink, sleepy, vomits everything, high fever or cold, fits); 'thin' rather than 'very thin' is kept here because the page covers every MUAC colour."
   ]
 }

@@ -371,9 +371,9 @@
     "en": "Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost."
   },
   "anim.ors.s2": {
-    "fa": "دست‌ها را بشویید. یک جگ پاک را تا ۱ لیتر از آب جوشانده و سرد شده پر کنید. تمام پاکت را بریزید و هم بزنید تا حل شود.",
-    "ps": "لاسونه ومینځئ. یو پاک جګ تر ۱ لیټره پورې په ایشول شویو او سړو شویو اوبو ډک کړئ. ټول پاکټ پکې واچوئ او وې خوځوئ تر څو حل شي.",
-    "en": "Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves."
+    "fa": "دست‌ها را بشویید. یک جگ پاک را از آب جوشانده و سرد شده پر کنید، به اندازه‌ای که روی پاکت نوشته است، معمولاً ۱ لیتر. تمام پاکت را بریزید و هم بزنید تا حل شود.",
+    "ps": "لاسونه ومینځئ. یو پاک جګ په ایشول شویو او سړو شویو اوبو ډک کړئ، هومره چې پر پاکټ لیکل شوي، معمولاً ۱ لیټر. ټول پاکټ پکې واچوئ او وې خوځوئ تر څو حل شي.",
+    "en": "Wash your hands. Fill a clean jug with boiled, cooled water, as much as the packet says, usually 1 litre. Pour in the whole packet and stir until it dissolves."
   },
   "anim.ors.s3": {
     "fa": "پاکت ندارید؟ فعلاً آب برنج یا شوربا بدهید و برای گرفتن پاکت او آر اس به کلینیک بروید. همیشه چند پاکت را در خانه نگه دارید.",
@@ -386,14 +386,14 @@
     "en": "Give small sips often, with a spoon or a cup. If the child vomits, wait 10 minutes, then give it more slowly. Make it fresh each day."
   },
   "anim.ors.s5": {
-    "fa": "شیر مادر و غذا را ادامه دهید. تابلیت زنک از کلینیک، روزی یک بار برای ۱۰ تا ۱۴ روز، به جور شدن طفل کمک می‌کند، حتی وقتی اسهال بند شد.",
-    "ps": "تی ورکول او خواړه ورکول دوام ورکړئ. د کلینیک د زنک ټابلیټ، ورځې یو ځل د ۱۰ تر ۱۴ ورځو لپاره، ماشوم ژر جوړوي، حتی کله چې اسهال ودرېږي.",
-    "en": "Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 10 to 14 days, help the child get well, even after the diarrhoea stops."
+    "fa": "شیر مادر و غذا را ادامه دهید. تابلیت زنک از کلینیک، روزی یک بار برای ۱۴ روز، به جور شدن طفل کمک می‌کند، حتی وقتی اسهال بند شد.",
+    "ps": "تی ورکول او خواړه ورکول دوام ورکړئ. د کلینیک د زنک ټابلیټ، ورځې یو ځل د ۱۴ ورځو لپاره، ماشوم ژر جوړوي، حتی کله چې اسهال ودرېږي.",
+    "en": "Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 14 days, help the child get well, even after the diarrhoea stops."
   },
   "anim.ors.s6": {
-    "fa": "اگر طفل نمی‌تواند بنوشد یا شیر بخورد، بسیار خواب‌آلود است، در پاخانه‌اش خون است، تب دارد یا بهتر نمی‌شود، زود به کلینیک بروید.",
-    "ps": "که ماشوم څښلی یا تی رودلی نشي، ډېر خوب وړی وي، په ډکو متیازو کې یې وینه وي، تبه ولري، یا ښه کېږي نه، ژر کلینیک ته لاړ شئ.",
-    "en": "Go to the clinic quickly if the child cannot drink or breastfeed, is very sleepy, has blood in the poo, has a fever, or is not getting better."
+    "fa": "اگر طفل نمی‌تواند بنوشد یا شیر بخورد، یا بسیار خواب‌آلود است، همین حالا به شفاخانه بروید. اگر در پاخانه‌اش خون است، تب دارد یا بهتر نمی‌شود، امروز به کلینیک بروید.",
+    "ps": "که ماشوم څښلی یا تی رودلی نشي، یا ډېر خوب وړی وي، همدا اوس روغتون ته ولاړ شئ. که په ډکو متیازو کې یې وینه وي، تبه ولري، یا ښه نه کېږي، نن کلینیک ته ولاړ شئ.",
+    "en": "Go to hospital now if the child cannot drink or breastfeed, or is very sleepy. Go to the clinic today if there is blood in the poo, a fever, or the child is not getting better."
   },
   "anim.spread.title": {
     "fa": "مریضی‌ها چگونه پخش می‌شوند",

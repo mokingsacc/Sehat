@@ -17,9 +17,9 @@
       "id": "diarrhoea.lead",
       "type": "lead",
       "text": {
-        "fa": "اسهال می‌تواند بدن طفل را خیلی زود بی‌آب کند. او آر اس و زنک بدهید و شیر و غذا را ادامه دهید.",
-        "ps": "نس ناستی کولای شي د ماشوم بدن ډېر ژر وچ کړي. او آر اس او زنک ورکړئ، او تی او خواړه مه بندوئ.",
-        "en": "Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding."
+        "fa": "اسهال می‌تواند بدن طفل را خیلی زود بی‌آب کند. او آر اس و زنک بدهید و شیر و غذا را ادامه دهید. طفل کمتر از ۲ ماه که اسهال دارد، باید امروز به کلینیک برده شود.",
+        "ps": "نس ناستی کولای شي د ماشوم بدن ډېر ژر وچ کړي. او آر اس او زنک ورکړئ، او تی او خواړه مه بندوئ. تر ۲ میاشتو کم ماشوم چې نس ناستی لري، باید نن کلینیک ته یوړل شي.",
+        "en": "Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding. A baby under 2 months with diarrhoea needs the clinic today."
       }
     },
     {
@@ -42,9 +42,9 @@
         "en": "Mix ORS the right way"
       },
       "text": {
-        "fa": "یک پاکت را در یک لیتر آب پاک حل کنید. هر روز تازه بسازید و باقی‌مانده را روز بعد دور بریزید.",
-        "ps": "یوه پاکټ په یوه لیټر پاکو اوبو کې حل کړئ. هره ورځ تازه جوړ کړئ او پاتې شوی یې بله ورځ وغورځوئ.",
-        "en": "Mix one packet in one litre of clean water. Make it fresh each day and throw away what is left the next day."
+        "fa": "یک پاکت را در همان مقدار آب پاک که روی پاکت نوشته شده، معمولاً یک لیتر، حل کنید. هر روز تازه بسازید و باقی‌مانده را روز بعد دور بریزید.",
+        "ps": "یوه پاکټ په هومره پاکو اوبو کې حل کړئ چې پر پاکټ لیکل شوي، معمولاً یو لیټر. هره ورځ تازه جوړ کړئ او پاتې شوی یې بله ورځ وغورځوئ.",
+        "en": "Mix one packet in the amount of clean water written on the packet, usually 1 litre. Make it fresh each day and throw away what is left the next day."
       }
     },
     {
@@ -67,14 +67,14 @@
       "type": "step",
       "icon": "zinc",
       "title": {
-        "fa": "۱۰ تا ۱۴ روز زنک بدهید",
-        "ps": "۱۰ تر ۱۴ ورځې زنک ورکړئ",
-        "en": "Give zinc for 10 to 14 days"
+        "fa": "۱۴ روز زنک بدهید",
+        "ps": "۱۴ ورځې زنک ورکړئ",
+        "en": "Give zinc for 14 days"
       },
       "text": {
-        "fa": "به طفل زیر ۶ ماه روزانه ۱۰ میلی‌گرام، و از ۶ ماهگی روزانه ۲۰ میلی‌گرام بدهید. حتی وقتی اسهال بند شد، ادامه دهید.",
-        "ps": "تر ۶ میاشتو کم ماشوم ته ورځې ۱۰ ملي ګرامه، او له ۶ میاشتو ورځې ۲۰ ملي ګرامه ورکړئ. حتی چې نس ناستی ودرېږي، دوام ورکړئ.",
-        "en": "Under 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Keep giving it even after the diarrhoea stops."
+        "fa": "از ۲ تا ۶ ماهگی روزانه ۱۰ میلی‌گرام، و از ۶ ماهگی روزانه ۲۰ میلی‌گرام بدهید. به طفل کمتر از ۲ ماه، زنک را فقط وقتی بدهید که کارمند صحی داده باشد. حتی وقتی اسهال بند شد، ادامه دهید.",
+        "ps": "له ۲ تر ۶ میاشتو ورځې ۱۰ ملي ګرامه، او له ۶ میاشتو ورځې ۲۰ ملي ګرامه ورکړئ. تر ۲ میاشتو کم ماشوم ته زنک یوازې هغه وخت ورکړئ چې روغتیايي کارکوونکي درکړی وي. حتی چې نس ناستی ودرېږي، دوام ورکړئ.",
+        "en": "From 2 to 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Under 2 months, give zinc only if the health worker gives it. Keep giving it even after the diarrhoea stops."
       }
     },
     {
@@ -146,6 +146,15 @@
       },
       "items": [
         {
+          "id": "diarrhoea.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "کمتر از ۲ ماه عمر دارد و در مدفوعش خون است، چشم‌هایش گود رفته، یا خوب شیر نمی‌خورد",
+            "ps": "تر ۲ میاشتو کم عمر لري او په ډکو متیازو کې یې وینه ده، سترګې یې ننوتې دي، یا ښه تی نه رودي",
+            "en": "is under 2 months old with blood in the stool, sunken eyes, or poor feeding"
+          }
+        },
+        {
           "id": "diarrhoea.urgent.drink",
           "icon": "no-drink",
           "text": {
@@ -176,9 +185,9 @@
           "id": "diarrhoea.urgent.eyes",
           "icon": "eye-sunken",
           "text": {
-            "fa": "چشمانش گود رفته است",
-            "ps": "سترګې یې ننوتې دي",
-            "en": "has sunken eyes"
+            "fa": "چشم‌هایش گود رفته، و خیلی خواب‌آلود است یا نمی‌تواند بنوشد",
+            "ps": "سترګې یې ننوتې دي، او ډېر خوب وړی دی یا نشي څښلای",
+            "en": "has sunken eyes, and is very sleepy or cannot drink"
           }
         },
         {
@@ -202,6 +211,24 @@
         "en": "If your child has any of these signs, go to the clinic today:"
       },
       "items": [
+        {
+          "id": "diarrhoea.soon.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "کمتر از ۲ ماه عمر دارد و اسهال دارد، حتی اگر کم باشد",
+            "ps": "تر ۲ میاشتو کم عمر لري او نس ناستی لري، که څه هم لږ وي",
+            "en": "is under 2 months old and has diarrhoea, even a little"
+          }
+        },
+        {
+          "id": "diarrhoea.soon.eyes",
+          "icon": "eye-sunken",
+          "text": {
+            "fa": "بی‌قرار است و خیلی تشنه است، یا چشم‌هایش گود رفته است",
+            "ps": "بې‌قراره دی او ډېر تږی دی، یا یې سترګې ننوتې دي",
+            "en": "is restless and very thirsty, or has sunken eyes"
+          }
+        },
         {
           "id": "diarrhoea.soon.blood",
           "icon": "stool-blood",
@@ -306,7 +333,8 @@
     "WHO/UNICEF joint statement: clinical management of acute diarrhoea (2004)",
     "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet",
     "WHO IMCI Chart Booklet (2014): Plan B (ORS at the clinic) and Plan C (intravenous or nasogastric rehydration); zinc; antibiotics only for dysentery and suspected cholera",
-    "Afghanistan BPHS (2010): ORS and zinc at Health Post level; intravenous fluids at CHC and hospitals"
+    "Afghanistan BPHS (2010): ORS and zinc at Health Post level; intravenous fluids at CHC and hospitals",
+    "WHO IMCI Chart Booklet (2014): sick young infant (diarrhoea up to 2 months: dehydration treated at the facility; blood in the stool = refer); classify dehydration (severe = two signs: lethargic, sunken eyes, not able to drink, skin pinch very slow); Plan A zinc 2 to 6 months 1/2 tablet (10 mg), 6 months or more 1 tablet (20 mg), for 14 days"
   ],
   "review": [
     "Sunken eyes and slow skin pinch are in the urgent (hospital now) alert as requested. In IMCI, either sign with restlessness or eager drinking is 'some dehydration' (Plan B at the clinic); with lethargy, poor drinking or a very slow pinch it is severe. Consider moving sunken eyes to the soon alert.",
@@ -318,6 +346,10 @@
     "'ORS and zinc free': both are in the BPHS Health Post kit; confirm CHW supply in Samangan in 2026.",
     "The children's ciprofloxacin for dysentery is not named here (it is named in the adult diarrhoea topic); keep consistent if Mo wants names.",
     "Content merge 2: animation(s) ors, water shown after the lead (docs/ANIMATIONS.md, batch 2). Their scene lines are in content/src/anims.json (anim.<name>.s1 ...).",
-    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check. 'free' removed from the clinic box (Mo's rule)."
+    "Content pass 3 (MoPH fixes): new tip naming the village health worker or health post as the first stop when there are no danger signs (BPHS 2010, CBHC 2015: health posts have ORS, zinc and paracetamol; no oral antibiotics, so pneumonia still goes to the clinic). Wording کارمند صحی قریه / د کلي روغتیايي کارکوونکی and پوستهٔ صحی / روغتیايي پوسته as elsewhere in the book: native check. 'free' removed from the clinic box (Mo's rule).",
+    "Medical audit 2026-10-08 CH3: a baby under 2 months with diarrhoea: clinic today (new diarrhoea.soon.baby, and one sentence added to the lead); with blood in the stool, sunken eyes or not feeding well: hospital now (new diarrhoea.urgent.baby). Zinc under 2 months only from the health worker (the IMCI zinc table starts at 2 months).",
+    "Medical audit 2026-10-08 CH7: diarrhoea.urgent.eyes now has the words of danger-child.dry.eyes ('sunken eyes, and is very sleepy or cannot drink'; IMCI severe dehydration needs two signs). Sunken eyes or great thirst alone is amber (new diarrhoea.soon.eyes, same words as ui.ask.thirsty; IMCI some dehydration, Plan B at the clinic). diarrhoea.urgent.skin ('goes back very slowly') stays red, as danger-child.dry.pinch does (more than 2 seconds, an IMCI severe sign); the two pages now agree. The first review note above is answered.",
+    "Medical audit 2026-10-08 CH10: zinc for 14 days (IMCI Plan A and the health-post blister pack), 10 mg from 2 to 6 months, 20 mg from 6 months; the 2004 joint statement's '10 to 14 days' is no longer used. Changed with kit-first-aid.zinc and the ORS animation line anim.ors.s5.",
+    "Medical audit 2026-10-08 KT-16 (done here for the kit worker): ORS packets in Samangan come in 200 ml, 500 ml and 1 litre sizes, so diarrhoea.mix and anim.ors.s2 say 'the amount of clean water written on the packet, usually 1 litre', as kit-first-aid.ors does."
   ]
 }

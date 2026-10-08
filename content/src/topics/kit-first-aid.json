@@ -47,9 +47,9 @@
         "en": "Zinc tablets"
       },
       "text": {
-        "fa": "برای طفل اسهالی، برای ۱۰ تا ۱۴ روز: زیر ۶ ماه، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام.",
-        "ps": "د نس ناستې لرونکي ماشوم لپاره، ۱۰ تر ۱۴ ورځو: تر ۶ میاشتو کم، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه.",
-        "en": "For a child with diarrhoea, for 10 to 14 days: under 6 months, 10 mg a day; from 6 months, 20 mg a day."
+        "fa": "برای طفل اسهالی، برای ۱۴ روز: از ۲ تا ۶ ماهگی، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام. کمتر از ۲ ماه، از کارمند صحی بپرسید.",
+        "ps": "د نس ناستې لرونکي ماشوم لپاره، ۱۴ ورځې: له ۲ تر ۶ میاشتو، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه. تر ۲ میاشتو کم، له روغتیايي کارکوونکي وپوښتئ.",
+        "en": "For a child with diarrhoea, for 14 days: from 2 to 6 months, 10 mg a day; from 6 months, 20 mg a day. Under 2 months, ask the health worker."
       }
     },
     {
@@ -163,13 +163,15 @@
     "WHO/UNICEF Facts for Life (2010): diarrhoea, injury prevention",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020)",
     "WHO Rabies fact sheet: wash bite wounds with soap and water for 15 minutes",
-    "WHO Model List of Essential Medicines (2023): ORS, zinc"
+    "WHO Model List of Essential Medicines (2023): ORS, zinc",
+    "WHO IMCI Chart Booklet (2014): Plan A, give zinc: 2 to 6 months 10 mg, 6 months or more 20 mg, for 14 days"
   ],
   "review": [
     "'Keep at least 4 ORS packets' is a judgement call.",
     "Zinc dose is the WHO caregiver message already used on the Diarrhoea page.",
     "'Sticking plasters, scissors, a torch' are common first-aid kit contents (IFRC), not essential.",
     "No paracetamol in the list on purpose (no doses in the app). Consider adding 'paracetamol syrup or tablets, as the clinic tells you'.",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 CH10 / KT-17: zinc for 14 days (was 10 to 14), from 2 months (IMCI); under 2 months, ask the health worker. Same numbers as diarrhoea.zinc and the ORS animation."
   ]
 }

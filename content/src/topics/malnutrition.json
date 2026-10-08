@@ -160,9 +160,18 @@
           "id": "malnutrition.urgent.fever",
           "icon": "fever",
           "text": {
-            "fa": "بسیار لاغر است و تب دارد، یا بدنش سرد است",
-            "ps": "ډېر ډنګر دی او تبه لري، یا بدن یې سوړ دی",
-            "en": "is very thin and has fever, or feels cold"
+            "fa": "بسیار لاغر است و تب بلند دارد (۳۹ یا بیشتر)، یا بدنش سرد است",
+            "ps": "ډېر ډنګر دی او لوړه تبه لري (۳۹ یا ډېر)، یا بدن یې سوړ دی",
+            "en": "is very thin with a high fever (39 or more), or feels cold"
+          }
+        },
+        {
+          "id": "malnutrition.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرده یا حالا تشنج دارد",
+            "ps": "اختلاج یې کړی یا اوس اختلاج لري",
+            "en": "has had convulsions (fits), or has them now"
           }
         }
       ]
@@ -211,6 +220,15 @@
             "fa": "۱۴ روز یا بیشتر اسهال دارد",
             "ps": "۱۴ ورځې یا ډېر نس ناستی لري",
             "en": "has had diarrhoea for 14 days or more"
+          }
+        },
+        {
+          "id": "malnutrition.soon.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "بسیار لاغر است و تب دارد",
+            "ps": "ډېر ډنګر دی او تبه لري",
+            "en": "is very thin and has a fever"
           }
         }
       ]
@@ -271,7 +289,8 @@
     "WHO/UNICEF Facts for Life (2010): nutrition and growth; coughs, colds and more serious illnesses",
     "WHO fact sheet: Malnutrition (1 Mar 2024)",
     "Afghanistan IPEHS (2019): outpatient management of acute malnutrition from BHC level, inpatient (stabilisation) care at district hospital and above; BPHS (2010) nutrition component",
-    "Burden: UNICEF Afghanistan Humanitarian Situation Reports (2026): about 3.7 million children wasted in 2026, including about 942,000 with severe acute malnutrition; 522,233 SAM/MAM admissions Jan-Jul 2026; MICS 2022-23: stunting 51.3 percent in Samangan"
+    "Burden: UNICEF Afghanistan Humanitarian Situation Reports (2026): about 3.7 million children wasted in 2026, including about 942,000 with severe acute malnutrition; 522,233 SAM/MAM admissions Jan-Jul 2026; MICS 2022-23: stunting 51.3 percent in Samangan",
+    "Afghanistan MoPH IMAM guideline (2018), pp. 18, 22, 37, 46: inpatient care for a danger sign (not able to drink, vomits everything, convulsions, lethargy, temperature above 39 C or below 35.5 C), no appetite, bilateral oedema"
   ],
   "review": [
     "RUTF is called 'a special peanut paste' (Dari خمیر مخصوص از بادام‌زمینی, Pashto د ممپلي ځانګړې خمیره). Confirm the words families in Samangan use for RUTF/Plumpy'Nut and for peanut.",
@@ -281,6 +300,8 @@
     "'Weekly checks' reflects standard CMAM follow-up; confirm local schedule (some sites fortnightly).",
     "Dari سوءتغذی and Pashto خوارځواکي are the formal words; a translator should check whether villagers say something simpler (e.g. کم‌غذایی / لاغری).",
     "Icon wanted: a 'thin child' or 'swollen feet' icon on the summary; used muac and swollen-feet.",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 CH12: a very thin child with any fever was hospital now. IMAM 2018 sends a thin child to inpatient care for a temperature above 39 C (danger sign) or below 35.5 C, so the red item is now 'a high fever (39 or more), or feels cold to touch', and a lower fever is amber (new malnutrition.soon.fever).",
+    "Medical audit 2026-10-08 CH20: one hospital-now list for a thin child: swollen feet, will not eat or drink, very sleepy, vomits everything, high fever or cold, fits (new malnutrition.urgent.convulsion, words of danger-child.urgent.convulsion; IMAM danger sign). reading-muac.urgent now has the same six signs; the MUAC checker (js/tools.js SIGNS.muac) is aligned by the kit worker."
   ]
 }

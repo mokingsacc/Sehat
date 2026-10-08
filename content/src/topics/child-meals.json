@@ -63,9 +63,9 @@
         "en": "An egg or animal food every day"
       },
       "text": {
-        "fa": "اگر بتوانید، هر روز تخم مرغ، جگر، گوشت یا ماست بدهید. این‌ها آهن و قوتی دارند که غذای نباتی به تنهایی ندارد.",
-        "ps": "که کولای شئ، هره ورځ هګۍ، ځیګر، غوښه یا مستې ورکړئ. دا هغه اوسپنه او ځواک لري چې یوازې نباتي خواړه یې نه لري.",
-        "en": "If you can, give egg, liver, meat or yoghurt every day. They give iron and strength that plant foods alone cannot."
+        "fa": "اگر بتوانید، هر روز تخم مرغ، گوشت یا ماست بدهید، و هفته‌ای یک بار جگر. این‌ها آهن و قوتی دارند که غذای نباتی به تنهایی ندارد.",
+        "ps": "که کولای شئ، هره ورځ هګۍ، غوښه یا مستې ورکړئ، او په اونۍ کې یو ځل ځیګر. دا هغه اوسپنه او ځواک لري چې یوازې نباتي خواړه یې نه لري.",
+        "en": "If you can, give egg, meat or yoghurt every day, and liver once a week. They give iron and strength that plant foods alone cannot."
       }
     },
     {
@@ -190,7 +190,8 @@
     "WHO fact sheet: Infant and young child feeding (2026): start at 6 months with small amounts; 2-3 meals a day at 6-8 months, 3-4 meals at 9-23 months, plus 1-2 snacks; breastfeed to 2 years or beyond",
     "WHO/UNICEF Facts for Life (2010): nutrition and growth (thick foods, add oil, own bowl, active feeding)",
     "FAO/WHO Vitamin and mineral requirements in human nutrition, 2nd ed. (2004): vitamin C raises iron absorption from plant foods; tea polyphenols lower it",
-    "WHO Five Keys to Safer Food (2006): do not leave cooked food at room temperature for more than 2 hours"
+    "WHO Five Keys to Safer Food (2006): do not leave cooked food at room temperature for more than 2 hours",
+    "NHS: Vitamin A (liver no more than once a week); WHO guideline for complementary feeding of infants and young children 6 to 23 months (2023): animal-source foods daily"
   ],
   "review": [
     "Meal numbers match the existing breastfeeding page (breastfeeding.meals), from the WHO IYCF fact sheet.",
@@ -199,6 +200,7 @@
     "Tea dont item: WHO 2023 advises against sugary drinks; 'no tea for babies and small children' is common Afghan counselling and fits the anaemia page (tea between meals). Confirm.",
     "Step pictures: food-thick-porridge (a spoon held level with thick porridge staying on it).",
     "Words to check: Dari لیتی (porridge), نوشابهٔ گازدار (fizzy drink); Pashto لېټی، اوبلنه (watery), ګازدار څښاک.",
-    "Content merge 2: the anaemia link (child-meals.anaemia) was dropped so the page keeps 2 links (breastfeeding, growth). The tea 'do not' item still points the same way as the anaemia page."
+    "Content merge 2: the anaemia link (child-meals.anaemia) was dropped so the page keeps 2 links (breastfeeding, growth). The tea 'do not' item still points the same way as the anaemia page.",
+    "Medical audit 2026-10-08 CH15: liver once a week, not every day (vitamin A; NHS). Egg, meat or yoghurt every day stays (WHO 2023)."
   ]
 }
