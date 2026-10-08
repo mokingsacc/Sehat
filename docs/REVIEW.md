@@ -5089,3 +5089,149 @@ For Mo and a native speaker to check:
 10. Vitamin A at home the next day: «یک نوبت که روز بعد در خانه بدهید» / «یو ځل چې بله ورځ یې په کور کې ورکړئ».
 11. Medical: the after-birth red list now has 9 items and Fever's 9 (CONTENT_SPEC aims for 3 to 8); waters with no pains
     is still amber (with the 6-hour limit); a very thin child with fever under 39 is now clinic today, not hospital.
+
+## Medical audit fixes: emergencies, home kit, checkers and hospital pages (8 Oct 2026, worker fix-emkit)
+
+Clear fixes from the medical audit of 8 Oct 2026 (`audit/medical-2026-10-08/ALL-FINDINGS.md`) with an EM- or KT- id,
+and every finding in `js/tools.js`. "Mo's call" rows were not touched. Each topic's `review` notes name the finding id
+and its new source. Narration ids were kept where the text changed (the voice tool remakes those clips); new ids are
+listed at the end.
+
+### Fixed (old English, then new)
+
+HIGH
+- **CH2, KT-6** (temperature checker, child 2 months to 5 years): six signs, none about breathing → also "the lower
+  chest pulls in when breathing in" and "makes a harsh noise breathing in, even when calm" (red), and "breathes fast"
+  (clinic today at any reading, new line `ui.rd.v.temp-fast`: "Fast breathing in a child can be pneumonia. Go to the
+  clinic today: the child may need medicine. You can count the breaths with the breathing counter below."). The result
+  has a row that opens the breathing counter (`ui.rd.temp-breaths`: "If the child breathes fast, count the breaths. Tap
+  here to open the breathing counter."). Baby under 2 months: also "the lower chest pulls in strongly when breathing in"
+  (red).
+
+MEDIUM
+- **EM2** Emergency screen, baby card: 8 pages → 19 (adds seizures, bleeding, falls, head injury, snake or scorpion,
+  dog bite, electric shock, heat stroke, too cold, chemical in the eye, severe allergy). Newborn card adds Choking baby.
+- **EM3** Newborn: new link `cpr-newborn.older` "Baby born more than a day ago? This page is for a baby just born. If an
+  older baby stops breathing, it needs breaths and chest pushes: open Baby not breathing (under 1)." Baby not breathing
+  is on the newborn card.
+- **EM4** `cpr-baby.thumbs`, `choking-baby.chest`: "both thumbs on the middle of the breastbone" → "both thumbs on the
+  lower half of the breastbone, just below the nipple line" (as the film and the approved picture; text only).
+- **EM7** `seizures.urgent`: new red items "the fit comes with fever, a stiff neck or a bad headache" and "the fit
+  follows a knock to the head".
+- **EM8** `first-aid.burn`: "Cool the burn under clean running water for 20 minutes. Take off rings and tight clothes,
+  then cover loosely with a clean cloth." → "Cool only the burn under clean running water for 20 minutes. Keep a child
+  wrapped and warm, and stop if they shiver. Take off rings, then cover loosely with a clean cloth."
+- **EM9** `head-injury.urgent`: new red items "are 65 or older, or take medicine that thins the blood"; "had drunk
+  alcohol, or taken opium or other drugs"; "fell from a roof or high place, or were in a road crash"; "are a baby under 1
+  with a big bump or cut on the head" (NICE NG232).
+- **EM11** `dog-bite.dogs`: "Vaccinated dogs cannot pass rabies." → "A vaccinated dog rarely passes rabies, but still go
+  for the vaccine after any bite."
+- **EM12, KT-11** Low sugar: checker "about 3 teaspoons" → "4 teaspoons" (`ui.rd.v.sugar-very-low`, `ui.rd.v.sugar-low`);
+  `diabetes.low-sugar` "give sugar or a sweet drink" → "give 4 teaspoons of sugar in water, or a sweet drink"; the
+  checker's rule is now also on the page: new red item `low-sugar.urgent.meter` "their sugar meter showed under 54, even
+  if they feel better" (and on the Sugar picture page).
+- **EM13** `red-flags.urgent.chest-pain`: "Crushing chest pain spreading to the arm or jaw, with sweating" → "Crushing or
+  pressing chest pain, or pain spreading to the arm, jaw or back".
+- **KT-1** Pregnancy BP checker: new red chip "Bleeding from the vagina"; top number under 90 in pregnancy: "If the person
+  feels well, this can be normal for them..." → new line `ui.rd.v.bp-preg-low` "A low reading. In pregnancy this can be
+  normal if she feels well. If there is any bleeding, or she has just given birth, go to hospital now. If not, tell the
+  midwife at the next visit."
+- **KT-2** Adult BP 135/85 or more with dizziness or fainting: "Clinic this week" → "Clinic today" (new line
+  `ui.rd.v.bp-high-faint`).
+- **KT-3** Sugar checker asks first "Does this person have diabetes?" ("Has diabetes" / "No diabetes, or not sure").
+  Without diabetes: 70 to 125 "Normal. To keep it that way, eat less sugar and white bread, and walk every day." (no
+  medicine line); 126 to 199 measure again before breakfast, 126 or more then = clinic this week; 200 to 249 clinic this
+  week for a proper test; 250 or more and under 70 as before but without the medicine line. New tip
+  `reading-sugar.no-diabetes`. The good-range line shows only for people with diabetes.
+- **KT-5** `hospital-places.village`: "gives ORS, zinc, iron tablets and simple medicines" → "gives ORS, zinc and iron
+  tablets, can treat a child's chest infection or malaria" (BPHS 2010). Family planning left out: see Mo below.
+
+LOW
+- **EM14** five pages: "watch the chest for 10 seconds" → "for up to 10 seconds".
+- **EM16** `dog-bite.lead`: "the vaccine after a bite prevents it every time if started early" → "the vaccine almost
+  always prevents it if started early and every injection is given, with serum for deep bites".
+- **EM17** `burns.cover`: "clean plastic food wrap or a clean, dry cloth" → "a clean, dry cloth, or clean plastic food
+  wrap if you have it".
+- **EM18** `allergy-severe.go`: adds "and a second one after 5 minutes if no better" ("this can get worse fast" dropped
+  for length).
+- **EM19** First fit ever: red on `seizures.urgent.first` → amber `seizures.soon.first` "it was their first fit ever, and
+  they are fully awake again" (as `epilepsy.soon.first`, mhGAP). The old clips are removed. The Fits picture page follows.
+- **EM20** `cpr-newborn.rub` and the film `anim.cpr-newborn.s3`: "Wipe the mouth and nose with a clean cloth" → "If the
+  mouth or nose is full of fluid, wipe it gently with a clean cloth".
+- **EM22** New step `cpr-newborn.alone` "Alone? Shout, then carry the baby: Shout loudly for help first. Give puffs for 1
+  minute. Then wrap the baby warmly and carry it with you to get help." (what the film says, s6).
+- **EM24** Dog bite on the child and adult cards, in `sections.emergency` and `config.urgentTopics`.
+- **EM25** Low sugar on the child card.
+- **EM26** Head injury citation NICE CG176 → NG232.
+- **EM28** `first-aid.urgent.burn-place`: "face, hands or genitals" → "face, hands, feet, genitals or joints".
+- **KT-7** `kit-oximeter.limits`: "On darker skin, with cold hands, or if the hand moves, it can show more oxygen than
+  there really is." → "Darker skin can make it read higher than the truth. Cold or moving hands give no reading or a
+  wrong one."
+- **KT-9** BP checker: new red chip "blurred or lost vision" (`ui.rd.s.vision`); `reading-bp.urgent.signs` adds "or
+  blurred vision".
+- **KT-14** Baby under 2 months at 35.5 to 35.9: "A little cold... measure again in 1 hour" → clinic today, new line
+  `ui.rd.v.temp-baby-chilly` "This baby is cold. Hold the baby skin to skin on the mother's chest now, cover the head,
+  and go to the clinic today. Keep the baby warm on the way."; new amber item `reading-temp.soon.cold`.
+- **KT-16** `kit-first-aid.ors`: "Mix one packet in one litre of clean water" → "Mix one packet in the amount of clean
+  water written on it, usually 1 litre". (diarrhoea.mix and anim.ors.s2: done by worker fix-ch-ma, same wording.)
+- **KT-18** `hospital-arrive.urgent`: new items "has diarrhoea with sunken eyes, or is very floppy", "has cold hands with
+  a very fast pulse", "is pregnant, with fever and too weak to stand, or vomits everything".
+- **KT-19** `hospital-arrive.waiting`: "give sips of drink unless told not to" → "Give sips of drink, but not if they are
+  very sleepy, fitting, vomiting everything, or may need an operation."
+- **KT-20** `hospital-stay.soon`: new items "blood in the stool", "a child drinks or breastfeeds much less than usual".
+- **KT-22** docs/HOME_KIT.md: "Any danger sign the person ticks makes the result red" → signs marked 'u' make it red;
+  dizziness or fainting and swelling make it at least amber.
+- **KT-23** docs/HOME_KIT.md: "2,000 m or more" → "about 2,500 m" (same as the kit-oximeter note; still an estimate).
+- **KT-24** Card and voice now agree: baby 36.0 to 36.4 card "Clinic today" → "Care at home and watch" (the voice says
+  rewarm and recheck in 1 hour); sugar 54 to 69 voice "If low sugar happens again, go to the clinic today" → "Measure
+  again in 15 minutes, and give sugar again if it is still low. Go to the clinic today".
+- **CH20** (js/tools.js part): SIGNS.muac now uses the thin-child hospital list that worker fix-ch-ma made for
+  malnutrition and reading-muac (CH12 applied).
+- Internal contradiction, sugar over 250: `reading-sugar.soon.high` "sugar stays over 250" → "sugar is over 250" (as the
+  numbers step and the checker).
+
+### Not changed, and why
+- Mo's call (left as they are): EM1, EM5, EM6, EM10, EM15, EM21, EM23, EM27, KT-4, KT-8, KT-10, KT-12, KT-13, KT-15 (with
+  MA13).
+- KT-21: the finding itself says no change until the new package reaches Samangan.
+- KT-17 (with CH10): done by worker fix-ch-ma (zinc on the diarrhoea and kit pages and the ORS film).
+- Burn size, "hand" (first-aid) vs "palm" (burns): EMERGENCIES.md judgement call 13, so left for Mo.
+- "Free" rabies vaccine vs hospital-places.cost: consistent (the rabies vaccine is a vaccine); no change.
+
+### For Mo
+1. KT-5: BPHS also gives CHWs family planning; it is left out of `hospital-places.village` because of current local
+   restrictions. Add it if you want. What Samangan CHWs stock in 2026 is not confirmed.
+2. EM12: the under-54 hospital rule is now on the Low sugar page too; if you drop it (EMERGENCIES.md item 11), drop it
+   in both places (`low-sugar.urgent.meter` and `verdictSugar`).
+3. KT-3: for people without diabetes, 126 to 199 shows "Care at home and watch" with "measure again before breakfast".
+4. Alert boxes now longer than the 8-item aim: `head-injury.urgent` 11, `hospital-arrive.urgent` 10, `seizures.urgent` 9.
+5. EM9: "alcohol" is named in a red item (alcohol, opium or other drugs). Change if it reads badly locally.
+
+### Narration (no clips made yet)
+- New (32): `ui.who.diabetes`, `ui.who.nodiabetes`, `ui.rd.who.sugar`, `ui.rd.v.temp-baby-chilly`, `ui.rd.v.temp-fast`,
+  `ui.rd.temp-breaths`, `ui.rd.v.bp-high-faint`, `ui.rd.v.bp-preg-low`, `ui.rd.v.sugar-nodm-low`, `ui.rd.v.sugar-nodm-ok`,
+  `ui.rd.v.sugar-nodm-check`, `ui.rd.v.sugar-nodm-high`, `ui.rd.v.sugar-nodm-very-high`, `ui.rd.s.fast`, `ui.rd.s.vision`,
+  `cpr-newborn.alone`, `cpr-newborn.older`, `seizures.urgent.fever`, `seizures.urgent.head`, `seizures.soon.first`,
+  `reading-temp.soon.cold`, `reading-sugar.no-diabetes`, `head-injury.urgent.older`, `head-injury.urgent.drugs`,
+  `head-injury.urgent.height`, `head-injury.urgent.baby`, `low-sugar.urgent.meter`, `hospital-arrive.urgent.dehydrated`,
+  `hospital-arrive.urgent.shock`, `hospital-arrive.urgent.pregnant-weak`, `hospital-stay.soon.stool`,
+  `hospital-stay.soon.drink`.
+- Changed text, same id (25): `ui.rd.v.sugar-very-low`, `ui.rd.v.sugar-low`, `cpr-newborn.rub`, `anim.cpr-newborn.s3`,
+  `cpr-baby.airway`, `cpr-baby.thumbs`, `cpr-child.airway`, `choking-baby.chest`, `drowning.check`, `burns.cover`,
+  `first-aid.burn`, `first-aid.urgent.burn-place`, `red-flags.urgent.chest-pain`, `reading-bp.urgent.signs`,
+  `reading-sugar.soon.high`, `diabetes.low-sugar`, `dog-bite.lead`, `dog-bite.dogs`, `cpr-adult.breathing`,
+  `unconscious.check`, `allergy-severe.go`, `hospital-places.village`, `hospital-arrive.waiting`, `kit-oximeter.limits`,
+  `kit-first-aid.ors`.
+- Removed: `seizures.urgent.first` (clips deleted in all four voices).
+
+### Dari and Pashto to check
+1. "just below the nipple line": fa «درست زیر خط بین دو نوک سینه», ps «د تیو د سرونو له کرښې لږ لاندې» (cpr-baby.thumbs, choking-baby.chest).
+2. "full of fluid": fa «پر از مایع», ps «له اوبو ډکه» (cpr-newborn.rub, anim.cpr-newborn.s3).
+3. Blood thinners: fa «دوای رقیق‌کنندهٔ خون», ps «د وینې د نري کولو درمل»; drugs: fa «مواد مخدر», ps «نشه يي توکي» (head-injury.urgent.*).
+4. Road crash: fa «تصادم موتر», ps «د موټر ټکر»; big bump: fa «ورم», ps «پړسوب».
+5. Shock pulse: fa «نبضش خیلی تیز می‌زند», ps «نبض یې ډېر چټک وهي» (hospital-arrive.urgent.shock).
+6. Blurred or lost vision: fa «تاری چشم، یا از دست رفتن دید», ps «د سترګو تتوالی، یا د لید له منځه تلل» (ui.rd.s.vision).
+7. Diabetes question and answers: «آیا این شخص مرض شکر دارد؟» / «آیا دا کس د شکرې ناروغي لري؟»; "or not sure" «یا معلوم نیست» / «یا معلومه نه ده».
+8. "A vaccinated dog rarely passes rabies": fa «بسیار کم ... سرایت می‌دهد», ps «ډېر لږ ... خپروي» (dog-bite.dogs).
+9. ORS water amount: fa «در همان مقدار آب پاک که روی پاکت نوشته شده», ps «په هومره پاکو اوبو کې ... چې پر پاکټ لیکل شوي» (kit-first-aid.ors).
+10. Lone newborn helper title: fa «تنها هستید؟ صدا کنید و نوزاد را ببرید», ps «یوازې یاست؟ غږ وکړئ او ماشوم یوسئ».
