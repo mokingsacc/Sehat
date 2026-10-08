@@ -38,11 +38,13 @@ Also available for `config.home`: `install`, `sendApp`, `near`, `disclaimer`, `s
 
 Sizes: every button is one column, at least 100 px tall (the Emergency button 132 px), with a 72 px picture or icon tile, a 21 px bold title, and a 56 px speaker. At 320 px the tiles shrink to 60 px and the title to about 20 px.
 
+Speakers: every speaker button in the app is at least 56 px (since the quality check of 8 October 2026), on the tab screens, the lists, topic pages, the tools, Family, Settings and in the animation player. Where a speaker sits on a picture (picture tiles, age cards, the device cards of the reading checker), it sits on the picture's top corner so the name keeps the whole width. `tools/test_crawl.cjs` checks it on every screen.
+
 Titles that fit: a big title never breaks a word in two and never runs into its speaker. When a word does not fit (a narrow phone, a wide font, or the phone's large-text setting), `fitText()` in `js/app.js` makes that title a little smaller, down to 70%, after every screen is drawn, when the screen turns and when the font arrives. The header shrinks the app's name and the Emergency word together. `tools/test_layout.cjs` checks the three tabs at 320, 360 and 412 px in fa, ps and en, at normal size and with text 15% and 30% bigger.
 
 ## Children (`#/children`) and Adults (`#/adults`)
 
-A title with a big speaker, then groups in order (`config.listGroups`). Each group has a heading with its own speaker; each topic is a big row with its picture, its title, its one-line summary and a 52 px speaker. Tool rows have a tinted background and an icon tile.
+A title with a big speaker, then groups in order (`config.listGroups`). Each group has a heading with its own speaker; each topic is a big row with its picture, its title, its one-line summary and a 56 px speaker. Tool rows have a tinted background and a small scene (an icon tile when there is no scene).
 
 - **Children**: Danger signs (danger-child); the growth chart (once this version has it) and the breathing counter; Common illnesses (fever, cough, diarrhoea, measles, worms, malnutrition); Home readings (temperature, arm tape and weight); Everyday care (every other children's topic: vaccines, newborn care, breastfeeding, food for young children, growth and development).
 - **Adults**: Danger signs (adults, pregnancy); the "check a reading" tool; Home readings (blood pressure, sugar, oxygen, temperature); Common illnesses; Women's health (pregnancy care, birth plan, after birth, anaemia, urine infection); Mind and stress (stress and worry, what stress does to us, thoughts feelings and actions, slow breathing, solving problems, low mood: sleep and routine; content pass 3); Everyday care (every other adults' topic: hygiene, illness from animals).
@@ -67,7 +69,7 @@ Lists from `config.lists` and `content/src/sections.json`: `kit`, `safety`, `hos
 
 - Opened by a tap on any Emergency button, it reads itself aloud ("Emergency. First, send someone for a car..." then "Who needs help?"); the Listen button in the header replays it. No full-width listen bar.
 - One short line with a car icon: "Send someone for a car now", with its speaker; under it **Nearest clinic**.
-- "Who needs help?" with its speaker, then four big picture cards: Newborn, Baby, Child, Adult (1 to 3 words; the age range is only in the narration, `ui.ageNewborn` and so on). Each card has a 52 px speaker on the picture.
+- "Who needs help?" with its speaker, then four big picture cards: Newborn, Baby, Child, Adult (1 to 3 words; the age range is only in the narration, `ui.ageNewborn` and so on). Each card has a 56 px speaker on the picture.
 - "All emergencies" (every emergency page) folds open at the bottom.
 - An age page: first the red **Not breathing** card with **Watch how** (plays that age's CPR animation), then a slim car line, then that age's emergencies as a two-column grid of pictures, each with its title and a speaker on the picture. A page's picture is its own, or, for pages that share a general picture, the first step picture.
 

@@ -4372,3 +4372,30 @@ Defaults chosen for Mo overnight (easy to reverse):
    them from inside the APK and never downloads them. With the man's voice the app downloads the man's clips and, when
    offline, falls back to the woman's clips inside the app. To change the voices inside: `BUNDLE_SLOTS` in
    `tools/build.py`; to drop them: set it to `()`.
+
+## Whole-app quality check after the overnight merges (8 Oct 2026)
+
+A new crawl, `tools/test_crawl.cjs`, opens every screen reachable from the three tabs (141 addresses: every topic, list,
+tool, Emergency and each age, the 13 animation buttons including the four CPR films, search with four queries and the
+symptom pictures, Settings, Share, Feedback, Clinics, and Family after adding a child and a woman) in Dari, Pashto and
+English at 320 and 360 px: 1,204 screens. It found no console errors, no failed requests, no sideways scroll, no
+broken links or pictures, and the Emergency button is right everywhere. Fixed:
+1. One-word titles were shrunk to 70% for nothing (WhatsApp and Telegram on Share, "Emergency" on the English Health
+   tab): `fitText()` now leaves a title alone when it sits on one line and fits.
+2. The Share link button showed the address cut and reversed in Dari and Pashto ("github.i" / "o/Sehat"); it now reads
+   left to right and breaks only after a slash. The version number in Settings reads the right way round too.
+3. Settings at 320 px in English: the three language buttons ran out of the card; they now go under the label.
+4. "Not breathing" on the age pages ran into its speaker at 320 px in English; the reading checker's device names ran
+   under their speaker.
+5. Every speaker button is now at least 56 px (they were 42 to 52 px on topic pages, lists, picture tiles, Settings,
+   the tools and the animation player). On the device cards of the reading checker the speaker now sits on the
+   picture's corner, as on the picture tiles.
+
+For Mo to check:
+1. The bigger speakers: look at a topic page, the Children list and the Emergency age pages on a small phone. To go back,
+   revert the speaker part of the commit (css/app.css and js/anim.js).
+2. Text with no speaker yet (needs new narration lines in four voices first): the clinic list (`#/near`), most of
+   Settings, "Or pick a picture" and "These pages can help" in search, "All emergencies" on Emergency, the empty
+   notes in Family ("No medicines yet" and so on), the Feedback screen's labels, and the recording studio.
+3. Rows that keep an icon instead of a picture: the red Emergency and "What is wrong?" buttons (by design) and
+   "Nearest clinic" in Going to the clinic (a small scene would match the other rows).

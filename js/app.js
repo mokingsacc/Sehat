@@ -914,12 +914,12 @@ function screenSettings() {
   let html = top(T('settings')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.settings"><div class="body">${esc(L(S.book.narration['ui.settings']))}</div>${spk('ui.settings')}</div>`;
   html += `<div class="panel">`;
-  html += `<div class="srow">${ic('talk')}<div class="grow"><div class="t">${esc(T('language'))}</div></div><div class="seg">${['fa', 'ps', 'en'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div></div>`;
-  html += `<div class="srow">${ic('clock')}<div class="grow"><div class="t">${esc(T('speed'))}</div></div><div class="seg"><button data-speed="1" aria-pressed="${S.speed === 1}">${esc(T('normal'))}</button><button data-speed="0.85" aria-pressed="${S.speed !== 1}">${esc(T('slower'))}</button></div></div>`;
+  html += `<div class="srow segrow">${ic('talk')}<div class="grow"><div class="t">${esc(T('language'))}</div></div><div class="seg">${['fa', 'ps', 'en'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div></div>`;
+  html += `<div class="srow segrow">${ic('clock')}<div class="grow"><div class="t">${esc(T('speed'))}</div></div><div class="seg"><button data-speed="1" aria-pressed="${S.speed === 1}">${esc(T('normal'))}</button><button data-speed="0.85" aria-pressed="${S.speed !== 1}">${esc(T('slower'))}</button></div></div>`;
   html += `</div><div class="panel" id="voicepanel"><h2>${esc(T('voices'))}</h2><p class="muted">${esc(T('voiceFor', { lang: S.book.langNames[S.lang] || S.lang }))}</p>${voiceCards('data-voice')}<div id="packs">${packsHtml()}</div>`;
   html += `<div class="srow">${ic('no')}<button class="grow" data-action="delvoices" style="text-align:start"><div class="t">${esc(T('deleteVoices'))}</div><div class="s">${esc(T('deleteVoicesSub'))}</div></button></div><p class="muted" id="storage"></p>`;
   html += `</div><div class="panel">`;
-  html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
+  html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} <bdi dir="ltr">${esc(S.book.version)}</bdi>${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
   html += SH.settingsRow(); // Share Sehat (js/share.js): the app file, the link, the QR code
   ids.push('ui.feedback');
   html += `<div class="srow" data-block="ui.feedback">${ic('talk')}<a class="grow" href="#/feedback"><div class="t">${esc(T('feedback'))}</div><div class="s">${esc(T('feedbackSub'))}</div></a>${spk('ui.feedback')}</div>`;
@@ -1182,7 +1182,7 @@ const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, t
    A big title never breaks a word in two and never runs into its speaker button: on a narrow phone, with a wide
    font or with the phone's large-text setting, the title gets a little smaller instead (down to 70%). The header
    (app name, Listen, Emergency, settings) shrinks its name and the Emergency word together. */
-const FIT_SEL = 'main .hbtn .t, main .trow .t, main .title-row h1, main .sbig .t, main .tcard .t, main .pn'; // .pn: a person's name in Family
+const FIT_SEL = 'main .hbtn .t, main .trow .t, main .title-row h1, main .sbig .t, main .tcard .t, main .pn, main .em-cpr .t, main .dev .t'; // .pn: a person's name in Family
 function wordsWidth(el) { // the widest word, in px
   let max = 0; const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
   while ((n = w.nextNode())) {
@@ -1192,12 +1192,21 @@ function wordsWidth(el) { // the widest word, in px
   return max;
 }
 function roomOf(el) { const cs = getComputedStyle(el); return el.getBoundingClientRect().width - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0) - 1; } // 1 px to spare: a word that only just fits still wraps
+function wrapsOrSpills(el) { // more than one line, or wider than its box
+  if (el.scrollWidth > el.clientWidth + 1) return true;
+  const rg = document.createRange(); rg.selectNodeContents(el); const rs = rg.getClientRects(); let top = null;
+  for (let i = 0; i < rs.length; i++) { if (!rs[i].width) continue; const t = Math.round(rs[i].top / 4); if (top === null) top = t; else if (t !== top) return true; }
+  return false;
+}
 function fitText() {
   try {
     const els = document.querySelectorAll(FIT_SEL);
     for (let i = 0; i < els.length; i++) {
       const el = els[i]; if (el.style.fontSize) el.style.fontSize = ''; // (no write when nothing was shrunk: long lists stay fast)
       if (!el.clientWidth) continue;
+      // a title on one line that fits its box is never shrunk: a one-word title in a box as wide as its text
+      // ("WhatsApp", "Emergency") measured a hair wider than the room and was shrunk to 70% for nothing
+      if (!wrapsOrSpills(el)) continue;
       let size = parseFloat(getComputedStyle(el).fontSize); const min = size * (el.classList.contains('pn') ? 0.6 : 0.7); // a name may get a little smaller still
       while (size > min && wordsWidth(el) > roomOf(el) + 0.5) { size -= 1; el.style.fontSize = size + 'px'; }
     }
@@ -1207,7 +1216,7 @@ function fitText() {
     if (h.style.fontSize) h.style.fontSize = ''; if (pill && pill.parentNode.style.fontSize) pill.parentNode.style.fontSize = '';
     let hs = parseFloat(getComputedStyle(h).fontSize), ps = pill ? parseFloat(getComputedStyle(pill).fontSize) : 0;
     const hmin = hs * 0.6, pmin = ps * 0.75; // (a long name in the bar: smaller rather than cut in two)
-    while (wordsWidth(h) > roomOf(h) + 0.5 && (hs > hmin || ps > pmin)) {
+    while (wrapsOrSpills(h) && wordsWidth(h) > roomOf(h) + 0.5 && (hs > hmin || ps > pmin)) {
       if (hs > hmin) { hs -= 1; h.style.fontSize = hs + 'px'; }
       if (pill && ps > pmin) { ps -= 1; pill.parentNode.style.fontSize = ps + 'px'; }
     }

@@ -96,8 +96,8 @@ const CSS = `
 .anim-ctl .nx{background:var(--accent);border-color:var(--accent);color:#fff;font-size:19px}
 .anim-ctl .rp{min-width:64px}
 .anim-ctl button:disabled{opacity:.35}
-.anim .spk{width:46px;height:46px;border-radius:999px;background:var(--card);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:0 0 auto}
-.anim .spk svg{width:22px;height:22px}
+.anim .spk{width:56px;height:56px;border-radius:999px;background:var(--card);border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--accent);flex:0 0 auto}
+.anim .spk svg{width:26px;height:26px}
 .anim .spk.speaking{background:var(--accent);color:#fff;border-color:var(--accent)}
 .anim[dir=rtl] .flip{transform:scaleX(-1)}
 .anim-svg .a{transform-box:fill-box;transform-origin:50% 50%}
@@ -143,7 +143,7 @@ const CSS = `
 [dir=rtl] .anim-pick .row{padding:8px 10px 8px 8px}
 .anim-pick .row b{flex:1 1 auto;font-size:16.5px;line-height:1.5;cursor:pointer}
 [dir=ltr] .anim-pick .row b{font-size:16px;line-height:1.35}
-.anim-pick .spk{width:42px;height:42px}
+.anim-pick .spk{width:56px;height:56px}
 .anim-pick .anim-svg *{animation:none!important}
 .anim-overlay{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;overscroll-behavior:contain}
 .anim-overlay>div{max-width:560px;margin:0 auto;padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px))}

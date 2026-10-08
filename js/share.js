@@ -71,7 +71,9 @@ export function initShare(ctx) {
   // one big button with its own big speaker (56 px) beside it: many people cannot read
   const bigSpk = (id) => spk(id).replace('class="spk', 'class="spk big');
   const row = (id, inner, tag = 'button', attrs = '') => `<div class="srowbig" data-block="${esc(id)}"><${tag} class="sbig" ${attrs}>${inner}</${tag}>${bigSpk(id)}</div>`;
-  const label = (icon, t, s2) => `${icon}<span class="tx"><span class="t">${esc(t)}</span>${s2 ? `<span class="s">${esc(s2)}</span>` : ''}</span>`;
+  const label = (icon, t, s2, sub) => `${icon}<span class="tx"><span class="t">${esc(t)}</span>${s2 ? `<span class="s">${esc(s2)}</span>` : sub || ''}</span>`;
+  // the address under "Send the link": left to right in every language, and on a narrow phone it breaks after a slash
+  const urlLine = (u) => `<span class="s url" dir="ltr">${u.split('/').map(esc).join('/<wbr>')}</span>`;
 
   function screen() {
     const B = bridge(), ids = [];
@@ -95,7 +97,7 @@ export function initShare(ctx) {
     } else {
       ids.push('ui.sh.web', 'ui.sh.b.link', 'ui.sh.b.whatsapp', 'ui.sh.b.telegram', 'ui.sh.b.copy');
       body += sayRow('ui.sh.web', 'blk lead trow');
-      body += row('ui.sh.b.link', label(LINK, T('shareLink'), url().replace(/^https:\/\//, '')), 'button', 'data-share="link" style="--c:#1F6F7A"');
+      body += row('ui.sh.b.link', label(LINK, T('shareLink'), '', urlLine(url().replace(/^https:\/\//, ''))), 'button', 'data-share="link" style="--c:#1F6F7A"');
       body += row('ui.sh.b.whatsapp', label(BUBBLE, T('appWhatsApp')), 'a', `data-share="wa" href="${esc(waLink(text()))}" target="_blank" rel="noopener" style="--c:${APPS[0].color}"`);
       body += row('ui.sh.b.telegram', label(BUBBLE, T('appTelegram')), 'a', `data-share="tg" href="${esc(tgLink(url(), T('shareText')))}" target="_blank" rel="noopener" style="--c:${APPS[1].color}"`);
       body += row('ui.sh.b.copy', label(LINK, T('copyLink')), 'button', 'data-share="copy" style="--c:#6B655E"');
