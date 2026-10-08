@@ -167,9 +167,18 @@
           "id": "mind-cycle.urgent.self-harm",
           "icon": "warning",
           "text": {
-            "fa": "به خود آسیب رسانده‌اید، یا قصد آن را دارید",
-            "ps": "ځان ته مو زیان رسولی، یا یې اراده لرئ",
-            "en": "you have hurt yourself, or are planning to"
+            "fa": "قصد دارید به خود آسیب برسانید",
+            "ps": "ځان ته د زیان رسولو اراده لرئ",
+            "en": "you are planning to hurt yourself"
+          }
+        },
+        {
+          "id": "mind-cycle.urgent.harmed",
+          "icon": "warning",
+          "text": {
+            "fa": "به خود آسیب رسانده‌اید: همین حالا به شفاخانه بروید، شب باشد یا روز",
+            "ps": "ځان ته مو زیان رسولی دی: همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+            "en": "you have already hurt yourself: go to hospital now, day or night"
           }
         },
         {
@@ -182,6 +191,16 @@
           }
         }
       ]
+    },
+    {
+      "id": "mind-cycle.help",
+      "type": "tip",
+      "icon": "family",
+      "text": {
+        "fa": "اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.",
+        "ps": "که څوک ووايي چې غواړي خپل ژوند پای ته ورسوي، جدي یې ونیسئ. ورسره پاتې شئ، زهر او درمل ترې لرې کړئ او مرسته وغواړئ.",
+        "en": "If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help."
+      }
     },
     {
       "id": "mind-cycle.soon",
@@ -246,12 +265,16 @@
     "WHO Doing What Matters in Times of Stress: an illustrated guide (2020): grounding, unhooking from difficult thoughts, acting on your values, being kind, making room",
     "WHO Problem Management Plus (PM+): individual psychological help for adults impaired by distress in communities exposed to adversity (2016, generic field-trial version 1.1, 2018): managing stress (slow breathing), managing problems, get going keep doing (behavioural activation), strengthening social support",
     "Beck JS, Cognitive Behavior Therapy: Basics and Beyond (3rd ed. 2020): the thought-feeling-behaviour cycle; WHO Thinking Healthy (2015), a manual of psychosocial management of perinatal depression using CBT for community health workers (Pakistan)",
-    "WHO mhGAP Intervention Guide 2.0 (2016): psychoeducation for stress and low mood; self-harm and suicide (ask, stay with the person, remove means, refer)"
+    "WHO mhGAP Intervention Guide 2.0 (2016): psychoeducation for stress and low mood; self-harm and suicide (ask, stay with the person, remove means, refer)",
+    "WHO mhGAP-based self-harm and suicide training module: treat injury or poisoning at once and transfer to a facility; do not leave the person alone",
+    "WHO fact sheet: Suicide (28 Aug 2026) and WHO mhGAP evidence centre, reducing access to means: keep pesticides and medicines away"
   ],
   "review": [
     "New page (content pass 3): the CBT cycle in one everyday story (a neighbour who does not greet you), as Mo asked. The story was chosen to be harmless and common for women and men; check that it rings true in Samangan villages.",
     "'I am having the thought that...' is the WHO DWMS 'notice and name' step; check that it makes sense heard once in Dari and Pashto.",
     "WHO Thinking Healthy (CBT by lady health workers in rural Pakistan) is the closest tested model for this region.",
-    "Every Mind page ends with the same red box (thoughts of ending life, self-harm, hurting others: tell someone you trust and go to a health worker now, day or night) and amber box (low or worried 2 weeks or more, attacks of fear that keep coming, cannot do daily work, drugs to cope: clinic today), with the page's own ids, as briefed. The red title does not say 'hospital': a health worker at the clinic or hospital, whichever is nearer. The stress page keeps its own boxes. First attacks of fear with chest pain may be the heart: chest pain is on the red-flags page. No hotline is given (moph-guidance.md item 11: 120 Youth Health Line not confirmed for Samangan)."
+    "Every Mind page ends with the same red box (thoughts of ending life, self-harm, hurting others: tell someone you trust and go to a health worker now, day or night) and amber box (low or worried 2 weeks or more, attacks of fear that keep coming, cannot do daily work, drugs to cope: clinic today), with the page's own ids, as briefed. The red title does not say 'hospital': a health worker at the clinic or hospital, whichever is nearer. The stress page keeps its own boxes. First attacks of fear with chest pain may be the heart: chest pain is on the red-flags page. No hotline is given (moph-guidance.md item 11: 120 Youth Health Line not confirmed for Samangan).",
+    "Medical audit 2026-10-08 HM-02: the red item 'mind-cycle.urgent.self-harm' was 'you have hurt yourself, or are planning to' (a health worker now). It is split: 'mind-cycle.urgent.self-harm' 'you are planning to hurt yourself' (box title: tell someone you trust, go to a health worker now) and new 'mind-cycle.urgent.harmed' 'you have already hurt yourself: go to hospital now, day or night' (mhGAP: treat injury or poisoning and transfer; red-flags.suicide and poisoning say hospital now). HM-16 (one wording on every page) is Mo's call and is not changed.",
+    "Medical audit 2026-10-08 HM-03: new tip 'mind-cycle.help' under the red box, word for word stress.tip-help: 'If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.' (WHO: restrict access to means, do not leave the person alone)."
   ]
 }

@@ -151,9 +151,9 @@
           "id": "chickens.dont.bare",
           "icon": "handwash",
           "text": {
-            "fa": "مرغ مرده را با دست خالی نگیرید؛ با خلطه بگیرید و عمیق دفن کنید",
-            "ps": "مړه مرغه په لوڅ لاس مه نیسئ؛ په کڅوړه یې ونیسئ او ژوره یې ښخه کړئ",
-            "en": "touch dead birds with bare hands; use a bag and bury them deep"
+            "fa": "مرغ مرده را با دست خالی نگیرید",
+            "ps": "مړه مرغه په لوڅ لاس مه نیسئ",
+            "en": "touch dead birds with bare hands"
           }
         },
         {
@@ -172,9 +172,9 @@
       "type": "tip",
       "icon": "phone",
       "text": {
-        "fa": "اگر مرغ‌های زیاد ناگهان مریض شوند یا بمیرند، همان روز به داکتر حیوانات خبر بدهید.",
-        "ps": "که ډېر چرګان ناڅاپه ناروغه شي یا مړه شي، په همغه ورځ د څارویو ډاکټر ته خبر ورکړئ.",
-        "en": "If many hens fall ill or die suddenly, tell the animal doctor the same day."
+        "fa": "اگر چند مرغ ناگهان مریض شوند یا بمیرند، به آن‌ها دست نزنید؛ همان روز به داکتر حیوانات خبر بدهید. یک مرغ مرده را، با خلطه‌ای روی دست، عمیق دفن کنید.",
+        "ps": "که څو چرګان ناڅاپه ناروغه یا مړه شي، لاس مه ورته وړئ؛ په همغه ورځ د څارویو ډاکټر ته خبر ورکړئ. یوه مړه چرګه ژوره ښخه کړئ، او پر لاس مو کڅوړه وي.",
+        "en": "If several hens fall ill or die suddenly, do not touch them; tell the animal doctor the same day. Bury a single dead hen deep, with a bag over your hand."
       }
     }
   ],
@@ -185,7 +185,8 @@
     "Afghanaid: What is a self-help group? (vocational training from tailoring to poultry rearing)",
     "WHO guideline for complementary feeding (2023): daily animal-source foods such as eggs",
     "WHO Five Keys to Safer Food (2006): cook thoroughly, eggs",
-    "WHO fact sheet: Avian influenza A (H5N1): avoid contact with sick or dead poultry; do not eat sick or dead birds"
+    "WHO fact sheet: Avian influenza A (H5N1): avoid contact with sick or dead poultry; do not eat sick or dead birds",
+    "WHO fact sheet: Influenza (avian and other zoonotic) (21 Jan 2026): avoid contact with sick or dead birds; report them to the veterinary service, which removes them"
   ],
   "review": [
     "Newcastle vaccine: thermostable I-2 eye-drop vaccine every 4 months is the ACIAR/FAO village model. Check with the Samangan livestock directorate or DCA/FAO/Afghanaid vets which vaccine (I-2, LaSota) and schedule are actually available.",
@@ -193,6 +194,7 @@
     "Chicken droppings and child diarrhoea/gut damage: supported by WASH research (e.g. animal faeces in the yard and environmental enteropathy). Keep 'keep hens away from babies and their food'.",
     "Local Dari name for Newcastle disease may differ (some areas say رانیخت or ترانیخت?). Native speakers and a vet to confirm; Pashto uses the same borrowed name.",
     "Icons: eggs step uses 'baby' (wanted 'egg'); coop uses 'house' (wanted 'chicken'); link uses 'animals'.",
-    "Words to check: Dari لانهٔ مرغ (coop), فضله (droppings), مؤسسه (aid group); Pashto غول (droppings), لومبړ (fox), کوټه for coop, مؤسسه."
+    "Words to check: Dari لانهٔ مرغ (coop), فضله (droppings), مؤسسه (aid group); Pashto غول (droppings), لومبړ (fox), کوټه for coop, مؤسسه.",
+    "Medical audit 2026-10-08 HM-06: chickens.dont.bare was 'touch dead birds with bare hands; use a bag and bury them deep'; now just 'touch dead birds with bare hands'. chickens.many-die now says 'If several hens fall ill or die suddenly, do not touch them; tell the animal doctor the same day. Bury a single dead hen deep, with a bag over your hand.' (WHO avian influenza). animal-illness has a new amber item for fever or cough after touching sick or dead birds (animal-illness.soon.birds), which the chickens.illness link promises."
   ]
 }

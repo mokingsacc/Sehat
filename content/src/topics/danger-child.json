@@ -716,6 +716,16 @@
       }
     },
     {
+      "id": "danger-child.no-opium",
+      "type": "tip",
+      "icon": "no",
+      "text": {
+        "fa": "هرگز تریاک، یا هر دوایی که کارمند صحی نداده، به طفل ندهید تا بخوابد یا گریه‌اش بند شود. این کار می‌تواند نفس او را بند کند.",
+        "ps": "هېڅکله ماشوم ته اپین، یا هغه درمل چې روغتیايي کارکوونکي نه وي ورکړي، مه ورکوئ چې ویده شي یا ژړا یې ودرېږي. دا کار یې ساه بندولای شي.",
+        "en": "Never give opium, or any medicine a health worker did not give, to make a child sleep or stop crying. It can stop the child's breathing."
+      }
+    },
+    {
       "id": "danger-child.clinic",
       "type": "clinic",
       "title": {
@@ -754,7 +764,9 @@
     "WHO IMCI Chart Booklet (2014): urgent referral with pre-referral treatment (first dose of antibiotic, prevent low blood sugar, keep warm)",
     "WHO IMCI Chart Booklet (2014): does the child have diarrhoea? (sunken eyes, skin pinch goes back very slowly, more than 2 seconds; severe and some dehydration); stiff neck in very severe febrile disease",
     "NICE NG143 Fever in under 5s (2019, updated 2021): traffic light system (colour, activity, breathing, circulation and hydration, other), adapted for parents",
-    "NICE NG51 Sepsis (2016, updated 2024) and NICE CG102 Bacterial meningitis and meningococcal septicaemia in under 16s: non-blanching rash; the glass (tumbler) test as taught to parents"
+    "NICE NG51 Sepsis (2016, updated 2024) and NICE CG102 Bacterial meningitis and meningococcal septicaemia in under 16s: non-blanching rash; the glass (tumbler) test as taught to parents",
+    "WHO fact sheet: Opioid overdose (29 Aug 2025): opioids can stop the breathing",
+    "The Afghan Times (Aug 2025), press report: Helmand hospital doctors see 1 to 3 children a week given opium by their mothers to sleep or calm them (not an official source)"
   ],
   "review": [
     "Fever threshold for young infants is not given as a number here ('has a fever, or the body feels cold'); WHO uses 37.5 C or more (axillary) and below 35.5 C.",
@@ -770,6 +782,7 @@
     "Cold hands and feet with fever: amber here (an early sepsis sign in parent leaflets); it is not in the NG143 table itself.",
     "Dehydration: IMCI severe dehydration needs two signs (lethargic or unconscious, sunken eyes, not able to drink or drinking poorly, skin pinch very slowly); the red item 'sunken eyes, and very sleepy or cannot drink' and 'skin pinch more than 2 seconds' follow that. Amber items (dry mouth, no wee for 8 hours or more, sunken soft spot, no tears) are NICE CG84/NG143 style and simplified.",
     "Breathing step: 'Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more' matches the breath counter (js/tools.js) and WHO IMCI.",
-    "Words to check: Dari 'کهنه' and Pashto 'کهنه' for nappy (cloth nappies; some families say 'پمپرز'); the soft spot is described ('جای نرم سر' / 'د سر نرمه برخه'), not named; Dari 'شخ' (stiff), 'زنخ' (chin); Pashto 'شین' for blue skin or lips; 'ناله' for grunting."
+    "Words to check: Dari 'کهنه' and Pashto 'کهنه' for nappy (cloth nappies; some families say 'پمپرز'); the soft spot is described ('جای نرم سر' / 'د سر نرمه برخه'), not named; Dari 'شخ' (stiff), 'زنخ' (chin); Pashto 'شین' for blue skin or lips; 'ناله' for grunting.",
+    "Medical audit 2026-10-08 HM-05: new tip danger-child.no-opium 'Never give opium, or any medicine a health worker did not give, to make a child sleep or stop crying. It can stop the child's breathing.' The warning was on sleep-well (Home tab) and was removed under the Home-tab rule; sleep-well now links here (sleep-well.child)."
   ]
 }

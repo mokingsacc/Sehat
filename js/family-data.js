@@ -11,8 +11,9 @@
 //   adult weight for height (BMI, kg/m²): under 16 very thin -> clinic this week; 16 to 18.4 a little thin; 18.5 to 24.9
 //   healthy; 25 to 29.9 a little heavy; 30 or more very heavy -> ask the clinic to check blood pressure and sugar.
 //   Not judged in pregnancy or for anyone under 18. Weight 5% or more below a weight from 1 to 6 months before -> clinic this week.
-//   Tetanus-diphtheria (Td) for women: dose 2 at least 4 weeks after dose 1, dose 3 6 months after dose 2, doses 4 and 5
-//   1 year after the one before (WHO; the Afghan EPI card).
+//   Tetanus-diphtheria (Td) for women: dose 2 at least 4 weeks after dose 1 (and in pregnancy at least 2 weeks before the
+//   birth), dose 3 at least 6 months after dose 2, doses 4 and 5 at least 1 year after the one before; a late dose does not
+//   mean starting again (WHO tetanus position paper 2017; the Afghan EPI card). TD_GAP gives the earliest day.
 
 export const DAY_MS = 864e5;
 export const PICS = ['baby', 'child', 'woman', 'man'];

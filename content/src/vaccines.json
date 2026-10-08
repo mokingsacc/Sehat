@@ -435,33 +435,33 @@
       {
         "id": "td2",
         "when": {
-          "fa": "نوبت دوم: حداقل ۴ هفته بعد از نوبت اول",
-          "ps": "دویم ځل: لږ تر لږه ۴ اونۍ له لومړي ځل وروسته",
-          "en": "Dose 2: at least 4 weeks after dose 1"
+          "fa": "نوبت دوم: حداقل ۴ هفته بعد از نوبت اول، و در حاملگی حداقل ۲ هفته پیش از ولادت",
+          "ps": "دویم ځل: لږ تر لږه ۴ اونۍ له لومړي ځل وروسته، او په امیندوارۍ کې لږ تر لږه ۲ اونۍ له زېږون مخکې",
+          "en": "Dose 2: at least 4 weeks after dose 1, and in pregnancy at least 2 weeks before the birth"
         }
       },
       {
         "id": "td3",
         "when": {
-          "fa": "نوبت سوم: ۶ ماه بعد از نوبت دوم",
-          "ps": "درېیم ځل: له دویم ځل ۶ میاشتې وروسته",
-          "en": "Dose 3: 6 months after dose 2"
+          "fa": "نوبت سوم: حداقل ۶ ماه بعد از نوبت دوم",
+          "ps": "درېیم ځل: لږ تر لږه ۶ میاشتې له دویم ځل وروسته",
+          "en": "Dose 3: at least 6 months after dose 2"
         }
       },
       {
         "id": "td4",
         "when": {
-          "fa": "نوبت چهارم: ۱ سال بعد از نوبت سوم",
-          "ps": "څلورم ځل: له درېیم ځل ۱ کال وروسته",
-          "en": "Dose 4: 1 year after dose 3"
+          "fa": "نوبت چهارم: حداقل ۱ سال بعد از نوبت سوم",
+          "ps": "څلورم ځل: لږ تر لږه ۱ کال له درېیم ځل وروسته",
+          "en": "Dose 4: at least 1 year after dose 3"
         }
       },
       {
         "id": "td5",
         "when": {
-          "fa": "نوبت پنجم: ۱ سال بعد از نوبت چهارم",
-          "ps": "پنځم ځل: له څلورم ځل ۱ کال وروسته",
-          "en": "Dose 5: 1 year after dose 4"
+          "fa": "نوبت پنجم: حداقل ۱ سال بعد از نوبت چهارم",
+          "ps": "پنځم ځل: لږ تر لږه ۱ کال له څلورم ځل وروسته",
+          "en": "Dose 5: at least 1 year after dose 4"
         }
       }
     ]
@@ -475,7 +475,8 @@
     "WHO position papers on vaccines; WHO/UNICEF Facts for Life (2010): immunization",
     "WHO/UNICEF WIISE immunization schedule as reported by Afghanistan for 2023, 2024 and 2025 (https://xmart-api-public.who.int/WIISE/AD_SCHEDULES?$filter=COUNTRY%20eq%20%27AFG%27%20and%20YEAR%20eq%202025): OPV dose 5 (counting the birth dose) and IPV 2 at 9 months with measles 1; Td (TD_S) for women 15 to 49 and pregnant women at the first contact, 5 doses",
     "WHO/UNICEF WIISE vaccine introductions, Afghanistan: measles-rubella planned January 2028, HPV planned 2029",
-    "WHO Summary Table 1 (Dec 2025), footnote 5: Td in place of TT; 5 doses only if first vaccinated as an adult"
+    "WHO Summary Table 1 (Dec 2025), footnote 5: Td in place of TT; 5 doses only if first vaccinated as an adult",
+    "WHO Tetanus vaccines position paper (Feb 2017), summary: dose 2 at least 4 weeks after dose 1 and at least 2 weeks before the birth; dose 3 at least 6 months later; doses 4 and 5 at least 1 year apart (minimum gaps)"
   ],
   "review": [
     "IPV2 (second polio injection) was introduced in 2020 or 2021 (WUENIC says 2020, CDC says 2021); its age in Afghanistan is not confirmed. Placed at 9 months with measles 1, as in many Gavi countries. Please confirm with the MoPH EPI schedule.",
@@ -490,6 +491,7 @@
     "Content pass 3: IPV2 at 9 months is still unconfirmed (moph-guidance.md item 1): no public MoPH or UNICEF Afghanistan source gives its age. Do not record the 9-month clip until NEPI or UNICEF confirms.",
     "Medical audit 2026-10-08 CH4: IPV2 at 9 months is now CONFIRMED (WIISE country reports 2022 to 2025), so the first and last review notes above are answered and the 9-month clip can be recorded. Polio drops at 9 months added as 'Polio drops 4' (Afghanistan's 2023, 2024 and 2025 reports list OPV dose 5 at 9 months, counting the birth dose; the app does not number the birth dose). This answers the third note. Check the number on a current Afghan vaccine card.",
     "Medical audit 2026-10-08 CH9: still measles only; Afghanistan plans measles-rubella (MR) for January 2028 (it was August 2026) and HPV for girls in 2029; no typhoid vaccine. Update 'measles' to 'measles and rubella' when NEPI confirms.",
-    "Medical audit 2026-10-08 CH8 / MA9 and MA10: the women's vaccine is now 'Tetanus and diphtheria vaccine for women (Td)', ages 15 to 49 (Afghanistan's 2024 and 2025 reports to WHO, which use Td, TD_S), so the diphtheria sentence is right. 'Needs 5 doses' is now 'needs up to 5 doses; the clinic checks her card to see how many she still needs' (WHO: 5 doses only if first vaccinated as an adult). This replaces the 15 to 45 band of the content pass 3 note (BPHS 2010). If a current Afghan card still says TT, drop the diphtheria words instead."
+    "Medical audit 2026-10-08 CH8 / MA9 and MA10: the women's vaccine is now 'Tetanus and diphtheria vaccine for women (Td)', ages 15 to 49 (Afghanistan's 2024 and 2025 reports to WHO, which use Td, TD_S), so the diphtheria sentence is right. 'Needs 5 doses' is now 'needs up to 5 doses; the clinic checks her card to see how many she still needs' (WHO: 5 doses only if first vaccinated as an adult). This replaces the 15 to 45 band of the content pass 3 note (BPHS 2010). If a current Afghan card still says TT, drop the diphtheria words instead.",
+    "Medical audit 2026-10-08 MA11/HM-17: the Td dose gaps are minimum gaps (WHO tetanus position paper 2017): 'at least 6 months' (dose 3) and 'at least 1 year' (doses 4 and 5), and dose 2 'and in pregnancy at least 2 weeks before the birth'. The Family record says the same and adds that a late dose does not mean starting again (ui.fam.td.tap). The code already uses minimum gaps (js/family-data.js TD_GAP)."
   ]
 }

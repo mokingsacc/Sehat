@@ -131,17 +131,34 @@
     {
       "id": "sleep-well.fumes",
       "type": "link",
-      "to": "topic/home-safety",
-      "icon": "stove",
+      "to": "topic/fumes-poisoning",
+      "icon": "warning",
       "title": {
-        "fa": "خانهٔ بی‌خطر: دود و گاز",
-        "ps": "خوندي کور: لوګی او ګاز",
-        "en": "Safe home: fumes and gas"
+        "fa": "کسی از دود یا گاز مریض شده؟",
+        "ps": "څوک له لوګي یا ګاز ناروغه شوی؟",
+        "en": "Someone feels ill from fumes?"
       },
       "text": {
-        "fa": "شب بدون گاز زهری گرم بمانید، و علایم خطر آن را بشناسید.",
-        "ps": "د شپې پرته له زهرجن ګازه ګرم پاتې شئ، او د هغه د خطر نښې وپېژنئ.",
-        "en": "Keep warm at night without poison gas, and know its warning signs."
+        "fa": "صفحهٔ صحت را باز کنید: همین حالا چه کنید، قدم به قدم.",
+        "ps": "د روغتیا پاڼه پرانیزئ: همدا اوس څه وکړئ، ګام په ګام.",
+        "en": "Open the Health page: what to do now, step by step."
+      },
+      "urgent": true
+    },
+    {
+      "id": "sleep-well.child",
+      "type": "link",
+      "to": "topic/danger-child",
+      "icon": "sleep",
+      "title": {
+        "fa": "طفل خواب نمی‌کند؟",
+        "ps": "ماشوم ویده کېږي نه؟",
+        "en": "A child who will not sleep?"
+      },
+      "text": {
+        "fa": "چه چیزی را هرگز برای خواباندن به طفل ندهید، و علایم خطر. صفحه را باز کنید.",
+        "ps": "څه شی باید هېڅکله ماشوم ته د خوب لپاره ورنه کړئ، او د خطر نښې. پاڼه پرانیزئ.",
+        "en": "What never to give a child to make it sleep, and the danger signs. Open the page."
       }
     },
     {
@@ -179,6 +196,8 @@
     "Soon alert uses 'this week', not 'today' (CONTENT_SPEC allows this where clinically right): possible sleep apnoea, daytime sleepiness, nocturia (diabetes, prostate, heart), chronic insomnia. Sadness or worry with poor sleep for 2 weeks is already 'clinic today' on the stress page, which evening-routine links to.",
     "Icons: no 'snore' icon, 'breathe' used; 'clock' used for passing urine at night (wanted: a night or toilet icon).",
     "Words to check: Dari خُرخُر (snoring), کلان‌سالان (old people), بعد از چاشت (afternoon), لحاف; Pashto خرهار (snoring), بړستن (quilt), ماسپښین.",
-    "Home tab rule (Mo): removed the 'Do not' box (sleeping tablets, opium for children) and the 'clinic this week' box (snoring with pauses, sleepy by day, waking to pass urine, a month of poor sleep). Ends with 'If you feel unwell, go to Health and tap What is wrong?'."
+    "Home tab rule (Mo): removed the 'Do not' box (sleeping tablets, opium for children) and the 'clinic this week' box (snoring with pauses, sleepy by day, waking to pass urine, a month of poor sleep). Ends with 'If you feel unwell, go to Health and tap What is wrong?'.",
+    "Medical audit 2026-10-08 HM-20: sleep-well.fumes promised warning signs on home-safety, which no longer has them. It is now a red link to fumes-poisoning with the words of home-safety.fumes-em ('Someone feels ill from fumes? Open the Health page: what to do now, step by step.'). Was: 'Safe home: fumes and gas. Keep warm at night without poison gas, and know its warning signs.' (link to home-safety). The prevention words stay in sleep-well.fire.",
+    "Medical audit 2026-10-08 HM-05: new plain link sleep-well.child to danger-child, where the 'no opium or medicine to make a child sleep' warning now is (danger-child.no-opium)."
   ]
 }

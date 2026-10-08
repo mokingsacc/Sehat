@@ -92,9 +92,9 @@
         "en": "Wash after spraying"
       },
       "text": {
-        "fa": "بعد از دواپاشی دست، رو و لباس خود را بشویید. اطفال و حیوانات را تا خشک شدن دوا از زمین دور نگه دارید.",
-        "ps": "له درملو شيندلو وروسته لاسونه، مخ او جامې ومینځئ. ماشومان او څاروي تر هغه له پټي لرې وساتئ چې درمل وچ شي.",
-        "en": "After spraying, wash your hands, face and clothes. Keep children and animals out of the field until the spray has dried."
+        "fa": "بعد از دواپاشی دست، رو و لباس خود را بشویید. اطفال و حیوانات را تا خشک شدن دوا، و تا وقتی که روی بوتل یا پاکت آن نوشته شده یا فروشنده می‌گوید، از زمین دور نگه دارید.",
+        "ps": "له درملو شيندلو وروسته لاسونه، مخ او جامې ومینځئ. ماشومان او څاروي تر هغه له پټي لرې وساتئ چې درمل وچ شي، او تر هغه وخته چې د هغه پر بوتل یا پاکټ لیکل شوي یا پلورونکی یې وايي.",
+        "en": "After spraying, wash your hands, face and clothes. Keep children and animals out of the field until the spray has dried, and as long as the label or seller says."
       }
     },
     {
@@ -185,7 +185,8 @@
     "FAO/WHO International Code of Conduct on Pesticide Management (2014)",
     "FAO Guidelines on management options for empty pesticide containers (2008): never reuse, triple rinse, puncture",
     "WHO Clinical management of acute pesticide intoxication: prevention of suicidal behaviours (2008)",
-    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): poisoning"
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): poisoning",
+    "Health Canada, After pesticides are applied: re-entry time is on the label (from 'until dried' to hours or more); FAO/WHO labelling guidelines (2015) require it on every label"
   ],
   "review": [
     "New page. child-safety.poison is moved here (safe-storage.lock), with 'in a locked box or cupboard; an adult keeps the key' added and the bottle rule given its own step (safe-storage.bottle). first-aid.tip-poison (the same storage message) is removed from first-aid.",
@@ -195,6 +196,7 @@
     "The last tip is about suicide prevention (WHO: locking pesticides away saves lives). It does not use the word suicide. Check the tone; poisoning.purpose already links to the Stress page.",
     "Urgent box: short form of the poisoning signs, so the page says when to go; the full list is on poisoning.",
     "Words to check (Dari / Pashto): الماری / المارۍ (cupboard), صندوق قفل‌دار / قلف لرونکی صندوق (locked box), دوای زراعتی / د کرنې درمل (farm spray), دواپاشی / درمل شيندل (spraying), خلطه / کڅوړه (bag), دواخانه / درملتون (pharmacy).",
-    "Home tab rule (Mo): no medical advice on Home pages. Removed: safe-storage.urgent. Urgent signs are reached through the red link to the Health side."
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: safe-storage.urgent. Urgent signs are reached through the red link to the Health side.",
+    "Medical audit 2026-10-08 HM-07: safe-storage.after now adds 'and as long as the label or seller says' to 'until the spray has dried' (the safe time to go back in is on the label). The audit's 'often a day or more' is not added: label times differ from hours to days."
   ]
 }

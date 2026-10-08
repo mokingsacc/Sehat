@@ -98,6 +98,21 @@
       }
     },
     {
+      "id": "goats-sheep.ticks",
+      "type": "step",
+      "icon": "insect",
+      "title": {
+        "fa": "ذبح و کنه",
+        "ps": "حلالول او کنې",
+        "en": "Slaughter and ticks"
+      },
+      "text": {
+        "fa": "هنگام ذبح، دست‌ها را با دستکش یا خلطهٔ پلاستیکی بپوشانید. هر روز حیوانات، خود و اطفال را برای کنه ببینید.",
+        "ps": "د حلالولو پر وخت لاسونه په دستکشو یا پلاستیکي کڅوړو پټ کړئ. هره ورځ څاروي، خپل ځان او ماشومان د کنو لپاره وګورئ.",
+        "en": "Cover your hands with gloves or plastic bags when you slaughter. Check the animals, yourself and the children for ticks every day."
+      }
+    },
+    {
       "id": "goats-sheep.vet",
       "type": "step",
       "icon": "syringe",
@@ -163,7 +178,8 @@
     "WHO/WOAH/FAO: Brucellosis in humans and animals (2006)",
     "WHO fact sheet: Infant and young child feeding (2026); breastfeeding page: no animal milk before 6 months",
     "Afghanaid / UK Aid Match (25 Sep 2023): By her side: livestock and dairy for rural women (milk, yoghurt, cheese; selling to neighbours)",
-    "WHO/UNICEF Facts for Life (2010): hygiene, keep animals away from living areas"
+    "WHO/UNICEF Facts for Life (2010): hygiene, keep animals away from living areas",
+    "WHO fact sheet: Crimean-Congo haemorrhagic fever (20 Feb 2025): gloves when handling animals and at slaughter; check skin and clothes for ticks"
   ],
   "review": [
     "This page repeats animal-illness.milk (boil all milk) on purpose so it stands alone; the link goes to the full signs.",
@@ -171,6 +187,7 @@
     "Lambing step repeats animal-illness.birth with 'children and pregnant women away' added (brucellosis and Q fever from afterbirths; pregnant women also risk toxoplasmosis and listeria). Mo to confirm.",
     "'Even in winter': families often bring animals indoors in the cold. Check this does not sound unrealistic; a shared wall or a partition may be the practical advice.",
     "Livestock vaccines (brucellosis, anthrax, PPR, sheep pox) are named only as 'vaccines for your flock'.",
-    "Words to check: Dari طویله (shed), رمه (flock), پستان (udder); Pashto غوجل (shed), غولانځه (udder), لوشل (milking), رمه."
+    "Words to check: Dari طویله (shed), رمه (flock), پستان (udder); Pashto غوجل (shed), غولانځه (udder), لوشل (milking), رمه.",
+    "Medical audit 2026-10-08 HM-11: new step goats-sheep.ticks 'Slaughter and ticks: Cover your hands with gloves or plastic bags when you slaughter. Check the animals, yourself and the children for ticks every day.' (WHO CCHF). Prevention only (Home-tab rule): the signs and when to go are on animal-illness."
   ]
 }

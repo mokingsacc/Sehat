@@ -72,14 +72,14 @@
       "type": "step",
       "icon": "bowl-food",
       "title": {
-        "fa": "چیزهای خورد را از شیرخوار دور نگه دارید",
-        "ps": "واړه شیان له تي خوړونکي ماشوم لرې وساتئ",
-        "en": "Keep small things from babies"
+        "fa": "چیزهای خورد را از اطفال خوردسال دور نگه دارید",
+        "ps": "واړه شیان له وړو ماشومانو لرې وساتئ",
+        "en": "Keep small things from small children"
       },
       "text": {
-        "fa": "چارمغز، تخمه، نخود، سکه و بازیچه‌های خورد را از شیرخوار دور نگه دارید. غذای نرم و میده‌شده بدهید.",
-        "ps": "غوز، دانې، نخود، سکې او واړه لوبتکي له ماشوم لرې وساتئ. نرم او میده خواړه ورکړئ.",
-        "en": "Keep nuts, seeds, chickpeas, coins and small toys away from babies. Give soft, mashed food."
+        "fa": "چارمغز، تخمه، نخود، سکه و بازیچه‌های خورد را از شیرخوار و اطفال کمتر از ۵ سال دور نگه دارید. به شیرخوار غذای نرم و میده‌شده بدهید.",
+        "ps": "غوز، دانې، نخود، سکې او واړه لوبتکي له تي خوړونکو او تر ۵ کلونو کمو ماشومانو لرې وساتئ. تي خوړونکي ماشوم ته نرم او میده خواړه ورکړئ.",
+        "en": "Keep nuts, seeds, chickpeas, coins and small toys away from babies and children under 5. Give babies soft, mashed food."
       }
     },
     {
@@ -185,7 +185,8 @@
     "ICRC Afghanistan mine and explosive remnants risk awareness (2025 figures: children 66% of casualties)",
     "WHO/UNICEF World report on child injury prevention (2008): choking on small objects and food; sharp objects (cuts)",
     "WHO Pocket Book of Hospital Care for Children (2013): common surgical problems, burns, head injury, poisoning",
-    "WHO/UNICEF World report on child injury prevention (2008)"
+    "WHO/UNICEF World report on child injury prevention (2008)",
+    "UNICEF/WHO Facts for Life (2010), injury prevention: young children (to about 4 or 5) put things in their mouths; keep coins, nuts, seeds and buttons out of reach"
   ],
   "review": [
     "The burn threshold 'bigger than the child's palm' is a common first-aid rule of thumb. Check it matches the first-aid topic's wording.",
@@ -195,6 +196,7 @@
     "Home safety section (2026-10-07): the poison step moved to the new safe-storage page (link child-safety.storage). New step child-safety.small comes from choking-baby.prevent (same text). New step child-safety.sharp (knives, sickles, axes, razor blades; slaughter and wood chopping). New link child-safety.road-page to road-safety. child-safety.fire, .roof, .water and .road stay here and are now the only place for those messages (burns.prevent, falls-fractures.prevent and drowning.prevent were removed and link here or to fire-safety).",
     "Now 7 steps and 2 links: near the upper length limit.",
     "Overnight observation after head injury is standard hospital practice; district hospitals may transfer to Mazar for scans.",
-    "Home tab rule (Mo): no medical advice on Home pages. Removed: child-safety.hospital, child-safety.urgent, child-safety.first-aid. Urgent signs are reached through the red link to the Health side."
+    "Home tab rule (Mo): no medical advice on Home pages. Removed: child-safety.hospital, child-safety.urgent, child-safety.first-aid. Urgent signs are reached through the red link to the Health side.",
+    "Medical audit 2026-10-08 HM-09: child-safety.small was 'Keep small things from babies: ...away from babies. Give soft, mashed food.'; now 'Keep small things from small children: ...away from babies and children under 5. Give babies soft, mashed food.' (Facts for Life). The choking-baby link (choking-baby.safety) keeps its words: that page is about babies."
   ]
 }
