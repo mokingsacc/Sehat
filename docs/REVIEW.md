@@ -5235,3 +5235,149 @@ LOW
 8. "A vaccinated dog rarely passes rabies": fa «بسیار کم ... سرایت می‌دهد», ps «ډېر لږ ... خپروي» (dog-bite.dogs).
 9. ORS water amount: fa «در همان مقدار آب پاک که روی پاکت نوشته شده», ps «په هومره پاکو اوبو کې ... چې پر پاکټ لیکل شوي» (kit-first-aid.ors).
 10. Lone newborn helper title: fa «تنها هستید؟ صدا کنید و نوزاد را ببرید», ps «یوازې یاست؟ غږ وکړئ او ماشوم یوسئ».
+
+## Medical audit fixes: illnesses, mind and home, Family record (8 Oct 2026, worker fix-common)
+
+The "Clear fix" rows with IL- and HM- IDs from the medical audit of 8 Oct 2026
+(/mnt/project-files/samangan-red-book/audit/medical-2026-10-08/ALL-FINDINGS.md), and the merged rows MA5/IL-9 and
+MA11/HM-17. Each topic's review notes name the finding; each topic has its source. Narration ids were kept where the
+words changed; new lines have new ids. Clips whose Dari and Pashto are word for word an existing line were copied from
+that line (the voice tool does the same); the rest are still to make.
+
+### Care levels made the same on every page
+
+- **HM-01** (HIGH) `falls-fractures.urgent.trapped` (new, first in the red box): "was trapped under a wall, roof or earth,
+  even if they seem well". The red title is now "Go to hospital now, day or night, if after a fall or a house collapse
+  someone:" (was "...if after a fall someone:"). `floods-quakes.hurt-em` ("Someone hurt or trapped?") now opens Falls and
+  broken bones; text "Open the page: what to do now, and when to go to hospital." (was "Open the Emergency page: what to do
+  now, step by step."). The Earthquake and flood picture page uses the new topic line; `ui.ask.trapped` is removed.
+- **MA5, IL-9** fever in pregnancy = clinic today everywhere; hospital only with a red sign (PCPNC).
+  `urine-infection.urgent.pregnant`: "pregnant, with fever, belly pain or contractions" -> "pregnant, with burning urine
+  and fever, back pain, vomiting or labour pains". `malaria.urgent.pregnant`: "a pregnant woman with high fever" -> "a
+  pregnant woman with fever who is too weak to get out of bed". New amber `malaria.soon.pregnant`: "a pregnant woman with
+  any fever, for the malaria test". Temperature checker verdict `ui.rd.v.temp-pregnant`: "...if there is belly pain..." ->
+  "...if there is severe belly pain..." (the checker's tick is already "Severe belly pain"). pregnancy-danger, dengue,
+  reading-temp and the checker's level were already clinic today and are unchanged.
+- **IL-7** coughing blood: streaks = clinic today for a TB test; a lot of blood = hospital now.
+  `pneumonia-adult.urgent.blood`: "coughing up blood" -> "coughing up a lot of blood"; new amber
+  `pneumonia-adult.soon.blood` "streaks of blood in the sputum: TB test". red-flags: see IL-8.
+- **IL-7, IL-8** red-flags: new amber box `red-flags.today` "If you have one of these signs, go to the clinic today" with
+  `red-flags.today.cough` "A cough for 2 weeks or more", `red-flags.today.blood` "Blood in the sputum" and
+  `red-flags.today.yellow-eyes` "Yellow eyes". Removed from the this-week box: `red-flags.soon.cough` "Cough for more than 2
+  weeks, or blood in the sputum" and `red-flags.soon.yellow-eyes` "Yellow eyes" (its clips moved to the new id).
+  `red-flags.clinic` title "At the clinic: the this-week signs" -> "At the clinic: the amber signs". Picture pages: Cough
+  (older) adds the streaks line; Thin (older) uses the today title, as its box holds TB signs (it also lists weight loss
+  and trouble swallowing, which are "this week" on red-flags; stricter on the picture page).
+- **HM-02** the five mind pages (`mind-body`, `mind-calm`, `mind-cycle`, `mind-problems`, `mind-routine`):
+  `<page>.urgent.self-harm` "you have hurt yourself, or are planning to" -> "you are planning to hurt yourself"; new
+  `<page>.urgent.harmed` "you have already hurt yourself: go to hospital now, day or night".
+
+### Illnesses (IL)
+
+- **IL-2** `tb.family`: "Children and everyone living with a person with TB should be checked at the clinic, even if they
+  seem well." -> "Everyone living with a person with TB should be checked, even if well. Children under 5 get a free daily
+  medicine for some months so they do not get TB; finish it."
+- **IL-3** new step `animal-illness.death` "If someone dies with fever and bleeding: Do not wash or prepare the body
+  yourselves; the blood can pass the illness. Tell the clinic at once, and let trained staff help with a safe burial."
+- **IL-4** `asthma.clinic`: "...They give a salbutamol inhaler, show how to use it, and may add a daily preventer
+  inhaler." -> "The health worker checks the chest for pneumonia or TB, gives a salbutamol inhaler and shows its use. Most
+  people also need a daily preventer inhaler; ask for it."
+- **IL-5, IL-11** `scabies.cream`: "Put it on the whole body from the neck down, babies on the head too. Leave it as long
+  as the health worker says, then wash. Itching can last 2 more weeks." -> "Cover the whole body, including the scalp and
+  behind the ears, but not the face. Cover a baby's hands so it is not sucked. Wash it off when the health worker says."
+  New step `scabies.again` "Use it again after one week: Put the cream on again after one week; the first time does not
+  kill the eggs. Itching can last 2 more weeks."
+- **IL-6** `typhoid.clinic`: "a typhoid antibiotic (such as ciprofloxacin, azithromycin or cefixime)" -> "an antibiotic for
+  typhoid (often azithromycin)".
+- **IL-10** `scabies.wash` "seal in a bag for 3 days" kept; now cited to MSF (72 hours), not WHO (WHO says a week).
+- **IL-12** `typhoid.prevent`: "...should not cook for others until well." -> "...must not cook for others until the
+  health worker says it is safe."
+- **IL-13** "the east and south" -> "the east and south-east" (`malaria.lead`, `malaria.test`, `malaria.soon.travel`);
+  `malaria.samangan` "...in the east or south..." -> "...in the east, such as Nangarhar, Kunar or Laghman...".
+- **IL-14** `eye-infection.samangan`: "Samangan is one of the few places in Afghanistan where trachoma is still found." ->
+  "Aybak, Dara-i-Suf Payin and Feroz Nakhchir together are one of only three areas in Afghanistan with enough trachoma to
+  treat whole villages."
+- **IL-15** `eye-infection.newborn`: removed "The eye ointment given at birth helps prevent this." (not confirmed for
+  Afghanistan; the newborn page lists no ointment).
+- **IL-16** `anim.handwashing.s6`: "rub for about 20 seconds" -> "rub for at least 20 seconds" (CDC and UNICEF; WHO's
+  whole handwash is 40 to 60 seconds); docs/ANIMATIONS.md source line fixed.
+- **IL-17** `hygiene.safe-water`: "a full, bubbling boil" -> "a full, rolling boil and keep it boiling for 1 minute", the
+  same as the water animation (anim.water.s2 and its 1-minute timer are unchanged).
+- **IL-19** `animal-illness.ticks`: "Pull ticks off with a cloth, not bare hands." -> "Pull ticks out slowly with tweezers
+  close to the skin, without crushing them. Then wash with soap."
+- **IL-20** `animal-illness.dead`: "Do not eat or skin... Bury it deep and tell the animal doctor." -> "Do not eat, skin or
+  cut open... Tell the animal doctor, who will say whether to burn or bury it."
+- **IL-22** `epilepsy.medicine`: "...for years. Never stop suddenly; missed doses bring fits back. Get the next supply
+  before it runs out." -> "Take epilepsy medicine every single day, often for years. Never stop it yourself; after about 2
+  years without fits the health worker may lower it slowly. Missed doses bring fits back." `epilepsy.dont.stop`: "Do not
+  stop the medicine when fits have gone for a while." -> "Do not stop the medicine yourself, even when the fits have
+  stopped."
+- **IL-23** new amber `tb.soon.chest` "chest pain or great tiredness with the cough".
+- **IL-24** `hepatitis.hospital`: "...in Kabul and some provincial hospitals." -> "...in Kabul; ask the clinic about a
+  nearer one."
+- **IL-25** new tip `diarrhoea-adult.film` after the child ORS film: "This film shows a child. Adults make and drink ORS the
+  same way; zinc is only for children."
+- **IL-26** English only (no new clips): `malaria.dont.shop` "Do not buy malaria tablets from a shop without a test." ->
+  "Do not buy shop malaria tablets without a test; wrong medicine wastes time."; `animal-illness.clinic` now ends "Finish
+  the whole course." ("such as penicillin" -> "like penicillin").
+
+### Mind, home, food and animals (HM)
+
+- **HM-03** new tip `<page>.help` under the red box of the five mind pages, word for word stress.tip-help: "If someone says
+  they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help."
+- **HM-04** `floods-quakes.clean-water`: "...Boil drinking water, wash hands with soap, and give ORS if a child has
+  diarrhoea." -> "Flood water spreads diarrhoea. Boil drinking water and wash hands with soap." New link
+  `floods-quakes.diarrhoea` "Child has diarrhoea after the flood? Open the page: drinks, food, and when to go to the
+  clinic." (to the diarrhoea page).
+- **HM-05** new tip `danger-child.no-opium` "Never give opium, or any medicine a health worker did not give, to make a child
+  sleep or stop crying. It can stop the child's breathing." New link `sleep-well.child` "A child who will not sleep? What
+  never to give a child to make it sleep, and the danger signs. Open the page."
+- **HM-06** `chickens.dont.bare`: "touch dead birds with bare hands; use a bag and bury them deep" -> "touch dead birds with
+  bare hands". `chickens.many-die`: "If many hens fall ill or die suddenly, tell the animal doctor the same day." -> "If
+  several hens fall ill or die suddenly, do not touch them; tell the animal doctor the same day. Bury a single dead hen
+  deep, with a bag over your hand." New amber `animal-illness.soon.birds` "fever or cough within 10 days of touching sick
+  or dead birds".
+- **HM-07** `safe-storage.after`: "...until the spray has dried." -> "...until the spray has dried, and as long as the label
+  or seller says."
+- **HM-09** `child-safety.small`: "Keep small things from babies: ...away from babies. Give soft, mashed food." -> "Keep
+  small things from small children: ...away from babies and children under 5. Give babies soft, mashed food."
+- **HM-11** new step `goats-sheep.ticks` "Slaughter and ticks: Cover your hands with gloves or plastic bags when you
+  slaughter. Check the animals, yourself and the children for ticks every day."
+- **HM-15** `mind-calm.repeat`: "...for about 2 minutes, or 10 breaths." -> "...for about 2 minutes."
+- **HM-20** `sleep-well.fumes`: "Safe home: fumes and gas. Keep warm at night without poison gas, and know its warning
+  signs." (to home-safety) -> red link to fumes-poisoning "Someone feels ill from fumes? Open the Health page: what to do
+  now, step by step." (the words of home-safety.fumes-em).
+- **MA11, HM-17** Td gaps are minimums (WHO 2017). vaccines.json `women.doses` and the Family record lines
+  `ui.fam.td2` to `ui.fam.td5`: "Dose 3: 6 months after dose 2", "Dose 4: 1 year after dose 3", "Dose 5: 1 year after dose 4"
+  -> "at least 6 months", "at least 1 year"; dose 2 adds "and in pregnancy at least 2 weeks before the birth".
+  `ui.fam.td.tap` adds "A late dose is still given; she does not start again." js/family-data.js comment updated (the code
+  already used minimum gaps).
+
+### Not changed
+
+- Mo's call, left as they are: IL-1 (paracetamol in hepatitis), IL-18, HM-08, HM-10, HM-12, HM-13, HM-14, HM-16, HM-19.
+- **IL-21** (Congo fever "hospital now" vs WHO Afghanistan "nearest health centre"): kept. The red box in this app always
+  means hospital now, and the audit rates the app as stricter, not wrong; "clinic or hospital" in a red item would break
+  that rule.
+- **HM-18** (adult weight classes from 18 vs WHO 19): the record has no age for a woman or man; the family's choice of the
+  woman or man picture decides, and "18" is only in a code comment. A fix needs an age question (and a pregnant teenager
+  must keep her Td card), so it is for Mo.
+- HM-09: choking-baby.safety keeps "babies" (that page is about babies under 1).
+
+### For a native speaker
+
+New Dari and Pashto to check (en / fa / ps). Least sure: موچینک / موچنۍ (tweezers), "مه یې ځپئ" (do not crush it),
+"لاس مه ورته وړئ", the burial step (IL-3) and the Td "at least" wording.
+- `falls-fractures.urgent.trapped`: was trapped under a wall, roof or earth, even if they seem well / زیر دیوار، سقف یا خاک
+  گیر مانده بود، حتی اگر خوب معلوم شود / د دېوال، چت یا خاورو لاندې بند پاتې شوی و، که څه هم روغ ښکاري
+- `animal-illness.death`: Do not wash or prepare the body yourselves... / جسد را خودتان نشویید و آماده نکنید... / جسد پخپله
+  مه مینځئ او مه یې چمتو کوئ...
+- `animal-illness.ticks`: ...tweezers close to the skin, without crushing them / کنه را با موچینک، نزدیک پوست، آهسته بیرون
+  بکشید و آن را له نکنید / کنه په موچنۍ، پوستکي ته نږدې، ورو راوباسئ او مه یې ځپئ
+- `<mind page>.urgent.harmed`: you have already hurt yourself: go to hospital now, day or night / به خود آسیب رسانده‌اید:
+  همین حالا به شفاخانه بروید، شب باشد یا روز / ځان ته مو زیان رسولی دی: همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `danger-child.no-opium`: Never give opium... / هرگز تریاک... / هېڅکله ماشوم ته اپین...
+- `eye-infection.samangan`: the district names (ایبک، دره صوف پایین، فیروز نخچیر) and "تمام قریه تداوی می‌شود" / "ټول کلي
+  درملنه کېږي".
+- `ui.fam.td2` "و در حاملگی حداقل ۲ هفته پیش از ولادت" / "او په امیندوارۍ کې لږ تر لږه ۲ اونۍ له زېږون مخکې";
+  `ui.fam.td.tap` "از سر شروع نمی‌شود" / "له سره نه پیلېږي".
