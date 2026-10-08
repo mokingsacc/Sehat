@@ -1,7 +1,8 @@
 // Health, Home and Family tabs on narrow phones: no text touches a speaker button, no word is split over two lines,
 // nothing leaves its card, the header pieces never overlap; at 320, 360 and 412 px, in fa, ps and en, at normal text size
 // and with the phone's large-text setting (fonts 15% and 30% bigger). Also: the Health tab has no Emergency button in its
-// header (its big red Emergency card is right there); the other screens keep it.
+// header (its big red Emergency card is right there); the other screens keep it. With a person, Family also lists two
+// family voice notes.
 // Needs Playwright with Chromium:  node tools/test_layout.cjs [screenshot folder]
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path'), http = require('http');
@@ -76,7 +77,7 @@ function measure(scale) {
     const p = await ctx.newPage(); const errs = [];
     p.on('pageerror', (e) => errs.push('pageerror ' + e.message));
     await p.route(/workers\.dev/, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
-    await p.addInitScript(([lg, CV, kid]) => { localStorage.setItem('fhb.lang', JSON.stringify(lg)); localStorage.setItem('fhb.voice', JSON.stringify('f')); localStorage.setItem('fhb.consent', JSON.stringify({ v: CV, ok: false, day: '2026-10-07' })); if (kid) { localStorage.setItem('fhb.kids', JSON.stringify([kid])); localStorage.setItem('fhb.kid', JSON.stringify(kid.id)); } }, [lang, book.config.consentVersion, kids ? KID : null]);
+    await p.addInitScript(([lg, CV, kid]) => { localStorage.setItem('fhb.lang', JSON.stringify(lg)); localStorage.setItem('fhb.voice', JSON.stringify('f')); localStorage.setItem('fhb.consent', JSON.stringify({ v: CV, ok: false, day: '2026-10-07' })); if (kid) { localStorage.setItem('fhb.kids', JSON.stringify([kid])); localStorage.setItem('fhb.kid', JSON.stringify(kid.id)); localStorage.setItem('fhb.famnotes', JSON.stringify([{ id: 'g1', d: '2026-10-08', t: Date.now(), rec: 'a1abcd' }, { id: 'g2', d: '2026-10-01', t: 0, rec: 'a2abcd' }])); } }, [lang, book.config.consentVersion, kids ? KID : null]);
     for (const [name, hash] of [['health', '#/home'], ['home', '#/house'], ['family', '#/family'], ['emergency', '#/emergency'], ['children', '#/children'], ['topic', '#/topic/fever']]) {
       if (scale !== 1 && !['health', 'home', 'family'].includes(name)) continue;
       if (kids && name !== 'family' && name !== 'health') continue;

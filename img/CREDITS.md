@@ -10,7 +10,7 @@ In the October 2026 picture pass, 20 topic scenes were redrawn so each list row 
 
 ## Icons (`img/icons/`, 48x48, single `currentColor`)
 
-91 icons: 55 adapted from Health Icons, 36 drawn new.
+92 icons: 55 adapted from Health Icons, 37 drawn new.
 
 People are drawn without eyes, mouths or other facial features, in the scenes and in the icons. The only exceptions are icons where the feature is the sign itself: `eye`, `eye-blurred`, `eye-sunken` (the eye region only) and `stroke-face` (the drooping mouth only).
 
@@ -80,7 +80,7 @@ People are drawn without eyes, mouths or other facial features, in the scenes an
 
 Health Icons has nothing close enough for these, so they were drawn in the same weight and style:
 
-`birth-plan`, `car`, `chest-indrawing`, `choking`, `clock`, `convulsion`, `cool-water`, `cord`, `cup-spoon`, `dog`, `drops`, `eye-sunken`, `family`, `food-iron`, `house`, `jaundice`, `midwife`, `milestones`, `moon`, `newborn-warm`, `no-drink`, `ors`, `rash`, `rest`, `sad`, `salt`, `skin-pinch`, `sleepy`, `stool-blood`, `stove`, `stroke-face`, `swelling`, `toys-play`, `water`, `waters`, `window`
+`birth-plan`, `car`, `chest-indrawing`, `choking`, `clock`, `convulsion`, `cool-water`, `cord`, `cup-spoon`, `dog`, `drops`, `eye-sunken`, `family`, `food-iron`, `house`, `jaundice`, `midwife`, `milestones`, `moon`, `newborn-warm`, `no-drink`, `ors`, `phone-in` (a phone with an arrow going in: getting records from a file), `rash`, `rest`, `sad`, `salt`, `skin-pinch`, `sleepy`, `stool-blood`, `stove`, `stroke-face`, `swelling`, `toys-play`, `water`, `waters`, `window`
 
 ## Health Icons MIT licence
 

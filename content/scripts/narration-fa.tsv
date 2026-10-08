@@ -222,6 +222,7 @@ ui.fam.note.ask	اول از داکتر بپرسید: آیا می‌توانم گ
 ui.fam.note.rec	برای شروع، میکروفون را بزنید. برای ختم، دوباره بزنید.	Tap the microphone to start. Tap again to stop.
 ui.fam.note.text	می‌توانید یک یادداشت کوتاه بنویسید هم. لازم نیست.	You can also write a short note. You can skip this.
 ui.fam.note.date	روز مراجعه.	The day of the visit.
+ui.fam.note.list	گپ‌های ثبت شده، تازه‌ترین اول. برای شنیدن، دکمهٔ پخش را بزنید.	The saved notes, newest first. Tap the play button to listen.
 ui.fam.rd.lead	این‌ها اندازه‌های فشار خون و شکر است که از «این عدد چه معنی دارد؟» ثبت کرده‌اید. آن‌ها را به داکتر نشان دهید.	These are the blood pressure and sugar readings you saved from 'What does the number mean?'. Show them to the doctor.
 ui.fam.rd.open	یک اندازهٔ تازه را ببینید.	Check a new reading.
 ui.fam.rd.save	این اندازه را در خانوادهٔ من ثبت کنید تا به داکتر نشان دهید.	Save this reading in My family, to show the doctor.
@@ -244,6 +245,12 @@ ui.fam.storage	معلومات خانوادهٔ شما، با صداها و عک�
 ui.fam.np	عدد را با دکمه‌های کلان بزنید. گوشی هر عدد را می‌گوید. وقتی درست بود، «درست است» را بزنید.	Type the number with the big buttons. The phone says each number. Tap OK when it is right.
 ui.fam.np.ok	درست است، این عدد درست است.	OK, this number is right.
 ui.fam.none	هنوز کسی اضافه نشده. برای شروع «یک نفر را اضافه کنید» را بزنید.	No one is added yet. Tap 'Add a person' to start.
+ui.fam.voice	یک صدا را ثبت کنید، مثلاً گپ‌های داکتر. با یک بار زدن، ثبت شروع می‌شود. صدا فقط در همین گوشی می‌ماند.	Record a voice note, for example what the doctor said. One tap starts recording. It stays on this phone.
+ui.fam.voice.who	این صدا برای کیست؟ آن نفر را بزنید.	Who is this note for? Tap the person.
+ui.fam.voice.new	یک نفر نو: او را اضافه کنید، و صدا با او ثبت می‌شود.	A new person: add them, and the note is saved with them.
+ui.fam.voice.keep	فقط آن را در صداهای خانواده نگه دارید.	Just keep it in the family voice notes.
+ui.fam.voice.kept	در صداهای خانواده ثبت شد.	Saved in the family voice notes.
+ui.fam.voice.list	صداهای خانواده. برای شنیدن، دکمهٔ پخش را بزنید.	Family voice notes. Tap the play button to listen.
 ui.num.0	صفر	zero
 ui.num.1	یک	one
 ui.num.2	دو	two

@@ -222,6 +222,7 @@ ui.fam.note.ask	لومړی له ډاکټر وپوښتئ: ایا ستاسو خب�
 ui.fam.note.rec	د پیل لپاره مایکروفون ووهئ. د پای لپاره بیا یې ووهئ.	Tap the microphone to start. Tap again to stop.
 ui.fam.note.text	تاسو کولای شئ یو لنډ یادښت ولیکئ هم. اړینه نه ده.	You can also write a short note. You can skip this.
 ui.fam.note.date	د لیدنې ورځ.	The day of the visit.
+ui.fam.note.list	ثبت شوې خبرې، تر ټولو نوې لومړی. د اورېدو لپاره د غږولو تڼۍ ووهئ.	The saved notes, newest first. Tap the play button to listen.
 ui.fam.rd.lead	دا د وینې فشار او شکر هغه اندازې دي چې تاسو له «دا شمېره څه مانا لري؟» څخه ثبت کړې. ډاکټر ته یې وښایئ.	These are the blood pressure and sugar readings you saved from 'What does the number mean?'. Show them to the doctor.
 ui.fam.rd.open	یوه نوې اندازه وګورئ.	Check a new reading.
 ui.fam.rd.save	دا اندازه زما په کورنۍ کې ثبت کړئ چې ډاکټر ته یې وښایئ.	Save this reading in My family, to show the doctor.
@@ -244,6 +245,12 @@ ui.fam.storage	ستاسو د کورنۍ معلومات، له غږونو او ا
 ui.fam.np	شمېره په لویو تڼیو ووهئ. ټیلیفون هره شمېره وايي. کله چې سمه وه، «سمه ده» ووهئ.	Type the number with the big buttons. The phone says each number. Tap OK when it is right.
 ui.fam.np.ok	سمه ده، دا شمېره سمه ده.	OK, this number is right.
 ui.fam.none	تر اوسه هېڅوک نه دي زیات شوي. د پیل لپاره «یو کس زیات کړئ» ووهئ.	No one is added yet. Tap 'Add a person' to start.
+ui.fam.voice	یو غږ ثبت کړئ، لکه د ډاکټر خبرې. په یو ځل وهلو ثبت پیلېږي. غږ یوازې په همدې ټیلیفون کې پاتې کېږي.	Record a voice note, for example what the doctor said. One tap starts recording. It stays on this phone.
+ui.fam.voice.who	دا غږ د چا لپاره دی؟ هغه کس ووهئ.	Who is this note for? Tap the person.
+ui.fam.voice.new	نوی کس: هغه زیات کړئ، او غږ به له هغه سره ثبت شي.	A new person: add them, and the note is saved with them.
+ui.fam.voice.keep	یوازې یې د کورنۍ په غږونو کې وساتئ.	Just keep it in the family voice notes.
+ui.fam.voice.kept	د کورنۍ په غږونو کې ثبت شو.	Saved in the family voice notes.
+ui.fam.voice.list	د کورنۍ غږونه. د اورېدو لپاره د غږولو تڼۍ ووهئ.	Family voice notes. Tap the play button to listen.
 ui.num.0	صفر	zero
 ui.num.1	یو	one
 ui.num.2	دوه	two

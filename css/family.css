@@ -11,6 +11,10 @@
 .srowbig.fam.note .sbig{--c:#1F6F7A}
 .srowbig.fam.rd .sbig{--c:#8E2622}
 .srowbig.fam.edit .sbig{--c:#6B655E}
+/* "Record a voice note": the big red microphone on the family screen */
+.srowbig.fam.voice .sbig{--c:var(--red);min-height:96px}
+.srowbig.fam.voice .sbig svg{width:46px;height:46px}
+.srowbig.fam.keep .sbig{--c:#5B5550}
 .srowbig.fam .sbig .s{font-size:14.5px;font-weight:600;opacity:.92;line-height:1.35}
 .srowbig.fam.off .sbig,.srowbig.fam .sbig[aria-disabled=true]{opacity:.45}
 .spk.big{width:56px;height:56px}
@@ -50,15 +54,32 @@ img.mini{width:40px;height:40px;border-radius:999px;background:#F1ECE3;flex:0 0 
 .recbig{flex:1 1 auto;display:flex;align-items:center;gap:12px;min-height:72px;border-radius:20px;background:var(--red);color:#fff;padding:8px 16px;font-size:19px;font-weight:800;cursor:pointer}
 .recbig svg,.recbig .ic{width:34px;height:34px;flex:0 0 auto}
 .recbig.stop{background:#22201D}
+.recbig.stop svg{fill:currentColor}
 .recbig.photo{background:#5B5550}
 .recbig .rectime{margin-inline-start:auto;font-variant-numeric:tabular-nums}
+/* the voice note screen: a very big stop button, the time, and a beating red dot while it records */
+.fvoice .recbig{min-height:128px;font-size:24px}
+.fvoice .recbig svg{width:54px;height:54px}
+.fvoice .recbig .rectime{font-size:32px;display:flex;align-items:center}
+.fvoice .recbox.on .rectime:before{content:"";width:16px;height:16px;border-radius:999px;background:var(--red);margin:0 10px;-webkit-animation:recdot 1s infinite;animation:recdot 1s infinite}
+@-webkit-keyframes recdot{50%{opacity:.25}}
+@keyframes recdot{50%{opacity:.25}}
+.whohead{display:flex;align-items:center;gap:8px;background:var(--accent-t);border-radius:20px;padding:6px 10px;margin-bottom:12px}
+.whohead .trow{flex:1 1 auto;min-width:0}
+/* the family voice notes */
+.fvnotes .vnrow{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding:8px 0}
+.fvnotes .vnrow .d{flex:1 1 auto;min-width:0;font-size:16px;font-weight:700}
+.fvnotes .vnrow .mt{display:block;font-size:15px;font-weight:600;color:var(--ink)}
+.fvnotes .vnrow .mphoto{width:64px;height:64px}
+.fvnotes .sbtn.del{background:#fff;color:var(--red);border:1px solid var(--red)}
 .ftext{margin-bottom:12px}
 input.small,textarea.small{font:inherit;font-size:16px;width:100%;padding:8px 12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);min-height:48px}
 .trow.small .body{font-size:15px;color:var(--mute)}
 .fdate,.fweight{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:4px 12px 12px;margin-bottom:12px}
 .fweight h2{font-size:18px;margin:10px 0 2px}
-.fstore{display:flex;align-items:center;gap:8px;color:var(--mute);font-size:15px;margin:6px 0 12px}
-.fstore span{flex:1 1 auto}.fstore b{color:var(--ink)}
+.fstore{display:flex;align-items:center;gap:8px;color:var(--mute);font-size:13.5px;margin:18px 0 12px}
+.fstore span{flex:1 1 auto}.fstore b{color:var(--mute);font-weight:700}
+.spk.quiet{background:transparent;border-color:transparent;color:var(--mute)} /* only a size note: the speaker is there, but quiet */
 .sep{height:1px;background:var(--line);margin:12px 0}
 /* vaccines */
 .vline{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line)}

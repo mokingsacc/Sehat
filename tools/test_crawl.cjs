@@ -1,6 +1,7 @@
 // A crawl over the whole app as a phone gets it, in fa, ps and en at 320 and 360 px.
 // It opens the three tabs and every screen reachable from them (following every in-app link), every topic page,
-// Emergency and each age, each CPR animation, search, Settings, Share, and Family (adding a child and a woman),
+// Emergency and each age, each CPR animation, search, Settings, Share, and Family (adding a child and a woman, and
+// recording voice notes with the fake microphone: kept for the family, and given to a person),
 // and checks on every screen:
 //   - no console errors, page errors or failed requests (clips that are simply not there are allowed: the app falls back);
 //   - no sideways scroll;
@@ -130,10 +131,10 @@ function measure(MIN) {
 (async () => {
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   const BASE = `http://127.0.0.1:${server.address().port}/`;
-  const b = await chromium.launch();
+  const b = await chromium.launch({ args: ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'] }); // a fake microphone for the voice notes
   for (const width of WIDTHS) for (const lang of LANGS) {
     const run = `${lang}-${width}`;
-    const ctx = await b.newContext({ viewport: { width, height: 760 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+    const ctx = await b.newContext({ viewport: { width, height: 760 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, permissions: ['microphone'] });
     const p = await ctx.newPage(); let cur = '#/home';
     p.on('pageerror', (e) => prob('pageerror', cur, e.message.slice(0, 160), run));
     p.on('console', (m) => { if (m.type() === 'error') { const t = m.text(); if (!/Failed to load resource/.test(t)) prob('console', cur, t.slice(0, 160), run); } });
@@ -233,7 +234,23 @@ function measure(MIN) {
     await go('#/ask'); const syms = await p.$$eval('.sym', (x) => x.length);
     for (let i = 0; i < syms; i++) { await go('#/ask'); const s = await p.$$('.sym'); await s[i].click(); await settle(); const res = await p.$$eval('#askres a[href^="#/"]', (x) => x.length); if (!res) prob('search', `#/ask symptom ${i + 1}`, 'no results', run); }
 
-    // 4. Family: add a child and a woman, then every screen of their records
+    // 4. Family: a voice note with no one in the family yet: one tap records, Stop keeps it as a family voice note
+    const famNotes = () => p.evaluate(() => JSON.parse(localStorage.getItem('fhb.famnotes') || '[]').length);
+    const recordVoice = async (tag) => {
+      await go('#/family'); await p.click('a[href="#/family/voice"]'); cur = '#/family/voice';
+      if (!(await p.waitForSelector('.recbox.on [data-fam-rec]', { timeout: 6000 }).catch(() => null))) { prob('family', tag, 'one tap did not start recording', run); return false; }
+      await p.waitForTimeout(2300); await look('#/family/voice (recording)', '#/family', { shot: true });
+      await p.click('[data-fam-rec]'); return true;
+    };
+    {
+      const before = await famNotes();
+      if (await recordVoice('#/family/voice (no one yet)')) {
+        await p.waitForFunction((n) => location.hash === '#/family' && JSON.parse(localStorage.getItem('fhb.famnotes') || '[]').length === n + 1, before, { timeout: 6000 }).catch(() => prob('family', '#/family/voice', 'with no one in the family, the note was not kept as a family voice note', run));
+        await settle(); cur = '#/family'; await look('#/family (a family voice note)', '#/family/voice', { shot: true });
+        if (!(await p.$('.fvnotes [data-fam-play]'))) prob('family', '#/family', 'the family voice note is not listed', run);
+      }
+    }
+    // 5. Family: add a child and a woman, then every screen of their records
     for (const [pic, name] of [['child', lang === 'en' ? 'Abdul Rahman' : 'عبدالرحیم'], ['woman', lang === 'en' ? 'Zarghuna' : 'سپوږمۍ ګلالۍ']]) {
       await go('#/family'); await go('#/family/add');
       await p.click(`[data-fam-pic="${pic}"]`); await p.waitForTimeout(150);
@@ -254,6 +271,20 @@ function measure(MIN) {
     await go('#/family'); await look('#/family (2 people)', '#/family/person', { shot: true });
     const people = await p.$$eval('main .pcard', (x) => x.length);
     if (people !== 2) prob('family', '#/family', `${people} people listed after adding 2`, run);
+    // a voice note with people: "Who is this note for?", then saved in that person's doctor's notes
+    if (await recordVoice('#/family/voice (2 people)')) {
+      if (!(await p.waitForSelector('[data-fam-voiceto]', { timeout: 6000 }).catch(() => null))) prob('family', '#/family/voice', 'no "Who is this note for?" after Stop', run);
+      else {
+        await settle(); await look('#/family/voice (who is it for?)', '#/family/voice', { shot: true });
+        const n = await p.$$eval('[data-fam-voiceto]', (x) => x.length); if (n !== 2) prob('family', '#/family/voice', `${n} people to choose from, not 2`, run);
+        for (const sel of ['[data-fam="voice-new"]', '[data-fam="voice-keep"]']) if (!(await p.$(sel))) prob('family', '#/family/voice', `no ${sel}`, run);
+        await p.click('[data-fam-voiceto]'); await p.waitForTimeout(600); await settle(); cur = '#/family/notes';
+        const h = await p.evaluate(() => location.hash); if (h !== '#/family/notes') prob('family', '#/family/voice', `choosing a person opens ${h}, not their doctor's notes`, run);
+        const got = await p.evaluate(() => { const k = JSON.parse(localStorage.getItem('fhb.kids')), id = JSON.parse(localStorage.getItem('fhb.kid')); const x = k.find((y) => y.id === id); return x ? x.notes.length : -1; });
+        if (got !== 1) prob('family', '#/family/notes', `${got} notes for the chosen person, not 1`, run);
+        await look('#/family/notes (a voice note)', '#/family/voice', { shot: true });
+      }
+    }
     // the Health tab with a child in the family
     await go('#/home'); await look('#/home', '#/family', { shot: true });
     await ctx.close();

@@ -1,16 +1,17 @@
 // Sehat family records (#/family): a card for each person (baby, child, woman, man) with the name said in their own
 // voice; vaccines (the child schedule, or the women's tetanus vaccine), growth or weight, medicines with reminders,
-// what the doctor said, and saved blood pressure and sugar readings. Voice first: every line has a big speaker,
+// what the doctor said, and saved blood pressure and sugar readings. "Record a voice note" on the main screen records
+// straight away, then asks whose note it is (or keeps it as a family voice note, "fhb.famnotes"). Voice first: every line has a big speaker,
 // numbers come from the big number pad (js/numpad.js), typing is always optional. Recordings and photos are kept in
 // IndexedDB ("sehat-family"), the rest with the people in localStorage ("fhb.kids"). "Copy records to another phone"
 // makes one zip file. Nothing leaves the phone unless the person sends that file. The data rules: js/family-data.js.
 import { PICS, isAdult, isChild, migrate, tdPlan, TD, adultAdvice, BMI_LV, numIds, sizeOf, TIMES, dueMeds, markTaken, snooze, medActive, daysLeft,
-  mediaIds, makeBundle, readBundle, mergePeople, BUNDLE, MEDIA_RE, newId, localDay, dayDiff } from './family-data.js';
+  mediaIds, makeBundle, readBundle, mergePeople, BUNDLE, MEDIA_RE, newId, localDay, dayDiff, cleanNotes, noteMediaIds, mergeNotes } from './family-data.js';
 import { makeZip, readZip } from './zip.js';
 import { APPS } from './share.js';
 
 export function initFamily(ctx) {
-  const { S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, disclaimer, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP } = ctx;
+  const { S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP } = ctx;
   const say = (id) => L(S.book.narration[id]);
   const big = (id) => spk(id).replace('class="spk', 'class="spk big');
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${big(id)}</div>`;
@@ -22,7 +23,7 @@ export function initFamily(ctx) {
   const go = (h) => { if (location.hash === h) rerender(); else location.hash = h; };
   const PIC_KEY = { baby: 'picBaby', child: 'picChild', woman: 'picWoman', man: 'picMan' };
   const picSrc = (p) => `img/pics/person-${PICS.includes(p && p.pic) ? p.pic : 'child'}.svg`;
-  const F = { draft: null, med: null, rec: null, shown: {}, remind: null, urls: {} };
+  const F = { draft: null, med: null, rec: null, shown: {}, remind: null, urls: {}, pending: null, saving: 0, prev: '', cur: location.hash };
 
   /* ---------- people ---------- */
   const m0 = migrate(S.kids); S.kids = m0.list; if (m0.changed) saveKids();
@@ -35,6 +36,10 @@ export function initFamily(ctx) {
   }
   const touch = (p) => { p.u = Date.now(); saveKids(); };
   const children = () => S.kids.filter(isChild);
+  // family voice notes that belong to no one person (and the ones kept when no one was chosen)
+  let GN = cleanNotes(store.get('famnotes', []));
+  const saveGN = () => store.set('famnotes', GN);
+  function keepGeneral(rec) { GN.push({ id: newId('g'), d: todayISO(), t: Date.now(), rec }); saveGN(); track('tool', { p: 'family-voice-keep' }); }
 
   /* ---------- recordings and photos: IndexedDB ---------- */
   const MS = {
@@ -67,16 +72,19 @@ export function initFamily(ctx) {
     await MS.put(id, { blob, type: blob.type || 'application/octet-stream', bytes: blob.size, d: Date.now() });
     return id;
   }
-  // delete recordings and photos that no person refers to any more (not while a form is open)
+  // delete recordings and photos that no person and no family voice note refers to any more (not while a form is
+  // open, while recording, or while a recording is being saved)
   async function gc() {
-    if (F.draft) return;
-    const used = new Set(); S.kids.forEach((p) => mediaIds(p).forEach((x) => used.add(x)));
+    if (F.draft || F.rec || F.saving) return;
     const keys = (await MS.keys()) || [];
+    if (F.draft || F.rec || F.saving) return;
+    const used = new Set(noteMediaIds(GN)); S.kids.forEach((p) => mediaIds(p).forEach((x) => used.add(x)));
+    if (F.pending) used.add(F.pending.rec);
     for (const k of keys) if (!used.has(k)) await MS.del(k);
   }
   async function storageBytes() {
     const all = (await MS.all()) || [];
-    return all.reduce((s, x) => s + ((x && x.bytes) || 0), 0) + JSON.stringify(S.kids).length * 2;
+    return all.reduce((s, x) => s + ((x && x.bytes) || 0), 0) + (JSON.stringify(S.kids).length + JSON.stringify(GN).length) * 2;
   }
   async function showStorage() {
     const el = $('#fam-storage'); if (!el) return;
@@ -117,7 +125,9 @@ export function initFamily(ctx) {
     return h;
   }
   function redrawRec(field, sayId) { const el = $('#rec-' + field); if (el) el.outerHTML = recBox(field, sayId, el.querySelector('[data-max]') && el.querySelector('[data-max]').dataset.max); }
-  async function startRec(field, max, sayId) {
+  // done (optional): called with the saved recording's id (or null when nothing was recorded) and its length in seconds,
+  // in place of putting it in the open form
+  async function startRec(field, max, sayId, done) {
     if (F.rec) { stopRec(); return; }
     stopAudio(); A.pause();
     let stream;
@@ -126,12 +136,14 @@ export function initFamily(ctx) {
     let rec;
     try { rec = new MediaRecorder(stream, type ? { mimeType: type, audioBitsPerSecond: 16000 } : undefined); } catch (e) { stream.getTracks().forEach((t) => t.stop()); toast(T('micDenied')); return; }
     const chunks = [];
-    F.rec = { field, rec, stream, t0: Date.now(), sayId, timer: 0 };
+    const t0 = Date.now();
+    F.rec = { field, rec, stream, t0, sayId, timer: 0 };
     rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
     rec.onstop = async () => {
       stream.getTracks().forEach((t) => t.stop());
       const blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
       F.rec = null;
+      if (done) { F.saving++; const id = blob.size > 200 ? await saveBlob(blob, 'a') : null; try { done(id, (Date.now() - t0) / 1000); } finally { F.saving--; } return; }
       if (blob.size > 200 && F.draft) { F.draft[field] = await saveBlob(blob, 'a'); }
       redrawRec(field, sayId);
     };
@@ -200,16 +212,77 @@ export function initFamily(ctx) {
     for (const p of S.kids) {
       html += `<div class="pcard" data-block="pc-${esc(p.id)}"><button type="button" class="pgo" data-fam-open="${esc(p.id)}">${picImg(p)}<span class="pt"><span class="pn">${esc(nameOf(p))}</span><span class="pm">${esc(personSub(p))}</span></span></button>${nameBtn(p)}</div>`;
     }
-    ids.push('ui.fam.add', 'ui.fam.copy');
+    ids.push('ui.fam.add', 'ui.fam.voice');
     html += bigRow('#/family/add', I.plus, T('addPerson'), '', 'ui.fam.add', 'add');
-    if (S.kids.length) html += bigRow('#/family/copy', ic('phone'), T('copyRecords'), T('copyRecordsSub'), 'ui.fam.copy', 'copy');
-    else html += bigRow('', ic('phone'), T('getRecords'), '', 'ui.fam.x.import', 'copy', ' data-fam="import"');
-    html += storageLine();
-    html += disclaimer();
+    // one tap records straight away (#/family/voice)
+    html += bigRow('#/family/voice', I.mic, T('voiceNote'), T('voiceNoteSub'), 'ui.fam.voice', 'voice');
+    if (GN.length) { ids.push('ui.fam.voice.list'); html += voiceList(); }
+    // rarely used: below the voice button
+    if (S.kids.length) { ids.push('ui.fam.copy'); html += bigRow('#/family/copy', ic('phone'), T('copyRecords'), T('copyRecordsSub'), 'ui.fam.copy', 'copy'); }
+    else { ids.push('ui.fam.x.import'); html += bigRow('', ic('phone-in'), T('getRecords'), '', 'ui.fam.x.import', 'copy', ' data-fam="import"'); }
+    // the space used: only when something is kept, as a quiet line at the bottom
+    if (S.kids.length || GN.length) html += storageLine();
     setTimeout(() => { showStorage(); gc(); }, 0);
     return { html, nav: 'family' };
   }
-  const storageLine = () => `<div class="fstore" id="fam-storage" data-ids="ui.fam.storage"><span>${esc(T('storageUse', { n: '' }))}</span><b>…</b><button type="button" class="spk big" data-fam-ids="#fam-storage" aria-label="${esc(T('listen'))}">${I.spk}</button></div>`;
+  const storageLine = () => `<div class="fstore" id="fam-storage" data-ids="ui.fam.storage"><span>${esc(T('storageUse', { n: '' }))}</span><b>…</b><button type="button" class="spk big quiet" data-fam-ids="#fam-storage" aria-label="${esc(T('listen'))}">${I.spk}</button></div>`;
+  // the family voice notes: play and delete, newest first
+  function voiceList() {
+    const list = GN.slice().sort((a, b) => (a.d < b.d ? 1 : a.d > b.d ? -1 : (b.t || 0) - (a.t || 0)));
+    const when = (n) => fmtDate(n.d) + (n.t ? ' · ' + num(String(new Date(n.t).getHours()).padStart(2, '0')) + ':' + num(String(new Date(n.t).getMinutes()).padStart(2, '0')) : '');
+    return `<div class="panel fvnotes">${headSay(`<h2>${esc(T('famVoiceNotes'))}</h2>`, 'ui.fam.voice.list')}${list.map((n) => `<div class="vnrow">${playBtn(n.rec, 'big')}<span class="d">${esc(when(n))}</span><button type="button" class="sbtn del" data-fam-delgn="${esc(n.id)}">${esc(T('delete'))}</button></div>`).join('')}</div>`;
+  }
+
+  /* ---------- #/family/voice: record a voice note, then say whose it is ---------- */
+  const VMAX = 600; // 10 minutes (about 1 MB)
+  function screenVoice() {
+    if (!F.draft || F.draft.for !== 'voice') F.draft = { for: 'voice', rec: null, stage: 'rec', auto: true };
+    const d = F.draft;
+    if (d.stage === 'who' && d.rec) return screenWho(d);
+    const ids = ['ui.fam.note.ask', 'ui.fam.note.rec'];
+    let html = top(T('voiceTitle'), { back: '#/family' }) + listenBar(ids);
+    // the reminder to ask the doctor first: a short spoken line, not a step (it is not said by itself: the phone is recording)
+    html += `<div class="askfirst">${ic('talk')}${sayRow('ui.fam.note.ask', 'trow')}</div>`;
+    html += `<div class="fvoice">${recBox('rec', 'ui.fam.note.rec', VMAX)}</div>`;
+    if (d.auto) {
+      d.auto = false;
+      setTimeout(() => { if (location.hash === '#/family/voice' && F.draft === d && !F.rec && !d.rec) startRec('rec', VMAX, 'ui.fam.note.rec', voiceDone); }, 0);
+    }
+    return { html, nav: 'family' };
+  }
+  // the recording is saved: whose is it? (with no one in the family yet, it is a family voice note)
+  function voiceDone(id, secs) {
+    const d = F.draft, here = d && d.for === 'voice' && location.hash === '#/family/voice';
+    if (!here) { if (id && secs >= 2) { keepGeneral(id); toast(T('savedOk')); } return; } // left while recording: kept, unless it was a slip
+    if (!id) { redrawRec('rec', 'ui.fam.note.rec'); return; }
+    d.rec = id;
+    track('tool', { p: 'family-voice' });
+    if (!S.kids.length) { F.draft = null; keepGeneral(id); voiceSaved('#/family', ['ui.fam.voice.kept']); return; }
+    d.stage = 'who'; rerender();
+    play(['ui.fam.voice.who'], { quiet: true });
+  }
+  function screenWho(d) {
+    const ids = ['ui.fam.voice.who'];
+    let html = top(T('whoseNote'), { back: '#/family' }) + listenBar(ids);
+    html += `<div class="whohead">${playBtn(d.rec, 'big')}${sayRow('ui.fam.voice.who', 'trow dq')}</div>`;
+    html += `<div class="pchoose">${S.kids.map((p) => `<div class="pcard" data-block="vw-${esc(p.id)}"><button type="button" class="pgo" data-fam-voiceto="${esc(p.id)}">${picImg(p)}<span class="pt"><span class="pn">${esc(nameOf(p))}</span></span></button>${nameBtn(p)}</div>`).join('')}</div>`;
+    ids.push('ui.fam.voice.new', 'ui.fam.voice.keep');
+    html += bigRow('', I.plus, T('newPerson'), '', 'ui.fam.voice.new', 'add', ' data-fam="voice-new"');
+    html += bigRow('', I.check, T('justKeep'), '', 'ui.fam.voice.keep', 'keep', ' data-fam="voice-keep"');
+    return { html, nav: 'family' };
+  }
+  // leave the voice note screens without leaving them in the back button's way
+  function voiceSaved(to, say) {
+    toast(T('savedOk')); play(say, { quiet: true });
+    if (to === '#/family' && F.prev === '#/family' && history.length > 1) history.back(); else location.replace(to);
+  }
+  function voiceTo(pid) {
+    const d = F.draft, p = S.kids.find((x) => x.id === pid); if (!d || !d.rec || !p) return;
+    p.notes = p.notes || []; p.notes.push({ id: newId('n'), d: todayISO(), rec: d.rec, text: '' });
+    S.kid = p.id; F.draft = null; touch(p);
+    track('tool', { p: 'family-voice-person' });
+    voiceSaved('#/family/notes', ['ui.fam.saved']);
+  }
 
   /* ---------- add or change a person ---------- */
   function screenForm(isNew) {
@@ -250,9 +323,13 @@ export function initFamily(ctx) {
     if (!p) { p = { id: newId('k'), v: 2, given: {}, td: {}, weights: [], meds: [], notes: [], readings: [] }; S.kids.push(p); }
     p.pic = d.pic; p.sex = d.pic === 'woman' ? 'f' : d.pic === 'man' ? 'm' : d.sex; p.name = d.name; p.nameRec = d.nameRec || null;
     if (isChild(p)) p.dob = d.dob; else delete p.dob;
-    S.kid = p.id; F.draft = null; touch(p);
+    S.kid = p.id; F.draft = null;
+    // a voice note recorded first ("New person" on "Whose note is this?") is saved for them
+    const vn = isNew ? F.pending : null;
+    if (vn) { p.notes.push({ id: newId('n'), d: vn.d, rec: vn.rec, text: '' }); F.pending = null; track('tool', { p: 'family-voice-person' }); }
+    touch(p);
     if (isNew) { track('kid', { n: S.kids.length }); track('tool', { p: 'family-add-' + p.pic }); }
-    toast(T('savedOk')); go('#/family/person'); gc();
+    toast(T('savedOk')); go(vn ? '#/family/notes' : '#/family/person'); gc();
   }
 
   /* ---------- #/family/person: one person's record ---------- */
@@ -316,7 +393,6 @@ export function initFamily(ctx) {
       if (t.next < 0) { ids.push('ui.fam.td.done'); html += sayRow('ui.fam.td.done', 'blk tip trow'); }
     } else return screenPerson();
     html = html.replace(/(<div class="(?:agechip|blk))/, listenBar(ids) + '$1');
-    html += disclaimer();
     return { html, nav: 'family' };
   }
   function doseDialog(title, sub, given, onGive, onUngive) {
@@ -357,7 +433,6 @@ export function initFamily(ctx) {
     if (ws.length > 1) html += weightChart(ws.slice().reverse());
     const wsay = ws.length ? 'ui.fam.weights' : 'ui.fam.no-weights';
     html += `<div class="panel">${headSay(`<h2>${esc(T('weights'))}</h2>`, wsay)}${ws.length ? ws.map((e) => `<div class="grow-row"><div class="gr-open"><span class="d">${esc(fmtDate(e.d))}</span><span class="v">${esc(dec(num(String(e.kg))))} ${esc(T('kg'))}</span></div><button type="button" class="gr-del" data-fam-delw="${esc(e.id)}" aria-label="${esc(T('delete'))}">×</button></div>`).join('') : `<p class="muted">${esc(T('noWeights'))}</p>`}</div>`;
-    html += disclaimer();
     return { html, nav: 'family', adult: true };
   }
   function weightChart(ws) {
@@ -398,7 +473,6 @@ export function initFamily(ctx) {
     html += bigRow('#/family/med-add', I.plus, T('addMed'), '', 'ui.fam.row.meds', 'add');
     const list = (p.meds || []).slice().sort((a, b) => (medActive(b) - medActive(a)) || (a.d < b.d ? 1 : -1));
     html += list.length ? list.map((m) => medCard(p, m)).join('') : emptyRow('ui.fam.no-meds', ids);
-    html += disclaimer();
     setTimeout(fillImages, 0);
     return { html, nav: 'family' };
   }
@@ -459,7 +533,9 @@ export function initFamily(ctx) {
     let html = top(T('rowNotes') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.note.lead', 'blk lead trow');
     html += bigRow('#/family/note-add', ic('talk'), T('addNote'), '', 'ui.fam.row.notes', 'add');
     const list = (p.notes || []).slice().sort((a, b) => (a.d < b.d ? 1 : -1));
-    html += list.length ? list.map((n) => `<div class="medcard"><div class="mtop"><span class="mphoto none">${ic('talk')}</span><div class="mtx"><div class="mm">${esc(fmtDate(n.d))}</div>${n.text ? `<div class="mt">${esc(n.text)}</div>` : ''}</div>${n.rec ? playBtn(n.rec, 'big') : ''}</div><div class="mbtns"><button type="button" class="sbtn" data-fam-delnote="${esc(n.id)}">${esc(T('delete'))}</button></div></div>`).join('') : emptyRow('ui.fam.no-notes', ids);
+    // the notes in one panel, newest first: its speaker covers the dates (and any typed words)
+    if (list.length) ids.push('ui.fam.note.list');
+    html += list.length ? `<div class="panel fvnotes">${headSay(`<h2>${esc(T('rowNotes'))}</h2>`, 'ui.fam.note.list')}${list.map((n) => `<div class="vnrow">${n.rec ? playBtn(n.rec, 'big') : `<span class="mphoto none">${ic('talk')}</span>`}<span class="d">${esc(fmtDate(n.d))}${n.text ? `<span class="mt">${esc(n.text)}</span>` : ''}</span><button type="button" class="sbtn del" data-fam-delnote="${esc(n.id)}">${esc(T('delete'))}</button></div>`).join('')}</div>` : emptyRow('ui.fam.no-notes', ids);
     return { html, nav: 'family' };
   }
   function screenNoteAdd() {
@@ -543,20 +619,20 @@ export function initFamily(ctx) {
       html += bigRow('', ic('phone'), T('sendFileTo'), '', 'ui.fam.x.other', 'x', ' data-fam-x="web"');
       html += bigRow('', ic('card'), T('saveFile'), '', 'ui.fam.x.save', 'x', ' data-fam-x="save"');
     }
-    html += `<div class="sep"></div>` + bigRow('', ic('card'), T('getRecords'), '', 'ui.fam.x.import', 'imp', ' data-fam="import"');
+    html += `<div class="sep"></div>` + bigRow('', ic('phone-in'), T('getRecords'), '', 'ui.fam.x.import', 'imp', ' data-fam="import"');
     html += storageLine();
     setTimeout(showStorage, 0);
     return { html, nav: 'family' };
   }
   async function buildZip() {
     const files = [], media = [];
-    const ids = new Set(); S.kids.forEach((p) => mediaIds(p).forEach((x) => ids.add(x)));
+    const ids = new Set(noteMediaIds(GN)); S.kids.forEach((p) => mediaIds(p).forEach((x) => ids.add(x)));
     for (const id of ids) {
       const r = await MS.get(id); if (!r || !r.blob) continue;
       files.push({ name: 'media/' + id, data: new Uint8Array(await r.blob.arrayBuffer()) });
       media.push({ id, type: r.type || r.blob.type });
     }
-    const json = JSON.stringify(makeBundle(S.kids, media));
+    const json = JSON.stringify(makeBundle(S.kids, media, new Date(), GN));
     files.unshift({ name: BUNDLE, data: new TextEncoder().encode(json) });
     return makeZip(files);
   }
@@ -591,10 +667,11 @@ export function initFamily(ctx) {
       const blob = new Blob([f.data], { type: m.type });
       await MS.put(m.id, { blob, type: m.type, bytes: blob.size, d: Date.now() });
     }
-    const res = mergePeople(S.kids, bundle.people);
+    const res = mergePeople(S.kids, bundle.people), rn = mergeNotes(GN, bundle.notes);
     S.kids = res.list; if (!S.kid && S.kids[0]) S.kid = S.kids[0].id; saveKids();
+    GN = rn.list; saveGN();
     track('tool', { p: 'family-import' });
-    toast(T('importDone', { n: num(res.added + res.updated) })); play(['ui.fam.x.done'], { quiet: true });
+    toast(res.added + res.updated || !rn.added ? T('importDone', { n: num(res.added + res.updated) }) : T('savedOk')); play(['ui.fam.x.done'], { quiet: true });
     go('#/family');
   }
   function pickFile() {
@@ -613,7 +690,7 @@ export function initFamily(ctx) {
     F.draft.photo = await saveBlob(small, 'p'); ctx.render();
   });
   document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-fam],[data-fam-open],[data-fam-play],[data-fam-rec],[data-fam-pic],[data-fam-sex],[data-fam-visit],[data-fam-td],[data-fam-slot],[data-fam-delw],[data-fam-delmed],[data-fam-delnote],[data-fam-delrd],[data-fam-taken],[data-fam-later],[data-fam-x],[data-fam-ids]');
+    const t = e.target.closest('[data-fam],[data-fam-open],[data-fam-play],[data-fam-rec],[data-fam-pic],[data-fam-sex],[data-fam-visit],[data-fam-td],[data-fam-slot],[data-fam-delw],[data-fam-delmed],[data-fam-delnote],[data-fam-delrd],[data-fam-delgn],[data-fam-voiceto],[data-fam-taken],[data-fam-later],[data-fam-x],[data-fam-ids]');
     if (!t) return;
     const d = t.dataset;
     if (t.tagName === 'A' && !d.famOpen) return;
@@ -621,7 +698,9 @@ export function initFamily(ctx) {
     if (d.famOpen) { S.kid = d.famOpen; saveKids(); go('#/family/person'); return; }
     if (d.famPlay !== undefined) { playRec(d.famPlay, t); return; }
     if (d.famIds) { const el = $(d.famIds); if (el) play((el.dataset.ids || '').split(',').filter(Boolean)); return; }
-    if (d.famRec) { const box = t.closest('.recbox'), sid = box && box.querySelector('[data-say]') ? box.querySelector('[data-say]').dataset.say : ''; if (F.rec) stopRec(); else startRec(d.famRec, +(d.max || 120), sid); return; }
+    if (d.famRec) { const box = t.closest('.recbox'), sid = box && box.querySelector('[data-say]') ? box.querySelector('[data-say]').dataset.say : ''; if (F.rec) stopRec(); else startRec(d.famRec, +(d.max || 120), sid, F.draft && F.draft.for === 'voice' ? voiceDone : null); return; }
+    if (d.famVoiceto) { voiceTo(d.famVoiceto); return; }
+    if (d.famDelgn) { if (!confirm(T('deleteThisQ'))) return; stopAudio(); A.pause(); GN = GN.filter((x) => x.id !== d.famDelgn); saveGN(); ctx.render(); gc(); return; }
     if (d.famPic) { if (F.draft) { const inp = $('[data-fam-in="name"]'); if (inp) F.draft.name = inp.value; const f = $('#fam-dob'); if (f) F.draft.dob = readDob(); F.draft.pic = d.famPic; } ctx.render(); return; }
     if (d.famSex) { if (F.draft) F.draft.sex = d.famSex; $$('[data-fam-sex]').forEach((b) => b.setAttribute('aria-pressed', b === t)); return; }
     if (d.famSlot) { const dr = F.draft; if (!dr) return; const i = dr.times.indexOf(d.famSlot); if (i < 0) dr.times.push(d.famSlot); else dr.times.splice(i, 1); t.setAttribute('aria-pressed', i < 0); return; }
@@ -651,21 +730,26 @@ export function initFamily(ctx) {
       case 'save-med': saveMed(); return;
       case 'save-note': saveNote(); return;
       case 'import': pickFile(); return;
+      case 'voice-keep': { const dr = F.draft; if (!dr || dr.for !== 'voice' || !dr.rec) return; F.draft = null; keepGeneral(dr.rec); voiceSaved('#/family', ['ui.fam.voice.kept']); return; }
+      case 'voice-new': { const dr = F.draft; if (!dr || dr.for !== 'voice' || !dr.rec) return; F.pending = { rec: dr.rec, d: todayISO() }; F.draft = null; location.replace('#/family/add'); return; }
     }
   });
-  // leaving a form drops its draft (and the recordings nobody kept)
+  // leaving a form drops its draft (and the recordings nobody kept). A voice note is never lost: one not yet given to
+  // a person is kept as a family voice note.
   addEventListener('hashchange', () => {
     const h = location.hash;
+    F.prev = F.cur; F.cur = h;
+    if (F.pending && h !== '#/family/add') { keepGeneral(F.pending.rec); F.pending = null; toast(T('savedOk')); }
     if (!F.draft) return;
-    const f = F.draft.for, keep = (f === '_new' && h === '#/family/add') || (f.startsWith('med:') && h === '#/family/med-add') || (f.startsWith('note:') && h === '#/family/note-add') || (!/^(_new|med:|note:)/.test(f) && h === '#/family/edit');
-    if (!keep) { F.draft = null; setTimeout(gc, 500); }
+    const f = F.draft.for, keep = (f === '_new' && h === '#/family/add') || (f.startsWith('med:') && h === '#/family/med-add') || (f.startsWith('note:') && h === '#/family/note-add') || (f === 'voice' && h === '#/family/voice') || (!/^(_new|med:|note:|voice$)/.test(f) && h === '#/family/edit');
+    if (!keep) { if (f === 'voice' && F.draft.rec) { keepGeneral(F.draft.rec); toast(T('savedOk')); } F.draft = null; setTimeout(gc, 500); }
   });
 
   function screen(sub) {
     track('view', { p: 'family' });
     const r = {
       add: () => screenForm(true), edit: () => screenForm(false), person: screenPerson, vacc: screenVacc, weight: screenWeight,
-      meds: screenMeds, 'med-add': screenMedAdd, notes: screenNotes, 'note-add': screenNoteAdd, readings: screenReadings, copy: screenCopy,
+      meds: screenMeds, 'med-add': screenMedAdd, notes: screenNotes, 'note-add': screenNoteAdd, readings: screenReadings, copy: screenCopy, voice: screenVoice,
     }[sub];
     const out = r ? r() : screenList();
     setTimeout(fillImages, 0);

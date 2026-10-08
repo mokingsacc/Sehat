@@ -93,6 +93,18 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   const mine = [{ id: 'a', u: 10, name: 'mine' }, { id: 'b', u: 10, name: 'old' }];
   const r = D.mergePeople(mine, [{ id: 'a', u: 5, name: 'older copy' }, { id: 'b', u: 20, name: 'newer' }, { id: 'c', u: 1, name: 'new' }]);
   eq([r.added, r.updated, r.list.map((x) => x.name)], [1, 1, ['mine', 'newer', 'new']], 'merge: newer wins, nothing deleted');
+  // the family voice notes (no one person's) travel in the same file
+  const notes = [{ id: 'g1', d: '2026-10-08', t: 5, rec: 'a9abc' }];
+  eq(D.noteMediaIds(notes), ['a9abc'], 'family voice notes: media ids');
+  const nb = D.readBundle(JSON.parse(JSON.stringify(D.makeBundle(people, [], new Date(0), notes))));
+  eq(nb.notes, notes, 'family voice notes: bundle round trip');
+  eq(D.readBundle(JSON.parse(JSON.stringify(b))).notes, [], 'family voice notes: none in the file');
+  eq(D.readBundle({ app: 'sehat', kind: 'family', people: [] }).notes, [], 'family voice notes: a file from an older app');
+  eq(D.cleanNotes([{ id: 'g1', d: '2026-10-08', rec: 'a9abc', evil: 1 }, { id: 'g1', d: '2026-10-08', rec: 'a9abc' }, { id: '../x', d: '2026-10-08', rec: 'a9abc' }, { id: 'g2', d: 'bad', rec: 'a9abc' }, { id: 'g3', d: '2026-10-08', rec: '../../x' }, null, 'x']),
+    [{ id: 'g1', d: '2026-10-08', t: 0, rec: 'a9abc' }], 'family voice notes: bad rows and fields dropped');
+  eq(D.cleanNotes('nope'), [], 'family voice notes: not a list');
+  const mn = D.mergeNotes([{ id: 'g1' }], [{ id: 'g1' }, { id: 'g2' }]);
+  eq([mn.added, mn.list.map((x) => x.id)], [1, ['g1', 'g2']], 'family voice notes: merge adds the new ones only');
 }
 // zip: write and read back; a deflated file
 {
@@ -124,6 +136,10 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   for (const l of ['vthin', 'thin', 'ok', 'heavy', 'vheavy']) ids.add('ui.fam.bmi.' + l);
   eq([...ids].filter((k) => !book.narration[k]), [], 'narration ids exist');
   for (const id of ids) { const n = book.narration[id]; if (n) ok(n.fa && n.ps && n.en, id + ' has fa, ps, en'); }
+  // Mo: the "This book does not replace a doctor" box stays on the Health pages, not on the Family screens
+  ok(!/disclaimer/.test(readFileSync(ROOT + 'js/family.js', 'utf8')), 'Family screens have no "does not replace a doctor" box');
+  // old phones: no ?? or ?. in the family code
+  for (const f of ['js/family.js', 'js/family-data.js']) ok(!/\?\?|\?\.(?![0-9])/.test(readFileSync(ROOT + f, 'utf8').replace(/'[^'\n]*'|`[^`]*`|\/\/[^\n]*/g, '')), f + ': no ?? or ?. (old Android WebView)');
 }
 console.log(`${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

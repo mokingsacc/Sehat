@@ -4706,3 +4706,33 @@ For Mo to check (medical):
    step count; the look steps could become their own page later if Mo prefers.
 10. Pictures (`img/pics/look-*.svg`): check that the floppy baby, the soft spot (flat, sunken, bulging) and the mottled
    arm read clearly on a small phone.
+
+## Family: "Record a voice note" in place of the doctor box (8 Oct 2026, worker famvoice)
+
+Mo asked to drop "This book does not replace a doctor" from the Family screen and put a microphone there. The box is
+gone from every Family screen (main, vaccines, adult weight, medicines); it stays on the Health pages and in Settings.
+The Family main screen now has a big red "Record a voice note" button (speaker beside it). One tap opens
+`#/family/voice` and starts recording at once with the existing voice-note recorder (same microphone permission path
+in the Android app and on the web; webm/opus at 16 kbit/s, up to 10 minutes, about 1 MB). The screen shows a very big
+Stop button with a timer; the existing "First ask the doctor: may I record what you say?" line is shown there with its
+speaker (it is not played by itself, because the phone is already recording). After Stop: "Who is this note for?",
+with a big button per person (picture, name, speaker), "New person" and "Just keep it". With no one in the family yet
+the note is kept as a family voice note. A note given to a person goes into their Doctor's notes with today's date.
+Family voice notes are listed on the main screen (play, delete), kept in localStorage `fhb.famnotes`, and travel in
+the "Copy records to another phone" file (a file from an older app still reads). Leaving after Stop keeps the note as
+a family voice note; leaving while recording keeps it if it is 2 seconds or longer.
+
+Also: "Get records from a file" has a new icon (`img/icons/phone-in.svg`, a phone with an arrow going in) and sits
+below the voice button; the "On this phone: 10 KB" line shows only when something is kept, smaller and grey, with a
+quiet 56 px speaker (the crawl's rule: every text on Family has a speaker). A person's Doctor's notes are now one
+panel with a speaker (the dates had none). The Stop icon on all recorders is white (it was black on black).
+
+New narration ids (fa, ps, en; clips still to make): `ui.fam.voice`, `ui.fam.voice.who`, `ui.fam.voice.new`,
+`ui.fam.voice.keep`, `ui.fam.voice.kept`, `ui.fam.voice.list`, `ui.fam.note.list`. New button texts: `voiceNote`,
+`voiceNoteSub`, `voiceTitle`, `whoseNote`, `newPerson`, `justKeep`, `famVoiceNotes`.
+
+For Mo to check:
+1. Dari and Pashto wording of the new lines, especially "صدا را ثبت کنید" / "غږ ثبت کړئ" for "Record a voice note"
+   and "صداهای خانواده" / "د کورنۍ غږونه" for "Family voice notes".
+2. Is 10 minutes a good longest recording (the doctor's-notes form keeps 5)?
+3. The growth charts (`#/growth`, reached from a child's record) still show the doctor box: they are their own module.

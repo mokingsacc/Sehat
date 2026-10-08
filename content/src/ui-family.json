@@ -311,6 +311,41 @@
    "ps": "معلومات له فایل څخه واخلئ",
    "en": "Get records from a file"
   },
+  "voiceNote": {
+   "fa": "صدا را ثبت کنید",
+   "ps": "غږ ثبت کړئ",
+   "en": "Record a voice note"
+  },
+  "voiceNoteSub": {
+   "fa": "مثلاً گپ‌های داکتر",
+   "ps": "لکه د ډاکټر خبرې",
+   "en": "For example, what the doctor said"
+  },
+  "voiceTitle": {
+   "fa": "ثبت صدا",
+   "ps": "غږ ثبتول",
+   "en": "Voice note"
+  },
+  "whoseNote": {
+   "fa": "این صدا برای کیست؟",
+   "ps": "دا غږ د چا لپاره دی؟",
+   "en": "Who is this note for?"
+  },
+  "newPerson": {
+   "fa": "یک نفر نو",
+   "ps": "نوی کس",
+   "en": "New person"
+  },
+  "justKeep": {
+   "fa": "فقط نگه دارید",
+   "ps": "یوازې یې وساتئ",
+   "en": "Just keep it"
+  },
+  "famVoiceNotes": {
+   "fa": "صداهای خانواده",
+   "ps": "د کورنۍ غږونه",
+   "en": "Family voice notes"
+  },
   "saveFile": {
    "fa": "فایل را ذخیره کنید",
    "ps": "فایل خوندي کړئ",
@@ -713,6 +748,11 @@
    "ps": "د لیدنې ورځ.",
    "en": "The day of the visit."
   },
+  "ui.fam.note.list": {
+   "fa": "گپ‌های ثبت شده، تازه‌ترین اول. برای شنیدن، دکمهٔ پخش را بزنید.",
+   "ps": "ثبت شوې خبرې، تر ټولو نوې لومړی. د اورېدو لپاره د غږولو تڼۍ ووهئ.",
+   "en": "The saved notes, newest first. Tap the play button to listen."
+  },
   "ui.fam.rd.lead": {
    "fa": "این‌ها اندازه‌های فشار خون و شکر است که از «این عدد چه معنی دارد؟» ثبت کرده‌اید. آن‌ها را به داکتر نشان دهید.",
    "ps": "دا د وینې فشار او شکر هغه اندازې دي چې تاسو له «دا شمېره څه مانا لري؟» څخه ثبت کړې. ډاکټر ته یې وښایئ.",
@@ -822,6 +862,36 @@
    "fa": "هنوز کسی اضافه نشده. برای شروع «یک نفر را اضافه کنید» را بزنید.",
    "ps": "تر اوسه هېڅوک نه دي زیات شوي. د پیل لپاره «یو کس زیات کړئ» ووهئ.",
    "en": "No one is added yet. Tap 'Add a person' to start."
+  },
+  "ui.fam.voice": {
+   "fa": "یک صدا را ثبت کنید، مثلاً گپ‌های داکتر. با یک بار زدن، ثبت شروع می‌شود. صدا فقط در همین گوشی می‌ماند.",
+   "ps": "یو غږ ثبت کړئ، لکه د ډاکټر خبرې. په یو ځل وهلو ثبت پیلېږي. غږ یوازې په همدې ټیلیفون کې پاتې کېږي.",
+   "en": "Record a voice note, for example what the doctor said. One tap starts recording. It stays on this phone."
+  },
+  "ui.fam.voice.who": {
+   "fa": "این صدا برای کیست؟ آن نفر را بزنید.",
+   "ps": "دا غږ د چا لپاره دی؟ هغه کس ووهئ.",
+   "en": "Who is this note for? Tap the person."
+  },
+  "ui.fam.voice.new": {
+   "fa": "یک نفر نو: او را اضافه کنید، و صدا با او ثبت می‌شود.",
+   "ps": "نوی کس: هغه زیات کړئ، او غږ به له هغه سره ثبت شي.",
+   "en": "A new person: add them, and the note is saved with them."
+  },
+  "ui.fam.voice.keep": {
+   "fa": "فقط آن را در صداهای خانواده نگه دارید.",
+   "ps": "یوازې یې د کورنۍ په غږونو کې وساتئ.",
+   "en": "Just keep it in the family voice notes."
+  },
+  "ui.fam.voice.kept": {
+   "fa": "در صداهای خانواده ثبت شد.",
+   "ps": "د کورنۍ په غږونو کې ثبت شو.",
+   "en": "Saved in the family voice notes."
+  },
+  "ui.fam.voice.list": {
+   "fa": "صداهای خانواده. برای شنیدن، دکمهٔ پخش را بزنید.",
+   "ps": "د کورنۍ غږونه. د اورېدو لپاره د غږولو تڼۍ ووهئ.",
+   "en": "Family voice notes. Tap the play button to listen."
   },
   "ui.num.0": {
    "fa": "صفر",

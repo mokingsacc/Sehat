@@ -5,6 +5,8 @@
 //     weights [{id, d, kg?, cm?, pos?, muac?}] (growth for children, weight for adults), hcm (an adult's height, cm),
 //     preg (pregnant now), meds [...], notes [...], readings [...], u (last change, ms) }
 // Voice recordings and photos are blobs in IndexedDB (js/family.js); the person keeps only their ids.
+// Family voice notes that belong to no one person are kept in localStorage "fhb.famnotes" as [{ id, d (ISO date),
+// t (ms), rec (a media id) }].
 // MEDICAL DEFAULTS (docs/REVIEW.md, "Family records"):
 //   adult weight for height (BMI, kg/m²): under 16 very thin -> clinic this week; 16 to 18.4 a little thin; 18.5 to 24.9
 //   healthy; 25 to 29.9 a little heavy; 30 or more very heavy -> ask the clinic to check blood pressure and sugar.
@@ -135,12 +137,26 @@ export function mediaIds(p) {
   return ids;
 }
 export const MEDIA_RE = /^[a-z0-9]{4,40}$/;
-export function makeBundle(people, media, now = new Date()) {
+// the family voice notes (no one person's): only well-formed rows, at most 500
+export function cleanNotes(list) {
+  const out = [], seen = {};
+  for (const n of Array.isArray(list) ? list : []) {
+    if (!n || typeof n !== 'object' || typeof n.id !== 'string' || !/^[A-Za-z0-9_-]{1,40}$/.test(n.id) || seen[n.id]) continue;
+    if (typeof n.rec !== 'string' || !MEDIA_RE.test(n.rec)) continue;
+    const d = typeof n.d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(n.d) ? n.d : null; if (!d) continue;
+    seen[n.id] = 1; out.push({ id: n.id, d, t: typeof n.t === 'number' && isFinite(n.t) ? n.t : 0, rec: n.rec });
+    if (out.length >= 500) break;
+  }
+  return out;
+}
+export const noteMediaIds = (notes) => (notes || []).map((n) => n.rec).filter(Boolean);
+// notes: the family voice notes (they travel with the people)
+export function makeBundle(people, media, now = new Date(), notes = []) {
   // media: [{id, type, bytes}] (the blobs travel as separate files media/<id>)
-  return { app: 'sehat', kind: 'family', v: 1, made: now.toISOString(), people, media: media.map((x) => ({ id: x.id, type: x.type })) };
+  return { app: 'sehat', kind: 'family', v: 1, made: now.toISOString(), people, notes, media: media.map((x) => ({ id: x.id, type: x.type })) };
 }
 const KEEP = ['id', 'v', 'pic', 'sex', 'name', 'nameRec', 'dob', 'given', 'td', 'weights', 'hcm', 'preg', 'meds', 'notes', 'readings', 'u'];
-// checks a bundle from another phone; returns { people, media } with only the known fields, or null
+// checks a bundle from another phone; returns { people, notes, media } with only the known fields, or null
 export function readBundle(j) {
   if (!j || j.app !== 'sehat' || j.kind !== 'family' || !Array.isArray(j.people)) return null;
   const people = [];
@@ -153,7 +169,7 @@ export function readBundle(j) {
   }
   const { list } = migrate(people);
   const media = (Array.isArray(j.media) ? j.media : []).filter((m) => m && MEDIA_RE.test(m.id) && /^(audio|image)\/[a-z0-9.+;=-]+$/i.test(String(m.type || '')));
-  return { people: list, media };
+  return { people: list, notes: cleanNotes(j.notes), media };
 }
 // adds the people from another phone: a new person is added; the same person (same id) is replaced only when the
 // copy is newer. Nothing on this phone is deleted.
@@ -165,4 +181,10 @@ export function mergePeople(mine, theirs) {
     else if ((p.u || 0) > (out[i].u || 0)) { out[i] = p; updated++; }
   }
   return { list: out, added, updated };
+}
+// adds the family voice notes from another phone that this phone does not have yet
+export function mergeNotes(mine, theirs) {
+  const out = mine.slice(); let added = 0;
+  for (const n of theirs) if (!out.some((x) => x.id === n.id)) { out.push(n); added++; }
+  return { list: out, added };
 }
