@@ -94,7 +94,7 @@ else {
     ok(x.status === 200 && x.body.knownBase === false, 'Mo brings in the app changes', x.body && { kept: x.body.kept && x.body.kept.length });
     x = await call(W2, env, 'check', {});
     const errs = x.body.errors.map((e) => e.msg);
-    ok(errs.length === 73 && errs.includes('The safety list names "home-safety", but there is no such topic.'), 'reproduced: the check showed 73 errors like Mo saw', { n: errs.length, first: errs.slice(0, 2) });
+    ok(errs.length >= 73 && errs.includes('The safety list names "home-safety", but there is no such topic.'), 'reproduced: the check showed 73 or more errors like Mo saw (more now that the Emergency cards name more pages)', { n: errs.length, first: errs.slice(0, 2) });
     // why: the no-base merge took every part that differed from the app as an editor change, so the app's 77 new topics
     // (missing from the old draft) were deleted, while the new lists (safety, hospital, food, wellbeing) and the Emergency
     // screen, which were not editor units, came from the new app and still named them
