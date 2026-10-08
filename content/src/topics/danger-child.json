@@ -164,22 +164,6 @@
       ]
     },
     {
-      "id": "danger-child.counter",
-      "type": "link",
-      "to": "tool/breaths",
-      "icon": "breathing-fast",
-      "title": {
-        "fa": "نفس‌ها را با گوشی بشمارید",
-        "ps": "ساه په ټیلیفون وشمېرئ",
-        "en": "Count breaths with the phone"
-      },
-      "text": {
-        "fa": "گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.",
-        "ps": "ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.",
-        "en": "The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast."
-      }
-    },
-    {
       "id": "danger-child.soon",
       "type": "alert",
       "level": "soon",
@@ -232,6 +216,426 @@
             "fa": "کم می‌نوشد یا کم می‌خورد",
             "ps": "لږ څښي یا لږ خوري",
             "en": "is drinking or eating poorly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.look",
+      "type": "tip",
+      "icon": "eye",
+      "text": {
+        "fa": "ببینید، بشنوید و لمس کنید. در یک جای گرم و روشن، کالای طفل را باز کنید و نفس، پوست، پیشاب و حال طفل را ببینید.",
+        "ps": "وګورئ، واورئ او لمس یې کړئ. په یوه ګرم او روښانه ځای کې د ماشوم کالي خلاص کړئ، او ساه، پوستکی، متیازې او حال یې وګورئ.",
+        "en": "Look, listen and feel. In a warm, bright place, open the child's clothes and check the breathing, the skin, the wee and how the child seems."
+      }
+    },
+    {
+      "id": "danger-child.look-breath",
+      "type": "step",
+      "icon": "breathing-fast",
+      "picture": "chest-indrawing",
+      "title": {
+        "fa": "سینه را ببینید و نفس‌ها را بشمارید",
+        "ps": "سینه وګورئ او ساګانې وشمېرئ",
+        "en": "Watch the chest and count"
+      },
+      "text": {
+        "fa": "وقتی طفل آرام است، نفس‌هایش را یک دقیقه بشمارید. نفس تیز است اگر: کمتر از ۲ ماه، ۶۰ یا بیشتر؛ ۲ تا ۱۲ ماه، ۵۰ یا بیشتر؛ ۱ تا ۵ سال، ۴۰ یا بیشتر.",
+        "ps": "کله چې ماشوم آرام وي، ساګانې یې یوه دقیقه وشمېرئ. ساه چټکه ده که: تر ۲ میاشتو کم، ۶۰ یا ډېر؛ له ۲ تر ۱۲ میاشتو، ۵۰ یا ډېر؛ له ۱ تر ۵ کلونو، ۴۰ یا ډېر.",
+        "en": "Count breaths for one minute while the child is calm. Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more."
+      }
+    },
+    {
+      "id": "danger-child.counter",
+      "type": "link",
+      "to": "tool/breaths",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس‌ها را با گوشی بشمارید",
+        "ps": "ساه په ټیلیفون وشمېرئ",
+        "en": "Count breaths with the phone"
+      },
+      "text": {
+        "fa": "گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.",
+        "ps": "ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.",
+        "en": "The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast."
+      }
+    },
+    {
+      "id": "danger-child.breath",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "نفس: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "ساه: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Breathing: go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.breath.grunt",
+          "icon": "breathe",
+          "text": {
+            "fa": "با هر نفس ناله می‌کند",
+            "ps": "د هرې ساه سره ناله کوي",
+            "en": "grunts or moans with each breath"
+          }
+        },
+        {
+          "id": "danger-child.breath.nose",
+          "icon": "breathe",
+          "text": {
+            "fa": "با هر نفس، سوراخ‌های بینی‌اش پهن می‌شود",
+            "ps": "د هرې ساه سره یې د پوزې سوري پراخېږي",
+            "en": "nostrils open wide with each breath"
+          }
+        },
+        {
+          "id": "danger-child.breath.pause",
+          "icon": "lungs",
+          "text": {
+            "fa": "گاهی چند ثانیه نفسش بند می‌شود",
+            "ps": "کله کله یې ساه څو ثانیې بندېږي",
+            "en": "stops breathing for a few seconds at a time"
+          }
+        },
+        {
+          "id": "danger-child.breath.blue",
+          "icon": "jaundice",
+          "text": {
+            "fa": "لب‌ها یا زبانش کبود یا خاکستری شده",
+            "ps": "شونډې یا ژبه یې شنې یا خړې شوې دي",
+            "en": "lips or tongue turn blue or grey"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.look-skin",
+      "type": "step",
+      "icon": "eye",
+      "picture": "look-skin-colour",
+      "title": {
+        "fa": "پوست را در روشنی روز ببینید",
+        "ps": "پوستکی د ورځې په رڼا کې وګورئ",
+        "en": "Look at the skin in daylight"
+      },
+      "text": {
+        "fa": "لب‌ها، زبان، کف دست و کف پا را ببینید. بعد دست و پایش را لمس کنید.",
+        "ps": "شونډې، ژبه، د لاسونو او پښو تلي وګورئ. بیا یې لاسونه او پښې لمس کړئ.",
+        "en": "Look at the lips, tongue, palms and soles. Then feel the hands and feet."
+      }
+    },
+    {
+      "id": "danger-child.glass",
+      "type": "step",
+      "icon": "rash",
+      "picture": "look-rash-glass",
+      "title": {
+        "fa": "دانه‌ها را با گیلاس امتحان کنید",
+        "ps": "دانې په ګیلاس وازمویئ",
+        "en": "Test spots with a glass"
+      },
+      "text": {
+        "fa": "پهلوی یک گیلاس شفاف را محکم روی دانه‌ها فشار دهید. اگر دانه‌ها از پشت گیلاس هنوز دیده می‌شوند، علامت خطر است.",
+        "ps": "د یو روڼ ګیلاس اړخ په دانو ټینګ کېکاږئ. که دانې د ګیلاس له شا لا هم ښکاري، د خطر نښه ده.",
+        "en": "Press the side of a clear glass firmly on the spots. If you can still see the spots through the glass, it is a danger sign."
+      }
+    },
+    {
+      "id": "danger-child.skin",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "پوست: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "پوستکی: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Skin: go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.skin.pale",
+          "icon": "jaundice",
+          "text": {
+            "fa": "رنگ پوستش خیلی پریده، خاکستری یا کبود است",
+            "ps": "د پوستکي رنګ یې ډېر الوتی، خړ یا شین دی",
+            "en": "has very pale, grey or blue skin"
+          }
+        },
+        {
+          "id": "danger-child.skin.mottled",
+          "icon": "jaundice",
+          "text": {
+            "fa": "پوستش لکه‌لکه است، با لکه‌های کبود و سفید",
+            "ps": "پوستکی یې داغ داغ دی، شین او سپین داغونه لري",
+            "en": "has blotchy purple and pale patches on the skin"
+          }
+        },
+        {
+          "id": "danger-child.skin.rash",
+          "icon": "rash",
+          "text": {
+            "fa": "دانه‌هایی دارد که زیر گیلاس از بین نمی‌روند",
+            "ps": "داسې دانې لري چې د ګیلاس لاندې نه ورکېږي",
+            "en": "has spots that do not fade under a pressed glass"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.skin-soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل این علامت را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم دا نښه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.skin-soon.cold",
+          "icon": "thermometer",
+          "text": {
+            "fa": "تب دارد، اما دست و پایش سرد است",
+            "ps": "تبه لري، خو لاسونه او پښې یې سړې دي",
+            "en": "has a fever, but cold hands and feet"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.pinch",
+      "type": "step",
+      "icon": "skin-pinch",
+      "picture": "look-skin-pinch",
+      "title": {
+        "fa": "پوست شکم را با دو انگشت بگیرید",
+        "ps": "د ګېډې پوستکی په دوو ګوتو ونیسئ",
+        "en": "Pinch the skin of the belly"
+      },
+      "text": {
+        "fa": "پوست شکم را، بین ناف و پهلو، با دو انگشت بالا بکشید و رها کنید. باید فوراً هموار شود.",
+        "ps": "د ګېډې پوستکی، د نوم او اړخ ترمنځ، په دوو ګوتو پورته کړئ او پرېږدئ یې. باید سمدلاسه هوار شي.",
+        "en": "Lift the belly skin between two fingers, halfway between the navel and the side, then let go. It should go flat at once."
+      }
+    },
+    {
+      "id": "danger-child.wee",
+      "type": "step",
+      "icon": "baby",
+      "picture": "look-nappy",
+      "title": {
+        "fa": "پیشاب، اشک و دهان را ببینید",
+        "ps": "متیازې، اوښکې او خوله وګورئ",
+        "en": "Check wee, tears and mouth"
+      },
+      "text": {
+        "fa": "کهنه‌های تر را بشمارید، یا ببینید طفل چند بار پیشاب می‌کند. وقت گریه اشک را ببینید. داخل دهانش را لمس کنید: خشک است؟",
+        "ps": "لمدې کهنې وشمېرئ، یا وګورئ چې ماشوم څو ځله متیازې کوي. د ژړا پر وخت اوښکې وګورئ. د خولې دننه یې لمس کړئ: وچه ده؟",
+        "en": "Count wet nappies, or how often the child wees. Look for tears when the child cries. Feel inside the mouth: is it dry?"
+      }
+    },
+    {
+      "id": "danger-child.soft-spot",
+      "type": "step",
+      "icon": "baby",
+      "picture": "look-soft-spot",
+      "title": {
+        "fa": "جای نرم سر طفل کوچک را لمس کنید",
+        "ps": "د کوچني ماشوم د سر نرمه برخه لمس کړئ",
+        "en": "Feel a baby's soft spot"
+      },
+      "text": {
+        "fa": "طفل کوچک بالای سرش یک جای نرم دارد. وقتی طفل آرام و راست نشسته است، باید هموار باشد، نه فرو رفته و نه برآمده.",
+        "ps": "کوچنی ماشوم د سر په سر کې یوه نرمه برخه لري. کله چې ماشوم آرام او نېغ ناست وي، باید هواره وي، نه ننوتې او نه پورته راوتلې.",
+        "en": "A baby has a soft spot on top of the head. When the baby is calm and held upright, it should be flat, not sunken or bulging."
+      }
+    },
+    {
+      "id": "danger-child.dry",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "کم‌آبی: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "د اوبو کمښت: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Drying out: go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.dry.eyes",
+          "icon": "eye-sunken",
+          "text": {
+            "fa": "چشم‌هایش گود رفته، و خیلی خواب‌آلود است یا نمی‌تواند بنوشد",
+            "ps": "سترګې یې ننوتې دي، او ډېر خوب وړی دی یا نشي څښلای",
+            "en": "has sunken eyes, and is very sleepy or cannot drink"
+          }
+        },
+        {
+          "id": "danger-child.dry.pinch",
+          "icon": "skin-pinch",
+          "text": {
+            "fa": "پوست شکم بعد از گرفتن، بیشتر از ۲ ثانیه طول می‌کشد تا هموار شود",
+            "ps": "د ګېډې پوستکی له نیولو وروسته، له ۲ ثانیو ډېر وخت نیسي چې هوار شي",
+            "en": "pinched belly skin takes more than 2 seconds to go flat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.dry-soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.dry-soon.mouth",
+          "icon": "water",
+          "text": {
+            "fa": "دهان و زبانش خشک است",
+            "ps": "خوله او ژبه یې وچې دي",
+            "en": "has a dry mouth and tongue"
+          }
+        },
+        {
+          "id": "danger-child.dry-soon.wee",
+          "icon": "baby",
+          "text": {
+            "fa": "۸ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود",
+            "ps": "۸ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي",
+            "en": "has not weed for 8 hours or more, or has fewer wet nappies"
+          }
+        },
+        {
+          "id": "danger-child.dry-soon.soft-spot",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل کوچک: جای نرم سرش فرو رفته است",
+            "ps": "کوچنی ماشوم: د سر نرمه برخه یې ننوتې ده",
+            "en": "baby: the soft spot on the head is sunken"
+          }
+        },
+        {
+          "id": "danger-child.dry-soon.tears",
+          "icon": "eye",
+          "text": {
+            "fa": "بدون اشک گریه می‌کند",
+            "ps": "بې اوښکو ژاړي",
+            "en": "cries with no tears"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.look-move",
+      "type": "step",
+      "icon": "sleepy",
+      "picture": "look-floppy",
+      "title": {
+        "fa": "طفل را بغل کنید و ببینید",
+        "ps": "ماشوم په غېږ کې ونیسئ او وګورئ",
+        "en": "Pick the child up and watch"
+      },
+      "text": {
+        "fa": "طفل سالم بدنش را نگه می‌دارد، تکان می‌خورد و به صدای شما رو می‌گرداند. طفل سست مثل یک تکه پارچه آویزان می‌ماند.",
+        "ps": "روغ ماشوم خپل بدن ټینګ ساتي، خوځېږي او ستاسو غږ ته مخ اړوي. سست ماشوم د ټوکر په څېر ځوړند پاتې کېږي.",
+        "en": "A well child holds its body, moves, and turns to your voice. A floppy child hangs limp like a cloth."
+      }
+    },
+    {
+      "id": "danger-child.seems",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "حال طفل: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "د ماشوم حال: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "How the child seems: go to hospital now, day or night, if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.seems.floppy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "سست است و مثل پارچه آویزان می‌ماند",
+            "ps": "سست دی او د ټوکر په څېر ځوړند پاتې کېږي",
+            "en": "is floppy, and hangs limp like a cloth"
+          }
+        },
+        {
+          "id": "danger-child.seems.cry",
+          "icon": "baby",
+          "text": {
+            "fa": "گریه‌اش ضعیف و تیز است، یا بی‌وقفه گریه می‌کند",
+            "ps": "ژړا یې کمزورې او تېره ده، یا پرله‌پسې ژاړي",
+            "en": "has a weak, high-pitched cry, or cries without stopping"
+          }
+        },
+        {
+          "id": "danger-child.seems.respond",
+          "icon": "talk",
+          "text": {
+            "fa": "وقتی با او گپ می‌زنید یا لمسش می‌کنید، هیچ جواب نمی‌دهد",
+            "ps": "کله چې ورسره خبرې کوئ یا یې لمس کوئ، هېڅ ځواب نه ورکوي",
+            "en": "does not respond when you talk to or touch the child"
+          }
+        },
+        {
+          "id": "danger-child.seems.soft-spot",
+          "icon": "baby",
+          "text": {
+            "fa": "طفل کوچک: جای نرم سرش برآمده است",
+            "ps": "کوچنی ماشوم: د سر نرمه برخه یې پورته راوتلې ده",
+            "en": "baby: the soft spot on the head bulges up"
+          }
+        },
+        {
+          "id": "danger-child.seems.neck",
+          "icon": "stiff-neck",
+          "text": {
+            "fa": "گردنش شخ است و نمی‌تواند زنخ را به سینه برساند",
+            "ps": "غاړه یې کلکه ده او زنه سینې ته نشي رسولای",
+            "en": "has a stiff neck, and cannot bend the chin to the chest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "danger-child.seems-soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic today if the child:"
+      },
+      "items": [
+        {
+          "id": "danger-child.seems-soon.play",
+          "icon": "toys-play",
+          "text": {
+            "fa": "دلش به بازی نیست",
+            "ps": "لوبو ته یې زړه نه کېږي",
+            "en": "is not interested in playing"
+          }
+        },
+        {
+          "id": "danger-child.seems-soon.active",
+          "icon": "milestones",
+          "text": {
+            "fa": "خیلی کمتر از همیشه تکان می‌خورد",
+            "ps": "تر بل وخت ډېر لږ خوځېږي",
+            "en": "is much less active than usual"
+          }
+        },
+        {
+          "id": "danger-child.seems-soon.smile",
+          "icon": "baby",
+          "text": {
+            "fa": "مثل همیشه لبخند نمی‌زند",
+            "ps": "د پخوا په څېر نه موسکی کېږي",
+            "en": "does not smile as usual"
           }
         }
       ]
@@ -347,7 +751,10 @@
     "WHO/UNICEF Caring for newborns and children in the community (2011): CHW chart booklet, danger signs and referral",
     "WHO/UNICEF Facts for Life (2010): coughs, colds and more serious illnesses",
     "WHO Pocket Book of Hospital Care for Children (2013), chapter 1: emergency triage, assessment and treatment (oxygen, fluids, glucose, anticonvulsants, antibiotics)",
-    "WHO IMCI Chart Booklet (2014): urgent referral with pre-referral treatment (first dose of antibiotic, prevent low blood sugar, keep warm)"
+    "WHO IMCI Chart Booklet (2014): urgent referral with pre-referral treatment (first dose of antibiotic, prevent low blood sugar, keep warm)",
+    "WHO IMCI Chart Booklet (2014): does the child have diarrhoea? (sunken eyes, skin pinch goes back very slowly, more than 2 seconds; severe and some dehydration); stiff neck in very severe febrile disease",
+    "NICE NG143 Fever in under 5s (2019, updated 2021): traffic light system (colour, activity, breathing, circulation and hydration, other), adapted for parents",
+    "NICE NG51 Sepsis (2016, updated 2024) and NICE CG102 Bacterial meningitis and meningococcal septicaemia in under 16s: non-blanching rash; the glass (tumbler) test as taught to parents"
   ],
   "review": [
     "Fever threshold for young infants is not given as a number here ('has a fever, or the body feels cold'); WHO uses 37.5 C or more (axillary) and below 35.5 C.",
@@ -356,6 +763,13 @@
     "Dari 'مدفوع' (stool) is formal; a native reviewer may prefer a more everyday Afghan word.",
     "Fast breathing follows WHO IMCI and the breathing counter (js/tools.js): under 2 months, 60 or more = hospital now; 2 months to 5 years, fast breathing alone = clinic today (IMCI 'pneumonia', oral amoxicillin at the clinic); chest indrawing, noisy breathing when calm (stridor) or any general danger sign = hospital now. Chosen by the merge (2026-10-07); Mo to confirm. danger-child.urgent.breathing now means severe difficulty or stridor; fast breathing alone moved to the new danger-child.soon.fast; the under-2-months box keeps 60 or more = hospital.",
     "'Oxygen if they have it' at clinic level: BPHS 2010 lists oxygen at CHC, not BHC; wording is deliberately conditional.",
-    "'Sugar if low' and 'medicine to stop fits' summarise ETAT; check the Dari/Pashto do not sound like advice to give sugar at home for every sick child."
+    "'Sugar if low' and 'medicine to stop fits' summarise ETAT; check the Dari/Pashto do not sound like advice to give sugar at home for every sick child.",
+    "Look, listen, feel part (added 2026-10-08 at Mo's request): signs sorted by what to look at (breathing, skin, drying out, how the child seems) into red (hospital now) and amber (clinic today) boxes, adapted from NICE NG143 traffic lights and WHO IMCI. Each sign appears once on the page: 'does not wake or stay awake' is covered by the existing danger-child.urgent.sleepy ('very sleepy and hard to wake, or unconscious'); 'chest pulling in' by danger-child.urgent.chest; 'fast breathing alone' by danger-child.soon.fast; blue lips are in the breathing box, pale/grey/blue skin in the skin box.",
+    "Fever age: this page keeps IMCI's under 2 months for 'any fever = hospital now' (danger-child.young.temperature, also fever.json). NICE NG143 and the app's own temperature checker and reading-temp page use under 3 months (js/tools.js: 'Mo: any fever under 3 months = hospital'). Mo to choose one age for the whole app.",
+    "Nostril flaring is red here as asked; NICE NG143 lists nasal flaring as amber (grunting, chest indrawing and RR over 60 are red). Mottled and pale/grey/blue skin are red as in NICE; NICE lists parent-reported pallor as amber.",
+    "Cold hands and feet with fever: amber here (an early sepsis sign in parent leaflets); it is not in the NG143 table itself.",
+    "Dehydration: IMCI severe dehydration needs two signs (lethargic or unconscious, sunken eyes, not able to drink or drinking poorly, skin pinch very slowly); the red item 'sunken eyes, and very sleepy or cannot drink' and 'skin pinch more than 2 seconds' follow that. Amber items (dry mouth, no wee for 8 hours or more, sunken soft spot, no tears) are NICE CG84/NG143 style and simplified.",
+    "Breathing step: 'Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more' matches the breath counter (js/tools.js) and WHO IMCI.",
+    "Words to check: Dari 'کهنه' and Pashto 'کهنه' for nappy (cloth nappies; some families say 'پمپرز'); the soft spot is described ('جای نرم سر' / 'د سر نرمه برخه'), not named; Dari 'شخ' (stiff), 'زنخ' (chin); Pashto 'شین' for blue skin or lips; 'ناله' for grunting."
   ]
 }

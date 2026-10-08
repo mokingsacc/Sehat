@@ -258,6 +258,71 @@
       "en": ["newborn not feeding", "newborn fever", "baby under 2 months fever", "newborn cold", "newborn not moving", "yellow palms", "two month old has fever", "one month old fever", "baby under two months fever"],
       "danger": ["نوزاد شیر نمی‌خورد", "نوزاد تب دارد", "newborn not feeding", "newborn fever", "طفل دو ماهه تب دارد", "دوه میاشتنی ماشوم تبه لري", "two month old has fever"]
     },
+    "danger-child.look-breath": {
+      "fa": ["طفل چند بار در دقیقه نفس می‌کشد", "تعداد نفس طفل", "نفس طفل چند باشد"],
+      "ps": ["ماشوم په یوه دقیقه کې څو ځله ساه اخلي", "د ماشوم د ساه شمېر"],
+      "en": ["breathing rate", "normal breathing rate child", "breaths per minute child"]
+    },
+    "danger-child.breath": {
+      "fa": ["لب‌هایش کبود است", "لب‌های طفل کبود است", "زبانش کبود است", "طفل با هر نفس ناله می‌کند", "طفلم ناله میکند و نفس میکشد", "بینی‌اش با نفس باز و بسته می‌شود", "سوراخ‌های بینی‌اش پهن می‌شود", "نفسش گاه‌گاه بند می‌شود"],
+      "ps": ["شونډې یې شنې دي", "د ماشوم شونډې شنې دي", "ژبه یې شنه ده", "د هرې ساه سره ناله کوي", "د پوزې سوري یې پراخېږي", "ساه یې کله کله بندېږي"],
+      "lat": ["lab kabud", "labhayash kabud ast", "shondi shin"],
+      "en": ["blue lips", "lips are blue", "grey lips", "blue tongue", "nostrils flaring", "nose flaring", "flaring nostrils", "grunting baby", "grunting with each breath", "moaning with each breath", "pauses in breathing", "breathing pauses"],
+      "danger": ["blue lips", "lips are blue", "grunting baby", "nostrils flaring", "pauses in breathing"]
+    },
+    "danger-child.glass": {
+      "fa": ["امتحان گیلاس", "گیلاس روی دانه", "دانه را با گیلاس امتحان کنید"],
+      "ps": ["د ګیلاس ازموینه", "ګیلاس په دانو کېکاږئ"],
+      "lat": ["gilas", "imtihan gilas"],
+      "en": ["glass test", "tumbler test", "rash glass", "glass on rash", "press a glass on the rash"]
+    },
+    "danger-child.skin": {
+      "fa": ["دانه که با گیلاس نمیره", "دانه‌ها زیر گیلاس نمی‌رود", "دانه‌های سرخ که از بین نمی‌روند", "دانه‌های بنفش", "رنگش پریده", "رنگ طفلم پریده", "طفلم خیلی سفید شده", "پوستش کبود شده", "پوستش خاکستری شده", "پوستش لکه لکه شده", "لکه‌های کبود روی پوست"],
+      "ps": ["دانې په ګیلاس نه ورکېږي", "دانې د ګیلاس لاندې ښکاري", "رنګ یې الوتی دی", "د ماشوم رنګ الوتی دی", "پوستکی یې شین شوی", "پوستکی یې خړ شوی", "پوستکی یې داغ داغ دی"],
+      "lat": ["dana ba gilas namera", "rangash parida", "rang parida", "rang yi alwatay"],
+      "en": ["rash does not fade", "rash doesn't fade", "rash does not go away", "spots do not go away", "rash that does not fade", "rash not fading under glass", "non blanching rash", "purple spots", "purple rash", "pale child", "very pale baby", "child looks grey", "grey skin", "blue skin", "mottled skin", "blotchy skin", "marbled skin"],
+      "danger": ["rash does not fade", "rash doesn't fade", "rash does not go away", "spots do not go away", "non blanching rash", "دانه که با گیلاس نمیره", "دانې په ګیلاس نه ورکېږي", "mottled skin", "purple rash", "very pale baby", "پوستش لکه لکه شده"]
+    },
+    "danger-child.skin-soon": {
+      "fa": ["تب دارد و دست و پایش سرد است", "دست و پای طفل سرد است"],
+      "ps": ["تبه لري خو لاسونه یې ساړه دي", "لاسونه او پښې یې سړې دي"],
+      "en": ["cold hands and feet", "cold hands and feet with fever", "fever but cold hands"]
+    },
+    "danger-child.pinch": {
+      "fa": ["پوست شکم را بگیرید", "امتحان پوست"],
+      "ps": ["د ګېډې پوستکی ونیسئ"],
+      "en": ["skin pinch", "pinch test", "how to check for dehydration"]
+    },
+    "danger-child.dry": {
+      "fa": ["پوستش دیر برمی‌گردد", "پوست شکم دیر صاف می‌شود", "چشم‌هایش گود رفته و بی‌حال است", "کم‌آبی شدید"],
+      "ps": ["پوستکی یې ورو بېرته ځي", "سترګې یې ننوتې او سست دی"],
+      "en": ["severe dehydration", "skin stays up when pinched", "sunken eyes and very sleepy", "sunken eyes and cannot drink"],
+      "danger": ["severe dehydration", "skin stays up when pinched", "کم‌آبی شدید"]
+    },
+    "danger-child.dry-soon": {
+      "fa": ["پیشاب نکرده", "طفلم پیشاب نمی‌کند", "طفلم پیشاب نکرده", "کهنه‌اش خشک است", "کهنه طفل خشک مانده", "دهانش خشک است", "لب و دهانش خشک", "بدون اشک گریه می‌کند", "اشک ندارد", "جای نرم سرش فرو رفته", "?ملاقش فرو رفته"],
+      "ps": ["متیازې یې نه دي کړې", "ماشوم متیازې نه کوي", "کهنه یې وچه ده", "خوله یې وچه ده", "بې اوښکو ژاړي", "اوښکې نه لري", "د سر نرمه برخه یې ننوتې"],
+      "lat": ["peshab nakada", "peshab namekona", "kohna khoshk", "dahanash khoshk", "mutiaze na kawi"],
+      "en": ["no wee", "not weeing", "has not peed", "no pee", "no urine", "not passing urine", "dry nappy", "dry nappies", "dry diaper", "no wet nappies", "fewer wet nappies", "dry mouth", "no tears", "crying without tears", "sunken soft spot", "sunken fontanelle"]
+    },
+    "danger-child.soft-spot": {
+      "fa": ["جای نرم سر طفل", "جای نرم بالای سر", "?ملاق طفل"],
+      "ps": ["د ماشوم د سر نرمه برخه"],
+      "en": ["soft spot", "baby soft spot", "fontanelle", "fontanel"]
+    },
+    "danger-child.seems": {
+      "fa": ["طفل سست شده و آویزان است", "طفلم مثل پارچه سست است", "گریه‌اش تیز و ضعیف است", "بی‌وقفه گریه می‌کند", "طفلم جواب نمی‌دهد", "گردن طفل شخ است", "گردنش شخ شده", "طفل گردنش را خم کرده نمی‌تواند", "جای نرم سرش برآمده", "?ملاقش برآمده"],
+      "ps": ["ماشوم سست او ځوړند دی", "ژړا یې کمزورې او تېره ده", "پرله‌پسې ژاړي", "ماشوم ځواب نه ورکوي", "د ماشوم غاړه کلکه ده", "غاړه یې شخه ده", "د سر نرمه برخه یې پورته راوتلې"],
+      "lat": ["gardanash shakh", "gardan shakh", "ghara kalaka"],
+      "en": ["limp baby", "baby like a rag doll", "high pitched cry", "weak cry", "cries and cries", "crying nonstop", "baby not responding", "child not responding to me", "stiff neck child", "child stiff neck", "bulging soft spot", "bulging fontanelle"],
+      "danger": ["limp baby", "high pitched cry", "baby not responding", "stiff neck child", "bulging fontanelle", "bulging soft spot", "گردنش شخ شده", "د ماشوم غاړه کلکه ده"]
+    },
+    "danger-child.seems-soon": {
+      "fa": ["طفلم بازی نمی‌کند", "دلش به بازی نیست", "طفلم نمی‌خندد", "طفلم لبخند نمی‌زند", "طفلم کم تکان می‌خورد", "طفلم مثل همیشه نیست"],
+      "ps": ["ماشوم لوبې نه کوي", "لوبو ته یې زړه نه کېږي", "ماشوم نه موسکی کېږي", "ماشوم لږ خوځېږي"],
+      "lat": ["bazi namekona", "lobe na kawi"],
+      "en": ["not playing", "won't play", "not interested in playing", "not smiling", "baby not smiling", "less active", "not himself", "not herself", "quiet and not playing"]
+    },
     "newborn": {
       "fa": ["نوزاد", "طفل نوزاد", "طفل تازه تولد", "مراقبت نوزاد", "مراقبت از نوزاد", "طفل نو", "طفل خورد و کم وزن", "طفل پیش از وقت", "نوزاد کوچک", "گرم نگهداشتن نوزاد", "چهل روز", "چله طفل", "چشم نوزاد چرک کرده", "دانه‌های چرکی نوزاد", "مراقبت ناف", "ناف نوزاد", "کلرهگزیدین", "هفته اول نوزاد", "آغوز", "شیر اول مادر"],
       "ps": ["نوی زېږېدلی ماشوم", "نوی ماشوم", "د نوي ماشوم پاملرنه", "کوچنی نوی ماشوم", "د نوي ماشوم سترګې زوه کوي", "د نوم پاملرنه", "د نوي ماشوم لومړۍ اونۍ", "فله"],

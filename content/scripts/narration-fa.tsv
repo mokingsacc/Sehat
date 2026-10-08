@@ -534,13 +534,50 @@ danger-child.young.chest	وقت نفس کشیدن، پایین سینه‌اش �
 danger-child.young.temperature	تب دارد، یا بدنش سرد است	has a fever, or the body feels cold
 danger-child.young.move	فقط وقتی تکانش بدهید حرکت می‌کند، یا هیچ حرکت نمی‌کند	moves only when touched, or does not move at all
 danger-child.young.yellow	کف دست و پایش زرد است، یا در روز اول زرد شده	has yellow palms and soles, or turned yellow on the first day
-danger-child.counter	نفس‌ها را با گوشی بشمارید. گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 danger-child.soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 danger-child.soon.fast	تیز تیز نفس می‌کشد، اما هیچ یک از علایم رفتن به شفاخانه را ندارد	breathes fast, but has none of the hospital signs
 danger-child.soon.worse	بهتر نمی‌شود یا بدتر می‌شود	is not getting better, or is getting worse
 danger-child.soon.fever	بیشتر از ۲ روز است که تب دارد	has had a fever for more than 2 days
 danger-child.soon.blood	در مدفوعش خون دیده می‌شود	has blood in the stool
 danger-child.soon.drinking	کم می‌نوشد یا کم می‌خورد	is drinking or eating poorly
+danger-child.look	ببینید، بشنوید و لمس کنید. در یک جای گرم و روشن، کالای طفل را باز کنید و نفس، پوست، پیشاب و حال طفل را ببینید.	Look, listen and feel. In a warm, bright place, open the child's clothes and check the breathing, the skin, the wee and how the child seems.
+danger-child.look-breath	سینه را ببینید و نفس‌ها را بشمارید. وقتی طفل آرام است، نفس‌هایش را یک دقیقه بشمارید. نفس تیز است اگر: کمتر از ۲ ماه، ۶۰ یا بیشتر؛ ۲ تا ۱۲ ماه، ۵۰ یا بیشتر؛ ۱ تا ۵ سال، ۴۰ یا بیشتر.	Watch the chest and count. Count breaths for one minute while the child is calm. Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more.
+danger-child.counter	نفس‌ها را با گوشی بشمارید. گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
+danger-child.breath	نفس: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	Breathing: go to hospital now, day or night, if the child:
+danger-child.breath.grunt	با هر نفس ناله می‌کند	grunts or moans with each breath
+danger-child.breath.nose	با هر نفس، سوراخ‌های بینی‌اش پهن می‌شود	nostrils open wide with each breath
+danger-child.breath.pause	گاهی چند ثانیه نفسش بند می‌شود	stops breathing for a few seconds at a time
+danger-child.breath.blue	لب‌ها یا زبانش کبود یا خاکستری شده	lips or tongue turn blue or grey
+danger-child.look-skin	پوست را در روشنی روز ببینید. لب‌ها، زبان، کف دست و کف پا را ببینید. بعد دست و پایش را لمس کنید.	Look at the skin in daylight. Look at the lips, tongue, palms and soles. Then feel the hands and feet.
+danger-child.glass	دانه‌ها را با گیلاس امتحان کنید. پهلوی یک گیلاس شفاف را محکم روی دانه‌ها فشار دهید. اگر دانه‌ها از پشت گیلاس هنوز دیده می‌شوند، علامت خطر است.	Test spots with a glass. Press the side of a clear glass firmly on the spots. If you can still see the spots through the glass, it is a danger sign.
+danger-child.skin	پوست: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	Skin: go to hospital now, day or night, if the child:
+danger-child.skin.pale	رنگ پوستش خیلی پریده، خاکستری یا کبود است	has very pale, grey or blue skin
+danger-child.skin.mottled	پوستش لکه‌لکه است، با لکه‌های کبود و سفید	has blotchy purple and pale patches on the skin
+danger-child.skin.rash	دانه‌هایی دارد که زیر گیلاس از بین نمی‌روند	has spots that do not fade under a pressed glass
+danger-child.skin-soon	اگر طفل این علامت را دارد، امروز به کلینیک بروید	Go to the clinic today if the child:
+danger-child.skin-soon.cold	تب دارد، اما دست و پایش سرد است	has a fever, but cold hands and feet
+danger-child.pinch	پوست شکم را با دو انگشت بگیرید. پوست شکم را، بین ناف و پهلو، با دو انگشت بالا بکشید و رها کنید. باید فوراً هموار شود.	Pinch the skin of the belly. Lift the belly skin between two fingers, halfway between the navel and the side, then let go. It should go flat at once.
+danger-child.wee	پیشاب، اشک و دهان را ببینید. کهنه‌های تر را بشمارید، یا ببینید طفل چند بار پیشاب می‌کند. وقت گریه اشک را ببینید. داخل دهانش را لمس کنید: خشک است؟	Check wee, tears and mouth. Count wet nappies, or how often the child wees. Look for tears when the child cries. Feel inside the mouth: is it dry?
+danger-child.soft-spot	جای نرم سر طفل کوچک را لمس کنید. طفل کوچک بالای سرش یک جای نرم دارد. وقتی طفل آرام و راست نشسته است، باید هموار باشد، نه فرو رفته و نه برآمده.	Feel a baby's soft spot. A baby has a soft spot on top of the head. When the baby is calm and held upright, it should be flat, not sunken or bulging.
+danger-child.dry	کم‌آبی: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	Drying out: go to hospital now, day or night, if the child:
+danger-child.dry.eyes	چشم‌هایش گود رفته، و خیلی خواب‌آلود است یا نمی‌تواند بنوشد	has sunken eyes, and is very sleepy or cannot drink
+danger-child.dry.pinch	پوست شکم بعد از گرفتن، بیشتر از ۲ ثانیه طول می‌کشد تا هموار شود	pinched belly skin takes more than 2 seconds to go flat
+danger-child.dry-soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	Go to the clinic today if the child:
+danger-child.dry-soon.mouth	دهان و زبانش خشک است	has a dry mouth and tongue
+danger-child.dry-soon.wee	۸ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود	has not weed for 8 hours or more, or has fewer wet nappies
+danger-child.dry-soon.soft-spot	طفل کوچک: جای نرم سرش فرو رفته است	baby: the soft spot on the head is sunken
+danger-child.dry-soon.tears	بدون اشک گریه می‌کند	cries with no tears
+danger-child.look-move	طفل را بغل کنید و ببینید. طفل سالم بدنش را نگه می‌دارد، تکان می‌خورد و به صدای شما رو می‌گرداند. طفل سست مثل یک تکه پارچه آویزان می‌ماند.	Pick the child up and watch. A well child holds its body, moves, and turns to your voice. A floppy child hangs limp like a cloth.
+danger-child.seems	حال طفل: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	How the child seems: go to hospital now, day or night, if the child:
+danger-child.seems.floppy	سست است و مثل پارچه آویزان می‌ماند	is floppy, and hangs limp like a cloth
+danger-child.seems.cry	گریه‌اش ضعیف و تیز است، یا بی‌وقفه گریه می‌کند	has a weak, high-pitched cry, or cries without stopping
+danger-child.seems.respond	وقتی با او گپ می‌زنید یا لمسش می‌کنید، هیچ جواب نمی‌دهد	does not respond when you talk to or touch the child
+danger-child.seems.soft-spot	طفل کوچک: جای نرم سرش برآمده است	baby: the soft spot on the head bulges up
+danger-child.seems.neck	گردنش شخ است و نمی‌تواند زنخ را به سینه برساند	has a stiff neck, and cannot bend the chin to the chest
+danger-child.seems-soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	Go to the clinic today if the child:
+danger-child.seems-soon.play	دلش به بازی نیست	is not interested in playing
+danger-child.seems-soon.active	خیلی کمتر از همیشه تکان می‌خورد	is much less active than usual
+danger-child.seems-soon.smile	مثل همیشه لبخند نمی‌زند	does not smile as usual
 danger-child.breastfeed	در راه شیر بدهید. اگر طفل می‌تواند بنوشد، در راه بار بار شیر بدهید.	Keep breastfeeding on the way. If the child can drink, breastfeed often on the way.
 danger-child.warm	طفل کوچک را گرم نگه دارید. طفل کوچک را پوست به پوست روی سینهٔ مادر بگذارید. هر دو را با کمپل بپوشانید و سرش را هم بپوشانید.	Keep a young baby warm. Hold a young baby skin to skin on the mother's chest. Cover you both with a blanket, and cover the baby's head.
 danger-child.ors	اسهال: او آر اس بدهید. اگر طفل اسهال دارد و می‌تواند بنوشد، در راه کم‌کم او آر اس بدهید.	Diarrhoea: give sips of ORS. If the child has diarrhoea and can drink, give small sips of ORS on the way.

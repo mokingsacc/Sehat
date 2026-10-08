@@ -534,13 +534,50 @@ danger-child.young.chest	د سا اخیستو پر وخت یې د سینې لا�
 danger-child.young.temperature	تبه لري، یا یې بدن سوړ دی	has a fever, or the body feels cold
 danger-child.young.move	یوازې هغه وخت خوځېږي چې لاس پرې ووهئ، یا هېڅ نه خوځېږي	moves only when touched, or does not move at all
 danger-child.young.yellow	د لاسونو او پښو تلي یې ژېړ دي، یا په لومړۍ ورځ ژېړ شوی	has yellow palms and soles, or turned yellow on the first day
-danger-child.counter	ساه په ټیلیفون وشمېرئ. ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 danger-child.soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
 danger-child.soon.fast	ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري	breathes fast, but has none of the hospital signs
 danger-child.soon.worse	ښه نه کېږي، یا لا خرابېږي	is not getting better, or is getting worse
 danger-child.soon.fever	له ۲ ورځو زیات وخت کېږي چې تبه لري	has had a fever for more than 2 days
 danger-child.soon.blood	په ډکو متیازو کې یې وینه ښکاري	has blood in the stool
 danger-child.soon.drinking	لږ څښي یا لږ خوري	is drinking or eating poorly
+danger-child.look	وګورئ، واورئ او لمس یې کړئ. په یوه ګرم او روښانه ځای کې د ماشوم کالي خلاص کړئ، او ساه، پوستکی، متیازې او حال یې وګورئ.	Look, listen and feel. In a warm, bright place, open the child's clothes and check the breathing, the skin, the wee and how the child seems.
+danger-child.look-breath	سینه وګورئ او ساګانې وشمېرئ. کله چې ماشوم آرام وي، ساګانې یې یوه دقیقه وشمېرئ. ساه چټکه ده که: تر ۲ میاشتو کم، ۶۰ یا ډېر؛ له ۲ تر ۱۲ میاشتو، ۵۰ یا ډېر؛ له ۱ تر ۵ کلونو، ۴۰ یا ډېر.	Watch the chest and count. Count breaths for one minute while the child is calm. Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more.
+danger-child.counter	ساه په ټیلیفون وشمېرئ. ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
+danger-child.breath	ساه: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Breathing: go to hospital now, day or night, if the child:
+danger-child.breath.grunt	د هرې ساه سره ناله کوي	grunts or moans with each breath
+danger-child.breath.nose	د هرې ساه سره یې د پوزې سوري پراخېږي	nostrils open wide with each breath
+danger-child.breath.pause	کله کله یې ساه څو ثانیې بندېږي	stops breathing for a few seconds at a time
+danger-child.breath.blue	شونډې یا ژبه یې شنې یا خړې شوې دي	lips or tongue turn blue or grey
+danger-child.look-skin	پوستکی د ورځې په رڼا کې وګورئ. شونډې، ژبه، د لاسونو او پښو تلي وګورئ. بیا یې لاسونه او پښې لمس کړئ.	Look at the skin in daylight. Look at the lips, tongue, palms and soles. Then feel the hands and feet.
+danger-child.glass	دانې په ګیلاس وازمویئ. د یو روڼ ګیلاس اړخ په دانو ټینګ کېکاږئ. که دانې د ګیلاس له شا لا هم ښکاري، د خطر نښه ده.	Test spots with a glass. Press the side of a clear glass firmly on the spots. If you can still see the spots through the glass, it is a danger sign.
+danger-child.skin	پوستکی: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Skin: go to hospital now, day or night, if the child:
+danger-child.skin.pale	د پوستکي رنګ یې ډېر الوتی، خړ یا شین دی	has very pale, grey or blue skin
+danger-child.skin.mottled	پوستکی یې داغ داغ دی، شین او سپین داغونه لري	has blotchy purple and pale patches on the skin
+danger-child.skin.rash	داسې دانې لري چې د ګیلاس لاندې نه ورکېږي	has spots that do not fade under a pressed glass
+danger-child.skin-soon	که ماشوم دا نښه ولري، نن کلینیک ته ولاړ شئ	Go to the clinic today if the child:
+danger-child.skin-soon.cold	تبه لري، خو لاسونه او پښې یې سړې دي	has a fever, but cold hands and feet
+danger-child.pinch	د ګېډې پوستکی په دوو ګوتو ونیسئ. د ګېډې پوستکی، د نوم او اړخ ترمنځ، په دوو ګوتو پورته کړئ او پرېږدئ یې. باید سمدلاسه هوار شي.	Pinch the skin of the belly. Lift the belly skin between two fingers, halfway between the navel and the side, then let go. It should go flat at once.
+danger-child.wee	متیازې، اوښکې او خوله وګورئ. لمدې کهنې وشمېرئ، یا وګورئ چې ماشوم څو ځله متیازې کوي. د ژړا پر وخت اوښکې وګورئ. د خولې دننه یې لمس کړئ: وچه ده؟	Check wee, tears and mouth. Count wet nappies, or how often the child wees. Look for tears when the child cries. Feel inside the mouth: is it dry?
+danger-child.soft-spot	د کوچني ماشوم د سر نرمه برخه لمس کړئ. کوچنی ماشوم د سر په سر کې یوه نرمه برخه لري. کله چې ماشوم آرام او نېغ ناست وي، باید هواره وي، نه ننوتې او نه پورته راوتلې.	Feel a baby's soft spot. A baby has a soft spot on top of the head. When the baby is calm and held upright, it should be flat, not sunken or bulging.
+danger-child.dry	د اوبو کمښت: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Drying out: go to hospital now, day or night, if the child:
+danger-child.dry.eyes	سترګې یې ننوتې دي، او ډېر خوب وړی دی یا نشي څښلای	has sunken eyes, and is very sleepy or cannot drink
+danger-child.dry.pinch	د ګېډې پوستکی له نیولو وروسته، له ۲ ثانیو ډېر وخت نیسي چې هوار شي	pinched belly skin takes more than 2 seconds to go flat
+danger-child.dry-soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	Go to the clinic today if the child:
+danger-child.dry-soon.mouth	خوله او ژبه یې وچې دي	has a dry mouth and tongue
+danger-child.dry-soon.wee	۸ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي	has not weed for 8 hours or more, or has fewer wet nappies
+danger-child.dry-soon.soft-spot	کوچنی ماشوم: د سر نرمه برخه یې ننوتې ده	baby: the soft spot on the head is sunken
+danger-child.dry-soon.tears	بې اوښکو ژاړي	cries with no tears
+danger-child.look-move	ماشوم په غېږ کې ونیسئ او وګورئ. روغ ماشوم خپل بدن ټینګ ساتي، خوځېږي او ستاسو غږ ته مخ اړوي. سست ماشوم د ټوکر په څېر ځوړند پاتې کېږي.	Pick the child up and watch. A well child holds its body, moves, and turns to your voice. A floppy child hangs limp like a cloth.
+danger-child.seems	د ماشوم حال: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	How the child seems: go to hospital now, day or night, if the child:
+danger-child.seems.floppy	سست دی او د ټوکر په څېر ځوړند پاتې کېږي	is floppy, and hangs limp like a cloth
+danger-child.seems.cry	ژړا یې کمزورې او تېره ده، یا پرله‌پسې ژاړي	has a weak, high-pitched cry, or cries without stopping
+danger-child.seems.respond	کله چې ورسره خبرې کوئ یا یې لمس کوئ، هېڅ ځواب نه ورکوي	does not respond when you talk to or touch the child
+danger-child.seems.soft-spot	کوچنی ماشوم: د سر نرمه برخه یې پورته راوتلې ده	baby: the soft spot on the head bulges up
+danger-child.seems.neck	غاړه یې کلکه ده او زنه سینې ته نشي رسولای	has a stiff neck, and cannot bend the chin to the chest
+danger-child.seems-soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	Go to the clinic today if the child:
+danger-child.seems-soon.play	لوبو ته یې زړه نه کېږي	is not interested in playing
+danger-child.seems-soon.active	تر بل وخت ډېر لږ خوځېږي	is much less active than usual
+danger-child.seems-soon.smile	د پخوا په څېر نه موسکی کېږي	does not smile as usual
 danger-child.breastfeed	په لاره کې تی ورکړئ. که ماشوم څښلای شي، په لاره کې یې بیا بیا تی ورکړئ.	Keep breastfeeding on the way. If the child can drink, breastfeed often on the way.
 danger-child.warm	کوچنی ماشوم ګرم وساتئ. کوچنی ماشوم د مور پر سینه پوستکی له پوستکي سره کېږدئ. دواړه په کمپله پټ کړئ، او سر یې هم پټ کړئ.	Keep a young baby warm. Hold a young baby skin to skin on the mother's chest. Cover you both with a blanket, and cover the baby's head.
 danger-child.ors	نس ناستی: او آر اس ورکړئ. که ماشوم نس ناستی لري او څښلای شي، په لاره کې ورته لږ لږ او آر اس ورکړئ.	Diarrhoea: give sips of ORS. If the child has diarrhoea and can drink, give small sips of ORS on the way.

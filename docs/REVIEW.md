@@ -4545,3 +4545,164 @@ Search changes (in `content/src/search-phrases.json`):
 3. Not changed: "مرگی" alone. The core test set says it must open Seizures first with the red badge (a fit happening
    now), and the new set says Epilepsy; both cannot pass. Mo to decide which one wins.
 
+## Spotting the unwell child: Look, listen, feel (8 Oct 2026, worker unwell)
+
+Mo asked for a parents' guide to spotting the unwell child (fast breathing, skin changes, drowsiness). Instead of a new
+page, `danger-child` (Danger signs in children) now has a "Look, listen, feel" part after its three existing boxes.
+It covers breathing, skin, drying out and how the child seems, each with red (hospital now) and amber (clinic today)
+boxes, based on WHO IMCI (2014) and the NICE NG143 traffic lights adapted for parents. Seven steps with pictures teach
+how to look: watch the chest and count (the existing `chest-indrawing` picture), the skin in daylight, the glass test,
+the belly skin pinch, wee, tears and mouth, the soft spot, and picking the child up. The new pictures are
+`img/pics/look-*.svg` (no faces, no text). The breath counter link moved next to the breathing step. Each sign appears
+once on the page. 37 new narration lines; until they are voiced they play with the phone's own speech.
+
+New lines for a native speaker to check (Dari, then Pashto):
+
+- `danger-child.look` (Look, listen and feel. In a warm, bright place, open the child's clothes and check the breathing, the skin, the wee and how the child seems.)
+  - fa: ببینید، بشنوید و لمس کنید. در یک جای گرم و روشن، کالای طفل را باز کنید و نفس، پوست، پیشاب و حال طفل را ببینید.
+  - ps: وګورئ، واورئ او لمس یې کړئ. په یوه ګرم او روښانه ځای کې د ماشوم کالي خلاص کړئ، او ساه، پوستکی، متیازې او حال یې وګورئ.
+- `danger-child.look-breath` (Watch the chest and count: Count breaths for one minute while the child is calm. Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more.)
+  - fa: سینه را ببینید و نفس‌ها را بشمارید. وقتی طفل آرام است، نفس‌هایش را یک دقیقه بشمارید. نفس تیز است اگر: کمتر از ۲ ماه، ۶۰ یا بیشتر؛ ۲ تا ۱۲ ماه، ۵۰ یا بیشتر؛ ۱ تا ۵ سال، ۴۰ یا بیشتر.
+  - ps: سینه وګورئ او ساګانې وشمېرئ. کله چې ماشوم آرام وي، ساګانې یې یوه دقیقه وشمېرئ. ساه چټکه ده که: تر ۲ میاشتو کم، ۶۰ یا ډېر؛ له ۲ تر ۱۲ میاشتو، ۵۰ یا ډېر؛ له ۱ تر ۵ کلونو، ۴۰ یا ډېر.
+- `danger-child.breath` (Breathing: go to hospital now, day or night, if the child:)
+  - fa: نفس: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز
+  - ps: ساه: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `danger-child.breath.grunt` (grunts or moans with each breath)
+  - fa: با هر نفس ناله می‌کند
+  - ps: د هرې ساه سره ناله کوي
+- `danger-child.breath.nose` (nostrils open wide with each breath)
+  - fa: با هر نفس، سوراخ‌های بینی‌اش پهن می‌شود
+  - ps: د هرې ساه سره یې د پوزې سوري پراخېږي
+- `danger-child.breath.pause` (stops breathing for a few seconds at a time)
+  - fa: گاهی چند ثانیه نفسش بند می‌شود
+  - ps: کله کله یې ساه څو ثانیې بندېږي
+- `danger-child.breath.blue` (lips or tongue turn blue or grey)
+  - fa: لب‌ها یا زبانش کبود یا خاکستری شده
+  - ps: شونډې یا ژبه یې شنې یا خړې شوې دي
+- `danger-child.look-skin` (Look at the skin in daylight: Look at the lips, tongue, palms and soles. Then feel the hands and feet.)
+  - fa: پوست را در روشنی روز ببینید. لب‌ها، زبان، کف دست و کف پا را ببینید. بعد دست و پایش را لمس کنید.
+  - ps: پوستکی د ورځې په رڼا کې وګورئ. شونډې، ژبه، د لاسونو او پښو تلي وګورئ. بیا یې لاسونه او پښې لمس کړئ.
+- `danger-child.glass` (Test spots with a glass: Press the side of a clear glass firmly on the spots. If you can still see the spots through the glass, it is a danger sign.)
+  - fa: دانه‌ها را با گیلاس امتحان کنید. پهلوی یک گیلاس شفاف را محکم روی دانه‌ها فشار دهید. اگر دانه‌ها از پشت گیلاس هنوز دیده می‌شوند، علامت خطر است.
+  - ps: دانې په ګیلاس وازمویئ. د یو روڼ ګیلاس اړخ په دانو ټینګ کېکاږئ. که دانې د ګیلاس له شا لا هم ښکاري، د خطر نښه ده.
+- `danger-child.skin` (Skin: go to hospital now, day or night, if the child:)
+  - fa: پوست: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز
+  - ps: پوستکی: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `danger-child.skin.pale` (has very pale, grey or blue skin)
+  - fa: رنگ پوستش خیلی پریده، خاکستری یا کبود است
+  - ps: د پوستکي رنګ یې ډېر الوتی، خړ یا شین دی
+- `danger-child.skin.mottled` (has blotchy purple and pale patches on the skin)
+  - fa: پوستش لکه‌لکه است، با لکه‌های کبود و سفید
+  - ps: پوستکی یې داغ داغ دی، شین او سپین داغونه لري
+- `danger-child.skin.rash` (has spots that do not fade under a pressed glass)
+  - fa: دانه‌هایی دارد که زیر گیلاس از بین نمی‌روند
+  - ps: داسې دانې لري چې د ګیلاس لاندې نه ورکېږي
+- `danger-child.skin-soon` (Go to the clinic today if the child:)
+  - fa: اگر طفل این علامت را دارد، امروز به کلینیک بروید
+  - ps: که ماشوم دا نښه ولري، نن کلینیک ته ولاړ شئ
+- `danger-child.skin-soon.cold` (has a fever, but cold hands and feet)
+  - fa: تب دارد، اما دست و پایش سرد است
+  - ps: تبه لري، خو لاسونه او پښې یې سړې دي
+- `danger-child.pinch` (Pinch the skin of the belly: Lift the belly skin between two fingers, halfway between the navel and the side, then let go. It should go flat at once.)
+  - fa: پوست شکم را با دو انگشت بگیرید. پوست شکم را، بین ناف و پهلو، با دو انگشت بالا بکشید و رها کنید. باید فوراً هموار شود.
+  - ps: د ګېډې پوستکی په دوو ګوتو ونیسئ. د ګېډې پوستکی، د نوم او اړخ ترمنځ، په دوو ګوتو پورته کړئ او پرېږدئ یې. باید سمدلاسه هوار شي.
+- `danger-child.wee` (Check wee, tears and mouth: Count wet nappies, or how often the child wees. Look for tears when the child cries. Feel inside the mouth: is it dry?)
+  - fa: پیشاب، اشک و دهان را ببینید. کهنه‌های تر را بشمارید، یا ببینید طفل چند بار پیشاب می‌کند. وقت گریه اشک را ببینید. داخل دهانش را لمس کنید: خشک است؟
+  - ps: متیازې، اوښکې او خوله وګورئ. لمدې کهنې وشمېرئ، یا وګورئ چې ماشوم څو ځله متیازې کوي. د ژړا پر وخت اوښکې وګورئ. د خولې دننه یې لمس کړئ: وچه ده؟
+- `danger-child.soft-spot` (Feel a baby's soft spot: A baby has a soft spot on top of the head. When the baby is calm and held upright, it should be flat, not sunken or bulging.)
+  - fa: جای نرم سر طفل کوچک را لمس کنید. طفل کوچک بالای سرش یک جای نرم دارد. وقتی طفل آرام و راست نشسته است، باید هموار باشد، نه فرو رفته و نه برآمده.
+  - ps: د کوچني ماشوم د سر نرمه برخه لمس کړئ. کوچنی ماشوم د سر په سر کې یوه نرمه برخه لري. کله چې ماشوم آرام او نېغ ناست وي، باید هواره وي، نه ننوتې او نه پورته راوتلې.
+- `danger-child.dry` (Drying out: go to hospital now, day or night, if the child:)
+  - fa: کم‌آبی: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز
+  - ps: د اوبو کمښت: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `danger-child.dry.eyes` (has sunken eyes, and is very sleepy or cannot drink)
+  - fa: چشم‌هایش گود رفته، و خیلی خواب‌آلود است یا نمی‌تواند بنوشد
+  - ps: سترګې یې ننوتې دي، او ډېر خوب وړی دی یا نشي څښلای
+- `danger-child.dry.pinch` (pinched belly skin takes more than 2 seconds to go flat)
+  - fa: پوست شکم بعد از گرفتن، بیشتر از ۲ ثانیه طول می‌کشد تا هموار شود
+  - ps: د ګېډې پوستکی له نیولو وروسته، له ۲ ثانیو ډېر وخت نیسي چې هوار شي
+- `danger-child.dry-soon` (Go to the clinic today if the child:)
+  - fa: اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید
+  - ps: که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ
+- `danger-child.dry-soon.mouth` (has a dry mouth and tongue)
+  - fa: دهان و زبانش خشک است
+  - ps: خوله او ژبه یې وچې دي
+- `danger-child.dry-soon.wee` (has not weed for 8 hours or more, or has fewer wet nappies)
+  - fa: ۸ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود
+  - ps: ۸ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي
+- `danger-child.dry-soon.soft-spot` (baby: the soft spot on the head is sunken)
+  - fa: طفل کوچک: جای نرم سرش فرو رفته است
+  - ps: کوچنی ماشوم: د سر نرمه برخه یې ننوتې ده
+- `danger-child.dry-soon.tears` (cries with no tears)
+  - fa: بدون اشک گریه می‌کند
+  - ps: بې اوښکو ژاړي
+- `danger-child.look-move` (Pick the child up and watch: A well child holds its body, moves, and turns to your voice. A floppy child hangs limp like a cloth.)
+  - fa: طفل را بغل کنید و ببینید. طفل سالم بدنش را نگه می‌دارد، تکان می‌خورد و به صدای شما رو می‌گرداند. طفل سست مثل یک تکه پارچه آویزان می‌ماند.
+  - ps: ماشوم په غېږ کې ونیسئ او وګورئ. روغ ماشوم خپل بدن ټینګ ساتي، خوځېږي او ستاسو غږ ته مخ اړوي. سست ماشوم د ټوکر په څېر ځوړند پاتې کېږي.
+- `danger-child.seems` (How the child seems: go to hospital now, day or night, if the child:)
+  - fa: حال طفل: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز
+  - ps: د ماشوم حال: که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `danger-child.seems.floppy` (is floppy, and hangs limp like a cloth)
+  - fa: سست است و مثل پارچه آویزان می‌ماند
+  - ps: سست دی او د ټوکر په څېر ځوړند پاتې کېږي
+- `danger-child.seems.cry` (has a weak, high-pitched cry, or cries without stopping)
+  - fa: گریه‌اش ضعیف و تیز است، یا بی‌وقفه گریه می‌کند
+  - ps: ژړا یې کمزورې او تېره ده، یا پرله‌پسې ژاړي
+- `danger-child.seems.respond` (does not respond when you talk to or touch the child)
+  - fa: وقتی با او گپ می‌زنید یا لمسش می‌کنید، هیچ جواب نمی‌دهد
+  - ps: کله چې ورسره خبرې کوئ یا یې لمس کوئ، هېڅ ځواب نه ورکوي
+- `danger-child.seems.soft-spot` (baby: the soft spot on the head bulges up)
+  - fa: طفل کوچک: جای نرم سرش برآمده است
+  - ps: کوچنی ماشوم: د سر نرمه برخه یې پورته راوتلې ده
+- `danger-child.seems.neck` (has a stiff neck, and cannot bend the chin to the chest)
+  - fa: گردنش شخ است و نمی‌تواند زنخ را به سینه برساند
+  - ps: غاړه یې کلکه ده او زنه سینې ته نشي رسولای
+- `danger-child.seems-soon` (Go to the clinic today if the child:)
+  - fa: اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید
+  - ps: که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ
+- `danger-child.seems-soon.play` (is not interested in playing)
+  - fa: دلش به بازی نیست
+  - ps: لوبو ته یې زړه نه کېږي
+- `danger-child.seems-soon.active` (is much less active than usual)
+  - fa: خیلی کمتر از همیشه تکان می‌خورد
+  - ps: تر بل وخت ډېر لږ خوځېږي
+- `danger-child.seems-soon.smile` (does not smile as usual)
+  - fa: مثل همیشه لبخند نمی‌زند
+  - ps: د پخوا په څېر نه موسکی کېږي
+
+Language points: "کهنه" for nappy in both languages (cloth nappies; some families say "پمپرز"); the soft spot is
+described ("جای نرم سر" / "د سر نرمه برخه") because the local word is not known to us; "شخ" (stiff) and "زنخ" (chin)
+in Dari; "شین" for blue lips and skin and "ناله" for grunting in Pashto; "رنگ پریده" / "رنګ الوتی" for pale.
+
+Search (`content/src/search-phrases.json`): new keys `danger-child.look-breath`, `.breath`, `.glass`, `.skin`,
+`.skin-soon`, `.pinch`, `.dry`, `.dry-soon`, `.soft-spot`, `.seems`, `.seems-soon` (for example "rash glass",
+"rash does not fade", "blue lips", "no wee", "dry nappy", "bulging fontanelle", "دانه که با گیلاس نمیره",
+"طفلم پیشاب نکرده", "گردنش شخ شده", "دانې په ګیلاس نه ورکېږي", "ماشوم متیازې نه کوي", "د ماشوم غاړه کلکه ده").
+Three Dari phrases start with ? for a native check ("ملاق" for the soft spot). A new test set `unwell` (42 queries in
+`tools/search-tests.json`) passes 42/42; core and hard stay at 100%. "لب‌هایش کبود شد" (lips went blue) still opens
+baby CPR first, with this page second, both red; "lips turned blue" in English now opens this page first, CPR second.
+
+For Mo to check (medical):
+1. Fever age: this page keeps IMCI's "any fever under 2 months = hospital now" (as asked, and as on the fever page).
+   The temperature checker (`js/tools.js`, "Mo: any fever under 3 months = hospital") and the `reading-temp` page use
+   under 3 months, as NICE does. One age for the whole app?
+2. Nostrils flaring is red here as asked; NICE NG143 lists nasal flaring as amber (grunting, chest indrawing and a
+   breathing rate over 60 are red).
+3. Pale, grey or blue skin and mottled skin are red (NICE red); NICE puts pallor reported by a parent in amber.
+4. Cold hands and feet with a fever is amber (a sepsis warning in parent leaflets; not in the NG143 table itself).
+5. Drying out, red: "sunken eyes, and very sleepy or cannot drink" and "pinched skin takes more than 2 seconds to go
+   flat" (IMCI severe dehydration, simplified). Amber: dry mouth and tongue, no wee for 8 hours or more or fewer wet
+   nappies, sunken soft spot, no tears (IMCI uses sunken eyes and slow skin pinch for "some dehydration").
+6. How the child seems, red: floppy; weak, high-pitched or non-stop cry; does not respond when you talk to or touch the
+   child; bulging soft spot; stiff neck (cannot bend the chin to the chest). "Does not wake or stay awake" is covered by
+   the existing "very sleepy and hard to wake, or unconscious". Amber: not interested in playing, much less active,
+   does not smile as usual.
+7. The glass test as taught: "Press the side of a clear glass firmly on the spots. If you can still see the spots
+   through the glass, it is a danger sign." On darker skin the spots are easier to see on the palms and soles; the skin
+   step tells parents to look there.
+8. Fast breathing numbers on the page (under 2 months 60 or more, 2 to 12 months 50 or more, 1 to 5 years 40 or more)
+   match the breath counter. Fast breathing alone stays amber except under 2 months (red, in the young baby box).
+9. The page is now long (12 numbered steps and 10 boxes, about 4 minutes of narration). The validator warns about the
+   step count; the look steps could become their own page later if Mo prefers.
+10. Pictures (`img/pics/look-*.svg`): check that the floppy baby, the soft spot (flat, sunken, bulging) and the mottled
+   arm read clearly on a small phone.
