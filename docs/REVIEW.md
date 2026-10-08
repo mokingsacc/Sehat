@@ -5101,8 +5101,8 @@ listed at the end.
 
 HIGH
 - **CH2, KT-6** (temperature checker, child 2 months to 5 years): six signs, none about breathing → also "the lower
-  chest pulls in when breathing in" and "makes a harsh noise breathing in, even when calm" (red), and "breathes fast"
-  (clinic today at any reading, new line `ui.rd.v.temp-fast`: "Fast breathing in a child can be pneumonia. Go to the
+  chest pulls in when breathing in" and "makes a harsh noise breathing in, even when calm" (red), and the Fever page's "breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5
+  years" (`fever.soon.fast`; clinic today at any reading, new line `ui.rd.v.temp-fast`: "Fast breathing in a child can be pneumonia. Go to the
   clinic today: the child may need medicine. You can count the breaths with the breathing counter below."). The result
   has a row that opens the breathing counter (`ui.rd.temp-breaths`: "If the child breathes fast, count the breaths. Tap
   here to open the breathing counter."). Baby under 2 months: also "the lower chest pulls in strongly when breathing in"
@@ -5208,9 +5208,9 @@ LOW
 5. EM9: "alcohol" is named in a red item (alcohol, opium or other drugs). Change if it reads badly locally.
 
 ### Narration (no clips made yet)
-- New (32): `ui.who.diabetes`, `ui.who.nodiabetes`, `ui.rd.who.sugar`, `ui.rd.v.temp-baby-chilly`, `ui.rd.v.temp-fast`,
+- New (31): `ui.who.diabetes`, `ui.who.nodiabetes`, `ui.rd.who.sugar`, `ui.rd.v.temp-baby-chilly`, `ui.rd.v.temp-fast`,
   `ui.rd.temp-breaths`, `ui.rd.v.bp-high-faint`, `ui.rd.v.bp-preg-low`, `ui.rd.v.sugar-nodm-low`, `ui.rd.v.sugar-nodm-ok`,
-  `ui.rd.v.sugar-nodm-check`, `ui.rd.v.sugar-nodm-high`, `ui.rd.v.sugar-nodm-very-high`, `ui.rd.s.fast`, `ui.rd.s.vision`,
+  `ui.rd.v.sugar-nodm-check`, `ui.rd.v.sugar-nodm-high`, `ui.rd.v.sugar-nodm-very-high`, `ui.rd.s.vision`,
   `cpr-newborn.alone`, `cpr-newborn.older`, `seizures.urgent.fever`, `seizures.urgent.head`, `seizures.soon.first`,
   `reading-temp.soon.cold`, `reading-sugar.no-diabetes`, `head-injury.urgent.older`, `head-injury.urgent.drugs`,
   `head-injury.urgent.height`, `head-injury.urgent.baby`, `low-sugar.urgent.meter`, `hospital-arrive.urgent.dehydrated`,

@@ -122,7 +122,6 @@ ui.rd.clinic.muac	په کلینیک کې ماشوم تلي او اندازه ک�
 ui.rd.s.faint	سر یې ګرځي، یا بې هوښه شوی	dizzy, or has fainted
 ui.rd.s.blue	شونډې یا مخ شین یا خړ ښکاري	lips or face look blue or grey
 ui.rd.s.deep	چټکه او ژوره ساه اخلي	breathing fast and deep
-ui.rd.s.fast	چټکه ساه اخلي	breathes fast
 ui.rd.s.vision	د سترګو تتوالی، یا د لید له منځه تلل	blurred or lost vision
 ui.consentDistrict	په کومه ولسوالۍ کې اوسېږئ؟ دا موږ ته ښيي چې هره سیمه څه ته اړتیا لري. یوازې د ولسوالۍ نوم لېږل کېږي، نه کلی او نه ستاسو نوم. کولای شئ دا پرېږدئ.	Which district do you live in? This shows us what each area needs. Only the district is sent, never your village or your name. You can skip this.
 ui.fbVoiceAsk	ستاسو غږیز پیغام د صحت ډلې ته لېږل کېږي څو ستاسو نظر واوري. دا پیغام له تاسو یا ستاسو له ټیلیفون سره نه تړل کېږي، او له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ.	Your voice message will be sent to the Sehat team so they can hear your idea. It is not linked to you or your phone, and it is deleted after 90 days. Please do not say names or phone numbers.

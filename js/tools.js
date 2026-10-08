@@ -36,7 +36,7 @@ export function initTools(ctx) {
   let icons = null, iconsOf = null;
   const itemIcon = (id) => {
     if (iconsOf !== S.book) {
-      icons = { 'ui.rd.s.faint': 'sleepy', 'ui.rd.s.blue': 'breathe', 'ui.rd.s.deep': 'breathing-fast', 'ui.rd.s.fast': 'breathing-fast', 'ui.rd.s.vision': 'eye-blurred' }; iconsOf = S.book;
+      icons = { 'ui.rd.s.faint': 'sleepy', 'ui.rd.s.blue': 'breathe', 'ui.rd.s.deep': 'breathing-fast', 'ui.rd.s.vision': 'eye-blurred' }; iconsOf = S.book;
       for (const t of Object.values(S.book.topics)) for (const b of t.blocks || []) for (const it of b.items || []) icons[it.id] = it.icon;
     }
     return icons[id] || 'warning';
@@ -177,7 +177,7 @@ export function initTools(ctx) {
   // (fast = fast breathing in a child, at least clinic today: IMCI pneumonia; medical audit 8 Oct 2026, CH2/KT-6)
   const SIGNS = {
     'temp/baby2m': [['newborn.urgent.feed', 'u'], ['newborn.urgent.convulsion', 'u'], ['newborn.urgent.move', 'u'], ['newborn.urgent.breathing', 'u'], ['newborn.urgent.chest', 'u']],
-    'temp/child2m': [['fever.urgent.convulsion', 'u'], ['fever.urgent.neck', 'u'], ['fever.urgent.sleepy', 'u'], ['fever.urgent.drink', 'u'], ['fever.urgent.vomit', 'u'], ['fever.urgent.rash', 'u'], ['danger-child.urgent.chest', 'u'], ['cough.urgent.noise', 'u'], ['ui.rd.s.fast', 'fast']],
+    'temp/child2m': [['fever.urgent.convulsion', 'u'], ['fever.urgent.neck', 'u'], ['fever.urgent.sleepy', 'u'], ['fever.urgent.drink', 'u'], ['fever.urgent.vomit', 'u'], ['fever.urgent.rash', 'u'], ['danger-child.urgent.chest', 'u'], ['cough.urgent.noise', 'u'], ['fever.soon.fast', 'fast']],
     'temp/older': [['red-flags.urgent.fever-neck', 'u'], ['red-flags.urgent.confused', 'u'], ['red-flags.urgent.breathing', 'u'], ['fever.urgent.convulsion', 'u']],
     'temp/pregnant': [['pregnancy-danger.urgent.fever-weak', 'u'], ['pregnancy-danger.urgent.belly-pain', 'u'], ['pregnancy-danger.urgent.bleeding', 'u'], ['pregnancy-danger.urgent.breathing', 'u'], ['pregnancy-danger.urgent.fits', 'u']],
     'bp/adult': [['blood-pressure.urgent.chest', 'u'], ['blood-pressure.urgent.face', 'u'], ['blood-pressure.urgent.weak', 'u'], ['blood-pressure.urgent.speech', 'u'], ['blood-pressure.urgent.headache', 'u'], ['ui.rd.s.vision', 'u'], ['red-flags.urgent.breathing', 'u'], ['red-flags.urgent.confused', 'u'], ['ui.rd.s.faint', 'faint']],
