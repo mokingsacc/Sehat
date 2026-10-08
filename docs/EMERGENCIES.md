@@ -149,7 +149,7 @@ No existing file was overwritten.
   - Resuscitation Council UK 2025: Paediatric choking algorithm
   - IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking
 - Notes for review:
-  - IMPORTANT: the brief said chest thrusts 'with two fingers'. ERC/RCUK 2025 now use the two-thumb method for infant chest thrusts and CPR. AHA 2025 uses the heel of one hand. Two thumbs are used here to match the baby CPR page. To keep two fingers instead, change the step text to: 'Put two fingers on the middle of the breastbone, just below the nipple line, and push in sharply 5 times.'
+  - IMPORTANT: the brief said chest thrusts 'with two fingers'. ERC/RCUK 2025 now use the two-thumb method for infant chest thrusts and CPR. AHA 2025 uses the heel of one hand. Two thumbs are used here to match the baby CPR page. To keep two fingers instead, change the step text to: 'Put two fingers on the lower half of the breastbone, just below the nipple line, and push in sharply 5 times.'
   - No abdominal thrusts under 1 year (all guidelines).
   - 'Baby' means under 1 year. Older children go to the 'choking' page.
   - Hospital after any back blows or chest thrusts: RCUK/ERC advise a medical check after abdominal or chest thrusts. Back blows alone are included here because a baby's airway may be hurt and families find it hard to judge.
@@ -296,7 +296,7 @@ No existing file was overwritten.
 - Notes for review:
   - Replaces the short first-aid.head step; its 'watch for 24 hours' advice is kept.
   - 'Wake them a few times' is common lay advice, not WHO wording. NICE no longer requires routine waking. Check whether to keep it.
-  - Red flags follow NICE CG176 and IFRC (loss of consciousness, vomiting more than once, drowsiness, fit, worsening headache, fluid from nose or ears, weakness or speech change).
+  - Red flags follow NICE NG232 (2023, which replaced CG176) and IFRC (loss of consciousness, vomiting more than once, drowsiness, fit, worsening headache, fluid from nose or ears, weakness or speech change).
   - Hospital tip says 'send to a bigger hospital for a scan': CT may only be in Mazar-i-Sharif or Kabul. Check.
 
 ### electric-shock: Electric shock
@@ -487,11 +487,12 @@ All targets exist once the drafts are merged.
 
      | Age | Pages in the list |
      |---|---|
-     | Newborn, just born | cpr-newborn, then newborn (danger signs) |
-     | Baby under 1 | cpr-baby; choking-baby, unconscious, fever-fits, drowning, burns, poisoning, danger-child |
-     | Child, 1 year to puberty | cpr-child; choking, unconscious, seizures, fever-fits (to 5 years), drowning, bleeding, burns, falls-fractures, head-injury, poisoning, snake-scorpion, electric-shock, heat-stroke, cold-hypothermia, eye-chemical, allergy-severe, asthma-attack, nosebleed, danger-child |
-     | Adult or teenager | cpr-adult; choking, unconscious, seizures, bleeding, burns, falls-fractures, head-injury, poisoning, snake-scorpion, electric-shock, drowning, heat-stroke, cold-hypothermia, eye-chemical, allergy-severe, low-sugar, asthma-attack, nosebleed, red-flags (heart attack, stroke), pregnancy-danger |
+     | Newborn, just born | cpr-newborn; newborn (danger signs), cpr-baby (a baby born more than a day ago), choking-baby |
+     | Baby under 1 | cpr-baby; choking-baby, unconscious, seizures, fever-fits, drowning, bleeding, burns, falls-fractures, head-injury, poisoning, fumes-poisoning, snake-scorpion, dog-bite, electric-shock, heat-stroke, cold-hypothermia, eye-chemical, allergy-severe, danger-child |
+     | Child, 1 year to puberty | cpr-child; choking, unconscious, seizures, fever-fits (to 5 years), drowning, bleeding, burns, falls-fractures, head-injury, poisoning, snake-scorpion, dog-bite, electric-shock, heat-stroke, cold-hypothermia, eye-chemical, allergy-severe, low-sugar, asthma-attack, nosebleed, danger-child |
+     | Adult or teenager | cpr-adult; choking, unconscious, seizures, bleeding, burns, falls-fractures, head-injury, poisoning, snake-scorpion, dog-bite, electric-shock, drowning, heat-stroke, cold-hypothermia, eye-chemical, allergy-severe, low-sugar, asthma-attack, nosebleed, red-flags (heart attack, stroke), pregnancy-danger |
 
+   - Medical audit 8 Oct 2026 (EM2, EM3, EM24, EM25): the baby card now lists every emergency that applies under 1, the newborn card adds cpr-baby and choking-baby, dog-bite is on the child and adult cards, the emergency list and the urgent pack, and low-sugar is on the child card. config.json is the live list.
    - The proposed strings, with fa, ps and en, and the two narrated `say` lines, are in `content/drafts/emergencies/ui-additions.json`. js/app.js, config.json and ui.json were not edited. The button needs a small `quick()`/screen addition in app.js.
 5. **symptoms.json** (the "What is wrong?" finder) could add these topics to existing symptom ids:
 

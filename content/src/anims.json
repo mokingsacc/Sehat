@@ -111,9 +111,9 @@
     "en": "If the baby is not crying or breathing, shout for help. Send someone to bring a car to go to hospital. Keep the baby warm."
   },
   "anim.cpr-newborn.s3": {
-    "fa": "نوزاد را به پشت بخوابانید و سرش را کمی به عقب ببرید. دهان و بعد بینی‌اش را با یک تکهٔ پاک آهسته پاک کنید.",
-    "ps": "ماشوم په شا څملوئ او سر یې لږ شاته کړئ. خوله او بیا پوزه یې په پاکه ټوټه ورو پاکه کړئ.",
-    "en": "Lay the baby on its back with the head tilted back a little. Gently wipe the mouth, then the nose, with a clean cloth."
+    "fa": "نوزاد را به پشت بخوابانید و سرش را کمی به عقب ببرید. اگر دهان یا بینی‌اش پر از مایع است، آن را با یک تکهٔ پاک آهسته پاک کنید.",
+    "ps": "ماشوم په شا څملوئ او سر یې لږ شاته کړئ. که خوله یا پوزه یې له اوبو ډکه وي، په پاکه ټوټه یې ورو پاکه کړئ.",
+    "en": "Lay the baby on its back with the head tilted back a little. If the mouth or nose is full of fluid, gently wipe it with a clean cloth."
   },
   "anim.cpr-newborn.s4": {
     "fa": "یک بار دیگر پشت یا کف پاهایش را مالش دهید. به سینه‌اش ببینید: آیا نفس می‌کشد؟",

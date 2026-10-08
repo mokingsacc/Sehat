@@ -127,12 +127,21 @@
           }
         },
         {
-          "id": "seizures.urgent.first",
-          "icon": "warning",
+          "id": "seizures.urgent.fever",
+          "icon": "stiff-neck",
           "text": {
-            "fa": "این اولین تشنج اوست",
-            "ps": "دا یې لومړی اختلاج دی",
-            "en": "it is their first fit ever"
+            "fa": "تشنج با تب، گردن شخ یا سردرد شدید همراه است",
+            "ps": "اختلاج له تبې، کلکې غاړې یا سخت سر درد سره دی",
+            "en": "the fit comes with fever, a stiff neck or a bad headache"
+          }
+        },
+        {
+          "id": "seizures.urgent.head",
+          "icon": "headache",
+          "text": {
+            "fa": "تشنج بعد از ضربه به سر شروع شد",
+            "ps": "اختلاج سر ته له ټکر وروسته پیل شو",
+            "en": "the fit follows a knock to the head"
           }
         },
         {
@@ -192,6 +201,15 @@
         "en": "Go to the clinic today if:"
       },
       "items": [
+        {
+          "id": "seizures.soon.first",
+          "icon": "convulsion",
+          "text": {
+            "fa": "این اولین تشنج او بود و حالا کاملاً به حال آمده است",
+            "ps": "دا یې لومړی اختلاج و او اوس بشپړ ځان ته راغلی",
+            "en": "it was their first fit ever, and they are fully awake again"
+          }
+        },
         {
           "id": "seizures.soon.more-fits",
           "icon": "convulsion",
@@ -294,6 +312,7 @@
     "A known epileptic with a short, typical fit who wakes fully does not need hospital. The text covers this because only the listed situations are urgent.",
     "Dont 'make them smell things' covers the custom of holding a shoe or onion under the nose. Check which local practices are common and whether to name them.",
     "The stigma tip ('can go to school, work and marry') follows mhGAP's psychoeducation messages. It makes no religious claim. The id is 'not-curse', but the text does not say 'curse'.",
-    "Dari مرگی and Pashto مرګي for epilepsy: check local terms (e.g. 'صرع' is formal)."
+    "Dari مرگی and Pashto مرګي for epilepsy: check local terms (e.g. 'صرع' is formal).",
+    "Medical audit 8 Oct 2026: EM7, two red items added (seizures.urgent.fever, seizures.urgent.head), as on the epilepsy page (mhGAP 2.0: look for fever, headache, stiff neck or head injury after a fit and refer urgently). EM19, a first fit ever moved from red to amber (seizures.soon.first: clinic today once fully awake), matching epilepsy.soon.first and mhGAP; a long fit, fits in a row, not waking, injury, fever, a knock to the head, pregnancy and any fit in a baby or child stay red. The old item id seizures.urgent.first is gone. The red box now has 9 items."
   ]
 }

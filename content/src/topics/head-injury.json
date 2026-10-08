@@ -169,6 +169,42 @@
             "ps": "لاس یا پښه یې کمزوري ده، یا خبرې یې ګډې وډې دي",
             "en": "have a weak arm or leg, or slurred speech"
           }
+        },
+        {
+          "id": "head-injury.urgent.older",
+          "icon": "pill",
+          "text": {
+            "fa": "۶۵ ساله یا بزرگ‌تر است، یا دوای رقیق‌کنندهٔ خون می‌خورد",
+            "ps": "۶۵ کلن یا تر دې زوړ دی، یا د وینې د نري کولو درمل خوري",
+            "en": "are 65 or older, or take medicine that thins the blood"
+          }
+        },
+        {
+          "id": "head-injury.urgent.drugs",
+          "icon": "warning",
+          "text": {
+            "fa": "شراب نوشیده بود، یا تریاک یا مواد مخدر دیگر گرفته بود",
+            "ps": "شراب یې څښلي وو، یا یې تریاک یا نور نشه يي توکي اخیستي وو",
+            "en": "had drunk alcohol, or taken opium or other drugs"
+          }
+        },
+        {
+          "id": "head-injury.urgent.height",
+          "icon": "warning",
+          "text": {
+            "fa": "از بام یا جای بلند افتاد، یا در تصادم موتر بود",
+            "ps": "له بام یا لوړ ځای څخه ولوېد، یا د موټر په ټکر کې و",
+            "en": "fell from a roof or high place, or were in a road crash"
+          }
+        },
+        {
+          "id": "head-injury.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "شیرخوار کمتر از ۱ سال است و روی سرش ورم یا زخم بزرگ دارد",
+            "ps": "له ۱ کال څخه کم ماشوم دی او په سر یې لوی پړسوب یا ټپ دی",
+            "en": "are a baby under 1 with a big bump or cut on the head"
+          }
         }
       ]
     },
@@ -216,12 +252,14 @@
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): head injury and concussion",
     "European Resuscitation Council Guidelines 2025: First Aid: concussion and head injury",
     "WHO Basic Emergency Care (WHO/ICRC, 2018): head injury, danger signs",
-    "WHO/UNICEF World report on child injury prevention (2008): falls"
+    "WHO/UNICEF World report on child injury prevention (2008): falls",
+    "NICE NG232 Head injury: assessment and early management (May 2023; replaced CG176): age 65 or over, anticoagulants, drug or alcohol intoxication, dangerous mechanism (fall from a height, road traffic collision), a baby under 1 year with a bruise, swelling or cut on the head"
   ],
   "review": [
     "Replaces the short first-aid.head step; its 'watch for 24 hours' advice is kept.",
     "'Wake them a few times' is common lay advice, not WHO wording. NICE no longer requires routine waking. Check whether to keep it.",
-    "Red flags follow NICE CG176 and IFRC (loss of consciousness, vomiting more than once, drowsiness, fit, worsening headache, fluid from nose or ears, weakness or speech change).",
-    "Hospital tip says 'send to a bigger hospital for a scan': CT may only be in Mazar-i-Sharif or Kabul. Check."
+    "Red flags follow NICE NG232 (2023, which replaced CG176) and IFRC (loss of consciousness, vomiting more than once, drowsiness, fit, worsening headache, fluid from nose or ears, weakness or speech change).",
+    "Hospital tip says 'send to a bigger hospital for a scan': CT may only be in Mazar-i-Sharif or Kabul. Check.",
+    "Medical audit 8 Oct 2026: EM9, four red items added from NICE NG232 (65 or older or on blood thinners; alcohol, opium or other drugs; a fall from a roof or height or a road crash; a baby under 1 year with a big bump or cut on the head). The red box now has 11 items. EM26, the citation is now NICE NG232 (CG176 was replaced in May 2023)."
   ]
 }

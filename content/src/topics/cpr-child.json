@@ -53,9 +53,9 @@
         "en": "Open the airway, look for breathing"
       },
       "text": {
-        "fa": "طفل را به پشت روی زمین سخت بخوابانید. سرش را کمی به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
-        "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې لږ شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
-        "en": "Lay the child on its back on firm ground. Tilt the head back a little, lift the chin, and watch the chest for 10 seconds."
+        "fa": "طفل را به پشت روی زمین سخت بخوابانید. سرش را کمی به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې لږ شاته کړئ، زنه یې پورته کړئ او تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
+        "en": "Lay the child on its back on firm ground. Tilt the head back a little, lift the chin, and watch the chest for up to 10 seconds."
       }
     },
     {
@@ -184,11 +184,13 @@
     "American Heart Association 2025 Guidelines for CPR and ECC: Adult and Pediatric Basic Life Support",
     "ILCOR 2025 International Consensus on CPR and ECC Science with Treatment Recommendations",
     "Resuscitation Council UK 2025: Paediatric out-of-hospital basic life support algorithm",
-    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): resuscitation"
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): resuscitation",
+    "Resuscitation Council UK 2025: Adult basic life support guidelines (check breathing for no more than 10 seconds)"
   ],
   "review": [
     "Ages: 'child' = 1 year to puberty (ERC/AHA). From puberty, use the adult page.",
     "Ratio 30:2 after 5 first breaths (RCUK 2025 allows lay rescuers 30:2 or 15:2; ERC 2025 trained rescuers use 15:2). See the note on cpr-baby.",
-    "Depth 'a third of the chest, about 5 cm' (ERC/AHA). One hand, or two hands for a big child."
+    "Depth 'a third of the chest, about 5 cm' (ERC/AHA). One hand, or two hands for a big child.",
+    "Medical audit 8 Oct 2026 (EM14): breathing check now 'for up to 10 seconds' (was 'for 10 seconds'), as in the CPR film narration; check for no more than 10 seconds and start as soon as breathing is not normal (RCUK 2025)."
   ]
 }

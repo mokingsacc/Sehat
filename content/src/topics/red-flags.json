@@ -36,9 +36,9 @@
           "id": "red-flags.urgent.chest-pain",
           "icon": "heart",
           "text": {
-            "fa": "درد شدید و فشارنده سینه که به بازو یا الاشه می‌رود، همراه با عرق",
-            "ps": "د سینې سخت او زبېښونکی درد چې لاس یا ژامې ته ځي، او خولې کېږي",
-            "en": "Crushing chest pain spreading to the arm or jaw, with sweating"
+            "fa": "درد فشارنده یا سنگین در سینه، یا دردی که به بازو، الاشه یا پشت می‌رود",
+            "ps": "د سینې زبېښونکی یا دروند درد، یا درد چې لاس، ژامې یا شا ته ځي",
+            "en": "Crushing or pressing chest pain, or pain spreading to the arm, jaw or back"
           }
         },
         {
@@ -319,6 +319,7 @@
     "Icons: trouble swallowing uses 'no-drink' (a 'swallow' icon would be better); yellow eyes uses 'jaundice'; confusion uses 'sleepy'; vomiting blood uses 'vomit'.",
     "fa uses everyday Afghan words: الاشه (jaw), گیچی (confusion), شخی گردن (stiff neck), دریور (driver); check with the translator.",
     "CT scanning is at Balkh Regional Hospital (Mazar), not Aybak; 'scans' is kept generic.",
-    "Clot-dissolving stroke treatment is probably not available regionally; the text does not promise it."
+    "Clot-dissolving stroke treatment is probably not available regionally; the text does not promise it.",
+    "Medical audit 8 Oct 2026 (EM13): the chest pain item no longer reads as if pain, spreading and sweating are all needed: 'Crushing or pressing chest pain, or pain spreading to the arm, jaw or back' (WHO cardiovascular diseases fact sheet 2025: sweating may happen, it is not required). The item is also a sign chip in the breathing counter and the oxygen checker, and a line on the symptom pictures."
   ]
 }

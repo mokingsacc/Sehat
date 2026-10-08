@@ -63,9 +63,9 @@
         "en": "5 pushes on the chest"
       },
       "text": {
-        "fa": "شیرخوار را رو به بالا بچرخانید، سرش پایین‌تر. هر دو شست را در وسط استخوان سینه بگذارید و ۵ بار تیز به داخل فشار دهید.",
-        "ps": "ماشوم مخ پورته واړوئ، سر یې ټیټ. دواړه غټې ګوتې د سینې د هډوکي په منځ کې کېږدئ او ۵ ځله په چټکۍ سره ننه فشار ورکړئ.",
-        "en": "Turn the baby face up, head lower. Put both thumbs on the middle of the breastbone and push in sharply 5 times."
+        "fa": "شیرخوار را رو به بالا بچرخانید، سرش پایین‌تر. هر دو شست را روی نیمهٔ پایینی استخوان سینه، درست زیر خط بین دو نوک سینه، بگذارید و ۵ بار تیز به داخل فشار دهید.",
+        "ps": "ماشوم مخ پورته واړوئ، سر یې ټیټ. دواړه غټې ګوتې د سینې د هډوکي په لاندینۍ نیمایي کې، د تیو د سرونو له کرښې لږ لاندې، کېږدئ او ۵ ځله په چټکۍ سره ننه فشار ورکړئ.",
+        "en": "Turn the baby face up, head lower. Put both thumbs on the lower half of the breastbone, just below the nipple line, and push in sharply 5 times."
       },
       "picture": "em-choking-baby-chest"
     },
@@ -232,14 +232,16 @@
     "European Resuscitation Council Guidelines 2025: Basic Life Support and Paediatric Life Support, foreign-body airway obstruction",
     "American Heart Association 2025 Guidelines: adult and pediatric foreign-body airway obstruction (back blows and abdominal thrusts for adults and children; back blows and chest thrusts for infants)",
     "Resuscitation Council UK 2025: Paediatric choking algorithm",
-    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking"
+    "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking",
+    "Resuscitation Council UK 2025: Paediatric basic life support guidelines (infant chest compressions on the lower half of the breastbone, just below the nipple line)"
   ],
   "review": [
-    "IMPORTANT: the brief said chest thrusts 'with two fingers'. ERC/RCUK 2025 now use the two-thumb method for infant chest thrusts and CPR. AHA 2025 uses the heel of one hand. Two thumbs are used here to match the baby CPR page. To keep two fingers instead, change the step text to: 'Put two fingers on the middle of the breastbone, just below the nipple line, and push in sharply 5 times.'",
+    "IMPORTANT: the brief said chest thrusts 'with two fingers'. ERC/RCUK 2025 now use the two-thumb method for infant chest thrusts and CPR. AHA 2025 uses the heel of one hand. Two thumbs are used here to match the baby CPR page. To keep two fingers instead, change the step text to: 'Put two fingers on the lower half of the breastbone, just below the nipple line, and push in sharply 5 times.'",
     "No abdominal thrusts under 1 year (all guidelines).",
     "'Baby' means under 1 year. Older children go to the 'choking' page.",
     "Hospital after any back blows or chest thrusts: RCUK/ERC advise a medical check after abdominal or chest thrusts. Back blows alone are included here because a baby's airway may be hurt and families find it hard to judge.",
     "Pashto ژامه for jaw and Dari الاشه (as in red-flags): check.",
-    "Home safety section (2026-10-07): choking-baby.prevent moved to child-safety (child-safety.small, same text) and is replaced by a link (choking-baby.safety)."
+    "Home safety section (2026-10-07): choking-baby.prevent moved to child-safety (child-safety.small, same text) and is replaced by a link (choking-baby.safety).",
+    "Medical audit 8 Oct 2026 (EM4): the thumbs now go on the 'lower half of the breastbone, just below the nipple line' (was 'the middle of the breastbone'), matching the baby CPR film narration (anim.cpr-baby.s5) and the approved picture (RCUK and AHA 2025). Text only; the pictures are unchanged."
   ]
 }

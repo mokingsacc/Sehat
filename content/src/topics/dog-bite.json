@@ -17,9 +17,9 @@
       "id": "dog-bite.lead",
       "type": "lead",
       "text": {
-        "fa": "هاری از راه گزیدن یا لیسیدن سگ، شغال، روباه، پشک یا حیوان مریض دیگر سرایت می‌کند. وقتی مریضی شروع شد همیشه می‌کشد، اما واکسین بعد از گزیدگی، اگر زود شروع شود، همیشه از آن جلوگیری می‌کند.",
-        "ps": "لېونتوب (هاري) د ناروغ سپي، ګیدړ، لومړ، پیشو یا بل څاروي د چیچلو یا څټلو له لارې خپرېږي. کله چې ناروغي پیل شي تل وژونکې ده، خو له چیچلو وروسته واکسین، که ژر پیل شي، تل یې مخه نیسي.",
-        "en": "Rabies is passed by the bite or lick of a sick dog, jackal, fox, cat or other animal. Once the illness starts it always kills, but the vaccine after a bite prevents it every time if started early."
+        "fa": "هاری از راه گزیدن یا لیسیدن سگ، شغال، روباه، پشک یا حیوان مریض دیگر سرایت می‌کند. وقتی مریضی شروع شد همیشه می‌کشد، اما اگر واکسین زود شروع شود و همهٔ پیچکاری‌ها گرفته شود، و برای گزیدگی عمیق سیروم هم زده شود، تقریباً همیشه از آن جلوگیری می‌کند.",
+        "ps": "لېونتوب (هاري) د ناروغ سپي، ګیدړ، لومړ، پیشو یا بل څاروي د چیچلو یا څټلو له لارې خپرېږي. کله چې ناروغي پیل شي تل وژونکې ده، خو که واکسین ژر پیل شي او ټولې پیچکارۍ ولګول شي، او د ژورو چیچلو لپاره سیروم هم ولګول شي، نږدې تل یې مخه نیسي.",
+        "en": "Rabies is passed by the bite or lick of a sick dog, jackal, fox, cat or other animal. Once the illness starts it always kills, but the vaccine almost always prevents it if started early and every injection is given, with serum for deep bites."
       }
     },
     {
@@ -92,9 +92,9 @@
         "en": "Vaccinate your own dogs"
       },
       "text": {
-        "fa": "اگر در قریهٔ شما روز واکسین سگ‌ها برگزار می‌شود، سگ‌های خود را ببرید. سگ واکسین‌شده هاری را سرایت نمی‌دهد. سگ‌ها را از اطفال خواب دور نگه دارید.",
-        "ps": "که ستاسو په کلي کې د سپیو د واکسین ورځ وي، خپل سپي یوسئ. واکسین شوی سپی لېونتوب نه خپروي. سپي له ویده ماشومانو لرې وساتئ.",
-        "en": "If your village has a dog vaccination day, take your dogs. Vaccinated dogs cannot pass rabies. Keep dogs away from sleeping children."
+        "fa": "اگر در قریهٔ شما روز واکسین سگ‌ها برگزار می‌شود، سگ‌های خود را ببرید. سگ واکسین‌شده بسیار کم هاری را سرایت می‌دهد، اما بعد از هر گزیدگی باز هم برای واکسین بروید. سگ‌ها را از اطفال خواب دور نگه دارید.",
+        "ps": "که ستاسو په کلي کې د سپیو د واکسین ورځ وي، خپل سپي یوسئ. واکسین شوی سپی ډېر لږ لېونتوب خپروي، خو بیا هم له هر چیچلو وروسته د واکسین لپاره ولاړ شئ. سپي له ویده ماشومانو لرې وساتئ.",
+        "en": "If your village has a dog vaccination day, take your dogs. A vaccinated dog rarely passes rabies, but still go for the vaccine after any bite. Keep dogs away from sleeping children."
       }
     },
     {
@@ -286,6 +286,7 @@
     "Antibiotic for deep/hand bites follows the WHO animal bites fact sheet; the medicine (usually amoxicillin-clavulanate) is not named.",
     "Watching a pet dog for 10 days does not replace starting the vaccine; the step says to still go the same day. Check the wording cannot be heard as 'wait and see'.",
     "The first-aid topic already has a short bite step and animal-illness has a dog tip; this topic goes deeper. Keep all three consistent if wording changes.",
-    "Pashto لېونتوب (هاري) and Dari هاری: confirm the words villagers use for rabies."
+    "Pashto لېونتوب (هاري) and Dari هاری: confirm the words villagers use for rabies.",
+    "Medical audit 8 Oct 2026: EM11, 'Vaccinated dogs cannot pass rabies' is now 'A vaccinated dog rarely passes rabies, but still go for the vaccine after any bite' (WHO: give the vaccine after every category II or III bite). EM16, the lead no longer says the vaccine prevents rabies 'every time': it almost always does if started early and every injection is given, with serum for deep bites (WHO rabies fact sheet 2026)."
   ]
 }

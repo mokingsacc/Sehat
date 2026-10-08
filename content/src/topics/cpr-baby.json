@@ -53,9 +53,9 @@
         "en": "Open the airway, look for breathing"
       },
       "text": {
-        "fa": "شیرخوار را به پشت روی زمین سخت بخوابانید. سرش را راست نگه دارید، زیاد به عقب نبرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
-        "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې نېغ وساتئ، ډېر یې شاته مه کوئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
-        "en": "Lay the baby on its back on a firm floor. Keep the head straight, not bent back, lift the chin, and watch the chest for 10 seconds."
+        "fa": "شیرخوار را به پشت روی زمین سخت بخوابانید. سرش را راست نگه دارید، زیاد به عقب نبرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې نېغ وساتئ، ډېر یې شاته مه کوئ، زنه یې پورته کړئ او تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
+        "en": "Lay the baby on its back on a firm floor. Keep the head straight, not bent back, lift the chin, and watch the chest for up to 10 seconds."
       }
     },
     {
@@ -84,9 +84,9 @@
         "en": "Push with two thumbs"
       },
       "text": {
-        "fa": "سینه را با هر دو دست بگیرید و هر دو شست را در وسط استخوان سینه بگذارید. یک سوم سینه، حدود ۴ سانتی‌متر، پایین فشار دهید.",
-        "ps": "سینه په دواړو لاسونو ونیسئ او دواړه غټې ګوتې د سینې د هډوکي په منځ کې کېږدئ. د سینې درېیمه برخه، شاوخوا ۴ سانتي متره، لاندې فشار ورکړئ.",
-        "en": "Hold the chest in both hands with both thumbs on the middle of the breastbone. Push down a third of the chest, about 4 centimetres."
+        "fa": "سینه را با هر دو دست بگیرید و هر دو شست را روی نیمهٔ پایینی استخوان سینه، درست زیر خط بین دو نوک سینه، بگذارید. یک سوم سینه، حدود ۴ سانتی‌متر، پایین فشار دهید.",
+        "ps": "سینه په دواړو لاسونو ونیسئ او دواړه غټې ګوتې د سینې د هډوکي په لاندینۍ نیمایي کې، د تیو د سرونو له کرښې لږ لاندې، کېږدئ. د سینې درېیمه برخه، شاوخوا ۴ سانتي متره، لاندې فشار ورکړئ.",
+        "en": "Hold the chest in both hands, with both thumbs on the lower half of the breastbone, just below the nipple line. Push down a third of the chest, about 4 centimetres."
       },
       "picture": "em-cpr-baby-thumbs"
     },
@@ -215,13 +215,17 @@
     "ILCOR 2025 International Consensus on CPR and ECC Science with Treatment Recommendations",
     "Resuscitation Council UK 2025: Paediatric out-of-hospital basic life support algorithm",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): resuscitation",
-    "WHO Pocket book of hospital care for children, 2nd edition (2013): chart 3, infant airway position"
+    "WHO Pocket book of hospital care for children, 2nd edition (2013): chart 3, infant airway position",
+    "Resuscitation Council UK 2025: Paediatric basic life support guidelines (infant chest compressions on the lower half of the breastbone, just below the nipple line)",
+    "Resuscitation Council UK 2025: Adult basic life support guidelines (check breathing for no more than 10 seconds)"
   ],
   "review": [
     "Two thumbs, not two fingers. ERC/RCUK 2025 replaced the two-finger method with the two-thumb encircling method for infants. AHA 2025 allows two thumbs or the heel of one hand. Two thumbs used here, and the picture shows it.",
     "Ratio 30:2 after 5 first breaths. ERC 2025 uses 15:2 for trained rescuers. RCUK 2025 allows lay bystanders 30:2 or 15:2. 30:2 was chosen so every age uses one number, the same as the adult page and the animation. Change to 15:2 if you prefer.",
     "Depth 'a third of the chest, about 4 cm' (ERC/AHA).",
     "Lone rescuer: 1 minute of CPR, then carry the baby to get help (ERC/RCUK). There is no ambulance number, so 'send someone for a car'.",
-    "Response check by tapping the soles of the feet is common teaching. ERC says 'stimulate', with no set method."
+    "Response check by tapping the soles of the feet is common teaching. ERC says 'stimulate', with no set method.",
+    "Medical audit 8 Oct 2026 (EM4): the thumbs now go on the 'lower half of the breastbone, just below the nipple line' (was 'the middle of the breastbone'), matching the baby CPR film narration (anim.cpr-baby.s5) and the approved picture (RCUK and AHA 2025). Text only; the pictures are unchanged.",
+    "Medical audit 8 Oct 2026 (EM14): breathing check now 'for up to 10 seconds' (was 'for 10 seconds'), as in the CPR film narration; check for no more than 10 seconds and start as soon as breathing is not normal (RCUK 2025)."
   ]
 }

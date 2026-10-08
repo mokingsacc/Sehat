@@ -240,6 +240,7 @@
     "burns",
     "poisoning",
     "snake-scorpion",
+    "dog-bite",
     "allergy-severe",
     "head-injury",
     "falls-fractures",
@@ -264,7 +265,9 @@
       "cpr": "cpr-newborn",
       "anim": "cpr-newborn",
       "topics": [
-        "newborn"
+        "newborn",
+        "cpr-baby",
+        "choking-baby"
       ]
     },
     {
@@ -276,11 +279,22 @@
       "topics": [
         "choking-baby",
         "unconscious",
+        "seizures",
         "fever-fits",
         "drowning",
+        "bleeding",
         "burns",
+        "falls-fractures",
+        "head-injury",
         "poisoning",
         "fumes-poisoning",
+        "snake-scorpion",
+        "dog-bite",
+        "electric-shock",
+        "heat-stroke",
+        "cold-hypothermia",
+        "eye-chemical",
+        "allergy-severe",
         "danger-child"
       ]
     },
@@ -303,11 +317,13 @@
         "poisoning",
         "fumes-poisoning",
         "snake-scorpion",
+        "dog-bite",
         "electric-shock",
         "heat-stroke",
         "cold-hypothermia",
         "eye-chemical",
         "allergy-severe",
+        "low-sugar",
         "asthma-attack",
         "nosebleed",
         "danger-child"
@@ -330,6 +346,7 @@
         "poisoning",
         "fumes-poisoning",
         "snake-scorpion",
+        "dog-bite",
         "electric-shock",
         "drowning",
         "heat-stroke",

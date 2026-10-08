@@ -47,9 +47,9 @@
         "en": "Go to hospital at once"
       },
       "text": {
-        "fa": "فوراً یک نفر را برای آوردن موتر بفرستید؛ این حالت زود بدتر می‌شود. اگر قلم پیچکاری حساسیت خود را دارد، کمکش کنید آن را به بیرون ران بزند.",
-        "ps": "سمدستي یو څوک د موټر راوړلو لپاره ولېږئ؛ دا حالت ژر بدترېږي. که د حساسیت خپل قلم پیچکاري لري، مرسته ورسره وکړئ چې د ورون بهرنۍ خوا ته یې ووهي.",
-        "en": "Send for a car straight away; this can get worse fast. If they have their own allergy pen, help them use it in the outer thigh."
+        "fa": "فوراً یک نفر را برای آوردن موتر بفرستید. اگر قلم پیچکاری حساسیت خود را دارد، کمکش کنید آن را به بیرون ران بزند، و اگر بعد از ۵ دقیقه بهتر نشد، قلم دوم را هم بزند.",
+        "ps": "سمدستي یو څوک د موټر راوړلو لپاره ولېږئ. که د حساسیت خپل قلم پیچکاري لري، مرسته ورسره وکړئ چې د ورون بهرنۍ خوا ته یې ووهي، او که له ۵ دقیقو وروسته ښه نه شو، دویم قلم هم دې ووهي.",
+        "en": "Send for a car at once. If they have their own allergy pen, help them use it in the outer thigh, and a second one after 5 minutes if no better."
       }
     },
     {
@@ -179,12 +179,14 @@
     "European Resuscitation Council Guidelines 2025: First Aid: anaphylaxis (adrenaline auto-injector in the outer thigh; lie flat with legs raised or sit if breathing is hard; avoid standing)",
     "World Allergy Organization Anaphylaxis Guidance (2020)",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): severe allergic reaction",
-    "WHO Model List of Essential Medicines: adrenaline for anaphylaxis"
+    "WHO Model List of Essential Medicines: adrenaline for anaphylaxis",
+    "Resuscitation Council UK 2025: First aid guidelines (anaphylaxis: a second adrenaline auto-injector after 5 minutes if no better)"
   ],
   "review": [
     "Allergy pens (adrenaline auto-injectors) are rare in Afghanistan. The step mentions them only 'if they have their own'. No dose is given (the spec allows none).",
     "Positioning follows ERC 2025: sit up if breathing is hard, lie flat with legs raised if faint, do not stand or walk.",
     "Pashto 'مچۍ' (bee) and 'ډبره' (wasp) need checking; Dari uses 'زنبور' for both, with 'زنبور عسل' for honey bee.",
-    "No 'dont' block: the steps cover the main points."
+    "No 'dont' block: the steps cover the main points.",
+    "Medical audit 8 Oct 2026 (EM18): a second pen after 5 minutes if no better and one is at hand (RCUK 2025). 'this can get worse fast' was dropped for length; the lead and title already say so."
   ]
 }

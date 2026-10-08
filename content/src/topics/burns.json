@@ -78,9 +78,9 @@
         "en": "Cover loosely"
       },
       "text": {
-        "fa": "سوختگی را با پلاستیک پاک یا یک تکهٔ پاک و خشک سست بپوشانید. آبله‌ها را نترکانید.",
-        "ps": "سوځېدلی ځای په پاک پلاستیک یا پاک او وچ ټوکر سست وپوښئ. اوبلنې دانې مه چوي کوئ.",
-        "en": "Cover the burn loosely with clean plastic food wrap or a clean, dry cloth. Do not burst blisters."
+        "fa": "سوختگی را با یک تکهٔ پاک و خشک، یا اگر دارید با پلاستیک پاک، سست بپوشانید. آبله‌ها را نترکانید.",
+        "ps": "سوځېدلی ځای په پاک او وچ ټوکر، یا که لرئ په پاک پلاستیک، سست وپوښئ. اوبلنې دانې مه چوي کوئ.",
+        "en": "Cover the burn loosely with a clean, dry cloth, or clean plastic food wrap if you have it. Do not burst blisters."
       }
     },
     {
@@ -291,6 +291,7 @@
     "'Any burn on a baby' is urgent, as in first-aid.urgent.big-burn.",
     "Cling film is used in UK first aid. 'Clean plastic' may not be available; 'clean, dry cloth' is the fallback.",
     "Pashto 'اوبلنې دانې' for blisters and Dari 'آبله': check.",
-    "Home safety section (2026-10-07): burns.prevent (children away from the tandoor, hot tea and pots up high) repeated child-safety.fire. It is replaced by a link to fire-safety (burns.safety), which links on to child-safety."
+    "Home safety section (2026-10-07): burns.prevent (children away from the tandoor, hot tea and pots up high) repeated child-safety.fire. It is replaced by a link to fire-safety (burns.safety), which links on to child-safety.",
+    "Medical audit 8 Oct 2026 (EM17): a clean, dry cloth comes first (WHO burns fact sheet: wrap in a clean cloth or sheet); plastic food wrap only if they have it (UK practice)."
   ]
 }

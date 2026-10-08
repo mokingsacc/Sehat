@@ -47,9 +47,9 @@
         "en": "Check breathing"
       },
       "text": {
-        "fa": "او را به پشت روی زمین بخوابانید. سرش را به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
-        "ps": "په شا یې په ځمکه وغځوئ. سر یې شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
-        "en": "Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for 10 seconds."
+        "fa": "او را به پشت روی زمین بخوابانید. سرش را به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "په شا یې په ځمکه وغځوئ. سر یې شاته کړئ، زنه یې پورته کړئ او تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
+        "en": "Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for up to 10 seconds."
       }
     },
     {
@@ -205,12 +205,14 @@
     "European Resuscitation Council Guidelines 2025: Special circumstances, drowning (5 initial rescue breaths for all ages)",
     "ILCOR 2025 Consensus on Science: drowning",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): drowning, every drowning victim needs medical care",
-    "WHO fact sheet: Drowning (2024) and WHO Preventing drowning: an implementation guide (2017)"
+    "WHO fact sheet: Drowning (2024) and WHO Preventing drowning: an implementation guide (2017)",
+    "Resuscitation Council UK 2025: Adult basic life support guidelines (check breathing for no more than 10 seconds)"
   ],
   "review": [
     "5 rescue breaths first for drowned adults as well as children (ERC). AHA also puts breaths first in drowning.",
     "All drowning victims go to hospital now (IFRC); this matches child-safety.urgent.water.",
     "'Reach or throw, don't go' rescue message (IFRC/RLSS). Rescue entry is not taught.",
-    "Home safety section (2026-10-07): drowning.prevent repeated child-safety.water. It is replaced by a link to child-safety (drowning.safety)."
+    "Home safety section (2026-10-07): drowning.prevent repeated child-safety.water. It is replaced by a link to child-safety (drowning.safety).",
+    "Medical audit 8 Oct 2026 (EM14): breathing check now 'for up to 10 seconds' (was 'for 10 seconds'), as in the CPR film narration; check for no more than 10 seconds and start as soon as breathing is not normal (RCUK 2025)."
   ]
 }

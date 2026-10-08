@@ -48,9 +48,9 @@
         "en": "Burns: cool with water"
       },
       "text": {
-        "fa": "جای سوختگی را ۲۰ دقیقه زیر آب پاک و روان نگه دارید. انگشتر و لباس تنگ را بکشید، بعد آن را با یک تکه پاک، سست بپوشانید.",
-        "ps": "سوځېدلی ځای ۲۰ دقیقې د پاکو بهېدونکو اوبو لاندې ونیسئ. ګوتمۍ او تنګې جامې لرې کړئ، بیا یې په پاک ټوکر سست وپوښئ.",
-        "en": "Cool the burn under clean running water for 20 minutes. Take off rings and tight clothes, then cover loosely with a clean cloth."
+        "fa": "فقط جای سوختگی را ۲۰ دقیقه زیر آب پاک و روان سرد کنید. طفل را پیچانده و گرم نگه دارید و اگر لرزید، بس کنید. انگشتر را بکشید، بعد سوختگی را با یک تکهٔ پاک سست بپوشانید.",
+        "ps": "یوازې سوځېدلی ځای ۲۰ دقیقې د پاکو بهېدونکو اوبو لاندې سوړ کړئ. ماشوم نغښتی او ګرم وساتئ او که ورپېد، سړول ودروئ. ګوتمۍ لرې کړئ، بیا یې په پاک ټوکر سست وپوښئ.",
+        "en": "Cool only the burn under clean running water for 20 minutes. Keep a child wrapped and warm, and stop if they shiver. Take off rings, then cover loosely with a clean cloth."
       }
     },
     {
@@ -228,9 +228,9 @@
           "id": "first-aid.urgent.burn-place",
           "icon": "burn",
           "text": {
-            "fa": "سوختگی روی صورت، دست‌ها یا اعضای تناسلی",
-            "ps": "په مخ، لاسونو یا تناسلي غړو سوځېدنه",
-            "en": "a burn on the face, hands or genitals"
+            "fa": "سوختگی روی صورت، دست، پا، اعضای تناسلی یا بندها",
+            "ps": "په مخ، لاسونو، پښو، تناسلي غړو یا بندونو سوځېدنه",
+            "en": "a burn on the face, hands, feet, genitals or joints"
           }
         },
         {
@@ -297,7 +297,8 @@
     "WHO fact sheet: Rabies (wound washing with soap and water for 15 minutes, post-exposure vaccine)",
     "WHO guidelines for indoor air quality: selected pollutants (2010): carbon monoxide; WHO guidelines for indoor air quality: household fuel combustion (2014)",
     "WHO/UNICEF World report on child injury prevention (2008): poisoning and burns prevention",
-    "WHO/IFRC first aid guidance (IFRC 2020); Afghanistan BPHS (2010): tetanus prophylaxis and wound care at BHC and CHC; EPHS: surgery, blood transfusion at district and provincial hospitals"
+    "WHO/IFRC first aid guidance (IFRC 2020); Afghanistan BPHS (2010): tetanus prophylaxis and wound care at BHC and CHC; EPHS: surgery, blood transfusion at district and provincial hospitals",
+    "ILCOR CoSTR First Aid (2020, reaffirmed 2025): cooling burns, watch for low body temperature in young children"
   ],
   "review": [
     "Burns: cooling time is 20 minutes as briefed (UK/Australian practice). IFRC/Red Cross 2020 says at least 10 minutes and ILCOR 2021 gives no set time; WHO warns against long cooling because of hypothermia. Consider adding 'keep a baby warm while cooling'.",
@@ -312,6 +313,7 @@
     "Length: this is the longest topic (about 325 English and 355 Dari words), so it is near the 2.5-minute limit.",
     "All fa and ps text needs checking by native Afghan Dari and Pashto speakers before recording.",
     "Home safety section (2026-10-07): the poison storage tip (first-aid.tip-poison) is removed; storage is now on the safe-storage page. first-aid.fumes and first-aid.urgent.fumes stay as hub summaries; the full CO signs are on home-safety.",
-    "Blood transfusion and antidotes are provincial/regional hospital services; Aybak provincial hospital capacity should be confirmed."
+    "Blood transfusion and antidotes are provincial/regional hospital services; Aybak provincial hospital capacity should be confirmed.",
+    "Medical audit 8 Oct 2026: EM8, first-aid.burn now says cool only the burn, keep a child wrapped and warm and stop if they shiver (WHO burns fact sheet, ILCOR), as burns.warm does; 'tight clothes' was dropped for length (the burns page keeps it). EM28, first-aid.urgent.burn-place now lists the same places as burns.urgent.place (face, hands, feet, genitals or joints). Burn size ('hand' here, 'palm' on the burns page) is left as it is: EMERGENCIES.md judgement call 13."
   ]
 }

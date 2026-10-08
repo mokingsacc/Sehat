@@ -32,9 +32,9 @@
         "en": "Check breathing"
       },
       "text": {
-        "fa": "به شانه‌هایش بزنید و بلند صدا کنید. اگر جواب نداد، سرش را به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.",
-        "ps": "اوږې یې وټکوئ او په لوړ غږ یې غږ کړئ. که ځواب یې ورنه کړ، سر یې شاته کړئ، زنه یې پورته کړئ او ۱۰ ثانیې یې سینې ته وګورئ.",
-        "en": "Tap the shoulders and shout. If there is no answer, tilt the head back, lift the chin, and watch the chest for 10 seconds."
+        "fa": "به شانه‌هایش بزنید و بلند صدا کنید. اگر جواب نداد، سرش را به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.",
+        "ps": "اوږې یې وټکوئ او په لوړ غږ یې غږ کړئ. که ځواب یې ورنه کړ، سر یې شاته کړئ، زنه یې پورته کړئ او تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
+        "en": "Tap the shoulders and shout. If there is no answer, tilt the head back, lift the chin, and watch the chest for up to 10 seconds."
       }
     },
     {
@@ -232,11 +232,13 @@
     "European Resuscitation Council Guidelines 2025: First Aid and Basic Life Support (recovery position for unresponsive, normally breathing people)",
     "ILCOR 2025 Consensus on Science: first aid, recovery position",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): unresponsive and breathing normally",
-    "WHO Emergency Triage Assessment and Treatment (ETAT, 2016): positioning the unconscious child"
+    "WHO Emergency Triage Assessment and Treatment (ETAT, 2016): positioning the unconscious child",
+    "Resuscitation Council UK 2025: Adult basic life support guidelines (check breathing for no more than 10 seconds)"
   ],
   "review": [
     "ERC 2025: recovery position for adults and children who are unresponsive but breathing normally; keep checking breathing. Infants are held on their side with the head lower (common UK teaching).",
     "Suspected spine injury: the tip says keep head and body in line. ERC allows the recovery position if the airway is at risk.",
-    "Every unconscious person goes to hospital now. A simple faint that wakes within a minute is not in the urgent list."
+    "Every unconscious person goes to hospital now. A simple faint that wakes within a minute is not in the urgent list.",
+    "Medical audit 8 Oct 2026 (EM14): breathing check now 'for up to 10 seconds' (was 'for 10 seconds'), as in the CPR film narration; check for no more than 10 seconds and start as soon as breathing is not normal (RCUK 2025)."
   ]
 }

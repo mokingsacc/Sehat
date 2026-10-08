@@ -53,9 +53,9 @@
         "en": "Rub the back"
       },
       "text": {
-        "fa": "وقت خشک کردن، پشتش را ۲ یا ۳ بار محکم بالا و پایین مالش دهید. دهان و بینی‌اش را با تکهٔ پاک پاک کنید.",
-        "ps": "د وچولو پر مهال، شا یې ۲ یا ۳ ځله کلکه پورته او ښکته ومښئ. خوله او پوزه یې په پاک ټوکر پاکه کړئ.",
-        "en": "While drying, rub the back firmly up and down 2 or 3 times. Wipe the mouth and nose with a clean cloth."
+        "fa": "وقت خشک کردن، پشتش را ۲ یا ۳ بار محکم بالا و پایین مالش دهید. اگر دهان یا بینی‌اش پر از مایع است، آن را با تکهٔ پاک آهسته پاک کنید.",
+        "ps": "د وچولو پر مهال، شا یې ۲ یا ۳ ځله کلکه پورته او ښکته ومښئ. که خوله یا پوزه یې له اوبو ډکه وي، په پاک ټوکر یې ورو پاکه کړئ.",
+        "en": "While drying, rub the back firmly up and down 2 or 3 times. If the mouth or nose is full of fluid, wipe it gently with a clean cloth."
       }
     },
     {
@@ -102,6 +102,21 @@
         "fa": "هر ۱ تا ۲ ثانیه یک نفس آهسته بدهید تا نوزاد نفس بکشد یا گریه کند. در راه شفاخانه هم ادامه دهید.",
         "ps": "په هرو ۱ تر ۲ ثانیو کې یوه ورو ساه ورکړئ تر څو ماشوم ساه واخلي یا وژاړي. د روغتون په لار کې هم دوام ورکړئ.",
         "en": "Give one gentle breath every 1 to 2 seconds until the baby breathes or cries. Keep going on the way to hospital."
+      }
+    },
+    {
+      "id": "cpr-newborn.alone",
+      "type": "step",
+      "icon": "talk",
+      "title": {
+        "fa": "تنها هستید؟ صدا کنید و نوزاد را ببرید",
+        "ps": "یوازې یاست؟ غږ وکړئ او ماشوم یوسئ",
+        "en": "Alone? Shout, then carry the baby"
+      },
+      "text": {
+        "fa": "اول بلند کمک بخواهید. ۱ دقیقه پف کنید. بعد نوزاد را گرم بپیچانید و با خود ببرید تا کمک پیدا کنید.",
+        "ps": "لومړی په لوړ غږ مرسته وغواړئ. ۱ دقیقه پو کړئ. بیا ماشوم ګرم ونغاړئ او له ځانه سره یې د مرستې لپاره یوسئ.",
+        "en": "Shout loudly for help first. Give puffs for 1 minute. Then wrap the baby warmly and carry it with you to get help."
       }
     },
     {
@@ -168,6 +183,22 @@
       ]
     },
     {
+      "id": "cpr-newborn.older",
+      "type": "link",
+      "to": "topic/cpr-baby",
+      "icon": "baby",
+      "title": {
+        "fa": "نوزاد بیشتر از یک روز پیش به دنیا آمده؟",
+        "ps": "ماشوم له یوې ورځې ډېر وړاندې زېږېدلی؟",
+        "en": "Baby born more than a day ago?"
+      },
+      "text": {
+        "fa": "این صفحه برای نوزادی است که تازه به دنیا آمده. اگر طفل بزرگ‌تر نفس نکشد، نفس و فشار سینه لازم دارد: صفحهٔ شیرخواری که نفس نمی‌کشد را باز کنید.",
+        "ps": "دا پاڼه د هغه ماشوم لپاره ده چې همدا اوس زېږېدلی. که لوی ماشوم ساه ونه اخلي، ساه او د سینې فشار ته اړتیا لري: د تي خوړونکي ماشوم چې ساه نه اخلي پاڼه پرانیزئ.",
+        "en": "This page is for a baby just born. If an older baby stops breathing, it needs breaths and chest pushes: open Baby not breathing (under 1)."
+      }
+    },
+    {
       "id": "cpr-newborn.dont",
       "type": "dont",
       "title": {
@@ -221,7 +252,9 @@
     "WHO / American Academy of Pediatrics: Helping Babies Breathe, 2nd edition (2016): the Golden Minute (dry, keep warm, clear the airway if needed, stimulate, ventilate)",
     "WHO recommendations on newborn health (2017) and WHO Guidelines on basic newborn resuscitation (2012)",
     "European Resuscitation Council Guidelines 2025: Newborn Resuscitation and Support of Transition of Infants at Birth (5 inflation breaths, then ventilation about 30 a minute)",
-    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): care of the newborn at birth"
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): care of the newborn at birth",
+    "Resuscitation Council UK 2025: Newborn resuscitation and support of transition of infants at birth (for babies at birth; after that, infant basic life support)",
+    "Resuscitation Council UK 2025: Paediatric basic life support guidelines (lone rescuer: 1 minute of CPR, then go for help)"
   ],
   "review": [
     "Family level, not health worker level. HBB assumes a bag and mask. Families at a home birth have none, so this page teaches mouth-to-mouth-and-nose breaths. Check this is acceptable.",
@@ -230,6 +263,7 @@
     "Head 'tilted back a little' (HBB: head slightly extended, the 'sniffing' position), matching the animation.",
     "No cord-clamping advice. HBB says clamp and cut the cord if ventilation is needed. Home births often wait for the midwife. Add a line if wanted.",
     "Dont: slapping and holding upside down are harmful customs. Check whether a local custom (e.g. cold water, smoke, or calling into the ear) should be named.",
-    "Pashto 'کړېږي' for grunting and Dari 'ناله می‌کند': check with native speakers."
+    "Pashto 'کړېږي' for grunting and Dari 'ناله می‌کند': check with native speakers.",
+    "Medical audit 8 Oct 2026: EM20, the mouth and nose are wiped only if full of fluid (no routine airway clearing; WHO 2012, HBB 2016), on the page (cpr-newborn.rub) and in the film (anim.cpr-newborn.s3). EM22, new step cpr-newborn.alone says what the film says for a lone helper (anim.cpr-newborn.s6: puffs for 1 minute, then carry the baby to get help). EM3, new link cpr-newborn.older: a baby born more than a day ago who stops breathing gets infant CPR (cpr-baby); cpr-baby is also on the newborn card of the Emergency screen."
   ]
 }

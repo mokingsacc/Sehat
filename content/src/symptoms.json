@@ -2296,7 +2296,8 @@
             "items": [
               "seizures.urgent.long",
               "seizures.urgent.repeated",
-              "seizures.urgent.first",
+              "seizures.urgent.fever",
+              "seizures.urgent.head",
               "seizures.urgent.not-waking",
               "seizures.urgent.injury",
               "seizures.urgent.breathing",
@@ -2309,6 +2310,7 @@
           "all": {
             "title": "seizures.soon",
             "items": [
+              "seizures.soon.first",
               "seizures.soon.more-fits",
               "seizures.soon.medicine",
               "epilepsy.soon.child"
@@ -2329,9 +2331,9 @@
           "BEC"
         ],
         "_notes": [
-          "Red: convulsions in a child (IMCI general danger sign), a fit over 5 minutes or repeated fits (mhGAP epilepsy emergency, status epilepticus), first fit, not waking, injury, breathing difficulty (BEC), fit in pregnancy or after birth (PCPNC eclampsia).",
-          "NOTE: the Epilepsy page says a first fit = clinic today once recovered; the Fits page and this tile say hospital now. Mo to choose one.",
-          "Amber: more fits than usual or medicine run out (mhGAP epilepsy follow-up); child with fits not learning or growing (mhGAP)."
+          "Red: convulsions in a child (IMCI general danger sign), a fit over 5 minutes or repeated fits (mhGAP epilepsy emergency, status epilepticus), fever, stiff neck or bad headache with the fit, or a fit after a knock to the head (mhGAP), not waking, injury, breathing difficulty (BEC), fit in pregnancy or after birth (PCPNC eclampsia).",
+          "First fit ever: clinic today once fully awake (mhGAP), on the Fits page and the Epilepsy page alike (medical audit 8 Oct 2026, EM19).",
+          "Amber: a first fit ever once fully awake (mhGAP); more fits than usual or medicine run out (mhGAP epilepsy follow-up); child with fits not learning or growing (mhGAP)."
         ]
       }
     },
