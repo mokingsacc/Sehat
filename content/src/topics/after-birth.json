@@ -36,9 +36,9 @@
           "id": "after-birth.urgent.bleeding",
           "icon": "bleeding",
           "text": {
-            "fa": "خونریزی زیاد، یا خونریزی که بیشتر می‌شود",
-            "ps": "ډېره وینه بهېدل، یا وینه چې زیاتېږي",
-            "en": "Heavy bleeding, or bleeding that gets more"
+            "fa": "خونریزی زیاد (در کمتر از ۵ دقیقه یک تکه را تر می‌کند)، یا خونریزی که بیشتر می‌شود",
+            "ps": "ډېره وینه بهېدل (له ۵ دقیقو په لږ وخت کې یو ټوکر لوند کړي)، یا وینه چې زیاتېږي",
+            "en": "Heavy bleeding (a cloth soaked in under 5 minutes), or bleeding that gets more"
           }
         },
         {
@@ -75,6 +75,24 @@
             "fa": "تب، همراه با ترشح بدبو از راه تناسلی",
             "ps": "تبه، له تناسلي لارې د بدبویه اوبو سره",
             "en": "Fever with a bad-smelling discharge from the vagina"
+          }
+        },
+        {
+          "id": "after-birth.urgent.fever-weak",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
+            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
+            "en": "Fever, and too weak to get out of bed"
+          }
+        },
+        {
+          "id": "after-birth.urgent.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "Severe belly pain"
           }
         },
         {
@@ -129,9 +147,45 @@
           "id": "after-birth.soon.urine",
           "icon": "urine-blood",
           "text": {
-            "fa": "درد یا مشکل هنگام ادرار",
-            "ps": "د تشو متیازو پر وخت درد یا ستونزه",
-            "en": "Pain or trouble passing urine"
+            "fa": "درد یا مشکل هنگام ادرار، یا چکیدن ادرار",
+            "ps": "د تشو متیازو پر وخت درد یا ستونزه، یا د متیازو څاڅېدل",
+            "en": "Pain or trouble passing urine, or urine that leaks"
+          }
+        },
+        {
+          "id": "after-birth.soon.fever",
+          "icon": "thermometer",
+          "text": {
+            "fa": "تب",
+            "ps": "تبه",
+            "en": "Fever"
+          }
+        },
+        {
+          "id": "after-birth.soon.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شکم",
+            "ps": "د نس درد",
+            "en": "Belly pain"
+          }
+        },
+        {
+          "id": "after-birth.soon.ill",
+          "icon": "warning",
+          "text": {
+            "fa": "احساس ناجوری",
+            "ps": "د ناروغۍ احساس",
+            "en": "Feeling ill"
+          }
+        },
+        {
+          "id": "after-birth.soon.discharge",
+          "icon": "warning",
+          "text": {
+            "fa": "ترشح بدبو از راه تناسلی",
+            "ps": "له تناسلي لارې بدبویه اوبه",
+            "en": "A bad-smelling discharge from the vagina"
           }
         },
         {
@@ -266,7 +320,10 @@
     "WHO Report of a technical consultation on birth spacing (2005): at least 24 months before the next pregnancy",
     "WHO Thinking Healthy: psychological intervention for perinatal depression (2015)",
     "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022): content of postnatal contacts",
-    "WHO PCPNC (2015): postpartum haemorrhage and puerperal sepsis management; WHO recommendations for the prevention and treatment of maternal peripartum infections (2015)"
+    "WHO PCPNC (2015): postpartum haemorrhage and puerperal sepsis management; WHO recommendations for the prevention and treatment of maternal peripartum infections (2015)",
+    "UNICEF/WHO Facts for Life (2010), pp. 19-20: go for help at once after birth for fever and weakness, severe belly pain, fast or difficult breathing",
+    "WHO PCPNC 3rd ed. (2015), B5 and B12: heavy bleeding = a pad or cloth soaked in less than 5 minutes; placenta not delivered 1 hour after the baby = refer",
+    "MSF Essential obstetric and newborn care, 11.4 Postpartum complications: fever, foul-smelling discharge (infection of the womb)"
   ],
   "review": [
     "BIRTH-SPACING TIP: keep or remove? It says 'Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births.' (WHO 2005 advises at least 24 months after a live birth.) It deliberately does not name contraception; check community acceptability in Samangan.",
@@ -277,6 +334,9 @@
     "Icons: calf uses 'swelling' (a 'leg' icon would be better); pain passing urine uses 'urine-blood' (a plain 'urine' icon would be better); breast pain uses 'breastfeed'; spacing tip uses 'family'.",
     "Postpartum vitamin A is deliberately not mentioned (WHO 2011: not recommended).",
     "'Removes any afterbirth left inside' is plain wording for manual removal/evacuation; check it is acceptable when narrated.",
-    "Content pass 3 (MoPH fixes): checks step adds 'the village health worker can also visit at home' (IPEHS 2019 postnatal home visit within 24 hours; CBHC 2015); 'Checks are free' removed (Mo's rule)."
+    "Content pass 3 (MoPH fixes): checks step adds 'the village health worker can also visit at home' (IPEHS 2019 postnatal home visit within 24 hours; CBHC 2015); 'Checks are free' removed (Mo's rule).",
+    "Medical audit 2026-10-08 MA1: two red items added, with the words and clips of pregnancy-danger: 'Fever, and too weak to get out of bed' (after-birth.urgent.fever-weak) and 'Severe belly pain' (after-birth.urgent.belly-pain). The red list now has 9 items.",
+    "Medical audit 2026-10-08 MA2 / MA19: heavy bleeding now has a measure a family can use: '(a cloth soaked in under 5 minutes)' (PCPNC B5). The placenta rule (not out 1 hour after the baby) is on birth-plan (home birth step and red list), where it belongs.",
+    "Medical audit 2026-10-08 MA3: amber items added: fever, belly pain, feeling ill (words of pregnancy-danger.soon, which says its signs matter for 6 weeks after birth), a bad-smelling discharge on its own (PCPNC M4: go promptly), and leaking urine (added to after-birth.soon.urine, same id, new clip). Fever with a bad-smelling discharge stays red. The second review note above is answered."
   ]
 }

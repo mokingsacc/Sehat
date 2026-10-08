@@ -92,9 +92,9 @@
         "en": "Iron tablets in pregnancy"
       },
       "text": {
-        "fa": "در حاملگی، تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.",
-        "ps": "په امیندوارۍ کې د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره.",
-        "en": "In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea."
+        "fa": "در حاملگی، تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای. اگر کلینیک تابلیت کلسیم داد، از تشنج حاملگی جلوگیری می‌کند؛ آن را در وقت دیگر روز بخورید.",
+        "ps": "په امیندوارۍ کې د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره. که کلینیک د کلسیم ګولۍ درکړې، د امیندوارۍ د اختلاج مخه نیسي؛ هغه د ورځې په بل وخت کې وخورئ.",
+        "en": "In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea. Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day."
       }
     },
     {
@@ -107,9 +107,9 @@
         "en": "Treat worms"
       },
       "text": {
-        "fa": "از کلینیک در مورد دوای کرم برای فامیل بپرسید. پیش از غذا و بعد از تشناب، دست‌ها را با صابون بشویید.",
-        "ps": "له کلینیک نه د کورنۍ لپاره د چینجو د درملو په اړه وپوښتئ. له ډوډۍ مخکې او له تشناب وروسته لاسونه په صابون ومینځئ.",
-        "en": "Ask the clinic about worm medicine for the family. Wash hands with soap before eating and after the toilet."
+        "fa": "از کلینیک در مورد دوای کرم برای فامیل بپرسید. در حاملگی، دوای کرم فقط بعد از ۳ ماه اول داده می‌شود؛ از قابله بپرسید. پیش از غذا و بعد از تشناب، دست‌ها را با صابون بشویید.",
+        "ps": "له کلینیک نه د کورنۍ لپاره د چینجو د درملو په اړه وپوښتئ. په امیندوارۍ کې د چینجو درمل یوازې له لومړیو ۳ میاشتو وروسته ورکول کېږي؛ له قابلې وپوښتئ. له ډوډۍ مخکې او له تشناب وروسته لاسونه په صابون ومینځئ.",
+        "en": "Ask the clinic about worm medicine for the family. In pregnancy, worm medicine is given only after the first 3 months; ask the midwife. Wash hands with soap before eating and after the toilet."
       }
     },
     {
@@ -236,7 +236,8 @@
     "WHO/UNICEF Facts for Life, 4th ed. (2010): nutrition and safe motherhood",
     "WHO guideline: daily iron supplementation in adult women and adolescent girls (2016); WHO ANC recommendations (2016): iron and folic acid, deworming",
     "WHO Pocket Book (2013) and PCPNC (2015): severe anaemia (haemoglobin under 7 g/dl) referred for transfusion assessment",
-    "Afghanistan BPHS (2010): iron-folate at Health Post and above; haemoglobin testing at BHC/CHC; blood transfusion at district hospital and above"
+    "Afghanistan BPHS (2010): iron-folate at Health Post and above; haemoglobin testing at BHC/CHC; blood transfusion at district hospital and above",
+    "WHO recommendations on antenatal care (2016), rec. A.3 (calcium where intake is low) and rec. C.4 (worm medicine in pregnancy only after the first trimester); WHO eLENA: calcium in pregnancy; deworming in pregnancy"
   ],
   "review": [
     "Tea: 'one hour before or one hour after a meal' is standard public-health advice (tea tannins reduce non-haem iron absorption); I did not find an exact WHO interval. Please confirm you are happy with 1 hour.",
@@ -247,6 +248,8 @@
     "Icons: causes uses 'warning'; worm medicine uses 'pill'; fainting uses 'sleepy'; black-stool tip uses 'iron-pill'.",
     "Finger-prick haemoglobin (HemoCue) is not available at every BHC; the text says 'may measure'.",
     "The haemoglobin threshold for transfusion is not stated; signs are used instead.",
-    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres)."
+    "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
+    "Medical audit 2026-10-08 MA6: the pregnancy iron step adds the calcium sentence used on pregnancy-care.iron (WHO ANC A.3; low calcium intake in Afghanistan).",
+    "Medical audit 2026-10-08 MA7: worm medicine in pregnancy only after the first 3 months; ask the midwife (WHO ANC C.4, PCPNC)."
   ]
 }

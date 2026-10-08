@@ -54,9 +54,9 @@
           "id": "pregnancy-danger.urgent.headache",
           "icon": "headache",
           "text": {
-            "fa": "سردرد شدید همراه با تاری دید",
-            "ps": "سخت سر درد، له تت لید سره",
-            "en": "Severe headache with blurred vision"
+            "fa": "سردرد شدید، یا تاری دید",
+            "ps": "سخت سر درد، یا تت لید",
+            "en": "Severe headache, or blurred vision"
           }
         },
         {
@@ -147,9 +147,9 @@
           "id": "pregnancy-danger.soon.waters",
           "icon": "waters",
           "text": {
-            "fa": "آب ولادت آمده، اما درد ولادت نیست",
-            "ps": "د زېږون اوبه راغلې، خو د زېږون دردونه نشته",
-            "en": "The waters break, but there are no labour pains"
+            "fa": "آب ولادت آمده، اما درد ولادت نیست: بیشتر از ۶ ساعت منتظر نمانید",
+            "ps": "د زېږون اوبه راغلې، خو د زېږون دردونه نشته: له ۶ ساعتونو زیات انتظار مه کوئ",
+            "en": "The waters break with no labour pains: do not wait more than 6 hours"
           }
         },
         {
@@ -312,7 +312,8 @@
     "WHO recommendations on antenatal care for a positive pregnancy experience (2016)",
     "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015), section B: emergency treatments (oxytocin, magnesium sulfate, antibiotics, rapid referral)",
     "WHO recommendations for the prevention and treatment of postpartum haemorrhage (2012) and for prevention and treatment of pre-eclampsia and eclampsia (2011)",
-    "Afghanistan BPHS (2010): oxytocin and magnesium sulfate at Basic Health Centre and above; comprehensive emergency obstetric care (caesarean, blood) at district hospital and above (IPEHS 2019)"
+    "Afghanistan BPHS (2010): oxytocin and magnesium sulfate at Basic Health Centre and above; comprehensive emergency obstetric care (caesarean, blood) at district hospital and above (IPEHS 2019)",
+    "NICE NG133 Hypertension in pregnancy (2019), rec. 1.1.1; UNICEF/WHO Facts for Life (2010), pp. 19-20: severe headache and blurred vision listed separately"
   ],
   "review": [
     "'The baby moves less, or not at all' is in the 'clinic today' (amber) list as requested; WHO counselling materials vary and UK practice treats reduced movements as same-day urgent. Consider moving it to the red list.",
@@ -323,6 +324,8 @@
     "Tip names the husband and mother-in-law as the people to tell; check this suits the cultural tone.",
     "Claude moved \"baby moves less or not at all\" from clinic-today to hospital-now (UK practice: same-day urgent).",
     "'The midwife goes with you or calls ahead' describes good practice (PCPNC referral), not a guarantee; wording may need softening.",
-    "Magnesium sulfate and oxytocin are in the BHC list; confirm midwives at Samangan BHCs are stocked and trained to give the loading dose before referral."
+    "Magnesium sulfate and oxytocin are in the BHC list; confirm midwives at Samangan BHCs are stocked and trained to give the loading dose before referral.",
+    "Medical audit 2026-10-08 MA8: 'Severe headache with blurred vision' (both needed) is now 'Severe headache, or blurred vision', as on after-birth and in the BP checker.",
+    "Medical audit 2026-10-08 MA4: the amber item 'the waters break, but there are no labour pains' now ends 'do not wait more than 6 hours' (PCPNC: go if not in labour 6 hours after the waters break), so it no longer reads as 'any time today' next to pregnancy-danger.go-early and birth-plan.go ('go, do not wait at home'). The second review note above is answered. Mo may still prefer to move it to the red list."
   ]
 }

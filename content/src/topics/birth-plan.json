@@ -122,9 +122,9 @@
         "en": "If the birth happens at home"
       },
       "text": {
-        "fa": "فوراً یک قابلهٔ آموزش‌دیده را بخواهید. اتاق را گرم و پاک نگه دارید و مادر و طفل را در روز اول به کلینیک ببرید.",
-        "ps": "سمدلاسه یوه روزل شوې قابله راوغواړئ. کوټه ګرمه او پاکه وساتئ او مور او ماشوم په لومړۍ ورځ کلینیک ته بوځئ.",
-        "en": "Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day."
+        "fa": "فوراً یک قابلهٔ آموزش‌دیده را بخواهید. اتاق را گرم و پاک نگه دارید و مادر و طفل را در روز اول به کلینیک ببرید. اگر جفت تا ۱ ساعت بعد از طفل بیرون نیامد، یا خون در کمتر از ۵ دقیقه یک تکه را تر کرد، همین حالا به شفاخانه بروید.",
+        "ps": "سمدلاسه یوه روزل شوې قابله راوغواړئ. کوټه ګرمه او پاکه وساتئ او مور او ماشوم په لومړۍ ورځ کلینیک ته بوځئ. که ځوله (پرېوان) د ماشوم له زېږون ۱ ساعت وروسته لا نه وي راوتلې، یا وینه له ۵ دقیقو په لږ وخت کې یو ټوکر لوند کړي، همدا اوس روغتون ته ولاړ شئ.",
+        "en": "Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day. Go to hospital now if the afterbirth is not out 1 hour after the baby, or blood soaks a cloth in under 5 minutes."
       }
     },
     {
@@ -205,9 +205,9 @@
           "id": "birth-plan.urgent.headache",
           "icon": "headache",
           "text": {
-            "fa": "سردرد شدید همراه با تاری دید",
-            "ps": "سخت سر درد، له تت لید سره",
-            "en": "Severe headache with blurred vision"
+            "fa": "سردرد شدید، یا تاری دید",
+            "ps": "سخت سر درد، یا تت لید",
+            "en": "Severe headache, or blurred vision"
           }
         },
         {
@@ -235,6 +235,15 @@
             "fa": "دردهای ولادت بیشتر از ۱۲ ساعت دوام کرده و طفل به دنیا نیامده",
             "ps": "د زېږون دردونه له ۱۲ ساعتونو زیات دوام کوي او ماشوم نه دی زېږېدلی",
             "en": "Labour pains for more than 12 hours, and the baby is not born"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.placenta",
+          "icon": "clock",
+          "text": {
+            "fa": "جفت تا ۱ ساعت بعد از ولادت طفل بیرون نیامده است",
+            "ps": "ځوله (پرېوان) د ماشوم له زېږون ۱ ساعت وروسته لا نه ده راوتلې",
+            "en": "The afterbirth (placenta) is not out 1 hour after the baby is born"
           }
         }
       ]
@@ -265,7 +274,9 @@
     "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 3rd ed. 2015): C2 and C14 'Develop a birth and emergency plan' (where, who goes, transport, money, things to take, a decision-maker), labour signs, danger signs, home birth with a skilled attendant",
     "WHO recommendations on health promotion interventions for maternal and newborn health (2015): birth preparedness and complication readiness; maternity waiting homes near a facility for women who live far",
     "Afghanistan MoPH: BPHS 2010 and IPEHS 2019 (skilled birth attendance at health facilities, four antenatal visits that include birth planning); see research/moph-guidance.md section 5",
-    "research/what-saves-lives.md: birth preparedness interventions reduce neonatal deaths by about 18% (Soubeiga et al., BMC Pregnancy Childbirth 2014); Herat near-miss study: no birth plan predicted a delayed decision"
+    "research/what-saves-lives.md: birth preparedness interventions reduce neonatal deaths by about 18% (Soubeiga et al., BMC Pregnancy Childbirth 2014); Herat near-miss study: no birth plan predicted a delayed decision",
+    "WHO PCPNC 3rd ed. (2015), B5 and B12 (AFRO copy, https://www.afro.who.int/sites/default/files/2017-06/mps%20pcpnc.pdf): placenta not out 1 hour after the baby needs skilled removal; heavy bleeding = a pad or cloth soaked in less than 5 minutes",
+    "NICE NG133 Hypertension in pregnancy (2019), rec. 1.1.1: report any one of severe headache or problems with vision"
   ],
   "review": [
     "New page (content pass 3), Health > Adults > Women's health, next to pregnancy-care. It expands the four plan steps already on pregnancy-danger; those stay where they are.",
@@ -275,6 +286,8 @@
     "'Within a day' for a home birth matches the newborn page (hepatitis B within 24 hours, IPEHS postnatal visit within 24 hours).",
     "'With money on it' (Dari 'با پول', Pashto 'له کارت سره') means phone credit; check the everyday word (کریدیت / کارت).",
     "The bag list names the ID card (تذکره); some women have none. The clinic card is the antenatal card.",
-    "Icons: birth-plan for the bag, midwife for the home birth, clock for labour."
+    "Icons: birth-plan for the bag, midwife for the home birth, clock for labour.",
+    "Medical audit 2026-10-08 MA2: about one birth in three in Samangan is at home. birth-plan.home now ends 'Go to hospital now if the afterbirth is not out 1 hour after the baby, or blood soaks a cloth in under 5 minutes', and the red list has the new item birth-plan.urgent.placenta (PCPNC). Dari جفت and Pashto ځوله (پرېوان) for the placenta: native check.",
+    "Medical audit 2026-10-08 MA8: the headache item now reads 'Severe headache, or blurred vision' (either one), with the words and clip of after-birth.urgent.headache, as on pregnancy-danger and pregnancy-care."
   ]
 }

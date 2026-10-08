@@ -106,9 +106,9 @@
         "en": "At the clinic: urine test and antibiotics"
       },
       "text": {
-        "fa": "کارمند صحی ادرار را با نوار معاینه می‌کند و یک دورهٔ کوتاه تابلیت انتی‌بیوتیک (مانند نیتروفورانتوئین یا اموکسی‌سیلین) می‌دهد، و در حاملگی دوای بی‌خطر را انتخاب می‌کند.",
-        "ps": "روغتیايي کارکوونکی متیازې په پټۍ معاینه کوي او د انټي بیوټیک ګولیو لنډه دوره (لکه نایټروفورانټوین یا اموکسي سیلین) ورکوي، او په امیندوارۍ کې بې خطره درمل غوره کوي.",
-        "en": "The health worker tests the urine with a strip and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy."
+        "fa": "کارمند صحی ادرار را (با نوار، یا در لابراتوار اگر باشد) معاینه می‌کند و یک دورهٔ کوتاه تابلیت انتی‌بیوتیک (مانند نیتروفورانتوئین یا اموکسی‌سیلین) می‌دهد، و در حاملگی دوای بی‌خطر را انتخاب می‌کند.",
+        "ps": "روغتیايي کارکوونکی متیازې (په پټۍ، یا په لابراتوار کې که وي) معاینه کوي او د انټي بیوټیک ګولیو لنډه دوره (لکه نایټروفورانټوین یا اموکسي سیلین) ورکوي، او په امیندوارۍ کې بې خطره درمل غوره کوي.",
+        "en": "The health worker tests the urine (with a strip, or in a laboratory where there is one) and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy."
       }
     },
     {
@@ -294,13 +294,15 @@
     "WHO AWaRe antibiotic book (2022): lower urinary tract infection (nitrofurantoin, trimethoprim-sulfamethoxazole, amoxicillin-clavulanate) and upper urinary tract infection (injectable options)",
     "WHO Pocket Book of Hospital Care for Children (2013): urinary tract infection in children",
     "Afghanistan BPHS (2010): amoxicillin and cotrimoxazole at Basic Health Centre; nitrofurantoin at district hospital level; Afghanistan National Essential Medicines List (2014): nitrofurantoin",
-    "Burden: no Afghanistan-specific data on urinary infection were found; MICS 2022-23 and AHS 2018 show low antenatal care coverage in Samangan (ANC4+ 18 percent), so screening in pregnancy is often missed"
+    "Burden: no Afghanistan-specific data on urinary infection were found; MICS 2022-23 and AHS 2018 show low antenatal care coverage in Samangan (ANC4+ 18 percent), so screening in pregnancy is often missed",
+    "WHO recommendations on antenatal care (2016), rec. B.1.2: for infection without symptoms in pregnancy, urine culture (or Gram stain) rather than a dipstick"
   ],
   "review": [
     "Antibiotic names (nitrofurantoin, amoxicillin) follow WHO AWaRe and the Afghan lists; nitrofurantoin was in the district-hospital list of BPHS 2010, not BHC, so BHCs may give cotrimoxazole or amoxicillin instead. Mo to confirm or remove names.",
     "Urine dipstick availability at BHC level is not guaranteed; the text says 'tests the urine with a strip'.",
     "'No urine for 12 hours' as an adult danger sign is practical wording, not a WHO figure.",
     "The 'after sex' advice and 'inside the private parts' do-not item need a check for acceptable Dari/Pashto wording when narrated aloud.",
-    "Section is 'women' although men and children are mentioned; the symptom finder should link it from 'burning urine' for everyone."
+    "Section is 'women' although men and children are mentioned; the symptom finder should link it from 'burning urine' for everyone.",
+    "Medical audit 2026-10-08 MA18: the clinic box no longer promises only a strip: 'tests the urine (with a strip, or in a laboratory where there is one)'. A strip is fine with symptoms; WHO prefers a laboratory test for the antenatal check. The drug names (MA17) are Mo's call and are unchanged."
   ]
 }

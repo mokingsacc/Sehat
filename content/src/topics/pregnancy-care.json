@@ -47,9 +47,9 @@
         "en": "Take iron every day"
       },
       "text": {
-        "fa": "تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.",
-        "ps": "د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره.",
-        "en": "Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea."
+        "fa": "تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای. اگر کلینیک تابلیت کلسیم داد، از تشنج حاملگی جلوگیری می‌کند؛ آن را در وقت دیگر روز بخورید.",
+        "ps": "د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره. که کلینیک د کلسیم ګولۍ درکړې، د امیندوارۍ د اختلاج مخه نیسي؛ هغه د ورځې په بل وخت کې وخورئ.",
+        "en": "Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea. Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day."
       }
     },
     {
@@ -64,7 +64,7 @@
       "text": {
         "fa": "واکسین تیتانوس، شما و نوزاد شما را محافظت می‌کند. از کلینیک بپرسید که چند بار لازم است.",
         "ps": "د تېتانوس واکسین تاسو او ستاسو نوی زېږېدلی ماشوم ساتي. له کلینیک وپوښتئ چې څو ځله پکار دی.",
-        "en": "The tetanus vaccine (TT or Td) protects you and your newborn baby. Ask the clinic how many doses you need."
+        "en": "The tetanus vaccine (Td) protects you and your newborn baby. Ask the clinic how many doses you need."
       }
     },
     {
@@ -87,14 +87,14 @@
       "type": "step",
       "icon": "rest",
       "title": {
-        "fa": "بیشتر استراحت کنید، کار سنگین نکنید",
-        "ps": "ډېر آرام وکړئ، دروند کار مه کوئ",
-        "en": "Rest more, avoid heavy work"
+        "fa": "فعال باشید، بار سنگین نبردارید",
+        "ps": "فعاله اوسئ، دروند بار مه پورته کوئ",
+        "en": "Keep active, avoid heavy loads"
       },
       "text": {
-        "fa": "در روز دراز بکشید و استراحت کنید. از فامیل بخواهید که در کارهای خیلی سنگین، مثل آوردن آب، کمک کنند.",
-        "ps": "د ورځې څملئ او آرام وکړئ. له کورنۍ وغواړئ چې په ډېرو درنو کارونو کې، لکه د اوبو راوړلو کې، مرسته وکړي.",
-        "en": "Lie down to rest during the day. Ask the family to help with very heavy work, like carrying water."
+        "fa": "قدم زدن و کارهای عادی روزانه برای شما خوب است. وقتی خسته شدید استراحت کنید، و از فامیل بخواهید که در کارهای سنگین، مثل آوردن آب، کمک کنند.",
+        "ps": "ګرځېدل او د ورځې عادي کارونه ستاسو لپاره ښه دي. کله چې ستړې شئ آرام وکړئ، او له کورنۍ وغواړئ چې په درنو کارونو کې، لکه د اوبو راوړلو کې، مرسته وکړي.",
+        "en": "Walking and your normal daily work are good for you. Rest when you are tired, and ask the family to help with heavy work, like carrying water."
       }
     },
     {
@@ -136,9 +136,9 @@
         "en": "At the clinic: at each antenatal visit"
       },
       "text": {
-        "fa": "قابله فشار خون، وزن و رشد و ضربان قلب طفل را معاینه می‌کند، خون را برای کم‌خونی و ادرار را برای عفونت معاینه می‌کند، آهن، فولیک اسید و واکسین تیتانوس می‌دهد، و برای ولادت پلان می‌کند.",
-        "ps": "قابله د وینې فشار، وزن او د ماشوم وده او د زړه ټکان معاینه کوي، وینه د وینې کمښت او متیازې د انتان لپاره معاینه کوي، اوسپنه، فولیک اسید او د تیټانوس واکسین ورکوي، او د زېږون پلان جوړوي.",
-        "en": "The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid and the tetanus vaccine, and plans the birth."
+        "fa": "قابله فشار خون، وزن و رشد و ضربان قلب طفل را معاینه می‌کند، خون را برای کم‌خونی و ادرار را برای عفونت معاینه می‌کند، آهن، فولیک اسید (و کلسیم اگر داشته باشد) و واکسین تیتانوس می‌دهد، و برای ولادت پلان می‌کند.",
+        "ps": "قابله د وینې فشار، وزن او د ماشوم وده او د زړه ټکان معاینه کوي، وینه د وینې کمښت او متیازې د انتان لپاره معاینه کوي، اوسپنه، فولیک اسید (او کلسیم که ولري) او د تیټانوس واکسین ورکوي، او د زېږون پلان جوړوي.",
+        "en": "The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid (and calcium if they have it) and the tetanus vaccine, and plans the birth."
       }
     },
     {
@@ -187,9 +187,9 @@
           "id": "pregnancy-care.urgent.headache",
           "icon": "eye-blurred",
           "text": {
-            "fa": "سردرد شدید همراه با تاری دید",
-            "ps": "سخت سر درد، له تت لید سره",
-            "en": "Severe headache with blurred vision"
+            "fa": "سردرد شدید، یا تاری دید",
+            "ps": "سخت سر درد، یا تت لید",
+            "en": "Severe headache, or blurred vision"
           }
         },
         {
@@ -258,7 +258,11 @@
     "WHO/UNICEF Facts for Life, 4th ed. (2010): safe motherhood",
     "WHO recommendations on antenatal care for a positive pregnancy experience (2016): content of contacts (blood pressure, haemoglobin, urine, iron and folic acid, tetanus toxoid, birth planning)",
     "WHO recommendations: intrapartum care for a positive childbirth experience (2018); PCPNC (2015): active management of the third stage (oxytocin), newborn resuscitation",
-    "Afghanistan BPHS (2010): antenatal and delivery care at BHC/CHC with midwives; caesarean at district hospital (EPHS)"
+    "Afghanistan BPHS (2010): antenatal and delivery care at BHC/CHC with midwives; caesarean at district hospital (EPHS)",
+    "WHO recommendations on antenatal care (2016), rec. A.3: calcium 1.5 to 2 g a day where diets are low in calcium, to prevent pre-eclampsia; take calcium and iron at different times (WHO eLENA); Afghanistan MoPH RMNCAH Strategy 2017-2021 lists calcium for pregnant women (via the NYAS calcium map)",
+    "WHO recommendations on antenatal care (2016), rec. A.1.1: counsel women to keep physically active; PCPNC: rest and avoid lifting heavy objects",
+    "WHO/UNICEF WIISE schedule, Afghanistan 2024 and 2025: Td (tetanus and diphtheria) for women 15 to 49 and at the first pregnancy contact",
+    "NICE NG133 Hypertension in pregnancy (2019), rec. 1.1.1: report severe headache or vision problems"
   ],
   "review": [
     "Visits: '3 months' used for the WHO 'before 12 weeks'; '8 visits are best' for the WHO 8 contacts (2016). Afghanistan services may still teach 4 visits; check local wording.",
@@ -268,6 +272,10 @@
     "A short red alert (4 key danger signs) is repeated here so the page is safe on its own; the full list is on the danger-signs page.",
     "Naswar uses the generic 'no' icon; a 'naswar' or 'tobacco' icon would be better.",
     "Caesarean is only at district hospital level and above; a BHC/CHC birth offers referral, not surgery. The wording 'can get a doctor for a caesarean' assumes transfer; Mo may prefer 'can send you to the hospital for a caesarean'.",
-    "Urine testing for infection at antenatal visits may not be available at every BHC; keep as 'tests'."
+    "Urine testing for infection at antenatal visits may not be available at every BHC; keep as 'tests'.",
+    "Medical audit 2026-10-08 MA6: calcium added to the iron step and the clinic box ('Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day'; 'and calcium if they have it'). The words 'if' and 'if they have it' are there because calcium stock at Samangan BHCs is not confirmed: ask the PHD.",
+    "Medical audit 2026-10-08 MA8: the headache item now reads 'Severe headache, or blurred vision', as on after-birth and pregnancy-danger.",
+    "Medical audit 2026-10-08 MA15: the rest step said only 'lie down to rest'. It now says walking and normal daily work are good, rest when tired, and get help with heavy work (WHO ANC A.1.1; PCPNC). Title 'Keep active, avoid heavy loads'.",
+    "Medical audit 2026-10-08 CH8 / MA9: Afghanistan reported Td (tetanus and diphtheria) for women to WHO in 2024 and 2025, so the English now says '(Td)' (it said 'TT or Td'); Dari and Pashto still say 'tetanus vaccine'. The second review note above is superseded. Check the current Afghan card."
   ]
 }
