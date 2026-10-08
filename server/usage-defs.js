@@ -312,12 +312,12 @@ export default {
   "worms": "Worms in the belly",
   "vaccines": "Vaccines"
  },
- "consentVersion": "2026-10-08.1",
+ "consentVersion": "2026-10-08.2",
  "privacy": {
   "ids": [
    "ui.privacy.phone",
    "ui.privacy.usage",
-   "ui.privacy.watch",
+   "ui.privacy.watchOn",
    "ui.privacy.voice",
    "ui.privacy.who",
    "ui.privacy.stop"
@@ -333,10 +333,10 @@ export default {
     "ps": "د کارونې شمېر: ټیلیفون هره ورځ حسابوي چې کوم مخونه پرانیستل شول، څو دقیقې، او څو ځله غږ واورېدل شو. دا شمېر ورځ کې یو ځل لېږي، د ولسوالۍ له نوم سره که مو ټاکلې وي. هېڅ نوم، د ټیلیفون شمېره، ستاسو ځای یا د ټیلیفون نښه نه لېږل کېږي. هغه څه چې په لټون کې یې لیکئ نه لېږل کېږي.",
     "en": "Usage counts: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent."
    },
-   "ui.privacy.watch": {
-    "fa": "دیدن مریضی‌های واگیر: اگر بگویید کسی در خانه مریضی واگیر دارد، فقط نام مریضی، ولسوالی، گروه سنی و روز فرستاده می‌شود، همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود.",
-    "ps": "د ساري ناروغیو لیدل: که ووایئ چې په کور کې څوک ساري ناروغي لري، یوازې د ناروغۍ نوم، ولسوالي، د عمر ډله او ورځ لېږل کېږي، له یوې بې‌نومې شمېرې سره چې هره میاشت بدلېږي، څو یو خبر دوه ځله ونه شمېرل شي.",
-    "en": "Disease watch: if you say someone at home has an illness that spreads, only the illness, your district, an age group and the day are sent, with a random number that changes every month so one report is not counted twice."
+   "ui.privacy.watchOn": {
+    "fa": "دیدن مریضی‌های واگیر: وقتی یک مریضی واگیر را جستجو می‌کنید، یا می‌گویید کسی در خانه آن را دارد، گوشی فقط نام مریضی، ولسوالی، گروه سنی و روز را می‌فرستد، همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود. هیچ نام یا جای شما فرستاده نمی‌شود. این از اول روشن است، و می‌توانید آن را در تنظیمات خاموش کنید.",
+    "ps": "د ساري ناروغیو لیدل: کله چې یوه ساري ناروغي لټوئ، یا وایئ چې په کور کې څوک یې لري، ټیلیفون یوازې د ناروغۍ نوم، ولسوالي، د عمر ډله او ورځ لېږي، له یوې بې‌نومې شمېرې سره چې هره میاشت بدلېږي، څو یو خبر دوه ځله ونه شمېرل شي. هېڅ نوم یا ستاسو ځای نه لېږل کېږي. دا له پیله روښانه دی، او په تنظیماتو کې یې بندولای شئ.",
+    "en": "Disease watch: when you look up an illness that spreads, or say someone at home has one, the phone sends only the illness, your district, an age group and the day, with a random number that changes every month so one report is not counted twice. No names and no location are sent. It is on from the start, and you can switch it off in Settings."
    },
    "ui.privacy.voice": {
     "fa": "نظر شما: پیش از ثبت صدای شما، از شما می‌پرسیم. پیام‌ها به شما وصل نیستند. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند. لطفاً نام یا شمارۀ تلیفون نگویید و ننویسید؛ برنامه شمارۀ تلیفون را از نوشته پاک می‌کند.",

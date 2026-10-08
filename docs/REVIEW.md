@@ -4807,3 +4807,30 @@ For Mo to check:
    دانه یا لکه روی پوست / پر پوستکي دانې یا داغونه; خستگی یا رنگ‌پریدگی / ستړیا یا رنګ الوتل).
 5. Typed search still shows other Home-tab pages when the words match them (for example "Safe warm home in winter" for
    "my child has a cough and fever", at its red "child coughing or breathing fast?" link row). Remove them too?
+
+## Disease watch on for everyone (8 Oct 2026, for Mo)
+Mo, 11:33: "turn on the disease watch for everyone". The watch ("Help watch for outbreaks") is now on for every phone, new
+and old, unless the family switched it off in Settings. The switch in Settings is unchanged, and it still only works while
+usage counts are on. No GPS: illness, district (if chosen), age group (reports only) and day. A report with no district
+still asks for it there and then. The district question never shows over the Emergency screen (unchanged).
+- Older phones, once (`watchV` 2): the app of this morning stored "off" wherever the old first-open question had no Yes, and
+  the switch also stores "off", so the two cannot always be told apart. Rule: a stored "off" is kept only where the old
+  question had a Yes (this morning's app kept those on, so the "off" came from the switch); every other phone is switched
+  on. A phone that switched it on and then off again this morning, with no Yes to the old question, is switched on again
+  (a few hours' window); the switch turns it off.
+- `consentVersion` 2026-10-08.2 (usage counts carry it as `cv`). Watch reports do not carry it; they carry the app
+  version, which changes with this build, so the dashboard can tell them apart by app version. No server change needed
+  (server/usage-defs.js is regenerated with the new Privacy text).
+- Wording: Settings and the Privacy page now also say that looking up an illness that spreads in "What is wrong?" sends a
+  signal (it always did, but the text only spoke of saying Yes), that no names or location are sent, and that it can be
+  switched off. New narration ids (need recording in the 4 voices; the old ids `ui.watch` and `ui.privacy.watch` are gone,
+  their clips now unused):
+  - `ui.watchOn` (Settings): fa «دیدن مریضی‌های واگیر: وقتی یک مریضی واگیر را جستجو می‌کنید، یا می‌گویید کسی در خانه آن را دارد، …»,
+    ps «د ساري ناروغیو لیدل: کله چې یوه ساري ناروغي لټوئ، یا وایئ چې په کور کې څوک یې لري، …», en "Disease watch: when you
+    look up an illness that spreads, or say someone at home has one, … You can switch it off here."
+  - `ui.privacy.watchOn` (Privacy): the same, with the monthly random number, and "It is on from the start, and you can
+    switch it off in Settings."
+- To check: (1) ethics: the watch, including search signals, now runs without a yes (REVIEW above, "First run: one tap",
+  flagged this); (2) Dari «جستجو می‌کنید» and Pashto «لټوئ» for "look up", and «این از اول روشن است» / «دا له پیله روښانه دی».
+- Tests: tools/test_firstrun.cjs (96 checks) now also covers: the watch on for a new phone, a report sent end to end (no
+  GPS or names in it), a symptom-picture signal, the Settings switch off staying off, and four kinds of older phone.

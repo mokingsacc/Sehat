@@ -1,14 +1,15 @@
 // The first run and the district question, at 360 px, with a fake clock (Playwright page.clock.setFixedTime):
 //   - a new phone sees one screen, the language; one tap opens the Health tab (no voice, consent or district screens);
-//     the woman's voice is chosen, usage counts are on, the Privacy page and Settings keep the off switch, and the
-//     disease watch stays off until it is switched on;
+//     the woman's voice is chosen, usage counts and the disease watch are on, the Privacy page and Settings keep the
+//     off switches;
 //   - the district question: not before 24 hours from the first open, never over the Emergency screen or a recording
 //     screen, then once;
 //     after "Not now" once more 7 days later, then never again; a chosen district ends it and shows in Settings;
 //     not asked when counts are off;
-//   - a disease-watch report with no district asks for it there and then;
-//   - phones from older versions: a language without a voice gets the woman's voice; a "yes" to the old question keeps
-//     the disease watch on.
+//   - a disease-watch report on a new phone (the watch on by default) asks for the district there and then, and is sent;
+//     a matching symptom search queues a search signal; switched off in Settings, it stays off;
+//   - phones from older versions: a language without a voice gets the woman's voice; the disease watch is switched on
+//     for every older phone, except one whose family switched it off in Settings.
 // Nothing leaves the test machine (every request outside the local server is blocked).
 // Needs Playwright with Chromium:  node tools/test_firstrun.cjs [screenshot folder]
 const { chromium } = require('playwright');
@@ -68,17 +69,18 @@ const SV = book.surveillance;
     ok(!(await p.$('.voices, .consent, [data-cdist], [data-consent]')), lang + ': no voice, consent or district screen');
     ok(await ls(p, 'lang') === lang && await ls(p, 'voice') === 'f', lang + ': language saved, the woman\'s voice chosen');
     ok(await ls(p, 'firstOpen') === T0, lang + ': first open remembered', await ls(p, 'firstOpen'));
-    ok(await ls(p, 'consent') === null && await ls(p, 'watch') === false, lang + ': counts on with no question; disease watch off');
+    ok(await ls(p, 'consent') === null && await ls(p, 'watch') === true, lang + ': counts and the disease watch on, with no question');
     await p.waitForTimeout(3000);
     ok(!(await asked(p)), lang + ': no district question on the first day');
     await shot(p, `2-after-first-run-${lang}`);
     await p.goto(BASE + 'index.html#/settings'); await p.waitForTimeout(400);
     ok(await p.$eval('[data-block="ui.set.stats"] .toggle', (e) => e.getAttribute('aria-pressed')) === 'true', lang + ': Settings: usage counts on');
-    ok(await p.$eval('[data-block="ui.watch"] .toggle', (e) => e.getAttribute('aria-pressed')) === 'false', lang + ': Settings: disease watch off');
+    ok(await p.$eval('[data-block="ui.watchOn"] .toggle', (e) => e.getAttribute('aria-pressed')) === 'true' && await p.$('[data-block="ui.watchOn"] .spk'), lang + ': Settings: disease watch on, with its speaker');
     ok(await p.$('[data-block="ui.district"] [data-action="district"]'), lang + ': Settings: district can be chosen');
     await p.goto(BASE + 'index.html#/privacy'); await p.waitForTimeout(400);
     ok(await p.$eval('[data-block="ui.set.stats"] .toggle', (e) => e.getAttribute('aria-pressed')) === 'true', lang + ': Privacy: the switch is there and on');
     ok(await p.$('[data-block="ui.privacy.usage"] .spk') && !(await p.$('[data-block="ui.privacy.counts"]')), lang + ': Privacy: the new usage line with its speaker');
+    ok(await p.$('[data-block="ui.privacy.watchOn"] .spk') && !(await p.$('[data-block="ui.privacy.watch"]')), lang + ': Privacy: the new disease-watch line with its speaker');
     ok(await p.$eval('main .top a.round', (e) => e.getAttribute('href')) === '#/settings' && await p.$('nav.nav'), lang + ': Privacy: back to Settings, with the tabs');
     await p.click('[data-block="ui.set.stats"] .toggle'); await p.waitForTimeout(300);
     ok((await ls(p, 'consent') || {}).ok === false, lang + ': Privacy: the switch turns counts off');
@@ -145,8 +147,11 @@ const SV = book.surveillance;
   // 5. a disease-watch report asks for the district there and then
   {
     const syn = SV.syndromes.find((s) => s.active !== false && s.topics.length);
-    const ctx = await newCtx({ fn: () => { if (!localStorage.getItem('fhb.lang')) { localStorage.setItem('fhb.lang', '"en"'); localStorage.setItem('fhb.voice', '"f"'); localStorage.setItem('fhb.watch', 'true'); } }, arg: null });
-    const p = await open(ctx, T0, '#/topic/' + syn.topics[0]);
+    const ctx = await newCtx({ fn: () => { if (!localStorage.getItem('fhb.lang')) { localStorage.setItem('fhb.lang', '"en"'); localStorage.setItem('fhb.voice', '"f"'); } }, arg: null });
+    const sent = []; // the report upload, answered here (it never reaches the real server)
+    const rUrl = String(book.config.analyticsUrl).replace(/\/e\/?$/, '') + '/r';
+    await ctx.route((u) => u.href === rUrl, (rt) => { sent.push(rt.request().postData()); rt.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); });
+    let p = await open(ctx, T0, '#/topic/' + syn.topics[0]);
     const yes = await p.$(`[data-rep="yes"][data-syn="${syn.id}"]`);
     ok(yes, 'watch: the report question shows on ' + syn.topics[0]);
     if (yes) {
@@ -158,7 +163,26 @@ const SV = book.surveillance;
       const rq = await ls(p, 'rq');
       ok(rq && rq.some((x) => x.k === 'r' && x.s === syn.id && x.d === SV.districts[0].id), 'watch: the report is queued with the district', rq);
       ok(await ls(p, 'district') === SV.districts[0].id, 'watch: the district is kept for next time');
+      await p.waitForTimeout(1500);
+      const body = sent.map((x) => JSON.parse(x)).find((b) => b.items.some((i) => i.k === 'r' && i.s === syn.id));
+      ok(body && body.items.every((i) => !('lat' in i) && !('lon' in i) && !('gps' in i)) && !/lat|lon|gps|name/i.test(Object.keys(body.items.find((i) => i.k === 'r')).join(' ')), 'watch: the report is sent, with no GPS or names', sent);
+      ok((await ls(p, 'rq') || []).length === 0, 'watch: nothing left in the queue once sent');
     }
+    // a symptom search that matches an illness that spreads queues a search signal
+    const sym = (syn.symptoms || []).find((id) => (book.symptoms || []).some((x) => x.id === id));
+    ok(sym, 'watch: the illness has a picture in What is wrong?', syn.symptoms);
+    if (sym) {
+      p = await open(ctx, T0 + 60e3, '#/ask');
+      await p.click(`[data-sym="${sym}"]`); await p.waitForTimeout(1500);
+      const rq = await ls(p, 'rq') || [], q = sent.map((x) => JSON.parse(x));
+      ok(rq.some((x) => x.k === 's' && x.s === syn.id) || q.some((b) => b.items.some((i) => i.k === 's' && i.s === syn.id)), 'watch: a matching symptom search sends a search signal', { rq, route: await p.evaluate(() => location.hash) });
+    }
+    // switched off in Settings: off, nothing queued, and still off at the next open
+    await p.goto(BASE + 'index.html#/settings'); await p.waitForTimeout(400);
+    await p.click('[data-block="ui.watchOn"] .toggle'); await p.waitForTimeout(300);
+    ok(await ls(p, 'watch') === false && (await ls(p, 'rq') || []).length === 0, 'watch: the Settings switch turns it off');
+    p = await open(ctx, T0 + 2 * DAYMS, '#/topic/' + syn.topics[0]);
+    ok(await ls(p, 'watch') === false && !(await p.$('[data-rep="yes"]')), 'watch: switched off, it stays off at the next open, and no report question shows');
     await ctx.close();
   }
 
@@ -168,6 +192,24 @@ const SV = book.surveillance;
     const p = await open(ctx, T0);
     ok(await p.$('.hbtn.em') && await ls(p, 'voice') === 'f', 'older phone: a language without a voice opens the Health tab with the woman\'s voice');
     ok(await ls(p, 'watch') === true, 'older phone: a yes to the old question keeps the disease watch on');
+    await ctx.close();
+  }
+  // the app of the morning of 2026-10-08 stored watch=false wherever the old question had no Yes; the switch stored it too
+  for (const [label, consent, watch, want] of [
+    ['opt-in morning default, never chose', null, false, true],
+    ['an older phone that never touched the switch', '{"ok":true,"v":"2026-10-07.1","day":"2026-10-07"}', null, true],
+    ['a Yes to the old question, then the watch switched off', '{"ok":true,"v":"2026-10-07.1","day":"2026-10-07"}', false, false],
+    ['counts switched off', '{"ok":false,"v":"2026-10-07.1","day":"2026-10-07"}', false, true],
+  ]) {
+    const ctx = await newCtx({ fn: ([c, w]) => { if (!localStorage.getItem('fhb.lang')) { localStorage.setItem('fhb.lang', '"fa"'); localStorage.setItem('fhb.voice', '"f"'); if (c) localStorage.setItem('fhb.consent', c); if (w !== null) localStorage.setItem('fhb.watch', JSON.stringify(w)); } }, arg: [consent, watch] });
+    let p = await open(ctx, T0);
+    ok(await ls(p, 'watch') === want && await ls(p, 'watchV') === 2, `older phone (${label}): disease watch ${want ? 'on' : 'off'}`, await ls(p, 'watch'));
+    p = await open(ctx, T0 + H);
+    ok(await ls(p, 'watch') === want, `older phone (${label}): the same at the next open`);
+    if (consent && /false/.test(consent)) {
+      await p.goto(BASE + 'index.html#/settings'); await p.waitForTimeout(400);
+      ok(await p.$eval('[data-block="ui.watchOn"] .toggle', (e) => e.disabled && e.getAttribute('aria-pressed') === 'false'), `older phone (${label}): with counts off, the watch sends nothing (switch shown off)`);
+    }
     await ctx.close();
   }
 

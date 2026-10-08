@@ -26,7 +26,7 @@ const S = {
   voice: store.get('voice', null), // 'f' = a woman's voice, 'm' = a man's voice
   speed: store.get('speed', 1),
   get stats() { return Stats.allowed(); }, set stats(v) { Stats.setConsent(v); }, // usage counts: on unless switched off (js/stats.js)
-  watch: store.get('watch', null), // "Help watch for outbreaks" (also needs stats on): off until switched on (see start())
+  watch: store.get('watch', true), // "Help watch for outbreaks" (also needs stats on): on unless switched off in Settings (see start())
   kids: store.get('kids', []),
   kid: store.get('kid', null),
   queueIds: [],
@@ -225,8 +225,8 @@ addEventListener('online', () => { flush(); sendFeedback(); clearTimeout(DL.retr
 addEventListener('offline', () => packsUI());
 
 /* ---------- disease watch: "does someone in your home have this now?" ---------- */
-// Definitions come from content/src/syndromes.json (book.surveillance). Off until the family switches it on in Settings
-// (phones that said yes to the old first-open question keep it on). A "yes" asks the district, there and then, if none
+// Definitions come from content/src/syndromes.json (book.surveillance). On for every phone (Mo, 2026-10-08); the switch in
+// Settings turns it off (see start() for older phones). A "yes" asks the district, there and then, if none
 // is chosen yet (kept on the phone), and an age group, then queues one report: syndrome, definition version, district, age group, day,
 // a random report id and the random install id. No names, no GPS, no free text. The same syndrome from this phone
 // counts once per 14 days. Symptom-finder searches that match a syndrome are queued as a weaker "search" signal
@@ -934,7 +934,7 @@ async function deleteVoices() {
 }
 async function showStorage() { const t = await storageText(); const el = $('#storage'); if (el) el.textContent = t; }
 function screenSettings() {
-  const ids = ['ui.settings', 'ui.set.language', 'ui.set.speed', 'ui.set.voices', 'ui.set.packs', 'ui.set.update', SH.homeSay(), 'ui.watch', 'ui.disclaimer'];
+  const ids = ['ui.settings', 'ui.set.language', 'ui.set.speed', 'ui.set.voices', 'ui.set.packs', 'ui.set.update', SH.homeSay(), 'ui.watchOn', 'ui.disclaimer'];
   let html = top(T('settings')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.settings"><div class="body">${esc(L(S.book.narration['ui.settings']))}</div>${spk('ui.settings')}</div>`;
   html += `<div class="panel">`;
@@ -954,7 +954,7 @@ function screenSettings() {
   html += `<div class="srow swrap" data-block="ui.set.stats">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div>${spk('ui.set.stats')}<button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
   html += `<div class="srow" data-block="ui.set.privacy">${ic('check')}<a class="grow" href="#/privacy"><div class="t">${esc(T('privacy'))}</div><div class="s">${esc(T('privacySub'))}</div></a>${spk('ui.set.privacy')}</div>`;
   if (SV()) {
-    html += `<div class="srow swrap watch" data-block="ui.watch">${ic('people')}<div class="grow"><div class="t">${esc(T('watch'))}</div><div class="s">${esc(L(S.book.narration['ui.watch']))}</div>${S.stats ? '' : `<div class="s warnline">${esc(T('watchNeedsStats'))}</div>`}</div>${spk('ui.watch')}<button class="toggle" data-action="watch" aria-pressed="${watching()}" aria-label="${esc(T('watch'))}"${S.stats ? '' : ' disabled'}></button></div>`;
+    html += `<div class="srow swrap watch" data-block="ui.watchOn">${ic('people')}<div class="grow"><div class="t">${esc(T('watch'))}</div><div class="s">${esc(L(S.book.narration['ui.watchOn']))}</div>${S.stats ? '' : `<div class="s warnline">${esc(T('watchNeedsStats'))}</div>`}</div>${spk('ui.watchOn')}<button class="toggle" data-action="watch" aria-pressed="${watching()}" aria-label="${esc(T('watch'))}"${S.stats ? '' : ' disabled'}></button></div>`;
     if (watching() || S.stats) { const d = store.get('district', null); ids.push('ui.district'); html += `<div class="srow swrap" data-block="ui.district">${ic('house')}<div class="grow"><div class="t">${esc(T('myDistrict'))}</div><div class="s" id="mydistrict">${esc(d ? placeName(d) : T('notChosen'))}</div></div>${spk('ui.district')}<button class="sbtn" data-action="district">${esc(T('change'))}</button></div>`; }
   }
   html += `<div class="srow" data-block="ui.set.studio">${ic('talk')}<a class="grow" href="#/studio"><div class="t">${esc(T('recordMode'))}</div><div class="s">${esc(T('recordModeSub'))}</div></a>${spk('ui.set.studio')}</div>`;
@@ -1488,7 +1488,15 @@ async function start() {
   Stats.init({ S, store, T, L, esc, spk, ic, I, top, listenBar, choose, sayRow, stopAudio, render: () => render(), isStandalone, platform, localDay, randId, isPlaying: () => P.on });
   if (!S.kid && S.kids[0]) S.kid = S.kids[0].id;
   if (!store.get('firstOpen', 0)) store.set('firstOpen', Date.now()); // the district question waits a day from here
-  if (S.watch === null) { const a = store.get('consent', null); S.watch = !!(a && a.ok === true); store.set('watch', S.watch); } // kept on only where the family said yes to the old question
+  // The disease watch is on for every phone (Mo, 2026-10-08), except where the family switched it off in Settings. Only
+  // the switch stored 'watch' before, except on the morning of 2026-10-08, when the app stored false wherever the old
+  // first-open question had no Yes. So, once: a stored false is kept only where that question had a Yes (the morning's
+  // app kept those on, so the false there came from the switch); every other phone is switched on.
+  if (store.get('watchV', 0) < 2) {
+    const a = store.get('consent', null);
+    if (!(S.watch === false && a && a.ok === true)) S.watch = true;
+    store.set('watch', S.watch); store.set('watchV', 2);
+  }
   if (S.lang && !S.voice) setVoice(S.lang, voiceFor(S.lang)); // chose a language on an older app but never a voice
   render();
   askDistrictSoon();
