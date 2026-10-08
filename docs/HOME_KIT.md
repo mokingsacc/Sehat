@@ -138,7 +138,7 @@ Colour, not a number (children 6 to 59 months, left upper arm, halfway between s
 | Red | under 115 mm | Clinic or nutrition centre today |
 | Yellow | 115 to 124 mm | Clinic this week |
 | Green | 125 mm or more | Good, measure again next month |
-| any colour, with swelling of both feet, will not eat, very sleepy, fits | | Hospital now |
+| any colour, with swelling of both feet, will not eat or drink, very weak or sleepy, vomits everything, high fever (39 or more) or feels cold, fits | | Hospital now (the same list as reading-muac.urgent and malnutrition.urgent; IMAM 2018; medical audit CH20) |
 
 ### Fever by touch (`fever.json`)
 

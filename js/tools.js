@@ -185,7 +185,8 @@ export function initTools(ctx) {
     sugar: [['red-flags.urgent.confused', 'conf'], ['fever.urgent.convulsion', 'conf'], ['diabetes.urgent.vomiting', 'u'], ['ui.rd.s.deep', 'u']],
     'spo2/older': [['red-flags.urgent.breathing', 'u'], ['ui.rd.s.blue', 'u'], ['red-flags.urgent.confused', 'u'], ['red-flags.urgent.chest-pain', 'u']],
     'spo2/under5': [['danger-child.urgent.chest', 'u'], ['ui.rd.s.blue', 'u'], ['danger-child.urgent.sleepy', 'u'], ['danger-child.urgent.drink', 'u']],
-    muac: [['growth.urgent.feet', 'u'], ['growth.urgent.eat', 'u'], ['danger-child.urgent.sleepy', 'u'], ['danger-child.urgent.convulsion', 'u']],
+    // the thin-child hospital list of the Health page reading-muac (= malnutrition.urgent; IMAM 2018; medical audit CH20)
+    muac: [['reading-muac.urgent.feet', 'u'], ['reading-muac.urgent.eat', 'u'], ['reading-muac.urgent.sleepy', 'u'], ['reading-muac.urgent.vomit', 'u'], ['reading-muac.urgent.fever', 'u'], ['reading-muac.urgent.convulsion', 'u']],
   };
   const RD = { dev: null, who: null, phase: 'dev', a: '', b: '', field: 'a', unit: 'mg', colour: null, signs: new Set() };
   const signList = () => (SIGNS[RD.dev + '/' + RD.who] || SIGNS[RD.dev] || []).filter(([id]) => S.book.narration[id]);
