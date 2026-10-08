@@ -136,8 +136,9 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   for (const l of ['vthin', 'thin', 'ok', 'heavy', 'vheavy']) ids.add('ui.fam.bmi.' + l);
   eq([...ids].filter((k) => !book.narration[k]), [], 'narration ids exist');
   for (const id of ids) { const n = book.narration[id]; if (n) ok(n.fa && n.ps && n.en, id + ' has fa, ps, en'); }
-  // Mo: the "This book does not replace a doctor" box stays on the Health pages, not on the Family screens
-  ok(!/disclaimer/.test(readFileSync(ROOT + 'js/family.js', 'utf8')), 'Family screens have no "does not replace a doctor" box');
+  // Mo: the "This book does not replace a doctor" box stays on the Health pages, not on the Family screens (nor on the
+  // growth charts, which open from a child's record)
+  for (const f of ['js/family.js', 'js/growth.js']) ok(!/disclaimer/.test(readFileSync(ROOT + f, 'utf8')), f + ': no "does not replace a doctor" box');
   // old phones: no ?? or ?. in the family code
   for (const f of ['js/family.js', 'js/family-data.js']) ok(!/\?\?|\?\.(?![0-9])/.test(readFileSync(ROOT + f, 'utf8').replace(/'[^'\n]*'|`[^`]*`|\/\/[^\n]*/g, '')), f + ': no ?? or ?. (old Android WebView)');
 }

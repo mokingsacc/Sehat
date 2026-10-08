@@ -6,6 +6,7 @@
 //   - no console errors, page errors or failed requests (clips that are simply not there are allowed: the app falls back);
 //   - no sideways scroll;
 //   - no title cut mid-word, clipped, running into its speaker or out of its card; header pieces never overlap;
+//     Family and Growth header titles stay on two lines at most;
 //   - every narrated block has a speaker, and every speaker is at least 56 px;
 //   - on the screens that have been gone over line by line (SPOKEN below: the clinic list, Settings, search,
 //     Emergency, Feedback, Privacy, Family and Growth), every piece of text has a speaker; elsewhere text without
@@ -120,6 +121,7 @@ function measure(MIN) {
   const links = [...document.querySelectorAll('main a[href^="#/"], nav a[href^="#/"]')].map((a) => a.getAttribute('href'));
   return {
     probs: P, links: [...new Set(links)],
+    h1Lines: (() => { const e = document.querySelector('main .top h1'); if (!e || !vis(e)) return 0; const rg = document.createRange(); rg.selectNodeContents(e); return new Set([...rg.getClientRects()].filter((r) => r.width > 0).map((r) => Math.round(r.top / 6))).size; })(),
     scroll: document.scrollingElement.scrollWidth - innerWidth,
     pill: !!document.querySelector('main .top .empill, main .topic-hero .empill'), nav: !!document.querySelector('nav.nav'),
     isHealth: !!document.querySelector('main .hbtn.em'), blocks: [...document.querySelectorAll('main [data-block]')].map((e) => e.dataset.block),
@@ -162,6 +164,8 @@ function measure(MIN) {
       for (const [cat, d] of m.probs) prob(cat, h, d, run);
       checks += m.probs.length + 6;
       if (m.scroll > 0) prob('scroll', h, `${m.scroll} px sideways`, run);
+      // Family and Growth: short header titles, at most two lines beside the Emergency button (the person's name is below)
+      if (/^#\/(family|growth)/.test(h) && m.h1Lines > 2) prob('title', h, `header title on ${m.h1Lines} lines`, run);
       // the Health tab is what the router falls back to: anywhere else, it means the link is broken
       if (h !== '#/home' && h !== '#/' && m.isHealth && !opts.mayBeHome) prob('link', h, `opens the Health tab instead (from ${prev})`, run);
       const tm = /^#\/topic\/([^/]+)\/(.+)$/.exec(h); if (tm && !m.blocks.includes(decodeURIComponent(tm[2]))) prob('link', h, 'the block it points to is not on the page', run);

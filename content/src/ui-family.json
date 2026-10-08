@@ -327,9 +327,9 @@
    "en": "Voice note"
   },
   "whoseNote": {
-   "fa": "این صدا برای کیست؟",
-   "ps": "دا غږ د چا لپاره دی؟",
-   "en": "Who is this note for?"
+   "fa": "برای کیست؟",
+   "ps": "د چا لپاره؟",
+   "en": "Whose note?"
   },
   "newPerson": {
    "fa": "یک نفر نو",
@@ -345,6 +345,31 @@
    "fa": "صداهای خانواده",
    "ps": "د کورنۍ غږونه",
    "en": "Family voice notes"
+  },
+  "readTitle": {
+   "fa": "فشار و شکر",
+   "ps": "فشار او شکر",
+   "en": "BP and sugar"
+  },
+  "noteTitle": {
+   "fa": "گپ داکتر",
+   "ps": "د ډاکټر خبره",
+   "en": "Doctor's words"
+  },
+  "copyTitle": {
+   "fa": "کاپی معلومات",
+   "ps": "د معلوماتو کاپي",
+   "en": "Copy records"
+  },
+  "measureTitle": {
+   "fa": "چطور اندازه کنیم",
+   "ps": "څنګه اندازه وکړو",
+   "en": "How to measure"
+  },
+  "tdTitle": {
+   "fa": "واکسین تیتانوس",
+   "ps": "د ټیټانوس واکسین",
+   "en": "Tetanus vaccine"
   },
   "saveFile": {
    "fa": "فایل را ذخیره کنید",

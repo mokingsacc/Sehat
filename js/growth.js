@@ -7,7 +7,7 @@
 import { assess, curves, lengthFor, ageDays, implausible, lms, FINDINGS } from './growth-calc.js';
 
 export function initGrowth(ctx) {
-  const { S, $, $$, esc, T, L, num, ic, I, spk, play, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, dateSelects, readDate, fmtDate, todayISO, saveKids } = ctx;
+  const { S, $, $$, esc, T, L, num, ic, I, spk, play, hasAudio, ttsVoice, track, listenBar, top, toast, dateSelects, readDate, fmtDate, todayISO, saveKids } = ctx;
   const say = (id) => L(S.book.narration[id]);
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${spk(id)}</div>`;
   // a heading, a label or a link with its own speaker
@@ -146,7 +146,7 @@ export function initGrowth(ctx) {
     return { html: top(T('growth')) + sayRow('ui.growth', 'blk lead trow') + sayRow('ui.gr.no-kids', 'blk tip trow') + `<button class="btn" data-action="addkid">${I.plus.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('addChild'))}</button>`, nav: 'family' };
   }
   function kidChips(k) {
-    const ks = kids(); if (ks.length < 2) return '';
+    const ks = kids(); if (ks.length < 2) return `<div class="agechip">${ic('baby')}<span>${esc(nameOf(k))}</span></div>`; // the name is not in the header title
     return `<div class="chips">${ks.map((x) => `<button class="chip" data-kid="${esc(x.id)}" aria-pressed="${x.id === k.id}">${esc(nameOf(x))}</button>`).join('')}</div>`;
   }
   function entryRow(k, e) {
@@ -161,7 +161,7 @@ export function initGrowth(ctx) {
     loadWho();
     const list = entriesOf(k), age = ageDays(k.dob, todayISO());
     const ids = ['ui.growth'];
-    let html = top(T('growth') + ' · ' + nameOf(k), { back: '#/family/person' }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
+    let html = top(T('growth'), { back: '#/family/person' }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
     ids.push('ui.gr.new');
     html += headSay(`<a class="btn big" href="#/growth/add">${I.plus.replace('<svg', '<svg style="width:26px;height:26px"')} ${esc(T('addMeasure'))}</a>`, 'ui.gr.new');
     if (age > 1826) { ids.push('ui.gr.over5'); html += sayRow('ui.gr.over5', 'blk tip trow'); }
@@ -175,7 +175,6 @@ export function initGrowth(ctx) {
     html += `<div class="panel">${headSay(`<h2>${esc(T('measurements'))}</h2>`, lsay)}${list.length ? list.slice().reverse().map((e) => entryRow(k, e)).join('') : `<p class="muted">${esc(T('noMeasures'))}</p>`}</div>`;
     if (list.length) { ids.push('ui.gr.show'); html += sayRow('ui.gr.show', 'blk tip trow'); }
     html += measureLink();
-    html += disclaimer();
     return { html, nav: 'family' };
   }
   function measureLink() {
@@ -252,7 +251,6 @@ export function initGrowth(ctx) {
     html += res.tips.map((id) => sayRow(id, 'blk tip trow')).join('');
     html += `<a class="btn" href="#/growth">${ic('growth')} ${esc(T('seeCharts'))}</a>`;
     if (res.lv !== 'ok') html += `<a class="btn ghost" href="#/near">${ic('hospital')} ${esc(T('near'))}</a>`;
-    html += disclaimer();
     if (G.speak) { G.speak = false; setTimeout(() => autoplay(ids), 500); }
     track('tool', { p: 'growth-result-' + res.lv });
     return { html, nav: 'family' };
@@ -262,7 +260,7 @@ export function initGrowth(ctx) {
     ['ui.gr.m.length2', null], ['ui.gr.m.height', 'img/pics/measure-height.svg'], ['ui.gr.m.muac', 'img/topics/kit-muac.svg']];
   function screenMeasure() {
     const ids = ['ui.gr.m.lead', ...GUIDE.map((g) => g[0]), 'ui.gr.m.exact'];
-    let html = top(T('howMeasure'), { back: kidNow() ? '#/growth' : '#/family' }) + listenBar(ids) + sayRow('ui.gr.m.lead', 'blk lead trow');
+    let html = top(T('measureTitle'), { back: kidNow() ? '#/growth' : '#/family' }) + listenBar(ids) + sayRow('ui.gr.m.lead', 'blk lead trow');
     let n = 0;
     for (const [id, pic] of GUIDE) {
       const txt = say(id), m = /^([^:：]{2,40})[:：]\s*(.+)$/s.exec(txt), head = m ? m[1] : '', body = m ? m[2] : txt;
@@ -271,7 +269,6 @@ export function initGrowth(ctx) {
     }
     html += sayRow('ui.gr.m.exact', 'blk tip trow');
     if (S.book.topics['kit-muac']) html += ctx.topicCard('kit-muac');
-    html += disclaimer();
     return { html, nav: 'family' };
   }
 

@@ -177,6 +177,8 @@ export function initFamily(ctx) {
   /* ---------- pieces ---------- */
   const bigRow = (href, icon, title, sub, sayId, cls = '', attr = '') => `<div class="srowbig fam ${cls}">${href ? `<a class="sbig" href="${href}"${attr}>` : `<button type="button" class="sbig"${attr}>`}${icon}<span class="tx"><span class="t">${esc(title)}</span>${sub ? `<span class="s">${esc(sub)}</span>` : ''}</span>${href ? '</a>' : '</button>'}${big(sayId)}</div>`;
   const picImg = (p, cls = 'ppic') => `<img class="${cls}" src="${esc(picSrc(p))}" alt="">`;
+  // whose page this is, under a short header title (the title stays on one or two lines on a small phone)
+  const whoChip = (p) => `<div class="agechip">${picImg(p, 'mini')}<span>${esc(nameOf(p))}</span></div>`;
   function personHead(p) {
     const age = isChild(p) && p.dob ? ageText(p.dob) : T('adultAge');
     return `<div class="phead">${picImg(p)}<div class="pt"><div class="pn">${esc(nameOf(p))}</div><div class="pm">${esc(p.name ? T(PIC_KEY[p.pic]) + ' · ' + age : age)}</div></div>${nameBtn(p)}</div>`;
@@ -205,7 +207,7 @@ export function initFamily(ctx) {
   /* ---------- #/family: everyone ---------- */
   function screenList() {
     const ids = ['ui.fam.lead'];
-    let html = top(T('myFamily')) + listenBar(ids) + sayRow('ui.fam.lead', 'blk lead trow');
+    let html = top(T('family')) + listenBar(ids) + sayRow('ui.fam.lead', 'blk lead trow');
     const due = dueMeds(S.kids);
     if (due.length) html += due.map(remCard).join('');
     if (!S.kids.length) { ids.push('ui.fam.none'); html += sayRow('ui.fam.none', 'blk tip trow'); }
@@ -369,7 +371,7 @@ export function initFamily(ctx) {
   function screenVacc() {
     const p = person(); if (!p) return screenList();
     const v = S.book.topics.vaccines;
-    let html = top(isChild(p) ? T('rowVaccines') : T('rowTd'), { back: '#/family/person' });
+    let html = top(isChild(p) ? T('rowVaccines') : T('tdTitle'), { back: '#/family/person' });
     const ids = [];
     if (isChild(p) && v) {
       ids.push('ui.fam.vacc');
@@ -382,6 +384,7 @@ export function initFamily(ctx) {
       }
     } else if (p.pic === 'woman') {
       ids.push('vaccines.td', 'ui.fam.td.tap');
+      html += whoChip(p);
       if (S.book.narration['vaccines.td']) html += sayRow('vaccines.td', 'blk lead trow');
       html += sayRow('ui.fam.td.tap', 'blk tip trow');
       const t = tdPlan(p.td);
@@ -414,7 +417,7 @@ export function initFamily(ctx) {
     const p = person(); if (!p) return screenList();
     if (isChild(p)) { go('#/growth'); return { html: '', nav: 'family' }; }
     const ids = ['ui.fam.w.lead', 'ui.fam.w.height'];
-    let html = top(T('rowWeight') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.w.lead', 'blk lead trow');
+    let html = top(T('rowWeight'), { back: '#/family/person' }) + listenBar(ids) + whoChip(p) + sayRow('ui.fam.w.lead', 'blk lead trow');
     html += NP.field('hcm', { label: T('heightCm'), say: 'ui.fam.w.height', unit: 'cm', dec: 1, min: 100, max: 230, value: p.hcm || null, onDone: (v) => { p.hcm = v; touch(p); ctx.render(); } });
     if (p.pic === 'woman') { ids.push('ui.fam.w.preg'); html += `<div class="srowbig"><button type="button" class="chip big preg" data-fam="preg" aria-pressed="${!!p.preg}">${ic('pregnant')} ${esc(T('pregnantNow'))}</button>${big('ui.fam.w.preg')}</div>`; }
     const adv = adultAdvice(p);
@@ -468,7 +471,7 @@ export function initFamily(ctx) {
   function screenMeds() {
     const p = person(); if (!p) return screenList();
     const ids = ['ui.fam.med.lead', 'ui.fam.med.safe'];
-    let html = top(T('rowMeds') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.med.lead', 'blk lead trow') + sayRow('ui.fam.med.safe', 'blk tip trow');
+    let html = top(T('rowMeds'), { back: '#/family/person' }) + listenBar(ids) + whoChip(p) + sayRow('ui.fam.med.lead', 'blk lead trow') + sayRow('ui.fam.med.safe', 'blk tip trow');
     const due = dueMeds([p]); if (due.length) html += due.map(remCard).join('');
     html += bigRow('#/family/med-add', I.plus, T('addMed'), '', 'ui.fam.row.meds', 'add');
     const list = (p.meds || []).slice().sort((a, b) => (medActive(b) - medActive(a)) || (a.d < b.d ? 1 : -1));
@@ -530,7 +533,7 @@ export function initFamily(ctx) {
   function screenNotes() {
     const p = person(); if (!p) return screenList();
     const ids = ['ui.fam.note.lead'];
-    let html = top(T('rowNotes') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.note.lead', 'blk lead trow');
+    let html = top(T('rowNotes'), { back: '#/family/person' }) + listenBar(ids) + whoChip(p) + sayRow('ui.fam.note.lead', 'blk lead trow');
     html += bigRow('#/family/note-add', ic('talk'), T('addNote'), '', 'ui.fam.row.notes', 'add');
     const list = (p.notes || []).slice().sort((a, b) => (a.d < b.d ? 1 : -1));
     // the notes in one panel, newest first: its speaker covers the dates (and any typed words)
@@ -542,7 +545,7 @@ export function initFamily(ctx) {
     const p = person(); if (!p) return screenList();
     if (!F.draft || F.draft.for !== 'note:' + p.id) F.draft = { for: 'note:' + p.id, rec: null, text: '' };
     const d = F.draft, ids = ['ui.fam.note.ask', 'ui.fam.note.rec', 'ui.fam.note.text', 'ui.fam.note.date'];
-    let html = top(T('addNote'), { back: '#/family/notes' }) + listenBar(ids);
+    let html = top(T('noteTitle'), { back: '#/family/notes' }) + listenBar(ids);
     html += `<div class="askfirst">${ic('talk')}${sayRow('ui.fam.note.ask', 'trow')}</div>`;
     html += recBox('rec', 'ui.fam.note.rec', 300);
     html += `<div class="ftext">${sayRow('ui.fam.note.text', 'trow small')}<textarea class="small" data-fam-in="text" maxlength="500" rows="3" aria-label="${esc(T('noteWrite'))}" placeholder="${esc(T('noteWrite'))}">${esc(d.text)}</textarea></div>`;
@@ -573,7 +576,7 @@ export function initFamily(ctx) {
   function screenReadings() {
     const p = person(); if (!p) return screenList();
     const ids = ['ui.fam.rd.lead', 'ui.fam.rd.open'];
-    let html = top(T('rowReadings') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.rd.lead', 'blk lead trow');
+    let html = top(T('readTitle'), { back: '#/family/person' }) + listenBar(ids) + whoChip(p) + sayRow('ui.fam.rd.lead', 'blk lead trow');
     html += bigRow('#/tool/reading', ic('bp'), T('checkReading'), '', 'ui.fam.rd.open', 'add');
     const list = (p.readings || []).slice().sort((a, b) => (a.d < b.d ? 1 : a.d > b.d ? -1 : (b.t || 0) - (a.t || 0)));
     html += list.length ? `<div class="panel">${list.map((r) => `<div class="grow-row rdrow"><div class="gr-open"><span class="d">${esc(fmtDate(r.d))} · ${ic(r.k === 'bp' ? 'bp' : 'sugar')}</span><span class="v" dir="ltr">${esc(readingText(r))}</span>${r.lv ? `<span class="lvchip ${esc(r.lv)}">${esc(T(LVW[r.lv] || 'lvCheck'))}</span>` : ''}</div><button type="button" class="gr-del" data-fam-delrd="${esc(r.id)}" aria-label="${esc(T('delete'))}">×</button></div>`).join('')}</div>` : emptyRow('ui.fam.no-readings', ids);
@@ -606,7 +609,7 @@ export function initFamily(ctx) {
   const B = () => window.FHBAndroid || null;
   function screenCopy() {
     const ids = ['ui.fam.copy.lead', 'ui.fam.copy.private'];
-    let html = top(T('copyRecords'), { back: '#/family' }) + listenBar(ids) + sayRow('ui.fam.copy.lead', 'blk lead trow') + sayRow('ui.fam.copy.private', 'blk tip trow');
+    let html = top(T('copyTitle'), { back: '#/family' }) + listenBar(ids) + sayRow('ui.fam.copy.lead', 'blk lead trow') + sayRow('ui.fam.copy.private', 'blk tip trow');
     const b = B();
     if (b) {
       html += bigRow('', ic('phone'), T('nearby'), T('nearbySub'), 'ui.fam.x.nearby', 'x', ' data-fam-x="sheet"');

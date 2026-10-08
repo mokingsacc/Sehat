@@ -4745,3 +4745,14 @@ What a new phone sees now: one screen, the language (Dari, Pashto, or English), 
 - Narration: `ui.privacy.counts` became **`ui.privacy.usage`**, because "only if you agree" was dropped (needs recording in the 4 voices): fa «شمار استفاده: گوشی هر روز حساب می‌کند …», ps «د کارونې شمېر: ټیلیفون هره ورځ حسابوي …», en "Usage counts: each day the phone adds up …". The rest of the text is unchanged. Removed: `ui.consent`, `ui.consentOn` (their clips and the old `ui.privacy.counts` clips are now unused; build lists them as "audio without text id"). Button text `skip` became `notNow` (fa «حالا نه», ps «اوس نه», en "Not now"; text only).
 - To check: `ui.set.stats` still says "if you turn this on…". This is still true, but the switch is now on from the start. A new line would need recording.
 - Tests: tools/test_firstrun.cjs (78 checks, with a fake clock) covers the first run, the 24-hour, 7-day and never-again rules, Emergency, counts off, the inline district for a report, and older phones.
+
+## Family follow-up: growth charts without the doctor box, short header titles (8 Oct 2026, worker famvoice)
+
+The "does not replace a doctor" box is also gone from the growth screens (charts, result, how to measure), since they
+open from a child's record. Family and Growth header titles are now short so they stay on at most two lines beside the
+Emergency button at 320 and 360 px (the crawl now checks this): "Family" (was "My family"), "Whose note?", "BP and
+sugar", "Doctor's words" (the note form), "Copy records", "How to measure", "Tetanus vaccine"; Medicines, Doctor's notes, Weight and
+Growth no longer add " · name" to the title. The person's picture and name sit in a chip just under the bar instead
+(and on the growth chart with one child). New button texts (no clips): `readTitle`, `noteTitle`, `copyTitle`,
+`measureTitle`, `tdTitle` ("Tetanus vaccine"); `whoseNote` is now the short "Whose note?" (fa "برای کیست؟", ps "د چا لپاره؟"). For Mo: check the
+short Dari and Pashto titles.
