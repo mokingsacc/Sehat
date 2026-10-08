@@ -39,6 +39,8 @@ ui.who.child2m	طفل ۲ ماهه تا ۵ ساله	Child from 2 months to 5 year
 ui.who.pregnant	زن حامله	Pregnant woman
 ui.who.adult	بزرگسال، غیر حامله	Adult, not pregnant
 ui.who.under5	طفل کمتر از ۵ سال	Child under 5
+ui.who.diabetes	مرض شکر دارد	Has diabetes
+ui.who.nodiabetes	مرض شکر ندارد، یا معلوم نیست	No diabetes, or not sure
 ui.br.calm	صبر کنید تا طفل آرام یا خواب باشد. وقتی گریه می‌کند یا شیر می‌خورد، نشمارید.	Wait until the child is calm or asleep. Do not count while the child cries or feeds.
 ui.br.uncover	لباس را بالا کنید تا سینه و شکم را ببینید. طفل کوچک را گرم نگه دارید.	Lift the clothes so you can see the chest and belly. Keep a small baby warm.
 ui.br.watch	شکم یا سینه را ببینید. هر بار که بالا می‌آید، یک نفس است.	Watch the belly or chest. Each time it rises, that is one breath.
@@ -55,6 +57,7 @@ ui.br.v.danger	شما یک علامت خطر را می‌بینید. همین ح
 ui.br.clinic	در کلینیک، کارمند صحی نفس‌ها را دوباره می‌شمارد، سینه را می‌بیند و اگر لازم بود دوای سینه‌بغل می‌دهد.	At the clinic, the health worker will count the breathing again, look at the chest, and give medicine for pneumonia if needed.
 ui.rd.intro	وسیله‌ای را که استفاده کردید انتخاب کنید. بعد انتخاب کنید برای چه کسی بود، و عدد را وارد کنید.	Choose the device you used. Then choose who was checked, and put in the number.
 ui.rd.who	برای چه کسی اندازه کردید؟	Who was checked?
+ui.rd.who.sugar	آیا این شخص مرض شکر دارد؟	Does this person have diabetes?
 ui.rd.enter.temp	عدد ترمامتر را بنویسید.	Type the number on the thermometer.
 ui.rd.enter.bp	اول عدد بالا، بعد عدد پایین را بنویسید.	Type the top number, then the bottom number.
 ui.rd.enter.sugar	واحدی را که ماشین شما نشان می‌دهد انتخاب کنید، بعد عدد را بنویسید.	Choose the unit shown on your meter, then type the number.
@@ -67,6 +70,7 @@ ui.rd.bp-order	عددها را ببینید. عدد بالا همیشه از ع�
 ui.rd.v.sign	این علامت خطر است، هر عددی که باشد. همین حالا به شفاخانه بروید، شب باشد یا روز.	This is a danger sign, whatever the number. Go to hospital now, day or night.
 ui.rd.v.temp-baby-fever	هر تب در طفل کمتر از ۲ ماه خطرناک است. همین حالا به شفاخانه بروید، شب باشد یا روز. در راه شیر دادن را ادامه دهید.	Any fever in a baby under 2 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
 ui.rd.v.temp-baby-cold	این طفل زیاد سرد است. طفل را پوست به پوست روی سینهٔ مادر بگذارید، سرش را بپوشانید و همین حالا به شفاخانه بروید.	This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now.
+ui.rd.v.temp-baby-chilly	این طفل سرد است. همین حالا طفل را پوست به پوست روی سینهٔ مادر بگیرید، سرش را بپوشانید و امروز به کلینیک بروید. در راه طفل را گرم نگه دارید.	This baby is cold. Hold the baby skin to skin on the mother's chest now, cover the head, and go to the clinic today. Keep the baby warm on the way.
 ui.rd.v.temp-baby-cool	کمی سرد است. طفل را پوست به پوست بگیرید، سرش را بپوشانید و بعد از ۱ ساعت دوباره اندازه کنید. اگر هنوز کمتر از ۳۶ و نیم است، یا خوب شیر نمی‌خورد، امروز به کلینیک بروید.	A little cold. Hold the baby skin to skin, cover the head, and measure again in 1 hour. If still under 36.5, or the baby feeds poorly, go to the clinic today.
 ui.rd.v.temp-baby-ok	برای طفل عادی است. طفل را گرم نگه دارید و بار بار شیر بدهید. اگر طفل مریض معلوم می‌شود، داغ یا سرد است یا خوب شیر نمی‌خورد، دوباره اندازه کنید.	Normal for a baby. Keep the baby warm and breastfeed often. If the baby seems ill, feels hot or cold, or feeds poorly, measure again.
 ui.rd.v.temp-cold	درجهٔ حرارت خیلی پایین است. مریض را با کمپل گرم کنید و همین حالا به شفاخانه بروید.	Very low temperature. Warm the person with blankets and go to hospital now.
@@ -75,6 +79,8 @@ ui.rd.v.temp-ok	تب نیست. اگر مریض به نظر می‌رسد، عل�
 ui.rd.v.temp-child-fever	این تب است. مایعات و شیر بیشتر بدهید و لباس سبک بپوشانید. اگر تب بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر طفل خیلی مریض معلوم می‌شود، امروز بروید.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill.
 ui.rd.v.temp-fever	این تب است. استراحت کنید و زیاد مایعات بنوشید. اگر بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر مریض خیلی بد است، امروز بروید.	This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell.
 ui.rd.v.temp-high	تب بلند است. زیاد مایعات بدهید و لباس سبک بپوشانید. امروز به کلینیک بروید.	A high fever. Give plenty to drink and dress lightly. Go to the clinic today.
+ui.rd.v.temp-fast	نفس تیز در طفل می‌تواند سینه‌بغل باشد. امروز به کلینیک بروید؛ شاید طفل به دوا ضرورت داشته باشد. نفس‌ها را می‌توانید با شمردن نفس در پایین بشمارید.	Fast breathing in a child can be pneumonia. Go to the clinic today: the child may need medicine. You can count the breaths with the breathing counter below.
+ui.rd.temp-breaths	اگر طفل تیز نفس می‌کشد، نفس‌هایش را بشمارید. برای باز کردن شمردن نفس، اینجا را بزنید.	If the child breathes fast, count the breaths. Tap here to open the breathing counter.
 ui.rd.v.temp-very-high	تب خیلی بلند است. مایعات بدهید، لباس سبک بپوشانید و همین حالا به شفاخانه بروید.	A very high fever. Give drinks, dress lightly, and go to hospital now.
 ui.rd.v.temp-pregnant	تب در حاملگی باید معاینه شود. زیاد مایعات بنوشید و امروز به کلینیک بروید. اگر درد شکم، خونریزی، یا آنقدر ضعف دارید که بلند شده نمی‌توانید، همین حالا به شفاخانه بروید.	Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is belly pain, bleeding, or you are too weak to get up.
 ui.rd.v.bp-very-high	خیلی بلند است. ۵ دقیقه آرام بنشینید و یک بار دیگر اندازه کنید. اگر هنوز ۱۸۰ بر ۱۲۰ یا بیشتر است، همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.	Very high. Sit quietly for 5 minutes and measure once more. If it is still 180 over 120 or more, go to hospital now, day or night. Take your medicines with you.
@@ -83,16 +89,23 @@ ui.rd.v.bp-ok	برای اندازهٔ خانه عادی است. نمک کم بخ
 ui.rd.v.bp-low	عدد پایین است. اگر مریض خوب است، شاید برای او عادی باشد. اگر دوای فشار می‌خورد، همین هفته به کلینیک بگویید.	A low reading. If the person feels well, this can be normal for them. If they take blood pressure medicine, tell the clinic this week.
 ui.rd.v.bp-low-faint	فشار پایین با سرچرخی یا بیهوش شدن. دراز بکشید، پاها را بلند کنید و آب بنوشید. امروز به کلینیک بروید. اگر دوباره بیهوش شد یا گیج شد، همین حالا به شفاخانه بروید.	Low blood pressure with dizziness or fainting. Lie down, raise the legs, and drink water. Go to the clinic today. If they faint again or become confused, go to hospital now.
 ui.rd.v.bp-normal-sign	عدد بلند نیست، اما این علامت باید معاینه شود. امروز به کلینیک بروید.	The number is not high, but this sign needs a check. Go to the clinic today.
+ui.rd.v.bp-high-faint	عدد بلند است، و سرچرخی یا بیهوش شدن باید معاینه شود. امروز با یادداشت‌های خود به کلینیک بروید. اگر دوباره بیهوش شد یا گیج شد، همین حالا به شفاخانه بروید.	The number is high, and dizziness or fainting needs a check. Go to the clinic today and take your readings. If they faint again or become confused, go to hospital now.
 ui.rd.v.bp-preg-severe	فشار خیلی بلند در حاملگی برای مادر و طفل خطرناک است. می‌تواند مرض فشار حاملگی (پری‌اکلامپسی) باشد. همین حالا به شفاخانه بروید، شب باشد یا روز.	Very high blood pressure in pregnancy is dangerous for mother and baby. It can be pre-eclampsia. Go to hospital now, day or night.
 ui.rd.v.bp-preg-signs	فشار بلند در حاملگی با این علایم می‌تواند پری‌اکلامپسی باشد که تشنج می‌آورد. همین حالا به شفاخانه بروید، شب باشد یا روز.	High blood pressure in pregnancy with these signs can be pre-eclampsia, which can cause fits. Go to hospital now, day or night.
 ui.rd.v.bp-preg-high	فشار بلند در حاملگی. امروز به کلینیک بروید، حتی اگر خوب هستید. اگر سردرد شدید، تاری چشم، پندیدگی روی یا دست‌ها، یا درد شکم شروع شد، همین حالا به شفاخانه بروید.	High blood pressure in pregnancy. Go to the clinic today, even if you feel well. Go to hospital now if a bad headache, blurred vision, swelling of the face or hands, or belly pain start.
 ui.rd.v.bp-preg-ok	برای حاملگی عادی است. در هر مراجعهٔ حاملگی فشار را اندازه کنید. اگر سردرد شدید، تاری چشم یا پندیدگی روی شروع شد، به شفاخانه بروید.	Normal for pregnancy. Have it checked at every pregnancy visit. Go to hospital if a bad headache, blurred vision or swelling of the face start.
-ui.rd.v.sugar-very-low	قند خیلی پایین است. اگر قورت داده می‌تواند، همین حالا شکر بدهید: حدود ۳ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد همین حالا به شفاخانه بروید، حتی اگر بهتر شد: قند خیلی پایین می‌تواند دوباره پایین شود.	Very low sugar. If they can swallow, give sugar now: about 3 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back.
-ui.rd.v.sugar-low	قند پایین است. همین حالا شکر بدهید: حدود ۳ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید. اگر قند دوباره پایین شد، امروز به کلینیک بروید؛ شاید دوا باید تغییر کند.	Low sugar. Give sugar now: about 3 teaspoons in a glass of water, then some food. Measure again in 15 minutes. If low sugar happens again, go to the clinic today: the medicine may need changing.
+ui.rd.v.bp-preg-low	عدد پایین است. در حاملگی، اگر خوب است، شاید عادی باشد. اگر کمی هم خونریزی دارد، یا تازه ولادت کرده، همین حالا به شفاخانه بروید. در غیر آن، در مراجعهٔ بعدی به قابله بگویید.	A low reading. In pregnancy this can be normal if she feels well. If there is any bleeding, or she has just given birth, go to hospital now. If not, tell the midwife at the next visit.
+ui.rd.v.sugar-very-low	قند خیلی پایین است. اگر قورت داده می‌تواند، همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد همین حالا به شفاخانه بروید، حتی اگر بهتر شد: قند خیلی پایین می‌تواند دوباره پایین شود.	Very low sugar. If they can swallow, give sugar now: 4 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back.
+ui.rd.v.sugar-low	قند پایین است. همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید و اگر هنوز پایین است، باز شکر بدهید. امروز به کلینیک بروید؛ شاید دوا باید تغییر کند.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes, and give sugar again if it is still low. Go to the clinic today: the medicine may need changing.
 ui.rd.v.sugar-low-sign	قند پایین با گیجی یا تشنج حالت عاجل است. اگر قورت داده می‌تواند، شکر بدهید. اگر نه، چیزی به دهانش ندهید. همین حالا به شفاخانه بروید.	Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now.
+ui.rd.v.sugar-nodm-low	قند پایین است. همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید. قند پایین در کسی که مرض شکر ندارد باید معاینه شود: امروز به کلینیک بروید.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes. Low sugar in someone without diabetes needs a check: go to the clinic today.
 ui.rd.v.sugar-ok	در اندازهٔ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.	In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-nodm-ok	عادی است. برای اینکه همین‌طور بماند، شکر و نان سفید کمتر بخورید و هر روز پیاده‌روی کنید.	Normal. To keep it that way, eat less sugar and white bread, and walk every day.
+ui.rd.v.sugar-nodm-check	بعد از غذا این عادی است، اما پیش از صبحانه بلند است. صبح، پیش از اینکه چیزی بخورد یا بنوشد، دوباره اندازه کنید. اگر آن وقت ۱۲۶ یا بیشتر بود، همین هفته برای معاینهٔ درست به کلینیک بروید.	This is normal after food, but high before breakfast. Measure again in the morning, before eating or drinking anything. If it is 126 or more then, go to the clinic this week for a proper test.
 ui.rd.v.sugar-high	از اندازهٔ لازم بلندتر است. دوا بخورید، آب بنوشید، شکر و نان سفید کمتر بخورید و پیاده‌روی کنید. اگر بیشتر عددها همین قدر بلند است، همین هفته به کلینیک بروید.	Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week.
+ui.rd.v.sugar-nodm-high	بلند است. این می‌تواند مرض شکر باشد. همین هفته برای معاینهٔ درست به کلینیک بروید. اگر تشنگی زیاد، ادرار زیاد یا کم شدن وزن دارد، امروز بروید.	High. This can mean diabetes. Go to the clinic this week for a proper test. Go today if there is much thirst, much urine or weight loss.
 ui.rd.v.sugar-very-high	خیلی بلند است. آب بنوشید، دوای همیشگی را بخورید و امروز به کلینیک بروید. اگر استفراغ، خواب‌آلودگی زیاد، یا نفس تیز و عمیق است، همین حالا به شفاخانه بروید.	Very high. Drink water, take your usual medicine, and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing.
+ui.rd.v.sugar-nodm-very-high	خیلی بلند است. این می‌تواند مرض شکر باشد. آب بنوشید و امروز به کلینیک بروید. اگر استفراغ، خواب‌آلودگی زیاد، یا نفس تیز و عمیق است، همین حالا به شفاخانه بروید.	Very high. This can be diabetes. Drink water and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing.
 ui.rd.v.sugar-danger	قند به اندازهٔ خطرناک بلند است. همین حالا به شفاخانه بروید، شب باشد یا روز. اگر می‌توانید، در راه آب بنوشید.	Dangerously high sugar. Go to hospital now, day or night. Drink water on the way if you can.
 ui.rd.v.spo2-low	اکسیجن پایین است. همین حالا به شفاخانه بروید، شب باشد یا روز. اگر دست سرد بود یا تکان می‌خورد، گرمش کنید و یک بار دیگر اندازه کنید، اما زیاد منتظر نمانید.	Low oxygen. Go to hospital now, day or night. If the hand was cold or moving, warm it and measure once more, but do not wait long.
 ui.rd.v.spo2-lowish	کمتر از عادی است. دست را گرم و آرام نگه دارید و دوباره اندازه کنید. اگر ۹۳ یا ۹۴ ماند، یا نفس تنگی دارد یا حالش خوب نیست، امروز به کلینیک بروید.	Lower than normal. Warm the hand, keep it still, and measure again. If it stays at 93 or 94, or the person is breathless or unwell, go to the clinic today.
@@ -109,6 +122,8 @@ ui.rd.clinic.muac	در کلینیک، طفل را وزن و اندازه می‌
 ui.rd.s.faint	سرچرخی دارد، یا بیهوش شده	dizzy, or has fainted
 ui.rd.s.blue	لب‌ها یا روی کبود یا خاکستری است	lips or face look blue or grey
 ui.rd.s.deep	نفس تیز و عمیق می‌کشد	breathing fast and deep
+ui.rd.s.fast	تیز نفس می‌کشد	breathes fast
+ui.rd.s.vision	تاری چشم، یا از دست رفتن دید	blurred or lost vision
 ui.consentDistrict	در کدام ولسوالی زندگی می‌کنید؟ این به ما نشان می‌دهد که هر منطقه به چه چیز نیاز دارد. فقط نام ولسوالی فرستاده می‌شود، نه قریه و نه نام شما. می‌توانید از این بگذرید.	Which district do you live in? This shows us what each area needs. Only the district is sent, never your village or your name. You can skip this.
 ui.fbVoiceAsk	پیام صوتی شما به گروه صحت فرستاده می‌شود تا نظر شما را بشنوند. این پیام به شما یا گوشی شما وصل نیست و بعد از ۹۰ روز پاک می‌شود. لطفاً نام یا شمارۀ تلیفون نگویید.	Your voice message will be sent to the Sehat team so they can hear your idea. It is not linked to you or your phone, and it is deleted after 90 days. Please do not say names or phone numbers.
 ui.privacy.phone	آنچه در گوشی شما می‌ماند: زبان شما، نام، تاریخ تولد و واکسین‌های اطفال شما، و تنظیمات. این‌ها هرگز فرستاده نمی‌شوند.	What stays on your phone: your language, your children's names, birth dates and vaccines, and your settings. These are never sent.
@@ -1476,6 +1491,7 @@ reading-temp.urgent.baby	طفل کمتر از ۲ ماه، ۳۷ و نیم یا ب
 reading-temp.urgent.cold	طفل کوچک کمتر از ۳۵ و نیم دارد، یا بعد از گرم کردن هم سرد است	a young baby has under 35.5, or stays cold after warming
 reading-temp.urgent.signs	تب با یکی از علایم خطر همراه است	there is fever with any danger sign
 reading-temp.soon	اگر یکی از این‌ها بود، امروز به کلینیک بروید	Go to the clinic today if:
+reading-temp.soon.cold	شیرخوار کمتر از ۲ ماه ۳۵ و نیم تا ۳۵ و ۹ دهم دارد (پوست به پوست گرمش کنید)	a baby under 2 months has 35.5 to 35.9 (warm skin to skin)
 reading-temp.soon.days	تب بیشتر از ۲ روز دوام کرده	a fever lasts more than 2 days
 reading-temp.soon.high	طفل ۳۹ یا بیشتر دارد	a child has 39 or more
 reading-temp.soon.pregnant	زن حامله تب دارد	a pregnant woman has a fever
@@ -1488,7 +1504,7 @@ reading-bp.check	فشار خون را معاینه کنید. هر دو عدد ر
 reading-bp.numbers	عددها چه معنا دارند. عدد بالا اول گفته می‌شود. در خانه، کمتر از ۱۳۵ بر ۸۵ عادی است. در حاملگی، ۱۴۰ بر ۹۰ یا بیشتر بلند است.	What the numbers mean. The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high.
 reading-bp.urgent	اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز	Go to hospital now, day or night, if:
 reading-bp.urgent.very-high	دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است	it is 180 over 120 or more, two times
-reading-bp.urgent.signs	بلند است، با درد سینه، ضعف، مشکل گپ زدن یا سردرد شدید	high, with chest pain, weakness, trouble speaking or a bad headache
+reading-bp.urgent.signs	بلند است، با درد سینه، ضعف، مشکل گپ زدن، سردرد شدید یا تاری چشم	high, with chest pain, weakness, trouble speaking, a bad headache or blurred vision
 reading-bp.urgent.pregnant-very-high	حامله است و ۱۶۰ بر ۱۱۰ یا بیشتر دارد	pregnant, and 160 over 110 or more
 reading-bp.urgent.pregnant-signs	حامله، ۱۴۰ بر ۹۰ یا بیشتر، با سردرد، تاری چشم یا پندیدگی	pregnant, 140 over 90 or more, with headache, blurred vision or swelling
 reading-bp.soon	اگر یکی از این‌ها بود، امروز به کلینیک بروید	Go to the clinic today if:
@@ -1508,9 +1524,10 @@ reading-sugar.urgent.low	قند کمتر از ۵۴ است، یا بعد از د�
 reading-sugar.urgent.very-high	قند بالای ۴۰۰ است، یا آنقدر بلند است که ماشین نمی‌خواند	sugar is over 400, or too high for the meter to read
 reading-sugar.urgent.vomit	قند بلند با استفراغ، یا نفس تیز و عمیق	high sugar with vomiting, or fast deep breathing
 reading-sugar.soon	اگر یکی از این‌ها بود، امروز به کلینیک بروید	Go to the clinic today if:
-reading-sugar.soon.high	قند بالای ۲۵۰ باقی می‌ماند	sugar stays over 250
+reading-sugar.soon.high	قند بالای ۲۵۰ است	sugar is over 250
 reading-sugar.soon.lows	قند بار بار پایین می‌شود	low sugar happens again and again
 reading-sugar.mmol	اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است، ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، و بالای ۱۴ خیلی بلند است.	If your meter shows mmol/L: under 4 is low, 4.4 to 7.2 before breakfast is good, and over 14 is very high.
+reading-sugar.no-diabetes	مرض شکر ندارید؟ پیش از صبحانه ۱۲۶ یا بیشتر، یا هر وقت ۲۰۰ یا بیشتر، باید همین هفته در کلینیک درست معاینه شود.	No diabetes? Before breakfast 126 or more, or 200 or more at any time, needs a proper test at the clinic this week.
 reading-sugar.dont	این کارها را نکنید:	Do not do these things:
 reading-sugar.dont.dose	انسولین یا تابلیت را خودتان کم یا زیاد نکنید؛ از کلینیک بپرسید.	Do not change your insulin or tablets yourself; ask the clinic.
 reading-sugar.more	مرض شکر. علایم، معاینه، غذا، پیاده‌روی، دوا و مراقبت پاها	Diabetes. Signs, testing, food, walking, medicine and foot care
@@ -1569,7 +1586,7 @@ diabetes.food	شکر و نان سفید کمتر بخورید. در چای شک�
 diabetes.walk	هر روز پیاده‌روی کنید. هر روز حدود نیم ساعت با قدم‌های تند پیاده‌روی کنید. این کار قند خون را پایین می‌آورد.	Walk every day. Walk at a good pace for about half an hour every day. It lowers blood sugar.
 diabetes.medicine	هر روز دوا بخورید. دوای خود را هر روز همان‌طور که کلینیک گفته بخورید، حتی وقتی خوب هستید. برای معاینه منظم دوباره به کلینیک بروید.	Take medicine every day. Take your medicine every day as the clinic tells you, even when you feel well. Go back to the clinic for regular checks.
 diabetes.feet	هر روز پاهای خود را ببینید. پاها را برای بریدگی، زخم یا سرخی ببینید. همیشه بوت بپوشید و پاها را پاک و خشک نگه دارید.	Check your feet every day. Look for cuts, sores or redness. Always wear shoes, and keep your feet clean and dry.
-diabetes.low-sugar	قند پایین: زود شکر بدهید. عرق کردن، لرزیدن یا گیجی می‌تواند علامه پایین شدن قند باشد. اگر قورت داده بتواند، شکر، چای شیرین یا آب شیرین بدهید، بعد کمی غذا.	Low sugar: give sugar fast. Sweating, shaking or confusion can mean low sugar. If they can swallow, give sugar or a sweet drink, then some food.
+diabetes.low-sugar	قند پایین: زود شکر بدهید. عرق کردن، لرزیدن یا گیجی می‌تواند علامه پایین شدن قند باشد. اگر قورت داده بتواند، ۴ قاشق چای‌خوری شکر در آب، یا چای شیرین یا آب شیرین بدهید، بعد کمی غذا.	Low sugar: give sugar fast. Sweating, shaking or confusion can mean low sugar. If they can swallow, give 4 teaspoons of sugar in water, or a sweet drink, then some food.
 diabetes.clinic	در کلینیک: معاینهٔ شکر و دوا. کارمند صحی شکر را با معاینهٔ نوک انگشت می‌بیند، فشار خون، پاها و چشم‌ها را معاینه می‌کند و در مورد غذا مشوره می‌دهد. اکثر مردم یک تابلیت روزانه (میتفورمین) شروع می‌کنند؛ بعضی به انسولین از شفاخانه ضرورت دارند.	At the clinic: sugar test and medicine. The health worker tests sugar with a finger prick, checks blood pressure, feet and eyes, and advises on food. Most people start a daily tablet (metformin); some need insulin from the hospital.
 diabetes.hospital	در شفاخانه: بحران شکر، زخم پا. مریض شکری که استفراغ می‌کند، گیج یا بسیار خواب‌آلود است، در شفاخانه به سیروم و انسولین ضرورت دارد. زخم چرکی پا به انتی‌بیوتیک پیچکاری و مراقبت زخم ضرورت دارد تا پا نجات یابد.	At the hospital: sugar crisis, foot wounds. Someone with diabetes who is vomiting, confused or very drowsy needs fluids and insulin by drip in hospital. An infected foot wound needs injected antibiotics and wound care to save the foot.
 diabetes.soon	اگر شخص مبتلا به مرض شکر یکی از این حالات را دارد، امروز به کلینیک بروید	If a person with diabetes has any of these, go to the clinic today
@@ -2466,6 +2483,7 @@ low-sugar.urgent	اگر کسی که مرض شکر دارد این حالت را 
 low-sugar.urgent.swallow	قورت داده نمی‌تواند یا بی‌هوش است	cannot swallow, or is unconscious
 low-sugar.urgent.fit	تشنج می‌کند	has a fit
 low-sugar.urgent.not-better	بعد از دو بار بوره بهتر نشد	is not better after sugar twice
+low-sugar.urgent.meter	دستگاه قند کمتر از ۵۴ نشان داد، حتی اگر حالا بهتر است	their sugar meter showed under 54, even if they feel better
 low-sugar.urgent.overdose	تابلیت یا انسولین زیاد گرفته است	took too many diabetes tablets or too much insulin
 low-sugar.soon	اگر این حالت را دارد، امروز به کلینیک بروید:	Go to the clinic today if:
 low-sugar.soon.again	کمی شکر بار بار می‌آید	low sugar keeps coming back

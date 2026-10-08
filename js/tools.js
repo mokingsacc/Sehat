@@ -36,7 +36,7 @@ export function initTools(ctx) {
   let icons = null, iconsOf = null;
   const itemIcon = (id) => {
     if (iconsOf !== S.book) {
-      icons = { 'ui.rd.s.faint': 'sleepy', 'ui.rd.s.blue': 'breathe', 'ui.rd.s.deep': 'breathing-fast' }; iconsOf = S.book;
+      icons = { 'ui.rd.s.faint': 'sleepy', 'ui.rd.s.blue': 'breathe', 'ui.rd.s.deep': 'breathing-fast', 'ui.rd.s.fast': 'breathing-fast', 'ui.rd.s.vision': 'eye-blurred' }; iconsOf = S.book;
       for (const t of Object.values(S.book.topics)) for (const b of t.blocks || []) for (const it of b.items || []) icons[it.id] = it.icon;
     }
     return icons[id] || 'warning';
@@ -168,19 +168,20 @@ export function initTools(ctx) {
   const DEV = {
     temp: { topic: 'kit-thermometer', who: ['baby2m', 'child2m', 'older', 'pregnant'], enter: 'ui.rd.enter.temp', dot: true },
     bp: { topic: 'kit-bp', who: ['adult', 'pregnant'], enter: 'ui.rd.enter.bp', two: true },
-    sugar: { topic: 'kit-glucometer', who: null, enter: 'ui.rd.enter.sugar' },
+    sugar: { topic: 'kit-glucometer', who: ['diabetes', 'nodiabetes'], ask: 'ui.rd.who.sugar', enter: 'ui.rd.enter.sugar' }, // KT-3: the good range and the medicine line are for people with diabetes
     spo2: { topic: 'kit-oximeter', who: ['older', 'under5'], enter: 'ui.rd.enter.spo2' },
     muac: { topic: 'kit-muac', who: null, enter: 'ui.rd.enter.muac', colour: true },
   };
-  const WHO_ICON = { baby2m: 'newborn-warm', child2m: 'milestones', older: 'people', pregnant: 'pregnant', adult: 'people', under5: 'baby' };
+  const WHO_ICON = { baby2m: 'newborn-warm', child2m: 'milestones', older: 'people', pregnant: 'pregnant', adult: 'people', under5: 'baby', diabetes: 'sugar', nodiabetes: 'people' };
   // signs asked before the result: [narration id, kind]. kind u = hospital now whatever the number; other kinds change the verdict below
+  // (fast = fast breathing in a child, at least clinic today: IMCI pneumonia; medical audit 8 Oct 2026, CH2/KT-6)
   const SIGNS = {
-    'temp/baby2m': [['newborn.urgent.feed', 'u'], ['newborn.urgent.convulsion', 'u'], ['newborn.urgent.move', 'u'], ['newborn.urgent.breathing', 'u']],
-    'temp/child2m': [['fever.urgent.convulsion', 'u'], ['fever.urgent.neck', 'u'], ['fever.urgent.sleepy', 'u'], ['fever.urgent.drink', 'u'], ['fever.urgent.vomit', 'u'], ['fever.urgent.rash', 'u']],
+    'temp/baby2m': [['newborn.urgent.feed', 'u'], ['newborn.urgent.convulsion', 'u'], ['newborn.urgent.move', 'u'], ['newborn.urgent.breathing', 'u'], ['newborn.urgent.chest', 'u']],
+    'temp/child2m': [['fever.urgent.convulsion', 'u'], ['fever.urgent.neck', 'u'], ['fever.urgent.sleepy', 'u'], ['fever.urgent.drink', 'u'], ['fever.urgent.vomit', 'u'], ['fever.urgent.rash', 'u'], ['danger-child.urgent.chest', 'u'], ['cough.urgent.noise', 'u'], ['ui.rd.s.fast', 'fast']],
     'temp/older': [['red-flags.urgent.fever-neck', 'u'], ['red-flags.urgent.confused', 'u'], ['red-flags.urgent.breathing', 'u'], ['fever.urgent.convulsion', 'u']],
     'temp/pregnant': [['pregnancy-danger.urgent.fever-weak', 'u'], ['pregnancy-danger.urgent.belly-pain', 'u'], ['pregnancy-danger.urgent.bleeding', 'u'], ['pregnancy-danger.urgent.breathing', 'u'], ['pregnancy-danger.urgent.fits', 'u']],
-    'bp/adult': [['blood-pressure.urgent.chest', 'u'], ['blood-pressure.urgent.face', 'u'], ['blood-pressure.urgent.weak', 'u'], ['blood-pressure.urgent.speech', 'u'], ['blood-pressure.urgent.headache', 'u'], ['red-flags.urgent.breathing', 'u'], ['red-flags.urgent.confused', 'u'], ['ui.rd.s.faint', 'faint']],
-    'bp/pregnant': [['pregnancy-danger.urgent.headache', 'u'], ['pregnancy-danger.urgent.fits', 'u'], ['pregnancy-danger.urgent.belly-pain', 'u'], ['pregnancy-danger.urgent.breathing', 'u'], ['pregnancy-danger.soon.swelling', 'swell'], ['ui.rd.s.faint', 'faint']],
+    'bp/adult': [['blood-pressure.urgent.chest', 'u'], ['blood-pressure.urgent.face', 'u'], ['blood-pressure.urgent.weak', 'u'], ['blood-pressure.urgent.speech', 'u'], ['blood-pressure.urgent.headache', 'u'], ['ui.rd.s.vision', 'u'], ['red-flags.urgent.breathing', 'u'], ['red-flags.urgent.confused', 'u'], ['ui.rd.s.faint', 'faint']],
+    'bp/pregnant': [['pregnancy-danger.urgent.headache', 'u'], ['pregnancy-danger.urgent.bleeding', 'u'], ['pregnancy-danger.urgent.fits', 'u'], ['pregnancy-danger.urgent.belly-pain', 'u'], ['pregnancy-danger.urgent.breathing', 'u'], ['pregnancy-danger.soon.swelling', 'swell'], ['ui.rd.s.faint', 'faint']],
     sugar: [['red-flags.urgent.confused', 'conf'], ['fever.urgent.convulsion', 'conf'], ['diabetes.urgent.vomiting', 'u'], ['ui.rd.s.deep', 'u']],
     'spo2/older': [['red-flags.urgent.breathing', 'u'], ['ui.rd.s.blue', 'u'], ['red-flags.urgent.confused', 'u'], ['red-flags.urgent.chest-pain', 'u']],
     'spo2/under5': [['danger-child.urgent.chest', 'u'], ['ui.rd.s.blue', 'u'], ['danger-child.urgent.sleepy', 'u'], ['danger-child.urgent.drink', 'u']],
@@ -201,15 +202,17 @@ export function initTools(ctx) {
     if (RD.who === 'baby2m') {                    // WHO IMCI young infant; Mo (8 Oct 2026): any fever under 2 months = hospital
       if (t >= 37.5) return out('urgent', 'ui.rd.v.temp-baby-fever');
       if (t < 35.5) return out('urgent', 'ui.rd.v.temp-baby-cold');   // IMCI: below 35.5 = very severe disease
-      if (t < 36.5) return out('today', 'ui.rd.v.temp-baby-cool');    // WHO thermal protection: rewarm, recheck
+      if (t < 36) return out('today', 'ui.rd.v.temp-baby-chilly');    // WHO bands: 32.0 to 35.9 = moderate hypothermia (KT-14)
+      if (t < 36.5) return out('watch', 'ui.rd.v.temp-baby-cool');    // 36.0 to 36.4 = cold stress: rewarm skin to skin, recheck in 1 hour (KT-24)
       return out('ok', 'ui.rd.v.temp-baby-ok');
     }
     if (t < 35) return out('urgent', 'ui.rd.v.temp-cold');           // hypothermia
-    if (t < 36) return out('watch', 'ui.rd.v.temp-low');
+    if (t < 36) return RD.who === 'child2m' && has('fast') ? out('today', 'ui.rd.v.temp-fast') : out('watch', 'ui.rd.v.temp-low');
     if (t >= 41) return out('urgent', 'ui.rd.v.temp-very-high');     // judgement call
+    if (RD.who === 'child2m' && has('fast') && t < 37.5) return out('today', 'ui.rd.v.temp-fast'); // fast breathing alone = clinic today (IMCI)
     if (t < 37.5) return out('ok', 'ui.rd.v.temp-ok');               // IMCI fever = 37.5 or more
     if (RD.who === 'pregnant') return out('today', 'ui.rd.v.temp-pregnant');
-    if (RD.who === 'child2m') return t >= 39 ? out('today', 'ui.rd.v.temp-high') : out('watch', 'ui.rd.v.temp-child-fever');
+    if (RD.who === 'child2m') return has('fast') ? out('today', 'ui.rd.v.temp-fast') : t >= 39 ? out('today', 'ui.rd.v.temp-high') : out('watch', 'ui.rd.v.temp-child-fever');
     return t >= 39.5 ? out('today', 'ui.rd.v.temp-high') : out('watch', 'ui.rd.v.temp-fever');
   }
   function verdictBp() {
@@ -220,13 +223,13 @@ export function initTools(ctx) {
     if (RD.who === 'pregnant') {                                       // NICE NG133, WHO ANC 2016
       if (s >= 160 || d >= 110) return out('urgent', 'ui.rd.v.bp-preg-severe');
       if (s >= 140 || d >= 90) return has('swell') ? out('urgent', 'ui.rd.v.bp-preg-signs') : out('today', 'ui.rd.v.bp-preg-high');
-      if (s < 90) return has('faint') ? out('today', 'ui.rd.v.bp-low-faint') : out('watch', 'ui.rd.v.bp-low');
+      if (s < 90) return has('faint') ? out('today', 'ui.rd.v.bp-low-faint') : out('watch', 'ui.rd.v.bp-preg-low'); // PCPNC: low BP with bleeding = shock (KT-1)
       if (has('swell') || has('faint')) return out('today', 'ui.rd.v.bp-normal-sign');
       return out('ok', 'ui.rd.v.bp-preg-ok');
     }
     if (s >= 180 || d >= 120) return out('urgent', 'ui.rd.v.bp-very-high'); // NICE NG136 / ISH 2020
     if (s < 90) return has('faint') ? out('today', 'ui.rd.v.bp-low-faint') : out('watch', 'ui.rd.v.bp-low');
-    if (s >= 135 || d >= 85) return out('soon', 'ui.rd.v.bp-high');  // home BP 135/85 (ISH 2020, NICE)
+    if (s >= 135 || d >= 85) return has('faint') ? out('today', 'ui.rd.v.bp-high-faint') : out('soon', 'ui.rd.v.bp-high'); // home BP 135/85 (ISH 2020, NICE); dizzy or fainted = at least clinic today (KT-2)
     if (has('faint')) return out('today', 'ui.rd.v.bp-normal-sign');
     return out('ok', 'ui.rd.v.bp-ok');
   }
@@ -240,9 +243,15 @@ export function initTools(ctx) {
     if (has('conf')) return out('urgent', g < 70 ? 'ui.rd.v.sugar-low-sign' : 'ui.rd.v.sign');
     if (g < 54) return out('urgent', 'ui.rd.v.sugar-very-low');       // ADA level 2 hypoglycaemia
     if (has('u')) return out('urgent', 'ui.rd.v.sign');
-    if (g < 70) return out('today', 'ui.rd.v.sugar-low');            // ADA level 1 hypoglycaemia
+    const dm = RD.who !== 'nodiabetes';
+    if (g < 70) return out('today', dm ? 'ui.rd.v.sugar-low' : 'ui.rd.v.sugar-nodm-low'); // ADA level 1 hypoglycaemia
     if (g >= 400) return out('urgent', 'ui.rd.v.sugar-danger');       // judgement call (meter HI is usually over 500 or 600)
-    if (g >= 250) return out('today', 'ui.rd.v.sugar-very-high');
+    if (g >= 250) return out('today', dm ? 'ui.rd.v.sugar-very-high' : 'ui.rd.v.sugar-nodm-very-high');
+    if (!dm) {                                                         // WHO/IDF 2006: fasting 126 or more, or 200 or more at any time = diabetes (KT-3)
+      if (g >= 200) return out('soon', 'ui.rd.v.sugar-nodm-high');
+      if (g >= 126) return out('watch', 'ui.rd.v.sugar-nodm-check');   // high if before breakfast, normal after food: measure before breakfast
+      return out('ok', 'ui.rd.v.sugar-nodm-ok');
+    }
     if (g > 180) return out('soon', 'ui.rd.v.sugar-high');           // ADA: under 180 two hours after meals
     return out('ok', 'ui.rd.v.sugar-ok');
   }
@@ -290,8 +299,9 @@ export function initTools(ctx) {
       html += topBar(T('reading'), 'exit') + listenBar(ids) + sayRow('ui.rd.intro', 'blk lead');
       html += `<div class="devs">${Object.keys(DEV).map((d) => `<div class="dev" data-block="${DEV[d].topic}.title"><button class="dbody" data-rd-dev="${d}"><img src="${esc(devImg(d))}" alt=""><span class="t">${esc(devTitle(d))}</span></button>${spk(DEV[d].topic + '.title')}</div>`).join('')}</div>`;
     } else if (RD.phase === 'who') {
-      ids = ['ui.rd.who', ...D.who.map((w) => 'ui.who.' + w)];
-      html += topBar(devTitle(RD.dev), 'dev') + listenBar(ids) + sayRow('ui.rd.who', 'trow dq');
+      const ask = D.ask || 'ui.rd.who';
+      ids = [ask, ...D.who.map((w) => 'ui.who.' + w)];
+      html += topBar(devTitle(RD.dev), 'dev') + listenBar(ids) + sayRow(ask, 'trow dq');
       html += `<div class="picks">${D.who.map((w) => `<div class="pick" data-block="ui.who.${w}"><button class="pbody" data-rd-who="${w}">${ic(WHO_ICON[w])}<span class="t">${esc(say('ui.who.' + w))}</span></button>${spk('ui.who.' + w)}</div>`).join('')}</div>`;
     } else if (RD.phase === 'val') {
       ids = [D.enter];
@@ -323,7 +333,8 @@ export function initTools(ctx) {
       const chosen = signList().filter(([id]) => RD.signs.has(id));
       if (chosen.length) html += `<div class="chosen">${chosen.map(([id]) => `<span>${ic(itemIcon(id))}${esc(say(id))}</span>`).join('')}</div>`;
       if (RD.dev === 'spo2' && RD.who === 'under5') { html += sayRow('ui.rd.spo2-child', 'blk tip'); extra.push('ui.rd.spo2-child'); }
-      if (RD.dev === 'sugar') html += `<p class="muted center">${esc(T('sugarGood', { a: RD.unit === 'mmol' ? `${dec(num('4.4'))}–${dec(num('7.2'))}` : `${num(80)}–${num(130)}`, b: RD.unit === 'mmol' ? num(10) : num(180) }))} <span dir="ltr">${RD.unit === 'mmol' ? 'mmol/L' : 'mg/dL'}</span></p>`;
+      if (RD.dev === 'temp' && RD.who === 'child2m') { html += breathRow(); extra.push('ui.rd.temp-breaths'); }
+      if (RD.dev === 'sugar' && RD.who !== 'nodiabetes') html += `<p class="muted center">${esc(T('sugarGood', { a: RD.unit === 'mmol' ? `${dec(num('4.4'))}–${dec(num('7.2'))}` : `${num(80)}–${num(130)}`, b: RD.unit === 'mmol' ? num(10) : num(180) }))} <span dir="ltr">${RD.unit === 'mmol' ? 'mmol/L' : 'mg/dL'}</span></p>`;
       const clinic = 'ui.rd.clinic.' + RD.dev;
       html += `<div class="clinicbox">${ic('clinic')}${sayRow(clinic)}</div>`;
       html += sayRow('ui.rd.note', 'blk tip note');
@@ -340,6 +351,8 @@ export function initTools(ctx) {
     track('view', { p: 'tool/reading/' + (RD.dev || '') + '/' + RD.phase });
     return { html, nav: 'home', adult: RD.dev !== 'muac' && RD.who !== 'baby2m' && RD.who !== 'child2m' && RD.who !== 'under5' };
   }
+  // a child's temperature: "If the child breathes fast, count the breaths", opening the breathing counter (CH2/KT-6)
+  const breathRow = () => `<div class="blk link" data-block="ui.rd.temp-breaths"><a class="pic" href="#/tool/breaths">${ic('breathing-fast')}</a><a class="body" href="#/tool/breaths"><div class="h">${esc(T('breaths'))}</div><div class="x">${esc(say('ui.rd.temp-breaths'))}</div></a>${spk('ui.rd.temp-breaths')}<a class="go" href="#/tool/breaths" aria-label="${esc(T('breaths'))}">${I.fwd}</a></div>`;
   const whoLine = () => (RD.who ? `<div class="agechip" data-block="ui.who.${RD.who}">${ic(WHO_ICON[RD.who])}<span>${esc(say('ui.who.' + RD.who))}</span></div>` : '');
   function rdReset(dev) { Object.assign(RD, { dev, who: null, phase: dev ? (DEV[dev].who ? 'who' : 'val') : 'dev', a: '', b: '', field: 'a', colour: null, signs: new Set() }); }
   function rdKey(k) {
@@ -362,7 +375,7 @@ export function initTools(ctx) {
     RD.phase = 'result'; rerender();
     const v = verdict();
     track('reading', { d: RD.dev, w: RD.who || '', lv: v.lv }); // the level only, never the number
-    autoplay([v.say, ...(RD.dev === 'spo2' && RD.who === 'under5' ? ['ui.rd.spo2-child'] : []), 'ui.rd.clinic.' + RD.dev]);
+    autoplay([v.say, ...(RD.dev === 'spo2' && RD.who === 'under5' ? ['ui.rd.spo2-child'] : []), ...(RD.dev === 'temp' && RD.who === 'child2m' ? ['ui.rd.temp-breaths'] : []), 'ui.rd.clinic.' + RD.dev]);
   }
 
   /* ======================= home health kit screen, home modules, link blocks ======================= */
@@ -424,7 +437,7 @@ export function initTools(ctx) {
       if (!was && BR.danger.size) { track('tool', { p: 'breaths-danger', a: BR.age }); autoplay(['ui.br.v.danger']); const v = $('#br-danger .verdict'); if (v) v.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
       return;
     }
-    if (d.rdDev) { rdReset(d.rdDev); rerender(); if (DEV[d.rdDev].who) autoplay(['ui.rd.who']); else autoplay([DEV[d.rdDev].enter]); return; }
+    if (d.rdDev) { rdReset(d.rdDev); rerender(); if (DEV[d.rdDev].who) autoplay([DEV[d.rdDev].ask || 'ui.rd.who']); else autoplay([DEV[d.rdDev].enter]); return; }
     if (d.rdWho) { RD.who = d.rdWho; RD.phase = 'val'; RD.signs = new Set(); rerender(); autoplay([DEV[RD.dev].enter]); return; }
     if (d.rdKey) { rdKey(d.rdKey); return; }
     if (d.rdField) { RD.field = d.rdField; ctx.render(); return; }

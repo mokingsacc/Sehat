@@ -103,6 +103,15 @@
       },
       "items": [
         {
+          "id": "reading-temp.soon.cold",
+          "icon": "newborn-warm",
+          "text": {
+            "fa": "شیرخوار کمتر از ۲ ماه ۳۵ و نیم تا ۳۵ و ۹ دهم دارد (پوست به پوست گرمش کنید)",
+            "ps": "له ۲ میاشتو کم ماشوم ۳۵ نیم تر ۳۵ اعشاریه ۹ لري (پوستکی په پوستکي یې ګرم کړئ)",
+            "en": "a baby under 2 months has 35.5 to 35.9 (warm skin to skin)"
+          }
+        },
+        {
           "id": "reading-temp.soon.days",
           "icon": "calendar",
           "text": {
@@ -163,10 +172,12 @@
     "WHO Thermal protection of the newborn: a practical guide (1997): normal 36.5 to 37.5 C; rewarm and recheck",
     "NICE NG143 Fever in under 5s: assessment and initial management (2019, updated 2021): electronic thermometer in the axilla under 4 weeks; under 3 months with 38 C or more is high risk",
     "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC), 3rd ed. (2015): fever in pregnancy",
-    "WHO Replacement of mercury thermometers and sphygmomanometers in health care (2011)"
+    "WHO Replacement of mercury thermometers and sphygmomanometers in health care (2011)",
+    "WHO Thermal protection of the newborn (1997), bands as reproduced in ICMR thermal care workflow (2020): 36.0 to 36.4 cold stress; 32.0 to 35.9 moderate hypothermia"
   ],
   "review": [
     "Fever age: Mo chose under 2 months (IMCI), 8 Oct 2026. reading-temp.urgent.baby says 'a baby under 2 months has 37.5 or more' (was under 3 months), the same age as the temperature checker (js/tools.js), danger-child.young.temperature and fever.urgent.baby. 37.5 C stays the threshold (IMCI young infant); the low-temperature rules did not change. NICE NG143 uses 38 C and under 3 months; kept in sources only.",
-    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-thermometer. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-thermometer. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture.",
+    "Medical audit 8 Oct 2026: KT-14, a baby under 2 months at 35.5 to 35.9 is now clinic today (warm skin to skin now and on the way; WHO: moderate hypothermia), new item reading-temp.soon.cold and checker line ui.rd.v.temp-baby-chilly; 36.0 to 36.4 stays rewarm and recheck in 1 hour, and its card now says 'Care at home and watch' to match what it says aloud (KT-24). CH2/KT-6, the checker now asks about chest indrawing and noisy breathing (red) and fast breathing (clinic today) for a child from 2 months to 5 years, and chest indrawing for a baby under 2 months; the result shows a row that opens the breathing counter (ui.rd.temp-breaths)."
   ]
 }

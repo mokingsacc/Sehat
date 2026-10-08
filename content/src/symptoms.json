@@ -2955,6 +2955,7 @@
               "low-sugar.urgent.swallow",
               "low-sugar.urgent.fit",
               "low-sugar.urgent.not-better",
+              "low-sugar.urgent.meter",
               "diabetes.urgent.vomiting",
               "diabetes.urgent.foot-wound"
             ]
@@ -2984,7 +2985,8 @@
         ],
         "_notes": [
           "Red: WHO PEN 2020 diabetes protocol: hypoglycaemia not responding or unconscious, convulsions, vomiting and very unwell (possible ketoacidosis), infected or gangrenous foot = refer urgently.",
-          "Amber: new foot ulcer, non-healing wound, recurrent hypoglycaemia, cannot eat on medicine (WHO PEN)."
+          "Amber: new foot ulcer, non-healing wound, recurrent hypoglycaemia, cannot eat on medicine (WHO PEN).",
+          "Red: a meter reading under 54, even if better after sugar (low-sugar.urgent.meter), the same rule as the sugar checker (medical audit 8 Oct 2026, EM12/KT-11)."
         ]
       }
     },

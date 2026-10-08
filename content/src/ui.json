@@ -1463,6 +1463,16 @@
    "ps": "تر ۵ کلونو کم ماشوم",
    "en": "Child under 5"
   },
+  "ui.who.diabetes": {
+   "fa": "مرض شکر دارد",
+   "ps": "د شکرې ناروغي لري",
+   "en": "Has diabetes"
+  },
+  "ui.who.nodiabetes": {
+   "fa": "مرض شکر ندارد، یا معلوم نیست",
+   "ps": "د شکرې ناروغي نه لري، یا معلومه نه ده",
+   "en": "No diabetes, or not sure"
+  },
   "ui.br.calm": {
    "fa": "صبر کنید تا طفل آرام یا خواب باشد. وقتی گریه می‌کند یا شیر می‌خورد، نشمارید.",
    "ps": "صبر وکړئ چې ماشوم ارام یا ویده شي. کله چې ژاړي یا تی رودي، مه یې شمېرئ.",
@@ -1543,6 +1553,11 @@
    "ps": "د چا لپاره مو اندازه کړه؟",
    "en": "Who was checked?"
   },
+  "ui.rd.who.sugar": {
+   "fa": "آیا این شخص مرض شکر دارد؟",
+   "ps": "آیا دا کس د شکرې ناروغي لري؟",
+   "en": "Does this person have diabetes?"
+  },
   "ui.rd.enter.temp": {
    "fa": "عدد ترمامتر را بنویسید.",
    "ps": "د ترمامیټر شمېره ولیکئ.",
@@ -1603,6 +1618,11 @@
    "ps": "دا ماشوم ډېر سوړ دی. ماشوم پوستکی په پوستکي د مور پر سینه کېږدئ، سر یې پټ کړئ، او همدا اوس روغتون ته ولاړ شئ.",
    "en": "This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now."
   },
+  "ui.rd.v.temp-baby-chilly": {
+   "fa": "این طفل سرد است. همین حالا طفل را پوست به پوست روی سینهٔ مادر بگیرید، سرش را بپوشانید و امروز به کلینیک بروید. در راه طفل را گرم نگه دارید.",
+   "ps": "دا ماشوم سوړ دی. همدا اوس ماشوم پوستکی په پوستکي د مور پر سینه ونیسئ، سر یې پټ کړئ، او نن کلینیک ته ولاړ شئ. په لاره کې ماشوم ګرم وساتئ.",
+   "en": "This baby is cold. Hold the baby skin to skin on the mother's chest now, cover the head, and go to the clinic today. Keep the baby warm on the way."
+  },
   "ui.rd.v.temp-baby-cool": {
    "fa": "کمی سرد است. طفل را پوست به پوست بگیرید، سرش را بپوشانید و بعد از ۱ ساعت دوباره اندازه کنید. اگر هنوز کمتر از ۳۶ و نیم است، یا خوب شیر نمی‌خورد، امروز به کلینیک بروید.",
    "ps": "لږ سوړ دی. ماشوم پوستکی په پوستکي ونیسئ، سر یې پټ کړئ، او ۱ ساعت وروسته بیا یې اندازه کړئ. که لا هم له ۳۶ نیم کم وي، یا ښه تی نه رودي، نن کلینیک ته ولاړ شئ.",
@@ -1642,6 +1662,16 @@
    "fa": "تب بلند است. زیاد مایعات بدهید و لباس سبک بپوشانید. امروز به کلینیک بروید.",
    "ps": "لوړه تبه ده. ډېرې اوبلنې ورکړئ او سپکې جامې واغوندئ. نن کلینیک ته ولاړ شئ.",
    "en": "A high fever. Give plenty to drink and dress lightly. Go to the clinic today."
+  },
+  "ui.rd.v.temp-fast": {
+   "fa": "نفس تیز در طفل می‌تواند سینه‌بغل باشد. امروز به کلینیک بروید؛ شاید طفل به دوا ضرورت داشته باشد. نفس‌ها را می‌توانید با شمردن نفس در پایین بشمارید.",
+   "ps": "په ماشوم کې چټکه ساه کېدای شي سینه بغل وي. نن کلینیک ته ولاړ شئ؛ کېدای شي ماشوم درملو ته اړتیا ولري. ساه یې لاندې د ساه شمېرلو په برخه کې شمېرلی شئ.",
+   "en": "Fast breathing in a child can be pneumonia. Go to the clinic today: the child may need medicine. You can count the breaths with the breathing counter below."
+  },
+  "ui.rd.temp-breaths": {
+   "fa": "اگر طفل تیز نفس می‌کشد، نفس‌هایش را بشمارید. برای باز کردن شمردن نفس، اینجا را بزنید.",
+   "ps": "که ماشوم چټکه ساه اخلي، ساه یې وشمېرئ. د ساه شمېرلو د پرانیستلو لپاره دلته ټک کړئ.",
+   "en": "If the child breathes fast, count the breaths. Tap here to open the breathing counter."
   },
   "ui.rd.v.temp-very-high": {
    "fa": "تب خیلی بلند است. مایعات بدهید، لباس سبک بپوشانید و همین حالا به شفاخانه بروید.",
@@ -1683,6 +1713,11 @@
    "ps": "شمېره لوړه نه ده، خو دا نښه باید معاینه شي. نن کلینیک ته ولاړ شئ.",
    "en": "The number is not high, but this sign needs a check. Go to the clinic today."
   },
+  "ui.rd.v.bp-high-faint": {
+   "fa": "عدد بلند است، و سرچرخی یا بیهوش شدن باید معاینه شود. امروز با یادداشت‌های خود به کلینیک بروید. اگر دوباره بیهوش شد یا گیج شد، همین حالا به شفاخانه بروید.",
+   "ps": "شمېره لوړه ده، او سر ګرځېدل یا بې هوښي باید معاینه شي. نن له خپلو یادښتونو سره کلینیک ته ولاړ شئ. که بیا بې هوښه شو یا ګډوډ شو، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "The number is high, and dizziness or fainting needs a check. Go to the clinic today and take your readings. If they faint again or become confused, go to hospital now."
+  },
   "ui.rd.v.bp-preg-severe": {
    "fa": "فشار خیلی بلند در حاملگی برای مادر و طفل خطرناک است. می‌تواند مرض فشار حاملگی (پری‌اکلامپسی) باشد. همین حالا به شفاخانه بروید، شب باشد یا روز.",
    "ps": "په امیندوارۍ کې ډېر لوړ فشار مور او ماشوم ته خطرناک دی. کېدای شي د امیندوارۍ د فشار ناروغي (پري اکلامپسیا) وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
@@ -1703,35 +1738,65 @@
    "ps": "د امیندوارۍ لپاره عادي دی. د امیندوارۍ په هره کتنه کې یې اندازه کړئ. که سخت سر درد، د سترګو تتوالی یا د مخ پړسوب پیل شي، روغتون ته ولاړ شئ.",
    "en": "Normal for pregnancy. Have it checked at every pregnancy visit. Go to hospital if a bad headache, blurred vision or swelling of the face start."
   },
+  "ui.rd.v.bp-preg-low": {
+   "fa": "عدد پایین است. در حاملگی، اگر خوب است، شاید عادی باشد. اگر کمی هم خونریزی دارد، یا تازه ولادت کرده، همین حالا به شفاخانه بروید. در غیر آن، در مراجعهٔ بعدی به قابله بگویید.",
+   "ps": "شمېره ټیټه ده. په امیندوارۍ کې، که ښه وي، کېدای شي عادي وي. که لږه وینه هم بهېږي، یا یې نوی زېږون کړی، همدا اوس روغتون ته ولاړ شئ. که نه، په بله کتنه کې قابلې ته ووایئ.",
+   "en": "A low reading. In pregnancy this can be normal if she feels well. If there is any bleeding, or she has just given birth, go to hospital now. If not, tell the midwife at the next visit."
+  },
   "ui.rd.v.sugar-very-low": {
-   "fa": "قند خیلی پایین است. اگر قورت داده می‌تواند، همین حالا شکر بدهید: حدود ۳ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد همین حالا به شفاخانه بروید، حتی اگر بهتر شد: قند خیلی پایین می‌تواند دوباره پایین شود.",
-   "ps": "شکره ډېره ټیټه ده. که تېرولای شي، همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. بیا همدا اوس روغتون ته ولاړ شئ، که ښه هم شي: ډېره ټیټه شکره بیا راتلای شي.",
-   "en": "Very low sugar. If they can swallow, give sugar now: about 3 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back."
+   "fa": "قند خیلی پایین است. اگر قورت داده می‌تواند، همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد همین حالا به شفاخانه بروید، حتی اگر بهتر شد: قند خیلی پایین می‌تواند دوباره پایین شود.",
+   "ps": "شکره ډېره ټیټه ده. که تېرولای شي، همدا اوس شکره ورکړئ: ۴ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. بیا همدا اوس روغتون ته ولاړ شئ، که ښه هم شي: ډېره ټیټه شکره بیا راتلای شي.",
+   "en": "Very low sugar. If they can swallow, give sugar now: 4 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back."
   },
   "ui.rd.v.sugar-low": {
-   "fa": "قند پایین است. همین حالا شکر بدهید: حدود ۳ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید. اگر قند دوباره پایین شد، امروز به کلینیک بروید؛ شاید دوا باید تغییر کند.",
-   "ps": "شکره ټیټه ده. همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. که شکره بیا ټیټه شوه، نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.",
-   "en": "Low sugar. Give sugar now: about 3 teaspoons in a glass of water, then some food. Measure again in 15 minutes. If low sugar happens again, go to the clinic today: the medicine may need changing."
+   "fa": "قند پایین است. همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید و اگر هنوز پایین است، باز شکر بدهید. امروز به کلینیک بروید؛ شاید دوا باید تغییر کند.",
+   "ps": "شکره ټیټه ده. همدا اوس شکره ورکړئ: ۴ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ، او که لا هم ټیټه وي، بیا شکره ورکړئ. نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.",
+   "en": "Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes, and give sugar again if it is still low. Go to the clinic today: the medicine may need changing."
   },
   "ui.rd.v.sugar-low-sign": {
    "fa": "قند پایین با گیجی یا تشنج حالت عاجل است. اگر قورت داده می‌تواند، شکر بدهید. اگر نه، چیزی به دهانش ندهید. همین حالا به شفاخانه بروید.",
    "ps": "ټیټه شکره له ګډوډۍ یا اختلاج سره بیړنی حالت دی. که تېرولای شي، شکره ورکړئ. که نه، په خوله کې هېڅ مه ورکوئ. همدا اوس روغتون ته ولاړ شئ.",
    "en": "Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now."
   },
+  "ui.rd.v.sugar-nodm-low": {
+   "fa": "قند پایین است. همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید. قند پایین در کسی که مرض شکر ندارد باید معاینه شود: امروز به کلینیک بروید.",
+   "ps": "شکره ټیټه ده. همدا اوس شکره ورکړئ: د چای ۴ کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. د هغه چا ټیټه شکره چې د شکرې ناروغي نه لري باید معاینه شي: نن کلینیک ته ولاړ شئ.",
+   "en": "Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes. Low sugar in someone without diabetes needs a check: go to the clinic today."
+  },
   "ui.rd.v.sugar-ok": {
    "fa": "در اندازهٔ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.",
    "ps": "په ښه اندازه کې ده. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.",
    "en": "In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit."
+  },
+  "ui.rd.v.sugar-nodm-ok": {
+   "fa": "عادی است. برای اینکه همین‌طور بماند، شکر و نان سفید کمتر بخورید و هر روز پیاده‌روی کنید.",
+   "ps": "عادي ده. د دې لپاره چې همداسې پاتې شي، شکره او سپینه ډوډۍ لږه وخورئ او هره ورځ پلی وګرځئ.",
+   "en": "Normal. To keep it that way, eat less sugar and white bread, and walk every day."
+  },
+  "ui.rd.v.sugar-nodm-check": {
+   "fa": "بعد از غذا این عادی است، اما پیش از صبحانه بلند است. صبح، پیش از اینکه چیزی بخورد یا بنوشد، دوباره اندازه کنید. اگر آن وقت ۱۲۶ یا بیشتر بود، همین هفته برای معاینهٔ درست به کلینیک بروید.",
+   "ps": "له خوړو وروسته دا عادي ده، خو له ناشتې مخکې لوړه ده. سهار، مخکې له دې چې څه وخوري یا وڅښي، بیا یې اندازه کړئ. که هغه وخت ۱۲۶ یا ډېره وه، په همدې اونۍ کې د سمې معاینې لپاره کلینیک ته ولاړ شئ.",
+   "en": "This is normal after food, but high before breakfast. Measure again in the morning, before eating or drinking anything. If it is 126 or more then, go to the clinic this week for a proper test."
   },
   "ui.rd.v.sugar-high": {
    "fa": "از اندازهٔ لازم بلندتر است. دوا بخورید، آب بنوشید، شکر و نان سفید کمتر بخورید و پیاده‌روی کنید. اگر بیشتر عددها همین قدر بلند است، همین هفته به کلینیک بروید.",
    "ps": "له اړتیا لوړه ده. درمل وخورئ، اوبه وڅښئ، شکره او سپینه ډوډۍ لږ وخورئ، او پلی وګرځئ. که ډېری شمېرې دومره لوړې وي، په همدې اونۍ کلینیک ته ولاړ شئ.",
    "en": "Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week."
   },
+  "ui.rd.v.sugar-nodm-high": {
+   "fa": "بلند است. این می‌تواند مرض شکر باشد. همین هفته برای معاینهٔ درست به کلینیک بروید. اگر تشنگی زیاد، ادرار زیاد یا کم شدن وزن دارد، امروز بروید.",
+   "ps": "لوړه ده. دا کېدای شي د شکرې ناروغي وي. په همدې اونۍ کې د سمې معاینې لپاره کلینیک ته ولاړ شئ. که ډېره تنده، ډېرې متیازې یا د وزن کمښت لري، نن ولاړ شئ.",
+   "en": "High. This can mean diabetes. Go to the clinic this week for a proper test. Go today if there is much thirst, much urine or weight loss."
+  },
   "ui.rd.v.sugar-very-high": {
    "fa": "خیلی بلند است. آب بنوشید، دوای همیشگی را بخورید و امروز به کلینیک بروید. اگر استفراغ، خواب‌آلودگی زیاد، یا نفس تیز و عمیق است، همین حالا به شفاخانه بروید.",
    "ps": "ډېره لوړه ده. اوبه وڅښئ، خپل معمول درمل وخورئ، او نن کلینیک ته ولاړ شئ. که کانګې، ډېر خوب وړتیا، یا چټکه او ژوره ساه وي، همدا اوس روغتون ته ولاړ شئ.",
    "en": "Very high. Drink water, take your usual medicine, and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing."
+  },
+  "ui.rd.v.sugar-nodm-very-high": {
+   "fa": "خیلی بلند است. این می‌تواند مرض شکر باشد. آب بنوشید و امروز به کلینیک بروید. اگر استفراغ، خواب‌آلودگی زیاد، یا نفس تیز و عمیق است، همین حالا به شفاخانه بروید.",
+   "ps": "ډېره لوړه ده. دا کېدای شي د شکرې ناروغي وي. اوبه وڅښئ او نن کلینیک ته ولاړ شئ. که کانګې، ډېر خوب وړتیا، یا چټکه او ژوره ساه وي، همدا اوس روغتون ته ولاړ شئ.",
+   "en": "Very high. This can be diabetes. Drink water and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing."
   },
   "ui.rd.v.sugar-danger": {
    "fa": "قند به اندازهٔ خطرناک بلند است. همین حالا به شفاخانه بروید، شب باشد یا روز. اگر می‌توانید، در راه آب بنوشید.",
@@ -1812,6 +1877,16 @@
    "fa": "نفس تیز و عمیق می‌کشد",
    "ps": "چټکه او ژوره ساه اخلي",
    "en": "breathing fast and deep"
+  },
+  "ui.rd.s.fast": {
+   "fa": "تیز نفس می‌کشد",
+   "ps": "چټکه ساه اخلي",
+   "en": "breathes fast"
+  },
+  "ui.rd.s.vision": {
+   "fa": "تاری چشم، یا از دست رفتن دید",
+   "ps": "د سترګو تتوالی، یا د لید له منځه تلل",
+   "en": "blurred or lost vision"
   },
   "ui.consentDistrict": {
    "fa": "در کدام ولسوالی زندگی می‌کنید؟ این به ما نشان می‌دهد که هر منطقه به چه چیز نیاز دارد. فقط نام ولسوالی فرستاده می‌شود، نه قریه و نه نام شما. می‌توانید از این بگذرید.",

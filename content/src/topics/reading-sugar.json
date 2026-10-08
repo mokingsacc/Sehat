@@ -106,9 +106,9 @@
           "id": "reading-sugar.soon.high",
           "icon": "sugar",
           "text": {
-            "fa": "قند بالای ۲۵۰ باقی می‌ماند",
-            "ps": "شکره له ۲۵۰ پورته پاتې کېږي",
-            "en": "sugar stays over 250"
+            "fa": "قند بالای ۲۵۰ است",
+            "ps": "شکره له ۲۵۰ پورته ده",
+            "en": "sugar is over 250"
           }
         },
         {
@@ -130,6 +130,16 @@
         "fa": "اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است، ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، و بالای ۱۴ خیلی بلند است.",
         "ps": "که ستاسو ماشین ملي مول ښيي: له ۴ کم ټیټ دی، له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی، او له ۱۴ پورته ډېر لوړ دی.",
         "en": "If your meter shows mmol/L: under 4 is low, 4.4 to 7.2 before breakfast is good, and over 14 is very high."
+      }
+    },
+    {
+      "id": "reading-sugar.no-diabetes",
+      "type": "tip",
+      "icon": "clinic",
+      "text": {
+        "fa": "مرض شکر ندارید؟ پیش از صبحانه ۱۲۶ یا بیشتر، یا هر وقت ۲۰۰ یا بیشتر، باید همین هفته در کلینیک درست معاینه شود.",
+        "ps": "د شکرې ناروغي نه لرئ؟ له ناشتې مخکې ۱۲۶ یا ډېره، یا هر وخت ۲۰۰ یا ډېره، باید په همدې اونۍ کې په کلینیک کې سمه معاینه شي.",
+        "en": "No diabetes? Before breakfast 126 or more, or 200 or more at any time, needs a proper test at the clinic this week."
       }
     },
     {
@@ -174,9 +184,12 @@
     "WHO Package of Essential Noncommunicable Disease Interventions (PEN) for primary health care (2020): diabetes protocol, hypoglycaemia (give sugar if able to swallow)",
     "American Diabetes Association Standards of Care in Diabetes 2025, sections 6 (glycaemic goals 80 to 130 mg/dL fasting, under 180 after meals) and hypoglycaemia levels (under 70 and under 54 mg/dL)",
     "International Diabetes Federation (IDF) Clinical Practice Recommendations for managing type 2 diabetes in primary care (2017)",
-    "WHO Global report on diabetes (2016)"
+    "WHO Global report on diabetes (2016)",
+    "WHO/IDF Definition and diagnosis of diabetes mellitus and intermediate hyperglycaemia (2006): fasting 126 mg/dL (7.0 mmol/L) or more, or 200 mg/dL (11.1 mmol/L) or more at any time with symptoms",
+    "Resuscitation Council UK 2025: First aid guidelines (low blood sugar: 15 to 20 g of sugar by mouth, recheck after 15 minutes)"
   ],
   "review": [
-    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-glucometer. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-glucometer. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture.",
+    "Medical audit 8 Oct 2026: KT-3, the checker now asks first whether the person has diabetes; for someone without diabetes it gives no 'keep taking your medicine' line, 126 to 199 = measure again before breakfast (126 or more then = clinic this week), 200 to 249 = clinic this week for a proper test (WHO/IDF 2006); new tip reading-sugar.no-diabetes. The high and low bands above 250 and under 70 are the same for both. EM12/KT-11, one sugar amount everywhere: 4 teaspoons (about 16 g; RCUK and ILCOR 15 to 20 g), in the checker too (was 'about 3 teaspoons'). Internal contradiction: reading-sugar.soon.high now says 'is over 250' (was 'stays over 250'), as the numbers step and the checker (one reading). KT-24: the 54 to 69 line now says go to the clinic today, as its card does."
   ]
 }

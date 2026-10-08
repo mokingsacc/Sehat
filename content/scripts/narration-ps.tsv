@@ -39,6 +39,8 @@ ui.who.child2m	د ۲ میاشتو تر ۵ کلونو ماشوم	Child from 2 mon
 ui.who.pregnant	امیندواره ښځه	Pregnant woman
 ui.who.adult	لوی کس، چې امیندواره نه وي	Adult, not pregnant
 ui.who.under5	تر ۵ کلونو کم ماشوم	Child under 5
+ui.who.diabetes	د شکرې ناروغي لري	Has diabetes
+ui.who.nodiabetes	د شکرې ناروغي نه لري، یا معلومه نه ده	No diabetes, or not sure
 ui.br.calm	صبر وکړئ چې ماشوم ارام یا ویده شي. کله چې ژاړي یا تی رودي، مه یې شمېرئ.	Wait until the child is calm or asleep. Do not count while the child cries or feeds.
 ui.br.uncover	جامې پورته کړئ چې سینه او خېټه ووینئ. کوچنی ماشوم ګرم وساتئ.	Lift the clothes so you can see the chest and belly. Keep a small baby warm.
 ui.br.watch	خېټې یا سینې ته وګورئ. هر ځل چې پورته شي، یوه ساه ده.	Watch the belly or chest. Each time it rises, that is one breath.
@@ -55,6 +57,7 @@ ui.br.v.danger	تاسو د خطر یوه نښه وینئ. همدا اوس روغ
 ui.br.clinic	په کلینیک کې روغتیايي کارکوونکی بیا ساه شمېري، سینې ته ګوري، او که اړتیا وي د سینه بغل درمل ورکوي.	At the clinic, the health worker will count the breathing again, look at the chest, and give medicine for pneumonia if needed.
 ui.rd.intro	هغه سامان وټاکئ چې مو کارولی. بیا وټاکئ چې د چا لپاره و، او شمېره ورکړئ.	Choose the device you used. Then choose who was checked, and put in the number.
 ui.rd.who	د چا لپاره مو اندازه کړه؟	Who was checked?
+ui.rd.who.sugar	آیا دا کس د شکرې ناروغي لري؟	Does this person have diabetes?
 ui.rd.enter.temp	د ترمامیټر شمېره ولیکئ.	Type the number on the thermometer.
 ui.rd.enter.bp	لومړی پورتنۍ شمېره، بیا لاندېنۍ شمېره ولیکئ.	Type the top number, then the bottom number.
 ui.rd.enter.sugar	هغه واحد وټاکئ چې ستاسو ماشین یې ښيي، بیا شمېره ولیکئ.	Choose the unit shown on your meter, then type the number.
@@ -67,6 +70,7 @@ ui.rd.bp-order	شمېرې وګورئ. پورتنۍ شمېره تل له لاند
 ui.rd.v.sign	دا د خطر نښه ده، هره شمېره چې وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	This is a danger sign, whatever the number. Go to hospital now, day or night.
 ui.rd.v.temp-baby-fever	تر ۲ میاشتو کم ماشوم کې هره تبه خطرناکه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په لاره کې تی ورکول دوام کړئ.	Any fever in a baby under 2 months is dangerous. Go to hospital now, day or night. Keep breastfeeding on the way.
 ui.rd.v.temp-baby-cold	دا ماشوم ډېر سوړ دی. ماشوم پوستکی په پوستکي د مور پر سینه کېږدئ، سر یې پټ کړئ، او همدا اوس روغتون ته ولاړ شئ.	This baby is too cold. Hold the baby skin to skin on the mother's chest, cover the head, and go to hospital now.
+ui.rd.v.temp-baby-chilly	دا ماشوم سوړ دی. همدا اوس ماشوم پوستکی په پوستکي د مور پر سینه ونیسئ، سر یې پټ کړئ، او نن کلینیک ته ولاړ شئ. په لاره کې ماشوم ګرم وساتئ.	This baby is cold. Hold the baby skin to skin on the mother's chest now, cover the head, and go to the clinic today. Keep the baby warm on the way.
 ui.rd.v.temp-baby-cool	لږ سوړ دی. ماشوم پوستکی په پوستکي ونیسئ، سر یې پټ کړئ، او ۱ ساعت وروسته بیا یې اندازه کړئ. که لا هم له ۳۶ نیم کم وي، یا ښه تی نه رودي، نن کلینیک ته ولاړ شئ.	A little cold. Hold the baby skin to skin, cover the head, and measure again in 1 hour. If still under 36.5, or the baby feeds poorly, go to the clinic today.
 ui.rd.v.temp-baby-ok	د ماشوم لپاره عادي ده. ماشوم ګرم وساتئ او ډېر ځله تی ورکړئ. که ماشوم ناروغ ښکاري، ګرم یا سوړ وي، یا ښه تی نه رودي، بیا یې اندازه کړئ.	Normal for a baby. Keep the baby warm and breastfeed often. If the baby seems ill, feels hot or cold, or feeds poorly, measure again.
 ui.rd.v.temp-cold	د بدن تودوخه ډېره ټیټه ده. ناروغ په کمپلو ګرم کړئ او همدا اوس روغتون ته ولاړ شئ.	Very low temperature. Warm the person with blankets and go to hospital now.
@@ -75,6 +79,8 @@ ui.rd.v.temp-ok	تبه نشته. که ناروغ ښکاري، د خطر نښو �
 ui.rd.v.temp-child-fever	دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ماشوم ډېر ناروغ ښکاري، نن ولاړ شئ.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill.
 ui.rd.v.temp-fever	دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ناروغ ډېر خراب وي، نن ولاړ شئ.	This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell.
 ui.rd.v.temp-high	لوړه تبه ده. ډېرې اوبلنې ورکړئ او سپکې جامې واغوندئ. نن کلینیک ته ولاړ شئ.	A high fever. Give plenty to drink and dress lightly. Go to the clinic today.
+ui.rd.v.temp-fast	په ماشوم کې چټکه ساه کېدای شي سینه بغل وي. نن کلینیک ته ولاړ شئ؛ کېدای شي ماشوم درملو ته اړتیا ولري. ساه یې لاندې د ساه شمېرلو په برخه کې شمېرلی شئ.	Fast breathing in a child can be pneumonia. Go to the clinic today: the child may need medicine. You can count the breaths with the breathing counter below.
+ui.rd.temp-breaths	که ماشوم چټکه ساه اخلي، ساه یې وشمېرئ. د ساه شمېرلو د پرانیستلو لپاره دلته ټک کړئ.	If the child breathes fast, count the breaths. Tap here to open the breathing counter.
 ui.rd.v.temp-very-high	ډېره لوړه تبه ده. اوبلنې ورکړئ، سپکې جامې واغوندئ، او همدا اوس روغتون ته ولاړ شئ.	A very high fever. Give drinks, dress lightly, and go to hospital now.
 ui.rd.v.temp-pregnant	په امیندوارۍ کې تبه باید معاینه شي. ډېرې اوبلنې وڅښئ او نن کلینیک ته ولاړ شئ. که د خېټې درد، وینه بهېدل وي، یا دومره کمزورې یاست چې نشئ پورته کېدای، همدا اوس روغتون ته ولاړ شئ.	Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is belly pain, bleeding, or you are too weak to get up.
 ui.rd.v.bp-very-high	ډېر لوړ دی. ۵ دقیقې ارام کېنئ او یو ځل بیا یې اندازه کړئ. که لا هم ۱۸۰ پر ۱۲۰ یا ډېر وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. خپل درمل له ځان سره یوسئ.	Very high. Sit quietly for 5 minutes and measure once more. If it is still 180 over 120 or more, go to hospital now, day or night. Take your medicines with you.
@@ -83,16 +89,23 @@ ui.rd.v.bp-ok	د کور د اندازې لپاره عادي دی. لږ مالګ�
 ui.rd.v.bp-low	شمېره ټیټه ده. که ناروغ ښه وي، کېدای شي د هغه لپاره عادي وي. که د فشار درمل خوري، په همدې اونۍ کې کلینیک ته ووایئ.	A low reading. If the person feels well, this can be normal for them. If they take blood pressure medicine, tell the clinic this week.
 ui.rd.v.bp-low-faint	ټیټ فشار له سر ګرځېدو یا بې هوښۍ سره. وغځېږئ، پښې پورته کړئ، او اوبه وڅښئ. نن کلینیک ته ولاړ شئ. که بیا بې هوښه شو یا ګډوډ شو، همدا اوس روغتون ته ولاړ شئ.	Low blood pressure with dizziness or fainting. Lie down, raise the legs, and drink water. Go to the clinic today. If they faint again or become confused, go to hospital now.
 ui.rd.v.bp-normal-sign	شمېره لوړه نه ده، خو دا نښه باید معاینه شي. نن کلینیک ته ولاړ شئ.	The number is not high, but this sign needs a check. Go to the clinic today.
+ui.rd.v.bp-high-faint	شمېره لوړه ده، او سر ګرځېدل یا بې هوښي باید معاینه شي. نن له خپلو یادښتونو سره کلینیک ته ولاړ شئ. که بیا بې هوښه شو یا ګډوډ شو، همدا اوس روغتون ته ولاړ شئ.	The number is high, and dizziness or fainting needs a check. Go to the clinic today and take your readings. If they faint again or become confused, go to hospital now.
 ui.rd.v.bp-preg-severe	په امیندوارۍ کې ډېر لوړ فشار مور او ماشوم ته خطرناک دی. کېدای شي د امیندوارۍ د فشار ناروغي (پري اکلامپسیا) وي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	Very high blood pressure in pregnancy is dangerous for mother and baby. It can be pre-eclampsia. Go to hospital now, day or night.
 ui.rd.v.bp-preg-signs	په امیندوارۍ کې لوړ فشار له دې نښو سره کېدای شي پري اکلامپسیا وي چې اختلاج راولي. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	High blood pressure in pregnancy with these signs can be pre-eclampsia, which can cause fits. Go to hospital now, day or night.
 ui.rd.v.bp-preg-high	په امیندوارۍ کې لوړ فشار. نن کلینیک ته ولاړ شئ، که څه هم ښه یاست. که سخت سر درد، د سترګو تتوالی، د مخ یا لاسونو پړسوب، یا د خېټې درد پیل شي، همدا اوس روغتون ته ولاړ شئ.	High blood pressure in pregnancy. Go to the clinic today, even if you feel well. Go to hospital now if a bad headache, blurred vision, swelling of the face or hands, or belly pain start.
 ui.rd.v.bp-preg-ok	د امیندوارۍ لپاره عادي دی. د امیندوارۍ په هره کتنه کې یې اندازه کړئ. که سخت سر درد، د سترګو تتوالی یا د مخ پړسوب پیل شي، روغتون ته ولاړ شئ.	Normal for pregnancy. Have it checked at every pregnancy visit. Go to hospital if a bad headache, blurred vision or swelling of the face start.
-ui.rd.v.sugar-very-low	شکره ډېره ټیټه ده. که تېرولای شي، همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. بیا همدا اوس روغتون ته ولاړ شئ، که ښه هم شي: ډېره ټیټه شکره بیا راتلای شي.	Very low sugar. If they can swallow, give sugar now: about 3 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back.
-ui.rd.v.sugar-low	شکره ټیټه ده. همدا اوس شکره ورکړئ: شاوخوا ۳ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. که شکره بیا ټیټه شوه، نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.	Low sugar. Give sugar now: about 3 teaspoons in a glass of water, then some food. Measure again in 15 minutes. If low sugar happens again, go to the clinic today: the medicine may need changing.
+ui.rd.v.bp-preg-low	شمېره ټیټه ده. په امیندوارۍ کې، که ښه وي، کېدای شي عادي وي. که لږه وینه هم بهېږي، یا یې نوی زېږون کړی، همدا اوس روغتون ته ولاړ شئ. که نه، په بله کتنه کې قابلې ته ووایئ.	A low reading. In pregnancy this can be normal if she feels well. If there is any bleeding, or she has just given birth, go to hospital now. If not, tell the midwife at the next visit.
+ui.rd.v.sugar-very-low	شکره ډېره ټیټه ده. که تېرولای شي، همدا اوس شکره ورکړئ: ۴ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. بیا همدا اوس روغتون ته ولاړ شئ، که ښه هم شي: ډېره ټیټه شکره بیا راتلای شي.	Very low sugar. If they can swallow, give sugar now: 4 teaspoons in a glass of water, then some food. Then go to hospital now, even if they feel better: very low sugar can come back.
+ui.rd.v.sugar-low	شکره ټیټه ده. همدا اوس شکره ورکړئ: ۴ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ، او که لا هم ټیټه وي، بیا شکره ورکړئ. نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes, and give sugar again if it is still low. Go to the clinic today: the medicine may need changing.
 ui.rd.v.sugar-low-sign	ټیټه شکره له ګډوډۍ یا اختلاج سره بیړنی حالت دی. که تېرولای شي، شکره ورکړئ. که نه، په خوله کې هېڅ مه ورکوئ. همدا اوس روغتون ته ولاړ شئ.	Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now.
+ui.rd.v.sugar-nodm-low	شکره ټیټه ده. همدا اوس شکره ورکړئ: د چای ۴ کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. د هغه چا ټیټه شکره چې د شکرې ناروغي نه لري باید معاینه شي: نن کلینیک ته ولاړ شئ.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes. Low sugar in someone without diabetes needs a check: go to the clinic today.
 ui.rd.v.sugar-ok	په ښه اندازه کې ده. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.	In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-nodm-ok	عادي ده. د دې لپاره چې همداسې پاتې شي، شکره او سپینه ډوډۍ لږه وخورئ او هره ورځ پلی وګرځئ.	Normal. To keep it that way, eat less sugar and white bread, and walk every day.
+ui.rd.v.sugar-nodm-check	له خوړو وروسته دا عادي ده، خو له ناشتې مخکې لوړه ده. سهار، مخکې له دې چې څه وخوري یا وڅښي، بیا یې اندازه کړئ. که هغه وخت ۱۲۶ یا ډېره وه، په همدې اونۍ کې د سمې معاینې لپاره کلینیک ته ولاړ شئ.	This is normal after food, but high before breakfast. Measure again in the morning, before eating or drinking anything. If it is 126 or more then, go to the clinic this week for a proper test.
 ui.rd.v.sugar-high	له اړتیا لوړه ده. درمل وخورئ، اوبه وڅښئ، شکره او سپینه ډوډۍ لږ وخورئ، او پلی وګرځئ. که ډېری شمېرې دومره لوړې وي، په همدې اونۍ کلینیک ته ولاړ شئ.	Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week.
+ui.rd.v.sugar-nodm-high	لوړه ده. دا کېدای شي د شکرې ناروغي وي. په همدې اونۍ کې د سمې معاینې لپاره کلینیک ته ولاړ شئ. که ډېره تنده، ډېرې متیازې یا د وزن کمښت لري، نن ولاړ شئ.	High. This can mean diabetes. Go to the clinic this week for a proper test. Go today if there is much thirst, much urine or weight loss.
 ui.rd.v.sugar-very-high	ډېره لوړه ده. اوبه وڅښئ، خپل معمول درمل وخورئ، او نن کلینیک ته ولاړ شئ. که کانګې، ډېر خوب وړتیا، یا چټکه او ژوره ساه وي، همدا اوس روغتون ته ولاړ شئ.	Very high. Drink water, take your usual medicine, and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing.
+ui.rd.v.sugar-nodm-very-high	ډېره لوړه ده. دا کېدای شي د شکرې ناروغي وي. اوبه وڅښئ او نن کلینیک ته ولاړ شئ. که کانګې، ډېر خوب وړتیا، یا چټکه او ژوره ساه وي، همدا اوس روغتون ته ولاړ شئ.	Very high. This can be diabetes. Drink water and go to the clinic today. Go to hospital now if there is vomiting, deep sleepiness, or fast deep breathing.
 ui.rd.v.sugar-danger	شکره په خطرناکه کچه لوړه ده. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که کولای شئ، په لاره کې اوبه وڅښئ.	Dangerously high sugar. Go to hospital now, day or night. Drink water on the way if you can.
 ui.rd.v.spo2-low	اکسیجن ټیټ دی. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. که لاس سوړ و یا خوځېده، ګرم یې کړئ او یو ځل بیا یې اندازه کړئ، خو ډېر انتظار مه کوئ.	Low oxygen. Go to hospital now, day or night. If the hand was cold or moving, warm it and measure once more, but do not wait long.
 ui.rd.v.spo2-lowish	له عادي کم دی. لاس ګرم او ارام ونیسئ او بیا یې اندازه کړئ. که ۹۳ یا ۹۴ پاتې شو، یا ساه لنډي لري یا ښه نه دی، نن کلینیک ته ولاړ شئ.	Lower than normal. Warm the hand, keep it still, and measure again. If it stays at 93 or 94, or the person is breathless or unwell, go to the clinic today.
@@ -109,6 +122,8 @@ ui.rd.clinic.muac	په کلینیک کې ماشوم تلي او اندازه ک�
 ui.rd.s.faint	سر یې ګرځي، یا بې هوښه شوی	dizzy, or has fainted
 ui.rd.s.blue	شونډې یا مخ شین یا خړ ښکاري	lips or face look blue or grey
 ui.rd.s.deep	چټکه او ژوره ساه اخلي	breathing fast and deep
+ui.rd.s.fast	چټکه ساه اخلي	breathes fast
+ui.rd.s.vision	د سترګو تتوالی، یا د لید له منځه تلل	blurred or lost vision
 ui.consentDistrict	په کومه ولسوالۍ کې اوسېږئ؟ دا موږ ته ښيي چې هره سیمه څه ته اړتیا لري. یوازې د ولسوالۍ نوم لېږل کېږي، نه کلی او نه ستاسو نوم. کولای شئ دا پرېږدئ.	Which district do you live in? This shows us what each area needs. Only the district is sent, never your village or your name. You can skip this.
 ui.fbVoiceAsk	ستاسو غږیز پیغام د صحت ډلې ته لېږل کېږي څو ستاسو نظر واوري. دا پیغام له تاسو یا ستاسو له ټیلیفون سره نه تړل کېږي، او له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ.	Your voice message will be sent to the Sehat team so they can hear your idea. It is not linked to you or your phone, and it is deleted after 90 days. Please do not say names or phone numbers.
 ui.privacy.phone	هغه څه چې ستاسو په ټیلیفون کې پاتې کېږي: ستاسو ژبه، د ماشومانو نومونه، د زېږېدو نېټې او واکسینونه، او تنظیمات. دا هېڅکله نه لېږل کېږي.	What stays on your phone: your language, your children's names, birth dates and vaccines, and your settings. These are never sent.
@@ -1476,6 +1491,7 @@ reading-temp.urgent.baby	تر ۲ میاشتو کم ماشوم ۳۷ نیم یا �
 reading-temp.urgent.cold	کوچنی ماشوم له ۳۵ نیم کم لري، یا له ګرمولو وروسته هم سوړ پاتې کېږي	a young baby has under 35.5, or stays cold after warming
 reading-temp.urgent.signs	تبه د خطر له یوې نښې سره ده	there is fever with any danger sign
 reading-temp.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
+reading-temp.soon.cold	له ۲ میاشتو کم ماشوم ۳۵ نیم تر ۳۵ اعشاریه ۹ لري (پوستکی په پوستکي یې ګرم کړئ)	a baby under 2 months has 35.5 to 35.9 (warm skin to skin)
 reading-temp.soon.days	تبه له ۲ ورځو زیاته دوام کړې	a fever lasts more than 2 days
 reading-temp.soon.high	ماشوم ۳۹ یا ډېر لري	a child has 39 or more
 reading-temp.soon.pregnant	امیندواره ښځه تبه لري	a pregnant woman has a fever
@@ -1488,7 +1504,7 @@ reading-bp.check	د وینې فشار وګورئ. دواړه شمېرې ورکړ
 reading-bp.numbers	شمېرې څه مانا لري. پورتنۍ شمېره لومړی ویل کېږي. په کور کې، له ۱۳۵ پر ۸۵ کم عادي دی. په امیندوارۍ کې، ۱۴۰ پر ۹۰ یا ډېر لوړ دی.	What the numbers mean. The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high.
 reading-bp.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
 reading-bp.urgent.very-high	دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی	it is 180 over 120 or more, two times
-reading-bp.urgent.signs	لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې یا سخت سر درد سره	high, with chest pain, weakness, trouble speaking or a bad headache
+reading-bp.urgent.signs	لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې، سخت سر درد یا د سترګو له تتوالي سره	high, with chest pain, weakness, trouble speaking, a bad headache or blurred vision
 reading-bp.urgent.pregnant-very-high	امیندواره ده او ۱۶۰ پر ۱۱۰ یا ډېر لري	pregnant, and 160 over 110 or more
 reading-bp.urgent.pregnant-signs	امیندواره، ۱۴۰ پر ۹۰ یا ډېر، له سر درد، د سترګو تتوالي یا پړسوب سره	pregnant, 140 over 90 or more, with headache, blurred vision or swelling
 reading-bp.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
@@ -1508,9 +1524,10 @@ reading-sugar.urgent.low	شکره له ۵۴ کمه ده، یا له شکرې و�
 reading-sugar.urgent.very-high	شکره له ۴۰۰ پورته ده، یا دومره لوړه ده چې ماشین یې نشي لوستلای	sugar is over 400, or too high for the meter to read
 reading-sugar.urgent.vomit	لوړه شکره له کانګو، یا چټکې او ژورې ساه سره	high sugar with vomiting, or fast deep breathing
 reading-sugar.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
-reading-sugar.soon.high	شکره له ۲۵۰ پورته پاتې کېږي	sugar stays over 250
+reading-sugar.soon.high	شکره له ۲۵۰ پورته ده	sugar is over 250
 reading-sugar.soon.lows	شکره بیا بیا ټیټېږي	low sugar happens again and again
 reading-sugar.mmol	که ستاسو ماشین ملي مول ښيي: له ۴ کم ټیټ دی، له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی، او له ۱۴ پورته ډېر لوړ دی.	If your meter shows mmol/L: under 4 is low, 4.4 to 7.2 before breakfast is good, and over 14 is very high.
+reading-sugar.no-diabetes	د شکرې ناروغي نه لرئ؟ له ناشتې مخکې ۱۲۶ یا ډېره، یا هر وخت ۲۰۰ یا ډېره، باید په همدې اونۍ کې په کلینیک کې سمه معاینه شي.	No diabetes? Before breakfast 126 or more, or 200 or more at any time, needs a proper test at the clinic this week.
 reading-sugar.dont	دا کارونه مه کوئ:	Do not do these things:
 reading-sugar.dont.dose	انسولین یا ګولۍ پخپله مه کموئ او مه زیاتوئ؛ له کلینیک وپوښتئ.	Do not change your insulin or tablets yourself; ask the clinic.
 reading-sugar.more	د شکرې ناروغي. نښې، معاینه، خواړه، پلي ګرځېدل، درمل او د پښو پاملرنه	Diabetes. Signs, testing, food, walking, medicine and foot care
@@ -1569,7 +1586,7 @@ diabetes.food	لږه بوره او سپینه ډوډۍ وخورئ. په چای �
 diabetes.walk	هره ورځ پلي وګرځئ. هره ورځ نږدې نیم ساعت په چټکو ګامونو پلي وګرځئ. دا کار د وینې شکره کموي.	Walk every day. Walk at a good pace for about half an hour every day. It lowers blood sugar.
 diabetes.medicine	هره ورځ درمل وخورئ. خپل درمل هره ورځ لکه څنګه چې کلینیک ویلي وخورئ، که ښه هم یاست. د منظمې معاینې لپاره بېرته کلینیک ته ورشئ.	Take medicine every day. Take your medicine every day as the clinic tells you, even when you feel well. Go back to the clinic for regular checks.
 diabetes.feet	هره ورځ خپلې پښې وګورئ. پښې د پرې کېدو، ټپونو یا سوروالي لپاره وګورئ. تل بوټونه په پښو کړئ او پښې پاکې او وچې وساتئ.	Check your feet every day. Look for cuts, sores or redness. Always wear shoes, and keep your feet clean and dry.
-diabetes.low-sugar	ټیټه شکره: ژر بوره ورکړئ. خوله کېدل، رېږدېدل یا ګډوډي کېدای شي د شکرې د ټیټېدو نښه وي. که تېرولی شي، بوره یا خوږ چای یا خوږې اوبه ورکړئ، بیا لږ خواړه.	Low sugar: give sugar fast. Sweating, shaking or confusion can mean low sugar. If they can swallow, give sugar or a sweet drink, then some food.
+diabetes.low-sugar	ټیټه شکره: ژر بوره ورکړئ. خوله کېدل، رېږدېدل یا ګډوډي کېدای شي د شکرې د ټیټېدو نښه وي. که تېرولی شي، د چای ۴ کاشوغې بوره په اوبو کې، یا خوږ چای یا خوږې اوبه ورکړئ، بیا لږ خواړه.	Low sugar: give sugar fast. Sweating, shaking or confusion can mean low sugar. If they can swallow, give 4 teaspoons of sugar in water, or a sweet drink, then some food.
 diabetes.clinic	په کلینیک کې: د شکرې معاینه او درمل. روغتیايي کارکوونکی شکره د ګوتې په معاینه ګوري، د وینې فشار، پښې او سترګې معاینه کوي او د خوړو په اړه مشوره ورکوي. ډېری خلک ورځنۍ ګولۍ (مېټفورمین) پیلوي؛ ځینې له روغتون څخه انسولین ته اړتیا لري.	At the clinic: sugar test and medicine. The health worker tests sugar with a finger prick, checks blood pressure, feet and eyes, and advises on food. Most people start a daily tablet (metformin); some need insulin from the hospital.
 diabetes.hospital	په روغتون کې: د شکرې بحران، د پښې زخم. د شکرې ناروغ چې کانګې کوي، ګډوډ یا ډېر خوبولی وي، په روغتون کې سیروم او انسولین ته اړتیا لري. د پښې چرکن زخم پیچکاري انټي بیوټیک او د زخم پاملرنې ته اړتیا لري چې پښه وژغورل شي.	At the hospital: sugar crisis, foot wounds. Someone with diabetes who is vomiting, confused or very drowsy needs fluids and insulin by drip in hospital. An infected foot wound needs injected antibiotics and wound care to save the foot.
 diabetes.soon	که د شکرې ناروغ له دې حالتونو څخه یو هم لري، نن کلینیک ته ولاړ شئ	If a person with diabetes has any of these, go to the clinic today
@@ -2466,6 +2483,7 @@ low-sugar.urgent	که د شکرې ناروغ دا حالت ولري، همدا �
 low-sugar.urgent.swallow	تېرولی نشي یا بې‌هوښه دی	cannot swallow, or is unconscious
 low-sugar.urgent.fit	اختلاج کوي	has a fit
 low-sugar.urgent.not-better	له دوه ځله بورې وروسته ښه نه شو	is not better after sugar twice
+low-sugar.urgent.meter	د شکرې ماشین له ۵۴ کم وښود، که څه هم اوس ښه دی	their sugar meter showed under 54, even if they feel better
 low-sugar.urgent.overdose	ډېرې ګولۍ یا ډېر انسولین یې اخیستی	took too many diabetes tablets or too much insulin
 low-sugar.soon	که دا حالت ولري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if:
 low-sugar.soon.again	د شکرې کمښت بیا بیا راځي	low sugar keeps coming back

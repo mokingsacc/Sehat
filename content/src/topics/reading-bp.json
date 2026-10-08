@@ -76,9 +76,9 @@
           "id": "reading-bp.urgent.signs",
           "icon": "stroke-face",
           "text": {
-            "fa": "بلند است، با درد سینه، ضعف، مشکل گپ زدن یا سردرد شدید",
-            "ps": "لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې یا سخت سر درد سره",
-            "en": "high, with chest pain, weakness, trouble speaking or a bad headache"
+            "fa": "بلند است، با درد سینه، ضعف، مشکل گپ زدن، سردرد شدید یا تاری چشم",
+            "ps": "لوړ دی، د سینې له درد، کمزورۍ، د خبرو له ستونزې، سخت سر درد یا د سترګو له تتوالي سره",
+            "en": "high, with chest pain, weakness, trouble speaking, a bad headache or blurred vision"
           }
         },
         {
@@ -186,9 +186,11 @@
     "NICE NG136 Hypertension in adults (2019, updated 2023): home average 135/85 or more; 180/120 or more same-day assessment",
     "NICE NG133 Hypertension in pregnancy (2019, updated 2023): 140/90 hypertension, 160/110 severe; symptoms of pre-eclampsia",
     "WHO recommendations on antenatal care for a positive pregnancy experience (2016) and PCPNC (2015): BP at every visit; severe headache, blurred vision = danger signs",
-    "STRIDE BP and validatebp.org lists of clinically validated devices"
+    "STRIDE BP and validatebp.org lists of clinically validated devices",
+    "WHO HEARTS technical package (2018), p. 36: urgent referral signs, including blurred vision on its own"
   ],
   "review": [
-    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-bp. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture."
+    "New Health page (Mo's Home tab rule): what the numbers mean, the hospital/clinic boxes and tips moved here word for word from the Home kit page kit-bp. The lead is the kit-buy tip 'A machine can be wrong...'. Block ids changed, so these clips need recording again. The picture is the kit page's device picture.",
+    "Medical audit 8 Oct 2026: KT-9, blurred vision alone is a red sign (HEARTS), in reading-bp.urgent.signs and as a chip in the checker (ui.rd.s.vision). KT-2, in the checker a dizzy or fainting adult now gets at least clinic today at any reading (new line ui.rd.v.bp-high-faint for 135/85 or more). KT-1, the pregnancy checker asks about bleeding (pregnancy-danger.urgent.bleeding, red), and a low top number in pregnancy says: any bleeding, or just given birth, go to hospital now (ui.rd.v.bp-preg-low)."
   ]
 }

@@ -135,6 +135,15 @@
           }
         },
         {
+          "id": "low-sugar.urgent.meter",
+          "icon": "sugar",
+          "text": {
+            "fa": "دستگاه قند کمتر از ۵۴ نشان داد، حتی اگر حالا بهتر است",
+            "ps": "د شکرې ماشین له ۵۴ کم وښود، که څه هم اوس ښه دی",
+            "en": "their sugar meter showed under 54, even if they feel better"
+          }
+        },
+        {
           "id": "low-sugar.urgent.overdose",
           "icon": "pill",
           "text": {
@@ -235,12 +244,14 @@
     "European Resuscitation Council Guidelines 2025: First Aid: hypoglycaemia (15 to 20 g of glucose or sugar by mouth if able to swallow; repeat after 15 minutes; then a snack)",
     "WHO Package of Essential Noncommunicable Disease Interventions (WHO PEN, 2020): diabetes, hypoglycaemia",
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020): low blood sugar",
-    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020)"
+    "WHO HEARTS-D: diagnosis and management of type 2 diabetes (2020)",
+    "Resuscitation Council UK 2025: First aid guidelines (low blood sugar: 15 to 20 g of sugar by mouth, recheck after 15 minutes, repeat if still low)"
   ],
   "review": [
     "The amount (4 teaspoons of sugar, about 16 g) is a number. Sugar is food, not medicine, but the spec only allows listed doses. ERC/IFRC give 15 to 20 g. Remove the number if you want: 'a glass of water with sugar stirred in'.",
     "Repeat after 15 minutes (ERC). 'Not better after sugar twice' means hospital.",
     "Overlaps diabetes.low-sugar (a short step). This page is the emergency version; diabetes.low-sugar could link here.",
-    "Dari 'بوره' (sugar) vs 'شکر' (blood sugar): check this reads clearly when heard."
+    "Dari 'بوره' (sugar) vs 'شکر' (blood sugar): check this reads clearly when heard.",
+    "Medical audit 8 Oct 2026 (EM12/KT-11): one amount and one hospital rule on this page and in the sugar checker. The amount is 4 teaspoons everywhere (the checker said about 3). The checker's rule 'a reading under 54 = hospital now, even if better after sugar' (docs/HOME_KIT.md judgement call 12, glibenclamide can make the sugar fall again) is now also a red item here (low-sugar.urgent.meter). Mo may still change the rule in both places (EMERGENCIES.md item 11)."
   ]
 }

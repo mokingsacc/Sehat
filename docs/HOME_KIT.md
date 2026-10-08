@@ -17,7 +17,7 @@ New content features used by the above, so other writers can use them too:
 - **`picture` on a `step` or `link` block**: the name of a file in `img/pics/` (without `.svg`). It shows a wide picture under the step.
 - **`kit` section** in `sections.json`: topics listed there are shown only in the kit page, not in the children or adults lists.
 
-Result colours (level, label): `urgent` red "Hospital now"; `today` amber "Clinic today"; `soon` light amber "Clinic this week"; `watch` teal "Care at home and watch"; `ok` green "Normal"; `check` grey "Measure again". Any danger sign the person ticks makes the result red whatever the number. The checker records only the device, the person and the colour (when usage counting is on); it never stores or sends the number.
+Result colours (level, label): `urgent` red "Hospital now"; `today` amber "Clinic today"; `soon` light amber "Clinic this week"; `watch` teal "Care at home and watch"; `ok` green "Normal"; `check` grey "Measure again". Any danger sign marked 'u' in `SIGNS` makes the result red whatever the number; dizziness or fainting, and swelling in pregnancy, make it at least amber (clinic today), and fast breathing in a child at least clinic today. The checker records only the device, the person and the colour (when usage counting is on); it never stores or sends the number.
 
 ## Sources
 
@@ -63,9 +63,11 @@ A number from 86 to 111 is taken as Fahrenheit and converted (the result shows b
 | --- | --- | --- |
 | Baby under 2 months | 37.5 or more | Hospital now |
 | | under 35.5 | Hospital now (skin to skin on the way) |
-| | 35.5 to 36.4 | Clinic today: skin to skin, cover the head, measure again in 1 hour |
+| | 35.5 to 35.9 | Clinic today: skin to skin now and on the way (WHO: moderate hypothermia) |
+| | 36.0 to 36.4 | Care at home and watch: skin to skin, cover the head, measure again in 1 hour; still under 36.5 or feeding poorly = clinic today |
 | | 36.5 to 37.4 | Normal |
-| Child 2 months to 5 years | 37.5 to 38.9 | Care at home and watch (drinks, back if over 2 days or very ill) |
+| Child 2 months to 5 years | any reading, with fast breathing ticked | Clinic today (IMCI pneumonia), with a row that opens the breathing counter |
+| | 37.5 to 38.9 | Care at home and watch (drinks, back if over 2 days or very ill) |
 | | 39 or more | Clinic today |
 | Older child or adult | 37.5 to 39.4 | Care at home and watch |
 | | 39.5 or more | Clinic today |
@@ -74,6 +76,8 @@ A number from 86 to 111 is taken as Fahrenheit and converted (the result shows b
 | | under 35 | Hospital now |
 | | 35 to 35.9 | Care at home: check the thermometer was deep under the arm, warm, measure again in 30 minutes |
 
+Signs asked (medical audit 8 Oct 2026, CH2/KT-6): a child from 2 months to 5 years is asked about fits, stiff neck, very sleepy, cannot drink, vomits everything, a rash with fever, the lower chest pulling in and noisy breathing when calm (any one = hospital now), and fast breathing (clinic today at any reading; the result opens the breathing counter). A baby under 2 months is also asked about the lower chest pulling in strongly.
+
 ### Blood pressure (`verdictBp`)
 
 Two numbers; the top must be bigger than the bottom. Valid range top 50 to 300, bottom 25 to 200. "Or" means either number.
@@ -81,7 +85,7 @@ Two numbers; the top must be bigger than the bottom. Valid range top 50 to 300, 
 | Person | Reading | Result |
 | --- | --- | --- |
 | Adult | 180/120 or more | Hospital now (the advice says sit 5 minutes and measure once more first) |
-| | 135/85 to 179/119 | Clinic this week (rest, measure again; keep taking medicine) |
+| | 135/85 to 179/119 | Clinic this week (rest, measure again; keep taking medicine); with dizziness or fainting = clinic today |
 | | top under 90 with dizziness or fainting | Clinic today (lie down, legs up, water; fainting again or confused = hospital) |
 | | top under 90, feels well | Care at home (tell the clinic if on BP medicine) |
 | | normal number but dizzy or fainting | Clinic today |
@@ -89,20 +93,24 @@ Two numbers; the top must be bigger than the bottom. Valid range top 50 to 300, 
 | Pregnant woman | 160/110 or more | Hospital now (possible pre-eclampsia) |
 | | 140/90 or more with swelling of face, hands or legs | Hospital now |
 | | 140/90 or more without signs | Clinic today |
+| | top under 90, feels well | Care at home; any bleeding, or just given birth = hospital now (PCPNC: shock) |
 | | under 140/90 but swelling or fainting | Clinic today |
 | | under 140/90 | Normal (check at every visit) |
-| Anyone | chest pain, face drooping, weak arm or leg, trouble speaking, very bad headache, breathless, confused; in pregnancy bad headache or blurred vision, fits, belly pain, breathless | Hospital now, whatever the number |
+| Anyone | chest pain, face drooping, weak arm or leg, trouble speaking, very bad headache, breathless, confused; blurred or lost vision; in pregnancy bad headache or blurred vision, bleeding, fits, belly pain, breathless | Hospital now, whatever the number |
 
 ### Blood sugar (`verdictSugar`)
 
-The person picks mg/dL (default) or mmol/L; mmol/L is multiplied by 18. "HI" counts as 600 and "LO" as 20. Valid range 10 to 700 mg/dL.
+The checker first asks whether the person has diabetes (KT-3). The person picks mg/dL (default) or mmol/L; mmol/L is multiplied by 18. "HI" counts as 600 and "LO" as 20. Valid range 10 to 700 mg/dL.
 
 | Reading (mg/dL) | mmol/L | Result |
 | --- | --- | --- |
-| under 54, or LO | under 3.0 | Hospital now: give sugar first if they can swallow (3 teaspoons in water, then food) |
-| 54 to 69 | 3.0 to 3.8 | Clinic today: give sugar, measure again in 15 minutes |
-| 70 to 180 | 3.9 to 10.0 | Good range |
-| 181 to 249 | 10.1 to 13.8 | Clinic this week if most readings are like this |
+| under 54, or LO | under 3.0 | Hospital now: give sugar first if they can swallow (4 teaspoons in water, then food) |
+| 54 to 69 | 3.0 to 3.8 | Clinic today: give sugar, measure again in 15 minutes and give sugar again if still low |
+| 70 to 180 | 3.9 to 10.0 | Good range (has diabetes) |
+| 181 to 249 | 10.1 to 13.8 | Clinic this week if most readings are like this (has diabetes) |
+| No diabetes, or not sure: 70 to 125 | 3.9 to 6.9 | Normal (no medicine line) |
+| No diabetes: 126 to 199 | 7.0 to 11.0 | Care at home and watch: measure again before breakfast; 126 or more then = clinic this week (WHO/IDF 2006) |
+| No diabetes: 200 to 249 | 11.1 to 13.8 | Clinic this week for a proper test (today if very thirsty, a lot of urine, weight loss) |
 | 250 to 399 | 13.9 to 22.1 | Clinic today (hospital if vomiting, very sleepy, fast deep breathing) |
 | 400 or more, or HI | 22.2 or more | Hospital now |
 | any, with confusion or fits | | Hospital now (nothing by mouth if they cannot swallow) |
@@ -144,17 +152,17 @@ Colour, not a number (children 6 to 59 months, left upper arm, halfway between s
 2. **Fast breathing under 2 months is red (hospital now),** as IMCI classes it as possible serious bacterial infection.
 3. **Older children and adults (optional age):** 30 or more = clinic today, 40 or more = hospital now. No single WHO cut-off exists for families. Age 5 to 12 normal is about 20 to 30; adult NEWS2 scores 21 to 24 as 2 and 25 or more as 3. 30 was chosen to be simple and safe. Mo may prefer to remove the adult option.
 4. **Very slow breathing** (under 30, 20, 15 and 10 for the four ages) gives "count again", then "hospital now" if it is really that slow. This is mostly there to catch miscounting.
-5. **Temperature under 2 months:** any 37.5 or more = hospital now (IMCI young infant, 37.5; Mo chose under 2 months as per IMCI on 8 Oct 2026, was under 3 months; NICE uses 38 and under 3 months). 35.5 to 36.4 is "rewarm and recheck in 1 hour, clinic today if still low" (WHO thermal protection says cold stress). Under 35.5 = hospital (IMCI).
+5. **Temperature under 2 months:** any 37.5 or more = hospital now (IMCI young infant, 37.5; Mo chose under 2 months as per IMCI on 8 Oct 2026, was under 3 months; NICE uses 38 and under 3 months). 35.5 to 35.9 = clinic today, skin to skin on the way (WHO bands: moderate hypothermia; KT-14); 36.0 to 36.4 is "rewarm and recheck in 1 hour, clinic today if still low", shown as Care at home and watch (WHO thermal protection: cold stress; KT-24). Under 35.5 = hospital (IMCI).
 6. **Fever in older children and adults:** child 39 or more = clinic today, older child or adult 39.5 or more = clinic today, 41 or more = hospital now. These numbers are judgement calls: IMCI does not grade fever height and NICE uses traffic lights on signs, not on height (except under 6 months). Fever lasting more than 2 days = clinic (IMCI return advice).
 7. **Fever in pregnancy = clinic today** whatever the number (PCPNC treats fever as needing assessment).
 8. **Adult BP 180/120 = hospital now after one repeat,** as Mo asked. NICE says same-day assessment and allows clinic review when there are no symptoms. In rural Samangan, the nearest place for a same-day check may be the hospital. Mo to confirm.
 9. **Adult home BP 135/85 to 179/119 = clinic this week.** One raised home reading does not diagnose hypertension; the advice says rest, measure again, and bring readings.
 10. **Low BP:** top number under 90 with dizziness or fainting = clinic today. There is no international lay threshold; 90 systolic is the usual clinical cut-off.
 11. **Pregnancy BP** follows the brief: 140/90 = clinic today; 160/110, or 140/90 with headache, vision change or swelling = hospital now. Swelling alone with normal BP = clinic today. The headache and vision signs are in the tick list (red whatever the number).
-12. **Sugar under 54 (ADA level 2) = hospital now, even if they feel better after sugar.** Many people in Afghanistan take glibenclamide, which can make the sugar fall again for many hours. Under 70 = give 3 teaspoons of sugar (about 15 g, the ADA 15-15 rule) and clinic today. Mo may prefer under 54 as "clinic today" if the person recovers fully.
+12. **Sugar under 54 (ADA level 2) = hospital now, even if they feel better after sugar.** Many people in Afghanistan take glibenclamide, which can make the sugar fall again for many hours. Under 70 = give 4 teaspoons of sugar (about 16 g; RCUK and ILCOR 15 to 20 g; the same amount as the Low sugar page since the medical audit of 8 Oct 2026, EM12/KT-11) and clinic today. The under-54 rule is now also a red item on the Low sugar page (low-sugar.urgent.meter). Mo may prefer under 54 as "clinic today" if the person recovers fully.
 13. **High sugar bands** (181 to 249 this week, 250 to 399 today, 400 or HI hospital) are judgement calls. ADA and WHO do not give lay cut-offs. Most meters show HI above 500 or 600 mg/dL.
 14. **mg/dL is assumed to be the usual unit in Afghanistan** (meters sold in Afghanistan mostly come from Pakistan, Iran and India, which use mg/dL). The checker offers mmol/L as well.
-15. **Oxygen: 92 or less = hospital now, 93 to 94 = clinic today (NHS home oximetry).** WHO gives oxygen under 90. Samangan is about 900 m (Aybak) to 2,000 m or more in the hills; healthy people at 2,000 m can read 93 to 95. No altitude adjustment was made. The page warns about darker skin, cold hands, movement, nail polish and henna.
+15. **Oxygen: 92 or less = hospital now, 93 to 94 = clinic today (NHS home oximetry).** WHO gives oxygen under 90. Samangan is about 900 m (Aybak) to about 2,500 m in the mountain villages (an estimate, not checked village by village; the same figure as the kit-oximeter note, KT-23); healthy people at 2,000 m can read 93 to 95. No altitude adjustment was made. The page warns about darker skin, cold hands, movement, nail polish and henna.
 16. **MUAC red = clinic or nutrition centre today** (WHO SAM). The existing item `growth.urgent.thin` says "very thin and weak = hospital now". Uncomplicated SAM is treated as an outpatient (OTP), so the two differ. Swelling of both feet, not eating, very sleepy or fits = hospital now in both places.
 17. **Baby scale page** is optional; Mo may remove it. It says weigh no more than once a month, use the same scale, and that clinics should decide if a baby is growing well.
 18. **Fever by touch:** "Feel the chest, belly or neck with the back of your hand" replaces the old text of `fever.check`. The narration id is the same, so the existing recording of `fever.check` must be re-recorded.
