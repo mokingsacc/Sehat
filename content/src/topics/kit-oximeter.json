@@ -93,9 +93,9 @@
         "en": "It can be wrong"
       },
       "text": {
-        "fa": "روی پوست تیره‌تر، با دست سرد، یا اگر دست تکان بخورد، ممکن است اکسیجن را بیشتر از حقیقت نشان دهد. به نفس کشیدن و حال مریض اعتماد کنید.",
-        "ps": "پر تیاره پوستکي، له سړو لاسونو سره، یا که لاس وخوځېږي، کېدای شي له اصلي څخه ډېر اکسیجن وښيي. پر ساه اخیستلو او د ناروغ پر حال باور وکړئ.",
-        "en": "On darker skin, with cold hands, or if the hand moves, it can show more oxygen than there really is. Trust the breathing and how the person looks."
+        "fa": "روی پوست تیره‌تر، ممکن است عدد را بیشتر از حقیقت نشان دهد. دست سرد یا دستی که تکان می‌خورد، عدد نمی‌دهد یا عدد غلط می‌دهد. به نفس کشیدن و حال مریض اعتماد کنید.",
+        "ps": "پر تیاره پوستکي کېدای شي له اصلي څخه لوړه شمېره وښيي. سوړ یا خوځېدونکی لاس هېڅ شمېره نه ورکوي یا غلطه شمېره ورکوي. پر ساه اخیستلو او د ناروغ پر حال باور وکړئ.",
+        "en": "Darker skin can make it read higher than the truth. Cold or moving hands give no reading or a wrong one. Trust the breathing and how the person looks."
       }
     },
     {
@@ -119,14 +119,16 @@
     "WHO Clinical management of COVID-19: living guideline (2023): SpO2 under 90 % = severe; pulse oximetry at home",
     "NHS England / NICE COVID-19 home pulse oximetry guidance (2020 to 2021): 93 to 94 % seek advice; 92 % or less urgent",
     "US FDA safety communication: pulse oximeter accuracy and limitations (2021, 2025 draft guidance on skin pigmentation)",
-    "Sjoding MW et al. Racial bias in pulse oximetry measurement. N Engl J Med 2020;383:2477-8"
+    "Sjoding MW et al. Racial bias in pulse oximetry measurement. N Engl J Med 2020;383:2477-8",
+    "WHO Pulse oximetry training manual (2011): cold hands and movement give no reading or a wrong one"
   ],
   "review": [
     "Thresholds: 95 to 100 normal; 93 to 94 = measure again, clinic today if unwell; 92 or less = hospital now. WHO uses under 90 % for oxygen; 92 % is the NHS home-monitoring cut-off, chosen here to allow for overestimation on darker skin. Judgement call.",
-    "Samangan altitude: Aybak about 900 m, mountain villages up to about 2,500 m. Normal SpO2 is slightly lower at altitude; thresholds not adjusted. Check.",
+    "Samangan altitude: Aybak about 900 m, mountain villages up to about 2,500 m (an estimate; the same figure is now in docs/HOME_KIT.md, KT-23). Normal SpO2 is slightly lower at altitude; thresholds not adjusted. Check.",
     "Henna on nails is common and lowers or blocks readings: included.",
     "Price 700 to 1,500 afghanis is an estimate (about 10 to 20 US dollars).",
     "Title 'oxygen finger clip' used instead of 'pulse oximeter' (not an everyday word). Check local name.",
-    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-spo2: kit-oximeter.numbers, kit-oximeter.urgent, kit-oximeter.check, kit-oximeter.breaths. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen)."
+    "Home tab rule (Mo): this Home kit page keeps what to buy and how to use. Moved to the Health page reading-spo2: kit-oximeter.numbers, kit-oximeter.urgent, kit-oximeter.check, kit-oximeter.breaths. In their place a link row 'What does my reading mean?' opens that page (its checker opens with this device chosen).",
+    "Medical audit 8 Oct 2026 (KT-7): only darker skin is said to read high (FDA 2021); cold or moving hands give no reading or a wrong one (WHO 2011), which matches the checker's advice to warm the hand and measure again."
   ]
 }

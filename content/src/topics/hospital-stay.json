@@ -215,6 +215,24 @@
             "ps": "ډاډه نه یاست چې درمل څنګه ورکړئ",
             "en": "you are not sure how to give the medicine"
           }
+        },
+        {
+          "id": "hospital-stay.soon.stool",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "خون در مدفوع",
+            "ps": "په ډکو کې وینه",
+            "en": "blood in the stool"
+          }
+        },
+        {
+          "id": "hospital-stay.soon.drink",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "طفل خیلی کمتر از همیشه می‌نوشد یا شیر می‌خورد",
+            "ps": "ماشوم له معمول څخه ډېر لږ څښي یا تی رودي",
+            "en": "a child drinks or breastfeeds much less than usual"
+          }
         }
       ]
     },
@@ -257,7 +275,8 @@
     "WHO fact sheet Antimicrobial resistance (2023) and WHO 'Antibiotics: handle with care' patient messages: take antibiotics as prescribed",
     "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
     "WHO PCPNC (2015) sheets D and K: postpartum danger signs and when to return",
-    "NHS (nhs.uk): Consent to treatment; Leaving hospital (discharge letter, medicines, follow-up)"
+    "NHS (nhs.uk): Consent to treatment; Leaving hospital (discharge letter, medicines, follow-up)",
+    "WHO IMCI chart booklet (2014): return at once if not able to drink, becomes sicker, fever, fast or difficult breathing, blood in the stool, drinking poorly"
   ],
   "review": [
     "Consent is framed as 'you can ask what, why and the risks, then decide together' (families decide together). It does not say the patient can refuse; add 'You can say no, or ask for time' if you want that explicit.",
@@ -265,6 +284,7 @@
     "Antibiotics: WHO now says take them 'as prescribed' rather than always 'finish the course'; the brief asked for 'finish antibiotics', and for the short courses given here the two match. Step icon is 'check' (an 'antibiotic' icon would be better).",
     "Red box items follow IMCI 'return immediately' signs plus postpartum bleeding; the amber box covers wound infection, returning fever, a rash after a new medicine (face swelling or hard breathing is on the severe allergy page) and doubt about medicine doses.",
     "Follow-up step: 'Keep the follow-up visit' is مراجعهٔ بعدی را فراموش نکنید / بیا کتنه مه هېروئ ('do not forget the next visit'). Check it sounds natural.",
-    "Discharge paper: ورقهٔ رخصتی / د رخصتۍ پاڼه. Check the local word."
+    "Discharge paper: ورقهٔ رخصتی / د رخصتۍ پاڼه. Check the local word.",
+    "Medical audit 8 Oct 2026 (KT-20): 'blood in the stool' and 'a child drinks or breastfeeds much less than usual' added to the clinic-today box (IMCI return advice)."
   ]
 }

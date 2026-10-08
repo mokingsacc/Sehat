@@ -32,9 +32,9 @@
         "en": "ORS packets"
       },
       "text": {
-        "fa": "برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. کلینیک و پوستهٔ صحی آن را دارند.",
-        "ps": "د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. کلینیک او روغتیايي پوسته یې لري.",
-        "en": "For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. The clinic and the health post have it."
+        "fa": "برای اسهال. حد اقل ۴ پاکت نگه دارید. یک پاکت را در همان مقدار آب پاک که روی پاکت نوشته شده، معمولاً یک لیتر، حل کنید. کلینیک و پوستهٔ صحی آن را دارند.",
+        "ps": "د نس ناستې لپاره. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په هومره پاکو اوبو کې حل کړئ چې پر پاکټ لیکل شوي، معمولاً یو لیتر. کلینیک او روغتیايي پوسته یې لري.",
+        "en": "For diarrhoea. Keep at least 4 packets. Mix one packet in the amount of clean water written on it, usually 1 litre. The clinic and the health post have it."
       }
     },
     {
@@ -164,7 +164,8 @@
     "IFRC International First Aid, Resuscitation and Education Guidelines (2020)",
     "WHO Rabies fact sheet: wash bite wounds with soap and water for 15 minutes",
     "WHO Model List of Essential Medicines (2023): ORS, zinc",
-    "WHO IMCI Chart Booklet (2014): Plan A, give zinc: 2 to 6 months 10 mg, 6 months or more 20 mg, for 14 days"
+    "WHO IMCI Chart Booklet (2014): Plan A, give zinc: 2 to 6 months 10 mg, 6 months or more 20 mg, for 14 days",
+    "USAID GHSC ORS procurement manual (2022): ORS packets are made for 200 ml, 500 ml and 1 litre"
   ],
   "review": [
     "'Keep at least 4 ORS packets' is a judgement call.",
@@ -172,6 +173,7 @@
     "'Sticking plasters, scissors, a torch' are common first-aid kit contents (IFRC), not essential.",
     "No paracetamol in the list on purpose (no doses in the app). Consider adding 'paracetamol syrup or tablets, as the clinic tells you'.",
     "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
-    "Medical audit 2026-10-08 CH10 / KT-17: zinc for 14 days (was 10 to 14), from 2 months (IMCI); under 2 months, ask the health worker. Same numbers as diarrhoea.zinc and the ORS animation."
+    "Medical audit 2026-10-08 CH10 / KT-17: zinc for 14 days (was 10 to 14), from 2 months (IMCI); under 2 months, ask the health worker. Same numbers as diarrhoea.zinc and the ORS animation.",
+    "Medical audit 8 Oct 2026 (KT-16): mix ORS in the amount of water written on the packet, usually 1 litre (packets come for 200 ml, 500 ml and 1 litre); the Diarrhoea page and the ORS film say the same. 'in children and adults' was dropped for length."
   ]
 }

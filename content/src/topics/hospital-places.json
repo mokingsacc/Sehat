@@ -32,9 +32,9 @@
         "en": "In the village: the health worker"
       },
       "text": {
-        "fa": "کارمند صحی قریه او آر اس، زنک، تابلیت آهن و دواهای ساده می‌دهد، رشد اطفال را معاینه می‌کند و می‌گوید بعد کجا بروید.",
-        "ps": "د کلي روغتیايي کارکوونکی او آر اس، زنک، د اوسپنې ګولۍ او ساده درمل ورکوي، د ماشومانو وده ګوري، او درته وايي چې بیا چېرته ولاړ شئ.",
-        "en": "The community health worker gives ORS, zinc, iron tablets and simple medicines, checks children's growth, and tells you where to go next."
+        "fa": "کارمند صحی قریه او آر اس، زنک و تابلیت آهن می‌دهد، سینه‌بغل یا ملاریای طفل را تداوی کرده می‌تواند، رشد اطفال را معاینه می‌کند و می‌گوید بعد کجا بروید.",
+        "ps": "د کلي روغتیايي کارکوونکی او آر اس، زنک او د اوسپنې ګولۍ ورکوي، د ماشوم سینه بغل یا ملاریا درملنه کولی شي، د ماشومانو وده ګوري، او درته وايي چې بیا چېرته ولاړ شئ.",
+        "en": "The community health worker gives ORS, zinc and iron tablets, can treat a child's chest infection or malaria, checks children's growth, and tells you where to go next."
       }
     },
     {
@@ -171,7 +171,8 @@
     "MoPH Sehatmandi Samangan semi-annual review (Sept 2019) and MMRCA HER project documents (2023-2026): Samangan facility counts and BPHS/EPHS implementer",
     "Afghanistan MoPH, National Health Policy 2025-2030 (p. 12: user charges at health facilities); MoPH statement 13 Nov 2025: TB tests and treatment free at 3,189 centres",
     "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
-    "research/facilities.md (7 Oct 2026): referral path health post > sub-centre/BHC > CHC or district hospital > Aybak provincial hospital > Mazar-i-Sharif regional hospital or Kabul"
+    "research/facilities.md (7 Oct 2026): referral path health post > sub-centre/BHC > CHC or district hospital > Aybak provincial hospital > Mazar-i-Sharif regional hospital or Kabul",
+    "Afghanistan MoPH Basic Package of Health Services (BPHS, 2010): community health workers diagnose and treat malaria, diarrhoea and chest infections in children, give family planning, community TB care and growth checks"
   ],
   "review": [
     "Samangan set-up as given by Mo: MMRCA runs BPHS/EPHS with 3 district hospitals, 4 CHCs, 14 BHCs, 21 sub-centres and 1 mobile team, plus about 188 health posts (MoPH 2019) and the provincial hospital in Aybak. The counts are NOT narrated (they change, and a third of northern facilities closed in 2025); the page says 'some districts of Samangan have a district hospital'. Add the names (Bazar-e-Sokhta, Dehi, Do-Ab) if you are sure they are open and are district hospitals.",
@@ -184,6 +185,7 @@
     "Health post: the text does not mention antibiotics (BPHS 2010 lists none at health posts) or family planning (local restrictions). 'Community health worker' is کارمند صحی قریه / د کلي روغتیايي کارکوونکی; MoPH documents use کارکن صحی جامعه / د ټولنې روغتیايي کارکوونکی. Native speakers to choose.",
     "Facility names: مرکز صحی فرعی / فرعي روغتیايي مرکز (sub-centre), مرکز صحی اساسی / اساسي روغتیايي مرکز (BHC), مرکز صحی جامع / جامع روغتیايي مرکز (CHC), شفاخانهٔ ولسوالی / د ولسوالۍ روغتون, شفاخانهٔ ولایتی / ولایتي روغتون, شفاخانهٔ حوزوی / حوزوي روغتون. Check these match what people say locally.",
     "Icons: health post uses 'house' (a 'health post' icon would be better); CHC uses 'clinic' again.",
-    "The 'near' link says the list is not complete: facilities.json has almost no public facilities in rural Samangan yet."
+    "The 'near' link says the list is not complete: facilities.json has almost no public facilities in rural Samangan yet.",
+    "Medical audit 8 Oct 2026 (KT-5): the village health worker line now says they can treat a child's chest infection or malaria (BPHS 2010 community case management; this corrects the older note above that BPHS lists no antibiotics at health posts). Family planning, also a BPHS CHW task, is left out on purpose because of current local restrictions: Mo to decide. What Samangan CHWs actually stock in 2026 is not confirmed."
   ]
 }

@@ -63,9 +63,9 @@
         "en": "Waiting is not being ignored"
       },
       "text": {
-        "fa": "اگر دیگران پیش از شما می‌روند، شاید مریض‌تر باشند. نوبت شما هم می‌رسد. مریض را گرم نگه دارید، و اگر منع نکرده‌اند، کم کم آب بدهید.",
-        "ps": "که نور له تاسو مخکې ځي، کېدای شي ډېر ناروغ وي. ستاسو نوبت هم راځي. ناروغ ګرم وساتئ، او که منع شوي نه وي، ورو ورو اوبه ورکړئ.",
-        "en": "If others go before you, they may be sicker. Your turn will come. Keep the sick person warm, and give sips of drink unless told not to."
+        "fa": "کسانی که مریض‌تر هستند شاید پیش از شما بروند. مریض را گرم نگه دارید. کم کم آب بدهید، اما اگر خیلی خواب‌آلود است، تشنج می‌کند، هر چیز را استفراغ می‌کند یا شاید عملیات لازم داشته باشد، ندهید.",
+        "ps": "هغه چې ډېر ناروغ دي کېدای شي له تاسو مخکې ولاړ شي. ناروغ ګرم وساتئ. ورو ورو اوبه ورکړئ، خو که ډېر خوب وړی وي، اختلاج کوي، هر څه کانګې کوي یا کېدای شي عملیات ته اړتیا ولري، مه یې ورکوئ.",
+        "en": "Sicker people may go first. Keep the person warm. Give sips of drink, but not if they are very sleepy, fitting, vomiting everything, or may need an operation."
       }
     },
     {
@@ -155,6 +155,33 @@
             "ps": "د سینې درد لري، یا مخ یې کوږ شوی یا لاس یې کمزوری دی",
             "en": "has chest pain, a drooping face or a weak arm"
           }
+        },
+        {
+          "id": "hospital-arrive.urgent.dehydrated",
+          "icon": "eye-sunken",
+          "text": {
+            "fa": "اسهال دارد و چشمانش گود رفته، یا خیلی سست است",
+            "ps": "نس ناستی لري او سترګې یې ننوتې دي، یا ډېر سست دی",
+            "en": "has diarrhoea with sunken eyes, or is very floppy"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.shock",
+          "icon": "heart",
+          "text": {
+            "fa": "دست‌هایش سرد است و نبضش خیلی تیز می‌زند",
+            "ps": "لاسونه یې ساړه دي او نبض یې ډېر چټک وهي",
+            "en": "has cold hands with a very fast pulse"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.pregnant-weak",
+          "icon": "pregnant",
+          "text": {
+            "fa": "حامله است، تب دارد و از ضعف ایستاده نمی‌تواند، یا هر چیز را استفراغ می‌کند",
+            "ps": "امیندواره ده، تبه لري او له کمزورۍ نشي درېدلی، یا هر څه کانګې کوي",
+            "en": "is pregnant, with fever and too weak to stand, or vomits everything"
+          }
         }
       ]
     },
@@ -226,7 +253,8 @@
     "WHO IMCI Chart Booklet (2014): urgent referral, pre-referral treatment and 'advise the mother when to return immediately'",
     "WHO Patients for Patient Safety: 'Speak up' and WHO Global Patient Safety Action Plan 2021-2030 (patients and families asking questions)",
     "WHO PCPNC (2015) sheet B2 / Quick check: women with danger signs are seen first",
-    "UK Home Office CPIN Afghanistan (Oct 2025): male doctors may treat women in emergencies (via research/moph-guidance.md section 5)"
+    "UK Home Office CPIN Afghanistan (Oct 2025): male doctors may treat women in emergencies (via research/moph-guidance.md section 5)",
+    "WHO Emergency Triage Assessment and Treatment (ETAT) updated guideline (2016): shock (cold hands, weak fast pulse), severe dehydration, nothing by mouth in coma, convulsions or severe breathing difficulty"
   ],
   "review": [
     "The red box title is not the glossary wording ('go to hospital now') because the family is already at the clinic or hospital: 'Tell the staff at once, out loud'. Its items repeat the ETAT emergency signs (airway/breathing, convulsions, coma, shock/bleeding), the IMCI general danger signs and the pregnancy and adult red flags.",
@@ -235,6 +263,7 @@
     "Women step: 'A woman can ask for a woman doctor, nurse or midwife, where there is one. In an emergency, let the first health worker help: do not wait.' Under current rules male doctors may treat women in emergencies (CPIN Oct 2025). Please check this is acceptable locally and the wording is respectful.",
     "Questions step is based on WHO patient-safety 'speak up' advice; worded as 'You can ask' so it does not sound like a challenge to staff.",
     "Registration may cost a fee at some facilities (user charges); not mentioned.",
-    "Icons: triage uses 'people' (a 'nurse with clipboard' icon would be better)."
+    "Icons: triage uses 'people' (a 'nurse with clipboard' icon would be better).",
+    "Medical audit 8 Oct 2026: KT-18, three red items added (diarrhoea with sunken eyes or very floppy; cold hands with a very fast pulse; pregnant with fever and too weak to stand, or vomiting everything), from ETAT and PCPNC. The red box now has 10 items. KT-19, the waiting step now says when not to give drinks (very sleepy, fitting, vomiting everything, or may need an operation; ETAT), in place of 'unless told not to'. 'Your turn will come' was dropped for length."
   ]
 }
