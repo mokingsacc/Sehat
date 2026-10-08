@@ -208,9 +208,9 @@
           "id": "dengue.soon.risk",
           "icon": "pregnant",
           "text": {
-            "fa": "تب در خانم حامله، طفل شیرخوار یا شخص پیر",
-            "ps": "په امیندوارې ښځې، تي روي ماشوم یا زاړه کس کې تبه",
-            "en": "fever in a pregnant woman, a baby or an old person"
+            "fa": "تب در خانم حامله، طفل شیرخوار (کمتر از ۲ ماه: همین حالا شفاخانه) یا شخص پیر",
+            "ps": "په امیندوارې ښځې، تي روي ماشوم (تر ۲ میاشتو کم: همدا اوس روغتون) یا زاړه کس کې تبه",
+            "en": "fever in a pregnant woman, a baby (under 2 months: hospital now) or an old person"
           }
         }
       ]
