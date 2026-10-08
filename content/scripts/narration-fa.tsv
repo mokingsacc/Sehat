@@ -157,6 +157,62 @@ ui.allEmergencies	همهٔ حالات عاجل: اینجا را بزنید تا 
 ui.fb.voice	پیام صوتی: دکمۀ سرخ را بزنید و گپ بزنید. وقتی گپ شما تمام شد، دوباره آن را بزنید.	Voice message: tap the red button and speak. Tap it again when you finish.
 ui.fb.write	یا پیام خود را اینجا بنویسید و بعد «فرستادن» را بزنید. لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.	Or write your message here, then tap Send. Please do not write or say names or phone numbers.
 ui.date	تاریخ: روزی که اندازه گرفته شد. امروز از قبل انتخاب شده است؛ اگر روز دیگری بود، آن را تغییر دهید.	Date: the day it was measured. Today is already chosen; change it if it was another day.
+ui.ask.who	مریض کیست؟ یکی را بزنید.	Who is sick? Tap one.
+ui.ask.who.after	مادر بعد از ولادت	Mother after the birth
+ui.ask.who.anyone	هر کس	Anyone
+ui.ask.now	کمک‌های اولیه: همین حالا این صفحه را باز کنید.	First aid: open this page now.
+ui.ask.clinic-today	«امروز کلینیک» یعنی همین امروز به نزدیک‌ترین پوستهٔ صحی، کارمند صحی قریه یا کلینیک بروید.	"Clinic today" means go today to the nearest health post, village health worker or clinic.
+ui.ask.care	مراقبت در خانه، وقتی هیچ علامت خطر نیست. علایم را باز هم ببینید.	Care at home, when there is no danger sign. Keep looking for the signs.
+ui.ask.more	صفحه‌های بیشتر: شاید چه باشد و چه کنید.	More pages: what it may be, and what to do.
+ui.ask.footer	این صفحه نمی‌گوید که مریضی چیست؛ فقط کارمند صحی می‌تواند بگوید. علایم از رهنمود سازمان صحی جهان است. اگر نگران هستید، باز هم به کلینیک بروید.	This page does not say what the illness is: only a health worker can. The signs are from World Health Organization guidance. If you are worried, go to the clinic anyway.
+ui.ask.open	اول علایم خطر را ببینید.	Look at the danger signs first.
+ui.ask.fast-child	تیز نفس می‌کشد: از ۲ تا ۱۲ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر	breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years
+ui.ask.thirsty	بی‌قرار است و خیلی تشنه است، یا چشم‌هایش گود رفته است	is restless and very thirsty, or has sunken eyes
+ui.ask.feed-baby	در یک شبانه‌روز کمتر از ۸ بار شیر می‌خورد، یا خوب نمی‌مکد	breastfeeds fewer than 8 times in a day and night, or does not suck well
+ui.ask.baby-diarrhoea	طفل کمتر از ۲ ماه اسهال دارد، حتی اگر کم باشد	a baby under 2 months has diarrhoea, even a little
+ui.ask.baby-blood	در مدفوعش خون است	has blood in the stool
+ui.ask.trapped	زیر دیوار یا سقف گیر مانده بود، حتی اگر حالا خوب معلوم شود	was trapped under a wall or roof, even if they seem well now
+ui.ask.placenta	جفت (همراه) یک ساعت بعد از تولد طفل هنوز بیرون نیامده است	the afterbirth has not come out 1 hour after the baby was born
+ui.ask.snake	مار گزیدگی، حتی اگر کوچک معلوم شود	a snake bite, even if it looks small
+ui.ask.tetanus	زخم عمیق یا کثیف، و در ۵ سال گذشته واکسین تیتانوس نگرفته	a deep or dirty wound, and no tetanus vaccine in the last 5 years
+ui.ask.vaccine-red	بعد از واکسین، اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	After a vaccine, go to hospital now, day or night, if the child:
+ui.ask.vaccine-amber	بعد از واکسین، اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	After a vaccine, go to the clinic today if the child:
+ui.ask.vaccine-swell	جای پیچکاری پندیده و بزرگ‌تر، سرخ و گرم می‌شود، یا چرک دارد	has a swelling where the injection was that grows, gets red and hot, or has pus
+ui.ask.notbreathing.lead	همین حالا کاری بکنید. کمک بخواهید و کسی را برای آوردن موتر بفرستید. اگر درست نفس نمی‌کشد، بزنید که کیست و فشار دادن سینه را شروع کنید.	Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes.
+ui.ask.fever.lead	اول علایم خطر را برای عمر مریض ببینید. طفل کمتر از ۲ ماه که هر قدر تب دارد، همین حالا به شفاخانه برود.	First look at the danger signs for the age of the sick person. A baby under 2 months with any fever must go to hospital now.
+ui.ask.cough.lead	اول علایم خطر را برای عمر مریض ببینید. نفس مشکل یا تیز همین امروز کمک لازم دارد.	First look at the danger signs for the age of the sick person. Hard or fast breathing needs help today.
+ui.ask.breathing.lead	نفس تنگی می‌تواند زود جان بگیرد. علایم خطر را برای عمر مریض ببینید، بعد نفس‌ها را بشمارید.	Hard breathing can kill fast. Look at the danger signs for the age of the sick person, then count the breaths.
+ui.ask.diarrhoea.lead	اول علایم خطر را ببینید. بعد از هر اسهال او آر اس بدهید و غذا دادن را ادامه دهید.	First look at the danger signs. Then give ORS after every loose stool, and keep feeding.
+ui.ask.vomiting.lead	اول علایم خطر را ببینید. بعد کم کم و بار بار جرعه‌های آب یا او آر اس بدهید.	First look at the danger signs. Then give small sips of water or ORS, often.
+ui.ask.rash.lead	اول علایم خطر را ببینید. لکه‌های تاریک با تب، یا پندیدگی روی و گلو، همین حالا شفاخانه لازم دارد.	First look at the danger signs. Dark spots with fever, or a swollen face or throat, need the hospital now.
+ui.ask.sore.lead	اول علایم خطر را ببینید. بعد زخم را با آب پاک و صابون بشویید و بپوشانید.	First look at the danger signs. Then wash the wound with clean water and soap, and cover it.
+ui.ask.pregnancy.lead	این علایم در حاملگی و بعد از ولادت خطرناک است. اگر یکی را دیدید، همین حالا به شفاخانه بروید، شب باشد یا روز.	These signs in pregnancy and after the birth mean danger. If you see one, go to hospital now, day or night.
+ui.ask.bleeding.lead	همین حالا با یک تکهٔ پاک روی زخم محکم فشار بدهید. بعد علایم خطر را ببینید.	Press hard on the wound now with a clean cloth. Then look at the danger signs.
+ui.ask.headache.lead	اول علایم خطر را برای عمر مریض ببینید. سردردی که ناگهان و خیلی شدید شروع شود، همین حالا شفاخانه لازم دارد.	First look at the danger signs for the age of the sick person. A sudden, very bad headache needs the hospital now.
+ui.ask.chest.lead	درد سینه می‌تواند از قلب یا شش‌ها باشد. اول علایم خطر را ببینید: بیشتر آنها یعنی همین حالا شفاخانه.	Chest pain can come from the heart or the lungs. Look at the danger signs first: most mean hospital now.
+ui.ask.belly.lead	اول علایم خطر را برای عمر مریض ببینید. درد شدید شکم همین حالا شفاخانه لازم دارد.	First look at the danger signs for the age of the sick person. Severe belly pain needs the hospital now.
+ui.ask.back.lead	کمردرد بعد از افتادن، یا با ضعف یا بی‌حسی پاها، همین حالا شفاخانه لازم دارد. اول علایم خطر را ببینید.	Back pain after a fall, or with weak or numb legs, needs the hospital now. First look at the danger signs.
+ui.ask.burn.lead	همین حالا سوختگی را ۲۰ دقیقه زیر آب پاک و روان سرد کنید. بعد علایم خطر را ببینید.	Cool the burn under clean running water for 20 minutes now. Then look at the danger signs.
+ui.ask.fumes.lead	همین حالا همه را به هوای تازه ببرید و دروازه‌ها را باز کنید. بعد علایم خطر را ببینید.	Take everyone into fresh air now, and open the doors. Then look at the danger signs.
+ui.ask.bite.lead	همین حالا جای گزیدگی را ۱۵ دقیقه با صابون و آب روان بشویید. بعد علایم خطر را ببینید.	Wash the bite with soap and running water for 15 minutes now. Then look at the danger signs.
+ui.ask.poison.lead	او را استفراغ ندهید. علایم خطر را ببینید و همین حالا با ظرف زهر به شفاخانه بروید.	Do not make them vomit. Look at the danger signs and go to hospital now, with the poison container.
+ui.ask.fits.lead	در وقت تشنج، شخص را از خطر دور نگه دارید و وقت را ببینید. بعد علایم خطر را ببینید.	During a fit, keep the person safe and note the time. Then look at the danger signs.
+ui.ask.newborn.lead	نوزاد مریض می‌تواند خیلی زود بدتر شود. اگر یک علامت خطر را دیدید، همین حالا به شفاخانه بروید، شب باشد یا روز.	A sick newborn can get worse very fast. If you see any danger sign, go to hospital now, day or night.
+ui.ask.feeding.lead	اول علایم خطر را برای عمر طفل ببینید. طفلی که شیر خوردن را بس کرده، همین حالا شفاخانه لازم دارد.	First look at the danger signs for the age of the child. A baby who has stopped feeding needs the hospital now.
+ui.ask.thin.lead	اول علایم خطر را ببینید. پندیدگی هر دو پا، یا طفل خیلی لاغر که از ضعف نمی‌خورد، همین حالا شفاخانه لازم دارد.	First look at the danger signs. Swelling of both feet, or a very thin child too weak to eat, needs the hospital now.
+ui.ask.yellow.lead	اول علایم خطر را برای عمر مریض ببینید. نوزادی که روز اول زرد شود، همین حالا شفاخانه لازم دارد.	First look at the danger signs for the age of the sick person. A newborn who turns yellow on the first day needs the hospital now.
+ui.ask.tired.lead	اول علایم خطر را برای عمر مریض ببینید. بعد برای معاینه به کلینیک بروید.	First look at the danger signs for the age of the sick person. Then go to the clinic for a check.
+ui.ask.sugar.lead	لرزه، عرق یا گیجی؟ اگر می‌تواند قورت بدهد، همین حالا بوره بدهید. بعد علایم خطر را ببینید.	Shaky, sweaty or confused? If they can swallow, give sugar now. Then look at the danger signs.
+ui.ask.pressure.lead	فشار بلند خون اکثراً هیچ علامتی ندارد. اول علایم خطر را ببینید، و فشار را اندازه کنید.	High blood pressure often has no signs. Look at the danger signs first, and get it measured.
+ui.ask.mind.lead	اگر کسی از تمام کردن زندگی خود می‌گوید، پیش او بمانید و همین حالا کمک بخواهید. اول علایم خطر را ببینید.	If someone talks of ending their life, stay with them and get help now. Look at the danger signs first.
+ui.ask.longcough.lead	سرفهٔ ۲ هفته یا بیشتر در کلینیک معاینهٔ توبرکلوز لازم دارد. اول علایم خطر را ببینید.	A cough for 2 weeks or more needs a TB test at the clinic. Look at the danger signs first.
+ui.ask.animals.lead	تب بعد از گزیدن کنه یا ذبح حیوان می‌تواند خطرناک باشد. اول علایم خطر را ببینید.	Fever after a tick bite or slaughtering can be dangerous. Look at the danger signs first.
+ui.ask.disaster.lead	اول همه را به جای امن ببرید. بعد علایم خطر را ببینید و کمک‌های اولیه بدهید.	First get everyone to a safe place. Then look at the danger signs and give first aid.
+ui.ask.vaccine.lead	بعد از واکسین، علایم خطر را ببینید. درد جای پیچکاری یا تب خفیف برای یک یا دو روز معمول است.	After a vaccine, look at the danger signs. A sore leg or a mild fever for a day or two is common.
+ui.ask.choking.lead	نمی‌تواند سرفه کند، نفس بکشد یا گپ بزند؟ همین حالا کاری بکنید: بزنید که کیست.	Cannot cough, breathe or speak? Act now: tap who it is.
+ui.ask.safety.lead	اگر طفل آسیب دیده، اول علایم خطر را ببینید. بعد کمک‌های اولیه بدهید.	If a child is hurt, look at the danger signs first. Then give first aid.
+ui.ask.eyes.lead	مواد کیمیاوی در چشم رفته؟ همین حالا ۲۰ دقیقه با آب پاک بشویید. بعد علایم خطر را ببینید.	Chemical in the eye? Wash it with clean water for 20 minutes now. Then look at the danger signs.
+ui.ask.teeth.lead	اول علایم خطر را ببینید. روی پندیده با تب همین حالا شفاخانه لازم دارد.	First look at the danger signs. A swollen face with fever needs the hospital now.
 ui.fam.lead	معلومات صحی خانوادهٔ خود را اینجا نگه دارید: واکسین، وزن، دوا و گپ‌های داکتر. یک نفر را بزنید تا معلومات او را ببینید. همه چیز فقط در همین گوشی می‌ماند.	Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone.
 ui.fam.add	یک نفر را اضافه کنید: طفل شیرخوار، طفل، زن یا مرد.	Add a person: a baby, a child, a woman or a man.
 ui.fam.who	این کیست؟ یک عکس را بزنید.	Who is this? Tap a picture.
@@ -505,6 +561,8 @@ ui.sym.sore	زخم و سالک	Sores and wounds
 ui.sym.pregnancy	حاملگی	Pregnancy
 ui.sym.bleeding	خونریزی	Bleeding
 ui.sym.headache	سردرد	Headache
+ui.sym.eyes	مشکل چشم	Eye problems
+ui.sym.teeth	دندان درد	Toothache
 ui.sym.belly	شکم درد	Belly pain
 ui.sym.back	کمر درد	Back pain
 ui.sym.burn	سوختگی	Burn
@@ -726,7 +784,7 @@ choking-baby.cpr	سست شد؟ نفس و فشار سینه بدهید. صفحه�
 choking-baby.hospital	در شفاخانه شش‌ها را معاینه می‌کنند و اگر چیزی مانده باشد، بیرون می‌کنند.	At hospital they check the lungs and can take out anything left inside.
 choking-baby.safety	چیزهای خورد را از شیرخوار دور نگه دارید. چارمغز، سکه و بازیچهٔ خورد، و راه‌های دیگر حفاظت شیرخوار در خانه. صفحه را باز کنید.	Keep small things from babies. Nuts, coins and small toys, and other ways to keep babies safe at home. Open the page.
 fever-fits.title	تشنج با تب در اطفال خورد	Fits with fever in young children
-fever-fits.summary	در طفل ۶ ماهه تا ۵ ساله زیاد است. ترسناک است، اما اکثراً بی‌ضرر.	Common from 6 months to 5 years. Frightening, but usually harmless.
+fever-fits.summary	بعد از تشنج با تب: شفاخانه. بدانید طفل را چطور در امان نگه دارید.	After a fit with fever: hospital. Know how to keep the child safe.
 fever-fits.lead	بعضی اطفال ۶ ماهه تا ۵ ساله وقتی تب می‌کنند، تشنج می‌کنند. این ترسناک است، اما اکثراً در چند دقیقه تمام می‌شود و ضرر نمی‌رساند.	Some children aged 6 months to 5 years have a fit when they get a fever. It is frightening, but it usually stops within a few minutes and does no harm.
 fever-fits.safe	طفل را در جای بی‌خطر بخوابانید. طفل را روی زمین، دور از آتش، بخاری و نوشیدنی داغ بخوابانید. طفل را محکم نگیرید و تکان ندهید.	Lay the child somewhere safe. Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them.
 fever-fits.time	وقتش را ببینید. ببینید که چه وقت شروع شد. اگر بیشتر از ۵ دقیقه دوام کرد، فوراً موتر بخواهید.	Time it. Note when it starts. If it lasts more than 5 minutes, get a car at once.
@@ -996,7 +1054,7 @@ worms.dont.baby	برای طفل زیر ۱ سال بدون پرسیدن از کا
 worms.dont.kerosene	برای کرم از تیل خاک، گیاه یا دواهای خانگی دیگر کار نگیرید.	Do not use kerosene, herbs or other home cures for worms.
 worms.together	دوای کرم وقتی بهترین اثر را دارد که تمام فامیل و همسایه‌ها یکجا بخورند و همه از تشناب کار بگیرند.	Worm medicine works best when the whole family and the neighbours take it at the same time, and everyone uses a latrine.
 cough.title	سرفه، زکام و سینه‌بغل	Cough, cold and pneumonia
-cough.summary	بیشتر سرفه‌ها در خانه خوب می‌شوند. علایم سینه‌بغل را بشناسید.	Most coughs get better at home. Know the signs of pneumonia.
+cough.summary	نفس مشکل: همین حالا شفاخانه. نفس تیز: امروز کلینیک. بعد مراقبت در خانه.	Hard breathing: hospital now. Fast breathing: clinic today. Then care at home.
 cough.lead	بیشتر سرفه‌ها و زکام‌ها در خانه خوب می‌شوند. اما نفس تیز یا مشکل می‌تواند علامت سینه‌بغل باشد و زود به داکتر نیاز دارد.	Most coughs and colds get better at home. But fast or difficult breathing can be a sign of pneumonia, which needs a health worker quickly.
 cough.feed	غذا و مایعات را ادامه دهید. بیشتر شیر بدهید. به اطفال بزرگ‌تر مایعات بیشتر و غذای نرم بدهید.	Keep feeding and give drinks. Breastfeed more often. Give older children extra drinks and soft food.
 cough.soothe	گلو و بینی را آرام کنید. نوشیدنی گرم بدهید؛ عسل فقط برای اطفال بالای ۱ سال. بینی بسته را با تکهٔ نرم و تر آهسته پاک کنید.	Soothe the throat, clear the nose. Give warm drinks; honey only for children over 1 year. Clean a blocked nose gently with a soft, wet cloth.
@@ -1105,7 +1163,7 @@ growth.soon.see	به نظر می‌رسد خوب نمی‌بیند	does not seem
 growth.soon.hear	به صدا یا آواز شما رو نمی‌گرداند	does not turn to sounds or to your voice
 growth.food	طفلی که خوب وزن نمی‌گیرد، به وعده‌های بیشتر غذا و شیر مادر نیاز دارد. از کارمند صحی مشوره بگیرید.	A child who is not gaining weight needs more meals and breast milk. Ask the health worker for advice.
 malnutrition.title	طفل لاغر (سوءتغذی)	Thin child (malnutrition)
-malnutrition.summary	طفل بسیار لاغر در کلینیک تداوی می‌شود.	A very thin child can be treated at the clinic.
+malnutrition.summary	پاهای پندیده یا نمی‌خورد: همین حالا شفاخانه. خیلی لاغر: امروز کلینیک.	Swollen feet or will not eat: hospital now. Very thin: clinic today.
 malnutrition.lead	وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند.	When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this.
 malnutrition.signs	علایم را بشناسید. طفل بسیار لاغر است، قبرغه‌ها و استخوان‌هایش معلوم می‌شود، پوست سرینش شُل و چین‌خورده است، یا هر دو پایش پندیده است. شاید ضعیف باشد و میل به خوردن نداشته باشد.	Know the signs. The child is very thin, the ribs and bones show, the skin hangs loose on the buttocks, or both feet are swollen. The child may be weak and not want to eat.
 malnutrition.band	فیتهٔ رنگی بازو. کارمند صحی یا کارمند صحی قریه دور بازوی طفل را با یک فیتهٔ رنگی اندازه می‌کند. سرخ یعنی طفل همین حالا تداوی ضرورت دارد؛ زرد یعنی برای غذای اضافی و معاینه بیایید.	The coloured arm band. The health worker or village health worker measures the upper arm with a coloured band. Red means the child needs treatment now; yellow means come for extra food and checks.
@@ -1330,7 +1388,7 @@ anaemia.urgent.chest-pain	درد سینه	Chest pain
 anaemia.urgent.breathless-lying	نفس‌تنگی در وقت دراز کشیدن	Short of breath when lying down
 anaemia.black-stool	تابلیت آهن ممکن است مدفوع را سیاه کند. این عادی است.	Iron tablets can make the stool black. This is normal.
 urine-infection.title	سوزش ادرار (عفونت)	Burning urine (infection)
-urine-infection.summary	سوزش هنگام ادرار قابل تداوی است. در حاملگی همان روز بروید.	Burning when passing urine is treatable. In pregnancy, go the same day.
+urine-infection.summary	سوزش ادرار با تب و کمردرد: همین حالا شفاخانه. فقط سوزش: امروز کلینیک.	Burning urine, fever and back pain: hospital now. Only burning: clinic today.
 urine-infection.lead	عفونت مثانه سوزش هنگام ادرار، ادرار مکرر، و ادرار کدر یا بدبو می‌آورد. در زنان زیاد است. انتی‌بیوتیک کلینیک آن را علاج می‌کند؛ اگر تداوی نشود به گرده‌ها می‌رسد و در حاملگی به طفل ضرر می‌رساند.	A bladder infection causes burning when passing urine, going often, and cloudy or smelly urine. It is common in women. Clinic antibiotics cure it; untreated it can reach the kidneys and, in pregnancy, harm the baby.
 urine-infection.signs	علایم را بشناسید. سوزش یا درد هنگام ادرار، ضرورت مکرر یا عاجل به ادرار، درد پایین شکم، ادرار کدر، بدبو یا خونی. اطفال شاید فقط تب یا استفراغ داشته باشند.	Know the signs. Burning or pain when passing urine, needing to go often or urgently, pain low in the belly, cloudy, smelly or bloody urine. Children may only have fever or vomiting.
 urine-infection.drink	آب زیاد بنوشید. آب پاک را زیاد بنوشید و ادرار را نگه ندارید. بعد از نزدیکی ادرار کنید. شرمگاه را پاک نگه دارید و از پیش به پس پاک کنید.	Drink plenty of water. Drink clean water often and do not hold urine in. Pass urine after sex. Keep the private area clean, wiping from front to back.
@@ -1500,7 +1558,7 @@ diabetes.urgent.confused	گیجی یا بیهوشی	confusion or unconsciousness
 diabetes.urgent.vomiting	استفراغ و حال بسیار خراب	vomiting and feeling very unwell
 diabetes.urgent.foot-wound	زخم پا که سرخ، سیاه یا بدبو شده	a foot wound that is red, black or smelly
 asthma.title	نفس‌تنگی (آسم)	Asthma and tight breathing
-asthma.summary	خس‌خس سینه و تنگی نفس با انهیلر (پف) کلینیک کنترول می‌شود.	Wheezing and tight chest can be controlled with a clinic inhaler.
+asthma.summary	نمی‌تواند گپ بزند یا لب‌ها کبود است: همین حالا شفاخانه. انهیلر کلینیک نفس‌تنگی را کنترول می‌کند.	Cannot speak or lips blue: hospital now. A clinic inhaler controls asthma.
 asthma.lead	آسم باعث خس‌خس نفس و تنگی سینه می‌شود، اکثراً در شب، در هوای سرد یا دود. با انهیلر، یک پف که از آن نفس می‌کشید، کنترول می‌شود، تا طفل یا بزرگسال عادی زندگی و کار کند.	Asthma makes breathing whistle and the chest feel tight, often at night, in cold air or smoke. It can be controlled with an inhaler, a pump you breathe in from, so a child or adult can live and work normally.
 asthma.signs	علایم را بشناسید. سرفه و نفس خس‌خس‌دار که می‌آید و می‌رود، و در شب، بعد از دویدن، در سردی یا دود بدتر می‌شود. بین حمله‌ها شخص شاید سالم به نظر برسد.	Know the signs. Cough and whistling breathing that comes and goes, worse at night, after running, in cold or smoke. Between attacks the person may seem well.
 asthma.inhaler	انهیلر را درست استعمال کنید. انهیلر فوری در چند دقیقه راه نفس را باز می‌کند. انهیلر روزانهٔ پیشگیری جلو حمله‌ها را می‌گیرد. دقیقاً همان طور که کارمند صحی نشان داد استعمال کنید، و انهیلر فوری را همراه داشته باشید.	Use the inhaler as taught. The reliever inhaler opens the airways in minutes. A daily preventer inhaler stops attacks. Use them exactly as the health worker showed, and keep the reliever with you.
@@ -1526,7 +1584,7 @@ asthma.dont.steroid	برای نفس‌تنگی از دکان تابلیت یا �
 asthma.dont.smoke	در کنار شخص مبتلا به آسم، مخصوصاً طفل، سگرت نکشید.	Do not smoke around a person with asthma, especially a child.
 asthma.spacer	طفل می‌تواند انهیلر را با یک محفظه (اسپیسر) استعمال کند؛ کلینیک می‌تواند آن را از یک بوتل پلاستیکی پاک بسازد و نشان بدهد.	A child can use an inhaler with a spacer; the clinic can make one from a clean plastic bottle and show you how.
 epilepsy.title	مرگی (صرع)	Fits (epilepsy)
-epilepsy.summary	تشنج‌های تکراری با دوای روزانهٔ کلینیک کنترول می‌شود.	Repeated fits can be controlled with daily medicine from the clinic.
+epilepsy.summary	تشنج بیشتر از ۵ دقیقه: همین حالا شفاخانه. دوای روزانهٔ کلینیک تشنج را کنترول می‌کند.	A fit over 5 minutes: hospital now. Daily clinic medicine controls fits.
 epilepsy.lead	مرگی تشنج‌های تکراری است: شخص می‌افتد، می‌لرزد، شاید زبانش را گاز بگیرد یا خودش را تر کند، بعد می‌خوابد. جن یا نفرین نیست و با تماس سرایت نمی‌کند. دوای روزانه در اکثر مردم تشنج را بند می‌کند.	Epilepsy is repeated fits: the person falls, shakes, may bite the tongue or wet themselves, then sleeps. It is not a spirit or a curse and does not pass by touch. Daily medicine stops the fits in most people.
 epilepsy.during	در وقت تشنج: او را در امان نگه دارید. شخص را به پهلو روی زمین بخوابانید، دور از آتش، آب و چیزهای تیز. چیز نرمی زیر سرش بگذارید. او را محکم نگیرید. وقت را یادداشت کنید.	During a fit: keep them safe. Lay the person on their side on the ground, away from fire, water and sharp things. Put something soft under the head. Do not hold them down. Note the time.
 epilepsy.mouth	هیچ چیز در دهن نگذارید. هرگز قاشق، پارچه، انگشت یا آب در دهن نگذارید؛ دندان را می‌شکند یا راه نفس را می‌بندد. شخص زبانش را بلعیده نمی‌تواند.	Nothing in the mouth. Never put a spoon, cloth, fingers or water in the mouth; it can break teeth or block breathing. The person cannot swallow the tongue.
@@ -1770,7 +1828,7 @@ diarrhoea-adult.dont.stop	به خاطر اسهال نوشیدن و خوردن ر
 diarrhoea-adult.dont.stream	لباس مریض را در جویی که دیگران از آن می‌نوشند نشویید.	Do not wash the sick person's clothes in the stream others drink from.
 diarrhoea-adult.packets	در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را دارد.	Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
 typhoid.title	محرقه (تیفویید)	Typhoid fever
-typhoid.summary	تب چند روزه از آب یا غذای ناپاک. با انتی‌بیوتیک علاج می‌شود.	Days of fever from dirty water or food. Antibiotics cure it.
+typhoid.summary	درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۳ روز: امروز کلینیک.	Severe belly pain: hospital now. Fever over 3 days: clinic today.
 typhoid.lead	محرقه از آب یا غذایی می‌آید که با مدفوع شخص مریض ناپاک شده. تب روز به روز بالا می‌رود، با سردرد، خستگی، درد شکم و گاهی اسهال یا قبضیت. به انتی‌بیوتیک از کلینیک ضرورت دارد.	Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic.
 typhoid.signs	علایم را بشناسید. تبی که در چند روز بالا می‌رود و نمی‌رود، با سردرد، ضعف، بی‌اشتهایی، درد شکم، و اسهال یا قبضیت. اطفال شاید فقط تب داشته باشند.	Know the signs. Fever that rises over several days and does not go, with headache, weakness, poor appetite, belly pain, and diarrhoea or constipation. Children may only have fever.
 typhoid.go	تب بیش از ۳ روز: بروید. اگر تب بیش از ۳ روز دوام کرد، یا زودتر اگر مریض بسیار ناخوش است، به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.	Fever over 3 days: go. Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself.
@@ -1995,7 +2053,7 @@ scabies.dont.one	فقط کسی را که خارش دارد تداوی نکنید
 scabies.dont.steroid	برای خارش کریم‌های استرویید دکان را استعمال نکنید؛ گری را بدتر می‌کند.	Do not use shop steroid creams for itching; they make scabies worse.
 scabies.shame	گری نشانهٔ ناپاکی نیست. هر جا که مردم نزدیک هم می‌خوابند و در کمپ‌های شلوغ سرایت می‌کند. هر کس می‌تواند بگیرد.	Scabies is not about being dirty. It spreads wherever people sleep close together, and in crowded camps. Anyone can get it.
 eye-infection.title	چشم سرخ و چرکی	Red, sticky eyes
-eye-infection.summary	چشم سرخ یا چرکی زود سرایت می‌کند. روی پاک و مرهم کلینیک کمک می‌کند.	Red or sticky eyes spread fast. Clean faces and clinic ointment help.
+eye-infection.summary	درد چشم، زخم یا کم شدن دید: همین حالا شفاخانه. چشم چرکی: امروز کلینیک.	Eye pain, injury or sight loss: hospital now. Sticky eyes: clinic today.
 eye-infection.lead	چشم سرخ و چرکی زیاد دیده می‌شود، مخصوصاً در اطفال، در تابستان و جایی که مگس زیاد است. اکثرشان با پاک کردن و مرهم کلینیک جور می‌شوند، اما بعضی عفونت‌ها می‌توانند بینایی را ببرند.	Red, sticky eyes are common, especially in children, in summer and where flies are many. Most get better with cleaning and ointment from the clinic, but some infections can take the sight.
 eye-infection.clean	چشم‌ها را آهسته پاک کنید. دست‌ها را بشویید. با یک تکهٔ پاک و تر از گوشهٔ داخلی چشم به طرف بیرون پاک کنید، برای هر چشم یک قسمت تازه. بعد دوباره دست‌ها را بشویید.	Clean the eyes gently. Wash your hands. Wipe from the inner corner outwards with a clean wet cloth, a fresh part for each eye. Wash hands again after.
 eye-infection.faces	روی پاک جلو تراخم را می‌گیرد. روی اطفال را هر روز با صابون بشویید، و مگس‌ها را از روی دور کنید. روی ناپاک مرض چشم تراخم را سرایت می‌دهد، که در پیری کور می‌کند.	Clean faces stop trachoma. Wash children's faces with soap every day, and keep flies off the face. A dirty face passes the trachoma eye disease, which can blind in old age.
@@ -2021,7 +2079,7 @@ eye-infection.dont.drops	بدون معاینهٔ کلینیک قطرهٔ دکا�
 eye-infection.dont.patch	چشم چرکی را با پارچهٔ سخت نبندید.	Do not cover a sticky eye with a tight patch.
 eye-infection.samangan	سمنگان یکی از چند جای افغانستان است که هنوز تراخم در آن دیده می‌شود. روی پاک، آب پاک و تشناب بینایی اطفال را حفاظت می‌کند.	Samangan is one of the few places in Afghanistan where trachoma is still found. Clean faces, clean water and latrines protect the children's sight.
 dental.title	دندان و دندان‌درد	Teeth and toothache
-dental.summary	دندان‌ها را روزی دو بار پاک کنید. روی پندیده با دندان‌درد به کلینیک ضرورت دارد.	Clean teeth twice daily. Toothache with a swollen face needs the clinic.
+dental.summary	روی پندیده با تب: همین حالا شفاخانه. دندان‌ها را روزی دو بار پاک کنید.	Swollen face with fever: hospital now. Clean teeth twice a day.
 dental.lead	دندان‌های خراب در اطفال و بزرگسالان افغانستان بسیار زیاد است و تقریباً هیچ وقت تداوی نمی‌شود. پاک کردن دندان‌ها، شکر و چای شیرین کمتر، و تداوی زود جلو درد و افتادن دندان‌ها را می‌گیرد.	Rotten teeth are very common in Afghan children and adults, and almost never treated. Cleaning teeth, less sugar and sweet tea, and early treatment stop pain and loss of teeth.
 dental.brush	دندان‌ها را روزی دو بار پاک کنید. با برس و کریم دندان فلوراید، یا مسواک پاک. صبح و پیش از خواب پاک کنید. به اطفال تا حدود ۸ سالگی کمک کنید.	Clean teeth twice a day. Use a brush with fluoride toothpaste, or a clean miswak. Clean in the morning and before sleep. Help children until they are about 8.
 dental.sugar	شکر و چای شیرین کمتر. شیرینی، بسکویت، نوشابه و چای شیرین زیاد دندان‌ها را خراب می‌کند. بین غذاها آب، میوه و غذای ساده بدهید.	Less sugar and sweet tea. Sweets, biscuits, fizzy drinks and many cups of sweet tea rot the teeth. Give water, fruit and plain food between meals.
@@ -2045,6 +2103,27 @@ dental.dont.aspirin	روی دندان دردناک اسپرین، تنباکو �
 dental.dont.shop	برای دندان‌درد از دکان انتی‌بیوتیک نگیرید؛ دندان را جور نمی‌کند.	Do not take shop antibiotics for toothache; they do not fix the tooth.
 dental.dont.pliers	نگذارید شخص بی‌تجربه دندان را با انبور بکشد.	Do not let an untrained person pull a tooth with pliers.
 dental.pregnancy	خانم‌های حامله: دندان‌ها را خوب پاک کنید و به داکتر دندان بروید؛ مرض بیره در حاملگی زیاد است.	Pregnant women: clean teeth well and see the dentist; gum disease is common in pregnancy.
+back-pain.title	کمردرد	Back pain
+back-pain.summary	بعد از افتادن یا با ضعف پاها: همین حالا شفاخانه. آهسته حرکت کنید.	After a fall, or with weak legs: hospital now. Keep moving gently.
+back-pain.lead	کمردرد بعد از افتادن، یا با ضعف یا بی‌حسی پاها، همین حالا شفاخانه لازم دارد. بیشتر کمردردهای دیگر، اگر آهسته حرکت کنید، در چند هفته خوب می‌شوند.	Back pain after a fall, or with weak or numb legs, needs the hospital now. Most other back pain gets better in a few weeks if you keep moving gently.
+back-pain.urgent	اگر کسی کمردرد دارد و یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	Go to hospital now, day or night, if someone has back pain:
+back-pain.urgent.fall	بعد از افتادن، تصادف یا ضربهٔ سخت	after a fall, a crash or a hard blow
+back-pain.urgent.legs	همراه با ضعف یا بی‌حسی تازه در پاها	with new weakness or numbness in the legs
+back-pain.urgent.bladder	و نمی‌تواند ادرار یا مدفوع را نگه دارد، یا ادرار نمی‌کند	and cannot hold urine or stool, or cannot pass urine
+back-pain.urgent.fever	همراه با تب، یا با لرزه و سوزش ادرار	with fever, or with shivering and burning urine
+back-pain.urgent.pregnant	در حاملگی، با دردهایی که پیش از وقت ولادت می‌آیند و می‌روند	in pregnancy, with pains that come and go before the due date
+back-pain.soon	اگر کسی کمردرد دارد و یکی از این علایم را دارد، این هفته به کلینیک بروید	Go to the clinic this week if someone has back pain:
+back-pain.soon.weight	و بدون دلیل وزن کم می‌کند	and is losing weight without trying
+back-pain.soon.night	که شب‌ها بدتر است و با استراحت کم نمی‌شود	that is worse at night, and does not ease with rest
+back-pain.move	آهسته حرکت کنید. هر روز کمی راه بروید و کارهای سبک بکنید. چند روز در بستر ماندن کمر را سخت‌تر می‌کند.	Keep moving gently. Walk a little and do light work each day. Staying in bed for days makes the back stiffer.
+back-pain.lift	با زانوی خم بلند کنید. بار را نزدیک بدن نگه دارید، زانوها را خم کنید و بدن را نپیچانید. بار سنگین را با دیگران بردارید.	Lift with bent knees. Keep the load close to your body, bend your knees and do not twist. Share heavy loads.
+back-pain.medicine	داروی درد از کلینیک. برای درد شدید، از کارمند صحی داروی درد بخواهید. پیچکاری را از دواخانه نخرید.	Pain medicine from the clinic. For strong pain, ask the health worker for a pain medicine. Do not buy injections from a shop.
+back-pain.pregnant	کمردرد در حاملگی. این عادی است: به پهلو استراحت کنید و بار سنگین برندارید. دردهایی که پیش از وقت ولادت می‌آیند و می‌روند، شفاخانه لازم دارند.	Back ache in pregnancy. It is common: rest on your side and avoid heavy loads. Pains that come and go before the due date need the hospital.
+back-pain.clinic	در کلینیک: معاینه و مشوره. کارمند صحی کمر، پاها و ادرار را معاینه می‌کند. اگر لازم باشد داروی درد می‌دهد و ورزش‌ها را نشان می‌دهد.	At the clinic: check and advice. The health worker checks the back, the legs and the urine. They give pain medicine if needed and show you exercises.
+back-pain.dont	این کارها را نکنید:	Do not:
+back-pain.dont.bed	چند روز در بستر نمانید.	Do not stay in bed for days.
+back-pain.dont.press	نگذارید کسی کمری را که در افتادن آسیب دیده، بکشد یا فشار بدهد.	Do not let anyone pull or press on a back hurt in a fall.
+back-pain.dont.shop	پیچکاری یا تابلیت ستیروئید را از دواخانه نخرید.	Do not buy steroid injections or tablets from a shop.
 floods-quakes.title	سیلاب و زلزله	Floods and earthquakes
 floods-quakes.summary	از پیش آماده شوید و بدانید هنگام سیلاب یا زلزله چه کنید.	Get ready early, and know what to do in floods or earthquakes.
 floods-quakes.lead	سیلاب‌های بهاری و زلزله در سمنگان مردم را کشته است. اگر بدانید پیش از حادثه، هنگام حادثه و بعد از آن چه کنید، خانوادهٔ خود را نجات می‌دهید.	Spring floods and earthquakes have killed people in Samangan. Knowing what to do before, during and after can save your family.

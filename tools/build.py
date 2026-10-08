@@ -36,8 +36,6 @@ for f in sorted(glob.glob(J("content/src/topics/*.json"))):
     topics[t["id"]] = t
 symptoms_src = load(J("content/src/symptoms.json")) if os.path.exists(J("content/src/symptoms.json")) else {}
 symptoms = symptoms_src.get("symptoms") or []
-# the pages that are for one age group only ("child", "adult", "pregnant"): the finder labels them when a tile's pages mix groups
-symptom_ages = {tid: grp for grp, ids in (symptoms_src.get("ages") or {}).items() for tid in ids}
 facilities = load(J("content/src/facilities.json")) if os.path.exists(J("content/src/facilities.json")) else {"facilities": []}
 vaccines = load(J("content/src/vaccines.json")) if os.path.exists(J("content/src/vaccines.json")) else None
 # disease watch: syndromes (case definitions, alert rules) and the places people choose
@@ -163,6 +161,29 @@ anim_groups = ANIM.groups()
 # "pic" is the tile picture (tools/symptom_pics.py writes img/symptoms/<id>.webp); without it the tile shows the icon.
 def words_of(t): return " ".join(re.sub(r"[.,:!?\u060c\u061f]", " ", t or "").lower().split())
 def same_words(a, b): return words_of(a) == words_of(b)
+# Each tile's own page (#/sym/<id>): its red and amber boxes name the alert lines of the topic pages by narration id; the
+# book gets each item with its picture (the icon of the item it reuses, or the one named for a ui.ask.* sign), the
+# sources written out, and no "_notes" (where each sign comes from: for Mo, in symptoms.json only).
+alert_items = {it["id"]: it for t in out_topics.values() for b in t.get("blocks") or [] if b.get("type") in ("alert", "dont") for it in b.get("items") or []}
+def sym_page(x):
+    pg = {k: v for k, v in x["page"].items() if not k.startswith("_")}
+    for lvl in ("red", "amber"):
+        boxes = {}
+        for age, bx in (pg.get(lvl) or {}).items():
+            items = []
+            for it in bx.get("items") or []:
+                iid, ic_ = (it, None) if isinstance(it, str) else (it.get("id"), it.get("icon"))
+                if iid not in narr: print("WARNING symptom", x["id"], lvl, age, "unknown line", iid); continue
+                ic_ = ic_ or (alert_items.get(iid) or {}).get("icon") or "warning"
+                items.append({"id": iid, "icon": icon(ic_)})
+            if bx.get("title") in narr and items: boxes[age] = {"title": bx["title"], "items": items}
+        if boxes: pg[lvl] = boxes
+        else: pg.pop(lvl, None)
+    for k in ("now", "pages"):
+        if pg.get(k): pg[k] = {age: [t for t in ids if t in out_topics] for age, ids in pg[k].items()}
+    srcs = symptoms_src.get("sources") or {}
+    pg["sources"] = [srcs.get(k, k) for k in pg.get("sources") or []]
+    return pg
 book_symptoms = []
 for x in symptoms:
     sid = x.get("say")
@@ -172,9 +193,10 @@ for x in symptoms:
     if not sid: sid = f"ui.sym.{x['id']}"; say(sid, x["label"])
     pic = x.get("pic")
     if pic and not exists(pic): print("WARNING symptom", x["id"], "picture missing:", pic); pic = None
-    y = dict(x, icon=icon(x.get("icon", "warning")), say=sid, go=[g for g in x["go"] if g in out_topics])
+    y = dict(x, icon=icon(x.get("icon", "warning")), say=sid)
     if pic: y["pic"] = pic
     else: y.pop("pic", None)
+    if x.get("page"): y["page"] = sym_page(x)
     book_symptoms.append(y)
 # interface lines (ui.*) stay ahead of the page lines in the book, as the dashboard editor rebuilds them (server/editor-core.js)
 for k in [k for k in narr if not k.startswith("ui.")]: narr[k] = narr.pop(k)
@@ -206,9 +228,8 @@ book = {
     "narration": narr,
     "audio": audio,
     "symptoms": book_symptoms,
-    # the finder: the danger-sign pages (marked red, first) and the pages for one age group only
-    "finder": {"danger": [t for t in symptoms_src.get("danger") or [] if t in out_topics],
-               "ages": {k: v for k, v in symptom_ages.items() if k in out_topics}},
+    # the finder: the danger-sign pages (shown in red when typed words find nothing)
+    "finder": {"danger": [t for t in symptoms_src.get("danger") or [] if t in out_topics]},
     "facilities": facilities,
     # animations the player can open (anim/<name>.js), the groups with a picker (cpr) and each one's narration ids;
     # the dashboard editor uses this to check "anim" blocks and to rebuild the recording order like this script does

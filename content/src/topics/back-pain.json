@@ -1,0 +1,236 @@
+{
+  "id": "back-pain",
+  "section": "everyone",
+  "title": {
+    "fa": "کمردرد",
+    "ps": "د ملا درد",
+    "en": "Back pain"
+  },
+  "summary": {
+    "fa": "بعد از افتادن یا با ضعف پاها: همین حالا شفاخانه. آهسته حرکت کنید.",
+    "ps": "له لوېدو وروسته یا د پښو له کمزورۍ سره: همدا اوس روغتون. ورو ورو وخوځېږئ.",
+    "en": "After a fall, or with weak legs: hospital now. Keep moving gently."
+  },
+  "image": "back-pain",
+  "blocks": [
+    {
+      "id": "back-pain.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کمردرد بعد از افتادن، یا با ضعف یا بی‌حسی پاها، همین حالا شفاخانه لازم دارد. بیشتر کمردردهای دیگر، اگر آهسته حرکت کنید، در چند هفته خوب می‌شوند.",
+        "ps": "د ملا درد له لوېدو وروسته، یا د پښو له کمزورۍ یا بې‌حسۍ سره، همدا اوس روغتون ته اړتیا لري. نور ډېری د ملا دردونه، که ورو ورو وخوځېږئ، په څو اونیو کې ښه کېږي.",
+        "en": "Back pain after a fall, or with weak or numb legs, needs the hospital now. Most other back pain gets better in a few weeks if you keep moving gently."
+      }
+    },
+    {
+      "id": "back-pain.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر کسی کمردرد دارد و یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که څوک د ملا درد لري او له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "Go to hospital now, day or night, if someone has back pain:"
+      },
+      "items": [
+        {
+          "id": "back-pain.urgent.fall",
+          "icon": "warning",
+          "text": {
+            "fa": "بعد از افتادن، تصادف یا ضربهٔ سخت",
+            "ps": "له لوېدو، ټکر یا سخت ګوزار وروسته",
+            "en": "after a fall, a crash or a hard blow"
+          }
+        },
+        {
+          "id": "back-pain.urgent.legs",
+          "icon": "walk",
+          "text": {
+            "fa": "همراه با ضعف یا بی‌حسی تازه در پاها",
+            "ps": "په پښو کې له نوې کمزورۍ یا بې‌حسۍ سره",
+            "en": "with new weakness or numbness in the legs"
+          }
+        },
+        {
+          "id": "back-pain.urgent.bladder",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "و نمی‌تواند ادرار یا مدفوع را نگه دارد، یا ادرار نمی‌کند",
+            "ps": "او متیازې یا غایطه نشي ساتلی، یا متیازې نشي کولی",
+            "en": "and cannot hold urine or stool, or cannot pass urine"
+          }
+        },
+        {
+          "id": "back-pain.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "همراه با تب، یا با لرزه و سوزش ادرار",
+            "ps": "له تبې سره، یا له لړزې او د متیازو له سوزش سره",
+            "en": "with fever, or with shivering and burning urine"
+          }
+        },
+        {
+          "id": "back-pain.urgent.pregnant",
+          "icon": "pregnant",
+          "text": {
+            "fa": "در حاملگی، با دردهایی که پیش از وقت ولادت می‌آیند و می‌روند",
+            "ps": "په امیندوارۍ کې، له داسې دردونو سره چې د زېږون له وخت مخکې راځي او ځي",
+            "en": "in pregnancy, with pains that come and go before the due date"
+          }
+        }
+      ]
+    },
+    {
+      "id": "back-pain.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر کسی کمردرد دارد و یکی از این علایم را دارد، این هفته به کلینیک بروید",
+        "ps": "که څوک د ملا درد لري او له دې نښو څخه یوه ولري، په دې اونۍ کې کلینیک ته ولاړ شئ",
+        "en": "Go to the clinic this week if someone has back pain:"
+      },
+      "items": [
+        {
+          "id": "back-pain.soon.weight",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "و بدون دلیل وزن کم می‌کند",
+            "ps": "او پرته له کوم لامله وزن کموي",
+            "en": "and is losing weight without trying"
+          }
+        },
+        {
+          "id": "back-pain.soon.night",
+          "icon": "moon",
+          "text": {
+            "fa": "که شب‌ها بدتر است و با استراحت کم نمی‌شود",
+            "ps": "چې د شپې خرابېږي او په آرام سره نه کمېږي",
+            "en": "that is worse at night, and does not ease with rest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "back-pain.move",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "آهسته حرکت کنید",
+        "ps": "ورو ورو وخوځېږئ",
+        "en": "Keep moving gently"
+      },
+      "text": {
+        "fa": "هر روز کمی راه بروید و کارهای سبک بکنید. چند روز در بستر ماندن کمر را سخت‌تر می‌کند.",
+        "ps": "هره ورځ لږ وګرځئ او سپک کارونه وکړئ. څو ورځې په بستر کې پاتې کېدل ملا نوره هم کلکه کوي.",
+        "en": "Walk a little and do light work each day. Staying in bed for days makes the back stiffer."
+      }
+    },
+    {
+      "id": "back-pain.lift",
+      "type": "step",
+      "icon": "people",
+      "title": {
+        "fa": "با زانوی خم بلند کنید",
+        "ps": "په کږو زنګونونو یې پورته کړئ",
+        "en": "Lift with bent knees"
+      },
+      "text": {
+        "fa": "بار را نزدیک بدن نگه دارید، زانوها را خم کنید و بدن را نپیچانید. بار سنگین را با دیگران بردارید.",
+        "ps": "بار خپل بدن ته نږدې وساتئ، زنګونونه کږ کړئ او بدن مه تاووئ. دروند بار له نورو سره یوځای پورته کړئ.",
+        "en": "Keep the load close to your body, bend your knees and do not twist. Share heavy loads."
+      }
+    },
+    {
+      "id": "back-pain.medicine",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "داروی درد از کلینیک",
+        "ps": "د درد درمل له کلینیک",
+        "en": "Pain medicine from the clinic"
+      },
+      "text": {
+        "fa": "برای درد شدید، از کارمند صحی داروی درد بخواهید. پیچکاری را از دواخانه نخرید.",
+        "ps": "د سخت درد لپاره، له روغتیايي کارکوونکي د درد درمل وغواړئ. پیچکاري له درملتون مه اخلئ.",
+        "en": "For strong pain, ask the health worker for a pain medicine. Do not buy injections from a shop."
+      }
+    },
+    {
+      "id": "back-pain.pregnant",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "کمردرد در حاملگی",
+        "ps": "په امیندوارۍ کې د ملا درد",
+        "en": "Back ache in pregnancy"
+      },
+      "text": {
+        "fa": "این عادی است: به پهلو استراحت کنید و بار سنگین برندارید. دردهایی که پیش از وقت ولادت می‌آیند و می‌روند، شفاخانه لازم دارند.",
+        "ps": "دا عادي دی: پر اړخ آرام وکړئ او دروند بار مه پورته کوئ. هغه دردونه چې د زېږون له وخت مخکې راځي او ځي، روغتون ته اړتیا لري.",
+        "en": "It is common: rest on your side and avoid heavy loads. Pains that come and go before the due date need the hospital."
+      }
+    },
+    {
+      "id": "back-pain.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه و مشوره",
+        "ps": "په کلینیک کې: معاینه او مشوره",
+        "en": "At the clinic: check and advice"
+      },
+      "text": {
+        "fa": "کارمند صحی کمر، پاها و ادرار را معاینه می‌کند. اگر لازم باشد داروی درد می‌دهد و ورزش‌ها را نشان می‌دهد.",
+        "ps": "روغتیايي کارکوونکی ملا، پښې او متیازې معاینه کوي. که اړتیا وي د درد درمل درکوي او تمرینونه درښيي.",
+        "en": "The health worker checks the back, the legs and the urine. They give pain medicine if needed and show you exercises."
+      }
+    },
+    {
+      "id": "back-pain.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید:",
+        "ps": "دا کارونه مه کوئ:",
+        "en": "Do not:"
+      },
+      "items": [
+        {
+          "id": "back-pain.dont.bed",
+          "icon": "rest",
+          "text": {
+            "fa": "چند روز در بستر نمانید.",
+            "ps": "څو ورځې په بستر کې مه پاتې کېږئ.",
+            "en": "Do not stay in bed for days."
+          }
+        },
+        {
+          "id": "back-pain.dont.press",
+          "icon": "no",
+          "text": {
+            "fa": "نگذارید کسی کمری را که در افتادن آسیب دیده، بکشد یا فشار بدهد.",
+            "ps": "مه پرېږدئ چې څوک هغه ملا چې په لوېدو کې ټپي شوې، کش کړي یا فشار ورکړي.",
+            "en": "Do not let anyone pull or press on a back hurt in a fall."
+          }
+        },
+        {
+          "id": "back-pain.dont.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "پیچکاری یا تابلیت ستیروئید را از دواخانه نخرید.",
+            "ps": "د سټېرایډ پیچکاري یا ګولۍ له درملتون مه اخلئ.",
+            "en": "Do not buy steroid injections or tablets from a shop."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "WHO guideline for non-surgical management of chronic primary low back pain in adults in primary and community care settings (2023): stay active, structured exercise; assess for red flags of serious causes (fracture, cauda equina syndrome, infection, cancer)",
+    "WHO/ICRC Basic Emergency Care (2018): trauma, suspected spinal injury (keep still, do not move or manipulate)",
+    "WHO IMAI Acute Care (2009): fever with flank pain (kidney infection)",
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC): preterm labour, danger signs; low back pain in pregnancy is common"
+  ],
+  "review": [
+    "New page (Phase 1 of the What is wrong? redesign). Red: after a fall or injury, new leg weakness or numbness, loss of bladder or bowel control or retention, fever, pregnancy with intermittent pains before term. Amber (this week): weight loss, night pain. Mo to check the levels (fever = hospital now, consistent with the urine-infection page).",
+    "Dari/Pashto: کمردرد / د ملا درد; بی‌حسی / بې‌حسي (numbness); ستیروئید / سټېرایډ (steroid) need a native check.",
+    "No picture yet: the page uses the general adults picture."
+  ]
+}

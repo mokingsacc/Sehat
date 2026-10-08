@@ -185,3 +185,31 @@ into `book.json` as `search`, keeping only keys that open something, and `tools/
 - The Children and Adults screens are built from `config.listGroups` (groups of topics, tool rows, and one `rest` group); the Health tab from `config.home`, the Home tab from `config.house`, CPR and first aid from `config.firstAid`. See docs/HOME_LAYOUT.md.
 - Topics with a general picture (`img/topics/children-generic.svg`, `adults-generic.svg`) show their first step picture in lists and at the top of the page.
 - No religious content anywhere (Mo, 2026-10-07): prayer was removed from the calm activities on the stress and evening-routine pages.
+
+## Addendum: "What is wrong?" picture pages (2026-10-08)
+Each picture on the "What is wrong?" screen opens one checked page, `#/sym/<id>[/<age>]`, built from the tile's `page`
+in `content/src/symptoms.json`. The page shows, in this order: the red "go to hospital now" box (for not breathing,
+choking and the injury pictures the send-for-a-car row and the first-aid pages come first: `nowFirst`), the nearest
+clinic row, the first-aid pages (`now`), the amber "clinic today" box, the tools, care at home, more pages, and the
+sources. Who is sick (`ages`: baby, child, older, pregnant, after, anyone) is a row of pictures that switches the boxes.
+
+```json
+{ "id": "cough", "icon": "cough", "label": "ui.sym.cough", "say": [...],
+  "page": { "lead": "ui.ask.cough.lead", "ages": ["baby", "child", "older"], "default": "child",
+    "red":   { "child": { "title": "danger-child.urgent", "items": ["cough.urgent.chest", { "id": "ui.ask.fast-child", "icon": "breathing-fast" }] } },
+    "amber": { "child": { "title": "danger-child.soon", "items": ["cough.soon.long"] } },
+    "now": { "all": ["choking"] }, "tools": { "child": ["breaths"] }, "care": { "child": ["cough.feed"] },
+    "pages": { "child": ["cough", "asthma"] }, "sources": ["IMCI", "PB"], "_notes": ["where each sign comes from"] } }
+```
+
+- Per-age maps use the age names, or `"all"`. Every age needs a red box.
+- Box items are the alert lines already on the topic pages (same words, same recordings). A sign no page has yet is
+  written once in `content/src/ui-ask.json` as a `ui.ask.*` line and given an `icon`.
+- A box title is an alert title of the same level (`danger-child.urgent`, `pregnancy-danger.soon`…) or a `ui.ask.*` line.
+- `now` is Emergency or first-aid pages, or topics with an urgent box. `care` is step, tip or don't blocks. `pages` are
+  Health topics. No Home-tab page anywhere (Mo's rule).
+- `sources` are keys of the file's `sources` table, shown under the page. Every red and amber sign must come from WHO
+  IMCI, PCPNC or other WHO guidance and be named in `_notes` (not shown in the app).
+- `validate.py` (`check_symptoms`) checks all of this; `node tools/test_tiles.cjs [folder]` opens every picture and age
+  in fa, ps and en (danger first, a speaker on every sign, a picture on every row, no Home-tab page, no dead end).
+- Typed questions on the screen show the best one or two picture pages first, then pages (no Home-tab pages).

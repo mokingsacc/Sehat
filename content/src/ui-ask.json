@@ -1,0 +1,286 @@
+{
+  "_note": "\"What is wrong?\" picture pages (#/sym/<id>, content/src/symptoms.json \"page\"): the opening line of each page, the who-is-sick question and its age names, headings, and the few signs written for these pages (each from WHO guidance, see symptoms.json _notes). Everything else on these pages reuses the lines of the topic pages.",
+  "text": {},
+  "say": {
+    "ui.ask.who": {
+      "fa": "مریض کیست؟ یکی را بزنید.",
+      "ps": "ناروغ څوک دی؟ یو یې ووهئ.",
+      "en": "Who is sick? Tap one."
+    },
+    "ui.ask.who.after": {
+      "fa": "مادر بعد از ولادت",
+      "ps": "مور له زېږون وروسته",
+      "en": "Mother after the birth"
+    },
+    "ui.ask.who.anyone": {
+      "fa": "هر کس",
+      "ps": "هر څوک",
+      "en": "Anyone"
+    },
+    "ui.ask.now": {
+      "fa": "کمک‌های اولیه: همین حالا این صفحه را باز کنید.",
+      "ps": "لومړنۍ مرسته: همدا اوس دا پاڼه پرانیزئ.",
+      "en": "First aid: open this page now."
+    },
+    "ui.ask.clinic-today": {
+      "fa": "«امروز کلینیک» یعنی همین امروز به نزدیک‌ترین پوستهٔ صحی، کارمند صحی قریه یا کلینیک بروید.",
+      "ps": "«نن کلینیک» دا مانا لري چې همدا نن نږدې روغتیايي پوستې، د کلي روغتیايي کارکوونکي یا کلینیک ته ولاړ شئ.",
+      "en": "\"Clinic today\" means go today to the nearest health post, village health worker or clinic."
+    },
+    "ui.ask.care": {
+      "fa": "مراقبت در خانه، وقتی هیچ علامت خطر نیست. علایم را باز هم ببینید.",
+      "ps": "په کور کې پاملرنه، کله چې د خطر نښه نه وي. نښې بیا بیا وګورئ.",
+      "en": "Care at home, when there is no danger sign. Keep looking for the signs."
+    },
+    "ui.ask.more": {
+      "fa": "صفحه‌های بیشتر: شاید چه باشد و چه کنید.",
+      "ps": "نورې پاڼې: کېدای شي څه وي، او څه وکړئ.",
+      "en": "More pages: what it may be, and what to do."
+    },
+    "ui.ask.footer": {
+      "fa": "این صفحه نمی‌گوید که مریضی چیست؛ فقط کارمند صحی می‌تواند بگوید. علایم از رهنمود سازمان صحی جهان است. اگر نگران هستید، باز هم به کلینیک بروید.",
+      "ps": "دا پاڼه نه وايي چې ناروغي څه ده؛ یوازې روغتیايي کارکوونکی یې ویلی شي. نښې د روغتیا نړیوال سازمان له لارښوونو دي. که اندېښنه لرئ، بیا هم کلینیک ته ولاړ شئ.",
+      "en": "This page does not say what the illness is: only a health worker can. The signs are from World Health Organization guidance. If you are worried, go to the clinic anyway."
+    },
+    "ui.ask.open": {
+      "fa": "اول علایم خطر را ببینید.",
+      "ps": "لومړی د خطر نښې وګورئ.",
+      "en": "Look at the danger signs first."
+    },
+    "ui.ask.fast-child": {
+      "fa": "تیز نفس می‌کشد: از ۲ تا ۱۲ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر",
+      "ps": "چټکه ساه اخلي: له ۲ تر ۱۲ میاشتو په یوه دقیقه کې ۵۰ ځله یا ډېر، له ۱ تر ۵ کلونو ۴۰ ځله یا ډېر",
+      "en": "breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years"
+    },
+    "ui.ask.thirsty": {
+      "fa": "بی‌قرار است و خیلی تشنه است، یا چشم‌هایش گود رفته است",
+      "ps": "بې‌قراره دی او ډېر تږی دی، یا یې سترګې ننوتې دي",
+      "en": "is restless and very thirsty, or has sunken eyes"
+    },
+    "ui.ask.feed-baby": {
+      "fa": "در یک شبانه‌روز کمتر از ۸ بار شیر می‌خورد، یا خوب نمی‌مکد",
+      "ps": "په یوه شپه او ورځ کې تر ۸ ځلو لږ شیدې خوري، یا ښه نه رودي",
+      "en": "breastfeeds fewer than 8 times in a day and night, or does not suck well"
+    },
+    "ui.ask.baby-diarrhoea": {
+      "fa": "طفل کمتر از ۲ ماه اسهال دارد، حتی اگر کم باشد",
+      "ps": "تر ۲ میاشتو کم ماشوم نس ناستی لري، که څه هم لږ وي",
+      "en": "a baby under 2 months has diarrhoea, even a little"
+    },
+    "ui.ask.baby-blood": {
+      "fa": "در مدفوعش خون است",
+      "ps": "په غایطه مواد کې یې وینه ده",
+      "en": "has blood in the stool"
+    },
+    "ui.ask.trapped": {
+      "fa": "زیر دیوار یا سقف گیر مانده بود، حتی اگر حالا خوب معلوم شود",
+      "ps": "د دېوال یا چت لاندې بند پاتې شوی و، که څه هم اوس روغ ښکاري",
+      "en": "was trapped under a wall or roof, even if they seem well now"
+    },
+    "ui.ask.placenta": {
+      "fa": "جفت (همراه) یک ساعت بعد از تولد طفل هنوز بیرون نیامده است",
+      "ps": "پرېوان (د ماشوم ځای) د ماشوم له زېږېدو یو ساعت وروسته لا نه دی وتلی",
+      "en": "the afterbirth has not come out 1 hour after the baby was born"
+    },
+    "ui.ask.snake": {
+      "fa": "مار گزیدگی، حتی اگر کوچک معلوم شود",
+      "ps": "د مار چیچل، که څه هم کوچنی ښکاري",
+      "en": "a snake bite, even if it looks small"
+    },
+    "ui.ask.tetanus": {
+      "fa": "زخم عمیق یا کثیف، و در ۵ سال گذشته واکسین تیتانوس نگرفته",
+      "ps": "ژور یا ککړ ټپ، او په تېرو ۵ کلونو کې یې د ټیټانوس واکسین نه دی اخیستی",
+      "en": "a deep or dirty wound, and no tetanus vaccine in the last 5 years"
+    },
+    "ui.ask.vaccine-red": {
+      "fa": "بعد از واکسین، اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+      "ps": "له واکسین وروسته، که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+      "en": "After a vaccine, go to hospital now, day or night, if the child:"
+    },
+    "ui.ask.vaccine-amber": {
+      "fa": "بعد از واکسین، اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+      "ps": "له واکسین وروسته، که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+      "en": "After a vaccine, go to the clinic today if the child:"
+    },
+    "ui.ask.vaccine-swell": {
+      "fa": "جای پیچکاری پندیده و بزرگ‌تر، سرخ و گرم می‌شود، یا چرک دارد",
+      "ps": "د پیچکارۍ ځای پړسېدلی، لویږي، سور او ګرم کېږي، یا زوه لري",
+      "en": "has a swelling where the injection was that grows, gets red and hot, or has pus"
+    },
+    "ui.ask.notbreathing.lead": {
+      "fa": "همین حالا کاری بکنید. کمک بخواهید و کسی را برای آوردن موتر بفرستید. اگر درست نفس نمی‌کشد، بزنید که کیست و فشار دادن سینه را شروع کنید.",
+      "ps": "همدا اوس کار وکړئ. مرسته وغواړئ او یو څوک د موټر لپاره ولېږئ. که سمه ساه نه اخلي، ووهئ چې څوک دی او د سینې فشار پیل کړئ.",
+      "en": "Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes."
+    },
+    "ui.ask.fever.lead": {
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. طفل کمتر از ۲ ماه که هر قدر تب دارد، همین حالا به شفاخانه برود.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. تر ۲ میاشتو کم ماشوم چې هر ډول تبه ولري، همدا اوس دې روغتون ته ولاړ شي.",
+      "en": "First look at the danger signs for the age of the sick person. A baby under 2 months with any fever must go to hospital now."
+    },
+    "ui.ask.cough.lead": {
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. نفس مشکل یا تیز همین امروز کمک لازم دارد.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. سخته یا چټکه ساه همدا نن مرستې ته اړتیا لري.",
+      "en": "First look at the danger signs for the age of the sick person. Hard or fast breathing needs help today."
+    },
+    "ui.ask.breathing.lead": {
+      "fa": "نفس تنگی می‌تواند زود جان بگیرد. علایم خطر را برای عمر مریض ببینید، بعد نفس‌ها را بشمارید.",
+      "ps": "ساه لنډي ژر وژونکې کېدای شي. د ناروغ د عمر لپاره د خطر نښې وګورئ، بیا ساه وشمېرئ.",
+      "en": "Hard breathing can kill fast. Look at the danger signs for the age of the sick person, then count the breaths."
+    },
+    "ui.ask.diarrhoea.lead": {
+      "fa": "اول علایم خطر را ببینید. بعد از هر اسهال او آر اس بدهید و غذا دادن را ادامه دهید.",
+      "ps": "لومړی د خطر نښې وګورئ. له هر نس ناستي وروسته او آر اس ورکړئ او خواړه ورکول دوام کړئ.",
+      "en": "First look at the danger signs. Then give ORS after every loose stool, and keep feeding."
+    },
+    "ui.ask.vomiting.lead": {
+      "fa": "اول علایم خطر را ببینید. بعد کم کم و بار بار جرعه‌های آب یا او آر اس بدهید.",
+      "ps": "لومړی د خطر نښې وګورئ. بیا لږ لږ او بیا بیا د اوبو یا او آر اس غوړپ ورکړئ.",
+      "en": "First look at the danger signs. Then give small sips of water or ORS, often."
+    },
+    "ui.ask.rash.lead": {
+      "fa": "اول علایم خطر را ببینید. لکه‌های تاریک با تب، یا پندیدگی روی و گلو، همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د خطر نښې وګورئ. له تبې سره تور داغونه، یا د مخ او ستوني پړسوب، همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs. Dark spots with fever, or a swollen face or throat, need the hospital now."
+    },
+    "ui.ask.sore.lead": {
+      "fa": "اول علایم خطر را ببینید. بعد زخم را با آب پاک و صابون بشویید و بپوشانید.",
+      "ps": "لومړی د خطر نښې وګورئ. بیا ټپ په پاکو اوبو او صابون ومینځئ او پټ یې کړئ.",
+      "en": "First look at the danger signs. Then wash the wound with clean water and soap, and cover it."
+    },
+    "ui.ask.pregnancy.lead": {
+      "fa": "این علایم در حاملگی و بعد از ولادت خطرناک است. اگر یکی را دیدید، همین حالا به شفاخانه بروید، شب باشد یا روز.",
+      "ps": "دا نښې په امیندوارۍ کې او له زېږون وروسته خطرناکې دي. که مو یوه ولیده، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+      "en": "These signs in pregnancy and after the birth mean danger. If you see one, go to hospital now, day or night."
+    },
+    "ui.ask.bleeding.lead": {
+      "fa": "همین حالا با یک تکهٔ پاک روی زخم محکم فشار بدهید. بعد علایم خطر را ببینید.",
+      "ps": "همدا اوس په یوه پاک ټوکر پر ټپ کلک فشار ورکړئ. بیا د خطر نښې وګورئ.",
+      "en": "Press hard on the wound now with a clean cloth. Then look at the danger signs."
+    },
+    "ui.ask.headache.lead": {
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. سردردی که ناگهان و خیلی شدید شروع شود، همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. هغه سر درد چې ناڅاپه او ډېر سخت پیل شي، همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs for the age of the sick person. A sudden, very bad headache needs the hospital now."
+    },
+    "ui.ask.chest.lead": {
+      "fa": "درد سینه می‌تواند از قلب یا شش‌ها باشد. اول علایم خطر را ببینید: بیشتر آنها یعنی همین حالا شفاخانه.",
+      "ps": "د سینې درد د زړه یا سږو له امله کېدای شي. لومړی د خطر نښې وګورئ: ډېری یې دا مانا لري چې همدا اوس روغتون.",
+      "en": "Chest pain can come from the heart or the lungs. Look at the danger signs first: most mean hospital now."
+    },
+    "ui.ask.belly.lead": {
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. درد شدید شکم همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. د نس سخت درد همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs for the age of the sick person. Severe belly pain needs the hospital now."
+    },
+    "ui.ask.back.lead": {
+      "fa": "کمردرد بعد از افتادن، یا با ضعف یا بی‌حسی پاها، همین حالا شفاخانه لازم دارد. اول علایم خطر را ببینید.",
+      "ps": "د ملا درد له لوېدو وروسته، یا د پښو له کمزورۍ یا بې‌حسۍ سره، همدا اوس روغتون ته اړتیا لري. لومړی د خطر نښې وګورئ.",
+      "en": "Back pain after a fall, or with weak or numb legs, needs the hospital now. First look at the danger signs."
+    },
+    "ui.ask.burn.lead": {
+      "fa": "همین حالا سوختگی را ۲۰ دقیقه زیر آب پاک و روان سرد کنید. بعد علایم خطر را ببینید.",
+      "ps": "همدا اوس سوځېدنه ۲۰ دقیقې د پاکو بهېدونکو اوبو لاندې سړه کړئ. بیا د خطر نښې وګورئ.",
+      "en": "Cool the burn under clean running water for 20 minutes now. Then look at the danger signs."
+    },
+    "ui.ask.fumes.lead": {
+      "fa": "همین حالا همه را به هوای تازه ببرید و دروازه‌ها را باز کنید. بعد علایم خطر را ببینید.",
+      "ps": "همدا اوس ټول تازه هوا ته وباسئ او دروازې پرانیزئ. بیا د خطر نښې وګورئ.",
+      "en": "Take everyone into fresh air now, and open the doors. Then look at the danger signs."
+    },
+    "ui.ask.bite.lead": {
+      "fa": "همین حالا جای گزیدگی را ۱۵ دقیقه با صابون و آب روان بشویید. بعد علایم خطر را ببینید.",
+      "ps": "همدا اوس د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ. بیا د خطر نښې وګورئ.",
+      "en": "Wash the bite with soap and running water for 15 minutes now. Then look at the danger signs."
+    },
+    "ui.ask.poison.lead": {
+      "fa": "او را استفراغ ندهید. علایم خطر را ببینید و همین حالا با ظرف زهر به شفاخانه بروید.",
+      "ps": "هغه ته کانګې مه ورکوئ. د خطر نښې وګورئ او همدا اوس د زهرو له لوښي سره روغتون ته ولاړ شئ.",
+      "en": "Do not make them vomit. Look at the danger signs and go to hospital now, with the poison container."
+    },
+    "ui.ask.fits.lead": {
+      "fa": "در وقت تشنج، شخص را از خطر دور نگه دارید و وقت را ببینید. بعد علایم خطر را ببینید.",
+      "ps": "د اختلاج پر مهال، کس له خطر لرې وساتئ او وخت وګورئ. بیا د خطر نښې وګورئ.",
+      "en": "During a fit, keep the person safe and note the time. Then look at the danger signs."
+    },
+    "ui.ask.newborn.lead": {
+      "fa": "نوزاد مریض می‌تواند خیلی زود بدتر شود. اگر یک علامت خطر را دیدید، همین حالا به شفاخانه بروید، شب باشد یا روز.",
+      "ps": "ناروغ نوی زېږېدلی ماشوم ډېر ژر خرابېدای شي. که مو د خطر یوه نښه ولیده، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+      "en": "A sick newborn can get worse very fast. If you see any danger sign, go to hospital now, day or night."
+    },
+    "ui.ask.feeding.lead": {
+      "fa": "اول علایم خطر را برای عمر طفل ببینید. طفلی که شیر خوردن را بس کرده، همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د ماشوم د عمر لپاره د خطر نښې وګورئ. هغه ماشوم چې شیدې یې پرېښې دي، همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs for the age of the child. A baby who has stopped feeding needs the hospital now."
+    },
+    "ui.ask.thin.lead": {
+      "fa": "اول علایم خطر را ببینید. پندیدگی هر دو پا، یا طفل خیلی لاغر که از ضعف نمی‌خورد، همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د خطر نښې وګورئ. د دواړو پښو پړسوب، یا ډېر ډنګر ماشوم چې له کمزورۍ نه خوري، همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs. Swelling of both feet, or a very thin child too weak to eat, needs the hospital now."
+    },
+    "ui.ask.yellow.lead": {
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. نوزادی که روز اول زرد شود، همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. هغه نوی زېږېدلی ماشوم چې په لومړۍ ورځ ژېړ شي، همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs for the age of the sick person. A newborn who turns yellow on the first day needs the hospital now."
+    },
+    "ui.ask.tired.lead": {
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. بعد برای معاینه به کلینیک بروید.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. بیا د معاینې لپاره کلینیک ته ولاړ شئ.",
+      "en": "First look at the danger signs for the age of the sick person. Then go to the clinic for a check."
+    },
+    "ui.ask.sugar.lead": {
+      "fa": "لرزه، عرق یا گیجی؟ اگر می‌تواند قورت بدهد، همین حالا بوره بدهید. بعد علایم خطر را ببینید.",
+      "ps": "لړزه، خوله یا ګډوډي؟ که تېرولی شي، همدا اوس بوره ورکړئ. بیا د خطر نښې وګورئ.",
+      "en": "Shaky, sweaty or confused? If they can swallow, give sugar now. Then look at the danger signs."
+    },
+    "ui.ask.pressure.lead": {
+      "fa": "فشار بلند خون اکثراً هیچ علامتی ندارد. اول علایم خطر را ببینید، و فشار را اندازه کنید.",
+      "ps": "د وینې لوړ فشار ډېری وخت هېڅ نښه نه لري. لومړی د خطر نښې وګورئ، او فشار اندازه کړئ.",
+      "en": "High blood pressure often has no signs. Look at the danger signs first, and get it measured."
+    },
+    "ui.ask.mind.lead": {
+      "fa": "اگر کسی از تمام کردن زندگی خود می‌گوید، پیش او بمانید و همین حالا کمک بخواهید. اول علایم خطر را ببینید.",
+      "ps": "که څوک د خپل ژوند د پای ته رسولو خبرې کوي، ورسره پاتې شئ او همدا اوس مرسته وغواړئ. لومړی د خطر نښې وګورئ.",
+      "en": "If someone talks of ending their life, stay with them and get help now. Look at the danger signs first."
+    },
+    "ui.ask.longcough.lead": {
+      "fa": "سرفهٔ ۲ هفته یا بیشتر در کلینیک معاینهٔ توبرکلوز لازم دارد. اول علایم خطر را ببینید.",
+      "ps": "۲ اونۍ یا ډېر ټوخی په کلینیک کې د نري رنځ ازموینې ته اړتیا لري. لومړی د خطر نښې وګورئ.",
+      "en": "A cough for 2 weeks or more needs a TB test at the clinic. Look at the danger signs first."
+    },
+    "ui.ask.animals.lead": {
+      "fa": "تب بعد از گزیدن کنه یا ذبح حیوان می‌تواند خطرناک باشد. اول علایم خطر را ببینید.",
+      "ps": "د کنې له چیچلو یا د څارویو له حلالولو وروسته تبه خطرناکه کېدای شي. لومړی د خطر نښې وګورئ.",
+      "en": "Fever after a tick bite or slaughtering can be dangerous. Look at the danger signs first."
+    },
+    "ui.ask.disaster.lead": {
+      "fa": "اول همه را به جای امن ببرید. بعد علایم خطر را ببینید و کمک‌های اولیه بدهید.",
+      "ps": "لومړی ټول خوندي ځای ته یوسئ. بیا د خطر نښې وګورئ او لومړنۍ مرسته وکړئ.",
+      "en": "First get everyone to a safe place. Then look at the danger signs and give first aid."
+    },
+    "ui.ask.vaccine.lead": {
+      "fa": "بعد از واکسین، علایم خطر را ببینید. درد جای پیچکاری یا تب خفیف برای یک یا دو روز معمول است.",
+      "ps": "له واکسین وروسته، د خطر نښې وګورئ. د پیچکارۍ د ځای درد یا لږه تبه د یوې یا دوو ورځو لپاره عادي ده.",
+      "en": "After a vaccine, look at the danger signs. A sore leg or a mild fever for a day or two is common."
+    },
+    "ui.ask.choking.lead": {
+      "fa": "نمی‌تواند سرفه کند، نفس بکشد یا گپ بزند؟ همین حالا کاری بکنید: بزنید که کیست.",
+      "ps": "نشي ټوخلی، ساه اخیستلی یا خبرې کولی؟ همدا اوس کار وکړئ: ووهئ چې څوک دی.",
+      "en": "Cannot cough, breathe or speak? Act now: tap who it is."
+    },
+    "ui.ask.safety.lead": {
+      "fa": "اگر طفل آسیب دیده، اول علایم خطر را ببینید. بعد کمک‌های اولیه بدهید.",
+      "ps": "که ماشوم ټپي شوی وي، لومړی د خطر نښې وګورئ. بیا لومړنۍ مرسته وکړئ.",
+      "en": "If a child is hurt, look at the danger signs first. Then give first aid."
+    },
+    "ui.ask.eyes.lead": {
+      "fa": "مواد کیمیاوی در چشم رفته؟ همین حالا ۲۰ دقیقه با آب پاک بشویید. بعد علایم خطر را ببینید.",
+      "ps": "کیمیاوي مواد سترګې ته ورغلي؟ همدا اوس ۲۰ دقیقې په پاکو اوبو یې ومینځئ. بیا د خطر نښې وګورئ.",
+      "en": "Chemical in the eye? Wash it with clean water for 20 minutes now. Then look at the danger signs."
+    },
+    "ui.ask.teeth.lead": {
+      "fa": "اول علایم خطر را ببینید. روی پندیده با تب همین حالا شفاخانه لازم دارد.",
+      "ps": "لومړی د خطر نښې وګورئ. له تبې سره پړسېدلی مخ همدا اوس روغتون ته اړتیا لري.",
+      "en": "First look at the danger signs. A swollen face with fever needs the hospital now."
+    }
+  }
+}

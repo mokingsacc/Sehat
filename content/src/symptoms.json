@@ -1,36 +1,41 @@
 {
-  "_note": "Offline symptom finder. Each entry: words people might say or type (Dari, Pashto, English), the picture icon, and the pages to open. Add words freely; matching ignores spelling marks. Order of \"go\": the danger and emergency pages first, then the others. Danger pages are marked red: the danger-sign pages (\"danger\" below), every page of the Emergency section, and an entry's own \"red\" list. Never a Home-tab page (Mo's rule: no medical advice from the Home side). \"ages\": pages for one age group only; when an entry's pages are for more than one group, each such card says who it is for. tools/validate.py checks all of this. Optional: say = an existing narration id with the same words as the label (its speaker reuses that recording; otherwise the label is narrated as ui.sym.<id>); pic = the tile picture, img/symptoms/<id>.webp, set by tools/symptom_pics.py (without it the tile shows the icon).",
+  "_note": "Offline symptom finder. Each entry: words people might say or type (Dari, Pashto, English), the picture icon, and its own page (\"page\", #/sym/<id>), danger first: the lead, who is sick (\"ages\": baby = under 2 months, child = 2 months to 5 years, older = over 5 or adult, pregnant, after = mother after the birth, anyone), then for that age the red \"hospital now\" box and the amber \"clinic today\" box. Boxes REUSE the alert lines of the pages (\"title\" and \"items\" are narration ids), so a sign has one wording and one recording; a sign written for these pages is a ui.ask.* line in ui-ask.json and names its icon. \"now\": first-aid pages shown as red rows (\"nowFirst\": before the red box, for not breathing and choking). \"tools\", \"care\" (steps and do-not boxes of the pages, by block id), \"pages\" (topics to read): by age, or \"all\". \"sources\" are keys of the sources table below, shown under the page; \"_notes\" say where each sign comes from (WHO IMCI, PCPNC, IMAI, BEC, mhGAP ...). Never a Home-tab page. \"danger\": the danger-sign pages, shown red when typed words find nothing. tools/validate.py checks all of this. Optional: say = an existing narration id with the same words as the label; pic = the tile picture, img/symptoms/<id>.webp, set by tools/symptom_pics.py (without it the tile and its page show the icon).",
   "danger": [
     "danger-child",
     "red-flags",
     "pregnancy-danger"
   ],
-  "ages": {
-    "child": [
-      "danger-child",
-      "fever",
-      "cough",
-      "diarrhoea",
-      "measles",
-      "newborn",
-      "breastfeeding",
-      "growth",
-      "malnutrition",
-      "worms",
-      "fever-fits",
-      "reading-muac"
-    ],
-    "adult": [
-      "red-flags",
-      "pneumonia-adult",
-      "diarrhoea-adult"
-    ],
-    "pregnant": [
-      "pregnancy-danger",
-      "pregnancy-care",
-      "after-birth",
-      "birth-plan"
-    ]
+  "sources": {
+    "IMCI": "WHO IMCI Chart Booklet (2014): general danger signs, cough or difficult breathing, diarrhoea, fever, ear, malnutrition, sick young infant up to 2 months",
+    "ICCM": "WHO/UNICEF Caring for the sick child in the community (iCCM, 2011; chart booklet 2014): refer for chest indrawing",
+    "PB": "WHO Pocket Book of Hospital Care for Children (2nd edition, 2013): emergency and priority signs",
+    "PCPNC": "WHO Pregnancy, Childbirth, Postpartum and Newborn Care: a guide for essential practice (PCPNC, 3rd edition, 2015): danger signs",
+    "PNC": "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022); WHO/UNICEF Caring for the newborn at home (2015)",
+    "IMAI": "WHO IMAI Acute Care (2009) and IMAI District Clinician Manual (2011): adolescents and adults",
+    "BEC": "WHO/ICRC Basic Emergency Care: approach to the acutely ill and injured (2018)",
+    "MHGAP": "WHO mhGAP Intervention Guide 2.0 (2016): self-harm and suicide, depression, epilepsy",
+    "PEN": "WHO HEARTS technical package (2018) and WHO PEN interventions (2020): hypertension, diabetes, heart attack and stroke signs",
+    "LBP": "WHO guideline for non-surgical management of chronic primary low back pain in adults (2023): red flags for serious causes",
+    "IIP": "WHO Immunization in Practice (2015): adverse events following immunization",
+    "RAB": "WHO rabies position paper (2018): wound washing and post-exposure vaccine",
+    "SNAKE": "WHO Guidelines for the management of snakebites (2nd edition, 2016)",
+    "TB": "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021)",
+    "MAL": "WHO Guidelines for malaria (2023): severe malaria",
+    "TYPH": "WHO typhoid fact sheet (2023)",
+    "HEP": "WHO hepatitis A, B and E fact sheets (2023)",
+    "CRUSH": "WHO/PAHO guidance on crush injury and crush syndrome after earthquakes: anyone trapped under rubble needs hospital care, even if they seem well",
+    "CCHF": "WHO Crimean-Congo haemorrhagic fever fact sheet (2022)",
+    "DENGUE": "WHO Dengue: guidelines for diagnosis, treatment, prevention and control (2009): warning signs",
+    "MEAS": "WHO measles fact sheet (2024)",
+    "BURN": "WHO burns fact sheet (2023)",
+    "CO": "WHO guidelines for indoor air quality: selected pollutants (2010): carbon monoxide",
+    "EYE": "WHO Primary Eye Care Training Manual (2018)",
+    "DENT": "WHO oral health fact sheet (2023)",
+    "TET": "WHO tetanus vaccines position paper (2017): care of wounds",
+    "HEAT": "WHO heat and health fact sheet (2024)",
+    "ANAEM": "WHO Nutritional anaemias: tools for effective prevention and control (2017)",
+    "MALN": "WHO guideline: updates on the management of severe acute malnutrition in infants and children (2013)",
+    "CHOKE": "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking, CPR (first-aid actions only; the signs are from WHO BEC)"
   },
   "symptoms": [
     {
@@ -66,13 +71,46 @@
           "not moving"
         ]
       },
-      "go": [
-        "unconscious",
-        "cpr-adult",
-        "cpr-child",
-        "cpr-baby",
-        "cpr-newborn"
-      ]
+      "page": {
+        "lead": "ui.ask.notbreathing.lead",
+        "ages": [
+          "anyone"
+        ],
+        "cpr": true,
+        "nowFirst": true,
+        "now": {
+          "all": [
+            "unconscious"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "unconscious.urgent",
+            "items": [
+              "unconscious.urgent.not-waking",
+              "unconscious.urgent.fainted",
+              "unconscious.urgent.confused",
+              "cpr-adult.urgent.woke"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "first-aid",
+            "seizures",
+            "drowning"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "CHOKE",
+          "IMCI"
+        ],
+        "_notes": [
+          "Red: unconscious or not waking, fainted and not waking, confused, woke after chest pushes: WHO/ICRC BEC (2018) 'unresponsive / altered mental status' = emergency.",
+          "CPR pages by age are the existing CPR pages (IFRC 2020 first aid actions)."
+        ]
+      }
     },
     {
       "id": "fever",
@@ -103,16 +141,162 @@
           "shivering"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "pregnancy-danger",
-        "fever",
-        "measles",
-        "malaria",
-        "typhoid",
-        "dengue"
-      ]
+      "page": {
+        "lead": "ui.ask.fever.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older",
+          "pregnant"
+        ],
+        "default": "child",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.temperature",
+              "danger-child.young.feed",
+              "danger-child.young.move",
+              "danger-child.young.convulsion",
+              "danger-child.young.breathing",
+              "danger-child.young.chest"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "danger-child.urgent.drink",
+              "danger-child.urgent.vomit",
+              "danger-child.urgent.convulsion",
+              "danger-child.urgent.sleepy",
+              "fever.urgent.neck",
+              "fever.urgent.rash",
+              "danger-child.urgent.breathing",
+              "danger-child.urgent.chest"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "red-flags.urgent.fever-neck",
+              "red-flags.urgent.confused",
+              "malaria.urgent.drink",
+              "malaria.urgent.breathing",
+              "malaria.urgent.yellow",
+              "animal-illness.urgent.bleeding",
+              "typhoid.urgent.belly"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.fever-weak",
+              "pregnancy-danger.urgent.breathing",
+              "pregnancy-danger.urgent.fits",
+              "pregnancy-danger.urgent.belly-pain",
+              "pregnancy-danger.urgent.movement",
+              "after-birth.urgent.fever-discharge"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "fever.soon.days",
+              {
+                "id": "ui.ask.fast-child",
+                "icon": "breathing-fast"
+              },
+              "fever.soon.measles",
+              "fever.soon.ear",
+              "fever.soon.throat",
+              "fever.soon.urine"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "typhoid.soon.days",
+              "malaria.soon.shiver",
+              "malaria.soon.returns",
+              "pneumonia-adult.soon.days",
+              "urine-infection.soon.burning",
+              "tb.soon.fever"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.soon",
+            "items": [
+              "pregnancy-danger.soon.fever",
+              "pregnancy-danger.soon.urine",
+              "pregnancy-danger.soon.ill"
+            ]
+          }
+        },
+        "tools": {
+          "child": [
+            "breaths"
+          ]
+        },
+        "care": {
+          "baby": [
+            "danger-child.breastfeed"
+          ],
+          "child": [
+            "fever.fluids",
+            "fever.clothes",
+            "fever.medicine"
+          ],
+          "older": [
+            "typhoid.fluids"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "danger-child",
+            "newborn",
+            "reading-temp"
+          ],
+          "child": [
+            "fever",
+            "malaria",
+            "measles",
+            "reading-temp"
+          ],
+          "older": [
+            "malaria",
+            "typhoid",
+            "animal-illness",
+            "heat-stroke",
+            "cold-hypothermia",
+            "dengue",
+            "reading-temp"
+          ],
+          "pregnant": [
+            "pregnancy-danger",
+            "malaria",
+            "urine-infection"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "MAL",
+          "TYPH",
+          "CCHF",
+          "PCPNC",
+          "IMAI",
+          "HEAT"
+        ],
+        "_notes": [
+          "Baby red: fever or low temperature, not feeding well, moves only when stimulated, convulsions, fast breathing 60+, severe chest indrawing: IMCI 2014 sick young infant (possible serious bacterial infection). Mo's decision: any fever under 2 months = hospital now.",
+          "Child red: IMCI general danger signs (cannot drink, vomits everything, convulsions, lethargic/unconscious) and stiff neck (very severe febrile disease); purple or dark spots and struggling to breathe or noisy breathing when calm: WHO Pocket Book 2013 emergency/priority signs (petechial rash, respiratory distress) and IMCI stridor in a calm child; chest indrawing RED by Mo's default (iCCM refers; IMCI 2014 facility chart gives oral amoxicillin). Added after medical audit 2026-10-08 CH1 (IMCI When to return immediately: fast or difficult breathing).",
+          "Child amber: fever more than 2 days (app's existing line; IMCI refers fever 7+ days: Mo to confirm), fast breathing (IMCI pneumonia, clinic today by Mo's default), measles rash, ear pain or pus (IMCI ear problem), sore throat (WHO Pocket Book), pain passing urine (WHO Pocket Book UTI).",
+          "Older red: WHO IMAI acute care danger signs; malaria items: WHO malaria guidelines 2023 severe malaria (impaired consciousness, unable to drink, respiratory distress, jaundice); fever with bleeding: WHO CCHF fact sheet; fever with severe belly pain: WHO typhoid (perforation).",
+          "Pregnant: WHO PCPNC danger signs (fever and too weak to get out of bed, fast or difficult breathing, convulsions, severe abdominal pain, baby moving less; postpartum fever with foul discharge)."
+        ]
+      }
     },
     {
       "id": "cough",
@@ -145,14 +329,129 @@
           "runny nose"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "cough",
-        "pneumonia-adult",
-        "tb",
-        "asthma"
-      ]
+      "page": {
+        "lead": "ui.ask.cough.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older"
+        ],
+        "default": "child",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.breathing",
+              "danger-child.young.chest",
+              "danger-child.young.feed",
+              "danger-child.young.temperature",
+              "danger-child.young.move",
+              "danger-child.young.convulsion"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "cough.urgent.chest",
+              "cough.urgent.noise",
+              "cough.urgent.drink",
+              "cough.urgent.sleepy",
+              "cough.urgent.convulsion",
+              "danger-child.urgent.vomit",
+              "danger-child.breath.blue"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "pneumonia-adult.urgent.breathing",
+              "pneumonia-adult.urgent.blue",
+              "pneumonia-adult.urgent.confused",
+              "pneumonia-adult.urgent.chest",
+              "pneumonia-adult.urgent.blood",
+              "pneumonia-adult.urgent.fever"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              {
+                "id": "ui.ask.fast-child",
+                "icon": "breathing-fast"
+              },
+              "cough.soon.long",
+              "cough.soon.wheeze",
+              "cough.soon.fever",
+              "cough.soon.worse",
+              "cough.soon.whoop"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "pneumonia-adult.soon.days",
+              "pneumonia-adult.soon.sputum",
+              "pneumonia-adult.soon.elderly",
+              "pneumonia-adult.soon.weeks",
+              "asthma.soon.wheeze"
+            ]
+          }
+        },
+        "tools": {
+          "baby": [
+            "breaths"
+          ],
+          "child": [
+            "breaths"
+          ]
+        },
+        "care": {
+          "baby": [
+            "danger-child.breastfeed",
+            "danger-child.warm"
+          ],
+          "child": [
+            "cough.feed",
+            "cough.soothe",
+            "cough.dont"
+          ],
+          "older": [
+            "pneumonia-adult.home",
+            "pneumonia-adult.dont"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "danger-child",
+            "newborn"
+          ],
+          "child": [
+            "cough",
+            "asthma",
+            "tb"
+          ],
+          "older": [
+            "pneumonia-adult",
+            "tb",
+            "asthma"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "ICCM",
+          "PB",
+          "IMAI",
+          "TB"
+        ],
+        "_notes": [
+          "Baby red: IMCI 2014 sick young infant: fast breathing 60+, severe chest indrawing, not feeding well, fever or low temperature, movement only when stimulated, convulsions.",
+          "Child red: IMCI general danger signs and stridor in a calm child (severe pneumonia or very severe disease); chest indrawing RED by Mo's default (iCCM refers chest indrawing; the IMCI 2014 facility chart treats it as pneumonia with oral amoxicillin); blue lips (central cyanosis): WHO Pocket Book 2013.",
+          "Child amber: fast breathing alone = clinic today (IMCI pneumonia: 50+ at 2-12 months, 40+ at 1-5 years); cough 14+ days (IMCI: assess for TB); wheeze (IMCI/Pocket Book); fever more than 2 days (app's existing line, Mo to confirm); not getting better; whooping cough (Pocket Book).",
+          "Older: WHO IMAI acute care: respiratory distress, cyanosis, confusion, chest pain with breathlessness, haemoptysis, high fever with rigors = refer; cough 2+ weeks = TB screen (WHO TB Module 2, 2021)."
+        ]
+      }
     },
     {
       "id": "breathing",
@@ -185,15 +484,119 @@
           "wheeze"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "asthma-attack",
-        "allergy-severe",
-        "cough",
-        "pneumonia-adult",
-        "asthma"
-      ]
+      "page": {
+        "lead": "ui.ask.breathing.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older"
+        ],
+        "default": "child",
+        "now": {
+          "all": [
+            "asthma-attack",
+            "allergy-severe",
+            "choking"
+          ]
+        },
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.breathing",
+              "danger-child.young.chest",
+              "danger-child.breath.grunt",
+              "danger-child.breath.blue",
+              "danger-child.young.feed",
+              "danger-child.young.move"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "danger-child.urgent.breathing",
+              "cough.urgent.chest",
+              "cough.urgent.noise",
+              "danger-child.breath.blue",
+              "danger-child.breath.grunt",
+              "cough.urgent.sleepy",
+              "cough.urgent.drink"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "pneumonia-adult.urgent.breathing",
+              "pneumonia-adult.urgent.blue",
+              "pneumonia-adult.urgent.confused",
+              "pneumonia-adult.urgent.chest",
+              "asthma.urgent.reliever",
+              "allergy-severe.urgent.swelling"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              {
+                "id": "ui.ask.fast-child",
+                "icon": "breathing-fast"
+              },
+              "cough.soon.wheeze",
+              "cough.soon.fever",
+              "cough.soon.worse"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "asthma.soon.wheeze",
+              "asthma.soon.effort",
+              "pneumonia-adult.soon.days",
+              "anaemia.soon.breathless-rest",
+              "pneumonia-adult.soon.weeks"
+            ]
+          }
+        },
+        "tools": {
+          "baby": [
+            "breaths"
+          ],
+          "child": [
+            "breaths"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "danger-child",
+            "newborn"
+          ],
+          "child": [
+            "cough",
+            "asthma",
+            "danger-child"
+          ],
+          "older": [
+            "pneumonia-adult",
+            "asthma",
+            "reading-spo2",
+            "anaemia"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "ICCM",
+          "PB",
+          "IMAI",
+          "BEC"
+        ],
+        "_notes": [
+          "Baby and child: as Cough (IMCI 2014, iCCM chest indrawing, Pocket Book 2013 grunting and central cyanosis).",
+          "Older: WHO IMAI and BEC: respiratory distress, cyanosis, altered mental status, chest pain with breathlessness; asthma not helped by the reliever and swelling of the lips, tongue or throat (anaphylaxis): WHO BEC 2018.",
+          "Older amber: recurrent wheeze, breathless on effort (IMAI chronic respiratory), breathless at rest (anaemia, WHO 2017), cough with fever more than 2 days, cough 2+ weeks (TB)."
+        ]
+      }
     },
     {
       "id": "diarrhoea",
@@ -224,13 +627,132 @@
           "runs"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "diarrhoea",
-        "diarrhoea-adult",
-        "hygiene"
-      ]
+      "page": {
+        "lead": "ui.ask.diarrhoea.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older"
+        ],
+        "default": "child",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.feed",
+              "danger-child.young.move",
+              "danger-child.dry.eyes",
+              {
+                "id": "ui.ask.baby-blood",
+                "icon": "stool-blood"
+              },
+              "danger-child.young.temperature",
+              "danger-child.young.convulsion"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "diarrhoea.urgent.drink",
+              "diarrhoea.urgent.vomit",
+              "diarrhoea.urgent.sleepy",
+              "danger-child.dry.eyes",
+              "danger-child.urgent.convulsion"
+            ]
+          },
+          "older": {
+            "title": "diarrhoea-adult.urgent",
+            "items": [
+              "diarrhoea-adult.urgent.drink",
+              "diarrhoea-adult.urgent.weak",
+              "diarrhoea-adult.urgent.rice",
+              "diarrhoea-adult.urgent.urine",
+              "diarrhoea-adult.urgent.risk"
+            ]
+          }
+        },
+        "amber": {
+          "baby": {
+            "title": "newborn.soon",
+            "items": [
+              {
+                "id": "ui.ask.baby-diarrhoea",
+                "icon": "baby"
+              },
+              {
+                "id": "ui.ask.thirsty",
+                "icon": "eye-sunken"
+              }
+            ]
+          },
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              {
+                "id": "ui.ask.thirsty",
+                "icon": "eye-sunken"
+              },
+              "danger-child.soon.blood",
+              "diarrhoea.soon.long",
+              "diarrhoea.soon.fever",
+              "diarrhoea.soon.worse"
+            ]
+          },
+          "older": {
+            "title": "diarrhoea-adult.soon",
+            "items": [
+              "diarrhoea-adult.soon.blood",
+              "diarrhoea-adult.soon.fever",
+              "diarrhoea-adult.soon.days",
+              "diarrhoea-adult.soon.pain"
+            ]
+          }
+        },
+        "care": {
+          "baby": [
+            "diarrhoea.feed"
+          ],
+          "child": [
+            "diarrhoea.give",
+            "diarrhoea.zinc",
+            "diarrhoea.feed",
+            "diarrhoea.dont"
+          ],
+          "older": [
+            "diarrhoea-adult.ors",
+            "diarrhoea-adult.fluids",
+            "diarrhoea-adult.dont"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "diarrhoea",
+            "newborn"
+          ],
+          "child": [
+            "diarrhoea",
+            "danger-child",
+            "hygiene"
+          ],
+          "older": [
+            "diarrhoea-adult",
+            "typhoid",
+            "hygiene"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "IMAI"
+        ],
+        "_notes": [
+          "Child red: IMCI general danger signs (not able to drink, vomits everything, lethargic or unconscious, convulsions) and severe dehydration (sunken eyes with lethargy or not able to drink).",
+          "Child amber: IMCI some dehydration (restless, irritable; sunken eyes; drinks eagerly, thirsty) = clinic today. This tile follows IMCI (two signs for severe dehydration; audit CH7). The Diarrhoea topic page still lists 'sunken eyes' alone as hospital now: main to align it.",
+          "Child amber: blood in stool (IMCI dysentery), 14 days or more (IMCI persistent diarrhoea), fever, not getting better (IMCI mother's card: return if).",
+          "Baby (under 2 months): IMCI 2014 sick young infant: not feeding well, movement only when stimulated, fever or low temperature, convulsions, severe dehydration, and blood in the stool (urgent referral) = hospital now; any diarrhoea or some dehydration = clinic today (IMCI treats young-infant dehydration at the facility; the IMCI zinc table starts at 2 months), so no home ORS or zinc step at this age, only keep breastfeeding. Medical audit 2026-10-08 CH3.",
+          "Older: WHO IMAI: severe dehydration, cholera-like stool, no urine, at-risk adults; blood in stool, fever, more than 3 days, severe pain: clinic today."
+        ]
+      }
     },
     {
       "id": "vomiting",
@@ -259,13 +781,135 @@
           "nausea"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "pregnancy-danger",
-        "diarrhoea",
-        "diarrhoea-adult"
-      ]
+      "page": {
+        "lead": "ui.ask.vomiting.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older",
+          "pregnant"
+        ],
+        "default": "child",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.feed",
+              "danger-child.young.move",
+              "danger-child.young.temperature",
+              "danger-child.young.convulsion"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "danger-child.urgent.vomit",
+              "danger-child.urgent.drink",
+              "danger-child.urgent.sleepy",
+              "danger-child.urgent.convulsion",
+              "fever.urgent.neck",
+              "danger-child.dry.eyes",
+              "worms.urgent.belly"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "diarrhoea-adult.urgent.drink",
+              "red-flags.urgent.blood-vomit",
+              "red-flags.urgent.belly-pain",
+              "red-flags.urgent.confused",
+              "red-flags.urgent.fever-neck",
+              "fumes-poisoning.urgent.headache"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.headache",
+              "pregnancy-danger.urgent.belly-pain",
+              "pregnancy-danger.urgent.fever-weak",
+              "pregnancy-danger.urgent.bleeding",
+              "pregnancy-danger.urgent.fits"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              {
+                "id": "ui.ask.thirsty",
+                "icon": "eye-sunken"
+              },
+              "danger-child.soon.drinking",
+              "danger-child.soon.fever",
+              "danger-child.soon.worse",
+              "danger-child.soon.blood"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "hepatitis.soon.yellow",
+              "diarrhoea-adult.soon.fever",
+              "diarrhoea-adult.soon.blood",
+              "typhoid.soon.days"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.soon",
+            "items": [
+              "pregnancy-danger.soon.ill",
+              "pregnancy-danger.soon.fever",
+              "pregnancy-danger.soon.urine"
+            ]
+          }
+        },
+        "care": {
+          "baby": [
+            "diarrhoea.feed"
+          ],
+          "child": [
+            "diarrhoea.vomit",
+            "diarrhoea.feed"
+          ],
+          "older": [
+            "diarrhoea-adult.ors"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "danger-child",
+            "newborn"
+          ],
+          "child": [
+            "diarrhoea",
+            "danger-child"
+          ],
+          "older": [
+            "diarrhoea-adult",
+            "hepatitis",
+            "red-flags"
+          ],
+          "pregnant": [
+            "pregnancy-danger",
+            "pregnancy-care"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "IMAI",
+          "PCPNC",
+          "CO"
+        ],
+        "_notes": [
+          "Child red: IMCI general danger signs (vomits everything, not able to drink, lethargic, convulsions), stiff neck (very severe febrile disease), severe dehydration; hard swollen belly with pain: WHO Pocket Book (surgical abdomen).",
+          "Older: WHO IMAI: unable to drink or vomiting everything, haematemesis, severe abdominal pain, altered consciousness, neck stiffness; vomiting near a fire or heater: WHO indoor air quality (carbon monoxide).",
+          "Pregnant: PCPNC danger signs (severe headache, severe abdominal pain, fever too weak to get up, bleeding, convulsions)."
+        ]
+      }
     },
     {
       "id": "rash",
@@ -295,14 +939,119 @@
           "itch"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "measles",
-        "scabies",
-        "leishmaniasis",
-        "fever"
-      ]
+      "page": {
+        "lead": "ui.ask.rash.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older"
+        ],
+        "default": "child",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.temperature",
+              "danger-child.young.feed",
+              "danger-child.young.move",
+              "newborn.urgent.cord-skin"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "fever.urgent.rash",
+              "danger-child.skin.rash",
+              "danger-child.urgent.breathing",
+              "danger-child.urgent.chest",
+              "measles.urgent.cloudy-eye",
+              "measles.urgent.mouth",
+              "danger-child.urgent.drink",
+              "allergy-severe.urgent.swelling"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "red-flags.urgent.fever-neck",
+              "allergy-severe.urgent.swelling",
+              "allergy-severe.urgent.rash",
+              "dengue.urgent.spots",
+              "animal-illness.urgent.bleeding",
+              "scabies.urgent.spread"
+            ]
+          }
+        },
+        "amber": {
+          "baby": {
+            "title": "newborn.soon",
+            "items": [
+              "newborn.soon.skin",
+              "newborn.soon.cord"
+            ]
+          },
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "fever.soon.measles",
+              {
+                "id": "ui.ask.fast-child",
+                "icon": "breathing-fast"
+              },
+              "measles.soon.pus",
+              "scabies.soon.pus",
+              "scabies.soon.itch"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "scabies.soon.itch",
+              "scabies.soon.pus",
+              "hospital-stay.soon.rash",
+              "leishmaniasis.soon.not-healing"
+            ]
+          }
+        },
+        "tools": {
+          "child": [
+            "breaths"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "newborn",
+            "danger-child"
+          ],
+          "child": [
+            "measles",
+            "scabies",
+            "fever",
+            "leishmaniasis"
+          ],
+          "older": [
+            "scabies",
+            "leishmaniasis",
+            "allergy-severe",
+            "dengue"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "MEAS",
+          "PNC",
+          "BEC",
+          "DENGUE",
+          "CCHF"
+        ],
+        "_notes": [
+          "Child red: petechial or purpuric rash (WHO Pocket Book 2013, meningococcal disease); severe complicated measles: clouding of the cornea, deep or extensive mouth ulcers, not able to drink (IMCI 2014 measles); struggling or noisy breathing and chest indrawing as on Cough (IMCI; chest indrawing RED by Mo's default); swelling of lips, tongue or throat (WHO BEC anaphylaxis).",
+          "Child amber: fast breathing alone = clinic today (IMCI pneumonia, with or without measles; audit CH6: the Measles page measles.urgent.breathing still says hospital, main to align), measles (fever with generalized rash), pus from the eyes (IMCI measles with eye complications), skin infection and scabies (WHO Pocket Book skin chapter).",
+          "Baby: IMCI 2014 young infant: umbilicus redness extending to the skin = possible serious bacterial infection; skin pustules and red umbilicus = local bacterial infection (clinic).",
+          "Older: neck stiffness with fever and dark rash (IMAI meningitis), anaphylaxis (BEC), dengue warning signs, CCHF bleeding, cellulitis with fever (IMAI)."
+        ]
+      }
     },
     {
       "id": "sore",
@@ -335,11 +1084,65 @@
           "leishmaniasis"
         ]
       },
-      "go": [
-        "first-aid",
-        "leishmaniasis",
-        "diabetes"
-      ]
+      "page": {
+        "lead": "ui.ask.sore.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "bleeding"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "first-aid.urgent",
+            "items": [
+              "first-aid.urgent.bleeding",
+              "bleeding.urgent.deep",
+              "bleeding.urgent.object",
+              "scabies.urgent.spread",
+              "diabetes.urgent.foot-wound",
+              "dog-bite.urgent.deep"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "hospital-stay.soon.wound",
+              {
+                "id": "ui.ask.tetanus",
+                "icon": "syringe"
+              },
+              "dog-bite.soon.any",
+              "leishmaniasis.soon.not-healing",
+              "leishmaniasis.soon-infected.fever"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "first-aid",
+            "leishmaniasis",
+            "diabetes",
+            "burns",
+            "dog-bite"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "TET",
+          "RAB",
+          "PEN",
+          "IMAI"
+        ],
+        "_notes": [
+          "Red: uncontrolled bleeding, deep wounds of neck, chest or belly, impaled objects (WHO BEC 2018 trauma); spreading redness with fever (IMAI cellulitis); infected or black diabetic foot (WHO PEN); deep or many bites or on the head, neck or hands (WHO rabies category III).",
+          "Amber: infected wound (IMAI), tetanus booster for a dirty or deep wound if the last dose was more than 5 years ago (WHO tetanus position paper 2017), any animal bite (WHO rabies), sore not healed after 2 weeks or with fever (leishmaniasis page)."
+        ]
+      }
     },
     {
       "id": "pregnancy",
@@ -373,11 +1176,91 @@
           "baby moving"
         ]
       },
-      "go": [
-        "pregnancy-danger",
-        "pregnancy-care",
-        "after-birth"
-      ]
+      "page": {
+        "lead": "ui.ask.pregnancy.lead",
+        "ages": [
+          "pregnant",
+          "after"
+        ],
+        "default": "pregnant",
+        "red": {
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.bleeding",
+              "pregnancy-danger.urgent.fits",
+              "pregnancy-danger.urgent.headache",
+              "pregnancy-danger.urgent.fever-weak",
+              "pregnancy-danger.urgent.belly-pain",
+              "pregnancy-danger.urgent.breathing",
+              "pregnancy-danger.urgent.movement"
+            ]
+          },
+          "after": {
+            "title": "after-birth.urgent",
+            "items": [
+              "after-birth.urgent.bleeding",
+              {
+                "id": "ui.ask.placenta",
+                "icon": "midwife"
+              },
+              "after-birth.urgent.fits",
+              "pregnancy-danger.urgent.fever-weak",
+              "pregnancy-danger.urgent.belly-pain",
+              "after-birth.urgent.headache",
+              "after-birth.urgent.breathing",
+              "after-birth.urgent.fever-discharge",
+              "after-birth.urgent.calf",
+              "after-birth.urgent.harm"
+            ]
+          }
+        },
+        "amber": {
+          "pregnant": {
+            "title": "pregnancy-danger.soon",
+            "items": [
+              "pregnancy-danger.soon.fever",
+              "pregnancy-danger.soon.belly-pain",
+              "pregnancy-danger.soon.ill",
+              "pregnancy-danger.soon.swelling",
+              "pregnancy-danger.soon.waters",
+              "pregnancy-danger.soon.urine"
+            ]
+          },
+          "after": {
+            "title": "after-birth.soon",
+            "items": [
+              "after-birth.soon.wound",
+              "after-birth.soon.breast",
+              "after-birth.soon.urine",
+              "after-birth.soon.sad"
+            ]
+          }
+        },
+        "pages": {
+          "pregnant": [
+            "pregnancy-danger",
+            "pregnancy-care",
+            "birth-plan",
+            "reading-bp"
+          ],
+          "after": [
+            "after-birth",
+            "newborn",
+            "breastfeeding"
+          ]
+        },
+        "sources": [
+          "PCPNC",
+          "PNC",
+          "MHGAP"
+        ],
+        "_notes": [
+          "All red and amber signs are the WHO PCPNC danger signs as already on the pregnancy and after-birth pages (vaginal bleeding, convulsions, severe headache with blurred vision, fever too weak to get up, severe abdominal pain, fast or difficult breathing, reduced fetal movement; postpartum: heavy bleeding, foul discharge, painful swollen calf, thoughts of harming self or baby (mhGAP)).",
+          "After birth (medical audit 2026-10-08 MA1, MA2): fever and too weak to get out of bed, severe belly pain (PCPNC 3rd ed. 2015 postpartum danger signs; UNICEF/WHO Facts for Life), and the placenta not delivered 1 hour after the baby (PCPNC B12: manual removal needs skilled care) added to the red box.",
+          "Amber: PCPNC 'go to the health centre as soon as possible' signs (fever, abdominal pain, feeling ill, swelling of fingers, face or legs, waters break without labour, burning urine; postpartum wound, breast, urine and low mood)."
+        ]
+      }
     },
     {
       "id": "bleeding",
@@ -404,13 +1287,75 @@
           "bleed"
         ]
       },
-      "go": [
-        "bleeding",
-        "pregnancy-danger",
-        "red-flags",
-        "nosebleed",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.bleeding.lead",
+        "ages": [
+          "anyone",
+          "pregnant"
+        ],
+        "default": "anyone",
+        "now": {
+          "anyone": [
+            "bleeding",
+            "nosebleed"
+          ]
+        },
+        "red": {
+          "anyone": {
+            "title": "bleeding.urgent",
+            "items": [
+              "bleeding.urgent.not-stopping",
+              "bleeding.urgent.spurting",
+              "bleeding.urgent.shock",
+              "bleeding.urgent.deep",
+              "red-flags.urgent.blood-vomit",
+              "pneumonia-adult.urgent.blood",
+              "animal-illness.urgent.bleeding"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.bleeding",
+              "after-birth.urgent.bleeding",
+              "pregnancy-danger.urgent.belly-pain",
+              "pregnancy-danger.urgent.fits"
+            ]
+          }
+        },
+        "amber": {
+          "anyone": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "diarrhoea-adult.soon.blood",
+              "urine-infection.soon.blood",
+              "nosebleed.soon.again"
+            ]
+          }
+        },
+        "pages": {
+          "anyone": [
+            "bleeding",
+            "nosebleed",
+            "first-aid"
+          ],
+          "pregnant": [
+            "pregnancy-danger",
+            "after-birth"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "PCPNC",
+          "IMAI",
+          "CCHF"
+        ],
+        "_notes": [
+          "Red: WHO BEC 2018 haemorrhage and shock (bleeding not controlled by pressure, spurting, pale, cold, sweaty or confused, deep wounds of trunk or neck); haematemesis or melaena and haemoptysis (IMAI); fever with bleeding (WHO CCHF).",
+          "Pregnant: PCPNC vaginal bleeding in pregnancy and heavy bleeding after birth = emergency.",
+          "Amber: blood in stool or urine (IMAI / IMCI dysentery), repeated nosebleeds (nosebleed page)."
+        ]
+      }
     },
     {
       "id": "headache",
@@ -439,12 +1384,268 @@
           "dizziness"
         ]
       },
-      "go": [
-        "red-flags",
-        "pregnancy-danger",
-        "fumes-poisoning",
-        "blood-pressure"
-      ]
+      "page": {
+        "lead": "ui.ask.headache.lead",
+        "ages": [
+          "child",
+          "older",
+          "pregnant"
+        ],
+        "default": "older",
+        "red": {
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "fever.urgent.neck",
+              "danger-child.urgent.sleepy",
+              "danger-child.urgent.convulsion",
+              "danger-child.urgent.vomit",
+              "fever.urgent.rash",
+              "first-aid.urgent.head",
+              "fumes-poisoning.urgent.headache"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "red-flags.urgent.headache",
+              "red-flags.urgent.fever-neck",
+              "red-flags.urgent.stroke",
+              "red-flags.urgent.confused",
+              "blood-pressure.urgent.headache",
+              "first-aid.urgent.head",
+              "fumes-poisoning.urgent.headache"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.headache",
+              "pregnancy-danger.urgent.fits",
+              "after-birth.urgent.headache",
+              "fumes-poisoning.urgent.headache"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "danger-child.soon.fever",
+              "malaria.soon.shiver"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "malaria.soon.shiver",
+              "dengue.soon.fever"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.soon",
+            "items": [
+              "pregnancy-danger.soon.swelling",
+              "pregnancy-danger.soon.fever",
+              "pregnancy-danger.soon.ill"
+            ]
+          }
+        },
+        "pages": {
+          "child": [
+            "danger-child",
+            "fever",
+            "fumes-poisoning"
+          ],
+          "older": [
+            "red-flags",
+            "blood-pressure",
+            "reading-bp",
+            "fumes-poisoning",
+            "heat-stroke",
+            "stress"
+          ],
+          "pregnant": [
+            "pregnancy-danger",
+            "reading-bp"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "BEC",
+          "PEN",
+          "IMAI",
+          "PCPNC",
+          "CO",
+          "MAL"
+        ],
+        "_notes": [
+          "Older red: WHO BEC 2018 headache red flags (sudden severe headache, fever with neck stiffness, altered mental status, focal weakness or speech problem, after head injury); severe headache with blurred vision and high blood pressure (WHO HEARTS); headache near a fire or heater (WHO indoor air quality: carbon monoxide).",
+          "Child red: IMCI general danger signs and stiff neck; petechial rash (Pocket Book); head injury then vomiting, sleepiness or a fit (BEC).",
+          "Pregnant: PCPNC severe headache with blurred vision, convulsions (pre-eclampsia/eclampsia); amber swelling and fever (PCPNC).",
+          "Amber: fever with shivering or headache (WHO malaria: test today); dengue (WHO 2009). No WHO-sourced amber line for a headache alone; Mo may want one ('headaches that keep coming back')."
+        ]
+      }
+    },
+    {
+      "id": "eyes",
+      "icon": "eye",
+      "label": {
+        "fa": "مشکل چشم",
+        "ps": "د سترګو ستونزه",
+        "en": "Eye problems"
+      },
+      "words": {
+        "fa": [
+          "چشم",
+          "چشم درد",
+          "سرخی چشم",
+          "چرک چشم",
+          "چشمم"
+        ],
+        "ps": [
+          "سترګه",
+          "سترګې",
+          "د سترګو درد",
+          "سرې سترګې"
+        ],
+        "en": [
+          "eye",
+          "eyes",
+          "red eye",
+          "sore eye",
+          "sticky eye"
+        ]
+      },
+      "page": {
+        "lead": "ui.ask.eyes.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "eye-chemical"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "eye-infection.urgent",
+            "items": [
+              "eye-chemical.urgent.chemical",
+              "eye-infection.urgent.injury",
+              "eye-infection.urgent.spot",
+              "eye-infection.urgent.pain",
+              "eye-infection.urgent.sight",
+              "eye-infection.urgent.lid"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "eye-infection.soon",
+            "items": [
+              "eye-infection.soon.newborn",
+              "eye-infection.soon.pus",
+              "eye-infection.soon.week",
+              "eye-infection.soon.lashes",
+              "eye-infection.soon.child"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "eye-infection",
+            "eye-chemical",
+            "measles"
+          ]
+        },
+        "sources": [
+          "EYE",
+          "BEC",
+          "IMCI",
+          "MEAS"
+        ],
+        "_notes": [
+          "Red: WHO Primary Eye Care Training Manual (2018) red eye referral signs (corneal opacity, severe pain, reduced vision, penetrating injury or chemical burn, orbital cellulitis: swollen red lid with fever).",
+          "Amber: newborn eye discharge (IMCI young infant / WHO PNC), conjunctivitis with pus, red eye over a week, trichiasis (WHO trachoma), child who does not see well."
+        ]
+      }
+    },
+    {
+      "id": "teeth",
+      "icon": "tooth",
+      "label": {
+        "fa": "دندان درد",
+        "ps": "د غاښ درد",
+        "en": "Toothache"
+      },
+      "words": {
+        "fa": [
+          "دندان",
+          "دندان درد",
+          "دندانم",
+          "لثه"
+        ],
+        "ps": [
+          "غاښ",
+          "غاښونه",
+          "د غاښ درد"
+        ],
+        "en": [
+          "tooth",
+          "teeth",
+          "toothache",
+          "gums"
+        ]
+      },
+      "page": {
+        "lead": "ui.ask.teeth.lead",
+        "ages": [
+          "anyone"
+        ],
+        "red": {
+          "all": {
+            "title": "dental.urgent",
+            "items": [
+              "dental.urgent.face",
+              "dental.urgent.swallow",
+              "dental.urgent.bleeding",
+              "dental.urgent.knocked"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "dental.soon",
+            "items": [
+              "dental.soon.ache",
+              "dental.soon.gums",
+              "dental.soon.patch",
+              "dental.soon.child"
+            ]
+          }
+        },
+        "care": {
+          "all": [
+            "dental.pain",
+            "dental.dont"
+          ]
+        },
+        "pages": {
+          "all": [
+            "dental"
+          ]
+        },
+        "sources": [
+          "DENT",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: facial swelling with fever, swelling that makes swallowing or breathing hard (WHO BEC airway), uncontrolled bleeding (BEC), avulsed adult tooth (WHO oral health / first aid).",
+          "Amber (this week): toothache and caries, gum disease, a mouth sore or white patch over 2 weeks (WHO oral cancer), damaged baby teeth (WHO oral health fact sheet)."
+        ]
+      }
     },
     {
       "id": "chest",
@@ -473,11 +1674,52 @@
           "chest"
         ]
       },
-      "go": [
-        "red-flags",
-        "pneumonia-adult",
-        "blood-pressure"
-      ]
+      "page": {
+        "lead": "ui.ask.chest.lead",
+        "ages": [
+          "older"
+        ],
+        "red": {
+          "all": {
+            "title": "red-flags.urgent",
+            "items": [
+              "red-flags.urgent.chest-pain",
+              "blood-pressure.urgent.chest",
+              "pneumonia-adult.urgent.chest",
+              "red-flags.urgent.breathing",
+              "pneumonia-adult.urgent.blood",
+              "anaemia.urgent.fainting"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "pneumonia-adult.soon.days",
+              "pneumonia-adult.soon.weeks",
+              "anaemia.soon.breathless-rest"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "red-flags",
+            "blood-pressure",
+            "pneumonia-adult",
+            "anaemia"
+          ]
+        },
+        "sources": [
+          "PEN",
+          "BEC",
+          "IMAI"
+        ],
+        "_notes": [
+          "Red: WHO PEN 2020 / HEARTS: chest pain or tightness (possible heart attack) = refer urgently; chest pain with breathlessness, haemoptysis, severe breathlessness, fainting: WHO BEC and IMAI.",
+          "Every chest pain is red here ('pain or tightness in the chest'); Mo may want a clinic-today line for pain only when coughing."
+        ]
+      }
     },
     {
       "id": "belly",
@@ -506,16 +1748,105 @@
           "tummy"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "pregnancy-danger",
-        "diarrhoea",
-        "worms",
-        "diarrhoea-adult",
-        "urine-infection",
-        "typhoid"
-      ]
+      "page": {
+        "lead": "ui.ask.belly.lead",
+        "ages": [
+          "child",
+          "older",
+          "pregnant"
+        ],
+        "default": "child",
+        "red": {
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "worms.urgent.belly",
+              "danger-child.urgent.vomit",
+              "danger-child.urgent.drink",
+              "danger-child.urgent.sleepy",
+              "danger-child.dry.eyes"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "red-flags.urgent.belly-pain",
+              "typhoid.urgent.belly",
+              "red-flags.urgent.blood-vomit",
+              "diarrhoea-adult.urgent.drink",
+              "urine-infection.urgent.urine"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.belly-pain",
+              "pregnancy-danger.urgent.bleeding",
+              "pregnancy-danger.urgent.fever-weak",
+              "pregnancy-danger.urgent.movement",
+              "urine-infection.urgent.pregnant"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "danger-child.soon.blood",
+              "worms.soon.pain",
+              "diarrhoea.soon.long",
+              "fever.soon.urine",
+              "danger-child.soon.fever"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "typhoid.soon.belly",
+              "urine-infection.soon.burning",
+              "hepatitis.soon.yellow",
+              "diarrhoea-adult.soon.blood"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.soon",
+            "items": [
+              "pregnancy-danger.soon.belly-pain",
+              "pregnancy-danger.soon.urine",
+              "pregnancy-danger.soon.waters"
+            ]
+          }
+        },
+        "pages": {
+          "child": [
+            "worms",
+            "diarrhoea",
+            "danger-child"
+          ],
+          "older": [
+            "typhoid",
+            "urine-infection",
+            "diarrhoea-adult",
+            "red-flags"
+          ],
+          "pregnant": [
+            "pregnancy-danger",
+            "urine-infection"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "IMAI",
+          "PCPNC",
+          "TYPH"
+        ],
+        "_notes": [
+          "Child red: IMCI general danger signs and severe dehydration; severe pain with a hard swollen belly: WHO Pocket Book (acute abdomen).",
+          "Older red: IMAI severe abdominal pain, haematemesis, unable to drink; typhoid perforation (WHO); anuria or severe flank pain (IMAI pyelonephritis).",
+          "Pregnant: PCPNC severe abdominal pain, bleeding, fever too weak to get up, reduced fetal movement; pyelonephritis in pregnancy (PCPNC)."
+        ]
+      }
     },
     {
       "id": "back",
@@ -543,12 +1874,83 @@
           "spine"
         ]
       },
-      "go": [
-        "red-flags",
-        "falls-fractures",
-        "pregnancy-danger",
-        "urine-infection"
-      ]
+      "page": {
+        "lead": "ui.ask.back.lead",
+        "ages": [
+          "older",
+          "pregnant"
+        ],
+        "default": "older",
+        "red": {
+          "older": {
+            "title": "back-pain.urgent",
+            "items": [
+              "back-pain.urgent.fall",
+              "back-pain.urgent.legs",
+              "back-pain.urgent.bladder",
+              "back-pain.urgent.fever"
+            ]
+          },
+          "pregnant": {
+            "title": "back-pain.urgent",
+            "items": [
+              "back-pain.urgent.pregnant",
+              "back-pain.urgent.fall",
+              "back-pain.urgent.fever",
+              "back-pain.urgent.legs"
+            ]
+          }
+        },
+        "amber": {
+          "older": {
+            "title": "back-pain.soon",
+            "items": [
+              "back-pain.soon.weight",
+              "back-pain.soon.night"
+            ]
+          },
+          "pregnant": {
+            "title": "pregnancy-danger.soon",
+            "items": [
+              "pregnancy-danger.soon.urine",
+              "pregnancy-danger.soon.belly-pain",
+              "pregnancy-danger.soon.ill"
+            ]
+          }
+        },
+        "care": {
+          "older": [
+            "back-pain.move",
+            "back-pain.lift",
+            "back-pain.dont"
+          ],
+          "pregnant": [
+            "back-pain.pregnant"
+          ]
+        },
+        "pages": {
+          "older": [
+            "back-pain",
+            "falls-fractures",
+            "urine-infection"
+          ],
+          "pregnant": [
+            "back-pain",
+            "pregnancy-danger"
+          ]
+        },
+        "sources": [
+          "LBP",
+          "BEC",
+          "IMAI",
+          "PCPNC"
+        ],
+        "_notes": [
+          "Red: after a fall or injury (WHO BEC spinal injury), new weakness or numbness in the legs and loss of bladder or bowel control (WHO 2023 low back pain guideline red flags: cauda equina, spinal cord compression), fever (WHO 2023 red flag: infection; IMAI pyelonephritis).",
+          "Amber (this week): weight loss and night pain (WHO 2023 red flags for cancer or infection).",
+          "Pregnant: pains that come and go before the due date (PCPNC preterm labour); urine burning and abdominal pain (PCPNC)."
+        ]
+      }
     },
     {
       "id": "burn",
@@ -578,10 +1980,53 @@
           "hot water"
         ]
       },
-      "go": [
-        "burns",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.burn.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "burns"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "burns.urgent",
+            "items": [
+              "burns.urgent.big",
+              "burns.urgent.baby",
+              "burns.urgent.place",
+              "burns.urgent.deep",
+              "burns.urgent.smoke",
+              "burns.urgent.electric"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "burns.soon",
+            "items": [
+              "burns.soon.blisters",
+              "burns.soon.infected",
+              "burns.soon.fever"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "burns",
+            "first-aid"
+          ]
+        },
+        "sources": [
+          "BURN",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: WHO BEC 2018 burns (large burns, burns in infants, face/hands/feet/genitals/joints, full thickness, inhalation injury, electrical or chemical burns). Amber: blisters, infection, fever (WHO burns fact sheet; BEC)."
+        ]
+      }
     },
     {
       "id": "fumes",
@@ -615,10 +2060,42 @@
           "sandali"
         ]
       },
-      "go": [
-        "fumes-poisoning",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.fumes.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "fumes-poisoning"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "fumes-poisoning.urgent",
+            "items": [
+              "fumes-poisoning.urgent.headache",
+              "fumes-poisoning.urgent.sleepy",
+              "fumes-poisoning.urgent.faint",
+              "fumes-poisoning.urgent.family",
+              "fumes-poisoning.urgent.outside"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "fumes-poisoning",
+            "first-aid"
+          ]
+        },
+        "sources": [
+          "CO",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: WHO indoor air quality guidelines (2010) carbon monoxide: headache, dizziness, nausea, confusion, collapse, several people ill together; BEC poisoning."
+        ]
+      }
     },
     {
       "id": "bite",
@@ -648,15 +2125,61 @@
           "bitten"
         ]
       },
-      "go": [
-        "dog-bite",
-        "snake-scorpion",
-        "first-aid",
-        "animal-illness"
-      ],
-      "red": [
-        "dog-bite"
-      ]
+      "page": {
+        "lead": "ui.ask.bite.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "dog-bite",
+            "snake-scorpion"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "dog-bite.urgent",
+            "items": [
+              {
+                "id": "ui.ask.snake",
+                "icon": "warning"
+              },
+              "snake-scorpion.urgent.child-scorpion",
+              "dog-bite.urgent.deep",
+              "dog-bite.urgent.bleeding",
+              "dog-bite.urgent.wild",
+              "dog-bite.urgent.rabies"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "dog-bite.soon",
+            "items": [
+              "dog-bite.soon.any",
+              "dog-bite.soon.lick",
+              "dog-bite.soon.infected",
+              "dog-bite.soon.missed"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "dog-bite",
+            "snake-scorpion",
+            "animal-illness"
+          ]
+        },
+        "sources": [
+          "RAB",
+          "SNAKE",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: any snakebite (WHO snakebite guidelines 2016: every bite to a health facility), scorpion sting in a child (WHO/BEC envenomation), WHO category III rabies exposures (deep or multiple bites, head, neck, hands), uncontrolled bleeding, wild animal, signs of rabies.",
+          "Amber: every bite or scratch for wound care and rabies vaccine the same day (WHO rabies position paper 2018), licks on broken skin or mucosa, infected bite, missed vaccine dose."
+        ]
+      }
     },
     {
       "id": "poison",
@@ -686,10 +2209,43 @@
           "overdose"
         ]
       },
-      "go": [
-        "poisoning",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.poison.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "poisoning"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "poisoning.urgent",
+            "items": [
+              "poisoning.urgent.kerosene",
+              "poisoning.urgent.spray",
+              "poisoning.urgent.drowsy",
+              "poisoning.urgent.bleeding",
+              "poisoning.urgent.purpose"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "poisoning",
+            "fumes-poisoning",
+            "first-aid"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "MHGAP"
+        ],
+        "_notes": [
+          "Red: WHO BEC 2018 poisoning (any poisoning goes to hospital; respiratory signs after hydrocarbons, cholinergic signs after organophosphate sprays, altered consciousness, bleeding after rat poison); intentional poisoning (mhGAP self-harm)."
+        ]
+      }
     },
     {
       "id": "fits",
@@ -723,14 +2279,61 @@
           "faint"
         ]
       },
-      "go": [
-        "seizures",
-        "fever-fits",
-        "danger-child",
-        "pregnancy-danger",
-        "red-flags",
-        "epilepsy"
-      ]
+      "page": {
+        "lead": "ui.ask.fits.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "seizures",
+            "fever-fits"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "seizures.urgent",
+            "items": [
+              "seizures.urgent.long",
+              "seizures.urgent.repeated",
+              "seizures.urgent.first",
+              "seizures.urgent.not-waking",
+              "seizures.urgent.injury",
+              "seizures.urgent.breathing",
+              "seizures.urgent.pregnant",
+              "seizures.urgent.baby"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "seizures.soon",
+            "items": [
+              "seizures.soon.more-fits",
+              "seizures.soon.medicine",
+              "epilepsy.soon.child"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "seizures",
+            "fever-fits",
+            "epilepsy"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "MHGAP",
+          "PCPNC",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: convulsions in a child (IMCI general danger sign), a fit over 5 minutes or repeated fits (mhGAP epilepsy emergency, status epilepticus), first fit, not waking, injury, breathing difficulty (BEC), fit in pregnancy or after birth (PCPNC eclampsia).",
+          "NOTE: the Epilepsy page says a first fit = clinic today once recovered; the Fits page and this tile say hospital now. Mo to choose one.",
+          "Amber: more fits than usual or medicine run out (mhGAP epilepsy follow-up); child with fits not learning or growing (mhGAP)."
+        ]
+      }
     },
     {
       "id": "newborn",
@@ -760,11 +2363,73 @@
           "navel"
         ]
       },
-      "go": [
-        "danger-child",
-        "newborn",
-        "breastfeeding"
-      ]
+      "page": {
+        "lead": "ui.ask.newborn.lead",
+        "ages": [
+          "baby"
+        ],
+        "red": {
+          "all": {
+            "title": "newborn.urgent",
+            "items": [
+              "newborn.urgent.feed",
+              "newborn.urgent.convulsion",
+              "newborn.urgent.breathing",
+              "newborn.urgent.chest",
+              "newborn.urgent.temperature",
+              "newborn.urgent.move",
+              "newborn.urgent.yellow",
+              "newborn.urgent.cord-skin"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "newborn.soon",
+            "items": [
+              "newborn.soon.cord",
+              "newborn.soon.eyes",
+              "newborn.soon.skin",
+              "newborn.soon.yellow",
+              {
+                "id": "ui.ask.feed-baby",
+                "icon": "breastfeed"
+              }
+            ]
+          }
+        },
+        "tools": {
+          "all": [
+            "breaths"
+          ]
+        },
+        "care": {
+          "all": [
+            "newborn.warm",
+            "newborn.breastfeed",
+            "newborn.cord",
+            "newborn.dont"
+          ]
+        },
+        "pages": {
+          "all": [
+            "newborn",
+            "breastfeeding",
+            "danger-child",
+            "cold-hypothermia",
+            "vaccines"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PCPNC",
+          "PNC"
+        ],
+        "_notes": [
+          "Red: IMCI 2014 sick young infant / WHO PCPNC newborn danger signs (not feeding well, convulsions, fast breathing 60+, severe chest indrawing, temperature 37.5+ or below 35.5, movement only when stimulated, jaundice on day 1 or palms and soles, umbilical redness extending to the skin).",
+          "Amber: IMCI local bacterial infection (umbilicus red or draining pus, skin pustules), eye discharge (PNC), jaundice (IMCI), feeding problem: fewer than 8 breastfeeds in 24 hours or not suckling effectively (IMCI young infant feeding problem)."
+        ]
+      }
     },
     {
       "id": "feeding",
@@ -796,11 +2461,89 @@
           "not eating"
         ]
       },
-      "go": [
-        "danger-child",
-        "breastfeeding",
-        "growth"
-      ]
+      "page": {
+        "lead": "ui.ask.feeding.lead",
+        "ages": [
+          "baby",
+          "child"
+        ],
+        "default": "child",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.feed",
+              "danger-child.young.move",
+              "danger-child.young.temperature",
+              "danger-child.young.breathing",
+              "danger-child.young.convulsion"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "danger-child.urgent.drink",
+              "danger-child.urgent.vomit",
+              "growth.urgent.feet",
+              "malnutrition.urgent.eat",
+              "danger-child.urgent.sleepy"
+            ]
+          }
+        },
+        "amber": {
+          "baby": {
+            "title": "newborn.soon",
+            "items": [
+              {
+                "id": "ui.ask.feed-baby",
+                "icon": "breastfeed"
+              },
+              "reading-muac.weight-soon.newborn"
+            ]
+          },
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "danger-child.soon.drinking",
+              "malnutrition.soon.weight",
+              "malnutrition.soon.eating",
+              "growth.today.muac"
+            ]
+          }
+        },
+        "care": {
+          "baby": [
+            "breastfeeding.often",
+            "breastfeeding.attach"
+          ],
+          "child": [
+            "breastfeeding.illness",
+            "breastfeeding.food"
+          ]
+        },
+        "pages": {
+          "baby": [
+            "breastfeeding",
+            "newborn"
+          ],
+          "child": [
+            "breastfeeding",
+            "growth",
+            "malnutrition",
+            "reading-muac"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "MALN",
+          "PNC"
+        ],
+        "_notes": [
+          "Baby: IMCI 2014 sick young infant (not feeding well = possible serious bacterial infection); feeding problem (fewer than 8 feeds, not suckling effectively) and not back to birth weight by 3 weeks (WHO PNC 2022) = clinic.",
+          "Child red: IMCI general danger signs; oedema of both feet (IMCI/WHO SAM 2013 complicated severe acute malnutrition); very thin and not eating (SAM with failed appetite).",
+          "Child amber: eating or drinking poorly, weight loss, MUAC red (WHO SAM 2013: refer to outpatient therapeutic care)."
+        ]
+      }
     },
     {
       "id": "thin",
@@ -833,12 +2576,79 @@
           "swollen feet"
         ]
       },
-      "go": [
-        "malnutrition",
-        "reading-muac",
-        "growth",
-        "breastfeeding"
-      ]
+      "page": {
+        "lead": "ui.ask.thin.lead",
+        "ages": [
+          "child",
+          "older"
+        ],
+        "default": "child",
+        "red": {
+          "child": {
+            "title": "malnutrition.urgent",
+            "items": [
+              "growth.urgent.feet",
+              "malnutrition.urgent.eat",
+              "malnutrition.urgent.sleepy",
+              "malnutrition.urgent.vomit",
+              "malnutrition.urgent.fever"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "diarrhoea-adult.urgent.weak",
+              "red-flags.urgent.confused",
+              "tb.urgent.blood"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "malnutrition.soon",
+            "items": [
+              "growth.today.muac",
+              "malnutrition.soon.thin",
+              "malnutrition.soon.weight",
+              "malnutrition.soon.diarrhoea"
+            ]
+          },
+          "older": {
+            "title": "red-flags.soon",
+            "items": [
+              "red-flags.soon.weight-loss",
+              "tb.soon.weight",
+              "tb.soon.cough",
+              "red-flags.soon.swallowing"
+            ]
+          }
+        },
+        "pages": {
+          "child": [
+            "malnutrition",
+            "reading-muac",
+            "growth",
+            "worms",
+            "breastfeeding"
+          ],
+          "older": [
+            "tb",
+            "diabetes",
+            "red-flags"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "MALN",
+          "TB",
+          "IMAI"
+        ],
+        "_notes": [
+          "Child red: WHO SAM 2013 / IMCI complicated severe acute malnutrition (bilateral pitting oedema; SAM with no appetite, lethargy, vomiting everything, fever or hypothermia).",
+          "Child amber: MUAC red or very thin (IMCI uncomplicated SAM or MAM), weight loss, persistent diarrhoea.",
+          "Older: IMAI: severe weakness or confusion = refer; weight loss, cough, trouble swallowing = clinic this week (TB screening WHO 2021; IMAI)."
+        ]
+      }
     },
     {
       "id": "yellow",
@@ -866,12 +2676,106 @@
           "hepatitis"
         ]
       },
-      "go": [
-        "danger-child",
-        "red-flags",
-        "newborn",
-        "hepatitis"
-      ]
+      "page": {
+        "lead": "ui.ask.yellow.lead",
+        "ages": [
+          "baby",
+          "child",
+          "older",
+          "pregnant"
+        ],
+        "default": "baby",
+        "red": {
+          "baby": {
+            "title": "danger-child.young",
+            "items": [
+              "danger-child.young.yellow",
+              "danger-child.young.feed",
+              "danger-child.young.move",
+              "danger-child.young.temperature"
+            ]
+          },
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "hepatitis.urgent.confused",
+              "hepatitis.urgent.bleeding",
+              "hepatitis.urgent.drink",
+              "malaria.urgent.yellow"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "hepatitis.urgent.confused",
+              "hepatitis.urgent.bleeding",
+              "hepatitis.urgent.drink",
+              "malaria.urgent.yellow"
+            ]
+          },
+          "pregnant": {
+            "title": "pneumonia-adult.urgent",
+            "items": [
+              "hepatitis.urgent.pregnant",
+              "hepatitis.urgent.confused",
+              "hepatitis.urgent.bleeding"
+            ]
+          }
+        },
+        "amber": {
+          "baby": {
+            "title": "newborn.soon",
+            "items": [
+              "newborn.soon.yellow"
+            ]
+          },
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "hepatitis.soon.yellow",
+              "hepatitis.soon.long"
+            ]
+          },
+          "older": {
+            "title": "pneumonia-adult.soon",
+            "items": [
+              "hepatitis.soon.yellow",
+              "hepatitis.soon.long",
+              "hepatitis.soon.household",
+              "hepatitis.soon.needle"
+            ]
+          }
+        },
+        "pages": {
+          "baby": [
+            "newborn",
+            "danger-child"
+          ],
+          "child": [
+            "hepatitis",
+            "malaria"
+          ],
+          "older": [
+            "hepatitis",
+            "malaria"
+          ],
+          "pregnant": [
+            "hepatitis",
+            "pregnancy-danger"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "HEP",
+          "MAL",
+          "PCPNC"
+        ],
+        "_notes": [
+          "Baby red: IMCI 2014 severe jaundice (any jaundice under 24 hours, yellow palms and soles) and young infant danger signs. Amber: jaundice (IMCI).",
+          "Child and older red: WHO hepatitis fact sheets (acute liver failure: confusion, bleeding; unable to keep fluids down); malaria with jaundice (WHO 2023 severe malaria). Pregnant: hepatitis E in pregnancy (WHO HEV fact sheet).",
+          "Amber: yellow eyes or dark urine, prolonged jaundice, household contact or unsafe injection (WHO hepatitis B/C testing)."
+        ]
+      }
     },
     {
       "id": "tired",
@@ -903,13 +2807,104 @@
           "anemia"
         ]
       },
-      "go": [
-        "anaemia",
-        "diabetes",
-        "tb",
-        "malnutrition",
-        "urine-infection"
-      ]
+      "page": {
+        "lead": "ui.ask.tired.lead",
+        "ages": [
+          "child",
+          "older",
+          "pregnant"
+        ],
+        "default": "older",
+        "red": {
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "danger-child.skin.pale",
+              "worms.urgent.pale",
+              "danger-child.urgent.sleepy",
+              "malnutrition.urgent.sleepy"
+            ]
+          },
+          "older": {
+            "title": "anaemia.urgent",
+            "items": [
+              "anaemia.urgent.fainting",
+              "anaemia.urgent.chest-pain",
+              "anaemia.urgent.breathless-lying",
+              "diabetes.urgent.confused"
+            ]
+          },
+          "pregnant": {
+            "title": "anaemia.urgent",
+            "items": [
+              "anaemia.urgent.fainting",
+              "anaemia.urgent.breathless-lying",
+              "pregnancy-danger.urgent.breathing",
+              "pregnancy-danger.urgent.bleeding"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "worms.soon.pale",
+              "danger-child.seems-soon.active",
+              "malnutrition.soon.weight"
+            ]
+          },
+          "older": {
+            "title": "anaemia.soon",
+            "items": [
+              "anaemia.soon.very-pale",
+              "anaemia.soon.breathless-rest",
+              "anaemia.soon.heavy-periods",
+              "tb.soon.fever",
+              "red-flags.soon.weight-loss",
+              "mind-body.soon.weeks"
+            ]
+          },
+          "pregnant": {
+            "title": "anaemia.soon",
+            "items": [
+              "anaemia.soon.very-pale",
+              "anaemia.soon.breathless-rest",
+              "pregnancy-danger.soon.ill"
+            ]
+          }
+        },
+        "pages": {
+          "child": [
+            "worms",
+            "malnutrition",
+            "danger-child"
+          ],
+          "older": [
+            "anaemia",
+            "diabetes",
+            "tb",
+            "stress"
+          ],
+          "pregnant": [
+            "anaemia",
+            "pregnancy-care"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "PB",
+          "ANAEM",
+          "IMAI",
+          "TB",
+          "MHGAP",
+          "PCPNC"
+        ],
+        "_notes": [
+          "Child: IMCI severe palmar pallor (severe anaemia = refer) and lethargy; some pallor = clinic (IMCI anaemia).",
+          "Older/pregnant red: WHO anaemia / IMAI: severe anaemia with fainting, chest pain, breathlessness lying down; diabetes with confusion (WHO PEN). Pregnant: PCPNC severe anaemia with breathlessness.",
+          "Amber: pallor, breathless at rest, heavy periods (WHO 2017 anaemia), fever or night sweats and weight loss (TB screening), low mood 2+ weeks (mhGAP depression)."
+        ]
+      }
     },
     {
       "id": "sugar",
@@ -940,10 +2935,56 @@
           "urinating"
         ]
       },
-      "go": [
-        "low-sugar",
-        "diabetes"
-      ]
+      "page": {
+        "lead": "ui.ask.sugar.lead",
+        "ages": [
+          "older"
+        ],
+        "now": {
+          "all": [
+            "low-sugar"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "diabetes.urgent",
+            "items": [
+              "diabetes.urgent.confused",
+              "low-sugar.urgent.swallow",
+              "low-sugar.urgent.fit",
+              "low-sugar.urgent.not-better",
+              "diabetes.urgent.vomiting",
+              "diabetes.urgent.foot-wound"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "diabetes.soon",
+            "items": [
+              "diabetes.soon.foot-sore",
+              "diabetes.soon.wound",
+              "diabetes.soon.low-again",
+              "low-sugar.soon.not-eating"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "diabetes",
+            "low-sugar",
+            "reading-sugar"
+          ]
+        },
+        "sources": [
+          "PEN",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: WHO PEN 2020 diabetes protocol: hypoglycaemia not responding or unconscious, convulsions, vomiting and very unwell (possible ketoacidosis), infected or gangrenous foot = refer urgently.",
+          "Amber: new foot ulcer, non-healing wound, recurrent hypoglycaemia, cannot eat on medicine (WHO PEN)."
+        ]
+      }
     },
     {
       "id": "pressure",
@@ -971,12 +3012,77 @@
           "stroke"
         ]
       },
-      "go": [
-        "red-flags",
-        "pregnancy-danger",
-        "blood-pressure",
-        "reading-bp"
-      ]
+      "page": {
+        "lead": "ui.ask.pressure.lead",
+        "ages": [
+          "older",
+          "pregnant"
+        ],
+        "default": "older",
+        "red": {
+          "older": {
+            "title": "blood-pressure.urgent",
+            "items": [
+              "blood-pressure.urgent.face",
+              "blood-pressure.urgent.weak",
+              "blood-pressure.urgent.speech",
+              "blood-pressure.urgent.chest",
+              "blood-pressure.urgent.headache",
+              "reading-bp.urgent.very-high"
+            ]
+          },
+          "pregnant": {
+            "title": "reading-bp.urgent",
+            "items": [
+              "reading-bp.urgent.pregnant-very-high",
+              "reading-bp.urgent.pregnant-signs",
+              "pregnancy-danger.urgent.headache",
+              "pregnancy-danger.urgent.fits"
+            ]
+          }
+        },
+        "amber": {
+          "older": {
+            "title": "reading-bp.soon",
+            "items": [
+              "reading-bp.soon.low"
+            ]
+          },
+          "pregnant": {
+            "title": "reading-bp.soon",
+            "items": [
+              "reading-bp.soon.pregnant",
+              "pregnancy-danger.soon.swelling"
+            ]
+          }
+        },
+        "tools": {
+          "older": [
+            "reading"
+          ],
+          "pregnant": [
+            "reading"
+          ]
+        },
+        "pages": {
+          "older": [
+            "blood-pressure",
+            "reading-bp"
+          ],
+          "pregnant": [
+            "reading-bp",
+            "pregnancy-danger"
+          ]
+        },
+        "sources": [
+          "PEN",
+          "PCPNC"
+        ],
+        "_notes": [
+          "Red: WHO HEARTS / PEN: stroke signs (face, arm, speech), chest pain, severe headache with blurred vision, BP 180/120 or more = refer urgently. Pregnant: PCPNC severe pre-eclampsia (160/110, or 140/90 with headache, blurred vision).",
+          "Amber: pregnant with 140/90 (PCPNC pre-eclampsia check same day); low BP with dizziness (IMAI)."
+        ]
+      }
     },
     {
       "id": "mind",
@@ -1014,15 +3120,57 @@
           "fear"
         ]
       },
-      "go": [
-        "stress",
-        "mind-body",
-        "mind-cycle",
-        "mind-calm",
-        "mind-problems",
-        "mind-routine",
-        "after-birth"
-      ]
+      "page": {
+        "lead": "ui.ask.mind.lead",
+        "ages": [
+          "anyone"
+        ],
+        "red": {
+          "all": {
+            "title": "stress.urgent",
+            "items": [
+              "stress.urgent.end-life",
+              "stress.urgent.self-harm",
+              "stress.urgent.hurt-others",
+              "after-birth.urgent.harm"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "mind-body.soon",
+            "items": [
+              "mind-body.soon.weeks",
+              "mind-body.soon.fear",
+              "mind-body.soon.daily",
+              "mind-body.soon.drugs",
+              "after-birth.soon.sad"
+            ]
+          }
+        },
+        "care": {
+          "all": [
+            "red-flags.suicide"
+          ]
+        },
+        "pages": {
+          "all": [
+            "stress",
+            "mind-problems",
+            "mind-calm",
+            "mind-body",
+            "after-birth"
+          ]
+        },
+        "sources": [
+          "MHGAP",
+          "PCPNC"
+        ],
+        "_notes": [
+          "Red: WHO mhGAP IG 2.0 self-harm/suicide (thoughts or plans of ending life, act of self-harm), risk of harm to others; postpartum thoughts of harming self or baby (PCPNC/mhGAP).",
+          "Amber: mhGAP depression (2+ weeks of low mood), panic, unable to function, substance use; postpartum low mood."
+        ]
+      }
     },
     {
       "id": "longcough",
@@ -1053,9 +3201,74 @@
           "coughing blood"
         ]
       },
-      "go": [
-        "tb"
-      ]
+      "page": {
+        "lead": "ui.ask.longcough.lead",
+        "ages": [
+          "child",
+          "older"
+        ],
+        "default": "older",
+        "red": {
+          "child": {
+            "title": "danger-child.urgent",
+            "items": [
+              "cough.urgent.chest",
+              "cough.urgent.noise",
+              "danger-child.urgent.drink",
+              "danger-child.urgent.sleepy"
+            ]
+          },
+          "older": {
+            "title": "tb.urgent",
+            "items": [
+              "tb.urgent.blood",
+              "tb.urgent.breathing",
+              "tb.urgent.weak"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "danger-child.soon",
+            "items": [
+              "cough.soon.long",
+              "malnutrition.soon.weight",
+              "cough.soon.wheeze"
+            ]
+          },
+          "older": {
+            "title": "tb.soon",
+            "items": [
+              "tb.soon.cough",
+              "tb.soon.blood",
+              "tb.soon.fever",
+              "tb.soon.weight"
+            ]
+          }
+        },
+        "pages": {
+          "child": [
+            "tb",
+            "cough",
+            "asthma"
+          ],
+          "older": [
+            "tb",
+            "asthma",
+            "pneumonia-adult"
+          ]
+        },
+        "sources": [
+          "IMCI",
+          "ICCM",
+          "TB",
+          "IMAI"
+        ],
+        "_notes": [
+          "Child: IMCI danger signs and chest indrawing (Mo's default RED); cough 14+ days and weight loss: IMCI / WHO TB Module 2 (2021) screening.",
+          "Older: WHO TB screening (cough 2+ weeks, haemoptysis, fever, night sweats, weight loss); massive haemoptysis, severe breathlessness, bedbound: IMAI refer."
+        ]
+      }
     },
     {
       "id": "animals",
@@ -1090,9 +3303,46 @@
           "eid"
         ]
       },
-      "go": [
-        "animal-illness"
-      ]
+      "page": {
+        "lead": "ui.ask.animals.lead",
+        "ages": [
+          "anyone"
+        ],
+        "red": {
+          "all": {
+            "title": "animal-illness.urgent",
+            "items": [
+              "animal-illness.urgent.fever",
+              "animal-illness.urgent.bleeding",
+              "animal-illness.urgent.vomit",
+              "animal-illness.urgent.sleepy"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "animal-illness.soon",
+            "items": [
+              "animal-illness.soon.black-sore",
+              "animal-illness.soon.long-fever",
+              "animal-illness.soon.tick"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "animal-illness",
+            "dog-bite"
+          ]
+        },
+        "sources": [
+          "CCHF",
+          "IMAI"
+        ],
+        "_notes": [
+          "Red: WHO CCHF fact sheet (sudden fever after tick bite or slaughter, bleeding, haematemesis or melaena, confusion). Amber: cutaneous anthrax eschar (WHO anthrax guidelines 2008), brucellosis (WHO), attached tick."
+        ]
+      }
     },
     {
       "id": "disaster",
@@ -1120,12 +3370,52 @@
           "collapsed"
         ]
       },
-      "go": [
-        "falls-fractures",
-        "head-injury",
-        "drowning",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.disaster.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "first-aid",
+            "falls-fractures",
+            "head-injury",
+            "drowning"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "falls-fractures.urgent",
+            "items": [
+              {
+                "id": "ui.ask.trapped",
+                "icon": "house"
+              },
+              "falls-fractures.urgent.height",
+              "falls-fractures.urgent.spine",
+              "falls-fractures.urgent.limb",
+              "falls-fractures.urgent.open",
+              "falls-fractures.urgent.head",
+              "falls-fractures.urgent.belly"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "bleeding",
+            "cold-hypothermia",
+            "diarrhoea-adult",
+            "hygiene"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "CRUSH"
+        ],
+        "_notes": [
+          "Red: trapped under a wall or roof = hospital even if the person seems well (crush injury: WHO/PAHO earthquake crush-syndrome guidance; INSARAG medical guidelines; medical audit 2026-10-08 HM-01). WHO BEC 2018 trauma (fall from height, spinal injury signs, deformed limb, open fracture, head injury with vomiting or drowsiness, abdominal or chest injury)."
+        ]
+      }
     },
     {
       "id": "vaccine",
@@ -1153,9 +3443,51 @@
           "polio"
         ]
       },
-      "go": [
-        "vaccines"
-      ]
+      "page": {
+        "lead": "ui.ask.vaccine.lead",
+        "ages": [
+          "anyone"
+        ],
+        "red": {
+          "all": {
+            "title": "ui.ask.vaccine-red",
+            "items": [
+              "danger-child.urgent.convulsion",
+              "danger-child.urgent.sleepy",
+              "danger-child.urgent.drink",
+              "danger-child.urgent.breathing",
+              "allergy-severe.urgent.swelling"
+            ]
+          }
+        },
+        "amber": {
+          "all": {
+            "title": "ui.ask.vaccine-amber",
+            "items": [
+              {
+                "id": "ui.ask.vaccine-swell",
+                "icon": "syringe"
+              },
+              "danger-child.soon.fever"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "vaccines",
+            "danger-child"
+          ]
+        },
+        "sources": [
+          "IIP",
+          "IMCI",
+          "BEC"
+        ],
+        "_notes": [
+          "Red: WHO Immunization in Practice (2015) serious AEFI (seizures, anaphylaxis: swelling and difficult breathing, hypotonic-hyporesponsive episode: very sleepy, floppy) plus IMCI general danger signs.",
+          "Amber: injection-site abscess (WHO AEFI), fever more than 2 days (not a vaccine reaction; app's existing line)."
+        ]
+      }
     },
     {
       "id": "choking",
@@ -1182,11 +3514,43 @@
           "swallowed"
         ]
       },
-      "go": [
-        "choking",
-        "choking-baby",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.choking.lead",
+        "ages": [
+          "anyone"
+        ],
+        "nowFirst": true,
+        "now": {
+          "all": [
+            "choking",
+            "choking-baby"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "choking.urgent",
+            "items": [
+              "choking.urgent.thrusts",
+              "choking.urgent.cough",
+              "choking.urgent.noisy",
+              "choking.urgent.unconscious"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "first-aid",
+            "unconscious"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "CHOKE"
+        ],
+        "_notes": [
+          "Red: after choking, refer if abdominal thrusts were given, persistent cough, pain or difficulty swallowing, noisy breathing, loss of consciousness (WHO BEC airway; IFRC 2020)."
+        ]
+      }
     },
     {
       "id": "safety",
@@ -1219,14 +3583,50 @@
           "mine"
         ]
       },
-      "go": [
-        "falls-fractures",
-        "drowning",
-        "burns",
-        "electric-shock",
-        "poisoning",
-        "first-aid"
-      ]
+      "page": {
+        "lead": "ui.ask.safety.lead",
+        "ages": [
+          "anyone"
+        ],
+        "now": {
+          "all": [
+            "first-aid",
+            "falls-fractures",
+            "burns",
+            "poisoning",
+            "drowning",
+            "electric-shock"
+          ]
+        },
+        "red": {
+          "all": {
+            "title": "first-aid.urgent",
+            "items": [
+              "first-aid.urgent.unconscious",
+              "first-aid.urgent.bleeding",
+              "first-aid.urgent.big-burn",
+              "first-aid.urgent.burn-place",
+              "first-aid.urgent.poison",
+              "first-aid.urgent.choking",
+              "first-aid.urgent.head",
+              "first-aid.urgent.fumes"
+            ]
+          }
+        },
+        "pages": {
+          "all": [
+            "head-injury",
+            "danger-child"
+          ]
+        },
+        "sources": [
+          "BEC",
+          "BURN"
+        ],
+        "_notes": [
+          "Red: the first-aid page's hospital list: WHO BEC 2018 (unresponsive, uncontrolled bleeding, large or special-area burns, ingestion of poison or kerosene, unresolved choking, head injury with vomiting or drowsiness, carbon monoxide)."
+        ]
+      }
     }
   ]
 }

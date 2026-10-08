@@ -684,7 +684,7 @@ function screenTopic(tid) {
 
 function screenVaccines(v) {
   const ids = ['vaccines.title', v.lead.id, ...v.visits.map((x) => x.id), ...(v.notes || []).map((x) => x.id), ...(v.women ? [v.women.id] : [])];
-  let html = `<div class="topic-hero"><img src="${esc(v.image)}" alt=""><a class="round" href="#/children" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
+  let html = `<div class="topic-hero"><img src="${esc(v.image)}" alt=""><a class="round" href="${esc(EM.back || '#/children')}" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
   html += `<div class="title-row" data-block="vaccines.title"><h1>${esc(L(v.title))}</h1>${spk('vaccines.title')}</div>`;
   html += listenBar(ids);
   html += `<div class="blk lead" data-block="${v.lead.id}"><div class="body">${esc(L(v.lead.text))}</div>${spk(v.lead.id)}</div>`;
@@ -1059,36 +1059,97 @@ function screenAsk() {
   html += groupHead(T('orPick'), 'ui.orPick', ' sayh') + `<div class="symgrid">${(S.book.symptoms || []).map(symTile).join('')}</div>`;
   return { html, nav: 'home' };
 }
-// a "What is wrong?" picture tile: tap the picture or the words to open it, the speaker on the picture's corner reads
-// the words (s.say). Its picture (s.pic, tools/symptom_pics.py) or, until there is one, its icon drawn large.
+// a "What is wrong?" picture tile: tap the picture or the words to open its page (#/sym/<id>), the speaker on the
+// picture's corner reads the words (s.say). Its picture (s.pic, tools/symptom_pics.py) or, until there is one, its icon drawn large.
+const symPic = (s, lazy) => (s.pic ? `<img src="${esc(s.pic)}" alt=""${lazy ? ' loading="lazy"' : ''}>` : ic(s.icon));
 function symTile(s) {
   const say = s.say || 'ui.sym.' + s.id;
-  return `<div class="symt" data-block="${esc(say)}"><button class="sym" data-sym="${esc(s.id)}"><span class="pp">${s.pic ? `<img src="${esc(s.pic)}" alt="" loading="lazy">` : ic(s.icon)}</span><span class="t">${esc(L(s.label))}</span></button>${spk(say)}</div>`;
+  return `<div class="symt" data-block="${esc(say)}"><a class="sym" href="#/sym/${esc(s.id)}"><span class="pp">${symPic(s, true)}</span><span class="t">${esc(L(s.label))}</span></a>${spk(say)}</div>`;
 }
-function askResults(symId, live) {
-  let syms = [], blocks = [];
-  if (symId) syms = (S.book.symptoms || []).filter((s) => s.id === symId);
-  else if (ASK.q) {
-    // typed or said: js/search.js ranks the pages (live while typing). The disease-watch signal and report cards
-    // still come from the symptom list, and only once the search is sent.
-    if (live) return FD.results(ASK.q, true);
-    const top3 = findSymptoms(ASK.q).syms.slice(0, 3).map((s) => s.id);
-    svSignal(top3);
-    return FD.results(ASK.q) + reportCards(svFor('symptoms', top3)).html;
-  }
-  else return '';
-  // a picture: its pages, danger pages first in red, the age of each page when they mix (js/search-ui.js)
-  let out = '';
-  for (const s of syms.slice(0, 3)) out += FD.tile(s);
-  for (const b of blocks) {
-    const tid = b.id.split('.')[0]; const t = S.book.topics[tid]; if (!t) continue;
-    const txt = L(S.book.narration[b.id]);
-    out += `<a class="hit" href="#/topic/${tid}/${encodeURIComponent(b.id)}"><span class="ht">${esc(L(t.title))}</span><span class="hx">${esc(txt.length > 110 ? txt.slice(0, 110) + '…' : txt)}</span></a>`;
-  }
+// typed or said: the pages of the pictures the words name come first (their danger signs, then what to do), then the
+// pages js/search.js ranks (live while typing). The disease-watch signal and report cards still come from the symptom
+// list, and only once the search is sent.
+function askResults(live) {
+  if (!ASK.q) return '';
+  const syms = findSymptoms(ASK.q).syms;
+  const cards = syms.slice(0, 2).filter((s) => s.page).map(symCard).join('');
+  if (live) return cards + FD.results(ASK.q, true, !!cards);
   const top3 = syms.slice(0, 3).map((s) => s.id);
   svSignal(top3);
-  if (out) out += reportCards(svFor('symptoms', top3)).html;
-  return out ? groupHead(T('results'), 'ui.results', ' sayh') + out : FD.none();
+  return cards + FD.results(ASK.q, false, !!cards) + reportCards(svFor('symptoms', top3)).html;
+}
+// a picture's page as a result card: red, its picture, its name and "Look at the danger signs first"
+function symCard(s) {
+  const href = '#/sym/' + s.id, more = S.book.narration['ui.ask.open'] ? ['ui.ask.open'] : [];
+  return `<div class="rcard danger symcard"><a href="${esc(href)}" class="rimg"><span class="symimg">${symPic(s)}</span></a><a href="${esc(href)}" class="rt"><span class="rbadge">${I.warn}${esc(T('dangerSigns'))}</span><b>${esc(L(s.label))}</b>${more.length ? `<span>${esc(L(S.book.narration['ui.ask.open']))}</span>` : ''}</a>${spk(s.say || 'ui.sym.' + s.id, null, more)}</div>`;
+}
+
+/* ---------- a picture's own page (#/sym/<id>/<age>): content/src/symptoms.json "page" ---------- */
+// Danger first, the same shape on every page: the lead (the danger, then the first thing to do), who is sick (when the
+// signs differ by age), the red "hospital now" box for that age, the nearest clinic, first-aid pages, the amber "clinic
+// today" box, the tools, care at home, then the pages to read. The boxes reuse the alert lines of the topic pages (one
+// wording, one recording), so a sign never says one thing here and another on its page.
+const SYM_AGE = { baby: ['ui.who.young', 'newborn-warm'], child: ['ui.who.child2m', 'toys-play'], older: ['ui.who.older', 'people'], pregnant: ['ui.who.pregnant', 'pregnant'], after: ['ui.ask.who.after', 'breastfeed'], anyone: ['ui.ask.who.anyone', 'family'] };
+const SYMS = { age: null }; // the age picked last, kept while the app is open (the next picture opens on it)
+const BLK = { book: null, map: {} };
+function blockById(id) {
+  if (BLK.book !== S.book) { BLK.book = S.book; BLK.map = {}; for (const t of Object.values(S.book.topics)) for (const b of t.blocks || []) BLK.map[b.id] = b; }
+  return BLK.map[id] || null;
+}
+const forAge = (x, age) => (x ? x[age] || x.all || null : null);
+const symAge = (pg, want) => { const ages = pg.ages || ['anyone']; return ages.indexOf(want) >= 0 ? want : ages.indexOf(SYMS.age) >= 0 ? SYMS.age : pg.default || ages[0]; };
+// a red or amber box from narration ids (its items keep the pictures of the signs they reuse)
+function symBox(bx, level, ids) {
+  const N = S.book.narration; if (!bx || !N[bx.title]) return '';
+  const items = (bx.items || []).filter((it) => N[it.id]); if (!items.length) return '';
+  const b = { type: 'alert', level, id: bx.title, title: N[bx.title], items: items.map((it) => ({ id: it.id, icon: it.icon, text: N[it.id] })) };
+  ids.push(...blockIds(b));
+  return blockHtml(b).replace('class="alert ', `class="alert symbox `);
+}
+function screenSym(id, want) {
+  const s = (S.book.symptoms || []).find((x) => x.id === id), pg = s && s.page;
+  if (!pg) return screenAsk();
+  const N = S.book.narration, ages = pg.ages || ['anyone'], age = symAge(pg, want), say = s.say || 'ui.sym.' + s.id;
+  const ids = [say];
+  let html = `<div class="topic-hero symhero">${s.pic ? `<img src="${esc(s.pic)}" alt="">` : `<span class="symic">${ic(s.icon)}</span>`}<a class="round" href="#/ask" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
+  html += titleRow(L(s.label), say) + listenBar(ids);
+  if (N[pg.lead]) { html += sayRow(pg.lead, 'blk lead'); ids.push(pg.lead); }
+  const now = (forAge(pg.now, age) || []).filter((t) => S.book.topics[t]);
+  const nowRows = () => { ids.push(...now.map((t) => t + '.title')); return now.map((t) => emRow(t).replace('class="erow', 'class="erow symnow')).join(''); };
+  // not breathing, choking: the first-aid pages come before anything else
+  if (pg.nowFirst) {
+    html += emCarRow(); ids.push('ui.sendForCar');
+    if (pg.cpr) { html += `<div class="em-ages">${emAges().map((x) => ageCard(x, '#/topic/' + x.cpr)).join('')}</div>`; ids.push(...emAges().map((x) => 'ui.' + x.label)); }
+    html += nowRows();
+  }
+  // who is sick: one picture per age; the question's speaker reads the question and every age
+  if (ages.length > 1) {
+    const whoIds = ['ui.ask.who', ...ages.map((a) => SYM_AGE[a][0])].filter((x) => N[x]);
+    html += `<div class="agewho" data-block="ui.ask.who"><div class="awq"><h2 class="t">${esc(L(N['ui.ask.who']))}</h2>${spk('ui.ask.who', null, whoIds.slice(1))}</div><div class="agetabs n${ages.length}">${ages.map((a) => `<a class="agetab${a === age ? ' on' : ''}" href="#/sym/${esc(id)}/${a}" data-symage="${a}"${a === age ? ' aria-current="true"' : ''}>${ic(SYM_AGE[a][1])}<span>${esc(L(N[SYM_AGE[a][0]]))}</span></a>`).join('')}</div></div>`;
+    ids.push('ui.ask.who', SYM_AGE[age][0]);
+  }
+  html += symBox(forAge(pg.red, age), 'urgent', ids);
+  html += nearRow(); ids.push('ui.near');
+  if (!pg.nowFirst && now.length) { ids.push('ui.ask.now'); html += groupHead(L(N['ui.ask.now']), 'ui.ask.now', ' danger') + nowRows(); }
+  const amber = symBox(forAge(pg.amber, age), 'soon', ids);
+  if (amber) {
+    html += amber;
+    const tl = (forAge(pg.amber, age) || {}).title, b = blockById(tl);
+    if (!/this week/i.test(((b && b.title) || N[tl] || {}).en || '')) { html += sayRow('ui.ask.clinic-today', 'blk tip'); ids.push('ui.ask.clinic-today'); }
+  }
+  html += (forAge(pg.tools, age) || []).map((x) => toolRow(x, ids)).join('');
+  const care = (forAge(pg.care, age) || []).map(blockById).filter(Boolean);
+  if (care.length) {
+    html += groupHead(L(N['ui.ask.care']), 'ui.ask.care'); ids.push('ui.ask.care');
+    let n = 0; for (const b of care) { if (b.type === 'step') n++; html += blockHtml(b, n); ids.push(...blockIds(b)); }
+  }
+  const more = (forAge(pg.pages, age) || []).filter((t) => S.book.topics[t]);
+  if (more.length) { html += groupHead(L(N['ui.ask.more']), 'ui.ask.more') + more.map(topicRow).join(''); ids.push('ui.ask.more', ...more.map((t) => t + '.title')); }
+  svSignal([id]);
+  const rc = reportCards(svFor('symptoms', [id])); html += rc.html; ids.push(...rc.ids);
+  if (N['ui.ask.footer']) { html += sayRow('ui.ask.footer', 'blk tip symfoot'); ids.push('ui.ask.footer'); }
+  if (pg.sources && pg.sources.length) html += `<details class="sources"><summary>${esc(T('sources'))}</summary><ul>${pg.sources.map((x) => `<li dir="ltr">${esc(x)}</li>`).join('')}</ul></details>`;
+  return { html, nav: 'health', adult: age === 'older' || age === 'pregnant' || age === 'after' };
 }
 async function startMic(btn) {
   const R = window.SpeechRecognition || window.webkitSpeechRecognition; if (!R) return;
@@ -1276,6 +1337,7 @@ function render() {
   else if (r[0] === 'settings') out = screenSettings();
   else if (r[0] === 'studio') out = screenStudio();
   else if (r[0] === 'ask') out = screenAsk();
+  else if (r[0] === 'sym') out = screenSym(r[1], r[2]);
   else if (r[0] === 'feedback') out = screenFeedback();
   else if (r[0] === 'near') out = screenNear();
   else if (r[0] === 's') out = screenList(r[1]);
@@ -1302,7 +1364,7 @@ function render() {
   if (r[0] === 'topic' && r[2]) setTimeout(() => { const el = document.querySelector(`[data-block="${CSS.escape(decodeURIComponent(r[2]))}"]`); if (el) { el.scrollIntoView({ block: 'center' }); el.classList.add('speaking'); setTimeout(() => el.classList.remove('speaking'), 2500); } }, 60);
   const af = $('#askform'); if (af) af.addEventListener('submit', (e) => { e.preventDefault(); ASK.q = $('#askq').value; $('#askres').innerHTML = askResults(); $('#askq').blur(); });
   // live results while typing; the cards are redrawn only when they change (fast on slow phones)
-  if (af) { $('#askq').addEventListener('input', (e) => { ASK.q = e.target.value; FD.show($('#askres'), askResults(null, true)); }); setTimeout(FD.warm, 30); }
+  if (af) { $('#askq').addEventListener('input', (e) => { ASK.q = e.target.value; FD.show($('#askres'), askResults(true)); }); setTimeout(FD.warm, 30); }
   const ff = $('#fbform'); if (ff) ff.addEventListener('submit', (e) => { e.preventDefault(); fbSubmit(ff.text.value.trim()); });
   fillPosters();
   fitText();
@@ -1312,7 +1374,7 @@ addEventListener('hashchange', () => {
   if (AN.ctl && AN.ctl.close) AN.ctl.close(); // leaving the page closes the animation player too
   // a page opened from the Emergency screen or a list (children, adults, #/s/...) goes back there
   const now = location.hash.split('/');
-  if (now[1] === 'topic') { if (/^#\/(emergency|s\/|children|adults|firstaid)/.test(lastHash)) EM.back = lastHash; } else EM.back = null;
+  if (now[1] === 'topic') { if (/^#\/(emergency|s\/|children|adults|firstaid|sym\/)/.test(lastHash)) EM.back = lastHash; } else EM.back = null;
   // a list page goes back to the screen it was opened from (Health, Home, Children, Adults); from a topic it keeps that
   const was = lastHash.split('/')[1];
   if (now[1] === 's') { if (was !== 'topic' && was !== 's') LB.back = lastHash || '#/home'; } else if (now[1] !== 'topic') LB.back = null;
@@ -1352,7 +1414,14 @@ document.addEventListener('click', async (e) => {
     else svYes(d.syn, card);
     return;
   }
-  if (d.sym) { ASK.q = ''; const q = $('#askq'); if (q) q.value = ''; $('#askres').innerHTML = askResults(d.sym); $('#askres').scrollIntoView({ behavior: 'smooth' }); return; }
+  if (d.symage) { // a picture's page: who is sick. Same page, that age's boxes; it says the age and the red box title
+    e.preventDefault(); SYMS.age = d.symage;
+    const y = scrollY; history.replaceState(null, '', t.getAttribute('href')); lastHash = location.hash; stopAudio(); render(); scrollTo(0, y);
+    const r = route(), s = (S.book.symptoms || []).find((x) => x.id === r[1]), bx = s && s.page && forAge(s.page.red, d.symage);
+    const say = [SYM_AGE[d.symage][0], ...(bx ? [bx.title] : [])].filter((x) => S.book.narration[x]);
+    if (say.length && (hasAudio(say[0]) || ttsVoice())) play(say, { quiet: true });
+    return;
+  }
   if (d.studioslot) { ST.slot = d.studioslot; store.set('studioSlot', ST.slot); render(); return; }
   switch (d.action) {
     case 'listen': if (P.on && P.ids.length > 1) stopAudio(); else play(S.queueIds); return;

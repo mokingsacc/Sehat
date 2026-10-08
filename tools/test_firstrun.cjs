@@ -173,7 +173,7 @@ const SV = book.surveillance;
     ok(sym, 'watch: the illness has a picture in What is wrong?', syn.symptoms);
     if (sym) {
       p = await open(ctx, T0 + 60e3, '#/ask');
-      await p.click(`[data-sym="${sym}"]`); await p.waitForTimeout(1500);
+      await p.click(`a.sym[href="#/sym/${sym}"]`); await p.waitForTimeout(1500);
       const rq = await ls(p, 'rq') || [], q = sent.map((x) => JSON.parse(x));
       ok(rq.some((x) => x.k === 's' && x.s === syn.id) || q.some((b) => b.items.some((i) => i.k === 's' && i.s === syn.id)), 'watch: a matching symptom search sends a search signal', { rq, route: await p.evaluate(() => location.hash) });
     }

@@ -52,19 +52,13 @@ export function initFinder(ctx) {
   const AGE_SAY = { child: 'ui.forChild', adult: 'ui.forAdult', pregnant: 'ui.who.pregnant' };
   const finder = () => S.book.finder || {};
   const dangerSigns = () => new Set(finder().danger || []);
-  // a danger page: a danger-sign page, a page of the Emergency section, or one the picture names in its "red" list
-  const isRed = (tid, s) => dangerSigns().has(tid) || ((S.book.sections || {}).emergency || []).includes(tid) || ((s && s.red) || []).includes(tid);
-  /** The cards for a picture of the symptom finder (symptoms.json): its pages in their order (danger pages first, in
-   *  red with a badge), each card saying who it is for when the pages are for more than one age group, then
-   *  "Which clinic or hospital?". */
-  function tile(s) {
-    const ages = finder().ages || {}, go = (s.go || []).filter((tid) => S.book.topics[tid]);
-    const mixed = new Set(go.map((tid) => ages[tid]).filter(Boolean)).size > 1;
-    const ds = dangerSigns();
-    const cards = go.map((tid) => card({ id: tid, route: '#/topic/' + tid, danger: isRed(tid, s), badge: T(ds.has(tid) ? 'dangerSigns' : 'emergency'), age: mixed ? ages[tid] : null }));
-    if (S.book.topics['hospital-places'] && !go.includes('hospital-places')) cards.push(card({ id: 'hospital-places', route: '#/topic/hospital-places' }));
-    return cards.join('');
-  }
+  // the Home tab's pages (lists with "tab": "house"): no medical advice there (Mo's rule), so never a search result,
+  // except the home health kit pages when the words are about a device
+  const homeTab = () => {
+    const out = new Set(), lists = (S.book.config && S.book.config.lists) || {};
+    for (const n of Object.keys(lists)) if (lists[n].tab === 'house') for (const t of (S.book.sections || {})[n] || []) out.add(t);
+    return out;
+  };
   // "These pages can help", with its speaker (as the group headings in the lists)
   const head = () => (S.book.narration['ui.results'] ? `<div class="group-h sayh" data-block="ui.results"><h2 class="t">${esc(T('results'))}</h2>${spk('ui.results')}</div>` : `<h2 class="sub-h">${esc(T('results'))}</h2>`);
   // nothing matched: never a blank screen. The spoken "if you are worried, see a health worker" line, then Emergency,
@@ -78,17 +72,19 @@ export function initFinder(ctx) {
   }
   /** Result cards for what someone typed or said (top 5, danger pages first with the red badge). live = still typing:
    *  nothing until there are 2 letters, and the "nothing found" help only once a word or two is there. */
-  function results(q, live) {
+  function results(q, live, have) {
     const n = String(q || '').trim().length;
     if (!n || (live && n < 2)) return '';
     let res = [];
-    try { res = engine().rank(q, S.lang, { limit: 8 }); } catch (e) { console.warn('search', e); }
+    try { res = engine().rank(q, S.lang, { limit: 10 }); } catch (e) { console.warn('search', e); }
     // the home health kit pages (Home tab) only when the words are about a device: the best calm match is a kit page,
-    // the kit list, or a reading (the checker or a "what the number means" page)
-    const lead = res.find((r) => !r.danger);
-    if (!(lead && (KIT(lead.id) || /^(tool\/reading|reading-)/.test(lead.id)))) res = res.filter((r) => !KIT(r.id));
+    // the kit list, or a reading (the checker or a "what the number means" page); the other Home-tab pages never
+    const lead = res.find((r) => !r.danger), home = homeTab();
+    const kitOk = !!(lead && (KIT(lead.id) || /^(tool\/reading|reading-)/.test(lead.id)));
+    res = res.filter((r) => (KIT(r.id) ? kitOk : !home.has(r.id)));
     const html = res.slice(0, 5).map(card).join('');
-    return html ? head() + html : live && n < 5 ? '' : none();
+    // have: the pages of the pictures the words name are already shown above (js/app.js), so no "nothing found"
+    return html ? head() + html : live && n < 5 ? '' : have ? '' : none();
   }
   /** Put result html into el while typing: cards that stay the same keep their element (no picture reload). */
   function show(el, html) {
@@ -107,5 +103,5 @@ export function initFinder(ctx) {
   }
   /** Build the word index for the reader's language ahead of the first letter typed. */
   function warm() { try { engine().warm(S.lang); } catch {} }
-  return { results, tile, none, show, warm, rank: (q, o) => engine().rank(q, S.lang, o), engine };
+  return { results, none, show, warm, rank: (q, o) => engine().rank(q, S.lang, o), engine };
 }

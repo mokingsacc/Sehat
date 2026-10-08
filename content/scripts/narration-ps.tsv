@@ -157,6 +157,62 @@ ui.allEmergencies	ټول بیړني حالات: دلته ووهئ چې د ټول
 ui.fb.voice	غږیز پیغام: سره تڼۍ ووهئ او خبرې وکړئ. کله چې مو خبرې پای ته ورسېدې، بیا یې ووهئ.	Voice message: tap the red button and speak. Tap it again when you finish.
 ui.fb.write	یا خپل پیغام دلته ولیکئ، بیا «لېږل» ووهئ. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه لیکئ او مه یې وایئ.	Or write your message here, then tap Send. Please do not write or say names or phone numbers.
 ui.date	نېټه: هغه ورځ چې اندازه شوې. نن ورځ دمخه ټاکل شوې ده؛ که بله ورځ وه، بدله یې کړئ.	Date: the day it was measured. Today is already chosen; change it if it was another day.
+ui.ask.who	ناروغ څوک دی؟ یو یې ووهئ.	Who is sick? Tap one.
+ui.ask.who.after	مور له زېږون وروسته	Mother after the birth
+ui.ask.who.anyone	هر څوک	Anyone
+ui.ask.now	لومړنۍ مرسته: همدا اوس دا پاڼه پرانیزئ.	First aid: open this page now.
+ui.ask.clinic-today	«نن کلینیک» دا مانا لري چې همدا نن نږدې روغتیايي پوستې، د کلي روغتیايي کارکوونکي یا کلینیک ته ولاړ شئ.	"Clinic today" means go today to the nearest health post, village health worker or clinic.
+ui.ask.care	په کور کې پاملرنه، کله چې د خطر نښه نه وي. نښې بیا بیا وګورئ.	Care at home, when there is no danger sign. Keep looking for the signs.
+ui.ask.more	نورې پاڼې: کېدای شي څه وي، او څه وکړئ.	More pages: what it may be, and what to do.
+ui.ask.footer	دا پاڼه نه وايي چې ناروغي څه ده؛ یوازې روغتیايي کارکوونکی یې ویلی شي. نښې د روغتیا نړیوال سازمان له لارښوونو دي. که اندېښنه لرئ، بیا هم کلینیک ته ولاړ شئ.	This page does not say what the illness is: only a health worker can. The signs are from World Health Organization guidance. If you are worried, go to the clinic anyway.
+ui.ask.open	لومړی د خطر نښې وګورئ.	Look at the danger signs first.
+ui.ask.fast-child	چټکه ساه اخلي: له ۲ تر ۱۲ میاشتو په یوه دقیقه کې ۵۰ ځله یا ډېر، له ۱ تر ۵ کلونو ۴۰ ځله یا ډېر	breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years
+ui.ask.thirsty	بې‌قراره دی او ډېر تږی دی، یا یې سترګې ننوتې دي	is restless and very thirsty, or has sunken eyes
+ui.ask.feed-baby	په یوه شپه او ورځ کې تر ۸ ځلو لږ شیدې خوري، یا ښه نه رودي	breastfeeds fewer than 8 times in a day and night, or does not suck well
+ui.ask.baby-diarrhoea	تر ۲ میاشتو کم ماشوم نس ناستی لري، که څه هم لږ وي	a baby under 2 months has diarrhoea, even a little
+ui.ask.baby-blood	په غایطه مواد کې یې وینه ده	has blood in the stool
+ui.ask.trapped	د دېوال یا چت لاندې بند پاتې شوی و، که څه هم اوس روغ ښکاري	was trapped under a wall or roof, even if they seem well now
+ui.ask.placenta	پرېوان (د ماشوم ځای) د ماشوم له زېږېدو یو ساعت وروسته لا نه دی وتلی	the afterbirth has not come out 1 hour after the baby was born
+ui.ask.snake	د مار چیچل، که څه هم کوچنی ښکاري	a snake bite, even if it looks small
+ui.ask.tetanus	ژور یا ککړ ټپ، او په تېرو ۵ کلونو کې یې د ټیټانوس واکسین نه دی اخیستی	a deep or dirty wound, and no tetanus vaccine in the last 5 years
+ui.ask.vaccine-red	له واکسین وروسته، که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	After a vaccine, go to hospital now, day or night, if the child:
+ui.ask.vaccine-amber	له واکسین وروسته، که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	After a vaccine, go to the clinic today if the child:
+ui.ask.vaccine-swell	د پیچکارۍ ځای پړسېدلی، لویږي، سور او ګرم کېږي، یا زوه لري	has a swelling where the injection was that grows, gets red and hot, or has pus
+ui.ask.notbreathing.lead	همدا اوس کار وکړئ. مرسته وغواړئ او یو څوک د موټر لپاره ولېږئ. که سمه ساه نه اخلي، ووهئ چې څوک دی او د سینې فشار پیل کړئ.	Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes.
+ui.ask.fever.lead	لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. تر ۲ میاشتو کم ماشوم چې هر ډول تبه ولري، همدا اوس دې روغتون ته ولاړ شي.	First look at the danger signs for the age of the sick person. A baby under 2 months with any fever must go to hospital now.
+ui.ask.cough.lead	لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. سخته یا چټکه ساه همدا نن مرستې ته اړتیا لري.	First look at the danger signs for the age of the sick person. Hard or fast breathing needs help today.
+ui.ask.breathing.lead	ساه لنډي ژر وژونکې کېدای شي. د ناروغ د عمر لپاره د خطر نښې وګورئ، بیا ساه وشمېرئ.	Hard breathing can kill fast. Look at the danger signs for the age of the sick person, then count the breaths.
+ui.ask.diarrhoea.lead	لومړی د خطر نښې وګورئ. له هر نس ناستي وروسته او آر اس ورکړئ او خواړه ورکول دوام کړئ.	First look at the danger signs. Then give ORS after every loose stool, and keep feeding.
+ui.ask.vomiting.lead	لومړی د خطر نښې وګورئ. بیا لږ لږ او بیا بیا د اوبو یا او آر اس غوړپ ورکړئ.	First look at the danger signs. Then give small sips of water or ORS, often.
+ui.ask.rash.lead	لومړی د خطر نښې وګورئ. له تبې سره تور داغونه، یا د مخ او ستوني پړسوب، همدا اوس روغتون ته اړتیا لري.	First look at the danger signs. Dark spots with fever, or a swollen face or throat, need the hospital now.
+ui.ask.sore.lead	لومړی د خطر نښې وګورئ. بیا ټپ په پاکو اوبو او صابون ومینځئ او پټ یې کړئ.	First look at the danger signs. Then wash the wound with clean water and soap, and cover it.
+ui.ask.pregnancy.lead	دا نښې په امیندوارۍ کې او له زېږون وروسته خطرناکې دي. که مو یوه ولیده، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	These signs in pregnancy and after the birth mean danger. If you see one, go to hospital now, day or night.
+ui.ask.bleeding.lead	همدا اوس په یوه پاک ټوکر پر ټپ کلک فشار ورکړئ. بیا د خطر نښې وګورئ.	Press hard on the wound now with a clean cloth. Then look at the danger signs.
+ui.ask.headache.lead	لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. هغه سر درد چې ناڅاپه او ډېر سخت پیل شي، همدا اوس روغتون ته اړتیا لري.	First look at the danger signs for the age of the sick person. A sudden, very bad headache needs the hospital now.
+ui.ask.chest.lead	د سینې درد د زړه یا سږو له امله کېدای شي. لومړی د خطر نښې وګورئ: ډېری یې دا مانا لري چې همدا اوس روغتون.	Chest pain can come from the heart or the lungs. Look at the danger signs first: most mean hospital now.
+ui.ask.belly.lead	لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. د نس سخت درد همدا اوس روغتون ته اړتیا لري.	First look at the danger signs for the age of the sick person. Severe belly pain needs the hospital now.
+ui.ask.back.lead	د ملا درد له لوېدو وروسته، یا د پښو له کمزورۍ یا بې‌حسۍ سره، همدا اوس روغتون ته اړتیا لري. لومړی د خطر نښې وګورئ.	Back pain after a fall, or with weak or numb legs, needs the hospital now. First look at the danger signs.
+ui.ask.burn.lead	همدا اوس سوځېدنه ۲۰ دقیقې د پاکو بهېدونکو اوبو لاندې سړه کړئ. بیا د خطر نښې وګورئ.	Cool the burn under clean running water for 20 minutes now. Then look at the danger signs.
+ui.ask.fumes.lead	همدا اوس ټول تازه هوا ته وباسئ او دروازې پرانیزئ. بیا د خطر نښې وګورئ.	Take everyone into fresh air now, and open the doors. Then look at the danger signs.
+ui.ask.bite.lead	همدا اوس د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ. بیا د خطر نښې وګورئ.	Wash the bite with soap and running water for 15 minutes now. Then look at the danger signs.
+ui.ask.poison.lead	هغه ته کانګې مه ورکوئ. د خطر نښې وګورئ او همدا اوس د زهرو له لوښي سره روغتون ته ولاړ شئ.	Do not make them vomit. Look at the danger signs and go to hospital now, with the poison container.
+ui.ask.fits.lead	د اختلاج پر مهال، کس له خطر لرې وساتئ او وخت وګورئ. بیا د خطر نښې وګورئ.	During a fit, keep the person safe and note the time. Then look at the danger signs.
+ui.ask.newborn.lead	ناروغ نوی زېږېدلی ماشوم ډېر ژر خرابېدای شي. که مو د خطر یوه نښه ولیده، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	A sick newborn can get worse very fast. If you see any danger sign, go to hospital now, day or night.
+ui.ask.feeding.lead	لومړی د ماشوم د عمر لپاره د خطر نښې وګورئ. هغه ماشوم چې شیدې یې پرېښې دي، همدا اوس روغتون ته اړتیا لري.	First look at the danger signs for the age of the child. A baby who has stopped feeding needs the hospital now.
+ui.ask.thin.lead	لومړی د خطر نښې وګورئ. د دواړو پښو پړسوب، یا ډېر ډنګر ماشوم چې له کمزورۍ نه خوري، همدا اوس روغتون ته اړتیا لري.	First look at the danger signs. Swelling of both feet, or a very thin child too weak to eat, needs the hospital now.
+ui.ask.yellow.lead	لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. هغه نوی زېږېدلی ماشوم چې په لومړۍ ورځ ژېړ شي، همدا اوس روغتون ته اړتیا لري.	First look at the danger signs for the age of the sick person. A newborn who turns yellow on the first day needs the hospital now.
+ui.ask.tired.lead	لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. بیا د معاینې لپاره کلینیک ته ولاړ شئ.	First look at the danger signs for the age of the sick person. Then go to the clinic for a check.
+ui.ask.sugar.lead	لړزه، خوله یا ګډوډي؟ که تېرولی شي، همدا اوس بوره ورکړئ. بیا د خطر نښې وګورئ.	Shaky, sweaty or confused? If they can swallow, give sugar now. Then look at the danger signs.
+ui.ask.pressure.lead	د وینې لوړ فشار ډېری وخت هېڅ نښه نه لري. لومړی د خطر نښې وګورئ، او فشار اندازه کړئ.	High blood pressure often has no signs. Look at the danger signs first, and get it measured.
+ui.ask.mind.lead	که څوک د خپل ژوند د پای ته رسولو خبرې کوي، ورسره پاتې شئ او همدا اوس مرسته وغواړئ. لومړی د خطر نښې وګورئ.	If someone talks of ending their life, stay with them and get help now. Look at the danger signs first.
+ui.ask.longcough.lead	۲ اونۍ یا ډېر ټوخی په کلینیک کې د نري رنځ ازموینې ته اړتیا لري. لومړی د خطر نښې وګورئ.	A cough for 2 weeks or more needs a TB test at the clinic. Look at the danger signs first.
+ui.ask.animals.lead	د کنې له چیچلو یا د څارویو له حلالولو وروسته تبه خطرناکه کېدای شي. لومړی د خطر نښې وګورئ.	Fever after a tick bite or slaughtering can be dangerous. Look at the danger signs first.
+ui.ask.disaster.lead	لومړی ټول خوندي ځای ته یوسئ. بیا د خطر نښې وګورئ او لومړنۍ مرسته وکړئ.	First get everyone to a safe place. Then look at the danger signs and give first aid.
+ui.ask.vaccine.lead	له واکسین وروسته، د خطر نښې وګورئ. د پیچکارۍ د ځای درد یا لږه تبه د یوې یا دوو ورځو لپاره عادي ده.	After a vaccine, look at the danger signs. A sore leg or a mild fever for a day or two is common.
+ui.ask.choking.lead	نشي ټوخلی، ساه اخیستلی یا خبرې کولی؟ همدا اوس کار وکړئ: ووهئ چې څوک دی.	Cannot cough, breathe or speak? Act now: tap who it is.
+ui.ask.safety.lead	که ماشوم ټپي شوی وي، لومړی د خطر نښې وګورئ. بیا لومړنۍ مرسته وکړئ.	If a child is hurt, look at the danger signs first. Then give first aid.
+ui.ask.eyes.lead	کیمیاوي مواد سترګې ته ورغلي؟ همدا اوس ۲۰ دقیقې په پاکو اوبو یې ومینځئ. بیا د خطر نښې وګورئ.	Chemical in the eye? Wash it with clean water for 20 minutes now. Then look at the danger signs.
+ui.ask.teeth.lead	لومړی د خطر نښې وګورئ. له تبې سره پړسېدلی مخ همدا اوس روغتون ته اړتیا لري.	First look at the danger signs. A swollen face with fever needs the hospital now.
 ui.fam.lead	د خپلې کورنۍ روغتیايي معلومات دلته وساتئ: واکسین، وزن، درمل او د ډاکټر خبرې. یو کس ووهئ چې د هغه معلومات ووینئ. هر څه یوازې په همدې ټیلیفون کې پاتې کېږي.	Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone.
 ui.fam.add	یو کس زیات کړئ: تی خور ماشوم، ماشوم، ښځه یا سړی.	Add a person: a baby, a child, a woman or a man.
 ui.fam.who	دا څوک دی؟ یو انځور ووهئ.	Who is this? Tap a picture.
@@ -505,6 +561,8 @@ ui.sym.sore	زخم او سالک	Sores and wounds
 ui.sym.pregnancy	امیندواري	Pregnancy
 ui.sym.bleeding	وینه بهېدل	Bleeding
 ui.sym.headache	سر درد	Headache
+ui.sym.eyes	د سترګو ستونزه	Eye problems
+ui.sym.teeth	د غاښ درد	Toothache
 ui.sym.belly	د نس درد	Belly pain
 ui.sym.back	ملا درد	Back pain
 ui.sym.burn	سوځېدنه	Burn
@@ -726,7 +784,7 @@ choking-baby.cpr	سست شو؟ ساه او د سینې فشار ورکړئ. د �
 choking-baby.hospital	په روغتون کې سږي معاینه کوي او که څه پاتې وي، بهر یې باسي.	At hospital they check the lungs and can take out anything left inside.
 choking-baby.safety	واړه شیان له تي خوړونکي ماشوم لرې وساتئ. غوز، سکې او واړه لوبتکي، او په کور کې د ماشوم د ساتنې نورې لارې. پاڼه پرانیزئ.	Keep small things from babies. Nuts, coins and small toys, and other ways to keep babies safe at home. Open the page.
 fever-fits.title	په کوچنیو ماشومانو کې له تبې سره اختلاج	Fits with fever in young children
-fever-fits.summary	له ۶ میاشتو تر ۵ کلونو ماشومانو کې عام دی. ډاروونکی دی، خو اکثره بې‌ضرره.	Common from 6 months to 5 years. Frightening, but usually harmless.
+fever-fits.summary	له تبې سره له اختلاج وروسته: روغتون. پوه شئ چې ماشوم څنګه خوندي وساتئ.	After a fit with fever: hospital. Know how to keep the child safe.
 fever-fits.lead	ځینې ماشومان چې د ۶ میاشتو او ۵ کلونو ترمنځ وي، کله چې تبه شي، اختلاج کوي. دا ډاروونکی دی، خو اکثره په څو دقیقو کې ودرېږي او زیان نه رسوي.	Some children aged 6 months to 5 years have a fit when they get a fever. It is frightening, but it usually stops within a few minutes and does no harm.
 fever-fits.safe	ماشوم په خوندي ځای کې وغځوئ. ماشوم پر ځمکه، له اور، بخارۍ او ګرمو څښاکونو لرې وغځوئ. ماشوم کلک مه نیسئ او مه یې ښوروئ.	Lay the child somewhere safe. Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them.
 fever-fits.time	وخت یې وګورئ. وګورئ چې کله پیل شو. که له ۵ دقیقو زیات دوام وکړي، سمدستي موټر راوغواړئ.	Time it. Note when it starts. If it lasts more than 5 minutes, get a car at once.
@@ -996,7 +1054,7 @@ worms.dont.baby	تر ۱ کال کم ماشوم ته د روغتیايي کارک
 worms.dont.kerosene	د چینجیو لپاره له خاورینو تېلو، بوټو یا نورو کورنیو درملو کار مه اخلئ.	Do not use kerosene, herbs or other home cures for worms.
 worms.together	د چینجیو درمل هغه وخت ښه اغېز کوي چې ټوله کورنۍ او ګاونډیان یې یوځای وخوري او ټول له تشناب څخه کار واخلي.	Worm medicine works best when the whole family and the neighbours take it at the same time, and everyone uses a latrine.
 cough.title	ټوخی، زکام او سینه بغل	Cough, cold and pneumonia
-cough.summary	ډېری ټوخي په کور کې ښه کېږي. د سینه بغل نښې وپېژنئ.	Most coughs get better at home. Know the signs of pneumonia.
+cough.summary	سخته ساه: همدا اوس روغتون. چټکه ساه: نن کلینیک. بیا په کور کې پاملرنه.	Hard breathing: hospital now. Fast breathing: clinic today. Then care at home.
 cough.lead	ډېری ټوخي او زکامونه په کور کې ښه کېږي. خو ژر ژر یا سخته سا کېدای شي د سینه بغل نښه وي، چې ژر ډاکټر ته اړتیا لري.	Most coughs and colds get better at home. But fast or difficult breathing can be a sign of pneumonia, which needs a health worker quickly.
 cough.feed	خواړه او اوبلنې ورکړئ. ډېر ځله تی ورکړئ. لویو ماشومانو ته ډېرې اوبلنې او نرم خواړه ورکړئ.	Keep feeding and give drinks. Breastfeed more often. Give older children extra drinks and soft food.
 cough.soothe	ستونی او پوزه آرامه کړئ. تود څښاک ورکړئ؛ شات یوازې له ۱ کال څخه لوی ماشوم ته. بنده پوزه په نرم او لوند ټوکر ورو پاکه کړئ.	Soothe the throat, clear the nose. Give warm drinks; honey only for children over 1 year. Clean a blocked nose gently with a soft, wet cloth.
@@ -1105,7 +1163,7 @@ growth.soon.see	داسې ښکاري چې ښه نه ویني	does not seem to see
 growth.soon.hear	غږ ته یا ستاسو آواز ته مخ نه اړوي	does not turn to sounds or to your voice
 growth.food	هغه ماشوم چې ښه وزن نه اخلي، ډېر ځله خواړو او د مور شیدو ته اړتیا لري. له روغتیايي کارکوونکي سره مشوره وکړئ.	A child who is not gaining weight needs more meals and breast milk. Ask the health worker for advice.
 malnutrition.title	ډنګر ماشوم (خوارځواکي)	Thin child (malnutrition)
-malnutrition.summary	ډېر ډنګر ماشوم په کلینیک کې درملنه کېږي.	A very thin child can be treated at the clinic.
+malnutrition.summary	پړسېدلې پښې یا نه خوري: همدا اوس روغتون. ډېر ډنګر: نن کلینیک.	Swollen feet or will not eat: hospital now. Very thin: clinic today.
 malnutrition.lead	کله چې ماشوم ډېر ډنګر وي، یا دواړه پښې یې پړسېدلې وي، بدن یې کمزوری وي او یوه ساده ناروغي یې وژلای شي. کلینیک دا حالت درملنه کوي.	When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this.
 malnutrition.signs	نښې وپېژنئ. ماشوم ډېر ډنګر وي، پښتۍ او هډوکي یې ښکاري، د کوناټو پوستکی یې شل او ګونځې وي، یا دواړه پښې یې پړسېدلې وي. ښايي کمزوری وي او خوړلو ته زړه ونه لري.	Know the signs. The child is very thin, the ribs and bones show, the skin hangs loose on the buttocks, or both feet are swollen. The child may be weak and not want to eat.
 malnutrition.band	د مټ رنګه فیته. روغتیايي کارکوونکی یا د کلي روغتیايي کارکوونکی د ماشوم مټ په یوه رنګه فیته اندازه کوي. سور یعنې ماشوم همدا اوس درملنې ته اړتیا لري؛ ژېړ یعنې د اضافي خوړو او معاینې لپاره راشئ.	The coloured arm band. The health worker or village health worker measures the upper arm with a coloured band. Red means the child needs treatment now; yellow means come for extra food and checks.
@@ -1330,7 +1388,7 @@ anaemia.urgent.chest-pain	د سینې درد	Chest pain
 anaemia.urgent.breathless-lying	د څملاستو پر وخت ساه لنډي	Short of breath when lying down
 anaemia.black-stool	د اوسپنې ګولۍ کېدای شي غایطه توره کړي. دا عادي خبره ده.	Iron tablets can make the stool black. This is normal.
 urine-infection.title	د متیازو سوزش (انتان)	Burning urine (infection)
-urine-infection.summary	د متیازو پر وخت سوزش د درملنې وړ دی. په امیندوارۍ کې په همغه ورځ ولاړ شئ.	Burning when passing urine is treatable. In pregnancy, go the same day.
+urine-infection.summary	د متیازو سوزش له تبې او ملا درد سره: همدا اوس روغتون. یوازې سوزش: نن کلینیک.	Burning urine, fever and back pain: hospital now. Only burning: clinic today.
 urine-infection.lead	د مثانې انتان د متیازو پر وخت سوزش، ډېر ځله متیازې، او خړې یا بدبویه متیازې راولي. په ښځو کې ډېر دی. د کلینیک انټي بیوټیک یې علاجوي؛ که درملنه نه شي پښتورګو ته رسېږي او په امیندوارۍ کې ماشوم ته زیان رسوي.	A bladder infection causes burning when passing urine, going often, and cloudy or smelly urine. It is common in women. Clinic antibiotics cure it; untreated it can reach the kidneys and, in pregnancy, harm the baby.
 urine-infection.signs	نښې وپېژنئ. د متیازو پر وخت سوزش یا درد، ډېر ځله یا بېړنۍ اړتیا، د نس په ښکتنۍ برخه کې درد، خړې، بدبویه یا وینه لرونکې متیازې. ماشومان ښايي یوازې تبه یا کانګې ولري.	Know the signs. Burning or pain when passing urine, needing to go often or urgently, pain low in the belly, cloudy, smelly or bloody urine. Children may only have fever or vomiting.
 urine-infection.drink	ډېرې اوبه وڅښئ. پاکې اوبه ډېر وڅښئ او متیازې مه ساتئ. له کوروالي وروسته متیازې وکړئ. شرمګاه پاکه وساتئ او له مخې خوا شا ته یې پاکه کړئ.	Drink plenty of water. Drink clean water often and do not hold urine in. Pass urine after sex. Keep the private area clean, wiping from front to back.
@@ -1500,7 +1558,7 @@ diabetes.urgent.confused	ګډوډي یا بې هوښي	confusion or unconsciousn
 diabetes.urgent.vomiting	کانګې او ډېر خراب حال	vomiting and feeling very unwell
 diabetes.urgent.foot-wound	د پښې ټپ چې سور، تور یا بدبویه شوی وي	a foot wound that is red, black or smelly
 asthma.title	ساه لنډي (آسم)	Asthma and tight breathing
-asthma.summary	د سینې شڼا او ساه لنډي د کلینیک په انهیلر (پف) کنټرولېږي.	Wheezing and tight chest can be controlled with a clinic inhaler.
+asthma.summary	خبرې نشي کولی یا شونډې یې شنې دي: همدا اوس روغتون. د کلینیک انهیلر ساه لنډي کنټرولوي.	Cannot speak or lips blue: hospital now. A clinic inhaler controls asthma.
 asthma.lead	آسم ساه شڼېدونکې او سینه تنګه کوي، ډېری د شپې، په سړه هوا یا لوګي کې. په انهیلر، یو پف چې ترې ساه اخلئ، کنټرولېږي، تر څو ماشوم یا لوی کس عادي ژوند او کار وکړي.	Asthma makes breathing whistle and the chest feel tight, often at night, in cold air or smoke. It can be controlled with an inhaler, a pump you breathe in from, so a child or adult can live and work normally.
 asthma.signs	نښې وپېژنئ. ټوخی او شڼېدونکې ساه چې راځي او ځي، او د شپې، له منډې وروسته، په سړه هوا یا لوګي کې بدترېږي. د حملو ترمنځ کس ښايي روغ ښکاري.	Know the signs. Cough and whistling breathing that comes and goes, worse at night, after running, in cold or smoke. Between attacks the person may seem well.
 asthma.inhaler	انهیلر سم وکاروئ. ژر اغېزه کوونکی انهیلر په څو دقیقو کې د ساه لاره خلاصوي. ورځنی مخنیوونکی انهیلر د حملو مخه نیسي. دقیقاً هغسې یې وکاروئ چې روغتیايي کارکوونکي ښودلي، او ژر اغېزه کوونکی انهیلر له ځان سره وساتئ.	Use the inhaler as taught. The reliever inhaler opens the airways in minutes. A daily preventer inhaler stops attacks. Use them exactly as the health worker showed, and keep the reliever with you.
@@ -1526,7 +1584,7 @@ asthma.dont.steroid	د ساه لنډۍ لپاره له دوکان څخه د سټ
 asthma.dont.smoke	د آسم لرونکي کس، په تېره بیا ماشوم، تر څنګ سګرټ مه څکوئ.	Do not smoke around a person with asthma, especially a child.
 asthma.spacer	ماشوم کولای شي انهیلر له یوه سپېسر سره وکاروي؛ کلینیک کولای شي له یوه پاک پلاستیکي بوتل څخه یې جوړ کړي او درته وښيي.	A child can use an inhaler with a spacer; the clinic can make one from a clean plastic bottle and show you how.
 epilepsy.title	مرګی (صرع)	Fits (epilepsy)
-epilepsy.summary	تکراري اختلاجونه د کلینیک په ورځني درمل کنټرولېږي.	Repeated fits can be controlled with daily medicine from the clinic.
+epilepsy.summary	له ۵ دقیقو اوږد اختلاج: همدا اوس روغتون. د کلینیک ورځنی درمل اختلاج کنټرولوي.	A fit over 5 minutes: hospital now. Daily clinic medicine controls fits.
 epilepsy.lead	مرګی تکراري اختلاجونه دي: کس لوېږي، رپېږي، ښايي ژبه وچیچي یا ځان لوند کړي، بیا ویده کېږي. پېری یا ښېراوې نه دي او په لمس نه خپرېږي. ورځني درمل په ډېری خلکو کې اختلاج دروي.	Epilepsy is repeated fits: the person falls, shakes, may bite the tongue or wet themselves, then sleeps. It is not a spirit or a curse and does not pass by touch. Daily medicine stops the fits in most people.
 epilepsy.during	د اختلاج پر وخت: خوندي یې وساتئ. کس پر ځمکه په اړخ څملوئ، له اور، اوبو او تېرو شیانو لرې. د سر لاندې یې نرم شی کېږدئ. کلک یې مه نیسئ. وخت په یاد وساتئ.	During a fit: keep them safe. Lay the person on their side on the ground, away from fire, water and sharp things. Put something soft under the head. Do not hold them down. Note the time.
 epilepsy.mouth	په خوله کې هېڅ شی مه ږدئ. هېڅکله کاشوغه، ټوکر، ګوتې یا اوبه په خوله کې مه اچوئ؛ غاښ ماتوي یا د ساه لاره بندوي. کس خپله ژبه نه شي تېرولای.	Nothing in the mouth. Never put a spoon, cloth, fingers or water in the mouth; it can break teeth or block breathing. The person cannot swallow the tongue.
@@ -1770,7 +1828,7 @@ diarrhoea-adult.dont.stop	د نس ناستي له امله څښل او خوړل 
 diarrhoea-adult.dont.stream	د ناروغ جامې په هغه ویاله کې مه مینځئ چې نور ترې اوبه څښي.	Do not wash the sick person's clothes in the stream others drink from.
 diarrhoea-adult.packets	په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې لري.	Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
 typhoid.title	محرقه (ټایفایډ)	Typhoid fever
-typhoid.summary	له ناپاکو اوبو یا خوړو څخه د څو ورځو تبه. په انټي بیوټیک علاج کېږي.	Days of fever from dirty water or food. Antibiotics cure it.
+typhoid.summary	د نس سخت درد: همدا اوس روغتون. له ۳ ورځو زیاته تبه: نن کلینیک.	Severe belly pain: hospital now. Fever over 3 days: clinic today.
 typhoid.lead	محرقه له هغو اوبو یا خوړو څخه راځي چې د ناروغ کس په ډکو ناپاک شوي وي. تبه ورځ تر بلې لوړېږي، له سردرد، ستړیا، د نس درد او کله کله نس ناستي یا قبضیت سره. له کلینیک څخه انټي بیوټیک ته اړتیا لري.	Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic.
 typhoid.signs	نښې وپېژنئ. هغه تبه چې په څو ورځو کې لوړېږي او نه ځي، له سردرد، کمزورۍ، بې اشتهايۍ، د نس درد، او نس ناستي یا قبضیت سره. ماشومان ښايي یوازې تبه ولري.	Know the signs. Fever that rises over several days and does not go, with headache, weakness, poor appetite, belly pain, and diarrhoea or constipation. Children may only have fever.
 typhoid.go	له ۳ ورځو زیاته تبه: ولاړ شئ. که تبه له ۳ ورځو زیات دوام وکړي، یا ژر تر ژره که ناروغ ډېر ناجوړه وي، کلینیک ته ولاړ شئ. محرقه د وینې معاینې او انټي بیوټیک ته اړتیا لري؛ پخپله نه ځي.	Fever over 3 days: go. Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself.
@@ -1995,7 +2053,7 @@ scabies.dont.one	یوازې هغه کس مه درملنه کوئ چې خارښت
 scabies.dont.steroid	د خارښت لپاره د دوکان سټرایډ کریمونه مه کاروئ؛ ګرګین بدتروي.	Do not use shop steroid creams for itching; they make scabies worse.
 scabies.shame	ګرګین د ناپاکۍ نښه نه ده. هر چېرته چې خلک یو بل ته نږدې ویده کېږي او په ګڼو کمپونو کې خپرېږي. هر څوک یې اخیستلای شي.	Scabies is not about being dirty. It spreads wherever people sleep close together, and in crowded camps. Anyone can get it.
 eye-infection.title	سرې او چرکنې سترګې	Red, sticky eyes
-eye-infection.summary	سرې یا چرکنې سترګې ژر خپرېږي. پاک مخ او د کلینیک ملهم مرسته کوي.	Red or sticky eyes spread fast. Clean faces and clinic ointment help.
+eye-infection.summary	د سترګو درد، ټپ یا د لید کمېدل: همدا اوس روغتون. زوه لرونکې سترګې: نن کلینیک.	Eye pain, injury or sight loss: hospital now. Sticky eyes: clinic today.
 eye-infection.lead	سرې او چرکنې سترګې ډېرې لیدل کېږي، په تېره بیا په ماشومانو کې، په دوبي کې او هلته چې مچان ډېر وي. ډېری یې په پاکولو او د کلینیک په ملهم جوړېږي، خو ځینې انتانات لید وړلای شي.	Red, sticky eyes are common, especially in children, in summer and where flies are many. Most get better with cleaning and ointment from the clinic, but some infections can take the sight.
 eye-infection.clean	سترګې ورو ورو پاکې کړئ. لاسونه ومینځئ. په یوه پاکه لمده ټوټه د سترګې له دننه کونج څخه بهر خوا ته پاکه کړئ، د هرې سترګې لپاره نوې برخه. وروسته بیا لاسونه ومینځئ.	Clean the eyes gently. Wash your hands. Wipe from the inner corner outwards with a clean wet cloth, a fresh part for each eye. Wash hands again after.
 eye-infection.faces	پاک مخ د تراخم مخه نیسي. د ماشومانو مخ هره ورځ په صابون ومینځئ، او مچان له مخ څخه لرې کړئ. ناپاک مخ د تراخم د سترګو ناروغي خپروي، چې په زړښت کې ړندوي.	Clean faces stop trachoma. Wash children's faces with soap every day, and keep flies off the face. A dirty face passes the trachoma eye disease, which can blind in old age.
@@ -2021,7 +2079,7 @@ eye-infection.dont.drops	د کلینیک له معاینې پرته د دوکا�
 eye-infection.dont.patch	چرکنه سترګه په کلک ټوکر مه تړئ.	Do not cover a sticky eye with a tight patch.
 eye-infection.samangan	سمنګان د افغانستان له هغو لږو ځایونو څخه دی چې تراخم لا هم پکې لیدل کېږي. پاک مخ، پاکې اوبه او تشناب د ماشومانو لید ساتي.	Samangan is one of the few places in Afghanistan where trachoma is still found. Clean faces, clean water and latrines protect the children's sight.
 dental.title	غاښونه او د غاښ درد	Teeth and toothache
-dental.summary	غاښونه په ورځ کې دوه ځله پاک کړئ. له غاښ درد سره پړسېدلی مخ کلینیک ته اړتیا لري.	Clean teeth twice daily. Toothache with a swollen face needs the clinic.
+dental.summary	له تبې سره پړسېدلی مخ: همدا اوس روغتون. غاښونه په ورځ کې دوه ځله پاک کړئ.	Swollen face with fever: hospital now. Clean teeth twice a day.
 dental.lead	خراب غاښونه د افغانستان په ماشومانو او لویانو کې ډېر دي او تقریباً هېڅکله درملنه نه کېږي. د غاښونو پاکول، لږ بوره او خوږ چای، او ژر درملنه د درد او د غاښونو د لوېدو مخه نیسي.	Rotten teeth are very common in Afghan children and adults, and almost never treated. Cleaning teeth, less sugar and sweet tea, and early treatment stop pain and loss of teeth.
 dental.brush	غاښونه په ورځ کې دوه ځله پاک کړئ. په برس او د فلورایډ کریم، یا پاک مسواک. سهار او له خوب مخکې یې پاک کړئ. له ماشومانو سره تر ۸ کلنۍ پورې مرسته وکړئ.	Clean teeth twice a day. Use a brush with fluoride toothpaste, or a clean miswak. Clean in the morning and before sleep. Help children until they are about 8.
 dental.sugar	لږ بوره او خوږ چای. خواږه، بسکویټ، سوډا او ډېر خوږ چای غاښونه خرابوي. د خوړو ترمنځ اوبه، مېوه او ساده خواړه ورکړئ.	Less sugar and sweet tea. Sweets, biscuits, fizzy drinks and many cups of sweet tea rot the teeth. Give water, fruit and plain food between meals.
@@ -2045,6 +2103,27 @@ dental.dont.aspirin	پر دردناک غاښ اسپرین، تنباکو یا ن
 dental.dont.shop	د غاښ درد لپاره له دوکان څخه انټي بیوټیک مه اخلئ؛ غاښ نه جوړوي.	Do not take shop antibiotics for toothache; they do not fix the tooth.
 dental.dont.pliers	مه پرېږدئ چې ناپوه کس غاښ په انبور وباسي.	Do not let an untrained person pull a tooth with pliers.
 dental.pregnancy	امیندوارې ښځې: غاښونه ښه پاک کړئ او د غاښونو ډاکټر ته ولاړ شئ؛ د ورۍ ناروغي په امیندوارۍ کې ډېره ده.	Pregnant women: clean teeth well and see the dentist; gum disease is common in pregnancy.
+back-pain.title	د ملا درد	Back pain
+back-pain.summary	له لوېدو وروسته یا د پښو له کمزورۍ سره: همدا اوس روغتون. ورو ورو وخوځېږئ.	After a fall, or with weak legs: hospital now. Keep moving gently.
+back-pain.lead	د ملا درد له لوېدو وروسته، یا د پښو له کمزورۍ یا بې‌حسۍ سره، همدا اوس روغتون ته اړتیا لري. نور ډېری د ملا دردونه، که ورو ورو وخوځېږئ، په څو اونیو کې ښه کېږي.	Back pain after a fall, or with weak or numb legs, needs the hospital now. Most other back pain gets better in a few weeks if you keep moving gently.
+back-pain.urgent	که څوک د ملا درد لري او له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if someone has back pain:
+back-pain.urgent.fall	له لوېدو، ټکر یا سخت ګوزار وروسته	after a fall, a crash or a hard blow
+back-pain.urgent.legs	په پښو کې له نوې کمزورۍ یا بې‌حسۍ سره	with new weakness or numbness in the legs
+back-pain.urgent.bladder	او متیازې یا غایطه نشي ساتلی، یا متیازې نشي کولی	and cannot hold urine or stool, or cannot pass urine
+back-pain.urgent.fever	له تبې سره، یا له لړزې او د متیازو له سوزش سره	with fever, or with shivering and burning urine
+back-pain.urgent.pregnant	په امیندوارۍ کې، له داسې دردونو سره چې د زېږون له وخت مخکې راځي او ځي	in pregnancy, with pains that come and go before the due date
+back-pain.soon	که څوک د ملا درد لري او له دې نښو څخه یوه ولري، په دې اونۍ کې کلینیک ته ولاړ شئ	Go to the clinic this week if someone has back pain:
+back-pain.soon.weight	او پرته له کوم لامله وزن کموي	and is losing weight without trying
+back-pain.soon.night	چې د شپې خرابېږي او په آرام سره نه کمېږي	that is worse at night, and does not ease with rest
+back-pain.move	ورو ورو وخوځېږئ. هره ورځ لږ وګرځئ او سپک کارونه وکړئ. څو ورځې په بستر کې پاتې کېدل ملا نوره هم کلکه کوي.	Keep moving gently. Walk a little and do light work each day. Staying in bed for days makes the back stiffer.
+back-pain.lift	په کږو زنګونونو یې پورته کړئ. بار خپل بدن ته نږدې وساتئ، زنګونونه کږ کړئ او بدن مه تاووئ. دروند بار له نورو سره یوځای پورته کړئ.	Lift with bent knees. Keep the load close to your body, bend your knees and do not twist. Share heavy loads.
+back-pain.medicine	د درد درمل له کلینیک. د سخت درد لپاره، له روغتیايي کارکوونکي د درد درمل وغواړئ. پیچکاري له درملتون مه اخلئ.	Pain medicine from the clinic. For strong pain, ask the health worker for a pain medicine. Do not buy injections from a shop.
+back-pain.pregnant	په امیندوارۍ کې د ملا درد. دا عادي دی: پر اړخ آرام وکړئ او دروند بار مه پورته کوئ. هغه دردونه چې د زېږون له وخت مخکې راځي او ځي، روغتون ته اړتیا لري.	Back ache in pregnancy. It is common: rest on your side and avoid heavy loads. Pains that come and go before the due date need the hospital.
+back-pain.clinic	په کلینیک کې: معاینه او مشوره. روغتیايي کارکوونکی ملا، پښې او متیازې معاینه کوي. که اړتیا وي د درد درمل درکوي او تمرینونه درښيي.	At the clinic: check and advice. The health worker checks the back, the legs and the urine. They give pain medicine if needed and show you exercises.
+back-pain.dont	دا کارونه مه کوئ:	Do not:
+back-pain.dont.bed	څو ورځې په بستر کې مه پاتې کېږئ.	Do not stay in bed for days.
+back-pain.dont.press	مه پرېږدئ چې څوک هغه ملا چې په لوېدو کې ټپي شوې، کش کړي یا فشار ورکړي.	Do not let anyone pull or press on a back hurt in a fall.
+back-pain.dont.shop	د سټېرایډ پیچکاري یا ګولۍ له درملتون مه اخلئ.	Do not buy steroid injections or tablets from a shop.
 floods-quakes.title	سېلاب او زلزله	Floods and earthquakes
 floods-quakes.summary	مخکې چمتو شئ او پوه شئ چې د سېلاب یا زلزلې پر وخت څه وکړئ.	Get ready early, and know what to do in floods or earthquakes.
 floods-quakes.lead	د پسرلي سېلابونو او زلزلو په سمنګان کې خلک وژلي دي. که پوه شئ چې د پېښې مخکې، پر وخت او وروسته څه وکړئ، خپله کورنۍ ژغورلای شئ.	Spring floods and earthquakes have killed people in Samangan. Knowing what to do before, during and after can save your family.

@@ -15,8 +15,8 @@
 //   - every in-app link opens a real page (not the Health tab fallback), "What does my reading mean?" on each
 //     home kit page opens that device's Health page, and Home pages have no danger or clinic boxes (Mo's rule);
 //   - every picture loads;
-//   - each "What is wrong?" picture: no Home-tab page, its danger pages first and in red (and only those), a speaker on
-//     every card; typed words that are not about a device show no home health kit page;
+//   - each "What is wrong?" picture opens its own page with the red danger box first and no Home-tab page; typed words
+//     show no Home-tab page (the home health kit only for words about a device) and offer the picture's page;
 //   - the red Emergency button is in the header except on the Health tab and in the emergency flow.
 // Needs Playwright with Chromium:  node tools/test_crawl.cjs [screenshot folder]
 // LANGS=fa,en WIDTHS=320 to run part of it; VERBOSE=1 lists every problem in every language and width.
@@ -37,8 +37,6 @@ const server = http.createServer((q, r) => { // the app folder, as a phone gets 
 
 // which lists are on the Home side (no medical advice there), and which kit page should open which reading page
 const HOUSE = new Set(Object.entries(book.config.lists).filter(([, c]) => c.tab === 'house').flatMap(([n]) => book.sections[n] || []));
-// the symptom finder's danger pages for a picture (red, first): the danger-sign pages, the Emergency section, its own "red"
-const TILE_RED = (id) => { const s = (book.symptoms || []).find((x) => x.id === id) || {}; const em = new Set(book.sections.emergency || []), ds = new Set((book.finder || {}).danger || []); return new Set((s.go || []).filter((t) => ds.has(t) || em.has(t) || (s.red || []).includes(t))); };
 const KIT_READING = { 'kit-bp': 'reading-bp', 'kit-thermometer': 'reading-temp', 'kit-glucometer': 'reading-sugar', 'kit-oximeter': 'reading-spo2', 'kit-muac': 'reading-muac' };
 const READING_DEV = { 'reading-bp': 'bp', 'reading-temp': 'temp', 'reading-sugar': 'sugar', 'reading-spo2': 'spo2', 'reading-muac': 'muac' };
 
@@ -144,7 +142,7 @@ function measure(MIN) {
     const p = await ctx.newPage(); let cur = '#/home';
     p.on('pageerror', (e) => prob('pageerror', cur, e.message.slice(0, 160), run));
     p.on('console', (m) => { if (m.type() === 'error') { const t = m.text(); if (!/Failed to load resource/.test(t)) prob('console', cur, t.slice(0, 160), run); } });
-    p.on('requestfailed', (r) => { const u = r.url(); if (/\/audio\//.test(u) || /net::ERR_ABORTED/.test(r.failure() && r.failure().errorText) && /\.mp3/.test(u)) return; prob('request', cur, `${r.failure() && r.failure().errorText} ${u.replace(BASE, '')}`, run); });
+    p.on('requestfailed', (r) => { const u = r.url(); if (/\/audio\//.test(u) || /net::ERR_ABORTED/.test(r.failure() && r.failure().errorText) && /\.mp3|workers\.dev/.test(u)) return; /* audio, or a stubbed server call cut off by the next screen */ prob('request', cur, `${r.failure() && r.failure().errorText} ${u.replace(BASE, '')}`, run); });
     p.on('response', (r) => { const u = r.url(); if (r.status() >= 400 && !/\/audio\/.*\.mp3/.test(u)) prob('request', cur, `${r.status()} ${u.replace(BASE, '')}`, run); });
     await p.route(/workers\.dev|\/e$|\/r$/, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
     // 0. the first run (a phone with nothing saved): only the language screen; tools/test_firstrun.cjs tests the rest
@@ -244,27 +242,30 @@ function measure(MIN) {
       if (OUT && q === Q[0]) await p.screenshot({ path: path.join(OUT, `${run}-search.png`), fullPage: true });
       for (const l of res.slice(0, 3)) { const prev = await go(l); await look(l, prev); await go('#/ask'); }
     }
-    // the symptom buttons under the search
-    await go('#/ask'); const syms = await p.$$eval('.sym', (x) => x.length);
-    for (let i = 0; i < syms; i++) {
-      await go('#/ask'); const s = await p.$$('.sym'); await s[i].click(); await settle();
-      const tag = `#/ask symptom ${i + 1}`;
-      const got = await p.$$eval('#askres .rcard', (x) => x.map((c) => ({ href: c.querySelector('a.rt').getAttribute('href'), red: c.classList.contains('danger'), spk: !!c.querySelector('.spk') })));
-      if (!got.length) { prob('search', tag, 'no results', run); continue; }
-      // Mo's rule: no page from the Home tab; the danger pages first, in red, so the first card is the danger page
-      const sym = await p.evaluate((n) => document.querySelectorAll('.sym')[n].dataset.sym, i);
-      const tids = got.map((g) => (/^#\/topic\/([\w-]+)/.exec(g.href) || [])[1]);
-      for (const t of tids) if (HOUSE.has(t)) prob('search', `${tag} (${sym})`, `shows the Home-tab page ${t}`, run);
-      const want = TILE_RED(sym);
-      got.forEach((g, j) => { if (g.red !== want.has(tids[j])) prob('search', `${tag} (${sym})`, `${tids[j]} ${want.has(tids[j]) ? 'is a danger page but not red' : 'is red but not a danger page'}`, run); });
-      if (want.size && !want.has(tids[0])) prob('search', `${tag} (${sym})`, `the first card is ${tids[0]}, not its danger page`, run);
-      if (got.some((g) => !g.spk)) prob('search', `${tag} (${sym})`, 'a result card has no speaker', run);
+    // the symptom pictures under the search: each opens its own page (#/sym/<id>), danger first, no Home-tab page
+    // (tools/test_tiles.cjs checks every age of every picture in detail)
+    await go('#/ask'); const syms = await p.$$eval('a.sym', (x) => x.map((a) => a.getAttribute('href')));
+    if (syms.length !== (book.symptoms || []).length) prob('search', '#/ask', `${syms.length} pictures, not ${(book.symptoms || []).length}`, run);
+    for (const h of syms) {
+      await go('#/ask'); await p.click(`a.sym[href="${h}"]`); await settle(); cur = h;
+      const got = await p.evaluate(() => ({ hash: location.hash, first: (() => { const e = document.querySelector('main .alert, main .em-car'); return e ? e.className : ''; })(), links: [...document.querySelectorAll('main a[href^="#/topic/"]')].map((a) => a.getAttribute('href').split('/')[2]) }));
+      if (got.hash !== h) { prob('search', h, `the picture opens ${got.hash}`, run); continue; }
+      if (!/urgent|em-car/.test(got.first)) prob('search', h, `the first box is not the red danger box (${got.first})`, run);
+      for (const t of got.links) if (HOUSE.has(t)) prob('search', h, `shows the Home-tab page ${t}`, run);
     }
     // typed words that are not about a device show no home health kit page (Home tab)
     for (const q of { fa: ['طفلم سرفه و تب دارد'], ps: ['ماشوم مې ټوخی او تبه لري'], en: ['my child has a cough and fever'] }[lang]) {
       await go('#/ask'); await p.fill('#askq', q); await p.press('#askq', 'Enter'); await settle();
       const hrefs = await p.$$eval('#askres a.rt', (x) => x.map((a) => a.getAttribute('href')));
       if (hrefs.some((h) => /^#\/(topic\/kit-|s\/kit)/.test(h))) prob('search', `#/ask "${q}"`, 'shows a home health kit page', run);
+      for (const h of hrefs) { const t = (/^#\/topic\/([\w-]+)/.exec(h) || [])[1]; if (t && HOUSE.has(t)) prob('search', `#/ask "${q}"`, `shows the Home-tab page ${t}`, run); }
+      if (!hrefs.some((h) => h === '#/sym/cough')) prob('search', `#/ask "${q}"`, 'does not offer the Cough picture page', run);
+    }
+    // typed words never show a Home-tab page (only the home kit, for words about a device)
+    for (const q of { fa: ['دود بخاری', 'زلزله', 'خواب'], ps: ['د بخارۍ لوګی', 'زلزله'], en: ['stove smoke', 'earthquake', 'sleep', 'winter home'] }[lang]) {
+      await go('#/ask'); await p.fill('#askq', q); await p.press('#askq', 'Enter'); await settle();
+      const hrefs = await p.$$eval('#askres a.rt', (x) => x.map((a) => a.getAttribute('href')));
+      for (const h of hrefs) { const t = (/^#\/topic\/([\w-]+)/.exec(h) || [])[1]; if (t && HOUSE.has(t) && !/^kit-/.test(t)) prob('search', `#/ask "${q}"`, `shows the Home-tab page ${t}`, run); }
     }
 
     // 4. Family: a voice note with no one in the family yet: one tap records, Stop keeps it as a family voice note

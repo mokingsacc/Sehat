@@ -4878,3 +4878,83 @@ For Mo to check:
 1. Babies aged 2 to 3 months with 37.5 to 38.9 now get "care at home and watch" (with the child danger signs asked
    first), where before they got "hospital now". This is IMCI; NICE would still call 38 or more under 3 months high risk.
 2. Dari "طفل ۲ ماهه تا ۵ ساله" and Pashto "د ۲ میاشتو تر ۵ کلونو ماشوم" (same pattern as before, only the number changed).
+
+## "What is wrong?" Phase 1: one checked page per picture (8 Oct 2026, worker tiles)
+Every picture on "What is wrong?" now opens its own page (`#/sym/<id>`). The page puts the red "go to hospital now"
+signs first, then the nearest clinic, then the amber "clinic today" signs, then tools, care at home and more pages.
+A row of pictures asks who is sick (baby under 2 months, child 2 months to 5 years, older child or adult, pregnant
+woman, mother after the birth; the child label is the same line as the temperature checker, `ui.who.child2m`) and
+changes the signs. Every sign has its own speaker and picture. The signs reuse the
+words already on the topic pages; where a sign was missing, a new line was written (below). Sources for every red and
+amber sign are in `content/src/symptoms.json` (`_notes`, not shown in the app). Typed questions now show the best one
+or two picture pages first, and no Home-tab pages. New pictures: Eye problems and Toothache (they open the eye and
+tooth pages; they need Mo's pictures). New page: Back pain (Adults), with its own picture.
+
+Defaults used where Mo has not decided:
+1. Any fever under 2 months = hospital now.
+2. Chest indrawing = hospital now (red). WHO IMCI 2014 treats it at the clinic with amoxicillin; iCCM and the Afghan
+   adaptation refer.
+3. Fast breathing alone = clinic today (IMCI pneumonia).
+4. "Clinic today" = the nearest health post, village health worker or clinic, the same day (said on every page).
+
+Medical points for Mo:
+1. Diarrhoea picture: sunken eyes alone, or restless and very thirsty, is clinic today (IMCI "some dehydration");
+   hospital now needs sunken eyes with very sleepy or cannot drink (IMCI). The Diarrhoea page still says sunken eyes
+   alone = hospital (audit CH7, left to main).
+2. Diarrhoea, baby under 2 months (audit CH3): any diarrhoea = clinic today; blood in the stool = hospital now; no home
+   ORS or zinc step at this age, only "keep breastfeeding".
+3. Rash picture (audit CH6): fast breathing with measles = clinic today, with the breath counter; struggling or noisy
+   breathing and chest indrawing = hospital now. The Measles page still says fast breathing = hospital (left to main).
+4. Fever picture (audit CH1): chest indrawing added to the child's hospital list; noisy breathing was already there;
+   fast breathing = clinic today with the breath counter. The Fever page itself still has no breathing sign (left to main).
+5. Pregnancy picture, mother after the birth (audit MA1, MA2): added "fever, and too weak to get out of bed", "severe
+   belly pain" and "the afterbirth has not come out 1 hour after the baby" (PCPNC 3rd ed. 2015).
+6. Injury and disaster picture (audit HM-01): "was trapped under a wall or roof, even if they seem well now" = hospital.
+7. Fits: the Fits picture says a first fit = hospital now; the Epilepsy page says a first fit = clinic today. Pick one.
+8. Headache: no WHO-sourced "clinic today" line for a headache alone, so the amber box has only fever, malaria and
+   dengue lines (and swelling, fever or feeling ill in pregnancy).
+9. Chest pain: every chest pain in an adult is hospital now.
+10. Vaccine picture: the red list is the IMCI general danger signs and anaphylaxis (WHO Immunization in Practice);
+    a growing, red, hot or pus-filled swelling at the injection site = clinic today.
+11. Back pain page red flags: after a fall or injury, weak or numb legs, loss of bladder or bowel control, fever, weight
+    loss, pain at night, pregnancy (WHO low back pain guideline 2023, BEC, IMAI, PCPNC). Weight loss and night pain are
+    "clinic this week"; the rest hospital now. Please check the levels.
+12. "Fever more than 2 days" (child) is kept as clinic today; IMCI refers fever of 7 days or more.
+
+Summaries now open with the danger and the action (fa, ps, en; please check the Dari and Pashto):
+- cough: Hard breathing: hospital now. Fast breathing: clinic today. Then care at home. / نفس مشکل: همین حالا شفاخانه. نفس تیز: امروز کلینیک. بعد مراقبت در خانه. / سخته ساه: همدا اوس روغتون. چټکه ساه: نن کلینیک. بیا په کور کې پاملرنه.
+- fever-fits: After a fit with fever: hospital. Know how to keep the child safe. / بعد از تشنج با تب: شفاخانه. بدانید طفل را چطور در امان نگه دارید. / له تبې سره له اختلاج وروسته: روغتون. پوه شئ چې ماشوم څنګه خوندي وساتئ.
+- asthma: Cannot speak or lips blue: hospital now. A clinic inhaler controls asthma. / نمی‌تواند گپ بزند یا لب‌ها کبود است: همین حالا شفاخانه. انهیلر کلینیک نفس‌تنگی را کنترول می‌کند. / خبرې نشي کولی یا شونډې یې شنې دي: همدا اوس روغتون. د کلینیک انهیلر ساه لنډي کنټرولوي.
+- epilepsy: A fit over 5 minutes: hospital now. Daily clinic medicine controls fits. / تشنج بیشتر از ۵ دقیقه: همین حالا شفاخانه. دوای روزانهٔ کلینیک تشنج را کنترول می‌کند. / له ۵ دقیقو اوږد اختلاج: همدا اوس روغتون. د کلینیک ورځنی درمل اختلاج کنټرولوي.
+- urine-infection: Burning urine, fever and back pain: hospital now. Only burning: clinic today. / سوزش ادرار با تب و کمردرد: همین حالا شفاخانه. فقط سوزش: امروز کلینیک. / د متیازو سوزش له تبې او ملا درد سره: همدا اوس روغتون. یوازې سوزش: نن کلینیک.
+- malnutrition: Swollen feet or will not eat: hospital now. Very thin: clinic today. / پاهای پندیده یا نمی‌خورد: همین حالا شفاخانه. خیلی لاغر: امروز کلینیک. / پړسېدلې پښې یا نه خوري: همدا اوس روغتون. ډېر ډنګر: نن کلینیک.
+- typhoid: Severe belly pain: hospital now. Fever over 3 days: clinic today. / درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۳ روز: امروز کلینیک. / د نس سخت درد: همدا اوس روغتون. له ۳ ورځو زیاته تبه: نن کلینیک.
+- dental: Swollen face with fever: hospital now. Clean teeth twice a day. / روی پندیده با تب: همین حالا شفاخانه. دندان‌ها را روزی دو بار پاک کنید. / له تبې سره پړسېدلی مخ: همدا اوس روغتون. غاښونه په ورځ کې دوه ځله پاک کړئ.
+- eye-infection: Eye pain, injury or sight loss: hospital now. Sticky eyes: clinic today. / درد چشم، زخم یا کم شدن دید: همین حالا شفاخانه. چشم چرکی: امروز کلینیک. / د سترګو درد، ټپ یا د لید کمېدل: همدا اوس روغتون. زوه لرونکې سترګې: نن کلینیک.
+
+New lines (en / fa / ps) for a native check. The terms I am least sure of: جفت (همراه) and پرېوان (د ماشوم ځای) for the afterbirth; غایطه مواد for stool in Pashto; "یکی را بزنید" for "tap one".
+- `ui.ask.who.after`: Mother after the birth / مادر بعد از ولادت / مور له زېږون وروسته
+- `ui.ask.who.anyone`: Anyone / هر کس / هر څوک
+- `ui.ask.now`: First aid: open this page now. / کمک‌های اولیه: همین حالا این صفحه را باز کنید. / لومړنۍ مرسته: همدا اوس دا پاڼه پرانیزئ.
+- `ui.ask.clinic-today`: "Clinic today" means go today to the nearest health post, village health worker or clinic. / «امروز کلینیک» یعنی همین امروز به نزدیک‌ترین پوستهٔ صحی، کارمند صحی قریه یا کلینیک بروید. / «نن کلینیک» دا مانا لري چې همدا نن نږدې روغتیايي پوستې، د کلي روغتیايي کارکوونکي یا کلینیک ته ولاړ شئ.
+- `ui.ask.care`: Care at home, when there is no danger sign. Keep looking for the signs. / مراقبت در خانه، وقتی هیچ علامت خطر نیست. علایم را باز هم ببینید. / په کور کې پاملرنه، کله چې د خطر نښه نه وي. نښې بیا بیا وګورئ.
+- `ui.ask.more`: More pages: what it may be, and what to do. / صفحه‌های بیشتر: شاید چه باشد و چه کنید. / نورې پاڼې: کېدای شي څه وي، او څه وکړئ.
+- `ui.ask.footer`: This page does not say what the illness is: only a health worker can. The signs are from World Health Organization guidance. If you are worried, go to the clinic anyway. / این صفحه نمی‌گوید که مریضی چیست؛ فقط کارمند صحی می‌تواند بگوید. علایم از رهنمود سازمان صحی جهان است. اگر نگران هستید، باز هم به کلینیک بروید. / دا پاڼه نه وايي چې ناروغي څه ده؛ یوازې روغتیايي کارکوونکی یې ویلی شي. نښې د روغتیا نړیوال سازمان له لارښوونو دي. که اندېښنه لرئ، بیا هم کلینیک ته ولاړ شئ.
+- `ui.ask.fast-child`: breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years / تیز نفس می‌کشد: از ۲ تا ۱۲ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر / چټکه ساه اخلي: له ۲ تر ۱۲ میاشتو په یوه دقیقه کې ۵۰ ځله یا ډېر، له ۱ تر ۵ کلونو ۴۰ ځله یا ډېر
+- `ui.ask.thirsty`: is restless and very thirsty, or has sunken eyes / بی‌قرار است و خیلی تشنه است، یا چشم‌هایش گود رفته است / بې‌قراره دی او ډېر تږی دی، یا یې سترګې ننوتې دي
+- `ui.ask.feed-baby`: breastfeeds fewer than 8 times in a day and night, or does not suck well / در یک شبانه‌روز کمتر از ۸ بار شیر می‌خورد، یا خوب نمی‌مکد / په یوه شپه او ورځ کې تر ۸ ځلو لږ شیدې خوري، یا ښه نه رودي
+- `ui.ask.baby-diarrhoea`: a baby under 2 months has diarrhoea, even a little / طفل کمتر از ۲ ماه اسهال دارد، حتی اگر کم باشد / تر ۲ میاشتو کم ماشوم نس ناستی لري، که څه هم لږ وي
+- `ui.ask.baby-blood`: has blood in the stool / در مدفوعش خون است / په غایطه مواد کې یې وینه ده
+- `ui.ask.trapped`: was trapped under a wall or roof, even if they seem well now / زیر دیوار یا سقف گیر مانده بود، حتی اگر حالا خوب معلوم شود / د دېوال یا چت لاندې بند پاتې شوی و، که څه هم اوس روغ ښکاري
+- `ui.ask.placenta`: the afterbirth has not come out 1 hour after the baby was born / جفت (همراه) یک ساعت بعد از تولد طفل هنوز بیرون نیامده است / پرېوان (د ماشوم ځای) د ماشوم له زېږېدو یو ساعت وروسته لا نه دی وتلی
+- `ui.ask.snake`: a snake bite, even if it looks small / مار گزیدگی، حتی اگر کوچک معلوم شود / د مار چیچل، که څه هم کوچنی ښکاري
+- `ui.ask.tetanus`: a deep or dirty wound, and no tetanus vaccine in the last 5 years / زخم عمیق یا کثیف، و در ۵ سال گذشته واکسین تیتانوس نگرفته / ژور یا ککړ ټپ، او په تېرو ۵ کلونو کې یې د ټیټانوس واکسین نه دی اخیستی
+- `ui.ask.vaccine-red`: After a vaccine, go to hospital now, day or night, if the child: / بعد از واکسین، اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز / له واکسین وروسته، که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ
+- `ui.ask.vaccine-amber`: After a vaccine, go to the clinic today if the child: / بعد از واکسین، اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید / له واکسین وروسته، که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ
+- `ui.ask.vaccine-swell`: has a swelling where the injection was that grows, gets red and hot, or has pus / جای پیچکاری پندیده و بزرگ‌تر، سرخ و گرم می‌شود، یا چرک دارد / د پیچکارۍ ځای پړسېدلی، لویږي، سور او ګرم کېږي، یا زوه لري
+- `ui.ask.<tile>.lead` (35 lines): the opening line of each picture page; each says to look at the danger signs first.
+- `ui.sym.eyes` (مشکل چشم / د سترګو ستونزه / Eye problems), `ui.sym.teeth` (دندان درد / Toothache), and every line of
+  the new Back pain page (`back-pain.*`).
+
+Dari points from the plan (Appendix C) still open: the MoPH word for chest indrawing ("پایین سینه‌اش به داخل کشیده
+می‌شود" is used), stridor ("صدای خشن وقت نفس گرفتن"), and the register words سینه‌بغل, علایم خطر, توبرکلوز.

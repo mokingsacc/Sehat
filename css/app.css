@@ -675,3 +675,25 @@ img{max-width:100%;display:block}
 /* a settings row with a speaker and a button or switch: on a narrow phone the button goes under the words */
 .srow.swrap{flex-wrap:wrap}.srow.swrap>.grow{flex:1 1 150px}.srow.swrap>.sbtn,.srow.swrap>.toggle{margin-inline-start:auto}
 .fweight .trow .body h2{margin:0 0 4px;font-size:18px}
+/* "What is wrong?" picture pages (#/sym/<id>/<age>): danger first; the tiles are links to them */
+a.sym{text-decoration:none}
+.topic-hero.symhero{display:flex;align-items:center;justify-content:center;height:96px;background:var(--red-t)}
+.topic-hero.symhero img{height:96px;width:100%;object-fit:cover}
+.symhero .symic .ic{display:block;width:64px;height:64px;color:var(--red)}
+.agewho{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 10px 10px;margin:0 0 12px;box-shadow:var(--shadow)}
+.agewho .awq{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.agewho .awq h2.t{flex:1 1 auto;margin:0;font-size:17px;line-height:1.45}
+.agetabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.agetabs.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.agetab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:70px;padding:6px 4px;border:2px solid var(--line);border-radius:16px;background:var(--card);color:inherit;text-align:center;font-weight:700;font-size:14.5px;line-height:1.3;overflow-wrap:break-word;word-wrap:break-word}
+.agetab .ic{width:28px;height:28px;color:var(--red);flex:0 0 auto}
+.agetab.on{background:var(--red);border-color:var(--red);color:#fff}
+.agetab.on .ic{color:#fff}
+@media (max-width:359px){.agetab{font-size:13.5px;min-height:66px}}
+.alert.symbox{margin-top:2px}
+.erow.symnow{background:var(--red-t);border:2px solid var(--red)}
+.erow.symnow .t{color:var(--red-d)}
+.symcard .rimg .symimg{display:flex;align-items:center;justify-content:center;height:62px;background:var(--red-t);color:var(--red)}
+.symcard .rimg .symimg img{width:100%;height:62px;object-fit:cover}
+.symcard .rimg .symimg .ic{width:40px;height:40px}
+.blk.tip.symfoot{background:#F3F0EA}
