@@ -4958,3 +4958,134 @@ New lines (en / fa / ps) for a native check. The terms I am least sure of: جف�
 
 Dari points from the plan (Appendix C) still open: the MoPH word for chest indrawing ("پایین سینه‌اش به داخل کشیده
 می‌شود" is used), stridor ("صدای خشن وقت نفس گرفتن"), and the register words سینه‌بغل, علایم خطر, توبرکلوز.
+
+## Medical audit 8 Oct 2026: child and maternal fixes (CH and MA), 8 Oct 2026
+
+The Clear fix rows with a CH or MA ID in the medical audit (/mnt/project-files/samangan-red-book/audit/medical-2026-10-08/ALL-FINDINGS.md),
+except js/tools.js (CH2 and the checker side of CH20 belong to the emergencies-and-kit worker) and the rows the
+illnesses-and-home worker took (MA5 + IL-9 fever in pregnancy, MA11 + HM-17 Td dose gaps). Each topic's "review"
+notes name the finding ID and its "sources" carry the source. Block ids were kept where the text changed (the voice
+tool remakes those clips); new lines have new ids.
+
+HIGH
+- CH1 (Fever page had no breathing sign). New red `fever.urgent.breathing`: "struggles to breathe, the lower chest pulls
+  in, or breathing is noisy when calm". New amber `fever.soon.fast`: "breathes fast: 50 or more a minute from 2 to 12
+  months, 40 or more from 1 to 5 years" (words of ui.ask.fast-child), and the breath-counter link `fever.counter` after
+  the amber box (words of cough.counter). Chest indrawing stays red, as on danger-child and cough, until Mo decides CH5.
+- MA1 (after-birth red list). Added `after-birth.urgent.fever-weak` "Fever, and too weak to get out of bed" and
+  `after-birth.urgent.belly-pain` "Severe belly pain" (words of pregnancy-danger).
+- MA2 + MA19 (home birth, placenta, a measure of heavy bleeding).
+  - `birth-plan.home`, old: "Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to
+    the clinic within a day." New: the same, then "Go to hospital now if the afterbirth is not out 1 hour after the
+    baby, or blood soaks a cloth in under 5 minutes."
+  - New red `birth-plan.urgent.placenta`: "The afterbirth (placenta) is not out 1 hour after the baby is born".
+  - `after-birth.urgent.bleeding`, old "Heavy bleeding, or bleeding that gets more"; new "Heavy bleeding (a cloth soaked
+    in under 5 minutes), or bleeding that gets more".
+
+MEDIUM
+- CH3 (diarrhoea in a baby under 2 months). `diarrhoea.lead` adds "A baby under 2 months with diarrhoea needs the
+  clinic today." New amber `diarrhoea.soon.baby` "is under 2 months old and has diarrhoea, even a little"; new red
+  `diarrhoea.urgent.baby` "is under 2 months old with blood in the stool, sunken eyes, or poor feeding". Zinc: see CH10.
+- CH4 (polio drops at 9 months). The 9-month visit (`vaccines.9m`) is now Measles 1, Polio drops 4 (new dose id `opv4`)
+  and Polio injection 2 (IPV), as in Afghanistan's WIISE reports for 2023 to 2025 (OPV dose 5 counting the birth dose;
+  the app does not number the birth dose). IPV2 at 9 months is confirmed, so its review flag is cleared and the
+  9-month clip can be recorded. The family vaccine card shows the new dose name on the 9-month row (nothing saved on a
+  phone changes: doses are saved by visit).
+- CH6 (measles, fast breathing). `measles.urgent.breathing`, old "breathes fast or with difficulty", new "struggles to
+  breathe, or the lower chest pulls in" (icon chest-indrawing). New amber `measles.soon.fast` "breathes fast, but has
+  none of the hospital signs" (words of cough.soon.fast).
+- CH7 (sunken eyes alone). `diarrhoea.urgent.eyes`, old "has sunken eyes", new "has sunken eyes, and is very sleepy or
+  cannot drink" (words of danger-child.dry.eyes). New amber `diarrhoea.soon.eyes` "is restless and very thirsty, or has
+  sunken eyes" (words of ui.ask.thirsty). `diarrhoea.urgent.skin` ("goes back very slowly") stays red, as
+  danger-child.dry.pinch does (more than 2 seconds); the audit row also suggested amber for it, but its own
+  contradiction note and the danger-child page keep a very slow pinch red, so the two pages now agree.
+- MA3 (after-birth amber list). New `after-birth.soon.fever` "Fever", `after-birth.soon.belly-pain` "Belly pain",
+  `after-birth.soon.ill` "Feeling ill" (words of pregnancy-danger.soon), `after-birth.soon.discharge` "A bad-smelling
+  discharge from the vagina"; `after-birth.soon.urine`, old "Pain or trouble passing urine", new "Pain or trouble
+  passing urine, or urine that leaks".
+- MA4 (waters break, no pains). `pregnancy-danger.soon.waters`, old "The waters break, but there are no labour pains",
+  new "The waters break with no labour pains: do not wait more than 6 hours" (PCPNC). go-early and birth-plan.go
+  ("do not wait at home") unchanged; Mo may still prefer red.
+- MA6 (calcium). `pregnancy-care.iron` and `anaemia.iron-pregnancy` add "Calcium tablets, if the clinic gives them, help
+  prevent fits; take them at another time of day." `pregnancy-care.clinic`: "gives iron, folic acid and the tetanus
+  vaccine" became "gives iron, folic acid (and calcium if they have it) and the tetanus vaccine". Calcium stock at
+  Samangan BHCs is unconfirmed (ask the PHD).
+- MA7 (worm medicine in pregnancy). `anaemia.worms` adds "In pregnancy, worm medicine is given only after the first 3
+  months; ask the midwife."
+- MA8 (headache with blurred vision). `pregnancy-danger.urgent.headache`, `pregnancy-care.urgent.headache` and
+  `birth-plan.urgent.headache`, old "Severe headache with blurred vision", new "Severe headache, or blurred vision" (the
+  words of after-birth.urgent.headache).
+
+LOW
+- CH8 + MA9 and MA10 (women's tetanus vaccine). `vaccines.td` title, old "Tetanus vaccine for women (TT or Td)", new
+  "Tetanus and diphtheria vaccine for women (Td)" (fa/ps now say tetanus and diphtheria). Text, old "Every woman aged
+  15 to 45, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from
+  diphtheria." New "Every woman aged 15 to 49, and every pregnant woman, needs up to 5 doses; the clinic checks her card
+  to see how many she still needs. It protects ...". `pregnancy-care.tetanus` English "(TT or Td)" became "(Td)" (fa/ps
+  unchanged, no new clip). `ui.fam.row.td`, old "five doses protect her ...", new "up to five doses protect her ...".
+  Follows the WIISE 2024 and 2025 country reports; if a current Afghan card still says TT, drop the diphtheria words.
+- CH9 (MR and HPV plans): review notes only (vaccines and measles): MR planned January 2028, HPV for girls 2029.
+- CH10 + KT-17 (zinc). `diarrhoea.zinc` title, old "Give zinc for 10 to 14 days", new "Give zinc for 14 days"; text,
+  old "Under 6 months, give 10 mg a day; from 6 months, give 20 mg a day. ...", new "From 2 to 6 months, give 10 mg a
+  day; from 6 months, give 20 mg a day. Under 2 months, give zinc only if the health worker gives it. ...".
+  `kit-first-aid.zinc`: "for 10 to 14 days: under 6 months ..." became "for 14 days: from 2 to 6 months ... Under 2
+  months, ask the health worker." `anim.ors.s5`: "10 to 14 days" became "14 days". docs/CONTENT_SPEC.md rule 5 updated.
+- CH11 (vitamin A doses). `measles.clinic`, old "... give vitamin A. Vitamin A protects ...", new "... give vitamin A:
+  one dose at the clinic, and one to give at home the next day. Vitamin A protects ...".
+- CH12 (thin child with fever). `malnutrition.urgent.fever`, old "is very thin and has fever, or feels cold", new "is
+  very thin with a high fever (39 or more), or feels cold"; new amber `malnutrition.soon.fever` "is very thin and has a
+  fever" (IMAM 2018).
+- CH15 (liver). `child-meals.egg`, old "If you can, give egg, liver, meat or yoghurt every day. ...", new "If you can,
+  give egg, meat or yoghurt every day, and liver once a week. ...".
+- CH16 (chlorhexidine). `newborn.cord`, old "Put nothing on the cord except chlorhexidine, the cord medicine from the
+  midwife or village health worker. Use it as they show you, and keep the cord dry.", new "If the baby was born at home,
+  use the chlorhexidine the midwife or village health worker gives you, as they show you. Otherwise put nothing on the
+  cord. Keep it clean and dry." `newborn.clinic`: "puts chlorhexidine on the cord" became "gives chlorhexidine for the
+  cord if the baby was born at home".
+- CH17: newborn source note corrected to "first 24 hours, 48 to 72 hours, day 7 to 14, week 6" (not shown in the app).
+- CH18 (ORS film). `anim.ors.s6`, old "Go to the clinic quickly if the child cannot drink or breastfeed, is very
+  sleepy, has blood in the poo, has a fever, or is not getting better.", new "Go to hospital now if the child cannot
+  drink or breastfeed, or is very sleepy. Go to the clinic today if there is blood in the poo, a fever, or the child is
+  not getting better."
+- CH20 (three thin-child lists). One list of six signs: swollen feet, will not eat or drink, very sleepy, vomits
+  everything, high fever (39 or more) or cold, fits. New `malnutrition.urgent.convulsion` (words of
+  danger-child.urgent.convulsion); reading-muac.urgent gains `reading-muac.urgent.vomit` "is thin and vomits
+  everything", `reading-muac.urgent.fever` "is thin with a high fever (39 or more), or feels cold" and
+  `reading-muac.urgent.convulsion`. The MUAC checker (js/tools.js SIGNS.muac) is for the kit worker, who has the ids.
+- CH21 (thin and tired tiles): already done by the tile rebuild (2f5a1d9): both tiles open with a red box. No change.
+- MA15 (keep active). `pregnancy-care.rest` title, old "Rest more, avoid heavy work", new "Keep active, avoid heavy
+  loads"; text, old "Lie down to rest during the day. Ask the family to help with very heavy work, like carrying
+  water.", new "Walking and your normal daily work are good for you. Rest when you are tired, and ask the family to
+  help with heavy work, like carrying water."
+- MA18 (urine test). `urine-infection.clinic`: "tests the urine with a strip" became "tests the urine (with a strip, or
+  in a laboratory where there is one)". The drug names (MA17) are Mo's call and unchanged.
+- KT-16 (done here for the kit worker, same file): `diarrhoea.mix`, old "Mix one packet in one litre of clean water.
+  ...", new "Mix one packet in the amount of clean water written on the packet, usually 1 litre. ..."; `anim.ors.s2`,
+  "Fill a clean jug to 1 litre with boiled, cooled water" became "Fill a clean jug with boiled, cooled water, as much
+  as the packet says, usually 1 litre".
+- symptoms.json: two tile notes that said "main to align" (CH6, CH7) now say the topic pages agree. No tile box changed;
+  the thin tile's red box picks up the new malnutrition.urgent.fever words.
+
+Not changed: everything marked Mo's call (CH5, CH13, CH14, CH19, CH22, MA12, MA13, MA14, MA16, MA17, MA20); CH2 (js/tools.js);
+MA5 and MA11 (other worker).
+
+Narration: 19 new ids and 30 changed ids, clips still to make (the old clips of changed ids say the old words until
+then). Several new lines have the same words as an existing clip, which the batch voice tool copies: fever.counter
+(cough.counter), measles.soon.fast (cough.soon.fast), malnutrition.urgent.convulsion and reading-muac.urgent.convulsion
+(danger-child.urgent.convulsion), after-birth.urgent.fever-weak, after-birth.urgent.belly-pain, after-birth.soon.fever,
+after-birth.soon.belly-pain, after-birth.soon.ill (pregnancy-danger), the three headache items (after-birth.urgent.headache),
+diarrhoea.urgent.eyes (danger-child.dry.eyes), diarrhoea.soon.eyes (ui.ask.thirsty), fever.soon.fast (ui.ask.fast-child).
+
+For Mo and a native speaker to check:
+1. Placenta: Dari «جفت», Pashto «ځوله (پرېوان)» (birth-plan.home, birth-plan.urgent.placenta).
+2. "A cloth soaked in under 5 minutes": Dari «در کمتر از ۵ دقیقه یک تکه را تر می‌کند», Pashto «له ۵ دقیقو په لږ وخت کې یو ټوکر لوند کړي».
+3. Calcium line: Dari «اگر کلینیک تابلیت کلسیم داد، از تشنج حاملگی جلوگیری می‌کند؛ آن را در وقت دیگر روز بخورید.», Pashto «که کلینیک د کلسیم ګولۍ درکړې، د امیندوارۍ د اختلاج مخه نیسي؛ هغه د ورځې په بل وخت کې وخورئ.»
+4. Waters: Dari «بیشتر از ۶ ساعت منتظر نمانید», Pashto «له ۶ ساعتونو زیات انتظار مه کوئ».
+5. Td title: Dari «واکسین تیتانوس و خناق برای زنان», Pashto «د ښځو لپاره د ټیټانوس او خناق واکسین»; "up to 5": «تا ۵ نوبت» / «تر ۵ ځلو پورې», «تا پنج نوبت» / «تر پنځو ډوزونو پورې».
+6. Polio drops 4: «قطرهٔ پولیو ۴» / «د پولیو څاڅکي ۴»: match the number on the Afghan card.
+7. Leaking urine: «چکیدن ادرار» / «د متیازو څاڅېدل»; bad-smelling discharge: «ترشح بدبو از راه تناسلی» / «له تناسلي لارې بدبویه اوبه».
+8. Keep active: «فعال باشید، بار سنگین نبردارید» / «فعاله اوسئ، دروند بار مه پورته کوئ»; «قدم زدن» / «ګرځېدل» for walking.
+9. Worms in pregnancy: «فقط بعد از ۳ ماه اول» / «یوازې له لومړیو ۳ میاشتو وروسته».
+10. Vitamin A at home the next day: «یک نوبت که روز بعد در خانه بدهید» / «یو ځل چې بله ورځ یې په کور کې ورکړئ».
+11. Medical: the after-birth red list now has 9 items and Fever's 9 (CONTENT_SPEC aims for 3 to 8); waters with no pains
+    is still amber (with the 6-hour limit); a very thin child with fever under 39 is now clinic today, not hospital.

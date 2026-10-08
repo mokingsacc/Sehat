@@ -232,7 +232,7 @@ ui.fam.need-pic	لطفاً اول یک عکس را بزنید.	Please tap a pict
 ui.fam.need-name	لطفاً نام را بگویید، یا آن را بنویسید.	Please say the name, or write it.
 ui.fam.rec-again	دوباره ثبت کنید.	Record again.
 ui.fam.row.vacc	واکسین‌ها: کدام‌ها داده شده، و کدام بعدی است.	Vaccines: which ones are given, and which one is next.
-ui.fam.row.td	واکسین تیتانوس برای زنان: پنج نوبت، او و نوزادانش را محافظت می‌کند.	Tetanus vaccine for women: five doses protect her and her newborn babies.
+ui.fam.row.td	واکسین تیتانوس برای زنان: تا پنج نوبت، او و نوزادانش را محافظت می‌کند.	Tetanus vaccine for women: up to five doses protect her and her newborn babies.
 ui.fam.row.growth	رشد: وزن و قد، با جدول رشد.	Growth: weight and length, with the growth chart.
 ui.fam.row.weight	وزن: وزن را بنویسید و ببینید که برای قد صحتمند است یا نه.	Weight: write the weight, and see if it is healthy for the height.
 ui.fam.row.meds	دواها: ثبت کنید چه دوا و چه وقت بخورد. وقتی برنامه باز است، یادتان می‌دهد.	Medicines: record what to take and when. When the app is open, it reminds you.
@@ -589,7 +589,7 @@ vaccines.birth	هنگام ولادت: واکسین بی سی جی، برای ت�
 vaccines.6w	۶ هفتگی: واکسین پنتاوالان ۱، برای خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد؛ قطرهٔ پولیو ۱، برای فلج اطفال (پولیو)؛ واکسین نوموکوک ۱، برای سینه‌بغل؛ قطرهٔ روتا ویروس ۱، برای اسهال شدید.	6 weeks: Pentavalent 1, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 1, against polio; PCV 1 (pneumococcal), against pneumonia; Rotavirus drops 1, against severe diarrhoea.
 vaccines.10w	۱۰ هفتگی: واکسین پنتاوالان ۲، برای خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد؛ قطرهٔ پولیو ۲، برای فلج اطفال (پولیو)؛ واکسین نوموکوک ۲، برای سینه‌بغل؛ قطرهٔ روتا ویروس ۲، برای اسهال شدید.	10 weeks: Pentavalent 2, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 2, against polio; PCV 2 (pneumococcal), against pneumonia; Rotavirus drops 2, against severe diarrhoea.
 vaccines.14w	۱۴ هفتگی: واکسین پنتاوالان ۳، برای خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد؛ قطرهٔ پولیو ۳، برای فلج اطفال (پولیو)؛ واکسین نوموکوک ۳، برای سینه‌بغل؛ پیچکاری پولیو ۱، برای فلج اطفال (پولیو).	14 weeks: Pentavalent 3, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 3, against polio; PCV 3 (pneumococcal), against pneumonia; Polio injection 1 (IPV), against polio.
-vaccines.9m	۹ ماهگی: واکسین سرخکان ۱، برای سرخکان؛ پیچکاری پولیو ۲، برای فلج اطفال (پولیو).	9 months: Measles 1, against measles; Polio injection 2 (IPV), against polio.
+vaccines.9m	۹ ماهگی: واکسین سرخکان ۱، برای سرخکان؛ قطرهٔ پولیو ۴، برای فلج اطفال (پولیو)؛ پیچکاری پولیو ۲، برای فلج اطفال (پولیو).	9 months: Measles 1, against measles; Polio drops 4, against polio; Polio injection 2 (IPV), against polio.
 vaccines.18m	۱۸ ماهگی: واکسین سرخکان ۲، برای سرخکان.	18 months: Measles 2, against measles.
 vaccines.free	واکسین در کلینیک‌های دولتی رایگان است.	Vaccines are free at government clinics.
 vaccines.birth-day	طفلی که در خانه به دنیا آمده، باید در ۲۴ ساعت اول برای واکسین هپاتیت ب و معاینه به کلینیک برده شود.	A baby born at home should go to the clinic within 24 hours, for the hepatitis B vaccine and a check.
@@ -598,7 +598,7 @@ vaccines.missed	اگر واکسینی مانده است، باز هم بروید
 vaccines.campaign	قطرهٔ پولیو، و گاهی ویتامین ای یا واکسین سرخکان، در کمپاین‌ها هم داده می‌شود. طفل را ببرید، و باز هم به هر نوبت کلینیک بروید.	Polio drops, and sometimes vitamin A or measles vaccine, are also given in campaigns. Take your child, and still go to every clinic visit.
 vaccines.mild-illness	طفلی که زکام یا اسهال خفیف دارد، باز هم می‌تواند واکسین شود.	A child with a mild cold or mild diarrhoea can still have vaccines.
 vaccines.normal	تب خفیف یا درد پا بعد از واکسین عادی است و در یکی دو روز خوب می‌شود.	A mild fever or a sore leg after a vaccine is normal, and gets better in a day or two.
-vaccines.td	واکسین تیتانوس برای زنان هر زن ۱۵ تا ۴۵ ساله و هر زن حامله باید ۵ نوبت این واکسین را بگیرد. این واکسین مادر و نوزاد را از تیتانوس و خناق محافظت می‌کند.	Tetanus vaccine for women (TT or Td) Every woman aged 15 to 45, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria.
+vaccines.td	واکسین تیتانوس و خناق برای زنان هر زن ۱۵ تا ۴۹ ساله و هر زن حامله تا ۵ نوبت این واکسین را لازم دارد؛ کلینیک کارتش را می‌بیند که چند نوبت دیگر لازم است. این واکسین مادر و نوزاد را از تیتانوس، و مادر را از خناق محافظت می‌کند.	Tetanus and diphtheria vaccine for women (Td) Every woman aged 15 to 49, and every pregnant woman, needs up to 5 doses; the clinic checks her card to see how many she still needs. It protects her and her newborn baby from tetanus, and her from diphtheria.
 anim.vaccines.title	چرا واکسین مهم است	Why vaccines matter
 anim.vaccines.s1	میکروب‌ها آن‌قدر کوچک هستند که دیده نمی‌شوند. بعضی میکروب‌ها سبب مریضی‌های خطرناک مانند سرخکان، پولیو و سیاه‌سرفه می‌شوند.	Germs are too small to see. Some germs cause dangerous illnesses, like measles, polio and whooping cough.
 anim.vaccines.s2	واکسین برای بدن مانند تمرین است. واکسین شکل ضعیف یا بی‌ضرر میکروب را به بدن نشان می‌دهد، تا بدن یاد بگیرد با آن مبارزه کند.	A vaccine is like practice for the body. It shows the body a weak or harmless form of a germ, so the body learns how to fight it.
@@ -924,12 +924,12 @@ newborn.lead	روزهای اول زندگی خطرناک‌ترین روزها �
 newborn.warm	خشک کنید و پوست به پوست بگیرید. طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر، پوست به پوست، بگذارید. هر دو را بپوشانید و به سر طفل کلاه بگذارید.	Dry the baby, hold skin to skin. Dry the baby at once and lay the baby on the mother's bare chest, skin to skin. Cover them both, and put a cap on the baby.
 newborn.breastfeed	در ساعت اول شیر بدهید. در ساعت اول بعد از ولادت شیر بدهید. بعد فقط شیر مادر، هر وقت طفل خواست، شب و روز. آب و شیر دیگر لازم نیست.	Breastfeed in the first hour. Start within one hour of birth. Then give only breast milk, whenever the baby wants, day and night. No water or other milk is needed.
 newborn.bath	یک روز صبر کنید، بعد بشویید. طفل را تا ۲۴ ساعت بعد از ولادت نشویید. بعد با آب گرم بشویید و زود خشک کنید.	Wait a day before the bath. Do not wash the baby for the first 24 hours. Then use warm water and dry the baby quickly.
-newborn.cord	ناف را پاک و خشک نگه دارید. روی ناف هیچ چیز نگذارید، به جز کلرهگزیدین، دوای نافی که قابله یا کارمند صحی قریه می‌دهد. آن را همان‌طور که نشان می‌دهند بمالید و ناف را خشک نگه دارید.	Keep the cord clean and dry. Put nothing on the cord except chlorhexidine, the cord medicine from the midwife or village health worker. Use it as they show you, and keep the cord dry.
+newborn.cord	ناف را پاک و خشک نگه دارید. اگر طفل در خانه به دنیا آمده، کلرهگزیدینی را که قابله یا کارمند صحی قریه می‌دهد، همان‌طور که نشان می‌دهند روی ناف بمالید. در غیر آن، روی ناف هیچ چیز نگذارید. ناف را پاک و خشک نگه دارید.	Keep the cord clean and dry. If the baby was born at home, use the chlorhexidine the midwife or village health worker gives you, as they show you. Otherwise put nothing on the cord. Keep it clean and dry.
 newborn.vaccines	واکسین‌های ولادت. طفل در روز اول به واکسین توبرکلوز، قطرهٔ پولیو و واکسین هپاتیت ب ضرورت دارد. اگر در خانه به دنیا آمده، در ۲۴ ساعت اول او را به کلینیک ببرید.	Birth vaccines. On the first day the baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, take the baby to the clinic within 24 hours.
 newborn.checks	چهار معاینه برای مادر و طفل. در روز اول، روز سوم، حدود یک هفتگی (روز ۷ تا ۱۴) و در ۶ هفتگی برای معاینه بروید. کارمند صحی قریه هم می‌تواند به خانهٔ شما بیاید.	Four checks for mother and baby. Go for checks on the first day, on day 3, at about one week (day 7 to 14), and at 6 weeks. The village health worker can also visit you at home.
 newborn.small	طفل کوچک مراقبت بیشتر می‌خواهد. طفل کوچک را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید و هر ۲ تا ۳ ساعت شیر بدهید. پاهای سرد یعنی طفل گرمی بیشتر می‌خواهد.	Small babies need extra care. Keep a small baby skin to skin on the mother's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth.
 newborn.breaths	نفس‌های طفل را بشمارید. وقتی طفل آرام است، تیلفون یک دقیقه را حساب می‌کند و شما با هر نفس یک بار دست می‌زنید. ۶۰ یا بیشتر زیاد تیز است.	Count the baby's breaths. When the baby is calm, the phone times one minute while you tap each breath. 60 or more is too fast.
-newborn.clinic	در کلینیک: معاینهٔ نوزاد. قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد و روی ناف دوای کلرهگزیدین می‌مالد.	At the clinic: the newborn check. The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord.
+newborn.clinic	در کلینیک: معاینهٔ نوزاد. قابله یا کارمند صحی طفل را وزن می‌کند، نفس، گرمی، شیرخوردن، ناف و چشم‌ها را معاینه می‌کند، واکسین‌های وقت تولد را می‌دهد، و اگر طفل در خانه به دنیا آمده، دوای کلرهگزیدین را برای ناف می‌دهد.	At the clinic: the newborn check. The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines, and gives chlorhexidine for the cord if the baby was born at home.
 newborn.hospital	در شفاخانه: نوزاد مریض. نوزادی که علامت خطر دارد شاید عفونت جدی داشته باشد. شفاخانه چند روز انتی‌بیوتیک پیچکاری می‌دهد، طفل را گرم نگه می‌دارد، در شیردهی کمک می‌کند و در صورت ضرورت اکسیجن می‌دهد.	At the hospital: a sick newborn. A newborn with a danger sign may have a serious infection. The hospital gives antibiotics by injection for several days, keeps the baby warm, helps with feeding and gives oxygen if needed.
 newborn.urgent	اگر نوزاد یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	If your newborn has any of these signs, go to hospital now, day or night:
 newborn.urgent.feed	خوب شیر نمی‌خورد یا شیر خوردن را بس کرده است	is not feeding well, or has stopped feeding
@@ -980,7 +980,7 @@ child-meals.summary	از ۶ ماهگی: هر روز لیتی غلیظ، تخم �
 child-meals.lead	در ۶ ماهگی طفل شما به چیزی بیشتر از شیر مادر نیاز دارد. غذای باغچه و مرغ‌های خودتان می‌تواند آنچه را طفل برای رشد لازم دارد بدهد.	At 6 months your baby needs more than breast milk. Food from your own garden and hens can give your child what they need to grow.
 child-meals.start	از ۶ ماهگی شروع کنید، شیر مادر را ادامه دهید. با ۲ یا ۳ قاشق غذای نرم، روزی دو بار شروع کنید و آهسته‌آهسته زیادتر بدهید. شیر مادر را بار بار، تا ۲ سالگی یا بیشتر، ادامه دهید.	Start at 6 months, keep breastfeeding. Begin with 2 or 3 spoons of soft food, twice a day, and slowly give more. Keep breastfeeding often, to 2 years or more.
 child-meals.thick	لیتی غلیظ، با کمی روغن. لیتی را آن‌قدر غلیظ بسازید که روی قاشق بماند؛ لیتی آبکی شکم را پر می‌کند ولی قوت کم دارد. کمی روغن، و تخم مرغ، لوبیا یا ترکاری کوبیده در آن مخلوط کنید.	Thick porridge, with oil added. Make porridge thick enough to stay on the spoon; watery porridge fills the belly but feeds little. Stir in a little oil, and mashed egg, beans or vegetables.
-child-meals.egg	هر روز تخم مرغ یا غذای حیوانی. اگر بتوانید، هر روز تخم مرغ، جگر، گوشت یا ماست بدهید. این‌ها آهن و قوتی دارند که غذای نباتی به تنهایی ندارد.	An egg or animal food every day. If you can, give egg, liver, meat or yoghurt every day. They give iron and strength that plant foods alone cannot.
+child-meals.egg	هر روز تخم مرغ یا غذای حیوانی. اگر بتوانید، هر روز تخم مرغ، گوشت یا ماست بدهید، و هفته‌ای یک بار جگر. این‌ها آهن و قوتی دارند که غذای نباتی به تنهایی ندارد.	An egg or animal food every day. If you can, give egg, meat or yoghurt every day, and liver once a week. They give iron and strength that plant foods alone cannot.
 child-meals.iron	غذای پر آهن همراه میوه. لوبیا، دال و سبزی‌های سبز تیره آهن دارند. همراه آن‌ها بادنجان رومی، زردآلو یا انار بدهید؛ به بدن کمک می‌کند آهن را بگیرد.	Iron foods with fruit. Beans, lentils and dark green leaves have iron. Give tomato, apricot or pomegranate with them: it helps the body take in the iron.
 child-meals.often	طفل روزی چند بار غذا بخورد. از ۶ تا ۸ ماهگی، روزی ۲ تا ۳ بار غذا. از ۹ ماهگی تا ۲ سالگی، روزی ۳ تا ۴ بار غذا، و ۱ تا ۲ بار خوراک سبک مثل میوه یا نان.	How often a child eats. From 6 to 8 months, 2 to 3 meals a day. From 9 months to 2 years, 3 to 4 meals, and 1 to 2 snacks like fruit or bread.
 child-meals.clean	دست پاک، غذای تازه. پیش از پختن و غذا دادن، دست‌ها را با صابون بشویید. غذا را تازه بپزید، یا سرپوشیده نگه دارید و تا ۲ ساعت استفاده کنید.	Clean hands, fresh food. Wash hands with soap before cooking and feeding. Cook food fresh, or keep it covered and use it within 2 hours.
@@ -992,21 +992,24 @@ child-meals.dont.tea	به شیرخوار و طفل کوچک چای ندهید؛ 
 child-meals.bowl	به طفل کوچک کاسهٔ جدا بدهید و با او بنشینید. با مهربانی تشویق کنید؛ هرگز زور نکنید.	Give a small child their own bowl and sit with them. Encourage gently; never force.
 diarrhoea.title	اسهال و او آر اس	Diarrhoea and ORS
 diarrhoea.summary	او آر اس و زنک بدهید و غذا دادن را ادامه دهید.	Give ORS and zinc, and keep feeding.
-diarrhoea.lead	اسهال می‌تواند بدن طفل را خیلی زود بی‌آب کند. او آر اس و زنک بدهید و شیر و غذا را ادامه دهید.	Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding.
-diarrhoea.mix	او آر اس را درست آماده کنید. یک پاکت را در یک لیتر آب پاک حل کنید. هر روز تازه بسازید و باقی‌مانده را روز بعد دور بریزید.	Mix ORS the right way. Mix one packet in one litre of clean water. Make it fresh each day and throw away what is left the next day.
+diarrhoea.lead	اسهال می‌تواند بدن طفل را خیلی زود بی‌آب کند. او آر اس و زنک بدهید و شیر و غذا را ادامه دهید. طفل کمتر از ۲ ماه که اسهال دارد، باید امروز به کلینیک برده شود.	Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding. A baby under 2 months with diarrhoea needs the clinic today.
+diarrhoea.mix	او آر اس را درست آماده کنید. یک پاکت را در همان مقدار آب پاک که روی پاکت نوشته شده، معمولاً یک لیتر، حل کنید. هر روز تازه بسازید و باقی‌مانده را روز بعد دور بریزید.	Mix ORS the right way. Mix one packet in the amount of clean water written on the packet, usually 1 litre. Make it fresh each day and throw away what is left the next day.
 diarrhoea.give	بعد از هر اسهال، او آر اس بدهید. به طفل زیر ۲ سال ۵۰ تا ۱۰۰ میلی‌لیتر، و به طفل ۲ سال و بالاتر ۱۰۰ تا ۲۰۰ میلی‌لیتر بدهید. با پیاله، کم‌کم بدهید.	Give ORS after each loose stool. Under 2 years, give 50 to 100 ml; 2 years and over, give 100 to 200 ml. Give small sips from a cup.
-diarrhoea.zinc	۱۰ تا ۱۴ روز زنک بدهید. به طفل زیر ۶ ماه روزانه ۱۰ میلی‌گرام، و از ۶ ماهگی روزانه ۲۰ میلی‌گرام بدهید. حتی وقتی اسهال بند شد، ادامه دهید.	Give zinc for 10 to 14 days. Under 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Keep giving it even after the diarrhoea stops.
+diarrhoea.zinc	۱۴ روز زنک بدهید. از ۲ تا ۶ ماهگی روزانه ۱۰ میلی‌گرام، و از ۶ ماهگی روزانه ۲۰ میلی‌گرام بدهید. به طفل کمتر از ۲ ماه، زنک را فقط وقتی بدهید که کارمند صحی داده باشد. حتی وقتی اسهال بند شد، ادامه دهید.	Give zinc for 14 days. From 2 to 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Under 2 months, give zinc only if the health worker gives it. Keep giving it even after the diarrhoea stops.
 diarrhoea.feed	شیر و غذا را ادامه دهید. بیشتر و طولانی‌تر شیر بدهید. غذای نرم، شوربا و آب برنج هم بدهید.	Keep breastfeeding and feeding. Breastfeed more often and for longer. Also give soft food, soup and rice water.
 diarrhoea.prevent	از اسهال جلوگیری کنید. بعد از تشناب و پیش از غذا، دست‌ها را با صابون بشویید. آب پاک یا جوش‌داده بنوشید و واکسین روتا ویروس را بگیرید.	Stop diarrhoea before it starts. Wash hands with soap after the toilet and before food. Drink clean or boiled water, and get the rotavirus vaccine.
 diarrhoea.clinic	در کلینیک: او آر اس، زنک و معاینه. کارمند صحی می‌بیند طفل چقدر خشک شده، او آر اس و زنک را می‌دهد و طرز دادنش را نشان می‌دهد. انتی‌بیوتیک فقط برای خون در مدفوع یا کولرا است.	At the clinic: ORS, zinc, a check. The health worker checks how dry the child is, gives ORS and zinc, and shows how to give them. Antibiotics are only for blood in the stool or cholera.
 diarrhoea.hospital	در شفاخانه: مایعات از راه رگ. طفلی که نمی‌تواند بنوشد یا بسیار خشک شده، به تیزی سیروم یا مایعات از راه نل بینی می‌گیرد. بعد دوباره او آر اس و زنک. اکثر اطفال در ظرف یک روز بهتر می‌شوند.	At the hospital: fluids by drip. A child who cannot drink or is very dry gets fluids by drip or through a tube in the nose. Then ORS and zinc again. Most children are better within a day.
 diarrhoea.urgent	اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	If your child has any of these signs, go to hospital now, day or night:
+diarrhoea.urgent.baby	کمتر از ۲ ماه عمر دارد و در مدفوعش خون است، چشم‌هایش گود رفته، یا خوب شیر نمی‌خورد	is under 2 months old with blood in the stool, sunken eyes, or poor feeding
 diarrhoea.urgent.drink	نمی‌تواند چیزی بنوشد یا شیر مادر بخورد	cannot drink or breastfeed
 diarrhoea.urgent.vomit	هر چه می‌خورد یا می‌نوشد، استفراغ می‌کند	vomits everything, cannot keep anything down
 diarrhoea.urgent.sleepy	خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است	is very sleepy and hard to wake, or unconscious
-diarrhoea.urgent.eyes	چشمانش گود رفته است	has sunken eyes
+diarrhoea.urgent.eyes	چشم‌هایش گود رفته، و خیلی خواب‌آلود است یا نمی‌تواند بنوشد	has sunken eyes, and is very sleepy or cannot drink
 diarrhoea.urgent.skin	پوست شکمش را که بگیرید و رها کنید، خیلی آهسته برمی‌گردد	pinched skin on the belly goes back very slowly
 diarrhoea.soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
+diarrhoea.soon.baby	کمتر از ۲ ماه عمر دارد و اسهال دارد، حتی اگر کم باشد	is under 2 months old and has diarrhoea, even a little
+diarrhoea.soon.eyes	بی‌قرار است و خیلی تشنه است، یا چشم‌هایش گود رفته است	is restless and very thirsty, or has sunken eyes
 diarrhoea.soon.blood	در مدفوعش خون دیده می‌شود	has blood in the stool
 diarrhoea.soon.long	۱۴ روز یا بیشتر است که اسهال دارد	has had diarrhoea for 14 days or more
 diarrhoea.soon.worse	بهتر نمی‌شود یا بدتر می‌شود	is not getting better, or is getting worse
@@ -1019,11 +1022,11 @@ diarrhoea.dont.antibiotic	انتی‌بیوتیک ندهید، مگر اینکه
 diarrhoea.vomit	اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید. بعد دوباره او آر اس بدهید، اما آهسته‌تر.	If the child vomits, wait 10 minutes. Then give ORS again, but more slowly.
 anim.ors.title	ساختن او آر اس در خانه	Making ORS at home
 anim.ors.s1	اسهال آب و نمک بدن طفل را بیرون می‌کشد. همین که اسهال شروع شد، او آر اس بدهید؛ آنچه را از دست رفته دوباره پر می‌کند.	Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost.
-anim.ors.s2	دست‌ها را بشویید. یک جگ پاک را تا ۱ لیتر از آب جوشانده و سرد شده پر کنید. تمام پاکت را بریزید و هم بزنید تا حل شود.	Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves.
+anim.ors.s2	دست‌ها را بشویید. یک جگ پاک را از آب جوشانده و سرد شده پر کنید، به اندازه‌ای که روی پاکت نوشته است، معمولاً ۱ لیتر. تمام پاکت را بریزید و هم بزنید تا حل شود.	Wash your hands. Fill a clean jug with boiled, cooled water, as much as the packet says, usually 1 litre. Pour in the whole packet and stir until it dissolves.
 anim.ors.s3	پاکت ندارید؟ فعلاً آب برنج یا شوربا بدهید و برای گرفتن پاکت او آر اس به کلینیک بروید. همیشه چند پاکت را در خانه نگه دارید.	No packet? For now give rice water or soup, and go to the clinic for ORS packets. Always keep a few packets at home.
 anim.ors.s4	کم‌کم و پی‌درپی با قاشق یا پیاله بدهید. اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید و بعد آهسته‌تر بدهید. هر روز تازه بسازید.	Give small sips often, with a spoon or a cup. If the child vomits, wait 10 minutes, then give it more slowly. Make it fresh each day.
-anim.ors.s5	شیر مادر و غذا را ادامه دهید. تابلیت زنک از کلینیک، روزی یک بار برای ۱۰ تا ۱۴ روز، به جور شدن طفل کمک می‌کند، حتی وقتی اسهال بند شد.	Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 10 to 14 days, help the child get well, even after the diarrhoea stops.
-anim.ors.s6	اگر طفل نمی‌تواند بنوشد یا شیر بخورد، بسیار خواب‌آلود است، در پاخانه‌اش خون است، تب دارد یا بهتر نمی‌شود، زود به کلینیک بروید.	Go to the clinic quickly if the child cannot drink or breastfeed, is very sleepy, has blood in the poo, has a fever, or is not getting better.
+anim.ors.s5	شیر مادر و غذا را ادامه دهید. تابلیت زنک از کلینیک، روزی یک بار برای ۱۴ روز، به جور شدن طفل کمک می‌کند، حتی وقتی اسهال بند شد.	Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 14 days, help the child get well, even after the diarrhoea stops.
+anim.ors.s6	اگر طفل نمی‌تواند بنوشد یا شیر بخورد، یا بسیار خواب‌آلود است، همین حالا به شفاخانه بروید. اگر در پاخانه‌اش خون است، تب دارد یا بهتر نمی‌شود، امروز به کلینیک بروید.	Go to hospital now if the child cannot drink or breastfeed, or is very sleepy. Go to the clinic today if there is blood in the poo, a fever, or the child is not getting better.
 anim.water.title	پاک کردن آب نوشیدنی	Making water safe
 anim.water.s1	آب شاید صاف معلوم شود، اما باز هم میکروب‌هایی داشته باشد که اطفال را اسهال می‌سازد. مادرها چند راه آسان یافته‌اند تا آب را بی‌خطر بسازند.	Water can look clear and still carry germs that give children diarrhoea. Mothers have found a few easy ways to make it safe.
 anim.water.s2	آب را بجوشانید: صبر کنید تا حباب‌های کلان بالا بیایند، بعد بگذارید ۱ دقیقهٔ دیگر بجوشد. سرپوش را بگذارید تا سرد شود.	Boil it: wait until big bubbles roll, then keep it boiling for 1 minute. Let it cool with the lid on.
@@ -1104,31 +1107,35 @@ fever.urgent.sleepy	خیلی خواب‌آلود است و به سختی بید�
 fever.urgent.drink	نمی‌تواند چیزی بنوشد یا شیر مادر بخورد	cannot drink or breastfeed
 fever.urgent.vomit	هر چه می‌خورد یا می‌نوشد، استفراغ می‌کند	vomits everything, cannot keep anything down
 fever.urgent.rash	روی پوستش لکه‌های بنفش یا تیره پیدا شده	has purple or dark spots on the skin
+fever.urgent.breathing	به سختی نفس می‌کشد، پایین سینه‌اش به داخل کشیده می‌شود، یا در حالت آرام نفسش صدا می‌کند	struggles to breathe, the lower chest pulls in, or breathing is noisy when calm
 fever.soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 fever.soon.days	بیشتر از ۲ روز است که تب دارد	has had a fever for more than 2 days
+fever.soon.fast	تیز نفس می‌کشد: از ۲ تا ۱۲ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر	breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years
 fever.soon.measles	تب و دانه‌های سرخ در تمام بدن دارد؛ شاید سرخکان باشد	has fever and a red rash all over; it may be measles
 fever.soon.ear	گوشش درد می‌کند یا از گوشش چرک می‌آید	has ear pain or pus coming from the ear
 fever.soon.urine	وقت پیشاب کردن درد دارد یا گریه می‌کند	has pain or cries when passing urine
 fever.soon.throat	گلودرد شدید با لکه‌های سفید دارد، یا بلعیده نمی‌تواند	has a very sore throat with white spots, or cannot swallow
+fever.counter	نفس‌ها را با گوشی بشمارید. گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 fever.chw	اگر طفل هیچ‌یک از این علایم را ندارد، کارمند صحی قریه یا پوستهٔ صحی می‌تواند طفل را ببیند و دوای تب بدهد.	If your child has none of these signs, the village health worker or the health post can check the child and give fever medicine.
 fever.measles	سرخکان زود سرایت می‌کند. طفل دارای دانه را از نوزادان و زنان حامله دور نگه دارید، و همهٔ اطفال را واکسین سرخکان کنید.	Measles spreads fast. Keep a child with a rash away from babies and pregnant women, and get every child the measles vaccine.
 measles.title	سرخکان: مراقبت در خانه	Measles: care at home
 measles.summary	سرخکان خطرناک است. طفل را غذا بدهید و علایم خطر را بشناسید.	Measles is dangerous. Keep feeding the child and know the danger signs.
 measles.lead	سرخکان با تب، سرفه، آب‌ریزش بینی و سرخی چشم شروع می‌شود، بعد دانه‌های سرخ از روی به تمام بدن پهن می‌شود. سرخکان می‌تواند سینه‌بغل، اسهال و کوری بیاورد، پس طفل به مراقبت کلینیک و خانه ضرورت دارد.	Measles starts with fever, cough, runny nose and red eyes, then a red rash spreads from the face to the whole body. It can cause pneumonia, diarrhoea and blindness, so the child needs care from the clinic and at home.
-measles.clinic	طفل را به کلینیک ببرید. کارمند صحی طفل را معاینه می‌کند و ویتامین الف می‌دهد. ویتامین الف چشم‌ها را حفاظت می‌کند و به جور شدن طفل کمک می‌کند.	Take the child to the clinic. The health worker will check the child and give vitamin A. Vitamin A protects the eyes and helps the child get better.
+measles.clinic	طفل را به کلینیک ببرید. کارمند صحی طفل را معاینه می‌کند و ویتامین الف می‌دهد: یک نوبت در کلینیک، و یک نوبت که روز بعد در خانه بدهید. ویتامین الف چشم‌ها را حفاظت می‌کند و به جور شدن طفل کمک می‌کند.	Take the child to the clinic. The health worker will check the child and give vitamin A: one dose at the clinic, and one to give at home the next day. Vitamin A protects the eyes and helps the child get better.
 measles.feed	شیردهی و غذا را ادامه دهید. طفل را بیشتر شیر بدهید و در روز چند بار غذای کم‌کم بدهید. آب و مایعات زیاد مثل شوربا بدهید.	Keep breastfeeding and feeding. Breastfeed more often and give small meals many times a day. Give plenty to drink, such as water and soup.
 measles.eyes	چشم‌ها را آرام پاک کنید. چشم‌ها را با تکهٔ پاک و آب جوشانده‌شده و سردشده پاک کنید. برای هر چشم یک جای پاک تکه را استفاده کنید.	Clean the eyes gently. Wipe the eyes with a clean cloth and boiled, cooled water. Use a clean part of the cloth for each eye.
 measles.others	دیگران را حفاظت کنید. سرخکان به آسانی سرایت می‌کند. نوزادان و زنان حامله را از طفل مریض دور نگه دارید.	Protect other people. Measles spreads very easily. Keep newborn babies and pregnant women away from the sick child.
 measles.vaccine	دو واکسین طفل را حفاظت می‌کند. هر طفل در ۹ ماهگی و ۱۸ ماهگی واکسین سرخکان می‌گیرد. خواهر و برادرهای طفل را هم برای واکسین ببرید.	Two vaccines protect the child. Every child gets measles vaccine at 9 months and 18 months. Take the sick child's brothers and sisters for their vaccine too.
 measles.hospital	در شفاخانه: سرخکان شدید. طفل مبتلا به سرخکان با علامت خطر بستر می‌شود. شفاخانه ویتامین الف، اکسیجن برای سینه‌بغل، انتی‌بیوتیک برای عفونت چشم، گوش یا سینه، و مایعات و غذا برای اسهال و زخم دهن می‌دهد.	At the hospital: severe measles. A child with severe measles is admitted. The hospital gives vitamin A, oxygen for pneumonia, antibiotics for eye, ear or chest infection, and fluids and food for diarrhoea and mouth sores.
 measles.urgent	اگر طفل مبتلا به سرخکان این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, if the child with measles:
-measles.urgent.breathing	تند یا به سختی نفس می‌کشد	breathes fast or with difficulty
+measles.urgent.breathing	به سختی نفس می‌کشد، یا پایین سینه‌اش به داخل کشیده می‌شود	struggles to breathe, or the lower chest pulls in
 measles.urgent.drink	نمی‌تواند چیزی بنوشد یا شیر بخورد	cannot drink or breastfeed
 measles.urgent.convulsion	تشنج می‌کند	has fits (convulsions)
 measles.urgent.sleepy	خیلی خواب‌آلود است یا به سختی بیدار می‌شود	is very sleepy or hard to wake
 measles.urgent.cloudy-eye	سیاهی چشمش خیره یا سفید شده است	has a white or cloudy patch on the eye
 measles.urgent.mouth	زخم‌های عمیق در دهان دارد و نمی‌تواند غذا بخورد	has deep mouth sores and cannot eat
 measles.soon	اگر طفل مبتلا به سرخکان این علایم را دارد، امروز به کلینیک بروید:	Go to the clinic today if the child with measles:
+measles.soon.fast	تیز تیز نفس می‌کشد، اما هیچ یک از علایم رفتن به شفاخانه را ندارد	breathes fast, but has none of the hospital signs
 measles.soon.pus	از چشم‌هایش چرک می‌آید	has pus coming from the eyes
 measles.soon.mouth	در دهانش زخم دارد	has sores in the mouth
 measles.soon.diarrhoea	اسهال دارد	has diarrhoea
@@ -1176,12 +1183,14 @@ malnutrition.urgent.feet	هر دو پایش پندیده است	has swelling of 
 malnutrition.urgent.eat	بسیار لاغر است و نمی‌خورد و نمی‌نوشد	is very thin and will not eat or drink
 malnutrition.urgent.sleepy	بسیار لاغر و بسیار خواب‌آلود است، یا به سختی بیدار می‌شود	is very thin and very sleepy, or hard to wake
 malnutrition.urgent.vomit	بسیار لاغر است و همه چیز را استفراغ می‌کند	is very thin and vomits everything
-malnutrition.urgent.fever	بسیار لاغر است و تب دارد، یا بدنش سرد است	is very thin and has fever, or feels cold
+malnutrition.urgent.fever	بسیار لاغر است و تب بلند دارد (۳۹ یا بیشتر)، یا بدنش سرد است	is very thin with a high fever (39 or more), or feels cold
+malnutrition.urgent.convulsion	تشنج کرده یا حالا تشنج دارد	has had convulsions (fits), or has them now
 malnutrition.soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 malnutrition.soon.thin	از اطفال هم‌سن خود لاغرتر است	is thinner than other children of the same age
 malnutrition.soon.weight	وزن کم می‌کند، یا وزن نمی‌گیرد	is losing weight, or not gaining weight
 malnutrition.soon.eating	چند روز است کمتر از پیش می‌خورد	has eaten less than before for several days
 malnutrition.soon.diarrhoea	۱۴ روز یا بیشتر اسهال دارد	has had diarrhoea for 14 days or more
+malnutrition.soon.fever	بسیار لاغر است و تب دارد	is very thin and has a fever
 malnutrition.dont	این کارها را نکنید:	Do not:
 malnutrition.dont.stop	خمیر مخصوص را زود قطع نکنید؛ تمام دوره را تمام کنید.	Do not stop the special paste early; finish the whole course.
 malnutrition.dont.share	خمیر طفل را با اطفال دیگر تقسیم نکنید؛ این دوای همان طفل است.	Do not share the child's paste with other children; it is that child's medicine.
@@ -1196,6 +1205,9 @@ reading-muac.urgent	اگر طفل یکی از این علایم را دارد، 
 reading-muac.urgent.feet	هر دو پایش پندیده است	has swelling of both feet
 reading-muac.urgent.eat	لاغر است و هیچ چیز نمی‌خورد یا نمی‌نوشد	is thin and will not eat or drink anything
 reading-muac.urgent.sleepy	لاغر است و خیلی ضعیف یا خواب‌آلود است	is thin and very weak or sleepy
+reading-muac.urgent.vomit	لاغر است و همه چیز را استفراغ می‌کند	is thin and vomits everything
+reading-muac.urgent.fever	لاغر است و تب بلند دارد (۳۹ یا بیشتر)، یا بدنش سرد است	is thin with a high fever (39 or more), or feels cold
+reading-muac.urgent.convulsion	تشنج کرده یا حالا تشنج دارد	has had convulsions (fits), or has them now
 reading-muac.weight	به چه چیز دقت کنید. طفل خورد باید هر ماه وزن بگیرد. جدول رشد کلینیک نشان می‌دهد که وزن برای عمرش درست است یا نه.	What to look for. A young child should gain weight each month. The clinic's growth chart shows if the weight is right for the age.
 reading-muac.weight-soon	اگر طفل یکی از این‌ها را دارد، همین هفته به کلینیک بروید	Go to the clinic this week if the child:
 reading-muac.weight-soon.flat	۲ ماه است که وزن نگرفته	has not gained weight for 2 months
@@ -1276,7 +1288,7 @@ pregnancy-danger.lead	بعضی علایم در حاملگی برای مادر و
 pregnancy-danger.urgent	اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز	If you have any of these signs, go to hospital now, day or night
 pregnancy-danger.urgent.bleeding	خونریزی از راه تناسلی	Bleeding from the vagina
 pregnancy-danger.urgent.fits	تشنج، یا بیهوشی	Fits, or being unconscious
-pregnancy-danger.urgent.headache	سردرد شدید همراه با تاری دید	Severe headache with blurred vision
+pregnancy-danger.urgent.headache	سردرد شدید، یا تاری دید	Severe headache, or blurred vision
 pregnancy-danger.urgent.fever-weak	تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید	Fever, and too weak to get out of bed
 pregnancy-danger.urgent.belly-pain	درد شدید شکم	Severe belly pain
 pregnancy-danger.urgent.breathing	نفس تند یا نفس کشیدن مشکل	Fast or difficult breathing
@@ -1286,7 +1298,7 @@ pregnancy-danger.soon.fever	تب	Fever
 pregnancy-danger.soon.belly-pain	درد شکم	Belly pain
 pregnancy-danger.soon.ill	احساس ناجوری	Feeling ill
 pregnancy-danger.soon.swelling	پندیدگی انگشتان، روی یا پاها	Swelling of the fingers, face or legs
-pregnancy-danger.soon.waters	آب ولادت آمده، اما درد ولادت نیست	The waters break, but there are no labour pains
+pregnancy-danger.soon.waters	آب ولادت آمده، اما درد ولادت نیست: بیشتر از ۶ ساعت منتظر نمانید	The waters break with no labour pains: do not wait more than 6 hours
 pregnancy-danger.soon.urine	سوزش هنگام ادرار	Burning when passing urine
 pregnancy-danger.birth-plan	با فامیل پلان ولادت بسازید. در اوایل حاملگی با فامیل خود گپ بزنید. فیصله کنید که در کجا ولادت می‌کنید و چه کسی با شما می‌رود.	Make a birth plan together. Talk with your family early in pregnancy. Decide where you will give birth and who will go with you.
 pregnancy-danger.money-car	پول و موتر را آماده کنید. از حالا کمی پول کنار بگذارید. با یک دریور گپ بزنید که شب یا روز شما را ببرد.	Get money and transport ready. Put some money aside now. Agree with a driver who can take you, day or night.
@@ -1303,18 +1315,18 @@ pregnancy-care.title	مراقبت در حاملگی	Care in pregnancy
 pregnancy-care.summary	کلینیک، آهن، واکسین، غذا و استراحت در حاملگی	Clinic visits, iron, vaccine, food and rest in pregnancy
 pregnancy-care.lead	مراقبت خوب در حاملگی، مادر و طفل را صحتمند نگه می‌دارد. زود و بارها به کلینیک بروید.	Good care in pregnancy keeps mother and baby healthy. Go to the clinic early and often.
 pregnancy-care.visits	زود و بارها به کلینیک بروید. در ۳ ماه اول حاملگی به کلینیک بروید. دست کم ۴ بار بروید، و ۸ بار از همه بهتر است.	Visit the clinic early and often. Go in the first 3 months of pregnancy. Go at least 4 times; 8 visits are best.
-pregnancy-care.iron	هر روز آهن بخورید. تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.	Take iron every day. Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea.
-pregnancy-care.tetanus	واکسین تیتانوس را بگیرید. واکسین تیتانوس، شما و نوزاد شما را محافظت می‌کند. از کلینیک بپرسید که چند بار لازم است.	Get the tetanus vaccine. The tetanus vaccine (TT or Td) protects you and your newborn baby. Ask the clinic how many doses you need.
+pregnancy-care.iron	هر روز آهن بخورید. تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای. اگر کلینیک تابلیت کلسیم داد، از تشنج حاملگی جلوگیری می‌کند؛ آن را در وقت دیگر روز بخورید.	Take iron every day. Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea. Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day.
+pregnancy-care.tetanus	واکسین تیتانوس را بگیرید. واکسین تیتانوس، شما و نوزاد شما را محافظت می‌کند. از کلینیک بپرسید که چند بار لازم است.	Get the tetanus vaccine. The tetanus vaccine (Td) protects you and your newborn baby. Ask the clinic how many doses you need.
 pregnancy-care.food	هر روز یک وعده غذای اضافه بخورید. هر روز غذاهای مختلف بخورید: گوشت، تخم مرغ، لوبیا، سبزی، میوه، شیر و ماست.	Eat one extra meal a day. Eat different foods each day: meat, eggs, beans, vegetables, fruit, milk and yoghurt.
-pregnancy-care.rest	بیشتر استراحت کنید، کار سنگین نکنید. در روز دراز بکشید و استراحت کنید. از فامیل بخواهید که در کارهای خیلی سنگین، مثل آوردن آب، کمک کنند.	Rest more, avoid heavy work. Lie down to rest during the day. Ask the family to help with very heavy work, like carrying water.
+pregnancy-care.rest	فعال باشید، بار سنگین نبردارید. قدم زدن و کارهای عادی روزانه برای شما خوب است. وقتی خسته شدید استراحت کنید، و از فامیل بخواهید که در کارهای سنگین، مثل آوردن آب، کمک کنند.	Keep active, avoid heavy loads. Walking and your normal daily work are good for you. Rest when you are tired, and ask the family to help with heavy work, like carrying water.
 pregnancy-care.midwife	با قابله ماهر ولادت کنید. پلان کنید که در شفاخانه یا کلینیک، با قابله ماهر ولادت کنید. با فامیل خود پلان ولادت بسازید.	Give birth with a skilled midwife. Plan to give birth in a hospital or clinic with a skilled midwife. Make a birth plan with your family.
 pregnancy-care.labour	علایم شروع ولادت را بشناسید. وقتی درد هر ۲۰ دقیقه یا زودتر می‌آید، آب ولادت می‌آید، یا ترشح چسپناک خون‌آلود می‌آید، ولادت شروع شده است. آن وقت بروید.	Know the signs of labour. Labour has started when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Then go.
-pregnancy-care.clinic	در کلینیک: در هر معاینهٔ حاملگی. قابله فشار خون، وزن و رشد و ضربان قلب طفل را معاینه می‌کند، خون را برای کم‌خونی و ادرار را برای عفونت معاینه می‌کند، آهن، فولیک اسید و واکسین تیتانوس می‌دهد، و برای ولادت پلان می‌کند.	At the clinic: at each antenatal visit. The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid and the tetanus vaccine, and plans the birth.
+pregnancy-care.clinic	در کلینیک: در هر معاینهٔ حاملگی. قابله فشار خون، وزن و رشد و ضربان قلب طفل را معاینه می‌کند، خون را برای کم‌خونی و ادرار را برای عفونت معاینه می‌کند، آهن، فولیک اسید (و کلسیم اگر داشته باشد) و واکسین تیتانوس می‌دهد، و برای ولادت پلان می‌کند.	At the clinic: at each antenatal visit. The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid (and calcium if they have it) and the tetanus vaccine, and plans the birth.
 pregnancy-care.hospital	در شفاخانه: ولادت در شفاخانه. در ولادت در کلینیک یا شفاخانه، قابله مادر و طفل را زیر نظر می‌گیرد، بعد از ولادت پیچکاری جلوگیری از خونریزی شدید را می‌دهد، در صورت ضرورت به نفس کشیدن طفل کمک می‌کند، و می‌تواند داکتر را برای سزارین بخواهد.	At the hospital: giving birth there. At a clinic or hospital birth, a midwife watches mother and baby, gives an injection to prevent heavy bleeding, helps the baby breathe if needed, and can send you for a caesarean.
 pregnancy-care.urgent	اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز	If you have any of these signs, go to hospital now, day or night
 pregnancy-care.urgent.bleeding	خونریزی از راه تناسلی	Bleeding from the vagina
 pregnancy-care.urgent.fits	تشنج، یا بیهوشی	Fits, or being unconscious
-pregnancy-care.urgent.headache	سردرد شدید همراه با تاری دید	Severe headache with blurred vision
+pregnancy-care.urgent.headache	سردرد شدید، یا تاری دید	Severe headache, or blurred vision
 pregnancy-care.urgent.belly-pain	درد شدید شکم	Severe belly pain
 pregnancy-care.dont	در حاملگی از این چیزها دوری کنید	Things to avoid in pregnancy
 pregnancy-care.dont.smoking	سگرت نکشید، و از دود سگرت دیگران دور باشید.	Do not smoke, and keep away from other people's cigarette smoke.
@@ -1330,34 +1342,41 @@ birth-plan.money-car	پول و موتر، از پیش آماده. هر ماه ک
 birth-plan.phone	شماره‌های تیلفون را ثبت کنید. شمارهٔ هر دو دریور، قابله یا کارمند صحی قریه و کلینیک را در تیلفون ثبت کنید. تیلفون را چارج و با پول نگه دارید.	Save the phone numbers. Save the numbers of both drivers, the midwife or village health worker, and the clinic. Keep the phone charged, with money on it.
 birth-plan.bag	یک بکس برای ولادت آماده کنید. تکه‌های پاک، لباس گرم و کلاه برای طفل، یک کمپل، کارت کلینیک و تذکرهٔ مادر، غذا و آب را آماده کنید.	Pack a bag for the birth. Pack clean cloths, warm clothes and a cap for the baby, a blanket, her clinic card and ID card, food and water.
 birth-plan.go	وقتی ولادت شروع شد، بروید. وقتی درد هر ۲۰ دقیقه یا زودتر می‌آید، آب ولادت می‌آید، یا ترشح چسپناک خون‌آلود می‌آید، بروید. در خانه منتظر نمانید.	Go when labour starts. Go when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Do not wait at home.
-birth-plan.home	اگر ولادت در خانه شد. فوراً یک قابلهٔ آموزش‌دیده را بخواهید. اتاق را گرم و پاک نگه دارید و مادر و طفل را در روز اول به کلینیک ببرید.	If the birth happens at home. Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day.
+birth-plan.home	اگر ولادت در خانه شد. فوراً یک قابلهٔ آموزش‌دیده را بخواهید. اتاق را گرم و پاک نگه دارید و مادر و طفل را در روز اول به کلینیک ببرید. اگر جفت تا ۱ ساعت بعد از طفل بیرون نیامد، یا خون در کمتر از ۵ دقیقه یک تکه را تر کرد، همین حالا به شفاخانه بروید.	If the birth happens at home. Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day. Go to hospital now if the afterbirth is not out 1 hour after the baby, or blood soaks a cloth in under 5 minutes.
 birth-plan.danger	همهٔ علایم خطر در حاملگی. آن‌ها را با شوهر و خشوی خود یکجا یاد بگیرید، تا همه بدانند چه وقت باید بروند.	All the danger signs in pregnancy. Learn them together with your husband and mother-in-law, so everyone knows when to go.
 birth-plan.near	نزدیک‌ترین کلینیک را پیدا کنید. کلینیک‌ها و شفاخانه‌های نزدیک خود را ببینید، تا جای ولادت را انتخاب کنید.	Find the nearest clinic. See the clinics and hospitals near you, to choose where to give birth.
 birth-plan.clinic	در کلینیک: پلان ولادت. قابله در هر معاینهٔ حاملگی شما و طفل را معاینه می‌کند، در ساختن پلان کمک می‌کند و می‌گوید اگر ولادت مشکل باشد، کجا بروید.	At the clinic: planning the birth. At each pregnancy check the midwife examines you and the baby, helps you make the plan, and tells you where to go if the birth may be difficult.
 birth-plan.urgent	اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز	If you have any of these signs, go to hospital now, day or night
 birth-plan.urgent.bleeding	خونریزی از راه تناسلی	Bleeding from the vagina
 birth-plan.urgent.fits	تشنج، یا بیهوشی	Fits, or being unconscious
-birth-plan.urgent.headache	سردرد شدید همراه با تاری دید	Severe headache with blurred vision
+birth-plan.urgent.headache	سردرد شدید، یا تاری دید	Severe headache, or blurred vision
 birth-plan.urgent.fever-weak	تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید	Fever, and too weak to get out of bed
 birth-plan.urgent.belly-pain	درد شدید شکم	Severe belly pain
 birth-plan.urgent.long-labour	دردهای ولادت بیشتر از ۱۲ ساعت دوام کرده و طفل به دنیا نیامده	Labour pains for more than 12 hours, and the baby is not born
+birth-plan.urgent.placenta	جفت تا ۱ ساعت بعد از ولادت طفل بیرون نیامده است	The afterbirth (placenta) is not out 1 hour after the baby is born
 birth-plan.far	اگر راه دور است، یا برف آن را بسته کرده می‌تواند، او می‌تواند در هفته‌های آخر پیش خویشاوندان نزدیک کلینیک بماند.	If the road is long, or snow may close it, she can stay with relatives near the clinic in the last weeks before the birth.
 birth-plan.tell	پلان را به تمام خانواده بگویید، و پول، بکس و شماره‌های تیلفون را جایی بگذارید که همه پیدا کرده بتوانند.	Tell the whole family the plan, and keep the money, the bag and the phone numbers where everyone can find them.
 after-birth.title	بعد از ولادت	After the birth
 after-birth.summary	مراقبت و علایم خطر برای مادر بعد از ولادت	Care and danger signs for the mother after birth
 after-birth.lead	هفته‌های بعد از ولادت برای مادر هم وقت خطر است. استراحت کنید، خوب غذا بخورید و علایم خطر را بشناسید.	The weeks after birth are a risky time for the mother too. Rest, eat well, and know the danger signs.
 after-birth.urgent	اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز	If you have any of these signs, go to hospital now, day or night
-after-birth.urgent.bleeding	خونریزی زیاد، یا خونریزی که بیشتر می‌شود	Heavy bleeding, or bleeding that gets more
+after-birth.urgent.bleeding	خونریزی زیاد (در کمتر از ۵ دقیقه یک تکه را تر می‌کند)، یا خونریزی که بیشتر می‌شود	Heavy bleeding (a cloth soaked in under 5 minutes), or bleeding that gets more
 after-birth.urgent.fits	تشنج	Fits
 after-birth.urgent.headache	سردرد شدید، یا تاری دید	Severe headache, or blurred vision
 after-birth.urgent.breathing	نفس تند یا نفس کشیدن مشکل	Fast or difficult breathing
 after-birth.urgent.fever-discharge	تب، همراه با ترشح بدبو از راه تناسلی	Fever with a bad-smelling discharge from the vagina
+after-birth.urgent.fever-weak	تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید	Fever, and too weak to get out of bed
+after-birth.urgent.belly-pain	درد شدید شکم	Severe belly pain
 after-birth.urgent.calf	ساق پای دردناک و پندیده	A painful, swollen calf (back of the lower leg)
 after-birth.urgent.harm	فکر آسیب زدن به خود یا به طفل	Thoughts of harming yourself or your baby
 after-birth.soon	اگر یکی از این علایم را دارید، امروز به کلینیک بروید	If you have any of these signs, go to the clinic today
 after-birth.soon.wound	درد، سرخی یا ریم در زخم یا بخیه‌ها	Pain, redness or pus in a wound or stitches
 after-birth.soon.breast	پستان دردناک، سرخ یا داغ	A breast that is painful, red or hot
-after-birth.soon.urine	درد یا مشکل هنگام ادرار	Pain or trouble passing urine
+after-birth.soon.urine	درد یا مشکل هنگام ادرار، یا چکیدن ادرار	Pain or trouble passing urine, or urine that leaks
+after-birth.soon.fever	تب	Fever
+after-birth.soon.belly-pain	درد شکم	Belly pain
+after-birth.soon.ill	احساس ناجوری	Feeling ill
+after-birth.soon.discharge	ترشح بدبو از راه تناسلی	A bad-smelling discharge from the vagina
 after-birth.soon.sad	بیشتر وقت خیلی غمگین یا پریشان هستید	Feeling very sad or worried most of the time
 after-birth.checks	معاینه مادر و طفل. مادر و طفل باید در روز اول، روز ۳، بین روز ۷ و ۱۴، و در ۶ هفتگی معاینه شوند. کارمند صحی قریه هم می‌تواند به خانه بیاید.	Check-ups for mother and baby. Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks. The village health worker can also visit at home.
 after-birth.rest-food	استراحت کنید و خوب غذا بخورید. بیشتر از معمول غذا بخورید و زیاد مایعات بنوشید. از فامیل بخواهید در کار خانه کمک کنند تا مادر استراحت کند.	Rest and eat well. Eat more than usual and drink plenty. Ask the family to help with housework, so the mother can rest.
@@ -1374,8 +1393,8 @@ anaemia.signs	علایم را بشناسید. خستگی، ضعف، سرچرخی
 anaemia.causes	علت‌ها را بدانید. آهن کم در غذا، خونی که در عادت ماهوار و ولادت‌ها از دست می‌رود، و کرم‌های شکم.	Know the causes. Too little iron in food, blood lost in monthly periods and births, and worms in the belly.
 anaemia.food	غذاهای پر آهن بخورید. گوشت، جگر، تخم مرغ، عدس، لوبیا و سبزی‌های سبز تیره مثل پالک بخورید. همراه آن میوه بخورید تا بدن آهن بیشتر بگیرد.	Eat iron-rich foods. Eat meat, liver, eggs, lentils, beans and dark green leaves like spinach. Eat fruit with them to take in more iron.
 anaemia.tea	چای را بین غذاها بنوشید. چای نمی‌گذارد بدن آهن غذا را بگیرد. چای را یک ساعت پیش یا یک ساعت بعد از غذا بنوشید، نه همراه غذا.	Drink tea between meals. Tea stops the body taking iron from food. Drink tea one hour before or one hour after a meal, not with it.
-anaemia.iron-pregnancy	تابلیت آهن در حاملگی. در حاملگی، تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.	Iron tablets in pregnancy. In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea.
-anaemia.worms	کرم‌ها را تداوی کنید. از کلینیک در مورد دوای کرم برای فامیل بپرسید. پیش از غذا و بعد از تشناب، دست‌ها را با صابون بشویید.	Treat worms. Ask the clinic about worm medicine for the family. Wash hands with soap before eating and after the toilet.
+anaemia.iron-pregnancy	تابلیت آهن در حاملگی. در حاملگی، تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای. اگر کلینیک تابلیت کلسیم داد، از تشنج حاملگی جلوگیری می‌کند؛ آن را در وقت دیگر روز بخورید.	Iron tablets in pregnancy. In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea. Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day.
+anaemia.worms	کرم‌ها را تداوی کنید. از کلینیک در مورد دوای کرم برای فامیل بپرسید. در حاملگی، دوای کرم فقط بعد از ۳ ماه اول داده می‌شود؛ از قابله بپرسید. پیش از غذا و بعد از تشناب، دست‌ها را با صابون بشویید.	Treat worms. Ask the clinic about worm medicine for the family. In pregnancy, worm medicine is given only after the first 3 months; ask the midwife. Wash hands with soap before eating and after the toilet.
 anaemia.clinic	در کلینیک: معاینهٔ خون و تابلیت آهن. کارمند صحی پلک‌ها و کف دست را می‌بیند و شاید خون را با معاینهٔ نوک انگشت اندازه کند. تابلیت آهن و فولیک اسید را برای ۳ ماه، و دوای کرم می‌دهد، و علت را جستجو می‌کند.	At the clinic: blood test, iron tablets. The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets for 3 months, plus worm medicine.
 anaemia.hospital	در شفاخانه: کم‌خونی شدید. کسی که بسیار رنگ‌پریده است با نفس‌تنگی، تپش قلب یا پاهای پندیده، یا خانم حاملهٔ نزدیک به ولادت، شاید در شفاخانه خون و جستجوی علت، مثل عادت ماهانهٔ زیاد، ضرورت داشته باشد.	At the hospital: severe anaemia. Someone very pale with breathlessness, a racing heart or swollen feet, or a pregnant woman near her time, may need blood in hospital and a search for the cause.
 anaemia.soon	اگر یکی از این علایم را دارید، امروز به کلینیک بروید	If you have any of these signs, go to the clinic today
@@ -1395,7 +1414,7 @@ urine-infection.drink	آب زیاد بنوشید. آب پاک را زیاد بن
 urine-infection.pregnant	در حاملگی: همان روز بروید. در حاملگی عفونت شاید علامت نداشته باشد اما ولادت زودرس می‌آورد. در معاینات حاملگی معاینهٔ ادرار را بخواهید، و اگر سوزش یا تب دارید همان روز بروید.	In pregnancy: go the same day. In pregnancy an infection may have no signs but can bring early labour. Ask for the urine test at antenatal visits, and go the same day if you have burning or fever.
 urine-infection.finish	انتی‌بیوتیک را تمام کنید. تمام تابلیت‌هایی را که کارمند صحی داده بخورید، حتی وقتی سوزش بعد از یک روز بند شد. اگر در ۲ روز بهتر نشد، برگردید.	Finish the antibiotic. Take all the tablets the health worker gives, even when the burning stops after a day. Go back if it is not better in 2 days.
 urine-infection.others	مردان و اطفال. سوزش ادرار در مرد، یا تب با استفراغ در طفل کوچک، هم به کلینیک ضرورت دارد؛ علتش شاید فرق کند. اطفال با عفونت‌های تکراری به معاینهٔ شفاخانه ضرورت دارند.	Men and children. Burning urine in a man, or fever with vomiting in a small child, needs the clinic too; the cause may be different. Children with repeated infections need a hospital check.
-urine-infection.clinic	در کلینیک: معاینهٔ ادرار و انتی‌بیوتیک. کارمند صحی ادرار را با نوار معاینه می‌کند و یک دورهٔ کوتاه تابلیت انتی‌بیوتیک (مانند نیتروفورانتوئین یا اموکسی‌سیلین) می‌دهد، و در حاملگی دوای بی‌خطر را انتخاب می‌کند.	At the clinic: urine test and antibiotics. The health worker tests the urine with a strip and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy.
+urine-infection.clinic	در کلینیک: معاینهٔ ادرار و انتی‌بیوتیک. کارمند صحی ادرار را (با نوار، یا در لابراتوار اگر باشد) معاینه می‌کند و یک دورهٔ کوتاه تابلیت انتی‌بیوتیک (مانند نیتروفورانتوئین یا اموکسی‌سیلین) می‌دهد، و در حاملگی دوای بی‌خطر را انتخاب می‌کند.	At the clinic: urine test and antibiotics. The health worker tests the urine (with a strip, or in a laboratory where there is one) and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy.
 urine-infection.hospital	در شفاخانه: عفونت گرده. تب با درد کمر و استفراغ یعنی عفونت به گرده‌ها رسیده. شفاخانه انتی‌بیوتیک پیچکاری و سیروم می‌دهد، و گرده‌ها را با التراسوند معاینه می‌کند.	At the hospital: a kidney infection. Fever with back pain and vomiting means the infection has reached the kidneys. The hospital gives antibiotics by injection and fluids by drip, and checks the kidneys with an ultrasound scan.
 urine-infection.urgent	اگر کسی این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, if someone has:
 urine-infection.urgent.fever	سوزش ادرار با تب بلند، لرزه و درد کمر	burning urine with high fever, shivering and back pain
@@ -2726,7 +2745,7 @@ kit-first-aid.title	وسایل کمک‌های اولیه در خانه	First-ai
 kit-first-aid.summary	او آر اس، زنک، صابون، تکهٔ پاک و بنداژ: هر کدام برای چیست.	ORS, zinc, soap, clean cloth and bandages: what each is for.
 kit-first-aid.lead	یک قطی کوچک وسایل کمک‌های اولیه را در جای پاک و خشک، بلند و دور از دست اطفال نگه دارید. هر چند ماه آن را ببینید.	Keep a small box of first-aid things in a clean, dry place, high up and away from children. Check it every few months.
 kit-first-aid.ors	پاکت‌های او آر اس. برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. کلینیک و پوستهٔ صحی آن را دارند.	ORS packets. For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. The clinic and the health post have it.
-kit-first-aid.zinc	تابلیت زنک. برای طفل اسهالی، برای ۱۰ تا ۱۴ روز: زیر ۶ ماه، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام.	Zinc tablets. For a child with diarrhoea, for 10 to 14 days: under 6 months, 10 mg a day; from 6 months, 20 mg a day.
+kit-first-aid.zinc	تابلیت زنک. برای طفل اسهالی، برای ۱۴ روز: از ۲ تا ۶ ماهگی، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام. کمتر از ۲ ماه، از کارمند صحی بپرسید.	Zinc tablets. For a child with diarrhoea, for 14 days: from 2 to 6 months, 10 mg a day; from 6 months, 20 mg a day. Under 2 months, ask the health worker.
 kit-first-aid.soap	صابون. برای شستن دست، زخم و گزیدگی. جای گزیدن حیوان را ۱۵ دقیقه با صابون و آب روان بشویید.	Soap. For washing hands, cuts and bites. Wash an animal bite with soap and running water for 15 minutes.
 kit-first-aid.cloth	تکهٔ پاک و بنداژ. تکهٔ نخی پاک و بنداژ، برای فشار دادن روی خونریزی و پوشاندن سوختگی و زخم. آن‌ها را در خلطهٔ پلاستیکی پاک نگه دارید.	Clean cloth and bandages. Clean cotton cloth and bandage rolls, to press on bleeding and to cover burns and wounds. Keep them in a clean plastic bag.
 kit-first-aid.more	این‌ها هم به کار می‌آید. ترمامتر، چسپ زخم، قیچی، چراغ دستی، و شمارهٔ تلفن یک دریور و کلینیک.	Also useful. A thermometer, sticking plasters, scissors, a torch, and the phone numbers of a driver and the clinic.

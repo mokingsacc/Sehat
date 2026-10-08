@@ -232,7 +232,7 @@ ui.fam.need-pic	مهرباني وکړئ لومړی یو انځور ووهئ.	Ple
 ui.fam.need-name	مهرباني وکړئ نوم ووایاست، یا یې ولیکئ.	Please say the name, or write it.
 ui.fam.rec-again	بیا ثبت کړئ.	Record again.
 ui.fam.row.vacc	واکسینونه: کوم ورکړل شوي، او کوم یو بل دی.	Vaccines: which ones are given, and which one is next.
-ui.fam.row.td	د ښځو لپاره د ټیټانوس واکسین: پنځه ډوزه، هغه او د هغې نوي زېږېدلي ماشومان ساتي.	Tetanus vaccine for women: five doses protect her and her newborn babies.
+ui.fam.row.td	د ښځو لپاره د ټیټانوس واکسین: تر پنځو ډوزونو پورې، هغه او د هغې نوي زېږېدلي ماشومان ساتي.	Tetanus vaccine for women: up to five doses protect her and her newborn babies.
 ui.fam.row.growth	وده: وزن او قد، د ودې له چارټ سره.	Growth: weight and length, with the growth chart.
 ui.fam.row.weight	وزن: وزن ولیکئ او ووینئ چې د قد لپاره روغ دی که نه.	Weight: write the weight, and see if it is healthy for the height.
 ui.fam.row.meds	درمل: ثبت کړئ چې کوم درمل او کله یې وخوري. کله چې اپ خلاص وي، درته یې وریادوي.	Medicines: record what to take and when. When the app is open, it reminds you.
@@ -589,7 +589,7 @@ vaccines.birth	د زېږون پر وخت: د بي سي جي واکسین، د ن
 vaccines.6w	۶ اونۍ: د پنټاوالانټ واکسین ۱، د خناق، توره ټوخله، ټیټانوس، هیپاټایټس ب، او د هیب میکروب چې سینه بغل او مننژیت راولي پر وړاندې؛ د پولیو څاڅکي ۱، د پولیو (ګوډوالی) پر وړاندې؛ د نوموکوک واکسین ۱، د سینه بغل پر وړاندې؛ د روټا ویروس څاڅکي ۱، د سخت نس ناستی پر وړاندې.	6 weeks: Pentavalent 1, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 1, against polio; PCV 1 (pneumococcal), against pneumonia; Rotavirus drops 1, against severe diarrhoea.
 vaccines.10w	۱۰ اونۍ: د پنټاوالانټ واکسین ۲، د خناق، توره ټوخله، ټیټانوس، هیپاټایټس ب، او د هیب میکروب چې سینه بغل او مننژیت راولي پر وړاندې؛ د پولیو څاڅکي ۲، د پولیو (ګوډوالی) پر وړاندې؛ د نوموکوک واکسین ۲، د سینه بغل پر وړاندې؛ د روټا ویروس څاڅکي ۲، د سخت نس ناستی پر وړاندې.	10 weeks: Pentavalent 2, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 2, against polio; PCV 2 (pneumococcal), against pneumonia; Rotavirus drops 2, against severe diarrhoea.
 vaccines.14w	۱۴ اونۍ: د پنټاوالانټ واکسین ۳، د خناق، توره ټوخله، ټیټانوس، هیپاټایټس ب، او د هیب میکروب چې سینه بغل او مننژیت راولي پر وړاندې؛ د پولیو څاڅکي ۳، د پولیو (ګوډوالی) پر وړاندې؛ د نوموکوک واکسین ۳، د سینه بغل پر وړاندې؛ د پولیو پیچکاري ۱، د پولیو (ګوډوالی) پر وړاندې.	14 weeks: Pentavalent 3, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 3, against polio; PCV 3 (pneumococcal), against pneumonia; Polio injection 1 (IPV), against polio.
-vaccines.9m	۹ میاشتې: د شري واکسین ۱، د شری پر وړاندې؛ د پولیو پیچکاري ۲، د پولیو (ګوډوالی) پر وړاندې.	9 months: Measles 1, against measles; Polio injection 2 (IPV), against polio.
+vaccines.9m	۹ میاشتې: د شري واکسین ۱، د شری پر وړاندې؛ د پولیو څاڅکي ۴، د پولیو (ګوډوالی) پر وړاندې؛ د پولیو پیچکاري ۲، د پولیو (ګوډوالی) پر وړاندې.	9 months: Measles 1, against measles; Polio drops 4, against polio; Polio injection 2 (IPV), against polio.
 vaccines.18m	۱۸ میاشتې: د شري واکسین ۲، د شری پر وړاندې.	18 months: Measles 2, against measles.
 vaccines.free	واکسین په دولتي کلینیکونو کې وړیا دی.	Vaccines are free at government clinics.
 vaccines.birth-day	هغه ماشوم چې په کور کې زېږېدلی، باید په لومړیو ۲۴ ساعتونو کې د هیپاټایټس ب واکسین او معاینې لپاره کلینیک ته بوتلل شي.	A baby born at home should go to the clinic within 24 hours, for the hepatitis B vaccine and a check.
@@ -598,7 +598,7 @@ vaccines.missed	که کوم واکسین پاتې شوی وي، بیا هم ول
 vaccines.campaign	د پولیو څاڅکي، او کله کله ویټامین اې یا د شري واکسین، په کمپاینونو کې هم ورکول کېږي. ماشوم بوځئ، او بیا هم د کلینیک هرې ټاکلې لیدنې ته ولاړ شئ.	Polio drops, and sometimes vitamin A or measles vaccine, are also given in campaigns. Take your child, and still go to every clinic visit.
 vaccines.mild-illness	هغه ماشوم چې لږ زکام یا نس ناستی لري، بیا هم واکسین کېدای شي.	A child with a mild cold or mild diarrhoea can still have vaccines.
 vaccines.normal	د واکسین وروسته لږه تبه یا د پښې درد عادي خبره ده، او په یوه دوه ورځو کې ښه کېږي.	A mild fever or a sore leg after a vaccine is normal, and gets better in a day or two.
-vaccines.td	د ښځو لپاره د ټیټانوس واکسین هره ۱۵ تر ۴۵ کلنه ښځه او هره امیندواره ښځه باید ۵ ځله دا واکسین واخلي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس او خناق څخه ساتي.	Tetanus vaccine for women (TT or Td) Every woman aged 15 to 45, and every pregnant woman, needs 5 doses. It protects her and her newborn baby from tetanus, and her from diphtheria.
+vaccines.td	د ښځو لپاره د ټیټانوس او خناق واکسین هره ۱۵ تر ۴۹ کلنه ښځه او هره امیندواره ښځه تر ۵ ځلو پورې دا واکسین ته اړتیا لري؛ کلینیک یې کارت ګوري چې څو ځله نور پکار دي. دا واکسین مور او نوی زېږېدلی ماشوم له ټیټانوس، او مور له خناق څخه ساتي.	Tetanus and diphtheria vaccine for women (Td) Every woman aged 15 to 49, and every pregnant woman, needs up to 5 doses; the clinic checks her card to see how many she still needs. It protects her and her newborn baby from tetanus, and her from diphtheria.
 anim.vaccines.title	واکسین ولې مهم دی	Why vaccines matter
 anim.vaccines.s1	میکروبونه دومره واړه دي چې نه لیدل کېږي. ځینې میکروبونه د خطرناکو ناروغیو لکه شری، پولیو او توره ټوخي لامل کېږي.	Germs are too small to see. Some germs cause dangerous illnesses, like measles, polio and whooping cough.
 anim.vaccines.s2	واکسین بدن ته د تمرین په څېر دی. واکسین د میکروب کمزوری یا بې‌ضرره ډول بدن ته ښيي، چې بدن زده کړي څنګه ورسره مبارزه وکړي.	A vaccine is like practice for the body. It shows the body a weak or harmless form of a germ, so the body learns how to fight it.
@@ -924,12 +924,12 @@ newborn.lead	د ژوند لومړۍ ورځې تر ټولو خطرناکې دي. 
 newborn.warm	وچ یې کړئ او پر سینه یې کېږدئ. ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه، پوستکی له پوستکي سره، کېږدئ. دواړه پټ کړئ او د ماشوم پر سر خولۍ کېږدئ.	Dry the baby, hold skin to skin. Dry the baby at once and lay the baby on the mother's bare chest, skin to skin. Cover them both, and put a cap on the baby.
 newborn.breastfeed	په لومړي ساعت کې تی ورکړئ. د زېږون په لومړي ساعت کې تی ورکړئ. بیا یوازې د مور شیدې، هر کله چې ماشوم وغواړي، شپه او ورځ. اوبو او نورو شیدو ته اړتیا نشته.	Breastfeed in the first hour. Start within one hour of birth. Then give only breast milk, whenever the baby wants, day and night. No water or other milk is needed.
 newborn.bath	یوه ورځ صبر وکړئ، بیا یې ووینځئ. ماشوم د زېږون څخه تر ۲۴ ساعتونو پورې مه وینځئ. بیا یې په تودو اوبو ووینځئ او ژر یې وچ کړئ.	Wait a day before the bath. Do not wash the baby for the first 24 hours. Then use warm water and dry the baby quickly.
-newborn.cord	نوم پاک او وچ وساتئ. پر نوم هېڅ شی مه لګوئ، پرته له کلورهګزیډین، د نوم هغه درمل چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي. هغسې یې ولګوئ لکه چې دوی یې ښيي، او نوم وچ وساتئ.	Keep the cord clean and dry. Put nothing on the cord except chlorhexidine, the cord medicine from the midwife or village health worker. Use it as they show you, and keep the cord dry.
+newborn.cord	نوم پاک او وچ وساتئ. که ماشوم په کور کې زېږېدلی وي، هغه کلورهګزیډین چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي، هغسې پر نوم ولګوئ لکه چې دوی یې ښيي. که نه، پر نوم هېڅ شی مه لګوئ. نوم پاک او وچ وساتئ.	Keep the cord clean and dry. If the baby was born at home, use the chlorhexidine the midwife or village health worker gives you, as they show you. Otherwise put nothing on the cord. Keep it clean and dry.
 newborn.vaccines	د زېږون واکسینونه. ماشوم په لومړۍ ورځ د نري رنځ واکسین، د پولیو څاڅکو او د هیپاټایټس ب واکسین ته اړتیا لري. که په کور کې زېږېدلی، په لومړیو ۲۴ ساعتونو کې یې کلینیک ته بوځئ.	Birth vaccines. On the first day the baby needs the TB vaccine, polio drops and hepatitis B vaccine. If born at home, take the baby to the clinic within 24 hours.
 newborn.checks	د مور او ماشوم څلور معاینې. په لومړۍ ورځ، درېیمه ورځ، شاوخوا یوه اونۍ وروسته (۷ تر ۱۴ ورځو) او په ۶ اونیو کې معاینې ته ولاړ شئ. د کلي روغتیايي کارکوونکی هم کولای شي ستاسو کور ته راشي.	Four checks for mother and baby. Go for checks on the first day, on day 3, at about one week (day 7 to 14), and at 6 weeks. The village health worker can also visit you at home.
 newborn.small	کوچنی ماشوم ډېره پاملرنه غواړي. کوچنی ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ او هرو ۲ تر ۳ ساعتونو کې تی ورکړئ. سړې پښې دا معنا لري چې ماشوم نوره ګرمي غواړي.	Small babies need extra care. Keep a small baby skin to skin on the mother's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth.
 newborn.breaths	د ماشوم ساګانې وشمېرئ. کله چې ماشوم ارام وي، ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره یو ځل ټک وهئ. ۶۰ یا ډېر ډېر ګړندي دي.	Count the baby's breaths. When the baby is calm, the phone times one minute while you tap each breath. 60 or more is too fast.
-newborn.clinic	په کلینیک کې: د نوي زېږېدلي ماشوم معاینه. قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي او پر نامه کلورهګزیډین درمل مږي.	At the clinic: the newborn check. The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines and puts chlorhexidine on the cord.
+newborn.clinic	په کلینیک کې: د نوي زېږېدلي ماشوم معاینه. قابله یا روغتیايي کارکوونکی ماشوم تلي، ساه، تودوخه، تي رودل، نامه او سترګې معاینه کوي، د زېږون واکسینونه ورکوي، او که ماشوم په کور کې زېږېدلی وي، د نامه لپاره کلورهګزیډین درمل ورکوي.	At the clinic: the newborn check. The midwife or health worker weighs the baby, checks breathing, warmth, feeding, the cord and the eyes, gives the birth vaccines, and gives chlorhexidine for the cord if the baby was born at home.
 newborn.hospital	په روغتون کې: ناروغ نوی زېږېدلی ماشوم. هغه نوی زېږېدلی ماشوم چې د خطر نښه لري ښايي جدي انتان ولري. روغتون څو ورځې پیچکاري انټي بیوټیک ورکوي، ماشوم تود ساتي، په تي ورکولو کې مرسته کوي او که اړتیا وي اکسیجن ورکوي.	At the hospital: a sick newborn. A newborn with a danger sign may have a serious infection. The hospital gives antibiotics by injection for several days, keeps the baby warm, helps with feeding and gives oxygen if needed.
 newborn.urgent	که نوی زېږېدلی ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If your newborn has any of these signs, go to hospital now, day or night:
 newborn.urgent.feed	ښه تی نه رودي، یا یې تی رودل بند کړي دي	is not feeding well, or has stopped feeding
@@ -980,7 +980,7 @@ child-meals.summary	له ۶ میاشتو: هره ورځ پنډه لېټی، هګ
 child-meals.lead	په ۶ میاشتو کې ستاسو ماشوم د مور تر شیدو ډېرو شیانو ته اړتیا لري. ستاسو د خپلې باغچې او چرګانو خواړه کولای شي ماشوم ته هغه څه ورکړي چې د ودې لپاره یې غواړي.	At 6 months your baby needs more than breast milk. Food from your own garden and hens can give your child what they need to grow.
 child-meals.start	له ۶ میاشتو پیل وکړئ، تی ورکول مه پرېږدئ. په ورځ کې دوه ځله، په ۲ یا ۳ کاشوغو نرمو خوړو پیل وکړئ او ورو ورو یې زیات کړئ. ډېر ځله تی ورکړئ، تر ۲ کلنۍ یا ډېر وخت پورې.	Start at 6 months, keep breastfeeding. Begin with 2 or 3 spoons of soft food, twice a day, and slowly give more. Keep breastfeeding often, to 2 years or more.
 child-meals.thick	پنډه لېټی، له لږ غوړیو سره. لېټی دومره پنډه کړئ چې پر کاشوغې پاتې شي؛ اوبلنه لېټی ګېډه ډکوي خو ځواک یې لږ دی. لږ غوړي، او میده شوې هګۍ، لوبیا یا سبزي ورګډې کړئ.	Thick porridge, with oil added. Make porridge thick enough to stay on the spoon; watery porridge fills the belly but feeds little. Stir in a little oil, and mashed egg, beans or vegetables.
-child-meals.egg	هره ورځ هګۍ یا حیواني خواړه. که کولای شئ، هره ورځ هګۍ، ځیګر، غوښه یا مستې ورکړئ. دا هغه اوسپنه او ځواک لري چې یوازې نباتي خواړه یې نه لري.	An egg or animal food every day. If you can, give egg, liver, meat or yoghurt every day. They give iron and strength that plant foods alone cannot.
+child-meals.egg	هره ورځ هګۍ یا حیواني خواړه. که کولای شئ، هره ورځ هګۍ، غوښه یا مستې ورکړئ، او په اونۍ کې یو ځل ځیګر. دا هغه اوسپنه او ځواک لري چې یوازې نباتي خواړه یې نه لري.	An egg or animal food every day. If you can, give egg, meat or yoghurt every day, and liver once a week. They give iron and strength that plant foods alone cannot.
 child-meals.iron	اوسپنه لرونکي خواړه له مېوې سره. لوبیا، دال او تکې شنې پاڼې اوسپنه لري. ورسره رومي بانجان، زردالو یا انار ورکړئ؛ له بدن سره مرسته کوي چې اوسپنه واخلي.	Iron foods with fruit. Beans, lentils and dark green leaves have iron. Give tomato, apricot or pomegranate with them: it helps the body take in the iron.
 child-meals.often	ماشوم په ورځ کې څو ځله خواړه وخوري. له ۶ تر ۸ میاشتو، په ورځ کې ۲ تر ۳ ځله خواړه. له ۹ میاشتو تر ۲ کلنۍ، په ورځ کې ۳ تر ۴ ځله خواړه، او ۱ تر ۲ ځله سپک خواړه لکه مېوه یا ډوډۍ.	How often a child eats. From 6 to 8 months, 2 to 3 meals a day. From 9 months to 2 years, 3 to 4 meals, and 1 to 2 snacks like fruit or bread.
 child-meals.clean	پاک لاسونه، تازه خواړه. د پخلي او خواړو ورکولو مخکې لاسونه په صابون ومینځئ. خواړه تازه پاخه کړئ، یا یې پټ وساتئ او تر ۲ ساعتونو پورې یې وکاروئ.	Clean hands, fresh food. Wash hands with soap before cooking and feeding. Cook food fresh, or keep it covered and use it within 2 hours.
@@ -992,21 +992,24 @@ child-meals.dont.tea	تي خوړونکي او کوچني ماشوم ته چای 
 child-meals.bowl	کوچني ماشوم ته جلا کاسه ورکړئ او ورسره کېنئ. په مینه یې وهڅوئ؛ هېڅکله زور مه کوئ.	Give a small child their own bowl and sit with them. Encourage gently; never force.
 diarrhoea.title	نس ناستی او او آر اس	Diarrhoea and ORS
 diarrhoea.summary	او آر اس او زنک ورکړئ، او خواړه ورکول دوام ورکړئ.	Give ORS and zinc, and keep feeding.
-diarrhoea.lead	نس ناستی کولای شي د ماشوم بدن ډېر ژر وچ کړي. او آر اس او زنک ورکړئ، او تی او خواړه مه بندوئ.	Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding.
-diarrhoea.mix	او آر اس سم جوړ کړئ. یوه پاکټ په یوه لیټر پاکو اوبو کې حل کړئ. هره ورځ تازه جوړ کړئ او پاتې شوی یې بله ورځ وغورځوئ.	Mix ORS the right way. Mix one packet in one litre of clean water. Make it fresh each day and throw away what is left the next day.
+diarrhoea.lead	نس ناستی کولای شي د ماشوم بدن ډېر ژر وچ کړي. او آر اس او زنک ورکړئ، او تی او خواړه مه بندوئ. تر ۲ میاشتو کم ماشوم چې نس ناستی لري، باید نن کلینیک ته یوړل شي.	Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding. A baby under 2 months with diarrhoea needs the clinic today.
+diarrhoea.mix	او آر اس سم جوړ کړئ. یوه پاکټ په هومره پاکو اوبو کې حل کړئ چې پر پاکټ لیکل شوي، معمولاً یو لیټر. هره ورځ تازه جوړ کړئ او پاتې شوی یې بله ورځ وغورځوئ.	Mix ORS the right way. Mix one packet in the amount of clean water written on the packet, usually 1 litre. Make it fresh each day and throw away what is left the next day.
 diarrhoea.give	د هر نس ناستي وروسته او آر اس ورکړئ. تر ۲ کلنۍ کم ماشوم ته ۵۰ تر ۱۰۰ ملي لیټره، او ۲ کلن یا لوی ماشوم ته ۱۰۰ تر ۲۰۰ ملي لیټره ورکړئ. په پیاله یې لږ لږ ورکړئ.	Give ORS after each loose stool. Under 2 years, give 50 to 100 ml; 2 years and over, give 100 to 200 ml. Give small sips from a cup.
-diarrhoea.zinc	۱۰ تر ۱۴ ورځې زنک ورکړئ. تر ۶ میاشتو کم ماشوم ته ورځې ۱۰ ملي ګرامه، او له ۶ میاشتو ورځې ۲۰ ملي ګرامه ورکړئ. حتی چې نس ناستی ودرېږي، دوام ورکړئ.	Give zinc for 10 to 14 days. Under 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Keep giving it even after the diarrhoea stops.
+diarrhoea.zinc	۱۴ ورځې زنک ورکړئ. له ۲ تر ۶ میاشتو ورځې ۱۰ ملي ګرامه، او له ۶ میاشتو ورځې ۲۰ ملي ګرامه ورکړئ. تر ۲ میاشتو کم ماشوم ته زنک یوازې هغه وخت ورکړئ چې روغتیايي کارکوونکي درکړی وي. حتی چې نس ناستی ودرېږي، دوام ورکړئ.	Give zinc for 14 days. From 2 to 6 months, give 10 mg a day; from 6 months, give 20 mg a day. Under 2 months, give zinc only if the health worker gives it. Keep giving it even after the diarrhoea stops.
 diarrhoea.feed	تی او خواړه دوام ورکړئ. ډېر ځله او ډېر وخت تی ورکړئ. نرم خواړه، ښوروا او د وریجو اوبه هم ورکړئ.	Keep breastfeeding and feeding. Breastfeed more often and for longer. Also give soft food, soup and rice water.
 diarrhoea.prevent	د نس ناستي مخه ونیسئ. له تشناب وروسته او له خوړو مخکې لاسونه په صابون ووینځئ. پاکې یا ایشول شوې اوبه وڅښئ، او د روټا ویروس واکسین وکړئ.	Stop diarrhoea before it starts. Wash hands with soap after the toilet and before food. Drink clean or boiled water, and get the rotavirus vaccine.
 diarrhoea.clinic	په کلینیک کې: او آر اس، زنک او معاینه. روغتیايي کارکوونکی ګوري چې ماشوم څومره وچ شوی، او آر اس او زنک ورکوي او د ورکولو لار یې ښيي. انټي بیوټیک یوازې د ډکو کې وینې یا کولرا لپاره دی.	At the clinic: ORS, zinc, a check. The health worker checks how dry the child is, gives ORS and zinc, and shows how to give them. Antibiotics are only for blood in the stool or cholera.
 diarrhoea.hospital	په روغتون کې: د رګ له لارې مایعات. هغه ماشوم چې نه شي څښلای یا ډېر وچ شوی، ژر سیروم یا د پوزې د نل له لارې مایعات اخلي. بیا بېرته او آر اس او زنک. ډېری ماشومان په یوه ورځ کې ښه کېږي.	At the hospital: fluids by drip. A child who cannot drink or is very dry gets fluids by drip or through a tube in the nose. Then ORS and zinc again. Most children are better within a day.
 diarrhoea.urgent	که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If your child has any of these signs, go to hospital now, day or night:
+diarrhoea.urgent.baby	تر ۲ میاشتو کم عمر لري او په ډکو متیازو کې یې وینه ده، سترګې یې ننوتې دي، یا ښه تی نه رودي	is under 2 months old with blood in the stool, sunken eyes, or poor feeding
 diarrhoea.urgent.drink	هېڅ نشي څښلای او تی نشي رودلای	cannot drink or breastfeed
 diarrhoea.urgent.vomit	هر څه چې خوري یا څښي، کانګې یې کوي	vomits everything, cannot keep anything down
 diarrhoea.urgent.sleepy	ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی	is very sleepy and hard to wake, or unconscious
-diarrhoea.urgent.eyes	سترګې یې ننوتې دي	has sunken eyes
+diarrhoea.urgent.eyes	سترګې یې ننوتې دي، او ډېر خوب وړی دی یا نشي څښلای	has sunken eyes, and is very sleepy or cannot drink
 diarrhoea.urgent.skin	د خېټې پوستکی یې چې ونیسئ او پرېږدئ یې، ډېر ورو بېرته ځي	pinched skin on the belly goes back very slowly
 diarrhoea.soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
+diarrhoea.soon.baby	تر ۲ میاشتو کم عمر لري او نس ناستی لري، که څه هم لږ وي	is under 2 months old and has diarrhoea, even a little
+diarrhoea.soon.eyes	بې‌قراره دی او ډېر تږی دی، یا یې سترګې ننوتې دي	is restless and very thirsty, or has sunken eyes
 diarrhoea.soon.blood	په ډکو متیازو کې یې وینه ښکاري	has blood in the stool
 diarrhoea.soon.long	۱۴ ورځې یا ډېر وخت کېږي چې نس ناستی لري	has had diarrhoea for 14 days or more
 diarrhoea.soon.worse	ښه نه کېږي، یا لا خرابېږي	is not getting better, or is getting worse
@@ -1019,11 +1022,11 @@ diarrhoea.dont.antibiotic	انټي بیوټیک مه ورکوئ، مګر دا چ
 diarrhoea.vomit	که ماشوم کانګې وکړې، ۱۰ دقیقې انتظار وباسئ. بیا بېرته او آر اس ورکړئ، خو ورو ورو.	If the child vomits, wait 10 minutes. Then give ORS again, but more slowly.
 anim.ors.title	په کور کې د او آر اس جوړول	Making ORS at home
 anim.ors.s1	اسهال د ماشوم له بدن څخه اوبه او مالګه باسي. څنګه چې اسهال پیل شي، او آر اس ورکړئ؛ هغه څه بېرته ډکوي چې له لاسه وتلي دي.	Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost.
-anim.ors.s2	لاسونه ومینځئ. یو پاک جګ تر ۱ لیټره پورې په ایشول شویو او سړو شویو اوبو ډک کړئ. ټول پاکټ پکې واچوئ او وې خوځوئ تر څو حل شي.	Wash your hands. Fill a clean jug to 1 litre with boiled, cooled water. Pour in the whole packet and stir until it dissolves.
+anim.ors.s2	لاسونه ومینځئ. یو پاک جګ په ایشول شویو او سړو شویو اوبو ډک کړئ، هومره چې پر پاکټ لیکل شوي، معمولاً ۱ لیټر. ټول پاکټ پکې واچوئ او وې خوځوئ تر څو حل شي.	Wash your hands. Fill a clean jug with boiled, cooled water, as much as the packet says, usually 1 litre. Pour in the whole packet and stir until it dissolves.
 anim.ors.s3	پاکټ نشته؟ اوس لپاره د وریجو اوبه یا ښوروا ورکړئ او د او آر اس د پاکټ لپاره کلینیک ته ولاړ شئ. تل څو پاکټونه په کور کې وساتئ.	No packet? For now give rice water or soup, and go to the clinic for ORS packets. Always keep a few packets at home.
 anim.ors.s4	لږ لږ او ژر ژر یې په کاچوغې یا پیالې ورکړئ. که ماشوم کانګې وکړې، ۱۰ دقیقې صبر وکړئ، بیا یې ورو ورو ورکړئ. هره ورځ یې تازه جوړ کړئ.	Give small sips often, with a spoon or a cup. If the child vomits, wait 10 minutes, then give it more slowly. Make it fresh each day.
-anim.ors.s5	تی ورکول او خواړه ورکول دوام ورکړئ. د کلینیک د زنک ټابلیټ، ورځې یو ځل د ۱۰ تر ۱۴ ورځو لپاره، ماشوم ژر جوړوي، حتی کله چې اسهال ودرېږي.	Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 10 to 14 days, help the child get well, even after the diarrhoea stops.
-anim.ors.s6	که ماشوم څښلی یا تی رودلی نشي، ډېر خوب وړی وي، په ډکو متیازو کې یې وینه وي، تبه ولري، یا ښه کېږي نه، ژر کلینیک ته لاړ شئ.	Go to the clinic quickly if the child cannot drink or breastfeed, is very sleepy, has blood in the poo, has a fever, or is not getting better.
+anim.ors.s5	تی ورکول او خواړه ورکول دوام ورکړئ. د کلینیک د زنک ټابلیټ، ورځې یو ځل د ۱۴ ورځو لپاره، ماشوم ژر جوړوي، حتی کله چې اسهال ودرېږي.	Keep breastfeeding and keep giving food. Zinc tablets from the clinic, once a day for 14 days, help the child get well, even after the diarrhoea stops.
+anim.ors.s6	که ماشوم څښلی یا تی رودلی نشي، یا ډېر خوب وړی وي، همدا اوس روغتون ته ولاړ شئ. که په ډکو متیازو کې یې وینه وي، تبه ولري، یا ښه نه کېږي، نن کلینیک ته ولاړ شئ.	Go to hospital now if the child cannot drink or breastfeed, or is very sleepy. Go to the clinic today if there is blood in the poo, a fever, or the child is not getting better.
 anim.water.title	د څښلو اوبو پاکول	Making water safe
 anim.water.s1	اوبه ښایي پاکې ښکاره شي، خو بیا هم پکې داسې میکروبونه وي چې ماشومانو ته اسهال ورکوي. میندو د اوبو د خوندي کولو څو اسانه لارې موندلې دي.	Water can look clear and still carry germs that give children diarrhoea. Mothers have found a few easy ways to make it safe.
 anim.water.s2	اوبه وخوټوئ: صبر وکړئ چې لویې بلبلې پورته شي، بیا یې ۱ دقیقه نوره په جوش کې پرېږدئ. سرپوښ ورباندې کېږدئ چې سړې شي.	Boil it: wait until big bubbles roll, then keep it boiling for 1 minute. Let it cool with the lid on.
@@ -1104,31 +1107,35 @@ fever.urgent.sleepy	ډېر خوب وړی دی او په سختۍ ویښېږي، 
 fever.urgent.drink	هېڅ نشي څښلای او تی نشي رودلای	cannot drink or breastfeed
 fever.urgent.vomit	هر څه چې خوري یا څښي، کانګې یې کوي	vomits everything, cannot keep anything down
 fever.urgent.rash	پر پوستکي یې بنفش یا تور داغونه راختلي	has purple or dark spots on the skin
+fever.urgent.breathing	په سختۍ سا اخلي، د سینې لاندې برخه یې ننوځي، یا په آرامه حالت کې یې سا غږ کوي	struggles to breathe, the lower chest pulls in, or breathing is noisy when calm
 fever.soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
 fever.soon.days	له ۲ ورځو زیات وخت کېږي چې تبه لري	has had a fever for more than 2 days
+fever.soon.fast	چټکه ساه اخلي: له ۲ تر ۱۲ میاشتو په یوه دقیقه کې ۵۰ ځله یا ډېر، له ۱ تر ۵ کلونو ۴۰ ځله یا ډېر	breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years
 fever.soon.measles	تبه او په ټول بدن سرې دانې لري؛ کېدای شي شري وي	has fever and a red rash all over; it may be measles
 fever.soon.ear	غوږ یې درد کوي یا له غوږه یې زوه راځي	has ear pain or pus coming from the ear
 fever.soon.urine	د تشو متیازو پر وخت درد لري یا ژاړي	has pain or cries when passing urine
 fever.soon.throat	سخت ستونی درد له سپینو داغونو سره لري، یا نه شي تېرولای	has a very sore throat with white spots, or cannot swallow
+fever.counter	ساه په ټیلیفون وشمېرئ. ټیلیفون یوه دقیقه شمېري او تاسو د هرې ساه سره تڼۍ ټکوئ. بیا وايي چې ساه چټکه ده که نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 fever.chw	که ماشوم له دې نښو څخه هېڅ یوه نه لري، د کلي روغتیايي کارکوونکی یا روغتیايي پوسته کولای شي ماشوم وګوري او د تبې درمل ورکړي.	If your child has none of these signs, the village health worker or the health post can check the child and give fever medicine.
 fever.measles	شری ژر خپرېږي. دانې لرونکی ماشوم له نوو زېږېدلو ماشومانو او امیندوارو ښځو لرې وساتئ، او ټولو ماشومانو ته د شري واکسین ورکړئ.	Measles spreads fast. Keep a child with a rash away from babies and pregnant women, and get every child the measles vaccine.
 measles.title	شری: په کور کې پاملرنه	Measles: care at home
 measles.summary	شری خطرناکه ده. ماشوم ته خواړه ورکړئ او د خطر نښې وپېژنئ.	Measles is dangerous. Keep feeding the child and know the danger signs.
 measles.lead	شری په تبه، ټوخي، د پوزې په بهېدو او سرو سترګو پیلېږي، بیا سرې دانې له مخ نه ټول بدن ته خپرېږي. شری کولای شي سینه بغل، نس ناستی او ړوندوالی راولي، نو ماشوم د کلینیک او کور پاملرنې ته اړتیا لري.	Measles starts with fever, cough, runny nose and red eyes, then a red rash spreads from the face to the whole body. It can cause pneumonia, diarrhoea and blindness, so the child needs care from the clinic and at home.
-measles.clinic	ماشوم کلینیک ته یوسئ. روغتیايي کارکوونکی ماشوم معاینه کوي او ویټامین الف ورکوي. ویټامین الف سترګې ساتي او له ماشوم سره د روغېدو مرسته کوي.	Take the child to the clinic. The health worker will check the child and give vitamin A. Vitamin A protects the eyes and helps the child get better.
+measles.clinic	ماشوم کلینیک ته یوسئ. روغتیايي کارکوونکی ماشوم معاینه کوي او ویټامین الف ورکوي: یو ځل په کلینیک کې، او یو ځل چې بله ورځ یې په کور کې ورکړئ. ویټامین الف سترګې ساتي او له ماشوم سره د روغېدو مرسته کوي.	Take the child to the clinic. The health worker will check the child and give vitamin A: one dose at the clinic, and one to give at home the next day. Vitamin A protects the eyes and helps the child get better.
 measles.feed	تي او خواړه دوام ورکړئ. ماشوم ته ډېر ځله تی ورکړئ او په ورځ کې څو ځله لږ لږ خواړه ورکړئ. ډېرې اوبه او مایعات لکه ښوروا ورکړئ.	Keep breastfeeding and feeding. Breastfeed more often and give small meals many times a day. Give plenty to drink, such as water and soup.
 measles.eyes	سترګې په نرمۍ پاکې کړئ. سترګې په پاک ټوکر او ایشول شویو سړو اوبو پاکې کړئ. د هرې سترګې لپاره د ټوکر یوه پاکه برخه وکاروئ.	Clean the eyes gently. Wipe the eyes with a clean cloth and boiled, cooled water. Use a clean part of the cloth for each eye.
 measles.others	نور خلک وساتئ. شری ډېر ژر خپرېږي. نوي زېږېدلي ماشومان او امیندوارې ښځې له ناروغ ماشوم نه لرې وساتئ.	Protect other people. Measles spreads very easily. Keep newborn babies and pregnant women away from the sick child.
 measles.vaccine	دوه واکسینونه ماشوم ساتي. هر ماشوم په ۹ میاشتنۍ او ۱۸ میاشتنۍ کې د شري واکسین اخلي. د ماشوم خویندې او وروڼه هم واکسین ته یوسئ.	Two vaccines protect the child. Every child gets measles vaccine at 9 months and 18 months. Take the sick child's brothers and sisters for their vaccine too.
 measles.hospital	په روغتون کې: سخت شری. په شري اخته ماشوم له د خطر نښې سره بستر کېږي. روغتون ویټامین الف، د سینه بغل لپاره اکسیجن، د سترګو، غوږ یا سینې انتان لپاره انټي بیوټیک، او د نس ناستي او د خولې زخمونو لپاره مایعات او خواړه ورکوي.	At the hospital: severe measles. A child with severe measles is admitted. The hospital gives vitamin A, oxygen for pneumonia, antibiotics for eye, ear or chest infection, and fluids and food for diarrhoea and mouth sores.
 measles.urgent	که په شري اخته ماشوم دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if the child with measles:
-measles.urgent.breathing	چټک یا په سختۍ سا اخلي	breathes fast or with difficulty
+measles.urgent.breathing	په سختۍ سا اخلي، یا د سینې لاندې برخه یې ننوځي	struggles to breathe, or the lower chest pulls in
 measles.urgent.drink	څه نه شي څښلای یا تی نه شي رودلای	cannot drink or breastfeed
 measles.urgent.convulsion	اختلاج کوي	has fits (convulsions)
 measles.urgent.sleepy	ډېر خوب وړی دی یا په سختۍ ویښېږي	is very sleepy or hard to wake
 measles.urgent.cloudy-eye	د سترګې تور یې خړ یا سپین شوی دی	has a white or cloudy patch on the eye
 measles.urgent.mouth	په خوله کې ژور زخمونه لري او خواړه نه شي خوړلای	has deep mouth sores and cannot eat
 measles.soon	که په شري اخته ماشوم دا نښې لري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if the child with measles:
+measles.soon.fast	ژر ژر سا اخلي، خو د روغتون له نښو څخه هېڅ یوه نه لري	breathes fast, but has none of the hospital signs
 measles.soon.pus	له سترګو یې زوه راځي	has pus coming from the eyes
 measles.soon.mouth	په خوله کې یې زخمونه دي	has sores in the mouth
 measles.soon.diarrhoea	نس ناستی لري	has diarrhoea
@@ -1176,12 +1183,14 @@ malnutrition.urgent.feet	دواړه پښې یې پړسېدلې دي	has swelling
 malnutrition.urgent.eat	ډېر ډنګر دی او نه خوري او نه څښي	is very thin and will not eat or drink
 malnutrition.urgent.sleepy	ډېر ډنګر او ډېر خوبولی دی، یا په سختۍ ویښېږي	is very thin and very sleepy, or hard to wake
 malnutrition.urgent.vomit	ډېر ډنګر دی او هر څه کانګې کوي	is very thin and vomits everything
-malnutrition.urgent.fever	ډېر ډنګر دی او تبه لري، یا بدن یې سوړ دی	is very thin and has fever, or feels cold
+malnutrition.urgent.fever	ډېر ډنګر دی او لوړه تبه لري (۳۹ یا ډېر)، یا بدن یې سوړ دی	is very thin with a high fever (39 or more), or feels cold
+malnutrition.urgent.convulsion	اختلاج یې کړی یا اوس اختلاج لري	has had convulsions (fits), or has them now
 malnutrition.soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	If your child has any of these signs, go to the clinic today:
 malnutrition.soon.thin	د خپل عمر له نورو ماشومانو ډنګر دی	is thinner than other children of the same age
 malnutrition.soon.weight	وزن بایلي، یا وزن نه اخلي	is losing weight, or not gaining weight
 malnutrition.soon.eating	څو ورځې کېږي چې له پخوا لږ خوري	has eaten less than before for several days
 malnutrition.soon.diarrhoea	۱۴ ورځې یا ډېر نس ناستی لري	has had diarrhoea for 14 days or more
+malnutrition.soon.fever	ډېر ډنګر دی او تبه لري	is very thin and has a fever
 malnutrition.dont	دا کارونه مه کوئ:	Do not:
 malnutrition.dont.stop	ځانګړې خمیره وخته مه پرېږدئ؛ ټوله دوره بشپړه کړئ.	Do not stop the special paste early; finish the whole course.
 malnutrition.dont.share	د ماشوم خمیره له نورو ماشومانو سره مه شریکوئ؛ دا د همغه ماشوم درمل دي.	Do not share the child's paste with other children; it is that child's medicine.
@@ -1196,6 +1205,9 @@ reading-muac.urgent	که ماشوم له دې نښو څخه یوه ولري، ه
 reading-muac.urgent.feet	دواړه پښې یې پړسېدلې دي	has swelling of both feet
 reading-muac.urgent.eat	ډنګر دی او هېڅ نه خوري او نه څښي	is thin and will not eat or drink anything
 reading-muac.urgent.sleepy	ډنګر دی او ډېر کمزوری یا خوب وړی دی	is thin and very weak or sleepy
+reading-muac.urgent.vomit	ډنګر دی او هر څه کانګې کوي	is thin and vomits everything
+reading-muac.urgent.fever	ډنګر دی او لوړه تبه لري (۳۹ یا ډېر)، یا بدن یې سوړ دی	is thin with a high fever (39 or more), or feels cold
+reading-muac.urgent.convulsion	اختلاج یې کړی یا اوس اختلاج لري	has had convulsions (fits), or has them now
 reading-muac.weight	څه ته پام وکړئ. کوچنی ماشوم باید هره میاشت وزن واخلي. د کلینیک د ودې چارټ ښيي چې وزن یې د عمر سره سم دی که نه.	What to look for. A young child should gain weight each month. The clinic's growth chart shows if the weight is right for the age.
 reading-muac.weight-soon	که ماشوم له دې څخه یو ولري، په همدې اونۍ کلینیک ته ولاړ شئ	Go to the clinic this week if the child:
 reading-muac.weight-soon.flat	۲ میاشتې کېږي چې وزن یې نه دی اخیستی	has not gained weight for 2 months
@@ -1276,7 +1288,7 @@ pregnancy-danger.lead	په امیندوارۍ کې ځینې نښې د مور ا�
 pregnancy-danger.urgent	که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If you have any of these signs, go to hospital now, day or night
 pregnancy-danger.urgent.bleeding	له تناسلي لارې وینه بهېدل	Bleeding from the vagina
 pregnancy-danger.urgent.fits	اختلاج، یا بې هوښي	Fits, or being unconscious
-pregnancy-danger.urgent.headache	سخت سر درد، له تت لید سره	Severe headache with blurred vision
+pregnancy-danger.urgent.headache	سخت سر درد، یا تت لید	Severe headache, or blurred vision
 pregnancy-danger.urgent.fever-weak	تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ	Fever, and too weak to get out of bed
 pregnancy-danger.urgent.belly-pain	د نس سخت درد	Severe belly pain
 pregnancy-danger.urgent.breathing	چټکه یا سخته ساه اخیستل	Fast or difficult breathing
@@ -1286,7 +1298,7 @@ pregnancy-danger.soon.fever	تبه	Fever
 pregnancy-danger.soon.belly-pain	د نس درد	Belly pain
 pregnancy-danger.soon.ill	د ناروغۍ احساس	Feeling ill
 pregnancy-danger.soon.swelling	د ګوتو، مخ یا پښو پړسوب	Swelling of the fingers, face or legs
-pregnancy-danger.soon.waters	د زېږون اوبه راغلې، خو د زېږون دردونه نشته	The waters break, but there are no labour pains
+pregnancy-danger.soon.waters	د زېږون اوبه راغلې، خو د زېږون دردونه نشته: له ۶ ساعتونو زیات انتظار مه کوئ	The waters break with no labour pains: do not wait more than 6 hours
 pregnancy-danger.soon.urine	د تشو متیازو پر وخت سوځېدل	Burning when passing urine
 pregnancy-danger.birth-plan	له کورنۍ سره د زېږون پلان جوړ کړئ. د امیندوارۍ په لومړیو کې له خپلې کورنۍ سره خبرې وکړئ. پرېکړه وکړئ چې چېرته به زېږون کوئ او څوک به درسره ځي.	Make a birth plan together. Talk with your family early in pregnancy. Decide where you will give birth and who will go with you.
 pregnancy-danger.money-car	پیسې او موټر چمتو کړئ. له اوس نه لږې پیسې خوندي کړئ. له یو موټر چلوونکي سره خبره وکړئ چې د شپې یا ورځې مو یوسي.	Get money and transport ready. Put some money aside now. Agree with a driver who can take you, day or night.
@@ -1303,18 +1315,18 @@ pregnancy-care.title	په امیندوارۍ کې پاملرنه	Care in pregnan
 pregnancy-care.summary	په امیندوارۍ کې کلینیک، اوسپنه، واکسین، خواړه او آرام	Clinic visits, iron, vaccine, food and rest in pregnancy
 pregnancy-care.lead	په امیندوارۍ کې ښه پاملرنه مور او ماشوم روغ ساتي. کلینیک ته ژر او ډېر ځله ولاړ شئ.	Good care in pregnancy keeps mother and baby healthy. Go to the clinic early and often.
 pregnancy-care.visits	ژر او ډېر ځله کلینیک ته ولاړ شئ. د امیندوارۍ په لومړیو ۳ میاشتو کې کلینیک ته ولاړ شئ. لږ تر لږه ۴ ځله ولاړ شئ، او ۸ ځله تر ټولو ښه دي.	Visit the clinic early and often. Go in the first 3 months of pregnancy. Go at least 4 times; 8 visits are best.
-pregnancy-care.iron	هره ورځ اوسپنه وخورئ. د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره.	Take iron every day. Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea.
-pregnancy-care.tetanus	د تېتانوس واکسین واخلئ. د تېتانوس واکسین تاسو او ستاسو نوی زېږېدلی ماشوم ساتي. له کلینیک وپوښتئ چې څو ځله پکار دی.	Get the tetanus vaccine. The tetanus vaccine (TT or Td) protects you and your newborn baby. Ask the clinic how many doses you need.
+pregnancy-care.iron	هره ورځ اوسپنه وخورئ. د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره. که کلینیک د کلسیم ګولۍ درکړې، د امیندوارۍ د اختلاج مخه نیسي؛ هغه د ورځې په بل وخت کې وخورئ.	Take iron every day. Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea. Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day.
+pregnancy-care.tetanus	د تېتانوس واکسین واخلئ. د تېتانوس واکسین تاسو او ستاسو نوی زېږېدلی ماشوم ساتي. له کلینیک وپوښتئ چې څو ځله پکار دی.	Get the tetanus vaccine. The tetanus vaccine (Td) protects you and your newborn baby. Ask the clinic how many doses you need.
 pregnancy-care.food	هره ورځ یو وخت اضافه خواړه وخورئ. هره ورځ بېلابېل خواړه وخورئ: غوښه، هګۍ، لوبیا، سبزي، مېوه، شیدې او مستې.	Eat one extra meal a day. Eat different foods each day: meat, eggs, beans, vegetables, fruit, milk and yoghurt.
-pregnancy-care.rest	ډېر آرام وکړئ، دروند کار مه کوئ. د ورځې څملئ او آرام وکړئ. له کورنۍ وغواړئ چې په ډېرو درنو کارونو کې، لکه د اوبو راوړلو کې، مرسته وکړي.	Rest more, avoid heavy work. Lie down to rest during the day. Ask the family to help with very heavy work, like carrying water.
+pregnancy-care.rest	فعاله اوسئ، دروند بار مه پورته کوئ. ګرځېدل او د ورځې عادي کارونه ستاسو لپاره ښه دي. کله چې ستړې شئ آرام وکړئ، او له کورنۍ وغواړئ چې په درنو کارونو کې، لکه د اوبو راوړلو کې، مرسته وکړي.	Keep active, avoid heavy loads. Walking and your normal daily work are good for you. Rest when you are tired, and ask the family to help with heavy work, like carrying water.
 pregnancy-care.midwife	له روزل شوې قابلې سره زېږون وکړئ. پلان وکړئ چې په روغتون یا کلینیک کې له روزل شوې قابلې سره زېږون وکړئ. له کورنۍ سره د زېږون پلان جوړ کړئ.	Give birth with a skilled midwife. Plan to give birth in a hospital or clinic with a skilled midwife. Make a birth plan with your family.
 pregnancy-care.labour	د زېږون د پیل نښې وپېژنئ. کله چې درد هر ۲۰ دقیقې یا ژر ژر راځي، د زېږون اوبه راځي، یا سرېښناکې وینې لړلې اوبه راځي، زېږون پیل شوی دی. بیا ولاړ شئ.	Know the signs of labour. Labour has started when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Then go.
-pregnancy-care.clinic	په کلینیک کې: په هره امیندوارۍ معاینه کې. قابله د وینې فشار، وزن او د ماشوم وده او د زړه ټکان معاینه کوي، وینه د وینې کمښت او متیازې د انتان لپاره معاینه کوي، اوسپنه، فولیک اسید او د تیټانوس واکسین ورکوي، او د زېږون پلان جوړوي.	At the clinic: at each antenatal visit. The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid and the tetanus vaccine, and plans the birth.
+pregnancy-care.clinic	په کلینیک کې: په هره امیندوارۍ معاینه کې. قابله د وینې فشار، وزن او د ماشوم وده او د زړه ټکان معاینه کوي، وینه د وینې کمښت او متیازې د انتان لپاره معاینه کوي، اوسپنه، فولیک اسید (او کلسیم که ولري) او د تیټانوس واکسین ورکوي، او د زېږون پلان جوړوي.	At the clinic: at each antenatal visit. The midwife checks blood pressure, weight and the baby's growth and heartbeat, tests blood for anaemia and urine for infection, gives iron, folic acid (and calcium if they have it) and the tetanus vaccine, and plans the birth.
 pregnancy-care.hospital	په روغتون کې: په روغتون کې زېږون. په کلینیک یا روغتون کې زېږون کې، قابله مور او ماشوم څاري، له زېږون وروسته د ډېرې وینې بهېدلو د مخنیوي پیچکاري ورکوي، که اړتیا وي له ماشوم سره په ساه اخیستلو کې مرسته کوي، او کولای شي د سزارین لپاره ډاکټر وغواړي.	At the hospital: giving birth there. At a clinic or hospital birth, a midwife watches mother and baby, gives an injection to prevent heavy bleeding, helps the baby breathe if needed, and can send you for a caesarean.
 pregnancy-care.urgent	که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If you have any of these signs, go to hospital now, day or night
 pregnancy-care.urgent.bleeding	له تناسلي لارې وینه بهېدل	Bleeding from the vagina
 pregnancy-care.urgent.fits	اختلاج، یا بې هوښي	Fits, or being unconscious
-pregnancy-care.urgent.headache	سخت سر درد، له تت لید سره	Severe headache with blurred vision
+pregnancy-care.urgent.headache	سخت سر درد، یا تت لید	Severe headache, or blurred vision
 pregnancy-care.urgent.belly-pain	د نس سخت درد	Severe belly pain
 pregnancy-care.dont	په امیندوارۍ کې له دې شیانو ډډه وکړئ	Things to avoid in pregnancy
 pregnancy-care.dont.smoking	سګرټ مه څکوئ، او د نورو د سګرټو له لوګي لرې اوسئ.	Do not smoke, and keep away from other people's cigarette smoke.
@@ -1330,34 +1342,41 @@ birth-plan.money-car	پیسې او موټر، له مخکې چمتو. هره م�
 birth-plan.phone	د ټیلیفون شمېرې ثبت کړئ. د دواړو موټر چلوونکو، قابلې یا د کلي روغتیايي کارکوونکي او کلینیک شمېرې په ټیلیفون کې ثبت کړئ. ټیلیفون چارج او له کارت سره وساتئ.	Save the phone numbers. Save the numbers of both drivers, the midwife or village health worker, and the clinic. Keep the phone charged, with money on it.
 birth-plan.bag	د زېږون لپاره یوه کڅوړه چمتو کړئ. پاک ټوکران، د ماشوم لپاره ګرمې جامې او خولۍ، یو کمپله، د مور د کلینیک کارت او تذکره، خواړه او اوبه چمتو کړئ.	Pack a bag for the birth. Pack clean cloths, warm clothes and a cap for the baby, a blanket, her clinic card and ID card, food and water.
 birth-plan.go	کله چې زېږون پیل شو، ولاړ شئ. کله چې درد هر ۲۰ دقیقې یا ژر ژر راځي، د زېږون اوبه راځي، یا سرېښناکې وینې لړلې اوبه راځي، ولاړ شئ. په کور کې انتظار مه باسئ.	Go when labour starts. Go when pains come every 20 minutes or less, the waters break, or sticky bloody mucus comes. Do not wait at home.
-birth-plan.home	که زېږون په کور کې وشو. سمدلاسه یوه روزل شوې قابله راوغواړئ. کوټه ګرمه او پاکه وساتئ او مور او ماشوم په لومړۍ ورځ کلینیک ته بوځئ.	If the birth happens at home. Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day.
+birth-plan.home	که زېږون په کور کې وشو. سمدلاسه یوه روزل شوې قابله راوغواړئ. کوټه ګرمه او پاکه وساتئ او مور او ماشوم په لومړۍ ورځ کلینیک ته بوځئ. که ځوله (پرېوان) د ماشوم له زېږون ۱ ساعت وروسته لا نه وي راوتلې، یا وینه له ۵ دقیقو په لږ وخت کې یو ټوکر لوند کړي، همدا اوس روغتون ته ولاړ شئ.	If the birth happens at home. Call a trained midwife at once. Keep the room warm and clean, and take mother and baby to the clinic within a day. Go to hospital now if the afterbirth is not out 1 hour after the baby, or blood soaks a cloth in under 5 minutes.
 birth-plan.danger	د امیندوارۍ د خطر ټولې نښې. له خپل مېړه او خواښې سره یې یوځای زده کړئ، چې ټول پوه شي کله باید ولاړ شي.	All the danger signs in pregnancy. Learn them together with your husband and mother-in-law, so everyone knows when to go.
 birth-plan.near	تر ټولو نږدې کلینیک پیدا کړئ. خپل نږدې کلینیکونه او روغتونونه وګورئ، چې د زېږون ځای وټاکئ.	Find the nearest clinic. See the clinics and hospitals near you, to choose where to give birth.
 birth-plan.clinic	په کلینیک کې: د زېږون پلان. قابله د امیندوارۍ په هره معاینه کې تاسو او ماشوم معاینه کوي، د پلان په جوړولو کې مرسته کوي او وايي که زېږون ستونزمن وي، چېرته ولاړ شئ.	At the clinic: planning the birth. At each pregnancy check the midwife examines you and the baby, helps you make the plan, and tells you where to go if the birth may be difficult.
 birth-plan.urgent	که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If you have any of these signs, go to hospital now, day or night
 birth-plan.urgent.bleeding	له تناسلي لارې وینه بهېدل	Bleeding from the vagina
 birth-plan.urgent.fits	اختلاج، یا بې هوښي	Fits, or being unconscious
-birth-plan.urgent.headache	سخت سر درد، له تت لید سره	Severe headache with blurred vision
+birth-plan.urgent.headache	سخت سر درد، یا تت لید	Severe headache, or blurred vision
 birth-plan.urgent.fever-weak	تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ	Fever, and too weak to get out of bed
 birth-plan.urgent.belly-pain	د نس سخت درد	Severe belly pain
 birth-plan.urgent.long-labour	د زېږون دردونه له ۱۲ ساعتونو زیات دوام کوي او ماشوم نه دی زېږېدلی	Labour pains for more than 12 hours, and the baby is not born
+birth-plan.urgent.placenta	ځوله (پرېوان) د ماشوم له زېږون ۱ ساعت وروسته لا نه ده راوتلې	The afterbirth (placenta) is not out 1 hour after the baby is born
 birth-plan.far	که لاره اوږده وي، یا واوره یې بندولای شي، هغه کولای شي په وروستیو اونیو کې د کلینیک سره نږدې له خپلوانو سره پاتې شي.	If the road is long, or snow may close it, she can stay with relatives near the clinic in the last weeks before the birth.
 birth-plan.tell	پلان ټولې کورنۍ ته ووایاست، او پیسې، کڅوړه او د ټیلیفون شمېرې داسې ځای کېږدئ چې ټول یې پیدا کړای شي.	Tell the whole family the plan, and keep the money, the bag and the phone numbers where everyone can find them.
 after-birth.title	له زېږون وروسته	After the birth
 after-birth.summary	له زېږون وروسته د مور پاملرنه او د خطر نښې	Care and danger signs for the mother after birth
 after-birth.lead	له زېږون وروسته اونۍ د مور لپاره هم د خطر وخت دی. آرام وکړئ، ښه خواړه وخورئ او د خطر نښې وپېژنئ.	The weeks after birth are a risky time for the mother too. Rest, eat well, and know the danger signs.
 after-birth.urgent	که له دې نښو څخه یوه هم لرئ، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	If you have any of these signs, go to hospital now, day or night
-after-birth.urgent.bleeding	ډېره وینه بهېدل، یا وینه چې زیاتېږي	Heavy bleeding, or bleeding that gets more
+after-birth.urgent.bleeding	ډېره وینه بهېدل (له ۵ دقیقو په لږ وخت کې یو ټوکر لوند کړي)، یا وینه چې زیاتېږي	Heavy bleeding (a cloth soaked in under 5 minutes), or bleeding that gets more
 after-birth.urgent.fits	اختلاج	Fits
 after-birth.urgent.headache	سخت سر درد، یا تت لید	Severe headache, or blurred vision
 after-birth.urgent.breathing	چټکه یا سخته ساه اخیستل	Fast or difficult breathing
 after-birth.urgent.fever-discharge	تبه، له تناسلي لارې د بدبویه اوبو سره	Fever with a bad-smelling discharge from the vagina
+after-birth.urgent.fever-weak	تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ	Fever, and too weak to get out of bed
+after-birth.urgent.belly-pain	د نس سخت درد	Severe belly pain
 after-birth.urgent.calf	دردناکه او پړسېدلې پنډۍ	A painful, swollen calf (back of the lower leg)
 after-birth.urgent.harm	ځان یا ماشوم ته د زیان رسولو فکرونه	Thoughts of harming yourself or your baby
 after-birth.soon	که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ	If you have any of these signs, go to the clinic today
 after-birth.soon.wound	په ټپ یا ګنډلو ځایونو کې درد، سوروالی یا زوې	Pain, redness or pus in a wound or stitches
 after-birth.soon.breast	دردناک، سور یا تود تی	A breast that is painful, red or hot
-after-birth.soon.urine	د تشو متیازو پر وخت درد یا ستونزه	Pain or trouble passing urine
+after-birth.soon.urine	د تشو متیازو پر وخت درد یا ستونزه، یا د متیازو څاڅېدل	Pain or trouble passing urine, or urine that leaks
+after-birth.soon.fever	تبه	Fever
+after-birth.soon.belly-pain	د نس درد	Belly pain
+after-birth.soon.ill	د ناروغۍ احساس	Feeling ill
+after-birth.soon.discharge	له تناسلي لارې بدبویه اوبه	A bad-smelling discharge from the vagina
 after-birth.soon.sad	ډېر وخت ډېره خپه یا اندېښمنه یاست	Feeling very sad or worried most of the time
 after-birth.checks	د مور او ماشوم معاینه. مور او ماشوم باید په لومړۍ ورځ، درېیمه ورځ، د ۷ او ۱۴ ورځو ترمنځ، او په ۶ اونیو کې معاینه شي. د کلي روغتیايي کارکوونکی هم کولای شي کور ته راشي.	Check-ups for mother and baby. Mother and baby need checks on the first day, on day 3, between day 7 and 14, and at 6 weeks. The village health worker can also visit at home.
 after-birth.rest-food	آرام وکړئ او ښه خواړه وخورئ. تر معمول ډېر خواړه وخورئ او ډېرې اوبه وڅښئ. له کورنۍ وغواړئ چې د کور په کار کې مرسته وکړي، چې مور آرام وکړي.	Rest and eat well. Eat more than usual and drink plenty. Ask the family to help with housework, so the mother can rest.
@@ -1374,8 +1393,8 @@ anaemia.signs	نښې وپېژنئ. ستړیا، کمزوري، سر ګرځېدل
 anaemia.causes	لاملونه یې وپېژنئ. په خوړو کې لږه اوسپنه، هغه وینه چې په میاشتنۍ عادت او زېږونونو کې ضایع کېږي، او د نس چینجي.	Know the causes. Too little iron in food, blood lost in monthly periods and births, and worms in the belly.
 anaemia.food	اوسپنه لرونکي خواړه وخورئ. غوښه، ځیګر، هګۍ، دال، لوبیا او تکې شنې سبزۍ لکه پالک وخورئ. ورسره مېوه وخورئ، چې بدن ډېره اوسپنه واخلي.	Eat iron-rich foods. Eat meat, liver, eggs, lentils, beans and dark green leaves like spinach. Eat fruit with them to take in more iron.
 anaemia.tea	چای د خوړو ترمنځ وڅښئ. چای بدن ته نه پرېږدي چې له خوړو اوسپنه واخلي. چای له ډوډۍ یو ساعت مخکې یا یو ساعت وروسته وڅښئ، نه له ډوډۍ سره.	Drink tea between meals. Tea stops the body taking iron from food. Drink tea one hour before or one hour after a meal, not with it.
-anaemia.iron-pregnancy	په امیندوارۍ کې د اوسپنې ګولۍ. په امیندوارۍ کې د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره.	Iron tablets in pregnancy. In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea.
-anaemia.worms	چینجي درملنه کړئ. له کلینیک نه د کورنۍ لپاره د چینجو د درملو په اړه وپوښتئ. له ډوډۍ مخکې او له تشناب وروسته لاسونه په صابون ومینځئ.	Treat worms. Ask the clinic about worm medicine for the family. Wash hands with soap before eating and after the toilet.
+anaemia.iron-pregnancy	په امیندوارۍ کې د اوسپنې ګولۍ. په امیندوارۍ کې د اوسپنې او فولیک اسید ګولۍ هره ورځ، لکه څنګه چې کلینیک درکړې، وخورئ. له اوبو سره یې وخورئ، نه له چای سره. که کلینیک د کلسیم ګولۍ درکړې، د امیندوارۍ د اختلاج مخه نیسي؛ هغه د ورځې په بل وخت کې وخورئ.	Iron tablets in pregnancy. In pregnancy, take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea. Calcium tablets, if the clinic gives them, help prevent fits; take them at another time of day.
+anaemia.worms	چینجي درملنه کړئ. له کلینیک نه د کورنۍ لپاره د چینجو د درملو په اړه وپوښتئ. په امیندوارۍ کې د چینجو درمل یوازې له لومړیو ۳ میاشتو وروسته ورکول کېږي؛ له قابلې وپوښتئ. له ډوډۍ مخکې او له تشناب وروسته لاسونه په صابون ومینځئ.	Treat worms. Ask the clinic about worm medicine for the family. In pregnancy, worm medicine is given only after the first 3 months; ask the midwife. Wash hands with soap before eating and after the toilet.
 anaemia.clinic	په کلینیک کې: د وینې معاینه او د اوسپنې ګولۍ. روغتیايي کارکوونکی باڼه او ورغوي ګوري او ښايي وینه د ګوتې په معاینه اندازه کړي. د اوسپنې او فولیک اسید ګولۍ د ۳ میاشتو لپاره، او د چینجیو درمل ورکوي، او لامل یې لټوي.	At the clinic: blood test, iron tablets. The health worker checks eyelids and palms and may measure the blood with a finger prick. They give iron and folic acid tablets for 3 months, plus worm medicine.
 anaemia.hospital	په روغتون کې: سخت د وینې کمښت. هغه څوک چې ډېر رنګ الوتی وي له ساه لنډۍ، د زړه چټک ټکان یا پړسېدلو پښو سره، یا د زېږون ته نږدې امیندواره ښځه، ښايي په روغتون کې وینې او د لامل لټون ته اړتیا ولري، لکه ډېر میاشتني عادتونه.	At the hospital: severe anaemia. Someone very pale with breathlessness, a racing heart or swollen feet, or a pregnant woman near her time, may need blood in hospital and a search for the cause.
 anaemia.soon	که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ	If you have any of these signs, go to the clinic today
@@ -1395,7 +1414,7 @@ urine-infection.drink	ډېرې اوبه وڅښئ. پاکې اوبه ډېر وڅ�
 urine-infection.pregnant	په امیندوارۍ کې: په همغه ورځ ولاړ شئ. په امیندوارۍ کې انتان ښايي نښه ونه لري خو وختي زېږون راولي. د امیندوارۍ په معایناتو کې د متیازو معاینه وغواړئ، او که سوزش یا تبه لرئ په همغه ورځ ولاړ شئ.	In pregnancy: go the same day. In pregnancy an infection may have no signs but can bring early labour. Ask for the urine test at antenatal visits, and go the same day if you have burning or fever.
 urine-infection.finish	انټي بیوټیک بشپړ کړئ. ټولې هغه ګولۍ وخورئ چې روغتیايي کارکوونکي درکړي، حتی کله چې سوزش له یوې ورځې وروسته ودرېږي. که په ۲ ورځو کې ښه نه شو، بېرته راشئ.	Finish the antibiotic. Take all the tablets the health worker gives, even when the burning stops after a day. Go back if it is not better in 2 days.
 urine-infection.others	نارینه او ماشومان. په نارینه کې د متیازو سوزش، یا په کوچني ماشوم کې تبه له کانګو سره، هم کلینیک ته اړتیا لري؛ لامل یې ښايي توپیر ولري. تکراري انتان لرونکي ماشومان د روغتون معاینې ته اړتیا لري.	Men and children. Burning urine in a man, or fever with vomiting in a small child, needs the clinic too; the cause may be different. Children with repeated infections need a hospital check.
-urine-infection.clinic	په کلینیک کې: د متیازو معاینه او انټي بیوټیک. روغتیايي کارکوونکی متیازې په پټۍ معاینه کوي او د انټي بیوټیک ګولیو لنډه دوره (لکه نایټروفورانټوین یا اموکسي سیلین) ورکوي، او په امیندوارۍ کې بې خطره درمل غوره کوي.	At the clinic: urine test and antibiotics. The health worker tests the urine with a strip and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy.
+urine-infection.clinic	په کلینیک کې: د متیازو معاینه او انټي بیوټیک. روغتیايي کارکوونکی متیازې (په پټۍ، یا په لابراتوار کې که وي) معاینه کوي او د انټي بیوټیک ګولیو لنډه دوره (لکه نایټروفورانټوین یا اموکسي سیلین) ورکوي، او په امیندوارۍ کې بې خطره درمل غوره کوي.	At the clinic: urine test and antibiotics. The health worker tests the urine (with a strip, or in a laboratory where there is one) and gives a short course of antibiotic tablets (such as nitrofurantoin or amoxicillin), choosing one that is safe in pregnancy.
 urine-infection.hospital	په روغتون کې: د پښتورګو انتان. تبه له ملا درد او کانګو سره یعنې انتان پښتورګو ته رسېدلی. روغتون پیچکاري انټي بیوټیک او سیروم ورکوي، او پښتورګي په الټراساونډ معاینه کوي.	At the hospital: a kidney infection. Fever with back pain and vomiting means the infection has reached the kidneys. The hospital gives antibiotics by injection and fluids by drip, and checks the kidneys with an ultrasound scan.
 urine-infection.urgent	که څوک دا نښې لري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if someone has:
 urine-infection.urgent.fever	د متیازو سوزش له لوړې تبې، لړزې او ملا درد سره	burning urine with high fever, shivering and back pain
@@ -2726,7 +2745,7 @@ kit-first-aid.title	په کور کې د لومړنیو مرستو سامان	Fir
 kit-first-aid.summary	او آر اس، زنک، صابون، پاک ټوکر او بنداژ: هر یو د څه لپاره دی.	ORS, zinc, soap, clean cloth and bandages: what each is for.
 kit-first-aid.lead	د لومړنیو مرستو یو کوچنی قطي په پاک او وچ ځای کې، لوړ او د ماشومانو له لاسه لرې وساتئ. هرو څو میاشتو کې یې وګورئ.	Keep a small box of first-aid things in a clean, dry place, high up and away from children. Check it every few months.
 kit-first-aid.ors	د او آر اس پاکټونه. د نس ناستې لپاره، په ماشومانو او لویانو کې. لږ تر لږه ۴ پاکټه وساتئ. یو پاکټ په یو لیتر پاکو اوبو کې حل کړئ. کلینیک او روغتیايي پوسته یې لري.	ORS packets. For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. The clinic and the health post have it.
-kit-first-aid.zinc	د زنک ګولۍ. د نس ناستې لرونکي ماشوم لپاره، ۱۰ تر ۱۴ ورځو: تر ۶ میاشتو کم، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه.	Zinc tablets. For a child with diarrhoea, for 10 to 14 days: under 6 months, 10 mg a day; from 6 months, 20 mg a day.
+kit-first-aid.zinc	د زنک ګولۍ. د نس ناستې لرونکي ماشوم لپاره، ۱۴ ورځې: له ۲ تر ۶ میاشتو، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه. تر ۲ میاشتو کم، له روغتیايي کارکوونکي وپوښتئ.	Zinc tablets. For a child with diarrhoea, for 14 days: from 2 to 6 months, 10 mg a day; from 6 months, 20 mg a day. Under 2 months, ask the health worker.
 kit-first-aid.soap	صابون. د لاسونو، ټپونو او چیچلو د مینځلو لپاره. د څاروي د چیچلو ځای ۱۵ دقیقې په صابون او بهېدونکو اوبو ومینځئ.	Soap. For washing hands, cuts and bites. Wash an animal bite with soap and running water for 15 minutes.
 kit-first-aid.cloth	پاک ټوکر او بنداژ. پاک پنبه یي ټوکر او د بنداژ کړۍ، په وینه بهېدو د فشار لپاره او د سوځېدنې او ټپونو د پټولو لپاره. په پاکه پلاستیکي کڅوړه کې یې وساتئ.	Clean cloth and bandages. Clean cotton cloth and bandage rolls, to press on bleeding and to cover burns and wounds. Keep them in a clean plastic bag.
 kit-first-aid.more	دا هم په کار دي. ترمامیټر، د ټپ پلستر، قیچي، لاسي څراغ، او د یوه موټروان او کلینیک د ټیلیفون شمېرې.	Also useful. A thermometer, sticking plasters, scissors, a torch, and the phone numbers of a driver and the clinic.
