@@ -646,3 +646,21 @@ img{max-width:100%;display:block}
 .hbtn .t{font-size:21px}
 .askbox input{min-width:0;width:100%}
 .trow .t,.erow .t,.ptile .t,.hbtn .t{overflow-wrap:break-word;word-wrap:break-word}
+/* speakers beside headings, labels and short lines (Settings, search, Feedback, Family, Growth, the clinic list) */
+.lblrow,.sayhead{display:flex;align-items:center;gap:10px}
+.lblrow{margin:12px 0 6px}
+.lblrow>.grow,.sayhead>.grow{flex:1 1 auto;min-width:0}
+.lblrow label,.form .lblrow label,.lblrow h2,.lblrow p,.sayhead h2,.sayhead p{margin:0}
+.lblrow .fbwarn{margin-top:4px}
+.lblrow .btn{margin:0}
+.panel>.lblrow:first-child{margin-top:4px}
+.group-h.sayh{margin:14px 0 8px}.group-h.sayh h2.t{font-size:18px}
+.em-all summary .grow{flex:1 1 auto}.em-all summary .spk{margin-inline-start:8px}
+.fac .fh b{flex:1 1 auto;min-width:0}
+.fbvoice{position:relative;padding:0 64px}
+.fbvoice>.spk{position:absolute;top:0;right:0;inset-inline-end:0}
+[dir=rtl] .fbvoice>.spk{right:auto;left:0}
+.fac .fh{margin-bottom:6px}
+/* a settings row with a speaker and a button or switch: on a narrow phone the button goes under the words */
+.srow.swrap{flex-wrap:wrap}.srow.swrap>.grow{flex:1 1 150px}.srow.swrap>.sbtn,.srow.swrap>.toggle{margin-inline-start:auto}
+.fweight .trow .body h2{margin:0 0 4px;font-size:18px}

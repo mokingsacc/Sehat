@@ -202,7 +202,8 @@ export function screenPrivacy() {
   const ids = Object.keys(S.book.narration).filter((k) => k.startsWith('ui.privacy.'));
   let html = C.top(T('privacy'), { back: needAnswer() && S.lang && S.voice ? '#/home' : '#/settings' }) + C.listenBar(ids);
   for (const id of ids) html += `<div class="blk tip" data-block="${esc(id)}">${ic(id === 'ui.privacy.voice' ? 'talk' : id === 'ui.privacy.watch' ? 'people' : id === 'ui.privacy.phone' ? 'phone' : 'check')}<div class="body">${esc(L(S.book.narration[id]))}</div>${spk(id)}</div>`;
-  if (!needAnswer()) html += `<div class="panel"><div class="srow">${ic('card')}<div class="grow"><div class="t">${esc(T(allowed() ? 'usageNowOn' : 'usageNowOff'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div><button class="toggle" data-action="stats" aria-pressed="${allowed()}" aria-label="${esc(T('usageStats'))}"></button></div></div>`;
+  if (!needAnswer() && S.book.narration['ui.set.stats']) ids.push('ui.set.stats');
+  if (!needAnswer()) html += `<div class="panel"><div class="srow" data-block="ui.set.stats">${ic('card')}<div class="grow"><div class="t">${esc(T(allowed() ? 'usageNowOn' : 'usageNowOff'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div>${S.book.narration['ui.set.stats'] ? spk('ui.set.stats') : ''}<button class="toggle" data-action="stats" aria-pressed="${allowed()}" aria-label="${esc(T('usageStats'))}"></button></div></div>`;
   return { html, nav: needAnswer() ? false : 'settings', adult: true };
 }
 // buttons on the consent screen (app.js's own click handler ignores these)

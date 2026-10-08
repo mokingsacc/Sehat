@@ -1442,6 +1442,31 @@
    "fa": "کیلوبایت",
    "ps": "کیلوبایټ",
    "en": "kilobytes"
+  },
+  "ui.fam.no-meds": {
+   "fa": "هنوز دوا ثبت نشده است.",
+   "ps": "تر اوسه درمل نه دي ثبت شوي.",
+   "en": "No medicines yet."
+  },
+  "ui.fam.no-notes": {
+   "fa": "هنوز یادداشتی نیست.",
+   "ps": "تر اوسه یادښت نشته.",
+   "en": "No notes yet."
+  },
+  "ui.fam.no-readings": {
+   "fa": "هنوز اندازه‌ای ثبت نشده است.",
+   "ps": "تر اوسه اندازه نه ده ثبت شوې.",
+   "en": "No readings saved yet."
+  },
+  "ui.fam.no-weights": {
+   "fa": "هنوز وزن نوشته نشده است.",
+   "ps": "تر اوسه وزن نه دی لیکل شوی.",
+   "en": "No weight written yet."
+  },
+  "ui.fam.weights": {
+   "fa": "وزن‌هایی که نوشته‌اید؛ تازه‌ترین در اول.",
+   "ps": "هغه وزنونه چې تاسو لیکلي دي؛ تر ټولو نوی په سر کې.",
+   "en": "The weights you wrote, newest first."
   }
  }
 }

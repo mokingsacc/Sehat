@@ -140,6 +140,23 @@ ui.ageNewborn	نوی زېږېدلی ماشوم، همدا اوس زېږېدلی	
 ui.ageBaby	له ۱ کال کم ماشوم	Baby under 1 year
 ui.ageChild	ماشوم، له ۱ کال تر بلوغ پورې	Child, 1 year to puberty
 ui.ageAdult	لوی کس یا ځوان	Adult or teenager
+ui.nearHospitals	روغتونونه او قابلې. د هر ځای د نوم اورېدو لپاره، د هغه تر څنګ د سپیکر تڼۍ ووهئ. د لارې لیدو لپاره، «لار» ووهئ.	Hospitals and midwives. Tap the speaker beside a place to hear its name. Tap Directions to see the way.
+ui.nearOther	نږدې کلینیکونه او ډاکټران.	Nearby clinics and doctors.
+ui.nearIncomplete	دا لېست لا بشپړ نه دی. د ایبک ولایتي روغتون او دولتي کلینیکونه به ژر ورزیات شي.	This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon.
+ui.set.language	ژبه: دري، پښتو یا انګلیسي وټاکئ. ټول کتاب په هماغه ژبه کېږي.	Language: choose Dari, Pashto or English. The whole book changes to that language.
+ui.set.speed	د غږ چټکتیا: که غږ ډېر چټک وي، «ورو» ووهئ.	Voice speed: if the voice is too fast, tap Slower.
+ui.set.voices	د کتاب غږونه: د ښځې غږ یا د سړي غږ وټاکئ. د اورېدو لپاره، د هر یوه لاندې د سپیکر تڼۍ ووهئ.	Voices of the book: choose a woman's voice or a man's voice. Tap the speaker under each one to hear it.
+ui.set.packs	د غږونو ښکته کول: د کتاب غږونه برخه په برخه ستاسو په ټیلیفون کې خوندي کېږي، چې کتاب بې انټرنېټه هم خبرې وکړي. تر ټولو مهمه برخه لومړی راځي: د خطر نښې او لومړنۍ مرستې. د تیک نښه دا مانا لري چې هغه برخه ستاسو په ټیلیفون کې ده. «غږونه پاک کړئ» د ټیلیفون ځای خالي کوي؛ کتاب بیا هم کار کوي.	Download the voices: the book's voices are saved on your phone part by part, so the book speaks without internet. The most important part comes first: danger signs and first aid. A tick means that part is on your phone. Delete voices frees space on the phone; the book still works.
+ui.set.update	د کتاب تازه کول: کله چې انټرنېټ وي، کتاب نوې پاڼې پخپله اخلي. د همدا اوس کتلو لپاره، «کتل» ووهئ. کتاب بې انټرنېټه هم کار کوي.	Updating the book: when there is internet, the book gets its new pages by itself. Tap Check to look now. The book works without internet.
+ui.set.stats	د کارونې شمېر: که دا روښانه کړئ، ټیلیفون هره ورځ د پرانیستل شویو پاڼو ټولګه لېږي. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که بند وي، کتاب همداسې کار کوي.	Usage counts: if you turn this on, the phone sends daily totals of which pages were opened. No names, no phone numbers and no location are sent. The book works the same if it is off.
+ui.set.privacy	شخصي حریم: څه لېږل کېږي او څه ستاسو په ټیلیفون کې پاتې کېږي. د لوستلو یا اورېدو لپاره، دلته ووهئ.	Privacy: what is sent and what stays on your phone. Tap here to read or listen.
+ui.set.studio	د غږ ثبتول: یوازې د هغه چا لپاره چې د کتاب غږونه ثبتوي. تاسو ورته اړتیا نه لرئ.	Recording the narration: only for the person who records the book's voices. You do not need it.
+ui.orPick	یا یو انځور وټاکئ: هغه انځور ووهئ چې ستونزه ښيي.	Or pick a picture: tap the picture that shows the problem.
+ui.results	دا پاڼې مرسته کوي. یوه پاڼه ووهئ چې خلاصه شي، یا یې د سپیکر تڼۍ ووهئ چې نوم یې واورئ.	These pages can help. Tap a page to open it, or tap its speaker to hear its name.
+ui.allEmergencies	ټول بیړني حالات: دلته ووهئ چې د ټولو بیړنیو پاڼو لېست ووینئ.	All emergencies: tap here to see the list of every emergency page.
+ui.fb.voice	غږیز پیغام: سره تڼۍ ووهئ او خبرې وکړئ. کله چې مو خبرې پای ته ورسېدې، بیا یې ووهئ.	Voice message: tap the red button and speak. Tap it again when you finish.
+ui.fb.write	یا خپل پیغام دلته ولیکئ، بیا «لېږل» ووهئ. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه لیکئ او مه یې وایئ.	Or write your message here, then tap Send. Please do not write or say names or phone numbers.
+ui.date	نېټه: هغه ورځ چې اندازه شوې. نن ورځ دمخه ټاکل شوې ده؛ که بله ورځ وه، بدله یې کړئ.	Date: the day it was measured. Today is already chosen; change it if it was another day.
 ui.fam.lead	د خپلې کورنۍ روغتیايي معلومات دلته وساتئ: واکسین، وزن، درمل او د ډاکټر خبرې. یو کس ووهئ چې د هغه معلومات ووینئ. هر څه یوازې په همدې ټیلیفون کې پاتې کېږي.	Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone.
 ui.fam.add	یو کس زیات کړئ: تی خور ماشوم، ماشوم، ښځه یا سړی.	Add a person: a baby, a child, a woman or a man.
 ui.fam.who	دا څوک دی؟ یو انځور ووهئ.	Who is this? Tap a picture.
@@ -351,6 +368,11 @@ ui.num.cm	سانتي متره	centimetres
 ui.num.days	ورځې	days
 ui.num.mb	میګابایټ	megabytes
 ui.num.kb	کیلوبایټ	kilobytes
+ui.fam.no-meds	تر اوسه درمل نه دي ثبت شوي.	No medicines yet.
+ui.fam.no-notes	تر اوسه یادښت نشته.	No notes yet.
+ui.fam.no-readings	تر اوسه اندازه نه ده ثبت شوې.	No readings saved yet.
+ui.fam.no-weights	تر اوسه وزن نه دی لیکل شوی.	No weight written yet.
+ui.fam.weights	هغه وزنونه چې تاسو لیکلي دي؛ تر ټولو نوی په سر کې.	The weights you wrote, newest first.
 ui.growth	هر ځل چې ماشوم اندازه کوئ، وزن او قد یې دلته ولیکئ. اپ ښيي چې ماشوم ښه وده کوي که نه، او کله کلینیک ته ولاړ شئ. دا معلومات یوازې په همدې ټیلیفون کې پاتې کېږي.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
 ui.gr.add	نېټه، وزن په کیلو او قد په سانتي متره ولیکئ. که یوازې یو یې لرئ، هم سمه ده.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
 ui.gr.pos	له ۲ کلونو کم ماشوم پرېوتی اندازه کړئ. له ۲ کلنۍ وروسته، ولاړ اندازه کړئ. ووایئ چې څنګه مو اندازه کړ.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.
@@ -391,6 +413,10 @@ ui.gr.m.length2	دویم کس د ماشوم پښې په نرمۍ سمې کړي �
 ui.gr.m.height	قد، له ۲ کلنۍ: بوټونه او خولۍ لرې کړئ. ماشوم سم ودرېږي، داسې چې پوندې او شا یې له دېوال سره ولګېږي او مخ ته وګوري. یو کتاب پر سر یې د دېوال سره برابر کېږدئ، د کتاب لاندې پر دېوال نښه کړئ او له ځمکې تر نښې پورې اندازه کړئ.	Height, from 2 years: take off shoes and hats. The child stands straight with heels and back against a wall, looking ahead. Put a book flat on the head against the wall, mark the wall under it, and measure from the floor to the mark.
 ui.gr.m.muac	د مټ فیته، له ۶ میاشتو: د کیڼ مټ منځ پیدا کړئ، فیته په نرمۍ تاو کړئ، نه ټینګه، او په کړکۍ کې رنګ وګورئ.	Arm tape, from 6 months: find the middle of the left upper arm, wrap the tape gently, not tight, and read the colour in the window.
 ui.gr.m.exact	د کور شمېرې دقیقې نه دي. که پایله مو اندېښمن کړي، کلینیک به بیا اندازه وکړي.	Numbers from home are not exact. If a result worries you, the clinic will measure again.
+ui.gr.new	نوې اندازه: دلته ووهئ چې د خپل ماشوم وزن او قد ولیکئ.	Add a measurement: tap here to write your child's weight and length.
+ui.gr.list	ستاسو د ماشوم اندازې؛ تر ټولو نوې په سر کې. یوه یې ووهئ چې مانا یې واورئ.	Your child's measurements, newest first. Tap one to hear what it means.
+ui.gr.none	تر اوسه هېڅ اندازه نه ده ثبت شوې.	No measurements yet.
+ui.gr.no-kids	تر اوسه کوم ماشوم نه دی ثبت شوی. لومړی خپل ماشوم زیات کړئ، بیا یې وزن او قد لیکلای شئ.	No children added yet. Add your child first, then you can write their weight and length.
 ui.share-app	صحت له کورنۍ او ملګرو سره شریک کړئ. له یوه ټیلیفون څخه یې بل ته ولېږئ، حتی بې انټرنېټه.	Share Sehat with family and friends. Send it from phone to phone, even without internet.
 ui.share-web	صحت له کورنۍ او ملګرو سره شریک کړئ. لینک ورته ولېږئ، یا پرېږدئ چې د ټیلیفون په کمره یې خلاص کړي.	Share Sehat with family and friends. Send them the link, or let them open it with the phone camera.
 ui.sh.nearby	«نږدې ټیلیفونونه» ووهئ. یو لېست خلاصېږي: Quick Share یا بلوتوث وټاکئ، نږدې ټیلیفونونه پخپله ښکاري. د بل ټیلیفون بلوتوث باید روښانه وي.	Tap Nearby phones. A list opens: choose Quick Share or Bluetooth, and the phones near you appear by themselves. The other phone must have Bluetooth on.
@@ -422,6 +448,46 @@ ui.syn.tb	۲ اونۍ یا ډېر ټوخی.	A cough for 2 weeks or more.
 ui.syn.jaundice	سترګې یا پوستکی تازه ژېړ شوي (نوی زېږېدلی ماشوم نه).	Eyes or skin have recently turned yellow (not a newborn baby).
 ui.syn.meningitis	تبه له شخې غاړې سره.	Fever with a stiff neck.
 ui.syn.leishmaniasis	د پوستکي زخم چې له دوو اونیو وروسته نه دی جوړ شوی.	A skin sore that has not healed after two weeks.
+ui.fac.ruyi-du-ab-hospital	د دوآب ولسوالۍ روغتون، احتمالاً. د ولسوالۍ روغتون.	Hospital at Ruyi Du Ab district centre, probably Do-Ab District Hospital. District hospital.
+ui.fac.aybak-private-hospital	شخصي روغتون. خصوصي روغتون.	Private hospital, Aybak. Private hospital.
+ui.fac.aybak-arian-hospital	آرین روغتون. خصوصي روغتون.	Arian Hospital. Private hospital.
+ui.fac.aybak-faiz-clinic	فیض کلینیک. روغتیايي مرکز.	Faiz Clinic. Health centre.
+ui.fac.aybak-alshifa-clinic	الشفا درملنیز کلینیک. روغتیايي مرکز.	Al-Shifa Treatment Clinic. Health centre.
+ui.fac.aybak-dr-ahmadshah-same	ډاکټر احمدشاه سامع. روغتیايي مرکز.	Dr Ahmad Shah Same, private doctor. Health centre.
+ui.fac.aybak-dr-mohammad-azam-sahak	ډاکټر محمد اعظم سهاک. روغتیايي مرکز.	Dr Mohammad Azam Sahak, private doctor. Health centre.
+ui.fac.aybak-dr-jamaluddin-qarin	الحاج ډاکټر جمال‌الدین قرین. روغتیايي مرکز.	Alhaj Dr Jamaluddin Qarin, private doctor. Health centre.
+ui.fac.aybak-dr-fateh-mohammad	ډاکټر فتح محمد. روغتیايي مرکز.	Dr Fateh Mohammad, private doctor. Health centre.
+ui.fac.aybak-dr-serajuddin-nazari	ډاکټر سراج‌الدین نظري. روغتیايي مرکز.	Dr Serajuddin Nazari, private doctor. Health centre.
+ui.fac.aybak-dr-mohammadullah-moradi	ډاکټر محمدالله مرادي. روغتیايي مرکز.	Dr Mohammadullah Moradi, private doctor. Health centre.
+ui.fac.aybak-dr-bazgul-jahangir	ډاکټر بازګل جهانګیر. روغتیايي مرکز.	Dr Bazgul Jahangir, private doctor. Health centre.
+ui.fac.aybak-midwife-1	ډیپلومه قابله. زېږنتون.	Diploma midwife, private. Maternity.
+ui.fac.aybak-midwife-parwin	ډیپلومه قابله پروین. زېږنتون.	Diploma midwife Parwin, private. Maternity.
+ui.fac.aybak-ultrasound-forotan-rahimi	د فروتن رحیمي د الټراساونډ تشخیصیه کلینیک. روغتیايي مرکز.	Forotan Rahimi Ultrasound Diagnostic Clinic. Health centre.
+ui.fac.aybak-fawad-digital-xray	فواد ډیجیټل اکسرې. روغتیايي مرکز.	Fawad Digital X-ray. Health centre.
+ui.fac.aybak-hamkar-xray	همکار اکسرې. روغتیايي مرکز.	Hamkar X-ray. Health centre.
+ui.fac.aybak-medical-laboratory	طبي لابراتوار. روغتیايي مرکز.	Medical laboratory. Health centre.
+ui.fac.aybak-physiotherapy-centre	د فزیوتراپۍ مرکز. روغتیايي مرکز.	Physiotherapy centre. Health centre.
+ui.fac.aybak-alshifa-eye-centre	د الشفا د سترګو روغتیايي مرکز. روغتیايي مرکز.	Al-Shifa Eye Health Centre. Health centre.
+ui.fac.aybak-dental-1	د غاښونو کلینیک. روغتیايي مرکز.	Dental clinic. Health centre.
+ui.fac.aybak-dental-2	د غاښونو کلینیک. روغتیايي مرکز.	Dental clinic. Health centre.
+ui.fac.aybak-dental-nouri	د نوري د غاښونو کلینیک. روغتیايي مرکز.	Nouri Dental Clinic. Health centre.
+ui.fac.aybak-dental-almakka	د المکه د غاښونو کلینیک. روغتیايي مرکز.	Al-Makka Dental Clinic. Health centre.
+ui.fac.aybak-dental-jalalabad	د جلال‌آباد د غاښونو کلینیک. روغتیايي مرکز.	Jalalabad Dental Clinic. Health centre.
+ui.fac.aybak-dental-maiwand	د میوند د غاښونو کلینیک. روغتیايي مرکز.	Maiwand Dental Clinic. Health centre.
+ui.fac.aybak-dental-insaf	د انصاف د غاښونو کلینیک. روغتیايي مرکز.	Insaf Dental Clinic. Health centre.
+ui.fac.aybak-dental-labkhand-zeba	د لبخند زیبا د غاښونو کلینیک. روغتیايي مرکز.	Labkhand-e Zeba Dental Clinic. Health centre.
+ui.fac.mazar-regional-hospital	د بلخ حوزوي روغتون، مزارشریف. ولایتي روغتون.	Balkh Regional Hospital, Mazar-i-Sharif, main referral hospital. Provincial hospital.
+ui.fac.balkh-district-hospital	د بلخ ولسوالۍ روغتون. د ولسوالۍ روغتون.	Balkh District Hospital. District hospital.
+ui.fac.mazar-kesha-farabi-hospital	کیشا فارابي روغتون. خصوصي روغتون.	Kesha Farabi Hospital, private. Private hospital.
+ui.fac.mazar-aamoon-eye-centre	د آمون د سترګو مرکز. روغتیايي مرکز.	Aamoon Ophthalmic Center. Health centre.
+ui.fac.mazar-parween-midwife-clinic	د قابله پروین کلینیک. زېږنتون.	Parween Midwife Clinic. Maternity.
+ui.fac.mazar-noor-khuda-clinic	نورخدا کلینیک. روغتیايي مرکز.	Noor Khuda Clinic. Health centre.
+ui.fac.mazar-razavie-pharmacy	رضوي درملتون. درملتون.	Razavie Pharmacy. Pharmacy.
+ui.fac.pul-e-khumri-hospital	د پلخمري روغتون. ولایتي روغتون.	Pul-e-Khumri Hospital, Baghlan provincial hospital, probable. Provincial hospital.
+ui.fac.pul-e-khumri-nasaji-hospital	د نساجۍ او حکیم سنايي پوهنتون روغتون. روغتیايي مرکز.	Nasaji and Hakim Sanai University Hospital. Health centre.
+ui.fac.baghlan-jadid-district-hospital	د بغلان مرکزي ولسوالۍ روغتون. د ولسوالۍ روغتون.	Central District Hospital, Baghlan-e-Jadid. District hospital.
+ui.fac.bamyan-hospital	د بامیان روغتون. ولایتي روغتون.	Bamyan Hospital. Provincial hospital.
+ui.fac.bamyan-old-hospital	د بامیان زوړ روغتون. روغتیايي مرکز.	Old Bamyan Hospital. Health centre.
 vaccines.title	واکسینونه	Vaccines
 vaccines.lead	واکسین ستاسو ماشوم له خطرناکو ناروغیو ساتي. ستاسو ماشوم باید تر ۲ کلنۍ پورې ۶ ځله واکسین ته بوتلل شي.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	د زېږون پر وخت: د بي سي جي واکسین، د نری رنځ پر وړاندې؛ د پولیو څاڅکي، د پولیو (ګوډوالی) پر وړاندې؛ د هیپاټایټس ب واکسین، د هیپاټایټس ب، چې د ځیګر ناروغي ده پر وړاندې.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.

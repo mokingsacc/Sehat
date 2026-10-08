@@ -6,6 +6,9 @@
 //   - no sideways scroll;
 //   - no title cut mid-word, clipped, running into its speaker or out of its card; header pieces never overlap;
 //   - every narrated block has a speaker, and every speaker is at least 56 px;
+//   - on the screens that have been gone over line by line (SPOKEN below: the clinic list, Settings, search,
+//     Emergency, Feedback, Privacy, Family and Growth), every piece of text has a speaker; elsewhere text without
+//     one is listed as a note (a to-do list);
 //   - every list row has a picture;
 //   - every in-app link opens a real page (not the Health tab fallback), "What does my reading mean?" on each
 //     home kit page opens that device's Health page, and Home pages have no danger or clinic boxes (Mo's rule);
@@ -35,8 +38,12 @@ const READING_DEV = { 'reading-bp': 'bp', 'reading-temp': 'temp', 'reading-sugar
 
 // problems: key "category | screen | detail" -> set of runs ("fa-320")
 const PROBS = new Map(); const COUNTS = {}; let screens = 0, checks = 0;
-const HARD = new Set(['console', 'request', 'pageerror', 'scroll', 'title', 'link', 'image', 'emergency', 'home-advice', 'reading-link', 'no-speaker', 'small-speaker', 'no-picture', 'anim', 'search', 'family']);
+const HARD = new Set(['console', 'request', 'pageerror', 'scroll', 'title', 'link', 'image', 'emergency', 'home-advice', 'reading-link', 'no-speaker', 'small-speaker', 'no-picture', 'anim', 'search', 'family', 'unspoken-text-here']);
+// screens where every piece of text must have a speaker (Mo's rule: many people cannot read). The recording studio
+// (#/studio) is the narrator's tool and is left out.
+const SPOKEN = /^#\/(near|settings|ask|emergency|feedback|privacy|family|growth)\b/;
 function prob(cat, screen, detail, run) {
+  if (cat === 'unspoken-text' && SPOKEN.test(screen)) cat = 'unspoken-text-here';
   const k = `${cat} | ${screen} | ${detail}`;
   if (!PROBS.has(k)) PROBS.set(k, new Set()); PROBS.get(k).add(run);
   COUNTS[cat] = (COUNTS[cat] || 0) + 1;
@@ -89,7 +96,9 @@ function measure(MIN) {
   }
   // text that no speaker covers (a to-do list: each needs a narration line in four voices first):
   // its nearest container with a speaker must hold just that one speaker
-  const SKIP = 'nav, .top, .topic-hero, .empill, button, select, option, input, textarea, label.chip, .sources, svg, [aria-hidden=true], .numpad, #toast, .anim-ctl, .anim-cap';
+  // (.credit: licence and version lines in Latin letters; .agechip without a block: a person's own typed name and age,
+  // which no clip can say; their record says the name in their own recorded voice)
+  const SKIP = 'nav, .top, .topic-hero, .empill, button, select, option, input, textarea, label.chip, .sources, .credit, .agechip:not([data-block]), svg, [aria-hidden=true], .numpad, #toast, .anim-ctl, .anim-cap';
   const seen = new Set();
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let tn;
   while ((tn = w.nextNode())) {
@@ -102,8 +111,8 @@ function measure(MIN) {
   for (const row of root.querySelectorAll('.trow, .erow, .ptile, .hbtn, .em-age')) {
     if (!vis(row) || !row.querySelector('a, button.grow')) continue;
     const img = row.querySelector('img, [data-poster] svg, .em-pic svg');
-    // the Emergency and "What is wrong?" buttons on the Health tab and the Nearest clinic row keep their icon by design
-    if (!img) P.push([row.matches('.hbtn.em, .hbtn.ask, .trow.near') ? 'icon-row' : 'no-picture', `${label(row)}: ${(row.querySelector('.t') || row).textContent.trim().slice(0, 30)}`]);
+    // the Emergency and "What is wrong?" buttons on the Health tab keep their icon by design
+    if (!img) P.push([row.matches('.hbtn.em, .hbtn.ask') ? 'icon-row' : 'no-picture', `${label(row)}: ${(row.querySelector('.t') || row).textContent.trim().slice(0, 30)}`]);
   }
   // pictures load
   for (const im of document.querySelectorAll('img')) if (vis(im) && im.complete && !im.naturalWidth) P.push(['image', `broken ${im.getAttribute('src')}`]);

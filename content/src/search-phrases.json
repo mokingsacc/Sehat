@@ -110,7 +110,7 @@
       "ps": ["مار", "مار وچیچه", "د مار چیچل", "لړم", "لړم وچیچه", "لړم ووهه"],
       "lat": ["mar", "mar gazid", "margazidagi", "gazhdum", "kazhdum", "gazhdom", "gazdum", "larum", "mar wachicha"],
       "en": ["snake", "snake bite", "snakebite", "bitten by a snake", "scorpion", "scorpion sting", "stung by a scorpion", "viper"],
-      "danger": ["مار گزید", "مارگزیدگی", "گژدم زد", "گژدم", "مار", "مار وچیچه", "لړم", "snake bite", "snakebite", "scorpion", "scorpion sting", "snake", "mar gazid", "gazhdum"]
+      "danger": ["مار گزید", "مارگزیدگی", "گژدم زد", "مار وچیچه", "لړم وچیچه", "snake bite", "snakebite", "scorpion sting", "mar gazid"]
     },
     "snake-scorpion.scorpion": {
       "fa": ["نیش گژدم طفل"],
@@ -779,7 +779,7 @@
       "fa": ["زردی", "یرقان", "هپاتیت", "چشمش زرد شده", "چشمانم زرد", "زردی کلان", "ادرار تیره", "جگر", "چشم زرد", "چشمانش زرد شده", "رنگ چشمش زرد"],
       "ps": ["ژېړی", "یرقان", "هیپاتیت", "سترګې یې ژیړې دي", "ژیړې سترګې", "ینه", "ژېړې سترګې"],
       "lat": ["zardi", "yaraqan", "yarqan", "hepatit", "zhera", "zheray"],
-      "en": ["hepatitis", "jaundice in adults", "yellow eyes", "yellow skin", "liver", "dark urine", "jaundice adult"]
+      "en": ["hepatitis", "jaundice in adults", "yellow eyes", "yellow skin", "liver", "dark urine", "jaundice adult", "yellow eyes adult", "adult with yellow eyes", "yellow eyes in a grown-up"]
     },
     "malnutrition": {
       "fa": ["طفل لاغر", "سوء تغذی", "سوتغذی", "کم غذایی", "طفلم خیلی لاغر است", "طفل پندیده پاها", "طفل وزن نمیگیرد", "پوست و استخوان", "سوءتغذیه"],

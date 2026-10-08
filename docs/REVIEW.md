@@ -4399,3 +4399,149 @@ For Mo to check:
    notes in Family ("No medicines yet" and so on), the Feedback screen's labels, and the recording studio.
 3. Rows that keep an icon instead of a picture: the red Emergency and "What is wrong?" buttons (by design) and
    "Nearest clinic" in Going to the clinic (a small scene would match the other rows).
+
+## Speakers for the last unspoken text (8 Oct 2026, worker speak)
+
+Mo's rule, a big speaker beside every piece of text: the clinic list, Settings, search, "All emergencies", Feedback,
+Privacy and the empty lines and labels in Family and Growth now have one. 26 new hand-written lines and 40 place
+lines made by `tools/build.py` from `content/src/facilities.json` (each place's name as written there, then its kind;
+brackets become a pause). They play with the phone's own speech until the voices are recorded. `tools/test_crawl.cjs`
+now fails when text on these screens has no speaker. The recording studio (`#/studio`) is the narrator's tool and is
+left out. Also: a small "Nearest clinic" scene (`img/pics/row-near.svg`) on the Going to the clinic list and in
+search results.
+
+New lines for a native speaker to check (Dari, then Pashto):
+
+- `ui.nearHospitals` (Hospitals and midwives. Tap the speaker beside a place to hear its name. Tap Directions to see the way.)
+  - fa: شفاخانه‌ها و قابله‌ها. برای شنیدن نام هر جای، دکمۀ بلندگوی کنار آن را بزنید. برای دیدن راه، «راه» را بزنید.
+  - ps: روغتونونه او قابلې. د هر ځای د نوم اورېدو لپاره، د هغه تر څنګ د سپیکر تڼۍ ووهئ. د لارې لیدو لپاره، «لار» ووهئ.
+- `ui.nearOther` (Nearby clinics and doctors.)
+  - fa: کلینیک‌ها و داکتران نزدیک.
+  - ps: نږدې کلینیکونه او ډاکټران.
+- `ui.nearIncomplete` (This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon.)
+  - fa: این فهرست هنوز کامل نیست. شفاخانه ولایتی ایبک و کلینیک‌های دولتی به‌زودی اضافه می‌شوند.
+  - ps: دا لېست لا بشپړ نه دی. د ایبک ولایتي روغتون او دولتي کلینیکونه به ژر ورزیات شي.
+- `ui.set.language` (Language: choose Dari, Pashto or English. The whole book changes to that language.)
+  - fa: زبان: دری، پشتو یا انگلیسی را انتخاب کنید. تمام کتاب به همان زبان می‌شود.
+  - ps: ژبه: دري، پښتو یا انګلیسي وټاکئ. ټول کتاب په هماغه ژبه کېږي.
+- `ui.set.speed` (Voice speed: if the voice is too fast, tap Slower.)
+  - fa: سرعت صدا: اگر صدا خیلی تیز است، «آهسته» را بزنید.
+  - ps: د غږ چټکتیا: که غږ ډېر چټک وي، «ورو» ووهئ.
+- `ui.set.voices` (Voices of the book: choose a woman's voice or a man's voice. Tap the speaker under each one to hear it.)
+  - fa: صداهای کتاب: صدای زن یا صدای مرد را انتخاب کنید. برای شنیدن هر کدام، دکمۀ بلندگوی زیر آن را بزنید.
+  - ps: د کتاب غږونه: د ښځې غږ یا د سړي غږ وټاکئ. د اورېدو لپاره، د هر یوه لاندې د سپیکر تڼۍ ووهئ.
+- `ui.set.packs` (Download the voices: the book's voices are saved on your phone part by part, so the book speaks without internet. The most important part comes first: danger signs and first aid. A tick means that part is on your phone. Delete voices frees space on the phone; the book still works.)
+  - fa: دانلود صداها: صداهای کتاب بخش به بخش در گوشی شما ذخیره می‌شوند تا کتاب بدون انترنت هم گپ بزند. مهم‌ترین بخش اول می‌آید: علایم خطر و کمک‌های اولیه. علامت تیک یعنی آن بخش در گوشی شما است. «پاک کردن صداها» جای گوشی را خالی می‌کند؛ کتاب باز هم کار می‌کند.
+  - ps: د غږونو ښکته کول: د کتاب غږونه برخه په برخه ستاسو په ټیلیفون کې خوندي کېږي، چې کتاب بې انټرنېټه هم خبرې وکړي. تر ټولو مهمه برخه لومړی راځي: د خطر نښې او لومړنۍ مرستې. د تیک نښه دا مانا لري چې هغه برخه ستاسو په ټیلیفون کې ده. «غږونه پاک کړئ» د ټیلیفون ځای خالي کوي؛ کتاب بیا هم کار کوي.
+- `ui.set.update` (Updating the book: when there is internet, the book gets its new pages by itself. Tap Check to look now. The book works without internet.)
+  - fa: تازه کردن کتاب: وقتی انترنت باشد، کتاب صفحه‌های تازه را خودش می‌گیرد. برای دیدن همین حالا، «بررسی» را بزنید. کتاب بدون انترنت هم کار می‌کند.
+  - ps: د کتاب تازه کول: کله چې انټرنېټ وي، کتاب نوې پاڼې پخپله اخلي. د همدا اوس کتلو لپاره، «کتل» ووهئ. کتاب بې انټرنېټه هم کار کوي.
+- `ui.set.stats` (Usage counts: if you turn this on, the phone sends daily totals of which pages were opened. No names, no phone numbers and no location are sent. The book works the same if it is off.)
+  - fa: شمار استفاده: اگر این را روشن کنید، گوشی هر روز مجموع صفحه‌هایی را که باز شده‌اند می‌فرستد. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر خاموش باشد، کتاب همان طور کار می‌کند.
+  - ps: د کارونې شمېر: که دا روښانه کړئ، ټیلیفون هره ورځ د پرانیستل شویو پاڼو ټولګه لېږي. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که بند وي، کتاب همداسې کار کوي.
+- `ui.set.privacy` (Privacy: what is sent and what stays on your phone. Tap here to read or listen.)
+  - fa: حریم خصوصی: چه چیز فرستاده می‌شود و چه در گوشی شما می‌ماند. برای خواندن یا شنیدن، اینجا را بزنید.
+  - ps: شخصي حریم: څه لېږل کېږي او څه ستاسو په ټیلیفون کې پاتې کېږي. د لوستلو یا اورېدو لپاره، دلته ووهئ.
+- `ui.set.studio` (Recording the narration: only for the person who records the book's voices. You do not need it.)
+  - fa: ثبت صدا: فقط برای کسی که صداهای کتاب را ثبت می‌کند. شما به آن ضرورت ندارید.
+  - ps: د غږ ثبتول: یوازې د هغه چا لپاره چې د کتاب غږونه ثبتوي. تاسو ورته اړتیا نه لرئ.
+- `ui.orPick` (Or pick a picture: tap the picture that shows the problem.)
+  - fa: یا یک تصویر را انتخاب کنید: تصویری را بزنید که مشکل را نشان می‌دهد.
+  - ps: یا یو انځور وټاکئ: هغه انځور ووهئ چې ستونزه ښيي.
+- `ui.results` (These pages can help. Tap a page to open it, or tap its speaker to hear its name.)
+  - fa: این صفحات کمک می‌کنند. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا نامش را بشنوید.
+  - ps: دا پاڼې مرسته کوي. یوه پاڼه ووهئ چې خلاصه شي، یا یې د سپیکر تڼۍ ووهئ چې نوم یې واورئ.
+- `ui.allEmergencies` (All emergencies: tap here to see the list of every emergency page.)
+  - fa: همهٔ حالات عاجل: اینجا را بزنید تا فهرست همهٔ صفحه‌های حالت عاجل را ببینید.
+  - ps: ټول بیړني حالات: دلته ووهئ چې د ټولو بیړنیو پاڼو لېست ووینئ.
+- `ui.fb.voice` (Voice message: tap the red button and speak. Tap it again when you finish.)
+  - fa: پیام صوتی: دکمۀ سرخ را بزنید و گپ بزنید. وقتی گپ شما تمام شد، دوباره آن را بزنید.
+  - ps: غږیز پیغام: سره تڼۍ ووهئ او خبرې وکړئ. کله چې مو خبرې پای ته ورسېدې، بیا یې ووهئ.
+- `ui.fb.write` (Or write your message here, then tap Send. Please do not write or say names or phone numbers.)
+  - fa: یا پیام خود را اینجا بنویسید و بعد «فرستادن» را بزنید. لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.
+  - ps: یا خپل پیغام دلته ولیکئ، بیا «لېږل» ووهئ. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه لیکئ او مه یې وایئ.
+- `ui.date` (Date: the day it was measured. Today is already chosen; change it if it was another day.)
+  - fa: تاریخ: روزی که اندازه گرفته شد. امروز از قبل انتخاب شده است؛ اگر روز دیگری بود، آن را تغییر دهید.
+  - ps: نېټه: هغه ورځ چې اندازه شوې. نن ورځ دمخه ټاکل شوې ده؛ که بله ورځ وه، بدله یې کړئ.
+- `ui.fam.no-meds` (No medicines yet.)
+  - fa: هنوز دوا ثبت نشده است.
+  - ps: تر اوسه درمل نه دي ثبت شوي.
+- `ui.fam.no-notes` (No notes yet.)
+  - fa: هنوز یادداشتی نیست.
+  - ps: تر اوسه یادښت نشته.
+- `ui.fam.no-readings` (No readings saved yet.)
+  - fa: هنوز اندازه‌ای ثبت نشده است.
+  - ps: تر اوسه اندازه نه ده ثبت شوې.
+- `ui.fam.no-weights` (No weight written yet.)
+  - fa: هنوز وزن نوشته نشده است.
+  - ps: تر اوسه وزن نه دی لیکل شوی.
+- `ui.fam.weights` (The weights you wrote, newest first.)
+  - fa: وزن‌هایی که نوشته‌اید؛ تازه‌ترین در اول.
+  - ps: هغه وزنونه چې تاسو لیکلي دي؛ تر ټولو نوی په سر کې.
+- `ui.gr.new` (Add a measurement: tap here to write your child's weight and length.)
+  - fa: اندازهٔ تازه: اینجا را بزنید تا وزن و قد طفل خود را بنویسید.
+  - ps: نوې اندازه: دلته ووهئ چې د خپل ماشوم وزن او قد ولیکئ.
+- `ui.gr.list` (Your child's measurements, newest first. Tap one to hear what it means.)
+  - fa: اندازه‌های طفل شما؛ تازه‌ترین در اول. یکی را بزنید تا معنای آن را بشنوید.
+  - ps: ستاسو د ماشوم اندازې؛ تر ټولو نوې په سر کې. یوه یې ووهئ چې مانا یې واورئ.
+- `ui.gr.none` (No measurements yet.)
+  - fa: هنوز اندازه‌ای ثبت نشده است.
+  - ps: تر اوسه هېڅ اندازه نه ده ثبت شوې.
+- `ui.gr.no-kids` (No children added yet. Add your child first, then you can write their weight and length.)
+  - fa: هنوز طفلی ثبت نشده است. اول طفل خود را اضافه کنید، بعد می‌توانید وزن و قد او را بنویسید.
+  - ps: تر اوسه کوم ماشوم نه دی ثبت شوی. لومړی خپل ماشوم زیات کړئ، بیا یې وزن او قد لیکلای شئ.
+
+The place lines (`ui.fac.<id>`), Dari | Pashto. The names are the ones on the clinic list; please check the names
+themselves too, and that a private doctor read out as "health centre" (the list's word for any other place) is not
+misleading:
+
+- `ui.fac.ruyi-du-ab-hospital`: شفاخانه ولسوالی دوآب، احتمالاً. شفاخانۀ ولسوالی. | د دوآب ولسوالۍ روغتون، احتمالاً. د ولسوالۍ روغتون.
+- `ui.fac.aybak-private-hospital`: شفاخانه شخصی. شفاخانۀ خصوصی. | شخصي روغتون. خصوصي روغتون.
+- `ui.fac.aybak-arian-hospital`: شفاخانه آرین. شفاخانۀ خصوصی. | آرین روغتون. خصوصي روغتون.
+- `ui.fac.aybak-faiz-clinic`: کلینیک فیض. مرکز صحی. | فیض کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-alshifa-clinic`: کلینیک معالجوی الشفا. مرکز صحی. | الشفا درملنیز کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dr-ahmadshah-same`: دوکتور احمدشاه سامع. مرکز صحی. | ډاکټر احمدشاه سامع. روغتیايي مرکز.
+- `ui.fac.aybak-dr-mohammad-azam-sahak`: داکتر محمد اعظم سهاک. مرکز صحی. | ډاکټر محمد اعظم سهاک. روغتیايي مرکز.
+- `ui.fac.aybak-dr-jamaluddin-qarin`: الحاج دوکتور جمال‌الدین قرین. مرکز صحی. | الحاج ډاکټر جمال‌الدین قرین. روغتیايي مرکز.
+- `ui.fac.aybak-dr-fateh-mohammad`: دوکتور فتح محمد. مرکز صحی. | ډاکټر فتح محمد. روغتیايي مرکز.
+- `ui.fac.aybak-dr-serajuddin-nazari`: دوکتور سراج‌الدین نظری. مرکز صحی. | ډاکټر سراج‌الدین نظري. روغتیايي مرکز.
+- `ui.fac.aybak-dr-mohammadullah-moradi`: دوکتور محمدالله مرادی. مرکز صحی. | ډاکټر محمدالله مرادي. روغتیايي مرکز.
+- `ui.fac.aybak-dr-bazgul-jahangir`: داکتر بازگل جهانگیر. مرکز صحی. | ډاکټر بازګل جهانګیر. روغتیايي مرکز.
+- `ui.fac.aybak-midwife-1`: قابله دیپلومه. زایشگاه. | ډیپلومه قابله. زېږنتون.
+- `ui.fac.aybak-midwife-parwin`: قابله دیپلومه پروین. زایشگاه. | ډیپلومه قابله پروین. زېږنتون.
+- `ui.fac.aybak-ultrasound-forotan-rahimi`: کلینیک تشخیصیه التراسوند فروتن رحیمی. مرکز صحی. | د فروتن رحیمي د الټراساونډ تشخیصیه کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-fawad-digital-xray`: فواد دیجیتال اکسری. مرکز صحی. | فواد ډیجیټل اکسرې. روغتیايي مرکز.
+- `ui.fac.aybak-hamkar-xray`: اکسری همکار. مرکز صحی. | همکار اکسرې. روغتیايي مرکز.
+- `ui.fac.aybak-medical-laboratory`: لابراتوار طبی. مرکز صحی. | طبي لابراتوار. روغتیايي مرکز.
+- `ui.fac.aybak-physiotherapy-centre`: مرکز فزیوتراپی. مرکز صحی. | د فزیوتراپۍ مرکز. روغتیايي مرکز.
+- `ui.fac.aybak-alshifa-eye-centre`: مرکز صحی چشم الشفا. مرکز صحی. | د الشفا د سترګو روغتیايي مرکز. روغتیايي مرکز.
+- `ui.fac.aybak-dental-1`: کلینیک دندان. مرکز صحی. | د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-2`: کلینیک دندان. مرکز صحی. | د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-nouri`: کلینیک دندان نوری. مرکز صحی. | د نوري د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-almakka`: کلینیک دندان المکه. مرکز صحی. | د المکه د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-jalalabad`: کلینیک دندان جلال‌آباد. مرکز صحی. | د جلال‌آباد د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-maiwand`: کلینیک دندان میوند. مرکز صحی. | د میوند د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-insaf`: کلینیک دندان انصاف. مرکز صحی. | د انصاف د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.aybak-dental-labkhand-zeba`: کلینیک دندان لبخند زیبا. مرکز صحی. | د لبخند زیبا د غاښونو کلینیک. روغتیايي مرکز.
+- `ui.fac.mazar-regional-hospital`: شفاخانه حوزوی بلخ، مزارشریف. شفاخانۀ ولایتی. | د بلخ حوزوي روغتون، مزارشریف. ولایتي روغتون.
+- `ui.fac.balkh-district-hospital`: شفاخانه ولسوالی بلخ. شفاخانۀ ولسوالی. | د بلخ ولسوالۍ روغتون. د ولسوالۍ روغتون.
+- `ui.fac.mazar-kesha-farabi-hospital`: شفاخانه کیشا فارابی. شفاخانۀ خصوصی. | کیشا فارابي روغتون. خصوصي روغتون.
+- `ui.fac.mazar-aamoon-eye-centre`: مرکز چشم آمون. مرکز صحی. | د آمون د سترګو مرکز. روغتیايي مرکز.
+- `ui.fac.mazar-parween-midwife-clinic`: کلینیک قابله پروین. زایشگاه. | د قابله پروین کلینیک. زېږنتون.
+- `ui.fac.mazar-noor-khuda-clinic`: کلینیک نورخدا. مرکز صحی. | نورخدا کلینیک. روغتیايي مرکز.
+- `ui.fac.mazar-razavie-pharmacy`: دواخانه رضوی. دواخانه. | رضوي درملتون. درملتون.
+- `ui.fac.pul-e-khumri-hospital`: شفاخانه پلخمری. شفاخانۀ ولایتی. | د پلخمري روغتون. ولایتي روغتون.
+- `ui.fac.pul-e-khumri-nasaji-hospital`: شفاخانه نساجی و پوهنتون حکیم سنایی. مرکز صحی. | د نساجۍ او حکیم سنايي پوهنتون روغتون. روغتیايي مرکز.
+- `ui.fac.baghlan-jadid-district-hospital`: شفاخانه ولسوالی مرکزی بغلان. شفاخانۀ ولسوالی. | د بغلان مرکزي ولسوالۍ روغتون. د ولسوالۍ روغتون.
+- `ui.fac.bamyan-hospital`: شفاخانه بامیان. شفاخانۀ ولایتی. | د بامیان روغتون. ولایتي روغتون.
+- `ui.fac.bamyan-old-hospital`: شفاخانه قدیم بامیان. مرکز صحی. | د بامیان زوړ روغتون. روغتیايي مرکز.
+
+Search changes (in `content/src/search-phrases.json`):
+1. The one-word danger words "مار", "گژدم", "لړم", "snake", "scorpion" and "gazhdum" are no longer danger phrases, so
+   "keep snakes away from the house", "snake in the house" and "scorpion in a shoe" open Bite safety first. Typed
+   alone, each word still opens Snake and scorpion first with the red Emergency badge (it is an Emergency page);
+   "snake bite", "مار گزید", "گژدم زد", "لړم وچیچه" and the others stay danger phrases.
+2. Hepatitis: "yellow eyes adult", "adult with yellow eyes", "yellow eyes in a grown-up".
+3. Not changed: "مرگی" alone. The core test set says it must open Seizures first with the red badge (a fit happening
+   now), and the new set says Epilepsy; both cannot pass. Mo to decide which one wins.
+

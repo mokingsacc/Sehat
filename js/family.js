@@ -14,6 +14,10 @@ export function initFamily(ctx) {
   const say = (id) => L(S.book.narration[id]);
   const big = (id) => spk(id).replace('class="spk', 'class="spk big');
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${big(id)}</div>`;
+  // "nothing here yet": a spoken line (and the page's Listen button reads it too)
+  const emptyRow = (id, ids) => { ids.push(id); return sayRow(id, 'blk tip trow'); };
+  // a heading or a field label with its own big speaker
+  const headSay = (html, id) => `<div class="lblrow" data-block="${esc(id)}"><div class="grow">${html}</div>${big(id)}</div>`;
   const rerender = () => { ctx.render(); scrollTo(0, 0); };
   const go = (h) => { if (location.hash === h) rerender(); else location.hash = h; };
   const PIC_KEY = { baby: 'picBaby', child: 'picChild', woman: 'picWoman', man: 'picMan' };
@@ -344,13 +348,15 @@ export function initFamily(ctx) {
       const cls = adv.loss ? 'soon' : adv.lv ? { soon: 'soon', watch: 'watch', ok: 'ok' }[BMI_LV[adv.lv]] : 'ok';
       if (adv.say.length) { ids.push(...adv.say); html += `<div class="verdict ${cls} grv">${parts.length ? `<div class="vh">${parts.join('')}</div>` : ''}<div class="vb">${adv.say.map((id) => sayRow(id)).join('')}</div></div>`; }
     }
-    html += `<form class="form fweight" id="fam-w" onsubmit="return false"><h2>${esc(T('addWeight'))}</h2>${sayRow('ui.fam.w.weight', 'trow')}`;
+    // the heading goes in the "Weight in kilos" line: one speaker for both
+    html += `<form class="form fweight" id="fam-w" onsubmit="return false"><div class="trow" data-block="ui.fam.w.weight"><div class="body"><h2>${esc(T('addWeight'))}</h2>${esc(say('ui.fam.w.weight'))}</div>${big('ui.fam.w.weight')}</div>`;
     html += NP.field('wkg', { label: T('weightKg'), say: 'ui.fam.w.weight', unit: 'kg', dec: 1, min: 20, max: 250, value: null });
-    html += `<label>${esc(T('gDate'))}</label>${dateSelects('w', todayISO())}</form>`;
+    html += `${headSay(`<label>${esc(T('gDate'))}</label>`, 'ui.date')}${dateSelects('w', todayISO())}</form>`;
     html += bigRow('', I.check, T('save'), '', 'ui.fam.save', 'save', ' data-fam="save-weight"');
     const ws = (p.weights || []).filter((e) => e.kg > 0).sort((a, b) => (a.d < b.d ? 1 : -1));
     if (ws.length > 1) html += weightChart(ws.slice().reverse());
-    html += `<div class="panel"><h2>${esc(T('weights'))}</h2>${ws.length ? ws.map((e) => `<div class="grow-row"><div class="gr-open"><span class="d">${esc(fmtDate(e.d))}</span><span class="v">${esc(dec(num(String(e.kg))))} ${esc(T('kg'))}</span></div><button type="button" class="gr-del" data-fam-delw="${esc(e.id)}" aria-label="${esc(T('delete'))}">×</button></div>`).join('') : `<p class="muted">${esc(T('noWeights'))}</p>`}</div>`;
+    const wsay = ws.length ? 'ui.fam.weights' : 'ui.fam.no-weights';
+    html += `<div class="panel">${headSay(`<h2>${esc(T('weights'))}</h2>`, wsay)}${ws.length ? ws.map((e) => `<div class="grow-row"><div class="gr-open"><span class="d">${esc(fmtDate(e.d))}</span><span class="v">${esc(dec(num(String(e.kg))))} ${esc(T('kg'))}</span></div><button type="button" class="gr-del" data-fam-delw="${esc(e.id)}" aria-label="${esc(T('delete'))}">×</button></div>`).join('') : `<p class="muted">${esc(T('noWeights'))}</p>`}</div>`;
     html += disclaimer();
     return { html, nav: 'family', adult: true };
   }
@@ -391,7 +397,7 @@ export function initFamily(ctx) {
     const due = dueMeds([p]); if (due.length) html += due.map(remCard).join('');
     html += bigRow('#/family/med-add', I.plus, T('addMed'), '', 'ui.fam.row.meds', 'add');
     const list = (p.meds || []).slice().sort((a, b) => (medActive(b) - medActive(a)) || (a.d < b.d ? 1 : -1));
-    html += list.length ? list.map((m) => medCard(p, m)).join('') : `<p class="muted center">${esc(T('noMeds'))}</p>`;
+    html += list.length ? list.map((m) => medCard(p, m)).join('') : emptyRow('ui.fam.no-meds', ids);
     html += disclaimer();
     setTimeout(fillImages, 0);
     return { html, nav: 'family' };
@@ -453,7 +459,7 @@ export function initFamily(ctx) {
     let html = top(T('rowNotes') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.note.lead', 'blk lead trow');
     html += bigRow('#/family/note-add', ic('talk'), T('addNote'), '', 'ui.fam.row.notes', 'add');
     const list = (p.notes || []).slice().sort((a, b) => (a.d < b.d ? 1 : -1));
-    html += list.length ? list.map((n) => `<div class="medcard"><div class="mtop"><span class="mphoto none">${ic('talk')}</span><div class="mtx"><div class="mm">${esc(fmtDate(n.d))}</div>${n.text ? `<div class="mt">${esc(n.text)}</div>` : ''}</div>${n.rec ? playBtn(n.rec, 'big') : ''}</div><div class="mbtns"><button type="button" class="sbtn" data-fam-delnote="${esc(n.id)}">${esc(T('delete'))}</button></div></div>`).join('') : `<p class="muted center">${esc(T('noNotes'))}</p>`;
+    html += list.length ? list.map((n) => `<div class="medcard"><div class="mtop"><span class="mphoto none">${ic('talk')}</span><div class="mtx"><div class="mm">${esc(fmtDate(n.d))}</div>${n.text ? `<div class="mt">${esc(n.text)}</div>` : ''}</div>${n.rec ? playBtn(n.rec, 'big') : ''}</div><div class="mbtns"><button type="button" class="sbtn" data-fam-delnote="${esc(n.id)}">${esc(T('delete'))}</button></div></div>`).join('') : emptyRow('ui.fam.no-notes', ids);
     return { html, nav: 'family' };
   }
   function screenNoteAdd() {
@@ -494,7 +500,7 @@ export function initFamily(ctx) {
     let html = top(T('rowReadings') + ' · ' + nameOf(p), { back: '#/family/person' }) + listenBar(ids) + sayRow('ui.fam.rd.lead', 'blk lead trow');
     html += bigRow('#/tool/reading', ic('bp'), T('checkReading'), '', 'ui.fam.rd.open', 'add');
     const list = (p.readings || []).slice().sort((a, b) => (a.d < b.d ? 1 : a.d > b.d ? -1 : (b.t || 0) - (a.t || 0)));
-    html += list.length ? `<div class="panel">${list.map((r) => `<div class="grow-row rdrow"><div class="gr-open"><span class="d">${esc(fmtDate(r.d))} · ${ic(r.k === 'bp' ? 'bp' : 'sugar')}</span><span class="v" dir="ltr">${esc(readingText(r))}</span>${r.lv ? `<span class="lvchip ${esc(r.lv)}">${esc(T(LVW[r.lv] || 'lvCheck'))}</span>` : ''}</div><button type="button" class="gr-del" data-fam-delrd="${esc(r.id)}" aria-label="${esc(T('delete'))}">×</button></div>`).join('')}</div>` : `<p class="muted center">${esc(T('noReadings'))}</p>`;
+    html += list.length ? `<div class="panel">${list.map((r) => `<div class="grow-row rdrow"><div class="gr-open"><span class="d">${esc(fmtDate(r.d))} · ${ic(r.k === 'bp' ? 'bp' : 'sugar')}</span><span class="v" dir="ltr">${esc(readingText(r))}</span>${r.lv ? `<span class="lvchip ${esc(r.lv)}">${esc(T(LVW[r.lv] || 'lvCheck'))}</span>` : ''}</div><button type="button" class="gr-del" data-fam-delrd="${esc(r.id)}" aria-label="${esc(T('delete'))}">×</button></div>`).join('')}</div>` : emptyRow('ui.fam.no-readings', ids);
     return { html, nav: 'family', adult: true };
   }
   // called by js/tools.js on a blood pressure or sugar result: {k: 'bp', s, dia} or {k: 'sugar', v, unit}, and lv

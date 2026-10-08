@@ -83,6 +83,18 @@ for k, L in ui["say"].items(): say(k, L)
 if syndromes:
     for x in syndromes["syndromes"]:
         if x.get("active"): say(f"ui.syn.{x['id']}", x["ask"])
+# each place on the Nearest clinic list (content/src/facilities.json): its name and its kind, as its card shows them
+# (the speaker on its card). Brackets become a pause ("..., probably ..."): the voice reads the name as written, adds nothing.
+def place_line(f):
+    kind = ui["text"].get("ft_" + (f.get("type") or "other")) or ui["text"]["ft_other"]
+    out = {}
+    for lg in LANGS:
+        name = (f["name"].get(lg) or f["name"]["en"]).strip()
+        name = re.sub(r"\s*\(([^)]*)\)", ("، " if lg != "en" else ", ") + r"\1", name).strip().rstrip(".،,")
+        out[lg] = f"{name}. {kind[lg].strip()}."
+    return out
+for f in facilities.get("facilities") or []:
+    if f.get("status") != "closed": say(f"ui.fac.{f['id']}", place_line(f))
 
 out_topics = {}
 for tid, t in topics.items():

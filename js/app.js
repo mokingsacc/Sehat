@@ -521,7 +521,7 @@ function screenList(name) {
   const c = LISTS()[name]; if (!c) return screenHome();
   const list = listOf(name), tab = listTab(name), ids = [c.say];
   let body = (c.tools || []).map((x) => toolRow(x, ids)).join('');
-  if (c.near) { ids.push('ui.near'); body += `<div class="trow tool near" data-block="ui.near"><a class="grow" href="#/near"><span class="tp ticon">${ic('hospital')}</span><span class="tx"><span class="t">${esc(T('near'))}</span><span class="s">${esc(T('nearSub'))}</span></span></a>${spk('ui.near')}</div>`; }
+  if (c.near) { ids.push('ui.near'); body += `<div class="trow tool near" data-block="ui.near"><a class="grow" href="#/near"><span class="tp"><img src="img/pics/row-near.svg" alt="" loading="lazy"></span><span class="tx"><span class="t">${esc(T('near'))}</span><span class="s">${esc(T('nearSub'))}</span></span></a>${spk('ui.near')}</div>`; }
   ids.push(...list.map((t) => t + '.title'));
   body += list.map(topicRow).join('');
   if (!list.length) body += `<div class="empty">${ic(c.icon || 'check')}<p>${esc(T('comingSoon'))}</p></div>`;
@@ -615,7 +615,8 @@ function screenEmergency(age) {
     html += `<div class="em-ages">${emAges().map((x) => ageCard(x, '#/emergency/' + x.id)).join('')}</div>`;
     ids.push(...emAges().map((x) => 'ui.' + x.label));
     const all = (b.sections.emergency || []).filter((t) => b.topics[t]);
-    if (all.length) html += `<details class="em-all"><summary>${esc(T('allEmergencies'))}</summary>${all.map(emRow).join('')}</details>`;
+    if (all.length) ids.push('ui.allEmergencies');
+    if (all.length) html += `<details class="em-all" data-block="ui.allEmergencies"><summary><span class="grow">${esc(T('allEmergencies'))}</span>${spk('ui.allEmergencies')}</summary>${all.map(emRow).join('')}</details>`;
     return { html, nav: 'health' };
   }
   EM.speak = false;
@@ -910,29 +911,32 @@ async function deleteVoices() {
 }
 async function showStorage() { const t = await storageText(); const el = $('#storage'); if (el) el.textContent = t; }
 function screenSettings() {
-  const ids = ['ui.settings', SH.homeSay(), 'ui.watch', 'ui.disclaimer'];
+  const ids = ['ui.settings', 'ui.set.language', 'ui.set.speed', 'ui.set.voices', 'ui.set.packs', 'ui.set.update', SH.homeSay(), 'ui.watch', 'ui.disclaimer'];
   let html = top(T('settings')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.settings"><div class="body">${esc(L(S.book.narration['ui.settings']))}</div>${spk('ui.settings')}</div>`;
   html += `<div class="panel">`;
-  html += `<div class="srow segrow">${ic('talk')}<div class="grow"><div class="t">${esc(T('language'))}</div></div><div class="seg">${['fa', 'ps', 'en'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div></div>`;
-  html += `<div class="srow segrow">${ic('clock')}<div class="grow"><div class="t">${esc(T('speed'))}</div></div><div class="seg"><button data-speed="1" aria-pressed="${S.speed === 1}">${esc(T('normal'))}</button><button data-speed="0.85" aria-pressed="${S.speed !== 1}">${esc(T('slower'))}</button></div></div>`;
-  html += `</div><div class="panel" id="voicepanel"><h2>${esc(T('voices'))}</h2><p class="muted">${esc(T('voiceFor', { lang: S.book.langNames[S.lang] || S.lang }))}</p>${voiceCards('data-voice')}<div id="packs">${packsHtml()}</div>`;
-  html += `<div class="srow">${ic('no')}<button class="grow" data-action="delvoices" style="text-align:start"><div class="t">${esc(T('deleteVoices'))}</div><div class="s">${esc(T('deleteVoicesSub'))}</div></button></div><p class="muted" id="storage"></p>`;
+  html += `<div class="srow segrow" data-block="ui.set.language">${ic('talk')}<div class="grow"><div class="t">${esc(T('language'))}</div></div>${spk('ui.set.language')}<div class="seg">${['fa', 'ps', 'en'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div></div>`;
+  html += `<div class="srow segrow" data-block="ui.set.speed">${ic('clock')}<div class="grow"><div class="t">${esc(T('speed'))}</div></div>${spk('ui.set.speed')}<div class="seg"><button data-speed="1" aria-pressed="${S.speed === 1}">${esc(T('normal'))}</button><button data-speed="0.85" aria-pressed="${S.speed !== 1}">${esc(T('slower'))}</button></div></div>`;
+  html += `</div><div class="panel" id="voicepanel"><div class="sayhead" data-block="ui.set.voices"><div class="grow"><h2>${esc(T('voices'))}</h2><p class="muted">${esc(T('voiceFor', { lang: S.book.langNames[S.lang] || S.lang }))}</p></div>${spk('ui.set.voices')}</div>${voiceCards('data-voice')}`;
+  // the voice packs, "Delete voices" and the space used: one block, one speaker (the rows change as clips download)
+  html += `<div class="packblock" data-block="ui.set.packs"><div class="srow">${ic('phone')}<div class="grow"><div class="t">${esc(T('packsHead'))}</div></div>${spk('ui.set.packs')}</div><div id="packs">${packsHtml()}</div>`;
+  html += `<div class="srow">${ic('no')}<button class="grow" data-action="delvoices" style="text-align:start"><div class="t">${esc(T('deleteVoices'))}</div><div class="s">${esc(T('deleteVoicesSub'))}</div></button></div><p class="muted" id="storage"></p></div>`;
   html += `</div><div class="panel">`;
-  html += `<div class="srow">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} <bdi dir="ltr">${esc(S.book.version)}</bdi>${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div><button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
+  html += `<div class="srow swrap" data-block="ui.set.update">${ic('check')}<div class="grow"><div class="t" id="upd-t">${esc(T('upToDate'))}</div><div class="s">${esc(T('version'))} <bdi dir="ltr">${esc(S.book.version)}</bdi>${S.book.edition ? ' · ' + esc(S.book.edition) : ''} · ${esc(T('offline'))}</div></div>${spk('ui.set.update')}<button class="sbtn" data-action="checkupd">${esc(T('checkUpdates'))}</button></div>`;
   html += SH.settingsRow(); // Share Sehat (js/share.js): the app file, the link, the QR code
   ids.push('ui.feedback');
   html += `<div class="srow" data-block="ui.feedback">${ic('talk')}<a class="grow" href="#/feedback"><div class="t">${esc(T('feedback'))}</div><div class="s">${esc(T('feedbackSub'))}</div></a>${spk('ui.feedback')}</div>`;
   if (S.installEvt || (platform() === 'ios' && !isStandalone())) { ids.push('ui.install'); html += `<div class="srow" data-block="ui.install">${ic('phone')}<button class="grow" data-action="install" style="text-align:start"><div class="t">${esc(T('install'))}</div><div class="s">${esc(T('installSub'))}</div></button>${spk('ui.install')}</div>`; }
-  html += `<div class="srow">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div><button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
-  html += `<a class="srow" href="#/privacy">${ic('check')}<div class="grow"><div class="t">${esc(T('privacy'))}</div><div class="s">${esc(T('privacySub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
+  ids.push('ui.set.stats', 'ui.set.privacy');
+  html += `<div class="srow swrap" data-block="ui.set.stats">${ic('card')}<div class="grow"><div class="t">${esc(T('usageStats'))}</div><div class="s">${esc(T('usageStatsSub'))}</div></div>${spk('ui.set.stats')}<button class="toggle" data-action="stats" aria-pressed="${S.stats}" aria-label="${esc(T('usageStats'))}"></button></div>`;
+  html += `<div class="srow" data-block="ui.set.privacy">${ic('check')}<a class="grow" href="#/privacy"><div class="t">${esc(T('privacy'))}</div><div class="s">${esc(T('privacySub'))}</div></a>${spk('ui.set.privacy')}</div>`;
   if (SV()) {
-    html += `<div class="srow watch" data-block="ui.watch">${ic('people')}<div class="grow"><div class="t">${esc(T('watch'))}</div><div class="s">${esc(L(S.book.narration['ui.watch']))}</div>${S.stats ? '' : `<div class="s warnline">${esc(T('watchNeedsStats'))}</div>`}</div>${spk('ui.watch')}<button class="toggle" data-action="watch" aria-pressed="${watching()}" aria-label="${esc(T('watch'))}"${S.stats ? '' : ' disabled'}></button></div>`;
-    if (watching() || S.stats) { const d = store.get('district', null); html += `<div class="srow">${ic('house')}<div class="grow"><div class="t">${esc(T('myDistrict'))}</div><div class="s" id="mydistrict">${esc(d ? placeName(d) : T('notChosen'))}</div></div><button class="sbtn" data-action="district">${esc(T('change'))}</button></div>`; }
+    html += `<div class="srow swrap watch" data-block="ui.watch">${ic('people')}<div class="grow"><div class="t">${esc(T('watch'))}</div><div class="s">${esc(L(S.book.narration['ui.watch']))}</div>${S.stats ? '' : `<div class="s warnline">${esc(T('watchNeedsStats'))}</div>`}</div>${spk('ui.watch')}<button class="toggle" data-action="watch" aria-pressed="${watching()}" aria-label="${esc(T('watch'))}"${S.stats ? '' : ' disabled'}></button></div>`;
+    if (watching() || S.stats) { const d = store.get('district', null); ids.push('ui.district'); html += `<div class="srow swrap" data-block="ui.district">${ic('house')}<div class="grow"><div class="t">${esc(T('myDistrict'))}</div><div class="s" id="mydistrict">${esc(d ? placeName(d) : T('notChosen'))}</div></div>${spk('ui.district')}<button class="sbtn" data-action="district">${esc(T('change'))}</button></div>`; }
   }
-  html += `<a class="srow" href="#/studio">${ic('talk')}<div class="grow"><div class="t">${esc(T('recordMode'))}</div><div class="s">${esc(T('recordModeSub'))}</div></div>${I.fwd.replace('<svg', '<svg style="width:20px;height:20px;color:#6B655E"')}</a>`;
+  html += `<div class="srow" data-block="ui.set.studio">${ic('talk')}<a class="grow" href="#/studio"><div class="t">${esc(T('recordMode'))}</div><div class="s">${esc(T('recordModeSub'))}</div></a>${spk('ui.set.studio')}</div>`;
   html += `</div>` + disclaimer();
-  html += `<p class="muted center" dir="ltr">Sehat · ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''}<br>Content based on WHO guidance (IMCI, PCPNC, Facts for Life). Draft for review. Icons: Health Icons (MIT). Font: Noto Naskh Arabic (OFL).</p>`;
+  html += `<p class="muted center credit" dir="ltr">Sehat · ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''}<br>Content based on WHO guidance (IMCI, PCPNC, Facts for Life). Draft for review. Icons: Health Icons (MIT). Font: Noto Naskh Arabic (OFL).</p>`;
   setTimeout(async () => { await refreshHave(); packsUI(); showStorage(); }, 0);
   return { html, nav: 'settings', adult: true };
 }
@@ -1023,13 +1027,13 @@ function findSymptoms(q) {
 }
 const ASK = { q: '', rec: null };
 function screenAsk() {
-  const ids = ['ui.ask'];
+  const ids = ['ui.ask', 'ui.orPick'];
   let html = top(T('ask')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.ask"><div class="body">${esc(L(S.book.narration['ui.ask']))}</div>${spk('ui.ask')}</div>`;
   const canMic = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
   html += `<form class="askbox" id="askform"><input id="askq" value="${esc(ASK.q)}" placeholder="${esc(T('askPlaceholder'))}" autocomplete="off" enterkeyhint="search">${canMic ? `<button type="button" class="mic" data-action="mic" aria-label="${esc(T('ask'))}">${I.mic}</button>` : ''}</form>`;
   html += `<div id="askres">${askResults()}</div>`;
-  html += `<h2 class="sub-h">${esc(T('orPick'))}</h2><div class="symgrid">${(S.book.symptoms || []).map((s) => `<button class="sym" data-sym="${esc(s.id)}">${ic(s.icon)}<span>${esc(L(s.label))}</span></button>`).join('')}</div>`;
+  html += groupHead(T('orPick'), 'ui.orPick', ' sayh') + `<div class="symgrid">${(S.book.symptoms || []).map((s) => `<button class="sym" data-sym="${esc(s.id)}">${ic(s.icon)}<span>${esc(L(s.label))}</span></button>`).join('')}</div>`;
   return { html, nav: 'home' };
 }
 function askResults(symId, live) {
@@ -1057,7 +1061,7 @@ function askResults(symId, live) {
   const top3 = syms.slice(0, 3).map((s) => s.id);
   svSignal(top3);
   if (out) out += reportCards(svFor('symptoms', top3)).html;
-  return out ? `<h2 class="sub-h">${esc(T('results'))}</h2>${out}` : `<div class="blk tip"><div class="body">${esc(T('noResults'))}</div></div>`;
+  return out ? groupHead(T('results'), 'ui.results', ' sayh') + out : `<div class="blk tip"><div class="body">${esc(T('noResults'))}</div></div>`;
 }
 function resultCard(tid) {
   const t = S.book.topics[tid]; if (!t) return '';
@@ -1083,11 +1087,11 @@ async function startMic(btn) {
 /* ---------- feedback: a voice note or a written note, sent when online ---------- */
 const FB = { rec: null, chunks: [], blob: null, on: false, stream: null };
 function screenFeedback() {
-  const ids = ['ui.feedback'];
+  const ids = ['ui.feedback', 'ui.fb.voice', 'ui.fb.write'];
   let html = top(T('feedback')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.feedback"><div class="body">${esc(L(S.book.narration['ui.feedback']))}</div>${spk('ui.feedback')}</div>`;
-  html += `<div class="center"><button class="recbig${FB.on ? ' on' : ''}" data-action="fbrec" aria-label="${esc(T('fbRecord'))}">${FB.on ? I.stop.replace('<svg', '<svg fill="#fff"') : I.mic}</button><div class="muted">${FB.on ? esc(T('recording')) : FB.blob ? esc(T('fbRecorded')) + ' ✓' : esc(T('fbRecord'))}</div>${FB.blob && !FB.on ? `<button class="sbtn" data-action="fbplay" style="margin-top:6px">${esc(T('play'))} ▶</button>` : ''}</div>`;
-  html += `<form class="form" id="fbform"><label for="fbtext">${esc(T('fbWrite'))}</label><p class="muted warnline fbwarn" id="fbwarn">${esc(T('fbNoNames'))}</p><textarea name="text" id="fbtext" aria-describedby="fbwarn" rows="4" maxlength="2000" style="font:inherit;font-size:18px;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px"></textarea><button class="btn" type="submit">${esc(T('fbSend'))}</button></form>`;
+  html += `<div class="center fbvoice" data-block="ui.fb.voice">${spk('ui.fb.voice')}<button class="recbig${FB.on ? ' on' : ''}" data-action="fbrec" aria-label="${esc(T('fbRecord'))}">${FB.on ? I.stop.replace('<svg', '<svg fill="#fff"') : I.mic}</button><div class="muted">${FB.on ? esc(T('recording')) : FB.blob ? esc(T('fbRecorded')) + ' ✓' : esc(T('fbRecord'))}</div>${FB.blob && !FB.on ? `<button class="sbtn" data-action="fbplay" style="margin-top:6px">${esc(T('play'))} ▶</button>` : ''}</div>`;
+  html += `<form class="form" id="fbform"><div class="lblrow" data-block="ui.fb.write"><div class="grow"><label for="fbtext">${esc(T('fbWrite'))}</label><p class="muted warnline fbwarn" id="fbwarn">${esc(T('fbNoNames'))}</p></div>${spk('ui.fb.write')}</div><textarea name="text" id="fbtext" aria-describedby="fbwarn" rows="4" maxlength="2000" style="font:inherit;font-size:18px;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px"></textarea><button class="btn" type="submit">${esc(T('fbSend'))}</button></form>`;
   return { html, nav: 'home' };
 }
 async function fbRecord() {
@@ -1146,14 +1150,18 @@ function screenNear() {
   const main = rows.filter((r) => isMain(r.f)).slice(0, 6), other = rows.filter((r) => !isMain(r.f)).slice(0, 12);
   const shown = [...main, ...other];
   if (me) html += nearMap(me, shown.slice(0, 3).concat(other.slice(0, 5)).filter((r, i, a) => a.indexOf(r) === i), shown);
-  const card = (r) => { const { f, d, b } = r, n = shown.indexOf(r) + 1;
+  const card = (r) => { const { f, d, b } = r, n = shown.indexOf(r) + 1, sid = 'ui.fac.' + f.id;
+    if (S.book.narration[sid]) ids.push(sid);
     const svc = (f.services || []).map((s) => `<span class="svc">${esc(T('svc_' + s))}</span>`).join('');
-    return `<div class="fac"><div class="fh"><b>${me ? `<span class="facn${isMain(f) ? ' h' : ''}">${num(n)}</span> ` : ''}${esc(L(f.name))}</b>${d != null ? `<span class="dist"><svg viewBox="0 0 24 24" style="transform:rotate(${Math.round(b)}deg)" aria-hidden="true"><path d="M12 2 19 21 12 17 5 21z" fill="currentColor"/></svg>${esc(T('km', { n: num(d < 10 ? d.toFixed(1) : Math.round(d)) }))}</span>` : ''}</div>
+    return `<div class="fac"${S.book.narration[sid] ? ` data-block="${esc(sid)}"` : ''}><div class="fh"><b>${me ? `<span class="facn${isMain(f) ? ' h' : ''}">${num(n)}</span> ` : ''}${esc(L(f.name))}</b>${d != null ? `<span class="dist"><svg viewBox="0 0 24 24" style="transform:rotate(${Math.round(b)}deg)" aria-hidden="true"><path d="M12 2 19 21 12 17 5 21z" fill="currentColor"/></svg>${esc(T('km', { n: num(d < 10 ? d.toFixed(1) : Math.round(d)) }))}</span>` : ''}${S.book.narration[sid] ? spk(sid) : ''}</div>
       <div class="muted">${esc(T('ft_' + (f.type || 'other')))}${f.district ? ' · ' + esc(f.district) : ''}</div><div class="svcs">${svc}</div>
       <div class="row2">${f.phone ? `<a class="sbtn" href="tel:${esc(f.phone)}">${ic('phone')} ${esc(f.phone)}</a>` : ''}<a class="sbtn" href="https://www.google.com/maps/dir/?api=1&destination=${f.lat},${f.lon}" target="_blank" rel="noopener">${esc(T('directions'))}</a></div></div>`; };
-  if (main.length) html += `<div class="group-h"><span class="t">${esc(T('nearHospitals'))}</span><span class="ln"></span></div>` + main.map(card).join('');
-  if (other.length) html += `<div class="group-h"><span class="t">${esc(T('nearOther'))}</span><span class="ln"></span></div>` + other.map(card).join('');
-  html += `<p class="muted center">${esc(T('nearIncomplete'))}</p><p class="muted center" style="font-size:13px" dir="ltr">${esc(T('mapCredit'))}</p>`;
+  const head = (key, sid) => { ids.push(sid); return groupHead(T(key), sid); };
+  if (main.length) html += head('nearHospitals', 'ui.nearHospitals') + main.map(card).join('');
+  if (other.length) html += head('nearOther', 'ui.nearOther') + other.map(card).join('');
+  ids.push('ui.nearIncomplete');
+  html += `<div class="blk tip" data-block="ui.nearIncomplete"><div class="body">${esc(L(S.book.narration['ui.nearIncomplete']))}</div>${spk('ui.nearIncomplete')}</div>`;
+  html += `<p class="muted center credit" style="font-size:13px" dir="ltr">${esc(T('mapCredit'))}</p>`; // the map licence: shown, not read aloud
   return { html, nav: 'home' };
 }
 function nearMap(me, rows, shown) {

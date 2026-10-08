@@ -367,6 +367,26 @@
    "fa": "عددهای خانه دقیق نیستند. اگر نتیجه شما را نگران می‌کند، کلینیک دوباره اندازه می‌کند.",
    "ps": "د کور شمېرې دقیقې نه دي. که پایله مو اندېښمن کړي، کلینیک به بیا اندازه وکړي.",
    "en": "Numbers from home are not exact. If a result worries you, the clinic will measure again."
+  },
+  "ui.gr.new": {
+   "fa": "اندازهٔ تازه: اینجا را بزنید تا وزن و قد طفل خود را بنویسید.",
+   "ps": "نوې اندازه: دلته ووهئ چې د خپل ماشوم وزن او قد ولیکئ.",
+   "en": "Add a measurement: tap here to write your child's weight and length."
+  },
+  "ui.gr.list": {
+   "fa": "اندازه‌های طفل شما؛ تازه‌ترین در اول. یکی را بزنید تا معنای آن را بشنوید.",
+   "ps": "ستاسو د ماشوم اندازې؛ تر ټولو نوې په سر کې. یوه یې ووهئ چې مانا یې واورئ.",
+   "en": "Your child's measurements, newest first. Tap one to hear what it means."
+  },
+  "ui.gr.none": {
+   "fa": "هنوز اندازه‌ای ثبت نشده است.",
+   "ps": "تر اوسه هېڅ اندازه نه ده ثبت شوې.",
+   "en": "No measurements yet."
+  },
+  "ui.gr.no-kids": {
+   "fa": "هنوز طفلی ثبت نشده است. اول طفل خود را اضافه کنید، بعد می‌توانید وزن و قد او را بنویسید.",
+   "ps": "تر اوسه کوم ماشوم نه دی ثبت شوی. لومړی خپل ماشوم زیات کړئ، بیا یې وزن او قد لیکلای شئ.",
+   "en": "No children added yet. Add your child first, then you can write their weight and length."
   }
  }
 }

@@ -10,6 +10,8 @@ export function initGrowth(ctx) {
   const { S, $, $$, esc, T, L, num, ic, I, spk, play, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, dateSelects, readDate, fmtDate, todayISO, saveKids } = ctx;
   const say = (id) => L(S.book.narration[id]);
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${spk(id)}</div>`;
+  // a heading, a label or a link with its own speaker
+  const headSay = (html, id) => `<div class="lblrow" data-block="${esc(id)}"><div class="grow">${html}</div>${spk(id)}</div>`;
   const autoplay = (ids) => { ids = ids.filter((id) => S.book.narration[id]); if (ids.length && (ids.some((id) => hasAudio(id)) || ttsVoice())) play(ids, { quiet: true }); };
   const dec = (s) => (S.lang === 'en' ? s : s.replace('.', '٫'));
   const fmt = (x, d = 1) => dec(num(String(Math.round(x * Math.pow(10, d)) / Math.pow(10, d))));
@@ -141,7 +143,7 @@ export function initGrowth(ctx) {
 
   /* ---------- screens ---------- */
   function noKid() {
-    return { html: top(T('growth')) + sayRow('ui.growth', 'blk lead trow') + `<p class="muted center">${esc(T('noChildren'))}</p><button class="btn" data-action="addkid">${I.plus.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('addChild'))}</button>`, nav: 'family' };
+    return { html: top(T('growth')) + sayRow('ui.growth', 'blk lead trow') + sayRow('ui.gr.no-kids', 'blk tip trow') + `<button class="btn" data-action="addkid">${I.plus.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('addChild'))}</button>`, nav: 'family' };
   }
   function kidChips(k) {
     const ks = kids(); if (ks.length < 2) return '';
@@ -160,7 +162,8 @@ export function initGrowth(ctx) {
     const list = entriesOf(k), age = ageDays(k.dob, todayISO());
     const ids = ['ui.growth'];
     let html = top(T('growth') + ' · ' + nameOf(k), { back: '#/family/person' }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
-    html += `<a class="btn big" href="#/growth/add">${I.plus.replace('<svg', '<svg style="width:26px;height:26px"')} ${esc(T('addMeasure'))}</a>`;
+    ids.push('ui.gr.new');
+    html += headSay(`<a class="btn big" href="#/growth/add">${I.plus.replace('<svg', '<svg style="width:26px;height:26px"')} ${esc(T('addMeasure'))}</a>`, 'ui.gr.new');
     if (age > 1826) { ids.push('ui.gr.over5'); html += sayRow('ui.gr.over5', 'blk tip trow'); }
     else if (G.who) {
       const tabs = [['wfa', 'chartWfa'], ['lfa', 'chartLfa'], ['wfl', 'chartWfl']];
@@ -168,7 +171,8 @@ export function initGrowth(ctx) {
       html += `<div class="gcard">${chartSvg(G.tab, k, list)}${legend(G.tab)}${sayRow('ui.gr.charts', 'trow gnote')}${G.tab === 'wfl' ? sayRow('ui.gr.wfl-lines', 'trow gnote') : ''}</div>`;
       ids.push('ui.gr.charts'); if (G.tab === 'wfl') ids.push('ui.gr.wfl-lines');
     } else html += `<div class="gcard"><p class="muted center">…</p></div>`;
-    html += `<div class="panel"><h2>${esc(T('measurements'))}</h2>${list.length ? list.slice().reverse().map((e) => entryRow(k, e)).join('') : `<p class="muted">${esc(T('noMeasures'))}</p>`}</div>`;
+    const lsay = list.length ? 'ui.gr.list' : 'ui.gr.none'; ids.push(lsay);
+    html += `<div class="panel">${headSay(`<h2>${esc(T('measurements'))}</h2>`, lsay)}${list.length ? list.slice().reverse().map((e) => entryRow(k, e)).join('') : `<p class="muted">${esc(T('noMeasures'))}</p>`}</div>`;
     if (list.length) { ids.push('ui.gr.show'); html += sayRow('ui.gr.show', 'blk tip trow'); }
     html += measureLink();
     html += disclaimer();
@@ -187,7 +191,7 @@ export function initGrowth(ctx) {
     let html = top(T('addMeasure'), { back: '#/growth' }) + listenBar(ids);
     html += `<div class="agechip">${ic('baby')}<span>${esc(nameOf(k))} · ${esc(ctx.ageText(k.dob))}</span></div>`;
     html += sayRow('ui.gr.add', 'blk lead trow');
-    html += `<div class="form" id="grform"><label>${esc(T('gDate'))}</label>${dateSelects('g', todayISO())}`;
+    html += `<div class="form" id="grform">${headSay(`<label>${esc(T('gDate'))}</label>`, 'ui.date')}${dateSelects('g', todayISO())}`;
     if (ctx.NP) { // the big number pad, which says each number (js/numpad.js)
       html += ctx.NP.field('gr-kg', { label: T('gWeight'), say: 'ui.fam.w.weight', unit: 'kg', dec: 1, digits: 2, value: f.kg == null ? null : f.kg, onDone: (v) => { f.kg = v; } });
       html += ctx.NP.field('gr-cm', { label: T('gLength'), say: 'ui.num.cm', unit: 'cm', dec: 1, value: f.cm == null ? null : f.cm, onDone: (v) => { f.cm = v; } });
@@ -203,7 +207,7 @@ export function initGrowth(ctx) {
       html += `<div class="gmuac">${[['', 'notMeasured'], ['g', 'green'], ['y', 'yellow'], ['r', 'red']].map(([v, key]) => `<button type="button" data-gr-muac="${v}" aria-pressed="${(f.muac || '') === v}">${v ? `<i class="swatch ${key}"></i>` : ''}<span>${esc(T(key))}</span></button>`).join('')}</div>`;
     }
     html += `<button class="btn big" type="button" data-gr="save">${I.check.replace('<svg', '<svg style="width:24px;height:24px"')} ${esc(T('save'))}</button>`;
-    html += `<a class="btn ghost" href="#/growth">${esc(T('cancel'))}</a></div>`;
+    html += `<button class="btn ghost" type="button" data-gr="cancel">${esc(T('cancel'))}</button></div>`; // a plain button like Save
     html += measureLink();
     return { html, nav: 'family' };
   }
@@ -308,6 +312,7 @@ export function initGrowth(ctx) {
       k.weights = (k.weights || []).filter((x) => x.id !== d.grDel); saveKids(); ctx.render(); return;
     }
     if (d.gr === 'save') save();
+    if (d.gr === 'cancel') location.hash = '#/growth';
   });
   // opening "add" from another page starts a fresh form
   addEventListener('hashchange', () => { if (location.hash !== '#/growth/add') G.form = null; });

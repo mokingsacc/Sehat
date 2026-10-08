@@ -1270,6 +1270,11 @@
    "fa": "به زودی",
    "ps": "ډېر ژر",
    "en": "Coming soon"
+  },
+  "packsHead": {
+   "fa": "دانلود صداها",
+   "ps": "د غږونو ښکته کول",
+   "en": "Download the voices"
   }
  },
  "say": {
@@ -1977,6 +1982,91 @@
    "fa": "بزرگسال یا نوجوان",
    "ps": "لوی کس یا ځوان",
    "en": "Adult or teenager"
+  },
+  "ui.nearHospitals": {
+   "fa": "شفاخانه‌ها و قابله‌ها. برای شنیدن نام هر جای، دکمۀ بلندگوی کنار آن را بزنید. برای دیدن راه، «راه» را بزنید.",
+   "ps": "روغتونونه او قابلې. د هر ځای د نوم اورېدو لپاره، د هغه تر څنګ د سپیکر تڼۍ ووهئ. د لارې لیدو لپاره، «لار» ووهئ.",
+   "en": "Hospitals and midwives. Tap the speaker beside a place to hear its name. Tap Directions to see the way."
+  },
+  "ui.nearOther": {
+   "fa": "کلینیک‌ها و داکتران نزدیک.",
+   "ps": "نږدې کلینیکونه او ډاکټران.",
+   "en": "Nearby clinics and doctors."
+  },
+  "ui.nearIncomplete": {
+   "fa": "این فهرست هنوز کامل نیست. شفاخانه ولایتی ایبک و کلینیک‌های دولتی به‌زودی اضافه می‌شوند.",
+   "ps": "دا لېست لا بشپړ نه دی. د ایبک ولایتي روغتون او دولتي کلینیکونه به ژر ورزیات شي.",
+   "en": "This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon."
+  },
+  "ui.set.language": {
+   "fa": "زبان: دری، پشتو یا انگلیسی را انتخاب کنید. تمام کتاب به همان زبان می‌شود.",
+   "ps": "ژبه: دري، پښتو یا انګلیسي وټاکئ. ټول کتاب په هماغه ژبه کېږي.",
+   "en": "Language: choose Dari, Pashto or English. The whole book changes to that language."
+  },
+  "ui.set.speed": {
+   "fa": "سرعت صدا: اگر صدا خیلی تیز است، «آهسته» را بزنید.",
+   "ps": "د غږ چټکتیا: که غږ ډېر چټک وي، «ورو» ووهئ.",
+   "en": "Voice speed: if the voice is too fast, tap Slower."
+  },
+  "ui.set.voices": {
+   "fa": "صداهای کتاب: صدای زن یا صدای مرد را انتخاب کنید. برای شنیدن هر کدام، دکمۀ بلندگوی زیر آن را بزنید.",
+   "ps": "د کتاب غږونه: د ښځې غږ یا د سړي غږ وټاکئ. د اورېدو لپاره، د هر یوه لاندې د سپیکر تڼۍ ووهئ.",
+   "en": "Voices of the book: choose a woman's voice or a man's voice. Tap the speaker under each one to hear it."
+  },
+  "ui.set.packs": {
+   "fa": "دانلود صداها: صداهای کتاب بخش به بخش در گوشی شما ذخیره می‌شوند تا کتاب بدون انترنت هم گپ بزند. مهم‌ترین بخش اول می‌آید: علایم خطر و کمک‌های اولیه. علامت تیک یعنی آن بخش در گوشی شما است. «پاک کردن صداها» جای گوشی را خالی می‌کند؛ کتاب باز هم کار می‌کند.",
+   "ps": "د غږونو ښکته کول: د کتاب غږونه برخه په برخه ستاسو په ټیلیفون کې خوندي کېږي، چې کتاب بې انټرنېټه هم خبرې وکړي. تر ټولو مهمه برخه لومړی راځي: د خطر نښې او لومړنۍ مرستې. د تیک نښه دا مانا لري چې هغه برخه ستاسو په ټیلیفون کې ده. «غږونه پاک کړئ» د ټیلیفون ځای خالي کوي؛ کتاب بیا هم کار کوي.",
+   "en": "Download the voices: the book's voices are saved on your phone part by part, so the book speaks without internet. The most important part comes first: danger signs and first aid. A tick means that part is on your phone. Delete voices frees space on the phone; the book still works."
+  },
+  "ui.set.update": {
+   "fa": "تازه کردن کتاب: وقتی انترنت باشد، کتاب صفحه‌های تازه را خودش می‌گیرد. برای دیدن همین حالا، «بررسی» را بزنید. کتاب بدون انترنت هم کار می‌کند.",
+   "ps": "د کتاب تازه کول: کله چې انټرنېټ وي، کتاب نوې پاڼې پخپله اخلي. د همدا اوس کتلو لپاره، «کتل» ووهئ. کتاب بې انټرنېټه هم کار کوي.",
+   "en": "Updating the book: when there is internet, the book gets its new pages by itself. Tap Check to look now. The book works without internet."
+  },
+  "ui.set.stats": {
+   "fa": "شمار استفاده: اگر این را روشن کنید، گوشی هر روز مجموع صفحه‌هایی را که باز شده‌اند می‌فرستد. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر خاموش باشد، کتاب همان طور کار می‌کند.",
+   "ps": "د کارونې شمېر: که دا روښانه کړئ، ټیلیفون هره ورځ د پرانیستل شویو پاڼو ټولګه لېږي. هېڅ نوم، د ټیلیفون شمېره یا ستاسو ځای نه لېږل کېږي. که بند وي، کتاب همداسې کار کوي.",
+   "en": "Usage counts: if you turn this on, the phone sends daily totals of which pages were opened. No names, no phone numbers and no location are sent. The book works the same if it is off."
+  },
+  "ui.set.privacy": {
+   "fa": "حریم خصوصی: چه چیز فرستاده می‌شود و چه در گوشی شما می‌ماند. برای خواندن یا شنیدن، اینجا را بزنید.",
+   "ps": "شخصي حریم: څه لېږل کېږي او څه ستاسو په ټیلیفون کې پاتې کېږي. د لوستلو یا اورېدو لپاره، دلته ووهئ.",
+   "en": "Privacy: what is sent and what stays on your phone. Tap here to read or listen."
+  },
+  "ui.set.studio": {
+   "fa": "ثبت صدا: فقط برای کسی که صداهای کتاب را ثبت می‌کند. شما به آن ضرورت ندارید.",
+   "ps": "د غږ ثبتول: یوازې د هغه چا لپاره چې د کتاب غږونه ثبتوي. تاسو ورته اړتیا نه لرئ.",
+   "en": "Recording the narration: only for the person who records the book's voices. You do not need it."
+  },
+  "ui.orPick": {
+   "fa": "یا یک تصویر را انتخاب کنید: تصویری را بزنید که مشکل را نشان می‌دهد.",
+   "ps": "یا یو انځور وټاکئ: هغه انځور ووهئ چې ستونزه ښيي.",
+   "en": "Or pick a picture: tap the picture that shows the problem."
+  },
+  "ui.results": {
+   "fa": "این صفحات کمک می‌کنند. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا نامش را بشنوید.",
+   "ps": "دا پاڼې مرسته کوي. یوه پاڼه ووهئ چې خلاصه شي، یا یې د سپیکر تڼۍ ووهئ چې نوم یې واورئ.",
+   "en": "These pages can help. Tap a page to open it, or tap its speaker to hear its name."
+  },
+  "ui.allEmergencies": {
+   "fa": "همهٔ حالات عاجل: اینجا را بزنید تا فهرست همهٔ صفحه‌های حالت عاجل را ببینید.",
+   "ps": "ټول بیړني حالات: دلته ووهئ چې د ټولو بیړنیو پاڼو لېست ووینئ.",
+   "en": "All emergencies: tap here to see the list of every emergency page."
+  },
+  "ui.fb.voice": {
+   "fa": "پیام صوتی: دکمۀ سرخ را بزنید و گپ بزنید. وقتی گپ شما تمام شد، دوباره آن را بزنید.",
+   "ps": "غږیز پیغام: سره تڼۍ ووهئ او خبرې وکړئ. کله چې مو خبرې پای ته ورسېدې، بیا یې ووهئ.",
+   "en": "Voice message: tap the red button and speak. Tap it again when you finish."
+  },
+  "ui.fb.write": {
+   "fa": "یا پیام خود را اینجا بنویسید و بعد «فرستادن» را بزنید. لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.",
+   "ps": "یا خپل پیغام دلته ولیکئ، بیا «لېږل» ووهئ. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه لیکئ او مه یې وایئ.",
+   "en": "Or write your message here, then tap Send. Please do not write or say names or phone numbers."
+  },
+  "ui.date": {
+   "fa": "تاریخ: روزی که اندازه گرفته شد. امروز از قبل انتخاب شده است؛ اگر روز دیگری بود، آن را تغییر دهید.",
+   "ps": "نېټه: هغه ورځ چې اندازه شوې. نن ورځ دمخه ټاکل شوې ده؛ که بله ورځ وه، بدله یې کړئ.",
+   "en": "Date: the day it was measured. Today is already chosen; change it if it was another day."
   }
  },
  "months": {

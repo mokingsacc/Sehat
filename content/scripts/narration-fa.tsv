@@ -140,6 +140,23 @@ ui.ageNewborn	نوزاد، همین حالا به دنیا آمده	Newborn, jus
 ui.ageBaby	شیرخوار کمتر از ۱ سال	Baby under 1 year
 ui.ageChild	طفل، از ۱ سال تا بلوغ	Child, 1 year to puberty
 ui.ageAdult	بزرگسال یا نوجوان	Adult or teenager
+ui.nearHospitals	شفاخانه‌ها و قابله‌ها. برای شنیدن نام هر جای، دکمۀ بلندگوی کنار آن را بزنید. برای دیدن راه، «راه» را بزنید.	Hospitals and midwives. Tap the speaker beside a place to hear its name. Tap Directions to see the way.
+ui.nearOther	کلینیک‌ها و داکتران نزدیک.	Nearby clinics and doctors.
+ui.nearIncomplete	این فهرست هنوز کامل نیست. شفاخانه ولایتی ایبک و کلینیک‌های دولتی به‌زودی اضافه می‌شوند.	This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon.
+ui.set.language	زبان: دری، پشتو یا انگلیسی را انتخاب کنید. تمام کتاب به همان زبان می‌شود.	Language: choose Dari, Pashto or English. The whole book changes to that language.
+ui.set.speed	سرعت صدا: اگر صدا خیلی تیز است، «آهسته» را بزنید.	Voice speed: if the voice is too fast, tap Slower.
+ui.set.voices	صداهای کتاب: صدای زن یا صدای مرد را انتخاب کنید. برای شنیدن هر کدام، دکمۀ بلندگوی زیر آن را بزنید.	Voices of the book: choose a woman's voice or a man's voice. Tap the speaker under each one to hear it.
+ui.set.packs	دانلود صداها: صداهای کتاب بخش به بخش در گوشی شما ذخیره می‌شوند تا کتاب بدون انترنت هم گپ بزند. مهم‌ترین بخش اول می‌آید: علایم خطر و کمک‌های اولیه. علامت تیک یعنی آن بخش در گوشی شما است. «پاک کردن صداها» جای گوشی را خالی می‌کند؛ کتاب باز هم کار می‌کند.	Download the voices: the book's voices are saved on your phone part by part, so the book speaks without internet. The most important part comes first: danger signs and first aid. A tick means that part is on your phone. Delete voices frees space on the phone; the book still works.
+ui.set.update	تازه کردن کتاب: وقتی انترنت باشد، کتاب صفحه‌های تازه را خودش می‌گیرد. برای دیدن همین حالا، «بررسی» را بزنید. کتاب بدون انترنت هم کار می‌کند.	Updating the book: when there is internet, the book gets its new pages by itself. Tap Check to look now. The book works without internet.
+ui.set.stats	شمار استفاده: اگر این را روشن کنید، گوشی هر روز مجموع صفحه‌هایی را که باز شده‌اند می‌فرستد. هیچ نام، شمارۀ تلیفون یا جای شما فرستاده نمی‌شود. اگر خاموش باشد، کتاب همان طور کار می‌کند.	Usage counts: if you turn this on, the phone sends daily totals of which pages were opened. No names, no phone numbers and no location are sent. The book works the same if it is off.
+ui.set.privacy	حریم خصوصی: چه چیز فرستاده می‌شود و چه در گوشی شما می‌ماند. برای خواندن یا شنیدن، اینجا را بزنید.	Privacy: what is sent and what stays on your phone. Tap here to read or listen.
+ui.set.studio	ثبت صدا: فقط برای کسی که صداهای کتاب را ثبت می‌کند. شما به آن ضرورت ندارید.	Recording the narration: only for the person who records the book's voices. You do not need it.
+ui.orPick	یا یک تصویر را انتخاب کنید: تصویری را بزنید که مشکل را نشان می‌دهد.	Or pick a picture: tap the picture that shows the problem.
+ui.results	این صفحات کمک می‌کنند. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا نامش را بشنوید.	These pages can help. Tap a page to open it, or tap its speaker to hear its name.
+ui.allEmergencies	همهٔ حالات عاجل: اینجا را بزنید تا فهرست همهٔ صفحه‌های حالت عاجل را ببینید.	All emergencies: tap here to see the list of every emergency page.
+ui.fb.voice	پیام صوتی: دکمۀ سرخ را بزنید و گپ بزنید. وقتی گپ شما تمام شد، دوباره آن را بزنید.	Voice message: tap the red button and speak. Tap it again when you finish.
+ui.fb.write	یا پیام خود را اینجا بنویسید و بعد «فرستادن» را بزنید. لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.	Or write your message here, then tap Send. Please do not write or say names or phone numbers.
+ui.date	تاریخ: روزی که اندازه گرفته شد. امروز از قبل انتخاب شده است؛ اگر روز دیگری بود، آن را تغییر دهید.	Date: the day it was measured. Today is already chosen; change it if it was another day.
 ui.fam.lead	معلومات صحی خانوادهٔ خود را اینجا نگه دارید: واکسین، وزن، دوا و گپ‌های داکتر. یک نفر را بزنید تا معلومات او را ببینید. همه چیز فقط در همین گوشی می‌ماند.	Keep your family's health records here: vaccines, weight, medicines and what the doctor said. Tap a person to see their record. Everything stays on this phone.
 ui.fam.add	یک نفر را اضافه کنید: طفل شیرخوار، طفل، زن یا مرد.	Add a person: a baby, a child, a woman or a man.
 ui.fam.who	این کیست؟ یک عکس را بزنید.	Who is this? Tap a picture.
@@ -351,6 +368,11 @@ ui.num.cm	سانتی‌متر	centimetres
 ui.num.days	روز	days
 ui.num.mb	میگابایت	megabytes
 ui.num.kb	کیلوبایت	kilobytes
+ui.fam.no-meds	هنوز دوا ثبت نشده است.	No medicines yet.
+ui.fam.no-notes	هنوز یادداشتی نیست.	No notes yet.
+ui.fam.no-readings	هنوز اندازه‌ای ثبت نشده است.	No readings saved yet.
+ui.fam.no-weights	هنوز وزن نوشته نشده است.	No weight written yet.
+ui.fam.weights	وزن‌هایی که نوشته‌اید؛ تازه‌ترین در اول.	The weights you wrote, newest first.
 ui.growth	هر بار که طفل را اندازه می‌کنید، وزن و قد او را اینجا بنویسید. برنامه نشان می‌دهد که طفل خوب رشد می‌کند یا نه، و چه وقت به کلینیک بروید. این معلومات فقط در همین گوشی می‌ماند.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
 ui.gr.add	تاریخ، وزن به کیلو و قد به سانتی‌متر را بنویسید. اگر فقط یکی از آن‌ها را دارید، مشکلی نیست.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
 ui.gr.pos	طفل کمتر از ۲ سال را خوابیده اندازه کنید. از ۲ سالگی به بعد، ایستاده اندازه کنید. بگویید چطور اندازه کردید.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.
@@ -391,6 +413,10 @@ ui.gr.m.length2	نفر دوم پاهای طفل را آرام راست کند و
 ui.gr.m.height	قد، از ۲ سالگی: بوت و کلاه را بکشید. طفل راست بایستد، طوری که پاشنه‌ها و پشتش به دیوار بچسپد و به پیش رو ببیند. یک کتاب را صاف روی سرش به دیوار بگذارید، زیر کتاب روی دیوار نشانی کنید و از زمین تا نشانی را اندازه کنید.	Height, from 2 years: take off shoes and hats. The child stands straight with heels and back against a wall, looking ahead. Put a book flat on the head against the wall, mark the wall under it, and measure from the floor to the mark.
 ui.gr.m.muac	فیتهٔ بازو، از ۶ ماهگی: وسط بازوی چپ را پیدا کنید، فیته را آرام بپیچانید، نه سخت، و رنگ را در کلکین فیته ببینید.	Arm tape, from 6 months: find the middle of the left upper arm, wrap the tape gently, not tight, and read the colour in the window.
 ui.gr.m.exact	عددهای خانه دقیق نیستند. اگر نتیجه شما را نگران می‌کند، کلینیک دوباره اندازه می‌کند.	Numbers from home are not exact. If a result worries you, the clinic will measure again.
+ui.gr.new	اندازهٔ تازه: اینجا را بزنید تا وزن و قد طفل خود را بنویسید.	Add a measurement: tap here to write your child's weight and length.
+ui.gr.list	اندازه‌های طفل شما؛ تازه‌ترین در اول. یکی را بزنید تا معنای آن را بشنوید.	Your child's measurements, newest first. Tap one to hear what it means.
+ui.gr.none	هنوز اندازه‌ای ثبت نشده است.	No measurements yet.
+ui.gr.no-kids	هنوز طفلی ثبت نشده است. اول طفل خود را اضافه کنید، بعد می‌توانید وزن و قد او را بنویسید.	No children added yet. Add your child first, then you can write their weight and length.
 ui.share-app	صحت را با خانواده و دوستان شریک کنید. آن را از گوشی به گوشی بفرستید، حتی بدون انترنت.	Share Sehat with family and friends. Send it from phone to phone, even without internet.
 ui.share-web	صحت را با خانواده و دوستان شریک کنید. لینک را برایشان بفرستید، یا بگذارید با کمرهٔ گوشی باز کنند.	Share Sehat with family and friends. Send them the link, or let them open it with the phone camera.
 ui.sh.nearby	«گوشی‌های نزدیک» را بزنید. یک فهرست باز می‌شود: Quick Share یا بلوتوث را انتخاب کنید، گوشی‌های نزدیک خودشان پیدا می‌شوند. بلوتوث گوشی دیگر باید روشن باشد.	Tap Nearby phones. A list opens: choose Quick Share or Bluetooth, and the phones near you appear by themselves. The other phone must have Bluetooth on.
@@ -422,6 +448,46 @@ ui.syn.tb	سرفه ۲ هفته یا بیشتر.	A cough for 2 weeks or more.
 ui.syn.jaundice	چشم یا پوست تازه زرد شده است (نه نوزاد).	Eyes or skin have recently turned yellow (not a newborn baby).
 ui.syn.meningitis	تب همراه با شخی گردن.	Fever with a stiff neck.
 ui.syn.leishmaniasis	زخم پوست که بعد از دو هفته جور نشده است.	A skin sore that has not healed after two weeks.
+ui.fac.ruyi-du-ab-hospital	شفاخانه ولسوالی دوآب، احتمالاً. شفاخانۀ ولسوالی.	Hospital at Ruyi Du Ab district centre, probably Do-Ab District Hospital. District hospital.
+ui.fac.aybak-private-hospital	شفاخانه شخصی. شفاخانۀ خصوصی.	Private hospital, Aybak. Private hospital.
+ui.fac.aybak-arian-hospital	شفاخانه آرین. شفاخانۀ خصوصی.	Arian Hospital. Private hospital.
+ui.fac.aybak-faiz-clinic	کلینیک فیض. مرکز صحی.	Faiz Clinic. Health centre.
+ui.fac.aybak-alshifa-clinic	کلینیک معالجوی الشفا. مرکز صحی.	Al-Shifa Treatment Clinic. Health centre.
+ui.fac.aybak-dr-ahmadshah-same	دوکتور احمدشاه سامع. مرکز صحی.	Dr Ahmad Shah Same, private doctor. Health centre.
+ui.fac.aybak-dr-mohammad-azam-sahak	داکتر محمد اعظم سهاک. مرکز صحی.	Dr Mohammad Azam Sahak, private doctor. Health centre.
+ui.fac.aybak-dr-jamaluddin-qarin	الحاج دوکتور جمال‌الدین قرین. مرکز صحی.	Alhaj Dr Jamaluddin Qarin, private doctor. Health centre.
+ui.fac.aybak-dr-fateh-mohammad	دوکتور فتح محمد. مرکز صحی.	Dr Fateh Mohammad, private doctor. Health centre.
+ui.fac.aybak-dr-serajuddin-nazari	دوکتور سراج‌الدین نظری. مرکز صحی.	Dr Serajuddin Nazari, private doctor. Health centre.
+ui.fac.aybak-dr-mohammadullah-moradi	دوکتور محمدالله مرادی. مرکز صحی.	Dr Mohammadullah Moradi, private doctor. Health centre.
+ui.fac.aybak-dr-bazgul-jahangir	داکتر بازگل جهانگیر. مرکز صحی.	Dr Bazgul Jahangir, private doctor. Health centre.
+ui.fac.aybak-midwife-1	قابله دیپلومه. زایشگاه.	Diploma midwife, private. Maternity.
+ui.fac.aybak-midwife-parwin	قابله دیپلومه پروین. زایشگاه.	Diploma midwife Parwin, private. Maternity.
+ui.fac.aybak-ultrasound-forotan-rahimi	کلینیک تشخیصیه التراسوند فروتن رحیمی. مرکز صحی.	Forotan Rahimi Ultrasound Diagnostic Clinic. Health centre.
+ui.fac.aybak-fawad-digital-xray	فواد دیجیتال اکسری. مرکز صحی.	Fawad Digital X-ray. Health centre.
+ui.fac.aybak-hamkar-xray	اکسری همکار. مرکز صحی.	Hamkar X-ray. Health centre.
+ui.fac.aybak-medical-laboratory	لابراتوار طبی. مرکز صحی.	Medical laboratory. Health centre.
+ui.fac.aybak-physiotherapy-centre	مرکز فزیوتراپی. مرکز صحی.	Physiotherapy centre. Health centre.
+ui.fac.aybak-alshifa-eye-centre	مرکز صحی چشم الشفا. مرکز صحی.	Al-Shifa Eye Health Centre. Health centre.
+ui.fac.aybak-dental-1	کلینیک دندان. مرکز صحی.	Dental clinic. Health centre.
+ui.fac.aybak-dental-2	کلینیک دندان. مرکز صحی.	Dental clinic. Health centre.
+ui.fac.aybak-dental-nouri	کلینیک دندان نوری. مرکز صحی.	Nouri Dental Clinic. Health centre.
+ui.fac.aybak-dental-almakka	کلینیک دندان المکه. مرکز صحی.	Al-Makka Dental Clinic. Health centre.
+ui.fac.aybak-dental-jalalabad	کلینیک دندان جلال‌آباد. مرکز صحی.	Jalalabad Dental Clinic. Health centre.
+ui.fac.aybak-dental-maiwand	کلینیک دندان میوند. مرکز صحی.	Maiwand Dental Clinic. Health centre.
+ui.fac.aybak-dental-insaf	کلینیک دندان انصاف. مرکز صحی.	Insaf Dental Clinic. Health centre.
+ui.fac.aybak-dental-labkhand-zeba	کلینیک دندان لبخند زیبا. مرکز صحی.	Labkhand-e Zeba Dental Clinic. Health centre.
+ui.fac.mazar-regional-hospital	شفاخانه حوزوی بلخ، مزارشریف. شفاخانۀ ولایتی.	Balkh Regional Hospital, Mazar-i-Sharif, main referral hospital. Provincial hospital.
+ui.fac.balkh-district-hospital	شفاخانه ولسوالی بلخ. شفاخانۀ ولسوالی.	Balkh District Hospital. District hospital.
+ui.fac.mazar-kesha-farabi-hospital	شفاخانه کیشا فارابی. شفاخانۀ خصوصی.	Kesha Farabi Hospital, private. Private hospital.
+ui.fac.mazar-aamoon-eye-centre	مرکز چشم آمون. مرکز صحی.	Aamoon Ophthalmic Center. Health centre.
+ui.fac.mazar-parween-midwife-clinic	کلینیک قابله پروین. زایشگاه.	Parween Midwife Clinic. Maternity.
+ui.fac.mazar-noor-khuda-clinic	کلینیک نورخدا. مرکز صحی.	Noor Khuda Clinic. Health centre.
+ui.fac.mazar-razavie-pharmacy	دواخانه رضوی. دواخانه.	Razavie Pharmacy. Pharmacy.
+ui.fac.pul-e-khumri-hospital	شفاخانه پلخمری. شفاخانۀ ولایتی.	Pul-e-Khumri Hospital, Baghlan provincial hospital, probable. Provincial hospital.
+ui.fac.pul-e-khumri-nasaji-hospital	شفاخانه نساجی و پوهنتون حکیم سنایی. مرکز صحی.	Nasaji and Hakim Sanai University Hospital. Health centre.
+ui.fac.baghlan-jadid-district-hospital	شفاخانه ولسوالی مرکزی بغلان. شفاخانۀ ولسوالی.	Central District Hospital, Baghlan-e-Jadid. District hospital.
+ui.fac.bamyan-hospital	شفاخانه بامیان. شفاخانۀ ولایتی.	Bamyan Hospital. Provincial hospital.
+ui.fac.bamyan-old-hospital	شفاخانه قدیم بامیان. مرکز صحی.	Old Bamyan Hospital. Health centre.
 vaccines.title	واکسین‌ها	Vaccines
 vaccines.lead	واکسین طفل شما را از مرض‌های خطرناک محافظت می‌کند. طفل شما تا ۲ سالگی ۶ بار باید برای واکسین برود.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	هنگام ولادت: واکسین بی سی جی، برای توبرکلوز (سل)؛ قطرهٔ پولیو، برای فلج اطفال (پولیو)؛ واکسین هپاتیت ب، برای هپاتیت ب، که یک مرض جگر است.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.

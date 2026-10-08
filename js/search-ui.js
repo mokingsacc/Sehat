@@ -18,7 +18,7 @@ export function initFinder(ctx) {
     switch (key) {
       case 'emergency': return [icon('warn'), T('emergency'), T('emergencySub'), 'ui.emergency'];
       case 'kit': return [kit ? img(kit.image) : icon('card'), T('kit'), T('kitSub'), 'ui.kit'];
-      case 'near': return [icon('hospital'), T('near'), T('nearSub'), 'ui.near'];
+      case 'near': return [img('img/pics/row-near.svg'), T('near'), T('nearSub'), 'ui.near'];
       case 'family': return [icon('card'), T('myFamily'), '', 'ui.family'];
       case 'children': return [img('img/app/home-children.svg'), T('children'), '', 'ui.children'];
       case 'adults': return [img('img/app/home-adults.svg'), T('adults'), '', 'ui.adults'];
@@ -43,6 +43,8 @@ export function initFinder(ctx) {
     return `<div class="rcard${r.danger ? ' danger' : ''}${adult ? ' adult' : ''}"><a href="${esc(r.route)}" class="rimg">${pic}</a>` +
       `<a href="${esc(r.route)}" class="rt">${badge}<b>${esc(title)}</b>${line ? `<span>${esc(cut(line, 140))}</span>` : ''}</a>${spk(sayId)}</div>`;
   }
+  // "These pages can help", with its speaker (as the group headings in the lists)
+  const head = () => (S.book.narration['ui.results'] ? `<div class="group-h sayh" data-block="ui.results"><h2 class="t">${esc(T('results'))}</h2>${spk('ui.results')}</div>` : `<h2 class="sub-h">${esc(T('results'))}</h2>`);
   // nothing matched: never a blank screen. The "see a health worker" line, then the ways in: Emergency, Children,
   // Adults and the nearest clinic.
   function none() {
@@ -58,7 +60,7 @@ export function initFinder(ctx) {
     let res = [];
     try { res = engine().rank(q, S.lang, { limit: 5 }); } catch (e) { console.warn('search', e); }
     const html = res.map(card).join('');
-    return html ? `<h2 class="sub-h">${esc(T('results'))}</h2>${html}` : live && n < 5 ? '' : none();
+    return html ? head() + html : live && n < 5 ? '' : none();
   }
   /** Put result html into el while typing: cards that stay the same keep their element (no picture reload). */
   function show(el, html) {
