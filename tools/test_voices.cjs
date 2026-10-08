@@ -149,7 +149,8 @@ async function go(p, base, hash) { await p.goto(base + 'index.html' + hash); awa
     await p.addInitScript(() => { Object.defineProperty(navigator, 'connection', { configurable: true, value: { type: 'cellular', effectiveType: '4g', saveData: false, addEventListener() {} } }); });
     await p.addInitScript(hooks, ['fa', 'm', CV, true]);
     await go(p, BASE, '#/settings');
-    const firstN = book.packs.first.length, first = new Set(book.packs.first);
+    // (only the lines that have a clip in this voice: new lines wait for the voices thread)
+    const first = new Set(book.packs.first.filter((id) => (book.audio['fa-m'] || {})[id])), firstN = first.size;
     await p.waitForFunction((n) => window.__fetched.length >= n, firstN, { timeout: 60000 }).catch(() => {});
     await p.waitForTimeout(1500);
     const got = await p.evaluate(() => window.__fetched.slice()), n = got.length;

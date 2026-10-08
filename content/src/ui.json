@@ -491,6 +491,21 @@
    "ps": "هېڅ ونه موندل شو. یو انځور وټاکئ یا کلینیک ته ولاړ شئ.",
    "en": "Nothing found. Pick a picture, or go to the clinic."
   },
+  "forChild": {
+   "fa": "برای طفل",
+   "ps": "د ماشوم لپاره",
+   "en": "For a child"
+  },
+  "forAdult": {
+   "fa": "برای بزرگسال",
+   "ps": "د لوی کس لپاره",
+   "en": "For an adult"
+  },
+  "forPregnant": {
+   "fa": "زن حامله",
+   "ps": "امیندواره ښځه",
+   "en": "Pregnant woman"
+  },
   "listening": {
    "fa": "گوش می‌دهم… حالا بگویید",
    "ps": "اورم… اوس ووایئ",
@@ -2004,9 +2019,19 @@
    "en": "Or pick a picture: tap the picture that shows the problem."
   },
   "ui.results": {
-   "fa": "این صفحات کمک می‌کنند. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا نامش را بشنوید.",
-   "ps": "دا پاڼې مرسته کوي. یوه پاڼه ووهئ چې خلاصه شي، یا یې د سپیکر تڼۍ ووهئ چې نوم یې واورئ.",
-   "en": "These pages can help. Tap a page to open it, or tap its speaker to hear its name."
+   "fa": "این صفحات کمک می‌کنند. صفحه‌های سرخ را اول ببینید. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا بشنوید دربارهٔ چه است.",
+   "ps": "دا پاڼې مرسته کوي. لومړی سرې پاڼې وګورئ. یوه پاڼه ووهئ چې خلاصه شي، یا یې د سپیکر تڼۍ ووهئ چې واورئ د څه په اړه ده.",
+   "en": "These pages can help. Look at the red pages first. Tap a page to open it, or tap its speaker to hear what it is about."
+  },
+  "ui.forChild": {
+   "fa": "برای طفل",
+   "ps": "د ماشوم لپاره",
+   "en": "For a child"
+  },
+  "ui.forAdult": {
+   "fa": "برای بزرگسال",
+   "ps": "د لوی کس لپاره",
+   "en": "For an adult"
   },
   "ui.allEmergencies": {
    "fa": "همهٔ حالات عاجل: اینجا را بزنید تا فهرست همهٔ صفحه‌های حالت عاجل را ببینید.",

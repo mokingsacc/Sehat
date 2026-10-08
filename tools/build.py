@@ -34,7 +34,10 @@ for f in sorted(glob.glob(J("content/src/topics/*.json"))):
     except Exception as e:
         print("SKIP (invalid JSON)", os.path.basename(f), e); continue
     topics[t["id"]] = t
-symptoms = load(J("content/src/symptoms.json"))["symptoms"] if os.path.exists(J("content/src/symptoms.json")) else []
+symptoms_src = load(J("content/src/symptoms.json")) if os.path.exists(J("content/src/symptoms.json")) else {}
+symptoms = symptoms_src.get("symptoms") or []
+# the pages that are for one age group only ("child", "adult", "pregnant"): the finder labels them when a tile's pages mix groups
+symptom_ages = {tid: grp for grp, ids in (symptoms_src.get("ages") or {}).items() for tid in ids}
 facilities = load(J("content/src/facilities.json")) if os.path.exists(J("content/src/facilities.json")) else {"facilities": []}
 vaccines = load(J("content/src/vaccines.json")) if os.path.exists(J("content/src/vaccines.json")) else None
 # disease watch: syndromes (case definitions, alert rules) and the places people choose
@@ -101,6 +104,8 @@ for tid, t in topics.items():
     t = dict(t)
     t["image"] = topic_image(tid, t.get("section"))
     say(f"{tid}.title", t["title"])
+    # the one-line summary: the finder's result cards read the title, then this line
+    if t.get("summary"): say(f"{tid}.summary", t["summary"])
     for b in t["blocks"]:
         if b.get("icon"): b["icon"] = icon(b["icon"])
         ty = b["type"]
@@ -127,6 +132,7 @@ if vaccines:
     v = dict(vaccines)
     v["image"] = topic_image("vaccines", "children")
     say("vaccines.title", v["title"])
+    if v.get("summary"): say("vaccines.summary", v["summary"])
     say(v["lead"]["id"], v["lead"]["text"])
     for vis in v["visits"]:
         parts = {lg: [] for lg in LANGS}
@@ -200,6 +206,9 @@ book = {
     "narration": narr,
     "audio": audio,
     "symptoms": book_symptoms,
+    # the finder: the danger-sign pages (marked red, first) and the pages for one age group only
+    "finder": {"danger": [t for t in symptoms_src.get("danger") or [] if t in out_topics],
+               "ages": {k: v for k, v in symptom_ages.items() if k in out_topics}},
     "facilities": facilities,
     # animations the player can open (anim/<name>.js), the groups with a picker (cpr) and each one's narration ids;
     # the dashboard editor uses this to check "anim" blocks and to rebuild the recording order like this script does

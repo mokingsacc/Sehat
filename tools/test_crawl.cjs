@@ -15,6 +15,8 @@
 //   - every in-app link opens a real page (not the Health tab fallback), "What does my reading mean?" on each
 //     home kit page opens that device's Health page, and Home pages have no danger or clinic boxes (Mo's rule);
 //   - every picture loads;
+//   - each "What is wrong?" picture: no Home-tab page, its danger pages first and in red (and only those), a speaker on
+//     every card; typed words that are not about a device show no home health kit page;
 //   - the red Emergency button is in the header except on the Health tab and in the emergency flow.
 // Needs Playwright with Chromium:  node tools/test_crawl.cjs [screenshot folder]
 // LANGS=fa,en WIDTHS=320 to run part of it; VERBOSE=1 lists every problem in every language and width.
@@ -35,6 +37,8 @@ const server = http.createServer((q, r) => { // the app folder, as a phone gets 
 
 // which lists are on the Home side (no medical advice there), and which kit page should open which reading page
 const HOUSE = new Set(Object.entries(book.config.lists).filter(([, c]) => c.tab === 'house').flatMap(([n]) => book.sections[n] || []));
+// the symptom finder's danger pages for a picture (red, first): the danger-sign pages, the Emergency section, its own "red"
+const TILE_RED = (id) => { const s = (book.symptoms || []).find((x) => x.id === id) || {}; const em = new Set(book.sections.emergency || []), ds = new Set((book.finder || {}).danger || []); return new Set((s.go || []).filter((t) => ds.has(t) || em.has(t) || (s.red || []).includes(t))); };
 const KIT_READING = { 'kit-bp': 'reading-bp', 'kit-thermometer': 'reading-temp', 'kit-glucometer': 'reading-sugar', 'kit-oximeter': 'reading-spo2', 'kit-muac': 'reading-muac' };
 const READING_DEV = { 'reading-bp': 'bp', 'reading-temp': 'temp', 'reading-sugar': 'sugar', 'reading-spo2': 'spo2', 'reading-muac': 'muac' };
 
@@ -242,7 +246,26 @@ function measure(MIN) {
     }
     // the symptom buttons under the search
     await go('#/ask'); const syms = await p.$$eval('.sym', (x) => x.length);
-    for (let i = 0; i < syms; i++) { await go('#/ask'); const s = await p.$$('.sym'); await s[i].click(); await settle(); const res = await p.$$eval('#askres a[href^="#/"]', (x) => x.length); if (!res) prob('search', `#/ask symptom ${i + 1}`, 'no results', run); }
+    for (let i = 0; i < syms; i++) {
+      await go('#/ask'); const s = await p.$$('.sym'); await s[i].click(); await settle();
+      const tag = `#/ask symptom ${i + 1}`;
+      const got = await p.$$eval('#askres .rcard', (x) => x.map((c) => ({ href: c.querySelector('a.rt').getAttribute('href'), red: c.classList.contains('danger'), spk: !!c.querySelector('.spk') })));
+      if (!got.length) { prob('search', tag, 'no results', run); continue; }
+      // Mo's rule: no page from the Home tab; the danger pages first, in red, so the first card is the danger page
+      const sym = await p.evaluate((n) => document.querySelectorAll('.sym')[n].dataset.sym, i);
+      const tids = got.map((g) => (/^#\/topic\/([\w-]+)/.exec(g.href) || [])[1]);
+      for (const t of tids) if (HOUSE.has(t)) prob('search', `${tag} (${sym})`, `shows the Home-tab page ${t}`, run);
+      const want = TILE_RED(sym);
+      got.forEach((g, j) => { if (g.red !== want.has(tids[j])) prob('search', `${tag} (${sym})`, `${tids[j]} ${want.has(tids[j]) ? 'is a danger page but not red' : 'is red but not a danger page'}`, run); });
+      if (want.size && !want.has(tids[0])) prob('search', `${tag} (${sym})`, `the first card is ${tids[0]}, not its danger page`, run);
+      if (got.some((g) => !g.spk)) prob('search', `${tag} (${sym})`, 'a result card has no speaker', run);
+    }
+    // typed words that are not about a device show no home health kit page (Home tab)
+    for (const q of { fa: ['طفلم سرفه و تب دارد'], ps: ['ماشوم مې ټوخی او تبه لري'], en: ['my child has a cough and fever'] }[lang]) {
+      await go('#/ask'); await p.fill('#askq', q); await p.press('#askq', 'Enter'); await settle();
+      const hrefs = await p.$$eval('#askres a.rt', (x) => x.map((a) => a.getAttribute('href')));
+      if (hrefs.some((h) => /^#\/(topic\/kit-|s\/kit)/.test(h))) prob('search', `#/ask "${q}"`, 'shows a home health kit page', run);
+    }
 
     // 4. Family: a voice note with no one in the family yet: one tap records, Stop keeps it as a family voice note
     const famNotes = () => p.evaluate(() => JSON.parse(localStorage.getItem('fhb.famnotes') || '[]').length);

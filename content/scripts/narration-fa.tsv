@@ -150,7 +150,9 @@ ui.set.stats	شمار استفاده: وقتی این روشن است، گوشی
 ui.set.privacy	حریم خصوصی: چه چیز فرستاده می‌شود و چه در گوشی شما می‌ماند. برای خواندن یا شنیدن، اینجا را بزنید.	Privacy: what is sent and what stays on your phone. Tap here to read or listen.
 ui.set.studio	ثبت صدا: فقط برای کسی که صداهای کتاب را ثبت می‌کند. شما به آن ضرورت ندارید.	Recording the narration: only for the person who records the book's voices. You do not need it.
 ui.orPick	یا یک تصویر را انتخاب کنید: تصویری را بزنید که مشکل را نشان می‌دهد.	Or pick a picture: tap the picture that shows the problem.
-ui.results	این صفحات کمک می‌کنند. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا نامش را بشنوید.	These pages can help. Tap a page to open it, or tap its speaker to hear its name.
+ui.results	این صفحات کمک می‌کنند. صفحه‌های سرخ را اول ببینید. یک صفحه را بزنید تا باز شود، یا بلندگوی آن را بزنید تا بشنوید دربارهٔ چه است.	These pages can help. Look at the red pages first. Tap a page to open it, or tap its speaker to hear what it is about.
+ui.forChild	برای طفل	For a child
+ui.forAdult	برای بزرگسال	For an adult
 ui.allEmergencies	همهٔ حالات عاجل: اینجا را بزنید تا فهرست همهٔ صفحه‌های حالت عاجل را ببینید.	All emergencies: tap here to see the list of every emergency page.
 ui.fb.voice	پیام صوتی: دکمۀ سرخ را بزنید و گپ بزنید. وقتی گپ شما تمام شد، دوباره آن را بزنید.	Voice message: tap the red button and speak. Tap it again when you finish.
 ui.fb.write	یا پیام خود را اینجا بنویسید و بعد «فرستادن» را بزنید. لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.	Or write your message here, then tap Send. Please do not write or say names or phone numbers.
@@ -498,7 +500,7 @@ ui.sym.cough	سرفه	Cough
 ui.sym.breathing	نفس تنگی	Breathing problems
 ui.sym.diarrhoea	اسهال	Diarrhoea
 ui.sym.vomiting	استفراغ	Vomiting
-ui.sym.rash	دانه پوست	Rash or spots
+ui.sym.rash	دانه یا لکه روی پوست	Rash or spots
 ui.sym.sore	زخم و سالک	Sores and wounds
 ui.sym.pregnancy	حاملگی	Pregnancy
 ui.sym.bleeding	خونریزی	Bleeding
@@ -511,18 +513,19 @@ ui.sym.bite	گزیدگی سگ	Dog bite
 ui.sym.poison	زهر	Poisoning
 ui.sym.newborn	نوزاد	Newborn baby
 ui.sym.feeding	شیر و غذا	Feeding
-ui.sym.thin	لاغری	Thin or not growing
+ui.sym.thin	لاغری یا رشد نکردن	Thin or not growing
 ui.sym.yellow	زردی	Yellow skin or eyes
-ui.sym.tired	خستگی و کم‌خونی	Tired or pale
+ui.sym.tired	خستگی یا رنگ‌پریدگی	Tired or pale
 ui.sym.pressure	فشار خون	Blood pressure
 ui.sym.mind	غم و پریشانی	Sadness and worry
-ui.sym.longcough	سرفۀ طولانی	Long cough or TB
+ui.sym.longcough	سرفۀ طولانی یا توبرکلوز	Long cough or TB
 ui.sym.animals	حیوانات و کنه	Animals and ticks
 ui.sym.disaster	زلزله و سیلاب	Earthquake and flood
 ui.sym.vaccine	واکسین	Vaccines
 ui.sym.choking	گیر کردن در گلو	Choking
 ui.sym.safety	حوادث اطفال	Child accidents
 vaccines.title	واکسین‌ها	Vaccines
+vaccines.summary	واکسین‌های رایگان، طفل شما را از مرض‌های خطرناک محافظت می‌کنند.	Free vaccines protect your child from serious diseases.
 vaccines.lead	واکسین طفل شما را از مرض‌های خطرناک محافظت می‌کند. طفل شما تا ۲ سالگی ۶ بار باید برای واکسین برود.	Vaccines protect your child from serious diseases. Your child needs 6 vaccine visits before 2 years of age.
 vaccines.birth	هنگام ولادت: واکسین بی سی جی، برای توبرکلوز (سل)؛ قطرهٔ پولیو، برای فلج اطفال (پولیو)؛ واکسین هپاتیت ب، برای هپاتیت ب، که یک مرض جگر است.	At birth: BCG, against tuberculosis (TB); Polio drops, against polio; Hepatitis B vaccine, against hepatitis B, a liver disease.
 vaccines.6w	۶ هفتگی: واکسین پنتاوالان ۱، برای خناق، سیاه‌سرفه، تیتانوس، هپاتیت ب، و میکروب هیب که سینه‌بغل و مننژیت می‌آورد؛ قطرهٔ پولیو ۱، برای فلج اطفال (پولیو)؛ واکسین نوموکوک ۱، برای سینه‌بغل؛ قطرهٔ روتا ویروس ۱، برای اسهال شدید.	6 weeks: Pentavalent 1, against diphtheria, whooping cough, tetanus, hepatitis B, and Hib, a germ that causes pneumonia and meningitis; Polio drops 1, against polio; PCV 1 (pneumococcal), against pneumonia; Rotavirus drops 1, against severe diarrhoea.
@@ -552,6 +555,7 @@ anim.herd.s3	وقتی بیشتر مردم واکسین شده باشند، سر�
 anim.herd.s4	این کار کسانی را هم محافظت می‌کند که واکسین گرفته نمی‌توانند: نوزادانی که هنوز خیلی کوچک هستند، و بعضی کسانی که بسیار مریض هستند.	This also protects people who cannot have the vaccine: babies who are too young, and some people who are very sick.
 anim.herd.s5	هر طفل دو واکسین سرخکان لازم دارد، در ۹ ماهگی و ۱۸ ماهگی. هر طفلی که واکسین می‌شود، به محافظت تمام قریه کمک می‌کند.	Every child needs two measles vaccines, at 9 months and at 18 months. Each vaccinated child helps protect the whole village.
 danger-child.title	علایم خطر در اطفال	Danger signs in children
+danger-child.summary	علایمی را بشناسید که باید فوراً به شفاخانه بروید.	Know the signs that mean go to hospital now.
 danger-child.lead	طفل مریض می‌تواند خیلی زود بدتر شود. اگر یکی از این علایم را دیدید، منتظر نمانید و همین حالا به شفاخانه بروید، شب باشد یا روز.	A sick child can get worse very fast. If you see any of these signs, do not wait: go to hospital now, day or night.
 danger-child.urgent	اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	If your child has any of these signs, go to hospital now, day or night:
 danger-child.urgent.drink	نمی‌تواند چیزی بنوشد یا شیر مادر بخورد	cannot drink or breastfeed
@@ -620,6 +624,7 @@ danger-child.card	کارت طفل را ببرید. کارت صحی طفل و ه�
 danger-child.clinic	در کلینیک: اگر شفاخانه دور است. اگر شفاخانه دور است، در راه به نزدیک‌ترین کلینیک یا کارمند صحی بروید. آن‌ها دوای اول و اگر داشته باشند اکسیجن می‌دهند، و در پیدا کردن موتر کمک می‌کنند.	At the clinic: when hospital is far. If the hospital is far, go to the nearest clinic or health worker on the way. They give the first medicine and oxygen if they have it, and help arrange transport.
 danger-child.hospital	در شفاخانه: کمک عاجل برای طفل. طفلی که علامت خطر دارد فوراً دیده می‌شود. شفاخانه اکسیجن، سیروم، انتی‌بیوتیک پیچکاری، شکر اگر کم باشد، و دوای بند کردن تشنج می‌دهد. دقیقه‌ها مهم‌اند.	At the hospital: fast help for children. A child with a danger sign is seen at once. The hospital gives oxygen, fluids by drip, antibiotics by injection, sugar if low, and medicine to stop fits. Minutes matter.
 cpr-newborn.title	نوزادی که بعد از ولادت نفس نمی‌کشد	Newborn not breathing at birth
+cpr-newborn.summary	در دقیقهٔ اول: خشک کنید، مالش دهید، گرم نگه دارید، بعد نفس بدهید.	In the first minute: dry, rub, keep warm, then give breaths.
 cpr-newborn.lead	بیشتر نوزادان زود بعد از ولادت گریه می‌کنند و نفس می‌کشند. اگر نوزاد این کار را نکرد، دقیقهٔ اول از همه مهم‌تر است. فوراً عمل کنید.	Most babies cry and breathe soon after birth. If a baby does not, the first minute matters most. Act at once.
 cpr-newborn.dry	نوزاد را فوراً خشک کنید. تمام بدن و سر را با یک تکهٔ گرم و پاک خشک کنید. تکهٔ تر را دور کنید و نوزاد را در تکهٔ خشک بپیچانید.	Dry the baby at once. Dry the whole body and head with a warm, clean cloth. Throw away the wet cloth and wrap the baby in a dry one.
 cpr-newborn.rub	پشتش را مالش دهید. وقت خشک کردن، پشتش را ۲ یا ۳ بار محکم بالا و پایین مالش دهید. دهان و بینی‌اش را با تکهٔ پاک پاک کنید.	Rub the back. While drying, rub the back firmly up and down 2 or 3 times. Wipe the mouth and nose with a clean cloth.
@@ -652,6 +657,7 @@ anim.cpr-newborn.s5	اگر نه، دهان خود را روی دهان و بین
 anim.cpr-newborn.s6	اگر تنها هستید، اول بلند کمک بخواهید. ۱ دقیقه پف کنید. بعد نوزاد را گرم بپیچانید و با خود ببرید تا کمک پیدا کنید.	If you are alone, first shout loudly for help. Give puffs for 1 minute. Then wrap the baby warmly and carry it with you to get help.
 anim.cpr-newborn.s7	تا وقتی که نوزاد نفس بکشد یا گریه کند، یا کمک برسد، پف کردن را ادامه دهید. بعد نوزاد را برهنه روی سینهٔ مادر بگذارید، رویش را بپوشانید و گرم نگه دارید و به شفاخانه بروید.	Keep giving puffs until the baby breathes or cries, or help arrives. Then lay the baby skin to skin on the mother's chest, covered and warm, and go to hospital.
 cpr-baby.title	شیرخواری که نفس نمی‌کشد	Baby not breathing (under 1)
+cpr-baby.summary	کمتر از ۱ سال: اول ۵ بار نفس، بعد با دو شست سینه را فشار دهید.	Under 1 year: 5 breaths first, then push with two thumbs.
 cpr-baby.lead	اگر شیرخوار بیدار نمی‌شود و عادی نفس نمی‌کشد، همین حالا شروع کنید. نفس دادن و فشار دادن شما، مغز را تا رسیدن کمک زنده نگه می‌دارد.	If a baby does not wake and is not breathing normally, start at once. Your breaths and pushes keep the brain alive until help comes.
 cpr-baby.check	بیدارش کنید و کمک بخواهید. به کف پایش آهسته بزنید و نامش را صدا کنید. اگر جواب نداد، بلند کمک بخواهید و یک نفر را برای آوردن موتر بفرستید.	Check and shout for help. Tap the soles of the feet and call the baby's name. If there is no answer, shout for help and send someone for a car.
 cpr-baby.airway	راه نفس را باز کنید. شیرخوار را به پشت روی زمین سخت بخوابانید. سرش را راست نگه دارید، زیاد به عقب نبرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.	Open the airway, look for breathing. Lay the baby on its back on a firm floor. Keep the head straight, not bent back, lift the chin, and watch the chest for 10 seconds.
@@ -677,6 +683,7 @@ anim.cpr-baby.s5	دست‌هایتان را دور سینهٔ شیرخوار ب�
 anim.cpr-baby.s6	بعد ۲ نفس بدهید و باز ۳۰ بار فشار دهید. ادامه دهید تا شیرخوار عادی نفس بکشد یا کمک برسد.	Then give 2 breaths and 30 pushes again. Keep going until the baby breathes normally or help arrives.
 anim.cpr-baby.s7	اگر تنها هستید، اول بلند کمک بخواهید. بعد ۱ دقیقه نفس بدهید و سینه را فشار دهید. بعد شیرخوار را با خود بگیرید و برای آوردن کمک بروید.	If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute. Then carry the baby with you to get help.
 cpr-child.title	طفل بالای ۱ سال که نفس نمی‌کشد	Child over 1 not breathing
+cpr-child.summary	از ۱ سال تا بالغ شدن: اول ۵ بار نفس، بعد سینه را فشار دهید.	From 1 year to puberty: 5 breaths first, then chest pushes.
 cpr-child.lead	اگر طفل بیدار نمی‌شود و عادی نفس نمی‌کشد، همین حالا شروع کنید. در اطفال اکثراً اول نفس بند می‌شود، پس اول نفس بدهید.	If a child does not wake and is not breathing normally, start at once. In children breathing usually stops first, so give breaths first.
 cpr-child.check	بیدارش کنید و کمک بخواهید. به شانه‌هایش بزنید و نامش را بلند صدا کنید. اگر جواب نداد، بلند کمک بخواهید و یک نفر را برای آوردن موتر بفرستید.	Check and shout for help. Tap the shoulders and call the child's name loudly. If there is no answer, shout for help and send someone for a car.
 cpr-child.airway	راه نفس را باز کنید. طفل را به پشت روی زمین سخت بخوابانید. سرش را کمی به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.	Open the airway, look for breathing. Lay the child on its back on firm ground. Tilt the head back a little, lift the chin, and watch the chest for 10 seconds.
@@ -699,6 +706,7 @@ anim.cpr-child.s5	با یک دست ۳۰ بار وسط سینه را فشار د�
 anim.cpr-child.s6	بعد ۲ نفس بدهید و باز ۳۰ بار فشار دهید. ادامه دهید تا طفل عادی نفس بکشد یا کمک برسد.	Then give 2 breaths and 30 pushes again. Keep going until the child breathes normally or help arrives.
 anim.cpr-child.s7	اگر تنها هستید، اول بلند کمک بخواهید. بعد ۱ دقیقه نفس بدهید و سینه را فشار دهید، و بعد از آن برای آوردن کمک بروید.	If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute, and only then go to get help.
 choking-baby.title	بند شدن گلوی شیرخوار	Choking baby (under 1)
+choking-baby.summary	کمتر از ۱ سال: ۵ ضربه به پشت، بعد ۵ فشار به سینه.	Under 1 year: 5 back blows, then 5 chest pushes.
 choking-baby.lead	شیرخواری که ناگهان گریه، سرفه یا نفس کشیده نمی‌تواند، شاید چیزی در گلویش گیر کرده باشد. فوراً عمل کنید.	A baby who suddenly cannot cry, cough or breathe may have something stuck in the throat. Act at once.
 choking-baby.cough	اگر سرفه می‌کند، بگذارید سرفه کند. اگر شیرخوار سرفه یا گریه می‌کند، هنوز هوا می‌گیرد. پیشش بمانید و ببینید. انگشت خود را برای جستجو داخل دهانش نکنید.	If coughing, let it cough. If the baby is coughing or crying, it is still getting air. Stay and watch. Do not put your finger in the mouth to look.
 choking-baby.back	۵ ضربه به پشت. شیرخوار را روی بازوی خود رو به پایین بخوابانید، سرش پایین‌تر از بدن، و الاشه‌اش را بگیرید. با قسمت پایین کف دست، ۵ ضربهٔ محکم بین دو شانه‌اش بزنید.	5 blows on the back. Lay the baby face down along your arm, head lower than the body, holding the jaw. Give 5 firm blows between the shoulder blades with the heel of your hand.
@@ -718,6 +726,7 @@ choking-baby.cpr	سست شد؟ نفس و فشار سینه بدهید. صفحه�
 choking-baby.hospital	در شفاخانه شش‌ها را معاینه می‌کنند و اگر چیزی مانده باشد، بیرون می‌کنند.	At hospital they check the lungs and can take out anything left inside.
 choking-baby.safety	چیزهای خورد را از شیرخوار دور نگه دارید. چارمغز، سکه و بازیچهٔ خورد، و راه‌های دیگر حفاظت شیرخوار در خانه. صفحه را باز کنید.	Keep small things from babies. Nuts, coins and small toys, and other ways to keep babies safe at home. Open the page.
 fever-fits.title	تشنج با تب در اطفال خورد	Fits with fever in young children
+fever-fits.summary	در طفل ۶ ماهه تا ۵ ساله زیاد است. ترسناک است، اما اکثراً بی‌ضرر.	Common from 6 months to 5 years. Frightening, but usually harmless.
 fever-fits.lead	بعضی اطفال ۶ ماهه تا ۵ ساله وقتی تب می‌کنند، تشنج می‌کنند. این ترسناک است، اما اکثراً در چند دقیقه تمام می‌شود و ضرر نمی‌رساند.	Some children aged 6 months to 5 years have a fit when they get a fever. It is frightening, but it usually stops within a few minutes and does no harm.
 fever-fits.safe	طفل را در جای بی‌خطر بخوابانید. طفل را روی زمین، دور از آتش، بخاری و نوشیدنی داغ بخوابانید. طفل را محکم نگیرید و تکان ندهید.	Lay the child somewhere safe. Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them.
 fever-fits.time	وقتش را ببینید. ببینید که چه وقت شروع شد. اگر بیشتر از ۵ دقیقه دوام کرد، فوراً موتر بخواهید.	Time it. Note when it starts. If it lasts more than 5 minutes, get a car at once.
@@ -739,6 +748,7 @@ fever-fits.fever	مراقبت تب در خانه. بعد از شفاخانه، �
 fever-fits.hospital	در شفاخانه علت تب را، مانند مکروب گوش، سینه یا مغز، پیدا و تداوی می‌کنند.	At hospital they look for the cause of the fever, such as an ear, chest or brain infection, and treat it.
 fever-fits.not-epilepsy	تشنج تب، مرگی نیست و به مغز ضرر نمی‌رساند. اطفال تا حدود ۶ سالگی از آن خلاص می‌شوند.	A fever fit is not epilepsy and does not harm the brain. Children grow out of it by about 6 years.
 choking.title	بند شدن گلو: طفل بالای ۱ سال و بزرگسال	Choking: child over 1, adult
+choking.summary	۵ ضربه به پشت، بعد ۵ فشار به شکم. تکرار کنید تا باز شود.	5 back blows, then 5 belly pushes. Repeat until it clears.
 choking.lead	کسی که هنگام خوردن ناگهان گپ زده، سرفه کرده یا نفس کشیده نمی‌تواند، گلویش بند شده است. شاید گلوی خود را بگیرد. فوراً عمل کنید.	Someone who suddenly cannot speak, cough or breathe while eating is choking. They may hold their throat. Act at once.
 choking.cough	اگر سرفه می‌تواند، بگویید سرفه کند. اگر سرفه کرده یا گپ زده می‌تواند، بگویید محکم سرفه کند. پیشش بمانید. هنوز به پشتش نزنید.	If they can cough, let them cough. If they can cough or speak, tell them to keep coughing hard. Stay with them. Do not hit their back yet.
 choking.back	۵ ضربه به پشت. پهلو و پشت سرش بایستید و او را به پیش خم کنید، سینه‌اش را با یک دست بگیرید. با قسمت پایین کف دست، ۵ ضربهٔ محکم بین دو شانه‌اش بزنید.	5 blows on the back. Stand to the side and behind. Lean them forward, holding the chest with one hand. Give 5 firm blows between the shoulder blades with the heel of your hand.
@@ -758,6 +768,7 @@ choking.dont.baby	شکم شیرخوار کمتر از ۱ سال را فشار ن
 choking.hospital	فشار شکم ممکن است به داخل بدن آسیب برساند. در شفاخانه این را و غذایی را که شاید در شش‌ها مانده باشد، معاینه می‌کنند.	Belly pushes can hurt the inside of the body. At hospital they check for this, and for food left in the lungs.
 choking.baby-page	شیرخوار کمتر از ۱ سال؟. صفحهٔ شیرخوار را باز کنید: ضربه به پشت و فشار به سینه، هرگز به شکم.	Baby under 1 year?. Open the baby page: back blows and chest pushes, never the belly.
 drowning.title	غرق شدن در آب	Drowning
+drowning.summary	با احتیاط نجات دهید، اول ۵ بار نفس بدهید، بعد فشار سینه.	Rescue safely, give 5 breaths first, then chest pushes.
 drowning.lead	اطفال در جوی، چاه، حوض و حتی سطل زود و بی‌صدا غرق می‌شوند. در غرق شدن اول نفس بند می‌شود، پس اول نفس بدهید.	Children drown fast and quietly in canals, wells, ponds and even buckets. In drowning, breathing stops first, so breaths come first.
 drowning.rescue	بدون رفتن در آب نجات دهید. خودتان در آب تیز یا چاه نپرید. با چوب، ریسمان یا چادر دست برسانید، یا چیزی که روی آب می‌ماند بیندازید، و بلند کمک بخواهید.	Rescue without going in. Do not jump into fast water or a well yourself. Reach with a stick, rope or scarf, or throw something that floats, and shout for help.
 drowning.check	نفسش را ببینید. او را به پشت روی زمین بخوابانید. سرش را به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.	Check breathing. Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for 10 seconds.
@@ -775,6 +786,7 @@ drowning.dont.jump	برای نجات در چاه یا آب تیز نپرید	jum
 drowning.hospital	حتی اگر خوب معلوم شود، مشکل نفس ممکن است چند ساعت بعد شروع شود. در شفاخانه نفسش را زیر نظر می‌گیرند و اکسیجن می‌دهند.	Even if they seem well, breathing problems can start hours later. At hospital they watch the breathing and give oxygen.
 drowning.safety	اطفال را نزدیک آب حفاظت کنید. پوشاندن چاه و ذخیرهٔ آب، و راه‌های دیگر حفاظت اطفال. صفحه را باز کنید.	Keep children safe near water. Covering wells and tanks, and other ways to keep children safe. Open the page.
 burns.title	سوختگی با آتش و آب داغ	Burns and scalds
+burns.summary	۲۰ دقیقه با آب روان سرد کنید، سست بپوشانید، طفل را گرم نگه دارید.	Cool with running water for 20 minutes, cover loosely, keep warm.
 burns.lead	اطفال با تنور، چای داغ، دیگ و صندلی می‌سوزند. سرد کردن فوری سوختگی با آب، آسیب را کم می‌کند.	Children are burned by the tandoor, hot tea, cooking pots and the sandali. Cooling the burn with water at once lessens the harm.
 burns.stop	سوختن را بند کنید. اگر لباس آتش گرفته: بایستید، به زمین بیفتید و غلت بزنید، یا با کمپل ضخیم بپوشانید. شخص را از گرمی دور کنید.	Stop the burning. If clothes are on fire: stop, drop to the ground and roll, or wrap in a thick blanket. Move the person away from the heat.
 burns.cool	با آب روان سرد کنید. ۲۰ دقیقه آب سرد، پاک و روان روی سوختگی بریزید. هرچه زودتر شروع کنید؛ تا ۳ ساعت بعد هم فایده دارد.	Cool with running water. Pour cool, clean running water over the burn for 20 minutes. Start as soon as you can; it still helps up to 3 hours later.
@@ -800,6 +812,7 @@ burns.dont.cotton	پنبه یا تکهٔ پشمی که می‌چسپد نگذا�
 burns.hospital	در شفاخانه سوختگی را پاک و پانسمان می‌کنند، سیروم و دوای درد می‌دهند و جلو مکروب را می‌گیرند.	At hospital they clean and dress the burn, give fluids and pain medicine, and prevent infection.
 burns.safety	جلوگیری از سوختگی و آتش‌سوزی. تنور، چراغ، تیل خاک و دیگ داغ: چطور خانواده را بی‌خطر نگه دارید. صفحه را باز کنید.	Prevent burns and fires. Tandoor, lamps, kerosene and hot pots: how to keep your family safe. Open the page.
 poisoning.title	مسمومیت	Poisoning
+poisoning.summary	تیل خاک، دوای زراعتی، دوا و زهر موش: اول چه کنید.	Kerosene, farm sprays, medicines, rat poison: what to do first.
 poisoning.lead	اطفال اکثراً به اشتباه تیل خاک، دوا یا زهر را قورت می‌دهند. دوای زراعتی از راه پوست و هوا هم مسموم می‌کند. زود عمل کنید و به شفاخانه بروید.	Children often swallow kerosene, medicines or poison by mistake. Farm sprays can poison through the skin and air too. Act fast and go to hospital.
 poisoning.no-vomit	استفراغ نکنانید. هرگز کاری نکنید که استفراغ کند، و آب نمک یا روغن ندهید. تیل خاکی که استفراغ شود، به شش‌ها می‌رود و بسیار خطرناک است.	Do not make them vomit. Never make them vomit, and give no salt water or oil. Kerosene that is vomited gets into the lungs and is very dangerous.
 poisoning.spray	دوای زراعتی روی پوست. شخص را به هوای تازه ببرید. لباسش را بکشید و پوست و موی او را با صابون و آب زیاد بشویید. دست خود را محافظت کنید.	Farm spray on the skin. Move the person into fresh air. Take off their clothes and wash skin and hair with lots of soap and water. Protect your own hands.
@@ -821,6 +834,7 @@ poisoning.hospital	در شفاخانه برای بعضی زهرها، مانند
 poisoning.purpose	قصداً خورده است؟. اگر کسی قصداً زهر خورده، پیشش بمانید و به شفاخانه ببرید. بعداً به آرامی از احوالش بپرسید.	Took it on purpose?. If someone took poison on purpose, stay with them and take them to hospital. Later, gently ask how they feel.
 poisoning.storage	جلوگیری از مسمومیت در خانه. دوا، تیل خاک و دوای زراعتی را قفل کنید و هر کدام را در بوتل خودش نگه دارید. صفحه را باز کنید.	Prevent poisoning at home. Lock away medicines, kerosene and farm sprays, and keep each in its own bottle. Open the page.
 seizures.title	تشنج (مرگی)	Fits (seizures)
+seizures.summary	او را از آسیب حفظ کنید، وقت تشنج را ببینید، بعد به پهلو بخوابانید.	Keep them safe, time the fit, then lay them on their side.
 seizures.lead	در تشنج، شخص ممکن است بیفتد، بدنش شخ شود و بلرزد، و جواب ندهد. بیشتر تشنج‌ها در چند دقیقه خودبخود تمام می‌شوند. کار شما حفاظت اوست.	In a fit, a person may fall, go stiff, shake and not answer. Most fits stop by themselves within a few minutes. Your job is to keep them safe.
 seizures.safe	جای را بی‌خطر کنید. آتش، بخاری، چای داغ، آب و چیزهای تیز را دور کنید. شخص را تکان ندهید، مگر اینکه در خطر باشد.	Make the place safe. Move away fire, the stove, hot tea, water and sharp things. Do not move the person unless they are in danger.
 seizures.head	زیر سرش چیز نرم بگذارید. چیزی نرم مانند تکهٔ قات‌شده زیر سرش بگذارید. لباس تنگ دور گردنش را سست کنید.	Cushion the head. Put something soft, like a folded cloth, under the head. Loosen tight clothes around the neck.
@@ -847,6 +861,7 @@ seizures.dont.water	بر او آب سرد نریزید و چیزی را به ا�
 seizures.hospital	در شفاخانه تشنج طولانی را با دوا بند می‌کنند و علت را پیدا می‌کنند. تشنج در حاملگی برای مادر و طفل تداوی عاجل لازم دارد.	At hospital they stop a long fit with medicine and find the cause. A fit in pregnancy needs urgent care for mother and baby.
 seizures.not-curse	مرگی یک مریضی مغز است که تداوی دارد. کسانی که مرگی دارند می‌توانند مکتب بروند، کار کنند و عروسی کنند.	Epilepsy is an illness of the brain that can be treated. People with epilepsy can go to school, work and marry.
 newborn.title	مراقبت از نوزاد: هفته‌های اول	Newborn care: the first weeks
+newborn.summary	گرمی، فقط شیر مادر، مراقبت ناف، واکسین و علایم خطر.	Warmth, breast milk only, cord care, vaccines and danger signs.
 newborn.lead	روزهای اول زندگی خطرناک‌ترین روزها است. طفل را گرم نگه دارید، زیاد شیر بدهید و علایم خطر را بشناسید.	The first days of life are the most dangerous. Keep the baby warm, breastfeed often, and know the danger signs.
 newborn.warm	خشک کنید و پوست به پوست بگیرید. طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر، پوست به پوست، بگذارید. هر دو را بپوشانید و به سر طفل کلاه بگذارید.	Dry the baby, hold skin to skin. Dry the baby at once and lay the baby on the mother's bare chest, skin to skin. Cover them both, and put a cap on the baby.
 newborn.breastfeed	در ساعت اول شیر بدهید. در ساعت اول بعد از ولادت شیر بدهید. بعد فقط شیر مادر، هر وقت طفل خواست، شب و روز. آب و شیر دیگر لازم نیست.	Breastfeed in the first hour. Start within one hour of birth. Then give only breast milk, whenever the baby wants, day and night. No water or other milk is needed.
@@ -885,6 +900,7 @@ anim.nappies.s3	بعد آن را با صابون در آب داغ بشویید،
 anim.nappies.s4	آن را در آفتاب آویزان کنید تا کاملاً خشک شود. آفتاب هم به کشتن میکروب‌ها کمک می‌کند.	Hang it in the sun until it is completely dry. The sun helps kill germs too.
 anim.nappies.s5	در آخر، دست‌های خود را با صابون بشویید. کهنه‌های چتل را تا وقت شستن در سطل سرپوش‌دار نگه دارید.	Last, wash your hands with soap. Keep dirty nappies in a bucket with a lid until wash time.
 breastfeeding.title	شیر مادر و غذای طفل	Breastfeeding and food
+breastfeeding.summary	تا ۶ ماه فقط شیر مادر، بعد غذای نرم هم بدهید.	Only breast milk for 6 months, then add soft foods.
 breastfeeding.lead	شیر مادر بهترین غذا و نوشیدنی برای طفل شما است. طفل را از اسهال و سینه‌بغل محافظت می‌کند.	Breast milk is the best food and drink for your baby. It protects the baby from diarrhoea and pneumonia.
 breastfeeding.first-hour	در ساعت اول شروع کنید. طفل را در ساعت اول بعد از ولادت به سینه بگذارید. شیر زرد اول مثل اولین واکسین طفل است؛ همه‌اش را بدهید.	Start in the first hour. Put the baby to the breast within one hour of birth. The first yellow milk is like the baby's first vaccine; give all of it.
 breastfeeding.only	تا ۶ ماه فقط شیر مادر. آب، چای یا هیچ غذای دیگر ندهید. شیر مادر همهٔ آبی را که طفل لازم دارد، دارد، حتی در گرمی.	Only breast milk for 6 months. Give no water, tea or any other food or drink. Breast milk has all the water the baby needs, even in hot weather.
@@ -902,6 +918,7 @@ breastfeeding.dont.bottle	از بوتل استفاده نکنید؛ اگر لا�
 breastfeeding.dont.sick	وقتی مادر یا طفل مریض است، شیردهی را بس نکنید.	Do not stop breastfeeding when the mother or baby is sick.
 breastfeeding.illness	وقتی طفل مریض است، بیشتر شیر بدهید. بعد از مریضی، تا وقتی که کاملاً خوب شود، بیشتر از معمول غذا بدهید.	When the child is sick, breastfeed more often. After the illness, give more food than usual until the child is fully well.
 child-meals.title	غذای باغچه برای طفل	Garden food for your child
+child-meals.summary	از ۶ ماهگی: هر روز لیتی غلیظ، تخم مرغ، ترکاری و میوه.	From 6 months: thick porridge, egg, vegetables and fruit every day.
 child-meals.lead	در ۶ ماهگی طفل شما به چیزی بیشتر از شیر مادر نیاز دارد. غذای باغچه و مرغ‌های خودتان می‌تواند آنچه را طفل برای رشد لازم دارد بدهد.	At 6 months your baby needs more than breast milk. Food from your own garden and hens can give your child what they need to grow.
 child-meals.start	از ۶ ماهگی شروع کنید، شیر مادر را ادامه دهید. با ۲ یا ۳ قاشق غذای نرم، روزی دو بار شروع کنید و آهسته‌آهسته زیادتر بدهید. شیر مادر را بار بار، تا ۲ سالگی یا بیشتر، ادامه دهید.	Start at 6 months, keep breastfeeding. Begin with 2 or 3 spoons of soft food, twice a day, and slowly give more. Keep breastfeeding often, to 2 years or more.
 child-meals.thick	لیتی غلیظ، با کمی روغن. لیتی را آن‌قدر غلیظ بسازید که روی قاشق بماند؛ لیتی آبکی شکم را پر می‌کند ولی قوت کم دارد. کمی روغن، و تخم مرغ، لوبیا یا ترکاری کوبیده در آن مخلوط کنید.	Thick porridge, with oil added. Make porridge thick enough to stay on the spoon; watery porridge fills the belly but feeds little. Stir in a little oil, and mashed egg, beans or vegetables.
@@ -916,6 +933,7 @@ child-meals.dont.sweets	شیرینی، بیسکویت یا نوشابهٔ گاز
 child-meals.dont.tea	به شیرخوار و طفل کوچک چای ندهید؛ آهن غذا را کم می‌کند	give tea to babies and small children: it takes away the iron in food
 child-meals.bowl	به طفل کوچک کاسهٔ جدا بدهید و با او بنشینید. با مهربانی تشویق کنید؛ هرگز زور نکنید.	Give a small child their own bowl and sit with them. Encourage gently; never force.
 diarrhoea.title	اسهال و او آر اس	Diarrhoea and ORS
+diarrhoea.summary	او آر اس و زنک بدهید و غذا دادن را ادامه دهید.	Give ORS and zinc, and keep feeding.
 diarrhoea.lead	اسهال می‌تواند بدن طفل را خیلی زود بی‌آب کند. او آر اس و زنک بدهید و شیر و غذا را ادامه دهید.	Diarrhoea can dry out a child's body very fast. Give ORS and zinc, and keep breastfeeding and feeding.
 diarrhoea.mix	او آر اس را درست آماده کنید. یک پاکت را در یک لیتر آب پاک حل کنید. هر روز تازه بسازید و باقی‌مانده را روز بعد دور بریزید.	Mix ORS the right way. Mix one packet in one litre of clean water. Make it fresh each day and throw away what is left the next day.
 diarrhoea.give	بعد از هر اسهال، او آر اس بدهید. به طفل زیر ۲ سال ۵۰ تا ۱۰۰ میلی‌لیتر، و به طفل ۲ سال و بالاتر ۱۰۰ تا ۲۰۰ میلی‌لیتر بدهید. با پیاله، کم‌کم بدهید.	Give ORS after each loose stool. Under 2 years, give 50 to 100 ml; 2 years and over, give 100 to 200 ml. Give small sips from a cup.
@@ -956,6 +974,7 @@ anim.water.s4	سرپوش را ببندید، تکانش دهید و پیش از 
 anim.water.s5	آب نوشیدنی را سرپوشیده، در ظرف پاک و بالاتر از زمین نگه دارید. ظرف را هر چند روز با صابون بشویید.	Keep drinking water covered, in a clean container up off the floor. Wash the container with soap every few days.
 anim.water.s6	آب را از شیر یا نول ظرف بریزید. پیاله یا دست را داخل ظرف نزنید؛ این کار میکروب‌ها را دوباره به آب می‌آورد.	Pour the water out from the tap or spout. Don't dip cups or hands into the pot: that brings the germs back in.
 worms.title	کرم‌های شکم	Worms in the belly
+worms.summary	کرم‌ها طفل را ضعیف و رنگ‌پریده می‌کنند. کلینیک دوای کرم می‌دهد.	Worms make children weak and pale. The clinic gives worm medicine.
 worms.lead	کرم‌ها از راه خاک روی دست‌ها، غذا و پاهای برهنه داخل بدن می‌شوند. غذا و خون طفل را می‌خورند. دست‌های پاک و دوای کرم از کلینیک جلو آن‌ها را می‌گیرد.	Worms get into the body from dirt on hands, food and bare feet. They steal the child's food and blood. Clean hands and worm medicine from the clinic stop them.
 worms.signs	علایم را بشناسید. درد شکم، شکم پندیده، خارش اطراف مقعد در شب، کرم در مدفوع، بی‌اشتهایی، رنگ‌پریدگی، یا طفلی که خوب رشد نمی‌کند.	Know the signs. Belly pain, a swollen belly, itching around the bottom at night, worms in the stool, poor appetite, pale skin, or a child who does not grow well.
 worms.medicine	دوای کرم از ۱ سالگی. از ۱ سالگی، کلینیک هر ۶ ماه یک تابلیت کرم می‌دهد. در وقت واکسین یا وزن‌کردن آن را بخواهید.	Worm medicine from 1 year. From 1 year old, the clinic gives a worm tablet every 6 months. Ask for it at the vaccine or weighing visit.
@@ -977,6 +996,7 @@ worms.dont.baby	برای طفل زیر ۱ سال بدون پرسیدن از کا
 worms.dont.kerosene	برای کرم از تیل خاک، گیاه یا دواهای خانگی دیگر کار نگیرید.	Do not use kerosene, herbs or other home cures for worms.
 worms.together	دوای کرم وقتی بهترین اثر را دارد که تمام فامیل و همسایه‌ها یکجا بخورند و همه از تشناب کار بگیرند.	Worm medicine works best when the whole family and the neighbours take it at the same time, and everyone uses a latrine.
 cough.title	سرفه، زکام و سینه‌بغل	Cough, cold and pneumonia
+cough.summary	بیشتر سرفه‌ها در خانه خوب می‌شوند. علایم سینه‌بغل را بشناسید.	Most coughs get better at home. Know the signs of pneumonia.
 cough.lead	بیشتر سرفه‌ها و زکام‌ها در خانه خوب می‌شوند. اما نفس تیز یا مشکل می‌تواند علامت سینه‌بغل باشد و زود به داکتر نیاز دارد.	Most coughs and colds get better at home. But fast or difficult breathing can be a sign of pneumonia, which needs a health worker quickly.
 cough.feed	غذا و مایعات را ادامه دهید. بیشتر شیر بدهید. به اطفال بزرگ‌تر مایعات بیشتر و غذای نرم بدهید.	Keep feeding and give drinks. Breastfeed more often. Give older children extra drinks and soft food.
 cough.soothe	گلو و بینی را آرام کنید. نوشیدنی گرم بدهید؛ عسل فقط برای اطفال بالای ۱ سال. بینی بسته را با تکهٔ نرم و تر آهسته پاک کنید.	Soothe the throat, clear the nose. Give warm drinks; honey only for children over 1 year. Clean a blocked nose gently with a soft, wet cloth.
@@ -1006,6 +1026,7 @@ cough.dont	این کارها را نکنید:	Do not do these things:
 cough.dont.medicine	به نوزاد و طفل کوچک شربت سرفه ندهید.	Do not give cough medicines to babies and young children.
 cough.dont.antibiotic	برای زکام انتی‌بیوتیک ندهید، مگر اینکه کلینیک داده باشد.	Do not give antibiotics for a cold unless the clinic gives them.
 fever.title	تب	Fever
+fever.summary	مایعات بدهید، لباس سبک بپوشانید و بدانید چه وقت بروید.	Give fluids, dress lightly, and know when to go.
 fever.lead	تب یعنی بدن داغ است، چون با یک مرض می‌جنگد. طفل را خوب زیر نظر بگیرید و علایم خطر را بشناسید.	Fever means the body is hot because it is fighting an illness. Watch your child closely and know the danger signs.
 fever.check	با پشت دست لمس کنید. پشت دست خود را روی سینه، شکم یا گردن طفل بگذارید. اگر از پوست خودتان گرم‌تر بود، تب است.	Feel with the back of your hand. Put the back of your hand on the child's chest, belly or neck. If it feels hotter than your own skin, it is a fever.
 fever.before	تب پیش از این هم حساب است. اگر طفل در همین مریضی پیش از این داغ بود، تب حساب می‌شود، حتی اگر حالا سرد باشد. به کارمند صحی بگویید.	Fever earlier also counts. If the child was hot earlier in this illness, it counts as a fever, even if the child feels cool now. Tell the health worker.
@@ -1034,6 +1055,7 @@ fever.soon.throat	گلودرد شدید با لکه‌های سفید دارد،
 fever.chw	اگر طفل هیچ‌یک از این علایم را ندارد، کارمند صحی قریه یا پوستهٔ صحی می‌تواند طفل را ببیند و دوای تب بدهد.	If your child has none of these signs, the village health worker or the health post can check the child and give fever medicine.
 fever.measles	سرخکان زود سرایت می‌کند. طفل دارای دانه را از نوزادان و زنان حامله دور نگه دارید، و همهٔ اطفال را واکسین سرخکان کنید.	Measles spreads fast. Keep a child with a rash away from babies and pregnant women, and get every child the measles vaccine.
 measles.title	سرخکان: مراقبت در خانه	Measles: care at home
+measles.summary	سرخکان خطرناک است. طفل را غذا بدهید و علایم خطر را بشناسید.	Measles is dangerous. Keep feeding the child and know the danger signs.
 measles.lead	سرخکان با تب، سرفه، آب‌ریزش بینی و سرخی چشم شروع می‌شود، بعد دانه‌های سرخ از روی به تمام بدن پهن می‌شود. سرخکان می‌تواند سینه‌بغل، اسهال و کوری بیاورد، پس طفل به مراقبت کلینیک و خانه ضرورت دارد.	Measles starts with fever, cough, runny nose and red eyes, then a red rash spreads from the face to the whole body. It can cause pneumonia, diarrhoea and blindness, so the child needs care from the clinic and at home.
 measles.clinic	طفل را به کلینیک ببرید. کارمند صحی طفل را معاینه می‌کند و ویتامین الف می‌دهد. ویتامین الف چشم‌ها را حفاظت می‌کند و به جور شدن طفل کمک می‌کند.	Take the child to the clinic. The health worker will check the child and give vitamin A. Vitamin A protects the eyes and helps the child get better.
 measles.feed	شیردهی و غذا را ادامه دهید. طفل را بیشتر شیر بدهید و در روز چند بار غذای کم‌کم بدهید. آب و مایعات زیاد مثل شوربا بدهید.	Keep breastfeeding and feeding. Breastfeed more often and give small meals many times a day. Give plenty to drink, such as water and soup.
@@ -1058,6 +1080,7 @@ measles.dont.stop-food	شیر یا غذای طفل را قطع نکنید	stop b
 measles.dont.eyes	سرمه، دوای گیاهی یا چیز دیگر در چشم‌ها نریزید	put kohl, herbs or anything else in the eyes
 measles.after	بعد از سرخکان طفل تا چند هفته ضعیف می‌ماند. غذای بیشتر بدهید و رشد او را نظارت کنید.	After measles a child stays weak for some weeks. Give extra food and watch the child's growth.
 growth.title	رشد و انکشاف طفل	Growth and development
+growth.summary	طفل را هر ماه وزن کنید و هر روز با او بازی کنید و گپ بزنید.	Weigh your child every month; play and talk every day.
 growth.lead	طفل صحتمند هر ماه بزرگ‌تر می‌شود و چیزهای تازه یاد می‌گیرد. وزن کردن، بازی و گپ زدن به شما کمک می‌کند ببینید طفل خوب رشد می‌کند.	A healthy child grows and learns new things every month. Weighing, playing and talking help you see that your child is growing well.
 growth.weigh	طفل را هر ماه وزن کنید. طفل را هر ماه برای وزن کردن به کلینیک یا پوستهٔ صحی ببرید، مخصوصاً در ۲ سال اول. کارت رشد را هر بار با خود ببرید.	Weigh your child every month. Take your child to be weighed every month at the clinic or the health post, especially in the first 2 years. Bring the growth card every time.
 growth.track	رشد طفل خود را دنبال کنید. هر وزن و قد را در برنامه بنویسید و جدول رشد را ببینید.	Track your child's growth. Write each weight and length in the app and see the growth chart.
@@ -1082,6 +1105,7 @@ growth.soon.see	به نظر می‌رسد خوب نمی‌بیند	does not seem
 growth.soon.hear	به صدا یا آواز شما رو نمی‌گرداند	does not turn to sounds or to your voice
 growth.food	طفلی که خوب وزن نمی‌گیرد، به وعده‌های بیشتر غذا و شیر مادر نیاز دارد. از کارمند صحی مشوره بگیرید.	A child who is not gaining weight needs more meals and breast milk. Ask the health worker for advice.
 malnutrition.title	طفل لاغر (سوءتغذی)	Thin child (malnutrition)
+malnutrition.summary	طفل بسیار لاغر در کلینیک تداوی می‌شود.	A very thin child can be treated at the clinic.
 malnutrition.lead	وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند.	When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this.
 malnutrition.signs	علایم را بشناسید. طفل بسیار لاغر است، قبرغه‌ها و استخوان‌هایش معلوم می‌شود، پوست سرینش شُل و چین‌خورده است، یا هر دو پایش پندیده است. شاید ضعیف باشد و میل به خوردن نداشته باشد.	Know the signs. The child is very thin, the ribs and bones show, the skin hangs loose on the buttocks, or both feet are swollen. The child may be weak and not want to eat.
 malnutrition.band	فیتهٔ رنگی بازو. کارمند صحی یا کارمند صحی قریه دور بازوی طفل را با یک فیتهٔ رنگی اندازه می‌کند. سرخ یعنی طفل همین حالا تداوی ضرورت دارد؛ زرد یعنی برای غذای اضافی و معاینه بیایید.	The coloured arm band. The health worker or village health worker measures the upper arm with a coloured band. Red means the child needs treatment now; yellow means come for extra food and checks.
@@ -1106,6 +1130,7 @@ malnutrition.dont.share	خمیر طفل را با اطفال دیگر تقسیم
 malnutrition.dont.sweets	به جای غذا چای، نوشابه یا شیرینی ندهید.	Do not give tea, fizzy drinks or sweets instead of food.
 malnutrition.fault	لاغری طفل تقصیر مادر نیست. مریضی، فقر و خشکسالی باعث آن می‌شود. از کلینیک در مورد غذای اضافی برای تمام فامیل بپرسید.	Malnutrition is not the mother's fault. Illness, poverty and drought cause it. Ask the clinic about extra food for the whole family.
 reading-muac.title	فیتهٔ بازو و وزن: معنای آن	Arm tape and weight readings
+reading-muac.summary	رنگ‌های فیته، وزن گرفتن، و چه وقت بروید.	The tape colours, weight gain, and when to go.
 reading-muac.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-muac.check	رنگ را معاینه کنید. رنگی را که دیدید انتخاب کنید و بشنوید چه باید کرد.	Check a colour. Choose the colour you saw, and hear what to do.
 reading-muac.colours	رنگ‌ها چه معنا دارند. سبز خوب است. زرد یعنی لاغر است: همین هفته به کلینیک بروید. سرخ یعنی خیلی لاغر است: امروز به کلینیک بروید.	What the colours mean. Green is good. Yellow means too thin: go to the clinic this week. Red means very thin: go to the clinic today.
@@ -1120,6 +1145,7 @@ reading-muac.weight-soon.loss	وزنش کم می‌شود	is losing weight
 reading-muac.weight-soon.newborn	۳ هفته دارد و هنوز از وزن ولادت کمتر است	is 3 weeks old and still under the birth weight
 reading-muac.more	رشد و انکشاف طفل. طفل را هر ماه وزن کنید و هر روز با او بازی کنید و گپ بزنید.	Growth and development. Weigh your child every month; play and talk every day.
 child-safety.title	اطفال را از حادثه حفاظت کنید	Keep children safe from injury
+child-safety.summary	بیشتر حادثه‌های اطفال در خانه قابل جلوگیری است.	Most injuries to children can be prevented at home.
 child-safety.lead	اطفال هر روز غرق می‌شوند، می‌افتند، می‌سوزند یا مسموم می‌شوند، اکثراً نزدیک خانه. چند تغییر ساده و نظارت دقیق بر اطفال خورد بیشتر این حادثه‌ها را جلوگیری می‌کند.	Every day children drown, fall, get burned or are poisoned, often close to home. A few simple changes and watching small children closely prevent most of these injuries.
 child-safety.water	آب را بپوشانید و اطفال را نظارت کنید. چاه، ذخیرهٔ آب و سطل را بپوشانید. طفل خورد را حتی یک دقیقه تنها نزدیک دریا، جوی یا حوض نگذارید.	Cover water and watch children. Cover wells, water tanks and buckets. Never leave a small child alone near a river, canal or pond, even for a minute.
 child-safety.fire	آتش و چیزهای داغ را دور نگه دارید. اطفال را از تنور، بخاری، صندلی و دیگ‌های داغ دور نگه دارید. دستهٔ دیگ را به داخل بچرخانید و گوگرد را بلند بگذارید.	Keep fire and hot things away. Keep children away from the tandoor, stove, sandali and hot pots. Turn pot handles inwards and keep matches up high.
@@ -1132,6 +1158,7 @@ child-safety.hurt	طفل صدمه دیده؟. صفحهٔ کمک‌های اول�
 child-safety.storage	دوا و زهر: قفل کنید. چطور دوا، تیل خاک و دوای زراعتی را طوری نگه دارید که دست اطفال به آن نرسد. صفحه را باز کنید.	Medicines and poisons: lock them away. How to store medicines, kerosene and farm sprays so that children cannot reach them. Open the page.
 child-safety.road-page	موترسایکل، موتر و سرک. کلاه ایمنی، کمربند ایمنی، و دیدن پشت موتر پیش از حرکت. صفحه را باز کنید.	Motorbikes, cars and roads. Helmets, seat belts, and looking behind the car before you move off. Open the page.
 safe-storage.title	نگهداری بی‌خطر دوا و زهر	Store medicines and poisons safely
+safe-storage.summary	دوا، تیل خاک، دوای زراعتی و زهر موش: قفل کنید.	Medicines, kerosene, farm sprays and rat poison: lock them away.
 safe-storage.lead	اطفال اکثراً دوا، تیل خاک یا دوای زراعتی را در خانه پیدا می‌کنند و می‌خورند. نگهداری بی‌خطر جلوی بیشتر این مسمومیت‌ها را می‌گیرد.	Children often find medicines, kerosene or farm sprays at home and drink or eat them. Storing them safely prevents most of these poisonings.
 safe-storage.lock	زهر و دوا را قفل کنید. دوا، تیل خاک، زهر موش و دوای زراعتی را بلند، در صندوق یا الماری قفل‌دار نگه دارید. کلید پیش یکی از بزرگان خانه باشد.	Lock away poisons and medicines. Keep medicines, kerosene, rat poison and farm sprays high up, in a locked box or cupboard. An adult keeps the key.
 safe-storage.bottle	هر کدام را در بوتل خودش نگه دارید. هرگز تیل خاک، دوای زراعتی یا دوا را در بوتل آب یا جوس نریزید. اطفال و بزرگان به اشتباه از آن می‌نوشند.	Keep each in its own bottle. Never pour kerosene, sprays or medicines into a water or juice bottle. Children and adults drink from them by mistake.
@@ -1146,6 +1173,7 @@ safe-storage.dont.room	دوای زراعتی یا تیل خاک را جایی ک
 safe-storage.dont.hands	با دست لچ دواپاشی نکنید و نگذارید اطفال کمک کنند	spray with bare hands, or let children help
 safe-storage.protect	قفل کردن دوای زراعتی و دوا، کسی از خانواده را هم که روزهای بسیار سختی دارد، محافظت می‌کند.	Locking sprays and medicines away also protects anyone in the family who is going through a very hard time.
 road-safety.title	بی‌خطر در سرک	Safe on the road
+road-safety.summary	موترسایکل، موتر، راه رفتن در شب و اطفال نزدیک موتر.	Motorbikes, cars, walking at night and children near vehicles.
 road-safety.lead	حادثه‌های سرک اطفال و مردان جوان زیادی را زخمی می‌کند و می‌کشد. چند عادت ساده هنگام پیاده رفتن، روی موترسایکل و در موتر، خانوادهٔ شما را بی‌خطر نگه می‌دارد.	Road crashes hurt and kill many children and young men. Simple habits on foot, on a motorbike and in a car keep your family safe.
 road-safety.helmet	در هر سفر موترسایکل، کلاه ایمنی. راننده و هر سواری کلاه ایمنی بپوشند و بند آن را زیر زنخ ببندند. برای طفل خورد بهتر است اصلاً سوار موترسایکل نشود.	A helmet on every motorbike ride. The rider and every passenger wear a helmet, fastened under the chin. A small child is safest not on a motorbike at all.
 road-safety.belts	کمربند ایمنی، و اطفال در چوکی عقب. همه در موتر کمربند ایمنی ببندند. اطفال در چوکی عقب بنشینند، هرگز در بغل کسی در چوکی پیش.	Seat belts, and children in the back. Everyone in a car wears a seat belt. Children sit in the back seat, never on someone's lap in the front.
@@ -1159,6 +1187,7 @@ road-safety.dont	این کارها را نکنید:	Do not:
 road-safety.dont.child-drive	نگذارید اطفال موترسایکل، تراکتور یا موتر برانند	let children drive a motorbike, tractor or car
 road-safety.dont.overload	بیشتر از جای موترسایکل، آدم سوار نکنید	carry more people on a motorbike than it has seats for
 first-aid.title	کمک‌های اولیه	First aid
+first-aid.summary	اولین کمک برای سوختگی، خونریزی، بند شدن گلو، مسمومیت و بیشتر	What to do first for burns, bleeding, choking, poisoning and more
 first-aid.lead	در حالت عاجل آرام بمانید و زود عمل کنید. این کارهای اول می‌تواند تا رسیدن کمک، جان کسی را نجات دهد.	In an emergency, stay calm and act fast. These first steps can save a life while you get help.
 first-aid.cpr	بی‌هوش است یا نفس نمی‌کشد؟. صفحه را باز کنید. شما را به صفحهٔ فشار سینه برای هر سن می‌برد.	Unconscious or not breathing?. Open the page. It takes you to chest pushes for each age.
 first-aid.burn	سوختگی: با آب سرد کنید. جای سوختگی را ۲۰ دقیقه زیر آب پاک و روان نگه دارید. انگشتر و لباس تنگ را بکشید، بعد آن را با یک تکه پاک، سست بپوشانید.	Burns: cool with water. Cool the burn under clean running water for 20 minutes. Take off rings and tight clothes, then cover loosely with a clean cloth.
@@ -1184,6 +1213,7 @@ first-aid.urgent.choking	بند شدن گلو که باز نمی‌شود	chokin
 first-aid.urgent.head	ضربه به سر، و بعد استفراغ، خواب‌آلودگی زیاد یا تشنج	a head injury, then vomiting, deep sleepiness or a fit
 first-aid.urgent.fumes	بیهوش شدن، گیجی یا خواب‌آلودگی زیاد بعد از گاز بخاری	fainting, confusion or deep sleepiness after stove fumes
 pregnancy-danger.title	علایم خطر در حاملگی	Danger signs in pregnancy
+pregnancy-danger.summary	علایمی در حاملگی و بعد از ولادت که کمک فوری لازم دارد	Signs in pregnancy and after birth that need help fast
 pregnancy-danger.lead	بعضی علایم در حاملگی برای مادر و طفل خطرناک است. این علایم را همراه با فامیل خود یاد بگیرید تا زود اقدام کرده بتوانید.	Some signs in pregnancy are dangerous for mother and baby. Learn them with your family, so you can act fast.
 pregnancy-danger.urgent	اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز	If you have any of these signs, go to hospital now, day or night
 pregnancy-danger.urgent.bleeding	خونریزی از راه تناسلی	Bleeding from the vagina
@@ -1212,6 +1242,7 @@ pregnancy-danger.dont.night	اگر علامه خطر در شب شروع شد، �
 pregnancy-danger.dont.bleeding	منتظر نمانید که خونریزی خودش بند شود.	Do not wait to see if bleeding stops by itself.
 pregnancy-danger.family	این علایم را به شوهر و خشو خود هم بگویید، تا آن‌ها بدانند چه وقت باید بروند.	Share these signs with your husband and mother-in-law, so they know when to go.
 pregnancy-care.title	مراقبت در حاملگی	Care in pregnancy
+pregnancy-care.summary	کلینیک، آهن، واکسین، غذا و استراحت در حاملگی	Clinic visits, iron, vaccine, food and rest in pregnancy
 pregnancy-care.lead	مراقبت خوب در حاملگی، مادر و طفل را صحتمند نگه می‌دارد. زود و بارها به کلینیک بروید.	Good care in pregnancy keeps mother and baby healthy. Go to the clinic early and often.
 pregnancy-care.visits	زود و بارها به کلینیک بروید. در ۳ ماه اول حاملگی به کلینیک بروید. دست کم ۴ بار بروید، و ۸ بار از همه بهتر است.	Visit the clinic early and often. Go in the first 3 months of pregnancy. Go at least 4 times; 8 visits are best.
 pregnancy-care.iron	هر روز آهن بخورید. تابلیت آهن و فولیک اسید را هر روز، طوری که کلینیک داده، بخورید. آن را با آب بخورید، نه با چای.	Take iron every day. Take the iron and folic acid tablets every day, as given by the clinic. Take them with water, not tea.
@@ -1233,6 +1264,7 @@ pregnancy-care.dont.naswar	نصوار استفاده نکنید.	Do not use nasw
 pregnancy-care.dont.stove-smoke	در دود بخاری، تنور یا آتش ننشینید.	Do not sit in smoke from the stove, tandoor or fire.
 pregnancy-care.danger-signs	همه علایم خطر حاملگی را در این کتاب، همراه با فامیل خود یاد بگیرید.	Learn all the danger signs of pregnancy in this book, together with your family.
 birth-plan.title	پلان ولادت: از پیش آماده شوید	Birth plan: get ready early
+birth-plan.summary	جای ولادت، همراه، پول، موتر، و چه چیزهایی ببرید.	Where to give birth, who goes, money, a car, what to take.
 birth-plan.lead	پلان ولادت را در اوایل حاملگی با خانواده بسازید. آن وقت، وقتی دردهای ولادت شروع شود یا علامت خطر پیدا شود، هیچ‌کس وقت را ضایع نمی‌کند.	Make the birth plan with your family early in pregnancy. Then, when labour starts or a danger sign comes, nobody loses time.
 birth-plan.where	جای ولادت را انتخاب کنید. پلان کنید که در کلینیک یا شفاخانه، با قابله یا داکتر، ولادت کنید. در معاینهٔ حاملگی بپرسید کدام جای برای شما بهتر است.	Choose where to give birth. Plan to give birth at a clinic or hospital, with a midwife or doctor. At your pregnancy check, ask which place is best for you.
 birth-plan.who	از پیش تعیین کنید چه کسی همراه برود. از همین حالا فیصله کنید چه کسی با او برود: یک زن که پیش او بماند، و یک مرد خانواده برای راه. فیصله کنید اگر شب شد، چه کسی تصمیم می‌گیرد.	Decide early who will go. Agree now who goes with her: a woman to stay with her, and a man of the family for the road. Agree who decides if it happens at night.
@@ -1254,6 +1286,7 @@ birth-plan.urgent.long-labour	دردهای ولادت بیشتر از ۱۲ سا�
 birth-plan.far	اگر راه دور است، یا برف آن را بسته کرده می‌تواند، او می‌تواند در هفته‌های آخر پیش خویشاوندان نزدیک کلینیک بماند.	If the road is long, or snow may close it, she can stay with relatives near the clinic in the last weeks before the birth.
 birth-plan.tell	پلان را به تمام خانواده بگویید، و پول، بکس و شماره‌های تیلفون را جایی بگذارید که همه پیدا کرده بتوانند.	Tell the whole family the plan, and keep the money, the bag and the phone numbers where everyone can find them.
 after-birth.title	بعد از ولادت	After the birth
+after-birth.summary	مراقبت و علایم خطر برای مادر بعد از ولادت	Care and danger signs for the mother after birth
 after-birth.lead	هفته‌های بعد از ولادت برای مادر هم وقت خطر است. استراحت کنید، خوب غذا بخورید و علایم خطر را بشناسید.	The weeks after birth are a risky time for the mother too. Rest, eat well, and know the danger signs.
 after-birth.urgent	اگر یکی از این علایم را دارید، همین حالا به شفاخانه بروید، شب باشد یا روز	If you have any of these signs, go to hospital now, day or night
 after-birth.urgent.bleeding	خونریزی زیاد، یا خونریزی که بیشتر می‌شود	Heavy bleeding, or bleeding that gets more
@@ -1277,6 +1310,7 @@ after-birth.clinic	در کلینیک: معاینات بعد از ولادت. ق�
 after-birth.hospital	در شفاخانه: خونریزی یا عفونت. برای خونریزی شدید شفاخانه سیروم و دوای جمع شدن رحم می‌دهد، باقی‌ماندهٔ جفت را بیرون می‌کند و خون می‌دهد. برای تب و ترشح بدبو انتی‌بیوتیک پیچکاری می‌دهد.	At the hospital: bleeding or infection. For heavy bleeding the hospital gives fluids, medicine to contract the womb, removes any afterbirth left inside, and gives blood. For fever and bad-smelling discharge it gives antibiotics by injection.
 after-birth.spacing	صبر کردن دست کم ۲ سال پیش از حاملگی بعدی، برای صحت مادر و طفل بهتر است. کلینیک در مورد فاصله بین ولادت‌ها مشوره می‌دهد.	Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births.
 anaemia.title	کم‌خونی	Anaemia (weak blood)
+anaemia.summary	علایم کم‌خونی، غذاهای پر آهن، و وقت درست چای	Signs of anaemia, iron-rich foods, and the right time for tea
 anaemia.lead	کم‌خونی یعنی خون ضعیف است، اکثراً به خاطر کمبود آهن. در زنان زیاد است، اما جلوگیری و تداوی می‌شود.	Anaemia means the blood is weak, often from too little iron. It is common in women, but it can be prevented and treated.
 anaemia.signs	علایم را بشناسید. خستگی، ضعف، سرچرخی و نفس‌تنگی. داخل پلک‌ها و کف دست‌ها رنگ‌پریده معلوم می‌شود.	Know the signs. Feeling tired, weak or dizzy, and short of breath. The inside of the eyelids and the palms look pale.
 anaemia.causes	علت‌ها را بدانید. آهن کم در غذا، خونی که در عادت ماهوار و ولادت‌ها از دست می‌رود، و کرم‌های شکم.	Know the causes. Too little iron in food, blood lost in monthly periods and births, and worms in the belly.
@@ -1296,6 +1330,7 @@ anaemia.urgent.chest-pain	درد سینه	Chest pain
 anaemia.urgent.breathless-lying	نفس‌تنگی در وقت دراز کشیدن	Short of breath when lying down
 anaemia.black-stool	تابلیت آهن ممکن است مدفوع را سیاه کند. این عادی است.	Iron tablets can make the stool black. This is normal.
 urine-infection.title	سوزش ادرار (عفونت)	Burning urine (infection)
+urine-infection.summary	سوزش هنگام ادرار قابل تداوی است. در حاملگی همان روز بروید.	Burning when passing urine is treatable. In pregnancy, go the same day.
 urine-infection.lead	عفونت مثانه سوزش هنگام ادرار، ادرار مکرر، و ادرار کدر یا بدبو می‌آورد. در زنان زیاد است. انتی‌بیوتیک کلینیک آن را علاج می‌کند؛ اگر تداوی نشود به گرده‌ها می‌رسد و در حاملگی به طفل ضرر می‌رساند.	A bladder infection causes burning when passing urine, going often, and cloudy or smelly urine. It is common in women. Clinic antibiotics cure it; untreated it can reach the kidneys and, in pregnancy, harm the baby.
 urine-infection.signs	علایم را بشناسید. سوزش یا درد هنگام ادرار، ضرورت مکرر یا عاجل به ادرار، درد پایین شکم، ادرار کدر، بدبو یا خونی. اطفال شاید فقط تب یا استفراغ داشته باشند.	Know the signs. Burning or pain when passing urine, needing to go often or urgently, pain low in the belly, cloudy, smelly or bloody urine. Children may only have fever or vomiting.
 urine-infection.drink	آب زیاد بنوشید. آب پاک را زیاد بنوشید و ادرار را نگه ندارید. بعد از نزدیکی ادرار کنید. شرمگاه را پاک نگه دارید و از پیش به پس پاک کنید.	Drink plenty of water. Drink clean water often and do not hold urine in. Pass urine after sex. Keep the private area clean, wiping from front to back.
@@ -1322,6 +1357,7 @@ urine-infection.dont.drinkless	برای اینکه کمتر ادرار کنید 
 urine-infection.dont.herbs	گیاه یا آب نمک را داخل شرمگاه استفاده نکنید.	Do not use herbs or salt water inside the private parts.
 urine-infection.female	خانم می‌تواند کارمند صحی زن یا قابله را بخواهد. سوزش ادرار شرم ندارد؛ عام است و زود تداوی می‌شود.	A woman can ask for a female health worker or midwife. Burning urine is nothing to be ashamed of; it is common and quickly treated.
 red-flags.title	علایم خطر در بزرگسالان	Danger signs in adults
+red-flags.summary	علایمی در بزرگسالان که شفاخانه یا کلینیک لازم دارد	Signs in adults that need the hospital now, or the clinic soon
 red-flags.lead	بعضی علایم در بزرگسالان خطر جانی دارد. کمک زود جان را نجات داده می‌تواند، پس زود اقدام کنید.	Some signs in adults mean danger to life. Fast help can save a life, so act quickly.
 red-flags.urgent	اگر شما یا کس دیگری یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	If you or anyone has one of these signs, go to hospital now, day or night
 red-flags.urgent.chest-pain	درد شدید و فشارنده سینه که به بازو یا الاشه می‌رود، همراه با عرق	Crushing chest pain spreading to the arm or jaw, with sweating
@@ -1350,6 +1386,7 @@ red-flags.dont	این کارها را نکنید	Things not to do
 red-flags.dont.wait	منتظر نمانید که درد خودش تیر شود. همین حالا بروید.	Do not wait for the pain to pass. Go now.
 red-flags.dont.food-drowsy	به کسی که خیلی خواب‌آلود یا بیهوش است، غذا یا آب ندهید. ممکن است گلویش بند شود.	Do not give food or drink to someone very drowsy; they may choke.
 reading-temp.title	عدد ترمامتر چه معنا دارد	Temperature: what the number means
+reading-temp.summary	عادی، تب، خیلی سرد، و چه وقت بروید.	Normal, fever, too cold, and when to go.
 reading-temp.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-temp.check	درجهٔ تب را معاینه کنید. عدد و اینکه برای کیست را وارد کنید و بشنوید چه باید کرد.	Check a temperature. Put in the number and who it is, and hear what to do.
 reading-temp.numbers	عددها چه معنا دارند. ۳۶ تا ۳۷ و ۴ دهم عادی است. ۳۷ و نیم یا بیشتر تب است. در طفل کوچک، کمتر از ۳۶ و نیم زیاد سرد است.	What the numbers mean. 36 to 37.4 is normal. 37.5 or more is a fever. In a young baby, under 36.5 is too cold.
@@ -1364,6 +1401,7 @@ reading-temp.soon.pregnant	زن حامله تب دارد	a pregnant woman has a 
 reading-temp.touch	ترمامتر ندارید؟ سینه یا شکم را با پشت دست لمس کنید. اگر داغ بود، تب حساب می‌شود.	No thermometer? Feel the chest or belly with the back of your hand. Feeling hot counts as a fever.
 reading-temp.more	تب. مایعات بدهید، لباس سبک بپوشانید و بدانید چه وقت بروید.	Fever. Give fluids, dress lightly, and know when to go.
 reading-bp.title	عدد فشار خون چه معنا دارد	Blood pressure: what the numbers mean
+reading-bp.summary	عادی، بلند، خیلی بلند، در حاملگی، و چه وقت بروید.	Normal, high, very high, in pregnancy, and when to go.
 reading-bp.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-bp.check	فشار خون را معاینه کنید. هر دو عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.	Check a blood pressure. Put in both numbers and hear what they mean and what to do.
 reading-bp.numbers	عددها چه معنا دارند. عدد بالا اول گفته می‌شود. در خانه، کمتر از ۱۳۵ بر ۸۵ عادی است. در حاملگی، ۱۴۰ بر ۹۰ یا بیشتر بلند است.	What the numbers mean. The top number comes first. At home, under 135 over 85 is normal. In pregnancy, 140 over 90 or more is high.
@@ -1380,6 +1418,7 @@ reading-bp.dont	این کارها را نکنید:	Do not do these things:
 reading-bp.dont.stop	به خاطر یک عدد، دوای خود را قطع یا تغییر ندهید.	Do not stop or change your medicine because of one reading.
 reading-bp.more	فشار خون بلند. اکثراً علامه ندارد. فشار خود را اندازه کنید، نمک کم بخورید، دوا را هر روز بخورید.	High blood pressure. Often no signs. Get checked, eat less salt, take medicine daily.
 reading-sugar.title	عدد قند خون چه معنا دارد	Blood sugar: what the number means
+reading-sugar.summary	قند پایین، خوب و بلند، و چه وقت بروید.	Low, good and high sugar, and when to go.
 reading-sugar.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-sugar.check	عدد قند را معاینه کنید. عدد را وارد کنید و بشنوید چه باید کرد.	Check a sugar reading. Put in the number, in mg/dL or mmol/L, and hear what to do.
 reading-sugar.numbers	عددها چه معنا دارند. به واحد ملی‌گرام: کمتر از ۷۰ پایین است، همین حالا شکر بدهید. ۸۰ تا ۱۳۰ پیش از صبحانه خوب است. بالای ۲۵۰ خیلی بلند است: امروز کلینیک.	What the numbers mean. In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good. Over 250 is very high: clinic today.
@@ -1395,6 +1434,7 @@ reading-sugar.dont	این کارها را نکنید:	Do not do these things:
 reading-sugar.dont.dose	انسولین یا تابلیت را خودتان کم یا زیاد نکنید؛ از کلینیک بپرسید.	Do not change your insulin or tablets yourself; ask the clinic.
 reading-sugar.more	مرض شکر. علایم، معاینه، غذا، پیاده‌روی، دوا و مراقبت پاها	Diabetes. Signs, testing, food, walking, medicine and foot care
 reading-spo2.title	عدد اکسیجن چه معنا دارد	Oxygen: what the number means
+reading-spo2.summary	اکسیجن عادی و پایین، نفس کشیدن، و چه وقت بروید.	Normal and low oxygen, breathing, and when to go.
 reading-spo2.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-spo2.check	عدد اکسیجن را معاینه کنید. عدد را وارد کنید و بشنوید چه معنا دارد و چه باید کرد.	Check an oxygen reading. Put in the number and hear what it means and what to do.
 reading-spo2.numbers	عددها چه معنا دارند. ۹۵ تا ۱۰۰ عادی است. ۹۳ یا ۹۴ پایین است: دوباره اندازه کنید و اگر مریض است امروز به کلینیک بروید. ۹۲ یا کمتر: همین حالا شفاخانه.	What the numbers mean. 95 to 100 is normal. 93 or 94 is low: measure again, and go to the clinic today if unwell. 92 or less: hospital now.
@@ -1405,6 +1445,7 @@ reading-spo2.urgent.blue	لب‌ها یا روی کبود یا خاکستری م
 reading-spo2.urgent.child	وقت نفس کشیدن، پایین سینهٔ طفل به داخل کشیده می‌شود	a child's lower chest pulls in when breathing in
 reading-spo2.more	شمردن نفس. نفس‌های طفل را بشمارید تا ببینید تیز نفس می‌کشد یا نه.	Count breaths. Count a child's breaths, to see if the breathing is fast.
 tb.title	توبرکلوز (سل)	TB (tuberculosis)
+tb.summary	سرفه طولانی؟ معاینه شوید. توبرکلوز علاج دارد و تداوی‌اش رایگان است.	Long cough? Get tested. TB is curable and treatment is free.
 tb.lead	توبرکلوز مریضی‌ای است که وقتی شخص مریض سرفه می‌کند، از راه هوا سرایت می‌کند. با دوا علاج می‌شود.	TB is an illness that spreads through the air when a sick person coughs. It can be cured with medicine.
 tb.soon	برای معاینه توبرکلوز، اگر یکی از این علایم را دارید، امروز به کلینیک بروید	For a TB test, if you have any of these signs, go to the clinic today
 tb.soon.cough	سرفه ۲ هفته یا بیشتر	a cough for 2 weeks or more
@@ -1423,6 +1464,7 @@ tb.urgent.blood	سرفه کردن خون زیاد	coughing up a lot of blood
 tb.urgent.breathing	نفس‌تنگی شدید	great difficulty breathing
 tb.urgent.weak	ضعف زیاد، طوری که از جا برخاسته نمی‌توانید	so weak you cannot get out of bed
 blood-pressure.title	فشار خون بلند	High blood pressure
+blood-pressure.summary	اکثراً علامه ندارد. فشار خود را اندازه کنید، نمک کم بخورید، دوا را هر روز بخورید.	Often no signs. Get checked, eat less salt, take medicine daily.
 blood-pressure.lead	فشار خون بلند اکثراً هیچ علامه‌ای ندارد، اما می‌تواند سکته مغزی یا حمله قلبی بیاورد. تنها راه فهمیدن، اندازه کردن آن است.	High blood pressure usually has no signs, but it can cause a stroke or heart attack. The only way to know is to check it.
 blood-pressure.check	هر سال فشار خود را اندازه کنید. بعد از ۴۰ سالگی، حد اقل سالی یک بار فشار خون خود را در کلینیک اندازه کنید. زنان حامله باید در هر مراجعه فشار خود را اندازه کنند.	Check it every year. After age 40, have your blood pressure checked at the clinic at least once a year. Pregnant women should have it checked at every visit.
 blood-pressure.salt	نمک کمتر بخورید. در پخت‌وپز نمک کمتر بزنید. نان شور، ترشی و خوراکی‌های نمکی کمتر بخورید.	Eat less salt. Use less salt in cooking. Eat less salty bread, pickles and salted snacks.
@@ -1439,6 +1481,7 @@ blood-pressure.urgent.speech	مشکل ناگهانی در گپ زدن یا فه�
 blood-pressure.urgent.chest	درد یا فشار در سینه	pain or tightness in the chest
 blood-pressure.urgent.headache	سردردی شدید همراه با تاری چشم	a severe headache with blurred vision
 diabetes.title	مرض شکر	Diabetes
+diabetes.summary	علایم، معاینه، غذا، پیاده‌روی، دوا و مراقبت پاها	Signs, testing, food, walking, medicine and foot care
 diabetes.lead	در مرض شکر، قند خون زیاد می‌شود. با غذای خوب، پیاده‌روی هر روزه و دوا، می‌شود خوب زندگی کرد.	In diabetes there is too much sugar in the blood. With good food, daily walking and medicine, people can live well.
 diabetes.test	علایم را بشناسید، معاینه شوید. تشنگی زیاد، زیاد پیشاب کردن، لاغر شدن، خستگی، زخمی که دیر جور می‌شود یا تاری چشم: در کلینیک قند خون خود را معاینه کنید.	Know the signs, get tested. Very thirsty, passing urine often, weight loss, tiredness, slow-healing wounds or blurred vision: get a sugar test at the clinic.
 diabetes.food	شکر و نان سفید کمتر بخورید. در چای شکر کمتر بیندازید و با چای شیرینی کمتر بخورید. نان سفید و برنج کمتر، و سبزی، دال و لوبیا بیشتر بخورید.	Less sugar and white bread. Put less sugar in tea and eat fewer sweets with tea. Eat less white bread and rice, and more vegetables, lentils and beans.
@@ -1457,6 +1500,7 @@ diabetes.urgent.confused	گیجی یا بیهوشی	confusion or unconsciousness
 diabetes.urgent.vomiting	استفراغ و حال بسیار خراب	vomiting and feeling very unwell
 diabetes.urgent.foot-wound	زخم پا که سرخ، سیاه یا بدبو شده	a foot wound that is red, black or smelly
 asthma.title	نفس‌تنگی (آسم)	Asthma and tight breathing
+asthma.summary	خس‌خس سینه و تنگی نفس با انهیلر (پف) کلینیک کنترول می‌شود.	Wheezing and tight chest can be controlled with a clinic inhaler.
 asthma.lead	آسم باعث خس‌خس نفس و تنگی سینه می‌شود، اکثراً در شب، در هوای سرد یا دود. با انهیلر، یک پف که از آن نفس می‌کشید، کنترول می‌شود، تا طفل یا بزرگسال عادی زندگی و کار کند.	Asthma makes breathing whistle and the chest feel tight, often at night, in cold air or smoke. It can be controlled with an inhaler, a pump you breathe in from, so a child or adult can live and work normally.
 asthma.signs	علایم را بشناسید. سرفه و نفس خس‌خس‌دار که می‌آید و می‌رود، و در شب، بعد از دویدن، در سردی یا دود بدتر می‌شود. بین حمله‌ها شخص شاید سالم به نظر برسد.	Know the signs. Cough and whistling breathing that comes and goes, worse at night, after running, in cold or smoke. Between attacks the person may seem well.
 asthma.inhaler	انهیلر را درست استعمال کنید. انهیلر فوری در چند دقیقه راه نفس را باز می‌کند. انهیلر روزانهٔ پیشگیری جلو حمله‌ها را می‌گیرد. دقیقاً همان طور که کارمند صحی نشان داد استعمال کنید، و انهیلر فوری را همراه داشته باشید.	Use the inhaler as taught. The reliever inhaler opens the airways in minutes. A daily preventer inhaler stops attacks. Use them exactly as the health worker showed, and keep the reliever with you.
@@ -1482,6 +1526,7 @@ asthma.dont.steroid	برای نفس‌تنگی از دکان تابلیت یا �
 asthma.dont.smoke	در کنار شخص مبتلا به آسم، مخصوصاً طفل، سگرت نکشید.	Do not smoke around a person with asthma, especially a child.
 asthma.spacer	طفل می‌تواند انهیلر را با یک محفظه (اسپیسر) استعمال کند؛ کلینیک می‌تواند آن را از یک بوتل پلاستیکی پاک بسازد و نشان بدهد.	A child can use an inhaler with a spacer; the clinic can make one from a clean plastic bottle and show you how.
 epilepsy.title	مرگی (صرع)	Fits (epilepsy)
+epilepsy.summary	تشنج‌های تکراری با دوای روزانهٔ کلینیک کنترول می‌شود.	Repeated fits can be controlled with daily medicine from the clinic.
 epilepsy.lead	مرگی تشنج‌های تکراری است: شخص می‌افتد، می‌لرزد، شاید زبانش را گاز بگیرد یا خودش را تر کند، بعد می‌خوابد. جن یا نفرین نیست و با تماس سرایت نمی‌کند. دوای روزانه در اکثر مردم تشنج را بند می‌کند.	Epilepsy is repeated fits: the person falls, shakes, may bite the tongue or wet themselves, then sleeps. It is not a spirit or a curse and does not pass by touch. Daily medicine stops the fits in most people.
 epilepsy.during	در وقت تشنج: او را در امان نگه دارید. شخص را به پهلو روی زمین بخوابانید، دور از آتش، آب و چیزهای تیز. چیز نرمی زیر سرش بگذارید. او را محکم نگیرید. وقت را یادداشت کنید.	During a fit: keep them safe. Lay the person on their side on the ground, away from fire, water and sharp things. Put something soft under the head. Do not hold them down. Note the time.
 epilepsy.mouth	هیچ چیز در دهن نگذارید. هرگز قاشق، پارچه، انگشت یا آب در دهن نگذارید؛ دندان را می‌شکند یا راه نفس را می‌بندد. شخص زبانش را بلعیده نمی‌تواند.	Nothing in the mouth. Never put a spoon, cloth, fingers or water in the mouth; it can break teeth or block breathing. The person cannot swallow the tongue.
@@ -1509,6 +1554,7 @@ epilepsy.dont.stop	وقتی تشنج مدتی نیامده دوا را قطع ن
 epilepsy.dont.exclude	شخص مبتلا به مرگی را از مکتب، کار یا ازدواج باز ندارید.	Do not keep a person with epilepsy from school, work or marriage.
 epilepsy.family	به فامیل و همسایه‌ها یاد بدهید چه کنند. ترس و شرم مانع گرفتن دوایی می‌شود که اثر می‌کند.	Teach the family and neighbours what to do. Fear and shame stop people getting medicine that works.
 stress.title	فشار روحی و تشویش	Stress and worry
+stress.summary	مهارت‌های ساده برای کنار آمدن با فشار روحی، و وقت کمک گرفتن	Simple skills to cope with stress, and when to get help
 stress.lead	فشار روحی و تشویش، به‌خصوص در روزهای سخت، عام است. مهارت‌های کوچک روزانه می‌تواند کمک کند آرام‌تر شوید.	Stress and worry are common, especially in hard times. Small daily skills can help you feel calmer.
 stress.ground	پاها را حس کنید، آهسته شوید. پاهای خود را محکم روی زمین بگذارید و نفس خود را آهسته کنید. ببینید و بشنوید که دور و بر شما چه است.	Feel your feet, slow down. Press your feet into the ground and slow your breathing. Notice what you can see and hear around you.
 stress.unhook	از فکرهای سخت جدا شوید. وقتی یک فکر دردناک آمد، نامش را بگیرید: «من یک فکر پریشان دارم.» بعد توجه خود را به کاری که می‌کنید برگردانید.	Unhook from hard thoughts. When a painful thought comes, name it: 'I am having a worried thought.' Then bring your attention back to what you are doing.
@@ -1529,6 +1575,7 @@ stress.urgent.hurt-others	فکر آسیب رساندن به کسی دیگر را
 stress.urgent.self-harm	عمداً به خود آسیب رسانده‌اید	you have hurt yourself on purpose
 stress.tip-help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
 mind-body.title	فشار روحی با ما چه می‌کند	What stress does to us
+mind-body.summary	فشار روحی در بدن، ذهن و کارهای ما دیده می‌شود.	Stress shows in the body, the mind and what we do.
 mind-body.lead	وقتی زندگی سخت است، بدن و ذهن واکنش نشان می‌دهند. شناختن این علایم کمک می‌کند بدانید که این فشار روحی است و بهتر شده می‌تواند.	When life is hard, the body and the mind react. Knowing the signs helps you see that this is stress, and that it can get better.
 mind-body.body	در بدن. قلب تیز می‌زند، نفس تیز می‌شود و عضلات سخت می‌شوند. سردردی، شکم‌دردی، خستگی و بی‌خوابی عام است.	In the body. The heart beats fast, breathing is quick and muscles are tight. Headache, stomach ache, tiredness and poor sleep are common.
 mind-body.mind	در ذهن. فکرهای پریشان دور می‌زنند. شاید غمگین، قهر یا ترسیده باشید و فکر کردن یا تصمیم گرفتن برایتان سخت شود.	In the mind. Worried thoughts go round and round. You may feel sad, angry or afraid, and find it hard to think or decide.
@@ -1548,6 +1595,7 @@ mind-body.soon.daily	کارهای روزانه یا مراقبت خانواده 
 mind-body.soon.drugs	برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید	you use opium, pills or other drugs to cope
 mind-body.children	اطفال هم فشار روحی را نشان می‌دهند: شب‌ادراری، چسپیدن به مادر، قهر یا بی‌خوابی. با آن‌ها نرم باشید و کارهای روزانهٔ شان را منظم نگه دارید.	Children show stress too: wetting the bed, clinging, anger or poor sleep. Be gentle, and keep their daily routine.
 mind-cycle.title	فکر، احساس و عمل	Thoughts, feelings and actions
+mind-cycle.summary	یک فکر پریشان چطور بزرگ می‌شود، و چطور این چرخه را بشکنید.	How a worried thought can grow, and how to break the cycle.
 mind-cycle.lead	آنچه فکر می‌کنیم، بالای احساس و کارهای ما اثر می‌کند، و کارهای ما دوباره بالای فکرهای ما اثر می‌کند. یک تغییر کوچک در هر جای این چرخه کمک کرده می‌تواند.	What we think changes how we feel and what we do, and what we do changes our thoughts again. A small change anywhere in this cycle can help.
 mind-cycle.example	یک مثال روزمره. همسایه بدون سلام از کنار شما می‌گذرد. فکر می‌کنید: «از من قهر است.» دل‌تان می‌شکند و تنها در خانه می‌مانید.	An everyday example. A neighbour walks past without greeting you. You think: 'She is angry with me.' You feel hurt, and you stay at home alone.
 mind-cycle.grows	این چرخه بزرگ‌تر می‌شود. تنها در خانه، فکرهای غمگین بیشتری می‌آید: «هیچ‌کس مرا دوست ندارد.» حال‌تان بدتر می‌شود و کمتر کار می‌کنید. چرخه دوباره دور می‌خورد.	The cycle can grow. Alone at home, more sad thoughts come: 'Nobody likes me.' You feel worse, and do even less. The cycle turns again.
@@ -1568,6 +1616,7 @@ mind-cycle.soon.daily	کارهای روزانه یا مراقبت خانواده
 mind-cycle.soon.drugs	برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید	you use opium, pills or other drugs to cope
 mind-cycle.fault	آمدن فکرهای سخت تقصیر شما نیست. جلوی آن‌ها را گرفته نمی‌توانید، اما انتخاب کرده می‌توانید که بعد چه کنید.	It is not your fault that hard thoughts come. You cannot stop them, but you can choose what to do next.
 mind-calm.title	آرام کردن بدن: نفس آهسته	Calm the body: slow breathing
+mind-calm.summary	نفس آهسته و حس کردن زمین، قدم به قدم، در چند دقیقه.	Slow breathing and grounding, step by step, in a few minutes.
 mind-calm.lead	وقتی فشار روحی زیاد است، اول بدن را آرام کنید. این تمرین‌ها چند دقیقه وقت می‌گیرد و هر جا، نشسته یا ایستاده، انجام شده می‌تواند.	When stress is strong, calm the body first. These exercises take a few minutes, and you can do them anywhere, sitting or standing.
 mind-calm.sit	بنشینید و شانه‌ها را رها کنید. بنشینید، پاها را صاف روی زمین بگذارید و دست‌ها را آرام بگذارید. شانه‌ها را رها کنید. چشم‌ها را ببندید، یا پایین ببینید.	Sit and drop your shoulders. Sit with your feet flat on the floor and your hands resting. Let your shoulders drop. Close your eyes, or look down.
 mind-calm.out	اول، همهٔ هوا را بیرون کنید. آهسته نفس را بیرون کنید، مثل این‌که بالای چای داغ پف می‌کنید. بعد بگذارید هوا خودش داخل شود.	First, breathe all the air out. Breathe out slowly, as if blowing on hot tea. Then let the air come back in by itself.
@@ -1595,6 +1644,7 @@ anim.breathe.s4	و از راه دهن آهسته نفس را بیرون کنید
 anim.breathe.s5	دوباره، همراه دایره. داخل، دو، سه. بیرون، دو، سه، چهار.	Again, with the circle. In, two, three. Out, two, three, four.
 anim.breathe.s6	حدود دو دقیقه همراه دایره نفس بکشید. بعد پاها را به زمین فشار دهید و سه چیز دور و بر خود را ببینید.	Keep breathing with the circle for about two minutes. Then press your feet into the floor, and notice three things around you.
 mind-problems.title	حل مشکل‌ها قدم به قدم	Solving problems in small steps
+mind-problems.summary	مشکل‌های زیاد یکجا؟ یکی‌یکی، با یک پلان کوچک.	Many problems? Take one at a time, with a small plan.
 mind-problems.lead	وقتی مشکل‌های زیاد یکجا می‌آیند، ذهن گیر می‌ماند. اگر آن‌ها را یکی‌یکی و قدم به قدم پیش ببرید، آسان‌تر می‌شوند.	When many problems come at once, the mind can freeze. Taking them one at a time, in small steps, makes them easier to face.
 mind-problems.list	مشکل‌های خود را بشمارید. آن‌ها را بلند بگویید، یا از کسی بخواهید بنویسد. بعد جدا کنید: آن‌هایی که تغییر داده می‌توانید، و آن‌هایی که نمی‌توانید.	List your problems. Say them out loud, or ask someone to write them down. Then sort them: ones you can change, and ones you cannot.
 mind-problems.pick	یک مشکل کوچک را انتخاب کنید. با مشکلی شروع کنید که تغییر داده می‌توانید و خیلی بزرگ نیست. آن را در چند کلمه بگویید، مثلاً: «وقتی باران می‌بارد، بام چکه می‌کند.»	Pick one small problem. Start with one you can change and that is not too big. Say it in a few words, like: 'The roof leaks when it rains.'
@@ -1615,6 +1665,7 @@ mind-problems.soon.daily	کارهای روزانه یا مراقبت خانوا�
 mind-problems.soon.drugs	برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید	you use opium, pills or other drugs to cope
 mind-problems.share	مشکل‌ها وقتی با کسی شریک شوند، سبک‌تر می‌شوند. از کسی که اعتماد دارید بخواهید در پلان کمک کند.	Problems feel lighter when shared. Ask someone you trust to help you with the plan.
 mind-routine.title	دل‌تنگی: خواب و برنامهٔ روزانه	Low mood: sleep and daily routine
+mind-routine.summary	وقتی دل‌تنگ هستید، کارهای کوچک پلان‌شده و خواب منظم کمک می‌کند.	When you feel low, small planned activities and regular sleep help.
 mind-routine.lead	دل‌تنگی باعث می‌شود کمتر کار کنیم، و کمتر کار کردن دل‌تنگی را بیشتر می‌کند. انجام کارهای کوچک، قدم به قدم، حال را دوباره بهتر کرده می‌تواند.	Low mood makes us do less, and doing less makes the mood lower. Doing small things, step by step, can lift it again.
 mind-routine.wake	هر روز در یک وقت بیدار شوید. هر روز تقریباً در یک وقت بیدار شوید، حتی بعد از یک شب بد. صبح‌ها در روشنی آفتاب باشید و خواب روز را کوتاه نگه دارید.	Get up at the same time. Get up at about the same time every day, even after a bad night. Get daylight in the morning, and keep day sleeps short.
 mind-routine.plan	هر روز یک کار خوب را پلان کنید. کارهای کوچکی را انتخاب کنید که پیش از این خوش داشتید، یا برای شما مهم است: چای با همسایه، باغچه، بازی با طفل.	Plan one good thing a day. Choose small things you used to enjoy, or that matter to you: tea with a neighbour, the garden, playing with a child.
@@ -1638,6 +1689,7 @@ mind-routine.soon.daily	کارهای روزانه یا مراقبت خانواد
 mind-routine.soon.drugs	برای تحمل، تریاک، تابلیت یا مواد مخدر دیگر استفاده می‌کنید	you use opium, pills or other drugs to cope
 mind-routine.praise	هر شام، یک کاری را که امروز کردید به یاد بیاورید، هر قدر هم کوچک باشد. این یک موفقیت است.	Each evening, remember one thing you did today, however small. That is a success.
 hygiene.title	دست، آب و غذای پاک	Clean hands, water and food
+hygiene.summary	عادت‌های ساده که جلوی اسهال و مریضی‌های دیگر را می‌گیرد	Simple habits that stop diarrhoea and other illnesses spreading
 hygiene.lead	اسهال و بسیاری مریضی‌های دیگر از راه دست، آب و غذای ناپاک سرایت می‌کند. عادت‌های ساده همه خانواده را محافظت می‌کند.	Diarrhoea and many other illnesses spread through dirty hands, water and food. Simple habits protect the whole family.
 hygiene.hands	دست‌ها را با صابون بشویید. بعد از تشناب، و بعد از پاک کردن طفل پس از رفع حاجت، دست‌ها را بشویید. همچنان پیش از پختن، پیش از خوردن و پیش از غذا دادن به طفل.	Wash hands with soap. Wash after the toilet and after cleaning a child's bottom. Also before cooking, before eating and before feeding a child.
 hygiene.safe-water	آب نوشیدنی را پاک کنید. آب نوشیدنی را بجوشانید تا خوب به جوش بیاید، یا طوری که کارمند صحی نشان می‌دهد، کلورین بیندازید.	Make drinking water safe. Bring drinking water to a full, bubbling boil, or add chlorine as the health worker shows you.
@@ -1665,6 +1717,7 @@ anim.spread.s5	سرفه و هوا: سرفه قطره‌های ریز را پخش
 anim.spread.s6	پشه و پشه‌خاکی شام و شب نیش می‌زنند. آن‌ها ملاریا و لیشمانیا را پخش می‌کنند؛ لیشمانیا زخمی است که جور نمی‌شود. زیر پشه‌خانهٔ دوادار بخوابید و شام‌ها دست و پا را بپوشانید.	Mosquitoes and sandflies bite in the evening and at night. They spread malaria and leishmaniasis, the sore that does not heal. Sleep under a treated net, and cover arms and legs in the evening.
 anim.spread.s7	صابون، آب پاک، غذای پوشیده، تشناب سرپوش‌دار، سرفه در آرنج و پشه‌خانه. عادت‌های کوچکی که همهٔ خانواده را صحتمندتر نگه می‌دارد.	Soap, safe water, covered food, a covered latrine, an elbow for coughs, and a bed net. Small habits that keep the whole family healthier.
 pneumonia-adult.title	سینه‌بغل در بزرگسالان	Chest infection in adults
+pneumonia-adult.summary	سرفه، تب و نفس تیز امروز به کلینیک ضرورت دارد.	Cough, fever and fast breathing need the clinic today.
 pneumonia-adult.lead	سینه‌بغل در زمستان بسیاری از بزرگسالان را می‌کشد، مخصوصاً پیران، سگرت‌کشان و کسانی که مریضی دیگری دارند. سرفه با تب و نفس تیز یا مشکل به انتی‌بیوتیک از کلینیک ضرورت دارد، و گاهی به اکسیجن در شفاخانه.	Chest infections kill many adults in winter, especially old people, smokers and those with other illnesses. A cough with fever and fast or difficult breathing needs antibiotics from the clinic, and sometimes oxygen in hospital.
 pneumonia-adult.signs	زکام یا سینه‌بغل؟. زکام، آب‌ریزش بینی و سرفهٔ خفیف است. سینه‌بغل تب، سرفه با بلغم غلیظ یا زنگ‌رنگ، نفس تیز، درد سینه هنگام نفس کشیدن و خستگی شدید می‌آورد.	Cold or chest infection?. A cold is a runny nose and mild cough. A chest infection brings fever, cough with thick or rusty sputum, fast breathing, chest pain on breathing, and great tiredness.
 pneumonia-adult.home	مراقبت در خانه تا رسیدن به کلینیک. استراحت کنید، مایعات گرم را زیاد بار بنوشید و خوردن را ادامه دهید. به جای دراز کشیدن بنشینید. پاراسیتامول از کلینیک به تب و درد کمک می‌کند. سگرت نکشید.	Care at home while you go. Rest, drink warm fluids often, and keep eating. Sit up rather than lie flat. Paracetamol from the clinic helps fever and pain. Do not smoke.
@@ -1691,6 +1744,7 @@ pneumonia-adult.dont.stop	وقتی بهتر شدید انتی‌بیوتیک ر�
 pneumonia-adult.dont.smoke	در وقت مریضی سگرت نکشید و در دود بخاری ننشینید.	Do not smoke or sit in stove smoke while ill.
 pneumonia-adult.samangan	سمنگان در سال ۲۰۲۵ (۱۴۰۴) بلندترین میزان سینه‌بغل را در کشور داشت. لباس گرم، بخاری با دودکش، و هوای تازه در اتاق تمام فامیل را حفاظت می‌کند.	Samangan had the highest rate of chest infections in the country in 2025. Warm clothes, a stove with a pipe, and fresh air in the room protect the whole family.
 diarrhoea-adult.title	اسهال در بزرگسالان	Diarrhoea in adults
+diarrhoea-adult.summary	بعد از هر اسهال او آر اس. خون یا ضعف شدید: بروید.	ORS after every loose stool. Blood or great weakness: go.
 diarrhoea-adult.lead	اسهال آبکی در تابستان و بعد از سیلاب، از راه آب و دست‌های ناپاک سرایت می‌کند. می‌تواند یک بزرگسال را در یک روز خشک کند، و کولرا می‌تواند در چند ساعت بکشد. او آر اس، اگر فوراً شروع شود، جان نجات می‌دهد.	Watery diarrhoea spreads in summer and after floods, through dirty water and hands. It can dry out an adult in a day, and cholera can kill within hours. ORS, started at once, saves lives.
 diarrhoea-adult.ors	بعد از هر اسهال او آر اس بنوشید. یک پاکت را در یک لیتر آب پاک حل کنید. بعد از هر اسهال یک گیلاس پر یا بیشتر، با جرعه‌های کوچک بنوشید. تا بند شدن اسهال ادامه دهید.	Drink ORS after every stool. Mix one packet in a litre of clean water. Drink a full cup or more after every loose stool, in small sips. Keep going until the diarrhoea stops.
 diarrhoea-adult.fluids	نوشیدنی‌ها و غذای دیگر. اگر او آر اس نیست، آب پاک، آب برنج، شوربا یا چای کم‌رنگ با کمی نمک بنوشید. خوردن غذای سبک را ادامه دهید. مادران شیرده شیردهی را ادامه دهند.	Other drinks and food. If no ORS, drink clean water, rice water, soup or weak tea with a little salt. Keep eating light food. Breastfeeding mothers keep breastfeeding.
@@ -1716,6 +1770,7 @@ diarrhoea-adult.dont.stop	به خاطر اسهال نوشیدن و خوردن ر
 diarrhoea-adult.dont.stream	لباس مریض را در جویی که دیگران از آن می‌نوشند نشویید.	Do not wash the sick person's clothes in the stream others drink from.
 diarrhoea-adult.packets	در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را دارد.	Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
 typhoid.title	محرقه (تیفویید)	Typhoid fever
+typhoid.summary	تب چند روزه از آب یا غذای ناپاک. با انتی‌بیوتیک علاج می‌شود.	Days of fever from dirty water or food. Antibiotics cure it.
 typhoid.lead	محرقه از آب یا غذایی می‌آید که با مدفوع شخص مریض ناپاک شده. تب روز به روز بالا می‌رود، با سردرد، خستگی، درد شکم و گاهی اسهال یا قبضیت. به انتی‌بیوتیک از کلینیک ضرورت دارد.	Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic.
 typhoid.signs	علایم را بشناسید. تبی که در چند روز بالا می‌رود و نمی‌رود، با سردرد، ضعف، بی‌اشتهایی، درد شکم، و اسهال یا قبضیت. اطفال شاید فقط تب داشته باشند.	Know the signs. Fever that rises over several days and does not go, with headache, weakness, poor appetite, belly pain, and diarrhoea or constipation. Children may only have fever.
 typhoid.go	تب بیش از ۳ روز: بروید. اگر تب بیش از ۳ روز دوام کرد، یا زودتر اگر مریض بسیار ناخوش است، به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.	Fever over 3 days: go. Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself.
@@ -1741,6 +1796,7 @@ typhoid.dont.stop	وقتی تب پایین آمد دوا را قطع نکنید.
 typhoid.dont.water	از جوی یا چاه روباز بدون جوشاندن یا کلورین آب ننوشید.	Do not drink from streams or open wells without boiling or chlorine.
 typhoid.season	محرقه بیشتر در تابستان و بعد از سیلاب سرایت می‌کند، وقتی چاه‌ها ناپاک می‌شوند. در آن وقت‌ها هر روز آب را بجوشانید.	Typhoid spreads most in summer and after floods, when wells get dirty. Boil water then, every day.
 hepatitis.title	زردی (هپاتیت)	Yellow eyes (hepatitis)
+hepatitis.summary	چشم‌های زرد یعنی جگر مریض است. در کلینیک معاینه شوید.	Yellow eyes mean the liver is ill. Get a clinic check.
 hepatitis.lead	زردی، یعنی چشم و پوست زرد با ادرار تیره، یعنی جگر التهاب دارد. اکثراً یک ویروس از آب یا غذای ناپاک است که با استراحت می‌گذرد. بعضی انواع از راه خون سرایت می‌کنند و معاینه و تداوی ضرورت دارند.	Jaundice, yellow eyes and skin with dark urine, means the liver is inflamed. Most often it is a virus from dirty water or food and passes with rest. Some types spread by blood and need testing and treatment.
 hepatitis.signs	علایم را بشناسید. خستگی، بی‌اشتهایی، دل‌بدی، درد زیر قبرغه‌های راست، بعد چشم و پوست زرد، ادرار تیره و مدفوع کم‌رنگ. شاید اول تب بیاید.	Know the signs. Tiredness, poor appetite, feeling sick, pain under the right ribs, then yellow eyes and skin, dark urine and pale stool. Fever may come first.
 hepatitis.rest	استراحت، مایعات و غذای ساده. در خانه استراحت کنید. آب پاک و او آر اس زیاد بنوشید. غذای ساده را کم‌کم بخورید. اکثر مردم در چند هفته بهتر می‌شوند.	Rest, fluids and simple food. Rest at home. Drink plenty of clean water and ORS. Eat small simple meals. Most people are better in a few weeks.
@@ -1766,6 +1822,7 @@ hepatitis.dont.share	پل، برس دندان یا سوزن را شریک نکن
 hepatitis.dont.breastfeed	شیردهی را قطع نکنید؛ مادر مبتلا به زردی می‌تواند شیر بدهد.	Do not stop breastfeeding; a mother with jaundice can keep feeding.
 hepatitis.vaccine	واکسین هپاتیت ب جزء واکسین‌های معمول اطفال است. کارت طفل را ببینید؛ دوز اول باید در وقت تولد باشد.	The hepatitis B vaccine is part of the children's routine vaccines. Check the child's card; the first dose should be at birth.
 winter-home.title	خانهٔ گرم و بی‌خطر در زمستان	Safe warm home in winter
+winter-home.summary	دود و گاز بخاری به شش‌ها ضرر دارد و می‌تواند بکشد.	Smoke and stove fumes harm the lungs and can kill.
 winter-home.lead	دود آتش، بخاری و صندلی اطفال را به سرفه و سینه‌بغل مریض می‌سازد. گاز زهری ذغال و بخاری گازی بوی ندارد و می‌تواند تمام خانواده را در خواب بکشد.	Smoke from fires, stoves and the sandali makes children ill with cough and pneumonia. The poison gas from coal and gas heaters has no smell and can kill a whole family in their sleep.
 winter-home.chimney	از بخاری نل‌دار استفاده کنید. بخاری بسته که نلش به بیرون می‌رود، دود را از اتاق دور نگه می‌دارد. پیش از زمستان ببینید که نل سوراخ یا بند نباشد.	Use a stove with a pipe. A closed stove with a pipe to the outside keeps smoke out of the room. Before winter, check the pipe has no holes or blockage.
 winter-home.air	هوای تازه را داخل کنید. حتی در هوای سرد، کلکین یا دروازه را کمی باز بگذارید. هوای تازه دود و گاز را بیرون می‌برد.	Let fresh air in. Even in cold weather, leave a window or door a little open. Fresh air carries smoke and fumes out.
@@ -1781,6 +1838,7 @@ winter-home.dont.plastic	پلاستیک، تایر یا کثافات را برا
 winter-home.dont.pipe	نل بخاری را برای نگه داشتن گرمی بند نکنید	block the stove pipe to keep the heat in
 winter-home.dont.sandali	نگذارید اطفال سر خود را زیر صندلی کرده بخوابند	let children sleep with their head under the sandali
 home-safety.title	خانهٔ بی‌خطر: دود و گاز	Safe home: fumes and gas
+home-safety.summary	گاز زهری آتش، موتر و جنراتور، و بالون گاز: بی‌خطر بمانید.	Poison gas from fires, cars and generators, and gas bottles: stay safe.
 home-safety.lead	دود آتش، بخاری، موتر و جنراتور گاز زهری دارد که نه بو دارد و نه رنگ. این گاز می‌تواند تمام خانواده را در خواب بکشد. گاز پخت‌وپز هم ممکن است نشت کند و آتش بگیرد.	Fires, heaters and engines give off a poison gas with no smell or colour. It can kill a family in their sleep. Cooking gas can leak and burn.
 home-safety.engines	موتر، جنراتور و آتش: فقط در هوای آزاد. جنراتور، موتر یا موترسایکل را هرگز در داخل خانه یا نزدیک کلکین روشن نکنید. هرگز در اتاق بسته تنور یا آتش پخت‌وپز روشن نکنید.	Engines and fires: only in open air. Never run a generator, car or motorbike indoors or by a window. Never use a tandoor or cooking fire in a closed room.
 home-safety.winter	صندلی، منقل و بخاری در زمستان. نل بخاری، هوای تازه، و خاموش کردن آتش پیش از خواب.	Sandali, brazier and heater in winter. Stove pipes, fresh air, and putting fires out before sleep.
@@ -1796,6 +1854,7 @@ home-safety.dont	این کارها را نکنید:	Do not:
 home-safety.dont.seller	گاز را از فروشندهٔ ناشناس نخرید و بالون زنگ‌زده یا ضربه‌خورده را استفاده نکنید	buy gas from unknown sellers, or use a rusty or dented bottle
 home-safety.dont.children	نگذارید اطفال با بالون، شیر گاز یا اجاق بازی کنند	let children play with the gas bottle, valve or cooker
 electric-safety.title	برق بی‌خطر در خانه	Safe electricity at home
+electric-safety.summary	سیم لچ، آب، سیم‌کشی خودسر، بتری سولر و جنراتور: بی‌خطر بمانید.	Bare wires, water, hook-ups, solar batteries and generators: stay safe.
 electric-safety.lead	سیم لچ، آب و سیم‌کشی خودسر می‌تواند در یک لحظه بکشد. اطفال بیشتر از همه در خطر هستند.	Bare wires, water and home-made hook-ups can kill in a second. Children are most at risk.
 electric-safety.wires	سیم لچ و پلگ شکسته را ترمیم کنید. سیم لچ، پلگ ترک‌خورده و ساکت شکسته را ترمیم کنید یا از مستری برق بخواهید. پلگ‌های زیاد را در یک ساکت نزنید.	Mend bare wires and broken plugs. Mend bare wires, cracked plugs and broken sockets, or ask an electrician. Do not put many plugs into one socket.
 electric-safety.dry	دست خشک، زمین خشک. به سویچ و پلگ فقط با دست خشک و روی زمین خشک دست بزنید. سیم‌ها را از زمین و آب دور نگه دارید.	Dry hands, dry floor. Touch switches and plugs only with dry hands, standing on a dry floor. Keep wires off the ground and away from water.
@@ -1811,6 +1870,7 @@ electric-safety.dont.washing	لباس تر را روی سیم برق آویزا�
 electric-safety.dont.rug	سیم را زیر قالین یا بوریا نکشید، آنجا کهنه می‌شود	run wires under rugs or mats, where they wear out
 electric-safety.dont.kite	نزدیک لین برق گدی‌پران بازی نکنید یا بالای درخت نروید	fly kites or climb trees near power lines
 fire-safety.title	جلوگیری از آتش‌سوزی در خانه	Fire safety at home
+fire-safety.summary	تنور، چراغ، تیل خاک و شمع: از آتش‌سوزی و سوختگی جلوگیری کنید.	Tandoor, lamps, kerosene and candles: prevent fires and burns.
 fire-safety.lead	آتش از تنور، بخاری، چراغ تیلی، شمع و گاز شروع می‌شود. بیشتر سوختگی‌ها در خانه، به اطفال و زنانی که پخت‌وپز می‌کنند، رخ می‌دهد. چند عادت ساده و یک پلان، خانوادهٔ شما را بی‌خطر نگه می‌دارد.	Fires start from tandoors, stoves, kerosene lamps, candles and gas. Most burns happen at home, to children and to women cooking. A few habits and a plan keep your family safe.
 fire-safety.scarf	چادر را نزدیک آتش جمع کنید. وقتی در تنور نان می‌پزید یا پخت‌وپز می‌کنید، چادر و آستین‌های گشاد را جمع کنید. چوب، تکه و سوخت را از شعله دور نگه دارید.	Tuck in your scarf at the fire. When you bake at the tandoor or cook, tuck in your chador and loose sleeves. Keep wood, cloth and fuel away from the flames.
 fire-safety.lamps	چراغ و شمع: محکم و زیر نظر. چراغ و شمع را روی جای محکم و هموار، دور از پرده و بستر بگذارید. پیش از خواب یا بیرون رفتن خاموش‌شان کنید.	Lamps and candles: firm and watched. Stand lamps and candles on a firm, flat place, away from curtains and bedding. Put them out before you sleep or go out.
@@ -1826,6 +1886,7 @@ fire-safety.dont.petrol	برای روشن کردن آتش، تیل خاک یا �
 fire-safety.dont.back	برای وسایل دوباره داخل خانهٔ آتش‌گرفته نروید	go back into a burning house for belongings
 fire-safety.dont.matches	نگذارید اطفال با گوگرد یا لایتر بازی کنند	let children play with matches or lighters
 bite-safety.title	دوری از مار، گژدم و سگ	Keep snakes, scorpions and dogs away
+bite-safety.summary	عادت‌های ساده در خانه و در شب، از گزیدن جلوگیری می‌کند.	Simple habits at home and at night prevent bites and stings.
 bite-safety.lead	مار و گژدم در انبار چوب، زیر سنگ، درز دیوار و در بستر پنهان می‌شوند، بیشتر در ماه‌های گرم. چند عادت ساده آن‌ها را از خانوادهٔ شما دور نگه می‌دارد.	Snakes and scorpions hide in wood piles, under stones, in cracks and in bedding, most of all in the warm months. A few habits keep them away from your family.
 bite-safety.shake	بوت و بستر را بتکانید. پیش از استفاده، بوت، لباس و بستر را بتکانید. گژدم‌ها، بیشتر شب‌ها، در داخل آن‌ها پنهان می‌شوند.	Shake out shoes and bedding. Shake out shoes, clothes and bedding before you use them. Scorpions hide inside, most of all at night.
 bite-safety.night	شب: چراغ دستی و بوت. وقتی شب بیرون می‌روید، چراغ دستی ببرید و بوت بسته بپوشید. مارها در شب‌های گرم بیرون می‌آیند.	At night: a torch and shoes. When you go out at night, carry a torch and wear closed shoes. Snakes move about on warm nights.
@@ -1835,6 +1896,7 @@ bite-safety.yard	خانه و حویلی را پاک نگه دارید. درز د
 bite-safety.bitten	مار گزیده یا گژدم زده؟. آرام بمانید، انگشتر را بکشید و همین حالا به شفاخانه بروید. نه بریدن، نه مکیدن، نه بستن محکم. صفحه را باز کنید.	Bitten or stung?. Keep still, take off rings, and go to hospital now. No cutting, sucking or tight bands. Open the page.
 bite-safety.dog-bite	سگ‌ها و هاری. به اطفال دربارهٔ سگ‌ها بیاموزید و سگ‌های خود را واکسین کنید. هر گزیدگی یا خراش: ۱۵ دقیقه بشویید و همان روز برای واکسین هاری بروید. صفحه را باز کنید.	Dogs and rabies. Teach children about dogs and vaccinate your own. Any bite or scratch: wash it for 15 minutes and go for rabies vaccine the same day. Open the page.
 animal-illness.title	مریضی‌هایی که از حیوانات می‌آید	Illness from animals
+animal-illness.summary	تب کانگو، تب مالت و سیاه‌زخم از مواشی می‌آید. خانواده را حفاظت کنید.	Congo fever, Malta fever and anthrax come from livestock. Protect your family.
 animal-illness.lead	کنه، خون و شیر خام گوسفند، بز و گاو می‌تواند مریضی‌های خطرناک داشته باشد. احتیاط ساده هنگام دوشیدن، ذبح و کار با حیوانات تمام خانواده را حفاظت می‌کند.	Ticks, blood and raw milk from sheep, goats and cattle can carry dangerous diseases. Simple care when you milk, slaughter and handle animals protects the whole family.
 animal-illness.milk	همه شیر را بجوشانید. شیر را پیش از نوشیدن یا ساختن ماست، قروت و پنیر خوب بجوشانید. شیر خام می‌تواند تب مالت بیاورد.	Boil all milk. Boil milk well before drinking it or making yoghurt, qurut or cheese. Raw milk can give Malta fever.
 animal-illness.slaughter	هنگام ذبح دست‌ها را بپوشانید. هنگام ذبح یا قطع کردن گوشت دستکش یا خریطهٔ پلاستیکی به دست کنید. بعد دست‌ها را با صابون بشویید.	Cover your hands when slaughtering. Wear gloves or plastic bags on your hands when you slaughter or cut meat. Afterwards, wash your hands with soap.
@@ -1860,6 +1922,7 @@ animal-illness.dont.waste	باقی‌ماندهٔ ذبح را نزدیک خان�
 animal-illness.eid	در عید قربان که حیوانات زیاد ذبح می‌شود، بیشتر احتیاط کنید.	Take extra care at Eid al-Adha, when many animals are slaughtered.
 animal-illness.dog	گزیدن سگ می‌تواند هاری بیاورد. صفحهٔ کمک‌های اولیه را ببینید و همان روز برای واکسین بروید.	A dog bite can cause rabies. See the First aid page and go for the vaccine the same day.
 leishmaniasis.title	زخم سالک (لیشمانیا)	Salak sores (leishmaniasis)
+leishmaniasis.summary	گزیدن پشهٔ خاکی زخم‌های دیرجور می‌آورد. تداوی در کلینیک کمک می‌کند.	Sandfly bites cause slow-healing sores. Clinic treatment helps.
 leishmaniasis.lead	سالک با یک دانهٔ کوچک سرخ در جای گزیدن پشهٔ خاکی شروع می‌شود، اکثراً روی روی، دست یا پا. آهسته‌آهسته زخم می‌شود که ماه‌ها می‌ماند و جایش تمام عمر باقی می‌ماند.	Salak starts as a small red bump where a tiny sandfly has bitten, often on the face, hands or legs. It slowly becomes a sore that lasts for months and leaves a scar for life.
 leishmaniasis.clinic	زود به کلینیک بروید. سالک قابل تداوی است. تداوی زود کمک می‌کند که زخم زودتر جور شود و جایش کوچک‌تر بماند.	Go to the clinic early. Salak can be treated. Early treatment helps the sore heal sooner and leave a smaller scar.
 leishmaniasis.cover	زخم را پاک و پوشیده نگه دارید. زخم را آرام با صابون و آب پاک بشویید و با تکهٔ پاک بپوشانید. پوشاندن نمی‌گذارد پشهٔ خاکی مریضی را به دیگران برساند.	Keep the sore clean and covered. Wash the sore gently with soap and clean water, and cover it with a clean cloth. Covering stops sandflies carrying it to others.
@@ -1883,6 +1946,7 @@ leishmaniasis.dont.scratch	زخم را نخارید و پوست آن را نکن
 leishmaniasis.dont.injection	بدون معاینهٔ کلینیک از دواخانه پیچکاری نخرید	buy injections from a shop without a clinic check
 leishmaniasis.spread	سالک با دست زدن سرایت نمی‌کند، اما پشهٔ خاکی آن را از زخم یک نفر به دیگری می‌برد.	Salak does not spread by touch, but sandflies carry it from one person's sore to another.
 dog-bite.title	گزیدن سگ و هاری	Dog bites and rabies
+dog-bite.summary	جای گزیدگی را ۱۵ دقیقه بشویید، بعد امروز برای واکسین هاری بروید.	Wash the bite 15 minutes, then go for rabies vaccine today.
 dog-bite.lead	هاری از راه گزیدن یا لیسیدن سگ، شغال، روباه، پشک یا حیوان مریض دیگر سرایت می‌کند. وقتی مریضی شروع شد همیشه می‌کشد، اما واکسین بعد از گزیدگی، اگر زود شروع شود، همیشه از آن جلوگیری می‌کند.	Rabies is passed by the bite or lick of a sick dog, jackal, fox, cat or other animal. Once the illness starts it always kills, but the vaccine after a bite prevents it every time if started early.
 dog-bite.wash	۱۵ دقیقه بشویید. فوراً جای گزیدگی را با صابون و آب روان زیاد، یک ۱۵ دقیقهٔ کامل بشویید. این کار مقدار زیاد ویروس را می‌شوید. بعد با پارچهٔ پاک بپوشانید.	Wash for 15 minutes. Straight away, wash the bite with soap and lots of running water for a full 15 minutes. This washes out much of the virus. Then cover it with a clean cloth.
 dog-bite.go	همان روز برای واکسین بروید. امروز به کلینیک یا شفاخانه بروید، حتی برای گزیدگی یا خراش کوچک از سگی که سالم به نظر می‌رسید. واکسین چند پیچکاری در حدود ۲ هفته است؛ همه را تمام کنید.	Go the same day for the vaccine. Go to the clinic or hospital today, even for a small bite or scratch from a dog that looked well. The vaccine is several injections over about 2 weeks; finish them all.
@@ -1907,6 +1971,7 @@ dog-bite.dont.wait	برای واکسین منتظر نمانید که ببینی
 dog-bite.dont.stitch	زخم گزیدگی را در خانه بخیه نزنید و محکم نبندید.	Do not stitch or close a bite wound tightly at home.
 dog-bite.card	کارت واکسین را نگه دارید و در تاریخ‌های نوشته‌شده برای هر پیچکاری برگردید. دوره فقط وقتی حفاظت می‌کند که تمام شود.	Keep the vaccine card and go back for every injection on the dates written. The course only protects if it is completed.
 scabies.title	گری (خارش پوست)	Scabies (itchy skin)
+scabies.summary	خارشی که شب بدتر است و در فامیل سرایت می‌کند. کلینیک کریم دارد.	Night itching that spreads in the family. The clinic has a cream.
 scabies.lead	گری یک جانور بسیار کوچک است که در پوست زندگی می‌کند و خارش شدید می‌دهد، که شب بدتر است. از راه تماس پوست و لحاف و بستر مشترک سرایت می‌کند. تمام اهل خانه باید یکجا تداوی شوند.	Scabies is a tiny mite that lives in the skin and causes strong itching, worst at night. It spreads by skin contact and shared bedding. The whole household must be treated at the same time.
 scabies.signs	علایم را بشناسید. خارش، که شب بدتر است، با دانه‌های کوچک یا خط‌های باریک بین انگشتان، روی بند دست، کمر و شرمگاه. طفل شیرخوار آن را روی کف دست، کف پا و سر می‌گیرد.	Know the signs. Itching, worse at night, with small bumps or thin lines between the fingers, on wrists, waist and private parts. Babies get it on palms, soles and head.
 scabies.all	همه را یکجا تداوی کنید. همهٔ کسانی که در خانه می‌خوابند در یک روز کریم را استعمال کنند، حتی آن‌هایی که هنوز خارش ندارند. در غیر آن فوراً برمی‌گردد.	Treat everyone together. Everyone who sleeps in the house uses the cream on the same day, even those who do not itch yet. Otherwise it comes straight back.
@@ -1930,6 +1995,7 @@ scabies.dont.one	فقط کسی را که خارش دارد تداوی نکنید
 scabies.dont.steroid	برای خارش کریم‌های استرویید دکان را استعمال نکنید؛ گری را بدتر می‌کند.	Do not use shop steroid creams for itching; they make scabies worse.
 scabies.shame	گری نشانهٔ ناپاکی نیست. هر جا که مردم نزدیک هم می‌خوابند و در کمپ‌های شلوغ سرایت می‌کند. هر کس می‌تواند بگیرد.	Scabies is not about being dirty. It spreads wherever people sleep close together, and in crowded camps. Anyone can get it.
 eye-infection.title	چشم سرخ و چرکی	Red, sticky eyes
+eye-infection.summary	چشم سرخ یا چرکی زود سرایت می‌کند. روی پاک و مرهم کلینیک کمک می‌کند.	Red or sticky eyes spread fast. Clean faces and clinic ointment help.
 eye-infection.lead	چشم سرخ و چرکی زیاد دیده می‌شود، مخصوصاً در اطفال، در تابستان و جایی که مگس زیاد است. اکثرشان با پاک کردن و مرهم کلینیک جور می‌شوند، اما بعضی عفونت‌ها می‌توانند بینایی را ببرند.	Red, sticky eyes are common, especially in children, in summer and where flies are many. Most get better with cleaning and ointment from the clinic, but some infections can take the sight.
 eye-infection.clean	چشم‌ها را آهسته پاک کنید. دست‌ها را بشویید. با یک تکهٔ پاک و تر از گوشهٔ داخلی چشم به طرف بیرون پاک کنید، برای هر چشم یک قسمت تازه. بعد دوباره دست‌ها را بشویید.	Clean the eyes gently. Wash your hands. Wipe from the inner corner outwards with a clean wet cloth, a fresh part for each eye. Wash hands again after.
 eye-infection.faces	روی پاک جلو تراخم را می‌گیرد. روی اطفال را هر روز با صابون بشویید، و مگس‌ها را از روی دور کنید. روی ناپاک مرض چشم تراخم را سرایت می‌دهد، که در پیری کور می‌کند.	Clean faces stop trachoma. Wash children's faces with soap every day, and keep flies off the face. A dirty face passes the trachoma eye disease, which can blind in old age.
@@ -1955,6 +2021,7 @@ eye-infection.dont.drops	بدون معاینهٔ کلینیک قطرهٔ دکا�
 eye-infection.dont.patch	چشم چرکی را با پارچهٔ سخت نبندید.	Do not cover a sticky eye with a tight patch.
 eye-infection.samangan	سمنگان یکی از چند جای افغانستان است که هنوز تراخم در آن دیده می‌شود. روی پاک، آب پاک و تشناب بینایی اطفال را حفاظت می‌کند.	Samangan is one of the few places in Afghanistan where trachoma is still found. Clean faces, clean water and latrines protect the children's sight.
 dental.title	دندان و دندان‌درد	Teeth and toothache
+dental.summary	دندان‌ها را روزی دو بار پاک کنید. روی پندیده با دندان‌درد به کلینیک ضرورت دارد.	Clean teeth twice daily. Toothache with a swollen face needs the clinic.
 dental.lead	دندان‌های خراب در اطفال و بزرگسالان افغانستان بسیار زیاد است و تقریباً هیچ وقت تداوی نمی‌شود. پاک کردن دندان‌ها، شکر و چای شیرین کمتر، و تداوی زود جلو درد و افتادن دندان‌ها را می‌گیرد.	Rotten teeth are very common in Afghan children and adults, and almost never treated. Cleaning teeth, less sugar and sweet tea, and early treatment stop pain and loss of teeth.
 dental.brush	دندان‌ها را روزی دو بار پاک کنید. با برس و کریم دندان فلوراید، یا مسواک پاک. صبح و پیش از خواب پاک کنید. به اطفال تا حدود ۸ سالگی کمک کنید.	Clean teeth twice a day. Use a brush with fluoride toothpaste, or a clean miswak. Clean in the morning and before sleep. Help children until they are about 8.
 dental.sugar	شکر و چای شیرین کمتر. شیرینی، بسکویت، نوشابه و چای شیرین زیاد دندان‌ها را خراب می‌کند. بین غذاها آب، میوه و غذای ساده بدهید.	Less sugar and sweet tea. Sweets, biscuits, fizzy drinks and many cups of sweet tea rot the teeth. Give water, fruit and plain food between meals.
@@ -1979,6 +2046,7 @@ dental.dont.shop	برای دندان‌درد از دکان انتی‌بیوت�
 dental.dont.pliers	نگذارید شخص بی‌تجربه دندان را با انبور بکشد.	Do not let an untrained person pull a tooth with pliers.
 dental.pregnancy	خانم‌های حامله: دندان‌ها را خوب پاک کنید و به داکتر دندان بروید؛ مرض بیره در حاملگی زیاد است.	Pregnant women: clean teeth well and see the dentist; gum disease is common in pregnancy.
 floods-quakes.title	سیلاب و زلزله	Floods and earthquakes
+floods-quakes.summary	از پیش آماده شوید و بدانید هنگام سیلاب یا زلزله چه کنید.	Get ready early, and know what to do in floods or earthquakes.
 floods-quakes.lead	سیلاب‌های بهاری و زلزله در سمنگان مردم را کشته است. اگر بدانید پیش از حادثه، هنگام حادثه و بعد از آن چه کنید، خانوادهٔ خود را نجات می‌دهید.	Spring floods and earthquakes have killed people in Samangan. Knowing what to do before, during and after can save your family.
 floods-quakes.plan	پلان خانواده را بسازید. یک جای بلند و امن را برای جمع شدن تعیین کنید و بگویید چه کسی اطفال و پیرها را می‌برد. یک خریطه با آب، غذا، دوا و چراغ دستی آماده بگذارید.	Make a family plan. Choose a safe high place to meet, and agree who will carry babies and old people. Keep a bag ready with water, food, medicines and a torch.
 floods-quakes.quake	هنگام زلزله: بنشینید، بپوشانید، بگیرید. روی زمین بنشینید، سر خود را زیر میز محکم یا کنار دیوار داخلی بپوشانید و محکم بگیرید. تا زمین می‌لرزد بیرون ندوید.	In an earthquake: drop, cover, hold. Drop to the ground, cover your head under a strong table or by an inside wall, and hold on. Do not run out while the ground shakes.
@@ -1993,6 +2061,7 @@ floods-quakes.dont.gas	اگر بوی گاز می‌آید، آتش یا گوگر
 floods-quakes.dont.play	نگذارید اطفال در آب سیلاب بازی کنند	let children play in flood water
 floods-quakes.feelings	بعد از حادثه، ترس و بی‌خوابی عادی است. با هم صحبت کنید و صفحهٔ فشار روحی را ببینید.	After a disaster, fear and poor sleep are common. Talk together and see the Stress page.
 malaria.title	ملاریا	Malaria
+malaria.summary	تب با لرزه؟ امروز در کلینیک معاینهٔ ملاریا بگیرید.	Fever with shivering? Get a malaria test today.
 malaria.lead	ملاریا از گزیدن پشه‌ای می‌آید که شب می‌گزد، بیشتر در ماه‌های گرم و در شرق و جنوب کشور. تب با لرزه و عرق می‌دهد. یک معاینهٔ تیز خون آن را نشان می‌دهد و دوا آن را علاج می‌کند.	Malaria comes from the bite of a mosquito that bites at night, mostly in the warm months and in the east and south of the country. It causes fever with shivering and sweats. A quick blood test shows it and medicine cures it.
 malaria.test	تب؟ معاینه شوید. هر تبی در ماه‌های گرم، یا بعد از سفر به شرق یا جنوب، همان روز معاینهٔ خون ملاریا ضرورت دارد. معاینه ۱۵ دقیقه وقت می‌گیرد.	Fever? Get the test. Any fever in the warm months, or after travel to the east or south, needs a malaria blood test the same day. The test takes 15 minutes.
 malaria.medicine	تمام دوا را تمام کنید. دوای ملاریا را دقیقاً همان طور که کارمند صحی گفته بخورید، تا تمام شود، حتی وقتی تب رفته. قطع زود باعث برگشتن مریضی می‌شود.	Finish all the medicine. Take the malaria medicine exactly as the health worker says, until it is finished, even when the fever has gone. Stopping early lets the illness come back.
@@ -2019,6 +2088,7 @@ malaria.dont.stop	وقتی تب رفت تابلیت‌ها را قطع نکنی�
 malaria.dont.share	تابلیت‌های باقی‌مانده را به کسان دیگری که تب دارند ندهید.	Do not share unfinished tablets with others who have fever.
 malaria.samangan	در سمنگان ملاریا کم است. اکثر واقعات در کسانی است که در شرق یا جنوب کار کرده یا سفر کرده‌اند؛ به کارمند صحی بگویید کجا بوده‌اید.	In Samangan malaria is uncommon. Most cases are in people who worked or travelled in the east or south; tell the health worker where you have been.
 dengue.title	تب دنگی	Dengue fever
+dengue.summary	تب پشه‌ای شرق کشور. خونریزی یا استفراغ یعنی همین حالا شفاخانه.	Mosquito fever of the east. Bleeding or vomiting means hospital now.
 dengue.lead	دنگی از راه پشهٔ راه‌راهی سرایت می‌کند که در روز می‌گزد، بیشتر در ننگرهار و شرق، در آخر تابستان و خزان. اکثر مردم با استراحت و مایعات جور می‌شوند، اما بعضی وقتی تب پایین می‌آید بسیار مریض می‌شوند.	Dengue is spread by a striped mosquito that bites in the daytime, mostly in Nangarhar and the east, in late summer and autumn. Most people recover with rest and fluids, but some become very ill as the fever falls.
 dengue.signs	علایم را بشناسید. تب بلند ناگهانی با سردرد شدید، درد پشت چشم‌ها، درد عضلات و مفاصل، و گاهی دانه‌های جلدی. حدود یک هفته دوام می‌کند.	Know the signs. Sudden high fever with a bad headache, pain behind the eyes, muscle and joint pain, and sometimes a rash. It lasts about a week.
 dengue.fluids	استراحت کنید و زیاد بنوشید. آب، او آر اس، شوربا و آب میوه را زیاد بار بنوشید. استراحت کنید. مریض را از نزدیک زیر نظر بگیرید، مخصوصاً در روزهای ۳ تا ۷ که تب پایین می‌آید.	Rest and drink a lot. Drink water, ORS, soup and juice often. Rest. Watch the sick person closely, especially on days 3 to 7 when the fever comes down.
@@ -2043,6 +2113,7 @@ dengue.dont.shop	از دکان انتی‌بیوتیک یا پیچکاری نگ�
 dengue.dont.relax	وقتی تب پایین آمد خاطرجمع نشوید؛ روزهای خطرناک تازه شروع می‌شوند.	Do not relax when the fever drops; the dangerous days are just starting.
 dengue.east	دنگی در سال‌های اخیر در افغانستان پخش شده، بیشتر در ننگرهار، با واقعاتی در ولایات دیگر. اگر در شرق بوده‌اید و تب گرفتید، در کلینیک بگویید.	Dengue has spread in Afghanistan in recent years, mostly in Nangarhar, with cases in other provinces. If you have been in the east and get fever, say so at the clinic.
 cpr-adult.title	بزرگسالی که افتاده و نفس نمی‌کشد	Adult collapsed, not breathing
+cpr-adult.summary	تا رسیدن کمک، سینه را محکم و تیز فشار دهید.	Push hard and fast on the chest until help arrives.
 cpr-adult.lead	وقتی قلب یک بزرگسال بند می‌شود، می‌افتد، جواب نمی‌دهد و عادی نفس نمی‌کشد. فشار دادن فوری سینه می‌تواند او را زنده نگه دارد.	When an adult's heart stops, they fall, do not answer and stop breathing normally. Pushing on the chest at once can keep them alive.
 cpr-adult.safe	اول خطر، بعد شخص را ببینید. ببینید که برای شما خطری مانند سیم برق یا موتر نباشد. به شانه‌هایش بزنید و بلند بپرسید: خوب هستی؟	Check for danger, then the person. Check there is no danger to you, like electric wires or traffic. Tap the shoulders and shout: Are you all right?
 cpr-adult.help	کمک بخواهید، موتر بخواهید. بلند کمک بخواهید. یک نفر را برای آوردن موتر بفرستید، و اگر تلفن دارید، به کارمند صحی زنگ بزنید.	Shout for help, send for a car. Shout for help. Send someone for a car to go to hospital, and if you have a phone, call the health worker.
@@ -2065,6 +2136,7 @@ anim.cpr-adult.s5	۳۰ بار محکم و تیز فشار دهید: حدود ۵ 
 anim.cpr-adult.s6	اگر می‌توانید، ۲ نفس بدهید: سر را به عقب ببرید، بینی را بگیرید و در دهانش پف کنید تا سینه بالا بیاید. اگر نمی‌خواهید، تنها فشار دادن سینه هم خوب است.	If you are willing, give 2 breaths: tilt the head, pinch the nose and blow into the mouth until the chest rises. Pushing without breaths is also good.
 anim.cpr-adult.s7	ادامه دهید، ۳۰ فشار و ۲ نفس، یا تنها فشار، تا وقتی که شخص عادی نفس بکشد یا کمک برسد. اگر کسی نیامد، ادامه دهید و باز هم بلند کمک بخواهید. اگر کس دیگری هم کمک کرده می‌تواند، هر ۲ دقیقه نوبت را عوض کنید.	Keep going, 30 pushes and 2 breaths, or pushes only, until the person breathes normally or help arrives. If nobody comes, keep going and keep shouting for help. If another person can help, take turns every 2 minutes.
 unconscious.title	بی‌هوش، اما نفس می‌کشد	Unconscious but breathing
+unconscious.summary	او را به پهلو بخوابانید تا به آسانی نفس بکشد. برای همه سنین.	Lay them on their side so they can breathe. All ages.
 unconscious.lead	کسی که بیدار نمی‌شود اما نفس می‌کشد، ممکن است با زبان یا استفراغ خود خفه شود. خواباندن به پهلو راه نفسش را باز نگه می‌دارد.	A person who will not wake but is breathing can choke on their tongue or vomit. Lying on the side keeps the airway open.
 unconscious.check	نفسش را ببینید. به شانه‌هایش بزنید و بلند صدا کنید. اگر جواب نداد، سرش را به عقب ببرید، زنخش را بالا کنید و ۱۰ ثانیه سینه‌اش را ببینید.	Check breathing. Tap the shoulders and shout. If there is no answer, tilt the head back, lift the chin, and watch the chest for 10 seconds.
 unconscious.not-breathing	عادی نفس نمی‌کشد؟ سینه را فشار دهید. اگر عادی نفس نمی‌کشد، همین حالا فشار سینه را شروع کنید. صفحهٔ مخصوص سن او را ببینید.	Not breathing normally? Start CPR. If they are not breathing normally, start pushing on the chest now. See the page for their age.
@@ -2084,6 +2156,7 @@ unconscious.dont.alone	او را تنها به پشت رها نکنید	leave th
 unconscious.neck	بعد از افتادن، او را تا ممکن است کم تکان بدهید. اگر باید بچرخانید، سر و بدنش را در یک خط راست نگه دارید.	After a fall, move them as little as you can. If you must roll them, keep the head and body in a straight line.
 unconscious.hospital	در شفاخانه علت بی‌هوشی را پیدا و تداوی می‌کنند، مثلاً کمی شکر، مسمومیت یا خونریزی.	At hospital they find out why the person is unconscious and treat it, for example low sugar, poisoning or bleeding.
 bleeding.title	خونریزی شدید	Severe bleeding
+bleeding.summary	محکم فشار دهید و ادامه دهید. بند محکم فقط برای دست یا پا.	Press hard and keep pressing. Tie a band only on a limb.
 bleeding.lead	خونریزی زیاد می‌تواند در چند دقیقه کشنده باشد. فشار محکم روی زخم بیشتر خونریزی‌ها را بند می‌کند.	Heavy bleeding can kill in minutes. Firm pressure on the wound stops most bleeding.
 bleeding.press	روی زخم محکم فشار دهید. یک تکهٔ پاک روی زخم بگذارید و با دست‌ها محکم فشار دهید. اگر خریطهٔ پلاستیکی دارید، آن را به دست کنید.	Press hard on the wound. Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands.
 bleeding.keep	فشار را ادامه دهید، برندارید. حداقل ۱۰ دقیقه بدون برداشتن برای دیدن، فشار دهید. اگر خون از تکه گذشت، تکهٔ دیگر بالایش بگذارید و محکم‌تر فشار دهید.	Keep pressing, do not lift. Press for at least 10 minutes without lifting to look. If blood soaks through, put more cloth on top and press harder.
@@ -2105,6 +2178,7 @@ bleeding.dont.neck	گردن، سر یا تنه را با بند نبندید	tie
 bleeding.object	اگر چیزی در زخم فرو رفته، آن را نکشید. دور آن فشار دهید، نه روی آن.	If something is stuck in the wound, leave it in. Press around it, not on it.
 bleeding.hospital	در شفاخانه زخم را می‌دوزند، سیروم یا خون می‌دهند و پیچکاری تیتانوس می‌زنند.	At hospital they close the wound, give fluids or blood, and an injection against tetanus.
 falls-fractures.title	افتادن و شکستن استخوان	Falls and broken bones
+falls-fractures.summary	بعد از افتادن از بام یا درخت: گردن و کمر را محافظت کنید.	Fell from a roof or tree? Protect the neck and back.
 falls-fractures.lead	افتادن از بام‌های هموار، درخت و دیوار زیاد است. حرکت دادن می‌تواند آسیب گردن یا کمر را بدتر کند، پس شخص را فقط وقتی حرکت دهید که در خطر باشد.	Falls from flat roofs, trees and walls are common. Moving the person can make a neck or back injury worse, so move them only if they are in danger.
 falls-fractures.still	بی‌حرکت نگه دارید. بگویید که حرکت نکند. بالای سرش زانو بزنید و سرش را با دو دست، راست با بدن، بی‌حرکت نگه دارید تا کمک برسد.	Keep them still. Tell them not to move. Kneel at their head and hold it still with both hands, in line with the body, until help comes.
 falls-fractures.signs	علایم آسیب گردن یا کمر. درد گردن یا کمر، بی‌حسی یا ضعف دست و پا، یا افتادن سخت بر سر: شاید ستون فقرات آسیب دیده باشد.	Signs of a neck or back injury. Neck or back pain, numb or weak arms or legs, or a hard fall onto the head: the spine may be hurt.
@@ -2126,6 +2200,7 @@ falls-fractures.dont.bonesetter	به جای شفاخانه، استخوان را
 falls-fractures.hospital	در شفاخانه عکس (اکسری) می‌گیرند، استخوان شکسته را جا می‌اندازند و گچ می‌گیرند، و خونریزی داخلی را معاینه می‌کنند.	At hospital they take an X-ray, set and plaster broken bones, and check for bleeding inside.
 falls-fractures.safety	جلوگیری از افتادن از بام. دیوار دور بام‌های هموار و زینه‌ها، و راه‌های دیگر حفاظت اطفال. صفحه را باز کنید.	Prevent falls from roofs. Walls round flat roofs and stairs, and other ways to keep children safe. Open the page.
 head-injury.title	ضربه به سر	Head injury
+head-injury.summary	بعد از ضربه به سر: چه کسی شفاخانه لازم دارد و چه را ببینید.	After a knock to the head: who needs hospital, what to watch.
 head-injury.lead	بیشتر ضربه‌های سر خفیف هستند. اما خونریزی داخل کاسهٔ سر ممکن است چند ساعت بعد معلوم شود، پس شخص را یک روز از نزدیک ببینید.	Most knocks to the head are mild. But bleeding inside the skull can show hours later, so watch the person closely for a day.
 head-injury.unconscious	اگر بی‌هوش است، گردن را محافظت کنید. اگر شخص بی‌هوش است، شاید گردنش هم آسیب دیده باشد. سر و گردن را بی‌حرکت نگه دارید، نفسش را ببینید و یک نفر را برای آوردن موتر بفرستید.	Knocked out? Protect the neck. If the person is unconscious, the neck may be hurt too. Keep the head and neck still, check breathing, and send for a car.
 head-injury.cut	روی زخم سر فشار دهید. زخم سر زیاد خون می‌دهد. ۱۰ دقیقه با تکهٔ پاک محکم رویش فشار دهید.	Press on a bleeding scalp. A cut on the head bleeds a lot. Press on it firmly with a clean cloth for 10 minutes.
@@ -2145,6 +2220,7 @@ head-injury.dont.alone	او را ۲۴ ساعت تنها نگذارید	leave the
 head-injury.dont.work	نگذارید همان روز کار سخت کند یا موتر و موترسایکل براند	let them do hard work, or drive a car or motorbike, that day
 head-injury.hospital	در شفاخانه مغز را معاینه می‌کنند و اگر لازم باشد، برای عکس یا عملیات به شفاخانهٔ بزرگ‌تر می‌فرستند.	At hospital they check the brain, and if needed send them to a bigger hospital for a scan or an operation.
 electric-shock.title	برق‌گرفتگی	Electric shock
+electric-shock.summary	اول برق را قطع کنید؛ تا برق وصل است، به او دست نزنید.	Switch off first. Never touch them while the power is on.
 electric-shock.lead	سیم لچ، پلگ شکسته و سیم نزدیک آب می‌تواند برق کشنده بدهد. برق از او به شما هم می‌رسد، پس اول جای را بی‌خطر کنید.	Bare wires, broken plugs and wires near water can give a deadly shock. The power can pass into you too, so make it safe first.
 electric-shock.off	برق را قطع کنید. سویچ یا سویچ عمومی را خاموش کنید، یا پلگ را بکشید. تا برق قطع نشده، به شخص دست نزنید.	Switch off the power. Turn off the switch or the main switch, or pull out the plug. Do not touch the person until the power is off.
 electric-shock.stick	قطع کرده نمی‌توانید؟ چوب خشک. روی چیزی خشک بایستید. سیم را با یک چوب یا چوکی چوبی خشک دور کنید. هرگز چیز تر یا فلزی را استفاده نکنید.	Cannot switch off? Use dry wood. Stand on something dry. Push the wire away with a dry wooden stick or chair. Never use anything wet or metal.
@@ -2164,6 +2240,7 @@ electric-shock.dont.water	بر آتش برقی آب نریزید	throw water on 
 electric-shock.hospital	برق می‌تواند با یک نشانهٔ کوچک بیرونی، به قلب و داخل بدن آسیب برساند. در شفاخانه ضربان قلب را معاینه می‌کنند.	Electricity can harm the heart and the inside of the body while leaving only small marks. At hospital they check the heartbeat.
 electric-shock.safety	جلوگیری از برق‌گرفتگی در خانه. سیم، ساکت، بتری سولر و جنراتور: چطور خانواده را بی‌خطر نگه دارید. صفحه را باز کنید.	Prevent shocks at home. Wires, sockets, solar batteries and generators: how to keep your family safe. Open the page.
 snake-scorpion.title	مارگزیدگی و نیش گژدم	Snake and scorpion bites
+snake-scorpion.summary	آرام و بی‌حرکت بمانید، به شفاخانه بروید. نبرید، نمکید، محکم نبندید.	Keep still and go to hospital. No cutting, sucking or tight bands.
 snake-scorpion.lead	مار و گژدم در سمنگان می‌توانند خطرناک باشند، خصوصاً برای اطفال. زود رسیدن به شفاخانه جان را نجات می‌دهد.	Snakes and scorpions in Samangan can be dangerous, most of all for children. Getting to hospital fast saves lives.
 snake-scorpion.away	دور شوید و آرام بمانید. از مار دور شوید. کوشش نکنید آن را بگیرید یا بکشید. شخص را آرام و بی‌حرکت خوابیده نگه دارید.	Move away and stay calm. Move away from the snake. Do not try to catch or kill it. Keep the person calm, lying still.
 snake-scorpion.still	جای گزیدگی را بی‌حرکت نگه دارید. قبل از پندیدن، انگشتر، چوری و بوت را بکشید. دست یا پا را بی‌حرکت نگه دارید، اگر ممکن است با یک تخته.	Keep the bitten part still. Before it swells, take off rings, bangles and shoes. Keep the arm or leg still, with a splint if you can.
@@ -2186,6 +2263,7 @@ snake-scorpion.dont.things	یخ، گیاه، سرگین یا آهن داغ رو�
 snake-scorpion.dont.wait	پیش از رفتن به شفاخانه منتظر نمانید	wait before going to hospital
 snake-scorpion.safety	مار و گژدم را دور نگه دارید. بوت، بستر، چراغ دستی در شب و حویلی پاک: عادت‌های ساده‌ای که از گزیدن جلوگیری می‌کند. صفحه را باز کنید.	Keep snakes and scorpions away. Shoes, bedding, a torch at night and a clear yard: simple habits that prevent bites. Open the page.
 fumes-poisoning.title	مسمومیت با دود و گاز	Poisoned by fumes or gas
+fumes-poisoning.summary	نزدیک آتش یا بخاری مریض شدید؟ بیرون بروید و به شفاخانه بروید.	Ill near a fire or heater? Get out and go to hospital.
 fumes-poisoning.lead	دود آتش، بخاری، موتر و جنراتور گاز زهری دارد که نه بو دارد و نه رنگ. این گاز می‌تواند تمام خانواده را در خواب بکشد. گاز پخت‌وپز هم ممکن است نشت کند و آتش بگیرد.	Fires, heaters and engines give off a poison gas with no smell or colour. It can kill a family in their sleep. Cooking gas can leak and burn.
 fumes-poisoning.out	نزدیک آتش مریض شدید؟ بیرون بروید. همه را فوراً به هوای تازه ببرید و دروازه و کلکین را باز کنید. آتش یا جنراتور را فقط اگر بی‌خطر است خاموش کنید.	Feel ill near a fire? Go outside. Take everyone into fresh air at once, and open doors and windows. Turn off the fire or engine only if it is safe.
 fumes-poisoning.urgent	همه را به هوای آزاد ببرید و همین حالا به شفاخانه بروید، شب باشد یا روز، اگر:	Get everyone into fresh air and go to hospital now, day or night, if:
@@ -2197,6 +2275,7 @@ fumes-poisoning.urgent.outside	در بیرون بهتر می‌شوند و در 
 fumes-poisoning.oxygen	در شفاخانه اکسیجن می‌دهند تا گاز زهری از خون پاک شود. حتی اگر در بیرون بهتر شدند، بروید.	At hospital they give oxygen to clear the poison gas from the blood. Go even if they feel better outside.
 fumes-poisoning.prevent	خانهٔ بی‌خطر: دود و گاز. گاز زهری آتش، موتر و جنراتور، و بالون گاز: بی‌خطر بمانید.	Safe home: fumes and gas. Poison gas from fires, cars and generators, and gas bottles: stay safe.
 heat-stroke.title	گرمازدگی	Heat stroke
+heat-stroke.summary	در گرما داغ، گیج یا افتاده: او را زود سرد کنید.	Hot, confused or collapsed in the heat: cool them fast.
 heat-stroke.lead	کار در زمین در گرمی تابستان، یا ماندن طفل در موتر یا اتاق داغ، می‌تواند سبب گرمازدگی شود. بدن بیش از حد داغ می‌شود و ممکن است کشنده باشد.	Field work in summer heat, or a child left in a hot car or room, can cause heat stroke. The body gets too hot, and this can kill.
 heat-stroke.signs	علایم را بشناسید. پوست بسیار داغ، سردرد، گیجی، رفتار عجیب، بی‌هوش شدن یا تشنج در گرما، علامت گرمازدگی است.	Know the signs. Very hot skin, headache, confusion, strange behaviour, fainting or a fit in the heat are signs of heat stroke.
 heat-stroke.shade	به سایه ببرید. او را به یک جای سرد و سایه ببرید. لباس اضافی را بکشید.	Move them into shade. Move them to a cool, shady place. Take off extra clothes.
@@ -2216,6 +2295,7 @@ heat-stroke.dont.drowsy	به شخص خواب‌آلود نوشیدنی ندهی�
 heat-stroke.exhaustion	خستگی، تشنگی، عرق و سردرد در گرما: در سایه استراحت کنید و آب یا او آر اس بنوشید. اگر در ۱ ساعت بهتر نشد، به کلینیک بروید.	Tired, thirsty, sweaty, headache in the heat: rest in shade and drink water or ORS. If not better in 1 hour, go to the clinic.
 heat-stroke.hospital	در شفاخانه بدن را زود سرد می‌کنند و از راه رگ سیروم می‌دهند.	At hospital they cool the body fast and give fluids into a vein.
 cold-hypothermia.title	سرمازدگی	Too cold (hypothermia)
+cold-hypothermia.summary	در سرما لرزه، کندی و گیجی: آهسته گرمش کنید.	Shivering, slow or confused in the cold: warm them gently.
 cold-hypothermia.lead	شیرخوار، اشخاص پیر و هر کسی که تر شده یا در برف مانده، ممکن است خطرناک سرد شوند. شخص بسیار سرد شاید دیگر نلرزد و خواب‌آلود و گیج شود.	Babies, old people, and anyone wet or caught in snow can get dangerously cold. A very cold person may stop shivering and become sleepy and confused.
 cold-hypothermia.shelter	از سرما بیرون کنید. او را به یک اتاق گرم، دور از باد بیاورید. آهسته با او رفتار کنید و خوابیده نگه دارید.	Get them out of the cold. Bring them into a warm room, out of the wind. Handle them gently and keep them lying down.
 cold-hypothermia.dry	لباس تر را بکشید. لباس تر را بکشید و پوست را خشک کنید. او را در کمپل خشک بپیچانید و سرش را با کلاه یا شال بپوشانید.	Take off wet clothes. Take off wet clothes and dry the skin. Wrap them in dry blankets, with a hat or scarf on the head.
@@ -2235,6 +2315,7 @@ cold-hypothermia.dont.bottle	بوتل آب داغ را مستقیم روی پو�
 cold-hypothermia.not-dead	شخص بسیار سرد که مرده معلوم می‌شود، شاید هنوز نجات یابد. اگر نفس نمی‌کشد، فشار سینه را شروع کنید و در راه شفاخانه ادامه دهید.	A very cold person who seems dead may still be saved. If not breathing, start chest pushes and keep going on the way to hospital.
 cold-hypothermia.hospital	در شفاخانه بدن را بی‌خطر از داخل گرم می‌کنند و پوست یخ‌زده را تداوی می‌کنند.	At hospital they warm the body safely from the inside and treat frozen skin.
 eye-chemical.title	مواد کیمیاوی در چشم	Chemical in the eye
+eye-chemical.summary	چشم را ۲۰ دقیقه با آب پاک زیاد بشویید، بعد به شفاخانه بروید.	Wash the eye with lots of clean water for 20 minutes.
 eye-chemical.lead	چونه، سمنت، دوای زراعتی، وایتکس و تیزاب بتری می‌توانند در چند ثانیه چشم را بسوزانند. شستن فوری با آب، چشم را نجات می‌دهد.	Lime, cement, farm sprays, bleach and battery acid can burn the eye in seconds. Washing at once with water saves sight.
 eye-chemical.wash	فوراً با آب بشویید. چشم را باز نگه دارید و آب پاک را آهسته از گوشهٔ نزدیک بینی به طرف بیرون بریزید، ۲۰ دقیقه. هر آب پاک را استفاده کنید؛ منتظر نمانید.	Wash at once with water. Hold the eye open and pour clean water gently from the inner corner outwards, for 20 minutes. Use any clean water; do not wait.
 eye-chemical.tilt	سر را کج کنید. سر را طوری کج کنید که چشم آسیب‌دیده پایین‌تر باشد، تا آب به چشم دیگر نرود.	Tilt the head. Tilt the head so the hurt eye is lower, so the water does not run into the other eye.
@@ -2252,6 +2333,7 @@ eye-chemical.dont.milk	شیر، چای، سرمه یا گیاه در چشم نر
 eye-chemical.dont.remove	چیزی را که در چشم فرو رفته بیرون نکشید	pull out something stuck in the eye
 eye-chemical.hospital	در شفاخانه شستن چشم را ادامه می‌دهند، دید را معاینه می‌کنند و برای محافظت چشم قطره می‌دهند.	At hospital they keep washing the eye, check the sight, and give drops to protect it.
 allergy-severe.title	حساسیت شدید	Severe allergic reaction
+allergy-severe.summary	پندیدن و مشکل نفس بعد از غذا، نیش زنبور یا دوا.	Swelling and trouble breathing after a food, sting or medicine.
 allergy-severe.lead	بعضی اشخاص در برابر یک غذا، نیش زنبور یا یک دوا یا پیچکاری، حساسیت شدید پیدا می‌کنند. در چند دقیقه ممکن است بپندند و به سختی نفس بکشند.	A few people react badly to a food, a bee or wasp sting, or a medicine or injection. Within minutes they can swell up and struggle to breathe.
 allergy-severe.signs	علایم خطر را بشناسید. پندیدن لب، زبان یا صورت، تنگ شدن گلو، نفس با صدا یا سخت، دانه‌های خارش‌دار برجسته، یا بی‌هوش شدن.	Know the danger signs. Swollen lips, tongue or face, a tight throat, noisy or hard breathing, a raised itchy rash, or fainting.
 allergy-severe.go	فوراً به شفاخانه بروید. فوراً یک نفر را برای آوردن موتر بفرستید؛ این حالت زود بدتر می‌شود. اگر قلم پیچکاری حساسیت خود را دارد، کمکش کنید آن را به بیرون ران بزند.	Go to hospital at once. Send for a car straight away; this can get worse fast. If they have their own allergy pen, help them use it in the outer thigh.
@@ -2267,6 +2349,7 @@ allergy-severe.urgent.rash	دانه در تمام بدن همراه با است�
 allergy-severe.hospital	در شفاخانه پیچکاری ادرینالین، اکسیجن و دواهای دیگر می‌دهند. چند ساعت آنجا بمانید، چون ممکن است دوباره شروع شود.	At hospital they give an adrenaline injection, oxygen and other medicines. Stay some hours, as it can come back.
 allergy-severe.after	بعد از آن، همیشه به کارمند صحی بگویید که از چه شد، و از آن غذا، نیش یا دوا دوری کنید.	Afterwards, always tell health workers what caused it, and avoid that food, sting or medicine.
 low-sugar.title	کم شدن شکر خون در مرض شکر	Low sugar in diabetes
+low-sugar.summary	لرزه، عرق یا گیجی: اگر قورت داده می‌تواند، زود بوره بدهید.	Shaky, sweaty or confused: give sugar fast if they can swallow.
 low-sugar.lead	کسانی که برای مرض شکر دوا یا انسولین می‌گیرند، ممکن است شکر خونشان کم شود، خصوصاً اگر غذا نخورند یا کار سخت کنند. زود می‌آید و می‌تواند سبب بی‌هوشی یا تشنج شود.	People on medicine or insulin for diabetes can get low blood sugar, most of all if they miss a meal or work hard. It comes on fast and can cause fainting or fits.
 low-sugar.signs	علایم را بشناسید. لرزه، عرق، گرسنگی، تپش تیز قلب، رنگ‌پریدگی، رفتار عجیب یا گیجی ممکن است علامت کمی شکر باشد.	Know the signs. Shaking, sweating, hunger, a fast heartbeat, pale skin, strange behaviour or confusion can mean low sugar.
 low-sugar.sugar	فوراً بوره بدهید. اگر بیدار است و قورت داده می‌تواند، ۴ قاشق چای‌خوری بوره در یک گیلاس آب، یا یک نوشیدنی شیرین یا شیرینی بدهید.	Give sugar at once. If they are awake and can swallow, give 4 teaspoons of sugar in a glass of water, or a sweet drink or sweets.
@@ -2287,6 +2370,7 @@ low-sugar.dont.pour	در دهان شخص خواب‌آلود نوشیدنی نر
 low-sugar.diabetes	زندگی با مرض شکر. صفحهٔ مرض شکر را برای مراقبت روزانه و دواها ببینید.	Living with diabetes. See the diabetes page for daily care and medicines.
 low-sugar.hospital	در شفاخانه از راه رگ شکر می‌دهند و علت کم شدن آن را پیدا می‌کنند.	At hospital they give sugar into a vein and find out why it fell.
 asthma-attack.title	حملهٔ نفس‌تنگی (استما)	Asthma attack
+asthma-attack.summary	بنشانید، اسپری آبی را بزنید، اگر زود بهتر نشد، به شفاخانه بروید.	Sit them up, use the blue inhaler, go if not better fast.
 asthma-attack.lead	در حملهٔ نفس‌تنگی، راه‌های نفس تنگ می‌شوند. شخص سرفه و خس‌خس می‌کند و خوب نفس کشیده نمی‌تواند. کمک زود با اسپری اکثراً فایده می‌کند.	In an asthma attack the airways tighten. The person coughs, wheezes and cannot breathe well. Quick help with their inhaler usually works.
 asthma-attack.sit	بنشانید، آرام بمانید. کمکش کنید که راست بنشیند، کمی به پیش خم. لباس تنگ را سست کنید. آرام گپ بزنید؛ ترس آن را بدتر می‌کند.	Sit them up, stay calm. Help them sit up, leaning slightly forward. Loosen tight clothes. Speak calmly; fear makes it worse.
 asthma-attack.inhaler	اسپری آبی را بزنید. اسپری آبی را همان‌طور بزنید که کلینیک یاد داده، اگر فاصله‌دهنده دارد با آن. پف‌ها را یکی یکی بزنید.	Use the blue reliever inhaler. Use the blue reliever inhaler as the clinic showed you, with a spacer if they have one. Give the puffs one at a time.
@@ -2302,6 +2386,7 @@ asthma-attack.urgent.not-better	بعد از اسپری بهتر نشد	is not be
 asthma-attack.bottle	فاصله‌دهنده ندارید؟ اسپری را در سوراخی در ته یک بوتل پلاستیکی پاک جا کنید و از دهن بوتل نفس بکشید.	No spacer? Push the inhaler into a hole cut in the bottom of a clean plastic bottle, and breathe through the bottle's neck.
 asthma-attack.hospital	در شفاخانه اکسیجن و دواهای قوی‌تر برای باز کردن راه نفس می‌دهند.	At hospital they give oxygen and stronger medicines to open the airways.
 nosebleed.title	خون آمدن از بینی	Nosebleed
+nosebleed.summary	به پیش خم بنشینید و قسمت نرم بینی را ۱۰ دقیقه فشار دهید.	Lean forward and pinch the soft nose for 10 minutes.
 nosebleed.lead	خون آمدن از بینی زیاد است، خصوصاً در هوای خشک، سرد یا گرد‌آلود. بیشتر آن با فشار ساده بند می‌شود.	Nosebleeds are common, most of all in dry, cold or dusty weather. Most stop with simple pressure.
 nosebleed.forward	بنشینید، به پیش خم شوید. راست بنشینید و به پیش خم شوید تا خون از بینی بیرون شود، نه به گلو. خون را تف کنید؛ قورت ندهید.	Sit up and lean forward. Sit up and lean forward, so blood runs out of the nose, not down the throat. Spit out blood; do not swallow it.
 nosebleed.pinch	قسمت نرم بینی را ۱۰ دقیقه فشار دهید. قسمت نرم بینی را، پایین‌تر از استخوان، ۱۰ دقیقه بدون رها کردن فشار دهید. از راه دهان نفس بکشید.	Pinch the soft part for 10 minutes. Pinch the soft part of the nose, below the bone, for 10 minutes without letting go. Breathe through the mouth.
@@ -2322,6 +2407,7 @@ nosebleed.dont.stuff	پنبه، کاغذ یا گیاه را در عمق بینی
 nosebleed.congo	تب با خون آمدن از بینی، بیره یا زیر پوست ممکن است تب کانگو باشد. همین حالا به شفاخانه بروید و از تماس با حیوان یا کنه بگویید.	Fever with bleeding from the nose, gums or under the skin can be Congo fever. Go to hospital now, and say if there was contact with animals or ticks.
 nosebleed.hospital	در شفاخانه می‌توانند بینی را برای بند کردن خون پر کنند و علت‌های دیگر را معاینه کنند.	At hospital they can pack the nose to stop the bleeding, and check for other causes.
 kitchen-garden.title	باغچهٔ خانه در زمین خشک	A kitchen garden in dry land
+kitchen-garden.summary	یک باغچهٔ کوچک کنار خانه، خانواده را در تمام سال غذا می‌دهد.	A small plot by the house feeds the family all year.
 kitchen-garden.lead	بسیاری از مادران در یک قطعهٔ کوچک کنار خانه ترکاری می‌کارند. حتی چند متر زمین برای اطفال غذای تازه می‌دهد، و کمی هم برای فروش.	Many mothers grow vegetables in a small plot by the house. Even a few metres of ground gives fresh food for the children, and some to sell.
 kitchen-garden.place	یک جا نزدیک خانه انتخاب کنید. یک جای آفتابی نزدیک آب و آشپزخانه انتخاب کنید. دیوار گلی یا چپر، حیوانات و مرغ‌ها را بیرون نگه می‌دارد.	Choose a spot near the house. Pick a sunny spot close to water and the kitchen. A mud wall or fence keeps animals and chickens out.
 kitchen-garden.soil	به خاک قوت بدهید. سرگین کهنه و پوسیدهٔ حیوانات و پوست ترکاری را با خاک مخلوط کنید. خاک قوی آب را بیشتر نگه می‌دارد و حاصل بیشتر می‌دهد.	Feed the soil. Mix old, rotted animal dung and vegetable peelings into the soil. Rich soil holds water longer and grows more food.
@@ -2335,6 +2421,7 @@ kitchen-garden.dont.dung	سرگین تازه را روی سبزی‌ای که خ
 kitchen-garden.dont.spray	دوای زهری زراعتی را نزدیک خانه، اطفال، غذا یا چاه استفاده نکنید	use farm poison sprays near the house, the children, food or the well
 kitchen-garden.seeds	تخم بهترین نباتات خود را نگه دارید، خوب خشک کنید و با همسایه‌ها شریک کنید.	Keep seeds from your best plants, dry them well, and share them with neighbours.
 garden-water.title	صرفه‌جویی آب در باغچه	Save water in the garden
+garden-water.summary	کاه، قطره از بوتل و آب دادن درست: حاصل بیشتر با آب کمتر.	Straw, bottle drips and smart watering: more food from less water.
 garden-water.lead	آب در سمنگان قیمتی است. این راه‌های ساده از خانواده‌های دیگر کمک می‌کند باغچه با آب کمتر و کار کمتر سبز شود.	Water is precious in Samangan. These simple ways from other families help the garden grow with less water and less work.
 garden-water.mulch	خاک را با کاه بپوشانید. کاه، برگ خشک یا علف کهنه را به ضخامت یک کف دست دور نباتات هموار کنید. خاک را نمناک و سرد نگه می‌دارد و نمی‌گذارد علف هرزه سبز شود.	Cover the soil with straw. Spread straw, dry leaves or old grass around the plants, about a hand thick. It keeps the soil damp and cool, and stops weeds.
 garden-water.bottle	آب قطره‌قطره از بوتل. در سرپوش یک بوتل سوراخ کوچک بکنید. بوتل را پر کنید و سرچپه کنار نبات در خاک فرو کنید. آب آهسته‌آهسته به ریشه می‌رسد.	Drip water from a bottle. Make a small hole in a bottle lid. Fill the bottle and push it, lid down, into the soil beside the plant. Water drips slowly to the roots.
@@ -2347,6 +2434,7 @@ garden-water.dont.dirty	آبی را که با آن طفل یا تکهٔ طفل �
 garden-water.dont.open	سطل یا حوض آب را سرباز نگذارید؛ طفل کوچک ممکن است در آن غرق شود	leave buckets or pools of water uncovered: a small child can drown
 garden-water.rain	آب باران و برف بام را در بشکه‌های سرپوشیده برای باغچه جمع کنید.	Catch rain and melting snow from the roof in covered drums for the garden.
 food-store.title	نگهداری و خشک کردن غذا	Store and dry food safely
+food-store.summary	خشک، سربسته و پوشیده: غذایی که تمام زمستان سالم می‌ماند.	Dry, sealed and covered: food that lasts the winter and stays safe.
 food-store.lead	نگهداری خوب یعنی غذا برای تمام زمستان، و غذای کمتر که به پوپنک، موش و مگس از بین برود. غذای پوپنک‌زده می‌تواند خانواده را مریض کند.	Good storage means food for the whole winter, and less lost to mould, mice and flies. Mouldy food can make the family ill.
 food-store.dry	میوه و ترکاری را پاک خشک کنید. آن‌ها را قاش کنید و روی تکهٔ پاک یا پتنوس، بالاتر از زمین، هموار کنید. با تکهٔ نازک از مگس و گرد بپوشانید. شب داخل ببرید.	Dry fruit and vegetables cleanly. Slice and spread them on a clean cloth or tray, raised off the ground. Cover with thin cloth against flies and dust. Bring them inside at night.
 food-store.keep-dry	خوب خشک کنید، بعد نگه دارید. آن‌قدر خشک کنید که وقتی فشار می‌دهید آب نکشد. در بانکه یا خلطهٔ پاک و سربسته، در جای خشک نگه دارید و هر چند هفته ببینید.	Dry well, then store. Dry until no juice comes out when you press. Keep in clean, closed jars or bags in a dry place, and check them every few weeks.
@@ -2361,6 +2449,7 @@ food-store.dont.seed	تخم کشت را که رنگ گلابی یا سرخ دا�
 food-store.dont.bags	غذا را در خلطه یا بشکهٔ کهنهٔ دوای زهری یا کود نگه ندارید؛ زهر در آن می‌ماند	store food in old poison or fertiliser bags or drums: poison stays inside
 food-store.green-potato	پیش از پختن، قسمت‌های سبز و جوانهٔ کچالو را ببرید و دور کنید. تلخ است و می‌تواند مریض کند.	Cut away green parts and sprouts of potatoes before cooking. They are bitter and can make you ill.
 chickens.title	مرغداری در خانه	Backyard chickens
+chickens.summary	چند مرغ صحتمند برای اطفال تخم، و برای خانواده پول می‌دهد.	A few healthy hens give eggs for the children and money.
 chickens.lead	چند مرغ نزدیک خانه بیشتر روزها تخم می‌کنند. روزی یک تخم مرغ یکی از بهترین غذاها برای طفل کوچک است.	A few hens near the house lay eggs on most days. One egg a day is one of the best foods for a young child.
 chickens.coop	یک لانهٔ امن و خشک. مرغ‌ها را در یک لانهٔ کوچک گلی یا چوبی، کمی بالاتر از زمین، با یک چوب برای نشستن نگه دارید. شب دروازه‌اش را ببندید تا روباه و سگ نیاید.	A safe, dry coop. Keep hens in a small mud or wooden coop, raised off the ground, with a perch. Close the door at night against foxes and dogs.
 chickens.water	آب پاک، لانهٔ پاک. هر روز در ظرف پاک آب تازه بدهید. هر هفته فضلهٔ مرغ را پاک کنید و بگذارید با کود دیگر بپوسد، بعد به باغچه بدهید.	Clean water, clean coop. Give fresh water every day in a clean dish. Sweep out droppings each week and let them rot with other manure before using them on the garden.
@@ -2375,6 +2464,7 @@ chickens.dont.bare	مرغ مرده را با دست خالی نگیرید؛ با
 chickens.dont.house	نگذارید مرغ‌ها در اتاقی بخوابند که مردم در آن زندگی می‌کنند یا می‌خوابند	let hens sleep in the rooms where people live or sleep
 chickens.many-die	اگر مرغ‌های زیاد ناگهان مریض شوند یا بمیرند، همان روز به داکتر حیوانات خبر بدهید.	If many hens fall ill or die suddenly, tell the animal doctor the same day.
 goats-sheep.title	بز و گوسفند در خانه	Goats and sheep at home
+goats-sheep.summary	شیر برای خانواده، با جوشاندن و دست پاک بی‌خطر.	Milk for the family, kept safe by boiling and clean hands.
 goats-sheep.lead	یک بز یا چند گوسفند برای خانواده شیر، ماست و قروت می‌دهد. چند عادت ساده شیر را بی‌خطر و خانواده را صحتمند نگه می‌دارد.	A goat or a few sheep give milk, yoghurt and qurut for the family. A few simple habits keep the milk safe and the family well.
 goats-sheep.boil	شیر را همیشه بجوشانید. شیر را پیش از نوشیدن یا ساختن ماست و قروت خوب بجوشانید. شیر خام می‌تواند تب مالت بیاورد، یک مریضی طولانی با تب و درد.	Always boil the milk. Bring milk to a full boil before drinking it or making yoghurt and qurut. Raw milk can give Malta fever, a long illness with fever and pain.
 goats-sheep.milking	دوشیدن پاک. پیش از دوشیدن، دست‌ها و پستان حیوان را بشویید. در یک ظرف پاک بدوشید و آن را سرپوشیده نگه دارید.	Clean milking. Wash your hands and the animal's udder before milking. Milk into a clean pot and keep it covered.
@@ -2387,6 +2477,7 @@ goats-sheep.dont	این کارها را نکنید:	Do not:
 goats-sheep.dont.raw	به اطفال شیر خام، یا پنیر تازه که از شیر خام ساخته شده، ندهید	give children raw milk, or fresh cheese made from raw milk
 goats-sheep.dont.baby	به طفل کمتر از ۶ ماه شیر حیوان ندهید	give animal milk to a baby under 6 months
 home-earning.title	درآمد از خانه	Earning from home
+home-earning.summary	پول کم ولی پیوسته از لبنیات، تخم، ترکاری و خیاطی.	Small, steady money from dairy, eggs, vegetables and sewing.
 home-earning.lead	بسیاری از زنان از خانه کمی پول به دست می‌آورند. با چیزی که دارید کوچک شروع کنید و حساب هر پول را نگه دارید.	Many women earn a little money from home. Start small with what you already have, and keep track of every coin.
 home-earning.dairy	ماست و قروت. ماست و قروت را از شیر جوشانده، با ظرف و دست پاک بسازید. لبنیات پاک و خوش‌مزه مشتری را دوباره می‌آورد.	Yoghurt and qurut. Make yoghurt and qurut from boiled milk, with clean pots and hands. Clean, tasty dairy brings buyers back.
 home-earning.sell	تخم و ترکاری بفروشید. وقتی اطفال سیر خوردند، باقی را بفروشید: تخم، سبزی، میوهٔ خشک. با همسایه‌ها یکجا بفروشید تا در بازار قیمت بهتر بگیرید.	Sell eggs and vegetables. When the children have had enough, sell the rest: eggs, greens, dried fruit. Sell together with neighbours to get a better price in the bazaar.
@@ -2396,6 +2487,7 @@ home-earning.group	در یک گروه پس‌انداز کنید. در یک گر
 home-earning.transport	پول کلینیک را جدا نگه دارید. کمی پول را برای کرایهٔ موتر تا کلینیک یا شفاخانه جدا نگه دارید. در حالت عاجل وقت قرض گرفتن نیست.	Keep money aside for the clinic. Keep a little money aside for a car to the clinic or hospital. In an emergency there is no time to borrow.
 home-earning.family	دربارهٔ برنامهٔ خود با خانواده گپ بزنید. وقتی همه کمک کنند، کار بهتر پیش می‌رود.	Talk with the family about your plans. Work goes better when everyone helps.
 hospital-places.title	کدام کلینیک یا شفاخانه؟	Which clinic or hospital?
+hospital-places.summary	از کارمند صحی قریه تا شفاخانه‌های کلان: کدام جای چه کار می‌کند	From the village health worker to the big hospitals: who does what
 hospital-places.lead	خدمات صحی در سمنگان زینه به زینه است، از قریهٔ شما تا شفاخانه‌های کلان. اگر بدانید کدام جای چه کار می‌کند، وقت و پول شما ضایع نمی‌شود و جان‌ها نجات می‌یابد.	Health care in Samangan has steps, from your village up to the big hospitals. Knowing which place does what saves time and money, and saves lives.
 hospital-places.village	در قریه: کارمند صحی. کارمند صحی قریه او آر اس، زنک، تابلیت آهن و دواهای ساده می‌دهد، رشد اطفال را معاینه می‌کند و می‌گوید بعد کجا بروید.	In the village: the health worker. The community health worker gives ORS, zinc, iron tablets and simple medicines, checks children's growth, and tells you where to go next.
 hospital-places.clinic	کلینیک خورد: مرکز صحی فرعی یا اساسی. نرس‌ها و قابله‌ها واکسین می‌دهند، زنان حامله را معاینه می‌کنند و در ولادت عادی کمک می‌کنند. مریضی‌های عام را تداوی می‌کنند و دوای توبرکلوز می‌دهند.	Small clinic: sub-centre or basic centre. Nurses and midwives give vaccines, check pregnant women and help with normal births. They treat common illnesses and give TB medicine.
@@ -2408,6 +2500,7 @@ hospital-places.near	نزدیک‌ترین کلینیک را پیدا کنید. 
 hospital-places.cost	واکسین‌ها، و معاینه و دوای توبرکلوز، رایگان است. برای خدمات دیگر بپرسید چقدر خرچ دارد، و کمی پول با خود ببرید.	Vaccines, and TB tests and medicine, are free. For other care, ask what it will cost, and take some money with you.
 hospital-places.vaccines	واکسین رایگان است. واکسین در کلینیک داده می‌شود. ببینید طفل شما کدام واکسین‌ها را و چه وقت لازم دارد.	Vaccines are free. Vaccines are given at the clinic. See which vaccines your child needs, and when.
 hospital-ready.title	آماده شدن برای رفتن	Getting ready to go
+hospital-ready.summary	چه چیزی ببرید، و چه کسی همراه شما برود	What to take, and who goes with you
 hospital-ready.lead	کمی پلان، رفتن را آسان‌تر می‌کند. اما در حالت عاجل، برای جمع کردن سامان منتظر نمانید: همین حالا بروید، فامیل می‌تواند چیزها را بعداً بیاورد.	A little planning makes the visit easier. But in an emergency, do not wait to pack: go now, and family can bring things later.
 hospital-ready.papers	کارت‌ها و کاغذها. کارت صحی، کارت واکسین یا کارت حاملگی، نتیجهٔ معاینات قبلی، و اگر کارمند صحی معرفی‌نامه داده، آن را هم ببرید.	Cards and papers. Take the health card, vaccine card or pregnancy card, any old test results, and the referral letter if the health worker gave you one.
 hospital-ready.medicines	دواهایی که می‌خورید. همهٔ دواها را با قطی‌شان، یا عکس آن‌ها را ببرید. اگر کدام دوا کسی را مریض ساخته، به داکتر بگویید.	The medicines you take. Take all medicines in their boxes, or a photo of them. Tell the doctor if a medicine has ever made someone ill.
@@ -2418,6 +2511,7 @@ hospital-ready.companion	با یک همراه بروید. یک نفر از فا�
 hospital-ready.family-record	«خانوادهٔ من» را نشان دهید. تاریخ واکسین‌ها و وزن‌هایی که در این برنامه ثبت کرده‌اید، به کارمند صحی کمک می‌کند.	Show 'My family' on this phone. The vaccine dates and weights you saved in this app can help the health worker.
 hospital-ready.birth	حامله هستید؟ ولادت را از پیش پلان کنید. برای ولادت، موتر، پول و همراه را پلان کنید. علایم خطری را یاد بگیرید که می‌گوید همین حالا بروید.	Pregnant? Plan the birth early. Plan transport, money and a companion for the birth. Learn the danger signs that mean go now.
 hospital-arrive.title	وقتی می‌رسید	When you arrive
+hospital-arrive.summary	ثبت نام، چه کسی اول دیده می‌شود، و چطور بگویید که عاجل است	Registration, who is seen first, and how to say it is urgent
 hospital-arrive.lead	در کلینیک و شفاخانه، کارمندان اول مریض‌ترین‌ها را می‌بینند. اگر بدانید کار چطور پیش می‌رود، انتظار آسان‌تر می‌شود.	At a clinic or hospital, staff see the sickest people first. Knowing how it works makes the wait easier.
 hospital-arrive.register	اول، ثبت نام. نام، عمر و قریهٔ مریض را بگویید، و کارت‌ها و معرفی‌نامه را نشان دهید. شاید به شما یک نمبر یا کارت بدهند.	First, registration. Give the patient's name, age and village, and show your cards and referral letter. You may be given a number or a card.
 hospital-arrive.triage	نرس می‌بیند که چه کسی مریض‌تر است. نرس یا داکتر به زودی نفس، تب و علایم دیگر را معاینه می‌کند، تا مریض‌ترین‌ها اول دیده شوند.	A nurse checks who is sickest. A nurse or doctor quickly checks breathing, temperature and other signs, so that the sickest can be seen first.
@@ -2436,6 +2530,7 @@ hospital-arrive.women	زنان می‌توانند کارمند زن بخواه�
 hospital-arrive.child-signs	علایم خطر در اطفال. علایمی را یاد بگیرید که باید بلند بگویید، تا کارمندان بدانند طفل اول کمک لازم دارد.	Danger signs in children. Learn the signs to say out loud, so the staff know a child needs help first.
 hospital-arrive.adult-signs	علایم خطر در بزرگسالان. درد سینه، علایم سکته، خونریزی زیاد و غیره: علایمی که اول کمک لازم دارد.	Danger signs in adults. Chest pain, stroke signs, heavy bleeding and more: the signs that need help first.
 hospital-tests.title	معاینات معمول	Common tests
+hospital-tests.summary	معاینهٔ خون، ادرار، اکسری، التراسوند و قلب: چطور است	Blood, urine, X-ray, ultrasound and heart tests: what they are like
 hospital-tests.lead	معاینات به داکتر کمک می‌کند که علت مریضی را پیدا کند. بیشتر آن‌ها زود و بی‌خطر است. همیشه می‌توانید بپرسید که معاینه برای چیست.	Tests help the doctor find the cause of an illness. Most are quick and safe. You can always ask what a test is for.
 hospital-tests.blood	معاینهٔ خون. یک سوزن خورد به نوک انگشت، یا کمی خون از بازو با سوزن. یک لحظه درد می‌کند. بدن این خون کم را زود دوباره می‌سازد.	Blood test. A prick on the finger, or a little blood from the arm with a needle. It stings for a moment. The body soon replaces this small amount.
 hospital-tests.quick	معاینات سریع: ملاریا، قند و غیره. یک قطره خون از انگشت روی یک وسیلهٔ خورد معاینه گذاشته می‌شود. جواب در چند دقیقه می‌آید، تا تداوی همان روز شروع شود.	Quick tests: malaria, sugar and more. A drop of blood from the finger goes on a small test. The answer comes in minutes, so treatment can start the same day.
@@ -2447,6 +2542,7 @@ hospital-tests.scanners	ماشین‌های کلان‌تر عکس‌بردار�
 hospital-tests.tb	سرفهٔ طولانی؟ معاینهٔ توبرکلوز رایگان است. سرفهٔ ۲ هفته یا بیشتر، معاینهٔ توبرکلوز لازم دارد. معاینه و تداوی رایگان است.	Long cough? TB test is free. A cough for 2 weeks or more needs a TB test. Testing and treatment are free.
 hospital-tests.kit	معایناتی که در خانه می‌توانید. ترمامتر و چند وسیلهٔ ساده کمک می‌کند بدانید چه وقت بروید. بکس صحی خانه را ببینید.	Checks you can do at home. A thermometer and a few simple tools help you know when to go. See the home health kit.
 hospital-treatments.title	تداوی‌های معمول	Common treatments
+hospital-treatments.summary	سیروم، پیچکاری، اکسیجن، بخیه، خون و عملیات، به زبان ساده	Drips, injections, oxygen, stitches, blood and operations, explained simply
 hospital-treatments.lead	تداوی‌های شفاخانه شاید ترسناک معلوم شود، اما بیشتر آن‌ها ساده است و زود کمک می‌کند. می‌توانید از کارمندان بخواهید هر کدام را توضیح بدهند.	Hospital treatments can look frightening, but most are simple and help quickly. You can ask the staff to explain each one.
 hospital-treatments.drip	سیروم: مایع در رگ. یک نل نازک و نرم در رگ دست یا بازو گذاشته می‌شود. وقتی مریض به اندازهٔ کافی نوشیده نمی‌تواند، آب، نمک یا دوا می‌دهد. فقط سوزن اول درد دارد.	Drip: fluid into a vein. A thin soft tube goes into a vein in the hand or arm. It gives water, salts or medicine when the person cannot drink enough. Only the first prick hurts.
 hospital-treatments.injection	پیچکاری. دوا با سوزن در عضله یا رگ داده می‌شود. زود اثر می‌کند، و فقط یک لحظه درد دارد.	Injection. Medicine goes in with a needle, into a muscle or a vein. It works fast, and stings only for a moment.
@@ -2457,6 +2553,7 @@ hospital-treatments.operation	عملیات و بیهوشی. دوای بیهوش�
 hospital-treatments.caesarean	ولادت با عملیات سزارین. وقتی ولادت عادی بی‌خطر نیست، طفل از راه یک برش در شکم به دنیا می‌آید. بیشتر مادران و اطفال خوب می‌شوند، و شیردهی را زود شروع کرده می‌توانند.	Caesarean birth. When a normal birth is not safe, the baby is born through a cut in the belly. Most mothers and babies do well, and can start breastfeeding soon.
 hospital-treatments.first-aid	کمک‌های اولیه در راه. برای خونریزی، سوختگی، تشنج و زخم، پیش از رسیدن به کمک چه کنید.	First aid on the way. What to do for bleeding, burns, fits and injuries before you reach help.
 hospital-stay.title	ماندن در شفاخانه و رفتن به خانه	Staying in hospital and going home
+hospital-stay.summary	ماندن با طفل، اجازه برای تداوی، دواها و مراجعهٔ بعدی	Staying with your child, agreeing to treatment, medicines and follow-up
 hospital-stay.lead	گاهی داکتر می‌خواهد که مریض در شفاخانه بماند. این بهترین مراقبت است، و بیشتر مریضان صحتمند به خانه برمی‌گردند.	Sometimes the doctor asks the patient to stay in hospital. This gives the best care, and most people go home well.
 hospital-stay.admission	بستر شدن در شفاخانه. مریض یک بستر می‌گیرد و کارمندان بارها او را معاینه می‌کنند. معمولاً یک نفر از فامیل می‌تواند برای کمک بماند. دربارهٔ قواعد ملاقات بپرسید.	Staying in hospital. The patient gets a bed, and staff check them often. Usually one family member can stay to help. Ask about the rules for visitors.
 hospital-stay.child	با طفل خود بمانید. مادر یا پدر می‌تواند با طفل مریض بماند. شیردهی را ادامه دهید، طفل را آرام کنید، و هر تغییری را به نرس بگویید.	Stay with your child. A mother or father can stay with a sick child. Keep breastfeeding, comfort the child, and tell the nurse about any change.
@@ -2478,6 +2575,7 @@ hospital-stay.soon.unsure	مطمئن نیستید که دوا را چطور بد
 hospital-stay.child-signs	علایمی که طفل فوراً کمک لازم دارد. علایم خطر را بشناسید، تا اگر در خانه دیده شد، زود برگردید.	Signs a child needs help now. Know the danger signs, so you come back quickly if they appear at home.
 hospital-stay.after-birth	بعد از ولادت یا سزارین. مادر چطور استراحت کند و غذا بخورد، و علایمی که می‌گوید دوباره بروید.	After a birth or caesarean. How the mother should rest and eat, and the signs that mean go back.
 kit-buy.title	بکس صحی خانه: چه بخریم	Home health kit: what to buy
+kit-buy.summary	کدام چیزها کمک می‌کند، چه کسی ضرورت دارد و چه چیزی را نخرید.	Which things help, who needs them, and what not to buy.
 kit-buy.lead	چند چیز ساده در خانه کمک می‌کند از خانوادهٔ خود مراقبت کنید و بدانید چه وقت به کلینیک بروید. فقط چیزی را بخرید که خانواده‌تان ضرورت دارد.	A few simple things at home help you care for your family and know when to go to the clinic. Buy only what your family needs.
 kit-buy.every	هر خانه: ترمامتر و کمک‌های اولیه. ترمامتر دیجیتل، او آر اس، زنک، صابون، تکهٔ پاک و بنداژ در هر خانه به کار می‌آید.	Every home: thermometer and first aid. A digital thermometer, ORS, zinc, soap, clean cloth and bandages are useful in every home.
 kit-buy.children	اطفال خورد: فیتهٔ بازو. برای اطفال ۶ ماهه تا ۵ ساله، فیتهٔ رنگهٔ بازو نشان می‌دهد که طفل زیاد لاغر است یا نه. از کلینیک یکی بخواهید.	Small children: an arm tape. For children from 6 months to 5 years, a coloured arm tape shows if a child is too thin. Ask the clinic for one.
@@ -2490,6 +2588,7 @@ kit-buy.dont	این کارها را نکنید:	Do not do these things:
 kit-buy.dont.wrist	ماشین فشار مچ دست نخرید؛ اکثراً غلط نشان می‌دهد.	Do not buy a wrist blood pressure machine; it is often wrong.
 kit-buy.dont.mercury	ترمامتر شیشه‌ای سیماب‌دار نخرید؛ می‌شکند و سیماب زهر است.	Do not buy a glass mercury thermometer; it breaks, and mercury is poison.
 kit-thermometer.title	استفاده از ترمامتر	Using a thermometer
+kit-thermometer.summary	دیجیتل بخرید، زیر بغل اندازه کنید، عددها را بشناسید.	Buy a digital one, measure under the arm, know the numbers.
 kit-thermometer.lead	ترمامتر به شما دقیق می‌گوید که تب هست یا نه. برای نوزادان و اطفال، زیر بغل اندازه کنید.	A thermometer tells you for sure if there is a fever. For babies and children, measure under the arm.
 kit-thermometer.buy	چه بخرید. یک ترمامتر دیجیتل که صدا می‌دهد، به قیمت حدود ۱۰۰ تا ۲۵۰ افغانی. ترمامتر شیشه‌ای سیماب‌دار نخرید.	What to buy. A digital thermometer that beeps, for about 100 to 250 afghanis. Do not buy a glass mercury one.
 kit-thermometer.armpit	زیر بغل بگذارید. سر آن را پاک کنید و روشن کنید. سرش را در بغل خشک، روی پوست بگذارید و بازو را به بدن نزدیک نگه دارید.	Put it under the arm. Wipe the tip and turn it on. Put the tip in the dry armpit, on the skin, and hold the arm close to the body.
@@ -2497,6 +2596,7 @@ kit-thermometer.wait	منتظر صدا بمانید. تا وقتی صدا بده
 kit-thermometer.meaning-page	عدد من چه معنا دارد؟. صفحهٔ صحت را باز کنید: معنای عدد، چه وقت بروید، و بررسی آن.	What does my reading mean?. Open the Health page: what it means, when to go, and a checker.
 kit-thermometer.clean	پاک کنید و نگه دارید. بعد از هر بار، سر آن را با آب و صابون یا الکول پاک کنید. آن را در آب نیندازید. در قطی‌اش نگه دارید.	Clean it and keep it safe. After each use, wipe the tip with soap and water or alcohol. Do not put it under water. Keep it in its box.
 kit-bp.title	ماشین فشار خون	Blood pressure machine
+kit-bp.summary	چه کسی ضرورت دارد، چطور اندازه کنید، عددها چه معنا دارند.	Who needs one, how to measure, and what the numbers mean.
 kit-bp.lead	ماشین خانه به کسانی که بالای ۴۰ سال، حامله، مریض شکر هستند یا قبلاً فشار بلند داشته‌اند کمک می‌کند تا بین مراجعه‌ها فشار خود را بدانند.	A home machine helps people over 40, pregnant women, people with diabetes, and anyone who has had high blood pressure know their numbers between visits.
 kit-bp.buy	ماشین بازو بخرید. یک ماشین خودکار با کف بازو بخرید که از نظر طبی آزمایش شده باشد، نه ماشین مچ دست. حدود ۱۵۰۰ تا ۳۰۰۰ افغانی.	Buy an upper-arm machine. Choose an automatic machine with a cuff for the upper arm, one that is clinically tested, not a wrist one. About 1,500 to 3,000 afghanis.
 kit-bp.cuff	اندازهٔ درست کف. کف باید اندازهٔ بازو باشد. بازوی چاق کف کلان می‌خواهد، ورنه عدد بیشتر از حقیقت نشان داده می‌شود.	The right cuff size. The cuff must fit the arm. A big arm needs a large cuff, or the number will be too high.
@@ -2507,6 +2607,7 @@ kit-bp.meaning-page	عدد من چه معنا دارد؟. صفحهٔ صحت را
 kit-bp.dont	این کارها را نکنید:	Do not do these things:
 kit-bp.dont.clothes	روی لباس ضخیم یا روی مچ دست اندازه نکنید.	Do not measure over thick clothes, or on the wrist.
 kit-muac.title	فیتهٔ بازو برای لاغری طفل	Arm tape for thin children
+kit-muac.summary	ببینید طفل ۶ ماهه تا ۵ ساله زیاد لاغر است یا نه.	Is a child from 6 months to 5 years too thin?
 kit-muac.lead	این فیتهٔ رنگه زود نشان می‌دهد که طفل ۶ ماهه تا ۵ ساله زیاد لاغر است یا نه. ماهی یک بار اندازه کنید.	This coloured tape shows quickly if a child from 6 months to 5 years is too thin. Measure once a month.
 kit-muac.get	از کجا پیدا کنید. از کلینیک یا کارمند تغذیه بپرسید؛ اکثراً آن را دارند. در دواخانه هم خیلی ارزان است.	Where to get one. Ask the clinic or the nutrition worker; they often have one. In a pharmacy it costs very little.
 kit-muac.arm	وسط بازوی چپ را پیدا کنید. بازو را خم کنید. نقطهٔ وسط شانه و آرنج را پیدا کنید. بعد بازو را آزاد و آویزان بگذارید.	Find the middle of the left arm. Bend the arm. Find the point halfway between the shoulder and the elbow. Then let the arm hang loose.
@@ -2515,6 +2616,7 @@ kit-muac.meaning-page	رنگ فیته چه معنا دارد؟. صفحهٔ صح�
 kit-muac.keep	صاف و پاک نگه دارید. با تکهٔ نم‌دار پاک کنید. صاف و خشک نگه دارید. فیتهٔ کش‌شده یا پاره، نتیجهٔ غلط می‌دهد.	Keep it flat and clean. Wipe it with a damp cloth. Keep it flat and dry. A stretched or torn tape gives wrong results.
 kit-muac.age	این فیته برای اطفال ۶ ماهه تا ۵ ساله است. نوزادان کوچک‌تر را در کلینیک وزن می‌کنند.	The tape is for children from 6 months to 5 years. Younger babies are weighed at the clinic instead.
 kit-glucometer.title	ماشین قند خون	Blood sugar meter
+kit-glucometer.summary	فقط برای مریض شکر: چطور معاینه کنید و چه کنید.	Only for people with diabetes: how to test and what to do.
 kit-glucometer.lead	ماشین قند فقط برای کسانی است که مرض شکر دارند، مخصوصاً اگر انسولین یا تابلیتی می‌خورند که قند را زیاد پایین می‌آورد. اول از کلینیک بپرسید.	A sugar meter is only for people who have diabetes, most of all if they use insulin or tablets that can make sugar too low. Ask the clinic first.
 kit-glucometer.buy	چه بخرید. یک ماشین با نوارها و سوزن‌های خودش، حدود ۱۰۰۰ تا ۲۰۰۰ افغانی. نوارها جدا پول دارد؛ نوعی را بخرید که برای ماشین شما ساخته شده.	What to buy. A meter with its own strips and needles, about 1,000 to 2,000 afghanis. Strips cost extra; buy the kind made for your meter.
 kit-glucometer.wash	دست‌ها را بشویید و خشک کنید. با صابون و آب گرم بشویید و خوب خشک کنید. شکر یا غذا روی انگشت، عدد غلط و بلند نشان می‌دهد.	Wash and dry your hands. Wash with soap and warm water, and dry well. Sugar or food on the finger gives a wrong, high number.
@@ -2525,6 +2627,7 @@ kit-glucometer.keep	نوارها را بسته و خشک نگه دارید. قط
 kit-glucometer.dont	این کارها را نکنید:	Do not do these things:
 kit-glucometer.dont.share	سوزن یا قلم سوزن‌زن را با هیچ کس شریک نکنید.	Do not share needles or the finger pricker with anyone.
 kit-oximeter.title	گیرهٔ اکسیجن انگشت	Oxygen finger clip
+kit-oximeter.summary	اکسیجن خون را نشان می‌دهد. مفید است، اما غلط هم می‌کند.	Shows oxygen in the blood. Useful, but it can be wrong.
 kit-oximeter.lead	این گیرهٔ کوچک روی انگشت نشان می‌دهد چقدر اکسیجن در خون است. کمک می‌کند، اما غلط هم می‌کند، پس همیشه خود مریض را هم ببینید.	This small clip on the finger shows how much oxygen is in the blood. It can help, but it can be wrong, so always look at the person too.
 kit-oximeter.buy	چه بخرید. یک گیرهٔ اکسیجن انگشت، حدود ۷۰۰ تا ۱۵۰۰ افغانی. بیشتر آن‌ها برای کلان‌سالان ساخته شده و روی اطفال خورد خوب کار نمی‌کند.	What to buy. A fingertip oxygen clip, about 700 to 1,500 afghanis. Most are made for adults and do not work well on small children.
 kit-oximeter.warm	دست گرم، پاک و آرام. اول دست را گرم کنید. خینه یا رنگ ناخن را از همان انگشت پاک کنید. دست را روی سینه بگذارید و آرام نگه دارید.	A warm, clean, still hand. Warm the hand first. Take henna or nail polish off that finger. Rest the hand on the chest and keep it still.
@@ -2533,6 +2636,7 @@ kit-oximeter.meaning-page	عدد من چه معنا دارد؟. صفحهٔ صح�
 kit-oximeter.limits	ممکن است غلط باشد. روی پوست تیره‌تر، با دست سرد، یا اگر دست تکان بخورد، ممکن است اکسیجن را بیشتر از حقیقت نشان دهد. به نفس کشیدن و حال مریض اعتماد کنید.	It can be wrong. On darker skin, with cold hands, or if the hand moves, it can show more oxygen than there really is. Trust the breathing and how the person looks.
 kit-oximeter.clean	پاک نگه دارید. بعد از استفاده با تکهٔ نم‌دار یا الکول پاک کنید. اگر برای مدت زیاد استفاده نمی‌کنید، بتری‌ها را بیرون کنید.	Keep it clean. Wipe it with a damp cloth or alcohol after use. Take the batteries out if you will not use it for a long time.
 kit-scale.title	وزن کردن طفل در خانه	Weighing a child at home
+kit-scale.summary	برای هر خانواده لازم نیست: کلینیک اطفال را وزن می‌کند.	Not needed by every family: the clinic weighs children.
 kit-scale.lead	کلینیک اطفال را در هر مراجعه وزن می‌کند. ترازو در خانه لازم نیست، اما برای نوزاد کوچک یا طفلی که وزن نمی‌گیرد کمک می‌کند.	The clinic weighs children at every visit. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight.
 kit-scale.buy	اگر می‌خواهید بخرید. ترازوی طفل، آویزان یا دیجیتل، حدود ۱۰۰۰ تا ۲۰۰۰ افغانی است. ترازوی عادی خانه هم برای اطفال بزرگ‌تر کار می‌دهد.	If you want one. A baby scale, hanging or digital, costs about 1,000 to 2,000 afghanis. A normal bathroom scale also works for older children.
 kit-scale.hold	با ترازوی عادی. اول خود را وزن کنید. بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.	With a normal scale. Weigh yourself. Then weigh yourself holding the child. Take the first number from the second: that is the child's weight.
@@ -2540,6 +2644,7 @@ kit-scale.same	هر بار به یک شکل وزن کنید. با لباس سب�
 kit-scale.family	در «خانوادهٔ من» بنویسید. وزن را در صفحهٔ طفل خود در این برنامه اضافه کنید و در کلینیک نشان دهید.	Write it in My family. Add the weight to your child's page in the app, and show it at the clinic.
 kit-scale.meaning-page	وزن چه معنا دارد؟. صفحهٔ صحت را باز کنید: معنای عدد، چه وقت بروید، و بررسی آن.	What does the weight mean?. Open the Health page: what it means, when to go, and a checker.
 kit-first-aid.title	وسایل کمک‌های اولیه در خانه	First-aid things at home
+kit-first-aid.summary	او آر اس، زنک، صابون، تکهٔ پاک و بنداژ: هر کدام برای چیست.	ORS, zinc, soap, clean cloth and bandages: what each is for.
 kit-first-aid.lead	یک قطی کوچک وسایل کمک‌های اولیه را در جای پاک و خشک، بلند و دور از دست اطفال نگه دارید. هر چند ماه آن را ببینید.	Keep a small box of first-aid things in a clean, dry place, high up and away from children. Check it every few months.
 kit-first-aid.ors	پاکت‌های او آر اس. برای اسهال، در اطفال و کلان‌سالان. حد اقل ۴ پاکت نگه دارید. یک پاکت را در یک لیتر آب پاک حل کنید. کلینیک و پوستهٔ صحی آن را دارند.	ORS packets. For diarrhoea, in children and adults. Keep at least 4 packets. Mix one packet in one litre of clean water. The clinic and the health post have it.
 kit-first-aid.zinc	تابلیت زنک. برای طفل اسهالی، برای ۱۰ تا ۱۴ روز: زیر ۶ ماه، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام.	Zinc tablets. For a child with diarrhoea, for 10 to 14 days: under 6 months, 10 mg a day; from 6 months, 20 mg a day.
@@ -2552,6 +2657,7 @@ kit-first-aid.dont	این کارها را نکنید:	Do not do these things:
 kit-first-aid.dont.bottles	دوا یا تیل خاک را در بوتل نوشیدنی یا جایی که دست اطفال می‌رسد نگه ندارید.	Do not keep medicines or kerosene in drink bottles or where children can reach.
 kit-first-aid.dont.old	دوای کهنه، یا دوایی را که برای کس دیگر داده شده، استفاده نکنید.	Do not use old medicines, or medicines given for someone else.
 wellbeing.title	زندگی صحتمند: عادت‌های کوچک روزانه	Well-being: small daily habits
+wellbeing.summary	خواب، شب‌های آرام، غذای خوب و تحرک: از کجا شروع کنیم.	Sleep, calm evenings, good food and moving: where to start.
 wellbeing.lead	عادت‌های کوچکی که هر روز انجام شوند، به جسم و ذهن کمک می‌کنند قوی بمانند. این مشوره‌ها از خانواده‌های دیگر و از کارمندان صحی است.	Small habits, done every day, help the body and mind stay strong. These tips come from other families and from health workers.
 wellbeing.sleep	تقریباً در یک وقت بخوابید. وقت خواب منظم، در یک اتاق تاریک و آرام، خواب را عمیق‌تر می‌کند. خواب عمیق به قلب و ذهن آرامش می‌دهد.	Sleep at about the same time. A regular bedtime in a dark, quiet room gives deeper sleep. Deep sleep rests the heart and the mind.
 wellbeing.evening	شب‌ها را آرام بگذرانید. غذای شب را سبک‌تر و کمی زودتر بخورید، از ۱ تا ۲ ساعت پیش از خواب دیگر چای نخورید، و تیلفون را کنار بگذارید.	Make evenings calm. Eat a lighter dinner a little earlier, have no tea for 1 to 2 hours before bed, and put the phone away.
@@ -2562,6 +2668,7 @@ wellbeing.move-page	تحرک هر روزه. چقدر تحرک لازم است، 
 wellbeing.start	همین هفته با یک تغییر کوچک شروع کنید. وقتی تمام خانواده با هم انجام دهند، آسان‌تر است.	Start with one small change this week. It is easier when the whole family does it together.
 wellbeing.ask	حالتان خوب نیست؟. اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.	Feeling unwell?. If you feel unwell, go to Health and tap What is wrong?
 sleep-well.title	خواب خوب	Sleep well
+sleep-well.summary	وقت خواب منظم، اتاق تاریک و آرام، و شب‌های گرم و بی‌خطر.	A regular bedtime, a dark quiet room, and warm, safe nights.
 sleep-well.lead	خواب خوب به جسم کمک می‌کند جور شود، ذهن آرام بماند و اطفال رشد کنند. این کارها به خانواده‌های دیگر کمک کرده که عمیق بخوابند.	Good sleep helps the body heal, the mind stay calm and children grow. These things help other families sleep deeply.
 sleep-well.time	هر شب تقریباً در یک وقت. هر روز تقریباً در یک وقت بخوابید و بیدار شوید. بدن شما یاد می‌گیرد که چه وقت، وقت خواب است.	About the same time every night. Go to bed and get up at about the same time each day. Your body learns when it is time to sleep.
 sleep-well.hours	به اندازهٔ کافی بخوابید. بیشتر بزرگسالان به ۷ تا ۹ ساعت خواب نیاز دارند. اطفال به خواب بیشتر نیاز دارند، پس آن‌ها را زود بخوابانید.	Enough hours of sleep. Most adults need 7 to 9 hours of sleep. Children need more, so put them to bed early.
@@ -2573,6 +2680,7 @@ sleep-well.evening	شب، پیش از خواب. غذای شب زودتر و سب
 sleep-well.fumes	خانهٔ بی‌خطر: دود و گاز. شب بدون گاز زهری گرم بمانید، و علایم خطر آن را بشناسید.	Safe home: fumes and gas. Keep warm at night without poison gas, and know its warning signs.
 sleep-well.ask	حالتان خوب نیست؟. اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.	Feeling unwell?. If you feel unwell, go to Health and tap What is wrong?
 evening-routine.title	شب، پیش از خواب	The evening before sleep
+evening-routine.summary	غذای شب زودتر و سبک‌تر، چای نخوردن پیش از خواب، تیلفون دور، روشنی کم.	An earlier, lighter dinner, no tea before bed, phone away, soft light.
 evening-routine.lead	کارهایی که شب‌ها می‌کنیم، روی خواب ما اثر دارد. بسیاری از خانواده‌ها با چند تغییر کوچک بهتر می‌خوابند.	What we do in the evening changes how we sleep. Many families sleep better after a few small changes.
 evening-routine.meal	غذای شب سبک‌تر و کمی زودتر. اگر بتوانید، غذای شب را ۲ تا ۳ ساعت یا بیشتر پیش از خواب تمام کنید و سبک بخورید. شکم پر، بدن را وقتی باید آرام شود مصروف نگه می‌دارد.	A lighter dinner, a little earlier. If you can, finish the evening meal 2 to 3 hours or more before sleep, and keep it light. A full stomach keeps the body busy when it should rest.
 evening-routine.tea	پیش از خواب چای نخورید. از ۱ تا ۲ ساعت پیش از خواب، دیگر چای نخورید. چای کافئین دارد که آدم را بیدار نگه می‌دارد.	No tea before bed. Stop drinking tea 1 to 2 hours before bed. Tea has caffeine, which keeps you awake.
@@ -2585,6 +2693,7 @@ evening-routine.sleep	خواب خوب. وقت خواب منظم، اتاق تا�
 evening-routine.worry	تشویش خواب را از شما گرفته؟. راه‌های ساده برای آرام کردن ذهن، و چه وقت کمک بگیرید.	Worries keeping you awake?. Simple ways to calm the mind, and when to get help.
 evening-routine.ask	حالتان خوب نیست؟. اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.	Feeling unwell?. If you feel unwell, go to Health and tap What is wrong?
 heart-food.title	غذا برای قلب صحتمند	Food for a healthy heart
+heart-food.summary	شکر، نوشابهٔ شیرین، سرخ کردن و نمک کمتر؛ ترکاری و دال بیشتر.	Less sugar, sweet drinks, frying and salt; more vegetables and lentils.
 heart-food.lead	آنچه هر روز می‌خوریم، می‌تواند سال‌ها قلب و رگ‌ها را محافظت کند. این تغییرها با غذاهایی است که خانوادهٔ شما همین حالا دارد.	What we eat every day can protect the heart and blood vessels for many years. These changes use foods your family already has.
 heart-food.sugar	شکر کمتر در چای و شیرینی. در چای شکر کمتر بیندازید و شیرینی، نُقل و بیسکویت را کمتر بخورید. شکر زیاد وزن را بالا می‌برد و می‌تواند مرض شکر و خرابی دندان بیاورد.	Less sugar in tea and sweets. Put less sugar in tea, and eat sweets, noql and biscuits less often. Too much sugar adds weight and can bring diabetes and bad teeth.
 heart-food.drinks	آب، نه نوشابهٔ شیرین. به جای نوشابهٔ گازدار، نوشابهٔ انرژی و جوس قطی، آب پاک بنوشید. یک بوتل آن می‌تواند چندین قاشق شکر داشته باشد.	Water, not sweet drinks. Drink clean water instead of fizzy drinks, energy drinks and packet juice. One bottle can hold many spoons of sugar.
@@ -2596,6 +2705,7 @@ heart-food.bp	فشار خون بلند. چرا بعد از ۴۰ سالگی هر 
 heart-food.move	تحرک هر روزه. پیاده‌روی و حرکت‌های سادهٔ قوت هم قلب را محافظت می‌کند.	Moving every day. Walking and simple strength moves protect the heart too.
 heart-food.ask	حالتان خوب نیست؟. اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.	Feeling unwell?. If you feel unwell, go to Health and tap What is wrong?
 move-daily.title	تحرک هر روزه	Moving every day
+move-daily.summary	چقدر تحرک لازم است، قدم زدن بعد از غذا، حرکت‌های قوت در خانه.	How much to move, walks after meals, strength moves at home.
 move-daily.lead	تحرک هر روزه قلب، عضلات و روحیه را قوی نگه می‌دارد و به خواب کمک می‌کند. کار در خانه و در زمین هم حساب می‌شود.	Moving every day keeps the heart, muscles and mood strong, and helps you sleep. Work in the house and the fields counts too.
 move-daily.how-much	نیم ساعت، بیشتر روزها. بزرگسالان: حد اقل روزی ۳۰ دقیقه، ۵ روز در هفته، طوری تحرک کنید که نفس تندتر شود اما هنوز بتوانید گپ بزنید. تا یک ساعت در روز از آن هم بهتر است.	Half an hour, most days. Adults: at least 30 minutes a day, 5 days a week, moving so you breathe faster but can still talk. Up to an hour a day is even better.
 move-daily.housework	کار خانه و پیاده‌روی حساب است. پیاده‌روی تند، آوردن آب، جاروب کردن، خمیر کردن و کار باغچه همه حساب می‌شوند. زنان می‌توانند با هم قدم بزنند یا در خانه تحرک کنند.	Housework and walking count. Brisk walking, carrying water, sweeping, kneading dough and garden work all count. Women can walk together, or move at home.

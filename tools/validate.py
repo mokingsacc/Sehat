@@ -371,6 +371,53 @@ def check_search():
                 if fld == "lat" and re.search(r"[\u0600-\u06ff]", y): warn(f, f"{k}.lat: {y!r} has Arabic letters")
     print(f"search-phrases.json: {len(d.get('pages') or {})} pages, {n} phrases, {review} marked ? for native review")
 check_search()
+
+# the symptom finder's pictures (content/src/symptoms.json): every page exists; never a Home-tab page (Mo's rule: no
+# medical advice from the Home side); the danger pages come first, so a picture's first card is its danger page
+# whenever it has one. Danger pages: the danger-sign pages ("danger"), the Emergency section, and the entry's own "red"
+# list (pages with a red "go to hospital now" box). "ages": pages for one age group only.
+def check_symptoms():
+    f = os.path.join(ROOT, "content/src/symptoms.json")
+    if not os.path.exists(f): return
+    try:
+        d = json.load(open(f, encoding="utf-8"))
+        cfg = json.load(open(os.path.join(ROOT, "content/src/config.json"), encoding="utf-8"))
+        secs = json.load(open(os.path.join(ROOT, "content/src/sections.json"), encoding="utf-8"))
+    except Exception as e: err(f, f"cannot read: {e}"); return
+    topics = {}
+    for x in glob.glob(os.path.join(ROOT, "content/src/topics/*.json")):
+        try: topics[os.path.basename(x)[:-5]] = json.load(open(x, encoding="utf-8"))
+        except Exception: pass
+    pages = set(topics) | {"vaccines"}
+    house = {t for n, c in (cfg.get("lists") or {}).items() if c.get("tab") == "house" for t in secs.get(n) or []}
+    urgent_box = {t for t, x in topics.items() if any(b.get("type") == "alert" and b.get("level") == "urgent" for b in x.get("blocks") or [])}
+    danger = d.get("danger") or []
+    for t in danger:
+        if t not in topics: err(f, f"danger: unknown page {t!r}")
+        if t in house: err(f, f"danger: {t} is a Home-tab page")
+    for grp, ids in (d.get("ages") or {}).items():
+        if grp not in ("child", "adult", "pregnant"): err(f, f"ages: unknown group {grp!r} (child, adult, pregnant)")
+        for t in ids:
+            if t not in pages: err(f, f"ages.{grp}: unknown page {t!r}")
+    emerg = set(secs.get("emergency") or [])
+    seen = set()
+    for s in d.get("symptoms") or []:
+        w = f"symptom {s.get('id')}"
+        if s.get("id") in seen: err(f, f"{w}: duplicate id")
+        seen.add(s.get("id"))
+        go = s.get("go") or []
+        if not go: err(f, f"{w}: no pages")
+        if len(set(go)) != len(go): err(f, f"{w}: a page is listed twice")
+        for t in go:
+            if t not in pages: err(f, f"{w}: unknown page {t!r}")
+            if t in house: err(f, f"{w}: {t} is a Home-tab page (no medical advice from the Home side)")
+        for t in s.get("red") or []:
+            if t not in go: err(f, f"{w}: red page {t} is not in its pages")
+            elif t not in urgent_box and t not in emerg and t not in danger: err(f, f"{w}: red page {t} has no red 'go to hospital now' box")
+        red = [t in danger or t in emerg or t in (s.get("red") or []) for t in go]
+        if any(red) and not red[0]: err(f, f"{w}: the first page must be its danger page ({next(t for t, r in zip(go, red) if r)})")
+        if any(red[i] and not red[i - 1] for i in range(1, len(red))): err(f, f"{w}: every danger page must come before the other pages ({', '.join(go)})")
+check_symptoms()
 def check_ui_features():
     # content/src/ui-<feature>.json: extra buttons (text) and narrated lines (say) that tools/build.py adds to ui.json's
     fu = os.path.join(ROOT, "content/src/ui.json")

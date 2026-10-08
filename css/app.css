@@ -482,6 +482,9 @@ img{max-width:100%;display:block}
 .rcard.danger{border:2px solid var(--red);background:var(--red-t)}
 .rbadge{display:inline-flex;align-items:center;gap:4px;align-self:flex-start;background:var(--red);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:1px 10px 1px 8px;margin-bottom:3px}
 .rbadge svg{width:15px;height:15px}
+/* who a finder result is for (a child, an adult, a pregnant woman), when a picture's pages are for more than one */
+.rage{display:inline-block;align-self:flex-start;background:var(--accent-t);color:var(--accent-d);font-size:13px;font-weight:700;border-radius:999px;padding:1px 10px;margin-bottom:3px;line-height:1.5}
+.rcard.danger .rage{background:#fff}
 .rcard .rt .rbadge{color:#fff;font-size:13px;line-height:1.5}
 .askbox input{min-width:0} /* a long placeholder or query must not push the microphone off a narrow phone */
 .rcard .rimg .ricon{display:flex;align-items:center;justify-content:center;aspect-ratio:9/5;color:var(--red)}

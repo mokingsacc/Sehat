@@ -4756,3 +4756,54 @@ Growth no longer add " · name" to the title. The person's picture and name sit 
 (and on the growth chart with one child). New button texts (no clips): `readTitle`, `noteTitle`, `copyTitle`,
 `measureTitle`, `tdTitle` ("Tetanus vaccine"); `whoseNote` is now the short "Whose note?" (fa "برای کیست؟", ps "د چا لپاره؟"). For Mo: check the
 short Dari and Pashto titles.
+
+
+## "What is wrong?" Phase 0: safe fixes to the picture results (8 Oct 2026, worker askfix)
+
+From the research note `research/ask-redesign.md` (Phase 0 only; no redesign). Before and after pictures at 360 px in
+English and Dari: `previews/ask-redesign/phase0/` (Cough, Fever, Breathing, Back pain, Rash, a typed search, nothing found).
+
+- **No Home-tab page in a picture's results** (Mo's rule): Safe warm home in winter, Keep children safe from injury and
+  Floods and earthquakes are gone from Cough, Headache, Stove fumes, Burn, Poisoning, Earthquake and Child accidents.
+  None of the Home-tab pages is itself an emergency answer, so none is kept. `tools/validate.py` now refuses a Home-tab
+  page in `symptoms.json`, and the crawl checks every picture in every language.
+- **Danger pages first, in red**, with a "Danger signs" or "Emergency" badge: the danger-sign pages (children, adults,
+  pregnancy: the new `"danger"` list in `symptoms.json`), every Emergency-section page, and Dog bite on the Dog bite
+  picture (`"red"`). Validate and the crawl check that they come first and that only they are red.
+- **Missing pages added** (the 33-tile table): dog-bite (first on Dog bite), fumes-poisoning (Stove fumes, Headache),
+  hepatitis (Yellow), pneumonia-adult (Cough, Breathing, Chest pain), asthma (Cough, Breathing), diarrhoea-adult
+  (Diarrhoea, Vomiting, Belly), malaria, typhoid and dengue (Fever), scabies (Rash), epilepsy (Fits), malnutrition and
+  the arm-tape reading page (Thin), worms, urine-infection, typhoid (Belly), malnutrition and urine-infection (Tired),
+  the five mind pages (Sadness), the BP reading page (Blood pressure). Every picture ends with "Which clinic or hospital?"
+  (hospital-places).
+- **Who each page is for**: when a picture's pages are for more than one group, each such card says "For a child",
+  "For an adult" or "Pregnant woman" (`"ages"` in `symptoms.json`). Pages for all ages carry no label.
+- **Speakers read the title, then who it is for, then the one-line summary** (new `<topic>.summary` lines for every
+  page, built from the summaries already in the topic files; the editor builds them the same way).
+- **Back pain**: no more "no page yet" note; it opens Danger signs in adults, Falls and broken bones (back pain after a
+  fall), Danger signs in pregnancy, and Burning urine (kidney infection: fever with back pain).
+- **Nothing found**: the spoken "If you are worried, see a health worker" line, Emergency, the three danger-sign pages
+  in red, and Nearest clinic; the pictures stay below. The plain "Nothing found" sentence is no longer used.
+- **Typed search**: the home health kit pages (Home tab) show only when the words are about a device (the best match
+  is a kit page or a reading). "My child has a cough and fever" no longer shows the kit.
+- Four picture names now say what the English says: Thin or not growing, Long cough or TB, Rash or spots, Tired or pale.
+
+Not changed (Mo is deciding): the fever age cut-off (2 or 3 months) and chest indrawing (hospital now or clinic today).
+
+New and changed lines (fa, ps, en; clips still to make): new `ui.forChild`, `ui.forAdult`, `<topic>.summary` for
+all 107 pages and `vaccines.summary`; changed `ui.results` ("Look at the red pages first ... hear what it is about")
+and `ui.sym.thin`, `ui.sym.longcough`, `ui.sym.rash`, `ui.sym.tired`. New texts: `forChild`, `forAdult`, `forPregnant`.
+
+For Mo to check:
+1. The page lists and their order for all 33 pictures (table in the session report), especially: red-flags on Cough,
+   Diarrhoea, Rash and Yellow; pregnancy-danger on Fever, Vomiting, Back pain and Blood pressure; danger-child on
+   Feeding and Belly; dengue on Fever (an eastern disease); first-aid first on Sores and wounds (there is no wound page
+   and no wound-infection danger list).
+2. Dog bite marked red like an emergency (go today for rabies vaccine).
+3. Summaries now read aloud start with reassurance on some pages ("Most coughs get better at home"); the red cards
+   come before them, but Phase 1 should rewrite these lines.
+4. Dari and Pashto: برای طفل / د ماشوم لپاره, برای بزرگسال / د لوی کس لپاره, the new ui.results line, and the four
+   picture names (لاغری یا رشد نکردن / ډنګروالی یا وده نه کول; سرفۀ طولانی یا توبرکلوز / اوږد ټوخی یا نری رنځ;
+   دانه یا لکه روی پوست / پر پوستکي دانې یا داغونه; خستگی یا رنگ‌پریدگی / ستړیا یا رنګ الوتل).
+5. Typed search still shows other Home-tab pages when the words match them (for example "Safe warm home in winter" for
+   "my child has a cough and fever", at its red "child coughing or breathing fast?" link row). Remove them too?

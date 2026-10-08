@@ -52,6 +52,7 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
     const n = {};
     if (tid === 'vaccines' || !t || !Array.isArray(t.blocks)) return n;
     n[tid + '.title'] = sayL(t.title);
+    if (hasText(t.summary)) n[tid + '.summary'] = sayL(t.summary); // the finder's result cards read it after the title
     for (const bl of t.blocks) {
       if (!bl || !bl.id) continue;
       if (bl.type === 'step' || bl.type === 'link' || bl.type === 'clinic') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));

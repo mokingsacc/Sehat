@@ -1,5 +1,37 @@
 {
-  "_note": "Offline symptom finder. Each entry: words people might say or type (Dari, Pashto, English), the picture icon, and the pages to open. Add words freely; matching ignores spelling marks. Optional: say = an existing narration id with the same words as the label (its speaker reuses that recording; otherwise the label is narrated as ui.sym.<id>); pic = the tile picture, img/symptoms/<id>.webp, set by tools/symptom_pics.py (without it the tile shows the icon).",
+  "_note": "Offline symptom finder. Each entry: words people might say or type (Dari, Pashto, English), the picture icon, and the pages to open. Add words freely; matching ignores spelling marks. Order of \"go\": the danger and emergency pages first, then the others. Danger pages are marked red: the danger-sign pages (\"danger\" below), every page of the Emergency section, and an entry's own \"red\" list. Never a Home-tab page (Mo's rule: no medical advice from the Home side). \"ages\": pages for one age group only; when an entry's pages are for more than one group, each such card says who it is for. tools/validate.py checks all of this. Optional: say = an existing narration id with the same words as the label (its speaker reuses that recording; otherwise the label is narrated as ui.sym.<id>); pic = the tile picture, img/symptoms/<id>.webp, set by tools/symptom_pics.py (without it the tile shows the icon).",
+  "danger": [
+    "danger-child",
+    "red-flags",
+    "pregnancy-danger"
+  ],
+  "ages": {
+    "child": [
+      "danger-child",
+      "fever",
+      "cough",
+      "diarrhoea",
+      "measles",
+      "newborn",
+      "breastfeeding",
+      "growth",
+      "malnutrition",
+      "worms",
+      "fever-fits",
+      "reading-muac"
+    ],
+    "adult": [
+      "red-flags",
+      "pneumonia-adult",
+      "diarrhoea-adult"
+    ],
+    "pregnant": [
+      "pregnancy-danger",
+      "pregnancy-care",
+      "after-birth",
+      "birth-plan"
+    ]
+  },
   "symptoms": [
     {
       "id": "notbreathing",
@@ -72,9 +104,14 @@
         ]
       },
       "go": [
-        "fever",
         "danger-child",
-        "measles"
+        "red-flags",
+        "pregnancy-danger",
+        "fever",
+        "measles",
+        "malaria",
+        "typhoid",
+        "dengue"
       ]
     },
     {
@@ -109,9 +146,12 @@
         ]
       },
       "go": [
+        "danger-child",
+        "red-flags",
         "cough",
+        "pneumonia-adult",
         "tb",
-        "winter-home"
+        "asthma"
       ]
     },
     {
@@ -146,11 +186,13 @@
         ]
       },
       "go": [
-        "cough",
         "danger-child",
         "red-flags",
         "asthma-attack",
-        "allergy-severe"
+        "allergy-severe",
+        "cough",
+        "pneumonia-adult",
+        "asthma"
       ]
     },
     {
@@ -183,8 +225,10 @@
         ]
       },
       "go": [
-        "diarrhoea",
         "danger-child",
+        "red-flags",
+        "diarrhoea",
+        "diarrhoea-adult",
         "hygiene"
       ]
     },
@@ -216,17 +260,19 @@
         ]
       },
       "go": [
-        "diarrhoea",
         "danger-child",
-        "pregnancy-danger"
+        "red-flags",
+        "pregnancy-danger",
+        "diarrhoea",
+        "diarrhoea-adult"
       ]
     },
     {
       "id": "rash",
       "icon": "rash",
       "label": {
-        "fa": "دانه پوست",
-        "ps": "دانې",
+        "fa": "دانه یا لکه روی پوست",
+        "ps": "پر پوستکي دانې یا داغونه",
         "en": "Rash or spots"
       },
       "words": {
@@ -250,9 +296,12 @@
         ]
       },
       "go": [
+        "danger-child",
+        "red-flags",
         "measles",
-        "fever",
-        "leishmaniasis"
+        "scabies",
+        "leishmaniasis",
+        "fever"
       ]
     },
     {
@@ -287,8 +336,8 @@
         ]
       },
       "go": [
-        "leishmaniasis",
         "first-aid",
+        "leishmaniasis",
         "diabetes"
       ]
     },
@@ -356,11 +405,11 @@
         ]
       },
       "go": [
-        "pregnancy-danger",
-        "first-aid",
-        "red-flags",
         "bleeding",
-        "nosebleed"
+        "pregnancy-danger",
+        "red-flags",
+        "nosebleed",
+        "first-aid"
       ]
     },
     {
@@ -392,9 +441,9 @@
       },
       "go": [
         "red-flags",
-        "blood-pressure",
         "pregnancy-danger",
-        "winter-home"
+        "fumes-poisoning",
+        "blood-pressure"
       ]
     },
     {
@@ -426,6 +475,7 @@
       },
       "go": [
         "red-flags",
+        "pneumonia-adult",
         "blood-pressure"
       ]
     },
@@ -457,9 +507,14 @@
         ]
       },
       "go": [
+        "danger-child",
         "red-flags",
         "pregnancy-danger",
-        "diarrhoea"
+        "diarrhoea",
+        "worms",
+        "diarrhoea-adult",
+        "urine-infection",
+        "typhoid"
       ]
     },
     {
@@ -490,13 +545,10 @@
       },
       "go": [
         "red-flags",
-        "pregnancy-danger"
-      ],
-      "note": {
-        "fa": "صفحۀ جداگانه برای کمردرد هنوز نداریم. اگر درد شدید است، با تب، یا بعد از افتادن، به کلینیک بروید.",
-        "ps": "د ملا د درد لپاره لا جلا پاڼه نه لرو. که درد سخت وي، له تبې سره وي، یا له لوېدو وروسته وي، کلینیک ته ولاړ شئ.",
-        "en": "There is no separate back pain page yet. If the pain is severe, comes with fever, or follows a fall, go to the clinic."
-      }
+        "falls-fractures",
+        "pregnancy-danger",
+        "urine-infection"
+      ]
     },
     {
       "id": "burn",
@@ -528,8 +580,7 @@
       },
       "go": [
         "burns",
-        "first-aid",
-        "child-safety"
+        "first-aid"
       ]
     },
     {
@@ -565,7 +616,7 @@
         ]
       },
       "go": [
-        "winter-home",
+        "fumes-poisoning",
         "first-aid"
       ]
     },
@@ -598,9 +649,13 @@
         ]
       },
       "go": [
+        "dog-bite",
         "snake-scorpion",
         "first-aid",
         "animal-illness"
+      ],
+      "red": [
+        "dog-bite"
       ]
     },
     {
@@ -633,8 +688,7 @@
       },
       "go": [
         "poisoning",
-        "first-aid",
-        "child-safety"
+        "first-aid"
       ]
     },
     {
@@ -670,11 +724,12 @@
         ]
       },
       "go": [
+        "seizures",
+        "fever-fits",
         "danger-child",
         "pregnancy-danger",
         "red-flags",
-        "seizures",
-        "fever-fits"
+        "epilepsy"
       ]
     },
     {
@@ -706,9 +761,9 @@
         ]
       },
       "go": [
+        "danger-child",
         "newborn",
-        "breastfeeding",
-        "danger-child"
+        "breastfeeding"
       ]
     },
     {
@@ -742,6 +797,7 @@
         ]
       },
       "go": [
+        "danger-child",
         "breastfeeding",
         "growth"
       ]
@@ -750,8 +806,8 @@
       "id": "thin",
       "icon": "muac",
       "label": {
-        "fa": "لاغری",
-        "ps": "ډنګروالی",
+        "fa": "لاغری یا رشد نکردن",
+        "ps": "ډنګروالی یا وده نه کول",
         "en": "Thin or not growing"
       },
       "words": {
@@ -778,6 +834,8 @@
         ]
       },
       "go": [
+        "malnutrition",
+        "reading-muac",
         "growth",
         "breastfeeding"
       ]
@@ -809,16 +867,18 @@
         ]
       },
       "go": [
+        "danger-child",
+        "red-flags",
         "newborn",
-        "red-flags"
+        "hepatitis"
       ]
     },
     {
       "id": "tired",
       "icon": "rest",
       "label": {
-        "fa": "خستگی و کم‌خونی",
-        "ps": "ستړیا او د وینې کمښت",
+        "fa": "خستگی یا رنگ‌پریدگی",
+        "ps": "ستړیا یا رنګ الوتل",
         "en": "Tired or pale"
       },
       "words": {
@@ -846,7 +906,9 @@
       "go": [
         "anaemia",
         "diabetes",
-        "tb"
+        "tb",
+        "malnutrition",
+        "urine-infection"
       ]
     },
     {
@@ -879,8 +941,8 @@
         ]
       },
       "go": [
-        "diabetes",
-        "low-sugar"
+        "low-sugar",
+        "diabetes"
       ]
     },
     {
@@ -910,8 +972,10 @@
         ]
       },
       "go": [
+        "red-flags",
+        "pregnancy-danger",
         "blood-pressure",
-        "red-flags"
+        "reading-bp"
       ]
     },
     {
@@ -952,6 +1016,11 @@
       },
       "go": [
         "stress",
+        "mind-body",
+        "mind-cycle",
+        "mind-calm",
+        "mind-problems",
+        "mind-routine",
         "after-birth"
       ]
     },
@@ -959,8 +1028,8 @@
       "id": "longcough",
       "icon": "lungs",
       "label": {
-        "fa": "سرفۀ طولانی",
-        "ps": "اوږد ټوخی",
+        "fa": "سرفۀ طولانی یا توبرکلوز",
+        "ps": "اوږد ټوخی یا نری رنځ",
         "en": "Long cough or TB"
       },
       "words": {
@@ -1052,11 +1121,10 @@
         ]
       },
       "go": [
-        "floods-quakes",
-        "first-aid",
         "falls-fractures",
         "head-injury",
-        "drowning"
+        "drowning",
+        "first-aid"
       ]
     },
     {
@@ -1152,11 +1220,12 @@
         ]
       },
       "go": [
-        "child-safety",
-        "first-aid",
+        "falls-fractures",
         "drowning",
+        "burns",
         "electric-shock",
-        "poisoning"
+        "poisoning",
+        "first-aid"
       ]
     }
   ]

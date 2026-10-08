@@ -77,7 +77,8 @@ const slotOf = (lg = S.lang, v = S.voice) => `${lg || 'fa'}-${v === 'm' ? 'm' : 
 const slotsFor = (slot, strict) => (strict ? [slot] : [slot, slot.slice(0, 3) + otherVoice(slot.slice(3))]);
 const clipSrc = (id, slot) => (S.book.audio[slot] && S.book.audio[slot][id]) || null;
 const hasAudio = (id, slot = slotOf(), strict = false) => slotsFor(slot, strict).some((s) => clipSrc(id, s) || REC.has(s + '/' + id));
-const spk = (id, label) => `<button class="spk${hasAudio(id) ? '' : ' none'}" data-say="${esc(id)}" aria-label="${esc(label || T('listen'))}">${I.spk}</button>`;
+// a speaker button; more: narration ids read straight after id (a result card reads its title, then its one line)
+const spk = (id, label, more) => `<button class="spk${hasAudio(id) ? '' : ' none'}" data-say="${esc(id)}"${more && more.length ? ` data-then="${esc(more.join(' '))}"` : ''} aria-label="${esc(label || T('listen'))}">${I.spk}</button>`;
 
 const P = { audio: new Audio(), ids: [], i: 0, on: false, url: null, token: 0, slot: 'fa-f', strict: false };
 P.audio.preload = 'auto';
@@ -1076,11 +1077,9 @@ function askResults(symId, live) {
     return FD.results(ASK.q) + reportCards(svFor('symptoms', top3)).html;
   }
   else return '';
-  const topicsSeen = new Set(); let out = '';
-  for (const s of syms.slice(0, 3)) {
-    if (s.note) out += `<div class="blk tip"><div class="body">${esc(L(s.note))}</div></div>`;
-    for (const tid of s.go) { if (topicsSeen.has(tid)) continue; topicsSeen.add(tid); out += resultCard(tid); }
-  }
+  // a picture: its pages, danger pages first in red, the age of each page when they mix (js/search-ui.js)
+  let out = '';
+  for (const s of syms.slice(0, 3)) out += FD.tile(s);
   for (const b of blocks) {
     const tid = b.id.split('.')[0]; const t = S.book.topics[tid]; if (!t) continue;
     const txt = L(S.book.narration[b.id]);
@@ -1089,11 +1088,7 @@ function askResults(symId, live) {
   const top3 = syms.slice(0, 3).map((s) => s.id);
   svSignal(top3);
   if (out) out += reportCards(svFor('symptoms', top3)).html;
-  return out ? groupHead(T('results'), 'ui.results', ' sayh') + out : `<div class="blk tip"><div class="body">${esc(T('noResults'))}</div></div>`;
-}
-function resultCard(tid) {
-  const t = S.book.topics[tid]; if (!t) return '';
-  return `<div class="rcard${isAdultTopic(t) ? ' adult' : ''}"><a href="#/topic/${tid}" class="rimg" tabindex="-1" aria-hidden="true"><img src="${esc(t.image)}" alt=""></a><a href="#/topic/${tid}" class="rt"><b>${esc(L(t.title))}</b><span>${esc(L(t.summary))}</span></a>${spk(tid + '.title')}</div>`;
+  return out ? groupHead(T('results'), 'ui.results', ' sayh') + out : FD.none();
 }
 async function startMic(btn) {
   const R = window.SpeechRecognition || window.webkitSpeechRecognition; if (!R) return;
@@ -1333,7 +1328,10 @@ document.addEventListener('click', async (e) => {
   const t = e.target.closest('button, a, [data-block]'); if (!t) return;
   const d = t.dataset;
   if (d.tabsay) { const id = d.tabsay; if (t.getAttribute('aria-current') === 'page') play([id], { quiet: true }); else S.tabSay = id; return; }
-  if (d.say) { e.preventDefault(); if (P.on && P.ids.length === 1 && P.ids[0] === d.say) stopAudio(); else play([d.say]); return; }
+  if (d.say) {
+    e.preventDefault(); const ids = [d.say, ...(d.then ? d.then.split(' ') : [])];
+    if (P.on && P.ids[0] === d.say && P.ids.length === ids.filter((id) => S.book.narration[id]).length) stopAudio(); else play(ids); return;
+  }
   if (d.sayLang) { e.preventDefault(); const prev = S.lang; S.lang = d.sayLang; play(['ui.welcome'], { slot: slotOf(d.sayLang) }); S.lang = prev; return; }
   if (d.sample) { e.preventDefault(); const sl = slotOf(S.lang, d.sample); if (P.on && P.strict && P.slot === sl) stopAudio(); else play([sampleId(sl)], { slot: sl, strict: true }); return; }
   if (d.setlang) { // the first run: the language, and straight to the Health tab
