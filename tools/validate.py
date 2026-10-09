@@ -555,35 +555,70 @@ check_steps()
 # APK, every other set downloads on demand. tools/anims.py chooses from the group; nobody sets it by hand.
 APK_PICTURES_MB = 3.0   # img/ inside the APK; with code (~1 MB) and the bundled narration (~7 MB) the APK stays ~11 MB
 def check_picture_storage():
+    import hashlib, shutil, tempfile
     live, em = ANIM.steps_live(), ANIM.emergency_anims()
-    on_demand = [n for n in live if os.path.exists(ANIM.steps_path(n)) and ANIM.steps_offline(n, em) == "on-demand"]
     for f in sorted(glob.glob(os.path.join(ROOT, "anim/steps/*.json"))):
         try: d = json.load(open(f, encoding="utf-8"))
         except Exception: continue
+        name = os.path.basename(f)[:-5]
         if "offline" in d: warn(f, f"\"offline\": {d['offline']!r} is ignored: tools/build.py chooses precache (Emergency and CPR) or on-demand from the animation's group")
+        # every picture's "v" is its content hash: phones keep on-demand pictures by it and check them against it
+        pdir = os.path.join(ROOT, (d.get("dir") or f"img/steps/{name}/"))
+        for fr, v in (d.get("frames") or {}).items():
+            for L in (v.get("layers") if isinstance(v, dict) else v) or []:
+                pf = os.path.join(pdir, str(L.get("src")))
+                if not os.path.exists(pf): continue  # reported by check_steps
+                h = hashlib.sha1(open(pf, "rb").read()).hexdigest()[:8]
+                if not L.get("v"): err(f, f"frame {fr}: picture {L.get('src')} has no \"v\" (its sha1[:8], {h}); run tools/steps_images.py or add it")
+                elif L["v"] != h: err(f, f"frame {fr}: picture {L.get('src')} has \"v\": {L['v']!r} but its sha1[:8] is {h!r}")
+    try: want = ANIM.steps_book(live, em)
+    except FileNotFoundError as e: err(os.path.join(ROOT, "js/anim.js"), str(e)); return
+    on_demand = [n for n, e in want.items() if e["offline"] == "on-demand"]
     for n in on_demand:
-        if not ANIM.has_fallback(n): warn(ANIM.steps_path(n), f"on-demand picture steps with no SVG version (anim/{n}.js): the animation is left off its page until the pictures are downloaded")
-    # the generated service worker must not precache an on-demand set (it would be downloaded at the first open)
+        if not want[n]["fallback"]: warn(ANIM.steps_path(n), f"on-demand picture steps with no SVG version (anim/{n}.js): the animation is left off its page until the pictures are downloaded")
+    # the built book must say the same (run tools/build.py after changing a set, its pictures or its group)
+    bp = os.path.join(ROOT, "content/book.json")
+    if os.path.exists(bp):
+        have = json.load(open(bp, encoding="utf-8")).get("steps")
+        if have != want:
+            diff = sorted(n for n in set(want) | set(have or {}) if (have or {}).get(n) != want.get(n))
+            err(bp, f"book.steps is out of date for {', '.join(diff) or 'the list'}: run python3 tools/build.py")
+    # the generated service worker precaches every precache set and nothing of an on-demand one
     sw = os.path.join(ROOT, "sw.js")
     if os.path.exists(sw):
         m = re.search(r"const PRECACHE = (\[.*?\]);", open(sw, encoding="utf-8").read(), re.S)
-        pre = json.loads(m.group(1)) if m else []
-        for n in on_demand:
-            js, pics, folder = ANIM.steps_files(n)
-            bad = [p for p in pre if p == f"anim/steps/{n}.json" or p.startswith(folder + "/")]
-            if bad: err(sw, f"precaches the on-demand set {n} ({len(bad)} files): run python3 tools/build.py")
-        for n in live:
-            if n not in on_demand and os.path.exists(ANIM.steps_path(n)) and f"anim/steps/{n}.json" not in pre:
-                err(sw, f"does not precache the Emergency / CPR set {n}: run python3 tools/build.py")
-    # android/sync-web.sh must leave on-demand sets out of the APK (it reads book.steps)
+        pre = set(json.loads(m.group(1)) if m else [])
+        for n, e in want.items():
+            files = {f"anim/steps/{n}.json"} | {f.split("?")[0] for f in e["files"][1:]}
+            if e["offline"] == "on-demand" and files & pre: err(sw, f"precaches the on-demand set {n}: run python3 tools/build.py")
+            if e["offline"] == "precache" and files - pre: err(sw, f"does not precache all of the Emergency / CPR set {n}: run python3 tools/build.py")
+    # the APK filter (tools/anims.py prune_apk, run by android/sync-web.sh) on a copy of the picture-step folders
     sync = os.path.join(ROOT, "android/sync-web.sh")
-    if os.path.exists(sync) and '"precache"' not in open(sync, encoding="utf-8").read():
-        err(sync, "does not leave on-demand picture steps out of the APK (book.steps \"precache\" check missing)")
-    keep = {(json.load(open(ANIM.steps_path(n), encoding="utf-8")).get("dir") or f"img/steps/{n}").rstrip("/") for n in live if n not in on_demand and os.path.exists(ANIM.steps_path(n))}
-    total = 0
+    if os.path.exists(sync) and "prune_apk" not in open(sync, encoding="utf-8").read():
+        err(sync, "does not run tools/anims.py prune_apk: on-demand picture steps would go into the APK")
+    tmp = tempfile.mkdtemp(prefix="apk-steps-")
+    try:
+        for d in glob.glob(os.path.join(ROOT, "img/steps/*")):
+            if os.path.isdir(d): shutil.copytree(d, os.path.join(tmp, "img/steps", os.path.basename(d)))
+        os.makedirs(os.path.join(tmp, "anim/steps"), exist_ok=True)
+        for f in glob.glob(os.path.join(ROOT, "anim/steps/*.json")): shutil.copy(f, os.path.join(tmp, "anim/steps"))
+        ANIM.prune_apk(tmp, want)
+        left = {os.path.relpath(os.path.join(a, f), tmp) for a, _, fs in os.walk(tmp) for f in fs}
+        should = set()
+        for n, e in want.items():
+            if e["offline"] == "precache":
+                should |= {f"anim/steps/{n}.json"} | {f.split("?")[0] for f in e["files"][1:]}
+        for f in sorted(left - should):
+            if f.startswith(("anim/steps/", "img/steps/")) and not any(f.startswith(e["dir"]) for n, e in want.items() if e["offline"] == "precache"):
+                err(sync, f"the APK filter keeps {f}, which is not an Emergency / CPR picture-step file")
+        for f in sorted(should - left): err(sync, f"the APK filter drops {f}, part of an Emergency / CPR set")
+        apk_steps = sum(os.path.getsize(os.path.join(tmp, f)) for f in left if f.startswith("img/"))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+    total = apk_steps
     for a, dirs, fs in os.walk(os.path.join(ROOT, "img")):
         rel = os.path.relpath(a, ROOT)
-        if rel.startswith(os.path.join("img", "_preview")) or (rel.startswith(os.path.join("img", "steps") + os.sep) and not any(rel == k or rel.startswith(k + os.sep) for k in keep)): continue
+        if rel.startswith(os.path.join("img", "_preview")) or rel.startswith(os.path.join("img", "steps")): continue
         total += sum(os.path.getsize(os.path.join(a, f)) for f in fs if not f.startswith("."))
     if total > APK_PICTURES_MB * 1e6:
         warn(os.path.join(ROOT, "img"), f"{total / 1e6:.1f} MB of pictures go into the APK (aim: under {APK_PICTURES_MB:.0f} MB, so the APK stays about 11 MB)")
@@ -597,6 +632,12 @@ def check_old_phone_js():
         for m in re.finditer(r"\?\?|\?\.(?!\d)", code):
             err(f, f"line {code.count(chr(10), 0, m.start()) + 1}: {m.group(0)!r} does not work on old Android phones")
 check_old_phone_js()
+# CSS "inset" (Chrome 87+): old phones ignore it, so write top/right/bottom/left instead (css/*.css and css in js/)
+def check_no_inset():
+    for f in sorted(glob.glob(os.path.join(ROOT, "css", "*.css")) + glob.glob(os.path.join(ROOT, "js", "*.js")) + glob.glob(os.path.join(ROOT, "js", "cine", "*.js"))):
+        for i, line in enumerate(open(f, encoding="utf-8"), 1):
+            if re.search(r"(?<![-\w])inset\s*:", line): err(f, f"line {i}: CSS inset does not work on old Android phones; use top/right/bottom/left")
+check_no_inset()
 
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst

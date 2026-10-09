@@ -324,17 +324,15 @@ pre = [p for p in pre if not p.startswith("js/sw") and not p.endswith("-3d.js")]
 #   downloads it the first time its page is opened online (all files or none), keeps it in the phone's "fhb-steps-v1"
 #   cache, and plays the SVG version until then.
 # book.steps tells the app which is which, with the files (?v= = content hash, so an update downloads again).
-steps_em, book["steps"] = ANIM.emergency_anims(), {}
-for name in ANIM.steps_live():
-    jp = f"anim/steps/{name}.json"
-    if not exists(jp): print("WARNING", name, "is in STEPS (js/anim.js) but", jp, "is missing"); continue
-    js, pics, folder = ANIM.steps_files(name)
-    pics = [f for f in pics if exists(f.split("?")[0])]
-    mode = ANIM.steps_offline(name, steps_em)
-    nbytes = sum(os.path.getsize(J(f.split("?")[0])) for f in [js] + pics)
-    book["steps"][name] = {"offline": mode, "dir": folder + "/", "files": [js] + pics, "bytes": nbytes, "fallback": ANIM.has_fallback(name)}
-    if mode == "precache":
-        for f in [jp] + [f.split("?")[0] for f in pics]:
+missing_steps = [n for n in ANIM.steps_live() if not exists(f"anim/steps/{n}.json")]
+if missing_steps: sys.exit(f"ERROR: in STEPS (js/anim.js) but anim/steps/<name>.json is missing: {', '.join(missing_steps)}")
+try:
+    book["steps"] = ANIM.steps_book(ANIM.steps_live())
+except FileNotFoundError as e:
+    sys.exit(f"ERROR: {e}")
+for name, e in book["steps"].items():
+    if e["offline"] == "precache":
+        for f in [f"anim/steps/{name}.json"] + [f.split("?")[0] for f in e["files"][1:]]:
             if f not in pre: pre.append(f)
 
 # version = hash of all precached content (not of the build time: rebuilding the same content keeps the same version,

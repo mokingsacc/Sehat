@@ -125,14 +125,14 @@ def _load(p):
 
 def emergency_topics():
     """Topics of the Emergency group: the Emergency section, every Emergency card's topics, CPR page and film
-    (config.json "emergency"), and every CPR, choking and newborn topic."""
+    (config.json "emergency"), every CPR and choking topic (cpr-*, choking*) and the newborn topic."""
     sections, config = _load(os.path.join(SRC, "sections.json")), _load(os.path.join(SRC, "config.json"))
     out = set(sections.get("emergency") or [])
     for card in config.get("emergency") or []:
         out.update(card.get("topics") or [])
         if card.get("cpr"): out.add(card["cpr"])
     every = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(SRC, "topics", "*.json"))}
-    out.update(t for t in every if re.search(r"^(cpr|choking)\b|newborn", t))
+    out.update(t for t in every if re.match(r"(cpr|choking)\b", t) or t == "newborn")
     return out
 
 
@@ -180,3 +180,46 @@ def steps_files(name):
 def has_fallback(name):
     """An SVG version (anim/<name>.js) that plays while an on-demand set is not on the phone."""
     return os.path.exists(os.path.join(ROOT, "anim", name + ".js"))
+
+
+def apk_steps_keep(steps):
+    """From book.steps: (set names, picture folders) that go inside the APK: the "precache" sets only."""
+    keep = {n for n, e in (steps or {}).items() if e.get("offline") == "precache"}
+    return keep, {os.path.normpath((steps[n].get("dir") or f"img/steps/{n}").rstrip("/")) for n in keep}
+
+
+def prune_apk(out, steps):
+    """Remove from an APK folder (android/sync-web.sh) every picture-step folder and JSON that is not a precache set
+    (on-demand sets, sets not live yet, leftovers). Returns (kept names, removed paths, removed bytes)."""
+    import shutil
+    keep, keep_dirs = apk_steps_keep(steps)
+    gone, size = [], 0
+    for d in sorted(glob.glob(os.path.join(out, "img/steps/*"))):
+        rel = os.path.normpath(os.path.relpath(d, out))
+        if rel in keep_dirs: continue
+        if os.path.isdir(d):
+            size += sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(d) for f in fs); shutil.rmtree(d)
+        else:
+            size += os.path.getsize(d); os.remove(d)
+        gone.append(rel)
+    for f in sorted(glob.glob(os.path.join(out, "anim/steps/*"))):
+        if f.endswith(".json") and os.path.basename(f)[:-5] in keep: continue
+        if os.path.isdir(f): shutil.rmtree(f)
+        else: size += os.path.getsize(f); os.remove(f)
+        gone.append(os.path.relpath(f, out))
+    return sorted(keep), gone, size
+
+
+def steps_book(names, em=None):
+    """book.steps for these live set names, as tools/build.py writes it (tools/validate.py compares)."""
+    em = emergency_anims() if em is None else em
+    out = {}
+    for name in names:
+        if not os.path.exists(steps_path(name)): continue
+        js, pics, folder = steps_files(name)
+        missing = [f for f in pics if not os.path.exists(os.path.join(ROOT, f.split("?")[0]))]
+        if missing: raise FileNotFoundError(f"anim/steps/{name}.json names pictures that are missing: {', '.join(missing)}")
+        out[name] = {"offline": steps_offline(name, em), "dir": folder + "/", "files": [js] + pics,
+                     "bytes": sum(os.path.getsize(os.path.join(ROOT, f.split("?")[0])) for f in [js] + pics),
+                     "fallback": has_fallback(name)}
+    return out

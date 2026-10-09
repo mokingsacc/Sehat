@@ -122,7 +122,7 @@ const CSS = `
 @keyframes ak-breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.014)}}
 .anim-svg .sw{animation:ak-sway 4.2s ease-in-out infinite}
 @keyframes ak-sway{0%,100%{transform:rotate(0)}50%{transform:rotate(1.6deg)}}
-.anim-stage>.anim-old{position:absolute;inset:0;width:100%;z-index:1;pointer-events:none;animation:ak-xfade .55s ease-in-out forwards}
+.anim-stage>.anim-old{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;z-index:1;pointer-events:none;animation:ak-xfade .55s ease-in-out forwards}
 @keyframes ak-xfade{from{opacity:1}to{opacity:0}}
 .anim-stage>.anim-cam{will-change:transform;transform-origin:var(--cx,50%) var(--cy,55%);animation:ak-cam var(--cd,9s) cubic-bezier(.45,0,.4,1) both}
 @keyframes ak-cam{from{transform:translate(var(--x0,0),var(--y0,0)) scale(var(--s0,1))}to{transform:translate(var(--x1,0),var(--y1,0)) scale(var(--s1,1.045))}}
@@ -145,7 +145,7 @@ const CSS = `
 [dir=ltr] .anim-pick .row b{font-size:16px;line-height:1.35}
 .anim-pick .spk{width:56px;height:56px}
 .anim-pick .anim-svg *{animation:none!important}
-.anim-overlay{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;overscroll-behavior:contain}
+.anim-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:50;background:var(--bg);overflow-y:auto;overscroll-behavior:contain}
 .anim-overlay>div{max-width:560px;margin:0 auto;padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px))}
 .anim-overlay .anim{min-height:calc(100vh - 28px - env(safe-area-inset-bottom,0px))}
 .anim-overlay .anim-ctl{margin-top:auto}
@@ -161,54 +161,102 @@ function injectCss(id, css) {
 // ---------- where picture-step sets live (Mo, 9 Oct 2026; docs/STEPS_PLAYER.md "Where the pictures live") ----------
 // tools/build.py lists every live picture-step set in book.steps and chooses where it lives from its group:
 // "precache" (Emergency and CPR) sets are inside the APK and precached from the first open; "on-demand" sets are not.
-// An on-demand set downloads the first time a page shows it (automatically on Wi-Fi only, like the voice packs; when
-// the person opens the animation itself, on any connection), one file at a time into the cache below. It plays only
-// when every one of its files is on the phone (all or nothing); until then the SVG version plays at once, so nothing
-// ever waits for the network. A failed or cut-off download is tried again quietly the next time. Inside the Android
-// app the files come from the website (config.appUrl), as the narration does. The app calls stepsSetup(book.steps).
+// An on-demand set downloads the first time a page shows it (by itself only on Wi-Fi or a cable, with data saver off;
+// when the person opens the animation itself, on any connection), one file at a time into the cache below.
+// - The set is its JSON (anim/steps/<name>.json?v=<sha1[:8]>, from book.steps) plus every picture that JSON names
+//   (img/steps/<name>/<file>?v=<its sha1[:8]>). Every file is checked against its hash before it is kept, so a
+//   website newer or older than this book (or a half-updated website) never mixes versions: that set is just not
+//   complete, and the SVG version plays.
+// - It plays only when every one of its files is on the phone (all or nothing), from blob: URLs, so it needs neither
+//   the network nor the service worker. Until then the SVG version plays at once: nothing waits for the network.
+// - A file that stops arriving for 30 s is given up (and kept files stay), so the next visit carries on quietly.
+// - A full phone (QuotaExceededError) stops downloads started by pages until the app is opened again.
+// Inside the Android app the files come from the website (config.appUrl), as the narration does.
 const SET_CACHE = 'fhb-steps-v1';
-const SETS = { info: {}, base: new URL('../', import.meta.url).href, busy: {}, ready: {}, have: {}, fns: [], swept: false };
+// have: a complete version is on the phone (it plays); cur: the version this book names is complete (no download)
+const SETS = { info: {}, base: new URL('../', import.meta.url).href, busy: {}, ready: {}, have: {}, cur: {}, fns: [], swept: false, full: false, idle: 30000 };
 const onDemand = (name) => { const e = SETS.info[name]; return e && e.offline === 'on-demand' && e.files && e.files.length ? e : null; };
 const setUrl = (f) => new URL(f, SETS.base).href;
-const canCache = () => typeof caches !== 'undefined' && !!caches.open;
-// data saver, 2G or mobile data (the same test as the voice packs in js/app.js)
-const slowNet = () => { const c = navigator.connection; return !!(c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || '') || /^(cellular|wimax|bluetooth)$/.test(c.type || ''))); };
+const canCache = () => typeof caches !== 'undefined' && !!caches.open && typeof crypto !== 'undefined' && !!crypto.subtle;
+// downloads that start by themselves: only on Wi-Fi or a cable with data saver off. A phone that does not say
+// (no navigator.connection, or no type, as on iPhones and computers) counts as not Wi-Fi. The voice packs use this too.
+export const onWifi = () => { const c = typeof navigator !== 'undefined' && navigator.connection; return !!(c && !c.saveData && /^(wifi|ethernet)$/.test(c.type || '')); };
+const hex8 = (buf) => crypto.subtle.digest('SHA-1', buf).then((h) => Array.prototype.map.call(new Uint8Array(h).slice(0, 4), (x) => (x < 16 ? '0' : '') + x.toString(16)).join(''));
+const vOf = (f) => { const m = /[?&]v=([0-9a-f]+)/.exec(f); return m ? m[1] : ''; };
 
-export function stepsSetup(info, base) {
+// opts.idleMs: give a file up after this long with nothing arriving (default 30 s; tools/test_ondemand.mjs uses less)
+export function stepsSetup(info, base, opts) {
   SETS.info = info && typeof info === 'object' ? info : {};
+  if (opts && opts.idleMs) SETS.idle = opts.idleMs;
   if (base) SETS.base = new URL(base, location.href).href;
-  SETS.ready = {}; SETS.have = {};
+  SETS.ready = {}; SETS.have = {}; SETS.cur = {};
   if (!canCache()) return;
   Object.keys(SETS.info).forEach((n) => { if (onDemand(n)) haveSet(n); });
   if (!SETS.swept) { SETS.swept = true; setTimeout(sweepSets, 8000); }
 }
 // true when the animation can play its picture steps now (a precache set, or an on-demand set all on the phone)
 export const stepsHave = (name) => !onDemand(name) || !!SETS.have[name];
-// fn(name) runs when an on-demand set has finished downloading (the app swaps its posters in)
+// fn(name) runs when an on-demand set is found complete on the phone or has just finished downloading
 export function onStepsReady(fn) { SETS.fns.push(fn); }
 // a page shows this animation: download its set if it is on-demand and not on the phone yet (Wi-Fi only)
 export function prefetchSteps(name) { getSet(String(name).replace(/^anim\./, ''), 'page'); }
+function told(name) { SETS.fns.forEach((fn) => { try { fn(name); } catch (er) {} }); }
 
-function haveSet(name) {
-  const e = onDemand(name);
-  if (!e || !canCache()) return Promise.resolve(false);
-  return caches.open(SET_CACHE).then((c) => Promise.all(e.files.map((f) => c.match(setUrl(f)))))
-    .then((rs) => { const ok = rs.every((r) => !!r); if (ok) SETS.have[name] = true; return ok; }, () => false);
+// the pictures a set's JSON names, as paths from the app root with their ?v= (as tools/anims.py steps_files)
+function picsOf(name, d) {
+  const dir = (d.dir || 'img/steps/' + name + '/').replace(/\/*$/, '/'), out = [];
+  Object.keys(d.frames || {}).forEach((f) => {
+    const fr = d.frames[f];
+    (fr.layers || fr || []).forEach((L) => { const p = dir + L.src + (L.v ? '?v=' + L.v : ''); if (out.indexOf(p) < 0) out.push(p); });
+  });
+  return out;
 }
-// the playable set from the phone's cache (pictures as blob: URLs, so it plays with no network and no service
-// worker), or null when any file is missing
+// a version of the set's JSON from the phone (url: its address with ?v=), only if its bytes match its ?v; then the
+// pictures it names
+async function cachedSet(c, name, url) {
+  const r = await c.match(url); if (!r) return null;
+  const buf = await r.arrayBuffer();
+  if ((await hex8(buf)) !== vOf(url)) return null;
+  const d = JSON.parse(new TextDecoder().decode(buf));
+  return { d: d, pics: picsOf(name, d) };
+}
+// the newest complete version of a set on the phone: {s, rs, cur} (cur: the version this book names), or null. The
+// version this book names comes first; until it is complete, an older complete version keeps playing (after an update).
+async function findSet(c, name) {
+  const e = onDemand(name); if (!e) return null;
+  const now = setUrl(e.files[0]), json = setUrl('anim/steps/' + name + '.json');
+  const older = (await c.keys()).map((k) => k.url).filter((u) => u !== now && u.split('?')[0] === json);
+  const tries = [now].concat(older);
+  for (let k = 0; k < tries.length; k++) {
+    const s = await cachedSet(c, name, tries[k]); if (!s) continue;
+    const rs = await Promise.all(s.pics.map((f) => c.match(setUrl(f))));
+    if (rs.some((r) => !r)) continue; // never part of a set
+    return { s: s, rs: rs, cur: !k };
+  }
+  return null;
+}
+// at the start: which sets are on the phone (no pictures are read yet)
+function haveSet(name) {
+  return caches.open(SET_CACHE).then((c) => findSet(c, name)).then((f) => {
+    if (!f) return;
+    if (f.cur) SETS.cur[name] = true;
+    if (!SETS.have[name]) { SETS.have[name] = true; told(name); }
+  }).catch(() => {});
+}
+// the playable set from the phone's cache (pictures as blob: URLs), or null when no version is complete
 function readySet(name) {
   const e = onDemand(name);
   if (!e || !canCache()) return Promise.resolve(null);
   if (SETS.ready[name]) return SETS.ready[name];
-  const files = e.files;
-  const p = caches.open(SET_CACHE).then((c) => Promise.all(files.map((f) => c.match(setUrl(f))))).then((rs) => {
-    if (rs.some((r) => !r)) return null; // never part of a set
-    return Promise.all([rs[0].json()].concat(rs.slice(1).map((r) => r.blob()))).then((parts) => {
-      const srcs = {};
-      files.slice(1).forEach((f, i) => { srcs[f] = URL.createObjectURL(parts[i + 1]); });
-      return import('./steps.js').then((m) => m.build(name, parts[0], srcs));
-    });
+  const p = caches.open(SET_CACHE).then(async (c) => {
+    const f = await findSet(c, name); if (!f) return null;
+    const blobs = await Promise.all(f.rs.map((r) => r.blob()));
+    const srcs = {};
+    f.s.pics.forEach((x, i) => { srcs[x] = URL.createObjectURL(blobs[i]); });
+    const m = await import('./steps.js');
+    const out = m.build(name, f.s.d, srcs);
+    if (f.cur) SETS.cur[name] = true;
+    return out;
   }).catch(() => null).then((s) => {
     if (s) SETS.have[name] = true;
     else if (SETS.ready[name] === p) delete SETS.ready[name];
@@ -220,45 +268,74 @@ function readySet(name) {
 // why: 'page' (a page shows the animation: Wi-Fi only) or 'open' (the person opened it: any connection)
 function getSet(name, why) {
   const e = onDemand(name);
-  if (!e || SETS.have[name] || SETS.busy[name] || !canCache() || navigator.onLine === false) return;
-  if (why !== 'open' && slowNet()) return;
+  if (!e || SETS.cur[name] || SETS.busy[name] || !canCache() || navigator.onLine === false) return;
+  const auto = why !== 'open';
+  if (auto && (SETS.full || !onWifi())) return;
   SETS.busy[name] = true;
-  downloadSet(name, e.files).then(() => true, () => false).then((ok) => {
+  downloadSet(name, auto).then(() => true, (er) => { if (er && er.name === 'QuotaExceededError') SETS.full = true; return false; }).then((ok) => {
     SETS.busy[name] = false;
-    if (ok) readySet(name).then((s) => { if (s) SETS.fns.forEach((fn) => { try { fn(name); } catch (er) {} }); });
+    if (ok) { delete SETS.ready[name]; readySet(name).then((s) => { if (s) told(name); }); }
   });
 }
-async function downloadSet(name, files) {
-  const c = await caches.open(SET_CACHE);
-  for (let i = 0; i < files.length; i++) { // one at a time, gentle on a slow line; files kept from a cut-off try stay
-    const u = setUrl(files[i]);
-    if (await c.match(u)) continue;
-    const ac = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    const t = setTimeout(() => { if (ac) ac.abort(); }, 60000); // a stalled line: give up, try again next time
-    try {
-      const r = await fetch(u, ac ? { signal: ac.signal } : {});
-      if (!r.ok || r.status !== 200) throw new Error('steps ' + r.status + ' ' + u);
-      await c.put(u, r);
-    } finally { clearTimeout(t); }
-  }
-  await dropOldFiles(c, name);
+// one file: fetched, its bytes checked against its ?v= hash. Given up when nothing arrives for SETS.idle (each chunk
+// of the body resets the clock, so a slow line still finishes). Works without AbortController too.
+function fetchFile(u, want) {
+  const ac = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  let timer = 0, fail = null, rd = null;
+  const stall = new Promise((res, rej) => { fail = rej; });
+  stall.catch(() => {});
+  const poke = () => { clearTimeout(timer); timer = setTimeout(() => { if (ac) ac.abort(); if (rd) rd.cancel().catch(() => {}); fail(new Error('stalled ' + u)); }, SETS.idle); };
+  poke();
+  const run = (async () => {
+    const r = await fetch(u, ac ? { signal: ac.signal } : {});
+    if (!r.ok || r.status !== 200) throw new Error('steps ' + r.status + ' ' + u);
+    const type = r.headers.get('content-type') || '';
+    let buf;
+    if (r.body && r.body.getReader) {
+      rd = r.body.getReader(); const parts = []; let n = 0;
+      for (;;) { poke(); const x = await rd.read(); if (x.done) break; parts.push(x.value); n += x.value.length; }
+      buf = new Uint8Array(n); let o = 0; parts.forEach((q) => { buf.set(q, o); o += q.length; });
+      buf = buf.buffer;
+    } else buf = await r.arrayBuffer();
+    if (want && (await hex8(buf)) !== want) throw new Error('steps: not the version this book names ' + u);
+    return new Response(buf, { headers: type ? { 'Content-Type': type } : {} });
+  })();
+  return Promise.race([run, stall]).then((x) => { clearTimeout(timer); return x; }, (er) => { clearTimeout(timer); throw er; });
 }
-// the files of an older version of a set (another ?v=) leave the phone once the new one is complete
-async function dropOldFiles(c, name) {
-  const e = onDemand(name); if (!e) return;
-  const keep = {}; e.files.forEach((f) => { keep[setUrl(f)] = 1; });
-  const json = setUrl('anim/steps/' + name + '.json'), dir = setUrl(e.dir || 'img/steps/' + name + '/');
+async function downloadSet(name, auto) {
+  const e = onDemand(name), c = await caches.open(SET_CACHE);
+  const get = async (f) => { // one at a time, gentle on a slow line; files kept from a cut-off try are not fetched again
+    const u = setUrl(f);
+    if (await c.match(u)) return;
+    if (auto && !onWifi()) throw new Error('steps: not on Wi-Fi any more');
+    await c.put(u, await fetchFile(u, vOf(f)));
+  };
+  await get(e.files[0]);
+  const s = await cachedSet(c, name, setUrl(e.files[0]));
+  if (!s) throw new Error('steps: ' + name + ' is not the version this book names');
+  for (let i = 0; i < s.pics.length; i++) await get(s.pics[i]);
+  await dropOldFiles(c, name, [e.files[0]].concat(s.pics));
+}
+// a set's own files: its JSON (any ?v=) and everything under its picture folder
+function setOwns(name, u) {
+  const e = SETS.info[name] || {};
+  return u.split('?')[0] === setUrl('anim/steps/' + name + '.json') || u.indexOf(setUrl(e.dir || 'img/steps/' + name + '/')) === 0;
+}
+// the files of an older version of a set leave the phone only once the new version is complete
+async function dropOldFiles(c, name, keepList) {
+  const keep = {}; keepList.forEach((f) => { keep[setUrl(f)] = 1; });
   const keys = await c.keys();
-  for (let i = 0; i < keys.length; i++) { const u = keys[i].url; if (!keep[u] && (u.split('?')[0] === json || u.indexOf(dir) === 0)) await c.delete(keys[i]); }
+  for (let i = 0; i < keys.length; i++) { const u = keys[i].url; if (!keep[u] && setOwns(name, u)) await c.delete(keys[i]); }
 }
-// once after the start: files of sets that are no longer on-demand (or no longer in the book) leave the phone
+// once after the start: files of sets that are no longer on-demand (or no longer in the book) leave the phone. Every
+// version of a current on-demand set stays (the old one plays until the new one is complete; dropOldFiles cleans up).
 function sweepSets() {
-  if (!canCache() || !Object.keys(SETS.info).length || Object.keys(SETS.busy).some((n) => SETS.busy[n])) return;
+  if (!canCache() || !Object.keys(SETS.info).length) return;
+  if (Object.keys(SETS.busy).some((n) => SETS.busy[n])) { setTimeout(sweepSets, 30000); return; }
+  const live = Object.keys(SETS.info).filter((n) => onDemand(n));
   caches.open(SET_CACHE).then(async (c) => {
-    const keep = {};
-    Object.keys(SETS.info).forEach((n) => { const e = onDemand(n); if (e) e.files.forEach((f) => { keep[setUrl(f)] = 1; }); });
     const keys = await c.keys();
-    for (let i = 0; i < keys.length; i++) if (!keep[keys[i].url]) await c.delete(keys[i]);
+    for (let i = 0; i < keys.length; i++) if (!live.some((n) => setOwns(n, keys[i].url))) await c.delete(keys[i]);
   }).catch(() => {});
 }
 
@@ -269,8 +346,8 @@ export async function loadAnimation(name, plain, noSteps, why) {
   if (!noSteps && STEPS.includes(name) && onDemand(name)) {
     // on-demand: only a set that is all on the phone plays; otherwise its download starts and the SVG version plays now
     const s = await readySet(name);
+    getSet(name, why || 'page'); // nothing to do when the version this book names is on the phone
     if (s) { injectCss('anim-css', CSS); return s; }
-    getSet(name, why || 'page');
   } else if (!noSteps && STEPS.includes(name)) {
     // a picture-step version; if its data is missing or broken, the cine or SVG version plays
     if (!cache.has('steps:' + name)) cache.set('steps:' + name, import('./steps.js').then((m) => m.loadSteps(name)).catch(() => null));

@@ -230,25 +230,46 @@ picture-step set.
   exists). Only precache sets go into the service worker's precache list. It prints a line such as
   `pictures in the APK (and precached): 0.95 MB, of which symptom tiles ... ; on demand (not in the APK): ...`.
 - `android/sync-web.sh` keeps only precache sets in the APK (`img/steps/<name>/`, `anim/steps/<name>.json`).
-- `js/anim.js` (`stepsSetup(book.steps)` from `js/app.js`): an on-demand set plays only when **every one of its files**
-  is in the phone's `fhb-steps-v1` cache; its pictures then play from there as `blob:` URLs, so it needs neither the
-  network nor the service worker. Otherwise the SVG version plays at once (poster and player): nothing waits for the
-  network and no box is ever blank.
-- **When it downloads:** the first time a page shows the animation's poster, by itself on Wi-Fi only (data saver,
-  2G and mobile data: not by itself, the same rule as the voice packs, `slowNet()`); and on any connection when the
-  person opens the animation (that first play is the SVG version; the pictures are there next time). One file at a
-  time, each given up after 60 s. Files that arrived stay, so a cut-off download carries on quietly the next time
-  the page opens; a half set never plays. When the set is complete, the posters on the screen cross-fade to the
-  picture-step poster (decoded first, same box). Files of an older version (another `?v=`) are removed once the new
-  version is complete, and files of sets that are no longer on-demand a few seconds after the start.
+- `js/anim.js` (`stepsSetup(book.steps)` from `js/app.js`): an on-demand set is its JSON (the `?v=` in
+  `book.steps`) **plus every picture that JSON names** (each with its own `?v=`). Every file is checked against its
+  `?v=` (sha1, first 8 hex digits) before it is kept, so a website that is newer or older than the phone's book (or
+  is half-way through a deploy) never mixes versions: the set is simply not complete, and the SVG version plays. A
+  phone whose app is older than the website's set therefore waits for the app update to get the new pictures.
+- It plays only when **every one of its files** is in the phone's `fhb-steps-v1` cache; its pictures then play from
+  there as `blob:` URLs, so it needs neither the network nor the service worker. Otherwise the SVG version plays at
+  once (poster and player): nothing waits for the network and no box is ever blank.
+- **When it downloads:** the first time a page shows the animation's poster, by itself **only on Wi-Fi or a cable
+  with data saver off** (`onWifi()` in `js/anim.js`; a phone that does not say, with no `navigator.connection` or no
+  `type`, as iPhones and computers, counts as not Wi-Fi), checked again before each file; and on any connection when
+  the person opens the animation (that first play is the SVG version; the pictures are there next time). The voice
+  packs use the same `onWifi()` rule. One file at a time; a file is given up when **nothing arrives for 30 s** (each
+  piece of it resets the clock, so a slow line still finishes; this works without `AbortController` too). Files that
+  arrived stay and are not fetched again, so a cut-off download carries on quietly the next time the page opens; a
+  half set never plays. A full phone (`QuotaExceededError`) stops the page-started downloads until the app is opened
+  again.
+- When a set is complete the posters on the screen cross-fade to the picture-step poster (decoded first). Posters
+  sit in a box of fixed shape (3:2 on topic pages, 4:3 on the Emergency cards; the box's height comes from a
+  `::before`, not `aspect-ratio`, for old phones) and a picture-step poster covers it like `object-fit: cover`
+  (`coverPoster()` in `js/app.js`), so nothing moves.
+- **Updates:** a new version (new `?v=`) downloads beside the old one; the old one keeps playing until the new one is
+  complete, then its files are removed. A few seconds after the start, files of sets that are no longer on-demand
+  leave the phone (every version of a current on-demand set stays until then).
 - **Inside the Android app** the files come from the website (`config.appUrl`), as the narration does.
-- An on-demand set with **no SVG version** is left off its page until it is downloaded (the page's text steps say
-  the same); `tools/validate.py` warns about it.
-- `tools/validate.py` also checks that `sw.js` precaches no on-demand set and every precache set, that
-  `android/sync-web.sh` leaves on-demand sets out, and warns when the APK's pictures pass 3 MB.
-- Test: `tools/test_ondemand.mjs` (a grey-box on-demand set on the hygiene page: not precached, not in the APK, SVG
-  offline before the download, a cut-off download never plays, then the poster cross-fades and the picture steps
-  play, offline too; on mobile data only opening the animation downloads it).
+- An on-demand set with **no SVG version** is left off its page (an empty marker stays) until it is on the phone; then
+  the block appears in place. `tools/validate.py` warns about such a set.
+- `tools/build.py` stops when a set's JSON names a picture that is missing; `android/sync-web.sh` stops when `sw.js`
+  precaches a file that is not in the APK. `tools/validate.py` checks that every picture's `v` is its sha1[:8],
+  recomputes `book.steps` and compares it with `content/book.json`, checks that `sw.js` precaches every precache
+  set and nothing of an on-demand one, runs the APK filter (`prune_apk()` in `tools/anims.py`, the one
+  `android/sync-web.sh` uses) on a copy of the picture-step folders, rejects CSS `inset`, and warns when the APK's
+  pictures pass 3 MB.
+- Test: `tools/test_ondemand.mjs`: a grey-box on-demand set on the hygiene page and a not-live folder. Not precached,
+  not in the APK; SVG offline before the download; a cut-off download never plays and kept files are not fetched
+  again; the poster cross-fades and fills its box; the picture steps play, offline too; an update keeps the old set
+  playing until the new one is complete; a website JSON of another version is refused; a stalled file is given up
+  (also with no `AbortController`) while a slow but steady one finishes; on mobile data, with no
+  `navigator.connection` and with data saver the page alone downloads nothing; a set with no SVG version appears
+  once downloaded.
 
 Rough sizes: a symptom tile is about 25 KB (36 tiles: about 0.9 MB); a CPR age is 0.3 to 0.6 MB of picture steps.
 

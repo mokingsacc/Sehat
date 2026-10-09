@@ -8,7 +8,7 @@ import { initShare } from './share.js'; // Share Sehat: #/share (the app file on
 import { initFamily } from './family.js'; // family records: #/family (people, vaccines, weight, medicines, doctor's notes, readings)
 import { initNumpad } from './numpad.js'; // the big number pad that says each number
 import * as Stats from './stats.js';
-import { openAnimation, animPoster, stepsSetup, stepsHave, prefetchSteps, onStepsReady } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md, docs/STEPS_PLAYER.md)
+import { openAnimation, animPoster, stepsSetup, stepsHave, prefetchSteps, onStepsReady, onWifi } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md, docs/STEPS_PLAYER.md)
 import { applyOverlay, FORMAT as OV_FORMAT } from './overlay.js'; // changes published from the editor (docs/EDITOR_AND_RELEASES.md)
 window.SEHAT_STARTED = true; // index.html shows an "update your browser" message if the app never gets this far
 
@@ -578,7 +578,7 @@ function blockHtml(b, n) {
   if (b.type === 'link') { const h = TL.linkBlock(b); return b.urgent ? h.replace('class="blk link"', 'class="blk link urgent"') : h; } // opens a tool, the home kit or another topic; urgent: a red row to the Health side
   // what the clinic or the hospital does for this problem: a building icon, no number
   if (b.type === 'clinic') return `<div class="blk clinic" data-block="${esc(b.id)}"><div class="pic">${ic(b.icon || 'clinic')}</div><div class="body"><div class="h">${esc(L(b.title))}</div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
-  if (b.type === 'anim') return animHidden(b) ? '' : animBlock(b); // a still picture with a play button: opens the animation player
+  if (b.type === 'anim') return animHidden(b) ? animWait(b) : animBlock(b); // a still picture with a play button: opens the animation player
   if (b.type === 'tip') return `<div class="blk tip" data-block="${esc(b.id)}">${ic(b.icon || 'check')}<div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
   if (b.type === 'alert' || b.type === 'dont') {
     const cls = b.type === 'dont' ? 'dont' : b.level === 'soon' ? 'soon' : 'urgent';
@@ -606,17 +606,38 @@ function animHidden(b) {
   if (!e || e.fallback !== false || stepsHave(name)) return false;
   prefetchSteps(name); return true;
 }
+// an empty marker where such a block will appear once its pictures are on the phone (onStepsReady below)
+const WAITING = [];
+function animWait(b) { WAITING.push(b); return `<div data-steps-wait="${esc(b.pick || b.anim)}" data-wait="${WAITING.length - 1}" hidden></div>`; }
+// a poster inside its fixed box (topic block, Emergency card): the picture-step poster fills the box and is cropped on
+// its long side, like object-fit: cover (css/app.css keeps it centred and full width without this, on old phones too)
+function coverPoster(st) {
+  const v = st.firstElementChild, ar = +st.dataset.ar, W = st.clientWidth, H = st.clientHeight;
+  if (!v || !ar || !W || !H) return;
+  const w = W / H >= ar ? 100 : (H * ar / W) * 100;
+  v.style.width = w + '%'; v.style.left = (100 - w) / 2 + '%'; v.style.paddingBottom = w / ar + '%';
+}
+const coverAll = () => { for (const st of $$('[data-poster]>.st-poster')) coverPoster(st); };
+addEventListener('resize', () => { clearTimeout(coverAll.t); coverAll.t = setTimeout(coverAll, 150); });
 // fill the posters on the page with still pictures (after each render; the files load once and stay cached).
 // An on-demand animation shows its SVG poster until its picture steps are on the phone (the poster starts the download).
 function fillPosters() {
   for (const el of $$('[data-poster]:not(.filled)')) {
     el.classList.add('filled');
-    animPoster(el.dataset.poster, +el.dataset.scene || 0).then((svg) => { if (el.isConnected) el.insertAdjacentHTML('afterbegin', svg); }).catch(() => {});
+    animPoster(el.dataset.poster, +el.dataset.scene || 0).then((svg) => { if (!el.isConnected) return; el.insertAdjacentHTML('afterbegin', svg); if (el.firstElementChild.classList.contains('st-poster')) coverPoster(el.firstElementChild); }).catch(() => {});
   }
 }
 // an on-demand set has just arrived: its posters on this screen change to the picture-step one, decoded first and
 // then cross-faded, so there is never a blank box (the poster's box keeps its size)
 onStepsReady((name) => {
+  // a block that waited for its pictures (no SVG version) appears where its marker is
+  let added = false;
+  for (const m of $$('[data-steps-wait]')) {
+    const b = WAITING[+m.dataset.wait];
+    if (m.dataset.stepsWait !== name || !b) continue;
+    m.insertAdjacentHTML('afterend', animBlock(b)); m.remove(); added = true;
+  }
+  if (added) fillPosters();
   for (const el of $$('[data-poster].filled')) {
     if (el.dataset.poster !== name) continue;
     animPoster(name, +el.dataset.scene || 0).then((html) => {
@@ -628,6 +649,7 @@ onStepsReady((name) => {
         if (!el.isConnected) return;
         const old = [...el.children].filter((x) => !x.classList.contains('play'));
         el.insertBefore(nw, el.firstChild);
+        if (nw.classList.contains('st-poster')) coverPoster(nw);
         if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
         const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
         for (const o of old) {
@@ -787,13 +809,14 @@ function readDate(form, prefix) {
 // The app shell (code, pictures, words) is precached by the service worker; audio never is.
 // After the voice step the "urgent" pack downloads quietly, then children, women, everyone (book.packs),
 // two clips at a time, skipping clips already on the phone, so it resumes after a lost signal or a closed app.
-// On saveData, 2G or mobile data only the Emergency and CPR part of the urgent pack downloads by itself; Settings shows
+// Everything downloads by itself only on Wi-Fi or a cable (onWifi() in js/anim.js; a phone that does not say, such as
+// an iPhone or a computer, counts as not Wi-Fi). Otherwise only the Emergency and CPR part of the urgent pack does; Settings shows
 // the rest with a Download button.
 // Inside the urgent pack the Emergency screen and CPR come first (urgentFirst).
 const PACKS = ['urgent', 'children', 'women', 'everyone'];
 const DL = { run: 0, active: false, slot: null, cur: null, again: false, waiting: false, full: false, retry: null, wait: 15000, have: new Set() };
 const abs = (u) => new URL(u, location.href).href;
-// slow or paid-for internet (data saver, 2G, or mobile data): only Emergency and CPR download by themselves; Wi-Fi gets everything
+// known slow or paid-for internet (data saver, 2G, or mobile data): Settings says so above the packs
 const slowNet = () => { const c = navigator.connection; return !!(c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || '') || /^(cellular|wimax|bluetooth)$/.test(c.type || ''))); };
 // download order inside the urgent pack: the Emergency screen, CPR and its films first, then the other emergency pages,
 // then the other urgent pages and red boxes, then page titles, then the rest of the interface
@@ -835,7 +858,7 @@ const wantStore = () => store.get('dlWant', {});
 function wanted(slot) {
   const asked = wantStore()[slot] || [];
   if (!store.get('dlAuto', true)) return new Set(asked); // after "Delete voices": only what the person asks for
-  return new Set([...(slowNet() ? ['first'] : PACKS), ...asked]); // 'first': only the Emergency and CPR part of the urgent pack
+  return new Set([...(onWifi() ? PACKS : ['first']), ...asked]); // 'first': only the Emergency and CPR part of the urgent pack
 }
 function wantPack(slot, p) { const w = wantStore(); w[slot] = [...new Set([...(w[slot] || []), p])]; store.set('dlWant', w); }
 const bundledHave = () => [...BUNDLED].map(abs); // clips inside the Android app count as on the phone: never downloaded
@@ -866,6 +889,7 @@ async function startDownloads() {
         while (!failed && run === DL.run && i < todo.length) {
           if (!navigator.onLine) { failed = true; break; } // signal gone: stop; the 'online' event resumes
           const u = todo[i++];
+          if (!wanted(slot).has(pack.id) && !(pack.id === 'urgent' && pack.first.has(u))) { complete = false; continue; } // left Wi-Fi: only Emergency and CPR go on
           try {
             const r = await fetch(u);
             if (r.ok) { await c.put(u, r); DL.have.add(abs(u)); DL.wait = 15000; packsUI(); }

@@ -23,21 +23,13 @@ find "$OUT" -name '*.cjs' -delete   # local screenshot helpers (anim/cine/shots.
 # Every other set (on-demand, or not live yet) stays on the website: the app downloads it the first time its page is
 # opened and plays the SVG version until then (js/anim.js, docs/STEPS_PLAYER.md). Keeps the APK about 11 MB.
 python3 - "$WEB" "$OUT" <<'PY'
-import glob, json, os, shutil, sys
+import json, os, sys
 web, out = sys.argv[1], sys.argv[2]
+sys.path.insert(0, os.path.join(web, "tools"))
+import anims   # prune_apk: the same filter tools/validate.py runs; keeps only "precache" sets of book.steps
 steps = json.load(open(os.path.join(web, "content/book.json"), encoding="utf-8")).get("steps") or {}
-keep = {n for n, e in steps.items() if e.get("offline") == "precache"}
-keep_dirs = {os.path.normpath(steps[n].get("dir") or f"img/steps/{n}") for n in keep}
-gone, size = [], 0
-for d in glob.glob(os.path.join(out, "img/steps/*")):
-    rel = os.path.normpath(os.path.relpath(d, out))
-    if os.path.isdir(d) and rel not in keep_dirs:
-        size += sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(d) for f in fs); shutil.rmtree(d); gone.append(rel)
-for f in glob.glob(os.path.join(out, "anim/steps/*")):
-    if not (f.endswith(".json") and os.path.basename(f)[:-5] in keep):
-        if os.path.isdir(f): shutil.rmtree(f)
-        else: size += os.path.getsize(f); os.remove(f)
-print(f"sync-web: picture steps in the APK: {' '.join(sorted(keep)) or 'none'}; left on the website: {len(gone)} folders ({size / 1e3:.0f} KB)")
+keep, gone, size = anims.prune_apk(out, steps)
+print(f"sync-web: picture steps in the APK: {' '.join(keep) or 'none'}; left on the website: {len(gone)} files or folders ({size / 1e3:.0f} KB)")
 PY
 # Narration: only the Emergency and CPR clips in the woman's voice of Dari and Pashto (book.bundle, listed by
 # tools/build.py; about 3 MB each), so a phone that gets the app by Bluetooth and never goes online still hears
@@ -71,7 +63,8 @@ src = open(os.path.join(out, "sw.js"), encoding="utf-8").read()
 m = re.search(r"const PRECACHE = (\[.*?\]);", src, re.S)
 missing = [p for p in (json.loads(m.group(1)) if m else []) if p not in ("./", "") and not os.path.isfile(os.path.join(out, p.split("?")[0]))]
 if missing:
-    print("sync-web: warning, sw.js precaches files that are not in the APK:", ", ".join(missing[:10]), file=sys.stderr)
+    print("sync-web: ERROR, sw.js precaches files that are not in the APK (the service worker would not install):", ", ".join(missing[:10]), file=sys.stderr)
+    sys.exit(1)
 PY
 fi
 

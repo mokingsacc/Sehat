@@ -449,7 +449,8 @@ function hudHtml(data, sc, P, ov, k, o) {
 
 export function poster(data, i) {
   const sc = data.scenes[Math.max(0, Math.min(data.scenes.length - 1, i))];
-  return '<div class="st st-poster" style="padding-bottom:' + pc(data.h, data.w) + '"><div class="st-view">' + sceneHtml(data, sc, { still: true, poster: true, lang: 'en', rtl: false }) + '</div></div>';
+  // data-ar and --pr: the picture's shape, for a poster that covers a box of another shape (css/app.css [data-poster])
+  return '<div class="st st-poster" data-ar="' + r3(data.w / data.h) + '" style="padding-bottom:' + pc(data.h, data.w) + ';--pr:' + pc(data.h, data.w) + '"><div class="st-view">' + sceneHtml(data, sc, { still: true, poster: true, lang: 'en', rtl: false }) + '</div></div>';
 }
 
 // ---------- playing ----------
