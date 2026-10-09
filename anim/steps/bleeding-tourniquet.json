@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "bleeding",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "held": "held: Mo's tourniquet call pending",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/bleeding-tourniquet), packed by tools/steps_images.py --px 800 --patch. HELD: Mo's tourniquet call is pending (brief flag F5). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "HELD: Mo's tourniquet call pending (flag F5)."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "4d400150",
+     "kb": 29.6
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "2-full-up.webp",
+     "v": "619a8b1a",
+     "kb": 26.5
+    },
+    {
+     "id": "full-down",
+     "src": "2-full-down.webp",
+     "v": "252bbb73",
+     "kb": 28.3
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "ea4c6fe5",
+     "kb": 30.0
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "bleeding.tourniquet",
+   "frame": "1",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 500,
+      "cy": 480,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 4600,
+     "ms": 900
+    },
+    {
+     "id": "twist",
+     "type": "swap",
+     "frame": "2",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 5800,
+     "rate": 20,
+     "count": 3
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 456,
+     "y": 504,
+     "at": 800,
+     "r": 40,
+     "until": 2600
+    },
+    {
+     "type": "ring",
+     "x": 568,
+     "y": 512,
+     "at": 2600,
+     "rx": 45,
+     "ry": 55,
+     "until": 4600
+    }
+   ]
+  },
+  {
+   "id": "bleeding.time",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 632,
+     "y": 68,
+     "at": 800,
+     "r": 55
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 860,
+     "y": 130,
+     "r": 52,
+     "at": 3400
+    }
+   ]
+  }
+ ]
+}

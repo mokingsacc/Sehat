@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "2026-10-07, Mo (demo version)",
- "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2, s4 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). Coordinates are in the 960x720 picture.",
+ "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). s4 (5 breaths) uses Mo's original CPR step 2 picture of 9 Oct 2026 (frame 'breath': mouth over the baby's mouth and nose, chin lifted). Coordinates are in the 960x720 picture.",
  "poster": 4,
  "frames": {
   "baby": {
@@ -70,6 +70,40 @@
       266,
       523,
       454
+     ]
+    }
+   ]
+  },
+  "breath": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "breath-bg.webp",
+     "v": "1d4838aa",
+     "kb": 21.2
+    },
+    {
+     "id": "body",
+     "src": "breath-body.webp",
+     "v": "a99c679e",
+     "kb": 14.3,
+     "box": [
+      240,
+      174,
+      689,
+      340
+     ]
+    },
+    {
+     "id": "arms",
+     "src": "breath-arms.webp",
+     "v": "37a46316",
+     "kb": 6.7,
+     "box": [
+      212,
+      216,
+      443,
+      269
      ]
     }
    ]
@@ -255,23 +289,23 @@
   },
   {
    "id": "anim.cpr-baby.s4",
-   "frame": "baby",
+   "frame": "breath",
    "ms": 13000,
    "cam": {
     "path": [
      [
-      190,
-      110,
-      560
+      0,
+      0,
+      960
      ],
      {
-      "cx": 413,
-      "cy": 200,
-      "w": 480
+      "cx": 380,
+      "cy": 420,
+      "w": 580
      }
     ],
     "ms": [
-     2200
+     2400
     ]
    },
    "motions": [
@@ -279,56 +313,44 @@
      "id": "breath",
      "type": "loop",
      "layer": "bg",
-     "s": 1.012,
+     "s": 1.006,
      "origin": [
-      413,
-      300
+      464,
+      520
      ],
      "ease": "breath",
      "rate": 30,
      "count": 5,
-     "at": 2600
+     "at": 2800
     }
    ],
    "overlays": [
     {
      "type": "ring",
-     "x": 413,
-     "y": 282,
-     "rx": 100,
+     "x": 318,
+     "y": 410,
+     "at": 1200,
+     "rx": 80,
      "ry": 62,
-     "at": 1600,
+     "until": 2800,
      "pulse": false
     },
     {
      "type": "shade",
-     "x": 413,
-     "y": 280,
-     "rx": 112,
-     "ry": 76,
+     "x": 470,
+     "y": 470,
+     "rx": 80,
+     "ry": 42,
      "max": 0.32,
-     "color": "255,238,205",
-     "follow": "breath"
-    },
-    {
-     "type": "waves",
-     "x": 540,
-     "y": 172,
-     "angle": 180,
-     "size": 58,
-     "count": 3,
-     "spread": 60,
-     "width": 6,
-     "ms": 2000,
-     "at": 1950,
-     "until": 12300
+     "follow": "breath",
+     "color": "255,238,205"
     },
     {
      "type": "counter",
      "follow": "breath",
+     "pos": "top-end",
      "of": 5,
-     "icon": "breath",
-     "pos": "top-end"
+     "icon": "breath"
     }
    ],
    "key": {

@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "id": "kit-thermometer",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/thermometer), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frame 2 (down): the tip sits at the edge of the chest and the armpit; check it reads as 'in the armpit'."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "1d240f4c",
+     "kb": 20.6
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "14b99934",
+     "kb": 30.0
+    },
+    {
+     "id": "arms-up",
+     "src": "2-arms-up.webp",
+     "v": "e914a67b",
+     "kb": 7.2,
+     "box": [
+      276,
+      158,
+      330,
+      239
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "2-arms-down.webp",
+     "v": "fe384c6e",
+     "kb": 8.0,
+     "box": [
+      276,
+      158,
+      359,
+      245
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-bg.webp",
+     "v": "14b99934",
+     "kb": 30.0
+    },
+    {
+     "id": "full-fix",
+     "src": "3-full-fix.webp",
+     "v": "dbbac74d",
+     "kb": 15.8,
+     "box": [
+      244,
+      140,
+      539,
+      415
+     ],
+     "patch": "full"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "kit-thermometer.armpit",
+   "frame": "1",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 3600,
+     "ms": 900
+    },
+    {
+     "id": "put",
+     "type": "swap",
+     "frame": "2",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 4600,
+     "rate": 10,
+     "count": 1
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 336,
+     "y": 248,
+     "at": 800,
+     "r": 45,
+     "until": 3400
+    },
+    {
+     "type": "ring",
+     "x": 544,
+     "y": 312,
+     "at": 6000,
+     "r": 45
+    }
+   ],
+   "key": {
+    "frame": "2",
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "kit-thermometer.wait",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 560,
+      "cy": 330,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 592,
+     "y": 336,
+     "at": 800,
+     "r": 40
+    },
+    {
+     "type": "waves",
+     "x": 610,
+     "y": 320,
+     "angle": -45,
+     "size": 40,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 3000
+    }
+   ]
+  }
+ ]
+}

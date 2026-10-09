@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "cough",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/breath-count), packed by tools/steps_images.py --px 800 --patch. The delivery's frame 2 (tapping hand) is part of frame 1 here (hand-up / hand-down). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "1-bg.webp",
+     "v": "fe62aa3e",
+     "kb": 30.0
+    },
+    {
+     "id": "chest-up",
+     "src": "1-chest-up.webp",
+     "v": "9ec2a7fe",
+     "kb": 1.9,
+     "box": [
+      386,
+      335,
+      118,
+      101
+     ]
+    },
+    {
+     "id": "chest-down",
+     "src": "1-chest-down.webp",
+     "v": "efcd87c3",
+     "kb": 2.0,
+     "box": [
+      386,
+      335,
+      118,
+      101
+     ]
+    },
+    {
+     "id": "hand-up",
+     "src": "1-hand-up.webp",
+     "v": "d7525111",
+     "kb": 4.2,
+     "box": [
+      158,
+      133,
+      95,
+      196
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "1-hand-down.webp",
+     "v": "ca9ea7d3",
+     "kb": 4.3,
+     "box": [
+      158,
+      133,
+      96,
+      196
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "c77580e6",
+     "kb": 27.7
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "c77580e6",
+     "kb": 27.7
+    },
+    {
+     "id": "full-fix",
+     "src": "4-full-fix.webp",
+     "v": "377a9820",
+     "kb": 1.4,
+     "box": [
+      372,
+      272,
+      211,
+      79
+     ],
+     "patch": "full"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "cough.watch",
+   "frame": "1",
+   "ms": 14000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 380,
+      "cy": 300,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "breath",
+     "type": "swap",
+     "frame": "1",
+     "layer": "chest-down",
+     "under": "chest-up",
+     "at": 1500,
+     "rate": 40
+    },
+    {
+     "id": "tap",
+     "type": "swap",
+     "frame": "1",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 1500,
+     "follow": "breath"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 445,
+     "y": 385,
+     "at": 600,
+     "rx": 70,
+     "ry": 55,
+     "until": 1500
+    },
+    {
+     "type": "counter",
+     "follow": "breath",
+     "pos": "top-end",
+     "icon": "breath"
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 60,
+     "at": 1500,
+     "pos": "top-start",
+     "wait": false
+    }
+   ]
+  },
+  {
+   "id": "cough.urgent.chest",
+   "frame": "3",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 480,
+      "cy": 330,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "4",
+     "at": 1500,
+     "ms": 700,
+     "back": true,
+     "hold": 800,
+     "gap": 900,
+     "count": 4
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 478,
+     "y": 312,
+     "at": 1500,
+     "rx": 60,
+     "ry": 30
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 860,
+     "y": 100,
+     "r": 52,
+     "at": 8000
+    }
+   ]
+  }
+ ]
+}

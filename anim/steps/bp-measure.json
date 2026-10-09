@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "id": "kit-bp",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/bp-measure), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "29da25db",
+     "kb": 29.8
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "e0b33539",
+     "kb": 29.7
+    },
+    {
+     "id": "cuff-up",
+     "src": "2-cuff-up.webp",
+     "v": "7e90fb2a",
+     "kb": 12.0,
+     "box": [
+      0,
+      115,
+      846,
+      341
+     ]
+    },
+    {
+     "id": "cuff-down",
+     "src": "2-cuff-down.webp",
+     "v": "e451a043",
+     "kb": 12.0,
+     "box": [
+      0,
+      124,
+      846,
+      332
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "29da25db",
+     "kb": 29.8
+    },
+    {
+     "id": "full-fix",
+     "src": "3-full-fix.webp",
+     "v": "c3dd8b42",
+     "kb": 11.3,
+     "box": [
+      330,
+      61,
+      589,
+      308
+     ],
+     "patch": "full"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "kit-bp.rest",
+   "frame": "1",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 830,
+     "y": 110,
+     "r": 52,
+     "at": 1000
+    },
+    {
+     "type": "ring",
+     "x": 656,
+     "y": 272,
+     "at": 2600,
+     "r": 50
+    }
+   ]
+  },
+  {
+   "id": "kit-bp.measure",
+   "frame": "2",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "cuff",
+     "type": "swap",
+     "frame": "2",
+     "layer": "cuff-down",
+     "under": "cuff-up",
+     "at": 1200,
+     "rate": 10,
+     "count": 1
+    },
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 6000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 432,
+     "y": 208,
+     "at": 500,
+     "r": 60,
+     "until": 1200
+    },
+    {
+     "type": "ring",
+     "x": 760,
+     "y": 304,
+     "at": 7000,
+     "r": 45
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 830,
+     "y": 110,
+     "r": 52,
+     "at": 8400
+    }
+   ]
+  }
+ ]
+}

@@ -1618,6 +1618,7 @@
     {
       "id": "eyes",
       "icon": "eye",
+      "pic": "img/symptoms/eyes.webp",
       "label": {
         "fa": "مشکل چشم",
         "ps": "د سترګو ستونزه",
@@ -1702,6 +1703,7 @@
     {
       "id": "teeth",
       "icon": "tooth",
+      "pic": "img/symptoms/teeth.webp",
       "label": {
         "fa": "دندان درد",
         "ps": "د غاښ درد",
@@ -1978,6 +1980,7 @@
     {
       "id": "back",
       "icon": "warning",
+      "pic": "img/symptoms/back.webp",
       "label": {
         "fa": "کمر درد",
         "ps": "ملا درد",

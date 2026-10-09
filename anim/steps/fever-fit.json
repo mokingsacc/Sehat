@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "fever-fits",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/fever-fit), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "1-bg.webp",
+     "v": "b5356a42",
+     "kb": 26.4
+    },
+    {
+     "id": "patient-up",
+     "src": "1-patient-up.webp",
+     "v": "7d95217c",
+     "kb": 13.4,
+     "box": [
+      232,
+      382,
+      582,
+      184
+     ]
+    },
+    {
+     "id": "patient-down",
+     "src": "1-patient-down.webp",
+     "v": "54619c41",
+     "kb": 12.0,
+     "box": [
+      232,
+      389,
+      583,
+      173
+     ]
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-bg.webp",
+     "v": "b5356a42",
+     "kb": 26.4
+    },
+    {
+     "id": "full-fix",
+     "src": "2-full-fix.webp",
+     "v": "653be992",
+     "kb": 14.0,
+     "box": [
+      242,
+      85,
+      587,
+      499
+     ],
+     "patch": "full"
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "cd09d674",
+     "kb": 29.2
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "fever-fits.safe",
+   "frame": "1",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "shake",
+     "type": "swap",
+     "frame": "1",
+     "layer": "patient-down",
+     "under": "patient-up",
+     "at": 600,
+     "rate": 150
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 860,
+     "y": 230,
+     "at": 1000,
+     "rx": 110,
+     "ry": 90
+    }
+   ]
+  },
+  {
+   "id": "fever-fits.time",
+   "frame": "1",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "shake",
+     "type": "swap",
+     "frame": "1",
+     "layer": "patient-down",
+     "under": "patient-up",
+     "at": 600,
+     "rate": 150
+    }
+   ],
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 150,
+     "y": 140,
+     "r": 52,
+     "at": 800
+    },
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 320,
+     "y": 140,
+     "r": 52,
+     "at": 3600
+    }
+   ]
+  },
+  {
+   "id": "fever-fits.side",
+   "frame": "2",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 640,
+      "cy": 420,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 720,
+     "y": 432,
+     "at": 1200,
+     "r": 60
+    }
+   ]
+  },
+  {
+   "id": "fever-fits.cool",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 544,
+     "y": 272,
+     "at": 1000,
+     "r": 45
+    },
+    {
+     "type": "ring",
+     "x": 112,
+     "y": 464,
+     "at": 3000,
+     "rx": 110,
+     "ry": 60
+    }
+   ]
+  }
+ ]
+}

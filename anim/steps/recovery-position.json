@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "unconscious",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/recovery-position), packed by tools/steps_images.py --px 800 --patch. Original CPR step 7 is the same picture as frame 4. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frames 1 to 3 put the far hand at the cheek before the roll; the app's order (unconscious.roll) is near arm out, far knee up, roll (brief flag F2)."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "22c22bdb",
+     "kb": 30.0
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "a7887bae",
+     "kb": 29.9
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "c0c02158",
+     "kb": 29.7
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "3128ee7c",
+     "kb": 29.2
+    }
+   ]
+  },
+  "5": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "5-full.webp",
+     "v": "eb8fbe9d",
+     "kb": 22.9
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "unconscious.roll",
+   "frame": "1",
+   "ms": 12500,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 600,
+      "cy": 330,
+      "w": 760
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 3400,
+     "ms": 900
+    },
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 7000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      720,
+      440
+     ],
+     "to": [
+      840,
+      480
+     ],
+     "width": 12,
+     "at": 1200,
+     "until": 3400
+    },
+    {
+     "type": "arrow",
+     "from": [
+      470,
+      290
+     ],
+     "to": [
+      420,
+      215
+     ],
+     "width": 12,
+     "at": 4400,
+     "until": 7000
+    },
+    {
+     "type": "arrow",
+     "from": [
+      610,
+      230
+     ],
+     "to": [
+      560,
+      430
+     ],
+     "width": 12,
+     "at": 8000,
+     "bend": 70
+    }
+   ]
+  },
+  {
+   "id": "unconscious.head",
+   "frame": "4",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 760,
+      "cy": 380,
+      "w": 520
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 800,
+     "y": 350,
+     "at": 1500,
+     "rx": 75,
+     "ry": 65
+    },
+    {
+     "type": "arrow",
+     "from": [
+      782,
+      390
+     ],
+     "to": [
+      770,
+      456
+     ],
+     "width": 10,
+     "at": 3400,
+     "dash": true
+    }
+   ]
+  },
+  {
+   "id": "unconscious.baby",
+   "frame": "5",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 400,
+      "cy": 380,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 370,
+     "y": 368,
+     "at": 1200,
+     "r": 62
+    }
+   ]
+  }
+ ]
+}

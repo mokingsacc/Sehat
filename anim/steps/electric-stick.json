@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "id": "electric-shock",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/electric-stick), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frame 2 is the 'cannot switch off' branch, not a step after frame 1."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "a8e0339d",
+     "kb": 29.8
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "2-full-up.webp",
+     "v": "18daf53a",
+     "kb": 30.0
+    },
+    {
+     "id": "full-down",
+     "src": "2-full-down.webp",
+     "v": "68ff3e82",
+     "kb": 14.9,
+     "box": [
+      445,
+      84,
+      508,
+      556
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "9ae3799d",
+     "kb": 29.9
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "electric-shock.off",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 920,
+     "y": 184,
+     "at": 800,
+     "r": 45
+    }
+   ]
+  },
+  {
+   "id": "electric-shock.stick",
+   "frame": "2",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "push",
+     "type": "swap",
+     "frame": "2",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1500,
+     "rate": 20,
+     "count": 3,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 536,
+     "y": 600,
+     "at": 600,
+     "r": 40,
+     "until": 1500
+    },
+    {
+     "type": "ring",
+     "x": 800,
+     "y": 480,
+     "at": 6000,
+     "rx": 110,
+     "ry": 40
+    }
+   ]
+  },
+  {
+   "id": "electric-shock.line",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 480,
+     "y": 560,
+     "at": 800,
+     "rx": 170,
+     "ry": 50
+    },
+    {
+     "type": "ring",
+     "x": 832,
+     "y": 256,
+     "at": 2600,
+     "rx": 80,
+     "ry": 90,
+     "pulse": false
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "id": "snake-scorpion",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/snake-bite), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frame 3: the splint is long; check 'not tight' (brief flag F4)."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "18b2992c",
+     "kb": 29.9
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "2-full-up.webp",
+     "v": "f67f9626",
+     "kb": 29.9
+    },
+    {
+     "id": "full-down",
+     "src": "2-full-down.webp",
+     "v": "25a989ba",
+     "kb": 8.9,
+     "box": [
+      28,
+      196,
+      343,
+      397
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "73325d4c",
+     "kb": 29.4
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "4788d3b6",
+     "kb": 31.3
+    }
+   ]
+  },
+  "5": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "5-full.webp",
+     "v": "eba7fcc3",
+     "kb": 33.9
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "snake-scorpion.away",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 104,
+     "y": 256,
+     "at": 800,
+     "r": 45
+    },
+    {
+     "type": "ring",
+     "x": 480,
+     "y": 480,
+     "at": 3000,
+     "rx": 300,
+     "ry": 70,
+     "pulse": false
+    }
+   ]
+  },
+  {
+   "id": "snake-scorpion.still",
+   "frame": "2",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "shoe",
+     "type": "swap",
+     "frame": "2",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1500,
+     "rate": 20,
+     "count": 2,
+     "hide": false
+    },
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 5600,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 190,
+     "y": 400,
+     "at": 600,
+     "r": 70,
+     "until": 1500
+    },
+    {
+     "type": "ring",
+     "x": 290,
+     "y": 530,
+     "at": 6600,
+     "rx": 240,
+     "ry": 50
+    }
+   ]
+  },
+  {
+   "id": "snake-scorpion.carry",
+   "frame": "4",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "walk",
+     "x": 420,
+     "y": 90,
+     "r": 52,
+     "at": 1000,
+     "crossed": true
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 560,
+     "y": 90,
+     "r": 52,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "snake-scorpion.side",
+   "frame": "5",
+   "ms": 7000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 700,
+      "cy": 380,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 840,
+     "y": 400,
+     "at": 1000,
+     "r": 60
+    }
+   ]
+  }
+ ]
+}

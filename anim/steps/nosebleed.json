@@ -1,0 +1,193 @@
+{
+ "v": 1,
+ "id": "nosebleed",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/nosebleed), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "9e6c7441",
+     "kb": 29.9
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "76194d9d",
+     "kb": 23.3
+    },
+    {
+     "id": "hand-up",
+     "src": "2-hand-up.webp",
+     "v": "22d383d8",
+     "kb": 5.0,
+     "box": [
+      458,
+      382,
+      194,
+      251
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "2-hand-down.webp",
+     "v": "fcad08f8",
+     "kb": 4.4,
+     "box": [
+      455,
+      382,
+      192,
+      251
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "944fc8be",
+     "kb": 29.9
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "nosebleed.forward",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 400,
+      "cy": 360,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 384,
+     "y": 344,
+     "at": 800,
+     "r": 50
+    },
+    {
+     "type": "arrow",
+     "from": [
+      330,
+      270
+     ],
+     "to": [
+      400,
+      340
+     ],
+     "width": 12,
+     "at": 2200,
+     "bend": -20
+    }
+   ]
+  },
+  {
+   "id": "nosebleed.pinch",
+   "frame": "2",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "pinch",
+     "type": "swap",
+     "frame": "2",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 1200,
+     "rate": 6,
+     "count": 1
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 576,
+     "y": 424,
+     "at": 500,
+     "r": 50,
+     "until": 1200
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 850,
+     "y": 120,
+     "r": 52,
+     "at": 2400
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "nosebleed.again",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 480,
+     "y": 304,
+     "at": 1000,
+     "r": 50
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 850,
+     "y": 120,
+     "r": 52,
+     "at": 2600
+    }
+   ]
+  }
+ ]
+}

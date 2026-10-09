@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.09-56903f';
+const VERSION = '2026.10.09-9f5275';
 const PRECACHE = [
  "./",
  "index.html",
@@ -304,10 +304,16 @@ const PRECACHE = [
  "img/app/icon-192.png",
  "img/app/icon-512.png",
  "img/app/icon-maskable-512.png",
+ "img/symptoms/back.webp",
+ "img/symptoms/eyes.webp",
+ "img/symptoms/teeth.webp",
  "anim/steps/cpr-baby.json",
  "img/steps/cpr-baby/thumbs-bg.webp",
  "img/steps/cpr-baby/thumbs-body.webp",
- "img/steps/cpr-baby/thumbs-arms.webp"
+ "img/steps/cpr-baby/thumbs-arms.webp",
+ "img/steps/cpr-baby/breath-bg.webp",
+ "img/steps/cpr-baby/breath-body.webp",
+ "img/steps/cpr-baby/breath-arms.webp"
 ];
 const SHELL = 'fhb-shell-' + VERSION;
 const AUDIO = 'fhb-audio-v1';

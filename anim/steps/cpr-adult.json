@@ -1,0 +1,504 @@
+{
+ "v": 1,
+ "id": "anim.cpr-adult",
+ "w": 960,
+ "h": 720,
+ "adult": true,
+ "approved": "",
+ "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Scenes 1 to 3, 6 and 7 reuse the 'push' picture with camera moves and overlays, as in cpr-baby. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 4,
+ "frames": {
+  "hand": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "hand-bg.webp",
+     "v": "992b0f28",
+     "kb": 18.5
+    },
+    {
+     "id": "arms",
+     "src": "hand-arms.webp",
+     "v": "ee45e3b9",
+     "kb": 18.5,
+     "box": [
+      312,
+      0,
+      548,
+      443
+     ]
+    }
+   ]
+  },
+  "push": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "push-bg.webp",
+     "v": "95fab73b",
+     "kb": 27.5
+    },
+    {
+     "id": "body",
+     "src": "push-body.webp",
+     "v": "21f0ddd9",
+     "kb": 9.9,
+     "box": [
+      304,
+      65,
+      378,
+      378
+     ]
+    },
+    {
+     "id": "arms",
+     "src": "push-arms.webp",
+     "v": "b7a9d54d",
+     "kb": 6.3,
+     "box": [
+      341,
+      134,
+      163,
+      290
+     ]
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "anim.cpr-adult.s1",
+   "frame": "push",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 300,
+      "cy": 330,
+      "w": 700
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 190,
+     "y": 420,
+     "at": 1200,
+     "rx": 70,
+     "ry": 40
+    },
+    {
+     "type": "waves",
+     "x": 320,
+     "y": 130,
+     "angle": -150,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-adult.s2",
+   "frame": "push",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     {
+      "cx": 300,
+      "cy": 330,
+      "w": 700
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 368,
+     "y": 90,
+     "angle": -90,
+     "size": 64,
+     "count": 3,
+     "spread": 70,
+     "ms": 1200,
+     "at": 300
+    },
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 640,
+     "y": 110,
+     "r": 52,
+     "at": 2400
+    },
+    {
+     "type": "arrow",
+     "from": [
+      702,
+      110
+     ],
+     "to": [
+      774,
+      110
+     ],
+     "width": 12,
+     "at": 3100
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 840,
+     "y": 110,
+     "r": 52,
+     "at": 3700
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-adult.s3",
+   "frame": "push",
+   "ms": 15000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 220,
+      "cy": 410,
+      "w": 480
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 90,
+     "y": 410,
+     "at": 1200,
+     "rx": 60,
+     "ry": 50,
+     "until": 4000
+    },
+    {
+     "type": "ring",
+     "x": 330,
+     "y": 420,
+     "at": 4000,
+     "rx": 100,
+     "ry": 40
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 10,
+     "at": 4000,
+     "pos": "top-end",
+     "wait": true
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-adult.s4",
+   "frame": "hand",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 570,
+      "cy": 380,
+      "w": 680
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 570,
+     "y": 385,
+     "at": 1200,
+     "rx": 120,
+     "ry": 62
+    },
+    {
+     "type": "guide",
+     "from": [
+      440,
+      30
+     ],
+     "to": [
+      560,
+      330
+     ],
+     "at": 3200
+    },
+    {
+     "type": "guide",
+     "from": [
+      760,
+      30
+     ],
+     "to": [
+      620,
+      330
+     ],
+     "at": 3200
+    }
+   ],
+   "key": {
+    "cam": 1
+   }
+  },
+  {
+   "id": "anim.cpr-adult.s5",
+   "frame": "push",
+   "ms": 22000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 330,
+      "w": 620
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "push",
+     "type": "loop",
+     "frame": "push",
+     "layer": "arms",
+     "dy": 12,
+     "ease": "push",
+     "rate": 110,
+     "count": 30,
+     "at": 2200,
+     "slow": {
+      "count": 3,
+      "rate": 40
+     }
+    },
+    {
+     "type": "loop",
+     "frame": "push",
+     "layer": "body",
+     "dy": 5,
+     "follow": "push"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      404,
+      290
+     ],
+     "to": [
+      404,
+      380
+     ],
+     "width": 12,
+     "at": 600,
+     "until": 2200
+    },
+    {
+     "type": "shade",
+     "x": 404,
+     "y": 420,
+     "rx": 56,
+     "ry": 16,
+     "max": 0.3,
+     "follow": "push",
+     "above": "bg"
+    },
+    {
+     "type": "counter",
+     "follow": "push",
+     "pos": "top-end",
+     "of": 30
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "anim.cpr-adult.s6",
+   "frame": "push",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 180,
+      "cy": 410,
+      "w": 460
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 75,
+     "y": 420,
+     "at": 1000,
+     "r": 50
+    },
+    {
+     "type": "ring",
+     "x": 330,
+     "y": 420,
+     "at": 3600,
+     "rx": 110,
+     "ry": 36,
+     "pulse": false
+    },
+    {
+     "type": "counter",
+     "to": 2,
+     "every": 2200,
+     "at": 3000,
+     "of": 2,
+     "icon": "breath",
+     "pos": "top-end"
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-adult.s7",
+   "frame": "push",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 330,
+      "w": 620
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     1800,
+     1800
+    ],
+    "hold": [
+     0,
+     6400
+    ]
+   },
+   "motions": [
+    {
+     "id": "push",
+     "type": "loop",
+     "frame": "push",
+     "layer": "arms",
+     "dy": 12,
+     "ease": "push",
+     "rate": 110,
+     "at": 1200
+    },
+    {
+     "type": "loop",
+     "frame": "push",
+     "layer": "body",
+     "dy": 5,
+     "follow": "push"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "shade",
+     "x": 404,
+     "y": 420,
+     "rx": 56,
+     "ry": 16,
+     "max": 0.3,
+     "follow": "push",
+     "above": "bg"
+    },
+    {
+     "type": "counter",
+     "follow": "push",
+     "pos": "top-end",
+     "of": 30,
+     "loop": true
+    },
+    {
+     "type": "waves",
+     "x": 368,
+     "y": 90,
+     "angle": -90,
+     "size": 60,
+     "count": 3,
+     "spread": 70,
+     "ms": 1200,
+     "at": 10000
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 840,
+     "y": 110,
+     "r": 52,
+     "at": 10400
+    }
+   ]
+  }
+ ]
+}

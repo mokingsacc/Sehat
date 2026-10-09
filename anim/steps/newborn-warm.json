@@ -1,0 +1,190 @@
+{
+ "v": 1,
+ "id": "newborn",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/newborn-warm), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frame 3: the father holds the small baby skin to skin (the brief's 'father helps'); the app's newborn.small says the mother's chest."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "705b6e2b",
+     "kb": 29.6
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "21ee080b",
+     "kb": 29.8
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "0106de82",
+     "kb": 29.8
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "11dced6e",
+     "kb": 29.5
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "newborn.warm",
+   "frame": "1",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 5000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      330,
+      470
+     ],
+     "to": [
+      205,
+      500
+     ],
+     "width": 12,
+     "at": 1500,
+     "until": 4800
+    },
+    {
+     "type": "ring",
+     "x": 304,
+     "y": 552,
+     "at": 3000,
+     "r": 40,
+     "until": 4800
+    },
+    {
+     "type": "waves",
+     "x": 432,
+     "y": 160,
+     "angle": -90,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 6000
+    }
+   ]
+  },
+  {
+   "id": "newborn.small",
+   "frame": "3",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 400,
+     "y": 170,
+     "angle": -90,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 1000
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 830,
+     "y": 110,
+     "r": 52,
+     "at": 2600
+    },
+    {
+     "type": "icon",
+     "name": "moon",
+     "x": 830,
+     "y": 240,
+     "r": 52,
+     "at": 3600
+    }
+   ]
+  },
+  {
+   "id": "newborn.cord",
+   "frame": "4",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 512,
+      "cy": 352,
+      "w": 480
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 512,
+     "y": 352,
+     "at": 1200,
+     "r": 60
+    }
+   ]
+  }
+ ]
+}

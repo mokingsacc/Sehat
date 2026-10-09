@@ -1,0 +1,386 @@
+{
+ "v": 1,
+ "id": "choking",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/choking-adult), packed by tools/steps_images.py --px 800 --patch. Scenes use the page's own narration (choking.*). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "15176910",
+     "kb": 30.0
+    },
+    {
+     "id": "full-fix",
+     "src": "2-full-fix.webp",
+     "v": "87b23b9f",
+     "kb": 2.3,
+     "box": [
+      325,
+      61,
+      181,
+      203
+     ],
+     "patch": "full"
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "3-full-up.webp",
+     "v": "5e9b9a05",
+     "kb": 29.9
+    },
+    {
+     "id": "full-down",
+     "src": "3-full-down.webp",
+     "v": "38008020",
+     "kb": 7.2,
+     "box": [
+      308,
+      133,
+      236,
+      338
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "4-full-up.webp",
+     "v": "51bd0224",
+     "kb": 29.9
+    },
+    {
+     "id": "full-down",
+     "src": "4-full-down.webp",
+     "v": "94082be3",
+     "kb": 8.8,
+     "box": [
+      316,
+      186,
+      419,
+      253
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "5": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "4-full-up.webp",
+     "v": "51bd0224",
+     "kb": 29.9
+    },
+    {
+     "id": "full-up-fix",
+     "src": "5-full-up-fix.webp",
+     "v": "17a429b6",
+     "kb": 19.1,
+     "box": [
+      308,
+      0,
+      504,
+      678
+     ],
+     "patch": "full-up"
+    },
+    {
+     "id": "full-down",
+     "src": "5-full-down.webp",
+     "v": "bbd98526",
+     "kb": 4.0,
+     "box": [
+      359,
+      158,
+      217,
+      143
+     ],
+     "patch": "full-up"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "choking.back",
+   "frame": "2",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 400,
+      "cy": 260,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "blow",
+     "type": "swap",
+     "frame": "2",
+     "layer": "full-fix",
+     "under": "full",
+     "at": 2600,
+     "rate": 50,
+     "count": 5,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      330,
+      120
+     ],
+     "to": [
+      380,
+      200
+     ],
+     "width": 12,
+     "at": 1000,
+     "until": 2600
+    },
+    {
+     "type": "ring",
+     "x": 395,
+     "y": 225,
+     "at": 1000,
+     "rx": 50,
+     "ry": 40,
+     "until": 2600
+    },
+    {
+     "type": "counter",
+     "follow": "blow",
+     "pos": "top-end",
+     "of": 5
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "choking.belly",
+   "frame": "3",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 300,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "pull",
+     "type": "swap",
+     "frame": "3",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 2400,
+     "rate": 40,
+     "count": 5,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      380,
+      300
+     ],
+     "to": [
+      450,
+      250
+     ],
+     "width": 12,
+     "at": 800,
+     "until": 2400
+    },
+    {
+     "type": "ring",
+     "x": 408,
+     "y": 272,
+     "at": 800,
+     "r": 45,
+     "until": 2400
+    },
+    {
+     "type": "counter",
+     "follow": "pull",
+     "pos": "top-end",
+     "of": 5
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "choking.repeat",
+   "frame": "4",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 440,
+      "cy": 360,
+      "w": 620
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "pull",
+     "type": "swap",
+     "frame": "4",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 2400,
+     "rate": 40,
+     "count": 5,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      410,
+      390
+     ],
+     "to": [
+      470,
+      340
+     ],
+     "width": 12,
+     "at": 800,
+     "until": 2400
+    },
+    {
+     "type": "ring",
+     "x": 432,
+     "y": 368,
+     "at": 800,
+     "r": 45,
+     "until": 2400
+    },
+    {
+     "type": "counter",
+     "follow": "pull",
+     "pos": "top-end",
+     "of": 5
+    }
+   ]
+  },
+  {
+   "id": "choking.pregnant",
+   "frame": "5",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 430,
+      "cy": 260,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "pull",
+     "type": "swap",
+     "frame": "5",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 2400,
+     "rate": 40,
+     "count": 5,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      400,
+      250
+     ],
+     "to": [
+      480,
+      250
+     ],
+     "width": 12,
+     "at": 800,
+     "until": 2400
+    },
+    {
+     "type": "ring",
+     "x": 424,
+     "y": 248,
+     "at": 800,
+     "r": 45,
+     "until": 2400
+    },
+    {
+     "type": "counter",
+     "follow": "pull",
+     "pos": "top-end",
+     "of": 5
+    }
+   ]
+  }
+ ]
+}

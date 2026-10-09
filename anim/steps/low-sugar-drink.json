@@ -1,0 +1,185 @@
+{
+ "v": 1,
+ "id": "low-sugar",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/low-sugar-drink), packed by tools/steps_images.py --px 800 --patch. Frame 3 is recovery-position frame 4, as the brief says. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "1-bg.webp",
+     "v": "d8e6ab26",
+     "kb": 30.0
+    },
+    {
+     "id": "hand-up",
+     "src": "1-hand-up.webp",
+     "v": "8e3676e3",
+     "kb": 10.2,
+     "box": [
+      359,
+      94,
+      601,
+      245
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "1-hand-down.webp",
+     "v": "f473b86e",
+     "kb": 11.9,
+     "box": [
+      332,
+      91,
+      628,
+      328
+     ]
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "9e5c7a06",
+     "kb": 29.7
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "3128ee7c",
+     "kb": 29.2
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "low-sugar.sugar",
+   "frame": "1",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "spoon",
+     "type": "swap",
+     "frame": "1",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 1200,
+     "rate": 30,
+     "count": 4
+    }
+   ],
+   "overlays": [
+    {
+     "type": "counter",
+     "follow": "spoon",
+     "pos": "top-end",
+     "of": 4
+    },
+    {
+     "type": "ring",
+     "x": 368,
+     "y": 384,
+     "at": 10000,
+     "rx": 70,
+     "ry": 110,
+     "pulse": false
+    }
+   ]
+  },
+  {
+   "id": "low-sugar.wait",
+   "frame": "2",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 130,
+     "y": 110,
+     "r": 52,
+     "at": 1000
+    },
+    {
+     "type": "icon",
+     "name": "bowl-food",
+     "x": 130,
+     "y": 260,
+     "r": 52,
+     "at": 4000
+    }
+   ]
+  },
+  {
+   "id": "low-sugar.drowsy",
+   "frame": "3",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "no-drink",
+     "x": 860,
+     "y": 110,
+     "r": 52,
+     "at": 800
+    },
+    {
+     "type": "ring",
+     "x": 800,
+     "y": 320,
+     "at": 2000,
+     "r": 60
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 700,
+     "y": 110,
+     "r": 52,
+     "at": 4500
+    }
+   ]
+  }
+ ]
+}

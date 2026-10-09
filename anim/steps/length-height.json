@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "id": "growth",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/length-height), packed by tools/steps_images.py --px 800 --patch. Scenes use the growth guide's narration (ui.gr.m.*). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "562a266e",
+     "kb": 29.5
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "f9c59b70",
+     "kb": 29.9
+    },
+    {
+     "id": "arms-up",
+     "src": "2-arms-up.webp",
+     "v": "a9fdc048",
+     "kb": 10.7,
+     "box": [
+      514,
+      217,
+      371,
+      365
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "2-arms-down.webp",
+     "v": "75e8103a",
+     "kb": 11.5,
+     "box": [
+      514,
+      217,
+      371,
+      356
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "8ee1a79d",
+     "kb": 29.5
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "ui.gr.m.length1",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 176,
+     "y": 480,
+     "at": 1000,
+     "r": 60
+    }
+   ]
+  },
+  {
+   "id": "ui.gr.m.length2",
+   "frame": "2",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "book",
+     "type": "swap",
+     "frame": "2",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 1200,
+     "rate": 12,
+     "count": 1
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 720,
+     "y": 496,
+     "at": 3600,
+     "r": 55
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "ui.gr.m.height",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 176,
+     "y": 144,
+     "at": 1000,
+     "r": 55
+    },
+    {
+     "type": "guide",
+     "from": [
+      140,
+      150
+     ],
+     "to": [
+      140,
+      700
+     ],
+     "at": 2600
+    }
+   ]
+  }
+ ]
+}

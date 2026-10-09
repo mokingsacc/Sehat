@@ -1,0 +1,610 @@
+{
+ "v": 1,
+ "id": "anim.cpr-newborn",
+ "w": 960,
+ "h": 720,
+ "adult": true,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Frame 6 is newborn-warm frame 2 (skin to skin), as the brief says. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 4,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "240a7a2f",
+     "kb": 29.3
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "04fa771f",
+     "kb": 29.8
+    },
+    {
+     "id": "arms-up",
+     "src": "2-arms-up.webp",
+     "v": "bbf55e5c",
+     "kb": 2.6,
+     "box": [
+      502,
+      246,
+      103,
+      178
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "2-arms-down.webp",
+     "v": "f358ef9f",
+     "kb": 2.4,
+     "box": [
+      530,
+      246,
+      72,
+      179
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "d6ccd18d",
+     "kb": 29.8
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "f545e600",
+     "kb": 29.6
+    }
+   ]
+  },
+  "5": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "5-full-up.webp",
+     "v": "f1d5c543",
+     "kb": 29.8
+    },
+    {
+     "id": "full-down",
+     "src": "5-full-down.webp",
+     "v": "8c1d995d",
+     "kb": 14.0,
+     "box": [
+      246,
+      155,
+      632,
+      348
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "6": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "6-full.webp",
+     "v": "21ee080b",
+     "kb": 29.8
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "anim.cpr-newborn.s1",
+   "frame": "1",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 430,
+      "cy": 420,
+      "w": 720
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 5200,
+     "ms": 900
+    },
+    {
+     "id": "rub",
+     "type": "swap",
+     "frame": "2",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 6300,
+     "rate": 50,
+     "count": 6
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 512,
+     "y": 408,
+     "at": 800,
+     "rx": 120,
+     "ry": 80,
+     "until": 3400
+    },
+    {
+     "type": "arrow",
+     "from": [
+      380,
+      470
+     ],
+     "to": [
+      205,
+      500
+     ],
+     "width": 12,
+     "at": 2400,
+     "until": 5200,
+     "bend": 20
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-newborn.s2",
+   "frame": "2",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     {
+      "cx": 480,
+      "cy": 400,
+      "w": 800
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 640,
+     "y": 120,
+     "angle": -45,
+     "size": 60,
+     "count": 3,
+     "spread": 70,
+     "ms": 1200,
+     "at": 300
+    },
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 880,
+     "y": 92,
+     "r": 52,
+     "at": 2400
+    },
+    {
+     "type": "arrow",
+     "from": [
+      880,
+      152
+     ],
+     "to": [
+      880,
+      204
+     ],
+     "width": 10,
+     "at": 3100
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 880,
+     "y": 266,
+     "r": 52,
+     "at": 3700
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-newborn.s3",
+   "frame": "4",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 500,
+      "cy": 470,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 4600,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "guide",
+     "from": [
+      528,
+      460
+     ],
+     "to": [
+      528,
+      320
+     ],
+     "at": 1200,
+     "until": 4600
+    },
+    {
+     "type": "ring",
+     "x": 528,
+     "y": 480,
+     "at": 1800,
+     "rx": 60,
+     "ry": 50,
+     "until": 4600,
+     "pulse": false
+    },
+    {
+     "type": "ring",
+     "x": 344,
+     "y": 480,
+     "at": 5600,
+     "rx": 70,
+     "ry": 60
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-newborn.s4",
+   "frame": "2",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 440,
+      "cy": 470,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "rub",
+     "type": "swap",
+     "frame": "2",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 900,
+     "rate": 50,
+     "count": 4
+    },
+    {
+     "type": "xfade",
+     "to": "4",
+     "at": 5200,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 400,
+     "y": 505,
+     "at": 6200,
+     "rx": 90,
+     "ry": 48
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 10,
+     "at": 6200,
+     "pos": "top-end",
+     "wait": false,
+     "until": 11800
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-newborn.s5",
+   "frame": "5",
+   "ms": 13000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 430,
+      "cy": 430,
+      "w": 620
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "puff",
+     "type": "swap",
+     "frame": "5",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1800,
+     "rate": 40,
+     "count": 5,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 528,
+     "y": 432,
+     "at": 600,
+     "rx": 70,
+     "ry": 60,
+     "until": 1800
+    },
+    {
+     "type": "shade",
+     "x": 304,
+     "y": 448,
+     "rx": 120,
+     "ry": 40,
+     "max": 0.3,
+     "follow": "puff",
+     "color": "255,238,205"
+    },
+    {
+     "type": "counter",
+     "follow": "puff",
+     "pos": "top-end",
+     "of": 5,
+     "icon": "breath"
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "anim.cpr-newborn.s6",
+   "frame": "5",
+   "ms": 14000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 430,
+      "cy": 430,
+      "w": 620
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2000,
+     2000
+    ],
+    "hold": [
+     0,
+     6800
+    ]
+   },
+   "motions": [
+    {
+     "id": "puff",
+     "type": "swap",
+     "frame": "5",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1800,
+     "rate": 40,
+     "count": 4,
+     "hide": false
+    },
+    {
+     "type": "xfade",
+     "to": "6",
+     "at": 9200,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 560,
+     "y": 300,
+     "angle": -60,
+     "size": 56,
+     "count": 3,
+     "spread": 70,
+     "ms": 1200,
+     "at": 200,
+     "until": 1800
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 820,
+     "y": 110,
+     "r": 52,
+     "at": 1800,
+     "until": 9000
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 60,
+     "at": 1800,
+     "pos": "top-end",
+     "wait": false,
+     "until": 9000
+    },
+    {
+     "type": "shade",
+     "x": 304,
+     "y": 448,
+     "rx": 120,
+     "ry": 40,
+     "max": 0.3,
+     "follow": "puff",
+     "color": "255,238,205"
+    },
+    {
+     "type": "icon",
+     "name": "walk",
+     "x": 860,
+     "y": 610,
+     "r": 50,
+     "at": 10200
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 860,
+     "y": 470,
+     "r": 50,
+     "at": 11000
+    }
+   ]
+  },
+  {
+   "id": "anim.cpr-newborn.s7",
+   "frame": "5",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     {
+      "cx": 430,
+      "cy": 430,
+      "w": 620
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "puff",
+     "type": "swap",
+     "frame": "5",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 600,
+     "rate": 40,
+     "count": 5,
+     "hide": false
+    },
+    {
+     "type": "xfade",
+     "to": "6",
+     "at": 6000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "shade",
+     "x": 304,
+     "y": 448,
+     "rx": 120,
+     "ry": 40,
+     "max": 0.3,
+     "follow": "puff",
+     "color": "255,238,205"
+    },
+    {
+     "type": "waves",
+     "x": 432,
+     "y": 170,
+     "angle": -90,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 7200
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 860,
+     "y": 110,
+     "r": 52,
+     "at": 8600
+    }
+   ]
+  }
+ ]
+}

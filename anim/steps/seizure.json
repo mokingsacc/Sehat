@@ -1,0 +1,282 @@
+{
+ "v": 1,
+ "id": "seizures",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/seizure), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "1-bg.webp",
+     "v": "a4aea5a2",
+     "kb": 26.9
+    },
+    {
+     "id": "patient-up",
+     "src": "1-patient-up.webp",
+     "v": "03a41c10",
+     "kb": 13.8,
+     "box": [
+      106,
+      326,
+      692,
+      258
+     ]
+    },
+    {
+     "id": "patient-down",
+     "src": "1-patient-down.webp",
+     "v": "e29c7c79",
+     "kb": 12.4,
+     "box": [
+      106,
+      379,
+      694,
+      205
+     ]
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "2-full-up.webp",
+     "v": "6a22a7a6",
+     "kb": 29.7
+    },
+    {
+     "id": "full-down",
+     "src": "2-full-down.webp",
+     "v": "1c9a1349",
+     "kb": 9.2,
+     "box": [
+      678,
+      128,
+      282,
+      415
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "3-bg.webp",
+     "v": "d84f47c1",
+     "kb": 28.1
+    },
+    {
+     "id": "patient-up",
+     "src": "1-patient-up.webp",
+     "v": "03a41c10",
+     "kb": 13.8,
+     "box": [
+      106,
+      326,
+      692,
+      258
+     ]
+    },
+    {
+     "id": "patient-down",
+     "src": "1-patient-down.webp",
+     "v": "e29c7c79",
+     "kb": 12.4,
+     "box": [
+      106,
+      379,
+      694,
+      205
+     ]
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "160a79a8",
+     "kb": 30.0
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "seizures.safe",
+   "frame": "1",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "shake",
+     "type": "swap",
+     "frame": "1",
+     "layer": "patient-down",
+     "under": "patient-up",
+     "at": 600,
+     "rate": 150
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 840,
+     "y": 280,
+     "at": 1000,
+     "rx": 120,
+     "ry": 80
+    },
+    {
+     "type": "arrow",
+     "from": [
+      820,
+      330
+     ],
+     "to": [
+      930,
+      360
+     ],
+     "width": 12,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "seizures.head",
+   "frame": "2",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 720,
+      "cy": 400,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "cloth",
+     "type": "swap",
+     "frame": "2",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1600,
+     "rate": 20,
+     "count": 2,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 744,
+     "y": 456,
+     "at": 800,
+     "r": 60
+    }
+   ]
+  },
+  {
+   "id": "seizures.time",
+   "frame": "3",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "shake",
+     "type": "swap",
+     "frame": "3",
+     "layer": "patient-down",
+     "under": "patient-up",
+     "at": 600,
+     "rate": 150
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 224,
+     "y": 80,
+     "at": 1000,
+     "r": 60
+    },
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 840,
+     "y": 110,
+     "r": 52,
+     "at": 4000
+    }
+   ]
+  },
+  {
+   "id": "seizures.side",
+   "frame": "4",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 760,
+      "cy": 440,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 800,
+     "y": 464,
+     "at": 1200,
+     "r": 60
+    }
+   ]
+  }
+ ]
+}

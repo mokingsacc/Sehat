@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "id": "drowning",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Delivery frame 4 is not used: it turns the whole body, and the app (and the brief's check) says turn only the head. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Delivery frame 4 not used: it turns the whole body; the app and the brief say turn only the head (water out of the mouth)."
+ ],
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "1-full-up.webp",
+     "v": "813546b4",
+     "kb": 29.9
+    },
+    {
+     "id": "full-down",
+     "src": "1-full-down.webp",
+     "v": "48f23b15",
+     "kb": 29.9
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "9e475bce",
+     "kb": 29.9
+    },
+    {
+     "id": "can",
+     "src": "2-can.webp",
+     "v": "b1a349eb",
+     "kb": 5.0,
+     "box": [
+      486,
+      199,
+      124,
+      115
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "7c44ad7e",
+     "kb": 29.9
+    }
+   ]
+  },
+  "5": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "5-full.webp",
+     "v": "10aa1f89",
+     "kb": 28.2
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "drowning.rescue",
+   "frame": "1",
+   "ms": 13000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "pull",
+     "type": "swap",
+     "frame": "1",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1600,
+     "rate": 30,
+     "count": 3
+    },
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 6600,
+     "ms": 900
+    },
+    {
+     "type": "move",
+     "frame": "2",
+     "layer": "can",
+     "from": {
+      "dx": -170,
+      "dy": -60
+     },
+     "to": {
+      "dx": 0,
+      "dy": 0
+     },
+     "at": 7400,
+     "ms": 1300,
+     "ease": "out"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      800,
+      440
+     ],
+     "to": [
+      600,
+      360
+     ],
+     "width": 12,
+     "at": 800,
+     "until": 6400
+    },
+    {
+     "type": "waves",
+     "x": 250,
+     "y": 50,
+     "angle": -120,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 8800
+    }
+   ]
+  },
+  {
+   "id": "drowning.check",
+   "frame": "3",
+   "ms": 15000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 740,
+      "cy": 480,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 840,
+     "y": 490,
+     "at": 1000,
+     "r": 60,
+     "until": 3600
+    },
+    {
+     "type": "ring",
+     "x": 690,
+     "y": 515,
+     "at": 3600,
+     "rx": 80,
+     "ry": 45
+    },
+    {
+     "type": "timer",
+     "from": 0,
+     "to": 10,
+     "at": 3600,
+     "pos": "top-end",
+     "wait": true
+    }
+   ]
+  },
+  {
+   "id": "drowning.warm",
+   "frame": "5",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 160,
+     "y": 528,
+     "at": 1200,
+     "r": 60
+    },
+    {
+     "type": "waves",
+     "x": 480,
+     "y": 300,
+     "angle": -90,
+     "size": 56,
+     "count": 3,
+     "spread": 70,
+     "ms": 1200,
+     "at": 2600
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 840,
+     "y": 110,
+     "r": 52,
+     "at": 5000
+    }
+   ]
+  }
+ ]
+}

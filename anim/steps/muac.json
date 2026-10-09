@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "id": "kit-muac",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/muac), packed by tools/steps_images.py --px 800 --patch. Delivery frame 1 is not shown: it measures the right arm (the app says the left arm); its picture stays only as the base of frame 2. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Delivery frame 1 not used: the mother measures the child's right arm; the app says the left arm (frame 2 marks the left arm)."
+ ],
+ "poster": 1,
+ "frames": {
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "49c98ad2",
+     "kb": 29.8
+    },
+    {
+     "id": "full-fix",
+     "src": "2-full-fix.webp",
+     "v": "e509d9c0",
+     "kb": 7.8,
+     "box": [
+      332,
+      262,
+      365,
+      256
+     ],
+     "patch": "full"
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "3-bg.webp",
+     "v": "eae40d2b",
+     "kb": 14.1
+    },
+    {
+     "id": "tape-up",
+     "src": "3-tape-up.webp",
+     "v": "813c0b17",
+     "kb": 13.1,
+     "box": [
+      254,
+      221,
+      706,
+      384
+     ]
+    },
+    {
+     "id": "tape-down",
+     "src": "3-tape-down.webp",
+     "v": "4aa5c942",
+     "kb": 12.0,
+     "box": [
+      262,
+      217,
+      698,
+      388
+     ]
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "0e7c0e48",
+     "kb": 19.7
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "kit-muac.arm",
+   "frame": "2",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 600,
+      "cy": 330,
+      "w": 480
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "dot",
+     "x": 592,
+     "y": 344,
+     "r": 16,
+     "at": 1200
+    }
+   ]
+  },
+  {
+   "id": "kit-muac.wrap",
+   "frame": "3",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "tape",
+     "type": "swap",
+     "frame": "3",
+     "layer": "tape-down",
+     "under": "tape-up",
+     "at": 1200,
+     "rate": 12,
+     "count": 1
+    },
+    {
+     "type": "xfade",
+     "to": "4",
+     "at": 5600,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 272,
+     "y": 208,
+     "at": 6600,
+     "r": 50
+    }
+   ]
+  }
+ ]
+}

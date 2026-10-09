@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Pictures for the picture-step player (js/steps.js, docs/STEPS_PLAYER.md): PNG layers in, small WebP layers out.
 
-    python3 tools/steps_images.py <folder of PNGs> [--anim cpr-adult] [--width 960] [--max-kb 60] [--dry-run]
+    python3 tools/steps_images.py <folder of PNGs> [--anim cpr-adult] [--width 960] [--max-kb 60] [--px 800] [--patch] [--dry-run]
 
 Input files are named <animation>-<frame>-<layer>.png as in the ChatGPT briefs, e.g. cpr-child-5-bg.png,
 cpr-child-5-body.png, cpr-child-5-arms-up.png, cpr-child-5-arms-down.png, recovery-position-3-full.png. The frame
@@ -24,6 +24,13 @@ For every frame it:
   - encodes WebP (with alpha), choosing the best quality that keeps each layer under --max-kb (default 60 KB);
 writes img/steps/<animation>/<frame>-<layer>.webp, updates the "frames" of anim/steps/<animation>.json (or
 creates the file with one simple scene per frame to start from), and prints the sizes.
+Smaller files (Mo, 9 Oct 2026: the APK should stay under 10 to 15 MB):
+  - --px 800 encodes the pictures 800 px wide while every box and coordinate stays in --width (960) pixels; the
+    player scales them, so scenes do not change.
+  - --patch stores an opaque -down picture (full-down, bg-down) as a small soft-edged patch over its -up picture,
+    only where the two differ (the player's swap then needs "hide": false). It also shares backgrounds: a frame whose
+    picture is mostly the same as an earlier frame's reuses that picture and adds a small <layer>-fix patch.
+  - pictures with the same bytes in one animation are written once.
 --sheet out.png also writes a contact sheet of every frame put back together from the WebP files (to check
 alignment). Needs Pillow (python3 -m pip install pillow).
 """
@@ -207,6 +214,35 @@ def encode(im, max_bytes, qmin, qmax):
     return best or (enc(qmin), qmin)
 
 
+def diff_patch(up, down, tol=26, pad=10, most=0.6):
+    """The part of an opaque -down picture that differs from its -up picture, as (RGBA patch with soft edges, box),
+    or None when most of the picture changes. Shown above the -up picture (swap with "hide": false), it gives the
+    -down picture for a fraction of the bytes."""
+    from PIL import ImageFilter
+    d = ImageChops.difference(up.convert("RGB"), down.convert("RGB")).convert("L").point(lambda v: 255 if v > tol else 0)
+    d = d.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.MaxFilter(9))  # ignore encoding noise, keep real changes
+    bb = d.getbbox()
+    if not bb: return None
+    W, H = up.size
+    bb = (max(0, bb[0] - pad), max(0, bb[1] - pad), min(W, bb[2] + pad), min(H, bb[3] + pad))
+    if (bb[2] - bb[0]) * (bb[3] - bb[1]) > most * W * H: return None
+    im = down.convert("RGBA").crop(bb)
+    w, h = im.size
+    edge = pad - 2
+    alpha = Image.new("L", (w, h), 255)
+    px = alpha.load()
+    for y in range(h):
+        for x in range(w):
+            k = edge
+            if bb[0] > 0: k = min(k, x)
+            if bb[1] > 0: k = min(k, y)
+            if bb[2] < W: k = min(k, w - 1 - x)
+            if bb[3] < H: k = min(k, h - 1 - y)
+            if k < edge: px[x, y] = round(255 * max(0, k) / edge)
+    im.putalpha(alpha)
+    return im, bb
+
+
 def starter_scene(name, k, fr, layers, W, H):
     """A first scene for a frame: a slow zoom; each -up / -down pair takes turns 5 times with a counter."""
     sc = {"id": f"anim.{name}.s{k + 1}", "frame": fr, "cam": {"path": [[0, 0, W], [round(W * 0.1), round(H * 0.1), round(W * 0.8)]], "ms": [7000]},
@@ -246,6 +282,8 @@ def main():
     ap.add_argument("--rename", default="", help="frame names, e.g. step01=thumbs,step02=breath")
     ap.add_argument("--allow-opaque", action="store_true", help="accept layers 2 and up without transparency")
     ap.add_argument("--sheet", help="write a contact sheet PNG of the rebuilt frames")
+    ap.add_argument("--px", type=int, help="encode the pictures this many pixels wide (default --width); the JSON keeps --width coordinates")
+    ap.add_argument("--patch", action="store_true", help="store each opaque -down picture as a small patch over its -up picture (only the part that changes)")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
@@ -258,7 +296,7 @@ def main():
         aspect = None
         if a.aspect:
             w, h = (float(x) for x in a.aspect.split(":")); aspect = w / h
-        out_frames, W, H = {}, a.width, None
+        out_frames, W, H, bases, written = {}, a.width, None, [], {}
         merged, last = {}, None
         for fr in sorted(frames, key=natural):
             if any(opaque_name(ly) for ly in frames[fr]) or last is None:
@@ -307,27 +345,62 @@ def main():
             if H is None: H = round(W / aspect)
             scale = W / (box[2] - box[0])
             out_frames[fr] = []
+            # the pictures are encoded --px wide (default --width); boxes and the JSON stay in --width coordinates
+            PX = a.px or W; PH = round(PX * H / W); f = W / PX
+            full = {ly: resize(ims[ly].crop(box), (PX, PH)) for ly in order if ly in ims}
+            # --patch: a frame whose picture is mostly the same as an earlier frame's (the same scene a moment later)
+            # shows that earlier picture with only the changed part on top ("<layer>-fix")
+            shared = None
+            if a.patch and base in full and full[base].mode == "RGB":
+                for pfr, pL, pim in bases:
+                    pp = diff_patch(pim, full[base], most=0.5)
+                    if pp and (shared is None or pp[0].size[0] * pp[0].size[1] < shared[2][0].size[0] * shared[2][0].size[1]): shared = (pfr, pL, pp)
             for ly in order:
                 if ly not in ims: continue
-                im = resize(ims[ly].crop(box), (W, H))
+                im = full[ly]
                 lbox = [0, 0, W, H]
-                if im.mode == "RGBA":
+                patch = None
+                if shared and ly == base:
+                    pfr, pL, (im, pb) = shared
+                    out_frames[fr].append(dict(pL, id=ly))
+                    lbox = [round(pb[0] * f), round(pb[1] * f), round((pb[2] - pb[0]) * f), round((pb[3] - pb[1]) * f)]
+                    print(f"  {fr}-{ly}: the picture of frame {pfr} with a patch ({lbox[2]}x{lbox[3]} at {lbox[0]},{lbox[1]})")
+                    ly = ly + "-fix"; patch = True
+                if not patch and a.patch and im.mode == "RGB" and re.search(r"(^|-)down$", ly):
+                    up = re.sub(r"down$", "up", ly)
+                    if up in full and full[up].mode == "RGB": patch = diff_patch(full[up], im)
+                if patch is True: pass
+                elif patch:
+                    im, pb = patch
+                    lbox = [round(pb[0] * f), round(pb[1] * f), round((pb[2] - pb[0]) * f), round((pb[3] - pb[1]) * f)]
+                    print(f"  {fr}-{ly}: stored as a patch over {up} ({lbox[2]}x{lbox[3]} at {lbox[0]},{lbox[1]})")
+                elif im.mode == "RGBA":
                     im = clean_alpha(im)
                     bb = im.getchannel("A").getbbox()
                     if not bb: problems.append(f"{name} {fr}-{ly}: empty (fully transparent)"); continue
                     pad = 2
-                    bb = (max(0, bb[0] - pad), max(0, bb[1] - pad), min(W, bb[2] + pad), min(H, bb[3] + pad))
-                    im = im.crop(bb); lbox = [bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1]]
+                    bb = (max(0, bb[0] - pad), max(0, bb[1] - pad), min(PX, bb[2] + pad), min(PH, bb[3] + pad))
+                    im = im.crop(bb); lbox = [round(bb[0] * f), round(bb[1] * f), round((bb[2] - bb[0]) * f), round((bb[3] - bb[1]) * f)]
+                    lbox[2] = min(lbox[2], W - lbox[0]); lbox[3] = min(lbox[3], H - lbox[1])
                 data, q = encode(im, a.max_kb * 1024, a.qmin, a.qmax)
                 over = len(data) > a.max_kb * 1024
                 grand += len(data)
                 fn = f"{fr}-{ly}.webp"
-                print(f"  {fn:28s} {sizes[ly][0]}x{sizes[ly][1]} -> {lbox[2]}x{lbox[3]} at {lbox[0]},{lbox[1]}  q{q:<3d} {len(data) / 1024:5.1f} KB{'  (over --max-kb at the lowest quality)' if over else ''}")
-                if not a.dry_run:
+                h8 = hashlib.sha1(data).hexdigest()[:8]
+                if h8 in written:  # the same picture as an earlier layer of this animation (e.g. a sprite reused): one file
+                    fn = written[h8]
+                    print(f"  {fr}-{ly}: the same picture as {fn}")
+                print(f"  {fn:28s} {size[0]}x{size[1]} -> {lbox[2]}x{lbox[3]} at {lbox[0]},{lbox[1]}  q{q:<3d} {len(data) / 1024:5.1f} KB{'  (over --max-kb at the lowest quality)' if over else ''}")
+                if not a.dry_run and h8 not in written:
                     os.makedirs(os.path.join(a.out, name), exist_ok=True)
                     open(os.path.join(a.out, name, fn), "wb").write(data)
+                elif h8 in written: grand -= len(data)
+                written.setdefault(h8, fn)
                 L = {"id": ly, "src": fn, "v": hashlib.sha1(data).hexdigest()[:8], "kb": round(len(data) / 1024, 1)}
                 if lbox != [0, 0, W, H]: L["box"] = lbox
+                if patch is True: L["patch"] = base
+                elif patch: L["patch"] = up
+                if a.patch and lbox == [0, 0, W, H] and im.mode == "RGB" and ly == base: bases.append((fr, L, full[ly]))
                 out_frames[fr].append(L)
             sheet_rows.append((name, fr))
         # anim/steps/<name>.json: replace the frames, keep the scenes (or start a simple one per frame)
@@ -342,7 +415,7 @@ def main():
             print(f"  note: the picture size changed from {d.get('w')}x{d.get('h')} to {W}x{H}: check the scenes' coordinates")
         d["w"], d["h"] = W, H
         d["frames"] = dict(d.get("frames") or {}, **{fr: {"layers": L} for fr, L in out_frames.items()})
-        kb = sum(L["kb"] for fr in d["frames"].values() for L in fr["layers"])
+        kb = sum({L["src"]: L["kb"] for fr in d["frames"].values() for L in fr["layers"]}.values())
         print(f"  {name}: {sum(len(v) for v in out_frames.values())} layers written, the animation's pictures now total {kb:.0f} KB")
         if not a.dry_run:
             os.makedirs(a.json, exist_ok=True)
@@ -354,7 +427,9 @@ def main():
                 canvas = Image.new("RGBA", (W, H), (255, 255, 255, 255))
                 for L in layers:
                     im = Image.open(os.path.join(a.out, name, L["src"])).convert("RGBA")
-                    bx = L.get("box", [0, 0, W, H]); canvas.alpha_composite(im, (bx[0], bx[1]))
+                    bx = L.get("box", [0, 0, W, H])
+                    if im.size != (bx[2], bx[3]): im = im.resize((bx[2], bx[3]), Image.LANCZOS)
+                    canvas.alpha_composite(im, (bx[0], bx[1]))
                 tiles.append(canvas.convert("RGB").resize((W // 3, H // 3)))
             if tiles:
                 sheet = Image.new("RGB", (W // 3 * min(3, len(tiles)), H // 3 * ((len(tiles) + 2) // 3)), "white")

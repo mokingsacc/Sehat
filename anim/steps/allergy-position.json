@@ -1,0 +1,191 @@
+{
+ "v": 1,
+ "id": "allergy-severe",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/allergy-position), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "8c945940",
+     "kb": 29.9
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "e016cda0",
+     "kb": 29.7
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "3-bg.webp",
+     "v": "718fba58",
+     "kb": 14.5
+    },
+    {
+     "id": "sting",
+     "src": "3-sting.webp",
+     "v": "2aa53ae3",
+     "kb": 0.5,
+     "box": [
+      402,
+      331,
+      26,
+      26
+     ]
+    },
+    {
+     "id": "hand-up",
+     "src": "3-hand-up.webp",
+     "v": "68a07abc",
+     "kb": 11.6,
+     "box": [
+      395,
+      0,
+      565,
+      362
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "3-hand-down.webp",
+     "v": "17e36dd4",
+     "kb": 11.5,
+     "box": [
+      329,
+      0,
+      631,
+      341
+     ]
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "allergy-severe.position",
+   "frame": "1",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 5000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 300,
+     "y": 280,
+     "at": 1000,
+     "rx": 120,
+     "ry": 140,
+     "until": 4800
+    },
+    {
+     "type": "waves",
+     "x": 300,
+     "y": 190,
+     "angle": -160,
+     "size": 40,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 1800,
+     "until": 4800
+    },
+    {
+     "type": "arrow",
+     "from": [
+      840,
+      520
+     ],
+     "to": [
+      840,
+      410
+     ],
+     "width": 12,
+     "at": 6000
+    }
+   ]
+  },
+  {
+   "id": "allergy-severe.sting",
+   "frame": "3",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 340,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "scrape",
+     "type": "swap",
+     "frame": "3",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 2000,
+     "rate": 30,
+     "count": 3
+    },
+    {
+     "type": "fade",
+     "layer": "sting",
+     "from": 1,
+     "to": 0,
+     "at": 6200,
+     "ms": 600
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 416,
+     "y": 344,
+     "at": 800,
+     "r": 30,
+     "until": 2000
+    }
+   ]
+  }
+ ]
+}

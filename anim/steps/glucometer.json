@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "id": "kit-glucometer",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/glucometer), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frame 2: the pricker points at the end of the fingertip rather than clearly at its side (the app says the side)."
+ ],
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "fd1e72c9",
+     "kb": 30.0
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "8dce862c",
+     "kb": 23.1
+    },
+    {
+     "id": "hand-up",
+     "src": "2-hand-up.webp",
+     "v": "553397bb",
+     "kb": 9.8,
+     "box": [
+      511,
+      390,
+      449,
+      330
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "2-hand-down.webp",
+     "v": "048af78f",
+     "kb": 10.1,
+     "box": [
+      511,
+      372,
+      449,
+      348
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-bg.webp",
+     "v": "8dce862c",
+     "kb": 23.1
+    },
+    {
+     "id": "full-fix",
+     "src": "3-full-fix.webp",
+     "v": "7229fd5c",
+     "kb": 10.4,
+     "box": [
+      486,
+      158,
+      474,
+      562
+     ],
+     "patch": "full"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "kit-glucometer.wash",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "handwash",
+     "x": 830,
+     "y": 100,
+     "r": 52,
+     "at": 1000
+    },
+    {
+     "type": "ring",
+     "x": 480,
+     "y": 256,
+     "at": 3000,
+     "r": 45
+    }
+   ]
+  },
+  {
+   "id": "kit-glucometer.prick",
+   "frame": "2",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "prick",
+     "type": "swap",
+     "frame": "2",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 1500,
+     "rate": 15,
+     "count": 1
+    },
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 5600,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 536,
+     "y": 344,
+     "at": 600,
+     "r": 40,
+     "until": 1500
+    },
+    {
+     "type": "ring",
+     "x": 536,
+     "y": 376,
+     "at": 6600,
+     "r": 35
+    }
+   ]
+  }
+ ]
+}

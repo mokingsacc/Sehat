@@ -1,0 +1,70 @@
+{
+ "v": 1,
+ "id": "breastfeeding",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/breastfeed-attach), packed by tools/steps_images.py --px 800 --patch. Frames 2 and 3 (mouth diagrams) are not used: they are hard to read. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Delivery frames 2 and 3 (mouth on the breast diagrams) not used: abstract shapes, hard to read, could teach the wrong latch."
+ ],
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "3ac581a8",
+     "kb": 29.9
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "breastfeeding.attach",
+   "frame": "1",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 400,
+      "cy": 300,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 424,
+     "y": 248,
+     "at": 800,
+     "r": 50
+    },
+    {
+     "type": "guide",
+     "from": [
+      400,
+      230
+     ],
+     "to": [
+      530,
+      400
+     ],
+     "at": 2400
+    }
+   ]
+  }
+ ]
+}

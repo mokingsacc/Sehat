@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "id": "cold-hypothermia",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cold-warming), packed by tools/steps_images.py --px 800 --patch. Frame 4 is newborn-warm frame 2 (skin to skin), as the brief says. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "02f6b135",
+     "kb": 29.8
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "6336d555",
+     "kb": 31.5
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "67663f47",
+     "kb": 29.8
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "21ee080b",
+     "kb": 29.8
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "cold-hypothermia.dry",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 336,
+     "y": 200,
+     "at": 1000,
+     "rx": 80,
+     "ry": 50
+    },
+    {
+     "type": "waves",
+     "x": 560,
+     "y": 330,
+     "angle": -90,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "cold-hypothermia.drink",
+   "frame": "2",
+   "ms": 7000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 620,
+      "cy": 300,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 640,
+     "y": 288,
+     "at": 1000,
+     "r": 45
+    }
+   ]
+  },
+  {
+   "id": "cold-hypothermia.frostbite",
+   "frame": "3",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 480,
+     "y": 380,
+     "at": 800,
+     "rx": 220,
+     "ry": 130,
+     "pulse": false
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 880,
+     "y": 640,
+     "r": 46,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "cold-hypothermia.baby",
+   "frame": "4",
+   "ms": 7000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 432,
+     "y": 170,
+     "angle": -90,
+     "size": 50,
+     "count": 2,
+     "spread": 70,
+     "ms": 1200,
+     "at": 1000
+    }
+   ]
+  }
+ ]
+}

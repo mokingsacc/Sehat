@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "id": "burns",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/burns-cool), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "1-full-up.webp",
+     "v": "31fc3f5c",
+     "kb": 29.6
+    },
+    {
+     "id": "full-down",
+     "src": "1-full-down.webp",
+     "v": "96bc422a",
+     "kb": 5.0,
+     "box": [
+      313,
+      127,
+      198,
+      238
+     ],
+     "patch": "full-up"
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "4f0238ee",
+     "kb": 25.9
+    },
+    {
+     "id": "hand-up",
+     "src": "2-hand-up.webp",
+     "v": "d374419d",
+     "kb": 10.1,
+     "box": [
+      0,
+      0,
+      427,
+      362
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "2-hand-down.webp",
+     "v": "e93b109e",
+     "kb": 7.5,
+     "box": [
+      0,
+      23,
+      150,
+      324
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "9dc002b9",
+     "kb": 29.7
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "burns.cool",
+   "frame": "1",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 460,
+      "cy": 340,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "pour",
+     "type": "swap",
+     "frame": "1",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 1400,
+     "rate": 40,
+     "hide": false
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 480,
+     "y": 384,
+     "at": 800,
+     "r": 50
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 840,
+     "y": 130,
+     "r": 52,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "burns.rings",
+   "frame": "2",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "ring",
+     "type": "swap",
+     "frame": "2",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 1500,
+     "rate": 20,
+     "count": 2
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 376,
+     "y": 296,
+     "at": 600,
+     "r": 50,
+     "until": 1500
+    },
+    {
+     "type": "arrow",
+     "from": [
+      350,
+      250
+     ],
+     "to": [
+      190,
+      250
+     ],
+     "width": 12,
+     "at": 1500,
+     "until": 6000
+    }
+   ]
+  },
+  {
+   "id": "burns.cover",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 460,
+      "cy": 380,
+      "w": 560
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 464,
+     "y": 384,
+     "at": 1200,
+     "rx": 70,
+     "ry": 50
+    }
+   ]
+  },
+  {
+   "id": "burns.warm",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     {
+      "cx": 460,
+      "cy": 380,
+      "w": 560
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "waves",
+     "x": 700,
+     "y": 300,
+     "angle": -90,
+     "size": 60,
+     "count": 3,
+     "spread": 70,
+     "ms": 1200,
+     "at": 1600
+    }
+   ]
+  }
+ ]
+}

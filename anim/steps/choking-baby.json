@@ -1,0 +1,304 @@
+{
+ "v": 1,
+ "id": "choking-baby",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/choking-baby), packed by tools/steps_images.py --px 800 --patch. Scenes use the page's own narration (choking-baby.*). The choking-01 folder is the same picture as frame 1. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_check": [
+  "Frame 2 (back blows): the contact is a little low (mid-back) rather than clearly between the shoulder blades.",
+  "Frame 4 (chest pushes): the two thumbs side by side on the breastbone are not clear; in the down picture the lower hand edge comes near the belly.",
+  "Frame 5 (look in the mouth): the hand rests on top of the head; it does not show looking into the mouth (no finger in the mouth, which is right)."
+ ],
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "1-bg.webp",
+     "v": "34fcc98c",
+     "kb": 23.8
+    },
+    {
+     "id": "arms-up",
+     "src": "1-arms-up.webp",
+     "v": "4a0b6059",
+     "kb": 3.4,
+     "box": [
+      371,
+      190,
+      206,
+      145
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "1-arms-down.webp",
+     "v": "6dac2aec",
+     "kb": 3.7,
+     "box": [
+      362,
+      176,
+      221,
+      191
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "79dfa390",
+     "kb": 29.7
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "4-bg.webp",
+     "v": "74cfabe7",
+     "kb": 29.6
+    },
+    {
+     "id": "arms-up",
+     "src": "4-arms-up.webp",
+     "v": "c7d5df13",
+     "kb": 8.7,
+     "box": [
+      425,
+      220,
+      269,
+      235
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "4-arms-down.webp",
+     "v": "cb2bc9ce",
+     "kb": 8.2,
+     "box": [
+      426,
+      220,
+      268,
+      235
+     ]
+    }
+   ]
+  },
+  "5": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "5-full.webp",
+     "v": "16e2bb99",
+     "kb": 29.8
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "choking-baby.back",
+   "frame": "1",
+   "ms": 12000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 340,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "blow",
+     "type": "swap",
+     "frame": "1",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 2600,
+     "rate": 50,
+     "count": 5
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      470,
+      200
+     ],
+     "to": [
+      425,
+      318
+     ],
+     "width": 12,
+     "at": 1000,
+     "until": 2600
+    },
+    {
+     "type": "ring",
+     "x": 415,
+     "y": 345,
+     "at": 1000,
+     "rx": 60,
+     "ry": 40,
+     "until": 2600
+    },
+    {
+     "type": "counter",
+     "follow": "blow",
+     "pos": "top-end",
+     "of": 5
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "choking-baby.chest",
+   "frame": "3",
+   "ms": 15000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 450,
+      "cy": 380,
+      "w": 600
+     }
+    ],
+    "ms": [
+     1600
+    ],
+    "hold": [
+     3400
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "4",
+     "at": 3500,
+     "ms": 900
+    },
+    {
+     "id": "push",
+     "type": "swap",
+     "frame": "4",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 5200,
+     "rate": 50,
+     "count": 5
+    }
+   ],
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      470,
+      300
+     ],
+     "to": [
+      470,
+      470
+     ],
+     "width": 12,
+     "at": 800,
+     "until": 3500,
+     "bend": -90
+    },
+    {
+     "type": "ring",
+     "x": 485,
+     "y": 372,
+     "at": 4400,
+     "rx": 50,
+     "ry": 40,
+     "until": 5200
+    },
+    {
+     "type": "counter",
+     "follow": "push",
+     "pos": "top-end",
+     "of": 5
+    }
+   ],
+   "key": {
+    "frame": "4",
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "choking-baby.repeat",
+   "frame": "5",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 400,
+      "cy": 400,
+      "w": 560
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2000,
+     1500
+    ],
+    "hold": [
+     0,
+     2600
+    ]
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "1",
+     "at": 6200,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 398,
+     "y": 400,
+     "at": 1200,
+     "r": 70,
+     "until": 6000
+    }
+   ]
+  }
+ ]
+}

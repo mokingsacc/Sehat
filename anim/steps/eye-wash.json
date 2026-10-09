@@ -1,0 +1,241 @@
+{
+ "v": 1,
+ "id": "eye-chemical",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/eye-wash), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "cf29b2d1",
+     "kb": 29.5
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "eabc46ab",
+     "kb": 29.8
+    },
+    {
+     "id": "arms-up",
+     "src": "2-arms-up.webp",
+     "v": "7b284c50",
+     "kb": 4.8,
+     "box": [
+      542,
+      196,
+      132,
+      223
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "2-arms-down.webp",
+     "v": "7f6e2fcf",
+     "kb": 5.5,
+     "box": [
+      547,
+      196,
+      133,
+      252
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "cf29b2d1",
+     "kb": 29.5
+    },
+    {
+     "id": "full-fix",
+     "src": "3-full-fix.webp",
+     "v": "6192f1ec",
+     "kb": 17.8,
+     "box": [
+      340,
+      127,
+      510,
+      530
+     ],
+     "patch": "full"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "eye-chemical.powder",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 300,
+      "w": 600
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 424,
+     "y": 288,
+     "at": 800,
+     "r": 50
+    },
+    {
+     "type": "arrow",
+     "from": [
+      430,
+      280
+     ],
+     "to": [
+      340,
+      250
+     ],
+     "width": 10,
+     "at": 2400
+    }
+   ]
+  },
+  {
+   "id": "eye-chemical.wash",
+   "frame": "2",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "pour",
+     "type": "swap",
+     "frame": "2",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 1200,
+     "rate": 12,
+     "count": 2
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 656,
+     "y": 480,
+     "at": 600,
+     "r": 45,
+     "until": 1200
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 100,
+     "y": 80,
+     "r": 46,
+     "at": 2600
+    }
+   ]
+  },
+  {
+   "id": "eye-chemical.tilt",
+   "frame": "2",
+   "ms": 7000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 640,
+      "cy": 440,
+      "w": 480
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 656,
+     "y": 480,
+     "at": 1200,
+     "r": 60
+    }
+   ]
+  },
+  {
+   "id": "eye-chemical.cover",
+   "frame": "3",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 416,
+     "y": 280,
+     "at": 800,
+     "r": 45
+    },
+    {
+     "type": "ring",
+     "x": 584,
+     "y": 416,
+     "at": 2600,
+     "rx": 70,
+     "ry": 90
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 100,
+     "y": 80,
+     "r": 46,
+     "at": 4200
+    }
+   ]
+  }
+ ]
+}

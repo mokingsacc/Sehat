@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "id": "asthma-attack",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/inhaler-spacer), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "3ee357a4",
+     "kb": 22.8
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "15d10c83",
+     "kb": 29.8
+    },
+    {
+     "id": "hand-up",
+     "src": "2-hand-up.webp",
+     "v": "5f9b79b2",
+     "kb": 2.9,
+     "box": [
+      500,
+      198,
+      98,
+      152
+     ]
+    },
+    {
+     "id": "hand-down",
+     "src": "2-hand-down.webp",
+     "v": "4cbc9542",
+     "kb": 2.9,
+     "box": [
+      500,
+      202,
+      101,
+      149
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "d75d72ff",
+     "kb": 29.6
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "asthma-attack.sit",
+   "frame": "3",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 300,
+      "cy": 330,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 200,
+     "y": 330,
+     "at": 1000,
+     "rx": 110,
+     "ry": 150,
+     "pulse": false
+    }
+   ]
+  },
+  {
+   "id": "asthma-attack.inhaler",
+   "frame": "2",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 420,
+      "cy": 260,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "puff",
+     "type": "swap",
+     "frame": "2",
+     "layer": "hand-down",
+     "under": "hand-up",
+     "at": 1500,
+     "rate": 15,
+     "count": 2
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 512,
+     "y": 240,
+     "at": 600,
+     "r": 40,
+     "until": 1500
+    },
+    {
+     "type": "counter",
+     "follow": "puff",
+     "pos": "top-end",
+     "icon": "breath"
+    }
+   ]
+  },
+  {
+   "id": "asthma-attack.bottle",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      870,
+      330
+     ],
+     "to": [
+      730,
+      322
+     ],
+     "width": 12,
+     "at": 1000
+    },
+    {
+     "type": "ring",
+     "x": 696,
+     "y": 320,
+     "at": 2600,
+     "r": 50
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "id": "kit-scale",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/weigh-child), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 0,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "9f47beba",
+     "kb": 29.9
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "fad5a73f",
+     "kb": 26.9
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "fad5a73f",
+     "kb": 26.9
+    },
+    {
+     "id": "full-fix",
+     "src": "3-full-fix.webp",
+     "v": "97cd6eed",
+     "kb": 7.5,
+     "box": [
+      202,
+      121,
+      274,
+      340
+     ],
+     "patch": "full"
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "ui.gr.m.hang",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 520,
+      "cy": 260,
+      "w": 640
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 568,
+     "y": 120,
+     "at": 1200,
+     "r": 55
+    }
+   ]
+  },
+  {
+   "id": "kit-scale.hold",
+   "frame": "2",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 4000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 352,
+     "y": 640,
+     "at": 1000,
+     "rx": 70,
+     "ry": 35,
+     "until": 3900
+    },
+    {
+     "type": "ring",
+     "x": 344,
+     "y": 640,
+     "at": 5000,
+     "rx": 70,
+     "ry": 35
+    }
+   ]
+  }
+ ]
+}

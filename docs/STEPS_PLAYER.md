@@ -22,8 +22,52 @@ animation without one). Until then the app keeps playing the SVG version.
 frame: s3, s5 and s6 as he approved them; s1 (ring on the feet, tap and call lines), s2 (zoom out, the call for help,
 car and hospital icons), s4 (face and chest, breath lines beside the head, 1–5 breath counter, the chest lighting up
 with each breath) and s7 (a call for help, pushes with a 1-minute clock, then the way to the hospital) are made with
-camera moves and overlays. Frame `kneel` is the rescuer's body layer without her arms. The newborn, child and adult
-CPR keep their cine / SVG versions.
+camera moves and overlays. Frame `kneel` is the rescuer's body layer without her arms. Since 9 Oct 2026, s4 uses
+Mo's original CPR step 2 picture (frame `breath`: mouth over the baby's mouth and nose, chin lifted), with the
+chest lighting up on each of the 5 breaths. The newborn, child and adult CPR keep their cine / SVG versions.
+
+## Mo's illustration delivery (9 Oct 2026): 32 more sets, not live yet
+
+Source: `/mnt/project-files/samangan-red-book/illustrations-2026-10-09/` (1200 px WebP layers: 31 sets in
+`medical-illustrations/`, `original-cpr/` steps 1 to 7, `choking-01/`, symptom pictures 34 to 36). Every set has its
+JSON and pictures in the repo, with scenes, and **none is in `STEPS`** (only `cpr-baby` plays in the app). The
+demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previews/animations-2026-10-09/index.html`.
+
+- **Packed small:** `python3 tools/steps_images.py <folder> --anim <name> --px 800 --max-kb 30 --qmax 72 --patch`.
+  Pictures are 800x600 (coordinates stay 960x720), a moving whole picture's `-down` version is a small patch over
+  its `-up` version, frames that are mostly the same picture share it plus a `<layer>-fix` patch, and repeated files
+  are written once. A delivery file `<name>-<n>-up` / `-down` (a whole picture) is staged as `<n>-full-up` /
+  `-full-down`. A patch swap needs `"hide": false` (written for you in these sets).
+- **Narration:** the scenes use the topic page's own narration ids (for example `choking-baby.back`), and `id` is the
+  topic id, so the title is the page's title: nothing new to record or translate. The CPR sets use
+  `anim.cpr-<age>.s1` to `s7`. Scene id per set: choking-baby (`choking-baby.*`), choking-adult (`choking.*`),
+  recovery-position (`unconscious.*`), bleeding-press and bleeding-tourniquet (`bleeding.*`), burns-cool, drowning-rescue,
+  seizure (`seizures.*`), fever-fit, spine-hold and splint-sling (`falls-fractures.*`), snake-bite
+  (`snake-scorpion.*`), electric-stick (`electric-shock.*`), allergy-position (`allergy-severe.*`), breath-count
+  (`cough.watch`, `cough.urgent.chest`), newborn-warm, breastfeed-attach, muac (`kit-muac.*`), inhaler-spacer
+  (`asthma-attack.*`), nosebleed, eye-wash (`eye-chemical.*`), thermometer (`kit-thermometer.*`), heat-cooling
+  (`heat-stroke.*`), cold-warming (`cold-hypothermia.*`), bp-measure (`kit-bp.*`), weigh-child (`ui.gr.m.hang`,
+  `kit-scale.hold`), length-height (`ui.gr.m.length*`, `ui.gr.m.height`), glucometer (`kit-glucometer.*`),
+  low-sugar-drink (`low-sugar.*`).
+- **To go live** (after Mo's approval): add the name to `STEPS`, the `"approved"` note, and an `anim` block on the
+  topic. `tools/validate.py` and `tools/anims.py` (`scene_ids`, `needed_ids`) still expect `anim.<name>.s<n>` ids and
+  an `anim.<name>.title` for a live set: the CPR sets fit; for the others either let those two accept a set's page
+  ids and `<id>.title`, or give the set `anim.<name>.*` lines in `content/src/anims.json`.
+- **Notes in the JSON:** `_note` (where the pictures came from and what was left out), `_check` (points for Mo's
+  medical check), `held` (bleeding-tourniquet: "held: Mo's tourniquet call pending").
+- **Not used, they look medically wrong:** cpr-child frame 4 (hand too high, on the upper chest), muac frame 1 (the
+  right arm; its picture stays only as the base of frame 2), drowning-rescue frame 4 (the whole body turned, the app
+  says the head), breastfeed-attach frames 2 and 3 (hard-to-read mouth diagrams). Pictures the delivery uses
+  twice: newborn-warm frame 2 is also cpr-newborn frame 6 and cold-warming frame 4, and recovery-position frame 4 is
+  also low-sugar-drink frame 3 (each set keeps its own copy, about 30 kB); `choking-01` is choking-baby frame 1.
+- **APK budget** (MB = 1,000,000 bytes): the APK of release v2026.10.09-56903f is 8.60 MB; this change adds
+  0.12 MB (the three symptom tiles and cpr-baby's breath frame), so about 8.72 MB. The 24 new Emergency and CPR sets
+  (picked by their topics) would add 3.03 MB if all went live, about 11.75 MB in all; the 8 other sets (0.67 MB) are
+  on demand. To stay under 10 MB, in life-saving order: cpr-adult, cpr-child, cpr-newborn, choking-baby,
+  choking-adult, bleeding-press, recovery-position and drowning-rescue fit (about 9.91 MB). The rest (burns-cool,
+  seizure, allergy-position, fever-fit, electric-stick, snake-bite, newborn-warm, spine-hold, low-sugar-drink,
+  cold-warming, heat-cooling, inhaler-spacer, splint-sling, eye-wash, nosebleed, and the held tourniquet) would have
+  to be on demand. Today that choice follows the topic's group, so it is a decision for Mo.
 
 ## How it plugs into the player
 

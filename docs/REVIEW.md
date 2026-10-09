@@ -5469,3 +5469,22 @@ For a native speaker (least sure first)
 - Hoarse voice: گرفتگی آواز / د غږ کېناستل. Groin: کشالهٔ ران / د ورون بېخ. Bruises: کبودی / شنه داغونه.
 - "Hepatitis B for life": هپاتیت ب دایمی / تل پاتې هیپاتیت ب. "Full check-up packages": بستهٔ معاینات کامل.
 - Search phrases marked "?" (5 new).
+
+## Mo's illustration delivery in the picture-step player (9 Oct 2026)
+
+What changed:
+- 32 new picture-step sets (`anim/steps/<name>.json`, `img/steps/<name>/`) from `illustrations-2026-10-09/`, each with scenes that follow the topic page's own narration ids (no new strings, nothing to record). The CPR sets (cpr-newborn, cpr-child, cpr-adult) use `anim.cpr-<age>.s1`–`s7`. **None is live** (not in `STEPS`), so they are not in the APK and not precached.
+- cpr-baby (live): scene 4 (5 breaths) now uses Mo's original CPR step 2 picture (mouth over mouth and nose, chin lifted), with a breath counter and the chest lighting up. The approved scenes s3, s5 and s6 are unchanged.
+- Symptom tiles: pictures 34 (eyes), 35 (teeth) and 36 (back) through `tools/symptom_pics.py` (`img/symptoms/`, 79 kB together, precached and in the APK).
+- `tools/steps_images.py`: `--px` (encode smaller, keep 960x720 coordinates), `--patch` (a moving whole picture's down version as a small patch; shared backgrounds with a `-fix` patch), duplicate files written once. All sets are packed at 800x600, about 70–210 kB a set.
+- `docs/STEPS_PLAYER.md`: the delivery, how each set maps to narration, how to go live, the APK budget.
+
+Size (MB = 1,000,000 bytes): the release APK is 8.60 MB; this change adds 0.12 MB (about 8.72 MB). If all 24 new Emergency/CPR sets went live they would add 3.03 MB (about 11.75 MB). Under 10 MB, in life-saving order: cpr-adult, cpr-child, cpr-newborn, choking-baby, choking-adult, bleeding-press, recovery-position, drowning-rescue (about 9.91 MB). The rest would need to be on demand; that is Mo's call.
+
+Held: bleeding-tourniquet ("held: Mo's tourniquet call pending").
+
+Not used, they look medically wrong: cpr-child frame 4 (hand on the upper chest), muac frame 1 (the right arm), drowning-rescue frame 4 (the whole body turned; the app says the head), breastfeed-attach frames 2 and 3 (hard-to-read latch diagrams).
+
+For Mo's check (also in each JSON's `_check` and in the gallery): choking-baby frames 2, 4 and 5; cpr-child push arm angle and chin-lift fingers; recovery-position order (flag F2); spine-hold frames 2–3 (falling wall); splint-sling and snake-bite ties (flag F4); electric-stick frame 2 is the alternative branch; glucometer frame 2 (tip of the finger, not the side); thermometer frame 2; newborn-warm frame 3 (father skin to skin, the app says mother).
+
+Demo: `/mnt/project-files/samangan-red-book/previews/animations-2026-10-09/index.html` (one file, 5.4 MB, every set playable in the app's player, fa/ps/en, light/dark).

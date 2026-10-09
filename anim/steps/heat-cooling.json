@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "id": "heat-stroke",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "approved": "",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/heat-cooling), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "aeccb293",
+     "kb": 29.7
+    }
+   ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "2-bg.webp",
+     "v": "5cc924af",
+     "kb": 37.3
+    },
+    {
+     "id": "body",
+     "src": "2-body.webp",
+     "v": "e979f884",
+     "kb": 14.0,
+     "box": [
+      158,
+      173,
+      691,
+      343
+     ]
+    },
+    {
+     "id": "arms-up",
+     "src": "2-arms-up.webp",
+     "v": "ea260911",
+     "kb": 11.5,
+     "box": [
+      218,
+      176,
+      600,
+      300
+     ]
+    },
+    {
+     "id": "arms-down",
+     "src": "2-arms-down.webp",
+     "v": "17f9017a",
+     "kb": 11.7,
+     "box": [
+      218,
+      250,
+      600,
+      227
+     ]
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "3-full.webp",
+     "v": "c57e1856",
+     "kb": 33.5
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "heat-stroke.shade",
+   "frame": "1",
+   "ms": 7000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 288,
+     "y": 320,
+     "at": 1200,
+     "r": 60
+    }
+   ]
+  },
+  {
+   "id": "heat-stroke.cool",
+   "frame": "2",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "motions": [
+    {
+     "id": "cool",
+     "type": "swap",
+     "frame": "2",
+     "layer": "arms-down",
+     "under": "arms-up",
+     "at": 1000,
+     "rate": 40
+    },
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 6000,
+     "ms": 900
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 408,
+     "y": 320,
+     "at": 600,
+     "r": 40,
+     "until": 3000
+    },
+    {
+     "type": "ring",
+     "x": 240,
+     "y": 384,
+     "at": 7000,
+     "r": 55
+    }
+   ]
+  }
+ ]
+}
