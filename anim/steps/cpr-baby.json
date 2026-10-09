@@ -5,7 +5,6 @@
  "h": 720,
  "adult": true,
  "approved": "2026-10-07, Mo (demo version)",
- "offline": "precache",
  "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2, s4 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). Coordinates are in the 960x720 picture.",
  "poster": 4,
  "frames": {

@@ -158,10 +158,120 @@ function injectCss(id, css) {
   const s = document.createElement('style'); s.id = id; s.textContent = css; document.head.appendChild(s);
 }
 
-export async function loadAnimation(name, plain, noSteps) {
+// ---------- where picture-step sets live (Mo, 9 Oct 2026; docs/STEPS_PLAYER.md "Where the pictures live") ----------
+// tools/build.py lists every live picture-step set in book.steps and chooses where it lives from its group:
+// "precache" (Emergency and CPR) sets are inside the APK and precached from the first open; "on-demand" sets are not.
+// An on-demand set downloads the first time a page shows it (automatically on Wi-Fi only, like the voice packs; when
+// the person opens the animation itself, on any connection), one file at a time into the cache below. It plays only
+// when every one of its files is on the phone (all or nothing); until then the SVG version plays at once, so nothing
+// ever waits for the network. A failed or cut-off download is tried again quietly the next time. Inside the Android
+// app the files come from the website (config.appUrl), as the narration does. The app calls stepsSetup(book.steps).
+const SET_CACHE = 'fhb-steps-v1';
+const SETS = { info: {}, base: new URL('../', import.meta.url).href, busy: {}, ready: {}, have: {}, fns: [], swept: false };
+const onDemand = (name) => { const e = SETS.info[name]; return e && e.offline === 'on-demand' && e.files && e.files.length ? e : null; };
+const setUrl = (f) => new URL(f, SETS.base).href;
+const canCache = () => typeof caches !== 'undefined' && !!caches.open;
+// data saver, 2G or mobile data (the same test as the voice packs in js/app.js)
+const slowNet = () => { const c = navigator.connection; return !!(c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || '') || /^(cellular|wimax|bluetooth)$/.test(c.type || ''))); };
+
+export function stepsSetup(info, base) {
+  SETS.info = info && typeof info === 'object' ? info : {};
+  if (base) SETS.base = new URL(base, location.href).href;
+  SETS.ready = {}; SETS.have = {};
+  if (!canCache()) return;
+  Object.keys(SETS.info).forEach((n) => { if (onDemand(n)) haveSet(n); });
+  if (!SETS.swept) { SETS.swept = true; setTimeout(sweepSets, 8000); }
+}
+// true when the animation can play its picture steps now (a precache set, or an on-demand set all on the phone)
+export const stepsHave = (name) => !onDemand(name) || !!SETS.have[name];
+// fn(name) runs when an on-demand set has finished downloading (the app swaps its posters in)
+export function onStepsReady(fn) { SETS.fns.push(fn); }
+// a page shows this animation: download its set if it is on-demand and not on the phone yet (Wi-Fi only)
+export function prefetchSteps(name) { getSet(String(name).replace(/^anim\./, ''), 'page'); }
+
+function haveSet(name) {
+  const e = onDemand(name);
+  if (!e || !canCache()) return Promise.resolve(false);
+  return caches.open(SET_CACHE).then((c) => Promise.all(e.files.map((f) => c.match(setUrl(f)))))
+    .then((rs) => { const ok = rs.every((r) => !!r); if (ok) SETS.have[name] = true; return ok; }, () => false);
+}
+// the playable set from the phone's cache (pictures as blob: URLs, so it plays with no network and no service
+// worker), or null when any file is missing
+function readySet(name) {
+  const e = onDemand(name);
+  if (!e || !canCache()) return Promise.resolve(null);
+  if (SETS.ready[name]) return SETS.ready[name];
+  const files = e.files;
+  const p = caches.open(SET_CACHE).then((c) => Promise.all(files.map((f) => c.match(setUrl(f))))).then((rs) => {
+    if (rs.some((r) => !r)) return null; // never part of a set
+    return Promise.all([rs[0].json()].concat(rs.slice(1).map((r) => r.blob()))).then((parts) => {
+      const srcs = {};
+      files.slice(1).forEach((f, i) => { srcs[f] = URL.createObjectURL(parts[i + 1]); });
+      return import('./steps.js').then((m) => m.build(name, parts[0], srcs));
+    });
+  }).catch(() => null).then((s) => {
+    if (s) SETS.have[name] = true;
+    else if (SETS.ready[name] === p) delete SETS.ready[name];
+    return s;
+  });
+  SETS.ready[name] = p;
+  return p;
+}
+// why: 'page' (a page shows the animation: Wi-Fi only) or 'open' (the person opened it: any connection)
+function getSet(name, why) {
+  const e = onDemand(name);
+  if (!e || SETS.have[name] || SETS.busy[name] || !canCache() || navigator.onLine === false) return;
+  if (why !== 'open' && slowNet()) return;
+  SETS.busy[name] = true;
+  downloadSet(name, e.files).then(() => true, () => false).then((ok) => {
+    SETS.busy[name] = false;
+    if (ok) readySet(name).then((s) => { if (s) SETS.fns.forEach((fn) => { try { fn(name); } catch (er) {} }); });
+  });
+}
+async function downloadSet(name, files) {
+  const c = await caches.open(SET_CACHE);
+  for (let i = 0; i < files.length; i++) { // one at a time, gentle on a slow line; files kept from a cut-off try stay
+    const u = setUrl(files[i]);
+    if (await c.match(u)) continue;
+    const ac = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const t = setTimeout(() => { if (ac) ac.abort(); }, 60000); // a stalled line: give up, try again next time
+    try {
+      const r = await fetch(u, ac ? { signal: ac.signal } : {});
+      if (!r.ok || r.status !== 200) throw new Error('steps ' + r.status + ' ' + u);
+      await c.put(u, r);
+    } finally { clearTimeout(t); }
+  }
+  await dropOldFiles(c, name);
+}
+// the files of an older version of a set (another ?v=) leave the phone once the new one is complete
+async function dropOldFiles(c, name) {
+  const e = onDemand(name); if (!e) return;
+  const keep = {}; e.files.forEach((f) => { keep[setUrl(f)] = 1; });
+  const json = setUrl('anim/steps/' + name + '.json'), dir = setUrl(e.dir || 'img/steps/' + name + '/');
+  const keys = await c.keys();
+  for (let i = 0; i < keys.length; i++) { const u = keys[i].url; if (!keep[u] && (u.split('?')[0] === json || u.indexOf(dir) === 0)) await c.delete(keys[i]); }
+}
+// once after the start: files of sets that are no longer on-demand (or no longer in the book) leave the phone
+function sweepSets() {
+  if (!canCache() || !Object.keys(SETS.info).length || Object.keys(SETS.busy).some((n) => SETS.busy[n])) return;
+  caches.open(SET_CACHE).then(async (c) => {
+    const keep = {};
+    Object.keys(SETS.info).forEach((n) => { const e = onDemand(n); if (e) e.files.forEach((f) => { keep[setUrl(f)] = 1; }); });
+    const keys = await c.keys();
+    for (let i = 0; i < keys.length; i++) if (!keep[keys[i].url]) await c.delete(keys[i]);
+  }).catch(() => {});
+}
+
+// why: 'page' (a poster) or 'open' (the player): see getSet
+export async function loadAnimation(name, plain, noSteps, why) {
   name = String(name).replace(/^anim\./, '');
   if (!/^[a-z0-9-]+$/.test(name)) throw new Error('bad animation id ' + name);
-  if (!noSteps && STEPS.includes(name)) {
+  if (!noSteps && STEPS.includes(name) && onDemand(name)) {
+    // on-demand: only a set that is all on the phone plays; otherwise its download starts and the SVG version plays now
+    const s = await readySet(name);
+    if (s) { injectCss('anim-css', CSS); return s; }
+    getSet(name, why || 'page');
+  } else if (!noSteps && STEPS.includes(name)) {
     // a picture-step version; if its data is missing or broken, the cine or SVG version plays
     if (!cache.has('steps:' + name)) cache.set('steps:' + name, import('./steps.js').then((m) => m.loadSteps(name)).catch(() => null));
     const s = await cache.get('steps:' + name);
@@ -204,7 +314,7 @@ function camStyle(d, sc) {
 }
 
 export async function mountAnimation(el, name, opts = {}) {
-  const d = await loadAnimation(name, opts.cine === false, opts.steps === false);
+  const d = await loadAnimation(name, opts.cine === false, opts.steps === false, 'open');
   const lg = opts.lang || 'fa';
   const rtl = lg !== 'en';
   const reduce = () => !!opts.still || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);

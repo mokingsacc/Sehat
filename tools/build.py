@@ -317,19 +317,25 @@ for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js
 # explicitly because these globs do not recurse). anim/*-3d.js (an earlier plan) is still left out.
 pre = [p for p in pre if not p.startswith("js/sw") and not p.endswith("-3d.js")]
 # picture-step animations (js/steps.js, docs/STEPS_PLAYER.md): only live ones (STEPS in js/anim.js, approved by Mo).
-# Their JSON is always precached; their pictures too unless the JSON says "offline": "pack" (then the service worker
-# keeps each picture the first time it is shown). CPR must work offline at once, so CPR uses the default (precache).
+# Where their pictures live is chosen from the animation's group, never by hand (tools/anims.py, Mo 9 Oct 2026):
+# - "precache": the Emergency and CPR animations (Emergency section, Emergency cards, CPR / choking / newborn pages).
+#   JSON and pictures are precached and inside the APK, so they work the first time, with no network.
+# - "on-demand": every other set. Not precached and not in the APK (android/sync-web.sh reads book.steps): js/anim.js
+#   downloads it the first time its page is opened online (all files or none), keeps it in the phone's "fhb-steps-v1"
+#   cache, and plays the SVG version until then.
+# book.steps tells the app which is which, with the files (?v= = content hash, so an update downloads again).
+steps_em, book["steps"] = ANIM.emergency_anims(), {}
 for name in ANIM.steps_live():
     jp = f"anim/steps/{name}.json"
     if not exists(jp): print("WARNING", name, "is in STEPS (js/anim.js) but", jp, "is missing"); continue
-    pre.append(jp)
-    sd = load(J(jp))
-    if sd.get("offline") == "pack": continue
-    d = (sd.get("dir") or f"img/steps/{name}/").rstrip("/")
-    for fr in (sd.get("frames") or {}).values():
-        for L in (fr.get("layers") if isinstance(fr, dict) else fr) or []:
-            f = f"{d}/{L['src']}"
-            if exists(f) and f not in pre: pre.append(f)
+    js, pics, folder = ANIM.steps_files(name)
+    pics = [f for f in pics if exists(f.split("?")[0])]
+    mode = ANIM.steps_offline(name, steps_em)
+    nbytes = sum(os.path.getsize(J(f.split("?")[0])) for f in [js] + pics)
+    book["steps"][name] = {"offline": mode, "dir": folder + "/", "files": [js] + pics, "bytes": nbytes, "fallback": ANIM.has_fallback(name)}
+    if mode == "precache":
+        for f in [jp] + [f.split("?")[0] for f in pics]:
+            if f not in pre: pre.append(f)
 
 # version = hash of all precached content (not of the build time: rebuilding the same content keeps the same version,
 # so phones do not download an "update" that changes nothing)
@@ -399,3 +405,19 @@ for slot in audio:
 print("  packs (clips each voice needs): " + ", ".join(f"{p} {len(pack_ids[p])}" for p in PACKS) + f"; Emergency and CPR first: {len(first_ids)} clips, "
       + ", ".join(f"{sl} {first_size[sl][0] / 1e6:.1f} MB" for sl in first_size) + "; in the Android app: " + " ".join(book["bundle"]["slots"]))
 if missing_icons: print("missing icons (shown as dots):", " ".join(missing_icons))
+# pictures: what the APK carries (img/ as android/sync-web.sh copies it: no img/_preview, no on-demand or not-live
+# picture-step folders) and what downloads on demand. The APK should stay about 11 MB (Mo, 9 Oct 2026).
+def tree_bytes(d):
+    return sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(J(d)) for f in fs if not f.startswith(".")) if os.path.isdir(J(d)) else 0
+keep_dirs = {e["dir"].rstrip("/") for e in book["steps"].values() if e["offline"] == "precache"}
+step_dirs = {os.path.relpath(p, ROOT) for p in glob.glob(J("img/steps/*")) if os.path.isdir(p)}
+apk_pics = tree_bytes("img") - tree_bytes("img/_preview") - sum(tree_bytes(d) for d in step_dirs - keep_dirs)
+sym = sum(os.path.getsize(p) for p in glob.glob(J("img/symptoms/*.webp")))
+pre_sets = {n: e for n, e in book["steps"].items() if e["offline"] == "precache"}
+od_sets = {n: e for n, e in book["steps"].items() if e["offline"] == "on-demand"}
+left_out = sum(tree_bytes(d) for d in step_dirs - {e["dir"].rstrip("/") for e in book["steps"].values()})
+print(f"  pictures in the APK (and precached): {apk_pics / 1e6:.2f} MB, of which symptom tiles {sym / 1e3:.0f} KB "
+      f"({len(glob.glob(J('img/symptoms/*.webp')))} files) and Emergency and CPR picture steps {sum(e['bytes'] for e in pre_sets.values()) / 1e3:.0f} KB "
+      f"({' '.join(sorted(pre_sets)) or 'none'}); on demand (not in the APK): {sum(e['bytes'] for e in od_sets.values()) / 1e3:.0f} KB "
+      f"in {len(od_sets)} sets{(' (' + ' '.join(sorted(od_sets)) + ')') if od_sets else ''}"
+      + (f"; not live, left out: {left_out / 1e3:.0f} KB" if left_out else ""))

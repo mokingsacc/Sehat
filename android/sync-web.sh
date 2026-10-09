@@ -19,6 +19,26 @@ if [ -f "$WEB/content/who-growth.json" ]; then cp "$WEB/content/who-growth.json"
 for d in css js fonts img anim; do if [ -d "$WEB/$d" ]; then cp -R "$WEB/$d" "$OUT/$d"; fi; done
 rm -rf "$OUT/img/_preview" "$OUT/js/sw.template.js" "$OUT/anim/demo.html"
 find "$OUT" -name '*.cjs' -delete   # local screenshot helpers (anim/cine/shots.cjs), not part of the app
+# Picture-step sets: only the Emergency and CPR ones ("precache" in book.steps, chosen by tools/build.py) go in the APK.
+# Every other set (on-demand, or not live yet) stays on the website: the app downloads it the first time its page is
+# opened and plays the SVG version until then (js/anim.js, docs/STEPS_PLAYER.md). Keeps the APK about 11 MB.
+python3 - "$WEB" "$OUT" <<'PY'
+import glob, json, os, shutil, sys
+web, out = sys.argv[1], sys.argv[2]
+steps = json.load(open(os.path.join(web, "content/book.json"), encoding="utf-8")).get("steps") or {}
+keep = {n for n, e in steps.items() if e.get("offline") == "precache"}
+keep_dirs = {os.path.normpath(steps[n].get("dir") or f"img/steps/{n}") for n in keep}
+gone, size = [], 0
+for d in glob.glob(os.path.join(out, "img/steps/*")):
+    rel = os.path.normpath(os.path.relpath(d, out))
+    if os.path.isdir(d) and rel not in keep_dirs:
+        size += sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(d) for f in fs); shutil.rmtree(d); gone.append(rel)
+for f in glob.glob(os.path.join(out, "anim/steps/*")):
+    if not (f.endswith(".json") and os.path.basename(f)[:-5] in keep):
+        if os.path.isdir(f): shutil.rmtree(f)
+        else: size += os.path.getsize(f); os.remove(f)
+print(f"sync-web: picture steps in the APK: {' '.join(sorted(keep)) or 'none'}; left on the website: {len(gone)} folders ({size / 1e3:.0f} KB)")
+PY
 # Narration: only the Emergency and CPR clips in the woman's voice of Dari and Pashto (book.bundle, listed by
 # tools/build.py; about 3 MB each), so a phone that gets the app by Bluetooth and never goes online still hears
 # emergencies. Everything else (audio/ is about 260 MB for four voices) comes from the website (config.appUrl) for the

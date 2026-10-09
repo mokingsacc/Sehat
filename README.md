@@ -28,6 +28,22 @@ Create an empty repository, push this folder, then Settings → Pages → Deploy
 - Size: clips are MP3, mono, 16 kHz, 24 kbps (plays on every iPhone and Android, old WebViews too; Opus would save only about a quarter and needs re-encoding). One voice of one language is about 65 MB for all 2,468 clips (urgent pack about 26 MB, of which Emergency and CPR about 3 MB); `tools/build.py` prints the sizes. The website holds all four voices (about 260 MB, well under the 1 GB Pages limit); `tts-manifest.json` and `tts-usage.json` are not published.
 - The Android app carries only the Emergency and CPR clips in the woman's voice of Dari and Pashto (`book.bundle` from `tools/build.py`, copied by `android/sync-web.sh`, about 6 MB), so it speaks emergencies with no internet. Everything else it downloads from the website (`appUrl`) the same way as the website does.
 
+## Pictures and the APK size
+The APK should stay about **11 MB** (8.5 MB on 9 Oct 2026: about 6.7 MB of it is the bundled Emergency and CPR narration).
+Where pictures live (Mo, 9 Oct 2026):
+- **Inside the APK and precached on the website from the first open:** every picture in `img/` (icons, topic pictures,
+  the symptom tiles `img/symptoms/*.webp` from `tools/symptom_pics.py`, about 25 KB each) and the picture-step sets of
+  the **Emergency and CPR animations**: those used by the Emergency section, the Emergency cards in `config.json`, and
+  the CPR, choking and newborn pages.
+- **Downloaded when first needed (not in the APK, not precached):** every other picture-step set. It downloads the
+  first time its page is opened online (by itself on Wi-Fi only, like the voice packs; on mobile data when the person
+  opens the animation), whole or not at all, and is then kept on the phone. Until then the animation's SVG version
+  plays. Inside the Android app it comes from the website (`appUrl`).
+- Nobody chooses this by hand: `tools/build.py` decides from the animation's group (`tools/anims.py`), writes it to
+  `book.steps` and the precache list, and `android/sync-web.sh` leaves the other sets out of the APK.
+  `tools/build.py` prints a line with the APK picture total and the on-demand total; `tools/validate.py` warns when the
+  APK's pictures pass 3 MB. Details: `docs/STEPS_PLAYER.md` ("Where the pictures live").
+
 ## Computer voices (placeholders)
 ```
 export GEMINI_API_KEY=...

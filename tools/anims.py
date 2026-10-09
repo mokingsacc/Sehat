@@ -105,3 +105,78 @@ def block_ids(block):
     if pick and g is not None:
         return [f"anim.{a}.title", f"anim.{a}.ask"] + [f"anim.{v}.label" for v in g] + needed_ids(pick)
     return needed_ids(a)
+
+
+# ---------- where the pictures of a picture-step animation live (Mo, 9 Oct 2026) ----------
+# Emergency and CPR sets are inside the APK and precached on the website from the first open; every other set is
+# "on-demand": it downloads the first time its page is opened (online), is then kept on the phone, and the
+# animation's fallback (the SVG version, or the page's own text steps) shows until then. Chosen here from the
+# animation's group, never by hand: tools/build.py writes it into book.json (book.steps) and the precache list,
+# android/sync-web.sh leaves on-demand sets out of the APK, tools/validate.py checks it. docs/STEPS_PLAYER.md.
+SRC = os.path.join(ROOT, "content/src")
+
+
+def _load(p):
+    try:
+        return json.load(open(p, encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def emergency_topics():
+    """Topics of the Emergency group: the Emergency section, every Emergency card's topics, CPR page and film
+    (config.json "emergency"), and every CPR, choking and newborn topic."""
+    sections, config = _load(os.path.join(SRC, "sections.json")), _load(os.path.join(SRC, "config.json"))
+    out = set(sections.get("emergency") or [])
+    for card in config.get("emergency") or []:
+        out.update(card.get("topics") or [])
+        if card.get("cpr"): out.add(card["cpr"])
+    every = {os.path.basename(p)[:-5] for p in glob.glob(os.path.join(SRC, "topics", "*.json"))}
+    out.update(t for t in every if re.search(r"^(cpr|choking)\b|newborn", t))
+    return out
+
+
+def _anim_blocks(x):
+    """Every "anim" block anywhere inside a topic's JSON."""
+    if isinstance(x, dict):
+        if x.get("type") == "anim" and x.get("anim"): yield x
+        for v in x.values(): yield from _anim_blocks(v)
+    elif isinstance(x, list):
+        for v in x: yield from _anim_blocks(v)
+
+
+def emergency_anims():
+    """Animations the Emergency group plays: the anim blocks of its topics (a group such as cpr brings all its
+    variants) and the Emergency cards' "watch how" films."""
+    out = set()
+    for t in emergency_topics():
+        for b in _anim_blocks(_load(os.path.join(SRC, "topics", t + ".json"))): out.update(claims(b))
+    for card in _load(os.path.join(SRC, "config.json")).get("emergency") or []:
+        if card.get("anim"): out.update(claims({"anim": card["anim"]}))
+    return out
+
+
+def steps_offline(name, em=None):
+    """"precache" (inside the APK, precached from the first open) or "on-demand" (downloaded when its page opens)."""
+    return "precache" if name in (emergency_anims() if em is None else em) else "on-demand"
+
+
+def steps_files(name):
+    """(json, [pictures]) of a picture-step set, as paths from the app root with the ?v= the player asks for
+    (the JSON's own hash; each picture's "v")."""
+    import hashlib
+    p = steps_path(name)
+    raw = open(p, "rb").read()
+    d = json.loads(raw)
+    folder = (d.get("dir") or f"img/steps/{name}/").rstrip("/")
+    pics = []
+    for fr in (d.get("frames") or {}).values():
+        for L in (fr.get("layers") if isinstance(fr, dict) else fr) or []:
+            f = f"{folder}/{L['src']}" + (f"?v={L['v']}" if L.get("v") else "")
+            if f not in pics: pics.append(f)
+    return f"anim/steps/{name}.json?v={hashlib.sha1(raw).hexdigest()[:8]}", pics, folder
+
+
+def has_fallback(name):
+    """An SVG version (anim/<name>.js) that plays while an on-demand set is not on the phone."""
+    return os.path.exists(os.path.join(ROOT, "anim", name + ".js"))

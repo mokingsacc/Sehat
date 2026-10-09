@@ -8,8 +8,11 @@ phones. It uses no canvas, no video and no libraries, and it works offline.
 - Player: `js/steps.js`, about 30 KB raw. It loads only when a picture-step animation opens.
 - One animation: `anim/steps/<name>.json` (the scenes) and `img/steps/<name>/*.webp` (the pictures).
 - Pictures in: `tools/steps_images.py` (PNG layers to small WebP layers, and the JSON's frames).
-- Tests: `node tools/test_steps.mjs` (arithmetic) and `tools/test_steps_browser.mjs` (Playwright: fa / ps / en,
-  320 and 412 px, RTL, digits, reduced motion, fps with the CPU slowed 4x).
+- Tests: `node tools/test_steps.mjs` (arithmetic), `tools/test_steps_browser.mjs` (Playwright: fa / ps / en,
+  320 and 412 px, RTL, digits, reduced motion, fps with the CPU slowed 4x) and `tools/test_ondemand.mjs` (where the
+  pictures live: precache or on-demand, offline before the download, cut-off downloads).
+- Where the pictures live (in the APK or downloaded when first needed) is chosen automatically from the animation's
+  group: see "Where the pictures live" below.
 
 **Nothing goes live until Mo approves the pictures.** A picture-step animation plays in the app only when its
 name is in `STEPS` in `js/anim.js` **and** its JSON has an `"approved"` note (tools/validate.py refuses a live
@@ -89,7 +92,8 @@ working. A picture-step version may use some of the SVG version's ids. For examp
 5. **Mo approves** the pictures and the motion (send him the strip `/tmp/shots/<name>-strip-fa.png`). Add
    `"approved": "2026-10-09, Mo (message ...)"` to the JSON.
 6. **Go live:** add the name to `STEPS` in `js/anim.js`, then run `python3 tools/validate.py` (0 errors) and
-   `python3 tools/build.py`. The JSON and its pictures are now precached and work offline. The topic's existing
+   `python3 tools/build.py`. An Emergency or CPR animation's JSON and pictures are now precached and inside the APK;
+   any other animation's set downloads the first time its page is opened ("Where the pictures live"). The topic's existing
    `anim` block (for example `cpr` with `pick: cpr-baby`) plays the new version; nothing else changes. Give every
    scene id narration in `content/src/anims.json`.
 
@@ -102,7 +106,6 @@ working. A picture-step version may use some of the SVG version's ids. For examp
  "w": 960, "h": 720,
  "adult": true,
  "approved": "",
- "offline": "precache",
  "poster": 1,
  "frames": {
   "baby":   {"layers": [{"id": "bg", "src": "thumbs-bg.webp", "v": "2431f830"}]},
@@ -118,7 +121,8 @@ working. A picture-step version may use some of the SVG version's ids. For examp
 - `id`: the narration prefix (`anim.<name>.title` is the title). `w`, `h`: the picture size all coordinates refer to.
 - `adult`: the teal look (all CPR). `approved`: Mo's approval note, needed to go live. `poster`: the scene used for
   posters and picker cards.
-- `offline`: `precache` (default) or `pack` (pictures kept by the phone once shown; see "Sizes, offline and speed").
+- There is no `offline` field any more: where the pictures live is chosen by `tools/build.py` from the animation's
+  group ("Where the pictures live"); `tools/validate.py` warns that a hand-set `offline` is ignored.
 - **frames**: a frame is a stack of layers, bottom first. `box` = `[x, y, w, h]` where a trimmed layer sits (the
   pipeline writes it; without it the layer covers the whole picture). `v` is the picture's hash (cache-busting).
   Frames may share pictures; `baby` above is the background alone, so the hands can be faded in.
@@ -195,18 +199,58 @@ frame of scene `poster`, without counters and labels.
 - **Mo's first frame** (baby, two thumbs; 3 layers, 1600x1200): 43 + 13 + 17 = **73 KB** at 960 px (the background
   is opaque WebP; the trimmed body and arms layers have alpha). Expect 60 to 110 KB a frame, so roughly 0.3 to 0.6 MB
   for each CPR age at 4 to 6 frames, and about 1.5 to 2 MB for all four ages. Today the precached app is about 4.2 MB.
-- **Offline: precache CPR.** CPR must work the first time, without a network, in an emergency, so a live CPR
-  animation's JSON and pictures are precached (`tools/build.py`, the default `"offline": "precache"`); this is the same
-  as the SVG files today. Other, non-urgent picture-step animations can use `"offline": "pack"`. The service worker
-  then keeps each picture in `fhb-steps-v1` the first time it is shown, and they could later join the matching audio
-  pack's download (`startDownloads()` in `js/app.js`). Audio stays on demand because it is many megabytes per voice.
-  The pictures are one set for every language and voice, and CPR's set is small, so precaching it is the better
-  trade.
+- **Where they live:** see the next section. In short, Emergency and CPR sets are in the APK and precached; every
+  other set downloads the first time its page is opened.
 - **Speed:** the demo runs at 60 fps at 320 and 412 px with the CPU slowed 4 times (Playwright's Chromium,
   `tools/test_steps_browser.mjs`). Each moving layer and overlay is its own composited element. Counters change their
   text a few times a second, and nothing else touches the page while a scene plays.
 - **Old phones (Chrome 69):** the player does not use `??`, `?.`, CSS `inset`, `aspect-ratio`, `Animation.finished` or
   `getAnimations()`. Web Animations with `startTime`, `pause` and `currentTime` have been in Chrome since version 39.
+
+## Where the pictures live (Mo, 9 Oct 2026)
+
+The APK should stay about 11 MB (8.5 MB on 9 Oct 2026). So pictures are split by what they are for, automatically:
+
+| | what | where |
+| --- | --- | --- |
+| **precache** | the symptom tiles (`img/symptoms/`), and the picture-step sets of the **Emergency and CPR animations** | inside the APK; precached by the website's service worker at the first open; work offline at once |
+| **on-demand** | every other picture-step set | not in the APK, not precached: downloaded the first time its page is opened, then kept on the phone |
+
+**Which animations are "Emergency and CPR"** (`emergency_anims()` in `tools/anims.py`): every animation an `anim`
+block can play (a group such as `cpr` brings all its ages) on the topics of the Emergency section
+(`sections.json` `emergency`), on the topics, CPR pages and films of the Emergency cards (`config.json` `emergency`),
+and on every CPR, choking and newborn topic. A new animation on one of those pages is precached by itself; a new one
+anywhere else is on-demand by itself. Nobody sets this by hand (a leftover `"offline"` in a JSON is ignored, with a
+warning). Today: `cpr` and its four ages, and `nappies` (the newborn page) are precached; `cpr-baby` is the only live
+picture-step set.
+
+**How** (nothing to do by hand):
+- `tools/build.py` writes `book.steps`: for each live set, `offline` (`precache` or `on-demand`), `files` (the JSON and
+  pictures, each with `?v=` = its content hash), `bytes` and `fallback` (whether an SVG version `anim/<name>.js`
+  exists). Only precache sets go into the service worker's precache list. It prints a line such as
+  `pictures in the APK (and precached): 0.95 MB, of which symptom tiles ... ; on demand (not in the APK): ...`.
+- `android/sync-web.sh` keeps only precache sets in the APK (`img/steps/<name>/`, `anim/steps/<name>.json`).
+- `js/anim.js` (`stepsSetup(book.steps)` from `js/app.js`): an on-demand set plays only when **every one of its files**
+  is in the phone's `fhb-steps-v1` cache; its pictures then play from there as `blob:` URLs, so it needs neither the
+  network nor the service worker. Otherwise the SVG version plays at once (poster and player): nothing waits for the
+  network and no box is ever blank.
+- **When it downloads:** the first time a page shows the animation's poster, by itself on Wi-Fi only (data saver,
+  2G and mobile data: not by itself, the same rule as the voice packs, `slowNet()`); and on any connection when the
+  person opens the animation (that first play is the SVG version; the pictures are there next time). One file at a
+  time, each given up after 60 s. Files that arrived stay, so a cut-off download carries on quietly the next time
+  the page opens; a half set never plays. When the set is complete, the posters on the screen cross-fade to the
+  picture-step poster (decoded first, same box). Files of an older version (another `?v=`) are removed once the new
+  version is complete, and files of sets that are no longer on-demand a few seconds after the start.
+- **Inside the Android app** the files come from the website (`config.appUrl`), as the narration does.
+- An on-demand set with **no SVG version** is left off its page until it is downloaded (the page's text steps say
+  the same); `tools/validate.py` warns about it.
+- `tools/validate.py` also checks that `sw.js` precaches no on-demand set and every precache set, that
+  `android/sync-web.sh` leaves on-demand sets out, and warns when the APK's pictures pass 3 MB.
+- Test: `tools/test_ondemand.mjs` (a grey-box on-demand set on the hygiene page: not precached, not in the APK, SVG
+  offline before the download, a cut-off download never plays, then the poster cross-fades and the picture steps
+  play, offline too; on mobile data only opening the animation downloads it).
+
+Rough sizes: a symptom tile is about 25 KB (36 tiles: about 0.9 MB); a CPR age is 0.3 to 0.6 MB of picture steps.
 
 ## Demo
 
@@ -222,6 +266,7 @@ opens a language, animation, scene, still mode and the fps meter. In the console
 ```sh
 node tools/test_steps.mjs                                        # arithmetic: camera, timing, beats, digits
 PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers NODE_PATH=$(npm root -g) node tools/test_steps_browser.mjs   # grey boxes
+PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers NODE_PATH=$(npm root -g) node tools/test_ondemand.mjs        # where pictures live
 ```
 
 Without `--root`, the browser test builds its own grey-box animation through `tools/steps_images.py` (no real pictures

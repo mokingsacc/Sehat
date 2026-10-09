@@ -12,6 +12,10 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 - The web app is copied into the APK (`app/src/main/assets/www/`) by `sync-web.sh`, which Gradle runs before every
   build. It copies `index.html`, `manifest.webmanifest`, `sw.js`, `css/`, `js/`, `fonts/`, `img/` (not `img/_preview`),
   `content/book.json` and `content/version.json`. Run `python3 tools/build.py` first, as usual.
+- **Pictures in the APK:** all of `img/` except the picture-step sets that are not Emergency or CPR ("on-demand" in
+  `book.steps`, chosen by `tools/build.py`): those stay on the website and download the first time their page is
+  opened, from `appUrl`; the SVG version plays until then (`docs/STEPS_PLAYER.md`, "Where the pictures live"). This
+  keeps the APK about 11 MB.
 - **Narration in the APK: only Emergency and CPR, woman's voice, Dari and Pashto** (`book.bundle`, listed by
   `tools/build.py` from the same order as the app's downloads; 220 clips, about 6.3 MB), so a phone that gets the app
   by Bluetooth and never goes online still hears emergencies. The app plays these from inside the APK and never

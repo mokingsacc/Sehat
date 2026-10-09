@@ -199,18 +199,21 @@ export async function loadSteps(name) {
   return cache.get(name);
 }
 
-// the object js/anim.js plays (the same shape as a cine version)
-export function build(name, d) {
+// the object js/anim.js plays (the same shape as a cine version).
+// srcs (optional): {"img/steps/<name>/<file>?v=<v>": url}, the pictures of an on-demand set that js/anim.js has
+// on the phone (blob: URLs read from its cache), used instead of the files next to the app.
+export function build(name, d, srcs) {
   const W = d.w, H = d.h;
   if (!W || !H || !d.frames || !d.scenes || !d.scenes.length) throw new Error('steps ' + name + ': needs w, h, frames and scenes');
-  const dir = new URL(d.dir || 'img/steps/' + name + '/', ROOT);
+  const rel = (d.dir || 'img/steps/' + name + '/').replace(/\/*$/, '/');
+  const dir = new URL(rel, ROOT);
   const frames = {};
   Object.keys(d.frames).forEach((f) => {
     const fr = d.frames[f];
-    frames[f] = (fr.layers || fr).map((L) => ({
-      id: L.id, box: L.box || [0, 0, W, H],
-      src: new URL(L.src + (L.v ? '?v=' + L.v : ''), dir).href,
-    }));
+    frames[f] = (fr.layers || fr).map((L) => {
+      const file = L.src + (L.v ? '?v=' + L.v : '');
+      return { id: L.id, box: L.box || [0, 0, W, H], src: (srcs && srcs[rel + file]) || new URL(file, dir).href };
+    });
   });
   const data = { name: name, w: W, h: H, frames: frames, scenes: d.scenes };
   injectCss();

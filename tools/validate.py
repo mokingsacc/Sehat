@@ -551,6 +551,43 @@ def check_steps():
         kb = sum(os.path.getsize(p) for p in glob.glob(os.path.join(pdir, "*.webp"))) / 1024
         if name not in live: print(f"anim/steps/{name}.json: not live (not in STEPS in js/anim.js), {kb:.0f} KB of pictures")
 check_steps()
+# where pictures live (Mo, 9 Oct 2026; docs/STEPS_PLAYER.md): Emergency and CPR picture steps are precached and in the
+# APK, every other set downloads on demand. tools/anims.py chooses from the group; nobody sets it by hand.
+APK_PICTURES_MB = 3.0   # img/ inside the APK; with code (~1 MB) and the bundled narration (~7 MB) the APK stays ~11 MB
+def check_picture_storage():
+    live, em = ANIM.steps_live(), ANIM.emergency_anims()
+    on_demand = [n for n in live if os.path.exists(ANIM.steps_path(n)) and ANIM.steps_offline(n, em) == "on-demand"]
+    for f in sorted(glob.glob(os.path.join(ROOT, "anim/steps/*.json"))):
+        try: d = json.load(open(f, encoding="utf-8"))
+        except Exception: continue
+        if "offline" in d: warn(f, f"\"offline\": {d['offline']!r} is ignored: tools/build.py chooses precache (Emergency and CPR) or on-demand from the animation's group")
+    for n in on_demand:
+        if not ANIM.has_fallback(n): warn(ANIM.steps_path(n), f"on-demand picture steps with no SVG version (anim/{n}.js): the animation is left off its page until the pictures are downloaded")
+    # the generated service worker must not precache an on-demand set (it would be downloaded at the first open)
+    sw = os.path.join(ROOT, "sw.js")
+    if os.path.exists(sw):
+        m = re.search(r"const PRECACHE = (\[.*?\]);", open(sw, encoding="utf-8").read(), re.S)
+        pre = json.loads(m.group(1)) if m else []
+        for n in on_demand:
+            js, pics, folder = ANIM.steps_files(n)
+            bad = [p for p in pre if p == f"anim/steps/{n}.json" or p.startswith(folder + "/")]
+            if bad: err(sw, f"precaches the on-demand set {n} ({len(bad)} files): run python3 tools/build.py")
+        for n in live:
+            if n not in on_demand and os.path.exists(ANIM.steps_path(n)) and f"anim/steps/{n}.json" not in pre:
+                err(sw, f"does not precache the Emergency / CPR set {n}: run python3 tools/build.py")
+    # android/sync-web.sh must leave on-demand sets out of the APK (it reads book.steps)
+    sync = os.path.join(ROOT, "android/sync-web.sh")
+    if os.path.exists(sync) and '"precache"' not in open(sync, encoding="utf-8").read():
+        err(sync, "does not leave on-demand picture steps out of the APK (book.steps \"precache\" check missing)")
+    keep = {(json.load(open(ANIM.steps_path(n), encoding="utf-8")).get("dir") or f"img/steps/{n}").rstrip("/") for n in live if n not in on_demand and os.path.exists(ANIM.steps_path(n))}
+    total = 0
+    for a, dirs, fs in os.walk(os.path.join(ROOT, "img")):
+        rel = os.path.relpath(a, ROOT)
+        if rel.startswith(os.path.join("img", "_preview")) or (rel.startswith(os.path.join("img", "steps") + os.sep) and not any(rel == k or rel.startswith(k + os.sep) for k in keep)): continue
+        total += sum(os.path.getsize(os.path.join(a, f)) for f in fs if not f.startswith("."))
+    if total > APK_PICTURES_MB * 1e6:
+        warn(os.path.join(ROOT, "img"), f"{total / 1e6:.1f} MB of pictures go into the APK (aim: under {APK_PICTURES_MB:.0f} MB, so the APK stays about 11 MB)")
+check_picture_storage()
 # Old Android phones (Chrome/WebView before 80) cannot run ?? or ?. and then the app never opens
 def check_old_phone_js():
     strip = re.compile(r"""//[^\n]*|/\*.*?\*/|'(?:\\.|[^'\\\n])*'|"(?:\\.|[^"\\\n])*"|`(?:\\.|[^`\\])*`""", re.S)

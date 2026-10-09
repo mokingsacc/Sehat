@@ -8,7 +8,7 @@ import { initShare } from './share.js'; // Share Sehat: #/share (the app file on
 import { initFamily } from './family.js'; // family records: #/family (people, vaccines, weight, medicines, doctor's notes, readings)
 import { initNumpad } from './numpad.js'; // the big number pad that says each number
 import * as Stats from './stats.js';
-import { openAnimation, animPoster } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md)
+import { openAnimation, animPoster, stepsSetup, stepsHave, prefetchSteps, onStepsReady } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md, docs/STEPS_PLAYER.md)
 import { applyOverlay, FORMAT as OV_FORMAT } from './overlay.js'; // changes published from the editor (docs/EDITOR_AND_RELEASES.md)
 window.SEHAT_STARTED = true; // index.html shows an "update your browser" message if the app never gets this far
 
@@ -578,7 +578,7 @@ function blockHtml(b, n) {
   if (b.type === 'link') { const h = TL.linkBlock(b); return b.urgent ? h.replace('class="blk link"', 'class="blk link urgent"') : h; } // opens a tool, the home kit or another topic; urgent: a red row to the Health side
   // what the clinic or the hospital does for this problem: a building icon, no number
   if (b.type === 'clinic') return `<div class="blk clinic" data-block="${esc(b.id)}"><div class="pic">${ic(b.icon || 'clinic')}</div><div class="body"><div class="h">${esc(L(b.title))}</div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
-  if (b.type === 'anim') return animBlock(b); // a still picture with a play button: opens the animation player
+  if (b.type === 'anim') return animHidden(b) ? '' : animBlock(b); // a still picture with a play button: opens the animation player
   if (b.type === 'tip') return `<div class="blk tip" data-block="${esc(b.id)}">${ic(b.icon || 'check')}<div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
   if (b.type === 'alert' || b.type === 'dont') {
     const cls = b.type === 'dont' ? 'dont' : b.level === 'soon' ? 'soon' : 'urgent';
@@ -586,7 +586,7 @@ function blockHtml(b, n) {
   }
   return '';
 }
-function blockIds(b) { return b.type === 'alert' || b.type === 'dont' ? [b.id, ...b.items.map((i) => i.id)] : b.type === 'anim' ? [animSay(b)] : [b.id]; }
+function blockIds(b) { return b.type === 'alert' || b.type === 'dont' ? [b.id, ...b.items.map((i) => i.id)] : b.type === 'anim' ? (animHidden(b) ? [] : [animSay(b)]) : [b.id]; }
 
 /* ---------- explainer animations (js/anim.js; anim/<name>.js) ---------- */
 // An "anim" block: a poster (one still scene) with a big play button and the title with a speaker.
@@ -599,13 +599,47 @@ function animBlock(b) {
   const [pa, ps] = POSTER_SCENE[name] || [name, 0];
   return `<div class="blk anim-block" data-block="${esc(sid)}"><button class="poster" data-action="anim" data-anim="${esc(b.anim)}"${b.pick ? ` data-variant="${esc(b.pick)}"` : ''} data-poster="${esc(pa)}" data-scene="${ps}" aria-label="${esc(title)}"><span class="play">${I.play}</span></button><div class="row"><span class="t">${esc(title)}</span>${spk(sid)}</div></div>`;
 }
-// fill the posters on the page with still pictures (after each render; the files load once and stay cached)
+// An on-demand picture-step animation (book.steps, docs/STEPS_PLAYER.md) with no SVG version to show meanwhile is left
+// out of its page until its pictures are on the phone; the page's own steps say the same. Its download starts here.
+function animHidden(b) {
+  const name = b.pick || b.anim, e = S.book.steps && S.book.steps[name];
+  if (!e || e.fallback !== false || stepsHave(name)) return false;
+  prefetchSteps(name); return true;
+}
+// fill the posters on the page with still pictures (after each render; the files load once and stay cached).
+// An on-demand animation shows its SVG poster until its picture steps are on the phone (the poster starts the download).
 function fillPosters() {
   for (const el of $$('[data-poster]:not(.filled)')) {
     el.classList.add('filled');
     animPoster(el.dataset.poster, +el.dataset.scene || 0).then((svg) => { if (el.isConnected) el.insertAdjacentHTML('afterbegin', svg); }).catch(() => {});
   }
 }
+// an on-demand set has just arrived: its posters on this screen change to the picture-step one, decoded first and
+// then cross-faded, so there is never a blank box (the poster's box keeps its size)
+onStepsReady((name) => {
+  for (const el of $$('[data-poster].filled')) {
+    if (el.dataset.poster !== name) continue;
+    animPoster(name, +el.dataset.scene || 0).then((html) => {
+      const box = document.createElement('div'); box.innerHTML = html;
+      const nw = box.firstElementChild; if (!nw) return;
+      const imgs = [...nw.querySelectorAll('img')];
+      const ready = Promise.all(imgs.map((i) => (i.decode ? i.decode().catch(() => {}) : new Promise((r) => { i.onload = i.onerror = r; }))));
+      return Promise.race([ready, new Promise((r) => setTimeout(r, 3000))]).then(() => {
+        if (!el.isConnected) return;
+        const old = [...el.children].filter((x) => !x.classList.contains('play'));
+        el.insertBefore(nw, el.firstChild);
+        if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+        const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        for (const o of old) {
+          if (still) { o.remove(); continue; }
+          o.style.cssText += ';position:absolute;top:0;left:0;width:100%;height:100%;transition:opacity .45s ease-out';
+          requestAnimationFrame(() => requestAnimationFrame(() => { o.style.opacity = '0'; }));
+          setTimeout(() => o.remove(), 600);
+        }
+      });
+    }).catch(() => {});
+  }
+});
 const AN = { ctl: null };
 async function openAnim(name, pick) {
   stopAudio();
@@ -1554,6 +1588,8 @@ async function start() {
   S.shippedBook = JSON.parse(txt); // kept as it came, to lay a newer overlay over it later
   S.shipped = { version: S.book.version, built: S.book.built, config: S.book.config || {} };
   if (contentUrl()) { const ov = await savedOverlay(); if (ov) useOverlay(ov); }
+  // picture-step sets that are not in the app download when first shown; inside the Android app from the website
+  { const site = S.shipped.config.appUrl || ''; stepsSetup(S.book.steps, IN_APK && /^https:\/\//.test(site) ? site : ''); }
   Stats.init({ S, store, T, L, esc, spk, ic, I, top, listenBar, choose, sayRow, stopAudio, render: () => render(), isStandalone, platform, localDay, randId, isPlaying: () => P.on });
   if (!S.kid && S.kids[0]) S.kid = S.kids[0].id;
   if (!store.get('firstOpen', 0)) store.set('firstOpen', Date.now()); // the district question waits a day from here
