@@ -213,3 +213,14 @@ sources. Who is sick (`ages`: baby, child, older, pregnant, after, anyone) is a 
 - `validate.py` (`check_symptoms`) checks all of this; `node tools/test_tiles.cjs [folder]` opens every picture and age
   in fa, ps and en (danger first, a speaker on every sign, a picture on every row, no Home-tab page, no dead end).
 - Typed questions on the screen show the best one or two picture pages first, then pages (no Home-tab pages).
+
+## Addendum: early signs and health checks (2026-10-09)
+- Five Health pages on their own list (`config.lists.checks`, `#/s/checks`, one button on the Health tab): `early-signs`,
+  `women-signs`, `child-signs` (signs chosen for specificity: a duration, age or quality on each item, NICE NG12 and WHO
+  early-diagnosis guidance) and `checks-women`, `checks-men` (one check per step: what to ask for, and when). Research and
+  the reasons for each sign: /mnt/project-files/samangan-red-book/research/screening.md.
+- Tone: "cancer" only in a lead, summary, clinic or hospital block (and a do-not line about paid tests), always with "most
+  are not cancer" or "found early"; never in an alert item or title. "TB first" wherever glands, fever, sweats or weight
+  loss appear. "Free" only for the TB test and vaccines; other tests say "ask the clinic where it is done".
+- `"_notes"` (optional, a list of English lines) on a topic: notes for Mo, such as where each sign comes from and the
+  "Mo's call" defaults used. Like "review", `tools/build.py` leaves it out of the book.

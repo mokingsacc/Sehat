@@ -9,6 +9,7 @@
     "ask",
     "children",
     "adults",
+    "checks",
     "hospital",
     "share",
     "feedback"
@@ -39,6 +40,14 @@
       "icon": "hospital",
       "tab": "health",
       "near": true
+    },
+    "checks": {
+      "title": "checks",
+      "sub": "checksSub",
+      "say": "ui.checks",
+      "image": "checks-women",
+      "icon": "check",
+      "tab": "health"
     },
     "food": {
       "title": "food",

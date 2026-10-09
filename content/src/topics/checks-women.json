@@ -1,0 +1,243 @@
+{
+  "id": "checks-women",
+  "section": "everyone",
+  "title": {
+    "fa": "معاینات صحی زنان، به حسب سن",
+    "ps": "د ښځو روغتیايي معاینې، د عمر له مخې",
+    "en": "Health checks for women, by age"
+  },
+  "summary": {
+    "fa": "کدام معاینات را بخواهید، و در کدام سن.",
+    "ps": "کومې معاینې وغواړئ، او په کوم عمر کې.",
+    "en": "Which checks to ask for, and at what age."
+  },
+  "image": "checks-women",
+  "blocks": [
+    {
+      "id": "checks-women.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اینجا کسی شما را برای معاینه نمی‌خواهد، پس این صفحه می‌گوید کدام معاینات را و چه وقت بخواهید. بیشتر آن‌ها در کلینیک چند دقیقه وقت می‌گیرد.",
+        "ps": "دلته څوک تاسو معاینې ته نه رابولي، نو دا پاڼه وایي چې کومې معاینې او کله وغواړئ. ډېری یې په کلینیک کې څو دقیقې وخت نیسي.",
+        "en": "No one calls you for a check-up here, so this page says which checks to ask for, and when. Most take a few minutes at the clinic."
+      }
+    },
+    {
+      "id": "checks-women.bp",
+      "type": "step",
+      "icon": "bp",
+      "title": {
+        "fa": "از ۱۸ سالگی: فشار خون",
+        "ps": "له ۱۸ کلنۍ: د وینې فشار",
+        "en": "From 18: blood pressure"
+      },
+      "text": {
+        "fa": "فشار خون خود را هر ۲ تا ۳ سال، بعد از ۴۰ سالگی هر سال، و در هر معاینهٔ حاملگی اندازه کنید. اگر کدام وقت بلند بوده، طوری که کلینیک می‌گوید اندازه کنید.",
+        "ps": "خپل د وینې فشار هر ۲ تر ۳ کاله، له ۴۰ کلنۍ وروسته هر کال، او د امیندوارۍ په هره معاینه کې اندازه کړئ. که کله لوړ و، لکه کلینیک چې وایي اندازه یې کړئ.",
+        "en": "Have your blood pressure measured every 2 to 3 years, every year after 40, and at every pregnancy visit. If it was ever high, check it as the clinic says."
+      },
+      "picture": "bp-sit"
+    },
+    {
+      "id": "checks-women.pregnancy",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "در حاملگی: کلینیک معاینه می‌کند",
+        "ps": "په امیندوارۍ کې: کلینیک معاینه کوي",
+        "en": "In pregnancy: the clinic checks"
+      },
+      "text": {
+        "fa": "در هر معاینهٔ حاملگی قابله فشار خون، خون و ادرار شما را معاینه می‌کند و آهن و واکسین تیتانوس می‌دهد. معاینهٔ خون هپاتیت ب را هم بخواهید.",
+        "ps": "د امیندوارۍ په هره معاینه کې قابله ستاسو د وینې فشار، وینه او متیازې معاینه کوي، او اوسپنه او د تیټانوس واکسین درکوي. د هیپاتیت ب د وینې معاینه هم وغواړئ.",
+        "en": "At each pregnancy visit the midwife checks your blood pressure, blood and urine, and gives iron and the tetanus vaccine. Ask for a hepatitis B blood test too."
+      }
+    },
+    {
+      "id": "checks-women.cervix",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "۳۰ تا ۴۹ سالگی: معاینهٔ دهانهٔ رحم",
+        "ps": "۳۰ تر ۴۹ کلنۍ: د رحم د خولې معاینه",
+        "en": "30 to 49: the cervix test"
+      },
+      "text": {
+        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
+        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
+        "en": "Ask for the cervix test once between 30 and 49, or every 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
+      }
+    },
+    {
+      "id": "checks-women.breasts",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "هر ماه: پستان‌های شما",
+        "ps": "هره میاشت: ستاسو تيونه",
+        "en": "Every month: your breasts"
+      },
+      "text": {
+        "fa": "بدانید پستان‌های شما به طور عادی چطور است. از ۴۰ سالگی، اگر ممکن باشد، سالی یک بار از یک کارمند صحی زن بخواهید آن‌ها را معاینه کند. غدهٔ نو: همین هفته کلینیک.",
+        "ps": "پوه شئ چې ستاسو تيونه په عادي ډول څنګه وي. له ۴۰ کلنۍ، که ممکنه وي، په کال کې یو ځل له یوې ښځینه روغتیايي کارکوونکې وغواړئ چې معاینه یې کړي. نوې غوټه: همدا اونۍ کلینیک.",
+        "en": "Know how your breasts normally feel. From 40, ask a female health worker to examine them once a year, if this is offered. A new lump: clinic this week."
+      }
+    },
+    {
+      "id": "checks-women.sugar",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "از ۴۰ سالگی: قند خون",
+        "ps": "له ۴۰ کلنۍ: د وینې شکره",
+        "en": "From 40: blood sugar"
+      },
+      "text": {
+        "fa": "در ۴۰ سالگی قند خون خود را معاینه کنید، و اگر عادی بود هر ۳ سال. اگر چاق هستید، در حاملگی قند داشتید، یا مرض شکر در خانواده است، زودتر.",
+        "ps": "په ۴۰ کلنۍ کې د وینې شکره معاینه کړئ، او که عادي وه هر ۳ کاله. که چاغه یاست، په امیندوارۍ کې مو شکره درلوده، یا په کورنۍ کې د شکرې ناروغي شته، ژر یې وکړئ.",
+        "en": "Ask for a blood sugar test at 40, then every 3 years if it is normal. Earlier if you are overweight, had sugar in pregnancy, or diabetes is in the family."
+      }
+    },
+    {
+      "id": "checks-women.hepatitis",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "یک بار در عمر: معاینهٔ هپاتیت",
+        "ps": "په ژوند کې یو ځل: د هیپاتیت معاینه",
+        "en": "Once in life: hepatitis test"
+      },
+      "text": {
+        "fa": "یک بار معاینهٔ خون برای هپاتیت ب و سی بخواهید، اول اگر حامله هستید یا کسی در خانه هپاتیت دارد. از کلینیک بپرسید کجا می‌شود.",
+        "ps": "یو ځل د هیپاتیت ب او سي د وینې معاینه وغواړئ، لومړی که امیندواره یاست یا په کور کې څوک هیپاتیت لري. له کلینیک وپوښتئ چې چېرې کېږي.",
+        "en": "Ask for one hepatitis B and C blood test, first if you are pregnant or someone in the house has hepatitis. Ask the clinic where it is done."
+      }
+    },
+    {
+      "id": "checks-women.anaemia",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "رنگ‌پریده یا خسته: معاینهٔ کم‌خونی",
+        "ps": "رنګ الوتې یا ستړې: د وینې کمښت معاینه",
+        "en": "Pale or tired: anaemia test"
+      },
+      "text": {
+        "fa": "اگر رنگ‌پریده، خسته یا نفس‌تنگ هستید، یا عادت ماهوار زیاد دارید، معاینهٔ خون نوک انگشت را برای کم‌خونی بخواهید.",
+        "ps": "که رنګ مو الوتی وي، ستړې یا ساه لنډې یاست، یا میاشتنی عادت مو ډېر وي، د وینې کمښت لپاره د ګوتې د سر د وینې معاینه وغواړئ.",
+        "en": "If you are pale, tired or breathless, or have heavy periods, ask for the finger-prick blood test for anaemia."
+      }
+    },
+    {
+      "id": "checks-women.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه چطور است",
+        "ps": "په کلینیک کې: معاینه څنګه وي",
+        "en": "At the clinic: what a check involves"
+      },
+      "text": {
+        "fa": "فشار خون یک دقیقه وقت می‌گیرد؛ قند و کم‌خونی با سوزن نوک انگشت است. معاینهٔ دهانهٔ رحم را یک کارمند صحی زن با سرکه زود انجام می‌دهد؛ نباید درد کند.",
+        "ps": "د وینې فشار یوه دقیقه نیسي؛ شکره او د وینې کمښت د ګوتې په سر یوه ستنه ده. د رحم د خولې معاینه یوه ښځینه روغتیايي کارکوونکې په سرکې ژر کوي؛ باید درد ونه کړي.",
+        "en": "Blood pressure takes a minute; sugar and anaemia are a finger prick. A female health worker does the cervix test, a quick look using vinegar; it should not hurt."
+      }
+    },
+    {
+      "id": "checks-women.dont",
+      "type": "dont",
+      "title": {
+        "fa": "معایناتی که لازم ندارید",
+        "ps": "هغه معاینې چې اړتیا ورته نه لرئ",
+        "en": "Tests you do not need"
+      },
+      "items": [
+        {
+          "id": "checks-women.dont.scans",
+          "icon": "money",
+          "text": {
+            "fa": "برای اسکن تمام بدن یا «بستهٔ معاینات کامل» پول ندهید.",
+            "ps": "د ټول بدن سکن یا د «بشپړو معایناتو بستې» لپاره پیسې مه ورکوئ.",
+            "en": "Do not pay for whole-body scans or 'full check-up' packages."
+          }
+        },
+        {
+          "id": "checks-women.dont.markers",
+          "icon": "money",
+          "text": {
+            "fa": "برای «معاینهٔ خون سرطان» که لابراتوارهای شخصی می‌فروشند پول ندهید.",
+            "ps": "د «سرطان د وینې معاینې» لپاره چې شخصي لابراتوارونه یې پلوري، پیسې مه ورکوئ.",
+            "en": "Do not pay for 'cancer blood tests' sold by private labs."
+          }
+        },
+        {
+          "id": "checks-women.dont.mammogram",
+          "icon": "no",
+          "text": {
+            "fa": "اکسری پستان نکنید، مگر اینکه داکتر برای یک غده آن را بخواهد.",
+            "ps": "د تي اکسرې مه کوئ، مګر دا چې ډاکټر یې د غوټې لپاره وغواړي.",
+            "en": "Do not have a breast X-ray unless a doctor asks, for a lump."
+          }
+        }
+      ]
+    },
+    {
+      "id": "checks-women.signs",
+      "type": "link",
+      "to": "topic/women-signs",
+      "icon": "lump",
+      "title": {
+        "fa": "پستان و رحم: علایمی که معاینه لازم دارد",
+        "ps": "تی او رحم: هغه نښې چې معاینه غواړي",
+        "en": "Breast and womb: signs to check"
+      },
+      "text": {
+        "fa": "غدهٔ پستان، یا خونریزی غیر عادی: چه وقت به کلینیک بروید. صفحه را باز کنید.",
+        "ps": "د تي غوټه، یا غیر عادي وینه بهېدل: کله کلینیک ته ولاړ شئ. پاڼه پرانیزئ.",
+        "en": "A breast lump, or bleeding that is not normal: when to go to the clinic. Open the page."
+      }
+    },
+    {
+      "id": "checks-women.reading",
+      "type": "link",
+      "to": "tool/reading/bp",
+      "icon": "bp",
+      "title": {
+        "fa": "عدد فشار خون دارید؟",
+        "ps": "د وینې فشار شمېره لرئ؟",
+        "en": "Have a blood pressure reading?"
+      },
+      "text": {
+        "fa": "دو عدد را بنویسید تا ببینید معنای آن چیست، و چه وقت بروید.",
+        "ps": "دواړه شمېرې ولیکئ چې وګورئ مانا یې څه ده، او کله ولاړ شئ.",
+        "en": "Put in the two numbers to see what they mean, and when to go."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Guideline for the pharmacological treatment of hypertension in adults (2021); USPSTF Screening for hypertension in adults (2021): every adult from 18, yearly from 40 or with risk",
+    "WHO Package of Essential Noncommunicable Disease Interventions (PEN), 2013 and 2020: blood sugar from 40 or earlier with risk (overweight, large waist, high blood pressure, family history)",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): blood pressure, Hb, urine, iron and folic acid, tetanus vaccine",
+    "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd edition (2021): women 30 to 49; VIA where HPV testing is not available",
+    "WHO position paper on mammography screening (2014) and WHO Global Breast Cancer Initiative (2023): breast awareness and clinical breast examination, no population mammography",
+    "WHO Guidelines on hepatitis B and C testing (2017): test pregnant women, household and sexual contacts, people with past unsafe injections or transfusions",
+    "WHO Guidelines for the prevention, diagnosis, care and treatment for people with chronic hepatitis B infection (March 2024)",
+    "WHO guideline: daily iron supplementation in adult women and adolescent girls (2016)",
+    "WHO blindness and vision impairment fact sheet (10 February 2026): most poor sight is uncorrected refractive error or cataract",
+    "WHO Regional Office for Europe, Screening programmes: a short guide (2020): tests without a programme and follow-up cause harm; no whole-body or tumour-marker screening",
+    "WHO cancer fact sheet (3 July 2026): early diagnosis has three steps, awareness of signs, assessment and treatment"
+  ],
+  "_notes": [
+    "Built from research/screening.md sections 5 and 6.5 (9 Oct 2026). One check per step, in the order of the age table. Pictures: the existing blood pressure scene (img/pics/bp-sit.svg, a seated woman) on the first step, which also shows on the list button; a hero picture is still to draw (research 6.8).",
+    "Mo's call: whether checks-women sits in 'women' or 'everyone', default used: everyone (men often hold the phone); it is shown on the Health tab list 'Early signs and health checks'.",
+    "Mo's call: yearly clinical breast exam from 40 when no Samangan midwife is known to be trained, default used: included with 'if this is offered' (checks-women.breasts).",
+    "Mo's call: 'ask for the cervical test' while availability is unknown, default used: 'Ask where it is done' (checks-women.cervix, same words as women-signs.cervix-test).",
+    "Mo's call: hepatitis B test in pregnancy, default used: 'Ask for a hepatitis B blood test too' here (checks-women.pregnancy) and a tip on pregnancy-care (pregnancy-care.hep-b); the pregnancy-care clinic block is unchanged.",
+    "Mo's call: AFP and ultrasound for cirrhosis surveillance, default used: not in the app (research 7.20 'probably not').",
+    "The eyes step was cut to keep the page near 2.5 minutes (research 6.5: 'the eyes step can be cut'); checks-men keeps it.",
+    "'Free' is not said for any check here (only the TB test and vaccines are reliably free); hepatitis testing says 'ask the clinic where it is done'.",
+    "The clinic block says the cervix test 'should not hurt' (VIA uses a speculum; mild discomfort is possible)."
+  ],
+  "review": [
+    "Native check: دهانهٔ رحم / د رحم خوله (cervix), سرکه (vinegar), آب مروارید / موتیا (cataract), بستهٔ معاینات کامل / د بشپړو معایناتو بستې ('full check-up packages'), لابراتوار شخصی / شخصي لابراتوار."
+  ]
+}

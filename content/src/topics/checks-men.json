@@ -1,0 +1,240 @@
+{
+  "id": "checks-men",
+  "section": "everyone",
+  "title": {
+    "fa": "معاینات صحی مردان، به حسب سن",
+    "ps": "د نارینه وو روغتیايي معاینې، د عمر له مخې",
+    "en": "Health checks for men, by age"
+  },
+  "summary": {
+    "fa": "کدام معاینات را بخواهید، و در کدام سن.",
+    "ps": "کومې معاینې وغواړئ، او په کوم عمر کې.",
+    "en": "Which checks to ask for, and at what age."
+  },
+  "image": "checks-men",
+  "blocks": [
+    {
+      "id": "checks-men.lead",
+      "type": "lead",
+      "text": {
+        "fa": "اینجا کسی شما را برای معاینه نمی‌خواهد، پس این معاینات را در کلینیک بخواهید. بیشتر آن‌ها فقط چند دقیقه وقت می‌گیرد.",
+        "ps": "دلته څوک تاسو معاینې ته نه رابولي، نو دا معاینې په کلینیک کې وغواړئ. ډېری یې یوازې څو دقیقې وخت نیسي.",
+        "en": "No one calls you for a check-up here, so ask for these at the clinic. Most take only a few minutes."
+      }
+    },
+    {
+      "id": "checks-men.bp",
+      "type": "step",
+      "icon": "bp",
+      "title": {
+        "fa": "از ۱۸ سالگی: فشار خون",
+        "ps": "له ۱۸ کلنۍ: د وینې فشار",
+        "en": "From 18: blood pressure"
+      },
+      "text": {
+        "fa": "فشار خون خود را هر ۲ تا ۳ سال، و بعد از ۴۰ سالگی هر سال اندازه کنید. فشار بلند احساس نمی‌شود؛ فقط با اندازه کردن پیدا می‌شود.",
+        "ps": "خپل د وینې فشار هر ۲ تر ۳ کاله، او له ۴۰ کلنۍ وروسته هر کال اندازه کړئ. لوړ فشار نه احساسېږي؛ یوازې په اندازه کولو موندل کېږي.",
+        "en": "Have your blood pressure measured every 2 to 3 years, and every year after 40. High pressure has no feeling; it is found only by measuring."
+      }
+    },
+    {
+      "id": "checks-men.sugar",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "از ۴۰ سالگی: قند خون",
+        "ps": "له ۴۰ کلنۍ: د وینې شکره",
+        "en": "From 40: blood sugar"
+      },
+      "text": {
+        "fa": "در ۴۰ سالگی قند خون خود را معاینه کنید، و اگر عادی بود هر ۳ سال. اگر چاق هستید، شکم کلان دارید، فشار بلند دارید، یا مرض شکر در خانواده است، زودتر.",
+        "ps": "په ۴۰ کلنۍ کې د وینې شکره معاینه کړئ، او که عادي وه هر ۳ کاله. که چاغ یاست، نس مو لوی دی، لوړ فشار لرئ، یا په کورنۍ کې د شکرې ناروغي شته، ژر یې وکړئ.",
+        "en": "Ask for a blood sugar test at 40, then every 3 years if it is normal. Earlier if you are overweight, have a large waist, high pressure, or diabetes in the family."
+      },
+      "picture": "hosp-blood-test"
+    },
+    {
+      "id": "checks-men.hepatitis",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "یک بار در عمر: معاینهٔ هپاتیت",
+        "ps": "په ژوند کې یو ځل: د هیپاتیت معاینه",
+        "en": "Once in life: hepatitis test"
+      },
+      "text": {
+        "fa": "یک بار معاینهٔ خون برای هپاتیت ب و سی بخواهید، اول اگر کسی در خانه هپاتیت دارد، یا پیچکاری، خون یا پل مشترک داشته‌اید. بپرسید کجا می‌شود.",
+        "ps": "یو ځل د هیپاتیت ب او سي د وینې معاینه وغواړئ، لومړی که په کور کې څوک هیپاتیت لري، یا مو پیچکاري، وینه یا ګډه پاکي کارولې وي. وپوښتئ چې چېرې کېږي.",
+        "en": "Ask for one hepatitis B and C blood test, first if someone in the house has hepatitis, or you had injections, blood or shared razors. Ask where it is done."
+      }
+    },
+    {
+      "id": "checks-men.tb",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "هر وقت: معاینهٔ توبرکلوز",
+        "ps": "هر وخت: د نري رنځ معاینه",
+        "en": "Any time: a TB check"
+      },
+      "text": {
+        "fa": "سرفهٔ ۲ هفته، تب یا عرق شبانه، یا کم شدن وزن یعنی معاینهٔ توبرکلوز. معاینه و دوای توبرکلوز رایگان است.",
+        "ps": "۲ اونۍ ټوخی، تبه یا د شپې خولې، یا د وزن کمېدل مانا د نري رنځ معاینه. د نري رنځ معاینه او درمل وړیا دي.",
+        "en": "A cough for 2 weeks, fever or sweats at night, or losing weight means a TB test. The TB test and medicine are free."
+      }
+    },
+    {
+      "id": "checks-men.mouth",
+      "type": "step",
+      "icon": "tooth",
+      "title": {
+        "fa": "اگر نسوار می‌کنید: دهن شما",
+        "ps": "که نسوار کاروئ: ستاسو خوله",
+        "en": "If you use naswar: your mouth"
+      },
+      "text": {
+        "fa": "هر ماه در آینه داخل دهن خود را ببینید. زخم، لکهٔ سفید یا غده که ۳ هفته بماند کلینیک لازم دارد. ترک نسوار بهترین محافظت است.",
+        "ps": "هره میاشت په هنداره کې د خپلې خولې دننه وګورئ. زخم، سپین داغ یا غوټه چې ۳ اونۍ پاتې شي کلینیک ته اړتیا لري. د نسوارو پرېښودل تر ټولو ښه ساتنه ده.",
+        "en": "Look in your mouth each month in a mirror. A sore, white patch or lump for 3 weeks needs the clinic. Stopping naswar is the best protection."
+      }
+    },
+    {
+      "id": "checks-men.eyes",
+      "type": "step",
+      "icon": "eye",
+      "title": {
+        "fa": "بعد از ۵۰ سالگی: چشم‌ها",
+        "ps": "له ۵۰ کلنۍ وروسته: سترګې",
+        "en": "After 50: eyes"
+      },
+      "text": {
+        "fa": "اگر دید شما کم شد، معاینهٔ چشم بخواهید. عینک یا عملیات آب مروارید بیشتر کم‌دیدی را جور می‌کند.",
+        "ps": "که لید مو کم شي، د سترګو معاینه وغواړئ. عینکې یا د سترګې د موتیا عملیات ډېری کم لید جوړوي.",
+        "en": "If your sight gets worse, ask for an eye check. Glasses or a cataract operation fix most poor sight."
+      }
+    },
+    {
+      "id": "checks-men.two-signs",
+      "type": "step",
+      "icon": "urine-blood",
+      "title": {
+        "fa": "در هر سن: دو علامه",
+        "ps": "په هر عمر کې: دوه نښې",
+        "en": "At any age: two signs"
+      },
+      "text": {
+        "fa": "خون در ادرار بدون سوزش، یا غده در خصیه، همین هفته کلینیک لازم دارد، حتی اگر خودش از بین برود.",
+        "ps": "په تشو متیازو کې وینه پرته له سوځېدو، یا په خصیه کې غوټه، همدا اونۍ کلینیک ته اړتیا لري، که څه هم پخپله ورکه شي.",
+        "en": "Blood in the urine with no burning, or a lump in a testicle, needs the clinic this week, even if it goes away."
+      }
+    },
+    {
+      "id": "checks-men.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینه چطور است",
+        "ps": "په کلینیک کې: معاینه څنګه وي",
+        "en": "At the clinic: what a check involves"
+      },
+      "text": {
+        "fa": "فشار خون یک دقیقه وقت می‌گیرد. قند با سوزن نوک انگشت است. معاینهٔ توبرکلوز نمونهٔ بلغم است و معاینهٔ هپاتیت یک قطره خون. نتیجه همان روز یا در چند روز می‌آید.",
+        "ps": "د وینې فشار یوه دقیقه نیسي. شکره د ګوتې په سر یوه ستنه ده. د نري رنځ معاینه د بلغم نمونه ده او د هیپاتیت معاینه یو څاڅکی وینه. پایله هماغه ورځ یا په څو ورځو کې راځي.",
+        "en": "Blood pressure takes a minute. Sugar is a finger prick. The TB test is a sputum sample, the hepatitis test a drop of blood. Results come the same day or within days."
+      }
+    },
+    {
+      "id": "checks-men.dont",
+      "type": "dont",
+      "title": {
+        "fa": "معایناتی که لازم ندارید",
+        "ps": "هغه معاینې چې اړتیا ورته نه لرئ",
+        "en": "Tests you do not need"
+      },
+      "items": [
+        {
+          "id": "checks-men.dont.psa",
+          "icon": "money",
+          "text": {
+            "fa": "اگر کدام علامه ندارید، برای معاینهٔ خون پروستات پول ندهید.",
+            "ps": "که کومه نښه نه لرئ، د پروسټات د وینې معاینې لپاره پیسې مه ورکوئ.",
+            "en": "Do not pay for a prostate blood test if you have no symptoms."
+          }
+        },
+        {
+          "id": "checks-men.dont.scans",
+          "icon": "money",
+          "text": {
+            "fa": "برای اسکن تمام بدن یا «بستهٔ معاینات کامل» پول ندهید.",
+            "ps": "د ټول بدن سکن یا د «بشپړو معایناتو بستې» لپاره پیسې مه ورکوئ.",
+            "en": "Do not pay for whole-body scans or 'full check-up' packages."
+          }
+        },
+        {
+          "id": "checks-men.dont.xray",
+          "icon": "no",
+          "text": {
+            "fa": "اگر صحتمند هستید، برای اکسری سینه به خاطر پیدا کردن سرطان پول ندهید.",
+            "ps": "که روغ یاست، د سرطان د موندلو لپاره د سینې اکسرې ته پیسې مه ورکوئ.",
+            "en": "If well, do not pay for a chest X-ray to look for cancer."
+          }
+        }
+      ]
+    },
+    {
+      "id": "checks-men.signs",
+      "type": "link",
+      "to": "topic/early-signs",
+      "icon": "lump",
+      "title": {
+        "fa": "علایمی که باید زود معاینه شود",
+        "ps": "هغه نښې چې باید ژر معاینه شي",
+        "en": "Signs to get checked early"
+      },
+      "text": {
+        "fa": "غده‌ای که کلان می‌شود، کم شدن وزن، زخمی که جور نمی‌شود، یا خون در ادرار: چه وقت بروید. صفحه را باز کنید.",
+        "ps": "غوټه چې لویېږي، د وزن کمېدل، زخم چې نه جوړېږي، یا په متیازو کې وینه: کله ولاړ شئ. پاڼه پرانیزئ.",
+        "en": "A growing lump, weight loss, a sore that does not heal, or blood in the urine: when to go. Open the page."
+      }
+    },
+    {
+      "id": "checks-men.reading",
+      "type": "link",
+      "to": "tool/reading/bp",
+      "icon": "bp",
+      "title": {
+        "fa": "عدد فشار خون دارید؟",
+        "ps": "د وینې فشار شمېره لرئ؟",
+        "en": "Have a blood pressure reading?"
+      },
+      "text": {
+        "fa": "دو عدد را بنویسید تا ببینید معنای آن چیست، و چه وقت بروید.",
+        "ps": "دواړه شمېرې ولیکئ چې وګورئ مانا یې څه ده، او کله ولاړ شئ.",
+        "en": "Put in the two numbers to see what they mean, and when to go."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Guideline for the pharmacological treatment of hypertension in adults (2021); USPSTF Screening for hypertension in adults (2021): every adult from 18, yearly from 40 or with risk",
+    "WHO Package of Essential Noncommunicable Disease Interventions (PEN), 2013 and 2020: blood sugar from 40 or earlier with risk (overweight, large waist, high blood pressure, family history)",
+    "WHO Guidelines on hepatitis B and C testing (2017): test pregnant women, household and sexual contacts, people with past unsafe injections or transfusions",
+    "WHO Guidelines for the prevention, diagnosis, care and treatment for people with chronic hepatitis B infection (March 2024)",
+    "WHO consolidated guidelines on tuberculosis, Module 2: systematic screening (2021); national TB programme: free test and treatment",
+    "WHO oral health fact sheet (2023) and WHO tobacco fact sheet: smokeless tobacco (naswar) and mouth cancer",
+    "WHO blindness and vision impairment fact sheet (10 February 2026)",
+    "NICE NG12 Suspected cancer (2015, updated 2025): visible haematuria; non-painful enlargement or change in shape of a testis",
+    "UK National Screening Committee, prostate cancer screening recommendation (March 2026): no PSA screening of men without symptoms",
+    "WHO Regional Office for Europe, Screening programmes: a short guide (2020): tests without a programme and follow-up cause harm; no whole-body or tumour-marker screening",
+    "WHO cancer fact sheet (3 July 2026): early diagnosis has three steps, awareness of signs, assessment and treatment"
+  ],
+  "_notes": [
+    "Built from research/screening.md sections 5, 5.1 and 6.5 (9 Oct 2026). Pictures: the existing finger-prick scene (img/pics/hosp-blood-test.svg) on the sugar step; a hero picture is still to draw (research 6.8: a man having his blood pressure measured).",
+    "Mo's call: the testicle lump item and its wording, default used: included in a step, 'a lump in a testicle' (fa خصیه, ps خصیه), with blood in the urine (checks-men.two-signs).",
+    "Mo's call: the PSA line, default used: 'Do not pay for a prostate blood test if you have no symptoms' (checks-men.dont.psa; 'PSA' is not said, as fa/ps text has no Latin letters).",
+    "Mo's call: naswar mouth check, default used: here (checks-men.mouth); early-signs has none (cut for length), dental unchanged.",
+    "Mo's call: the 3-week duration for a mouth sore, default used: 3 weeks (NICE), as on early-signs; dental.soon.patch keeps 2 weeks.",
+    "The lead does not mention the Family record (it has no place for adult readings); the link opens the blood pressure checker instead."
+  ],
+  "review": [
+    "Native check: خصیه (testicle) in both languages, پروستات / پروسټات, پل مشترک / ګډه پاکي (shared razor), موتیا (cataract, Pashto)."
+  ]
+}

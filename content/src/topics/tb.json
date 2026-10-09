@@ -155,6 +155,21 @@
       }
     },
     {
+      "id": "tb.negative",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "اگر معاینه منفی بود",
+        "ps": "که معاینه منفي وه",
+        "en": "If the test is negative"
+      },
+      "text": {
+        "fa": "اگر معاینات توبرکلوز منفی بود اما تب، عرق یا کم شدن وزن ادامه داشت، دوباره بروید. کلینیک شما را برای معاینات دیگر به شفاخانه می‌فرستد.",
+        "ps": "که د نري رنځ معاینې منفي وې خو تبه، خولې یا د وزن کمېدل دوام ولري، بیا ولاړ شئ. کلینیک مو د نورو معایناتو لپاره روغتون ته لېږي.",
+        "en": "If the TB tests are negative but the fever, sweats or weight loss go on, go back. The clinic sends you to the hospital for other tests."
+      }
+    },
+    {
       "id": "tb.clinic",
       "type": "clinic",
       "title": {
@@ -233,7 +248,8 @@
     "Afghanistan IPEHS (2019): TB diagnosis and treatment from CHC level; drug-resistant TB management at provincial/regional hospitals",
     "WHO consolidated guidelines on tuberculosis, Module 1: TB preventive treatment (2020; 2nd ed. 2024), via the WHO TB Knowledge Sharing Platform: children under 5 living with a person with lung TB get preventive treatment (strong)",
     "Afghanistan National TB Programme: household contact screening and isoniazid preventive therapy for under-5 contacts, 2011-2018 (86% started; Int J Tuberc Lung Dis 2020, MSH summary)",
-    "WHO fact sheet: Tuberculosis (24 Mar 2026): prolonged cough, sometimes with blood, chest pain, weakness or tiredness, weight loss, fever, night sweats; seek care"
+    "WHO fact sheet: Tuberculosis (24 Mar 2026): prolonged cough, sometimes with blood, chest pain, weakness or tiredness, weight loss, fever, night sweats; seek care",
+    "NICE NG12 Suspected cancer (2015, updated 2025) and Cheson BD et al., Lugano classification (2014): fever, drenching sweats and weight loss that persist need further tests (lymphoma)"
   ],
   "review": [
     "'Usually 6 months': WHO also has 4-month regimens (children with non-severe TB; HPMZ for people aged 12 and over), and drug-resistant TB takes longer.",
@@ -247,5 +263,9 @@
     "Which Samangan facilities have GeneXpert is unknown; 'the machine test' is placed at the hospital.",
     "Medical audit 2026-10-08 IL-2: tb.family now adds 'Children under 5 get a free daily medicine for some months so they do not get TB; finish it' (WHO strong recommendation; the Afghan NTP already gives it). Was: 'Children and everyone living with a person with TB should be checked at the clinic, even if they seem well.' This answers the earlier review note on preventive treatment.",
     "Medical audit 2026-10-08 IL-23: new amber item tb.soon.chest 'chest pain or great tiredness with the cough' (WHO TB fact sheet symptom list). IL-7: tb.soon.blood (clinic today) and tb.urgent.blood (a lot of blood, hospital now) are now the rule on the pneumonia and red-flags pages too."
+  ],
+  "_notes": [
+    "Screening section (9 Oct 2026, research/screening.md 4.2 and 6.6): new step tb.negative (a new block, not added to tb.clinic, which is at the 32-word limit).",
+    "Mo's call: reword tb.soon.fever to 'night sweats that soak your clothes', default used: not changed; the TB page keeps the WHO TB symptom-screen wording (any night sweats, more sensitive). The drenching-sweats wording is on early-signs.today.b-symptoms only."
   ]
 }

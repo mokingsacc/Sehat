@@ -1,0 +1,244 @@
+{
+  "id": "women-signs",
+  "section": "women",
+  "title": {
+    "fa": "پستان و رحم: علایمی که معاینه لازم دارد",
+    "ps": "تی او رحم: هغه نښې چې معاینه غواړي",
+    "en": "Breast and womb: signs to check"
+  },
+  "summary": {
+    "fa": "سرطان پستان اگر زود پیدا شود، علاج می‌شود. علایم را بشناسید.",
+    "ps": "د تي سرطان که ژر وموندل شي، روغېدای شي. نښې وپېژنئ.",
+    "en": "Found early, breast cancer can be cured. Know the signs."
+  },
+  "image": "women-signs",
+  "blocks": [
+    {
+      "id": "women-signs.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سرطان پستان شایع‌ترین سرطان زنان در اینجا است، و اگر زود پیدا شود با عملیات علاج می‌شود. بیشتر غده‌ها سرطان نیست، اما هر تغییر نو معاینه لازم دارد.",
+        "ps": "د تي سرطان دلته د ښځو تر ټولو عام سرطان دی، او که ژر وموندل شي په عملیات روغېدای شي. ډېری غوټې سرطان نه وي، خو هر نوی بدلون معاینې ته اړتیا لري.",
+        "en": "Breast cancer is the commonest cancer in women here, and found early it can be cured with an operation. Most lumps are not cancer, but every new change needs a check."
+      }
+    },
+    {
+      "id": "women-signs.know",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "پستان‌های خود را بشناسید",
+        "ps": "خپل تيونه وپېژنئ",
+        "en": "Know your breasts"
+      },
+      "text": {
+        "fa": "ماهی یک بار، بعد از عادت ماهوار، هر دو پستان و زیر بغل را ببینید و لمس کنید تا بدانید برای شما چه عادی است. هر تغییر نو کلینیک لازم دارد.",
+        "ps": "په میاشت کې یو ځل، له میاشتني عادت وروسته، دواړه تيونه او تخرګونه وګورئ او لمس یې کړئ، چې پوه شئ ستاسو لپاره څه عادي دي. هر نوی بدلون کلینیک ته اړتیا لري.",
+        "en": "Once a month, after your period, look at and feel both breasts and armpits, to learn what is normal for you. Any new change needs the clinic."
+      }
+    },
+    {
+      "id": "women-signs.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین هفته به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اونۍ کلینیک ته ولاړ شئ",
+        "en": "If you have one of these signs, go to the clinic this week"
+      },
+      "items": [
+        {
+          "id": "women-signs.soon.lump",
+          "icon": "lump",
+          "text": {
+            "fa": "غده یا سختی نو در پستان یا زیر بغل",
+            "ps": "په تي یا تخرګ کې نوې غوټه یا کلکوالی",
+            "en": "A new lump or thickening in the breast or armpit"
+          }
+        },
+        {
+          "id": "women-signs.soon.nipple",
+          "icon": "bleeding",
+          "text": {
+            "fa": "سر پستان که تازه به داخل کشیده شده، یا خون آمدن از یک سر پستان",
+            "ps": "د تي سر چې نوی دننه ننوتلی وي، یا له یوه تي سر څخه وینه",
+            "en": "A nipple newly pulled in, or bleeding from one nipple"
+          }
+        },
+        {
+          "id": "women-signs.soon.skin",
+          "icon": "lump",
+          "text": {
+            "fa": "پوست پستان که چقر شده، چین خورده، سرخ است یا مثل پوست مالته شده",
+            "ps": "د تي پوستکی چې ګونځې یا سور شوی، یا د مالټې د پوستکي په شان شوی وي",
+            "en": "Breast skin dimpled, puckered, red, or like orange peel"
+          }
+        },
+        {
+          "id": "women-signs.soon.milk-lump",
+          "icon": "breastfeed",
+          "text": {
+            "fa": "غده در پستان که بعد از کم شدن پندیدگی شیر باقی بماند",
+            "ps": "په تي کې غوټه چې د شیدو د پړسوب له کمېدو وروسته پاتې شي",
+            "en": "A breast lump that stays after the milk swelling settles"
+          }
+        },
+        {
+          "id": "women-signs.soon.bleeding-sex",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خونریزی بعد از همبستری، یا بین دو عادت ماهوار، بیش از یک بار",
+            "ps": "له مېړه سره له یوځای کېدو وروسته، یا د دوو میاشتنیو عادتونو ترمنځ وینه، له یو ځل زیات",
+            "en": "Bleeding after sex, or between periods, more than once"
+          }
+        },
+        {
+          "id": "women-signs.soon.menopause",
+          "icon": "bleeding",
+          "text": {
+            "fa": "هر نوع خونریزی، یک سال یا بیشتر بعد از قطع عادت ماهوار",
+            "ps": "هر ډول وینه، یو کال یا ډېر وروسته له دې چې میاشتنی عادت بند شوی وي",
+            "en": "Any bleeding a year or more after periods have stopped"
+          }
+        },
+        {
+          "id": "women-signs.soon.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "شکمی که کلان‌تر می‌شود، همراه با کم شدن وزن",
+            "ps": "نس چې لویېږي، د وزن له کمېدو سره",
+            "en": "A belly that keeps getting bigger, with weight loss"
+          }
+        }
+      ]
+    },
+    {
+      "id": "women-signs.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: معاینهٔ پستان",
+        "ps": "په کلینیک کې: د تي معاینه",
+        "en": "At the clinic: a breast check"
+      },
+      "text": {
+        "fa": "یک کارمند صحی زن هر دو پستان و زیر بغل را معاینه می‌کند و می‌پرسد چند وقت است. برای غده، شما را برای التراسوند و یک معاینهٔ کوچک با سوزن به شفاخانه یا شهر می‌فرستد.",
+        "ps": "یوه ښځینه روغتیايي کارکوونکې دواړه تيونه او تخرګونه معاینه کوي او پوښتي چې څومره وخت کېږي. د غوټې لپاره مو د الټراساونډ او د ستنې د یوې کوچنۍ معاینې لپاره روغتون یا ښار ته لېږي.",
+        "en": "A female health worker feels both breasts and armpits and asks how long. A lump is sent for ultrasound and a small needle test, at the hospital or in the city."
+      }
+    },
+    {
+      "id": "women-signs.cervix-test",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "معاینهٔ دهانهٔ رحم",
+        "ps": "د رحم د خولې معاینه",
+        "en": "The cervix test"
+      },
+      "text": {
+        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
+        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
+        "en": "Ask for the cervix test once between 30 and 49, or every 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
+      }
+    },
+    {
+      "id": "women-signs.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: غده یا خونریزی",
+        "ps": "په روغتون کې: غوټه یا وینه بهېدل",
+        "en": "At the hospital: lump or bleeding"
+      },
+      "text": {
+        "fa": "التراسوند یا یک نمونهٔ کوچک نشان می‌دهد غده چیست؛ بیشتر آن سرطان نیست. سرطان پستان در مرحلهٔ اول در کابل با عملیات و دوا تداوی می‌شود. خونریزی با معاینه دیده می‌شود.",
+        "ps": "الټراساونډ یا یوه کوچنۍ نمونه ښيي چې غوټه څه ده؛ ډېری یې سرطان نه وي. د تي لومړنی سرطان په کابل کې په عملیات او درملو درملنه کېږي. وینه بهېدل په معاینه کتل کېږي.",
+        "en": "Ultrasound or a small sample shows what a lump is; most are not cancer. Early breast cancer is treated in Kabul with an operation and medicines. Bleeding is checked by examination."
+      }
+    },
+    {
+      "id": "women-signs.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید",
+        "ps": "دا کارونه مه کوئ",
+        "en": "Things not to do"
+      },
+      "items": [
+        {
+          "id": "women-signs.dont.wait",
+          "icon": "clock",
+          "text": {
+            "fa": "به خاطر اینکه غده درد ندارد، منتظر نمانید.",
+            "ps": "یوازې ځکه چې غوټه درد نه کوي، انتظار مه کوئ.",
+            "en": "Do not wait because a lump does not hurt."
+          }
+        },
+        {
+          "id": "women-signs.dont.hide",
+          "icon": "family",
+          "text": {
+            "fa": "آن را از خانواده پنهان نکنید؛ یک کارمند صحی زن شما را معاینه کرده می‌تواند.",
+            "ps": "له کورنۍ یې مه پټوئ؛ یوه ښځینه روغتیايي کارکوونکې تاسو معاینه کولای شي.",
+            "en": "Do not hide it from the family; a female health worker can examine you."
+          }
+        },
+        {
+          "id": "women-signs.dont.press",
+          "icon": "no",
+          "text": {
+            "fa": "غده را فشار ندهید، مالش ندهید و گرم نکنید.",
+            "ps": "غوټه مه زبېښئ، مه یې مښئ او مه یې تودوئ.",
+            "en": "Do not press, massage or heat a lump."
+          }
+        }
+      ]
+    },
+    {
+      "id": "women-signs.tip",
+      "type": "tip",
+      "icon": "walk",
+      "text": {
+        "fa": "شیردهی، حرکت هر روزه و وزن صحتمند، همه خطر سرطان پستان را کم می‌کند.",
+        "ps": "تي ورکول، هره ورځ حرکت او روغ وزن، ټول د تي د سرطان خطر کموي.",
+        "en": "Breastfeeding, moving every day and a healthy weight all lower the risk of breast cancer."
+      }
+    },
+    {
+      "id": "women-signs.checks",
+      "type": "link",
+      "to": "topic/checks-women",
+      "icon": "calendar",
+      "title": {
+        "fa": "معاینات صحی زنان، به حسب سن",
+        "ps": "د ښځو روغتیايي معاینې، د عمر له مخې",
+        "en": "Health checks for women, by age"
+      },
+      "text": {
+        "fa": "فشار خون، قند، معاینهٔ دهانهٔ رحم و دیگر: چه بخواهید و چه وقت. صفحه را باز کنید.",
+        "ps": "د وینې فشار، شکره، د رحم د خولې معاینه او نور: څه وغواړئ او کله. پاڼه پرانیزئ.",
+        "en": "Blood pressure, sugar, the cervix test and more: what to ask for, and when. Open the page."
+      }
+    }
+  ],
+  "sources": [
+    "WHO breast cancer fact sheet (3 July 2026): signs (lump, change in size or shape, dimpling, nipple changes, discharge); early breast cancer is curable; breastfeeding and activity lower risk",
+    "WHO position paper on mammography screening (2014): no population mammography in limited-resource settings; breast awareness and clinical breast examination",
+    "WHO Global Breast Cancer Initiative implementation framework (2023): diagnosis within 60 days of first visit",
+    "Mittra I et al., clinical breast examination trial, Mumbai (BMJ 2021;372:n256)",
+    "WHO guideline for screening and treatment of cervical pre-cancer lesions, 2nd edition (2021): women 30 to 49, HPV test or VIA, every 5 to 10 years",
+    "NICE NG12 Suspected cancer (2015, updated 2025): breast lump from 30, nipple changes, post-menopausal bleeding"
+  ],
+  "_notes": [
+    "Built from research/screening.md sections 4.3 and 6.3 (9 Oct 2026). Breast awareness (look and feel, act on change), not a formal self-examination routine (WHO 2014).",
+    "Mo's call: bleeding after sex or between periods (low PPV in the UK; no screening here), default used: included, 'more than once' (women-signs.soon.bleeding-sex).",
+    "Mo's call: the ovarian item 'belly that keeps getting bigger, with weight loss' (low PPV), default used: included (women-signs.soon.belly).",
+    "Mo's call: the 'milk lump that stays' item, and whether after-birth gets the same line, default used: on this page only (women-signs.soon.milk-lump); after-birth unchanged, because its amber box is 'clinic today' and mastitis is already there (after-birth.soon.breast).",
+    "Mo's call: breast awareness wording, yearly clinical breast exam from 40 when no midwife may be trained, and any picture, default used: 'look at and feel ... once a month after your period' (women-signs.know); the yearly exam 'if offered' is on checks-women.breast; no breast picture, icons only (a clinic scene with clothed, faceless women can be added later).",
+    "Mo's call: saying 'ask for the cervical test' while availability in Samangan is unknown, default used: 'ask for the cervix test ... Ask where it is done' (women-signs.cervix-test).",
+    "'Sex' is said politely in fa (همبستری) and ps (له مېړه سره له یوځای کېدو وروسته, 'after being together with the husband')."
+  ],
+  "review": [
+    "Native check: سر پستان / د تي سر (nipple), چقر (dimpled), پوست مالته / د مالټې پوستکی (orange peel), همبستری and the Pashto 'له مېړه سره له یوځای کېدو', دهانهٔ رحم / د رحم خوله (cervix).",
+    "Icon wanted: 'breast-check' (breastfeed is used for women-signs.know)."
+  ]
+}

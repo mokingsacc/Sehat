@@ -752,6 +752,22 @@
         "ps": "هغه ماشوم چې د خطر نښه لري سمدستي کتل کېږي. روغتون اکسیجن، سیروم، پیچکاري انټي بیوټیک، بوره که کمه وي، او د اختلاج د درولو درمل ورکوي. دقیقې مهمې دي.",
         "en": "A child with a danger sign is seen at once. The hospital gives oxygen, fluids by drip, antibiotics by injection, sugar if low, and medicine to stop fits. Minutes matter."
       }
+    },
+    {
+      "id": "danger-child.child-signs",
+      "type": "link",
+      "to": "topic/child-signs",
+      "icon": "lump",
+      "title": {
+        "fa": "علایمی که زود معاینه لازم دارد",
+        "ps": "هغه نښې چې ژر معاینه غواړي",
+        "en": "Signs that need a check soon"
+      },
+      "text": {
+        "fa": "غده، برق سفید در چشم، درد استخوان در شب یا تب طولانی. صفحه را باز کنید.",
+        "ps": "غوټه، په سترګه کې سپینه ځلا، د شپې د هډوکي درد یا اوږده تبه. پاڼه پرانیزئ.",
+        "en": "A lump, a white glow in the eye, bone pain at night or a long fever. Open the page."
+      }
     }
   ],
   "sources": [
@@ -784,5 +800,9 @@
     "Breathing step: 'Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more' matches the breath counter (js/tools.js) and WHO IMCI.",
     "Words to check: Dari 'کهنه' and Pashto 'کهنه' for nappy (cloth nappies; some families say 'پمپرز'); the soft spot is described ('جای نرم سر' / 'د سر نرمه برخه'), not named; Dari 'شخ' (stiff), 'زنخ' (chin); Pashto 'شین' for blue skin or lips; 'ناله' for grunting.",
     "Medical audit 2026-10-08 HM-05: new tip danger-child.no-opium 'Never give opium, or any medicine a health worker did not give, to make a child sleep or stop crying. It can stop the child's breathing.' The warning was on sleep-well (Home tab) and was removed under the Home-tab rule; sleep-well now links here (sleep-well.child)."
+  ],
+  "_notes": [
+    "Screening section (9 Oct 2026, research/screening.md 6.6): link danger-child.child-signs to the new child-signs page.",
+    "Mo's call: petechiae with fever on danger-child, default used: already here (danger-child.skin.rash, red, glass test), so nothing added."
   ]
 }

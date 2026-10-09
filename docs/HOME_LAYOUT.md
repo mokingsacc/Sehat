@@ -30,9 +30,11 @@ Top to bottom (`config.home`; remove a name to hide it):
 4. `ask`: **What is wrong?** (the symptom search, `#/ask`).
 5. `children`: a picture card that opens `#/children`.
 6. `adults`: a picture card that opens `#/adults`.
-7. `hospital`: **Going to the clinic or hospital** (the list page `#/s/hospital`; its first row is **Nearest clinic**).
-8. `share`: **Share Sehat** (`config.shareCard`). It opens `#/share` with the Share Sehat screen's own words (`shareApp`, `shareAppSub` or `shareWebSub`, `ui.share-app` or `ui.share-web`) once this version of the app has them; until then it opens the phone's share sheet with the older words.
-9. `feedback`: **Give feedback** (`#/feedback`).
+7. `checks`: **Early signs and health checks** (the list page `#/s/checks`, 9 Oct 2026): signs to get checked early
+   (adults, breast and womb, children) and the health checks to ask for at each age (women, men). Not emergency pages.
+8. `hospital`: **Going to the clinic or hospital** (the list page `#/s/hospital`; its first row is **Nearest clinic**).
+9. `share`: **Share Sehat** (`config.shareCard`). It opens `#/share` with the Share Sehat screen's own words (`shareApp`, `shareAppSub` or `shareWebSub`, `ui.share-app` or `ui.share-web`) once this version of the app has them; until then it opens the phone's share sheet with the older words.
+10. `feedback`: **Give feedback** (`#/feedback`).
 
 Also available for `config.home`: `install`, `sendApp`, `near`, `disclaimer`, `sections` (children and adults together) and the name of any list in `config.lists`.
 
@@ -63,7 +65,7 @@ A title with its speaker, then one big picture row per list (`config.house`): **
 
 ## List pages (`#/s/<name>`)
 
-Lists from `config.lists` and `content/src/sections.json`: `kit`, `safety`, `hospital`, `food`, `wellbeing`. The page has a header (back, Listen, Emergency), a wide picture, the title with its speaker, any tool rows, the Nearest clinic row for `hospital` (`"near": true`), a big row per topic, and the safety note. `"tab"` says which tab is lit (`health` or `house`). Back returns to the screen the list was opened from. Old addresses still work: `#/kit`, `#/safety`, `#/hospital`, `#/food` go to `#/s/<name>`.
+Lists from `config.lists` and `content/src/sections.json`: `kit`, `safety`, `hospital`, `checks`, `food`, `wellbeing`. The page has a header (back, Listen, Emergency), a wide picture, the title with its speaker, any tool rows, the Nearest clinic row for `hospital` (`"near": true`), a big row per topic, and the safety note. `"tab"` says which tab is lit (`health` or `house`). Back returns to the screen the list was opened from. Old addresses still work: `#/kit`, `#/safety`, `#/hospital`, `#/food` go to `#/s/<name>`.
 
 ## Emergency (`#/emergency`, `#/emergency/<age>`)
 

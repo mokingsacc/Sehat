@@ -1,0 +1,301 @@
+{
+  "id": "child-signs",
+  "section": "children",
+  "title": {
+    "fa": "علایمی در طفل که معاینه لازم دارد",
+    "ps": "په ماشوم کې هغه نښې چې معاینه غواړي",
+    "en": "Signs in a child to check"
+  },
+  "summary": {
+    "fa": "بیشتر این علایم علت دیگری دارد، اما زود معاینه لازم دارد.",
+    "ps": "ډېری دا نښې بل علت لري، خو ژر معاینې ته اړتیا لري.",
+    "en": "Most of these have another cause, but they need a check soon."
+  },
+  "image": "child-signs",
+  "blocks": [
+    {
+      "id": "child-signs.lead",
+      "type": "lead",
+      "text": {
+        "fa": "سرطان در اطفال کم است، و بیشتر این علایم علت دیگری دارد. اما طفلی که یکی از این علایم را دارد زود معاینه لازم دارد، چون تداوی زود بهتر کار می‌کند.",
+        "ps": "په ماشومانو کې سرطان لږ دی، او ډېری دا نښې بل علت لري. خو هغه ماشوم چې له دې نښو یوه ولري ژر معاینې ته اړتیا لري، ځکه ژر درملنه ښه اغېز کوي.",
+        "en": "Cancer in children is rare, and most of these signs have another cause. But a child with one of them needs a check soon, because treatment works best early."
+      }
+    },
+    {
+      "id": "child-signs.urgent",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ",
+        "en": "If your child has any of these signs, go to hospital now, day or night:"
+      },
+      "items": [
+        {
+          "id": "child-signs.urgent.spots",
+          "icon": "rash",
+          "text": {
+            "fa": "دانه‌های سرخ یا ارغوانی که زیر گیلاس از بین نمی‌روند",
+            "ps": "سرې یا ارغواني دانې چې د ګیلاس لاندې نه ورکېږي",
+            "en": "Red or purple spots that do not fade under a pressed glass"
+          }
+        },
+        {
+          "id": "child-signs.urgent.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خیلی رنگ‌پریده و ضعیف، همراه با خون آمدن از بیره یا بینی",
+            "ps": "ډېر رنګ الوتی او کمزوری، د ورېژو یا پوزې له وینې سره",
+            "en": "Very pale and weak, with bleeding from the gums or nose"
+          }
+        },
+        {
+          "id": "child-signs.urgent.head",
+          "icon": "headache",
+          "text": {
+            "fa": "سردرد صبح همراه با استفراغ، یا تازه تلو تلو راه رفتن",
+            "ps": "د سهار سر درد له کانګو سره، یا نوی داسې تګ چې توازن نه لري",
+            "en": "Morning headache with vomiting, or a new unsteady walk"
+          }
+        }
+      ]
+    },
+    {
+      "id": "child-signs.today",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید",
+        "ps": "که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "child-signs.today.belly",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "پندیدگی یا غده در شکم، که اکثراً وقت شستن دیده می‌شود",
+            "ps": "په نس کې پړسوب یا غوټه، چې ډېری وخت د لمبولو پر وخت ښکاري",
+            "en": "A swelling or lump in the belly, often found when bathing"
+          }
+        },
+        {
+          "id": "child-signs.today.pale",
+          "icon": "sleepy",
+          "text": {
+            "fa": "رنگ‌پریده و خسته، با کبودی‌هایی که زود پیدا می‌شود",
+            "ps": "رنګ الوتی او ستړی، له داسې شنو داغونو سره چې ژر پیدا کېږي",
+            "en": "Pale and tired, with bruises that come easily"
+          }
+        },
+        {
+          "id": "child-signs.today.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "تب بیش از ۲ هفته",
+            "ps": "له ۲ اونیو زیاته تبه",
+            "en": "Fever for more than 2 weeks"
+          }
+        }
+      ]
+    },
+    {
+      "id": "child-signs.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دیدید، همین هفته به کلینیک بروید",
+        "ps": "که له دې نښو څخه مو یوه ولیده، په همدې اونۍ کې کلینیک ته ولاړ شئ",
+        "en": "If you see any of these signs, go to the clinic this week:"
+      },
+      "items": [
+        {
+          "id": "child-signs.soon.white-pupil",
+          "icon": "eye",
+          "text": {
+            "fa": "برق سفید در سیاهی چشم، یا تازه لوچ شدن چشم",
+            "ps": "د سترګې په تور کې سپینه ځلا، یا نوې کاږه سترګه",
+            "en": "A white glow in the black of the eye, or a new squint"
+          }
+        },
+        {
+          "id": "child-signs.soon.bone",
+          "icon": "walk",
+          "text": {
+            "fa": "درد استخوان که طفل را شب بیدار می‌کند، یا تازه لنگیدن",
+            "ps": "د هډوکي درد چې ماشوم د شپې راویښوي، یا نوی ګوډوالی",
+            "en": "Bone pain that wakes the child at night, or a new limp"
+          }
+        },
+        {
+          "id": "child-signs.soon.gland",
+          "icon": "lump",
+          "text": {
+            "fa": "غده در گردن، زیر بغل یا کشالهٔ ران، بیش از یک ماه",
+            "ps": "په غاړه، تخرګ یا د ورون په بېخ کې غوټه، له یوې میاشتې زیاته",
+            "en": "A lump in the neck, armpit or groin for over a month"
+          }
+        },
+        {
+          "id": "child-signs.soon.lump",
+          "icon": "lump",
+          "text": {
+            "fa": "غده در هر جای بدن که کلان می‌شود",
+            "ps": "د بدن په هر ځای کې غوټه چې لویېږي",
+            "en": "A lump anywhere that is growing"
+          }
+        },
+        {
+          "id": "child-signs.soon.weight",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "کم شدن وزن یا رشد نکردن، همراه با عرق شبانه",
+            "ps": "د وزن کمېدل یا نه وده کول، د شپې له خولو سره",
+            "en": "Losing weight or not growing, with sweats at night"
+          }
+        }
+      ]
+    },
+    {
+      "id": "child-signs.eyes",
+      "type": "step",
+      "icon": "eye",
+      "title": {
+        "fa": "چشم‌ها را ببینید",
+        "ps": "سترګې وګورئ",
+        "en": "Look at the eyes"
+      },
+      "text": {
+        "fa": "در عکسی که با فلش گرفته شده، یا در روشنی چراغ دستی، سیاهی هر دو چشم باید تاریک یا سرخ معلوم شود. برق سفید در یکی، همین هفته کلینیک لازم دارد.",
+        "ps": "په هغه عکس کې چې له فلش سره اخیستل شوی، یا د لاسي څراغ په رڼا کې، د دواړو سترګو تور باید تیاره یا سور ښکاره شي. په یوه کې سپینه ځلا همدا اونۍ کلینیک ته اړتیا لري.",
+        "en": "In a photo with the flash, or in torchlight, the black of both eyes should look dark or red. A white glow in one needs the clinic this week."
+      }
+    },
+    {
+      "id": "child-signs.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: یک معاینهٔ دقیق",
+        "ps": "په کلینیک کې: دقیقه معاینه",
+        "en": "At the clinic: a careful check"
+      },
+      "text": {
+        "fa": "کارمند صحی چشم‌ها، شکم، غده‌ها و پوست را معاینه می‌کند، طفل را وزن می‌کند و شاید خون را معاینه کند. غدهٔ شکم یا برق سفید چشم را به شفاخانه می‌فرستد.",
+        "ps": "روغتیايي کارکوونکی سترګې، نس، غوټې او پوستکی معاینه کوي، ماشوم تلي او ښايي وینه معاینه کړي. د نس غوټه یا د سترګې سپینه ځلا روغتون ته لېږي.",
+        "en": "The health worker checks the eyes, belly, glands and skin, weighs the child, and may test the blood. A belly lump or white glow in the eye goes to hospital."
+      }
+    },
+    {
+      "id": "child-signs.three",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "سه هفته، یا سه بار رفتن",
+        "ps": "درې اونۍ، یا درې ځله تلل",
+        "en": "Three weeks, or three visits"
+      },
+      "text": {
+        "fa": "اگر یک علامه ۳ هفته دوام کرد، یا ۳ بار به کلینیک رفتید و طفل بهتر نشد، بخواهید که شما را به شفاخانه بفرستند.",
+        "ps": "که یوه نښه ۳ اونۍ دوام وکړي، یا ۳ ځله کلینیک ته ولاړئ او ماشوم ښه نه شو، وغواړئ چې روغتون ته مو ولېږي.",
+        "en": "If a sign lasts 3 weeks, or you have been to the clinic 3 times and the child is not better, ask to be sent to the hospital."
+      }
+    },
+    {
+      "id": "child-signs.tb",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "اول، معاینهٔ توبرکلوز",
+        "ps": "لومړی، د نري رنځ معاینه",
+        "en": "First, a TB test"
+      },
+      "text": {
+        "fa": "در طفل، تب طولانی، کم شدن وزن یا غده‌های پندیده اکثراً توبرکلوز است. معاینه و دوا رایگان است. اگر معاینه منفی بود و علایم ادامه داشت، به شفاخانه بروید.",
+        "ps": "په ماشوم کې، اوږده تبه، د وزن کمېدل یا پړسېدلې غوټې ډېری وخت نری رنځ وي. معاینه او درمل وړیا دي. که معاینه منفي وه او نښې دوام ولري، روغتون ته ولاړ شئ.",
+        "en": "In a child, long fever, weight loss or swollen glands are most often TB. The test and medicine are free. If it is negative and signs go on, go to hospital."
+      }
+    },
+    {
+      "id": "child-signs.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: پیدا کردن علت",
+        "ps": "په روغتون کې: د علت موندل",
+        "en": "At the hospital: finding the cause"
+      },
+      "text": {
+        "fa": "شفاخانه معاینهٔ خون، التراسوند یا اکسری می‌کند. سرطان اطفال در کابل تداوی می‌شود، و بسیاری از اطفالی که سرطان خون دارند با دوا علاج می‌شوند.",
+        "ps": "روغتون د وینې معاینه، الټراساونډ یا اکسرې کوي. د ماشومانو سرطان په کابل کې درملنه کېږي، او ډېر هغه ماشومان چې د وینې سرطان لري په درملو روغېږي.",
+        "en": "The hospital does blood tests, ultrasound or X-ray. Children's cancer is treated in Kabul, and many children with leukaemia are cured with medicines."
+      }
+    },
+    {
+      "id": "child-signs.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید",
+        "ps": "دا کارونه مه کوئ",
+        "en": "Things not to do"
+      },
+      "items": [
+        {
+          "id": "child-signs.dont.wait",
+          "icon": "clock",
+          "text": {
+            "fa": "منتظر نمانید که غده درد کند.",
+            "ps": "انتظار مه کوئ چې غوټه درد وکړي.",
+            "en": "Do not wait for a lump to hurt."
+          }
+        },
+        {
+          "id": "child-signs.dont.hope",
+          "icon": "heart",
+          "text": {
+            "fa": "ناامید نشوید: بسیاری از سرطان‌های اطفال اگر زود پیدا شوند علاج می‌شوند.",
+            "ps": "هیله مه بایلئ: د ماشومانو ډېر سرطانونه که ژر وموندل شي روغېږي.",
+            "en": "Do not give up: many children's cancers are cured when found early."
+          }
+        }
+      ]
+    },
+    {
+      "id": "child-signs.danger",
+      "type": "link",
+      "to": "topic/danger-child",
+      "icon": "warning",
+      "title": {
+        "fa": "علایم خطر در اطفال",
+        "ps": "په ماشومانو کې د خطر نښې",
+        "en": "Danger signs in children"
+      },
+      "text": {
+        "fa": "همه علایمی که یعنی همین حالا به شفاخانه بروید. صفحه را باز کنید.",
+        "ps": "ټولې هغه نښې چې مانا یې همدا اوس روغتون ته تلل دي. پاڼه پرانیزئ.",
+        "en": "All the signs that mean go to hospital now. Open the page."
+      }
+    }
+  ],
+  "sources": [
+    "WHO childhood cancer fact sheet (10 March 2026): screening does not help in children; early recognition of signs and prompt referral do; many childhood cancers are curable",
+    "WHO CureAll framework, Global Initiative for Childhood Cancer (2021)",
+    "PAHO, Early diagnosis of childhood cancer (SILUAN warning signs: white pupil, lumps, bone pain, bleeding and pallor, persistent fever, neurological signs)",
+    "CCLG Child Cancer Smart signs and symptoms, with the '3 weeks, 3 visits' rule",
+    "NICE NG12 Suspected cancer (2015, updated 2025), children's recommendations: absent red reflex, abdominal mass, unexplained petechiae, persistent bone pain, lymphadenopathy",
+    "WHO IMCI Chart Booklet (2014) and WHO Pocket Book of Hospital Care for Children (2013): a non-blanching rash and severe pallor are danger signs",
+    "WHO consolidated guidelines on tuberculosis, Module 2: screening (2021), and Module 5: children (2022)"
+  ],
+  "_notes": [
+    "Built from research/screening.md sections 4.4 and 6.4 (9 Oct 2026).",
+    "Mo's call: petechiae with fever, confirm danger-child has it, default used: danger-child already has it (danger-child.skin.rash, red, no change there); here child-signs.urgent.spots uses the same glass-test words without 'with fever', so neither page suggests a non-fading rash without fever can wait.",
+    "Mo's call: the line 'Do not give up: many children's cancers are cured', default used: included (child-signs.dont.hope).",
+    "Mo's call: a new children list group, or child-signs under Common illnesses, default used: neither; Mo's brief asks for one new entry point, so the page is on the Health tab list 'Early signs and health checks' (config.lists.checks) with the four adult pages.",
+    "Mo's call: the white-pupil item on growth as well, default used: added (growth.soon.white-eye) with a link from growth to this page.",
+    "'Morning headache with vomiting, or a new unsteady walk' is hospital now (research section 4.4: progressive neurological signs, NICE very urgent).",
+    "The today and this-week box titles are word for word danger-child.soon and growth.soon; the red title is danger-child.urgent.",
+    "Step 'Look at the eyes' (flash photo or torchlight) is added from research 4.4 ('in a photo, in torchlight'). To keep the page near 2.5 minutes the bulging-eye item (research 6.4: drop if over), the eye-drops do-not line and the growth link were cut; growth links here instead."
+  ],
+  "review": [
+    "Native check: برق سفید در سیاهی چشم / د سترګې په تور کې سپینه ځلا (white glow in the pupil), لوچ / کاږه سترګه (squint), تلو تلو راه رفتن / داسې تګ چې توازن نه لري (unsteady walk), لنگیدن / ګوډوالی (limp), فلش (camera flash), چراغ دستی / لاسي څراغ (torch)."
+  ]
+}

@@ -160,6 +160,13 @@ export default {
    "hospital-treatments",
    "hospital-stay"
   ],
+  "checks": [
+   "early-signs",
+   "women-signs",
+   "child-signs",
+   "checks-women",
+   "checks-men"
+  ],
   "food": [
    "kitchen-garden",
    "garden-water",
@@ -219,9 +226,12 @@ export default {
   "blood-pressure": "High blood pressure",
   "breastfeeding": "Breastfeeding and food",
   "burns": "Burns and scalds",
+  "checks-men": "Health checks for men, by age",
+  "checks-women": "Health checks for women, by age",
   "chickens": "Backyard chickens",
   "child-meals": "Garden food for your child",
   "child-safety": "Keep children safe from injury",
+  "child-signs": "Signs in a child to check",
   "choking-baby": "Choking baby (under 1)",
   "choking": "Choking: child over 1, adult",
   "cold-hypothermia": "Too cold (hypothermia)",
@@ -238,6 +248,7 @@ export default {
   "diarrhoea": "Diarrhoea and ORS",
   "dog-bite": "Dog bites and rabies",
   "drowning": "Drowning",
+  "early-signs": "Signs to get checked early",
   "electric-safety": "Safe electricity at home",
   "electric-shock": "Electric shock",
   "epilepsy": "Fits (epilepsy)",
@@ -313,6 +324,7 @@ export default {
   "urine-infection": "Burning urine (infection)",
   "wellbeing": "Well-being: small daily habits",
   "winter-home": "Safe warm home in winter",
+  "women-signs": "Breast and womb: signs to check",
   "worms": "Worms in the belly",
   "vaccines": "Vaccines"
  },

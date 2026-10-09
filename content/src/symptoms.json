@@ -35,7 +35,10 @@
     "HEAT": "WHO heat and health fact sheet (2024)",
     "ANAEM": "WHO Nutritional anaemias: tools for effective prevention and control (2017)",
     "MALN": "WHO guideline: updates on the management of severe acute malnutrition in infants and children (2013)",
-    "CHOKE": "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking, CPR (first-aid actions only; the signs are from WHO BEC)"
+    "CHOKE": "IFRC International First Aid, Resuscitation and Education Guidelines (2020): choking, CPR (first-aid actions only; the signs are from WHO BEC)",
+    "CANC": "WHO Guide to cancer early diagnosis (2017) and WHO cancer fact sheet (2026): warning signs that need prompt assessment (a lump that grows or persists, weight loss, a sore that does not heal); NICE NG12 (2015, updated 2025) for the durations",
+    "CHCANC": "WHO childhood cancer fact sheet (2026) and WHO CureAll framework (2021): early signs of childhood cancer (lumps, abdominal mass, white pupil, bleeding and pallor, persistent fever)",
+    "SURG": "WHO Surgical care at the district hospital (2003): strangulated hernia and abscess need surgery"
   },
   "symptoms": [
     {
@@ -1143,6 +1146,128 @@
         "_notes": [
           "Red: uncontrolled bleeding, deep wounds of neck, chest or belly, impaled objects (WHO BEC 2018 trauma); spreading redness with fever (IMAI cellulitis); infected or black diabetic foot (WHO PEN); deep or many bites or on the head, neck or hands (WHO rabies category III).",
           "Amber: infected wound (IMAI), tetanus booster for a dirty or deep wound if the last dose was more than 5 years ago (WHO tetanus position paper 2017), any animal bite (WHO rabies), sore not healed after 2 weeks or with fever (leishmaniasis page)."
+        ]
+      }
+    },
+    {
+      "id": "lump",
+      "icon": "lump",
+      "label": {
+        "fa": "غده یا پندیدگی",
+        "ps": "غوټه یا پړسوب",
+        "en": "A lump or swelling"
+      },
+      "words": {
+        "fa": [
+          "غده",
+          "دانه",
+          "پندیدگی",
+          "غده در گردن",
+          "غده زیر بغل",
+          "غده در پستان"
+        ],
+        "ps": [
+          "غوټه",
+          "پړسوب",
+          "په غاړه کې غوټه",
+          "د تي غوټه"
+        ],
+        "en": [
+          "lump",
+          "swelling",
+          "gland",
+          "swollen gland",
+          "breast lump"
+        ]
+      },
+      "page": {
+        "lead": "ui.ask.lump.lead",
+        "ages": [
+          "child",
+          "older"
+        ],
+        "default": "older",
+        "red": {
+          "child": {
+            "title": "child-signs.urgent",
+            "items": [
+              "child-signs.urgent.spots",
+              "child-signs.urgent.bleeding",
+              "dental.urgent.swallow"
+            ]
+          },
+          "older": {
+            "title": "red-flags.urgent",
+            "items": [
+              "dental.urgent.swallow",
+              {
+                "id": "ui.ask.hernia",
+                "icon": "belly-pain"
+              },
+              "scabies.urgent.spread"
+            ]
+          }
+        },
+        "amber": {
+          "child": {
+            "title": "child-signs.today",
+            "items": [
+              "child-signs.today.belly",
+              "child-signs.soon.gland",
+              "child-signs.soon.lump",
+              "child-signs.today.fever"
+            ]
+          },
+          "older": {
+            "title": "early-signs.soon",
+            "items": [
+              "early-signs.soon.lump",
+              "early-signs.soon.gland",
+              "women-signs.soon.lump",
+              "early-signs.soon.weight-loss"
+            ]
+          }
+        },
+        "care": {
+          "child": [
+            "child-signs.three",
+            "child-signs.tb"
+          ],
+          "older": [
+            "early-signs.tb-first",
+            "early-signs.go-back",
+            "early-signs.dont"
+          ]
+        },
+        "pages": {
+          "child": [
+            "child-signs",
+            "danger-child",
+            "tb"
+          ],
+          "older": [
+            "early-signs",
+            "women-signs",
+            "checks-men",
+            "tb"
+          ]
+        },
+        "sources": [
+          "CANC",
+          "CHCANC",
+          "TB",
+          "BEC",
+          "IMAI",
+          "SURG",
+          "PB"
+        ],
+        "_notes": [
+          "Added 9 Oct 2026 for the screening section (research/screening.md 6.7).",
+          "Child red: non-fading spots and severe pallor with bleeding (WHO Pocket Book 2013 and IMCI 2014: non-blanching rash and severe pallor are emergency signs; WHO childhood cancer: bleeding and pallor), a neck swelling that makes swallowing or breathing hard (WHO BEC 2018 airway).",
+          "Older red: a neck swelling that makes swallowing or breathing hard (WHO BEC airway), a painful lump in the groin or belly with vomiting (WHO Surgical care at the district hospital 2003: strangulated hernia, new line ui.ask.hernia), fever with a hot, red, spreading area of skin (WHO IMAI: cellulitis or abscess).",
+          "Child amber: belly lump (WHO childhood cancer and CureAll: abdominal mass; NICE NG12 very urgent), a gland or lump that lasts or grows (WHO CureAll; TB first, WHO TB 2021), fever over 2 weeks (WHO TB screening). The box title is child-signs.today (clinic today); the gland and growing-lump lines are 'this week' on child-signs, so this page is stricter for them, as the Thin page is for weight loss.",
+          "Older amber (this week): a growing or hard painless lump, a gland over a month, a new breast lump, weight loss without trying (WHO Guide to cancer early diagnosis 2017; NICE NG12 durations). B symptoms (clinic today for a TB test) are on the early-signs page, reached from 'More pages' and the TB-first step.",
+          "Mo's call: a women's bleeding tile, or the women's bleeding items in the existing bleeding tile, default used: neither for now (only the lump tile); the breast lump is in this tile's adult box."
         ]
       }
     },

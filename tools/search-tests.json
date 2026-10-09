@@ -684,6 +684,20 @@
     {"q": "د ماشوم غاړه کلکه ده", "lang": "ps", "want": "danger-child", "danger": true, "set": "unwell", "note": "look, listen, feel"},
     {"q": "ماشوم لوبې نه کوي", "lang": "ps", "want": "danger-child", "set": "unwell", "note": "look, listen, feel"},
     {"q": "رنګ یې الوتی دی", "lang": "ps", "want": "danger-child", "danger": true, "set": "unwell", "note": "look, listen, feel"},
-    {"q": "بې اوښکو ژاړي", "lang": "ps", "want": "danger-child", "set": "unwell", "note": "look, listen, feel"}
+    {"q": "بې اوښکو ژاړي", "lang": "ps", "want": "danger-child", "set": "unwell", "note": "look, listen, feel"},
+    {"q": "lump in my neck for two months", "lang": "en", "want": "early-signs", "set": "screening"},
+    {"q": "signs of cancer", "lang": "en", "want": "early-signs", "set": "screening"},
+    {"q": "سرطان", "lang": "fa", "want": "early-signs", "set": "screening"},
+    {"q": "د سرطان نښې", "lang": "ps", "want": "early-signs", "set": "screening"},
+    {"q": "غده در پستانم پیدا شده", "lang": "fa", "want": "women-signs", "set": "screening"},
+    {"q": "د تي غوټه", "lang": "ps", "want": "women-signs", "set": "screening"},
+    {"q": "breast lump", "lang": "en", "want": "women-signs", "set": "screening"},
+    {"q": "چشم طفلم در عکس سفید است", "lang": "fa", "want": "child-signs", "set": "screening"},
+    {"q": "white glow in the eye", "lang": "en", "want": "child-signs", "set": "screening"},
+    {"q": "lump in my child's belly", "lang": "en", "want": "child-signs", "set": "screening"},
+    {"q": "چک آپ", "lang": "fa", "want": "checks-women", "set": "screening"},
+    {"q": "cervical screening", "lang": "en", "want": "checks-women", "set": "screening"},
+    {"q": "prostate test", "lang": "en", "want": "checks-men", "set": "screening"},
+    {"q": "hepatitis test", "lang": "en", "want": "hepatitis", "set": "screening"}
   ]
 }

@@ -1,0 +1,290 @@
+{
+  "id": "early-signs",
+  "section": "everyone",
+  "title": {
+    "fa": "علایمی که باید زود معاینه شود",
+    "ps": "هغه نښې چې باید ژر معاینه شي",
+    "en": "Signs to get checked early"
+  },
+  "summary": {
+    "fa": "بیشتر آن سرطان نیست. معاینه آن چند تا را زود پیدا می‌کند.",
+    "ps": "ډېری یې سرطان نه دي. معاینه هغه څو ژر پیدا کوي.",
+    "en": "Most are not cancer. A check finds the few that are, early."
+  },
+  "image": "early-signs",
+  "blocks": [
+    {
+      "id": "early-signs.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بیشتر علایم این صفحه چیز ساده‌ای است، یا توبرکلوز که تداوی می‌شود. چند تای آن سرطان است، و زود پیدا کردن آن تداوی را موفق می‌سازد.",
+        "ps": "د دې پاڼې ډېری نښې یو ساده شی وي، یا نری رنځ چې درملنه یې کېږي. یو څو یې سرطان وي، او ژر موندل یې درملنه بریالۍ کوي.",
+        "en": "Most signs on this page turn out to be something simple, or TB, which is treatable. A few are cancer, and finding it early is what makes treatment work."
+      }
+    },
+    {
+      "id": "early-signs.today",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، امروز به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، نن کلینیک ته ولاړ شئ",
+        "en": "If you have one of these signs, go to the clinic today"
+      },
+      "items": [
+        {
+          "id": "early-signs.today.b-symptoms",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، عرق شبانه که کالا را تر می‌کند، و کم شدن وزن، برای ۲ هفته",
+            "ps": "تبه، د شپې داسې خولې چې جامې لمدې کړي، او د وزن کمېدل، ۲ اونۍ",
+            "en": "Fever, soaking night sweats and weight loss, for 2 weeks"
+          }
+        },
+        {
+          "id": "early-signs.today.bruising",
+          "icon": "bleeding",
+          "text": {
+            "fa": "زود کبود شدن یا خون آمدن از بیره، همراه با رنگ‌پریدگی یا تب",
+            "ps": "ژر شنه داغونه یا د ورېژو وینه، له رنګ الوتلو یا تبې سره",
+            "en": "Bruising or bleeding gums easily, with paleness or fever"
+          }
+        },
+        {
+          "id": "early-signs.today.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "زرد شدن چشم‌ها، همراه با کم شدن وزن یا غدهٔ سخت زیر قبرغه‌ها",
+            "ps": "د سترګو ژېړېدل، د وزن له کمېدو یا د پوښتیو لاندې له کلکې غوټې سره",
+            "en": "Yellow eyes, with weight loss or a hard lump under the ribs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "early-signs.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر یکی از این علایم را دارید، همین هفته به کلینیک بروید",
+        "ps": "که له دې نښو څخه یوه هم لرئ، همدا اونۍ کلینیک ته ولاړ شئ",
+        "en": "If you have one of these signs, go to the clinic this week"
+      },
+      "items": [
+        {
+          "id": "early-signs.soon.weight-loss",
+          "icon": "weight-loss",
+          "text": {
+            "fa": "کم شدن وزن بدون کوشش، طوری که کالا گشاد می‌شود",
+            "ps": "پرته له هڅې د وزن کمېدل، داسې چې جامې ارتې شي",
+            "en": "Losing weight without trying, so clothes become loose"
+          }
+        },
+        {
+          "id": "early-signs.soon.lump",
+          "icon": "lump",
+          "text": {
+            "fa": "غده‌ای که کلان می‌شود، یا سخت است و درد ندارد",
+            "ps": "غوټه چې لویېږي، یا کلکه ده او درد نه لري",
+            "en": "A lump that is growing, or hard and painless"
+          }
+        },
+        {
+          "id": "early-signs.soon.gland",
+          "icon": "lump",
+          "text": {
+            "fa": "غده در گردن، زیر بغل یا کشالهٔ ران، بیش از یک ماه",
+            "ps": "په غاړه، تخرګ یا د ورون په بېخ کې غوټه، له یوې میاشتې زیاته",
+            "en": "A lump in the neck, armpit or groin for over a month"
+          }
+        },
+        {
+          "id": "early-signs.soon.sore",
+          "icon": "wound",
+          "text": {
+            "fa": "زخم پوست یا دهن که در ۳ هفته جور نشده",
+            "ps": "د پوستکي یا خولې زخم چې په ۳ اونیو کې نه وي جوړ شوی",
+            "en": "A sore on the skin or in the mouth not healed in 3 weeks"
+          }
+        },
+        {
+          "id": "early-signs.soon.hoarse",
+          "icon": "talk",
+          "text": {
+            "fa": "گرفتگی آواز، بیش از ۳ هفته",
+            "ps": "د غږ کېناستل، له ۳ اونیو زیات",
+            "en": "A hoarse voice for more than 3 weeks"
+          }
+        },
+        {
+          "id": "early-signs.soon.swallow",
+          "icon": "no-drink",
+          "text": {
+            "fa": "گیر ماندن غذا در گلو یا سینه، که بدتر می‌شود",
+            "ps": "په ستوني یا سینه کې د خوړو بندېدل، چې بدتر کېږي",
+            "en": "Food sticking in the throat or chest, getting worse"
+          }
+        },
+        {
+          "id": "early-signs.soon.urine",
+          "icon": "urine-blood",
+          "text": {
+            "fa": "خون در ادرار، بدون سوزش",
+            "ps": "په تشو متیازو کې وینه، پرته له سوځېدو",
+            "en": "Blood in the urine, when there is no burning"
+          }
+        },
+        {
+          "id": "early-signs.soon.stool",
+          "icon": "stool-blood",
+          "text": {
+            "fa": "خون در مدفوع، بیش از یک بار",
+            "ps": "په غایطه کې وینه، له یو ځل زیات",
+            "en": "Blood in the stool more than once"
+          }
+        }
+      ]
+    },
+    {
+      "id": "early-signs.clinic",
+      "type": "clinic",
+      "title": {
+        "fa": "در کلینیک: سوال‌ها و معاینه",
+        "ps": "په کلینیک کې: پوښتنې او معاینه",
+        "en": "At the clinic: questions and a look"
+      },
+      "text": {
+        "fa": "کارمند صحی می‌پرسد چند وقت است، غده یا زخم را معاینه می‌کند و شاید توبرکلوز را معاینه کند. اگر لازم باشد، شما را برای اسکن یا گرفتن یک نمونهٔ کوچک به شفاخانه می‌فرستد.",
+        "ps": "روغتیايي کارکوونکی پوښتي چې څومره وخت کېږي، غوټه یا زخم معاینه کوي او ښايي د نري رنځ معاینه وکړي. که اړتیا وي، د سکن یا د یوې کوچنۍ نمونې لپاره مو روغتون ته لېږي.",
+        "en": "The health worker asks how long, examines the lump or sore, and may test for TB. If needed, they send you to the hospital for a scan or a small sample."
+      }
+    },
+    {
+      "id": "early-signs.tb-first",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "اول، معاینهٔ توبرکلوز",
+        "ps": "لومړی، د نري رنځ معاینه",
+        "en": "First, a TB test"
+      },
+      "text": {
+        "fa": "تب، عرق، کم شدن وزن و غده‌های پندیده اکثراً توبرکلوز است. معاینه و دوای توبرکلوز رایگان است. اگر معاینه منفی بود و علایم ادامه داشت، به شفاخانه بروید.",
+        "ps": "تبه، خولې، د وزن کمېدل او پړسېدلې غوټې ډېری وخت نری رنځ وي. د نري رنځ معاینه او درمل وړیا دي. که معاینه منفي وه او نښې دوام ولري، روغتون ته ولاړ شئ.",
+        "en": "Fever, sweats, weight loss and swollen glands are most often TB. The TB test and medicine are free. If the test is negative and the signs go on, go to hospital."
+      }
+    },
+    {
+      "id": "early-signs.go-back",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "اگر ادامه داشت، دوباره بروید",
+        "ps": "که دوام یې وکړ، بیا ولاړ شئ",
+        "en": "If it goes on, go back"
+      },
+      "text": {
+        "fa": "اگر کلینیک چیزی پیدا نکرد اما علامه بعد از یک ماه هنوز هست، دوباره بروید یا به شفاخانه بروید. بگویید چند وقت است.",
+        "ps": "که کلینیک څه ونه موندل خو نښه له یوې میاشتې وروسته لا هم شته، بیا ولاړ شئ یا روغتون ته ولاړ شئ. ووایاست چې څومره وخت کېږي.",
+        "en": "If the clinic found nothing but the sign is still there after a month, go again, or go to the hospital. Say how long it has been."
+      }
+    },
+    {
+      "id": "early-signs.hospital",
+      "type": "clinic",
+      "title": {
+        "fa": "در شفاخانه: پیدا کردن علت",
+        "ps": "په روغتون کې: د علت موندل",
+        "en": "At the hospital: finding the cause"
+      },
+      "text": {
+        "fa": "شفاخانه التراسوند، اکسری و معاینهٔ خون می‌کند و شاید یک نمونهٔ کوچک بگیرد. بیشتر غده‌ها سرطان نیست. سرطانی که زود پیدا شود، در کابل تداوی می‌شود.",
+        "ps": "روغتون الټراساونډ، اکسرې او د وینې معاینه کوي او ښايي یوه کوچنۍ نمونه واخلي. ډېری غوټې سرطان نه وي. هغه سرطان چې ژر وموندل شي، په کابل کې درملنه کېږي.",
+        "en": "The hospital does ultrasound, X-ray and blood tests, and may take a small sample. Most lumps are not cancer. Cancer found early is treated in Kabul."
+      }
+    },
+    {
+      "id": "early-signs.dont",
+      "type": "dont",
+      "title": {
+        "fa": "این کارها را نکنید",
+        "ps": "دا کارونه مه کوئ",
+        "en": "Things not to do"
+      },
+      "items": [
+        {
+          "id": "early-signs.dont.wait",
+          "icon": "clock",
+          "text": {
+            "fa": "منتظر نمانید که غده درد کند؛ غده‌های خطرناک اکثراً درد ندارد.",
+            "ps": "انتظار مه کوئ چې غوټه درد وکړي؛ خطرناکې غوټې ډېری وخت درد نه لري.",
+            "en": "Do not wait for a lump to hurt; serious lumps often do not hurt."
+          }
+        },
+        {
+          "id": "early-signs.dont.remedies",
+          "icon": "no",
+          "text": {
+            "fa": "روی غده یا زخم دوای خانگی نگذارید، و آن را داغ نکنید.",
+            "ps": "پر غوټې یا زخم کورني درمل مه ږدئ، او مه یې داغئ.",
+            "en": "Do not put home remedies on a lump or sore, or burn it."
+          }
+        },
+        {
+          "id": "early-signs.dont.scans",
+          "icon": "money",
+          "text": {
+            "fa": "برای اسکن تمام بدن یا «معاینهٔ خون سرطان» در لابراتوار شخصی پول ندهید.",
+            "ps": "د ټول بدن سکن یا په شخصي لابراتوار کې د «سرطان د وینې معاینې» لپاره پیسې مه ورکوئ.",
+            "en": "Do not pay for whole-body scans or private-lab 'cancer blood tests'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "early-signs.tb",
+      "type": "link",
+      "to": "topic/tb",
+      "icon": "cough",
+      "title": {
+        "fa": "توبرکلوز: معاینه و دوای رایگان",
+        "ps": "نری رنځ: وړیا معاینه او درمل",
+        "en": "TB: the free test and medicine"
+      },
+      "text": {
+        "fa": "علایم توبرکلوز، معاینهٔ رایگان، و محافظت خانواده. صفحه را باز کنید.",
+        "ps": "د نري رنځ نښې، وړیا معاینه، او د کورنۍ ساتنه. پاڼه پرانیزئ.",
+        "en": "The signs of TB, the free test, and how to protect the family. Open the page."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Guide to cancer early diagnosis (2017): awareness of warning signs, prompt assessment, access to treatment",
+    "WHO cancer fact sheet (3 July 2026): early diagnosis and common warning signs",
+    "NICE NG12 Suspected cancer: recognition and referral (2015, updated 2025): signs that carry about 3% risk or more (dysphagia, unexplained weight loss, persistent lymph node, non-healing ulcer over 3 weeks, hoarseness over 3 weeks, visible haematuria, rectal bleeding)",
+    "Nicholson BD et al., unexpected weight loss and cancer risk in primary care (BMJ 2024 update)",
+    "Shephard EA et al., risk of non-Hodgkin lymphoma with lymphadenopathy in primary care (BJGP 2015)",
+    "WHO consolidated guidelines on tuberculosis, Module 2: systematic screening (2021): cough, fever, night sweats, weight loss; free test and treatment through the national TB programme",
+    "Cheson BD et al., Lugano classification (J Clin Oncol 2014): B symptoms are fever, drenching night sweats and weight loss",
+    "WHO oral health fact sheet (2023) and WHO tobacco fact sheet: smokeless tobacco (naswar) and oral cancer",
+    "WHO Regional Office for Europe, Screening programmes: a short guide (2020): tests without a programme and follow-up cause harm; no whole-body or tumour-marker screening",
+    "WHO cancer fact sheet (3 July 2026): early diagnosis has three steps, awareness of signs, assessment and treatment"
+  ],
+  "_notes": [
+    "Built from research/screening.md sections 4 and 6.2 (9 Oct 2026). Signs chosen for specificity (NICE NG12, about 3% risk or more), with a duration, age or quality qualifier on each.",
+    "Order: the clinic-today box (B symptoms, bruising, yellow eyes) comes before the this-week box, so the more urgent signs are heard first.",
+    "Mo's call: age cut-offs (over 55 for weight loss with belly pain, 45 for blood in urine, 40 for blood in sputum), default used: no ages in the alert items (research drafts as written); 'without trying', 'no burning', 'more than once' and the durations carry the specificity.",
+    "Mo's call: iron-deficiency anaemia in a man or a woman after the menopause, default used: no item (it needs an Hb result most families will not have).",
+    "Mo's call: non-healing sore 2 weeks (red-flags, dental) or 3 weeks (NICE), default used: 3 weeks on the new pages; red-flags.soon.wound and dental.soon.patch keep 2 weeks (stricter, not changed). One line to change: early-signs.soon.sore.",
+    "Mo's call: naswar mouth check on early-signs, checks-men, dental or all three, default used: checks-men (checks-men.mouth); dental already has dental.naswar and dental.soon.patch, unchanged. The early-signs naswar step was cut to keep this page near 2.5 minutes (research 6.2: 'trim the naswar step if over').",
+    "Mo's call: 'whole-body scans or cancer blood tests' wording, default used: early-signs.dont.scans 'Do not pay for whole-body scans or private-lab cancer blood tests' (research wording, 'shop' made 'private lab'; no lab named).",
+    "Black stool is not in the this-week stool item (the research draft had 'or black stool'): black stool is hospital now on red-flags.urgent.blood-vomit, so it stays there only.",
+    "Trouble swallowing uses the icon no-drink, like red-flags.soon.swallowing (a 'swallow' icon is still wanted).",
+    "'Cancer' is only in the summary, the lead, the hospital block and the do-not line on private-lab tests, each time with 'most are not cancer' or 'found early'.",
+    "No link to red-flags here (red-flags links to this page, and the header Emergency button is on every screen); kept the TB link."
+  ],
+  "review": [
+    "Native check: 'night sweats that soak your clothes' (عرق شبانه که کالا را تر می‌کند / د شپې داسې خولې چې جامې لمدې کړي), 'clothes become loose' (کالا گشاد می‌شود / جامې ارتې شي), 'hoarse voice' (گرفتگی آواز / د غږ کېناستل), 'groin' (کشالهٔ ران / د ورون بېخ), 'bruising' (کبود شدن / شنه داغونه).",
+    "The this-week and today box titles are word for word red-flags.soon and red-flags.today, so their clips can be copied."
+  ]
+}

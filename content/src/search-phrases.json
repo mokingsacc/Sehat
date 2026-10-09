@@ -243,6 +243,40 @@
       "lat": ["ghudda", "yaraqan", "zardi", "chashm zard", "zhera"],
       "en": ["lump", "growing lump", "weight loss", "losing weight", "blood in urine", "blood in stool", "hard to swallow", "trouble swallowing"]
     },
+    "early-signs": {
+      "fa": ["سرطان", "علایم سرطان", "نشانه های سرطان", "غده کلان شده", "غده در گردن", "غده زیر بغل", "زخم جور نمیشود", "آوازم گرفته", "?غذا در گلویم گیر میکند"],
+      "ps": ["د سرطان نښې", "په غاړه کې غوټه", "غوټه لویه شوې", "زخم نه جوړېږي", "?غږ مې کېناستلی"],
+      "lat": ["saratan", "sartan", "alayem saratan"],
+      "en": ["cancer", "cancer signs", "signs of cancer", "early warning signs", "lump in neck", "lump in armpit", "swollen glands", "lymph node", "hoarse voice", "food sticking", "sore not healing", "b symptoms", "lymphoma"]
+    },
+    "women-signs": {
+      "fa": ["غده در پستان", "پستانم غده دارد", "سرطان پستان", "سر پستانم خون میاید", "خون بعد از همبستری", "خونریزی بعد از یائسگی", "?خونریزی بین دو عادت"],
+      "ps": ["د تي غوټه", "په تي کې غوټه", "د تي سرطان", "?له عادت بندېدو وروسته وینه"],
+      "lat": ["saratan pestan", "ghudda pestan"],
+      "en": ["lump in breast", "breast cancer", "nipple discharge", "nipple bleeding", "bleeding after sex", "bleeding after menopause", "postmenopausal bleeding", "bleeding between periods"]
+    },
+    "child-signs": {
+      "fa": ["سیاهی چشم طفل سفید است", "چشم طفل در عکس سفید", "چشمش لوچ شده", "غده در شکم طفل", "درد استخوان طفل در شب", "سرطان اطفال", "سرطان خون"],
+      "ps": ["?د ماشوم سترګه سپینه ځلېږي", "د ماشوم په نس کې غوټه", "د ماشومانو سرطان", "د وینې سرطان"],
+      "lat": ["saratan khun"],
+      "en": ["white glow in the eye", "white pupil", "white eye in photo", "white reflex", "new squint", "lump in child's belly", "child bone pain at night", "childhood cancer", "leukaemia", "leukemia"]
+    },
+    "checks-women": {
+      "fa": ["معاینات زنان", "چک آپ", "معاینه دهانه رحم", "معاینه منظم", "کدام معاینه بکنم"],
+      "ps": ["د ښځو معاینې", "د رحم د خولې معاینه"],
+      "lat": ["chekap", "check ap"],
+      "en": ["check-up", "checkup", "health check", "screening", "pap smear", "cervical screening", "smear test", "via test", "women's check-up", "mammogram"]
+    },
+    "checks-men": {
+      "fa": ["معاینات مردان", "معاینه پروستات"],
+      "ps": ["د نارینه وو معاینې"],
+      "en": ["men's check-up", "psa", "prostate test", "testicle lump", "full body check-up"]
+    },
+    "hepatitis.test-once": {
+      "fa": ["معاینه هپاتیت", "آزمایش هپاتیت"],
+      "ps": ["د هیپاتیت معاینه"],
+      "en": ["hepatitis test", "hepatitis b test", "hepatitis c test"]
+    },
     "danger-child": {
       "urgent": true,
       "fa": ["علایم خطر طفل", "طفلم خیلی مریض است", "طفل خیلی مریض", "طفل بی‌حال", "بی‌حال است", "سست شده", "طفلم سست است", "شیر نمی‌خورد", "شیر نمی‌گیرد", "پستان نمی‌گیرد", "هیچ چیز نمی‌خورد", "آب نمی‌خورد", "هر چه میخورد قی میکند", "همه چیز را استفراغ میکند", "خواب‌آلود است", "بیدار نمیشود", "سینه‌اش پایین میرود", "قفسه سینه‌اش داخل میرود", "نوزاد سرد است", "شیرخوار تب دارد", "نفسش خرخر میکند"],

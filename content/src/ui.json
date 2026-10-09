@@ -926,6 +926,16 @@
    "ps": "کوم ځای، څه یوسئ، معاینې او درملنې",
    "en": "Which place, what to take, tests and treatments"
   },
+  "checks": {
+   "fa": "علایم اولیه و معاینات صحی",
+   "ps": "لومړنۍ نښې او روغتیايي معاینې",
+   "en": "Early signs and health checks"
+  },
+  "checksSub": {
+   "fa": "علایمی که زود معاینه لازم دارد، و معاینات هر سن",
+   "ps": "هغه نښې چې ژر معاینه غواړي، او د هر عمر معاینې",
+   "en": "Signs to check early, and the tests for each age"
+  },
   "food": {
    "fa": "غذا و باغچه",
    "ps": "خواړه او باغچه",
@@ -1407,6 +1417,11 @@
    "fa": "رفتن به کلینیک یا شفاخانه. شش صفحهٔ کوتاه: کدام جای چه کار می‌کند، آماده شدن، وقتی می‌رسید، معاینات، تداوی، و رفتن به خانه.",
    "ps": "کلینیک یا روغتون ته تلل. شپږ لنډې پاڼې: کوم ځای څه کوي، چمتو کېدل، کله چې ورسېږئ، معاینې، درملنې، او کور ته تلل.",
    "en": "Going to the clinic or hospital. Six short pages: which place does what, getting ready, arriving, tests, treatments, and going home."
+  },
+  "ui.checks": {
+   "fa": "علایم اولیه و معاینات صحی: علایمی که زود معاینه لازم دارد، در بزرگسالان، زنان و اطفال، و معایناتی که در هر سن باید بخواهید.",
+   "ps": "لومړنۍ نښې او روغتیايي معاینې: هغه نښې چې ژر معاینې ته اړتیا لري، په لویانو، ښځو او ماشومانو کې، او هغه معاینې چې په هر عمر کې باید وغواړئ.",
+   "en": "Early signs and health checks: signs that need a check soon, in adults, women and children, and the tests to ask for at each age."
   },
   "ui.food": {
    "fa": "غذا و باغچه: کشت ترکاری، صرفه‌جویی آب، غذای اطفال، نگهداری غذا، مرغ، بز و گوسفند، و درآمد از خانه.",

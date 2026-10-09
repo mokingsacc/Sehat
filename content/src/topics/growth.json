@@ -258,6 +258,15 @@
           }
         },
         {
+          "id": "growth.soon.white-eye",
+          "icon": "eye",
+          "text": {
+            "fa": "در سیاهی چشم برق سفید دارد",
+            "ps": "د سترګې په تور کې سپینه ځلا لري",
+            "en": "has a white glow in the black of the eye"
+          }
+        },
+        {
           "id": "growth.soon.hear",
           "icon": "talk",
           "text": {
@@ -277,6 +286,22 @@
         "ps": "هغه ماشوم چې ښه وزن نه اخلي، ډېر ځله خواړو او د مور شیدو ته اړتیا لري. له روغتیايي کارکوونکي سره مشوره وکړئ.",
         "en": "A child who is not gaining weight needs more meals and breast milk. Ask the health worker for advice."
       }
+    },
+    {
+      "id": "growth.child-signs",
+      "type": "link",
+      "to": "topic/child-signs",
+      "icon": "lump",
+      "title": {
+        "fa": "علایم دیگری که زود معاینه لازم دارد",
+        "ps": "نورې نښې چې ژر معاینه غواړي",
+        "en": "Other signs to check soon"
+      },
+      "text": {
+        "fa": "غده، برق سفید در چشم، درد استخوان در شب یا تب طولانی. صفحه را باز کنید.",
+        "ps": "غوټه، په سترګه کې سپینه ځلا، د شپې د هډوکي درد یا اوږده تبه. پاڼه پرانیزئ.",
+        "en": "A lump, a white glow in the eye, bone pain at night or a long fever. Open the page."
+      }
     }
   ],
   "sources": [
@@ -287,7 +312,8 @@
     "WHO guideline: Preventive chemotherapy to control soil-transmitted helminth infections (2017)",
     "WHO IMCI Chart Booklet (2014): check for acute malnutrition",
     "WHO IMCI Chart Booklet (2014): check for acute malnutrition and anaemia; WHO guideline on wasting and nutritional oedema (2023)",
-    "WHO/UNICEF Care for Child Development (2012); WHO Nurturing care framework (2018)"
+    "WHO/UNICEF Care for Child Development (2012); WHO Nurturing care framework (2018)",
+    "NICE NG12 Suspected cancer (2015, updated 2025): an absent red reflex or white pupil in a child needs urgent referral (retinoblastoma); WHO childhood cancer fact sheet (2026)"
   ],
   "review": [
     "Milestone ages are given as 'most children' by these ages, as requested (smile about 6 weeks, head 3 to 4 months, sit 6 to 8 months, first words about 12 months, walk 12 to 18 months, short sentences by 2 years). WHO motor windows are wider (sitting alone 4 to 9 months, walking alone 8 to 18 months); check that the wording will not alarm parents of normal children.",
@@ -298,5 +324,9 @@
     "Very thin (severe wasting) follows MoPH IMAM 2018 and WHO SAM 2013, and matches the home kit (kit-muac, the MUAC checker in js/tools.js): very thin or a red MUAC = clinic today (outpatient treatment with therapeutic food, OPD-SAM); swelling of both feet, will not eat or drink, or very thin and very weak, sleepy or sick = hospital now (inpatient). New: growth.today (clinic today box) and the growth.home-care tip; growth.urgent.thin now needs 'very weak, sleepy or sick' as well. Chosen by the merge (2026-10-07); Mo to confirm. 'Every week' for outpatient visits is IMAM practice (weekly or every 2 weeks); check locally.",
     "Developmental assessment at district hospital level is limited in Afghanistan; the block promises only a check for treatable causes and advice.",
     "Content pass 3 (MoPH fixes): weighing at 'the clinic or the health post'; vitamin A 'every 6 months: at the clinic, or when the vaccination team comes' (it mostly comes with campaigns and CHWs); 'free' removed from the paste (Mo's rule: 'free' only for vaccines and TB). The very thin child already goes to the clinic today unless weak, sleepy or sick (IMAM 2018)."
+  ],
+  "_notes": [
+    "Screening section (9 Oct 2026, research/screening.md 6.6): new amber item growth.soon.white-eye and link growth.child-signs.",
+    "Mo's call: the 'white glow in the pupil' item on growth as well as child-signs, default used: added (growth.soon.white-eye)."
   ]
 }

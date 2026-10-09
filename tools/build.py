@@ -123,7 +123,7 @@ for tid, t in topics.items():
             for it in b["items"]:
                 if it.get("icon"): it["icon"] = icon(it["icon"])
                 say(it["id"], it["text"])
-    t.pop("review", None)
+    t.pop("review", None); t.pop("_notes", None)  # notes for Mo (sources of each sign, Mo's-call defaults): not in the book
     out_topics[tid] = t
 
 if vaccines:

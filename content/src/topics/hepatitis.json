@@ -98,6 +98,36 @@
       }
     },
     {
+      "id": "hepatitis.test-once",
+      "type": "step",
+      "icon": "syringe",
+      "title": {
+        "fa": "یک بار معاینه شوید",
+        "ps": "یو ځل معاینه شئ",
+        "en": "Get tested once"
+      },
+      "text": {
+        "fa": "هر کس باید در عمر خود یک بار معاینهٔ خون هپاتیت ب و سی کند؛ اول زنان حامله و خانوادهٔ کسی که هپاتیت دارد. از کلینیک بپرسید کجا می‌شود.",
+        "ps": "هر څوک باید په ژوند کې یو ځل د هیپاتیت ب او سي د وینې معاینه وکړي؛ لومړی امیندوارې ښځې او د هغه چا کورنۍ چې هیپاتیت لري. له کلینیک وپوښتئ چې چېرې کېږي.",
+        "en": "Everyone should have one hepatitis B and C blood test in life; pregnant women and the family of a person with hepatitis first. Ask the clinic where it is done."
+      }
+    },
+    {
+      "id": "hepatitis.carrier",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "هپاتیت ب دایمی: معاینهٔ منظم",
+        "ps": "تل پاتې هیپاتیت ب: منظمه معاینه",
+        "en": "Hepatitis B for life: regular checks"
+      },
+      "text": {
+        "fa": "کسی که هپاتیت ب دایمی دارد، باید هر ۶ تا ۱۲ ماه، حتی وقتی صحتمند است، نزد داکتر شفاخانه برود تا جگر معاینه شود و در مورد دوا تصمیم گرفته شود.",
+        "ps": "هغه څوک چې تل پاتې هیپاتیت ب لري، باید هر ۶ تر ۱۲ میاشتې، حتی کله چې روغ وي، د روغتون ډاکټر ته ولاړ شي، چې ځیګر یې معاینه شي او د درملو پرېکړه وشي.",
+        "en": "Someone with hepatitis B for life should see the hospital doctor every 6 to 12 months, even when well, to check the liver and decide on medicine."
+      }
+    },
+    {
       "id": "hepatitis.clinic",
       "type": "clinic",
       "title": {
@@ -285,7 +315,9 @@
     "WHO Pocket Book of Hospital Care for Children (2013): jaundice; WHO IMCI Chart Booklet (2014): jaundice in the young infant (yellow palms and soles, or jaundice under 24 hours, refer urgently)",
     "WHO Afghanistan news (27 Jul 2025): 67,230 hepatitis B and 27,937 hepatitis C infections confirmed from 2023 to the first quarter of 2025; free testing and treatment at the Kabul infectious diseases hospital and expansion to provinces",
     "Afghanistan MoPH NDSR weekly report, week 33 2026: 7,270 acute hepatitis cases and 51 deaths in 2026 to date; Afghanistan EPI schedule: hepatitis B birth dose (content/src/vaccines.json)",
-    "WHO/UNICEF Facts for Life (2010): hygiene"
+    "WHO/UNICEF Facts for Life (2010): hygiene",
+    "WHO Guidelines on hepatitis B and C testing (2017): test pregnant women, household and sexual contacts, and people with past unsafe injections; general-population testing where HBsAg is about 2% or more",
+    "WHO Guidelines for the prevention, diagnosis, care and treatment for people with chronic hepatitis B infection (March 2024): monitoring of people with chronic hepatitis B, wider treatment"
   ],
   "review": [
     "'Free hepatitis B and C treatment at the Kabul infectious diseases hospital and some provincial hospitals' comes from WHO Afghanistan (July 2025); confirm whether Balkh Regional Hospital or Samangan provincial hospital now offers it.",
@@ -295,6 +327,12 @@
     "Breastfeeding with hepatitis B is safe when the baby is vaccinated (WHO); the do-not item does not go into this detail.",
     "Dari زردی / Pashto ژېړی are the everyday words for jaundice; هپاتیت/هیپاتیت added in brackets.",
     "Content pass 3 (MoPH fixes, moph-guidance.md section 6): 'free' removed (Mo's rule: say 'free' only for vaccines and TB; the National Health Policy 2025-2030 introduces user charges at health centres).",
-    "Medical audit 2026-10-08 IL-24: hepatitis.hospital no longer says 'and some provincial hospitals' (the WHO Afghanistan item names only the Kabul hospital); it says 'ask the clinic about a nearer one'. IL-8: yellow eyes are clinic today here and now on red-flags too (red-flags.today.yellow-eyes). IL-1 (paracetamol) is Mo's call and is unchanged."
+    "Medical audit 2026-10-08 IL-24: hepatitis.hospital no longer says 'and some provincial hospitals' (the WHO Afghanistan item names only the Kabul hospital); it says 'ask the clinic about a nearer one'. IL-8: yellow eyes are clinic today here and now on red-flags too (red-flags.today.yellow-eyes). IL-1 (paracetamol) is Mo's call and is unchanged.",
+    "Native check (9 Oct 2026): 'hepatitis B for life' = هپاتیت ب دایمی / تل پاتې هیپاتیت ب (chronic carrier)."
+  ],
+  "_notes": [
+    "Screening section (9 Oct 2026, research/screening.md 5 and 6.6): new steps hepatitis.test-once and hepatitis.carrier.",
+    "Mo's call: a follow-up step for hepatitis B carriers (6 to 12 monthly hospital check), default used: added (hepatitis.carrier, WHO 2024 monitoring); remove that one block to undo.",
+    "Mo's call: AFP and ultrasound for cirrhosis surveillance, default used: not in the app ('check the liver' only)."
   ]
 }

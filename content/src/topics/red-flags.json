@@ -291,6 +291,22 @@
       }
     },
     {
+      "id": "red-flags.early",
+      "type": "link",
+      "to": "topic/early-signs",
+      "icon": "lump",
+      "title": {
+        "fa": "علایم دیگر برای معاینهٔ زود",
+        "ps": "د ژر معاینې لپاره نورې نښې",
+        "en": "More signs to check early"
+      },
+      "text": {
+        "fa": "غده، کم شدن وزن، زخم، و علایمی در زنان و اطفال که زود معاینه لازم دارد. صفحه را باز کنید.",
+        "ps": "غوټې، د وزن کمېدل، زخمونه، او په ښځو او ماشومانو کې هغه نښې چې ژر معاینه غواړي. پاڼه پرانیزئ.",
+        "en": "Lumps, weight loss, sores, and signs in women and children that need a check soon. Open the page."
+      }
+    },
+    {
       "id": "red-flags.dont",
       "type": "dont",
       "title": {
@@ -347,5 +363,10 @@
     "Medical audit 8 Oct 2026 (EM13): the chest pain item no longer reads as if pain, spreading and sweating are all needed: 'Crushing or pressing chest pain, or pain spreading to the arm, jaw or back' (WHO cardiovascular diseases fact sheet 2025: sweating may happen, it is not required). The item is also a sign chip in the breathing counter and the oxygen checker, and a line on the symptom pictures.",
     "Medical audit 2026-10-08 IL-7 and IL-8: red-flags.soon.cough ('Cough for more than 2 weeks, or blood in the sputum', clinic this week) and red-flags.soon.yellow-eyes ('Yellow eyes', clinic this week) moved to a new amber box red-flags.today 'If you have one of these signs, go to the clinic today': 'A cough for 2 weeks or more', 'Blood in the sputum' (the same words as tb.soon.cough and tb.soon.blood) and 'Yellow eyes' (same words as before). This matches the TB, pneumonia and hepatitis pages (clinic today). The this-week box keeps weight loss, a growing lump, blood in urine or stool, a sore that does not heal and trouble swallowing. The clinic block title now says 'the amber signs' (was 'the this-week signs'). The 'What is wrong?' Thin page (older) now uses the today title, as its box holds TB signs.",
     "Two older review notes above ('Blood in the sputum' this week; 'Yellow eyes' this week) are answered by the IL-7 and IL-8 change."
+  ],
+  "_notes": [
+    "Screening section (9 Oct 2026, research/screening.md 6.6): link red-flags.early to early-signs added after the clinic block. The this-week box is unchanged (its ids are used by the What is wrong? pictures).",
+    "Mo's call: add 'getting worse' to red-flags.soon.swallowing, default used: not changed here (a rewording, not an addition); early-signs.soon.swallow says 'getting worse'.",
+    "Mo's call: red-flags.soon.wound 2 weeks or 3 weeks (NICE), default used: 2 weeks kept (stricter); the new pages say 3 weeks."
   ]
 }

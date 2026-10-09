@@ -142,6 +142,16 @@
       }
     },
     {
+      "id": "pregnancy-care.hep-b",
+      "type": "tip",
+      "icon": "syringe",
+      "text": {
+        "fa": "در حاملگی معاینهٔ خون هپاتیت ب را بخواهید، و از کلینیک بپرسید کجا می‌شود. واکسین وقت تولد طفل را محافظت می‌کند.",
+        "ps": "په امیندوارۍ کې د هیپاتیت ب د وینې معاینه وغواړئ، او له کلینیک وپوښتئ چې چېرې کېږي. د زېږون پر وخت واکسین ماشوم ساتي.",
+        "en": "Ask for a hepatitis B blood test in pregnancy, and ask the clinic where it is done. The vaccine at birth protects the baby."
+      }
+    },
+    {
       "id": "pregnancy-care.hospital",
       "type": "clinic",
       "title": {
@@ -262,7 +272,8 @@
     "WHO recommendations on antenatal care (2016), rec. A.3: calcium 1.5 to 2 g a day where diets are low in calcium, to prevent pre-eclampsia; take calcium and iron at different times (WHO eLENA); Afghanistan MoPH RMNCAH Strategy 2017-2021 lists calcium for pregnant women (via the NYAS calcium map)",
     "WHO recommendations on antenatal care (2016), rec. A.1.1: counsel women to keep physically active; PCPNC: rest and avoid lifting heavy objects",
     "WHO/UNICEF WIISE schedule, Afghanistan 2024 and 2025: Td (tetanus and diphtheria) for women 15 to 49 and at the first pregnancy contact",
-    "NICE NG133 Hypertension in pregnancy (2019), rec. 1.1.1: report severe headache or vision problems"
+    "NICE NG133 Hypertension in pregnancy (2019), rec. 1.1.1: report severe headache or vision problems",
+    "WHO Guidelines on hepatitis B and C testing (2017): HBsAg testing of all pregnant women where prevalence is about 2% or more (Afghanistan about 1.9%); national hepatitis programme (WHO Afghanistan, July 2025)"
   ],
   "review": [
     "Visits: '3 months' used for the WHO 'before 12 weeks'; '8 visits are best' for the WHO 8 contacts (2016). Afghanistan services may still teach 4 visits; check local wording.",
@@ -277,5 +288,9 @@
     "Medical audit 2026-10-08 MA8: the headache item now reads 'Severe headache, or blurred vision', as on after-birth and pregnancy-danger.",
     "Medical audit 2026-10-08 MA15: the rest step said only 'lie down to rest'. It now says walking and normal daily work are good, rest when tired, and get help with heavy work (WHO ANC A.1.1; PCPNC). Title 'Keep active, avoid heavy loads'.",
     "Medical audit 2026-10-08 CH8 / MA9: Afghanistan reported Td (tetanus and diphtheria) for women to WHO in 2024 and 2025, so the English now says '(Td)' (it said 'TT or Td'); Dari and Pashto still say 'tetanus vaccine'. The second review note above is superseded. Check the current Afghan card."
+  ],
+  "_notes": [
+    "Screening section (9 Oct 2026, research/screening.md 6.6): new tip pregnancy-care.hep-b.",
+    "Mo's call: add 'and a hepatitis B blood test' to the pregnancy-care clinic block, default used: a separate tip ('ask for it, ask where it is done'), because the clinic block says what the midwife does and the test is not yet offered everywhere; the clinic block and its clips are unchanged."
   ]
 }

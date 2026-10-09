@@ -126,6 +126,13 @@
     "hospital-treatments",
     "hospital-stay"
   ],
+  "checks": [
+    "early-signs",
+    "women-signs",
+    "child-signs",
+    "checks-women",
+    "checks-men"
+  ],
   "food": [
     "kitchen-garden",
     "garden-water",
