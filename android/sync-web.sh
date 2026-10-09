@@ -21,7 +21,7 @@ rm -rf "$OUT/img/_preview" "$OUT/js/sw.template.js" "$OUT/anim/demo.html"
 find "$OUT" -name '*.cjs' -delete   # local screenshot helpers (anim/cine/shots.cjs), not part of the app
 # Picture-step sets: only the Emergency and CPR ones ("precache" in book.steps, chosen by tools/build.py) go in the APK.
 # Every other set (on-demand, or not live yet) stays on the website: the app downloads it the first time its page is
-# opened and plays the SVG version until then (js/anim.js, docs/STEPS_PLAYER.md). Keeps the APK about 11 MB.
+# opened and plays the SVG version until then (js/anim.js, docs/STEPS_PLAYER.md). Keeps the APK about 12 MB (Mo 9 Oct: all Emergency sets in the APK; under 15 MB).
 python3 - "$WEB" "$OUT" <<'PY'
 import json, os, sys
 web, out = sys.argv[1], sys.argv[2]

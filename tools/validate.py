@@ -25,6 +25,12 @@ except Exception: CONFIG_LISTS = {}
 PAGE_LISTS = set(CONFIG_LISTS) | {"kit"}
 SECTION_LISTS = SECTIONS | {"emergency"} | PAGE_LISTS
 ANIM_FILES, ANIM_GROUPS, ANIM_TEXT = set(ANIM.names()), ANIM.groups(), ANIM.narration()
+# the book's other spoken lines (interface, topic pages): a picture-step set may read its page's lines (docs/STEPS_PLAYER.md)
+PAGE_LINES = ANIM.page_lines()
+def anim_line_missing(i):
+    """None when narration id i exists; otherwise why (an animation's own line, or a page line it borrows)."""
+    if i in ANIM_TEXT or (not ANIM.own_line(i) and i in PAGE_LINES): return None
+    return f"narration {i} missing from content/src/anims.json" if ANIM.own_line(i) else f"narration {i} is not a spoken line of the book (a topic page or ui say line)"
 ID_RE = re.compile(r'^[a-z0-9-]+(\.[a-z0-9-]+)*$')
 LANGS = ("fa", "ps", "en")
 
@@ -73,7 +79,8 @@ def check_anim(f, w, b):
     if b.get("title") is not None: check_L(f, w + ".title", b["title"], 7)
     for x in ([a] + ([pick] if pick else [])):
         for i in ANIM.needed_ids(x):
-            if i not in ANIM_TEXT: err(f, f"{w}: narration {i} missing from content/src/anims.json")
+            why = anim_line_missing(i)
+            if why: err(f, f"{w}: {why}")
         anims_used.add(x)
 
 def check_topic(f, d):
@@ -238,7 +245,7 @@ def check_anims_and_lists():
         if not ID_RE.match(k) or not k.startswith("anim."): err(fa, f"{k}: ids look like anim.<name>.s1")
         check_L(fa, k, L)
     for name in sorted(ANIM_FILES):
-        miss = [i for i in ANIM.needed_ids(name) if i not in ANIM_TEXT]
+        miss = [i for i in ANIM.needed_ids(name) if anim_line_missing(i)]
         if miss and name not in anims_used: warn(fa, f"anim/{name}.js: no narration yet for {', '.join(miss[:4])}{' ...' if len(miss) > 4 else ''}")
     topic_ids = {os.path.basename(x)[:-5] for x in glob.glob(os.path.join(ROOT, "content/src/topics/*.json"))} | {"vaccines"}
     fs = os.path.join(ROOT, "content/src/sections.json")
@@ -510,8 +517,16 @@ def check_steps():
         except Exception as e: err(f, f"invalid JSON: {e}"); continue
         W, H = d.get("w"), d.get("h")
         if not (isinstance(W, int) and isinstance(H, int) and W > 0 and H > 0): err(f, "w and h (picture size in pixels) missing"); continue
-        if name in live and not str(d.get("approved") or "").strip():
-            err(f, "is live (STEPS in js/anim.js) but has no \"approved\" note: only pictures Mo has approved go live")
+        approved = str(d.get("approved") or "").strip()
+        if name in live and (not approved or approved.upper().startswith("PENDING")):
+            err(f, f"is live (STEPS in js/anim.js) but has no \"approved\" note{' (' + repr(approved) + ')' if approved else ''}: only pictures Mo has approved go live")
+        if name in live and d.get("held"): err(f, f"is live (STEPS in js/anim.js) but held: {d['held']}")
+        # narration: scenes read anim.<name>.s<n> (content/src/anims.json), or the lines of the set's topic page and
+        # the title is then that page's title ("id": the topic id). Mo's sets of 9 Oct 2026 read their page's lines.
+        bad = err if name in live else warn
+        sid = str(d.get("id") or "")
+        if sid != f"anim.{name}" and f"{sid}.title" not in PAGE_LINES:
+            bad(f, f"id {sid!r} should be anim.{name} or a topic id (its title {sid}.title is the animation's title)")
         pdir = os.path.join(ROOT, (d.get("dir") or f"img/steps/{name}/"))
         layers = {}
         for fr, v in (d.get("frames") or {}).items():
@@ -523,7 +538,9 @@ def check_steps():
         if not layers: err(f, "no frames"); continue
         for n, sc in enumerate(d.get("scenes") or []):
             w = f"scenes[{n}]"
-            if not str(sc.get("id", "")).startswith(f"anim.{name}.s") and name in live: err(f, f"{w}: id should be anim.{name}.s<n> (the narration id)")
+            scid = str(sc.get("id", ""))
+            if not re.match(rf"anim\.{re.escape(name)}\.s\d+$", scid) and (ANIM.own_line(scid) or scid not in PAGE_LINES):
+                bad(f, f"{w}: id {scid!r} should be anim.{name}.s<n> or a spoken line of its page (the narration id)")
             if sc.get("frame") not in layers: err(f, f"{w}: unknown frame {sc.get('frame')!r}"); continue
             ids = {m.get("id") for m in sc.get("motions") or [] if m.get("id")}
             for m in sc.get("motions") or []:
@@ -553,7 +570,11 @@ def check_steps():
 check_steps()
 # where pictures live (Mo, 9 Oct 2026; docs/STEPS_PLAYER.md): Emergency and CPR picture steps are precached and in the
 # APK, every other set downloads on demand. tools/anims.py chooses from the group; nobody sets it by hand.
-APK_PICTURES_MB = 3.0   # img/ inside the APK; with code (~1 MB) and the bundled narration (~7 MB) the APK stays ~11 MB
+# Mo 9 Oct: all Emergency sets in the APK. Their pictures (2.8 MB for the 24 Emergency and CPR sets, bleeding-tourniquet
+# held) and the rest of img/ (1.1 MB, with the symptom tiles) make about 3.9 MB; with code and the bundled narration
+# (about 7.6 MB) the APK is about 11.6 MB. This limit leaves 0.6 MB of headroom (an APK of about 12.2 MB); 15 MB is the
+# hard limit for the APK.
+APK_PICTURES_MB = 4.5   # img/ inside the APK
 def check_picture_storage():
     import hashlib, shutil, tempfile
     live, em = ANIM.steps_live(), ANIM.emergency_anims()
@@ -608,9 +629,9 @@ def check_picture_storage():
         for n, e in want.items():
             if e["offline"] == "precache":
                 should |= {f"anim/steps/{n}.json"} | {f.split("?")[0] for f in e["files"][1:]}
-        for f in sorted(left - should):
-            if f.startswith(("anim/steps/", "img/steps/")) and not any(f.startswith(e["dir"]) for n, e in want.items() if e["offline"] == "precache"):
-                err(sync, f"the APK filter keeps {f}, which is not an Emergency / CPR picture-step file")
+        for f in sorted(left - should):   # also a held or unused picture inside an Emergency / CPR set's folder
+            if f.startswith(("anim/steps/", "img/steps/")):
+                err(sync, f"the APK filter keeps {f}, which is not a picture an Emergency / CPR set's JSON names")
         for f in sorted(should - left): err(sync, f"the APK filter drops {f}, part of an Emergency / CPR set")
         apk_steps = sum(os.path.getsize(os.path.join(tmp, f)) for f in left if f.startswith("img/"))
     finally:
@@ -621,7 +642,7 @@ def check_picture_storage():
         if rel.startswith(os.path.join("img", "_preview")) or rel.startswith(os.path.join("img", "steps")): continue
         total += sum(os.path.getsize(os.path.join(a, f)) for f in fs if not f.startswith("."))
     if total > APK_PICTURES_MB * 1e6:
-        warn(os.path.join(ROOT, "img"), f"{total / 1e6:.1f} MB of pictures go into the APK (aim: under {APK_PICTURES_MB:.0f} MB, so the APK stays about 11 MB)")
+        warn(os.path.join(ROOT, "img"), f"{total / 1e6:.1f} MB of pictures go into the APK (aim: under {APK_PICTURES_MB:.1f} MB, so the APK stays about 12 MB, never over 15 MB)")
 check_picture_storage()
 # Old Android phones (Chrome/WebView before 80) cannot run ?? or ?. and then the app never opens
 def check_old_phone_js():

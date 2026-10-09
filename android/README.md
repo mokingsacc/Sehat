@@ -15,7 +15,7 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 - **Pictures in the APK:** all of `img/` except the picture-step sets that are not Emergency or CPR ("on-demand" in
   `book.steps`, chosen by `tools/build.py`): those stay on the website and download the first time their page is
   opened, from `appUrl`; the SVG version plays until then (`docs/STEPS_PLAYER.md`, "Where the pictures live"). This
-  keeps the APK about 11 MB.
+  keeps the APK about 12 MB with every Emergency set inside (Mo, 9 Oct 2026), under 15 MB.
 - **Narration in the APK: only Emergency and CPR, woman's voice, Dari and Pashto** (`book.bundle`, listed by
   `tools/build.py` from the same order as the app's downloads; 220 clips, about 6.3 MB), so a phone that gets the app
   by Bluetooth and never goes online still hears emergencies. The app plays these from inside the APK and never

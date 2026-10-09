@@ -50,9 +50,19 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   `kit-scale.hold`), length-height (`ui.gr.m.length*`, `ui.gr.m.height`), glucometer (`kit-glucometer.*`),
   low-sugar-drink (`low-sugar.*`).
 - **To go live** (after Mo's approval): add the name to `STEPS`, the `"approved"` note, and an `anim` block on the
-  topic. `tools/validate.py` and `tools/anims.py` (`scene_ids`, `needed_ids`) still expect `anim.<name>.s<n>` ids and
-  an `anim.<name>.title` for a live set: the CPR sets fit; for the others either let those two accept a set's page
-  ids and `<id>.title`, or give the set `anim.<name>.*` lines in `content/src/anims.json`.
+  topic. The tools accept a set that reads its page's lines (nothing new to record): `tools/validate.py` takes a
+  scene id that is `anim.<name>.s<n>` or a spoken line of the book (a topic block or ui `say` line), and an `id` that
+  is `anim.<name>` or a topic id (the title is then `<topic>.title`, `title_id()` in `tools/anims.py`).
+  `needed_ids()` lists those lines (they must exist), `block_ids()` brings only the animation's own `anim.*` lines to
+  a page's recording order (the page lines stay with their page, never recorded twice), and the app's poster title
+  is that same title id (`book.anims.ids`; "Listen to the page" does not read the page title twice). A live set's
+  approved note must be Mo's: an empty one, or one starting with `PENDING`, is an error, as is a live set with a
+  `held` note.
+- **Ready to go live: branch `golive-emergency`** (not merged). It adds every Emergency and CPR set except the held
+  bleeding-tourniquet to `STEPS` (23 sets with cpr-baby's 24), each with `"approved": "PENDING Mo's approval"` and,
+  for the sets that read a page's lines, an `anim` block placed just above the first step it shows (block id
+  `<topic>.anim-<name>`; spine-hold and splint-sling both on falls-fractures). After Mo approves the demo: replace each
+  `PENDING ...` with Mo's note, run `tools/validate.py` (0 errors) and `tools/build.py`, and merge.
 - **Notes in the JSON:** `_note` (where the pictures came from and what was left out), `_check` (points for Mo's
   medical check), `held` (bleeding-tourniquet: "held: Mo's tourniquet call pending").
 - **Not used, they look medically wrong:** cpr-child frame 4 (hand too high, on the upper chest), muac frame 1 (the
@@ -60,14 +70,12 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   says the head), breastfeed-attach frames 2 and 3 (hard-to-read mouth diagrams). Pictures the delivery uses
   twice: newborn-warm frame 2 is also cpr-newborn frame 6 and cold-warming frame 4, and recovery-position frame 4 is
   also low-sugar-drink frame 3 (each set keeps its own copy, about 30 kB); `choking-01` is choking-baby frame 1.
-- **APK budget** (MB = 1,000,000 bytes): the APK of release v2026.10.09-56903f is 8.60 MB; this change adds
-  0.12 MB (the three symptom tiles and cpr-baby's breath frame), so about 8.72 MB. The 24 new Emergency and CPR sets
-  (picked by their topics) would add 3.03 MB if all went live, about 11.75 MB in all; the 8 other sets (0.67 MB) are
-  on demand. To stay under 10 MB, in life-saving order: cpr-adult, cpr-child, cpr-newborn, choking-baby,
-  choking-adult, bleeding-press, recovery-position and drowning-rescue fit (about 9.91 MB). The rest (burns-cool,
-  seizure, allergy-position, fever-fit, electric-stick, snake-bite, newborn-warm, spine-hold, low-sugar-drink,
-  cold-warming, heat-cooling, inhaler-spacer, splint-sling, eye-wash, nosebleed, and the held tourniquet) would have
-  to be on demand. Today that choice follows the topic's group, so it is a decision for Mo.
+- **APK budget** (MB = 1,000,000 bytes). **Mo 9 Oct: all Emergency sets in the APK.** The APK of release
+  v2026.10.09-9f5275 is 8.72 MB. The 23 new Emergency and CPR sets (all but the held bleeding-tourniquet) add
+  2.82 MB of pictures and 0.09 MB of JSON, so the APK is about 11.6 MB once they are live; `img/` inside the APK is
+  then about 3.9 MB. `tools/validate.py` warns above 4.5 MB of pictures (`APK_PICTURES_MB`: an APK of about 12.2 MB);
+  15 MB is the hard limit. The 8 other sets (0.67 MB: bp-measure, breastfeed-attach, breath-count, glucometer,
+  length-height, muac, thermometer, weigh-child) stay on demand, as their topics are not in the Emergency group.
 
 ## How it plugs into the player
 
@@ -85,7 +93,7 @@ for next), keys, and auto-advance when the narration ends. Picture steps add one
 counting (for example 30 pushes) finishes before the player moves on**, even if the narration ended earlier.
 
 Scene ids are the narration ids, `anim.<name>.s1` and so on, as for the SVG versions, so recordings and translations keep
-working. A picture-step version may use some of the SVG version's ids. For example, a demo can use only
+working, or a topic page's own lines (`choking-baby.back`, `unconscious.roll`; the set's `id` is then the topic id). A picture-step version may use some of the SVG version's ids. For example, a demo can use only
 `anim.cpr-baby.s3`, `s5` and `s6`; the other lines then fall into the "everyone" audio pack until scenes use them.
 
 ## From Mo's PNGs to a live animation (the quick path)
@@ -139,7 +147,7 @@ working. A picture-step version may use some of the SVG version's ids. For examp
    `python3 tools/build.py`. An Emergency or CPR animation's JSON and pictures are now precached and inside the APK;
    any other animation's set downloads the first time its page is opened ("Where the pictures live"). The topic's existing
    `anim` block (for example `cpr` with `pick: cpr-baby`) plays the new version; nothing else changes. Give every
-   scene id narration in `content/src/anims.json`.
+   `anim.<name>.*` scene id narration in `content/src/anims.json`; a scene that reads a page line needs nothing new.
 
 ## Data format: `anim/steps/<name>.json`
 
@@ -162,7 +170,8 @@ working. A picture-step version may use some of the SVG version's ids. For examp
 }
 ```
 
-- `id`: the narration prefix (`anim.<name>.title` is the title). `w`, `h`: the picture size all coordinates refer to.
+- `id`: the narration prefix (`anim.<name>.title` is the title), or the topic id of a set that reads its page's lines
+  (`<topic>.title` is the title). `w`, `h`: the picture size all coordinates refer to.
 - `adult`: the teal look (all CPR). `approved`: Mo's approval note, needed to go live. `poster`: the scene used for
   posters and picker cards.
 - There is no `offline` field any more: where the pictures live is chosen by `tools/build.py` from the animation's
@@ -253,7 +262,8 @@ frame of scene `poster`, without counters and labels.
 
 ## Where the pictures live (Mo, 9 Oct 2026)
 
-The APK should stay about 11 MB (8.5 MB on 9 Oct 2026). So pictures are split by what they are for, automatically:
+Mo 9 Oct: all Emergency sets in the APK. The APK is 8.7 MB on 9 Oct 2026 and about 11.6 MB once they are live; it must
+stay under 15 MB. So pictures are split by what they are for, automatically:
 
 | | what | where |
 | --- | --- | --- |
@@ -305,8 +315,9 @@ picture-step set.
   precaches a file that is not in the APK. `tools/validate.py` checks that every picture's `v` is its sha1[:8],
   recomputes `book.steps` and compares it with `content/book.json`, checks that `sw.js` precaches every precache
   set and nothing of an on-demand one, runs the APK filter (`prune_apk()` in `tools/anims.py`, the one
-  `android/sync-web.sh` uses) on a copy of the picture-step folders, rejects CSS `inset`, and warns when the APK's
-  pictures pass 3 MB.
+  `android/sync-web.sh` uses; it also drops any file in a kept set's folder that its JSON does not name, so a held or
+  unused picture never ships) on a copy of the picture-step folders, rejects CSS `inset`, and warns when the APK's
+  pictures pass 4.5 MB (`APK_PICTURES_MB`).
 - Test: `tools/test_ondemand.mjs`: a grey-box on-demand set on the hygiene page and a not-live folder. Not precached,
   not in the APK; SVG offline before the download; a cut-off download never plays and kept files are not fetched
   again; the poster cross-fades and fills its box; the picture steps play, offline too; an update keeps the old set

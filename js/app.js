@@ -591,8 +591,13 @@ function blockIds(b) { return b.type === 'alert' || b.type === 'dont' ? [b.id, .
 /* ---------- explainer animations (js/anim.js; anim/<name>.js) ---------- */
 // An "anim" block: a poster (one still scene) with a big play button and the title with a speaker.
 // anim = an animation or a group (cpr: the age picker); pick = go straight to one variant (cpr-baby).
-// Its speaker reads the block's own title, or the animation's title (anim.<name>.title) when it has none.
-const animSay = (b) => (b.title ? b.id : `anim.${b.pick || b.anim}.title`);
+// Its speaker reads the block's own title, or the animation's title when it has none: anim.<name>.title, or for a
+// picture-step set that reads its topic page's lines the page's title (book.anims.ids[name][0], tools/anims.py title_id).
+const animSay = (b) => {
+  if (b.title) return b.id;
+  const name = b.pick || b.anim, ids = S.book.anims && S.book.anims.ids && S.book.anims.ids[name];
+  return ids && ids[0] && S.book.narration[ids[0]] ? ids[0] : `anim.${name}.title`;
+};
 const POSTER_SCENE = { cpr: ['cpr-adult', 4], 'cpr-newborn': ['cpr-newborn', 4], 'cpr-baby': ['cpr-baby', 4], 'cpr-child': ['cpr-child', 4], 'cpr-adult': ['cpr-adult', 4] };
 function animBlock(b) {
   const sid = animSay(b), title = b.title ? L(b.title) : L(S.book.narration[sid]), name = b.pick || b.anim;
@@ -725,7 +730,8 @@ function screenTopic(tid) {
   if (tid === 'vaccines') return screenVaccines(t);
   const ids = [tid + '.title'];
   let n = 0, body = '';
-  for (const b of t.blocks) { if (b.type === 'step') n++; body += blockHtml(b, n); ids.push(...blockIds(b)); }
+  // (an animation titled with the page's own title is not read twice by "Listen to the page")
+  for (const b of t.blocks) { if (b.type === 'step') n++; body += blockHtml(b, n); ids.push(...blockIds(b).filter((i) => ids.indexOf(i) < 0)); }
   const rc = reportCards(svFor('topics', [tid])); body += rc.html; ids.push(...rc.ids);
   ids.push('ui.disclaimer');
   const own = ownList(tid, t), back = EM.back || (own ? '#/s/' + own : t.section === 'children' ? '#/children' : '#/adults');

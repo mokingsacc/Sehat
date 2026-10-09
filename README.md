@@ -29,7 +29,8 @@ Create an empty repository, push this folder, then Settings → Pages → Deploy
 - The Android app carries only the Emergency and CPR clips in the woman's voice of Dari and Pashto (`book.bundle` from `tools/build.py`, copied by `android/sync-web.sh`, about 6 MB), so it speaks emergencies with no internet. Everything else it downloads from the website (`appUrl`) the same way as the website does.
 
 ## Pictures and the APK size
-The APK should stay about **11 MB** (8.5 MB on 9 Oct 2026: about 6.7 MB of it is the bundled Emergency and CPR narration).
+The APK should stay about **12 MB** and never pass 15 MB (8.7 MB on 9 Oct 2026: about 6.7 MB of it is the bundled
+Emergency and CPR narration; about 11.6 MB once all the Emergency picture-step sets are live: Mo 9 Oct, all Emergency sets in the APK).
 Where pictures live (Mo, 9 Oct 2026):
 - **Inside the APK and precached on the website from the first open:** every picture in `img/` (icons, topic pictures,
   the symptom tiles `img/symptoms/*.webp` from `tools/symptom_pics.py`, about 25 KB each) and the picture-step sets of
@@ -42,7 +43,7 @@ Where pictures live (Mo, 9 Oct 2026):
 - Nobody chooses this by hand: `tools/build.py` decides from the animation's group (`tools/anims.py`), writes it to
   `book.steps` and the precache list, and `android/sync-web.sh` leaves the other sets out of the APK.
   `tools/build.py` prints a line with the APK picture total and the on-demand total; `tools/validate.py` warns when the
-  APK's pictures pass 3 MB. Details: `docs/STEPS_PLAYER.md` ("Where the pictures live").
+  APK's pictures pass 4.5 MB. Details: `docs/STEPS_PLAYER.md` ("Where the pictures live").
 
 ## Computer voices (placeholders)
 ```

@@ -61,13 +61,25 @@ def groups():
     return out
 
 
+def steps_data(name):
+    """The JSON of a live picture-step set (anim/steps/<name>.json), or None (not live, missing or broken)."""
+    if name not in steps_live() or not os.path.exists(steps_path(name)): return None
+    try:
+        d = json.load(open(steps_path(name), encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return d if isinstance(d, dict) else None
+
+
 def scene_ids(name):
     """The narration ids of an animation's scenes, in order (anim.<name>.s1, ...). A live picture-step version
-    (anim/steps/<name>.json) is what plays, so its scenes count."""
-    if name in steps_live() and os.path.exists(steps_path(name)):
+    (anim/steps/<name>.json) is what plays, so its scenes count. Such a set may instead read its topic page's own
+    lines (choking-baby.back, unconscious.roll, ...): Mo's sets of 9 Oct 2026 do (docs/STEPS_PLAYER.md)."""
+    d = steps_data(name)
+    if d is not None:
         try:
-            return [sc["id"] for sc in json.load(open(steps_path(name), encoding="utf-8")).get("scenes") or [] if sc.get("id")]
-        except (OSError, ValueError, TypeError):
+            return [sc["id"] for sc in d.get("scenes") or [] if sc.get("id")]
+        except (AttributeError, TypeError):
             return []
     p = os.path.join(ROOT, "anim", name + ".js")
     if not os.path.exists(p): return []
@@ -78,15 +90,30 @@ def scene_ids(name):
     return seen
 
 
+def title_id(name):
+    """The narration id of an animation's title: anim.<name>.title, or for a live picture-step set whose "id" is a topic
+    (it reads that page's own lines) the page's title, <topic>.title, as js/anim.js shows it (d.id + '.title')."""
+    d = steps_data(name)
+    sid = str((d or {}).get("id") or "")
+    return f"{sid}.title" if sid and sid != f"anim.{name}" else f"anim.{name}.title"
+
+
+def own_line(i):
+    """An animation's own narration line (content/src/anims.json, anim.*), not a line it borrows from a page or the
+    interface (those are recorded and translated with their page)."""
+    return i.startswith("anim.")
+
+
 def needed_ids(name):
     """Every narration id an animation (or a group) needs: its title and scenes; a group also its question,
-    each variant's label and everything each variant needs."""
+    each variant's label and everything each variant needs. Lines a picture-step set borrows from its page are
+    included (they must exist); they come with the page, not with content/src/anims.json."""
     g = groups().get(name)
     if g is not None:
         ids = [f"anim.{name}.title", f"anim.{name}.ask"] + [f"anim.{v}.label" for v in g]
         for v in g: ids += needed_ids(v)
         return ids
-    return [f"anim.{name}.title"] + scene_ids(name)
+    return [title_id(name)] + scene_ids(name)
 
 
 def claims(block):
@@ -99,12 +126,43 @@ def claims(block):
 
 def block_ids(block):
     """The narration ids an "anim" block brings to its page, in recording order. With pick: the group's picker
-    lines and that one variant (the other variants come with their own pages); otherwise everything it can play."""
+    lines and that one variant (the other variants come with their own pages); otherwise everything it can play.
+    Only the animation's own lines (anim.*): the page lines a picture-step set reads are recorded with their page,
+    so they are neither asked for twice nor moved to another page's recording order."""
     a, pick = block.get("anim"), block.get("pick")
     g = groups().get(a)
     if pick and g is not None:
-        return [f"anim.{a}.title", f"anim.{a}.ask"] + [f"anim.{v}.label" for v in g] + needed_ids(pick)
-    return needed_ids(a)
+        ids = [f"anim.{a}.title", f"anim.{a}.ask"] + [f"anim.{v}.label" for v in g] + needed_ids(pick)
+    else:
+        ids = needed_ids(a)
+    return [i for n, i in enumerate(ids) if own_line(i) and i not in ids[:n]]
+
+
+def page_lines():
+    """Every narration id the book has outside content/src/anims.json, from content/src as tools/build.py writes them:
+    the interface lines (ui.json and ui-*.json "say"), and each topic's title, summary and spoken blocks (and the
+    vaccines page). A picture-step scene may read one of these instead of an anim.<name>.s<n> line."""
+    src = os.path.join(ROOT, "content/src")
+    out = set()
+    for f in [os.path.join(src, "ui.json")] + sorted(glob.glob(os.path.join(src, "ui-*.json"))):
+        out.update((_load(f).get("say") or {}).keys())
+    for f in sorted(glob.glob(os.path.join(src, "topics", "*.json"))):
+        t = _load(f)
+        tid = t.get("id")
+        if not tid: continue
+        out.add(f"{tid}.title")
+        if t.get("summary"): out.add(f"{tid}.summary")
+        for b in t.get("blocks") or []:
+            if not isinstance(b, dict) or not b.get("id"): continue
+            if b.get("type") != "anim" or b.get("title"): out.add(b["id"])
+            out.update(it["id"] for it in b.get("items") or [] if isinstance(it, dict) and it.get("id"))
+    v = _load(os.path.join(src, "vaccines.json"))
+    if v:
+        out.add("vaccines.title")
+        if v.get("summary"): out.add("vaccines.summary")
+        for x in [v.get("lead"), v.get("women")] + (v.get("visits") or []) + (v.get("notes") or []) + [b for b in v.get("anims") or [] if b.get("title")]:
+            if isinstance(x, dict) and x.get("id"): out.add(x["id"])
+    return out
 
 
 # ---------- where the pictures of a picture-step animation live (Mo, 9 Oct 2026) ----------
@@ -190,13 +248,20 @@ def apk_steps_keep(steps):
 
 def prune_apk(out, steps):
     """Remove from an APK folder (android/sync-web.sh) every picture-step folder and JSON that is not a precache set
-    (on-demand sets, sets not live yet, leftovers). Returns (kept names, removed paths, removed bytes)."""
+    (on-demand sets, sets not live yet, leftovers), and inside a precache set's folder every file its JSON does not
+    name (a held or unused picture). Returns (kept names, removed paths, removed bytes)."""
     import shutil
     keep, keep_dirs = apk_steps_keep(steps)
+    named = {os.path.normpath(f.split("?")[0]) for n in keep for f in (steps[n].get("files") or [])[1:]}
     gone, size = [], 0
     for d in sorted(glob.glob(os.path.join(out, "img/steps/*"))):
         rel = os.path.normpath(os.path.relpath(d, out))
-        if rel in keep_dirs: continue
+        if rel in keep_dirs:
+            for a, _, fs in os.walk(d):
+                for f in fs:
+                    r = os.path.normpath(os.path.relpath(os.path.join(a, f), out))
+                    if r not in named: size += os.path.getsize(os.path.join(a, f)); os.remove(os.path.join(a, f)); gone.append(r)
+            continue
         if os.path.isdir(d):
             size += sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(d) for f in fs); shutil.rmtree(d)
         else:
