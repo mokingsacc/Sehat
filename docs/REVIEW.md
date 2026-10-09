@@ -5381,3 +5381,91 @@ New Dari and Pashto to check (en / fa / ps). Least sure: موچینک / موچن
   درملنه کېږي".
 - `ui.fam.td2` "و در حاملگی حداقل ۲ هفته پیش از ولادت" / "او په امیندوارۍ کې لږ تر لږه ۲ اونۍ له زېږون مخکې";
   `ui.fam.td.tap` "از سر شروع نمی‌شود" / "له سره نه پیلېږي".
+
+## Early signs and health checks: the screening section (9 Oct 2026, worker screening)
+
+Mo asked (9 Oct): a screening part in Health with the sinister signs to watch for (B symptoms, cancer signs), chosen for
+specificity, and which blood and stool tests to get at what age, as Afghanistan has no screening programmes. Built from
+/mnt/project-files/samangan-red-book/research/screening.md (sections 4 to 7).
+
+What changed
+- One new button on the Health tab, under Adults: **Early signs and health checks** (`config.home` "checks",
+  `config.lists.checks`, `#/s/checks`). It opens five pages: `early-signs` (Signs to get checked early), `women-signs`
+  (Breast and womb: signs to check), `child-signs` (Signs in a child to check), `checks-women` and `checks-men` (Health
+  checks by age). They are not repeated in the Adults or Children lists and none is an urgent topic. Nothing on the Home
+  tab. New ui lines: `text.checks`, `text.checksSub`, `say.ui.checks`.
+- Each page: amber boxes (child-signs also has a red box), a clinic and a hospital block, "TB first" wherever glands,
+  fever, sweats or weight loss appear, a do-not box (incl. the tests not to pay for: whole-body scans, private-lab
+  "cancer blood tests", PSA without symptoms, chest X-ray to look for cancer, mammogram without a lump), sources, and
+  `_notes` for Mo with each Mo's-call default. "Cancer" is only in a summary, lead, clinic or hospital block or a do-not
+  line about paid tests, each time with "most are not cancer" or "found early". Stool tests: none recommended (no FIT or
+  occult blood without colonoscopy in reach); visible blood in the stool more than once is the sign to act on.
+- Narration length (English words): early-signs 368, women-signs 329, child-signs 391, checks-women 381, checks-men 366
+  (about 2.2 to 2.6 minutes). Cut to fit, as the research allows: the naswar step on early-signs, the bulging-eye item,
+  the eye-drops do-not line, the eyes step on checks-women, and the early-signs to red-flags link.
+- Additions to existing pages (no old line reworded, no ids moved): `red-flags.early` (link to early-signs), `tb.negative`
+  (step: if the TB test is negative and the signs go on, go back; the clinic sends you to the hospital), `hepatitis.test-once`
+  and `hepatitis.carrier` (steps), `growth.soon.white-eye` (amber item) and `growth.child-signs` (link), `pregnancy-care.hep-b`
+  (tip), `danger-child.child-signs` (link). after-birth and dental unchanged (see defaults).
+- "What is wrong?": new picture **A lump or swelling** (`lump`, after Sores and wounds), ages child and older, danger
+  first. Red: child `child-signs.urgent` (non-fading spots, very pale with bleeding, `dental.urgent.swallow`); older
+  `red-flags.urgent` title with `dental.urgent.swallow`, new line `ui.ask.hernia` ("a painful lump in the groin or belly,
+  with vomiting", WHO Surgical care at the district hospital) and `scabies.urgent.spread`. Amber: child under the
+  clinic-today title (belly lump, gland over a month, growing lump, fever over 2 weeks; stricter than child-signs for the
+  two this-week lines, as the Thin page is), older under the this-week title (growing lump, gland, breast lump, weight
+  loss). New lead `ui.ask.lump.lead`; new sources CANC, CHCANC, SURG. Picture prompt 37 added to
+  animation-briefs/symptom-pictures-prompts.md (blank faces); the tile shows the lump icon until the picture exists.
+- Search: phrases for the five pages and `hepatitis.test-once`; a new "screening" set of 14 queries in
+  tools/search-tests.json (written after the phrases, so not an untouched set).
+- tools/build.py leaves a topic's `_notes` out of the book (like `review`). docs/CONTENT_SPEC.md and docs/HOME_LAYOUT.md
+  updated.
+
+Mo's call: the defaults used (each is one line or one block to change; the page `_notes` say which)
+1. NICE age cut-offs: no ages in the alert items; duration and quality words carry the specificity.
+2. Bleeding after sex or between periods: included, "more than once" (`women-signs.soon.bleeding-sex`).
+3. Ovarian "belly that keeps getting bigger, with weight loss": included (`women-signs.soon.belly`).
+4. Milk lump that stays: on women-signs only (`women-signs.soon.milk-lump`); after-birth unchanged (its amber box is
+   "clinic today" and already has the painful breast).
+5. Breast awareness: monthly look and feel after the period (`women-signs.know`); yearly clinical breast exam from 40
+   "if this is offered" (`checks-women.breasts`); no breast picture, icons only.
+6. Cervical test: "ask for the cervix test ... ask where it is done" (`women-signs.cervix-test`, `checks-women.cervix`).
+7. Hepatitis B test in pregnancy: a new tip `pregnancy-care.hep-b` and a line in `checks-women.pregnancy`; the
+   pregnancy-care clinic block is unchanged.
+8. Follow-up for hepatitis B carriers: added, `hepatitis.carrier` (hospital doctor every 6 to 12 months, WHO 2024).
+9. Iron-deficiency anaemia in a man or a woman after the menopause: not included (needs an Hb).
+10. Non-healing sore: 3 weeks on the new pages (NICE); `red-flags.soon.wound` and `dental.soon.patch` keep 2 weeks.
+11. `tb.soon.fever`: not reworded (the WHO TB symptom screen counts any night sweats); "sweats that soak the clothes" is
+    only in `early-signs.today.b-symptoms`. The "if the TB tests are negative" sentence is the new step `tb.negative`.
+12. Testicle lump: included in `checks-men.two-signs`, "a lump in a testicle" (خصیه).
+13. Naswar mouth check: on `checks-men.mouth`; dental already has it; the early-signs step was cut for length.
+14. White glow in the pupil on growth: added (`growth.soon.white-eye`).
+15. Petechiae with fever on danger-child: already there (`danger-child.skin.rash`, red); child-signs uses the same glass
+    test without "with fever".
+16. "Do not give up: many children's cancers are cured when found early": included (`child-signs.dont.hope`).
+17. Scans and "cancer blood tests" wording: "Do not pay for whole-body scans or private-lab 'cancer blood tests'"; PSA:
+    "Do not pay for a prostate blood test if you have no symptoms" (no Latin letters in fa/ps, so "PSA" is not said).
+18. Children list group vs Common illnesses: neither; all five pages are on the one Health-tab list.
+19. Lump tile: added. Women's bleeding tile: not added.
+20. AFP and ultrasound for cirrhosis surveillance: not in the app.
+21. checks-women: section everyone (on the shared list).
+
+Not done
+- `red-flags.soon.swallowing` "getting worse" (a rewording; early-signs says it). The diabetes page "from 40, every 3
+  years" alignment (not in this brief's page list; checks-women and checks-men say it).
+- Hero pictures for the five pages (research 6.8 scenes): the pages use the general pictures; checks-women shows the
+  existing blood pressure scene (bp-sit) and checks-men the finger-prick scene (hosp-blood-test) on one step each.
+- Narration: 118 new clips per voice are still to make (no TTS run). The box titles of early-signs and women-signs are
+  word for word `red-flags.soon` / `red-flags.today`; child-signs titles are word for word `danger-child.urgent`,
+  `danger-child.soon` and `growth.soon`; `child-signs.soon.gland` = `early-signs.soon.gland`; the "scans" do-not lines
+  and the two "Have a blood pressure reading?" links are the same words on both checks pages: these clips can be copied.
+
+For a native speaker (least sure first)
+- Pashto "له مېړه سره له یوځای کېدو وروسته" for "after sex", and Dari "همبستری".
+- "Night sweats that soak your clothes": عرق شبانه که کالا را تر می‌کند / د شپې داسې خولې چې جامې لمدې کړي.
+- "A white glow in the black of the eye": برق سفید در سیاهی چشم / د سترګې په تور کې سپینه ځلا; squint لوچ / کاږه سترګه.
+- "Unsteady walk": تلو تلو راه رفتن / داسې تګ چې توازن نه لري.
+- Breast skin "dimpled ... like orange peel": چقر شده، چین خورده ... مثل پوست مالته / ګونځې ... د مالټې د پوستکي په شان.
+- Nipple: سر پستان / د تي سر. Cervix: دهانهٔ رحم / د رحم خوله. Cataract: آب مروارید / موتیا.
+- Hoarse voice: گرفتگی آواز / د غږ کېناستل. Groin: کشالهٔ ران / د ورون بېخ. Bruises: کبودی / شنه داغونه.
+- "Hepatitis B for life": هپاتیت ب دایمی / تل پاتې هیپاتیت ب. "Full check-up packages": بستهٔ معاینات کامل.
+- Search phrases marked "?" (5 new).
