@@ -44,6 +44,7 @@
     {
       "id": "notbreathing",
       "icon": "breathe",
+      "pic": "img/symptoms/notbreathing.webp",
       "label": {
         "fa": "نفس نمی‌کشد یا بی‌هوش است",
         "ps": "ساه نه اخلي یا بې‌هوښه دی",
@@ -119,6 +120,7 @@
       "id": "fever",
       "icon": "fever",
       "say": "fever.title",
+      "pic": "img/symptoms/fever.webp",
       "label": {
         "fa": "تب",
         "ps": "تبه",
@@ -304,6 +306,7 @@
     {
       "id": "cough",
       "icon": "cough",
+      "pic": "img/symptoms/cough.webp",
       "label": {
         "fa": "سرفه",
         "ps": "ټوخی",
@@ -606,6 +609,7 @@
     {
       "id": "diarrhoea",
       "icon": "ors",
+      "pic": "img/symptoms/diarrhoea.webp",
       "label": {
         "fa": "اسهال",
         "ps": "نس ناستی",
@@ -762,6 +766,7 @@
     {
       "id": "vomiting",
       "icon": "vomit",
+      "pic": "img/symptoms/vomiting.webp",
       "label": {
         "fa": "استفراغ",
         "ps": "کانګې",
@@ -919,6 +924,7 @@
     {
       "id": "rash",
       "icon": "rash",
+      "pic": "img/symptoms/rash.webp",
       "label": {
         "fa": "دانه یا لکه روی پوست",
         "ps": "پر پوستکي دانې یا داغونه",
@@ -1061,6 +1067,7 @@
     {
       "id": "sore",
       "icon": "wound",
+      "pic": "img/symptoms/sore.webp",
       "label": {
         "fa": "زخم و سالک",
         "ps": "زخم او سالک",
@@ -1152,6 +1159,7 @@
     {
       "id": "lump",
       "icon": "lump",
+      "pic": "img/symptoms/lump.webp",
       "label": {
         "fa": "غده یا پندیدگی",
         "ps": "غوټه یا پړسوب",
@@ -1274,6 +1282,7 @@
     {
       "id": "pregnancy",
       "icon": "pregnant",
+      "pic": "img/symptoms/pregnancy.webp",
       "label": {
         "fa": "حاملگی",
         "ps": "امیندواري",
@@ -1392,6 +1401,7 @@
     {
       "id": "bleeding",
       "icon": "bleeding",
+      "pic": "img/symptoms/bleeding.webp",
       "label": {
         "fa": "خونریزی",
         "ps": "وینه بهېدل",
@@ -1487,6 +1497,7 @@
     {
       "id": "headache",
       "icon": "headache",
+      "pic": "img/symptoms/headache.webp",
       "label": {
         "fa": "سردرد",
         "ps": "سر درد",
@@ -1780,6 +1791,7 @@
       "id": "chest",
       "icon": "heart",
       "say": "anaemia.urgent.chest-pain",
+      "pic": "img/symptoms/chest.webp",
       "label": {
         "fa": "درد سینه",
         "ps": "د سینې درد",
@@ -1853,6 +1865,7 @@
     {
       "id": "belly",
       "icon": "belly-pain",
+      "pic": "img/symptoms/belly.webp",
       "label": {
         "fa": "شکم درد",
         "ps": "د نس درد",
@@ -2085,6 +2098,7 @@
     {
       "id": "burn",
       "icon": "burn",
+      "pic": "img/symptoms/burn.webp",
       "label": {
         "fa": "سوختگی",
         "ps": "سوځېدنه",
@@ -2161,6 +2175,7 @@
     {
       "id": "fumes",
       "icon": "stove",
+      "pic": "img/symptoms/fumes.webp",
       "label": {
         "fa": "گاز و دود بخاری",
         "ps": "ګاز او لوګی",
@@ -2230,6 +2245,7 @@
     {
       "id": "bite",
       "icon": "dog",
+      "pic": "img/symptoms/bite.webp",
       "label": {
         "fa": "گزیدگی سگ",
         "ps": "د سپي چیچل",
@@ -2314,6 +2330,7 @@
     {
       "id": "poison",
       "icon": "poison",
+      "pic": "img/symptoms/poison.webp",
       "label": {
         "fa": "زهر",
         "ps": "زهر",
@@ -2381,6 +2398,7 @@
       "id": "fits",
       "icon": "convulsion",
       "say": "after-birth.urgent.fits",
+      "pic": "img/symptoms/fits.webp",
       "label": {
         "fa": "تشنج",
         "ps": "اختلاج",
@@ -2470,6 +2488,7 @@
     {
       "id": "newborn",
       "icon": "baby",
+      "pic": "img/symptoms/newborn.webp",
       "label": {
         "fa": "نوزاد",
         "ps": "نوی زېږېدلی",
@@ -2566,6 +2585,7 @@
     {
       "id": "feeding",
       "icon": "breastfeed",
+      "pic": "img/symptoms/feeding.webp",
       "label": {
         "fa": "شیر و غذا",
         "ps": "شیدې او خواړه",
@@ -2680,6 +2700,7 @@
     {
       "id": "thin",
       "icon": "muac",
+      "pic": "img/symptoms/thin.webp",
       "label": {
         "fa": "لاغری یا رشد نکردن",
         "ps": "ډنګروالی یا وده نه کول",
@@ -2786,6 +2807,7 @@
     {
       "id": "yellow",
       "icon": "jaundice",
+      "pic": "img/symptoms/yellow.webp",
       "label": {
         "fa": "زردی",
         "ps": "ژېړی",
@@ -2913,6 +2935,7 @@
     {
       "id": "tired",
       "icon": "rest",
+      "pic": "img/symptoms/tired.webp",
       "label": {
         "fa": "خستگی یا رنگ‌پریدگی",
         "ps": "ستړیا یا رنګ الوتل",
@@ -3043,6 +3066,7 @@
       "id": "sugar",
       "icon": "sugar",
       "say": "diabetes.title",
+      "pic": "img/symptoms/sugar.webp",
       "label": {
         "fa": "مرض شکر",
         "ps": "د شکرې ناروغي",
@@ -3124,6 +3148,7 @@
     {
       "id": "pressure",
       "icon": "bp",
+      "pic": "img/symptoms/pressure.webp",
       "label": {
         "fa": "فشار خون",
         "ps": "د وینې فشار",
@@ -3222,6 +3247,7 @@
     {
       "id": "mind",
       "icon": "sad",
+      "pic": "img/symptoms/mind.webp",
       "label": {
         "fa": "غم و پریشانی",
         "ps": "خپګان او اندېښنه",
@@ -3310,6 +3336,7 @@
     {
       "id": "longcough",
       "icon": "lungs",
+      "pic": "img/symptoms/longcough.webp",
       "label": {
         "fa": "سرفۀ طولانی یا توبرکلوز",
         "ps": "اوږد ټوخی یا نری رنځ",
@@ -3408,6 +3435,7 @@
     {
       "id": "animals",
       "icon": "animals",
+      "pic": "img/symptoms/animals.webp",
       "label": {
         "fa": "حیوانات و کنه",
         "ps": "څاروي او کنه",
@@ -3482,6 +3510,7 @@
     {
       "id": "disaster",
       "icon": "house",
+      "pic": "img/symptoms/disaster.webp",
       "label": {
         "fa": "زلزله و سیلاب",
         "ps": "زلزله او سېلاب",
@@ -3552,6 +3581,7 @@
     {
       "id": "vaccine",
       "icon": "syringe",
+      "pic": "img/symptoms/vaccine.webp",
       "label": {
         "fa": "واکسین",
         "ps": "واکسین",
@@ -3624,6 +3654,7 @@
     {
       "id": "choking",
       "icon": "choking",
+      "pic": "img/symptoms/choking.webp",
       "label": {
         "fa": "گیر کردن در گلو",
         "ps": "په ستوني کې بندېدل",

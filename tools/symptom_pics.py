@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Pictures for the "What is wrong?" tiles (#/ask): square PNGs in, small square WebPs out.
 
-    python3 tools/symptom_pics.py <folder or .zip of PNGs> [--size 360] [--max-kb 28] [--sheet sheet.png] [--dry-run]
+    python3 tools/symptom_pics.py <folder or .zip of PNGs> [--size 480] [--max-kb 24] [--sheet sheet.png] [--dry-run]
 
 Each picture is named with its symptom id from content/src/symptoms.json, e.g. fever.png (the ChatGPT prompts are in
 animation-briefs/symptom-pictures-prompts.md). Names like "02 fever.png", "fever (1).png" or "Fever.PNG" work too.
 For every picture it:
-  - crops it to a square from the centre (if it is not square already) and resizes it to --size (default 360 px);
-  - encodes WebP at the best quality that keeps it under --max-kb (default 28 KB; most land at 20-30 KB);
+  - crops it to a square from the centre (if it is not square already) and resizes it to --size (default 480 px: a tile is about 181 CSS px wide on a
+    412 px phone, 475 screen pixels at 2.625x, so 480 stays sharp; eyes, teeth and back are older 360 px files);
+  - encodes WebP at the best quality that keeps it under --max-kb (default 24 KB; at 480 px they land at q74-88);
   - writes img/symptoms/<id>.webp and sets "pic" on that symptom in content/src/symptoms.json.
-It then lists the ids that still have no picture, writes a contact sheet of all 33 tiles from the WebP files (by
+It then lists the ids that still have no picture, writes a contact sheet of all the tiles from the WebP files (by
 default next to the input: <folder>/symptom-pictures-sheet.png) and reminds you to run tools/build.py (which also
 adds the pictures to the offline precache). Running it again with new pictures replaces the old ones.
 Needs Pillow (python3 -m pip install pillow).
@@ -96,8 +97,8 @@ def contact_sheet(syms, path, cell=180, cols=6):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("src", help="folder or .zip of PNGs named <id>.png")
-    ap.add_argument("--size", type=int, default=360, help="square size in px (default 360)")
-    ap.add_argument("--max-kb", type=float, default=28, help="largest WebP in KB (default 28)")
+    ap.add_argument("--size", type=int, default=480, help="square size in px (default 480)")
+    ap.add_argument("--max-kb", type=float, default=24, help="largest WebP in KB (default 24)")
     ap.add_argument("--sheet", help="contact sheet path (default: next to the input)")
     ap.add_argument("--dry-run", action="store_true", help="only check names and sizes, write nothing")
     a = ap.parse_args()

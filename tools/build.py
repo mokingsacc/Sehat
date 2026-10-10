@@ -405,7 +405,7 @@ print("  packs (clips each voice needs): " + ", ".join(f"{p} {len(pack_ids[p])}"
 if missing_icons: print("missing icons (shown as dots):", " ".join(missing_icons))
 # pictures: what the APK carries (img/ as android/sync-web.sh copies it: no img/_preview, no on-demand or not-live
 # picture-step folders) and what downloads on demand. All Emergency sets are in the APK (Mo, 9 Oct 2026):
-# about 11.6 MB, under 15 MB (tools/validate.py APK_PICTURES_MB).
+# about 12.5 MB once they are live, under 15 MB (tools/validate.py APK_PICTURES_MB).
 def tree_bytes(d):
     return sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(J(d)) for f in fs if not f.startswith(".")) if os.path.isdir(J(d)) else 0
 keep_dirs = {e["dir"].rstrip("/") for e in book["steps"].values() if e["offline"] == "precache"}

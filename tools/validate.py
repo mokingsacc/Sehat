@@ -572,9 +572,11 @@ check_steps()
 # APK, every other set downloads on demand. tools/anims.py chooses from the group; nobody sets it by hand.
 # Mo 9 Oct: all Emergency sets in the APK. Their pictures (2.8 MB for the 24 Emergency and CPR sets, bleeding-tourniquet
 # held) and the rest of img/ (1.1 MB, with the symptom tiles) make about 3.9 MB; with code and the bundled narration
-# (about 7.6 MB) the APK is about 11.6 MB. This limit leaves 0.6 MB of headroom (an APK of about 12.2 MB); 15 MB is the
-# hard limit for the APK.
-APK_PICTURES_MB = 4.5   # img/ inside the APK
+# (about 7.6 MB) the APK is about 11.6 MB. 10 Oct 2026: pictures for 31 more symptom tiles (0.75 MB, 480 px, the "What is
+# wrong?" screen) and the three adult CPR scenes (0.14 MB) bring it to about 4.8 MB once the Emergency sets are live
+# (branch golive-emergency; APK about 12.5 MB), so the limit went from 4.5 to 5.2 MB: 0.4 MB of headroom (an APK of
+# about 12.9 MB); 15 MB is the hard limit for the APK.
+APK_PICTURES_MB = 5.2   # img/ inside the APK
 def check_picture_storage():
     import hashlib, shutil, tempfile
     live, em = ANIM.steps_live(), ANIM.emergency_anims()
@@ -642,7 +644,7 @@ def check_picture_storage():
         if rel.startswith(os.path.join("img", "_preview")) or rel.startswith(os.path.join("img", "steps")): continue
         total += sum(os.path.getsize(os.path.join(a, f)) for f in fs if not f.startswith("."))
     if total > APK_PICTURES_MB * 1e6:
-        warn(os.path.join(ROOT, "img"), f"{total / 1e6:.1f} MB of pictures go into the APK (aim: under {APK_PICTURES_MB:.1f} MB, so the APK stays about 12 MB, never over 15 MB)")
+        warn(os.path.join(ROOT, "img"), f"{total / 1e6:.1f} MB of pictures go into the APK (aim: under {APK_PICTURES_MB:.1f} MB, so the APK stays about 13 MB, never over 15 MB)")
 check_picture_storage()
 # Old Android phones (Chrome/WebView before 80) cannot run ?? or ?. and then the app never opens
 def check_old_phone_js():
