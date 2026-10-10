@@ -316,10 +316,12 @@ async function downloadSet(name, auto) {
   for (let i = 0; i < s.pics.length; i++) await get(s.pics[i]);
   await dropOldFiles(c, name, [e.files[0]].concat(s.pics));
 }
-// a set's own files: its JSON (any ?v=) and everything under its picture folder
+// a set's own files: its JSON (any ?v=), everything under its picture folder, and the pictures it names in another
+// set's folder (a picture several sets share)
 function setOwns(name, u) {
   const e = SETS.info[name] || {};
-  return u.split('?')[0] === setUrl('anim/steps/' + name + '.json') || u.indexOf(setUrl(e.dir || 'img/steps/' + name + '/')) === 0;
+  return u.split('?')[0] === setUrl('anim/steps/' + name + '.json') || u.indexOf(setUrl(e.dir || 'img/steps/' + name + '/')) === 0 ||
+    (e.files || []).some((f) => setUrl(f) === u);
 }
 // the files of an older version of a set leave the phone only once the new version is complete
 async function dropOldFiles(c, name, keepList) {

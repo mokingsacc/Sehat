@@ -5,9 +5,19 @@
  "h": 720,
  "adult": false,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/burns-cool), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
- "poster": 0,
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/burns-cool), packed by tools/steps_images.py --px 800 --patch. Frame 'stop' (scene burns.stop, clothes on fire: smother with a thick blanket, the head out) is Mo's 10 Oct 2026 picture (illustrations-2026-10-10/fixes, REVIEW.md B2). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "poster": 1,
  "frames": {
+  "stop": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "stop-full.webp",
+     "v": "a7f8cd55",
+     "kb": 29.9
+    }
+   ]
+  },
   "1": {
    "layers": [
     {
@@ -77,6 +87,60 @@
   }
  },
  "scenes": [
+  {
+   "id": "burns.stop",
+   "frame": "stop",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 440,
+      "cy": 470,
+      "w": 760
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 520,
+     "y": 530,
+     "rx": 300,
+     "ry": 110,
+     "at": 1000,
+     "pulse": false
+    },
+    {
+     "type": "arrow",
+     "from": [
+      408,
+      330
+     ],
+     "to": [
+      408,
+      440
+     ],
+     "width": 12,
+     "at": 2200,
+     "until": 5200
+    },
+    {
+     "type": "ring",
+     "x": 120,
+     "y": 540,
+     "r": 56,
+     "at": 5200
+    }
+   ]
+  },
   {
    "id": "burns.cool",
    "frame": "1",

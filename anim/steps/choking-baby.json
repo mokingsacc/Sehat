@@ -5,11 +5,11 @@
  "h": 720,
  "adult": false,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/choking-baby), packed by tools/steps_images.py --px 800 --patch. Scenes use the page's own narration (choking-baby.*). The choking-01 folder is the same picture as frame 1. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/choking-baby), packed by tools/steps_images.py --px 800 --patch. Scenes use the page's own narration (choking-baby.*). The choking-01 folder is the same picture as frame 1. Frames 4 (two thumbs on the breastbone; 'down' is a small patch) and 5 (look in the mouth) are Mo's 10 Oct 2026 fixes (illustrations-2026-10-10/fixes, REVIEW.md H3 and M6). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
   "Frame 2 (back blows): the contact is a little low (mid-back) rather than clearly between the shoulder blades.",
-  "Frame 4 (chest pushes): the two thumbs side by side on the breastbone are not clear; in the down picture the lower hand edge comes near the belly.",
-  "Frame 5 (look in the mouth): the hand rests on top of the head; it does not show looking into the mouth (no finger in the mouth, which is right)."
+  "Frame 4 (10 Oct): both thumbs side by side on the breastbone just below the nipple line, hands round the chest; the 'down' picture is the same with the thumbs pressed in. Seen from above, so 'head lower than the body' cannot be seen.",
+  "Frame 5 (10 Oct): the mother's thumb opens the mouth by the chin; no finger in the mouth. The baby's nose and open mouth are drawn."
  ],
  "poster": 0,
  "frames": {
@@ -60,34 +60,23 @@
   "4": {
    "layers": [
     {
-     "id": "bg",
-     "src": "4-bg.webp",
-     "v": "74cfabe7",
-     "kb": 29.6
+     "id": "full-up",
+     "src": "4-full-up.webp",
+     "v": "185bacc5",
+     "kb": 23.0
     },
     {
-     "id": "arms-up",
-     "src": "4-arms-up.webp",
-     "v": "c7d5df13",
-     "kb": 8.7,
+     "id": "full-down",
+     "src": "4-full-down.webp",
+     "v": "abae1a21",
+     "kb": 2.7,
      "box": [
-      425,
-      220,
-      269,
-      235
-     ]
-    },
-    {
-     "id": "arms-down",
-     "src": "4-arms-down.webp",
-     "v": "cb2bc9ce",
-     "kb": 8.2,
-     "box": [
-      426,
-      220,
-      268,
-      235
-     ]
+      359,
+      198,
+      215,
+      236
+     ],
+     "patch": "full-up"
     }
    ]
   },
@@ -96,8 +85,8 @@
     {
      "id": "full",
      "src": "5-full.webp",
-     "v": "16e2bb99",
-     "kb": 29.8
+     "v": "4d63890e",
+     "kb": 22.9
     }
    ]
   }
@@ -183,8 +172,8 @@
       960
      ],
      {
-      "cx": 450,
-      "cy": 380,
+      "cx": 460,
+      "cy": 350,
       "w": 600
      }
     ],
@@ -206,11 +195,12 @@
      "id": "push",
      "type": "swap",
      "frame": "4",
-     "layer": "arms-down",
-     "under": "arms-up",
+     "layer": "full-down",
+     "under": "full-up",
      "at": 5200,
      "rate": 50,
-     "count": 5
+     "count": 5,
+     "hide": false
     }
    ],
    "overlays": [
@@ -231,10 +221,10 @@
     },
     {
      "type": "ring",
-     "x": 485,
-     "y": 372,
+     "x": 458,
+     "y": 308,
      "at": 4400,
-     "rx": 50,
+     "rx": 48,
      "ry": 40,
      "until": 5200
     },
@@ -262,8 +252,8 @@
       960
      ],
      {
-      "cx": 400,
-      "cy": 400,
+      "cx": 380,
+      "cy": 320,
       "w": 560
      },
      [
@@ -292,10 +282,10 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 398,
-     "y": 400,
+     "x": 326,
+     "y": 266,
+     "r": 56,
      "at": 1200,
-     "r": 70,
      "until": 6000
     }
    ]

@@ -5,10 +5,11 @@
  "h": 720,
  "adult": true,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-child), packed by tools/steps_images.py --px 800 --patch. Frame 'push' is original-cpr step 5 (one heel of the hand, other hand on the forehead). Delivery frame 4 is not used (the hand sits too high, on the upper chest); frames 5 and 6 (bigger child, two hands) are left out to keep the APK small. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-child), packed by tools/steps_images.py --px 800 --patch. Since 10 Oct 2026 (illustrations-2026-10-10/fixes, frame review REVIEW.md H2 and M3): frame 'push' is Mo's two full pictures (one heel of the hand on the lower breastbone, arm straight, the other hand on her own knee; 'down' is a patch over 'up'), pressed with a swap; frame 2 is the redone head tilt and chin lift (fingertips on the bony chin). Frame 3 (breaths) is still the 9 Oct picture: the 10 Oct breath pair (child-breath-review) draws full faces with eyes and its nose pinch is not checked yet. Delivery frame 4 is not used (the hand sits too high, on the upper chest); frames 5 and 6 (bigger child, two hands) are left out to keep the APK small. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
-  "Frame 'push' (original step 5): the arm is slightly angled, the shoulder not straight over the hand.",
-  "Frame 2: the chin-lift fingertips sit close to the soft part under the chin."
+  "Frame 'push' (10 Oct): the fingertips are on the lower breastbone at the end of the button line, but the heel of the hand sits at the very bottom of the breastbone, close to the top of the belly. The ring marks the hand. If it reads as low, ask for the hand two fingers' width nearer the head. The fingers rest on the chest rather than lifted.",
+  "Frame 2 (10 Oct): the boy's closed eye is drawn as a faint line (the brief asked only for the nose and mouth).",
+  "Frame 3 (breaths): the helper's head hovers over the face; the breath itself is not shown (REVIEW.md M2, still to redo)."
  ],
  "poster": 4,
  "frames": {
@@ -27,8 +28,8 @@
     {
      "id": "full",
      "src": "2-full.webp",
-     "v": "4bd25010",
-     "kb": 29.7
+     "v": "863e1013",
+     "kb": 28.8
     }
    ]
   },
@@ -51,34 +52,23 @@
   "push": {
    "layers": [
     {
-     "id": "bg",
-     "src": "push-bg.webp",
-     "v": "64f3e42a",
-     "kb": 24.8
+     "id": "full-up",
+     "src": "push-full-up.webp",
+     "v": "05edc064",
+     "kb": 24.3
     },
     {
-     "id": "body",
-     "src": "push-body.webp",
-     "v": "e708c40f",
-     "kb": 12.3,
+     "id": "full-down",
+     "src": "push-full-down.webp",
+     "v": "8fbf1fd7",
+     "kb": 8.8,
      "box": [
-      346,
-      28,
-      376,
-      436
-     ]
-    },
-    {
-     "id": "arms",
-     "src": "push-arms.webp",
-     "v": "afe5bcdd",
-     "kb": 7.2,
-     "box": [
-      482,
-      139,
-      316,
-      335
-     ]
+      382,
+      18,
+      378,
+      505
+     ],
+     "patch": "full-up"
     }
    ]
   }
@@ -203,8 +193,8 @@
       960
      ],
      {
-      "cx": 560,
-      "cy": 440,
+      "cx": 580,
+      "cy": 430,
       "w": 560
      }
     ],
@@ -215,20 +205,28 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 576,
-     "y": 424,
+     "x": 622,
+     "y": 404,
+     "r": 40,
      "at": 1200,
-     "rx": 60,
-     "ry": 45,
      "until": 4000
     },
     {
      "type": "ring",
-     "x": 480,
-     "y": 488,
-     "at": 4000,
-     "rx": 90,
-     "ry": 50
+     "x": 768,
+     "y": 410,
+     "rx": 48,
+     "ry": 40,
+     "at": 1800,
+     "until": 4000
+    },
+    {
+     "type": "ring",
+     "x": 500,
+     "y": 486,
+     "rx": 100,
+     "ry": 46,
+     "at": 4000
     },
     {
      "type": "timer",
@@ -327,60 +325,45 @@
    },
    "motions": [
     {
-     "id": "push",
-     "type": "loop",
+     "type": "swap",
      "frame": "push",
-     "layer": "arms",
-     "dy": 12,
+     "layer": "full-down",
+     "under": "full-up",
      "ease": "push",
      "rate": 110,
+     "hide": false,
+     "blend": 40,
+     "id": "push",
      "count": 30,
      "at": 3000,
      "slow": {
       "count": 3,
       "rate": 40
      }
-    },
-    {
-     "type": "loop",
-     "frame": "push",
-     "layer": "body",
-     "dy": 4,
-     "follow": "push"
     }
    ],
    "overlays": [
     {
-     "type": "dot",
-     "x": 546,
-     "y": 452,
-     "r": 16,
+     "type": "ring",
+     "x": 588,
+     "y": 472,
+     "r": 38,
      "at": 900,
      "until": 3000
     },
     {
      "type": "arrow",
      "from": [
-      546,
+      588,
       330
      ],
      "to": [
-      546,
-      420
+      588,
+      428
      ],
      "width": 12,
      "at": 1500,
      "until": 3000
-    },
-    {
-     "type": "shade",
-     "x": 546,
-     "y": 455,
-     "rx": 60,
-     "ry": 18,
-     "max": 0.3,
-     "follow": "push",
-     "above": "bg"
     },
     {
      "type": "counter",
@@ -435,22 +418,17 @@
      "ms": 900
     },
     {
-     "id": "push",
-     "type": "loop",
+     "type": "swap",
      "frame": "push",
-     "layer": "arms",
-     "dy": 12,
+     "layer": "full-down",
+     "under": "full-up",
      "ease": "push",
      "rate": 110,
+     "hide": false,
+     "blend": 40,
+     "id": "push",
      "count": 30,
      "at": 6800
-    },
-    {
-     "type": "loop",
-     "frame": "push",
-     "layer": "body",
-     "dy": 4,
-     "follow": "push"
     }
    ],
    "overlays": [
@@ -471,16 +449,6 @@
      "of": 2,
      "icon": "breath",
      "until": 5600
-    },
-    {
-     "type": "shade",
-     "x": 546,
-     "y": 455,
-     "rx": 60,
-     "ry": 18,
-     "max": 0.3,
-     "follow": "push",
-     "above": "bg"
     },
     {
      "type": "counter",
@@ -523,21 +491,16 @@
    },
    "motions": [
     {
-     "id": "push",
-     "type": "loop",
+     "type": "swap",
      "frame": "push",
-     "layer": "arms",
-     "dy": 12,
+     "layer": "full-down",
+     "under": "full-up",
      "ease": "push",
      "rate": 110,
+     "hide": false,
+     "blend": 40,
+     "id": "push",
      "at": 1800
-    },
-    {
-     "type": "loop",
-     "frame": "push",
-     "layer": "body",
-     "dy": 4,
-     "follow": "push"
     }
    ],
    "overlays": [
@@ -570,16 +533,6 @@
      "pos": "top-end",
      "wait": false,
      "until": 11500
-    },
-    {
-     "type": "shade",
-     "x": 546,
-     "y": 455,
-     "rx": 60,
-     "ry": 18,
-     "max": 0.3,
-     "follow": "push",
-     "above": "bg"
     },
     {
      "type": "icon",

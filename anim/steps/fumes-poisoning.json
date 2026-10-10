@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "id": "fumes-poisoning",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "_note": "Mo's picture of 10 Oct 2026 (illustrations-2026-10-10/fixes, REVIEW.md B3): the family outside in the snow, the door and window wide open, the stove inside. Packed by tools/steps_images.py --px 800 --patch. The scenes read the page's own lines (fumes-poisoning.out, fumes-poisoning.oxygen); the title is the page's title. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "773c09db",
+     "kb": 29.7
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "fumes-poisoning.out",
+   "frame": "1",
+   "ms": 10000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 620,
+      "cy": 250,
+      "w": 640
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2000,
+     2000
+    ],
+    "hold": [
+     2600,
+     3400
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 470,
+     "y": 470,
+     "rx": 420,
+     "ry": 190,
+     "at": 600,
+     "until": 2600,
+     "pulse": false,
+     "still": false
+    },
+    {
+     "type": "ring",
+     "x": 570,
+     "y": 180,
+     "rx": 70,
+     "ry": 100,
+     "at": 3000
+    },
+    {
+     "type": "ring",
+     "x": 816,
+     "y": 136,
+     "rx": 90,
+     "ry": 70,
+     "at": 4200
+    }
+   ]
+  },
+  {
+   "id": "fumes-poisoning.oxygen",
+   "frame": "1",
+   "ms": 8000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 70,
+     "y": 74,
+     "r": 44,
+     "at": 800
+    },
+    {
+     "type": "arrow",
+     "from": [
+      124,
+      74
+     ],
+     "to": [
+      172,
+      74
+     ],
+     "width": 10,
+     "at": 1500
+    },
+    {
+     "type": "icon",
+     "name": "hospital",
+     "x": 228,
+     "y": 74,
+     "r": 44,
+     "at": 2100
+    }
+   ]
+  }
+ ],
+ "approved": "",
+ "poster": 0
+}

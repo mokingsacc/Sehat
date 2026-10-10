@@ -65,6 +65,24 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   their side if water or vomit comes out, wipe the mouth, roll them back and carry on (M8: ANZCOR 9.3.2, AHA/AAP 2024,
   ERC 2025), so the 9 Oct drowning-rescue frame 4 (the whole body on the side) is used: the scene goes from the back
   (frame 3) to the side (frame 4, there and back) and then to the blanket (frame 5). Still not live (not in `STEPS`).
+- **Fix pictures (10 Oct 2026,** `illustrations-2026-10-10/fixes/`, answering `animation-briefs/chatgpt-fixes-2026-10-10.md`**):**
+  packed with the same flags. cpr-child frame `push` (A2) is now two full pictures (one heel of the hand on the lower
+  breastbone, arm straight, the other hand on her own knee; `down` is a patch), pressed with a `swap` (`hide: false`,
+  `blend` 40), with a ring on the hand before the pushes; frame 2 (C3) is the redone head tilt and chin lift.
+  choking-baby frame 4 (A3, two thumbs on the breastbone, a full pair) and frame 5 (C6, the mouth looked into).
+  cpr-adult frame `breath` (C9) is a full pair: the 10 Oct picture as `up` and Mo's `down` (mouth sealed, chest
+  raised); `down` adds the grandmother phoning in the background, so she was copied into `up` (only empty wall
+  changes) and the swap shows only the breath. recovery-position frame 5 (C7, the baby on its side and front, face
+  free). burns-cool frame `stop` (B2) plays a new first scene on `burns.stop` (clothes on fire: a thick blanket, the
+  head out). New one-picture sets on their pages' own lines (no new narration ids): `fumes-poisoning` (B3:
+  `fumes-poisoning.out`, `fumes-poisoning.oxygen`) and `poisoning` (B4: `poisoning.no-vomit`, `poisoning.bottle`,
+  `poisoning.side`); both are Emergency topics, so they will be in the APK once live (60 KB). The skin-to-skin
+  picture (C4) is stored once, as cpr-newborn frame 6; newborn-warm frame 2 and cold-warming frame 4 read it as
+  `../cpr-newborn/6-full.webp` (see "Pictures shared by several sets"). cpr-newborn s7 now starts on frame 4 (the
+  chest ringed) and cross-fades to the skin-to-skin picture, so it no longer shows the frame 5 puff picture. Still the
+  old pictures until Mo's redos: cpr-newborn frame 5 puffs (A1, s5 and s6), cpr-newborn rub (C5), cpr-baby breath
+  (C1), cpr-child frame 3 breaths (the 10 Oct `child-breath-review` pair draws full faces with eyes and its nose pinch
+  is unchecked) and dog-bite (B1, no set yet). Not live on main.
 - **To go live** (after Mo's approval): add the name to `STEPS`, the `"approved"` note, and an `anim` block on the
   topic. The tools accept a set that reads its page's lines (nothing new to record): `tools/validate.py` takes a
   scene id that is `anim.<name>.s<n>` or a spoken line of the book (a topic block or ui `say` line), and an `id` that
@@ -82,8 +100,14 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
 - **Notes in the JSON:** `_note` (where the pictures came from and what was left out), `_check` (points for Mo's
   medical check), `held` (bleeding-tourniquet: "held: Mo's tourniquet call pending").
 - **Not used, they look medically wrong:** cpr-child frame 4 (hand too high, on the upper chest). Pictures the delivery uses
-  twice: newborn-warm frame 2 is also cpr-newborn frame 6 and cold-warming frame 4, and recovery-position frame 4 is
-  also low-sugar-drink frame 3 (each set keeps its own copy, about 30 kB); `choking-01` is choking-baby frame 1.
+  twice: newborn-warm frame 2 and cold-warming frame 4 are cpr-newborn frame 6 (one file since 10 Oct 2026), and
+  recovery-position frame 4 is also low-sugar-drink frame 3 (each set keeps its own copy, about 30 kB); `choking-01`
+  is choking-baby frame 1.
+- **Pictures shared by several sets:** a layer's `src` may point into another set's folder (`../cpr-newborn/6-full.webp`,
+  never outside `img/steps/`; `tools/validate.py` checks). `tools/anims.py` lists it by its own path in `book.steps`
+  (`img/steps/cpr-newborn/6-full.webp?v=...`), so the precache list, the APK filter (`prune_apk()` keeps every file a
+  precache set names, in whatever folder) and the on-demand download (`setOwns()` in `js/anim.js` counts the files a set
+  names as its own, so the start-up sweep keeps them) all see one file. `tools/test_ondemand.mjs` part 10 tests it.
 - **APK budget** (MB = 1,000,000 bytes). **Mo 9 Oct: all Emergency sets in the APK.** The APK of release
   v2026.10.09-9f5275 is 8.72 MB. The 23 new Emergency and CPR sets (all but the held bleeding-tourniquet) add
   2.82 MB of pictures (2.85 MB with drowning-rescue frame 4 since 10 Oct) and 0.09 MB of JSON, so the APK is about 11.6 MB once they are live; `img/` inside the APK is

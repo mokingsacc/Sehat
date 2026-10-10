@@ -18,6 +18,8 @@
 //   7. a stalled file is given up after the inactivity time (also with no AbortController) and the next visit
 //      completes; a slow but steady file (longer than that time in total) finishes;
 //   8. mobile data, no navigator.connection, and data saver: the page alone downloads nothing; opening it does.
+//   9. a set with no SVG version waits off its page until it is downloaded;
+//  10. a picture shared from another set's folder is listed by its own path, downloaded and kept by the sweep.
 import { execFileSync } from 'child_process';
 import crypto from 'crypto';
 import fs from 'fs';
@@ -297,6 +299,29 @@ try {
   ok(await posterKind(nf.p) === 'steps' && !(await nf.p.$(`[data-steps-wait="${NAME}"]`)), 'once downloaded, the block appears with its picture-step poster');
   SRV.drip = null;
   await nf.ctx.close();
+
+  // 10. a picture the set shares with another set's folder ("../shared-pics/b-bg.webp", as newborn-warm reads
+  // cpr-newborn's skin-to-skin picture): listed by its own path, downloaded with the set, and kept after the start-up sweep
+  const j4 = JSON.parse(fs.readFileSync(jp, 'utf8'));
+  const sharedL = j4.frames.b.layers[0];
+  fs.mkdirSync(path.join(root, 'img/steps/shared-pics'), { recursive: true });
+  fs.copyFileSync(path.join(root, 'img/steps', NAME, sharedL.src), path.join(root, 'img/steps/shared-pics', sharedL.src));
+  sharedL.src = '../shared-pics/' + sharedL.src;
+  fs.writeFileSync(jp, JSON.stringify(j4));
+  const book4 = build(), files4 = book4.steps[NAME].files;
+  const sharedFile = files4.find((f) => f.indexOf('img/steps/shared-pics/') === 0);
+  ok(!!sharedFile && !files4.some((f) => f.indexOf('..') >= 0), `book.steps lists the shared picture by its own path (${sharedFile})`);
+  const sh = await phone('wifi');
+  await setup(sh.p, book4.steps);
+  await revisit(sh.p, 2500);
+  await sh.p.waitForTimeout(8000); // the start-up sweep (8 s after the start) must keep the shared picture
+  const keys10 = await stepsKeys(sh.p);
+  ok(keys10.indexOf(sharedFile) >= 0 && keys10.length === files4.length, `the shared picture is downloaded with the set and survives the sweep (${keys10.length}/${files4.length} files)`);
+  await go(sh.p, '#/home'); await go(sh.p, '#/topic/hygiene');
+  await sh.p.waitForSelector(`[data-poster="${NAME}"] .st-poster`, { timeout: 10000 }).catch(() => {});
+  const k10 = await playerKind(sh.p);
+  ok(k10.kind === 'steps' && k10.imgs > 0 && k10.loaded === k10.imgs, `a set with a shared picture plays (${k10.loaded}/${k10.imgs} pictures)`);
+  await sh.ctx.close();
 } catch (e) { ok(false, 'test crashed: ' + (e && e.stack || e)); }
 ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''));
 await b.close(); server.close();

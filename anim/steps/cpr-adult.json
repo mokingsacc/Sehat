@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "",
- "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Mo's adult CPR additions of 10 Oct 2026 (illustrations-2026-10-10/adult-cpr-additions): 'check' (response-check: hands on both shoulders) plays s1 (tap the shoulders, ask loudly) and s2 (shout for help), 'tilt' (head-tilt-chin-lift: hand on the forehead, two fingertips under the bony chin) plays s3 (look at the chest for up to 10 s), 'breath' (rescue-breath: nose pinched, chin lifted, mouth over mouth) plays s6 (2 breaths). s5 and s7 use 'push', s4 'hand'. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Mo's adult CPR additions of 10 Oct 2026 (illustrations-2026-10-10/adult-cpr-additions): 'check' (response-check: hands on both shoulders) plays s1 (tap the shoulders, ask loudly) and s2 (shout for help), 'tilt' (head-tilt-chin-lift: hand on the forehead, two fingertips under the bony chin) plays s3 (look at the chest for up to 10 s), 'breath' (rescue-breath: nose pinched, chin lifted) plays s6 (2 breaths): since 10 Oct 2026 it is two full pictures, the 10 Oct picture ('up') and Mo's 'down' version (illustrations-2026-10-10/fixes, REVIEW.md C9: mouth sealed over the mouth, chest raised; a patch over 'up'). The 'down' picture adds the grandmother phoning for help in the background, so the same figure was copied into 'up' (only the empty wall there changes) and the swap shows only the breath. s5 and s7 use 'push', s4 'hand'. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 4,
  "frames": {
   "hand": {
@@ -67,34 +67,23 @@
   "breath": {
    "layers": [
     {
-     "id": "bg",
-     "src": "breath-bg.webp",
-     "v": "be2d8bd6",
-     "kb": 24.2
+     "id": "full-up",
+     "src": "breath-full-up.webp",
+     "v": "14f13c31",
+     "kb": 29.7
     },
     {
-     "id": "body",
-     "src": "breath-body.webp",
-     "v": "3c5989a0",
-     "kb": 12.0,
+     "id": "full-down",
+     "src": "breath-full-down.webp",
+     "v": "b98eb6fe",
+     "kb": 12.2,
      "box": [
-      191,
-      118,
-      514,
-      319
-     ]
-    },
-    {
-     "id": "arms",
-     "src": "breath-arms.webp",
-     "v": "e051f867",
-     "kb": 8.8,
-     "box": [
-      106,
-      151,
-      451,
-      250
-     ]
+      131,
+      108,
+      634,
+      400
+     ],
+     "patch": "full-up"
     }
    ]
   },
@@ -533,14 +522,28 @@
     },
     {
      "type": "counter",
-     "to": 2,
-     "every": 2200,
-     "at": 3000,
+     "follow": "breath",
      "of": 2,
      "icon": "breath",
      "pos": "top-end"
     }
-   ]
+   ],
+   "motions": [
+    {
+     "id": "breath",
+     "type": "swap",
+     "frame": "breath",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 3000,
+     "rate": 24,
+     "count": 2,
+     "hide": false
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
   },
   {
    "id": "anim.cpr-adult.s7",

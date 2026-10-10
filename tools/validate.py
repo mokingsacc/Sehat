@@ -533,6 +533,9 @@ def check_steps():
             for L in (v.get("layers") if isinstance(v, dict) else v) or []:
                 layers.setdefault(fr, set()).add(L.get("id"))
                 if not os.path.exists(os.path.join(pdir, str(L.get("src")))): err(f, f"frame {fr}: picture {L.get('src')} missing in {os.path.relpath(pdir, ROOT)}")
+                # a picture several sets share may sit in another set's folder ("../cpr-newborn/6-full.webp"), never outside img/steps
+                if not os.path.normpath(os.path.join(pdir, str(L.get("src")))).startswith(os.path.join(ROOT, "img", "steps") + os.sep):
+                    err(f, f"frame {fr}: picture {L.get('src')} is outside img/steps/")
                 b = L.get("box")
                 if b is not None and not (len(b) == 4 and b[0] >= 0 and b[1] >= 0 and b[0] + b[2] <= W + 1 and b[1] + b[3] <= H + 1): err(f, f"frame {fr} layer {L.get('id')}: box {b} outside the {W}x{H} picture")
         if not layers: err(f, "no frames"); continue

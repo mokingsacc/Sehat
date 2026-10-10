@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/newborn-warm), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/newborn-warm), packed by tools/steps_images.py --px 800 --patch. Frame 2 is the skin-to-skin picture of cpr-newborn (Mo's 10 Oct 2026 redo, REVIEW.md M4), read from img/steps/cpr-newborn/ so it is stored once. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
   "Frame 3: the father holds the small baby skin to skin (the brief's 'father helps'); since 10 Oct 2026 newborn.small says the mother's or father's chest (frame review L12)."
  ],
@@ -25,9 +25,9 @@
    "layers": [
     {
      "id": "full",
-     "src": "2-full.webp",
-     "v": "21ee080b",
-     "kb": 29.8
+     "src": "../cpr-newborn/6-full.webp",
+     "v": "d4fef7c7",
+     "kb": 26.1
     }
    ]
   },
@@ -100,8 +100,8 @@
     },
     {
      "type": "waves",
-     "x": 432,
-     "y": 160,
+     "x": 600,
+     "y": 520,
      "angle": -90,
      "size": 50,
      "count": 2,

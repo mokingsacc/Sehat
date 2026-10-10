@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Frame 6 is newborn-warm frame 2 (skin to skin), as the brief says. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Frame 6 is newborn-warm frame 2 (skin to skin), as the brief says. Since 10 Oct 2026 frame 6 is Mo's redone skin-to-skin picture (illustrations-2026-10-10/fixes, REVIEW.md M4: the baby's head turned to the side, nose and mouth free); newborn-warm frame 2 and cold-warming frame 4 use the same file (stored once, here). s7 now starts on frame 4 (the baby on its back, the chest ringed: 'until the baby breathes or cries') and cross-fades to frame 6, so it no longer shows the frame 5 puff picture (REVIEW.md H1). Frame 5 (puffs, s5 and s6) and frame 2 (rubbing the chest, s1 and s4) are still the 9 Oct pictures until Mo's redos (A1, C5). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 4,
  "frames": {
   "1": {
@@ -100,8 +100,8 @@
     {
      "id": "full",
      "src": "6-full.webp",
-     "v": "21ee080b",
-     "kb": 29.8
+     "v": "d4fef7c7",
+     "kb": 26.1
     }
    ]
   }
@@ -536,14 +536,14 @@
   },
   {
    "id": "anim.cpr-newborn.s7",
-   "frame": "5",
+   "frame": "4",
    "ms": 12000,
    "cam": {
     "path": [
      {
-      "cx": 430,
-      "cy": 430,
-      "w": 620
+      "cx": 440,
+      "cy": 470,
+      "w": 640
      },
      [
       0,
@@ -552,49 +552,41 @@
      ]
     ],
     "ms": [
-     2400
+     2000
+    ],
+    "hold": [
+     3000
     ]
    },
    "motions": [
     {
-     "id": "puff",
-     "type": "swap",
-     "frame": "5",
-     "layer": "full-down",
-     "under": "full-up",
-     "at": 600,
-     "rate": 40,
-     "count": 5,
-     "hide": false
-    },
-    {
      "type": "xfade",
      "to": "6",
-     "at": 6000,
+     "at": 5000,
      "ms": 900
     }
    ],
    "overlays": [
     {
-     "type": "shade",
-     "x": 304,
-     "y": 448,
-     "rx": 120,
-     "ry": 40,
-     "max": 0.3,
-     "follow": "puff",
-     "color": "255,238,205"
+     "type": "ring",
+     "x": 400,
+     "y": 505,
+     "rx": 90,
+     "ry": 48,
+     "at": 800,
+     "until": 4800,
+     "still": false
     },
     {
      "type": "waves",
-     "x": 432,
-     "y": 170,
+     "x": 600,
+     "y": 520,
      "angle": -90,
      "size": 50,
      "count": 2,
      "spread": 70,
      "ms": 1200,
-     "at": 7200
+     "at": 6200
     },
     {
      "type": "icon",
@@ -606,5 +598,10 @@
     }
    ]
   }
+ ],
+ "_check": [
+  "Frame 5 (puffs, s5 and s6): the grandmother's head merges with the baby's; the seal over the mouth and nose cannot be seen (REVIEW.md H1, redo A1 pending).",
+  "Frame 2 in s4: the hand rubs the chest and tummy; the line says the back or the soles (REVIEW.md M5, redo C5 pending).",
+  "Frame 6 (10 Oct): the baby's face in profile with the nose and mouth free; a faint closed-eye line is drawn."
  ]
 }

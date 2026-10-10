@@ -1,6 +1,6 @@
 """Explainer animations (anim/<name>.js, played by js/anim.js), as tools/build.py and tools/validate.py see them.
 Only reads the files: anim/*.js and js/anim.js belong to the animation player and are never changed here."""
-import glob, json, os, re
+import glob, json, os, posixpath, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NARRATION = os.path.join(ROOT, "content/src/anims.json")
@@ -230,7 +230,8 @@ def steps_files(name):
     pics = []
     for fr in (d.get("frames") or {}).values():
         for L in (fr.get("layers") if isinstance(fr, dict) else fr) or []:
-            f = f"{folder}/{L['src']}" + (f"?v={L['v']}" if L.get("v") else "")
+            # a picture may live in another set's folder ("../cpr-newborn/6-full.webp": one picture, several sets)
+            f = posixpath.normpath(f"{folder}/{L['src']}") + (f"?v={L['v']}" if L.get("v") else "")
             if f not in pics: pics.append(f)
     return f"anim/steps/{name}.json?v={hashlib.sha1(raw).hexdigest()[:8]}", pics, folder
 
@@ -247,26 +248,24 @@ def apk_steps_keep(steps):
 
 
 def prune_apk(out, steps):
-    """Remove from an APK folder (android/sync-web.sh) every picture-step folder and JSON that is not a precache set
-    (on-demand sets, sets not live yet, leftovers), and inside a precache set's folder every file its JSON does not
-    name (a held or unused picture). Returns (kept names, removed paths, removed bytes)."""
+    """Remove from an APK folder (android/sync-web.sh) every picture-step file that no precache set names: on-demand
+    sets, sets not live yet, leftovers, and a held or unused picture inside a precache set's folder. A picture a
+    precache set names stays even when it sits in another set's folder (a picture several sets share). Every
+    picture-step JSON that is not a precache set goes too. Returns (kept names, removed paths, removed bytes)."""
     import shutil
-    keep, keep_dirs = apk_steps_keep(steps)
+    keep, _ = apk_steps_keep(steps)
     named = {os.path.normpath(f.split("?")[0]) for n in keep for f in (steps[n].get("files") or [])[1:]}
     gone, size = [], 0
     for d in sorted(glob.glob(os.path.join(out, "img/steps/*"))):
         rel = os.path.normpath(os.path.relpath(d, out))
-        if rel in keep_dirs:
-            for a, _, fs in os.walk(d):
-                for f in fs:
-                    r = os.path.normpath(os.path.relpath(os.path.join(a, f), out))
-                    if r not in named: size += os.path.getsize(os.path.join(a, f)); os.remove(os.path.join(a, f)); gone.append(r)
-            continue
-        if os.path.isdir(d):
-            size += sum(os.path.getsize(os.path.join(a, f)) for a, _, fs in os.walk(d) for f in fs); shutil.rmtree(d)
-        else:
-            size += os.path.getsize(d); os.remove(d)
-        gone.append(rel)
+        if not os.path.isdir(d):
+            size += os.path.getsize(d); os.remove(d); gone.append(rel); continue
+        files = [os.path.join(a, f) for a, _, fs in os.walk(d) for f in fs]
+        if not any(os.path.normpath(os.path.relpath(p, out)) in named for p in files):
+            size += sum(os.path.getsize(p) for p in files); shutil.rmtree(d); gone.append(rel); continue
+        for p in files:
+            r = os.path.normpath(os.path.relpath(p, out))
+            if r not in named: size += os.path.getsize(p); os.remove(p); gone.append(r)
     for f in sorted(glob.glob(os.path.join(out, "anim/steps/*"))):
         if f.endswith(".json") and os.path.basename(f)[:-5] in keep: continue
         if os.path.isdir(f): shutil.rmtree(f)
