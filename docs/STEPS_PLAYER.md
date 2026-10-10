@@ -49,6 +49,13 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   (`heat-stroke.*`), cold-warming (`cold-hypothermia.*`), bp-measure (`kit-bp.*`), weigh-child (`ui.gr.m.hang`,
   `kit-scale.hold`), length-height (`ui.gr.m.length*`, `ui.gr.m.height`), glucometer (`kit-glucometer.*`),
   low-sugar-drink (`low-sugar.*`).
+- **Adult CPR additions (10 Oct 2026):** `/mnt/project-files/samangan-red-book/illustrations-2026-10-10/adult-cpr-additions/`
+  (three 1200x900 sets of 3 layers) are frames `check` (response-check: hands on both shoulders), `tilt`
+  (head-tilt-chin-lift: hand on the forehead, two fingertips under the bony chin) and `breath` (rescue-breath: nose
+  pinched, chin lifted) of `cpr-adult`, packed with the same flags as the others (140 KB). `check` plays s1 (tap the
+  shoulders, ask loudly) and s2 (shout for help), `tilt` plays s3 (look at the chest, 10 s timer) and `breath` plays s6
+  (2 breaths). Same narration ids `anim.cpr-adult.s1` to `s7`: nothing new to record. Still not live on main (live only
+  on `golive-emergency`).
 - **To go live** (after Mo's approval): add the name to `STEPS`, the `"approved"` note, and an `anim` block on the
   topic. The tools accept a set that reads its page's lines (nothing new to record): `tools/validate.py` takes a
   scene id that is `anim.<name>.s<n>` or a spoken line of the book (a topic block or ui `say` line), and an `id` that
@@ -73,8 +80,9 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
 - **APK budget** (MB = 1,000,000 bytes). **Mo 9 Oct: all Emergency sets in the APK.** The APK of release
   v2026.10.09-9f5275 is 8.72 MB. The 23 new Emergency and CPR sets (all but the held bleeding-tourniquet) add
   2.82 MB of pictures and 0.09 MB of JSON, so the APK is about 11.6 MB once they are live; `img/` inside the APK is
-  then about 3.9 MB. `tools/validate.py` warns above 4.5 MB of pictures (`APK_PICTURES_MB`: an APK of about 12.2 MB);
-  15 MB is the hard limit. The 8 other sets (0.67 MB: bp-measure, breastfeed-attach, breath-count, glucometer,
+  then about 3.9 MB. 10 Oct 2026: 31 more symptom tiles (0.75 MB) and the three adult CPR scenes (0.14 MB) make it
+  about 4.8 MB and the APK about 12.5 MB with every Emergency set live. `tools/validate.py` warns above 5.2 MB of
+  pictures (`APK_PICTURES_MB`, raised from 4.5 on 10 Oct: an APK of about 12.9 MB); 15 MB is the hard limit. The 8 other sets (0.67 MB: bp-measure, breastfeed-attach, breath-count, glucometer,
   length-height, muac, thermometer, weigh-child) stay on demand, as their topics are not in the Emergency group.
 
 ## How it plugs into the player
@@ -326,7 +334,7 @@ picture-step set.
   `navigator.connection` and with data saver the page alone downloads nothing; a set with no SVG version appears
   once downloaded.
 
-Rough sizes: a symptom tile is about 25 KB (36 tiles: about 0.9 MB); a CPR age is 0.3 to 0.6 MB of picture steps.
+Rough sizes: a symptom tile is about 23 KB (480 px; the 34 tiles with pictures on 10 Oct 2026: 0.83 MB); a CPR age is 0.3 to 0.6 MB of picture steps.
 
 ## Demo
 

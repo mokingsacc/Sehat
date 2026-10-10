@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "",
- "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Scenes 1 to 3, 6 and 7 reuse the 'push' picture with camera moves and overlays, as in cpr-baby. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Mo's adult CPR additions of 10 Oct 2026 (illustrations-2026-10-10/adult-cpr-additions): 'check' (response-check: hands on both shoulders) plays s1 (tap the shoulders, ask loudly) and s2 (shout for help), 'tilt' (head-tilt-chin-lift: hand on the forehead, two fingertips under the bony chin) plays s3 (look at the chest for up to 10 s), 'breath' (rescue-breath: nose pinched, chin lifted, mouth over mouth) plays s6 (2 breaths). s5 and s7 use 'push', s4 'hand'. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 4,
  "frames": {
   "hand": {
@@ -63,12 +63,114 @@
      ]
     }
    ]
+  },
+  "breath": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "breath-bg.webp",
+     "v": "be2d8bd6",
+     "kb": 24.2
+    },
+    {
+     "id": "body",
+     "src": "breath-body.webp",
+     "v": "3c5989a0",
+     "kb": 12.0,
+     "box": [
+      191,
+      118,
+      514,
+      319
+     ]
+    },
+    {
+     "id": "arms",
+     "src": "breath-arms.webp",
+     "v": "e051f867",
+     "kb": 8.8,
+     "box": [
+      106,
+      151,
+      451,
+      250
+     ]
+    }
+   ]
+  },
+  "check": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "check-bg.webp",
+     "v": "4f41b947",
+     "kb": 29.3
+    },
+    {
+     "id": "body",
+     "src": "check-body.webp",
+     "v": "2c6bf359",
+     "kb": 9.8,
+     "box": [
+      223,
+      106,
+      340,
+      330
+     ]
+    },
+    {
+     "id": "arms",
+     "src": "check-arms.webp",
+     "v": "8aefa1f5",
+     "kb": 8.1,
+     "box": [
+      106,
+      191,
+      347,
+      262
+     ]
+    }
+   ]
+  },
+  "tilt": {
+   "layers": [
+    {
+     "id": "bg",
+     "src": "tilt-bg.webp",
+     "v": "7ebe931e",
+     "kb": 24.1
+    },
+    {
+     "id": "body",
+     "src": "tilt-body.webp",
+     "v": "7f087e55",
+     "kb": 13.5,
+     "box": [
+      247,
+      26,
+      460,
+      425
+     ]
+    },
+    {
+     "id": "arms",
+     "src": "tilt-arms.webp",
+     "v": "4721c220",
+     "kb": 10.4,
+     "box": [
+      107,
+      127,
+      449,
+      298
+     ]
+    }
+   ]
   }
  },
  "scenes": [
   {
    "id": "anim.cpr-adult.s1",
-   "frame": "push",
+   "frame": "check",
    "ms": 8000,
    "cam": {
     "path": [
@@ -78,9 +180,9 @@
       960
      ],
      {
-      "cx": 300,
+      "cx": 250,
       "cy": 330,
-      "w": 700
+      "w": 640
      }
     ],
     "ms": [
@@ -90,35 +192,55 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 190,
-     "y": 420,
-     "at": 1200,
-     "rx": 70,
-     "ry": 40
+     "x": 195,
+     "y": 405,
+     "rx": 115,
+     "ry": 55,
+     "at": 1800
     },
     {
      "type": "waves",
-     "x": 320,
-     "y": 130,
-     "angle": -150,
-     "size": 50,
+     "x": 225,
+     "y": 228,
+     "angle": 140,
+     "size": 40,
      "count": 2,
-     "spread": 70,
+     "spread": 60,
      "ms": 1200,
+     "at": 4400
+    }
+   ],
+   "motions": [
+    {
+     "id": "tap",
+     "type": "loop",
+     "frame": "check",
+     "layer": "arms",
+     "dy": 4,
+     "ease": "push",
+     "rate": 150,
+     "count": 4,
      "at": 2600
+    },
+    {
+     "type": "loop",
+     "frame": "check",
+     "layer": "body",
+     "dy": 2,
+     "follow": "tap"
     }
    ]
   },
   {
    "id": "anim.cpr-adult.s2",
-   "frame": "push",
+   "frame": "check",
    "ms": 9000,
    "cam": {
     "path": [
      {
-      "cx": 300,
+      "cx": 250,
       "cy": 330,
-      "w": 700
+      "w": 640
      },
      [
       0,
@@ -133,8 +255,8 @@
    "overlays": [
     {
      "type": "waves",
-     "x": 368,
-     "y": 90,
+     "x": 292,
+     "y": 92,
      "angle": -90,
      "size": 64,
      "count": 3,
@@ -175,7 +297,7 @@
   },
   {
    "id": "anim.cpr-adult.s3",
-   "frame": "push",
+   "frame": "tilt",
    "ms": 15000,
    "cam": {
     "path": [
@@ -185,9 +307,9 @@
       960
      ],
      {
-      "cx": 220,
-      "cy": 410,
-      "w": 480
+      "cx": 300,
+      "cy": 400,
+      "w": 600
      }
     ],
     "ms": [
@@ -197,26 +319,34 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 90,
-     "y": 410,
-     "at": 1200,
-     "rx": 60,
+     "x": 146,
+     "y": 378,
+     "rx": 55,
      "ry": 50,
-     "until": 4000
+     "at": 1200,
+     "until": 4600
     },
     {
      "type": "ring",
-     "x": 330,
-     "y": 420,
-     "at": 4000,
-     "rx": 100,
-     "ry": 40
+     "x": 290,
+     "y": 380,
+     "r": 38,
+     "at": 2000,
+     "until": 4600
+    },
+    {
+     "type": "ring",
+     "x": 390,
+     "y": 490,
+     "rx": 110,
+     "ry": 40,
+     "at": 4600
     },
     {
      "type": "timer",
      "from": 0,
      "to": 10,
-     "at": 4000,
+     "at": 4600,
      "pos": "top-end",
      "wait": true
     }
@@ -364,7 +494,7 @@
   },
   {
    "id": "anim.cpr-adult.s6",
-   "frame": "push",
+   "frame": "breath",
    "ms": 9000,
    "cam": {
     "path": [
@@ -374,9 +504,9 @@
       960
      ],
      {
-      "cx": 180,
-      "cy": 410,
-      "w": 460
+      "cx": 290,
+      "cy": 370,
+      "w": 560
      }
     ],
     "ms": [
@@ -386,18 +516,19 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 75,
-     "y": 420,
+     "x": 205,
+     "y": 288,
+     "r": 44,
      "at": 1000,
-     "r": 50
+     "until": 3600
     },
     {
      "type": "ring",
-     "x": 330,
-     "y": 420,
-     "at": 3600,
+     "x": 432,
+     "y": 462,
      "rx": 110,
      "ry": 36,
+     "at": 3600,
      "pulse": false
     },
     {
@@ -500,5 +631,10 @@
     }
    ]
   }
+ ],
+ "_check": [
+  "Frame 'check': the hand nearer the head rests on the top of the shoulder, close to the base of the neck but not on it.",
+  "Frames 'tilt' and 'breath': two fingertips at the tip of the bony chin; the other hand on the forehead ('tilt') or pinching the nose ('breath'). In 'breath' the rescuer's face covers the nose, so the pinch is seen only from the fingers.",
+  "s2 (shout for help) now shows the rescuer still at the shoulders (frame 'check'), not already pushing."
  ]
 }
