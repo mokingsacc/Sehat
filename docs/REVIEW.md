@@ -5488,3 +5488,24 @@ Not used, they look medically wrong: cpr-child frame 4 (hand on the upper chest)
 For Mo's check (also in each JSON's `_check` and in the gallery): choking-baby frames 2, 4 and 5; cpr-child push arm angle and chin-lift fingers; recovery-position order (flag F2); spine-hold frames 2–3 (falling wall); splint-sling and snake-bite ties (flag F4); electric-stick frame 2 is the alternative branch; glucometer frame 2 (tip of the finger, not the side); thermometer frame 2; newborn-warm frame 3 (father skin to skin, the app says mother).
 
 Demo: `/mnt/project-files/samangan-red-book/previews/animations-2026-10-09/index.html` (one file, 5.4 MB, every set playable in the app's player, fa/ps/en, light/dark).
+
+## Symptom tile pictures and adult CPR scenes (10 Oct 2026, worker tiles2)
+
+Source: `/mnt/project-files/samangan-red-book/illustrations-2026-10-10/` (Mo's new ChatGPT pictures).
+
+What changed:
+- "What is wrong?" tiles: 31 more tiles have a picture (`img/symptoms/<id>.webp`, 480 px, 23-24 KB each; all 34 tiles 0.83 MB, precached and in the APK): notbreathing, fever, cough, diarrhoea, vomiting, rash, sore, lump, pregnancy, bleeding, headache, chest, belly, burn, fumes, bite, poison, fits, newborn, feeding, thin, yellow, tired, sugar, pressure, mind, longcough, animals, disaster, vaccine, choking.
+- Left out (icon kept): **breathing** (a baby's chest and belly with no head and no visible breathing sign; reads as a belly at tile size) and **safety** (a toddler held beside a lit stove, pot handle sticking out: the opposite of the child-safety page).
+- Not used: back-14 (alternative back picture; the repo keeps picture 36, the grain sack); the delivery's eyes and teeth are wider recrops of the repo's tiles, so the repo's own pictures stay.
+- Adult CPR picture steps (`cpr-adult`, still not live on main): three new frames from `adult-cpr-additions/`: `check` plays s1 (danger, tap the shoulders, ask loudly) and s2 (shout for help); `tilt` plays s3 (head tilt with chin lift, look at the chest for 10 s); `breath` plays s6 (2 breaths, nose pinched). Same narration ids, nothing new to record. 140 KB.
+- `tools/validate.py` APK_PICTURES_MB 4.5 -> 5.2 (with every Emergency set live: pictures 4.79 MB, APK about 12.5 MB). Branch `golive-emergency` rebased on top.
+- Contact sheets (phone, 412 px, en and fa), the left-out pictures and the new CPR scenes: `/mnt/project-files/samangan-red-book/previews/tiles-2026-10-10/`.
+
+For Mo's check:
+1. Men in white skullcaps (teeth, bleeding, headache, fumes, chest, pressure, disaster tiles and the adult CPR rescuer): everyday Afghan wear, but say if it reads as religious.
+2. Animals tile: the cow and sheep also have blank human-style faces.
+3. Rash tile shows the glass test (the fever page's "Test spots with a glass").
+4. Choking tile shows back blows for a baby only; the tile also covers adults.
+5. Yellow tile: a newborn's yellow skin and one yellow eye (the eye is the sign).
+6. Adult CPR `check`: the hand nearer the head rests on the top of the shoulder close to the base of the neck; `tilt` and `breath`: two fingertips at the tip of the bony chin; in `breath` the rescuer's face hides the nose, so the pinch shows only from the fingers. s2 now shows the rescuer still at the shoulders while shouting, not already pushing.
+7. On the tiles, the round speaker sits in the top corner (top-left in Dari and Pashto) and covers part of some pictures (e.g. the head in teeth, back and pressure in fa).
