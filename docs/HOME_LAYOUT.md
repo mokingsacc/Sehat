@@ -24,6 +24,8 @@ Each tab is a picture icon (`heart`, `house`, `family`) with its name under it. 
 
 Top to bottom (`config.home`; remove a name to hide it):
 
+0. **Get the app** (not in `config.home`; `banner()` in `js/share.js`, Mo 10 Oct 2026): a small teal banner right under the header, "Get the app: works with no internet", only on an Android phone in a browser. Never inside the Android app (its address `appassets.androidplatform.net` or its bridge), never on iPhones or computers, and not when the website runs from the home screen (it already opens like an app and works offline there; the Share page still offers the file). A "Get" tile (phone icon over the word), the line, a 56 px speaker (`ui.getapp`) and a big ×. **Get** opens a sheet with the line `ui.getapp.lead`, the same red download button as the Share page and the install steps. **×** hides it for good on that phone (`fhb.apkBannerOff`; if the phone cannot keep it, it shows again next time). Counted as `tool-banner-getapk` and `tool-banner-close`. About 62 px tall at 360 px: on a 360 x 640 phone the Emergency card and CPR and first aid stay whole on the first screen. Listen reads it last. Tests: `tools/test_apkbanner.cjs`.
+
 1. `nextVaccine`: a slim strip only when a child's next vaccine is due within 7 days or is late ("Name · Next vaccine: 6 weeks · in 3 days"), with a speaker. It opens Family, where the full card is.
 2. `emergency`: the biggest thing on the screen. Red, a warning icon, one word, a big speaker. It opens the Emergency screen and reads it aloud.
 3. `firstAid`: **CPR and first aid** (`#/firstaid`, `config.firstAid`): "Not breathing? Choose the age" with four big age pictures (each opens that age's CPR page), then every first-aid page as a picture tile.

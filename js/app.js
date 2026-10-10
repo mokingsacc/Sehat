@@ -216,6 +216,8 @@ const A = {
 function track(t, data = {}) { Stats.event(t, data); }
 function flush() { flushReports(); Stats.send(); }
 function isStandalone() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
+// inside the Android app (android/: its WebView serves the app from this address)
+const IN_APK = location.hostname === 'appassets.androidplatform.net';
 function platform() { const u = navigator.userAgent; return /iPhone|iPad|iPod/.test(u) ? 'ios' : /Android/.test(u) ? 'android' : 'other'; }
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') { stopAudio(); flushReports(); clearTimeout(DQ.timer); }
@@ -427,7 +429,8 @@ const tabTop = (ids) => top(T('appName'), { back: '', listen: ids });
 function screenHome() {
   const b = S.book, ids = ['ui.tab.health'], cfg = b.config || {};
   const mods = cfg.home || ['nextVaccine', 'emergency', 'firstAid', 'ask', 'children', 'adults', 'hospital', 'share', 'feedback'];
-  let html = tabTop(ids);
+  const getApp = SH.banner(); // "Get the app" on Android phones in a browser (js/share.js), under the header; read last by Listen
+  let html = tabTop(ids) + getApp;
   let shareShown = false, emCard = false;
   const M = {
     // only when a vaccine is due within 7 days or is late: a slim strip (the full card is in Family)
@@ -462,6 +465,7 @@ function screenHome() {
     disclaimer() { ids.push('ui.disclaimer'); return disclaimer(); },
   };
   for (const m of mods) html += M[m] ? M[m]() : listBtn(m, ids);
+  if (getApp) ids.push('ui.getapp');
   return { html, nav: 'health', healthTab: true, emCard };
 }
 
@@ -1331,7 +1335,7 @@ const TL = initTools({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, ha
 const FD = initFinder({ S, esc, T, L, ic, I, spk, isAdultTopic });
 const NP = initNumpad({ S, esc, T, L, num, I, spk, play, dialog, toast });
 const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, store, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, topicCard, NP, nameOf: (k) => FM.nameOf(k), children: () => FM.children(), render: () => render() });
-const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText });
+const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk: IN_APK });
 const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, disclaimer, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP, render: () => render() });
 
 /* ---------- titles that fit ----------
@@ -1560,7 +1564,6 @@ function goodBook(b) {
 // book.audio is keyed by slot ("fa-f"); a book from before voices (keyed "fa") counts as the woman's voice
 // The Android app carries no narration (it stays a small file to pass from phone to phone): its clips come from the
 // website (config.appUrl) and are kept on the phone like on the website (packs, or the first time each one plays).
-const IN_APK = location.hostname === 'appassets.androidplatform.net';
 // Except the Emergency and CPR clips in the woman's voice of Dari and Pashto (book.bundle, copied in by
 // android/sync-web.sh): those play from inside the app, so a phone that never goes online still hears emergencies.
 // Only the exact files built with this app count (same ?v= hash); a newer clip from an update comes from the website.

@@ -95,6 +95,16 @@
    "fa": "مسنجر",
    "ps": "مسنجر",
    "en": "Messenger"
+  },
+  "getAppBanner": {
+   "fa": "برنامه را بگیرید: بدون انترنت کار می‌کند",
+   "ps": "اپ واخلئ: بې انټرنېټه کار کوي",
+   "en": "Get the app: works with no internet"
+  },
+  "getAppGo": {
+   "fa": "گرفتن",
+   "ps": "اخیستل",
+   "en": "Get"
   }
  },
  "say": {
@@ -202,6 +212,16 @@
    "fa": "آیفون نمی‌تواند این فایل را نصب کند. در آیفون، لینک را باز کنید.",
    "ps": "آیفون دا فایل نشي نصبولای. په آیفون کې لینک خلاص کړئ.",
    "en": "iPhones cannot install this file. On an iPhone, open the link instead."
+  },
+  "ui.getapp": {
+   "fa": "برنامهٔ صحت را برای اندروید بگیرید. بدون انترنت کار می‌کند. «گرفتن» را بزنید.",
+   "ps": "د اندروید لپاره د صحت اپ واخلئ. بې انټرنېټه کار کوي. «اخیستل» ووهئ.",
+   "en": "Get the Sehat app for Android. It works with no internet. Tap Get."
+  },
+  "ui.getapp.lead": {
+   "fa": "دکمهٔ سرخ را بزنید تا فایل برنامه را بگیرید. فقط برای گرفتن فایل انترنت لازم است. بعد این قدم‌ها را دنبال کنید.",
+   "ps": "سور تڼۍ ووهئ چې د اپ فایل واخلئ. یوازې د فایل اخیستلو لپاره انټرنېټ پکار دی. بیا دا ګامونه تعقیب کړئ.",
+   "en": "Tap the red button to get the app file. You need internet only to get the file. Then follow these steps."
   }
  }
 }

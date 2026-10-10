@@ -705,3 +705,14 @@ a.sym{text-decoration:none}
 .symcard .rimg .symimg img{width:100%;height:62px;object-fit:cover}
 .symcard .rimg .symimg .ic{width:40px;height:40px}
 .blk.tip.symfoot{background:#F3F0EA}
+/* "Get the app: works with no internet": the small banner under the header of the Health tab, Android browsers only (js/share.js).
+   As low as the 56 px speaker allows: the "Get" tile (phone icon over the word), the line, the speaker and a close button. */
+.getapp{display:flex;align-items:center;gap:2px;background:var(--teal-t);border-radius:18px;padding:3px;margin:0 0 12px}
+.getapp .grow{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:8px;min-height:56px;padding:3px;text-align:start;color:var(--ink);border-radius:15px}
+.getapp .go{flex:0 0 auto;min-width:52px;height:50px;padding:0 6px;border-radius:13px;background:var(--teal);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-weight:800;font-size:13px;line-height:1.15}
+.getapp .go .ic{width:22px;height:22px}
+.getapp .tx{flex:1 1 0;min-width:0;font-weight:700;font-size:14.5px;line-height:1.3}
+.getapp .spk{background:var(--card);border-color:transparent;color:var(--teal)}
+.getapp .gx{flex:0 0 auto;width:42px;min-height:56px;display:flex;align-items:center;justify-content:center;color:var(--mute);border-radius:12px}
+.getapp .gx svg{width:22px;height:22px}
+.getapp-sheet .srowbig{margin-top:12px}

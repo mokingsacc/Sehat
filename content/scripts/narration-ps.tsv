@@ -517,6 +517,8 @@ ui.sh.i2	که ټیلیفون وپوښتل، «تنظیمات» ووهئ او ل�
 ui.sh.i3	«نصب» ووهئ. که ټیلیفون د ناپېژندل شوي اپ په اړه خبرداری ورکړ، «More details» او بیا «Install anyway» ووهئ.	Tap Install. If the phone warns about an unknown app, tap More details, then Install anyway.
 ui.sh.i4	صحت خلاص کړئ. بې انټرنېټه کار کوي.	Open Sehat. It works without internet.
 ui.sh.iphone	آیفون دا فایل نشي نصبولای. په آیفون کې لینک خلاص کړئ.	iPhones cannot install this file. On an iPhone, open the link instead.
+ui.getapp	د اندروید لپاره د صحت اپ واخلئ. بې انټرنېټه کار کوي. «اخیستل» ووهئ.	Get the Sehat app for Android. It works with no internet. Tap Get.
+ui.getapp.lead	سور تڼۍ ووهئ چې د اپ فایل واخلئ. یوازې د فایل اخیستلو لپاره انټرنېټ پکار دی. بیا دا ګامونه تعقیب کړئ.	Tap the red button to get the app file. You need internet only to get the file. Then follow these steps.
 ui.syn.measles	تبه او په ټول بدن سرې دانې؛ کېدای شي شري وي.	Fever and a red rash all over the body; it may be measles.
 ui.syn.awd	په یوه ورځ کې درې ځله یا ډېر اوبلن نس ناستی، بې له وینې.	Three or more watery stools in one day, with no blood.
 ui.syn.bloody-diarrhoea	نس ناستی، او په ډکو متیازو کې وینه ښکاري.	Diarrhoea, with blood in the stool.

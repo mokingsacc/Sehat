@@ -36,10 +36,11 @@ export const tgLink = (url, text) => 'https://t.me/share/url?url=' + encodeURICo
 const PHONES = '<svg viewBox="0 0 120 80" aria-hidden="true"><rect x="8" y="10" width="34" height="60" rx="7" fill="#22201D"/><rect x="12" y="16" width="26" height="46" rx="3" fill="#FBFAF7"/><rect x="78" y="10" width="34" height="60" rx="7" fill="#22201D"/><rect x="82" y="16" width="26" height="46" rx="3" fill="#FBFAF7"/><path d="M25 32c-3-5-10-3-9 2 1 4 9 9 9 9s8-5 9-9c1-5-6-7-9-2z" fill="#B6322D"/><path d="M95 32c-3-5-10-3-9 2 1 4 9 9 9 9s8-5 9-9c1-5-6-7-9-2z" fill="#B6322D"/><path d="M48 34q12-12 24 0" fill="none" stroke="#9A6F00" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/><path d="M48 46q12 12 24 0" fill="none" stroke="#9A6F00" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 6"/><path d="M66 30l6 4-7 3" fill="none" stroke="#9A6F00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const BUBBLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 3 6.6 3 11c0 2.2.9 4.1 2.4 5.5L4.5 21l4.4-2.1c1 .3 2 .4 3.1.4 5.5 0 9-3.6 9-8.1S17.5 3 12 3z" fill="currentColor"/></svg>';
 const NEAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="8" height="15" rx="2"/><path d="M12 15h.01"/><path d="M4 8a9 9 0 0 0 0 8M20 8a9 9 0 0 1 0 8M1.5 6a13 13 0 0 0 0 12M22.5 6a13 13 0 0 1 0 12"/></svg>';
+const CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 const LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
 
 export function initShare(ctx) {
-  const { S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText } = ctx;
+  const { S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk } = ctx;
   const say = (id) => L(S.book.narration[id]);
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${spk(id)}</div>`;
   const url = () => String((S.book.config && S.book.config.appUrl) || SITE);
@@ -63,6 +64,26 @@ export function initShare(ctx) {
     h += ['ui.sh.i1', 'ui.sh.i2', 'ui.sh.i3', 'ui.sh.i4'].map((id, i) => `<div class="blk step" data-block="${id}"><div class="body"><div class="h"><span class="num">${esc(num(i + 1))}</span></div><div class="x">${esc(say(id))}</div></div>${spk(id)}</div>`).join('');
     return h + sayRow('ui.sh.iphone', 'blk tip trow');
   }
+  // "Get the app: works with no internet" (Mo, 2026-10-10): a small banner at the top of the Health tab, only in a browser
+  // on an Android phone. Never inside the Android app (its address, or its bridge), never on iPhones or computers, and not
+  // when the website was added to the home screen (display-mode standalone): that phone already opens Sehat like an app
+  // and it already works offline there, so "Get the app" would only confuse; the Share page still offers the file.
+  // × hides it for good on this phone (store: if the phone cannot keep it, the banner simply shows again next time).
+  // "Get" opens a sheet with the same red download button and install steps as the Share page.
+  const BANNER_OFF = 'apkBannerOff';
+  const bannerOn = () => platform() === 'android' && !inApk && !bridge() && !isStandalone() && !store.get(BANNER_OFF, false);
+  function banner() {
+    if (!bannerOn()) return '';
+    return `<div class="getapp" data-block="ui.getapp"><button type="button" class="grow" data-share="banner-get"><span class="go">${ic('phone')}<span>${esc(T('getAppGo'))}</span></span><span class="tx">${esc(T('getAppBanner'))}</span></button>${spk('ui.getapp')}<button type="button" class="gx" data-share="banner-close" aria-label="${esc(T('close'))}">${CLOSE}</button></div>`;
+  }
+  function apkSheet() {
+    const ids = [];
+    let h = sayRow('ui.getapp.lead', 'blk lead trow');
+    h += row('ui.sh.b.apk', label(ic('phone'), T('getApk')), 'a', `data-share="apk" href="${esc(APK_URL)}" rel="noopener" style="--c:#B6322D"`);
+    h += installHelp(ids);
+    dialog(`<div class="getapp-sheet">${h}<button class="btn ghost" data-close>${esc(T('close'))}</button></div>`);
+  }
+
   function qrBlock(ids) {
     ids.push('ui.sh.qr');
     return `<div class="qrcard"><h2>${esc(T('qrTitle'))}</h2><div class="qrbox" dir="ltr">${qrSvg(url())}</div><div class="qrurl" dir="ltr">${esc(url().replace(/^https:\/\//, ''))}</div>${sayRow('ui.sh.qr')}</div>`;
@@ -141,8 +162,17 @@ export function initShare(ctx) {
     if (how === 'link') { shareLink(); return; }
     if (how === 'copy') { track('share'); track('tool', { p: 'share-copy' }); copy(); return; }
     if (how === 'wa' || how === 'tg') { track('share'); track('tool', { p: 'share-' + how }); return; } // the link opens the app
-    if (how === 'apk') { track('tool', { p: 'share-getapk' }); }
+    if (how === 'banner-get') { track('tool', { p: 'banner-getapk' }); apkSheet(); return; }
+    if (how === 'banner-close') {
+      track('tool', { p: 'banner-close' }); store.set(BANNER_OFF, true);
+      const b = t.closest('.getapp'); if (b) b.remove();
+      return;
+    }
+    if (how === 'apk') {
+      if (navigator.onLine === false) { ev.preventDefault(); toast(T('offlineNow')); return; } // the download needs internet; never leave the app for an error page
+      track('tool', { p: 'share-getapk' });
+    }
   });
 
-  return { screen, homeCard, homeSay, settingsRow, shareLink };
+  return { screen, homeCard, homeSay, settingsRow, shareLink, banner };
 }

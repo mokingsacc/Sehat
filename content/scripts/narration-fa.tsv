@@ -517,6 +517,8 @@ ui.sh.i2	اگر گوشی پرسید، «تنظیمات» را بزنید و اج
 ui.sh.i3	«نصب» را بزنید. اگر گوشی دربارهٔ برنامهٔ ناشناس هشدار داد، «More details» و بعد «Install anyway» را بزنید.	Tap Install. If the phone warns about an unknown app, tap More details, then Install anyway.
 ui.sh.i4	صحت را باز کنید. بدون انترنت کار می‌کند.	Open Sehat. It works without internet.
 ui.sh.iphone	آیفون نمی‌تواند این فایل را نصب کند. در آیفون، لینک را باز کنید.	iPhones cannot install this file. On an iPhone, open the link instead.
+ui.getapp	برنامهٔ صحت را برای اندروید بگیرید. بدون انترنت کار می‌کند. «گرفتن» را بزنید.	Get the Sehat app for Android. It works with no internet. Tap Get.
+ui.getapp.lead	دکمهٔ سرخ را بزنید تا فایل برنامه را بگیرید. فقط برای گرفتن فایل انترنت لازم است. بعد این قدم‌ها را دنبال کنید.	Tap the red button to get the app file. You need internet only to get the file. Then follow these steps.
 ui.syn.measles	تب و دانه‌های سرخ در تمام بدن؛ شاید سرخکان باشد.	Fever and a red rash all over the body; it may be measles.
 ui.syn.awd	سه بار یا بیشتر اسهال آبکی در یک روز، بدون خون.	Three or more watery stools in one day, with no blood.
 ui.syn.bloody-diarrhoea	اسهال، و در مدفوع خون دیده می‌شود.	Diarrhoea, with blood in the stool.
