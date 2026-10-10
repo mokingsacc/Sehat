@@ -83,6 +83,15 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   old pictures until Mo's redos: cpr-newborn frame 5 puffs (A1, s5 and s6), cpr-newborn rub (C5), cpr-baby breath
   (C1), cpr-child frame 3 breaths (the 10 Oct `child-breath-review` pair draws full faces with eyes and its nose pinch
   is unchecked) and dog-bite (B1, no set yet). Not live on main.
+- **Training-doll pictures (10 Oct 2026,** `illustrations-2026-10-10/training-doll/webp/`**,** 1200x900 WebP**):** ChatGPT
+  drew the babies as first-aid training dolls. Packed with the same flags. cpr-newborn frame 5 (A1) is the new puff pair
+  (`up`: head lifted; `down`: lips over the doll's mouth and nose, chest raised, a patch): s5 and s6 swap them
+  (`hide: false`) with the chest lighting up on `down`. cpr-newborn frame 2 (C5) is the new rubbing pair (a dry towel
+  on the back; `up`/`down` are the two ends of the stroke): s1 (after the drying) and s4 swap them; s2 (the call for
+  help) now shows frame 1, and the old frame 2 pictures are gone. New one-picture set `dog-bite` (B1: water poured from
+  a jug onto the bite over a basin, soap in hand) on the page's own lines `dog-bite.wash` (ring on the bite, the stream,
+  the soap, water and clock icons) and `dog-bite.go` (car, clinic, syringe and calendar icons); an Emergency topic, so
+  precache once live (30 KB). The cpr-baby breath pair (C1) goes in on `golive-emergency` only (cpr-baby is live).
 - **To go live** (after Mo's approval): add the name to `STEPS`, the `"approved"` note, and an `anim` block on the
   topic. The tools accept a set that reads its page's lines (nothing new to record): `tools/validate.py` takes a
   scene id that is `anim.<name>.s<n>` or a spoken line of the book (a topic block or ui `say` line), and an `id` that

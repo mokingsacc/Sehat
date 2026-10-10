@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "id": "dog-bite",
+ "w": 960,
+ "h": 720,
+ "adult": false,
+ "_note": "Mo's picture of 10 Oct 2026 (illustrations-2026-10-10/training-doll, REVIEW.md section 7 rank 1, ChatGPT brief B1): the father pours clean water from a jug in a stream onto the bite on the boy's forearm over a basin, a bar of soap in his other hand; a calm dog sits far away. Packed by tools/steps_images.py --px 800 --patch. The scenes read the page's own lines (dog-bite.wash, dog-bite.go); the title is the page's title. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "frames": {
+  "1": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "1-full.webp",
+     "v": "f92a797c",
+     "kb": 29.8
+    }
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "dog-bite.wash",
+   "frame": "1",
+   "ms": 11000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 440,
+      "cy": 440,
+      "w": 560
+     },
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": [
+     2200,
+     2000
+    ],
+    "hold": [
+     300,
+     4600
+    ]
+   },
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 372,
+     "y": 448,
+     "rx": 52,
+     "ry": 38,
+     "at": 1600,
+     "until": 4400,
+     "pulse": false
+    },
+    {
+     "type": "arrow",
+     "from": [
+      452,
+      330
+     ],
+     "to": [
+      400,
+      430
+     ],
+     "width": 10,
+     "bend": -14,
+     "at": 3000,
+     "until": 5800
+    },
+    {
+     "type": "ring",
+     "x": 530,
+     "y": 458,
+     "rx": 62,
+     "ry": 42,
+     "at": 4600,
+     "until": 6800
+    },
+    {
+     "type": "icon",
+     "name": "water",
+     "x": 742,
+     "y": 92,
+     "r": 46,
+     "at": 7400
+    },
+    {
+     "type": "icon",
+     "name": "clock",
+     "x": 858,
+     "y": 92,
+     "r": 46,
+     "at": 8000
+    }
+   ]
+  },
+  {
+   "id": "dog-bite.go",
+   "frame": "1",
+   "ms": 9000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ]
+    ],
+    "ms": []
+   },
+   "overlays": [
+    {
+     "type": "icon",
+     "name": "car",
+     "x": 80,
+     "y": 84,
+     "r": 46,
+     "at": 800
+    },
+    {
+     "type": "arrow",
+     "from": [
+      136,
+      84
+     ],
+     "to": [
+      186,
+      84
+     ],
+     "width": 10,
+     "at": 1500
+    },
+    {
+     "type": "icon",
+     "name": "clinic",
+     "x": 244,
+     "y": 84,
+     "r": 46,
+     "at": 2100
+    },
+    {
+     "type": "icon",
+     "name": "syringe",
+     "x": 372,
+     "y": 84,
+     "r": 46,
+     "at": 3200
+    },
+    {
+     "type": "icon",
+     "name": "calendar",
+     "x": 494,
+     "y": 84,
+     "r": 46,
+     "at": 4000
+    }
+   ]
+  }
+ ],
+ "approved": "",
+ "poster": 0,
+ "_check": [
+  "The bite is washed under a stream poured from a jug (running water) over a basin; the soap is in the father's hand, with no foam on the arm yet (the line: soap and lots of running water for 15 minutes). The dog sits loose (the brief asked for a tied dog; the page says to keep a pet dog tied and watch it 10 days)."
+ ]
+}
