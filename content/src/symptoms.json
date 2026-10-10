@@ -464,6 +464,7 @@
     {
       "id": "breathing",
       "icon": "breathing-fast",
+      "pic": "img/symptoms/breathing.webp",
       "label": {
         "fa": "نفس تنگی",
         "ps": "ساه لنډي",
@@ -3718,6 +3719,7 @@
     {
       "id": "safety",
       "icon": "toys-play",
+      "pic": "img/symptoms/safety.webp",
       "label": {
         "fa": "حوادث اطفال",
         "ps": "د ماشومانو پېښې",

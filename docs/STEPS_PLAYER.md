@@ -343,7 +343,7 @@ picture-step set.
   `navigator.connection` and with data saver the page alone downloads nothing; a set with no SVG version appears
   once downloaded.
 
-Rough sizes: a symptom tile is about 23 KB (480 px; the 34 tiles with pictures on 10 Oct 2026: 0.83 MB); a CPR age is 0.3 to 0.6 MB of picture steps.
+Rough sizes: a symptom tile is about 23 KB (480 px; all 36 tiles have pictures since 10 Oct 2026: 0.88 MB); a CPR age is 0.3 to 0.6 MB of picture steps.
 
 ## Demo
 
