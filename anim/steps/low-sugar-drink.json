@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/low-sugar-drink), packed by tools/steps_images.py --px 800 --patch. Frame 3 is recovery-position frame 4, as the brief says. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 0,
  "frames": {

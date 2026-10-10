@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/eye-wash), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 1,
  "frames": {

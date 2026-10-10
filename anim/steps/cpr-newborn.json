@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": true,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Frame 6 is newborn-warm frame 2 (skin to skin), as the brief says. Since 10 Oct 2026 frame 6 is Mo's redone skin-to-skin picture (illustrations-2026-10-10/fixes, REVIEW.md M4: the baby's head turned to the side, nose and mouth free); newborn-warm frame 2 and cold-warming frame 4 use the same file (stored once, here). s7 now starts on frame 4 (the baby on its back, the chest ringed: 'until the baby breathes or cries') and cross-fades to frame 6, so it no longer shows the frame 5 puff picture (REVIEW.md H1). Frame 5 (puffs, s5 and s6) and frame 2 (rubbing the chest, s1 and s4) are still the 9 Oct pictures until Mo's redos (A1, C5). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 4,
  "frames": {

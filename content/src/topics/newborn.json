@@ -28,6 +28,11 @@
       "anim": "nappies"
     },
     {
+      "id": "newborn.anim-newborn-warm",
+      "type": "anim",
+      "anim": "newborn-warm"
+    },
+    {
       "id": "newborn.warm",
       "type": "step",
       "icon": "newborn-warm",

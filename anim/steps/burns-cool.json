@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/burns-cool), packed by tools/steps_images.py --px 800 --patch. Frame 'stop' (scene burns.stop, clothes on fire: smother with a thick blanket, the head out) is Mo's 10 Oct 2026 picture (illustrations-2026-10-10/fixes, REVIEW.md B2). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 1,
  "frames": {

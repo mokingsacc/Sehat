@@ -57,8 +57,13 @@ export const CINE = [];
 // Picture-step versions (js/steps.js, docs/STEPS_PLAYER.md): anim/steps/<name>.json with layered pictures in
 // img/steps/<name>/, played before the cine and SVG versions. A name goes in this list only when Mo has approved
 // its pictures; useSteps(name) adds one at run time (previews). opts.steps === false skips them.
-// cpr-baby: approved by Mo on 7 Oct 2026 (demo version); the other ages keep their SVG versions.
-export const STEPS = ['cpr-baby'];
+// cpr-baby: approved by Mo on 7 Oct 2026 (demo version). The Emergency and CPR sets of Mo's 9 Oct 2026 delivery (all of
+// them in the APK, Mo 9 Oct): approved PENDING Mo's approval of the demo (each JSON's "approved" note). bleeding-tourniquet
+// stays held (Mo's tourniquet call pending); the 8 other sets of that delivery are not Emergency (on demand once approved).
+export const STEPS = ['cpr-baby', 'cpr-newborn', 'cpr-child', 'cpr-adult', 'choking-baby', 'choking-adult', 'bleeding-press',
+  'recovery-position', 'drowning-rescue', 'burns-cool', 'seizure', 'allergy-position', 'fever-fit', 'electric-stick', 'snake-bite',
+  'newborn-warm', 'spine-hold', 'low-sugar-drink', 'cold-warming', 'heat-cooling', 'inhaler-spacer', 'splint-sling', 'eye-wash',
+  'nosebleed', 'poisoning', 'fumes-poisoning'];
 export function useSteps(...names) { names.forEach((n) => { if (STEPS.indexOf(n) < 0) STEPS.push(n); }); }
 
 const IC = {

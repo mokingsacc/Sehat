@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "falls-fractures.anim-spine-hold",
+      "type": "anim",
+      "anim": "spine-hold"
+    },
+    {
       "id": "falls-fractures.still",
       "type": "step",
       "icon": "warning",
@@ -67,6 +72,11 @@
         "ps": "روغتون ته د وړلو لپاره، د څو کسانو په مرسته یې په یوه دروازه یا هواره تخته وښویوئ، او سر، غاړه او بدن په یوه کرښه کې وساتئ.",
         "en": "To go to hospital, slide them onto a door or flat board with several helpers, keeping the head, neck and body in one line."
       }
+    },
+    {
+      "id": "falls-fractures.anim-splint-sling",
+      "type": "anim",
+      "anim": "splint-sling"
     },
     {
       "id": "falls-fractures.bone",

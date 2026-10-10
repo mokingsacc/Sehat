@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "choking-baby.anim-choking-baby",
+      "type": "anim",
+      "anim": "choking-baby"
+    },
+    {
       "id": "choking-baby.back",
       "type": "step",
       "icon": "choking",

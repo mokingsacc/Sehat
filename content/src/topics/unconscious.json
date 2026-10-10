@@ -69,6 +69,11 @@
       }
     },
     {
+      "id": "unconscious.anim-recovery-position",
+      "type": "anim",
+      "anim": "recovery-position"
+    },
+    {
       "id": "unconscious.roll",
       "type": "step",
       "icon": "people",

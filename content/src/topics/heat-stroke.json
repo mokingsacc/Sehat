@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "heat-stroke.anim-heat-cooling",
+      "type": "anim",
+      "anim": "heat-cooling"
+    },
+    {
       "id": "heat-stroke.shade",
       "type": "step",
       "icon": "house",

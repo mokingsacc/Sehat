@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/recovery-position), packed by tools/steps_images.py --px 800 --patch. Original CPR step 7 is the same picture as frame 4. Frame 5 is Mo's 10 Oct 2026 redo (illustrations-2026-10-10/fixes, REVIEW.md M7): the baby along the forearm on its side and front, face free. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
   "Frames 1 to 3 put the far hand at the cheek before the roll; the app's order (unconscious.roll) is near arm out, far knee up, roll (brief flag F2).",

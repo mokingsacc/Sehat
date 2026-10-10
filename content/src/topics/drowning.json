@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "drowning.anim-drowning-rescue",
+      "type": "anim",
+      "anim": "drowning-rescue"
+    },
+    {
       "id": "drowning.rescue",
       "type": "step",
       "icon": "warning",

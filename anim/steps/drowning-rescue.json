@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
   "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8."

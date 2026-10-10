@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "fever-fits.anim-fever-fit",
+      "type": "anim",
+      "anim": "fever-fit"
+    },
+    {
       "id": "fever-fits.safe",
       "type": "step",
       "icon": "warning",

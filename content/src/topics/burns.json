@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "burns.anim-burns-cool",
+      "type": "anim",
+      "anim": "burns-cool"
+    },
+    {
       "id": "burns.stop",
       "type": "step",
       "icon": "burn",

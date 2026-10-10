@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "bleeding.anim-bleeding-press",
+      "type": "anim",
+      "anim": "bleeding-press"
+    },
+    {
       "id": "bleeding.press",
       "type": "step",
       "icon": "wound",
