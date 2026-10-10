@@ -15,7 +15,7 @@
 //   overlays  ring, arrow (straight or curved), guide (dotted line), dot, depth (bracket with a marker that
 //             follows the push), shade, tick, cross, icon (the app's icons, optionally crossed out), waves
 //             (sound or breathing lines), counter (1-30, breaths), timer
-// Reduced motion shows the scene's key frame with all its overlays. In fa / ps numbers use Persian digits;
+// Reduced motion shows the scene's key frame with all its overlays (except those marked "still": false). In fa / ps numbers use Persian digits;
 // corner badges swap sides in RTL, and an overlay with "mirror": true is mirrored; pictures are never flipped.
 //
 // Old Android WebView (Chrome 69): no ?? or ?. (tools/validate.py rejects them), no CSS inset or aspect-ratio,
@@ -302,20 +302,22 @@ function sceneHtml(data, sc, o) {
       if (s.wrapTransform) ws += ';transform:' + s.wrapTransform;
       h += '<div class="st-l" data-l="' + esc(f + '.' + L.id) + '" style="' + ws + '"><img src="' + esc(L.src) + '" alt="" draggable="false"' + (s.transform ? ' style="transform:' + s.transform + '"' : '') + '></div>';
       // overlays that belong between layers (e.g. a shadow under the hands): "above": "<layer id>"
-      (sc.overlays || []).forEach((ov, k) => { if (ov.above === L.id && (ov.frame || sc.frame) === f) h += overlayHtml(data, ov, k, o); });
+      (sc.overlays || []).forEach((ov, k) => { if (ov.above === L.id && (ov.frame || sc.frame) === f && !offStill(ov, o)) h += overlayHtml(data, ov, k, o); });
     });
     h += '</div>';
   });
-  (sc.overlays || []).forEach((ov, k) => { if (!ov.above && ov.type !== 'counter' && ov.type !== 'timer') h += overlayHtml(data, ov, k, o); });
+  (sc.overlays || []).forEach((ov, k) => { if (!ov.above && ov.type !== 'counter' && ov.type !== 'timer' && !offStill(ov, o)) h += overlayHtml(data, ov, k, o); });
   h += '</div>';
   if (!o.poster) {
     h += '<div class="st-hud">';
-    (sc.overlays || []).forEach((ov, k) => { if (ov.type === 'counter' || ov.type === 'timer') h += hudHtml(data, sc, P, ov, k, o); });
+    (sc.overlays || []).forEach((ov, k) => { if ((ov.type === 'counter' || ov.type === 'timer') && !offStill(ov, o)) h += hudHtml(data, sc, P, ov, k, o); });
     h += '</div>';
   }
   return h;
 }
 
+// "still": false = an overlay that belongs to an earlier frame of the scene: left out of the key frame (reduced motion, posters)
+function offStill(ov, o) { return !!o.still && ov.still === false; }
 function mx(data, ov, x) { return ov.mirror && ov.rtl ? data.w - x : x; }
 
 function overlayHtml(data, ov0, k, o) {

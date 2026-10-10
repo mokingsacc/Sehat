@@ -56,7 +56,8 @@ for fr, sh in (("a", 0), ("b", 40)):
         { type: 'cross', x: 860, y: 180, at: 300 }, { type: 'guide', from: [180, 520], to: [780, 520], at: 100 }, { type: 'timer', from: 0, to: 3, pos: 'top-start' },
         { type: 'arrow', from: [120, 600], to: [420, 600], bend: 60, at: 200 }, { type: 'dot', x: 600, y: 300, at: 100 },
         { type: 'icon', name: 'hospital', x: 120, y: 120, at: 100 }, { type: 'icon', name: 'car', x: 240, y: 120, crossed: true, at: 100 },
-        { type: 'waves', x: 820, y: 420, angle: -30, at: 100, mirror: true }] },
+        { type: 'waves', x: 820, y: 420, angle: -30, at: 100, mirror: true },
+        { type: 'ring', x: 400, y: 400, r: 40, at: 100, until: 2000, still: false }] },
     { id: 'anim.test-boxes.s2', frame: 'a', cam: false,
       motions: [{ id: 'push', type: 'loop', layer: 'arms', dy: 24, rate: 110, count: 12, slow: { count: 2, rate: 40 }, at: 200 },
         { id: 'breath', type: 'xfade', to: 'b', back: true, count: 2, ms: 400, hold: 400, gap: 300, at: 9500 }],
@@ -199,6 +200,12 @@ for (const lang of ['fa', 'ps', 'en']) {
   ok(r.hidden === 0, `reduced: ${r.hidden} overlays hidden`);
   ok(!r.badge || /[۰-۹]/.test(r.badge), `reduced: counter key value ${r.badge}`);
   if (shots) await page.locator('.anim').screenshot({ path: path.join(shots, `${anim}-reduced.png`) });
+  if (anim === 'test-boxes') {
+    // "still": false: an overlay of an earlier frame is left out of the key frame (and only there)
+    await page.evaluate(() => window.__ctl.go(0)); await page.waitForTimeout(600);
+    const k = await page.evaluate(() => ({ off: document.querySelectorAll('.st-view [data-o="10"]').length, tick: document.querySelectorAll('.st-view [data-o="1"]').length }));
+    ok(k.off === 0 && k.tick === 1, `reduced: "still": false overlay left out (${k.off}), the others kept (${k.tick})`);
+  }
   await ctx.close();
 }
 

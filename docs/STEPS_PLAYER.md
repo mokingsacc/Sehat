@@ -56,6 +56,15 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   shoulders, ask loudly) and s2 (shout for help), `tilt` plays s3 (look at the chest, 10 s timer) and `breath` plays s6
   (2 breaths). Same narration ids `anim.cpr-adult.s1` to `s7`: nothing new to record. Still not live on main (live only
   on `golive-emergency`).
+- **Frame review fixes (10 Oct 2026,** `/mnt/project-files/samangan-red-book/audit/animations-2026-10-10/REVIEW.md`**):**
+  Mo's 10 Oct redos (`illustrations-2026-10-10/redos/`, judged "use") are packed with the same flags: muac frame 1
+  (the left arm bent, fingertips on the shoulder tip and the elbow tip; the 9 Oct right-arm picture is gone and frame 2
+  is now a whole picture) plays first in `kit-muac.arm` (dots on both tips, then a ring on the middle, then frame 2 with
+  the arm hanging loose); breastfeed-attach frames 2 (good latch, tick) and 3 (poor latch, cross; frame 2's picture
+  plus a 1.6 KB mouth patch) follow frame 1 in `breastfeeding.attach`. drowning.warm now says to roll the person onto
+  their side if water or vomit comes out, wipe the mouth, roll them back and carry on (M8: ANZCOR 9.3.2, AHA/AAP 2024,
+  ERC 2025), so the 9 Oct drowning-rescue frame 4 (the whole body on the side) is used: the scene goes from the back
+  (frame 3) to the side (frame 4, there and back) and then to the blanket (frame 5). Still not live (not in `STEPS`).
 - **To go live** (after Mo's approval): add the name to `STEPS`, the `"approved"` note, and an `anim` block on the
   topic. The tools accept a set that reads its page's lines (nothing new to record): `tools/validate.py` takes a
   scene id that is `anim.<name>.s<n>` or a spoken line of the book (a topic block or ui `say` line), and an `id` that
@@ -72,17 +81,15 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   `PENDING ...` with Mo's note, run `tools/validate.py` (0 errors) and `tools/build.py`, and merge.
 - **Notes in the JSON:** `_note` (where the pictures came from and what was left out), `_check` (points for Mo's
   medical check), `held` (bleeding-tourniquet: "held: Mo's tourniquet call pending").
-- **Not used, they look medically wrong:** cpr-child frame 4 (hand too high, on the upper chest), muac frame 1 (the
-  right arm; its picture stays only as the base of frame 2), drowning-rescue frame 4 (the whole body turned, the app
-  says the head), breastfeed-attach frames 2 and 3 (hard-to-read mouth diagrams). Pictures the delivery uses
+- **Not used, they look medically wrong:** cpr-child frame 4 (hand too high, on the upper chest). Pictures the delivery uses
   twice: newborn-warm frame 2 is also cpr-newborn frame 6 and cold-warming frame 4, and recovery-position frame 4 is
   also low-sugar-drink frame 3 (each set keeps its own copy, about 30 kB); `choking-01` is choking-baby frame 1.
 - **APK budget** (MB = 1,000,000 bytes). **Mo 9 Oct: all Emergency sets in the APK.** The APK of release
   v2026.10.09-9f5275 is 8.72 MB. The 23 new Emergency and CPR sets (all but the held bleeding-tourniquet) add
-  2.82 MB of pictures and 0.09 MB of JSON, so the APK is about 11.6 MB once they are live; `img/` inside the APK is
+  2.82 MB of pictures (2.85 MB with drowning-rescue frame 4 since 10 Oct) and 0.09 MB of JSON, so the APK is about 11.6 MB once they are live; `img/` inside the APK is
   then about 3.9 MB. 10 Oct 2026: 31 more symptom tiles (0.75 MB) and the three adult CPR scenes (0.14 MB) make it
   about 4.8 MB and the APK about 12.5 MB with every Emergency set live. `tools/validate.py` warns above 5.2 MB of
-  pictures (`APK_PICTURES_MB`, raised from 4.5 on 10 Oct: an APK of about 12.9 MB); 15 MB is the hard limit. The 8 other sets (0.67 MB: bp-measure, breastfeed-attach, breath-count, glucometer,
+  pictures (`APK_PICTURES_MB`, raised from 4.5 on 10 Oct: an APK of about 12.9 MB); 15 MB is the hard limit. The 8 other sets (0.68 MB: bp-measure, breastfeed-attach, breath-count, glucometer,
   length-height, muac, thermometer, weigh-child) stay on demand, as their topics are not in the Emergency group.
 
 ## How it plugs into the player
@@ -239,7 +246,8 @@ chest's height in the picture, with a `depth` bracket of the same size.
 | `counter` | `follow` (a motion id) or `to` + `every` (ms), `of` (shows "/30"), `start`, `loop`, `icon` (`push`, `breath`), `pos` | counts each push at the bottom (each breath at its peak); appears just before the first one |
 | `timer` | `from`, `to` (seconds; counts down when `to` < `from`), `pos`, `wait` | e.g. "look for up to 10 seconds"; `wait: true` holds the scene until it ends |
 
-All overlays take `at` (appear) and `until` (go). Rings, arrows, guides, ticks and depth brackets are drawn in
+All overlays take `at` (appear) and `until` (go). `"still": false` leaves an overlay out of the key frame (reduced
+motion and posters): use it for the rings and arrows of an earlier frame in a scene that cross-fades to another picture. Rings, arrows, guides, ticks and depth brackets are drawn in
 picture coordinates and zoom with the camera. Counters and timers sit in a corner of the stage (`pos`: `top-end`
 by default, or `top-start`, `bottom-start`, `bottom-end`) and do not zoom.
 
@@ -250,7 +258,8 @@ Add `"mirror": true` only to an overlay that is not tied to the picture (it is t
 ### Reduced motion and posters
 
 With reduced motion (the phone setting, or the player's `still` option), each scene shows its **key frame**: the
-last frame it cross-fades to, the camera's last stop and every overlay. Counters show their final value (for
+last frame it cross-fades to (a there-and-back cross-fade does not count), the camera's last stop and every overlay
+except those marked `"still": false`. Counters show their final value (for
 example ۳۰). `"key": {"frame": "thumbs", "cam": 1, "pose": "beat"}` overrides this: `cam` is a stop index or a
 rectangle, and `pose: "beat"` shows a pushing layer fully pushed. Posters (topic blocks, picker cards) are the key
 frame of scene `poster`, without counters and labels.

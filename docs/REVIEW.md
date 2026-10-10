@@ -5509,3 +5509,21 @@ For Mo's check:
 5. Yellow tile: a newborn's yellow skin and one yellow eye (the eye is the sign).
 6. Adult CPR `check`: the hand nearer the head rests on the top of the shoulder close to the base of the neck; `tilt` and `breath`: two fingertips at the tip of the bony chin; in `breath` the rescuer's face hides the nose, so the pinch shows only from the fingers. s2 now shows the rescuer still at the shoulders while shouting, not already pushing.
 7. On the tiles, the round speaker sits in the top corner (top-left in Dari and Pashto) and covers part of some pictures (e.g. the head in teeth, back and pressure in fa).
+
+## Frame review fixes that need no new picture (10 Oct 2026, worker revfix)
+
+Source: the frame-by-frame review `/mnt/project-files/samangan-red-book/audit/animations-2026-10-10/REVIEW.md` and Mo's redo pictures in `/mnt/project-files/samangan-red-book/illustrations-2026-10-10/redos/`. The HIGH and MEDIUM picture problems wait for Mo's new pictures and are not touched here. No set is live on main (only cpr-baby, as before).
+
+What changed:
+- **muac**: Mo's 10 Oct frame 1 (left arm bent at the elbow, fingertips on the shoulder tip and the elbow tip) replaces the 9 Oct right-arm picture. `kit-muac.arm` now shows it first (dots on both tips, a dotted line, a ring on the middle), then cross-fades to frame 2 (the arm hanging loose, the middle marked). Frame 2 is now a whole picture of its own (the old right-arm picture is gone).
+- **breastfeed-attach**: Mo's 10 Oct good-latch and poor-latch pictures are frames 2 and 3 (frame 3 is frame 2 plus a 1.6 KB patch of the mouth). `breastfeeding.attach`: the body position (frame 1), then the good latch with a tick, then the poor latch with a cross. Reduced motion and the poster show the good latch with its tick.
+- **drowning.warm** (review M8 and section 5 item 1): "Water may come out of the mouth: turn the head to the side and carry on." is now "If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out." (then, as before, wet clothes off and dry blankets). "Do not hold them upside down or press the belly" stays. Sources added: ANZCOR 9.3.2 and the AHA/AAP 2024 drowning update (ERC 2025 was already there). No other place in the app repeated the old advice (symptoms.json, anims.json, the CPR, recovery and other pages checked; search phrases not touched). The drowning-rescue scene for this line now shows Mo's 9 Oct frame 4 (the whole body rolled onto the side): on the back, rolled onto the side with the mouth ringed, back again, then the blanket.
+- **newborn.small** (review L12): "on the mother's chest" is now "on the mother's or father's chest", as the picture shows the father.
+- Player: an overlay may say `"still": false` to be left out of the still picture (reduced motion, posters), so a ring or tick of an earlier frame does not sit on the last picture. Opt-in: no other set changes. Tested in `tools/test_steps_browser.mjs`.
+- Changed narration: `drowning.warm`, `newborn.small` (fa and ps need new recordings; the old clips play until then).
+
+For Mo's check:
+1. drowning.warm: the step is now 41 English words (aim 32). The picture shows the boy on his side but not the mouth being wiped (optional prompt C8 in the ChatGPT fixes file).
+2. Dari: «اگر آب یا استفراغ از دهانش بیرون شود، او را به پهلو بچرخانید، دهانش را پاک کنید، بعد دوباره به پشت بچرخانید و ادامه دهید. کوشش نکنید که آب را بیرون کنید.» Pashto: «که اوبه یا کانګې یې له خولې راووځي، پر اړخ یې واړوئ، خوله یې پاکه کړئ، بیا یې بېرته په شا واړوئ او دوام ورکړئ. د اوبو د ایستلو هڅه مه کوئ.»
+3. newborn.small: Dari «روی سینهٔ مادر یا پدر», Pashto «د مور یا پلار پر سینه».
+4. Latch scene: the line is the page's own (body close, mouth wide over the dark skin); the review suggests narrating the four signs, which would be a new line to record.

@@ -5,9 +5,10 @@
  "h": 720,
  "adult": false,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/breastfeed-attach), packed by tools/steps_images.py --px 800 --patch. Frames 2 and 3 (mouth diagrams) are not used: they are hard to read. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/breastfeed-attach): frame 1 from it; frames 2 (good latch) and 3 (poor latch) are Mo's redos of 10 Oct 2026 (illustrations-2026-10-10/redos/breastfeed-attach-2-full.webp, -3-full.webp; the 9 Oct mouth diagrams are not used), packed by tools/steps_images.py --px 800 --patch (frame 3 is frame 2's picture with a small patch: only the mouth differs). Scene breastfeeding.attach: frame 1 (whole body close, facing the breast), then the good latch with a tick, then the poor latch with a cross. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
-  "Delivery frames 2 and 3 (mouth on the breast diagrams) not used: abstract shapes, hard to read, could teach the wrong latch."
+  "Frames 2 and 3 (10 Oct redos, frame review: use): good latch first (mouth wide open over the dark skin, lower lip turned out, chin on the breast) with a tick, then the poor latch (small mouth on the nipple tip, chin away) with a cross.",
+  "Reduced motion and the poster show the good latch with its tick (the overlays of frames 1 and 3 are left out of the still picture). The narration is the page's line breastfeeding.attach; the review suggests narrating the four signs, which would be a new line to record."
  ],
  "poster": 0,
  "frames": {
@@ -20,13 +21,46 @@
      "kb": 29.9
     }
    ]
+  },
+  "2": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "3cd7c5a7",
+     "kb": 7.1
+    }
+   ]
+  },
+  "3": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "3cd7c5a7",
+     "kb": 7.1
+    },
+    {
+     "id": "full-fix",
+     "src": "3-full-fix.webp",
+     "v": "b032fb76",
+     "kb": 1.6,
+     "box": [
+      482,
+      295,
+      205,
+      304
+     ],
+     "patch": "full"
+    }
+   ]
   }
  },
  "scenes": [
   {
    "id": "breastfeeding.attach",
    "frame": "1",
-   "ms": 9000,
+   "ms": 14000,
    "cam": {
     "path": [
      [
@@ -38,19 +72,49 @@
       "cx": 400,
       "cy": 300,
       "w": 640
-     }
+     },
+     [
+      0,
+      0,
+      960
+     ]
     ],
     "ms": [
-     2400
+     2400,
+     900
+    ],
+    "hold": [
+     0,
+     2600
     ]
    },
+   "key": {
+    "frame": "2",
+    "cam": 2
+   },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 5200,
+     "ms": 900
+    },
+    {
+     "type": "xfade",
+     "to": "3",
+     "at": 10400,
+     "ms": 700
+    }
+   ],
    "overlays": [
     {
      "type": "ring",
      "x": 424,
      "y": 248,
      "at": 800,
-     "r": 50
+     "r": 50,
+     "until": 5000,
+     "still": false
     },
     {
      "type": "guide",
@@ -62,7 +126,43 @@
       530,
       400
      ],
-     "at": 2400
+     "at": 2400,
+     "until": 5000,
+     "still": false
+    },
+    {
+     "type": "ring",
+     "x": 530,
+     "y": 378,
+     "rx": 70,
+     "ry": 80,
+     "at": 6400,
+     "until": 10300
+    },
+    {
+     "type": "tick",
+     "x": 540,
+     "y": 110,
+     "r": 44,
+     "at": 7200,
+     "until": 10300
+    },
+    {
+     "type": "ring",
+     "x": 580,
+     "y": 378,
+     "rx": 60,
+     "ry": 45,
+     "at": 11200,
+     "still": false
+    },
+    {
+     "type": "cross",
+     "x": 540,
+     "y": 110,
+     "r": 44,
+     "at": 11600,
+     "still": false
     }
    ]
   }

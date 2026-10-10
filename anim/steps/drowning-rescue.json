@@ -5,9 +5,9 @@
  "h": 720,
  "adult": false,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Delivery frame 4 is not used: it turns the whole body, and the app (and the brief's check) says turn only the head. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
-  "Delivery frame 4 not used: it turns the whole body; the app and the brief say turn only the head (water out of the mouth)."
+  "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8."
  ],
  "poster": 0,
  "frames": {
@@ -56,6 +56,16 @@
      "src": "3-full.webp",
      "v": "7c44ad7e",
      "kb": 29.9
+    }
+   ]
+  },
+  "4": {
+   "layers": [
+    {
+     "id": "full",
+     "src": "4-full.webp",
+     "v": "1b69babe",
+     "kb": 29.6
     }
    ]
   },
@@ -197,8 +207,8 @@
   },
   {
    "id": "drowning.warm",
-   "frame": "5",
-   "ms": 9000,
+   "frame": "3",
+   "ms": 18000,
    "cam": {
     "path": [
      [
@@ -209,12 +219,55 @@
     ],
     "ms": []
    },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "4",
+     "at": 1600,
+     "ms": 1000,
+     "back": true,
+     "hold": 4400,
+     "gap": 400,
+     "count": 1
+    },
+    {
+     "type": "xfade",
+     "to": "5",
+     "at": 9800,
+     "ms": 900
+    }
+   ],
    "overlays": [
+    {
+     "type": "arrow",
+     "from": [
+      600,
+      440
+     ],
+     "to": [
+      640,
+      600
+     ],
+     "bend": 60,
+     "width": 12,
+     "at": 600,
+     "until": 2800,
+     "still": false
+    },
+    {
+     "type": "ring",
+     "x": 800,
+     "y": 525,
+     "r": 55,
+     "at": 3000,
+     "until": 6900,
+     "still": false
+    },
     {
      "type": "ring",
      "x": 160,
      "y": 528,
-     "at": 1200,
+     "at": 11800,
      "r": 60
     },
     {
@@ -226,7 +279,7 @@
      "count": 3,
      "spread": 70,
      "ms": 1200,
-     "at": 2600
+     "at": 13200
     },
     {
      "type": "icon",
@@ -234,7 +287,7 @@
      "x": 840,
      "y": 110,
      "r": 52,
-     "at": 5000
+     "at": 15600
     }
    ]
   }

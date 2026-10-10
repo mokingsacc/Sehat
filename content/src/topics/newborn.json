@@ -127,9 +127,9 @@
         "en": "Small babies need extra care"
       },
       "text": {
-        "fa": "طفل کوچک را شب و روز پوست به پوست روی سینهٔ مادر نگه دارید و هر ۲ تا ۳ ساعت شیر بدهید. پاهای سرد یعنی طفل گرمی بیشتر می‌خواهد.",
-        "ps": "کوچنی ماشوم شپه او ورځ د مور پر سینه پوستکی له پوستکي سره وساتئ او هرو ۲ تر ۳ ساعتونو کې تی ورکړئ. سړې پښې دا معنا لري چې ماشوم نوره ګرمي غواړي.",
-        "en": "Keep a small baby skin to skin on the mother's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth."
+        "fa": "طفل کوچک را شب و روز پوست به پوست روی سینهٔ مادر یا پدر نگه دارید و هر ۲ تا ۳ ساعت شیر بدهید. پاهای سرد یعنی طفل گرمی بیشتر می‌خواهد.",
+        "ps": "کوچنی ماشوم شپه او ورځ د مور یا پلار پر سینه پوستکی له پوستکي سره وساتئ او هرو ۲ تر ۳ ساعتونو کې تی ورکړئ. سړې پښې دا معنا لري چې ماشوم نوره ګرمي غواړي.",
+        "en": "Keep a small baby skin to skin on the mother's or father's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth."
       }
     },
     {
@@ -394,6 +394,7 @@
     "Content pass 3: postnatal checks 'first day, day 3, about one week (day 7 to 14), 6 weeks' (WHO 2013; WHO 2022 says day 4 to 7 for the third contact). The CHW home visit is from IPEHS 2019 and CBHC 2015.",
     "Content pass 3: small-baby step now says feed every 2 to 3 hours and 'cold feet mean the baby needs more warmth' (PCPNC J10); the father-or-grandmother line was dropped for length.",
     "Medical audit 2026-10-08 CH16: chlorhexidine on the cord only for babies born at home (WHO 2013 and 2022: home births where newborn deaths are high, which includes Afghanistan); a baby born in a clinic gets clean, dry cord care with nothing on it. Supply in Samangan still unconfirmed.",
-    "Medical audit 2026-10-08 CH17: the WHO 2022 source line now gives the contacts as first 24 hours, 48 to 72 hours, day 7 to 14 and week 6 (it said day 2 to 3 and day 4 to 7). The page text was already right."
+    "Medical audit 2026-10-08 CH17: the WHO 2022 source line now gives the contacts as first 24 hours, 48 to 72 hours, day 7 to 14 and week 6 (it said day 2 to 3 and day 4 to 7). The page text was already right.",
+    "Frame review 10 Oct 2026 (L12): newborn.small now says skin to skin on the mother's or father's chest, as the picture-step scene shows the father holding the small baby (WHO kangaroo mother care: the father or another family member can also give skin-to-skin care)."
   ]
 }

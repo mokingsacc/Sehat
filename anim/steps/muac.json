@@ -5,32 +5,30 @@
  "h": 720,
  "adult": false,
  "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/muac), packed by tools/steps_images.py --px 800 --patch. Delivery frame 1 is not shown: it measures the right arm (the app says the left arm); its picture stays only as the base of frame 2. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/muac), frame 1 replaced by Mo's redo of 10 Oct 2026 (illustrations-2026-10-10/redos/muac-1-full.webp: the left arm, elbow bent, fingertips on the shoulder tip and the elbow tip), packed by tools/steps_images.py --px 800 --patch. Scene kit-muac.arm: frame 1 (bend the arm, dots on the shoulder tip and the elbow tip, then the middle), then frame 2 (the arm hangs loose, the middle marked). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
-  "Delivery frame 1 not used: the mother measures the child's right arm; the app says the left arm (frame 2 marks the left arm)."
+  "Frame 1 (10 Oct redo, frame review: use): the left arm bent at a right angle, the mother's fingertips on the shoulder tip and the elbow tip; the dots mark them and a ring marks the middle. Frame 2: the arm hangs loose with the middle marked.",
+  "Frame 3 (tape close-up): which arm it is cannot be told (review L15); frames 1 and 2 show the left arm."
  ],
  "poster": 1,
  "frames": {
-  "2": {
+  "1": {
    "layers": [
     {
      "id": "full",
      "src": "1-full.webp",
-     "v": "49c98ad2",
-     "kb": 29.8
-    },
+     "v": "d809f625",
+     "kb": 27.7
+    }
+   ]
+  },
+  "2": {
+   "layers": [
     {
-     "id": "full-fix",
-     "src": "2-full-fix.webp",
-     "v": "e509d9c0",
-     "kb": 7.8,
-     "box": [
-      332,
-      262,
-      365,
-      256
-     ],
-     "patch": "full"
+     "id": "full",
+     "src": "2-full.webp",
+     "v": "2ce1c12a",
+     "kb": 29.4
     }
    ]
   },
@@ -82,8 +80,8 @@
  "scenes": [
   {
    "id": "kit-muac.arm",
-   "frame": "2",
-   "ms": 8000,
+   "frame": "1",
+   "ms": 12000,
    "cam": {
     "path": [
      [
@@ -92,8 +90,8 @@
       960
      ],
      {
-      "cx": 600,
-      "cy": 330,
+      "cx": 565,
+      "cy": 365,
       "w": 480
      }
     ],
@@ -101,13 +99,62 @@
      2400
     ]
    },
+   "motions": [
+    {
+     "type": "xfade",
+     "to": "2",
+     "at": 8800,
+     "ms": 900
+    }
+   ],
    "overlays": [
+    {
+     "type": "dot",
+     "x": 557,
+     "y": 315,
+     "r": 14,
+     "at": 2600,
+     "until": 8700,
+     "still": false
+    },
+    {
+     "type": "dot",
+     "x": 557,
+     "y": 417,
+     "r": 14,
+     "at": 3800,
+     "until": 8700,
+     "still": false
+    },
+    {
+     "type": "guide",
+     "from": [
+      557,
+      315
+     ],
+     "to": [
+      557,
+      417
+     ],
+     "at": 5000,
+     "until": 8700,
+     "still": false
+    },
+    {
+     "type": "ring",
+     "x": 555,
+     "y": 366,
+     "r": 30,
+     "at": 6200,
+     "until": 8700,
+     "still": false
+    },
     {
      "type": "dot",
      "x": 592,
      "y": 344,
      "r": 16,
-     "at": 1200
+     "at": 9800
     }
    ]
   },

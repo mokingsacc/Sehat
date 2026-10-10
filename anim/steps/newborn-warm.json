@@ -7,7 +7,7 @@
  "approved": "",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/newborn-warm), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
-  "Frame 3: the father holds the small baby skin to skin (the brief's 'father helps'); the app's newborn.small says the mother's chest."
+  "Frame 3: the father holds the small baby skin to skin (the brief's 'father helps'); since 10 Oct 2026 newborn.small says the mother's or father's chest (frame review L12)."
  ],
  "poster": 1,
  "frames": {
