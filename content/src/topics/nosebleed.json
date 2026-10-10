@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "nosebleed.anim-nosebleed",
+      "type": "anim",
+      "anim": "nosebleed"
+    },
+    {
       "id": "nosebleed.forward",
       "type": "step",
       "icon": "people",

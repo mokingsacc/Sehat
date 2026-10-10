@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": true,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-child), packed by tools/steps_images.py --px 800 --patch. Since 10 Oct 2026 (illustrations-2026-10-10/fixes, frame review REVIEW.md H2 and M3): frame 'push' is Mo's two full pictures (one heel of the hand on the lower breastbone, arm straight, the other hand on her own knee; 'down' is a patch over 'up'), pressed with a swap; frame 2 is the redone head tilt and chin lift (fingertips on the bony chin). Frame 3 (breaths) is still the 9 Oct picture: the 10 Oct breath pair (child-breath-review) draws full faces with eyes and its nose pinch is not checked yet. Delivery frame 4 is not used (the hand sits too high, on the upper chest); frames 5 and 6 (bigger child, two hands) are left out to keep the APK small. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "_check": [
   "Frame 'push' (10 Oct): the fingertips are on the lower breastbone at the end of the button line, but the heel of the hand sits at the very bottom of the breastbone, close to the top of the belly. The ring marks the hand. If it reads as low, ask for the hand two fingers' width nearer the head. The fingers rest on the chest rather than lifted.",

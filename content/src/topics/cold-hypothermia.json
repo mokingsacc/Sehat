@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "cold-hypothermia.anim-cold-warming",
+      "type": "anim",
+      "anim": "cold-warming"
+    },
+    {
       "id": "cold-hypothermia.dry",
       "type": "step",
       "icon": "newborn-warm",

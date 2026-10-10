@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "fumes-poisoning.anim-fumes-poisoning",
+      "type": "anim",
+      "anim": "fumes-poisoning"
+    },
+    {
       "id": "fumes-poisoning.out",
       "type": "step",
       "icon": "window",

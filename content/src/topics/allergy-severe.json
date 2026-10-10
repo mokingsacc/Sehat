@@ -53,6 +53,11 @@
       }
     },
     {
+      "id": "allergy-severe.anim-allergy-position",
+      "type": "anim",
+      "anim": "allergy-position"
+    },
+    {
       "id": "allergy-severe.position",
       "type": "step",
       "icon": "breathe",

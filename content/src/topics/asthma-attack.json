@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "asthma-attack.anim-inhaler-spacer",
+      "type": "anim",
+      "anim": "inhaler-spacer"
+    },
+    {
       "id": "asthma-attack.sit",
       "type": "step",
       "icon": "breathe",

@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "electric-shock.anim-electric-stick",
+      "type": "anim",
+      "anim": "electric-stick"
+    },
+    {
       "id": "electric-shock.off",
       "type": "step",
       "icon": "warning",

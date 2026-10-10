@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "low-sugar.anim-low-sugar-drink",
+      "type": "anim",
+      "anim": "low-sugar-drink"
+    },
+    {
       "id": "low-sugar.sugar",
       "type": "step",
       "icon": "cup-spoon",

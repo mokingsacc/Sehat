@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "snake-scorpion.anim-snake-bite",
+      "type": "anim",
+      "anim": "snake-bite"
+    },
+    {
       "id": "snake-scorpion.away",
       "type": "step",
       "icon": "warning",

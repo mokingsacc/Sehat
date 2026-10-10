@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "poisoning.anim-poisoning",
+      "type": "anim",
+      "anim": "poisoning"
+    },
+    {
       "id": "poisoning.no-vomit",
       "type": "step",
       "icon": "vomit",

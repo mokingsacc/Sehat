@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": true,
- "approved": "",
+ "approved": "PENDING Mo's approval",
  "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Since 10 Oct 2026 frame 6 is Mo's redone skin-to-skin picture (illustrations-2026-10-10/fixes, REVIEW.md M4: the baby's head turned to the side, nose and mouth free); newborn-warm frame 2 and cold-warming frame 4 use the same file (stored once, here). s7 starts on frame 4 (the baby on its back, the chest ringed) and cross-fades to frame 6, so it never shows the puff picture. Since 10 Oct 2026 (illustrations-2026-10-10/training-doll, drawn with a first-aid training doll): frame 5 is the new puff pair (A1, REVIEW.md H1: up = head lifted, down = lips sealed over the baby's mouth and nose, chest raised; s5 and s6 swap them for the puffs, the chest lighting up on 'down'), and frame 2 is the new rubbing pair (C5, REVIEW.md M5: a dry towel rubbing the baby's back, up/down = the two ends of the stroke; s1 after the drying and s4). s2 (the call for help) now shows frame 1. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
  "poster": 4,
  "frames": {

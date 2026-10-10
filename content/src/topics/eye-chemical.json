@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "eye-chemical.anim-eye-wash",
+      "type": "anim",
+      "anim": "eye-wash"
+    },
+    {
       "id": "eye-chemical.wash",
       "type": "step",
       "icon": "water",

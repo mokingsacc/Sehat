@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "seizures.anim-seizure",
+      "type": "anim",
+      "anim": "seizure"
+    },
+    {
       "id": "seizures.safe",
       "type": "step",
       "icon": "warning",
