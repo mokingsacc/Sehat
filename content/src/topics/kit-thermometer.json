@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "kit-thermometer.anim-thermometer",
+      "type": "anim",
+      "anim": "thermometer"
+    },
+    {
       "id": "kit-thermometer.armpit",
       "type": "step",
       "icon": "thermometer",

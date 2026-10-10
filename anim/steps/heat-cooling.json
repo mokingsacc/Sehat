@@ -4,8 +4,8 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "PENDING Mo's approval",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/heat-cooling), packed by tools/steps_images.py --px 800 --patch. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/heat-cooling), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
  "poster": 1,
  "frames": {
   "1": {

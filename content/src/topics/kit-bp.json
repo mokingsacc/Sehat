@@ -53,6 +53,11 @@
       }
     },
     {
+      "id": "kit-bp.anim-bp-measure",
+      "type": "anim",
+      "anim": "bp-measure"
+    },
+    {
       "id": "kit-bp.rest",
       "type": "step",
       "icon": "rest",

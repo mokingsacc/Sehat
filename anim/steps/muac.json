@@ -4,8 +4,8 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/muac), frame 1 replaced by Mo's redo of 10 Oct 2026 (illustrations-2026-10-10/redos/muac-1-full.webp: the left arm, elbow bent, fingertips on the shoulder tip and the elbow tip), packed by tools/steps_images.py --px 800 --patch. Scene kit-muac.arm: frame 1 (bend the arm, dots on the shoulder tip and the elbow tip, then the middle), then frame 2 (the arm hangs loose, the middle marked). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/muac), frame 1 replaced by Mo's redo of 10 Oct 2026 (illustrations-2026-10-10/redos/muac-1-full.webp: the left arm, elbow bent, fingertips on the shoulder tip and the elbow tip), packed by tools/steps_images.py --px 800 --patch. Scene kit-muac.arm: frame 1 (bend the arm, dots on the shoulder tip and the elbow tip, then the middle), then frame 2 (the arm hangs loose, the middle marked). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
  "_check": [
   "Frame 1 (10 Oct redo, frame review: use): the left arm bent at a right angle, the mother's fingertips on the shoulder tip and the elbow tip; the dots mark them and a ring marks the middle. Frame 2: the arm hangs loose with the middle marked.",
   "Frame 3 (tape close-up): which arm it is cannot be told (review L15); frames 1 and 2 show the left arm."

@@ -68,6 +68,11 @@
       }
     },
     {
+      "id": "breastfeeding.anim-breastfeed-attach",
+      "type": "anim",
+      "anim": "breastfeed-attach"
+    },
+    {
       "id": "breastfeeding.attach",
       "type": "step",
       "icon": "breastfeed",

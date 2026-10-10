@@ -4,8 +4,8 @@
  "w": 960,
  "h": 720,
  "adult": true,
- "approved": "2026-10-07, Mo (demo version)",
- "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). s4 (5 breaths) uses Mo's original CPR step 2 picture of 9 Oct 2026 (frame 'breath': mouth over the baby's mouth and nose, chin lifted). Coordinates are in the 960x720 picture.",
+ "approved": "2026-10-07, Mo (demo version); new s4 breath pictures: 2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
+ "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). s4 (5 breaths) uses frame 'breath': since 10 Oct 2026 Mo's training-doll pair (illustrations-2026-10-10/training-doll, ChatGPT brief C1, REVIEW.md M1): 'up' head lifted, 'down' lips sealed over the baby's mouth and nose, chin lifted, head level, chest raised; s4 swaps them 5 times with the chest lighting up. Coordinates are in the 960x720 picture.",
  "poster": 4,
  "frames": {
   "baby": {
@@ -77,34 +77,23 @@
   "breath": {
    "layers": [
     {
-     "id": "bg",
-     "src": "breath-bg.webp",
-     "v": "1d4838aa",
-     "kb": 21.2
+     "id": "full-up",
+     "src": "breath-full-up.webp",
+     "v": "643a8e7b",
+     "kb": 22.8
     },
     {
-     "id": "body",
-     "src": "breath-body.webp",
-     "v": "a99c679e",
-     "kb": 14.3,
+     "id": "full-down",
+     "src": "breath-full-down.webp",
+     "v": "13dc4d7d",
+     "kb": 10.1,
      "box": [
-      240,
-      174,
-      689,
-      340
-     ]
-    },
-    {
-     "id": "arms",
-     "src": "breath-arms.webp",
-     "v": "37a46316",
-     "kb": 6.7,
-     "box": [
-      212,
-      216,
-      443,
-      269
-     ]
+      102,
+      31,
+      517,
+      467
+     ],
+     "patch": "full-up"
     }
    ]
   }
@@ -299,9 +288,9 @@
       960
      ],
      {
-      "cx": 380,
-      "cy": 420,
-      "w": 580
+      "cx": 400,
+      "cy": 410,
+      "w": 600
      }
     ],
     "ms": [
@@ -311,36 +300,32 @@
    "motions": [
     {
      "id": "breath",
-     "type": "loop",
-     "layer": "bg",
-     "s": 1.006,
-     "origin": [
-      464,
-      520
-     ],
-     "ease": "breath",
+     "type": "swap",
+     "layer": "full-down",
+     "under": "full-up",
      "rate": 30,
      "count": 5,
-     "at": 2800
+     "at": 2800,
+     "hide": false
     }
    ],
    "overlays": [
     {
      "type": "ring",
-     "x": 318,
-     "y": 410,
+     "x": 268,
+     "y": 350,
      "at": 1200,
-     "rx": 80,
-     "ry": 62,
+     "rx": 66,
+     "ry": 54,
      "until": 2800,
      "pulse": false
     },
     {
      "type": "shade",
-     "x": 470,
-     "y": 470,
-     "rx": 80,
-     "ry": 42,
+     "x": 420,
+     "y": 442,
+     "rx": 100,
+     "ry": 40,
      "max": 0.32,
      "follow": "breath",
      "color": "255,238,205"

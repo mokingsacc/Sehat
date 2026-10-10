@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.10-60b13d';
+const VERSION = '2026.10.10-dfb1f3';
 const PRECACHE = [
  "./",
  "index.html",
@@ -344,14 +344,12 @@ const PRECACHE = [
  "img/steps/cpr-baby/thumbs-bg.webp",
  "img/steps/cpr-baby/thumbs-body.webp",
  "img/steps/cpr-baby/thumbs-arms.webp",
- "img/steps/cpr-baby/breath-bg.webp",
- "img/steps/cpr-baby/breath-body.webp",
- "img/steps/cpr-baby/breath-arms.webp",
+ "img/steps/cpr-baby/breath-full-up.webp",
+ "img/steps/cpr-baby/breath-full-down.webp",
  "anim/steps/cpr-newborn.json",
  "img/steps/cpr-newborn/1-full.webp",
- "img/steps/cpr-newborn/2-bg.webp",
- "img/steps/cpr-newborn/2-arms-up.webp",
- "img/steps/cpr-newborn/2-arms-down.webp",
+ "img/steps/cpr-newborn/2-full-up.webp",
+ "img/steps/cpr-newborn/2-full-down.webp",
  "img/steps/cpr-newborn/3-full.webp",
  "img/steps/cpr-newborn/4-full.webp",
  "img/steps/cpr-newborn/5-full-up.webp",
@@ -508,7 +506,9 @@ const PRECACHE = [
  "anim/steps/poisoning.json",
  "img/steps/poisoning/1-full.webp",
  "anim/steps/fumes-poisoning.json",
- "img/steps/fumes-poisoning/1-full.webp"
+ "img/steps/fumes-poisoning/1-full.webp",
+ "anim/steps/dog-bite.json",
+ "img/steps/dog-bite/1-full.webp"
 ];
 const SHELL = 'fhb-shell-' + VERSION;
 const AUDIO = 'fhb-audio-v1';

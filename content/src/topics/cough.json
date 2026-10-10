@@ -68,6 +68,11 @@
       }
     },
     {
+      "id": "cough.anim-breath-count",
+      "type": "anim",
+      "anim": "breath-count"
+    },
+    {
       "id": "cough.watch",
       "type": "step",
       "icon": "breathing-fast",

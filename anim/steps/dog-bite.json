@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "_note": "Mo's picture of 10 Oct 2026 (illustrations-2026-10-10/training-doll, REVIEW.md section 7 rank 1, ChatGPT brief B1): the father pours clean water from a jug in a stream onto the bite on the boy's forearm over a basin, a bar of soap in his other hand; a calm dog sits far away. Packed by tools/steps_images.py --px 800 --patch. The scenes read the page's own lines (dog-bite.wash, dog-bite.go); the title is the page's title. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's picture of 10 Oct 2026 (illustrations-2026-10-10/training-doll, REVIEW.md section 7 rank 1, ChatGPT brief B1): the father pours clean water from a jug in a stream onto the bite on the boy's forearm over a basin, a bar of soap in his other hand; a calm dog sits far away. Packed by tools/steps_images.py --px 800 --patch. The scenes read the page's own lines (dog-bite.wash, dog-bite.go); the title is the page's title. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
  "frames": {
   "1": {
    "layers": [
@@ -165,7 +165,7 @@
    ]
   }
  ],
- "approved": "",
+ "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
  "poster": 0,
  "_check": [
   "The bite is washed under a stream poured from a jug (running water) over a basin; the soap is in the father's hand, with no foam on the arm yet (the line: soap and lots of running water for 15 minutes). The dog sits loose (the brief asked for a tied dog; the page says to keep a pet dog tied and watch it 10 days)."

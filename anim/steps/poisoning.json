@@ -4,7 +4,7 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "_note": "Mo's picture of 10 Oct 2026 (illustrations-2026-10-10/fixes, REVIEW.md B4): the girl on her side, the mother's hand on her shoulder, the kerosene bottle (capped) going into a cloth bag for the hospital; no cup, milk or food. Packed by tools/steps_images.py --px 800 --patch. The scenes read the page's own lines (poisoning.no-vomit, poisoning.bottle, poisoning.side); the title is the page's title. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "_note": "Mo's picture of 10 Oct 2026 (illustrations-2026-10-10/fixes, REVIEW.md B4): the girl on her side, the mother's hand on her shoulder, the kerosene bottle (capped) going into a cloth bag for the hospital; no cup, milk or food. Packed by tools/steps_images.py --px 800 --patch. The scenes read the page's own lines (poisoning.no-vomit, poisoning.bottle, poisoning.side); the title is the page's title. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
  "frames": {
   "1": {
    "layers": [
@@ -140,6 +140,6 @@
    ]
   }
  ],
- "approved": "PENDING Mo's approval",
+ "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
  "poster": 2
 }

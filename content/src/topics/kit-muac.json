@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "kit-muac.anim-muac",
+      "type": "anim",
+      "anim": "muac"
+    },
+    {
       "id": "kit-muac.arm",
       "type": "step",
       "icon": "muac",

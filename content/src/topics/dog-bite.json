@@ -23,6 +23,11 @@
       }
     },
     {
+      "id": "dog-bite.anim-dog-bite",
+      "type": "anim",
+      "anim": "dog-bite"
+    },
+    {
       "id": "dog-bite.wash",
       "type": "step",
       "icon": "water",

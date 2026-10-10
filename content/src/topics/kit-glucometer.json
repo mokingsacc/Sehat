@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "kit-glucometer.anim-glucometer",
+      "type": "anim",
+      "anim": "glucometer"
+    },
+    {
       "id": "kit-glucometer.wash",
       "type": "step",
       "icon": "handwash",

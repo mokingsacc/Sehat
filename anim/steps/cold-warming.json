@@ -4,8 +4,8 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "PENDING Mo's approval",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cold-warming), packed by tools/steps_images.py --px 800 --patch. Frame 4 is newborn-warm frame 2 (skin to skin), as the brief says. Frame 4 is the skin-to-skin picture of cpr-newborn (Mo's 10 Oct 2026 redo, REVIEW.md M4), read from img/steps/cpr-newborn/ so it is stored once. Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
+ "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cold-warming), packed by tools/steps_images.py --px 800 --patch. Frame 4 is newborn-warm frame 2 (skin to skin), as the brief says. Frame 4 is the skin-to-skin picture of cpr-newborn (Mo's 10 Oct 2026 redo, REVIEW.md M4), read from img/steps/cpr-newborn/ so it is stored once. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
  "poster": 0,
  "frames": {
   "1": {

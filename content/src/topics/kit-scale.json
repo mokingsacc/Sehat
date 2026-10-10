@@ -38,6 +38,11 @@
       }
     },
     {
+      "id": "kit-scale.anim-weigh-child",
+      "type": "anim",
+      "anim": "weigh-child"
+    },
+    {
       "id": "kit-scale.hold",
       "type": "step",
       "icon": "growth",
