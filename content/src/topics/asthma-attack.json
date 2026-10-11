@@ -11,7 +11,7 @@
     "ps": "کېنوئ یې، شین پف وکاروئ، که ژر ښه نه شو، روغتون ته ولاړ شئ.",
     "en": "Sit them up, use the blue inhaler, go if not better fast."
   },
-  "image": "asthma-attack",
+  "image": "img/steps/inhaler-spacer/1-full.webp",
   "blocks": [
     {
       "id": "asthma-attack.lead",

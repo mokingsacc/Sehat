@@ -11,7 +11,7 @@
     "ps": "په احتیاط یې وژغورئ، لومړی ۵ ځله ساه ورکړئ، بیا د سینې فشار.",
     "en": "Rescue safely, give 5 breaths first, then chest pushes."
   },
-  "image": "img/steps/drowning-rescue/1-full-up.webp",
+  "image": "img/steps/drowning-rescue/4-full.webp",
   "blocks": [
     {
       "id": "drowning.lead",

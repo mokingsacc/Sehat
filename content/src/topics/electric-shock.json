@@ -12,6 +12,7 @@
     "en": "Switch off first. Never touch them while the power is on."
   },
   "image": "electric-shock",
+  "hero": false,
   "blocks": [
     {
       "id": "electric-shock.lead",

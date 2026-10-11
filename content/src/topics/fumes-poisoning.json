@@ -12,6 +12,7 @@
     "en": "Ill near a fire or heater? Get out and go to hospital."
   },
   "image": "img/steps/fumes-poisoning/1-full.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "fumes-poisoning.lead",

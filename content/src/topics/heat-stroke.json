@@ -11,7 +11,7 @@
     "ps": "په ګرمۍ کې تود، ګډوډ یا لوېدلی: ژر یې سوړ کړئ.",
     "en": "Hot, confused or collapsed in the heat: cool them fast."
   },
-  "image": "heat-stroke",
+  "image": "img/steps/heat-cooling/3-full.webp",
   "blocks": [
     {
       "id": "heat-stroke.lead",

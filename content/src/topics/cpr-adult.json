@@ -11,7 +11,7 @@
     "ps": "تر څو مرسته رسېږي، سینه کلکه او چټکه کېکاږئ.",
     "en": "Push hard and fast on the chest until help arrives."
   },
-  "image": "cpr-adult",
+  "image": "img/steps/cpr-adult/breath-full-up.webp",
   "blocks": [
     {
       "id": "cpr-adult.lead",

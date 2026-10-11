@@ -11,7 +11,7 @@
     "ps": "له بام یا ونې څخه له لوېدو وروسته: غاړه او ملا وساتئ.",
     "en": "Fell from a roof or tree? Protect the neck and back."
   },
-  "image": "falls-fractures",
+  "image": "img/steps/spine-hold/2-full.webp",
   "blocks": [
     {
       "id": "falls-fractures.lead",

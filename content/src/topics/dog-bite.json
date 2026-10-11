@@ -12,6 +12,7 @@
     "en": "Wash the bite 15 minutes, then go for rabies vaccine today."
   },
   "image": "img/steps/dog-bite/1-full.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "dog-bite.lead",

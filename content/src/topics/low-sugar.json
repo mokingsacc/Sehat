@@ -12,6 +12,7 @@
     "en": "Shaky, sweaty or confused: give sugar fast if they can swallow."
   },
   "image": "img/stills/low-sugar-drink.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "low-sugar.lead",

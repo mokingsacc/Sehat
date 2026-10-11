@@ -11,7 +11,7 @@
     "ps": "کومې معاینې وغواړئ، او په کوم عمر کې.",
     "en": "Which checks to ask for, and at what age."
   },
-  "image": "checks-women",
+  "image": "img/symptoms/pregnancy.webp",
   "blocks": [
     {
       "id": "checks-women.lead",

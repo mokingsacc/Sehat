@@ -169,7 +169,7 @@
    ]
   },
   {
-   "id": "cough.urgent.chest",
+   "id": "anim.breath-count.s2",
    "frame": "3",
    "ms": 11000,
    "cam": {

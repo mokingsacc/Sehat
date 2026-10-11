@@ -12,6 +12,7 @@
     "en": "After a fit with fever: hospital. Know how to keep the child safe."
   },
   "image": "img/stills/fever-fit-side.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "fever-fits.lead",

@@ -12,6 +12,7 @@
     "en": "Kerosene, farm sprays, medicines, rat poison: what to do first."
   },
   "image": "img/steps/poisoning/1-full.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "poisoning.lead",

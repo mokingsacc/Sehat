@@ -12,6 +12,7 @@
     "en": "Wash the eye with lots of clean water for 20 minutes, then go to hospital."
   },
   "image": "eye-chemical",
+  "hero": false,
   "blocks": [
     {
       "id": "eye-chemical.lead",

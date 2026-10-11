@@ -719,6 +719,71 @@ def check_no_inset():
             if re.search(r"(?<![-\w])inset\s*:", line): err(f, f"line {i}: CSS inset does not work on old Android phones; use top/right/bottom/left")
 check_no_inset()
 
+# One picture once per screen (app audit 11 Oct 2026, P-04): a page's top picture is never also a step picture, the
+# film poster or a row on the same screen (topic pages, the list pages of config.lists, the #/sym pages), and a #/sym
+# page shows a page's row once. A still (img/stills, tools/steps_stills.py) counts as the frame it is made from, and
+# every layer of a frame as that frame, so another file of the same picture is still the same picture.
+def check_page_top_repeats():
+    import ast
+    try:
+        tree = ast.parse(open(os.path.join(ROOT, "tools/steps_stills.py"), encoding="utf-8").read())
+        stills = next(ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign) and any(getattr(t, "id", "") == "STILLS" for t in n.targets))
+        cfg = json.load(open(os.path.join(ROOT, "content/src/config.json"), encoding="utf-8"))
+        secs = json.load(open(os.path.join(ROOT, "content/src/sections.json"), encoding="utf-8"))
+        syms = json.load(open(os.path.join(ROOT, "content/src/symptoms.json"), encoding="utf-8"))
+    except Exception as e: err(os.path.join(ROOT, "tools/validate.py"), f"page-top check cannot read its files: {e}"); return
+    topics = {}
+    for x in glob.glob(os.path.join(ROOT, "content/src/topics/*.json")):
+        try: topics[os.path.basename(x)[:-5]] = (x, json.load(open(x, encoding="utf-8")))
+        except Exception: pass
+    def same(p):  # what a picture is: "<set>/<frame>" for step frames and their stills, else its path
+        p = os.path.normpath(str(p).split("?")[0]).replace(os.sep, "/")
+        m = re.match(r"^img/stills/([\w-]+)\.webp$", p)
+        if m and m.group(1) in stills: return "/".join(stills[m.group(1)][:2])
+        m = re.match(r"^img/steps/([\w-]+)/([0-9a-z]+?)-[\w-]+\.webp$", p) or re.match(r"^img/steps/([\w-]+)/([0-9a-z]+)\.webp$", p)
+        return f"{m.group(1)}/{m.group(2)}" if m else p
+    def hero(tid, t):  # as tools/build.py topic_image, then js/app.js topicPic (a general picture gives way to the first step picture)
+        img, sec = t.get("image"), t.get("section")
+        if not (isinstance(img, str) and img.startswith("img/") and img.endswith(".webp") and os.path.exists(os.path.join(ROOT, img))):
+            img = next((c for c in (f"img/topics/{tid}.svg", *([f"img/topics/{img}.svg"] if img and img != tid else []), f"img/topics/{'children' if sec == 'children' else 'adults'}-generic.svg") if os.path.exists(os.path.join(ROOT, c))), "img/app/placeholder.svg")
+        if img.endswith("-generic.svg"): img = next((b["picture"] for b in t.get("blocks") or [] if b.get("picture")), img)
+        return same(img)
+    POSTER_SCENE = {"cpr": ("cpr-adult", 4), "cpr-newborn": ("cpr-newborn", 4), "cpr-baby": ("cpr-baby", 4), "cpr-child": ("cpr-child", 4), "cpr-adult": ("cpr-adult", 4)}  # js/app.js
+    def poster(b):  # the frame a topic page's film poster shows: the key frame of its poster scene (js/steps.js keyOf)
+        name, i = POSTER_SCENE.get(b.get("pick") or b.get("anim"), (b.get("pick") or b.get("anim"), 0))
+        name = str(name).replace("anim.", "")
+        try: d = json.load(open(ANIM.steps_path(name), encoding="utf-8"))
+        except Exception: return None
+        sc = (d.get("scenes") or [{}])[min(i, len(d.get("scenes") or [1]) - 1)]
+        k = sc.get("key") or {}; fr = k.get("frame") or sc.get("frame")
+        if not k.get("frame"):
+            for m in sc.get("motions") or []:
+                if m.get("type") == "xfade" and not m.get("back"): fr = m.get("to")
+        return f"{name}/{fr}"
+    for tid, (f, t) in sorted(topics.items()):
+        if t.get("hero") is False: continue  # no page top: the page opens on its title (every picture of its set is a step or the poster)
+        top = hero(tid, t)
+        for b in t.get("blocks") or []:
+            if b.get("picture") and same(b["picture"]) == top: err(f, f"page top {top} is also the picture of step {b.get('id')} (P-04: use another frame or picture for 'image')")
+            if b.get("type") == "anim" and poster(b) == top: err(f, f"page top {top} is also the film poster (P-04: use another frame or picture for 'image')")
+    fc = os.path.join(ROOT, "content/src/config.json")
+    for n, c in (cfg.get("lists") or {}).items():
+        if c.get("image") not in topics: continue
+        top = hero(c["image"], topics[c["image"]][1])
+        for r in secs.get(n) or []:
+            if r in topics and hero(r, topics[r][1]) == top: err(fc, f"lists.{n}: page top (the picture of {c['image']}) is also the row of {r} (P-04: name a topic outside the list)")
+    fs = os.path.join(ROOT, "content/src/symptoms.json")
+    for s in syms.get("symptoms") or []:
+        pg = s.get("page") or {}
+        for age in pg.get("ages") or ["anyone"]:
+            fa = lambda x: (x or {}).get(age) or (x or {}).get("all") or []
+            rows = [r for r in list(fa(pg.get("now"))) + list(fa(pg.get("pages"))) if r in topics]
+            for r in sorted({r for r in rows if rows.count(r) > 1}): err(fs, f"symptom {s.get('id')} ({age}): page {r} is both in 'now' and in 'pages' (its row shows twice)")
+            if s.get("pic"):
+                for r in dict.fromkeys(rows):
+                    if hero(r, topics[r][1]) == same(s["pic"]): warn(fs, f"symptom {s.get('id')} ({age}): the row of {r} shows the page-top picture {s['pic']} again")
+check_page_top_repeats()
+
 want = {os.path.abspath(x) for x in files}
 show = lambda lst: [x for x in lst if any(x.startswith(os.path.relpath(w, ROOT)) for w in want)] if sys.argv[1:] else lst
 E, W = show(errors), show(warnings)

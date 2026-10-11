@@ -5,9 +5,10 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Since 11 Oct 2026 (app audit A-01): the film shows the life-saving steps of the page, drowning.breaths (5 breaths, the cpr-child breath pair, counter of 5) and drowning.cpr (30 pushes with the cpr-child push pair, then 2 breaths), between the check and the side roll; it ends on the blanket frame (5). The breath and push frames are the cpr-child pictures (\"../cpr-child/...\": one picture, two sets) until the cast-matched frames of prompt D-1 arrive. Reduced motion shows frame 4 (the side roll) for drowning.warm (audit P-09).",
  "_check": [
-  "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8."
+  "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8.",
+  "Frames 'breath' and 'push' (11 Oct 2026) are the cpr-child pictures: a mother and a boy in blue indoors, not the father and the wet boy by the canal of frames 1-5. Replace them with the cast-matched pictures of prompt D-1 (FIXLIST.md part d) when they arrive."
  ],
  "poster": 0,
  "frames": {
@@ -76,6 +77,45 @@
      "src": "5-full.webp",
      "v": "10aa1f89",
      "kb": 28.2
+    }
+   ]
+  },
+  "breath": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "../cpr-child/3-full-up.webp",
+     "v": "4ae6ccfc",
+     "kb": 30.0
+    },
+    {
+     "id": "full-down",
+     "src": "../cpr-child/3-full-down.webp",
+     "v": "cf136f95",
+     "kb": 28.9
+    }
+   ]
+  },
+  "push": {
+   "layers": [
+    {
+     "id": "full-up",
+     "src": "../cpr-child/push-full-up.webp",
+     "v": "05edc064",
+     "kb": 24.3
+    },
+    {
+     "id": "full-down",
+     "src": "../cpr-child/push-full-down.webp",
+     "v": "8fbf1fd7",
+     "kb": 8.8,
+     "box": [
+      382,
+      18,
+      378,
+      505
+     ],
+     "patch": "full-up"
     }
    ]
   }
@@ -206,6 +246,192 @@
    ]
   },
   {
+   "id": "drowning.breaths",
+   "frame": "breath",
+   "ms": 16000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 430,
+      "cy": 420,
+      "w": 660
+     }
+    ],
+    "ms": [
+     2400
+    ]
+   },
+   "motions": [
+    {
+     "id": "breath",
+     "type": "swap",
+     "frame": "breath",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 2500,
+     "rate": 24,
+     "count": 5
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 592,
+     "y": 384,
+     "at": 800,
+     "r": 60,
+     "until": 2500
+    },
+    {
+     "type": "shade",
+     "x": 240,
+     "y": 480,
+     "rx": 120,
+     "ry": 60,
+     "max": 0.3,
+     "follow": "breath",
+     "color": "255,238,205"
+    },
+    {
+     "type": "counter",
+     "follow": "breath",
+     "pos": "top-end",
+     "of": 5,
+     "icon": "breath"
+    }
+   ],
+   "key": {
+    "pose": "beat"
+   }
+  },
+  {
+   "id": "drowning.cpr",
+   "frame": "push",
+   "ms": 30000,
+   "cam": {
+    "path": [
+     [
+      0,
+      0,
+      960
+     ],
+     {
+      "cx": 580,
+      "cy": 400,
+      "w": 620
+     },
+     {
+      "cx": 430,
+      "cy": 420,
+      "w": 660
+     }
+    ],
+    "ms": [
+     2400,
+     900
+    ],
+    "hold": [
+     0,
+     19400
+    ]
+   },
+   "motions": [
+    {
+     "type": "swap",
+     "frame": "push",
+     "layer": "full-down",
+     "under": "full-up",
+     "ease": "push",
+     "rate": 110,
+     "hide": false,
+     "blend": 40,
+     "id": "push",
+     "count": 30,
+     "at": 3000,
+     "slow": {
+      "count": 3,
+      "rate": 40
+     }
+    },
+    {
+     "type": "xfade",
+     "to": "breath",
+     "at": 22800,
+     "ms": 900
+    },
+    {
+     "id": "breath",
+     "type": "swap",
+     "frame": "breath",
+     "layer": "full-down",
+     "under": "full-up",
+     "at": 23900,
+     "rate": 24,
+     "count": 2
+    }
+   ],
+   "overlays": [
+    {
+     "type": "ring",
+     "x": 588,
+     "y": 472,
+     "r": 38,
+     "at": 900,
+     "until": 3000
+    },
+    {
+     "type": "arrow",
+     "from": [
+      588,
+      330
+     ],
+     "to": [
+      588,
+      428
+     ],
+     "width": 12,
+     "at": 1500,
+     "until": 3000
+    },
+    {
+     "type": "counter",
+     "follow": "push",
+     "pos": "top-end",
+     "of": 30,
+     "until": 22800
+    },
+    {
+     "type": "shade",
+     "x": 240,
+     "y": 480,
+     "rx": 120,
+     "ry": 60,
+     "max": 0.3,
+     "follow": "breath",
+     "color": "255,238,205",
+     "still": false
+    },
+    {
+     "type": "counter",
+     "follow": "breath",
+     "pos": "top-end",
+     "of": 2,
+     "icon": "breath",
+     "at": 22800,
+     "still": false
+    }
+   ],
+   "key": {
+    "frame": "push",
+    "pose": "beat"
+   }
+  },
+  {
    "id": "drowning.warm",
    "frame": "3",
    "ms": 18000,
@@ -260,15 +486,15 @@
      "y": 525,
      "r": 55,
      "at": 3000,
-     "until": 6900,
-     "still": false
+     "until": 6900
     },
     {
      "type": "ring",
      "x": 160,
      "y": 528,
      "at": 11800,
-     "r": 60
+     "r": 60,
+     "still": false
     },
     {
      "type": "waves",
@@ -279,7 +505,8 @@
      "count": 3,
      "spread": 70,
      "ms": 1200,
-     "at": 13200
+     "at": 13200,
+     "still": false
     },
     {
      "type": "icon",
@@ -289,7 +516,10 @@
      "r": 52,
      "at": 15600
     }
-   ]
+   ],
+   "key": {
+    "frame": "4"
+   }
   }
  ]
 }
