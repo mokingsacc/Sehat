@@ -40,8 +40,7 @@
         "fa": "کمکش کنید که راست بنشیند، کمی به پیش خم. لباس تنگ را سست کنید. آرام گپ بزنید؛ ترس آن را بدتر می‌کند.",
         "ps": "مرسته ورسره وکړئ چې نېغ کېني، لږ مخ ته کوږ. تنګې جامې یې سستې کړئ. په ارامۍ خبرې وکړئ؛ وېره یې بدتروي.",
         "en": "Help them sit up, leaning slightly forward. Loosen tight clothes. Speak calmly; fear makes it worse."
-      },
-      "picture": "img/steps/inhaler-spacer/3-full.webp"
+      }
     },
     {
       "id": "asthma-attack.inhaler",

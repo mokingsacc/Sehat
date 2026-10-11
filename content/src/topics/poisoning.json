@@ -101,8 +101,7 @@
         "fa": "اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.",
         "ps": "که خوب وړی وي، پر اړخ یې وغځوئ. که ساه یې ودرېده، د سینې فشار پیل کړئ؛ ماشوم یا تي خوړونکي ته لومړی ۵ ځله ساه ورکړئ.",
         "en": "If they are drowsy, lay them on their side. If breathing stops, start chest pushes; give a child or baby 5 breaths first."
-      },
-      "picture": "img/steps/poisoning/1-full.webp"
+      }
     },
     {
       "id": "poisoning.cpr-link",

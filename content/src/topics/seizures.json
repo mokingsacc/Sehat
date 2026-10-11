@@ -41,8 +41,7 @@
         "fa": "آتش، بخاری، چای داغ، آب و چیزهای تیز را دور کنید. شخص را تکان ندهید، مگر اینکه در خطر باشد.",
         "ps": "اور، بخاري، ګرمه چای، اوبه او تېره شیان لرې کړئ. کس مه خوځوئ، مګر دا چې په خطر کې وي.",
         "en": "Move away fire, the stove, hot tea, water and sharp things. Do not move the person unless they are in danger."
-      },
-      "picture": "img/stills/seizure-safe.webp"
+      }
     },
     {
       "id": "seizures.head",

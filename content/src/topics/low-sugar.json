@@ -56,8 +56,7 @@
         "fa": "اگر بیدار است و قورت داده می‌تواند، ۴ قاشق چای‌خوری بوره در یک گیلاس آب، یا یک نوشیدنی شیرین یا شیرینی بدهید.",
         "ps": "که ویښ وي او تېرولی شي، د چای ۴ کاچوغې بوره په یوه ګیلاس اوبو کې، یا خوږ څښاک یا خواږه ورکړئ.",
         "en": "If they are awake and can swallow, give 4 teaspoons of sugar in a glass of water, or a sweet drink or sweets."
-      },
-      "picture": "img/stills/low-sugar-drink.webp"
+      }
     },
     {
       "id": "low-sugar.wait",

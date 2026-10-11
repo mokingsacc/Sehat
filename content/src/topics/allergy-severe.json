@@ -70,8 +70,7 @@
         "fa": "اگر نفس کشیدن سخت است، بگذارید بنشیند. اگر سرش می‌چرخد، او را هموار بخوابانید و پاهایش را بالا کنید. نگذارید بایستد یا راه برود.",
         "ps": "که ساه اخیستل سخت وي، پرېږدئ چې کېني. که سر یې ګرځي، هوار یې وغځوئ او پښې یې پورته کړئ. مه پرېږدئ چې ودرېږي یا وګرځي.",
         "en": "If breathing is hard, let them sit up. If they feel faint, lay them flat with the legs raised. Do not let them stand or walk."
-      },
-      "picture": "img/steps/allergy-position/2-full.webp"
+      }
     },
     {
       "id": "allergy-severe.sting",

@@ -41,8 +41,7 @@
         "fa": "فوراً جای گزیدگی را با صابون و آب روان زیاد، یک ۱۵ دقیقهٔ کامل بشویید. این کار مقدار زیاد ویروس را می‌شوید. بعد با پارچهٔ پاک بپوشانید.",
         "ps": "سمدستي د چیچلو ځای په صابون او ډېرو بهېدونکو اوبو پوره ۱۵ دقیقې ومینځئ. دا کار ډېر ویروس مینځي. بیا یې په پاک ټوکر وپوښئ.",
         "en": "Straight away, wash the bite with soap and lots of running water for a full 15 minutes. This washes out much of the virus. Then cover it with a clean cloth."
-      },
-      "picture": "img/steps/dog-bite/1-full.webp"
+      }
     },
     {
       "id": "dog-bite.go",

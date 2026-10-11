@@ -114,7 +114,7 @@ function look(MIN) {
       const link = await p.$('main .trow a.grow[href^="#/topic/"], main .erow a.grow[href^="#/topic/"]');
       if (link) {
         await link.click(); await p.waitForTimeout(200);
-        const back = await p.$eval('main .topic-hero a.round', (a) => a.getAttribute('href')).catch(() => '');
+        const back = await p.$eval('main .topic-hero a.round, main .top a.round', (a) => a.getAttribute('href')).catch(() => '');
         ok(back === here, `${lang} ${id}: a page opened from the picture's page goes back to it (${back})`);
       }
     }

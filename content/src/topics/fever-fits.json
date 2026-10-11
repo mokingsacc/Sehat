@@ -41,8 +41,7 @@
         "fa": "طفل را روی زمین، دور از آتش، بخاری و نوشیدنی داغ بخوابانید. طفل را محکم نگیرید و تکان ندهید.",
         "ps": "ماشوم پر ځمکه، له اور، بخارۍ او ګرمو څښاکونو لرې وغځوئ. ماشوم کلک مه نیسئ او مه یې ښوروئ.",
         "en": "Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them."
-      },
-      "picture": "img/stills/fever-fit-safe.webp"
+      }
     },
     {
       "id": "fever-fits.time",

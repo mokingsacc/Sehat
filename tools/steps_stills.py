@@ -38,6 +38,7 @@ STILLS = {
     "cpr-adult-check": ("cpr-adult", "check", "up", "big"),
     "cpr-adult-tilt": ("cpr-adult", "tilt", "up", "big"),
     "cpr-adult-push": ("cpr-adult", "push", "up", "big"),
+    "cpr-adult-hand": ("cpr-adult", "hand", "up", "big"),  # step cpr-adult.push (the push frame is the film poster)
     "choking-baby-back": ("choking-baby", "1", "down", "big"),
     "choking-adult-back": ("choking-adult", "2", "up", "big"),
     "choking-adult-pregnant": ("choking-adult", "5", "up", "big"),

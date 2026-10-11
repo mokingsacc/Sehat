@@ -41,8 +41,7 @@
         "fa": "اگر لباس آتش گرفته: بایستید، به زمین بیفتید و غلت بزنید، یا با کمپل ضخیم بپوشانید. شخص را از گرمی دور کنید.",
         "ps": "که جامې اور اخیستي وي: ودرېږئ، پر ځمکه ولوېږئ او ورغړېږئ، یا په پنډه کمپله یې ونغاړئ. کس له تودوخې لرې کړئ.",
         "en": "If clothes are on fire: stop, drop to the ground and roll, or wrap in a thick blanket. Move the person away from the heat."
-      },
-      "picture": "img/steps/burns-cool/stop-full.webp"
+      }
     },
     {
       "id": "burns.cool",

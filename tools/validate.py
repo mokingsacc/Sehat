@@ -760,7 +760,22 @@ def check_page_top_repeats():
             for m in sc.get("motions") or []:
                 if m.get("type") == "xfade" and not m.get("back"): fr = m.get("to")
         return f"{name}/{fr}"
+    def poster_pics(b):  # everything that counts as the poster's picture: its frame, a still of it, and each of its layer files
+        p = poster(b)
+        if not p: return set()
+        name, fr = p.split("/", 1)
+        d = json.load(open(ANIM.steps_path(name), encoding="utf-8"))
+        L = (d.get("frames") or {}).get(fr)
+        L = (L.get("layers") if isinstance(L, dict) else L) or []
+        folder = (d.get("dir") or f"img/steps/{name}/").rstrip("/")
+        files = {os.path.normpath(f"{folder}/{x['src']}").replace(os.sep, "/") for x in L if x.get("src")}
+        return {p} | files | {same(x) for x in files if "/../" in f"{folder}/" + x or not x.startswith(folder)}
     for tid, (f, t) in sorted(topics.items()):
+        # a step card never shows the frame of a film poster on its page (the film sits right above it)
+        posters = set().union(*[poster_pics(b) for b in t.get("blocks") or [] if b.get("type") == "anim"])
+        for b in t.get("blocks") or []:
+            pic = b.get("picture")
+            if pic and (same(pic) in posters or os.path.normpath(pic).replace(os.sep, "/") in posters): err(f, f"step {b.get('id')} shows {pic}, the picture of the film poster on this page (leave its picture out, or use another frame)")
         if t.get("hero") is False: continue  # no page top: the page opens on its title (every picture of its set is a step or the poster)
         top = hero(tid, t)
         for b in t.get("blocks") or []:

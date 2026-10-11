@@ -41,8 +41,7 @@
         "fa": "یک تکهٔ پاک روی زخم بگذارید و با دست‌ها محکم فشار دهید. اگر خریطهٔ پلاستیکی دارید، آن را به دست کنید.",
         "ps": "یو پاک ټوکر په ټپ کېږدئ او په لاسونو کلک فشار ورکړئ. که پلاستیکي کڅوړه لرئ، په لاس یې کړئ.",
         "en": "Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands."
-      },
-      "picture": "img/steps/bleeding-press/1-full-up.webp"
+      }
     },
     {
       "id": "bleeding.keep",

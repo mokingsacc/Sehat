@@ -40,8 +40,7 @@
         "fa": "بگویید که حرکت نکند. بالای سرش زانو بزنید و سرش را با دو دست، راست با بدن، بی‌حرکت نگه دارید تا کمک برسد.",
         "ps": "ورته ووایئ چې ونه خوځېږي. د سر خوا ته یې په زنګنونو کېنئ او سر یې په دواړو لاسونو، له بدن سره نېغ، بې‌حرکته ونیسئ تر څو مرسته ورسېږي.",
         "en": "Tell them not to move. Kneel at their head and hold it still with both hands, in line with the body, until help comes."
-      },
-      "picture": "img/stills/spine-hold.webp"
+      }
     },
     {
       "id": "falls-fractures.signs",
@@ -93,7 +92,7 @@
         "ps": "درد، پړسوب یا کوږوالی د هډوکي ماتېدل ښيي. له یوه لرګي یا تاو شوي ټوکر سره یې وتړئ، یا لاس په غاړه کې وځړوئ.",
         "en": "Pain, swelling or a bent shape means a broken bone. Keep it still with a stick or rolled cloth tied alongside, or the arm in a sling."
       },
-      "picture": "img/steps/splint-sling/1-full.webp"
+      "picture": "img/steps/splint-sling/2-full.webp"
     },
     {
       "id": "falls-fractures.open",

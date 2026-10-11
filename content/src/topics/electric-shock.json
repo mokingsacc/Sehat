@@ -41,8 +41,7 @@
         "fa": "سویچ یا سویچ عمومی را خاموش کنید، یا پلگ را بکشید. تا برق قطع نشده، به شخص دست نزنید.",
         "ps": "سویچ یا عمومي سویچ بند کړئ، یا پلګ وباسئ. تر څو برېښنا بنده شوې نه وي، کس ته لاس مه وړئ.",
         "en": "Turn off the switch or the main switch, or pull out the plug. Do not touch the person until the power is off."
-      },
-      "picture": "img/steps/electric-stick/1-full.webp"
+      }
     },
     {
       "id": "electric-shock.stick",

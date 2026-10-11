@@ -40,8 +40,7 @@
         "fa": "از مار دور شوید. کوشش نکنید آن را بگیرید یا بکشید. شخص را آرام و بی‌حرکت خوابیده نگه دارید.",
         "ps": "له مار لرې شئ. هڅه مه کوئ چې ونیسئ یا یې ووژنئ. کس ارام او بې‌حرکته غځېدلی وساتئ.",
         "en": "Move away from the snake. Do not try to catch or kill it. Keep the person calm, lying still."
-      },
-      "picture": "img/steps/snake-bite/1-full.webp"
+      }
     },
     {
       "id": "snake-scorpion.still",

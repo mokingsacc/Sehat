@@ -41,8 +41,7 @@
         "fa": "همه را فوراً به هوای تازه ببرید و دروازه و کلکین را باز کنید. آتش یا جنراتور را فقط اگر بی‌خطر است خاموش کنید.",
         "ps": "ټول سمدستي تازه هوا ته وباسئ او دروازې او کړکۍ خلاصې کړئ. اور یا جنراتور یوازې هغه وخت بند کړئ چې خوندي وي.",
         "en": "Take everyone into fresh air at once, and open doors and windows. Turn off the fire or engine only if it is safe."
-      },
-      "picture": "img/steps/fumes-poisoning/1-full.webp"
+      }
     },
     {
       "id": "fumes-poisoning.urgent",

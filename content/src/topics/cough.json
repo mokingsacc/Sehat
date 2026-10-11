@@ -85,8 +85,7 @@
         "fa": "وقتی طفل آرام است، یک دقیقهٔ کامل بشمارید که چند بار نفس می‌کشد. ببینید پایین سینه به داخل کشیده می‌شود یا نه.",
         "ps": "کله چې ماشوم آرام وي، یوه بشپړه دقیقه وشمېرئ چې څو ځله سا اخلي. وګورئ چې د سینې لاندې برخه ننوځي که نه.",
         "en": "When the child is calm, count the breaths for one full minute. Look to see if the lower chest pulls in."
-      },
-      "picture": "img/stills/breath-watch.webp"
+      }
     },
     {
       "id": "cough.fast-breathing",

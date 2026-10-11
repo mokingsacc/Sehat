@@ -55,8 +55,7 @@
         "fa": "او را به یک جای سرد و سایه ببرید. لباس اضافی را بکشید.",
         "ps": "یو سوړ او سیوري ځای ته یې یوسئ. اضافي جامې یې وباسئ.",
         "en": "Move them to a cool, shady place. Take off extra clothes."
-      },
-      "picture": "img/steps/heat-cooling/1-full.webp"
+      }
     },
     {
       "id": "heat-stroke.cool",

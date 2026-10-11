@@ -55,8 +55,7 @@
         "fa": "سر آن را پاک کنید و روشن کنید. سرش را در بغل خشک، روی پوست بگذارید و بازو را به بدن نزدیک نگه دارید.",
         "ps": "سر یې پاک کړئ او روښانه یې کړئ. سر یې په وچ تخرګ کې پر پوستکي کېږدئ، او مټ له بدن سره نږدې ونیسئ.",
         "en": "Wipe the tip and turn it on. Put the tip in the dry armpit, on the skin, and hold the arm close to the body."
-      },
-      "picture": "img/stills/thermometer-armpit.webp"
+      }
     },
     {
       "id": "kit-thermometer.wait",
