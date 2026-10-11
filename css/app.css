@@ -636,13 +636,14 @@ img{max-width:100%;display:block}
 .em-who .spk{width:56px;height:56px}
 .em-ages{gap:12px;margin-bottom:16px}
 .em-age{position:relative;border:2px solid #EBC3BF;border-radius:22px;box-shadow:var(--shadow)}
-.em-age>a{display:flex;flex-direction:column;color:inherit}
+.em-age>a{display:flex;flex-direction:column;flex:1 1 auto;color:inherit}
 .em-age .em-pic::before{padding-bottom:75%}
 .em-age .em-pic>img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
 /* the name and its speaker share the row under the picture (the speaker never covers the picture) */
-.em-age .t{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-height:68px;text-align:center;font-size:23px;font-weight:800;line-height:1.3;padding:6px 4px;padding-inline-end:64px;color:var(--red-d)}
-.em-age .spk{position:absolute;bottom:6px;background:var(--red-t);border-color:var(--red-t);color:var(--red)}
-[dir=rtl] .em-age .spk{left:6px}[dir=ltr] .em-age .spk{right:6px}
+/* the name, then its speaker under it (the speaker never covers the picture or the name, even at 320 px) */
+.em-age{display:flex;flex-direction:column}
+.em-age .t{display:block;text-align:center;font-size:23px;font-weight:800;line-height:1.3;padding:8px 6px 8px;color:var(--red-d);overflow-wrap:anywhere}
+.em-age .spk{position:static;align-self:center;margin:6px 0 10px;background:var(--red-t);border-color:var(--red-t);color:var(--red)}
 .em-cpr{padding:14px;border-radius:22px;box-shadow:0 8px 22px rgba(182,50,45,.3)}
 .em-cpr .ic{width:56px;height:56px}
 .em-cpr .t{font-size:28px;font-weight:800;line-height:1.25}
