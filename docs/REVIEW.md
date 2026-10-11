@@ -5529,3 +5529,42 @@ For Mo's check:
 3. newborn.small: Dari «روی سینهٔ مادر یا پدر», Pashto «د مور یا پلار پر سینه».
 4. Latch scene: the line is the page's own (body close, mouth wide over the dark skin); the review suggests narrating the four signs, which would be a new line to record.
 5. Breathing tile: the baby's face is drawn (eyes, mouth: the distressed look is the sign); the mother stays blank. Safety tile: the mother turns the pot handle in while the toddler plays away from the stove.
+
+## Food that helps: 14 pages with "what is true" boxes (11 Oct 2026, worker food)
+
+Source: `research/food-as-medicine.md`, Mo's "Honest mix" (foods that help; beliefs that are not proven, said kindly; habits that harm). Mo's 26 calls were answered the conservative way, without waiting; each call, its default and the line ids it affects are in `research/food-as-medicine-CALLS.md`, together with a picture idea per page.
+
+What changed:
+- A Health-tab list **Food that helps** (`#/s/food-help`, after Early signs and health checks). It has a hub, `food-help`, and 13 problem pages: `food-diarrhoea`, `food-cough`, `food-anaemia`, `food-pregnancy`, `food-after-birth`, `food-baby`, `food-sick-child`, `food-belly`, `food-diabetes`, `food-bp`, `food-eyes`, `food-iodine`, `food-bones`.
+- New block type `belief`, with `level` set to helps, unproven or harm:
+  - helps: green, with a tick;
+  - unproven: grey and dashed, with a question mark;
+  - harm: dark red, with a no sign.
+  The heading is a shared line per level (`ui.beliefHelps`, `ui.beliefUnproven`, `ui.beliefHarm`, recorded once). Every line has its own speaker. Belief blocks are not allowed on Home-tab pages.
+- Links:
+  - Each Home food page has one link in (`kitchen-garden`, `garden-water`, `food-store`, `chickens`, `goats-sheep`, `home-earning`).
+  - `child-meals.breastfeeding` now opens `food-baby` (same words).
+  - `heart-food.move` was removed and replaced by `heart-food.food-bp` (the two-link limit).
+  - 13 illness pages link back.
+- New amber signs:
+  - `pregnancy-danger.soon.vomit`;
+  - small amber boxes `food-eyes.soon` (`.dusk`, `.patch`), `food-iodine.soon` (`.neck`) and `food-bones.soon` (`.legs`).
+- Pictures: no new files. Each page borrows an existing topic picture through `"image"`.
+- Search: phrases for the 14 pages (fa, ps, Latin, en). There is a new "food" test set (24/24). The old "nothing found" test for «قبضیت دارم» now expects `food-belly`.
+- Narration: 274 new ids: 249 lines of the 14 food pages, the 4 ui lines, 20 new link lines on other pages and `pregnancy-danger.soon.vomit`. One id was removed: `heart-food.move`; its clips can be deleted. No existing line's words changed.
+
+Native-speaker check: **every new fa and ps line in the 14 `food-*` topics**, the ui lines `foodHelp`, `foodHelpSub`, `ui.foodHelp` and `beliefHelps/Unproven/Harm`, and `pregnancy-danger.soon.vomit`. The link lines on other pages reuse each food page's own title and summary word for word. The search phrases marked `?` need the same check.
+
+For Mo's check:
+1. "Free" is never said, including for ORS, zinc, iron, vitamin A and worm tablets. These are said to come "from the clinic or health post". Say if any should be called free.
+2. Liver is left off the pregnancy page. Black seed, dates in pregnancy, sun minutes, vitamin D drops, cup amounts and the honey teaspoon amount are all left out.
+3. Opium is named (تریاک / اپین) only in three "can harm" lines, with no amounts.
+4. The five amber signs are in; the bones sign leaves out "slow to sit or walk" (already in growth). Should they move to early-signs / child-signs?
+5. Honey: "a small spoon at bedtime" from age 1 (no number). Ginger in pregnancy: "up to 3 cups a day".
+6. Tea and iron: the food pages say "between meals, never with food or with iron tablets" and give no hour.
+7. Iron after birth: `food-anaemia.tablets` says "for 3 months after the birth" (WHO postnatal: 6 to 12 weeks where anaemia is common).
+8. Qurut and landi are named as salty foods to eat "now and then" (`food-bp.salty-foods`). Their salt has not been measured locally.
+9. Garm/sard: «غذای گرم و سرد، هر دو قوت می‌دهد» / «ګرم او سوړ خواړه دواړه ځواک ورکوي». It is respectful and makes no medical claim.
+10. "Healer" is تعویذگر / تعویذګر, as in `hepatitis.dont.cures`. Say if it reads as religious and should be another word.
+11. Pashto for doogh: شلومبې. Vitamin A: fa ویتامین ای, ps ویټامین اې. Health post: پوستهٔ صحی / روغتیايي پوسته.
+12. `food-bones.sun` says to sit in the sun in the yard "face and hands uncovered". Check this is acceptable for women.
