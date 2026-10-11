@@ -36,7 +36,8 @@ const server = http.createServer((q, r) => { // the app folder, as a phone gets 
 });
 
 // which lists are on the Home side (no medical advice there), and which kit page should open which reading page
-const HOUSE = new Set(Object.entries(book.config.lists).filter(([, c]) => c.tab === 'house').flatMap(([n]) => book.sections[n] || []));
+// Home-tab pages, except Food that helps (advice: true), which gives health advice from the Home tab (Mo, 11 Oct 2026)
+const HOUSE = new Set(Object.entries(book.config.lists).filter(([, c]) => c.tab === 'house' && !c.advice).flatMap(([n]) => book.sections[n] || []));
 const KIT_READING = { 'kit-bp': 'reading-bp', 'kit-thermometer': 'reading-temp', 'kit-glucometer': 'reading-sugar', 'kit-oximeter': 'reading-spo2', 'kit-muac': 'reading-muac' };
 const READING_DEV = { 'reading-bp': 'bp', 'reading-temp': 'temp', 'reading-sugar': 'sugar', 'reading-spo2': 'spo2', 'reading-muac': 'muac' };
 

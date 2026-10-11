@@ -301,12 +301,14 @@ def check_anims_and_lists():
             if x not in TOOL_ROWS: err(fc, f"{w}: unknown tool {x!r}")
         if v.get("tab") not in ("health", "house"): err(fc, f"{w}: tab must be health or house")
         if v.get("near") not in (None, True, False): err(fc, f"{w}: near must be true or false")
+        if v.get("advice") not in (None, True, False): err(fc, f"{w}: advice must be true or false")
     # the Home tab (#/house): lists only, and no medical advice on their pages (Mo's rule: urgent signs live on the Health side)
     for m in cfg.get("house") or []:
+        if m in ("share", "feedback"): continue  # the Share Sehat and Give feedback cards (Mo, 11 Oct 2026)
         if m not in CONFIG_LISTS: err(fc, f"house: {m!r} needs an entry in config.lists")
         elif CONFIG_LISTS[m].get("tab") != "house": err(fc, f"house: list {m!r} has tab {CONFIG_LISTS[m].get('tab')!r}, not 'house'")
     for k, v in CONFIG_LISTS.items():
-        if v.get("tab") != "house": continue
+        if v.get("tab") != "house" or v.get("advice"): continue  # advice: Food that helps (Mo, 11 Oct 2026)
         for t in secs.get(k) or []:
             try: td = json.load(open(os.path.join(ROOT, "content/src/topics", t + ".json"), encoding="utf-8"))
             except Exception: continue

@@ -23,7 +23,8 @@ const server = http.createServer((q, r) => {
   if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { r.writeHead(404); return r.end(); }
   r.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(r);
 });
-const HOUSE = new Set(Object.entries(book.config.lists).filter(([, c]) => c.tab === 'house').flatMap(([n]) => book.sections[n] || []));
+// Home-tab pages, except Food that helps (advice: true), which gives health advice from the Home tab (Mo, 11 Oct 2026)
+const HOUSE = new Set(Object.entries(book.config.lists).filter(([, c]) => c.tab === 'house' && !c.advice).flatMap(([n]) => book.sections[n] || []));
 let pass = 0, fail = 0; const FAILS = [];
 const ok = (c, label) => { if (c) pass++; else { fail++; FAILS.push(label); } };
 

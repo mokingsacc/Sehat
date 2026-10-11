@@ -233,8 +233,8 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
       for (const id of Object.keys(b.topics || {})) if (!listed.has(id)) W(`Topic "${id}" is not in any section, so nobody can open it.`, id);
       // home screen
       if (!Array.isArray((b.config || {}).home) || !b.config.home.length) W('The home screen has no parts switched on.');
-      // Mo's rule: the Home tab's lists (config.lists ... tab "house") give no medical advice; urgent signs live on the Health side
-      for (const [name, l] of Object.entries((b.config || {}).lists || {})) if (l && l.tab === 'house') for (const tid of (b.sections || {})[name] || []) for (const bl of (((b.topics || {})[tid] || {}).blocks || [])) if (bl && (bl.type === 'alert' || bl.type === 'clinic' || bl.type === 'belief')) W(`${bl.id}: this page is on the Home tab (${name}), which gives no medical advice. Move the box to a Health page and link to it with a red link row.`, tid);
+      // Mo's rule: the Home tab's lists (config.lists ... tab "house") give no medical advice; urgent signs live on the Health side (except "advice": true, Food that helps)
+      for (const [name, l] of Object.entries((b.config || {}).lists || {})) if (l && l.tab === 'house' && !l.advice) for (const tid of (b.sections || {})[name] || []) for (const bl of (((b.topics || {})[tid] || {}).blocks || [])) if (bl && (bl.type === 'alert' || bl.type === 'clinic' || bl.type === 'belief')) W(`${bl.id}: this page is on the Home tab (${name}), which gives no medical advice. Move the box to a Health page and link to it with a red link row.`, tid);
     }
     // words on buttons and spoken interface lines
     for (const [k, L] of Object.entries(b.ui || {})) {

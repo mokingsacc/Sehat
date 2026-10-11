@@ -10,10 +10,7 @@
     "children",
     "adults",
     "checks",
-    "food-help",
-    "hospital",
-    "share",
-    "feedback"
+    "hospital"
   ],
   "_home": "The Health tab (#/home, the screen the app opens on), top to bottom; remove a name to hide it. Available: nextVaccine (a slim strip, only when a vaccine is due within 7 days or late), emergency (the big red button: who needs help, then that age's first aid), firstAid (CPR by age and every first-aid page: config.firstAid), ask (What is wrong?), children, adults (big picture buttons: config.listGroups), share (Share Sehat: config.shareCard), feedback, install, sendApp, near, disclaimer, and the name of any list in 'lists' (a big picture button that opens its page). See docs/HOME_LAYOUT.md.",
   "lists": {
@@ -56,7 +53,8 @@
       "say": "ui.foodHelp",
       "image": "food-help",
       "icon": "bowl-food",
-      "tab": "health"
+      "tab": "house",
+      "advice": true
     },
     "food": {
       "title": "food",
@@ -75,14 +73,17 @@
       "tab": "house"
     }
   },
-  "_lists": "Topic lists with their own page (#/s/<name>; the old #/<name> still works). The topics are in content/src/sections.json under the same name. title, sub = ui.text keys; say = the narrated line (ui.say); image = the topic whose picture the button and page show; icon = the icon for an empty list; tab = the bottom tab it belongs to (health or house); tools = tool rows at the top (growth, breaths, reading); near = true: a 'Nearest clinic' row at the top. Topics only in a list (not in their section's list) are not added to the children or adults lists by tools/build.py. Mo's rule: the Home tab lists (house) give no medical advice; urgent signs live on the Health side and Home pages link there.",
+  "_lists": "Topic lists with their own page (#/s/<name>; the old #/<name> still works). The topics are in content/src/sections.json under the same name. title, sub = ui.text keys; say = the narrated line (ui.say); image = the topic whose picture the button and page show; icon = the icon for an empty list; tab = the bottom tab it belongs to (health or house); tools = tool rows at the top (growth, breaths, reading); near = true: a 'Nearest clinic' row at the top; advice = true: a Home tab list whose pages may give health advice (Mo, 11 Oct 2026: Food that helps sits in the Home tab), so they keep their clinic signs and belief boxes and are search results. Topics only in a list (not in their section's list) are not added to the children or adults lists by tools/build.py. Mo's rule: the Home tab lists (house) give no medical advice; urgent signs live on the Health side and Home pages link there.",
   "house": [
+    "share",
+    "feedback",
     "safety",
     "food",
+    "food-help",
     "wellbeing",
     "kit"
   ],
-  "_house": "The Home tab (#/house: the house and everyday life), top to bottom: names of lists in 'lists'.",
+  "_house": "The Home tab (#/house: the house and everyday life), top to bottom: share (the Share Sehat card), feedback (Give feedback) and names of lists in 'lists'.",
   "firstAid": {
     "title": "cprFirstAid",
     "sub": "cprFirstAidSub",

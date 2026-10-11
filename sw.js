@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.11-1d780c';
+const VERSION = '2026.10.11-d32ddc';
 const PRECACHE = [
  "./",
  "index.html",

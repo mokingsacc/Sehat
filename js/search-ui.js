@@ -53,10 +53,10 @@ export function initFinder(ctx) {
   const finder = () => S.book.finder || {};
   const dangerSigns = () => new Set(finder().danger || []);
   // the Home tab's pages (lists with "tab": "house"): no medical advice there (Mo's rule), so never a search result,
-  // except the home health kit pages when the words are about a device
+  // except the home health kit pages when the words are about a device; lists with "advice" (Food that helps) are results
   const homeTab = () => {
     const out = new Set(), lists = (S.book.config && S.book.config.lists) || {};
-    for (const n of Object.keys(lists)) if (lists[n].tab === 'house') for (const t of (S.book.sections || {})[n] || []) out.add(t);
+    for (const n of Object.keys(lists)) if (lists[n].tab === 'house' && !lists[n].advice) for (const t of (S.book.sections || {})[n] || []) out.add(t);
     return out;
   };
   // "These pages can help", with its speaker (as the group headings in the lists)

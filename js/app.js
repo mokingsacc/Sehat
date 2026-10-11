@@ -428,6 +428,17 @@ function listBtn(name, ids) { const c = LISTS()[name]; return c && listOf(name).
 // the tab screens: no back button, the app's name on the left of the bar
 const tabTop = (ids) => top(T('appName'), { back: '', listen: ids });
 
+// Share Sehat (config.shareCard: the share screen, when this version has it); otherwise the phone's own share sheet.
+// On the Health tab and, since 11 Oct 2026 (Mo), at the top of the Home tab with Give feedback.
+function shareCard(ids) {
+  const b = S.book, c = (b.config || {}).shareCard || {}, and = typeof SH !== 'undefined' ? SH.homeSay() === c.say : !!window.FHBAndroid;
+  const say = and ? c.say : c.webSay || c.say, sub = and ? c.sub : c.webSub || c.sub;
+  const pic = picImg('img/pics/row-share.svg'); // a small scene, cropped like the hospital and first-aid rows
+  if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share pic', c.href, pic, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
+  return bigBtn('share pic', '', pic, T('share'), T('shareSub'), 'ui.share', ids, 'share');
+}
+const feedbackCard = (ids) => bigBtn('fbk pic', '#/feedback', picImg('img/pics/row-feedback.svg'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids);
+
 // Health (the start screen, #/home): config.home, top to bottom
 function screenHome() {
   const b = S.book, ids = ['ui.tab.health'], cfg = b.config || {};
@@ -452,15 +463,8 @@ function screenHome() {
     adults() { return bigBtn('sec adult', '#/adults', picImg('img/app/home-adults.svg'), T('adults'), T('adultsSub'), 'ui.adults', ids); },
     sections() { return M.children() + M.adults(); },
     // Share Sehat (config.shareCard: the share screen, when this version has it); otherwise the phone's own share sheet
-    share() {
-      if (shareShown) return ''; shareShown = true;
-      const c = cfg.shareCard || {}, and = typeof SH !== 'undefined' ? SH.homeSay() === c.say : !!window.FHBAndroid;
-      const say = and ? c.say : c.webSay || c.say, sub = and ? c.sub : c.webSub || c.sub;
-      const pic = picImg('img/pics/row-share.svg'); // a small scene, cropped like the hospital and first-aid rows
-      if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share pic', c.href, pic, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
-      return bigBtn('share pic', '', pic, T('share'), T('shareSub'), 'ui.share', ids, 'share');
-    },
-    feedback() { return bigBtn('fbk pic', '#/feedback', picImg('img/pics/row-feedback.svg'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids); },
+    share() { if (shareShown) return ''; shareShown = true; return shareCard(ids); },
+    feedback() { return feedbackCard(ids); },
     install() { return S.installEvt || (platform() === 'ios' && !isStandalone()) ? bigBtn('inst', '', ic('phone'), T('install'), T('installSub'), 'ui.install', ids, 'install') : ''; },
     sendApp() { return M.share(); }, // the older name of the same card
     growth() { ids.push('ui.growth'); return `<div class="grid2">${GR.homeTile()}</div>`; }, // growth tracker tile (js/growth.js)
@@ -472,11 +476,13 @@ function screenHome() {
   return { html, nav: 'health', healthTab: true, emCard };
 }
 
-// Home (#/house): the house and everyday life. config.house: lists from config.lists (home safety, food and garden, well-being, home kit)
+// Home (#/house): the house and everyday life. config.house: share and feedback cards, and lists from config.lists
+// (home safety, food and garden, food that helps, well-being, home kit)
 function screenHouse() {
   const ids = ['ui.tab.house', 'ui.house'];
   let html = tabTop(ids) + titleRow(T('house'), 'ui.house');
-  for (const m of (S.book.config && S.book.config.house) || ['safety', 'food', 'wellbeing', 'kit']) html += listBtn(m, ids);
+  const CARDS = { share: shareCard, feedback: feedbackCard };
+  for (const m of (S.book.config && S.book.config.house) || ['safety', 'food', 'wellbeing', 'kit']) html += CARDS[m] ? CARDS[m](ids) : listBtn(m, ids);
   track('view', { p: 'house' });
   return { html, nav: 'house' };
 }

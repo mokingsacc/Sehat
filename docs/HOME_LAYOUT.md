@@ -34,13 +34,8 @@ Top to bottom (`config.home`; remove a name to hide it):
 6. `adults`: a picture card that opens `#/adults`.
 7. `checks`: **Early signs and health checks** (the list page `#/s/checks`, 9 Oct 2026): signs to get checked early
    (adults, breast and womb, children) and the health checks to ask for at each age (women, men). Not emergency pages.
-8. `food-help`: **Food that helps** (the list page `#/s/food-help`, 11 Oct 2026): a hub page and 13 problem pages
-   (diarrhoea, cough, weak blood, pregnancy, after the birth, first foods, a sick child, belly, sugar, blood pressure,
-   eyes, iodine, bones). Each says which foods help, which beliefs are not proven, and which habits harm, in `belief`
-   boxes. It is on the Health tab because it is health advice (Mo's rule); each Home-tab food page has one link to it.
-9. `hospital`: **Going to the clinic or hospital** (the list page `#/s/hospital`; its first row is **Nearest clinic**).
-10. `share`: **Share Sehat** (`config.shareCard`). It opens `#/share` with the Share Sehat screen's own words (`shareApp`, `shareAppSub` or `shareWebSub`, `ui.share-app` or `ui.share-web`) once this version of the app has them; until then it opens the phone's share sheet with the older words.
-11. `feedback`: **Give feedback** (`#/feedback`).
+8. `hospital`: **Going to the clinic or hospital** (the list page `#/s/hospital`; its first row is **Nearest clinic**).
+Share Sehat and Give feedback are not on the Health tab: Mo moved them to the top of the Home tab on 11 Oct 2026 (`share`, `feedback` still work in `config.home`).
 
 Also available for `config.home`: `install`, `sendApp`, `near`, `disclaimer`, `sections` (children and adults together) and the name of any list in `config.lists`.
 
@@ -61,10 +56,12 @@ A title with a big speaker, then groups in order (`config.listGroups`). Each gro
 
 ## Home (`#/house`)
 
-A title with its speaker, then one big picture row per list (`config.house`): **Home safety**, **Food and garden**, **Well-being**, **Home health kit**. Each opens its list page.
+A title with its speaker, then (`config.house`, top to bottom) **Share Sehat** and **Give feedback** (Mo, 11 Oct 2026; the Share Sehat card opens `#/share` with the Share Sehat screen's own words, or the phone's share sheet on an older version; Give feedback opens `#/feedback`), then one big picture row per list: **Home safety**, **Food and garden**, **Food that helps**, **Well-being**, **Home health kit**. Each opens its list page.
+
+**Food that helps** (`#/s/food-help`, Mo moved it here on 11 Oct 2026): a hub page and 13 problem pages (diarrhoea, cough, weak blood, pregnancy, after the birth, first foods, a sick child, belly, sugar, blood pressure, eyes, iodine, bones). Each says which foods help, which beliefs are not proven, and which habits harm, in `belief` boxes. Its list has `"advice": true`: it is the one Home list whose pages give health advice, so they keep their clinic signs and belief boxes and show up in search.
 
 **Mo's rule: no medical advice on the Home side.** Medical advice is reached only through Health, where people describe symptoms.
-- Home pages have no danger-sign boxes (`alert`) and no "at the clinic" boxes (`clinic`). `tools/validate.py` refuses them on any topic of a list with `"tab": "house"`, and the dashboard editor warns.
+- Home pages have no danger-sign boxes (`alert`) and no "at the clinic" boxes (`clinic`). `tools/validate.py` refuses them on any topic of a list with `"tab": "house"` (except `"advice": true`, Food that helps), and the dashboard editor warns.
 - Where a page needs a way out in an emergency, it has a **red link row** (`"urgent": true` on a link block) to the Health page: for example "Someone feels ill from fumes?" opens the Emergency screen; "Burned by fire or gas?" opens Burns.
 - Well-being pages are lifestyle tips only; each ends with "If you feel unwell, go to Health and tap What is wrong?" (a link to `#/ask`).
 - Home health kit pages keep what to buy and how to use the device. Right after "how to use", a link row **"What does my reading mean?"** opens that device's own Health page (`reading-bp`, `reading-temp`, `reading-sugar`, `reading-spo2`, `reading-muac`), which has what the numbers mean, when to go, and the checker opened with that device chosen (`#/tool/reading/bp` and so on).
