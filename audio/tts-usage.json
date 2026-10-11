@@ -609,5 +609,21 @@
   "input_tokens": 29209,
   "audio_tokens": 81030,
   "estimated_usd": 0.25
+ },
+ {
+  "when": "2026-10-11 13:00",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/jw1x76ylwxwf7m34m518vqkwol4tpu49u6hk",
+  "made": 164,
+  "input_tokens": 16227,
+  "audio_tokens": 43523,
+  "estimated_usd": 0.13
+ },
+ {
+  "when": "2026-10-11 13:00",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "copied": 32,
+  "check": [],
+  "note": "end of run; each batch above has its own tokens and cost"
  }
 ]
