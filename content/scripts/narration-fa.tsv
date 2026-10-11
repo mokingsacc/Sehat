@@ -1,6 +1,6 @@
 id	text	english
 ui.welcome	به صحت خوش آمدید، کتاب صحت خانوادۀ شما. اگر دری می‌خواهید، دکمۀ دری را بزنید.	Welcome to Sehat, your family health book. Tap your language.
-ui.home	این کتاب به شما کمک می‌کند از صحت خانوادۀ خود مراقبت کنید. اطفال یا بزرگسالان را انتخاب کنید. هر جا بلندگو را دیدید، بزنید تا بشنوید.	This book helps you look after your family's health. Choose children or adults. Wherever you see a speaker, tap it to listen.
+ui.home	این کتاب به شما کمک می‌کند از صحت خانوادۀ خود مراقبت کنید. هر جا بلندگو را دیدید، بزنید تا بشنوید.	This book helps you look after your family's health. Wherever you see a speaker, tap it to listen.
 ui.children	بخش اطفال. روی هر موضوع بزنید تا باز شود. بلندگو نام موضوع را می‌خواند.	Children's section. Tap a topic to open it. The speaker reads its name.
 ui.adults	بخش بزرگسالان: صحت زنان، و علایم خطر و امراض عام برای همه.	Adults' section: women's health, and danger signs and common illnesses for everyone.
 ui.family	اینجا کارت واکسین اطفال خود را نگه دارید. همه چیز فقط در همین گوشی می‌ماند.	Keep your children's vaccine card here. Everything stays on this phone only.
@@ -176,6 +176,8 @@ ui.foodHelp	غذایی که کمک می‌کند: کدام غذا واقعاً �
 ui.beliefHelps	ثابت شده که کمک می‌کند	Proven to help
 ui.beliefUnproven	ثابت نشده، اما ضرر ندارد	Not proven, but no harm
 ui.beliefHarm	این‌ها ضرر می‌رساند	This can harm
+ui.rd.v.bp-very-high-2	دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است. همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.	180 over 120 or more, two times. Go to hospital now, day or night. Take your medicines with you.
+ui.rd.v.spo2-lowish-2	دو بار ۹۴ یا کمتر است. امروز به کلینیک بروید. اگر نفس کشیدن سخت شد یا لب‌ها کبود شد، همین حالا به شفاخانه بروید، شب باشد یا روز.	94 or less, two times. Go to the clinic today. If breathing becomes hard or the lips turn blue, go to hospital now, day or night.
 ui.ask.who	مریض کیست؟ یکی را بزنید.	Who is sick? Tap one.
 ui.ask.who.after	مادر بعد از ولادت	Mother after the birth
 ui.ask.who.anyone	هر کس	Anyone
@@ -197,9 +199,9 @@ ui.ask.vaccine-red	بعد از واکسین، اگر طفل یکی از این �
 ui.ask.vaccine-amber	بعد از واکسین، اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	After a vaccine, go to the clinic today if the child:
 ui.ask.vaccine-swell	جای پیچکاری پندیده و بزرگ‌تر، سرخ و گرم می‌شود، یا چرک دارد	has a swelling where the injection was that grows, gets red and hot, or has pus
 ui.ask.hernia	غدهٔ دردناک در کشالهٔ ران یا شکم، همراه با استفراغ	a painful lump in the groin or belly, with vomiting
-ui.ask.notbreathing.lead	همین حالا کاری بکنید. کمک بخواهید و کسی را برای آوردن موتر بفرستید. اگر درست نفس نمی‌کشد، بزنید که کیست و فشار دادن سینه را شروع کنید.	Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes.
+ui.ask.notbreathing.lead	همین حالا کاری بکنید. کمک بخواهید و کسی را برای آوردن موتر بفرستید. اگر درست نفس نمی‌کشد، بزنید که کیست و فشار دادن سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.	Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes; give a child or baby 5 breaths first.
 ui.ask.fever.lead	اول علایم خطر را برای عمر مریض ببینید. طفل کمتر از ۲ ماه که هر قدر تب دارد، همین حالا به شفاخانه برود.	First look at the danger signs for the age of the sick person. A baby under 2 months with any fever must go to hospital now.
-ui.ask.cough.lead	اول علایم خطر را برای عمر مریض ببینید. نفس مشکل یا تیز همین امروز کمک لازم دارد.	First look at the danger signs for the age of the sick person. Hard or fast breathing needs help today.
+ui.ask.cough.lead	اول علایم خطر را برای عمر مریض ببینید. نفس مشکل، که پایین سینه به داخل کشیده شود یا صدا بدهد: همین حالا شفاخانه. فقط نفس تیز: امروز کلینیک.	First look at the danger signs for the age of the sick person. Hard breathing, with the chest pulling in or a noise: hospital now. Fast breathing alone: clinic today.
 ui.ask.breathing.lead	نفس تنگی می‌تواند زود جان بگیرد. علایم خطر را برای عمر مریض ببینید، بعد نفس‌ها را بشمارید.	Hard breathing can kill fast. Look at the danger signs for the age of the sick person, then count the breaths.
 ui.ask.diarrhoea.lead	اول علایم خطر را ببینید. بعد از هر اسهال او آر اس بدهید و غذا دادن را ادامه دهید.	First look at the danger signs. Then give ORS after every loose stool, and keep feeding.
 ui.ask.vomiting.lead	اول علایم خطر را ببینید. بعد کم کم و بار بار جرعه‌های آب یا او آر اس بدهید.	First look at the danger signs. Then give small sips of water or ORS, often.
@@ -489,7 +491,7 @@ ui.gr.nolength	قد را هم بنویسید، تا ببینید طفل برای
 ui.gr.over5	این جدول‌ها برای اطفال کمتر از ۵ سال است. برای طفل بزرگ‌تر، از کلینیک بپرسید.	These charts are for children under 5 years. For an older child, ask the clinic.
 ui.gr.baddate	این تاریخ پیش از تولد طفل است. لطفاً تاریخ را ببینید.	This date is before the child was born. Please check the date.
 ui.gr.m.lead	می‌توانید در خانه اندازه کنید. هر بار به یک شکل اندازه کنید و عدد را فوراً بنویسید.	You can measure at home. Measure the same way each time, and write the number down straight away.
-ui.gr.m.hang	وزن با ترازوی آویزان: طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید.	Weight with a hanging scale: put the baby in the sling with light clothes. Wait until the baby is still, then read the number.
+ui.gr.m.hang	وزن با ترازوی آویزان: خریطهٔ خالی را آویزان کنید و ترازو را روی ۰ بیاورید. بعد طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید.	Weight with a hanging scale: hang the empty sling and set the scale to 0. Then put the baby in the sling with light clothes. Wait until the baby is still, then read the number.
 ui.gr.m.hold	وزن با ترازوی عادی: اول خود را وزن کنید، بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.	Weight with a bathroom scale: weigh yourself, then weigh yourself holding the baby. Take the first number from the second: that is the baby's weight.
 ui.gr.m.length1	قد، کمتر از ۲ سال: دو نفر لازم است. طفل را روی زمین هموار به پشت بخوابانید، طوری که سرش به دیوار برسد. یک نفر سر طفل را آرام نگه دارد.	Length, under 2 years: two people are needed. Lay the baby on its back on a flat floor, with the top of the head against a wall. One person holds the head still.
 ui.gr.m.length2	نفر دوم پاهای طفل را آرام راست کند و یک کتاب را صاف به کف پاهایش بگذارد. جای کتاب را روی زمین نشانی کنید و از دیوار تا نشانی را با متر اندازه کنید.	The second person gently straightens the legs and holds a book flat against the soles of the feet. Mark the floor at the book, and measure from the wall to the mark.
@@ -621,7 +623,7 @@ vaccines.missed	اگر واکسینی مانده است، باز هم بروید
 vaccines.campaign	قطرهٔ پولیو، و گاهی ویتامین ای یا واکسین سرخکان، در کمپاین‌ها هم داده می‌شود. طفل را ببرید، و باز هم به هر نوبت کلینیک بروید.	Polio drops, and sometimes vitamin A or measles vaccine, are also given in campaigns. Take your child, and still go to every clinic visit.
 vaccines.mild-illness	طفلی که زکام یا اسهال خفیف دارد، باز هم می‌تواند واکسین شود.	A child with a mild cold or mild diarrhoea can still have vaccines.
 vaccines.normal	تب خفیف یا درد پا بعد از واکسین عادی است و در یکی دو روز خوب می‌شود.	A mild fever or a sore leg after a vaccine is normal, and gets better in a day or two.
-vaccines.td	واکسین تیتانوس و خناق برای زنان هر زن ۱۵ تا ۴۹ ساله و هر زن حامله تا ۵ نوبت این واکسین را لازم دارد؛ کلینیک کارتش را می‌بیند که چند نوبت دیگر لازم است. این واکسین مادر و نوزاد را از تیتانوس، و مادر را از خناق محافظت می‌کند.	Tetanus and diphtheria vaccine for women (Td) Every woman aged 15 to 49, and every pregnant woman, needs up to 5 doses; the clinic checks her card to see how many she still needs. It protects her and her newborn baby from tetanus, and her from diphtheria.
+vaccines.td	واکسین تیتانوس و خناق برای زنان. هر زن ۱۵ تا ۴۹ ساله و هر زن حامله تا ۵ نوبت این واکسین را لازم دارد؛ کلینیک کارتش را می‌بیند که چند نوبت دیگر لازم است. این واکسین مادر و نوزاد را از تیتانوس، و مادر را از خناق محافظت می‌کند.	Tetanus and diphtheria vaccine for women (Td). Every woman aged 15 to 49, and every pregnant woman, needs up to 5 doses; the clinic checks her card to see how many she still needs. It protects her and her newborn baby from tetanus, and her from diphtheria.
 anim.vaccines.title	چرا واکسین مهم است	Why vaccines matter
 anim.vaccines.s1	میکروب‌ها آن‌قدر کوچک هستند که دیده نمی‌شوند. بعضی میکروب‌ها سبب مریضی‌های خطرناک مانند سرخکان، پولیو و سیاه‌سرفه می‌شوند.	Germs are too small to see. Some germs cause dangerous illnesses, like measles, polio and whooping cough.
 anim.vaccines.s2	واکسین برای بدن مانند تمرین است. واکسین شکل ضعیف یا بی‌ضرر میکروب را به بدن نشان می‌دهد، تا بدن یاد بگیرد با آن مبارزه کند.	A vaccine is like practice for the body. It shows the body a weak or harmless form of a germ, so the body learns how to fight it.
@@ -660,7 +662,7 @@ danger-child.soon.fever	بیشتر از ۲ روز است که تب دارد	has 
 danger-child.soon.blood	در مدفوعش خون دیده می‌شود	has blood in the stool
 danger-child.soon.drinking	کم می‌نوشد یا کم می‌خورد	is drinking or eating poorly
 danger-child.look	ببینید، بشنوید و لمس کنید. در یک جای گرم و روشن، کالای طفل را باز کنید و نفس، پوست، پیشاب و حال طفل را ببینید.	Look, listen and feel. In a warm, bright place, open the child's clothes and check the breathing, the skin, the wee and how the child seems.
-danger-child.look-breath	سینه را ببینید و نفس‌ها را بشمارید. وقتی طفل آرام است، نفس‌هایش را یک دقیقه بشمارید. نفس تیز است اگر: کمتر از ۲ ماه، ۶۰ یا بیشتر؛ ۲ تا ۱۲ ماه، ۵۰ یا بیشتر؛ ۱ تا ۵ سال، ۴۰ یا بیشتر.	Watch the chest and count. Count breaths for one minute while the child is calm. Fast is: under 2 months 60 or more; 2 to 12 months 50 or more; 1 to 5 years 40 or more.
+danger-child.look-breath	سینه را ببینید و نفس‌ها را بشمارید. وقتی طفل آرام است، نفس‌هایش را یک دقیقه بشمارید. نفس تیز است اگر: کمتر از ۲ ماه، ۶۰ یا بیشتر؛ ۲ تا ۱۱ ماه، ۵۰ یا بیشتر؛ ۱ تا ۵ سال، ۴۰ یا بیشتر.	Watch the chest and count. Count breaths for one minute while the child is calm. Fast is: under 2 months 60 or more; 2 to 11 months 50 or more; 1 to 5 years 40 or more.
 danger-child.counter	نفس‌ها را با گوشی بشمارید. گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 danger-child.breath	نفس: اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	Breathing: go to hospital now, day or night, if the child:
 danger-child.breath.grunt	با هر نفس ناله می‌کند	grunts or moans with each breath
@@ -734,11 +736,11 @@ anim.cpr-baby.label	شیرخوار (کمتر از ۱ سال)	Baby (under 1 year)
 anim.cpr-child.label	طفل (از ۱ سال تا بلوغ)	Child (1 year to puberty)
 anim.cpr-adult.label	بزرگسال	Adult
 anim.cpr-newborn.title	نوزادی که بعد از تولد نفس نمی‌کشد	A newborn who is not breathing
-anim.cpr-newborn.s1	همین که طفل به دنیا آمد، تمام بدنش را با یک تکهٔ پاک و خشک خوب خشک کنید و پشتش را آهسته مالش دهید. بیشتر نوزادها بعد از این گریه می‌کنند و نفس می‌کشند.	As soon as the baby is born, dry the whole body well with a clean, dry cloth, and rub the back gently. Most babies then cry and breathe.
+anim.cpr-newborn.s1	همین که طفل به دنیا آمد، تمام بدنش را با یک تکهٔ پاک و خشک خوب خشک کنید و پشتش را محکم مالش دهید. بیشتر نوزادها بعد از این گریه می‌کنند و نفس می‌کشند.	As soon as the baby is born, dry the whole body well with a clean, dry cloth, and rub the back firmly. Most babies then cry and breathe.
 anim.cpr-newborn.s2	اگر نوزاد گریه نمی‌کند یا نفس نمی‌کشد، بلند کمک بخواهید. یک نفر را بفرستید که برای رفتن به شفاخانه موتر بیاورد. نوزاد را گرم نگه دارید.	If the baby is not crying or breathing, shout for help. Send someone to bring a car to go to hospital. Keep the baby warm.
 anim.cpr-newborn.s3	نوزاد را به پشت بخوابانید و سرش را کمی به عقب ببرید. اگر دهان یا بینی‌اش پر از مایع است، آن را با یک تکهٔ پاک آهسته پاک کنید.	Lay the baby on its back with the head tilted back a little. If the mouth or nose is full of fluid, gently wipe it with a clean cloth.
 anim.cpr-newborn.s4	یک بار دیگر پشت یا کف پاهایش را مالش دهید. به سینه‌اش ببینید: آیا نفس می‌کشد؟	Rub the back or the soles of the feet once more. Look at the chest: is the baby breathing?
-anim.cpr-newborn.s5	اگر نه، دهان خود را روی دهان و بینی نوزاد بگذارید و پف‌های کوچک و آهسته بدهید، تقریباً هر ۱ تا ۲ ثانیه یک بار. ببینید که سینه با هر پف بالا بیاید.	If not, cover the baby's mouth and nose with your mouth and give small, gentle puffs, about one every 1 to 2 seconds. Watch the chest rise with each puff.
+anim.cpr-newborn.s5	اگر نه، اول ۵ بار آهسته نفس بدهید: دهان خود را روی دهان و بینی نوزاد بگذارید و آهسته پف کنید، و ببینید که سینه بالا بیاید. بعد هر ۱ تا ۲ ثانیه یک پف بدهید و ادامه دهید.	If not, give 5 gentle breaths first: cover the baby's mouth and nose with your mouth and puff gently, watching the chest rise. Then keep giving one puff every 1 to 2 seconds.
 anim.cpr-newborn.s6	اگر تنها هستید، اول بلند کمک بخواهید. ۱ دقیقه پف کنید. بعد نوزاد را گرم بپیچانید و با خود ببرید تا کمک پیدا کنید.	If you are alone, first shout loudly for help. Give puffs for 1 minute. Then wrap the baby warmly and carry it with you to get help.
 anim.cpr-newborn.s7	تا وقتی که نوزاد نفس بکشد یا گریه کند، یا کمک برسد، پف کردن را ادامه دهید. بعد نوزاد را برهنه روی سینهٔ مادر بگذارید، رویش را بپوشانید و گرم نگه دارید و به شفاخانه بروید.	Keep giving puffs until the baby breathes or cries, or help arrives. Then lay the baby skin to skin on the mother's chest, covered and warm, and go to hospital.
 cpr-baby.title	شیرخواری که نفس نمی‌کشد	Baby not breathing (under 1)
@@ -757,7 +759,7 @@ cpr-baby.urgent.colour	کبود یا خاکستری شد، یا بدنش سست 
 cpr-baby.dont	این کارها را نکنید:	Do not:
 cpr-baby.dont.shake	شیرخوار را تکان ندهید	shake the baby
 cpr-baby.dont.upside-down	شیرخوار را از پاها سرچپه آویزان نکنید	hold the baby upside down by the feet
-cpr-baby.alone	اگر تنها هستید، اول ۱ دقیقه این کار را بکنید، بعد شیرخوار را با خود بردارید و برای کمک بروید.	If you are alone, do this for 1 minute first, then carry the baby with you to get help.
+cpr-baby.alone	اگر تنها هستید، فوراً بلند کمک بخواهید، ۱ دقیقه نفس بدهید و سینه را فشار دهید، بعد شیرخوار را با خود بردارید و برای کمک بروید.	If you are alone, shout for help at once, give breaths and pushes for 1 minute, then carry the baby with you to get help.
 cpr-baby.hospital	در شفاخانه به او اکسیجن می‌دهند، قلبش را معاینه می‌کنند و علت را پیدا می‌کنند.	At hospital they give oxygen, check the heart and find out what caused it.
 anim.cpr-baby.title	شیرخواری که نفس نمی‌کشد	A baby who is not breathing
 anim.cpr-baby.s1	به پای شیرخوار آهسته بزنید و بلند صدا کنید. هرگز شیرخوار را تکان ندهید.	Gently tap the baby's foot and call loudly. Never shake a baby.
@@ -780,14 +782,14 @@ cpr-child.urgent	حتی اگر طفل خوب معلوم شود، همین حال
 cpr-child.urgent.needed-help	نفس دادن یا فشار سینه لازم داشت	needed breaths or chest pushes
 cpr-child.urgent.stopped	حتی برای مدت کوتاه نفسش بند شد	stopped breathing, even for a short time
 cpr-child.urgent.sleepy	بعد از آن خواب‌آلود یا گیج است	are sleepy or confused afterwards
-cpr-child.alone	اگر تنها هستید، اول ۱ دقیقه این کار را بکنید، بعد برای کمک بروید یا بلند صدا کنید.	If you are alone, do this for 1 minute first, then go for help or shout loudly.
+cpr-child.alone	اگر تنها هستید، فوراً بلند کمک بخواهید، ۱ دقیقه نفس بدهید و سینه را فشار دهید، بعد برای آوردن کمک بروید.	If you are alone, shout for help at once, give breaths and pushes for 1 minute, then go for help.
 cpr-child.hospital	در شفاخانه به او اکسیجن می‌دهند، قلبش را معاینه می‌کنند و علت را پیدا می‌کنند.	At hospital they give oxygen, check the heart and find out what caused it.
 anim.cpr-child.title	طفلی که نفس نمی‌کشد	A child who is not breathing
 anim.cpr-child.s1	مطمئن شوید که خطر نیست. به طفل آهسته بزنید و نامش را بلند صدا کنید.	Make sure it is safe. Tap the child and call their name loudly.
 anim.cpr-child.s2	اگر طفل جواب نداد، بلند کمک بخواهید. یک نفر را بفرستید که برای رفتن به شفاخانه موتر بیاورد.	If the child does not answer, shout for help. Send someone to bring a car to go to hospital.
 anim.cpr-child.s3	سرش را آهسته به عقب ببرید و زنخش را بالا کنید. تا ۱۰ ثانیه سینه‌اش را ببینید. اگر طفل عادی نفس نمی‌کشد، همین حالا شروع کنید.	Gently tilt the head back and lift the chin. Look at the chest for up to 10 seconds. If the child is not breathing normally, start now.
 anim.cpr-child.s4	۵ نفس بدهید: بینی‌اش را بگیرید، دهان خود را روی دهان طفل بگذارید و آهسته پف کنید تا سینه‌اش بالا بیاید.	Give 5 breaths: pinch the nose, cover the child's mouth with your mouth, and blow gently until the chest rises.
-anim.cpr-child.s5	با یک دست ۳۰ بار وسط سینه را فشار دهید: حدود ۵ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه.	Push on the centre of the chest 30 times with one hand: about 5 centimetres deep, 100 to 120 times a minute.
+anim.cpr-child.s5	با یک دست ۳۰ بار روی نیمهٔ پایین استخوان سینه فشار دهید: حدود ۵ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه.	Push on the lower half of the breastbone 30 times with one hand: about 5 centimetres deep, 100 to 120 times a minute.
 anim.cpr-child.s6	بعد ۲ نفس بدهید و باز ۳۰ بار فشار دهید. ادامه دهید تا طفل عادی نفس بکشد یا کمک برسد.	Then give 2 breaths and 30 pushes again. Keep going until the child breathes normally or help arrives.
 anim.cpr-child.s7	اگر تنها هستید، اول بلند کمک بخواهید. بعد ۱ دقیقه نفس بدهید و سینه را فشار دهید، و بعد از آن برای آوردن کمک بروید.	If you are alone, first shout loudly for help. Then give breaths and pushes for 1 minute, and only then go to get help.
 choking-baby.title	بند شدن گلوی شیرخوار	Choking baby (under 1)
@@ -859,7 +861,8 @@ drowning.rescue	بدون رفتن در آب نجات دهید. خودتان در
 drowning.check	نفسش را ببینید. او را به پشت روی زمین بخوابانید. سرش را به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.	Check breathing. Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for up to 10 seconds.
 drowning.breaths	نفس نمی‌کشد: اول ۵ بار نفس بدهید. ۵ بار در دهانش پف کنید و ببینید که سینه‌اش بالا می‌آید. برای شیرخوار، دهان و بینی را بپوشانید. برای بزرگسال هم همین‌طور.	Not breathing: 5 breaths first. Give 5 breaths into the mouth, watching the chest rise. For a baby, cover the mouth and nose. Do the same for adults.
 drowning.cpr	بعد ۳۰ فشار، ۲ نفس. فشار سینه را شروع کنید: ۳۰ فشار، بعد ۲ نفس، بار بار. ادامه دهید تا نفس بکشد یا کمک برسد.	Then 30 pushes, 2 breaths. Start pushing on the chest: 30 pushes, then 2 breaths, again and again. Keep going until they breathe or help arrives.
-drowning.warm	گرم نگه دارید. اگر آب یا استفراغ از دهانش بیرون شود، او را به پهلو بچرخانید، دهانش را پاک کنید، بعد دوباره به پشت بچرخانید و ادامه دهید. کوشش نکنید که آب را بیرون کنید. لباس تر را بکشید و او را در کمپل خشک بپیچانید.	Keep them warm. If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out. Take off wet clothes and wrap them in dry blankets.
+drowning.cpr-link	نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید. صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.	Not breathing? Choose the age for CPR. Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step.
+drowning.warm	گرم نگه دارید. اگر آب یا استفراغ از دهانش بیرون شود، او را به پهلو بچرخانید، دهانش را پاک کنید، بعد دوباره به پشت بچرخانید و نفس دادن و فشار سینه را ادامه دهید. کوشش نکنید که آب را بیرون کنید. لباس تر را بکشید و او را در کمپل خشک بپیچانید.	Keep them warm. If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and go on with the breaths and pushes. Do not try to get water out. Take off wet clothes and wrap them in dry blankets.
 drowning.urgent	بعد از هر غرق شدن، همین حالا به شفاخانه بروید، شب باشد یا روز. خصوصاً اگر:	After any drowning, go to hospital now, day or night. Most of all if they:
 drowning.urgent.needed-help	نفس دادن یا فشار سینه لازم داشت	needed breaths or chest pushes
 drowning.urgent.cough	سرفه می‌کند، یا تیز یا به سختی نفس می‌کشد	cough, or breathe fast or with difficulty
@@ -903,7 +906,8 @@ poisoning.no-vomit	استفراغ نکنانید. هرگز کاری نکنید �
 poisoning.spray	دوای زراعتی روی پوست. شخص را به هوای تازه ببرید. لباسش را بکشید و پوست و موی او را با صابون و آب زیاد بشویید. دست خود را محافظت کنید.	Farm spray on the skin. Move the person into fresh air. Take off their clothes and wash skin and hair with lots of soap and water. Protect your own hands.
 poisoning.mouth	دهان را بشویید. اگر بیدار است، دهانش را با آب بشوید و آب را بیرون بیندازد. چیز دیگری برای خوردن یا نوشیدن ندهید، مگر کارمند صحی بگوید.	Rinse the mouth. If they are awake, let them rinse the mouth with water and spit it out. Give nothing else to eat or drink unless a health worker says so.
 poisoning.bottle	بوتل را به شفاخانه ببرید. همین حالا به شفاخانه بروید، شب باشد یا روز. بوتل، پاکت یا تابلیت را با خود ببرید تا داکتر بداند که چه بوده است.	Take the bottle to hospital. Go to hospital now, day or night. Take the bottle, packet or tablets with you, so the doctor knows what it was.
-poisoning.side	اگر خواب‌آلود است، به پهلو. اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید.	If drowsy, lay them on their side. If they are drowsy, lay them on their side. If breathing stops, start chest pushes.
+poisoning.side	اگر خواب‌آلود است، به پهلو. اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.	If drowsy, lay them on their side. If they are drowsy, lay them on their side. If breathing stops, start chest pushes; give a child or baby 5 breaths first.
+poisoning.cpr-link	نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید. صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.	Not breathing? Choose the age for CPR. Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step.
 poisoning.later	زهر موش و دوا: حتی اگر خوب است، بروید. بعضی زهرهای موش و دواها، مانند تابلیت آهن، بعد از چند ساعت یا چند روز ضرر می‌رسانند. حتی اگر شخص خوب معلوم شود، به شفاخانه بروید.	Rat poison, medicines: go even if well. Some rat poisons and medicines, like iron tablets, do harm only after hours or days. Go to hospital even if the person seems well.
 poisoning.urgent	بعد از هر مسمومیت همین حالا به شفاخانه بروید، شب باشد یا روز. زودتر بروید اگر:	After any poisoning, go to hospital now, day or night. Hurry if they:
 poisoning.urgent.kerosene	بعد از تیل خاک سرفه می‌کند، خفه می‌شود یا تیز نفس می‌کشد	cough, choke or breathe fast after kerosene
@@ -992,7 +996,7 @@ breastfeeding.lead	شیر مادر بهترین غذا و نوشیدنی برا�
 breastfeeding.first-hour	در ساعت اول شروع کنید. طفل را در ساعت اول بعد از ولادت به سینه بگذارید. شیر زرد اول مثل اولین واکسین طفل است؛ همه‌اش را بدهید.	Start in the first hour. Put the baby to the breast within one hour of birth. The first yellow milk is like the baby's first vaccine; give all of it.
 breastfeeding.only	تا ۶ ماه فقط شیر مادر. آب، چای یا هیچ غذای دیگر ندهید. شیر مادر همهٔ آبی را که طفل لازم دارد، دارد، حتی در گرمی.	Only breast milk for 6 months. Give no water, tea or any other food or drink. Breast milk has all the water the baby needs, even in hot weather.
 breastfeeding.often	شب و روز شیر بدهید. در شبانه‌روز ۸ تا ۱۲ بار، هر وقت طفل خواست، شیر بدهید. هر چه طفل بیشتر شیر بخورد، شیر بیشتر می‌آید.	Feed day and night. Breastfeed 8 to 12 times in a day and night, whenever the baby wants. The more the baby feeds, the more milk comes.
-breastfeeding.attach	طفل را درست به سینه بگذارید. تمام بدن طفل را نزدیک و رو به سینه بگیرید. دهانش کاملاً باز باشد و بیشتر قسمت تیرهٔ دور نوک سینه را بگیرد.	Help the baby attach well. Hold the baby's whole body close, facing the breast. The mouth opens wide and takes in most of the dark skin around the nipple.
+breastfeeding.attach	طفل را درست به سینه بگذارید. تمام بدن طفل را نزدیک و رو به سینه بگیرید. دهانش کاملاً باز باشد و بیشتر قسمت تیرهٔ دور نوک سینه را بگیرد. زنخش به سینه بچسپد و لب پایینش به بیرون برگردد.	Help the baby attach well. Hold the baby's whole body close, facing the breast. The mouth opens wide and takes in most of the dark skin around the nipple. The chin touches the breast and the lower lip turns out.
 breastfeeding.food	از ۶ ماهگی غذای نرم هم بدهید. لیتی یا شولهٔ غلیظ، ترکاری پخته و کوبیده، تخم مرغ، دال و گوشت نرم بدهید. شیر مادر را تا ۲ سالگی یا بیشتر ادامه دهید.	From 6 months, add soft food. Give thick porridge, mashed cooked vegetables, egg, lentils and soft meat. Keep breastfeeding to 2 years or more.
 breastfeeding.meals	روزانه چند بار غذا. از ۶ تا ۸ ماهگی، روزی ۲ تا ۳ بار غذا بدهید. از ۹ ماهگی، روزی ۳ تا ۴ بار غذا و ۱ تا ۲ بار خوراک سبک بدهید.	How many meals a day. From 6 to 8 months, give 2 to 3 meals a day. From 9 months, give 3 to 4 meals and 1 to 2 snacks a day.
 breastfeeding.clean	دست و ظرف پاک. پیش از پختن غذا و غذا دادن، دست‌ها را با صابون بشویید. از پیاله و قاشق پاک استفاده کنید.	Clean hands and dishes. Wash your hands with soap before cooking and feeding. Use a clean cup and spoon.
@@ -1094,7 +1098,7 @@ cough.feed	غذا و مایعات را ادامه دهید. بیشتر شیر ب
 cough.soothe	گلو و بینی را آرام کنید. نوشیدنی گرم بدهید؛ عسل فقط برای اطفال بالای ۱ سال. بینی بسته را با تکهٔ نرم و تر آهسته پاک کنید.	Soothe the throat, clear the nose. Give warm drinks; honey only for children over 1 year. Clean a blocked nose gently with a soft, wet cloth.
 cough.smoke	طفل را از دود دور نگه دارید. اطفال را از بخاری و دود آشپزی دور نگه دارید. در داخل خانه سگرت نکشید.	Keep children away from smoke. Keep children away from the stove and cooking smoke. Do not smoke inside the house.
 cough.watch	نفس طفل را ببینید. وقتی طفل آرام است، یک دقیقهٔ کامل بشمارید که چند بار نفس می‌کشد. ببینید پایین سینه به داخل کشیده می‌شود یا نه.	Watch the breathing. When the child is calm, count the breaths for one full minute. Look to see if the lower chest pulls in.
-cough.fast-breathing	نفس تیز یعنی: زیر ۲ ماه، ۶۰ بار یا بیشتر در یک دقیقه؛ از ۲ تا ۱۲ ماه، ۵۰ بار یا بیشتر؛ از ۱ تا ۵ سال، ۴۰ بار یا بیشتر.	Fast breathing is: under 2 months, 60 or more breaths a minute; 2 to 12 months, 50 or more; 1 to 5 years, 40 or more.
+cough.fast-breathing	نفس تیز یعنی: زیر ۲ ماه، ۶۰ بار یا بیشتر در یک دقیقه؛ از ۲ تا ۱۱ ماه، ۵۰ بار یا بیشتر؛ از ۱ تا ۵ سال، ۴۰ بار یا بیشتر.	Fast breathing is: under 2 months, 60 or more breaths a minute; 2 to 11 months, 50 or more; 1 to 5 years, 40 or more.
 cough.counter	نفس‌ها را با گوشی بشمارید. گوشی یک دقیقه را حساب می‌کند و شما با هر نفس دکمه را می‌زنید. بعد می‌گوید که نفس تیز است یا نه.	Count breaths with the phone. The phone times one minute while you tap at each breath. Then it tells you if the breathing is fast.
 cough.vaccines	واکسین از سینه‌بغل محافظت می‌کند. واکسین‌های سینه‌بغل، سیاه‌سرفه و سرخکان، شش‌ها را محافظت می‌کنند. همهٔ واکسین‌های طفل را تکمیل کنید.	Vaccines protect against pneumonia. Vaccines against pneumonia, whooping cough and measles protect the lungs. Make sure your child has all their vaccines.
 cough.clinic	در کلینیک: شمردن نفس و انتی‌بیوتیک. کارمند صحی نفس‌ها را می‌شمارد و به سینه نگاه می‌کند. برای سینه‌بغل شربت یا تابلیت انتی‌بیوتیک می‌دهد، معمولاً اموکسی‌سیلین، برای ۵ روز. زکام انتی‌بیوتیک ضرورت ندارد.	At the clinic: breath count and antibiotics. The health worker counts the breaths and looks at the chest. For pneumonia they give an antibiotic syrup or tablets, usually amoxicillin, for 5 days. A cold needs no antibiotic.
@@ -1108,7 +1112,7 @@ cough.urgent.sleepy	خیلی خواب‌آلود است و به سختی بید�
 cough.urgent.convulsion	تشنج کرده یا حالا تشنج دارد	has had convulsions (fits), or has them now
 cough.soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 cough.soon.fast	تیز تیز نفس می‌کشد، اما هیچ یک از علایم رفتن به شفاخانه را ندارد	breathes fast, but has none of the hospital signs
-cough.soon.long	بیشتر از ۲ هفته سرفه دارد؛ باید برای توبرکلوز معاینه شود	has coughed for more than 2 weeks; needs a TB check
+cough.soon.long	۲ هفته یا بیشتر سرفه دارد؛ باید برای توبرکلوز معاینه شود	has coughed for 2 weeks or more; needs a TB check
 cough.soon.wheeze	وقت بیرون دادن نفس، صدای سوت می‌دهد	makes a whistling sound when breathing out
 cough.soon.fever	بیشتر از ۲ روز است که تب دارد	has had a fever for more than 2 days
 cough.soon.worse	بهتر نمی‌شود یا بدتر می‌شود	is not getting better, or is getting worse
@@ -1118,6 +1122,7 @@ cough.dont	این کارها را نکنید:	Do not do these things:
 cough.dont.medicine	به نوزاد و طفل کوچک شربت سرفه ندهید.	Do not give cough medicines to babies and young children.
 cough.dont.antibiotic	برای زکام انتی‌بیوتیک ندهید، مگر اینکه کلینیک داده باشد.	Do not give antibiotics for a cold unless the clinic gives them.
 cough.food-cough	سرفه و زکام: غذا و نوشیدنی. نوشیدنی گرم، عسل از ۱ سالگی، و غذایی که قوت را نگه می‌دارد.	Cough and cold: food and drinks. Warm drinks, honey from age 1, and food that keeps strength.
+anim.breath-count.s2	اگر وقت نفس کشیدن پایین سینه به داخل کشیده می‌شود، همین حالا به شفاخانه بروید، شب باشد یا روز.	If the lower chest pulls in when breathing in, go to hospital now, day or night.
 fever.title	تب	Fever
 fever.summary	مایعات بدهید، لباس سبک بپوشانید و بدانید چه وقت بروید.	Give fluids, dress lightly, and know when to go.
 fever.lead	تب یعنی بدن داغ است، چون با یک مرض می‌جنگد. طفل را خوب زیر نظر بگیرید و علایم خطر را بشناسید.	Fever means the body is hot because it is fighting an illness. Watch your child closely and know the danger signs.
@@ -1142,7 +1147,7 @@ fever.urgent.rash	روی پوستش لکه‌های بنفش یا تیره پی�
 fever.urgent.breathing	به سختی نفس می‌کشد، پایین سینه‌اش به داخل کشیده می‌شود، یا در حالت آرام نفسش صدا می‌کند	struggles to breathe, the lower chest pulls in, or breathing is noisy when calm
 fever.soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 fever.soon.days	بیشتر از ۲ روز است که تب دارد	has had a fever for more than 2 days
-fever.soon.fast	تیز نفس می‌کشد: از ۲ تا ۱۲ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر	breathes fast: 50 or more a minute from 2 to 12 months, 40 or more from 1 to 5 years
+fever.soon.fast	تیز نفس می‌کشد: از ۲ تا ۱۱ ماهگی ۵۰ بار یا بیشتر در یک دقیقه، از ۱ تا ۵ سالگی ۴۰ بار یا بیشتر	breathes fast: 50 or more a minute from 2 to 11 months, 40 or more from 1 to 5 years
 fever.soon.measles	تب و دانه‌های سرخ در تمام بدن دارد؛ شاید سرخکان باشد	has fever and a red rash all over; it may be measles
 fever.soon.ear	گوشش درد می‌کند یا از گوشش چرک می‌آید	has ear pain or pus coming from the ear
 fever.soon.urine	وقت پیشاب کردن درد دارد یا گریه می‌کند	has pain or cries when passing urine
@@ -1190,8 +1195,12 @@ growth.clinic	در کلینیک: وزن، فیتهٔ بازو و مشوره. ک�
 growth.hospital	در شفاخانه: طفلی که بسیار عقب است. طفلی که در راه رفتن، گپ زدن، دیدن یا شنیدن بسیار عقب است، توسط داکتر شفاخانه برای علت‌های قابل تداوی، مثل کم‌شنوایی یا کم‌خونی، معاینه می‌شود و فامیل در مورد بازی مشوره می‌گیرد.	At the hospital: a child far behind. A child far behind in walking, talking, seeing or hearing is checked by the hospital doctor for treatable causes, like poor hearing or anaemia, and the family gets advice on play.
 growth.urgent	اگر طفل یکی از این علایم را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز	If your child has any of these signs, go to hospital now, day or night:
 growth.urgent.feet	هر دو پایش پندیده است	has swelling of both feet
-growth.urgent.thin	خیلی لاغر است و همچنان خیلی ضعیف، خواب‌آلود یا مریض است	is very thin and also very weak, sleepy or sick
+growth.urgent.thin	خیلی لاغر است و خیلی ضعیف یا خواب‌آلود است، یا به سختی بیدار می‌شود	is very thin and very weak or sleepy, or hard to wake
 growth.urgent.eat	هیچ چیز نمی‌خورد یا نمی‌نوشد	will not eat or drink anything
+growth.urgent.vomit	بسیار لاغر است و همه چیز را استفراغ می‌کند	is very thin and vomits everything
+growth.urgent.fever	بسیار لاغر است و تب بلند دارد (۳۹ یا بیشتر)، یا بدنش سرد است	is very thin with a high fever (39 or more), or feels cold
+growth.urgent.convulsion	تشنج کرده یا حالا تشنج دارد	has had convulsions (fits), or has them now
+growth.urgent.eye-spot	روی سیاهی چشمش لکهٔ سفید یا کدر دیده می‌شود، یا چشمش سرخ و دردناک است	has a white or cloudy spot you can see on the black of the eye, or a red, painful eye
 growth.today	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 growth.today.thin	خیلی لاغر است، اما هنوز می‌خورد و فعال است	is very thin, but still eats and is active
 growth.today.muac	فیتهٔ بازو رنگ سرخ را نشان می‌دهد	the arm tape shows red
@@ -1200,7 +1209,7 @@ growth.soon	اگر یکی از این علایم را دیدید، همین هف
 growth.soon.weight	وزنش زیاد نمی‌شود یا کم می‌شود	is not gaining weight, or is losing weight
 growth.soon.milestones	در نشستن، راه رفتن یا گپ زدن از اطفال هم‌سن خیلی عقب است	is far behind other children of the same age
 growth.soon.see	به نظر می‌رسد خوب نمی‌بیند	does not seem to see well
-growth.soon.white-eye	در سیاهی چشم برق سفید دارد	has a white glow in the black of the eye
+growth.soon.white-eye	مردمک چشمش فقط در عکس با فلش یا روشنی چراغ دستی سفید معلوم می‌شود	has a white pupil seen only in a flash photo or torchlight
 growth.soon.hear	به صدا یا آواز شما رو نمی‌گرداند	does not turn to sounds or to your voice
 growth.food	طفلی که خوب وزن نمی‌گیرد، به وعده‌های بیشتر غذا و شیر مادر نیاز دارد. از کارمند صحی مشوره بگیرید.	A child who is not gaining weight needs more meals and breast milk. Ask the health worker for advice.
 growth.child-signs	علایم دیگری که زود معاینه لازم دارد. غده، برق سفید در چشم، درد استخوان در شب یا تب طولانی. صفحه را باز کنید.	Other signs to check soon. A lump, a white glow in the eye, bone pain at night or a long fever. Open the page.
@@ -1208,7 +1217,7 @@ malnutrition.title	طفل لاغر (سوءتغذی)	Thin child (malnutrition)
 malnutrition.summary	پاهای پندیده یا نمی‌خورد: همین حالا شفاخانه. خیلی لاغر: امروز کلینیک.	Swollen feet or will not eat: hospital now. Very thin: clinic today.
 malnutrition.lead	وقتی طفل بسیار لاغر است، یا هر دو پایش پندیده است، بدنش ضعیف است و یک مریضی ساده می‌تواند او را بکشد. کلینیک این حالت را تداوی می‌کند.	When a child is much too thin, or both feet are swollen, the body is weak and a simple illness can kill. The clinic treats this.
 malnutrition.signs	علایم را بشناسید. طفل بسیار لاغر است، قبرغه‌ها و استخوان‌هایش معلوم می‌شود، پوست سرینش شُل و چین‌خورده است، یا هر دو پایش پندیده است. شاید ضعیف باشد و میل به خوردن نداشته باشد.	Know the signs. The child is very thin, the ribs and bones show, the skin hangs loose on the buttocks, or both feet are swollen. The child may be weak and not want to eat.
-malnutrition.band	فیتهٔ رنگی بازو. کارمند صحی یا کارمند صحی قریه دور بازوی طفل را با یک فیتهٔ رنگی اندازه می‌کند. سرخ یعنی طفل همین حالا تداوی ضرورت دارد؛ زرد یعنی برای غذای اضافی و معاینه بیایید.	The coloured arm band. The health worker or village health worker measures the upper arm with a coloured band. Red means the child needs treatment now; yellow means come for extra food and checks.
+malnutrition.band	فیتهٔ رنگی بازو. کارمند صحی یا کارمند صحی قریه دور بازوی طفل را با یک فیتهٔ رنگی اندازه می‌کند. سرخ یعنی طفل را امروز به کلینیک ببرید؛ زرد یعنی برای غذای اضافی و معاینه بیایید.	The coloured arm band. The health worker or village health worker measures the upper arm with a coloured band. Red means take the child to the clinic today; yellow means come for extra food and checks.
 malnutrition.feed	در راه هم شیر و غذا بدهید. شیردهی را ادامه دهید. غذای نرم را کم‌کم و زیاد بار بدهید، روزی ۵ یا ۶ بار، و هر وقت می‌توانید کمی روغن، تخم، لوبیا یا ماست اضافه کنید.	Keep feeding on the way. Keep breastfeeding. Offer small soft meals often, 5 or 6 times a day, with a little oil, egg, beans or yoghurt when you can.
 malnutrition.warm	طفل را گرم نگه دارید. طفل بسیار لاغر زود سرد می‌شود. طفل را بپوشانید و نزدیک بدن خود نگه دارید، مخصوصاً شب و در راه.	Keep the child warm. A very thin child gets cold easily. Cover the child and keep them close to your body, especially at night and on the way.
 malnutrition.clinic	در کلینیک: وزن و خمیر مخصوص. کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، یک خمیر مخصوص از بادام‌زمینی می‌گیرد که به خانه ببرد، با معاینهٔ هفته‌وار.	At the clinic: weighing and special paste. The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, with weekly checks.
@@ -1303,6 +1312,7 @@ first-aid.poison	مسمومیت: به شفاخانه بروید. کاری نکن
 first-aid.fumes	گاز بخاری و صندلی. هرگز در اتاق بسته با صندلی زغالی یا بخاری روشن نخوابید. اگر در اتاق گرم کسی سردرد شد، سرش چرخید یا استفراغ کرد، همه را همین حالا به هوای تازه ببرید.	Stove and sandali fumes. Never sleep with a charcoal sandali or a stove burning in a closed room. Headache, dizziness or vomiting in a heated room: get everyone into fresh air now.
 first-aid.bite	گزیدن سگ یا حیوان دیگر. جای گزیدگی را ۱۵ دقیقه با صابون و آب روان بشویید. همان روز برای واکسین هاری به کلینیک یا شفاخانه بروید.	Dog or other animal bites. Wash the bite with soap and running water for 15 minutes. Go the same day to the clinic or hospital for rabies vaccine.
 first-aid.head	ضربه به سر: از نزدیک مراقب باشید. بعد از ضربه سخت به سر، بگذارید آن شخص استراحت کند. یک نفر ۲۴ ساعت پیش او بماند و مراقبش باشد.	Head injury: watch closely. After a hard knock to the head, let the person rest. Someone should stay with them and watch them for 24 hours.
+first-aid.head-link	ضربه به سر: علایم خطر. صفحهٔ ضربه به سر را باز کنید: چه وقت به شفاخانه بروید و مراقب چه باشید.	Head injury: the danger signs. Open the Head injury page: when to go to hospital, and what to watch for.
 first-aid.hospital	در شفاخانه: چه کمکی می‌کنند. کلینیک تداوی اول و پیچکاری تیتانوس می‌دهد و واقعات جدی را به شفاخانه می‌فرستد. شفاخانه زخم‌ها را بخیه می‌کند، استخوان را جابه‌جا می‌کند، سوختگی را تداوی می‌کند، اکسیجن و خون می‌دهد و برای بعضی زهرها پادزهر دارد.	At the hospital: what they can do. The clinic gives first treatment and a tetanus injection and sends serious cases on. The hospital stitches wounds, sets bones, treats burns, gives oxygen and blood, and has antidotes for some poisons.
 first-aid.dont	روی سوختگی این چیزها را نگذارید	On a burn, never put
 first-aid.dont.toothpaste	خمیر دندان را روی سوختگی نمالید	toothpaste on a burn
@@ -1310,13 +1320,13 @@ first-aid.dont.oil	روغن، مسکه یا روغن زرد را روی سوخت
 first-aid.dont.egg	تخم مرغ یا آرد را روی سوختگی نمالید	egg or flour on a burn
 first-aid.dont.ice	یخ یا آب یخ را روی سوختگی نگذارید	ice or ice water on a burn
 first-aid.urgent	در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز	Go to hospital now, day or night, for any of these
-first-aid.urgent.big-burn	سوختگی بزرگ‌تر از دست همان شخص، یا هر سوختگی در شیرخوار	a burn bigger than the person's hand, or any burn on a baby
+first-aid.urgent.big-burn	سوختگی بزرگ‌تر از کف دست همان شخص، یا هر سوختگی در شیرخوار	a burn bigger than the person's palm, or any burn on a baby
 first-aid.urgent.burn-place	سوختگی روی صورت، دست، پا، اعضای تناسلی یا بندها	a burn on the face, hands, feet, genitals or joints
 first-aid.urgent.bleeding	خونریزی که بند نمی‌شود	bleeding that will not stop
 first-aid.urgent.unconscious	بیهوشی، یا کسی که بیدار نمی‌شود	someone unconscious who cannot be woken
 first-aid.urgent.poison	قورت دادن زهر، تیل خاک یا دوا	swallowed poison, kerosene or medicines
 first-aid.urgent.choking	بند شدن گلو که باز نمی‌شود	choking that does not clear
-first-aid.urgent.head	ضربه به سر، و بعد استفراغ، خواب‌آلودگی زیاد یا تشنج	a head injury, then vomiting, deep sleepiness or a fit
+first-aid.urgent.head	ضربه به سر همراه با بی‌هوش شدن، استفراغ، خواب‌آلودگی زیاد یا تشنج، یا هر ضربه به سر در شیرخوار یا شخص مسن	a head injury with being knocked out, vomiting, deep sleepiness or a fit, or any head injury in a baby or an older person
 first-aid.urgent.fumes	بیهوش شدن، گیجی یا خواب‌آلودگی زیاد بعد از گاز بخاری	fainting, confusion or deep sleepiness after stove fumes
 pregnancy-danger.title	علایم خطر در حاملگی	Danger signs in pregnancy
 pregnancy-danger.summary	علایمی در حاملگی و بعد از ولادت که کمک فوری لازم دارد	Signs in pregnancy and after birth that need help fast
@@ -1334,9 +1344,9 @@ pregnancy-danger.soon.fever	تب	Fever
 pregnancy-danger.soon.belly-pain	درد شکم	Belly pain
 pregnancy-danger.soon.ill	احساس ناجوری	Feeling ill
 pregnancy-danger.soon.swelling	پندیدگی انگشتان، روی یا پاها	Swelling of the fingers, face or legs
-pregnancy-danger.soon.waters	آب ولادت آمده، اما درد ولادت نیست: بیشتر از ۶ ساعت منتظر نمانید	The waters break with no labour pains: do not wait more than 6 hours
+pregnancy-danger.soon.waters	آب ولادت آمده، اما درد ولادت نیست: همین حالا به کلینیک بروید؛ بیشتر از ۶ ساعت منتظر نمانید	The waters break with no labour pains: go to the clinic now; do not wait more than 6 hours
 pregnancy-danger.soon.urine	سوزش هنگام ادرار	Burning when passing urine
-pregnancy-danger.soon.vomit	استفراغ تمام روز، و آب هم در شکم نمی‌ماند	Vomiting all day, and cannot keep water down
+pregnancy-danger.soon.vomit	استفراغ تمام روز، و آب هم در شکم نمی‌ماند. اگر همراه با آن بسیار ضعیف یا سرگیچ است، یا ادرار بسیار کم می‌آید: همین حالا شفاخانه.	Vomiting all day, and cannot keep water down. If also very weak, dizzy or passing very little urine: hospital now.
 pregnancy-danger.birth-plan	با فامیل پلان ولادت بسازید. در اوایل حاملگی با فامیل خود گپ بزنید. فیصله کنید که در کجا ولادت می‌کنید و چه کسی با شما می‌رود.	Make a birth plan together. Talk with your family early in pregnancy. Decide where you will give birth and who will go with you.
 pregnancy-danger.money-car	پول و موتر را آماده کنید. از حالا کمی پول کنار بگذارید. با یک دریور گپ بزنید که شب یا روز شما را ببرد.	Get money and transport ready. Put some money aside now. Agree with a driver who can take you, day or night.
 pregnancy-danger.phone	شماره‌های تیلفون را آماده داشته باشید. شماره دریور، قابله و کلینیک را در تیلفون ثبت کنید. تیلفون را چارج نگه دارید.	Keep phone numbers ready. Save the numbers of the driver, the midwife and the clinic. Keep the phone charged.
@@ -1494,7 +1504,7 @@ red-flags.today.yellow-eyes	زرد شدن چشم‌ها	Yellow eyes
 red-flags.soon	اگر یکی از این علایم را دارید، همین هفته به کلینیک بروید	If you have one of these signs, go to the clinic this week
 red-flags.soon.weight-loss	کم شدن وزن، بدون کدام دلیل	Losing weight without trying
 red-flags.soon.lump	غده‌ای که کلان می‌شود	A lump that is growing
-red-flags.soon.blood-urine-stool	خون در ادرار یا مدفوع	Blood in the urine or stool
+red-flags.soon.blood-urine-stool	خون در ادرار یا مدفوع، بیش از یک بار، بدون سوزش، تب یا اسهال	Blood in the urine or stool more than once, with no burning, fever or diarrhoea
 red-flags.soon.wound	زخمی که در ۲ هفته جور نمی‌شود	A wound or sore that does not heal in 2 weeks
 red-flags.soon.swallowing	مشکل در قورت دادن غذا	Trouble swallowing food
 red-flags.transport	کمک بخواهید و زود موتر پیدا کنید. فوراً فامیل یا همسایه‌ها را صدا کنید. زود موتر پیدا کنید، پیش از آنکه شب یا راه خراب کار را مشکل کند.	Call for help, find transport early. Call family or neighbours at once. Find a car early, before night or bad roads make it hard.
@@ -1551,7 +1561,7 @@ reading-sugar.urgent.vomit	قند بلند با استفراغ، یا نفس ت�
 reading-sugar.soon	اگر یکی از این‌ها بود، امروز به کلینیک بروید	Go to the clinic today if:
 reading-sugar.soon.high	قند بالای ۲۵۰ است	sugar is over 250
 reading-sugar.soon.lows	قند بار بار پایین می‌شود	low sugar happens again and again
-reading-sugar.mmol	اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است، ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، و بالای ۱۴ خیلی بلند است.	If your meter shows mmol/L: under 4 is low, 4.4 to 7.2 before breakfast is good, and over 14 is very high.
+reading-sugar.mmol	اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است؛ کمتر از ۳ خیلی پایین است: شکر بدهید و همین حالا به شفاخانه بروید؛ ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، و بالای ۱۴ خیلی بلند است.	If your meter shows mmol/L: under 4 is low; under 3 is very low: give sugar and go to hospital now; 4.4 to 7.2 before breakfast is good, and over 14 is very high.
 reading-sugar.no-diabetes	مرض شکر ندارید؟ پیش از صبحانه ۱۲۶ یا بیشتر، یا هر وقت ۲۰۰ یا بیشتر، باید همین هفته در کلینیک درست معاینه شود.	No diabetes? Before breakfast 126 or more, or 200 or more at any time, needs a proper test at the clinic this week.
 reading-sugar.dont	این کارها را نکنید:	Do not do these things:
 reading-sugar.dont.dose	انسولین یا تابلیت را خودتان کم یا زیاد نکنید؛ از کلینیک بپرسید.	Do not change your insulin or tablets yourself; ask the clinic.
@@ -1696,11 +1706,11 @@ stress.soon	اگر یکی از این حالات را دارید، امروز ب
 stress.soon.two-weeks	۲ هفته، اکثر روزها غمگین، پریشان یا بی‌خواب هستید	you have felt sad, worried or unable to sleep most days for 2 weeks
 stress.soon.daily-work	کارهای روزانه یا مراقبت خانواده را کرده نمی‌توانید	you cannot do your daily work or care for your family
 stress.soon.drugs	برای تحمل، تریاک یا مواد مخدر دیگر استفاده می‌کنید	you use opium or other drugs to cope
-stress.urgent	در این حالات، همین حالا به کسی بگویید و به کلینیک یا شفاخانه بروید، شب باشد یا روز	For any of these, tell someone now and go to clinic or hospital, day or night
+stress.urgent	در این حالات، به کسی بگویید و همین حالا به شفاخانه بروید، شب باشد یا روز	For any of these, tell someone and go to hospital now, day or night
 stress.urgent.end-life	فکر پایان دادن به زندگی خود را دارید	you have thoughts of ending your life
 stress.urgent.hurt-others	فکر آسیب رساندن به کسی دیگر را دارید	you have thoughts of hurting someone else
 stress.urgent.self-harm	عمداً به خود آسیب رسانده‌اید	you have hurt yourself on purpose
-stress.tip-help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
+stress.tip-help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر، دوا و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.	If someone says they want to end their life, take it seriously. Stay with them, remove poisons, medicines and weapons, and take them to hospital now, day or night.
 mind-body.title	فشار روحی با ما چه می‌کند	What stress does to us
 mind-body.summary	فشار روحی در بدن، ذهن و کارهای ما دیده می‌شود.	Stress shows in the body, the mind and what we do.
 mind-body.lead	وقتی زندگی سخت است، بدن و ذهن واکنش نشان می‌دهند. شناختن این علایم کمک می‌کند بدانید که این فشار روحی است و بهتر شده می‌تواند.	When life is hard, the body and the mind react. Knowing the signs helps you see that this is stress, and that it can get better.
@@ -1711,12 +1721,12 @@ mind-body.normal	این یک واکنش عادی است. فشار روحی زن�
 mind-body.check	بدن را هم معاینه کنید. سردردی، درد سینه یا کم شدن وزن علت‌های دیگر هم داشته می‌تواند. اگر دردی تازه یا شدید است، پیش کارمند صحی بروید.	Let the body be checked too. Headache, chest pain or weight loss can have other causes. If a pain is new or strong, see a health worker.
 mind-body.calm	آرام کردن بدن: نفس آهسته. نفس آهسته و حس کردن زمین، قدم به قدم، برای آرام کردن زنگ خطر.	Calm the body: slow breathing. Slow breathing and grounding, step by step, to turn the alarm down.
 mind-body.cycle	فکر، احساس و عمل. یک فکر پریشان چطور بزرگ می‌شود، و چطور این چرخه را بشکنید.	Thoughts, feelings and actions. How a worried thought can grow, and how to break the cycle.
-mind-body.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز	Any of these? Tell someone you trust, go to a health worker now, day or night
+mind-body.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا به شفاخانه بروید، شب باشد یا روز	Any of these? Tell someone you trust and go to hospital now, day or night
 mind-body.urgent.end-life	فکر پایان دادن به زندگی خود را دارید	you have thoughts of ending your life
 mind-body.urgent.self-harm	قصد دارید به خود آسیب برسانید	you are planning to hurt yourself
 mind-body.urgent.harmed	به خود آسیب رسانده‌اید: همین حالا به شفاخانه بروید، شب باشد یا روز	you have already hurt yourself: go to hospital now, day or night
 mind-body.urgent.hurt-others	حس می‌کنید شاید به کسی دیگر آسیب برسانید	you feel you might hurt someone else
-mind-body.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
+mind-body.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر، دوا و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.	If someone says they want to end their life, take it seriously. Stay with them, remove poisons, medicines and weapons, and take them to hospital now, day or night.
 mind-body.soon	اگر یکی از این حالات را دارید، امروز به کلینیک بروید	If any of these is true for you, go to the clinic today
 mind-body.soon.weeks	۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید	you have felt low or worried most days for 2 weeks or more
 mind-body.soon.fear	حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید	sudden attacks of fear, with a racing heart, keep coming back
@@ -1734,12 +1744,12 @@ mind-cycle.act	یک کار کوچک را تغییر دهید. کاری دیگر 
 mind-cycle.practise	هر شام تمرین کنید. یک لحظهٔ امروز را که شما را ناراحت کرد به یاد بیاورید. فکر، احساس و کاری را که کردید نام بگیرید. بعد یک راه دیگر پیدا کنید.	Practise each evening. Think of one moment today that upset you. Name the thought, the feeling and what you did. Then find one other way.
 mind-cycle.calm	آرام کردن بدن: نفس آهسته. وقتی احساسات خیلی شدید است، اول بدن را آرام کنید.	Calm the body: slow breathing. When feelings are very strong, calm the body first.
 mind-cycle.problems	حل مشکل‌ها قدم به قدم. وقتی پریشانی یک مشکل واقعی است، یک قدم کوچک را پلان کنید.	Solving problems in small steps. When the worry is a real problem, plan one small step.
-mind-cycle.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز	Any of these? Tell someone you trust, go to a health worker now, day or night
+mind-cycle.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا به شفاخانه بروید، شب باشد یا روز	Any of these? Tell someone you trust and go to hospital now, day or night
 mind-cycle.urgent.end-life	فکر پایان دادن به زندگی خود را دارید	you have thoughts of ending your life
 mind-cycle.urgent.self-harm	قصد دارید به خود آسیب برسانید	you are planning to hurt yourself
 mind-cycle.urgent.harmed	به خود آسیب رسانده‌اید: همین حالا به شفاخانه بروید، شب باشد یا روز	you have already hurt yourself: go to hospital now, day or night
 mind-cycle.urgent.hurt-others	حس می‌کنید شاید به کسی دیگر آسیب برسانید	you feel you might hurt someone else
-mind-cycle.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
+mind-cycle.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر، دوا و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.	If someone says they want to end their life, take it seriously. Stay with them, remove poisons, medicines and weapons, and take them to hospital now, day or night.
 mind-cycle.soon	اگر یکی از این حالات را دارید، امروز به کلینیک بروید	If any of these is true for you, go to the clinic today
 mind-cycle.soon.weeks	۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید	you have felt low or worried most days for 2 weeks or more
 mind-cycle.soon.fear	حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید	sudden attacks of fear, with a racing heart, keep coming back
@@ -1756,12 +1766,12 @@ mind-calm.repeat	۲ دقیقه ادامه دهید. حدود ۲ دقیقه هم�
 mind-calm.feet	پاها را روی زمین حس کنید. پاها را به زمین فشار دهید، و دست‌ها را به هم فشار دهید. حس کنید که زمین شما را نگه داشته است.	Feel your feet on the ground. Press your feet into the floor, and press your hands together. Feel the floor holding you up.
 mind-calm.notice	۳ چیز دور و بر خود را ببینید. ۳ چیزی را که می‌بینید، ۳ چیزی را که می‌شنوید و ۳ چیزی را که لمس کرده می‌توانید، نام بگیرید. این کار ذهن را به همین جا و همین حالا برمی‌گرداند.	Notice 3 things around you. Name 3 things you can see, 3 you can hear, and 3 you can touch. This brings the mind back to here and now.
 mind-calm.problems	حل مشکل‌ها قدم به قدم. وقتی آرام‌تر شدید، یک مشکل را بگیرید و یک قدم کوچک را پلان کنید.	Solving problems in small steps. When you feel calmer, take one problem and plan a small step.
-mind-calm.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز	Any of these? Tell someone you trust, go to a health worker now, day or night
+mind-calm.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا به شفاخانه بروید، شب باشد یا روز	Any of these? Tell someone you trust and go to hospital now, day or night
 mind-calm.urgent.end-life	فکر پایان دادن به زندگی خود را دارید	you have thoughts of ending your life
 mind-calm.urgent.self-harm	قصد دارید به خود آسیب برسانید	you are planning to hurt yourself
 mind-calm.urgent.harmed	به خود آسیب رسانده‌اید: همین حالا به شفاخانه بروید، شب باشد یا روز	you have already hurt yourself: go to hospital now, day or night
 mind-calm.urgent.hurt-others	حس می‌کنید شاید به کسی دیگر آسیب برسانید	you feel you might hurt someone else
-mind-calm.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
+mind-calm.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر، دوا و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.	If someone says they want to end their life, take it seriously. Stay with them, remove poisons, medicines and weapons, and take them to hospital now, day or night.
 mind-calm.soon	اگر یکی از این حالات را دارید، امروز به کلینیک بروید	If any of these is true for you, go to the clinic today
 mind-calm.soon.weeks	۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید	you have felt low or worried most days for 2 weeks or more
 mind-calm.soon.fear	حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید	sudden attacks of fear, with a racing heart, keep coming back
@@ -1787,12 +1797,12 @@ mind-problems.plan	یک پلان کوچک بسازید. تصمیم بگیرید 
 mind-problems.review	نتیجه را ببینید و باز کوشش کنید. بعد از چند روز بپرسید: چه چیز کار داد؟ اگر کار نداد، راه دیگری را امتحان کنید. هر قدم کوچک حساب می‌شود.	Look back, then try again. After a few days, ask: what worked? If it did not work, try another way. Each small step counts.
 mind-problems.cannot	برای چیزهایی که تغییر داده نمی‌توانید. بعضی مشکل‌ها حالا حل نمی‌شوند. آن وقت به کارهایی رو بیاورید که از دست‌تان پوره است: استراحت، گپ زدن با کسی و مهربانی با خود.	For what you cannot change. Some problems cannot be solved now. Then turn to what you can do: rest, talk with someone, and be kind to yourself.
 mind-problems.calm	آرام کردن بدن: نفس آهسته. آن‌قدر ناراحت هستید که فکر کرده نمی‌توانید؟ اول بدن را آرام کنید، بعد برگردید.	Calm the body: slow breathing. Too upset to think? Calm the body first, then come back.
-mind-problems.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز	Any of these? Tell someone you trust, go to a health worker now, day or night
+mind-problems.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا به شفاخانه بروید، شب باشد یا روز	Any of these? Tell someone you trust and go to hospital now, day or night
 mind-problems.urgent.end-life	فکر پایان دادن به زندگی خود را دارید	you have thoughts of ending your life
 mind-problems.urgent.self-harm	قصد دارید به خود آسیب برسانید	you are planning to hurt yourself
 mind-problems.urgent.harmed	به خود آسیب رسانده‌اید: همین حالا به شفاخانه بروید، شب باشد یا روز	you have already hurt yourself: go to hospital now, day or night
 mind-problems.urgent.hurt-others	حس می‌کنید شاید به کسی دیگر آسیب برسانید	you feel you might hurt someone else
-mind-problems.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
+mind-problems.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر، دوا و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.	If someone says they want to end their life, take it seriously. Stay with them, remove poisons, medicines and weapons, and take them to hospital now, day or night.
 mind-problems.soon	اگر یکی از این حالات را دارید، امروز به کلینیک بروید	If any of these is true for you, go to the clinic today
 mind-problems.soon.weeks	۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید	you have felt low or worried most days for 2 weeks or more
 mind-problems.soon.fear	حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید	sudden attacks of fear, with a racing heart, keep coming back
@@ -1813,12 +1823,12 @@ mind-routine.cycle	فکر، احساس و عمل. فکرهای غمگینی که
 mind-routine.dont	این کارها را نکنید:	Do not:
 mind-routine.dont.pills	تریاک، چرس یا تابلیت خواب بازار را استفاده نکنید؛ حال را بدتر می‌کنند.	Do not use opium, hashish or bazaar sleeping pills; they make things worse.
 mind-routine.dont.bed	تمام روز در بستر نمانید. دل‌تنگی را سنگین‌تر می‌کند.	Do not stay in bed all day. It makes low mood heavier.
-mind-routine.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا پیش کارمند صحی بروید، شب باشد یا روز	Any of these? Tell someone you trust, go to a health worker now, day or night
+mind-routine.urgent	یکی از این‌ها را دارید؟ به کسی که اعتماد دارید بگویید و همین حالا به شفاخانه بروید، شب باشد یا روز	Any of these? Tell someone you trust and go to hospital now, day or night
 mind-routine.urgent.end-life	فکر پایان دادن به زندگی خود را دارید	you have thoughts of ending your life
 mind-routine.urgent.self-harm	قصد دارید به خود آسیب برسانید	you are planning to hurt yourself
 mind-routine.urgent.harmed	به خود آسیب رسانده‌اید: همین حالا به شفاخانه بروید، شب باشد یا روز	you have already hurt yourself: go to hospital now, day or night
 mind-routine.urgent.hurt-others	حس می‌کنید شاید به کسی دیگر آسیب برسانید	you feel you might hurt someone else
-mind-routine.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر و دوا را از او دور کنید و کمک بگیرید.	If someone says they want to end their life, take it seriously. Stay with them, keep poisons and medicines away, and get help.
+mind-routine.help	اگر کسی گفت می‌خواهد به زندگی خود پایان دهد، جدی بگیرید. پیش او بمانید، زهر، دوا و سلاح را دور کنید، و همین حالا او را به شفاخانه ببرید، شب باشد یا روز.	If someone says they want to end their life, take it seriously. Stay with them, remove poisons, medicines and weapons, and take them to hospital now, day or night.
 mind-routine.soon	اگر یکی از این حالات را دارید، امروز به کلینیک بروید	If any of these is true for you, go to the clinic today
 mind-routine.soon.weeks	۲ هفته یا بیشتر، اکثر روزها غمگین یا پریشان بوده‌اید	you have felt low or worried most days for 2 weeks or more
 mind-routine.soon.fear	حمله‌های ناگهانی ترس، با تپش تیز قلب، بار بار می‌آید	sudden attacks of fear, with a racing heart, keep coming back
@@ -2006,7 +2016,7 @@ electric-safety.solar	پلیت آفتابی و بتری. بتری را در یک
 electric-safety.generator	جنراتور: فقط در بیرون. جنراتور را در بیرون و دور از دروازه و کلکین روشن کنید؛ دود آن گاز زهری است. پطرول را در ظرف بسته و دور از خانه نگه دارید.	Generator: outside only. Run a generator outside, far from doors and windows: its smoke is poison gas. Keep petrol in a closed can, away from the house.
 electric-safety.storm	بعد از توفان، از سیم‌ها دور بمانید. بعد از توفان یا سیلاب، سیم‌های افتاده یا آویزان ممکن است هنوز برق داشته باشند. اطفال را دور نگه دارید و به ادارهٔ برق خبر بدهید.	After a storm, keep away from wires. Fallen or hanging wires may still carry power after a storm or flood. Keep children far away and tell the power company.
 electric-safety.shock	کسی را برق گرفته؟. اول برق را قطع کنید. تا وصل است به او دست نزنید؛ سیم را با چوب خشک دور کنید. صفحه را باز کنید.	Someone had a shock?. Turn off the power first. Never touch them while they are connected: push the wire away with dry wood. Open the page.
-electric-safety.cpr	بعد از برق‌گرفتگی نفس نمی‌کشد؟. وقتی برق قطع شد، فشار سینه را شروع کنید. این صفحه نشان می‌دهد که برای هر سن چطور.	Not breathing after a shock?. When the power is off, start chest pushes. The page shows how for each age.
+electric-safety.cpr	بعد از برق‌گرفتگی نفس نمی‌کشد؟. وقتی برق قطع شد، نفس و فشار سینه را شروع کنید. صفحه را باز کنید و سن او را انتخاب کنید.	Not breathing after a shock?. When the power is off, start CPR. Open the page and choose the age.
 electric-safety.dont	این کارها را نکنید:	Do not:
 electric-safety.dont.washing	لباس تر را روی سیم برق آویزان نکنید	hang wet washing on electric wires
 electric-safety.dont.rug	سیم را زیر قالین یا بوریا نکشید، آنجا کهنه می‌شود	run wires under rugs or mats, where they wear out
@@ -2286,7 +2296,7 @@ cpr-adult.title	بزرگسالی که افتاده و نفس نمی‌کشد	Adu
 cpr-adult.summary	تا رسیدن کمک، سینه را محکم و تیز فشار دهید.	Push hard and fast on the chest until help arrives.
 cpr-adult.lead	وقتی قلب یک بزرگسال بند می‌شود، می‌افتد، جواب نمی‌دهد و عادی نفس نمی‌کشد. فشار دادن فوری سینه می‌تواند او را زنده نگه دارد.	When an adult's heart stops, they fall, do not answer and stop breathing normally. Pushing on the chest at once can keep them alive.
 cpr-adult.safe	اول خطر، بعد شخص را ببینید. ببینید که برای شما خطری مانند سیم برق یا موتر نباشد. به شانه‌هایش بزنید و بلند بپرسید: خوب هستی؟	Check for danger, then the person. Check there is no danger to you, like electric wires or traffic. Tap the shoulders and shout: Are you all right?
-cpr-adult.help	کمک بخواهید، موتر بخواهید. بلند کمک بخواهید. یک نفر را برای آوردن موتر بفرستید، و اگر تلفن دارید، به کارمند صحی زنگ بزنید.	Shout for help, send for a car. Shout for help. Send someone for a car to go to hospital, and if you have a phone, call the health worker.
+cpr-adult.help	کمک بخواهید، موتر بخواهید. بلند کمک بخواهید. یک نفر را بفرستید تا برای رفتن به شفاخانه موتر بیاورد، و اگر تلفن دارید، به کارمند صحی زنگ بزنید.	Shout for help, send for a car. Shout for help. Send someone for a car to go to hospital, and if you have a phone, call the health worker.
 cpr-adult.breathing	نفس کشیدنش را ببینید. سرش را به عقب ببرید و زنخش را بالا کنید. تا ۱۰ ثانیه سینه‌اش را ببینید. نفس سخت و گاه‌گاهی، نفس عادی نیست.	Look for normal breathing. Tilt the head back and lift the chin. Watch the chest for up to 10 seconds. Gasping now and then is not normal breathing.
 cpr-adult.push	وسط سینه را محکم فشار دهید. قسمت پایین کف یک دست را در وسط سینه بگذارید، دست دیگر را روی آن، بازوها راست. ۵ تا ۶ سانتی‌متر پایین فشار دهید.	Push hard in the centre. Put the heel of one hand in the centre of the chest, the other hand on top, arms straight. Push down 5 to 6 centimetres.
 cpr-adult.rhythm	تیز و بدون توقف. تقریباً ۲ بار در هر ثانیه فشار دهید و بگذارید سینه دوباره بالا بیاید. اگر بلد هستید، بعد از هر ۳۰ فشار ۲ بار نفس بدهید.	Fast, and without stopping. Push about 2 times every second and let the chest come back up. If you know how, give 2 breaths after every 30 pushes.
@@ -2294,7 +2304,7 @@ cpr-adult.turns	نوبت بگیرید، ادامه دهید. ادامه دهید
 cpr-adult.urgent	اگر شخص این حالت را داشت، همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, if someone:
 cpr-adult.urgent.collapsed	افتاد و عادی نفس نمی‌کشید	collapsed and was not breathing normally
 cpr-adult.urgent.woke	بعد از فشار سینه به هوش آمد، حتی اگر حالا خوب است	woke up after chest pushes, even if they seem well now
-cpr-adult.urgent.fainted	بی‌هوش شد و زود به هوش نیامد	fainted and did not wake up quickly
+cpr-adult.urgent.fainted	بی‌هوش شد و در یک دقیقه به هوش نیامد	fainted and did not wake within a minute
 cpr-adult.anyone	از روی لباس هم فشار داده می‌توانید. هر کس، مرد یا زن، می‌تواند کمک کند و جان کسی را نجات دهد.	You can push through clothes. Anyone, a man or a woman, can help and save a life.
 cpr-adult.hospital	درد سینه، کج شدن صورت یا ضعف دست ممکن است حملهٔ قلبی یا سکته باشد؛ صفحهٔ علایم خطر را ببینید. در شفاخانه قلب را دوباره به کار می‌اندازند و علت را تداوی می‌کنند.	Chest pain, a drooping face or a weak arm can mean a heart attack or stroke: see Danger signs. At hospital they restart the heart and treat the cause.
 anim.cpr-adult.title	بزرگسالی که بی‌هوش افتاده	An adult who has collapsed
@@ -2309,8 +2319,10 @@ unconscious.title	بی‌هوش، اما نفس می‌کشد	Unconscious but br
 unconscious.summary	او را به پهلو بخوابانید تا به آسانی نفس بکشد. برای همه سنین.	Lay them on their side so they can breathe. All ages.
 unconscious.lead	کسی که بیدار نمی‌شود اما نفس می‌کشد، ممکن است با زبان یا استفراغ خود خفه شود. خواباندن به پهلو راه نفسش را باز نگه می‌دارد.	A person who will not wake but is breathing can choke on their tongue or vomit. Lying on the side keeps the airway open.
 unconscious.check	نفسش را ببینید. به شانه‌هایش بزنید و بلند صدا کنید. اگر جواب نداد، سرش را به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.	Check breathing. Tap the shoulders and shout. If there is no answer, tilt the head back, lift the chin, and watch the chest for up to 10 seconds.
-unconscious.not-breathing	عادی نفس نمی‌کشد؟ سینه را فشار دهید. اگر عادی نفس نمی‌کشد، همین حالا فشار سینه را شروع کنید. صفحهٔ مخصوص سن او را ببینید.	Not breathing normally? Start CPR. If they are not breathing normally, start pushing on the chest now. See the page for their age.
-unconscious.cpr	بزرگسال نفس نمی‌کشد؟. صفحهٔ بزرگسال را باز کنید. برای طفل یا شیرخوار، صفحهٔ طفل یا شیرخوار را ببینید.	Adult not breathing?. Open the adult page. For a child or baby, use the child or baby page.
+unconscious.not-breathing	عادی نفس نمی‌کشد؟ سینه را فشار دهید. اگر عادی نفس نمی‌کشد، همین حالا فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید. صفحهٔ سن او را در پایین باز کنید.	Not breathing normally? Start CPR. If they are not breathing normally, start chest pushes now; give a child or baby 5 breaths first. Open the page for their age below.
+unconscious.cpr	بزرگسال نفس نمی‌کشد؟. صفحهٔ بزرگسال را باز کنید و قدم به قدم انجام دهید.	Adult not breathing?. Open the adult page and follow it step by step.
+unconscious.cpr-child	طفل نفس نمی‌کشد؟. صفحهٔ طفل را باز کنید: اول ۵ بار نفس، بعد فشار سینه.	Child not breathing?. Open the child page: 5 breaths first, then chest pushes.
+unconscious.cpr-baby	شیرخوار کمتر از ۱ سال نفس نمی‌کشد؟. صفحهٔ شیرخوار را باز کنید: اول ۵ بار نفس، بعد فشار سینه.	Baby under 1 not breathing?. Open the baby page: 5 breaths first, then chest pushes.
 unconscious.roll	او را به پهلو بچرخانید. کنارش زانو بزنید. دست نزدیک را به طرف بیرون بگذارید، زانوی دور را بالا خم کنید و او را به طرف خود به پهلو بچرخانید.	Roll them onto their side. Kneel beside them. Put the near arm out, bend the far knee up, and roll them towards you onto their side.
 unconscious.head	سر به عقب، دهان به پایین. دست بالایی‌اش را زیر رخسارش بگذارید. سرش را به عقب نگه دارید تا دهانش به طرف پایین باشد و استفراغ بیرون شود.	Head back, mouth down. Put their upper hand under the cheek. Keep the head tilted back so the mouth points down and vomit can run out.
 unconscious.baby	شیرخوار را به پهلو در بغل بگیرید. شیرخوار را به پهلو در بغل خود بگیرید، سرش کمی پایین‌تر از بدن، تا شیر یا استفراغ بیرون شود.	Hold a baby on its side. Hold a baby in your arms on its side, head a little lower than the body, so milk or vomit can run out.
@@ -2400,7 +2412,8 @@ electric-shock.lead	سیم لچ، پلگ شکسته و سیم نزدیک آب م
 electric-shock.off	برق را قطع کنید. سویچ یا سویچ عمومی را خاموش کنید، یا پلگ را بکشید. تا برق قطع نشده، به شخص دست نزنید.	Switch off the power. Turn off the switch or the main switch, or pull out the plug. Do not touch the person until the power is off.
 electric-shock.stick	قطع کرده نمی‌توانید؟ چوب خشک. روی چیزی خشک بایستید. سیم را با یک چوب یا چوکی چوبی خشک دور کنید. هرگز چیز تر یا فلزی را استفاده نکنید.	Cannot switch off? Use dry wood. Stand on something dry. Push the wire away with a dry wooden stick or chair. Never use anything wet or metal.
 electric-shock.line	سیم بزرگ برق: دور بمانید. اگر سیم بزرگ برق افتاده، حداقل ۲۰ قدم دور بمانید و دیگران را هم دور نگه دارید تا برق قطع شود.	Big power line down: keep away. If a big power line has fallen, stay at least 20 steps away and keep others back until the power is cut.
-electric-shock.breathing	نفسش را ببینید. وقتی بی‌خطر شد، نفسش را ببینید. اگر عادی نفس نمی‌کشد، فشار سینه را شروع کنید و یک نفر را برای آوردن موتر بفرستید.	Check breathing. When it is safe, check breathing. If they are not breathing normally, start chest pushes and send for a car.
+electric-shock.breathing	نفسش را ببینید. وقتی بی‌خطر شد، نفسش را ببینید. اگر عادی نفس نمی‌کشد، یک نفر را برای آوردن موتر بفرستید و فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.	Check breathing. When it is safe, check breathing. If they are not breathing normally, send for a car and start chest pushes; give a child or baby 5 breaths first.
+electric-shock.cpr-link	نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید. صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.	Not breathing? Choose the age for CPR. Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step.
 electric-shock.burns	سوختگی‌ها را سرد کنید. برق در جای داخل شدن و بیرون شدن می‌سوزاند. این سوختگی‌ها را ۲۰ دقیقه با آب سرد کنید و سست بپوشانید.	Cool the burns. Electricity burns where it goes in and comes out. Cool these burns with water for 20 minutes and cover them loosely.
 electric-shock.urgent	بعد از برق‌گرفتگی شدید، حتی اگر خوب است، همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, after a strong shock, even if they seem well:
 electric-shock.urgent.unconscious	بی‌هوش شد یا فشار سینه لازم داشت	was unconscious or needed chest pushes
@@ -2420,7 +2433,8 @@ snake-scorpion.lead	مار و گژدم در سمنگان می‌توانند خ�
 snake-scorpion.away	دور شوید و آرام بمانید. از مار دور شوید. کوشش نکنید آن را بگیرید یا بکشید. شخص را آرام و بی‌حرکت خوابیده نگه دارید.	Move away and stay calm. Move away from the snake. Do not try to catch or kill it. Keep the person calm, lying still.
 snake-scorpion.still	جای گزیدگی را بی‌حرکت نگه دارید. قبل از پندیدن، انگشتر، چوری و بوت را بکشید. دست یا پا را بی‌حرکت نگه دارید، اگر ممکن است با یک تخته.	Keep the bitten part still. Before it swells, take off rings, bangles and shoes. Keep the arm or leg still, with a splint if you can.
 snake-scorpion.carry	او را به شفاخانه ببرید. همین حالا به شفاخانه بروید، شب باشد یا روز. شخص را بردارید یا با موتر ببرید: راه رفتن زهر را زودتر پخش می‌کند.	Carry them to hospital. Go to hospital now, day or night. Carry the person or take a car: walking spreads the poison faster.
-snake-scorpion.side	اگر استفراغ کرد یا خواب‌آلود شد. اگر استفراغ می‌کند یا خواب‌آلود می‌شود، او را به پهلوی چپ بخوابانید. نفسش را ببینید و اگر بند شد، فشار سینه را شروع کنید.	If vomiting or drowsy. If they vomit or get drowsy, lay them on their left side. Watch the breathing, and start chest pushes if it stops.
+snake-scorpion.side	اگر استفراغ کرد یا خواب‌آلود شد. اگر استفراغ می‌کند یا خواب‌آلود می‌شود، او را به پهلوی چپ بخوابانید. نفسش را ببینید. اگر بند شد، فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.	If vomiting or drowsy. If they vomit or get drowsy, lay them on their left side. Watch the breathing. If it stops, start chest pushes; give a child or baby 5 breaths first.
+snake-scorpion.cpr-link	نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید. صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.	Not breathing? Choose the age for CPR. Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step.
 snake-scorpion.scorpion	نیش گژدم. جای نیش را بشویید و یک تکهٔ تر و سرد رویش بگذارید. طفلی که گژدم نیش زده، باید همین حالا به شفاخانه برود.	Scorpion sting. Wash the sting and put a cold wet cloth on it. A child stung by a scorpion must go to hospital now.
 snake-scorpion.clinic	در کلینیک: معاینهٔ اول، بعد شفاخانه. پوستهٔ صحی یا کلینیک زخم را پاک می‌کند، دوای درد و پیچکاری تیتانوس می‌دهد، و مارگزیده را به شفاخانه می‌فرستد. سیروم ضد گژدم شاید در مرکز صحی باشد؛ بپرسید.	At the clinic: first check, then hospital. The health post or clinic cleans the wound, gives pain medicine and a tetanus injection, and sends snake bites on to the hospital. Scorpion antivenom may be at the health centre; ask.
 snake-scorpion.antivenom	در شفاخانه: سیروم ضد زهر. شفاخانه شخص را چند ساعت زیر نظر می‌گیرد، خون را معاینه می‌کند و اگر علایم زهر باشد سیروم ضد زهر را از راه رگ می‌دهد. پندیدگی، خونریزی و مشکل نفس را تداوی می‌کند. بپرسید کدام شفاخانه سیروم ضد زهر دارد.	At the hospital: antivenom. The hospital watches for hours, checks the blood, and gives antivenom by drip if there are signs of poisoning. It treats swelling, bleeding and breathing trouble. Ask which hospital holds antivenom.
@@ -2487,10 +2501,11 @@ cold-hypothermia.dont	این کارها را نکنید:	Do not:
 cold-hypothermia.dont.fire	او را برای زود گرم شدن به آتش، بخاری یا صندلی نچسپانید	put them right next to a fire, stove or sandali to warm fast
 cold-hypothermia.dont.rub	پوست یخ‌زده را مالش ندهید و برف رویش نمالید	rub frozen skin, or rub snow on it
 cold-hypothermia.dont.bottle	بوتل آب داغ را مستقیم روی پوست نگذارید	put a hot-water bottle straight onto the skin
-cold-hypothermia.not-dead	شخص بسیار سرد که مرده معلوم می‌شود، شاید هنوز نجات یابد. اگر نفس نمی‌کشد، فشار سینه را شروع کنید و در راه شفاخانه ادامه دهید.	A very cold person who seems dead may still be saved. If not breathing, start chest pushes and keep going on the way to hospital.
+cold-hypothermia.not-dead	شخص بسیار سرد که مرده معلوم می‌شود، شاید هنوز نجات یابد. اگر نفس نمی‌کشد، فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید. در راه شفاخانه ادامه دهید.	A very cold person who seems dead may still be saved. If not breathing, start chest pushes; give a child or baby 5 breaths first. Keep going on the way to hospital.
+cold-hypothermia.cpr-link	نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید. صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.	Not breathing? Choose the age for CPR. Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step.
 cold-hypothermia.hospital	در شفاخانه بدن را بی‌خطر از داخل گرم می‌کنند و پوست یخ‌زده را تداوی می‌کنند.	At hospital they warm the body safely from the inside and treat frozen skin.
 eye-chemical.title	مواد کیمیاوی در چشم	Chemical in the eye
-eye-chemical.summary	چشم را ۲۰ دقیقه با آب پاک زیاد بشویید، بعد به شفاخانه بروید.	Wash the eye with lots of clean water for 20 minutes.
+eye-chemical.summary	چشم را ۲۰ دقیقه با آب پاک زیاد بشویید، بعد به شفاخانه بروید.	Wash the eye with lots of clean water for 20 minutes, then go to hospital.
 eye-chemical.lead	چونه، سمنت، دوای زراعتی، وایتکس و تیزاب بتری می‌توانند در چند ثانیه چشم را بسوزانند. شستن فوری با آب، چشم را نجات می‌دهد.	Lime, cement, farm sprays, bleach and battery acid can burn the eye in seconds. Washing at once with water saves sight.
 eye-chemical.wash	فوراً با آب بشویید. چشم را باز نگه دارید و آب پاک را آهسته از گوشهٔ نزدیک بینی به طرف بیرون بریزید، ۲۰ دقیقه. هر آب پاک را استفاده کنید؛ منتظر نمانید.	Wash at once with water. Hold the eye open and pour clean water gently from the inner corner outwards, for 20 minutes. Use any clean water; do not wait.
 eye-chemical.tilt	سر را کج کنید. سر را طوری کج کنید که چشم آسیب‌دیده پایین‌تر باشد، تا آب به چشم دیگر نرود.	Tilt the head. Tilt the head so the hurt eye is lower, so the water does not run into the other eye.
@@ -2514,7 +2529,8 @@ allergy-severe.signs	علایم خطر را بشناسید. پندیدن لب، 
 allergy-severe.go	فوراً به شفاخانه بروید. فوراً یک نفر را برای آوردن موتر بفرستید. اگر قلم پیچکاری حساسیت خود را دارد، کمکش کنید آن را به بیرون ران بزند، و اگر بعد از ۵ دقیقه بهتر نشد، قلم دوم را هم بزند.	Go to hospital at once. Send for a car at once. If they have their own allergy pen, help them use it in the outer thigh, and a second one after 5 minutes if no better.
 allergy-severe.position	بنشانید یا بخوابانید. اگر نفس کشیدن سخت است، بگذارید بنشیند. اگر سرش می‌چرخد، او را هموار بخوابانید و پاهایش را بالا کنید. نگذارید بایستد یا راه برود.	Sit them up, or lay them flat. If breathing is hard, let them sit up. If they feel faint, lay them flat with the legs raised. Do not let them stand or walk.
 allergy-severe.sting	نیش را بیرون کنید. بعد از نیش زنبور عسل، نیش را زود با ناخن یا یک کارت بتراشید و بیرون کنید.	Scrape out a bee sting. After a bee sting, scrape the sting out quickly with a fingernail or a card.
-allergy-severe.cpr	اگر نفسش بند شد. اگر دیگر جواب نمی‌دهد و عادی نفس نمی‌کشد، فوراً فشار سینه را شروع کنید.	If they stop breathing. If they stop responding and are not breathing normally, start chest pushes at once.
+allergy-severe.cpr	اگر نفسش بند شد. اگر دیگر جواب نمی‌دهد و عادی نفس نمی‌کشد، فوراً فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.	If they stop breathing. If they stop responding and are not breathing normally, start chest pushes at once; give a child or baby 5 breaths first.
+allergy-severe.cpr-link	نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید. صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.	Not breathing? Choose the age for CPR. Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step.
 allergy-severe.urgent	اگر بعد از غذا، نیش یا دوا این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, if after a food, sting or medicine someone has:
 allergy-severe.urgent.swelling	پندیدن لب، زبان یا گلو	swelling of the lips, tongue or throat
 allergy-severe.urgent.breathing	نفس با صدا، خس‌خس یا نفس سخت	noisy breathing, wheeze or hard breathing
@@ -2535,7 +2551,7 @@ low-sugar.urgent	اگر کسی که مرض شکر دارد این حالت را 
 low-sugar.urgent.swallow	قورت داده نمی‌تواند یا بی‌هوش است	cannot swallow, or is unconscious
 low-sugar.urgent.fit	تشنج می‌کند	has a fit
 low-sugar.urgent.not-better	بعد از دو بار بوره بهتر نشد	is not better after sugar twice
-low-sugar.urgent.meter	دستگاه قند کمتر از ۵۴ نشان داد، حتی اگر حالا بهتر است	their sugar meter showed under 54, even if they feel better
+low-sugar.urgent.meter	دستگاه قند کمتر از ۵۴ ملی‌گرام (۳٫۰ میلی‌مول) نشان داد، حتی اگر حالا بهتر است	their sugar meter showed under 54 mg/dL (3.0 mmol/L), even if they feel better
 low-sugar.urgent.overdose	تابلیت یا انسولین زیاد گرفته است	took too many diabetes tablets or too much insulin
 low-sugar.soon	اگر این حالت را دارد، امروز به کلینیک بروید:	Go to the clinic today if:
 low-sugar.soon.again	کمی شکر بار بار می‌آید	low sugar keeps coming back
@@ -2611,16 +2627,18 @@ women-signs.title	پستان و رحم: علایمی که معاینه لازم 
 women-signs.summary	سرطان پستان اگر زود پیدا شود، علاج می‌شود. علایم را بشناسید.	Found early, breast cancer can be cured. Know the signs.
 women-signs.lead	سرطان پستان شایع‌ترین سرطان زنان در اینجا است، و اگر زود پیدا شود با عملیات علاج می‌شود. بیشتر غده‌ها سرطان نیست، اما هر تغییر نو معاینه لازم دارد.	Breast cancer is the commonest cancer in women here, and found early it can be cured with an operation. Most lumps are not cancer, but every new change needs a check.
 women-signs.know	پستان‌های خود را بشناسید. ماهی یک بار، بعد از عادت ماهوار، هر دو پستان و زیر بغل را ببینید و لمس کنید تا بدانید برای شما چه عادی است. هر تغییر نو کلینیک لازم دارد.	Know your breasts. Once a month, after your period, look at and feel both breasts and armpits, to learn what is normal for you. Any new change needs the clinic.
+women-signs.pregnant	اگر حامله هستید، برای این حالت همین حالا به شفاخانه بروید، شب باشد یا روز:	If you are pregnant, go to hospital now, day or night, for:
+women-signs.pregnant.bleeding	هر نوع خونریزی از راه تناسلی	Any bleeding from the vagina
 women-signs.soon	اگر یکی از این علایم را دارید، همین هفته به کلینیک بروید	If you have one of these signs, go to the clinic this week
 women-signs.soon.lump	غده یا سختی نو در پستان یا زیر بغل	A new lump or thickening in the breast or armpit
 women-signs.soon.nipple	سر پستان که تازه به داخل کشیده شده، یا خون آمدن از یک سر پستان	A nipple newly pulled in, or bleeding from one nipple
 women-signs.soon.skin	پوست پستان که چقر شده، چین خورده، سرخ است یا مثل پوست مالته شده	Breast skin dimpled, puckered, red, or like orange peel
 women-signs.soon.milk-lump	غده در پستان که بعد از کم شدن پندیدگی شیر باقی بماند	A breast lump that stays after the milk swelling settles
-women-signs.soon.bleeding-sex	خونریزی بعد از همبستری، یا بین دو عادت ماهوار، بیش از یک بار	Bleeding after sex, or between periods, more than once
+women-signs.soon.bleeding-sex	خونریزی بعد از همبستری، یا بین دو عادت ماهوار، بیش از یک بار (اگر حامله نیستید)	Bleeding after sex, or between periods, more than once (not pregnant)
 women-signs.soon.menopause	هر نوع خونریزی، یک سال یا بیشتر بعد از قطع عادت ماهوار	Any bleeding a year or more after periods have stopped
 women-signs.soon.belly	شکمی که کلان‌تر می‌شود، همراه با کم شدن وزن	A belly that keeps getting bigger, with weight loss
 women-signs.clinic	در کلینیک: معاینهٔ پستان. یک کارمند صحی زن هر دو پستان و زیر بغل را معاینه می‌کند و می‌پرسد چند وقت است. برای غده، شما را برای التراسوند و یک معاینهٔ کوچک با سوزن به شفاخانه یا شهر می‌فرستد.	At the clinic: a breast check. A female health worker feels both breasts and armpits and asks how long. A lump is sent for ultrasound and a small needle test, at the hospital or in the city.
-women-signs.cervix-test	معاینهٔ دهانهٔ رحم. بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.	The cervix test. Ask for the cervix test once between 30 and 49, or every 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done.
+women-signs.cervix-test	معاینهٔ دهانهٔ رحم. بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.	The cervix test. Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done.
 women-signs.hospital	در شفاخانه: غده یا خونریزی. التراسوند یا یک نمونهٔ کوچک نشان می‌دهد غده چیست؛ بیشتر آن سرطان نیست. سرطان پستان در مرحلهٔ اول در کابل با عملیات و دوا تداوی می‌شود. خونریزی با معاینه دیده می‌شود.	At the hospital: lump or bleeding. Ultrasound or a small sample shows what a lump is; most are not cancer. Early breast cancer is treated in Kabul with an operation and medicines. Bleeding is checked by examination.
 women-signs.dont	این کارها را نکنید	Things not to do
 women-signs.dont.wait	به خاطر اینکه غده درد ندارد، منتظر نمانید.	Do not wait because a lump does not hurt.
@@ -2635,12 +2653,13 @@ child-signs.urgent	اگر طفل یکی از این علایم را دارد، �
 child-signs.urgent.spots	دانه‌های سرخ یا ارغوانی که زیر گیلاس از بین نمی‌روند	Red or purple spots that do not fade under a pressed glass
 child-signs.urgent.bleeding	خیلی رنگ‌پریده و ضعیف، همراه با خون آمدن از بیره یا بینی	Very pale and weak, with bleeding from the gums or nose
 child-signs.urgent.head	سردرد صبح همراه با استفراغ، یا تازه تلو تلو راه رفتن	Morning headache with vomiting, or a new unsteady walk
+child-signs.urgent.eye-spot	لکهٔ سفید یا کدر که روی سیاهی چشم دیده می‌شود، یا چشم سرخ و دردناک	A white or cloudy spot you can see on the black of the eye, or a red, painful eye
 child-signs.today	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	If your child has any of these signs, go to the clinic today:
 child-signs.today.belly	پندیدگی یا غده در شکم، که اکثراً وقت شستن دیده می‌شود	A swelling or lump in the belly, often found when bathing
 child-signs.today.pale	رنگ‌پریده و خسته، با کبودی‌هایی که زود پیدا می‌شود	Pale and tired, with bruises that come easily
 child-signs.today.fever	تب بیش از ۲ هفته	Fever for more than 2 weeks
 child-signs.soon	اگر یکی از این علایم را دیدید، همین هفته به کلینیک بروید	If you see any of these signs, go to the clinic this week:
-child-signs.soon.white-pupil	برق سفید در سیاهی چشم، یا تازه لوچ شدن چشم	A white glow in the black of the eye, or a new squint
+child-signs.soon.white-pupil	مردمک چشم فقط در عکس با فلش یا روشنی چراغ دستی سفید معلوم می‌شود، یا تازه لوچ شدن چشم	A white pupil seen only in a flash photo or torchlight, or a new squint
 child-signs.soon.bone	درد استخوان که طفل را شب بیدار می‌کند، یا تازه لنگیدن	Bone pain that wakes the child at night, or a new limp
 child-signs.soon.gland	غده در گردن، زیر بغل یا کشالهٔ ران، بیش از یک ماه	A lump in the neck, armpit or groin for over a month
 child-signs.soon.lump	غده در هر جای بدن که کلان می‌شود	A lump anywhere that is growing
@@ -2658,12 +2677,13 @@ checks-women.title	معاینات صحی زنان، به حسب سن	Health chec
 checks-women.summary	کدام معاینات را بخواهید، و در کدام سن.	Which checks to ask for, and at what age.
 checks-women.lead	اینجا کسی شما را برای معاینه نمی‌خواهد، پس این صفحه می‌گوید کدام معاینات را و چه وقت بخواهید. بیشتر آن‌ها در کلینیک چند دقیقه وقت می‌گیرد.	No one calls you for a check-up here, so this page says which checks to ask for, and when. Most take a few minutes at the clinic.
 checks-women.bp	از ۱۸ سالگی: فشار خون. فشار خون خود را هر ۲ تا ۳ سال، بعد از ۴۰ سالگی هر سال، و در هر معاینهٔ حاملگی اندازه کنید. اگر کدام وقت بلند بوده، طوری که کلینیک می‌گوید اندازه کنید.	From 18: blood pressure. Have your blood pressure measured every 2 to 3 years, every year after 40, and at every pregnancy visit. If it was ever high, check it as the clinic says.
-checks-women.pregnancy	در حاملگی: کلینیک معاینه می‌کند. در هر معاینهٔ حاملگی قابله فشار خون، خون و ادرار شما را معاینه می‌کند و آهن و واکسین تیتانوس می‌دهد. معاینهٔ خون هپاتیت ب را هم بخواهید.	In pregnancy: the clinic checks. At each pregnancy visit the midwife checks your blood pressure, blood and urine, and gives iron and the tetanus vaccine. Ask for a hepatitis B blood test too.
-checks-women.cervix	۳۰ تا ۴۹ سالگی: معاینهٔ دهانهٔ رحم. بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.	30 to 49: the cervix test. Ask for the cervix test once between 30 and 49, or every 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done.
+checks-women.pregnancy	در حاملگی: کلینیک معاینه می‌کند. در هر معاینهٔ حاملگی قابله فشار خون، خون و ادرار شما را معاینه می‌کند و آهن و فولیک اسید و واکسین تیتانوس می‌دهد. معاینهٔ خون هپاتیت ب را هم بخواهید.	In pregnancy: the clinic checks. At each pregnancy visit the midwife checks your blood pressure, blood and urine, and gives iron and folic acid and the tetanus vaccine. Ask for a hepatitis B blood test too.
+checks-women.cervix	۳۰ تا ۴۹ سالگی: معاینهٔ دهانهٔ رحم. بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.	30 to 49: the cervix test. Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done.
 checks-women.breasts	هر ماه: پستان‌های شما. بدانید پستان‌های شما به طور عادی چطور است. از ۴۰ سالگی، اگر ممکن باشد، سالی یک بار از یک کارمند صحی زن بخواهید آن‌ها را معاینه کند. غدهٔ نو: همین هفته کلینیک.	Every month: your breasts. Know how your breasts normally feel. From 40, ask a female health worker to examine them once a year, if this is offered. A new lump: clinic this week.
 checks-women.sugar	از ۴۰ سالگی: قند خون. در ۴۰ سالگی قند خون خود را معاینه کنید، و اگر عادی بود هر ۳ سال. اگر چاق هستید، در حاملگی قند داشتید، یا مرض شکر در خانواده است، زودتر.	From 40: blood sugar. Ask for a blood sugar test at 40, then every 3 years if it is normal. Earlier if you are overweight, had sugar in pregnancy, or diabetes is in the family.
 checks-women.hepatitis	یک بار در عمر: معاینهٔ هپاتیت. یک بار معاینهٔ خون برای هپاتیت ب و سی بخواهید، اول اگر حامله هستید یا کسی در خانه هپاتیت دارد. از کلینیک بپرسید کجا می‌شود.	Once in life: hepatitis test. Ask for one hepatitis B and C blood test, first if you are pregnant or someone in the house has hepatitis. Ask the clinic where it is done.
 checks-women.anaemia	رنگ‌پریده یا خسته: معاینهٔ کم‌خونی. اگر رنگ‌پریده، خسته یا نفس‌تنگ هستید، یا عادت ماهوار زیاد دارید، معاینهٔ خون نوک انگشت را برای کم‌خونی بخواهید.	Pale or tired: anaemia test. If you are pale, tired or breathless, or have heavy periods, ask for the finger-prick blood test for anaemia.
+checks-women.tb	هر وقت: معاینهٔ توبرکلوز. سرفهٔ ۲ هفته، تب یا عرق شبانه، یا کم شدن وزن یعنی معاینهٔ توبرکلوز. معاینه و دوای توبرکلوز رایگان است.	Any time: a TB check. A cough for 2 weeks, fever or sweats at night, or losing weight means a TB test. The TB test and medicine are free.
 checks-women.clinic	در کلینیک: معاینه چطور است. فشار خون یک دقیقه وقت می‌گیرد؛ قند و کم‌خونی با سوزن نوک انگشت است. معاینهٔ دهانهٔ رحم را یک کارمند صحی زن با سرکه زود انجام می‌دهد؛ نباید درد کند.	At the clinic: what a check involves. Blood pressure takes a minute; sugar and anaemia are a finger prick. A female health worker does the cervix test, a quick look using vinegar; it should not hurt.
 checks-women.dont	معایناتی که لازم ندارید	Tests you do not need
 checks-women.dont.scans	برای اسکن تمام بدن یا «بستهٔ معاینات کامل» پول ندهید.	Do not pay for whole-body scans or 'full check-up' packages.
@@ -2790,6 +2810,7 @@ food-help.ask	حالتان خوب نیست؟. «چه مشکلی دارید؟» �
 food-diarrhoea.title	اسهال: چه بخوریم و چه بنوشیم	Diarrhoea: what to eat and drink
 food-diarrhoea.summary	او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.	ORS, home drinks and soft food: what helps, and what harms.
 food-diarrhoea.lead	در اسهال بدن زود آب و نمک از دست می‌دهد. نوشیدنی و غذا را ادامه دهید: برای طفل و برای کلان، دوا همین است.	In diarrhoea the body loses water and salt fast. Keep giving drinks and food: for a child and for an adult, this is the medicine.
+food-diarrhoea.young	کمتر از ۲ ماه، یا خون در مدفوع؟. شیرخوار کمتر از ۲ ماه که اسهال دارد، یا خون در مدفوع: امروز به کلینیک بروید. صفحهٔ اسهال را باز کنید.	Under 2 months, or blood in stool?. A baby under 2 months with diarrhoea, or blood in the stool: clinic today. Open the Diarrhoea page.
 food-diarrhoea.ors	اول او آر اس، بعد از هر اسهال. او آر اس بهترین نوشیدنی برای اسهال است. بعد از هر اسهال کم‌کم بدهید؛ مقدار آن در صفحهٔ اسهال است.	ORS first, after every loose stool. ORS is the best drink for diarrhoea. Give it in small sips after every loose stool; how much to give is on the Diarrhoea page.
 food-diarrhoea.home-drinks	نوشیدنی‌های خانگی که کمک می‌کند. آب برنج، شوربای رقیق با کمی نمک، دوغی که از شیر جوشیده ساخته شده، و آب پاک همه کمک می‌کند. هر قدر که بنوشد، بدهید.	Home drinks that also help. Rice water, thin soup with a pinch of salt, doogh made from boiled milk, and clean water all help. Give as much as the person will take.
 food-diarrhoea.breast	بیشتر شیر بدهید، نه کمتر. طفلی که شیر مادر می‌خورد، باید بیشتر و طولانی‌تر شیر بخورد. شیر مادر هم غذا است، هم آب و هم محافظت.	Breastfeed more, not less. A breastfed child should feed more often and for longer. Breast milk is food, water and protection in one.
@@ -2809,6 +2830,7 @@ food-diarrhoea.adult	اسهال در بزرگسالان. او آر اس برای
 food-cough.title	سرفه و زکام: غذا و نوشیدنی	Cough and cold: food and drinks
 food-cough.summary	نوشیدنی گرم، عسل از ۱ سالگی، و غذایی که قوت را نگه می‌دارد.	Warm drinks, honey from age 1, and food that keeps strength.
 food-cough.lead	زکام معمولاً در حدود یک هفته خودش خوب می‌شود. نوشیدنی گرم و غذا بدن را قوی نگه می‌دارد؛ شربت سرفهٔ دکان کمک نمی‌کند.	A cold usually gets better by itself in about a week. Warm drinks and food keep the body strong; cough medicine from the shop does not help.
+food-cough.young	شیرخوار خورد، یا نفس تیز یا مشکل؟. شیرخوار کمتر از ۲ ماه که سرفه دارد، یا هر طفلی که تیز یا مشکل نفس می‌کشد: همین حالا صفحهٔ سرفه را ببینید.	Young baby, or fast or hard breathing?. A baby under 2 months with a cough, or any child breathing fast or hard: see the Cough page now.
 food-cough.drinks	نوشیدنی گرم، زیاد بار. آب گرم، شوربای رقیق یا آش، یا برای اطفال بالای ۱ سال شیر جوشیدهٔ گرم بدهید. زیاد بار نوشیدنی پیش کنید.	Warm drinks, often. Give warm water, thin soup or aush, or warm boiled milk for children over 1 year. Offer a drink often.
 food-cough.honey	عسل از ۱ سالگی. از ۱ سالگی، یک قاشق کوچک عسل وقت خواب سرفهٔ شب را آرام می‌کند. هرگز به طفل کمتر از ۱ سال عسل ندهید.	Honey from age 1. From 1 year, a small spoon of honey at bedtime can ease a night cough. Never give honey to a baby under 1 year.
 food-cough.breast	شیرخوار: دوای او شیر مادر است. طفل کمتر از ۶ ماه فقط شیر مادر لازم دارد، بیشتر از معمول. پیش از شیر دادن، بینی را با تکهٔ نرم و تر پاک کنید.	Babies: breast milk is the remedy. A baby under 6 months needs only breast milk, more often than usual. Clear the nose with a soft wet cloth before feeds.
@@ -2891,9 +2913,9 @@ food-baby.choking	نرم و کوبیده، مغز درست نه. مغزها را
 food-baby.helps.egg	روزی یک تخم مرغ به رشد طفل کمک می‌کند: درست است.	An egg a day helps a child grow: true.
 food-baby.helps.oil	از ۶ ماهگی، کمی روغن یا روغن زرد در غذا خوب است: چربی به رشد طفل کمک می‌کند.	From 6 months, a little oil or ghee in the food is good: fat helps the baby grow.
 food-baby.unproven.sheer-birinj	شیر برنج به عنوان غذای اول خوب است، اگر غلیظ و با شیر جوشیده ساخته شده باشد. تخم مرغ یا دال هم اضافه کنید.	Sheer birinj as a first food is fine if it is thick and made with boiled milk. Add an egg or lentils too.
-food-baby.harm.first-feeds	روغن زرد، آب بوره، چای، عسل یا آب گیاهی در ۶ ماه اول: میکروب می‌آورد و طفل را از سینه دور می‌کند.	Ghee, sugar water, tea, honey or herb water in the first 6 months: they bring germs and keep the baby from the breast.
+food-baby.harm.first-feeds	روغن زرد، آب بوره، چای یا آب گیاهی در ۶ ماه اول، یا عسل پیش از ۱ سالگی: میکروب می‌آورد و طفل را از سینه دور می‌کند.	Ghee, sugar water, tea or herb water in the first 6 months, or honey before 1 year: they bring germs and keep the baby from the breast.
 food-baby.harm.colic	قطره‌های دلدردی دکان، هینگ یا آب گیاهان برای طفلی که گریه می‌کند: کار نمی‌کند، و بعضی به طفل ضرر می‌رساند.	Shop colic drops, hing or herb waters for a crying baby: they do not work, and some can harm a baby.
-food-baby.harm.jaundice	شیرخشت یا آب بوره برای طفل زرد، به جای کلینیک: زردی در روز اول شفاخانه لازم دارد.	Shir khesht or sugar water for a yellow baby, in place of the clinic: yellow on the first day needs the hospital.
+food-baby.harm.jaundice	شیرخشت یا آب بوره برای طفل زرد، به جای کلینیک: زردی در روز اول، یا کف دست و پای زرد، همین حالا شفاخانه لازم دارد.	Shir khesht or sugar water for a yellow baby, in place of the clinic: yellow on the first day, or yellow palms and soles, needs the hospital now.
 food-baby.harm.late	منتظر دندان ماندن، یا تا ۸ یا ۹ ماهگی صبر کردن پیش از غذای نرم: طفل خوب رشد نمی‌کند.	Waiting for teeth, or until 8 or 9 months, before soft food: the baby stops growing well.
 food-baby.harm.kernels	خستهٔ تلخ زردآلو: برای اطفال کوچک زهر است.	Bitter apricot kernels: they are poison for small children.
 food-baby.breastfeeding	شیر مادر و تعداد وعده‌ها. ساعت اول، شیر دادن در شب و روز، و اینکه طفل در هر سن روزی چند وعده غذا لازم دارد.	Breastfeeding and meals a day. The first hour, feeding day and night, and how many meals a child needs at each age.
@@ -3014,7 +3036,7 @@ food-bones.sun	آفتاب بر پوست. آفتاب در پوست ویتامین
 food-bones.teeth	شکر کمتر، دندان پاک. شیرینی، بیسکویت و چای شیرین دندان را خراب می‌کند. روزی دو بار دندان را پاک کنید، و هرگز طفل را با بوتل چای شیرین نخوابانید.	Less sugar, clean teeth. Sweets, biscuits and sweet tea rot the teeth. Clean teeth twice a day, and never put a baby to sleep with a bottle of sweet tea.
 food-bones.calcium	تابلیت کلسیم در حاملگی. اگر کلینیک در حاملگی تابلیت کلسیم داد، آن را در وقتی جدا از آهن بخورید.	Calcium tablets in pregnancy. If the clinic gives calcium tablets in pregnancy, take them, at a different time from the iron.
 food-bones.soon	اگر این را دیدید، همین هفته به کلینیک بروید:	Go to the clinic this week if you see:
-food-bones.soon.legs	طفلی که پاهایش کج می‌شود، یا بند دستش ضخیم است	a child whose legs are bowing, or whose wrists are thick
+food-bones.soon.legs	طفلی که پاهایش بعد از ۲ سالگی بیشتر کج می‌شود، یا یک طرف بیشتر کج است، یا بند دستش ضخیم است	a child whose legs bow more after age 2, or more on one side, or whose wrists are thick
 food-bones.helps.milk	شیر و ماست استخوان را قوی می‌سازد: درست است، از شیر جوشیده.	Milk and yoghurt build strong bones: true, from boiled milk.
 food-bones.helps.sun	آفتاب به استخوان کمک می‌کند: درست است. استخوان هم آفتاب و هم غذا لازم دارد.	The sun helps bones: true. Bones need the sun as well as food.
 food-bones.unproven.bone-soup	یخنی غذای خوب است، اما به استخوان کلسیم کم می‌دهد.	Yakhni (bone soup) is good food, but it gives the bones little calcium.
@@ -3182,6 +3204,7 @@ kit-scale.title	وزن کردن طفل در خانه	Weighing a child at home
 kit-scale.summary	برای هر خانواده لازم نیست: کلینیک اطفال را وزن می‌کند.	Not needed by every family: the clinic weighs children.
 kit-scale.lead	کلینیک اطفال را در هر مراجعه وزن می‌کند. ترازو در خانه لازم نیست، اما برای نوزاد کوچک یا طفلی که وزن نمی‌گیرد کمک می‌کند.	The clinic weighs children at every visit. A scale at home is not needed, but it can help with a small baby or a child who is not gaining weight.
 kit-scale.buy	اگر می‌خواهید بخرید. ترازوی طفل، آویزان یا دیجیتل، حدود ۱۰۰۰ تا ۲۰۰۰ افغانی است. ترازوی عادی خانه هم برای اطفال بزرگ‌تر کار می‌دهد.	If you want one. A baby scale, hanging or digital, costs about 1,000 to 2,000 afghanis. A normal bathroom scale also works for older children.
+kit-scale.zero	ترازوی آویزان: اول روی ۰. خریطهٔ خالی را آویزان کنید و ترازو را روی ۰ بیاورید. بعد طفل را در خریطه بگذارید.	Hanging scale: set it to 0 first. Hang the empty sling and set the scale to 0. Then put the baby in the sling.
 kit-scale.hold	با ترازوی عادی. اول خود را وزن کنید. بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.	With a normal scale. Weigh yourself. Then weigh yourself holding the child. Take the first number from the second: that is the child's weight.
 kit-scale.same	هر بار به یک شکل وزن کنید. با لباس سبک، پیش از شیر یا غذا، در همان وقت روز، و ترازو روی زمین هموار و سخت باشد.	Weigh the same way each time. Use light clothes, weigh before a feed, at the same time of day, with the scale on a flat, hard floor.
 kit-scale.family	در «خانوادهٔ من» بنویسید. وزن را در صفحهٔ طفل خود در این برنامه اضافه کنید و در کلینیک نشان دهید.	Write it in My family. Add the weight to your child's page in the app, and show it at the clinic.
@@ -3190,7 +3213,8 @@ kit-first-aid.title	وسایل کمک‌های اولیه در خانه	First-ai
 kit-first-aid.summary	او آر اس، زنک، صابون، تکهٔ پاک و بنداژ: هر کدام برای چیست.	ORS, zinc, soap, clean cloth and bandages: what each is for.
 kit-first-aid.lead	یک قطی کوچک وسایل کمک‌های اولیه را در جای پاک و خشک، بلند و دور از دست اطفال نگه دارید. هر چند ماه آن را ببینید.	Keep a small box of first-aid things in a clean, dry place, high up and away from children. Check it every few months.
 kit-first-aid.ors	پاکت‌های او آر اس. برای اسهال. حد اقل ۴ پاکت نگه دارید. یک پاکت را در همان مقدار آب پاک که روی پاکت نوشته شده، معمولاً یک لیتر، حل کنید. کلینیک و پوستهٔ صحی آن را دارند.	ORS packets. For diarrhoea. Keep at least 4 packets. Mix one packet in the amount of clean water written on it, usually 1 litre. The clinic and the health post have it.
-kit-first-aid.zinc	تابلیت زنک. برای طفل اسهالی، برای ۱۴ روز: از ۲ تا ۶ ماهگی، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام. کمتر از ۲ ماه، از کارمند صحی بپرسید.	Zinc tablets. For a child with diarrhoea, for 14 days: from 2 to 6 months, 10 mg a day; from 6 months, 20 mg a day. Under 2 months, ask the health worker.
+kit-first-aid.zinc	تابلیت زنک. یک بسته برای طفل اسهالی نگه دارید. صفحهٔ اسهال می‌گوید چه قدر بدهید.	Zinc tablets. Keep a strip for a child with diarrhoea. The Diarrhoea page says how much to give.
+kit-first-aid.zinc-link	چه قدر زنک بدهید. صفحهٔ اسهال را باز کنید: چه قدر زنک و او آر اس به طفل بدهید، و علایم خطر.	How much zinc to give. Open the Diarrhoea page: how much zinc and ORS to give a child, and the danger signs.
 kit-first-aid.soap	صابون. برای شستن دست، زخم و گزیدگی. جای گزیدن حیوان را ۱۵ دقیقه با صابون و آب روان بشویید.	Soap. For washing hands, cuts and bites. Wash an animal bite with soap and running water for 15 minutes.
 kit-first-aid.cloth	تکهٔ پاک و بنداژ. تکهٔ نخی پاک و بنداژ، برای فشار دادن روی خونریزی و پوشاندن سوختگی و زخم. آن‌ها را در خلطهٔ پلاستیکی پاک نگه دارید.	Clean cloth and bandages. Clean cotton cloth and bandage rolls, to press on bleeding and to cover burns and wounds. Keep them in a clean plastic bag.
 kit-first-aid.more	این‌ها هم به کار می‌آید. ترمامتر، چسپ زخم، قیچی، چراغ دستی، و شمارهٔ تلفن یک دریور و کلینیک.	Also useful. A thermometer, sticking plasters, scissors, a torch, and the phone numbers of a driver and the clinic.
