@@ -1159,16 +1159,17 @@ function symTile(s) {
 function askResults(live) {
   if (!ASK.q) return '';
   const syms = findSymptoms(ASK.q).syms;
-  const cards = syms.slice(0, 2).filter((s) => s.page).map(symCard).join('');
-  if (live) return cards + FD.results(ASK.q, true, !!cards);
+  const pics = syms.slice(0, 2).filter((s) => s.page); // js/search-ui.js ask() puts them in order with the pages
+  if (live) return FD.ask(ASK.q, true, pics, symCard);
   const top3 = syms.slice(0, 3).map((s) => s.id);
   svSignal(top3);
-  return cards + FD.results(ASK.q, false, !!cards) + reportCards(svFor('symptoms', top3)).html;
+  return FD.ask(ASK.q, false, pics, symCard) + reportCards(svFor('symptoms', top3)).html;
 }
 // a picture's page as a result card: red, its picture, its name and "Look at the danger signs first"
-function symCard(s) {
+// (calm: no danger in the words and only a loose word match, so without the red look and badge)
+function symCard(s, calm) {
   const href = '#/sym/' + s.id, more = S.book.narration['ui.ask.open'] ? ['ui.ask.open'] : [];
-  return `<div class="rcard danger symcard"><a href="${esc(href)}" class="rimg"><span class="symimg">${symPic(s)}</span></a><a href="${esc(href)}" class="rt"><span class="rbadge">${I.warn}${esc(T('dangerSigns'))}</span><b>${esc(L(s.label))}</b>${more.length ? `<span>${esc(L(S.book.narration['ui.ask.open']))}</span>` : ''}</a>${spk(s.say || 'ui.sym.' + s.id, null, more)}</div>`;
+  return `<div class="rcard${calm ? '' : ' danger'} symcard"><a href="${esc(href)}" class="rimg"><span class="symimg">${symPic(s)}</span></a><a href="${esc(href)}" class="rt">${calm ? '' : `<span class="rbadge">${I.warn}${esc(T('dangerSigns'))}</span>`}<b>${esc(L(s.label))}</b>${more.length ? `<span>${esc(L(S.book.narration['ui.ask.open']))}</span>` : ''}</a>${spk(s.say || 'ui.sym.' + s.id, null, more)}</div>`;
 }
 
 /* ---------- a picture's own page (#/sym/<id>/<age>): content/src/symptoms.json "page" ---------- */

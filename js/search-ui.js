@@ -3,6 +3,65 @@
 // js/app.js calls initFinder(ctx) once with its own helpers and puts finder.results(query) under the search box.
 import { createSearch } from './search.js';
 
+/* ---------- the "What is wrong?" pictures among the results (pure, no DOM: tools/search_eval.mjs tests it) ---------- */
+// js/app.js findSymptoms picks the pictures whose words were typed (at most two, shown above the page results). These
+// rules only put them in order with the ranked pages; they never add a picture.
+const DIG = '۰۱۲۳۴۵۶۷۸۹';
+// the same letter folding as js/app.js findSymptoms
+const pnorm = (x) => String(x || '').toLowerCase()
+  .replace(/[ً-ٰٟ‌‍ـ]/g, '')
+  .replace(/[يى]/g, 'ی').replace(/ك/g, 'ک').replace(/ة/g, 'ه').replace(/[أإآ]/g, 'ا').replace(/ۀ/g, 'ه')
+  .replace(/[۰-۹]/g, (d) => DIG.indexOf(d)).replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+/** True when one of the picture's words was typed as a whole word ("کمر درد"), not only inside another ("کمرم"). */
+export function pictureWhole(s, q) {
+  const nq = ' ' + pnorm(q) + ' ';
+  for (const lg of ['fa', 'ps', 'en']) for (const w of (s.words && s.words[lg]) || []) { const nw = pnorm(w); if (nw && nq.includes(' ' + nw + ' ')) return true; }
+  return false;
+}
+/** Every topic a picture's page points to (its first-aid rows, red and amber boxes, care, tools and more pages). */
+export function pictureTopics(s) {
+  const out = new Set(), pg = s.page || {};
+  const walk = (o) => {
+    if (!o) return;
+    if (typeof o === 'string') { if (!o.startsWith('ui.')) out.add(o.split('.')[0]); return; }
+    if (Array.isArray(o)) { o.forEach(walk); return; }
+    if (typeof o === 'object') for (const v of Object.values(o)) walk(v);
+  };
+  for (const k of ['now', 'red', 'amber', 'care', 'pages']) walk(pg[k]);
+  for (const x of Object.values(pg.tools || {}).flat()) out.add('tool/' + x).add('tool/reading'); // "breaths" → tool/breaths
+  for (const x of [...out]) if (x === 'tool/reading') ['bp', 'temp', 'sugar', 'spo2', 'muac'].forEach((d) => out.add('tool/reading/' + d));
+  return out;
+}
+// the one emergency page a picture is about, when its "first aid now" list has only that page (burn → burns)
+const pictureOnly = (s) => Object.values((s.page && s.page.now) || {}).filter((x) => x.length === 1).map((x) => x[0]);
+// a picture that may lose its red look: not a first-aid picture (it has "now" pages), and not one only for a newborn
+// or a pregnant or newly delivered woman
+const calmable = (s) => !(s.page && s.page.now) && !((s.page && s.page.ages) || ['anyone']).every((a) => a === 'baby' || a === 'pregnant' || a === 'after');
+/**
+ * Order the results of #/ask. res: the ranked pages (best first, danger first, Home-tab pages already taken out);
+ * pics: the pictures js/app.js matched. Returns { lead, pics: [{ s, calm }], rest }:
+ * - lead: the named emergency page goes above the pictures when the words matched its danger phrase and no picture is
+ *   about that one page ("مار پای برادرم را گزید": snake bite before the dog-bite picture; "قلبش ایستاد": CPR before chest pain).
+ *   The Emergency screen is never moved: the pictures already lead to it.
+ * - a picture is left out only when it clearly does not fit: no danger in the words, none of the picture's pages among
+ *   the results, and either a sure page match (score 8 or more: "سرفه‌ام یک ماه است خوب نمیشود", where Pashto خوب is
+ *   "sleep") or the picture's word only inside another word ("کمرم درد میکنه" holds کنه, a tick).
+ * - calm: no danger in the words and the picture's word was only inside another word ("کمرم درد می‌کند", "شیرم کم
+ *   است"), on a picture that is not first aid and not only for a newborn or a pregnancy (calmable): the card without
+ *   the red danger look. When the words have a danger, every picture stays red and none is left out.
+ */
+export function askPlan(res, pics, q) {
+  const danger = res.some((r) => r.danger), top = res.slice(0, 5);
+  const kept = pics.filter((s) => {
+    if (danger || !top.length || (top[0].score < 8 && pictureWhole(s, q))) return true;
+    const t = pictureTopics(s);
+    return top.some((r) => t.has(r.id));
+  }).map((s) => ({ s, calm: !danger && calmable(s) && !pictureWhole(s, q) }));
+  const first = res[0];
+  const lead = kept.length && first && first.danger && first.id !== 'emergency' && !kept.some((p) => pictureOnly(p.s).includes(first.id)) ? first : null;
+  return { lead, pics: kept, rest: res.filter((r) => r !== lead).slice(0, lead ? 4 : 5) };
+}
+
 export function initFinder(ctx) {
   const { S, esc, T, L, ic, I, spk, isAdultTopic } = ctx;
   let eng = null, engBook = null;
@@ -86,6 +145,21 @@ export function initFinder(ctx) {
     // have: the pages of the pictures the words name are already shown above (js/app.js), so no "nothing found"
     return html ? head() + html : live && n < 5 ? '' : have ? '' : none();
   }
+  /** The whole #/ask result list: pics are the pictures js/app.js matched, symCard(s, calm) draws one. The named
+   *  emergency page first when no picture is about it, then the pictures, then "These pages can help" (askPlan). */
+  function ask(q, live, pics, symCard) {
+    const n = String(q || '').trim().length;
+    if (!n || (live && n < 2)) return '';
+    let res = [];
+    try { res = engine().rank(q, S.lang, { limit: 10 }); } catch (e) { console.warn('search', e); }
+    const lead = res.find((r) => !r.danger), home = homeTab();
+    const kitOk = !!(lead && (KIT(lead.id) || /^(tool\/reading|reading-)/.test(lead.id)));
+    res = res.filter((r) => (KIT(r.id) ? kitOk : !home.has(r.id)));
+    const plan = askPlan(res, pics || [], q);
+    const rest = plan.rest.map(card).join('');
+    const html = (plan.lead ? card(plan.lead) : '') + plan.pics.map((p) => symCard(p.s, p.calm)).join('') + (rest ? head() + rest : '');
+    return html || (live && n < 5 ? '' : none());
+  }
   /** Put result html into el while typing: cards that stay the same keep their element (no picture reload). */
   function show(el, html) {
     // (skip only when el still shows what this function put there: a sent search or a picture may have replaced it)
@@ -103,5 +177,5 @@ export function initFinder(ctx) {
   }
   /** Build the word index for the reader's language ahead of the first letter typed. */
   function warm() { try { engine().warm(S.lang); } catch {} }
-  return { results, none, show, warm, rank: (q, o) => engine().rank(q, S.lang, o), engine };
+  return { results, ask, none, show, warm, rank: (q, o) => engine().rank(q, S.lang, o), engine };
 }

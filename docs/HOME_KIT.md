@@ -84,7 +84,7 @@ Two numbers; the top must be bigger than the bottom. Valid range top 50 to 300, 
 
 | Person | Reading | Result |
 | --- | --- | --- |
-| Adult | 180/120 or more | Hospital now (the advice says sit 5 minutes and measure once more first) |
+| Adult | 180/120 or more | First reading: measure again (sit 5 minutes); a second reading still 180/120 or more = hospital now (the reading-bp page's "two times"; audit 11 Oct 2026, A-20) |
 | | 135/85 to 179/119 | Clinic this week (rest, measure again; keep taking medicine); with dizziness or fainting = clinic today |
 | | top under 90 with dizziness or fainting | Clinic today (lie down, legs up, water; fainting again or confused = hospital) |
 | | top under 90, feels well | Care at home (tell the clinic if on BP medicine) |
@@ -100,15 +100,15 @@ Two numbers; the top must be bigger than the bottom. Valid range top 50 to 300, 
 
 ### Blood sugar (`verdictSugar`)
 
-The checker first asks whether the person has diabetes (KT-3). The person picks mg/dL (default) or mmol/L; mmol/L is multiplied by 18. "HI" counts as 600 and "LO" as 20. Valid range 10 to 700 mg/dL.
+The checker first asks whether the person has diabetes (KT-3). The person picks mg/dL (default) or mmol/L; mmol/L is multiplied by 18, except the two low bands, which are compared in mmol/L as the page says (under 3.0, under 4.0; audit 11 Oct 2026, A-16: 3.9 × 18 = 70.2 read as good). "HI" counts as 600 and "LO" as 20. Valid range 10 to 700 mg/dL.
 
 | Reading (mg/dL) | mmol/L | Result |
 | --- | --- | --- |
 | under 54, or LO | under 3.0 | Hospital now: give sugar first if they can swallow (4 teaspoons in water, then food) |
-| 54 to 69 | 3.0 to 3.8 | Clinic today: give sugar, measure again in 15 minutes and give sugar again if still low |
-| 70 to 180 | 3.9 to 10.0 | Good range (has diabetes) |
+| 54 to 69 | 3.0 to 3.9 | Clinic today: give sugar, measure again in 15 minutes and give sugar again if still low |
+| 70 to 180 | 4.0 to 10.0 | Good range (has diabetes) |
 | 181 to 249 | 10.1 to 13.8 | Clinic this week if most readings are like this (has diabetes) |
-| No diabetes, or not sure: 70 to 125 | 3.9 to 6.9 | Normal (no medicine line) |
+| No diabetes, or not sure: 70 to 125 | 4.0 to 6.9 | Normal (no medicine line) |
 | No diabetes: 126 to 199 | 7.0 to 11.0 | Care at home and watch: measure again before breakfast; 126 or more then = clinic this week (WHO/IDF 2006) |
 | No diabetes: 200 to 249 | 11.1 to 13.8 | Clinic this week for a proper test (today if very thirsty, a lot of urine, weight loss) |
 | 250 to 399 | 13.9 to 22.1 | Clinic today (hospital if vomiting, very sleepy, fast deep breathing) |
@@ -123,7 +123,7 @@ The topic page teaches 80 to 130 before breakfast as the target (ADA), and mmol/
 | Reading (%) | Result |
 | --- | --- |
 | 95 to 100 | Normal, but a normal number does not rule out illness |
-| 93 to 94 | Clinic today if it stays there or the person is unwell (warm the hand, keep still, measure again) |
+| 93 to 94 | First reading: measure again (warm the hand, keep still); a second reading of 93 or 94 = clinic today; any danger sign = hospital now (the reading-spo2 page; audit 11 Oct 2026, A-20) |
 | 92 or less | Hospital now |
 | any, with very hard breathing, blue lips, confusion, chest pain (adult) or chest indrawing, blue lips, very sleepy, cannot drink (child under 5) | Hospital now |
 

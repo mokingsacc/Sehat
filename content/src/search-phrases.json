@@ -10,11 +10,11 @@
       "danger": ["نفس نمی‌کشد", "نفس نمیکشه", "نفسش بند شده", "ساه نه اخلي", "not breathing", "stopped breathing", "nafas namekasha", "saa na akhli", "emergency", "حالت عاجل", "بیړنی"]
     },
     "cpr-adult": {
-      "fa": ["بزرگسال نفس نمی‌کشد", "مرد افتاد و نفس نمی‌کشد", "پدرم افتاد نفس نمیکشه", "شوهرم نفس نمی‌کشد", "مادرم نفس نمی‌کشد", "افتاد و نفس نمی‌کشد", "قلبش ایستاد", "قلب ایستاده", "نبض ندارد", "احیای قلبی", "فشار دادن سینه", "ماساژ قلب", "بی‌هوش و نفس نمی‌کشد"],
-      "ps": ["لوی سړی ساه نه اخلي", "پرېوت او ساه نه اخلي", "پلار مې ساه نه اخلي", "مېړه مې ساه نه اخلي", "زړه یې ودرېد", "نبض نه لري", "د سینې فشار"],
-      "lat": ["qalbesh istad", "qalb istad", "nabz nadara", "ehya", "ehyaye qalbi", "pedaram nafas namekasha", "zra ye wadared", "cpr"],
+      "fa": ["بزرگسال نفس نمی‌کشد", "مرد افتاد و نفس نمی‌کشد", "پدرم افتاد نفس نمیکشه", "شوهرم نفس نمی‌کشد", "مادرم نفس نمی‌کشد", "افتاد و نفس نمی‌کشد", "قلبش ایستاد", "قلب ایستاده", "نبض ندارد", "احیای قلبی", "فشار دادن سینه", "ماساژ قلب", "بی‌هوش و نفس نمی‌کشد", "قلبش بند آمد", "قلبش بند شد", "قلبش از کار ماند"],
+      "ps": ["لوی سړی ساه نه اخلي", "پرېوت او ساه نه اخلي", "پلار مې ساه نه اخلي", "مېړه مې ساه نه اخلي", "زړه یې ودرېد", "نبض نه لري", "د سینې فشار", "زړه یې بند شو", "زړه یې ودرېده"],
+      "lat": ["qalbesh istad", "qalb istad", "nabz nadara", "ehya", "ehyaye qalbi", "pedaram nafas namekasha", "zra ye wadared", "cpr", "qalbesh band amad", "qalbesh band shud"],
       "en": ["adult not breathing", "man collapsed not breathing", "woman collapsed not breathing", "collapsed not breathing", "heart stopped", "cardiac arrest", "cpr", "cpr adult", "chest compressions", "no pulse", "resuscitation", "heart massage", "father not breathing", "husband not breathing"],
-      "danger": ["بزرگسال نفس نمی‌کشد", "قلبش ایستاد", "نبض ندارد", "زړه یې ودرېد", "لوی سړی ساه نه اخلي", "heart stopped", "cardiac arrest", "adult not breathing", "collapsed not breathing", "no pulse", "cpr"]
+      "danger": ["بزرگسال نفس نمی‌کشد", "قلبش ایستاد", "نبض ندارد", "زړه یې ودرېد", "لوی سړی ساه نه اخلي", "heart stopped", "cardiac arrest", "adult not breathing", "collapsed not breathing", "no pulse", "cpr", "قلبش بند آمد", "قلبش بند شد", "زړه یې بند شو", "qalbesh band amad"]
     },
     "cpr-child": {
       "fa": ["طفل نفس نمی‌کشد", "طفلم نفس نمی‌کشد", "بچه نفس نمیکشه", "بچیم نفس نمیکشه", "پسرم نفس نمی‌کشد", "دخترم نفس نمی‌کشد", "اولادم نفس نمی‌کشد", "احیای طفل", "طفل افتاد و نفس نمی‌کشد"],
@@ -31,11 +31,11 @@
       "danger": ["شیرخوار نفس نمی‌کشد", "طفل کبود شد", "طفل کبود شده", "ماشوم شین شو", "تي خوړونکی ماشوم ساه نه اخلي", "baby not breathing", "infant not breathing", "baby turned blue", "baby is blue", "baby limp", "shirkhor nafas namekasha"]
     },
     "cpr-newborn": {
-      "fa": ["نوزاد نفس نمی‌کشد", "طفل بعد از ولادت نفس نمی‌کشد", "طفل تازه تولد نفس نمیکشه", "نوزاد گریه نمی‌کند", "طفل بعد از ولادت گریه نکرد", "طفل پیدا شد و نفس نمیکشه", "نوزاد کبود است"],
+      "fa": ["نوزاد نفس نمی‌کشد", "طفل بعد از ولادت نفس نمی‌کشد", "طفل تازه تولد نفس نمیکشه", "نوزاد گریه نمی‌کند", "طفل بعد از ولادت گریه نکرد", "طفل پیدا شد و نفس نمیکشه", "نوزاد کبود است", "نوزاد بعد از تولد نفس نمی‌کشد", "طفل نو نفس نمی‌کشد"],
       "ps": ["نوی زېږېدلی ماشوم ساه نه اخلي", "ماشوم له زېږون وروسته ساه نه اخلي", "ماشوم له زېږون وروسته نه ژاړي", "نوی ماشوم نه ژاړي"],
       "lat": ["nawzad nafas namekasha", "nozad nafas namekasha", "nawzad gerya namekona", "nawe mashum saa na akhli"],
       "en": ["newborn not breathing", "baby not breathing after birth", "newborn not crying", "baby born not breathing", "baby did not cry at birth", "newborn resuscitation", "just born not breathing"],
-      "danger": ["نوزاد نفس نمی‌کشد", "طفل بعد از ولادت نفس نمی‌کشد", "نوزاد گریه نمی‌کند", "نوی زېږېدلی ماشوم ساه نه اخلي", "newborn not breathing", "baby not breathing after birth", "newborn not crying", "nawzad nafas namekasha"]
+      "danger": ["نوزاد نفس نمی‌کشد", "طفل بعد از ولادت نفس نمی‌کشد", "نوزاد گریه نمی‌کند", "نوی زېږېدلی ماشوم ساه نه اخلي", "newborn not breathing", "baby not breathing after birth", "newborn not crying", "nawzad nafas namekasha", "نوزاد نفس نمیکشه", "طفل تازه تولد نفس نمیکشه", "نوزاد بعد از تولد نفس نمی‌کشد"]
     },
     "choking-baby": {
       "fa": ["گلوی شیرخوار بند شد", "چیزی در گلوی طفل گیر کرده", "گلوی طفل بند شده", "شیر در گلوی طفل گیر کرد", "نخود در گلوی طفل", "طفل سکه قورت داد", "شیرخوار خفه شد", "طفل نخود قورت داد", "طفلم چیزی قورت داد و نفسش بند شد", "شیرخوار قورت داد نفسش بند"],
@@ -59,11 +59,11 @@
       "danger": ["بیهوش", "بی‌هوش شد", "از هوش رفت", "به هوش نمی‌آید", "بې هوښه", "unconscious", "unresponsive", "passed out", "not responding", "behosh", "be hosh"]
     },
     "drowning": {
-      "fa": ["غرق", "غرق شد", "در آب غرق شد", "در آب افتاد", "در جوی افتاد", "در کانال افتاد", "در چاه افتاد", "در دریا افتاد", "در حوض افتاد", "از آب کشیدیم"],
+      "fa": ["غرق", "غرق شد", "در آب غرق شد", "در آب افتاد", "در جوی افتاد", "در کانال افتاد", "در چاه افتاد", "در دریا افتاد", "در حوض افتاد", "از آب کشیدیم", "طفلم در آب افتاد", "در آب افتاد غرق شد", "از آب کشیدیمش"],
       "ps": ["ډوب شو", "په اوبو کې ډوب شو", "په ویاله کې ولوېد", "په څاه کې ولوېد", "له اوبو مو راوویست", "په سیند کې ډوب"],
-      "lat": ["gharq", "gharq shud", "garq shod", "dub shu", "dob shu", "ab aftad", "da obo ke dub"],
+      "lat": ["gharq", "gharq shud", "garq shod", "dub shu", "dob shu", "ab aftad", "da obo ke dub", "ghargh shod", "ghargh shud", "gharq shod", "dar ab aftad"],
       "en": ["drowning", "drowned", "nearly drowned", "fell in water", "fell in the canal", "fell in the river", "fell in a well", "pulled out of water", "under water"],
-      "danger": ["غرق", "غرق شد", "در آب افتاد", "ډوب شو", "drowning", "drowned", "fell in water", "pulled out of water", "gharq", "fell in the canal", "fell in the river", "fell in a well"]
+      "danger": ["غرق", "غرق شد", "در آب افتاد", "ډوب شو", "drowning", "drowned", "fell in water", "pulled out of water", "gharq", "fell in the canal", "fell in the river", "fell in a well", "غرق شده", "ghargh shod", "gharq shud", "در جوی افتاد", "در کانال افتاد", "در حوض افتاد", "در چاه افتاد", "په ویاله کې ولوېد"]
     },
     "bleeding": {
       "fa": ["خونریزی", "خونریزی شدید", "خون بند نمی‌شود", "خون بند نمیشه", "خون زیاد میره", "خون فواره میزند", "زخم عمیق", "بریدگی عمیق", "دستش برید", "پایش برید", "چاقو خورد", "مرمی خورد", "زخمی شد خون میاید", "زخمی انفجار"],
@@ -119,11 +119,11 @@
       "en": ["child stung by scorpion"]
     },
     "allergy-severe": {
-      "fa": ["حساسیت", "حساسیت شدید", "لبش پندید", "لب‌هایش پندیده", "رویش پندید", "زبانش پندید", "گلویش تنگ شد", "زنبور زد", "نیش زنبور", "بعد از پیچکاری پندید", "بعد از دوا حساسیت کرد", "کهیر", "دانه و خارش همه جان", "ورم روی بعد از غذا", "زنبور گزید"],
-      "ps": ["حساسیت", "سخت حساسیت", "شونډې یې پړسیدلې", "مخ یې وپړسېد", "ژبه یې پړسیدلې", "ستونی یې تنګ شو", "مچۍ وچیچه", "ګنډیر وچیچه", "د پیچکارۍ وروسته پړسوب"],
-      "lat": ["hasasiat", "hasasiyat", "hassasiat", "zanbur zad", "zambur", "lab pundid", "pundidan", "parsob", "machai wachicha"],
-      "en": ["allergy", "allergic reaction", "severe allergy", "anaphylaxis", "swollen lips", "swollen face", "swollen tongue", "throat closing", "throat swelling", "bee sting", "wasp sting", "reaction to injection", "reaction to medicine", "hives", "itchy rash all over", "allergic to food", "face swelled up after eating", "swelling after eating nuts"],
-      "danger": ["حساسیت شدید", "زبانش پندید", "گلویش تنگ شد", "سخت حساسیت", "ژبه یې پړسیدلې", "anaphylaxis", "throat closing", "swollen tongue", "swollen lips", "allergic reaction", "severe allergy", "زنبور گزید نفسش تنگ است", "مچۍ وچیچه ساه یې تنګه ده", "bee sting cannot breathe"]
+      "fa": ["حساسیت", "حساسیت شدید", "لبش پندید", "لب‌هایش پندیده", "رویش پندید", "زبانش پندید", "گلویش تنگ شد", "زنبور زد", "نیش زنبور", "بعد از پیچکاری پندید", "بعد از دوا حساسیت کرد", "کهیر", "دانه و خارش همه جان", "ورم روی بعد از غذا", "زنبور گزید", "زنبور گزید و پندید", "زنبور گزید رویش پندید", "زنبور زد نفسش تنگ شد", "زنبور گزید نفسش تنگ شد", "نیش زنبور و نفس تنگی", "زنبور زد و پندید"],
+      "ps": ["حساسیت", "سخت حساسیت", "شونډې یې پړسیدلې", "مخ یې وپړسېد", "ژبه یې پړسیدلې", "ستونی یې تنګ شو", "مچۍ وچیچه", "ګنډیر وچیچه", "د پیچکارۍ وروسته پړسوب", "مچۍ وچیچه او وپړسېد", "ګنډیر وچیچه ساه یې تنګه ده"],
+      "lat": ["hasasiat", "hasasiyat", "hassasiat", "zanbur zad", "zambur", "lab pundid", "pundidan", "parsob", "machai wachicha", "zanbur gazid", "zanbur zad pundid"],
+      "en": ["allergy", "allergic reaction", "severe allergy", "anaphylaxis", "swollen lips", "swollen face", "swollen tongue", "throat closing", "throat swelling", "bee sting", "wasp sting", "reaction to injection", "reaction to medicine", "hives", "itchy rash all over", "allergic to food", "face swelled up after eating", "swelling after eating nuts", "bee sting and swelling", "bee sting short of breath", "wasp sting and swelling", "stung and face swelling"],
+      "danger": ["حساسیت شدید", "زبانش پندید", "گلویش تنگ شد", "سخت حساسیت", "ژبه یې پړسیدلې", "anaphylaxis", "throat closing", "swollen tongue", "swollen lips", "allergic reaction", "severe allergy", "زنبور گزید نفسش تنگ است", "مچۍ وچیچه ساه یې تنګه ده", "bee sting cannot breathe", "زنبور گزید رویش پندید", "زنبور گزید نفسش تنگ شد", "زنبور زد نفسش تنگ شد", "ګنډیر وچیچه ساه یې تنګه ده", "bee sting short of breath", "wasp sting cannot breathe", "stung and face swelling"]
     },
     "allergy-severe.sting": {
       "fa": ["نیش زنبور", "زنبور گزید"],
@@ -132,18 +132,18 @@
       "en": ["bee sting", "wasp sting", "stung by a bee"]
     },
     "asthma-attack": {
-      "fa": ["حمله استما", "نفس تنگی", "نفس تنگی شدید", "نفسش تنگ است", "خس خس سینه", "سینه‌اش خس خس میکند", "پمپ نفس", "نفس گرفته نمی‌تواند"],
+      "fa": ["حمله استما", "نفس تنگی", "نفس تنگی شدید", "نفسش تنگ است", "خس خس سینه", "سینه‌اش خس خس میکند", "پمپ نفس", "نفس گرفته نمی‌تواند", "حمله نفس تنگی", "استما دارد نفسش تنگ شده", "استما حمله کرده", "نفسش تنگ شده"],
       "ps": ["ساه لنډي", "د ساه لنډۍ حمله", "سینه یې خړهار کوي", "ساه یې لنډه ده", "ساه نشي اخیستلی", "پمپ"],
       "lat": ["astma", "dama", "nafas tangi", "nafas tang", "nafasesh tang", "khes khes", "khis khis", "saa landi", "sah landi", "pump"],
       "en": ["asthma attack", "wheeze", "wheezing", "puffer", "short of breath", "shortness of breath", "breathless", "tight chest", "cannot breathe", "can't breathe", "struggling to breathe", "hard to breathe"],
-      "danger": ["حمله استما", "نفس تنگی شدید", "نفس گرفته نمی‌تواند", "ساه نشي اخیستلی", "asthma attack", "cannot breathe", "can't breathe", "struggling to breathe"]
+      "danger": ["حمله استما", "نفس تنگی شدید", "نفس گرفته نمی‌تواند", "ساه نشي اخیستلی", "asthma attack", "cannot breathe", "can't breathe", "struggling to breathe", "حمله نفس تنگی", "استما نفسش تنگ شده", "د ساه لنډۍ حمله"]
     },
     "head-injury": {
-      "fa": ["ضربه به سر", "سرش خورد", "سرش به زمین خورد", "سرش شکست", "سرش زخم شد", "ضربه سر", "سرش کفید", "بعد از ضربه سر قی کرد", "بعد از ضربه سر بیهوش شد", "سرش به دیوال خورد"],
-      "ps": ["سر ته ټکر", "سر یې ولګېد", "سر یې مات شو", "سر یې ټپي شو", "سر یې په ځمکه ولګېد", "سر یې ووهل شو"],
+      "fa": ["ضربه به سر", "سرش خورد", "سرش به زمین خورد", "سرش شکست", "سرش زخم شد", "ضربه سر", "سرش کفید", "بعد از ضربه سر قی کرد", "بعد از ضربه سر بیهوش شد", "سرش به دیوال خورد", "سرش خورد و بیهوش شد", "سرش به زمین خورد و بیهوش شد", "سرش خورد بی‌هوش شد"],
+      "ps": ["سر ته ټکر", "سر یې ولګېد", "سر یې مات شو", "سر یې ټپي شو", "سر یې په ځمکه ولګېد", "سر یې ووهل شو", "سر یې ولګېد او بې هوښه شو"],
       "lat": ["zarba sar", "zarba ba sar", "sarash khord", "sar shikast", "sar mat shu", "sar ta takar"],
       "en": ["head injury", "hit head", "hit his head", "hit her head", "bang on the head", "knock on the head", "head wound", "fell on head", "cut on head", "concussion", "vomiting after head injury", "head bump"],
-      "danger": ["ضربه به سر", "سرش شکست", "سر ته ټکر", "سر یې مات شو", "head injury", "hit head", "head wound", "concussion"]
+      "danger": ["ضربه به سر", "سرش شکست", "سر ته ټکر", "سر یې مات شو", "head injury", "hit head", "head wound", "concussion", "سرش خورد و بیهوش شد", "بعد از ضربه سر بیهوش شد", "سرش به زمین خورد بیهوش", "سر یې ولګېد بې هوښه"]
     },
     "falls-fractures": {
       "fa": ["افتاد", "از بام افتاد", "از درخت افتاد", "از دیوار افتاد", "از بلندی افتاد", "شکستگی", "استخوان شکست", "دستش شکست", "پایش شکست", "کمرش شکست", "گردن درد بعد از افتادن", "شکسته بند", "پایش پیچ خورد", "مچ پایش پندید", "کمر درد بعد از افتادن"],
@@ -179,11 +179,11 @@
       "en": ["dust in eye", "sand in eye", "grit in eye"]
     },
     "heat-stroke": {
-      "fa": ["گرمازدگی", "گرما زده", "گرمی زد", "آفتاب زد", "آفتاب‌زدگی", "در گرمی بیهوش شد", "در آفتاب افتاد", "?گرمی کرده", "جانش در گرما خیلی داغ شد", "در موتر گرم ماند", "در گرما بیهوش شد", "در گرما کار کرد و افتاد", "گرما زد"],
+      "fa": ["گرمازدگی", "گرما زده", "گرمی زد", "آفتاب زد", "آفتاب‌زدگی", "در گرمی بیهوش شد", "در آفتاب افتاد", "?گرمی کرده", "جانش در گرما خیلی داغ شد", "در موتر گرم ماند", "در گرما بیهوش شد", "در گرما کار کرد و افتاد", "گرما زد", "گرمازده شد", "گرما زده شد", "گرمی خورده"],
       "ps": ["د ګرمۍ وهل", "ګرمي وهلی", "لمر وهلی", "په ګرمۍ کې بې هوښه شو", "ګرمي ووهه"],
       "lat": ["garmazadagi", "garma zada", "garmi zad", "aftab zad", "aftabzadagi", "?garmi", "garmi wahali", "lmar wahali"],
       "en": ["heat stroke", "heatstroke", "sunstroke", "sun stroke", "too hot in the sun", "collapsed in the heat", "heat exhaustion", "overheated", "child left in hot car", "fainted in the heat", "collapsed working in the heat"],
-      "danger": ["گرمازدگی", "آفتاب زد", "د ګرمۍ وهل", "heat stroke", "heatstroke", "sunstroke", "garmazadagi"]
+      "danger": ["گرمازدگی", "آفتاب زد", "د ګرمۍ وهل", "heat stroke", "heatstroke", "sunstroke", "garmazadagi", "گرما زده", "گرمازده شد", "گرما زد"]
     },
     "cold-hypothermia": {
       "fa": ["سرمازدگی", "سرما زده", "یخ زد", "از سرما یخ کرد", "جانش یخ است", "بدنش سرد است", "دست و پایش یخ زده", "در برف ماند", "انگشتانش یخ زده", "از سرما میلرزد"],
@@ -224,11 +224,11 @@
       "en": ["knock on the head"]
     },
     "red-flags": {
-      "fa": ["علایم خطر بزرگسالان", "درد سینه", "سینه‌ام درد میکند", "درد قفسه سینه", "سکته", "سکته مغزی", "سکته قلبی", "حمله قلبی", "رویش کج شد", "دهنش کج شد", "دست و پایش بی‌حس شد", "یک طرفش فلج شد", "زبانش گرفت", "گپ زده نمی‌تواند", "سردرد", "سردرد شدید", "سر درد", "سرم درد میکند", "درد سر", "بدترین سردرد", "خون قی کرد", "استفراغ خون", "مدفوع سیاه", "درد شدید شکم", "دل درد شدید", "دلم درد میکند", "شکم درد", "گیچ است", "تب و گردن شخ"],
-      "ps": ["په لویانو کې د خطر نښې", "د سینې درد", "سینه مې خوږیږي", "سکته", "د زړه حمله", "مخ یې کوږ شو", "لاس یې کمزوری شو", "خبرې نه شي کولی", "سخت سر درد", "سر درد", "سر مې خوږیږي", "وینه یې کانګې کړې", "تور غایطه", "سخت نس درد", "نس درد", "نس مې خوږیږي"],
-      "lat": ["dard sina", "dard-e sina", "sina dard", "sakta", "sekta", "sakta-e qalbi", "hamla qalbi", "ru kaj", "sar dard", "sardard", "dard-e sar", "dard sar", "saram dard mekona", "sar me khwagigi", "sar khog", "khun qai", "shekam dard", "shikam dard", "del dard", "dil dard", "nas dard", "zra hamla"],
-      "en": ["chest pain", "pain in chest", "heart attack", "stroke", "face drooping", "weak arm", "one side weak", "slurred speech", "cannot speak", "worst headache", "sudden headache", "severe headache", "headache", "head pain", "vomiting blood", "black stool", "severe stomach pain", "severe belly pain", "stomach pain", "belly pain", "tummy pain", "confused", "very drowsy", "stiff neck and fever", "adult danger signs", "stomach ache", "tummy ache", "belly ache"],
-      "danger": ["درد سینه", "سکته", "سکته مغزی", "حمله قلبی", "خون قی کرد", "د سینې درد", "د زړه حمله", "chest pain", "heart attack", "stroke", "face drooping", "vomiting blood", "worst headache", "dard sina", "sakta"]
+      "fa": ["علایم خطر بزرگسالان", "درد سینه", "سینه‌ام درد میکند", "درد قفسه سینه", "سکته", "سکته مغزی", "سکته قلبی", "حمله قلبی", "رویش کج شد", "دهنش کج شد", "دست و پایش بی‌حس شد", "یک طرفش فلج شد", "زبانش گرفت", "گپ زده نمی‌تواند", "سردرد", "سردرد شدید", "سر درد", "سرم درد میکند", "درد سر", "بدترین سردرد", "خون قی کرد", "استفراغ خون", "مدفوع سیاه", "درد شدید شکم", "دل درد شدید", "دلم درد میکند", "شکم درد", "گیچ است", "تب و گردن شخ", "رویش کج شده", "یک طرف رویش کج شد", "یک طرف رویش کج شده", "دهنش کج شده", "رویش یک طرف افتاده"],
+      "ps": ["په لویانو کې د خطر نښې", "د سینې درد", "سینه مې خوږیږي", "سکته", "د زړه حمله", "مخ یې کوږ شو", "لاس یې کمزوری شو", "خبرې نه شي کولی", "سخت سر درد", "سر درد", "سر مې خوږیږي", "وینه یې کانګې کړې", "تور غایطه", "سخت نس درد", "نس درد", "نس مې خوږیږي", "مخ یې کوږ شوی", "خوله یې کوږه شوه", "د مخ یو اړخ یې کوږ شو"],
+      "lat": ["dard sina", "dard-e sina", "sina dard", "sakta", "sekta", "sakta-e qalbi", "hamla qalbi", "ru kaj", "sar dard", "sardard", "dard-e sar", "dard sar", "saram dard mekona", "sar me khwagigi", "sar khog", "khun qai", "shekam dard", "shikam dard", "del dard", "dil dard", "nas dard", "zra hamla", "ruyash kaj shud", "dahanash kaj", "makh ye kog sho"],
+      "en": ["chest pain", "pain in chest", "heart attack", "stroke", "face drooping", "weak arm", "one side weak", "slurred speech", "cannot speak", "worst headache", "sudden headache", "severe headache", "headache", "head pain", "vomiting blood", "black stool", "severe stomach pain", "severe belly pain", "stomach pain", "belly pain", "tummy pain", "confused", "very drowsy", "stiff neck and fever", "adult danger signs", "stomach ache", "tummy ache", "belly ache", "face droops on one side", "mouth drooping", "crooked face", "face fallen on one side", "one side of the face drooping"],
+      "danger": ["درد سینه", "سکته", "سکته مغزی", "حمله قلبی", "خون قی کرد", "د سینې درد", "د زړه حمله", "chest pain", "heart attack", "stroke", "face drooping", "vomiting blood", "worst headache", "dard sina", "sakta", "رویش کج شد", "رویش کج شده", "طرف رویش کج", "دهنش کج شد", "دهنش کج شده", "مخ یې کوږ شو", "خوله یې کوږه شوه", "ru kaj", "face droops", "mouth drooping", "crooked face"]
     },
     "red-flags.suicide": {
       "fa": ["خودکشی", "میخواهم خودم را بکشم", "میخواهد خود را بکشد", "نمیخواهم زنده باشم", "میخواهم بمیرم", "خود را کشتن"],
@@ -311,11 +311,11 @@
       "en": ["glass test", "tumbler test", "rash glass", "glass on rash", "press a glass on the rash"]
     },
     "danger-child.skin": {
-      "fa": ["دانه که با گیلاس نمیره", "دانه‌ها زیر گیلاس نمی‌رود", "دانه‌های سرخ که از بین نمی‌روند", "دانه‌های بنفش", "رنگش پریده", "رنگ طفلم پریده", "طفلم خیلی سفید شده", "پوستش کبود شده", "پوستش خاکستری شده", "پوستش لکه لکه شده", "لکه‌های کبود روی پوست"],
-      "ps": ["دانې په ګیلاس نه ورکېږي", "دانې د ګیلاس لاندې ښکاري", "رنګ یې الوتی دی", "د ماشوم رنګ الوتی دی", "پوستکی یې شین شوی", "پوستکی یې خړ شوی", "پوستکی یې داغ داغ دی"],
+      "fa": ["دانه که با گیلاس نمیره", "دانه‌ها زیر گیلاس نمی‌رود", "دانه‌های سرخ که از بین نمی‌روند", "دانه‌های بنفش", "رنگش پریده", "رنگ طفلم پریده", "طفلم خیلی سفید شده", "پوستش کبود شده", "پوستش خاکستری شده", "پوستش لکه لکه شده", "لکه‌های کبود روی پوست", "دانه سرخ که با فشار رنگش نمیرود", "دانه‌ها با فشار گیلاس پاک نمی‌شود", "دانه‌ها با فشار از بین نمی‌رود", "دانه که رنگش نمیرود", "دانه‌های سرخ زیر گیلاس معلوم است"],
+      "ps": ["دانې په ګیلاس نه ورکېږي", "دانې د ګیلاس لاندې ښکاري", "رنګ یې الوتی دی", "د ماشوم رنګ الوتی دی", "پوستکی یې شین شوی", "پوستکی یې خړ شوی", "پوستکی یې داغ داغ دی", "دانې په فشار نه ورکېږي"],
       "lat": ["dana ba gilas namera", "rangash parida", "rang parida", "rang yi alwatay"],
       "en": ["rash does not fade", "rash doesn't fade", "rash does not go away", "spots do not go away", "rash that does not fade", "rash not fading under glass", "non blanching rash", "purple spots", "purple rash", "pale child", "very pale baby", "child looks grey", "grey skin", "blue skin", "mottled skin", "blotchy skin", "marbled skin"],
-      "danger": ["rash does not fade", "rash doesn't fade", "rash does not go away", "spots do not go away", "non blanching rash", "دانه که با گیلاس نمیره", "دانې په ګیلاس نه ورکېږي", "mottled skin", "purple rash", "very pale baby", "پوستش لکه لکه شده"]
+      "danger": ["rash does not fade", "rash doesn't fade", "rash does not go away", "spots do not go away", "non blanching rash", "دانه که با گیلاس نمیره", "دانې په ګیلاس نه ورکېږي", "mottled skin", "purple rash", "very pale baby", "پوستش لکه لکه شده", "دانه با فشار رنگش نمیرود", "دانه با فشار گیلاس پاک نمیشود", "دانه با فشار از بین نمیرود", "دانه زیر گیلاس معلوم", "دانې په فشار نه ورکېږي"]
     },
     "danger-child.skin-soon": {
       "fa": ["تب دارد و دست و پایش سرد است", "دست و پای طفل سرد است"],
@@ -454,9 +454,9 @@
       "en": ["count breaths", "breath counter", "breathing counter", "breaths per minute", "count breathing", "breathing rate", "how fast is the breathing", "respiratory rate", "how many breaths", "how many breaths is normal", "normal breathing rate", "how fast should a baby breathe"]
     },
     "tb": {
-      "fa": ["توبرکلوز", "سل", "تی بی", "سرفه طولانی", "سرفه دو هفته", "سرفه زیاد وقت", "سرفه کهنه", "خون در بلغم", "بلغم خون دار", "سرفه خونی", "عرق شب", "عرق شبانه", "لاغر شدن و سرفه", "دوای توبرکلوز", "سرفه یک ماه", "سرفه چند هفته", "یک ماه است سرفه میکنم", "سرفه خوب نمیشود"],
-      "ps": ["نری رنځ", "توبرکلوز", "اوږد ټوخی", "دوه اونۍ ټوخی", "په بلغم کې وینه", "د شپې خوله", "د نري رنځ دوا", "یوه میاشت ټوخی", "له یوې میاشتې ټوخی", "ټوخی نه جوړېږي"],
-      "lat": ["tb", "ti bi", "tuberculosis", "sil", "sel", "tobarkoloz", "tuberkuloz", "nari ranz", "nari rans", "ozhd tokhay", "araq shab"],
+      "fa": ["توبرکلوز", "سل", "تی بی", "سرفه طولانی", "سرفه دو هفته", "سرفه زیاد وقت", "سرفه کهنه", "خون در بلغم", "بلغم خون دار", "سرفه خونی", "عرق شب", "عرق شبانه", "لاغر شدن و سرفه", "دوای توبرکلوز", "سرفه یک ماه", "سرفه چند هفته", "یک ماه است سرفه میکنم", "سرفه خوب نمیشود", "سرفه‌ام یک ماه است", "یک ماه سرفه", "یک ماه است سرفه دارم", "سرفه‌ام خوب نمیشود", "سرفه جور نمیشود", "سرفه‌ام تمام نمیشود"],
+      "ps": ["نری رنځ", "توبرکلوز", "اوږد ټوخی", "دوه اونۍ ټوخی", "په بلغم کې وینه", "د شپې خوله", "د نري رنځ دوا", "یوه میاشت ټوخی", "له یوې میاشتې ټوخی", "ټوخی نه جوړېږي", "ټوخی مې نه جوړېږي", "یوه میاشت کېږي ټوخی لرم"],
+      "lat": ["tb", "ti bi", "tuberculosis", "sil", "sel", "tobarkoloz", "tuberkuloz", "nari ranz", "nari rans", "ozhd tokhay", "araq shab", "yak mah sulfa", "sulfa khub namesha"],
       "en": ["tb", "tuberculosis", "long cough", "cough for weeks", "cough for two weeks", "coughing blood", "coughing up blood", "blood in sputum", "night sweats", "weight loss and cough", "tb medicine", "cough for a month", "cough not getting better", "cough for weeks and weight loss"]
     },
     "fever": {
@@ -634,11 +634,11 @@
     },
     "pregnancy-danger": {
       "urgent": true,
-      "fa": ["علایم خطر حاملگی", "خونریزی در حاملگی", "خون آمدن در حاملگی", "حامله است خون میاید", "?خونریزی از پایین", "تشنج در حاملگی", "سردرد شدید حامله", "حامله سردرد و تاری چشم", "چشمم تار میبیند", "طفل در شکم حرکت نمیکند", "طفل تکان نمیخورد", "طفل در شکم کم حرکت میکند", "آب آمد", "آب کیسه ریخت", "ورم دست و پا در حاملگی", "رویش پندیده حامله", "درد شدید شکم حاملگی", "تب در حاملگی", "سوزش ادرار حامله", "سقط", "بچه انداخت", "حامله طفل حرکت نمیکند", "حامله هستم خونریزی دارم", "ماهه حامله طفل تکان نمیخورد"],
+      "fa": ["علایم خطر حاملگی", "خونریزی در حاملگی", "خون آمدن در حاملگی", "حامله است خون میاید", "?خونریزی از پایین", "تشنج در حاملگی", "سردرد شدید حامله", "حامله سردرد و تاری چشم", "چشمم تار میبیند", "طفل در شکم حرکت نمیکند", "طفل تکان نمیخورد", "طفل در شکم کم حرکت میکند", "آب کیسه آمد", "آب کیسه ریخت", "ورم دست و پا در حاملگی", "رویش پندیده حامله", "درد شدید شکم حاملگی", "تب در حاملگی", "سوزش ادرار حامله", "سقط", "بچه انداخت", "حامله طفل حرکت نمیکند", "حامله هستم خونریزی دارم", "ماهه حامله طفل تکان نمیخورد", "حامله است و خون میاید", "زن حامله خونریزی دارد", "حامله خونریزی", "کیسه آب پاره شد"],
       "ps": ["د امیندوارۍ د خطر نښې", "په امیندوارۍ کې وینه", "امیندواره ده وینه ورځي", "په امیندوارۍ کې اختلاج", "امیندواره سخت سر درد", "سترګې یې تتې ګوري", "ماشوم په نس کې نه خوځیږي", "ماشوم لږ خوځیږي", "اوبه یې ماتې شوې", "د لاسونو او پښو پړسوب", "امیندواره سخت نس درد", "امیندواره تبه لري", "سقط"],
-      "lat": ["hamila khun", "hamela khun", "khunrezi hamelagi", "tifl harakat namekona", "ab amad", "saqt", "amindwara wina", "umindwara wina", "sozish idrar", "sozesh adrar"],
+      "lat": ["hamila khun", "hamela khun", "khunrezi hamelagi", "tifl harakat namekona", "ab kisa amad", "saqt", "amindwara wina", "umindwara wina", "sozish idrar", "sozesh adrar"],
       "en": ["bleeding in pregnancy", "pregnant bleeding", "pregnant and bleeding", "bleeding while pregnant", "vaginal bleeding pregnant", "spotting", "miscarriage", "fits in pregnancy", "eclampsia", "pregnant headache", "blurred vision pregnant", "baby not moving", "baby moving less", "reduced baby movements", "waters broke", "water broke", "swollen face pregnant", "swelling in pregnancy", "pregnant severe belly pain", "fever in pregnancy", "pregnancy danger signs"],
-      "danger": ["خونریزی در حاملگی", "حامله است خون میاید", "تشنج در حاملگی", "طفل در شکم حرکت نمیکند", "په امیندوارۍ کې وینه", "ماشوم په نس کې نه خوځیږي", "pregnant bleeding", "bleeding in pregnancy", "pregnant and bleeding", "bleeding while pregnant", "baby not moving", "fits in pregnancy", "eclampsia", "miscarriage", "hamila khun"]
+      "danger": ["خونریزی در حاملگی", "حامله است خون میاید", "تشنج در حاملگی", "طفل در شکم حرکت نمیکند", "په امیندوارۍ کې وینه", "ماشوم په نس کې نه خوځیږي", "pregnant bleeding", "bleeding in pregnancy", "pregnant and bleeding", "bleeding while pregnant", "baby not moving", "fits in pregnancy", "eclampsia", "miscarriage", "hamila khun", "حامله خونریزی", "حامله خون میاید", "زن حامله خونریزی دارد", "امیندواره ده وینه ورځي"]
     },
     "pregnancy-care": {
       "fa": ["حاملگی", "حامله هستم", "حامله", "امیدوار است", "دو جانه", "مراقبت حاملگی", "معاینه حاملگی", "کلینیک در حاملگی", "غذا در حاملگی", "استراحت در حاملگی", "قابله", "در حاملگی چه بخورم", "خوراک در حاملگی"],
@@ -789,10 +789,10 @@
       "en": ["smoke", "stove", "stove fumes", "sandali", "charcoal", "coal fumes", "carbon monoxide", "gas heater", "fumes", "gassed", "heater", "chimney", "winter", "warm home", "headache in heated room", "smoky room", "whole family has headache", "everyone has a headache in the room"]
     },
     "fumes-poisoning": {
-      "fa": ["مسمومیت با دود", "مسمومیت گاز", "گاز ذغال", "دود بخاری مریض کرد", "سردرد در اتاق گرم", "سرچرخی در اتاق بخاری", "سر درد در اتاق بخاری", "همه سردرد داریم", "همه خانواده سردرد", "سرچرخی و قی در اتاق گرم", "کنار بخاری خواب آلود", "دود جنراتور مریض کرد"],
+      "fa": ["مسمومیت با دود", "مسمومیت گاز", "گاز ذغال", "دود بخاری مریض کرد", "سردرد در اتاق گرم", "سرچرخی در اتاق بخاری", "سر درد در اتاق بخاری", "همه سردرد داریم", "همه خانواده سردرد", "سرچرخی و قی در اتاق گرم", "کنار بخاری خواب آلود", "دود جنراتور مریض کرد", "دود صندلی", "دود بخاری در اتاق", "بوی گاز در اتاق"],
       "ps": ["د لوګي زهري کېدل", "د ګاز زهري کېدل", "ټول کور سر درد لري", "په ګرمه کوټه کې سر درد", "د بخارۍ لوګي ناروغه کړ"],
       "lat": ["gaz gereft", "gaz zad", "gaz gerefta", "masmumiat gaz"],
-      "en": ["carbon monoxide poisoning", "co poisoning", "fumes poisoning", "headache near the heater", "everyone has a headache by the fire", "sleepy by the stove"],
+      "en": ["carbon monoxide poisoning", "co poisoning", "fumes poisoning", "headache near the heater", "everyone has a headache by the fire", "sleepy by the stove", "gas heater in the bedroom", "gas leak"],
       "danger": ["گاز گرفتگی", "گاز گرفت", "گاز زد", "د سکرو ګاز", "ګاز ونیو", "carbon monoxide", "gassed", "coal fumes", "gaz gereft", "بخاری دود کرده", "اتاق پر از دود", "همه خانواده سردرد", "ټول کور سر درد لري"]
     },
     "animal-illness": {
@@ -847,7 +847,7 @@
     "dental": {
       "fa": ["دندان", "دندان درد", "دندانم درد میکند", "درد دندان", "کرم دندان", "دندان خراب", "دندان پوسیده", "روی پندیده از دندان", "بیره پندیده", "مسواک", "دندان طفل", "نسوار"],
       "ps": ["غاښ", "د غاښ درد", "غاښ مې خوږیږي", "غاښ درد", "خراب غاښ", "د غاښ چینجی", "مسواک", "نسوار"],
-      "lat": ["dandan dard", "dandan", "ghash dard", "ghakh dard", "ghas", "dandanam dard"],
+      "lat": ["dandan dard", "dandan", "ghash dard", "ghakh dard", "dandanam dard"],
       "en": ["toothache", "tooth ache", "tooth pain", "teeth", "bad tooth", "rotten tooth", "swollen gum", "brush teeth", "dentist"]
     },
     "diarrhoea-adult": {

@@ -2182,6 +2182,16 @@
    "fa": "این‌ها ضرر می‌رساند",
    "ps": "دا زیان رسوي",
    "en": "This can harm"
+  },
+  "ui.rd.v.bp-very-high-2": {
+   "fa": "دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است. همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.",
+   "ps": "دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. خپل درمل له ځان سره یوسئ.",
+   "en": "180 over 120 or more, two times. Go to hospital now, day or night. Take your medicines with you."
+  },
+  "ui.rd.v.spo2-lowish-2": {
+   "fa": "دو بار ۹۴ یا کمتر است. امروز به کلینیک بروید. اگر نفس کشیدن سخت شد یا لب‌ها کبود شد، همین حالا به شفاخانه بروید، شب باشد یا روز.",
+   "ps": "دوه ځله ۹۴ یا کم دی. نن کلینیک ته ولاړ شئ. که ساه اخیستل سخت شول یا شونډې شنې شوې، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+   "en": "94 or less, two times. Go to the clinic today. If breathing becomes hard or the lips turn blue, go to hospital now, day or night."
   }
  },
  "months": {
