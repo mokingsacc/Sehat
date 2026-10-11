@@ -20,6 +20,9 @@
 //   8. mobile data, no navigator.connection, and data saver: the page alone downloads nothing; opening it does.
 //   9. a set with no SVG version waits off its page until it is downloaded;
 //  10. a picture shared from another set's folder is listed by its own path, downloaded and kept by the sweep.
+//  11. a set with no SVG version but a still of its first scene (audit N-07): the still is its poster on any connection,
+//      with the size of the download; off Wi-Fi the page alone downloads nothing, a tap downloads the set and plays it;
+//      on Wi-Fi the still shows until the set has come by itself, then the picture-step poster takes its place.
 import { execFileSync } from 'child_process';
 import crypto from 'crypto';
 import fs from 'fs';
@@ -322,6 +325,39 @@ try {
   const k10 = await playerKind(sh.p);
   ok(k10.kind === 'steps' && k10.imgs > 0 && k10.loaded === k10.imgs, `a set with a shared picture plays (${k10.loaded}/${k10.imgs} pictures)`);
   await sh.ctx.close();
+
+  // 11. no SVG version, but a still of the first scene (tools/steps_stills.py STILLS): a poster on any connection
+  fs.copyFileSync(path.join(root, 'img/steps', NAME, j4.frames.a.layers[0].src), path.join(root, `img/stills/${NAME}-a.webp`));
+  const sp = path.join(root, 'tools/steps_stills.py');
+  fs.writeFileSync(sp, fs.readFileSync(sp, 'utf8').replace('STILLS = {', `STILLS = {\n    "${NAME}-a": ("${NAME}", "a", "up", "small"),`));
+  const book5 = build(), files5 = book5.steps[NAME].files;
+  ok(book5.steps[NAME].fallback === false && book5.steps[NAME].still === `img/stills/${NAME}-a.webp`, `book.steps names the still of the first scene (${book5.steps[NAME].still})`);
+  const stillOn = (p) => p.evaluate((n) => { const el = document.querySelector(`[data-steps-wait="${n}"] .poster.still`); const i = el && el.querySelector('img'), dl = el && el.querySelector('.dl'); return { el: !!el, img: !!(i && i.complete && i.naturalWidth > 0), dl: dl ? dl.textContent : '', h: el ? Math.round(el.getBoundingClientRect().height) : 0, w: el ? Math.round(el.getBoundingClientRect().width) : 0 }; }, NAME);
+  for (const net of ['cellular', 'none']) {
+    const m = await phone(net);
+    await go(m.p, '#/topic/hygiene'); await m.p.waitForTimeout(1500);
+    const st = await stillOn(m.p);
+    ok(st.el && st.img && /·/.test(st.dl) && Math.abs(st.h - st.w * 2 / 3) < 2, `${net}: the still is the film's poster at once, in its 3:2 box, with the size (${st.dl}, ${st.w} x ${st.h})`);
+    ok((await stepsKeys(m.p)).length === 0, `${net}: the page alone downloads nothing`);
+    await m.p.click(`[data-get="${NAME}"]`);
+    await m.p.waitForSelector('.anim-overlay .anim-stage > *', { timeout: 10000 }).catch(() => {});
+    await m.p.waitForTimeout(500);
+    const k11 = await m.p.evaluate(() => { const s = document.querySelector('.anim-overlay .anim-stage'); return s ? (s.querySelector('.st') ? 'steps' : s.querySelector('.anim-svg') ? 'svg' : 'empty') : 'none'; });
+    ok(k11 === 'steps', `${net}: a tap downloads the set and plays it (${k11})`);
+    ok((await stepsKeys(m.p)).length === files5.length, `${net}: the whole set is on the phone after the tap`);
+    if (await m.p.$('.anim-overlay .ax')) { await m.p.click('.anim-overlay .ax'); await m.p.waitForTimeout(300); }
+    ok(!(await m.p.$(`[data-steps-wait="${NAME}"]`)) && !!(await m.p.$(`[data-poster="${NAME}"] .st-poster`)), `${net}: the still gave way to the film's own poster`);
+    await m.ctx.close();
+  }
+  const wf = await phone('wifi');
+  SRV.drip = { file: files5[1].split('?')[0], pieces: 4, ms: 500 };
+  await go(wf.p, '#/topic/hygiene');
+  const st11 = await stillOn(wf.p);
+  ok(st11.el, 'wifi: the still shows while the set downloads by itself');
+  await wf.p.waitForSelector(`[data-poster="${NAME}"] .st-poster`, { timeout: 10000 }).catch(() => {});
+  ok(await posterKind(wf.p) === 'steps' && !(await wf.p.$(`[data-steps-wait="${NAME}"]`)), 'wifi: once downloaded, the picture-step poster takes its place');
+  SRV.drip = null;
+  await wf.ctx.close();
 } catch (e) { ok(false, 'test crashed: ' + (e && e.stack || e)); }
 ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''));
 await b.close(); server.close();

@@ -59,10 +59,11 @@ export const CINE = [];
 // its pictures; useSteps(name) adds one at run time (previews). opts.steps === false skips them.
 // cpr-baby: approved by Mo on 7 Oct 2026 (demo version). The Emergency and CPR sets of Mo's 9 Oct 2026 delivery (all of
 // them in the APK, Mo 9 Oct) and the on-demand sets: approved by Mo on 10 Oct 2026 (each JSON's "approved" note).
-// bleeding-tourniquet stays held (Mo's tourniquet call pending); length-height has no page yet (growth guide lines).
+// bleeding-tourniquet: Mo's tourniquet call of 11 Oct 2026 (show it, as a last resort). length-height has no page yet (growth guide lines).
 export const STEPS = ['cpr-baby', 'cpr-newborn', 'cpr-child', 'cpr-adult', 'choking-baby', 'choking-adult', 'bleeding-press',
-  'recovery-position', 'drowning-rescue', 'burns-cool', 'seizure', 'allergy-position', 'fever-fit', 'electric-stick', 'snake-bite',
-  'newborn-warm', 'spine-hold', 'low-sugar-drink', 'cold-warming', 'heat-cooling', 'inhaler-spacer', 'splint-sling', 'eye-wash',
+  'bleeding-tourniquet', 'recovery-position', 'drowning-rescue', 'burns-cool', 'seizure', 'allergy-position', 'fever-fit',
+  'electric-stick', 'snake-bite', 'newborn-warm', 'spine-hold', 'low-sugar-drink', 'cold-warming', 'heat-cooling',
+  'inhaler-spacer', 'splint-sling', 'eye-wash',
   'nosebleed', 'poisoning', 'fumes-poisoning', 'dog-bite', 'bp-measure', 'breastfeed-attach', 'breath-count', 'glucometer',
   'muac', 'thermometer', 'weigh-child'];
 export function useSteps(...names) { names.forEach((n) => { if (STEPS.indexOf(n) < 0) STEPS.push(n); }); }
@@ -206,6 +207,14 @@ export const stepsHave = (name) => !onDemand(name) || !!SETS.have[name];
 export function onStepsReady(fn) { SETS.fns.push(fn); }
 // a page shows this animation: download its set if it is on-demand and not on the phone yet (Wi-Fi only)
 export function prefetchSteps(name) { getSet(String(name).replace(/^anim\./, ''), 'page'); }
+// a person tapped the film's still poster (an on-demand set with no SVG version, audit N-07): download the set over any
+// connection. Resolves true once the set is on the phone and ready to play (its onStepsReady has run), false if it
+// could not come (no internet, no space, a cut-off line). A Wi-Fi download already under way is waited for; if it
+// stopped (the phone left Wi-Fi), the set is asked for once more.
+export function fetchSteps(name) {
+  name = String(name).replace(/^anim\./, '');
+  return getSet(name, 'open').then((ok) => ok || (navigator.onLine !== false && !SETS.full && onDemand(name) ? getSet(name, 'open') : false));
+}
 function told(name) { SETS.fns.forEach((fn) => { try { fn(name); } catch (er) {} }); }
 
 // the pictures a set's JSON names, as paths from the app root with their ?v= (as tools/anims.py steps_files)
@@ -271,17 +280,22 @@ function readySet(name) {
   SETS.ready[name] = p;
   return p;
 }
-// why: 'page' (a page shows the animation: Wi-Fi only) or 'open' (the person opened it: any connection)
+// why: 'page' (a page shows the animation: Wi-Fi only) or 'open' (the person opened it: any connection).
+// Resolves true when the version this book names is on the phone and ready (a download under way is shared).
 function getSet(name, why) {
   const e = onDemand(name);
-  if (!e || SETS.cur[name] || SETS.busy[name] || !canCache() || navigator.onLine === false) return;
+  if (SETS.busy[name]) return SETS.busy[name];
+  if (!e || SETS.cur[name] || !canCache() || navigator.onLine === false) return Promise.resolve(!!(e && SETS.cur[name]));
   const auto = why !== 'open';
-  if (auto && (SETS.full || !onWifi())) return;
-  SETS.busy[name] = true;
-  downloadSet(name, auto).then(() => true, (er) => { if (er && er.name === 'QuotaExceededError') SETS.full = true; return false; }).then((ok) => {
+  if (auto && (SETS.full || !onWifi())) return Promise.resolve(false);
+  const p = downloadSet(name, auto).then(() => true, (er) => { if (er && er.name === 'QuotaExceededError') SETS.full = true; return false; }).then((ok) => {
     SETS.busy[name] = false;
-    if (ok) { delete SETS.ready[name]; readySet(name).then((s) => { if (s) told(name); }); }
+    if (!ok) return false;
+    delete SETS.ready[name];
+    return readySet(name).then((s) => { if (s) told(name); return !!s; });
   });
+  SETS.busy[name] = p;
+  return p;
 }
 // one file: fetched, its bytes checked against its ?v= hash. Given up when nothing arrives for SETS.idle (each chunk
 // of the body resets the clock, so a slow line still finishes). Works without AbortController too.

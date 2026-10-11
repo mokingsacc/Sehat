@@ -171,6 +171,15 @@
             "ps": "تي خوړونکي او کوچني ماشوم ته چای مه ورکوئ؛ د خوړو اوسپنه کموي",
             "en": "give tea to babies and small children: it takes away the iron in food"
           }
+        },
+        {
+          "id": "child-meals.dont.milk",
+          "icon": "milk",
+          "text": {
+            "fa": "پیش از ۱ سالگی شیر گاو یا بز را نوشیدنی اصلی طفل نسازید؛ از ۶ ماهگی کمی از آن در غذا خوب است",
+            "ps": "تر ۱ کلنۍ مخکې د غوا یا وزې شیدې د ماشوم اصلي څښاک مه ګرځوئ؛ له ۶ میاشتو کمې یې په خوړو کې ښې دي",
+            "en": "give cow's or goat's milk as the main drink before 1 year; a little in food is fine from 6 months"
+          }
         }
       ]
     },

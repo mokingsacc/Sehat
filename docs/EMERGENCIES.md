@@ -26,7 +26,7 @@ These are the places where the guidelines differ, or where the text simplifies t
 4. **Adult CPR: hands-only first, breaths optional.** This follows ERC/AHA 2025 for lay rescuers. Drowning is the exception: 5 breaths first at every age (ERC), on the drowning page.
 5. **Lone rescuer with a baby or child:** 1 minute of CPR, then go for help. There is no ambulance number, so every page says "send someone for a car".
 6. **Fever fits always mean hospital now** (IMCI danger sign; meningitis cannot be ruled out at home). In the UK, a child with known simple febrile convulsions is often managed at home after review.
-7. **Improvised tourniquet** (wide cloth and a stick) for life-threatening bleeding from a limb only, after pressure fails (ILCOR/ERC 2025). Note the time; do not loosen it.
+7. **Improvised tourniquet** (wide cloth and a stick) for life-threatening bleeding from a limb only, after pressure fails (ILCOR/ERC 2025). Note the time; do not loosen it. Mo, 11 Oct 2026: show it, worded as a last resort (arm or leg only, when firm pressing has not stopped heavy bleeding; tie it high above the wound, tight, note the time, hospital now), with the bleeding-tourniquet picture steps.
 8. **Choking: hospital after any thrusts.** Back blows alone in a baby also go to hospital, to keep the rule simple.
 9. **Snakebite: no pressure bandage.** Vipers are common in northern Afghanistan (WHO SEARO 2016). Which hospital in Samangan holds snake or scorpion antivenom is unknown; please add the place.
 10. **Scorpion stings in children are urgent.** Adults with local pain only are not told to stay home. The page simply does not list them as urgent.
@@ -35,7 +35,7 @@ These are the places where the guidelines differ, or where the text simplifies t
 13. **Burns:**
     - Cool for 20 minutes. It still helps up to 3 hours later (UK and Australian burns teaching).
     - Size rule: "bigger than the person's palm". first-aid.urgent says "hand". Choose one.
-14. **Heat stroke: cold-water immersion up to the neck** (ILCOR/ERC first choice), with the head held. Check this is safe to teach.
+14. **Heat stroke: cold-water immersion up to the neck** (ILCOR/ERC first choice), with the head held. Mo, 11 Oct 2026 (EM10): the tub only for older children and adults; babies and young children get wet cloths and fanning.
 15. **Head injury: "wake them a few times in the night"** is common lay advice. NICE no longer requires it. CT may only be in Mazar-i-Sharif or Kabul.
 16. **Falls:**
     - Manual head hold, no collar (ERC/IFRC).

@@ -294,9 +294,9 @@
       "type": "tip",
       "icon": "calendar",
       "text": {
-        "fa": "در عید قربان که حیوانات زیاد ذبح می‌شود، بیشتر احتیاط کنید.",
-        "ps": "د لوی اختر پر مهال چې ډېر څاروي حلالېږي، ډېر احتیاط وکړئ.",
-        "en": "Take extra care at Eid al-Adha, when many animals are slaughtered."
+        "fa": "وقتی حیوانات زیاد در یک وقت ذبح می‌شوند، بیشتر احتیاط کنید.",
+        "ps": "کله چې په یو وخت کې ډېر څاروي حلالېږي، ډېر احتیاط وکړئ.",
+        "en": "When many animals are slaughtered at one time, take extra care."
       }
     },
     {

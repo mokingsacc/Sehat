@@ -178,9 +178,9 @@
           "id": "breastfeeding.dont.animal-milk",
           "icon": "milk",
           "text": {
-            "fa": "پیش از ۶ ماهگی شیر گاو یا بز ندهید.",
-            "ps": "تر ۶ میاشتو مخکې د غوا یا وزې شیدې مه ورکوئ.",
-            "en": "Do not give cow's or goat's milk before 6 months."
+            "fa": "پیش از ۱ سالگی شیر گاو یا بز را نوشیدنی اصلی طفل نسازید. از ۶ ماهگی کمی از آن در غذا خوب است.",
+            "ps": "تر ۱ کلنۍ مخکې د غوا یا وزې شیدې د ماشوم اصلي څښاک مه ګرځوئ. له ۶ میاشتو کمې یې په خوړو کې ښې دي.",
+            "en": "Do not give cow's or goat's milk as the main drink before 1 year. A little in food is fine from 6 months."
           }
         },
         {

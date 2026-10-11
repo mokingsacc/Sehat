@@ -145,7 +145,9 @@ why, and the pictures still to make: `/mnt/project-files/samangan-red-book/audit
   changed); `--check` says which are out of date; `--sheet out.png <set> ...` draws every frame of the sets, up and down,
   to choose from. After re-packing a set, run it again.
 - `tools/validate.py` refuses a page picture under `img/steps/` that is not a file of a precache set's JSON.
-- Not used on the pages: the held bleeding-tourniquet set (the tourniquet step keeps its drawing), cpr-child frame 4
+- bleeding-tourniquet went live on 11 Oct 2026 (Mo's tourniquet call: show it, as a last resort): its film sits above the
+  tourniquet step, which shows frame 1, and bleeding.time shows frame 3 (frame 2, the stick, is the poster).
+- Not used on the pages: cpr-child frame 4
   and the merged-faces newborn puff picture (both gone from the sets).
 
 ## How it plugs into the player

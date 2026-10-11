@@ -67,9 +67,9 @@
         "en": "Cool the whole body fast"
       },
       "text": {
-        "fa": "آب سرد را روی تمام بدنش بریزید و باد بزنید. یا او را تا گردن در تشت آب سرد بخوابانید و سرش را بالا نگه دارید.",
-        "ps": "سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. یا یې تر غاړې پورې د سړو اوبو په لوښي کې وغځوئ او سر یې پورته ونیسئ.",
-        "en": "Pour cool water all over the body and fan them. Or lay them in a tub of cool water up to the neck, holding the head up."
+        "fa": "آب سرد را روی تمام بدنش بریزید و باد بزنید. شیرخوار و طفل کوچک را با تکهٔ تر بپوشانید و باد بزنید. فقط طفل بزرگتر یا بزرگسال را می‌توانید تا گردن در تشت آب سرد بخوابانید و سرش را بالا نگه دارید.",
+        "ps": "سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. تي خوړونکی او کوچنی ماشوم په لوند ټوکر پټ کړئ او باد ورکړئ. یوازې لوی ماشوم یا لوی کس تر غاړې پورې د سړو اوبو په لوښي کې غځولی شئ او سر یې پورته ونیسئ.",
+        "en": "Pour cool water all over the body and fan them. For a baby or young child, use wet cloths and fan. Only an older child or an adult can be laid in a tub of cool water up to the neck, holding the head up."
       },
       "picture": "img/stills/heat-cool.webp"
     },
@@ -227,6 +227,7 @@
   ],
   "review": [
     "Cold-water immersion up to the neck is the ILCOR/ERC first choice for heat stroke in adults. With an unconscious person or a child, someone must hold the head above water. Check this is safe to teach.",
+    "Mo, 11 Oct 2026 (medical audit EM10): babies and young children get wet cloths and fanning; the cold-water tub is only for older children and adults (ILCOR CoSTR First Aid: immersion for adults with exertional heat stroke, no recommendation for children; RCUK First Aid Guidelines 2025).",
     "Heat exhaustion: 'not better in 1 hour, go to the clinic' is a judgement call (UK NHS uses 30 minutes for adults).",
     "No temperature numbers, as families have no thermometer."
   ]

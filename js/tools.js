@@ -210,7 +210,6 @@ export function initTools(ctx) {
     }
     if (t < 35) return out('urgent', 'ui.rd.v.temp-cold');           // hypothermia
     if (t < 36) return RD.who === 'child2m' && has('fast') ? out('today', 'ui.rd.v.temp-fast') : out('watch', 'ui.rd.v.temp-low');
-    if (t >= 41) return out('urgent', 'ui.rd.v.temp-very-high');     // judgement call
     if (RD.who === 'child2m' && has('fast') && t < 37.5) return out('today', 'ui.rd.v.temp-fast'); // fast breathing alone = clinic today (IMCI)
     if (t < 37.5) return out('ok', 'ui.rd.v.temp-ok');               // IMCI fever = 37.5 or more
     if (RD.who === 'pregnant') return out('today', 'ui.rd.v.temp-pregnant');
@@ -261,7 +260,9 @@ export function initTools(ctx) {
       return out('ok', 'ui.rd.v.sugar-nodm-ok');
     }
     if (g > 180) return out('soon', 'ui.rd.v.sugar-high');           // ADA: under 180 two hours after meals
-    return out('ok', 'ui.rd.v.sugar-ok');
+    // the checker does not ask before or after food, so "good" says both ADA targets (80 to 130 before breakfast, under
+    // 180 two hours after food; Mo, 11 Oct 2026, KT-10), in the meter's own unit as the reading-sugar page says them
+    return out('ok', mmol ? 'ui.rd.v.sugar-ok-mmol' : 'ui.rd.v.sugar-ok');
   }
   function verdictSpo2() {
     const p = parse(RD.a), out = (lv, x) => ({ lv, say: x });

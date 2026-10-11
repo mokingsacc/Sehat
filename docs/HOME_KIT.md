@@ -67,12 +67,11 @@ A number from 86 to 111 is taken as Fahrenheit and converted (the result shows b
 | | 36.0 to 36.4 | Care at home and watch: skin to skin, cover the head, measure again in 1 hour; still under 36.5 or feeding poorly = clinic today |
 | | 36.5 to 37.4 | Normal |
 | Child 2 months to 5 years | any reading, with fast breathing ticked | Clinic today (IMCI pneumonia), with a row that opens the breathing counter |
-| | 37.5 to 38.9 | Care at home and watch (drinks, back if over 2 days or very ill) |
+| | 37.5 to 38.9 | Care at home and watch (drinks; clinic today if more than 2 days or very ill) |
 | | 39 or more | Clinic today |
 | Older child or adult | 37.5 to 39.4 | Care at home and watch |
 | | 39.5 or more | Clinic today |
 | Pregnant woman | 37.5 or more | Clinic today |
-| Everyone except young babies | 41 or more | Hospital now |
 | | under 35 | Hospital now |
 | | 35 to 35.9 | Care at home: check the thermometer was deep under the arm, warm, measure again in 30 minutes |
 
@@ -106,7 +105,7 @@ The checker first asks whether the person has diabetes (KT-3). The person picks 
 | --- | --- | --- |
 | under 54, or LO | under 3.0 | Hospital now: give sugar first if they can swallow (4 teaspoons in water, then food) |
 | 54 to 69 | 3.0 to 3.9 | Clinic today: give sugar, measure again in 15 minutes and give sugar again if still low |
-| 70 to 180 | 4.0 to 10.0 | Good range (has diabetes) |
+| 70 to 180 | 4.0 to 10.0 | Good range (has diabetes); the checker does not ask before or after food, so the result says both ADA targets: 80 to 130 before breakfast and under 180 two hours after food (4.4 to 7.2 and under 10 in mmol/L; Mo 11 Oct 2026, KT-10) |
 | 181 to 249 | 10.1 to 13.8 | Clinic this week if most readings are like this (has diabetes) |
 | No diabetes, or not sure: 70 to 125 | 4.0 to 6.9 | Normal (no medicine line) |
 | No diabetes: 126 to 199 | 7.0 to 11.0 | Care at home and watch: measure again before breakfast; 126 or more then = clinic this week (WHO/IDF 2006) |
@@ -116,7 +115,7 @@ The checker first asks whether the person has diabetes (KT-3). The person picks 
 | any, with confusion or fits | | Hospital now (nothing by mouth if they cannot swallow) |
 | any, with vomiting or fast deep breathing | | Hospital now |
 
-The topic page teaches 80 to 130 before breakfast as the target (ADA), and mmol/L equivalents (under 4 low, 4.4 to 7.2 good, over 14 very high).
+The topic page teaches 80 to 130 before breakfast and under 180 two hours after food as the targets (ADA), and mmol/L equivalents (under 4 low, 4.4 to 7.2 before breakfast and under 10 after food good, over 14 very high).
 
 ### Oxygen (`verdictSpo2`)
 
@@ -153,7 +152,7 @@ Colour, not a number (children 6 to 59 months, left upper arm, halfway between s
 3. **Older children and adults (optional age):** 30 or more = clinic today, 40 or more = hospital now. No single WHO cut-off exists for families. Age 5 to 12 normal is about 20 to 30; adult NEWS2 scores 21 to 24 as 2 and 25 or more as 3. 30 was chosen to be simple and safe. Mo may prefer to remove the adult option.
 4. **Very slow breathing** (under 30, 20, 15 and 10 for the four ages) gives "count again", then "hospital now" if it is really that slow. This is mostly there to catch miscounting.
 5. **Temperature under 2 months:** any 37.5 or more = hospital now (IMCI young infant, 37.5; Mo chose under 2 months as per IMCI on 8 Oct 2026, was under 3 months; NICE uses 38 and under 3 months). 35.5 to 35.9 = clinic today, skin to skin on the way (WHO bands: moderate hypothermia; KT-14); 36.0 to 36.4 is "rewarm and recheck in 1 hour, clinic today if still low", shown as Care at home and watch (WHO thermal protection: cold stress; KT-24). Under 35.5 = hospital (IMCI).
-6. **Fever in older children and adults:** child 39 or more = clinic today, older child or adult 39.5 or more = clinic today, 41 or more = hospital now. These numbers are judgement calls: IMCI does not grade fever height and NICE uses traffic lights on signs, not on height (except under 6 months). Fever lasting more than 2 days = clinic (IMCI return advice).
+6. **Fever in older children and adults:** child 39 or more = clinic today, older child or adult 39.5 or more = clinic today. These numbers are judgement calls: IMCI does not grade fever height and NICE uses traffic lights on signs, not on height (except under 6 months). Mo (11 Oct 2026, audit A-14) dropped the old "41 or more = hospital now" rule, which no page stated; danger signs still mean hospital now at any number. Fever lasting more than 2 days = clinic today (IMCI return advice), in the same words on every page, typhoid included (Mo, 11 Oct 2026, audit A-20).
 7. **Fever in pregnancy = clinic today** whatever the number (PCPNC treats fever as needing assessment).
 8. **Adult BP 180/120 = hospital now after one repeat,** as Mo asked. NICE says same-day assessment and allows clinic review when there are no symptoms. In rural Samangan, the nearest place for a same-day check may be the hospital. Mo to confirm.
 9. **Adult home BP 135/85 to 179/119 = clinic this week.** One raised home reading does not diagnose hypertension; the advice says rest, measure again, and bring readings.

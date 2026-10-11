@@ -8,7 +8,7 @@ import { initShare } from './share.js'; // Share Sehat: #/share (the app file on
 import { initFamily } from './family.js'; // family records: #/family (people, vaccines, weight, medicines, doctor's notes, readings)
 import { initNumpad } from './numpad.js'; // the big number pad that says each number
 import * as Stats from './stats.js';
-import { openAnimation, animPoster, stepsSetup, stepsHave, prefetchSteps, onStepsReady, onWifi } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md, docs/STEPS_PLAYER.md)
+import { openAnimation, animPoster, stepsSetup, stepsHave, prefetchSteps, fetchSteps, onStepsReady, onWifi } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md, docs/STEPS_PLAYER.md)
 import { applyOverlay, FORMAT as OV_FORMAT } from './overlay.js'; // changes published from the editor (docs/EDITOR_AND_RELEASES.md)
 window.SEHAT_STARTED = true; // index.html shows an "update your browser" message if the app never gets this far
 
@@ -79,7 +79,11 @@ const otherVoice = (v) => (v === 'm' ? 'f' : 'm');
 const slotOf = (lg = S.lang, v = S.voice) => `${lg || 'fa'}-${v === 'm' ? 'm' : 'f'}`;
 const slotsFor = (slot, strict) => (strict ? [slot] : [slot, slot.slice(0, 3) + otherVoice(slot.slice(3))]);
 const clipSrc = (id, slot) => (S.book.audio[slot] && S.book.audio[slot][id]) || null;
-const hasAudio = (id, slot = slotOf(), strict = false) => slotsFor(slot, strict).some((s) => clipSrc(id, s) || REC.has(s + '/' + id));
+// Studio mode (Mo, 11 Oct 2026, audit S-01): on once the recording studio (#/studio, typed by staff; Settings has no row
+// for it) has been opened, until the app is closed. Only then does a studio recording play, in place of the shipped clip;
+// in normal use a recording made on this phone never plays, so it can never replace an Emergency or CPR line.
+const STUDIO = { on: false };
+const hasAudio = (id, slot = slotOf(), strict = false) => slotsFor(slot, strict).some((s) => clipSrc(id, s) || (STUDIO.on && REC.has(s + '/' + id)));
 // a speaker button; more: narration ids read straight after id (a result card reads its title, then its one line)
 const spk = (id, label, more) => `<button class="spk${hasAudio(id) ? '' : ' none'}" data-say="${esc(id)}"${more && more.length ? ` data-then="${esc(more.join(' '))}"` : ''} aria-label="${esc(label || T('listen'))}">${I.spk}</button>`;
 
@@ -90,7 +94,7 @@ P.audio.addEventListener('error', () => advance());
 
 async function clipUrl(id, slot = slotOf(), strict = false) {
   for (const s of slotsFor(slot, strict)) {
-    const rec = await REC.get(s + '/' + id);
+    const rec = STUDIO.on ? await REC.get(s + '/' + id) : null;
     if (rec) return URL.createObjectURL(rec.blob);
     const src = clipSrc(id, s);
     if (src) { const blob = await getClip(src); if (blob) return URL.createObjectURL(blob); }
@@ -423,8 +427,7 @@ function screenWelcome() {
   return { html: `<div class="welcome"><div class="pic"><img src="img/app/welcome.svg" alt=""></div>
     <h1>${b.ui.appName.fa === b.ui.appName.ps ? esc(b.ui.appName.fa) : `${esc(b.ui.appName.fa)}<br>${esc(b.ui.appName.ps)}`}</h1>
     <p class="tl">${esc(b.ui.chooseLang.fa)} · ${esc(b.ui.chooseLang.ps)}</p>
-    ${btn('fa')}${btn('ps')}
-    <button class="en" data-setlang="en">English</button></div>`, nav: false };
+    ${btn('fa')}${btn('ps')}</div>`, nav: false }; // English is in Settings only (Mo, 11 Oct 2026, audit S-02)
 }
 
 // the woman's or the man's voice, in Settings (each card has a speaker that plays a sample in that voice). The first run
@@ -581,6 +584,9 @@ const LISTS = () => (S.book.config && S.book.config.lists) || {};
 const listOf = (name) => ((S.book.sections || {})[name] || []).filter((t) => S.book.topics[t]);
 const listPic = (c) => (c && S.book.topics[c.image] ? topicPic(S.book.topics[c.image]) : 'img/app/placeholder.svg');
 const listTab = (name) => ((LISTS()[name] || {}).tab === 'health' ? 'health' : 'house');
+// a Home-tab page: a topic on one of the Home tab's lists. Mo (11 Oct 2026, audit T-23): the yellow "nearest clinic or
+// hospital" line stays on the Health pages and is left off the Home tab's lists and their pages.
+const homePage = (tid) => Object.keys(LISTS()).some((n) => listTab(n) === 'house' && listOf(n).includes(tid));
 // the list page a topic belongs to when its own section list does not show it (kit and hospital pages, most food pages)
 const ownList = (tid, t) => (S.book.sections[t.section] || []).includes(tid) ? null : Object.keys(LISTS()).find((n) => listOf(n).includes(tid)) || null;
 function screenList(name) {
@@ -592,7 +598,7 @@ function screenList(name) {
   body += list.map(topicRow).join('');
   if (!list.length) body += `<div class="empty">${ic(c.icon || 'check')}<p>${esc(T('comingSoon'))}</p></div>`;
   const back = backTo(tab === 'health' ? '#/home' : '#/house'); // the screen it was opened from
-  const html = top('', { back, listen: ids }) + `<div class="lhero"><img src="${esc(listPic(c))}" alt=""></div>` + titleRow(T(c.title), c.say) + body + disclaimer();
+  const html = top('', { back, listen: ids }) + `<div class="lhero"><img src="${esc(listPic(c))}" alt=""></div>` + titleRow(T(c.title), c.say) + body + (tab === 'house' ? '' : disclaimer());
   return { html, nav: tab, adult: !c.child };
 }
 
@@ -626,7 +632,10 @@ function blockHtml(b, n) {
   if (b.type === 'link') { const h = TL.linkBlock(b); return b.urgent ? h.replace('class="blk link"', 'class="blk link urgent"') : h; } // opens a tool, the home kit or another topic; urgent: a red row to the Health side
   // what the clinic or the hospital does for this problem: a building icon, no number
   if (b.type === 'clinic') return `<div class="blk clinic" data-block="${esc(b.id)}"><div class="pic">${ic(b.icon || 'clinic')}</div><div class="body"><div class="h">${esc(L(b.title))}</div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
-  if (b.type === 'anim') return animHidden(b) ? animWait(b) : animBlock(b); // a still picture with a play button: opens the animation player
+  if (b.type === 'anim') { // a still picture with a play button: opens the animation player
+    const e = pendingSet(b); if (!e) return animBlock(b);
+    prefetchSteps(b.pick || b.anim); return e.still ? animStill(b, e) : animWait(b);
+  }
   if (b.type === 'tip') return `<div class="blk tip" data-block="${esc(b.id)}">${ic(b.icon || 'check')}<div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
   if (b.type === 'belief') return beliefHtml(b);
   if (b.type === 'alert' || b.type === 'dont') {
@@ -662,16 +671,37 @@ function animBlock(b) {
   const [pa, ps] = POSTER_SCENE[name] || [name, 0];
   return `<div class="blk anim-block" data-block="${esc(sid)}"><button class="poster" data-action="anim" data-anim="${esc(b.anim)}"${b.pick ? ` data-variant="${esc(b.pick)}"` : ''} data-poster="${esc(pa)}" data-scene="${ps}" aria-label="${esc(title)}"><span class="play">${I.play}</span></button><div class="row"><span class="t">${esc(title)}</span>${spk(sid)}</div></div>`;
 }
-// An on-demand picture-step animation (book.steps, docs/STEPS_PLAYER.md) with no SVG version to show meanwhile is left
-// out of its page until its pictures are on the phone; the page's own steps say the same. Its download starts here.
-function animHidden(b) {
+// An on-demand picture-step animation (book.steps, docs/STEPS_PLAYER.md) with no SVG version to show meanwhile, while
+// its pictures are not on the phone: its book.steps entry, else null. On Wi-Fi its download starts by itself (blockHtml).
+// With a still of its first scene (book.steps[name].still, in the APK) the page shows that still as the film's poster on
+// any connection, with the size of the download; a tap downloads the set and plays it (Mo, 11 Oct 2026, audit N-07).
+// Without one, the block is left out of its page until its pictures are on the phone; the page's own steps say the same.
+function pendingSet(b) {
   const name = b.pick || b.anim, e = S.book.steps && S.book.steps[name];
-  if (!e || e.fallback !== false || stepsHave(name)) return false;
-  prefetchSteps(name); return true;
+  return e && e.fallback === false && !stepsHave(name) ? e : null;
 }
+function animHidden(b) { const e = pendingSet(b); return !!e && !e.still; }
 // an empty marker where such a block will appear once its pictures are on the phone (onStepsReady below)
 const WAITING = [];
 function animWait(b) { WAITING.push(b); return `<div data-steps-wait="${esc(b.pick || b.anim)}" data-wait="${WAITING.length - 1}" hidden></div>`; }
+// the still poster: the same block as animBlock, its picture the still, and "Download · 0.1 MB" on it. It is also the
+// marker: once the pictures are on the phone, onStepsReady puts the real block in its place.
+function animStill(b, e) {
+  WAITING.push(b);
+  const sid = animSay(b), title = b.title ? L(b.title) : L(S.book.narration[sid]), name = b.pick || b.anim;
+  const size = `${T('download')} · ${mbText(e.bytes || 0)}`;
+  return `<div class="blk anim-block" data-block="${esc(sid)}" data-steps-wait="${esc(name)}" data-wait="${WAITING.length - 1}"><button class="poster still" data-action="animget" data-get="${esc(name)}" data-anim="${esc(b.anim)}"${b.pick ? ` data-variant="${esc(b.pick)}"` : ''} data-size="${esc(size)}" aria-label="${esc(title)} · ${esc(size)}"><img src="${esc(e.still)}" alt=""><span class="play">${I.play}</span><span class="dl">${esc(size)}</span></button><div class="row"><span class="t">${esc(title)}</span>${spk(sid)}</div></div>`;
+}
+// a tap on the still poster: download the set (any connection), then play it if the person is still on that page
+async function getFilm(t, d) {
+  if (t.classList.contains('busy')) return;
+  if (navigator.onLine === false) { toast(T('offlineNow')); return; }
+  const lab = t.querySelector('.dl'), at = location.hash;
+  t.classList.add('busy'); if (lab) lab.textContent = T('downloading');
+  const ok = await fetchSteps(d.get).catch(() => false);
+  if (!ok) { t.classList.remove('busy'); if (lab) lab.textContent = d.size || ''; toast(T('offlineNow')); return; }
+  if (location.hash === at) openAnim(d.anim, d.variant); // onStepsReady has already put the film block in place
+}
 // a poster inside its fixed box (topic block, Emergency card): the picture-step poster fills the box and is cropped on
 // its long side, like object-fit: cover (css/app.css keeps it centred and full width without this, on old phones too)
 function coverPoster(st) {
@@ -791,7 +821,8 @@ function screenTopic(tid) {
   // (an animation titled with the page's own title is not read twice by "Listen to the page")
   for (const b of t.blocks) { if (b.type === 'step') n++; body += blockHtml(b, n); ids.push(...blockIds(b).filter((i) => ids.indexOf(i) < 0)); }
   const rc = reportCards(svFor('topics', [tid])); body += rc.html; ids.push(...rc.ids);
-  ids.push('ui.disclaimer');
+  const disc = !homePage(tid);
+  if (disc) ids.push('ui.disclaimer');
   // Back: the screen it was opened from (another page too); opened straight from a link, its list or section.
   // The tab stays the one the person came from.
   const own = ownList(tid, t), back = backTo(own ? '#/s/' + own : t.section === 'children' ? '#/children' : '#/adults');
@@ -800,7 +831,7 @@ function screenTopic(tid) {
   // bar with Back (and the Emergency button), like a list page; list rows and search cards still use its "image"
   let html = t.hero === false ? top('', { back }) : `<div class="topic-hero"><img src="${esc(topicPic(t))}" alt=""><a class="round" href="${back}" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
   html += `<div class="title-row" data-block="${tid}.title"><h1>${esc(L(t.title))}</h1>${spk(tid + '.title')}</div>`;
-  html += listenBar(ids) + body + disclaimer();
+  html += listenBar(ids) + body + (disc ? disclaimer() : '');
   if (t.sources && t.sources.length) html += `<details class="sources"><summary>${esc(T('sources'))}</summary><ul>${t.sources.map((s) => `<li dir="ltr">${esc(s)}</li>`).join('')}</ul></details>`;
   track('view', { p: 'topic/' + tid });
   return { html, nav: tab, adult: isAdultTopic(t) };
@@ -1083,7 +1114,6 @@ function screenSettings() {
     html += `<div class="srow swrap watch" data-block="ui.watchOn">${ic('people')}<div class="grow"><div class="t">${esc(T('watch'))}</div><div class="s">${esc(L(S.book.narration['ui.watchOn']))}</div>${S.stats ? '' : `<div class="s warnline">${esc(T('watchNeedsStats'))}</div>`}</div>${spk('ui.watchOn')}<button class="toggle" data-action="watch" aria-pressed="${watching()}" aria-label="${esc(T('watch'))}"${S.stats ? '' : ' disabled'}></button></div>`;
     if (watching() || S.stats) { const d = store.get('district', null); ids.push('ui.district'); html += `<div class="srow swrap" data-block="ui.district">${ic('house')}<div class="grow"><div class="t">${esc(T('myDistrict'))}</div><div class="s" id="mydistrict">${esc(d ? placeName(d) : T('notChosen'))}</div></div>${spk('ui.district')}<button class="sbtn" data-action="district">${esc(T('change'))}</button></div>`; }
   }
-  html += `<div class="srow" data-block="ui.set.studio">${ic('talk')}<a class="grow" href="#/studio"><div class="t">${esc(T('recordMode'))}</div><div class="s">${esc(T('recordModeSub'))}</div></a>${spk('ui.set.studio')}</div>`;
   html += `</div>` + disclaimer();
   html += `<p class="muted center credit" dir="ltr">Sehat · ${esc(S.book.version)}${S.book.edition ? ' · ' + esc(S.book.edition) : ''}<br>Content based on WHO guidance (IMCI, PCPNC, Facts for Life). Draft for review. Icons: Health Icons (MIT). Font: Noto Naskh Arabic (OFL).</p>`;
   setTimeout(async () => { await refreshHave(); packsUI(); showStorage(); }, 0);
@@ -1094,6 +1124,7 @@ function screenSettings() {
 // the reader picks the slot they record: their language and their voice (woman or man)
 const ST = { slot: store.get('studioSlot', null) || (store.get('studioLang', null) ? store.get('studioLang', null) + '-f' : null), i: store.get('studioI', 0), rec: null, chunks: [], on: false, stream: null };
 function screenStudio() {
+  STUDIO.on = true;
   ST.slot = ST.slot || slotOf(S.lang === 'en' ? 'fa' : S.lang, S.voice);
   const lg = ST.slot.slice(0, 2);
   const order = S.book.order; ST.i = Math.min(Math.max(ST.i, 0), order.length - 1);
@@ -1581,6 +1612,7 @@ document.addEventListener('click', async (e) => {
     case 'locate': locate(); return;
     case 'delvoices': deleteVoices(); return;
     case 'anim': e.preventDefault(); openAnim(d.anim, d.variant); return;
+    case 'animget': e.preventDefault(); getFilm(t, d); return;
     case 'emergency': EM.speak = true; return; // the link opens #/emergency, which reads ui.emergency aloud
   }
   // tapping the text of a block also reads it

@@ -241,6 +241,31 @@ def has_fallback(name):
     return os.path.exists(os.path.join(ROOT, "anim", name + ".js"))
 
 
+def poster_still(name):
+    """The still of the frame a set's first scene shows as its poster (img/stills/<still>.webp, from STILLS in tools/steps_stills.py;
+    precached and in the APK), or None. An on-demand set with no SVG version shows it as its poster on any connection
+    until the set is on the phone; a tap downloads the set and plays it (Mo, 11 Oct 2026, audit N-07)."""
+    import ast
+    try:
+        tree = ast.parse(open(os.path.join(ROOT, "tools", "steps_stills.py"), encoding="utf-8").read())
+        stills = next(ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign) and any(getattr(t, "id", "") == "STILLS" for t in n.targets))
+        sc = (_load(steps_path(name)).get("scenes") or [{}])[0]
+        # the key frame of the first scene, as the picture-step poster shows it (js/steps.js keyOf)
+        fr = (sc.get("key") or {}).get("frame")
+        if not fr:
+            fr = sc.get("frame")
+            for m in sc.get("motions") or []:
+                if m.get("type") == "xfade" and not m.get("back"): fr = m.get("to")
+        fr = str(fr)
+    except (OSError, StopIteration, ValueError, SyntaxError):
+        return None
+    for want in ("up", "down"):
+        for still, (s, f, pose, _size) in stills.items():
+            p = f"img/stills/{still}.webp"
+            if s == name and str(f) == fr and pose == want and os.path.exists(os.path.join(ROOT, p)): return p
+    return None
+
+
 def apk_steps_keep(steps):
     """From book.steps: (set names, picture folders) that go inside the APK: the "precache" sets only."""
     keep = {n for n, e in (steps or {}).items() if e.get("offline") == "precache"}
@@ -286,4 +311,6 @@ def steps_book(names, em=None):
         out[name] = {"offline": steps_offline(name, em), "dir": folder + "/", "files": [js] + pics,
                      "bytes": sum(os.path.getsize(os.path.join(ROOT, f.split("?")[0])) for f in [js] + pics),
                      "fallback": has_fallback(name)}
+        still = poster_still(name) if out[name]["offline"] == "on-demand" and not out[name]["fallback"] else None
+        if still: out[name]["still"] = still
     return out

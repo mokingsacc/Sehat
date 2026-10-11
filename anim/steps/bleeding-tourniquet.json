@@ -4,12 +4,8 @@
  "w": 960,
  "h": 720,
  "adult": false,
- "approved": "",
- "held": "held: Mo's tourniquet call pending",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/bleeding-tourniquet), packed by tools/steps_images.py --px 800 --patch. HELD: Mo's tourniquet call is pending (brief flag F5). Not live: add the name to STEPS in js/anim.js, Mo's \"approved\" note and an anim block on the topic to go live (docs/STEPS_PLAYER.md).",
- "_check": [
-  "HELD: Mo's tourniquet call pending (flag F5)."
- ],
+ "approved": "2026-10-11, Mo (tourniquet call EM1 / P-08: \"SHOW it\", 21:50; the step worded as a last resort)",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/bleeding-tourniquet), packed by tools/steps_images.py --px 800 --patch. Live since 11 Oct 2026 (STEPS in js/anim.js, anim block bleeding.anim-bleeding-tourniquet above the tourniquet step; step cards bleeding.tourniquet and bleeding.time show frames 1 and 3; frame 2 is the poster).",
  "poster": 1,
  "frames": {
   "1": {

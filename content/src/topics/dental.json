@@ -205,9 +205,9 @@
           "id": "dental.soon.patch",
           "icon": "lump",
           "text": {
-            "fa": "زخم یا لکهٔ سفید در دهن بیش از ۲ هفته",
-            "ps": "په خوله کې زخم یا سپین داغ له ۲ اونیو زیات",
-            "en": "a sore or white patch in the mouth for over 2 weeks"
+            "fa": "زخم یا لکهٔ سفید در دهن بیش از ۳ هفته",
+            "ps": "په خوله کې زخم یا سپین داغ له ۳ اونیو زیات",
+            "en": "a sore or white patch in the mouth for over 3 weeks"
           }
         },
         {

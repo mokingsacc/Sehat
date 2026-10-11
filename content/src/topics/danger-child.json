@@ -503,9 +503,9 @@
           "id": "danger-child.dry-soon.wee",
           "icon": "baby",
           "text": {
-            "fa": "۸ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود",
-            "ps": "۸ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي",
-            "en": "has not weed for 8 hours or more, or has fewer wet nappies"
+            "fa": "۱۲ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود",
+            "ps": "۱۲ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي",
+            "en": "has not weed for 12 hours or more, or has fewer wet nappies"
           }
         },
         {

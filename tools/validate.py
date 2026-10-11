@@ -655,7 +655,7 @@ def check_picture_storage():
     except FileNotFoundError as e: err(os.path.join(ROOT, "js/anim.js"), str(e)); return
     on_demand = [n for n, e in want.items() if e["offline"] == "on-demand"]
     for n in on_demand:
-        if not want[n]["fallback"]: warn(ANIM.steps_path(n), f"on-demand picture steps with no SVG version (anim/{n}.js): the animation is left off its page until the pictures are downloaded")
+        if not want[n]["fallback"] and not want[n].get("still"): warn(ANIM.steps_path(n), f"on-demand picture steps with no SVG version (anim/{n}.js) and no still of its first scene (tools/steps_stills.py STILLS): the animation is left off its page until the pictures are downloaded")
     # the built book must say the same (run tools/build.py after changing a set, its pictures or its group)
     bp = os.path.join(ROOT, "content/book.json")
     if os.path.exists(bp):

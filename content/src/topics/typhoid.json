@@ -7,9 +7,9 @@
     "en": "Typhoid fever"
   },
   "summary": {
-    "fa": "درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۳ روز: امروز کلینیک.",
-    "ps": "د نس سخت درد: همدا اوس روغتون. له ۳ ورځو زیاته تبه: نن کلینیک.",
-    "en": "Severe belly pain: hospital now. Fever over 3 days: clinic today."
+    "fa": "درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۲ روز: امروز کلینیک.",
+    "ps": "د نس سخت درد: همدا اوس روغتون. له ۲ ورځو زیاته تبه: نن کلینیک.",
+    "en": "Severe belly pain: hospital now. Fever more than 2 days: clinic today."
   },
   "image": "typhoid",
   "blocks": [
@@ -42,14 +42,14 @@
       "type": "step",
       "icon": "clinic",
       "title": {
-        "fa": "تب بیش از ۳ روز: بروید",
-        "ps": "له ۳ ورځو زیاته تبه: ولاړ شئ",
-        "en": "Fever over 3 days: go"
+        "fa": "تب بیشتر از ۲ روز: به کلینیک بروید",
+        "ps": "له ۲ ورځو زیاته تبه: کلینیک ته ولاړ شئ",
+        "en": "Fever more than 2 days: go to the clinic"
       },
       "text": {
-        "fa": "اگر تب بیش از ۳ روز دوام کرد، یا زودتر اگر مریض بسیار ناخوش است، به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.",
-        "ps": "که تبه له ۳ ورځو زیات دوام وکړي، یا ژر تر ژره که ناروغ ډېر ناجوړه وي، کلینیک ته ولاړ شئ. محرقه د وینې معاینې او انټي بیوټیک ته اړتیا لري؛ پخپله نه ځي.",
-        "en": "Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself."
+        "fa": "اگر تب بیشتر از ۲ روز دوام کرد، یا مریض بسیار ناخوش است، امروز به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.",
+        "ps": "که تبه له ۲ ورځو زیاته دوام وکړي، یا ناروغ ډېر ناجوړه وي، نن کلینیک ته ولاړ شئ. محرقه د وینې معاینې او انټي بیوټیک ته اړتیا لري؛ پخپله نه ځي.",
+        "en": "If the fever lasts more than 2 days, or the person is very unwell, go to the clinic today. Typhoid needs a blood test and antibiotics; it does not pass by itself."
       }
     },
     {
@@ -196,9 +196,9 @@
           "id": "typhoid.soon.days",
           "icon": "calendar",
           "text": {
-            "fa": "تب بیش از ۳ روز",
-            "ps": "له ۳ ورځو زیاته تبه",
-            "en": "fever for more than 3 days"
+            "fa": "تب بیشتر از ۲ روز",
+            "ps": "له ۲ ورځو زیاته تبه",
+            "en": "fever for more than 2 days"
           }
         },
         {
@@ -291,7 +291,7 @@
   "review": [
     "Antibiotic names (ciprofloxacin, azithromycin, cefixime; ceftriaxone injection) follow the WHO Pocket Book and AWaRe book; resistance to fluoroquinolones is high in the region, so Mo should confirm what Samangan clinics actually use, or replace with 'an antibiotic'. Cefixime was not confirmed on the 2014 EML.",
     "'Blood test': most clinics use the Widal test, which is unreliable; blood culture is only at larger hospitals. The text just says 'a blood test'.",
-    "'Fever over 3 days: go to the clinic' is a practical threshold for adults; IMCI uses 7 days for referral of fever in children but the child topic covers that.",
+    "'Fever more than 2 days: go to the clinic today' (Mo, 11 Oct 2026, audit A-20): one care level and the same words on every page and in the temperature checker (was 3 days here). IMCI uses 7 days for referral of fever in children but the child topic covers that.",
     "Typhoid vaccine campaigns were not confirmed for Afghanistan, so no vaccine claim is made.",
     "Dari محرقه and Pashto محرقه are the common words; تیفویید/ټایفایډ added in brackets.",
     "Medical audit 2026-10-08 IL-6: typhoid.clinic was 'a typhoid antibiotic (such as ciprofloxacin, azithromycin or cefixime)'; now 'an antibiotic for typhoid (often azithromycin)' (MSF 2024; cefixime is not on Afghanistan's 2014 essential list). The hospital block still names ceftriaxone.",

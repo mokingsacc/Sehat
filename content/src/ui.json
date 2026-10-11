@@ -1689,14 +1689,14 @@
    "en": "No fever. If the person seems ill, watch for danger signs and measure again later."
   },
   "ui.rd.v.temp-child-fever": {
-   "fa": "این تب است. مایعات و شیر بیشتر بدهید و لباس سبک بپوشانید. اگر تب بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر طفل خیلی مریض معلوم می‌شود، امروز بروید.",
-   "ps": "دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ماشوم ډېر ناروغ ښکاري، نن ولاړ شئ.",
-   "en": "This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill."
+   "fa": "این تب است. مایعات و شیر بیشتر بدهید و لباس سبک بپوشانید. اگر تب بیشتر از ۲ روز دوام کرد، یا طفل خیلی مریض معلوم می‌شود، امروز به کلینیک بروید.",
+   "ps": "دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي، یا ماشوم ډېر ناروغ ښکاري، نن کلینیک ته ولاړ شئ.",
+   "en": "This is a fever. Give more drinks and breastfeed more, and dress the child lightly. If the fever lasts more than 2 days, or the child seems very ill, go to the clinic today."
   },
   "ui.rd.v.temp-fever": {
-   "fa": "این تب است. استراحت کنید و زیاد مایعات بنوشید. اگر بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر مریض خیلی بد است، امروز بروید.",
-   "ps": "دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ناروغ ډېر خراب وي، نن ولاړ شئ.",
-   "en": "This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell."
+   "fa": "این تب است. استراحت کنید و زیاد مایعات بنوشید. اگر تب بیشتر از ۲ روز دوام کرد، یا مریض خیلی بد است، امروز به کلینیک بروید.",
+   "ps": "دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که تبه له ۲ ورځو زیاته دوام وکړي، یا ناروغ ډېر خراب وي، نن کلینیک ته ولاړ شئ.",
+   "en": "This is a fever. Rest and drink plenty. If the fever lasts more than 2 days, or the person is very unwell, go to the clinic today."
   },
   "ui.rd.v.temp-high": {
    "fa": "تب بلند است. زیاد مایعات بدهید و لباس سبک بپوشانید. امروز به کلینیک بروید.",
@@ -1712,11 +1712,6 @@
    "fa": "اگر طفل تیز نفس می‌کشد، نفس‌هایش را بشمارید. برای باز کردن شمردن نفس، اینجا را بزنید.",
    "ps": "که ماشوم چټکه ساه اخلي، ساه یې وشمېرئ. د ساه شمېرلو د پرانیستلو لپاره دلته ټک کړئ.",
    "en": "If the child breathes fast, count the breaths. Tap here to open the breathing counter."
-  },
-  "ui.rd.v.temp-very-high": {
-   "fa": "تب خیلی بلند است. مایعات بدهید، لباس سبک بپوشانید و همین حالا به شفاخانه بروید.",
-   "ps": "ډېره لوړه تبه ده. اوبلنې ورکړئ، سپکې جامې واغوندئ، او همدا اوس روغتون ته ولاړ شئ.",
-   "en": "A very high fever. Give drinks, dress lightly, and go to hospital now."
   },
   "ui.rd.v.temp-pregnant": {
    "fa": "تب در حاملگی باید معاینه شود. زیاد مایعات بنوشید و امروز به کلینیک بروید. اگر درد شدید شکم، خونریزی، یا آنقدر ضعف دارید که بلند شده نمی‌توانید، همین حالا به شفاخانه بروید.",
@@ -1804,9 +1799,14 @@
    "en": "Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes. Low sugar in someone without diabetes needs a check: go to the clinic today."
   },
   "ui.rd.v.sugar-ok": {
-   "fa": "در اندازهٔ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.",
-   "ps": "په ښه اندازه کې ده. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.",
-   "en": "In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit."
+   "fa": "پیش از صبحانه ۸۰ تا ۱۳۰ خوب است؛ ۲ ساعت بعد از غذا، کمتر از ۱۸۰ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.",
+   "ps": "له ناشتې مخکې ۸۰ تر ۱۳۰ ښه دی؛ له خوړو ۲ ساعته وروسته، له ۱۸۰ کم ښه دی. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.",
+   "en": "Before breakfast, 80 to 130 is good; 2 hours after food, under 180 is good. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit."
+  },
+  "ui.rd.v.sugar-ok-mmol": {
+   "fa": "پیش از صبحانه ۴٫۴ تا ۷٫۲ خوب است؛ ۲ ساعت بعد از غذا، کمتر از ۱۰ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.",
+   "ps": "له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی؛ له خوړو ۲ ساعته وروسته، له ۱۰ کم ښه دی. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.",
+   "en": "Before breakfast, 4.4 to 7.2 is good; 2 hours after food, under 10 is good. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit."
   },
   "ui.rd.v.sugar-nodm-ok": {
    "fa": "عادی است. برای اینکه همین‌طور بماند، شکر و نان سفید کمتر بخورید و هر روز پیاده‌روی کنید.",

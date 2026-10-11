@@ -186,9 +186,9 @@
           "id": "diarrhoea-adult.urgent.urine",
           "icon": "urine-blood",
           "text": {
-            "fa": "۸ ساعت یا بیشتر ادرار نکرده",
-            "ps": "۸ ساعته یا ډېر یې متیازې نه دي کړې",
-            "en": "no urine for 8 hours or more"
+            "fa": "۱۲ ساعت یا بیشتر ادرار نکرده",
+            "ps": "۱۲ ساعته یا ډېر یې متیازې نه دي کړې",
+            "en": "no urine for 12 hours or more"
           }
         },
         {
@@ -328,7 +328,7 @@
   "review": [
     "Ciprofloxacin named for bloody diarrhoea with fever (NSTG 2013, WHO); confirm this is still the local first choice and that naming is wanted.",
     "'Cholera also gets an antibiotic' (single-dose doxycycline or azithromycin in WHO guidance) is kept generic.",
-    "'No urine for 8 hours' as an adult danger sign is a practical threshold, not a WHO number; Mo to adjust.",
+    "'No urine for 12 hours' as an adult danger sign is a practical threshold, not a WHO number; Mo, 11 Oct 2026 (audit A-22): 12 hours on every page.",
     "ORS amount for adults ('a full cup or more after every loose stool') follows WHO's adult guidance of at least 200-400 ml per stool, simplified; the children's topic has the exact child amounts.",
     "ORS 'free at the health post': BPHS Health Post kit; confirm CHWs in Samangan are still supplied (about 600 facilities closed nationally by August 2026).",
     "Pashto 'د نس ناستي درېدونکي درمل' (anti-diarrhoeal medicines) to be checked for natural wording.",

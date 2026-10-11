@@ -160,9 +160,9 @@
           "id": "dengue.urgent.urine",
           "icon": "urine-blood",
           "text": {
-            "fa": "۶ ساعت ادرار نکرده",
-            "ps": "۶ ساعته یې متیازې نه دي کړې",
-            "en": "has passed no urine for 6 hours"
+            "fa": "۱۲ ساعت ادرار نکرده",
+            "ps": "۱۲ ساعته یې متیازې نه دي کړې",
+            "en": "has passed no urine for 12 hours"
           }
         },
         {
@@ -273,7 +273,7 @@
   "review": [
     "Dengue is essentially an eastern (Nangarhar) problem; for Samangan this topic matters for travellers and returnees. Mo may decide to shorten it or keep it only in the symptom finder.",
     "Paracetamol is named because WHO's own patient advice names it and warns against NSAIDs; no dose is given. Confirm this is acceptable.",
-    "'Has passed no urine for 6 hours' is a WHO warning sign (reduced urine output); exact hours vary by source (4-6 hours).",
+    "'Has passed no urine for 12 hours': reduced urine output is a WHO warning sign (sources give 4 to 6 hours); Mo, 11 Oct 2026 (audit A-22): 12 hours on every page.",
     "'Dengue has spread in recent years' deliberately gives no year; the first large Afghan outbreak was reported from Nangarhar around 2022-2023 but the exact date was not verified.",
     "Striped daytime mosquito (Aedes) breeding sites listed from the WHO fact sheet; coolers may be rare in Samangan villages.",
     "Dari تب دنگی / Pashto ډینګي تبه: confirm the words used locally (some say 'دینگی')."

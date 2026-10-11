@@ -62,10 +62,12 @@ STILLS = {
     "bp-cuff": ("bp-measure", "2", "down", "small"),
     "bp-arm": ("bp-measure", "3", "up", "small"),  # page top of kit-bp (audit P-04)
     "breastfeed-hold": ("breastfeed-attach", "1", "up", "small"),
+    "breastfeed-latch": ("breastfeed-attach", "2", "up", "small"),  # poster of the film until it is downloaded (N-07)
     "breath-watch": ("breath-count", "1", "up", "small"),
     "glucometer-drop": ("glucometer", "3", "up", "small"),
     "glucometer-wash": ("glucometer", "1", "up", "small"),  # page top of kit-glucometer (audit P-04, P-06)
     "muac-arm": ("muac", "1", "up", "small"),
+    "muac-loose": ("muac", "2", "up", "small"),  # poster of the film until it is downloaded (N-07)
     "muac-read": ("muac", "4", "up", "small"),
     "muac-tape": ("muac", "3", "up", "small"),  # page top of kit-muac (audit P-04)
     "thermometer-armpit": ("thermometer", "2", "down", "small"),

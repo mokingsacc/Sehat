@@ -1,5 +1,7 @@
 // The first run and the district question, at 360 px, with a fake clock (Playwright page.clock.setFixedTime):
-//   - a new phone sees one screen, the language; one tap opens the Health tab (no voice, consent or district screens);
+//   - a new phone sees one screen, the language (Dari and Pashto; English is in Settings only, Mo 11 Oct 2026, audit
+//     S-02, so the English run taps Dari and then picks English in Settings); one tap opens the Health tab (no voice,
+//     consent or district screens);
 //     the woman's voice is chosen, usage counts and the disease watch are on, the Privacy page and Settings keep the
 //     off switches;
 //   - the district question: not before 24 hours from the first open, never over the Emergency screen or a recording
@@ -60,11 +62,17 @@ const SV = book.surveillance;
   for (const lang of ['en', 'fa']) {
     const ctx = await newCtx();
     let p = await open(ctx, T0, '');
-    ok(await p.$('.welcome [data-setlang="fa"]') && await p.$('.welcome [data-setlang="ps"]') && await p.$('.welcome [data-setlang="en"]'), lang + ': the first screen offers the three languages');
+    ok(await p.$('.welcome [data-setlang="fa"]') && await p.$('.welcome [data-setlang="ps"]') && !(await p.$('.welcome [data-setlang="en"]')), lang + ': the first screen offers Dari and Pashto, not English');
     ok(!(await p.$('.dialog-wrap')), lang + ': no question on the first screen');
     if (lang === 'en') await shot(p, '1-first-run-language');
-    await p.click(`.welcome [data-setlang="${lang}"]${lang === 'en' ? '' : '.big'}`);
+    await p.click(`.welcome [data-setlang="${lang === 'en' ? 'fa' : lang}"].big`);
     await p.waitForTimeout(600);
+    if (lang === 'en') { // English: in Settings only
+      await p.goto(BASE + 'index.html#/settings'); await p.waitForTimeout(400);
+      await p.click('[data-block="ui.set.language"] [data-lang="en"]'); await p.waitForTimeout(600);
+      if (await p.$('[data-oldvoice="keep"]')) { await p.click('[data-oldvoice="keep"]'); await p.waitForTimeout(200); } // "delete the Dari voice?": keep
+      await p.goto(BASE + 'index.html#/home'); await p.waitForTimeout(600);
+    }
     ok(await p.$('.hbtn.em'), lang + ': one tap opens the Health tab', await p.$eval('#app', (e) => e.innerText.slice(0, 200)));
     ok(!(await p.$('.voices, .consent, [data-cdist], [data-consent]')), lang + ': no voice, consent or district screen');
     ok(await ls(p, 'lang') === lang && await ls(p, 'voice') === 'f', lang + ': language saved, the woman\'s voice chosen');

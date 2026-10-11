@@ -76,20 +76,25 @@
       "picture": "img/steps/bleeding-press/3-full.webp"
     },
     {
+      "id": "bleeding.anim-bleeding-tourniquet",
+      "type": "anim",
+      "anim": "bleeding-tourniquet"
+    },
+    {
       "id": "bleeding.tourniquet",
       "type": "step",
       "icon": "warning",
       "title": {
-        "fa": "خون زیاد از دست یا پا: بالای زخم ببندید",
-        "ps": "له لاس یا پښې ډېره وینه: له ټپ پورته یې وتړئ",
-        "en": "Arm or leg still pouring? Tie above"
+        "fa": "آخرین راه: بالای زخم ببندید (دست یا پا)",
+        "ps": "وروستۍ لار: له ټپ پورته یې وتړئ (لاس یا پښه)",
+        "en": "Last resort: tie above (arm or leg)"
       },
       "text": {
-        "fa": "اگر باز هم خون زیاد از دست یا پا می‌ریزد، یک تکهٔ پهن را یک کف دست بالاتر از زخم بسیار محکم ببندید. با یک چوب بپیچانید تا خون بند شود.",
-        "ps": "که بیا هم له لاس یا پښې ډېره وینه بهېږي، یو پلن ټوکر یو ورغوی له ټپ پورته ډېر کلک وتړئ. په یوه لرګي یې تاو کړئ تر څو وینه ودرېږي.",
-        "en": "If blood still pours from an arm or leg, tie a wide cloth very tight a hand's width above the wound. Twist it with a stick until the bleeding stops."
+        "fa": "فقط برای دست یا پا، اگر فشار محکم خونریزی زیاد را بند نکرده است: یک تکهٔ پهن را خوب بالاتر از زخم، بسیار محکم ببندید و با یک چوب بپیچانید تا خون بند شود. وقت را یاد کنید و همین حالا به شفاخانه بروید.",
+        "ps": "یوازې د لاس یا پښې لپاره، که کلک فشار ډېره وینه نه وي درولې: یو پلن ټوکر له ټپ څخه ښه پورته ډېر کلک وتړئ او په یوه لرګي یې تاو کړئ تر څو وینه ودرېږي. وخت په یاد ولرئ او همدا اوس روغتون ته ولاړ شئ.",
+        "en": "Arm or leg only, if firm pressing has not stopped heavy bleeding: tie a wide cloth high above the wound, very tight, and twist it with a stick until the bleeding stops. Note the time and go to hospital now."
       },
-      "picture": "em-bleeding-tourniquet"
+      "picture": "img/steps/bleeding-tourniquet/1-full.webp"
     },
     {
       "id": "bleeding.time",
@@ -104,7 +109,8 @@
         "fa": "وقتی را که بستید به یاد داشته باشید و به شفاخانه بگویید. خودتان آن را سست نکنید. همین حالا به شفاخانه بروید.",
         "ps": "هغه وخت چې مو وتاړه په یاد ولرئ او روغتون ته یې ووایئ. پخپله یې مه سستوئ. همدا اوس روغتون ته ولاړ شئ.",
         "en": "Remember the time you tied it and tell the hospital. Do not loosen it yourself. Go to hospital now."
-      }
+      },
+      "picture": "img/steps/bleeding-tourniquet/3-full.webp"
     },
     {
       "id": "bleeding.lie",
@@ -254,7 +260,8 @@
     "WHO Basic Emergency Care: approach to the acutely ill and injured (WHO/ICRC, 2018): haemorrhage control"
   ],
   "review": [
-    "Tourniquet only for life-threatening bleeding from an arm or leg that pressure does not stop (ERC/ILCOR 2025). Families have no commercial tourniquet, so the text describes an improvised one: a wide cloth tied a hand's width above the wound and tightened by twisting a stick (windlass). ILCOR says improvised tourniquets often fail and must be wide and tightened with a windlass. Check that this is safe to teach without hands-on training.",
+    "Tourniquet only for life-threatening bleeding from an arm or leg that pressure does not stop (ERC/ILCOR 2025). Families have no commercial tourniquet, so the text describes an improvised one: a wide cloth tied high above the wound and tightened by twisting a stick (windlass). ILCOR says improvised tourniquets often fail and must be wide and tightened with a windlass. Check that this is safe to teach without hands-on training.",
+    "Mo, 11 Oct 2026 (audit P-08, medical audit EM1): show the tourniquet. The step is worded as a last resort (arm or leg only, when firm pressing has not stopped heavy bleeding): tie it high above the wound, tight, note the time, and go to hospital now (RCUK and ERC First Aid Guidelines 2025: life-threatening limb bleeding that direct pressure does not control; note the time). The picture-step set bleeding-tourniquet plays above the step, and the step cards show its frames 1 and 3 instead of the old drawing (frame 2, the stick, is the film poster).",
     "'Do not loosen it yourself' and 'note the time' follow ERC/ICRC teaching.",
     "No haemostatic dressings (not available in villages).",
     "Raising the legs for shock is left out to keep it simple. ILCOR allows passive leg raising when there is no injury.",

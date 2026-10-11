@@ -201,9 +201,9 @@
           "id": "red-flags.soon.wound",
           "icon": "wound",
           "text": {
-            "fa": "زخمی که در ۲ هفته جور نمی‌شود",
-            "ps": "ټپ چې په ۲ اونیو کې نه جوړېږي",
-            "en": "A wound or sore that does not heal in 2 weeks"
+            "fa": "زخم پوست یا دهن که در ۳ هفته جور نمی‌شود",
+            "ps": "د پوستکي یا خولې زخم چې په ۳ اونیو کې نه جوړېږي",
+            "en": "A wound or sore, on the skin or in the mouth, that does not heal in 3 weeks"
           }
         },
         {
