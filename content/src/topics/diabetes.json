@@ -217,6 +217,22 @@
           }
         }
       ]
+    },
+    {
+      "id": "diabetes.food-diabetes",
+      "type": "link",
+      "to": "topic/food-diabetes",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "مرض شکر: چه بخوریم",
+        "ps": "د شکرې ناروغي: څه وخورو",
+        "en": "Sugar disease: what to eat"
+      },
+      "text": {
+        "fa": "نیم بشقاب سبزی، چای بی‌شکر، و غذا در وقت معین.",
+        "ps": "نیمه پشقاب سبزي، بې بورې چای، او په ټاکلي وخت ډوډۍ.",
+        "en": "Half the plate vegetables, no sugar in tea, and regular meals."
+      }
     }
   ],
   "sources": [

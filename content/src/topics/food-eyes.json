@@ -1,0 +1,255 @@
+{
+  "id": "food-eyes",
+  "section": "children",
+  "title": {
+    "fa": "ویتامین ای: غذا برای چشم",
+    "ps": "ویټامین اې: د سترګو لپاره خواړه",
+    "en": "Vitamin A: food for the eyes"
+  },
+  "summary": {
+    "fa": "جگر، تخم مرغ، غذای نارنجی و سبز، و ویتامین ای هر ۶ ماه.",
+    "ps": "ځیګر، هګۍ، نارنجي او شنه خواړه، او هرو ۶ میاشتو کې ویټامین اې.",
+    "en": "Liver, eggs, orange and green foods, and vitamin A every 6 months."
+  },
+  "image": "kitchen-garden",
+  "blocks": [
+    {
+      "id": "food-eyes.lead",
+      "type": "lead",
+      "text": {
+        "fa": "طفلی که هنگام شام خوب نمی‌بیند، شاید ویتامین ای کم داشته باشد. ویتامین ای به اطفال در برابر سرخکان و اسهال هم کمک می‌کند؛ در جگر، تخم مرغ، شیر و غذاهای نارنجی و سبز است.",
+        "ps": "هغه ماشوم چې د ماښام پر مهال ښه نه ویني، کېدای شي ویټامین اې یې کم وي. ویټامین اې له ماشومانو سره د شري او نس ناستي پر وړاندې هم مرسته کوي؛ په ځیګر، هګۍ، شیدو او نارنجي او شنو خوړو کې دی.",
+        "en": "A child who cannot see well at dusk may be short of vitamin A. Vitamin A also helps children fight measles and diarrhoea; it is in liver, eggs, milk, and orange and green foods."
+      }
+    },
+    {
+      "id": "food-eyes.liver",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "هفته‌ای یک بار جگر",
+        "ps": "په اونۍ کې یو ځل ځیګر",
+        "en": "Liver once a week"
+      },
+      "text": {
+        "fa": "جگر برای چشم از همه غذاها غنی‌تر است. هفته‌ای یک بار، یک تکهٔ کوچک، کوبیده یا ریزه شده، به اطفال بدهید.",
+        "ps": "ځیګر د سترګو لپاره تر ټولو بډایه خواړه دي. په اونۍ کې یو ځل، یوه کوچنۍ ټوټه، میده یا وړه پرې شوې، ماشومانو ته ورکړئ.",
+        "en": "Liver is the richest food for the eyes. Give children a small piece, mashed or cut fine, once a week."
+      }
+    },
+    {
+      "id": "food-eyes.egg-milk",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "تخم مرغ، شیر جوشیده و ماست",
+        "ps": "هګۍ، ایشول شوې شیدې او مستې",
+        "en": "Eggs, boiled milk and yoghurt"
+      },
+      "text": {
+        "fa": "روزی یک تخم مرغ و شیر جوشیده یا ماست، به اطفال و مادران ویتامین ای می‌دهد.",
+        "ps": "هره ورځ یوه هګۍ او ایشول شوې شیدې یا مستې ماشومانو او میندو ته ویټامین اې ورکوي.",
+        "en": "An egg a day and boiled milk or yoghurt give vitamin A to children and mothers."
+      }
+    },
+    {
+      "id": "food-eyes.orange",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "نارنجی و سبز تیره، با روغن",
+        "ps": "نارنجي او تک شین، له غوړیو سره",
+        "en": "Orange and dark green, with oil"
+      },
+      "text": {
+        "fa": "زردک، کدو، زردآلو، خربوزهٔ نارنجی و سبزی‌های سبز تیره در بدن ویتامین ای می‌سازد. آن‌ها را با کمی روغن بپزید یا کوبیده کنید تا بدن آن را بگیرد.",
+        "ps": "ګازرې، کدو، زردالو، نارنجي خټکی او تکې شنې پاڼې په بدن کې ویټامین اې جوړوي. له لږو غوړیو سره یې پاخه یا میده کړئ، چې بدن یې واخلي.",
+        "en": "Carrots, pumpkin, apricots, orange melon and dark green leaves make vitamin A in the body. Cook or mash them with a little oil, so the body can take it in."
+      }
+    },
+    {
+      "id": "food-eyes.seasons",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "در تمام سال",
+        "ps": "ټول کال",
+        "en": "Through the year"
+      },
+      "text": {
+        "fa": "تابستان زردآلو و خربوزه می‌دهد، و خزان کدو و زردک. در زمستان زردآلوی خشک، زردک و کدوی ذخیره شده، و تخم مرغ بخورید.",
+        "ps": "اوړی زردالو او خټکي راکوي، او منی کدو او ګازرې. په ژمي کې وچ زردالو، ساتل شوې ګازرې او کدو، او هګۍ وخورئ.",
+        "en": "Summer gives apricots and melon, and autumn gives pumpkin and carrots. In winter use dried apricots, stored carrots and pumpkin, and eggs."
+      }
+    },
+    {
+      "id": "food-eyes.vitamin-a",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "ویتامین ای هر ۶ ماه",
+        "ps": "هرو ۶ میاشتو کې ویټامین اې",
+        "en": "Vitamin A every 6 months"
+      },
+      "text": {
+        "fa": "از ۶ ماهگی تا ۵ سالگی، هر طفل هر ۶ ماه ویتامین ای لازم دارد، از کلینیک یا تیم واکسین.",
+        "ps": "له ۶ میاشتو تر ۵ کلنۍ، هر ماشوم هرو ۶ میاشتو کې ویټامین اې ته اړتیا لري، له کلینیک یا د واکسین له ټیم څخه.",
+        "en": "From 6 months to 5 years, every child needs vitamin A every 6 months, from the clinic or the vaccination team."
+      }
+    },
+    {
+      "id": "food-eyes.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر طفل شما یکی از این علایم را دارد، امروز به کلینیک بروید:",
+        "ps": "که ستاسو ماشوم له دې نښو څخه یوه هم لري، نن کلینیک ته ولاړ شئ:",
+        "en": "If your child has any of these signs, go to the clinic today:"
+      },
+      "items": [
+        {
+          "id": "food-eyes.soon.dusk",
+          "icon": "eye",
+          "text": {
+            "fa": "هنگام شام خوب نمی‌بیند، یا شام‌ها به چیزها می‌خورد",
+            "ps": "د ماښام پر مهال ښه نه ویني، یا ماښام له شیانو سره ټکر کوي",
+            "en": "cannot see well at dusk, or bumps into things in the evening"
+          }
+        },
+        {
+          "id": "food-eyes.soon.patch",
+          "icon": "eye",
+          "text": {
+            "fa": "یک لکهٔ خشک و کف‌مانند سفید در سفیدی چشم دارد",
+            "ps": "د سترګې په سپینه برخه کې وچ، ځګ ډوله سپین داغ لري",
+            "en": "has a dry, foamy white patch on the white of the eye"
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-eyes.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-eyes.helps.liver",
+          "icon": "food-iron",
+          "text": {
+            "fa": "جگر و تخم مرغ برای چشم خوب است: درست است.",
+            "ps": "ځیګر او هګۍ سترګو ته ښې دي: سمه ده.",
+            "en": "Liver and eggs are good for the eyes: true."
+          }
+        },
+        {
+          "id": "food-eyes.helps.carrots",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "زردک و کدو به طفلی که هنگام شام بد می‌بیند کمک می‌کند: درست است، اگر با کمی روغن پخته شود.",
+            "ps": "ګازرې او کدو له هغه ماشوم سره مرسته کوي چې د ماښام پر مهال بد ویني: سمه ده، که له لږو غوړیو سره پاخه شي.",
+            "en": "Carrots and pumpkin help a child who sees badly at dusk: true, cooked with a little oil."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-eyes.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-eyes.unproven.all-eyes",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "زردک همه مشکلات چشم را خوب نمی‌کند. فقط وقتی ویتامین ای کم است کمک می‌کند.",
+            "ps": "ګازرې د سترګو ټولې ستونزې نه جوړوي. یوازې هغه وخت مرسته کوي چې ویټامین اې کم وي.",
+            "en": "Carrots do not fix every eye problem. They help only when vitamin A is short."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-eyes.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-eyes.harm.kohl",
+          "icon": "eye",
+          "text": {
+            "fa": "سرمه در چشم شیرخوار: بسیاری از سرمه‌ها سرب دارد که به مغز ضرر می‌رساند.",
+            "ps": "په تي خوړونکي ماشوم سترګو کې رانجه: ډېری رانجې سرب لري چې دماغ ته زیان رسوي.",
+            "en": "Kohl (surma) in a baby's eyes: many kinds carry lead, which harms the brain."
+          }
+        },
+        {
+          "id": "food-eyes.harm.in-eye",
+          "icon": "no",
+          "text": {
+            "fa": "گلاب، شیر مادر، گیاه یا عسل در چشم: عفونت می‌آورد.",
+            "ps": "ګلاب، د مور شیدې، بوټي یا شات په سترګو کې: انتان راوړي.",
+            "en": "Rose water, breast milk, herbs or honey in the eye: they bring infection."
+          }
+        },
+        {
+          "id": "food-eyes.harm.withhold",
+          "icon": "no",
+          "text": {
+            "fa": "دور نگه داشتن تخم مرغ و جگر از اطفال کوچک چون «ثقیل» یا «گرم» است: چشم‌شان همین غذاها را لازم دارد.",
+            "ps": "له کوچنیو ماشومانو هګۍ او ځیګر ساتل ځکه چې «درانه» یا «ګرم» دي: د دوی سترګې همدې خوړو ته اړتیا لري.",
+            "en": "Keeping eggs and liver from small children as \"heavy\" or \"garm\": these are the foods their eyes need."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-eyes.eye-infection",
+      "type": "link",
+      "to": "topic/eye-infection",
+      "icon": "eye",
+      "title": {
+        "fa": "مشکلات چشم و علایم خطر",
+        "ps": "د سترګو ستونزې او د خطر نښې",
+        "en": "Eye problems and danger signs"
+      },
+      "text": {
+        "fa": "لکهٔ سفید یا تیره روی سیاهی چشم همین حالا شفاخانه لازم دارد. همه علایم را ببینید.",
+        "ps": "د سترګې په تور کې سپین یا خړ داغ همدا اوس روغتون ته اړتیا لري. ټولې نښې وګورئ.",
+        "en": "A white or cloudy spot on the black of the eye needs the hospital now. See all the signs."
+      }
+    },
+    {
+      "id": "food-eyes.garden",
+      "type": "link",
+      "to": "topic/kitchen-garden",
+      "icon": "house",
+      "title": {
+        "fa": "باغچهٔ خانه در زمین خشک",
+        "ps": "په وچه ځمکه کې د کور باغچه",
+        "en": "A kitchen garden in dry land"
+      },
+      "text": {
+        "fa": "در هر فصل زردک، کدو و سبزی‌های سبز تیره بکارید.",
+        "ps": "په هر موسم کې ګازرې، کدو او تکې شنې پاڼې وکرئ.",
+        "en": "Grow carrots, pumpkin and dark green leaves every season."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guideline: vitamin A supplementation in infants and children 6 to 59 months (2011)",
+    "Cochrane: vitamin A supplementation for preventing morbidity and mortality in children (Imdad et al. 2022)",
+    "WHO: indicators for assessing vitamin A deficiency (1996): night blindness and Bitot's spots",
+    "WHO Measles fact sheet",
+    "CDC: lead in kohl, kajal and surma",
+    "Afghanistan National Nutrition Survey 2013: vitamin A deficiency in half of under-fives"
+  ],
+  "review": [
+    "Vitamin A every 6 months lives on growth.vitamin-a; this page repeats it in one sentence (as the research allows), with no 'free' (Mo's rule).",
+    "New amber items (Mo's call 14): food-eyes.soon.dusk (night blindness) and food-eyes.soon.patch (Bitot's spot), WHO xerophthalmia signs, under the clinic-today title. The red sign (a white or cloudy spot on the black of the eye) stays on eye-infection.urgent.spot and measles.urgent.cloudy-eye, by link.",
+    "Pashto ځګ ډوله (foamy), رانجه (kohl) and Dari کف‌مانند: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Liver here is for children (not pregnancy; Mo's call 4)."
+  ]
+}

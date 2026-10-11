@@ -1,0 +1,249 @@
+{
+  "id": "food-diabetes",
+  "section": "everyone",
+  "title": {
+    "fa": "مرض شکر: چه بخوریم",
+    "ps": "د شکرې ناروغي: څه وخورو",
+    "en": "Sugar disease: what to eat"
+  },
+  "summary": {
+    "fa": "نیم بشقاب سبزی، چای بی‌شکر، و غذا در وقت معین.",
+    "ps": "نیمه پشقاب سبزي، بې بورې چای، او په ټاکلي وخت ډوډۍ.",
+    "en": "Half the plate vegetables, no sugar in tea, and regular meals."
+  },
+  "image": "diabetes",
+  "blocks": [
+    {
+      "id": "food-diabetes.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در مرض شکر، آنچه هر روز می‌خورید به اندازهٔ تابلیت مهم است. غذای درست ارزان است: سبزی، دال، نان آرد کامل گندم، و بدون شکر.",
+        "ps": "د شکرې په ناروغۍ کې، هغه څه چې هره ورځ یې خورئ د ګولیو په اندازه مهم دي. سم خواړه ارزانه دي: سبزي، دال، د بشپړو غنمو ډوډۍ، او بې بورې.",
+        "en": "With sugar disease, what you eat each day matters as much as the tablets. The right food is cheap: vegetables, lentils, whole-wheat bread, and no sugar."
+      }
+    },
+    {
+      "id": "food-diabetes.plate",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "نیم بشقاب سبزی",
+        "ps": "نیمه پشقاب سبزي",
+        "en": "Half the plate vegetables"
+      },
+      "text": {
+        "fa": "نیم بشقاب را سبزی یا سلاد، یک چارک را دال، لوبیا، گوشت، تخم مرغ یا ماست، و یک چارک را نان یا برنج بگذارید.",
+        "ps": "نیمه پشقاب له سبزیو یا سلاتې، څلورمه برخه له دال، لوبیا، غوښې، هګۍ یا مستو، او څلورمه برخه له ډوډۍ یا وریجو ډکه کړئ.",
+        "en": "Fill half the plate with vegetables or salad, a quarter with lentils, beans, meat, egg or yoghurt, and a quarter with bread or rice."
+      }
+    },
+    {
+      "id": "food-diabetes.bread",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "نان گندم کامل، برنج سفید کمتر",
+        "ps": "د بشپړو غنمو ډوډۍ، لږې سپینې وریجې",
+        "en": "Whole-wheat bread, less white rice"
+      },
+      "text": {
+        "fa": "نان آرد کامل گندم را انتخاب کنید، و پلو و نان سفید را کم بخورید.",
+        "ps": "د بشپړو غنمو د اوړو ډوډۍ غوره کړئ، او پلو او سپینه ډوډۍ لږ وخورئ.",
+        "en": "Choose bread from whole-wheat flour, and eat palau and white bread in small amounts."
+      }
+    },
+    {
+      "id": "food-diabetes.tea",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "چای بی‌شکر",
+        "ps": "بې بورې چای",
+        "en": "Tea without sugar"
+      },
+      "text": {
+        "fa": "چای را بی‌شکر بنوشید، یا هر هفته کمی کمتر تا هیچ. نوشابه، آب میوهٔ پاکتی یا شربت شیرین نه؛ آب و دوغ نوشیدنی شما است.",
+        "ps": "چای بې بورې وڅښئ، یا هره اونۍ لږه کمه تر څو هېڅ پاتې نشي. ګازدار څښاک، د پاکټ جوس یا خوږ شربت نه؛ اوبه او شلومبې ستاسو څښاک دي.",
+        "en": "Drink tea with no sugar, or a little less each week until none. No fizzy drinks, packet juice or sweet sherbet; water and doogh are the drinks."
+      }
+    },
+    {
+      "id": "food-diabetes.fruit",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "میوه: روزی یک یا دو دانه، کامل",
+        "ps": "مېوه: په ورځ کې یوه یا دوه، روغه",
+        "en": "Fruit: one or two a day, whole"
+      },
+      "text": {
+        "fa": "روزی یک یا دو میوهٔ کوچک بخورید، مثل یک سیب یا یک انار. آب میوه نه؛ و میوهٔ خشک، خرما و خربوزه فقط کم.",
+        "ps": "په ورځ کې یوه یا دوه کوچنۍ مېوې وخورئ، لکه یوه مڼه یا یو انار. جوس نه؛ او وچه مېوه، خرما او خټکي یوازې لږ.",
+        "en": "Eat one or two small fruits a day, like an apple or a pomegranate. Not juice; and dried fruit, dates and melon only a little."
+      }
+    },
+    {
+      "id": "food-diabetes.walk",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "بعد از غذا قدم بزنید",
+        "ps": "له ډوډۍ وروسته وګرځئ",
+        "en": "Walk after meals"
+      },
+      "text": {
+        "fa": "قدم زدن کوتاه ۱۰ تا ۱۵ دقیقه بعد از هر غذا، شکر همان غذا را پایین می‌آورد.",
+        "ps": "له هرې ډوډۍ وروسته ۱۰ تر ۱۵ دقیقې لنډ ګرځېدل د هماغې ډوډۍ شکره ټیټوي.",
+        "en": "A short walk of 10 to 15 minutes after each meal lowers the sugar from that meal."
+      }
+    },
+    {
+      "id": "food-diabetes.meals",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "با تابلیت، هیچ وعدهٔ غذا را نیندازید",
+        "ps": "له ګولیو سره هېڅ ډوډۍ مه پرېږدئ",
+        "en": "Never skip meals on tablets"
+      },
+      "text": {
+        "fa": "اگر تابلیت شکر یا انسولین می‌گیرید، در وقت معین غذا بخورید و هیچ وعده را نیندازید. پایین شدن شکر خطرناک است.",
+        "ps": "که د شکرې ګولۍ یا انسولین اخلئ، په ټاکلي وخت ډوډۍ وخورئ او هېڅ وخت مه پرېږدئ. د شکرې ټیټېدل خطرناک دي.",
+        "en": "If you take sugar tablets or insulin, eat at regular times and do not skip meals. Low sugar is dangerous."
+      }
+    },
+    {
+      "id": "food-diabetes.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-diabetes.helps.vegetables",
+          "icon": "food-iron",
+          "text": {
+            "fa": "سبزی، دال و نان گندم کامل شکر را آرام‌تر نگه می‌دارد: درست است.",
+            "ps": "سبزي، دال او د بشپړو غنمو ډوډۍ شکره آرامه ساتي: سمه ده.",
+            "en": "Vegetables, lentils and whole-wheat bread keep the sugar steadier: true."
+          }
+        },
+        {
+          "id": "food-diabetes.helps.walk",
+          "icon": "walk",
+          "text": {
+            "fa": "قدم زدن بعد از غذا شکر را پایین می‌آورد: درست است.",
+            "ps": "له ډوډۍ وروسته ګرځېدل شکره ټیټوي: سمه ده.",
+            "en": "Walking after meals lowers the sugar: true."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-diabetes.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-diabetes.unproven.bitter",
+          "icon": "food-iron",
+          "text": {
+            "fa": "ثابت نشده که دارچین، حلبه یا گیاهان تلخ مرض شکر را تداوی کند. کمی در غذا ضرر ندارد؛ تابلیت را ادامه دهید.",
+            "ps": "ثابته نه ده چې دارچیني، حلبه یا تریخ بوټي د شکرې ناروغي جوړه کړي. لږ په خوړو کې زیان نه لري؛ ګولیو ته دوام ورکړئ.",
+            "en": "Cinnamon, fenugreek or bitter herbs are not proven to treat sugar disease. A little in food is fine; keep taking the tablets."
+          }
+        },
+        {
+          "id": "food-diabetes.unproven.biscuits",
+          "icon": "money",
+          "text": {
+            "fa": "بیسکویت و شیرینی «بی‌شکر» دکان لازم نیست. میوه و چند دانه مغز ارزان‌تر است.",
+            "ps": "د دوکان «بې بورې» بسکیټ او خواږه اړین نه دي. مېوه او څو دانې مغز ارزانه دي.",
+            "en": "\"Sugar-free\" biscuits and sweets from the shop are not needed. Fruit and a few nuts cost less."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-diabetes.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-diabetes.harm.honey",
+          "icon": "sugar",
+          "text": {
+            "fa": "عسل، گُر، نبات یا خرما «به جای شکر»: شکر خون را مثل شکر بالا می‌برد.",
+            "ps": "شات، ګوړه، نبات یا خرما «د بورې پر ځای»: د وینې شکره د بورې په څېر لوړوي.",
+            "en": "Honey, gur, nabat or dates \"in place of sugar\": they raise the sugar just like sugar."
+          }
+        },
+        {
+          "id": "food-diabetes.harm.stop-tablets",
+          "icon": "pill",
+          "text": {
+            "fa": "قطع تابلیت یا انسولین به خاطر گیاهان یا تعویذگر: شکر بلند به چشم، گرده و پا ضرر می‌رساند.",
+            "ps": "د بوټو یا تعویذګر لپاره د ګولیو یا انسولین پرېښودل: لوړه شکره سترګو، پښتورګو او پښو ته زیان رسوي.",
+            "en": "Stopping the tablets or insulin for herbs or a healer: high sugar harms the eyes, kidneys and feet."
+          }
+        },
+        {
+          "id": "food-diabetes.harm.big-plates",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "بشقاب‌های پر از نان سفید و پلو چون «شکر ندارد»: در خون به شکر تبدیل می‌شود.",
+            "ps": "د سپینې ډوډۍ او پلو ډکې پشقابې ځکه چې «بوره نه لري»: په وینه کې په شکرې بدلېږي.",
+            "en": "Big plates of white bread and palau because \"no sugar was added\": they turn into sugar in the blood."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-diabetes.diabetes",
+      "type": "link",
+      "to": "topic/diabetes",
+      "icon": "sugar",
+      "title": {
+        "fa": "مرض شکر: دوا و علایم خطر",
+        "ps": "د شکرې ناروغي: درمل او د خطر نښې",
+        "en": "Diabetes: medicine and danger signs"
+      },
+      "text": {
+        "fa": "تابلیت، مراقبت از پا، و علایمی که کلینیک یا شفاخانه لازم دارد.",
+        "ps": "ګولۍ، د پښو پاملرنه، او هغه نښې چې کلینیک یا روغتون ته اړتیا لري.",
+        "en": "Tablets, foot care, and the signs that need the clinic or hospital."
+      }
+    },
+    {
+      "id": "food-diabetes.low-sugar",
+      "type": "link",
+      "to": "topic/low-sugar",
+      "icon": "sugar",
+      "title": {
+        "fa": "پایین شدن شکر: چه کنیم",
+        "ps": "ټیټه شکره: څه وکړو",
+        "en": "Low sugar: what to do"
+      },
+      "text": {
+        "fa": "عرق کردن، لرزیدن یا گیجی: زود شکر بدهید، و چه وقت به شفاخانه بروید.",
+        "ps": "خوله کېدل، رېږدېدل یا ګډوډي: ژر بوره ورکړئ، او کله روغتون ته ولاړ شئ.",
+        "en": "Sweating, shaking or confusion: give sugar fast, and when to go to hospital."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Diabetes fact sheet (2024) and WHO HEARTS-D (2020)",
+    "WHO guideline: sugars intake for adults and children (2015)",
+    "Evert et al., Diabetes Care 2019: nutrition therapy for adults with diabetes (consensus report)",
+    "Buffey et al., Sports Medicine 2022: short walks after meals and blood sugar",
+    "Cochrane: cinnamon for diabetes (Leach and Kumar 2012); Momordica charantia (Ooi et al. 2012)"
+  ],
+  "review": [
+    "Low-sugar rescue (4 teaspoons) stays on diabetes.low-sugar and low-sugar (lives once); this page links.",
+    "No fasting content (Mo's call 20); the only line is 'do not skip meals' on tablets or insulin.",
+    "Black seed left out (Mo's call 11). Portion 'half a naan' left out (no source).",
+    "Dari گُر and Pashto ګوړه for jaguery; دارچیني in Pashto: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: diabetes.soon, diabetes.urgent, low-sugar.urgent, by link."
+  ]
+}

@@ -10,6 +10,7 @@
     "children",
     "adults",
     "checks",
+    "food-help",
     "hospital",
     "share",
     "feedback"
@@ -47,6 +48,14 @@
       "say": "ui.checks",
       "image": "checks-women",
       "icon": "check",
+      "tab": "health"
+    },
+    "food-help": {
+      "title": "foodHelp",
+      "sub": "foodHelpSub",
+      "say": "ui.foodHelp",
+      "image": "food-help",
+      "icon": "bowl-food",
       "tab": "health"
     },
     "food": {

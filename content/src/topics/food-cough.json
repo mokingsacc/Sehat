@@ -1,0 +1,242 @@
+{
+  "id": "food-cough",
+  "section": "children",
+  "title": {
+    "fa": "سرفه و زکام: غذا و نوشیدنی",
+    "ps": "ټوخی او زکام: خواړه او څښاک",
+    "en": "Cough and cold: food and drinks"
+  },
+  "summary": {
+    "fa": "نوشیدنی گرم، عسل از ۱ سالگی، و غذایی که قوت را نگه می‌دارد.",
+    "ps": "تود څښاک، شات له ۱ کلنۍ، او هغه خواړه چې ځواک ساتي.",
+    "en": "Warm drinks, honey from age 1, and food that keeps strength."
+  },
+  "image": "typhoid",
+  "blocks": [
+    {
+      "id": "food-cough.lead",
+      "type": "lead",
+      "text": {
+        "fa": "زکام معمولاً در حدود یک هفته خودش خوب می‌شود. نوشیدنی گرم و غذا بدن را قوی نگه می‌دارد؛ شربت سرفهٔ دکان کمک نمی‌کند.",
+        "ps": "زکام اکثره په یوه اونۍ کې پخپله ښه کېږي. تود څښاک او خواړه بدن پیاوړی ساتي؛ د دوکان د ټوخي شربت مرسته نه کوي.",
+        "en": "A cold usually gets better by itself in about a week. Warm drinks and food keep the body strong; cough medicine from the shop does not help."
+      }
+    },
+    {
+      "id": "food-cough.drinks",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "نوشیدنی گرم، زیاد بار",
+        "ps": "تود څښاک، ډېر ځله",
+        "en": "Warm drinks, often"
+      },
+      "text": {
+        "fa": "آب گرم، شوربای رقیق یا آش، یا برای اطفال بالای ۱ سال شیر جوشیدهٔ گرم بدهید. زیاد بار نوشیدنی پیش کنید.",
+        "ps": "تودې اوبه، نری ښوروا یا آش، یا له ۱ کال لوی ماشوم ته تودې ایشول شوې شیدې ورکړئ. ډېر ځله څښاک ورته وړاندې کړئ.",
+        "en": "Give warm water, thin soup or aush, or warm boiled milk for children over 1 year. Offer a drink often."
+      }
+    },
+    {
+      "id": "food-cough.honey",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "عسل از ۱ سالگی",
+        "ps": "شات له ۱ کلنۍ",
+        "en": "Honey from age 1"
+      },
+      "text": {
+        "fa": "از ۱ سالگی، یک قاشق کوچک عسل وقت خواب سرفهٔ شب را آرام می‌کند. هرگز به طفل کمتر از ۱ سال عسل ندهید.",
+        "ps": "له ۱ کلنۍ، د ویده کېدو پر وخت یوه کوچنۍ کاشوغه شات د شپې ټوخی آراموي. هېڅکله له ۱ کال کم ماشوم ته شات مه ورکوئ.",
+        "en": "From 1 year, a small spoon of honey at bedtime can ease a night cough. Never give honey to a baby under 1 year."
+      }
+    },
+    {
+      "id": "food-cough.breast",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیرخوار: دوای او شیر مادر است",
+        "ps": "تي خوړونکی: درمل یې د مور شیدې دي",
+        "en": "Babies: breast milk is the remedy"
+      },
+      "text": {
+        "fa": "طفل کمتر از ۶ ماه فقط شیر مادر لازم دارد، بیشتر از معمول. پیش از شیر دادن، بینی را با تکهٔ نرم و تر پاک کنید.",
+        "ps": "له ۶ میاشتو کم ماشوم یوازې د مور شیدو ته اړتیا لري، تر معمول ډېر ځله. د تي ورکولو مخکې پوزه په نرم او لوند ټوکر پاکه کړئ.",
+        "en": "A baby under 6 months needs only breast milk, more often than usual. Clear the nose with a soft wet cloth before feeds."
+      }
+    },
+    {
+      "id": "food-cough.eat",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذا را ادامه دهید، کم و نرم",
+        "ps": "خواړو ته دوام ورکړئ، لږ او نرم",
+        "en": "Keep feeding, small and soft"
+      },
+      "text": {
+        "fa": "طفلی که سرفه دارد هم غذا لازم دارد: شوربا با نان، کچری، تخم مرغ، ماست و میوه. وعده‌های کوچک، چندین بار در روز.",
+        "ps": "هغه ماشوم چې ټوخی لري هم خوړو ته اړتیا لري: ښوروا له ډوډۍ سره، کچري، هګۍ، مستې او مېوه. کوچني وختونه، په ورځ کې څو ځله.",
+        "en": "A coughing child still needs food: soup with bread, kichri, egg, yoghurt and fruit. Small meals, many times a day."
+      }
+    },
+    {
+      "id": "food-cough.fruit",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "میوه و سبزی هر روز",
+        "ps": "مېوه او سبزي هره ورځ",
+        "en": "Fruit and vegetables every day"
+      },
+      "text": {
+        "fa": "مالته، انار، زردآلو و سبزی‌های برگ‌دار بدن را قوی نگه می‌دارد. اما زکامی را که شروع شده، تداوی نمی‌کند.",
+        "ps": "مالټې، انار، زردالو او شنې پاڼې بدن پیاوړی ساتي. خو هغه زکام چې پیل شوی، نه جوړوي.",
+        "en": "Oranges, pomegranate, apricots and green leaves keep the body strong. They do not cure a cold that has already started."
+      }
+    },
+    {
+      "id": "food-cough.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-cough.helps.honey",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "عسل سرفهٔ شب را آرام می‌کند: درست است، برای اطفال بالای ۱ سال و کلان‌ها.",
+            "ps": "شات د شپې ټوخی آراموي: سمه ده، له ۱ کال لویو ماشومانو او لویانو لپاره.",
+            "en": "Honey eases a night cough: true, for children over 1 year and adults."
+          }
+        },
+        {
+          "id": "food-cough.helps.soup",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "شوربا و نوشیدنی گرم کمک می‌کند: آب و قوت می‌دهد.",
+            "ps": "تود ښوروا او څښاک مرسته کوي: اوبه او ځواک ورکوي.",
+            "en": "Warm soup and drinks help: they give water and strength."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-cough.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-cough.unproven.turnip",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "شوربای شلغم، چای زنجبیل یا شیر با زردچوبه سرفه را تداوی نمی‌کند. گرم است و بعد از ۱ سالگی دادن آن ضرر ندارد.",
+            "ps": "د شلغمو ښوروا، د زنجبیلو چای یا له زرچوبې سره شیدې ټوخی نه جوړوي. تود دي، او له ۱ کلنۍ وروسته یې ورکول زیان نه لري.",
+            "en": "Turnip soup, ginger tea or turmeric milk do not cure a cough. They are warm, and fine to give after age 1."
+          }
+        },
+        {
+          "id": "food-cough.unproven.garlic",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "ثابت نشده که سیر زکام را تداوی کند. در غذا ضرر ندارد.",
+            "ps": "ثابته نه ده چې هوږه زکام جوړ کړي. په خوړو کې زیان نه لري.",
+            "en": "Garlic is not proven to cure a cold. It is fine in food."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-cough.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-cough.harm.baby-honey",
+          "icon": "no",
+          "text": {
+            "fa": "عسل یا آب گیاهی برای طفل کمتر از ۱ سال: عسل می‌تواند طفل را مسموم کند، و آب گیاهی جای شیر را می‌گیرد.",
+            "ps": "شات یا د بوټو اوبه له ۱ کال کم ماشوم ته: شات ماشوم مسموم کولای شي، او د بوټو اوبه د شیدو ځای نیسي.",
+            "en": "Honey or herb water for a baby under 1 year: honey can poison a baby, and herb water takes the place of milk."
+          }
+        },
+        {
+          "id": "food-cough.harm.syrup",
+          "icon": "pill",
+          "text": {
+            "fa": "شربت سرفهٔ دکان برای اطفال کوچک: کمک نمی‌کند و بعضی ضرر دارد.",
+            "ps": "د دوکان د ټوخي شربت کوچنیو ماشومانو ته: مرسته نه کوي او ځینې زیان لري.",
+            "en": "Cough syrups from the shop for young children: they do not help, and some can harm."
+          }
+        },
+        {
+          "id": "food-cough.harm.withhold",
+          "icon": "no",
+          "text": {
+            "fa": "دور نگه داشتن ماست، میوه یا تخم مرغ از طفل مریض چون «سرد» یا «گرم» است: طفل برای خوب شدن به آن‌ها ضرورت دارد.",
+            "ps": "له ناروغ ماشوم څخه د مستو، مېوې یا هګیو ساتل ځکه چې «سړې» یا «ګرمې» دي: ماشوم د روغېدو لپاره ورته اړتیا لري.",
+            "en": "Keeping yoghurt, fruit or eggs from a sick child because they are \"sard\" or \"garm\": the child needs them to get well."
+          }
+        },
+        {
+          "id": "food-cough.harm.steam",
+          "icon": "stove",
+          "text": {
+            "fa": "بخار دیگ آب جوش: کمک نمی‌کند و اطفال می‌سوزند.",
+            "ps": "د ایشېدونکو اوبو د دېګ بړاس: مرسته نه کوي او ماشومان سوځي.",
+            "en": "Steam from a pot of boiling water: it does not help, and children get burned."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-cough.cough",
+      "type": "link",
+      "to": "topic/cough",
+      "icon": "breathing-fast",
+      "title": {
+        "fa": "نفس‌ها را بشمارید، علایم را بشناسید",
+        "ps": "ساه وشمېرئ، نښې وپېژنئ",
+        "en": "Count the breaths, know the signs"
+      },
+      "text": {
+        "fa": "نفس تیز می‌تواند سینه‌بغل باشد. علایمی را ببینید که کلینیک یا شفاخانه لازم دارد.",
+        "ps": "چټکه ساه کېدای شي سینه بغل وي. هغه نښې وګورئ چې کلینیک یا روغتون ته اړتیا لري.",
+        "en": "Fast breathing can mean pneumonia. See the signs that need the clinic or hospital."
+      }
+    },
+    {
+      "id": "food-cough.winter",
+      "type": "link",
+      "to": "topic/winter-home",
+      "icon": "smoke",
+      "title": {
+        "fa": "خانهٔ گرم و بی‌خطر در زمستان",
+        "ps": "په ژمي کې ګرم او خوندي کور",
+        "en": "Safe warm home in winter"
+      },
+      "text": {
+        "fa": "دود بخاری را از شش‌های طفل دور نگه دارید.",
+        "ps": "د بخارۍ لوګی د ماشوم له سږو لرې وساتئ.",
+        "en": "Keep stove smoke away from the child's lungs."
+      }
+    }
+  ],
+  "sources": [
+    "Cochrane: honey for acute cough in children (Oduwole et al. 2018)",
+    "CDC: botulism prevention, no honey under 12 months",
+    "WHO IMCI chart booklet (2014): home care for cough and cold",
+    "WHO: cough and cold remedies for acute respiratory infections in young children (2001)",
+    "Cochrane: heated, humidified air for the common cold (Singh et al. 2017)",
+    "Cochrane: garlic for the common cold (Lissiman et al. 2014)"
+  ],
+  "review": [
+    "Honey: age 1 (CDC, Cochrane); 'a small spoon at bedtime' with no number of nights (Mo's call 3, conservative: no exact amount). cough.soothe unchanged.",
+    "Pashto زرچوبه for turmeric and Dari آش for aush noodle soup: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: cough.urgent and cough.soon, by link."
+  ]
+}

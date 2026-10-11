@@ -271,6 +271,22 @@
         "ps": "ایبک، دره صوف پایین او فیروز نخچیر یوځای په افغانستان کې له یوازې درېیو سیمو څخه یوه ده چې تراخم پکې دومره زیات دی چې ټول کلي درملنه کېږي. پاک مخ، پاکې اوبه او تشناب د ماشومانو لید ساتي.",
         "en": "Aybak, Dara-i-Suf Payin and Feroz Nakhchir together are one of only three areas in Afghanistan with enough trachoma to treat whole villages. Clean faces, water and latrines protect children's sight."
       }
+    },
+    {
+      "id": "eye-infection.food-eyes",
+      "type": "link",
+      "to": "topic/food-eyes",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "ویتامین ای: غذا برای چشم",
+        "ps": "ویټامین اې: د سترګو لپاره خواړه",
+        "en": "Vitamin A: food for the eyes"
+      },
+      "text": {
+        "fa": "جگر، تخم مرغ، غذای نارنجی و سبز، و ویتامین ای هر ۶ ماه.",
+        "ps": "ځیګر، هګۍ، نارنجي او شنه خواړه، او هرو ۶ میاشتو کې ویټامین اې.",
+        "en": "Liver, eggs, orange and green foods, and vitamin A every 6 months."
+      }
     }
   ],
   "sources": [

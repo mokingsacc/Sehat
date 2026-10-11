@@ -116,7 +116,7 @@
     {
       "id": "child-meals.breastfeeding",
       "type": "link",
-      "to": "topic/breastfeeding",
+      "to": "topic/food-baby",
       "icon": "breastfeed",
       "title": {
         "fa": "شیر مادر و غذای اول",

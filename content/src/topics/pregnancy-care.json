@@ -260,6 +260,22 @@
         "ps": "د امیندوارۍ د خطر ټولې نښې په دې کتاب کې له خپلې کورنۍ سره زده کړئ.",
         "en": "Learn all the danger signs of pregnancy in this book, together with your family."
       }
+    },
+    {
+      "id": "pregnancy-care.food-pregnancy",
+      "type": "link",
+      "to": "topic/food-pregnancy",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "حاملگی: غذا و دواهای خانگی",
+        "ps": "امیندواري: خواړه او کورني درمل",
+        "en": "Pregnancy: food and home remedies"
+      },
+      "text": {
+        "fa": "یک وعده غذای اضافه، تابلیت آهن، و آنچه دل‌بدی را آرام می‌کند.",
+        "ps": "یو وخت اضافه خواړه، د اوسپنې ګولۍ، او هغه څه چې زړه بدوالی آراموي.",
+        "en": "One extra meal, iron tablets, and what eases sickness."
+      }
     }
   ],
   "sources": [

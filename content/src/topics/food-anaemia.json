@@ -1,0 +1,259 @@
+{
+  "id": "food-anaemia",
+  "section": "women",
+  "title": {
+    "fa": "کم‌خونی: غذایی که خون می‌سازد",
+    "ps": "د وینې کمښت: خواړه چې وینه جوړوي",
+    "en": "Weak blood: food that builds blood"
+  },
+  "summary": {
+    "fa": "غذای پر آهن، چای دور از غذا، و تابلیت‌هایی که کار می‌کند.",
+    "ps": "اوسپنه لرونکي خواړه، چای له ډوډۍ لرې، او هغه ګولۍ چې کار کوي.",
+    "en": "Iron foods, tea away from meals, and the tablets that work."
+  },
+  "image": "anaemia",
+  "blocks": [
+    {
+      "id": "food-anaemia.lead",
+      "type": "lead",
+      "text": {
+        "fa": "کم‌خونی زنان و اطفال را خسته، رنگ‌پریده و در آموختن کند می‌سازد. غذا می‌تواند خون را دوباره بسازد، به شرطی که آهن آن به بدن برسد.",
+        "ps": "د وینې کمښت ښځې او ماشومان ستړي، رنګ الوتي او په زده کړه کې ورو کوي. خواړه کولای شي وینه بېرته جوړه کړي، په دې شرط چې اوسپنه یې بدن ته ورسېږي.",
+        "en": "Weak blood makes women and children tired, pale and slow to learn. Food can build the blood back, if the iron in it can get in."
+      }
+    },
+    {
+      "id": "food-anaemia.meat",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "گوشت، جگر و تخم مرغ",
+        "ps": "غوښه، ځیګر او هګۍ",
+        "en": "Meat, liver and eggs"
+      },
+      "text": {
+        "fa": "آهن گوشت، جگر، مرغ و تخم مرغ بهتر از همه به خون می‌رسد. هر روزی که بتوانید گوشت یا تخم مرغ بخورید، و هفته‌ای یک بار به اطفال جگر بدهید.",
+        "ps": "د غوښې، ځیګر، چرګ او هګۍ اوسپنه تر ټولو ښه وینې ته رسېږي. هره ورځ چې وکولای شئ غوښه یا هګۍ وخورئ، او په اونۍ کې یو ځل ماشومانو ته ځیګر ورکړئ.",
+        "en": "The iron in meat, liver, chicken and eggs gets into the blood best. Eat meat or an egg on the days you can, and give children liver once a week."
+      }
+    },
+    {
+      "id": "food-anaemia.lentils",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "دال و سبزی، با چیزی ترش",
+        "ps": "دال او سبزي، له یو ترش شي سره",
+        "en": "Lentils and greens, with something sour"
+      },
+      "text": {
+        "fa": "دال، ماش، لوبیا و سبزی‌های سبز تیره هم آهن دارد. آن‌ها را با بادنجان رومی، لیمو، مالته، انار یا توت تازه بخورید: به بدن کمک می‌کند آهن را بگیرد.",
+        "ps": "دال، ماش، لوبیا او تکې شنې پاڼې هم اوسپنه لري. له رومي بانجانو، لیمو، مالټې، انار یا تازه توتو سره یې وخورئ: له بدن سره مرسته کوي چې اوسپنه واخلي.",
+        "en": "Lentils, mung, beans and dark green leaves have iron too. Eat them with tomato, lemon, orange, pomegranate or fresh mulberries: they help the body take in the iron."
+      }
+    },
+    {
+      "id": "food-anaemia.tea",
+      "type": "step",
+      "icon": "clock",
+      "title": {
+        "fa": "چای دور از غذا",
+        "ps": "چای له ډوډۍ لرې",
+        "en": "Tea away from meals"
+      },
+      "text": {
+        "fa": "چای و شیرچای نمی‌گذارد بدن آهن غذا را بگیرد. چای را بین غذاها بنوشید، هرگز همراه غذا یا تابلیت آهن نه.",
+        "ps": "چای او شیدې چای بدن ته نه پرېږدي چې د ډوډۍ اوسپنه واخلي. چای د ډوډیو ترمنځ وڅښئ، هېڅکله له ډوډۍ یا د اوسپنې له ګولۍ سره نه.",
+        "en": "Tea and milk tea stop the body taking iron from a meal. Drink tea between meals, never with food or with iron tablets."
+      }
+    },
+    {
+      "id": "food-anaemia.children",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "برای اطفال چای نه",
+        "ps": "ماشومانو ته چای نه",
+        "en": "No tea for children"
+      },
+      "text": {
+        "fa": "به اطفال آب، شیر جوشیده یا دوغ بدهید، نه چای. برای خوراک سبک، توت خشک، زردآلو یا تخم مرغ جوش بدهید، نه چای و نان.",
+        "ps": "ماشومانو ته اوبه، ایشول شوې شیدې یا شلومبې ورکړئ، نه چای. د سپک خوراک لپاره وچ توت، زردالو یا ایشول شوې هګۍ ورکړئ، نه چای او ډوډۍ.",
+        "en": "Give children water, boiled milk or doogh, not tea. For snacks give dried mulberries, apricots or a boiled egg, not tea and bread."
+      }
+    },
+    {
+      "id": "food-anaemia.tablets",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "تابلیت آهن از کلینیک",
+        "ps": "د اوسپنې ګولۍ له کلینیک څخه",
+        "en": "Iron tablets from the clinic"
+      },
+      "text": {
+        "fa": "در حاملگی، و تا ۳ ماه بعد از ولادت، غذا به تنهایی کافی نیست. تابلیت آهن و فولیک اسید کلینیک را هر روز با آب بخورید.",
+        "ps": "په امیندوارۍ کې، او له زېږون وروسته تر ۳ میاشتو، یوازې خواړه بس نه دي. د کلینیک د اوسپنې او فولیک اسید ګولۍ هره ورځ له اوبو سره وخورئ.",
+        "en": "In pregnancy, and for 3 months after the birth, food alone is not enough. Take the clinic's iron and folic acid tablets every day, with water."
+      }
+    },
+    {
+      "id": "food-anaemia.worms",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "تابلیت ضد کرم هر ۶ ماه",
+        "ps": "د چینجیو ګولۍ هرو ۶ میاشتو کې",
+        "en": "Worm tablets every 6 months"
+      },
+      "text": {
+        "fa": "کرم‌ها خون را می‌دزدند. از ۱ سالگی، اطفال هر ۶ ماه یک تابلیت ضد کرم از کلینیک لازم دارند.",
+        "ps": "چینجي وینه غلا کوي. له ۱ کلنۍ، ماشومان هرو ۶ میاشتو کې له کلینیک څخه د چینجیو یوې ګولۍ ته اړتیا لري.",
+        "en": "Worms steal blood. From 1 year, children need a worm tablet from the clinic every 6 months."
+      }
+    },
+    {
+      "id": "food-anaemia.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-anaemia.helps.liver",
+          "icon": "food-iron",
+          "text": {
+            "fa": "جگر، گوشت و تخم مرغ خون می‌سازد: درست است. این‌ها بهترین غذاهای پر آهن هستند.",
+            "ps": "ځیګر، غوښه او هګۍ وینه جوړوي: سمه ده. دا د اوسپنې تر ټولو ښه خواړه دي.",
+            "en": "Liver, meat and eggs build blood: true. They are the best iron foods."
+          }
+        },
+        {
+          "id": "food-anaemia.helps.tea",
+          "icon": "clock",
+          "text": {
+            "fa": "چای دور از غذا آهن غذا را نگه می‌دارد: درست است.",
+            "ps": "چای له ډوډۍ لرې د خوړو اوسپنه ساتي: سمه ده.",
+            "en": "Tea away from meals keeps the iron in the food: true."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-anaemia.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-anaemia.unproven.red-foods",
+          "icon": "food-iron",
+          "text": {
+            "fa": "«غذای سرخ خون می‌سازد»: لبلبو، انگور سرخ و خرما غذای خوب است، اما آهن کم دارد.",
+            "ps": "«سور خواړه وینه جوړوي»: چغندر، سره انګور او خرما ښه خواړه دي، خو لږه اوسپنه لري.",
+            "en": "\"Red foods make blood\": beetroot, red grapes and dates are good food, but they have little iron."
+          }
+        },
+        {
+          "id": "food-anaemia.unproven.pomegranate",
+          "icon": "food-iron",
+          "text": {
+            "fa": "انار آهن کم دارد. اما اگر با دال خورده شود، ترشی آن به بدن کمک می‌کند آهن دال را بگیرد.",
+            "ps": "انار لږه اوسپنه لري. خو که له دال سره وخوړل شي، تروالی یې له بدن سره مرسته کوي چې د دال اوسپنه واخلي.",
+            "en": "Pomegranate has little iron. But eaten with lentils, its sourness helps the body take in their iron."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-anaemia.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-anaemia.harm.tea-meals",
+          "icon": "no",
+          "text": {
+            "fa": "چای با هر غذا، و چای شیرین با نان به جای غذای طفل: آهن غذا از دست می‌رود.",
+            "ps": "له هرې ډوډۍ سره چای، او د ماشوم د خوړو پر ځای خوږ چای له ډوډۍ سره: د خوړو اوسپنه له منځه ځي.",
+            "en": "Tea with every meal, and sweet tea with bread as a child's meal: the iron in the food is lost."
+          }
+        },
+        {
+          "id": "food-anaemia.harm.clay",
+          "icon": "poison",
+          "text": {
+            "fa": "خوردن گِل یا خاک: می‌تواند کرم و زهر داشته باشد. به قابله بگویید؛ می‌تواند علامهٔ کم‌خونی باشد.",
+            "ps": "د خټې یا خاورې خوړل: کېدای شي چینجي او زهر ولري. قابلې ته ووایئ؛ کېدای شي د وینې د کمښت نښه وي.",
+            "en": "Eating clay or earth: it can carry worms and poison. Tell the midwife; it can be a sign of weak blood."
+          }
+        },
+        {
+          "id": "food-anaemia.harm.stop-tablets",
+          "icon": "iron-pill",
+          "text": {
+            "fa": "قطع تابلیت آهن چون مدفوع سیاه می‌شود: مدفوع سیاه از تابلیت آهن عادی است.",
+            "ps": "د اوسپنې د ګولیو پرېښودل ځکه چې غایطه توره کېږي: د اوسپنې له ګولیو توره غایطه عادي ده.",
+            "en": "Stopping iron tablets because the stool turns black: black stool from iron tablets is normal."
+          }
+        },
+        {
+          "id": "food-anaemia.harm.tonics",
+          "icon": "money",
+          "text": {
+            "fa": "شربت‌های قوت و خون از دکان: لازم نیست. کلینیک تابلیت آهن می‌دهد.",
+            "ps": "د دوکان د ځواک او وینې شربتونه: اړتیا ورته نشته. کلینیک د اوسپنې ګولۍ ورکوي.",
+            "en": "Shop tonics and syrups \"for blood\": you do not need them. The clinic gives iron tablets."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-anaemia.anaemia",
+      "type": "link",
+      "to": "topic/anaemia",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "کم‌خونی: علایم و تابلیت",
+        "ps": "د وینې کمښت: نښې او ګولۍ",
+        "en": "Anaemia: signs and tablets"
+      },
+      "text": {
+        "fa": "قاعدهٔ یک ساعت برای چای، تابلیت آهن، و وقتی که کم‌خونی کلینیک لازم دارد.",
+        "ps": "د چای د یو ساعت قاعده، د اوسپنې ګولۍ، او کله چې د وینې کمښت کلینیک ته اړتیا لري.",
+        "en": "The one-hour tea rule, the iron tablets, and when weak blood needs the clinic."
+      }
+    },
+    {
+      "id": "food-anaemia.worms-page",
+      "type": "link",
+      "to": "topic/worms",
+      "icon": "pill",
+      "title": {
+        "fa": "کرم‌های شکم",
+        "ps": "د نس چینجي",
+        "en": "Worms in the belly"
+      },
+      "text": {
+        "fa": "کرم‌ها چطور خون طفل را می‌دزدند، و علایمی که کلینیک لازم دارد.",
+        "ps": "چینجي څنګه د ماشوم وینه غلا کوي، او هغه نښې چې کلینیک ته اړتیا لري.",
+        "en": "How worms steal a child's blood, and the signs that need the clinic."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Anaemia fact sheet (2023)",
+    "WHO guideline: daily iron and folic acid supplementation in pregnant women (2012)",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016)",
+    "Hurrell, Reddy and Cook, British Journal of Nutrition 1999: tea and non-haem iron absorption",
+    "Zijp, Korver and Tijburg, Critical Reviews in Food Science and Nutrition 2000: tea and other dietary factors in iron absorption",
+    "WHO IMCI chart booklet (2014): iron, deworming from 1 year"
+  ],
+  "review": [
+    "The one-hour tea interval lives on anaemia.tea (Mo's call 7: one hour, unchanged); this page says 'between meals' and links.",
+    "Liver: 'give children liver once a week' only (not addressed to pregnant women; Mo's call 4).",
+    "Clay eating kept as can-harm on general evidence (Mo's call 18), without any prevalence claim.",
+    "Dari گِل / خاک and Pashto خټه / خاوره for clay and earth; چغندر for beetroot in Pashto: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: anaemia.soon, anaemia.urgent, worms.soon.pale, worms.urgent.pale, by link."
+  ]
+}

@@ -76,6 +76,7 @@ Block types the app renders (use only these):
 - "alert": a coloured box of danger signs. "level": "urgent" (red) or "soon" (amber). Title says what to do; items are the signs, each with an icon. Most topics have one urgent alert; add a soon alert if useful. 3 to 8 items each.
 - "dont": things NOT to do (harmful customs, e.g. toothpaste on burns, stopping breastfeeding in diarrhoea). Optional, 2 to 5 items.
 - "tip": one extra helpful sentence. Optional, at most 2.
+- "belief": "what is true" about a food or home remedy (the Food that helps pages, 11 Oct 2026). "level": "helps" (green, a tick: proven to help), "unproven" (grey, dashed, a question mark: not proven, but no harm) or "harm" (dark red, a no sign: this can harm). Items as in "dont": each with an id, an icon and a text of at most 26 words (aim 1 to 2 sentences: the belief, then the plain truth, said kindly). The heading is the shared line for the level (`ui.beliefHelps`, `ui.beliefUnproven`, `ui.beliefHarm`), recorded once for the whole book; give the block a "title" (at most 7 words) only when it needs its own heading. Never on a Home-tab page (validate refuses it, like alert and clinic). Put "helps" before "unproven" before "harm"; a harm item that is a danger sign also belongs in an alert box on the illness page, linked from here.
 
 Ids: lowercase, a-z, 0-9 and hyphens, dot-separated: "<topic-id>.<block>" and "<topic-id>.<block>.<item>". Unique across the whole book. Never reuse or rename an id once written (audio files are named after ids: `audio/<lang>-<voice>/<id>.mp3`, voice `f` for a woman, `m` for a man).
 
@@ -89,7 +90,7 @@ Everyone: heart, stroke-face, bp, sugar, foot, lungs, mask, window, weight-loss,
 If you truly need another icon, use the closest one and add a "review" note naming the icon you wanted.
 
 ## Images
-"image" is the topic id (the illustrator draws img/topics/<topic-id>.svg). Don't change it.
+"image" is the topic id (the illustrator draws img/topics/<topic-id>.svg). Don't change it. Exception (11 Oct 2026): a topic with no picture of its own yet may name another topic whose picture fits (food-cough uses "typhoid", the steaming pot); tools/build.py uses img/topics/<topic-id>.svg first when it exists, then the named one, then the general picture. The picture ideas for the food pages are in research/food-as-medicine-CALLS.md.
 
 ## Topic list and sections
 children: vaccines (special page, see below), danger-child, newborn, breastfeeding, diarrhoea, cough, fever, growth, first-aid (shared)

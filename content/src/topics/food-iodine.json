@@ -1,0 +1,237 @@
+{
+  "id": "food-iodine",
+  "section": "everyone",
+  "title": {
+    "fa": "پندیدگی گردن و نمک آیودین‌دار",
+    "ps": "د غاړې پړسوب او آیوډین لرونکې مالګه",
+    "en": "Neck swelling and iodised salt"
+  },
+  "summary": {
+    "fa": "هر روز کمی نمک آیودین‌دار مغز اطفال را حفاظت می‌کند.",
+    "ps": "هره ورځ لږه آیوډین لرونکې مالګه د ماشومانو دماغ ساتي.",
+    "en": "A little iodised salt every day protects children's brains."
+  },
+  "image": "food-store",
+  "blocks": [
+    {
+      "id": "food-iodine.lead",
+      "type": "lead",
+      "text": {
+        "fa": "پندیدگی پیش گردن بیشتر وقت‌ها از کمبود آیودین است. هر روز کمی نمک آیودین‌دار از آن جلوگیری می‌کند و مغز طفل را حفاظت می‌کند.",
+        "ps": "د غاړې په مخ کې پړسوب اکثره د آیوډین له کموالي څخه وي. هره ورځ لږه آیوډین لرونکې مالګه یې مخه نیسي او د ماشوم دماغ ساتي.",
+        "en": "A swelling at the front of the neck, goitre, most often comes from too little iodine. A little iodised salt every day prevents it and protects babies' brains."
+      }
+    },
+    {
+      "id": "food-iodine.salt",
+      "type": "step",
+      "icon": "salt",
+      "title": {
+        "fa": "نمک آیودین‌دار بخرید",
+        "ps": "آیوډین لرونکې مالګه واخلئ",
+        "en": "Buy iodised salt"
+      },
+      "text": {
+        "fa": "نمکی بخرید که روی پاکت آن آیودین‌دار نوشته شده باشد. اگر مطمئن نیستید، از کارمند صحی بپرسید.",
+        "ps": "هغه مالګه واخلئ چې پر پاکټ یې آیوډین لرونکې لیکل شوي وي. که ډاډه نه یاست، له روغتیايي کارکوونکي وپوښتئ.",
+        "en": "Buy salt that says iodised on the packet. If you are not sure, ask the health worker."
+      }
+    },
+    {
+      "id": "food-iodine.store",
+      "type": "step",
+      "icon": "house",
+      "title": {
+        "fa": "در ظرف بسته و خشک نگه دارید",
+        "ps": "تړلې او وچه یې وساتئ",
+        "en": "Keep it closed and dry"
+      },
+      "text": {
+        "fa": "نمک را در یک ظرف سربسته، دور از اجاق، نم و آفتاب نگه دارید. آیودین نمکی که باز بماند، از بین می‌رود.",
+        "ps": "مالګه په تړلي لوښي کې، له بخارۍ، لندبل او لمر لرې وساتئ. د خلاصې مالګې آیوډین له منځه ځي.",
+        "en": "Keep salt in a closed jar, away from the stove, damp and sun. Iodine is lost from salt left open."
+      }
+    },
+    {
+      "id": "food-iodine.cook",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "نزدیک آخر پختن بیندازید",
+        "ps": "د پخلي په پای کې یې واچوئ",
+        "en": "Add it near the end"
+      },
+      "text": {
+        "fa": "نمک را وقتی بیندازید که غذا تقریباً پخته شده، نه در شروع. جوشیدن طولانی آیودین را از بین می‌برد.",
+        "ps": "مالګه هغه وخت واچوئ چې خواړه نږدې پاخه شوي وي، نه په پیل کې. اوږده ایشېدنه آیوډین له منځه وړي.",
+        "en": "Add the salt when the food is nearly cooked, not at the start. Long boiling drives the iodine out."
+      }
+    },
+    {
+      "id": "food-iodine.little",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "کم کافی است",
+        "ps": "لږه بسیا ده",
+        "en": "A little is enough"
+      },
+      "text": {
+        "fa": "کمتر از یک قاشق چای‌خوری نمک آیودین‌دار در روز، برای هر نفر، همه آیودین لازم را می‌دهد. کم کردن نمک برای فشار خون هنوز درست است؛ فقط آیودین‌دار باشد.",
+        "ps": "په ورځ کې د هر کس لپاره له یوې د چای کاشوغې کمه آیوډین لرونکې مالګه ټول اړین آیوډین ورکوي. د وینې د فشار لپاره د مالګې کمول لا هم سم دي؛ یوازې آیوډین لرونکې دې وي.",
+        "en": "Less than a teaspoon of iodised salt a day, for each person, gives all the iodine needed. Cutting salt for blood pressure is still right; just make it iodised."
+      }
+    },
+    {
+      "id": "food-iodine.pregnant",
+      "type": "step",
+      "icon": "pregnant",
+      "title": {
+        "fa": "در حاملگی از همه مهم‌تر",
+        "ps": "په امیندوارۍ کې تر ټولو مهم",
+        "en": "Most important in pregnancy"
+      },
+      "text": {
+        "fa": "مادر حامله یا شیرده هر روز برای مغز طفل آیودین لازم دارد. اگر نمک شما آیودین‌دار نیست، به قابله بگویید.",
+        "ps": "امیندواره یا تی ورکوونکې مور د ماشوم د دماغ لپاره هره ورځ آیوډین ته اړتیا لري. که ستاسو مالګه آیوډین لرونکې نه وي، قابلې ته ووایئ.",
+        "en": "A pregnant or breastfeeding mother needs iodine every day for the baby's brain. If your salt is not iodised, tell the midwife."
+      }
+    },
+    {
+      "id": "food-iodine.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این را دیدید، همین هفته به کلینیک بروید:",
+        "ps": "که دا مو ولیدل، همدا اونۍ کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic this week if you see:"
+      },
+      "items": [
+        {
+          "id": "food-iodine.soon.neck",
+          "icon": "lump",
+          "text": {
+            "fa": "پندیدگی در پیش گردن، یا پندیدگی‌ای که کلان می‌شود",
+            "ps": "د غاړې په مخ کې پړسوب، یا پړسوب چې لویېږي",
+            "en": "a swelling at the front of the neck, or one that is growing"
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-iodine.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-iodine.helps.iodised",
+          "icon": "salt",
+          "text": {
+            "fa": "نمک آیودین‌دار از پندیدگی گردن جلوگیری می‌کند: درست است.",
+            "ps": "آیوډین لرونکې مالګه د غاړې د پړسوب مخه نیسي: سمه ده.",
+            "en": "Iodised salt prevents a swollen neck: true."
+          }
+        },
+        {
+          "id": "food-iodine.helps.eggs-milk",
+          "icon": "milk",
+          "text": {
+            "fa": "تخم مرغ، شیر و ماست هم کمی آیودین دارد: درست است.",
+            "ps": "هګۍ، شیدې او مستې هم لږ آیوډین لري: سمه ده.",
+            "en": "Eggs, milk and yoghurt carry some iodine too: true."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-iodine.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-iodine.unproven.walnuts",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "ثابت نشده که چارمغز یا گیاهان پندیدگی گردن را کوچک کند. به عنوان غذا ضرر ندارد.",
+            "ps": "ثابته نه ده چې غوزان یا بوټي د غاړې پړسوب کم کړي. د خوړو په توګه زیان نه لري.",
+            "en": "Walnuts or herbs are not proven to shrink a swollen neck. They are fine as food."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-iodine.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-iodine.harm.healer",
+          "icon": "no",
+          "text": {
+            "fa": "خمیر تعویذگر، تار یا گیاه برای پندیدگی گردن، به جای کلینیک: بعضی غده‌ها تداوی دیگری لازم دارد.",
+            "ps": "د تعویذګر خمیر، تار یا بوټي د غاړې د پړسوب لپاره، د کلینیک پر ځای: ځینې غوټې بلې درملنې ته اړتیا لري.",
+            "en": "A healer's paste, a string or herbs for a neck swelling, in place of the clinic: some lumps need other treatment."
+          }
+        },
+        {
+          "id": "food-iodine.harm.no-salt",
+          "icon": "salt",
+          "text": {
+            "fa": "هیچ نمک نخوردن: بدن آیودین نمی‌گیرد. به جای آن کمی نمک آیودین‌دار بخورید.",
+            "ps": "هېڅ مالګه نه خوړل: بدن آیوډین نه اخلي. د دې پر ځای لږه آیوډین لرونکې مالګه وخورئ.",
+            "en": "No salt at all: the body gets no iodine. Use a little iodised salt instead."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-iodine.early",
+      "type": "link",
+      "to": "topic/early-signs",
+      "icon": "lump",
+      "title": {
+        "fa": "علایمی که باید زود معاینه شود",
+        "ps": "هغه نښې چې باید ژر معاینه شي",
+        "en": "Signs to get checked early"
+      },
+      "text": {
+        "fa": "غده‌ها، تب طولانی و علایم دیگری که زود معاینه لازم دارد.",
+        "ps": "غوټې، اوږده تبه او نورې نښې چې ژر معاینې ته اړتیا لري.",
+        "en": "Lumps, a long fever and other signs that need a check soon."
+      }
+    },
+    {
+      "id": "food-iodine.store-food",
+      "type": "link",
+      "to": "topic/food-store",
+      "icon": "house",
+      "title": {
+        "fa": "نگهداری و خشک کردن غذا",
+        "ps": "د خوړو ساتل او وچول",
+        "en": "Store and dry food safely"
+      },
+      "text": {
+        "fa": "غذا را خشک، سربسته و دور از موش و پوپنک نگه دارید.",
+        "ps": "خواړه وچ، تړلي او له موږکانو او پوپنک څخه خوندي وساتئ.",
+        "en": "Keep food dry, closed and safe from mice and mould."
+      }
+    }
+  ],
+  "sources": [
+    "WHO/UNICEF/ICCIDD: assessment of iodine deficiency disorders and monitoring their elimination (2007)",
+    "WHO guideline: fortification of food-grade salt with iodine (2014)",
+    "UNICEF and Iodine Global Network: household salt storage and use",
+    "WHO guideline: sodium intake for adults and children (2012)",
+    "Afghanistan National Nutrition Survey 2013: iodine deficiency"
+  ],
+  "review": [
+    "'Loose rock salt is often not iodised' left out (Mo's call 6a, unconfirmed); the page says 'buy salt that says iodised on the packet; if not sure, ask'.",
+    "No iodine tablets claimed (BPHS does not supply them; Mo's call 9).",
+    "New amber item food-iodine.soon.neck (Mo's call 14), clinic this week, like red-flags.soon.lump.",
+    "Goitre: Dari پندیدگی گردن and Pashto د غاړې پړسوب (descriptive; there is no single sure local word): native check, and whether جاغور is the usual word."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Iodised salt storage: food-store (Home) links here."
+  ]
+}

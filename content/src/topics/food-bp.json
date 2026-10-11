@@ -1,0 +1,239 @@
+{
+  "id": "food-bp",
+  "section": "everyone",
+  "title": {
+    "fa": "فشار خون: چه بخوریم",
+    "ps": "د وینې فشار: څه وخورو",
+    "en": "Blood pressure: what to eat"
+  },
+  "summary": {
+    "fa": "کمتر از یک قاشق چای‌خوری نمک در روز، سبزی، و تابلیت.",
+    "ps": "په ورځ کې له یوې د چای کاشوغې کمه مالګه، سبزي، او ګولۍ.",
+    "en": "Under a teaspoon of salt a day, vegetables, and the tablet."
+  },
+  "image": "heart-food",
+  "blocks": [
+    {
+      "id": "food-bp.lead",
+      "type": "lead",
+      "text": {
+        "fa": "فشار خون بلند احساس نمی‌شود، اما به قلب، مغز و گرده ضرر می‌رساند. نمک کمتر، سبزی و میوهٔ بیشتر، و تابلیت روزانه آن را پایین می‌آورد.",
+        "ps": "د وینې لوړ فشار نه احساسېږي، خو زړه، دماغ او پښتورګو ته زیان رسوي. لږه مالګه، ډېرې سبزۍ او مېوې، او ورځنۍ ګولۍ یې ټیټوي.",
+        "en": "High blood pressure has no feeling, but it harms the heart, brain and kidneys. Less salt, more vegetables and fruit, and the daily tablet bring it down."
+      }
+    },
+    {
+      "id": "food-bp.salt",
+      "type": "step",
+      "icon": "salt",
+      "title": {
+        "fa": "کمتر از یک قاشق چای‌خوری نمک در روز",
+        "ps": "په ورځ کې له یوې کاشوغې کمه مالګه",
+        "en": "Under a teaspoon of salt a day"
+      },
+      "text": {
+        "fa": "تمام نمک یک روز، در نان، پخت‌وپز و سر دسترخوان، باید کمتر از یک قاشق چای‌خوری هموار باشد. سر دسترخوان نمک اضافه نکنید.",
+        "ps": "د یوې ورځې ټوله مالګه، په ډوډۍ، پخلي او دسترخوان کې، باید له یوې هوارې د چای کاشوغې کمه وي. پر دسترخوان مالګه مه اچوئ.",
+        "en": "All the salt in a day, in bread, cooking and at the table, should be less than one level teaspoon. Add no salt at the table."
+      }
+    },
+    {
+      "id": "food-bp.salty-foods",
+      "type": "step",
+      "icon": "no",
+      "title": {
+        "fa": "غذای شور فقط گاه‌گاه",
+        "ps": "مالګین خواړه یوازې کله کله",
+        "en": "Salty foods only now and then"
+      },
+      "text": {
+        "fa": "قروت، لاندی، ترشی، مغزهای نمکی و خوراکی‌های دکان نمک زیاد دارد. گاه‌گاه بخورید، نه هر روز.",
+        "ps": "قروت، لاندي، اچار، مالګین مغز او د دوکان خوراکونه ډېره مالګه لري. کله کله یې وخورئ، نه هره ورځ.",
+        "en": "Qurut, landi, pickles, salted nuts and shop snacks carry a lot of salt. Eat them now and then, not every day."
+      }
+    },
+    {
+      "id": "food-bp.plants",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "سبزی، میوه و دال هر روز",
+        "ps": "سبزي، مېوه او دال هره ورځ",
+        "en": "Vegetables, fruit and lentils daily"
+      },
+      "text": {
+        "fa": "در دو وعده سبزی و هر روز میوه بخورید، و بیشتر روزها دال، لوبیا یا نخود. به پایین آمدن فشار کمک می‌کند.",
+        "ps": "په دوو وختونو کې سبزي او هره ورځ مېوه وخورئ، او ډېری ورځې دال، لوبیا یا نخود. د فشار له ټیټېدو سره مرسته کوي.",
+        "en": "Eat vegetables at two meals and fruit every day, with lentils, beans or chickpeas most days. They help bring the pressure down."
+      }
+    },
+    {
+      "id": "food-bp.fat",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "روغن مایع، نه روغن زرد یا دنبه",
+        "ps": "اوبلن غوړي، نه کلک غوړي یا لم",
+        "en": "Liquid oil, not ghee or tail fat"
+      },
+      "text": {
+        "fa": "به جای روغن زرد، دنبه یا مسکه، با کمی روغن مایع بپزید. بیشتر بجوشانید، دم کنید یا در تنور بپزید تا سرخ کنید.",
+        "ps": "د کلکو غوړیو، لم یا کوچ پر ځای په لږو اوبلنو غوړیو پخلی وکړئ. تر سره کولو ډېر یې وایشوئ، دم یې کړئ یا په تنور کې یې پاخه کړئ.",
+        "en": "Cook with a little liquid oil instead of ghee, tail fat or butter. Boil, stew or bake more than you fry."
+      }
+    },
+    {
+      "id": "food-bp.nuts",
+      "type": "step",
+      "icon": "heart",
+      "title": {
+        "fa": "چارمغز و بادام بی‌نمک",
+        "ps": "بې مالګې غوزان او بادام",
+        "en": "Unsalted walnuts and almonds"
+      },
+      "text": {
+        "fa": "یک مشت کوچک چارمغز یا بادام بی‌نمک در بیشتر روزها برای قلب خوب است. نُقل شکری و مغز نمکی نه.",
+        "ps": "په ډېرو ورځو کې یو کوچنی موټی بې مالګې غوزان یا بادام زړه ته ښه دي. د بورې نُقل او مالګین مغز نه.",
+        "en": "A small handful of unsalted walnuts or almonds most days is good for the heart. Sugared noql and salted nuts are not."
+      }
+    },
+    {
+      "id": "food-bp.tablet",
+      "type": "step",
+      "icon": "pill",
+      "title": {
+        "fa": "غذا و تابلیت با هم",
+        "ps": "خواړه او ګولۍ یوځای",
+        "en": "Food and the tablet together"
+      },
+      "text": {
+        "fa": "سیر، پیاز و لیمو در غذا خوب است، اما جای تابلیت را نمی‌گیرد. تابلیت فشار خون را هر روز بخورید، حتی وقتی خوب هستید.",
+        "ps": "هوږه، پیاز او لیمو په پخلي کې ښه دي، خو د ګولۍ ځای نه نیسي. د وینې د فشار ګولۍ هره ورځ وخورئ، حتی کله چې ښه یاست.",
+        "en": "Garlic, onion and lemon in cooking are good, but they do not replace the tablet. Take the blood pressure tablet every day, even when you feel well."
+      }
+    },
+    {
+      "id": "food-bp.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-bp.helps.less-salt",
+          "icon": "salt",
+          "text": {
+            "fa": "نمک کمتر فشار را پایین می‌آورد: درست است.",
+            "ps": "لږه مالګه فشار ټیټوي: سمه ده.",
+            "en": "Less salt brings the pressure down: true."
+          }
+        },
+        {
+          "id": "food-bp.helps.walk",
+          "icon": "walk",
+          "text": {
+            "fa": "روزی نیم ساعت قدم زدن فشار را پایین می‌آورد: درست است.",
+            "ps": "په ورځ کې نیم ساعت ګرځېدل فشار ټیټوي: سمه ده.",
+            "en": "Walking half an hour a day lowers the pressure: true."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bp.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-bp.unproven.garlic",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "ثابت نشده که سیر، آب لیمو و انار فشار بلند را تداوی کند. غذای خوب است، اما جای تابلیت را نمی‌گیرد.",
+            "ps": "ثابته نه ده چې هوږه، د لیمو اوبه او انار لوړ فشار جوړ کړي. ښه خواړه دي، خو د ګولۍ ځای نه نیسي.",
+            "en": "Garlic, lemon water and pomegranate are not proven to treat high pressure. They are good food, but they do not replace the tablet."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bp.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-bp.harm.stop-tablet",
+          "icon": "pill",
+          "text": {
+            "fa": "قطع تابلیت چون سیر یا لیمو «کار می‌کند»، یا چون خوب هستید: فشار بی‌علامه دوباره بلند می‌شود.",
+            "ps": "د ګولۍ پرېښودل ځکه چې هوږه یا لیمو «کار کوي»، یا ځکه چې ښه یاست: فشار پرته له نښې بېرته لوړېږي.",
+            "en": "Stopping the tablet because garlic or lemon \"works\", or because you feel well: the pressure comes back without a sign."
+          }
+        },
+        {
+          "id": "food-bp.harm.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "خوردن تابلیت فقط وقتی سر درد می‌کند: فشار در روزهای دیگر هم بلند است.",
+            "ps": "ګولۍ یوازې هغه وخت خوړل چې سر درد کوي: فشار په نورو ورځو کې هم لوړ وي.",
+            "en": "Taking the tablet only when the head aches: the pressure is high on the other days too."
+          }
+        },
+        {
+          "id": "food-bp.harm.naswar",
+          "icon": "smoke",
+          "text": {
+            "fa": "نسوار و سگرت: به قلب و رگ‌ها ضرر می‌رساند.",
+            "ps": "نسوار او سګرټ: زړه او رګونو ته زیان رسوي.",
+            "en": "Naswar and smoking: they harm the heart and blood vessels."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bp.bp",
+      "type": "link",
+      "to": "topic/blood-pressure",
+      "icon": "bp",
+      "title": {
+        "fa": "فشار خون بلند: معاینه و علایم",
+        "ps": "د وینې لوړ فشار: معاینه او نښې",
+        "en": "High blood pressure: checks and signs"
+      },
+      "text": {
+        "fa": "بعد از ۴۰ سالگی هر سال آن را معاینه کنید، و علایم سکته که همین حالا شفاخانه لازم دارد.",
+        "ps": "له ۴۰ کلنۍ وروسته هر کال معاینه یې کړئ، او د سکتې هغه نښې چې همدا اوس روغتون ته اړتیا لري.",
+        "en": "Have it checked every year after 40, and the signs of a stroke that need the hospital now."
+      }
+    },
+    {
+      "id": "food-bp.heart",
+      "type": "link",
+      "to": "topic/heart-food",
+      "icon": "heart",
+      "title": {
+        "fa": "غذا برای قلب صحتمند",
+        "ps": "د روغ زړه لپاره خواړه",
+        "en": "Food for a healthy heart"
+      },
+      "text": {
+        "fa": "شکر کمتر، سرخ کردن کمتر، و آب به جای نوشیدنی شیرین.",
+        "ps": "لږه بوره، لږ سره کول، او د خوږو څښاکونو پر ځای اوبه.",
+        "en": "Less sugar, less frying, and water in place of sweet drinks."
+      }
+    }
+  ],
+  "sources": [
+    "WHO guideline: sodium intake for adults and children (2012); potassium intake (2012)",
+    "WHO guideline: saturated fatty acid and trans-fatty acid intake (2023)",
+    "WHO HEARTS technical package (2020); WHO Hypertension fact sheet",
+    "Cochrane: garlic for the prevention of cardiovascular morbidity and mortality in hypertensive patients (Stabler et al. 2012)",
+    "Aune et al., BMC Medicine 2016: nut intake and cardiovascular disease"
+  ],
+  "review": [
+    "The one-teaspoon salt number lives here (food-bp.salt); heart-food.salt and blood-pressure.salt stay short (lives once). food-iodine.little says the same limit for iodised salt.",
+    "Salty tea, the 12 g figure and 'loose rock salt is not iodised' were left out (Mo's call 6, unconfirmed locally). Qurut and landi named as salty, as heart-food.salt already does.",
+    "Black seed left out (Mo's call 11). Pashto لم for tail fat and کوچ for butter: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: blood-pressure.urgent (stroke and chest pain), by link."
+  ]
+}

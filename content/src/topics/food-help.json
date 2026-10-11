@@ -1,0 +1,173 @@
+{
+  "id": "food-help",
+  "section": "everyone",
+  "title": {
+    "fa": "غذایی که کمک می‌کند: چه درست است",
+    "ps": "خواړه چې مرسته کوي: څه سم دي",
+    "en": "Food that helps: what is true"
+  },
+  "summary": {
+    "fa": "کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام ضرر می‌رساند.",
+    "ps": "کوم خواړه رښتیا مرسته کوي، کوم زیان نه لري، او کوم زیان رسوي.",
+    "en": "Which foods truly help, which do no harm, and which can hurt."
+  },
+  "image": "wellbeing",
+  "blocks": [
+    {
+      "id": "food-help.lead",
+      "type": "lead",
+      "text": {
+        "fa": "خانواده‌های افغان می‌دانند که غذا می‌تواند دوا باشد. این صفحه‌ها نشان می‌دهد کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام عادت قدیمی ضرر می‌رساند.",
+        "ps": "افغان کورنۍ پوهېږي چې خواړه درمل کېدای شي. دا پاڼې ښيي چې کوم خواړه رښتیا مرسته کوي، کوم زیان نه لري، او کوم زاړه دودونه زیان رسوي.",
+        "en": "Afghan families know that food can be medicine. These pages show which foods truly help, which do no harm, and which old habits can hurt."
+      }
+    },
+    {
+      "id": "food-help.garm-sard",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذای گرم و سرد، هر دو قوت می‌دهد",
+        "ps": "ګرم او سوړ خواړه دواړه ځواک ورکوي",
+        "en": "Garm and sard both give strength"
+      },
+      "text": {
+        "fa": "بسیاری از خانواده‌ها غذا را گرم و سرد می‌دانند. بدن به هر دو نوع، هم در مریضی و هم در صحت، ضرورت دارد.",
+        "ps": "ډېرې کورنۍ خواړه په ګرمو او سړو وېشي. بدن دواړو ډولونو ته، په ناروغۍ او روغتیا کې، اړتیا لري.",
+        "en": "Many families sort food into garm and sard. The body needs both kinds, in sickness and in health."
+      }
+    },
+    {
+      "id": "food-help.colours",
+      "type": "step",
+      "icon": "check",
+      "title": {
+        "fa": "سه رنگ در هر صفحه",
+        "ps": "په هره پاڼه کې درې رنګونه",
+        "en": "Three colours on each page"
+      },
+      "text": {
+        "fa": "سبز یعنی ثابت شده که کمک می‌کند. خاکستری یعنی ثابت نشده، اما ضرر ندارد. سرخ تیره یعنی ضرر می‌رساند.",
+        "ps": "شین یعنې ثابته ده چې مرسته کوي. خړ یعنې ثابته نه ده، خو زیان نه لري. تک سور یعنې زیان رسوي.",
+        "en": "Green means proven to help. Grey means not proven, but no harm. Dark red means it can harm."
+      }
+    },
+    {
+      "id": "food-help.keep-eating",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "مریض به غذا و نوشیدنی ضرورت دارد",
+        "ps": "ناروغ خوړو او څښاک ته اړتیا لري",
+        "en": "A sick person needs food and drink"
+      },
+      "text": {
+        "fa": "مریضی قوت بدن را می‌گیرد، پس بدن به غذا و نوشیدنی بیشتر ضرورت دارد، نه کمتر. کم‌کم و چندین بار در روز بدهید.",
+        "ps": "ناروغي د بدن ځواک اخلي، نو بدن خوړو او څښاک ته ډېره اړتیا لري، نه لږه. لږ لږ او په ورځ کې څو ځله یې ورکړئ.",
+        "en": "Illness uses up strength, so the body needs food and drink more, not less. Give small amounts, many times a day."
+      }
+    },
+    {
+      "id": "food-help.clinic",
+      "type": "step",
+      "icon": "clinic",
+      "title": {
+        "fa": "بعضی دواها از کلینیک می‌آید",
+        "ps": "ځینې درمل له کلینیک څخه راځي",
+        "en": "Some cures come from the clinic"
+      },
+      "text": {
+        "fa": "او آر اس، زنک، تابلیت آهن، ویتامین ای و تابلیت ضد کرم را از کلینیک یا پوستهٔ صحی بگیرید. برای بعضی مشکلات، این‌ها کاری می‌کند که غذا به تنهایی نمی‌تواند.",
+        "ps": "او آر اس، زنک، د اوسپنې ګولۍ، ویټامین اې او د چینجیو ګولۍ له کلینیک یا روغتیايي پوستې څخه واخلئ. د ځینو ستونزو لپاره دا هغه کار کوي چې یوازې خواړه یې نشي کولای.",
+        "en": "ORS, zinc, iron tablets, vitamin A and worm tablets come from the clinic or health post. For some problems they do what food alone cannot."
+      }
+    },
+    {
+      "id": "food-help.clean",
+      "type": "step",
+      "icon": "handwash",
+      "title": {
+        "fa": "غذای پاک اولین دوا است",
+        "ps": "پاک خواړه لومړی درمل دی",
+        "en": "Clean food is the first medicine"
+      },
+      "text": {
+        "fa": "پیش از پختن، دست‌ها را با صابون بشویید، و شیر را پیش از نوشیدن بجوشانید. غذای کثیف و شیر خام مریضی می‌آورد، نه قوت.",
+        "ps": "د پخلي مخکې لاسونه په صابون ومینځئ، او شیدې د څښلو مخکې وایشوئ. ناپاک خواړه او اومې شیدې ناروغي راوړي، نه ځواک.",
+        "en": "Wash hands with soap before cooking, and boil milk before drinking it. Dirty food and raw milk bring illness, not strength."
+      }
+    },
+    {
+      "id": "food-help.home-food",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "غذای خانه از شربت قوت دکان بهتر است",
+        "ps": "د کور خواړه د دوکان د ځواک له شربتونو ښه دي",
+        "en": "Home food beats shop tonics"
+      },
+      "text": {
+        "fa": "تخم مرغ، دال، جگر، ماست و سبزی باغچه از هر بوتل شربت قوت بازار بیشتر فایده دارد. پول را برای غذا خرج کنید.",
+        "ps": "هګۍ، دال، ځیګر، مستې او د باغچې سبزي د بازار د هر ځواک بوتل څخه ډېره ګټه لري. پیسې په خوړو ولګوئ.",
+        "en": "Eggs, lentils, liver, yoghurt and garden greens do more than any tonic bottle from the bazaar. Spend the money on food."
+      }
+    },
+    {
+      "id": "food-help.elders",
+      "type": "tip",
+      "icon": "talk",
+      "text": {
+        "fa": "وقتی نصیحت بزرگان با این کتاب فرق دارد، از کارمند صحی بپرسید. بیشتر نصیحت‌های قدیمی خوب و بی‌خطر است؛ این صفحه‌ها می‌گوید کدام نیست.",
+        "ps": "کله چې د مشرانو مشوره له دې کتاب سره توپیر ولري، له روغتیايي کارکوونکي وپوښتئ. ډېرې زړې مشورې ښې او بې خطره دي؛ دا پاڼې وايي چې کومه نه ده.",
+        "en": "When an elder's advice and this book disagree, ask the health worker. Most old advice is kind and safe; these pages say when it is not."
+      }
+    },
+    {
+      "id": "food-help.child-meals",
+      "type": "link",
+      "to": "topic/child-meals",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذای باغچه برای طفل",
+        "ps": "د ماشوم لپاره د باغچې خواړه",
+        "en": "Garden food for your child"
+      },
+      "text": {
+        "fa": "لیتی غلیظ، روزی یک تخم مرغ، و اینکه طفل کوچک روزی چند بار غذا بخورد.",
+        "ps": "پنډه لېټی، هره ورځ یوه هګۍ، او دا چې کوچنی ماشوم په ورځ کې څو ځله خواړه وخوري.",
+        "en": "Thick porridge, an egg a day, and how often a small child eats."
+      }
+    },
+    {
+      "id": "food-help.ask",
+      "type": "link",
+      "to": "ask",
+      "icon": "talk",
+      "title": {
+        "fa": "حالتان خوب نیست؟",
+        "ps": "ځان ناروغه احساسوئ؟",
+        "en": "Feeling unwell?"
+      },
+      "text": {
+        "fa": "«چه مشکلی دارید؟» را باز کنید تا صفحهٔ درست و علایم خطر آن را پیدا کنید.",
+        "ps": "«څه ستونزه لرئ؟» پرانیزئ چې سمه پاڼه او د هغې د خطر نښې پیدا کړئ.",
+        "en": "Open What is wrong? to find the right page and its danger signs."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Healthy diet fact sheet (2020)",
+    "WHO IMCI chart booklet (2014): counsel the mother, feeding during illness",
+    "UNICEF, WHO and others: Facts for Life (2010)",
+    "WHO Brucellosis fact sheet (boil the milk)",
+    "research/food-as-medicine.md, sections 1 and 2 (beliefs in northern Afghanistan and the verdicts)"
+  ],
+  "review": [
+    "Garm/sard phrasing is option A of research call 5.1 (respectful, no medical claim). Native check of گرم و سرد / ګرم او سوړ.",
+    "'Free' is not said anywhere in this section (Mo's rule: free only for vaccines and TB). The clinic step says the medicines 'come from the clinic or health post'."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Call 9 default: no 'free' (see CALLS file). Call 25: list title 'Food that helps' (غذایی که کمک می‌کند / خواړه چې مرسته کوي), different from 'Food and garden' when read aloud."
+  ]
+}

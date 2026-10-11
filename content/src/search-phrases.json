@@ -1083,6 +1083,90 @@
       "ps": ["ورزش", "پلی ګرځېدل", "حرکت"],
       "lat": ["warzish", "worzesh", "payada rawi"],
       "en": ["exercise", "walking", "physical activity", "keep active", "be active"]
+    },
+    "food-help": {
+      "fa": ["غذای گرم و سرد", "گرم و سرد", "گرمی و سردی غذا", "طبیعت گرم", "طبیعت سرد", "غذا دوا است", "غذا به عنوان دوا", "کدام غذا کمک می‌کند", "دوای خانگی", "دواهای خانگی", "غذای مریض", "باور غلط درباره غذا", "پرهیز غذا"],
+      "ps": ["تود او سوړ خواړه", "ګرم او سوړ", "د خوړو ګرمي او سړښت", "خواړه درمل دي", "کوم خواړه مرسته کوي", "کورني درمل", "د ناروغ خواړه", "پرهېز"],
+      "lat": ["garm sard", "garm o sard", "garmi sardi", "ghaza garm sard", "tabiat garm", "tabiat sard", "dawa khanagi", "parhez", "tod aw sor"],
+      "en": ["food as medicine", "hot and cold foods", "hot cold food", "home remedies", "which food helps", "food that helps", "food myths", "is it true food", "diet when sick"]
+    },
+    "food-diarrhoea": {
+      "fa": ["غذا در اسهال", "در اسهال چه بخورد", "اسهال چه بخورم", "نوشیدنی اسهال", "دوغ برای اسهال", "ماست برای اسهال", "پرهیز در اسهال", "شکم روی غذا"],
+      "ps": ["په نس ناستي کې خواړه", "نس ناستي کې څه وخوري", "د نس ناستي څښاک", "شلومبې د نس ناستي لپاره", "مستې د نس ناستي لپاره"],
+      "lat": ["ishal ghaza", "es-hal chi bokhora", "dogh ishal", "mast ishal", "nas nasti khwara", "?shkam rawi ghaza"],
+      "en": ["food for diarrhoea", "what to eat with diarrhoea", "diarrhea diet", "drinks for diarrhoea", "yoghurt diarrhoea"]
+    },
+    "food-cough": {
+      "fa": ["عسل", "عسل برای سرفه", "عسل و سرفه", "شوربا برای زکام", "غذا در سرفه", "نوشیدنی گرم برای سرفه", "سیر برای زکام", "شلغم برای سرفه"],
+      "ps": ["شات", "شات د ټوخي لپاره", "د ټوخي لپاره شات", "د زکام لپاره ښوروا", "په ټوخي کې خواړه", "تود څښاک د ټوخي لپاره"],
+      "lat": ["asal", "asal sorfa", "asal salfa", "shat", "shat tukhay", "shorwa zukam"],
+      "en": ["honey", "honey for cough", "food for a cold", "soup for cold", "cough home remedy", "garlic for cold"]
+    },
+    "food-anaemia": {
+      "fa": ["کمخونی غذا", "کم خونی غذا", "غذا برای کم‌خونی", "غذا برای کم خونی", "غذا برای کمخونی", "غذای کم‌خونی", "غذای پر آهن", "غذای آهن‌دار", "خون‌ساز", "غذای خون‌ساز", "چای و آهن", "انار برای خون", "جگر برای خون", "خاک خوردن"],
+      "ps": ["د وینې کمښت خواړه", "د وینې کمښت لپاره خواړه", "اوسپنه لرونکي خواړه", "وینه جوړونکي خواړه", "چای او اوسپنه", "خاوره خوړل"],
+      "lat": ["kamkhuni ghaza", "kam khuni ghaza", "ghaza ahan", "khun saz", "anar khun", "jigar khun", "khak khordan"],
+      "en": ["food for anaemia", "iron rich food", "food for weak blood", "anemia diet", "foods with iron", "tea and iron", "eating clay"]
+    },
+    "food-pregnancy": {
+      "fa": ["غذا در حاملگی", "غذای زن حامله", "در حاملگی چه بخورم", "دل‌بدی حاملگی", "دلبدی در حاملگی", "سوزش سینه در حاملگی", "زعفران در حاملگی", "ویار"],
+      "ps": ["په امیندوارۍ کې خواړه", "د امیندوارې ښځې خواړه", "په امیندوارۍ کې زړه بدوالی", "د امیندوارۍ زړه بدوالی", "په امیندوارۍ کې د سینې سوځېدنه"],
+      "lat": ["ghaza hamelagi", "hamela ghaza", "del badi hamelagi", "amindwari khwara", "?wiyar"],
+      "en": ["food in pregnancy", "pregnancy diet", "morning sickness", "what to eat pregnant", "heartburn pregnancy", "saffron pregnancy"]
+    },
+    "food-after-birth": {
+      "fa": ["غذای زچه", "غذای بعد از ولادت", "غذا در چهله", "چهل روز غذا", "حلوای زچه", "شیر کم مادر غذا", "غذا برای شیر مادر"],
+      "ps": ["د زېږون وروسته خواړه", "د لوګې خواړه", "په څلوېښتو کې خواړه", "د مور د شیدو لپاره خواړه", "حلوا له زېږون وروسته"],
+      "lat": ["ghaza zacha", "zacha ghaza", "chehla ghaza", "halwa zacha", "ghaza shir madar"],
+      "en": ["food after birth", "food after delivery", "postpartum diet", "food for breast milk", "the 40 days food"]
+    },
+    "food-baby": {
+      "fa": ["غذای اول طفل", "اولین غذای طفل", "غذای شیرخوار", "شروع غذا", "طفل ۶ ماهه چه بخورد", "عسل برای نوزاد", "آب برای نوزاد", "روغن زرد برای نوزاد"],
+      "ps": ["د ماشوم لومړي خواړه", "د تي خوړونکي خواړه", "شپږ میاشتنی ماشوم څه وخوري", "نوي زېږېدلي ته شات", "نوي زېږېدلي ته اوبه"],
+      "lat": ["awalin ghaza tefl", "ghaza shirkhor", "tefl shash maha", "asal nawzad"],
+      "en": ["first foods", "baby first food", "starting solids", "weaning", "honey for baby", "water for newborn", "6 month baby food"]
+    },
+    "food-sick-child": {
+      "fa": ["طفل مریض چه بخورد", "غذای طفل مریض", "طفل مریض غذا نمی‌خورد", "طفلم اشتها ندارد", "خاکشیر", "غذا در تب", "پرهیز طفل مریض"],
+      "ps": ["ناروغ ماشوم څه وخوري", "د ناروغ ماشوم خواړه", "ماشوم خواړه نه خوري", "ماشوم اشتها نه لري", "خاکشیر"],
+      "lat": ["tefl mariz ghaza", "ishteha nadara", "khakshir", "mashum khwara na khori"],
+      "en": ["sick child food", "feeding a sick child", "child not eating", "food during fever", "child no appetite"]
+    },
+    "food-belly": {
+      "fa": ["زنجبیل", "زنجبیل برای دل‌بدی", "دل‌بدی", "دلبدی", "سوزش سینه غذا", "قبضیت", "قبض", "پودینه", "نعناع برای شکم", "چه بخورم شکمم درد میکند"],
+      "ps": ["زنجبیل", "زړه بدوالی", "د سینې سوځېدنه", "قبضیت", "پودینه", "د ګېډې لپاره خواړه"],
+      "lat": ["zanjabil", "zanjafil", "del badi", "qabziat", "qabz", "podina", "sozish sina"],
+      "en": ["ginger", "nausea", "heartburn food", "constipation", "mint tea", "upset stomach food", "food for stomach"]
+    },
+    "food-diabetes": {
+      "fa": ["غذای مرض شکر", "مریض شکر چه بخورد", "رژیم شکر", "شکر خون غذا", "کریله", "غذای دیابت", "عسل برای شکر"],
+      "ps": ["د شکرې ناروغ خواړه", "د شکرې ناروغ څه وخوري", "د شکرې رژیم", "کریله"],
+      "lat": ["ghaza shakar", "marz shakar ghaza", "rejim shakar", "karela", "shakar khwara"],
+      "en": ["diabetes diet", "food for diabetes", "what to eat with diabetes", "sugar disease food", "bitter gourd"]
+    },
+    "food-bp": {
+      "fa": ["غذای فشار خون", "نمک و فشار", "فشار بلند غذا", "رژیم فشار", "سیر برای فشار", "مریض فشار چه بخورد"],
+      "ps": ["د وینې فشار خواړه", "مالګه او فشار", "د لوړ فشار خواړه", "هوږه د فشار لپاره"],
+      "lat": ["ghaza feshar", "namak feshar", "fishar khwara", "seer feshar"],
+      "en": ["blood pressure diet", "salt and blood pressure", "food for high blood pressure", "garlic blood pressure", "low salt diet"]
+    },
+    "food-eyes": {
+      "fa": ["ویتامین ای", "ویتامین آ", "شب‌کوری", "شب کوری", "غذا برای چشم", "زردک برای چشم", "جگر برای چشم", "سرمه"],
+      "ps": ["ویټامین اې", "د شپې ړوندوالی", "د سترګو لپاره خواړه", "ګازرې د سترګو لپاره", "رانجه"],
+      "lat": ["vitamin a", "shab kori", "shabkori", "zardak chesm", "ranja", "surma"],
+      "en": ["vitamin a", "night blindness", "food for eyes", "carrots for eyes", "kohl"]
+    },
+    "food-iodine": {
+      "fa": ["نمک آیودین‌دار", "آیودین", "گواتر", "?غمبر", "پندیدگی گردن", "گردن پندیده", "نمک یددار"],
+      "ps": ["آیوډین لرونکې مالګه", "آیوډین", "ګواتر", "د غاړې پړسوب", "غاړه پړسېدلې"],
+      "lat": ["ayodin", "namak ayodin", "gwatar", "goiter", "gardan pundida", "?ghumbur"],
+      "en": ["iodised salt", "iodine", "goitre", "goiter", "swollen neck", "neck swelling"]
+    },
+    "food-bones": {
+      "fa": ["استخوان قوی", "غذا برای استخوان", "کلسیم", "ویتامین دی", "کجی پا", "پای کج طفل", "دندان قوی"],
+      "ps": ["پیاوړي هډوکي", "د هډوکو لپاره خواړه", "کلسیم", "ویټامین ډي", "کږې پښې", "د ماشوم کږې پښې"],
+      "lat": ["ostokhan qawi", "calcium", "vitamin d", "pai kaj", "kage pkhe"],
+      "en": ["strong bones", "calcium", "vitamin d", "bowed legs", "rickets", "food for bones", "food for teeth"]
     }
   }
 }

@@ -1200,6 +1200,7 @@ function adminClient(cfg) {
     const P = `topic:blocks|${i}|`, ty = b.type;
     let h = `<div class="c blk ${esc(ty)} ${esc(b.level || '')}"><div class="bh"><b>${i + 1}. ${esc(cfg.types[ty] || ty)}</b><span class="s grow">${esc(b.id)}</span><button class="sm" data-act="bmove" data-i="${i}" data-d="-1"${i ? '' : ' disabled'} aria-label="up">↑</button><button class="sm" data-act="bmove" data-i="${i}" data-d="1"${i < n - 1 ? '' : ' disabled'} aria-label="down">↓</button><button class="sm danger" data-act="bdel" data-i="${i}">Delete</button></div>`;
     if (ty === 'alert') h += `<label><span>How urgent</span><select data-f="${P}level">${opts([['urgent', 'Red: go to hospital now, day or night'], ['soon', 'Amber: go to the clinic today']], b.level)}</select></label>`;
+    if (ty === 'belief') h += `<label><span>What kind of box</span><select data-f="${P}level">${opts([['helps', 'Green: proven to help'], ['unproven', 'Grey: not proven, but harmless'], ['harm', 'Dark red: can harm']], b.level)}</select></label><p class="s">The heading is the same for every box of this kind (Words: ui.beliefHelps, ui.beliefUnproven, ui.beliefHarm). Each item says the belief and what is true, in one or two short sentences.</p>`;
     if (ty === 'step' || ty === 'tip' || ty === 'link' || ty === 'clinic') h += iconPick(P + 'icon', b.icon, ty !== 'step');
     if (ty === 'link') h += `<label><span>Goes to</span><select data-f="${P}to">${opts(linkTargets(), b.to || '', b.to ? '' : 'choose…')}</select></label>`;
     if (ty === 'anim') {
@@ -1299,6 +1300,7 @@ function adminClient(cfg) {
     if (ty === 'step') return { id, type: 'step', icon: 'check', title: L0(), text: L0() };
     if (ty === 'tip') return { id, type: 'tip', icon: 'check', text: L0() };
     if (ty === 'clinic') return { id, type: 'clinic', title: { fa: 'در کلینیک: ', ps: 'په کلینیک کې: ', en: 'At the clinic: ' }, text: L0() };
+    if (ty === 'belief') return { id, type: 'belief', level: 'unproven', items: [{ id: newId(id + '.item'), icon: 'check', text: L0() }] }; // headed by the shared line for its kind
     const b = { id, type: ty, title: L0(), items: [] };
     if (ty === 'alert') b.level = 'urgent';
     b.items.push({ id: newId(id + '.item'), icon: ty === 'dont' ? 'no' : 'warning', text: L0() });
@@ -1435,7 +1437,7 @@ function adminClient(cfg) {
       case 'badd': t.blocks.push(newBlock(CUR, $('#newtype').value)); topicChanged(); return scrollTo(0, document.body.scrollHeight);
       case 'imove': move(t.blocks[i].items, +d.j, +d.d); return topicChanged();
       case 'idel': if (!confirm('Delete this item?')) return; retire(t.blocks[i].items[+d.j].id); t.blocks[i].items.splice(+d.j, 1); return topicChanged();
-      case 'iadd': { const bl = t.blocks[i]; bl.items.push({ id: newId(bl.id + '.item'), icon: bl.type === 'dont' ? 'no' : 'warning', text: L0() }); return topicChanged(); }
+      case 'iadd': { const bl = t.blocks[i]; bl.items.push({ id: newId(bl.id + '.item'), icon: bl.type === 'dont' ? 'no' : bl.type === 'belief' ? 'check' : 'warning', text: L0() }); return topicChanged(); }
       case 'fadd': {
         const txt = $('#np-loc').value.trim(), en = $('#np-en').value.trim();
         if (!en) return alert('Type the English name of the place.');

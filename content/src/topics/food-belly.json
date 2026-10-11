@@ -1,0 +1,248 @@
+{
+  "id": "food-belly",
+  "section": "everyone",
+  "title": {
+    "fa": "ناراحتی شکم: چه بخوریم",
+    "ps": "د ګېډې ستونزې: څه وخورو",
+    "en": "Belly troubles: what to eat"
+  },
+  "summary": {
+    "fa": "دل‌بدی، سوزش سینه و قبضیت: غذا و نوشیدنی ساده که کمک می‌کند.",
+    "ps": "زړه بدوالی، د سینې سوځېدنه او قبضیت: ساده خواړه او څښاک چې مرسته کوي.",
+    "en": "Nausea, heartburn and hard stools: simple food and drink that help."
+  },
+  "image": "diarrhoea-adult",
+  "blocks": [
+    {
+      "id": "food-belly.lead",
+      "type": "lead",
+      "text": {
+        "fa": "بیشتر ناراحتی‌های شکم با استراحت، غذای ساده و نوشیدنی زیاد در یکی دو روز خوب می‌شود. صفحه‌هایی که در آخر وصل است، می‌گوید چه وقت بیشتر از این است.",
+        "ps": "د ګېډې ډېرې ستونزې په یوه دوه ورځو کې له آرام، ساده خوړو او ډېر څښاک سره ښې کېږي. په پای کې نښلول شوې پاڼې وايي چې کله تر دې زیاته ده.",
+        "en": "Most belly troubles pass in a day or two with rest, simple food and plenty to drink. The pages linked at the end say when it is more than that."
+      }
+    },
+    {
+      "id": "food-belly.sips",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "دل‌بدی: کم‌کم بنوشید، بعد غذای ساده",
+        "ps": "زړه بدوالی: لږ لږ وڅښئ، بیا ساده خواړه",
+        "en": "Nausea: sips, then plain food"
+      },
+      "text": {
+        "fa": "هر چند دقیقه کمی آب، او آر اس، چای نعناع یا دوغ بنوشید. وقتی آرام شد، نان، برنج جوشیده، کچالوی جوشیده یا ماست، کم‌کم بخورید.",
+        "ps": "هرو څو دقیقو کې لږ لږ اوبه، او آر اس، د پودینې چای یا شلومبې وڅښئ. کله چې آرام شو، ډوډۍ، ایشول شوې وریجې، ایشول شوي کچالو یا مستې لږ لږ وخورئ.",
+        "en": "Take small sips of water, ORS, mint tea or doogh every few minutes. When it settles, eat bread, boiled rice, boiled potato or yoghurt, a little at a time."
+      }
+    },
+    {
+      "id": "food-belly.ginger",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "زنجبیل برای دل‌بدی",
+        "ps": "زنجبیل د زړه بدوالي لپاره",
+        "en": "Ginger for nausea"
+      },
+      "text": {
+        "fa": "چند ورق نازک زنجبیل تازه در آب گرم دل‌بدی را آرام می‌کند. چای نعناع هم آرام می‌کند، اما دوا نیست.",
+        "ps": "د تازه زنجبیلو څو نرۍ ټوټې په تودو اوبو کې زړه بدوالی آراموي. د پودینې چای هم آراموي، خو درمل نه دی.",
+        "en": "A few thin slices of fresh ginger in hot water ease nausea. Mint tea soothes too, but it is not a cure."
+      }
+    },
+    {
+      "id": "food-belly.heartburn",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "سوزش سینه: غذای کمتر، راست بمانید",
+        "ps": "د سینې سوځېدنه: لږ خواړه، نېغ پاتې شئ",
+        "en": "Heartburn: smaller meals, stay upright"
+      },
+      "text": {
+        "fa": "غذای کمتر بخورید، با سرخ‌کرده و مرچ کمتر و چای تند کمتر. تا دو ساعت بعد از غذا دراز نکشید.",
+        "ps": "لږ خواړه وخورئ، لږ سره شوي او تېز خواړه او لږ تېز چای. له ډوډۍ وروسته تر دوو ساعتونو مه پرېوځئ.",
+        "en": "Eat smaller meals, with less fried and spicy food and less strong tea. Do not lie down for two hours after eating."
+      }
+    },
+    {
+      "id": "food-belly.constipation",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "قبضیت: آب، میوه، گندم کامل",
+        "ps": "قبضیت: اوبه، مېوه، بشپړ غنم",
+        "en": "Hard stools: water, fruit, whole wheat"
+      },
+      "text": {
+        "fa": "در طول روز آب بنوشید، و میوه، سبزی و نان آرد کامل گندم بخورید. یک مشت زردآلو، انجیر یا توت خشک که شب در آب مانده، کمک می‌کند.",
+        "ps": "ټوله ورځ اوبه وڅښئ، او مېوه، سبزي او د بشپړو غنمو د اوړو ډوډۍ وخورئ. یو موټی وچ زردالو، انځر یا توت چې شپه په اوبو کې پاتې شوي وي، مرسته کوي.",
+        "en": "Drink water through the day, and eat fruit, vegetables and whole-wheat bread. A handful of dried apricots, figs or mulberries, soaked overnight, helps."
+      }
+    },
+    {
+      "id": "food-belly.walk",
+      "type": "step",
+      "icon": "walk",
+      "title": {
+        "fa": "قدم بزنید، و خود را نگه ندارید",
+        "ps": "وګرځئ، او ځان مه ټینګوئ",
+        "en": "Walk, and do not hold on"
+      },
+      "text": {
+        "fa": "هر روز قدم بزنید، و وقتی بدن خواست، به تشناب بروید. یک نوشیدنی گرم بعد از ناشتا به کار روده کمک می‌کند.",
+        "ps": "هره ورځ وګرځئ، او کله چې بدن وغواړي، تشناب ته ولاړ شئ. له ناشتې وروسته تود څښاک د کولمو له حرکت سره مرسته کوي.",
+        "en": "Walk every day, and go to the toilet when the body says. A warm drink after breakfast helps the bowel move."
+      }
+    },
+    {
+      "id": "food-belly.children",
+      "type": "step",
+      "icon": "baby",
+      "title": {
+        "fa": "اطفال: مسهل نه",
+        "ps": "ماشومان: جلاب نه",
+        "en": "Children: no purges"
+      },
+      "text": {
+        "fa": "به طفل بالای ۶ ماه که قبض است، آب، میوه و سبزی بیشتر و بیسکویت کمتر بدهید. مسهل یا روغن به دهن ندهید؛ کلینیک دوای بی‌خطر دارد.",
+        "ps": "له ۶ میاشتو لوی ماشوم ته چې قبض وي، ډېرې اوبه، مېوه او سبزي او لږ بسکیټ ورکړئ. جلاب یا غوړي په خوله مه ورکوئ؛ کلینیک بې خطره درمل لري.",
+        "en": "For a child over 6 months with hard stools, give more water, fruit and vegetables, and fewer biscuits. No purges or oils by mouth; the clinic has safe medicine."
+      }
+    },
+    {
+      "id": "food-belly.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-belly.helps.ginger",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "زنجبیل دل‌بدی را آرام می‌کند: درست است.",
+            "ps": "زنجبیل زړه بدوالی آراموي: سمه ده.",
+            "en": "Ginger eases nausea: true."
+          }
+        },
+        {
+          "id": "food-belly.helps.dried-fruit",
+          "icon": "food-iron",
+          "text": {
+            "fa": "زردآلو، انجیر و توت خشک به قبضیت کمک می‌کند: درست است، با آب زیاد.",
+            "ps": "وچ زردالو، انځر او توت له قبضیت سره مرسته کوي: سمه ده، له ډېرو اوبو سره.",
+            "en": "Dried apricots, figs and mulberries help hard stools: true, with plenty of water."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-belly.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-belly.unproven.mint",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "چای نعناع، آب زیره یا آب نبات برای دل‌درد: آرام می‌کند، اما دوا نیست.",
+            "ps": "د پودینې چای، د زیرې اوبه یا د نبات اوبه د ګېډې درد لپاره: آراموي، خو درمل نه دي.",
+            "en": "Mint tea, zira water or nabat water for a stomach ache: soothing, but not a cure."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-belly.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-belly.harm.stop-drinking",
+          "icon": "no-drink",
+          "text": {
+            "fa": "بند کردن نوشیدن به خاطر استفراغ: بدن خشک می‌شود. کم‌کم بنوشید.",
+            "ps": "د کانګو له امله څښل بندول: بدن وچېږي. لږ لږ څښاک ته دوام ورکړئ.",
+            "en": "Stopping drinking because of vomiting: the body dries out. Keep taking small sips."
+          }
+        },
+        {
+          "id": "food-belly.harm.shop",
+          "icon": "pill",
+          "text": {
+            "fa": "انتی‌بیوتیک یا پیچکاری از دکان برای یک ناراحتی سادهٔ شکم: کمک نمی‌کند و ضرر دارد.",
+            "ps": "انټي بیوټیک یا پیچکاري له دوکان څخه د ګېډې د ساده ستونزې لپاره: مرسته نه کوي او زیان لري.",
+            "en": "Antibiotics or injections from a shop for a simple upset stomach: they do not help, and they can harm."
+          }
+        },
+        {
+          "id": "food-belly.harm.naswar",
+          "icon": "smoke",
+          "text": {
+            "fa": "نسوار یا سگرت «برای هضم»: به معده و دهن ضرر می‌رساند.",
+            "ps": "نسوار یا سګرټ «د هضم لپاره»: معدې او خولې ته زیان رسوي.",
+            "en": "Naswar or smoking \"to help digestion\": they harm the stomach and the mouth."
+          }
+        },
+        {
+          "id": "food-belly.harm.yellow",
+          "icon": "jaundice",
+          "text": {
+            "fa": "دواهای گیاهی تعویذگر وقتی چشم‌ها زرد است: به جگر ضرر می‌رساند.",
+            "ps": "د تعویذګر د بوټو درمل کله چې سترګې ژېړې وي: ځیګر ته زیان رسوي.",
+            "en": "Herb mixes from a healer when the eyes are yellow: they can harm the liver."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-belly.red-flags",
+      "type": "link",
+      "to": "topic/red-flags",
+      "icon": "warning",
+      "title": {
+        "fa": "علایم خطر در بزرگسالان",
+        "ps": "په لویانو کې د خطر نښې",
+        "en": "Danger signs in adults"
+      },
+      "text": {
+        "fa": "درد شدید شکم، استفراغ خون، مدفوع سیاه و علایم دیگری که شفاخانه لازم دارد.",
+        "ps": "د ګېډې سخت درد، په کانګو کې وینه، توره غایطه او نورې هغه نښې چې روغتون ته اړتیا لري.",
+        "en": "Severe belly pain, vomiting blood, black stools and other signs that need the hospital."
+      }
+    },
+    {
+      "id": "food-belly.diarrhoea",
+      "type": "link",
+      "to": "topic/diarrhoea-adult",
+      "icon": "water",
+      "title": {
+        "fa": "اسهال در بزرگسالان",
+        "ps": "په لویانو کې نس ناستی",
+        "en": "Diarrhoea in adults"
+      },
+      "text": {
+        "fa": "او آر اس برای کلان‌ها، و علایم خشک شدن بدن.",
+        "ps": "د لویانو لپاره او آر اس، او د بدن د وچېدو نښې.",
+        "en": "ORS for adults, and the signs of drying out."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Package of Essential Noncommunicable disease interventions (PEN) and WHO IMAI district clinician manual: dyspepsia and reflux",
+    "Ness-Jensen et al., Clinical Gastroenterology and Hepatology 2016: lifestyle measures for reflux",
+    "Cochrane: interventions for nausea and vomiting in early pregnancy (Matthews et al. 2015), ginger",
+    "Attaluri et al., Alimentary Pharmacology and Therapeutics 2011: dried plums for constipation",
+    "NICE CG99: constipation in children (fluids, fibre, laxatives only from the clinic)"
+  ],
+  "review": [
+    "No medicine names on this page (Mo's call 24, conservative): 'purges or oils by mouth', 'antibiotics or injections from a shop'.",
+    "'Sour food causes ulcers' and 'milk cures heartburn' were left out (not needed; short page).",
+    "Dari نعناع and Pashto پودینه for mint; جلاب for a purge: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: red-flags.urgent (belly pain, vomiting blood, black stool), diarrhoea-adult.urgent, hepatitis.soon.yellow, by link."
+  ]
+}

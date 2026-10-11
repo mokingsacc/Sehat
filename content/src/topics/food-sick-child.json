@@ -1,0 +1,248 @@
+{
+  "id": "food-sick-child",
+  "section": "children",
+  "title": {
+    "fa": "طفل مریض: چه بخورانیم",
+    "ps": "ناروغ ماشوم: څه ورکړو",
+    "en": "A sick child: what to feed"
+  },
+  "summary": {
+    "fa": "غذای نرم و کم، نوشیدنی بیشتر، و بعداً یک وعده غذای اضافه.",
+    "ps": "لږ نرم خواړه، ډېر څښاک، او وروسته یو وخت اضافه خواړه.",
+    "en": "Small soft meals, extra drinks, and one extra meal afterwards."
+  },
+  "image": "fever",
+  "blocks": [
+    {
+      "id": "food-sick-child.lead",
+      "type": "lead",
+      "text": {
+        "fa": "طفل مریض کمتر می‌خورد، اما غذا را بیشتر لازم دارد. وعده‌های کوچک و نرم، چندین بار در روز، به طفل کمک می‌کند زودتر خوب شود.",
+        "ps": "ناروغ ماشوم لږ خوري، خو خوړو ته ډېره اړتیا لري. کوچني او نرم وختونه، په ورځ کې څو ځله، له ماشوم سره مرسته کوي چې ژر ښه شي.",
+        "en": "A sick child eats less but needs food more. Small soft meals, many times a day, help the child get better faster."
+      }
+    },
+    {
+      "id": "food-sick-child.breast",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "اول شیر مادر، بیشتر",
+        "ps": "لومړی د مور شیدې، ډېر ځله",
+        "en": "Breast milk first, more often"
+      },
+      "text": {
+        "fa": "طفل شیرخوار یا کوچک مریض باید شب و روز بیشتر شیر بخورد. طفلی که اصلاً نمی‌تواند بنوشد یا شیر بخورد، همین حالا شفاخانه لازم دارد.",
+        "ps": "ناروغ تي خوړونکی یا کوچنی ماشوم باید شپه او ورځ ډېر ځله تی ورکړل شي. هغه ماشوم چې هېڅ نشي څښلی یا تی نشي رودلی، همدا اوس روغتون ته اړتیا لري.",
+        "en": "A sick baby or toddler should breastfeed more often, day and night. A child who cannot drink or breastfeed at all needs the hospital now."
+      }
+    },
+    {
+      "id": "food-sick-child.favourite",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذای نرمی که دوست دارد، زیاد بار",
+        "ps": "هغه نرم خواړه چې خوښوي یې، ډېر ځله",
+        "en": "Favourite soft foods, often"
+      },
+      "text": {
+        "fa": "غذای نرمی را که طفل دوست دارد پیش کنید: کچری، شیر برنج، کچالوی کوبیده با تخم مرغ، شوربا با نان، ماست، کیله. هر ۲ تا ۳ ساعت کمی، با حوصله.",
+        "ps": "هغه نرم خواړه چې ماشوم یې خوښوي ورکړئ: کچري، شیربرنج، میده کچالو له هګۍ سره، ښوروا له ډوډۍ سره، مستې، کېله. هرو ۲ تر ۳ ساعتونو کې لږ، په صبر سره.",
+        "en": "Offer the child's favourite soft foods: kichri, sheer birinj, mashed potato with egg, soup with bread, yoghurt, banana. A little every 2 to 3 hours, with patience."
+      }
+    },
+    {
+      "id": "food-sick-child.drinks",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "نوشیدنی بیشتر",
+        "ps": "ډېر څښاک",
+        "en": "Extra drinks"
+      },
+      "text": {
+        "fa": "بین غذاها آب، شوربا، دوغ یا او آر اس بدهید. طفلی که تب یا اسهال دارد، بیشتر از معمول نوشیدنی لازم دارد.",
+        "ps": "د خوړو ترمنځ اوبه، ښوروا، شلومبې یا او آر اس ورکړئ. هغه ماشوم چې تبه یا نس ناستی لري، تر معمول ډېر څښاک ته اړتیا لري.",
+        "en": "Give water, soup, doogh or ORS between meals. A child with fever or diarrhoea needs more to drink than usual."
+      }
+    },
+    {
+      "id": "food-sick-child.vomit",
+      "type": "step",
+      "icon": "vomit",
+      "title": {
+        "fa": "بعد از استفراغ: صبر، بعد کم‌کم",
+        "ps": "له کانګو وروسته: صبر، بیا لږ لږ",
+        "en": "After vomiting: wait, then sips"
+      },
+      "text": {
+        "fa": "اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید، بعد هر چند دقیقه کمی بدهید. طفلی که همه چیز را استفراغ می‌کند، همین حالا شفاخانه لازم دارد.",
+        "ps": "که ماشوم کانګې وکړې، ۱۰ دقیقې صبر وکړئ، بیا هرو څو دقیقو کې لږ لږ ورکړئ. هغه ماشوم چې هر څه کانګې کوي، همدا اوس روغتون ته اړتیا لري.",
+        "en": "If the child vomits, wait 10 minutes, then give small sips every few minutes. A child who vomits everything needs the hospital now."
+      }
+    },
+    {
+      "id": "food-sick-child.after",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "بعد از مریضی: یک وعده غذای اضافه",
+        "ps": "له ناروغۍ وروسته: یو وخت اضافه خواړه",
+        "en": "After the illness: one extra meal"
+      },
+      "text": {
+        "fa": "وقتی طفل بهتر شد، حداقل دو هفته روزی یک وعده غذای اضافه، با تخم مرغ، روغن یا گوشت بدهید. این کار وزن از دست رفته را دوباره می‌آورد.",
+        "ps": "کله چې ماشوم ښه شي، لږ تر لږه دوه اونۍ په ورځ کې یو وخت اضافه خواړه، له هګۍ، غوړیو یا غوښې سره ورکړئ. دا له لاسه تللی وزن بېرته راولي.",
+        "en": "When the child is better, give one extra meal a day for at least two weeks, with egg, oil or meat. This puts back the lost weight."
+      }
+    },
+    {
+      "id": "food-sick-child.measles",
+      "type": "step",
+      "icon": "drops",
+      "title": {
+        "fa": "سرخکان: ویتامین ای از کلینیک",
+        "ps": "شری: ویټامین اې له کلینیک څخه",
+        "en": "Measles: vitamin A from the clinic"
+      },
+      "text": {
+        "fa": "طفلی که سرخکان دارد، ویتامین ای از کلینیک لازم دارد. ماست و غذای نرم و سرد به دهن زخمی کمک می‌کند.",
+        "ps": "هغه ماشوم چې شری لري، له کلینیک څخه ویټامین اې ته اړتیا لري. مستې او نرم، سړه خواړه له خوږې خولې سره مرسته کوي.",
+        "en": "A child with measles needs vitamin A from the clinic. Yoghurt and soft, cool food help a sore mouth."
+      }
+    },
+    {
+      "id": "food-sick-child.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-sick-child.helps.cool-foods",
+          "icon": "milk",
+          "text": {
+            "fa": "ماست، دوغ و میوه برای طفلی که تب دارد خوب است: بدهید.",
+            "ps": "مستې، شلومبې او مېوه د تبې لرونکي ماشوم لپاره ښې دي: ورکړئ یې.",
+            "en": "Yoghurt, doogh and fruit are good for a child with fever: give them."
+          }
+        },
+        {
+          "id": "food-sick-child.helps.soup",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "شوربای مرغ و شیر برنج برای طفل مریض غذای خوب است: درست است.",
+            "ps": "د چرګ ښوروا او شیربرنج د ناروغ ماشوم لپاره ښه خواړه دي: سمه ده.",
+            "en": "Chicken soup and sheer birinj are good foods for a sick child: true."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-sick-child.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-sick-child.unproven.khakshir",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "خاکشیر در آب «برای گرمی» ثابت نشده. به طفل کلان‌تر، همراه غذای اصلی، ضرر ندارد؛ برای شیرخوار نه.",
+            "ps": "خاکشیر په اوبو کې «د ګرمۍ لپاره» ثابت شوی نه دی. لوی ماشوم ته، له اصلي خوړو سره، زیان نه لري؛ تي خوړونکي ماشوم ته نه.",
+            "en": "Khak-e-shir in water \"for heat\" is not proven. It does no harm to an older child beside real food; not for babies."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-sick-child.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-sick-child.harm.stop-food",
+          "icon": "no",
+          "text": {
+            "fa": "بند کردن غذا یا شیر «تا تب برود»: طفل لاغر می‌شود و مریضی طولانی‌تر می‌شود.",
+            "ps": "د خوړو یا شیدو بندول «تر څو تبه لاړه شي»: ماشوم ډنګرېږي او ناروغي اوږدېږي.",
+            "en": "Stopping food or milk \"until the fever passes\": the child grows thin, and the illness lasts longer."
+          }
+        },
+        {
+          "id": "food-sick-child.harm.sweet-only",
+          "icon": "sugar",
+          "text": {
+            "fa": "فقط آب نبات، چای شیرین یا بیسکویت: شکم را پر می‌کند اما قوت نمی‌دهد.",
+            "ps": "یوازې د نبات اوبه، خوږ چای یا بسکیټ: ګېډه ډکوي خو ځواک نه ورکوي.",
+            "en": "Only nabat water, sweet tea or biscuits: they fill the belly but do not feed."
+          }
+        },
+        {
+          "id": "food-sick-child.harm.opium",
+          "icon": "poison",
+          "text": {
+            "fa": "تریاک یا شربت دکان برای خواباندن طفل یا بند کردن گریه‌اش: می‌تواند نفس را بند کند.",
+            "ps": "اپین یا د دوکان شربت د ماشوم د ویده کولو یا د ژړا د بندولو لپاره: ساه بندولای شي.",
+            "en": "Opium or shop syrups to make a child sleep or stop crying: they can stop the breathing."
+          }
+        },
+        {
+          "id": "food-sick-child.harm.force",
+          "icon": "sleepy",
+          "text": {
+            "fa": "ریختن نوشیدنی در دهن طفلی که خیلی خواب‌آلود است: طفل خفه شده می‌تواند. همین حالا به شفاخانه بروید.",
+            "ps": "د ډېر خوب وړي ماشوم په خوله کې څښاک اچول: ماشوم خفه کېدای شي. همدا اوس روغتون ته ولاړ شئ.",
+            "en": "Pouring drinks into the mouth of a very sleepy child: the child can choke. Go to hospital now."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-sick-child.danger",
+      "type": "link",
+      "to": "topic/danger-child",
+      "icon": "warning",
+      "title": {
+        "fa": "علایم خطر در اطفال",
+        "ps": "په ماشومانو کې د خطر نښې",
+        "en": "Danger signs in children"
+      },
+      "text": {
+        "fa": "علایمی که یعنی همین حالا به شفاخانه بروید، شب باشد یا روز.",
+        "ps": "هغه نښې چې معنا یې دا ده چې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+        "en": "The signs that mean go to hospital now, day or night."
+      }
+    },
+    {
+      "id": "food-sick-child.thin",
+      "type": "link",
+      "to": "topic/malnutrition",
+      "icon": "growth",
+      "title": {
+        "fa": "طفل لاغر (سوءتغذی)",
+        "ps": "ډنګر ماشوم (خوارځواکي)",
+        "en": "Thin child (malnutrition)"
+      },
+      "text": {
+        "fa": "وقتی طفل خیلی لاغر است، و غذای مخصوص کلینیک.",
+        "ps": "کله چې ماشوم ډېر ډنګر وي، او د کلینیک ځانګړي خواړه.",
+        "en": "When a child is too thin, and the clinic's special food."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI chart booklet (2014): counsel the mother, feeding during and after illness",
+    "UNICEF, WHO and others: Facts for Life (2010)",
+    "WHO Measles fact sheet: vitamin A for every child with measles",
+    "Action contre la Faim: Link NCA, Dara-i-Suf Bala, Samangan (2016): stopping food in illness as a cause of malnutrition",
+    "UNODC: drug use in Afghanistan (2010): opium given to children"
+  ],
+  "review": [
+    "'At least two weeks' for the extra meal (Mo's call 12), the same words as food-diarrhoea.after.",
+    "The breastfeeding step sends a child who cannot drink or breastfeed to hospital (danger-child.urgent), instead of the research's 'give expressed milk by cup' (safer).",
+    "No 'free' for vitamin A (Mo's rule)."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: danger-child.urgent and .soon, malnutrition.soon.eating, measles.urgent.mouth, by link."
+  ]
+}

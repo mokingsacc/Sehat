@@ -130,6 +130,22 @@
       }
     },
     {
+      "id": "chickens.food-baby",
+      "type": "link",
+      "to": "topic/food-baby",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "شیر اول و غذای اول طفل",
+        "ps": "د ماشوم لومړۍ شیدې او لومړي خواړه",
+        "en": "Baby's first milk and first foods"
+      },
+      "text": {
+        "fa": "تا ۶ ماه فقط شیر مادر، بعد غذای غلیظ با تخم مرغ.",
+        "ps": "تر ۶ میاشتو یوازې د مور شیدې، بیا پنډه خواړه له هګۍ سره.",
+        "en": "Only breast milk to 6 months, then thick food with an egg."
+      }
+    },
+    {
       "id": "chickens.dont",
       "type": "dont",
       "title": {

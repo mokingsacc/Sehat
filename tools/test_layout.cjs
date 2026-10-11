@@ -2,7 +2,7 @@
 // nothing leaves its card, the header pieces never overlap; at 320, 360 and 412 px, in fa, ps and en, at normal text size
 // and with the phone's large-text setting (fonts 15% and 30% bigger). Also: the Health tab has no Emergency button in its
 // header (its big red Emergency card is right there); the other screens keep it. With a person, Family also lists two
-// family voice notes.
+// family voice notes. The Food that helps list and a food page check the "what is true" (belief) boxes.
 // Needs Playwright with Chromium:  node tools/test_layout.cjs [screenshot folder]
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path'), http = require('http');
@@ -47,7 +47,7 @@ function measure(scale) {
     for (const { r, t } of textRects(box, [...box.querySelectorAll('.spk')])) if (hit(r, sr, 4)) probs.push(['text touches speaker', t, Math.round(r.right), Math.round(sr.left)]);
   }
   // 2. text that leaves its card
-  for (const card of main.querySelectorAll('.hbtn, .trow, .tcard, .srow, .srowbig, .vstrip, .blk, .listcard, .ptile, .tile, .card, .kidcard, .panel, .top, .title-row, .vcard')) {
+  for (const card of main.querySelectorAll('.hbtn, .trow, .tcard, .srow, .srowbig, .vstrip, .blk, .listcard, .ptile, .tile, .card, .kidcard, .panel, .top, .title-row, .vcard, .belief')) {
     if (!vis(card)) continue; const cr = card.getBoundingClientRect();
     for (const { r, t } of textRects(card)) if (r.left < cr.left - 1 || r.right > cr.right + 1) probs.push(['text leaves card', card.className, t, Math.round(r.left), Math.round(r.right), Math.round(cr.left), Math.round(cr.right)]);
   }
@@ -78,7 +78,7 @@ function measure(scale) {
     p.on('pageerror', (e) => errs.push('pageerror ' + e.message));
     await p.route(/workers\.dev/, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
     await p.addInitScript(([lg, CV, kid]) => { localStorage.setItem('fhb.lang', JSON.stringify(lg)); localStorage.setItem('fhb.voice', JSON.stringify('f')); localStorage.setItem('fhb.consent', JSON.stringify({ v: CV, ok: false, day: '2026-10-07' })); if (kid) { localStorage.setItem('fhb.kids', JSON.stringify([kid])); localStorage.setItem('fhb.kid', JSON.stringify(kid.id)); localStorage.setItem('fhb.famnotes', JSON.stringify([{ id: 'g1', d: '2026-10-08', t: Date.now(), rec: 'a1abcd' }, { id: 'g2', d: '2026-10-01', t: 0, rec: 'a2abcd' }])); } }, [lang, book.config.consentVersion, kids ? KID : null]);
-    for (const [name, hash] of [['health', '#/home'], ['home', '#/house'], ['family', '#/family'], ['emergency', '#/emergency'], ['children', '#/children'], ['topic', '#/topic/fever']]) {
+    for (const [name, hash] of [['health', '#/home'], ['home', '#/house'], ['family', '#/family'], ['emergency', '#/emergency'], ['children', '#/children'], ['topic', '#/topic/fever'], ['food-help', '#/s/food-help'], ['belief', '#/topic/food-cough']]) {
       if (scale !== 1 && !['health', 'home', 'family'].includes(name)) continue;
       if (kids && name !== 'family' && name !== 'health') continue;
       await p.goto(BASE + 'index.html' + hash); await p.waitForSelector('main .top, main .topic-hero', { timeout: 8000 }).catch(() => {});
@@ -86,7 +86,7 @@ function measure(scale) {
       await p.waitForTimeout(300);
       await p.evaluate(() => { document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; }); return Promise.race([new Promise((r) => setTimeout(r, 2500)), Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })))]); });
       await p.evaluate(measure, scale); await p.waitForTimeout(150); const m = await p.evaluate(measure, scale);
-      if (['health', 'home', 'family'].includes(name)) {
+      if (['health', 'home', 'family', 'food-help', 'belief'].includes(name)) {
         ok(m.probs.length === 0, `${tag} ${name}: no text touches a speaker or leaves its card`, m.probs.slice(0, 6));
         ok(m.scroll <= 0, `${tag} ${name}: no sideways scroll`, m.scroll);
         if (OUT) await p.screenshot({ path: `${OUT}/${tag}-${name}.png`, fullPage: true });
@@ -95,6 +95,10 @@ function measure(scale) {
         if (name === 'health') ok(!m.pill, `${tag}: Health tab has no Emergency button in its header`);
         if (name === 'home' || name === 'family' || name === 'children') ok(m.pill, `${tag}: ${name} keeps the Emergency button in its header`);
         if (name === 'topic') ok(m.heroPill, `${tag}: a topic page keeps the Emergency button`);
+        if (name === 'belief') {
+          const bl = await p.evaluate(() => [...document.querySelectorAll('main .belief')].map((e) => ({ lv: e.className, n: e.querySelectorAll('.item').length, spk: e.querySelectorAll('[data-block] .spk').length, w: e.getBoundingClientRect().width })));
+          ok(['helps', 'unproven', 'harm'].every((lv) => bl.some((x) => x.lv.includes(lv))) && bl.every((x) => x.spk === x.n + 1 && x.w <= width), `${tag}: the three "what is true" boxes, a speaker on the heading and on every line, inside the screen`, bl);
+        }
         if (name === 'emergency') ok(!m.pill, `${tag}: the Emergency screen has no Emergency button`);
       }
     }

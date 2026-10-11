@@ -131,6 +131,22 @@
       }
     },
     {
+      "id": "food-store.food-iodine",
+      "type": "link",
+      "to": "topic/food-iodine",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "پندیدگی گردن و نمک آیودین‌دار",
+        "ps": "د غاړې پړسوب او آیوډین لرونکې مالګه",
+        "en": "Neck swelling and iodised salt"
+      },
+      "text": {
+        "fa": "هر روز کمی نمک آیودین‌دار مغز اطفال را حفاظت می‌کند.",
+        "ps": "هره ورځ لږه آیوډین لرونکې مالګه د ماشومانو دماغ ساتي.",
+        "en": "A little iodised salt every day protects children's brains."
+      }
+    },
+    {
       "id": "food-store.dont",
       "type": "dont",
       "title": {

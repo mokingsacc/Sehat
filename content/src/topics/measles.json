@@ -272,6 +272,22 @@
         "ps": "له شري وروسته ماشوم څو اونۍ کمزوری وي. ډېر خواړه ورکړئ او د هغه وده وڅارئ.",
         "en": "After measles a child stays weak for some weeks. Give extra food and watch the child's growth."
       }
+    },
+    {
+      "id": "measles.food-sick-child",
+      "type": "link",
+      "to": "topic/food-sick-child",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "طفل مریض: چه بخورانیم",
+        "ps": "ناروغ ماشوم: څه ورکړو",
+        "en": "A sick child: what to feed"
+      },
+      "text": {
+        "fa": "غذای نرم و کم، نوشیدنی بیشتر، و بعداً یک وعده غذای اضافه.",
+        "ps": "لږ نرم خواړه، ډېر څښاک، او وروسته یو وخت اضافه خواړه.",
+        "en": "Small soft meals, extra drinks, and one extra meal afterwards."
+      }
     }
   ],
   "sources": [

@@ -172,6 +172,10 @@ ui.allEmergencies	همهٔ حالات عاجل: اینجا را بزنید تا 
 ui.fb.voice	پیام صوتی: دکمۀ سرخ را بزنید و گپ بزنید. وقتی گپ شما تمام شد، دوباره آن را بزنید.	Voice message: tap the red button and speak. Tap it again when you finish.
 ui.fb.write	یا پیام خود را اینجا بنویسید و بعد «فرستادن» را بزنید. لطفاً نام یا شمارۀ تلیفون ننویسید و نگویید.	Or write your message here, then tap Send. Please do not write or say names or phone numbers.
 ui.date	تاریخ: روزی که اندازه گرفته شد. امروز از قبل انتخاب شده است؛ اگر روز دیگری بود، آن را تغییر دهید.	Date: the day it was measured. Today is already chosen; change it if it was another day.
+ui.foodHelp	غذایی که کمک می‌کند: کدام غذا واقعاً برای اسهال، سرفه، کم‌خونی، حاملگی و مشکلات دیگر کمک می‌کند، کدام عادت کهنه ضرر ندارد، و کدام ضرر می‌رساند.	Food that helps: which foods truly help with diarrhoea, cough, weak blood, pregnancy and more, which old habits do no harm, and which can hurt.
+ui.beliefHelps	ثابت شده که کمک می‌کند	Proven to help
+ui.beliefUnproven	ثابت نشده، اما ضرر ندارد	Not proven, but no harm
+ui.beliefHarm	این‌ها ضرر می‌رساند	This can harm
 ui.ask.who	مریض کیست؟ یکی را بزنید.	Who is sick? Tap one.
 ui.ask.who.after	مادر بعد از ولادت	Mother after the birth
 ui.ask.who.anyone	هر کس	Anyone
@@ -1000,6 +1004,7 @@ breastfeeding.dont.animal-milk	پیش از ۶ ماهگی شیر گاو یا بز
 breastfeeding.dont.bottle	از بوتل استفاده نکنید؛ اگر لازم شد، پیالهٔ پاک بکار ببرید.	Do not use a feeding bottle; if needed, use a clean cup.
 breastfeeding.dont.sick	وقتی مادر یا طفل مریض است، شیردهی را بس نکنید.	Do not stop breastfeeding when the mother or baby is sick.
 breastfeeding.illness	وقتی طفل مریض است، بیشتر شیر بدهید. بعد از مریضی، تا وقتی که کاملاً خوب شود، بیشتر از معمول غذا بدهید.	When the child is sick, breastfeed more often. After the illness, give more food than usual until the child is fully well.
+breastfeeding.food-baby	شیر اول و غذای اول طفل. تا ۶ ماه فقط شیر مادر، بعد غذای غلیظ با تخم مرغ.	Baby's first milk and first foods. Only breast milk to 6 months, then thick food with an egg.
 child-meals.title	غذای باغچه برای طفل	Garden food for your child
 child-meals.summary	از ۶ ماهگی: هر روز لیتی غلیظ، تخم مرغ، ترکاری و میوه.	From 6 months: thick porridge, egg, vegetables and fruit every day.
 child-meals.lead	در ۶ ماهگی طفل شما به چیزی بیشتر از شیر مادر نیاز دارد. غذای باغچه و مرغ‌های خودتان می‌تواند آنچه را طفل برای رشد لازم دارد بدهد.	At 6 months your baby needs more than breast milk. Food from your own garden and hens can give your child what they need to grow.
@@ -1045,6 +1050,7 @@ diarrhoea.dont.stop-food	شیر مادر یا غذا را بند نکنید.	Do 
 diarrhoea.dont.medicine	دوا برای بند کردن اسهال ندهید؛ برای طفل ضرر دارد.	Do not give medicines to stop diarrhoea; they can harm children.
 diarrhoea.dont.antibiotic	انتی‌بیوتیک ندهید، مگر اینکه کلینیک داده باشد.	Do not give antibiotics unless the clinic gives them.
 diarrhoea.vomit	اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید. بعد دوباره او آر اس بدهید، اما آهسته‌تر.	If the child vomits, wait 10 minutes. Then give ORS again, but more slowly.
+diarrhoea.food-diarrhoea	اسهال: چه بخوریم و چه بنوشیم. او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.	Diarrhoea: what to eat and drink. ORS, home drinks and soft food: what helps, and what harms.
 anim.ors.title	ساختن او آر اس در خانه	Making ORS at home
 anim.ors.s1	اسهال آب و نمک بدن طفل را بیرون می‌کشد. همین که اسهال شروع شد، او آر اس بدهید؛ آنچه را از دست رفته دوباره پر می‌کند.	Diarrhoea drains water and salt out of a child's body. Start ORS as soon as the diarrhoea starts: it puts back what is lost.
 anim.ors.s2	دست‌ها را بشویید. یک جگ پاک را از آب جوشانده و سرد شده پر کنید، به اندازه‌ای که روی پاکت نوشته است، معمولاً ۱ لیتر. تمام پاکت را بریزید و هم بزنید تا حل شود.	Wash your hands. Fill a clean jug with boiled, cooled water, as much as the packet says, usually 1 litre. Pour in the whole packet and stir until it dissolves.
@@ -1111,6 +1117,7 @@ cough.chw	اگر طفل هیچ‌یک از این علایم را ندارد، �
 cough.dont	این کارها را نکنید:	Do not do these things:
 cough.dont.medicine	به نوزاد و طفل کوچک شربت سرفه ندهید.	Do not give cough medicines to babies and young children.
 cough.dont.antibiotic	برای زکام انتی‌بیوتیک ندهید، مگر اینکه کلینیک داده باشد.	Do not give antibiotics for a cold unless the clinic gives them.
+cough.food-cough	سرفه و زکام: غذا و نوشیدنی. نوشیدنی گرم، عسل از ۱ سالگی، و غذایی که قوت را نگه می‌دارد.	Cough and cold: food and drinks. Warm drinks, honey from age 1, and food that keeps strength.
 fever.title	تب	Fever
 fever.summary	مایعات بدهید، لباس سبک بپوشانید و بدانید چه وقت بروید.	Give fluids, dress lightly, and know when to go.
 fever.lead	تب یعنی بدن داغ است، چون با یک مرض می‌جنگد. طفل را خوب زیر نظر بگیرید و علایم خطر را بشناسید.	Fever means the body is hot because it is fighting an illness. Watch your child closely and know the danger signs.
@@ -1169,6 +1176,7 @@ measles.dont	این کارها را نکنید:	Do not:
 measles.dont.stop-food	شیر یا غذای طفل را قطع نکنید	stop breastfeeding or food
 measles.dont.eyes	سرمه، دوای گیاهی یا چیز دیگر در چشم‌ها نریزید	put kohl, herbs or anything else in the eyes
 measles.after	بعد از سرخکان طفل تا چند هفته ضعیف می‌ماند. غذای بیشتر بدهید و رشد او را نظارت کنید.	After measles a child stays weak for some weeks. Give extra food and watch the child's growth.
+measles.food-sick-child	طفل مریض: چه بخورانیم. غذای نرم و کم، نوشیدنی بیشتر، و بعداً یک وعده غذای اضافه.	A sick child: what to feed. Small soft meals, extra drinks, and one extra meal afterwards.
 growth.title	رشد و انکشاف طفل	Growth and development
 growth.summary	طفل را هر ماه وزن کنید و هر روز با او بازی کنید و گپ بزنید.	Weigh your child every month; play and talk every day.
 growth.lead	طفل صحتمند هر ماه بزرگ‌تر می‌شود و چیزهای تازه یاد می‌گیرد. وزن کردن، بازی و گپ زدن به شما کمک می‌کند ببینید طفل خوب رشد می‌کند.	A healthy child grows and learns new things every month. Weighing, playing and talking help you see that your child is growing well.
@@ -1223,6 +1231,7 @@ malnutrition.dont.stop	خمیر مخصوص را زود قطع نکنید؛ تم�
 malnutrition.dont.share	خمیر طفل را با اطفال دیگر تقسیم نکنید؛ این دوای همان طفل است.	Do not share the child's paste with other children; it is that child's medicine.
 malnutrition.dont.sweets	به جای غذا چای، نوشابه یا شیرینی ندهید.	Do not give tea, fizzy drinks or sweets instead of food.
 malnutrition.fault	لاغری طفل تقصیر مادر نیست. مریضی، فقر و خشکسالی باعث آن می‌شود. از کلینیک در مورد غذای اضافی برای تمام فامیل بپرسید.	Malnutrition is not the mother's fault. Illness, poverty and drought cause it. Ask the clinic about extra food for the whole family.
+malnutrition.food-sick-child	طفل مریض: چه بخورانیم. غذای نرم و کم، نوشیدنی بیشتر، و بعداً یک وعده غذای اضافه.	A sick child: what to feed. Small soft meals, extra drinks, and one extra meal afterwards.
 reading-muac.title	فیتهٔ بازو و وزن: معنای آن	Arm tape and weight readings
 reading-muac.summary	رنگ‌های فیته، وزن گرفتن، و چه وقت بروید.	The tape colours, weight gain, and when to go.
 reading-muac.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
@@ -1327,6 +1336,7 @@ pregnancy-danger.soon.ill	احساس ناجوری	Feeling ill
 pregnancy-danger.soon.swelling	پندیدگی انگشتان، روی یا پاها	Swelling of the fingers, face or legs
 pregnancy-danger.soon.waters	آب ولادت آمده، اما درد ولادت نیست: بیشتر از ۶ ساعت منتظر نمانید	The waters break with no labour pains: do not wait more than 6 hours
 pregnancy-danger.soon.urine	سوزش هنگام ادرار	Burning when passing urine
+pregnancy-danger.soon.vomit	استفراغ تمام روز، و آب هم در شکم نمی‌ماند	Vomiting all day, and cannot keep water down
 pregnancy-danger.birth-plan	با فامیل پلان ولادت بسازید. در اوایل حاملگی با فامیل خود گپ بزنید. فیصله کنید که در کجا ولادت می‌کنید و چه کسی با شما می‌رود.	Make a birth plan together. Talk with your family early in pregnancy. Decide where you will give birth and who will go with you.
 pregnancy-danger.money-car	پول و موتر را آماده کنید. از حالا کمی پول کنار بگذارید. با یک دریور گپ بزنید که شب یا روز شما را ببرد.	Get money and transport ready. Put some money aside now. Agree with a driver who can take you, day or night.
 pregnancy-danger.phone	شماره‌های تیلفون را آماده داشته باشید. شماره دریور، قابله و کلینیک را در تیلفون ثبت کنید. تیلفون را چارج نگه دارید.	Keep phone numbers ready. Save the numbers of the driver, the midwife and the clinic. Keep the phone charged.
@@ -1361,6 +1371,7 @@ pregnancy-care.dont.smoking	سگرت نکشید، و از دود سگرت دیگ
 pregnancy-care.dont.naswar	نصوار استفاده نکنید.	Do not use naswar.
 pregnancy-care.dont.stove-smoke	در دود بخاری، تنور یا آتش ننشینید.	Do not sit in smoke from the stove, tandoor or fire.
 pregnancy-care.danger-signs	همه علایم خطر حاملگی را در این کتاب، همراه با فامیل خود یاد بگیرید.	Learn all the danger signs of pregnancy in this book, together with your family.
+pregnancy-care.food-pregnancy	حاملگی: غذا و دواهای خانگی. یک وعده غذای اضافه، تابلیت آهن، و آنچه دل‌بدی را آرام می‌کند.	Pregnancy: food and home remedies. One extra meal, iron tablets, and what eases sickness.
 birth-plan.title	پلان ولادت: از پیش آماده شوید	Birth plan: get ready early
 birth-plan.summary	جای ولادت، همراه، پول، موتر، و چه چیزهایی ببرید.	Where to give birth, who goes, money, a car, what to take.
 birth-plan.lead	پلان ولادت را در اوایل حاملگی با خانواده بسازید. آن وقت، وقتی دردهای ولادت شروع شود یا علامت خطر پیدا شود، هیچ‌کس وقت را ضایع نمی‌کند.	Make the birth plan with your family early in pregnancy. Then, when labour starts or a danger sign comes, nobody loses time.
@@ -1414,6 +1425,7 @@ after-birth.low-mood	غم زیاد قابل تداوی است. چند روز غ�
 after-birth.clinic	در کلینیک: معاینات بعد از ولادت. قابله خونریزی، فشار خون، تب، پستان‌ها و زخم شما را معاینه می‌کند، در مورد روحیه و ادرار می‌پرسد، آهن می‌دهد، طفل را معاینه می‌کند و به سوال‌ها جواب می‌دهد.	At the clinic: the postnatal checks. The midwife checks your bleeding, blood pressure, temperature, breasts and wound, asks about your mood and urine, gives iron, checks the baby and answers questions.
 after-birth.hospital	در شفاخانه: خونریزی یا عفونت. برای خونریزی شدید شفاخانه سیروم و دوای جمع شدن رحم می‌دهد، باقی‌ماندهٔ جفت را بیرون می‌کند و خون می‌دهد. برای تب و ترشح بدبو انتی‌بیوتیک پیچکاری می‌دهد.	At the hospital: bleeding or infection. For heavy bleeding the hospital gives fluids, medicine to contract the womb, removes any afterbirth left inside, and gives blood. For fever and bad-smelling discharge it gives antibiotics by injection.
 after-birth.spacing	صبر کردن دست کم ۲ سال پیش از حاملگی بعدی، برای صحت مادر و طفل بهتر است. کلینیک در مورد فاصله بین ولادت‌ها مشوره می‌دهد.	Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births.
+after-birth.food-after-birth	بعد از ولادت: غذای مادر. چهل روز: غذای بیشتر، نوشیدنی زیاد، و همه غذاهای صحی.	After the birth: the mother's food. The 40 days: more food, plenty to drink, and all healthy foods.
 anaemia.title	کم‌خونی	Anaemia (weak blood)
 anaemia.summary	علایم کم‌خونی، غذاهای پر آهن، و وقت درست چای	Signs of anaemia, iron-rich foods, and the right time for tea
 anaemia.lead	کم‌خونی یعنی خون ضعیف است، اکثراً به خاطر کمبود آهن. در زنان زیاد است، اما جلوگیری و تداوی می‌شود.	Anaemia means the blood is weak, often from too little iron. It is common in women, but it can be prevented and treated.
@@ -1434,6 +1446,7 @@ anaemia.urgent.fainting	ضعف کردن یا بیهوش شدن	Fainting
 anaemia.urgent.chest-pain	درد سینه	Chest pain
 anaemia.urgent.breathless-lying	نفس‌تنگی در وقت دراز کشیدن	Short of breath when lying down
 anaemia.black-stool	تابلیت آهن ممکن است مدفوع را سیاه کند. این عادی است.	Iron tablets can make the stool black. This is normal.
+anaemia.food-anaemia	کم‌خونی: غذایی که خون می‌سازد. غذای پر آهن، چای دور از غذا، و تابلیت‌هایی که کار می‌کند.	Weak blood: food that builds blood. Iron foods, tea away from meals, and the tablets that work.
 urine-infection.title	سوزش ادرار (عفونت)	Burning urine (infection)
 urine-infection.summary	سوزش ادرار با تب و کمردرد: همین حالا شفاخانه. فقط سوزش: امروز کلینیک.	Burning urine, fever and back pain: hospital now. Only burning: clinic today.
 urine-infection.lead	عفونت مثانه سوزش هنگام ادرار، ادرار مکرر، و ادرار کدر یا بدبو می‌آورد. در زنان زیاد است. انتی‌بیوتیک کلینیک آن را علاج می‌کند؛ اگر تداوی نشود به گرده‌ها می‌رسد و در حاملگی به طفل ضرر می‌رساند.	A bladder infection causes burning when passing urine, going often, and cloudy or smelly urine. It is common in women. Clinic antibiotics cure it; untreated it can reach the kidneys and, in pregnancy, harm the baby.
@@ -1592,6 +1605,7 @@ blood-pressure.urgent.weak	ضعف ناگهانی دست یا پا	sudden weaknes
 blood-pressure.urgent.speech	مشکل ناگهانی در گپ زدن یا فهمیدن	sudden trouble speaking or understanding
 blood-pressure.urgent.chest	درد یا فشار در سینه	pain or tightness in the chest
 blood-pressure.urgent.headache	سردردی شدید همراه با تاری چشم	a severe headache with blurred vision
+blood-pressure.food-bp	فشار خون: چه بخوریم. کمتر از یک قاشق چای‌خوری نمک در روز، سبزی، و تابلیت.	Blood pressure: what to eat. Under a teaspoon of salt a day, vegetables, and the tablet.
 diabetes.title	مرض شکر	Diabetes
 diabetes.summary	علایم، معاینه، غذا، پیاده‌روی، دوا و مراقبت پاها	Signs, testing, food, walking, medicine and foot care
 diabetes.lead	در مرض شکر، قند خون زیاد می‌شود. با غذای خوب، پیاده‌روی هر روزه و دوا، می‌شود خوب زندگی کرد.	In diabetes there is too much sugar in the blood. With good food, daily walking and medicine, people can live well.
@@ -1611,6 +1625,7 @@ diabetes.urgent	اگر شخص مبتلا به مرض شکر یکی از این �
 diabetes.urgent.confused	گیجی یا بیهوشی	confusion or unconsciousness
 diabetes.urgent.vomiting	استفراغ و حال بسیار خراب	vomiting and feeling very unwell
 diabetes.urgent.foot-wound	زخم پا که سرخ، سیاه یا بدبو شده	a foot wound that is red, black or smelly
+diabetes.food-diabetes	مرض شکر: چه بخوریم. نیم بشقاب سبزی، چای بی‌شکر، و غذا در وقت معین.	Sugar disease: what to eat. Half the plate vegetables, no sugar in tea, and regular meals.
 asthma.title	نفس‌تنگی (آسم)	Asthma and tight breathing
 asthma.summary	نمی‌تواند گپ بزند یا لب‌ها کبود است: همین حالا شفاخانه. انهیلر کلینیک نفس‌تنگی را کنترول می‌کند.	Cannot speak or lips blue: hospital now. A clinic inhaler controls asthma.
 asthma.lead	آسم باعث خس‌خس نفس و تنگی سینه می‌شود، اکثراً در شب، در هوای سرد یا دود. با انهیلر، یک پف که از آن نفس می‌کشید، کنترول می‌شود، تا طفل یا بزرگسال عادی زندگی و کار کند.	Asthma makes breathing whistle and the chest feel tight, often at night, in cold air or smoke. It can be controlled with an inhaler, a pump you breathe in from, so a child or adult can live and work normally.
@@ -1893,6 +1908,7 @@ diarrhoea-adult.dont.shop	برای اسهال آبکی از دکان انتی‌
 diarrhoea-adult.dont.stop	به خاطر اسهال نوشیدن و خوردن را قطع نکنید.	Do not stop drinking or eating because of the diarrhoea.
 diarrhoea-adult.dont.stream	لباس مریض را در جویی که دیگران از آن می‌نوشند نشویید.	Do not wash the sick person's clothes in the stream others drink from.
 diarrhoea-adult.packets	در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را دارد.	Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
+diarrhoea-adult.food-diarrhoea	اسهال: چه بخوریم و چه بنوشیم. او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.	Diarrhoea: what to eat and drink. ORS, home drinks and soft food: what helps, and what harms.
 typhoid.title	محرقه (تیفویید)	Typhoid fever
 typhoid.summary	درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۳ روز: امروز کلینیک.	Severe belly pain: hospital now. Fever over 3 days: clinic today.
 typhoid.lead	محرقه از آب یا غذایی می‌آید که با مدفوع شخص مریض ناپاک شده. تب روز به روز بالا می‌رود، با سردرد، خستگی، درد شکم و گاهی اسهال یا قبضیت. به انتی‌بیوتیک از کلینیک ضرورت دارد.	Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic.
@@ -2149,6 +2165,7 @@ eye-infection.dont.kohl	سرمه، شیر مادر، گیاه یا ادرار د
 eye-infection.dont.drops	بدون معاینهٔ کلینیک قطرهٔ دکان را استفاده نکنید؛ بعضی چشم را خراب می‌کنند.	Do not use shop drops without a clinic check; some harm the eye.
 eye-infection.dont.patch	چشم چرکی را با پارچهٔ سخت نبندید.	Do not cover a sticky eye with a tight patch.
 eye-infection.samangan	ایبک، دره صوف پایین و فیروز نخچیر با هم یکی از تنها سه ساحه در افغانستان است که تراخم آن‌قدر زیاد است که تمام قریه تداوی می‌شود. روی پاک، آب پاک و تشناب بینایی اطفال را حفاظت می‌کند.	Aybak, Dara-i-Suf Payin and Feroz Nakhchir together are one of only three areas in Afghanistan with enough trachoma to treat whole villages. Clean faces, water and latrines protect children's sight.
+eye-infection.food-eyes	ویتامین ای: غذا برای چشم. جگر، تخم مرغ، غذای نارنجی و سبز، و ویتامین ای هر ۶ ماه.	Vitamin A: food for the eyes. Liver, eggs, orange and green foods, and vitamin A every 6 months.
 dental.title	دندان و دندان‌درد	Teeth and toothache
 dental.summary	روی پندیده با تب: همین حالا شفاخانه. دندان‌ها را روزی دو بار پاک کنید.	Swollen face with fever: hospital now. Clean teeth twice a day.
 dental.lead	دندان‌های خراب در اطفال و بزرگسالان افغانستان بسیار زیاد است و تقریباً هیچ وقت تداوی نمی‌شود. پاک کردن دندان‌ها، شکر و چای شیرین کمتر، و تداوی زود جلو درد و افتادن دندان‌ها را می‌گیرد.	Rotten teeth are very common in Afghan children and adults, and almost never treated. Cleaning teeth, less sugar and sweet tea, and early treatment stop pain and loss of teeth.
@@ -2174,6 +2191,7 @@ dental.dont.aspirin	روی دندان دردناک اسپرین، تنباکو �
 dental.dont.shop	برای دندان‌درد از دکان انتی‌بیوتیک نگیرید؛ دندان را جور نمی‌کند.	Do not take shop antibiotics for toothache; they do not fix the tooth.
 dental.dont.pliers	نگذارید شخص بی‌تجربه دندان را با انبور بکشد.	Do not let an untrained person pull a tooth with pliers.
 dental.pregnancy	خانم‌های حامله: دندان‌ها را خوب پاک کنید و به داکتر دندان بروید؛ مرض بیره در حاملگی زیاد است.	Pregnant women: clean teeth well and see the dentist; gum disease is common in pregnancy.
+dental.food-bones	استخوان و دندان قوی. غذای شیری، آفتاب بر پوست، و شکر کمتر.	Strong bones and teeth. Milk foods, sun on the skin, and less sugar.
 back-pain.title	کمردرد	Back pain
 back-pain.summary	بعد از افتادن یا با ضعف پاها: همین حالا شفاخانه. آهسته حرکت کنید.	After a fall, or with weak legs: hospital now. Keep moving gently.
 back-pain.lead	کمردرد بعد از افتادن، یا با ضعف یا بی‌حسی پاها، همین حالا شفاخانه لازم دارد. بیشتر کمردردهای دیگر، اگر آهسته حرکت کنید، در چند هفته خوب می‌شوند.	Back pain after a fall, or with weak or numb legs, needs the hospital now. Most other back pain gets better in a few weeks if you keep moving gently.
@@ -2680,6 +2698,7 @@ kitchen-garden.autumn	خزان: پیاز و سبزی زمستان. در خزان
 kitchen-garden.orange	غذای نارنجی و سبز تیره بکارید. زردک، کدو، زردآلو و سبزی‌های سبز تیره چشم اطفال را صحتمند نگه می‌دارد و کمک می‌کند با مریضی مقابله کنند. هر فصل کمی از آن‌ها بکارید.	Grow orange and dark green food. Carrots, pumpkin, apricots and dark green leaves keep children's eyes healthy and help them fight illness. Grow some every season.
 kitchen-garden.trees	یک درخت میوه بشانید. توت، زردآلو و انار در زمین خشک خوب رشد می‌کنند. در آخر زمستان نهال بشانید و هفته‌ای یک بار عمیق آب بدهید. درخت سال‌ها خانواده را غذا می‌دهد.	Plant a fruit tree. Mulberry, apricot and pomegranate grow well in dry land. Plant in late winter and water deeply once a week. The tree feeds the family for years.
 kitchen-garden.water	صرفه‌جویی آب در باغچه. کاه روی خاک، آبیاری قطره‌ای با بوتل، و بهترین وقت آب دادن.	Save water in the garden. Straw on the soil, a bottle drip, and the best time to water.
+kitchen-garden.food-eyes	ویتامین ای: غذا برای چشم. جگر، تخم مرغ، غذای نارنجی و سبز، و ویتامین ای هر ۶ ماه.	Vitamin A: food for the eyes. Liver, eggs, orange and green foods, and vitamin A every 6 months.
 kitchen-garden.dont	این کارها را نکنید:	Do not:
 kitchen-garden.dont.dung	سرگین تازه را روی سبزی‌ای که خام خورده می‌شود نریزید؛ میکروب اسهال دارد	put fresh dung on greens eaten raw: it carries germs that cause diarrhoea
 kitchen-garden.dont.spray	دوای زهری زراعتی را نزدیک خانه، اطفال، غذا یا چاه استفاده نکنید	use farm poison sprays near the house, the children, food or the well
@@ -2693,6 +2712,7 @@ garden-water.time	صبح وقت یا شام آب بدهید. صبح وقت یا 
 garden-water.roots	به ریشه آب بدهید، نه به برگ. آب را آهسته پای هر نبات بریزید. هر چند روز یک بار آب عمیق، از کمی آب هر روز بهتر است.	Water the roots, not the leaves. Pour water slowly at the foot of each plant. A deep drink every few days is better than a little every day.
 garden-water.reuse	آب شستشو را با احتیاط دوباره استفاده کنید. آبی که برنج یا ترکاری را با آن شسته‌اید برای نبات خوب است. آب صابون را فقط پای درخت بریزید، هرگز روی برگی که خورده می‌شود نریزید؛ صابون و کثافت می‌تواند مردم را مریض کند.	Reuse washing water with care. Water from rinsing rice or vegetables is good for plants. Soapy water may go around trees, never on leaves you eat: soap and dirt can make people ill.
 garden-water.shade	در گرمی به نهال‌ها سایه بدهید. در هفته‌های خیلی گرم، در چاشت یک تکهٔ کهنه یا بوریا روی نهال‌های جوان بیندازید. لوبیای بلند یا جواری می‌تواند به سبزی‌های کوچک سایه بدهد.	Shade young plants in the heat. In the hottest weeks, put an old cloth or reed mat over young plants at midday. Tall beans or maize can shade small greens.
+garden-water.food-help	غذایی که کمک می‌کند: چه درست است. کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام ضرر می‌رساند.	Food that helps: what is true. Which foods truly help, which do no harm, and which can hurt.
 garden-water.dont	این کارها را نکنید:	Do not:
 garden-water.dont.dirty	آبی را که با آن طفل یا تکهٔ طفل را شسته‌اید استفاده نکنید؛ میکروب دارد	use water from washing a child's bottom or nappies: it carries germs
 garden-water.dont.open	سطل یا حوض آب را سرباز نگذارید؛ طفل کوچک ممکن است در آن غرق شود	leave buckets or pools of water uncovered: a small child can drown
@@ -2707,6 +2727,7 @@ food-store.mould	غله و مغز پوپنک‌زده را دور بریزید. 
 food-store.winter	کچالو، پیاز و زردک برای زمستان. کچالو را در جای سرد و تاریک که یخ نزند نگه دارید. پیاز خشک را جایی آویزان کنید که هوا جریان دارد. زردک را در ریگ نمناک دفن کنید. هر کدام که پوسید، بیرون کنید.	Potatoes, onions and carrots for winter. Keep potatoes in a cool, dark place that does not freeze. Hang dried onions where air moves. Bury carrots in damp sand. Remove any that rot.
 food-store.cover	آب پاک، غذای پوشیده. با آب پاک غذا بپزید و ترکاری را با آن بشویید. غذای پخته و آب را از مگس بپوشانید؛ مگس میکروب اسهال را می‌آورد.	Clean water, covered food. Cook with clean water and wash vegetables in it. Cover cooked food and water from flies; flies carry germs that cause diarrhoea.
 food-store.hygiene	دست، آب و غذای پاک. چطور آب نوشیدنی را پاک کنید، و عادت‌های دیگر که جلوی اسهال را می‌گیرد.	Clean hands, water and food. How to make drinking water safe, and other habits that stop diarrhoea.
+food-store.food-iodine	پندیدگی گردن و نمک آیودین‌دار. هر روز کمی نمک آیودین‌دار مغز اطفال را حفاظت می‌کند.	Neck swelling and iodised salt. A little iodised salt every day protects children's brains.
 food-store.dont	این کارها را نکنید:	Do not:
 food-store.dont.animals	غلهٔ پوپنک‌زده را به حیوانات ندهید؛ زهر آن به شیر و تخم می‌رسد	feed mouldy grain to animals: the poison passes into milk and eggs
 food-store.dont.seed	تخم کشت را که رنگ گلابی یا سرخ دارد نخورید و آرد نکنید؛ به آن دوای زهری زده‌اند	eat or grind seed grain coloured pink or red: it is treated with poison
@@ -2722,6 +2743,7 @@ chickens.vaccine	مرغ‌ها را برای مرض نیوکاسل واکسین 
 chickens.eggs	اول تخم برای اطفال. پیش از فروش تخم، چند تا را برای اطفال کوچک و زنان حامله نگه دارید. تخم را آن‌قدر بپزید که زردی‌اش سفت شود، تا میکروب بمیرد.	Eggs for the children first. Before selling eggs, keep some for young children and pregnant women. Cook eggs until the yolk is firm, to kill germs.
 chickens.hands	بعد از مرغ‌ها دست بشویید. فضلهٔ مرغ میکروب اسهال دارد. بعد از کار در لانهٔ مرغ دست‌ها را با صابون بشویید، و مرغ‌ها را از طفل و غذایش دور نگه دارید.	Wash hands after the hens. Chicken droppings carry germs that cause diarrhoea. Wash hands with soap after the coop, and keep hens away from babies and their food.
 chickens.illness	مریضی‌هایی که از حیوانات می‌آید. کدام مریضی حیوانات به انسان می‌رسد، و چه وقت به شفاخانه بروید.	Illness from animals. Which animal illnesses spread to people, and when to go to hospital.
+chickens.food-baby	شیر اول و غذای اول طفل. تا ۶ ماه فقط شیر مادر، بعد غذای غلیظ با تخم مرغ.	Baby's first milk and first foods. Only breast milk to 6 months, then thick food with an egg.
 chickens.dont	این کارها را نکنید:	Do not:
 chickens.dont.sick	مرغی را که مریض بوده یا مرده نخورید و نفروشید؛ مریضی می‌تواند به انسان برسد	eat or sell hens that were sick or died: illness can pass to people
 chickens.dont.bare	مرغ مرده را با دست خالی نگیرید	touch dead birds with bare hands
@@ -2738,6 +2760,7 @@ goats-sheep.birth	وقت زاییدن احتیاط کنید. وقتی به زا�
 goats-sheep.ticks	ذبح و کنه. هنگام ذبح، دست‌ها را با دستکش یا خلطهٔ پلاستیکی بپوشانید. هر روز حیوانات، خود و اطفال را برای کنه ببینید.	Slaughter and ticks. Cover your hands with gloves or plastic bags when you slaughter. Check the animals, yourself and the children for ticks every day.
 goats-sheep.vet	واکسین از داکتر حیوانات. از داکتر حیوانات دربارهٔ واکسین رمه بپرسید. حیوانات صحتمند شیر بیشتر می‌دهند و مریضی کمتر به انسان می‌رسانند.	Vaccines from the animal doctor. Ask the animal doctor about vaccines for your flock. Healthy animals give more milk and pass less illness to people.
 goats-sheep.illness	مریضی‌هایی که از حیوانات می‌آید. تب کانگو، تب مالت و سیاه‌زخم: علایم، و چه وقت به شفاخانه بروید.	Illness from animals. Congo fever, Malta fever and anthrax: the signs, and when to go to hospital.
+goats-sheep.food-bones	استخوان و دندان قوی. غذای شیری، آفتاب بر پوست، و شکر کمتر.	Strong bones and teeth. Milk foods, sun on the skin, and less sugar.
 goats-sheep.dont	این کارها را نکنید:	Do not:
 goats-sheep.dont.raw	به اطفال شیر خام، یا پنیر تازه که از شیر خام ساخته شده، ندهید	give children raw milk, or fresh cheese made from raw milk
 goats-sheep.dont.baby	به طفل کمتر از ۶ ماه شیر حیوان ندهید	give animal milk to a baby under 6 months
@@ -2750,7 +2773,257 @@ home-earning.sew	خیاطی و خامک‌دوزی. خیاطی و خامک‌د�
 home-earning.notebook	یک کتابچهٔ پول داشته باشید. هر روز بنویسید یا نشانی بگذارید که چه خرج کردید و چه به دست آوردید. طفلی که نوشتن می‌داند می‌تواند کمک کند. بعد می‌بینید کدام کار واقعاً پول می‌آورد.	Keep a money notebook. Each day, write or mark what you spent and what you earned. A child who can write can help. Then you see what really brings money.
 home-earning.group	در یک گروه پس‌انداز کنید. در یک گروه پس‌انداز، ۱۰ تا ۲۵ زن هر هفته هر کدام کمی پول می‌گذارند. اعضا می‌توانند برای بز، تخم یا یک حالت عاجل قرض بگیرند.	Save together in a group. In a savings group, 10 to 25 women each put in a little money every week. Members can borrow for a goat, seeds or an emergency.
 home-earning.transport	پول کلینیک را جدا نگه دارید. کمی پول را برای کرایهٔ موتر تا کلینیک یا شفاخانه جدا نگه دارید. در حالت عاجل وقت قرض گرفتن نیست.	Keep money aside for the clinic. Keep a little money aside for a car to the clinic or hospital. In an emergency there is no time to borrow.
+home-earning.food-help	غذایی که کمک می‌کند: چه درست است. کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام ضرر می‌رساند.	Food that helps: what is true. Which foods truly help, which do no harm, and which can hurt.
 home-earning.family	دربارهٔ برنامهٔ خود با خانواده گپ بزنید. وقتی همه کمک کنند، کار بهتر پیش می‌رود.	Talk with the family about your plans. Work goes better when everyone helps.
+food-help.title	غذایی که کمک می‌کند: چه درست است	Food that helps: what is true
+food-help.summary	کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام ضرر می‌رساند.	Which foods truly help, which do no harm, and which can hurt.
+food-help.lead	خانواده‌های افغان می‌دانند که غذا می‌تواند دوا باشد. این صفحه‌ها نشان می‌دهد کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام عادت قدیمی ضرر می‌رساند.	Afghan families know that food can be medicine. These pages show which foods truly help, which do no harm, and which old habits can hurt.
+food-help.garm-sard	غذای گرم و سرد، هر دو قوت می‌دهد. بسیاری از خانواده‌ها غذا را گرم و سرد می‌دانند. بدن به هر دو نوع، هم در مریضی و هم در صحت، ضرورت دارد.	Garm and sard both give strength. Many families sort food into garm and sard. The body needs both kinds, in sickness and in health.
+food-help.colours	سه رنگ در هر صفحه. سبز یعنی ثابت شده که کمک می‌کند. خاکستری یعنی ثابت نشده، اما ضرر ندارد. سرخ تیره یعنی ضرر می‌رساند.	Three colours on each page. Green means proven to help. Grey means not proven, but no harm. Dark red means it can harm.
+food-help.keep-eating	مریض به غذا و نوشیدنی ضرورت دارد. مریضی قوت بدن را می‌گیرد، پس بدن به غذا و نوشیدنی بیشتر ضرورت دارد، نه کمتر. کم‌کم و چندین بار در روز بدهید.	A sick person needs food and drink. Illness uses up strength, so the body needs food and drink more, not less. Give small amounts, many times a day.
+food-help.clinic	بعضی دواها از کلینیک می‌آید. او آر اس، زنک، تابلیت آهن، ویتامین ای و تابلیت ضد کرم را از کلینیک یا پوستهٔ صحی بگیرید. برای بعضی مشکلات، این‌ها کاری می‌کند که غذا به تنهایی نمی‌تواند.	Some cures come from the clinic. ORS, zinc, iron tablets, vitamin A and worm tablets come from the clinic or health post. For some problems they do what food alone cannot.
+food-help.clean	غذای پاک اولین دوا است. پیش از پختن، دست‌ها را با صابون بشویید، و شیر را پیش از نوشیدن بجوشانید. غذای کثیف و شیر خام مریضی می‌آورد، نه قوت.	Clean food is the first medicine. Wash hands with soap before cooking, and boil milk before drinking it. Dirty food and raw milk bring illness, not strength.
+food-help.home-food	غذای خانه از شربت قوت دکان بهتر است. تخم مرغ، دال، جگر، ماست و سبزی باغچه از هر بوتل شربت قوت بازار بیشتر فایده دارد. پول را برای غذا خرج کنید.	Home food beats shop tonics. Eggs, lentils, liver, yoghurt and garden greens do more than any tonic bottle from the bazaar. Spend the money on food.
+food-help.elders	وقتی نصیحت بزرگان با این کتاب فرق دارد، از کارمند صحی بپرسید. بیشتر نصیحت‌های قدیمی خوب و بی‌خطر است؛ این صفحه‌ها می‌گوید کدام نیست.	When an elder's advice and this book disagree, ask the health worker. Most old advice is kind and safe; these pages say when it is not.
+food-help.child-meals	غذای باغچه برای طفل. لیتی غلیظ، روزی یک تخم مرغ، و اینکه طفل کوچک روزی چند بار غذا بخورد.	Garden food for your child. Thick porridge, an egg a day, and how often a small child eats.
+food-help.ask	حالتان خوب نیست؟. «چه مشکلی دارید؟» را باز کنید تا صفحهٔ درست و علایم خطر آن را پیدا کنید.	Feeling unwell?. Open What is wrong? to find the right page and its danger signs.
+food-diarrhoea.title	اسهال: چه بخوریم و چه بنوشیم	Diarrhoea: what to eat and drink
+food-diarrhoea.summary	او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.	ORS, home drinks and soft food: what helps, and what harms.
+food-diarrhoea.lead	در اسهال بدن زود آب و نمک از دست می‌دهد. نوشیدنی و غذا را ادامه دهید: برای طفل و برای کلان، دوا همین است.	In diarrhoea the body loses water and salt fast. Keep giving drinks and food: for a child and for an adult, this is the medicine.
+food-diarrhoea.ors	اول او آر اس، بعد از هر اسهال. او آر اس بهترین نوشیدنی برای اسهال است. بعد از هر اسهال کم‌کم بدهید؛ مقدار آن در صفحهٔ اسهال است.	ORS first, after every loose stool. ORS is the best drink for diarrhoea. Give it in small sips after every loose stool; how much to give is on the Diarrhoea page.
+food-diarrhoea.home-drinks	نوشیدنی‌های خانگی که کمک می‌کند. آب برنج، شوربای رقیق با کمی نمک، دوغی که از شیر جوشیده ساخته شده، و آب پاک همه کمک می‌کند. هر قدر که بنوشد، بدهید.	Home drinks that also help. Rice water, thin soup with a pinch of salt, doogh made from boiled milk, and clean water all help. Give as much as the person will take.
+food-diarrhoea.breast	بیشتر شیر بدهید، نه کمتر. طفلی که شیر مادر می‌خورد، باید بیشتر و طولانی‌تر شیر بخورد. شیر مادر هم غذا است، هم آب و هم محافظت.	Breastfeed more, not less. A breastfed child should feed more often and for longer. Breast milk is food, water and protection in one.
+food-diarrhoea.meals	غذای نرم، کم و زیاد بار. کچری، کچالوی پخته و کوبیده، برنج نرم با دال، ماست، کیله، یا نان تر شده در شوربا بدهید. وعده‌های کوچک، حدود ۶ بار در روز، با کمی روغن.	Soft food, small and often. Give kichri, mashed potato, soft rice with lentils, yoghurt, banana, or bread soaked in soup. Small meals, about 6 times a day, with a little oil.
+food-diarrhoea.yoghurt	اگر دوام کرد: ماست، نه شیر. اگر اسهال ۱۴ روز دوام کرد، به جای شیر تازهٔ حیوان ماست بدهید و طفل را به کلینیک ببرید. شیر مادر را ادامه دهید.	If it lasts: yoghurt, not milk. If diarrhoea lasts 14 days, give yoghurt in place of fresh animal milk, and take the child to the clinic. Keep breastfeeding.
+food-diarrhoea.after	بعد از بند شدن: یک وعده غذای اضافه. وقتی اسهال بند شد، حداقل دو هفته هر روز یک وعده غذای اضافه بدهید. این کار وزنی را که کم شده، دوباره می‌آورد.	After it stops: one extra meal. When the diarrhoea stops, give one extra meal every day for at least two weeks. This puts back the weight that was lost.
+food-diarrhoea.zinc	زنک از کلینیک. طفلی که اسهال دارد، ۱۴ روز زنک هم لازم دارد که از کلینیک یا پوستهٔ صحی می‌گیرید. زنک اسهال را کوتاه‌تر می‌کند.	Zinc from the clinic. A child with diarrhoea also needs zinc for 14 days, from the clinic or health post. It makes the diarrhoea shorter.
+food-diarrhoea.helps.doogh	دوغ و ماست در اسهال خوب است، به شرطی که شیر اول جوشانده شده باشد.	Doogh and yoghurt are good in diarrhoea, if the milk was boiled first.
+food-diarrhoea.helps.soft	کیله، کچالوی جوشیده و کچری برای شکم نرم است و قوت می‌دهد.	Banana, boiled potato and kichri are kind to the belly and give strength.
+food-diarrhoea.unproven.yoghurt-cure	ماست به تنهایی اسهال را تداوی نمی‌کند، اما یکی از بهترین غذاها برای دادن است.	Yoghurt does not cure diarrhoea by itself, but it is one of the best foods to give.
+food-diarrhoea.unproven.peel	چای پوست انار یا بهی اسهال را بند نمی‌کند. کمی از آن به کلانی که او آر اس هم می‌نوشد ضرر ندارد؛ برای شیرخوار نه.	Pomegranate peel tea or quince does not stop diarrhoea. A little does no harm to an adult who also drinks ORS; not for babies.
+food-diarrhoea.harm.stop-food	بند کردن غذا، شیر یا شیر مادر «تا شکم آرام شود»: طفل ضعیف می‌شود و اسهال طولانی‌تر می‌شود.	Stopping food, milk or breastfeeding "to rest the belly": the child grows weak, and the diarrhoea lasts longer.
+food-diarrhoea.harm.sweet	فقط نوشیدنی‌های شیرین، مثل آب نبات، چای شیرین یا آب میوهٔ پاکتی: شکر زیاد اسهال را بدتر می‌کند.	Only sweet drinks, like nabat water, sweet tea or packet juice: too much sugar makes diarrhoea worse.
+food-diarrhoea.harm.opium	تریاک یا دوای دکان برای بند کردن اسهال: می‌تواند نفس طفل را بند کند.	Opium or shop medicine to stop diarrhoea: it can stop a child's breathing.
+food-diarrhoea.diarrhoea	مقدار او آر اس و علایم خطر. چه قدر او آر اس و زنک به طفل بدهید، و علایمی که کلینیک یا شفاخانه لازم دارد.	ORS amounts and danger signs. How much ORS and zinc to give a child, and the signs that need the clinic or hospital.
+food-diarrhoea.adult	اسهال در بزرگسالان. او آر اس برای کلان‌ها، و علایم خشک شدن بدن که شفاخانه لازم دارد.	Diarrhoea in adults. ORS for adults, and the signs of drying out that need the hospital.
+food-cough.title	سرفه و زکام: غذا و نوشیدنی	Cough and cold: food and drinks
+food-cough.summary	نوشیدنی گرم، عسل از ۱ سالگی، و غذایی که قوت را نگه می‌دارد.	Warm drinks, honey from age 1, and food that keeps strength.
+food-cough.lead	زکام معمولاً در حدود یک هفته خودش خوب می‌شود. نوشیدنی گرم و غذا بدن را قوی نگه می‌دارد؛ شربت سرفهٔ دکان کمک نمی‌کند.	A cold usually gets better by itself in about a week. Warm drinks and food keep the body strong; cough medicine from the shop does not help.
+food-cough.drinks	نوشیدنی گرم، زیاد بار. آب گرم، شوربای رقیق یا آش، یا برای اطفال بالای ۱ سال شیر جوشیدهٔ گرم بدهید. زیاد بار نوشیدنی پیش کنید.	Warm drinks, often. Give warm water, thin soup or aush, or warm boiled milk for children over 1 year. Offer a drink often.
+food-cough.honey	عسل از ۱ سالگی. از ۱ سالگی، یک قاشق کوچک عسل وقت خواب سرفهٔ شب را آرام می‌کند. هرگز به طفل کمتر از ۱ سال عسل ندهید.	Honey from age 1. From 1 year, a small spoon of honey at bedtime can ease a night cough. Never give honey to a baby under 1 year.
+food-cough.breast	شیرخوار: دوای او شیر مادر است. طفل کمتر از ۶ ماه فقط شیر مادر لازم دارد، بیشتر از معمول. پیش از شیر دادن، بینی را با تکهٔ نرم و تر پاک کنید.	Babies: breast milk is the remedy. A baby under 6 months needs only breast milk, more often than usual. Clear the nose with a soft wet cloth before feeds.
+food-cough.eat	غذا را ادامه دهید، کم و نرم. طفلی که سرفه دارد هم غذا لازم دارد: شوربا با نان، کچری، تخم مرغ، ماست و میوه. وعده‌های کوچک، چندین بار در روز.	Keep feeding, small and soft. A coughing child still needs food: soup with bread, kichri, egg, yoghurt and fruit. Small meals, many times a day.
+food-cough.fruit	میوه و سبزی هر روز. مالته، انار، زردآلو و سبزی‌های برگ‌دار بدن را قوی نگه می‌دارد. اما زکامی را که شروع شده، تداوی نمی‌کند.	Fruit and vegetables every day. Oranges, pomegranate, apricots and green leaves keep the body strong. They do not cure a cold that has already started.
+food-cough.helps.honey	عسل سرفهٔ شب را آرام می‌کند: درست است، برای اطفال بالای ۱ سال و کلان‌ها.	Honey eases a night cough: true, for children over 1 year and adults.
+food-cough.helps.soup	شوربا و نوشیدنی گرم کمک می‌کند: آب و قوت می‌دهد.	Warm soup and drinks help: they give water and strength.
+food-cough.unproven.turnip	شوربای شلغم، چای زنجبیل یا شیر با زردچوبه سرفه را تداوی نمی‌کند. گرم است و بعد از ۱ سالگی دادن آن ضرر ندارد.	Turnip soup, ginger tea or turmeric milk do not cure a cough. They are warm, and fine to give after age 1.
+food-cough.unproven.garlic	ثابت نشده که سیر زکام را تداوی کند. در غذا ضرر ندارد.	Garlic is not proven to cure a cold. It is fine in food.
+food-cough.harm.baby-honey	عسل یا آب گیاهی برای طفل کمتر از ۱ سال: عسل می‌تواند طفل را مسموم کند، و آب گیاهی جای شیر را می‌گیرد.	Honey or herb water for a baby under 1 year: honey can poison a baby, and herb water takes the place of milk.
+food-cough.harm.syrup	شربت سرفهٔ دکان برای اطفال کوچک: کمک نمی‌کند و بعضی ضرر دارد.	Cough syrups from the shop for young children: they do not help, and some can harm.
+food-cough.harm.withhold	دور نگه داشتن ماست، میوه یا تخم مرغ از طفل مریض چون «سرد» یا «گرم» است: طفل برای خوب شدن به آن‌ها ضرورت دارد.	Keeping yoghurt, fruit or eggs from a sick child because they are "sard" or "garm": the child needs them to get well.
+food-cough.harm.steam	بخار دیگ آب جوش: کمک نمی‌کند و اطفال می‌سوزند.	Steam from a pot of boiling water: it does not help, and children get burned.
+food-cough.cough	نفس‌ها را بشمارید، علایم را بشناسید. نفس تیز می‌تواند سینه‌بغل باشد. علایمی را ببینید که کلینیک یا شفاخانه لازم دارد.	Count the breaths, know the signs. Fast breathing can mean pneumonia. See the signs that need the clinic or hospital.
+food-cough.winter	خانهٔ گرم و بی‌خطر در زمستان. دود بخاری را از شش‌های طفل دور نگه دارید.	Safe warm home in winter. Keep stove smoke away from the child's lungs.
+food-anaemia.title	کم‌خونی: غذایی که خون می‌سازد	Weak blood: food that builds blood
+food-anaemia.summary	غذای پر آهن، چای دور از غذا، و تابلیت‌هایی که کار می‌کند.	Iron foods, tea away from meals, and the tablets that work.
+food-anaemia.lead	کم‌خونی زنان و اطفال را خسته، رنگ‌پریده و در آموختن کند می‌سازد. غذا می‌تواند خون را دوباره بسازد، به شرطی که آهن آن به بدن برسد.	Weak blood makes women and children tired, pale and slow to learn. Food can build the blood back, if the iron in it can get in.
+food-anaemia.meat	گوشت، جگر و تخم مرغ. آهن گوشت، جگر، مرغ و تخم مرغ بهتر از همه به خون می‌رسد. هر روزی که بتوانید گوشت یا تخم مرغ بخورید، و هفته‌ای یک بار به اطفال جگر بدهید.	Meat, liver and eggs. The iron in meat, liver, chicken and eggs gets into the blood best. Eat meat or an egg on the days you can, and give children liver once a week.
+food-anaemia.lentils	دال و سبزی، با چیزی ترش. دال، ماش، لوبیا و سبزی‌های سبز تیره هم آهن دارد. آن‌ها را با بادنجان رومی، لیمو، مالته، انار یا توت تازه بخورید: به بدن کمک می‌کند آهن را بگیرد.	Lentils and greens, with something sour. Lentils, mung, beans and dark green leaves have iron too. Eat them with tomato, lemon, orange, pomegranate or fresh mulberries: they help the body take in the iron.
+food-anaemia.tea	چای دور از غذا. چای و شیرچای نمی‌گذارد بدن آهن غذا را بگیرد. چای را بین غذاها بنوشید، هرگز همراه غذا یا تابلیت آهن نه.	Tea away from meals. Tea and milk tea stop the body taking iron from a meal. Drink tea between meals, never with food or with iron tablets.
+food-anaemia.children	برای اطفال چای نه. به اطفال آب، شیر جوشیده یا دوغ بدهید، نه چای. برای خوراک سبک، توت خشک، زردآلو یا تخم مرغ جوش بدهید، نه چای و نان.	No tea for children. Give children water, boiled milk or doogh, not tea. For snacks give dried mulberries, apricots or a boiled egg, not tea and bread.
+food-anaemia.tablets	تابلیت آهن از کلینیک. در حاملگی، و تا ۳ ماه بعد از ولادت، غذا به تنهایی کافی نیست. تابلیت آهن و فولیک اسید کلینیک را هر روز با آب بخورید.	Iron tablets from the clinic. In pregnancy, and for 3 months after the birth, food alone is not enough. Take the clinic's iron and folic acid tablets every day, with water.
+food-anaemia.worms	تابلیت ضد کرم هر ۶ ماه. کرم‌ها خون را می‌دزدند. از ۱ سالگی، اطفال هر ۶ ماه یک تابلیت ضد کرم از کلینیک لازم دارند.	Worm tablets every 6 months. Worms steal blood. From 1 year, children need a worm tablet from the clinic every 6 months.
+food-anaemia.helps.liver	جگر، گوشت و تخم مرغ خون می‌سازد: درست است. این‌ها بهترین غذاهای پر آهن هستند.	Liver, meat and eggs build blood: true. They are the best iron foods.
+food-anaemia.helps.tea	چای دور از غذا آهن غذا را نگه می‌دارد: درست است.	Tea away from meals keeps the iron in the food: true.
+food-anaemia.unproven.red-foods	«غذای سرخ خون می‌سازد»: لبلبو، انگور سرخ و خرما غذای خوب است، اما آهن کم دارد.	"Red foods make blood": beetroot, red grapes and dates are good food, but they have little iron.
+food-anaemia.unproven.pomegranate	انار آهن کم دارد. اما اگر با دال خورده شود، ترشی آن به بدن کمک می‌کند آهن دال را بگیرد.	Pomegranate has little iron. But eaten with lentils, its sourness helps the body take in their iron.
+food-anaemia.harm.tea-meals	چای با هر غذا، و چای شیرین با نان به جای غذای طفل: آهن غذا از دست می‌رود.	Tea with every meal, and sweet tea with bread as a child's meal: the iron in the food is lost.
+food-anaemia.harm.clay	خوردن گِل یا خاک: می‌تواند کرم و زهر داشته باشد. به قابله بگویید؛ می‌تواند علامهٔ کم‌خونی باشد.	Eating clay or earth: it can carry worms and poison. Tell the midwife; it can be a sign of weak blood.
+food-anaemia.harm.stop-tablets	قطع تابلیت آهن چون مدفوع سیاه می‌شود: مدفوع سیاه از تابلیت آهن عادی است.	Stopping iron tablets because the stool turns black: black stool from iron tablets is normal.
+food-anaemia.harm.tonics	شربت‌های قوت و خون از دکان: لازم نیست. کلینیک تابلیت آهن می‌دهد.	Shop tonics and syrups "for blood": you do not need them. The clinic gives iron tablets.
+food-anaemia.anaemia	کم‌خونی: علایم و تابلیت. قاعدهٔ یک ساعت برای چای، تابلیت آهن، و وقتی که کم‌خونی کلینیک لازم دارد.	Anaemia: signs and tablets. The one-hour tea rule, the iron tablets, and when weak blood needs the clinic.
+food-anaemia.worms-page	کرم‌های شکم. کرم‌ها چطور خون طفل را می‌دزدند، و علایمی که کلینیک لازم دارد.	Worms in the belly. How worms steal a child's blood, and the signs that need the clinic.
+food-pregnancy.title	حاملگی: غذا و دواهای خانگی	Pregnancy: food and home remedies
+food-pregnancy.summary	یک وعده غذای اضافه، تابلیت آهن، و آنچه دل‌بدی را آرام می‌کند.	One extra meal, iron tablets, and what eases sickness.
+food-pregnancy.lead	زن حامله برای قوت خودش و برای مغز و خون طفل غذا می‌خورد. یک وعده غذای اضافه در روز، با غذاهای مختلف، قاعده است.	A pregnant woman eats for her own strength and for the baby's brain and blood. One extra meal a day, with many kinds of food, is the rule.
+food-pregnancy.extra	هر روز یک وعده غذای اضافه. هر روز یک وعده غذا یا دو خوراک سبک اضافه کنید: نان با تخم مرغ، ماست، چند دانه چارمغز، میوه.	One extra meal every day. Add one meal, or two snacks, every day: bread with an egg, yoghurt, a few walnuts, fruit.
+food-pregnancy.variety	هر روز غذاهای مختلف. هر روز نان یا برنج؛ دال، لوبیا، گوشت یا تخم مرغ؛ شیر جوشیده یا ماست؛ و سبزی و میوه بخورید.	Different foods each day. Each day eat bread or rice; lentils, beans, meat or eggs; boiled milk or yoghurt; and vegetables and fruit.
+food-pregnancy.iron	آهن و فولیک اسید هر روز. تابلیت آهن و فولیک اسید کلینیک را هر روز بخورید. آن را با آب بخورید، نه با چای.	Iron and folic acid every day. Take the clinic's iron and folic acid tablet every day. Take it with water, not tea.
+food-pregnancy.nausea	دل‌بدی: غذای خشک و کم، و زنجبیل. غذای خشک را کم‌کم و زیاد بار بخورید، مثل نان پیش از برخاستن. چند ورق نازک زنجبیل تازه در آب گرم، تا ۳ پیاله در روز، دل‌بدی را آرام می‌کند.	Sickness: small dry meals and ginger. Eat small dry meals often, like bread before getting up. A few thin slices of fresh ginger in hot water, up to 3 cups a day, ease the sickness.
+food-pregnancy.heartburn	سوزش سینه و قبضیت. برای سوزش سینه، غذای کم بخورید و بعد از غذا فوراً دراز نکشید. برای قبضیت، تمام روز آب بنوشید، میوه و سبزی بخورید و قدم بزنید.	Heartburn and hard stools. For heartburn, eat small meals and do not lie down straight after eating. For hard stools, drink water all day, eat fruit and vegetables, and walk.
+food-pregnancy.salt-milk	نمک آیودین‌دار، شیر جوشیده. هر روز با کمی نمک آیودین‌دار غذا بپزید: آیودین مغز طفل را می‌سازد. شیر را فقط جوشیده بنوشید؛ شیر خام می‌تواند به طفل ضرر برساند.	Iodised salt, boiled milk. Cook with a little iodised salt every day: iodine builds the baby's brain. Drink milk only when it has been boiled; raw milk can harm the baby.
+food-pregnancy.helps.ginger	زنجبیل دل‌بدی صبح را آرام می‌کند: درست است، به مقدار کم.	Ginger eases morning sickness: true, in small amounts.
+food-pregnancy.helps.milk	شیر جوشیده و ماست برای مادر و طفل خوب است: درست است.	Boiled milk and yoghurt are good for mother and baby: true.
+food-pregnancy.unproven.looks	سیب و انار شکل طفل را تغییر نمی‌دهد، اما میوهٔ خوب است.	Apples and pomegranate do not change how the baby looks, but they are good fruit.
+food-pregnancy.unproven.saffron-pinch	کمی زعفران در غذا ضرر ندارد. رنگ طفل را تغییر نمی‌دهد.	A pinch of saffron in food is fine. It does not change the baby's colour.
+food-pregnancy.harm.eat-less	کمتر خوردن در حاملگی: طفل کوچک و ضعیف به دنیا می‌آید.	Eating less in pregnancy: the baby is born small and weak.
+food-pregnancy.harm.garm	قطع تخم مرغ، گوشت یا شیر چون «گرم» است: بدن طفل از همین‌ها ساخته می‌شود.	Cutting out eggs, meat or milk because they are "garm": the baby's body is built from them.
+food-pregnancy.harm.herbs	زعفران زیاد، یا دواهای گیاهی دکان یا تعویذگر: می‌تواند به حاملگی ضرر برساند.	Large amounts of saffron, or herb mixes from a shop or healer: they can harm the pregnancy.
+food-pregnancy.danger	علایم خطر در حاملگی. خونریزی، سردرد شدید، استفراغ تمام روز و علایم دیگری که کمک لازم دارد. آن‌ها را با فامیل یاد بگیرید.	Danger signs in pregnancy. Bleeding, a bad headache, vomiting all day and other signs that need help. Learn them with the family.
+food-pregnancy.care	مراقبت در حاملگی. رفتن به کلینیک، واکسین تیتانوس و پلان ولادت.	Care in pregnancy. Clinic visits, the tetanus vaccine and planning the birth.
+food-after-birth.title	بعد از ولادت: غذای مادر	After the birth: the mother's food
+food-after-birth.summary	چهل روز: غذای بیشتر، نوشیدنی زیاد، و همه غذاهای صحی.	The 40 days: more food, plenty to drink, and all healthy foods.
+food-after-birth.lead	چهل روز بعد از ولادت برای جور شدن و برای ساختن شیر است. مادر از وقت حاملگی بیشتر غذا لازم دارد، نه کمتر، و نوشیدنی زیاد.	The 40 days after the birth are for healing and for making milk. A mother needs more food than in pregnancy, not less, and plenty to drink.
+food-after-birth.two-meals	روزی دو وعده غذای اضافه. مادر شیرده دو وعده غذا یا خوراک سبک بیشتر از معمول لازم دارد: نان با تخم مرغ، شوربا با مرغ یا گوشت، کچری با ماست، لوبیا، میوه.	Two extra meals a day. A breastfeeding mother needs two more meals or snacks than usual: bread with egg, soup with chicken or meat, kichri with yoghurt, beans, fruit.
+food-after-birth.drink	در هر بار شیر دادن، بنوشید. هر بار که طفل شیر می‌خورد، یک گیلاس آب، دوغ یا شیر جوشیده بنوشید. وقتی تشنه هستید بنوشید؛ هیچ دلیلی برای کم نوشیدن نیست.	Drink at every feed. Drink a glass of water, doogh or boiled milk each time the baby feeds. Drink when thirsty; there is no reason to drink less.
+food-after-birth.all-foods	همه غذاهای صحی را می‌شود خورد. سبزی، میوه، ماست، لوبیا و آب سرد به مادر یا شیر ضرر نمی‌رساند. آن‌ها را همراه غذاهای گرم بخورید؛ بدن به هر دو ضرورت دارد.	All healthy foods can be eaten. Vegetables, fruit, yoghurt, beans and cool water do not harm the mother or the milk. Eat them with the warm foods; the body needs both.
+food-after-birth.more-milk	زیاد شیر دادن، شیر را زیاد می‌کند. شیر از مکیدن زیاد طفل، شب و روز، می‌آید. هیچ غذا یا گیاهی به اندازهٔ آن شیر نمی‌سازد.	Feeding often makes more milk. Milk comes from the baby sucking often, day and night. No food or herb makes as much milk as that.
+food-after-birth.iron	تابلیت آهن برای ۳ ماه. تابلیت آهن کلینیک را تا ۳ ماه بعد از ولادت ادامه دهید. خونی را که در ولادت از دست رفته، دوباره می‌سازد.	Iron tablets for 3 months. Keep taking the clinic's iron tablets for 3 months after the birth. They rebuild the blood lost at the birth.
+food-after-birth.halwa	حلوا و روغن زرد: کم. حلوا و روغن زرد بعد از ولادت قوت می‌دهد. یک کاسهٔ کوچک خوب است، اما نباید جای تخم مرغ، گوشت، دال و سبزی را بگیرد.	Halwa and ghee: a little. Halwa and ghee give strength after the birth. A small bowl is fine, but they should not take the place of eggs, meat, lentils and vegetables.
+food-after-birth.helps.soup	شوربای مرغ یا گوشت با سبزی بعد از ولادت غذای خوب است: درست است.	Chicken or meat soup with vegetables is a good food after the birth: true.
+food-after-birth.helps.eggs	تخم مرغ، ماست و لوبیا به مادر نو قوت می‌دهد: درست است.	Eggs, yoghurt and beans give a new mother strength: true.
+food-after-birth.unproven.herbs-milk	ثابت نشده که حلبه، بادیان یا گیاهان دیگر شیر را زیاد کند. در غذا ضرر ندارد؛ آنچه کار می‌کند مکیدن طفل است.	Fenugreek, fennel or other herbs to make milk are not proven. They do no harm in food; the baby's sucking is what works.
+food-after-birth.unproven.wind	«لوبیا طفل را باد می‌کند» ثابت نشده. اگر غذایی طفل را ناراحت کرد، یک هفته نخورید، بعد دوباره امتحان کنید.	"Beans give the baby wind" is not proven. If a food seems to upset the baby, leave it a week, then try again.
+food-after-birth.harm.bread-tea	چهل روز فقط نان، چای، روغن زرد و حلوا: مادر کم‌خون و قبض می‌شود.	Forty days of only bread, tea, ghee and halwa: the mother gets weak blood and hard stools.
+food-after-birth.harm.little-water	کم نوشیدن آب بعد از ولادت: قبضیت، عفونت ادرار و مادر خسته.	Drinking little water after the birth: hard stools, urine infection and a tired mother.
+food-after-birth.harm.bleeding	خاکشیر، دم‌کردهٔ گیاهی یا تعویذگر برای خونریزی زیاد: خونریزی زیاد همین حالا شفاخانه لازم دارد.	Khak-e-shir, herb drinks or a healer for heavy bleeding: heavy bleeding needs the hospital now.
+food-after-birth.harm.opium	تریاک برای درد یا خواب مادر: از راه شیر به طفل می‌رسد.	Opium for the mother's pain or sleep: it passes to the baby through the milk.
+food-after-birth.after-birth	بعد از ولادت: علایم خطر. خونریزی زیاد، تب و علایم دیگری که شفاخانه لازم دارد، و معاینه‌ها.	After the birth: danger signs. Heavy bleeding, fever and the other signs that need the hospital, and the check-ups.
+food-after-birth.breastfeeding	شیر مادر و غذای طفل. شیر دادن در شب و روز، کمک به طفل تا خوب سینه را بگیرد، و کمک گرفتن.	Breastfeeding and food. Feeding day and night, helping the baby attach well, and getting help.
+food-baby.title	شیر اول و غذای اول طفل	Baby's first milk and first foods
+food-baby.summary	تا ۶ ماه فقط شیر مادر، بعد غذای غلیظ با تخم مرغ.	Only breast milk to 6 months, then thick food with an egg.
+food-baby.lead	در ۶ ماه اول، طفل فقط شیر مادر لازم دارد. از ۶ ماهگی، غذای واقعی هم لازم دارد: غلیظ، با تخم مرغ، روغن و سبزی کوبیده.	For the first 6 months a baby needs only breast milk. From 6 months the baby needs real food too: thick, with egg, oil and mashed vegetables.
+food-baby.first-milk	شیر زرد اول، بعد فقط شیر مادر. شیر غلیظ و زرد اول، اولین محافظت طفل است: همه‌اش را بدهید. بعد تا ۶ ماه فقط شیر مادر، حتی در تابستان.	The first yellow milk, then only milk. The thick yellow first milk is the baby's first protection: give all of it. Then only breast milk to 6 months, even in summer.
+food-baby.start	در ۶ ماهگی: غلیظ، نه آبکی. با ۲ تا ۳ قاشق لیتی غلیظ یا کچری کوبیده، روزی دو بار شروع کنید. آن را آن‌قدر غلیظ بسازید که روی قاشق بماند، و کمی روغن در آن بیندازید.	At 6 months: thick, not watery. Start with 2 to 3 spoons of thick porridge or mashed kichri, twice a day. Make it thick enough to stay on the spoon, and stir in a little oil.
+food-baby.egg	روزی یک تخم مرغ، و غذای کوبیده. از ۶ ماهگی هر روز یک تخم مرغ خوب پخته و کوبیده، و کچالو، کدو، زردک، دال، کیله یا زردآلوی کوبیده بدهید. هر وقت توانستید، جگر یا گوشت نرم و خوب کوبیده اضافه کنید.	An egg a day, and mashed food. From 6 months give a well-cooked, mashed egg every day, and mashed potato, pumpkin, carrot, lentils, banana or apricot. Add liver or soft meat, mashed fine, when you can.
+food-baby.drinks	آب با پیاله، چای نه. از ۶ ماهگی آب جوشیده و سرد شده را با پیالهٔ پاک بدهید. چای، نوشیدنی شیرین یا آب میوهٔ پاکتی ندهید: شکم را پر می‌کند و آهن را کم می‌کند.	Water from a cup, no tea. From 6 months give boiled, cooled water from a clean cup. No tea, sweet drinks or packet juice: they fill the belly and take away iron.
+food-baby.choking	نرم و کوبیده، مغز درست نه. مغزها را آرد کرده در لیتی بیندازید؛ مغز درست، کشمش و انگور درست می‌تواند گلوی طفل کوچک را بند کند. تا ۱ سالگی عسل نه.	Soft and mashed, no whole nuts. Grind nuts into the porridge; whole nuts, raisins and whole grapes can block a small child's throat. No honey before 1 year.
+food-baby.helps.egg	روزی یک تخم مرغ به رشد طفل کمک می‌کند: درست است.	An egg a day helps a child grow: true.
+food-baby.helps.oil	از ۶ ماهگی، کمی روغن یا روغن زرد در غذا خوب است: چربی به رشد طفل کمک می‌کند.	From 6 months, a little oil or ghee in the food is good: fat helps the baby grow.
+food-baby.unproven.sheer-birinj	شیر برنج به عنوان غذای اول خوب است، اگر غلیظ و با شیر جوشیده ساخته شده باشد. تخم مرغ یا دال هم اضافه کنید.	Sheer birinj as a first food is fine if it is thick and made with boiled milk. Add an egg or lentils too.
+food-baby.harm.first-feeds	روغن زرد، آب بوره، چای، عسل یا آب گیاهی در ۶ ماه اول: میکروب می‌آورد و طفل را از سینه دور می‌کند.	Ghee, sugar water, tea, honey or herb water in the first 6 months: they bring germs and keep the baby from the breast.
+food-baby.harm.colic	قطره‌های دلدردی دکان، هینگ یا آب گیاهان برای طفلی که گریه می‌کند: کار نمی‌کند، و بعضی به طفل ضرر می‌رساند.	Shop colic drops, hing or herb waters for a crying baby: they do not work, and some can harm a baby.
+food-baby.harm.jaundice	شیرخشت یا آب بوره برای طفل زرد، به جای کلینیک: زردی در روز اول شفاخانه لازم دارد.	Shir khesht or sugar water for a yellow baby, in place of the clinic: yellow on the first day needs the hospital.
+food-baby.harm.late	منتظر دندان ماندن، یا تا ۸ یا ۹ ماهگی صبر کردن پیش از غذای نرم: طفل خوب رشد نمی‌کند.	Waiting for teeth, or until 8 or 9 months, before soft food: the baby stops growing well.
+food-baby.harm.kernels	خستهٔ تلخ زردآلو: برای اطفال کوچک زهر است.	Bitter apricot kernels: they are poison for small children.
+food-baby.breastfeeding	شیر مادر و تعداد وعده‌ها. ساعت اول، شیر دادن در شب و روز، و اینکه طفل در هر سن روزی چند وعده غذا لازم دارد.	Breastfeeding and meals a day. The first hour, feeding day and night, and how many meals a child needs at each age.
+food-baby.child-meals	غذای باغچه برای طفل. غذای پر آهن همراه میوه، و غذا از باغچه و مرغ‌های خودتان.	Garden food for your child. Iron foods with fruit, and food from your own garden and hens.
+food-sick-child.title	طفل مریض: چه بخورانیم	A sick child: what to feed
+food-sick-child.summary	غذای نرم و کم، نوشیدنی بیشتر، و بعداً یک وعده غذای اضافه.	Small soft meals, extra drinks, and one extra meal afterwards.
+food-sick-child.lead	طفل مریض کمتر می‌خورد، اما غذا را بیشتر لازم دارد. وعده‌های کوچک و نرم، چندین بار در روز، به طفل کمک می‌کند زودتر خوب شود.	A sick child eats less but needs food more. Small soft meals, many times a day, help the child get better faster.
+food-sick-child.breast	اول شیر مادر، بیشتر. طفل شیرخوار یا کوچک مریض باید شب و روز بیشتر شیر بخورد. طفلی که اصلاً نمی‌تواند بنوشد یا شیر بخورد، همین حالا شفاخانه لازم دارد.	Breast milk first, more often. A sick baby or toddler should breastfeed more often, day and night. A child who cannot drink or breastfeed at all needs the hospital now.
+food-sick-child.favourite	غذای نرمی که دوست دارد، زیاد بار. غذای نرمی را که طفل دوست دارد پیش کنید: کچری، شیر برنج، کچالوی کوبیده با تخم مرغ، شوربا با نان، ماست، کیله. هر ۲ تا ۳ ساعت کمی، با حوصله.	Favourite soft foods, often. Offer the child's favourite soft foods: kichri, sheer birinj, mashed potato with egg, soup with bread, yoghurt, banana. A little every 2 to 3 hours, with patience.
+food-sick-child.drinks	نوشیدنی بیشتر. بین غذاها آب، شوربا، دوغ یا او آر اس بدهید. طفلی که تب یا اسهال دارد، بیشتر از معمول نوشیدنی لازم دارد.	Extra drinks. Give water, soup, doogh or ORS between meals. A child with fever or diarrhoea needs more to drink than usual.
+food-sick-child.vomit	بعد از استفراغ: صبر، بعد کم‌کم. اگر طفل استفراغ کرد، ۱۰ دقیقه صبر کنید، بعد هر چند دقیقه کمی بدهید. طفلی که همه چیز را استفراغ می‌کند، همین حالا شفاخانه لازم دارد.	After vomiting: wait, then sips. If the child vomits, wait 10 minutes, then give small sips every few minutes. A child who vomits everything needs the hospital now.
+food-sick-child.after	بعد از مریضی: یک وعده غذای اضافه. وقتی طفل بهتر شد، حداقل دو هفته روزی یک وعده غذای اضافه، با تخم مرغ، روغن یا گوشت بدهید. این کار وزن از دست رفته را دوباره می‌آورد.	After the illness: one extra meal. When the child is better, give one extra meal a day for at least two weeks, with egg, oil or meat. This puts back the lost weight.
+food-sick-child.measles	سرخکان: ویتامین ای از کلینیک. طفلی که سرخکان دارد، ویتامین ای از کلینیک لازم دارد. ماست و غذای نرم و سرد به دهن زخمی کمک می‌کند.	Measles: vitamin A from the clinic. A child with measles needs vitamin A from the clinic. Yoghurt and soft, cool food help a sore mouth.
+food-sick-child.helps.cool-foods	ماست، دوغ و میوه برای طفلی که تب دارد خوب است: بدهید.	Yoghurt, doogh and fruit are good for a child with fever: give them.
+food-sick-child.helps.soup	شوربای مرغ و شیر برنج برای طفل مریض غذای خوب است: درست است.	Chicken soup and sheer birinj are good foods for a sick child: true.
+food-sick-child.unproven.khakshir	خاکشیر در آب «برای گرمی» ثابت نشده. به طفل کلان‌تر، همراه غذای اصلی، ضرر ندارد؛ برای شیرخوار نه.	Khak-e-shir in water "for heat" is not proven. It does no harm to an older child beside real food; not for babies.
+food-sick-child.harm.stop-food	بند کردن غذا یا شیر «تا تب برود»: طفل لاغر می‌شود و مریضی طولانی‌تر می‌شود.	Stopping food or milk "until the fever passes": the child grows thin, and the illness lasts longer.
+food-sick-child.harm.sweet-only	فقط آب نبات، چای شیرین یا بیسکویت: شکم را پر می‌کند اما قوت نمی‌دهد.	Only nabat water, sweet tea or biscuits: they fill the belly but do not feed.
+food-sick-child.harm.opium	تریاک یا شربت دکان برای خواباندن طفل یا بند کردن گریه‌اش: می‌تواند نفس را بند کند.	Opium or shop syrups to make a child sleep or stop crying: they can stop the breathing.
+food-sick-child.harm.force	ریختن نوشیدنی در دهن طفلی که خیلی خواب‌آلود است: طفل خفه شده می‌تواند. همین حالا به شفاخانه بروید.	Pouring drinks into the mouth of a very sleepy child: the child can choke. Go to hospital now.
+food-sick-child.danger	علایم خطر در اطفال. علایمی که یعنی همین حالا به شفاخانه بروید، شب باشد یا روز.	Danger signs in children. The signs that mean go to hospital now, day or night.
+food-sick-child.thin	طفل لاغر (سوءتغذی). وقتی طفل خیلی لاغر است، و غذای مخصوص کلینیک.	Thin child (malnutrition). When a child is too thin, and the clinic's special food.
+food-belly.title	ناراحتی شکم: چه بخوریم	Belly troubles: what to eat
+food-belly.summary	دل‌بدی، سوزش سینه و قبضیت: غذا و نوشیدنی ساده که کمک می‌کند.	Nausea, heartburn and hard stools: simple food and drink that help.
+food-belly.lead	بیشتر ناراحتی‌های شکم با استراحت، غذای ساده و نوشیدنی زیاد در یکی دو روز خوب می‌شود. صفحه‌هایی که در آخر وصل است، می‌گوید چه وقت بیشتر از این است.	Most belly troubles pass in a day or two with rest, simple food and plenty to drink. The pages linked at the end say when it is more than that.
+food-belly.sips	دل‌بدی: کم‌کم بنوشید، بعد غذای ساده. هر چند دقیقه کمی آب، او آر اس، چای نعناع یا دوغ بنوشید. وقتی آرام شد، نان، برنج جوشیده، کچالوی جوشیده یا ماست، کم‌کم بخورید.	Nausea: sips, then plain food. Take small sips of water, ORS, mint tea or doogh every few minutes. When it settles, eat bread, boiled rice, boiled potato or yoghurt, a little at a time.
+food-belly.ginger	زنجبیل برای دل‌بدی. چند ورق نازک زنجبیل تازه در آب گرم دل‌بدی را آرام می‌کند. چای نعناع هم آرام می‌کند، اما دوا نیست.	Ginger for nausea. A few thin slices of fresh ginger in hot water ease nausea. Mint tea soothes too, but it is not a cure.
+food-belly.heartburn	سوزش سینه: غذای کمتر، راست بمانید. غذای کمتر بخورید، با سرخ‌کرده و مرچ کمتر و چای تند کمتر. تا دو ساعت بعد از غذا دراز نکشید.	Heartburn: smaller meals, stay upright. Eat smaller meals, with less fried and spicy food and less strong tea. Do not lie down for two hours after eating.
+food-belly.constipation	قبضیت: آب، میوه، گندم کامل. در طول روز آب بنوشید، و میوه، سبزی و نان آرد کامل گندم بخورید. یک مشت زردآلو، انجیر یا توت خشک که شب در آب مانده، کمک می‌کند.	Hard stools: water, fruit, whole wheat. Drink water through the day, and eat fruit, vegetables and whole-wheat bread. A handful of dried apricots, figs or mulberries, soaked overnight, helps.
+food-belly.walk	قدم بزنید، و خود را نگه ندارید. هر روز قدم بزنید، و وقتی بدن خواست، به تشناب بروید. یک نوشیدنی گرم بعد از ناشتا به کار روده کمک می‌کند.	Walk, and do not hold on. Walk every day, and go to the toilet when the body says. A warm drink after breakfast helps the bowel move.
+food-belly.children	اطفال: مسهل نه. به طفل بالای ۶ ماه که قبض است، آب، میوه و سبزی بیشتر و بیسکویت کمتر بدهید. مسهل یا روغن به دهن ندهید؛ کلینیک دوای بی‌خطر دارد.	Children: no purges. For a child over 6 months with hard stools, give more water, fruit and vegetables, and fewer biscuits. No purges or oils by mouth; the clinic has safe medicine.
+food-belly.helps.ginger	زنجبیل دل‌بدی را آرام می‌کند: درست است.	Ginger eases nausea: true.
+food-belly.helps.dried-fruit	زردآلو، انجیر و توت خشک به قبضیت کمک می‌کند: درست است، با آب زیاد.	Dried apricots, figs and mulberries help hard stools: true, with plenty of water.
+food-belly.unproven.mint	چای نعناع، آب زیره یا آب نبات برای دل‌درد: آرام می‌کند، اما دوا نیست.	Mint tea, zira water or nabat water for a stomach ache: soothing, but not a cure.
+food-belly.harm.stop-drinking	بند کردن نوشیدن به خاطر استفراغ: بدن خشک می‌شود. کم‌کم بنوشید.	Stopping drinking because of vomiting: the body dries out. Keep taking small sips.
+food-belly.harm.shop	انتی‌بیوتیک یا پیچکاری از دکان برای یک ناراحتی سادهٔ شکم: کمک نمی‌کند و ضرر دارد.	Antibiotics or injections from a shop for a simple upset stomach: they do not help, and they can harm.
+food-belly.harm.naswar	نسوار یا سگرت «برای هضم»: به معده و دهن ضرر می‌رساند.	Naswar or smoking "to help digestion": they harm the stomach and the mouth.
+food-belly.harm.yellow	دواهای گیاهی تعویذگر وقتی چشم‌ها زرد است: به جگر ضرر می‌رساند.	Herb mixes from a healer when the eyes are yellow: they can harm the liver.
+food-belly.red-flags	علایم خطر در بزرگسالان. درد شدید شکم، استفراغ خون، مدفوع سیاه و علایم دیگری که شفاخانه لازم دارد.	Danger signs in adults. Severe belly pain, vomiting blood, black stools and other signs that need the hospital.
+food-belly.diarrhoea	اسهال در بزرگسالان. او آر اس برای کلان‌ها، و علایم خشک شدن بدن.	Diarrhoea in adults. ORS for adults, and the signs of drying out.
+food-diabetes.title	مرض شکر: چه بخوریم	Sugar disease: what to eat
+food-diabetes.summary	نیم بشقاب سبزی، چای بی‌شکر، و غذا در وقت معین.	Half the plate vegetables, no sugar in tea, and regular meals.
+food-diabetes.lead	در مرض شکر، آنچه هر روز می‌خورید به اندازهٔ تابلیت مهم است. غذای درست ارزان است: سبزی، دال، نان آرد کامل گندم، و بدون شکر.	With sugar disease, what you eat each day matters as much as the tablets. The right food is cheap: vegetables, lentils, whole-wheat bread, and no sugar.
+food-diabetes.plate	نیم بشقاب سبزی. نیم بشقاب را سبزی یا سلاد، یک چارک را دال، لوبیا، گوشت، تخم مرغ یا ماست، و یک چارک را نان یا برنج بگذارید.	Half the plate vegetables. Fill half the plate with vegetables or salad, a quarter with lentils, beans, meat, egg or yoghurt, and a quarter with bread or rice.
+food-diabetes.bread	نان گندم کامل، برنج سفید کمتر. نان آرد کامل گندم را انتخاب کنید، و پلو و نان سفید را کم بخورید.	Whole-wheat bread, less white rice. Choose bread from whole-wheat flour, and eat palau and white bread in small amounts.
+food-diabetes.tea	چای بی‌شکر. چای را بی‌شکر بنوشید، یا هر هفته کمی کمتر تا هیچ. نوشابه، آب میوهٔ پاکتی یا شربت شیرین نه؛ آب و دوغ نوشیدنی شما است.	Tea without sugar. Drink tea with no sugar, or a little less each week until none. No fizzy drinks, packet juice or sweet sherbet; water and doogh are the drinks.
+food-diabetes.fruit	میوه: روزی یک یا دو دانه، کامل. روزی یک یا دو میوهٔ کوچک بخورید، مثل یک سیب یا یک انار. آب میوه نه؛ و میوهٔ خشک، خرما و خربوزه فقط کم.	Fruit: one or two a day, whole. Eat one or two small fruits a day, like an apple or a pomegranate. Not juice; and dried fruit, dates and melon only a little.
+food-diabetes.walk	بعد از غذا قدم بزنید. قدم زدن کوتاه ۱۰ تا ۱۵ دقیقه بعد از هر غذا، شکر همان غذا را پایین می‌آورد.	Walk after meals. A short walk of 10 to 15 minutes after each meal lowers the sugar from that meal.
+food-diabetes.meals	با تابلیت، هیچ وعدهٔ غذا را نیندازید. اگر تابلیت شکر یا انسولین می‌گیرید، در وقت معین غذا بخورید و هیچ وعده را نیندازید. پایین شدن شکر خطرناک است.	Never skip meals on tablets. If you take sugar tablets or insulin, eat at regular times and do not skip meals. Low sugar is dangerous.
+food-diabetes.helps.vegetables	سبزی، دال و نان گندم کامل شکر را آرام‌تر نگه می‌دارد: درست است.	Vegetables, lentils and whole-wheat bread keep the sugar steadier: true.
+food-diabetes.helps.walk	قدم زدن بعد از غذا شکر را پایین می‌آورد: درست است.	Walking after meals lowers the sugar: true.
+food-diabetes.unproven.bitter	ثابت نشده که دارچین، حلبه یا گیاهان تلخ مرض شکر را تداوی کند. کمی در غذا ضرر ندارد؛ تابلیت را ادامه دهید.	Cinnamon, fenugreek or bitter herbs are not proven to treat sugar disease. A little in food is fine; keep taking the tablets.
+food-diabetes.unproven.biscuits	بیسکویت و شیرینی «بی‌شکر» دکان لازم نیست. میوه و چند دانه مغز ارزان‌تر است.	"Sugar-free" biscuits and sweets from the shop are not needed. Fruit and a few nuts cost less.
+food-diabetes.harm.honey	عسل، گُر، نبات یا خرما «به جای شکر»: شکر خون را مثل شکر بالا می‌برد.	Honey, gur, nabat or dates "in place of sugar": they raise the sugar just like sugar.
+food-diabetes.harm.stop-tablets	قطع تابلیت یا انسولین به خاطر گیاهان یا تعویذگر: شکر بلند به چشم، گرده و پا ضرر می‌رساند.	Stopping the tablets or insulin for herbs or a healer: high sugar harms the eyes, kidneys and feet.
+food-diabetes.harm.big-plates	بشقاب‌های پر از نان سفید و پلو چون «شکر ندارد»: در خون به شکر تبدیل می‌شود.	Big plates of white bread and palau because "no sugar was added": they turn into sugar in the blood.
+food-diabetes.diabetes	مرض شکر: دوا و علایم خطر. تابلیت، مراقبت از پا، و علایمی که کلینیک یا شفاخانه لازم دارد.	Diabetes: medicine and danger signs. Tablets, foot care, and the signs that need the clinic or hospital.
+food-diabetes.low-sugar	پایین شدن شکر: چه کنیم. عرق کردن، لرزیدن یا گیجی: زود شکر بدهید، و چه وقت به شفاخانه بروید.	Low sugar: what to do. Sweating, shaking or confusion: give sugar fast, and when to go to hospital.
+food-bp.title	فشار خون: چه بخوریم	Blood pressure: what to eat
+food-bp.summary	کمتر از یک قاشق چای‌خوری نمک در روز، سبزی، و تابلیت.	Under a teaspoon of salt a day, vegetables, and the tablet.
+food-bp.lead	فشار خون بلند احساس نمی‌شود، اما به قلب، مغز و گرده ضرر می‌رساند. نمک کمتر، سبزی و میوهٔ بیشتر، و تابلیت روزانه آن را پایین می‌آورد.	High blood pressure has no feeling, but it harms the heart, brain and kidneys. Less salt, more vegetables and fruit, and the daily tablet bring it down.
+food-bp.salt	کمتر از یک قاشق چای‌خوری نمک در روز. تمام نمک یک روز، در نان، پخت‌وپز و سر دسترخوان، باید کمتر از یک قاشق چای‌خوری هموار باشد. سر دسترخوان نمک اضافه نکنید.	Under a teaspoon of salt a day. All the salt in a day, in bread, cooking and at the table, should be less than one level teaspoon. Add no salt at the table.
+food-bp.salty-foods	غذای شور فقط گاه‌گاه. قروت، لاندی، ترشی، مغزهای نمکی و خوراکی‌های دکان نمک زیاد دارد. گاه‌گاه بخورید، نه هر روز.	Salty foods only now and then. Qurut, landi, pickles, salted nuts and shop snacks carry a lot of salt. Eat them now and then, not every day.
+food-bp.plants	سبزی، میوه و دال هر روز. در دو وعده سبزی و هر روز میوه بخورید، و بیشتر روزها دال، لوبیا یا نخود. به پایین آمدن فشار کمک می‌کند.	Vegetables, fruit and lentils daily. Eat vegetables at two meals and fruit every day, with lentils, beans or chickpeas most days. They help bring the pressure down.
+food-bp.fat	روغن مایع، نه روغن زرد یا دنبه. به جای روغن زرد، دنبه یا مسکه، با کمی روغن مایع بپزید. بیشتر بجوشانید، دم کنید یا در تنور بپزید تا سرخ کنید.	Liquid oil, not ghee or tail fat. Cook with a little liquid oil instead of ghee, tail fat or butter. Boil, stew or bake more than you fry.
+food-bp.nuts	چارمغز و بادام بی‌نمک. یک مشت کوچک چارمغز یا بادام بی‌نمک در بیشتر روزها برای قلب خوب است. نُقل شکری و مغز نمکی نه.	Unsalted walnuts and almonds. A small handful of unsalted walnuts or almonds most days is good for the heart. Sugared noql and salted nuts are not.
+food-bp.tablet	غذا و تابلیت با هم. سیر، پیاز و لیمو در غذا خوب است، اما جای تابلیت را نمی‌گیرد. تابلیت فشار خون را هر روز بخورید، حتی وقتی خوب هستید.	Food and the tablet together. Garlic, onion and lemon in cooking are good, but they do not replace the tablet. Take the blood pressure tablet every day, even when you feel well.
+food-bp.helps.less-salt	نمک کمتر فشار را پایین می‌آورد: درست است.	Less salt brings the pressure down: true.
+food-bp.helps.walk	روزی نیم ساعت قدم زدن فشار را پایین می‌آورد: درست است.	Walking half an hour a day lowers the pressure: true.
+food-bp.unproven.garlic	ثابت نشده که سیر، آب لیمو و انار فشار بلند را تداوی کند. غذای خوب است، اما جای تابلیت را نمی‌گیرد.	Garlic, lemon water and pomegranate are not proven to treat high pressure. They are good food, but they do not replace the tablet.
+food-bp.harm.stop-tablet	قطع تابلیت چون سیر یا لیمو «کار می‌کند»، یا چون خوب هستید: فشار بی‌علامه دوباره بلند می‌شود.	Stopping the tablet because garlic or lemon "works", or because you feel well: the pressure comes back without a sign.
+food-bp.harm.headache	خوردن تابلیت فقط وقتی سر درد می‌کند: فشار در روزهای دیگر هم بلند است.	Taking the tablet only when the head aches: the pressure is high on the other days too.
+food-bp.harm.naswar	نسوار و سگرت: به قلب و رگ‌ها ضرر می‌رساند.	Naswar and smoking: they harm the heart and blood vessels.
+food-bp.bp	فشار خون بلند: معاینه و علایم. بعد از ۴۰ سالگی هر سال آن را معاینه کنید، و علایم سکته که همین حالا شفاخانه لازم دارد.	High blood pressure: checks and signs. Have it checked every year after 40, and the signs of a stroke that need the hospital now.
+food-bp.heart	غذا برای قلب صحتمند. شکر کمتر، سرخ کردن کمتر، و آب به جای نوشیدنی شیرین.	Food for a healthy heart. Less sugar, less frying, and water in place of sweet drinks.
+food-eyes.title	ویتامین ای: غذا برای چشم	Vitamin A: food for the eyes
+food-eyes.summary	جگر، تخم مرغ، غذای نارنجی و سبز، و ویتامین ای هر ۶ ماه.	Liver, eggs, orange and green foods, and vitamin A every 6 months.
+food-eyes.lead	طفلی که هنگام شام خوب نمی‌بیند، شاید ویتامین ای کم داشته باشد. ویتامین ای به اطفال در برابر سرخکان و اسهال هم کمک می‌کند؛ در جگر، تخم مرغ، شیر و غذاهای نارنجی و سبز است.	A child who cannot see well at dusk may be short of vitamin A. Vitamin A also helps children fight measles and diarrhoea; it is in liver, eggs, milk, and orange and green foods.
+food-eyes.liver	هفته‌ای یک بار جگر. جگر برای چشم از همه غذاها غنی‌تر است. هفته‌ای یک بار، یک تکهٔ کوچک، کوبیده یا ریزه شده، به اطفال بدهید.	Liver once a week. Liver is the richest food for the eyes. Give children a small piece, mashed or cut fine, once a week.
+food-eyes.egg-milk	تخم مرغ، شیر جوشیده و ماست. روزی یک تخم مرغ و شیر جوشیده یا ماست، به اطفال و مادران ویتامین ای می‌دهد.	Eggs, boiled milk and yoghurt. An egg a day and boiled milk or yoghurt give vitamin A to children and mothers.
+food-eyes.orange	نارنجی و سبز تیره، با روغن. زردک، کدو، زردآلو، خربوزهٔ نارنجی و سبزی‌های سبز تیره در بدن ویتامین ای می‌سازد. آن‌ها را با کمی روغن بپزید یا کوبیده کنید تا بدن آن را بگیرد.	Orange and dark green, with oil. Carrots, pumpkin, apricots, orange melon and dark green leaves make vitamin A in the body. Cook or mash them with a little oil, so the body can take it in.
+food-eyes.seasons	در تمام سال. تابستان زردآلو و خربوزه می‌دهد، و خزان کدو و زردک. در زمستان زردآلوی خشک، زردک و کدوی ذخیره شده، و تخم مرغ بخورید.	Through the year. Summer gives apricots and melon, and autumn gives pumpkin and carrots. In winter use dried apricots, stored carrots and pumpkin, and eggs.
+food-eyes.vitamin-a	ویتامین ای هر ۶ ماه. از ۶ ماهگی تا ۵ سالگی، هر طفل هر ۶ ماه ویتامین ای لازم دارد، از کلینیک یا تیم واکسین.	Vitamin A every 6 months. From 6 months to 5 years, every child needs vitamin A every 6 months, from the clinic or the vaccination team.
+food-eyes.soon	اگر طفل شما یکی از این علایم را دارد، امروز به کلینیک بروید:	If your child has any of these signs, go to the clinic today:
+food-eyes.soon.dusk	هنگام شام خوب نمی‌بیند، یا شام‌ها به چیزها می‌خورد	cannot see well at dusk, or bumps into things in the evening
+food-eyes.soon.patch	یک لکهٔ خشک و کف‌مانند سفید در سفیدی چشم دارد	has a dry, foamy white patch on the white of the eye
+food-eyes.helps.liver	جگر و تخم مرغ برای چشم خوب است: درست است.	Liver and eggs are good for the eyes: true.
+food-eyes.helps.carrots	زردک و کدو به طفلی که هنگام شام بد می‌بیند کمک می‌کند: درست است، اگر با کمی روغن پخته شود.	Carrots and pumpkin help a child who sees badly at dusk: true, cooked with a little oil.
+food-eyes.unproven.all-eyes	زردک همه مشکلات چشم را خوب نمی‌کند. فقط وقتی ویتامین ای کم است کمک می‌کند.	Carrots do not fix every eye problem. They help only when vitamin A is short.
+food-eyes.harm.kohl	سرمه در چشم شیرخوار: بسیاری از سرمه‌ها سرب دارد که به مغز ضرر می‌رساند.	Kohl (surma) in a baby's eyes: many kinds carry lead, which harms the brain.
+food-eyes.harm.in-eye	گلاب، شیر مادر، گیاه یا عسل در چشم: عفونت می‌آورد.	Rose water, breast milk, herbs or honey in the eye: they bring infection.
+food-eyes.harm.withhold	دور نگه داشتن تخم مرغ و جگر از اطفال کوچک چون «ثقیل» یا «گرم» است: چشم‌شان همین غذاها را لازم دارد.	Keeping eggs and liver from small children as "heavy" or "garm": these are the foods their eyes need.
+food-eyes.eye-infection	مشکلات چشم و علایم خطر. لکهٔ سفید یا تیره روی سیاهی چشم همین حالا شفاخانه لازم دارد. همه علایم را ببینید.	Eye problems and danger signs. A white or cloudy spot on the black of the eye needs the hospital now. See all the signs.
+food-eyes.garden	باغچهٔ خانه در زمین خشک. در هر فصل زردک، کدو و سبزی‌های سبز تیره بکارید.	A kitchen garden in dry land. Grow carrots, pumpkin and dark green leaves every season.
+food-iodine.title	پندیدگی گردن و نمک آیودین‌دار	Neck swelling and iodised salt
+food-iodine.summary	هر روز کمی نمک آیودین‌دار مغز اطفال را حفاظت می‌کند.	A little iodised salt every day protects children's brains.
+food-iodine.lead	پندیدگی پیش گردن بیشتر وقت‌ها از کمبود آیودین است. هر روز کمی نمک آیودین‌دار از آن جلوگیری می‌کند و مغز طفل را حفاظت می‌کند.	A swelling at the front of the neck, goitre, most often comes from too little iodine. A little iodised salt every day prevents it and protects babies' brains.
+food-iodine.salt	نمک آیودین‌دار بخرید. نمکی بخرید که روی پاکت آن آیودین‌دار نوشته شده باشد. اگر مطمئن نیستید، از کارمند صحی بپرسید.	Buy iodised salt. Buy salt that says iodised on the packet. If you are not sure, ask the health worker.
+food-iodine.store	در ظرف بسته و خشک نگه دارید. نمک را در یک ظرف سربسته، دور از اجاق، نم و آفتاب نگه دارید. آیودین نمکی که باز بماند، از بین می‌رود.	Keep it closed and dry. Keep salt in a closed jar, away from the stove, damp and sun. Iodine is lost from salt left open.
+food-iodine.cook	نزدیک آخر پختن بیندازید. نمک را وقتی بیندازید که غذا تقریباً پخته شده، نه در شروع. جوشیدن طولانی آیودین را از بین می‌برد.	Add it near the end. Add the salt when the food is nearly cooked, not at the start. Long boiling drives the iodine out.
+food-iodine.little	کم کافی است. کمتر از یک قاشق چای‌خوری نمک آیودین‌دار در روز، برای هر نفر، همه آیودین لازم را می‌دهد. کم کردن نمک برای فشار خون هنوز درست است؛ فقط آیودین‌دار باشد.	A little is enough. Less than a teaspoon of iodised salt a day, for each person, gives all the iodine needed. Cutting salt for blood pressure is still right; just make it iodised.
+food-iodine.pregnant	در حاملگی از همه مهم‌تر. مادر حامله یا شیرده هر روز برای مغز طفل آیودین لازم دارد. اگر نمک شما آیودین‌دار نیست، به قابله بگویید.	Most important in pregnancy. A pregnant or breastfeeding mother needs iodine every day for the baby's brain. If your salt is not iodised, tell the midwife.
+food-iodine.soon	اگر این را دیدید، همین هفته به کلینیک بروید:	Go to the clinic this week if you see:
+food-iodine.soon.neck	پندیدگی در پیش گردن، یا پندیدگی‌ای که کلان می‌شود	a swelling at the front of the neck, or one that is growing
+food-iodine.helps.iodised	نمک آیودین‌دار از پندیدگی گردن جلوگیری می‌کند: درست است.	Iodised salt prevents a swollen neck: true.
+food-iodine.helps.eggs-milk	تخم مرغ، شیر و ماست هم کمی آیودین دارد: درست است.	Eggs, milk and yoghurt carry some iodine too: true.
+food-iodine.unproven.walnuts	ثابت نشده که چارمغز یا گیاهان پندیدگی گردن را کوچک کند. به عنوان غذا ضرر ندارد.	Walnuts or herbs are not proven to shrink a swollen neck. They are fine as food.
+food-iodine.harm.healer	خمیر تعویذگر، تار یا گیاه برای پندیدگی گردن، به جای کلینیک: بعضی غده‌ها تداوی دیگری لازم دارد.	A healer's paste, a string or herbs for a neck swelling, in place of the clinic: some lumps need other treatment.
+food-iodine.harm.no-salt	هیچ نمک نخوردن: بدن آیودین نمی‌گیرد. به جای آن کمی نمک آیودین‌دار بخورید.	No salt at all: the body gets no iodine. Use a little iodised salt instead.
+food-iodine.early	علایمی که باید زود معاینه شود. غده‌ها، تب طولانی و علایم دیگری که زود معاینه لازم دارد.	Signs to get checked early. Lumps, a long fever and other signs that need a check soon.
+food-iodine.store-food	نگهداری و خشک کردن غذا. غذا را خشک، سربسته و دور از موش و پوپنک نگه دارید.	Store and dry food safely. Keep food dry, closed and safe from mice and mould.
+food-bones.title	استخوان و دندان قوی	Strong bones and teeth
+food-bones.summary	غذای شیری، آفتاب بر پوست، و شکر کمتر.	Milk foods, sun on the skin, and less sugar.
+food-bones.lead	استخوان و دندان از غذای شیری، آفتاب بر پوست و دندان پاک ساخته می‌شود. اطفال، زنان حامله و پیرها بیشتر از همه این‌ها را لازم دارند.	Bones and teeth are built from milk foods, sun on the skin and clean teeth. Children, pregnant women and old people need them most.
+food-bones.milk	غذای شیری هر روز. به اطفال و مادران هر روز شیر جوشیده، ماست، دوغ یا چکه بدهید. شیر را اول بجوشانید.	Milk foods every day. Give children and mothers boiled milk, yoghurt, doogh or chaka every day. Boil the milk first.
+food-bones.greens	سبزی و لوبیا هم کمک می‌کند. سبزی‌های سبز تیره، لوبیا و نخود هم به ساختن استخوان کمک می‌کند. قروت هم کلسیم دارد، اما شور است، پس فقط کمی.	Greens and beans help too. Dark green leaves, beans and chickpeas also help build bone. Qurut has calcium too, but it is salty, so only a little.
+food-bones.sun	آفتاب بر پوست. آفتاب در پوست ویتامین دی می‌سازد که استخوان آن را لازم دارد. بیشتر روزها در حویلی در آفتاب بنشینید، با روی و دست‌های باز، اما نه در گرمی چاشت تابستان.	Sun on the skin. The sun makes vitamin D in the skin, and bones need it. Sit in the sun in the yard most days, face and hands uncovered, but not in summer midday heat.
+food-bones.teeth	شکر کمتر، دندان پاک. شیرینی، بیسکویت و چای شیرین دندان را خراب می‌کند. روزی دو بار دندان را پاک کنید، و هرگز طفل را با بوتل چای شیرین نخوابانید.	Less sugar, clean teeth. Sweets, biscuits and sweet tea rot the teeth. Clean teeth twice a day, and never put a baby to sleep with a bottle of sweet tea.
+food-bones.calcium	تابلیت کلسیم در حاملگی. اگر کلینیک در حاملگی تابلیت کلسیم داد، آن را در وقتی جدا از آهن بخورید.	Calcium tablets in pregnancy. If the clinic gives calcium tablets in pregnancy, take them, at a different time from the iron.
+food-bones.soon	اگر این را دیدید، همین هفته به کلینیک بروید:	Go to the clinic this week if you see:
+food-bones.soon.legs	طفلی که پاهایش کج می‌شود، یا بند دستش ضخیم است	a child whose legs are bowing, or whose wrists are thick
+food-bones.helps.milk	شیر و ماست استخوان را قوی می‌سازد: درست است، از شیر جوشیده.	Milk and yoghurt build strong bones: true, from boiled milk.
+food-bones.helps.sun	آفتاب به استخوان کمک می‌کند: درست است. استخوان هم آفتاب و هم غذا لازم دارد.	The sun helps bones: true. Bones need the sun as well as food.
+food-bones.unproven.bone-soup	یخنی غذای خوب است، اما به استخوان کلسیم کم می‌دهد.	Yakhni (bone soup) is good food, but it gives the bones little calcium.
+food-bones.unproven.tooth-baby	«هر طفل یک دندان مادر را می‌گیرد» درست نیست. دندان از شکر و میکروب خراب می‌شود؛ آن را پاک کنید و غذای شیری بخورید.	"Each baby costs the mother a tooth" is not true. Teeth are lost to sugar and germs; clean them, and eat milk foods.
+food-bones.harm.indoors	نگه داشتن اطفال در خانه، دور از آفتاب، در تمام سال: استخوان‌شان نرم می‌شود و پاهای‌شان کج شده می‌تواند.	Keeping children indoors, out of the sun, all year: their bones grow soft and their legs can bend.
+food-bones.harm.raw-milk	شیر خام، یا پنیر تازه که از شیر خام ساخته شده: می‌تواند تب مالت بیاورد.	Raw milk, or fresh cheese made from raw milk: it can give Malta fever.
+food-bones.harm.winter	قطع شیر و ماست در زمستان چون «سرد» است: استخوان در تمام سال آن را لازم دارد.	Stopping milk and yoghurt in winter because they are "sard": bones need them all year.
+food-bones.dental	دندان و دندان‌درد. پاک کردن دندان، و وقتی که دندان کلینیک لازم دارد.	Teeth and toothache. Cleaning teeth, and when a tooth needs the clinic.
+food-bones.goats	بز و گوسفند در خانه. شیر را بجوشانید، و فامیل را از مریضی‌های حیوانات حفاظت کنید.	Goats and sheep at home. Boil the milk, and keep the family safe from the animals' illnesses.
 hospital-places.title	کدام کلینیک یا شفاخانه؟	Which clinic or hospital?
 hospital-places.summary	از کارمند صحی قریه تا شفاخانه‌های کلان: کدام جای چه کار می‌کند	From the village health worker to the big hospitals: who does what
 hospital-places.lead	خدمات صحی در سمنگان زینه به زینه است، از قریهٔ شما تا شفاخانه‌های کلان. اگر بدانید کدام جای چه کار می‌کند، وقت و پول شما ضایع نمی‌شود و جان‌ها نجات می‌یابد.	Health care in Samangan has steps, from your village up to the big hospitals. Knowing which place does what saves time and money, and saves lives.
@@ -2973,7 +3246,7 @@ heart-food.salt	نمک کمتر. در وقت پختن نمک کمتر بزنید
 heart-food.plants	ترکاری، میوه و دال بیشتر. هر روز ترکاری، میوه، و دال، لوبیا یا نخود بخورید. نان آرد کامل گندم را انتخاب کنید. این‌ها شما را سیر نگه می‌دارد و قلب را محافظت می‌کند.	More vegetables, fruit and lentils. Every day, eat vegetables, fruit, and lentils, beans or chickpeas. Choose bread from whole wheat flour. They keep you full and protect the heart.
 heart-food.slowly	آهسته‌آهسته تغییر دهید: هر هفته کمی شکر و نمک کمتر. بعد از چند هفته زبان عادت می‌کند.	Change slowly: a little less sugar and salt each week. In a few weeks the tongue gets used to it.
 heart-food.bp	فشار خون بلند. چرا بعد از ۴۰ سالگی هر سال آن را اندازه کنید، و علایم خطر آن.	High blood pressure. Why to check it every year after 40, and its danger signs.
-heart-food.move	تحرک هر روزه. پیاده‌روی و حرکت‌های سادهٔ قوت هم قلب را محافظت می‌کند.	Moving every day. Walking and simple strength moves protect the heart too.
+heart-food.food-bp	فشار خون: چه بخوریم. کمتر از یک قاشق چای‌خوری نمک در روز، سبزی، و تابلیت.	Blood pressure: what to eat. Under a teaspoon of salt a day, vegetables, and the tablet.
 heart-food.ask	حالتان خوب نیست؟. اگر حالتان خوب نیست، به بخش صحت بروید و «چه مشکلی دارید؟» را بزنید.	Feeling unwell?. If you feel unwell, go to Health and tap What is wrong?
 move-daily.title	تحرک هر روزه	Moving every day
 move-daily.summary	چقدر تحرک لازم است، قدم زدن بعد از غذا، حرکت‌های قوت در خانه.	How much to move, walks after meals, strength moves at home.

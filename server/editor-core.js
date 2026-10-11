@@ -13,7 +13,7 @@ export function editorCore() {
   const SECTIONS = ['children', 'women', 'everyone'];
   // topic lists in book.sections: the three sections, "emergency" (the Emergency screen), and the lists with their own page
   // (config.lists in content/src/config.json): kit (home health kit), safety (home safety), hospital, food (food and garden), wellbeing
-  const PAGE_LISTS = ['kit', 'safety', 'hospital', 'food', 'wellbeing'];
+  const PAGE_LISTS = ['kit', 'safety', 'hospital', 'checks', 'food-help', 'food', 'wellbeing'];
   const LISTS = [...SECTIONS, 'emergency', ...PAGE_LISTS];
   // same as tools/validate.py: where a "link" block can go
   const TOOLS = ['breaths', 'reading', 'reading/temp', 'reading/bp', 'reading/sugar', 'reading/spo2', 'reading/muac'];
@@ -26,8 +26,9 @@ baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash th
 pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
 heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect`.split(/\s+/);
   const ICON_SET = new Set(ICONS);
-  const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip', link: 'link to a tool or another page', anim: 'animation (picture story)', clinic: 'what the clinic or hospital does' };
-  const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', firstAid: 'CPR and first aid', children: 'Children (big picture button)', adults: 'Adults (big picture button)', share: 'Share Sehat', wellbeing: 'Well-being', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', safety: 'Home safety', hospital: 'Going to the clinic or hospital', food: 'Food and garden', sendApp: 'Send the app to another phone (Android app only)' };
+  const BLOCK_TYPES = { lead: 'opening sentence (lead)', step: 'step', alert: 'danger signs box', dont: '"do not" box', tip: 'tip', link: 'link to a tool or another page', anim: 'animation (picture story)', clinic: 'what the clinic or hospital does', belief: '"what is true" box (helps, not proven, can harm)' };
+  const BELIEF_LEVELS = ['helps', 'unproven', 'harm'];
+  const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', firstAid: 'CPR and first aid', children: 'Children (big picture button)', adults: 'Adults (big picture button)', share: 'Share Sehat', wellbeing: 'Well-being', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', safety: 'Home safety', hospital: 'Going to the clinic or hospital', checks: 'Early signs and health checks', 'food-help': 'Food that helps (what is true)', food: 'Food and garden', sendApp: 'Send the app to another phone (Android app only)' };
   const STATUSES = ['open', 'unknown', 'closed'];
   const LN = { fa: 'Dari', ps: 'Pashto', en: 'English' };
 
@@ -58,8 +59,8 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
       if (bl.type === 'step' || bl.type === 'link' || bl.type === 'clinic') n[bl.id] = sayL(Object.fromEntries(LANGS.map((lg) => [lg, String((bl.title && bl.title[lg]) || '').replace(/[.:،]+$/, '') + '. ' + ((bl.text && bl.text[lg]) || '')])));
       else if (bl.type === 'lead' || bl.type === 'tip') n[bl.id] = sayL(bl.text);
       else if (bl.type === 'anim') { if (hasText(bl.title)) n[bl.id] = sayL(bl.title); } // without a title it reads anim.<name>.title
-      else if (bl.type === 'alert' || bl.type === 'dont') {
-        n[bl.id] = sayL(bl.title);
+      else if (bl.type === 'alert' || bl.type === 'dont' || bl.type === 'belief') {
+        if (bl.type !== 'belief' || hasText(bl.title)) n[bl.id] = sayL(bl.title); // a belief box without a title is headed by ui.beliefHelps ...
         for (const it of bl.items || []) if (it && it.id) n[it.id] = sayL(it.text);
       }
     }
@@ -188,7 +189,9 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
         else if (ty === 'clinic') { checkIcon(w, bl.icon, false, tid); checkL(`${w} title`, bl.title, 7, tid); checkL(`${w} text`, bl.text, 32, tid); }
         else {
           if (ty === 'alert' && !['urgent', 'soon'].includes(bl.level)) E(`${w}: choose how urgent it is (red or amber).`, tid);
-          checkL(`${w} title`, bl.title, 16, tid);
+          if (ty === 'belief' && !BELIEF_LEVELS.includes(bl.level)) E(`${w}: choose what kind of box it is (proven to help, not proven, or can harm).`, tid);
+          if (ty !== 'belief') checkL(`${w} title`, bl.title, 16, tid);
+          else if (bl.title != null && hasText(bl.title)) checkL(`${w} title`, bl.title, 7, tid);
           if (!Array.isArray(bl.items) || !bl.items.length) { E(`${w}: has no items.`, tid); return; }
           bl.items.forEach((it, m) => {
             const iw = `${w} › item ${m + 1}`;
@@ -196,7 +199,7 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
             regId(iw, it.id, tid);
             if (typeof it.id === 'string' && !it.id.startsWith((bl.id || '') + '.')) E(`${iw}: its id must start with "${bl.id}."`, tid);
             checkIcon(iw, it.icon, true, tid);
-            checkL(iw, it.text, 14, tid);
+            checkL(iw, it.text, ty === 'belief' ? 26 : 14, tid);
           });
         }
       });
@@ -231,7 +234,7 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
       // home screen
       if (!Array.isArray((b.config || {}).home) || !b.config.home.length) W('The home screen has no parts switched on.');
       // Mo's rule: the Home tab's lists (config.lists ... tab "house") give no medical advice; urgent signs live on the Health side
-      for (const [name, l] of Object.entries((b.config || {}).lists || {})) if (l && l.tab === 'house') for (const tid of (b.sections || {})[name] || []) for (const bl of (((b.topics || {})[tid] || {}).blocks || [])) if (bl && (bl.type === 'alert' || bl.type === 'clinic')) W(`${bl.id}: this page is on the Home tab (${name}), which gives no medical advice. Move the box to a Health page and link to it with a red link row.`, tid);
+      for (const [name, l] of Object.entries((b.config || {}).lists || {})) if (l && l.tab === 'house') for (const tid of (b.sections || {})[name] || []) for (const bl of (((b.topics || {})[tid] || {}).blocks || [])) if (bl && (bl.type === 'alert' || bl.type === 'clinic' || bl.type === 'belief')) W(`${bl.id}: this page is on the Home tab (${name}), which gives no medical advice. Move the box to a Health page and link to it with a red link row.`, tid);
     }
     // words on buttons and spoken interface lines
     for (const [k, L] of Object.entries(b.ui || {})) {
@@ -322,6 +325,6 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
   const unitName = (k) => (k.startsWith('topic:') ? 'topic ' + k.slice(6) : k.startsWith('list:') ? 'topic list ' + k.slice(5) : k.startsWith('ui:') ? 'words ' + k.slice(3)
     : k.startsWith('say:') ? 'spoken line ' + k.slice(4) : k.startsWith('search:') ? 'search words ' + k.slice(7) : k === 'home' ? 'home screen' : k === 'facilities' ? 'places' : k);
 
-  return { LANGS, SLOTS, PACKS, URGENT_TOPICS, SECTIONS, PAGE_LISTS, LISTS, TOOLS, LINK_RE, ID_RE, TOPIC_ID_RE, ICONS, ICON_SET, BLOCK_TYPES, HOME_MODULES, STATUSES,
+  return { LANGS, SLOTS, PACKS, URGENT_TOPICS, SECTIONS, PAGE_LISTS, LISTS, TOOLS, LINK_RE, ID_RE, TOPIC_ID_RE, ICONS, ICON_SET, BLOCK_TYPES, BELIEF_LEVELS, HOME_MODULES, STATUSES,
     sayL, hasText, cleanL, animNeeded, animBlockIds, topicNarration, rebuildNarration, normAudio, packIds, checkBook, cleanUnit, unitName, draftOf, oldChanges };
 }

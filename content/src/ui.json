@@ -1270,6 +1270,31 @@
    "fa": "دانلود صداها",
    "ps": "د غږونو ښکته کول",
    "en": "Download the voices"
+  },
+  "foodHelp": {
+   "fa": "غذایی که کمک می‌کند",
+   "ps": "خواړه چې مرسته کوي",
+   "en": "Food that helps"
+  },
+  "foodHelpSub": {
+   "fa": "کدام غذا به کدام مشکل کمک می‌کند، و کدام عادت کهنه ضرر می‌رساند",
+   "ps": "کوم خواړه له کومې ستونزې سره مرسته کوي، او کوم زوړ عادت زیان رسوي",
+   "en": "Which foods help with which problems, and which old habits harm"
+  },
+  "beliefHelps": {
+   "fa": "ثابت شده که کمک می‌کند",
+   "ps": "ثابته ده چې مرسته کوي",
+   "en": "Proven to help"
+  },
+  "beliefUnproven": {
+   "fa": "ثابت نشده، اما ضرر ندارد",
+   "ps": "ثابته نه ده، خو زیان نه لري",
+   "en": "Not proven, but no harm"
+  },
+  "beliefHarm": {
+   "fa": "این‌ها ضرر می‌رساند",
+   "ps": "دا زیان رسوي",
+   "en": "This can harm"
   }
  },
  "say": {
@@ -2137,6 +2162,26 @@
    "fa": "تاریخ: روزی که اندازه گرفته شد. امروز از قبل انتخاب شده است؛ اگر روز دیگری بود، آن را تغییر دهید.",
    "ps": "نېټه: هغه ورځ چې اندازه شوې. نن ورځ دمخه ټاکل شوې ده؛ که بله ورځ وه، بدله یې کړئ.",
    "en": "Date: the day it was measured. Today is already chosen; change it if it was another day."
+  },
+  "ui.foodHelp": {
+   "fa": "غذایی که کمک می‌کند: کدام غذا واقعاً برای اسهال، سرفه، کم‌خونی، حاملگی و مشکلات دیگر کمک می‌کند، کدام عادت کهنه ضرر ندارد، و کدام ضرر می‌رساند.",
+   "ps": "خواړه چې مرسته کوي: کوم خواړه رښتیا له نس ناستي، ټوخي، د وینې کمښت، امیندوارۍ او نورو ستونزو سره مرسته کوي، کوم زوړ عادت زیان نه لري، او کوم زیان رسوي.",
+   "en": "Food that helps: which foods truly help with diarrhoea, cough, weak blood, pregnancy and more, which old habits do no harm, and which can hurt."
+  },
+  "ui.beliefHelps": {
+   "fa": "ثابت شده که کمک می‌کند",
+   "ps": "ثابته ده چې مرسته کوي",
+   "en": "Proven to help"
+  },
+  "ui.beliefUnproven": {
+   "fa": "ثابت نشده، اما ضرر ندارد",
+   "ps": "ثابته نه ده، خو زیان نه لري",
+   "en": "Not proven, but no harm"
+  },
+  "ui.beliefHarm": {
+   "fa": "این‌ها ضرر می‌رساند",
+   "ps": "دا زیان رسوي",
+   "en": "This can harm"
   }
  },
  "months": {

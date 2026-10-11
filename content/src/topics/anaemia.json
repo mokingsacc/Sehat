@@ -227,6 +227,22 @@
         "ps": "د اوسپنې ګولۍ کېدای شي غایطه توره کړي. دا عادي خبره ده.",
         "en": "Iron tablets can make the stool black. This is normal."
       }
+    },
+    {
+      "id": "anaemia.food-anaemia",
+      "type": "link",
+      "to": "topic/food-anaemia",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "کم‌خونی: غذایی که خون می‌سازد",
+        "ps": "د وینې کمښت: خواړه چې وینه جوړوي",
+        "en": "Weak blood: food that builds blood"
+      },
+      "text": {
+        "fa": "غذای پر آهن، چای دور از غذا، و تابلیت‌هایی که کار می‌کند.",
+        "ps": "اوسپنه لرونکي خواړه، چای له ډوډۍ لرې، او هغه ګولۍ چې کار کوي.",
+        "en": "Iron foods, tea away from meals, and the tablets that work."
+      }
     }
   ],
   "sources": [

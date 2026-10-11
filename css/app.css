@@ -111,6 +111,19 @@ img{max-width:100%;display:block}
 .item .pic .ic{width:32px;height:32px}
 .item .x{flex:1 1 auto;font-size:17px;line-height:1.5;font-weight:600}
 .dont .item .x{font-weight:500}
+/* "What is true" boxes (belief blocks): green with a tick = proven to help; grey, dashed, a question mark = not proven but
+   harmless; dark red with a no sign = can harm (darker than the red "go to hospital now" box, which has a warning sign) */
+.belief{border-radius:20px;margin-bottom:12px;overflow:hidden;border:2px solid var(--bl);--bl:var(--green);--blt:var(--green-t)}
+.belief .ah{background:var(--bl);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 12px;font-weight:700;font-size:18px;line-height:1.45}
+.belief .ah .ic{width:32px;height:32px;flex:0 0 auto}
+.belief .ah .spk{background:#fff;border-color:#fff;color:var(--bl)}
+.belief .item .pic{background:var(--blt);color:var(--bl)}
+.belief.harm{--bl:var(--red-d);--blt:var(--red-t)}
+.belief.unproven{--bl:#59636E;--blt:#ECEFF2;border-style:dashed}
+.belief.unproven .ah{background:#ECEFF2;color:var(--ink)}
+.belief.unproven .ah .ic{color:#59636E}
+.belief.unproven .ah .spk{border-color:var(--line)}
+.belief .speaking{box-shadow:none;background:rgba(255,255,255,.75)}
 .ic{display:inline-block;background:currentColor;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .sources{font-size:13px;color:var(--mute);margin:14px 2px 6px}
 .sources summary{cursor:pointer;padding:6px 0}

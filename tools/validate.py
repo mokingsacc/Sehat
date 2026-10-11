@@ -10,7 +10,11 @@ ICONS = set("""clinic hospital car phone calendar clock moon family talk card ch
 baby newborn-warm cord breastfeed bowl-food cup-spoon ors zinc water handwash thermometer fever cough breathing-fast chest-indrawing no-drink vomit convulsion sleepy stool-blood eye-sunken skin-pinch growth muac swollen-feet milestones jaundice syringe drops pill rash toys-play
 pregnant bleeding headache eye-blurred belly-pain swelling baby-movement waters iron-pill birth-plan midwife rest food-iron sad
 heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood stiff-neck wound burn cool-water dog poison choking stove smoke salt walk sleep breathe people eye tooth animals milk insect""".split())
-TYPES = {"lead", "step", "alert", "dont", "tip", "link", "anim", "clinic"}
+TYPES = {"lead", "step", "alert", "dont", "tip", "link", "anim", "clinic", "belief"}
+# "belief": a "what is true" box on the Food that helps pages (docs/CONTENT_SPEC.md): level helps (proven to help), unproven
+# (not proven, but harmless) or harm (can harm); its items are spoken one by one like danger signs
+BELIEF_LEVELS = ("helps", "unproven", "harm")
+belief_used = set()
 # "clinic": what the clinic or the hospital actually does for this problem (title "At the clinic: ..." / "At the hospital: ...", and a text)
 # "link" blocks open another screen of the app: a tool, a topic, the home kit, the family record, the clinic finder,
 # "What is wrong?" (ask) or the Emergency screen; urgent: true draws it as a red row (the Home tab's way to the Health side)
@@ -90,7 +94,9 @@ def check_topic(f, d):
     if d.get("section") not in SECTIONS: err(f, f"section must be one of {sorted(SECTIONS)}")
     check_L(f, "title", d.get("title"), 6)
     check_L(f, "summary", d.get("summary"), 12)
-    if d.get("image") != tid: warn(f, "image should equal the topic id")
+    # "image": the topic id (its own picture), or another topic's picture that already exists (no new drawing needed)
+    if d.get("image") != tid and not (ID_RE.match(str(d.get("image", ""))) and os.path.exists(os.path.join(ROOT, "img/topics", str(d.get("image")) + ".svg"))):
+        warn(f, "image should equal the topic id, or name an existing picture in img/topics")
     blocks = d.get("blocks")
     if not isinstance(blocks, list) or not blocks: err(f, "blocks missing"); return
     if blocks[0].get("type") != "lead": err(f, "first block must be the lead")
@@ -120,16 +126,22 @@ def check_topic(f, d):
         if t in ("step", "link") and b.get("picture") is not None:
             if not ID_RE.match(str(b["picture"])) or not os.path.exists(os.path.join(ROOT, "img/pics", str(b["picture"]) + ".svg")):
                 err(f, f"{w}: picture img/pics/{b['picture']}.svg not found")
-        elif t in ("alert", "dont"):
+        elif t in ("alert", "dont", "belief"):
             if t == "alert" and b.get("level") not in ("urgent", "soon"): err(f, f"{w}: level must be urgent or soon")
-            check_L(f, w + ".title", b.get("title"), 16)
+            if t == "belief":
+                if b.get("level") not in BELIEF_LEVELS: err(f, f"{w}: level must be one of {', '.join(BELIEF_LEVELS)}")
+                else: belief_used.add(b["level"])
+                # the heading is the shared line for the level (ui.beliefHelps ...) unless the block has its own title
+                if b.get("title") is not None: check_L(f, w + ".title", b.get("title"), 7)
+            else: check_L(f, w + ".title", b.get("title"), 16)
             items = b.get("items")
             if not isinstance(items, list) or not items: err(f, f"{w}: items missing"); continue
             for m, it in enumerate(items):
                 iw = f"{w}.items[{m}]"
                 reg_id(f, it.get("id"), iw)
                 if isinstance(it.get("id"), str) and not it["id"].startswith(b.get("id", "") + "."): err(f, f"{iw}: id must start with '{b.get('id')}.'")
-                check_icon(f, iw, it.get("icon")); check_L(f, iw + ".text", it.get("text"), 14)
+                check_icon(f, iw, it.get("icon")); check_L(f, iw + ".text", it.get("text"), 26 if t == "belief" else 14)
+                if t == "belief" and isinstance(it.get("text"), dict) and len(re.findall(r"[.!?](\s|$)", it["text"].get("en", ""))) > 2: warn(f, f"{iw}.en: more than 2 sentences")
     if counts.get("anim", 0) > 2: warn(f, f"{counts['anim']} animations (aim for at most 2 per topic)")
     if counts.get("lead", 0) != 1: err(f, "exactly one lead block")
     lo = 1 if counts.get("alert", 0) else 2  # a reading page (what a number means) is one step and its alert boxes
@@ -299,7 +311,7 @@ def check_anims_and_lists():
             try: td = json.load(open(os.path.join(ROOT, "content/src/topics", t + ".json"), encoding="utf-8"))
             except Exception: continue
             for b in td.get("blocks", []):
-                if b.get("type") in ("alert", "clinic"): err(f"content/src/topics/{t}.json", f"{b.get('id')}: the Home tab ({k}) gives no medical advice: no '{b['type']}' blocks; link to the Health page instead")
+                if b.get("type") in ("alert", "clinic", "belief"): err(f"content/src/topics/{t}.json", f"{b.get('id')}: the Home tab ({k}) gives no medical advice: no '{b['type']}' blocks; link to the Health page instead")
     fa = cfg.get("firstAid")
     if fa is not None:
         if fa.get("title") not in ui["text"] or fa.get("sub") not in ui["text"]: err(fu, "firstAid: title and sub must be ui.text keys")
@@ -311,6 +323,11 @@ def check_anims_and_lists():
             if k not in ui["text"]: err(fu, f"text.{k} missing (the CPR and first aid screen needs it)")
         for k in ("ui.cprWho", "ui.firstAidAll") + tuple("ui." + a.get("label", "") for a in cfg.get("emergency") or []):
             if k not in ui["say"]: err(fu, f"say.{k} missing (the CPR and first aid screen needs it)")
+    # the "what is true" boxes: one shared heading per level, written once in ui.json (text) and spoken once (say)
+    for lv in sorted(belief_used):
+        k = "belief" + lv.capitalize()
+        if k not in ui["text"]: err(fu, f"text.{k} missing (the heading of a '{lv}' belief box)")
+        if "ui." + k not in ui["say"]: err(fu, f"say.ui.{k} missing (the spoken heading of a '{lv}' belief box)")
     sc = cfg.get("shareCard")
     if sc is not None and not (str(sc.get("href", "")).startswith("#/") and sc.get("title") and sc.get("say")): err(fc, "shareCard: needs href (#/...), title and say")
     # the Children and Adults screens: groups in order

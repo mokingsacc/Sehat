@@ -311,6 +311,22 @@
         "ps": "د بلې امیندوارۍ نه مخکې لږ تر لږه ۲ کاله صبر د مور او ماشوم روغتیا لپاره ښه دی. کلینیک د زېږونونو ترمنځ د واټن په اړه مشوره درکوي.",
         "en": "Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births."
       }
+    },
+    {
+      "id": "after-birth.food-after-birth",
+      "type": "link",
+      "to": "topic/food-after-birth",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "بعد از ولادت: غذای مادر",
+        "ps": "له زېږون وروسته: د مور خواړه",
+        "en": "After the birth: the mother's food"
+      },
+      "text": {
+        "fa": "چهل روز: غذای بیشتر، نوشیدنی زیاد، و همه غذاهای صحی.",
+        "ps": "څلوېښت ورځې: ډېر خواړه، ډېر څښاک، او ټول روغ خواړه.",
+        "en": "The 40 days: more food, plenty to drink, and all healthy foods."
+      }
     }
   ],
   "sources": [

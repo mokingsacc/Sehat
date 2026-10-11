@@ -133,6 +133,22 @@
     "checks-women",
     "checks-men"
   ],
+  "food-help": [
+    "food-help",
+    "food-diarrhoea",
+    "food-cough",
+    "food-anaemia",
+    "food-pregnancy",
+    "food-after-birth",
+    "food-baby",
+    "food-sick-child",
+    "food-belly",
+    "food-diabetes",
+    "food-bp",
+    "food-eyes",
+    "food-iodine",
+    "food-bones"
+  ],
   "food": [
     "kitchen-garden",
     "garden-water",

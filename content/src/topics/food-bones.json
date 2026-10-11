@@ -1,0 +1,256 @@
+{
+  "id": "food-bones",
+  "section": "children",
+  "title": {
+    "fa": "استخوان و دندان قوی",
+    "ps": "پیاوړي هډوکي او غاښونه",
+    "en": "Strong bones and teeth"
+  },
+  "summary": {
+    "fa": "غذای شیری، آفتاب بر پوست، و شکر کمتر.",
+    "ps": "د شیدو خواړه، پر پوستکي لمر، او لږه بوره.",
+    "en": "Milk foods, sun on the skin, and less sugar."
+  },
+  "image": "goats-sheep",
+  "blocks": [
+    {
+      "id": "food-bones.lead",
+      "type": "lead",
+      "text": {
+        "fa": "استخوان و دندان از غذای شیری، آفتاب بر پوست و دندان پاک ساخته می‌شود. اطفال، زنان حامله و پیرها بیشتر از همه این‌ها را لازم دارند.",
+        "ps": "هډوکي او غاښونه د شیدو له خوړو، پر پوستکي له لمر او پاکو غاښونو جوړېږي. ماشومان، امیندوارې ښځې او زاړه خلک ورته تر ټولو ډېره اړتیا لري.",
+        "en": "Bones and teeth are built from milk foods, sun on the skin and clean teeth. Children, pregnant women and old people need them most."
+      }
+    },
+    {
+      "id": "food-bones.milk",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "غذای شیری هر روز",
+        "ps": "هره ورځ د شیدو خواړه",
+        "en": "Milk foods every day"
+      },
+      "text": {
+        "fa": "به اطفال و مادران هر روز شیر جوشیده، ماست، دوغ یا چکه بدهید. شیر را اول بجوشانید.",
+        "ps": "ماشومانو او میندو ته هره ورځ ایشول شوې شیدې، مستې، شلومبې یا چکه ورکړئ. شیدې لومړی وایشوئ.",
+        "en": "Give children and mothers boiled milk, yoghurt, doogh or chaka every day. Boil the milk first."
+      }
+    },
+    {
+      "id": "food-bones.greens",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "سبزی و لوبیا هم کمک می‌کند",
+        "ps": "سبزي او لوبیا هم مرسته کوي",
+        "en": "Greens and beans help too"
+      },
+      "text": {
+        "fa": "سبزی‌های سبز تیره، لوبیا و نخود هم به ساختن استخوان کمک می‌کند. قروت هم کلسیم دارد، اما شور است، پس فقط کمی.",
+        "ps": "تکې شنې پاڼې، لوبیا او نخود هم د هډوکو په جوړولو کې مرسته کوي. قروت هم کلسیم لري، خو مالګین دی، نو یوازې لږ.",
+        "en": "Dark green leaves, beans and chickpeas also help build bone. Qurut has calcium too, but it is salty, so only a little."
+      }
+    },
+    {
+      "id": "food-bones.sun",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "آفتاب بر پوست",
+        "ps": "پر پوستکي لمر",
+        "en": "Sun on the skin"
+      },
+      "text": {
+        "fa": "آفتاب در پوست ویتامین دی می‌سازد که استخوان آن را لازم دارد. بیشتر روزها در حویلی در آفتاب بنشینید، با روی و دست‌های باز، اما نه در گرمی چاشت تابستان.",
+        "ps": "لمر په پوستکي کې ویټامین ډي جوړوي، او هډوکي ورته اړتیا لري. ډېری ورځې په انګړ کې په لمر کې کېنئ، مخ او لاسونه مو لوڅ وي، خو د اوړي د غرمې په ګرمۍ کې نه.",
+        "en": "The sun makes vitamin D in the skin, and bones need it. Sit in the sun in the yard most days, face and hands uncovered, but not in summer midday heat."
+      }
+    },
+    {
+      "id": "food-bones.teeth",
+      "type": "step",
+      "icon": "tooth",
+      "title": {
+        "fa": "شکر کمتر، دندان پاک",
+        "ps": "لږه بوره، پاک غاښونه",
+        "en": "Less sugar, clean teeth"
+      },
+      "text": {
+        "fa": "شیرینی، بیسکویت و چای شیرین دندان را خراب می‌کند. روزی دو بار دندان را پاک کنید، و هرگز طفل را با بوتل چای شیرین نخوابانید.",
+        "ps": "خواږه، بسکیټ او خوږ چای غاښونه خرابوي. په ورځ کې دوه ځله غاښونه پاک کړئ، او هېڅکله ماشوم د خوږ چای له بوتل سره مه ویده کوئ.",
+        "en": "Sweets, biscuits and sweet tea rot the teeth. Clean teeth twice a day, and never put a baby to sleep with a bottle of sweet tea."
+      }
+    },
+    {
+      "id": "food-bones.calcium",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "تابلیت کلسیم در حاملگی",
+        "ps": "په امیندوارۍ کې د کلسیم ګولۍ",
+        "en": "Calcium tablets in pregnancy"
+      },
+      "text": {
+        "fa": "اگر کلینیک در حاملگی تابلیت کلسیم داد، آن را در وقتی جدا از آهن بخورید.",
+        "ps": "که کلینیک په امیندوارۍ کې د کلسیم ګولۍ درکړې، د اوسپنې څخه په جلا وخت یې وخورئ.",
+        "en": "If the clinic gives calcium tablets in pregnancy, take them, at a different time from the iron."
+      }
+    },
+    {
+      "id": "food-bones.soon",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "اگر این را دیدید، همین هفته به کلینیک بروید:",
+        "ps": "که دا مو ولیدل، همدا اونۍ کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic this week if you see:"
+      },
+      "items": [
+        {
+          "id": "food-bones.soon.legs",
+          "icon": "milestones",
+          "text": {
+            "fa": "طفلی که پاهایش کج می‌شود، یا بند دستش ضخیم است",
+            "ps": "هغه ماشوم چې پښې یې کږېږي، یا مړوند یې پنډ دی",
+            "en": "a child whose legs are bowing, or whose wrists are thick"
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bones.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-bones.helps.milk",
+          "icon": "milk",
+          "text": {
+            "fa": "شیر و ماست استخوان را قوی می‌سازد: درست است، از شیر جوشیده.",
+            "ps": "شیدې او مستې هډوکي پیاوړي کوي: سمه ده، له ایشول شوو شیدو.",
+            "en": "Milk and yoghurt build strong bones: true, from boiled milk."
+          }
+        },
+        {
+          "id": "food-bones.helps.sun",
+          "icon": "calendar",
+          "text": {
+            "fa": "آفتاب به استخوان کمک می‌کند: درست است. استخوان هم آفتاب و هم غذا لازم دارد.",
+            "ps": "لمر له هډوکو سره مرسته کوي: سمه ده. هډوکي هم لمر او هم خوړو ته اړتیا لري.",
+            "en": "The sun helps bones: true. Bones need the sun as well as food."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bones.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-bones.unproven.bone-soup",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "یخنی غذای خوب است، اما به استخوان کلسیم کم می‌دهد.",
+            "ps": "یخني ښه خواړه دي، خو هډوکو ته لږ کلسیم ورکوي.",
+            "en": "Yakhni (bone soup) is good food, but it gives the bones little calcium."
+          }
+        },
+        {
+          "id": "food-bones.unproven.tooth-baby",
+          "icon": "tooth",
+          "text": {
+            "fa": "«هر طفل یک دندان مادر را می‌گیرد» درست نیست. دندان از شکر و میکروب خراب می‌شود؛ آن را پاک کنید و غذای شیری بخورید.",
+            "ps": "«هر ماشوم د مور یو غاښ اخلي» سمه نه ده. غاښونه له بورې او میکروبونو خرابېږي؛ پاک یې کړئ او د شیدو خواړه وخورئ.",
+            "en": "\"Each baby costs the mother a tooth\" is not true. Teeth are lost to sugar and germs; clean them, and eat milk foods."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bones.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-bones.harm.indoors",
+          "icon": "house",
+          "text": {
+            "fa": "نگه داشتن اطفال در خانه، دور از آفتاب، در تمام سال: استخوان‌شان نرم می‌شود و پاهای‌شان کج شده می‌تواند.",
+            "ps": "ماشومان ټول کال په کور کې، له لمر لرې ساتل: هډوکي یې نرمېږي او پښې یې کږې کېدای شي.",
+            "en": "Keeping children indoors, out of the sun, all year: their bones grow soft and their legs can bend."
+          }
+        },
+        {
+          "id": "food-bones.harm.raw-milk",
+          "icon": "milk",
+          "text": {
+            "fa": "شیر خام، یا پنیر تازه که از شیر خام ساخته شده: می‌تواند تب مالت بیاورد.",
+            "ps": "اومې شیدې، یا له اومو شیدو جوړ تازه پنیر: د مالټا تبه راوستلای شي.",
+            "en": "Raw milk, or fresh cheese made from raw milk: it can give Malta fever."
+          }
+        },
+        {
+          "id": "food-bones.harm.winter",
+          "icon": "no",
+          "text": {
+            "fa": "قطع شیر و ماست در زمستان چون «سرد» است: استخوان در تمام سال آن را لازم دارد.",
+            "ps": "په ژمي کې د شیدو او مستو پرېښودل ځکه چې «سړې» دي: هډوکي ټول کال ورته اړتیا لري.",
+            "en": "Stopping milk and yoghurt in winter because they are \"sard\": bones need them all year."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-bones.dental",
+      "type": "link",
+      "to": "topic/dental",
+      "icon": "tooth",
+      "title": {
+        "fa": "دندان و دندان‌درد",
+        "ps": "غاښونه او د غاښ درد",
+        "en": "Teeth and toothache"
+      },
+      "text": {
+        "fa": "پاک کردن دندان، و وقتی که دندان کلینیک لازم دارد.",
+        "ps": "د غاښونو پاکول، او کله چې غاښ کلینیک ته اړتیا لري.",
+        "en": "Cleaning teeth, and when a tooth needs the clinic."
+      }
+    },
+    {
+      "id": "food-bones.goats",
+      "type": "link",
+      "to": "topic/goats-sheep",
+      "icon": "milk",
+      "title": {
+        "fa": "بز و گوسفند در خانه",
+        "ps": "په کور کې وزې او پسونه",
+        "en": "Goats and sheep at home"
+      },
+      "text": {
+        "fa": "شیر را بجوشانید، و فامیل را از مریضی‌های حیوانات حفاظت کنید.",
+        "ps": "شیدې وایشوئ، او کورنۍ د څارویو له ناروغیو وساتئ.",
+        "en": "Boil the milk, and keep the family safe from the animals' illnesses."
+      }
+    }
+  ],
+  "sources": [
+    "WHO/FAO: vitamin and mineral requirements in human nutrition (2004): calcium and vitamin D, sunlight",
+    "WHO recommendations on antenatal care for a positive pregnancy experience (2016): calcium where intake is low",
+    "Holick, New England Journal of Medicine 2007: vitamin D deficiency",
+    "WHO Oral health fact sheet; WHO guideline: sugars intake (2015)",
+    "Afghanistan National Nutrition Survey 2013: vitamin D deficiency",
+    "WHO Brucellosis fact sheet"
+  ],
+  "review": [
+    "Sun: no minutes and no baby-sun advice (Mo's call 8, conservative: no WHO number; AAP keeps babies under 6 months out of strong sun). No vitamin D drops.",
+    "Sesame and almonds left out (Mo's call 19); dairy, greens and beans only. '2 cups a day' left out (no WHO figure).",
+    "New amber item food-bones.soon.legs (Mo's call 14): bowing legs or thick wrists (rickets), clinic this week; slow to sit or walk stays on growth.soon.milestones.",
+    "Calcium tablets 'if the clinic gives them' (no 'free'). Teeth lines live on dental.sugar and dental.baby (short here)."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Pashto مړوند (wrist), انګړ (yard), Dari حویلی: native check."
+  ]
+}

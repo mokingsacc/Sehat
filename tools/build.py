@@ -45,8 +45,9 @@ districts = load(J("content/src/districts.json")) if os.path.exists(J("content/s
 def exists(rel): return os.path.exists(J(rel))
 
 # images: fall back to generic pictures when a topic picture is missing
-def topic_image(tid, section):
-    for cand in (f"img/topics/{tid}.svg", f"img/topics/{'children' if section == 'children' else 'adults'}-generic.svg"):
+def topic_image(tid, section, image=None):
+    # its own picture, else the existing picture it names ("image": another topic's id), else the general picture
+    for cand in (f"img/topics/{tid}.svg", *([f"img/topics/{image}.svg"] if image and image != tid else []), f"img/topics/{'children' if section == 'children' else 'adults'}-generic.svg"):
         if exists(cand): return cand
     return "img/app/placeholder.svg"
 
@@ -100,7 +101,7 @@ for f in facilities.get("facilities") or []:
 out_topics = {}
 for tid, t in topics.items():
     t = dict(t)
-    t["image"] = topic_image(tid, t.get("section"))
+    t["image"] = topic_image(tid, t.get("section"), t.get("image"))
     say(f"{tid}.title", t["title"])
     # the one-line summary: the finder's result cards read the title, then this line
     if t.get("summary"): say(f"{tid}.summary", t["summary"])
@@ -118,8 +119,9 @@ for tid, t in topics.items():
             # the block's speaker reads only its title (default: the animation's own title, anim.<name>.title);
             # the scenes are read by the player
             if b.get("title"): say(b["id"], b["title"])
-        elif ty in ("alert", "dont"):
-            say(b["id"], b["title"])
+        elif ty in ("alert", "dont", "belief"):
+            # a belief box without its own title is headed by the shared line for its level (ui.beliefHelps ...)
+            if b.get("title"): say(b["id"], b["title"])
             for it in b["items"]:
                 if it.get("icon"): it["icon"] = icon(it["icon"])
                 say(it["id"], it["text"])

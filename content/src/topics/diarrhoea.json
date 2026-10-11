@@ -324,6 +324,22 @@
         "ps": "که ماشوم کانګې وکړې، ۱۰ دقیقې انتظار وباسئ. بیا بېرته او آر اس ورکړئ، خو ورو ورو.",
         "en": "If the child vomits, wait 10 minutes. Then give ORS again, but more slowly."
       }
+    },
+    {
+      "id": "diarrhoea.food-diarrhoea",
+      "type": "link",
+      "to": "topic/food-diarrhoea",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "اسهال: چه بخوریم و چه بنوشیم",
+        "ps": "نس ناستی: څه وخورو او څه وڅښو",
+        "en": "Diarrhoea: what to eat and drink"
+      },
+      "text": {
+        "fa": "او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.",
+        "ps": "او آر اس، کورني څښاکونه او نرم خواړه: څه مرسته کوي او څه زیان لري.",
+        "en": "ORS, home drinks and soft food: what helps, and what harms."
+      }
     }
   ],
   "sources": [

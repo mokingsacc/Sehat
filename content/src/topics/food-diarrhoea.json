@@ -1,0 +1,264 @@
+{
+  "id": "food-diarrhoea",
+  "section": "children",
+  "title": {
+    "fa": "اسهال: چه بخوریم و چه بنوشیم",
+    "ps": "نس ناستی: څه وخورو او څه وڅښو",
+    "en": "Diarrhoea: what to eat and drink"
+  },
+  "summary": {
+    "fa": "او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.",
+    "ps": "او آر اس، کورني څښاکونه او نرم خواړه: څه مرسته کوي او څه زیان لري.",
+    "en": "ORS, home drinks and soft food: what helps, and what harms."
+  },
+  "image": "diarrhoea",
+  "blocks": [
+    {
+      "id": "food-diarrhoea.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در اسهال بدن زود آب و نمک از دست می‌دهد. نوشیدنی و غذا را ادامه دهید: برای طفل و برای کلان، دوا همین است.",
+        "ps": "په نس ناستي کې بدن ژر اوبه او مالګه له لاسه ورکوي. څښاک او خواړو ته دوام ورکړئ: د ماشوم او لوی دواړو لپاره درمل همدا دي.",
+        "en": "In diarrhoea the body loses water and salt fast. Keep giving drinks and food: for a child and for an adult, this is the medicine."
+      }
+    },
+    {
+      "id": "food-diarrhoea.ors",
+      "type": "step",
+      "icon": "ors",
+      "title": {
+        "fa": "اول او آر اس، بعد از هر اسهال",
+        "ps": "لومړی او آر اس، د هر نس ناستي وروسته",
+        "en": "ORS first, after every loose stool"
+      },
+      "text": {
+        "fa": "او آر اس بهترین نوشیدنی برای اسهال است. بعد از هر اسهال کم‌کم بدهید؛ مقدار آن در صفحهٔ اسهال است.",
+        "ps": "او آر اس د نس ناستي لپاره تر ټولو ښه څښاک دی. د هر نس ناستي وروسته یې لږ لږ ورکړئ؛ څومره چې ورکړئ، د نس ناستي په پاڼه کې دي.",
+        "en": "ORS is the best drink for diarrhoea. Give it in small sips after every loose stool; how much to give is on the Diarrhoea page."
+      }
+    },
+    {
+      "id": "food-diarrhoea.home-drinks",
+      "type": "step",
+      "icon": "cup-spoon",
+      "title": {
+        "fa": "نوشیدنی‌های خانگی که کمک می‌کند",
+        "ps": "کورني څښاکونه چې مرسته کوي",
+        "en": "Home drinks that also help"
+      },
+      "text": {
+        "fa": "آب برنج، شوربای رقیق با کمی نمک، دوغی که از شیر جوشیده ساخته شده، و آب پاک همه کمک می‌کند. هر قدر که بنوشد، بدهید.",
+        "ps": "د وریجو اوبه، نری ښوروا له لږې مالګې سره، له ایشول شوو شیدو جوړه شلومبې، او پاکې اوبه ټول مرسته کوي. هر څومره چې وڅښي، ورکړئ.",
+        "en": "Rice water, thin soup with a pinch of salt, doogh made from boiled milk, and clean water all help. Give as much as the person will take."
+      }
+    },
+    {
+      "id": "food-diarrhoea.breast",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "بیشتر شیر بدهید، نه کمتر",
+        "ps": "ډېر تی ورکړئ، نه لږ",
+        "en": "Breastfeed more, not less"
+      },
+      "text": {
+        "fa": "طفلی که شیر مادر می‌خورد، باید بیشتر و طولانی‌تر شیر بخورد. شیر مادر هم غذا است، هم آب و هم محافظت.",
+        "ps": "هغه ماشوم چې د مور شیدې خوري، باید ډېر ځله او ډېر وخت تی ورکړل شي. د مور شیدې خواړه، اوبه او ساتنه، ټول په یو کې دي.",
+        "en": "A breastfed child should feed more often and for longer. Breast milk is food, water and protection in one."
+      }
+    },
+    {
+      "id": "food-diarrhoea.meals",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذای نرم، کم و زیاد بار",
+        "ps": "نرم خواړه، لږ او ډېر ځله",
+        "en": "Soft food, small and often"
+      },
+      "text": {
+        "fa": "کچری، کچالوی پخته و کوبیده، برنج نرم با دال، ماست، کیله، یا نان تر شده در شوربا بدهید. وعده‌های کوچک، حدود ۶ بار در روز، با کمی روغن.",
+        "ps": "کچري، پاخه او میده کچالو، نرمې وریجې له دال سره، مستې، کېله، یا په ښوروا کې لنده ډوډۍ ورکړئ. کوچني وختونه، په ورځ کې شاوخوا ۶ ځله، له لږو غوړیو سره.",
+        "en": "Give kichri, mashed potato, soft rice with lentils, yoghurt, banana, or bread soaked in soup. Small meals, about 6 times a day, with a little oil."
+      }
+    },
+    {
+      "id": "food-diarrhoea.yoghurt",
+      "type": "step",
+      "icon": "milk",
+      "title": {
+        "fa": "اگر دوام کرد: ماست، نه شیر",
+        "ps": "که دوام یې وکړ: مستې، نه شیدې",
+        "en": "If it lasts: yoghurt, not milk"
+      },
+      "text": {
+        "fa": "اگر اسهال ۱۴ روز دوام کرد، به جای شیر تازهٔ حیوان ماست بدهید و طفل را به کلینیک ببرید. شیر مادر را ادامه دهید.",
+        "ps": "که نس ناستی ۱۴ ورځې دوام وکړي، د څارویو د تازه شیدو پر ځای مستې ورکړئ او ماشوم کلینیک ته یوسئ. تی ورکولو ته دوام ورکړئ.",
+        "en": "If diarrhoea lasts 14 days, give yoghurt in place of fresh animal milk, and take the child to the clinic. Keep breastfeeding."
+      }
+    },
+    {
+      "id": "food-diarrhoea.after",
+      "type": "step",
+      "icon": "calendar",
+      "title": {
+        "fa": "بعد از بند شدن: یک وعده غذای اضافه",
+        "ps": "له درېدو وروسته: یو وخت اضافه خواړه",
+        "en": "After it stops: one extra meal"
+      },
+      "text": {
+        "fa": "وقتی اسهال بند شد، حداقل دو هفته هر روز یک وعده غذای اضافه بدهید. این کار وزنی را که کم شده، دوباره می‌آورد.",
+        "ps": "کله چې نس ناستی ودرېږي، لږ تر لږه دوه اونۍ هره ورځ یو وخت اضافه خواړه ورکړئ. دا هغه وزن بېرته راولي چې کم شوی و.",
+        "en": "When the diarrhoea stops, give one extra meal every day for at least two weeks. This puts back the weight that was lost."
+      }
+    },
+    {
+      "id": "food-diarrhoea.zinc",
+      "type": "step",
+      "icon": "zinc",
+      "title": {
+        "fa": "زنک از کلینیک",
+        "ps": "زنک له کلینیک څخه",
+        "en": "Zinc from the clinic"
+      },
+      "text": {
+        "fa": "طفلی که اسهال دارد، ۱۴ روز زنک هم لازم دارد که از کلینیک یا پوستهٔ صحی می‌گیرید. زنک اسهال را کوتاه‌تر می‌کند.",
+        "ps": "هغه ماشوم چې نس ناستی لري، ۱۴ ورځې زنک ته هم اړتیا لري چې له کلینیک یا روغتیايي پوستې یې اخلئ. زنک نس ناستی لنډوي.",
+        "en": "A child with diarrhoea also needs zinc for 14 days, from the clinic or health post. It makes the diarrhoea shorter."
+      }
+    },
+    {
+      "id": "food-diarrhoea.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-diarrhoea.helps.doogh",
+          "icon": "milk",
+          "text": {
+            "fa": "دوغ و ماست در اسهال خوب است، به شرطی که شیر اول جوشانده شده باشد.",
+            "ps": "شلومبې او مستې په نس ناستي کې ښې دي، په دې شرط چې شیدې لومړی ایشول شوې وي.",
+            "en": "Doogh and yoghurt are good in diarrhoea, if the milk was boiled first."
+          }
+        },
+        {
+          "id": "food-diarrhoea.helps.soft",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "کیله، کچالوی جوشیده و کچری برای شکم نرم است و قوت می‌دهد.",
+            "ps": "کېله، ایشول شوي کچالو او کچري د ګېډې لپاره نرم دي او ځواک ورکوي.",
+            "en": "Banana, boiled potato and kichri are kind to the belly and give strength."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-diarrhoea.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-diarrhoea.unproven.yoghurt-cure",
+          "icon": "milk",
+          "text": {
+            "fa": "ماست به تنهایی اسهال را تداوی نمی‌کند، اما یکی از بهترین غذاها برای دادن است.",
+            "ps": "مستې پخپله نس ناستی نه جوړوي، خو د ورکولو لپاره له غوره خوړو څخه دي.",
+            "en": "Yoghurt does not cure diarrhoea by itself, but it is one of the best foods to give."
+          }
+        },
+        {
+          "id": "food-diarrhoea.unproven.peel",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "چای پوست انار یا بهی اسهال را بند نمی‌کند. کمی از آن به کلانی که او آر اس هم می‌نوشد ضرر ندارد؛ برای شیرخوار نه.",
+            "ps": "د انار د پوستکي چای یا بهي نس ناستی نه بندوي. لږ یې هغه لوی ته چې او آر اس هم څښي زیان نه لري؛ تي خوړونکي ماشوم ته نه.",
+            "en": "Pomegranate peel tea or quince does not stop diarrhoea. A little does no harm to an adult who also drinks ORS; not for babies."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-diarrhoea.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-diarrhoea.harm.stop-food",
+          "icon": "no",
+          "text": {
+            "fa": "بند کردن غذا، شیر یا شیر مادر «تا شکم آرام شود»: طفل ضعیف می‌شود و اسهال طولانی‌تر می‌شود.",
+            "ps": "د خوړو، شیدو یا تي بندول «چې ګېډه آرامه شي»: ماشوم کمزوری کېږي او نس ناستی اوږدېږي.",
+            "en": "Stopping food, milk or breastfeeding \"to rest the belly\": the child grows weak, and the diarrhoea lasts longer."
+          }
+        },
+        {
+          "id": "food-diarrhoea.harm.sweet",
+          "icon": "sugar",
+          "text": {
+            "fa": "فقط نوشیدنی‌های شیرین، مثل آب نبات، چای شیرین یا آب میوهٔ پاکتی: شکر زیاد اسهال را بدتر می‌کند.",
+            "ps": "یوازې خواږه څښاکونه، لکه د نبات اوبه، خوږ چای یا د پاکټ جوس: ډېره بوره نس ناستی بدتروي.",
+            "en": "Only sweet drinks, like nabat water, sweet tea or packet juice: too much sugar makes diarrhoea worse."
+          }
+        },
+        {
+          "id": "food-diarrhoea.harm.opium",
+          "icon": "poison",
+          "text": {
+            "fa": "تریاک یا دوای دکان برای بند کردن اسهال: می‌تواند نفس طفل را بند کند.",
+            "ps": "اپین یا د دوکان درمل د نس ناستي د بندولو لپاره: کولای شي د ماشوم ساه بنده کړي.",
+            "en": "Opium or shop medicine to stop diarrhoea: it can stop a child's breathing."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-diarrhoea.diarrhoea",
+      "type": "link",
+      "to": "topic/diarrhoea",
+      "icon": "ors",
+      "title": {
+        "fa": "مقدار او آر اس و علایم خطر",
+        "ps": "د او آر اس اندازه او د خطر نښې",
+        "en": "ORS amounts and danger signs"
+      },
+      "text": {
+        "fa": "چه قدر او آر اس و زنک به طفل بدهید، و علایمی که کلینیک یا شفاخانه لازم دارد.",
+        "ps": "ماشوم ته څومره او آر اس او زنک ورکړئ، او هغه نښې چې کلینیک یا روغتون ته اړتیا لري.",
+        "en": "How much ORS and zinc to give a child, and the signs that need the clinic or hospital."
+      }
+    },
+    {
+      "id": "food-diarrhoea.adult",
+      "type": "link",
+      "to": "topic/diarrhoea-adult",
+      "icon": "water",
+      "title": {
+        "fa": "اسهال در بزرگسالان",
+        "ps": "په لویانو کې نس ناستی",
+        "en": "Diarrhoea in adults"
+      },
+      "text": {
+        "fa": "او آر اس برای کلان‌ها، و علایم خشک شدن بدن که شفاخانه لازم دارد.",
+        "ps": "د لویانو لپاره او آر اس، او د بدن د وچېدو هغه نښې چې روغتون ته اړتیا لري.",
+        "en": "ORS for adults, and the signs of drying out that need the hospital."
+      }
+    }
+  ],
+  "sources": [
+    "WHO IMCI chart booklet (2014): Plan A, extra fluid and continued feeding",
+    "WHO: The treatment of diarrhoea, a manual for physicians and other senior health workers (2005): feeding during and after diarrhoea",
+    "WHO/UNICEF joint statement: clinical management of acute diarrhoea (2004)",
+    "Cochrane: oral zinc for treating diarrhoea in children (Lazzerini and Wanzira 2016)",
+    "Cochrane: probiotics for treating acute infectious diarrhoea (Collinson et al. 2020)",
+    "UNODC: drug use in Afghanistan, 2009 survey (2010), opium given to children"
+  ],
+  "review": [
+    "ORS amounts and zinc doses stay on diarrhoea.give and diarrhoea.zinc (lives once); this page links there.",
+    "'At least two weeks' for the extra meal (Mo's call 12): matches 'until fully well' and 'some weeks' elsewhere.",
+    "Pashto شلومبې for doogh, and Dari بهی for quince: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: diarrhoea.urgent, diarrhoea.soon, diarrhoea-adult.urgent and .soon, by link (lives once)."
+  ]
+}

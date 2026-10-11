@@ -129,6 +129,22 @@
       }
     },
     {
+      "id": "kitchen-garden.food-eyes",
+      "type": "link",
+      "to": "topic/food-eyes",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "ویتامین ای: غذا برای چشم",
+        "ps": "ویټامین اې: د سترګو لپاره خواړه",
+        "en": "Vitamin A: food for the eyes"
+      },
+      "text": {
+        "fa": "جگر، تخم مرغ، غذای نارنجی و سبز، و ویتامین ای هر ۶ ماه.",
+        "ps": "ځیګر، هګۍ، نارنجي او شنه خواړه، او هرو ۶ میاشتو کې ویټامین اې.",
+        "en": "Liver, eggs, orange and green foods, and vitamin A every 6 months."
+      }
+    },
+    {
       "id": "kitchen-garden.dont",
       "type": "dont",
       "title": {

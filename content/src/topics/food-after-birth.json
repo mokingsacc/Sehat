@@ -1,0 +1,258 @@
+{
+  "id": "food-after-birth",
+  "section": "women",
+  "title": {
+    "fa": "بعد از ولادت: غذای مادر",
+    "ps": "له زېږون وروسته: د مور خواړه",
+    "en": "After the birth: the mother's food"
+  },
+  "summary": {
+    "fa": "چهل روز: غذای بیشتر، نوشیدنی زیاد، و همه غذاهای صحی.",
+    "ps": "څلوېښت ورځې: ډېر خواړه، ډېر څښاک، او ټول روغ خواړه.",
+    "en": "The 40 days: more food, plenty to drink, and all healthy foods."
+  },
+  "image": "after-birth",
+  "blocks": [
+    {
+      "id": "food-after-birth.lead",
+      "type": "lead",
+      "text": {
+        "fa": "چهل روز بعد از ولادت برای جور شدن و برای ساختن شیر است. مادر از وقت حاملگی بیشتر غذا لازم دارد، نه کمتر، و نوشیدنی زیاد.",
+        "ps": "له زېږون وروسته څلوېښت ورځې د رغېدو او د شیدو د جوړېدو لپاره دي. مور تر امیندوارۍ ډېرو خوړو ته اړتیا لري، نه لږو، او ډېر څښاک ته.",
+        "en": "The 40 days after the birth are for healing and for making milk. A mother needs more food than in pregnancy, not less, and plenty to drink."
+      }
+    },
+    {
+      "id": "food-after-birth.two-meals",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "روزی دو وعده غذای اضافه",
+        "ps": "په ورځ کې دوه وخته اضافه خواړه",
+        "en": "Two extra meals a day"
+      },
+      "text": {
+        "fa": "مادر شیرده دو وعده غذا یا خوراک سبک بیشتر از معمول لازم دارد: نان با تخم مرغ، شوربا با مرغ یا گوشت، کچری با ماست، لوبیا، میوه.",
+        "ps": "تی ورکوونکې مور تر معمول دوه وخته خواړه یا سپک خوراک ډېر ته اړتیا لري: ډوډۍ له هګۍ سره، ښوروا له چرګ یا غوښې سره، کچري له مستو سره، لوبیا، مېوه.",
+        "en": "A breastfeeding mother needs two more meals or snacks than usual: bread with egg, soup with chicken or meat, kichri with yoghurt, beans, fruit."
+      }
+    },
+    {
+      "id": "food-after-birth.drink",
+      "type": "step",
+      "icon": "water",
+      "title": {
+        "fa": "در هر بار شیر دادن، بنوشید",
+        "ps": "په هر ځل تي ورکولو کې وڅښئ",
+        "en": "Drink at every feed"
+      },
+      "text": {
+        "fa": "هر بار که طفل شیر می‌خورد، یک گیلاس آب، دوغ یا شیر جوشیده بنوشید. وقتی تشنه هستید بنوشید؛ هیچ دلیلی برای کم نوشیدن نیست.",
+        "ps": "هر ځل چې ماشوم تی رودي، یو ګیلاس اوبه، شلومبې یا ایشول شوې شیدې وڅښئ. کله چې تږې یاست وڅښئ؛ د لږ څښلو هېڅ دلیل نشته.",
+        "en": "Drink a glass of water, doogh or boiled milk each time the baby feeds. Drink when thirsty; there is no reason to drink less."
+      }
+    },
+    {
+      "id": "food-after-birth.all-foods",
+      "type": "step",
+      "icon": "food-iron",
+      "title": {
+        "fa": "همه غذاهای صحی را می‌شود خورد",
+        "ps": "ټول روغ خواړه خوړل کېدای شي",
+        "en": "All healthy foods can be eaten"
+      },
+      "text": {
+        "fa": "سبزی، میوه، ماست، لوبیا و آب سرد به مادر یا شیر ضرر نمی‌رساند. آن‌ها را همراه غذاهای گرم بخورید؛ بدن به هر دو ضرورت دارد.",
+        "ps": "سبزي، مېوه، مستې، لوبیا او سړې اوبه مور یا شیدو ته زیان نه رسوي. له ګرمو خوړو سره یې وخورئ؛ بدن دواړو ته اړتیا لري.",
+        "en": "Vegetables, fruit, yoghurt, beans and cool water do not harm the mother or the milk. Eat them with the warm foods; the body needs both."
+      }
+    },
+    {
+      "id": "food-after-birth.more-milk",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "زیاد شیر دادن، شیر را زیاد می‌کند",
+        "ps": "ډېر تی ورکول ډېرې شیدې جوړوي",
+        "en": "Feeding often makes more milk"
+      },
+      "text": {
+        "fa": "شیر از مکیدن زیاد طفل، شب و روز، می‌آید. هیچ غذا یا گیاهی به اندازهٔ آن شیر نمی‌سازد.",
+        "ps": "شیدې د ماشوم له ډېر رودلو، شپه او ورځ، راځي. هېڅ خواړه یا بوټی دومره شیدې نه جوړوي.",
+        "en": "Milk comes from the baby sucking often, day and night. No food or herb makes as much milk as that."
+      }
+    },
+    {
+      "id": "food-after-birth.iron",
+      "type": "step",
+      "icon": "iron-pill",
+      "title": {
+        "fa": "تابلیت آهن برای ۳ ماه",
+        "ps": "د اوسپنې ګولۍ ۳ میاشتې",
+        "en": "Iron tablets for 3 months"
+      },
+      "text": {
+        "fa": "تابلیت آهن کلینیک را تا ۳ ماه بعد از ولادت ادامه دهید. خونی را که در ولادت از دست رفته، دوباره می‌سازد.",
+        "ps": "د کلینیک د اوسپنې ګولۍ له زېږون وروسته تر ۳ میاشتو دوام ورکړئ. هغه وینه بېرته جوړوي چې په زېږون کې له لاسه تللې.",
+        "en": "Keep taking the clinic's iron tablets for 3 months after the birth. They rebuild the blood lost at the birth."
+      }
+    },
+    {
+      "id": "food-after-birth.halwa",
+      "type": "step",
+      "icon": "sugar",
+      "title": {
+        "fa": "حلوا و روغن زرد: کم",
+        "ps": "حلوا او غوړي: لږ",
+        "en": "Halwa and ghee: a little"
+      },
+      "text": {
+        "fa": "حلوا و روغن زرد بعد از ولادت قوت می‌دهد. یک کاسهٔ کوچک خوب است، اما نباید جای تخم مرغ، گوشت، دال و سبزی را بگیرد.",
+        "ps": "حلوا او غوړي له زېږون وروسته ځواک ورکوي. یوه کوچنۍ کاسه ښه ده، خو باید د هګیو، غوښې، دال او سبزیو ځای ونه نیسي.",
+        "en": "Halwa and ghee give strength after the birth. A small bowl is fine, but they should not take the place of eggs, meat, lentils and vegetables."
+      }
+    },
+    {
+      "id": "food-after-birth.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-after-birth.helps.soup",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "شوربای مرغ یا گوشت با سبزی بعد از ولادت غذای خوب است: درست است.",
+            "ps": "د چرګ یا غوښې ښوروا له سبزیو سره له زېږون وروسته ښه خواړه دي: سمه ده.",
+            "en": "Chicken or meat soup with vegetables is a good food after the birth: true."
+          }
+        },
+        {
+          "id": "food-after-birth.helps.eggs",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "تخم مرغ، ماست و لوبیا به مادر نو قوت می‌دهد: درست است.",
+            "ps": "هګۍ، مستې او لوبیا نوې مور ته ځواک ورکوي: سمه ده.",
+            "en": "Eggs, yoghurt and beans give a new mother strength: true."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-after-birth.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-after-birth.unproven.herbs-milk",
+          "icon": "cup-spoon",
+          "text": {
+            "fa": "ثابت نشده که حلبه، بادیان یا گیاهان دیگر شیر را زیاد کند. در غذا ضرر ندارد؛ آنچه کار می‌کند مکیدن طفل است.",
+            "ps": "ثابته نه ده چې حلبه، بادیان یا نور بوټي شیدې زیاتې کړي. په خوړو کې زیان نه لري؛ هغه څه چې کار کوي د ماشوم رودل دي.",
+            "en": "Fenugreek, fennel or other herbs to make milk are not proven. They do no harm in food; the baby's sucking is what works."
+          }
+        },
+        {
+          "id": "food-after-birth.unproven.wind",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "«لوبیا طفل را باد می‌کند» ثابت نشده. اگر غذایی طفل را ناراحت کرد، یک هفته نخورید، بعد دوباره امتحان کنید.",
+            "ps": "«لوبیا ماشوم ته باد ورکوي» ثابته نه ده. که کوم خواړه ماشوم ناآرامه کړي، یوه اونۍ یې مه خورئ، بیا یې وازمایئ.",
+            "en": "\"Beans give the baby wind\" is not proven. If a food seems to upset the baby, leave it a week, then try again."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-after-birth.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-after-birth.harm.bread-tea",
+          "icon": "no",
+          "text": {
+            "fa": "چهل روز فقط نان، چای، روغن زرد و حلوا: مادر کم‌خون و قبض می‌شود.",
+            "ps": "څلوېښت ورځې یوازې ډوډۍ، چای، غوړي او حلوا: مور د وینې کمښت او قبضیت پیدا کوي.",
+            "en": "Forty days of only bread, tea, ghee and halwa: the mother gets weak blood and hard stools."
+          }
+        },
+        {
+          "id": "food-after-birth.harm.little-water",
+          "icon": "no-drink",
+          "text": {
+            "fa": "کم نوشیدن آب بعد از ولادت: قبضیت، عفونت ادرار و مادر خسته.",
+            "ps": "له زېږون وروسته لږې اوبه څښل: قبضیت، د متیازو انتان او ستړې مور.",
+            "en": "Drinking little water after the birth: hard stools, urine infection and a tired mother."
+          }
+        },
+        {
+          "id": "food-after-birth.harm.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "خاکشیر، دم‌کردهٔ گیاهی یا تعویذگر برای خونریزی زیاد: خونریزی زیاد همین حالا شفاخانه لازم دارد.",
+            "ps": "خاکشیر، د بوټو څښاک یا تعویذګر د ډېرې وینې بهېدو لپاره: ډېره وینه بهېدل همدا اوس روغتون ته اړتیا لري.",
+            "en": "Khak-e-shir, herb drinks or a healer for heavy bleeding: heavy bleeding needs the hospital now."
+          }
+        },
+        {
+          "id": "food-after-birth.harm.opium",
+          "icon": "poison",
+          "text": {
+            "fa": "تریاک برای درد یا خواب مادر: از راه شیر به طفل می‌رسد.",
+            "ps": "اپین د مور د درد یا خوب لپاره: د شیدو له لارې ماشوم ته رسېږي.",
+            "en": "Opium for the mother's pain or sleep: it passes to the baby through the milk."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-after-birth.after-birth",
+      "type": "link",
+      "to": "topic/after-birth",
+      "icon": "warning",
+      "title": {
+        "fa": "بعد از ولادت: علایم خطر",
+        "ps": "له زېږون وروسته: د خطر نښې",
+        "en": "After the birth: danger signs"
+      },
+      "text": {
+        "fa": "خونریزی زیاد، تب و علایم دیگری که شفاخانه لازم دارد، و معاینه‌ها.",
+        "ps": "ډېره وینه بهېدل، تبه او نورې هغه نښې چې روغتون ته اړتیا لري، او معاینې.",
+        "en": "Heavy bleeding, fever and the other signs that need the hospital, and the check-ups."
+      }
+    },
+    {
+      "id": "food-after-birth.breastfeeding",
+      "type": "link",
+      "to": "topic/breastfeeding",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیر مادر و غذای طفل",
+        "ps": "د مور شیدې او د ماشوم خواړه",
+        "en": "Breastfeeding and food"
+      },
+      "text": {
+        "fa": "شیر دادن در شب و روز، کمک به طفل تا خوب سینه را بگیرد، و کمک گرفتن.",
+        "ps": "شپه او ورځ تی ورکول، له ماشوم سره مرسته چې تی ښه ونیسي، او مرسته غوښتل.",
+        "en": "Feeding day and night, helping the baby attach well, and getting help."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Pregnancy, Childbirth, Postpartum and Newborn Care (PCPNC, 2015): care of the mother after birth",
+    "WHO recommendations on maternal and newborn care for a positive postnatal experience (2022)",
+    "UNICEF Community infant and young child feeding counselling package: women's nutrition (two extra meals while breastfeeding)",
+    "Cochrane: oral galactagogues (Foong et al. 2020); extra fluids for breastfeeding mothers (Ndikom et al. 2014)",
+    "WHO IYCF fact sheet: feed on demand, day and night",
+    "Minnesota Department of Health: Afghan health and cultural profile (2022), the 40 days"
+  ],
+  "review": [
+    "'Two extra meals or snacks' (UNICEF C-IYCF); after-birth.rest-food keeps 'eat more than usual' (lives once).",
+    "Feeding times (8 to 12 a day) live on breastfeeding.often; this page does not repeat the number.",
+    "Fenugreek حلبه and fennel بادیان in both languages: native check (Afghan Dari may say میتی for fenugreek)."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: after-birth.urgent and .soon, by link."
+  ]
+}

@@ -160,6 +160,15 @@
             "ps": "د تشو متیازو پر وخت سوځېدل",
             "en": "Burning when passing urine"
           }
+        },
+        {
+          "id": "pregnancy-danger.soon.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "استفراغ تمام روز، و آب هم در شکم نمی‌ماند",
+            "ps": "ټوله ورځ کانګې، او اوبه هم په ګېډه کې نه پاتې کېږي",
+            "en": "Vomiting all day, and cannot keep water down"
+          }
         }
       ]
     },

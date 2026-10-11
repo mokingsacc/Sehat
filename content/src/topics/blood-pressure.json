@@ -196,6 +196,22 @@
           }
         }
       ]
+    },
+    {
+      "id": "blood-pressure.food-bp",
+      "type": "link",
+      "to": "topic/food-bp",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "فشار خون: چه بخوریم",
+        "ps": "د وینې فشار: څه وخورو",
+        "en": "Blood pressure: what to eat"
+      },
+      "text": {
+        "fa": "کمتر از یک قاشق چای‌خوری نمک در روز، سبزی، و تابلیت.",
+        "ps": "په ورځ کې له یوې د چای کاشوغې کمه مالګه، سبزي، او ګولۍ.",
+        "en": "Under a teaspoon of salt a day, vegetables, and the tablet."
+      }
     }
   ],
   "sources": [

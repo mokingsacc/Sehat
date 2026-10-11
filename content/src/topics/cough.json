@@ -327,6 +327,22 @@
           }
         }
       ]
+    },
+    {
+      "id": "cough.food-cough",
+      "type": "link",
+      "to": "topic/food-cough",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "سرفه و زکام: غذا و نوشیدنی",
+        "ps": "ټوخی او زکام: خواړه او څښاک",
+        "en": "Cough and cold: food and drinks"
+      },
+      "text": {
+        "fa": "نوشیدنی گرم، عسل از ۱ سالگی، و غذایی که قوت را نگه می‌دارد.",
+        "ps": "تود څښاک، شات له ۱ کلنۍ، او هغه خواړه چې ځواک ساتي.",
+        "en": "Warm drinks, honey from age 1, and food that keeps strength."
+      }
     }
   ],
   "sources": [

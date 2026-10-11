@@ -297,6 +297,22 @@
         "ps": "په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې لري.",
         "en": "Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them."
       }
+    },
+    {
+      "id": "diarrhoea-adult.food-diarrhoea",
+      "type": "link",
+      "to": "topic/food-diarrhoea",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "اسهال: چه بخوریم و چه بنوشیم",
+        "ps": "نس ناستی: څه وخورو او څه وڅښو",
+        "en": "Diarrhoea: what to eat and drink"
+      },
+      "text": {
+        "fa": "او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.",
+        "ps": "او آر اس، کورني څښاکونه او نرم خواړه: څه مرسته کوي او څه زیان لري.",
+        "en": "ORS, home drinks and soft food: what helps, and what harms."
+      }
     }
   ],
   "sources": [

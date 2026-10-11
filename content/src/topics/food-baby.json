@@ -1,0 +1,246 @@
+{
+  "id": "food-baby",
+  "section": "children",
+  "title": {
+    "fa": "شیر اول و غذای اول طفل",
+    "ps": "د ماشوم لومړۍ شیدې او لومړي خواړه",
+    "en": "Baby's first milk and first foods"
+  },
+  "summary": {
+    "fa": "تا ۶ ماه فقط شیر مادر، بعد غذای غلیظ با تخم مرغ.",
+    "ps": "تر ۶ میاشتو یوازې د مور شیدې، بیا پنډه خواړه له هګۍ سره.",
+    "en": "Only breast milk to 6 months, then thick food with an egg."
+  },
+  "image": "child-meals",
+  "blocks": [
+    {
+      "id": "food-baby.lead",
+      "type": "lead",
+      "text": {
+        "fa": "در ۶ ماه اول، طفل فقط شیر مادر لازم دارد. از ۶ ماهگی، غذای واقعی هم لازم دارد: غلیظ، با تخم مرغ، روغن و سبزی کوبیده.",
+        "ps": "په لومړیو ۶ میاشتو کې ماشوم یوازې د مور شیدو ته اړتیا لري. له ۶ میاشتو، رښتیني خوړو ته هم اړتیا لري: پنډه، له هګۍ، غوړیو او میده شوو سبزیو سره.",
+        "en": "For the first 6 months a baby needs only breast milk. From 6 months the baby needs real food too: thick, with egg, oil and mashed vegetables."
+      }
+    },
+    {
+      "id": "food-baby.first-milk",
+      "type": "step",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیر زرد اول، بعد فقط شیر مادر",
+        "ps": "لومړۍ ژېړې شیدې، بیا یوازې د مور شیدې",
+        "en": "The first yellow milk, then only milk"
+      },
+      "text": {
+        "fa": "شیر غلیظ و زرد اول، اولین محافظت طفل است: همه‌اش را بدهید. بعد تا ۶ ماه فقط شیر مادر، حتی در تابستان.",
+        "ps": "لومړۍ پنډې او ژېړې شیدې د ماشوم لومړۍ ساتنه ده: ټولې یې ورکړئ. بیا تر ۶ میاشتو یوازې د مور شیدې، حتی په اوړي کې.",
+        "en": "The thick yellow first milk is the baby's first protection: give all of it. Then only breast milk to 6 months, even in summer."
+      }
+    },
+    {
+      "id": "food-baby.start",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "در ۶ ماهگی: غلیظ، نه آبکی",
+        "ps": "په ۶ میاشتو کې: پنډه، نه اوبلنه",
+        "en": "At 6 months: thick, not watery"
+      },
+      "text": {
+        "fa": "با ۲ تا ۳ قاشق لیتی غلیظ یا کچری کوبیده، روزی دو بار شروع کنید. آن را آن‌قدر غلیظ بسازید که روی قاشق بماند، و کمی روغن در آن بیندازید.",
+        "ps": "په ورځ کې دوه ځله، له ۲ تر ۳ کاشوغو پنډې لېټۍ یا میده شوې کچرۍ پیل وکړئ. دومره پنډه یې کړئ چې پر کاشوغې پاتې شي، او لږ غوړي ورواچوئ.",
+        "en": "Start with 2 to 3 spoons of thick porridge or mashed kichri, twice a day. Make it thick enough to stay on the spoon, and stir in a little oil."
+      },
+      "picture": "food-thick-porridge"
+    },
+    {
+      "id": "food-baby.egg",
+      "type": "step",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "روزی یک تخم مرغ، و غذای کوبیده",
+        "ps": "هره ورځ یوه هګۍ، او میده خواړه",
+        "en": "An egg a day, and mashed food"
+      },
+      "text": {
+        "fa": "از ۶ ماهگی هر روز یک تخم مرغ خوب پخته و کوبیده، و کچالو، کدو، زردک، دال، کیله یا زردآلوی کوبیده بدهید. هر وقت توانستید، جگر یا گوشت نرم و خوب کوبیده اضافه کنید.",
+        "ps": "له ۶ میاشتو هره ورځ یوه ښه پخه او میده شوې هګۍ، او میده شوي کچالو، کدو، ګازرې، دال، کېله یا زردالو ورکړئ. هر کله چې وکولای شئ، ځیګر یا نرمه او ښه میده شوې غوښه ورزیاته کړئ.",
+        "en": "From 6 months give a well-cooked, mashed egg every day, and mashed potato, pumpkin, carrot, lentils, banana or apricot. Add liver or soft meat, mashed fine, when you can."
+      }
+    },
+    {
+      "id": "food-baby.drinks",
+      "type": "step",
+      "icon": "no-drink",
+      "title": {
+        "fa": "آب با پیاله، چای نه",
+        "ps": "اوبه په پیالې، چای نه",
+        "en": "Water from a cup, no tea"
+      },
+      "text": {
+        "fa": "از ۶ ماهگی آب جوشیده و سرد شده را با پیالهٔ پاک بدهید. چای، نوشیدنی شیرین یا آب میوهٔ پاکتی ندهید: شکم را پر می‌کند و آهن را کم می‌کند.",
+        "ps": "له ۶ میاشتو ایشول شوې او سړې شوې اوبه په پاکه پیاله کې ورکړئ. چای، خواږه څښاکونه یا د پاکټ جوس مه ورکوئ: ګېډه ډکوي او اوسپنه کموي.",
+        "en": "From 6 months give boiled, cooled water from a clean cup. No tea, sweet drinks or packet juice: they fill the belly and take away iron."
+      }
+    },
+    {
+      "id": "food-baby.choking",
+      "type": "step",
+      "icon": "choking",
+      "title": {
+        "fa": "نرم و کوبیده، مغز درست نه",
+        "ps": "نرم او میده، روغ مغزونه نه",
+        "en": "Soft and mashed, no whole nuts"
+      },
+      "text": {
+        "fa": "مغزها را آرد کرده در لیتی بیندازید؛ مغز درست، کشمش و انگور درست می‌تواند گلوی طفل کوچک را بند کند. تا ۱ سالگی عسل نه.",
+        "ps": "مغزونه اوړه کړئ او په لېټۍ کې یې واچوئ؛ روغ مغزونه، کشمش او روغ انګور کولای شي د کوچني ماشوم ستونی بند کړي. تر ۱ کلنۍ شات نه.",
+        "en": "Grind nuts into the porridge; whole nuts, raisins and whole grapes can block a small child's throat. No honey before 1 year."
+      }
+    },
+    {
+      "id": "food-baby.helps",
+      "type": "belief",
+      "level": "helps",
+      "items": [
+        {
+          "id": "food-baby.helps.egg",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "روزی یک تخم مرغ به رشد طفل کمک می‌کند: درست است.",
+            "ps": "هره ورځ یوه هګۍ د ماشوم له ودې سره مرسته کوي: سمه ده.",
+            "en": "An egg a day helps a child grow: true."
+          }
+        },
+        {
+          "id": "food-baby.helps.oil",
+          "icon": "bowl-food",
+          "text": {
+            "fa": "از ۶ ماهگی، کمی روغن یا روغن زرد در غذا خوب است: چربی به رشد طفل کمک می‌کند.",
+            "ps": "له ۶ میاشتو، په خوړو کې لږ غوړي ښه دي: غوړي د ماشوم له ودې سره مرسته کوي.",
+            "en": "From 6 months, a little oil or ghee in the food is good: fat helps the baby grow."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-baby.unproven",
+      "type": "belief",
+      "level": "unproven",
+      "items": [
+        {
+          "id": "food-baby.unproven.sheer-birinj",
+          "icon": "milk",
+          "text": {
+            "fa": "شیر برنج به عنوان غذای اول خوب است، اگر غلیظ و با شیر جوشیده ساخته شده باشد. تخم مرغ یا دال هم اضافه کنید.",
+            "ps": "شیربرنج د لومړي خوراک په توګه ښه دی، که پنډه او له ایشول شوو شیدو جوړ وي. هګۍ یا دال هم ورزیات کړئ.",
+            "en": "Sheer birinj as a first food is fine if it is thick and made with boiled milk. Add an egg or lentils too."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-baby.harm",
+      "type": "belief",
+      "level": "harm",
+      "items": [
+        {
+          "id": "food-baby.harm.first-feeds",
+          "icon": "no",
+          "text": {
+            "fa": "روغن زرد، آب بوره، چای، عسل یا آب گیاهی در ۶ ماه اول: میکروب می‌آورد و طفل را از سینه دور می‌کند.",
+            "ps": "غوړي، د بورې اوبه، چای، شات یا د بوټو اوبه په لومړیو ۶ میاشتو کې: میکروب راوړي او ماشوم له تي لرې کوي.",
+            "en": "Ghee, sugar water, tea, honey or herb water in the first 6 months: they bring germs and keep the baby from the breast."
+          }
+        },
+        {
+          "id": "food-baby.harm.colic",
+          "icon": "poison",
+          "text": {
+            "fa": "قطره‌های دلدردی دکان، هینگ یا آب گیاهان برای طفلی که گریه می‌کند: کار نمی‌کند، و بعضی به طفل ضرر می‌رساند.",
+            "ps": "د دوکان د ګېډې درد څاڅکي، هینګ یا د بوټو اوبه د ژړېدونکي ماشوم لپاره: کار نه کوي، او ځینې ماشوم ته زیان رسوي.",
+            "en": "Shop colic drops, hing or herb waters for a crying baby: they do not work, and some can harm a baby."
+          }
+        },
+        {
+          "id": "food-baby.harm.jaundice",
+          "icon": "jaundice",
+          "text": {
+            "fa": "شیرخشت یا آب بوره برای طفل زرد، به جای کلینیک: زردی در روز اول شفاخانه لازم دارد.",
+            "ps": "شیرخشت یا د بورې اوبه د ژېړ ماشوم لپاره، د کلینیک پر ځای: په لومړۍ ورځ ژېړی روغتون ته اړتیا لري.",
+            "en": "Shir khesht or sugar water for a yellow baby, in place of the clinic: yellow on the first day needs the hospital."
+          }
+        },
+        {
+          "id": "food-baby.harm.late",
+          "icon": "calendar",
+          "text": {
+            "fa": "منتظر دندان ماندن، یا تا ۸ یا ۹ ماهگی صبر کردن پیش از غذای نرم: طفل خوب رشد نمی‌کند.",
+            "ps": "د غاښونو انتظار، یا د نرمو خوړو مخکې تر ۸ یا ۹ میاشتو صبر: ماشوم ښه وده نه کوي.",
+            "en": "Waiting for teeth, or until 8 or 9 months, before soft food: the baby stops growing well."
+          }
+        },
+        {
+          "id": "food-baby.harm.kernels",
+          "icon": "choking",
+          "text": {
+            "fa": "خستهٔ تلخ زردآلو: برای اطفال کوچک زهر است.",
+            "ps": "د زردالو تریخې زړې: د کوچنیو ماشومانو لپاره زهر دي.",
+            "en": "Bitter apricot kernels: they are poison for small children."
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-baby.breastfeeding",
+      "type": "link",
+      "to": "topic/breastfeeding",
+      "icon": "breastfeed",
+      "title": {
+        "fa": "شیر مادر و تعداد وعده‌ها",
+        "ps": "د مور شیدې او په ورځ کې وختونه",
+        "en": "Breastfeeding and meals a day"
+      },
+      "text": {
+        "fa": "ساعت اول، شیر دادن در شب و روز، و اینکه طفل در هر سن روزی چند وعده غذا لازم دارد.",
+        "ps": "لومړی ساعت، شپه او ورځ تی ورکول، او دا چې ماشوم په هر عمر کې په ورځ کې څو وخته خواړو ته اړتیا لري.",
+        "en": "The first hour, feeding day and night, and how many meals a child needs at each age."
+      }
+    },
+    {
+      "id": "food-baby.child-meals",
+      "type": "link",
+      "to": "topic/child-meals",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذای باغچه برای طفل",
+        "ps": "د ماشوم لپاره د باغچې خواړه",
+        "en": "Garden food for your child"
+      },
+      "text": {
+        "fa": "غذای پر آهن همراه میوه، و غذا از باغچه و مرغ‌های خودتان.",
+        "ps": "اوسپنه لرونکي خواړه له مېوې سره، او ستاسو د خپلې باغچې او چرګانو خواړه.",
+        "en": "Iron foods with fruit, and food from your own garden and hens."
+      }
+    }
+  ],
+  "sources": [
+    "WHO Infant and young child feeding fact sheet",
+    "WHO guideline for complementary feeding of infants and young children 6 to 23 months (2023)",
+    "CDC: botulism prevention, no honey under 12 months",
+    "Perry, Hunt and Ernst, Pediatrics 2011: complementary remedies for infantile colic",
+    "EFSA 2016: acute health risks from cyanogenic glycosides in raw apricot kernels",
+    "Afghanistan MICS 2022-23, analysed by Stanikzai et al. 2025 and 2026: prelacteal feeds"
+  ],
+  "review": [
+    "First milk, only breast milk and the meal numbers live on breastfeeding.first-hour, .only and .meals; this page keeps one short step and links (lives once).",
+    "Cup amounts by age were left out: a local پیاله is smaller than WHO's 250 ml cup, so the amount would mislead (Mo's call, conservative).",
+    "Jaundice: shir khesht as can-harm only when it replaces the clinic; nothing said about sunlight (Mo's call 13).",
+    "Apricot kernels: only 'bitter' kernels (Mo's call 23). First-taste customs: only the substances are named (call 22).",
+    "Hing هینگ / هینګ and شیرخشت: native check."
+  ],
+  "_notes": [
+    "Food that helps section (11 Oct 2026, Mo's 'Honest mix'): built from research/food-as-medicine.md section 3. Mo's-call defaults (the safer option each time) are listed in research/food-as-medicine-CALLS.md with the line ids. Danger signs live once, on the illness page this page links to (no alert box is copied here).",
+    "Danger signs: newborn.urgent (incl. yellow on day one), newborn.soon.yellow, growth.today, by the links to breastfeeding and child-meals pages and the Newborn page."
+  ]
+}

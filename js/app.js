@@ -65,6 +65,9 @@ const I = {
   man: '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 44c0-9.5 7.2-16 16-16s16 6.5 16 16z" fill="currentColor" fill-opacity=".22" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="24" cy="17.5" r="7.5" fill="currentColor"/><path d="M15 11c0-3.8 4-6.5 9-6.5s9 2.7 9 6.5v1.8H15z" fill="currentColor" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>',
   share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="currentColor"/><circle cx="6" cy="12" r="3" fill="currentColor"/><circle cx="18" cy="19" r="3" fill="currentColor"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>',
   plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  // the three "what is true" boxes (belief blocks): proven to help, not proven but harmless, can harm
+  q: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 9a3.5 3.5 0 1 1 5 3.2c-1 .5-1.5 1.2-1.5 2.3v.5"/><circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none"/></svg>',
+  no: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m5.7 5.7 12.6 12.6"/></svg>',
 };
 const ic = (name, cls = 'ic') => { const u = `url('img/icons/${esc(name || '_dot')}.svg')`; return `<span class="${cls}" style="-webkit-mask-image:${u};mask-image:${u}" aria-hidden="true"></span>`; };
 
@@ -584,13 +587,23 @@ function blockHtml(b, n) {
   if (b.type === 'clinic') return `<div class="blk clinic" data-block="${esc(b.id)}"><div class="pic">${ic(b.icon || 'clinic')}</div><div class="body"><div class="h">${esc(L(b.title))}</div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
   if (b.type === 'anim') return animHidden(b) ? animWait(b) : animBlock(b); // a still picture with a play button: opens the animation player
   if (b.type === 'tip') return `<div class="blk tip" data-block="${esc(b.id)}">${ic(b.icon || 'check')}<div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
+  if (b.type === 'belief') return beliefHtml(b);
   if (b.type === 'alert' || b.type === 'dont') {
     const cls = b.type === 'dont' ? 'dont' : b.level === 'soon' ? 'soon' : 'urgent';
     return `<div class="alert ${cls}"><div class="ah" data-block="${esc(b.id)}">${b.type === 'dont' ? ic('no') : I.warn.replace('<svg', '<svg class="ic" style="background:none;-webkit-mask:none;mask:none"')}<div style="flex:1">${esc(L(b.title))}</div>${spk(b.id)}</div>${b.items.map((it) => `<div class="item" data-block="${esc(it.id)}"><div class="pic">${ic(it.icon)}</div><div class="x">${esc(L(it.text))}</div>${spk(it.id)}</div>`).join('')}</div>`;
   }
   return '';
 }
-function blockIds(b) { return b.type === 'alert' || b.type === 'dont' ? [b.id, ...b.items.map((i) => i.id)] : b.type === 'anim' ? (animHidden(b) ? [] : [animSay(b)]) : [b.id]; }
+// "What is true" (a belief block): one box per level, helps (green, a tick), unproven (grey, dashed, a question mark) or
+// harm (dark red, a no sign). Its heading is the block's own title, or the shared line for the level (ui.beliefHelps ...),
+// so the same heading is recorded once for the whole book. Each item has its own speaker, like a danger sign.
+const BELIEF = { helps: ['beliefHelps', 'check'], unproven: ['beliefUnproven', 'q'], harm: ['beliefHarm', 'no'] };
+const beliefHead = (b) => (b.title ? b.id : 'ui.' + (BELIEF[b.level] || BELIEF.unproven)[0]);
+function beliefHtml(b) {
+  const lv = BELIEF[b.level] ? b.level : 'unproven', h = beliefHead(b);
+  return `<div class="belief ${lv}"><div class="ah" data-block="${esc(h)}">${I[BELIEF[lv][1]].replace('<svg', '<svg class="ic" style="background:none;-webkit-mask:none;mask:none"')}<div style="flex:1">${esc(b.title ? L(b.title) : T(BELIEF[lv][0]))}</div>${spk(h)}</div>${b.items.map((it) => `<div class="item" data-block="${esc(it.id)}"><div class="pic">${ic(it.icon)}</div><div class="x">${esc(L(it.text))}</div>${spk(it.id)}</div>`).join('')}</div>`;
+}
+function blockIds(b) { return b.type === 'alert' || b.type === 'dont' ? [b.id, ...b.items.map((i) => i.id)] : b.type === 'belief' ? [beliefHead(b), ...b.items.map((i) => i.id)] : b.type === 'anim' ? (animHidden(b) ? [] : [animSay(b)]) : [b.id]; }
 
 /* ---------- explainer animations (js/anim.js; anim/<name>.js) ---------- */
 // An "anim" block: a poster (one still scene) with a big play button and the title with a speaker.
@@ -1555,7 +1568,7 @@ function goodBook(b) {
     for (const [tid, t] of Object.entries(b.topics)) {
       if (!t || !t.title) return false;
       if (tid === 'vaccines') { if (!Array.isArray(t.visits) || !t.lead) return false; continue; }
-      if (!Array.isArray(t.blocks) || !t.blocks.every((x) => x && x.id && x.type && (!(x.type === 'alert' || x.type === 'dont') || Array.isArray(x.items)))) return false;
+      if (!Array.isArray(t.blocks) || !t.blocks.every((x) => x && x.id && x.type && (!(x.type === 'alert' || x.type === 'dont' || x.type === 'belief') || Array.isArray(x.items)))) return false;
     }
     return true;
   } catch { return false; }

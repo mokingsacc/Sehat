@@ -124,19 +124,19 @@
       }
     },
     {
-      "id": "heart-food.move",
+      "id": "heart-food.food-bp",
       "type": "link",
-      "to": "topic/move-daily",
-      "icon": "walk",
+      "to": "topic/food-bp",
+      "icon": "bowl-food",
       "title": {
-        "fa": "تحرک هر روزه",
-        "ps": "هره ورځ حرکت",
-        "en": "Moving every day"
+        "fa": "فشار خون: چه بخوریم",
+        "ps": "د وینې فشار: څه وخورو",
+        "en": "Blood pressure: what to eat"
       },
       "text": {
-        "fa": "پیاده‌روی و حرکت‌های سادهٔ قوت هم قلب را محافظت می‌کند.",
-        "ps": "پلي ګرځېدل او د ځواک ساده حرکتونه هم زړه ساتي.",
-        "en": "Walking and simple strength moves protect the heart too."
+        "fa": "کمتر از یک قاشق چای‌خوری نمک در روز، سبزی، و تابلیت.",
+        "ps": "په ورځ کې له یوې د چای کاشوغې کمه مالګه، سبزي، او ګولۍ.",
+        "en": "Under a teaspoon of salt a day, vegetables, and the tablet."
       }
     },
     {

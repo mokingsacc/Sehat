@@ -280,6 +280,22 @@
         "ps": "د ماشوم ډنګروالی د مور ګناه نه ده. ناروغي، بېوزلي او وچکالي یې لامل کېږي. له کلینیک څخه د ټولې کورنۍ لپاره د اضافي خوړو په اړه وپوښتئ.",
         "en": "Malnutrition is not the mother's fault. Illness, poverty and drought cause it. Ask the clinic about extra food for the whole family."
       }
+    },
+    {
+      "id": "malnutrition.food-sick-child",
+      "type": "link",
+      "to": "topic/food-sick-child",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "طفل مریض: چه بخورانیم",
+        "ps": "ناروغ ماشوم: څه ورکړو",
+        "en": "A sick child: what to feed"
+      },
+      "text": {
+        "fa": "غذای نرم و کم، نوشیدنی بیشتر، و بعداً یک وعده غذای اضافه.",
+        "ps": "لږ نرم خواړه، ډېر څښاک، او وروسته یو وخت اضافه خواړه.",
+        "en": "Small soft meals, extra drinks, and one extra meal afterwards."
+      }
     }
   ],
   "sources": [

@@ -144,6 +144,22 @@
       }
     },
     {
+      "id": "goats-sheep.food-bones",
+      "type": "link",
+      "to": "topic/food-bones",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "استخوان و دندان قوی",
+        "ps": "پیاوړي هډوکي او غاښونه",
+        "en": "Strong bones and teeth"
+      },
+      "text": {
+        "fa": "غذای شیری، آفتاب بر پوست، و شکر کمتر.",
+        "ps": "د شیدو خواړه، پر پوستکي لمر، او لږه بوره.",
+        "en": "Milk foods, sun on the skin, and less sugar."
+      }
+    },
+    {
       "id": "goats-sheep.dont",
       "type": "dont",
       "title": {

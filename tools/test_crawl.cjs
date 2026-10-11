@@ -127,7 +127,7 @@ function measure(MIN) {
     scroll: document.scrollingElement.scrollWidth - innerWidth,
     pill: !!document.querySelector('main .top .empill, main .topic-hero .empill'), nav: !!document.querySelector('nav.nav'),
     isHealth: !!document.querySelector('main .hbtn.em'), blocks: [...document.querySelectorAll('main [data-block]')].map((e) => e.dataset.block),
-    houseAdvice: [...document.querySelectorAll('main .alert.urgent, main .alert.soon, main .blk.clinic')].map((e) => e.className), // ("don't" boxes are safety tips, allowed)
+    houseAdvice: [...document.querySelectorAll('main .alert.urgent, main .alert.soon, main .blk.clinic, main .belief')].map((e) => e.className), // ("don't" boxes are safety tips, allowed)
     linkBlocks: [...document.querySelectorAll('main .blk.link a[href], main a.blk.link[href]')].map((a) => a.getAttribute('href')),
   };
 }

@@ -114,6 +114,22 @@
       }
     },
     {
+      "id": "home-earning.food-help",
+      "type": "link",
+      "to": "topic/food-help",
+      "icon": "bowl-food",
+      "title": {
+        "fa": "غذایی که کمک می‌کند: چه درست است",
+        "ps": "خواړه چې مرسته کوي: څه سم دي",
+        "en": "Food that helps: what is true"
+      },
+      "text": {
+        "fa": "کدام غذا واقعاً کمک می‌کند، کدام ضرر ندارد، و کدام ضرر می‌رساند.",
+        "ps": "کوم خواړه رښتیا مرسته کوي، کوم زیان نه لري، او کوم زیان رسوي.",
+        "en": "Which foods truly help, which do no harm, and which can hurt."
+      }
+    },
+    {
       "id": "home-earning.family",
       "type": "tip",
       "icon": "family",
