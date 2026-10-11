@@ -47,9 +47,25 @@
         "en": "Zinc tablets"
       },
       "text": {
-        "fa": "برای طفل اسهالی، برای ۱۴ روز: از ۲ تا ۶ ماهگی، روزانه ۱۰ ملی‌گرام؛ از ۶ ماهگی، روزانه ۲۰ ملی‌گرام. کمتر از ۲ ماه، از کارمند صحی بپرسید.",
-        "ps": "د نس ناستې لرونکي ماشوم لپاره، ۱۴ ورځې: له ۲ تر ۶ میاشتو، ورځ کې ۱۰ ملي ګرامه؛ له ۶ میاشتو، ورځ کې ۲۰ ملي ګرامه. تر ۲ میاشتو کم، له روغتیايي کارکوونکي وپوښتئ.",
-        "en": "For a child with diarrhoea, for 14 days: from 2 to 6 months, 10 mg a day; from 6 months, 20 mg a day. Under 2 months, ask the health worker."
+        "fa": "یک بسته برای طفل اسهالی نگه دارید. صفحهٔ اسهال می‌گوید چه قدر بدهید.",
+        "ps": "یوه بسته د نس ناستې لرونکي ماشوم لپاره وساتئ. د نس ناستې پاڼه وايي چې څومره ورکړئ.",
+        "en": "Keep a strip for a child with diarrhoea. The Diarrhoea page says how much to give."
+      }
+    },
+    {
+      "id": "kit-first-aid.zinc-link",
+      "type": "link",
+      "to": "topic/diarrhoea",
+      "icon": "zinc",
+      "title": {
+        "fa": "چه قدر زنک بدهید",
+        "ps": "څومره زنک ورکړئ",
+        "en": "How much zinc to give"
+      },
+      "text": {
+        "fa": "صفحهٔ اسهال را باز کنید: چه قدر زنک و او آر اس به طفل بدهید، و علایم خطر.",
+        "ps": "د نس ناستې پاڼه پرانیزئ: ماشوم ته څومره زنک او او آر اس ورکړئ، او د خطر نښې.",
+        "en": "Open the Diarrhoea page: how much zinc and ORS to give a child, and the danger signs."
       }
     },
     {

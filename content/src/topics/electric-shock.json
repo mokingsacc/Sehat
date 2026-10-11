@@ -85,9 +85,26 @@
         "en": "Check breathing"
       },
       "text": {
-        "fa": "وقتی بی‌خطر شد، نفسش را ببینید. اگر عادی نفس نمی‌کشد، فشار سینه را شروع کنید و یک نفر را برای آوردن موتر بفرستید.",
-        "ps": "کله چې خوندي شو، ساه یې وګورئ. که په عادي ډول ساه نه اخلي، د سینې فشار پیل کړئ او یو څوک د موټر راوړلو لپاره ولېږئ.",
-        "en": "When it is safe, check breathing. If they are not breathing normally, start chest pushes and send for a car."
+        "fa": "وقتی بی‌خطر شد، نفسش را ببینید. اگر عادی نفس نمی‌کشد، یک نفر را برای آوردن موتر بفرستید و فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.",
+        "ps": "کله چې خوندي شو، ساه یې وګورئ. که په عادي ډول ساه نه اخلي، یو څوک د موټر راوړلو لپاره ولېږئ او د سینې فشار پیل کړئ؛ ماشوم یا تي خوړونکي ته لومړی ۵ ځله ساه ورکړئ.",
+        "en": "When it is safe, check breathing. If they are not breathing normally, send for a car and start chest pushes; give a child or baby 5 breaths first."
+      }
+    },
+    {
+      "id": "electric-shock.cpr-link",
+      "type": "link",
+      "to": "emergency",
+      "icon": "heart",
+      "urgent": true,
+      "title": {
+        "fa": "نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید",
+        "ps": "ساه نه اخلي؟ د ساه او سینې فشار لپاره عمر وټاکئ",
+        "en": "Not breathing? Choose the age for CPR"
+      },
+      "text": {
+        "fa": "صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.",
+        "ps": "د بیړني حالت پاڼه پرانیزئ او د هغه عمر ووهئ: ساه ورکول او د سینې فشار ګام په ګام ښيي.",
+        "en": "Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step."
       }
     },
     {

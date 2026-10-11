@@ -97,11 +97,28 @@
         "en": "If drowsy, lay them on their side"
       },
       "text": {
-        "fa": "اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید.",
-        "ps": "که خوب وړی وي، پر اړخ یې وغځوئ. که ساه یې ودرېده، د سینې فشار پیل کړئ.",
-        "en": "If they are drowsy, lay them on their side. If breathing stops, start chest pushes."
+        "fa": "اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.",
+        "ps": "که خوب وړی وي، پر اړخ یې وغځوئ. که ساه یې ودرېده، د سینې فشار پیل کړئ؛ ماشوم یا تي خوړونکي ته لومړی ۵ ځله ساه ورکړئ.",
+        "en": "If they are drowsy, lay them on their side. If breathing stops, start chest pushes; give a child or baby 5 breaths first."
       },
       "picture": "img/steps/poisoning/1-full.webp"
+    },
+    {
+      "id": "poisoning.cpr-link",
+      "type": "link",
+      "to": "emergency",
+      "icon": "heart",
+      "urgent": true,
+      "title": {
+        "fa": "نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید",
+        "ps": "ساه نه اخلي؟ د ساه او سینې فشار لپاره عمر وټاکئ",
+        "en": "Not breathing? Choose the age for CPR"
+      },
+      "text": {
+        "fa": "صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.",
+        "ps": "د بیړني حالت پاڼه پرانیزئ او د هغه عمر ووهئ: ساه ورکول او د سینې فشار ګام په ګام ښيي.",
+        "en": "Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step."
+      }
     },
     {
       "id": "poisoning.later",

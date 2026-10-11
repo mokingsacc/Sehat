@@ -101,9 +101,9 @@
     "en": "A newborn who is not breathing"
   },
   "anim.cpr-newborn.s1": {
-    "fa": "همین که طفل به دنیا آمد، تمام بدنش را با یک تکهٔ پاک و خشک خوب خشک کنید و پشتش را آهسته مالش دهید. بیشتر نوزادها بعد از این گریه می‌کنند و نفس می‌کشند.",
-    "ps": "کله چې ماشوم وزېږېد، ټول بدن یې په پاکه او وچه ټوټه ښه وچ کړئ او شا یې ورو وموږئ. ډېری نوي زېږېدلي ماشومان بیا ژاړي او ساه اخلي.",
-    "en": "As soon as the baby is born, dry the whole body well with a clean, dry cloth, and rub the back gently. Most babies then cry and breathe."
+    "fa": "همین که طفل به دنیا آمد، تمام بدنش را با یک تکهٔ پاک و خشک خوب خشک کنید و پشتش را محکم مالش دهید. بیشتر نوزادها بعد از این گریه می‌کنند و نفس می‌کشند.",
+    "ps": "کله چې ماشوم وزېږېد، ټول بدن یې په پاکه او وچه ټوټه ښه وچ کړئ او شا یې کلکه وموږئ. ډېری نوي زېږېدلي ماشومان بیا ژاړي او ساه اخلي.",
+    "en": "As soon as the baby is born, dry the whole body well with a clean, dry cloth, and rub the back firmly. Most babies then cry and breathe."
   },
   "anim.cpr-newborn.s2": {
     "fa": "اگر نوزاد گریه نمی‌کند یا نفس نمی‌کشد، بلند کمک بخواهید. یک نفر را بفرستید که برای رفتن به شفاخانه موتر بیاورد. نوزاد را گرم نگه دارید.",
@@ -121,9 +121,9 @@
     "en": "Rub the back or the soles of the feet once more. Look at the chest: is the baby breathing?"
   },
   "anim.cpr-newborn.s5": {
-    "fa": "اگر نه، دهان خود را روی دهان و بینی نوزاد بگذارید و پف‌های کوچک و آهسته بدهید، تقریباً هر ۱ تا ۲ ثانیه یک بار. ببینید که سینه با هر پف بالا بیاید.",
-    "ps": "که نه، خپله خوله د ماشوم پر خوله او پوزه کېږدئ او کوچني او ورو پو کړئ، شاوخوا هر ۱ تر ۲ ثانیو کې یو ځل. وګورئ چې سینه یې له هر پو سره پورته شي.",
-    "en": "If not, cover the baby's mouth and nose with your mouth and give small, gentle puffs, about one every 1 to 2 seconds. Watch the chest rise with each puff."
+    "fa": "اگر نه، اول ۵ بار آهسته نفس بدهید: دهان خود را روی دهان و بینی نوزاد بگذارید و آهسته پف کنید، و ببینید که سینه بالا بیاید. بعد هر ۱ تا ۲ ثانیه یک پف بدهید و ادامه دهید.",
+    "ps": "که نه، لومړی ۵ ځله ورو ساه ورکړئ: خپله خوله د ماشوم پر خوله او پوزه کېږدئ او ورو پو کړئ، او وګورئ چې سینه یې پورته شي. بیا هر ۱ تر ۲ ثانیو کې یو پو ورکړئ او دوام ورکړئ.",
+    "en": "If not, give 5 gentle breaths first: cover the baby's mouth and nose with your mouth and puff gently, watching the chest rise. Then keep giving one puff every 1 to 2 seconds."
   },
   "anim.cpr-newborn.s6": {
     "fa": "اگر تنها هستید، اول بلند کمک بخواهید. ۱ دقیقه پف کنید. بعد نوزاد را گرم بپیچانید و با خود ببرید تا کمک پیدا کنید.",
@@ -201,9 +201,9 @@
     "en": "Give 5 breaths: pinch the nose, cover the child's mouth with your mouth, and blow gently until the chest rises."
   },
   "anim.cpr-child.s5": {
-    "fa": "با یک دست ۳۰ بار وسط سینه را فشار دهید: حدود ۵ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه.",
-    "ps": "په یوه لاس ۳۰ ځله د سینې منځ کېکاږئ: شاوخوا ۵ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله.",
-    "en": "Push on the centre of the chest 30 times with one hand: about 5 centimetres deep, 100 to 120 times a minute."
+    "fa": "با یک دست ۳۰ بار روی نیمهٔ پایین استخوان سینه فشار دهید: حدود ۵ سانتی‌متر پایین، ۱۰۰ تا ۱۲۰ بار در یک دقیقه.",
+    "ps": "په یوه لاس ۳۰ ځله د سینې د هډوکي په لاندینۍ نیمایي فشار ورکړئ: شاوخوا ۵ سانتي متره لاندې، په یوه دقیقه کې ۱۰۰ تر ۱۲۰ ځله.",
+    "en": "Push on the lower half of the breastbone 30 times with one hand: about 5 centimetres deep, 100 to 120 times a minute."
   },
   "anim.cpr-child.s6": {
     "fa": "بعد ۲ نفس بدهید و باز ۳۰ بار فشار دهید. ادامه دهید تا طفل عادی نفس بکشد یا کمک برسد.",
@@ -469,5 +469,10 @@
     "fa": "حدود دو دقیقه همراه دایره نفس بکشید. بعد پاها را به زمین فشار دهید و سه چیز دور و بر خود را ببینید.",
     "ps": "شاوخوا دوه دقیقې له کړۍ سره ساه واخلئ. بیا پښې په ځمکه کېکاږئ او خپل شاوخوا درې شیان وګورئ.",
     "en": "Keep breathing with the circle for about two minutes. Then press your feet into the floor, and notice three things around you."
+  },
+  "anim.breath-count.s2": {
+    "fa": "اگر وقت نفس کشیدن پایین سینه به داخل کشیده می‌شود، همین حالا به شفاخانه بروید، شب باشد یا روز.",
+    "ps": "که د ساه اخیستو پر وخت د سینې لاندې برخه ننوځي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
+    "en": "If the lower chest pulls in when breathing in, go to hospital now, day or night."
   }
 }

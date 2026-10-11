@@ -90,6 +90,23 @@
       }
     },
     {
+      "id": "drowning.cpr-link",
+      "type": "link",
+      "to": "emergency",
+      "icon": "heart",
+      "urgent": true,
+      "title": {
+        "fa": "نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید",
+        "ps": "ساه نه اخلي؟ د ساه او سینې فشار لپاره عمر وټاکئ",
+        "en": "Not breathing? Choose the age for CPR"
+      },
+      "text": {
+        "fa": "صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.",
+        "ps": "د بیړني حالت پاڼه پرانیزئ او د هغه عمر ووهئ: ساه ورکول او د سینې فشار ګام په ګام ښيي.",
+        "en": "Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step."
+      }
+    },
+    {
       "id": "drowning.warm",
       "type": "step",
       "icon": "newborn-warm",
@@ -99,9 +116,9 @@
         "en": "Keep them warm"
       },
       "text": {
-        "fa": "اگر آب یا استفراغ از دهانش بیرون شود، او را به پهلو بچرخانید، دهانش را پاک کنید، بعد دوباره به پشت بچرخانید و ادامه دهید. کوشش نکنید که آب را بیرون کنید. لباس تر را بکشید و او را در کمپل خشک بپیچانید.",
-        "ps": "که اوبه یا کانګې یې له خولې راووځي، پر اړخ یې واړوئ، خوله یې پاکه کړئ، بیا یې بېرته په شا واړوئ او دوام ورکړئ. د اوبو د ایستلو هڅه مه کوئ. لندې جامې یې وباسئ او په وچو کمپلو کې یې ونغاړئ.",
-        "en": "If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out. Take off wet clothes and wrap them in dry blankets."
+        "fa": "اگر آب یا استفراغ از دهانش بیرون شود، او را به پهلو بچرخانید، دهانش را پاک کنید، بعد دوباره به پشت بچرخانید و نفس دادن و فشار سینه را ادامه دهید. کوشش نکنید که آب را بیرون کنید. لباس تر را بکشید و او را در کمپل خشک بپیچانید.",
+        "ps": "که اوبه یا کانګې یې له خولې راووځي، پر اړخ یې واړوئ، خوله یې پاکه کړئ، بیا یې بېرته په شا واړوئ او ساه ورکولو او د سینې فشار ته دوام ورکړئ. د اوبو د ایستلو هڅه مه کوئ. لندې جامې یې وباسئ او په وچو کمپلو کې یې ونغاړئ.",
+        "en": "If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and go on with the breaths and pushes. Do not try to get water out. Take off wet clothes and wrap them in dry blankets."
       },
       "picture": "img/steps/drowning-rescue/5-full.webp"
     },

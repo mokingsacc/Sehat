@@ -108,9 +108,9 @@
       "en": "a painful lump in the groin or belly, with vomiting"
     },
     "ui.ask.notbreathing.lead": {
-      "fa": "همین حالا کاری بکنید. کمک بخواهید و کسی را برای آوردن موتر بفرستید. اگر درست نفس نمی‌کشد، بزنید که کیست و فشار دادن سینه را شروع کنید.",
-      "ps": "همدا اوس کار وکړئ. مرسته وغواړئ او یو څوک د موټر لپاره ولېږئ. که سمه ساه نه اخلي، ووهئ چې څوک دی او د سینې فشار پیل کړئ.",
-      "en": "Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes."
+      "fa": "همین حالا کاری بکنید. کمک بخواهید و کسی را برای آوردن موتر بفرستید. اگر درست نفس نمی‌کشد، بزنید که کیست و فشار دادن سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید.",
+      "ps": "همدا اوس کار وکړئ. مرسته وغواړئ او یو څوک د موټر لپاره ولېږئ. که سمه ساه نه اخلي، ووهئ چې څوک دی او د سینې فشار پیل کړئ؛ ماشوم یا تي خوړونکي ته لومړی ۵ ځله ساه ورکړئ.",
+      "en": "Act now. Shout for help and send someone for a car. If they are not breathing normally, tap who it is and start chest pushes; give a child or baby 5 breaths first."
     },
     "ui.ask.fever.lead": {
       "fa": "اول علایم خطر را برای عمر مریض ببینید. طفل کمتر از ۲ ماه که هر قدر تب دارد، همین حالا به شفاخانه برود.",
@@ -118,9 +118,9 @@
       "en": "First look at the danger signs for the age of the sick person. A baby under 2 months with any fever must go to hospital now."
     },
     "ui.ask.cough.lead": {
-      "fa": "اول علایم خطر را برای عمر مریض ببینید. نفس مشکل یا تیز همین امروز کمک لازم دارد.",
-      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. سخته یا چټکه ساه همدا نن مرستې ته اړتیا لري.",
-      "en": "First look at the danger signs for the age of the sick person. Hard or fast breathing needs help today."
+      "fa": "اول علایم خطر را برای عمر مریض ببینید. نفس مشکل، که پایین سینه به داخل کشیده شود یا صدا بدهد: همین حالا شفاخانه. فقط نفس تیز: امروز کلینیک.",
+      "ps": "لومړی د ناروغ د عمر لپاره د خطر نښې وګورئ. سخته ساه، چې د سینې لاندې برخه ننوځي یا غږ کوي: همدا اوس روغتون. یوازې چټکه ساه: نن کلینیک.",
+      "en": "First look at the danger signs for the age of the sick person. Hard breathing, with the chest pulling in or a noise: hospital now. Fast breathing alone: clinic today."
     },
     "ui.ask.breathing.lead": {
       "fa": "نفس تنگی می‌تواند زود جان بگیرد. علایم خطر را برای عمر مریض ببینید، بعد نفس‌ها را بشمارید.",

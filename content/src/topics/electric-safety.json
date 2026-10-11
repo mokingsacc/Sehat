@@ -148,7 +148,7 @@
     {
       "id": "electric-safety.cpr",
       "type": "link",
-      "to": "topic/unconscious",
+      "to": "emergency",
       "icon": "breathe",
       "title": {
         "fa": "بعد از برق‌گرفتگی نفس نمی‌کشد؟",
@@ -156,9 +156,9 @@
         "en": "Not breathing after a shock?"
       },
       "text": {
-        "fa": "وقتی برق قطع شد، فشار سینه را شروع کنید. این صفحه نشان می‌دهد که برای هر سن چطور.",
-        "ps": "کله چې برېښنا بنده شوه، د سینې فشار پیل کړئ. دا پاڼه د هر عمر لپاره ښيي چې څنګه.",
-        "en": "When the power is off, start chest pushes. The page shows how for each age."
+        "fa": "وقتی برق قطع شد، نفس و فشار سینه را شروع کنید. صفحه را باز کنید و سن او را انتخاب کنید.",
+        "ps": "کله چې برېښنا بنده شوه، ساه او د سینې فشار پیل کړئ. پاڼه پرانیزئ او د هغه عمر وټاکئ.",
+        "en": "When the power is off, start CPR. Open the page and choose the age."
       },
       "urgent": true
     },

@@ -48,9 +48,9 @@
         "en": "In pregnancy: the clinic checks"
       },
       "text": {
-        "fa": "در هر معاینهٔ حاملگی قابله فشار خون، خون و ادرار شما را معاینه می‌کند و آهن و واکسین تیتانوس می‌دهد. معاینهٔ خون هپاتیت ب را هم بخواهید.",
-        "ps": "د امیندوارۍ په هره معاینه کې قابله ستاسو د وینې فشار، وینه او متیازې معاینه کوي، او اوسپنه او د تیټانوس واکسین درکوي. د هیپاتیت ب د وینې معاینه هم وغواړئ.",
-        "en": "At each pregnancy visit the midwife checks your blood pressure, blood and urine, and gives iron and the tetanus vaccine. Ask for a hepatitis B blood test too."
+        "fa": "در هر معاینهٔ حاملگی قابله فشار خون، خون و ادرار شما را معاینه می‌کند و آهن و فولیک اسید و واکسین تیتانوس می‌دهد. معاینهٔ خون هپاتیت ب را هم بخواهید.",
+        "ps": "د امیندوارۍ په هره معاینه کې قابله ستاسو د وینې فشار، وینه او متیازې معاینه کوي، او اوسپنه، فولیک اسید او د تیټانوس واکسین درکوي. د هیپاتیت ب د وینې معاینه هم وغواړئ.",
+        "en": "At each pregnancy visit the midwife checks your blood pressure, blood and urine, and gives iron and folic acid and the tetanus vaccine. Ask for a hepatitis B blood test too."
       }
     },
     {
@@ -63,9 +63,9 @@
         "en": "30 to 49: the cervix test"
       },
       "text": {
-        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
-        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
-        "en": "Ask for the cervix test once between 30 and 49, or every 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
+        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
+        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۳ تر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
+        "en": "Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
       }
     },
     {
@@ -126,6 +126,21 @@
         "fa": "اگر رنگ‌پریده، خسته یا نفس‌تنگ هستید، یا عادت ماهوار زیاد دارید، معاینهٔ خون نوک انگشت را برای کم‌خونی بخواهید.",
         "ps": "که رنګ مو الوتی وي، ستړې یا ساه لنډې یاست، یا میاشتنی عادت مو ډېر وي، د وینې کمښت لپاره د ګوتې د سر د وینې معاینه وغواړئ.",
         "en": "If you are pale, tired or breathless, or have heavy periods, ask for the finger-prick blood test for anaemia."
+      }
+    },
+    {
+      "id": "checks-women.tb",
+      "type": "step",
+      "icon": "cough",
+      "title": {
+        "fa": "هر وقت: معاینهٔ توبرکلوز",
+        "ps": "هر وخت: د نري رنځ معاینه",
+        "en": "Any time: a TB check"
+      },
+      "text": {
+        "fa": "سرفهٔ ۲ هفته، تب یا عرق شبانه، یا کم شدن وزن یعنی معاینهٔ توبرکلوز. معاینه و دوای توبرکلوز رایگان است.",
+        "ps": "۲ اونۍ ټوخی، تبه یا د شپې خولې، یا د وزن کمېدل مانا د نري رنځ معاینه. د نري رنځ معاینه او درمل وړیا دي.",
+        "en": "A cough for 2 weeks, fever or sweats at night, or losing weight means a TB test. The TB test and medicine are free."
       }
     },
     {

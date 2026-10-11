@@ -147,9 +147,9 @@
           "id": "pregnancy-danger.soon.waters",
           "icon": "waters",
           "text": {
-            "fa": "آب ولادت آمده، اما درد ولادت نیست: بیشتر از ۶ ساعت منتظر نمانید",
-            "ps": "د زېږون اوبه راغلې، خو د زېږون دردونه نشته: له ۶ ساعتونو زیات انتظار مه کوئ",
-            "en": "The waters break with no labour pains: do not wait more than 6 hours"
+            "fa": "آب ولادت آمده، اما درد ولادت نیست: همین حالا به کلینیک بروید؛ بیشتر از ۶ ساعت منتظر نمانید",
+            "ps": "د زېږون اوبه راغلې، خو د زېږون دردونه نشته: همدا اوس کلینیک ته ولاړ شئ؛ له ۶ ساعتونو زیات انتظار مه کوئ",
+            "en": "The waters break with no labour pains: go to the clinic now; do not wait more than 6 hours"
           }
         },
         {
@@ -165,9 +165,9 @@
           "id": "pregnancy-danger.soon.vomit",
           "icon": "vomit",
           "text": {
-            "fa": "استفراغ تمام روز، و آب هم در شکم نمی‌ماند",
-            "ps": "ټوله ورځ کانګې، او اوبه هم په ګېډه کې نه پاتې کېږي",
-            "en": "Vomiting all day, and cannot keep water down"
+            "fa": "استفراغ تمام روز، و آب هم در شکم نمی‌ماند. اگر همراه با آن بسیار ضعیف یا سرگیچ است، یا ادرار بسیار کم می‌آید: همین حالا شفاخانه.",
+            "ps": "ټوله ورځ کانګې، او اوبه هم په ګېډه کې نه پاتې کېږي. که ورسره ډېره کمزورې یا سرګرځې وي، یا ډېرې لږې متیازې کوي: همدا اوس روغتون.",
+            "en": "Vomiting all day, and cannot keep water down. If also very weak, dizzy or passing very little urine: hospital now."
           }
         }
       ]

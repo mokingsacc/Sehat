@@ -58,6 +58,15 @@
             "ps": "د سهار سر درد له کانګو سره، یا نوی داسې تګ چې توازن نه لري",
             "en": "Morning headache with vomiting, or a new unsteady walk"
           }
+        },
+        {
+          "id": "child-signs.urgent.eye-spot",
+          "icon": "eye",
+          "text": {
+            "fa": "لکهٔ سفید یا کدر که روی سیاهی چشم دیده می‌شود، یا چشم سرخ و دردناک",
+            "ps": "سپین یا خړ داغ چې د سترګې پر تور باندې ښکاري، یا سره او دردناکه سترګه",
+            "en": "A white or cloudy spot you can see on the black of the eye, or a red, painful eye"
+          }
         }
       ]
     },
@@ -114,9 +123,9 @@
           "id": "child-signs.soon.white-pupil",
           "icon": "eye",
           "text": {
-            "fa": "برق سفید در سیاهی چشم، یا تازه لوچ شدن چشم",
-            "ps": "د سترګې په تور کې سپینه ځلا، یا نوې کاږه سترګه",
-            "en": "A white glow in the black of the eye, or a new squint"
+            "fa": "مردمک چشم فقط در عکس با فلش یا روشنی چراغ دستی سفید معلوم می‌شود، یا تازه لوچ شدن چشم",
+            "ps": "د سترګې کسی یوازې د فلش په عکس یا د لاسي څراغ په رڼا کې سپین ښکاري، یا نوې کاږه سترګه",
+            "en": "A white pupil seen only in a flash photo or torchlight, or a new squint"
           }
         },
         {

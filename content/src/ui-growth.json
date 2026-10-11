@@ -334,9 +334,9 @@
    "en": "You can measure at home. Measure the same way each time, and write the number down straight away."
   },
   "ui.gr.m.hang": {
-   "fa": "وزن با ترازوی آویزان: طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید.",
-   "ps": "وزن په ځوړنده تله: ماشوم په سپکو جامو د تلې په کڅوړه کې کېږدئ. صبر وکړئ چې ارام شي، بیا شمېره ولولئ.",
-   "en": "Weight with a hanging scale: put the baby in the sling with light clothes. Wait until the baby is still, then read the number."
+   "fa": "وزن با ترازوی آویزان: خریطهٔ خالی را آویزان کنید و ترازو را روی ۰ بیاورید. بعد طفل را با لباس سبک در خریطهٔ ترازو بگذارید. صبر کنید تا آرام شود، بعد عدد را بخوانید.",
+   "ps": "وزن په ځوړنده تله: خالي کڅوړه وځړوئ او تله په ۰ برابره کړئ. بیا ماشوم په سپکو جامو د تلې په کڅوړه کې کېږدئ. صبر وکړئ چې ارام شي، بیا شمېره ولولئ.",
+   "en": "Weight with a hanging scale: hang the empty sling and set the scale to 0. Then put the baby in the sling with light clothes. Wait until the baby is still, then read the number."
   },
   "ui.gr.m.hold": {
    "fa": "وزن با ترازوی عادی: اول خود را وزن کنید، بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.",

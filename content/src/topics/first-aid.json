@@ -145,6 +145,23 @@
       }
     },
     {
+      "id": "first-aid.head-link",
+      "type": "link",
+      "to": "topic/head-injury",
+      "icon": "headache",
+      "urgent": true,
+      "title": {
+        "fa": "ضربه به سر: علایم خطر",
+        "ps": "سر ته ټکر: د خطر نښې",
+        "en": "Head injury: the danger signs"
+      },
+      "text": {
+        "fa": "صفحهٔ ضربه به سر را باز کنید: چه وقت به شفاخانه بروید و مراقب چه باشید.",
+        "ps": "د سر ته د ټکر پاڼه پرانیزئ: کله روغتون ته ولاړ شئ او د څه پام وساتئ.",
+        "en": "Open the Head injury page: when to go to hospital, and what to watch for."
+      }
+    },
+    {
       "id": "first-aid.hospital",
       "type": "clinic",
       "title": {
@@ -219,9 +236,9 @@
           "id": "first-aid.urgent.big-burn",
           "icon": "burn",
           "text": {
-            "fa": "سوختگی بزرگ‌تر از دست همان شخص، یا هر سوختگی در شیرخوار",
-            "ps": "له لاس څخه لویه سوځېدنه، یا په تي خوړونکي ماشوم کې هره سوځېدنه",
-            "en": "a burn bigger than the person's hand, or any burn on a baby"
+            "fa": "سوختگی بزرگ‌تر از کف دست همان شخص، یا هر سوختگی در شیرخوار",
+            "ps": "له هغه کس له ورغوي لویه سوځېدنه، یا په تي خوړونکي ماشوم کې هره سوځېدنه",
+            "en": "a burn bigger than the person's palm, or any burn on a baby"
           }
         },
         {
@@ -273,9 +290,9 @@
           "id": "first-aid.urgent.head",
           "icon": "headache",
           "text": {
-            "fa": "ضربه به سر، و بعد استفراغ، خواب‌آلودگی زیاد یا تشنج",
-            "ps": "سر ته ټکر، او بیا کانګې، ډېر خوب وړل یا اختلاج",
-            "en": "a head injury, then vomiting, deep sleepiness or a fit"
+            "fa": "ضربه به سر همراه با بی‌هوش شدن، استفراغ، خواب‌آلودگی زیاد یا تشنج، یا هر ضربه به سر در شیرخوار یا شخص مسن",
+            "ps": "سر ته ټکر چې ورسره بې‌هوښه کېدل، کانګې، ډېر خوب وړل یا اختلاج وي، یا په تي خوړونکي ماشوم یا زاړه کس کې سر ته هر ټکر",
+            "en": "a head injury with being knocked out, vomiting, deep sleepiness or a fit, or any head injury in a baby or an older person"
           }
         },
         {

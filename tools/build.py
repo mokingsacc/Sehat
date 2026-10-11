@@ -154,7 +154,8 @@ if vaccines:
         if b.get("title"): say(b["id"], b["title"])
     if v.get("women"):
         w = v["women"]
-        say(w["id"], join(w["title"], w["text"]))
+        # the title, a full stop, then the text (T-14: "(Td). Every woman ...", read with a pause)
+        say(w["id"], {lg: w["title"][lg].strip().rstrip(".:،") + ". " + w["text"][lg].strip() for lg in LANGS})
     v.pop("review", None)
     out_topics["vaccines"] = v
 

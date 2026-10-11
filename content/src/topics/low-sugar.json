@@ -146,9 +146,9 @@
           "id": "low-sugar.urgent.meter",
           "icon": "sugar",
           "text": {
-            "fa": "دستگاه قند کمتر از ۵۴ نشان داد، حتی اگر حالا بهتر است",
-            "ps": "د شکرې ماشین له ۵۴ کم وښود، که څه هم اوس ښه دی",
-            "en": "their sugar meter showed under 54, even if they feel better"
+            "fa": "دستگاه قند کمتر از ۵۴ ملی‌گرام (۳٫۰ میلی‌مول) نشان داد، حتی اگر حالا بهتر است",
+            "ps": "د شکرې ماشین له ۵۴ ملي ګرام (۳٫۰ ملي مول) کم وښود، که څه هم اوس ښه دی",
+            "en": "their sugar meter showed under 54 mg/dL (3.0 mmol/L), even if they feel better"
           }
         },
         {

@@ -192,9 +192,9 @@
           "id": "red-flags.soon.blood-urine-stool",
           "icon": "urine-blood",
           "text": {
-            "fa": "خون در ادرار یا مدفوع",
-            "ps": "په تشو متیازو یا غایطه کې وینه",
-            "en": "Blood in the urine or stool"
+            "fa": "خون در ادرار یا مدفوع، بیش از یک بار، بدون سوزش، تب یا اسهال",
+            "ps": "په تشو متیازو یا غایطه کې وینه، له یو ځل زیات، پرته له سوځېدو، تبې یا نس ناستې",
+            "en": "Blood in the urine or stool more than once, with no burning, fever or diarrhoea"
           }
         },
         {

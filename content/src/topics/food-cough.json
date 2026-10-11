@@ -23,6 +23,23 @@
       }
     },
     {
+      "id": "food-cough.young",
+      "type": "link",
+      "to": "topic/cough",
+      "icon": "breathing-fast",
+      "urgent": true,
+      "title": {
+        "fa": "شیرخوار خورد، یا نفس تیز یا مشکل؟",
+        "ps": "کوچنی ماشوم، یا چټکه یا سخته ساه؟",
+        "en": "Young baby, or fast or hard breathing?"
+      },
+      "text": {
+        "fa": "شیرخوار کمتر از ۲ ماه که سرفه دارد، یا هر طفلی که تیز یا مشکل نفس می‌کشد: همین حالا صفحهٔ سرفه را ببینید.",
+        "ps": "له ۲ میاشتو کم ماشوم چې ټوخی لري، یا هر ماشوم چې چټکه یا سخته ساه اخلي: همدا اوس د ټوخي پاڼه وګورئ.",
+        "en": "A baby under 2 months with a cough, or any child breathing fast or hard: see the Cough page now."
+      }
+    },
+    {
       "id": "food-cough.drinks",
       "type": "step",
       "icon": "cup-spoon",

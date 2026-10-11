@@ -206,9 +206,26 @@
       "type": "tip",
       "icon": "heart",
       "text": {
-        "fa": "شخص بسیار سرد که مرده معلوم می‌شود، شاید هنوز نجات یابد. اگر نفس نمی‌کشد، فشار سینه را شروع کنید و در راه شفاخانه ادامه دهید.",
-        "ps": "ډېر یخ کس چې مړ ښکاري، کېدای شي لا هم وژغورل شي. که ساه نه اخلي، د سینې فشار پیل کړئ او د روغتون په لاره کې دوام ورکړئ.",
-        "en": "A very cold person who seems dead may still be saved. If not breathing, start chest pushes and keep going on the way to hospital."
+        "fa": "شخص بسیار سرد که مرده معلوم می‌شود، شاید هنوز نجات یابد. اگر نفس نمی‌کشد، فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید. در راه شفاخانه ادامه دهید.",
+        "ps": "ډېر یخ کس چې مړ ښکاري، کېدای شي لا هم وژغورل شي. که ساه نه اخلي، د سینې فشار پیل کړئ؛ ماشوم یا تي خوړونکي ته لومړی ۵ ځله ساه ورکړئ. د روغتون په لاره کې دوام ورکړئ.",
+        "en": "A very cold person who seems dead may still be saved. If not breathing, start chest pushes; give a child or baby 5 breaths first. Keep going on the way to hospital."
+      }
+    },
+    {
+      "id": "cold-hypothermia.cpr-link",
+      "type": "link",
+      "to": "emergency",
+      "icon": "heart",
+      "urgent": true,
+      "title": {
+        "fa": "نفس نمی‌کشد؟ برای نفس و فشار سینه، سن را انتخاب کنید",
+        "ps": "ساه نه اخلي؟ د ساه او سینې فشار لپاره عمر وټاکئ",
+        "en": "Not breathing? Choose the age for CPR"
+      },
+      "text": {
+        "fa": "صفحهٔ حالت عاجل را باز کنید و سن او را بزنید: نفس دادن و فشار سینه را قدم به قدم نشان می‌دهد.",
+        "ps": "د بیړني حالت پاڼه پرانیزئ او د هغه عمر ووهئ: ساه ورکول او د سینې فشار ګام په ګام ښيي.",
+        "en": "Open the Emergency page and tap their age: it shows the breaths and chest pushes step by step."
       }
     },
     {

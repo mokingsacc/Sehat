@@ -148,9 +148,9 @@
           "id": "food-baby.harm.first-feeds",
           "icon": "no",
           "text": {
-            "fa": "روغن زرد، آب بوره، چای، عسل یا آب گیاهی در ۶ ماه اول: میکروب می‌آورد و طفل را از سینه دور می‌کند.",
-            "ps": "غوړي، د بورې اوبه، چای، شات یا د بوټو اوبه په لومړیو ۶ میاشتو کې: میکروب راوړي او ماشوم له تي لرې کوي.",
-            "en": "Ghee, sugar water, tea, honey or herb water in the first 6 months: they bring germs and keep the baby from the breast."
+            "fa": "روغن زرد، آب بوره، چای یا آب گیاهی در ۶ ماه اول، یا عسل پیش از ۱ سالگی: میکروب می‌آورد و طفل را از سینه دور می‌کند.",
+            "ps": "غوړي، د بورې اوبه، چای یا د بوټو اوبه په لومړیو ۶ میاشتو کې، یا شات تر ۱ کلنۍ مخکې: میکروب راوړي او ماشوم له تي لرې کوي.",
+            "en": "Ghee, sugar water, tea or herb water in the first 6 months, or honey before 1 year: they bring germs and keep the baby from the breast."
           }
         },
         {
@@ -166,9 +166,9 @@
           "id": "food-baby.harm.jaundice",
           "icon": "jaundice",
           "text": {
-            "fa": "شیرخشت یا آب بوره برای طفل زرد، به جای کلینیک: زردی در روز اول شفاخانه لازم دارد.",
-            "ps": "شیرخشت یا د بورې اوبه د ژېړ ماشوم لپاره، د کلینیک پر ځای: په لومړۍ ورځ ژېړی روغتون ته اړتیا لري.",
-            "en": "Shir khesht or sugar water for a yellow baby, in place of the clinic: yellow on the first day needs the hospital."
+            "fa": "شیرخشت یا آب بوره برای طفل زرد، به جای کلینیک: زردی در روز اول، یا کف دست و پای زرد، همین حالا شفاخانه لازم دارد.",
+            "ps": "شیرخشت یا د بورې اوبه د ژېړ ماشوم لپاره، د کلینیک پر ځای: په لومړۍ ورځ ژېړی، یا د لاسونو او پښو ژېړ تلي، همدا اوس روغتون ته اړتیا لري.",
+            "en": "Shir khesht or sugar water for a yellow baby, in place of the clinic: yellow on the first day, or yellow palms and soles, needs the hospital now."
           }
         },
         {

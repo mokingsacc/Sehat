@@ -23,6 +23,23 @@
       }
     },
     {
+      "id": "food-diarrhoea.young",
+      "type": "link",
+      "to": "topic/diarrhoea",
+      "icon": "stool-blood",
+      "urgent": true,
+      "title": {
+        "fa": "کمتر از ۲ ماه، یا خون در مدفوع؟",
+        "ps": "له ۲ میاشتو کم، یا په غایطه کې وینه؟",
+        "en": "Under 2 months, or blood in stool?"
+      },
+      "text": {
+        "fa": "شیرخوار کمتر از ۲ ماه که اسهال دارد، یا خون در مدفوع: امروز به کلینیک بروید. صفحهٔ اسهال را باز کنید.",
+        "ps": "له ۲ میاشتو کم ماشوم چې نس ناستی لري، یا په غایطه کې وینه: نن کلینیک ته ولاړ شئ. د نس ناستې پاڼه پرانیزئ.",
+        "en": "A baby under 2 months with diarrhoea, or blood in the stool: clinic today. Open the Diarrhoea page."
+      }
+    },
+    {
       "id": "food-diarrhoea.ors",
       "type": "step",
       "icon": "ors",

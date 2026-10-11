@@ -38,6 +38,27 @@
       }
     },
     {
+      "id": "women-signs.pregnant",
+      "type": "alert",
+      "level": "urgent",
+      "title": {
+        "fa": "اگر حامله هستید، برای این حالت همین حالا به شفاخانه بروید، شب باشد یا روز:",
+        "ps": "که امیندواره یاست، د دې حالت لپاره همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:",
+        "en": "If you are pregnant, go to hospital now, day or night, for:"
+      },
+      "items": [
+        {
+          "id": "women-signs.pregnant.bleeding",
+          "icon": "bleeding",
+          "text": {
+            "fa": "هر نوع خونریزی از راه تناسلی",
+            "ps": "له تناسلي لارې هر ډول وینه بهېدل",
+            "en": "Any bleeding from the vagina"
+          }
+        }
+      ]
+    },
+    {
       "id": "women-signs.soon",
       "type": "alert",
       "level": "soon",
@@ -87,9 +108,9 @@
           "id": "women-signs.soon.bleeding-sex",
           "icon": "bleeding",
           "text": {
-            "fa": "خونریزی بعد از همبستری، یا بین دو عادت ماهوار، بیش از یک بار",
-            "ps": "له مېړه سره له یوځای کېدو وروسته، یا د دوو میاشتنیو عادتونو ترمنځ وینه، له یو ځل زیات",
-            "en": "Bleeding after sex, or between periods, more than once"
+            "fa": "خونریزی بعد از همبستری، یا بین دو عادت ماهوار، بیش از یک بار (اگر حامله نیستید)",
+            "ps": "له مېړه سره له یوځای کېدو وروسته، یا د دوو میاشتنیو عادتونو ترمنځ وینه، له یو ځل زیات (که امیندواره نه یاست)",
+            "en": "Bleeding after sex, or between periods, more than once (not pregnant)"
           }
         },
         {
@@ -136,9 +157,9 @@
         "en": "The cervix test"
       },
       "text": {
-        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
-        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
-        "en": "Ask for the cervix test once between 30 and 49, or every 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
+        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
+        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۳ تر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
+        "en": "Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
       }
     },
     {

@@ -168,7 +168,7 @@
   },
   "nextVaccine": {
    "fa": "واکسین بعدی",
-   "ps": "بل واکسین",
+   "ps": "راتلونکی واکسین",
    "en": "Next vaccine"
   },
   "overdue": {
@@ -572,9 +572,9 @@
    "en": "Finding where you are…"
   },
   "locFail": {
-   "fa": "جای شما پیدا نشد. GPS گوشی را روشن کنید.",
-   "ps": "ستاسو ځای پیدا نشو. د ټیلیفون GPS روښانه کړئ.",
-   "en": "Could not find your location. Turn on the phone's GPS."
+   "fa": "جای شما پیدا نشد. موقعیت‌یاب گوشی را روشن کنید.",
+   "ps": "ستاسو ځای پیدا نشو. د ټیلیفون ځای موندونکی روښانه کړئ.",
+   "en": "Could not find your location. Turn on the phone's location."
   },
   "km": {
    "fa": "{n} کیلومتر",
@@ -1304,9 +1304,9 @@
    "en": "Welcome to Sehat, your family health book. Tap your language."
   },
   "ui.home": {
-   "fa": "این کتاب به شما کمک می‌کند از صحت خانوادۀ خود مراقبت کنید. اطفال یا بزرگسالان را انتخاب کنید. هر جا بلندگو را دیدید، بزنید تا بشنوید.",
-   "ps": "دا کتاب له تاسو سره مرسته کوي چې د خپلې کورنۍ د روغتیا پاملرنه وکړئ. ماشومان یا لویان وټاکئ. هر چېرې چې ویاند ووینئ، ټک یې کړئ چې واورئ.",
-   "en": "This book helps you look after your family's health. Choose children or adults. Wherever you see a speaker, tap it to listen."
+   "fa": "این کتاب به شما کمک می‌کند از صحت خانوادۀ خود مراقبت کنید. هر جا بلندگو را دیدید، بزنید تا بشنوید.",
+   "ps": "دا کتاب له تاسو سره مرسته کوي چې د خپلې کورنۍ د روغتیا پاملرنه وکړئ. هر چېرې چې ویاند ووینئ، ټک یې کړئ چې واورئ.",
+   "en": "This book helps you look after your family's health. Wherever you see a speaker, tap it to listen."
   },
   "ui.children": {
    "fa": "بخش اطفال. روی هر موضوع بزنید تا باز شود. بلندگو نام موضوع را می‌خواند.",

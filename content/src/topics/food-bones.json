@@ -111,9 +111,9 @@
           "id": "food-bones.soon.legs",
           "icon": "milestones",
           "text": {
-            "fa": "طفلی که پاهایش کج می‌شود، یا بند دستش ضخیم است",
-            "ps": "هغه ماشوم چې پښې یې کږېږي، یا مړوند یې پنډ دی",
-            "en": "a child whose legs are bowing, or whose wrists are thick"
+            "fa": "طفلی که پاهایش بعد از ۲ سالگی بیشتر کج می‌شود، یا یک طرف بیشتر کج است، یا بند دستش ضخیم است",
+            "ps": "هغه ماشوم چې پښې یې له ۲ کلنۍ وروسته ډېرې کږېږي، یا یوه خوا ډېره کږه وي، یا مړوند یې پنډ دی",
+            "en": "a child whose legs bow more after age 2, or more on one side, or whose wrists are thick"
           }
         }
       ]

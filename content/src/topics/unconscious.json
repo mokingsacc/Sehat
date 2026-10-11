@@ -47,9 +47,9 @@
         "en": "Not breathing normally? Start CPR"
       },
       "text": {
-        "fa": "اگر عادی نفس نمی‌کشد، همین حالا فشار سینه را شروع کنید. صفحهٔ مخصوص سن او را ببینید.",
-        "ps": "که په عادي ډول ساه نه اخلي، همدا اوس د سینې فشار پیل کړئ. د هغه د عمر ځانګړې پاڼه وګورئ.",
-        "en": "If they are not breathing normally, start pushing on the chest now. See the page for their age."
+        "fa": "اگر عادی نفس نمی‌کشد، همین حالا فشار سینه را شروع کنید؛ به طفل یا شیرخوار اول ۵ بار نفس بدهید. صفحهٔ سن او را در پایین باز کنید.",
+        "ps": "که په عادي ډول ساه نه اخلي، همدا اوس د سینې فشار پیل کړئ؛ ماشوم یا تي خوړونکي ته لومړی ۵ ځله ساه ورکړئ. لاندې د هغه د عمر پاڼه پرانیزئ.",
+        "en": "If they are not breathing normally, start chest pushes now; give a child or baby 5 breaths first. Open the page for their age below."
       }
     },
     {
@@ -57,15 +57,50 @@
       "type": "link",
       "to": "topic/cpr-adult",
       "icon": "breathe",
+      "urgent": true,
       "title": {
         "fa": "بزرگسال نفس نمی‌کشد؟",
         "ps": "لوی کس ساه نه اخلي؟",
         "en": "Adult not breathing?"
       },
       "text": {
-        "fa": "صفحهٔ بزرگسال را باز کنید. برای طفل یا شیرخوار، صفحهٔ طفل یا شیرخوار را ببینید.",
-        "ps": "د لوی کس پاڼه پرانیزئ. د ماشوم یا تي خوړونکي لپاره، د هغوی پاڼه وګورئ.",
-        "en": "Open the adult page. For a child or baby, use the child or baby page."
+        "fa": "صفحهٔ بزرگسال را باز کنید و قدم به قدم انجام دهید.",
+        "ps": "د لوی کس پاڼه پرانیزئ او ګام په ګام یې وکړئ.",
+        "en": "Open the adult page and follow it step by step."
+      }
+    },
+    {
+      "id": "unconscious.cpr-child",
+      "type": "link",
+      "to": "topic/cpr-child",
+      "icon": "breathe",
+      "urgent": true,
+      "title": {
+        "fa": "طفل نفس نمی‌کشد؟",
+        "ps": "ماشوم ساه نه اخلي؟",
+        "en": "Child not breathing?"
+      },
+      "text": {
+        "fa": "صفحهٔ طفل را باز کنید: اول ۵ بار نفس، بعد فشار سینه.",
+        "ps": "د ماشوم پاڼه پرانیزئ: لومړی ۵ ځله ساه، بیا د سینې فشار.",
+        "en": "Open the child page: 5 breaths first, then chest pushes."
+      }
+    },
+    {
+      "id": "unconscious.cpr-baby",
+      "type": "link",
+      "to": "topic/cpr-baby",
+      "icon": "baby",
+      "urgent": true,
+      "title": {
+        "fa": "شیرخوار کمتر از ۱ سال نفس نمی‌کشد؟",
+        "ps": "له ۱ کال کم ماشوم ساه نه اخلي؟",
+        "en": "Baby under 1 not breathing?"
+      },
+      "text": {
+        "fa": "صفحهٔ شیرخوار را باز کنید: اول ۵ بار نفس، بعد فشار سینه.",
+        "ps": "د تي خوړونکي ماشوم پاڼه پرانیزئ: لومړی ۵ ځله ساه، بیا د سینې فشار.",
+        "en": "Open the baby page: 5 breaths first, then chest pushes."
       }
     },
     {

@@ -43,6 +43,21 @@
       "anim": "weigh-child"
     },
     {
+      "id": "kit-scale.zero",
+      "type": "step",
+      "icon": "growth",
+      "title": {
+        "fa": "ترازوی آویزان: اول روی ۰",
+        "ps": "ځوړنده تله: لومړی په ۰",
+        "en": "Hanging scale: set it to 0 first"
+      },
+      "text": {
+        "fa": "خریطهٔ خالی را آویزان کنید و ترازو را روی ۰ بیاورید. بعد طفل را در خریطه بگذارید.",
+        "ps": "خالي کڅوړه وځړوئ او تله په ۰ برابره کړئ. بیا ماشوم په کڅوړه کې کېږدئ.",
+        "en": "Hang the empty sling and set the scale to 0. Then put the baby in the sling."
+      }
+    },
+    {
       "id": "kit-scale.hold",
       "type": "step",
       "icon": "growth",

@@ -162,11 +162,11 @@
         },
         {
           "id": "growth.urgent.thin",
-          "icon": "muac",
+          "icon": "sleepy",
           "text": {
-            "fa": "خیلی لاغر است و همچنان خیلی ضعیف، خواب‌آلود یا مریض است",
-            "ps": "ډېر ډنګر دی او ډېر کمزوری، خوب وړی یا ناروغ هم دی",
-            "en": "is very thin and also very weak, sleepy or sick"
+            "fa": "خیلی لاغر است و خیلی ضعیف یا خواب‌آلود است، یا به سختی بیدار می‌شود",
+            "ps": "ډېر ډنګر دی او ډېر کمزوری یا خوب وړی دی، یا په سختۍ ویښېږي",
+            "en": "is very thin and very weak or sleepy, or hard to wake"
           }
         },
         {
@@ -176,6 +176,42 @@
             "fa": "هیچ چیز نمی‌خورد یا نمی‌نوشد",
             "ps": "هېڅ شی نه خوري او نه څښي",
             "en": "will not eat or drink anything"
+          }
+        },
+        {
+          "id": "growth.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "بسیار لاغر است و همه چیز را استفراغ می‌کند",
+            "ps": "ډېر ډنګر دی او هر څه کانګې کوي",
+            "en": "is very thin and vomits everything"
+          }
+        },
+        {
+          "id": "growth.urgent.fever",
+          "icon": "fever",
+          "text": {
+            "fa": "بسیار لاغر است و تب بلند دارد (۳۹ یا بیشتر)، یا بدنش سرد است",
+            "ps": "ډېر ډنګر دی او لوړه تبه لري (۳۹ یا ډېر)، یا بدن یې سوړ دی",
+            "en": "is very thin with a high fever (39 or more), or feels cold"
+          }
+        },
+        {
+          "id": "growth.urgent.convulsion",
+          "icon": "convulsion",
+          "text": {
+            "fa": "تشنج کرده یا حالا تشنج دارد",
+            "ps": "اختلاج یې کړی یا اوس اختلاج لري",
+            "en": "has had convulsions (fits), or has them now"
+          }
+        },
+        {
+          "id": "growth.urgent.eye-spot",
+          "icon": "eye",
+          "text": {
+            "fa": "روی سیاهی چشمش لکهٔ سفید یا کدر دیده می‌شود، یا چشمش سرخ و دردناک است",
+            "ps": "د سترګې پر تور یې سپین یا خړ داغ ښکاري، یا سترګه یې سره او دردناکه ده",
+            "en": "has a white or cloudy spot you can see on the black of the eye, or a red, painful eye"
           }
         }
       ]
@@ -261,9 +297,9 @@
           "id": "growth.soon.white-eye",
           "icon": "eye",
           "text": {
-            "fa": "در سیاهی چشم برق سفید دارد",
-            "ps": "د سترګې په تور کې سپینه ځلا لري",
-            "en": "has a white glow in the black of the eye"
+            "fa": "مردمک چشمش فقط در عکس با فلش یا روشنی چراغ دستی سفید معلوم می‌شود",
+            "ps": "د سترګې کسی یې یوازې د فلش په عکس یا د لاسي څراغ په رڼا کې سپین ښکاري",
+            "en": "has a white pupil seen only in a flash photo or torchlight"
           }
         },
         {
