@@ -11,7 +11,7 @@
     "ps": "د ماشومانو ډېرې پېښې په کور کې مخنیوی کېدای شي.",
     "en": "Most injuries to children can be prevented at home."
   },
-  "image": "child-safety",
+  "image": "img/symptoms/safety.webp",
   "blocks": [
     {
       "id": "child-safety.lead",

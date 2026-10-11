@@ -11,7 +11,7 @@
     "ps": "چا ته اړین دی، څنګه یې اندازه کړئ، شمېرې څه مانا لري.",
     "en": "Who needs one, how to measure, and what the numbers mean."
   },
-  "image": "kit-bp",
+  "image": "img/stills/bp-rest.webp",
   "blocks": [
     {
       "id": "kit-bp.lead",
@@ -71,7 +71,7 @@
         "ps": "تر هغه ۳۰ دقیقې مخکې چای، سګرټ او سخت کار مه کوئ. شا ته تکیه وکړئ، پښې پر ځمکه برابرې، او مټ د زړه په لوړوالي پر یو شي کېږدئ.",
         "en": "No tea, smoking or hard work for 30 minutes before. Sit with your back supported, feet flat, and arm resting at heart height."
       },
-      "picture": "bp-sit"
+      "picture": "img/stills/bp-rest.webp"
     },
     {
       "id": "kit-bp.measure",
@@ -86,7 +86,8 @@
         "fa": "کف را روی بازوی برهنه ببندید. گپ نزنید. اندازه کنید، ۱ دقیقه صبر کنید، دوباره اندازه کنید و هر دو را بنویسید.",
         "ps": "کف پر لوڅ مټ وتړئ. خبرې مه کوئ. اندازه یې کړئ، ۱ دقیقه صبر وکړئ، بیا یې اندازه کړئ، او دواړه ولیکئ.",
         "en": "Put the cuff on the bare upper arm. Do not talk. Measure, wait 1 minute, measure again, and write down both."
-      }
+      },
+      "picture": "img/stills/bp-cuff.webp"
     },
     {
       "id": "kit-bp.time",

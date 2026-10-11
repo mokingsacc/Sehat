@@ -11,7 +11,7 @@
     "ps": "۲۰ دقیقې په بهېدونکو اوبو یې سړه کړئ، سست یې وپوښئ، ماشوم ګرم وساتئ.",
     "en": "Cool with running water for 20 minutes, cover loosely, keep warm."
   },
-  "image": "burns",
+  "image": "img/steps/burns-cool/1-full-up.webp",
   "blocks": [
     {
       "id": "burns.lead",
@@ -40,7 +40,8 @@
         "fa": "اگر لباس آتش گرفته: بایستید، به زمین بیفتید و غلت بزنید، یا با کمپل ضخیم بپوشانید. شخص را از گرمی دور کنید.",
         "ps": "که جامې اور اخیستي وي: ودرېږئ، پر ځمکه ولوېږئ او ورغړېږئ، یا په پنډه کمپله یې ونغاړئ. کس له تودوخې لرې کړئ.",
         "en": "If clothes are on fire: stop, drop to the ground and roll, or wrap in a thick blanket. Move the person away from the heat."
-      }
+      },
+      "picture": "img/steps/burns-cool/stop-full.webp"
     },
     {
       "id": "burns.cool",
@@ -56,7 +57,7 @@
         "ps": "۲۰ دقیقې سړې، پاکې او بهېدونکې اوبه پر سوځېدلي ځای واچوئ. څومره ژر چې کېږي پیل یې کړئ؛ تر ۳ ساعتونو وروسته هم ګټه لري.",
         "en": "Pour cool, clean running water over the burn for 20 minutes. Start as soon as you can; it still helps up to 3 hours later."
       },
-      "picture": "em-burns-cool"
+      "picture": "img/steps/burns-cool/1-full-up.webp"
     },
     {
       "id": "burns.rings",
@@ -71,7 +72,8 @@
         "fa": "وقت سرد کردن، انگشتر، چوری و لباس نزدیک سوختگی را بکشید. چیزی را که به پوست چسپیده، نکشید.",
         "ps": "د سړولو پر مهال، ګوتمۍ، بنګړي او د سوځېدلي ځای نږدې جامې لرې کړئ. هغه څه چې له پوستکي سره نښتي، مه یې باسئ.",
         "en": "While cooling, take off rings, bangles and clothes near the burn. Leave anything that is stuck to the skin."
-      }
+      },
+      "picture": "img/stills/burns-rings.webp"
     },
     {
       "id": "burns.cover",
@@ -86,7 +88,8 @@
         "fa": "سوختگی را با یک تکهٔ پاک و خشک، یا اگر دارید با پلاستیک پاک، سست بپوشانید. آبله‌ها را نترکانید.",
         "ps": "سوځېدلی ځای په پاک او وچ ټوکر، یا که لرئ په پاک پلاستیک، سست وپوښئ. اوبلنې دانې مه چوي کوئ.",
         "en": "Cover the burn loosely with a clean, dry cloth, or clean plastic food wrap if you have it. Do not burst blisters."
-      }
+      },
+      "picture": "img/steps/burns-cool/3-full.webp"
     },
     {
       "id": "burns.warm",

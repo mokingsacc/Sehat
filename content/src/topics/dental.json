@@ -11,7 +11,7 @@
     "ps": "له تبې سره پړسېدلی مخ: همدا اوس روغتون. غاښونه په ورځ کې دوه ځله پاک کړئ.",
     "en": "Swollen face with fever: hospital now. Clean teeth twice a day."
   },
-  "image": "dental",
+  "image": "img/symptoms/teeth.webp",
   "blocks": [
     {
       "id": "dental.lead",

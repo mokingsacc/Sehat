@@ -11,7 +11,7 @@
     "ps": "په یخنۍ کې لړزه، سستي او ګډوډي: ورو یې ګرم کړئ.",
     "en": "Shivering, slow or confused in the cold: warm them gently."
   },
-  "image": "cold-hypothermia",
+  "image": "img/steps/cold-warming/1-full.webp",
   "blocks": [
     {
       "id": "cold-hypothermia.lead",
@@ -55,7 +55,8 @@
         "fa": "لباس تر را بکشید و پوست را خشک کنید. او را در کمپل خشک بپیچانید و سرش را با کلاه یا شال بپوشانید.",
         "ps": "لندې جامې یې وباسئ او پوستکی یې وچ کړئ. په وچو کمپلو کې یې ونغاړئ او سر یې په خولۍ یا شال پټ کړئ.",
         "en": "Take off wet clothes and dry the skin. Wrap them in dry blankets, with a hat or scarf on the head."
-      }
+      },
+      "picture": "img/steps/cold-warming/1-full.webp"
     },
     {
       "id": "cold-hypothermia.baby",
@@ -70,7 +71,8 @@
         "fa": "شیرخوار سرد را پوست به پوست روی سینهٔ مادر بگیرید، با کمپل بپوشانید و شیر بدهید.",
         "ps": "یخ ماشوم پوستکی په پوستکي د مور پر سینه ونیسئ، په کمپلو یې وپوښئ او تی ورکړئ.",
         "en": "Hold a cold baby skin to skin on the mother's chest, cover them both with blankets, and breastfeed."
-      }
+      },
+      "picture": "img/steps/cpr-newborn/6-full.webp"
     },
     {
       "id": "cold-hypothermia.drink",
@@ -85,7 +87,8 @@
         "fa": "اگر کاملاً بیدار است و قورت داده می‌تواند، چای یا نوشیدنی گرم و شیرین بدهید. تنهٔ بدن را گرم کنید، نه فقط دست و پا را.",
         "ps": "که بشپړ ویښ وي او تېرولی شي، ګرمه او خوږه چای یا څښاک ورکړئ. د بدن تنه ګرمه کړئ، نه یوازې لاسونه او پښې.",
         "en": "If fully awake and able to swallow, give warm, sweet tea or drinks. Warm the body, not just the hands and feet."
-      }
+      },
+      "picture": "img/steps/cold-warming/2-full.webp"
     },
     {
       "id": "cold-hypothermia.frostbite",
@@ -100,7 +103,8 @@
         "fa": "انگشتان سفید، سخت و بی‌حس را ۳۰ دقیقه در آب گرم، نه داغ، گرم کنید. آن‌ها را مالش ندهید.",
         "ps": "سپینې، کلکې او بې‌حسه ګوتې ۳۰ دقیقې په تودو، نه ډېرو ګرمو، اوبو کې ګرمې کړئ. مه یې مښئ.",
         "en": "Warm white, hard, numb fingers or toes in warm, not hot, water for 30 minutes. Do not rub them."
-      }
+      },
+      "picture": "img/steps/cold-warming/3-full.webp"
     },
     {
       "id": "cold-hypothermia.urgent",

@@ -11,7 +11,7 @@
     "ps": "اوبلنې ورکړئ، سپکې جامې ورته واغوندئ او پوه شئ چې کله ولاړ شئ.",
     "en": "Give fluids, dress lightly, and know when to go."
   },
-  "image": "fever",
+  "image": "img/symptoms/fever.webp",
   "blocks": [
     {
       "id": "fever.lead",

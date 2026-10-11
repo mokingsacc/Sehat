@@ -40,7 +40,8 @@
         "fa": "سویچ یا سویچ عمومی را خاموش کنید، یا پلگ را بکشید. تا برق قطع نشده، به شخص دست نزنید.",
         "ps": "سویچ یا عمومي سویچ بند کړئ، یا پلګ وباسئ. تر څو برېښنا بنده شوې نه وي، کس ته لاس مه وړئ.",
         "en": "Turn off the switch or the main switch, or pull out the plug. Do not touch the person until the power is off."
-      }
+      },
+      "picture": "img/steps/electric-stick/1-full.webp"
     },
     {
       "id": "electric-shock.stick",
@@ -56,7 +57,7 @@
         "ps": "پر یوه وچ شي ودرېږئ. سیم په وچ لرګي یا لرګینې چوکۍ لرې کړئ. هېڅکله لوند یا فلزي شی مه کاروئ.",
         "en": "Stand on something dry. Push the wire away with a dry wooden stick or chair. Never use anything wet or metal."
       },
-      "picture": "em-electric-stick"
+      "picture": "img/steps/electric-stick/2-full-up.webp"
     },
     {
       "id": "electric-shock.line",
@@ -71,7 +72,8 @@
         "fa": "اگر سیم بزرگ برق افتاده، حداقل ۲۰ قدم دور بمانید و دیگران را هم دور نگه دارید تا برق قطع شود.",
         "ps": "که د برېښنا لوی سیم لوېدلی وي، لږ تر لږه ۲۰ قدمه لرې پاتې شئ او نور هم لرې وساتئ تر څو برېښنا پرې شي.",
         "en": "If a big power line has fallen, stay at least 20 steps away and keep others back until the power is cut."
-      }
+      },
+      "picture": "img/steps/electric-stick/3-full.webp"
     },
     {
       "id": "electric-shock.breathing",

@@ -11,7 +11,7 @@
     "ps": "له خوړو، د مچۍ له چیچلو یا درملو وروسته پړسوب او د ساه ستونزه.",
     "en": "Swelling and trouble breathing after a food, sting or medicine."
   },
-  "image": "allergy-severe",
+  "image": "img/steps/allergy-position/1-full.webp",
   "blocks": [
     {
       "id": "allergy-severe.lead",
@@ -70,7 +70,8 @@
         "fa": "اگر نفس کشیدن سخت است، بگذارید بنشیند. اگر سرش می‌چرخد، او را هموار بخوابانید و پاهایش را بالا کنید. نگذارید بایستد یا راه برود.",
         "ps": "که ساه اخیستل سخت وي، پرېږدئ چې کېني. که سر یې ګرځي، هوار یې وغځوئ او پښې یې پورته کړئ. مه پرېږدئ چې ودرېږي یا وګرځي.",
         "en": "If breathing is hard, let them sit up. If they feel faint, lay them flat with the legs raised. Do not let them stand or walk."
-      }
+      },
+      "picture": "img/steps/allergy-position/2-full.webp"
     },
     {
       "id": "allergy-severe.sting",
@@ -85,7 +86,8 @@
         "fa": "بعد از نیش زنبور عسل، نیش را زود با ناخن یا یک کارت بتراشید و بیرون کنید.",
         "ps": "د شاتو د مچۍ له چیچلو وروسته، نیش ژر په نوک یا کارت وګروئ او ویې باسئ.",
         "en": "After a bee sting, scrape the sting out quickly with a fingernail or a card."
-      }
+      },
+      "picture": "img/stills/allergy-sting.webp"
     },
     {
       "id": "allergy-severe.cpr",

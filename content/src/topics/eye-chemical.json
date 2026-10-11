@@ -41,7 +41,7 @@
         "ps": "سترګه خلاصه ونیسئ او پاکې اوبه ورو د پوزې له خوا کونج څخه بهر خوا ته واچوئ، ۲۰ دقیقې. هرې پاکې اوبه وکاروئ؛ انتظار مه باسئ.",
         "en": "Hold the eye open and pour clean water gently from the inner corner outwards, for 20 minutes. Use any clean water; do not wait."
       },
-      "picture": "em-eye-wash"
+      "picture": "img/stills/eye-wash.webp"
     },
     {
       "id": "eye-chemical.tilt",
@@ -71,7 +71,8 @@
         "fa": "اگر پودر خشک چونه یا سمنت روی صورت است، اول آن را آهسته از پلک‌ها پاک کنید، بعد با آب زیاد بشویید.",
         "ps": "که د چونې یا سمټو وچ پوډر پر مخ وي، لومړی یې ورو له پلکونو پاک کړئ، بیا په ډېرو اوبو ومینځئ.",
         "en": "If dry lime or cement powder is on the face, gently brush it off the eyelids first, then wash with lots of water."
-      }
+      },
+      "picture": "img/steps/eye-wash/1-full.webp"
     },
     {
       "id": "eye-chemical.cover",
@@ -86,7 +87,8 @@
         "fa": "بعد از شستن، چشم را با تکهٔ پاک آهسته بپوشانید و همین حالا به شفاخانه بروید، شب باشد یا روز. بوتل یا نام آن ماده را با خود ببرید.",
         "ps": "له مینځلو وروسته، سترګه په پاک ټوکر ورو وپوښئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. د هغو موادو بوتل یا نوم له ځان سره یوسئ.",
         "en": "After washing, cover the eye lightly with a clean cloth and go to hospital now. Take the bottle or the name of the chemical."
-      }
+      },
+      "picture": "img/stills/eye-cover.webp"
     },
     {
       "id": "eye-chemical.dust",

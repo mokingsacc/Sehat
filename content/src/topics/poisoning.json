@@ -11,7 +11,7 @@
     "ps": "خاورین تېل، د کرنې درمل، درمل او د موږکانو زهر: لومړی څه وکړئ.",
     "en": "Kerosene, farm sprays, medicines, rat poison: what to do first."
   },
-  "image": "poisoning",
+  "image": "img/steps/poisoning/1-full.webp",
   "blocks": [
     {
       "id": "poisoning.lead",
@@ -100,7 +100,8 @@
         "fa": "اگر خواب‌آلود است، او را به پهلو بخوابانید. اگر نفسش بند شد، فشار سینه را شروع کنید.",
         "ps": "که خوب وړی وي، پر اړخ یې وغځوئ. که ساه یې ودرېده، د سینې فشار پیل کړئ.",
         "en": "If they are drowsy, lay them on their side. If breathing stops, start chest pushes."
-      }
+      },
+      "picture": "img/steps/poisoning/1-full.webp"
     },
     {
       "id": "poisoning.later",

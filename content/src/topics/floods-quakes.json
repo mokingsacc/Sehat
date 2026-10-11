@@ -11,7 +11,7 @@
     "ps": "مخکې چمتو شئ او پوه شئ چې د سېلاب یا زلزلې پر وخت څه وکړئ.",
     "en": "Get ready early, and know what to do in floods or earthquakes."
   },
-  "image": "floods-quakes",
+  "image": "img/symptoms/disaster.webp",
   "blocks": [
     {
       "id": "floods-quakes.lead",

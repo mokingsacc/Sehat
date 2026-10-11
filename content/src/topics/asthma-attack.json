@@ -40,7 +40,8 @@
         "fa": "کمکش کنید که راست بنشیند، کمی به پیش خم. لباس تنگ را سست کنید. آرام گپ بزنید؛ ترس آن را بدتر می‌کند.",
         "ps": "مرسته ورسره وکړئ چې نېغ کېني، لږ مخ ته کوږ. تنګې جامې یې سستې کړئ. په ارامۍ خبرې وکړئ؛ وېره یې بدتروي.",
         "en": "Help them sit up, leaning slightly forward. Loosen tight clothes. Speak calmly; fear makes it worse."
-      }
+      },
+      "picture": "img/steps/inhaler-spacer/3-full.webp"
     },
     {
       "id": "asthma-attack.inhaler",
@@ -56,7 +57,7 @@
         "ps": "شین پف هماغسې وکاروئ لکه کلینیک چې در زده کړي، که فاصله ورکوونکی لري له هغه سره. پفونه یو یو وکړئ.",
         "en": "Use the blue reliever inhaler as the clinic showed you, with a spacer if they have one. Give the puffs one at a time."
       },
-      "picture": "em-asthma-spacer"
+      "picture": "img/stills/inhaler-spacer.webp"
     },
     {
       "id": "asthma-attack.worse",

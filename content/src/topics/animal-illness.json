@@ -11,7 +11,7 @@
     "ps": "د کانګو تبه، د مالټا تبه او تور زخم له څارویو راځي. کورنۍ وساتئ.",
     "en": "Congo fever, Malta fever and anthrax come from livestock. Protect your family."
   },
-  "image": "animal-illness",
+  "image": "img/symptoms/animals.webp",
   "blocks": [
     {
       "id": "animal-illness.lead",

@@ -11,7 +11,7 @@
     "ps": "پړسېدلې پښې یا نه خوري: همدا اوس روغتون. ډېر ډنګر: نن کلینیک.",
     "en": "Swollen feet or will not eat: hospital now. Very thin: clinic today."
   },
-  "image": "malnutrition",
+  "image": "img/symptoms/thin.webp",
   "blocks": [
     {
       "id": "malnutrition.lead",

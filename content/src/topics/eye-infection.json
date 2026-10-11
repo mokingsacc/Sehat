@@ -11,7 +11,7 @@
     "ps": "د سترګو درد، ټپ یا د لید کمېدل: همدا اوس روغتون. زوه لرونکې سترګې: نن کلینیک.",
     "en": "Eye pain, injury or sight loss: hospital now. Sticky eyes: clinic today."
   },
-  "image": "eye-infection",
+  "image": "img/symptoms/eyes.webp",
   "blocks": [
     {
       "id": "eye-infection.lead",

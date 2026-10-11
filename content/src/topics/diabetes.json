@@ -11,7 +11,7 @@
     "ps": "نښې، معاینه، خواړه، پلي ګرځېدل، درمل او د پښو پاملرنه",
     "en": "Signs, testing, food, walking, medicine and foot care"
   },
-  "image": "diabetes",
+  "image": "img/symptoms/sugar.webp",
   "blocks": [
     {
       "id": "diabetes.lead",

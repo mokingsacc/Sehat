@@ -11,7 +11,7 @@
     "ps": "له زیان یې وساتئ، د اختلاج وخت وګورئ، بیا یې پر اړخ څملوئ.",
     "en": "Keep them safe, time the fit, then lay them on their side."
   },
-  "image": "seizures",
+  "image": "img/steps/seizure/2-full-up.webp",
   "blocks": [
     {
       "id": "seizures.lead",
@@ -40,7 +40,8 @@
         "fa": "آتش، بخاری، چای داغ، آب و چیزهای تیز را دور کنید. شخص را تکان ندهید، مگر اینکه در خطر باشد.",
         "ps": "اور، بخاري، ګرمه چای، اوبه او تېره شیان لرې کړئ. کس مه خوځوئ، مګر دا چې په خطر کې وي.",
         "en": "Move away fire, the stove, hot tea, water and sharp things. Do not move the person unless they are in danger."
-      }
+      },
+      "picture": "img/stills/seizure-safe.webp"
     },
     {
       "id": "seizures.head",
@@ -56,7 +57,7 @@
         "ps": "یو نرم شی لکه قات شوی ټوکر یې تر سر لاندې کېږدئ. د غاړې شاوخوا تنګې جامې یې سستې کړئ.",
         "en": "Put something soft, like a folded cloth, under the head. Loosen tight clothes around the neck."
       },
-      "picture": "em-seizure-cushion"
+      "picture": "img/steps/seizure/2-full-up.webp"
     },
     {
       "id": "seizures.time",
@@ -71,7 +72,8 @@
         "fa": "وقتی شروع شد، به ساعت یا تلفن ببینید. اگر بیشتر از ۵ دقیقه دوام کرد، یک نفر را برای موتر بفرستید و به شفاخانه بروید.",
         "ps": "کله چې پیل شي، ساعت یا ټیلیفون ته وګورئ. که له ۵ دقیقو زیات دوام وکړي، یو څوک د موټر لپاره ولېږئ او روغتون ته ولاړ شئ.",
         "en": "Look at a clock or phone when it starts. If it lasts more than 5 minutes, send for a car and go to hospital."
-      }
+      },
+      "picture": "img/stills/seizure-time.webp"
     },
     {
       "id": "seizures.side",
@@ -86,7 +88,8 @@
         "fa": "وقتی لرزه تمام شد، او را به پهلو بچرخانید، سرش به عقب، تا آب دهان بیرون شود. پیشش بمانید تا کاملاً بیدار شود.",
         "ps": "کله چې لړزه ودرېږي، پر اړخ یې واړوئ، سر یې شاته، چې لاړې بهر ووځي. ورسره پاتې شئ تر څو بشپړ ویښ شي.",
         "en": "When the shaking stops, roll them onto their side, head back, so saliva can run out. Stay until they are fully awake."
-      }
+      },
+      "picture": "img/steps/seizure/4-full.webp"
     },
     {
       "id": "seizures.epilepsy",

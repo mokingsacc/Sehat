@@ -11,7 +11,7 @@
     "ps": "له لوېدو وروسته یا د پښو له کمزورۍ سره: همدا اوس روغتون. ورو ورو وخوځېږئ.",
     "en": "After a fall, or with weak legs: hospital now. Keep moving gently."
   },
-  "image": "back-pain",
+  "image": "img/symptoms/back.webp",
   "blocks": [
     {
       "id": "back-pain.lead",

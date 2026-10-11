@@ -11,7 +11,7 @@
     "ps": "د وینې د کمښت نښې، اوسپنه لرونکي خواړه، او د چای سم وخت",
     "en": "Signs of anaemia, iron-rich foods, and the right time for tea"
   },
-  "image": "anaemia",
+  "image": "img/symptoms/tired.webp",
   "blocks": [
     {
       "id": "anaemia.lead",

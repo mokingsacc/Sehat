@@ -11,7 +11,7 @@
     "ps": "ارام او بې‌حرکته اوسئ، روغتون ته ولاړ شئ. مه یې پرې کوئ، مه یې زبېښئ، کلک یې مه تړئ.",
     "en": "Keep still and go to hospital. No cutting, sucking or tight bands."
   },
-  "image": "snake-scorpion",
+  "image": "img/steps/snake-bite/3-full.webp",
   "blocks": [
     {
       "id": "snake-scorpion.lead",
@@ -40,7 +40,8 @@
         "fa": "از مار دور شوید. کوشش نکنید آن را بگیرید یا بکشید. شخص را آرام و بی‌حرکت خوابیده نگه دارید.",
         "ps": "له مار لرې شئ. هڅه مه کوئ چې ونیسئ یا یې ووژنئ. کس ارام او بې‌حرکته غځېدلی وساتئ.",
         "en": "Move away from the snake. Do not try to catch or kill it. Keep the person calm, lying still."
-      }
+      },
+      "picture": "img/steps/snake-bite/1-full.webp"
     },
     {
       "id": "snake-scorpion.still",
@@ -56,7 +57,7 @@
         "ps": "مخکې له پړسېدو، ګوتمۍ، بنګړي او بوټونه وباسئ. لاس یا پښه بې‌حرکته وساتئ، که کېږي په یوه تخته.",
         "en": "Before it swells, take off rings, bangles and shoes. Keep the arm or leg still, with a splint if you can."
       },
-      "picture": "em-snakebite-splint"
+      "picture": "img/steps/snake-bite/3-full.webp"
     },
     {
       "id": "snake-scorpion.carry",
@@ -71,7 +72,8 @@
         "fa": "همین حالا به شفاخانه بروید، شب باشد یا روز. شخص را بردارید یا با موتر ببرید: راه رفتن زهر را زودتر پخش می‌کند.",
         "ps": "همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. کس په غېږ یا په موټر کې یوسئ: تګ زهر ژر خپروي.",
         "en": "Go to hospital now, day or night. Carry the person or take a car: walking spreads the poison faster."
-      }
+      },
+      "picture": "img/steps/snake-bite/4-full.webp"
     },
     {
       "id": "snake-scorpion.side",
@@ -86,7 +88,8 @@
         "fa": "اگر استفراغ می‌کند یا خواب‌آلود می‌شود، او را به پهلوی چپ بخوابانید. نفسش را ببینید و اگر بند شد، فشار سینه را شروع کنید.",
         "ps": "که کانګې کوي یا خوب وړی کېږي، پر چپ اړخ یې وغځوئ. ساه یې وګورئ، او که ودرېده، د سینې فشار پیل کړئ.",
         "en": "If they vomit or get drowsy, lay them on their left side. Watch the breathing, and start chest pushes if it stops."
-      }
+      },
+      "picture": "img/steps/snake-bite/5-full.webp"
     },
     {
       "id": "snake-scorpion.scorpion",

@@ -41,7 +41,8 @@
         "fa": "به شانه‌هایش بزنید و نامش را بلند صدا کنید. اگر جواب نداد، بلند کمک بخواهید و یک نفر را برای آوردن موتر بفرستید.",
         "ps": "اوږې یې وټکوئ او نوم یې په لوړ غږ واخلئ. که ځواب یې ورنه کړ، په لوړ غږ مرسته وغواړئ او یو څوک د موټر راوړلو لپاره ولېږئ.",
         "en": "Tap the shoulders and call the child's name loudly. If there is no answer, shout for help and send someone for a car."
-      }
+      },
+      "picture": "img/steps/cpr-child/1-full.webp"
     },
     {
       "id": "cpr-child.airway",
@@ -56,7 +57,8 @@
         "fa": "طفل را به پشت روی زمین سخت بخوابانید. سرش را کمی به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.",
         "ps": "ماشوم په شا په کلکه ځمکه وغځوئ. سر یې لږ شاته کړئ، زنه یې پورته کړئ او تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
         "en": "Lay the child on its back on firm ground. Tilt the head back a little, lift the chin, and watch the chest for up to 10 seconds."
-      }
+      },
+      "picture": "img/steps/cpr-child/2-full.webp"
     },
     {
       "id": "cpr-child.breaths",
@@ -71,7 +73,8 @@
         "fa": "بینی‌اش را با دو انگشت بند کنید و دهانش را با دهان خود بپوشانید. آرام پف کنید تا سینه‌اش بالا بیاید، ۵ بار.",
         "ps": "پوزه یې په دوو ګوتو بنده کړئ او خوله یې په خپله خوله وپوښئ. ورو پو کړئ تر څو سینه یې پورته شي، ۵ ځله.",
         "en": "Pinch the nose closed and cover the mouth with your mouth. Blow steadily until the chest rises, 5 times."
-      }
+      },
+      "picture": "img/stills/cpr-child-breath.webp"
     },
     {
       "id": "cpr-child.hand",
@@ -87,7 +90,7 @@
         "ps": "د یوه لاس د ورغوي لاندې برخه د سینې د هډوکي په لاندینۍ نیمایي کېږدئ. د سینې درېیمه برخه، شاوخوا ۵ سانتي متره، لاندې فشار ورکړئ. لوی ماشوم ته کېدای شي دواړه لاسونه پکار وي.",
         "en": "Put the heel of one hand on the lower half of the breastbone. Push down a third of the chest, about 5 centimetres. A big child may need two hands."
       },
-      "picture": "em-cpr-child-hand"
+      "picture": "img/steps/cpr-child/push-full-up.webp"
     },
     {
       "id": "cpr-child.rhythm",

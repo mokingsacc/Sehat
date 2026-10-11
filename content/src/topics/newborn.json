@@ -11,7 +11,7 @@
     "ps": "ګرمي، یوازې د مور شیدې، د نوم پاملرنه، واکسین او د خطر نښې.",
     "en": "Warmth, breast milk only, cord care, vaccines and danger signs."
   },
-  "image": "newborn",
+  "image": "img/steps/cpr-newborn/6-full.webp",
   "blocks": [
     {
       "id": "newborn.lead",
@@ -45,7 +45,8 @@
         "fa": "طفل را فوراً خشک کنید و روی سینهٔ برهنهٔ مادر، پوست به پوست، بگذارید. هر دو را بپوشانید و به سر طفل کلاه بگذارید.",
         "ps": "ماشوم سمدلاسه وچ کړئ او د مور پر لوڅه سینه، پوستکی له پوستکي سره، کېږدئ. دواړه پټ کړئ او د ماشوم پر سر خولۍ کېږدئ.",
         "en": "Dry the baby at once and lay the baby on the mother's bare chest, skin to skin. Cover them both, and put a cap on the baby."
-      }
+      },
+      "picture": "img/steps/cpr-newborn/6-full.webp"
     },
     {
       "id": "newborn.breastfeed",
@@ -90,7 +91,8 @@
         "fa": "اگر طفل در خانه به دنیا آمده، کلرهگزیدینی را که قابله یا کارمند صحی قریه می‌دهد، همان‌طور که نشان می‌دهند روی ناف بمالید. در غیر آن، روی ناف هیچ چیز نگذارید. ناف را پاک و خشک نگه دارید.",
         "ps": "که ماشوم په کور کې زېږېدلی وي، هغه کلورهګزیډین چې قابله یا د کلي روغتیايي کارکوونکی یې درکوي، هغسې پر نوم ولګوئ لکه چې دوی یې ښيي. که نه، پر نوم هېڅ شی مه لګوئ. نوم پاک او وچ وساتئ.",
         "en": "If the baby was born at home, use the chlorhexidine the midwife or village health worker gives you, as they show you. Otherwise put nothing on the cord. Keep it clean and dry."
-      }
+      },
+      "picture": "img/steps/newborn-warm/4-full.webp"
     },
     {
       "id": "newborn.vaccines",
@@ -135,7 +137,8 @@
         "fa": "طفل کوچک را شب و روز پوست به پوست روی سینهٔ مادر یا پدر نگه دارید و هر ۲ تا ۳ ساعت شیر بدهید. پاهای سرد یعنی طفل گرمی بیشتر می‌خواهد.",
         "ps": "کوچنی ماشوم شپه او ورځ د مور یا پلار پر سینه پوستکی له پوستکي سره وساتئ او هرو ۲ تر ۳ ساعتونو کې تی ورکړئ. سړې پښې دا معنا لري چې ماشوم نوره ګرمي غواړي.",
         "en": "Keep a small baby skin to skin on the mother's or father's chest, day and night, and feed every 2 to 3 hours. Cold feet mean the baby needs more warmth."
-      }
+      },
+      "picture": "img/steps/newborn-warm/3-full.webp"
     },
     {
       "id": "newborn.breaths",

@@ -11,7 +11,7 @@
     "ps": "سخته ساه: همدا اوس روغتون. چټکه ساه: نن کلینیک. بیا په کور کې پاملرنه.",
     "en": "Hard breathing: hospital now. Fast breathing: clinic today. Then care at home."
   },
-  "image": "cough",
+  "image": "img/symptoms/cough.webp",
   "blocks": [
     {
       "id": "cough.lead",
@@ -86,7 +86,7 @@
         "ps": "کله چې ماشوم آرام وي، یوه بشپړه دقیقه وشمېرئ چې څو ځله سا اخلي. وګورئ چې د سینې لاندې برخه ننوځي که نه.",
         "en": "When the child is calm, count the breaths for one full minute. Look to see if the lower chest pulls in."
       },
-      "picture": "breath-watch"
+      "picture": "img/stills/breath-watch.webp"
     },
     {
       "id": "cough.fast-breathing",

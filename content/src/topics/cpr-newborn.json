@@ -41,7 +41,8 @@
         "fa": "تمام بدن و سر را با یک تکهٔ گرم و پاک خشک کنید. تکهٔ تر را دور کنید و نوزاد را در تکهٔ خشک بپیچانید.",
         "ps": "ټول بدن او سر یې په ګرم او پاک ټوکر وچ کړئ. لوند ټوکر لرې کړئ او ماشوم په وچ ټوکر کې ونغاړئ.",
         "en": "Dry the whole body and head with a warm, clean cloth. Throw away the wet cloth and wrap the baby in a dry one."
-      }
+      },
+      "picture": "img/steps/cpr-newborn/1-full.webp"
     },
     {
       "id": "cpr-newborn.rub",
@@ -56,7 +57,8 @@
         "fa": "وقت خشک کردن، پشتش را ۲ یا ۳ بار محکم بالا و پایین مالش دهید. اگر دهان یا بینی‌اش پر از مایع است، آن را با تکهٔ پاک آهسته پاک کنید.",
         "ps": "د وچولو پر مهال، شا یې ۲ یا ۳ ځله کلکه پورته او ښکته ومښئ. که خوله یا پوزه یې له اوبو ډکه وي، په پاک ټوکر یې ورو پاکه کړئ.",
         "en": "While drying, rub the back firmly up and down 2 or 3 times. If the mouth or nose is full of fluid, wipe it gently with a clean cloth."
-      }
+      },
+      "picture": "img/steps/cpr-newborn/2-full-up.webp"
     },
     {
       "id": "cpr-newborn.head",
@@ -72,7 +74,7 @@
         "ps": "که لا هم نه ژاړي یا ساه نه اخلي، په شا یې په یوه هوار او ګرم ځای کې وغځوئ. سر یې لږ شاته کړئ، ډېر نه.",
         "en": "If the baby still does not cry or breathe, lay it on its back on a flat, warm place. Tilt the head back just a little, not too far."
       },
-      "picture": "em-cpr-newborn-breaths"
+      "picture": "img/steps/cpr-newborn/4-full.webp"
     },
     {
       "id": "cpr-newborn.breaths",
@@ -87,7 +89,8 @@
         "fa": "دهان و بینی نوزاد را با دهان خود بپوشانید. ۵ بار فقط با هوای دهان آهسته پف کنید و ببینید که سینه‌اش بالا می‌آید.",
         "ps": "د ماشوم خوله او پوزه په خپله خوله وپوښئ. ۵ ځله یوازې د خپلې خولې په هوا ورو پو کړئ او وګورئ چې سینه یې پورته کېږي.",
         "en": "Cover the baby's mouth and nose with your mouth. Give 5 gentle puffs from your cheeks, and watch the chest rise."
-      }
+      },
+      "picture": "img/stills/cpr-newborn-puff.webp"
     },
     {
       "id": "cpr-newborn.keep-breathing",
@@ -132,7 +135,8 @@
         "fa": "وقتی نوزاد نفس کشید، او را پوست به پوست روی سینهٔ مادر بگذارید و با کمپل و کلاه بپوشانید. در شیر خوردن کمکش کنید.",
         "ps": "کله چې ماشوم ساه واخیسته، پوستکی په پوستکي یې د مور پر سینه کېږدئ او په کمپله او خولۍ یې وپوښئ. د تي په رودلو کې ورسره مرسته وکړئ.",
         "en": "When the baby breathes, put it skin to skin on the mother's chest, covered with a blanket and a hat. Help the baby breastfeed."
-      }
+      },
+      "picture": "img/steps/cpr-newborn/6-full.webp"
     },
     {
       "id": "cpr-newborn.urgent",

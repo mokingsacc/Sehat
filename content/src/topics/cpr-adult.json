@@ -41,7 +41,8 @@
         "fa": "ببینید که برای شما خطری مانند سیم برق یا موتر نباشد. به شانه‌هایش بزنید و بلند بپرسید: خوب هستی؟",
         "ps": "وګورئ چې تاسو ته د برېښنا د سیم یا موټر په څېر خطر نه وي. اوږې یې وټکوئ او په لوړ غږ وپوښتئ: ښه یې؟",
         "en": "Check there is no danger to you, like electric wires or traffic. Tap the shoulders and shout: Are you all right?"
-      }
+      },
+      "picture": "img/stills/cpr-adult-check.webp"
     },
     {
       "id": "cpr-adult.help",
@@ -71,7 +72,8 @@
         "fa": "سرش را به عقب ببرید و زنخش را بالا کنید. تا ۱۰ ثانیه سینه‌اش را ببینید. نفس سخت و گاه‌گاهی، نفس عادی نیست.",
         "ps": "سر یې شاته کړئ او زنه یې پورته کړئ. تر ۱۰ ثانیو پورې یې سینې ته وګورئ. کله کله سخته ساه اخیستل، عادي ساه نه ده.",
         "en": "Tilt the head back and lift the chin. Watch the chest for up to 10 seconds. Gasping now and then is not normal breathing."
-      }
+      },
+      "picture": "img/stills/cpr-adult-tilt.webp"
     },
     {
       "id": "cpr-adult.push",
@@ -87,7 +89,7 @@
         "ps": "د یوه لاس د ورغوي لاندې برخه د سینې په منځ کې کېږدئ، بل لاس پرې کېږدئ، لاسونه نېغ. ۵ تر ۶ سانتي متره لاندې فشار ورکړئ.",
         "en": "Put the heel of one hand in the centre of the chest, the other hand on top, arms straight. Push down 5 to 6 centimetres."
       },
-      "picture": "em-cpr-adult-hands"
+      "picture": "img/stills/cpr-adult-push.webp"
     },
     {
       "id": "cpr-adult.rhythm",

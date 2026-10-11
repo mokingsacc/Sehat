@@ -11,7 +11,7 @@
     "ps": "ډیجیټل واخلئ، د تخرګ لاندې یې اندازه کړئ، شمېرې وپېژنئ.",
     "en": "Buy a digital one, measure under the arm, know the numbers."
   },
-  "image": "kit-thermometer",
+  "image": "img/stills/thermometer-armpit.webp",
   "blocks": [
     {
       "id": "kit-thermometer.lead",
@@ -55,7 +55,8 @@
         "fa": "سر آن را پاک کنید و روشن کنید. سرش را در بغل خشک، روی پوست بگذارید و بازو را به بدن نزدیک نگه دارید.",
         "ps": "سر یې پاک کړئ او روښانه یې کړئ. سر یې په وچ تخرګ کې پر پوستکي کېږدئ، او مټ له بدن سره نږدې ونیسئ.",
         "en": "Wipe the tip and turn it on. Put the tip in the dry armpit, on the skin, and hold the arm close to the body."
-      }
+      },
+      "picture": "img/stills/thermometer-armpit.webp"
     },
     {
       "id": "kit-thermometer.wait",
@@ -70,7 +71,8 @@
         "fa": "تا وقتی صدا بدهد بازو را آرام نگه دارید، بعد عدد را ببینید. بعد از حمام یا کمپل ضخیم، ۲۰ دقیقه صبر کنید.",
         "ps": "تر هغه چې غږ وکړي مټ ارام ونیسئ، بیا شمېره ولولئ. له لمبلو یا درنو کمپلو وروسته ۲۰ دقیقې صبر وکړئ.",
         "en": "Keep the arm still until it beeps, then read the number. Wait 20 minutes after a bath or heavy blankets."
-      }
+      },
+      "picture": "img/stills/thermometer-wait.webp"
     },
     {
       "id": "kit-thermometer.meaning-page",

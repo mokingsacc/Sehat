@@ -72,7 +72,7 @@
         "ps": "د ماشوم خوله او پوزه په خپله خوله وپوښئ. ورو پو کړئ، یوازې دومره چې سینه یې پورته شي، ۵ ځله.",
         "en": "Cover the baby's mouth and nose with your mouth. Blow gently, just enough to make the chest rise, 5 times."
       },
-      "picture": "em-cpr-baby-breaths"
+      "picture": "img/stills/cpr-baby-breath.webp"
     },
     {
       "id": "cpr-baby.thumbs",
@@ -88,7 +88,7 @@
         "ps": "سینه په دواړو لاسونو ونیسئ او دواړه غټې ګوتې د سینې د هډوکي په لاندینۍ نیمایي کې، د تیو د سرونو له کرښې لږ لاندې، کېږدئ. د سینې درېیمه برخه، شاوخوا ۴ سانتي متره، لاندې فشار ورکړئ.",
         "en": "Hold the chest in both hands, with both thumbs on the lower half of the breastbone, just below the nipple line. Push down a third of the chest, about 4 centimetres."
       },
-      "picture": "em-cpr-baby-thumbs"
+      "picture": "img/stills/cpr-baby-thumbs.webp"
     },
     {
       "id": "cpr-baby.rhythm",

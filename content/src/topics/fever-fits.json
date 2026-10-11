@@ -11,7 +11,7 @@
     "ps": "له تبې سره له اختلاج وروسته: روغتون. پوه شئ چې ماشوم څنګه خوندي وساتئ.",
     "en": "After a fit with fever: hospital. Know how to keep the child safe."
   },
-  "image": "fever-fits",
+  "image": "img/stills/fever-fit-side.webp",
   "blocks": [
     {
       "id": "fever-fits.lead",
@@ -40,7 +40,8 @@
         "fa": "طفل را روی زمین، دور از آتش، بخاری و نوشیدنی داغ بخوابانید. طفل را محکم نگیرید و تکان ندهید.",
         "ps": "ماشوم پر ځمکه، له اور، بخارۍ او ګرمو څښاکونو لرې وغځوئ. ماشوم کلک مه نیسئ او مه یې ښوروئ.",
         "en": "Lay the child on the floor, away from the fire, stove and hot drinks. Do not hold the child tight or shake them."
-      }
+      },
+      "picture": "img/stills/fever-fit-safe.webp"
     },
     {
       "id": "fever-fits.time",
@@ -70,7 +71,8 @@
         "fa": "وقتی لرزه تمام شد، طفل را به پهلو بخوابانید. طفل شاید مدتی خواب‌آلود باشد؛ نزدیکش بمانید.",
         "ps": "کله چې لړزه ودرېږي، ماشوم پر اړخ وغځوئ. ماشوم کېدای شي یو څه وخت خوب وړی وي؛ ورته نږدې پاتې شئ.",
         "en": "When the shaking stops, lay the child on their side. The child may be sleepy for a while; stay close."
-      }
+      },
+      "picture": "img/stills/fever-fit-side.webp"
     },
     {
       "id": "fever-fits.cool",
@@ -85,7 +87,8 @@
         "fa": "لباس و کمپل اضافی را دور کنید. وقتی بیدار شد، زیاد شیر مادر یا نوشیدنی بدهید.",
         "ps": "اضافي جامې او کمپلې لرې کړئ. کله چې ویښ شو، ډېر ځله د مور شیدې یا څښاک ورکړئ.",
         "en": "Take off extra clothes and blankets. When the child is awake, give breast milk or drinks often."
-      }
+      },
+      "picture": "img/steps/fever-fit/3-full.webp"
     },
     {
       "id": "fever-fits.hospital-now",

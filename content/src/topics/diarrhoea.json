@@ -11,7 +11,7 @@
     "ps": "او آر اس او زنک ورکړئ، او خواړه ورکول دوام ورکړئ.",
     "en": "Give ORS and zinc, and keep feeding."
   },
-  "image": "diarrhoea",
+  "image": "img/symptoms/diarrhoea.webp",
   "blocks": [
     {
       "id": "diarrhoea.lead",

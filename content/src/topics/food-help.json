@@ -11,7 +11,7 @@
     "ps": "کوم خواړه رښتیا مرسته کوي، کوم زیان نه لري، او کوم زیان رسوي.",
     "en": "Which foods truly help, which do no harm, and which can hurt."
   },
-  "image": "wellbeing",
+  "image": "heart-food",
   "blocks": [
     {
       "id": "food-help.lead",

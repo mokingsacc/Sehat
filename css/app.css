@@ -84,6 +84,7 @@ img{max-width:100%;display:block}
 /* topic */
 .topic-hero{margin:0 -16px 10px;position:relative;background:var(--accent-t)}
 .topic-hero img{width:100%;aspect-ratio:9/5;object-fit:cover}
+.topic-hero img[src$=".webp"]{object-position:50% 25%}  /* ChatGPT pictures (4:3 or square): keep heads in, crop the floor */
 .topic-hero .round{position:absolute;top:12px;left:12px;inset-inline-start:12px}
 .title-row{display:flex;align-items:center;gap:10px;margin:4px 0 10px}
 .title-row h1{font-size:25px;line-height:1.35;margin:0;flex:1 1 auto}
@@ -331,6 +332,8 @@ img{max-width:100%;display:block}
 .blk.haspic{flex-wrap:wrap}
 .blk.haspic .body{flex:1 1 0}
 .blk .fig{flex:1 0 100%;width:100%;aspect-ratio:9/5;object-fit:cover;border-radius:14px;background:var(--accent-t)}
+/* Mo's ChatGPT pictures (WebP, 4:3) show whole: the hands and what they do must not be cropped off (docs/STEPS_PLAYER.md) */
+.blk .fig[src$=".webp"],.toolpic[src$=".webp"]{aspect-ratio:4/3}
 .trow{display:flex;align-items:center;gap:10px}
 .trow .body{flex:1 1 auto;min-width:0}
 .blk.lead.trow{align-items:center}

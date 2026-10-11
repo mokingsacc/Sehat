@@ -56,7 +56,7 @@
         "ps": "ماشوم په خپل مټ باندې مخ ښکته وغځوئ، سر یې له بدن ټیټ، او ژامه یې ونیسئ. د ورغوي په لاندې برخه د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ.",
         "en": "Lay the baby face down along your arm, head lower than the body, holding the jaw. Give 5 firm blows between the shoulder blades with the heel of your hand."
       },
-      "picture": "em-choking-baby-back"
+      "picture": "img/stills/choking-baby-back.webp"
     },
     {
       "id": "choking-baby.chest",
@@ -72,7 +72,7 @@
         "ps": "ماشوم مخ پورته واړوئ، سر یې ټیټ. دواړه غټې ګوتې د سینې د هډوکي په لاندینۍ نیمایي کې، د تیو د سرونو له کرښې لږ لاندې، کېږدئ او ۵ ځله په چټکۍ سره ننه فشار ورکړئ.",
         "en": "Turn the baby face up, head lower. Put both thumbs on the lower half of the breastbone, just below the nipple line, and push in sharply 5 times."
       },
-      "picture": "em-choking-baby-chest"
+      "picture": "img/steps/choking-baby/4-full-up.webp"
     },
     {
       "id": "choking-baby.repeat",
@@ -87,7 +87,8 @@
         "fa": "دهانش را ببینید. اگر چیزی به آسانی دیده می‌شود، بیرون کنید. اگر نه، باز ۵ ضربه به پشت و ۵ فشار به سینه بدهید.",
         "ps": "خوله یې وګورئ. که څه شی په اسانۍ ښکاري، ویې باسئ. که نه، بیا شا ته ۵ ګوزارونه او پر سینه ۵ فشارونه ورکړئ.",
         "en": "Look in the mouth. Take out anything you can see easily. If not, give 5 back blows and 5 chest pushes again."
-      }
+      },
+      "picture": "img/steps/choking-baby/5-full.webp"
     },
     {
       "id": "choking-baby.limp",

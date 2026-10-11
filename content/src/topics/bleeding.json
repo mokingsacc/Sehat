@@ -41,7 +41,7 @@
         "ps": "یو پاک ټوکر په ټپ کېږدئ او په لاسونو کلک فشار ورکړئ. که پلاستیکي کڅوړه لرئ، په لاس یې کړئ.",
         "en": "Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands."
       },
-      "picture": "em-bleeding-press"
+      "picture": "img/steps/bleeding-press/1-full-up.webp"
     },
     {
       "id": "bleeding.keep",
@@ -56,7 +56,8 @@
         "fa": "حداقل ۱۰ دقیقه بدون برداشتن برای دیدن، فشار دهید. اگر خون از تکه گذشت، تکهٔ دیگر بالایش بگذارید و محکم‌تر فشار دهید.",
         "ps": "لږ تر لږه ۱۰ دقیقې فشار ورکړئ او د کتلو لپاره یې مه پورته کوئ. که وینه له ټوکر تېره شوه، بل ټوکر پرې کېږدئ او کلک فشار ورکړئ.",
         "en": "Press for at least 10 minutes without lifting to look. If blood soaks through, put more cloth on top and press harder."
-      }
+      },
+      "picture": "img/stills/bleeding-keep.webp"
     },
     {
       "id": "bleeding.bandage",
@@ -71,7 +72,8 @@
         "fa": "یک تکهٔ دراز را محکم روی تکهٔ زخم بپیچانید تا فشار بماند. ببینید که انگشتان دست یا پا گلابی و گرم بمانند.",
         "ps": "یو اوږد ټوکر د ټپ پر ټوکر کلک تاو کړئ چې فشار پاتې شي. وګورئ چې د لاس یا پښې ګوتې ګلابي او ګرمې پاتې شي.",
         "en": "Wrap a long cloth tightly over the pad to keep the pressure on. Check the fingers or toes stay pink and warm."
-      }
+      },
+      "picture": "img/steps/bleeding-press/3-full.webp"
     },
     {
       "id": "bleeding.tourniquet",
@@ -117,7 +119,8 @@
         "fa": "او را خوابیده و با کمپل گرم نگه دارید. به او غذا ندهید.",
         "ps": "غځېدلی او په کمپله ګرم یې وساتئ. خواړه مه ورکوئ.",
         "en": "Keep them lying down and warm with a blanket. Do not give food."
-      }
+      },
+      "picture": "img/steps/bleeding-press/4-full.webp"
     },
     {
       "id": "bleeding.urgent",

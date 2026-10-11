@@ -11,7 +11,7 @@
     "ps": "هرې کورنۍ ته اړین نه دی: کلینیک ماشومان تلي.",
     "en": "Not needed by every family: the clinic weighs children."
   },
-  "image": "kit-scale",
+  "image": "img/stills/weigh-hang.webp",
   "blocks": [
     {
       "id": "kit-scale.lead",
@@ -55,7 +55,8 @@
         "fa": "اول خود را وزن کنید. بعد طفل را در بغل بگیرید و دوباره وزن کنید. عدد اول را از عدد دوم کم کنید: این وزن طفل است.",
         "ps": "لومړی ځان وتلئ. بیا ماشوم په غېږ کې ونیسئ او بیا ځان وتلئ. لومړۍ شمېره له دویمې کمه کړئ: دا د ماشوم وزن دی.",
         "en": "Weigh yourself. Then weigh yourself holding the child. Take the first number from the second: that is the child's weight."
-      }
+      },
+      "picture": "img/stills/weigh-hold.webp"
     },
     {
       "id": "kit-scale.same",

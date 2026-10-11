@@ -11,7 +11,7 @@
     "ps": "د اور یا بخارۍ ترڅنګ ناروغه شوئ؟ بهر ووځئ او روغتون ته ولاړ شئ.",
     "en": "Ill near a fire or heater? Get out and go to hospital."
   },
-  "image": "fumes-poisoning",
+  "image": "img/steps/fumes-poisoning/1-full.webp",
   "blocks": [
     {
       "id": "fumes-poisoning.lead",
@@ -41,7 +41,7 @@
         "ps": "ټول سمدستي تازه هوا ته وباسئ او دروازې او کړکۍ خلاصې کړئ. اور یا جنراتور یوازې هغه وخت بند کړئ چې خوندي وي.",
         "en": "Take everyone into fresh air at once, and open doors and windows. Turn off the fire or engine only if it is safe."
       },
-      "picture": "home-co-fresh-air"
+      "picture": "img/steps/fumes-poisoning/1-full.webp"
     },
     {
       "id": "fumes-poisoning.urgent",

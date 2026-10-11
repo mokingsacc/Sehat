@@ -132,7 +132,7 @@ export function initTools(ctx) {
       ids = [a.who, 'ui.br.calm', 'ui.br.uncover', 'ui.br.watch', 'ui.br.start'];
       html += topBar(T('breaths'), 'age') + listenBar(ids);
       html += `<div class="agechip" data-block="${a.who}">${ic(a.icon)}<span>${esc(say(a.who))}</span><button class="sbtn ghost" data-br="age">${esc(T('otherAge'))}</button></div>`;
-      html += `<img class="toolpic" src="img/pics/breath-watch.svg" alt="">`;
+      html += `<img class="toolpic" src="img/stills/breath-watch.webp" alt="">`;
       html += [['ui.br.calm', 'sleep'], ['ui.br.uncover', 'baby'], ['ui.br.watch', 'breathing-fast'], ['ui.br.start', 'clock']].map(([id, icn], i) => `<div class="blk step" data-block="${id}"><div class="pic">${ic(icn)}</div><div class="body"><div class="h"><span class="num">${num(i + 1)}</span></div><div class="x">${esc(say(id))}</div></div>${spk(id)}</div>`).join('');
       html += `<button class="btn big" data-br="start">${I.play.replace('<svg', '<svg style="width:26px;height:26px;fill:#fff"')} ${esc(T('start'))}</button>`;
     } else if (BR.phase === 'count') {

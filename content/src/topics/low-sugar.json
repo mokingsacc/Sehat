@@ -11,7 +11,7 @@
     "ps": "لړزه، خولې یا ګډوډي: که تېرولی شي، ژر بوره ورکړئ.",
     "en": "Shaky, sweaty or confused: give sugar fast if they can swallow."
   },
-  "image": "low-sugar",
+  "image": "img/stills/low-sugar-drink.webp",
   "blocks": [
     {
       "id": "low-sugar.lead",
@@ -55,7 +55,8 @@
         "fa": "اگر بیدار است و قورت داده می‌تواند، ۴ قاشق چای‌خوری بوره در یک گیلاس آب، یا یک نوشیدنی شیرین یا شیرینی بدهید.",
         "ps": "که ویښ وي او تېرولی شي، د چای ۴ کاچوغې بوره په یوه ګیلاس اوبو کې، یا خوږ څښاک یا خواږه ورکړئ.",
         "en": "If they are awake and can swallow, give 4 teaspoons of sugar in a glass of water, or a sweet drink or sweets."
-      }
+      },
+      "picture": "img/stills/low-sugar-drink.webp"
     },
     {
       "id": "low-sugar.wait",
@@ -70,7 +71,8 @@
         "fa": "اگر در ۱۵ دقیقه بهتر نشد، باز بوره بدهید. وقتی بهتر شد، نان یا غذا بدهید تا شکر دوباره کم نشود.",
         "ps": "که په ۱۵ دقیقو کې ښه نه شو، بیا بوره ورکړئ. کله چې ښه شو، ډوډۍ یا خواړه ورکړئ چې شکره یې بیا کمه نشي.",
         "en": "If not better in 15 minutes, give sugar again. When better, give bread or a meal so the sugar does not fall again."
-      }
+      },
+      "picture": "img/steps/low-sugar-drink/2-full.webp"
     },
     {
       "id": "low-sugar.drowsy",
@@ -85,7 +87,8 @@
         "fa": "اگر به‌خوبی قورت داده نمی‌تواند، نوشیدنی ندهید. او را به پهلو بخوابانید و همین حالا به شفاخانه بروید، شب باشد یا روز.",
         "ps": "که په سمه توګه تېرولی نشي، څښاک مه ورکوئ. پر اړخ یې وغځوئ او همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
         "en": "If they cannot swallow safely, give no drinks. Lay them on their side and go to hospital now, day or night."
-      }
+      },
+      "picture": "img/steps/low-sugar-drink/3-full.webp"
     },
     {
       "id": "low-sugar.prevent",

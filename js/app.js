@@ -504,7 +504,7 @@ const topicCard = topicRow; // js/tools.js lists topics with it too
 // [href, icon, title, sub, sayId, picture]: the picture is a small scene cropped like a topic row's (the icon is the fallback)
 const TOOL_ROWS = {
   growth: ['#/growth', 'growth', 'growth', 'growthSub', 'ui.growth', 'img/pics/row-growth.svg'],
-  breaths: ['#/tool/breaths', 'breathing-fast', 'breaths', '', 'ui.breaths', 'img/pics/row-breaths.svg'],
+  breaths: ['#/tool/breaths', 'breathing-fast', 'breaths', '', 'ui.breaths', 'img/stills/breath-watch.webp'],
   reading: ['#/tool/reading', 'bp', 'reading', '', 'ui.reading', 'img/pics/row-reading.svg'],
 };
 function toolRow(x, ids) {

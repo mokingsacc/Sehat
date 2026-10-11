@@ -55,7 +55,8 @@
         "fa": "او را به یک جای سرد و سایه ببرید. لباس اضافی را بکشید.",
         "ps": "یو سوړ او سیوري ځای ته یې یوسئ. اضافي جامې یې وباسئ.",
         "en": "Move them to a cool, shady place. Take off extra clothes."
-      }
+      },
+      "picture": "img/steps/heat-cooling/1-full.webp"
     },
     {
       "id": "heat-stroke.cool",
@@ -71,7 +72,7 @@
         "ps": "سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. یا یې تر غاړې پورې د سړو اوبو په لوښي کې وغځوئ او سر یې پورته ونیسئ.",
         "en": "Pour cool water all over the body and fan them. Or lay them in a tub of cool water up to the neck, holding the head up."
       },
-      "picture": "em-heat-cooling"
+      "picture": "img/stills/heat-cool.webp"
     },
     {
       "id": "heat-stroke.drink",

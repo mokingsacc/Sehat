@@ -11,7 +11,7 @@
     "ps": "ډېری یې سرطان نه دي. معاینه هغه څو ژر پیدا کوي.",
     "en": "Most are not cancer. A check finds the few that are, early."
   },
-  "image": "early-signs",
+  "image": "img/symptoms/lump.webp",
   "blocks": [
     {
       "id": "early-signs.lead",

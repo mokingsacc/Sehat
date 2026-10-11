@@ -11,7 +11,7 @@
     "ps": "تر ۶ میاشتو یوازې د مور شیدې، بیا نرم خواړه هم ورکړئ.",
     "en": "Only breast milk for 6 months, then add soft foods."
   },
-  "image": "breastfeeding",
+  "image": "img/symptoms/feeding.webp",
   "blocks": [
     {
       "id": "breastfeeding.lead",
@@ -85,7 +85,8 @@
         "fa": "تمام بدن طفل را نزدیک و رو به سینه بگیرید. دهانش کاملاً باز باشد و بیشتر قسمت تیرهٔ دور نوک سینه را بگیرد.",
         "ps": "د ماشوم ټول بدن ځان ته نږدې او تي ته مخامخ ونیسئ. خوله یې ښه خلاصه وي او د تي د سر شاوخوا تور ځای ډېر ونیسي.",
         "en": "Hold the baby's whole body close, facing the breast. The mouth opens wide and takes in most of the dark skin around the nipple."
-      }
+      },
+      "picture": "img/stills/breastfeed-hold.webp"
     },
     {
       "id": "breastfeeding.food",

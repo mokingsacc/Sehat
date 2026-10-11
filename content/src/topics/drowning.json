@@ -11,7 +11,7 @@
     "ps": "په احتیاط یې وژغورئ، لومړی ۵ ځله ساه ورکړئ، بیا د سینې فشار.",
     "en": "Rescue safely, give 5 breaths first, then chest pushes."
   },
-  "image": "drowning",
+  "image": "img/steps/drowning-rescue/1-full-up.webp",
   "blocks": [
     {
       "id": "drowning.lead",
@@ -40,7 +40,8 @@
         "fa": "خودتان در آب تیز یا چاه نپرید. با چوب، ریسمان یا چادر دست برسانید، یا چیزی که روی آب می‌ماند بیندازید، و بلند کمک بخواهید.",
         "ps": "پخپله چټکو اوبو یا څاه ته مه ورټوپ کېږئ. په لرګي، رسۍ یا چادر لاس ورورسوئ، یا داسې شی ورواچوئ چې پر اوبو پاتې کېږي، او په لوړ غږ مرسته وغواړئ.",
         "en": "Do not jump into fast water or a well yourself. Reach with a stick, rope or scarf, or throw something that floats, and shout for help."
-      }
+      },
+      "picture": "img/steps/drowning-rescue/1-full-up.webp"
     },
     {
       "id": "drowning.check",
@@ -55,7 +56,8 @@
         "fa": "او را به پشت روی زمین بخوابانید. سرش را به عقب ببرید، زنخش را بالا کنید و تا ۱۰ ثانیه سینه‌اش را ببینید.",
         "ps": "په شا یې په ځمکه وغځوئ. سر یې شاته کړئ، زنه یې پورته کړئ او تر ۱۰ ثانیو پورې یې سینې ته وګورئ.",
         "en": "Lay them on their back on the ground. Tilt the head back, lift the chin, and watch the chest for up to 10 seconds."
-      }
+      },
+      "picture": "img/steps/drowning-rescue/3-full.webp"
     },
     {
       "id": "drowning.breaths",
@@ -100,7 +102,8 @@
         "fa": "اگر آب یا استفراغ از دهانش بیرون شود، او را به پهلو بچرخانید، دهانش را پاک کنید، بعد دوباره به پشت بچرخانید و ادامه دهید. کوشش نکنید که آب را بیرون کنید. لباس تر را بکشید و او را در کمپل خشک بپیچانید.",
         "ps": "که اوبه یا کانګې یې له خولې راووځي، پر اړخ یې واړوئ، خوله یې پاکه کړئ، بیا یې بېرته په شا واړوئ او دوام ورکړئ. د اوبو د ایستلو هڅه مه کوئ. لندې جامې یې وباسئ او په وچو کمپلو کې یې ونغاړئ.",
         "en": "If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out. Take off wet clothes and wrap them in dry blankets."
-      }
+      },
+      "picture": "img/steps/drowning-rescue/5-full.webp"
     },
     {
       "id": "drowning.urgent",

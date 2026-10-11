@@ -87,6 +87,25 @@ def check_anim(f, w, b):
             if why: err(f, f"{w}: {why}")
         anims_used.add(x)
 
+# A step or topic picture may be a path to one of Mo's ChatGPT pictures (docs/STEPS_PLAYER.md "Still pictures on the
+# pages"): a still (img/stills/, tools/steps_stills.py), a symptom picture (img/symptoms/) or a whole-picture frame of an
+# Emergency or CPR picture-step set (img/steps/<set>/, precached and in the APK). A frame of an on-demand or not-live set
+# is not in the APK, so it would be missing offline: use a still of it instead.
+_PRECACHED = None
+def picture_path_problem(p):
+    global _PRECACHED
+    if not (isinstance(p, str) and p.endswith(".webp") and re.match(r"^img/(stills|symptoms|steps/[a-z0-9-]+)/[\w.-]+\.webp$", p)):
+        return f"picture {p!r} must be an img/pics name, or a WebP in img/stills/, img/symptoms/ or img/steps/<set>/"
+    if not os.path.exists(os.path.join(ROOT, p)): return f"picture {p} not found"
+    if p.startswith("img/steps/"):
+        if _PRECACHED is None:
+            try: book = ANIM.steps_book(ANIM.steps_live())
+            except Exception: book = {}
+            _PRECACHED = {x.split("?")[0] for e in book.values() if e.get("offline") == "precache" for x in e.get("files", [])}
+        if p not in _PRECACHED:
+            return f"picture {p} is not a picture of an Emergency or CPR set in the APK (on-demand or not live): use a still (tools/steps_stills.py)"
+    return None
+
 def check_topic(f, d):
     tid = d.get("id")
     if not tid or not ID_RE.match(tid): err(f, "bad or missing topic id"); return
@@ -95,8 +114,11 @@ def check_topic(f, d):
     check_L(f, "title", d.get("title"), 6)
     check_L(f, "summary", d.get("summary"), 12)
     # "image": the topic id (its own picture), or another topic's picture that already exists (no new drawing needed)
-    if d.get("image") != tid and not (ID_RE.match(str(d.get("image", ""))) and os.path.exists(os.path.join(ROOT, "img/topics", str(d.get("image")) + ".svg"))):
-        warn(f, "image should equal the topic id, or name an existing picture in img/topics")
+    if str(d.get("image", "")).startswith("img/"):
+        pr = picture_path_problem(d["image"])
+        if pr: err(f, "image: " + pr)
+    elif d.get("image") != tid and not (ID_RE.match(str(d.get("image", ""))) and os.path.exists(os.path.join(ROOT, "img/topics", str(d.get("image")) + ".svg"))):
+        warn(f, "image should equal the topic id, name an existing picture in img/topics, or be a WebP path")
     blocks = d.get("blocks")
     if not isinstance(blocks, list) or not blocks: err(f, "blocks missing"); return
     if blocks[0].get("type") != "lead": err(f, "first block must be the lead")
@@ -123,7 +145,10 @@ def check_topic(f, d):
         elif t == "clinic":
             check_icon(f, w, b.get("icon"), required=False); check_L(f, w + ".title", b.get("title"), 7); check_L(f, w + ".text", b.get("text"), 32)
         if t == "anim": check_anim(f, w, b)
-        if t in ("step", "link") and b.get("picture") is not None:
+        if t in ("step", "link") and str(b.get("picture", "")).startswith("img/"):
+            pr = picture_path_problem(b["picture"])
+            if pr: err(f, f"{w}: {pr}")
+        elif t in ("step", "link") and b.get("picture") is not None:
             if not ID_RE.match(str(b["picture"])) or not os.path.exists(os.path.join(ROOT, "img/pics", str(b["picture"]) + ".svg")):
                 err(f, f"{w}: picture img/pics/{b['picture']}.svg not found")
         elif t in ("alert", "dont", "belief"):
@@ -173,6 +198,9 @@ def check_vaccines(f, d):
         if b.get("type") != "anim": err(f, f"{w}: type must be anim")
         if isinstance(b.get("id"), str) and not b["id"].startswith("vaccines."): err(f, f"{w}: id must start with 'vaccines.'")
         check_anim(f, w, b)
+    if str(d.get("image", "")).startswith("img/"):
+        pr = picture_path_problem(d["image"])
+        if pr: err(f, "image: " + pr)
     wm = d.get("women")
     if wm:
         reg_id(f, wm.get("id"), "women"); check_L(f, "women.title", wm.get("title")); check_L(f, "women.text", wm.get("text"))
@@ -597,8 +625,11 @@ check_steps()
 # (about 7.6 MB) the APK is about 11.6 MB. 10 Oct 2026: pictures for 31 more symptom tiles (0.75 MB, 480 px, the "What is
 # wrong?" screen) and the three adult CPR scenes (0.14 MB) bring it to about 4.8 MB once the Emergency sets are live
 # (branch golive-emergency; APK about 12.5 MB), so the limit went from 4.5 to 5.2 MB: 0.4 MB of headroom (an APK of
-# about 12.9 MB); 15 MB is the hard limit for the APK.
-APK_PICTURES_MB = 5.2   # img/ inside the APK
+# about 12.9 MB); 15 MB is the hard limit for the APK. 11 Oct 2026: the step cards and pages show Mo's ChatGPT pictures
+# instead of the old drawings (Mo); most reuse the frames already in the APK, and 39 stills (img/stills/, 0.77 MB) cover
+# layered frames and the on-demand sets, so img/ is about 5.6 MB and the APK about 13.5 MB (release v2026.10.11-a583eb was
+# 12.7 MB). Limit 5.2 -> 5.9 MB: 0.3 MB of headroom (an APK of about 13.8 MB).
+APK_PICTURES_MB = 5.9   # img/ inside the APK
 def check_picture_storage():
     import hashlib, shutil, tempfile
     live, em = ANIM.steps_live(), ANIM.emergency_anims()

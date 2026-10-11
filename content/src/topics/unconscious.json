@@ -11,7 +11,7 @@
     "ps": "پر اړخ یې څملوئ چې په اسانۍ ساه واخلي. د ټولو عمرونو لپاره.",
     "en": "Lay them on their side so they can breathe. All ages."
   },
-  "image": "unconscious",
+  "image": "img/steps/recovery-position/4-full.webp",
   "blocks": [
     {
       "id": "unconscious.lead",
@@ -86,7 +86,8 @@
         "fa": "کنارش زانو بزنید. دست نزدیک را به طرف بیرون بگذارید، زانوی دور را بالا خم کنید و او را به طرف خود به پهلو بچرخانید.",
         "ps": "تر څنګ یې په زنګنونو کېنئ. نږدې لاس یې بهر ته کېږدئ، لرې زنګون یې پورته کوږ کړئ او خپل لوري ته یې پر اړخ واړوئ.",
         "en": "Kneel beside them. Put the near arm out, bend the far knee up, and roll them towards you onto their side."
-      }
+      },
+      "picture": "img/steps/recovery-position/3-full.webp"
     },
     {
       "id": "unconscious.head",
@@ -102,7 +103,7 @@
         "ps": "پورتنی لاس یې د مخ لاندې کېږدئ. سر یې شاته وساتئ چې خوله یې ښکته وي او کانګې بهر ووځي.",
         "en": "Put their upper hand under the cheek. Keep the head tilted back so the mouth points down and vomit can run out."
       },
-      "picture": "em-recovery-position"
+      "picture": "img/steps/recovery-position/4-full.webp"
     },
     {
       "id": "unconscious.baby",
@@ -118,7 +119,7 @@
         "ps": "تي خوړونکی ماشوم پر اړخ په خپله غېږ کې ونیسئ، سر یې له بدن لږ ټیټ، چې شیدې یا کانګې بهر ووځي.",
         "en": "Hold a baby in your arms on its side, head a little lower than the body, so milk or vomit can run out."
       },
-      "picture": "em-recovery-baby"
+      "picture": "img/steps/recovery-position/5-full.webp"
     },
     {
       "id": "unconscious.watch",

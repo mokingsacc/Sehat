@@ -43,10 +43,15 @@ syndromes = load(J("content/src/syndromes.json")) if os.path.exists(J("content/s
 districts = load(J("content/src/districts.json")) if os.path.exists(J("content/src/districts.json")) else None
 
 def exists(rel): return os.path.exists(J(rel))
+# a step or topic picture given as a path (a WebP of Mo's ChatGPT pictures) rather than an img/pics or img/topics name
+def is_path(x): return isinstance(x, str) and x.startswith("img/") and x.endswith(".webp")
 
 # images: fall back to generic pictures when a topic picture is missing
 def topic_image(tid, section, image=None):
-    # its own picture, else the existing picture it names ("image": another topic's id), else the general picture
+    # a picture path ("img/stills/....webp", "img/symptoms/....webp", "img/steps/<set>/....webp": one of Mo's ChatGPT
+    # pictures, docs/STEPS_PLAYER.md "Still pictures on the pages"), else its own picture, else the existing picture it
+    # names ("image": another topic's id), else the general picture
+    if image and is_path(image) and exists(image): return image
     for cand in (f"img/topics/{tid}.svg", *([f"img/topics/{image}.svg"] if image and image != tid else []), f"img/topics/{'children' if section == 'children' else 'adults'}-generic.svg"):
         if exists(cand): return cand
     return "img/app/placeholder.svg"
@@ -108,7 +113,7 @@ for tid, t in topics.items():
     for b in t["blocks"]:
         if b.get("icon"): b["icon"] = icon(b["icon"])
         ty = b["type"]
-        if b.get("picture"): b["picture"] = f"img/pics/{b['picture']}.svg"
+        if b.get("picture"): b["picture"] = b["picture"] if is_path(b["picture"]) else f"img/pics/{b['picture']}.svg"
         if ty == "clinic" and not b.get("icon"):  # what the clinic or the hospital does: a building icon
             b["icon"] = icon("hospital" if b["title"]["en"].lower().startswith("at the hospital") else "clinic")
         if ty in ("step", "link", "clinic"):
@@ -130,7 +135,7 @@ for tid, t in topics.items():
 
 if vaccines:
     v = dict(vaccines)
-    v["image"] = topic_image("vaccines", "children")
+    v["image"] = topic_image("vaccines", "children", v.get("image"))
     say("vaccines.title", v["title"])
     if v.get("summary"): say("vaccines.summary", v["summary"])
     say(v["lead"]["id"], v["lead"]["text"])
@@ -236,7 +241,9 @@ book = {
     # animations the player can open (anim/<name>.js), the groups with a picker (cpr) and each one's narration ids;
     # the dashboard editor uses this to check "anim" blocks and to rebuild the recording order like this script does
     "anims": {"groups": anim_groups, "ids": {n: ANIM.needed_ids(n) for n in ANIM.names()}},
-    "pictures": sorted(os.path.relpath(p, ROOT) for p in glob.glob(J("img/pics/*.svg"))),  # as step and link "picture" in this book
+    # as step and link "picture" in this book: the drawings, the stills (tools/steps_stills.py) and every WebP a page uses
+    "pictures": sorted({os.path.relpath(p, ROOT) for p in glob.glob(J("img/pics/*.svg")) + glob.glob(J("img/stills/*.webp"))}
+                       | {b["picture"] for t in out_topics.values() for b in (t.get("blocks") or []) if is_path(b.get("picture"))}),
 }
 if syndromes and districts:
     sym_ids = {x["id"] for x in symptoms}
@@ -312,7 +319,7 @@ book["bundle"] = {"slots": [s for s in BUNDLE_SLOTS if audio.get(s)], "ids": fir
 
 # precache list: everything the app needs offline except audio
 pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json",) if exists(p)]  # WHO growth tables (js/growth.js)
-for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png", "img/symptoms/*.webp"):
+for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png", "img/symptoms/*.webp", "img/stills/*.webp"):
     pre += sorted(os.path.relpath(p, ROOT) for p in glob.glob(J(pat)))
 # js/cine/*.js is the CPR drawing kit and anim/cine/*.js the CPR versions built with it: js/anim.js loads anim/cine/<name>.js
 # when it is there and falls back to the SVG version when it is not, so precache whatever exists (sub-folders are listed

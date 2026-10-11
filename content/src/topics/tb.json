@@ -11,7 +11,7 @@
     "ps": "اوږد ټوخی؟ معاینه شئ. نری رنځ علاج لري او درملنه یې وړیا ده.",
     "en": "Long cough? Get tested. TB is curable and treatment is free."
   },
-  "image": "tb",
+  "image": "img/symptoms/longcough.webp",
   "blocks": [
     {
       "id": "tb.lead",

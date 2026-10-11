@@ -5568,3 +5568,28 @@ For Mo's check:
 10. "Healer" is تعویذگر / تعویذګر, as in `hepatitis.dont.cures`. Say if it reads as religious and should be another word.
 11. Pashto for doogh: شلومبې. Vitamin A: fa ویتامین ای, ps ویټامین اې. Health post: پوستهٔ صحی / روغتیايي پوسته.
 12. `food-bones.sun` says to sit in the sun in the yard "face and hands uncovered". Check this is acceptable for women.
+
+## Pictures: new ChatGPT pictures on step cards, page tops and tiles (11 Oct 2026)
+
+Mo saw it on the Pashto choking-baby page: the animation played the new pictures, but the numbered step cards still showed the old flat drawings. Now every step card on a page with a picture-step animation shows the matching frame, with the hands in place and no rings, arrows or counters. The page tops and the First aid and Emergency tiles show the new pictures too. Full audit: `audit/pictures-2026-10-11/REPORT.md` in the shared folder. Screenshots: `previews/pictures-2026-10-11/index.html`.
+
+- **Step cards:** 91 now show a new picture (27 replaced an old drawing, 64 had none). 52 page pictures are new. So are the breath counter picture and the 6 growth-guide pictures.
+- **Layered frames:** frames made of layers are flattened by `tools/steps_stills.py` into `img/stills/*.webp`.
+  - 39 stills, 772 KB.
+  - 640x480 for Emergency and CPR sets.
+  - 480x360 for on-demand sets, whose full set still downloads with its page.
+- **Picture paths:** a topic `image` or a step `picture` may now be a WebP path. validate checks the path, the file, and that a frame is in a precache set. The picture budget aim is raised from 5.2 to 5.9 MB.
+- **Duplicates:** fixed 3 per-screen duplicates.
+  - Home tab: Food that helps and Well-being.
+  - Health checks list: Early signs and Women's signs.
+  - The "What is wrong?" lump page: the same two rows.
+- **Kept:** 31 step cards and 76 page pictures keep their old drawings because nothing new shows the same thing. Each is listed with its reason in the report.
+- **New prompts:** 16 ChatGPT prompts for 17 pictures, in ranked order: `animation-briefs/chatgpt-pictures-2026-10-11.md`.
+- **No text changed.** No new drawing was made.
+
+For Mo's check (pictures):
+1. Nearest-match pictures: animal illness uses the animals picture, anaemia the tired one, stress the mind one, early signs the lump one, TB the long cough, malnutrition the thin child, floods the disaster picture.
+2. "From 40: blood sugar" and "Blood test" show the blood-sugar picture.
+3. The choking-baby back-blows card shows the hand coming down; the heat-stroke card shows the water being poured.
+4. The growth guide uses the length-height frames, a set that is not live; they were checked right on 10 Oct.
+5. The bleeding tourniquet card keeps its drawing until you decide on the held tourniquet set.

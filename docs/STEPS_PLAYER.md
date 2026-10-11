@@ -125,6 +125,29 @@ demo gallery that plays them all is `/mnt/project-files/samangan-red-book/previe
   pictures (`APK_PICTURES_MB`, raised from 4.5 on 10 Oct: an APK of about 12.9 MB); 15 MB is the hard limit. The 8 other sets (0.68 MB: bp-measure, breastfeed-attach, breath-count, glucometer,
   length-height, muac, thermometer, weigh-child) stay on demand, as their topics are not in the Emergency group.
 
+## Still pictures on the pages (11 Oct 2026)
+
+Mo (11 Oct 2026): the picture-step animation at the top of a page played the new pictures while the numbered step cards
+below still showed the old flat drawings. Now every step card a set's scene shows uses that scene's picture, and the
+Emergency and first-aid pages, tiles and heroes use the new pictures too (the full list, what kept its old drawing and
+why, and the pictures still to make: `/mnt/project-files/samangan-red-book/audit/pictures-2026-10-11/REPORT.md`).
+
+- A step's `picture` (and a topic's `image`) may be a WebP path (docs/CONTENT_SPEC.md). A frame that is one whole picture
+  of an Emergency or CPR set (`img/steps/<set>/<n>-full.webp`, or a pair's `-up` picture) is used as it is: it is in the
+  APK already and costs nothing.
+- `tools/steps_stills.py` makes the rest, into `img/stills/` (precached, in the APK): a frame made of layers (bg, body,
+  arms; a `-fix` patch over a shared picture) flattened with the hands in place (`up`, or `down` where the pushed or
+  pouring pose shows the step better), no rings, arrows or counters; 640x480 under 22 KB. Frames of the **on-demand
+  sets** (bp-measure, breastfeed-attach, breath-count, glucometer, muac, thermometer, weigh-child) are not in the APK, so
+  their pages get small stills (480x360, under 15 KB) and the full set still downloads when the page opens. The growth
+  guide (`js/growth.js`) uses stills of length-height, which has no page of its own and is not live.
+- `python3 tools/steps_stills.py` rewrites the stills from the `STILLS` list in the tool (the same bytes when nothing
+  changed); `--check` says which are out of date; `--sheet out.png <set> ...` draws every frame of the sets, up and down,
+  to choose from. After re-packing a set, run it again.
+- `tools/validate.py` refuses a page picture under `img/steps/` that is not a file of a precache set's JSON.
+- Not used on the pages: the held bleeding-tourniquet set (the tourniquet step keeps its drawing), cpr-child frame 4
+  and the merged-faces newborn puff picture (both gone from the sets).
+
 ## How it plugs into the player
 
 `js/anim.js` plays three kinds of animation behind one API (`openAnimation`, `mountAnimation`, `animPoster`,

@@ -56,7 +56,7 @@
         "ps": "د هغه تر څنګ او شا ودرېږئ، مخ ته یې کوږ کړئ او سینه یې په یوه لاس ونیسئ. د ورغوي په لاندې برخه د دواړو اوږو ترمنځ ۵ کلک ګوزارونه ورکړئ.",
         "en": "Stand to the side and behind. Lean them forward, holding the chest with one hand. Give 5 firm blows between the shoulder blades with the heel of your hand."
       },
-      "picture": "em-choking-adult-back"
+      "picture": "img/stills/choking-adult-back.webp"
     },
     {
       "id": "choking.belly",
@@ -72,7 +72,7 @@
         "ps": "شا ته یې ودرېږئ او لاسونه یې د ملا شاوخوا تاو کړئ. خپل موټی د نوم پورته کېږدئ، په بل لاس یې ونیسئ او ۵ ځله په چټکۍ سره ننه او پورته یې راکاږئ.",
         "en": "Stand behind, arms round the waist. Put a fist above the navel, hold it with the other hand, and pull sharply in and up, 5 times."
       },
-      "picture": "em-choking-adult-belly"
+      "picture": "img/steps/choking-adult/3-full-up.webp"
     },
     {
       "id": "choking.repeat",
@@ -87,7 +87,8 @@
         "fa": "باز ۵ ضربه به پشت و ۵ فشار به شکم بدهید تا غذا بیرون شود. برای طفل خورد، پشت سرش زانو بزنید.",
         "ps": "بیا بیا شا ته ۵ ګوزارونه او پر ګېډه ۵ فشارونه ورکړئ تر څو خواړه ووځي. د کوچني ماشوم لپاره، شا ته یې په زنګنونو کېنئ.",
         "en": "Keep giving 5 back blows and 5 belly pushes until the food comes out. For a small child, kneel behind them."
-      }
+      },
+      "picture": "img/steps/choking-adult/4-full-up.webp"
     },
     {
       "id": "choking.pregnant",
@@ -102,7 +103,8 @@
         "fa": "اگر زن حامله است یا دست‌ها دور کمرش نمی‌رسد، مشت خود را به جای شکم روی پایین استخوان سینه بگذارید و ۵ بار به عقب بکشید.",
         "ps": "که ښځه امیندواره وي یا لاسونه مو د ملا شاوخوا نه رسېږي، خپل موټی د ګېډې پر ځای د سینې د هډوکي په لاندې برخه کېږدئ او ۵ ځله شاته یې راکاږئ.",
         "en": "If she is pregnant, or you cannot reach round the waist, put your fist on the lower breastbone instead and pull straight back 5 times."
-      }
+      },
+      "picture": "img/stills/choking-adult-pregnant.webp"
     },
     {
       "id": "choking.collapse",

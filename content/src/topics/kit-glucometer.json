@@ -11,7 +11,7 @@
     "ps": "یوازې د شکرې ناروغانو لپاره: څنګه معاینه وکړئ او څه وکړئ.",
     "en": "Only for people with diabetes: how to test and what to do."
   },
-  "image": "kit-glucometer",
+  "image": "img/stills/glucometer-drop.webp",
   "blocks": [
     {
       "id": "kit-glucometer.lead",
@@ -70,7 +70,8 @@
         "fa": "نوار را در ماشین بگذارید. کنار سر انگشت را با سوزن نو بزنید و قطرهٔ خون را به نوار بزنید.",
         "ps": "پټۍ په ماشین کې کېږدئ. د ګوتې د سر څنګ ته په نوې ستن ووهئ، او د وینې څاڅکی پټۍ ته ورسوئ.",
         "en": "Put a strip in the meter. Prick the side of a fingertip with a new needle, and touch the drop to the strip."
-      }
+      },
+      "picture": "img/stills/glucometer-drop.webp"
     },
     {
       "id": "kit-glucometer.write",

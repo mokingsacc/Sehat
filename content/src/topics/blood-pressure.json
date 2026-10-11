@@ -11,7 +11,7 @@
     "ps": "اکثره نښې نه لري. فشار مو اندازه کړئ، لږه مالګه وخورئ، درمل هره ورځ وخورئ.",
     "en": "Often no signs. Get checked, eat less salt, take medicine daily."
   },
-  "image": "blood-pressure",
+  "image": "img/symptoms/pressure.webp",
   "blocks": [
     {
       "id": "blood-pressure.lead",

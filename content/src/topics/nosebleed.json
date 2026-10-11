@@ -41,7 +41,7 @@
         "ps": "نېغ کېنئ او مخ ته کوږ شئ چې وینه له پوزې بهر شي، نه ستوني ته. وینه وتوکئ؛ مه یې تېروئ.",
         "en": "Sit up and lean forward, so blood runs out of the nose, not down the throat. Spit out blood; do not swallow it."
       },
-      "picture": "em-nosebleed-pinch"
+      "picture": "img/steps/nosebleed/1-full.webp"
     },
     {
       "id": "nosebleed.pinch",
@@ -56,7 +56,8 @@
         "fa": "قسمت نرم بینی را، پایین‌تر از استخوان، ۱۰ دقیقه بدون رها کردن فشار دهید. از راه دهان نفس بکشید.",
         "ps": "د پوزې نرمه برخه، له هډوکي لاندې، ۱۰ دقیقې پرته له پرېښودو ټینګه کړئ. له خولې ساه واخلئ.",
         "en": "Pinch the soft part of the nose, below the bone, for 10 minutes without letting go. Breathe through the mouth."
-      }
+      },
+      "picture": "img/stills/nosebleed-pinch.webp"
     },
     {
       "id": "nosebleed.again",
@@ -71,7 +72,8 @@
         "fa": "اگر هنوز خون می‌آید، باز ۱۰ دقیقهٔ دیگر فشار دهید. یک تکهٔ تر و سرد روی بینی شاید کمک کند.",
         "ps": "که لا هم وینه راځي، بیا ۱۰ نورې دقیقې یې ټینګه کړئ. پر پوزه سوړ او لوند ټوکر کېدای شي مرسته وکړي.",
         "en": "If it still bleeds, pinch again for 10 more minutes. A cold wet cloth on the nose may help."
-      }
+      },
+      "picture": "img/steps/nosebleed/3-full.webp"
     },
     {
       "id": "nosebleed.after",

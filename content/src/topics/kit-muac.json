@@ -11,7 +11,7 @@
     "ps": "وګورئ چې د ۶ میاشتو تر ۵ کلونو ماشوم ډېر ډنګر دی که نه.",
     "en": "Is a child from 6 months to 5 years too thin?"
   },
-  "image": "kit-muac",
+  "image": "img/stills/muac-read.webp",
   "blocks": [
     {
       "id": "kit-muac.lead",
@@ -55,7 +55,8 @@
         "fa": "بازو را خم کنید. نقطهٔ وسط شانه و آرنج را پیدا کنید. بعد بازو را آزاد و آویزان بگذارید.",
         "ps": "مټ کوږ کړئ. د اوږې او څنګل ترمنځ نیمایي ځای پیدا کړئ. بیا مټ ازاد او ځوړند پرېږدئ.",
         "en": "Bend the arm. Find the point halfway between the shoulder and the elbow. Then let the arm hang loose."
-      }
+      },
+      "picture": "img/stills/muac-arm.webp"
     },
     {
       "id": "kit-muac.wrap",
@@ -70,7 +71,8 @@
         "fa": "فیته را در همان جا دور بازو بپیچانید، نه سخت و نه شل. رنگی را که در کلکین فیته دیده می‌شود ببینید.",
         "ps": "فیته په همغه ځای د مټ شاوخوا تاو کړئ، نه ټینګه او نه سسته. هغه رنګ وګورئ چې د فیتې په کړکۍ کې ښکاري.",
         "en": "Put the tape around the arm at that point, not tight and not loose. Look at the colour in the window."
-      }
+      },
+      "picture": "img/stills/muac-read.webp"
     },
     {
       "id": "kit-muac.meaning-page",

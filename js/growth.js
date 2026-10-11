@@ -256,8 +256,9 @@ export function initGrowth(ctx) {
     return { html, nav: 'family' };
   }
 
-  const GUIDE = [['ui.gr.m.hang', 'img/topics/growth.svg'], ['ui.gr.m.hold', 'img/pics/measure-hold.svg'], ['ui.gr.m.length1', 'img/pics/measure-length.svg'],
-    ['ui.gr.m.length2', null], ['ui.gr.m.height', 'img/pics/measure-height.svg'], ['ui.gr.m.muac', 'img/topics/kit-muac.svg']];
+  // stills of Mo's ChatGPT pictures (tools/steps_stills.py, docs/STEPS_PLAYER.md "Still pictures on the pages")
+  const GUIDE = [['ui.gr.m.hang', 'img/stills/weigh-hang.webp'], ['ui.gr.m.hold', 'img/stills/weigh-hold.webp'], ['ui.gr.m.length1', 'img/stills/length-lie.webp'],
+    ['ui.gr.m.length2', 'img/stills/length-book.webp'], ['ui.gr.m.height', 'img/stills/height-wall.webp'], ['ui.gr.m.muac', 'img/stills/muac-read.webp']];
   function screenMeasure() {
     const ids = ['ui.gr.m.lead', ...GUIDE.map((g) => g[0]), 'ui.gr.m.exact'];
     let html = top(T('measureTitle'), { back: kidNow() ? '#/growth' : '#/family' }) + listenBar(ids) + sayRow('ui.gr.m.lead', 'blk lead trow');
