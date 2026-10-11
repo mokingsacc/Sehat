@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.11-a2b61c';
+const VERSION = '2026.10.11-6068e6';
 const PRECACHE = [
  "./",
  "index.html",
@@ -346,6 +346,7 @@ const PRECACHE = [
  "img/stills/bp-cuff.webp",
  "img/stills/bp-rest.webp",
  "img/stills/breastfeed-hold.webp",
+ "img/stills/breastfeed-latch.webp",
  "img/stills/breath-watch.webp",
  "img/stills/burns-rings.webp",
  "img/stills/choking-adult-back.webp",
@@ -373,6 +374,7 @@ const PRECACHE = [
  "img/stills/length-lie.webp",
  "img/stills/low-sugar-drink.webp",
  "img/stills/muac-arm.webp",
+ "img/stills/muac-loose.webp",
  "img/stills/muac-read.webp",
  "img/stills/muac-tape.webp",
  "img/stills/nosebleed-pinch.webp",
@@ -445,6 +447,11 @@ const PRECACHE = [
  "img/steps/bleeding-press/2-full-fix.webp",
  "img/steps/bleeding-press/3-full.webp",
  "img/steps/bleeding-press/4-full.webp",
+ "anim/steps/bleeding-tourniquet.json",
+ "img/steps/bleeding-tourniquet/1-full.webp",
+ "img/steps/bleeding-tourniquet/2-full-up.webp",
+ "img/steps/bleeding-tourniquet/2-full-down.webp",
+ "img/steps/bleeding-tourniquet/3-full.webp",
  "anim/steps/recovery-position.json",
  "img/steps/recovery-position/1-full.webp",
  "img/steps/recovery-position/2-full.webp",

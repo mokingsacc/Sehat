@@ -77,12 +77,11 @@ ui.rd.v.temp-baby-ok	د ماشوم لپاره عادي ده. ماشوم ګرم �
 ui.rd.v.temp-cold	د بدن تودوخه ډېره ټیټه ده. ناروغ په کمپلو ګرم کړئ او همدا اوس روغتون ته ولاړ شئ.	Very low temperature. Warm the person with blankets and go to hospital now.
 ui.rd.v.temp-low	شمېره ټیټه ده. وګورئ چې ترمامیټر ښه د تخرګ لاندې و، ګرم یې وساتئ، او ۳۰ دقیقې وروسته بیا یې اندازه کړئ. که ټیټه پاتې شوه، یا ناروغ کمزوری یا خوب وړی وي، نن کلینیک ته ولاړ شئ.	A low reading. Check the thermometer was deep under the arm, keep warm, and measure again in 30 minutes. If it stays low, or the person is weak or sleepy, go to the clinic today.
 ui.rd.v.temp-ok	تبه نشته. که ناروغ ښکاري، د خطر نښو ته پام وکړئ او وروسته بیا یې اندازه کړئ.	No fever. If the person seems ill, watch for danger signs and measure again later.
-ui.rd.v.temp-child-fever	دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ماشوم ډېر ناروغ ښکاري، نن ولاړ شئ.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill.
-ui.rd.v.temp-fever	دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که له ۲ ورځو زیاته دوام وکړي کلینیک ته ولاړ شئ، او که ناروغ ډېر خراب وي، نن ولاړ شئ.	This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell.
+ui.rd.v.temp-child-fever	دا تبه ده. ډېرې اوبلنې او تی ورکړئ، او سپکې جامې ورته واغوندئ. که تبه له ۲ ورځو زیاته دوام وکړي، یا ماشوم ډېر ناروغ ښکاري، نن کلینیک ته ولاړ شئ.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. If the fever lasts more than 2 days, or the child seems very ill, go to the clinic today.
+ui.rd.v.temp-fever	دا تبه ده. ارام وکړئ او ډېرې اوبلنې وڅښئ. که تبه له ۲ ورځو زیاته دوام وکړي، یا ناروغ ډېر خراب وي، نن کلینیک ته ولاړ شئ.	This is a fever. Rest and drink plenty. If the fever lasts more than 2 days, or the person is very unwell, go to the clinic today.
 ui.rd.v.temp-high	لوړه تبه ده. ډېرې اوبلنې ورکړئ او سپکې جامې واغوندئ. نن کلینیک ته ولاړ شئ.	A high fever. Give plenty to drink and dress lightly. Go to the clinic today.
 ui.rd.v.temp-fast	په ماشوم کې چټکه ساه کېدای شي سینه بغل وي. نن کلینیک ته ولاړ شئ؛ کېدای شي ماشوم درملو ته اړتیا ولري. ساه یې لاندې د ساه شمېرلو په برخه کې شمېرلی شئ.	Fast breathing in a child can be pneumonia. Go to the clinic today: the child may need medicine. You can count the breaths with the breathing counter below.
 ui.rd.temp-breaths	که ماشوم چټکه ساه اخلي، ساه یې وشمېرئ. د ساه شمېرلو د پرانیستلو لپاره دلته ټک کړئ.	If the child breathes fast, count the breaths. Tap here to open the breathing counter.
-ui.rd.v.temp-very-high	ډېره لوړه تبه ده. اوبلنې ورکړئ، سپکې جامې واغوندئ، او همدا اوس روغتون ته ولاړ شئ.	A very high fever. Give drinks, dress lightly, and go to hospital now.
 ui.rd.v.temp-pregnant	په امیندوارۍ کې تبه باید معاینه شي. ډېرې اوبلنې وڅښئ او نن کلینیک ته ولاړ شئ. که د خېټې سخت درد، وینه بهېدل وي، یا دومره کمزورې یاست چې نشئ پورته کېدای، همدا اوس روغتون ته ولاړ شئ.	Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is severe belly pain, bleeding, or you are too weak to get up.
 ui.rd.v.bp-very-high	ډېر لوړ دی. ۵ دقیقې ارام کېنئ او یو ځل بیا یې اندازه کړئ. که لا هم ۱۸۰ پر ۱۲۰ یا ډېر وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. خپل درمل له ځان سره یوسئ.	Very high. Sit quietly for 5 minutes and measure once more. If it is still 180 over 120 or more, go to hospital now, day or night. Take your medicines with you.
 ui.rd.v.bp-high	لوړ دی. ۵ دقیقې ارام وکړئ او بیا یې اندازه کړئ. که لوړ پاتې شو، په همدې اونۍ کې له خپلو یادښتونو سره کلینیک ته ولاړ شئ. که درمل لرئ، هره ورځ یې وخورئ.	High. Rest 5 minutes and measure again. If it stays high, go to the clinic this week and take your readings. If you have medicine, keep taking it every day.
@@ -100,7 +99,8 @@ ui.rd.v.sugar-very-low	شکره ډېره ټیټه ده. که تېرولای شي
 ui.rd.v.sugar-low	شکره ټیټه ده. همدا اوس شکره ورکړئ: ۴ د چای کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ، او که لا هم ټیټه وي، بیا شکره ورکړئ. نن کلینیک ته ولاړ شئ؛ کېدای شي درمل بدلولو ته اړتیا ولري.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes, and give sugar again if it is still low. Go to the clinic today: the medicine may need changing.
 ui.rd.v.sugar-low-sign	ټیټه شکره له ګډوډۍ یا اختلاج سره بیړنی حالت دی. که تېرولای شي، شکره ورکړئ. که نه، په خوله کې هېڅ مه ورکوئ. همدا اوس روغتون ته ولاړ شئ.	Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now.
 ui.rd.v.sugar-nodm-low	شکره ټیټه ده. همدا اوس شکره ورکړئ: د چای ۴ کاشوغې په یوه ګیلاس اوبو کې، بیا لږ خواړه. ۱۵ دقیقې وروسته بیا یې اندازه کړئ. د هغه چا ټیټه شکره چې د شکرې ناروغي نه لري باید معاینه شي: نن کلینیک ته ولاړ شئ.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes. Low sugar in someone without diabetes needs a check: go to the clinic today.
-ui.rd.v.sugar-ok	په ښه اندازه کې ده. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.	In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-ok	له ناشتې مخکې ۸۰ تر ۱۳۰ ښه دی؛ له خوړو ۲ ساعته وروسته، له ۱۸۰ کم ښه دی. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.	Before breakfast, 80 to 130 is good; 2 hours after food, under 180 is good. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-ok-mmol	له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی؛ له خوړو ۲ ساعته وروسته، له ۱۰ کم ښه دی. درمل، ښه خواړه او پلی ګرځېدل دوام کړئ. شمېرې په هره کتنه کې کلینیک ته وښایئ.	Before breakfast, 4.4 to 7.2 is good; 2 hours after food, under 10 is good. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
 ui.rd.v.sugar-nodm-ok	عادي ده. د دې لپاره چې همداسې پاتې شي، شکره او سپینه ډوډۍ لږه وخورئ او هره ورځ پلی وګرځئ.	Normal. To keep it that way, eat less sugar and white bread, and walk every day.
 ui.rd.v.sugar-nodm-check	له خوړو وروسته دا عادي ده، خو له ناشتې مخکې لوړه ده. سهار، مخکې له دې چې څه وخوري یا وڅښي، بیا یې اندازه کړئ. که هغه وخت ۱۲۶ یا ډېره وه، په همدې اونۍ کې د سمې معاینې لپاره کلینیک ته ولاړ شئ.	This is normal after food, but high before breakfast. Measure again in the morning, before eating or drinking anything. If it is 126 or more then, go to the clinic this week for a proper test.
 ui.rd.v.sugar-high	له اړتیا لوړه ده. درمل وخورئ، اوبه وڅښئ، شکره او سپینه ډوډۍ لږ وخورئ، او پلی وګرځئ. که ډېری شمېرې دومره لوړې وي، په همدې اونۍ کلینیک ته ولاړ شئ.	Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week.
@@ -685,7 +685,7 @@ danger-child.dry.eyes	سترګې یې ننوتې دي، او ډېر خوب وړ�
 danger-child.dry.pinch	د ګېډې پوستکی له نیولو وروسته، له ۲ ثانیو ډېر وخت نیسي چې هوار شي	pinched belly skin takes more than 2 seconds to go flat
 danger-child.dry-soon	که ماشوم له دې نښو څخه یوه ولري، نن کلینیک ته ولاړ شئ	Go to the clinic today if the child:
 danger-child.dry-soon.mouth	خوله او ژبه یې وچې دي	has a dry mouth and tongue
-danger-child.dry-soon.wee	۸ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي	has not weed for 8 hours or more, or has fewer wet nappies
+danger-child.dry-soon.wee	۱۲ ساعته یا ډېر یې متیازې نه دي کړې، یا یې کهنې لږې لمدې کېږي	has not weed for 12 hours or more, or has fewer wet nappies
 danger-child.dry-soon.soft-spot	کوچنی ماشوم: د سر نرمه برخه یې ننوتې ده	baby: the soft spot on the head is sunken
 danger-child.dry-soon.tears	بې اوښکو ژاړي	cries with no tears
 danger-child.look-move	ماشوم په غېږ کې ونیسئ او وګورئ. روغ ماشوم خپل بدن ټینګ ساتي، خوځېږي او ستاسو غږ ته مخ اړوي. سست ماشوم د ټوکر په څېر ځوړند پاتې کېږي.	Pick the child up and watch. A well child holds its body, moves, and turns to your voice. A floppy child hangs limp like a cloth.
@@ -1004,7 +1004,7 @@ breastfeeding.clinic	په کلینیک کې: د تي ورکولو لپاره م�
 breastfeeding.dont	دا کارونه مه کوئ:	Do not do these things:
 breastfeeding.dont.first-milk	لومړۍ ژېړې شیدې مه غورځوئ.	Do not throw away the first yellow milk.
 breastfeeding.dont.prelacteal	نوي زېږېدلي ماشوم ته غوړي، د بورې اوبه، چای یا شات مه ورکوئ.	Do not give a newborn ghee, sugar water, tea or honey.
-breastfeeding.dont.animal-milk	تر ۶ میاشتو مخکې د غوا یا وزې شیدې مه ورکوئ.	Do not give cow's or goat's milk before 6 months.
+breastfeeding.dont.animal-milk	تر ۱ کلنۍ مخکې د غوا یا وزې شیدې د ماشوم اصلي څښاک مه ګرځوئ. له ۶ میاشتو کمې یې په خوړو کې ښې دي.	Do not give cow's or goat's milk as the main drink before 1 year. A little in food is fine from 6 months.
 breastfeeding.dont.bottle	بوتل مه کاروئ؛ که اړتیا وه، پاکه پیاله وکاروئ.	Do not use a feeding bottle; if needed, use a clean cup.
 breastfeeding.dont.sick	کله چې مور یا ماشوم ناروغ وي، تی ورکول مه بندوئ.	Do not stop breastfeeding when the mother or baby is sick.
 breastfeeding.illness	کله چې ماشوم ناروغ وي، ډېر ځله تی ورکړئ. له ناروغۍ وروسته، تر هغه چې بشپړ روغ شي، تر عادي ډېر خواړه ورکړئ.	When the child is sick, breastfeed more often. After the illness, give more food than usual until the child is fully well.
@@ -1023,6 +1023,7 @@ child-meals.growth	ایا ستاسو ماشوم ښه وده کوي؟. هره م�
 child-meals.dont	دا کارونه مه کوئ:	Do not:
 child-meals.dont.sweets	خوږې، بسکیټ یا ګازدار څښاک مه ورکوئ؛ ګېډه ډکوي خو ځواک نه ورکوي	give sweets, biscuits or fizzy drinks: they fill the belly but do not feed
 child-meals.dont.tea	تي خوړونکي او کوچني ماشوم ته چای مه ورکوئ؛ د خوړو اوسپنه کموي	give tea to babies and small children: it takes away the iron in food
+child-meals.dont.milk	تر ۱ کلنۍ مخکې د غوا یا وزې شیدې د ماشوم اصلي څښاک مه ګرځوئ؛ له ۶ میاشتو کمې یې په خوړو کې ښې دي	give cow's or goat's milk as the main drink before 1 year; a little in food is fine from 6 months
 child-meals.bowl	کوچني ماشوم ته جلا کاسه ورکړئ او ورسره کېنئ. په مینه یې وهڅوئ؛ هېڅکله زور مه کوئ.	Give a small child their own bowl and sit with them. Encourage gently; never force.
 diarrhoea.title	نس ناستی او او آر اس	Diarrhoea and ORS
 diarrhoea.summary	او آر اس او زنک ورکړئ، او خواړه ورکول دوام ورکړئ.	Give ORS and zinc, and keep feeding.
@@ -1505,7 +1506,7 @@ red-flags.soon	که له دې نښو څخه یوه هم لرئ، همدا اون
 red-flags.soon.weight-loss	پرته له کوم دلیل د وزن کمېدل	Losing weight without trying
 red-flags.soon.lump	غوټه چې لویېږي	A lump that is growing
 red-flags.soon.blood-urine-stool	په تشو متیازو یا غایطه کې وینه، له یو ځل زیات، پرته له سوځېدو، تبې یا نس ناستې	Blood in the urine or stool more than once, with no burning, fever or diarrhoea
-red-flags.soon.wound	ټپ چې په ۲ اونیو کې نه جوړېږي	A wound or sore that does not heal in 2 weeks
+red-flags.soon.wound	د پوستکي یا خولې زخم چې په ۳ اونیو کې نه جوړېږي	A wound or sore, on the skin or in the mouth, that does not heal in 3 weeks
 red-flags.soon.swallowing	د خوړو په تېرولو کې ستونزه	Trouble swallowing food
 red-flags.transport	مرسته وغواړئ او ژر موټر پیدا کړئ. سمدستي کورنۍ یا ګاونډیان راوبولئ. ژر موټر پیدا کړئ، مخکې له دې چې شپه یا خرابه لاره کار سخت کړي.	Call for help, find transport early. Call family or neighbours at once. Find a car early, before night or bad roads make it hard.
 red-flags.phone	مهمې د ټیلیفون شمېرې وساتئ. د یو موټر چلوونکي، کلینیک او روغتون شمېرې په ټیلیفون کې ثبت کړئ. په کاغذ یې هم ولیکئ.	Keep important phone numbers. Save the numbers of a driver, the clinic and the hospital. Write them on paper too.
@@ -1553,7 +1554,7 @@ reading-sugar.title	د وینې د شکرې شمېره څه مانا لري	Bloo
 reading-sugar.summary	ټیټه، ښه او لوړه شکره، او کله ولاړ شئ.	Low, good and high sugar, and when to go.
 reading-sugar.lead	ماشین هم غلطي کوي. که څوک ډېر ناروغ ښکاري، هره شمېره چې وي، روغتیايي کارکوونکي ته ولاړ شئ.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-sugar.check	د شکرې شمېره وګورئ. شمېره ورکړئ، او واورئ چې څه باید وکړئ.	Check a sugar reading. Put in the number, in mg/dL or mmol/L, and hear what to do.
-reading-sugar.numbers	شمېرې څه مانا لري. په ملي ګرام: له ۷۰ کم ټیټ دی، همدا اوس شکره ورکړئ. له ناشتې مخکې ۸۰ تر ۱۳۰ ښه دی. له ۲۵۰ پورته ډېر لوړ دی: نن کلینیک.	What the numbers mean. In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good. Over 250 is very high: clinic today.
+reading-sugar.numbers	شمېرې څه مانا لري. په ملي ګرام: له ۷۰ کم ټیټ دی، همدا اوس شکره ورکړئ. له ناشتې مخکې ۸۰ تر ۱۳۰ ښه دی، او له خوړو ۲ ساعته وروسته له ۱۸۰ کم. له ۲۵۰ پورته ډېر لوړ دی: نن کلینیک.	What the numbers mean. In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good, and under 180 two hours after food. Over 250 is very high: clinic today.
 reading-sugar.urgent	که له دې څخه یو هم وي، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ	Go to hospital now, day or night, if:
 reading-sugar.urgent.low	شکره له ۵۴ کمه ده، یا له شکرې ورکولو وروسته هم ټیټه پاتې کېږي، یا ناروغ ګډوډ دی	sugar is under 54, or stays low after sugar, or the person is confused
 reading-sugar.urgent.very-high	شکره له ۴۰۰ پورته ده، یا دومره لوړه ده چې ماشین یې نشي لوستلای	sugar is over 400, or too high for the meter to read
@@ -1561,7 +1562,7 @@ reading-sugar.urgent.vomit	لوړه شکره له کانګو، یا چټکې ا�
 reading-sugar.soon	که له دې څخه یو هم وي، نن کلینیک ته ولاړ شئ	Go to the clinic today if:
 reading-sugar.soon.high	شکره له ۲۵۰ پورته ده	sugar is over 250
 reading-sugar.soon.lows	شکره بیا بیا ټیټېږي	low sugar happens again and again
-reading-sugar.mmol	که ستاسو ماشین ملي مول ښيي: له ۴ کم ټیټ دی؛ له ۳ کم ډېر ټیټ دی: شکره ورکړئ او همدا اوس روغتون ته ولاړ شئ؛ له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی، او له ۱۴ پورته ډېر لوړ دی.	If your meter shows mmol/L: under 4 is low; under 3 is very low: give sugar and go to hospital now; 4.4 to 7.2 before breakfast is good, and over 14 is very high.
+reading-sugar.mmol	که ستاسو ماشین ملي مول ښيي: له ۴ کم ټیټ دی؛ له ۳ کم ډېر ټیټ دی: شکره ورکړئ او همدا اوس روغتون ته ولاړ شئ؛ له ناشتې مخکې ۴٫۴ تر ۷٫۲ ښه دی، له خوړو ۲ ساعته وروسته له ۱۰ کم ښه دی، او له ۱۴ پورته ډېر لوړ دی.	If your meter shows mmol/L: under 4 is low; under 3 is very low: give sugar and go to hospital now; 4.4 to 7.2 before breakfast is good, under 10 two hours after food is good, and over 14 is very high.
 reading-sugar.no-diabetes	د شکرې ناروغي نه لرئ؟ له ناشتې مخکې ۱۲۶ یا ډېره، یا هر وخت ۲۰۰ یا ډېره، باید په همدې اونۍ کې په کلینیک کې سمه معاینه شي.	No diabetes? Before breakfast 126 or more, or 200 or more at any time, needs a proper test at the clinic this week.
 reading-sugar.dont	دا کارونه مه کوئ:	Do not do these things:
 reading-sugar.dont.dose	انسولین یا ګولۍ پخپله مه کموئ او مه زیاتوئ؛ له کلینیک وپوښتئ.	Do not change your insulin or tablets yourself; ask the clinic.
@@ -1906,7 +1907,7 @@ diarrhoea-adult.urgent	که څوک دا نښې لري، همدا اوس روغت
 diarrhoea-adult.urgent.drink	نه شي څښلای، یا هر څه کانګې کوي	cannot drink, or vomits everything
 diarrhoea-adult.urgent.weak	ډېر کمزوری، سرګرځېدلی، ګډوډ یا په سختۍ ویښېږي	very weak, dizzy, confused or hard to wake
 diarrhoea-adult.urgent.rice	اوبلنې ډکې لکه د وریجو اوبه، په ساعت کې څو ځله	watery stool like rice water, many times an hour
-diarrhoea-adult.urgent.urine	۸ ساعته یا ډېر یې متیازې نه دي کړې	no urine for 8 hours or more
+diarrhoea-adult.urgent.urine	۱۲ ساعته یا ډېر یې متیازې نه دي کړې	no urine for 12 hours or more
 diarrhoea-adult.urgent.risk	امیندواره ښځه یا زوړ کس چې بدن یې وچېږي	a pregnant woman or an old person who is drying out
 diarrhoea-adult.soon	که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if someone has:
 diarrhoea-adult.soon.blood	په ډکو کې وینه	blood in the stool
@@ -1920,10 +1921,10 @@ diarrhoea-adult.dont.stream	د ناروغ جامې په هغه ویاله کې �
 diarrhoea-adult.packets	په دوبي کې دوه کڅوړې او آر اس په کور کې ولرئ. که نه لرئ، روغتیايي پوسته یا د کلي روغتیايي کارکوونکی یې لري.	Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
 diarrhoea-adult.food-diarrhoea	نس ناستی: څه وخورو او څه وڅښو. او آر اس، کورني څښاکونه او نرم خواړه: څه مرسته کوي او څه زیان لري.	Diarrhoea: what to eat and drink. ORS, home drinks and soft food: what helps, and what harms.
 typhoid.title	محرقه (ټایفایډ)	Typhoid fever
-typhoid.summary	د نس سخت درد: همدا اوس روغتون. له ۳ ورځو زیاته تبه: نن کلینیک.	Severe belly pain: hospital now. Fever over 3 days: clinic today.
+typhoid.summary	د نس سخت درد: همدا اوس روغتون. له ۲ ورځو زیاته تبه: نن کلینیک.	Severe belly pain: hospital now. Fever more than 2 days: clinic today.
 typhoid.lead	محرقه له هغو اوبو یا خوړو څخه راځي چې د ناروغ کس په ډکو ناپاک شوي وي. تبه ورځ تر بلې لوړېږي، له سردرد، ستړیا، د نس درد او کله کله نس ناستي یا قبضیت سره. له کلینیک څخه انټي بیوټیک ته اړتیا لري.	Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic.
 typhoid.signs	نښې وپېژنئ. هغه تبه چې په څو ورځو کې لوړېږي او نه ځي، له سردرد، کمزورۍ، بې اشتهايۍ، د نس درد، او نس ناستي یا قبضیت سره. ماشومان ښايي یوازې تبه ولري.	Know the signs. Fever that rises over several days and does not go, with headache, weakness, poor appetite, belly pain, and diarrhoea or constipation. Children may only have fever.
-typhoid.go	له ۳ ورځو زیاته تبه: ولاړ شئ. که تبه له ۳ ورځو زیات دوام وکړي، یا ژر تر ژره که ناروغ ډېر ناجوړه وي، کلینیک ته ولاړ شئ. محرقه د وینې معاینې او انټي بیوټیک ته اړتیا لري؛ پخپله نه ځي.	Fever over 3 days: go. Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself.
+typhoid.go	له ۲ ورځو زیاته تبه: کلینیک ته ولاړ شئ. که تبه له ۲ ورځو زیاته دوام وکړي، یا ناروغ ډېر ناجوړه وي، نن کلینیک ته ولاړ شئ. محرقه د وینې معاینې او انټي بیوټیک ته اړتیا لري؛ پخپله نه ځي.	Fever more than 2 days: go to the clinic. If the fever lasts more than 2 days, or the person is very unwell, go to the clinic today. Typhoid needs a blood test and antibiotics; it does not pass by itself.
 typhoid.fluids	مایعات او نرم خواړه. ډېرې اوبه، او آر اس او ښوروا ورکړئ. د نرمو خوړو خوړلو ته دوام ورکړئ. له کلینیک څخه پاراسیټامول تبه ښکته کوي.	Fluids and soft food. Give plenty of water, ORS and soup. Keep eating soft food. Paracetamol from the clinic can bring the fever down.
 typhoid.finish	ټوله دوره بشپړه کړئ. انټي بیوټیک ټولې هغه ورځې وخورئ چې روغتیايي کارکوونکي ویلي، حتی کله چې تبه تللې وي. وخته پرېښودل تبه بېرته راولي او درمل بې اغېزې کوي.	Finish the whole course. Take the antibiotic for all the days the health worker says, even when the fever has gone. Stopping early brings the fever back and makes the medicine stop working.
 typhoid.prevent	د خپرېدو مخه ونیسئ. د څښاک اوبه وایشوئ یا کلورین ورواچوئ. له تشناب وروسته او له خوړو مخکې لاسونه په صابون ومینځئ. ناروغ کس تر هغه وخته نورو ته خواړه مه پخوي چې روغتیايي کارکوونکی ووايي خطر نه لري.	Stop it spreading. Boil or chlorinate drinking water. Wash hands with soap after the toilet and before food. The sick person must not cook for others until the health worker says it is safe.
@@ -1936,7 +1937,7 @@ typhoid.urgent.sleepy	تبه او ګډوډ، ډېر خوبولی یا بې هو�
 typhoid.urgent.drink	تبه او نه شي څښلای یا مایعات نه شي ساتلای	fever and cannot drink or keep fluids down
 typhoid.urgent.breathing	تبه له چټکې ساه یا د سینې درد سره	fever with fast breathing or chest pain
 typhoid.soon	که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if someone has:
-typhoid.soon.days	له ۳ ورځو زیاته تبه	fever for more than 3 days
+typhoid.soon.days	له ۲ ورځو زیاته تبه	fever for more than 2 days
 typhoid.soon.belly	تبه له د نس درد، نس ناستي یا قبضیت سره	fever with belly pain, diarrhoea or constipation
 typhoid.soon.family	په څو کسانو کې تبه چې ګډې اوبه یا خواړه لري	fever in several people who share water or food
 typhoid.soon.back	هغه تبه چې د انټي بیوټیک له پای ته رسېدو وروسته بېرته راغلې	fever that came back after the antibiotics ended
@@ -2073,7 +2074,7 @@ animal-illness.dont	دا کارونه مه کوئ:	Do not:
 animal-illness.dont.children	مه پرېږدئ چې ماشومان د حلال شوي څاروي په وینه یا پوستکي لوبې وکړي	let children play with blood or skins from slaughter
 animal-illness.dont.sell	د ناروغ څاروي غوښه مه پلورئ او چا ته یې مه ورکوئ	sell or give away meat from a sick animal
 animal-illness.dont.waste	د حلالولو پاتې شوني د کور یا اوبو تر څنګ مه غورځوئ	throw slaughter waste near the house or water
-animal-illness.eid	د لوی اختر پر مهال چې ډېر څاروي حلالېږي، ډېر احتیاط وکړئ.	Take extra care at Eid al-Adha, when many animals are slaughtered.
+animal-illness.eid	کله چې په یو وخت کې ډېر څاروي حلالېږي، ډېر احتیاط وکړئ.	When many animals are slaughtered at one time, take extra care.
 animal-illness.dog	د سپي چیچل هاري راوستلای شي. د لومړنیو مرستو پاڼه وګورئ او په همغه ورځ واکسین ته ولاړ شئ.	A dog bite can cause rabies. See the First aid page and go for the vaccine the same day.
 leishmaniasis.title	د سالک زخم (لیشمانیا)	Salak sores (leishmaniasis)
 leishmaniasis.summary	د شګو د ماشي چیچل ورو جوړېدونکي زخمونه راولي. د کلینیک درملنه مرسته کوي.	Sandfly bites cause slow-healing sores. Clinic treatment helps.
@@ -2194,7 +2195,7 @@ dental.urgent.knocked	دایمي غاښ لوېدلی؛ په شیدو کې یې �
 dental.soon	که څوک دا نښې لري، همدا اونۍ کلینیک ته ولاړ شئ:	Go to the clinic this week if someone has:
 dental.soon.ache	د غاښ درد، یا داسې غاښ چې سوری یا تور داغ لري	toothache, or a tooth with a hole or black spot
 dental.soon.gums	وري چې وینه کوي یا پړسېدلې وي	gums that bleed or are swollen
-dental.soon.patch	په خوله کې زخم یا سپین داغ له ۲ اونیو زیات	a sore or white patch in the mouth for over 2 weeks
+dental.soon.patch	په خوله کې زخم یا سپین داغ له ۳ اونیو زیات	a sore or white patch in the mouth for over 3 weeks
 dental.soon.child	د ماشوم غاښونه چې نسواري یا مات دي	a child's teeth that are brown or broken
 dental.dont	دا کارونه مه کوئ:	Do not:
 dental.dont.aspirin	پر دردناک غاښ اسپرین، تنباکو یا نسوار مه ږدئ.	Do not put aspirin, tobacco or naswar on an aching tooth.
@@ -2281,7 +2282,7 @@ dengue.urgent.belly	د نس سخت درد یا پرله پسې کانګې	severe
 dengue.urgent.bleeding	له پوزې یا ورۍ وینه بهېدل، په کانګو یا ډکو کې وینه	bleeding from the nose or gums, blood in vomit or stool
 dengue.urgent.sleepy	ډېر خوبولی، بې قراره یا ګډوډ	very sleepy, restless or confused
 dengue.urgent.cold	چټکه ساه، یا سړې لاسونه او پښې	fast breathing, or cold hands and feet
-dengue.urgent.urine	۶ ساعته یې متیازې نه دي کړې	has passed no urine for 6 hours
+dengue.urgent.urine	۱۲ ساعته یې متیازې نه دي کړې	has passed no urine for 12 hours
 dengue.urgent.spots	د پوستکي لاندې ډېر کوچني سره یا بنفش ټکي	tiny red or purple spots under the skin
 dengue.soon	که څوک دا نښې لري، نن کلینیک ته ولاړ شئ:	Go to the clinic today if someone has:
 dengue.soon.fever	لوړه تبه له سردرد او د سترګو شا درد سره	high fever with headache and pain behind the eyes
@@ -2343,7 +2344,7 @@ bleeding.lead	ډېره وینه بهېدنه کولی شي په څو دقیقو 
 bleeding.press	په ټپ کلک فشار ورکړئ. یو پاک ټوکر په ټپ کېږدئ او په لاسونو کلک فشار ورکړئ. که پلاستیکي کڅوړه لرئ، په لاس یې کړئ.	Press hard on the wound. Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands.
 bleeding.keep	فشار ته دوام ورکړئ، مه یې پورته کوئ. لږ تر لږه ۱۰ دقیقې فشار ورکړئ او د کتلو لپاره یې مه پورته کوئ. که وینه له ټوکر تېره شوه، بل ټوکر پرې کېږدئ او کلک فشار ورکړئ.	Keep pressing, do not lift. Press for at least 10 minutes without lifting to look. If blood soaks through, put more cloth on top and press harder.
 bleeding.bandage	کلک بنداژ وتړئ. یو اوږد ټوکر د ټپ پر ټوکر کلک تاو کړئ چې فشار پاتې شي. وګورئ چې د لاس یا پښې ګوتې ګلابي او ګرمې پاتې شي.	Tie a firm bandage. Wrap a long cloth tightly over the pad to keep the pressure on. Check the fingers or toes stay pink and warm.
-bleeding.tourniquet	له لاس یا پښې ډېره وینه: له ټپ پورته یې وتړئ. که بیا هم له لاس یا پښې ډېره وینه بهېږي، یو پلن ټوکر یو ورغوی له ټپ پورته ډېر کلک وتړئ. په یوه لرګي یې تاو کړئ تر څو وینه ودرېږي.	Arm or leg still pouring? Tie above. If blood still pours from an arm or leg, tie a wide cloth very tight a hand's width above the wound. Twist it with a stick until the bleeding stops.
+bleeding.tourniquet	وروستۍ لار: له ټپ پورته یې وتړئ (لاس یا پښه). یوازې د لاس یا پښې لپاره، که کلک فشار ډېره وینه نه وي درولې: یو پلن ټوکر له ټپ څخه ښه پورته ډېر کلک وتړئ او په یوه لرګي یې تاو کړئ تر څو وینه ودرېږي. وخت په یاد ولرئ او همدا اوس روغتون ته ولاړ شئ.	Last resort: tie above (arm or leg). Arm or leg only, if firm pressing has not stopped heavy bleeding: tie a wide cloth high above the wound, very tight, and twist it with a stick until the bleeding stops. Note the time and go to hospital now.
 bleeding.time	وخت په یاد ولرئ، مه یې سستوئ. هغه وخت چې مو وتاړه په یاد ولرئ او روغتون ته یې ووایئ. پخپله یې مه سستوئ. همدا اوس روغتون ته ولاړ شئ.	Note the time, do not loosen. Remember the time you tied it and tell the hospital. Do not loosen it yourself. Go to hospital now.
 bleeding.lie	ویې غځوئ، ګرم یې وساتئ. غځېدلی او په کمپله ګرم یې وساتئ. خواړه مه ورکوئ.	Lay them down, keep them warm. Keep them lying down and warm with a blanket. Do not give food.
 bleeding.urgent	په دې حالتونو کې همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if:
@@ -2468,7 +2469,7 @@ heat-stroke.summary	په ګرمۍ کې تود، ګډوډ یا لوېدلی: ژر
 heat-stroke.lead	د اوړي په ګرمۍ کې په پټي کې کار، یا په ګرم موټر یا کوټه کې د ماشوم پاتې کېدل، کولی شي د ګرمۍ وهلو لامل شي. بدن ډېر ګرم کېږي او کېدای شي ووژني.	Field work in summer heat, or a child left in a hot car or room, can cause heat stroke. The body gets too hot, and this can kill.
 heat-stroke.signs	نښې وپېژنئ. ډېر تود پوستکی، سر درد، ګډوډي، عجیب چلند، بې‌هوښه کېدل یا اختلاج په ګرمۍ کې، د ګرمۍ وهلو نښې دي.	Know the signs. Very hot skin, headache, confusion, strange behaviour, fainting or a fit in the heat are signs of heat stroke.
 heat-stroke.shade	سیوري ته یې یوسئ. یو سوړ او سیوري ځای ته یې یوسئ. اضافي جامې یې وباسئ.	Move them into shade. Move them to a cool, shady place. Take off extra clothes.
-heat-stroke.cool	ټول بدن ژر سوړ کړئ. سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. یا یې تر غاړې پورې د سړو اوبو په لوښي کې وغځوئ او سر یې پورته ونیسئ.	Cool the whole body fast. Pour cool water all over the body and fan them. Or lay them in a tub of cool water up to the neck, holding the head up.
+heat-stroke.cool	ټول بدن ژر سوړ کړئ. سړې اوبه یې پر ټول بدن واچوئ او باد ورکړئ. تي خوړونکی او کوچنی ماشوم په لوند ټوکر پټ کړئ او باد ورکړئ. یوازې لوی ماشوم یا لوی کس تر غاړې پورې د سړو اوبو په لوښي کې غځولی شئ او سر یې پورته ونیسئ.	Cool the whole body fast. Pour cool water all over the body and fan them. For a baby or young child, use wet cloths and fan. Only an older child or an adult can be laid in a tub of cool water up to the neck, holding the head up.
 heat-stroke.drink	که ویښ وي، اوبه غوړپ غوړپ. که بشپړ ویښ وي او تېرولی شي، غوړپ غوړپ سړې اوبه یا او آر اس ورکړئ. که خوب وړی وي، هېڅ شی یې په خوله کې مه اچوئ.	Sips of water if awake. If fully awake and able to swallow, give sips of cool water or ORS. If drowsy, give nothing by mouth.
 heat-stroke.go	په لاره کې هم یې سوړ کړئ. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. په موټر کې هم اوبه پرې واچوئ او باد ورکړئ.	Keep cooling on the way. Go to hospital now, day or night. Keep pouring water and fanning in the car.
 heat-stroke.urgent	که په ګرمۍ کې دا حالت ولري، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ:	Go to hospital now, day or night, if in the heat someone:
@@ -2783,7 +2784,7 @@ goats-sheep.illness	له څارویو راتلونکې ناروغۍ. د کانګ
 goats-sheep.food-bones	پیاوړي هډوکي او غاښونه. د شیدو خواړه، پر پوستکي لمر، او لږه بوره.	Strong bones and teeth. Milk foods, sun on the skin, and less sugar.
 goats-sheep.dont	دا کارونه مه کوئ:	Do not:
 goats-sheep.dont.raw	ماشومانو ته اومې شیدې، یا له اومو شیدو جوړ تازه پنیر مه ورکوئ	give children raw milk, or fresh cheese made from raw milk
-goats-sheep.dont.baby	له ۶ میاشتو کم عمر ماشوم ته د څاروي شیدې مه ورکوئ	give animal milk to a baby under 6 months
+goats-sheep.dont.baby	تر ۱ کلنۍ مخکې د څاروي شیدې د ماشوم اصلي څښاک مه ګرځوئ؛ له ۶ میاشتو کمې یې په خوړو کې ښې دي	give animal milk as the main drink before 1 year; a little in food is fine from 6 months
 home-earning.title	له کوره عاید	Earning from home
 home-earning.summary	له لبنیاتو، هګیو، سبزیو او خیاطۍ لږې خو دوامداره پیسې.	Small, steady money from dairy, eggs, vegetables and sewing.
 home-earning.lead	ډېرې ښځې له کوره لږې پیسې ګټي. په هغه څه چې لرئ یې کوچنی پیل وکړئ او د هرې پیسې حساب وساتئ.	Many women earn a little money from home. Start small with what you already have, and keep track of every coin.
@@ -2908,7 +2909,7 @@ food-baby.lead	په لومړیو ۶ میاشتو کې ماشوم یوازې د �
 food-baby.first-milk	لومړۍ ژېړې شیدې، بیا یوازې د مور شیدې. لومړۍ پنډې او ژېړې شیدې د ماشوم لومړۍ ساتنه ده: ټولې یې ورکړئ. بیا تر ۶ میاشتو یوازې د مور شیدې، حتی په اوړي کې.	The first yellow milk, then only milk. The thick yellow first milk is the baby's first protection: give all of it. Then only breast milk to 6 months, even in summer.
 food-baby.start	په ۶ میاشتو کې: پنډه، نه اوبلنه. په ورځ کې دوه ځله، له ۲ تر ۳ کاشوغو پنډې لېټۍ یا میده شوې کچرۍ پیل وکړئ. دومره پنډه یې کړئ چې پر کاشوغې پاتې شي، او لږ غوړي ورواچوئ.	At 6 months: thick, not watery. Start with 2 to 3 spoons of thick porridge or mashed kichri, twice a day. Make it thick enough to stay on the spoon, and stir in a little oil.
 food-baby.egg	هره ورځ یوه هګۍ، او میده خواړه. له ۶ میاشتو هره ورځ یوه ښه پخه او میده شوې هګۍ، او میده شوي کچالو، کدو، ګازرې، دال، کېله یا زردالو ورکړئ. هر کله چې وکولای شئ، ځیګر یا نرمه او ښه میده شوې غوښه ورزیاته کړئ.	An egg a day, and mashed food. From 6 months give a well-cooked, mashed egg every day, and mashed potato, pumpkin, carrot, lentils, banana or apricot. Add liver or soft meat, mashed fine, when you can.
-food-baby.drinks	اوبه په پیالې، چای نه. له ۶ میاشتو ایشول شوې او سړې شوې اوبه په پاکه پیاله کې ورکړئ. چای، خواږه څښاکونه یا د پاکټ جوس مه ورکوئ: ګېډه ډکوي او اوسپنه کموي.	Water from a cup, no tea. From 6 months give boiled, cooled water from a clean cup. No tea, sweet drinks or packet juice: they fill the belly and take away iron.
+food-baby.drinks	اوبه په پیالې، چای نه. له ۶ میاشتو ایشول شوې او سړې شوې اوبه په پاکه پیاله کې ورکړئ. چای، خواږه څښاکونه یا د پاکټ جوس مه ورکوئ: ګېډه ډکوي او اوسپنه کموي. تر ۱ کلنۍ مخکې د څاروي شیدې اصلي څښاک نه دي؛ له ۶ میاشتو کمې یې په خوړو کې ښې دي.	Water from a cup, no tea. From 6 months give boiled, cooled water from a clean cup. No tea, sweet drinks or packet juice: they fill the belly and take away iron. Animal milk is not the main drink before 1 year; a little in food is fine from 6 months.
 food-baby.choking	نرم او میده، روغ مغزونه نه. مغزونه اوړه کړئ او په لېټۍ کې یې واچوئ؛ روغ مغزونه، کشمش او روغ انګور کولای شي د کوچني ماشوم ستونی بند کړي. تر ۱ کلنۍ شات نه.	Soft and mashed, no whole nuts. Grind nuts into the porridge; whole nuts, raisins and whole grapes can block a small child's throat. No honey before 1 year.
 food-baby.helps.egg	هره ورځ یوه هګۍ د ماشوم له ودې سره مرسته کوي: سمه ده.	An egg a day helps a child grow: true.
 food-baby.helps.oil	له ۶ میاشتو، په خوړو کې لږ غوړي ښه دي: غوړي د ماشوم له ودې سره مرسته کوي.	From 6 months, a little oil or ghee in the food is good: fat helps the baby grow.

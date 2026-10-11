@@ -77,12 +77,11 @@ ui.rd.v.temp-baby-ok	برای طفل عادی است. طفل را گرم نگه 
 ui.rd.v.temp-cold	درجهٔ حرارت خیلی پایین است. مریض را با کمپل گرم کنید و همین حالا به شفاخانه بروید.	Very low temperature. Warm the person with blankets and go to hospital now.
 ui.rd.v.temp-low	عدد پایین است. ببینید ترمامتر خوب زیر بغل بود، گرم نگه دارید و بعد از ۳۰ دقیقه دوباره اندازه کنید. اگر پایین ماند، یا مریض ضعیف یا خواب‌آلود است، امروز به کلینیک بروید.	A low reading. Check the thermometer was deep under the arm, keep warm, and measure again in 30 minutes. If it stays low, or the person is weak or sleepy, go to the clinic today.
 ui.rd.v.temp-ok	تب نیست. اگر مریض به نظر می‌رسد، علایم خطر را زیر نظر بگیرید و بعداً دوباره اندازه کنید.	No fever. If the person seems ill, watch for danger signs and measure again later.
-ui.rd.v.temp-child-fever	این تب است. مایعات و شیر بیشتر بدهید و لباس سبک بپوشانید. اگر تب بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر طفل خیلی مریض معلوم می‌شود، امروز بروید.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. Go to the clinic if the fever lasts more than 2 days, or today if the child seems very ill.
-ui.rd.v.temp-fever	این تب است. استراحت کنید و زیاد مایعات بنوشید. اگر بیشتر از ۲ روز دوام کرد به کلینیک بروید، و اگر مریض خیلی بد است، امروز بروید.	This is a fever. Rest and drink plenty. Go to the clinic if it lasts more than 2 days, or today if the person is very unwell.
+ui.rd.v.temp-child-fever	این تب است. مایعات و شیر بیشتر بدهید و لباس سبک بپوشانید. اگر تب بیشتر از ۲ روز دوام کرد، یا طفل خیلی مریض معلوم می‌شود، امروز به کلینیک بروید.	This is a fever. Give more drinks and breastfeed more, and dress the child lightly. If the fever lasts more than 2 days, or the child seems very ill, go to the clinic today.
+ui.rd.v.temp-fever	این تب است. استراحت کنید و زیاد مایعات بنوشید. اگر تب بیشتر از ۲ روز دوام کرد، یا مریض خیلی بد است، امروز به کلینیک بروید.	This is a fever. Rest and drink plenty. If the fever lasts more than 2 days, or the person is very unwell, go to the clinic today.
 ui.rd.v.temp-high	تب بلند است. زیاد مایعات بدهید و لباس سبک بپوشانید. امروز به کلینیک بروید.	A high fever. Give plenty to drink and dress lightly. Go to the clinic today.
 ui.rd.v.temp-fast	نفس تیز در طفل می‌تواند سینه‌بغل باشد. امروز به کلینیک بروید؛ شاید طفل به دوا ضرورت داشته باشد. نفس‌ها را می‌توانید با شمردن نفس در پایین بشمارید.	Fast breathing in a child can be pneumonia. Go to the clinic today: the child may need medicine. You can count the breaths with the breathing counter below.
 ui.rd.temp-breaths	اگر طفل تیز نفس می‌کشد، نفس‌هایش را بشمارید. برای باز کردن شمردن نفس، اینجا را بزنید.	If the child breathes fast, count the breaths. Tap here to open the breathing counter.
-ui.rd.v.temp-very-high	تب خیلی بلند است. مایعات بدهید، لباس سبک بپوشانید و همین حالا به شفاخانه بروید.	A very high fever. Give drinks, dress lightly, and go to hospital now.
 ui.rd.v.temp-pregnant	تب در حاملگی باید معاینه شود. زیاد مایعات بنوشید و امروز به کلینیک بروید. اگر درد شدید شکم، خونریزی، یا آنقدر ضعف دارید که بلند شده نمی‌توانید، همین حالا به شفاخانه بروید.	Fever in pregnancy needs a check. Drink plenty and go to the clinic today. Go to hospital now if there is severe belly pain, bleeding, or you are too weak to get up.
 ui.rd.v.bp-very-high	خیلی بلند است. ۵ دقیقه آرام بنشینید و یک بار دیگر اندازه کنید. اگر هنوز ۱۸۰ بر ۱۲۰ یا بیشتر است، همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.	Very high. Sit quietly for 5 minutes and measure once more. If it is still 180 over 120 or more, go to hospital now, day or night. Take your medicines with you.
 ui.rd.v.bp-high	بلند است. ۵ دقیقه استراحت کنید و دوباره اندازه کنید. اگر بلند ماند، همین هفته با یادداشت‌های خود به کلینیک بروید. اگر دوا دارید، هر روز بخورید.	High. Rest 5 minutes and measure again. If it stays high, go to the clinic this week and take your readings. If you have medicine, keep taking it every day.
@@ -100,7 +99,8 @@ ui.rd.v.sugar-very-low	قند خیلی پایین است. اگر قورت داد
 ui.rd.v.sugar-low	قند پایین است. همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید و اگر هنوز پایین است، باز شکر بدهید. امروز به کلینیک بروید؛ شاید دوا باید تغییر کند.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes, and give sugar again if it is still low. Go to the clinic today: the medicine may need changing.
 ui.rd.v.sugar-low-sign	قند پایین با گیجی یا تشنج حالت عاجل است. اگر قورت داده می‌تواند، شکر بدهید. اگر نه، چیزی به دهانش ندهید. همین حالا به شفاخانه بروید.	Low sugar with confusion or fits is an emergency. If they can swallow, give sugar. If not, give nothing by mouth. Go to hospital now.
 ui.rd.v.sugar-nodm-low	قند پایین است. همین حالا شکر بدهید: ۴ قاشق چای‌خوری در یک گیلاس آب، بعد کمی غذا. بعد از ۱۵ دقیقه دوباره اندازه کنید. قند پایین در کسی که مرض شکر ندارد باید معاینه شود: امروز به کلینیک بروید.	Low sugar. Give sugar now: 4 teaspoons in a glass of water, then some food. Measure again in 15 minutes. Low sugar in someone without diabetes needs a check: go to the clinic today.
-ui.rd.v.sugar-ok	در اندازهٔ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.	In a good range. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-ok	پیش از صبحانه ۸۰ تا ۱۳۰ خوب است؛ ۲ ساعت بعد از غذا، کمتر از ۱۸۰ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.	Before breakfast, 80 to 130 is good; 2 hours after food, under 180 is good. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
+ui.rd.v.sugar-ok-mmol	پیش از صبحانه ۴٫۴ تا ۷٫۲ خوب است؛ ۲ ساعت بعد از غذا، کمتر از ۱۰ خوب است. دوا، غذای خوب و پیاده‌روی را ادامه دهید. عددها را در هر مراجعه به کلینیک نشان دهید.	Before breakfast, 4.4 to 7.2 is good; 2 hours after food, under 10 is good. Keep taking your medicine, eating well and walking. Show your readings at each clinic visit.
 ui.rd.v.sugar-nodm-ok	عادی است. برای اینکه همین‌طور بماند، شکر و نان سفید کمتر بخورید و هر روز پیاده‌روی کنید.	Normal. To keep it that way, eat less sugar and white bread, and walk every day.
 ui.rd.v.sugar-nodm-check	بعد از غذا این عادی است، اما پیش از صبحانه بلند است. صبح، پیش از اینکه چیزی بخورد یا بنوشد، دوباره اندازه کنید. اگر آن وقت ۱۲۶ یا بیشتر بود، همین هفته برای معاینهٔ درست به کلینیک بروید.	This is normal after food, but high before breakfast. Measure again in the morning, before eating or drinking anything. If it is 126 or more then, go to the clinic this week for a proper test.
 ui.rd.v.sugar-high	از اندازهٔ لازم بلندتر است. دوا بخورید، آب بنوشید، شکر و نان سفید کمتر بخورید و پیاده‌روی کنید. اگر بیشتر عددها همین قدر بلند است، همین هفته به کلینیک بروید.	Higher than it should be. Take your medicine, drink water, eat less sugar and white bread, and walk. If most readings are this high, go to the clinic this week.
@@ -685,7 +685,7 @@ danger-child.dry.eyes	چشم‌هایش گود رفته، و خیلی خواب�
 danger-child.dry.pinch	پوست شکم بعد از گرفتن، بیشتر از ۲ ثانیه طول می‌کشد تا هموار شود	pinched belly skin takes more than 2 seconds to go flat
 danger-child.dry-soon	اگر طفل یکی از این علایم را دارد، امروز به کلینیک بروید	Go to the clinic today if the child:
 danger-child.dry-soon.mouth	دهان و زبانش خشک است	has a dry mouth and tongue
-danger-child.dry-soon.wee	۸ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود	has not weed for 8 hours or more, or has fewer wet nappies
+danger-child.dry-soon.wee	۱۲ ساعت یا بیشتر پیشاب نکرده، یا کهنه‌اش کمتر تر می‌شود	has not weed for 12 hours or more, or has fewer wet nappies
 danger-child.dry-soon.soft-spot	طفل کوچک: جای نرم سرش فرو رفته است	baby: the soft spot on the head is sunken
 danger-child.dry-soon.tears	بدون اشک گریه می‌کند	cries with no tears
 danger-child.look-move	طفل را بغل کنید و ببینید. طفل سالم بدنش را نگه می‌دارد، تکان می‌خورد و به صدای شما رو می‌گرداند. طفل سست مثل یک تکه پارچه آویزان می‌ماند.	Pick the child up and watch. A well child holds its body, moves, and turns to your voice. A floppy child hangs limp like a cloth.
@@ -1004,7 +1004,7 @@ breastfeeding.clinic	در کلینیک: کمک برای شیردهی. اگر ط�
 breastfeeding.dont	این کارها را نکنید:	Do not do these things:
 breastfeeding.dont.first-milk	شیر زرد اول را دور نریزید.	Do not throw away the first yellow milk.
 breastfeeding.dont.prelacteal	به نوزاد روغن زرد، آب بوره، چای یا عسل ندهید.	Do not give a newborn ghee, sugar water, tea or honey.
-breastfeeding.dont.animal-milk	پیش از ۶ ماهگی شیر گاو یا بز ندهید.	Do not give cow's or goat's milk before 6 months.
+breastfeeding.dont.animal-milk	پیش از ۱ سالگی شیر گاو یا بز را نوشیدنی اصلی طفل نسازید. از ۶ ماهگی کمی از آن در غذا خوب است.	Do not give cow's or goat's milk as the main drink before 1 year. A little in food is fine from 6 months.
 breastfeeding.dont.bottle	از بوتل استفاده نکنید؛ اگر لازم شد، پیالهٔ پاک بکار ببرید.	Do not use a feeding bottle; if needed, use a clean cup.
 breastfeeding.dont.sick	وقتی مادر یا طفل مریض است، شیردهی را بس نکنید.	Do not stop breastfeeding when the mother or baby is sick.
 breastfeeding.illness	وقتی طفل مریض است، بیشتر شیر بدهید. بعد از مریضی، تا وقتی که کاملاً خوب شود، بیشتر از معمول غذا بدهید.	When the child is sick, breastfeed more often. After the illness, give more food than usual until the child is fully well.
@@ -1023,6 +1023,7 @@ child-meals.growth	آیا طفل شما خوب رشد می‌کند؟. هر ما
 child-meals.dont	این کارها را نکنید:	Do not:
 child-meals.dont.sweets	شیرینی، بیسکویت یا نوشابهٔ گازدار ندهید؛ شکم را پر می‌کند اما قوت نمی‌دهد	give sweets, biscuits or fizzy drinks: they fill the belly but do not feed
 child-meals.dont.tea	به شیرخوار و طفل کوچک چای ندهید؛ آهن غذا را کم می‌کند	give tea to babies and small children: it takes away the iron in food
+child-meals.dont.milk	پیش از ۱ سالگی شیر گاو یا بز را نوشیدنی اصلی طفل نسازید؛ از ۶ ماهگی کمی از آن در غذا خوب است	give cow's or goat's milk as the main drink before 1 year; a little in food is fine from 6 months
 child-meals.bowl	به طفل کوچک کاسهٔ جدا بدهید و با او بنشینید. با مهربانی تشویق کنید؛ هرگز زور نکنید.	Give a small child their own bowl and sit with them. Encourage gently; never force.
 diarrhoea.title	اسهال و او آر اس	Diarrhoea and ORS
 diarrhoea.summary	او آر اس و زنک بدهید و غذا دادن را ادامه دهید.	Give ORS and zinc, and keep feeding.
@@ -1505,7 +1506,7 @@ red-flags.soon	اگر یکی از این علایم را دارید، همین �
 red-flags.soon.weight-loss	کم شدن وزن، بدون کدام دلیل	Losing weight without trying
 red-flags.soon.lump	غده‌ای که کلان می‌شود	A lump that is growing
 red-flags.soon.blood-urine-stool	خون در ادرار یا مدفوع، بیش از یک بار، بدون سوزش، تب یا اسهال	Blood in the urine or stool more than once, with no burning, fever or diarrhoea
-red-flags.soon.wound	زخمی که در ۲ هفته جور نمی‌شود	A wound or sore that does not heal in 2 weeks
+red-flags.soon.wound	زخم پوست یا دهن که در ۳ هفته جور نمی‌شود	A wound or sore, on the skin or in the mouth, that does not heal in 3 weeks
 red-flags.soon.swallowing	مشکل در قورت دادن غذا	Trouble swallowing food
 red-flags.transport	کمک بخواهید و زود موتر پیدا کنید. فوراً فامیل یا همسایه‌ها را صدا کنید. زود موتر پیدا کنید، پیش از آنکه شب یا راه خراب کار را مشکل کند.	Call for help, find transport early. Call family or neighbours at once. Find a car early, before night or bad roads make it hard.
 red-flags.phone	شماره‌های مهم تیلفون را نگه دارید. شماره یک دریور، کلینیک و شفاخانه را در تیلفون ثبت کنید. آن‌ها را روی کاغذ هم بنویسید.	Keep important phone numbers. Save the numbers of a driver, the clinic and the hospital. Write them on paper too.
@@ -1553,7 +1554,7 @@ reading-sugar.title	عدد قند خون چه معنا دارد	Blood sugar: wha
 reading-sugar.summary	قند پایین، خوب و بلند، و چه وقت بروید.	Low, good and high sugar, and when to go.
 reading-sugar.lead	ماشین هم غلط می‌کند. اگر کسی خیلی مریض معلوم می‌شود، هر عددی که باشد، نزد کارمند صحی بروید.	A machine can be wrong. If someone looks very ill, go to a health worker, whatever the number says.
 reading-sugar.check	عدد قند را معاینه کنید. عدد را وارد کنید و بشنوید چه باید کرد.	Check a sugar reading. Put in the number, in mg/dL or mmol/L, and hear what to do.
-reading-sugar.numbers	عددها چه معنا دارند. به واحد ملی‌گرام: کمتر از ۷۰ پایین است، همین حالا شکر بدهید. ۸۰ تا ۱۳۰ پیش از صبحانه خوب است. بالای ۲۵۰ خیلی بلند است: امروز کلینیک.	What the numbers mean. In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good. Over 250 is very high: clinic today.
+reading-sugar.numbers	عددها چه معنا دارند. به واحد ملی‌گرام: کمتر از ۷۰ پایین است، همین حالا شکر بدهید. ۸۰ تا ۱۳۰ پیش از صبحانه خوب است، و ۲ ساعت بعد از غذا کمتر از ۱۸۰. بالای ۲۵۰ خیلی بلند است: امروز کلینیک.	What the numbers mean. In mg/dL: under 70 is low, give sugar now. 80 to 130 before breakfast is good, and under 180 two hours after food. Over 250 is very high: clinic today.
 reading-sugar.urgent	اگر یکی از این‌ها بود، همین حالا به شفاخانه بروید، شب باشد یا روز	Go to hospital now, day or night, if:
 reading-sugar.urgent.low	قند کمتر از ۵۴ است، یا بعد از دادن شکر هم پایین می‌ماند، یا مریض گیج است	sugar is under 54, or stays low after sugar, or the person is confused
 reading-sugar.urgent.very-high	قند بالای ۴۰۰ است، یا آنقدر بلند است که ماشین نمی‌خواند	sugar is over 400, or too high for the meter to read
@@ -1561,7 +1562,7 @@ reading-sugar.urgent.vomit	قند بلند با استفراغ، یا نفس ت�
 reading-sugar.soon	اگر یکی از این‌ها بود، امروز به کلینیک بروید	Go to the clinic today if:
 reading-sugar.soon.high	قند بالای ۲۵۰ است	sugar is over 250
 reading-sugar.soon.lows	قند بار بار پایین می‌شود	low sugar happens again and again
-reading-sugar.mmol	اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است؛ کمتر از ۳ خیلی پایین است: شکر بدهید و همین حالا به شفاخانه بروید؛ ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، و بالای ۱۴ خیلی بلند است.	If your meter shows mmol/L: under 4 is low; under 3 is very low: give sugar and go to hospital now; 4.4 to 7.2 before breakfast is good, and over 14 is very high.
+reading-sugar.mmol	اگر ماشین شما میلی‌مول نشان می‌دهد: کمتر از ۴ پایین است؛ کمتر از ۳ خیلی پایین است: شکر بدهید و همین حالا به شفاخانه بروید؛ ۴٫۴ تا ۷٫۲ پیش از صبحانه خوب است، ۲ ساعت بعد از غذا کمتر از ۱۰ خوب است، و بالای ۱۴ خیلی بلند است.	If your meter shows mmol/L: under 4 is low; under 3 is very low: give sugar and go to hospital now; 4.4 to 7.2 before breakfast is good, under 10 two hours after food is good, and over 14 is very high.
 reading-sugar.no-diabetes	مرض شکر ندارید؟ پیش از صبحانه ۱۲۶ یا بیشتر، یا هر وقت ۲۰۰ یا بیشتر، باید همین هفته در کلینیک درست معاینه شود.	No diabetes? Before breakfast 126 or more, or 200 or more at any time, needs a proper test at the clinic this week.
 reading-sugar.dont	این کارها را نکنید:	Do not do these things:
 reading-sugar.dont.dose	انسولین یا تابلیت را خودتان کم یا زیاد نکنید؛ از کلینیک بپرسید.	Do not change your insulin or tablets yourself; ask the clinic.
@@ -1906,7 +1907,7 @@ diarrhoea-adult.urgent	اگر کسی این علایم را دارد، همین 
 diarrhoea-adult.urgent.drink	نمی‌تواند بنوشد، یا همه چیز را استفراغ می‌کند	cannot drink, or vomits everything
 diarrhoea-adult.urgent.weak	بسیار ضعیف، سرچرخ، گیج یا به سختی بیدار می‌شود	very weak, dizzy, confused or hard to wake
 diarrhoea-adult.urgent.rice	مدفوع آبکی مثل آب برنج، چند بار در ساعت	watery stool like rice water, many times an hour
-diarrhoea-adult.urgent.urine	۸ ساعت یا بیشتر ادرار نکرده	no urine for 8 hours or more
+diarrhoea-adult.urgent.urine	۱۲ ساعت یا بیشتر ادرار نکرده	no urine for 12 hours or more
 diarrhoea-adult.urgent.risk	خانم حامله یا شخص پیری که بدنش خشک می‌شود	a pregnant woman or an old person who is drying out
 diarrhoea-adult.soon	اگر کسی این علایم را دارد، امروز به کلینیک بروید:	Go to the clinic today if someone has:
 diarrhoea-adult.soon.blood	خون در مدفوع	blood in the stool
@@ -1920,10 +1921,10 @@ diarrhoea-adult.dont.stream	لباس مریض را در جویی که دیگرا
 diarrhoea-adult.packets	در تابستان دو پاکت او آر اس در خانه داشته باشید. اگر ندارید، پوستهٔ صحی یا کارمند صحی قریه آن را دارد.	Keep two ORS packets at home in summer. If you have none, the health post or village health worker has them.
 diarrhoea-adult.food-diarrhoea	اسهال: چه بخوریم و چه بنوشیم. او آر اس، نوشیدنی‌های خانگی و غذای نرم: چه کمک می‌کند و چه ضرر دارد.	Diarrhoea: what to eat and drink. ORS, home drinks and soft food: what helps, and what harms.
 typhoid.title	محرقه (تیفویید)	Typhoid fever
-typhoid.summary	درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۳ روز: امروز کلینیک.	Severe belly pain: hospital now. Fever over 3 days: clinic today.
+typhoid.summary	درد شدید شکم: همین حالا شفاخانه. تب بیشتر از ۲ روز: امروز کلینیک.	Severe belly pain: hospital now. Fever more than 2 days: clinic today.
 typhoid.lead	محرقه از آب یا غذایی می‌آید که با مدفوع شخص مریض ناپاک شده. تب روز به روز بالا می‌رود، با سردرد، خستگی، درد شکم و گاهی اسهال یا قبضیت. به انتی‌بیوتیک از کلینیک ضرورت دارد.	Typhoid comes from water or food dirtied by the stool of a sick person. The fever rises day by day with headache, tiredness, belly pain and sometimes diarrhoea or constipation. It needs antibiotics from the clinic.
 typhoid.signs	علایم را بشناسید. تبی که در چند روز بالا می‌رود و نمی‌رود، با سردرد، ضعف، بی‌اشتهایی، درد شکم، و اسهال یا قبضیت. اطفال شاید فقط تب داشته باشند.	Know the signs. Fever that rises over several days and does not go, with headache, weakness, poor appetite, belly pain, and diarrhoea or constipation. Children may only have fever.
-typhoid.go	تب بیش از ۳ روز: بروید. اگر تب بیش از ۳ روز دوام کرد، یا زودتر اگر مریض بسیار ناخوش است، به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.	Fever over 3 days: go. Go to the clinic if fever lasts more than 3 days, or sooner if the person is very unwell. Typhoid needs a blood test and antibiotics; it does not pass by itself.
+typhoid.go	تب بیشتر از ۲ روز: به کلینیک بروید. اگر تب بیشتر از ۲ روز دوام کرد، یا مریض بسیار ناخوش است، امروز به کلینیک بروید. محرقه معاینهٔ خون و انتی‌بیوتیک ضرورت دارد؛ خود به خود نمی‌رود.	Fever more than 2 days: go to the clinic. If the fever lasts more than 2 days, or the person is very unwell, go to the clinic today. Typhoid needs a blood test and antibiotics; it does not pass by itself.
 typhoid.fluids	مایعات و غذای نرم. آب، او آر اس و شوربای زیاد بدهید. خوردن غذای نرم را ادامه دهید. پاراسیتامول از کلینیک تب را پایین می‌آورد.	Fluids and soft food. Give plenty of water, ORS and soup. Keep eating soft food. Paracetamol from the clinic can bring the fever down.
 typhoid.finish	تمام دوره را تمام کنید. انتی‌بیوتیک را تمام روزهایی که کارمند صحی گفته بخورید، حتی وقتی تب رفته. قطع زود تب را برمی‌گرداند و دوا را بی‌اثر می‌کند.	Finish the whole course. Take the antibiotic for all the days the health worker says, even when the fever has gone. Stopping early brings the fever back and makes the medicine stop working.
 typhoid.prevent	جلو سرایت را بگیرید. آب نوشیدنی را بجوشانید یا کلورین بزنید. بعد از تشناب و پیش از غذا دست‌ها را با صابون بشویید. شخص مریض تا وقتی کارمند صحی نگوید که بی‌خطر است، برای دیگران غذا نپزد.	Stop it spreading. Boil or chlorinate drinking water. Wash hands with soap after the toilet and before food. The sick person must not cook for others until the health worker says it is safe.
@@ -1936,7 +1937,7 @@ typhoid.urgent.sleepy	تب و گیج، بسیار خواب‌آلود یا بی�
 typhoid.urgent.drink	تب و نمی‌تواند بنوشد یا مایعات را نگه دارد	fever and cannot drink or keep fluids down
 typhoid.urgent.breathing	تب با نفس تیز یا درد سینه	fever with fast breathing or chest pain
 typhoid.soon	اگر کسی این علایم را دارد، امروز به کلینیک بروید:	Go to the clinic today if someone has:
-typhoid.soon.days	تب بیش از ۳ روز	fever for more than 3 days
+typhoid.soon.days	تب بیشتر از ۲ روز	fever for more than 2 days
 typhoid.soon.belly	تب با درد شکم، اسهال یا قبضیت	fever with belly pain, diarrhoea or constipation
 typhoid.soon.family	تب در چند نفر که آب یا غذای مشترک دارند	fever in several people who share water or food
 typhoid.soon.back	تبی که بعد از ختم انتی‌بیوتیک برگشته	fever that came back after the antibiotics ended
@@ -2073,7 +2074,7 @@ animal-illness.dont	این کارها را نکنید:	Do not:
 animal-illness.dont.children	نگذارید اطفال با خون یا پوست حیوان ذبح‌شده بازی کنند	let children play with blood or skins from slaughter
 animal-illness.dont.sell	گوشت حیوان مریض را نفروشید و به کسی ندهید	sell or give away meat from a sick animal
 animal-illness.dont.waste	باقی‌ماندهٔ ذبح را نزدیک خانه یا آب نیندازید	throw slaughter waste near the house or water
-animal-illness.eid	در عید قربان که حیوانات زیاد ذبح می‌شود، بیشتر احتیاط کنید.	Take extra care at Eid al-Adha, when many animals are slaughtered.
+animal-illness.eid	وقتی حیوانات زیاد در یک وقت ذبح می‌شوند، بیشتر احتیاط کنید.	When many animals are slaughtered at one time, take extra care.
 animal-illness.dog	گزیدن سگ می‌تواند هاری بیاورد. صفحهٔ کمک‌های اولیه را ببینید و همان روز برای واکسین بروید.	A dog bite can cause rabies. See the First aid page and go for the vaccine the same day.
 leishmaniasis.title	زخم سالک (لیشمانیا)	Salak sores (leishmaniasis)
 leishmaniasis.summary	گزیدن پشهٔ خاکی زخم‌های دیرجور می‌آورد. تداوی در کلینیک کمک می‌کند.	Sandfly bites cause slow-healing sores. Clinic treatment helps.
@@ -2194,7 +2195,7 @@ dental.urgent.knocked	دندان دایمی افتاده؛ آن را در شیر
 dental.soon	اگر کسی این علایم را دارد، همین هفته به کلینیک بروید:	Go to the clinic this week if someone has:
 dental.soon.ache	دندان‌درد، یا دندانی با سوراخ یا لکهٔ سیاه	toothache, or a tooth with a hole or black spot
 dental.soon.gums	بیره‌ای که خون می‌دهد یا پندیده است	gums that bleed or are swollen
-dental.soon.patch	زخم یا لکهٔ سفید در دهن بیش از ۲ هفته	a sore or white patch in the mouth for over 2 weeks
+dental.soon.patch	زخم یا لکهٔ سفید در دهن بیش از ۳ هفته	a sore or white patch in the mouth for over 3 weeks
 dental.soon.child	دندان‌های طفل که قهوه‌ای یا شکسته‌اند	a child's teeth that are brown or broken
 dental.dont	این کارها را نکنید:	Do not:
 dental.dont.aspirin	روی دندان دردناک اسپرین، تنباکو یا نسوار نگذارید.	Do not put aspirin, tobacco or naswar on an aching tooth.
@@ -2281,7 +2282,7 @@ dengue.urgent.belly	درد شدید شکم یا استفراغ پی‌درپی	s
 dengue.urgent.bleeding	خونریزی از بینی یا بیره، خون در استفراغ یا مدفوع	bleeding from the nose or gums, blood in vomit or stool
 dengue.urgent.sleepy	بسیار خواب‌آلود، بی‌قرار یا گیج	very sleepy, restless or confused
 dengue.urgent.cold	نفس تیز، یا دست و پای سرد	fast breathing, or cold hands and feet
-dengue.urgent.urine	۶ ساعت ادرار نکرده	has passed no urine for 6 hours
+dengue.urgent.urine	۱۲ ساعت ادرار نکرده	has passed no urine for 12 hours
 dengue.urgent.spots	دانه‌های بسیار کوچک سرخ یا بنفش زیر پوست	tiny red or purple spots under the skin
 dengue.soon	اگر کسی این علایم را دارد، امروز به کلینیک بروید:	Go to the clinic today if someone has:
 dengue.soon.fever	تب بلند با سردرد و درد پشت چشم‌ها	high fever with headache and pain behind the eyes
@@ -2343,7 +2344,7 @@ bleeding.lead	خونریزی زیاد می‌تواند در چند دقیقه �
 bleeding.press	روی زخم محکم فشار دهید. یک تکهٔ پاک روی زخم بگذارید و با دست‌ها محکم فشار دهید. اگر خریطهٔ پلاستیکی دارید، آن را به دست کنید.	Press hard on the wound. Put a clean cloth on the wound and press hard with your hands. If you have a plastic bag, put it over your hands.
 bleeding.keep	فشار را ادامه دهید، برندارید. حداقل ۱۰ دقیقه بدون برداشتن برای دیدن، فشار دهید. اگر خون از تکه گذشت، تکهٔ دیگر بالایش بگذارید و محکم‌تر فشار دهید.	Keep pressing, do not lift. Press for at least 10 minutes without lifting to look. If blood soaks through, put more cloth on top and press harder.
 bleeding.bandage	یک بانداژ محکم ببندید. یک تکهٔ دراز را محکم روی تکهٔ زخم بپیچانید تا فشار بماند. ببینید که انگشتان دست یا پا گلابی و گرم بمانند.	Tie a firm bandage. Wrap a long cloth tightly over the pad to keep the pressure on. Check the fingers or toes stay pink and warm.
-bleeding.tourniquet	خون زیاد از دست یا پا: بالای زخم ببندید. اگر باز هم خون زیاد از دست یا پا می‌ریزد، یک تکهٔ پهن را یک کف دست بالاتر از زخم بسیار محکم ببندید. با یک چوب بپیچانید تا خون بند شود.	Arm or leg still pouring? Tie above. If blood still pours from an arm or leg, tie a wide cloth very tight a hand's width above the wound. Twist it with a stick until the bleeding stops.
+bleeding.tourniquet	آخرین راه: بالای زخم ببندید (دست یا پا). فقط برای دست یا پا، اگر فشار محکم خونریزی زیاد را بند نکرده است: یک تکهٔ پهن را خوب بالاتر از زخم، بسیار محکم ببندید و با یک چوب بپیچانید تا خون بند شود. وقت را یاد کنید و همین حالا به شفاخانه بروید.	Last resort: tie above (arm or leg). Arm or leg only, if firm pressing has not stopped heavy bleeding: tie a wide cloth high above the wound, very tight, and twist it with a stick until the bleeding stops. Note the time and go to hospital now.
 bleeding.time	وقت را یاد کنید، سست نکنید. وقتی را که بستید به یاد داشته باشید و به شفاخانه بگویید. خودتان آن را سست نکنید. همین حالا به شفاخانه بروید.	Note the time, do not loosen. Remember the time you tied it and tell the hospital. Do not loosen it yourself. Go to hospital now.
 bleeding.lie	بخوابانید، گرم نگه دارید. او را خوابیده و با کمپل گرم نگه دارید. به او غذا ندهید.	Lay them down, keep them warm. Keep them lying down and warm with a blanket. Do not give food.
 bleeding.urgent	در این حالات همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, if:
@@ -2468,7 +2469,7 @@ heat-stroke.summary	در گرما داغ، گیج یا افتاده: او را �
 heat-stroke.lead	کار در زمین در گرمی تابستان، یا ماندن طفل در موتر یا اتاق داغ، می‌تواند سبب گرمازدگی شود. بدن بیش از حد داغ می‌شود و ممکن است کشنده باشد.	Field work in summer heat, or a child left in a hot car or room, can cause heat stroke. The body gets too hot, and this can kill.
 heat-stroke.signs	علایم را بشناسید. پوست بسیار داغ، سردرد، گیجی، رفتار عجیب، بی‌هوش شدن یا تشنج در گرما، علامت گرمازدگی است.	Know the signs. Very hot skin, headache, confusion, strange behaviour, fainting or a fit in the heat are signs of heat stroke.
 heat-stroke.shade	به سایه ببرید. او را به یک جای سرد و سایه ببرید. لباس اضافی را بکشید.	Move them into shade. Move them to a cool, shady place. Take off extra clothes.
-heat-stroke.cool	تمام بدن را زود سرد کنید. آب سرد را روی تمام بدنش بریزید و باد بزنید. یا او را تا گردن در تشت آب سرد بخوابانید و سرش را بالا نگه دارید.	Cool the whole body fast. Pour cool water all over the body and fan them. Or lay them in a tub of cool water up to the neck, holding the head up.
+heat-stroke.cool	تمام بدن را زود سرد کنید. آب سرد را روی تمام بدنش بریزید و باد بزنید. شیرخوار و طفل کوچک را با تکهٔ تر بپوشانید و باد بزنید. فقط طفل بزرگتر یا بزرگسال را می‌توانید تا گردن در تشت آب سرد بخوابانید و سرش را بالا نگه دارید.	Cool the whole body fast. Pour cool water all over the body and fan them. For a baby or young child, use wet cloths and fan. Only an older child or an adult can be laid in a tub of cool water up to the neck, holding the head up.
 heat-stroke.drink	اگر بیدار است، آب جرعه‌جرعه. اگر کاملاً بیدار است و قورت داده می‌تواند، جرعه‌جرعه آب سرد یا او آر اس بدهید. اگر خواب‌آلود است، چیزی به دهانش ندهید.	Sips of water if awake. If fully awake and able to swallow, give sips of cool water or ORS. If drowsy, give nothing by mouth.
 heat-stroke.go	در راه هم سرد کنید. همین حالا به شفاخانه بروید، شب باشد یا روز. در موتر هم آب بریزید و باد بزنید.	Keep cooling on the way. Go to hospital now, day or night. Keep pouring water and fanning in the car.
 heat-stroke.urgent	اگر در گرما این حالت را دارد، همین حالا به شفاخانه بروید، شب باشد یا روز:	Go to hospital now, day or night, if in the heat someone:
@@ -2783,7 +2784,7 @@ goats-sheep.illness	مریضی‌هایی که از حیوانات می‌آید
 goats-sheep.food-bones	استخوان و دندان قوی. غذای شیری، آفتاب بر پوست، و شکر کمتر.	Strong bones and teeth. Milk foods, sun on the skin, and less sugar.
 goats-sheep.dont	این کارها را نکنید:	Do not:
 goats-sheep.dont.raw	به اطفال شیر خام، یا پنیر تازه که از شیر خام ساخته شده، ندهید	give children raw milk, or fresh cheese made from raw milk
-goats-sheep.dont.baby	به طفل کمتر از ۶ ماه شیر حیوان ندهید	give animal milk to a baby under 6 months
+goats-sheep.dont.baby	پیش از ۱ سالگی شیر حیوان را نوشیدنی اصلی طفل نسازید؛ از ۶ ماهگی کمی از آن در غذا خوب است	give animal milk as the main drink before 1 year; a little in food is fine from 6 months
 home-earning.title	درآمد از خانه	Earning from home
 home-earning.summary	پول کم ولی پیوسته از لبنیات، تخم، ترکاری و خیاطی.	Small, steady money from dairy, eggs, vegetables and sewing.
 home-earning.lead	بسیاری از زنان از خانه کمی پول به دست می‌آورند. با چیزی که دارید کوچک شروع کنید و حساب هر پول را نگه دارید.	Many women earn a little money from home. Start small with what you already have, and keep track of every coin.
@@ -2908,7 +2909,7 @@ food-baby.lead	در ۶ ماه اول، طفل فقط شیر مادر لازم د
 food-baby.first-milk	شیر زرد اول، بعد فقط شیر مادر. شیر غلیظ و زرد اول، اولین محافظت طفل است: همه‌اش را بدهید. بعد تا ۶ ماه فقط شیر مادر، حتی در تابستان.	The first yellow milk, then only milk. The thick yellow first milk is the baby's first protection: give all of it. Then only breast milk to 6 months, even in summer.
 food-baby.start	در ۶ ماهگی: غلیظ، نه آبکی. با ۲ تا ۳ قاشق لیتی غلیظ یا کچری کوبیده، روزی دو بار شروع کنید. آن را آن‌قدر غلیظ بسازید که روی قاشق بماند، و کمی روغن در آن بیندازید.	At 6 months: thick, not watery. Start with 2 to 3 spoons of thick porridge or mashed kichri, twice a day. Make it thick enough to stay on the spoon, and stir in a little oil.
 food-baby.egg	روزی یک تخم مرغ، و غذای کوبیده. از ۶ ماهگی هر روز یک تخم مرغ خوب پخته و کوبیده، و کچالو، کدو، زردک، دال، کیله یا زردآلوی کوبیده بدهید. هر وقت توانستید، جگر یا گوشت نرم و خوب کوبیده اضافه کنید.	An egg a day, and mashed food. From 6 months give a well-cooked, mashed egg every day, and mashed potato, pumpkin, carrot, lentils, banana or apricot. Add liver or soft meat, mashed fine, when you can.
-food-baby.drinks	آب با پیاله، چای نه. از ۶ ماهگی آب جوشیده و سرد شده را با پیالهٔ پاک بدهید. چای، نوشیدنی شیرین یا آب میوهٔ پاکتی ندهید: شکم را پر می‌کند و آهن را کم می‌کند.	Water from a cup, no tea. From 6 months give boiled, cooled water from a clean cup. No tea, sweet drinks or packet juice: they fill the belly and take away iron.
+food-baby.drinks	آب با پیاله، چای نه. از ۶ ماهگی آب جوشیده و سرد شده را با پیالهٔ پاک بدهید. چای، نوشیدنی شیرین یا آب میوهٔ پاکتی ندهید: شکم را پر می‌کند و آهن را کم می‌کند. پیش از ۱ سالگی شیر حیوان نوشیدنی اصلی نیست؛ از ۶ ماهگی کمی از آن در غذا خوب است.	Water from a cup, no tea. From 6 months give boiled, cooled water from a clean cup. No tea, sweet drinks or packet juice: they fill the belly and take away iron. Animal milk is not the main drink before 1 year; a little in food is fine from 6 months.
 food-baby.choking	نرم و کوبیده، مغز درست نه. مغزها را آرد کرده در لیتی بیندازید؛ مغز درست، کشمش و انگور درست می‌تواند گلوی طفل کوچک را بند کند. تا ۱ سالگی عسل نه.	Soft and mashed, no whole nuts. Grind nuts into the porridge; whole nuts, raisins and whole grapes can block a small child's throat. No honey before 1 year.
 food-baby.helps.egg	روزی یک تخم مرغ به رشد طفل کمک می‌کند: درست است.	An egg a day helps a child grow: true.
 food-baby.helps.oil	از ۶ ماهگی، کمی روغن یا روغن زرد در غذا خوب است: چربی به رشد طفل کمک می‌کند.	From 6 months, a little oil or ghee in the food is good: fat helps the baby grow.
