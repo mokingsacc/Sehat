@@ -65,7 +65,7 @@ const foldTok = (t) => (isAr(t) || /^\d/.test(t) ? t : latFold(t));
 /* ------------------------------------------------------------------ word lists ------------------------------------------------------------------ */
 // Words that carry no meaning for finding a page (checked on the word as typed, before Latin folding).
 const STOP_RAW = {
-  fa: 'و را به از در با که این ان اون او است هست اس استه بود شد شده شود میشود میشه میشد کرد کرده کند میکند میکنه میکنن میکنند دارد داره دارم داریم دارن دارند چه چی چرا چطور چطوری من تو ما شما ایشان مه ما اونا یک یه یکی همی همین هم برای بری بخاطر ده سره ام اش ها های ای تر ترین خو دیگه دیگر باید لطفا حالا مرا مره ره رو را چند کمی خیلی زیاده بسیار وقتی کدام چیزی یکدم ایقه اینقدر میباشد باشد ای اینه گاهی اول',
+  fa: 'و را به از در با که این ان اون او است هست اس استه بود شد شده شود شدند شدیم شدم شوند میشود میشه میشد کرد کرده کند میکند میکنه میکنن میکنند دارد داره دارم داریم دارن دارند چه چی چرا چطور چطوری من تو ما شما ایشان مه ما اونا یک یه یکی همی همین هم برای بری بخاطر ده سره ام اش ها های ای تر ترین خو دیگه دیگر باید لطفا حالا مرا مره ره رو را چند کمی خیلی زیاده بسیار وقتی کدام چیزی یکدم ایقه اینقدر میباشد باشد ای اینه گاهی اول',
   ps: 'د په ته او چی چې می مې دې دی یی یې ئې مو زما ستا هغه دا دغه ده دي دے وو وه وي شو شوه شوی شوې شي شی کوي کوم کړي کړ کړه کړې کې کی سره له هم ډېر ډیر یو یوه څه څنګه ولې ولی لپاره باندې باندی پر ما زه لري لرو لری یم یو راته ورته ټول ډېره ډیره خو نو بیا اوس',
   en: 'a an the my our your his her their its it is are was were be been being am i im me we you he she they this that these those of in on at to for from with and or but has have had having do does did doing very so too what how why when where which who can could should would will please some any just really lot lots bit little got get gets getting feel feels feeling there about since keeps keep kind sort also again now today ill',
   lat: 'e i va wa ra ba az dar da pa ta ke ki ka ast as hast ase asta astan bud shud shod shuda shoda mesha mishe meshe misha mesh kad kard karda kada mekona mikona mekone mekunad mikunad mikone mikonad mekuna mekunan dara dare darad darum daram dari darem man mara mana mu tu shuma yak yag yaki hamin ham kho khu digar baraye kheli khaili khayli besyar ziad ziyad ziada chi che chira chetor chitor chand de aw ao chi me mi ye yi zama sta haga dagha dey day wi wu shu shwa shwe shi kawi kawey kri kre kay sara la hum der dir yaw yawa sa tsa sanga wale lapara lari laram larey yam yu rata warta tol tul kho no bya os',
@@ -140,8 +140,11 @@ for (const [c, words] of Object.entries(CONCEPT_RAW)) for (const w of words.spli
 // a word, or the word without a my/his/plural ending, that is one of the ideas above
 const CANON_SUF_AR = ['هایشان', 'هایش', 'هایم', 'های', 'ها', 'شان', 'یش', 'یم', 'ام', 'اش', 'ش', 'م', 'ی', 'ه'];
 const CANON_SUF_LAT = [...new Set(['ash', 'esh', 'ish', 'am', 'at', 'ha', 'an', 'es', 's', 'i', 'e'].map(latFold))].sort((a, b) => b.length - a.length);
+// words that only look like an idea word with an ending: سرمه (kohl) is not سرم (my head), Pashto سړی (a man) is not سر
+const NOT_IDEA = new Set(['سرمه', 'سری'].map(normalize));
 function canon(t) {
   const c = CONCEPT.get(t); if (c) return c;
+  if (NOT_IDEA.has(t)) return t;
   for (const s of isAr(t) ? CANON_SUF_AR : CANON_SUF_LAT) if (t.length - s.length >= 2 && t.endsWith(s)) { const b = CONCEPT.get(t.slice(0, -s.length)); if (b) return b; }
   return t;
 }
@@ -283,7 +286,8 @@ export function createSearch(book, opts = {}) {
     const suffixes = (t) => (isAr(t) ? SUF_AR : SUF_LAT);
     toks.forEach((x, i) => {
       if (x.t[0] === '~') return;
-      for (const s of suffixes(x.t)) if (x.t.length - s.length >= 2 && x.t.endsWith(s)) {
+      // (a Latin stem of 2 letters is too loose: "teeth" folds to "tit", and "tea" must not be "ti" + t)
+      for (const s of suffixes(x.t)) if (x.t.length - s.length >= (isAr(x.t) ? 2 : 3) && x.t.endsWith(s)) {
         const b = x.t.slice(0, -s.length);
         if (!base.has(b)) base.set(b, []); base.get(b).push(i);
       }
@@ -426,6 +430,9 @@ export function createSearch(book, opts = {}) {
     for (const [page, pc] of credit) {
       let score = 0.01 * pc.best; for (const c of pc.c) score += c; // (ties go to the page with a listed phrase)
       if (!pc.best && score < 1.6) continue; // only loose word overlaps: not a real match
+      // no listed phrase, and under half the words of a longer query found in the page's text ("سرش خورد و بیهوش شد"
+      // → Getting ready for hospital, from "خورد" alone): a stray word, not what the person asked about
+      if (!pc.best && Q.length >= 3 && pc.c.filter((c) => c > 0).length * 2 < Q.length) continue;
       res.push({ id: page, target: pc.tgt, route: routeOf(pc.tgt || page), score, danger: pc.danger, pc });
     }
     // a danger query ("پدرم افتاد نفس نمی‌کشد" matches the danger words of the Emergency screen): another emergency page

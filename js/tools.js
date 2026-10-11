@@ -188,7 +188,8 @@ export function initTools(ctx) {
     // the thin-child hospital list of the Health page reading-muac (= malnutrition.urgent; IMAM 2018; medical audit CH20)
     muac: [['reading-muac.urgent.feet', 'u'], ['reading-muac.urgent.eat', 'u'], ['reading-muac.urgent.sleepy', 'u'], ['reading-muac.urgent.vomit', 'u'], ['reading-muac.urgent.fever', 'u'], ['reading-muac.urgent.convulsion', 'u']],
   };
-  const RD = { dev: null, who: null, phase: 'dev', a: '', b: '', field: 'a', unit: 'mg', colour: null, signs: new Set() };
+  // re: this is the second reading, after a result that said measure again (BP 180/120 or more, oxygen 93 or 94)
+  const RD = { dev: null, who: null, phase: 'dev', a: '', b: '', field: 'a', unit: 'mg', colour: null, signs: new Set(), re: false };
   const signList = () => (SIGNS[RD.dev + '/' + RD.who] || SIGNS[RD.dev] || []).filter(([id]) => S.book.narration[id]);
   const has = (kind) => signList().some(([id, k]) => k === kind && RD.signs.has(id));
   const parse = (s) => { const x = parseFloat(String(s)); return isFinite(x) ? x : NaN; };
@@ -228,7 +229,9 @@ export function initTools(ctx) {
       if (has('swell') || has('faint')) return out('today', 'ui.rd.v.bp-normal-sign');
       return out('ok', 'ui.rd.v.bp-preg-ok');
     }
-    if (s >= 180 || d >= 120) return out('urgent', 'ui.rd.v.bp-very-high'); // NICE NG136 / ISH 2020
+    // NICE NG136 / ISH 2020; the reading-bp page: hospital now when it is 180 over 120 or more two times, so the first such
+    // reading (no danger sign) says sit 5 minutes and measure again, and the second one still that high says hospital now
+    if (s >= 180 || d >= 120) return RD.re ? out('urgent', 'ui.rd.v.bp-very-high-2') : { ...out('check', 'ui.rd.v.bp-very-high'), again: true };
     if (s < 90) return has('faint') ? out('today', 'ui.rd.v.bp-low-faint') : out('watch', 'ui.rd.v.bp-low');
     if (s >= 135 || d >= 85) return has('faint') ? out('today', 'ui.rd.v.bp-high-faint') : out('soon', 'ui.rd.v.bp-high'); // home BP 135/85 (ISH 2020, NICE); dizzy or fainted = at least clinic today (KT-2)
     if (has('faint')) return out('today', 'ui.rd.v.bp-normal-sign');
@@ -241,11 +244,15 @@ export function initTools(ctx) {
   function verdictSugar() {
     const g = sugarMg(), out = (lv, x) => ({ lv, say: x, mg: g });
     if (!(g >= 10 && g <= 700)) return out('check', 'ui.rd.check');
-    if (has('conf')) return out('urgent', g < 70 ? 'ui.rd.v.sugar-low-sign' : 'ui.rd.v.sign');
-    if (g < 54) return out('urgent', 'ui.rd.v.sugar-very-low');       // ADA level 2 hypoglycaemia
+    // the low bands in the meter's own unit: mg/dL under 54 and under 70 (ADA levels 2 and 1); mmol/L under 3.0 and under 4.0,
+    // as the reading-sugar page says (3.9 mmol/L × 18 = 70.2 mg/dL would otherwise read as good)
+    const mmol = RD.unit === 'mmol' && RD.a !== 'HI' && RD.a !== 'LO', x = parse(RD.a);
+    const veryLow = mmol ? x < 3 : g < 54, low = mmol ? x < 4 : g < 70;
+    if (has('conf')) return out('urgent', low ? 'ui.rd.v.sugar-low-sign' : 'ui.rd.v.sign');
+    if (veryLow) return out('urgent', 'ui.rd.v.sugar-very-low');
     if (has('u')) return out('urgent', 'ui.rd.v.sign');
     const dm = RD.who !== 'nodiabetes';
-    if (g < 70) return out('today', dm ? 'ui.rd.v.sugar-low' : 'ui.rd.v.sugar-nodm-low'); // ADA level 1 hypoglycaemia
+    if (low) return out('today', dm ? 'ui.rd.v.sugar-low' : 'ui.rd.v.sugar-nodm-low');
     if (g >= 400) return out('urgent', 'ui.rd.v.sugar-danger');       // judgement call (meter HI is usually over 500 or 600)
     if (g >= 250) return out('today', dm ? 'ui.rd.v.sugar-very-high' : 'ui.rd.v.sugar-nodm-very-high');
     if (!dm) {                                                         // WHO/IDF 2006: fasting 126 or more, or 200 or more at any time = diabetes (KT-3)
@@ -261,7 +268,8 @@ export function initTools(ctx) {
     if (!(p >= 50 && p <= 100)) return out('check', 'ui.rd.check');
     if (has('u')) return out('urgent', 'ui.rd.v.sign');
     if (p <= 92) return out('urgent', 'ui.rd.v.spo2-low');           // NHS home oximetry; WHO oxygen under 90
-    if (p <= 94) return out('today', 'ui.rd.v.spo2-lowish');
+    // 93 or 94: the reading-spo2 page says measure again (a cold or moving hand reads low); clinic today if it stays there
+    if (p <= 94) return RD.re ? out('today', 'ui.rd.v.spo2-lowish-2') : { ...out('check', 'ui.rd.v.spo2-lowish'), again: true };
     return out('ok', 'ui.rd.v.spo2-ok');
   }
   function verdictMuac() {
@@ -342,12 +350,13 @@ export function initTools(ctx) {
       ids = [v.say, ...extra, clinic, 'ui.rd.note'];
       html = html.replace('<div class="bigread', listenBar(ids) + '<div class="bigread');
       // blood pressure and sugar can be kept on a person's family record, to show the doctor (js/family.js)
-      if (ctx.saveReading && (RD.dev === 'bp' || RD.dev === 'sugar') && v.lv !== 'check' && S.book.narration['ui.fam.rd.save']) {
+      if (ctx.saveReading && (RD.dev === 'bp' || RD.dev === 'sugar') && (v.lv !== 'check' || v.again) && S.book.narration['ui.fam.rd.save']) {
         html += `<div class="srowbig"><button type="button" class="sbig" data-rd="save" style="--c:#2F6F7E">${ic('family')}<span class="tx"><span class="t">${esc(T('saveToFamily'))}</span></span></button>${spk('ui.fam.rd.save').replace('class="spk', 'class="spk big')}</div>`;
         ids.push('ui.fam.rd.save');
       }
-      html += `<div class="row2"><button class="btn" data-rd="again">${esc(T('anotherReading'))}</button><a class="btn ghost" href="#/topic/${DEV[RD.dev].topic}">${esc(T('howToUse'))}</a></div>`;
-      if (v.lv === 'urgent' || v.lv === 'today') html += `<a class="btn ghost" href="#/near">${ic('hospital')} ${esc(T('near'))}</a>`;
+      if (v.again) html += `<button class="btn big" data-rd="remeasure">${esc(T('lvCheck'))}</button>`; // the second reading
+      html += `<div class="row2"><button class="btn${v.again ? ' ghost' : ''}" data-rd="again">${esc(T('anotherReading'))}</button><a class="btn ghost" href="#/topic/${DEV[RD.dev].topic}">${esc(T('howToUse'))}</a></div>`;
+      if (v.lv === 'urgent' || v.lv === 'today' || v.again) html += `<a class="btn ghost" href="#/near">${ic('hospital')} ${esc(T('near'))}</a>`;
     }
     track('view', { p: 'tool/reading/' + (RD.dev || '') + '/' + RD.phase });
     return { html, nav: 'home', adult: RD.dev !== 'muac' && RD.who !== 'baby2m' && RD.who !== 'child2m' && RD.who !== 'under5' };
@@ -355,7 +364,7 @@ export function initTools(ctx) {
   // a child's temperature: "If the child breathes fast, count the breaths", opening the breathing counter (CH2/KT-6)
   const breathRow = () => `<div class="blk link" data-block="ui.rd.temp-breaths"><a class="pic" href="#/tool/breaths">${ic('breathing-fast')}</a><a class="body" href="#/tool/breaths"><div class="h">${esc(T('breaths'))}</div><div class="x">${esc(say('ui.rd.temp-breaths'))}</div></a>${spk('ui.rd.temp-breaths')}<a class="go" href="#/tool/breaths" aria-label="${esc(T('breaths'))}">${I.fwd}</a></div>`;
   const whoLine = () => (RD.who ? `<div class="agechip" data-block="ui.who.${RD.who}">${ic(WHO_ICON[RD.who])}<span>${esc(say('ui.who.' + RD.who))}</span></div>` : '');
-  function rdReset(dev) { Object.assign(RD, { dev, who: null, phase: dev ? (DEV[dev].who ? 'who' : 'val') : 'dev', a: '', b: '', field: 'a', colour: null, signs: new Set() }); }
+  function rdReset(dev) { Object.assign(RD, { dev, who: null, phase: dev ? (DEV[dev].who ? 'who' : 'val') : 'dev', a: '', b: '', field: 'a', colour: null, signs: new Set(), re: false }); }
   function rdKey(k) {
     const f = RD.dev === 'bp' ? RD.field : 'a';
     let v = RD[f] === 'HI' || RD[f] === 'LO' ? '' : RD[f];
@@ -369,7 +378,7 @@ export function initTools(ctx) {
   }
   function rdNext() {
     if (!valueOk()) return;
-    RD.phase = signList().length ? 'signs' : 'result';
+    RD.phase = signList().length && !RD.re ? 'signs' : 'result'; // the second reading keeps the signs already asked
     if (RD.phase === 'result') rdResult(); else { rerender(); autoplay(['ui.rd.signs']); }
   }
   function rdResult() {
@@ -439,7 +448,7 @@ export function initTools(ctx) {
       return;
     }
     if (d.rdDev) { rdReset(d.rdDev); rerender(); if (DEV[d.rdDev].who) autoplay([DEV[d.rdDev].ask || 'ui.rd.who']); else autoplay([DEV[d.rdDev].enter]); return; }
-    if (d.rdWho) { RD.who = d.rdWho; RD.phase = 'val'; RD.signs = new Set(); rerender(); autoplay([DEV[RD.dev].enter]); return; }
+    if (d.rdWho) { RD.who = d.rdWho; RD.phase = 'val'; RD.signs = new Set(); RD.re = false; rerender(); autoplay([DEV[RD.dev].enter]); return; }
     if (d.rdKey) { rdKey(d.rdKey); return; }
     if (d.rdField) { RD.field = d.rdField; ctx.render(); return; }
     if (d.rdUnit) { RD.unit = d.rdUnit; RD.a = ''; ctx.render(); return; }
@@ -452,7 +461,8 @@ export function initTools(ctx) {
       ctx.saveReading(RD.dev === 'bp' ? { k: 'bp', s: parse(RD.a), dia: parse(RD.b), who: RD.who || '', lv: v.lv } : { k: 'sugar', v: RD.a === 'HI' || RD.a === 'LO' ? RD.a : parse(RD.a), unit: RD.unit, lv: v.lv });
       return;
     }
-    if (d.rd === 'again') { stopAudio(); Object.assign(RD, { phase: 'val', a: '', b: '', field: 'a', colour: null, signs: new Set() }); rerender(); return; }
+    if (d.rd === 'again') { stopAudio(); Object.assign(RD, { phase: 'val', a: '', b: '', field: 'a', colour: null, signs: new Set(), re: false }); rerender(); return; }
+    if (d.rd === 'remeasure') { stopAudio(); Object.assign(RD, { phase: 'val', a: '', b: '', field: 'a', re: true }); rerender(); autoplay([DEV[RD.dev].enter]); return; }
   });
 
   return { screenKit, screenTool, homeTools, homeKit, linkBlock, isKitTopic };
