@@ -11,7 +11,8 @@
     "ps": "د اور یا بخارۍ ترڅنګ ناروغه شوئ؟ بهر ووځئ او روغتون ته ولاړ شئ.",
     "en": "Ill near a fire or heater? Get out and go to hospital."
   },
-  "image": "img/symptoms/fumes.webp",
+  "image": "img/steps/fumes-poisoning/1-full.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "fumes-poisoning.lead",

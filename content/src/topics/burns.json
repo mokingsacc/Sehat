@@ -11,7 +11,8 @@
     "ps": "۲۰ دقیقې په بهېدونکو اوبو یې سړه کړئ، سست یې وپوښئ، ماشوم ګرم وساتئ.",
     "en": "Cool with running water for 20 minutes, cover loosely, keep warm."
   },
-  "image": "img/symptoms/burn.webp",
+  "image": "img/steps/burns-cool/1-full-up.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "burns.lead",

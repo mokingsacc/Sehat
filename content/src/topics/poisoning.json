@@ -11,7 +11,8 @@
     "ps": "خاورین تېل، د کرنې درمل، درمل او د موږکانو زهر: لومړی څه وکړئ.",
     "en": "Kerosene, farm sprays, medicines, rat poison: what to do first."
   },
-  "image": "img/symptoms/poison.webp",
+  "image": "img/steps/poisoning/1-full.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "poisoning.lead",
