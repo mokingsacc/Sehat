@@ -12,6 +12,7 @@
     "en": "Keep them safe, time the fit, then lay them on their side."
   },
   "image": "img/steps/seizure/2-full-up.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "seizures.lead",

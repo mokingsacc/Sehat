@@ -11,7 +11,7 @@
     "ps": "له ۱ کلنۍ تر بلوغ پورې: لومړی ۵ ځله ساه، بیا سینه کېکاږئ.",
     "en": "From 1 year to puberty: 5 breaths first, then chest pushes."
   },
-  "image": "cpr-child",
+  "image": "img/symptoms/notbreathing.webp",
   "blocks": [
     {
       "id": "cpr-child.lead",

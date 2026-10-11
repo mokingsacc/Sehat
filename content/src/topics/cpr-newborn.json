@@ -11,7 +11,7 @@
     "ps": "په لومړۍ دقیقه کې: وچ یې کړئ، ومښئ، ګرم یې وساتئ، بیا ساه ورکړئ.",
     "en": "In the first minute: dry, rub, keep warm, then give breaths."
   },
-  "image": "cpr-newborn",
+  "image": "img/steps/cpr-newborn/3-full.webp",
   "blocks": [
     {
       "id": "cpr-newborn.lead",

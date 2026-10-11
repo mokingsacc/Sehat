@@ -871,6 +871,10 @@
           "pregnant": {
             "title": "pregnancy-danger.soon",
             "items": [
+              {
+                "id": "pregnancy-danger.soon.vomit",
+                "icon": "vomit"
+              },
               "pregnancy-danger.soon.ill",
               "pregnancy-danger.soon.fever",
               "pregnancy-danger.soon.urine"
@@ -1020,9 +1024,14 @@
             "items": [
               "scabies.soon.itch",
               "scabies.soon.pus",
-              "hospital-stay.soon.rash",
-              "leishmaniasis.soon.not-healing"
-            ]
+              "hospital-stay.soon.rash"
+            ],
+            "soon": {
+              "title": "red-flags.soon",
+              "items": [
+                "leishmaniasis.soon.not-healing"
+              ]
+            }
           }
         },
         "tools": {
@@ -1130,9 +1139,14 @@
                 "icon": "syringe"
               },
               "dog-bite.soon.any",
-              "leishmaniasis.soon.not-healing",
               "leishmaniasis.soon-infected.fever"
-            ]
+            ],
+            "soon": {
+              "title": "red-flags.soon",
+              "items": [
+                "leishmaniasis.soon.not-healing"
+              ]
+            }
           }
         },
         "pages": {
@@ -1222,10 +1236,15 @@
             "title": "child-signs.today",
             "items": [
               "child-signs.today.belly",
-              "child-signs.soon.gland",
-              "child-signs.soon.lump",
               "child-signs.today.fever"
-            ]
+            ],
+            "soon": {
+              "title": "child-signs.soon",
+              "items": [
+                "child-signs.soon.gland",
+                "child-signs.soon.lump"
+              ]
+            }
           },
           "older": {
             "title": "early-signs.soon",
@@ -1356,6 +1375,10 @@
           "pregnant": {
             "title": "pregnancy-danger.soon",
             "items": [
+              {
+                "id": "pregnancy-danger.soon.vomit",
+                "icon": "vomit"
+              },
               "pregnancy-danger.soon.fever",
               "pregnancy-danger.soon.belly-pain",
               "pregnancy-danger.soon.ill",
@@ -1466,15 +1489,18 @@
             "title": "pneumonia-adult.soon",
             "items": [
               "diarrhoea-adult.soon.blood",
-              "urine-infection.soon.blood",
-              "nosebleed.soon.again"
-            ]
+              "urine-infection.soon.blood"
+            ],
+            "soon": {
+              "title": "red-flags.soon",
+              "items": [
+                "nosebleed.soon.again"
+              ]
+            }
           }
         },
         "pages": {
           "anyone": [
-            "bleeding",
-            "nosebleed",
             "first-aid"
           ],
           "pregnant": [
@@ -1696,7 +1722,6 @@
         "pages": {
           "all": [
             "eye-infection",
-            "eye-chemical",
             "measles"
           ]
         },
@@ -2160,7 +2185,6 @@
         },
         "pages": {
           "all": [
-            "burns",
             "first-aid"
           ]
         },
@@ -2230,7 +2254,6 @@
         },
         "pages": {
           "all": [
-            "fumes-poisoning",
             "first-aid"
           ]
         },
@@ -2312,8 +2335,6 @@
         },
         "pages": {
           "all": [
-            "dog-bite",
-            "snake-scorpion",
             "animal-illness"
           ]
         },
@@ -2381,7 +2402,6 @@
         },
         "pages": {
           "all": [
-            "poisoning",
             "fumes-poisoning",
             "first-aid"
           ]
@@ -2468,8 +2488,6 @@
         },
         "pages": {
           "all": [
-            "seizures",
-            "fever-fits",
             "epilepsy"
           ]
         },
@@ -2650,9 +2668,14 @@
               {
                 "id": "ui.ask.feed-baby",
                 "icon": "breastfeed"
-              },
-              "reading-muac.weight-soon.newborn"
-            ]
+              }
+            ],
+            "soon": {
+              "title": "child-signs.soon",
+              "items": [
+                "reading-muac.weight-soon.newborn"
+              ]
+            }
           },
           "child": {
             "title": "danger-child.soon",
@@ -2770,11 +2793,16 @@
           "older": {
             "title": "red-flags.today",
             "items": [
-              "red-flags.soon.weight-loss",
               "tb.soon.weight",
-              "tb.soon.cough",
-              "red-flags.soon.swallowing"
-            ]
+              "tb.soon.cough"
+            ],
+            "soon": {
+              "title": "red-flags.soon",
+              "items": [
+                "red-flags.soon.weight-loss",
+                "red-flags.soon.swallowing"
+              ]
+            }
           }
         },
         "pages": {
@@ -2870,7 +2898,7 @@
             ]
           },
           "pregnant": {
-            "title": "pneumonia-adult.urgent",
+            "title": "hepatitis.urgent",
             "items": [
               "hepatitis.urgent.pregnant",
               "hepatitis.urgent.confused",
@@ -3017,9 +3045,14 @@
               "anaemia.soon.breathless-rest",
               "anaemia.soon.heavy-periods",
               "tb.soon.fever",
-              "red-flags.soon.weight-loss",
               "mind-body.soon.weeks"
-            ]
+            ],
+            "soon": {
+              "title": "red-flags.soon",
+              "items": [
+                "red-flags.soon.weight-loss"
+              ]
+            }
           },
           "pregnant": {
             "title": "anaemia.soon",
@@ -3131,7 +3164,6 @@
         "pages": {
           "all": [
             "diabetes",
-            "low-sugar",
             "reading-sugar"
           ]
         },

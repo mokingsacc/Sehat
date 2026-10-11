@@ -32,6 +32,7 @@ STILLS = {
     # straight from img/steps/<set>/)
     "cpr-baby-thumbs": ("cpr-baby", "thumbs", "up", "big"),
     "cpr-baby-breath": ("cpr-baby", "breath", "down", "big"),
+    "cpr-baby-kneel": ("cpr-baby", "kneel", "up", "big"),  # page top of cpr-baby (audit P-04)
     "cpr-newborn-puff": ("cpr-newborn", "5", "down", "big"),
     "cpr-child-breath": ("cpr-child", "3", "down", "big"),
     "cpr-adult-check": ("cpr-adult", "check", "up", "big"),
@@ -58,15 +59,20 @@ STILLS = {
     # on-demand sets (their pictures are not in the APK): small stills, the full set still downloads with its page
     "bp-rest": ("bp-measure", "1", "up", "small"),
     "bp-cuff": ("bp-measure", "2", "down", "small"),
+    "bp-arm": ("bp-measure", "3", "up", "small"),  # page top of kit-bp (audit P-04)
     "breastfeed-hold": ("breastfeed-attach", "1", "up", "small"),
     "breath-watch": ("breath-count", "1", "up", "small"),
     "glucometer-drop": ("glucometer", "3", "up", "small"),
+    "glucometer-wash": ("glucometer", "1", "up", "small"),  # page top of kit-glucometer (audit P-04, P-06)
     "muac-arm": ("muac", "1", "up", "small"),
     "muac-read": ("muac", "4", "up", "small"),
+    "muac-tape": ("muac", "3", "up", "small"),  # page top of kit-muac (audit P-04)
     "thermometer-armpit": ("thermometer", "2", "down", "small"),
     "thermometer-wait": ("thermometer", "3", "up", "small"),
+    "thermometer-wipe": ("thermometer", "1", "up", "small"),  # page top of kit-thermometer (audit P-03, P-04)
     "weigh-hang": ("weigh-child", "1", "up", "small"),
     "weigh-hold": ("weigh-child", "3", "up", "small"),
+    "weigh-stand": ("weigh-child", "2", "up", "small"),  # page top of kit-scale (audit P-04)
     # growth guide (js/growth.js): length-height has no page of its own, so its set is not live; its frames were
     # checked right in the 10 Oct frame review
     "length-lie": ("length-height", "1", "up", "small"),

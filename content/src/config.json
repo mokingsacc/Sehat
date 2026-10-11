@@ -18,7 +18,7 @@
       "title": "kit",
       "sub": "kitSub",
       "say": "ui.kit",
-      "image": "kit-buy",
+      "image": "diabetes",
       "icon": "check",
       "tab": "house"
     },
@@ -26,7 +26,7 @@
       "title": "homeSafety",
       "sub": "homeSafetySub",
       "say": "ui.homeSafety",
-      "image": "home-safety",
+      "image": "fumes-poisoning",
       "icon": "house",
       "tab": "house"
     },
@@ -34,7 +34,7 @@
       "title": "hospital",
       "sub": "hospitalSub",
       "say": "ui.hospital",
-      "image": "hospital-places",
+      "image": "danger-child",
       "icon": "hospital",
       "tab": "health",
       "near": true
@@ -43,7 +43,7 @@
       "title": "checks",
       "sub": "checksSub",
       "say": "ui.checks",
-      "image": "checks-women",
+      "image": "red-flags",
       "icon": "check",
       "tab": "health"
     },
@@ -51,7 +51,7 @@
       "title": "foodHelp",
       "sub": "foodHelpSub",
       "say": "ui.foodHelp",
-      "image": "food-help",
+      "image": "wellbeing",
       "icon": "bowl-food",
       "tab": "house",
       "advice": true
@@ -60,7 +60,7 @@
       "title": "food",
       "sub": "foodSub",
       "say": "ui.food",
-      "image": "kitchen-garden",
+      "image": "heart-food",
       "icon": "bowl-food",
       "tab": "house"
     },
@@ -68,7 +68,7 @@
       "title": "wellbeing",
       "sub": "wellbeingSub",
       "say": "ui.wellbeing",
-      "image": "wellbeing",
+      "image": "mind-calm",
       "icon": "heart",
       "tab": "house"
     }

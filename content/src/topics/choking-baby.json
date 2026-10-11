@@ -11,7 +11,7 @@
     "ps": "له ۱ کال کم: شا ته ۵ ګوزارونه، بیا پر سینه ۵ فشارونه.",
     "en": "Under 1 year: 5 back blows, then 5 chest pushes."
   },
-  "image": "choking-baby",
+  "image": "img/steps/choking-baby/3-full.webp",
   "blocks": [
     {
       "id": "choking-baby.lead",

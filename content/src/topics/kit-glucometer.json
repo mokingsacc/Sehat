@@ -11,7 +11,8 @@
     "ps": "یوازې د شکرې ناروغانو لپاره: څنګه معاینه وکړئ او څه وکړئ.",
     "en": "Only for people with diabetes: how to test and what to do."
   },
-  "image": "img/stills/glucometer-drop.webp",
+  "image": "img/stills/glucometer-wash.webp",
+  "hero": false,
   "blocks": [
     {
       "id": "kit-glucometer.lead",

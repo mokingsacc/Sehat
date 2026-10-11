@@ -533,7 +533,11 @@
      "r": 50,
      "at": 11000
     }
-   ]
+   ],
+   "key": {
+    "frame": "5",
+    "pose": "beat"
+   }
   },
   {
    "id": "anim.cpr-newborn.s7",

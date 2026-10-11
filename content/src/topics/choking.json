@@ -12,6 +12,7 @@
     "en": "5 back blows, then 5 belly pushes. Repeat until it clears."
   },
   "image": "choking",
+  "hero": false,
   "blocks": [
     {
       "id": "choking.lead",

@@ -11,7 +11,7 @@
     "ps": "کلک فشار ورکړئ او دوام ورکړئ. کلک تړل یوازې د لاس یا پښې لپاره.",
     "en": "Press hard and keep pressing. Tie a band only on a limb."
   },
-  "image": "bleeding",
+  "image": "img/symptoms/bleeding.webp",
   "blocks": [
     {
       "id": "bleeding.lead",

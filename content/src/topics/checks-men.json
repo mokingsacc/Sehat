@@ -11,7 +11,7 @@
     "ps": "کومې معاینې وغواړئ، او په کوم عمر کې.",
     "en": "Which checks to ask for, and at what age."
   },
-  "image": "checks-men",
+  "image": "img/stills/bp-rest.webp",
   "blocks": [
     {
       "id": "checks-men.lead",

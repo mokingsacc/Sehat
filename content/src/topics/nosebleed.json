@@ -12,6 +12,7 @@
     "en": "Lean forward and pinch the soft nose for 10 minutes."
   },
   "image": "nosebleed",
+  "hero": false,
   "blocks": [
     {
       "id": "nosebleed.lead",

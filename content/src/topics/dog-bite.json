@@ -11,7 +11,7 @@
     "ps": "د چیچلو ځای ۱۵ دقیقې ومینځئ، بیا نن د هاري د واکسین لپاره ولاړ شئ.",
     "en": "Wash the bite 15 minutes, then go for rabies vaccine today."
   },
-  "image": "img/steps/dog-bite/1-full.webp",
+  "image": "img/symptoms/bite.webp",
   "blocks": [
     {
       "id": "dog-bite.lead",
