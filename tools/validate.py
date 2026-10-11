@@ -486,7 +486,11 @@ def check_symptoms():
         red, amber = per_age("red"), per_age("amber")
         for a in ages:
             if a not in red and "all" not in red: err(f, f"{w}: no red 'hospital now' box for {a} (danger signs come first on every page)")
-        for lvl, boxes in (("red", red), ("amber", amber)):
+        # an amber box can hold a second group, "soon": {"title", "items"}: the "this week" signs under their own title
+        # (red-flags.soon, child-signs.soon); with it, the box's own title and items may be left out
+        weeks = {a: bx["soon"] for a, bx in amber.items() if isinstance(bx, dict) and "soon" in bx}
+        today = {a: bx for a, bx in amber.items() if not (a in weeks and not bx.get("title") and not bx.get("items"))}
+        for lvl, boxes in (("red", red), ("amber", today), ("amber.soon", weeks)):
             for a, bx in boxes.items():
                 bw = f"{w}.{lvl}.{a}"
                 if not isinstance(bx, dict) or not bx.get("items"): err(f, f"{bw}: needs a title and items"); continue
