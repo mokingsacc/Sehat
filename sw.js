@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.11-a3e91a';
+const VERSION = '2026.10.11-c52440';
 const PRECACHE = [
  "./",
  "index.html",
@@ -342,6 +342,7 @@ const PRECACHE = [
  "img/symptoms/yellow.webp",
  "img/stills/allergy-sting.webp",
  "img/stills/bleeding-keep.webp",
+ "img/stills/bp-arm.webp",
  "img/stills/bp-cuff.webp",
  "img/stills/bp-rest.webp",
  "img/stills/breastfeed-hold.webp",
@@ -354,6 +355,7 @@ const PRECACHE = [
  "img/stills/cpr-adult-push.webp",
  "img/stills/cpr-adult-tilt.webp",
  "img/stills/cpr-baby-breath.webp",
+ "img/stills/cpr-baby-kneel.webp",
  "img/stills/cpr-baby-thumbs.webp",
  "img/stills/cpr-child-breath.webp",
  "img/stills/cpr-newborn-puff.webp",
@@ -362,6 +364,7 @@ const PRECACHE = [
  "img/stills/fever-fit-safe.webp",
  "img/stills/fever-fit-side.webp",
  "img/stills/glucometer-drop.webp",
+ "img/stills/glucometer-wash.webp",
  "img/stills/heat-cool.webp",
  "img/stills/height-wall.webp",
  "img/stills/inhaler-spacer.webp",
@@ -370,6 +373,7 @@ const PRECACHE = [
  "img/stills/low-sugar-drink.webp",
  "img/stills/muac-arm.webp",
  "img/stills/muac-read.webp",
+ "img/stills/muac-tape.webp",
  "img/stills/nosebleed-pinch.webp",
  "img/stills/seizure-safe.webp",
  "img/stills/seizure-time.webp",
@@ -377,8 +381,10 @@ const PRECACHE = [
  "img/stills/splint-cold.webp",
  "img/stills/thermometer-armpit.webp",
  "img/stills/thermometer-wait.webp",
+ "img/stills/thermometer-wipe.webp",
  "img/stills/weigh-hang.webp",
  "img/stills/weigh-hold.webp",
+ "img/stills/weigh-stand.webp",
  "anim/steps/cpr-baby.json",
  "img/steps/cpr-baby/thumbs-bg.webp",
  "img/steps/cpr-baby/thumbs-body.webp",
