@@ -175,16 +175,23 @@ def same_words(a, b): return words_of(a) == words_of(b)
 alert_items = {it["id"]: it for t in out_topics.values() for b in t.get("blocks") or [] if b.get("type") in ("alert", "dont") for it in b.get("items") or []}
 def sym_page(x):
     pg = {k: v for k, v in x["page"].items() if not k.startswith("_")}
+    def box_items(bx, lvl, age):
+        items = []
+        for it in bx.get("items") or []:
+            iid, ic_ = (it, None) if isinstance(it, str) else (it.get("id"), it.get("icon"))
+            if iid not in narr: print("WARNING symptom", x["id"], lvl, age, "unknown line", iid); continue
+            ic_ = ic_ or (alert_items.get(iid) or {}).get("icon") or "warning"
+            items.append({"id": iid, "icon": icon(ic_)})
+        return items
     for lvl in ("red", "amber"):
         boxes = {}
         for age, bx in (pg.get(lvl) or {}).items():
-            items = []
-            for it in bx.get("items") or []:
-                iid, ic_ = (it, None) if isinstance(it, str) else (it.get("id"), it.get("icon"))
-                if iid not in narr: print("WARNING symptom", x["id"], lvl, age, "unknown line", iid); continue
-                ic_ = ic_ or (alert_items.get(iid) or {}).get("icon") or "warning"
-                items.append({"id": iid, "icon": icon(ic_)})
+            items = box_items(bx, lvl, age)
             if bx.get("title") in narr and items: boxes[age] = {"title": bx["title"], "items": items}
+            # an amber box's second group, "this week" under its own title (js/app.js screenSym)
+            wk = bx.get("soon") if lvl == "amber" and isinstance(bx.get("soon"), dict) else None
+            wk_items = box_items(wk, lvl + ".soon", age) if wk else []
+            if wk and wk.get("title") in narr and wk_items: boxes.setdefault(age, {})["soon"] = {"title": wk["title"], "items": wk_items}
         if boxes: pg[lvl] = boxes
         else: pg.pop(lvl, None)
     for k in ("now", "pages"):

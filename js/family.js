@@ -207,7 +207,7 @@ export function initFamily(ctx) {
   /* ---------- #/family: everyone ---------- */
   function screenList() {
     const ids = ['ui.fam.lead'];
-    let html = top(T('family')) + listenBar(ids) + sayRow('ui.fam.lead', 'blk lead trow');
+    let html = top(T('family'), { back: '' }) + listenBar(ids) + sayRow('ui.fam.lead', 'blk lead trow'); // a tab screen: no Back
     const due = dueMeds(S.kids);
     if (due.length) html += due.map(remCard).join('');
     if (!S.kids.length) { ids.push('ui.fam.none'); html += sayRow('ui.fam.none', 'blk tip trow'); }

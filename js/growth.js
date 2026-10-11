@@ -7,7 +7,7 @@
 import { assess, curves, lengthFor, ageDays, implausible, lms, FINDINGS } from './growth-calc.js';
 
 export function initGrowth(ctx) {
-  const { S, $, $$, esc, T, L, num, ic, I, spk, play, hasAudio, ttsVoice, track, listenBar, top, toast, dateSelects, readDate, fmtDate, todayISO, saveKids } = ctx;
+  const { S, $, $$, esc, T, L, num, ic, I, spk, play, hasAudio, ttsVoice, track, listenBar, top, toast, backTo, openerTab, dateSelects, readDate, fmtDate, todayISO, saveKids } = ctx;
   const say = (id) => L(S.book.narration[id]);
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${spk(id)}</div>`;
   // a heading, a label or a link with its own speaker
@@ -143,7 +143,8 @@ export function initGrowth(ctx) {
 
   /* ---------- screens ---------- */
   function noKid() {
-    return { html: top(T('growth')) + sayRow('ui.growth', 'blk lead trow') + sayRow('ui.gr.no-kids', 'blk tip trow') + `<button class="btn" data-action="addkid">${I.plus.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('addChild'))}</button>`, nav: 'family' };
+    // opened from Children (Health) or a child's record (Family): Back goes there, and that tab stays lit
+    return { html: top(T('growth'), { back: backTo('#/home') }) + sayRow('ui.growth', 'blk lead trow') + sayRow('ui.gr.no-kids', 'blk tip trow') + `<button class="btn" data-action="addkid">${I.plus.replace('<svg', '<svg style="width:22px;height:22px"')} ${esc(T('addChild'))}</button>`, nav: openerTab('family') };
   }
   function kidChips(k) {
     const ks = kids(); if (ks.length < 2) return `<div class="agechip">${ic('baby')}<span>${esc(nameOf(k))}</span></div>`; // the name is not in the header title
@@ -161,7 +162,7 @@ export function initGrowth(ctx) {
     loadWho();
     const list = entriesOf(k), age = ageDays(k.dob, todayISO());
     const ids = ['ui.growth'];
-    let html = top(T('growth'), { back: '#/family/person' }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
+    let html = top(T('growth'), { back: backTo('#/family/person') }) + listenBar(ids) + kidChips(k) + sayRow('ui.growth', 'blk lead trow');
     ids.push('ui.gr.new');
     html += headSay(`<a class="btn big" href="#/growth/add">${I.plus.replace('<svg', '<svg style="width:26px;height:26px"')} ${esc(T('addMeasure'))}</a>`, 'ui.gr.new');
     if (age > 1826) { ids.push('ui.gr.over5'); html += sayRow('ui.gr.over5', 'blk tip trow'); }
@@ -175,7 +176,7 @@ export function initGrowth(ctx) {
     html += `<div class="panel">${headSay(`<h2>${esc(T('measurements'))}</h2>`, lsay)}${list.length ? list.slice().reverse().map((e) => entryRow(k, e)).join('') : `<p class="muted">${esc(T('noMeasures'))}</p>`}</div>`;
     if (list.length) { ids.push('ui.gr.show'); html += sayRow('ui.gr.show', 'blk tip trow'); }
     html += measureLink();
-    return { html, nav: 'family' };
+    return { html, nav: openerTab('family') }; // the tab it was opened from (Health from Children)
   }
   function measureLink() {
     return `<div class="blk link" data-block="ui.gr.m.lead"><a class="pic" href="#/growth/measure">${ic('growth')}</a><a class="body" href="#/growth/measure"><div class="h">${esc(T('howMeasure'))}</div><div class="x">${esc(T('howMeasureSub'))}</div></a>${spk('ui.gr.m.lead')}<a class="go" href="#/growth/measure" aria-label="${esc(T('howMeasure'))}">${I.fwd}</a></div>`;
@@ -208,7 +209,7 @@ export function initGrowth(ctx) {
     html += `<button class="btn big" type="button" data-gr="save">${I.check.replace('<svg', '<svg style="width:24px;height:24px"')} ${esc(T('save'))}</button>`;
     html += `<button class="btn ghost" type="button" data-gr="cancel">${esc(T('cancel'))}</button></div>`; // a plain button like Save
     html += measureLink();
-    return { html, nav: 'family' };
+    return { html, nav: openerTab('family') }; // the tab it was opened from (Health from Children)
   }
   function save() {
     const k = kidNow(), box = $('#grform'); if (!k || !box) return;
@@ -253,7 +254,7 @@ export function initGrowth(ctx) {
     if (res.lv !== 'ok') html += `<a class="btn ghost" href="#/near">${ic('hospital')} ${esc(T('near'))}</a>`;
     if (G.speak) { G.speak = false; setTimeout(() => autoplay(ids), 500); }
     track('tool', { p: 'growth-result-' + res.lv });
-    return { html, nav: 'family' };
+    return { html, nav: openerTab('family') }; // the tab it was opened from (Health from Children)
   }
 
   // stills of Mo's ChatGPT pictures (tools/steps_stills.py, docs/STEPS_PLAYER.md "Still pictures on the pages")
@@ -270,7 +271,7 @@ export function initGrowth(ctx) {
     }
     html += sayRow('ui.gr.m.exact', 'blk tip trow');
     if (S.book.topics['kit-muac']) html += ctx.topicCard('kit-muac');
-    return { html, nav: 'family' };
+    return { html, nav: openerTab('family') }; // the tab it was opened from (Health from Children)
   }
 
   /* ---------- pieces for other screens ---------- */
