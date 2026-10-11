@@ -1259,11 +1259,11 @@ async function startMic(btn) {
 const FB = { rec: null, chunks: [], blob: null, on: false, stream: null };
 function screenFeedback() {
   const ids = ['ui.feedback', 'ui.fb.voice', 'ui.fb.write'];
-  let html = top(T('feedback')) + listenBar(ids);
+  let html = top(T('feedback'), { back: '#/house' }) + listenBar(ids); // on the Home tab since 11 Oct 2026 (Mo)
   html += `<div class="blk lead" data-block="ui.feedback"><div class="body">${esc(L(S.book.narration['ui.feedback']))}</div>${spk('ui.feedback')}</div>`;
   html += `<div class="center fbvoice" data-block="ui.fb.voice">${spk('ui.fb.voice')}<button class="recbig${FB.on ? ' on' : ''}" data-action="fbrec" aria-label="${esc(T('fbRecord'))}">${FB.on ? I.stop.replace('<svg', '<svg fill="#fff"') : I.mic}</button><div class="muted">${FB.on ? esc(T('recording')) : FB.blob ? esc(T('fbRecorded')) + ' ✓' : esc(T('fbRecord'))}</div>${FB.blob && !FB.on ? `<button class="sbtn" data-action="fbplay" style="margin-top:6px">${esc(T('play'))} ▶</button>` : ''}</div>`;
   html += `<form class="form" id="fbform"><div class="lblrow" data-block="ui.fb.write"><div class="grow"><label for="fbtext">${esc(T('fbWrite'))}</label><p class="muted warnline fbwarn" id="fbwarn">${esc(T('fbNoNames'))}</p></div>${spk('ui.fb.write')}</div><textarea name="text" id="fbtext" aria-describedby="fbwarn" rows="4" maxlength="2000" style="font:inherit;font-size:18px;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px"></textarea><button class="btn" type="submit">${esc(T('fbSend'))}</button></form>`;
-  return { html, nav: 'home' };
+  return { html, nav: 'house' };
 }
 async function fbRecord() {
   if (FB.on) { FB.rec && FB.rec.state !== 'inactive' && FB.rec.stop(); return; }

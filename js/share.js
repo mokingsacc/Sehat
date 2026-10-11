@@ -130,7 +130,8 @@ export function initShare(ctx) {
         body += installHelp(ids);
       }
     }
-    return { html: top(T('shareApp')) + listenBar(ids) + body + disclaimer(), nav: 'home' };
+    // on the Home tab since 11 Oct 2026 (Mo): Back goes to Home, no 'not a doctor' note on this page
+    return { html: top(T('shareApp'), { back: '#/house' }) + listenBar(ids) + body, nav: 'house' };
   }
 
   async function shareLink() {
