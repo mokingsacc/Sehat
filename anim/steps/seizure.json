@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/seizure), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/seizure), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): seizures.head's ring moved from the face to the folded cloth under the head; the shaking swaps of seizures.safe and seizures.time blend in 30 ms (80 ms left the man half see-through, a ghost of both poses, much of the time).",
  "poster": 0,
  "frames": {
   "1": {
@@ -133,7 +133,8 @@
      "layer": "patient-down",
      "under": "patient-up",
      "at": 600,
-     "rate": 150
+     "rate": 150,
+     "blend": 30
     }
    ],
    "overlays": [
@@ -197,10 +198,11 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 744,
-     "y": 456,
+     "x": 750,
+     "y": 490,
      "at": 800,
-     "r": 60
+     "rx": 80,
+     "ry": 42
     }
    ]
   },
@@ -226,7 +228,8 @@
      "layer": "patient-down",
      "under": "patient-up",
      "at": 600,
-     "rate": 150
+     "rate": 150,
+     "blend": 30
     }
    ],
    "overlays": [

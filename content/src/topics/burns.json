@@ -11,7 +11,7 @@
     "ps": "۲۰ دقیقې په بهېدونکو اوبو یې سړه کړئ، سست یې وپوښئ، ماشوم ګرم وساتئ.",
     "en": "Cool with running water for 20 minutes, cover loosely, keep warm."
   },
-  "image": "img/steps/burns-cool/1-full-up.webp",
+  "image": "img/stills/burns-pour.webp",
   "hero": false,
   "blocks": [
     {
@@ -57,7 +57,7 @@
         "ps": "۲۰ دقیقې سړې، پاکې او بهېدونکې اوبه پر سوځېدلي ځای واچوئ. څومره ژر چې کېږي پیل یې کړئ؛ تر ۳ ساعتونو وروسته هم ګټه لري.",
         "en": "Pour cool, clean running water over the burn for 20 minutes. Start as soon as you can; it still helps up to 3 hours later."
       },
-      "picture": "img/steps/burns-cool/1-full-up.webp"
+      "picture": "img/stills/burns-pour.webp"
     },
     {
       "id": "burns.rings",

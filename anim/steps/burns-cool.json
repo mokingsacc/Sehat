@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/burns-cool), packed by tools/steps_images.py --px 800 --patch. Frame 'stop' (scene burns.stop, clothes on fire: smother with a thick blanket, the head out) is Mo's 10 Oct 2026 picture (illustrations-2026-10-10/fixes, REVIEW.md B2). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/burns-cool), packed by tools/steps_images.py --px 800 --patch. Frame 'stop' (scene burns.stop, clothes on fire: smother with a thick blanket, the head out) is Mo's 10 Oct 2026 picture (illustrations-2026-10-10/fixes, REVIEW.md B2). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): burns.cool's clock icon moved inside the zoomed view (it sat off screen at x 840); burns.warm's warmth lines moved from the child's face to the wrapped shawl.",
  "poster": 1,
  "frames": {
   "stop": {
@@ -185,8 +185,8 @@
     {
      "type": "icon",
      "name": "clock",
-     "x": 840,
-     "y": 130,
+     "x": 720,
+     "y": 170,
      "r": 52,
      "at": 2600
     }
@@ -299,8 +299,8 @@
    "overlays": [
     {
      "type": "waves",
-     "x": 700,
-     "y": 300,
+     "x": 730,
+     "y": 470,
      "angle": -90,
      "size": 60,
      "count": 3,

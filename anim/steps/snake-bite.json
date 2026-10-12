@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/snake-bite), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/snake-bite), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): frame 5 is Mo's picture mirrored (from illustrations-2026-10-09/medical-illustrations/snake-bite/snake-bite-5-full.webp): as drawn, the man lay on his RIGHT side (back to us, head to the right) while snake-scorpion.side says the left side; mirrored, he lies on his left side. The scene's camera and ring were mirrored with it.",
  "_check": [
   "Frame 3: the splint is long; check 'not tight' (brief flag F4)."
  ],
@@ -69,8 +69,8 @@
     {
      "id": "full",
      "src": "5-full.webp",
-     "v": "eba7fcc3",
-     "kb": 33.9
+     "v": "38ed98ee",
+     "kb": 34.3
     }
    ]
   }
@@ -207,7 +207,7 @@
       960
      ],
      {
-      "cx": 700,
+      "cx": 260,
       "cy": 380,
       "w": 600
      }
@@ -219,7 +219,7 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 840,
+     "x": 120,
      "y": 400,
      "at": 1000,
      "r": 60

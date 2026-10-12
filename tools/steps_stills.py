@@ -44,6 +44,7 @@ STILLS = {
     "choking-adult-back": ("choking-adult", "2", "up", "big"),
     "choking-adult-pregnant": ("choking-adult", "5", "up", "big"),
     "bleeding-keep": ("bleeding-press", "2", "up", "big"),
+    "burns-pour": ("burns-cool", "1", "down", "big"),  # step burns.cool and the burns page: the jug tipped over the burn (12 Oct 2026)
     "burns-rings": ("burns-cool", "2", "up", "big"),
     "seizure-safe": ("seizure", "1", "up", "big"),
     "seizure-time": ("seizure", "3", "up", "big"),
