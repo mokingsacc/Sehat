@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/recovery-position), packed by tools/steps_images.py --px 800 --patch. Original CPR step 7 is the same picture as frame 4. Frame 5 is Mo's 12 Oct 2026 redo (prompt D-4): the baby on its side along the mother's forearm on her sloping thigh, bottom higher, head lower in her cupped hand, the mouth the lowest point and free. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/recovery-position), packed by tools/steps_images.py --px 800 --patch. Original CPR step 7 is the same picture as frame 4. Frame 5 is Mo's 12 Oct 2026 redo (prompt D-4): the baby on its side along the mother's forearm on her sloping thigh, bottom higher, head lower in her cupped hand, the mouth the lowest point and free. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): unconscious.roll's key frame shows only the roll arrow on frame 3 (the arm and knee arrows of frames 1 and 2 pointed at nothing there).",
  "_check": [
   "Frames 1 to 3 put the far hand at the cheek before the roll; the app's order (unconscious.roll) is near arm out, far knee up, roll (brief flag F2)."
  ],
@@ -111,7 +111,8 @@
      ],
      "width": 12,
      "at": 1200,
-     "until": 3400
+     "until": 3400,
+     "still": false
     },
     {
      "type": "arrow",
@@ -125,7 +126,8 @@
      ],
      "width": 12,
      "at": 4400,
-     "until": 7000
+     "until": 7000,
+     "still": false
     },
     {
      "type": "arrow",

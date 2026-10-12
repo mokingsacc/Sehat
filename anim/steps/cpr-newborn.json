@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Since 10 Oct 2026 frame 6 is Mo's redone skin-to-skin picture (illustrations-2026-10-10/fixes, REVIEW.md M4: the baby's head turned to the side, nose and mouth free); newborn-warm frame 2 and cold-warming frame 4 use the same file (stored once, here). s7 starts on frame 4 (the baby on its back, the chest ringed) and cross-fades to frame 6, so it never shows the puff picture. Since 10 Oct 2026 (illustrations-2026-10-10/training-doll, drawn with a first-aid training doll): frame 5 is the new puff pair (A1, REVIEW.md H1: up = head lifted, down = lips sealed over the baby's mouth and nose, chest raised; s5 and s6 swap them for the puffs, the chest lighting up on 'down'), and frame 2 is the new rubbing pair (C5, REVIEW.md M5: a dry towel rubbing the baby's back, up/down = the two ends of the stroke; s1 after the drying and s4). s2 (the call for help) now shows frame 1. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/cpr-newborn), packed by tools/steps_images.py --px 800 --patch. Since 10 Oct 2026 frame 6 is Mo's redone skin-to-skin picture (illustrations-2026-10-10/fixes, REVIEW.md M4: the baby's head turned to the side, nose and mouth free); newborn-warm frame 2 and cold-warming frame 4 use the same file (stored once, here). s7 starts on frame 4 (the baby on its back, the chest ringed) and cross-fades to frame 6, so it never shows the puff picture. Since 10 Oct 2026 (illustrations-2026-10-10/training-doll, drawn with a first-aid training doll): frame 5 is the new puff pair (A1, REVIEW.md H1: up = head lifted, down = lips sealed over the baby's mouth and nose, chest raised; s5 and s6 swap them for the puffs, the chest lighting up on 'down'), and frame 2 is the new rubbing pair (C5, REVIEW.md M5: a dry towel rubbing the baby's back, up/down = the two ends of the stroke; s1 after the drying and s4). s2 (the call for help) now shows frame 1. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): the key frames (posters, reduced motion) of s1 and s3 no longer carry the rings, arrow and guide of the first picture onto the second (the arrow pointed at the head, a ring sat on the arm); s6's clock icon, never in view (outside the zoom, under the timer), is gone.",
  "poster": 4,
  "frames": {
   "1": {
@@ -144,7 +144,8 @@
      "at": 800,
      "rx": 120,
      "ry": 80,
-     "until": 3400
+     "until": 3400,
+     "still": false
     },
     {
      "type": "arrow",
@@ -159,7 +160,8 @@
      "width": 12,
      "at": 2400,
      "until": 5200,
-     "bend": 20
+     "bend": 20,
+     "still": false
     },
     {
      "type": "ring",
@@ -278,7 +280,8 @@
       320
      ],
      "at": 1200,
-     "until": 4600
+     "until": 4600,
+     "still": false
     },
     {
      "type": "ring",
@@ -288,7 +291,8 @@
      "rx": 60,
      "ry": 50,
      "until": 4600,
-     "pulse": false
+     "pulse": false,
+     "still": false
     },
     {
      "type": "ring",
@@ -488,15 +492,6 @@
      "ms": 1200,
      "at": 200,
      "until": 1800
-    },
-    {
-     "type": "icon",
-     "name": "clock",
-     "x": 820,
-     "y": 110,
-     "r": 52,
-     "at": 1800,
-     "until": 9000
     },
     {
      "type": "timer",

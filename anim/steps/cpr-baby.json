@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "2026-10-07, Mo (demo version); new s4 breath pictures: 2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). s4 (5 breaths) uses frame 'breath': since 10 Oct 2026 Mo's training-doll pair (illustrations-2026-10-10/training-doll, ChatGPT brief C1, REVIEW.md M1): 'up' head lifted, 'down' lips sealed over the baby's mouth and nose, chin lifted, head level, chest raised; s4 swaps them 5 times with the chest lighting up. Coordinates are in the 960x720 picture.",
+ "_note": "Mo's ChatGPT picture (one frame: baby on the rug, rescuer's body, arms and hands), approved by Mo on 7 Oct 2026 (demo version). s3, s5 and s6 are the scenes Mo approved; s1, s2 and s7 reuse the same picture with camera moves and overlays (frame 'kneel' = the rescuer without her arms). s4 (5 breaths) uses frame 'breath': since 10 Oct 2026 Mo's training-doll pair (illustrations-2026-10-10/training-doll, ChatGPT brief C1, REVIEW.md M1): 'up' head lifted, 'down' lips sealed over the baby's mouth and nose, chin lifted, head level, chest raised; s4 swaps them 5 times with the chest lighting up. Coordinates are in the 960x720 picture. 12 Oct 2026 (emergency picture check): s6 now shows its words \"give 2 breaths and 30 pushes again\": 2 breaths on the breath picture, then the thumbs pushing; s7's 1-minute timer and clock are left out of its key frame (they sat on the hospital icon).",
  "poster": 4,
  "frames": {
   "baby": {
@@ -485,15 +485,15 @@
   },
   {
    "id": "anim.cpr-baby.s6",
-   "frame": "thumbs",
+   "frame": "breath",
    "ms": 9000,
    "cam": {
     "path": [
-     [
-      60,
-      30,
-      840
-     ],
+     {
+      "cx": 400,
+      "cy": 410,
+      "w": 600
+     },
      [
       150,
       70,
@@ -501,10 +501,30 @@
      ]
     ],
     "ms": [
-     6000
+     1200
+    ],
+    "hold": [
+     4800
     ]
    },
    "motions": [
+    {
+     "id": "breath",
+     "type": "swap",
+     "frame": "breath",
+     "layer": "full-down",
+     "under": "full-up",
+     "rate": 30,
+     "count": 2,
+     "at": 600,
+     "hide": false
+    },
+    {
+     "type": "xfade",
+     "to": "thumbs",
+     "at": 4800,
+     "ms": 900
+    },
     {
      "id": "push",
      "type": "loop",
@@ -517,7 +537,7 @@
       720
      ],
      "ease": "push",
-     "at": 800,
+     "at": 6200,
      "count": 30,
      "rate": 110
     },
@@ -534,6 +554,27 @@
     }
    ],
    "overlays": [
+    {
+     "type": "shade",
+     "frame": "breath",
+     "x": 420,
+     "y": 442,
+     "rx": 100,
+     "ry": 40,
+     "max": 0.32,
+     "follow": "breath",
+     "color": "255,238,205",
+     "still": false
+    },
+    {
+     "type": "counter",
+     "follow": "breath",
+     "pos": "top-end",
+     "of": 2,
+     "icon": "breath",
+     "until": 4800,
+     "still": false
+    },
     {
      "type": "shade",
      "frame": "thumbs",
@@ -666,7 +707,8 @@
      "y": 238,
      "r": 50,
      "at": 1500,
-     "until": 9400
+     "until": 9400,
+     "still": false
     },
     {
      "type": "timer",
@@ -674,7 +716,8 @@
      "to": 60,
      "at": 1800,
      "pos": "top-end",
-     "until": 9400
+     "until": 9400,
+     "still": false
     },
     {
      "type": "icon",
