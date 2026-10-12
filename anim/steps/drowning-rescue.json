@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Since 11 Oct 2026 (app audit A-01): the film shows the life-saving steps of the page, drowning.breaths (5 breaths, the cpr-child breath pair, counter of 5) and drowning.cpr (30 pushes with the cpr-child push pair, then 2 breaths), between the check and the side roll; it ends on the blanket frame (5). Since 12 Oct 2026 the breath and push frames are Mo's cast-matched pictures (prompt D-1, ChatGPT batch of 12 Oct): the father and the wet boy on the canal bank, head tilt with two fingers on the bony chin, nose pinched; one heel of the hand on the lower breastbone, arm straight. Reduced motion shows frame 4 (the side roll) for drowning.warm (audit P-09).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Since 11 Oct 2026 (app audit A-01): the film shows the life-saving steps of the page, drowning.breaths (5 breaths, the cpr-child breath pair, counter of 5) and drowning.cpr (30 pushes with the cpr-child push pair, then 2 breaths), between the check and the side roll; it ends on the blanket frame (5). Since 12 Oct 2026 the breath and push frames are Mo's cast-matched pictures (prompt D-1, ChatGPT batch of 12 Oct): the father and the wet boy on the canal bank, head tilt with two fingers on the bony chin, nose pinched; one heel of the hand on the lower breastbone, arm straight. Reduced motion shows frame 4 (the side roll) for drowning.warm (audit P-09). 12 Oct 2026 (emergency picture check): the breath swaps of drowning.breaths and drowning.cpr keep the whole picture under the mouth patch (\"hide\": false; before, each breath and the key frame showed only the patch on a blank stage); drowning.rescue's key frame no longer shows frame 1's arrow over frame 2.",
  "_check": [
   "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8."
  ],
@@ -188,7 +188,8 @@
      ],
      "width": 12,
      "at": 800,
-     "until": 6400
+     "until": 6400,
+     "still": false
     },
     {
      "type": "waves",
@@ -281,7 +282,8 @@
      "under": "full-up",
      "at": 2500,
      "rate": 24,
-     "count": 5
+     "count": 5,
+     "hide": false
     }
    ],
    "overlays": [
@@ -378,7 +380,8 @@
      "under": "full-up",
      "at": 23900,
      "rate": 24,
-     "count": 2
+     "count": 2,
+     "hide": false
     }
    ],
    "overlays": [

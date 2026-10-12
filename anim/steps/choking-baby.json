@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/choking-baby), packed by tools/steps_images.py --px 800 --patch. Scenes use the page's own narration (choking-baby.*). The choking-01 folder is the same picture as frame 1. Frames 4 (two thumbs on the breastbone; 'down' is a small patch) and 5 (look in the mouth) are Mo's 10 Oct 2026 fixes (illustrations-2026-10-10/fixes, REVIEW.md H3 and M6). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/choking-baby), packed by tools/steps_images.py --px 800 --patch. Scenes use the page's own narration (choking-baby.*). The choking-01 folder is the same picture as frame 1. Frames 4 (two thumbs on the breastbone; 'down' is a small patch) and 5 (look in the mouth) are Mo's 10 Oct 2026 fixes (illustrations-2026-10-10/fixes, REVIEW.md H3 and M6). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): choking-baby.chest's key frame no longer shows the turning arrow of frame 3 over the thumbs picture.",
  "_check": [
   "Frame 2 (back blows): the contact is a little low (mid-back) rather than clearly between the shoulder blades.",
   "Frame 4 (10 Oct): both thumbs side by side on the breastbone just below the nipple line, hands round the chest; the 'down' picture is the same with the thumbs pressed in. Seen from above, so 'head lower than the body' cannot be seen.",
@@ -217,7 +217,8 @@
      "width": 12,
      "at": 800,
      "until": 3500,
-     "bend": -90
+     "bend": -90,
+     "still": false
     },
     {
      "type": "ring",
