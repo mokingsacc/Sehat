@@ -5,9 +5,9 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/glucometer), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/glucometer), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Frames 2 and 3 are Mo's 12 Oct 2026 redo (prompt D-2, audit P-06): the pricker a finger's width from, then touching, the side of the ring fingertip; the drop on the side of the pad touched to the strip.",
  "_check": [
-  "Frame 2: the pricker points at the end of the fingertip rather than clearly at its side (the app says the side)."
+  "Frames 2-3 (12 Oct): the pricker meets the upper side of the ring fingertip's pad, not the very end; frame 1 (washing) is the 9 Oct picture."
  ],
  "poster": 1,
  "frames": {
@@ -24,34 +24,23 @@
   "2": {
    "layers": [
     {
-     "id": "bg",
-     "src": "2-bg.webp",
-     "v": "8dce862c",
-     "kb": 23.1
+     "id": "full-up",
+     "src": "2-full-up.webp",
+     "v": "ef756cc1",
+     "kb": 25.8
     },
     {
-     "id": "hand-up",
-     "src": "2-hand-up.webp",
-     "v": "553397bb",
-     "kb": 9.8,
+     "id": "full-down",
+     "src": "2-full-down.webp",
+     "v": "0f0ac6b6",
+     "kb": 9.6,
      "box": [
-      511,
-      390,
-      449,
-      330
-     ]
-    },
-    {
-     "id": "hand-down",
-     "src": "2-hand-down.webp",
-     "v": "048af78f",
-     "kb": 10.1,
-     "box": [
-      511,
-      372,
-      449,
-      348
-     ]
+      0,
+      101,
+      427,
+      523
+     ],
+     "patch": "full-up"
     }
    ]
   },
@@ -59,22 +48,9 @@
    "layers": [
     {
      "id": "full",
-     "src": "2-bg.webp",
-     "v": "8dce862c",
-     "kb": 23.1
-    },
-    {
-     "id": "full-fix",
-     "src": "3-full-fix.webp",
-     "v": "7229fd5c",
-     "kb": 10.4,
-     "box": [
-      486,
-      158,
-      474,
-      562
-     ],
-     "patch": "full"
+     "src": "3-full.webp",
+     "v": "1f690cd5",
+     "kb": 24.3
     }
    ]
   }
@@ -131,11 +107,12 @@
      "id": "prick",
      "type": "swap",
      "frame": "2",
-     "layer": "hand-down",
-     "under": "hand-up",
+     "layer": "full-down",
+     "under": "full-up",
      "at": 1500,
      "rate": 15,
-     "count": 1
+     "count": 1,
+     "hide": false
     },
     {
      "type": "xfade",
@@ -147,16 +124,16 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 536,
-     "y": 344,
+     "x": 420,
+     "y": 228,
      "at": 600,
      "r": 40,
      "until": 1500
     },
     {
      "type": "ring",
-     "x": 536,
-     "y": 376,
+     "x": 419,
+     "y": 221,
      "at": 6600,
      "r": 35
     }

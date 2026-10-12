@@ -11,7 +11,7 @@
     "ps": "په امیندوارۍ او له زېږون وروسته هغه نښې چې ژر مرستې ته اړتیا لري",
     "en": "Signs in pregnancy and after birth that need help fast"
   },
-  "image": "pregnancy-danger",
+  "image": "img/stills/pregnancy-danger.webp",
   "blocks": [
     {
       "id": "pregnancy-danger.lead",

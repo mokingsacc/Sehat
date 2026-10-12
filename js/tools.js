@@ -159,7 +159,7 @@ export function initTools(ctx) {
   function brDangerHtml(a) {
     const chest = a.signs[0].endsWith('.chest') ? a.signs[0] : null;
     let h = `<div class="dcheck" id="br-danger">${BR.danger.size ? verdictCard('urgent', 'ui.br.v.danger') : ''}${sayRow('ui.br.check', 'trow dq')}`;
-    if (chest) h += `<div class="figcard${BR.danger.has(chest) ? ' on' : ''}" data-block="ui.br.indrawing"><img src="img/pics/chest-indrawing.svg" alt=""><div class="trow"><div class="body">${esc(say('ui.br.indrawing'))}</div>${spk('ui.br.indrawing')}</div>${signChip(chest, BR.danger.has(chest), 'data-br-sign')}</div>`;
+    if (chest) h += `<div class="figcard${BR.danger.has(chest) ? ' on' : ''}" data-block="ui.br.indrawing"><img src="img/stills/chest-indrawing.webp" alt=""><div class="trow"><div class="body">${esc(say('ui.br.indrawing'))}</div>${spk('ui.br.indrawing')}</div>${signChip(chest, BR.danger.has(chest), 'data-br-sign')}</div>`;
     h += a.signs.filter((x) => x !== chest).map((x) => signChip(x, BR.danger.has(x), 'data-br-sign')).join('');
     return h + '</div>';
   }

@@ -72,7 +72,8 @@
         "fa": "۵ بار در دهانش پف کنید و ببینید که سینه‌اش بالا می‌آید. برای شیرخوار، دهان و بینی را بپوشانید. برای بزرگسال هم همین‌طور.",
         "ps": "۵ ځله یې په خوله کې پو کړئ او وګورئ چې سینه یې پورته کېږي. د تي خوړونکي ماشوم خوله او پوزه وپوښئ. د لویانو لپاره هم همداسې.",
         "en": "Give 5 breaths into the mouth, watching the chest rise. For a baby, cover the mouth and nose. Do the same for adults."
-      }
+      },
+      "picture": "img/steps/drowning-rescue/breath-full-up.webp"
     },
     {
       "id": "drowning.cpr",
@@ -87,7 +88,8 @@
         "fa": "فشار سینه را شروع کنید: ۳۰ فشار، بعد ۲ نفس، بار بار. ادامه دهید تا نفس بکشد یا کمک برسد.",
         "ps": "د سینې فشار پیل کړئ: ۳۰ فشارونه، بیا ۲ ساه، بیا بیا. دوام ورکړئ تر څو ساه واخلي یا مرسته ورسېږي.",
         "en": "Start pushing on the chest: 30 pushes, then 2 breaths, again and again. Keep going until they breathe or help arrives."
-      }
+      },
+      "picture": "img/steps/drowning-rescue/push-full-up.webp"
     },
     {
       "id": "drowning.cpr-link",

@@ -78,10 +78,10 @@ export function initFinder(ctx) {
     switch (key) {
       case 'emergency': return [icon('warn'), T('emergency'), T('emergencySub'), 'ui.emergency'];
       case 'kit': return [kit ? img(kit.image) : icon('card'), T('kit'), T('kitSub'), 'ui.kit'];
-      case 'near': return [img('img/pics/row-near.svg'), T('near'), T('nearSub'), 'ui.near'];
+      case 'near': return [img('img/stills/row-near.webp'), T('near'), T('nearSub'), 'ui.near'];
       case 'family': return [icon('card'), T('myFamily'), '', 'ui.family'];
-      case 'children': return [img('img/app/home-children.svg'), T('children'), '', 'ui.children'];
-      case 'adults': return [img('img/app/home-adults.svg'), T('adults'), '', 'ui.adults'];
+      case 'children': return [img('img/stills/home-children.webp'), T('children'), '', 'ui.children'];
+      case 'adults': return [img('img/stills/home-adults.webp'), T('adults'), '', 'ui.adults'];
       case 'tool/breaths': return [icon('breathing-fast'), T('breaths'), T('breathsSub'), 'ui.breaths'];
       case 'tool/reading': return [icon('bp'), T('reading'), T('readingSub'), 'ui.reading'];
     }

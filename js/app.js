@@ -489,8 +489,8 @@ function screenHome() {
     emergency() { if ((cfg.emergency || []).length) emCard = true; return (cfg.emergency || []).length ? bigBtn('em', '#/emergency', I.warn, T('emergency'), '', 'ui.emergency', ids, 'emergency') : ''; },
     firstAid() { const f = cfg.firstAid; return f ? bigBtn('fa', '#/firstaid', picImg(topicPic(b.topics[f.image])), T(f.title), T(f.sub), f.say, ids) : ''; },
     ask() { return bigBtn('ask', '#/ask', I.mic, T('ask'), T('askSub'), 'ui.ask', ids); },
-    children() { return bigBtn('sec', '#/children', picImg('img/app/home-children.svg'), T('children'), T('childrenSub'), 'ui.children', ids); },
-    adults() { return bigBtn('sec adult', '#/adults', picImg('img/app/home-adults.svg'), T('adults'), T('adultsSub'), 'ui.adults', ids); },
+    children() { return bigBtn('sec', '#/children', picImg('img/stills/home-children.webp'), T('children'), T('childrenSub'), 'ui.children', ids); },
+    adults() { return bigBtn('sec adult', '#/adults', picImg('img/stills/home-adults.webp'), T('adults'), T('adultsSub'), 'ui.adults', ids); },
     sections() { return M.children() + M.adults(); },
     // Share Sehat (config.shareCard: the share screen, when this version has it); otherwise the phone's own share sheet
     share() { if (shareShown) return ''; shareShown = true; return shareCard(ids); },
@@ -537,9 +537,9 @@ const topicCard = topicRow; // js/tools.js lists topics with it too
 // tool rows (growth chart, breathing counter, "what does the number mean?"); growth shows once this version has it
 // [href, icon, title, sub, sayId, picture]: the picture is a small scene cropped like a topic row's (the icon is the fallback)
 const TOOL_ROWS = {
-  growth: ['#/growth', 'growth', 'growth', 'growthSub', 'ui.growth', 'img/pics/row-growth.svg'],
+  growth: ['#/growth', 'growth', 'growth', 'growthSub', 'ui.growth', 'img/stills/row-growth.webp'],
   breaths: ['#/tool/breaths', 'breathing-fast', 'breaths', '', 'ui.breaths', 'img/stills/breath-watch.webp'],
-  reading: ['#/tool/reading', 'bp', 'reading', '', 'ui.reading', 'img/pics/row-reading.svg'],
+  reading: ['#/tool/reading', 'bp', 'reading', '', 'ui.reading', 'img/stills/row-reading.webp'],
 };
 function toolRow(x, ids) {
   const r = TOOL_ROWS[x]; if (!r || !S.book.ui[r[2]] || !S.book.narration[r[4]]) return '';
@@ -593,7 +593,7 @@ function screenList(name) {
   const c = LISTS()[name]; if (!c) return screenHome();
   const list = listOf(name), tab = listTab(name), ids = [c.say];
   let body = (c.tools || []).map((x) => toolRow(x, ids)).join('');
-  if (c.near) { ids.push('ui.near'); body += `<div class="trow tool near" data-block="ui.near"><a class="grow" href="#/near"><span class="tp"><img src="img/pics/row-near.svg" alt="" loading="lazy"></span><span class="tx"><span class="t">${esc(T('near'))}</span><span class="s">${esc(T('nearSub'))}</span></span></a>${spk('ui.near')}</div>`; }
+  if (c.near) { ids.push('ui.near'); body += `<div class="trow tool near" data-block="ui.near"><a class="grow" href="#/near"><span class="tp"><img src="img/stills/row-near.webp" alt="" loading="lazy"></span><span class="tx"><span class="t">${esc(T('near'))}</span><span class="s">${esc(T('nearSub'))}</span></span></a>${spk('ui.near')}</div>`; }
   ids.push(...list.map((t) => t + '.title'));
   body += list.map(topicRow).join('');
   if (!list.length) body += `<div class="empty">${ic(c.icon || 'check')}<p>${esc(T('comingSoon'))}</p></div>`;

@@ -147,6 +147,15 @@ why, and the pictures still to make: `/mnt/project-files/samangan-red-book/audit
 - `tools/validate.py` refuses a page picture under `img/steps/` that is not a file of a precache set's JSON.
 - bleeding-tourniquet went live on 11 Oct 2026 (Mo's tourniquet call: show it, as a last resort): its film sits above the
   tourniquet step, which shows frame 1, and bleeding.time shows frame 3 (frame 2, the stick, is the poster).
+- **Mo's ChatGPT batch of 12 Oct 2026** (`animation-briefs/chatgpt-ONE-PROMPT-2026-10-11.md`, checked picture by picture;
+  preview `/mnt/project-files/samangan-red-book/previews/pictures-2026-10-12/`): drowning-rescue frames `breath` and
+  `push` are the cast-matched father and wet boy on the canal bank (no more borrowed cpr-child pictures); recovery-position
+  frame 5 (head lower, mouth lowest) is back on `unconscious.baby`; thermometer frames 2-3 (tip in the centre of the armpit)
+  and glucometer frames 2-3 (side of the fingertip) are whole `full-up` / `full-down` pairs, so their swaps need
+  `"hide": false`; dog-bite frame 1 has the dog tied. Whole pictures that are not frames (page tops, rows, the chest
+  indrawing pair, the Children / Adults buttons) are encoded by `python3 tools/steps_stills.py --png <folder>` from its
+  `PICTURES` list into `img/stills/`. Not used: the breathing tile (a rib-cage diagram) and step-fever-touch (the same
+  file as thermometer-3, while fever.check says the back of the hand).
 - Not used on the pages: cpr-child frame 4
   and the merged-faces newborn puff picture (both gone from the sets).
 
