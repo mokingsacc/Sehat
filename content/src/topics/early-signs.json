@@ -142,6 +142,15 @@
             "ps": "په غایطه کې وینه، له یو ځل زیات",
             "en": "Blood in the stool more than once"
           }
+        },
+        {
+          "id": "early-signs.soon.anaemia",
+          "icon": "rest",
+          "text": {
+            "fa": "رنگ پریده و خسته: مرد، یا زنی که عادت ماهوارش قطع شده",
+            "ps": "رنګ الوتی او ستړی: نارینه، یا هغه ښځه چې میاشتنی عادت یې بند شوی",
+            "en": "Pale and tired: a man, or a woman whose periods have stopped"
+          }
         }
       ]
     },
@@ -169,9 +178,9 @@
         "en": "First, a TB test"
       },
       "text": {
-        "fa": "تب، عرق، کم شدن وزن و غده‌های پندیده اکثراً توبرکلوز است. معاینه و دوای توبرکلوز رایگان است. اگر معاینه منفی بود و علایم ادامه داشت، به شفاخانه بروید.",
-        "ps": "تبه، خولې، د وزن کمېدل او پړسېدلې غوټې ډېری وخت نری رنځ وي. د نري رنځ معاینه او درمل وړیا دي. که معاینه منفي وه او نښې دوام ولري، روغتون ته ولاړ شئ.",
-        "en": "Fever, sweats, weight loss and swollen glands are most often TB. The TB test and medicine are free. If the test is negative and the signs go on, go to hospital."
+        "fa": "تب، عرق، کم شدن وزن و غده‌های پندیده اکثراً توبرکلوز است. معاینه و دوای توبرکلوز باید رایگان باشد؛ بپرسید. اگر معاینه منفی بود و علایم ادامه داشت، به شفاخانه بروید.",
+        "ps": "تبه، خولې، د وزن کمېدل او پړسېدلې غوټې ډېری وخت نری رنځ وي. د نري رنځ معاینه او درمل باید وړیا وي؛ وپوښتئ. که معاینه منفي وه او نښې دوام ولري، روغتون ته ولاړ شئ.",
+        "en": "Fever, sweats, weight loss and swollen glands are most often TB. The TB test and medicine should be free; ask. If the test is negative and the signs go on, go to hospital."
       }
     },
     {
@@ -247,14 +256,14 @@
       "to": "topic/tb",
       "icon": "cough",
       "title": {
-        "fa": "توبرکلوز: معاینه و دوای رایگان",
-        "ps": "نری رنځ: وړیا معاینه او درمل",
-        "en": "TB: the free test and medicine"
+        "fa": "توبرکلوز: معاینه و دوا",
+        "ps": "نری رنځ: معاینه او درمل",
+        "en": "TB: the test and medicine"
       },
       "text": {
-        "fa": "علایم توبرکلوز، معاینهٔ رایگان، و محافظت خانواده. صفحه را باز کنید.",
-        "ps": "د نري رنځ نښې، وړیا معاینه، او د کورنۍ ساتنه. پاڼه پرانیزئ.",
-        "en": "The signs of TB, the free test, and how to protect the family. Open the page."
+        "fa": "علایم توبرکلوز، معاینه، و محافظت خانواده. صفحه را باز کنید.",
+        "ps": "د نري رنځ نښې، معاینه، او د کورنۍ ساتنه. پاڼه پرانیزئ.",
+        "en": "The signs of TB, the test, and how to protect the family. Open the page."
       }
     }
   ],
@@ -285,6 +294,7 @@
   ],
   "review": [
     "Native check: 'night sweats that soak your clothes' (عرق شبانه که کالا را تر می‌کند / د شپې داسې خولې چې جامې لمدې کړي), 'clothes become loose' (کالا گشاد می‌شود / جامې ارتې شي), 'hoarse voice' (گرفتگی آواز / د غږ کېناستل), 'groin' (کشالهٔ ران / د ورون بېخ), 'bruising' (کبود شدن / شنه داغونه).",
-    "The this-week and today box titles are word for word red-flags.soon and red-flags.today, so their clips can be copied."
+    "The this-week and today box titles are word for word red-flags.soon and red-flags.today, so their clips can be copied.",
+    "Mo, 12 Oct 2026 (his answers to the 52 open calls): anaemia signs in a man or a woman after the menopause are \"clinic this week\" (item 32, early-signs.soon.anaemia; also on the Tired picture page). No age limits on the signs (item 28)."
   ]
 }

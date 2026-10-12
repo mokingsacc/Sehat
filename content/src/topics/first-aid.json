@@ -233,33 +233,6 @@
       },
       "items": [
         {
-          "id": "first-aid.urgent.big-burn",
-          "icon": "burn",
-          "text": {
-            "fa": "سوختگی بزرگ‌تر از کف دست همان شخص، یا هر سوختگی در شیرخوار",
-            "ps": "له هغه کس له ورغوي لویه سوځېدنه، یا په تي خوړونکي ماشوم کې هره سوځېدنه",
-            "en": "a burn bigger than the person's palm, or any burn on a baby"
-          }
-        },
-        {
-          "id": "first-aid.urgent.burn-place",
-          "icon": "burn",
-          "text": {
-            "fa": "سوختگی روی صورت، دست، پا، اعضای تناسلی یا بندها",
-            "ps": "په مخ، لاسونو، پښو، تناسلي غړو یا بندونو سوځېدنه",
-            "en": "a burn on the face, hands, feet, genitals or joints"
-          }
-        },
-        {
-          "id": "first-aid.urgent.bleeding",
-          "icon": "bleeding",
-          "text": {
-            "fa": "خونریزی که بند نمی‌شود",
-            "ps": "وینه بهېدل چې نه درېږي",
-            "en": "bleeding that will not stop"
-          }
-        },
-        {
           "id": "first-aid.urgent.unconscious",
           "icon": "sleepy",
           "text": {
@@ -269,12 +242,12 @@
           }
         },
         {
-          "id": "first-aid.urgent.poison",
-          "icon": "poison",
+          "id": "first-aid.urgent.bleeding",
+          "icon": "bleeding",
           "text": {
-            "fa": "قورت دادن زهر، تیل خاک یا دوا",
-            "ps": "د زهرو، خاورینو تېلو یا درملو تېرول",
-            "en": "swallowed poison, kerosene or medicines"
+            "fa": "خونریزی که بند نمی‌شود",
+            "ps": "وینه بهېدل چې نه درېږي",
+            "en": "bleeding that will not stop"
           }
         },
         {
@@ -293,6 +266,33 @@
             "fa": "ضربه به سر همراه با بی‌هوش شدن، استفراغ، خواب‌آلودگی زیاد یا تشنج، یا هر ضربه به سر در شیرخوار یا شخص مسن",
             "ps": "سر ته ټکر چې ورسره بې‌هوښه کېدل، کانګې، ډېر خوب وړل یا اختلاج وي، یا په تي خوړونکي ماشوم یا زاړه کس کې سر ته هر ټکر",
             "en": "a head injury with being knocked out, vomiting, deep sleepiness or a fit, or any head injury in a baby or an older person"
+          }
+        },
+        {
+          "id": "first-aid.urgent.poison",
+          "icon": "poison",
+          "text": {
+            "fa": "قورت دادن زهر، تیل خاک یا دوا",
+            "ps": "د زهرو، خاورینو تېلو یا درملو تېرول",
+            "en": "swallowed poison, kerosene or medicines"
+          }
+        },
+        {
+          "id": "first-aid.urgent.big-burn",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی بزرگ‌تر از کف دست همان شخص، یا هر سوختگی در شیرخوار",
+            "ps": "له هغه کس له ورغوي لویه سوځېدنه، یا په تي خوړونکي ماشوم کې هره سوځېدنه",
+            "en": "a burn bigger than the person's palm, or any burn on a baby"
+          }
+        },
+        {
+          "id": "first-aid.urgent.burn-place",
+          "icon": "burn",
+          "text": {
+            "fa": "سوختگی روی صورت، دست، پا، اعضای تناسلی یا بندها",
+            "ps": "په مخ، لاسونو، پښو، تناسلي غړو یا بندونو سوځېدنه",
+            "en": "a burn on the face, hands, feet, genitals or joints"
           }
         },
         {

@@ -32,9 +32,9 @@
         "en": "Know your breasts"
       },
       "text": {
-        "fa": "ماهی یک بار، بعد از عادت ماهوار، هر دو پستان و زیر بغل را ببینید و لمس کنید تا بدانید برای شما چه عادی است. هر تغییر نو کلینیک لازم دارد.",
-        "ps": "په میاشت کې یو ځل، له میاشتني عادت وروسته، دواړه تيونه او تخرګونه وګورئ او لمس یې کړئ، چې پوه شئ ستاسو لپاره څه عادي دي. هر نوی بدلون کلینیک ته اړتیا لري.",
-        "en": "Once a month, after your period, look at and feel both breasts and armpits, to learn what is normal for you. Any new change needs the clinic."
+        "fa": "بدانید پستان‌های شما به طور عادی چطور دیده می‌شود و چه حسی دارد، تا تغییر را بفهمید. هر تغییر نو کلینیک لازم دارد.",
+        "ps": "پوه شئ چې ستاسو تيونه په عادي ډول څنګه ښکاري او څنګه احساس کېږي، چې بدلون درک کړئ. هر نوی بدلون کلینیک ته اړتیا لري.",
+        "en": "Know how your breasts normally look and feel, so you notice a change. Any new change needs the clinic."
       }
     },
     {
@@ -99,9 +99,9 @@
           "id": "women-signs.soon.milk-lump",
           "icon": "breastfeed",
           "text": {
-            "fa": "غده در پستان که بعد از کم شدن پندیدگی شیر باقی بماند",
-            "ps": "په تي کې غوټه چې د شیدو د پړسوب له کمېدو وروسته پاتې شي",
-            "en": "A breast lump that stays after the milk swelling settles"
+            "fa": "غده در پستان در وقت شیردهی که بیش از ۲ هفته بماند",
+            "ps": "د تي ورکولو پر وخت په تي کې غوټه چې له ۲ اونیو زیاته پاتې شي",
+            "en": "A breast lump while breastfeeding that stays more than 2 weeks"
           }
         },
         {
@@ -157,9 +157,9 @@
         "en": "The cervix test"
       },
       "text": {
-        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
-        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۳ تر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
-        "en": "Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
+        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. در شفاخانهٔ ولایتی بپرسید که این معاینه را می‌کنند یا نه.",
+        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۳ تر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. په ولایتي روغتون کې وپوښتئ چې دا معاینه کوي که نه.",
+        "en": "Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask at the provincial hospital whether they do it."
       }
     },
     {

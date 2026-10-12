@@ -108,30 +108,21 @@
       },
       "items": [
         {
-          "id": "head-injury.urgent.knocked-out",
-          "icon": "sleepy",
-          "text": {
-            "fa": "حتی برای مدت کوتاه بی‌هوش شد",
-            "ps": "که څه هم لږ وخت، بې‌هوښه شو",
-            "en": "were knocked out, even for a moment"
-          }
-        },
-        {
-          "id": "head-injury.urgent.vomit",
-          "icon": "vomit",
-          "text": {
-            "fa": "بیشتر از یک بار استفراغ کرد",
-            "ps": "له یو ځل زیات یې کانګې وکړې",
-            "en": "vomit more than once"
-          }
-        },
-        {
           "id": "head-injury.urgent.drowsy",
           "icon": "sleepy",
           "text": {
             "fa": "بسیار خواب‌آلود یا گیج است، یا مشکل بیدار می‌شود",
             "ps": "ډېر خوب وړی یا ګډوډ دی، یا په سختۍ راویښېږي",
             "en": "are very sleepy, confused or hard to wake"
+          }
+        },
+        {
+          "id": "head-injury.urgent.knocked-out",
+          "icon": "sleepy",
+          "text": {
+            "fa": "حتی برای مدت کوتاه بی‌هوش شد",
+            "ps": "که څه هم لږ وخت، بې‌هوښه شو",
+            "en": "were knocked out, even for a moment"
           }
         },
         {
@@ -144,12 +135,21 @@
           }
         },
         {
-          "id": "head-injury.urgent.headache",
-          "icon": "headache",
+          "id": "head-injury.urgent.weak",
+          "icon": "stroke-face",
           "text": {
-            "fa": "سردردی دارد که بدتر می‌شود",
-            "ps": "سر درد لري چې بدترېږي",
-            "en": "have a headache that gets worse"
+            "fa": "دست یا پایش ضعیف است، یا گپ زدنش نامفهوم است",
+            "ps": "لاس یا پښه یې کمزوري ده، یا خبرې یې ګډې وډې دي",
+            "en": "have a weak arm or leg, or slurred speech"
+          }
+        },
+        {
+          "id": "head-injury.urgent.vomit",
+          "icon": "vomit",
+          "text": {
+            "fa": "بیشتر از یک بار استفراغ کرد",
+            "ps": "له یو ځل زیات یې کانګې وکړې",
+            "en": "vomit more than once"
           }
         },
         {
@@ -162,12 +162,21 @@
           }
         },
         {
-          "id": "head-injury.urgent.weak",
-          "icon": "stroke-face",
+          "id": "head-injury.urgent.headache",
+          "icon": "headache",
           "text": {
-            "fa": "دست یا پایش ضعیف است، یا گپ زدنش نامفهوم است",
-            "ps": "لاس یا پښه یې کمزوري ده، یا خبرې یې ګډې وډې دي",
-            "en": "have a weak arm or leg, or slurred speech"
+            "fa": "سردردی دارد که بدتر می‌شود",
+            "ps": "سر درد لري چې بدترېږي",
+            "en": "have a headache that gets worse"
+          }
+        },
+        {
+          "id": "head-injury.urgent.baby",
+          "icon": "baby",
+          "text": {
+            "fa": "شیرخوار کمتر از ۱ سال است و روی سرش ورم یا زخم بزرگ دارد",
+            "ps": "له ۱ کال څخه کم ماشوم دی او په سر یې لوی پړسوب یا ټپ دی",
+            "en": "are a baby under 1 with a big bump or cut on the head"
           }
         },
         {
@@ -180,15 +189,6 @@
           }
         },
         {
-          "id": "head-injury.urgent.drugs",
-          "icon": "warning",
-          "text": {
-            "fa": "شراب نوشیده بود، یا تریاک یا مواد مخدر دیگر گرفته بود",
-            "ps": "شراب یې څښلي وو، یا یې تریاک یا نور نشه يي توکي اخیستي وو",
-            "en": "had drunk alcohol, or taken opium or other drugs"
-          }
-        },
-        {
           "id": "head-injury.urgent.height",
           "icon": "warning",
           "text": {
@@ -198,12 +198,12 @@
           }
         },
         {
-          "id": "head-injury.urgent.baby",
-          "icon": "baby",
+          "id": "head-injury.urgent.drugs",
+          "icon": "warning",
           "text": {
-            "fa": "شیرخوار کمتر از ۱ سال است و روی سرش ورم یا زخم بزرگ دارد",
-            "ps": "له ۱ کال څخه کم ماشوم دی او په سر یې لوی پړسوب یا ټپ دی",
-            "en": "are a baby under 1 with a big bump or cut on the head"
+            "fa": "تریاک یا مواد مخدر دیگر گرفته بود",
+            "ps": "تریاک یا نور نشه يي توکي یې اخیستي وو",
+            "en": "had taken opium or other drugs"
           }
         }
       ]
@@ -260,6 +260,7 @@
     "'Wake them a few times' is common lay advice, not WHO wording. NICE no longer requires routine waking. Check whether to keep it.",
     "Red flags follow NICE NG232 (2023, which replaced CG176) and IFRC (loss of consciousness, vomiting more than once, drowsiness, fit, worsening headache, fluid from nose or ears, weakness or speech change).",
     "Hospital tip says 'send to a bigger hospital for a scan': CT may only be in Mazar-i-Sharif or Kabul. Check.",
-    "Medical audit 8 Oct 2026: EM9, four red items added from NICE NG232 (65 or older or on blood thinners; alcohol, opium or other drugs; a fall from a roof or height or a road crash; a baby under 1 year with a big bump or cut on the head). The red box now has 11 items. EM26, the citation is now NICE NG232 (CG176 was replaced in May 2023)."
+    "Medical audit 8 Oct 2026: EM9, four red items added from NICE NG232 (65 or older or on blood thinners; alcohol, opium or other drugs; a fall from a roof or height or a road crash; a baby under 1 year with a big bump or cut on the head). The red box now has 11 items. EM26, the citation is now NICE NG232 (CG176 was replaced in May 2023).",
+    "Mo, 12 Oct 2026 (his answers to the 52 open calls): alcohol is no longer named in head-injury.urgent.drugs (item 11); the red box shows the first 6 signs, the rest behind a \"more\" button, most important first (item 10)."
   ]
 }

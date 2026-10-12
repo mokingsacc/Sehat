@@ -63,9 +63,9 @@
         "en": "30 to 49: the cervix test"
       },
       "text": {
-        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. بپرسید کجا می‌شود.",
-        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۳ تر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. وپوښتئ چې چېرې کېږي.",
-        "en": "Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask where it is done."
+        "fa": "بین ۳۰ و ۴۹ سالگی یک بار، یا اگر بتوانید هر ۳ تا ۵ سال، معاینهٔ دهانهٔ رحم را بخواهید. این معاینه تغییرات را زود پیدا می‌کند، وقتی تداوی آن آسان است. در شفاخانهٔ ولایتی بپرسید که این معاینه را می‌کنند یا نه.",
+        "ps": "د ۳۰ او ۴۹ کلنۍ ترمنځ یو ځل، یا که وکولای شئ هر ۳ تر ۵ کاله، د رحم د خولې معاینه وغواړئ. دا معاینه بدلونونه ژر مومي، کله چې درملنه یې اسانه وي. په ولایتي روغتون کې وپوښتئ چې دا معاینه کوي که نه.",
+        "en": "Ask for the cervix test once between 30 and 49, or every 3 to 5 years if you can. It finds changes early, when they are easy to treat. Ask at the provincial hospital whether they do it."
       }
     },
     {
@@ -73,14 +73,14 @@
       "type": "step",
       "icon": "breastfeed",
       "title": {
-        "fa": "هر ماه: پستان‌های شما",
-        "ps": "هره میاشت: ستاسو تيونه",
-        "en": "Every month: your breasts"
+        "fa": "پستان‌ها: معاینهٔ سالانه از ۴۰ سالگی",
+        "ps": "تيونه: له ۴۰ کلنۍ هر کال معاینه",
+        "en": "Breasts: a yearly check from 40"
       },
       "text": {
-        "fa": "بدانید پستان‌های شما به طور عادی چطور است. از ۴۰ سالگی، اگر ممکن باشد، سالی یک بار از یک کارمند صحی زن بخواهید آن‌ها را معاینه کند. غدهٔ نو: همین هفته کلینیک.",
-        "ps": "پوه شئ چې ستاسو تيونه په عادي ډول څنګه وي. له ۴۰ کلنۍ، که ممکنه وي، په کال کې یو ځل له یوې ښځینه روغتیايي کارکوونکې وغواړئ چې معاینه یې کړي. نوې غوټه: همدا اونۍ کلینیک.",
-        "en": "Know how your breasts normally feel. From 40, ask a female health worker to examine them once a year, if this is offered. A new lump: clinic this week."
+        "fa": "بدانید پستان‌های شما به طور عادی چطور دیده می‌شود و چه حسی دارد. از ۴۰ سالگی، سالی یک بار پستان‌ها را در کلینیک معاینه کنید. غدهٔ نو: همین هفته کلینیک.",
+        "ps": "پوه شئ چې ستاسو تيونه په عادي ډول څنګه ښکاري او څنګه احساس کېږي. له ۴۰ کلنۍ، په کال کې یو ځل تيونه په کلینیک کې معاینه کړئ. نوې غوټه: همدا اونۍ کلینیک.",
+        "en": "Know how your breasts normally look and feel. From 40, have a breast check at the clinic once a year. A new lump: clinic this week."
       }
     },
     {
@@ -138,9 +138,9 @@
         "en": "Any time: a TB check"
       },
       "text": {
-        "fa": "سرفهٔ ۲ هفته، تب یا عرق شبانه، یا کم شدن وزن یعنی معاینهٔ توبرکلوز. معاینه و دوای توبرکلوز رایگان است.",
-        "ps": "۲ اونۍ ټوخی، تبه یا د شپې خولې، یا د وزن کمېدل مانا د نري رنځ معاینه. د نري رنځ معاینه او درمل وړیا دي.",
-        "en": "A cough for 2 weeks, fever or sweats at night, or losing weight means a TB test. The TB test and medicine are free."
+        "fa": "سرفهٔ ۲ هفته، تب یا عرق شبانه، یا کم شدن وزن یعنی معاینهٔ توبرکلوز. معاینه و دوای توبرکلوز باید رایگان باشد؛ بپرسید.",
+        "ps": "۲ اونۍ ټوخی، تبه یا د شپې خولې، یا د وزن کمېدل مانا د نري رنځ معاینه. د نري رنځ معاینه او درمل باید وړیا وي؛ وپوښتئ.",
+        "en": "A cough for 2 weeks, fever or sweats at night, or losing weight means a TB test. The TB test and medicine should be free; ask."
       }
     },
     {

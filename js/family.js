@@ -5,7 +5,7 @@
 // numbers come from the big number pad (js/numpad.js), typing is always optional. Recordings and photos are kept in
 // IndexedDB ("sehat-family"), the rest with the people in localStorage ("fhb.kids"). "Copy records to another phone"
 // makes one zip file. Nothing leaves the phone unless the person sends that file. The data rules: js/family-data.js.
-import { PICS, isAdult, isChild, migrate, tdPlan, TD, adultAdvice, BMI_LV, numIds, sizeOf, TIMES, dueMeds, markTaken, snooze, medActive, daysLeft,
+import { PICS, isAdult, isChild, migrate, tdPlan, tdFor, TD, adultAdvice, BMI_LV, numIds, sizeOf, TIMES, dueMeds, markTaken, snooze, medActive, daysLeft,
   mediaIds, makeBundle, readBundle, mergePeople, BUNDLE, MEDIA_RE, newId, localDay, dayDiff, cleanNotes, noteMediaIds, mergeNotes } from './family-data.js';
 import { makeZip, readZip } from './zip.js';
 import { APPS } from './share.js';
@@ -199,7 +199,7 @@ export function initFamily(ctx) {
     const parts = [isChild(p) && p.dob ? ageText(p.dob) : T(PIC_KEY[p.pic])];
     const n = nextVisit(p);
     if (n && !n.done) parts.push(`${T('nextVaccine')}: ${L(n.vis.age)} · ${whenText(n.due)}`);
-    if (p.pic === 'woman') { const t = tdPlan(p.td); if (t.next >= 0) parts.push(`${T('rowTd')}: ${T('tdDose', { n: num(t.next + 1) })}`); }
+    if (tdFor(p)) { const t = tdPlan(p.td); if (t.next >= 0) parts.push(`${T('rowTd')}: ${T('tdDose', { n: num(t.next + 1) })}`); }
     const due = dueMeds([p]).length; if (due) parts.push(T('medTime'));
     return parts.join(' · ');
   }
@@ -344,9 +344,10 @@ export function initFamily(ctx) {
     if (isChild(p)) {
       const n = nextVisit(p);
       rows.push(['#/family/vacc', ic('syringe'), T('rowVaccines'), n ? (n.done ? T('allDone') : `${T('nextVaccine')}: ${L(n.vis.age)} · ${whenText(n.due)}`) : '', 'ui.fam.row.vacc', 'vac']);
+      if (tdFor(p)) rows.push(tdRow(p, '#/family/td')); // a girl of 12 or more: her tetanus vaccine too (Mo, 12 Oct 2026)
       rows.push(['#/growth', ic('growth'), T('rowGrowth'), lastWeight(p), 'ui.fam.row.growth', 'grw']);
     } else {
-      if (p.pic === 'woman') { const t = tdPlan(p.td); rows.push(['#/family/vacc', ic('syringe'), T('rowTd'), t.next < 0 ? T('tdDone') : T('nextDose', { x: T('tdDose', { n: num(t.next + 1) }) }) + (t.from ? ' · ' + T('tdFrom', { d: fmtDate(t.from) }) : ''), 'ui.fam.row.td', 'vac']); }
+      if (p.pic === 'woman') rows.push(tdRow(p, '#/family/vacc'));
       rows.push(['#/family/weight', ic('weight-loss'), T('rowWeight'), lastWeight(p), 'ui.fam.row.weight', 'grw']);
     }
     const act = (p.meds || []).filter((m) => medActive(m)).length;
@@ -359,6 +360,7 @@ export function initFamily(ctx) {
     const due = dueMeds([p]); if (due.length) html = html.replace('<div class="srowbig', due.map(remCard).join('') + '<div class="srowbig');
     return { html, nav: 'family' };
   }
+  function tdRow(p, href) { const t = tdPlan(p.td); return [href, ic('syringe'), T('rowTd'), t.next < 0 ? T('tdDone') : T('nextDose', { x: T('tdDose', { n: num(t.next + 1) }) }) + (t.from ? ' · ' + T('tdFrom', { d: fmtDate(t.from) }) : ''), 'ui.fam.row.td', 'vac']; }
   function lastWeight(p) {
     const ws = (p.weights || []).filter((e) => e.kg > 0 || e.cm > 0).sort((a, b) => (a.d < b.d ? 1 : -1)); const e = ws[0];
     if (!e) return '';
@@ -368,12 +370,13 @@ export function initFamily(ctx) {
   const dec = (s) => (S.lang === 'en' ? s : s.replace('.', '٫'));
 
   /* ---------- vaccines: the child schedule, or the women's tetanus vaccine ---------- */
-  function screenVacc() {
+  // td: the tetanus vaccine of a girl recorded as a child (#/family/td); a woman's is her only vaccine (#/family/vacc)
+  function screenVacc(td) {
     const p = person(); if (!p) return screenList();
-    const v = S.book.topics.vaccines;
-    let html = top(isChild(p) ? T('rowVaccines') : T('tdTitle'), { back: '#/family/person' });
+    const v = S.book.topics.vaccines, child = isChild(p) && !(td && tdFor(p));
+    let html = top(child ? T('rowVaccines') : T('tdTitle'), { back: '#/family/person' });
     const ids = [];
-    if (isChild(p) && v) {
+    if (child && v) {
       ids.push('ui.fam.vacc');
       html += `<div class="agechip">${picImg(p, 'mini')}<span>${esc(nameOf(p))} · ${esc(p.dob ? ageText(p.dob) : '')}</span></div>` + sayRow('ui.fam.vacc', 'blk lead trow');
       const n = nextVisit(p), dob = Date.parse(p.dob + 'T12:00:00');
@@ -382,7 +385,7 @@ export function initFamily(ctx) {
         ids.push(vis.id);
         html += `<div class="vline" data-block="${esc(vis.id)}"><button type="button" class="vrow ${g ? 'done' : isNext ? 'due' : ''}" data-fam-visit="${esc(vis.id)}"><span class="ck">${g ? I.check : ''}</span><span style="flex:1"><div class="a">${esc(L(vis.age))}</div><div class="d">${g ? esc(T('given')) + ' · ' + esc(fmtDate(g)) : esc(fmtDate(due))} · ${esc(vis.doses.map((x) => L(x.name)).join('، '))}</div></span></button>${big(vis.id)}</div>`;
       }
-    } else if (p.pic === 'woman') {
+    } else if (tdFor(p)) {
       ids.push('vaccines.td', 'ui.fam.td.tap');
       html += whoChip(p);
       if (S.book.narration['vaccines.td']) html += sayRow('vaccines.td', 'blk lead trow');
@@ -751,7 +754,7 @@ export function initFamily(ctx) {
   function screen(sub) {
     track('view', { p: 'family' });
     const r = {
-      add: () => screenForm(true), edit: () => screenForm(false), person: screenPerson, vacc: screenVacc, weight: screenWeight,
+      add: () => screenForm(true), edit: () => screenForm(false), person: screenPerson, vacc: () => screenVacc(false), td: () => screenVacc(true), weight: screenWeight,
       meds: screenMeds, 'med-add': screenMedAdd, notes: screenNotes, 'note-add': screenNoteAdd, readings: screenReadings, copy: screenCopy, voice: screenVoice,
     }[sub];
     const out = r ? r() : screenList();

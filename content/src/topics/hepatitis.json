@@ -62,9 +62,9 @@
         "en": "No medicines without the clinic"
       },
       "text": {
-        "fa": "جگر مریض بسیاری از دواها را تحمل نمی‌کند. هیچ تابلیت، گیاه یا پیچکاری نگیرید، مگر اینکه کارمند صحی بدهد. پاراسیتامول فقط آن طور که می‌گوید.",
-        "ps": "ناروغ ځیګر ډېر درمل نه شي زغملای. هېڅ ګولۍ، بوټي یا پیچکاري مه اخلئ، مګر دا چې روغتیايي کارکوونکی یې درکړي. پاراسیټامول یوازې هغسې چې هغه وايي.",
-        "en": "A sick liver cannot handle many medicines. Take no tablets, herbs or injections unless the health worker gives them. Paracetamol only as they say."
+        "fa": "جگر مریض بسیاری از دواها را تحمل نمی‌کند. هیچ تابلیت، گیاه یا پیچکاری نگیرید، مگر اینکه کارمند صحی بدهد. پاراسیتامول فقط کم: روزانه بیشتر از ۲ گرام (۴ تابلیت ۵۰۰ ملی‌گرامی) نخورید.",
+        "ps": "ناروغ ځیګر ډېر درمل نه شي زغملای. هېڅ ګولۍ، بوټي یا پیچکاري مه اخلئ، مګر دا چې روغتیايي کارکوونکی یې درکړي. پاراسیټامول یوازې لږ: په ورځ کې له ۲ ګرامو (۴ ګولۍ د ۵۰۰ ملي ګرامو) زیات مه خورئ.",
+        "en": "A sick liver cannot handle many medicines. Take no tablets, herbs or injections unless the health worker gives them. Paracetamol only a little: no more than 2 grams a day (4 tablets of 500 mg)."
       }
     },
     {
@@ -117,14 +117,14 @@
       "type": "step",
       "icon": "calendar",
       "title": {
-        "fa": "هپاتیت ب دایمی: معاینهٔ منظم",
-        "ps": "تل پاتې هیپاتیت ب: منظمه معاینه",
-        "en": "Hepatitis B for life: regular checks"
+        "fa": "هپاتیت ب دایمی: معاینهٔ سالانه",
+        "ps": "تل پاتې هیپاتیت ب: کلنۍ معاینه",
+        "en": "Hepatitis B for life: a yearly check"
       },
       "text": {
-        "fa": "کسی که هپاتیت ب دایمی دارد، باید هر ۶ تا ۱۲ ماه، حتی وقتی صحتمند است، نزد داکتر شفاخانه برود تا جگر معاینه شود و در مورد دوا تصمیم گرفته شود.",
-        "ps": "هغه څوک چې تل پاتې هیپاتیت ب لري، باید هر ۶ تر ۱۲ میاشتې، حتی کله چې روغ وي، د روغتون ډاکټر ته ولاړ شي، چې ځیګر یې معاینه شي او د درملو پرېکړه وشي.",
-        "en": "Someone with hepatitis B for life should see the hospital doctor every 6 to 12 months, even when well, to check the liver and decide on medicine."
+        "fa": "کسی که هپاتیت ب دایمی دارد، باید سالی یک بار، حتی وقتی صحتمند است، به کلینیک برود تا جگر معاینه شود و در مورد دوا تصمیم گرفته شود.",
+        "ps": "هغه څوک چې تل پاتې هیپاتیت ب لري، باید په کال کې یو ځل، حتی کله چې روغ وي، کلینیک ته ولاړ شي، چې ځیګر یې معاینه شي او د درملو پرېکړه وشي.",
+        "en": "Someone with hepatitis B for life should have a check at the clinic once a year, even when well, to check the liver and decide on medicine."
       }
     },
     {
@@ -150,9 +150,9 @@
         "en": "At the hospital: hepatitis B, C treatment"
       },
       "text": {
-        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب کنترول می‌شود، در شفاخانهٔ امراض ساری کابل؛ از کلینیک دربارهٔ یک شفاخانهٔ نزدیک‌تر بپرسید. شخص گیج یا دارای خونریزی بستر می‌شود.",
-        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب کنټرولېږي، د کابل د ساري ناروغیو په روغتون کې؛ له کلینیک څخه د یوه نږدې روغتون په اړه وپوښتئ. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
-        "en": "Hepatitis C is cured with tablets and hepatitis B controlled at the infectious diseases hospital in Kabul; ask the clinic about a nearer one. A confused or bleeding person is admitted."
+        "fa": "هپاتیت سی با تابلیت علاج می‌شود و هپاتیت ب با دوا کنترول می‌شود، در بعضی شفاخانه‌ها؛ از کلینیک بپرسید کجا. شخص گیج یا دارای خونریزی بستر می‌شود.",
+        "ps": "هیپاتیت سي په ګولیو علاج کېږي او هیپاتیت ب په درملو کنټرولېږي، په ځینو روغتونونو کې؛ له کلینیک وپوښتئ چې چېرې. ګډوډ یا وینه بهېدونکی کس بستر کېږي.",
+        "en": "Hepatitis C is cured with tablets, and hepatitis B controlled with medicine, at some hospitals; ask the clinic where. A confused or bleeding person is admitted."
       }
     },
     {

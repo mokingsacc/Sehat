@@ -131,9 +131,9 @@
         "en": "At the clinic: first check, then hospital"
       },
       "text": {
-        "fa": "پوستهٔ صحی یا کلینیک زخم را پاک می‌کند، دوای درد و پیچکاری تیتانوس می‌دهد، و مارگزیده را به شفاخانه می‌فرستد. سیروم ضد گژدم شاید در مرکز صحی باشد؛ بپرسید.",
-        "ps": "روغتیايي پوسته یا کلینیک زخم پاکوي، د درد درمل او د تیټانوس پیچکاري ورکوي، او د مار چیچلی روغتون ته لېږي. د لړم ضد سیروم ښايي په روغتیايي مرکز کې وي؛ وپوښتئ.",
-        "en": "The health post or clinic cleans the wound, gives pain medicine and a tetanus injection, and sends snake bites on to the hospital. Scorpion antivenom may be at the health centre; ask."
+        "fa": "پوستهٔ صحی یا کلینیک زخم را پاک می‌کند، دوای درد و پیچکاری تیتانوس می‌دهد، و مارگزیده را به شفاخانه می‌فرستد. برای سیروم ضد زهر، از شفاخانه بپرسید.",
+        "ps": "روغتیايي پوسته یا کلینیک زخم پاکوي، د درد درمل او د تیټانوس پیچکاري ورکوي، او د مار چیچلی روغتون ته لېږي. د زهرو ضد سیروم لپاره له روغتون وپوښتئ.",
+        "en": "The health post or clinic cleans the wound, gives pain medicine and a tetanus injection, and sends snake bites on to the hospital. For antivenom, ask the hospital."
       }
     },
     {
@@ -145,9 +145,9 @@
         "en": "At the hospital: antivenom"
       },
       "text": {
-        "fa": "شفاخانه شخص را چند ساعت زیر نظر می‌گیرد، خون را معاینه می‌کند و اگر علایم زهر باشد سیروم ضد زهر را از راه رگ می‌دهد. پندیدگی، خونریزی و مشکل نفس را تداوی می‌کند. بپرسید کدام شفاخانه سیروم ضد زهر دارد.",
-        "ps": "روغتون کس څو ساعته څاري، وینه معاینه کوي او که د زهرو نښې وي د زهرو ضد سیروم د رګ له لارې ورکوي. پړسوب، وینه بهېدل او د ساه ستونزه درملنه کوي. وپوښتئ چې کوم روغتون د زهرو ضد سیروم لري.",
-        "en": "The hospital watches for hours, checks the blood, and gives antivenom by drip if there are signs of poisoning. It treats swelling, bleeding and breathing trouble. Ask which hospital holds antivenom."
+        "fa": "شفاخانه شخص را چند ساعت زیر نظر می‌گیرد، خون را معاینه می‌کند و اگر علایم زهر باشد سیروم ضد زهر را از راه رگ می‌دهد. پندیدگی، خونریزی و مشکل نفس را تداوی می‌کند. از شفاخانه بپرسید که سیروم ضد زهر دارد یا نه.",
+        "ps": "روغتون کس څو ساعته څاري، وینه معاینه کوي او که د زهرو نښې وي د زهرو ضد سیروم د رګ له لارې ورکوي. پړسوب، وینه بهېدل او د ساه ستونزه درملنه کوي. له روغتون وپوښتئ چې د زهرو ضد سیروم لري که نه.",
+        "en": "The hospital watches for hours, checks the blood, and gives antivenom by drip if there are signs of poisoning. It treats swelling, bleeding and breathing trouble. Ask the hospital if it has antivenom."
       }
     },
     {

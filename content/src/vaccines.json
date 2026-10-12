@@ -6,9 +6,9 @@
     "en": "Vaccines"
   },
   "summary": {
-    "fa": "واکسین‌های رایگان، طفل شما را از مرض‌های خطرناک محافظت می‌کنند.",
-    "ps": "وړیا واکسینونه ستاسو ماشوم له خطرناکو ناروغیو ساتي.",
-    "en": "Free vaccines protect your child from serious diseases."
+    "fa": "واکسین‌ها طفل شما را از مرض‌های خطرناک محافظت می‌کنند. باید رایگان باشند.",
+    "ps": "واکسینونه ستاسو ماشوم له خطرناکو ناروغیو ساتي. باید وړیا وي.",
+    "en": "Vaccines protect your child from serious diseases. They should be free."
   },
   "image": "img/symptoms/vaccine.webp",
   "lead": {
@@ -351,9 +351,9 @@
       "id": "vaccines.free",
       "icon": "clinic",
       "text": {
-        "fa": "واکسین در کلینیک‌های دولتی رایگان است.",
-        "ps": "واکسین په دولتي کلینیکونو کې وړیا دی.",
-        "en": "Vaccines are free at government clinics."
+        "fa": "واکسین در کلینیک‌های دولتی باید رایگان باشد؛ بپرسید.",
+        "ps": "واکسین په دولتي کلینیکونو کې باید وړیا وي؛ وپوښتئ.",
+        "en": "Vaccines should be free at government clinics; ask."
       }
     },
     {

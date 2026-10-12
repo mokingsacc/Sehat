@@ -86,14 +86,14 @@
       "id": "malnutrition.clinic",
       "type": "clinic",
       "title": {
-        "fa": "در کلینیک: وزن و خمیر مخصوص",
-        "ps": "په کلینیک کې: تول او ځانګړې خمیره",
-        "en": "At the clinic: weighing and special paste"
+        "fa": "در کلینیک: وزن و غذای مخصوص",
+        "ps": "په کلینیک کې: تول او ځانګړي خواړه",
+        "en": "At the clinic: weighing and special food"
       },
       "text": {
-        "fa": "کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، یک خمیر مخصوص از بادام‌زمینی می‌گیرد که به خانه ببرد، با معاینهٔ هفته‌وار.",
-        "ps": "روغتیايي کارکوونکی ماشوم تلي او د ناروغۍ لپاره یې معاینه کوي. هغه ډېر ډنګر ماشوم چې لا هم ښه خوري، د ممپلي یوه ځانګړې خمیره اخلي چې کور ته یې یوسي، د اونیزې معاینې سره.",
-        "en": "The health worker weighs the child and checks for illness. A very thin child who still eats well gets a special peanut paste to take home, with weekly checks."
+        "fa": "کارمند صحی طفل را وزن می‌کند و از نظر مریضی معاینه می‌کند. طفل بسیار لاغری که هنوز خوب می‌خورد، غذای مخصوص اطفال لاغر را می‌گیرد که به خانه ببرد، با معاینهٔ منظم.",
+        "ps": "روغتیايي کارکوونکی ماشوم تلي او د ناروغۍ لپاره یې معاینه کوي. هغه ډېر ډنګر ماشوم چې لا هم ښه خوري، د ډنګرو ماشومانو ځانګړي خواړه اخلي چې کور ته یې یوسي، له منظمې معاینې سره.",
+        "en": "The health worker weighs the child and checks for illness. A very thin child who still eats well gets special food for thin children to take home, with regular checks."
       }
     },
     {
@@ -226,9 +226,9 @@
           "id": "malnutrition.soon.fever",
           "icon": "fever",
           "text": {
-            "fa": "بسیار لاغر است و تب دارد",
-            "ps": "ډېر ډنګر دی او تبه لري",
-            "en": "is very thin and has a fever"
+            "fa": "بسیار لاغر است و تب کمتر از ۳۹ دارد",
+            "ps": "ډېر ډنګر دی او له ۳۹ کمه تبه لري",
+            "en": "is very thin and has a fever under 39"
           }
         }
       ]

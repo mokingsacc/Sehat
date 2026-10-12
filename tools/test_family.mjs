@@ -31,6 +31,8 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   eq(D.tdPlan({}), { n: 0, next: 0, from: null }, 'td: none given');
   eq(D.tdPlan({ td1: '2026-01-01' }), { n: 1, next: 1, from: '2026-01-29' }, 'td: dose 2 four weeks later');
   eq(D.tdPlan({ td1: '2026-01-01', td2: '2026-02-01' }).from, '2026-08-03', 'td: dose 3 six months later');
+  // the Td card: every woman, and a girl recorded as a child from her 12th birthday (Mo, 12 Oct 2026)
+  eq([D.tdFor({ pic: 'woman' }), D.tdFor({ pic: 'man' }), D.tdFor({ pic: 'child', sex: 'f', dob: '2014-10-12' }, '2026-10-12'), D.tdFor({ pic: 'child', sex: 'f', dob: '2014-10-13' }, '2026-10-12'), D.tdFor({ pic: 'child', sex: 'm', dob: '2010-01-01' }, '2026-10-12'), D.tdFor({ pic: 'child', sex: 'f' }, '2026-10-12')], [true, false, true, false, false, false], 'td: women, and girls of 12 or more');
   eq(D.tdPlan({ td1: 'a', td2: 'b', td3: '2026-01-01' }).from, '2027-01-01', 'td: dose 4 one year later');
   eq(D.tdPlan({ td1: 'a', td2: 'b', td3: 'c', td4: 'd', td5: 'e' }), { n: 5, next: -1, from: null }, 'td: all given');
   eq(D.tdPlan({ td1: '2026-01-01', td3: '2026-03-01' }).next, 1, 'td: a gap means dose 2 is next');

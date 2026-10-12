@@ -53,9 +53,9 @@
         "en": "Go the same day for the vaccine"
       },
       "text": {
-        "fa": "امروز به کلینیک یا شفاخانه بروید، حتی برای گزیدگی یا خراش کوچک از سگی که سالم به نظر می‌رسید. واکسین چند پیچکاری در حدود ۲ هفته است؛ همه را تمام کنید.",
-        "ps": "نن کلینیک یا روغتون ته ولاړ شئ، حتی د داسې سپي د کوچني چیچلو یا ګرولو لپاره چې روغ ښکارېده. واکسین څو پیچکارۍ دي چې شاوخوا ۲ اونۍ دوام کوي؛ ټولې بشپړې کړئ.",
-        "en": "Go to the clinic or hospital today, even for a small bite or scratch from a dog that looked well. The vaccine is several injections over about 2 weeks; finish them all."
+        "fa": "امروز به کلینیک یا شفاخانه بروید، حتی برای گزیدگی یا خراش کوچک از سگی که سالم به نظر می‌رسید. واکسین یک دوره پیچکاری در حدود ۲ هفته است که همان روز شروع می‌شود؛ همه را تمام کنید.",
+        "ps": "نن کلینیک یا روغتون ته ولاړ شئ، حتی د داسې سپي د کوچني چیچلو یا ګرولو لپاره چې روغ ښکارېده. واکسین د پیچکاریو یوه دوره ده چې شاوخوا ۲ اونۍ دوام کوي او په همغه ورځ پیلېږي؛ ټولې بشپړې کړئ.",
+        "en": "Go to the clinic or hospital today, even for a small bite or scratch from a dog that looked well. The vaccine is a course of injections over about 2 weeks, starting the same day; finish them all."
       }
     },
     {
@@ -112,9 +112,9 @@
         "en": "At the clinic: wound care and vaccines"
       },
       "text": {
-        "fa": "کارمند صحی زخم را دوباره می‌شوید و واکسین هاری و پیچکاری تیتانوس می‌دهد، و برای گزیدگی عمیق یا در دست انتی‌بیوتیک هم. واکسین هاری در مراکز دولتی رایگان است.",
-        "ps": "روغتیايي کارکوونکی زخم بیا مینځي او د هاري واکسین او د تیټانوس پیچکاري ورکوي، او د ژور یا د لاس د چیچلو لپاره انټي بیوټیک هم. د هاري واکسین په دولتي مرکزونو کې وړیا دی.",
-        "en": "The health worker washes the wound again and gives rabies vaccine and a tetanus injection, plus an antibiotic for deep or hand bites. Rabies vaccine is free at government centres."
+        "fa": "کارمند صحی زخم را دوباره می‌شوید و واکسین هاری و پیچکاری تیتانوس می‌دهد، و برای گزیدگی عمیق یا در دست انتی‌بیوتیک هم. واکسین هاری در مراکز دولتی باید رایگان باشد؛ بپرسید.",
+        "ps": "روغتیايي کارکوونکی زخم بیا مینځي او د هاري واکسین او د تیټانوس پیچکاري ورکوي، او د ژور یا د لاس د چیچلو لپاره انټي بیوټیک هم. د هاري واکسین په دولتي مرکزونو کې باید وړیا وي؛ وپوښتئ.",
+        "en": "The health worker washes the wound again and gives rabies vaccine and a tetanus injection, plus an antibiotic for deep or hand bites. Rabies vaccine should be free at government centres; ask."
       }
     },
     {

@@ -51,6 +51,24 @@
           }
         },
         {
+          "id": "red-flags.urgent.breathing",
+          "icon": "breathing-fast",
+          "text": {
+            "fa": "نفس‌تنگی شدید",
+            "ps": "سخته ساه لنډي",
+            "en": "Severe difficulty breathing"
+          }
+        },
+        {
+          "id": "red-flags.urgent.confused",
+          "icon": "sleepy",
+          "text": {
+            "fa": "گیچی، خواب‌آلودگی زیاد، یا بیهوشی",
+            "ps": "ګډوډ ذهن، ډېر خوب وړل، یا بې هوښي",
+            "en": "Confused, very drowsy, or unconscious"
+          }
+        },
+        {
           "id": "red-flags.urgent.headache",
           "icon": "headache",
           "text": {
@@ -69,15 +87,6 @@
           }
         },
         {
-          "id": "red-flags.urgent.breathing",
-          "icon": "breathing-fast",
-          "text": {
-            "fa": "نفس‌تنگی شدید",
-            "ps": "سخته ساه لنډي",
-            "en": "Severe difficulty breathing"
-          }
-        },
-        {
           "id": "red-flags.urgent.blood-vomit",
           "icon": "vomit",
           "text": {
@@ -93,15 +102,6 @@
             "fa": "درد شدید شکم",
             "ps": "د نس سخت درد",
             "en": "Severe belly pain"
-          }
-        },
-        {
-          "id": "red-flags.urgent.confused",
-          "icon": "sleepy",
-          "text": {
-            "fa": "گیچی، خواب‌آلودگی زیاد، یا بیهوشی",
-            "ps": "ګډوډ ذهن، ډېر خوب وړل، یا بې هوښي",
-            "en": "Confused, very drowsy, or unconscious"
           }
         }
       ]

@@ -131,10 +131,12 @@ function sayTTS(id, token) {
   u.onend = () => { if (token === P.token) advance(); };
   speechSynthesis.speak(u); return true;
 }
+function unfold(box) { box.classList.remove('folded'); const m = box.querySelector('.more'); if (m) m.remove(); }
 function mark(id) {
   $$('.speaking').forEach((e) => e.classList.remove('speaking'));
   if (!id) return;
   const el = document.querySelector(`[data-block="${CSS.escape(id)}"]`) || document.querySelector(`.spk[data-say="${CSS.escape(id)}"]`);
+  const fb = el && el.classList.contains('xtra') && el.closest('.alert.folded'); if (fb) unfold(fb); // reading a hidden sign opens its box
   if (el) { el.classList.add('speaking'); const r = el.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight - 90) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
 }
 function updateListenBar() {
@@ -626,6 +628,7 @@ function screenFirstAid() {
   return { html, nav: 'health' };
 }
 
+const FOLD = 6; // signs shown in a long red box before its "more signs" button
 function blockHtml(b, n) {
   if (b.type === 'lead') return `<div class="blk lead" data-block="${esc(b.id)}"><div class="body">${esc(L(b.text))}</div>${spk(b.id)}</div>`;
   if (b.type === 'step') return `<div class="blk step${b.picture ? ' haspic' : ''}" data-block="${esc(b.id)}">${b.picture ? `<img class="fig" src="${esc(b.picture)}" alt="" loading="lazy">` : ''}<div class="pic">${ic(b.icon)}</div><div class="body"><div class="h"><span class="num">${num(n)}</span><span>${esc(L(b.title))}</span></div><div class="x">${esc(L(b.text))}</div></div>${spk(b.id)}</div>`;
@@ -640,7 +643,12 @@ function blockHtml(b, n) {
   if (b.type === 'belief') return beliefHtml(b);
   if (b.type === 'alert' || b.type === 'dont') {
     const cls = b.type === 'dont' ? 'dont' : b.level === 'soon' ? 'soon' : 'urgent';
-    return `<div class="alert ${cls}"><div class="ah" data-block="${esc(b.id)}">${b.type === 'dont' ? ic('no') : I.warn.replace('<svg', '<svg class="ic" style="background:none;-webkit-mask:none;mask:none"')}<div style="flex:1">${esc(L(b.title))}</div>${spk(b.id)}</div>${b.items.map((it) => `<div class="item" data-block="${esc(it.id)}"><div class="pic">${ic(it.icon)}</div><div class="x">${esc(L(it.text))}</div>${spk(it.id)}</div>`).join('')}</div>`;
+    // Mo, 12 Oct 2026 (item 10): a long red box shows its first FOLD signs (the most important come first in the
+    // content); the rest wait behind one big "more signs" button. A box of 7 shows all 7 (a button in place of one sign
+    // saves nothing and hides a danger sign). "Listen to the page" still reads every sign: mark() opens the box when
+    // it reaches a hidden one.
+    const fold = cls === 'urgent' && b.items.length > FOLD + 1;
+    return `<div class="alert ${cls}${fold ? ' folded' : ''}"><div class="ah" data-block="${esc(b.id)}">${b.type === 'dont' ? ic('no') : I.warn.replace('<svg', '<svg class="ic" style="background:none;-webkit-mask:none;mask:none"')}<div style="flex:1">${esc(L(b.title))}</div>${spk(b.id)}</div>${b.items.map((it, i) => `<div class="item${fold && i >= FOLD ? ' xtra' : ''}" data-block="${esc(it.id)}"><div class="pic">${ic(it.icon)}</div><div class="x">${esc(L(it.text))}</div>${spk(it.id)}</div>`).join('')}${fold ? `<button class="more" data-action="moresigns">${I.plus}<span>${esc(T('moreSigns', { n: num(b.items.length - FOLD) }))}</span></button>` : ''}</div>`;
   }
   return '';
 }
@@ -1592,6 +1600,7 @@ document.addEventListener('click', async (e) => {
   if (d.studioslot) { ST.slot = d.studioslot; store.set('studioSlot', ST.slot); render(); return; }
   switch (d.action) {
     case 'listen': if (P.on && P.ids.length > 1) stopAudio(); else play(S.queueIds); return;
+    case 'moresigns': { const box = t.closest('.alert'); if (box) unfold(box); return; }
     case 'addkid': location.hash = '#/family/add'; return;
     case 'editkid': location.hash = '#/family/edit'; return;
     case 'addweight': location.hash = '#/growth/add'; return;

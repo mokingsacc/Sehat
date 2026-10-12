@@ -68,9 +68,9 @@
         "en": "Rinse the mouth"
       },
       "text": {
-        "fa": "اگر بیدار است، دهانش را با آب بشوید و آب را بیرون بیندازد. چیز دیگری برای خوردن یا نوشیدن ندهید، مگر کارمند صحی بگوید.",
-        "ps": "که ویښ وي، خوله دې په اوبو ومینځي او اوبه دې بهر وغورځوي. بل څه د خوړلو یا څښلو لپاره مه ورکوئ، مګر دا چې روغتیايي کارکوونکی ووايي.",
-        "en": "If they are awake, let them rinse the mouth with water and spit it out. Give nothing else to eat or drink unless a health worker says so."
+        "fa": "اگر بیدار است، دهانش را با آب بشوید و آب را بیرون بیندازد. اگر وایتکس یا تیزاب خورده و قورت داده می‌تواند، کمی کمی آب بدهید. چیز دیگری ندهید.",
+        "ps": "که ویښ وي، خوله دې په اوبو ومینځي او اوبه دې بهر وغورځوي. که یې وایټکس یا تېزاب خوړلی وي او تېرولی شي، لږ لږ اوبه ورکړئ. بل څه مه ورکوئ.",
+        "en": "If they are awake, let them rinse the mouth with water and spit it out. After bleach or acid, give small sips of water if they can swallow. Give nothing else."
       }
     },
     {
@@ -282,11 +282,11 @@
     "WHO/UNICEF World report on child injury prevention (2008): poisoning"
   ],
   "review": [
-    "Rinsing the mouth is reasonable for corrosives and pesticides. ERC 2025 advises against giving water or milk as a 'dilution' antidote. The text says 'give nothing else unless a health worker says so'.",
     "Organophosphate signs are simplified to 'sweat, drool or twitch'. Small pupils are left out because they are hard to judge.",
     "Rat poison: Afghan rat poisons may be anticoagulants (bleeding days later), zinc or aluminium phosphide ('rice tablet', highly lethal), or others. Phosphide poisoning gives off a gas. Consider adding 'keep the room aired' if it is common locally.",
     "Iron tablets are given as an example of a delayed-harm medicine (pregnancy iron is in many homes).",
     "Self-harm by poisoning (pesticides) is a major cause of suicide in the region. The link block goes to the Stress page. Check the tone.",
-    "Home safety section (2026-10-07): new link poisoning.storage to the safe-storage page (prevention was not on this page before)."
+    "Home safety section (2026-10-07): new link poisoning.storage to the safe-storage page (prevention was not on this page before).",
+    "Mo, 12 Oct 2026 (his answers to the 52 open calls): after bleach or acid: rinse the mouth, small sips of water if they can swallow, do not make them vomit, hospital now (item 2, poisoning.mouth; WHO Pocket Book 2013 1.6.2 allows water). Kerosene, medicines and farm sprays: nothing else to drink."
   ]
 }

@@ -51,6 +51,11 @@
    "ps": "دا پاڼه واورئ",
    "en": "Listen to this page"
   },
+  "moreSigns": {
+   "fa": "{n} علامهٔ دیگر را ببینید",
+   "ps": "{n} نورې نښې وګورئ",
+   "en": "Show {n} more signs"
+  },
   "playing": {
    "fa": "در حال خواندن…",
    "ps": "لوستل کېږي…",

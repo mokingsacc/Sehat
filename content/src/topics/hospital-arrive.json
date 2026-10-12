@@ -130,12 +130,12 @@
           }
         },
         {
-          "id": "hospital-arrive.urgent.drink",
-          "icon": "no-drink",
+          "id": "hospital-arrive.urgent.chest",
+          "icon": "heart",
           "text": {
-            "fa": "چیزی نوشیده نمی‌تواند، یا شیر خورده نمی‌تواند",
-            "ps": "څه نشي څښلای، یا تی نشي رودلای",
-            "en": "cannot drink or breastfeed"
+            "fa": "درد سینه دارد، یا رویش کج شده یا بازویش ضعیف است",
+            "ps": "د سینې درد لري، یا مخ یې کوږ شوی یا لاس یې کمزوری دی",
+            "en": "has chest pain, a drooping face or a weak arm"
           }
         },
         {
@@ -148,21 +148,12 @@
           }
         },
         {
-          "id": "hospital-arrive.urgent.chest",
-          "icon": "heart",
+          "id": "hospital-arrive.urgent.drink",
+          "icon": "no-drink",
           "text": {
-            "fa": "درد سینه دارد، یا رویش کج شده یا بازویش ضعیف است",
-            "ps": "د سینې درد لري، یا مخ یې کوږ شوی یا لاس یې کمزوری دی",
-            "en": "has chest pain, a drooping face or a weak arm"
-          }
-        },
-        {
-          "id": "hospital-arrive.urgent.dehydrated",
-          "icon": "eye-sunken",
-          "text": {
-            "fa": "اسهال دارد و چشمانش گود رفته، یا خیلی سست است",
-            "ps": "نس ناستی لري او سترګې یې ننوتې دي، یا ډېر سست دی",
-            "en": "has diarrhoea with sunken eyes, or is very floppy"
+            "fa": "چیزی نوشیده نمی‌تواند، یا شیر خورده نمی‌تواند",
+            "ps": "څه نشي څښلای، یا تی نشي رودلای",
+            "en": "cannot drink or breastfeed"
           }
         },
         {
@@ -172,6 +163,15 @@
             "fa": "دست‌هایش سرد است و نبضش خیلی تیز می‌زند",
             "ps": "لاسونه یې ساړه دي او نبض یې ډېر چټک وهي",
             "en": "has cold hands with a very fast pulse"
+          }
+        },
+        {
+          "id": "hospital-arrive.urgent.dehydrated",
+          "icon": "eye-sunken",
+          "text": {
+            "fa": "اسهال دارد و چشمانش گود رفته، یا خیلی سست است",
+            "ps": "نس ناستی لري او سترګې یې ننوتې دي، یا ډېر سست دی",
+            "en": "has diarrhoea with sunken eyes, or is very floppy"
           }
         },
         {

@@ -145,39 +145,12 @@
           }
         },
         {
-          "id": "falls-fractures.urgent.height",
-          "icon": "house",
-          "text": {
-            "fa": "از بام یا جای بلند افتاده",
-            "ps": "له بام یا لوړ ځای لوېدلی",
-            "en": "fell from a roof or a high place"
-          }
-        },
-        {
           "id": "falls-fractures.urgent.spine",
           "icon": "stiff-neck",
           "text": {
             "fa": "درد گردن یا کمر، یا دست و پای بی‌حس یا ضعیف دارد",
             "ps": "د غاړې یا ملا درد، یا بې‌حسه یا کمزوري لاسونه او پښې لري",
             "en": "has neck or back pain, or numb or weak limbs"
-          }
-        },
-        {
-          "id": "falls-fractures.urgent.limb",
-          "icon": "wound",
-          "text": {
-            "fa": "دست یا پایش کج شده یا کار نمی‌کند",
-            "ps": "لاس یا پښه یې کږه شوې یا کار نه کوي",
-            "en": "has an arm or leg that is bent or cannot be used"
-          }
-        },
-        {
-          "id": "falls-fractures.urgent.open",
-          "icon": "bleeding",
-          "text": {
-            "fa": "استخوانش از پوست بیرون شده",
-            "ps": "هډوکی یې له پوستکي وتلی",
-            "en": "has bone showing through the skin"
           }
         },
         {
@@ -196,6 +169,33 @@
             "fa": "درد شکم یا سینه، یا مشکل نفس دارد",
             "ps": "د ګېډې یا سینې درد، یا د ساه ستونزه لري",
             "en": "has belly or chest pain, or trouble breathing"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.height",
+          "icon": "house",
+          "text": {
+            "fa": "از بام یا جای بلند افتاده",
+            "ps": "له بام یا لوړ ځای لوېدلی",
+            "en": "fell from a roof or a high place"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.open",
+          "icon": "bleeding",
+          "text": {
+            "fa": "استخوانش از پوست بیرون شده",
+            "ps": "هډوکی یې له پوستکي وتلی",
+            "en": "has bone showing through the skin"
+          }
+        },
+        {
+          "id": "falls-fractures.urgent.limb",
+          "icon": "wound",
+          "text": {
+            "fa": "دست یا پایش کج شده یا کار نمی‌کند",
+            "ps": "لاس یا پښه یې کږه شوې یا کار نه کوي",
+            "en": "has an arm or leg that is bent or cannot be used"
           }
         }
       ]

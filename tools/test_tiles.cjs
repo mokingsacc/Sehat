@@ -36,7 +36,7 @@ function look(MIN) {
   const order = [...main.querySelectorAll('.alert, .blk.step, .blk.clinic, .trow, .erow, .em-car, .em-ages, .group-h, .blk.link')].map((e) =>
     e.matches('.alert.urgent') ? 'red' : e.matches('.alert.soon') ? 'amber' : e.matches('.alert.dont') ? 'dont' : e.matches('.em-car') ? 'car' : e.matches('.em-ages') ? 'cpr'
       : e.matches('.erow') ? 'now' : e.matches('.trow.tool') ? 'tool' : e.matches('.trow') ? 'page' : e.matches('.group-h') ? 'head:' + e.dataset.block : 'step');
-  const signs = [...main.querySelectorAll('.alert .item, .alert .ah')].map((e) => { const s = e.querySelector('.spk'); const r = s && s.getBoundingClientRect(); return { id: e.dataset.block, say: s && s.dataset.say, size: r ? Math.min(r.width, r.height) : 0 }; });
+  const signs = [...main.querySelectorAll('.alert .item, .alert .ah')].filter(vis).map((e) => { const s = e.querySelector('.spk'); const r = s && s.getBoundingClientRect(); return { id: e.dataset.block, say: s && s.dataset.say, size: r ? Math.min(r.width, r.height) : 0 }; });
   const blocks = [...main.querySelectorAll('[data-block]')].filter(vis).map((b) => ({ id: b.dataset.block, spk: !!(b.querySelector('.spk, [data-say]') || b.matches('[data-say]')) }));
   const small = [...main.querySelectorAll('.spk')].filter(vis).map((s) => { const r = s.getBoundingClientRect(); return Math.min(r.width, r.height); }).filter((x) => x < MIN - 0.5);
   // text with no speaker over it (the age pictures are read by the "Who is sick?" speaker above them)
@@ -51,7 +51,9 @@ function look(MIN) {
   const links = [...main.querySelectorAll('a[href^="#/"]')].map((a) => a.getAttribute('href'));
   const tabs = [...main.querySelectorAll('.agetab')].map((a) => ({ href: a.getAttribute('href'), on: a.classList.contains('on') }));
   const redItems = [...main.querySelectorAll('.alert.urgent .item')].map((e) => e.dataset.block);
-  return { order, signs, blocks, small, unspoken, rowsNoPic, links, tabs, redItems, scroll: document.scrollingElement.scrollWidth - innerWidth, h1: (main.querySelector('h1') || {}).textContent };
+  // a long red box: its first 6 signs and one big "more signs" button (Mo, 12 Oct 2026)
+  const folded = [...main.querySelectorAll('.alert.folded')].map((a) => { const m = a.querySelector('.more'), r = m && m.getBoundingClientRect(); return { shown: [...a.querySelectorAll('.item')].filter(vis).length, hidden: a.querySelectorAll('.item.xtra').length, h: r ? r.height : 0, w: r ? r.width : 0 }; });
+  return { order, signs, folded, blocks, small, unspoken, rowsNoPic, links, tabs, redItems, scroll: document.scrollingElement.scrollWidth - innerWidth, h1: (main.querySelector('h1') || {}).textContent };
 }
 
 (async () => {
@@ -92,6 +94,12 @@ function look(MIN) {
         if (ages.length > 1) ok(m.tabs.filter((t) => t.on).length === 1 && m.tabs.find((t) => t.on).href.endsWith('/' + age), `${tag}: this age's picture is the one picked`);
         // a speaker on every sign and every block
         ok(m.signs.length > 1 && m.signs.every((s) => s.say === s.id && book.narration[s.id] && s.size >= 55.5), `${tag}: every sign has its own speaker of 56 px (${m.signs.filter((s) => !(s.say === s.id && s.size >= 55.5)).map((s) => s.id).join(' ')})`);
+        for (const f of m.folded) ok(f.shown === 6 && f.hidden >= 2 && f.h >= 56 && f.w > 250, `${tag}: a long red box shows 6 signs and a big "more" button (${JSON.stringify(f)})`);
+        if (m.folded.length) {
+          for (let k = 0; k < 4 && await p.$('main .alert.folded .more'); k++) { await p.click('main .alert.folded .more'); await p.waitForTimeout(100); }
+          const open = await p.evaluate(() => ({ left: document.querySelectorAll('main .alert.folded, main .alert .more').length, hid: [...document.querySelectorAll('main .alert.urgent .item')].filter((e) => !e.getBoundingClientRect().height).length }));
+          ok(!open.left && !open.hid, `${tag}: the "more" button shows every sign (${JSON.stringify(open)})`);
+        }
         ok(m.blocks.every((x) => x.spk), `${tag}: every narrated block has a speaker (${m.blocks.filter((x) => !x.spk).map((x) => x.id).join(' ')})`);
         ok(!m.small.length, `${tag}: speakers at least 56 px (${m.small.join(' ')})`);
         ok(!m.unspoken.length, `${tag}: every text has a speaker (${m.unspoken.slice(0, 3).join(' | ')})`);

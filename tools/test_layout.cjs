@@ -78,7 +78,7 @@ function measure(scale) {
     p.on('pageerror', (e) => errs.push('pageerror ' + e.message));
     await p.route(/workers\.dev/, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{}' }));
     await p.addInitScript(([lg, CV, kid]) => { localStorage.setItem('fhb.lang', JSON.stringify(lg)); localStorage.setItem('fhb.voice', JSON.stringify('f')); localStorage.setItem('fhb.consent', JSON.stringify({ v: CV, ok: false, day: '2026-10-07' })); if (kid) { localStorage.setItem('fhb.kids', JSON.stringify([kid])); localStorage.setItem('fhb.kid', JSON.stringify(kid.id)); localStorage.setItem('fhb.famnotes', JSON.stringify([{ id: 'g1', d: '2026-10-08', t: Date.now(), rec: 'a1abcd' }, { id: 'g2', d: '2026-10-01', t: 0, rec: 'a2abcd' }])); } }, [lang, book.config.consentVersion, kids ? KID : null]);
-    for (const [name, hash] of [['health', '#/home'], ['home', '#/house'], ['family', '#/family'], ['emergency', '#/emergency'], ['children', '#/children'], ['topic', '#/topic/fever'], ['food-help', '#/s/food-help'], ['belief', '#/topic/food-cough']]) {
+    for (const [name, hash] of [['health', '#/home'], ['home', '#/house'], ['family', '#/family'], ['emergency', '#/emergency'], ['children', '#/children'], ['topic', '#/topic/fever'], ['food-help', '#/s/food-help'], ['belief', '#/topic/food-cough'], ['redbox', '#/topic/head-injury']]) {
       if (scale !== 1 && !['health', 'home', 'family'].includes(name)) continue;
       if (kids && name !== 'family' && name !== 'health') continue;
       await p.goto(BASE + 'index.html' + hash); await p.waitForSelector('main .top, main .topic-hero', { timeout: 8000 }).catch(() => {});
@@ -100,6 +100,16 @@ function measure(scale) {
           ok(['helps', 'unproven', 'harm'].every((lv) => bl.some((x) => x.lv.includes(lv))) && bl.every((x) => x.spk === x.n + 1 && x.w <= width), `${tag}: the three "what is true" boxes, a speaker on the heading and on every line, inside the screen`, bl);
         }
         if (name === 'emergency') ok(!m.pill, `${tag}: the Emergency screen has no Emergency button`);
+        if (name === 'redbox') { // a long red box (11 signs): 6 shown, then one big "more signs" button; tapping it shows all 11
+          const mb = await p.evaluate(() => { const a = document.querySelector('main .alert.urgent.folded'), m = a && a.querySelector('.more'), r = m && m.getBoundingClientRect(), ar = a && a.getBoundingClientRect(); const tx = m && document.createRange(); if (tx) tx.selectNodeContents(m.querySelector('span')); const t = tx && [...tx.getClientRects()]; return a && { shown: [...a.querySelectorAll('.item')].filter((e) => e.getBoundingClientRect().height > 0).length, h: r.height, inBox: r.left >= ar.left - 1 && r.right <= ar.right + 1, textIn: t.every((q) => q.left >= r.left && q.right <= r.right), fs: parseFloat(getComputedStyle(m).fontSize) }; });
+          ok(mb && mb.shown === 6 && mb.h >= 56 && mb.inBox && mb.textIn && mb.fs >= 18, `${tag}: head injury's red box shows 6 signs and a big "more signs" button inside the box`, mb);
+          ok(m.probs.length === 0 && m.scroll <= 0, `${tag}: the folded red box: no text touches a speaker, no sideways scroll`, [m.probs.slice(0, 4), m.scroll]);
+          await p.click('main .alert.folded .more'); await p.waitForTimeout(150);
+          const all = await p.evaluate(() => { const a = document.querySelector('main .alert.urgent'); return { n: [...a.querySelectorAll('.item')].filter((e) => e.getBoundingClientRect().height > 0).length, more: !!a.querySelector('.more') }; });
+          const m2 = await p.evaluate(measure, scale);
+          ok(all.n === 11 && !all.more && m2.probs.length === 0 && m2.scroll <= 0, `${tag}: "more signs" shows all 11 signs, the button goes, the layout stays clean`, [all, m2.probs.slice(0, 4)]);
+          if (OUT) await p.screenshot({ path: `${OUT}/${tag}-redbox.png`, fullPage: true });
+        }
       }
     }
     ok(errs.length === 0, `${tag}: no page errors`, errs);

@@ -5593,3 +5593,102 @@ For Mo's check (pictures):
 3. The choking-baby back-blows card shows the hand coming down; the heat-stroke card shows the water being poured.
 4. The growth guide uses the length-height frames, a set that is not live; they were checked right on 10 Oct.
 5. The bleeding tourniquet card keeps its drawing until you decide on the held tourniquet set.
+
+## Mo's answers to the 52 open calls (12 Oct 2026)
+
+Mo answered all 52 open calls. He took the starred option for every item, except 38 = B (name each medicine) and 40 = B (make service details general now). The sources were `audit/medical-2026-10-08/FOR-MO.md`, `research/screening.md` section 7, `research/food-as-medicine-CALLS.md`, `research/regional-burden-and-treatment.md` section 11, and `audit/animations-2026-10-10/REVIEW.md`. Each source is now marked "Decided by Mo, 12 Oct 2026".
+
+### Changed in the app
+
+- **Item 2: bleach or acid.** poisoning.mouth now says: rinse the mouth and spit it out; after bleach or acid, give small sips of water if they can swallow; give nothing else. The step "do not make them vomit" stays.
+- **Item 3: first fit ever.** This is now a red sign, hospital now: `seizures.urgent.first-ever` and `epilepsy.urgent.first-ever`. The amber `*.soon.first` items are gone. The "What is wrong?" fits page also shows it in its red box.
+- **Item 4: thin child with fever.** malnutrition.soon.fever now reads "fever under 39". A fever of 39 or more, or a cold body, was already red (growth.urgent.fever, malnutrition.urgent.fever).
+- **Item 8: paracetamol.** hepatitis.nomeds now says: only a little, no more than 2 grams a day (4 tablets of 500 mg).
+- **Item 10: long red boxes.** A red box with more than 7 signs shows its first 6. One big button ("Show N more signs", `ui.moreSigns`, 58 px high, 18 px bold) shows the rest.
+  - A box of 7 shows all 7. A button in place of one sign saves nothing and would hide a danger sign.
+  - "Listen to the page" still reads every sign, and opens the box when it reaches a hidden one.
+  - The most important signs now come first in head-injury, fever, after-birth, falls-fractures, first-aid, birth-plan, hospital-arrive, red-flags and seizures.
+  - Code: `blockHtml` and `mark()` in `js/app.js`, `.alert.folded` in `css/app.css`.
+  - Tests: `tools/test_tiles.cjs` checks the visible signs and every "more" button. `tools/test_layout.cjs` checks head injury at 320, 360 and 412 px.
+- **Item 11: alcohol.** It is no longer named in head-injury.urgent.drugs ("had taken opium or other drugs").
+- **Item 14: cord care.** newborn.cord: chlorhexidine if the clinic gave it; nothing else on the cord.
+- **Item 15: Td card for a teenage girl.** A girl recorded as a child gets the tetanus vaccine row from her 12th birthday. It is on her record, opens `#/family/td`, and her card line shows her next Td dose. The rule is `tdFor()` in `js/family-data.js`, tested in `tools/test_family.mjs`. Women are unchanged.
+- **Item 16: calcium.** pregnancy-care.iron and anaemia.iron-pregnancy now say: ask the clinic for calcium tablets; they help prevent fits; take them at another time of day.
+- **Item 17: birth spacing at the clinic.** hospital-places.clinic now ends "and advise on spacing children".
+- **Item 18: spacing children.** after-birth.spacing says "ask the midwife about spacing your children". There is no full birth-spacing page in the app.
+- **Item 20: hepatitis B test.** pregnancy-care.clinic now says the midwife tests blood for anaemia and hepatitis B.
+- **Item 21: hepatitis B carrier.** hepatitis.carrier now asks for a yearly check at the clinic.
+- **Item 24: breast lump while breastfeeding.** women-signs.soon.milk-lump now reads "stays more than 2 weeks". The same line is in a new amber box on after-birth: `after-birth.week` and `after-birth.week.milk-lump`, which uses the same words, so the clip can be copied.
+- **Item 25: breast awareness, words only.** women-signs.know: know how your breasts normally look and feel. checks-women.breasts: a yearly breast check at the clinic from 40.
+- **Item 26: cervix test.** checks-women.cervix and women-signs.cervix-test now say "ask at the provincial hospital whether they do it".
+- **Item 30: naswar.** dental.naswar adds "look in your mouth each month in a mirror". checks-men already had the monthly mirror check.
+- **Item 31: TB.** tb.soon.fever now reads "soaking night sweats". tb.negative: if the test finds no TB but you are still unwell, go back.
+- **Item 32: anaemia.** The new early-signs.soon.anaemia reads "Pale and tired: a man, or a woman whose periods have stopped" (clinic this week). The "What is wrong?" tired page shows it for older people.
+- **Item 35: children's cancer signs.** child-signs is now under the Children button, in a "Health checks" group. It is still also under Early signs.
+- **Item 36: women's bleeding tile.** The new "What is wrong?" tile `womenbleed` has three ages, each with its own red box:
+  - pregnant: pregnancy danger signs;
+  - after a birth: after-birth danger signs;
+  - older: red-flags, plus belly pain and bleeding after a missed period, shock and fainting.
+  - The amber box lists bleeding after sex or between periods, and bleeding after the periods have stopped.
+  - The picture is a stand-in, cropped from the mind tile (a woman with a hand on her shoulder), until the ChatGPT picture arrives.
+  - The lump tile already existed (9 Oct).
+- **Item 38: medicine names.** The clinic gives each medicine. Named now:
+  - danger-child.clinic: "a first dose of an antibiotic, such as amoxicillin";
+  - malaria.clinic: "plus primaquine";
+  - scabies.hospital: ivermectin.
+  - Typhoid keeps "often azithromycin" and does not name ciprofloxacin, which was dropped on 8 Oct (audit IL-6) for resistance.
+- **Item 39: "free".** The word "free" now reads "should be free; ask" (fa باید رایگان باشد؛ بپرسید, ps باید وړیا وي؛ وپوښتئ) in these places: tb, vaccines, hospital-places, hospital-tests, checks-men, checks-women, child-signs, early-signs, pneumonia-adult, dog-bite and the vaccines film. In some titles the word was just dropped (tb.family, tb.hospital, early-signs.tb).
+- **Item 40: service details are general.**
+  - Rabies: "a course of injections over about 2 weeks, starting the same day".
+  - Antivenom: "ask the hospital".
+  - Malnutrition and growth: "special food for thin children" and "regular checks" at the clinic.
+  - TB: "the sputum you cough up for a test", with no machine name and no timing.
+  - Oxygen: at the hospital, no longer at the clinic.
+  - No district hospital or Aybak for the dentist, and no city for hepatitis or animal illness.
+  - Kabul stays where it names where cancer is treated (early-signs, women-signs, child-signs) and on the general pages hospital-places (referral to Mazar-i-Sharif or Kabul) and hospital-tests (CT and MRI scanners).
+- **Item 52: choking tile.** It now shows the adult belly thrust (choking-adult frame 3) instead of the baby back blows. That frame shows white caps (item 47); swap it when the new pictures come.
+
+### Already so (no change)
+
+- 1: Child chest indrawing is red.
+- 5: Sunken eyes alone means the clinic today.
+- 6: back-pain.soon has weight loss and night pain.
+- 7: The sugar numbers.
+- 9: There is no altitude note.
+- 12, 13: CPR breaths, newborn head level and the alone rule.
+- 19: hepatitis.urgent.pregnant and the yellow tile mean hospital now.
+- 22: women-signs.soon.bleeding-sex.
+- 23: women-signs.soon.belly.
+- 27: The women's checks page is under Early signs, for everyone.
+- 28: There are no age limits on the cancer signs.
+- 29: checks-men has the testicle lump.
+- 33: child-signs.dont.hope.
+- 34: The do-not-pay box, including PSA.
+- 37: There are no liver cancer scans.
+- 41: The food pages.
+- 42: The chlorine dose.
+- 43: Ash when there is no soap.
+- 44: The ORS packet comes first, with no home-made recipe.
+- 45: سالک.
+- 46: WHO 2006 growth reference.
+- 47, 48, 49, 51: Pictures; prompts are written separately.
+- 50: spine-hold frames 2 and 3 cannot be cropped cleanly (the wall is behind the people), so they are left until the new pictures arrive.
+
+### For native speakers
+
+These lines are new:
+
+- seizures.urgent.first-ever: این اولین تشنج او در زندگی بود / دا یې په ژوند کې لومړی اختلاج و
+- epilepsy.urgent.first-ever: اولین تشنج در زندگی / په ژوند کې لومړی اختلاج
+- after-birth.week: برای این حالت، همین هفته به کلینیک بروید: / د دې حالت لپاره، همدا اونۍ کلینیک ته ولاړ شئ:
+- early-signs.soon.anaemia: رنگ پریده و خسته: مرد، یا زنی که عادت ماهوارش قطع شده / رنګ الوتی او ستړی: نارینه، یا هغه ښځه چې میاشتنی عادت یې بند شوی
+- ui.sym.womenbleed: خونریزی زنانه / د ښځو وینه بهېدل
+- ui.ask.missed-period: درد شکم و خونریزی، وقتی عادت ماهوار به وقتش نیامده بود / د نس درد او وینه، کله چې میاشتنی عادت په خپل وخت نه وي راغلی
+- ui.moreSigns (button text, not narrated): {n} علامهٔ دیگر را ببینید / {n} نورې نښې وګورئ
+
+Voice clips are needed for:
+
+- 8 new ids: the 7 above with clips, plus ui.ask.womenbleed.lead.
+- 48 changed ids: the list is in the commit message.
+
+Two ids are gone: seizures.soon.first and epilepsy.soon.first. Their old clips are still in audio/; build.py lists them as "audio without text id".

@@ -7,9 +7,9 @@
     "en": "TB (tuberculosis)"
   },
   "summary": {
-    "fa": "سرفه طولانی؟ معاینه شوید. توبرکلوز علاج دارد و تداوی‌اش رایگان است.",
-    "ps": "اوږد ټوخی؟ معاینه شئ. نری رنځ علاج لري او درملنه یې وړیا ده.",
-    "en": "Long cough? Get tested. TB is curable and treatment is free."
+    "fa": "سرفه طولانی؟ معاینه شوید. توبرکلوز علاج دارد و تداوی‌اش باید رایگان باشد.",
+    "ps": "اوږد ټوخی؟ معاینه شئ. نری رنځ علاج لري او درملنه یې باید وړیا وي.",
+    "en": "Long cough? Get tested. TB is curable, and treatment should be free."
   },
   "image": "img/symptoms/longcough.webp",
   "blocks": [
@@ -54,9 +54,9 @@
           "id": "tb.soon.fever",
           "icon": "fever",
           "text": {
-            "fa": "تب یا عرق شبانه که خوب نمی‌شود",
-            "ps": "تبه یا د شپې خولې چې نه ښه کېږي",
-            "en": "fever or night sweats that do not go away"
+            "fa": "تب یا عرق شبانه که کالا را تر می‌کند و خوب نمی‌شود",
+            "ps": "تبه یا د شپې داسې خولې چې جامې لمدې کړي او نه ښه کېږي",
+            "en": "fever or soaking night sweats that do not go away"
           }
         },
         {
@@ -84,14 +84,14 @@
       "type": "step",
       "icon": "clinic",
       "title": {
-        "fa": "معاینه و دوا رایگان است",
-        "ps": "معاینه او درمل وړیا دي",
-        "en": "Tests and medicine are free"
+        "fa": "معاینه و دوا باید رایگان باشد",
+        "ps": "معاینه او درمل باید وړیا وي",
+        "en": "Tests and medicine should be free"
       },
       "text": {
-        "fa": "معاینه و تداوی توبرکلوز در کلینیک‌های دولتی رایگان است. توبرکلوز علاج می‌شود.",
-        "ps": "د نري رنځ معاینه او درملنه په دولتي کلینیکونو کې وړیا ده. نری رنځ روغېدای شي.",
-        "en": "TB tests and treatment are free at government clinics. TB can be cured."
+        "fa": "معاینه و تداوی توبرکلوز در کلینیک‌های دولتی باید رایگان باشد؛ بپرسید. توبرکلوز علاج می‌شود.",
+        "ps": "د نري رنځ معاینه او درملنه په دولتي کلینیکونو کې باید وړیا وي؛ وپوښتئ. نری رنځ روغېدای شي.",
+        "en": "TB tests and treatment should be free at government clinics; ask. TB can be cured."
       }
     },
     {
@@ -134,9 +134,9 @@
         "en": "Check the whole family"
       },
       "text": {
-        "fa": "همه کسانی که با مریض توبرکلوز زندگی می‌کنند، حتی اگر صحتمند معلوم شوند، باید معاینه شوند. اطفال کمتر از ۵ سال برای چند ماه هر روز یک دوای رایگان می‌گیرند تا توبرکلوز نگیرند؛ آن را تمام کنید.",
-        "ps": "ټول هغه کسان چې د نري رنځ له ناروغ سره اوسېږي، که روغ هم ښکاري، باید معاینه شي. تر ۵ کلونو کم ماشومان د څو میاشتو لپاره هره ورځ یو وړیا درمل اخلي چې نری رنځ ونه نیسي؛ هغه بشپړ کړئ.",
-        "en": "Everyone living with a person with TB should be checked, even if well. Children under 5 get a free daily medicine for some months so they do not get TB; finish it."
+        "fa": "همه کسانی که با مریض توبرکلوز زندگی می‌کنند، حتی اگر صحتمند معلوم شوند، باید معاینه شوند. اطفال کمتر از ۵ سال برای چند ماه هر روز یک دوا می‌گیرند تا توبرکلوز نگیرند؛ آن را تمام کنید.",
+        "ps": "ټول هغه کسان چې د نري رنځ له ناروغ سره اوسېږي، که روغ هم ښکاري، باید معاینه شي. تر ۵ کلونو کم ماشومان د څو میاشتو لپاره هره ورځ یو درمل اخلي چې نری رنځ ونه نیسي؛ هغه بشپړ کړئ.",
+        "en": "Everyone living with a person with TB should be checked, even if well. Children under 5 get a daily medicine for some months so they do not get TB; finish it."
       }
     },
     {
@@ -159,28 +159,28 @@
       "type": "step",
       "icon": "calendar",
       "title": {
-        "fa": "اگر معاینه منفی بود",
-        "ps": "که معاینه منفي وه",
-        "en": "If the test is negative"
+        "fa": "اگر توبرکلوز پیدا نشد",
+        "ps": "که نری رنځ ونه موندل شو",
+        "en": "If no TB is found"
       },
       "text": {
-        "fa": "اگر معاینات توبرکلوز منفی بود اما تب، عرق یا کم شدن وزن ادامه داشت، دوباره بروید. کلینیک شما را برای معاینات دیگر به شفاخانه می‌فرستد.",
-        "ps": "که د نري رنځ معاینې منفي وې خو تبه، خولې یا د وزن کمېدل دوام ولري، بیا ولاړ شئ. کلینیک مو د نورو معایناتو لپاره روغتون ته لېږي.",
-        "en": "If the TB tests are negative but the fever, sweats or weight loss go on, go back. The clinic sends you to the hospital for other tests."
+        "fa": "اگر در معاینه توبرکلوز پیدا نشد اما هنوز مریض هستید، دوباره بروید. کلینیک شما را برای معاینات دیگر به شفاخانه می‌فرستد.",
+        "ps": "که په معاینه کې نری رنځ ونه موندل شو خو لا هم ناروغ یاست، بیا ولاړ شئ. کلینیک مو د نورو معایناتو لپاره روغتون ته لېږي.",
+        "en": "If the test finds no TB but you are still unwell, go back. The clinic sends you to the hospital for other tests."
       }
     },
     {
       "id": "tb.clinic",
       "type": "clinic",
       "title": {
-        "fa": "در کلینیک: معاینهٔ بلغم و دوای رایگان",
-        "ps": "په کلینیک کې: د بلغم معاینه او وړیا درمل",
-        "en": "At the clinic: sputum test, free medicine"
+        "fa": "در کلینیک: معاینهٔ بلغم و دوا",
+        "ps": "په کلینیک کې: د بلغم معاینه او درمل",
+        "en": "At the clinic: sputum test and medicine"
       },
       "text": {
-        "fa": "بلغم می‌دهید؛ نتیجه در یکی دو روز می‌آید. اگر مثبت باشد، کلینیک فوراً تابلیت‌ها را شروع می‌کند و هر ماه شما را می‌بیند. فامیل هم معاینه می‌شود.",
-        "ps": "بلغم ورکوئ؛ پایله په یوه دوه ورځو کې راځي. که مثبت وي، کلینیک سمدستي ګولۍ پیلوي او هره میاشت مو ویني. کورنۍ هم معاینه کېږي.",
-        "en": "You give sputum; the result comes in a day or two. If positive, the clinic starts the tablets at once and sees you monthly. The family is checked too."
+        "fa": "بلغم سرفه را برای معاینه می‌دهید. اگر توبرکلوز نشان داد، کلینیک فوراً تابلیت‌ها را شروع می‌کند و هر ماه شما را می‌بیند. فامیل هم معاینه می‌شود.",
+        "ps": "د ټوخي بلغم د معاینې لپاره ورکوئ. که نری رنځ وښيي، کلینیک سمدستي ګولۍ پیلوي او هره میاشت مو ویني. کورنۍ هم معاینه کېږي.",
+        "en": "You give the sputum you cough up for a test. If it shows TB, the clinic starts the tablets at once and sees you monthly. The family is checked too."
       }
     },
     {
@@ -192,9 +192,9 @@
         "en": "At the hospital: severe or resistant TB"
       },
       "text": {
-        "fa": "شخص بسیار ناخوش، طفل مشکوک به توبرکلوز، یا کسی که توبرکلوزش به دوا جواب نمی‌دهد در شفاخانه دیده می‌شود، که عکس سینه، معاینهٔ ماشینی و دواهای مخصوص توبرکلوز مقاوم را دارد، آن هم رایگان.",
-        "ps": "ډېر ناجوړه کس، د نري رنځ شکمن ماشوم، یا هغه څوک چې نری رنځ یې درملو ته ځواب نه وايي په روغتون کې کتل کېږي، چې د سینې عکس، ماشیني معاینه او د مقاوم نري رنځ ځانګړي درمل لري، هغه هم وړیا.",
-        "en": "A very ill person, a child with suspected TB, or someone whose TB does not respond goes to the hospital, which has X-ray, the machine test and medicines for resistant TB, free."
+        "fa": "شخص بسیار ناخوش، طفل مشکوک به توبرکلوز، یا کسی که توبرکلوزش به دوا جواب نمی‌دهد در شفاخانه دیده می‌شود، که عکس سینه، معاینات بیشتر و دواهای مخصوص توبرکلوز مقاوم را دارد.",
+        "ps": "ډېر ناجوړه کس، د نري رنځ شکمن ماشوم، یا هغه څوک چې نری رنځ یې درملو ته ځواب نه وايي په روغتون کې کتل کېږي، چې د سینې عکس، نورې معاینې او د مقاوم نري رنځ ځانګړي درمل لري.",
+        "en": "A very ill person, a child with suspected TB, or someone whose TB does not respond goes to the hospital, which has X-ray, more tests and medicines for resistant TB."
       }
     },
     {

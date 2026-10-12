@@ -60,6 +60,15 @@
           }
         },
         {
+          "id": "after-birth.urgent.fever-weak",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
+            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
+            "en": "Fever, and too weak to get out of bed"
+          }
+        },
+        {
           "id": "after-birth.urgent.breathing",
           "icon": "breathing-fast",
           "text": {
@@ -69,21 +78,21 @@
           }
         },
         {
+          "id": "after-birth.urgent.harm",
+          "icon": "sad",
+          "text": {
+            "fa": "فکر آسیب زدن به خود یا به طفل",
+            "ps": "ځان یا ماشوم ته د زیان رسولو فکرونه",
+            "en": "Thoughts of harming yourself or your baby"
+          }
+        },
+        {
           "id": "after-birth.urgent.fever-discharge",
           "icon": "fever",
           "text": {
             "fa": "تب، همراه با ترشح بدبو از راه تناسلی",
             "ps": "تبه، له تناسلي لارې د بدبویه اوبو سره",
             "en": "Fever with a bad-smelling discharge from the vagina"
-          }
-        },
-        {
-          "id": "after-birth.urgent.fever-weak",
-          "icon": "fever",
-          "text": {
-            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
-            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
-            "en": "Fever, and too weak to get out of bed"
           }
         },
         {
@@ -102,15 +111,6 @@
             "fa": "ساق پای دردناک و پندیده",
             "ps": "دردناکه او پړسېدلې پنډۍ",
             "en": "A painful, swollen calf (back of the lower leg)"
-          }
-        },
-        {
-          "id": "after-birth.urgent.harm",
-          "icon": "sad",
-          "text": {
-            "fa": "فکر آسیب زدن به خود یا به طفل",
-            "ps": "ځان یا ماشوم ته د زیان رسولو فکرونه",
-            "en": "Thoughts of harming yourself or your baby"
           }
         }
       ]
@@ -195,6 +195,27 @@
             "fa": "بیشتر وقت خیلی غمگین یا پریشان هستید",
             "ps": "ډېر وخت ډېره خپه یا اندېښمنه یاست",
             "en": "Feeling very sad or worried most of the time"
+          }
+        }
+      ]
+    },
+    {
+      "id": "after-birth.week",
+      "type": "alert",
+      "level": "soon",
+      "title": {
+        "fa": "برای این حالت، همین هفته به کلینیک بروید:",
+        "ps": "د دې حالت لپاره، همدا اونۍ کلینیک ته ولاړ شئ:",
+        "en": "Go to the clinic this week for:"
+      },
+      "items": [
+        {
+          "id": "after-birth.week.milk-lump",
+          "icon": "lump",
+          "text": {
+            "fa": "غده در پستان در وقت شیردهی که بیش از ۲ هفته بماند",
+            "ps": "د تي ورکولو پر وخت په تي کې غوټه چې له ۲ اونیو زیاته پاتې شي",
+            "en": "A breast lump while breastfeeding that stays more than 2 weeks"
           }
         }
       ]
@@ -307,9 +328,9 @@
       "type": "tip",
       "icon": "family",
       "text": {
-        "fa": "صبر کردن دست کم ۲ سال پیش از حاملگی بعدی، برای صحت مادر و طفل بهتر است. کلینیک در مورد فاصله بین ولادت‌ها مشوره می‌دهد.",
-        "ps": "د بلې امیندوارۍ نه مخکې لږ تر لږه ۲ کاله صبر د مور او ماشوم روغتیا لپاره ښه دی. کلینیک د زېږونونو ترمنځ د واټن په اړه مشوره درکوي.",
-        "en": "Waiting at least 2 years before the next pregnancy is healthier for mother and baby. The clinic can advise on spacing births."
+        "fa": "صبر کردن دست کم ۲ سال پیش از حاملگی بعدی، برای صحت مادر و طفل بهتر است. در مورد فاصلهٔ بین اولاد از قابله بپرسید.",
+        "ps": "د بلې امیندوارۍ نه مخکې لږ تر لږه ۲ کاله صبر د مور او ماشوم روغتیا لپاره ښه دی. د خپلو ماشومانو ترمنځ د واټن په اړه له قابلې وپوښتئ.",
+        "en": "Waiting at least 2 years before the next pregnancy is healthier for mother and baby. Ask the midwife about spacing your children."
       }
     },
     {
@@ -353,6 +374,7 @@
     "Content pass 3 (MoPH fixes): checks step adds 'the village health worker can also visit at home' (IPEHS 2019 postnatal home visit within 24 hours; CBHC 2015); 'Checks are free' removed (Mo's rule).",
     "Medical audit 2026-10-08 MA1: two red items added, with the words and clips of pregnancy-danger: 'Fever, and too weak to get out of bed' (after-birth.urgent.fever-weak) and 'Severe belly pain' (after-birth.urgent.belly-pain). The red list now has 9 items.",
     "Medical audit 2026-10-08 MA2 / MA19: heavy bleeding now has a measure a family can use: '(a cloth soaked in under 5 minutes)' (PCPNC B5). The placenta rule (not out 1 hour after the baby) is on birth-plan (home birth step and red list), where it belongs.",
-    "Medical audit 2026-10-08 MA3: amber items added: fever, belly pain, feeling ill (words of pregnancy-danger.soon, which says its signs matter for 6 weeks after birth), a bad-smelling discharge on its own (PCPNC M4: go promptly), and leaking urine (added to after-birth.soon.urine, same id, new clip). Fever with a bad-smelling discharge stays red. The second review note above is answered."
+    "Medical audit 2026-10-08 MA3: amber items added: fever, belly pain, feeling ill (words of pregnancy-danger.soon, which says its signs matter for 6 weeks after birth), a bad-smelling discharge on its own (PCPNC M4: go promptly), and leaking urine (added to after-birth.soon.urine, same id, new clip). Fever with a bad-smelling discharge stays red. The second review note above is answered.",
+    "Mo, 12 Oct 2026 (his answers to the 52 open calls): a breast lump while breastfeeding that stays more than 2 weeks is \"clinic this week\" here and on women-signs (item 24); birth spacing is one counselling line only, \"ask the midwife about spacing your children\" (item 18; the full birth-spacing page stays unpublished)."
   ]
 }

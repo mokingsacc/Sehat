@@ -177,21 +177,30 @@
           }
         },
         {
-          "id": "fever.urgent.cold",
-          "icon": "newborn-warm",
-          "text": {
-            "fa": "کمتر از ۲ ماه عمر دارد و بدنش سرد است",
-            "ps": "تر ۲ میاشتو کم عمر لري او بدن یې سوړ دی",
-            "en": "is under 2 months old and feels cold to touch"
-          }
-        },
-        {
           "id": "fever.urgent.convulsion",
           "icon": "convulsion",
           "text": {
             "fa": "تشنج کرده یا حالا تشنج دارد",
             "ps": "اختلاج یې کړی یا اوس اختلاج لري",
             "en": "has had convulsions (fits), or has them now"
+          }
+        },
+        {
+          "id": "fever.urgent.sleepy",
+          "icon": "sleepy",
+          "text": {
+            "fa": "خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است",
+            "ps": "ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی",
+            "en": "is very sleepy and hard to wake, or unconscious"
+          }
+        },
+        {
+          "id": "fever.urgent.breathing",
+          "icon": "chest-indrawing",
+          "text": {
+            "fa": "به سختی نفس می‌کشد، پایین سینه‌اش به داخل کشیده می‌شود، یا در حالت آرام نفسش صدا می‌کند",
+            "ps": "په سختۍ سا اخلي، د سینې لاندې برخه یې ننوځي، یا په آرامه حالت کې یې سا غږ کوي",
+            "en": "struggles to breathe, the lower chest pulls in, or breathing is noisy when calm"
           }
         },
         {
@@ -204,12 +213,12 @@
           }
         },
         {
-          "id": "fever.urgent.sleepy",
-          "icon": "sleepy",
+          "id": "fever.urgent.rash",
+          "icon": "rash",
           "text": {
-            "fa": "خیلی خواب‌آلود است و به سختی بیدار می‌شود، یا بی‌هوش است",
-            "ps": "ډېر خوب وړی دی او په سختۍ ویښېږي، یا بې هوښه دی",
-            "en": "is very sleepy and hard to wake, or unconscious"
+            "fa": "روی پوستش لکه‌های بنفش یا تیره پیدا شده",
+            "ps": "پر پوستکي یې بنفش یا تور داغونه راختلي",
+            "en": "has purple or dark spots on the skin"
           }
         },
         {
@@ -231,21 +240,12 @@
           }
         },
         {
-          "id": "fever.urgent.rash",
-          "icon": "rash",
+          "id": "fever.urgent.cold",
+          "icon": "newborn-warm",
           "text": {
-            "fa": "روی پوستش لکه‌های بنفش یا تیره پیدا شده",
-            "ps": "پر پوستکي یې بنفش یا تور داغونه راختلي",
-            "en": "has purple or dark spots on the skin"
-          }
-        },
-        {
-          "id": "fever.urgent.breathing",
-          "icon": "chest-indrawing",
-          "text": {
-            "fa": "به سختی نفس می‌کشد، پایین سینه‌اش به داخل کشیده می‌شود، یا در حالت آرام نفسش صدا می‌کند",
-            "ps": "په سختۍ سا اخلي، د سینې لاندې برخه یې ننوځي، یا په آرامه حالت کې یې سا غږ کوي",
-            "en": "struggles to breathe, the lower chest pulls in, or breathing is noisy when calm"
+            "fa": "کمتر از ۲ ماه عمر دارد و بدنش سرد است",
+            "ps": "تر ۲ میاشتو کم عمر لري او بدن یې سوړ دی",
+            "en": "is under 2 months old and feels cold to touch"
           }
         }
       ]

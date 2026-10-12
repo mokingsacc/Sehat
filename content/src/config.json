@@ -132,6 +132,13 @@
         ]
       },
       {
+        "title": "checks",
+        "say": "ui.checks",
+        "topics": [
+          "child-signs"
+        ]
+      },
+      {
         "title": "homeReadings",
         "say": "ui.homeReadings",
         "topics": [

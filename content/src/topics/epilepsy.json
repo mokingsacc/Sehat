@@ -154,6 +154,15 @@
           }
         },
         {
+          "id": "epilepsy.urgent.first-ever",
+          "icon": "convulsion",
+          "text": {
+            "fa": "اولین تشنج در زندگی",
+            "ps": "په ژوند کې لومړی اختلاج",
+            "en": "a first fit ever"
+          }
+        },
+        {
           "id": "epilepsy.urgent.fever",
           "icon": "fever",
           "text": {
@@ -201,15 +210,6 @@
         "en": "Go to the clinic today if someone has:"
       },
       "items": [
-        {
-          "id": "epilepsy.soon.first",
-          "icon": "convulsion",
-          "text": {
-            "fa": "اولین تشنج، بعد از اینکه شخص به حال آمد",
-            "ps": "لومړی اختلاج، کله چې کس ځان ته راشي",
-            "en": "a first fit, once the person has recovered"
-          }
-        },
         {
           "id": "epilepsy.soon.back",
           "icon": "calendar",
@@ -313,6 +313,7 @@
     "'Into the rectum' (rectal diazepam) is said plainly in the hospital block; adjust if felt inappropriate for narration.",
     "A fit in pregnancy (eclampsia) is already in pregnancy-danger; included here so a listener on this page still goes now.",
     "Dari مرگی and Pashto مرګی are the common words; صرع added in brackets.",
-    "Medical audit 2026-10-08 IL-22: epilepsy.medicine now says 'Never stop it yourself; after about 2 years without fits the health worker may lower it slowly' (WHO 2024), and epilepsy.dont.stop 'Do not stop the medicine yourself, even when the fits have stopped'. 'Get the next supply before it runs out' left epilepsy.medicine to keep the length; epilepsy.soon.supply still says it."
+    "Medical audit 2026-10-08 IL-22: epilepsy.medicine now says 'Never stop it yourself; after about 2 years without fits the health worker may lower it slowly' (WHO 2024), and epilepsy.dont.stop 'Do not stop the medicine yourself, even when the fits have stopped'. 'Get the next supply before it runs out' left epilepsy.medicine to keep the length; epilepsy.soon.supply still says it.",
+    "Mo, 12 Oct 2026 (his answers to the 52 open calls): a first fit ever is hospital now (item 3): epilepsy.soon.first is replaced by the red item epilepsy.urgent.first-ever, as on the Fits page."
   ]
 }

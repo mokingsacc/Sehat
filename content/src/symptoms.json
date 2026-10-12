@@ -1295,7 +1295,7 @@
           "Older red: a neck swelling that makes swallowing or breathing hard (WHO BEC airway), a painful lump in the groin or belly with vomiting (WHO Surgical care at the district hospital 2003: strangulated hernia, new line ui.ask.hernia), fever with a hot, red, spreading area of skin (WHO IMAI: cellulitis or abscess).",
           "Child amber: belly lump (WHO childhood cancer and CureAll: abdominal mass; NICE NG12 very urgent), a gland or lump that lasts or grows (WHO CureAll; TB first, WHO TB 2021), fever over 2 weeks (WHO TB screening). The box title is child-signs.today (clinic today); the gland and growing-lump lines are 'this week' on child-signs, so this page is stricter for them, as the Thin page is for weight loss.",
           "Older amber (this week): a growing or hard painless lump, a gland over a month, a new breast lump, weight loss without trying (WHO Guide to cancer early diagnosis 2017; NICE NG12 durations). B symptoms (clinic today for a TB test) are on the early-signs page, reached from 'More pages' and the TB-first step.",
-          "Mo's call: a women's bleeding tile, or the women's bleeding items in the existing bleeding tile, default used: neither for now (only the lump tile); the breast lump is in this tile's adult box."
+          "Mo, 12 Oct 2026 (item 36): a separate Women's bleeding picture (womenbleed); the breast lump stays in this tile's adult box."
         ]
       }
     },
@@ -1419,6 +1419,134 @@
           "All red and amber signs are the WHO PCPNC danger signs as already on the pregnancy and after-birth pages (vaginal bleeding, convulsions, severe headache with blurred vision, fever too weak to get up, severe abdominal pain, fast or difficult breathing, reduced fetal movement; postpartum: heavy bleeding, foul discharge, painful swollen calf, thoughts of harming self or baby (mhGAP)).",
           "After birth (medical audit 2026-10-08 MA1, MA2): fever and too weak to get out of bed, severe belly pain (PCPNC 3rd ed. 2015 postpartum danger signs; UNICEF/WHO Facts for Life), and the placenta not delivered 1 hour after the baby (PCPNC B12: manual removal needs skilled care) added to the red box.",
           "Amber: PCPNC 'go to the health centre as soon as possible' signs (fever, abdominal pain, feeling ill, swelling of fingers, face or legs, waters break without labour, burning urine; postpartum wound, breast, urine and low mood)."
+        ]
+      }
+    },
+    {
+      "id": "womenbleed",
+      "icon": "bleeding",
+      "pic": "img/symptoms/womenbleed.webp",
+      "label": {
+        "fa": "خونریزی زنانه",
+        "ps": "د ښځو وینه بهېدل",
+        "en": "Women's bleeding"
+      },
+      "words": {
+        "fa": [
+          "خونریزی زنانه",
+          "خونریزی رحم",
+          "خونریزی از رحم",
+          "عادت ماهوار زیاد",
+          "حیض زیاد",
+          "خونریزی بین عادت",
+          "خونریزی بعد از همبستری",
+          "لکه بینی"
+        ],
+        "ps": [
+          "د ښځو وینه",
+          "د رحم وینه",
+          "ډېر میاشتنی عادت",
+          "د میاشتني عادت ترمنځ وینه"
+        ],
+        "en": [
+          "vaginal bleeding",
+          "bleeding from the vagina",
+          "women's bleeding",
+          "heavy periods",
+          "bleeding between periods",
+          "bleeding after sex",
+          "spotting",
+          "bleeding after menopause"
+        ]
+      },
+      "page": {
+        "lead": "ui.ask.womenbleed.lead",
+        "ages": [
+          "pregnant",
+          "after",
+          "older"
+        ],
+        "default": "pregnant",
+        "red": {
+          "pregnant": {
+            "title": "pregnancy-danger.urgent",
+            "items": [
+              "pregnancy-danger.urgent.bleeding",
+              "pregnancy-danger.urgent.belly-pain",
+              "bleeding.urgent.shock"
+            ]
+          },
+          "after": {
+            "title": "after-birth.urgent",
+            "items": [
+              "after-birth.urgent.bleeding",
+              "after-birth.urgent.fever-discharge",
+              "after-birth.urgent.belly-pain",
+              "bleeding.urgent.shock"
+            ]
+          },
+          "older": {
+            "title": "red-flags.urgent",
+            "items": [
+              {
+                "id": "ui.ask.missed-period",
+                "icon": "belly-pain"
+              },
+              "bleeding.urgent.shock",
+              "anaemia.urgent.fainting"
+            ]
+          }
+        },
+        "amber": {
+          "after": {
+            "title": "after-birth.soon",
+            "items": [
+              "after-birth.soon.discharge",
+              "after-birth.soon.fever"
+            ]
+          },
+          "older": {
+            "title": "anaemia.soon",
+            "items": [
+              "anaemia.soon.heavy-periods",
+              "anaemia.soon.very-pale"
+            ],
+            "soon": {
+              "title": "women-signs.soon",
+              "items": [
+                "women-signs.soon.bleeding-sex",
+                "women-signs.soon.menopause"
+              ]
+            }
+          }
+        },
+        "pages": {
+          "pregnant": [
+            "pregnancy-danger",
+            "pregnancy-care"
+          ],
+          "after": [
+            "after-birth"
+          ],
+          "older": [
+            "women-signs",
+            "anaemia",
+            "checks-women"
+          ]
+        },
+        "sources": [
+          "PCPNC",
+          "PNC",
+          "IMAI",
+          "BEC",
+          "ANAEM",
+          "CANC"
+        ],
+        "_notes": [
+          "Added 12 Oct 2026 (Mo's answer to item 36 of the 52 open calls; research/screening.md 7.19). The picture is a stand-in (a crop of the Sadness and worry picture: a woman sitting, a hand on her shoulder) until the ChatGPT picture arrives.",
+          "Pregnant red: vaginal bleeding and severe belly pain in pregnancy (WHO PCPNC), shock (WHO BEC). After the birth red: heavy bleeding, fever with bad-smelling discharge, severe belly pain (PCPNC, WHO postnatal care 2013).",
+          "Older red: belly pain and bleeding after a missed period (WHO IMPAC/PCPNC: possible ectopic pregnancy; new line ui.ask.missed-period), shock (BEC), fainting (WHO anaemia). Amber today: very heavy periods, very pale (WHO anaemia 2017). This week: bleeding after sex or between periods, bleeding after the menopause (WHO Guide to cancer early diagnosis 2017; women-signs).",
+          "Default age: pregnant (the danger case first, as the Yellow page starts with the newborn)."
         ]
       }
     },
@@ -2465,12 +2593,13 @@
             "items": [
               "seizures.urgent.long",
               "seizures.urgent.repeated",
-              "seizures.urgent.fever",
-              "seizures.urgent.head",
               "seizures.urgent.not-waking",
-              "seizures.urgent.injury",
               "seizures.urgent.breathing",
               "seizures.urgent.pregnant",
+              "seizures.urgent.first-ever",
+              "seizures.urgent.fever",
+              "seizures.urgent.head",
+              "seizures.urgent.injury",
               "seizures.urgent.baby"
             ]
           }
@@ -2479,7 +2608,6 @@
           "all": {
             "title": "seizures.soon",
             "items": [
-              "seizures.soon.first",
               "seizures.soon.more-fits",
               "seizures.soon.medicine",
               "epilepsy.soon.child"
@@ -2499,8 +2627,8 @@
         ],
         "_notes": [
           "Red: convulsions in a child (IMCI general danger sign), a fit over 5 minutes or repeated fits (mhGAP epilepsy emergency, status epilepticus), fever, stiff neck or bad headache with the fit, or a fit after a knock to the head (mhGAP), not waking, injury, breathing difficulty (BEC), fit in pregnancy or after birth (PCPNC eclampsia).",
-          "First fit ever: clinic today once fully awake (mhGAP), on the Fits page and the Epilepsy page alike (medical audit 8 Oct 2026, EM19).",
-          "Amber: a first fit ever once fully awake (mhGAP); more fits than usual or medicine run out (mhGAP epilepsy follow-up); child with fits not learning or growing (mhGAP)."
+          "Amber: more fits than usual or medicine run out (mhGAP epilepsy follow-up); child with fits not learning or growing (mhGAP).",
+          "First fit ever: hospital now (Mo, 12 Oct 2026, item 3; it was clinic today from 8 Oct, EM19), here and on the Fits and Epilepsy pages."
         ]
       }
     },
@@ -3050,7 +3178,8 @@
             "soon": {
               "title": "red-flags.soon",
               "items": [
-                "red-flags.soon.weight-loss"
+                "red-flags.soon.weight-loss",
+                "early-signs.soon.anaemia"
               ]
             }
           },
@@ -3092,7 +3221,8 @@
         "_notes": [
           "Child: IMCI severe palmar pallor (severe anaemia = refer) and lethargy; some pallor = clinic (IMCI anaemia).",
           "Older/pregnant red: WHO anaemia / IMAI: severe anaemia with fainting, chest pain, breathlessness lying down; diabetes with confusion (WHO PEN). Pregnant: PCPNC severe anaemia with breathlessness.",
-          "Amber: pallor, breathless at rest, heavy periods (WHO 2017 anaemia), fever or night sweats and weight loss (TB screening), low mood 2+ weeks (mhGAP depression)."
+          "Amber: pallor, breathless at rest, heavy periods (WHO 2017 anaemia), fever or night sweats and weight loss (TB screening), low mood 2+ weeks (mhGAP depression).",
+          "This week: pale and tired in a man or a woman after the menopause (Mo, 12 Oct 2026, item 32; research/screening.md 7.9)."
         ]
       }
     },

@@ -52,6 +52,16 @@ export function tdPlan(td = {}) {
   if (n >= 5) return { n, next: -1, from: null };
   return { n, next: n, from: n ? addDays(td[TD[n - 1]], TD_GAP[n]) : null };
 }
+// who gets the Td card: every woman, and a girl of 12 or more who is recorded as a child (a pregnant teenager needs
+// it too; Mo, 12 Oct 2026, audit HM-18). A child's age comes from her date of birth.
+export const TD_GIRL_YEARS = 12;
+export function tdFor(p, today = localDay()) {
+  if (!p) return false;
+  if (p.pic === 'woman') return true;
+  if (p.pic !== 'child' || p.sex !== 'f' || !p.dob) return false;
+  const [y, m, d] = today.split('-').map(Number), [by, bm, bd] = p.dob.split('-').map(Number);
+  return y - by - (m < bm || (m === bm && d < bd) ? 1 : 0) >= TD_GIRL_YEARS;
+}
 
 /* ---------- adults: weight for height ---------- */
 export function bmi(kg, cm) { if (!(kg > 0 && cm > 0)) return null; const m = cm / 100; return Math.round((kg / (m * m)) * 10) / 10; }

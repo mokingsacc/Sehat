@@ -202,33 +202,6 @@
           }
         },
         {
-          "id": "birth-plan.urgent.headache",
-          "icon": "headache",
-          "text": {
-            "fa": "سردرد شدید، یا تاری دید",
-            "ps": "سخت سر درد، یا تت لید",
-            "en": "Severe headache, or blurred vision"
-          }
-        },
-        {
-          "id": "birth-plan.urgent.fever-weak",
-          "icon": "fever",
-          "text": {
-            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
-            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
-            "en": "Fever, and too weak to get out of bed"
-          }
-        },
-        {
-          "id": "birth-plan.urgent.belly-pain",
-          "icon": "belly-pain",
-          "text": {
-            "fa": "درد شدید شکم",
-            "ps": "د نس سخت درد",
-            "en": "Severe belly pain"
-          }
-        },
-        {
           "id": "birth-plan.urgent.long-labour",
           "icon": "clock",
           "text": {
@@ -244,6 +217,33 @@
             "fa": "جفت تا ۱ ساعت بعد از ولادت طفل بیرون نیامده است",
             "ps": "ځوله (پرېوان) د ماشوم له زېږون ۱ ساعت وروسته لا نه ده راوتلې",
             "en": "The afterbirth (placenta) is not out 1 hour after the baby is born"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.headache",
+          "icon": "headache",
+          "text": {
+            "fa": "سردرد شدید، یا تاری دید",
+            "ps": "سخت سر درد، یا تت لید",
+            "en": "Severe headache, or blurred vision"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.belly-pain",
+          "icon": "belly-pain",
+          "text": {
+            "fa": "درد شدید شکم",
+            "ps": "د نس سخت درد",
+            "en": "Severe belly pain"
+          }
+        },
+        {
+          "id": "birth-plan.urgent.fever-weak",
+          "icon": "fever",
+          "text": {
+            "fa": "تب، و آن‌قدر ضعف که از بستر بلند شده نمی‌توانید",
+            "ps": "تبه، او دومره کمزوري چې له بستره پاڅېدای نه شئ",
+            "en": "Fever, and too weak to get out of bed"
           }
         }
       ]

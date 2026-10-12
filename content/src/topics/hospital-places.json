@@ -47,9 +47,9 @@
         "en": "Small clinic: sub-centre or basic centre"
       },
       "text": {
-        "fa": "نرس‌ها و قابله‌ها واکسین می‌دهند، زنان حامله را معاینه می‌کنند و در ولادت عادی کمک می‌کنند. مریضی‌های عام را تداوی می‌کنند و دوای توبرکلوز می‌دهند.",
-        "ps": "نرسان او قابلې واکسین ورکوي، امیندوارې ښځې معاینه کوي او په عادي زېږون کې مرسته کوي. عامې ناروغۍ درملنه کوي او د نري رنځ درمل ورکوي.",
-        "en": "Nurses and midwives give vaccines, check pregnant women and help with normal births. They treat common illnesses and give TB medicine."
+        "fa": "نرس‌ها و قابله‌ها واکسین می‌دهند، زنان حامله را معاینه می‌کنند، در ولادت عادی کمک می‌کنند و در مورد فاصلهٔ بین اولاد مشوره می‌دهند. مریضی‌های عام را تداوی می‌کنند و دوای توبرکلوز می‌دهند.",
+        "ps": "نرسان او قابلې واکسین ورکوي، امیندوارې ښځې معاینه کوي، په عادي زېږون کې مرسته کوي او د ماشومانو ترمنځ د واټن په اړه مشوره ورکوي. عامې ناروغۍ درملنه کوي او د نري رنځ درمل ورکوي.",
+        "en": "Nurses and midwives give vaccines, check pregnant women, help with normal births and advise on spacing children. They treat common illnesses and give TB medicine."
       }
     },
     {
@@ -143,9 +143,9 @@
       "type": "tip",
       "icon": "money",
       "text": {
-        "fa": "واکسین‌ها، و معاینه و دوای توبرکلوز، رایگان است. برای خدمات دیگر بپرسید چقدر خرچ دارد، و کمی پول با خود ببرید.",
-        "ps": "واکسینونه، او د نري رنځ معاینه او درمل، وړیا دي. د نورو خدمتونو لپاره وپوښتئ چې څومره لګښت لري، او څه پیسې له ځان سره یوسئ.",
-        "en": "Vaccines, and TB tests and medicine, are free. For other care, ask what it will cost, and take some money with you."
+        "fa": "واکسین‌ها، و معاینه و دوای توبرکلوز، باید رایگان باشد؛ بپرسید. برای خدمات دیگر بپرسید چقدر خرچ دارد، و کمی پول با خود ببرید.",
+        "ps": "واکسینونه، او د نري رنځ معاینه او درمل، باید وړیا وي؛ وپوښتئ. د نورو خدمتونو لپاره وپوښتئ چې څومره لګښت لري، او څه پیسې له ځان سره یوسئ.",
+        "en": "Vaccines, and TB tests and medicine, should be free; ask. For other care, ask what it will cost, and take some money with you."
       }
     },
     {
@@ -154,9 +154,9 @@
       "to": "topic/vaccines",
       "icon": "syringe",
       "title": {
-        "fa": "واکسین رایگان است",
-        "ps": "واکسین وړیا دی",
-        "en": "Vaccines are free"
+        "fa": "واکسین باید رایگان باشد",
+        "ps": "واکسین باید وړیا وي",
+        "en": "Vaccines should be free"
       },
       "text": {
         "fa": "واکسین در کلینیک داده می‌شود. ببینید طفل شما کدام واکسین‌ها را و چه وقت لازم دارد.",
