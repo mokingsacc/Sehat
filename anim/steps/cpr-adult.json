@@ -5,7 +5,7 @@
  "h": 720,
  "adult": true,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Mo's adult CPR additions of 10 Oct 2026 (illustrations-2026-10-10/adult-cpr-additions): 'check' (response-check: hands on both shoulders) plays s1 (tap the shoulders, ask loudly) and s2 (shout for help), 'tilt' (head-tilt-chin-lift: hand on the forehead, two fingertips under the bony chin) plays s3 (look at the chest for up to 10 s), 'breath' (rescue-breath: nose pinched, chin lifted) plays s6 (2 breaths): since 10 Oct 2026 it is two full pictures, the 10 Oct picture ('up') and Mo's 'down' version (illustrations-2026-10-10/fixes, REVIEW.md C9: mouth sealed over the mouth, chest raised; a patch over 'up'). The 'down' picture adds the grandmother phoning for help in the background, so the same figure was copied into 'up' (only the empty wall there changes) and the swap shows only the breath. s5 and s7 use 'push', s4 'hand'. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's original CPR pictures of 9 Oct 2026 (illustrations-2026-10-09/original-cpr): 'hand' is step 3 (hand placement close-up; its body layer is empty), 'push' is step 4 (kneeling, straight arms). Mo's adult CPR additions of 10 Oct 2026 (illustrations-2026-10-10/adult-cpr-additions): 'check' (response-check: hands on both shoulders) plays s1 (tap the shoulders, ask loudly) and s2 (shout for help), 'tilt' (head-tilt-chin-lift: hand on the forehead, two fingertips under the bony chin) plays s3 (look at the chest for up to 10 s), 'breath' (rescue-breath: nose pinched, chin lifted) plays s6 (2 breaths): since 10 Oct 2026 it is two full pictures, the 10 Oct picture ('up') and Mo's 'down' version (illustrations-2026-10-10/fixes, REVIEW.md C9: mouth sealed over the mouth, chest raised; a patch over 'up'). The 'down' picture adds the grandmother phoning for help in the background, so the same figure was copied into 'up' (only the empty wall there changes) and the swap shows only the breath. s5 and s7 use 'push', s4 'hand'. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026: the rescuer (body and arms layers) moved 140 px left so the hands sit on the centre of the chest (lower half of the breastbone), not the upper belly (Mo's screenshot).",
  "poster": 4,
  "frames": {
   "hand": {
@@ -44,7 +44,7 @@
      "v": "21f0ddd9",
      "kb": 9.9,
      "box": [
-      304,
+      164,
       65,
       378,
       378
@@ -56,7 +56,7 @@
      "v": "b7a9d54d",
      "kb": 6.3,
      "box": [
-      341,
+      201,
       134,
       163,
       290
@@ -412,7 +412,7 @@
       960
      ],
      {
-      "cx": 420,
+      "cx": 280,
       "cy": 330,
       "w": 620
      }
@@ -449,11 +449,11 @@
     {
      "type": "arrow",
      "from": [
-      404,
+      264,
       290
      ],
      "to": [
-      404,
+      264,
       380
      ],
      "width": 12,
@@ -462,7 +462,7 @@
     },
     {
      "type": "shade",
-     "x": 404,
+     "x": 264,
      "y": 420,
      "rx": 56,
      "ry": 16,
@@ -557,7 +557,7 @@
       960
      ],
      {
-      "cx": 420,
+      "cx": 280,
       "cy": 330,
       "w": 620
      },
@@ -598,7 +598,7 @@
    "overlays": [
     {
      "type": "shade",
-     "x": 404,
+     "x": 264,
      "y": 420,
      "rx": 56,
      "ry": 16,
