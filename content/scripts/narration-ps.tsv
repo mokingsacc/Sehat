@@ -460,6 +460,11 @@ ui.fam.no-notes	تر اوسه یادښت نشته.	No notes yet.
 ui.fam.no-readings	تر اوسه اندازه نه ده ثبت شوې.	No readings saved yet.
 ui.fam.no-weights	تر اوسه وزن نه دی لیکل شوی.	No weight written yet.
 ui.fam.weights	هغه وزنونه چې تاسو لیکلي دي؛ تر ټولو نوی په سر کې.	The weights you wrote, newest first.
+ui.fam.times.row	د خپلې کورنۍ لپاره د سهار، غرمې، ماښام او د خوب وخت بدل کړئ.	Change what time morning, midday, evening and bedtime are for your family.
+ui.fam.times.lead	دا ستاسو د ټولې کورنۍ لپاره د درملو وختونه دي. د وروسته لپاره جمع ووهئ. د مخکې لپاره منفي ووهئ. ټیلیفون په همدې وختونو کې درته وریادوي.	These are the medicine times for your whole family. Press plus for later. Press minus for earlier. The phone reminds you at these times.
+ui.fam.oclock	بجې.	o'clock.
+ui.fam.notify.ask	د دې لپاره چې ټیلیفون درته هغه وخت هم وریاد کړي چې اپ بند وي، بل ووهئ، بیا اجازه ووهئ.	So that the phone can remind you even when the app is closed, press Next, then press Allow.
+ui.fam.notify.next	بل.	Next.
 ui.growth	هر ځل چې ماشوم اندازه کوئ، وزن او قد یې دلته ولیکئ. اپ ښيي چې ماشوم ښه وده کوي که نه، او کله کلینیک ته ولاړ شئ. دا معلومات یوازې په همدې ټیلیفون کې پاتې کېږي.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
 ui.gr.add	نېټه، وزن په کیلو او قد په سانتي متره ولیکئ. که یوازې یو یې لرئ، هم سمه ده.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
 ui.gr.pos	له ۲ کلونو کم ماشوم پرېوتی اندازه کړئ. له ۲ کلنۍ وروسته، ولاړ اندازه کړئ. ووایئ چې څنګه مو اندازه کړ.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.

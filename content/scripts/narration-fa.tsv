@@ -460,6 +460,11 @@ ui.fam.no-notes	هنوز یادداشتی نیست.	No notes yet.
 ui.fam.no-readings	هنوز اندازه‌ای ثبت نشده است.	No readings saved yet.
 ui.fam.no-weights	هنوز وزن نوشته نشده است.	No weight written yet.
 ui.fam.weights	وزن‌هایی که نوشته‌اید؛ تازه‌ترین در اول.	The weights you wrote, newest first.
+ui.fam.times.row	وقت صبح، چاشت، شام و وقت خواب را برای خانوادهٔ خود تغییر دهید.	Change what time morning, midday, evening and bedtime are for your family.
+ui.fam.times.lead	این‌ها وقت‌های دوا برای تمام خانوادهٔ شما است. برای بعدتر، جمع را بزنید. برای وقت‌تر، منفی را بزنید. گوشی در همین وقت‌ها یادتان می‌دهد.	These are the medicine times for your whole family. Press plus for later. Press minus for earlier. The phone reminds you at these times.
+ui.fam.oclock	بجه.	o'clock.
+ui.fam.notify.ask	تا گوشی حتی وقتی برنامه بسته است یادتان بدهد، بعدی را بزنید، بعد اجازه را بزنید.	So that the phone can remind you even when the app is closed, press Next, then press Allow.
+ui.fam.notify.next	بعدی.	Next.
 ui.growth	هر بار که طفل را اندازه می‌کنید، وزن و قد او را اینجا بنویسید. برنامه نشان می‌دهد که طفل خوب رشد می‌کند یا نه، و چه وقت به کلینیک بروید. این معلومات فقط در همین گوشی می‌ماند.	Write down your child's weight and length each time you measure. The app shows if your child is growing well, and when to go to the clinic. It stays on this phone only.
 ui.gr.add	تاریخ، وزن به کیلو و قد به سانتی‌متر را بنویسید. اگر فقط یکی از آن‌ها را دارید، مشکلی نیست.	Write the date, the weight in kilos and the length in centimetres. If you only have one of them, that is fine.
 ui.gr.pos	طفل کمتر از ۲ سال را خوابیده اندازه کنید. از ۲ سالگی به بعد، ایستاده اندازه کنید. بگویید چطور اندازه کردید.	Under 2 years, measure lying down. From 2 years, measure standing. Choose how you measured.

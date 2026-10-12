@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.12-866a48';
+const VERSION = '2026.10.12-54b57b';
 const PRECACHE = [
  "./",
  "index.html",
@@ -640,4 +640,16 @@ self.addEventListener('fetch', (e) => {
     return;
   }
   e.respondWith(caches.open(SHELL).then((c) => c.match(req, { ignoreSearch: true })).then((hit) => hit || fetch(req)));
+});
+
+// a medicine reminder shown by the open (but hidden) page (js/family.js, webNotify): a tap brings the app back (or opens
+// it on the family page). Nothing is ever pushed from a server.
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const hash = (e.notification.data && e.notification.data.hash) || '#/family';
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+    const c = list.find((x) => x.url.startsWith(self.registration.scope));
+    if (c) return c.focus(); // the page shows its own reminder as soon as it is on the screen again
+    return self.clients.openWindow(self.registration.scope + 'index.html' + hash);
+  }));
 });
