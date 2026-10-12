@@ -66,7 +66,8 @@
         "fa": "اگر ترمامتر دارید، آن را زیر بغل بگذارید. ۳۷ و نیم درجه یا بیشتر تب است.",
         "ps": "که ترمامیټر لرئ، د تخرګ لاندې یې کېږدئ. ۳۷ نیم درجې یا ډېر تبه ده.",
         "en": "If you have a thermometer, put it under the arm. 37.5 degrees or more is a fever."
-      }
+      },
+      "picture": "img/stills/thermometer-wait.webp"
     },
     {
       "id": "fever.kit",
