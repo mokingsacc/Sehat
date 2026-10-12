@@ -11,7 +11,7 @@
     "ps": "سر ته له ټکر وروسته: څوک روغتون ته اړتیا لري او څه وګورئ.",
     "en": "After a knock to the head: who needs hospital, what to watch."
   },
-  "image": "head-injury",
+  "image": "img/stills/head-injury.webp",
   "blocks": [
     {
       "id": "head-injury.lead",

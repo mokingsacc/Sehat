@@ -11,7 +11,7 @@
     "ps": "هغه نښې وپېژنئ چې سمدلاسه روغتون ته د تګ غوښتنه کوي.",
     "en": "Know the signs that mean go to hospital now."
   },
-  "image": "danger-child",
+  "image": "img/stills/danger-child.webp",
   "blocks": [
     {
       "id": "danger-child.lead",
@@ -234,7 +234,7 @@
       "id": "danger-child.look-breath",
       "type": "step",
       "icon": "breathing-fast",
-      "picture": "chest-indrawing",
+      "picture": "img/stills/chest-indrawing.webp",
       "title": {
         "fa": "سینه را ببینید و نفس‌ها را بشمارید",
         "ps": "سینه وګورئ او ساګانې وشمېرئ",

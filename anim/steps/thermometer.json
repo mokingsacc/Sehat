@@ -5,9 +5,9 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/thermometer), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/thermometer), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Frames 2 and 3 are Mo's 12 Oct 2026 redo (prompt D-3, audit P-03): the tip pushed up into the centre of the armpit hollow, then the arm folded down over it with only the display showing; frame 3 adds the mother's hand on the girl's back.",
  "_check": [
-  "Frame 2 (down): the tip sits at the edge of the chest and the armpit; check it reads as 'in the armpit'."
+  "Frames 2-3 (12 Oct): the tip goes into the armpit hollow under the sleeve, on skin; in 'down' the arm is held against the side."
  ],
  "poster": 1,
  "frames": {
@@ -24,34 +24,23 @@
   "2": {
    "layers": [
     {
-     "id": "bg",
-     "src": "2-bg.webp",
-     "v": "14b99934",
-     "kb": 30.0
+     "id": "full-up",
+     "src": "2-full-up.webp",
+     "v": "16179f42",
+     "kb": 26.7
     },
     {
-     "id": "arms-up",
-     "src": "2-arms-up.webp",
-     "v": "e914a67b",
-     "kb": 7.2,
-     "box": [
-      276,
-      158,
-      330,
-      239
-     ]
-    },
-    {
-     "id": "arms-down",
-     "src": "2-arms-down.webp",
-     "v": "fe384c6e",
+     "id": "full-down",
+     "src": "2-full-down.webp",
+     "v": "df0b6987",
      "kb": 8.0,
      "box": [
-      276,
-      158,
-      359,
-      245
-     ]
+      362,
+      307,
+      427,
+      320
+     ],
+     "patch": "full-up"
     }
    ]
   },
@@ -59,20 +48,20 @@
    "layers": [
     {
      "id": "full",
-     "src": "2-bg.webp",
-     "v": "14b99934",
-     "kb": 30.0
+     "src": "2-full-up.webp",
+     "v": "16179f42",
+     "kb": 26.7
     },
     {
      "id": "full-fix",
      "src": "3-full-fix.webp",
-     "v": "dbbac74d",
-     "kb": 15.8,
+     "v": "74892102",
+     "kb": 10.1,
      "box": [
-      244,
-      140,
-      539,
-      415
+      149,
+      305,
+      643,
+      322
      ],
      "patch": "full"
     }
@@ -105,11 +94,12 @@
      "id": "put",
      "type": "swap",
      "frame": "2",
-     "layer": "arms-down",
-     "under": "arms-up",
+     "layer": "full-down",
+     "under": "full-up",
      "at": 4600,
      "rate": 10,
-     "count": 1
+     "count": 1,
+     "hide": false
     }
    ],
    "overlays": [
@@ -123,8 +113,8 @@
     },
     {
      "type": "ring",
-     "x": 544,
-     "y": 312,
+     "x": 600,
+     "y": 440,
      "at": 6000,
      "r": 45
     }
@@ -146,8 +136,8 @@
       960
      ],
      {
-      "cx": 560,
-      "cy": 330,
+      "cx": 590,
+      "cy": 420,
       "w": 560
      }
     ],
@@ -158,15 +148,15 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 592,
-     "y": 336,
+     "x": 590,
+     "y": 444,
      "at": 800,
      "r": 40
     },
     {
      "type": "waves",
-     "x": 610,
-     "y": 320,
+     "x": 632,
+     "y": 428,
      "angle": -45,
      "size": 40,
      "count": 2,

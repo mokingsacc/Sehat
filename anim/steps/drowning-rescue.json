@@ -5,10 +5,9 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Since 11 Oct 2026 (app audit A-01): the film shows the life-saving steps of the page, drowning.breaths (5 breaths, the cpr-child breath pair, counter of 5) and drowning.cpr (30 pushes with the cpr-child push pair, then 2 breaths), between the check and the side roll; it ends on the blanket frame (5). The breath and push frames are the cpr-child pictures (\"../cpr-child/...\": one picture, two sets) until the cast-matched frames of prompt D-1 arrive. Reduced motion shows frame 4 (the side roll) for drowning.warm (audit P-09).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/drowning-rescue), packed by tools/steps_images.py --px 800 --patch. Frame 4 (the whole body rolled onto the side) is used since 10 Oct 2026 (frame review M8): drowning.warm now says roll them onto their side if water or vomit comes out, wipe the mouth, roll them back and carry on. Scene drowning.warm: on the back (frame 3), rolled onto the side (frame 4) with the mouth marked, back again (frame 3), then wet clothes off and the blanket (frame 5). Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). Since 11 Oct 2026 (app audit A-01): the film shows the life-saving steps of the page, drowning.breaths (5 breaths, the cpr-child breath pair, counter of 5) and drowning.cpr (30 pushes with the cpr-child push pair, then 2 breaths), between the check and the side roll; it ends on the blanket frame (5). Since 12 Oct 2026 the breath and push frames are Mo's cast-matched pictures (prompt D-1, ChatGPT batch of 12 Oct): the father and the wet boy on the canal bank, head tilt with two fingers on the bony chin, nose pinched; one heel of the hand on the lower breastbone, arm straight. Reduced motion shows frame 4 (the side roll) for drowning.warm (audit P-09).",
  "_check": [
-  "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8.",
-  "Frames 'breath' and 'push' (11 Oct 2026) are the cpr-child pictures: a mother and a boy in blue indoors, not the father and the wet boy by the canal of frames 1-5. Replace them with the cast-matched pictures of prompt D-1 (FIXLIST.md part d) when they arrive."
+  "Frame 4 (whole body on the side, the father's hands on the head and shoulder) goes with drowning.warm: 'If water or vomit comes out of the mouth, roll them onto their side, wipe the mouth, then roll them back and carry on. Do not try to get water out.' (ANZCOR 9.3.2, AHA/AAP 2024, ERC 2025). The mouth is not wiped in the picture; an optional cleaner version is prompt C8."
  ],
  "poster": 0,
  "frames": {
@@ -84,15 +83,22 @@
    "layers": [
     {
      "id": "full-up",
-     "src": "../cpr-child/3-full-up.webp",
-     "v": "4ae6ccfc",
-     "kb": 30.0
+     "src": "breath-full-up.webp",
+     "v": "0537c4dd",
+     "kb": 29.8
     },
     {
      "id": "full-down",
-     "src": "../cpr-child/3-full-down.webp",
-     "v": "cf136f95",
-     "kb": 28.9
+     "src": "breath-full-down.webp",
+     "v": "762149a4",
+     "kb": 18.2,
+     "box": [
+      377,
+      102,
+      550,
+      478
+     ],
+     "patch": "full-up"
     }
    ]
   },
@@ -100,20 +106,20 @@
    "layers": [
     {
      "id": "full-up",
-     "src": "../cpr-child/push-full-up.webp",
-     "v": "05edc064",
-     "kb": 24.3
+     "src": "push-full-up.webp",
+     "v": "e97a915f",
+     "kb": 29.8
     },
     {
      "id": "full-down",
-     "src": "../cpr-child/push-full-down.webp",
-     "v": "8fbf1fd7",
-     "kb": 8.8,
+     "src": "push-full-down.webp",
+     "v": "124bb929",
+     "kb": 6.3,
      "box": [
-      382,
-      18,
-      378,
-      505
+      458,
+      89,
+      218,
+      433
      ],
      "patch": "full-up"
     }
@@ -257,8 +263,8 @@
       960
      ],
      {
-      "cx": 430,
-      "cy": 420,
+      "cx": 630,
+      "cy": 400,
       "w": 660
      }
     ],
@@ -281,18 +287,18 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 592,
-     "y": 384,
+     "x": 742,
+     "y": 425,
      "at": 800,
      "r": 60,
      "until": 2500
     },
     {
      "type": "shade",
-     "x": 240,
-     "y": 480,
-     "rx": 120,
-     "ry": 60,
+     "x": 624,
+     "y": 490,
+     "rx": 100,
+     "ry": 50,
      "max": 0.3,
      "follow": "breath",
      "color": "255,238,205"
@@ -321,13 +327,13 @@
       960
      ],
      {
-      "cx": 580,
+      "cx": 600,
       "cy": 400,
       "w": 620
      },
      {
-      "cx": 430,
-      "cy": 420,
+      "cx": 630,
+      "cy": 400,
       "w": 660
      }
     ],
@@ -378,7 +384,7 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 588,
+     "x": 590,
      "y": 472,
      "r": 38,
      "at": 900,
@@ -387,11 +393,11 @@
     {
      "type": "arrow",
      "from": [
-      588,
+      590,
       330
      ],
      "to": [
-      588,
+      590,
       428
      ],
      "width": 12,
@@ -407,10 +413,10 @@
     },
     {
      "type": "shade",
-     "x": 240,
-     "y": 480,
-     "rx": 120,
-     "ry": 60,
+     "x": 624,
+     "y": 490,
+     "rx": 100,
+     "ry": 50,
      "max": 0.3,
      "follow": "breath",
      "color": "255,238,205",

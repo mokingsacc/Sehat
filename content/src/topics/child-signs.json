@@ -11,7 +11,7 @@
     "ps": "ډېری دا نښې بل علت لري، خو ژر معاینې ته اړتیا لري.",
     "en": "Most of these have another cause, but they need a check soon."
   },
-  "image": "child-signs",
+  "image": "img/stills/child-signs.webp",
   "blocks": [
     {
       "id": "child-signs.lead",

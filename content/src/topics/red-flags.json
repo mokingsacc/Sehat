@@ -11,7 +11,7 @@
     "ps": "په لویانو کې هغه نښې چې روغتون یا کلینیک ته اړتیا لري",
     "en": "Signs in adults that need the hospital now, or the clinic soon"
   },
-  "image": "red-flags",
+  "image": "img/stills/red-flags.webp",
   "blocks": [
     {
       "id": "red-flags.lead",

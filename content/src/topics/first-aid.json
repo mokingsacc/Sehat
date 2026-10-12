@@ -11,7 +11,7 @@
     "ps": "د سوځېدو، وینې بهېدو، ستوني بندېدو، مسمومیت او نورو لپاره لومړۍ مرسته",
     "en": "What to do first for burns, bleeding, choking, poisoning and more"
   },
-  "image": "first-aid",
+  "image": "img/stills/first-aid.webp",
   "blocks": [
     {
       "id": "first-aid.lead",

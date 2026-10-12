@@ -11,6 +11,7 @@ gets a flattened still here: the layers put back together in the frame's own ord
     python3 tools/steps_stills.py            # writes img/stills/<name>.webp for every entry of STILLS below
     python3 tools/steps_stills.py --check    # only says which stills are missing or out of date
     python3 tools/steps_stills.py --sheet out.png [set ...]   # contact sheet of every frame (up and down) of the sets
+    python3 tools/steps_stills.py --png <folder>   # whole pictures delivered on their own (PICTURES), not set frames
 
 Emergency and CPR stills are 640x480, under 22 KB; stills of on-demand sets are 480x360, under 15 KB, so the APK carries only a small still and the full set still downloads when its page is opened.
 """
@@ -82,7 +83,63 @@ STILLS = {
     "length-book": ("length-height", "2", "down", "small"),
     "height-wall": ("length-height", "3", "up", "small"),
 }
-SIZES = {"big": ((640, 480), 22), "small": ((480, 360), 15)}
+SIZES = {"big": ((640, 480), 22), "small": ((480, 360), 15),
+         # whole pictures delivered on their own (PICTURES below): page tops and step cards, list-row thumbnails
+         # (116x84 CSS px), the two wide Health-tab buttons (16:7) and a side-by-side pair
+         "page": ((480, 360), 12), "row": ((320, 240), 8), "wide": ((800, 350), 16), "pair": ((640, 480), 20)}
+
+# Whole pictures that are not frames of a set (Mo's ChatGPT batch of 12 Oct 2026, prompt
+# animation-briefs/chatgpt-ONE-PROMPT-2026-10-11.md part 2): they replace old flat drawings on page tops, rows, step
+# cards and the Children / Adults buttons. name: (delivered PNG(s), size, crop). Two PNGs make one picture: the two
+# side by side (left: normal, right: the danger sign), each cropped to crop, with a thin green and red border. crop is
+# x, y, w, h in the delivered 1600x1200 pixels (None: the whole picture).
+#     python3 tools/steps_stills.py --png <folder of the delivered PNGs>    # writes img/stills/<name>.webp
+PICTURES = {
+    "food-help": ("topic-food-help.png", "page", None),
+    "head-injury": ("topic-head-injury.png", "page", None),
+    "first-aid": ("topic-first-aid.png", "page", None),
+    "red-flags": ("topic-red-flags.png", "page", None),
+    "pregnancy-danger": ("topic-pregnancy-danger.png", "page", None),
+    "danger-child": ("topic-danger-child.png", "page", None),
+    "women-signs": ("topic-women-signs.png", "page", None),
+    "child-signs": ("topic-child-signs.png", "page", None),
+    "checks-women-bp": ("step-checks-women-bp.png", "page", None),
+    "chest-indrawing": (("danger-chest-normal.png", "danger-chest-indrawing.png"), "pair", (360, 100, 700, 1075)),
+    "home-children": ("home-children.png", "wide", (0, 150, 1600, 700)),
+    "home-adults": ("home-adults.png", "wide", (0, 120, 1600, 700)),
+    "row-growth": ("row-growth.png", "row", None),
+    "row-reading": ("row-reading.png", "row", None),
+    "row-near": ("row-near.png", "row", None),
+}
+
+
+def picture(folder, files, size, crop):
+    """One delivered picture (or a side-by-side pair) at its size."""
+    (w, h), _ = SIZES[size]
+    ims = [Image.open(os.path.join(folder, f)).convert("RGB") for f in ((files,) if isinstance(files, str) else files)]
+    if crop: ims = [im.crop((crop[0], crop[1], crop[0] + crop[2], crop[1] + crop[3])) for im in ims]
+    if len(ims) == 1: return ims[0].resize((w, h), Image.LANCZOS)
+    gap, line = 8, 5
+    out = Image.new("RGB", (w, h), (255, 250, 240))
+    pw = (w - gap) // 2
+    for k, (im, col) in enumerate(zip(ims, ((46, 125, 91), (192, 57, 43)))):
+        x = k * (pw + gap)
+        out.paste(col, (x, 0, x + pw, h))
+        out.paste(im.resize((pw - 2 * line, h - 2 * line), Image.LANCZOS), (x + line, line))
+    return out
+
+
+def build_pictures(folder):
+    total = 0
+    for n, (files, size, crop) in PICTURES.items():
+        need = (files,) if isinstance(files, str) else files
+        if not all(os.path.exists(os.path.join(folder, f)) for f in need):
+            print(f"  {n:24s} not in {folder}, kept"); continue
+        data, q = encode(picture(folder, files, size, crop), SIZES[size][1])
+        open(J(OUT, n + ".webp"), "wb").write(data); total += len(data)
+        print(f"  {n:24s} {' + '.join(need)} {SIZES[size][0][0]}x{SIZES[size][0][1]} q{q} {len(data) / 1024:5.1f} KB")
+    print(f"{total / 1e3:.0f} KB of delivered pictures in {OUT}/")
+    return 0
 
 
 def frame_layers(name, frame, pose):
@@ -143,7 +200,7 @@ def build(check=False):
         if not same: open(path, "wb").write(data)
         total += len(data)
         print(f"  {n:24s} {s} frame {fr} ({pose}) {w}x{h} q{q} {len(data) / 1024:5.1f} KB")
-    extra = sorted(f[:-5] for f in os.listdir(J(OUT)) if f.endswith(".webp") and f[:-5] not in STILLS)
+    extra = sorted(f[:-5] for f in os.listdir(J(OUT)) if f.endswith(".webp") and f[:-5] not in STILLS and f[:-5] not in PICTURES)
     if check:
         print("stills out of date or missing:", ", ".join(stale) or "none", "| not in STILLS:", ", ".join(extra) or "none")
         return 1 if stale or extra else 0
@@ -172,7 +229,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--sheet")
+    ap.add_argument("--png", help="folder of delivered whole pictures (PICTURES)")
     ap.add_argument("sets", nargs="*")
     a = ap.parse_args()
+    if a.png: sys.exit(build_pictures(a.png))
     if a.sheet: sheet(a.sheet, a.sets); sys.exit(0)
     sys.exit(build(a.check))

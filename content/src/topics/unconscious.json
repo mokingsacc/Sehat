@@ -153,7 +153,8 @@
         "fa": "شیرخوار را به پهلو در بغل خود بگیرید، سرش کمی پایین‌تر از بدن، تا شیر یا استفراغ بیرون شود.",
         "ps": "تي خوړونکی ماشوم پر اړخ په خپله غېږ کې ونیسئ، سر یې له بدن لږ ټیټ، چې شیدې یا کانګې بهر ووځي.",
         "en": "Hold a baby in your arms on its side, head a little lower than the body, so milk or vomit can run out."
-      }
+      },
+      "picture": "img/steps/recovery-position/5-full.webp"
     },
     {
       "id": "unconscious.watch",
