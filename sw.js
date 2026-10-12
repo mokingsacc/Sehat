@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.12-208f5e';
+const VERSION = '2026.10.12-866a48';
 const PRECACHE = [
  "./",
  "index.html",
@@ -349,6 +349,7 @@ const PRECACHE = [
  "img/stills/breastfeed-hold.webp",
  "img/stills/breastfeed-latch.webp",
  "img/stills/breath-watch.webp",
+ "img/stills/burns-pour.webp",
  "img/stills/burns-rings.webp",
  "img/stills/checks-women-bp.webp",
  "img/stills/chest-indrawing.webp",
