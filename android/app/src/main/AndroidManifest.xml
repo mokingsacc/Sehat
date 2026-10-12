@@ -10,6 +10,13 @@
     <!-- nearest clinic -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- medicine reminders (Reminders.java): the notification (asked when the first medicine with a time is saved,
+         Android 13+), the alarm at the dose time (exact when allowed, otherwise a few minutes late), setting it again
+         after a restart, and the buzz on Android 7 and older -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- none of these are required: the app installs on phones without GPS or microphone -->
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
@@ -54,6 +61,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- medicine reminders: the alarm, and setting it again after a restart, a time zone or clock change, an update,
+             or when "Alarms and reminders" is allowed -->
+        <receiver
+            android:name=".ReminderReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
 
         <!-- hands the APK (and the recordings zip) to the share sheet -->
         <provider

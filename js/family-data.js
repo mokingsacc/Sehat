@@ -105,9 +105,43 @@ export function sizeOf(bytes) {
 }
 
 /* ---------- medicines and their reminders ---------- */
+// The four times of day. The family can move each one (#/family/times, kept in localStorage "fhb.medtimes" and sent with
+// the records); these are the usual times. Every time is a time of the phone's own clock, in the phone's own time zone:
+// a dose is a calendar day (localDay) and a time "HH:MM", turned into a moment only when it is needed, so a phone whose
+// clock or time zone changes still reminds at 07:00 on its own clock.
+export const SLOTS = ['morning', 'noon', 'evening', 'night'];
 export const TIMES = { morning: '07:00', noon: '12:00', evening: '18:00', night: '21:00' };
+// the hours each time may move between, so "morning" stays in the morning (its sun picture stays true) and no dose
+// crosses midnight
+export const SLOT_HOURS = { morning: [4, 11], noon: [10, 15], evening: [15, 21], night: [18, 23] };
 export const REMIND_MIN = 180; // a dose shows as due from its time until 3 hours later
 export const SNOOZE_MIN = 15;
+export const AHEAD_DAYS = 7; // the phone (Android app) is given the doses of today and the next 7 days
+const HM_RE = /^([01][0-9]|2[0-3]):([0-5][0-9])$/;
+// the family's times: only well-formed ones, each inside its hours; anything else is the usual time
+export function cleanTimes(t) {
+  const out = {};
+  for (const s of SLOTS) {
+    const v = t && typeof t === 'object' ? t[s] : null, m = typeof v === 'string' ? HM_RE.exec(v) : null, r = SLOT_HOURS[s];
+    out[s] = m && +m[1] >= r[0] && +m[1] <= r[1] ? v : TIMES[s];
+  }
+  return out;
+}
+export const isUsualTimes = (t) => SLOTS.every((s) => cleanTimes(t)[s] === TIMES[s]);
+// one hour later (dh = 1) or earlier (dh = -1), never outside the slot's hours
+export function moveTime(times, slot, dh) {
+  const t = cleanTimes(times), r = SLOT_HOURS[slot]; if (!r) return t;
+  t[slot] = pad2(Math.min(r[1], Math.max(r[0], +t[slot].slice(0, 2) + dh))) + t[slot].slice(2);
+  return t;
+}
+// the hour on a 12-hour clock (as people say it: "7 in the evening"), and the narration of a time: slot, hour, o'clock
+export const hour12 = (hm) => (+hm.slice(0, 2) % 12) || 12;
+export const timeIds = (slot, hm) => ['ui.fam.t.' + slot, 'ui.num.' + hour12(hm), 'ui.fam.oclock'];
+// a slot's moment on a calendar day (ISO), on the phone's own clock and time zone (never UTC)
+export function slotTime(day, slot, times = TIMES) {
+  const hm = times[slot] || TIMES[slot], [y, mo, d] = day.split('-').map(Number);
+  return new Date(y, mo - 1, d, +hm.slice(0, 2), +hm.slice(3)).getTime();
+}
 export function medActive(m, today = localDay()) {
   if (!m || m.on === false) return false;
   if (m.days > 0 && m.d && dayDiff(m.d, today) >= m.days) return false;
@@ -115,13 +149,13 @@ export function medActive(m, today = localDay()) {
 }
 export function daysLeft(m, today = localDay()) { return m.days > 0 && m.d ? Math.max(0, m.days - dayDiff(m.d, today)) : null; }
 // doses due now: [{ p, m, slot, at }] (at = ms of the dose time today), earliest first
-export function dueMeds(people, now = new Date()) {
+export function dueMeds(people, now = new Date(), times = TIMES) {
   const day = localDay(now), out = [];
   for (const p of people || []) for (const m of p.meds || []) {
     if (!medActive(m, day) || (m.d && m.d > day)) continue;
     for (const slot of m.times || []) {
-      const hm = TIMES[slot]; if (!hm) continue;
-      const at = new Date(now.getFullYear(), now.getMonth(), now.getDate(), +hm.slice(0, 2), +hm.slice(3)).getTime();
+      if (!TIMES[slot]) continue;
+      const at = slotTime(day, slot, times);
       if (now.getTime() < at || now.getTime() >= at + REMIND_MIN * 60000) continue;
       if (((m.taken || {})[day] || []).includes(slot)) continue;
       const z = m.snooze; if (z && z.k === day + '|' + slot && z.until > now.getTime()) continue;
@@ -129,6 +163,29 @@ export function dueMeds(people, now = new Date()) {
     }
   }
   return out.sort((a, b) => a.at - b.at);
+}
+// every dose from the one due now to the end of the next AHEAD_DAYS days that is not taken yet, earliest first, for the
+// phone's own reminders (Android app): [{ p, m, slot, day, key, at, hm, abs }]. key names the dose (day|medicine|slot); a
+// snoozed dose ("Later") comes at the end of its 15 minutes as a new key (…|until) with abs = true (a moment, not a time
+// of day). hm = the time of day, so the phone can work the moment out again after a time zone or clock change.
+export function upcoming(people, now = new Date(), times = TIMES, days = AHEAD_DAYS, max = 200) {
+  const t0 = now.getTime(), out = [];
+  for (let k = 0; k <= days; k++) {
+    const day = localDay(new Date(now.getFullYear(), now.getMonth(), now.getDate() + k));
+    for (const p of people || []) for (const m of p.meds || []) {
+      if (!medActive(m, day) || (m.d && m.d > day)) continue;
+      const taken = (m.taken || {})[day] || [];
+      for (const slot of m.times || []) {
+        if (!TIMES[slot] || taken.includes(slot)) continue;
+        const at = slotTime(day, slot, times), key = day + '|' + m.id + '|' + slot;
+        if (at + REMIND_MIN * 60000 <= t0) continue; // its time is over
+        const z = m.snooze;
+        if (z && z.k === day + '|' + slot && z.until > t0) out.push({ p, m, slot, day, key: key + '|' + z.until, at: z.until, hm: times[slot] || TIMES[slot], abs: true });
+        else out.push({ p, m, slot, day, key, at, hm: times[slot] || TIMES[slot], abs: false });
+      }
+    }
+  }
+  return out.sort((a, b) => a.at - b.at).slice(0, max);
 }
 export function markTaken(m, day, slot) {
   m.taken = m.taken || {};
@@ -162,12 +219,16 @@ export function cleanNotes(list) {
 }
 export const noteMediaIds = (notes) => (notes || []).map((n) => n.rec).filter(Boolean);
 // notes: the family voice notes (they travel with the people)
-export function makeBundle(people, media, now = new Date(), notes = []) {
+// times: the family's medicine times (only when they are not the usual ones)
+export function makeBundle(people, media, now = new Date(), notes = [], times = null) {
   // media: [{id, type, bytes}] (the blobs travel as separate files media/<id>)
-  return { app: 'sehat', kind: 'family', v: 1, made: now.toISOString(), people, notes, media: media.map((x) => ({ id: x.id, type: x.type })) };
+  const b = { app: 'sehat', kind: 'family', v: 1, made: now.toISOString(), people, notes, media: media.map((x) => ({ id: x.id, type: x.type })) };
+  if (times && !isUsualTimes(times)) b.times = cleanTimes(times);
+  return b;
 }
 const KEEP = ['id', 'v', 'pic', 'sex', 'name', 'nameRec', 'dob', 'given', 'td', 'weights', 'hcm', 'preg', 'meds', 'notes', 'readings', 'u'];
-// checks a bundle from another phone; returns { people, notes, media } with only the known fields, or null
+// checks a bundle from another phone; returns { people, notes, media, times } with only the known fields (times: null
+// when the file has none), or null
 export function readBundle(j) {
   if (!j || j.app !== 'sehat' || j.kind !== 'family' || !Array.isArray(j.people)) return null;
   const people = [];
@@ -180,7 +241,7 @@ export function readBundle(j) {
   }
   const { list } = migrate(people);
   const media = (Array.isArray(j.media) ? j.media : []).filter((m) => m && MEDIA_RE.test(m.id) && /^(audio|image)\/[a-z0-9.+;=-]+$/i.test(String(m.type || '')));
-  return { people: list, notes: cleanNotes(j.notes), media };
+  return { people: list, notes: cleanNotes(j.notes), media, times: j.times && typeof j.times === 'object' ? cleanTimes(j.times) : null };
 }
 // adds the people from another phone: a new person is added; the same person (same id) is replaced only when the
 // copy is newer. Nothing on this phone is deleted.

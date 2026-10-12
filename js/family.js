@@ -5,13 +5,16 @@
 // numbers come from the big number pad (js/numpad.js), typing is always optional. Recordings and photos are kept in
 // IndexedDB ("sehat-family"), the rest with the people in localStorage ("fhb.kids"). "Copy records to another phone"
 // makes one zip file. Nothing leaves the phone unless the person sends that file. The data rules: js/family-data.js.
-import { PICS, isAdult, isChild, migrate, tdPlan, tdFor, TD, adultAdvice, BMI_LV, numIds, sizeOf, TIMES, dueMeds, markTaken, snooze, medActive, daysLeft,
+import { PICS, isAdult, isChild, migrate, tdPlan, tdFor, TD, adultAdvice, BMI_LV, numIds, sizeOf, SLOTS, SLOT_HOURS, cleanTimes, isUsualTimes, moveTime, hour12, timeIds,
+  REMIND_MIN, dueMeds, upcoming, markTaken, snooze, medActive, daysLeft,
   mediaIds, makeBundle, readBundle, mergePeople, BUNDLE, MEDIA_RE, newId, localDay, dayDiff, cleanNotes, noteMediaIds, mergeNotes } from './family-data.js';
 import { makeZip, readZip } from './zip.js';
 import { APPS } from './share.js';
 
 export function initFamily(ctx) {
-  const { S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP } = ctx;
+  const { S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, NP } = ctx;
+  // every change to the people (medicines, taken, "Later") also tells the Android app's reminders (syncReminders)
+  const saveKids = () => { ctx.saveKids(); syncSoon(); };
   const say = (id) => L(S.book.narration[id]);
   const big = (id) => spk(id).replace('class="spk', 'class="spk big');
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${big(id)}</div>`;
@@ -23,7 +26,10 @@ export function initFamily(ctx) {
   const go = (h) => { if (location.hash === h) rerender(); else location.hash = h; };
   const PIC_KEY = { baby: 'picBaby', child: 'picChild', woman: 'picWoman', man: 'picMan' };
   const picSrc = (p) => `img/pics/person-${PICS.includes(p && p.pic) ? p.pic : 'child'}.svg`;
-  const F = { draft: null, med: null, rec: null, shown: {}, remind: null, urls: {}, pending: null, saving: 0, prev: '', cur: location.hash };
+  const F = { draft: null, med: null, rec: null, shown: {}, remind: null, urls: {}, pending: null, saving: 0, prev: '', cur: location.hash, sent: '', syncT: 0 };
+  // the family's medicine times (#/family/times): the usual ones until the family changes them
+  const MT = () => cleanTimes(store.get('medtimes', null));
+  const dueNow = (people) => dueMeds(people, new Date(), MT());
 
   /* ---------- people ---------- */
   const m0 = migrate(S.kids); S.kids = m0.list; if (m0.changed) saveKids();
@@ -200,7 +206,7 @@ export function initFamily(ctx) {
     const n = nextVisit(p);
     if (n && !n.done) parts.push(`${T('nextVaccine')}: ${L(n.vis.age)} · ${whenText(n.due)}`);
     if (tdFor(p)) { const t = tdPlan(p.td); if (t.next >= 0) parts.push(`${T('rowTd')}: ${T('tdDose', { n: num(t.next + 1) })}`); }
-    const due = dueMeds([p]).length; if (due) parts.push(T('medTime'));
+    const due = dueNow([p]).length; if (due) parts.push(T('medTime'));
     return parts.join(' · ');
   }
 
@@ -208,7 +214,7 @@ export function initFamily(ctx) {
   function screenList() {
     const ids = ['ui.fam.lead'];
     let html = top(T('family'), { back: '' }) + listenBar(ids) + sayRow('ui.fam.lead', 'blk lead trow'); // a tab screen: no Back
-    const due = dueMeds(S.kids);
+    const due = dueNow(S.kids);
     if (due.length) html += due.map(remCard).join('');
     if (!S.kids.length) { ids.push('ui.fam.none'); html += sayRow('ui.fam.none', 'blk tip trow'); }
     for (const p of S.kids) {
@@ -357,7 +363,7 @@ export function initFamily(ctx) {
     rows.push(['#/family/edit', ic('card'), T('editPerson'), '', 'ui.fam.row.edit', 'edit']);
     for (const r of rows) { ids.push(r[4]); html += bigRow(r[0], r[1], r[2], r[3], r[4], r[5]); }
     html = html.replace('<div class="phead">', listenBar(ids) + '<div class="phead">');
-    const due = dueMeds([p]); if (due.length) html = html.replace('<div class="srowbig', due.map(remCard).join('') + '<div class="srowbig');
+    const due = dueNow([p]); if (due.length) html = html.replace('<div class="srowbig', due.map(remCard).join('') + '<div class="srowbig');
     return { html, nav: 'family' };
   }
   function tdRow(p, href) { const t = tdPlan(p.td); return [href, ic('syringe'), T('rowTd'), t.next < 0 ? T('tdDone') : T('nextDose', { x: T('tdDose', { n: num(t.next + 1) }) }) + (t.from ? ' · ' + T('tdFrom', { d: fmtDate(t.from) }) : ''), 'ui.fam.row.td', 'vac']; }
@@ -463,11 +469,21 @@ export function initFamily(ctx) {
 
   /* ---------- medicines ---------- */
   const SLOT_KEY = { morning: 'tMorning', noon: 'tNoon', evening: 'tEvening', night: 'tNight' };
+  // a picture for each time of day: the sun coming up, the sun high, the sun going down, the moon
+  const SLOT_PIC = {
+    morning: '<circle cx="24" cy="24" r="24" fill="#FFF0CC"/><g stroke="#F29A0E" stroke-width="3.2" stroke-linecap="round"><path d="M24 9v5M11 16l3.5 3.5M37 16l-3.5 3.5"/></g><circle cx="24" cy="31" r="9.5" fill="#F29A0E"/><path d="M1.4 31H46.6A24 24 0 0 1 1.4 31z" fill="#6FA35C"/>',
+    noon: '<circle cx="24" cy="24" r="24" fill="#DCEFFB"/><g stroke="#F2B705" stroke-width="3.2" stroke-linecap="round"><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11.3 11.3l3.5 3.5M33.2 33.2l3.5 3.5M36.7 11.3l-3.5 3.5M14.8 33.2l-3.5 3.5"/></g><circle cx="24" cy="24" r="9" fill="#F2B705"/>',
+    evening: '<circle cx="24" cy="24" r="24" fill="#FFD9BF"/><circle cx="24" cy="32" r="10" fill="#E2591B"/><path d="M1.4 31H46.6A24 24 0 0 1 1.4 31z" fill="#5E7F4E"/>',
+    night: '<circle cx="24" cy="24" r="24" fill="#22305A"/><path d="M27 11a13 13 0 1 0 10 21A11 11 0 1 1 27 11z" fill="#FFE07A"/><g fill="#fff"><circle cx="13" cy="15" r="1.6"/><circle cx="35" cy="13" r="1.3"/><circle cx="12" cy="31" r="1.2"/></g>',
+  };
+  const slotPic = (s, cls = 'spic') => `<svg class="${cls}" viewBox="0 0 48 48" aria-hidden="true">${SLOT_PIC[s] || ''}</svg>`;
+  // a time as the family reads it: the hour on a 12-hour clock (the picture and the word say morning or evening)
+  const clock = (hm) => `${num(hour12(hm))}:${num(hm.slice(3))}`;
   function medCard(p, m) {
-    const day = localDay(), taken = (m.taken && m.taken[day]) || [], left = daysLeft(m), active = medActive(m);
+    const day = localDay(), taken = (m.taken && m.taken[day]) || [], left = daysLeft(m), active = medActive(m), tm = MT();
     let h = `<div class="medcard${active ? '' : ' off'}">`;
     h += `<div class="mtop">${m.photo ? `<img class="mphoto" data-fam-img="${esc(m.photo)}" alt="">` : `<span class="mphoto none">${ic('pill')}</span>`}<div class="mtx">${m.text ? `<div class="mt">${esc(m.text)}</div>` : ''}<div class="mm">${esc(fmtDate(m.d))}${left != null ? ' · ' + esc(active ? T('daysLeft', { n: num(left) }) : T('medDone')) : ''}</div></div>${m.rec ? playBtn(m.rec, 'big') : ''}</div>`;
-    if ((m.times || []).length) h += `<div class="mtimes">${m.times.map((s) => `<span class="mtime${taken.includes(s) ? ' ok' : ''}">${taken.includes(s) ? I.check : ''}${esc(T(SLOT_KEY[s]))}</span>`).join('')}</div>`;
+    if ((m.times || []).length) h += `<div class="mtimes">${m.times.map((s) => `<span class="mtime${taken.includes(s) ? ' ok' : ''}">${taken.includes(s) ? I.check : slotPic(s)}${esc(T(SLOT_KEY[s]))} <bdi dir="ltr">${esc(clock(tm[s]))}</bdi></span>`).join('')}</div>`;
     h += `<div class="mbtns"><button type="button" class="sbtn" data-fam-delmed="${esc(m.id)}">${esc(T('delete'))}</button></div></div>`;
     return h;
   }
@@ -475,10 +491,15 @@ export function initFamily(ctx) {
     const p = person(); if (!p) return screenList();
     const ids = ['ui.fam.med.lead', 'ui.fam.med.safe'];
     let html = top(T('rowMeds'), { back: '#/family/person' }) + listenBar(ids) + whoChip(p) + sayRow('ui.fam.med.lead', 'blk lead trow') + sayRow('ui.fam.med.safe', 'blk tip trow');
-    const due = dueMeds([p]); if (due.length) html += due.map(remCard).join('');
+    const due = dueNow([p]); if (due.length) html += due.map(remCard).join('');
     html += bigRow('#/family/med-add', I.plus, T('addMed'), '', 'ui.fam.row.meds', 'add');
     const list = (p.meds || []).slice().sort((a, b) => (medActive(b) - medActive(a)) || (a.d < b.d ? 1 : -1));
     html += list.length ? list.map((m) => medCard(p, m)).join('') : emptyRow('ui.fam.no-meds', ids);
+    // the family's own times (one set for everyone): under the medicines, easy to find
+    ids.push('ui.fam.times.row');
+    html += bigRow('#/family/times', slotPic('morning', 'spic row'), T('changeTimes'), timesLine(), 'ui.fam.times.row', 'times');
+    // a phone that already had medicines with times before the reminders came: ask once here
+    if (list.some((m) => medActive(m) && (m.times || []).length)) setTimeout(askNotifyOnce, 900);
     setTimeout(fillImages, 0);
     return { html, nav: 'family' };
   }
@@ -491,7 +512,8 @@ export function initFamily(ctx) {
     html += `<div class="fphoto">${sayRow('ui.fam.med.photo', 'trow')}<div class="recrow">${d.photo ? `<img class="mphoto big" data-fam-img="${esc(d.photo)}" alt="">` : ''}<label class="recbig photo">${ic('eye')}<span>${esc(T('takePhoto'))}</span><input type="file" accept="image/*" capture="environment" data-fam-photo hidden></label></div></div>`;
     html += `<div class="ftext">${sayRow('ui.fam.med.text', 'trow small')}<textarea class="small" data-fam-in="text" maxlength="300" rows="2" aria-label="${esc(T('medWrite'))}" placeholder="${esc(T('medWrite'))}">${esc(d.text)}</textarea></div>`;
     html += sayRow('ui.fam.med.times', 'trow dq');
-    html += `<div class="slots">${Object.keys(TIMES).map((s) => `<div class="srowbig"><button type="button" class="chip big slot" data-fam-slot="${s}" aria-pressed="${d.times.includes(s)}">${ic(s === 'night' ? 'moon' : 'clock')} ${esc(T(SLOT_KEY[s]))}</button>${big('ui.fam.t.' + s)}</div>`).join('')}</div>`;
+    const tm = MT();
+    html += `<div class="slots">${SLOTS.map((s) => `<div class="srowbig"><button type="button" class="chip big slot" data-fam-slot="${s}" aria-pressed="${d.times.includes(s)}">${slotPic(s)}<span class="sl">${esc(T(SLOT_KEY[s]))}</span><bdi class="tm" dir="ltr">${esc(clock(tm[s]))}</bdi></button>${spk('ui.fam.t.' + s, '', timeIds(s, tm[s]).slice(1)).replace('class="spk', 'class="spk big')}</div>`).join('')}</div>`;
     html += NP.field('mdays', { label: T('medDays'), say: 'ui.fam.med.days', unit: 'days', dec: 0, digits: 3, min: 1, max: 365, value: d.days == null ? null : d.days, onDone: (v) => { d.days = v; } });
     html += bigRow('', I.check, T('save'), '', 'ui.fam.save', 'save', ' data-fam="save-med"');
     setTimeout(fillImages, 0);
@@ -508,21 +530,29 @@ export function initFamily(ctx) {
     p.meds = p.meds || []; p.meds.push(m); F.draft = null; NP.set('mdays', null); touch(p);
     track('tool', { p: 'family-med' });
     toast(T('savedOk')); go('#/family/meds'); gc();
+    if (m.times.length) setTimeout(askNotifyOnce, 700); // the first medicine with a reminder: may the phone show it?
   }
   // a dose that is due: on the family pages, and as a pop-up when the app is open at that time
   function remCard(x) {
     const p = x.p, m = x.m;
-    return `<div class="remcard" data-block="ui.fam.rem"><div class="rh">${ic('clock')}<span>${esc(T('medTime'))} · ${esc(T(SLOT_KEY[x.slot]))}</span>${big('ui.fam.rem')}</div>`
+    return `<div class="remcard" data-block="ui.fam.rem"><div class="rh">${slotPic(x.slot)}<span>${esc(T('medTime'))} · ${esc(T(SLOT_KEY[x.slot]))}</span>${big('ui.fam.rem')}</div>`
       + `<div class="mtop">${picImg(p, 'mini')}<div class="mtx"><div class="mt">${esc(nameOf(p))}</div>${m.text ? `<div class="mm">${esc(m.text)}</div>` : ''}</div>${m.photo ? `<img class="mphoto" data-fam-img="${esc(m.photo)}" alt="">` : ''}${m.rec ? playBtn(m.rec, 'big') : ''}</div>`
       + `<div class="srowbig"><button type="button" class="sbig ok" data-fam-taken="${esc(p.id)}|${esc(m.id)}|${x.slot}">${I.check}<span class="tx"><span class="t">${esc(T('taken'))}</span></span></button>${big('ui.fam.b.taken')}</div>`
       + `<div class="srowbig"><button type="button" class="sbig later" data-fam-later="${esc(p.id)}|${esc(m.id)}|${x.slot}">${ic('clock')}<span class="tx"><span class="t">${esc(T('later'))}</span></span></button>${big('ui.fam.b.later')}</div></div>`;
   }
   function findMed(key) { const [pid, mid, slot] = key.split('|'); const p = S.kids.find((x) => x.id === pid); const m = p && (p.meds || []).find((x) => x.id === mid); return { p, m, slot }; }
-  function checkReminders() {
-    if (document.visibilityState !== 'visible' || !S.book || $('.dialog-wrap')) return;
-    const due = dueMeds(S.kids); if (!due.length) return;
-    const x = due.find((y) => !F.shown[localDay() + '|' + y.m.id + '|' + y.slot]); if (!x) return;
-    F.shown[localDay() + '|' + x.m.id + '|' + x.slot] = 1;
+  // the key of a dose's reminder: a dose put off with "Later" reminds again when its 15 minutes are over
+  const remKey = (x) => localDay() + '|' + x.m.id + '|' + x.slot + '|' + (x.m.snooze && x.m.snooze.k === localDay() + '|' + x.slot ? x.m.snooze.until : '');
+  // force: show the reminder even if it was shown already (the Android app's notification was tapped, or its alarm rang
+  // while the app was open: the app's own reminder wins, the phone shows no notification then)
+  function checkReminders(force) {
+    if (!S.book) return;
+    syncReminders();
+    const due = dueNow(S.kids);
+    if (document.visibilityState !== 'visible') { if (due.length) webNotify(due); return; }
+    if ($('.dialog-wrap') || !due.length) return;
+    const x = force === true ? due[0] : due.find((y) => !F.shown[remKey(y)]); if (!x) return;
+    F.shown[remKey(x)] = 1;
     const w = dialog(remCard(x), () => {});
     w.classList.add('remind');
     setTimeout(fillImages, 0);
@@ -531,6 +561,91 @@ export function initFamily(ctx) {
   }
   setInterval(checkReminders, 30000);
   setTimeout(checkReminders, 4000);
+  window.sehatRemindNow = () => { setTimeout(() => checkReminders(true), 300); }; // called by the Android app
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    closeWebNotes(); setTimeout(checkReminders, 800);
+  });
+
+  /* ---------- reminders when the app is not on the screen ---------- */
+  // Android app (android/, Reminders.java): the phone is given every dose of today and the next days that is not taken
+  // yet, with the words of its notification in the family's language. It rings at the dose time even when the app is
+  // closed or the phone was restarted. Sent at start, after every change, and every 30 seconds when it changed.
+  const IN_APK = location.hostname === 'appassets.androidplatform.net';
+  const AB = () => { const b = window.FHBAndroid; return b && typeof b.setReminders === 'function' ? b : null; };
+  function syncSoon() { clearTimeout(F.syncT); F.syncT = setTimeout(syncReminders, 300); }
+  function syncReminders() {
+    const b = AB(); if (!b || !S.book) return;
+    const items = upcoming(S.kids, new Date(), MT()).map((x) => ({
+      k: x.key, d: x.day, hm: x.hm, at: x.abs ? x.at : 0,
+      t: `${T('medTime')} · ${T(SLOT_KEY[x.slot])}`,
+      b: nameOf(x.p) + (x.m.text ? ': ' + x.m.text.slice(0, 140) : ''),
+    }));
+    const json = JSON.stringify({ v: 1, win: REMIND_MIN, chan: T('medReminders'), items });
+    if (json === F.sent) return;
+    try { b.setReminders(json); F.sent = json; } catch (e) {}
+  }
+  setTimeout(syncReminders, 1500);
+  // the website: while the page is open but not on the screen, the browser's own notification (only when the family
+  // allowed it when they saved a medicine). Nothing is sent from a server: a closed browser does not remind.
+  async function swReg() {
+    if (IN_APK || !('Notification' in window) || Notification.permission !== 'granted' || !('serviceWorker' in navigator)) return null;
+    try { return S.swReg || (await navigator.serviceWorker.getRegistration()) || null; } catch (e) { return null; }
+  }
+  async function webNotify(due) {
+    const reg = await swReg(); if (!reg || !reg.showNotification) return;
+    for (const x of due) {
+      const k = 'n' + remKey(x); if (F.shown[k]) continue; F.shown[k] = 1;
+      try {
+        await reg.showNotification(`${T('medTime')} · ${T(SLOT_KEY[x.slot])}`, { body: nameOf(x.p) + (x.m.text ? ': ' + x.m.text.slice(0, 140) : ''), tag: k, icon: 'img/app/icon-192.png', lang: S.lang, dir: S.lang === 'en' ? 'ltr' : 'rtl', vibrate: [400, 200, 400], requireInteraction: true, data: { hash: '#/family' } });
+      } catch (e) {}
+    }
+  }
+  async function closeWebNotes() { const reg = await swReg(); if (!reg || !reg.getNotifications) return; try { (await reg.getNotifications()).forEach((n) => n.close()); } catch (e) {} }
+  // may the phone show reminders? Asked once, when a medicine with a time is saved: a spoken line first, then the
+  // phone's own question (Android 13 and newer; the browser on the website)
+  function notifyNeed() {
+    const b = AB();
+    if (b) { try { return typeof b.notifyState === 'function' && b.notifyState() === 'ask'; } catch (e) { return false; } }
+    return !IN_APK && 'Notification' in window && Notification.permission === 'default' && 'serviceWorker' in navigator && !!navigator.serviceWorker.controller;
+  }
+  function askNotifyOnce() {
+    if (store.get('notifyAsked', false) || $('.dialog-wrap') || !notifyNeed()) return;
+    store.set('notifyAsked', true);
+    const w = dialog(`<div class="notask">${slotPic('morning', 'spic big')}${sayRow('ui.fam.notify.ask', 'trow dq')}</div>` + bigRow('', I.check, T('next'), '', 'ui.fam.notify.next', 'save', ' data-fam="notify-ok"'), () => {});
+    w.classList.add('remind');
+    play(['ui.fam.notify.ask'], { quiet: true });
+  }
+  function askNotify() {
+    const b = AB();
+    if (b) { try { if (typeof b.askNotify === 'function') b.askNotify(); } catch (e) {} return; }
+    try { const r = Notification.requestPermission(); if (r && r.then) r.catch(() => {}); } catch (e) {}
+  }
+
+  /* ---------- #/family/times: what time "morning", "midday", "evening" and "bedtime" are for this family ---------- */
+  const timesLine = () => { const t = MT(); return SLOTS.map((s) => clock(t[s])).join(' · '); };
+  function timeCard(s, hm) {
+    const r = SLOT_HOURS[s], h = +hm.slice(0, 2);
+    return `<div class="mtc ${s}" id="mtc-${s}" data-block="ui.fam.t.${s}"><div class="th">${slotPic(s, 'spic big')}<span class="tn">${esc(T(SLOT_KEY[s]))}</span>${spk('ui.fam.t.' + s, '', timeIds(s, hm).slice(1)).replace('class="spk', 'class="spk big')}</div>`
+      + `<div class="tset" dir="ltr"><button type="button" class="tpm" data-fam-time="${s}|-1" aria-label="${esc(T('hourEarlier'))}"${h <= r[0] ? ' disabled' : ''}>−</button><b class="tbig">${esc(clock(hm))}</b><button type="button" class="tpm" data-fam-time="${s}|1" aria-label="${esc(T('hourLater'))}"${h >= r[1] ? ' disabled' : ''}>+</button></div></div>`;
+  }
+  const timesIds = (t) => ['ui.fam.times.lead'].concat(...SLOTS.map((s) => timeIds(s, t[s])));
+  function screenTimes() {
+    const t = MT(), back = person() ? '#/family/meds' : '#/family';
+    let html = top(T('timesTitle'), { back }) + listenBar(timesIds(t)) + sayRow('ui.fam.times.lead', 'blk lead trow');
+    html += SLOTS.map((s) => timeCard(s, t[s])).join('');
+    html += bigRow('', I.check, T('save'), '', 'ui.fam.save', 'save', ' data-fam="times-done"');
+    return { html, nav: 'family' };
+  }
+  function changeTime(slot, dh) {
+    const t = moveTime(MT(), slot, dh);
+    if (isUsualTimes(t)) store.set('medtimes', null); else store.set('medtimes', t);
+    const el = $('#mtc-' + slot); if (el) el.outerHTML = timeCard(slot, t[slot]);
+    S.queueIds = timesIds(t);
+    stopAudio(); play(timeIds(slot, t[slot]), { quiet: true });
+    track('tool', { p: 'family-times' });
+    syncSoon();
+  }
 
   /* ---------- what the doctor said ---------- */
   function screenNotes() {
@@ -638,7 +753,7 @@ export function initFamily(ctx) {
       files.push({ name: 'media/' + id, data: new Uint8Array(await r.blob.arrayBuffer()) });
       media.push({ id, type: r.type || r.blob.type });
     }
-    const json = JSON.stringify(makeBundle(S.kids, media, new Date(), GN));
+    const json = JSON.stringify(makeBundle(S.kids, media, new Date(), GN, MT()));
     files.unshift({ name: BUNDLE, data: new TextEncoder().encode(json) });
     return makeZip(files);
   }
@@ -676,6 +791,8 @@ export function initFamily(ctx) {
     const res = mergePeople(S.kids, bundle.people), rn = mergeNotes(GN, bundle.notes);
     S.kids = res.list; if (!S.kid && S.kids[0]) S.kid = S.kids[0].id; saveKids();
     GN = rn.list; saveGN();
+    // the other phone's medicine times, when this phone still has the usual ones
+    if (bundle.times && isUsualTimes(MT()) && !isUsualTimes(bundle.times)) { store.set('medtimes', bundle.times); syncSoon(); }
     track('tool', { p: 'family-import' });
     toast(res.added + res.updated || !rn.added ? T('importDone', { n: num(res.added + res.updated) }) : T('savedOk')); play(['ui.fam.x.done'], { quiet: true });
     go('#/family');
@@ -696,7 +813,7 @@ export function initFamily(ctx) {
     F.draft.photo = await saveBlob(small, 'p'); ctx.render();
   });
   document.addEventListener('click', (e) => {
-    const t = e.target.closest('[data-fam],[data-fam-open],[data-fam-play],[data-fam-rec],[data-fam-pic],[data-fam-sex],[data-fam-visit],[data-fam-td],[data-fam-slot],[data-fam-delw],[data-fam-delmed],[data-fam-delnote],[data-fam-delrd],[data-fam-delgn],[data-fam-voiceto],[data-fam-taken],[data-fam-later],[data-fam-x],[data-fam-ids]');
+    const t = e.target.closest('[data-fam],[data-fam-open],[data-fam-play],[data-fam-rec],[data-fam-pic],[data-fam-sex],[data-fam-visit],[data-fam-td],[data-fam-slot],[data-fam-delw],[data-fam-delmed],[data-fam-delnote],[data-fam-delrd],[data-fam-delgn],[data-fam-voiceto],[data-fam-taken],[data-fam-later],[data-fam-x],[data-fam-ids],[data-fam-time]');
     if (!t) return;
     const d = t.dataset;
     if (t.tagName === 'A' && !d.famOpen) return;
@@ -706,6 +823,7 @@ export function initFamily(ctx) {
     if (d.famIds) { const el = $(d.famIds); if (el) play((el.dataset.ids || '').split(',').filter(Boolean)); return; }
     if (d.famRec) { const box = t.closest('.recbox'), sid = box && box.querySelector('[data-say]') ? box.querySelector('[data-say]').dataset.say : ''; if (F.rec) stopRec(); else startRec(d.famRec, +(d.max || 120), sid, F.draft && F.draft.for === 'voice' ? voiceDone : null); return; }
     if (d.famVoiceto) { voiceTo(d.famVoiceto); return; }
+    if (d.famTime) { const [slot, dh] = d.famTime.split('|'); changeTime(slot, +dh); return; }
     if (d.famDelgn) { if (!confirm(T('deleteThisQ'))) return; stopAudio(); A.pause(); GN = GN.filter((x) => x.id !== d.famDelgn); saveGN(); ctx.render(); gc(); return; }
     if (d.famPic) { if (F.draft) { const inp = $('[data-fam-in="name"]'); if (inp) F.draft.name = inp.value; const f = $('#fam-dob'); if (f) F.draft.dob = readDob(); F.draft.pic = d.famPic; } ctx.render(); return; }
     if (d.famSex) { if (F.draft) F.draft.sex = d.famSex; $$('[data-fam-sex]').forEach((b) => b.setAttribute('aria-pressed', b === t)); return; }
@@ -736,6 +854,8 @@ export function initFamily(ctx) {
       case 'save-med': saveMed(); return;
       case 'save-note': saveNote(); return;
       case 'import': pickFile(); return;
+      case 'times-done': toast(T('savedOk')); play(['ui.fam.saved'], { quiet: true }); if (F.prev && F.prev.startsWith('#/family') && history.length > 1) history.back(); else go(person() ? '#/family/meds' : '#/family'); return;
+      case 'notify-ok': { const w = t.closest('.dialog-wrap'); if (w) w.remove(); stopAudio(); askNotify(); return; }
       case 'voice-keep': { const dr = F.draft; if (!dr || dr.for !== 'voice' || !dr.rec) return; F.draft = null; keepGeneral(dr.rec); voiceSaved('#/family', ['ui.fam.voice.kept']); return; }
       case 'voice-new': { const dr = F.draft; if (!dr || dr.for !== 'voice' || !dr.rec) return; F.pending = { rec: dr.rec, d: todayISO() }; F.draft = null; location.replace('#/family/add'); return; }
     }
@@ -755,7 +875,7 @@ export function initFamily(ctx) {
     track('view', { p: 'family' });
     const r = {
       add: () => screenForm(true), edit: () => screenForm(false), person: screenPerson, vacc: () => screenVacc(false), td: () => screenVacc(true), weight: screenWeight,
-      meds: screenMeds, 'med-add': screenMedAdd, notes: screenNotes, 'note-add': screenNoteAdd, readings: screenReadings, copy: screenCopy, voice: screenVoice,
+      meds: screenMeds, 'med-add': screenMedAdd, times: screenTimes, notes: screenNotes, 'note-add': screenNoteAdd, readings: screenReadings, copy: screenCopy, voice: screenVoice,
     }[sub];
     const out = r ? r() : screenList();
     setTimeout(fillImages, 0);

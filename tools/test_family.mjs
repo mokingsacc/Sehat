@@ -82,6 +82,74 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   eq(D.dueMeds([{ id: 'x', meds: [{ id: 'f', d: '2026-10-08', times: ['morning'] }] }], now).length, 0, 'due: not before the start day');
   eq(D.dueMeds([{ id: 'x', meds: [{ id: 'o', d: '2026-10-01', times: ['morning'], on: false }] }], now).length, 0, 'due: stopped');
 }
+// the family's own medicine times (#/family/times)
+{
+  eq(D.cleanTimes(null), D.TIMES, 'times: usual times when none are kept');
+  eq(D.cleanTimes({ morning: '06:00', noon: '25:00', evening: 'x', night: '22:30', evil: 1 }), { morning: '06:00', noon: '12:00', evening: '18:00', night: '22:30' }, 'times: bad ones become the usual ones');
+  eq(D.cleanTimes({ morning: '21:00', night: '02:00' }), D.TIMES, 'times: a time outside its part of the day is not kept');
+  eq(D.moveTime(D.TIMES, 'morning', -1).morning, '06:00', 'times: one hour earlier');
+  eq(D.moveTime(D.TIMES, 'night', 1).night, '22:00', 'times: one hour later');
+  let t = D.TIMES; for (let i = 0; i < 30; i++) t = D.moveTime(t, 'morning', -1); eq(t.morning, '04:00', 'times: morning stops at 4');
+  t = D.TIMES; for (let i = 0; i < 30; i++) t = D.moveTime(t, 'night', 1); eq(t.night, '23:00', 'times: bedtime stops at 23 (no dose after midnight)');
+  ok(D.isUsualTimes(D.TIMES) && !D.isUsualTimes({ ...D.TIMES, noon: '13:00' }) && D.isUsualTimes(null), 'times: usual or not');
+  eq([D.hour12('07:00'), D.hour12('12:00'), D.hour12('18:00'), D.hour12('00:00')], [7, 12, 6, 12], 'times: 12-hour clock');
+  eq(D.timeIds('evening', '18:00'), ['ui.fam.t.evening', 'ui.num.6', 'ui.fam.oclock'], 'times: spoken as "evening, six o\'clock"');
+  const my = { ...D.TIMES, morning: '05:00', night: '23:00' };
+  const m = { id: 'd1', d: '2026-10-05', times: ['morning', 'night'] }, p = { id: 'p1', meds: [m] };
+  eq(D.dueMeds([p], new Date(2026, 9, 7, 5, 30), my).map((x) => x.slot), ['morning'], 'times: due at the family\'s morning (05:00)');
+  eq(D.dueMeds([p], new Date(2026, 9, 7, 5, 30)).length, 0, 'times: not due at 05:30 with the usual 07:00');
+  eq(D.dueMeds([p], new Date(2026, 9, 7, 8, 1), my).length, 0, 'times: 3 hours after 05:00 it is over');
+  eq(D.dueMeds([p], new Date(2026, 9, 7, 22, 30), my).length, 0, 'times: bedtime 23:00 not due at 22:30');
+  eq(D.dueMeds([p], new Date(2026, 9, 7, 23, 10), my).map((x) => x.slot), ['night'], 'times: bedtime due at 23:10');
+}
+// the doses the Android app is given (upcoming)
+{
+  const now = new Date(2026, 9, 7, 8, 0);
+  const m = { id: 'd1', d: '2026-10-07', days: 2, times: ['morning', 'evening'] }, p = { id: 'p1', meds: [m] };
+  let u = D.upcoming([p], now);
+  eq(u.map((x) => x.key), ['2026-10-07|d1|morning', '2026-10-07|d1|evening', '2026-10-08|d1|morning', '2026-10-08|d1|evening'], 'upcoming: the dose due now, then the next ones, until the last day (2 days)');
+  eq([u[0].d, u[0].day, u[0].hm, u[0].abs, u[0].at], [undefined, '2026-10-07', '07:00', false, new Date(2026, 9, 7, 7, 0).getTime()], 'upcoming: day, time of day, moment');
+  D.markTaken(m, '2026-10-07', 'morning'); u = D.upcoming([p], now);
+  eq(u[0].key, '2026-10-07|d1|evening', 'upcoming: a taken dose is not reminded');
+  const m2 = { id: 'd2', d: '2026-10-07', times: ['noon'] }; u = D.upcoming([{ id: 'p', meds: [m2] }], new Date(2026, 9, 7, 15, 1));
+  eq([u.length, u[0].day], [D.AHEAD_DAYS, '2026-10-08'], 'upcoming: a dose whose 3 hours are over is gone; 7 days ahead');
+  D.snooze(m2, '2026-10-07', 'noon', new Date(2026, 9, 7, 12, 30).getTime());
+  u = D.upcoming([{ id: 'p', meds: [m2] }], new Date(2026, 9, 7, 12, 31));
+  eq([u[0].key, u[0].abs, u[0].at], ['2026-10-07|d2|noon|' + (new Date(2026, 9, 7, 12, 45).getTime()), true, new Date(2026, 9, 7, 12, 45).getTime()], 'upcoming: "Later" reminds again 15 minutes later, as a new reminder');
+  const my = { ...D.TIMES, evening: '20:00' };
+  eq(D.upcoming([p], now, my)[0].hm, '20:00', 'upcoming: the family\'s own times');
+  eq(D.upcoming([{ id: 'x', meds: [{ id: 'o', d: '2026-10-01', times: ['noon'], on: false }, { id: 'f', d: '2026-10-09', times: ['noon'] }] }], now).map((x) => x.day)[0], '2026-10-09', 'upcoming: not a stopped medicine, not before the start day');
+  eq(D.upcoming([{ id: 'x', meds: [{ id: 'a', d: '2026-10-01', times: D.SLOTS }] }], now, D.TIMES, 7, 10).length, 10, 'upcoming: at most max');
+  ok(D.upcoming([p, { id: 'q', meds: [{ id: 'z', d: '2026-10-01', times: ['noon'] }] }], now).every((x, i, a) => !i || a[i - 1].at <= x.at), 'upcoming: earliest first');
+}
+// the phone's own clock and time zone: a phone that moves to another time zone or whose clock is changed
+{
+  const was = process.env.TZ;
+  const at7 = (tz, day = '2026-10-12') => { process.env.TZ = tz; return D.slotTime(day, 'morning'); };
+  eq(at7('Asia/Kabul'), Date.UTC(2026, 9, 12, 2, 30), 'time zone: 07:00 in Kabul (UTC+4:30)');
+  eq(at7('Asia/Tehran'), Date.UTC(2026, 9, 12, 3, 30), 'time zone: 07:00 in Tehran (UTC+3:30)');
+  eq(at7('Asia/Karachi'), Date.UTC(2026, 9, 12, 2, 0), 'time zone: 07:00 in Karachi (UTC+5)');
+  eq(at7('America/New_York', '2026-03-08'), Date.UTC(2026, 2, 8, 11, 0), 'time zone: 07:00 on a clock-change day (summer time starts)');
+  for (const tz of ['Asia/Kabul', 'Pacific/Kiritimati', 'Pacific/Pago_Pago', 'UTC', 'America/New_York']) {
+    process.env.TZ = tz;
+    const m = { id: 'd', d: '2026-10-12', times: ['morning', 'night'] }, p = { id: 'p', meds: [m] };
+    const early = new Date(2026, 9, 12, 0, 30); // half past midnight on the phone: still the same calendar day everywhere
+    eq(D.localDay(early), '2026-10-12', `time zone ${tz}: the day is the phone's own day`);
+    const u = D.upcoming([p], early);
+    eq([u[0].key, new Date(u[0].at).getHours(), new Date(u[0].at).getMinutes(), u[1].key], ['2026-10-12|d|morning', 7, 0, '2026-10-12|d|night'], `time zone ${tz}: 07:00 on the phone's clock`);
+    eq(D.dueMeds([p], new Date(2026, 9, 12, 7, 5)).map((x) => x.slot), ['morning'], `time zone ${tz}: due at 07:05 on the phone's clock`);
+  }
+  // the clock is put forward past a dose time (or the phone was off): the dose is due, and stays due for 3 hours
+  process.env.TZ = 'Asia/Kabul';
+  const m = { id: 'd', d: '2026-10-12', times: ['noon'] }, p = { id: 'p', meds: [m] };
+  eq(D.dueMeds([p], new Date(2026, 9, 12, 11, 0)).length, 0, 'clock: 11:00, nothing due');
+  eq(D.dueMeds([p], new Date(2026, 9, 12, 13, 30)).length, 1, 'clock put forward to 13:30: noon is due');
+  eq(D.upcoming([p], new Date(2026, 9, 12, 13, 30))[0].key, '2026-10-12|d|noon', 'clock put forward: the phone is told the dose due now');
+  // the family's code makes no dose time from UTC: only the date sums (addDays, dayDiff) use a UTC noon on purpose
+  const src = readFileSync(ROOT + 'js/family-data.js', 'utf8') + readFileSync(ROOT + 'js/family.js', 'utf8');
+  eq([...src.matchAll(/getUTC\w+|setUTC\w+|Date\.UTC|toUTCString/g)].map((x) => x[0]), [], 'no UTC clock reading in the family code');
+  if (was === undefined) delete process.env.TZ; else process.env.TZ = was;
+}
 // copying to another phone
 {
   const people = D.migrate([{ id: 'k1', v: 2, pic: 'child', sex: 'f', name: 'Zahra', nameRec: 'a1abc', dob: '2024-01-01', meds: [{ id: 'm', rec: 'a2abc', photo: 'p3abc' }], notes: [{ id: 'n', rec: 'a4abc' }], u: 5 }]).list;
@@ -105,6 +173,12 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   eq(D.cleanNotes([{ id: 'g1', d: '2026-10-08', rec: 'a9abc', evil: 1 }, { id: 'g1', d: '2026-10-08', rec: 'a9abc' }, { id: '../x', d: '2026-10-08', rec: 'a9abc' }, { id: 'g2', d: 'bad', rec: 'a9abc' }, { id: 'g3', d: '2026-10-08', rec: '../../x' }, null, 'x']),
     [{ id: 'g1', d: '2026-10-08', t: 0, rec: 'a9abc' }], 'family voice notes: bad rows and fields dropped');
   eq(D.cleanNotes('nope'), [], 'family voice notes: not a list');
+  // the family's medicine times travel in the same file (only when they are not the usual ones)
+  const my = { ...D.TIMES, morning: '06:00' };
+  eq(D.readBundle(JSON.parse(JSON.stringify(D.makeBundle(people, [], new Date(0), [], my)))).times, my, 'times: bundle round trip');
+  ok(!('times' in D.makeBundle(people, [], new Date(0), [], D.TIMES)), 'times: the usual times are not written');
+  eq(D.readBundle(JSON.parse(JSON.stringify(b))).times, null, 'times: none in an older file');
+  eq(D.readBundle({ app: 'sehat', kind: 'family', people: [], times: { morning: '23:00', noon: 5 } }).times, D.TIMES, 'times: bad times in a file are not kept');
   const mn = D.mergeNotes([{ id: 'g1' }], [{ id: 'g1' }, { id: 'g2' }]);
   eq([mn.added, mn.list.map((x) => x.id)], [1, ['g1', 'g2']], 'family voice notes: merge adds the new ones only');
 }
@@ -133,6 +207,7 @@ const book = JSON.parse(readFileSync(ROOT + 'content/book.json', 'utf8'));
   const ids = new Set([...src.matchAll(/'(ui\.fam\.[a-z0-9.-]+)'/g)].map((m) => m[1]).filter((x) => !x.endsWith('.')));
   for (const p of D.PICS) ids.add('ui.fam.pic.' + p);
   for (const t of Object.keys(D.TIMES)) ids.add('ui.fam.t.' + t);
+  for (const s of D.SLOTS) for (let h = D.SLOT_HOURS[s][0]; h <= D.SLOT_HOURS[s][1]; h++) D.timeIds(s, String(h).padStart(2, '0') + ':00').forEach((x) => ids.add(x));
   for (const t of D.TD) ids.add('ui.fam.' + t);
   for (const a of ['whatsapp', 'telegram', 'imo', 'messenger']) ids.add('ui.fam.x.' + a);
   for (const l of ['vthin', 'thin', 'ok', 'heavy', 'vheavy']) ids.add('ui.fam.bmi.' + l);

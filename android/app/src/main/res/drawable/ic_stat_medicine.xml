@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The small icon of a medicine reminder (status bar): one colour on transparent, as Android draws it. A capsule
+     pill. A vector, which every Android version this app runs on (5.0+) can draw. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M4.22,12.69l4.24,-4.24 7.07,7.07 -4.24,4.24a5,5 0,0 1,-7.07 -7.07z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M9.88,7.03l1.41,-1.41a5,5 0,0 1,7.07 7.07l-1.41,1.41z" />
+</vector>

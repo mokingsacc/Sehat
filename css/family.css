@@ -137,3 +137,24 @@ input.small,textarea.small{font:inherit;font-size:16px;width:100%;padding:8px 12
 .npkeys button{min-height:68px;border-radius:18px;background:var(--card);border:1.5px solid var(--line);font-size:30px;font-weight:800}
 .npkeys button:active{background:var(--teal-t)}
 .np .sbig.npok{--c:var(--green)}
+/* medicine times: a picture for each time of day (sun coming up, sun high, sun going down, moon) */
+.spic{width:30px;height:30px;flex:0 0 auto;display:inline-block;vertical-align:middle}
+.mtime .spic{width:20px;height:20px;stroke:none}
+.remcard .rh .spic{width:34px;height:34px}
+.sbig .spic.row{width:44px;height:44px}
+.srowbig.fam.times .sbig{--c:#3D5A8C}
+.chip.big.slot{justify-content:flex-start}
+.chip.big.slot .spic{width:38px;height:38px}
+.chip.big.slot .sl{flex:1 1 auto;text-align:start}
+.chip.big.slot .tm{font-size:17px;font-weight:700;opacity:.85}
+.mtc{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:10px 12px;margin-bottom:12px}
+.mtc .th{display:flex;align-items:center;gap:10px}
+.mtc .th .spic.big{width:56px;height:56px}
+.mtc .tn{flex:1 1 auto;font-size:22px;font-weight:800;min-width:0}
+.mtc .tset{display:flex;align-items:center;gap:8px;margin-top:8px}
+.tpm{flex:0 0 72px;width:72px;height:72px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:46px;font-weight:800;line-height:1;display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+.tpm:disabled{background:#D9D4CC;color:#fff}
+.tpm:active:not(:disabled){background:var(--teal-d)}
+.tbig{flex:1 1 auto;min-width:0;text-align:center;white-space:nowrap;font-size:36px;font-size:min(44px,11vw);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.notask{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:12px}
+.notask .spic.big{width:72px;height:72px}

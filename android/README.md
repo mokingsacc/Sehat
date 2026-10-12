@@ -51,6 +51,41 @@ APK file and **pass it from phone to phone without internet** (Bluetooth, Quick 
 | `FHBAndroid.isInstalled(pkg)` | `true` if that messaging app is on the phone (used to grey out its button) |
 | `FHBAndroid.apkSize()` | size of the APK in bytes, shown on the share screen |
 | `FHBAndroid.shareFileTo(base64, name, mime, pkg)` | sends a file made by the page (the family records file) straight to one listed messaging app; false = not possible |
+| `FHBAndroid.setReminders(json)` | the medicine doses still to come, for the phone's own reminders (below) |
+| `FHBAndroid.notifyState()` | `"on"` (notifications can show), `"ask"` (Android 13+, not allowed yet), `"off"` (switched off in the phone's settings) |
+| `FHBAndroid.askNotify()` | Android 13+: the phone's "Allow notifications?" question |
+| `FHBAndroid.exactReminders()` | `false` on Android 12+ when "Alarms and reminders" is not allowed (reminders then come a few minutes late) |
+
+The app calls `window.sehatRemindNow()` in the page when a reminder notification is tapped or its alarm rings while the
+app is on the screen.
+
+### Medicine reminders (`Reminders.java`, `ReminderPlan.java`, `ReminderReceiver.java`)
+The family records (`js/family.js`) call `setReminders(json)` at start, after every change (a medicine added or
+deleted, "Taken", "Later", the family's medicine times, records received) and when the list changes as time passes:
+`{v: 1, win: 180, chan: "<channel name>", items: [{k, d, hm, at, t, b}]}`, one item per dose from the one due now to 7
+days ahead that is not taken yet. `k` names the dose (`day|medicine|slot`, and `|<ms>` for a dose put off with "Later"),
+`d` + `hm` are its day and time on the phone's clock (`at` instead: a moment, for "Later"), `t` and `b` the notification's
+title and text already in the family's language (time of day; the person's name and the medicine's words).
+- The list is kept in SharedPreferences (`reminders`). One alarm at a time, for the next dose: `setExactAndAllowWhileIdle`
+  when exact alarms are allowed (always before Android 12; on 12+ when **Alarms and reminders** is on for Sehat, off
+  by default on Android 14+), otherwise `setAndAllowWhileIdle` (Android 6+: a few minutes late, but it still rings when
+  the phone is asleep, where a plain `setWindow` could wait for hours) or `setWindow` (10 minutes, Android 5).
+- When it rings: every dose due then that has not rung yet. App on the screen: no notification, the page shows its own
+  spoken reminder (`sehatRemindNow`). Otherwise a notification in the channel "Medicine reminders" (high importance,
+  sound, vibration; small icon `res/drawable/ic_stat_medicine.xml`, a white vector pill). A tap opens the app on
+  `#/family` with the reminder. A dose that is taken or put off disappears from the list, and its notification from the
+  phone.
+- `ReminderReceiver` sets the alarm again after `BOOT_COMPLETED` (and `QUICKBOOT_POWERON`), `TIME_SET`,
+  `TIMEZONE_CHANGED`, `MY_PACKAGE_REPLACED` and the exact-alarm permission changing. A dose's moment is worked out from
+  its day and time in the phone's time zone of that moment, so after a time zone or clock change it rings at the time
+  on the new clock. A dose missed while the phone was off still rings after the restart if its 3 hours are not over.
+- Permissions: `POST_NOTIFICATIONS` (asked on Android 13+ when the first medicine with a time is saved, after the page
+  says what it is for), `SCHEDULE_EXACT_ALARM` (not asked; without it reminders are a few minutes late),
+  `RECEIVE_BOOT_COMPLETED`, `VIBRATE` (Android 7 and older).
+- Test the plan without Android: `cd android && javac -d /tmp/rp app/src/main/java/org/sehat/app/ReminderPlan.java test/ReminderPlanTest.java && java -cp /tmp/rp org.sehat.app.ReminderPlanTest`.
+- Phones that kill apps in the background (Xiaomi, Oppo, Vivo, Tecno, some Samsung): a reminder can be missed until
+  Sehat is allowed to "Autostart" or its battery use is set to "No restrictions" in the phone's settings.
+  Force-stopping the app clears its alarm until it is opened again.
 
 ### Share Sehat (`js/share.js`, route `#/share`)
 The web app's **Share Sehat** screen (home card and Settings row) uses these calls: a Nearby button (`shareApp()`, the
@@ -62,6 +97,11 @@ offline QR code.
 Every push to `main` (and the **Run workflow** button under **Actions → Android app**) builds a signed `sehat.apk`.
 Download it from the repository's **Releases** page (one release per book version, tag `v<version>`), or from the
 workflow run's **Artifacts**.
+
+**Test builds:** Run workflow on any other branch (or `gh workflow run android.yml --ref <branch>`) first builds the
+book from that branch (`tools/build.py`), then publishes a **pre-release** with tag `test-<version>`
+(`.../releases/download/test-<version>/sehat.apk`). It is never marked "latest" and never touches the `v<version>`
+releases families download; delete old test pre-releases from the Releases page when done.
 
 ### Signing secrets (one time)
 The APK must always be signed with the same key (made once; kept in the private `android-signing` folder, not in

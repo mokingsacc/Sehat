@@ -445,6 +445,31 @@
    "fa": "بزرگسال",
    "ps": "لوی سړی یا ښځه",
    "en": "Adult"
+  },
+  "changeTimes": {
+   "fa": "تغییر وقت‌ها",
+   "ps": "وختونه بدل کړئ",
+   "en": "Change the times"
+  },
+  "timesTitle": {
+   "fa": "وقت‌های دوا",
+   "ps": "د درملو وختونه",
+   "en": "Medicine times"
+  },
+  "hourLater": {
+   "fa": "یک ساعت بعدتر",
+   "ps": "یو ساعت وروسته",
+   "en": "One hour later"
+  },
+  "hourEarlier": {
+   "fa": "یک ساعت وقت‌تر",
+   "ps": "یو ساعت مخکې",
+   "en": "One hour earlier"
+  },
+  "medReminders": {
+   "fa": "یادآوری دوا",
+   "ps": "د درملو یادونه",
+   "en": "Medicine reminders"
   }
  },
  "say": {
@@ -1562,6 +1587,31 @@
    "fa": "وزن‌هایی که نوشته‌اید؛ تازه‌ترین در اول.",
    "ps": "هغه وزنونه چې تاسو لیکلي دي؛ تر ټولو نوی په سر کې.",
    "en": "The weights you wrote, newest first."
+  },
+  "ui.fam.times.row": {
+   "fa": "وقت صبح، چاشت، شام و وقت خواب را برای خانوادهٔ خود تغییر دهید.",
+   "ps": "د خپلې کورنۍ لپاره د سهار، غرمې، ماښام او د خوب وخت بدل کړئ.",
+   "en": "Change what time morning, midday, evening and bedtime are for your family."
+  },
+  "ui.fam.times.lead": {
+   "fa": "این‌ها وقت‌های دوا برای تمام خانوادهٔ شما است. برای بعدتر، جمع را بزنید. برای وقت‌تر، منفی را بزنید. گوشی در همین وقت‌ها یادتان می‌دهد.",
+   "ps": "دا ستاسو د ټولې کورنۍ لپاره د درملو وختونه دي. د وروسته لپاره جمع ووهئ. د مخکې لپاره منفي ووهئ. ټیلیفون په همدې وختونو کې درته وریادوي.",
+   "en": "These are the medicine times for your whole family. Press plus for later. Press minus for earlier. The phone reminds you at these times."
+  },
+  "ui.fam.oclock": {
+   "fa": "بجه.",
+   "ps": "بجې.",
+   "en": "o'clock."
+  },
+  "ui.fam.notify.ask": {
+   "fa": "تا گوشی حتی وقتی برنامه بسته است یادتان بدهد، بعدی را بزنید، بعد اجازه را بزنید.",
+   "ps": "د دې لپاره چې ټیلیفون درته هغه وخت هم وریاد کړي چې اپ بند وي، بل ووهئ، بیا اجازه ووهئ.",
+   "en": "So that the phone can remind you even when the app is closed, press Next, then press Allow."
+  },
+  "ui.fam.notify.next": {
+   "fa": "بعدی.",
+   "ps": "بل.",
+   "en": "Next."
   }
  }
 }

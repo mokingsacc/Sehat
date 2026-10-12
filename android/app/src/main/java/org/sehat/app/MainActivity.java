@@ -33,6 +33,7 @@ import android.widget.Toast;
 import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
 import androidx.webkit.ServiceWorkerClientCompat;
 import androidx.webkit.ServiceWorkerControllerCompat;
@@ -45,6 +46,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,6 +58,10 @@ public class MainActivity extends Activity {
     private static final int REQ_MIC = 1;
     private static final int REQ_LOCATION = 2;
     private static final int REQ_FILES = 3;
+    private static final int REQ_NOTIFY = 4;
+    private static final String POST_NOTIFICATIONS = "android.permission.POST_NOTIFICATIONS";   // Android 13+
+    private static volatile boolean onScreen;                  // the app is in front (its own medicine reminder wins)
+    private static WeakReference<MainActivity> current = new WeakReference<>(null);
     private static final int THEME_COLOR = 0xFFB6322D;
     private static final int PAGE_COLOR = 0xFFFBFAF7;
 
@@ -105,7 +111,35 @@ public class MainActivity extends Activity {
             if ("http".equals(u.getScheme()) || "https".equals(u.getScheme())) openExternal(u);
         });
 
-        if (state == null || web.restoreState(state) == null) web.loadUrl(START_URL);
+        // a medicine reminder was tapped: open on the family page (the page then shows its spoken reminder)
+        String dose = getIntent() == null ? null : getIntent().getStringExtra(Reminders.EXTRA_DOSE);
+        if (dose != null) web.loadUrl(START_URL + "#/family");
+        else if (state == null || web.restoreState(state) == null) web.loadUrl(START_URL);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        String dose = intent == null ? null : intent.getStringExtra(Reminders.EXTRA_DOSE);
+        if (dose != null && web != null) {
+            Reminders.dismiss(this, dose);
+            web.evaluateJavascript("if(location.hash!=='#/family')location.hash='#/family';window.sehatRemindNow&&window.sehatRemindNow()", null);
+        }
+    }
+
+    /** Whether the app is in front now (ReminderReceiver then lets the page remind instead of a notification). */
+    static boolean onScreen() {
+        return onScreen;
+    }
+
+    /** The alarm rang while the app was in front: the page shows its spoken reminder now. */
+    static void remindInApp() {
+        MainActivity a = current.get();
+        if (a == null) return;
+        a.runOnUiThread(() -> {
+            if (a.web != null) a.web.evaluateJavascript("window.sehatRemindNow&&window.sehatRemindNow()", null);
+        });
     }
 
     @Override
@@ -117,11 +151,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        current = new WeakReference<>(this);
+        onScreen = true;
         if (web != null) web.onResume();
+        Reminders.run(getApplicationContext());   // set the alarm again (a force stop clears it); a dose due now is the page's to remind
     }
 
     @Override
     protected void onPause() {
+        onScreen = false;
         if (web != null) web.onPause();
         super.onPause();
     }
@@ -358,6 +396,8 @@ public class MainActivity extends Activity {
             if (any) pendingMic.grant(new String[]{PermissionRequest.RESOURCE_AUDIO_CAPTURE});
             else pendingMic.deny();
             pendingMic = null;
+        } else if (requestCode == REQ_NOTIFY) {
+            Reminders.run(getApplicationContext());
         } else if (requestCode == REQ_LOCATION && pendingGeoCallback != null) {
             pendingGeoCallback.invoke(pendingGeoOrigin, any, false);   // coarse alone is enough for "nearest clinic"
             pendingGeoCallback = null;
@@ -552,6 +592,39 @@ public class MainActivity extends Activity {
             } catch (Exception e) {
                 return false;
             }
+        }
+
+        /**
+         * The medicine doses still to come (js/family.js): {v, win, chan, items: [{k, d, hm, at, t, b}]}. Kept on the
+         * phone; each one rings as a notification at its time, even when the app is closed or after a restart.
+         */
+        @JavascriptInterface
+        public void setReminders(String json) {
+            Reminders.save(getApplicationContext(), json);
+        }
+
+        /** "on": notifications can be shown; "ask": Android 13+ and not asked yet (or refused once); "off": switched off. */
+        @JavascriptInterface
+        public String notifyState() {
+            if (NotificationManagerCompat.from(MainActivity.this).areNotificationsEnabled()) return "on";
+            if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) return "ask";
+            return "off";
+        }
+
+        /** Android 13+: the phone's own "Allow notifications?" question (the page says what it is for first). */
+        @JavascriptInterface
+        public void askNotify() {
+            if (Build.VERSION.SDK_INT < 33) return;
+            runOnUiThread(() -> {
+                if (checkSelfPermission(POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+                    requestPermissions(new String[]{POST_NOTIFICATIONS}, REQ_NOTIFY);
+            });
+        }
+
+        /** Whether the reminders ring on time (false: Android 12+ without "Alarms and reminders"; they come a few minutes late). */
+        @JavascriptInterface
+        public boolean exactReminders() {
+            return Reminders.exactAllowed(MainActivity.this);
         }
 
         @JavascriptInterface

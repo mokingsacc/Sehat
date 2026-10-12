@@ -1,5 +1,7 @@
 # Builds the Android app (android/), signs it with the release key from the repository secrets,
 # and publishes sehat.apk as a GitHub Release (tag v<content version>) and as a workflow artifact.
+# A test build (Run workflow on any branch other than main) rebuilds the book from that branch first and publishes a
+# pre-release instead (tag test-<content version>): never "latest", never the v<version> release people download.
 name: Android app
 on:
   push:
@@ -11,7 +13,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write   # to create the release
-concurrency: { group: android, cancel-in-progress: false }
+concurrency: { group: "${{ github.ref == 'refs/heads/main' && 'android' || format('android-test-{0}', github.ref_name) }}", cancel-in-progress: false }
 jobs:
   apk:
     runs-on: ubuntu-latest
@@ -41,6 +43,12 @@ jobs:
             if [ -z "${!v}" ]; then echo "::error::Signing secrets are missing. See android/README.md, 'Signing secrets'."; exit 1; fi
           done
           printf '%s' "$KS" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      # main has the built book committed; a branch usually does not (content/book.json, version.json and sw.js are
+      # made by tools/build.py and committed only on main), so a test build makes them from the branch's sources
+      - name: Build the book (test builds only)
+        if: github.ref != 'refs/heads/main'
+        run: python3 tools/build.py | tail -3
 
       - name: Copy the web app into the APK
         run: bash android/sync-web.sh
@@ -76,6 +84,7 @@ jobs:
           if-no-files-found: error
 
       - name: Publish the GitHub Release
+        if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: v${{ steps.apk.outputs.version }}
@@ -96,3 +105,19 @@ jobs:
             gh release create "$TAG" out/sehat.apk --target "$GITHUB_SHA" --title "Sehat $TAG" \
               --notes "Android app (sehat.apk) for book version ${TAG#v}. Install it on a phone, then send it to other phones from the app (no internet needed)."
           fi
+
+      - name: Publish a test pre-release (not main)
+        if: github.ref != 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: test-${{ steps.apk.outputs.version }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          NOTES="Test build from branch $BRANCH (commit ${GITHUB_SHA::7}). Not for families: the app people use is the latest v... release."
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" out/sehat.apk --clobber
+            gh release edit "$TAG" --prerelease --latest=false --notes "$NOTES"
+          else
+            gh release create "$TAG" out/sehat.apk --prerelease --latest=false --target "$GITHUB_SHA" --title "Sehat test $TAG ($BRANCH)" --notes "$NOTES"
+          fi
+          echo "Test pre-release: https://github.com/$GITHUB_REPOSITORY/releases/download/$TAG/sehat.apk" >> "$GITHUB_STEP_SUMMARY"
