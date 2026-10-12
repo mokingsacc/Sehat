@@ -138,7 +138,8 @@
      "y": 320,
      "at": 600,
      "r": 40,
-     "until": 3000
+     "until": 3000,
+     "still": false
     },
     {
      "type": "ring",
