@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/spine-hold), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/spine-hold), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): falls-fractures.still's dotted body line now stops at the chin instead of running across the face.",
  "_check": [
   "Frames 2 and 3 show a falling wall behind (the 'danger, move him now' case); the app's carry text has no danger in it."
  ],
@@ -103,8 +103,8 @@
       485
      ],
      "to": [
-      700,
-      475
+      640,
+      478
      ],
      "at": 2600
     }

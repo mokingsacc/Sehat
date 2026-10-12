@@ -5,7 +5,7 @@
  "h": 720,
  "adult": false,
  "approved": "2026-10-10, Mo (\"incorporate everything new and all the fixes into the app\"; \"yes\" to switching on all the animations, 20:02)",
- "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/fever-fit), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic).",
+ "_note": "Mo's illustration delivery of 9 Oct 2026 (illustrations-2026-10-09/medical-illustrations/fever-fit), packed by tools/steps_images.py --px 800 --patch. Live since 10 Oct 2026 (STEPS in js/anim.js, anim block on the topic). 12 Oct 2026 (emergency picture check): fever-fits.safe's ring round the stove and the hot tea moved inside the picture (it was cut off at the right edge).",
  "poster": 0,
  "frames": {
   "1": {
@@ -105,10 +105,10 @@
    "overlays": [
     {
      "type": "ring",
-     "x": 860,
+     "x": 850,
      "y": 230,
      "at": 1000,
-     "rx": 110,
+     "rx": 100,
      "ry": 90
     }
    ]
