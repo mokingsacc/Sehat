@@ -1,0 +1,159 @@
+// Every word the app shows, in Dari (prs) and Pashto (ps). Lesson text comes from the packs, not from here.
+// Drafts: a native Dari speaker and a native Pashto speaker must check these before children use the app.
+
+const S = {
+  prs: {
+    app: 'قلم',
+    hub_on: 'وصل', hub_off: 'وصل نیست',
+    welcome_title: 'در کدام صنف هستی؟', welcome_kicker: 'شاگرد تازه',
+    name: 'نام', name_hint: 'نامت (فقط در همین تلفن می‌ماند)',
+    primary: 'مکتب ابتدایی', primary_note: 'صنف ۱ تا ۶ · رنگه، بزرگ، با صدا',
+    secondary: 'متوسطه و لیسه', secondary_note: 'صنف ۷ تا ۱۲ · ساده و تمیز',
+    not_in_school: 'مکتب نمی‌روم · تازه خواندن یاد می‌گیرم',
+    year_n: 'صنف {n}', beginner: 'تازه‌کار',
+    lessons: 'درس‌ها', ask: 'بپرس', print: 'چاپ',
+    next_lesson: 'درس بعدی', listen: 'گوش بده', continue: 'ادامه بده',
+    print_today: 'ورق امروزم را چاپ کن',
+    subjects: 'مضمون‌ها', every_lesson_open: 'هر درس باز است',
+    maths: 'ریاضی', science: 'ساینس', english: 'انگلیسی', dari: 'دری', pashto: 'پښتو',
+    of: '{a} از {b}', minutes: '{n} دقیقه', lesson_n: 'درس {a} از {b}',
+    worksheet: 'ورق تمرین', worksheet_note: 'با قلم روی کاغذ حل کن، بعد چک کن',
+    print_it: 'چاپ کن', check_sheet: 'ورق را چک کن',
+    back: 'برگشت', close: 'بستن', next: 'بعدی', done: 'تمام',
+    say_it: 'بگو: «{w}»', say_note: 'صدایت ضبط می‌شود و دوباره می‌شنوی', say_aloud: 'بلند بگو: «{w}»',
+    recording: 'دارد ضبط می‌کند… برای تمام کردن دوباره بزن',
+    right: 'درست! آفرین', wrong: 'نه، دوباره ببین', answer_is: 'جواب درست: {a}', why: 'چرا؟',
+    check_answer: 'ببین', your_answer: 'جوابت را بنویس، مثل ۳/۴',
+    lesson_done: 'درس تمام شد! آفرین',
+    ask_title: 'بپرس', ask_scope: 'فقط درباره‌ی درس‌های مکتب جواب می‌دهد',
+    ask_placeholder: 'سوالت را بنویس…', send: 'بفرست', ready_questions: 'یکی را انتخاب کن یا خودت بنویس',
+    badge_checked: 'جواب بررسی‌شده', badge_maths: 'حساب شد', badge_ai: 'هوش مصنوعی · بررسی نشده',
+    badge_ai_checked: 'هوش مصنوعی · حساب چک شد', badge_lesson: 'از درس', badge_teacher: 'جواب معلم',
+    badge_waiting: 'منتظر جواب معلم', badge_rules: 'برای تو',
+    send_teacher: 'بفرست به معلم تا ببیند', sent_teacher: 'به معلم رفت',
+    offline_ask: 'مرکز درسی وصل نیست. نزدیک‌ترین جواب از همین درس:',
+    no_offline: 'برای پرسیدن به وای‌فای مرکز درسی وصل شو.',
+    todays_sheet: 'ورق امروز', how_many: 'چند ورق؟', sheets_word: 'ورق',
+    name_on_sheet: 'نام {name} بالای ورق', practice_sheet: 'ورق تمرین', answer_sheet: 'ورق جواب‌ها · معلم',
+    printer_hub: 'پرینتر مرکز درسی', printer_ready: 'آماده · ورقت را از آنجا بگیر',
+    printer_busy: 'مشغول · ورقت در صف است', printer_off: 'پرینتر آماده نیست',
+    printer_outbox: 'پرینتر وصل نیست · ورق در مرکز نگه داشته می‌شود',
+    later: 'بعداً', get_pdf: 'پرینتر نیست؟ فایل PDF بگیر',
+    printing: 'دارد چاپ می‌کند…', printed: 'چاپ شد! ورقت را از پرینتر بگیر.',
+    saved: 'ورق در مرکز نگه داشته شد. معلم آن را چاپ می‌کند.', print_failed: 'چاپ نشد. به معلم بگو.',
+    need_pin: 'برای این، رمز معلم لازم است', too_many_prints: 'فعلاً بس است. از معلم بپرس.',
+    no_hub_print: 'برای چاپ به وای‌فای مرکز درسی وصل شو.',
+    check_title: 'ورق را چک کن', check_note: 'جواب‌های کاغذ را این‌جا بنویس',
+    sheet_code: 'عدد گوشه‌ی پایین ورق', open_code: 'باز کن', check_btn: 'چک کن',
+    well_done: 'آفرین {name}!', look_again: '{n} تا را دوباره ببین.', all_right: 'همه درست است!',
+    simplify: 'درست، ولی ساده‌اش کن: {a}', show_answer: 'جواب را نشانم بده', was_it_right: 'درست بود؟',
+    yes: 'بله', no: 'نه', print_new: 'ورق تازه', check_with_teacher: 'این را معلم یا پدر و مادر می‌بیند',
+    teacher: 'صفحه‌ی معلم', teacher_pin: 'رمز معلم', enter: 'ورود', wrong_pin: 'رمز درست نیست',
+    questions_review: 'سوال‌ها برای بررسی', correct_btn: 'درست است', fix_btn: 'اصلاح', reject_btn: 'رد',
+    write_answer: 'جواب بنویس', save: 'نگه دار', cancel: 'لغو', pashto_teacher: 'پښتو: جواب را معلم می‌نویسد',
+    urgent: 'فوری: یک شاگرد کمک می‌خواهد. با شاگردان صحبت کن.',
+    asked_today: 'سوال امروز', checked_today: 'جواب بررسی‌شده', pages_today: 'ورق امروز', ai: 'هوش مصنوعی',
+    on: 'روشن', off: 'خاموش', print_card: 'کارت مرکز را چاپ کن', no_questions: 'سوالی برای بررسی نیست.',
+    recent_prints: 'چاپ‌های تازه', problems: 'مشکل در درس‌ها',
+    add_child: 'شاگرد تازه', who_title: 'کی درس می‌خواند؟', change_year: 'صنف یا زبان را عوض کن',
+    no_voice: 'صدا هنوز آماده نیست', offline: 'مرکز درسی وصل نیست', loading: 'صبر کن…',
+    error: 'چیزی درست کار نکرد. دوباره کوشش کن.', hear_page: 'این صفحه را بشنو', hear: 'بشنو',
+    other_years: 'درس‌های صنف‌های دیگر', no_lessons: 'هنوز درسی نیست.', this_year: 'برای صنف تو',
+    draft_note: 'نسخه‌ی آزمایشی · متن‌ها هنوز بررسی نشده‌اند', more: 'بیشتر', fewer: 'کمتر',
+    language: 'زبان', status_done: 'خوانده شد', start_lesson: 'شروع درس',
+    your_turn: 'حالا تو بگو', thinking: 'دارد فکر می‌کند…', printed_sheets: 'ورق‌هایی که چاپ کردی',
+    answer_saved: 'جواب نگه داشته شد', no_key: 'جواب‌های این ورق هنوز این‌جا نیست. به مرکز درسی وصل شو.',
+    look_at_paper: 'به کاغذ نگاه کن و بگو', of_right: '{a} از {b} درست', refresh: 'تازه کن',
+    wait_minute: 'چند بار اشتباه شد. یک دقیقه صبر کن.', hub_card: 'کارت مرکز',
+    job_queued: 'در صف', job_printing: 'چاپ می‌شود', job_done: 'چاپ شد', job_saved: 'نگه داشته شد', job_failed: 'نشد', approved: 'جواب‌های تأییدشده', lang_prs: 'دری', lang_ps: 'پښتو', lang_en: 'انگلیسی',
+  },
+  ps: {
+    app: 'قلم',
+    hub_on: 'وصل', hub_off: 'نه دی وصل',
+    welcome_title: 'په کوم ټولګي کې یې؟', welcome_kicker: 'نوی زده کوونکی',
+    name: 'نوم', name_hint: 'ستا نوم (یوازې په همدې ټیلیفون کې پاتې کېږي)',
+    primary: 'لومړنی ښوونځی', primary_note: 'ټولګي ۱ تر ۶ · رنګین، لوی، له غږ سره',
+    secondary: 'منځنی او لیسه', secondary_note: 'ټولګي ۷ تر ۱۲ · ساده او پاک',
+    not_in_school: 'ښوونځي ته نه ځم · نوی لوستل زده کوم',
+    year_n: 'ټولګی {n}', beginner: 'نوی زده کوونکی',
+    lessons: 'لوستونه', ask: 'وپوښته', print: 'چاپ',
+    next_lesson: 'بل لوست', listen: 'غوږ ونیسه', continue: 'دوام ورکړه',
+    print_today: 'د نن پاڼه مې چاپ کړه',
+    subjects: 'مضمونونه', every_lesson_open: 'هر لوست خلاص دی',
+    maths: 'ریاضي', science: 'ساینس', english: 'انګلیسي', dari: 'دري', pashto: 'پښتو',
+    of: '{a} له {b}', minutes: '{n} دقیقې', lesson_n: 'لوست {a} له {b}',
+    worksheet: 'د تمرین پاڼه', worksheet_note: 'په قلم یې پر کاغذ حل کړه، بیا یې وګوره',
+    print_it: 'چاپ یې کړه', check_sheet: 'پاڼه وګوره',
+    back: 'بېرته', close: 'بندول', next: 'بل', done: 'پای',
+    say_it: 'ووایه: «{w}»', say_note: 'غږ دې ثبتېږي او بیا یې اورې', say_aloud: 'په لوړ غږ ووایه: «{w}»',
+    recording: 'ثبتوي… د بشپړولو لپاره بیا یې کېکاږه',
+    right: 'سم دی! شاباس', wrong: 'نه، بیا یې وګوره', answer_is: 'سم ځواب: {a}', why: 'ولې؟',
+    check_answer: 'وګوره', your_answer: 'خپل ځواب ولیکه، لکه ۳/۴',
+    lesson_done: 'لوست پای ته ورسېد! شاباس',
+    ask_title: 'وپوښته', ask_scope: 'یوازې د ښوونځي د لوستونو په اړه ځواب ورکوي',
+    ask_placeholder: 'خپله پوښتنه ولیکه…', send: 'ولېږه', ready_questions: 'یوه یې غوره کړه یا پخپله ولیکه',
+    badge_checked: 'کتل شوی ځواب', badge_maths: 'حساب شو', badge_ai: 'مصنوعي ځیرکتیا · نه دی کتل شوی',
+    badge_ai_checked: 'مصنوعي ځیرکتیا · حساب وکتل شو', badge_lesson: 'له لوست څخه', badge_teacher: 'د ښوونکي ځواب',
+    badge_waiting: 'د ښوونکي ځواب ته په تمه', badge_rules: 'ستا لپاره',
+    send_teacher: 'ښوونکي ته یې ولېږه چې وې ګوري', sent_teacher: 'ښوونکي ته ولاړه',
+    offline_ask: 'د زده کړې مرکز نه دی وصل. له همدې لوست څخه نږدې ځواب:',
+    no_offline: 'د پوښتلو لپاره د زده کړې مرکز له وای فای سره وصل شه.',
+    todays_sheet: 'د نن پاڼه', how_many: 'څو پاڼې؟', sheets_word: 'پاڼې',
+    name_on_sheet: 'د {name} نوم د پاڼې پر سر', practice_sheet: 'د تمرین پاڼه', answer_sheet: 'د ځوابونو پاڼه · ښوونکی',
+    printer_hub: 'د زده کړې مرکز پرنټر', printer_ready: 'چمتو دی · خپله پاڼه له هغه ځایه واخله',
+    printer_busy: 'بوخت دی · ستا پاڼه په کتار کې ده', printer_off: 'پرنټر چمتو نه دی',
+    printer_outbox: 'پرنټر نه دی وصل · پاڼه په مرکز کې ساتل کېږي',
+    later: 'وروسته', get_pdf: 'پرنټر نشته؟ د PDF فایل واخله',
+    printing: 'چاپوي…', printed: 'چاپ شوه! خپله پاڼه له پرنټر څخه واخله.',
+    saved: 'پاڼه په مرکز کې وساتل شوه. ښوونکی به یې چاپ کړي.', print_failed: 'چاپ نه شوه. ښوونکي ته ووایه.',
+    need_pin: 'د دې لپاره د ښوونکي رمز په کار دی', too_many_prints: 'اوس بس دي. له ښوونکي وپوښته.',
+    no_hub_print: 'د چاپ لپاره د زده کړې مرکز له وای فای سره وصل شه.',
+    check_title: 'پاڼه وګوره', check_note: 'د کاغذ ځوابونه دلته ولیکه',
+    sheet_code: 'د پاڼې په لاندې کونج کې عدد', open_code: 'خلاص یې کړه', check_btn: 'وګوره',
+    well_done: 'شاباس {name}!', look_again: '{n} یې بیا وګوره.', all_right: 'ټول سم دي!',
+    simplify: 'سم دی، خو ساده یې کړه: {a}', show_answer: 'ځواب راوښیه', was_it_right: 'سم و؟',
+    yes: 'هو', no: 'نه', print_new: 'نوې پاڼه', check_with_teacher: 'دا ښوونکی یا مور او پلار ګوري',
+    teacher: 'د ښوونکي پاڼه', teacher_pin: 'د ښوونکي رمز', enter: 'ننوځه', wrong_pin: 'رمز سم نه دی',
+    questions_review: 'د کتلو لپاره پوښتنې', correct_btn: 'سم دی', fix_btn: 'سمول', reject_btn: 'ردول',
+    write_answer: 'ځواب ولیکه', save: 'وساته', cancel: 'پرېږده', pashto_teacher: 'پښتو: ځواب ښوونکی لیکي',
+    urgent: 'بیړنی: یو زده کوونکی مرسته غواړي. له زده کوونکو سره خبرې وکړه.',
+    asked_today: 'د نن پوښتنې', checked_today: 'کتل شوي ځوابونه', pages_today: 'د نن پاڼې', ai: 'مصنوعي ځیرکتیا',
+    on: 'فعال', off: 'بند', print_card: 'د مرکز کارت چاپ کړه', no_questions: 'د کتلو لپاره پوښتنه نشته.',
+    recent_prints: 'نوي چاپونه', problems: 'په لوستونو کې ستونزې',
+    add_child: 'نوی زده کوونکی', who_title: 'څوک لوست کوي؟', change_year: 'ټولګی یا ژبه بدله کړه',
+    no_voice: 'غږ لا چمتو نه دی', offline: 'د زده کړې مرکز نه دی وصل', loading: 'لږ صبر وکړه…',
+    error: 'یو څه سم کار ونه کړ. بیا هڅه وکړه.', hear_page: 'دا پاڼه واوره', hear: 'واوره',
+    other_years: 'د نورو ټولګیو لوستونه', no_lessons: 'لا لوست نشته.', this_year: 'ستا د ټولګي لپاره',
+    draft_note: 'ازمېښتي نسخه · متنونه لا نه دي کتل شوي', more: 'ډېر', fewer: 'لږ',
+    language: 'ژبه', status_done: 'لوستل شوی', start_lesson: 'لوست پیل کړه',
+    your_turn: 'اوس ته ووایه', thinking: 'فکر کوي…', printed_sheets: 'هغه پاڼې چې چاپ دې کړې',
+    answer_saved: 'ځواب وساتل شو', no_key: 'د دې پاڼې ځوابونه لا دلته نشته. د زده کړې له مرکز سره وصل شه.',
+    look_at_paper: 'کاغذ ته وګوره او ووایه', of_right: '{a} له {b} سم', refresh: 'تازه کول',
+    wait_minute: 'څو ځله غلط شو. یوه دقیقه صبر وکړه.', hub_card: 'د مرکز کارت',
+    job_queued: 'په کتار کې', job_printing: 'چاپېږي', job_done: 'چاپ شو', job_saved: 'وساتل شو', job_failed: 'ونه شو', approved: 'تایید شوي ځوابونه', lang_prs: 'دري', lang_ps: 'پښتو', lang_en: 'انګلیسي',
+  },
+};
+
+let lang = 'prs';
+
+export function setLang(l) { lang = S[l] ? l : 'prs'; }
+export function getLang() { return lang; }
+
+// s('of', {a: 2, b: 10}) -> "۲ از ۱۰"
+export function s(key, vars) {
+  let t = (S[lang] && S[lang][key]) ?? S.prs[key] ?? key;
+  if (vars) for (const [k, v] of Object.entries(vars)) t = t.replaceAll(`{${k}}`, String(v));
+  return fa(t);
+}
+
+// Latin digits to the Persian digit shapes used in Dari and Pashto
+export function fa(x) {
+  return String(x).replace(/[0-9]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+}
+
+// a lesson text object {prs, ps, en} or a plain string, in the child's language
+export function pick(t, l = lang) {
+  if (t == null) return '';
+  if (typeof t === 'string') return t;
+  return t[l] || t.prs || t.ps || t.en || '';
+}

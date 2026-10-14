@@ -1,0 +1,5 @@
+# the hub's own records (questions, teacher PIN, print outbox) never leave the hub
+data/
+.venv/
+.pytest_cache/
+review-sheets/

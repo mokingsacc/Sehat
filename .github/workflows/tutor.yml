@@ -1,0 +1,31 @@
+# Tests the village tutor (tutor/): the lesson packs, the hub's Python tests and the app's scripts.
+# Runs only when tutor/ changes, so the Sehat app's own workflows are untouched.
+name: Tutor
+on:
+  push:
+    branches: [main]
+    paths: ["tutor/**", ".github/workflows/tutor.yml"]
+  pull_request:
+    paths: ["tutor/**", ".github/workflows/tutor.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: tutor } }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with: { node-version: 22 }
+      - name: Install the PDF maker's system libraries
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libpango-1.0-0 libpangoft2-1.0-0
+      - name: Install the hub
+        run: python3 -m venv .venv && .venv/bin/pip install --quiet -r hub/requirements.txt
+      - name: Check the lesson packs
+        run: .venv/bin/python tools/validate_pack.py
+      - name: Hub tests
+        working-directory: tutor/hub
+        run: ../.venv/bin/python -m pytest -q
+      - name: App scripts parse
+        run: for f in app/js/*.js app/js/screens/*.js; do node --check "$f"; done

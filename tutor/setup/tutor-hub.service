@@ -1,0 +1,24 @@
+# The village hub's web server: the app for phones, lessons, Ask, worksheets and printing (port 80).
+[Unit]
+Description=Qalam village learning hub
+After=network-online.target cups.service
+Wants=network-online.target
+
+[Service]
+User=qalam
+Group=qalam
+EnvironmentFile=/etc/qalam/hub.env
+WorkingDirectory=/opt/qalam/tutor/hub
+ExecStart=/opt/qalam/venv/bin/python -m tutor_hub serve --host 0.0.0.0 --port 80
+# port 80 without running as root
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/qalam
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

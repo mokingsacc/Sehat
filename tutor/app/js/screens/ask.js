@@ -1,0 +1,150 @@
+// Ask: a child's question goes to the hub, which answers from checked sources first (docs/ARCHITECTURE.md).
+// Every answer carries a badge saying where it came from. Away from the hub, the closest answer from a lesson
+// already on this phone is shown and marked as such; nothing is made up on the phone.
+
+import { getLang, pick, s } from '../i18n.js';
+import * as hub from '../hub.js';
+import * as library from '../library.js';
+import { speak } from '../speech.js';
+import * as state from '../state.js';
+import { fill, h, hubChip, icon, plain, rich, speakerBtn, toast, topbar } from '../ui.js';
+
+const BADGE = {
+  rules: ['badge_rules', 'checked', 'check'], maths: ['badge_maths', 'checked', 'check'],
+  bank: ['badge_checked', 'checked', 'check'], approved: ['badge_checked', 'checked', 'check'],
+  teacher: ['badge_teacher', 'checked', 'check'], lesson: ['badge_lesson', 'wait', 'book'],
+  offline: ['badge_lesson', 'wait', 'book'], none: ['badge_waiting', 'wait', 'users'],
+};
+const POLL_MS = 20000;
+
+function badge(source, mc) {
+  if (source === 'ai') return h('span', { class: 'badge ai' }, icon('chip', 16), mc ? s('badge_ai_checked') : s('badge_ai'));
+  const [key, cls, ic] = BADGE[source] || BADGE.none;
+  return h('span', { class: 'badge ' + cls }, icon(ic, 16), s(key));
+}
+
+// words for matching a question to a lesson's ready answers when the hub is out of reach
+const words = (t) => String(t || '').toLowerCase()
+  .replace(/[ً-ٰٟ]/g, '').replace(/[يى]/g, 'ی').replace(/ك/g, 'ک').replace(/[أإآ]/g, 'ا')
+  .replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 1);
+
+function offlineAnswer(q, lang) {
+  const want = new Set(words(q));
+  if (!want.size) return null;
+  let best = null;
+  for (const l of library.all()) {
+    const full = state.cache('lesson.' + l.id);
+    for (const b of (full && full.bank) || []) {
+      const have = new Set(words(pick(b.q, lang)));
+      let n = 0;
+      want.forEach((w) => { if (have.has(w)) n += 1; });
+      if (!best || n / want.size > best.score) best = { score: n / want.size, a: pick(b.a, lang) };
+    }
+  }
+  return best && best.score >= 0.5 ? best.a : null;
+}
+
+export default async function ask() {
+  const c = state.child();
+  const lang = getLang();
+  await library.load();
+  const context = library.next(c);
+  const full = context ? await hub.lesson(context.id) : null;
+  const ready = ((full && full.bank) || []).slice(0, 3).map((b) => pick(b.q, lang)).filter(Boolean);
+  let pending = null;
+
+  const thread = h('div', { class: 'thread', 'aria-live': 'polite' });
+  const readyBox = h('div', { class: 'ready' });
+  const input = h('input', { placeholder: s('ask_placeholder'), 'aria-label': s('ask_placeholder'), maxlength: 400,
+    autocomplete: 'off', enterkeyhint: 'send' });
+  const composer = h('form', { class: 'composer', onSubmit: (e) => { e.preventDefault(); send(input.value); } },
+    input, h('button', { type: 'submit', 'aria-label': s('send') }, icon('send', 26, 2.3)));
+
+  const answerBubble = (text, badgeEl, extra) => h('div', { class: 'bubble-a' },
+    h('div', { class: 'text' }, rich(text)),
+    h('div', { class: 'meta' }, badgeEl,
+      h('span', { class: 'row' }, extra || null, speakerBtn(() => speak(plain(text), lang), { size: 'sm' }))));
+
+  function drawThread() {
+    const asks = state.child().asks;
+    fill(thread, asks.map((a) => {
+      const out = [h('div', { class: 'bubble-q' }, a.q)];
+      if (a.note) out.push(h('div', { class: 'note' }, s(a.note)));
+      if (a.a) {
+        const canSend = a.id && !a.sent && !a.done && (a.source === 'ai' || a.source === 'lesson');
+        const extra = canSend ? h('button', { class: 'link', type: 'button', onClick: () => toTeacher(a) }, s('send_teacher'))
+          : (a.sent || (a.waiting && a.source === 'rules')) && !a.done ? h('span', { class: 'badge wait' }, s('sent_teacher')) : null;
+        out.push(answerBubble(a.a, badge(a.source, a.mc), extra));
+      }
+      if (a.teacher) out.push(answerBubble(a.teacher, badge('teacher')));
+      return out;
+    }), pending ? [h('div', { class: 'bubble-q' }, pending), h('div', { class: 'bubble-a' }, h('div', { class: 'text muted' }, s('thinking')))] : null);
+    fill(readyBox, asks.length || pending || !ready.length ? null : [
+      h('div', { class: 'muted small' }, s('ready_questions')),
+      ready.map((q) => h('button', { type: 'button', onClick: () => send(q) }, icon('ask', 22), q))]);
+  }
+
+  async function send(text) {
+    text = String(text || '').trim();
+    if (!text || pending) return;
+    input.value = '';
+    const entry = { id: null, q: text, at: Date.now(), lang };
+    if (!hub.online()) {
+      const a = offlineAnswer(text, lang);
+      if (!a) { toast(s('no_offline')); input.value = text; return; }
+      state.addAsk({ ...entry, a, source: 'offline', note: 'offline_ask', done: true });
+      drawThread();
+      return;
+    }
+    pending = text;
+    drawThread();
+    composer.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    try {
+      const r = await hub.ask({ text, lang, year: c.year, lesson: context ? context.id : null });
+      state.addAsk({ ...entry, id: r.id, a: r.text, source: r.source, mc: r.maths_checked, waiting: r.waiting });
+    } catch (e) {
+      toast(hub.online() ? s('error') : s('offline'));
+      input.value = text;
+    }
+    pending = null;
+    drawThread();
+    composer.scrollIntoView({ block: 'end', behavior: 'smooth' });
+  }
+
+  async function toTeacher(a) {
+    try {
+      await hub.toTeacher(a.id);
+      state.updateAsk(a.id, { sent: true });
+      toast(s('sent_teacher'));
+    } catch { toast(hub.online() ? s('error') : s('offline')); }
+    drawThread();
+  }
+
+  // the teacher's answers arrive on this screen; questions older than three days stop being checked
+  async function poll() {
+    if (!hub.online()) return;
+    const open = state.child().asks.filter((a) => a.id && !a.done && (a.waiting || a.sent) && Date.now() - a.at < 3 * 864e5);
+    let changed = false;
+    for (const a of open) {
+      try {
+        const r = await hub.askStatus(a.id);
+        if (r.status === 'reviewed' && r.teacher_answer) {
+          const same = r.teacher_answer.trim() === String(a.a || '').trim();
+          state.updateAsk(a.id, same ? { source: 'teacher', done: true } : { teacher: r.teacher_answer, done: true });
+          changed = true;
+        } else if (r.status === 'rejected') {
+          state.updateAsk(a.id, { done: true });
+        }
+      } catch (e) { if (e.status === 404) state.updateAsk(a.id, { done: true }); }
+    }
+    if (changed) drawThread();
+  }
+
+  drawThread();
+  poll();
+  const timer = setInterval(poll, POLL_MS);
+  const el = h('div', { class: 'screen' },
+    topbar({ back: '#/home', title: s('ask_title'), sub: s('ask_scope'), extra: hubChip() }),
+    thread, readyBox, composer);
+  return { el, tab: 'ask', cleanup: () => clearInterval(timer), onHub: poll };
+}

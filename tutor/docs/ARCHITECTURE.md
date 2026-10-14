@@ -1,0 +1,103 @@
+# How the tutor fits together
+
+Working name **Qalam** (قلم, pen). The plan behind it: [Tutor Build Plan](https://claude.ai/artifact/CyzJJLpoB2bDe4fizEgcUx).
+The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi3aT).
+
+```
+ phones (years 0-6: bold look C, years 7-12: clean look B)          paper worksheet
+        |  Wi-Fi, no internet                                             ^
+        v                                                                 |
+ +------------------------- village or school hub ----------------------------+
+ |  hub server (hub/tutor_hub, FastAPI)                                        |
+ |   lessons  <- content/packs (JSON lessons, pictures)                        |
+ |   Ask      -> rules -> exact maths -> checked answers -> AI* -> lesson -> teacher
+ |   sheets   -> HTML -> PDF (WeasyPrint) -> print queue -> CUPS -> printer ----+
+ |   teacher page (PIN): review answers, see printing, print the hub card      |
+ |   SQLite: questions (no names), approved answers, print jobs                |
+ |   * any local model server with the OpenAI chat API, e.g. llama.cpp         |
+ +------------------------------------------------------------------------------+
+```
+
+## The parts
+
+| Folder | What it is |
+|---|---|
+| `app/` | The phone app: plain HTML, CSS and JavaScript modules, no build step. The hub serves it at `/`. |
+| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `store.py` the database, `llm.py` the AI slot. |
+| `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
+| `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
+| `tools/` | `validate_pack.py` checks packs; `make_sheets.py` prints every sheet to PDF for reviewers. |
+
+## Answering a question (brain.py)
+
+The safest source answers first, and every answer says where it came from, so the app can label it.
+
+1. **Rules** (`rules.py`). Distress words: a kind "tell a trusted adult now" message, and the question goes to the
+   top of the teacher's list. Health: points to a health worker or the Sehat app, and the teacher sees it.
+   Politics, religious rulings, weapons: "I only help with lessons". Words match whole words only.
+2. **Maths.** A plain sum (`۱/۲ + ۱/۴ چند می‌شود؟`) is worked out exactly with fractions. Badge: worked out.
+3. **Checked answers.** A lesson's question bank, or an answer the teacher approved, when it explains at least
+   60% of the question (BM25 search, `search.py`). Badge: checked.
+4. **AI**, only in the languages trusted so far (`TUTOR_AI_LANGS`, Dari and English at first). The model gets the
+   closest lesson passages. Every sum it writes is recomputed; an answer with a wrong sum is never shown. Badge: AI,
+   or "AI, sums checked".
+5. **Lesson passage**, if it explains at least 45% of the question. Badge: from the lesson.
+6. **Teacher.** Nothing fits: the child sees "your question went to the teacher", and the answer appears on the
+   phone when the teacher writes it.
+
+The child can send any AI or lesson answer to the teacher. Each answer the teacher approves becomes a checked
+answer for the next child who asks; approved Pashto answers are also the Pashto data the AI does not have yet.
+
+## Printing (sheets.py, printing.py)
+
+The phone sends lesson, copies, language, the seed and (optionally) the child's name. The hub renders the sheet as
+HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints one job at a time through CUPS
+(`lp`), or saves PDFs in `data/outbox/` when there is no printer (`TUTOR_PRINT=outbox`).
+
+- **Seeds.** Sheets with generated sums (fractions, adding, times tables) get new numbers on each print. The seed
+  is printed in the corner (`M7-03-4821`). The same seed always gives the same sums, so "Check my sheet" knows
+  the answers, and the phone keeps the answer key it fetched when printing, to check at home.
+- **Limits.** Answer sheets and more than `TUTOR_FREE_COPIES` copies need the teacher's PIN; each phone may print
+  `TUTOR_COPIES_PER_HOUR` copies an hour. Five wrong PINs lock that phone out for a minute.
+- **Names** are printed once and never stored.
+
+## Privacy
+
+- The hub stores no names. A question is kept with a random token (so the asking phone can fetch the teacher's
+  answer), the year, subject and lesson; questions are deleted after `TUTOR_KEEP_DAYS` (60).
+- Progress, names and the asked-questions list stay on the phone (`localStorage`, key `qalam.v1`).
+- Nothing leaves the hub: there is no internet connection and no analytics.
+
+## Routes
+
+| Route | What |
+|---|---|
+| `GET /api/hello` | Hub name, version, lesson count, AI on and its languages, printer state, free copies |
+| `GET /api/packs` | Every pack and its lesson list (no lesson content) |
+| `GET /api/lessons/{id}` | One lesson, picture names turned into URLs, without the sheet |
+| `GET /packs/{pack}/pictures/{file}` | A lesson picture |
+| `POST /api/ask` | `{text, lang, year, subject, lesson}` -> answer, badge source, token |
+| `GET /api/ask/{token}` | Status and the teacher's answer |
+| `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
+| `GET /api/sheets/{id}.html` / `.pdf` | The sheet (`seed`, `lang`, `kind=worksheet or answers`, `name`); header `X-Sheet-Seed` |
+| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`) |
+| `POST /api/print` | `{lesson, kind, copies, lang, seed, name, device}`; PIN header for answer sheets or many copies |
+| `GET /api/print/{job}` | queued, printing, done, saved or failed |
+| `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
+
+## The app (app/js)
+
+- `main.js` starts up and routes by the address after `#` (`#/home`, `#/lesson/{id}`, `#/print/{id}`,
+  `#/check/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`).
+- The year a child picks sets `<html data-mode>`: `small` (years 0-6, look C) or `big` (years 7-12, look B). The
+  CSS tokens do the rest ([DESIGN.md](DESIGN.md)).
+- `hub.js` finds the hub (the website the app came from first, then the usual hotspot addresses), and caches the
+  lesson list and opened lessons so they still show when the hub is out of reach.
+- `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
+  child's year, one subject after another. Every lesson stays open from the subject pages.
+- Text from lessons, the hub or the AI is always added as text, never as HTML.
+
+## Not built yet
+
+See [ROADMAP.md](ROADMAP.md): the Android app (lessons kept on the phone, recording yourself over plain http,
+finding the hub), speech input, recorded voices for lessons, progress counts for the teacher, updates by USB stick.
