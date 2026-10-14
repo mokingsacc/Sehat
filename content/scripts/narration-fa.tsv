@@ -178,6 +178,31 @@ ui.beliefUnproven	ثابت نشده، اما ضرر ندارد	Not proven, but n
 ui.beliefHarm	این‌ها ضرر می‌رساند	This can harm
 ui.rd.v.bp-very-high-2	دو بار ۱۸۰ بر ۱۲۰ یا بیشتر است. همین حالا به شفاخانه بروید، شب باشد یا روز. دواهای خود را با خود ببرید.	180 over 120 or more, two times. Go to hospital now, day or night. Take your medicines with you.
 ui.rd.v.spo2-lowish-2	دو بار ۹۴ یا کمتر است. امروز به کلینیک بروید. اگر نفس کشیدن سخت شد یا لب‌ها کبود شد، همین حالا به شفاخانه بروید، شب باشد یا روز.	94 or less, two times. Go to the clinic today. If breathing becomes hard or the lips turn blue, go to hospital now, day or night.
+ui.onb.lang	زبان خود را انتخاب کنید. برای دری، دکمهٔ آبی را بزنید.	Choose your language: the blue button for Dari, the yellow button for Pashto.
+ui.onb.about	این صحت است، یک کتاب صحی رایگان برای خانوادهٔ شما. بدون انترنت هم کار می‌کند.	This is Sehat, a free health book for your family. It works without internet.
+ui.onb.help	به شما می‌گوید وقتی کسی مریض یا زخمی است چه کنید، و چه وقت به کلینیک بروید.	It tells you what to do when someone is sick or hurt, and when to go to the clinic.
+ui.onb.talk	هر دکمه گپ می‌زند. بلندگو را بزنید تا بشنوید.	Every button can talk. Press the speaker to hear it.
+ui.onb.keep	برای این‌که صحت روی گوشی شما بماند، دکمهٔ زرد را بزنید. اگر نتوانستید، از کسی کمک بخواهید.	To keep Sehat on your phone, press the yellow button. If you cannot, ask someone to help you.
+ui.onb.net	چند دقیقه انترنت را خاموش نکنید، تا صداها روی گوشی شما ذخیره شوند.	Keep the internet on for a few minutes, so the voices can save on your phone.
+ui.onb.next	وقتی آماده بودید، دکمهٔ آبی را بزنید.	When you are ready, press the blue button.
+ui.intro.more	بلندگوی کنار هر بخش را بزنید تا بیشتر بشنوید.	Press the speaker next to any part to hear more.
+ui.intro.health	این‌جا کمک پیدا می‌کنید، وقتی کسی مریض یا زخمی است. در حالت عاجل، دکمهٔ سرخ را بزنید. برای طفل، دکمهٔ آبی. برای بزرگسالان، دکمهٔ سبز.	Here you find help when someone is sick or hurt. In an emergency, press the red button. For a child, the blue button. For adults, the green button.
+ui.intro.family	هر نفر خانوادهٔ خود را اضافه کنید، تا واکسین‌ها، رشد و دواهای شان روی همین گوشی بماند.	Add each person in your family, to keep their vaccines, growth and medicines on this phone.
+ui.intro.children	اطفال: مریضی‌ها، علایم خطر و رشد. یک موضوع را انتخاب کنید تا باز شود.	Children: illnesses, danger signs and growth. Choose a topic to open it.
+ui.set.autoSay	وقتی صفحه‌ای باز می‌شود، نامش را می‌گوید. دو بار اول، این را هم می‌گوید که برای چیست. این‌جا می‌توانید آن را خاموش کنید.	When a page opens, it says its name. The first two times, it also says what it is for. You can switch this off here.
+ui.name.children	اطفال	Children
+ui.name.adults	بزرگسالان	Adults
+ui.name.firstaid	احیا و کمک‌های اولیه	CPR and first aid
+ui.name.ask	چه مشکلی دارید؟	What is wrong?
+ui.name.kit	بکس صحی خانه	Home health kit
+ui.name.safety	خانهٔ بی‌خطر	Home safety
+ui.name.hospital	رفتن به کلینیک یا شفاخانه	Going to the clinic or hospital
+ui.name.checks	علایم اولیه و معاینات صحی	Early signs and health checks
+ui.name.food-help	غذایی که کمک می‌کند	Food that helps
+ui.name.food	غذا و باغچه	Food and garden
+ui.name.wellbeing	زندگی صحتمند	Well-being
+ui.name.feedback	نظر شما	Your ideas
+ui.name.share	صحت را شریک کنید	Share Sehat
 ui.ask.who	مریض کیست؟ یکی را بزنید.	Who is sick? Tap one.
 ui.ask.who.after	مادر بعد از ولادت	Mother after the birth
 ui.ask.who.anyone	هر کس	Anyone

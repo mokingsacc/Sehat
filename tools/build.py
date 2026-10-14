@@ -321,6 +321,9 @@ em = config.get("emergency") or []
 em_cpr = {a["cpr"] for a in em if a.get("cpr")}
 em_ui = {"ui.emergency", "ui.emergencyWho", "ui.sendForCar", "ui.near", "ui.cprFirstAid"} | {"ui." + a["label"] for a in em if a.get("label")}
 first_ids = [k for k in pack_ids["urgent"] if k in em_ui or k.split(".")[0] in em_cpr or re.match(r"anim\.cpr[-.]", k)]
+# the talking welcome (the first two screens, js/app.js: screenWelcome, screenHello) is in it too: the first thing a phone
+# that got the app by Bluetooth hears, with no internet (Mo, 14 Oct 2026)
+first_ids += [k for k in pack_ids["urgent"] if k.startswith("ui.onb.") and k not in first_ids]
 first_size = {slot: [sum(audio_bytes[slot].get(k, 0) for k in first_ids), sum(1 for k in first_ids if k in audio[slot])] for slot in audio if audio[slot]}
 book["packs"] = {"order": list(PACKS), "ids": pack_ids, "size": pack_size, "first": first_ids, "firstSize": first_size}
 book["bundle"] = {"slots": [s for s in BUNDLE_SLOTS if audio.get(s)], "ids": first_ids}

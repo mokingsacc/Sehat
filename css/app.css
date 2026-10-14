@@ -213,10 +213,6 @@ img{max-width:100%;display:block}
 .welcome .pic{border-radius:24px;overflow:hidden;background:var(--red-t)}
 .welcome h1{margin:6px 0 0;font-size:26px;text-align:center;line-height:1.4}
 .welcome .tl{text-align:center;color:var(--mute);margin:-6px 0 6px}
-.langbtn{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:22px;padding:12px 14px;min-height:86px}
-.langbtn .big{font-size:30px;font-weight:700;flex:1 1 auto;text-align:start}
-.langbtn .go{width:52px;height:52px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-.langbtn .go svg{width:24px;height:24px}
 
 /* bottom nav */
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#fff;border-top:1px solid var(--line);padding:8px 8px calc(10px + var(--safe-b));display:flex;justify-content:space-around;max-width:560px;margin:0 auto}
@@ -744,3 +740,51 @@ a.sym{text-decoration:none}
 .getapp .gx{flex:0 0 auto;width:42px;min-height:56px;display:flex;align-items:center;justify-content:center;color:var(--mute);border-radius:12px}
 .getapp .gx svg{width:22px;height:22px}
 .getapp-sheet .srowbig{margin-top:12px}
+
+/* ---------- the talking welcome (js/app.js: screenWelcome, screenHello; docs/TALKING_GUIDE.md) ---------- */
+.onb{padding:28px 18px 28px;display:flex;flex-direction:column;align-items:stretch;gap:18px;min-height:100vh;min-height:100dvh}
+.onbhead{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:6px}
+.onbhead img{width:116px;height:116px;border-radius:30px;box-shadow:0 8px 22px rgba(60,40,20,.20)}
+.onbhead h1{margin:0;font-size:46px;line-height:1.3}
+.hello .onbhead{flex-direction:row;justify-content:center;gap:12px;margin-top:0}
+.hello .onbhead img{width:58px;height:58px;border-radius:16px}
+.hello .onbhead h1{font-size:32px}
+.onbpic{border-radius:24px;overflow:hidden;background:var(--accent-t)}
+.onbpic img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:50% 30%}
+.onbspk{align-self:center;margin-block:auto;width:124px;height:124px;border-radius:999px;background:var(--card);border:3px solid var(--line);color:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);flex:0 0 auto}
+.onbspk svg{width:60px;height:60px}
+.onbspk.talking,.onbspk.speaking{background:var(--ink);border-color:var(--ink);color:#fff}
+.onbspk.wait{animation:onbpulse 1.5s ease-in-out infinite;border-color:var(--ink)}
+@keyframes onbpulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(34,32,29,.28)}50%{transform:scale(1.08);box-shadow:0 0 0 20px rgba(34,32,29,0)}}
+@media (prefers-reduced-motion:reduce){.onbspk.wait{animation:none;box-shadow:0 0 0 8px rgba(34,32,29,.18)}}
+.onbbtns{display:flex;flex-direction:column;gap:16px}
+.onbbtn{display:flex;align-items:center;gap:14px;min-height:100px;padding:14px 24px;border-radius:28px;border:0;font:inherit;font-size:36px;font-weight:800;line-height:1.25;color:#fff;text-align:start;box-shadow:0 8px 18px rgba(40,30,20,.18);transition:transform .15s}
+.onbbtn .t{flex:1 1 auto;min-width:0}
+.onbbtn>svg{width:42px;height:42px;flex:0 0 auto}
+.onbbtn>.ic{width:44px;height:44px;flex:0 0 auto}
+.onbbtn.blue{background:#2F6DB5}
+.onbbtn.yellow{background:#EBB027;color:#2E2100}
+.onbbtn.keep{min-height:84px;font-size:24px}
+.onbbtn.done{min-height:64px;background:var(--green-t);color:var(--green);font-size:20px;box-shadow:none}
+.onbbtn.done>svg{width:30px;height:30px}
+.onbbtn.lit,.onbbtn.speaking{outline:6px solid rgba(34,32,29,.85);outline-offset:4px;transform:scale(1.02)}
+@media (max-width:359px){.onb{padding:20px 14px;gap:14px}.onbhead img{width:92px;height:92px}.onbhead h1{font-size:38px}.onbspk{width:104px;height:104px}.onbbtn{min-height:88px;font-size:31px}.onbbtn.keep{font-size:21px}}
+@media (max-height:640px){.onbhead img{width:80px;height:80px}.onbspk{width:96px;height:96px}.onbspk svg{width:48px;height:48px}.hello .onbpic{display:none}}
+
+/* each big button on the Health and Home tabs has its own colour (Mo, 14 Oct 2026), so the voice can say "press the
+   blue button"; red is only ever Emergency (js/app.js: COLOURS) */
+.c-orange{--c:#CF6A1F;--c-d:#8A400C;--c-t:#FDF0E5;--c-b:#F2CDAE}
+.c-purple{--c:#7A4FA6;--c-d:#4D2C72;--c-t:#F4EEFA;--c-b:#D9CAEC}
+.c-blue{--c:#2F6DB5;--c-d:#1C4A80;--c-t:#EAF2FC;--c-b:#C3D7F0}
+.c-green{--c:#2E8049;--c-d:#1B5530;--c-t:#E8F5EC;--c-b:#BCDDC6}
+.c-yellow{--c:#E6A817;--c-d:#6A4B00;--c-t:#FEF6DD;--c-b:#F0D791;--c-on:#2E2100}
+.c-brown{--c:#8C5B3B;--c-d:#5A3622;--c-t:#F7EFE8;--c-b:#DEC9B6}
+.c-pink{--c:#C2477A;--c-d:#842A50;--c-t:#FDEEF3;--c-b:#F1C4D6}
+.hbtn.col{background:var(--c-t);border:2px solid var(--c-b)}
+.hbtn.col .t{color:var(--c-d)}
+.hbtn.col .spk{background:var(--c);border-color:var(--c);color:var(--c-on,#fff)}
+.hbtn.col.speaking .spk,.hbtn.col .spk.speaking{background:var(--c-d);border-color:var(--c-d);color:#fff}
+.hbtn.col .hv{background:var(--c-b);color:var(--c-d)}
+.hbtn.ask.col .hv{background:var(--c);color:var(--c-on,#fff)}
+.hbtn.sec.col .hv{background:var(--c-b)}
+.hbtn.col .hv img{box-shadow:0 0 0 2px var(--c-b)}

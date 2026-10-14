@@ -1300,6 +1300,36 @@
    "fa": "این‌ها ضرر می‌رساند",
    "ps": "دا زیان رسوي",
    "en": "This can harm"
+  },
+  "onbKeep": {
+   "fa": "صحت را روی گوشی نگه دارید",
+   "ps": "صحت په ټیلیفون کې وساتئ",
+   "en": "Keep Sehat on my phone"
+  },
+  "onbKept": {
+   "fa": "صحت روی گوشی شما است",
+   "ps": "صحت ستاسو په ټیلیفون کې دی",
+   "en": "Sehat is on your phone"
+  },
+  "onbAgain": {
+   "fa": "خوش‌آمدید را دوباره بشنوید",
+   "ps": "ښه راغلاست بیا واورئ",
+   "en": "Hear the welcome again"
+  },
+  "onbAgainSub": {
+   "fa": "برای کمک به کسی که تازه شروع می‌کند",
+   "ps": "د هغه چا د مرستې لپاره چې نوی پیلوي",
+   "en": "To help someone who is new to Sehat"
+  },
+  "autoSay": {
+   "fa": "وقتی صفحه باز می‌شود، گپ بزند",
+   "ps": "کله چې پاڼه خلاصیږي، خبرې دې وکړي",
+   "en": "Speak when a page opens"
+  },
+  "autoSaySub": {
+   "fa": "نام صفحه را می‌گوید؛ دو بار اول، این‌که برای چیست",
+   "ps": "د پاڼې نوم وايي؛ لومړي دوه ځله، دا چې د څه لپاره ده",
+   "en": "Says the page name; the first two times, what it is for"
   }
  },
  "say": {
@@ -2197,6 +2227,131 @@
    "fa": "دو بار ۹۴ یا کمتر است. امروز به کلینیک بروید. اگر نفس کشیدن سخت شد یا لب‌ها کبود شد، همین حالا به شفاخانه بروید، شب باشد یا روز.",
    "ps": "دوه ځله ۹۴ یا کم دی. نن کلینیک ته ولاړ شئ. که ساه اخیستل سخت شول یا شونډې شنې شوې، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.",
    "en": "94 or less, two times. Go to the clinic today. If breathing becomes hard or the lips turn blue, go to hospital now, day or night."
+  },
+  "ui.onb.lang": {
+   "fa": "زبان خود را انتخاب کنید. برای دری، دکمهٔ آبی را بزنید.",
+   "ps": "خپله ژبه وټاکئ. د پښتو لپاره، ژېړه تڼۍ ووهئ.",
+   "en": "Choose your language: the blue button for Dari, the yellow button for Pashto."
+  },
+  "ui.onb.about": {
+   "fa": "این صحت است، یک کتاب صحی رایگان برای خانوادهٔ شما. بدون انترنت هم کار می‌کند.",
+   "ps": "دا صحت دی، ستاسو د کورنۍ لپاره وړیا روغتیايي کتاب. بې انټرنېټه هم کار کوي.",
+   "en": "This is Sehat, a free health book for your family. It works without internet."
+  },
+  "ui.onb.help": {
+   "fa": "به شما می‌گوید وقتی کسی مریض یا زخمی است چه کنید، و چه وقت به کلینیک بروید.",
+   "ps": "تاسو ته وايي چې کله څوک ناروغ یا ټپي وي څه وکړئ، او کله کلینیک ته ولاړ شئ.",
+   "en": "It tells you what to do when someone is sick or hurt, and when to go to the clinic."
+  },
+  "ui.onb.talk": {
+   "fa": "هر دکمه گپ می‌زند. بلندگو را بزنید تا بشنوید.",
+   "ps": "هره تڼۍ خبرې کوي. ویاند ووهئ چې واورئ.",
+   "en": "Every button can talk. Press the speaker to hear it."
+  },
+  "ui.onb.keep": {
+   "fa": "برای این‌که صحت روی گوشی شما بماند، دکمهٔ زرد را بزنید. اگر نتوانستید، از کسی کمک بخواهید.",
+   "ps": "چې صحت ستاسو په ټیلیفون کې پاتې شي، ژېړه تڼۍ ووهئ. که مو ونه شو کړای، له چا مرسته وغواړئ.",
+   "en": "To keep Sehat on your phone, press the yellow button. If you cannot, ask someone to help you."
+  },
+  "ui.onb.net": {
+   "fa": "چند دقیقه انترنت را خاموش نکنید، تا صداها روی گوشی شما ذخیره شوند.",
+   "ps": "څو دقیقې انټرنېټ مه بندوئ، چې غږونه ستاسو په ټیلیفون کې خوندي شي.",
+   "en": "Keep the internet on for a few minutes, so the voices can save on your phone."
+  },
+  "ui.onb.next": {
+   "fa": "وقتی آماده بودید، دکمهٔ آبی را بزنید.",
+   "ps": "کله چې تیار شوئ، هغه تڼۍ ووهئ چې د آسمان په رنګ شنه ده.",
+   "en": "When you are ready, press the blue button."
+  },
+  "ui.intro.more": {
+   "fa": "بلندگوی کنار هر بخش را بزنید تا بیشتر بشنوید.",
+   "ps": "د هرې برخې تر څنګ ویاند ووهئ چې نور واورئ.",
+   "en": "Press the speaker next to any part to hear more."
+  },
+  "ui.intro.health": {
+   "fa": "این‌جا کمک پیدا می‌کنید، وقتی کسی مریض یا زخمی است. در حالت عاجل، دکمهٔ سرخ را بزنید. برای طفل، دکمهٔ آبی. برای بزرگسالان، دکمهٔ سبز.",
+   "ps": "دلته مرسته پیدا کوئ، کله چې څوک ناروغ یا ټپي وي. په بیړني حالت کې، سره تڼۍ ووهئ. د ماشوم لپاره، هغه تڼۍ چې د آسمان په رنګ شنه ده. د لویانو لپاره، هغه تڼۍ چې د واښو په رنګ شنه ده.",
+   "en": "Here you find help when someone is sick or hurt. In an emergency, press the red button. For a child, the blue button. For adults, the green button."
+  },
+  "ui.intro.family": {
+   "fa": "هر نفر خانوادهٔ خود را اضافه کنید، تا واکسین‌ها، رشد و دواهای شان روی همین گوشی بماند.",
+   "ps": "د خپلې کورنۍ هر غړی ورزیات کړئ، چې د هغوی واکسینونه، وده او درمل په همدې ټیلیفون کې پاتې شي.",
+   "en": "Add each person in your family, to keep their vaccines, growth and medicines on this phone."
+  },
+  "ui.intro.children": {
+   "fa": "اطفال: مریضی‌ها، علایم خطر و رشد. یک موضوع را انتخاب کنید تا باز شود.",
+   "ps": "ماشومان: ناروغۍ، د خطر نښې او وده. یوه موضوع وټاکئ چې خلاصه شي.",
+   "en": "Children: illnesses, danger signs and growth. Choose a topic to open it."
+  },
+  "ui.set.autoSay": {
+   "fa": "وقتی صفحه‌ای باز می‌شود، نامش را می‌گوید. دو بار اول، این را هم می‌گوید که برای چیست. این‌جا می‌توانید آن را خاموش کنید.",
+   "ps": "کله چې یوه پاڼه خلاصه شي، خپل نوم وايي. لومړي دوه ځله، دا هم وايي چې د څه لپاره ده. دلته یې بندولی شئ.",
+   "en": "When a page opens, it says its name. The first two times, it also says what it is for. You can switch this off here."
+  },
+  "ui.name.children": {
+   "fa": "اطفال",
+   "ps": "ماشومان",
+   "en": "Children"
+  },
+  "ui.name.adults": {
+   "fa": "بزرگسالان",
+   "ps": "لویان",
+   "en": "Adults"
+  },
+  "ui.name.firstaid": {
+   "fa": "احیا و کمک‌های اولیه",
+   "ps": "بیا ژوندي کول او لومړنۍ مرستې",
+   "en": "CPR and first aid"
+  },
+  "ui.name.ask": {
+   "fa": "چه مشکلی دارید؟",
+   "ps": "څه ستونزه لرئ؟",
+   "en": "What is wrong?"
+  },
+  "ui.name.kit": {
+   "fa": "بکس صحی خانه",
+   "ps": "د کور روغتیايي بکس",
+   "en": "Home health kit"
+  },
+  "ui.name.safety": {
+   "fa": "خانهٔ بی‌خطر",
+   "ps": "خوندي کور",
+   "en": "Home safety"
+  },
+  "ui.name.hospital": {
+   "fa": "رفتن به کلینیک یا شفاخانه",
+   "ps": "کلینیک یا روغتون ته تلل",
+   "en": "Going to the clinic or hospital"
+  },
+  "ui.name.checks": {
+   "fa": "علایم اولیه و معاینات صحی",
+   "ps": "لومړنۍ نښې او روغتیايي معاینې",
+   "en": "Early signs and health checks"
+  },
+  "ui.name.food-help": {
+   "fa": "غذایی که کمک می‌کند",
+   "ps": "خواړه چې مرسته کوي",
+   "en": "Food that helps"
+  },
+  "ui.name.food": {
+   "fa": "غذا و باغچه",
+   "ps": "خواړه او باغچه",
+   "en": "Food and garden"
+  },
+  "ui.name.wellbeing": {
+   "fa": "زندگی صحتمند",
+   "ps": "روغ ژوند",
+   "en": "Well-being"
+  },
+  "ui.name.feedback": {
+   "fa": "نظر شما",
+   "ps": "ستاسو نظر",
+   "en": "Your ideas"
+  },
+  "ui.name.share": {
+   "fa": "صحت را شریک کنید",
+   "ps": "صحت شریک کړئ",
+   "en": "Share Sehat"
   }
  },
  "months": {

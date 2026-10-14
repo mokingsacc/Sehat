@@ -178,6 +178,31 @@ ui.beliefUnproven	ثابته نه ده، خو زیان نه لري	Not proven, b
 ui.beliefHarm	دا زیان رسوي	This can harm
 ui.rd.v.bp-very-high-2	دوه ځله ۱۸۰ پر ۱۲۰ یا ډېر دی. همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ. خپل درمل له ځان سره یوسئ.	180 over 120 or more, two times. Go to hospital now, day or night. Take your medicines with you.
 ui.rd.v.spo2-lowish-2	دوه ځله ۹۴ یا کم دی. نن کلینیک ته ولاړ شئ. که ساه اخیستل سخت شول یا شونډې شنې شوې، همدا اوس روغتون ته ولاړ شئ، که شپه وي که ورځ.	94 or less, two times. Go to the clinic today. If breathing becomes hard or the lips turn blue, go to hospital now, day or night.
+ui.onb.lang	خپله ژبه وټاکئ. د پښتو لپاره، ژېړه تڼۍ ووهئ.	Choose your language: the blue button for Dari, the yellow button for Pashto.
+ui.onb.about	دا صحت دی، ستاسو د کورنۍ لپاره وړیا روغتیايي کتاب. بې انټرنېټه هم کار کوي.	This is Sehat, a free health book for your family. It works without internet.
+ui.onb.help	تاسو ته وايي چې کله څوک ناروغ یا ټپي وي څه وکړئ، او کله کلینیک ته ولاړ شئ.	It tells you what to do when someone is sick or hurt, and when to go to the clinic.
+ui.onb.talk	هره تڼۍ خبرې کوي. ویاند ووهئ چې واورئ.	Every button can talk. Press the speaker to hear it.
+ui.onb.keep	چې صحت ستاسو په ټیلیفون کې پاتې شي، ژېړه تڼۍ ووهئ. که مو ونه شو کړای، له چا مرسته وغواړئ.	To keep Sehat on your phone, press the yellow button. If you cannot, ask someone to help you.
+ui.onb.net	څو دقیقې انټرنېټ مه بندوئ، چې غږونه ستاسو په ټیلیفون کې خوندي شي.	Keep the internet on for a few minutes, so the voices can save on your phone.
+ui.onb.next	کله چې تیار شوئ، هغه تڼۍ ووهئ چې د آسمان په رنګ شنه ده.	When you are ready, press the blue button.
+ui.intro.more	د هرې برخې تر څنګ ویاند ووهئ چې نور واورئ.	Press the speaker next to any part to hear more.
+ui.intro.health	دلته مرسته پیدا کوئ، کله چې څوک ناروغ یا ټپي وي. په بیړني حالت کې، سره تڼۍ ووهئ. د ماشوم لپاره، هغه تڼۍ چې د آسمان په رنګ شنه ده. د لویانو لپاره، هغه تڼۍ چې د واښو په رنګ شنه ده.	Here you find help when someone is sick or hurt. In an emergency, press the red button. For a child, the blue button. For adults, the green button.
+ui.intro.family	د خپلې کورنۍ هر غړی ورزیات کړئ، چې د هغوی واکسینونه، وده او درمل په همدې ټیلیفون کې پاتې شي.	Add each person in your family, to keep their vaccines, growth and medicines on this phone.
+ui.intro.children	ماشومان: ناروغۍ، د خطر نښې او وده. یوه موضوع وټاکئ چې خلاصه شي.	Children: illnesses, danger signs and growth. Choose a topic to open it.
+ui.set.autoSay	کله چې یوه پاڼه خلاصه شي، خپل نوم وايي. لومړي دوه ځله، دا هم وايي چې د څه لپاره ده. دلته یې بندولی شئ.	When a page opens, it says its name. The first two times, it also says what it is for. You can switch this off here.
+ui.name.children	ماشومان	Children
+ui.name.adults	لویان	Adults
+ui.name.firstaid	بیا ژوندي کول او لومړنۍ مرستې	CPR and first aid
+ui.name.ask	څه ستونزه لرئ؟	What is wrong?
+ui.name.kit	د کور روغتیايي بکس	Home health kit
+ui.name.safety	خوندي کور	Home safety
+ui.name.hospital	کلینیک یا روغتون ته تلل	Going to the clinic or hospital
+ui.name.checks	لومړنۍ نښې او روغتیايي معاینې	Early signs and health checks
+ui.name.food-help	خواړه چې مرسته کوي	Food that helps
+ui.name.food	خواړه او باغچه	Food and garden
+ui.name.wellbeing	روغ ژوند	Well-being
+ui.name.feedback	ستاسو نظر	Your ideas
+ui.name.share	صحت شریک کړئ	Share Sehat
 ui.ask.who	ناروغ څوک دی؟ یو یې ووهئ.	Who is sick? Tap one.
 ui.ask.who.after	مور له زېږون وروسته	Mother after the birth
 ui.ask.who.anyone	هر څوک	Anyone

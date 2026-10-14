@@ -89,7 +89,7 @@ const spk = (id, label, more) => `<button class="spk${hasAudio(id) ? '' : ' none
 
 const P = { audio: new Audio(), ids: [], i: 0, on: false, url: null, token: 0, slot: 'fa-f', strict: false };
 P.audio.preload = 'auto';
-P.audio.addEventListener('ended', () => advance());
+P.audio.addEventListener('ended', () => { if (P.audio.src !== SILENT) advance(); });
 P.audio.addEventListener('error', () => advance());
 
 async function clipUrl(id, slot = slotOf(), strict = false) {
@@ -135,6 +135,7 @@ function unfold(box) { box.classList.remove('folded'); const m = box.querySelect
 function mark(id) {
   $$('.speaking').forEach((e) => e.classList.remove('speaking'));
   if (!id) return;
+  if (ONB_LIT[id]) { const o = $(ONB_LIT[id]); if (o) o.classList.add('speaking'); return; } // the talking welcome
   const el = document.querySelector(`[data-block="${CSS.escape(id)}"]`) || document.querySelector(`.spk[data-say="${CSS.escape(id)}"]`);
   const fb = el && el.classList.contains('xtra') && el.closest('.alert.folded'); if (fb) unfold(fb); // reading a hidden sign opens its box
   if (el) { el.classList.add('speaking'); const r = el.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight - 90) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
@@ -170,7 +171,7 @@ async function playCurrent(token) {
     if (P.url) URL.revokeObjectURL(P.url);
     P.url = url; P.audio.src = url; P.audio.playbackRate = S.speed;
     track('play', { id });
-    try { await P.audio.play(); } catch { advance(); }
+    try { await P.audio.play(); } catch (e) { if (e && e.name === 'NotAllowedError') P.blocked = true; advance(); } // blocked: the browser wants a touch first
   } else if (!sayTTS(id, token)) {
     if (P.ids.length === 1) toast(T('noAudio'));
     setTimeout(() => token === P.token && advance(), P.ids.length === 1 ? 1200 : 350);
@@ -305,7 +306,10 @@ async function askDistrict() {
   if (!SV() || !S.stats) return;
   const st = store.get('distAsk', {}) || {};
   if (!Stats.districtAskDue({ first: store.get('firstOpen', 0), n: st.n, t: st.t, has: knownPlace(store.get('district', null)) }, Date.now())) return;
-  if (!askDistrictSafe()) return; // not now: asked at a later opening
+  if (!askDistrictSafe()) { // not now: asked at a later opening, or when the page has finished saying what it is
+    if (P.on && S.intro) S.intro.then((r) => { if (r === 'ended') askDistrictSoon(); });
+    return;
+  }
   store.set('distAsk', { n: (st.n | 0) + 1, t: Date.now() }); // counted when shown, so it is never asked more often
   const d = await svPickDistrict(true, 'ui.consentDistrict', `<button class="btn ghost notnow" data-close>${esc(T('notNow'))}</button>`);
   stopAudio();
@@ -423,13 +427,101 @@ function langPill() {
 function disclaimer() { return `<div class="disc" data-block="ui.disclaimer">${I.warn.replace('<svg', '<svg style="width:26px;height:26px;flex:0 0 auto;color:#9A6F00"')}<div style="flex:1">${esc(L(S.book.narration['ui.disclaimer']))}</div>${spk('ui.disclaimer')}</div>`; }
 
 /* ---------- screens ---------- */
+/* ---------- the talking welcome (Mo, 14 Oct 2026: many people cannot read; docs/TALKING_GUIDE.md) ---------- */
+// Screen 1 (no language yet): the logo and a big speaker. 2 seconds after it opens a woman's voice says "choose your
+// language" in Dari, then in Pashto, naming the colour of that language's button: blue for Dari, yellow for Pashto (red
+// is only ever Emergency, and in Pashto "shin" is both blue and green). A phone's browser plays no sound before the first
+// touch: there the speaker pulses and the next touch starts the voice. The Android app plays at once.
+// Screen 2 (#/hello) then speaks by itself: what Sehat is, every button talks, keep it on the phone (the yellow button, the
+// phone's own install: on the website only), keep the internet on so the voices save, and the blue Next button.
+// Their clips are inside the Android app (tools/build.py: book.bundle), so they play with no internet.
+const ONB = { timer: 0, wait: false };
+const ONB_LIT = { 'ui.onb.about': '.onbspk', 'ui.onb.help': '.onbspk', 'ui.onb.talk': '.onbspk', 'ui.onb.net': '.onbspk', 'ui.onb.keep': '[data-onb="keep"]', 'ui.onb.next': '[data-onb="next"]' };
+const SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+const onbHead = () => `<div class="onbhead"><img src="img/app/icon.svg" alt=""><h1>${esc(S.book.ui.appName.fa)}</h1></div>`;
 function screenWelcome() {
   const b = S.book;
-  const btn = (lg) => `<div class="langbtn"><button class="spk" data-say-lang="${lg}" aria-label="${esc(b.langNames[lg])}">${I.spk}</button><button class="big" data-setlang="${lg}" lang="${lg}">${esc(b.langNames[lg])}</button><button class="go" data-setlang="${lg}" aria-label="${esc(b.langNames[lg])}">${I.fwd}</button></div>`;
-  return { html: `<div class="welcome"><div class="pic"><img src="img/app/welcome.svg" alt=""></div>
-    <h1>${b.ui.appName.fa === b.ui.appName.ps ? esc(b.ui.appName.fa) : `${esc(b.ui.appName.fa)}<br>${esc(b.ui.appName.ps)}`}</h1>
-    <p class="tl">${esc(b.ui.chooseLang.fa)} · ${esc(b.ui.chooseLang.ps)}</p>
-    ${btn('fa')}${btn('ps')}</div>`, nav: false }; // English is in Settings only (Mo, 11 Oct 2026, audit S-02)
+  const btn = (lg, col) => `<button class="onbbtn ${col}" data-setlang="${lg}" data-onb="${lg}" lang="${lg}"><span class="t">${esc(b.langNames[lg])}</span>${I.fwd}</button>`;
+  return { html: `<div class="welcome onb">${onbHead()}<button class="onbspk" data-action="onbsay" aria-label="${esc(b.ui.listen.fa)} · ${esc(b.ui.listen.ps)}">${I.spk}</button>
+    <div class="onbbtns">${btn('fa', 'blue')}${btn('ps', 'yellow')}</div></div>`, nav: false }; // English is in Settings only (Mo, 11 Oct 2026, audit S-02)
+}
+// the website can be kept on the phone: the phone's own install (Android), or the Share steps (iPhone)
+const canKeep = () => !IN_APK && !isStandalone() && (!!S.installEvt || platform() === 'ios');
+function screenHello() {
+  let keep = '';
+  if (canKeep()) keep = `<button class="onbbtn yellow keep" data-action="install" data-onb="keep">${ic('phone')}<span class="t">${esc(T('onbKeep'))}</span></button>`;
+  else if (S.kept) keep = `<div class="onbbtn done">${I.check}<span class="t">${esc(T('onbKept'))}</span></div>`;
+  return { html: `<div class="onb hello">${onbHead()}<div class="onbpic"><img src="img/stills/home-children.webp" alt=""></div>
+    <button class="onbspk" data-action="onbsay" aria-label="${esc(T('listen'))}">${I.spk}</button>
+    <div class="onbbtns">${keep}<a class="onbbtn blue" href="#/home" data-onb="next"><span class="t">${esc(T('next'))}</span>${I.fwd}</a></div></div>`, nav: false };
+}
+function onbStart() { clearTimeout(ONB.timer); ONB.timer = setTimeout(onbLangVoice, 2000); }
+// "choose your language", in Dari and then in Pashto, each lighting its button
+async function onbLangVoice() {
+  clearTimeout(ONB.timer); if (S.lang) return;
+  ONB.wait = false; P.blocked = false; onbSpk('talking');
+  for (const lg of ['fa', 'ps']) {
+    onbLit(lg);
+    const r = await play(['ui.onb.lang'], { slot: lg + '-f', quiet: true });
+    onbLit(null);
+    if (P.blocked) return onbBlocked();
+    if (r !== 'ended' || S.lang) break;
+  }
+  onbSpk('');
+}
+async function onbAboutVoice() {
+  clearTimeout(ONB.timer); if (!S.lang || route()[0] !== 'hello') return;
+  ONB.wait = false; P.blocked = false;
+  await play(['ui.onb.about', 'ui.onb.help', 'ui.onb.talk', ...($('[data-onb="keep"]') ? ['ui.onb.keep'] : []), 'ui.onb.net', 'ui.onb.next'], { quiet: true });
+  if (P.blocked) onbBlocked();
+}
+// no sound before a touch (a phone's browser): the speaker pulses, and the next touch outside a button starts the voice
+function onbBlocked() { ONB.wait = true; onbSpk('wait'); }
+function onbSpk(state) { const sp = $('.onbspk'); if (sp) { sp.classList.toggle('wait', state === 'wait'); sp.classList.toggle('talking', state === 'talking'); } }
+function onbLit(lg) { $$('.onbbtn[data-onb]').forEach((e) => e.classList.toggle('lit', !!lg && e.dataset.onb === lg)); }
+document.addEventListener('pointerdown', (e) => {
+  if (!ONB.wait) return;
+  ONB.wait = false; unlockAudio();
+  if (e.target.closest && e.target.closest('button, a')) return; // a button's own click does the rest
+  setTimeout(() => (S.lang ? onbAboutVoice() : onbLangVoice()), 0);
+}, true);
+// an iPhone lets a sound play by itself only after the same player has played inside a touch: a silent instant does it
+function unlockAudio() {
+  const a = P.audio; if (a.src || platform() !== 'ios') return;
+  try { a.muted = true; a.src = SILENT; const pr = a.play(); const back = () => { a.muted = false; }; if (pr && pr.then) pr.then(() => { a.pause(); back(); }, back); else back(); } catch {}
+}
+
+/* ---------- a page says what it is (Mo, 14 Oct 2026; docs/TALKING_GUIDE.md) ---------- */
+// Opening a page says its name; the first 2 times, also one line on what it is for and "press the speaker next to any
+// part to hear more". Settings can switch it off. Not in the Emergency flow (the Emergency screen reads itself).
+function pageSay(r) {
+  const b = S.book, more = 'ui.intro.more', k = r[0] || 'home';
+  const say = (key, full, name) => ({ key, full: full.filter((id) => id && b.narration[id]), name: name.filter((id) => b.narration[id]) });
+  if (k === 'home') return say('home', ['ui.tab.health', 'ui.intro.health', more], ['ui.tab.health']);
+  if (k === 'house') return say('house', ['ui.house', more], ['ui.tab.house']);
+  if (k === 'family' && !r[1]) return say('family', ['ui.tab.family', 'ui.intro.family', more], ['ui.tab.family']);
+  if (k === 'children') return say(k, ['ui.intro.children', more], ['ui.name.children']);
+  if (k === 'adults') return say(k, ['ui.adults', more], ['ui.name.adults']);
+  if (k === 'firstaid') return say(k, [((b.config || {}).firstAid || {}).say, more], ['ui.name.firstaid']);
+  if (k === 'ask' && !r[1]) return say(k, ['ui.ask', more], ['ui.name.ask']);
+  if (k === 's' && LISTS()[r[1]]) return say('s/' + r[1], [LISTS()[r[1]].say, more], ['ui.name.' + r[1]]);
+  if (k === 'share') return say(k, [SH.homeSay(), more], ['ui.name.share']);
+  if (k === 'feedback') return say(k, ['ui.feedback', more], ['ui.name.feedback']);
+  if (k === 'topic' && b.topics[r[1]] && !r[2] && !inEmFlow(r)) return say('topic/' + r[1], [r[1] + '.title', r[1] + '.summary', more], [r[1] + '.title']);
+  return null;
+}
+// opening: the app has just been opened (then only a page's first 2 visits speak, not its name every time)
+function sayPage(r, opening) {
+  if (!S.lang) return;
+  if (r[0] === 'hello') { clearTimeout(ONB.timer); ONB.timer = setTimeout(onbAboutVoice, 700); return; }
+  const p = pageSay(r); if (!p || !p.full.length) return;
+  const seen = store.get('seen', {}), n = seen[p.key] || 0;
+  seen[p.key] = n + 1; store.set('seen', seen);
+  if (store.get('autoSay', true) === false) return;
+  const ids = n < 2 ? p.full : opening ? [] : p.name;
+  if (!ids.length || !(hasAudio(ids[0]) || ttsVoice())) return;
+  const h = location.hash;
+  setTimeout(() => { if (location.hash === h && !P.on) S.intro = play(ids, { quiet: true }); }, 300);
 }
 
 // the woman's or the man's voice, in Settings (each card has a speaker that plays a sample in that voice). The first run
@@ -456,7 +548,12 @@ function bigBtn(cls, href, visual, title, sub, sayId, ids, action) {
 }
 const picImg = (src) => `<img src="${esc(src)}" alt="" loading="lazy">`;
 // a list from config.lists as a big picture row
-function listBtn(name, ids) { const c = LISTS()[name]; return c && listOf(name).length ? bigBtn('list', '#/s/' + name, picImg(listPic(c)), T(c.title), T(c.sub), c.say, ids) : ''; }
+function listBtn(name, ids) { const c = LISTS()[name]; return c && listOf(name).length ? bigBtn('list' + colour(name), '#/s/' + name, picImg(listPic(c)), T(c.title), T(c.sub), c.say, ids) : ''; }
+// each big button on the Health and Home tabs has its own colour, so the voice can say "press the blue button" (Mo,
+// 14 Oct 2026). Red is only ever Emergency. No two buttons on one tab share a colour.
+const COLOURS = { firstAid: 'orange', ask: 'purple', children: 'blue', adults: 'green', checks: 'yellow', hospital: 'brown',
+  share: 'pink', feedback: 'brown', safety: 'orange', food: 'green', 'food-help': 'yellow', wellbeing: 'purple', kit: 'blue' };
+const colour = (k) => (COLOURS[k] ? ' col c-' + COLOURS[k] : '');
 // the tab screens: no back button, the app's name on the left of the bar
 const tabTop = (ids) => top(T('appName'), { back: '', listen: ids });
 
@@ -466,10 +563,10 @@ function shareCard(ids) {
   const b = S.book, c = (b.config || {}).shareCard || {}, and = typeof SH !== 'undefined' ? SH.homeSay() === c.say : !!window.FHBAndroid;
   const say = and ? c.say : c.webSay || c.say, sub = and ? c.sub : c.webSub || c.sub;
   const pic = picImg('img/pics/row-share.svg'); // a small scene, cropped like the hospital and first-aid rows
-  if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share pic', c.href, pic, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
-  return bigBtn('share pic', '', pic, T('share'), T('shareSub'), 'ui.share', ids, 'share');
+  if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share pic' + colour('share'), c.href, pic, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
+  return bigBtn('share pic' + colour('share'), '', pic, T('share'), T('shareSub'), 'ui.share', ids, 'share');
 }
-const feedbackCard = (ids) => bigBtn('fbk pic', '#/feedback', picImg('img/pics/row-feedback.svg'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids);
+const feedbackCard = (ids) => bigBtn('fbk pic' + colour('feedback'), '#/feedback', picImg('img/pics/row-feedback.svg'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids);
 
 // Health (the start screen, #/home): config.home, top to bottom
 function screenHome() {
@@ -489,10 +586,10 @@ function screenHome() {
     },
     // the biggest thing on the screen: red, one word; opens "who needs help?" and reads it aloud
     emergency() { if ((cfg.emergency || []).length) emCard = true; return (cfg.emergency || []).length ? bigBtn('em', '#/emergency', I.warn, T('emergency'), '', 'ui.emergency', ids, 'emergency') : ''; },
-    firstAid() { const f = cfg.firstAid; return f ? bigBtn('fa', '#/firstaid', picImg(topicPic(b.topics[f.image])), T(f.title), T(f.sub), f.say, ids) : ''; },
-    ask() { return bigBtn('ask', '#/ask', I.mic, T('ask'), T('askSub'), 'ui.ask', ids); },
-    children() { return bigBtn('sec', '#/children', picImg('img/stills/home-children.webp'), T('children'), T('childrenSub'), 'ui.children', ids); },
-    adults() { return bigBtn('sec adult', '#/adults', picImg('img/stills/home-adults.webp'), T('adults'), T('adultsSub'), 'ui.adults', ids); },
+    firstAid() { const f = cfg.firstAid; return f ? bigBtn('fa' + colour('firstAid'), '#/firstaid', picImg(topicPic(b.topics[f.image])), T(f.title), T(f.sub), f.say, ids) : ''; },
+    ask() { return bigBtn('ask' + colour('ask'), '#/ask', I.mic, T('ask'), T('askSub'), 'ui.ask', ids); },
+    children() { return bigBtn('sec' + colour('children'), '#/children', picImg('img/stills/home-children.webp'), T('children'), T('childrenSub'), 'ui.children', ids); },
+    adults() { return bigBtn('sec adult' + colour('adults'), '#/adults', picImg('img/stills/home-adults.webp'), T('adults'), T('adultsSub'), 'ui.adults', ids); },
     sections() { return M.children() + M.adults(); },
     // Share Sehat (config.shareCard: the share screen, when this version has it); otherwise the phone's own share sheet
     share() { if (shareShown) return ''; shareShown = true; return shareCard(ids); },
@@ -1099,12 +1196,14 @@ async function deleteVoices() {
 }
 async function showStorage() { const t = await storageText(); const el = $('#storage'); if (el) el.textContent = t; }
 function screenSettings() {
-  const ids = ['ui.settings', 'ui.set.language', 'ui.set.speed', 'ui.set.voices', 'ui.set.packs', 'ui.set.update', SH.homeSay(), 'ui.watchOn', 'ui.disclaimer'];
+  const ids = ['ui.settings', 'ui.set.language', 'ui.set.speed', 'ui.set.autoSay', 'ui.onb.about', 'ui.set.voices', 'ui.set.packs', 'ui.set.update', SH.homeSay(), 'ui.watchOn', 'ui.disclaimer'];
   let html = top(T('settings')) + listenBar(ids);
   html += `<div class="blk lead" data-block="ui.settings"><div class="body">${esc(L(S.book.narration['ui.settings']))}</div>${spk('ui.settings')}</div>`;
   html += `<div class="panel">`;
   html += `<div class="srow segrow" data-block="ui.set.language">${ic('talk')}<div class="grow"><div class="t">${esc(T('language'))}</div></div>${spk('ui.set.language')}<div class="seg">${['fa', 'ps', 'en'].map((lg) => `<button data-lang="${lg}" aria-pressed="${S.lang === lg}">${esc(S.book.langNames[lg])}</button>`).join('')}</div></div>`;
   html += `<div class="srow segrow" data-block="ui.set.speed">${ic('clock')}<div class="grow"><div class="t">${esc(T('speed'))}</div></div>${spk('ui.set.speed')}<div class="seg"><button data-speed="1" aria-pressed="${S.speed === 1}">${esc(T('normal'))}</button><button data-speed="0.85" aria-pressed="${S.speed !== 1}">${esc(T('slower'))}</button></div></div>`;
+  html += `<div class="srow swrap" data-block="ui.set.autoSay">${ic('talk')}<div class="grow"><div class="t">${esc(T('autoSay'))}</div><div class="s">${esc(T('autoSaySub'))}</div></div>${spk('ui.set.autoSay')}<button class="toggle" data-action="autosay" aria-pressed="${store.get('autoSay', true) !== false}" aria-label="${esc(T('autoSay'))}"></button></div>`;
+  html += `<div class="srow" data-block="ui.onb.about">${ic('phone')}<a class="grow" href="#/hello"><div class="t">${esc(T('onbAgain'))}</div><div class="s">${esc(T('onbAgainSub'))}</div></a>${spk('ui.onb.about')}</div>`;
   html += `</div><div class="panel" id="voicepanel"><div class="sayhead" data-block="ui.set.voices"><div class="grow"><h2>${esc(T('voices'))}</h2><p class="muted">${esc(T('voiceFor', { lang: S.book.langNames[S.lang] || S.lang }))}</p></div>${spk('ui.set.voices')}</div>${voiceCards('data-voice')}`;
   // the voice packs, "Delete voices" and the space used: one block, one speaker (the rows change as clips download)
   html += `<div class="packblock" data-block="ui.set.packs"><div class="srow">${ic('phone')}<div class="grow"><div class="t">${esc(T('packsHead'))}</div></div>${spk('ui.set.packs')}</div><div id="packs">${packsHtml()}</div>`;
@@ -1499,6 +1598,7 @@ function render() {
   let r = route(), out;
   try { // a broken link or page must never leave the app stuck on the loading screen
   if (!S.lang) out = screenWelcome(); // the first run is only this: choose the language
+  else if (r[0] === 'hello') out = screenHello(); // the talking welcome's second screen
   else if (r[0] === 'privacy') out = Stats.screenPrivacy();
   else if (r[0] === 'topic') out = screenTopic(r[1]);
   else if (r[0] === 'children') out = screenChildren();
@@ -1545,7 +1645,7 @@ addEventListener('hashchange', () => {
   if (AN.ctl && AN.ctl.close) AN.ctl.close(); // leaving the page closes the animation player too
   bkMove(lastHash, location.hash); // Back on the new screen goes to the one it was opened from
   stopAudio(); render();
-  if (S.tabSay) { const id = S.tabSay; S.tabSay = null; if (hasAudio(id) || ttsVoice()) play([id], { quiet: true }); }
+  sayPage(route()); // its name, and the first 2 times what it is for
   const r = route(); if (r[0] !== 'topic' && r[0] !== 'family') track('view', { p: r[0] || 'home' });
   if (location.hash.split('/')[1] !== lastHash.split('/')[1] || location.hash !== lastHash) scrollTo(0, 0);
   lastHash = location.hash;
@@ -1564,19 +1664,19 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', async (e) => {
   const t = e.target.closest('button, a, [data-block]'); if (!t) return;
   const d = t.dataset;
-  if (d.tabsay) { const id = d.tabsay; if (t.getAttribute('aria-current') === 'page') play([id], { quiet: true }); else S.tabSay = id; return; }
+  if (d.tabsay) { if (t.getAttribute('aria-current') === 'page') { const pg = pageSay(route()); if (pg && pg.full.length) play(pg.full, { quiet: true }); } return; } // the tab it is on: what this page is
   if (d.say) {
     e.preventDefault(); const ids = [d.say, ...(d.then ? d.then.split(' ') : [])];
     if (P.on && P.ids[0] === d.say && P.ids.length === ids.filter((id) => S.book.narration[id]).length) stopAudio(); else play(ids); return;
   }
   if (d.sayLang) { e.preventDefault(); const prev = S.lang; S.lang = d.sayLang; play(['ui.welcome'], { slot: slotOf(d.sayLang) }); S.lang = prev; return; }
   if (d.sample) { e.preventDefault(); const sl = slotOf(S.lang, d.sample); if (P.on && P.strict && P.slot === sl) stopAudio(); else play([sampleId(sl)], { slot: sl, strict: true }); return; }
-  if (d.setlang) { // the first run: the language, and straight to the Health tab
-    stopAudio(); track('lang', { to: d.setlang });
+  if (d.setlang) { // the first run: the language, then the screen that says what Sehat is (#/hello)
+    stopAudio(); clearTimeout(ONB.timer); ONB.wait = false; track('lang', { to: d.setlang });
     const first = !S.voice;
     setVoice(d.setlang, voiceFor(d.setlang)); // a language not chosen yet starts with the woman's voice
     if (first) persistOnce();
-    location.hash = '#/home'; render(); return;
+    location.hash = '#/hello'; return; // its hashchange draws it and starts its voice
   }
   if (d.voice) { stopAudio(); await setVoice(S.lang, d.voice); render(); return; }
   if (d.lang) { stopAudio(); await setVoice(d.lang, voiceFor(d.lang)); render(); return; }
@@ -1605,6 +1705,8 @@ document.addEventListener('click', async (e) => {
     case 'editkid': location.hash = '#/family/edit'; return;
     case 'addweight': location.hash = '#/growth/add'; return;
     case 'install': doInstall(); return;
+    case 'onbsay': if (P.on) stopAudio(); else if (S.lang) onbAboutVoice(); else onbLangVoice(); return;
+    case 'autosay': store.set('autoSay', store.get('autoSay', true) === false); render(); return;
     case 'sendapp': case 'share': location.hash = '#/share'; return; // one sharing feature: the Share Sehat screen (js/share.js)
     case 'stats': S.stats = !S.stats; if (!S.stats) { A.rq = []; store.set('rq', []); } render(); return;
     case 'watch': if (!S.stats) return; S.watch = !S.watch; store.set('watch', S.watch); if (!S.watch) { A.rq = []; store.set('rq', []); } render(); return;
@@ -1629,10 +1731,10 @@ document.addEventListener('click', async (e) => {
 });
 
 /* ---------- install, share, updates ---------- */
-addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); S.installEvt = e; if (route()[0] === 'home' || !location.hash) render(); });
-addEventListener('appinstalled', () => { S.installEvt = null; track('a2hs'); persistOnce(true); render(); });
+addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); S.installEvt = e; if (S.lang && ['home', 'hello'].includes(route()[0] || 'home')) render(); });
+addEventListener('appinstalled', () => { S.installEvt = null; S.kept = true; track('a2hs'); persistOnce(true); if (S.lang) render(); });
 async function doInstall() {
-  if (S.installEvt) { S.installEvt.prompt(); const c = await S.installEvt.userChoice; track('a2hs-prompt', { ok: c.outcome }); S.installEvt = null; render(); return; }
+  if (S.installEvt) { stopAudio(); S.installEvt.prompt(); const c = await S.installEvt.userChoice; track('a2hs-prompt', { ok: c.outcome }); if (c.outcome === 'accepted') S.kept = true; S.installEvt = null; render(); return; }
   dialog(`<h2>${esc(T('install'))}</h2><p style="font-size:18px">${esc(T('installIos'))}</p><button class="btn" data-close>${esc(T('close'))}</button>`);
 }
 async function checkUpdate(manual) {
@@ -1746,6 +1848,7 @@ async function start() {
   }
   if (S.lang && !S.voice) setVoice(S.lang, voiceFor(S.lang)); // chose a language on an older app but never a voice
   render();
+  if (!S.lang) onbStart(); else sayPage(route(), true); // the talking welcome, or a page's first visits
   askDistrictSoon();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     try {

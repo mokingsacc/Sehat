@@ -1,7 +1,8 @@
 // The first run and the district question, at 360 px, with a fake clock (Playwright page.clock.setFixedTime):
-//   - a new phone sees one screen, the language (Dari and Pashto; English is in Settings only, Mo 11 Oct 2026, audit
-//     S-02, so the English run taps Dari and then picks English in Settings); one tap opens the Health tab (no voice,
-//     consent or district screens);
+//   - a new phone sees the talking welcome (Mo, 14 Oct 2026; docs/TALKING_GUIDE.md): the language (Dari blue, Pashto
+//     yellow; English is in Settings only, Mo 11 Oct 2026, audit S-02, so the English run taps Dari and then picks English
+//     in Settings) with its big speaker, then the screen that says what Sehat is (#/hello) and its blue Next, which opens
+//     the Health tab (no voice, consent or district screens);
 //     the woman's voice is chosen, usage counts and the disease watch are on, the Privacy page and Settings keep the
 //     off switches;
 //   - the district question: not before 24 hours from the first open, never over the Emergency screen or a recording
@@ -58,15 +59,23 @@ const SV = book.surveillance;
   const asked = (p) => p.$('.dialog-wrap [data-say="ui.consentDistrict"]').then(Boolean);
   const shot = async (p, name) => { if (OUT) await p.screenshot({ path: path.join(OUT, name + '.png') }); };
 
-  // 1. the first run: one screen, then the Health tab
+  // 1. the first run: the language, the screen that says what Sehat is, then the Health tab
   for (const lang of ['en', 'fa']) {
     const ctx = await newCtx();
     let p = await open(ctx, T0, '');
     ok(await p.$('.welcome [data-setlang="fa"]') && await p.$('.welcome [data-setlang="ps"]') && !(await p.$('.welcome [data-setlang="en"]')), lang + ': the first screen offers Dari and Pashto, not English');
     ok(!(await p.$('.dialog-wrap')), lang + ': no question on the first screen');
+    ok(await p.$('.welcome .onbspk') && await p.$('.welcome .onbbtn.blue[data-setlang="fa"]') && await p.$('.welcome .onbbtn.yellow[data-setlang="ps"]'), lang + ': the big speaker, Dari blue and Pashto yellow');
+    ok(!(await p.$('nav.nav, .empill')), lang + ': no tabs or Emergency button on the first screen');
     if (lang === 'en') await shot(p, '1-first-run-language');
-    await p.click(`.welcome [data-setlang="${lang === 'en' ? 'fa' : lang}"].big`);
+    await p.click(`.welcome [data-setlang="${lang === 'en' ? 'fa' : lang}"]`);
     await p.waitForTimeout(600);
+    ok(await p.evaluate(() => location.hash) === '#/hello' && await p.$('.hello .onbspk') && await p.$('.hello a.onbbtn.blue[data-onb="next"]'), lang + ': the language opens the screen that says what Sehat is, with its speaker and the blue Next');
+    ok(!(await p.$('nav.nav, .empill, .voices, .consent, .dialog-wrap')), lang + ': ... with nothing else on it');
+    if (lang === 'en') await shot(p, '1b-first-run-hello');
+    await p.click('.hello [data-onb="next"]');
+    await p.waitForTimeout(600);
+    ok((await ls(p, 'seen') || {}).home === 1, lang + ': the Health tab counts its first visit (it says what it is for twice)', await ls(p, 'seen'));
     if (lang === 'en') { // English: in Settings only
       await p.goto(BASE + 'index.html#/settings'); await p.waitForTimeout(400);
       await p.click('[data-block="ui.set.language"] [data-lang="en"]'); await p.waitForTimeout(600);
@@ -95,7 +104,8 @@ const SV = book.surveillance;
     await p.click('[data-block="ui.set.stats"] .toggle'); await p.waitForTimeout(300);
     ok((await ls(p, 'consent') || {}).ok === true, lang + ': ... and on again');
 
-    // 2. the district question
+    // 2. the district question (with the page intros off: a page saying what it is for holds the question until it ends)
+    await p.evaluate(() => localStorage.setItem('fhb.autoSay', 'false'));
     p = await open(ctx, T0 + 23 * H);
     ok(!(await asked(p)), lang + ': not asked at 23 hours');
     p = await open(ctx, T0 + DAYMS + 60e3, '#/emergency');
