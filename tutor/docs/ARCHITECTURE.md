@@ -58,8 +58,12 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
   is printed in the corner (`M7-03-4821`). The same seed always gives the same sums, so "Check my sheet" knows
   the answers, and the phone keeps the answer key it fetched when printing, to check at home.
 - **Limits.** Answer sheets and more than `TUTOR_FREE_COPIES` copies need the teacher's PIN; each phone may print
-  `TUTOR_COPIES_PER_HOUR` copies an hour. Five wrong PINs lock that phone out for a minute.
-- **Names** are printed once and never stored.
+  `TUTOR_COPIES_PER_HOUR` copies an hour (prints the teacher allowed with the PIN don't count). The hub knows a phone
+  by its address on the hub's Wi-Fi, which the phone can't choose. Five wrong PINs lock that phone out for a minute,
+  the next five for 15 minutes, then an hour each time. Ask and PDF downloads take at most 10 a minute per phone.
+- **Names** go on the paper only: not in the database and not in the logs (the hub keeps no access log, because the
+  sheet preview's address carries the name), and `printer.sh` tells CUPS not to keep printed files. In outbox mode
+  the saved PDFs carry the name until the teacher prints and deletes them.
 
 ## Privacy
 
@@ -81,7 +85,7 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
 | `GET /api/sheets/{id}.html` / `.pdf` | The sheet (`seed`, `lang`, `kind=worksheet or answers`, `name`); header `X-Sheet-Seed` |
 | `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`) |
-| `POST /api/print` | `{lesson, kind, copies, lang, seed, name, device}`; PIN header for answer sheets or many copies |
+| `POST /api/print` | `{lesson, kind, copies, lang, seed, name}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
 

@@ -61,11 +61,11 @@ class LLM:
                                  "temperature": temperature, "stream": False})
             r.raise_for_status()
             text = r.json()["choices"][0]["message"]["content"]
-        except (httpx.HTTPError, KeyError, IndexError, ValueError) as e:
+        except (httpx.HTTPError, KeyError, IndexError, ValueError, TypeError, AttributeError) as e:
             log.warning("model server did not answer: %s", e)
             self._seen = (time.monotonic(), False)
             return None
-        text = (text or "").strip()
+        text = text.strip() if isinstance(text, str) else ""
         if "</think>" in text:              # reasoning models: keep only the answer
             text = text.split("</think>")[-1].strip()
         return text or None

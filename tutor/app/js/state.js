@@ -3,7 +3,7 @@
 // the app then still works, it just forgets on reload.
 
 const KEY = 'qalam.v1';
-const empty = () => ({ v: 1, device: rid(), active: null, children: [] });
+const empty = () => ({ v: 1, active: null, children: [] });
 let data = load();
 
 function rid() {
@@ -24,7 +24,6 @@ export function save() {
   try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* full or blocked: keep going */ }
 }
 
-export function device() { return data.device; }
 export function children() { return data.children; }
 
 export function child() {
@@ -56,12 +55,27 @@ export function markDone(lessonId, stars) {
   const old = c.done[lessonId];
   c.done[lessonId] = { stars: Math.max(stars, old ? old.stars : 0), at: Date.now() };
   delete c.step[lessonId];
+  if (c.tries) delete c.tries[lessonId];
   save();
 }
 
 export function setStep(lessonId, i) {
   const c = child();
   if (c) { c.step[lessonId] = i; c.last = lessonId; save(); }
+}
+
+// right or wrong on the first try, per question step, kept until the lesson is done so stars stay fair
+// when a child leaves half way and comes back
+export function firstTries(lessonId) {
+  const c = child();
+  return { ...((c && c.tries && c.tries[lessonId]) || {}) };
+}
+
+export function firstTry(lessonId, i, ok) {
+  const c = child();
+  if (!c) return;
+  const t = ((c.tries ||= {})[lessonId] ||= {});
+  if (t[i] === undefined) { t[i] = ok; save(); }
 }
 
 export function rememberPrint(lessonId, seed) {

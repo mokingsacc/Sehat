@@ -82,7 +82,7 @@ export default async function print([id]) {
     go.disabled = true;
     say(s('printing'));
     try {
-      const r = await hub.printSheet({ lesson: L.id, kind, copies, lang, seed, device: state.device(),
+      const r = await hub.printSheet({ lesson: L.id, kind, copies, lang, seed,
         name: withName && kind === 'worksheet' ? c.name : null }, pin || undefined);
       if (pin) state.pin(pin);
       if (kind === 'worksheet') {

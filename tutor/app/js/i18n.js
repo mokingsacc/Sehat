@@ -64,7 +64,7 @@ const S = {
     your_turn: 'حالا تو بگو', thinking: 'دارد فکر می‌کند…', printed_sheets: 'ورق‌هایی که چاپ کردی',
     answer_saved: 'جواب نگه داشته شد', no_key: 'جواب‌های این ورق هنوز این‌جا نیست. به مرکز درسی وصل شو.',
     look_at_paper: 'به کاغذ نگاه کن و بگو', of_right: '{a} از {b} درست', refresh: 'تازه کن',
-    wait_minute: 'چند بار اشتباه شد. یک دقیقه صبر کن.', hub_card: 'کارت مرکز',
+    wait_minute: 'چند بار اشتباه شد. کمی صبر کن و بعد دوباره امتحان کن.', slow_down: 'کمی صبر کن، بعد دوباره بپرس.', hub_card: 'کارت مرکز',
     job_queued: 'در صف', job_printing: 'چاپ می‌شود', job_done: 'چاپ شد', job_saved: 'نگه داشته شد', job_failed: 'نشد', approved: 'جواب‌های تأییدشده', lang_prs: 'دری', lang_ps: 'پښتو', lang_en: 'انگلیسی',
   },
   ps: {
@@ -129,7 +129,7 @@ const S = {
     your_turn: 'اوس ته ووایه', thinking: 'فکر کوي…', printed_sheets: 'هغه پاڼې چې چاپ دې کړې',
     answer_saved: 'ځواب وساتل شو', no_key: 'د دې پاڼې ځوابونه لا دلته نشته. د زده کړې له مرکز سره وصل شه.',
     look_at_paper: 'کاغذ ته وګوره او ووایه', of_right: '{a} له {b} سم', refresh: 'تازه کول',
-    wait_minute: 'څو ځله غلط شو. یوه دقیقه صبر وکړه.', hub_card: 'د مرکز کارت',
+    wait_minute: 'څو ځله غلط شو. لږ صبر وکړه، بیا یې وازمایه.', slow_down: 'لږ صبر وکړه، بیا وپوښته.', hub_card: 'د مرکز کارت',
     job_queued: 'په کتار کې', job_printing: 'چاپېږي', job_done: 'چاپ شو', job_saved: 'وساتل شو', job_failed: 'ونه شو', approved: 'تایید شوي ځوابونه', lang_prs: 'دري', lang_ps: 'پښتو', lang_en: 'انګلیسي',
   },
 };

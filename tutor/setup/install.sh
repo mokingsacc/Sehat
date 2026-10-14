@@ -16,7 +16,6 @@ apt-get install -y --no-install-recommends python3 python3-venv python3-pip libp
 
 echo "== the qalam user and folders"
 id qalam >/dev/null 2>&1 || useradd --system --home /var/lib/qalam --shell /usr/sbin/nologin qalam
-usermod -aG lpadmin qalam || true
 install -d -o qalam -g qalam -m 0750 /var/lib/qalam
 install -d -m 0755 "$DEST" "$DEST/models" /etc/qalam
 

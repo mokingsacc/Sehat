@@ -22,7 +22,7 @@ export default async function lesson([id]) {
   const lang = getLang();
   const steps = L.steps;
   const young = state.mode(c) === 'small';
-  const results = {};                      // step number -> right on the first try
+  const results = state.firstTries(id);   // step number -> right on the first try (kept if the child leaves)
   let i = Math.min(Math.max(c.step[id] || 0, 0), steps.length - 1);
 
   const say = (text, l = lang) => speak(text, l);
@@ -96,7 +96,7 @@ export default async function lesson([id]) {
         if (solved) return;
         solved = true;
         const ok = k === st.answer;
-        if (results[i] === undefined) results[i] = ok;
+        if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
         opts[k].classList.add(ok ? 'right' : 'wrong');
         opts[st.answer].classList.add('right');
         feedback(ok, st.why, optText(st.options[st.answer]));
@@ -110,7 +110,7 @@ export default async function lesson([id]) {
         const v = parse(inp.value);
         if (!v) { toast(s('your_answer')); inp.focus(); return; }
         const ok = same(v, right);
-        if (results[i] === undefined) results[i] = ok;
+        if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
         inp.className = ok ? 'right' : 'wrong';
         feedback(ok, st.why, `$${show(right)}$`, ok && notSimplest(inp.value) ? s('simplify', { a: show(right) }) : null);
       }

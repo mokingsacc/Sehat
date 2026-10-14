@@ -16,7 +16,19 @@ SUBJECTS = ("maths", "science", "english", "dari", "pashto")
 LANGS = ("prs", "ps", "en")          # Dari, Pashto, English
 STEP_KINDS = ("read", "letter", "choice", "number", "say")
 ITEM_KINDS = ("trace", "circle", "draw", "count", "sum", "write", "sort", "generate")
-GENERATORS = ("fraction_add", "add_sub", "times")
+
+
+def _int_in(v, lo, hi) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool) and lo <= v <= hi
+
+
+# each sum generator (sheets.py) and the options a lesson may give it
+GENERATORS = {
+    "fraction_add": {"max_den": lambda v: _int_in(v, 4, 24), "same_first": lambda v: _int_in(v, 0, 30)},
+    "add_sub": {"max_total": lambda v: _int_in(v, 2, 1000),
+                "ops": lambda v: isinstance(v, str) and bool(v) and set(v) <= set("+-")},
+    "times": {"tables": lambda v: isinstance(v, list) and bool(v) and all(_int_in(t, 1, 12) for t in v)},
+}
 PICTURE_EXT = (".svg", ".webp", ".png", ".jpg")
 _ID = re.compile(r"^[a-z0-9][a-z0-9-]{1,63}$")
 
@@ -127,8 +139,8 @@ def validate_lesson(lesson: dict, pack_dir: Path) -> list[str]:
             _check_text(s.get("why"), w + " why", p, required=False)
         elif k == "number":
             _check_text(s.get("prompt"), w + " prompt", p)
-            if mathcheck.evaluate(str(s.get("answer", ""))) is None:
-                p.append(f"{w}: answer must be a number or fraction such as 3/4")
+            if mathcheck.plain(str(s.get("answer", ""))) is None:
+                p.append(f"{w}: answer must be one number or fraction such as 3/4, not a sum")
         elif k == "say":
             _check_text(s.get("text"), w, p)
 
@@ -173,10 +185,20 @@ def validate_lesson(lesson: dict, pack_dir: Path) -> list[str]:
                 if len(ans) != len(words) or any(not isinstance(a, int) or not 0 <= a < len(groups) for a in ans):
                     p.append(f"{w}: answer must give a group number for every word")
             if k == "generate":
-                if it.get("type") not in GENERATORS:
+                t = it.get("type")
+                if t not in GENERATORS:
                     p.append(f"{w}: type must be one of {', '.join(GENERATORS)}")
-                if not isinstance(it.get("count"), int) or not 1 <= it["count"] <= 30:
+                if not _int_in(it.get("count"), 1, 30):
                     p.append(f"{w}: count must be 1 to 30")
+                if "work" in it and not isinstance(it["work"], bool):
+                    p.append(f"{w}: work must be true or false")
+                for opt, v in it.items():
+                    if opt in ("kind", "type", "count", "prompt", "work") or t not in GENERATORS:
+                        continue
+                    if opt not in GENERATORS[t]:
+                        p.append(f"{w}: {t} has no option '{opt}' (it has {', '.join(GENERATORS[t]) or 'none'})")
+                    elif not GENERATORS[t][opt](v):
+                        p.append(f"{w}: {opt} cannot be {v!r}")
 
     for i, b in enumerate(lesson.get("bank") or [], 1):
         w = f"{lid} bank {i}"
@@ -209,16 +231,25 @@ class Library:
             except (OSError, ValueError) as e:
                 self.problems.append(f"{pj}: {e}")
                 continue
+            if not isinstance(pack, dict) or not isinstance(pack.get("lessons", []), list):
+                self.problems.append(f"{pj}: must be an object with a list of lessons")
+                continue
             pid = pack.get("id") or pdir.name
             pack["id"], pack["_dir"], kept = pid, pdir, []
             for lid in pack.get("lessons", []):
+                if not isinstance(lid, str) or not _ID.match(lid):
+                    self.problems.append(f"{pid}: {lid!r} is not a lesson id")
+                    continue
                 f = pdir / "lessons" / f"{lid}.json"
                 try:
                     lesson = json.loads(f.read_text(encoding="utf-8"))
+                    probs = validate_lesson(lesson, pdir) if isinstance(lesson, dict) else ["must be an object"]
                 except (OSError, ValueError) as e:
                     self.problems.append(f"{pid}/{lid}: {e}")
                     continue
-                probs = validate_lesson(lesson, pdir)
+                except Exception as e:          # a wrong shape somewhere inside: leave this lesson out, keep going
+                    self.problems.append(f"{pid}/{lid}: could not be checked ({type(e).__name__}: {e})")
+                    continue
                 if lesson.get("id") != lid:
                     probs.append(f"{lid}: the file name and the id inside differ")
                 if lid in self.lessons:

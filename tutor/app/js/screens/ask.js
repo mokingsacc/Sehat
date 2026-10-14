@@ -103,7 +103,7 @@ export default async function ask() {
       const r = await hub.ask({ text, lang, year: c.year, lesson: context ? context.id : null });
       state.addAsk({ ...entry, id: r.id, a: r.text, source: r.source, mc: r.maths_checked, waiting: r.waiting });
     } catch (e) {
-      toast(hub.online() ? s('error') : s('offline'));
+      toast(e.status === 429 ? s('slow_down') : hub.online() ? s('error') : s('offline'));
       input.value = text;
     }
     pending = null;

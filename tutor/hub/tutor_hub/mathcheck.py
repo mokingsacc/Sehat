@@ -55,6 +55,21 @@ def evaluate(expr: str):
         return None
 
 
+def plain(text: str):
+    """The value of one plain number as a child types it (3, -2, 0.75, 3/4, 1 1/2), or None for anything else,
+    sums included. It reads exactly what parse() in app/js/numbers.js reads, so a lesson's answer is one the
+    phone can check."""
+    t = " ".join(digits_to_latin(str(text)).translate(_OPS).replace("⁄", "/").replace("∕", "/").split())
+    if m := re.fullmatch(r"(-?)([0-9]+) ([0-9]+) ?/ ?([0-9]+)", t):
+        whole, n, d = int(m[2]), int(m[3]), int(m[4])
+        return (-1 if m[1] else 1) * (whole + Fraction(n, d)) if d else None
+    if m := re.fullmatch(r"(-?[0-9]+) ?/ ?(-?[0-9]+)", t):
+        return Fraction(int(m[1]), int(m[2])) if int(m[2]) else None
+    if re.fullmatch(r"-?([0-9]*\.[0-9]+|[0-9]+)", t):
+        return Fraction(t)
+    return None
+
+
 def fmt(v: Fraction, fa: bool = True) -> str:
     """3/4, 2 or -1/2 (in Persian digits unless fa=False)."""
     s = str(v.numerator) if v.denominator == 1 else f"{v.numerator}/{v.denominator}"

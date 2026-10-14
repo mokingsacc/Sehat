@@ -52,7 +52,7 @@ When it is signed: `"review": {"status": "checked", "by": ["role, name or initia
 | `read` | `text`, optional `picture`, `picture_count` (1-10), `english` | reads or listens |
 | `letter` | `letter`, `forms` (the joined shapes), `word`, `picture`, `text` | sees a big letter, hears it |
 | `choice` | `prompt`, `options` (2-4: text, `{"prs","ps"}`, or `{"picture","text"}`), `answer` (from 0), `why` | taps one; sees why |
-| `number` | `prompt`, `answer` (a number or fraction such as `1/2`), `why` | types it; 2/4 is right but "make it simpler" |
+| `number` | `prompt`, `answer` (one number or fraction such as `1/2`, `0.5` or `1 1/2`, never a sum), `why` | types it; 2/4 is right but "make it simpler" |
 | `say` | `text` (the words to say) or `english` plus `text` as the instruction | hears it, records themself, hears it back |
 
 ### The worksheet
@@ -77,8 +77,10 @@ When it is signed: `"review": {"status": "checked", "by": ["role, name or initia
 | `draw` | `prompt` | a box to draw in | a grown-up looks |
 | `generate` | `type` (`fraction_add`, `add_sub`, `times`), `count` (1-30), options | new sums on every print | checked by value |
 
-Generator options: `fraction_add` takes `max_den` (largest denominator, default 12); `add_sub` takes `max_total`
-and `ops` (`"+-"`); `times` takes `tables` (`[2, 3, 4, 5]`). Results stay child-sized (fraction sums at most 1).
+Generator options: `fraction_add` takes `max_den` (largest denominator, 4-24, default 12) and `same_first` (how
+many sums share one denominator before they mix, default 2); `add_sub` takes `max_total` (2-1000, default 10) and
+`ops` (`"+-"`, `"+"` or `"-"`); `times` takes `tables` (numbers 1-12, default `[2, 3, 4, 5]`). `"work": false`
+drops the box for working. The validator refuses any other option. Results stay child-sized (fraction sums at most 1).
 
 Keep a sheet to **one A4 page**: `make_sheets.py` warns when one spills over.
 

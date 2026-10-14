@@ -223,7 +223,7 @@ def expand(lesson: dict, seed: int):
     out, n = [], 0
     for it in lesson["sheet"]["items"]:
         if it["kind"] == "generate":
-            opts = {k: v for k, v in it.items() if k not in ("kind", "type", "count", "prompt")}
+            opts = {k: v for k, v in it.items() if k not in ("kind", "type", "count", "prompt", "work")}
             sums = GENERATORS[it["type"]](rng, it["count"], **opts)
             group = []
             for s in sums:

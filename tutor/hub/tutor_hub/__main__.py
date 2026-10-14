@@ -42,7 +42,8 @@ def main(argv=None):
 
     import uvicorn
     from .server import create_app
-    uvicorn.run(create_app(cfg), host=a.host, port=a.port, log_level="info")
+    # no access log: addresses with a child's name in them (the sheet preview) must never reach the system journal
+    uvicorn.run(create_app(cfg), host=a.host, port=a.port, log_level="info", access_log=False)
     return 0
 
 

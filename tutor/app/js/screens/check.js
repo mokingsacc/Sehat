@@ -70,7 +70,7 @@ export default async function check([id, seedText]) {
 
   function drawScore() {
     const vals = Object.values(results);
-    if (!vals.length) return;
+    if (!vals.length) { score.classList.add('hidden'); return; }
     const right = vals.filter(Boolean).length;
     const wrong = vals.length - right;
     score.classList.remove('hidden');
@@ -118,7 +118,13 @@ export default async function check([id, seedText]) {
 
   function checkValues() {
     for (const { r, inp, mark, fix } of values) {
-      if (!inp.value.trim()) continue;
+      if (!inp.value.trim()) {                 // emptied since the last check: it no longer counts
+        delete results['v' + r.n];
+        inp.className = '';
+        mark.className = 'mark hidden';
+        fix.className = 'fix hidden';
+        continue;
+      }
       const v = parse(inp.value);
       const ok = !!v && same(v, parse(r.a));
       results['v' + r.n] = ok;

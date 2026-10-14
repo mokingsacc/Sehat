@@ -1,7 +1,8 @@
 import copy
 import json
+import shutil
 
-from tutor_hub.packs import validate_lesson
+from tutor_hub.packs import Library, validate_lesson
 
 from conftest import PACKS
 
@@ -44,6 +45,33 @@ def test_validation_catches_mistakes():
     assert "sum does not add up" in problems
     assert "the answer 3/9 is wrong" in problems
     assert "picture 'no-such-picture'" in problems
+
+
+def test_answers_the_phone_cannot_read_and_unknown_options_are_caught():
+    pdir = PACKS / "starter"
+    bad = copy.deepcopy(lesson("maths-7-fractions-add"))
+    bad["steps"][4]["answer"] = "1/4 + 1/4"         # the phone reads one number or fraction, never a sum
+    bad["sheet"]["items"][0]["max_denom"] = 10       # a typo
+    bad["sheet"]["items"][0]["work"] = "no"
+    problems = "\n".join(validate_lesson(bad, pdir))
+    assert "not a sum" in problems
+    assert "no option 'max_denom'" in problems
+    assert "work must be true or false" in problems
+    good = copy.deepcopy(lesson("maths-7-fractions-add"))
+    good["steps"][4]["answer"] = "۰٫۵"
+    good["sheet"]["items"][0].update(work=False, max_den=8)
+    assert validate_lesson(good, pdir) == []
+
+
+def test_a_broken_lesson_is_left_out_and_the_rest_still_load(tmp_path):
+    shutil.copytree(PACKS / "starter", tmp_path / "starter")
+    f = tmp_path / "starter" / "lessons" / "dari-1-sheen.json"
+    broken = json.loads(f.read_text(encoding="utf-8"))
+    broken["steps"] = [None]
+    f.write_text(json.dumps(broken), encoding="utf-8")
+    lib = Library(tmp_path)
+    assert "dari-1-sheen" not in lib.lessons and len(lib.lessons) == 5
+    assert any("dari-1-sheen" in p and "could not be checked" in p for p in lib.problems)
 
 
 def test_every_starter_lesson_is_still_a_draft():

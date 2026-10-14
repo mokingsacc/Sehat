@@ -51,7 +51,28 @@ class PrintIn(BaseModel):
     lang: str = "prs"
     seed: int | None = Field(None, ge=0, le=99999)
     name: str | None = Field(None, max_length=40)
-    device: str | None = Field(None, max_length=40)
+
+
+# after each round of five wrong PINs a phone waits longer: a minute, 15 minutes, then an hour each time
+PIN_LOCKS = (60, 15 * 60, 60 * 60)
+
+
+class Limit:
+    """At most `n` requests in `per` seconds from one phone, known by its address on the hub's Wi-Fi."""
+
+    def __init__(self, n: int, per: float):
+        self.n, self.per = n, per
+        self._seen: dict[str, list[float]] = {}
+        self._lock = threading.Lock()
+
+    def check(self, who: str):
+        now = time.monotonic()
+        with self._lock:
+            recent = [t for t in self._seen.get(who, []) if now - t < self.per]
+            if len(recent) >= self.n:
+                self._seen[who] = recent
+                raise HTTPException(429, "too many at once: wait a minute")
+            self._seen[who] = recent + [now]
 
 
 def teacher_pin(data: Path) -> str:
@@ -81,17 +102,32 @@ class Hub:
         self.printer = Printer(cfg.print_backend, cfg.printer, cfg.data / "outbox")
         self.prints = PrintQueue(self.store, self.printer, self.render_pdf)
         self.pin = teacher_pin(cfg.data)
-        self._fails: dict[str, tuple[int, float]] = {}
+        self._fails: dict[str, tuple[int, float, int, float]] = {}   # who -> wrong tries, locked until, rounds, last lock
+        self._pin_lock = threading.Lock()
+        self.clock = time.monotonic
+        self.print_lock = threading.Lock()
+        self.ask_limit = Limit(10, 60)
+        self.pdf_limit = Limit(10, 60)
 
     def check_pin(self, pin: str | None, who: str):
-        n, until = self._fails.get(who, (0, 0.0))
-        if time.monotonic() < until:
-            raise HTTPException(429, "too many wrong PINs: wait a minute")
-        if not pin or not hmac.compare_digest(pin.strip(), self.pin):
+        with self._pin_lock:
+            now = self.clock()
+            n, until, rounds, last = self._fails.get(who, (0, 0.0, 0, 0.0))
+            if now < until:
+                raise HTTPException(429, "too many wrong PINs: wait and try again later")
+            if rounds and now - last > 24 * 3600:         # a quiet day: back to a one-minute wait
+                rounds = 0
+            if pin and hmac.compare_digest(pin.strip().encode(), self.pin.encode()):
+                self._fails.pop(who, None)
+                return
             n += 1
-            self._fails[who] = (0, time.monotonic() + 60) if n >= 5 else (n, 0.0)
+            if n >= 5:
+                wait = PIN_LOCKS[min(rounds, len(PIN_LOCKS) - 1)]
+                self._fails[who] = (0, now + wait, rounds + 1, now)
+                log.warning("teacher PIN: 5 wrong tries from %s, locked for %d minutes", who, wait // 60)
+            else:
+                self._fails[who] = (n, 0.0, rounds, last)
             raise HTTPException(401, "teacher PIN needed")
-        self._fails.pop(who, None)
 
     def reindex(self):
         with self._ix_lock:
@@ -182,7 +218,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
 
     # Ask
     @app.post("/api/ask")
-    def ask(a: AskIn):
+    def ask(a: AskIn, request: Request):
+        hub.ask_limit.check(_who(request))
         lang = _lang(a.lang)
         ans = hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson)
         token = hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
@@ -217,7 +254,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                             headers={"X-Sheet-Seed": str(seed)})
 
     @app.get("/api/sheets/{lid}.pdf")
-    def sheet_pdf(lid: str, lang: str = "prs", seed: int | None = None, kind: str = "worksheet"):
+    def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = None, kind: str = "worksheet"):
+        hub.pdf_limit.check(_who(request))
         seed = _seed(lid, seed)
         kind = "answers" if kind == "answers" else "worksheet"
         try:
@@ -241,13 +279,16 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         l = hub.lesson(p.lesson)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
-        if p.kind == "answers" or p.copies > cfg.free_copies:
-            hub.check_pin(x_teacher_pin, _who(request))
-        elif hub.store.copies_last_hour(p.device or _who(request)) + p.copies > cfg.copies_per_hour:
-            raise HTTPException(429, "enough printing for now: ask the teacher")
+        who = _who(request)          # each phone has its own address on the hub's Wi-Fi; the phone can't choose it
+        teacher = p.kind == "answers" or p.copies > cfg.free_copies
+        if teacher:
+            hub.check_pin(x_teacher_pin, who)
         seed = _seed(p.lesson, p.seed)
-        jid = hub.store.add_print(lesson_id=p.lesson, kind=p.kind, copies=p.copies, lang=_lang(p.lang), seed=seed,
-                                  device=p.device or _who(request))
+        with hub.print_lock:         # count and add together, so two quick taps can't both slip under the limit
+            if not teacher and hub.store.copies_last_hour(who) + p.copies > cfg.copies_per_hour:
+                raise HTTPException(429, "enough printing for now: ask the teacher")
+            jid = hub.store.add_print(lesson_id=p.lesson, kind=p.kind, copies=p.copies, lang=_lang(p.lang), seed=seed,
+                                      device="teacher" if teacher else who)
         hub.prints.add(jid, {"lesson": p.lesson, "kind": p.kind, "copies": p.copies, "lang": _lang(p.lang),
                              "seed": seed, "name": (p.name or "").strip() or None,
                              "title": f"{l['sheet']['code']}-{seed}" if seed else l["sheet"]["code"]})

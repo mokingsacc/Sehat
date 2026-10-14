@@ -35,3 +35,11 @@ def test_solve_plain_sums_only():
 def test_mark_wraps_sums_for_left_to_right():
     assert mathcheck.mark("حاصل ۱/۲ + ۱/۴ = ۳/۴ است") == "حاصل $۱/۲ + ۱/۴ = ۳/۴$ است"
     assert mathcheck.mark("عدد ۵") == "عدد ۵"
+
+
+def test_plain_reads_one_number_as_the_phone_does():
+    for t, v in [("3", 3), ("-2", -2), ("۰٫۷۵", Fraction(3, 4)), ("۳/۴", Fraction(3, 4)), ("1 1/2", Fraction(3, 2)),
+                 ("2/4", Fraction(1, 2))]:
+        assert mathcheck.plain(t) == v
+    for t in ("1/2 + 1/4", "2*3", "(1/2)", "1/0", "", "x"):
+        assert mathcheck.plain(t) is None

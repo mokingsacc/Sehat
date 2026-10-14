@@ -1,4 +1,5 @@
 """The hub as the phones see it: lessons, Ask, worksheets, printing (to the outbox) and the teacher's page."""
+from fastapi.testclient import TestClient
 
 
 def test_hello_and_lists(hub_client):
@@ -77,8 +78,7 @@ def test_sheet_pdf(hub_client):
 
 
 def test_print_a_worksheet_to_the_outbox(hub_client, cfg):
-    r = hub_client.post("/api/print", json={"lesson": "maths-1-count-5", "lang": "prs", "name": "Maryam",
-                                            "device": "phone-1"}).json()
+    r = hub_client.post("/api/print", json={"lesson": "maths-1-count-5", "lang": "prs", "name": "Maryam"}).json()
     hub_client.hub.prints.wait()
     job = hub_client.get(f"/api/print/{r['id']}").json()
     assert job["status"] == "saved"
@@ -90,7 +90,7 @@ def test_print_a_worksheet_to_the_outbox(hub_client, cfg):
 
 
 def test_answer_sheets_and_many_copies_need_the_pin(hub_client):
-    base = {"lesson": "maths-1-count-5", "lang": "prs", "device": "phone-2"}
+    base = {"lesson": "maths-1-count-5", "lang": "prs"}
     assert hub_client.post("/api/print", json=dict(base, kind="answers")).status_code == 401
     assert hub_client.post("/api/print", json=dict(base, copies=4)).status_code == 401
     ok = hub_client.post("/api/print", json=dict(base, copies=20), headers={"X-Teacher-Pin": hub_client.pin})
@@ -98,12 +98,15 @@ def test_answer_sheets_and_many_copies_need_the_pin(hub_client):
     hub_client.hub.prints.wait()
 
 
-def test_hourly_limit_per_phone(hub_client):
-    base = {"lesson": "dari-1-sheen", "lang": "prs", "copies": 3, "device": "phone-3"}
-    for _ in range(4):
-        assert hub_client.post("/api/print", json=base).status_code == 200
-    assert hub_client.post("/api/print", json=base).status_code == 429
-    assert hub_client.post("/api/print", json=dict(base, device="phone-4")).status_code == 200
+def test_hourly_limit_is_per_phone_address(hub_client):
+    base = {"lesson": "dari-1-sheen", "lang": "prs", "copies": 3}
+    teacher = {"X-Teacher-Pin": hub_client.pin}
+    assert hub_client.post("/api/print", json=dict(base, copies=20), headers=teacher).status_code == 200
+    for k in range(4):                     # the teacher's 20 don't count; what a phone says about itself changes nothing
+        assert hub_client.post("/api/print", json=dict(base, device=f"phone-{k}")).status_code == 200
+    assert hub_client.post("/api/print", json=dict(base, device="new-phone")).status_code == 429
+    other_phone = TestClient(hub_client.app, client=("10.42.0.20", 50000))
+    assert other_phone.post("/api/print", json=base).status_code == 200
     hub_client.hub.prints.wait()
 
 
@@ -112,6 +115,50 @@ def test_teacher_pages_need_the_pin_and_lock_after_wrong_tries(hub_client):
     for _ in range(4):
         assert hub_client.get("/api/teacher/summary", headers={"X-Teacher-Pin": "000000"}).status_code == 401
     assert hub_client.get("/api/teacher/summary", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 429
+
+
+def test_wrong_pins_wait_longer_each_round(hub_client):
+    clock = [1000.0]
+    hub_client.hub.clock = lambda: clock[0]
+    wrong, right = {"X-Teacher-Pin": "000000"}, {"X-Teacher-Pin": hub_client.pin}
+
+    def five_wrong():
+        for _ in range(5):
+            assert hub_client.get("/api/teacher/summary", headers=wrong).status_code == 401
+    five_wrong()
+    assert hub_client.get("/api/teacher/summary", headers=right).status_code == 429
+    clock[0] += 61
+    five_wrong()
+    clock[0] += 61                         # the second wait is 15 minutes
+    assert hub_client.get("/api/teacher/summary", headers=right).status_code == 429
+    clock[0] += 15 * 60
+    assert hub_client.get("/api/teacher/summary", headers=right).status_code == 200
+
+
+def test_a_pin_in_other_letters_is_only_wrong(hub_client):
+    r = hub_client.get("/api/teacher/summary", headers={"X-Teacher-Pin": "۱۲۳۴۵۶".encode()})
+    assert r.status_code == 401
+
+
+def test_one_phone_cannot_flood_ask(hub_client):
+    for _ in range(10):
+        assert hub_client.post("/api/ask", json={"text": "۱ + ۱", "lang": "prs"}).status_code == 200
+    assert hub_client.post("/api/ask", json={"text": "۱ + ۱", "lang": "prs"}).status_code == 429
+    other_phone = TestClient(hub_client.app, client=("10.42.0.21", 50000))
+    assert other_phone.post("/api/ask", json={"text": "۱ + ۱", "lang": "prs"}).status_code == 200
+
+
+def test_the_hub_keeps_no_access_log(monkeypatch, tmp_path):
+    # the sheet preview's address carries the child's name, so request lines must never reach the journal
+    import uvicorn
+
+    from tutor_hub.__main__ import main
+    seen = {}
+    monkeypatch.setenv("TUTOR_DATA", str(tmp_path / "data"))
+    monkeypatch.setenv("TUTOR_PRINT", "outbox")
+    monkeypatch.setattr(uvicorn, "run", lambda app, **kw: seen.update(kw))
+    assert main(["serve", "--port", "8099"]) == 0
+    assert seen["access_log"] is False
 
 
 def test_teacher_summary_and_hub_card(hub_client):

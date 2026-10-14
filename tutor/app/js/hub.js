@@ -1,6 +1,7 @@
 // Talking to the village hub. Phones normally get this app from the hub itself, so the hub is "this website";
 // the other addresses are for a copy of the app that came another way (the Android app later, or a laptop test).
 
+import { latin } from './numbers.js';
 import { cache } from './state.js';
 
 const CANDIDATES = ['http://10.42.0.1', 'http://10.42.0.1:8080', 'http://qalam.lan', 'http://192.168.4.1:8080'];
@@ -61,7 +62,8 @@ async function call(path, { method = 'GET', body, pin, ms = 30000 } = {}) {
   const t = setTimeout(() => ctl.abort(), ms);
   try {
     const headers = { 'Content-Type': 'application/json' };
-    if (pin) headers['X-Teacher-Pin'] = pin;
+    // a PIN typed with Persian digits is sent as 0-9; a header with other letters would never leave the phone
+    if (pin) headers['X-Teacher-Pin'] = latin(pin).replace(/[^\x21-\x7e]/g, '');
     const r = await fetch(url(path), { method, headers, body: body ? JSON.stringify(body) : undefined, signal: ctl.signal });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) throw Object.assign(new Error(j.error || j.detail || r.status), { status: r.status });

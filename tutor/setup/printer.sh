@@ -13,4 +13,6 @@ fi
 lpadmin -p Qalam -E -v "$1" -m everywhere -o media-default=iso_a4_210x297mm -o sides-default=one-sided
 lpadmin -d Qalam
 cupsenable Qalam && cupsaccept Qalam
+# sheets carry children's names: don't keep the printed files (CUPS keeps them a day by default)
+cupsctl PreserveJobFiles=No || echo "Could not change PreserveJobFiles; set it to No in /etc/cups/cupsd.conf"
 echo "Printer added. Test page: lp -d Qalam /usr/share/cups/data/testprint"

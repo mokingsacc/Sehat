@@ -1,3 +1,4 @@
+import copy
 import random
 from fractions import Fraction
 
@@ -54,3 +55,10 @@ def test_every_starter_sheet_prints_on_one_a4_page(library, lang):
                                fonts=(app / "fonts").resolve().as_uri(), picture_url=pic, hub_name="Qalam")
             pdf, pages = sheets.render_pdf(html, base_url=str(app))
             assert pdf.startswith(b"%PDF") and pages == 1, (lid, lang, kind, pages)
+
+
+def test_work_false_drops_the_working_box(library):
+    l = copy.deepcopy(library.lessons["maths-7-fractions-add"])
+    l["sheet"]["items"][0]["work"] = False
+    sums = sheets.expand(l, 1234)[0]
+    assert sums["kind"] == "sums" and sums["work"] is False and len(sums["items"]) == 6
