@@ -714,5 +714,21 @@
   "copied": 0,
   "check": [],
   "note": "end of run; each batch above has its own tokens and cost"
+ },
+ {
+  "when": "2026-10-14 12:11",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/i0jo2f44us9opdzct62kd4x0q9v7j1ntvxx8",
+  "made": 50,
+  "input_tokens": 3820,
+  "audio_tokens": 6924,
+  "estimated_usd": 0.02
+ },
+ {
+  "when": "2026-10-14 12:11",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "copied": 0,
+  "check": [],
+  "note": "end of run; each batch above has its own tokens and cost"
  }
 ]

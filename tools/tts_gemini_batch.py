@@ -123,7 +123,7 @@ def main():
     plan, copies, mans = {}, [], {}  # key -> (lang, voice, text); identical lines to copy; manifests per folder
     skipped = human = 0
     hold = tuple(x for x in os.environ.get("GEMINI_TTS_HOLD", "").split(",") if x)  # id prefixes to leave for later
-    for voice in ["f", "m"]:
+    for voice in os.environ.get("GEMINI_TTS_VOICES", "f,m").split(","):  # e.g. "f" for the woman's voice only
         for lang in ["fa", "ps"]:
             rows = T.order(list(csv.DictReader(open(T.J("content", "scripts", f"narration-{lang}.tsv"), encoding="utf-8"), delimiter="\t")))
             d = T.J("audio", f"{lang}-{voice}"); os.makedirs(d, exist_ok=True)
