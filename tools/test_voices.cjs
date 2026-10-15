@@ -112,7 +112,7 @@ async function go(p, base, hash) { await p.goto(base + 'index.html' + hash); awa
     const em = book.config.emergency, cpr = new Set(em.map((a) => a.cpr));
     const first = got.map((u) => decodeURIComponent(u.split('/').pop().replace(/\.mp3.*$/, '')));
     ok(got.every((u) => u.includes('/audio/ps-f/')), 'pack: only the chosen voice downloads', got.find((u) => !u.includes('/audio/ps-f/')));
-    ok(first.length === 60 && first.every((id) => /^ui\.(emergency|emergencyWho|sendForCar|near|cprFirstAid|age)/.test(id) || cpr.has(id.split('.')[0]) || /^anim\.cpr/.test(id)), 'pack: Emergency and CPR come first', first);
+    ok(first.length === 60 && first.every((id) => /^ui\.(emergency|emergencyWho|sendForCar|near|cprFirstAid|age|onb\.)/.test(id) || cpr.has(id.split('.')[0]) || /^anim\.cpr/.test(id)), 'pack: Emergency and CPR come first', first);
     ok(/[%٪]/.test(st), 'pack: Settings shows the urgent pack downloading with progress', st);
     // wait for the CPR pages of the urgent pack, then play one offline
     await p.waitForFunction(() => window.__fetched.length >= 140, null, { timeout: 30000 }).catch(() => {});
@@ -151,12 +151,14 @@ async function go(p, base, hash) { await p.goto(base + 'index.html' + hash); awa
     await p.addInitScript((c) => { Object.defineProperty(navigator, 'connection', { configurable: true, value: c ? Object.assign({ addEventListener() {} }, c) : undefined }); }, conn);
     await p.addInitScript(hooks, ['fa', 'm', CV, true]);
     await go(p, BASE, '#/settings');
-    // (only the lines that have a clip in this voice: new lines wait for the voices thread)
-    const first = new Set(book.packs.first.filter((id) => (book.audio['fa-m'] || {})[id])), firstN = first.size;
+    // (only the lines that have a clip in this voice, or else in the other voice of the language, as packList() in
+    // js/app.js picks them: the talking guide's welcome lines are in the woman's voice only; new lines wait for the voices thread)
+    const has = (sl, id) => !!(book.audio[sl] || {})[id];
+    const first = new Map(book.packs.first.filter((id) => has('fa-m', id) || has('fa-f', id)).map((id) => [id, has('fa-m', id) ? 'fa-m' : 'fa-f'])), firstN = first.size;
     await p.waitForFunction((n) => window.__fetched.length >= n, firstN, { timeout: 60000 }).catch(() => {});
     await p.waitForTimeout(1500);
     const got = await p.evaluate(() => window.__fetched.slice()), n = got.length;
-    ok(n === firstN && got.every((u) => u.includes('/audio/fa-m/') && first.has(u.split('/').pop().replace(/\.mp3$/, ''))),
+    ok(n === firstN && got.every((u) => { const id = u.split('/').pop().replace(/\.mp3$/, ''); return first.has(id) && u.includes('/audio/' + first.get(id) + '/'); }),
       NET + ': only the Emergency and CPR part downloads by itself', { n, firstN });
     ok(!!(await p.$('#packs [data-pack=urgent] [data-dlpack=urgent]')), NET + ': the rest of the urgent pack has a Download button');
     ok(!!(await p.$('#packs [data-pack=children] [data-dlpack=children]')), NET + ': the children pack has a Download button');

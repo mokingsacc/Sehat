@@ -1,5 +1,37 @@
 # Family Health Book: art spec
 
+## The pictures now (October 2026)
+The app has two kinds of pictures, and they must look like one set:
+- **Painted stills** (img/stills, img/symptoms, img/steps: .webp): made by Mo with an image model from the prompts in
+  the project's animation-briefs folder. These are the look to match.
+- **Soft drawings** (img/topics, img/pics, img/app/placeholder.svg: .svg): in October 2026 all 106 older flat drawings that
+  the app still shows were redrawn in a softer style close to the stills, with a shared Python kit (people with an elbow
+  solver for arms, headscarves drawn the way the stills draw them, walls, carpets, outdoor scenes). Each picture was then
+  checked by two reviewers, one for how it looks on a phone and one for medical accuracy and culture, and fixed.
+
+Rules for every picture (the rules below the line are the original brief and are partly out of date):
+- Warm plastered walls, mud-brick stones, red carpets with a diamond border, or dry hills and earth outdoors; soft
+  gradients and warm dark-brown outlines; one clear subject that reads at thumbnail size; nothing floats (floor shadows).
+- The cast matches the stills: the mother in a mustard headscarf and teal dress, the older woman in a white scarf and maroon
+  dress, the man in a white skullcap, light kameez and brown waistcoat, children in red or blue, health workers in white
+  coats. Women's hair always fully covered; long sleeves and dresses.
+- **Faces are blank** (no eyes, brows or mouth), except where a step needs a feature (lips for colour, a mouth for breaths).
+- **Right hand** for eating, drinking, feeding, giving, receiving and writing.
+- **No writing, letters or numbers** anywhere (three languages): screens show bars or dots, papers show lines.
+- **No religious signs**: no crescent or cross, also not on a clinic. A clinic shows a plain red heart or a pulse line.
+- **Page pictures (360x200)**: the Back button and the red Emergency pill sit over the top corners (they swap sides in
+  Dari and Pashto), so keep faces and key details out of x<130 and x>210 down to y 65. The same picture is the list-row
+  thumbnail, cropped to about x 42 to 318: the subject must be clear there.
+- Size: under 20 KB each, never over 25 KB (the Android app must stay under 15 MB). Gradients and shapes are linked with
+  xlink:href so old Android WebViews draw them.
+- Pages that have a painted still use it; 30 topic drawings that no page showed any more, and the unused
+  img/app/welcome.svg, home-adults.svg and home-children.svg, were removed (git history keeps them). A page with no
+  picture of its own falls back to img/topics/children-generic.svg or adults-generic.svg.
+
+---
+
+## The original brief
+
 The app is a narrated, offline family health book for villages in Samangan province, northern Afghanistan (Dari and Pashto speakers). The owner asked for "beautiful pictures". Pictures carry meaning for people who cannot read, so every picture must be instantly clear on a small, cheap phone screen.
 
 ## Palette (match the app)
@@ -12,7 +44,7 @@ The app is a narrated, offline family health book for villages in Samangan provi
 ## Style
 Flat vector, soft rounded shapes, no outlines or thin dark outlines only, 2 to 3 shades per object, gentle shadows as flat shapes, no gradients except a soft sky. Calm and dignified, never scary or gory. People are simple but warm (dot eyes, small smile or neutral). No text or letters inside pictures (except "ORS" on a sachet is allowed).
 
-Culture: rural northern Afghanistan. Women wear a long dress and a large head scarf (chador) covering hair, in muted colours; men wear perahan tunban with a waistcoat, and a pakol or a turban or a cap; children in simple clothes; grandparents with white hair/beard. Mud-brick houses with flat roofs, wooden doors, a tandoor, a courtyard with a tree, dry hills and snowy mountains behind. Health workers: a female health worker in a white coat over her scarf; a male doctor in a white coat. Clinic and hospital buildings show a red crescent (never a cross). Modesty: breastfeeding shown with the baby wrapped and the mother's scarf covering; pregnancy shown by a rounded belly under the dress; no bare bodies.
+Culture: rural northern Afghanistan. Women wear a long dress and a large head scarf (chador) covering hair, in muted colours; men wear perahan tunban with a waistcoat, and a pakol or a turban or a cap; children in simple clothes; grandparents with white hair/beard. Mud-brick houses with flat roofs, wooden doors, a tandoor, a courtyard with a tree, dry hills and snowy mountains behind. Health workers: a female health worker in a white coat over her scarf; a male doctor in a white coat. Clinic and hospital buildings show a plain red heart (no crescent or cross). Modesty: breastfeeding shown with the baby wrapped and the mother's scarf covering; pregnancy shown by a rounded belly under the dress; no bare bodies.
 
 ## Files to produce
 1. Topic hero pictures: img/topics/<id>.svg, viewBox="0 0 360 200", a full scene with background. Ids:

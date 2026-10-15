@@ -1,12 +1,14 @@
 # Picture credits
 
-All pictures in `img/` are flat SVG, drawn for this app. No raster images, no web fonts, no external references: everything works offline.
+All pictures in `img/` were made for this app: SVG drawings, and painted stills (`img/stills`, `img/symptoms`, `img/steps`, .webp) made by the project owner with an image model. No external references: everything works offline.
 
 ## Scenes and app pictures
 
-`img/topics/*.svg` (the topic scenes), `img/app/icon.svg`, `img/app/home-children.svg`, `img/app/home-adults.svg` and `img/app/welcome.svg`, and the step and row pictures in `img/pics/` were drawn new for this project and carry no third-party licence.
+`img/topics/*.svg` (the topic scenes), `img/app/icon.svg`, `img/app/placeholder.svg`, and the step and row pictures in `img/pics/` were drawn new for this project and carry no third-party licence.
 
 In the October 2026 picture pass, 20 topic scenes were redrawn so each list row shows its own subject at thumbnail size (the subject large and in the middle third, where the list rows crop): `fever`, `cough`, `diarrhoea`, `measles`, `worms`, `malnutrition`, `vaccines`, `newborn`, `tb`, `blood-pressure`, `diabetes`, `asthma`, `pneumonia-adult`, `diarrhoea-adult`, `typhoid`, `red-flags`, `pregnancy-care`, `stress`, `fumes-poisoning` and `wellbeing`. Five small scenes were added for the tool and link rows that still show an icon tile: `img/pics/row-growth.svg`, `row-breaths.svg`, `row-reading.svg`, `row-share.svg` and `row-feedback.svg`. They use the same parts, palette and faceless figures as the other scenes, and contain no text.
+
+On 14 October 2026 every drawing the app still shows (106: topic scenes, step pictures, the Home-tab rows, the family pictures and the loading placeholder) was redrawn in a softer style that matches the painted stills, with blank faces (a feature only where a step needs it), the right hand for eating and giving, no writing and no religious signs. Each was checked by two reviewers (how it looks on a phone; medical accuracy and culture) and fixed. Eight food pages that borrowed another page's picture got their own: `food-cough`, `food-belly`, `food-after-birth`, `food-pregnancy`, `food-baby`, `food-iodine`, `food-bones` and `food-eyes`.
 
 ## Icons (`img/icons/`, 48x48, single `currentColor`)
 
@@ -34,7 +36,7 @@ People are drawn without eyes, mouths or other facial features, in the scenes an
 | `calendar` | `objects/calendar.svg` | normalised only |
 | `card` | `objects/insurance_card.svg` | normalised only |
 | `check` | `symbols/yes.svg` | normalised only |
-| `clinic` | `places/ambulatory_clinic.svg` | cross replaced by a crescent |
+| `clinic` | `places/ambulatory_clinic.svg` | cross replaced by a heart (no religious signs) |
 | `cough` | `conditions/coughing_alt.svg` | normalised only |
 | `eye` | `body/eye.svg` | normalised only |
 | `eye-blurred` | `conditions/low_vision.svg` | normalised only |
@@ -44,7 +46,7 @@ People are drawn without eyes, mouths or other facial features, in the scenes an
 | `handwash` | `people/wash_hands.svg` | normalised only |
 | `headache` | `conditions/headache.svg` | normalised only |
 | `heart` | `symbols/heart.svg` | normalised only |
-| `hospital` | `places/hospital.svg` | cross replaced by a crescent |
+| `hospital` | `places/hospital.svg` | cross replaced by a heart (no religious signs) |
 | `insect` | `zoonoses/mosquito.svg` | normalised only |
 | `iron-pill` | `medications/blister_pills_oval_x4.svg` | normalised only |
 | `lump` | `body/head.svg` | with a lump on the neck added |
