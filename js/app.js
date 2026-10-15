@@ -1735,8 +1735,17 @@ addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); S.installEv
 addEventListener('appinstalled', () => { S.installEvt = null; S.kept = true; track('a2hs'); persistOnce(true); if (S.lang) render(); });
 async function doInstall() {
   if (S.installEvt) { stopAudio(); S.installEvt.prompt(); const c = await S.installEvt.userChoice; track('a2hs-prompt', { ok: c.outcome }); if (c.outcome === 'accepted') S.kept = true; S.installEvt = null; render(); return; }
-  dialog(`<h2>${esc(T('install'))}</h2><p style="font-size:18px">${esc(T('installIos'))}</p><button class="btn" data-close>${esc(T('close'))}</button>`);
+  // iPhone: Safari has no install button for a website, so the steps are shown, each with its speaker, and read aloud
+  // as soon as the sheet opens (Mo, 15 Oct: "it's just written"). Close is grey: red is for Emergency only.
+  const ids = ['ui.install', 'ui.ios.1', 'ui.ios.2', 'ui.ios.3'];
+  const step = (id, i) => `<div class="blk step" data-block="${id}"><div class="body"><div class="h"><span class="num">${esc(num(i))}</span>${i === 1 ? `<span class="iosshare" aria-hidden="true">${IOS_SHARE}</span>` : ''}</div><div class="x">${esc(L(S.book.narration[id]))}</div></div>${spk(id)}</div>`;
+  dialog(`<div class="iosinst"><h2>${esc(T('install'))}</h2>${sayRow('ui.install', 'blk lead trow')}${ids.slice(1).map((id, i) => step(id, i + 1)).join('')}<button class="btn ghost" data-close>${esc(T('close'))}</button></div>`, (w) => {
+    w.addEventListener('click', (e) => { if (e.target === w || e.target.closest('[data-close]')) stopAudio(); });
+    play(ids);
+  });
 }
+// the iPhone's Share sign: a square open at the top with an arrow pointing up
+const IOS_SHARE = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9H6a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1h-2"/><path d="M12 3v12M8 7l4-4 4 4"/></svg>';
 async function checkUpdate(manual) {
   if (!navigator.onLine) { if (manual) toast(T('offlineNow')); return; }
   let msg = null;

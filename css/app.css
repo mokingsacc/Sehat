@@ -788,3 +788,6 @@ a.sym{text-decoration:none}
 .hbtn.ask.col .hv{background:var(--c);color:var(--c-on,#fff)}
 .hbtn.sec.col .hv{background:var(--c-b)}
 .hbtn.col .hv img{box-shadow:0 0 0 2px var(--c-b)}
+/* the iPhone "add to home screen" sheet: numbered spoken steps, the Share sign drawn beside step 1 */
+.iosinst .step{margin-top:10px}
+.iosshare{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--line);color:#1F6FD1}
