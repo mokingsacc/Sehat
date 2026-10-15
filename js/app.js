@@ -436,7 +436,7 @@ function disclaimer() { return `<div class="disc" data-block="ui.disclaimer">${I
 // phone's own install: on the website only), keep the internet on so the voices save, and the blue Next button.
 // Their clips are inside the Android app (tools/build.py: book.bundle), so they play with no internet.
 const ONB = { timer: 0, wait: false };
-const ONB_LIT = { 'ui.onb.about': '.onbspk', 'ui.onb.help': '.onbspk', 'ui.onb.talk': '.onbspk', 'ui.onb.net': '.onbspk', 'ui.onb.keep': '[data-onb="keep"]', 'ui.onb.next': '[data-onb="next"]' };
+const ONB_LIT = { 'ui.onb.about': '.onbspk', 'ui.onb.help': '.onbspk', 'ui.onb.parts': '.onbspk', 'ui.onb.family': '.onbspk', 'ui.onb.look': '.onbspk', 'ui.onb.talk': '.onbspk', 'ui.onb.net': '.onbspk', 'ui.onb.keep': '[data-onb="keep"]', 'ui.onb.next': '[data-onb="next"]' };
 const SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
 const onbHead = () => `<div class="onbhead"><img src="img/app/icon.svg" alt=""><h1>${esc(S.book.ui.appName.fa)}</h1></div>`;
 function screenWelcome() {
@@ -472,7 +472,7 @@ async function onbLangVoice() {
 async function onbAboutVoice() {
   clearTimeout(ONB.timer); if (!S.lang || route()[0] !== 'hello') return;
   ONB.wait = false; P.blocked = false;
-  await play(['ui.onb.about', 'ui.onb.help', 'ui.onb.talk', ...($('[data-onb="keep"]') ? ['ui.onb.keep'] : []), 'ui.onb.net', 'ui.onb.next'], { quiet: true });
+  await play(['ui.onb.about', 'ui.onb.help', 'ui.onb.parts', 'ui.onb.family', 'ui.onb.look', 'ui.onb.talk', ...($('[data-onb="keep"]') ? ['ui.onb.keep'] : []), 'ui.onb.net', 'ui.onb.next'], { quiet: true });
   if (P.blocked) onbBlocked();
 }
 // no sound before a touch (a phone's browser): the speaker pulses, and the next touch outside a button starts the voice

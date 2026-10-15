@@ -2254,9 +2254,24 @@
    "en": "This is Sehat, a free health book for your family. It works without internet."
   },
   "ui.onb.help": {
-   "fa": "به شما می‌گوید وقتی کسی مریض یا زخمی است چه کنید، و چه وقت به کلینیک بروید.",
-   "ps": "تاسو ته وايي چې کله څوک ناروغ یا ټپي وي څه وکړئ، او کله کلینیک ته ولاړ شئ.",
-   "en": "It tells you what to do when someone is sick or hurt, and when to go to the clinic."
+   "fa": "در وقت خطر، دکمهٔ سرخ را بزنید: قدم به قدم، با تصویرهای متحرک، نشان می‌دهد چه کنید. اگر کسی مریض است، کمک می‌کند بفهمید چقدر جدی است و چه وقت به کلینیک بروید.",
+   "ps": "د خطر په وخت کې سره تڼۍ ووهئ: ګام په ګام، په خوځنده انځورونو، درښيي چې څه وکړئ. که څوک ناروغ وي، مرسته کوي چې پوه شئ څومره جدي دی او کله کلینیک ته ولاړ شئ.",
+   "en": "In an emergency, press the red button: it shows you what to do, step by step, with moving pictures. If someone is sick, it helps you see how serious it is, and when to go to the clinic."
+  },
+  "ui.onb.parts": {
+   "fa": "در پایین صفحه سه بخش است. «صحت» برای مریضی، اطفال، کلان‌سالان و نشانه‌های اول مریضی‌هاست. «خانه» برای ایمنی خانه، غذا و باغچه، و سالم ماندن است.",
+   "ps": "د پاڼې لاندې درې برخې دي. «روغتیا» د ناروغۍ، ماشومانو، لویانو او د ناروغیو د لومړیو نښو لپاره ده. «کور» د کور د خوندیتوب، خوړو او باغچې، او روغ پاتې کېدو لپاره دی.",
+   "en": "At the bottom are three parts. Health is for sickness, children, adults, and the first signs of illness. Home is for safety in the house, food and the garden, and staying well."
+  },
+  "ui.onb.family": {
+   "fa": "در «خانواده» واکسین‌ها، رشد و دواهای هر نفر را نگه دارید، و صحت وقت دوا را به یادتان می‌آورد.",
+   "ps": "په «کورنۍ» کې د هر چا واکسینونه، وده او درمل وساتئ، او صحت مو د درملو وخت دریادوي.",
+   "en": "In Family, keep each person's vaccines, growth and medicines, and Sehat reminds you when a medicine is due."
+  },
+  "ui.onb.look": {
+   "fa": "چیزهای زیاد دیگر هم در آن است، و همه رایگان است. چند دقیقه وقت بگذارید و همه جای آن را ببینید.",
+   "ps": "په کې نور ډېر شیان هم شته، او ټول وړیا دي. څو دقیقې وخت ونیسئ او ټوله یې وګورئ.",
+   "en": "There is much more inside, and it is all free. Take a few minutes to look around."
   },
   "ui.onb.talk": {
    "fa": "هر دکمه گپ می‌زند. بلندگو را بزنید تا بشنوید.",

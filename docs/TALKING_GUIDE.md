@@ -8,7 +8,7 @@ Many of the families Sehat is for cannot read, so the app talks them through its
    Two seconds after the screen opens, a woman's voice says `ui.onb.lang` in Pashto ("for Pashto, press the yellow
    button"), then in Dari ("choose your language: for Dari, press the blue button"), lighting each button as it is
    named (Pashto first: Mo, 15 Oct 2026).
-2. **What Sehat is** (`#/hello`). It speaks by itself: `ui.onb.about`, `ui.onb.help`, `ui.onb.talk`, `ui.onb.keep`
+2. **What Sehat is** (`#/hello`). It speaks by itself: `ui.onb.about`, a short tour of what Sehat can do (Mo, 15 Oct: "sell the app": `ui.onb.help` the red Emergency button and the sick-person checks, `ui.onb.parts` the Health and Home tabs, `ui.onb.family` the Family tab, `ui.onb.look` "look around"), `ui.onb.talk`, `ui.onb.keep`
    (website only: the yellow "Keep Sehat on my phone" button, the phone's own install), `ui.onb.net` (keep the internet
    on so the voices save) and `ui.onb.next` (press the blue button). Next opens the Health tab.
 
