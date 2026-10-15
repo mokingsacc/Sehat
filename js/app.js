@@ -456,11 +456,11 @@ function screenHello() {
     <div class="onbbtns">${keep}<a class="onbbtn blue" href="#/home" data-onb="next"><span class="t">${esc(T('next'))}</span>${I.fwd}</a></div></div>`, nav: false };
 }
 function onbStart() { clearTimeout(ONB.timer); ONB.timer = setTimeout(onbLangVoice, 2000); }
-// "choose your language", in Dari and then in Pashto, each lighting its button
+// "choose your language", in Pashto and then in Dari (Mo, 15 Oct), each lighting its button
 async function onbLangVoice() {
   clearTimeout(ONB.timer); if (S.lang) return;
   ONB.wait = false; P.blocked = false; onbSpk('talking');
-  for (const lg of ['fa', 'ps']) {
+  for (const lg of ['ps', 'fa']) {
     onbLit(lg);
     const r = await play(['ui.onb.lang'], { slot: lg + '-f', quiet: true });
     onbLit(null);

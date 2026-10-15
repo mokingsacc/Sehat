@@ -5,8 +5,9 @@ Many of the families Sehat is for cannot read, so the app talks them through its
 ## First run (js/app.js: screenWelcome, screenHello)
 
 1. **Language.** Only the logo, the name and a big speaker, with two big buttons: Dari (blue) and Pashto (yellow).
-   Two seconds after the screen opens, a woman's voice says `ui.onb.lang` in Dari ("choose your language: for Dari, press
-   the blue button"), then in Pashto ("for Pashto, press the yellow button"), lighting each button as it is named.
+   Two seconds after the screen opens, a woman's voice says `ui.onb.lang` in Pashto ("for Pashto, press the yellow
+   button"), then in Dari ("choose your language: for Dari, press the blue button"), lighting each button as it is
+   named (Pashto first: Mo, 15 Oct 2026).
 2. **What Sehat is** (`#/hello`). It speaks by itself: `ui.onb.about`, `ui.onb.help`, `ui.onb.talk`, `ui.onb.keep`
    (website only: the yellow "Keep Sehat on my phone" button, the phone's own install), `ui.onb.net` (keep the internet
    on so the voices save) and `ui.onb.next` (press the blue button). Next opens the Health tab.
