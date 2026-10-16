@@ -31,7 +31,11 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   (lesson started and done, kept offline), the hub's own events for Ask, printing, sheet keys and the teacher's
   review; free text and unknown verbs refused; a scan that fails on any column that could hold a name, sex, birth
   date, phone number or address.
-- Then P5 to P7: the AI gateway, the D1 store, the Worker on staging.
+- **P5, done:** the AI gateway (`hub/tutor_hub/ai/`): provider policy in code (OpenAI, the hub's own model or the
+  fake; Anthropic and Google hosts raise), a daily token budget per cohort (`ai_usage`, migration 0004) that falls
+  back to checked answers and the teacher, the identifier filter, sums re-checked, hints that give the answer away
+  dropped, and the fake provider with a recorder. Ask runs through it end to end on the fake.
+- Then P6 and P7: the D1 store, the Worker on staging.
 
 ## January 2027: buy and test
 

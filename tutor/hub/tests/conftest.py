@@ -1,7 +1,9 @@
 from pathlib import Path
 
+import httpx
 import pytest
 
+from tutor_hub.ai.fake import FakeProvider
 from tutor_hub.config import Config
 from tutor_hub.packs import Library
 
@@ -34,23 +36,23 @@ def hub_client(cfg):
         yield c
 
 
-class FakeModel:
-    """Stands in for the local model server."""
+@pytest.fixture(autouse=True)
+def no_network(monkeypatch):
+    """No test reaches the network: a real HTTP connection fails at once. In-process apps (TestClient,
+    httpx.ASGITransport) and tests that stub the client still work."""
+    def refuse(self, request, *a, **kw):
+        raise AssertionError(f"a test tried to reach the network: {request.url}")
 
-    def __init__(self, reply="", up=True):
-        self.reply, self.up, self.asked = reply, up, []
-
-    async def available(self):
-        return self.up
-
-    async def chat(self, messages, **kw):
-        self.asked.append(messages)
-        return self.reply
+    async def refuse_async(self, request, *a, **kw):
+        refuse(self, request)
+    monkeypatch.setattr(httpx.HTTPTransport, "handle_request", refuse)
+    monkeypatch.setattr(httpx.AsyncHTTPTransport, "handle_async_request", refuse_async)
 
 
 @pytest.fixture
-def fake_model():
-    return FakeModel
+def fake_ai():
+    """The fake provider class (tutor_hub/ai/fake.py): FakeProvider({"explain": "..."}, up=..., latency=...)."""
+    return FakeProvider
 
 
 @pytest.fixture

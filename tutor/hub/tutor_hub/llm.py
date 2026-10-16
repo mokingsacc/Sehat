@@ -1,4 +1,5 @@
-"""The AI slot: any local model server that speaks the OpenAI chat API (llama.cpp's llama-server, vLLM, Ollama).
+"""The model client: any server that speaks the OpenAI chat API (llama.cpp's llama-server, vLLM, Ollama on the hub).
+Nothing calls it directly: the AI gateway (ai/) wraps it as a provider and decides whether a call may happen.
 
 The model is a file the hub's owner can swap (setup/llama-server.service points at /opt/qalam/models/current.gguf).
 The hub works without it: no AI means checked answers, lesson passages and the teacher, nothing worse.
@@ -65,22 +66,32 @@ class LLM:
         return ok
 
     async def chat(self, messages: list[dict], max_tokens: int = 350, temperature: float = 0.2) -> str | None:
+        return (await self.complete(messages, max_tokens, temperature))[0]
+
+    async def complete(self, messages: list[dict], max_tokens: int = 350,
+                       temperature: float = 0.2) -> tuple[str | None, dict]:
+        """(the answer or None, the token counts the server reported: {"in": n, "out": n})."""
         if not self.url:
-            return None
+            return None, {"in": 0, "out": 0}
         try:
             r = await self._http().post(f"{self.url}/chat/completions", headers=self.headers, timeout=self.timeout,
                                         json={"model": self.model, "messages": messages, "max_tokens": max_tokens,
                                               "temperature": temperature, "stream": False})
             r.raise_for_status()
-            text = r.json()["choices"][0]["message"]["content"]
+            body = r.json()
+            text = body["choices"][0]["message"]["content"]
         except (httpx.HTTPError, KeyError, IndexError, ValueError, TypeError, AttributeError) as e:
             log.warning("model server did not answer: %s", e)
             self._seen = (time.monotonic(), False)
-            return None
+            return None, {"in": 0, "out": 0}
+        usage = body.get("usage") if isinstance(body, dict) else None
+        usage = usage if isinstance(usage, dict) else {}
+        counts = {k: v if type(v) is int and v >= 0 else 0
+                  for k, v in (("in", usage.get("prompt_tokens")), ("out", usage.get("completion_tokens")))}
         text = text.strip() if isinstance(text, str) else ""
         if "</think>" in text:              # reasoning models: keep only the answer
             text = text.split("</think>")[-1].strip()
-        return text or None
+        return text or None, counts
 
 
 def prompt(question: str, *, lang: str, year, subject, notes: list[str]) -> list[dict]:

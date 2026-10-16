@@ -170,3 +170,16 @@ class SqliteStore(Store):
 
     async def prune_events(self, keep_days: int):
         return await self._run("prune_events", keep_days)
+
+    # AI usage
+    async def add_ai_usage(self, **kw):
+        return await self._run("add_ai_usage", **kw)
+
+    async def ai_usage(self, cid, since=None):
+        return await self._run("ai_usage", cid, since)
+
+    async def ai_spent(self, cid, day):
+        return await self._run("ai_spent", cid, day)
+
+    async def prune_ai_usage(self, keep_days: int):
+        return await self._run("prune_ai_usage", keep_days)

@@ -23,7 +23,7 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | Folder | What it is |
 |---|---|
 | `app/` | The phone app: plain HTML, CSS and JavaScript modules, no build step. The hub serves it at `/`. |
-| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `events.py` nameless events, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database, `llm.py` the AI slot. |
+| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `events.py` nameless events, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database, `ai/` the AI gateway, `llm.py` the model client. |
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
 | `tools/` | `validate_pack.py` checks packs; `make_sheets.py` prints every sheet to PDF for reviewers. |
@@ -95,7 +95,8 @@ The safest source answers first, and every answer says where it came from, so th
 2. **Maths.** A plain sum (`۱/۲ + ۱/۴ چند می‌شود؟`) is worked out exactly with fractions. Badge: worked out.
 3. **Checked answers.** A lesson's question bank, or an answer the teacher approved, when it explains at least
    60% of the question (BM25 search, `search.py`). Badge: checked.
-4. **AI**, only in the languages trusted so far (`TUTOR_AI_LANGS`, Dari and English at first). The model gets the
+4. **AI**, through the AI gateway (below), only in the languages trusted so far (`TUTOR_AI_LANGS`, Dari and English
+   at first) and while the cohort's daily budget lasts. The model gets the
    closest lesson passages. Every sum it writes is recomputed; an answer with a wrong sum is never shown. Badge: AI,
    or "AI, sums checked".
 5. **Lesson passage**, if it explains at least 45% of the question. Badge: from the lesson.
@@ -104,6 +105,32 @@ The safest source answers first, and every answer says where it came from, so th
 
 The child can send any AI or lesson answer to the teacher. Each answer the teacher approves becomes a checked
 answer for the next child who asks; approved Pashto answers are also the Pashto data the AI does not have yet.
+
+## The AI gateway (ai/)
+
+Nothing calls a model except through `ai/gateway.py`; `brain.py` asks it for the `explain` purpose on behalf of the
+`ask` module.
+
+- **Policy** (`ai/policy.py`, code, not configuration): learner purposes (`explain`, `hint`, `read_sheet`, `plan`,
+  `screen`) may go to `local` (a model server on the hub's own network only), `openai` (only
+  `https://api.openai.com`) or `fake`. Any other provider, and any Anthropic or Google host whatever the provider is
+  called, raises `PolicyError`: at start-up the hub refuses to start, and each provider checks again before a call.
+  A module may use only the purposes its manifest lists.
+- **Choosing:** `TUTOR_AI_PROVIDER` (`local` when `TUTOR_LLM_URL` is set, else `off`; `openai`; `fake` for tests and
+  for staging until a key exists). `openai` without a key is simply off and is never pinged.
+- **Before a call:** a language not trusted yet, the rules screen, or a cohort past its daily budget
+  (`TUTOR_AI_BUDGET` tokens per UTC day, default 300 000; 0 means no AI) means no call, quietly: the brain goes on
+  to lesson passages and the teacher, so an over-budget cohort still gets checked answers. The learner's words lose
+  identifiers first (`ai/filters.py`): "my name is ..." in English, Dari and Pashto, names the caller knows, runs of
+  seven digits or more in any script, email addresses.
+- **After a call:** sums are recomputed (a wrong sum drops the answer); a hint holding the answer (`3/4`, `۳/۴`,
+  `0.75`, `۰٫۷۵`) is asked for once more, then dropped; errors and timeouts are logged and dropped; every reply is
+  counted in `ai_usage` (`migrations/0004`): per day, cohort, module, purpose, provider and model, the calls,
+  tokens and cost, never a learner or any text. Kept 2 years.
+- **The fake** (`ai/fake.py`): scripted replies per purpose, latency, errors and timeouts, a vision fake that "reads"
+  fixture pictures by their hash from JSON, and a recorder of exactly what would be sent. `tests/test_gateway.py`
+  checks the policy, budgets and the recorder; no test reaches the network (a fixture in `conftest.py` fails any
+  real connection).
 
 ## Printing (sheets.py, printing.py)
 

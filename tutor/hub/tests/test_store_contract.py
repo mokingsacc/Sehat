@@ -307,3 +307,36 @@ async def test_prune_events_keeps_the_recent_ones(store):
     await store.add_events([ev(at=old), ev(at=new)])
     await store.prune_events(365)
     assert [r["at"] for r in await store.events("abcd1234ef")] == [new]
+
+
+# AI usage
+
+def use(day="2026-10-16", cohort="abcd1234ef", module="ask", purpose="explain", tokens=100, **kw):
+    return dict({"day": day, "cohort": cohort, "module": module, "purpose": purpose, "provider": "fake",
+                 "model": "fake", "tokens": tokens}, **kw)
+
+
+async def test_ai_usage_counts_calls_per_day_and_purpose(store):
+    assert await store.ai_spent("abcd1234ef", "2026-10-16") == {"calls": 0, "tokens": 0, "cost_micro": 0}
+    await store.add_ai_usage(**use())
+    await store.add_ai_usage(**use(tokens=50, cost_micro=7, held=True))
+    await store.add_ai_usage(**use(purpose="hint", tokens=10))
+    await store.add_ai_usage(**use(day="2026-10-15", tokens=1000))
+    await store.add_ai_usage(**use(cohort="zz99yy88xx", tokens=999))
+    assert await store.ai_spent("abcd1234ef", "2026-10-16") == {"calls": 3, "tokens": 160, "cost_micro": 7}
+    rows = await store.ai_usage("abcd1234ef")
+    assert [(r["day"], r["purpose"], r["calls"], r["tokens"], r["held"]) for r in rows] == [
+        ("2026-10-15", "explain", 1, 1000, 0), ("2026-10-16", "explain", 2, 150, 1), ("2026-10-16", "hint", 1, 10, 0)]
+    assert set(rows[0]) == {"day", "cohort", "module", "purpose", "provider", "model", "calls", "tokens", "cost_micro",
+                            "held"}
+    assert len(await store.ai_usage("abcd1234ef", since="2026-10-16")) == 2
+
+
+async def test_prune_ai_usage_keeps_two_years(store):
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    old, new = ((now - timedelta(days=d)).strftime("%Y-%m-%d") for d in (800, 1))
+    await store.add_ai_usage(**use(day=old))
+    await store.add_ai_usage(**use(day=new))
+    await store.prune_ai_usage(730)
+    assert [r["day"] for r in await store.ai_usage("abcd1234ef")] == [new]

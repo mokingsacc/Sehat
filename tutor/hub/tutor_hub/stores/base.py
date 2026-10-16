@@ -52,6 +52,15 @@ Events (events.py decides what may be in them)
   `at` is the caller's UTC minute, kept as given.
 - `events(cid, limit=100) -> list`: the cohort's events, newest first (by `at`, then the order they were added).
 - `prune_events(keep_days)`: deletes events whose `at` is more than `keep_days` days old.
+
+AI usage (the gateway's spending, ai/gateway.py)
+- `add_ai_usage(*, day, cohort, module, purpose, provider, model, tokens, cost_micro=0, held=False)`: counts one call
+  on the row for that day, cohort, module, purpose, provider and model, making the row if it is the first: one
+  more call, `tokens` and `cost_micro` added, and one more held answer when `held`. Never a learner or any text.
+- `ai_usage(cid, since=None) -> list`: the cohort's rows `{day, cohort, module, purpose, provider, model, calls,
+  tokens, cost_micro, held}` from day `since` on (all when None), by day, module, purpose, provider, model.
+- `ai_spent(cid, day) -> {calls, tokens, cost_micro}`: the cohort's totals for one day; zeros when nothing was spent.
+- `prune_ai_usage(keep_days)`: deletes rows whose day is more than `keep_days` days ago.
 """
 
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
@@ -137,4 +146,18 @@ class Store:
         raise NotImplementedError
 
     async def prune_events(self, keep_days: int) -> None:
+        raise NotImplementedError
+
+    # AI usage
+    async def add_ai_usage(self, *, day, cohort, module, purpose, provider, model, tokens, cost_micro=0,
+                           held=False) -> None:
+        raise NotImplementedError
+
+    async def ai_usage(self, cid, since=None) -> list[dict]:
+        raise NotImplementedError
+
+    async def ai_spent(self, cid, day) -> dict:
+        raise NotImplementedError
+
+    async def prune_ai_usage(self, keep_days: int) -> None:
         raise NotImplementedError

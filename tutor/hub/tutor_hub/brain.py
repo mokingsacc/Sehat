@@ -3,9 +3,10 @@
 1. rules     words of distress, health questions, or topics the hub does not answer (rules.py)
 2. maths     a plain sum is worked out exactly (mathcheck.solve)
 3. checked   an answer from a lesson's question bank or one the teacher approved, if it clearly fits
-4. AI        the local model, given the closest lesson passages; every sum it writes is recomputed and
-             an answer with a wrong sum is never shown. Languages the AI is not trusted in yet (Pashto at
-             first) skip this step.
+4. AI        through the AI gateway (ai/), given the closest lesson passages. The gateway decides whether a call
+             may happen (provider policy, trusted languages, the cohort's daily budget), takes identifiers out
+             of the question, recomputes every sum (an answer with a wrong sum is never shown) and counts the
+             call. No AI this time, for any reason, simply means the next step.
 5. lesson    the closest passage of a lesson, said to be "from the lesson", if it fits well enough
 6. teacher   nothing fits: the question waits for the teacher, and the answer appears on the phone later
 
@@ -15,6 +16,7 @@ from dataclasses import asdict, dataclass
 
 from . import llm as llm_mod
 from . import mathcheck, rules
+from .ai import Gateway
 from .packs import text as pick_text
 
 WAITING = {
@@ -42,12 +44,12 @@ class Answer:
 
 
 class Brain:
-    def __init__(self, index, model: "llm_mod.LLM", ai_langs=("prs", "en")):
+    def __init__(self, index, gateway: Gateway):
         self.index = index
-        self.model = model
-        self.ai_langs = tuple(ai_langs)
+        self.gateway = gateway
 
-    async def answer(self, question: str, *, lang="prs", subject=None, year=None, lesson=None) -> Answer:
+    async def answer(self, question: str, *, lang="prs", subject=None, year=None, lesson=None,
+                     cohort: str | None = None) -> Answer:
         lang = lang if lang in ("prs", "ps", "en") else "prs"
         q = (question or "").strip()
 
@@ -68,15 +70,13 @@ class Brain:
             return Answer(pick_text(d["a"], lang), lang, d["kind"], checked=True, lesson=d.get("lesson"))
 
         passages = self.index.search(q, subject=subject, lesson=lesson, limit=4)
-        if lang in self.ai_langs and await self.model.available():
-            notes = [pick_text(d["a"], lang) for _, cov, d in passages if cov > 0.2]
-            reply = await self.model.chat(llm_mod.prompt(q, lang=lang, year=year, subject=subject, notes=notes))
-            if reply:
-                c = mathcheck.check(reply)
-                if c.ok:
-                    return Answer(mathcheck.mark(reply), lang, "ai", maths_checked=c.checked,
-                                  lesson=passages[0][2].get("lesson") if passages else None)
-                # a wrong sum: the child never sees this answer; the teacher answers instead
+        notes = [pick_text(d["a"], lang) for _, cov, d in passages if cov > 0.2]
+        r = await self.gateway.call("explain", llm_mod.prompt(q, lang=lang, year=year, subject=subject, notes=notes),
+                                    module="ask", lang=lang, cohort=cohort)
+        if r.text:
+            return Answer(r.text, lang, "ai", maths_checked=r.maths_checked,
+                          lesson=passages[0][2].get("lesson") if passages else None)
+        # no AI this time (off, untrusted language, budget, a wrong sum...): the lesson, else the teacher
 
         if passages and passages[0][1] >= PASSAGE_OK:
             d = passages[0][2]

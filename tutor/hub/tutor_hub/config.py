@@ -11,6 +11,14 @@ def _env(name, default=None):
     return v if v not in (None, "") else default
 
 
+def _budget(v):
+    """TUTOR_AI_BUDGET: unset means the default; set but empty (or "none") means no cap."""
+    if v is None:
+        return Config.ai_budget
+    v = v.strip().replace("_", "")
+    return None if v.lower() in ("", "none") else max(0, int(v))
+
+
 @dataclass
 class Config:
     name: str = "Qalam"                                   # working name, shown in the app and on sheets
@@ -25,6 +33,8 @@ class Config:
     llm_key: str | None = None
     llm_timeout: float = 60.0
     ai_langs: tuple = ("prs", "en")                       # Pashto joins when its answers test well (docs/ROADMAP.md)
+    ai_provider: str | None = None                        # off, local, openai or fake; empty = local if llm_url is set
+    ai_budget: int | None = 300_000                       # AI tokens per cohort per UTC day; empty = no cap, 0 = no AI
     print_backend: str = "auto"                           # cups, outbox, or auto (cups if installed)
     printer: str | None = None                            # CUPS queue name; empty = the system default
     free_copies: int = 3                                  # more copies than this need the teacher's PIN
@@ -48,6 +58,8 @@ class Config:
             llm_key=_env("TUTOR_LLM_KEY"),
             llm_timeout=float(_env("TUTOR_LLM_TIMEOUT", cls.llm_timeout)),
             ai_langs=tuple(x.strip() for x in _env("TUTOR_AI_LANGS", "prs,en").split(",") if x.strip()),
+            ai_provider=_env("TUTOR_AI_PROVIDER"),
+            ai_budget=_budget(os.environ.get("TUTOR_AI_BUDGET")),
             print_backend=_env("TUTOR_PRINT", cls.print_backend),
             printer=_env("TUTOR_PRINTER"),
             free_copies=int(_env("TUTOR_FREE_COPIES", cls.free_copies)),

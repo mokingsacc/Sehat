@@ -1,5 +1,5 @@
 """The hub's own records in one SQLite file: questions, the teacher's approved answers, print jobs, cohorts and
-flags, and nameless events.
+flags, nameless events, and the AI gateway's daily usage.
 This is the blocking half of stores/sqlite.py; routes reach it only through SqliteStore.
 
 Privacy rule: the hub never stores a child's name. Questions are anonymous (a random token lets the asking phone
@@ -220,3 +220,25 @@ class Store:
     def prune_events(self, keep_days: int):
         cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime("%Y-%m-%dT%H:%M")
         self._x("DELETE FROM events WHERE at<?", (cut,))
+
+    # AI usage
+    def add_ai_usage(self, *, day, cohort, module, purpose, provider, model, tokens, cost_micro=0, held=False):
+        self._x("""INSERT INTO ai_usage(day, cohort, module, purpose, provider, model, calls, tokens, cost_micro, held)
+                   VALUES(?,?,?,?,?,?,1,?,?,?) ON CONFLICT(day, cohort, module, purpose, provider, model) DO UPDATE SET
+                   calls=calls+1, tokens=tokens+excluded.tokens, cost_micro=cost_micro+excluded.cost_micro,
+                   held=held+excluded.held""",
+                (day, cohort, module, purpose, provider, model, int(tokens), int(cost_micro), int(bool(held))))
+
+    def ai_usage(self, cid, since=None):
+        return self._all("SELECT * FROM ai_usage WHERE cohort=? AND day>=? ORDER BY day, module, purpose, provider, model",
+                         (cid, since or ""))
+
+    def ai_spent(self, cid, day):
+        r = self._one("""SELECT COALESCE(SUM(calls),0) AS calls, COALESCE(SUM(tokens),0) AS tokens,
+                                COALESCE(SUM(cost_micro),0) AS cost_micro FROM ai_usage WHERE cohort=? AND day=?""",
+                      (cid, day))
+        return {k: int(r[k]) for k in ("calls", "tokens", "cost_micro")}
+
+    def prune_ai_usage(self, keep_days: int):
+        cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime("%Y-%m-%d")
+        self._x("DELETE FROM ai_usage WHERE day<?", (cut,))

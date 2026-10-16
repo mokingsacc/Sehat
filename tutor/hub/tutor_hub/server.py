@@ -22,9 +22,9 @@ from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
 from . import __version__, events, flags, modules, search, sheets
+from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import Brain
 from .config import Config
-from .llm import LLM
 from .packs import Library, picture_file
 from .packs import text as pick_text
 from .printing import Printer, PrintQueue
@@ -114,9 +114,11 @@ class Hub:
         self.modules, self.module_problems = modules.load(cfg.modules)
         self.seeds, self.seed_problems = flags.load_seeds(cfg.cohorts)
         self.cohort_id = cfg.cohort or (self.seeds.get("hub") or {}).get("id")
-        self.llm = LLM(cfg.llm_url, cfg.llm_model, cfg.llm_timeout, cfg.llm_key)
+        # the AI gateway: a provider the policy refuses stops the hub here, before it serves anyone
+        self.gateway = Gateway(make_provider(cfg), store=self.store, manifests=self.modules, ai_langs=cfg.ai_langs,
+                               budget=cfg.ai_budget, timeout=cfg.llm_timeout, cohort=self.cohort_id)
         self._ix_lock = asyncio.Lock()
-        self.brain = Brain(None, self.llm, cfg.ai_langs)     # the search index is built in start()
+        self.brain = Brain(None, self.gateway)     # the search index is built in start()
         self.printer = Printer(cfg.print_backend, cfg.printer, cfg.data / "outbox")
         self.prints: PrintQueue | None = None
         self.pin = teacher_pin(cfg.data)
@@ -136,12 +138,13 @@ class Hub:
             log.error("this hub's cohort (TUTOR_COHORT=%s) does not exist: every module is off", self.cohort_id)
         await self.store.prune(self.cfg.keep_days)
         await self.store.prune_events(events.KEEP_DAYS)
+        await self.store.prune_ai_usage(ai_gateway.KEEP_DAYS)
         await self.store.fail_unfinished_prints()
         await self.reindex()
         self.prints = PrintQueue(self.store.sync, self.printer, self.render_pdf)
 
     async def stop(self):
-        await self.llm.aclose()
+        await self.gateway.aclose()
         await self.store.close()
 
     def check_pin(self, pin: str | None, who: str):
@@ -231,7 +234,7 @@ class Hub:
         cohort, f, on = await self.cohort_modules(cohort_id, band)
         if cohort_id and not cohort:
             raise HTTPException(404, "no such cohort")
-        ai_on = await self.llm.available()
+        ai_on = await self.gateway.available()
         mods = []
         for mid in on:
             m = self.modules[mid]
@@ -312,7 +315,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
     async def ask(a: AskIn, request: Request):
         hub.ask_limit.check(_who(request))
         lang = _lang(a.lang)
-        ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson)
+        ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson,
+                                     cohort=request.query_params.get("cohort") or hub.cohort_id)
         token = await hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
                                              question=a.text.strip(),
                                              answer=None if ans.waiting and ans.source != "rules" else ans.text,
