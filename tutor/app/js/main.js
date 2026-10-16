@@ -32,7 +32,10 @@ import teacher from './screens/teacher.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
-const SCREENS = { home, subject, lesson, ask, print, check, teacher, welcome, who, credits, consent, lock: lockScreen,
+// the photo screens load only when opened (the `photo` module, online only)
+const photo = (args) => import('./modules/photo.js').then((m) => m.default(args));
+
+const SCREENS = { home, subject, lesson, ask, print, check, photo, teacher, welcome, who, credits, consent, lock: lockScreen,
   settings, signup };
 const NEEDS_NO_CHILD = new Set(['welcome', 'teacher', 'signup']);
 const CLEAN = new Set(['welcome', 'teacher', 'signup']);          // the clean adult look, not the learner's

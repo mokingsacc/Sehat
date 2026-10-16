@@ -12,6 +12,7 @@
     "ask": true,
     "print": true,
     "check": true,
-    "teacher": true
+    "teacher": true,
+    "photo": true
   }
 }

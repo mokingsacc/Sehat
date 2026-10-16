@@ -7,10 +7,15 @@
 // example first, each question beside its answer box, and trace and draw items as "Do this one on paper".
 // Each time a sheet is marked, one `check.done` joins the phone's events queue: the lesson and the percent right
 // (only with consent: state.record).
+// Photos (C2.2, P14): the sheet she got last is offered first, "This sheet?", with "Take a photo" where the `photo`
+// module is on for her, the phone is online, she joined with consent and the reader knows her language; offline
+// that button is "Photos need the internet". The photo screen (modules/photo.js) hands back what she confirmed she
+// wrote, which is typed in here and marked like typed answers: the server never learns right or wrong.
 
 import { fa, getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
+import * as modules from '../modules.js';
 import { notSimplest, parse, same, show } from '../numbers.js';
 import * as sheetcode from '../sheetcode.js';
 import * as state from '../state.js';
@@ -35,9 +40,41 @@ export async function loadKey(id, seed, lang) {
 
 export const codeOf = (l, seed) => sheetcode.make(l.code, seed);
 
+// "Take a photo" for her: 'on', 'offline' (say "Photos need the internet"), or null (not offered at all)
+export function photoOffer(c = state.child()) {
+  if (!c || !modules.listed('photo') || !modules.allows('photo', c.band)) return null;
+  if (!hub.online()) return 'offline';
+  const ai = (hub.info() && hub.info().ai) || {};
+  if (!modules.on('photo') || !c.token || !c.consent || !ai.on || !(ai.langs || []).includes(getLang())) return null;
+  return 'on';
+}
+
+// the camera was refused on this visit: Check my sheet says how to allow it (memory only)
+let cameraRefused = false;
+export function cameraOff(v = true) { cameraRefused = v; }
+
+// readings she confirmed on "What I read", for the next opening of that sheet's check (memory only, never stored)
+let handed = null;
+export function handoff(id, seed, readings) { handed = { id, seed: +seed || 0, readings }; }
+
+// "This sheet?" (C2.2): the sheet she got last, its title and code, "Take a photo" and "Type my answers"
+function thisSheet({ l, seed }) {
+  const offer = photoOffer();
+  const at = `${encodeURIComponent(l.id)}/${seed}`;
+  return h('div', { class: 'card pad-card stack this-sheet' },
+    h('div', { class: 'row' }, icon('file', 30), h('div', { class: 'grow' }, h('small', { class: 'muted' }, s('this_sheet')),
+      h('b', {}, plain(l.title)), h('small', {}, h('bdi', { dir: 'ltr' }, codeOf(l, seed))))),
+    offer === 'on' ? said(h('a', { class: 'btn primary main', href: '#/photo/' + at }, icon('camera'), s('take_photo'))) : null,
+    said(h('a', { class: offer === 'on' ? 'btn outline' : 'btn primary main', href: '#/check/' + at }, icon('pencil'), s('type_answers'))),
+    offer === 'offline' ? h('p', { class: 'muted small' }, s('photo_offline')) : null,
+    offer === 'on' && cameraRefused ? h('p', { class: 'muted small' }, s('camera_off')) : null);
+}
+
 function pickSheet() {
   const c = state.child();
-  const printed = Object.entries(c.prints).map(([id, seed]) => ({ l: library.get(id), seed })).filter((x) => x.l);
+  const all = Object.entries(c.prints).map(([id, seed]) => ({ l: library.get(id), seed })).filter((x) => x.l);
+  const last = all.at(-1);
+  const printed = all.slice(0, -1).reverse();
   const input = h('input', { dir: 'ltr', autocomplete: 'off', placeholder: 'M7-03-48217', 'aria-label': s('sheet_code') });
   const open = (e) => {
     e.preventDefault();
@@ -47,6 +84,7 @@ function pickSheet() {
   };
   return h('div', { class: 'screen' },
     topbar({ back: '#/home', title: s('check_title'), sub: s('check_note'), child: true }),
+    last ? thisSheet(last) : null,
     printed.length ? h('div', { class: 'section-head' }, h('h2', {}, s('printed_sheets'))) : null,
     h('div', { class: 'lessons' }, printed.map(({ l, seed }) => said(h('a', { class: 'lesson-row',
       href: `#/check/${encodeURIComponent(l.id)}/${seed}` },
@@ -76,6 +114,7 @@ export default async function check([id, seedText, mode]) {
     title: s(onScreen ? 'on_screen' : 'check_title'),
     extra: h('span', { class: 'tag', dir: 'ltr' }, (key && key.code) || (L ? codeOf(L, seed) : '')) });
   if (!key) return { el: h('div', { class: 'screen' }, head, h('div', { class: 'empty' }, s('no_key'))), tab: 'sheets' };
+  if (L) state.rememberPrint(id, seed);           // opened or checked: "This sheet?" offers it next time
 
   const results = {};
   const score = h('div', { class: 'score hidden', role: 'status', 'aria-live': 'polite' });
@@ -183,6 +222,11 @@ export default async function check([id, seedText, mode]) {
     h('div', { class: 'actions' },
       values.length ? said(h('button', { class: 'btn primary main', type: 'button', onClick: checkValues }, icon('check'), s('check_btn'))) : null,
       said(h('a', { class: 'btn', href: '#/print/' + encodeURIComponent(id) }, icon(onScreen ? 'file' : 'printer'), s('print_new')))));
+  if (handed && handed.id === id && handed.seed === seed) {        // back from "What I read": mark what she confirmed
+    const r = handed.readings;
+    handed = null;
+    fillIn(values, r, checkValues);
+  }
   return { el, tab: 'sheets', fill: (readings) => fillIn(values, readings, checkValues) };
 }
 

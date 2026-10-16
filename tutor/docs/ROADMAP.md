@@ -101,6 +101,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   only adds the hub's queue. Online the third tab is Sheets: "Print or save as PDF" through the browser, then "Do it
   on screen". Check my sheet no longer shows a sum's answer. `name` left the server's sheet and print routes.
   `make_sheets.py --batch` prints a stack for a class; `tools/sheet_check.mjs` checks the print in Chromium.
+- **P14, done:** photo marking of Qalam sheets (C2.2), on in staging only. Check my sheet asks "This sheet?" and
+  offers "Take a photo" first; the in-page camera takes the photo itself once the four squares hold still (or the
+  phone's own camera through a file input), the phone cuts out the answer cells only and sends one small greyscale
+  strip, `read_sheet` reads it through the AI gateway (on the fake until the provider key comes in January), and
+  "What I read" shows her own writing beside each reading to fix before the phone marks it. The server returns
+  readings only and never learns right or wrong; photos and strips are never stored or logged.
 
 ## January 2027: buy and test
 

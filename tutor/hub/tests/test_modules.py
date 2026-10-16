@@ -34,7 +34,7 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "check", "lessons", "print", "sheets", "teacher"]
+    assert sorted(REAL) == ["ask", "check", "lessons", "photo", "print", "sheets", "teacher"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
     assert REAL["print"]["needs"] == ["printer"]
     # C2, change 6: `sheets` holds the sheet, its keys, "Get the sheet" and the lesson-end card; `print` depends on it
@@ -42,6 +42,10 @@ def test_the_built_modules_are_valid():
     assert REAL["print"]["depends"] == ["sheets"] and REAL["print"]["slots"] == []
     assert REAL["check"]["depends"] == ["sheets"] and REAL["sheets"]["needs"] == []
     assert "ey" in REAL["sheets"]["bands"]
+    # C2.2: photo marking reads sheets, sends pictures to the AI (high risk), needs the internet, never for p1 or ey
+    assert REAL["photo"]["depends"] == ["sheets", "check"] and REAL["photo"]["needs"] == ["internet"]
+    assert REAL["photo"]["ai"]["purposes"] == ["read_sheet"] and modules.risk(REAL["photo"]) == "high"
+    assert REAL["photo"]["bands"] == ["p2", "s1", "s2", "ad"]
 
 
 def test_the_seed_cohorts_are_valid_and_neutral():
@@ -57,14 +61,14 @@ def test_the_validator_tool_passes_and_fails(tmp_path):
     tool = [sys.executable, str(TUTOR / "tools" / "validate_modules.py")]
     ok = subprocess.run(tool, capture_output=True, text=True)
     assert ok.returncode == 0, ok.stdout
-    bad = tmp_path / "modules" / "photo"
+    bad = tmp_path / "modules" / "sample"                # a module with no app code (photo has its own since P14)
     bad.mkdir(parents=True)
-    (bad / "module.json").write_text(json.dumps(manifest(maturity="beta")), encoding="utf-8")
+    (bad / "module.json").write_text(json.dumps(manifest("sample", maturity="beta")), encoding="utf-8")
     out = subprocess.run(tool + [str(tmp_path / "modules")], capture_output=True, text=True)
-    assert out.returncode == 1 and "photo: maturity" in out.stdout
-    (bad / "module.json").write_text(json.dumps(manifest()), encoding="utf-8")       # valid, but no app code
+    assert out.returncode == 1 and "sample: maturity" in out.stdout
+    (bad / "module.json").write_text(json.dumps(manifest("sample")), encoding="utf-8")   # valid, but no app code
     out = subprocess.run(tool + [str(tmp_path / "modules")], capture_output=True, text=True)
-    assert out.returncode == 1 and "no app/js/modules/photo.js" in out.stdout
+    assert out.returncode == 1 and "no app/js/modules/sample.js" in out.stdout
 
 
 # validation
@@ -184,8 +188,8 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     staging = seeds["staging"]
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
-    assert flags.enabled(REAL, staging, f) == ["ask", "check", "lessons", "print", "sheets", "teacher"]
-    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "lessons", "sheets"]
+    assert flags.enabled(REAL, staging, f) == ["ask", "check", "lessons", "photo", "print", "sheets", "teacher"]
+    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "lessons", "photo", "sheets"]
     assert REAL["teacher"]["needs"] == ["pin"]
 
 
@@ -193,7 +197,8 @@ def test_the_real_hub_cohort_takes_the_built_modules():
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     hub = seeds["hub"]
     f = {m: {"enabled": v} for m, v in hub["modules"].items()}
-    assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "print", "sheets", "teacher"]
+    assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "print", "sheets", "teacher"]   # no photo on the hub
+    assert hub["modules"]["photo"] is False and seeds["open"]["modules"]["photo"] is False
     assert flags.enabled(REAL, hub, f, band="ey") == ["lessons", "print", "sheets", "teacher"]     # no Ask for ey
 
 

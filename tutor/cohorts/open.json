@@ -26,6 +26,7 @@
     "check": true,
     "ask": false,
     "print": false,
-    "teacher": false
+    "teacher": false,
+    "photo": false
   }
 }

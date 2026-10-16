@@ -210,7 +210,7 @@ export function firstTry(lessonId, i, ok) {
 
 export function rememberPrint(lessonId, seed) {
   const c = child();
-  if (c) { c.prints[lessonId] = seed; save(); }
+  if (c) { delete c.prints[lessonId]; c.prints[lessonId] = seed; save(); }    // the last got is last
 }
 
 // a question in her list; `k` is the phone's own key for it (the server's id comes once it is sent)

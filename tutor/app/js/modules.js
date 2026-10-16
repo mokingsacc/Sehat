@@ -74,6 +74,12 @@ export const tabs = () => TABS.filter((t) => on(t.module)).map((t) => ({ ...t,
 // listed while the phone is offline, so a screen can say "Photos need the internet" rather than nothing)
 export const listed = (id) => !!entry(id);
 
+// the module is for this band (its manifest's bands; a hub's list without them allows every band)
+export function allows(id, band) {
+  const m = entry(id);
+  return !!m && (!Array.isArray(m.bands) || m.bands.includes(band));
+}
+
 export function routeOn(name) { return !ROUTES[name] || on(ROUTES[name]); }
 
 // what a module's register(shell) receives: it can only add offers to the shell's slots

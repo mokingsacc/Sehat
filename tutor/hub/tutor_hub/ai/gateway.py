@@ -24,6 +24,7 @@ log = logging.getLogger("tutor.ai")
 
 KEEP_DAYS = 730                                  # ai_usage is kept 2 years (BUILD-PLAN 3.4)
 MATHS_PURPOSES = ("explain", "hint")             # replies whose sums are recomputed
+UNSCREENED = ("read_sheet",)                     # no learner words in the messages: nothing for the rules screen
 
 
 @dataclass
@@ -96,7 +97,9 @@ class Gateway:
         if lang not in self.ai_langs:
             return Result(None, "language")
         said = [m for m in messages if m.get("role") == "user"]
-        if any(rules.screen(_text(m.get("content"))) for m in said):
+        # the rules screen is for a learner's words; a sheet's reading (read_sheet) carries only the hub's own list
+        # of tiles, and the strip, which holds digits she wrote in boxes
+        if purpose not in UNSCREENED and any(rules.screen(_text(m.get("content"))) for m in said):
             return Result(None, "rules")
         cohort = cohort or self.cohort
         if await self.over_budget(cohort):

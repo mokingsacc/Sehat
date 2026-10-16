@@ -1,0 +1,15 @@
+{
+  "id": "photo",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["sheets", "check"],
+  "bands": ["p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": ["photo.upload", "ai.call"],
+  "ai": {
+    "purposes": ["read_sheet"]
+  },
+  "settings": {},
+  "needs": ["internet"],
+  "offline": "no"
+}

@@ -160,7 +160,7 @@ async def test_the_worker_serves_the_hub_with_print_and_teacher_off_and_sheets_o
         r = await c.get("/api/hello")
         assert r.status_code == 200
         h = r.json()
-        assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "sheets"]
+        assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "photo", "sheets"]
         assert h["cohort"]["label"] == "Staging" and h["lessons"] > 0 and h["ai"]["on"] is True
         assert h["printer"]["state"] == "off"
         assert (await c.get("/api/print/1")).status_code == 404
@@ -220,6 +220,10 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
             if path == "/api/join":
                 headers = {"X-Learner-Token": r.json()["token"]}
             costs[name] = worker.db.calls - before
+    # the start applies each migration once per database (one batch each), so it grows by one with every migration
+    # file; it stays at half the plan's limit, every other request at 20
+    first = costs.pop("first request (hub starts)")
+    assert first <= 25 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
     assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
     assert costs["100 events"] <= 4, costs                    # her record (and her day seen), then one batch
 
@@ -236,3 +240,24 @@ async def test_the_spike_route_only_where_staging_asks_for_it(worker, monkeypatc
         assert (await c.get("/api/_spike?n=5000")).json()["queries"]["tried"] == 1100
         monkeypatch.setenv("QALAM_SPIKE", "off")
         assert (await c.get("/api/_spike")).status_code == 404
+
+
+async def test_a_photo_is_read_on_the_worker_and_nothing_of_it_reaches_d1(worker):
+    """Staging has photo on; the strip goes to the gateway (the fake, which knows no picture here: every cell "?")
+    and back, and D1 never sees it: the only row it adds is the AI call's count."""
+    import base64
+    strip = (Path(__file__).parent / "fixtures" / "photos" / "m7-prs-tilted.jpg").read_bytes()
+    b64 = base64.b64encode(strip).decode()
+    async with client(worker) as c:
+        j = await c.post("/api/join", json={"band": "s1", "lang": "prs", "picture": "key",
+                                            "consent": {"kind": "guardian-on-phone", "version": "online-2026-10"}})
+        h = {"X-Learner-Token": j.json()["token"]}
+        r = await c.post("/api/m/photo/mark", headers=h, json={"code": "M7-03-48217", "seed": 4821, "lang": "prs",
+                                                               "strip": b64})
+        assert r.status_code == 200, r.text
+        assert {x["read"] for x in r.json()["readings"]} == {"?"}
+    db = worker.db.sqlite
+    tables = [r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type = 'table'")]
+    dump = "\n".join(repr(tuple(row)) for t in tables for row in db.execute(f'SELECT * FROM "{t}"'))
+    assert b64[100:160] not in dump and strip[100:140].hex() not in dump
+    assert "read_sheet" in dump                                # the call was counted, and only counted

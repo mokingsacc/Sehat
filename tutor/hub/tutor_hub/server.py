@@ -25,6 +25,7 @@ from . import __version__, events, flags, learners, modules, search, sheets
 from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import Brain
 from .config import Config
+from .mods import photo as photo_mod
 from .packs import Library, picture_file
 from .packs import text as pick_text
 from .printing import Printer, PrintQueue
@@ -159,6 +160,7 @@ class Hub:
         self.pdf_limit = Limit(10, 60)
         self.event_limit = Limit(30, 60)
         self.join_limit = Limit(20, 3600)
+        self.photo_limit = Limit(6, 60)              # photos of sheets read per phone a minute
         self.aliases = set(learners.load_aliases())
         self.consent_texts = learners.load_consent()
         self.consent_version = learners.CONSENT_VERSIONS[cfg.home]
@@ -501,6 +503,9 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         rows = [r for r in (events.row(e, cohort=who["cohort"], token_hash=who["token_hash"]) for e in items) if r]
         await hub.store.add_events(rows)
         return {"saved": len(rows), "expired": len(items) - len(rows)}
+
+    # photo marking (the `photo` module, P14): readings only, the phone marks (mods/photo.py)
+    app.include_router(photo_mod.router(hub, needs))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
     # The answer page is the teacher's: behind the teacher's PIN on the hub, and on no learner route (C2.3); online

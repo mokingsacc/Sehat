@@ -69,14 +69,15 @@ class LLM:
         return (await self.complete(messages, max_tokens, temperature))[0]
 
     async def complete(self, messages: list[dict], max_tokens: int = 350,
-                       temperature: float = 0.2) -> tuple[str | None, dict]:
-        """(the answer or None, the token counts the server reported: {"in": n, "out": n})."""
+                       temperature: float = 0.2, extra: dict | None = None) -> tuple[str | None, dict]:
+        """(the answer or None, the token counts the server reported: {"in": n, "out": n}). `extra` adds fields to
+        the request (`store: false` for a picture)."""
         if not self.url:
             return None, {"in": 0, "out": 0}
         try:
             r = await self._http().post(f"{self.url}/chat/completions", headers=self.headers, timeout=self.timeout,
                                         json={"model": self.model, "messages": messages, "max_tokens": max_tokens,
-                                              "temperature": temperature, "stream": False})
+                                              "temperature": temperature, "stream": False, **(extra or {})})
             r.raise_for_status()
             body = r.json()
             text = body["choices"][0]["message"]["content"]

@@ -355,6 +355,24 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
   take rows the draft did not count), so it has no "Working" box; the other Pack 1 sheets range from 190 to
   213.5 mm, and two (E4-01, S7-01) get one.
 
+## What P14 built, and where it differs
+
+- "Check my sheet" opens, where `photo` is on, with "This sheet?" for the last sheet she got (its title and code):
+  "Take a photo" first, then "Type my answers" (always there); offline, "Photos need the internet" takes the photo
+  button's place. A camera the phone refused adds a line on allowing it in Settings.
+- The first time, a short explainer ("Put your sheet flat, in good light. Show all four black squares.") with Start; then the camera, dark
+  whatever her theme, with the four corner brackets, a coaching line and the shutter. The phone takes the photo
+  itself once the four squares have held still; the shutter and the flash are there too. Without a camera, the
+  file input; after a photo from it, one line says the phone may keep it in its gallery and she can delete it there.
+- "Is this clear?" shows only when the photo is blurred, dark or shiny, with Retake and Use it anyway. While it
+  reads, the flattened sheet sits dimmed under a ring.
+- "What I read": one row per answer box with her own writing (the tile), the reading in her digits ("I can't read
+  it" or "Empty" where so), Fix (a keypad) and, in adult literacy (P9 ruling 1), a speaker. "Yes, mark it" then marks on
+  the phone, the same as typed answers; "Retake" goes back to the camera.
+- Open for the look-over: the noisy test photos make strips of 45 to 50 KB, not the spec's about 30 KB (a real
+  phone's cleaner photo should come out smaller; JPEG 0.7 is kept as specified); the "This sheet?" card sits on
+  the page's own background in the clean look and could use a stronger edge.
+
 ### Sheet heights
 
 The final table (C2.1 allowed each height to move by up to 4 mm). Item rows are in mm, clean / bold; the body is 230

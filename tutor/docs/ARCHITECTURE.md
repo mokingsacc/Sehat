@@ -143,7 +143,10 @@ settled (BUILD-PLAN 3.2): `id`, `version`, `maturity`, `depends`, `bands`, `slot
 calls a model), `settings`, `needs`, `offline`. The first six are today's features: `lessons`, `ask`, `sheets`
 (the sheet document, the keys, "Get the sheet" and the lesson-end card, C2 change 6), `print` (only the hub's print
 queue; it depends on `sheets` and needs `printer`), `check` (Check my sheet, which depends on `sheets`) and
-`teacher`. `migrations/0007` switches `sheets` on in every cohort made before it wherever `print` or `check` was. `modules.py` checks every manifest at start and leaves out a broken one, and
+`teacher`. `photo` (P14, photo marking of Qalam sheets) depends on `sheets` and `check`, serves p2 to adult, needs
+the internet and is on only in staging so far. `migrations/0007` switches `sheets` on in every cohort made before it
+wherever `print` or `check` was; `migrations/0008` switches `photo` on for the staging seed cohort in a database
+seeded before it. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
 risk a module carries comes from the core's table of capabilities, never from the module.
 
@@ -254,6 +257,10 @@ Nothing calls a model except through `ai/gateway.py`; `brain.py` asks it for the
   A module may use only the purposes its manifest lists.
 - **Choosing:** `TUTOR_AI_PROVIDER` (`local` when `TUTOR_LLM_URL` is set, else `off`; `openai`; `fake` for tests and
   for staging until a key exists). `openai` without a key is simply off and is never pinged.
+- **Pictures.** `call(..., images=[jpeg bytes])` passes pictures to the provider. The OpenAI provider puts them in
+  the last user message as `image_url` parts (data URIs, never an uploaded file) and asks the provider not to keep
+  the request (`store: false`); the fake reads them by hash. `read_sheet` skips the rules screen (its text is our own
+  prompt, not the learner's words).
 - **Before a call:** a language not trusted yet, the rules screen, or a cohort past its daily budget
   (`TUTOR_AI_BUDGET` tokens per UTC day, default 300 000; 0 means no AI) means no call, quietly: the brain goes on
   to lesson passages and the teacher, so an over-budget cohort still gets checked answers. The learner's words lose
@@ -302,6 +309,44 @@ as a PDF (`?print=1` opens the print dialog once it loads; the document's title 
   the app sends no name at all, and since P13 the hub takes none either (`name` left `PrintIn` and the sheet routes):
   the learner writes hers in the sheet's name box by hand.
 
+## Photo marking (mods/photo.py, app/js/scan.js, P14)
+
+C2.2: the phone takes a photo of a Qalam sheet, cuts out the answer cells, and the AI reads them; the phone marks.
+
+- **On the phone** (`app/js/scan.js`, pure functions, `app/tests/scan.test.js`): greyscale, an adaptive threshold,
+  dark blobs that are square and solid, or a ring with one hole (the sheet's top right); the best one in each quarter
+  of the picture; the corners turned so the ring is top right, whatever way the phone was held. A homography from
+  the key's mm (the frame between the squares' centres, 178 x 265 mm) to the picture's pixels cuts out each answer
+  cell with 2.5 mm round it, and nothing else: never the name box, the header or the QR code. The tiles go into one
+  greyscale JPEG strip (0.7): 280 x 200 px tiles under a 24 px black band with the item's number, two to a row, 13 px
+  gutters, 600 px wide and 13 + rows x 237 high. Before sending, the photo is checked for blur (the variance of the
+  Laplacian), glare and darkness, and "Is this clear?" offers Retake or Use it anyway.
+- **The camera** (`app/js/modules/photo.js`, lazy-loaded at `#/photo/{id}/{seed}`): a dark full-screen view with
+  the four brackets; it takes the photo itself once four squares have held still for a moment, with coaching lines
+  in between ("Fit the four squares", "Move back", "Hold still"), the flash where the phone has one, and a shutter.
+  Where the camera is missing or refused it falls back to `<input type="file" accept="image/*"
+  capture="environment">`. The phone reads the QR code (`BarcodeDetector`, where there is one) to catch another
+  sheet. While the strip is read, a ring fills over 15 s, "Still reading" shows at 10 s, and at 30 s "Keep waiting" or "Type my answers".
+- **The route** `POST /api/m/photo/mark` (`mods/photo.py`, behind `needs("photo")`): `{code, seed, lang, strip}`
+  with her token and consent; 6 a minute per learner. It checks the code's check digit and seed, finds the sheet's
+  key, and checks the strip is a JPEG of exactly the size that sheet's cells make (at most 150 KB). It calls the
+  gateway's `read_sheet` with each tile's number, cell kind and expected digits, never an answer, and returns
+  `{code, readings: [{n, read}]}` in Latin digits (`?` for what could not be read, `""` for an empty box). It never
+  marks: the server does not learn right or wrong on this route. No AI, an error or a timeout answers 503
+  `{"error": why}`, and the phone offers "Type my answers".
+- **"What I read"**: each row shows her own tile beside the reading, with Fix (`app/js/keypad.js`: digits in her
+  script, `/`, a space, delete). "Yes, mark it" hands the readings to Check my sheet in memory
+  (`check.handoff`), which types them in and marks them with the key on the phone, as for typed answers.
+- **Nothing kept.** The photo, the canvases and the strip live in the page's memory and are dropped when the
+  screen closes; the strip is in the hub's memory for one request. Neither is written to a file, the database, D1,
+  R2, a log or the phone's storage; the provider gets `store: false`. `tests/test_photo.py` patches every writer
+  (files, the store, logs) and the Worker test dumps D1 after a read.
+- **Fixtures.** `tools/make_test_photos.mjs` renders sheets with handwritten answers, warps them into 1080 x 1440
+  photos (tilted, turned, upside down; noise and uneven light), cuts them with `scan.js` in Chromium and writes the
+  strips and `tests/fixtures/photos/vision.json` (the fake's readings by hash, and what was written).
+  `tools/photo_check.mjs` walks the flow in Chromium with a photo as the fake camera, then the file input, then
+  offline; it checks the strip's size and that nothing was kept. Both are manual, not in CI.
+
 ## The fallback container (tutor/deploy, P12)
 
 The same app as one container, for Render in Frankfurt if D6 goes that way ([HOSTING.md](HOSTING.md)): the hub's
@@ -347,6 +392,8 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 - Events (above) are verbs and ids with no name and no free text, sent only with consent and kept against her
   token's hash; they stay on the hub.
 - Nothing leaves the hub: there is no internet connection and no analytics.
+- Sheet photos (online, P14): only a strip of the answer cells leaves the phone, never the name box; it is read in
+  memory and never stored or logged, on the phone or the server (above, "Photo marking").
 
 ## Routes
 
@@ -371,17 +418,18 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`), with each cell's place in mm |
 | `POST /api/print` | `{lesson, kind, copies, lang, seed}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
+| `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (the teacher routes; the hub card also needs `print`). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/lesson/{id}`, `#/print/{id}`,
-  `#/check/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
+  `#/check/{id}/{seed}`, `#/photo/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
   `#/lock`, `#/settings`, `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
   learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
   and the teacher's page stay open).
@@ -442,7 +490,9 @@ learner routes and the app's files are always there.
   primary action, one secondary and one list. The clean Home has Check my sheet but no Print button, since Print is
   a tab. `screens/print.js` is one screen for both: the hub's queue where `print` is on, else "Print or save as PDF"
   then "Do it on screen" (`#/check/{id}/{seed}/screen`: the typed check with the sheet's intro and example, and trace
-  and draw items as "Do this one on paper"). A wrong sum on Check my sheet shows no answer (C2.3). A screen whose module is off sends the phone Home. While connected, the app
+  and draw items as "Do this one on paper"). A wrong sum on Check my sheet shows no answer (C2.3). Where `photo` is on, Check
+  my sheet opens with "This sheet?" for the last sheet she got: "Take a photo", then "Type my answers"; offline it
+  says "Photos need the internet" instead. A screen whose module is off sends the phone Home. While connected, the app
   re-reads `/api/hello` every minute, so a module switched off leaves the phones within a minute.
   `app/tests/modules.test.js` (`node --test`) checks the shell.
 - `events.js` queues the phone's events (lesson started, lesson done, sheet marked) and sends them when the hub is in reach;

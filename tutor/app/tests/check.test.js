@@ -173,3 +173,27 @@ test('readings from a photo are typed in for her and marked on the phone', async
   assert.deepEqual(inputs.map((i) => i.value), ['3/4', '', '2/5']);
   assert.deepEqual(checks(), [[LESSON, 50]]);
 });
+
+test('readings confirmed on "What I read" are typed in and marked on the phone, once', async () => {
+  const { handoff } = await import('../js/screens/check.js');
+  state.cache(`key.${LESSON}.4821`, KEY);
+  handoff(LESSON, 4821, [{ n: 1, read: '3/4' }, { n: 2, read: '4/6' }, { n: 3, read: '' }]);
+  const { el } = await check([LESSON, '4821']);
+  assert.deepEqual(el.all((n) => n.tag === 'input').map((i) => i.value), ['3/4', '4/6', '']);
+  assert.deepEqual(checks(), [[LESSON, 100]]);                        // two typed in, both right (4/6: "simpler")
+  await check([LESSON, '4821']);                                       // the hand-off is used once
+  assert.deepEqual(checks(), [[LESSON, 100]]);
+});
+
+test('"Take a photo" only where photo is on for her band; offline it says photos need the internet', async () => {
+  const modules = await import('../js/modules.js');
+  const { photoOffer } = await import('../js/screens/check.js');
+  const photo = { id: 'photo', slots: [], needs: ['internet'], bands: ['p2', 's1', 's2', 'ad'] };
+  const c = { ...state.child(), band: 's1', token: 't', consent: AGREED };
+  modules.sync([{ id: 'check', slots: [] }, { id: 'sheets', slots: [] }]);
+  assert.equal(photoOffer(c), null);                                  // not listed for her class
+  modules.sync([{ id: 'check', slots: [] }, { id: 'sheets', slots: [] }, photo]);
+  assert.equal(photoOffer(c), 'offline');                             // listed, but the phone is offline
+  assert.equal(photoOffer({ ...c, band: 'p1' }), null);               // p1 types with a grown-up; ey never
+  modules.sync(null);
+});

@@ -1,10 +1,12 @@
 """Providers: what actually answers a gateway call. Each checks the policy again before anything leaves.
 
 - `HttpProvider` speaks the OpenAI chat API: `local` (a model server on the hub) or `openai` (online; switched on
-  with a key after 20 January 2027, P18). Pictures (`read_sheet`) arrive with photo marking (P14).
+  with a key after 20 January 2027, P18). Pictures (`read_sheet`, P14) go inline in the last user message as JPEG
+  data URIs, never through a files API, and the request asks the provider not to keep it (`store: false`).
 - `FakeProvider` (fake.py) answers from a script, for tests and for staging until a key exists.
 `make_provider(cfg)` picks one from TUTOR_AI_PROVIDER and refuses, at start-up, one the policy does not allow.
 """
+import base64
 from dataclasses import dataclass
 
 from .. import llm as llm_mod
@@ -57,13 +59,31 @@ class HttpProvider(Provider):
 
     async def complete(self, purpose, messages, *, max_tokens=350, temperature=0.2, images=None) -> Reply:
         policy.check(self.name, self.url, purpose)
+        extra = None
         if images:
-            raise ProviderError("pictures go to a model with photo marking (P14)")
-        text, used = await self.client.complete(messages, max_tokens, temperature)
+            messages = with_images(messages, images)
+            extra = {"store": False}
+        text, used = await self.client.complete(messages, max_tokens, temperature, extra=extra)
         return Reply(text, used["in"], used["out"])
 
     async def aclose(self):
         await self.client.aclose()
+
+
+def with_images(messages: list[dict], images: list[bytes]) -> list[dict]:
+    """The messages with the pictures added to the last user message, in the chat API's parts: its text, then each
+    picture as a JPEG data URI. Nothing is uploaded on its own; the bytes exist only in this request."""
+    out = [dict(m) for m in messages]
+    last = max((i for i, m in enumerate(out) if m.get("role") == "user"), default=None)
+    if last is None:
+        out.append({"role": "user", "content": []})
+        last = len(out) - 1
+    text = out[last].get("content")
+    parts = [{"type": "text", "text": text}] if isinstance(text, str) and text else list(text or [])
+    parts += [{"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(b).decode("ascii"),
+                                                  "detail": "high"}} for b in images]
+    out[last] = dict(out[last], content=parts)
+    return out
 
 
 def make_provider(cfg) -> Provider | None:

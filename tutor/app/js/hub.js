@@ -183,6 +183,8 @@ export function consentVersion() {
 }
 export const printSheet = (job, pin) => call('/api/print', { method: 'POST', body: job, pin });
 export const printStatus = (id) => call('/api/print/' + id);
+// a photo's strip of answer cells (P14): readings come back, never marks; the strip is not kept anywhere
+export const photoMark = (body, token) => call('/api/m/photo/mark', { method: 'POST', body, token, ms: 60000 });
 export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}`);
 // the phone keeps no name, so none is sent: she writes hers in the sheet's name box by hand. `print` opens the
 // browser's print dialog as the sheet loads ("Print or save as PDF", where there is no hub printer)
