@@ -18,7 +18,8 @@ const modules = await import('../js/modules.js');
 const HUB_LIST = [
   { id: 'ask', slots: [], needs: [] }, { id: 'check', slots: ['home.action'], needs: [] },
   { id: 'lessons', slots: ['home.action'], needs: [] },
-  { id: 'print', slots: ['home.action', 'lesson.end'], needs: ['printer'] }, { id: 'teacher', slots: [], needs: ['pin'] },
+  { id: 'print', slots: [], needs: ['printer'] }, { id: 'sheets', slots: ['home.action', 'lesson.end'], needs: [] },
+  { id: 'teacher', slots: [], needs: ['pin'] },
 ];
 const without = (id) => HUB_LIST.filter((m) => m.id !== id);
 
@@ -28,8 +29,8 @@ const CODE = {
     shell.offer('home.action', { id: 'next', role: 'primary', priority: 10, when: (c) => !!c.lesson, render: () => 'play' });
     shell.offer('home.action', { id: 'subjects', role: 'list', priority: 10, when: (c) => !!c.lesson, render: () => 'subjects' });
   } },
-  print: { register(shell) {
-    shell.offer('home.action', { id: 'print-today', role: 'secondary', priority: 10,
+  sheets: { register(shell) {
+    shell.offer('home.action', { id: 'sheet-today', role: 'secondary', priority: 10,
       when: (c) => c.look === 'bold' && c.band !== 'ey' && !!c.lesson.sheet, render: () => 'print today' });
     shell.offer('lesson.end', { id: 'worksheet', priority: 10, when: (c) => !!c.lesson.sheet, render: () => 'worksheet' });
   } },
@@ -47,10 +48,23 @@ const keys = (t) => t.map((x) => x.key);
 
 beforeEach(() => { modules.reset(); imported.length = 0; store.clear(); });
 
-test('without word from a hub the app has the built-in five, as it always had', () => {
+test('without word from a hub the app has the built-in six, as it always had', () => {
   modules.sync(null);
-  assert.deepEqual(modules.enabledIds(), ['ask', 'check', 'lessons', 'print', 'teacher']);
+  assert.deepEqual(modules.enabledIds(), ['ask', 'check', 'lessons', 'print', 'sheets', 'teacher']);
   assert.deepEqual(keys(modules.tabs()), ['lessons', 'ask', 'print']);
+});
+
+test('the third tab belongs to sheets: Print where the hub prints, Sheets online (C2, change 6)', () => {
+  modules.sync(HUB_LIST);
+  assert.deepEqual(modules.tabs().map((t) => [t.key, t.icon, t.module]).at(-1), ['print', 'printer', 'sheets']);
+  assert.equal(modules.printer(), true);
+  modules.sync(without('print'));                            // online: no printer and no PIN
+  assert.deepEqual(modules.tabs().map((t) => [t.key, t.icon, t.module]).at(-1), ['sheets', 'file', 'sheets']);
+  assert.equal(modules.printer(), false);
+  assert.equal(modules.routeOn('print'), true);              // the sheet screen stays: "Get the sheet"
+  modules.sync(without('sheets'));
+  assert.deepEqual(keys(modules.tabs()), ['lessons', 'ask']);
+  assert.equal(modules.routeOn('print'), false);
 });
 
 test('the list kept on the phone is used while the hub is out of reach', () => {
@@ -58,13 +72,13 @@ test('the list kept on the phone is used while the hub is out of reach', () => {
   assert.equal(hub.moduleList(), null);
   localStorage.setItem('qalam.cache.modules', JSON.stringify(without('print')));
   modules.sync();
-  assert.deepEqual(modules.enabledIds(), ['ask', 'check', 'lessons', 'teacher']);
+  assert.deepEqual(modules.enabledIds(), ['ask', 'check', 'lessons', 'sheets', 'teacher']);
 });
 
 test('a module switched off loses its tab and its screens; sync says when the list changed', () => {
-  assert.equal(modules.sync(HUB_LIST), false);              // the same five as the built-in list
-  assert.equal(modules.sync(without('print')), true);
-  assert.equal(modules.sync(without('print')), false);
+  assert.equal(modules.sync(HUB_LIST), false);              // the same six as the built-in list
+  assert.equal(modules.sync(without('sheets')), true);
+  assert.equal(modules.sync(without('sheets')), false);
   assert.deepEqual(keys(modules.tabs()), ['lessons', 'ask']);
   assert.equal(modules.routeOn('print'), false);
   assert.equal(modules.routeOn('check'), true);
@@ -78,7 +92,7 @@ test('only modules that are on and have app code are imported, once each', async
   modules.sync(without('check'));
   await modules.load(importer);
   await modules.load(importer);
-  assert.deepEqual(imported.sort(), ['lessons', 'print']);  // not ask or teacher (no slots), not check (off)
+  assert.deepEqual(imported.sort(), ['lessons', 'sheets']); // not ask, print or teacher (no slots), not check (off)
 });
 
 test('a module whose code fails to load is left out; the others still show', async () => {
@@ -97,11 +111,11 @@ test('Home shows one primary, one secondary and one list, by look', async () => 
   assert.deepEqual(modules.home(big), { primary: 'play', secondary: 'check my sheet', list: 'subjects' });
 });
 
-test('with print off, "print today\'s sheet" goes and nothing else changes', async () => {
+test('with sheets off, "print today\'s sheet" goes and nothing else changes', async () => {
   modules.sync(HUB_LIST);
   await modules.load(importer);
   const before = modules.home(small);
-  modules.sync(without('print'));
+  modules.sync(without('sheets'));
   assert.deepEqual(modules.home(small), { ...before, secondary: null });
   assert.deepEqual(modules.home(big), { primary: 'play', secondary: 'check my sheet', list: 'subjects' });
   assert.deepEqual(modules.lessonEnd(small), []);

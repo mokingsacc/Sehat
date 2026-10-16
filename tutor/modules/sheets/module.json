@@ -1,0 +1,12 @@
+{
+  "id": "sheets",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "slots": ["home.action", "lesson.end"],
+  "capabilities": [],
+  "settings": {},
+  "needs": [],
+  "offline": "partly"
+}

@@ -243,11 +243,12 @@ function netSheet(text, waits) {
   document.body.append(sheet);
 }
 
-// the tabs of the modules that are on; each keeps its column, so a tab switched off leaves the others in place
+// the tabs of the modules that are on; each keeps its column, so a tab switched off leaves the others in place.
+// `active` is a tab's key or its module's id (the sheets screens say 'sheets', whose tab reads Print on the hub)
 export function nav(active) {
   return h('nav', { class: 'tabs', 'aria-label': s('app') },
-    modules.tabs().map(({ icon: ic, key, href }) => h('a', { href, class: key === active ? 'on' : '',
-      'aria-current': key === active ? 'page' : null, onClick: () => { if (perButton()) tabSaid = key; } },
+    modules.tabs().map(({ icon: ic, key, href, module }) => h('a', { href, class: key === active || module === active ? 'on' : '',
+      'aria-current': key === active || module === active ? 'page' : null, onClick: () => { if (perButton()) tabSaid = key; } },
     icon(ic, 28, 2.3), h('span', {}, s(key)))));
 }
 

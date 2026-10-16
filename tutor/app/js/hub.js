@@ -184,9 +184,10 @@ export function consentVersion() {
 export const printSheet = (job, pin) => call('/api/print', { method: 'POST', body: job, pin });
 export const printStatus = (id) => call('/api/print/' + id);
 export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}`);
-// the phone keeps no name, so none is sent: the sheet has a blank name line to write on by hand
-export const sheetUrl = (id, { seed = 0, lang = 'prs', kind = 'worksheet', pdf = false } = {}) =>
-  url(`/api/sheets/${encodeURIComponent(id)}.${pdf ? 'pdf' : 'html'}?seed=${seed}&lang=${lang}&kind=${kind}`);
+// the phone keeps no name, so none is sent: she writes hers in the sheet's name box by hand. `print` opens the
+// browser's print dialog as the sheet loads ("Print or save as PDF", where there is no hub printer)
+export const sheetUrl = (id, { seed = 0, lang = 'prs', pdf = false, print = false } = {}) =>
+  url(`/api/sheets/${encodeURIComponent(id)}.${pdf ? 'pdf' : 'html'}?seed=${seed}&lang=${lang}${print ? '&print=1' : ''}`);
 
 export const teacher = {
   summary: (pin) => call('/api/teacher/summary', { pin }),

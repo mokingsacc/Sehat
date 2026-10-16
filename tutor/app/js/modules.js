@@ -1,7 +1,8 @@
 // The module shell. The hub says which modules are on for this phone's cohort (/api/hello, kept on the phone for
 // offline use); only those modules' code is loaded, by import() from this app's own folder, and only their offers
 // show. The shell, not a module, keeps every screen sparse (design committee C0.1):
-// - tabs: at most three, owned here (Lessons, Ask, Print), each shown only while its module is on;
+// - tabs: at most three, owned here: Lessons, Ask, and Print on the hub or Sheets online (C2, change 6: the third tab
+//   belongs to `sheets`, and says Print where the hub's `print` queue is on), each shown only while its module is on;
 // - Home: one primary action, one secondary action and one list, picked from the modules' `home.action` offers;
 // - the end of a lesson: at most two `lesson.end` actions;
 // - `settings.row`: offers kept for the Settings screen (P10).
@@ -24,18 +25,21 @@ export const BUILT_IN = [
   { id: 'ask', slots: [], needs: [] },
   { id: 'check', slots: ['home.action'], needs: [] },
   { id: 'lessons', slots: ['home.action'], needs: [] },
-  { id: 'print', slots: ['home.action', 'lesson.end'], needs: ['printer'] },
+  { id: 'print', slots: [], needs: ['printer'] },
+  { id: 'sheets', slots: ['home.action', 'lesson.end'], needs: [] },
   { id: 'teacher', slots: [], needs: ['pin'] },
 ];
 
-// the tabs, in order, and the module each one belongs to
+// the tabs, in order, and the module each one belongs to; the third says Print where the hub prints
 const TABS = [
   { module: 'lessons', key: 'lessons', icon: 'book', href: '#/home' },
   { module: 'ask', key: 'ask', icon: 'ask', href: '#/ask' },
-  { module: 'print', key: 'print', icon: 'printer', href: '#/print' },
+  { module: 'sheets', key: () => (printer() ? 'print' : 'sheets'), icon: () => (printer() ? 'printer' : 'file'),
+    href: '#/print' },
 ];
 // screens that belong to a module (#/name/...); every other screen belongs to the shell
-const ROUTES = { ask: 'ask', print: 'print', check: 'check', teacher: 'teacher', lesson: 'lessons', subject: 'lessons' };
+const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', teacher: 'teacher', lesson: 'lessons',
+  subject: 'lessons' };
 
 let list = BUILT_IN;
 const offers = new Map(SLOTS.map((s) => [s, []]));
@@ -60,7 +64,15 @@ export function on(id) {
 
 export function enabledIds() { return list.map((m) => m.id).filter(on).sort(); }
 
-export const tabs = () => TABS.filter((t) => on(t.module));
+// the hub's print queue is on: sheets go to its printer; otherwise the browser prints them (or saves a PDF)
+export const printer = () => on('print');
+
+export const tabs = () => TABS.filter((t) => on(t.module)).map((t) => ({ ...t,
+  key: typeof t.key === 'function' ? t.key() : t.key, icon: typeof t.icon === 'function' ? t.icon() : t.icon }));
+
+// the hub lists the module for this phone, whether or not it can show now (a module that needs the internet is
+// listed while the phone is offline, so a screen can say "Photos need the internet" rather than nothing)
+export const listed = (id) => !!entry(id);
 
 export function routeOn(name) { return !ROUTES[name] || on(ROUTES[name]); }
 

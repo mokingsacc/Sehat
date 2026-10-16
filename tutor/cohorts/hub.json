@@ -8,6 +8,7 @@
   },
   "modules": {
     "lessons": true,
+    "sheets": true,
     "ask": true,
     "print": true,
     "check": true,

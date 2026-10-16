@@ -6,8 +6,7 @@ Two ways out:
 - outbox: PDFs are saved in the hub's outbox folder instead (no printer yet, testing, or to copy to a USB stick).
 - off:    no printer and no outbox (the online Worker, which lacks `printer`, so the print module is off there).
 
-One job prints at a time, in order. A child's name, if they chose to have it printed, is used for that one page
-and never written down.
+One job prints at a time, in order. No name goes to the printer: she writes hers in the sheet's name box by hand.
 """
 import logging
 import queue

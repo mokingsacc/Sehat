@@ -142,3 +142,34 @@ test('a sheet with nothing to type is marked when every row is judged', async ()
   nos[1].click();
   assert.deepEqual(checks(), [['dari-1-sheen', 50]]);
 });
+
+test('a wrong value shows no answer: she looks again (C2.3, hints never answers)', async () => {
+  state.cache(`key.${LESSON}.4821`, KEY);
+  const { el } = await check([LESSON, '4821']);
+  const inputs = el.all((n) => n.tag === 'input');
+  inputs[0].value = '2/6';                               // wrong
+  button(el, 'main')[0].click();
+  const shown = el.textContent;
+  assert.ok(!shown.includes('3/4') && !shown.includes('۳/۴'), shown);
+  assert.equal(el.all((n) => n.className === 'fix').length, 1);
+});
+
+test('"Do it on screen" shows the intro and example, and trace items as "on paper"', async () => {
+  state.cache(`key.${LESSON}.4821`, { ...KEY, intro: 'Add the tops', example: { text: 'Like this:', math: '1/4+2/4=3/4' } });
+  const { el, tab } = await check([LESSON, '4821', 'screen']);
+  assert.equal(tab, 'sheets');
+  assert.equal(el.all((n) => n.className.includes('sheet-intro')).length, 1);
+  assert.equal(el.all((n) => n.className === 'check-row paper').length, 1);   // row 5, the trace
+  const plain = await check([LESSON, '4821']);
+  assert.equal(plain.el.all((n) => n.className.includes('sheet-intro')).length, 0);
+  assert.equal(plain.el.all((n) => n.className === 'check-row paper').length, 0);
+});
+
+test('readings from a photo are typed in for her and marked on the phone', async () => {
+  state.cache(`key.${LESSON}.4821`, KEY);
+  const { el, fill } = await check([LESSON, '4821']);
+  fill([{ n: 1, read: '3/4' }, { n: 2, read: '?' }, { n: 3, read: '2/5' }]);
+  const inputs = el.all((n) => n.tag === 'input');
+  assert.deepEqual(inputs.map((i) => i.value), ['3/4', '', '2/5']);
+  assert.deepEqual(checks(), [[LESSON, 50]]);
+});

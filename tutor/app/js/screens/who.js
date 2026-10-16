@@ -50,8 +50,9 @@ export default function who() {
       active ? said(h('a', { class: 'btn', href: '#/welcome/edit' }, s('change_year'))) : null,
       active ? said(h('a', { class: 'btn', href: '#/settings' }, icon('gear', 22), s('settings'))) : null,
       // early years has no tabs: the grown-up's corner leads here, and Print is reached from here
-      active && active.band === 'ey' && modules.on('print')
-        ? said(h('a', { class: 'btn', href: '#/print' }, icon('printer', 22), s('print'))) : null),
+      active && active.band === 'ey' && modules.on('sheets')
+        ? said(h('a', { class: 'btn', href: '#/print' }, icon(modules.printer() ? 'printer' : 'file', 22),
+          s(modules.printer() ? 'print' : 'sheets'))) : null),
     modules.on('teacher')
       ? h('div', { class: 'pad teacher-link' }, h('a', { class: 'link', href: '#/teacher' }, icon('lock', 20), s('teacher')))
       : null);

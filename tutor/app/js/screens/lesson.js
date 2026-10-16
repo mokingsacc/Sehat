@@ -1,7 +1,7 @@
 // The lesson player: one step per screen, a speaker on every text, answers checked at once with the reason.
 // The bands that read lesson steps on open (bands.js: early years, years 1 to 6, adult literacy) hear each step
 // read aloud, from its recorded clip or the phone's voice. Children get stars at the end, adults a check mark.
-// The end of every lesson points to its worksheet (the print module's lesson.end offer): pen and paper is where
+// The end of every lesson points to its worksheet (the sheets module's lesson.end offer): pen and paper is where
 // the practice happens.
 
 import { getLang, pick, s } from '../i18n.js';

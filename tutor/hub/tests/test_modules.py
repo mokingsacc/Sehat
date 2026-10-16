@@ -33,10 +33,15 @@ def on(*ids):
 
 # the manifests in the repository
 
-def test_the_five_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "check", "lessons", "print", "teacher"]
+def test_the_built_modules_are_valid():
+    assert sorted(REAL) == ["ask", "check", "lessons", "print", "sheets", "teacher"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
     assert REAL["print"]["needs"] == ["printer"]
+    # C2, change 6: `sheets` holds the sheet, its keys, "Get the sheet" and the lesson-end card; `print` depends on it
+    # and adds only the hub's queue, so it has no app code of its own
+    assert REAL["print"]["depends"] == ["sheets"] and REAL["print"]["slots"] == []
+    assert REAL["check"]["depends"] == ["sheets"] and REAL["sheets"]["needs"] == []
+    assert "ey" in REAL["sheets"]["bands"]
 
 
 def test_the_seed_cohorts_are_valid_and_neutral():
@@ -172,23 +177,31 @@ def test_a_module_needing_what_the_host_lacks_is_off():
     assert flags.enabled(ms, cohort(), flagged, lacks=("camera",)) == ["card", "lessons", "print"]
 
 
-def test_online_the_staging_cohort_keeps_three_of_its_five_modules():
-    """The Worker lacks a printer and the teacher's PIN (TUTOR_LACKS), whatever the cohort's flags say."""
+def test_online_the_staging_cohort_keeps_sheets_but_not_print():
+    """The Worker lacks a printer and the teacher's PIN (TUTOR_LACKS), whatever the cohort's flags say; its sheets are
+    the browser's to print."""
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     staging = seeds["staging"]
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
-    assert flags.enabled(REAL, staging, f) == ["ask", "check", "lessons", "print", "teacher"]
-    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "lessons"]
+    assert flags.enabled(REAL, staging, f) == ["ask", "check", "lessons", "print", "sheets", "teacher"]
+    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "lessons", "sheets"]
     assert REAL["teacher"]["needs"] == ["pin"]
 
 
-def test_the_real_hub_cohort_takes_the_five_built_modules():
+def test_the_real_hub_cohort_takes_the_built_modules():
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     hub = seeds["hub"]
     f = {m: {"enabled": v} for m, v in hub["modules"].items()}
-    assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "print", "teacher"]
-    assert flags.enabled(REAL, hub, f, band="ey") == ["lessons", "print", "teacher"]           # no Ask for ey
+    assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "print", "sheets", "teacher"]
+    assert flags.enabled(REAL, hub, f, band="ey") == ["lessons", "print", "sheets", "teacher"]     # no Ask for ey
+
+
+def test_the_open_cohort_has_sheets_and_no_print():
+    seeds, _ = flags.load_seeds(TUTOR / "cohorts")
+    c = seeds["open"]
+    f = {m: {"enabled": v} for m, v in c["modules"].items()}
+    assert flags.enabled(REAL, c, f, lacks=("printer", "pin")) == ["check", "lessons", "sheets"]
 
 
 def test_module_settings_use_valid_cohort_values_only():

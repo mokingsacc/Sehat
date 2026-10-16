@@ -37,8 +37,9 @@ top of `app/css/app.css`; screens use only tokens, so a look is changed in one p
 
 Mo's view, and the plan's: worksheets with pen and paper beat a screen for practice. So:
 
-- Every lesson ends with its worksheet and a big Print button. The bold look has "print today's sheet" on Home.
-- **A4, black and white, one page,** big margins, line art with no faces, a name line and date at the top, written by
+- Every lesson ends with its worksheet and a big Print button ("Get the sheet" online). The bold look has "print
+  today's sheet" ("get today's sheet") on Home.
+- **A4, black and white, one page,** big margins, line art with no faces, name and date boxes at the top, written by
   hand; the phone never asks for the name.
 - **Grey letters to write over** (tracing), then empty boxes to write alone; stacked fractions with an answer box.
 - The **code in the corner** (`M7-03-48217`, its last digit a check digit) brings the sheet back in "Check my
@@ -333,6 +334,47 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
   screens behind the corner (Who is learning, Settings, Print, Credits).
 - The chip says "Offline" as soon as the browser says the network went, not only at the next round.
 - Dari and Pashto put a comma, not a middle dot, between "Offline" and the count, by the P10 rule.
+
+## What P13 built, and where it differs
+
+- The sheet is laid out as C2.1 says: four solid corner squares (the top right one a ring with a 6 mm hole), a header
+  with the title and the name and date boxes, a two-column slot grid, and the foot with the QR code (text only,
+  `Q1 M7-03-48217 PRS`) and the code beside it at its end side. Every cell is a function of the item list, so the hub's
+  PDF, the browser's print and the phone's key agree; the layout test holds Chromium and WeasyPrint within 0.5 mm
+  of the key. Squares and cells are drawn as SVG and borders, so they print with "background graphics" off.
+- The intro sits beside the example box in one row (16 mm clean, 18 mm bold), not above it; the code sits at the
+  QR's end side; a `mixed` cell's whole-number box is on the left in every language, as sums are written left to
+  right.
+- Online, the third tab is "Sheets" (a page icon) and the sheet screen offers "Print or save as PDF" (a new tab that
+  prints itself) and then "Do it on screen"; on the hub it is "Print" with the hub's queue, as before. The answer page
+  needs the teacher's PIN everywhere and does not exist online, which has no PIN; the preview is always the
+  worksheet.
+- Check my sheet shows no answer for a sum or a count, only "No, look again" (C2.3); written, circled and sorted items
+  keep "Done it on paper? Compare". The hint ladder comes with P15.
+- Open for the next sitting: M7-03 needs 214 mm, not the draft's 200 (its intro, example and the challenge prompt
+  take rows the draft did not count), so it has no "Working" box; the other Pack 1 sheets range from 190 to
+  213.5 mm, and two (E4-01, S7-01) get one.
+
+### Sheet heights
+
+The final table (C2.1 allowed each height to move by up to 4 mm). Item rows are in mm, clean / bold; the body is 230
+mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the validator.
+
+| Kind | Width | Height clean / bold | Cell |
+|---|---|---|---|
+| sum, whole-number answer | half | 28 / 34 | int, 30 × 22 |
+| sum, fraction answer | half | 34 / 40 | frac, two 24 × 13 boxes 4 mm apart (26 × 14 bold); mixed adds a 14 × 13 box (15 × 14) 3 mm before |
+| count, up to 6 objects | half | 40 / 44 | int |
+| count, more than 6 | full | 34 / 40 | int |
+| trace | full | 34 / 38 | none |
+| circle | full | 40 / 44 | none |
+| write | full | 12 + 10 per line | none |
+| sort | full | 60 / 60 | none |
+| draw | full | 64 / 64 | none |
+| a generated group's prompt | full | 7 / 8 | none |
+| intro, per line | full | 6 / 7.5 | none |
+| intro beside the example | full | 16 / 18 | none |
+| Working (what is left) | full | at least 20 | never photographed |
 
 ---
 

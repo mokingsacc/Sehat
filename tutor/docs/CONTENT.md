@@ -113,10 +113,18 @@ naming a clip in `audio/<lang>/manifest.json`. No synthetic voice, ever: clips a
 
 Generator options: `fraction_add` takes `max_den` (largest denominator, 4-24, default 12) and `same_first` (how
 many sums share one denominator before they mix, default 2); `add_sub` takes `max_total` (2-1000, default 10) and
-`ops` (`"+-"`, `"+"` or `"-"`); `times` takes `tables` (numbers 1-12, default `[2, 3, 4, 5]`). `"work": false`
-drops the box for working. The validator refuses any other option. Results stay child-sized (fraction sums at most 1).
+`ops` (`"+-"`, `"+"` or `"-"`); `times` takes `tables` (numbers 1-12, default `[2, 3, 4, 5]`). The validator refuses
+any other option. Results stay child-sized (fraction sums at most 1). (`"work"` is still accepted but no longer adds a
+box: one "Working" box fills what is left of the page.)
 
-Keep a sheet to **one A4 page**: `make_sheets.py` warns when one spills over.
+Any item may name its lesson step, `"step": 3` (from 1), which the hint ladder points back to. A `sum` whose answer is
+more than 1 may say `"mixed": true` to get a box for the whole number before the fraction (`1 1/4`); otherwise the
+answer is written as one fraction (`5/4`).
+
+Keep a sheet to **one A4 page**: the validator refuses a sheet whose rows need more than the 230 mm a page has (the
+heights are in DESIGN.md, "Sheet heights"), and `make_sheets.py` warns if one still spills over. Facilitators print a
+stack with `make_sheets.py --batch 30 --lesson <id>` (one seed for the class; `--different` for one each; `--html`
+where WeasyPrint is missing).
 
 ### The question bank
 

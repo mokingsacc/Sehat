@@ -155,17 +155,21 @@ def client(entry):
     return httpx.AsyncClient(transport=httpx.ASGITransport(app=entry.qalam), base_url="https://qalam-staging")
 
 
-async def test_the_worker_serves_the_hub_with_print_and_teacher_off(worker):
+async def test_the_worker_serves_the_hub_with_print_and_teacher_off_and_sheets_on(worker):
     async with client(worker) as c:
         r = await c.get("/api/hello")
         assert r.status_code == 200
         h = r.json()
-        assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons"]
+        assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "sheets"]
         assert h["cohort"]["label"] == "Staging" and h["lessons"] > 0 and h["ai"]["on"] is True
         assert h["printer"]["state"] == "off"
         assert (await c.get("/api/print/1")).status_code == 404
         assert (await c.get("/api/teacher/summary", headers={"X-Teacher-Pin": "123456"})).status_code == 404
-        assert (await c.get("/api/sheets/maths-7-fractions-add.html")).status_code == 404
+        # online the sheet is HTML for the browser to print (no WeasyPrint here), and the answer page is not served
+        sheet = await c.get("/api/sheets/maths-7-fractions-add.html?seed=4821")
+        assert sheet.status_code == 200 and "M7-03-48217" in sheet.text and 'class="mk ring"' in sheet.text
+        assert (await c.get("/api/sheets/maths-7-fractions-add.pdf")).status_code == 404
+        assert (await c.get("/api/sheets/maths-7-fractions-add.html?kind=answers")).status_code == 404
         q = {"text": "Why does ice melt?", "lang": "en", "subject": "science"}
         assert (await c.post("/api/ask", json=q)).status_code == 401           # online: a learner who agreed
         j = await c.post("/api/join", json={"band": "s1", "lang": "en", "picture": "key",

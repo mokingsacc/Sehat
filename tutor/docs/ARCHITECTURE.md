@@ -27,7 +27,7 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `content/sources.json` | Every outside source with its licence class and flags: the only record of what may be copied ([FREE-RESOURCES.md](FREE-RESOURCES.md)); `content/permissions/` holds written permissions for ASK sources. |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
-| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests. |
+| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers, or a batch of one for facilitators; `sheet_check.mjs` checks the sheets in Chromium's print; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests. |
 
 ## The async seam (stores/, October 2026)
 
@@ -111,10 +111,11 @@ measurements and what it costs). Nothing of the hub is forked:
 - **What a host lacks** (`TUTOR_LACKS`, empty on the hub): online it is `printer,pin`. A module whose manifest
   `needs` something the host lacks is off for every cohort there, whatever its flag says, and so is any module that
   depends on it. `print` needs `printer`, and `teacher` now needs `pin` (the teacher's PIN, which only the hub has),
-  so online the staging cohort's five modules resolve to Lessons, Ask and Check my sheet. Without a printer the
+  so online the staging cohort's modules resolve to Lessons, Ask, Sheets and Check my sheet. Without a printer the
   hub makes no print queue (its thread cannot run in a Worker) and `/api/hello` reports the printer as off; without
-  a PIN no PIN file is made. No other print or teacher path exists online yet (BUILD-PLAN 3.6 has "Get the sheet"
-  and Cloudflare Access for later).
+  a PIN no PIN file is made. Online, sheets are HTML that the browser prints or saves as a PDF ("Get the sheet",
+  P13): WeasyPrint is on neither the Worker nor the fallback kit, so the `.pdf` route belongs to `print`, and the
+  answer page, which needs the PIN, does not exist there.
 - Settings online: `TUTOR_COHORT` (the staging seed cohort), `TUTOR_AI_PROVIDER=fake`, `TUTOR_LACKS`. The Worker
   has no secrets at all.
 - `.github/workflows/tutor-worker.yml` deploys on every push of `tutor/**` to the working branch: a guard (the
@@ -139,8 +140,10 @@ measurements and what it costs). Nothing of the hub is forked:
 
 Each part of Qalam is a module with a manifest, `tutor/modules/<id>/module.json`, in the shape the design committee
 settled (BUILD-PLAN 3.2): `id`, `version`, `maturity`, `depends`, `bands`, `slots`, `capabilities`, `ai` (only when it
-calls a model), `settings`, `needs`, `offline`. The first five are today's features: `lessons`, `ask`, `print`,
-`check` (Check my sheet) and `teacher`. `modules.py` checks every manifest at start and leaves out a broken one, and
+calls a model), `settings`, `needs`, `offline`. The first six are today's features: `lessons`, `ask`, `sheets`
+(the sheet document, the keys, "Get the sheet" and the lesson-end card, C2 change 6), `print` (only the hub's print
+queue; it depends on `sheets` and needs `printer`), `check` (Check my sheet, which depends on `sheets`) and
+`teacher`. `migrations/0007` switches `sheets` on in every cohort made before it wherever `print` or `check` was. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
 risk a module carries comes from the core's table of capabilities, never from the module.
 
@@ -267,21 +270,37 @@ Nothing calls a model except through `ai/gateway.py`; `brain.py` asks it for the
 
 ## Printing (sheets.py, printing.py)
 
-The phone sends lesson, copies, language, the seed and (optionally) the child's name. The hub renders the sheet as
-HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints one job at a time through CUPS
+The phone sends lesson, copies, language and the seed; never a name. The hub renders the sheet as HTML, turns it
+into an A4 PDF with WeasyPrint and queues it. Online the same HTML goes to the browser, which prints it or saves it
+as a PDF (`?print=1` opens the print dialog once it loads; the document's title is the code alone). One worker prints one job at a time through CUPS
 (`lp`), or saves PDFs in `data/outbox/` when there is no printer (`TUTOR_PRINT=outbox`).
 
-- **Seeds.** Sheets with generated sums (fractions, adding, times tables) get new numbers on each print. The seed
-  is printed in the corner (`M7-03-4821`). The same seed always gives the same sums, so "Check my sheet" knows
-  the answers, and the phone keeps the answer key it fetched when printing, to check at home.
+- **Seeds and the code.** Sheets with generated sums (fractions, adding, times tables) get new numbers on each
+  print. The code at the foot is the lesson code, the 4-digit seed and a Damm check digit (`M7-03-48217`), so a
+  mistyped or swapped digit is refused; a sheet without a seed (or seed 0) keeps the bare lesson code.
+  `sheets.sheet_code` and `app/js/sheetcode.js` make the same codes (`app/tests/sheetcode.test.js`). The same seed
+  always gives the same sums, so "Check my sheet" knows the answers, and the phone keeps the key it fetched when
+  printing or getting the sheet, to check at home.
+- **Layout (C2.1, photo-ready).** Every box is placed absolutely in mm (`sheets.layout`): four corner squares (the
+  top right one a ring), the header with name and date boxes, a two-column slot grid for the items (heights in
+  DESIGN.md, "Sheet heights"; a sheet that needs more than 230 mm fails `validate_pack`), one answer cell per value
+  item at its end side, a "Working" box if 20 mm are left, and the foot: an 18 mm QR code holding text only
+  (`Q1 M7-03-48217 PRS`, made by `qr.py`, no dependency) and the code. No app name, URL or cohort. The key gives
+  each cell `{kind, x, y, w, h}` in mm from the top-left square's centre, the frame the camera finds (P14).
+  `test_sheets.py` checks the clearances, the squares and WeasyPrint's positions; `tools/sheet_check.mjs` checks
+  Chromium's print positions (within 0.5 mm of the key) and that no solid black wider than 6 mm is printed except
+  the squares.
+- **Batches.** `tools/make_sheets.py --batch N --lesson ID` writes N pages in one file for a facilitator: one seed
+  for the class, or `--different` for one each, with the answer pages in a separate file; `--html` where WeasyPrint
+  is missing.
 - **Limits.** Answer sheets and more than `TUTOR_FREE_COPIES` copies need the teacher's PIN; each phone may print
   `TUTOR_COPIES_PER_HOUR` copies an hour (prints the teacher allowed with the PIN don't count). The hub knows a phone
   by its address on the hub's Wi-Fi, which the phone can't choose. Five wrong PINs lock that phone out for a minute,
   the next five for 15 minutes, then an hour each time. Ask and PDF downloads take at most 10 a minute per phone.
 - **Names** go on the paper only: not in the database and not in the logs (the hub keeps no access log, because the
-  sheet preview's address could carry a name), and `printer.sh` tells CUPS not to keep printed files. Since P9 the
-  app sends no name at all: the learner writes hers in the sheet's name box by hand. The hub still accepts `name` on
-  sheets and print jobs (P13 removes it); in outbox mode a PDF printed with one keeps it until the teacher deletes it.
+  sheet preview's address once could carry a name), and `printer.sh` tells CUPS not to keep printed files. Since P9
+  the app sends no name at all, and since P13 the hub takes none either (`name` left `PrintIn` and the sheet routes):
+  the learner writes hers in the sheet's name box by hand.
 
 ## The fallback container (tutor/deploy, P12)
 
@@ -347,15 +366,16 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `POST /api/ask` | `{text, lang, year, subject, lesson}` -> answer, badge source, token; header `X-Learner-Token` (online: needed, with her consent) |
 | `GET /api/ask/{token}` | Status and the teacher's answer |
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
-| `GET /api/sheets/{id}.html` / `.pdf` | The sheet (`seed`, `lang`, `kind=worksheet or answers`, `name`); header `X-Sheet-Seed` |
-| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`) |
-| `POST /api/print` | `{lesson, kind, copies, lang, seed, name}`; PIN header for answer sheets or many copies |
+| `GET /api/sheets/{id}.html` | The sheet (`seed`, `lang`, `print=1` to open the print dialog); `kind=answers` needs `X-Teacher-Pin` and is 404 where there is no PIN; header `X-Sheet-Seed` |
+| `GET /api/sheets/{id}.pdf` | The same as a PDF, on the hub only (`print`); the file is named by the code |
+| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`), with each cell's place in mm |
+| `POST /api/print` | `{lesson, kind, copies, lang, seed}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
-pictures, clips, link cards), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jobs), `check` (the sheet key),
-`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello`, `/api/events`, `/api/credits`, the
+pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
+print jobs), `teacher` (the teacher routes; the hub card also needs `print`). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
@@ -415,15 +435,19 @@ learner routes and the app's files are always there.
   online-mode server and checks the whole round: reopen offline, Home and a lesson, a marked sheet, a question that
   waits, the chip, a restart, and everything sent when the network comes back.
 - `modules.js` is the shell: it takes the modules on from `hello.modules` (kept on the phone for offline use; the
-  built-in five when nothing is known), imports `js/modules/<id>.js` only for modules that are on and have a slot,
+  built-in six when nothing is known), imports `js/modules/<id>.js` only for modules that are on and have a slot,
   and lets them offer actions through slots (`home.action`, `lesson.end`, `settings.row`). The shell, not a module,
-  keeps screens sparse: at most three tabs (Lessons, Ask, Print, each while its module is on, each keeping its
-  place), and on Home one primary action, one secondary and one list. The clean Home has Check my sheet but no
-  Print button, since Print is a tab. A screen whose module is off sends the phone Home. While connected, the app
+  keeps screens sparse: at most three tabs (Lessons, Ask, and Print on the hub or Sheets online: the third belongs to
+  `sheets` and says Print where `print` is on; each while its module is on, each keeping its place), and on Home one
+  primary action, one secondary and one list. The clean Home has Check my sheet but no Print button, since Print is
+  a tab. `screens/print.js` is one screen for both: the hub's queue where `print` is on, else "Print or save as PDF"
+  then "Do it on screen" (`#/check/{id}/{seed}/screen`: the typed check with the sheet's intro and example, and trace
+  and draw items as "Do this one on paper"). A wrong sum on Check my sheet shows no answer (C2.3). A screen whose module is off sends the phone Home. While connected, the app
   re-reads `/api/hello` every minute, so a module switched off leaves the phones within a minute.
   `app/tests/modules.test.js` (`node --test`) checks the shell.
 - `events.js` queues the phone's events (lesson started, lesson done, sheet marked) and sends them when the hub is in reach;
-  `app/tests/events.test.js` checks the queue, `app/tests/check.test.js` the Check my sheet screen's events.
+  `app/tests/events.test.js` checks the queue, `app/tests/check.test.js` the Check my sheet screen's events and
+  marking.
 - `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
   child's year, one subject after another. Every lesson stays open from the subject pages.
 - Text from lessons, the hub or the AI is always added as text, never as HTML.

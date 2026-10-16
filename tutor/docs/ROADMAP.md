@@ -92,6 +92,16 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   but the Free plan's CPU limit does not fit, so Render stays one of Mo's three answers. CI builds the image and
   runs the smoke test against it ([HOSTING.md](HOSTING.md)). Stage B's build work is complete.
 
+## Stage C: the pilot features (built early, from October 2026)
+
+- **P13, done:** sheets online and a photo-ready layout (C2.1). Every sheet is laid out in mm: four corner squares
+  (one a ring), name and date boxes to fill by hand, a two-column slot grid, one answer cell per sum or count, and a
+  text-only QR code with the sheet's code, `M7-03-48217`, whose last digit is a Damm check digit. No app name, URL or
+  cohort on paper. A `sheets` module now holds the sheet, the keys, "Get the sheet" and the lesson-end card; `print`
+  only adds the hub's queue. Online the third tab is Sheets: "Print or save as PDF" through the browser, then "Do it
+  on screen". Check my sheet no longer shows a sum's answer. `name` left the server's sheet and print routes.
+  `make_sheets.py --batch` prints a stack for a class; `tools/sheet_check.mjs` checks the print in Chromium.
+
 ## January 2027: buy and test
 
 - One hub computer, one ink-tank printer, two cheap Android phones.

@@ -241,6 +241,10 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
                 groups, words, ans = it.get("groups", []), it.get("words", []), it.get("answer", [])
                 if len(ans) != len(words) or any(not isinstance(a, int) or not 0 <= a < len(groups) for a in ans):
                     p.append(f"{w}: answer must give a group number for every word")
+            if "step" in it and not _int_in(it["step"], 1, len(steps)):
+                p.append(f"{w}: step must be the number of one of the lesson's steps, counting from 1")
+            if "mixed" in it and (k != "sum" or not isinstance(it["mixed"], bool)):
+                p.append(f"{w}: mixed (true or false) is for a sum whose answer is a mixed number")
             if k == "generate":
                 t = it.get("type")
                 if t not in GENERATORS:
@@ -250,12 +254,21 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
                 if "work" in it and not isinstance(it["work"], bool):
                     p.append(f"{w}: work must be true or false")
                 for opt, v in it.items():
-                    if opt in ("kind", "type", "count", "prompt", "work") or t not in GENERATORS:
+                    if opt in ("kind", "type", "count", "prompt", "work", "step") or t not in GENERATORS:
                         continue
                     if opt not in GENERATORS[t]:
                         p.append(f"{w}: {t} has no option '{opt}' (it has {', '.join(GENERATORS[t]) or 'none'})")
                     elif not GENERATORS[t][opt](v):
                         p.append(f"{w}: {opt} cannot be {v!r}")
+
+    if sheet is not None and not p:
+        from . import sheets                  # the slot grid (C2.1): a sheet must fit one A4 page
+        try:
+            tall = sheets.too_tall(lesson)
+        except Exception as e:                # a sheet the layout cannot read is a problem, not a crash
+            tall = f"the sheet cannot be laid out ({e})"
+        if tall:
+            p.append(f"{lid} sheet: {tall}")
 
     for i, b in enumerate(lesson.get("bank") or [], 1):
         w = f"{lid} bank {i}"

@@ -14,7 +14,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
@@ -52,8 +52,7 @@ class PrintIn(BaseModel):
     kind: Literal["worksheet", "answers"] = "worksheet"
     copies: int = Field(1, ge=1, le=60)
     lang: str = "prs"
-    seed: int | None = Field(None, ge=0, le=99999)
-    name: str | None = Field(None, max_length=40)
+    seed: int | None = Field(None, ge=0, le=9999)
 
 
 class EventIn(BaseModel):
@@ -254,13 +253,14 @@ class Hub:
             raise HTTPException(404, "no such lesson")
         return l
 
-    def sheet_html(self, lid, *, lang, seed, kind="worksheet", name=None, for_pdf=False):
+    def sheet_html(self, lid, *, lang, seed, kind="worksheet", for_pdf=False, print_on_load=False):
+        """The sheet as HTML (C2.1). No name goes on it: she writes hers in the name box by hand (F3)."""
         l = self.lesson(lid)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
         fonts = (self.cfg.app / "fonts").resolve().as_uri() if for_pdf else "/fonts"
-        return sheets.page(l, lang=lang, seed=seed, kind=kind, name=name, fonts=fonts,
-                           picture_url=self.picture_url(lid, for_pdf), hub_name=self.cfg.name)
+        return sheets.page(l, lang=lang, seed=seed, kind=kind, fonts=fonts, picture_url=self.picture_url(lid, for_pdf),
+                           print_on_load=print_on_load)
 
     def picture_url(self, lid: str, for_pdf: bool = False):
         """name -> the picture's address: a file:// path for the PDF maker, a web path for phones."""
@@ -280,7 +280,7 @@ class Hub:
                                         fonts=(self.cfg.app / "fonts").resolve().as_uri())
         else:
             html_text = self.sheet_html(spec["lesson"], lang=spec["lang"], seed=spec["seed"], kind=spec["kind"],
-                                        name=spec.get("name"), for_pdf=True)
+                                        for_pdf=True)
         return sheets.render_pdf(html_text, base_url=str(self.cfg.app))
 
     async def cohort_modules(self, cohort_id: str | None = None, band: str | None = None):
@@ -502,36 +502,49 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         await hub.store.add_events(rows)
         return {"saved": len(rows), "expired": len(items) - len(rows)}
 
-    # worksheets
+    # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
+    # The answer page is the teacher's: behind the teacher's PIN on the hub, and on no learner route (C2.3); online
+    # there is no PIN, so there it is not served at all (the teacher's pages come with P20).
     def _seed(lid, seed):
         if seed is not None:
             return seed
         return random.randint(1000, 9999) if sheets.needs_seed(hub.lesson(lid)) else 0
 
-    @app.get("/api/sheets/{lid}.html", response_class=HTMLResponse, dependencies=needs("print"))
-    async def sheet_page(lid: str, lang: str = "prs", seed: int | None = None, kind: str = "worksheet", name: str | None = None):
+    def _kind(kind, request, pin):
+        if kind != "answers":
+            return "worksheet"
+        if hub.pin is None:
+            raise HTTPException(404, "Not Found")
+        hub.check_pin(pin, _who(request))
+        return "answers"
+
+    @app.get("/api/sheets/{lid}.html", response_class=HTMLResponse, dependencies=needs("sheets"))
+    async def sheet_page(lid: str, request: Request, lang: str = "prs", seed: int | None = Query(None, ge=0, le=9999),
+                         kind: str = "worksheet", print: int = 0, x_teacher_pin: str | None = Header(None)):
+        kind = _kind(kind, request, x_teacher_pin)
         seed = _seed(lid, seed)
-        kind = "answers" if kind == "answers" else "worksheet"
-        return HTMLResponse(hub.sheet_html(lid, lang=_lang(lang), seed=seed, kind=kind, name=(name or "")[:40] or None),
+        return HTMLResponse(hub.sheet_html(lid, lang=_lang(lang), seed=seed, kind=kind, print_on_load=print == 1),
                             headers={"X-Sheet-Seed": str(seed)})
 
+    # the PDF is the hub's: WeasyPrint is neither on the Worker nor in the fallback kit, where the browser prints
     @app.get("/api/sheets/{lid}.pdf", dependencies=needs("print"))
-    async def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = None, kind: str = "worksheet"):
+    async def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = Query(None, ge=0, le=9999),
+                        kind: str = "worksheet", x_teacher_pin: str | None = Header(None)):
         hub.pdf_limit.check(_who(request))
+        kind = _kind(kind, request, x_teacher_pin)
         seed = _seed(lid, seed)
-        kind = "answers" if kind == "answers" else "worksheet"
         try:
             # WeasyPrint keeps the processor busy for a while: it runs off the event loop
             pdf, _ = await run_in_threadpool(hub.render_pdf, {"lesson": lid, "lang": _lang(lang), "seed": seed,
                                                              "kind": kind})
         except RuntimeError as e:
             raise HTTPException(503, str(e))
-        code = hub.lesson(lid)["sheet"]["code"] + (f"-{seed}" if seed else "")
+        code = sheets.sheet_code(hub.lesson(lid), seed)
         return Response(pdf, media_type="application/pdf",
                         headers={"Content-Disposition": f'inline; filename="{code}.pdf"', "X-Sheet-Seed": str(seed)})
 
-    @app.get("/api/sheets/{lid}/key", dependencies=needs("check"))
-    async def sheet_key(lid: str, seed: int = 0, lang: str = "prs"):
+    @app.get("/api/sheets/{lid}/key", dependencies=needs("sheets"))
+    async def sheet_key(lid: str, seed: int = Query(0, ge=0, le=9999), lang: str = "prs"):
         l = hub.lesson(lid)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
@@ -554,8 +567,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
             jid = await hub.store.add_print(lesson_id=p.lesson, kind=p.kind, copies=p.copies, lang=_lang(p.lang), seed=seed,
                                       device="teacher" if teacher else who)
         hub.prints.add(jid, {"lesson": p.lesson, "kind": p.kind, "copies": p.copies, "lang": _lang(p.lang),
-                             "seed": seed, "name": (p.name or "").strip() or None,
-                             "title": f"{l['sheet']['code']}-{seed}" if seed else l["sheet"]["code"]})
+                             "seed": seed, "title": sheets.sheet_code(l, seed)})
         await hub.record("print.queued", events.lesson_id(p.lesson), p.copies,
                          cohort_id=request.query_params.get("cohort"))
         return {"id": jid, "status": "queued", "seed": seed, "printer": hub.printer.status()}

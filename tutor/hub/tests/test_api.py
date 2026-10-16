@@ -1,6 +1,8 @@
 """The hub as the phones see it: lessons, Ask, worksheets, printing (to the outbox) and the teacher's page."""
 from fastapi.testclient import TestClient
 
+from tutor_hub import sheets
+
 
 def test_hello_and_lists(hub_client):
     h = hub_client.get("/api/hello").json()
@@ -63,9 +65,10 @@ def test_child_can_send_an_answer_to_the_teacher(hub_client):
 def test_sheet_page_seed_and_key(hub_client):
     r = hub_client.get("/api/sheets/maths-7-fractions-add.html?lang=prs")
     seed = int(r.headers["x-sheet-seed"])
-    assert 1000 <= seed <= 9999 and f"M7-03-{seed}" in r.text
+    code = sheets.sheet_code(hub_client.hub.lesson("maths-7-fractions-add"), seed)
+    assert 1000 <= seed <= 9999 and code in r.text and f"<title>{code}</title>" in r.text
     key = hub_client.get(f"/api/sheets/maths-7-fractions-add/key?seed={seed}&lang=prs").json()
-    assert key["code"] == "M7-03" and key["seed"] == seed and key["items"][0]["check"] == "value"
+    assert key["code"] == code and key["seed"] == seed and key["items"][0]["check"] == "value"
     again = hub_client.get(f"/api/sheets/maths-7-fractions-add/key?seed={seed}&lang=prs").json()
     assert again == key
     fixed = hub_client.get("/api/sheets/dari-1-sheen.html?lang=ps")
@@ -78,15 +81,41 @@ def test_sheet_pdf(hub_client):
 
 
 def test_print_a_worksheet_to_the_outbox(hub_client, cfg):
+    # an old phone may still send a name: it is dropped unread (F3: she writes hers in the name box by hand)
+    queued = []
+    add = hub_client.hub.prints.add
+    hub_client.hub.prints.add = lambda jid, spec: (queued.append(spec), add(jid, spec))
     r = hub_client.post("/api/print", json={"lesson": "maths-1-count-5", "lang": "prs", "name": "Maryam"}).json()
     hub_client.hub.prints.wait()
     job = hub_client.get(f"/api/print/{r['id']}").json()
     assert job["status"] == "saved"
     files = list((cfg.data / "outbox").glob("*.pdf"))
     assert len(files) == 1 and files[0].read_bytes().startswith(b"%PDF")
-    # the name was printed once and never stored
     row = hub_client.hub.store.sync.print_job(r["id"])
-    assert "Maryam" not in str(row)
+    assert "Maryam" not in str(row) and "Maryam" not in str(queued) and "name" not in queued[0]
+
+
+def test_the_sheet_routes_take_no_name(hub_client):
+    r = hub_client.get("/api/sheets/maths-1-count-5.html?lang=prs&name=Maryam")
+    assert r.status_code == 200 and "Maryam" not in r.text
+
+
+def test_the_answer_page_is_behind_the_teacher_pin(hub_client):
+    # C2.3: a value answer appears on no learner route
+    url = "/api/sheets/maths-7-fractions-add.html?seed=4821&kind=answers"
+    assert hub_client.get(url).status_code == 401
+    page = hub_client.get(url, headers={"X-Teacher-Pin": hub_client.pin})
+    answer = '<span class="n">۱۳</span><span class="d">۲۰</span>'           # 13/20, the challenge's answer
+    assert page.status_code == 200 and answer in page.text
+    pdf = hub_client.get(url.replace(".html", ".pdf"))
+    assert pdf.status_code == 401
+    assert answer not in hub_client.get(url.replace("&kind=answers", "")).text
+
+
+def test_print_on_load_opens_the_browser_print(hub_client):
+    plain = hub_client.get("/api/sheets/dari-1-sheen.html").text
+    auto = hub_client.get("/api/sheets/dari-1-sheen.html?print=1").text
+    assert "print()" not in plain and "print()" in auto and "<title>DR1-01</title>" in auto
 
 
 def test_answer_sheets_and_many_copies_need_the_pin(hub_client):
@@ -149,7 +178,7 @@ def test_one_phone_cannot_flood_ask(hub_client):
 
 
 def test_the_hub_keeps_no_access_log(monkeypatch, tmp_path):
-    # the sheet preview's address carries the child's name, so request lines must never reach the journal
+    # request lines never reach the journal: an address may carry a learner's token or her question's words
     import uvicorn
 
     from tutor_hub.__main__ import main
@@ -183,14 +212,15 @@ def test_health_question_points_to_sehat_and_waits_for_the_teacher(hub_client):
 
 # modules and cohorts (P1)
 
-def test_hello_lists_the_five_modules_for_the_hub(hub_client):
+def test_hello_lists_the_six_modules_for_the_hub(hub_client):
     h = hub_client.get("/api/hello").json()
     assert h["cohort"]["id"] == hub_client.hub.cohort_id and h["core"] == h["version"]
-    assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "print", "teacher"]
+    assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "print", "sheets", "teacher"]
     ask = next(m for m in h["modules"] if m["id"] == "ask")
     assert ask["risk"] == "medium" and "ey" not in ask["bands"]
     assert hub_client.get(f"/api/hello?cohort={h['cohort']['id']}").json()["modules"] == h["modules"]
-    assert [m["id"] for m in hub_client.get("/api/hello?band=ey").json()["modules"]] == ["lessons", "print", "teacher"]
+    assert [m["id"] for m in hub_client.get("/api/hello?band=ey").json()["modules"]] == ["lessons", "print", "sheets",
+                                                                                          "teacher"]
     assert hub_client.get("/api/hello?cohort=nosuchcohort").status_code == 404
     assert hub_client.get("/api/hello?band=k9").status_code == 400
 
@@ -201,10 +231,11 @@ def test_print_off_makes_its_routes_404_for_that_cohort_only(hub_client):
     hub.store.sync.set_flag(hub.cohort_id, "print", enabled=False, changed_by="admin")
     base = {"lesson": "maths-1-count-5", "lang": "prs"}
     assert hub_client.post("/api/print", json=base).status_code == 404
-    assert hub_client.get("/api/sheets/dari-1-sheen.html").status_code == 404
+    assert hub_client.get("/api/sheets/dari-1-sheen.pdf").status_code == 404
     assert hub_client.post("/api/teacher/hub-card", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 404
     assert "print" not in [m["id"] for m in hub_client.get("/api/hello").json()["modules"]]
-    # everything else still works, and Check my sheet keeps its key
+    # everything else still works: the sheet itself (the `sheets` module), its key, Ask
+    assert hub_client.get("/api/sheets/dari-1-sheen.html").status_code == 200
     assert hub_client.get("/api/lessons/maths-1-count-5").status_code == 200
     assert hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=1234").status_code == 200
     assert hub_client.post("/api/ask", json={"text": "۱ + ۱", "lang": "prs"}).status_code == 200
@@ -241,7 +272,7 @@ def test_a_broken_manifest_is_left_out_and_the_hub_still_runs(cfg, tmp_path, cap
         app = create_app(cfg)
     assert "print: unknown fields" in caplog.text or "print: missing fields" in caplog.text
     with TestClient(app) as c:
-        assert [m["id"] for m in c.get("/api/hello").json()["modules"]] == ["ask", "check", "lessons", "teacher"]
+        assert [m["id"] for m in c.get("/api/hello").json()["modules"]] == ["ask", "check", "lessons", "sheets", "teacher"]
         assert c.post("/api/print", json={"lesson": "maths-1-count-5"}).status_code == 404
         assert c.get("/api/lessons/maths-1-count-5").status_code == 200
 

@@ -20,7 +20,7 @@ ROUTES_OF = {      # a route of each module, which must answer 404 while that mo
     "lessons": ("GET", "/api/packs"),
     "ask": ("GET", "/api/ask/0000000000000000"),
     "print": ("GET", "/api/print/1"),
-    "check": ("GET", "/api/sheets/maths-7-fractions-add/key?seed=4821"),
+    "sheets": ("GET", "/api/sheets/maths-7-fractions-add/key?seed=4821"),
     "teacher": ("GET", "/api/teacher/summary"),
 }
 SOURCES = {"rules", "maths", "bank", "approved", "ai", "lesson", "none"}
@@ -85,9 +85,11 @@ class Smoke:
             s, _ = self.call("GET", "/api/lessons/no-such-lesson")
             self.check("an unknown lesson is 404", s == 404, f"{s}")
 
-        if "check" in on:
+        if "sheets" in on:
             s, k = self.call("GET", "/api/sheets/maths-7-fractions-add/key?seed=4821&lang=prs")
             self.check("Check my sheet's key", s == 200 and k.get("items"), f"{s}")
+            s, page = self.call("GET", "/api/sheets/maths-7-fractions-add.html?seed=4821&lang=prs")
+            self.check("the sheet, for the browser to print", s == 200 and b"M7-03-48217" in (page or b""), f"{s}")
 
         # a learner joins with consent (a band, a language and an alias picture: nothing personal), asks, sends
         # events, then deletes herself, so each run leaves nothing behind

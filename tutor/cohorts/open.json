@@ -22,6 +22,7 @@
   },
   "modules": {
     "lessons": true,
+    "sheets": true,
     "check": true,
     "ask": false,
     "print": false,

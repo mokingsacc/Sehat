@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10 and P11 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10, P11 and P13 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -167,6 +167,16 @@ const S = {
     q_sent: 'سوالت فرستاده شد',
     connect_once: 'یک بار به انترنت وصل شو تا درس‌هایت را بگیری.',
     lesson_not_here: 'این درس هنوز در تلفنت نیست. یک بار وصل شو تا آن را بگیری.',
+    // P13, drafts for a native Dari speaker's check:
+    sheets: 'ورق‌ها',
+    get_sheet: 'ورق را بگیر',
+    get_today: 'ورق امروزم را بگیر',
+    print_pdf: 'چاپ کن یا PDF ذخیره کن',
+    on_screen: 'روی صفحه حل کن',
+    on_paper: 'این یکی را روی کاغذ حل کن',
+    sheet_offline: 'برای گرفتن ورق به انترنت وصل شو',
+    code_wrong: 'این کد درست نیست. دوباره از پایین ورق بخوان.',
+    compare: 'روی کاغذ حل کردی؟ مقایسه کن',
   },
   ps: {
     app: 'قلم',
@@ -330,6 +340,16 @@ const S = {
     q_sent: 'ستا پوښتنه ولېږل شوه',
     connect_once: 'یو ځل انټرنټ ته وصل شه چې خپل لوستونه واخلې.',
     lesson_not_here: 'دا لوست لا ستا په ټیلیفون کې نشته. یو ځل وصل شه چې ویې اخلې.',
+    // P13, drafts for a native Pashto speaker's check:
+    sheets: 'پاڼې',
+    get_sheet: 'پاڼه واخله',
+    get_today: 'د نن پاڼه مې واخله',
+    print_pdf: 'چاپ یې کړه یا PDF یې خوندي کړه',
+    on_screen: 'په پرده یې حل کړه',
+    on_paper: 'دا یوه په کاغذ حل کړه',
+    sheet_offline: 'د پاڼې اخیستو لپاره انټرنټ ته وصل شه',
+    code_wrong: 'دا کوډ سم نه دی. د پاڼې له لاندې یې بیا ولوله.',
+    compare: 'په کاغذ دې حل کړه؟ پرتله یې کړه',
   },
   en: {
     app: 'Qalam',
@@ -492,6 +512,16 @@ const S = {
     q_sent: 'Your question was sent',
     connect_once: 'Connect to the internet once to get your lessons.',
     lesson_not_here: "This lesson isn't on your phone yet. Connect once to get it.",
+    // P13:
+    sheets: 'Sheets',
+    get_sheet: 'Get the sheet',
+    get_today: "Get today's sheet",
+    print_pdf: 'Print or save as PDF',
+    on_screen: 'Do it on screen',
+    on_paper: 'Do this one on paper',
+    sheet_offline: 'Connect to the internet to get the sheet',
+    code_wrong: "That code isn't right. Read it again from the foot of the sheet.",
+    compare: 'Done it on paper? Compare',
   },
 };
 
