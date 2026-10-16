@@ -86,6 +86,46 @@ the record by hand: `wrangler d1 execute qalam-staging --remote --command "SELEC
 migration files must ship inside the Worker bundle, at the path `stores/migrations.py` reads (`tutor/migrations`),
 or be passed as `D1Store(env.DB, migrations=...)`.
 
+## Online: the Worker (tutor/worker, P7)
+
+The same app runs online as a Cloudflare Python Worker, `qalam-staging` for now ([HOSTING.md](HOSTING.md) has the
+measurements and what it costs). Nothing of the hub is forked:
+
+- `worker/build.py` copies the hub's code, the migrations, manifests, seed cohorts and packs into `worker/build/src`
+  in the hub's own layout (so `config.TUTOR` and `stores/migrations.py` find everything without a setting), and the
+  app and the lesson pictures into `worker/build/public`, the Worker's static assets. Pictures go in both: the hub
+  checks they exist as files, and phones fetch them as assets. `build/` is never committed.
+- `worker/entry.py` is the Worker: the ASGI adapter from the Workers SDK around the hub's `create_app()`. On the
+  first request an isolate serves it reads the settings from the Worker's vars, builds the app with
+  `D1Store(env.DB)` and runs `Hub.start()` (store opened and migrated, cohorts seeded, old rows pruned, search index
+  built). The adapter would run the ASGI lifespan around every request, so the entry does not acknowledge it. The
+  store gets the plain JavaScript binding (from `cloudflare:workers`): the SDK's `self.env` wraps bindings in its
+  own Python converters, and D1Store does its own (jsnull, to_js, to_py), as its contract and the fake expect.
+- Static assets are served before the Worker; only `/api/*` reaches Python (`run_worker_first`). So the hub's
+  picture route and its `StaticFiles` mounts are not used online, and `create_app` mounts the app folder only
+  where it exists.
+- **What a host lacks** (`TUTOR_LACKS`, empty on the hub): online it is `printer,pin`. A module whose manifest
+  `needs` something the host lacks is off for every cohort there, whatever its flag says, and so is any module that
+  depends on it. `print` needs `printer`, and `teacher` now needs `pin` (the teacher's PIN, which only the hub has),
+  so online the staging cohort's five modules resolve to Lessons, Ask and Check my sheet. Without a printer the
+  hub makes no print queue (its thread cannot run in a Worker) and `/api/hello` reports the printer as off; without
+  a PIN no PIN file is made. No other print or teacher path exists online yet (BUILD-PLAN 3.6 has "Get the sheet"
+  and Cloudflare Access for later).
+- Settings online: `TUTOR_COHORT` (the staging seed cohort), `TUTOR_AI_PROVIDER=fake`, `TUTOR_LACKS`. The Worker
+  has no secrets at all.
+- `.github/workflows/tutor-worker.yml` deploys on every push of `tutor/**` to the working branch: a guard (the
+  Worker and its database must be `qalam-staging`), find or create D1 in the `eu` jurisdiction, `pywrangler deploy`,
+  `/api/hello` (which applies the migrations), `hub/tests/smoke_http.py` (any base URL: the hub, `pywrangler dev`
+  or the Worker) and `worker/measure.py`. Without the Cloudflare secrets, or when the Free plan blocks the Worker,
+  it runs the same smoke test under `pywrangler dev` and stays green (D6).
+- `tests/test_worker.py` loads `entry.py` with stand-ins for the runtime (the D1 fake, wrangler.toml's vars),
+  serves the app through it, counts D1 calls per request (the first, which starts the hub, makes 16; the Free
+  plan allows 50), checks the bundle layout and the deploy's guards.
+- Limits that remain online: the per-phone limits (Ask, events) know a phone by its address, which a Worker does
+  not see, so all phones reaching one isolate share them; learner tokens (P10) will replace this. Workers Logs
+  stay off (no `[observability]`), as the hub keeps no access log; the deploy job reads CPU times live with
+  `wrangler tail` and keeps only the numbers.
+
 ## Modules and cohort flags (modules.py, flags.py)
 
 Each part of Qalam is a module with a manifest, `tutor/modules/<id>/module.json`, in the shape the design committee

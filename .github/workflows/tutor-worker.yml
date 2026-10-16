@@ -102,6 +102,7 @@ jobs:
           echo "D1 qalam-staging: $where" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Deploy the Worker
+        timeout-minutes: 10
         id: deploy
         if: steps.secrets.outputs.deploy == 'yes'
         run: |
@@ -142,6 +143,7 @@ jobs:
           python3 -c "import json; h=json.load(open('hello.json')); print('hello:', h['cohort'], [m['id'] for m in h['modules']], h['lessons'], 'lessons')"
 
       - name: Smoke test against the Worker
+        timeout-minutes: 10
         id: smoke
         if: steps.hello.outputs.first_ms != ''
         env: { URL: "${{ steps.deploy.outputs.url }}" }
@@ -159,6 +161,7 @@ jobs:
           exit $code
 
       - name: Measure the Worker
+        timeout-minutes: 10
         if: steps.hello.outputs.first_ms != '' && steps.smoke.outputs.blocked == ''
         env: { URL: "${{ steps.deploy.outputs.url }}" }
         run: |

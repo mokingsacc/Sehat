@@ -33,5 +33,4 @@ type = "Data"
 globs = ["**/*.json", "**/*.sql", "**/*.svg", "**/*.webp", "**/*.png", "**/*.jpg"]
 fallthrough = false
 
-[observability]
-enabled = true
+# no [observability]: Workers Logs stay off, as the hub keeps no access log (CPU time is read live with wrangler tail)

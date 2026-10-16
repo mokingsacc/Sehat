@@ -74,15 +74,20 @@ def test_the_deploy_workflow_keeps_to_its_own_worker():
 
 # the bundle
 
-def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
+def load_build():
     spec = importlib.util.spec_from_file_location("worker_build", WORKER / "build.py")
     build = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(build)
+    return build
+
+
+def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
     out = tmp_path / "build"
-    build.build(out)
+    load_build().build(out)
     src, public = out / "src", out / "public"
     # config.TUTOR is two folders above tutor_hub, so src/ stands where tutor/ stands
     assert (src / "hub" / "tutor_hub" / "config.py").is_file() and (src / "entry.py").is_file()
+    assert json.loads((src / "vars.json").read_text(encoding="utf-8")) == WRANGLER["vars"]
     assert sorted(f.name for f in (src / "migrations").glob("*.sql")) == sorted(
         f.name for f in (TUTOR / "migrations").glob("*.sql"))
     assert (src / "modules" / "teacher" / "module.json").is_file() and (src / "cohorts" / "staging.json").is_file()
@@ -133,7 +138,8 @@ def worker(monkeypatch, tmp_path):
     for k in WRANGLER["vars"]:
         monkeypatch.delenv(k, raising=False)            # entry.py sets them from the env, as on Cloudflare
     monkeypatch.setenv("TUTOR_DATA", str(tmp_path / "data"))
-    spec = importlib.util.spec_from_file_location("qalam_worker_entry", WORKER / "entry.py")
+    load_build().build(tmp_path / "build")          # entry.py reads build/src/vars.json, made from wrangler.toml
+    spec = importlib.util.spec_from_file_location("qalam_worker_entry", tmp_path / "build" / "src" / "entry.py")
     entry = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(entry)
     assert entry.Default == ("Default", entry.qalam)
@@ -165,12 +171,15 @@ async def test_the_worker_serves_the_hub_with_print_and_teacher_off(worker):
     assert "d1_migrations" not in tables
 
 
-async def test_the_hub_starts_once_per_isolate(worker):
+async def test_the_app_is_built_at_import_and_the_hub_starts_once_per_isolate(worker):
+    """Built at import, so Cloudflare's deploy-time snapshot holds it; the store opens on the first request."""
+    assert worker.app.state.hub.library.lessons and worker.store.db is None and not worker._started
     async with client(worker) as c:
         await c.get("/api/hello")
-        first = worker._app
+        assert worker._started and worker.store.db is worker.db
+        calls = worker.db.calls
         await c.get("/api/hello")
-    assert worker._app is first
+    assert worker.db.calls - calls == 2                  # no second start: the cohort and its flags only
     applied = [r[0] for r in worker.db.sqlite.execute("SELECT id FROM schema_migrations ORDER BY id")]
     assert applied == sorted(f.stem for f in (TUTOR / "migrations").glob("*.sql"))
 
@@ -204,7 +213,7 @@ async def test_the_spike_route_only_where_staging_asks_for_it(worker, monkeypatc
         assert r.status_code == 200
         s = r.json()
         assert s["jsnull"] is True and s["batch_to_js"]["ok"] is True
-        assert s["queries"] == {"single_after_batch": 60, "stopped_by": None}      # the fake has no limit
-        env = worker.import_from_javascript("cloudflare:workers").env
-        monkeypatch.setattr(env, "QALAM_SPIKE", "off")
+        assert s["queries"] == {"tried": 60, "single_after_batch": 60, "stopped_by": None}   # the fake has no limit
+        assert (await c.get("/api/_spike?n=5000")).json()["queries"]["tried"] == 1100
+        monkeypatch.setenv("QALAM_SPIKE", "off")
         assert (await c.get("/api/_spike")).status_code == 404

@@ -97,11 +97,16 @@ def tail_facts(path):
         return {"events": 0}
     cpu = [e["cpuTime"] for e in events if isinstance(e.get("cpuTime"), (int, float))]
     wall = [e["wallTime"] for e in events if isinstance(e.get("wallTime"), (int, float))]
-    outcomes = {}
+    outcomes, by_path = {}, {}
     for e in events:
         outcomes[e["outcome"]] = outcomes.get(e["outcome"], 0) + 1
+        url = ((e.get("event") or {}).get("request") or {}).get("url") or ""
+        path = re.sub(r"^https?://[^/]+", "", url).split("?")[0]
+        path = re.sub(r"/api/ask/[0-9a-f]+", "/api/ask/{token}", re.sub(r"/api/lessons/[^/]+", "/api/lessons/{id}", path))
+        if isinstance(e.get("cpuTime"), (int, float)):
+            by_path.setdefault(path or "?", []).append(e["cpuTime"])
     return {"events": len(events), "outcomes": outcomes, "cpu_ms": spread(cpu), "wall_ms": spread(wall),
-            "cpu_first_ms": cpu[0] if cpu else None}
+            "cpu_first_ms": cpu[0] if cpu else None, "cpu_by_path": {p: spread(v) for p, v in sorted(by_path.items())}}
 
 
 def table(rows):
@@ -123,10 +128,12 @@ def main(argv=None):
 
     s, raw, _ = get(base + "/api/_spike")
     spike = json.loads(raw) if s == 200 else {"status": s, "body": raw[:200].decode("utf-8", "replace")}
+    s, raw, _ = get(base + "/api/_spike?n=1001")         # past the Free plan's documented 50, to its 1000
+    probe = json.loads(raw).get("queries") if s == 200 else {"status": s, "body": raw[:160].decode("utf-8", "replace")}
     lat, bad = warm(base)
     m = {"where": a.where, "d1": a.d1, "first_request_ms": a.first_ms, "warm_ms": lat, "errors": bad,
          "deploy": deploy_facts(a.deploy_log) if a.deploy_log else {}, "tail": tail_facts(a.tail) if a.tail else None,
-         "spike": spike}
+         "spike": spike, "query_probe": probe}
 
     d, t, q = m["deploy"], m["tail"] or {}, spike.get("queries", {}) if isinstance(spike, dict) else {}
     rows = [("Where", a.where or "?"), ("D1", a.d1 or "?"),
@@ -144,13 +151,16 @@ def main(argv=None):
         rows.append(("CPU time per request (wrangler tail)", f"median {t['cpu_ms']['median']} ms, p90 "
                      f"{t['cpu_ms']['p90']} ms, max {t['cpu_ms']['max']} ms (n={t['cpu_ms']['n']}); "
                      f"outcomes {t['outcomes']}"))
+        for p, v in t.get("cpu_by_path", {}).items():
+            rows.append((f"CPU {p}", f"median {v['median']} ms, p90 {v['p90']} ms, max {v['max']} ms (n={v['n']})"))
     else:
         rows.append(("CPU time per request", "not measured (no tail events)" if a.tail else "not measured"))
     if isinstance(spike, dict) and "jsnull" in spike:
         rows += [("Python", spike.get("python")), ("pyodide.ffi.jsnull exists", spike["jsnull"]),
                  ("A to_js list works with batch()", spike.get("batch_to_js")),
-                 ("D1 queries one request may make", f"{q.get('single_after_batch')} single queries after one batch; "
-                  f"stopped by: {q.get('stopped_by') or 'nothing (60 tried)'}")]
+                 ("D1 queries one request may make", f"{q.get('single_after_batch')} of {q.get('tried')} single "
+                  f"queries after one batch; stopped by: {q.get('stopped_by') or 'nothing'}"),
+                 ("Probing to 1001 queries in one request", str(probe))]
     if bad:
         rows.append(("Errors during the warm runs", "; ".join(bad[:5])))
     md = "### Qalam staging: measurements\n\n" + table(rows) + "\n"
