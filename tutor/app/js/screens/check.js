@@ -10,7 +10,7 @@ import * as hub from '../hub.js';
 import * as library from '../library.js';
 import { latin, notSimplest, parse, same, show } from '../numbers.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, rich, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, rich, said, toast, topbar } from '../ui.js';
 import { rememberKey } from './print.js';
 
 function fromCode(text) {
@@ -50,7 +50,7 @@ function pickSheet() {
       h('small', { dir: 'ltr' }, l.code + (seed ? '-' + seed : ''))), icon('chev', 20)))),
     h('div', { class: 'section-head' }, h('h2', {}, s('sheet_code'))),
     h('form', { class: 'pad row', onSubmit: open }, h('div', { class: 'field grow flat' }, input),
-      h('button', { class: 'btn primary', type: 'submit' }, s('open_code'))));
+      said(h('button', { class: 'btn primary', type: 'submit' }, s('open_code')))));
 }
 
 export default async function check([id, seedText]) {
@@ -100,7 +100,7 @@ export default async function check([id, seedText]) {
       const ans = h('div', { class: 'ans hidden' });
       const yes = h('button', { class: 'btn good', type: 'button' }, icon('check', 22, 3), s('yes'));
       const no = h('button', { class: 'btn', type: 'button' }, icon('x', 22, 3), s('no'));
-      const judge = h('div', { class: 'row hidden' }, h('span', { class: 'grow' }, s('was_it_right')), yes, no);
+      const judge = h('div', { class: 'row wrap hidden' }, h('span', { class: 'grow' }, s('was_it_right')), said(yes), said(no));
       const reveal = h('button', { class: 'link', type: 'button' }, s('show_answer'));
       if (Array.isArray(r.a) && r.a.length && Array.isArray(r.a[0])) {
         ans.append(...r.a.map(([w, g]) => h('div', {}, h('b', {}, w), ' ← ', g)));
@@ -161,7 +161,7 @@ export default async function check([id, seedText]) {
     h('div', { class: 'checks' }, rows),
     forGrownUps.length ? h('p', { class: 'pad muted small' }, forGrownUps.join('، '), ': ', s('check_with_teacher')) : null,
     h('div', { class: 'actions' },
-      values.length ? h('button', { class: 'btn primary main', type: 'button', onClick: checkValues }, icon('check'), s('check_btn')) : null,
-      h('a', { class: 'btn', href: '#/print/' + encodeURIComponent(id) }, icon('printer'), s('print_new'))));
+      values.length ? said(h('button', { class: 'btn primary main', type: 'button', onClick: checkValues }, icon('check'), s('check_btn'))) : null,
+      said(h('a', { class: 'btn', href: '#/print/' + encodeURIComponent(id) }, icon('printer'), s('print_new')))));
   return { el, tab: 'print' };
 }

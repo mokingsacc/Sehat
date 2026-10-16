@@ -12,7 +12,7 @@ import { notSimplest, parse, same, show } from '../numbers.js';
 import { praise, readsOnOpen } from '../bands.js';
 import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, rich, speakerBtn, star, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
 
 const QUESTION = new Set(['choice', 'number']);
 
@@ -37,13 +37,17 @@ export default async function lesson([id]) {
   const header = h('header', { class: 'top' },
     h('a', { class: 'round', href: '#/home', 'aria-label': s('close') }, icon('x', 24, 2.6)),
     segs,
-    speakerBtn(() => pageSpeak(), { size: 'sm', label: s('hear_page') }));
+    speakerBtn(() => pageSpeak(), { size: 'sm', label: s('hear_page'), page: true }));
   const body = h('div', { class: 'step' });
   const fb = h('div', { class: 'feedback hidden', role: 'status', 'aria-live': 'polite' });
   const prev = h('button', { class: 'btn', type: 'button', onClick: () => go(i - 1) }, icon('back'), s('back'));
   const next = h('button', { class: 'btn primary main', type: 'button', onClick: () => go(i + 1) });
-  const actions = h('div', { class: 'actions' }, prev, next);
-  const draftBand = L.draft ? h('div', { class: 'draft' }, s('draft_note')) : null;
+  // in the bands with a speaker per button (bands.speakerPerButton) each button carries its own
+  const prevBox = said(prev);
+  const nextBox = said(next);
+  if (nextBox !== next) nextBox.classList.add('main');
+  const actions = h('div', { class: 'actions' }, prevBox, nextBox);
+  const draftBand = L.draft ? h('div', { class: 'draft', 'data-silent': '' }, s('draft_note')) : null;
   const root = h('div', { class: 'screen player' }, header, draftBand, body, fb, actions);
 
   function mainText(st) {
@@ -127,7 +131,7 @@ export default async function lesson([id]) {
       }
       return [pics(st), promptRow(st.prompt),
         h('form', { class: 'answer-in', onSubmit: (e) => { e.preventDefault(); check(); } },
-          inp, h('button', { class: 'btn primary', type: 'submit' }, s('check_answer')))];
+          inp, said(h('button', { class: 'btn primary', type: 'submit' }, s('check_answer'))))];
     },
     say: (st) => {
       const en = !!st.english;
@@ -160,7 +164,7 @@ export default async function lesson([id]) {
     fill(body, (KINDS[st.kind] || KINDS.read)(st));
     fb.className = 'feedback hidden';
     fb.replaceChildren();
-    prev.classList.toggle('hidden', !i);
+    prevBox.classList.toggle('hidden', !i);
     next.disabled = QUESTION.has(st.kind) && results[i] === undefined;
     next.replaceChildren(i === steps.length - 1 ? s('done') : s('next'), icon('next'));
     if (young && canSay(st)) setTimeout(pageSpeak, 300);
@@ -183,8 +187,8 @@ export default async function lesson([id]) {
       answers.length ? h('p', { class: 'muted' }, adult ? s('correct_of', { a: right, b: answers.length })
         : s('of', { a: right, b: answers.length })) : null,
       summary ? modules.lessonEnd(modules.context(state.child(), summary)) : null,
-      after && after.id !== id ? h('a', { class: 'btn primary big', href: '#/lesson/' + encodeURIComponent(after.id) },
-        s('next_lesson'), icon('next')) : null,
+      after && after.id !== id ? said(h('a', { class: 'btn primary big', href: '#/lesson/' + encodeURIComponent(after.id) },
+        s('next_lesson'), icon('next'))) : null,
       h('a', { class: 'link', href: '#/home' }, s('back')),
       sourceNote(L)));
     if (young) speak(s('lesson_done'), lang, { key: 'lesson_done' });

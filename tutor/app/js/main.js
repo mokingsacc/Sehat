@@ -9,7 +9,7 @@ import * as library from './library.js';
 import * as modules from './modules.js';
 import * as state from './state.js';
 import { loadClips, stop } from './speech.js';
-import { busy, h, hubChip, nav } from './ui.js';
+import { busy, h, hubChip, nav, sayTab } from './ui.js';
 
 import ask from './screens/ask.js';
 import check from './screens/check.js';
@@ -65,6 +65,7 @@ async function route() {
   app.className = tabs ? '' : 'no-nav';
   app.replaceChildren(out.el, ...(tabs ? [nav(out.tab)] : []));
   window.scrollTo(0, 0);
+  sayTab();                      // a tab tapped in years 1 to 3 or adult literacy says its label
 }
 
 function refreshChips() {

@@ -318,6 +318,10 @@ files are always there.
   decides what is read aloud on open, whether the tabs show (not in early years, which has the grown-up's corner
   instead) and whether a lesson ends in stars or a check mark. English is an interface language beside Dari and
   Pashto and turns the page left to right; pack text keeps its own direction (`unicode-bidi: plaintext`).
+- Speakers (the P9 look-over, DESIGN.md): every header has the page speaker (`ui.pageSpeaker`, which reads the
+  screen with `readText`, skipping anything marked `data-silent`: the draft band and the connection chip). In years
+  1 to 3 and adult literacy (`bands.speakerPerButton`) `ui.said()` puts a 44 px speaker after every worded button
+  and row, subject tiles go one per row, and a tab says its label once the new screen is drawn.
 - `speech.js` plays a recorded clip first: the pack's clip for a lesson step, or an interface clip
   `app/audio/<lang>/<key>.opus` listed in that folder's `manifest.json` (with the speaker's code, never a name, and
   the file's SHA-256). Then the phone's own voice, then the "voice not ready" toast. There is no generated speech.

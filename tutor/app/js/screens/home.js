@@ -14,7 +14,7 @@ import * as library from '../library.js';
 import * as modules from '../modules.js';
 import { hasVoice, sayKey, speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, hubChip, icon, speakerBtn } from '../ui.js';
+import { fill, h, hubChip, icon, pageSpeaker, readPage, said, speakerBtn } from '../ui.js';
 import { whoChip } from './who.js';
 
 const HOLD_MS = 2000;
@@ -29,15 +29,9 @@ export default async function home() {
   const key = c && c.id + location.hash;
   if (c && readsOnOpen(c.band, c.track, 'home') && readFor !== key && hasVoice(getLang())) {
     readFor = key;
-    setTimeout(() => readPage(root), 400);
+    setTimeout(() => readPage(root.closest('#app') || root), 400);
   }
   return { el: root, tab: 'lessons', onHub: draw, cleanup: () => { readFor = null; } };
-}
-
-// everything the page says, in reading order (the page speaker)
-function readPage(root) {
-  const text = (root.closest('#app') || root).innerText.replace(/\s+/g, ' ').trim();
-  speak(text, getLang());
 }
 
 // the grown-up's corner: a long press opens Who is learning (and Settings, Print behind it); a tap says "hold it"
@@ -59,7 +53,7 @@ function grownUpCorner() {
 function header(c, root) {
   if (c.band === 'ey') return h('header', { class: 'top' }, whoChip(c), h('div', { class: 'grow' }), grownUpCorner());
   return h('header', { class: 'top' }, whoChip(c), h('div', { class: 'grow' }),
-    speakerBtn(() => readPage(root), { size: 'sm', label: s('hear_page'), page: true }), hubChip());
+    pageSpeaker(root), hubChip());
 }
 
 function nothing() {
@@ -70,13 +64,13 @@ function adultsComing() {
   return h('section', { class: 'card lined pad-card stack' },
     h('div', { class: 'row' }, h('p', { class: 'grow lead' }, s('adults_coming')),
       speakerBtn(() => sayKey('adults_coming', getLang()), { size: 'md' })),
-    h('a', { class: 'btn outline', href: '#/welcome/edit' }, s('pick_year')));
+    said(h('a', { class: 'btn outline', href: '#/welcome/edit' }, s('pick_year'))));
 }
 
 function page(root) {
   const c = state.child();
   const ctx = modules.context(c, library.next(c));
-  const out = [header(c, root), library.hasDrafts() ? h('div', { class: 'draft' }, s('draft_note')) : null];
+  const out = [header(c, root), library.hasDrafts() ? h('div', { class: 'draft', 'data-silent': '' }, s('draft_note')) : null];
   if (c.band === 'ad' && !library.hasAdultLessons()) return [...out, adultsComing()];
   if (!ctx.lesson) return [...out, nothing()];
   const { primary, secondary, list } = modules.home(ctx);

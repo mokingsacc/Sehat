@@ -41,6 +41,10 @@ export function readsOnOpen(band, track, where) {
   return (READ_ON_OPEN[band] || []).includes(where);
 }
 
+// a 44 px speaker beside every worded button, tile and row, where Home is read on open (years 1 to 3 and adult
+// literacy; the P9 look-over's ruling 1). Elsewhere the header's page speaker is enough; early years has no words.
+export const speakerPerButton = (band, track) => band === 'p1' || (band === 'ad' && track === 'literacy');
+
 // the shell's tabs: none in early years (no text the child must read; the grown-up's corner instead)
 export const hasTabs = (band) => band !== 'ey';
 // stars for children, "Correct, 8 of 10" and a check mark for adults

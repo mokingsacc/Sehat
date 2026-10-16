@@ -5,7 +5,7 @@ import * as hub from '../hub.js';
 import * as library from '../library.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, speakerBtn, star, subjectBadge, topbar } from '../ui.js';
+import { fill, h, icon, plain, said, speakerBtn, star, subjectBadge, topbar } from '../ui.js';
 import { yearLabel } from './who.js';
 
 export function lessonRow(l, n, c) {
@@ -28,15 +28,17 @@ export default async function subject([name]) {
   const others = library.all().filter((l) => l.subject === name && !mine.includes(l))
     .sort((a, b) => a.year - b.year || a.order - b.order);
   const years = [...new Set(others.map((l) => l.year))];
-  const el = h('div', { class: 'screen' },
+  const el = h('div', { class: 'screen', 'data-speaks': '' });
+  const row = (l, i) => said(lessonRow(l, i + 1, c));
+  fill(el,
     topbar({ back: '#/home', sub: yearLabel(c), title: s(name), extra: subjectBadge(name, 44) }),
     mine.length ? h('div', { class: 'section-head' }, h('h2', {}, s('this_year'))) : null,
-    mine.length ? h('div', { class: 'lessons' }, mine.map((l, i) => lessonRow(l, i + 1, c))) : null,
+    mine.length ? h('div', { class: 'lessons' }, mine.map(row)) : null,
     !mine.length && !others.length ? h('div', { class: 'empty' }, s('no_lessons')) : null,
     others.length ? h('div', { class: 'section-head' }, h('h2', {}, s('other_years'))) : null,
     years.map((y) => [
       h('div', { class: 'year-head' }, y === 0 ? s('beginner') : s('year_n', { n: y })),
-      h('div', { class: 'lessons' }, others.filter((l) => l.year === y).map((l, i) => lessonRow(l, i + 1, c))),
+      h('div', { class: 'lessons' }, others.filter((l) => l.year === y).map(row)),
     ]));
   const cards = h('div', { class: 'linkcards' });
   el.append(cards);

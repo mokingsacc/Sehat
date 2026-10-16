@@ -125,7 +125,7 @@ border, not text). The browser test recomputes ink-on-background per band.
 | `--bad-soft` | #fdecea | #fdecea | #2a1715 | #2a1715 | wrong feedback |
 | `--ai-ink` | #8a4a06 | #8a4a06 | #f0b36b | #f0b36b | the AI badge and the draft banner |
 | `--draft-bg` | #fdf1e1 | #fdf1e1 | #2e2416 | #2e2416 | the draft banner |
-| `--s-maths`, `--s-science`, `--s-english`, `--s-dari`, `--s-pashto` | #1f4fa3, #c2410c, #7a4a9e, #0b6e4f, #b23a48 | same | lightened in dark so white text stays 4.5:1 (builder checks) | same | subject badges |
+| `--s-maths`, `--s-science`, `--s-english`, `--s-dari`, `--s-pashto` | #1f4fa3, #c2410c, #7a4a9e, #0b6e4f, #b23a48 | same | the same in dark; white on each is 4.5:1 or better | same | subject badges |
 
 `--warm` changed from #d9600b (white text 3.7:1) to #c2540a (4.6:1). A "good" button is `--good-soft` with
 `--good-ink` text and a `--good` border, because white on `--good` is 3.4:1. `color: var(--accent-shadow)` on any
@@ -163,8 +163,9 @@ The app stays 480 px wide at most on tablets and laptops, so lines never grow lo
 
 - `data-theme` absent: the tokens follow `@media (prefers-color-scheme: dark)`. Settings offers Phone, Light or Dark,
   per learner, kept on the phone. Dark is less conspicuous at night on a borrowed phone, which is why it exists.
-- Pictures: pack line art is SVG drawn in `currentColor` (the importer in P8 rewrites black strokes); any raster
-  picture gets `filter: invert(1)` in dark. The subject badges and the alias pictures keep their colours.
+- Pictures: in dark only line art takes `--picture-filter` (invert and hue-rotate): the importer marks it
+  (`line: true` on the picture); a photograph, a coloured picture or an alias picture is never filtered and keeps its
+  colours (P9 look-over, ruling 7). The subject badges keep their colours too.
 - The draft banner, toasts and the hub chip use the tokens too; no element keeps a fixed colour.
 - Sheets, previews and PDFs never take the theme: the sheet document has its own fixed black-on-white CSS.
 
@@ -184,7 +185,10 @@ picks them from the modules' `home.action` offers, and no module can add a tile 
 **Early years (`ey`):** `data-look="bold" data-tone="child"`, `--tap` 72 px. No tabs, no Ask, no text the child must
 read: everything is read on open from recorded clips. The alias picture sits at the top start; the grown-up's corner
 is a 44 px lock icon at the top end that opens Who is learning, Settings and Print after a 2-second long press (a
-short tap says, aloud, "hold it"). Lesson steps advance with one 72 px "next"; stars at the end. No PIN lock.
+short tap says, aloud, "hold it"). The press shows it is working: pressed down from the first touch, the consent
+ring's component filling round the lock over the 2 seconds (a plain pressed state under reduced motion), a short
+vibration as Who opens, a cancel when the finger lifts or leaves early (ruling 6). The draft band shows on staging
+phones but is never spoken (ruling 8). Lesson steps advance with one 72 px "next"; stars at the end. No PIN lock.
 
 **Adult literacy (`ad`, track `literacy`):** `data-look="bold" data-tone="adult"`: Naskh 22 px, 60 px buttons, read
 on open, on the adult palette (white, teal). Home as in the table; the tracks list shows only tracks the cohort has
@@ -286,8 +290,16 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
   width, direction and the speaker rule. The screenshots for C2 are in the committee's `p9-screens` folder.
 - Text in the accent colour uses `--accent-ink`, not `--accent`: the active tab's teal on `--accent-soft` was 4.3:1.
 - The subject colours stay the same in dark: white on each is already 4.5:1 or better.
-- The speaker rule is met by one page speaker in each header that reads the screen in order (early years: the
-  listen button), not a speaker on every tile, tab and button. C2 to confirm.
+- The speaker rule (P9 look-over, ruling 1): one page speaker in each header, the subject page's included, reads the
+  screen in order, skipping the draft band and the connection chip (ruling 8). That is enough where learners read
+  (s1, s2, adult reader, p2). Where Home is read on open (p1 and adult literacy) every worded button also has a
+  44 px speaker after it, subject tiles and lesson rows go one per row with a speaker at the end, and a tab says
+  its label as it switches. Early years: the listen button; nothing there is worded for the child.
+- The Who chip shows the alias picture (P10); never an initial, a nickname or a photo. Its circle is
+  `--accent-soft` with `--accent-ink`, never `--warm`, which is the one action's (ruling 4).
+- Credit lines are in the learner's language for every word Qalam writes (heads, "all rights are theirs", voices,
+  "shared with permission", the `changes` text); owners' names, titles and licence names stay as the owner wrote
+  them; a row's speaker reads in the interface language (ruling 3).
 - Interface clips: `app/audio/<lang>/manifest.json` names each recording's speaker by a code, never a name. Until
   native speakers record, the three clips there are two-note chimes marked `placeholder`, which play only on a
   tester's phone; everyone else hears the phone's voice or the "voice not ready" toast.
@@ -430,3 +442,67 @@ them. Nothing here needs Mo before 22 December 2026; one decision, D11, is added
 - **DESIGN.md:** replace "Still to design" with this note as "C2 and C3 decisions"; apply changes 2, 3, 5 and 6 to
   the C1 and "Ease of use first" text; the draft's specs are the builder's detail, filed as
   `docs/DESIGN-C2C3-SPECS.md`.
+
+## P9 look-over
+
+Thread review, 16 October 2026, as C2.9 set it: 13 of the 65 shots against the 13-point checklist (ey light and dark;
+p1 light and dark; s1 in Pashto and in English; s2 with Bigger text; adult literacy light; adult reader dark, and
+light at 1280; p2 dark at 768; the subject page for p1, and for s1 with Bigger text), and the three reports read for
+all 65. The reports stand in for the contact sheet: no shot has a problem, and the lowest text contrast is 4.6:1 in
+light and 5.42:1 in dark. Items 1, 2, 4, 8, 10, 12 and 13 pass on what was shot; 3, 5, 6 and 7 fail somewhere; 9
+could not be checked; 11 is interim. The fixes are listed at the end, and P9 is not done until they land.
+
+- Item 3 fails on p1 and p2: the Who chip's placeholder circle is `--warm`, so Home shows a second warm thing beside
+  the one warm action. Item 5 fails everywhere: one page speaker per header, and the subject page has none at all
+  (its header is a plain `topbar`). Item 6 fails in ey: `readPage` speaks the whole of `#app`, so the listen button
+  reads the draft band and "Connected" to a four-year-old. Item 7: adult literacy's "Lessons for adults are coming"
+  is Vazirmatn, not Naskh (`.lead` has no `--read-font`). Item 9: there is no Pashto with Bigger text, and nothing at
+  360 px (the shots are 390, 768 and 1280). Item 11: the chip shows the year digit, or a book, until P10's alias
+  pictures; neither is an initial or a name, so it passes for now (ruling 4).
+
+**Rulings on the nine questions**
+
+1. **Speakers.** One page speaker is enough where learners read: s1, s2, adult reader, and p2 by C1's "a speaker
+   elsewhere". It is not enough where Home is read on open. In p1 and adult literacy the owner's rule stands as
+   DESIGN writes it: a 44 px speaker beside every worded button, as C2.4 draws it, and at the end of every subject
+   tile and track row, which go one per row so it fits; a tab says its label as it switches. The page speaker stays
+   in every header, the subject page's included. ey is right as it is: nothing there is worded for the child.
+2. **Link card, source note, Credits.** C2.6 settles all three: the card, the lesson-end note and the Credits screen
+   as drawn there, in P9's tokens. P9's plain `.linkcard` and `.credit` cards are the base; the tag, the data line
+   and the offline state come with the phase that builds `link` steps, and the Credits screen with P10, as C2.6 says.
+3. **Credit lines in the learner's language: yes,** for every word Qalam writes: the heads, "all rights are theirs",
+   "a native Dari speaker", "shared with permission" and the `changes` text, through `i18n.js` or a per-language
+   field. An owner's name, a title and a licence name stay exactly as the owner wrote them (`exact_attribution`).
+   The row's speaker reads it all in `getLang()`, not `'en'`.
+4. **The Who chip until the alias picture:** the year digit, or the book for adults, as now, but on `--accent-soft`
+   in `--accent-ink`, never `--warm`: warm is the one action's. Never an initial, a nickname or a photo. P10's alias
+   picture replaces it.
+5. **Bigger text and Theme before P10:** two rows in Who is learning, under the learner rows and above the Teacher
+   and Credits links: "Bigger text" as a switch, "Theme" as three chips (Phone, Light, Dark), each row with a
+   speaker. Nothing in any header. P10 moves them into Settings unchanged.
+6. **The 2-second press** should show that it is working: pressed-down from the first touch, the lock's ring filling
+   over the 2 s with the consent ring's component (a plain pressed state under reduced motion), a short vibration
+   where the phone has one as Who opens, and a cancel when the finger lifts or leaves early. It is a mis-tap guard,
+   not a lock: "hold it" may teach a child to hold, and nothing behind it harms; removing a learner stays behind the
+   PIN.
+7. **Invert and hue-rotate in dark: yes, for line art only.** The P8 importer's line art comes out as light lines
+   with any accent colour near its own, which is what we want; a photograph, a coloured picture or an alias picture
+   is never filtered and keeps its colours on the dark page. The importer marks line art (`line: true` on the
+   picture) and only that takes `--picture-filter`.
+8. **The draft band in early years: shown, not spoken.** It tells the grown-up or tester holding a staging phone
+   what the phone is, and they can read it; it is never on a pilot phone. `readPage` skips the draft band and the
+   net chip in every band.
+9. **Subject colours in dark: accept.** White on each of the five is 4.5:1 or better (5.2 to 7.8), which is all the
+   lightening was for, and one colour per subject in both themes keeps a badge recognisable; against the dark page
+   the badges sit at 2.3 to 3.4:1, enough for a badge that always has its label beside it. DESIGN's cell becomes
+   "the same in dark; white on each is 4.5:1 or better".
+
+**P9 fixes before P10** (C2.9: failures return to P9)
+
+- Speakers as ruling 1, and a page speaker on the subject page.
+- `readPage` skips the draft band and the net chip (ruling 8).
+- The Who chip's placeholder circle on `--accent-soft` in `--accent-ink` (ruling 4).
+- `.lead` takes `--read-font`, so adult literacy reads in Naskh at 22 px.
+- Shots at 360 px, not 390: Home in Pashto with Bigger text for every band, and a lesson step, Ask, Print and Check
+  for one band per look and tone; the reports' JSON is the contact sheet, and no `index.html` is needed. Welcome,
+  consent and lock wait for P10, which rebuilds them. The chair looks at the new shots in this thread.

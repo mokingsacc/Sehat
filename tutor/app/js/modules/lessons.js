@@ -7,7 +7,7 @@
 import { getLang, s } from '../i18n.js';
 import * as library from '../library.js';
 import { speak } from '../speech.js';
-import { h, icon, playIcon, plain, speakerBtn, subjectBadge, star } from '../ui.js';
+import { h, icon, perButton, playIcon, plain, said, speakerBtn, subjectBadge, star } from '../ui.js';
 
 const hasLesson = (ctx) => !!ctx.lesson;
 
@@ -47,14 +47,16 @@ function nextClean({ child: c, lesson: l }) {
       at !== undefined ? h('div', { class: 'bar' }, h('span', { style: { width: pct + '%' } })) : null));
 }
 
+// subject tiles; in the bands with a speaker per button they go one per row, each with its speaker at the end
 function tiles({ child: c, tone }) {
+  const one = perButton();
   return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects'))),
-    h('div', { class: 'tiles' }, library.subjectOrder(c.lang).map((sub) => {
+    h('div', { class: 'tiles' + (one ? ' one' : '') }, library.subjectOrder(c.lang).map((sub) => {
       const p = library.progress(c, sub);
-      return h('a', { class: 'tile', href: '#/subject/' + sub },
+      return said(h('a', { class: 'tile', href: '#/subject/' + sub },
         subjectBadge(sub, 46),
         h('span', { class: 'grow' }, h('b', {}, s(sub)),
-          p.total ? h('small', {}, tone === 'child' ? star(14, p.done > 0) : null, s('of', { a: p.done, b: p.total })) : null));
+          p.total ? h('small', {}, tone === 'child' ? star(14, p.done > 0) : null, s('of', { a: p.done, b: p.total })) : null)));
     }))];
 }
 

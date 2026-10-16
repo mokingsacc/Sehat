@@ -7,7 +7,7 @@ import * as hub from '../hub.js';
 import * as library from '../library.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, hubChip, icon, plain, rich, speakerBtn, toast, topbar } from '../ui.js';
+import { fill, h, hubChip, icon, plain, rich, said, speakerBtn, toast, topbar } from '../ui.js';
 
 const BADGE = {
   rules: ['badge_rules', 'checked', 'check'], maths: ['badge_maths', 'checked', 'check'],
@@ -81,7 +81,7 @@ export default async function ask() {
     }), pending ? [h('div', { class: 'bubble-q' }, pending), h('div', { class: 'bubble-a' }, h('div', { class: 'text muted' }, s('thinking')))] : null);
     fill(readyBox, asks.length || pending || !ready.length ? null : [
       h('div', { class: 'muted small' }, s('ready_questions')),
-      ready.map((q) => h('button', { type: 'button', onClick: () => send(q) }, icon('ask', 22), q))]);
+      ready.map((q) => said(h('button', { type: 'button', onClick: () => send(q) }, icon('ask', 22), q)))]);
   }
 
   async function send(text) {

@@ -205,7 +205,7 @@ h2 { font-size: var(--fs-btn); }
 
 /* home */
 .who { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 14px 0 6px; border-radius: 999px; border: var(--bw) solid var(--line); background: var(--card); text-decoration: none; color: var(--ink); }
-.who .ini { width: 40px; height: 40px; border-radius: 50%; background: var(--warm); color: var(--on-warm); display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-btn); font-weight: 800; }
+.who .ini { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-btn); font-weight: 800; }
 .who b { display: block; font-size: var(--fs); line-height: 1.25; }
 .who small { display: block; font-size: var(--fs-sm); color: var(--muted); font-weight: 800; }
 .chips { display: flex; gap: 8px; overflow-x: auto; }
@@ -250,7 +250,9 @@ h2 { font-size: var(--fs-btn); }
 .step .prompt { font-family: var(--read-font); font-size: var(--fs-read); font-weight: 800; line-height: 1.7; }
 .pics { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .pics img { width: 110px; height: 110px; }
-.pics img, .opt img, .selfcheck .pics img, .next-card .pic { filter: var(--picture-filter); }   /* line art follows the theme */
+/* line art follows the theme; a photograph or coloured picture never does (P9 look-over, ruling 7). Until the importer
+   marks line art (line: true), the packs' line art is their SVG pictures */
+:is(.pics, .opt, .selfcheck .pics) img[src$=".svg"], .next-card img.pic[src$=".svg"] { filter: var(--picture-filter); }
 .pics.many img { width: 70px; height: 70px; }
 .listen-row { display: flex; align-items: center; gap: 14px; width: 100%; text-align: start; }
 .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; width: 100%; }
@@ -430,7 +432,7 @@ h2 { font-size: var(--fs-btn); }
 .round.corner { width: 44px; height: 44px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none; }
 .done-big { width: 88px; height: 88px; border-radius: 50%; background: var(--good-soft); border: 3px solid var(--good); color: var(--good-ink);
   display: inline-flex; align-items: center; justify-content: center; }
-.lead { margin: 0; font-size: var(--fs-read); line-height: 1.7; font-weight: 800; }
+.lead { margin: 0; font-family: var(--read-font); font-size: var(--fs-read); line-height: 1.7; font-weight: 800; }
 :root[dir="ltr"] .preview iframe { transform-origin: top left; right: auto; left: 0; }
 /* an English interface still shows Dari and Pashto pack text: each paragraph of pack text takes the direction of
    its own first letter, so "حرف «ش»" keeps its marks the right way round */
@@ -438,3 +440,17 @@ h2 { font-size: var(--fs-btn); }
 :root[dir="ltr"] :is(.i-back, .i-next, .i-chev) { transform: scaleX(-1); }
 :root[dir="ltr"] :is(.title, .read, .prompt, .word, .why, .opt, .naskh, .step h1, .top h1, .grow > b) { unicode-bidi: plaintext; }
 @media (prefers-reduced-motion: reduce) { .btn:active { transform: none; } }
+
+/* a speaker beside every worded button, tile and row in years 1 to 3 and adult literacy (P9 look-over, ruling 1) */
+.said { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.said > :first-child { flex: 1 1 auto; min-width: 0; }
+.said > .speaker { flex: none; }
+.actions .said { flex: 1 1 0; }
+.actions .said.main { flex: 2 1 0; }
+.actions .said > .btn { flex: 1 1 auto; }
+.tiles.one { grid-template-columns: minmax(0, 1fr); }
+.answer-in .said { flex: none; }
+.row.wrap { flex-wrap: wrap; }
+.finish .said { width: 100%; }
+.sheet-card .said { flex: none; }
+.btn svg { flex: none; }

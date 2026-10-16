@@ -9,7 +9,7 @@
 // of the app. Run from tutor/:
 //   PLAYWRIGHT=/path/to/node_modules/playwright CHROMIUM=/path/to/chrome \
 //     node tools/browser_check.mjs --hub http://127.0.0.1:8000 --out shots/ [--screen home] [--widths 390,768,1280]
-//       [--langs prs,ps,en] [--variants light,dark,bigger] [--full]
+//       [--langs prs,ps,en] [--variants light,dark,bigger] [--bands p1,s1,ad-literacy] [--full]
 // A shot is what the screen shows when the page opens (--full: the whole page, with the tab bar where the screen
 // ends); the checks always cover the whole page.
 // Exit code 1 when a check fails. No learner name is ever seeded: a learner is a band, a year and settings.
@@ -46,6 +46,7 @@ const ALL_VARIANTS = [
   { tag: 'bigger', theme: 'light', text: 'large' },
 ];
 const LANGS = (args.langs || 'prs').split(',');
+const BAND_TAGS = args.bands ? args.bands.split(',') : null;          // --bands p1,s1,ad-literacy: only these
 const VARIANTS = args.variants ? ALL_VARIANTS.filter((v) => args.variants.split(',').includes(v.tag)) : ALL_VARIANTS;
 
 // runs in the page: every check that needs the layout
@@ -138,7 +139,7 @@ const report = [];
 let failed = 0;
 for (const width of WIDTHS) {
   for (const lang of LANGS) {
-    for (const l of LEARNERS) {
+    for (const l of LEARNERS.filter((x) => !BAND_TAGS || BAND_TAGS.includes(x.tag))) {
       for (const v of VARIANTS) {
         const ctx = await browser.newContext({ viewport: { width, height: 844 }, colorScheme: 'light', deviceScaleFactor: 2 });
         const page = await ctx.newPage();

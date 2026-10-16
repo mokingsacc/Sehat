@@ -7,7 +7,7 @@ import { fa, getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as state from '../state.js';
-import { h, hubChip, icon, plain, topbar } from '../ui.js';
+import { h, hubChip, icon, plain, said, topbar } from '../ui.js';
 
 const FINAL = new Set(['done', 'saved', 'failed']);
 
@@ -40,6 +40,7 @@ export default async function print([id]) {
   const pinRow = h('div', { class: 'pin hidden' }, icon('lock', 24), pinIn);
   const printerBox = h('div', { class: 'printer' });
   const go = h('button', { class: 'btn warm big', type: 'button', onClick: send }, icon('printer', 30, 2.4), s('print_it'));
+  const goBox = said(go);
   const pdf = h('a', { class: 'link', target: '_blank', rel: 'noopener' }, icon('file', 20), s('get_pdf'));
   const segBtns = [['worksheet', 'practice_sheet'], ['answers', 'answer_sheet']].map(([k, label]) =>
     h('button', { type: 'button', 'aria-pressed': 'false', onClick: () => { kind = k; update(); } }, s(label)));
@@ -125,7 +126,7 @@ export default async function print([id]) {
     topbar({ back: '#/home', sub: s('todays_sheet'), title: plain(L.title), extra: hubChip() }),
     h('div', { class: 'seg2', role: 'group' }, segBtns),
     preview,
-    h('div', { class: 'card pad-card stack' }, stepper, pinRow, go, status, printerBox,
+    h('div', { class: 'card pad-card stack' }, stepper, pinRow, goBox, status, printerBox,
       h('div', { class: 'row between' }, pdf,
         h('a', { class: 'link', href: `#/check/${encodeURIComponent(L.id)}/${seed}` }, icon('check', 20), s('check_sheet')))));
   update();

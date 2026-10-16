@@ -1,9 +1,11 @@
 // Small building blocks shared by every screen. Text from lessons and answers is always added as text, never as
 // HTML, so nothing a hub or a model sends can run in the page.
 
+import { speakerPerButton } from './bands.js';
 import { fa, getLang, pick, s } from './i18n.js';
 import * as hub from './hub.js';
 import * as modules from './modules.js';
+import { sayKey, speak } from './speech.js';
 
 export function h(tag, props, ...kids) {
   const el = document.createElement(tag);
@@ -101,6 +103,45 @@ export function speakerBtn(onClick, { size = 'md', label = s('hear'), solid = fa
     'data-page': page || null }, icon('speaker', SPEAKER_ICON[size] || 26));
 }
 
+// the band on screen wants a speaker beside every worded button (bands.speakerPerButton)
+export function perButton(root = document.documentElement) {
+  const d = (root && root.dataset) || {};
+  return speakerPerButton(d.band, d.band === 'ad' && d.look === 'bold' ? 'literacy' : null);
+}
+
+// a worded button (or row link) with its own 44 px speaker after it, in the bands that want one; elsewhere the
+// button alone. The speaker reads what the button says when it is tapped, so a label that changes stays right.
+export function said(btn, text) {
+  if (!btn || !perButton()) return btn;
+  const read = () => speak(text || btn.textContent.replace(/\s+/g, ' ').trim(), getLang());
+  return h('span', { class: 'said' }, btn, speakerBtn(read, { size: 'sm' }));
+}
+
+// what a page says, in reading order: its text, without the parts that are not for the learner (the draft band and
+// the connection chip, marked data-silent), and without anything hidden (P9 look-over, ruling 8)
+export function readText(root) {
+  const out = [];
+  const walk = (el) => {
+    for (const n of el.childNodes) {
+      if (n.nodeType === 3) { if (n.textContent.trim()) out.push(n.textContent.trim()); continue; }
+      if (n.nodeType !== 1 || n.hasAttribute('data-silent') || n.getAttribute('aria-hidden') === 'true') continue;
+      if (n.classList.contains('hidden') || n.tagName === 'SCRIPT' || n.tagName === 'STYLE') continue;
+      if (n.tagName === 'INPUT' || n.tagName === 'TEXTAREA') continue;
+      walk(n);
+    }
+  };
+  walk(root);
+  return out.join(' ').replace(/\s+/g, ' ').trim();
+}
+
+export function readPage(root) { speak(readText(root), getLang()); }
+
+// the header's page speaker, which reads the screen in order
+export function pageSpeaker(root) {
+  return speakerBtn(() => readPage(root || document.getElementById('app') || document.body),
+    { size: 'sm', label: s('hear_page'), page: true });
+}
+
 let toastTimer = null;
 export function toast(msg) {
   let el = document.getElementById('toast');
@@ -114,7 +155,7 @@ export function toast(msg) {
 export function hubChip() {
   const on = hub.online();
   const i = hub.info();
-  return h('span', { class: `hubchip ${on ? 'on' : 'off'}`, title: on ? i.hub : '' },
+  return h('span', { class: `hubchip ${on ? 'on' : 'off'}`, title: on ? i.hub : '', 'data-silent': '' },
     h('span', { class: 'dot' }), on ? s('hub_on') : s('hub_off'));
 }
 
@@ -122,14 +163,25 @@ export function hubChip() {
 export function nav(active) {
   return h('nav', { class: 'tabs', 'aria-label': s('app') },
     modules.tabs().map(({ icon: ic, key, href }) => h('a', { href, class: key === active ? 'on' : '',
-      'aria-current': key === active ? 'page' : null }, icon(ic, 28, 2.3), h('span', {}, s(key)))));
+      'aria-current': key === active ? 'page' : null, onClick: () => { if (perButton()) tabSaid = key; } },
+    icon(ic, 28, 2.3), h('span', {}, s(key)))));
 }
 
-export function topbar({ back = '#/home', title, sub, extra } = {}) {
+// a tab says its label as it switches, in the bands with a speaker per button (P9 look-over, ruling 1); the router
+// says it once the new screen is drawn, since drawing a screen stops whatever was playing
+let tabSaid = null;
+export function sayTab() {
+  const key = tabSaid;
+  tabSaid = null;
+  if (key) sayKey(key, getLang());
+}
+
+// every header keeps the page speaker (P9 look-over, ruling 1), which reads the whole screen
+export function topbar({ back = '#/home', title, sub, extra, speaker = true } = {}) {
   return h('header', { class: 'top' },
     back ? h('a', { class: 'round', href: back, 'aria-label': s('back') }, icon('back', 24, 2.5)) : null,
     h('div', { class: 'grow' }, sub ? h('div', { class: 'kicker' }, sub) : null, title ? h('h1', {}, title) : null),
-    extra || null);
+    speaker ? pageSpeaker() : null, extra || null);
 }
 
 export const SUBJECTS = ['maths', 'science', 'english', 'dari', 'pashto'];

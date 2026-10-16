@@ -64,7 +64,9 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   strings; `qalam.v2` with no name (v1 migrated, names dropped; Welcome and Print lost their name fields);
   `speech.js` plays recorded clips before the phone's voice, with labelled placeholder chimes until native speakers
   record; `tools/browser_check.mjs` checks every band in light, dark and Bigger text. Bigger text and the theme get
-  their switches in P10's Settings.
+  their switches in P10's Settings. After the chair's look-over: a speaker beside every worded button and row in
+  years 1 to 3 and adult literacy, a page speaker in every header, the draft band and the chip never read aloud, the
+  Who chip off the warm colour, adult literacy's lead line in Naskh; new shots at 360 px.
 - **C2 and C3 held** with C0 and C1 on 16 October: the sheets, the camera, results and hints, Home in and out of
   school, the offline chip, link cards and Credits, early years' modules, the `open` cohort, the school day, the
   staff pages, Learn this and the Android app are specified (DESIGN.md, "C2 and C3 decisions", and
