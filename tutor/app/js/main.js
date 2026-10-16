@@ -1,6 +1,7 @@
 // Start-up and the router. One screen at a time, chosen by the address after # (so the phone's Back button
 // works). Each screen is a function that returns { el, tab, cleanup, onHub }.
 
+import * as events from './events.js';
 import { getLang, s, setLang } from './i18n.js';
 import * as hub from './hub.js';
 import * as library from './library.js';
@@ -96,6 +97,7 @@ async function boot() {
   modules.sync();               // the hub's list, else the one kept on the phone, else the built-in five
   await modules.load();
   await route();
+  events.start();                // send what earlier visits queued, and again whenever the hub comes back
   if (late) connecting.then((ok) => { if (ok) hubCameBack(); });
   // walking into the hub's Wi-Fi lights the app up without a reload; while connected, the modules switched on
   // are read again every minute, so a module the teacher or admin switches off leaves the phones within a minute

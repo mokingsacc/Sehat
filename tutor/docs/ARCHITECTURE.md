@@ -23,7 +23,7 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | Folder | What it is |
 |---|---|
 | `app/` | The phone app: plain HTML, CSS and JavaScript modules, no build step. The hub serves it at `/`. |
-| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database, `llm.py` the AI slot. |
+| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `events.py` nameless events, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database, `llm.py` the AI slot. |
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
 | `tools/` | `validate_pack.py` checks packs; `make_sheets.py` prints every sheet to PDF for reviewers. |
@@ -65,6 +65,25 @@ is on when its flag is on, its `depends` are on, the cohort takes its maturity, 
 module and the cohort serve that band. The hub's own cohort is `TUTOR_COHORT`, by default the id in `cohorts/hub.json`;
 a request may name another with `?cohort=`. Flags are read on every request, so a switch reaches the next one, and a
 switched-off module's routes answer 404 as if they were never there.
+
+## Events without names (events.py)
+
+An event says what happened, never who: `{at, verb, object, value}`, the UTC minute, a verb from the fixed list in
+`events.py`, an id (a lesson, or where an answer came from) and a number when the verb has one (stars, copies). The
+hub derives the module from the verb and adds the cohort; `token_hash` stays empty until learners have tokens (P10).
+The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted at start-up after that).
+
+- **From the phone** (`app/js/events.js`): `lesson.start` and `lesson.done`, recorded by `state.js` and kept in a
+  queue on the phone (`qalam.events.v1`, at most 500) until the hub is in reach, then sent with
+  `POST /api/events`, at most 100 at a time. A batch that did not arrive stays queued; one the hub refuses is dropped.
+- **From the hub's own routes:** `ask.answered` (with the answer's source), `ask.to_teacher`, `print.queued` (lesson,
+  copies), `check.key` (a sheet's key was fetched), `review.approved` and `review.rejected` (the question's lesson).
+  A phone cannot send these. Writing one never breaks the route that made it.
+- **Refused:** any field besides the four (so no free text), an unknown verb, an object that is not a plain id or
+  has a run of five digits or more, a value out of range; the whole batch is refused (422). A time in the future
+  becomes now; one older than 12 months is not kept. The store itself refuses a row with any column it does not
+  know. `tests/test_events.py` also scans every table for a column that could hold a name, sex, birth date, phone
+  number or address.
 
 ## Answering a question (brain.py)
 
@@ -108,6 +127,7 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 - The hub stores no names. A question is kept with a random token (so the asking phone can fetch the teacher's
   answer), the year, subject and lesson; questions are deleted after `TUTOR_KEEP_DAYS` (60).
 - Progress, names and the asked-questions list stay on the phone (`localStorage`, key `qalam.v1`).
+- Events (above) are verbs and ids with no name, no free text and, for now, no learner token; they stay on the hub.
 - Nothing leaves the hub: there is no internet connection and no analytics.
 
 ## Routes
@@ -115,6 +135,7 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | Route | What |
 |---|---|
 | `GET /api/hello` | Hub name, version and `core`, lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
+| `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}` (`?cohort=`) |
 | `GET /api/packs` | Every pack and its lesson list (no lesson content) |
 | `GET /api/lessons/{id}` | One lesson, picture names turned into URLs, without the sheet |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |
@@ -129,7 +150,8 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jobs), `check` (the sheet key),
-`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello` and the app's files are always there.
+`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello`, `/api/events` and the app's files are
+always there.
 
 ## The app (app/js)
 
@@ -147,6 +169,8 @@ pictures), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jo
   Print button, since Print is a tab. A screen whose module is off sends the phone Home. While connected, the app
   re-reads `/api/hello` every minute, so a module switched off leaves the phones within a minute.
   `app/tests/modules.test.js` (`node --test`) checks the shell.
+- `events.js` queues the phone's events (lesson started, lesson done) and sends them when the hub is in reach;
+  `app/tests/events.test.js` checks the queue.
 - `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
   child's year, one subject after another. Every lesson stays open from the subject pages.
 - Text from lessons, the hub or the AI is always added as text, never as HTML.

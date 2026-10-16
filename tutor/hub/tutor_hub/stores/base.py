@@ -44,7 +44,18 @@ Cohorts and flags (flags.py decides what they mean)
 - `set_flag(cid, module, *, enabled, settings=None, changed_by)`: sets the switch and adds the same row to the log,
   together. `changed_by` is a role, never a name.
 - `flag_log(cid, limit=50) -> list`: the cohort's changes, newest first.
+
+Events (events.py decides what may be in them)
+- `add_events(rows) -> int`: appends every row, all or none, and returns how many. A row has exactly the keys
+  `at, token_hash, cohort, module, verb, object, value` (`EVENT_FIELDS`); a row with any other key, or without one
+  of these, raises ValueError and nothing is written, so no stray field (a name, free text) can reach the table.
+  `at` is the caller's UTC minute, kept as given.
+- `events(cid, limit=100) -> list`: the cohort's events, newest first (by `at`, then the order they were added).
+- `prune_events(keep_days)`: deletes events whose `at` is more than `keep_days` days old.
 """
+
+EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
+
 
 
 class Store:
@@ -116,4 +127,14 @@ class Store:
         raise NotImplementedError
 
     async def flag_log(self, cid, limit=50) -> list[dict]:
+        raise NotImplementedError
+
+    # events
+    async def add_events(self, rows: list[dict]) -> int:
+        raise NotImplementedError
+
+    async def events(self, cid, limit=100) -> list[dict]:
+        raise NotImplementedError
+
+    async def prune_events(self, keep_days: int) -> None:
         raise NotImplementedError

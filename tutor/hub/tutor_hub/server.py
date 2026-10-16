@@ -19,9 +19,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
-from . import __version__, flags, modules, search, sheets
+from . import __version__, events, flags, modules, search, sheets
 from .brain import Brain
 from .config import Config
 from .llm import LLM
@@ -54,6 +54,20 @@ class PrintIn(BaseModel):
     lang: str = "prs"
     seed: int | None = Field(None, ge=0, le=99999)
     name: str | None = Field(None, max_length=40)
+
+
+class EventIn(BaseModel):
+    """One event from a phone's queue: these four fields and nothing else (events.py checks what is in them)."""
+    model_config = ConfigDict(extra="forbid")
+    at: StrictStr = Field(..., max_length=16)
+    verb: StrictStr = Field(..., max_length=32)
+    object: StrictStr | None = Field(None, max_length=64)
+    value: StrictInt | None = None
+
+
+class EventsIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    events: list[EventIn] = Field(..., min_length=1, max_length=events.MAX_BATCH)
 
 
 # after each round of five wrong PINs a phone waits longer: a minute, 15 minutes, then an hour each time
@@ -112,6 +126,7 @@ class Hub:
         self.print_lock = asyncio.Lock()
         self.ask_limit = Limit(10, 60)
         self.pdf_limit = Limit(10, 60)
+        self.event_limit = Limit(30, 60)
 
     async def start(self):
         await self.store.open()
@@ -120,6 +135,7 @@ class Hub:
         if not self.cohort_id or not await self.store.cohort(self.cohort_id):
             log.error("this hub's cohort (TUTOR_COHORT=%s) does not exist: every module is off", self.cohort_id)
         await self.store.prune(self.cfg.keep_days)
+        await self.store.prune_events(events.KEEP_DAYS)
         await self.store.fail_unfinished_prints()
         await self.reindex()
         self.prints = PrintQueue(self.store.sync, self.printer, self.render_pdf)
@@ -147,6 +163,20 @@ class Hub:
             else:
                 self._fails[who] = (n, 0.0, rounds, last)
             raise HTTPException(401, "teacher PIN needed")
+
+    async def record(self, verb: str, obj=None, value=None, cohort_id: str | None = None):
+        """An event the hub writes itself (Ask, printing, a sheet key, the teacher's review). It never breaks the
+        route that made it: a problem is logged and the route carries on."""
+        e = {"at": events.minute(), "verb": verb, "object": obj, "value": value}
+        problems = events.check(e, phone=False)
+        cid = cohort_id or self.cohort_id
+        if problems or not cid:
+            log.warning("event %s not kept: %s", verb, "; ".join(problems) or "no cohort")
+            return
+        try:
+            await self.store.add_events([events.row(e, cohort=cid)])
+        except Exception:
+            log.exception("event %s not kept", verb)
 
     async def reindex(self):
         async with self._ix_lock:
@@ -287,6 +317,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                                              question=a.text.strip(),
                                              answer=None if ans.waiting and ans.source != "rules" else ans.text,
                                              source=ans.source, urgent=ans.urgent, waiting=ans.waiting)
+        await hub.record("ask.answered", ans.source, cohort_id=request.query_params.get("cohort"))
         return dict(ans.dict(), id=token)
 
     @app.get("/api/ask/{token}", dependencies=needs("ask"))
@@ -297,10 +328,26 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return {"id": token, "status": q["status"], "teacher_answer": q["teacher_answer"]}
 
     @app.post("/api/ask/{token}/teacher", dependencies=needs("ask"))
-    async def ask_teacher(token: str):
+    async def ask_teacher(token: str, request: Request):
         if not await hub.store.send_to_teacher(token):
             raise HTTPException(404, "no such question")
+        await hub.record("ask.to_teacher", cohort_id=request.query_params.get("cohort"))
         return {"ok": True}
+
+    # events from the phones' queues: verbs and ids only (events.py)
+    @app.post("/api/events")
+    async def post_events(body: EventsIn, request: Request, cohort: str | None = None):
+        hub.event_limit.check(_who(request))
+        c = await hub.store.cohort(cohort or hub.cohort_id or "")
+        if not c:
+            raise HTTPException(404, "no such cohort")
+        items = [e.model_dump() for e in body.events]
+        problems = [f"event {i + 1}: {p}" for i, e in enumerate(items) for p in events.check(e, phone=True)]
+        if problems:
+            raise HTTPException(422, "; ".join(problems[:10]))
+        rows = [r for r in (events.row(e, cohort=c["id"]) for e in items) if r]
+        await hub.store.add_events(rows)
+        return {"saved": len(rows), "expired": len(items) - len(rows)}
 
     # worksheets
     def _seed(lid, seed):
@@ -331,11 +378,13 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                         headers={"Content-Disposition": f'inline; filename="{code}.pdf"', "X-Sheet-Seed": str(seed)})
 
     @app.get("/api/sheets/{lid}/key", dependencies=needs("check"))
-    async def sheet_key(lid: str, seed: int = 0, lang: str = "prs"):
+    async def sheet_key(lid: str, request: Request, seed: int = 0, lang: str = "prs"):
         l = hub.lesson(lid)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
-        return sheets.answer_key(l, seed, _lang(lang), hub.picture_url(lid))
+        key = sheets.answer_key(l, seed, _lang(lang), hub.picture_url(lid))
+        await hub.record("check.key", events.lesson_id(lid), cohort_id=request.query_params.get("cohort"))
+        return key
 
     # printing
     @app.post("/api/print", dependencies=needs("print"))
@@ -356,6 +405,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         hub.prints.add(jid, {"lesson": p.lesson, "kind": p.kind, "copies": p.copies, "lang": _lang(p.lang),
                              "seed": seed, "name": (p.name or "").strip() or None,
                              "title": f"{l['sheet']['code']}-{seed}" if seed else l["sheet"]["code"]})
+        await hub.record("print.queued", events.lesson_id(p.lesson), p.copies,
+                         cohort_id=request.query_params.get("cohort"))
         return {"id": jid, "status": "queued", "seed": seed, "printer": hub.printer.status()}
 
     @app.get("/api/print/{jid}", dependencies=needs("print"))
@@ -388,6 +439,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         q = await hub.store.review(qid, answer=body.answer, approve=body.approve)
         if not q:
             raise HTTPException(404, "no such question")
+        await hub.record("review.approved" if q["status"] == "reviewed" else "review.rejected",
+                         events.lesson_id(q.get("lesson_id")), cohort_id=request.query_params.get("cohort"))
         if body.approve:
             await hub.reindex()
         q.pop("token", None)

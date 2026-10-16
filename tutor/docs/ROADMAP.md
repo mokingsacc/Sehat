@@ -26,7 +26,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **P1, done:** module manifests for the five built features, cohorts and flags (seeded, logged), `/api/hello`
   listing the modules on, and a switched-off module's routes answering 404.
 - **P2, done:** the app loads only the modules that are on: a slot registry, tabs and Home actions from
-  `hello.modules`, one primary, one secondary and one list on Home, the cached list offline. Then P4 to P7: events without names, the AI gateway, the D1 store, the Worker on staging.
+  `hello.modules`, one primary, one secondary and one list on Home, the cached list offline.
+- **P4, done:** events without names: `events` (migration 0003), `POST /api/events` from a queue on the phone
+  (lesson started and done, kept offline), the hub's own events for Ask, printing, sheet keys and the teacher's
+  review; free text and unknown verbs refused; a scan that fails on any column that could hold a name, sex, birth
+  date, phone number or address.
+- Then P5 to P7: the AI gateway, the D1 store, the Worker on staging.
 
 ## January 2027: buy and test
 

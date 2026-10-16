@@ -1,6 +1,9 @@
 // What the phone remembers: the children who use it, their year and language, lessons done, sheets printed and
 // questions asked. It stays on this phone only (the hub keeps no names). Storage can fail (private mode, full):
-// the app then still works, it just forgets on reload.
+// the app then still works, it just forgets on reload. Starting and finishing a lesson also join the events queue
+// (events.js) as a verb and the lesson id, never the child.
+
+import * as events from './events.js';
 
 const KEY = 'qalam.v1';
 const empty = () => ({ v: 1, active: null, children: [] });
@@ -57,11 +60,17 @@ export function markDone(lessonId, stars) {
   delete c.step[lessonId];
   if (c.tries) delete c.tries[lessonId];
   save();
+  events.record('lesson.done', lessonId, stars);
 }
 
 export function setStep(lessonId, i) {
   const c = child();
-  if (c) { c.step[lessonId] = i; c.last = lessonId; save(); }
+  if (!c) return;
+  const fresh = c.step[lessonId] === undefined;      // not started, or started again after it was done
+  c.step[lessonId] = i;
+  c.last = lessonId;
+  save();
+  if (fresh) events.record('lesson.start', lessonId);
 }
 
 // right or wrong on the first try, per question step, kept until the lesson is done so stars stay fair

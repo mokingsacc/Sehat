@@ -106,6 +106,7 @@ export async function lesson(id) {
 export const ask = (q) => call('/api/ask', { method: 'POST', body: q, ms: 90000 });
 export const askStatus = (id) => call('/api/ask/' + id);
 export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST' });
+export const sendEvents = (list) => call('/api/events', { method: 'POST', body: { events: list }, ms: 15000 });
 export const printSheet = (job, pin) => call('/api/print', { method: 'POST', body: job, pin });
 export const printStatus = (id) => call('/api/print/' + id);
 export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}`);

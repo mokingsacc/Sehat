@@ -160,3 +160,13 @@ class SqliteStore(Store):
 
     async def flag_log(self, cid, limit=50):
         return await self._run("flag_log", cid, limit)
+
+    # events
+    async def add_events(self, rows) -> int:
+        return await self._run("add_events", rows)
+
+    async def events(self, cid, limit=100):
+        return await self._run("events", cid, limit)
+
+    async def prune_events(self, keep_days: int):
+        return await self._run("prune_events", keep_days)

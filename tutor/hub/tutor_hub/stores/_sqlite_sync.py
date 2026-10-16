@@ -1,4 +1,5 @@
-"""The hub's own records in one SQLite file: questions, the teacher's approved answers, and print jobs.
+"""The hub's own records in one SQLite file: questions, the teacher's approved answers, print jobs, cohorts and
+flags, and nameless events.
 This is the blocking half of stores/sqlite.py; routes reach it only through SqliteStore.
 
 Privacy rule: the hub never stores a child's name. Questions are anonymous (a random token lets the asking phone
@@ -10,6 +11,8 @@ import secrets
 import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
+
+from .base import EVENT_FIELDS
 
 
 def now() -> str:
@@ -188,3 +191,32 @@ class Store:
     def flag_log(self, cid, limit=50):
         return [dict(r, enabled=bool(r["enabled"]), settings=json.loads(r["settings"]))
                 for r in self._all("SELECT * FROM flag_log WHERE cohort=? ORDER BY id DESC LIMIT ?", (cid, limit))]
+
+    # events
+    def add_events(self, rows) -> int:
+        """Append the rows, all or none; a row with a field outside EVENT_FIELDS is refused before anything is written."""
+        rows = list(rows)
+        for r in rows:
+            if not isinstance(r, dict) or set(r) != set(EVENT_FIELDS):
+                raise ValueError(f"an event row has exactly these fields: {', '.join(EVENT_FIELDS)}")
+        if not rows:
+            return 0
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                self.db.executemany(f"INSERT INTO events({', '.join(EVENT_FIELDS)}) "
+                                    f"VALUES({', '.join('?' * len(EVENT_FIELDS))})",
+                                    [tuple(r[k] for k in EVENT_FIELDS) for r in rows])
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+        return len(rows)
+
+    def events(self, cid, limit=100):
+        return self._all(f"SELECT id, {', '.join(EVENT_FIELDS)} FROM events WHERE cohort=? "
+                         "ORDER BY at DESC, id DESC LIMIT ?", (cid, limit))
+
+    def prune_events(self, keep_days: int):
+        cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime("%Y-%m-%dT%H:%M")
+        self._x("DELETE FROM events WHERE at<?", (cut,))

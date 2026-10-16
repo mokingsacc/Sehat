@@ -271,3 +271,39 @@ async def test_every_flag_change_is_logged(store):
                                                                          ("print", True, {"copies": 2})]
     assert len(await store.flag_log("zz99yy88xx", limit=1)) == 1
     assert len(await store.flag_log("abcd1234ef")) == 2          # another cohort's log is untouched
+
+
+# events
+
+def ev(verb="lesson.start", at="2026-10-16T09:41", cohort="abcd1234ef", **kw):
+    return dict({"at": at, "token_hash": None, "cohort": cohort, "module": "lessons", "verb": verb,
+                 "object": "dari-1-sheen", "value": None}, **kw)
+
+
+async def test_events_are_appended_and_read_newest_first(store):
+    assert await store.add_events([]) == 0
+    assert await store.add_events([ev(at="2026-10-16T09:41"), ev("lesson.done", at="2026-10-16T09:50", value=3),
+                                   ev(at="2026-10-15T08:00"), ev(cohort="zz99yy88xx")]) == 4
+    rows = await store.events("abcd1234ef")
+    assert [(r["verb"], r["at"], r["value"]) for r in rows] == [("lesson.done", "2026-10-16T09:50", 3),
+                                                                ("lesson.start", "2026-10-16T09:41", None),
+                                                                ("lesson.start", "2026-10-15T08:00", None)]
+    assert set(rows[0]) == {"id", "at", "token_hash", "cohort", "module", "verb", "object", "value"}
+    assert len(await store.events("abcd1234ef", limit=1)) == 1 and len(await store.events("zz99yy88xx")) == 1
+
+
+@pytest.mark.parametrize("bad", [dict(ev(), name="Maryam"), dict(ev(), note="free text"),
+                                 {k: v for k, v in ev().items() if k != "verb"}, "lesson.start"])
+async def test_an_event_row_with_a_stray_field_writes_nothing(store, bad):
+    with pytest.raises(ValueError):
+        await store.add_events([ev(), bad])
+    assert await store.events("abcd1234ef") == []
+
+
+async def test_prune_events_keeps_the_recent_ones(store):
+    from datetime import datetime, timedelta, timezone
+    old = (datetime.now(timezone.utc) - timedelta(days=400)).strftime("%Y-%m-%dT%H:%M")
+    new = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M")
+    await store.add_events([ev(at=old), ev(at=new)])
+    await store.prune_events(365)
+    assert [r["at"] for r in await store.events("abcd1234ef")] == [new]
