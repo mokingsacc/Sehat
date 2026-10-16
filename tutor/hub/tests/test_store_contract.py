@@ -1,13 +1,18 @@
-"""The store contract (stores/base.py), run against every store: SQLite now, the D1 fake from P6.
+"""The store contract (stores/base.py), run against every store: the hub's SQLite and D1 (through the fake in
+tests/fakes/d1.py, SQLite behind D1's call shape).
 
-Also the migrations: a fresh database and one made by the hub's code before migrations end with the same tables, and
-running them again changes nothing.
+Also the migrations, the same files through the same mechanism (stores/migrations.py) on both: a fresh database and
+one made by the hub's code before migrations end with the same tables, SQLite and D1 end with the same tables, and
+running them again changes nothing. And the fake itself, which must be as strict as D1.
 """
+import asyncio
 import re
 import sqlite3
 import pytest
 
-from tutor_hub.stores import SqliteStore
+from fakes.d1 import JS_NULL, FakeD1, JsArray, JsException, ffi as fake_ffi
+from tutor_hub.stores import D1Store, SqliteStore
+from tutor_hub.stores.migrations import statements
 from tutor_hub.stores.sqlite import MIGRATIONS, migrate, migration_files
 
 pytestmark = pytest.mark.anyio
@@ -53,7 +58,11 @@ def make_sqlite(tmp_path):
     return SqliteStore(tmp_path / "hub.db")
 
 
-STORES = {"sqlite": make_sqlite}
+def make_d1(tmp_path, folder=MIGRATIONS, db=None):
+    return D1Store(db or FakeD1(tmp_path / "d1.db"), ffi=fake_ffi, migrations=folder)
+
+
+STORES = {"sqlite": make_sqlite, "d1": make_d1}
 
 
 @pytest.fixture(params=sorted(STORES))
@@ -62,6 +71,8 @@ async def store(request, tmp_path):
     await s.open()
     yield s
     await s.close()
+    if isinstance(s, D1Store):
+        s.db.sqlite.close()
 
 
 async def ask(store, text="?", *, waiting=False, urgent=False, source="bank", answer="an answer"):
@@ -139,6 +150,81 @@ def test_badly_named_migrations_are_refused(tmp_path):
     (tmp_path / "init.sql").write_text("SELECT 1;", encoding="utf-8")
     with pytest.raises(ValueError):
         migration_files(tmp_path)
+
+
+def test_a_migration_splits_into_statements_without_comments():
+    sql = """-- a comment; with a semicolon
+    CREATE TABLE IF NOT EXISTS a(x TEXT DEFAULT 'one; -- two', "y;z" INTEGER); /* also; a comment */
+    INSERT INTO a(x) VALUES('it''s; fine');
+    """
+    assert statements(sql) == ["CREATE TABLE IF NOT EXISTS a(x TEXT DEFAULT 'one; -- two', \"y;z\" INTEGER)",
+                               "INSERT INTO a(x) VALUES('it''s; fine')"]
+    for bad in ("PRAGMA foreign_keys=OFF;", "BEGIN; CREATE TABLE a(x); COMMIT;", "SELECT 'open",
+                "CREATE TRIGGER t AFTER INSERT ON a BEGIN SELECT 1; END;"):
+        with pytest.raises(ValueError):
+            statements(bad)
+    for f in migration_files():                     # every real file splits into complete statements
+        assert all(sqlite3.complete_statement(x + ";") for x in statements(f.read_text(encoding="utf-8"))), f.name
+
+
+async def test_sqlite_and_d1_end_with_the_same_tables(tmp_path):
+    hub, d1 = make_sqlite(tmp_path), make_d1(tmp_path)
+    for s in (hub, d1):
+        await s.open()
+        await s.close()
+    d1.db.sqlite.close()
+    assert shape(tmp_path / "hub.db") == shape(tmp_path / "d1.db")
+    ids = [f.stem for f in migration_files()]
+    for path in ("hub.db", "d1.db"):
+        db = sqlite3.connect(tmp_path / path)
+        assert [r[0] for r in db.execute("SELECT id FROM schema_migrations ORDER BY id")] == ids
+        db.close()
+
+
+async def test_d1_migrations_run_from_empty_and_again_without_harm(tmp_path):
+    db = FakeD1(tmp_path / "d1.db")
+    await make_d1(tmp_path, db=db).open()
+    before = shape(tmp_path / "d1.db")
+    first = db.sqlite.execute("SELECT id, applied_at FROM schema_migrations ORDER BY id").fetchall()
+    assert [r[0] for r in first] == [f.stem for f in migration_files()]
+    queries = db.queries
+    again = make_d1(tmp_path, db=db)                 # a new Worker isolate on the same database
+    await again.open()
+    await again.open()                               # and opening twice is once
+    assert db.queries - queries == 2                 # the ledger's CREATE IF NOT EXISTS and one read: nothing applied
+    assert shape(tmp_path / "d1.db") == before
+    assert db.sqlite.execute("SELECT id, applied_at FROM schema_migrations ORDER BY id").fetchall() == first
+    db.sqlite.close()
+
+
+async def test_d1_a_failed_migration_leaves_no_trace(tmp_path):
+    folder = tmp_path / "migrations"
+    folder.mkdir()
+    (folder / "0001_init.sql").write_text("CREATE TABLE IF NOT EXISTS a(x);", encoding="utf-8")
+    (folder / "0002_broken.sql").write_text("CREATE TABLE IF NOT EXISTS b(x);\nNOT SQL AT ALL;", encoding="utf-8")
+    db = FakeD1(tmp_path / "d1.db")
+    with pytest.raises(JsException):
+        await make_d1(tmp_path, folder, db).open()
+    tables = {r[0] for r in db.sqlite.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    assert "a" in tables and "b" not in tables
+    assert [r[0] for r in db.sqlite.execute("SELECT id FROM schema_migrations")] == ["0001_init"]
+    db.sqlite.close()
+
+
+async def test_two_workers_opening_at_once_apply_each_migration_once(tmp_path):
+    db = FakeD1(tmp_path / "d1.db")
+    await asyncio.gather(*(make_d1(tmp_path, db=db).open() for _ in range(3)))
+    ids = [r[0] for r in db.sqlite.execute("SELECT id FROM schema_migrations ORDER BY id")]
+    assert ids == [f.stem for f in migration_files()]
+    db.sqlite.close()
+
+
+async def test_d1_exec_splits_at_newlines_so_migrations_go_in_batches(tmp_path):
+    db = FakeD1()
+    with pytest.raises(JsException):                 # a CREATE TABLE over several lines is cut at the first newline
+        await db.exec(migration_files()[0].read_text(encoding="utf-8"))
+    r = await db.exec("CREATE TABLE IF NOT EXISTS a(x)\nINSERT INTO a VALUES(1)\n\nINSERT INTO a VALUES(2)")
+    assert r.count == 3 and db.sqlite.execute("SELECT COUNT(*) FROM a").fetchone()[0] == 2
 
 
 # questions
@@ -340,3 +426,83 @@ async def test_prune_ai_usage_keeps_two_years(store):
     await store.add_ai_usage(**use(day=new))
     await store.prune_ai_usage(730)
     assert [r["day"] for r in await store.ai_usage("abcd1234ef")] == [new]
+
+
+# every store, at its edges
+
+async def test_rows_are_plain_python(store):
+    t = await ask(store, waiting=True, answer=None, source="none")
+    q = await store.question(t)
+    assert type(q) is dict and q["answer"] is None and q["teacher_answer"] is None
+    assert all(v is None or type(v) in (str, int, float) for v in q.values())
+    assert type(await store.queue()) is list and type((await store.queue())[0]) is dict
+
+
+async def test_a_batch_of_events_lands_whole_or_not_at_all(store):
+    rows = [ev(at=f"2026-10-16T09:{i % 60:02d}") for i in range(100)]
+    assert await store.add_events(rows) == 100          # more than one insert's worth on D1 (100 bound values)
+    assert len(await store.events("abcd1234ef", limit=200)) == 100
+    rows[60] = ev(cohort=None)                           # the database refuses this one (cohort NOT NULL)
+    with pytest.raises(Exception):
+        await store.add_events(rows)
+    assert len(await store.events("abcd1234ef", limit=200)) == 100
+
+
+# the D1 fake is as strict as D1, so a mistake fails here and not on Cloudflare
+
+async def test_the_fake_refuses_pragmas_and_transactions_outside_batch():
+    db = FakeD1()
+    await db.prepare("CREATE TABLE t(x INTEGER)").run()
+    for sql in ("PRAGMA foreign_keys=OFF", "PRAGMA table_info(t)", "BEGIN", "BEGIN TRANSACTION", "COMMIT",
+                "SAVEPOINT s", "ATTACH DATABASE ':memory:' AS other"):
+        with pytest.raises(JsException):
+            await db.prepare(sql).run()
+        with pytest.raises(JsException):
+            await db.exec(sql)
+    with pytest.raises(JsException):                     # one statement per prepare
+        await db.prepare("INSERT INTO t VALUES(1); INSERT INTO t VALUES(2)").run()
+    assert db.sqlite.execute("SELECT COUNT(*) FROM t").fetchone()[0] == 0
+
+
+async def test_the_fake_binds_values_as_d1_does():
+    db = FakeD1()
+    await db.prepare("CREATE TABLE t(a, b, c)").run()
+    with pytest.raises(JsException, match="D1_TYPE_ERROR"):  # Python None arrives as undefined: refused
+        db.prepare("INSERT INTO t VALUES(?, ?, ?)").bind(1, None, 2)
+    with pytest.raises(JsException, match="D1_TYPE_ERROR"):  # no BigInt
+        db.prepare("INSERT INTO t VALUES(?, ?, ?)").bind(2 ** 60, 1, 1)
+    with pytest.raises(JsException):                         # at most 100 values
+        await db.prepare(f"SELECT {', '.join('?' * 101)}").bind(*range(101)).all()
+    with pytest.raises(JsException):                         # no named parameters
+        await db.prepare("SELECT :a").all()
+    r = await db.prepare("INSERT INTO t VALUES(?, ?, ?)").bind(True, JS_NULL, 2.0).run()
+    assert r.success and r.meta.changes == 1 and r.meta.last_row_id == 1
+    row = await db.prepare("SELECT a, b, c FROM t").first()
+    with pytest.raises(TypeError):                           # a JS object has attributes, not keys
+        row["a"]
+    assert row.to_py() == {"a": 1, "b": JS_NULL, "c": 2}     # JS null stays jsnull; a whole REAL comes back an int
+    assert await db.prepare("SELECT a FROM t WHERE a=99").first() is JS_NULL
+    assert await db.prepare("SELECT a FROM t").first("a") == 1
+    with pytest.raises(JsException):
+        await db.prepare("SELECT a FROM t").first("nope")
+
+
+async def test_the_fake_batch_is_one_transaction():
+    db = FakeD1()
+    await db.prepare("CREATE TABLE t(x INTEGER PRIMARY KEY)").run()
+    insert = db.prepare("INSERT INTO t VALUES(?)")
+    with pytest.raises(JsException):                         # a Python list is not a JS array: use to_js
+        await db.batch([insert.bind(1)])
+    with pytest.raises(JsException):
+        await db.batch(fake_ffi.to_js([insert.bind(1), insert.bind(2), insert.bind(1)]))
+    assert db.sqlite.execute("SELECT COUNT(*) FROM t").fetchone()[0] == 0
+    out = await db.batch(fake_ffi.to_js([insert.bind(1), insert.bind(2), db.prepare("SELECT x FROM t ORDER BY x")]))
+    assert isinstance(out, JsArray) and out[2].results.to_py() == [{"x": 1}, {"x": 2}]
+
+
+async def test_the_fake_enforces_foreign_keys_as_d1_does():
+    db = FakeD1()
+    await db.prepare("CREATE TABLE p(id TEXT PRIMARY KEY)").run()
+    await db.prepare("CREATE TABLE c(p TEXT REFERENCES p(id))").run()
+    with pytest.raises(JsException, match="FOREIGN KEY"):
+        await db.prepare("INSERT INTO c VALUES('nobody')").run()

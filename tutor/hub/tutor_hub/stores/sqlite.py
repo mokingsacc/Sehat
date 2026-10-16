@@ -4,7 +4,7 @@ Every call runs on a single-thread executor, so calls reach the database one at 
 loop never waits on the disk. The print worker is a thread of its own and keeps calling the inner store directly
 (`sync`); the inner store's lock keeps the two apart.
 
-The tables come from the shared migrations in tutor/migrations (`NNNN_name.sql`, plain SQL that D1 also runs). At
+The tables come from the shared migrations (stores/migrations.py, the same files and runner rules as D1). At
 `open()` the files not yet listed in `schema_migrations` are applied in order, each in one transaction with its
 row in that table, so a cut in the middle leaves the database as it was. The PRAGMAs (WAL, full sync) are the
 hub's own and stay in the inner store, never in a migration.
@@ -12,48 +12,38 @@ hub's own and stay in the inner store, never in a migration.
 import asyncio
 import functools
 import logging
-import re
 import sqlite3
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timezone
 from pathlib import Path
 
-from ..config import TUTOR
 from . import _sqlite_sync
 from .base import Store
+from .migrations import APPLIED, LEDGER, MIGRATIONS, NAME, RECORD, applied_at, migration_files, plan
 
+__all__ = ["SqliteStore", "migrate", "migration_files", "MIGRATIONS", "NAME"]
 log = logging.getLogger("tutor.store")
-MIGRATIONS = TUTOR / "migrations"
-NAME = re.compile(r"^[0-9]{4}_[a-z0-9_]+$")
-
-
-def migration_files(folder: Path = MIGRATIONS) -> list[Path]:
-    files = sorted(folder.glob("*.sql"))
-    bad = [f.name for f in files if not NAME.match(f.stem)]
-    if bad:
-        raise ValueError(f"migration files must be named like 0001_init.sql: {', '.join(bad)}")
-    return files
 
 
 def migrate(db: sqlite3.Connection, folder: Path = MIGRATIONS) -> list[str]:
     """Apply the migrations `db` has not had yet, in order; return the ids applied. Safe to run any number of times."""
-    db.execute("CREATE TABLE IF NOT EXISTS schema_migrations(id TEXT PRIMARY KEY, applied_at TEXT NOT NULL)")
-    done = {r[0] for r in db.execute("SELECT id FROM schema_migrations")}
+    db.execute(LEDGER)
+    done = {r[0] for r in db.execute(APPLIED)}
     applied = []
-    for f in migration_files(folder):
-        if f.stem in done:
-            continue
-        at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for m in plan(done, folder):
+        if db.in_transaction:           # as executescript did: what the caller left open is committed first
+            db.commit()
         try:
-            # the id and time are safe to write in place: the id matched NAME and the time is ours
-            db.executescript(f"BEGIN;\n{f.read_text(encoding='utf-8')}\n;"
-                             f"INSERT INTO schema_migrations(id, applied_at) VALUES('{f.stem}', '{at}');\nCOMMIT;")
+            db.execute("BEGIN")
+            db.execute(RECORD, (m.id, applied_at()))
+            for sql in m.statements:
+                db.execute(sql)
+            db.execute("COMMIT")
         except sqlite3.Error:
             if db.in_transaction:
                 db.execute("ROLLBACK")
             raise
-        log.info("applied migration %s", f.stem)
-        applied.append(f.stem)
+        log.info("applied migration %s", m.id)
+        applied.append(m.id)
     return applied
 
 

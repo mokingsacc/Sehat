@@ -23,7 +23,7 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | Folder | What it is |
 |---|---|
 | `app/` | The phone app: plain HTML, CSS and JavaScript modules, no build step. The hub serves it at `/`. |
-| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `events.py` nameless events, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database, `ai/` the AI gateway, `llm.py` the model client. |
+| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `events.py` nameless events, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database (SQLite on the hub, D1 online), `ai/` the AI gateway, `llm.py` the model client. |
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
 | `tools/` | `validate_pack.py` checks packs; `make_sheets.py` prints every sheet to PDF for reviewers. |
@@ -42,12 +42,49 @@ index and starts the print queue, and closes the store on shutdown. `tests/test_
 asking a slow model at once take about as long as one.
 
 **Migrations.** The tables are made by shared SQL files, `tutor/migrations/NNNN_name.sql`, written so D1 runs them
-too: no PRAGMA, every `CREATE` with `IF NOT EXISTS`. `0001_init.sql` is the schema as it was before migrations, so a
-hub database made by older code takes it without harm. When the store opens, `stores/sqlite.py` applies the files not
-yet in `schema_migrations(id, applied_at)`, in order, each in one transaction with its row; the PRAGMAs (WAL, full
-sync) stay in the SQLite store. `tests/test_store_contract.py` runs one set of tests against every store (SQLite
-now, a D1 fake later) and checks that fresh and old databases end the same and that a second run changes nothing.
-A new table is a new numbered file, never an edit to an old one.
+too: no PRAGMA, no BEGIN or COMMIT, no trigger, every `CREATE` with `IF NOT EXISTS`. `0001_init.sql` is the schema as
+it was before migrations, so a hub database made by older code takes it without harm. One mechanism serves both
+stores (`stores/migrations.py`): the files in order, each split into its statements, each applied once as one atomic
+group whose first statement is its row in `schema_migrations(id, applied_at)`. SQLite makes the group atomic with
+BEGIN and COMMIT, D1 by sending it as one `batch()`. Because the row comes first, a second caller racing to apply the
+same file fails on that row before touching a table, finds the row, and moves on. The PRAGMAs (WAL, full sync) stay
+in the SQLite store. `tests/test_store_contract.py` runs one set of tests against both stores and checks that fresh
+and old hub databases end the same, that SQLite and D1 end with the same tables, that a second run changes nothing,
+that a failed file leaves no trace, and that three Workers opening at once apply each file once. A new table is a new
+numbered file, never an edit to an old one, and a migration only adds (tables, columns, indexes), so code still
+running from the last release keeps working beside it.
+
+## The D1 store (stores/d1.py)
+
+Online, the same contract runs on Cloudflare D1 through the Worker's binding: `D1Store(env.DB)`. A Python Worker
+reaches D1 through JavaScript, so the store does what the binding needs: `await db.prepare(sql).bind(...)` with
+`.all()`, `.first()` or `.run()`; writes that belong together (a review and its approved answer, a flag and its log
+row, a batch of events, a migration with its row) in one `db.batch(...)`, D1's only transaction; SQL NULL sent as
+`pyodide.ffi.jsnull`, because Python None arrives as `undefined`, which D1 refuses; the list of statements turned
+into a JavaScript array with `to_js`; results turned into dicts with `.to_py()`, and JavaScript nulls in them (which
+Pyodide shows as `jsnull`, not None) into None. D1 takes at most 100 bound values in a statement, so events go in as
+inserts of 14 rows, all in one batch. `close()` lets go of nothing: the binding belongs to the Worker. Neither the D1
+store nor the migration code imports sqlite3 or uses a thread, and `stores/__init__.py` loads each store on first use.
+
+The tests reach D1 through `tests/fakes/d1.py`: SQLite behind D1's call shape, as strict as D1 so a mistake fails in
+CI rather than on Cloudflare. It refuses PRAGMA (all of them, stricter than D1) and BEGIN, COMMIT, ROLLBACK, SAVEPOINT,
+ATTACH and DETACH outside its own `batch()`; one statement per `prepare()`; positional values only, at most 100; no
+Python None, no integer beyond JavaScript's safe range; a batch only as a JavaScript array, all or nothing; `exec()`
+split at every newline, as D1 does (so a migration cannot go through `exec()`); foreign keys enforced, as D1 does by
+default. What it returns behaves like a JS proxy: attributes and `.to_py()`, no `row["key"]`, `jsnull` for null,
+`first()` giving `jsnull` when there is no row, and a whole number stored as REAL coming back as an int. Every call
+awaits once before it runs, so concurrent callers interleave as separate Worker isolates would.
+
+**Migrations on the real D1 (P7).** `schema_migrations` is the only record of what was applied, on the hub and
+online. The deploy must never run `wrangler d1 migrations apply` (it keeps its own `d1_migrations` table, a second,
+competing record) so `wrangler.toml` sets no `migrations_dir` and no `migrations/` folder sits beside it. The migrations reach D1 through `D1Store.open()`, the
+same runner as the hub, from inside the Worker: the Worker opens its store once per isolate, before the first request
+it serves, and an open with nothing to do costs two queries (the ledger's `CREATE TABLE IF NOT EXISTS` and one read).
+The deploy job makes this happen at once rather than on a learner's first request: after `wrangler deploy` it
+requests `/api/hello` on the new version, which opens the store, and fails if that does not answer 200. To look at
+the record by hand: `wrangler d1 execute qalam-staging --remote --command "SELECT * FROM schema_migrations"`. The
+migration files must ship inside the Worker bundle, at the path `stores/migrations.py` reads (`tutor/migrations`),
+or be passed as `D1Store(env.DB, migrations=...)`.
 
 ## Modules and cohort flags (modules.py, flags.py)
 
