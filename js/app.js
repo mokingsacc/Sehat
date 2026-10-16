@@ -1634,7 +1634,11 @@ document.addEventListener('click', async (e) => {
     const first = !S.voice;
     setVoice(d.setlang, voiceFor(d.setlang)); // a language not chosen yet starts with the woman's voice
     if (first) persistOnce();
-    location.hash = START_HASH === '#/check' ? '#/check' : '#/hello'; return; // its hashchange draws it and starts its voice; a check link goes straight to its page
+    // its hashchange draws it and starts its voice; a check link goes straight to its page (already the address: no
+    // hashchange, so it is drawn here)
+    const to = START_HASH === '#/check' ? '#/check' : '#/hello';
+    if (location.hash === to) { stopAudio(); render(); sayPage(route()); track('view', { p: route()[0] }); } else location.hash = to;
+    return;
   }
   if (d.voice) { stopAudio(); await setVoice(S.lang, d.voice); render(); return; }
   if (d.lang) { stopAudio(); await setVoice(d.lang, voiceFor(d.lang)); render(); return; }

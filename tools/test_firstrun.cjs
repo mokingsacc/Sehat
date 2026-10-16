@@ -231,6 +231,16 @@ const SV = book.surveillance;
     await ctx.close();
   }
 
+  // the link Mo sends to people in Samangan (#/check): on a new phone, the language first, then straight to the check page
+  for (const lg of ['ps', 'fa']) {
+    const ctx = await newCtx();
+    const p = await open(ctx, T0, '#/check');
+    ok(await p.$(`.welcome [data-setlang="${lg}"]`), `check link (${lg}): a new phone chooses its language first`);
+    await p.click(`.welcome [data-setlang="${lg}"]`); await p.waitForTimeout(600);
+    ok(await p.evaluate(() => location.hash) === '#/check' && await p.$('.dchips [data-cl="cdist"]') && !(await p.$('.welcome')), `check link (${lg}): then the check page, with its district buttons`);
+    await ctx.close();
+  }
+
   ok(!errors.length, 'no page errors', errors.slice(0, 5));
   await browser.close(); server.close();
   console.log(`first-run tests: ${pass} passed, ${fail} failed`);
