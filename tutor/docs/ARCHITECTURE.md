@@ -95,12 +95,15 @@ measurements and what it costs). Nothing of the hub is forked:
   in the hub's own layout (so `config.TUTOR` and `stores/migrations.py` find everything without a setting), and the
   app and the lesson pictures into `worker/build/public`, the Worker's static assets. Pictures go in both: the hub
   checks they exist as files, and phones fetch them as assets. `build/` is never committed.
-- `worker/entry.py` is the Worker: the ASGI adapter from the Workers SDK around the hub's `create_app()`. On the
-  first request an isolate serves it reads the settings from the Worker's vars, builds the app with
-  `D1Store(env.DB)` and runs `Hub.start()` (store opened and migrated, cohorts seeded, old rows pruned, search index
-  built). The adapter would run the ASGI lifespan around every request, so the entry does not acknowledge it. The
-  store gets the plain JavaScript binding (from `cloudflare:workers`): the SDK's `self.env` wraps bindings in its
-  own Python converters, and D1Store does its own (jsnull, to_js, to_py), as its contract and the fake expect.
+- `worker/entry.py` is the Worker: the ASGI adapter from the Workers SDK around the hub's `create_app()`. The app
+  is built when the module is imported, with the settings from wrangler.toml's `[vars]` (build.py copies them next
+  to it as `vars.json`): Cloudflare runs that import once at deploy time and keeps a memory snapshot, so a new
+  isolate starts with the app, lessons and manifests in memory. On the first request an isolate serves, the store
+  gets the D1 binding and `Hub.start()` runs (store opened and migrated, cohorts seeded, old rows pruned, search
+  index built). The adapter would run the ASGI lifespan around every request, so the entry does not acknowledge
+  it. The store gets the plain JavaScript binding (from `cloudflare:workers`): the SDK's `self.env` wraps bindings
+  in its own Python converters, and D1Store does its own (jsnull, to_js, to_py), as its contract and the fake
+  expect.
 - Static assets are served before the Worker; only `/api/*` reaches Python (`run_worker_first`). So the hub's
   picture route and its `StaticFiles` mounts are not used online, and `create_app` mounts the app folder only
   where it exists.
@@ -120,7 +123,7 @@ measurements and what it costs). Nothing of the hub is forked:
   it runs the same smoke test under `pywrangler dev` and stays green (D6).
 - `tests/test_worker.py` loads `entry.py` with stand-ins for the runtime (the D1 fake, wrangler.toml's vars),
   serves the app through it, counts D1 calls per request (the first, which starts the hub, makes 16; the Free
-  plan allows 50), checks the bundle layout and the deploy's guards.
+  plan documents 50), checks the bundle layout and the deploy's guards.
 - Limits that remain online: the per-phone limits (Ask, events) know a phone by its address, which a Worker does
   not see, so all phones reaching one isolate share them; learner tokens (P10) will replace this. Workers Logs
   stay off (no `[observability]`), as the hub keeps no access log; the deploy job reads CPU times live with

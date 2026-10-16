@@ -42,8 +42,11 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **Check my sheet's event:** `check.done` (the lesson and the percent right), sent from the phone's queue each time
   a sheet is marked, replaces the hub-side `check.key`, which missed every sheet checked with the key kept from
   printing.
-- Then P7: the Worker on staging, which applies the migrations through the D1 store (never
-  `wrangler d1 migrations apply`).
+- **P7, done:** the Worker on staging (`tutor/worker`): the hub's own app as a Cloudflare Python Worker on
+  `qalam-staging` (workers.dev), D1 `qalam-staging` in the `eu` jurisdiction, migrations applied by the D1 store from
+  inside the Worker, the app and pictures as static assets, deployed by `tutor-worker.yml` on every push of
+  `tutor/` with a smoke test and measurements ([HOSTING.md](HOSTING.md)). Print and teacher are off online because
+  the Worker lacks a printer and the teacher's PIN (`TUTOR_LACKS`). Stage A is complete.
 
 ## January 2027: buy and test
 
