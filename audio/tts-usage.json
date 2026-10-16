@@ -778,5 +778,37 @@
   "copied": 0,
   "check": [],
   "note": "end of run; each batch above has its own tokens and cost"
+ },
+ {
+  "when": "2026-10-16 16:42",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/cdmgbl8wlglxs6u3ijoc09okhbn7t34c80lo",
+  "made": 288,
+  "input_tokens": 25604,
+  "audio_tokens": 67285,
+  "estimated_usd": 0.21
+ },
+ {
+  "when": "2026-10-16 16:42",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "copied": 4,
+  "check": [],
+  "note": "end of run; each batch above has its own tokens and cost"
+ },
+ {
+  "when": "2026-10-16 16:46",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "batch": "batches/k3xw9y5k2mylyjiqorsa46s97m02e2kx5cg5",
+  "made": 4,
+  "input_tokens": 262,
+  "audio_tokens": 225,
+  "estimated_usd": 0.0
+ },
+ {
+  "when": "2026-10-16 16:46",
+  "model": "gemini-3.8-flash-lite-tts (batch)",
+  "copied": 0,
+  "check": [],
+  "note": "end of run; each batch above has its own tokens and cost"
  }
 ]
