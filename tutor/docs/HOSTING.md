@@ -36,7 +36,7 @@ runner saw them, network included.
 
 | What | Run 1 (app built per isolate) | Run 3 (app in the snapshot) |
 |---|---|---|
-| Cold start: the first request after the deploy (`/api/hello`, which opens the store and runs the migrations) | 3,674 ms | 759 ms (run 2: 3,090 ms) |
+| Cold start: the first request after the deploy (`/api/hello`, which opens the store and runs the migrations) | 3,674 ms | 759 ms (run 2: 3,090 ms; run 4: 3,258 ms) |
 | Startup time Cloudflare reports at deploy (the import, snapshotted) | 2,835 ms | 3,615 ms (run 2: 3,272 ms) |
 | Bundle (Python, packages, data) | 9,910 KiB in 519 modules | 9,910 KiB in 520 modules, of which 9,689 KiB vendored packages |
 | Upload | 9,914 KiB, gzip 2,477 KiB | 9,915 KiB, gzip 2,477 KiB |
@@ -55,6 +55,9 @@ runner saw them, network included.
 | D1 round trip from the Worker | | 134 to 142 ms per query |
 
 The slow tail in run 1 was new isolates building the app (1 to 2 s of CPU each); building it at import removed it.
+The first request after a deploy still varies from 0.8 to 3.3 s over three samples, and a warm series still shows one
+request near 3 s, likely a new isolate restoring the snapshot. Run 4 (the docs commit) measured CPU median 8 ms,
+p90 56 ms, max 312 ms (n=54, all ok) and 120 queries at 132 ms each.
 What remains of a request's wall time is mostly D1: the Worker runs near the caller, D1 answers from the EU, and each
 query is one round trip (134 to 142 ms from the US runner). `/api/hello` makes 2 queries, an Ask 4 to 6.
 
