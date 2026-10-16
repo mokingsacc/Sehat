@@ -1,6 +1,7 @@
 # Qalam build plan
 
-Draft for the design committee, 16 October 2026. Built on the code in this folder (branch `claude/project-thread-sbgfoh`,
+Draft of 16 October 2026, revised the same day to the design committee's C0 and C1 decisions
+(`build-committee/decisions_fable.md`). Built on the code in this folder (branch `claude/project-thread-sbgfoh`,
 draft PR #1), the committee plan of 16 October and its two reviews, and Mo's instruction that day: start the build,
 builders on Opus 5.5 high, every design element settled by a committee of Opus 5.5 max and Fable 5.1 max,
 usage-efficient, methodical, for all ages, using the free resources out there.
@@ -32,7 +33,8 @@ pilot in spring 2028.
   worksheets, Check my sheet and Ask (all built).
 - **Photo help:** printed Qalam sheets photographed and marked against the sheet's own answer key, with hints, never
   answers. Other homework photos later, behind the blind test.
-- **School day** for out-of-school learners: timetable, bells, breaks, wake-up alarm, on by default.
+- **School day** for out-of-school learners: timetable, bells, breaks, wake-up alarm; on by default while the app is
+  open, alarms with the app closed only on a phone she has said is hers (C3 settles the screens).
 - **Goals:** "I want to learn this" over signed lessons, then over a reviewed skills graph.
 - **Teachers and admins:** dashboard, admin panel, held-answer queue, content sign-off.
 - **Content:** a pipeline that imports free resources by licence class, with attribution, review and signature.
@@ -52,7 +54,7 @@ advertising or tracking code.
 | 3 | A photographed Pack 1 sheet comes back marked in under 20 seconds on throttled 3G, with "what I read" shown | browser check |
 | 4 | No hint contains the answer: 100% on a test set of every Pack 1 sheet item | automated test |
 | 5 | Held-answer mode is on for the pilot cohort and the teacher clears the queue from the dashboard | test, dress rehearsal |
-| 6 | The school day runs with bells on by default, off in one tap; the APK's alarm fires | two real phones |
+| 6 | The school day runs with bells on by default, off in one tap; the APK's alarm fires once she has said the phone is hers | two real phones |
 | 7 | The admin switches a module off for the cohort and phones see it within a minute | test, dress rehearsal |
 | 8 | No table holds a name, sex (unless Mo decides), or free text in events; no photo is written anywhere | privacy test suite |
 | 9 | AI spend is capped per cohort per day; requests to OpenAI carry nothing identifying | gateway tests |
@@ -71,23 +73,26 @@ on the hub's SQLite and on D1.
 ## 2. Age bands and how the app adapts
 
 Today the school year picks one of two looks: `small` (years 0 to 6, look C, bold) and `big` (years 7 to 12, look B,
-clean), Mo's choice of 14 October. The plan keeps both looks and adds a **band** and a **tone** (child or adult), so
-adults get big, simple screens without childish pictures. The learner never picks a look; the band does, and one
-setting, "bigger text", overrides size for anyone.
+clean), Mo's choice of 14 October. The committee (C0.5 and C1, 16 October) keeps both looks and adds a **band** and a
+**tone**, as two switches on `<html>`: `data-look` (bold or clean: sizes, fonts, read-on-open) and `data-tone` (child
+or adult: palette, words, pictures). Adults learning to read get bold sizes in the adult tone. The learner never picks
+a look; the band does, and one setting, "Bigger text", scales every size for anyone. The spec is in DESIGN.md.
 
-| Band | Who | Look | Navigation | Voice | Reading | Privacy |
+| Band | Who | Look, tone | Home | Voice | Reading | Privacy |
 |---|---|---|---|---|---|---|
-| EY | about 3 to 5, year 0 | C, child | one huge play button; no tabs; grown-up's corner behind a long press | everything read on open | none needed: pictures and sound | guardian holds the phone; no AI |
-| P1 | years 1 to 3 | C, child | play button, subject tiles, Lessons / Ask / Print | read on open | short sentences, Naskh 22 px | guardian consent; AI answers held in the pilot; no photo upload |
-| P2 | years 4 to 6 | C, child | as P1, plus Check my sheet | lesson steps read on open; speaker elsewhere | two-clause sentences | guardian consent; photo help on Qalam sheets |
-| S1 | years 7 to 9 | B | continue card, subject list, three tabs | speaker to tap | textbook level, Vazirmatn 18 px | guardian consent; photo help; goals |
-| S2 | years 10 to 12 | B | as S1, plus Goals | speaker to tap | textbook level | guardian consent under 18; university links |
-| AD | 18 and over | B for readers; C size, adult tone, for adults learning to read | tracks instead of years: Literacy, Maths, English, Chinese, University | speaker; read on open in Literacy | first letters to university | own consent |
+| `ey` | about 3 to 5, year 0 | bold, child | one huge play button and a listen button; no tabs; the grown-up's corner behind a long press | everything read on open, from recorded clips | none needed: pictures and sound | guardian holds the phone; no AI; no lock |
+| `p1` | years 1 to 3 | bold, child | play, "print today's sheet", subject tiles; tabs Lessons, Ask, Print | Home and lesson steps read on open | short sentences, Naskh 22 px | guardian consent; AI answers held in the pilot; no photo upload |
+| `p2` | years 4 to 6 | bold, child | as `p1`; Check my sheet from Print and the lesson's end | lesson steps read on open; speaker elsewhere | two-clause sentences | guardian consent; photo help on Qalam sheets |
+| `s1` | years 7 to 9 | clean, adult | continue card, Check my sheet, subject list; three tabs | speaker to tap | textbook level, Vazirmatn 18 px | guardian consent; photo help; goals |
+| `s2` | years 10 to 12 | clean, adult | as `s1`, plus "Learn this" (C3 places it) | speaker to tap | textbook level | guardian consent under 18; university links |
+| `ad` | 18 and over | track `literacy`: bold, adult; track `reader`: clean, adult | tracks instead of years: Literacy, Maths, English, Chinese, University | speaker; read on open in Literacy | first letters to university | own consent |
 
 Rules across bands:
 
-- **Band, not birth date.** "Who is learning?" shows a picture per band; inside a school band she picks her year, as now.
-- **Fewest options.** Every Home shows at most one big action, one secondary action and one list.
+- **Band, not birth date.** She taps a year, "not in school yet" or an adult door; the band follows. No band pictures:
+  the alias picture (C0.4) is the only avatar, on the Who chip and in "Who is learning".
+- **Fewest options.** Every Home shows at most one big action, one secondary action and one list; the shell, not a
+  module, enforces it (C0.1). Settings lives behind "Who is learning", never on Home.
 - **Speaker on every text,** including buttons, answers, hints and teacher messages; the browser check fails otherwise.
 - **Pictures:** line art of objects, no faces (CONTENT.md); adult packs use adult objects (market, clinic, bus).
 - **School day or Homework help:** out-of-school learners get the school day, in-school learners get Homework help on
@@ -96,7 +101,7 @@ Rules across bands:
   filter, and cohorts can hold AI answers for the teacher. Nothing relies on OpenAI's clause on minors, which nobody has
   yet read live.
 
-The number of bands, the adult-literacy look and the band pictures are the committee's first questions (sitting C1).
+Bands, tone, the adult-literacy look and the sign-up order were settled by C1 on 16 October (DESIGN.md, decision log).
 
 ---
 
@@ -129,33 +134,32 @@ start (a failing module is left out, as packs are). Hub code in `hub/tutor_hub/m
 
 ```jsonc
 {
-  "id": "photo",                          // lower case, the folder name
-  "name": {"en": "Photo help"},           // Dari and Pashto in app/js/i18n.js, drafts until checked
+  "id": "photo",                          // lower case, the folder name; its name is i18n `mod.photo.*`
   "version": "0.1.0",                     // semver; a patch changes no behaviour
-  "core": ">=0.3",                        // the core API it needs
-  "depends": ["lessons", "sheets"],       // declared now, checked simply (one repo)
   "maturity": "draft",                    // draft, pilot or stable; pilot cohorts take pilot and stable only
-  "slots": ["home.tile", "lesson.end"],
-  "scopes": ["content", "self", "events.write"],
-  "capabilities": {"photo.upload": "high", "ai.call": "medium"},
-  "ai": {"purposes": ["read_sheet", "hint"], "langs": ["prs", "en"],
-         "max_calls_per_learner_day": 30, "hold_for_teacher": false, "sources_only": true},
-  "bands": ["P2", "S1", "S2", "AD"],
+  "depends": ["lessons", "sheets"],       // checked simply (one repo)
+  "bands": ["p2", "s1", "s2", "ad"],
+  "slots": ["home.action", "lesson.end"],
+  "capabilities": ["photo.upload", "ai.call"],   // the core maps each to a risk level (below)
+  "ai": {"purposes": ["read_sheet", "hint"], "max_calls_per_learner_day": 30},
   "settings": {"max_photos_per_day": {"type": "int", "min": 1, "max": 50, "default": 10}},
-  "offline": {"works": "no", "bundle": false},   // yes, partly or no; bundle for APK and USB
-  "needs": ["internet"],                  // hidden while the phone is offline
-  "review": {"by": [], "date": null}      // who signed its learner-facing text
+  "needs": ["internet", "camera"],        // internet: hidden while the phone is offline; also printer, camera
+  "offline": "no"                         // yes, partly or no
 }
 ```
 
-- **Slots:** `tab`, `home.tile`, `home.banner`, `subject.section`, `lesson.step`, `lesson.end`, `timetable.block`,
-  `ask.source`, `teacher.panel`, `admin.panel`, `settings`.
-- **Scopes:** `content` (read), `self` (this learner, on the phone where possible), `cohort.summary` (counts only),
-  `events.write`. JS modules in one page cannot be walled off, so scopes are a review checklist plus hub route guards,
-  not a sandbox.
-- **Capabilities with risk shown to the admin:** `photo.upload`, `audio.record`, `ai.call`, `free.text`,
-  `share.public`, `child.contact`. The hub refuses to switch on the last two unless the cohort's moderation is
-  `paid-human`.
+The committee trimmed the draft (C0.1): no `core`, `scopes`, `review` or `name` fields, since nothing would read them
+before the pilot, and the shell rather than the modules keeps Home sparse.
+
+- **Slots:** `home.action`, `lesson.end`, `settings.row`, `teacher.panel`, `admin.panel`; `timetable.block` arrives
+  with P19. No tab, tile, banner, subject or ask slots: the shell owns at most three tabs per band, and the answer
+  order in `brain.py` is safety code. A `home.action` offer is `{id, role, priority, when(state)}`; the shell shows one
+  primary, one secondary and one list; `lesson.end` takes two actions at most. `app/js/modules/<id>.js` exports
+  `register(shell)` and is loaded by `import()` only when the module is on, never from another origin.
+- **Capabilities and risk:** the core's table, not the manifest, sets the risk the admin sees: `photo.upload` and
+  `audio.record` high; `free.text` and `ai.call` medium; `share.public` and `child.contact` blocked unless the cohort's
+  moderation is `paid-human`. A module with any risk loads only after consent. Hub route guards and a review checklist
+  replace the dropped `scopes` field; JS modules in one page cannot be walled off.
 
 ### 3.3 Cohort flags
 
@@ -181,7 +185,7 @@ Shared SQL migrations in `tutor/migrations/NNNN_name.sql`, run by the hub at sta
 |---|---|---|
 | `cohorts` | id, join code (hashed), langs, bands, settings | while active |
 | `flags`, `flag_log` | as 3.3 | log 2 years |
-| `learners` | token hash, alias, cohort, band, consent kind, text version and time, last seen | until deleted or 12 months idle |
+| `learners` | token hash, alias picture and number, cohort, band, consent kind, text version and time, last seen | until deleted or 12 months idle |
 | `events` | time (minute), token hash, cohort, module, verb, object id, value | 12 months, then counts |
 | `questions` | as today, plus cohort and token hash | 60 days |
 | `approved` | as today, plus cohort scope | permanent |
@@ -193,12 +197,13 @@ Shared SQL migrations in `tutor/migrations/NNNN_name.sql`, run by the hub at sta
 | `certificates` (Year 1) | id, course, band, date, cohort; never a name | permanent |
 
 Never on the server: names, sex (unless Mo decides live classes need it, then as a routing flag only), date of birth,
-school status, phone number, location, photos, audio. The **alias** (an object and a number from a reviewed word list)
-is made by the server so a teacher can tell learners apart; the nickname she types stays on her phone. Teachers and
-admins sign in through Cloudflare Access online and the PIN on the hub.
+school status, phone number, location, photos, audio. The **alias** is a picture the phone picks from a reviewed list
+plus a number the server draws ("Book ۲۷", C0.4), so a teacher can tell learners apart; the nickname she may type in
+Settings stays on her phone. Teachers and admins sign in through Cloudflare Access online and the PIN on the hub.
 
-On the phone (`localStorage`, `qalam.v1` migrated to `qalam.v2`): learners, nicknames, band and year, PIN-lock hash,
-progress, private notes, school-day settings, the upload queue, cached lessons; a service worker caches the app.
+On the phone (`localStorage`, `qalam.v1` migrated to `qalam.v2`): learners (alias picture, optional nickname, never a
+name), band and year, consent record, PIN-lock hash, text size and theme, progress, private notes, school-day settings,
+the upload queue, cached lessons; a service worker caches the app on HTTPS origins only (the hub is plain http).
 
 ### 3.5 API
 
@@ -206,11 +211,12 @@ Existing routes stay (ARCHITECTURE.md). New:
 
 | Route | What |
 |---|---|
-| `GET /api/hello` | adds `core`, `cohort`, `modules` |
-| `POST /api/join` | `{cohort_code?, band, year?, lang, consent}` → `{token, alias, cohort}` |
+| `GET /api/hello` | adds `core`, `cohort`, `modules`, `consent` (the consent text version to show) |
+| `POST /api/join` | `{cohort_code?, band, lang, picture, consent}` → `{token, number, cohort}`; queued while offline |
 | `GET` / `DELETE /api/me` | her cohort, band, alias; deletion of her server records (deliberate, behind her PIN) |
+| `POST /api/me/pin-reset` | (P20) a teacher's 6-digit code shortens a lock reset in cohorts that allow it |
 | `POST /api/events` | up to 100 queued events |
-| `POST /api/m/photo/mark` | sheet code, seed, cropped image → items read, right or wrong, hints |
+| `POST /api/m/photo/mark` | sheet code, seed, the answer-cell strip (about 30 KB, held in memory for the call) → items read, right or wrong, hints |
 | `POST /api/m/homework/hint` | the next hint rung; never the answer |
 | `GET /api/m/plan?goal=` | signed lessons in order; a miss joins the wishlist |
 | `GET /api/m/timetable` | the cohort's timetable |
@@ -233,14 +239,15 @@ one address. The hub keeps its address-based limits.
 ```
 
 - **Async first, on the hub.** Python Workers need async database and network calls and nothing in the hub is async,
-  so the port happens on the hub while the code is small (P3); both homes then run the same code. SQLite runs in a
+  so the port happens on the hub while the code is small (P3a, P3b); both homes then run the same code. SQLite runs in a
   thread on the hub; printing keeps its thread there and is absent online.
 - **Store interface** (`stores/base.py`): one contract suite runs every store test against SQLite and a D1 fake.
 - **HTTP adapter:** `httpx.AsyncClient` on the hub; whatever the Worker supports (the spike decides) behind it.
 - **Printing** is a module with `needs: ["printer"]`; online, Print becomes "Get the sheet" (HTML plus the key).
 - **Gate:** tests pass on a staging Worker by 31 January 2027, or the same code runs under uvicorn on Render Starter in
-  Frankfurt behind Cloudflare. D1 and R2 are created with jurisdiction `eu` (it cannot be added later); the DPIA
-  records "EU, not UK".
+  Frankfurt behind Cloudflare. D1 is created with jurisdiction `eu` (it cannot be added later); R2 only when something
+  needs it, also `eu` (nothing does in v1: photos are never stored and audio ships as static assets); the DPIA records
+  "EU, not UK".
 
 ### 3.7 The AI gateway
 
@@ -265,28 +272,36 @@ one address. The hub keeps its address-based limits.
 
 ### 4.1 Sources and licence classes
 
-`tutor/content/sources.json` (being written now, with `docs/FREE-RESOURCES.md`) gives every outside source an id, owner,
-URL, licence and one class. The pipeline reads it and enforces the class; this plan does not pre-judge any source.
+`tutor/content/sources.json` (41 sources, checked 16 October, with `docs/FREE-RESOURCES.md`) gives every outside
+source an id, owner, URL, licence and one class. The pipeline reads it and enforces the class. Where this table and
+sources.json ever differ, sources.json wins and this table is wrong (the committee corrected two rows on 16 October).
 
-| Class | Meaning | The pipeline allows | Where research so far points (sources.json decides) |
+| Class | Meaning | The pipeline allows | In sources.json today |
 |---|---|---|---|
-| BUNDLE | copying and changes allowed (CC BY, CC BY-SA, CC0, public domain, OFL) | import into any pack with attribution; share-alike carried to the pack | Darakht-e Danesh items marked CC BY, Global Digital Library storybooks, PhET |
-| BUNDLE-NC | non-commercial licences (CC BY-NC, BY-NC-SA) | import only into packs marked `licence: NC`, kept apart | Khan Academy Farsi (Iranian vocabulary needs Afghan review) |
-| LINK | may be pointed to, not copied | a link card (title, owner, our one-line description, link), no copied text, no embedding unless allowed, `needs: internet` | Begum Academy, Right to Learn |
-| ASK | needs written permission | treated as LINK, or hidden, until a record in `content/permissions/` says otherwise | anything a partner may license |
-| AVOID | never used | the validator refuses any reference | 1980s jihad-era textbooks; Iranian religious school material |
+| BUNDLE | copying and changes allowed (CC BY, CC BY-SA, CC0, public domain, OFL, "verbatim with credit") | import into any pack with attribution; share-alike carried to the pack; `verbatim` items unchanged | Afghan Children Read (CC0), StoryWeaver, Global Digital Library, Bloom (per book), African Storybook, Feed the Monster code, PhET (before 29 March 2026), Illustrative Mathematics first edition, VOA, Wikipedia, Wiktionary, Wikibooks, Tatoeba, CC-CEDICT, hadith-api, Tanzil and QuranEnc (verbatim), Kolibri (per item), Piper voices, Common Voice |
+| BUNDLE-NC | non-commercial licences (CC BY-NC, BY-NC-SA, CK-12's licence, the reciters' NC grant) | import only into packs marked `licence: NC`, kept apart; never with BY-SA in one lesson | Khan Academy (Iranian vocabulary needs Afghan review), CK-12, OpenStax (`no_ai`: link cards only in 2027), MIT OpenCourseWare, Islamic Network recitations, Meta MMS, Dari Literature Corpus |
+| LINK | free to view, all rights reserved | a link card (title, owner, our description of at most 140 characters, URL), no copied text, no embeds, `needs: internet` | Ministry of Education textbooks (syllabus map only), BBC Learning English, BBC Dars |
+| ASK | needs written permission | treated as LINK until `content/permissions/<id>.md` says otherwise | Begum Academy, SOLAx, LEARN Afghanistan, Darakht-e Danesh (Right to Learn), Hesperian, King Fahd Complex recitations |
+| AVOID | never used | the validator refuses any reference | QuranicAudio and EveryAyah, Transparent Language, KP Board Pashto books, 1980s UNO textbooks |
 
-A source may add flags the validator also enforces: `verbatim` (no edits; Quran translations), `attribution` (exact
-wording), `no_ai_training`, `needs_internet`.
+Flags the validator also enforces (C0.6): `verbatim` (no edits, hash-checked: Tanzil, QuranEnc), `exact_attribution`
+(the owner's wording: Tanzil, QuranEnc, PhET, Illustrative Mathematics, VOA), `no_ai` (never imported into a pack or an
+AI context: OpenStax), `per_item_licence` (each item's own page decides: Bloom, Afghan Children Read, Global Digital
+Library, StoryWeaver, Kolibri, Darakht-e Danesh). `offline: false` means `needs: internet`. Language codes become the
+app's (`prs`, `ps`, `en`; two-letter ISO elsewhere) and `ages` map to bands (`early` ey; `g1-6` p1 and p2; `g7-9` s1;
+`g10-12` s2; `adult` and `beyond` ad); P8 makes both changes in sources.json.
 
 ### 4.2 From source to learner
 
 1. **Register** the source in sources.json. No class, no import.
 2. **Import or draft** with `tools/import_<kind>.py`; every lesson, picture and audio file carries
-   `sources: [{id, item, changes}]`. AI drafting is allowed on the UK side (Claude included, since no learner touches
-   it); the lesson records `drafted_by` and stays a draft.
-3. **Validate** in CI: today's checks plus no unknown or AVOID ids, NC only in NC packs, no copied text in LINK or
-   unpermitted ASK items, `verbatim` text matching its source by hash, attribution present.
+   `sources: [{id, item, title, url, licence, changes, checked}]`. AI drafting is allowed on the UK side (Claude
+   included, since no learner touches it), never from a `no_ai` source; the lesson records `drafted_by` and stays a
+   draft.
+3. **Validate** in CI: today's checks plus no unknown or AVOID ids, NC only in NC packs, SA and NC-SA never in one
+   lesson, no copied text in LINK or unpermitted ASK items, `no_ai` sources in no pack and no AI context, `verbatim`
+   text matching its source by hash, attribution present, and recorded audio for every `ey` and `p1` step and every
+   `letter` step before release (F1: no synthetic Dari or Pashto voice, ever).
 4. **Review:** a Dari reader, a Pashto reader and a subject teacher; a Hanafi scholar for religious content; an adult
    educator for adult packs. On phones in the Review module (P17) or on printed review sheets.
 5. **Sign** the lesson's content hash; any later change voids it. Signatures live in `signoffs` and are written back
@@ -361,10 +376,11 @@ withheld raised them.
 
 ### 5.4 Privacy
 
-- Names are typed on the phone for a sheet or certificate, used once, never stored or logged. Sheets have a "Name" line
-  (`sheets.py`), so the phone crops the name box before any upload.
-- Photos are processed in memory and discarded: not written to R2, the database or logs. If a queue is ever needed:
-  R2 `eu`, deleted after marking, a one-day lifecycle rule.
+- Names are typed on the phone only for a certificate (Year 1), used once, never stored or logged. Sheets keep a blank
+  "Name" line to write on by hand; the `name` parameter leaves `/api/print` and the sheet URL in P13, and `qalam.v2`
+  holds no name (F3).
+- Photos never exist on the server: the phone cuts out the answer cells (never the name box) and sends one strip of
+  about 30 KB, held in memory for the call and dropped; no R2, no queue, no log of image bytes (C0.3).
 - Events hold verbs and ids only. OpenAI zero data retention is requested in January; images are cropped to the answer
   cells. A daily job deletes what has expired (3.4).
 - Threat model from the research: any phone or server may be seized, so neither may say "girl, 14, not in school".
@@ -374,8 +390,10 @@ withheld raised them.
 ### 5.5 Consent and moderation
 
 - **Under 18:** a guardian consents before AI, photo help or events switch on. The screen is short, read aloud, and the
-  guardian holds a button for three seconds. The record keeps the kind (`guardian-on-phone` or `partner-paper`), the
-  text version and the time, not the guardian's name. The pilot partner also collects paper consent.
+  guardian holds a button for three seconds (the screen is specified in DESIGN.md). The record keeps the kind
+  (`guardian-on-phone`, `self` or `partner-paper`), the text version and the time, not the guardian's name. The server
+  names the version to show (`hello.consent`), so the hub's text says nothing leaves the village. The pilot partner
+  also collects paper consent.
 - **Without consent:** lessons, worksheets and checked answers still work; AI and photo help are off.
 - **Adults** consent for themselves. **Withdrawal:** `DELETE /api/me`, or the admin on request.
 - The lawful basis for under-13s and the final wording are for the solicitor in March (Mo); consent text is versioned
@@ -399,31 +417,76 @@ Rules for every phase:
 
 ### Stage A: the modular, async core (17 October to 22 November 2026)
 
+Order, set by C0.2: **P3a, P3b, P1, P2**, then P4 to P7. The async seam comes before any new table, and migrations
+before the first new tables, so nothing is written twice. P3a needs no design input and starts today.
+
+**P3a. The async seam** (S, first)
+- Goal: the hub's request path becomes async without changing what any route returns or any table: routes
+  `async def`, the store behind an async interface, the model client async. No new table, no migration, no new
+  behaviour, no new dependency (anyio ships with FastAPI).
+- Files and exactly what changes in each:
+  - `hub/tutor_hub/stores/__init__.py`, `stores/base.py` (new): `class Store` with `async` methods named exactly as
+    today's (`add_question`, `question`, `send_to_teacher`, `queue`, `review`, `approved`, `counts`, `prune`,
+    `add_print`, `set_print`, `print_job`, `prints`, `copies_last_hour`, `fail_unfinished_prints`) plus `open()` and
+    `close()`; the docstring is the contract.
+  - `stores/_sqlite_sync.py`: today's `store.py` class moved unchanged (lock, PRAGMAs, schema). `stores/sqlite.py`:
+    `SqliteStore(Store)` runs each inner call with `loop.run_in_executor(self._pool, ...)` on a
+    `ThreadPoolExecutor(max_workers=1)`; a `sync` property exposes the inner store for the print worker thread, which
+    keeps calling `set_print` synchronously, so the inner lock stays. `store.py` becomes a one-line re-export of
+    `SqliteStore as Store` for this phase and is deleted in P3b.
+  - `llm.py`: one lazily created `httpx.AsyncClient`; `async def available()` and `async def chat()`, same signatures,
+    same return values, same 30-second availability cache.
+  - `brain.py`: `async def answer()`, awaiting `available()` and `chat()`; rules, maths and search stay sync.
+  - `server.py`: every route `async def`; `await hub.store.*` and `await hub.brain.answer(...)`; `Hub.reindex()` and
+    the index build become async (`await self.store.approved()`); `Hub.__init__` no longer touches the database. A
+    lifespan handler (`@asynccontextmanager`, passed as `FastAPI(lifespan=...)`) does `await store.open()`,
+    `await store.prune(cfg.keep_days)`, `await store.fail_unfinished_prints()`, builds the search index, starts the
+    print queue, and closes the store on shutdown. `sheet_pdf` and the teacher card call `render_pdf` through
+    `await run_in_threadpool(...)` (WeasyPrint is CPU-bound). `Limit` and `check_pin` keep their locks, held across
+    no `await`. `StaticFiles` mounts stay on the hub.
+  - `printing.py`: `PrintQueue(store.sync, ...)`; otherwise unchanged.
+  - `tests/conftest.py`: `FakeModel.available` and `chat` become `async def`; `hub_client` is unchanged, because
+    `with TestClient(app)` runs the lifespan. `tests/test_brain.py`: `@pytest.mark.anyio` and `await brain.answer(...)`.
+    `tests/test_api.py`: the two lines that read `hub.store` directly use `hub.store.sync`.
+  - `tests/test_async.py` (new): `httpx.AsyncClient(transport=httpx.ASGITransport(app=app))`, a fake model whose
+    `chat` sleeps 0.2 s, 20 asks under `asyncio.gather` finishing in under 1 s (sync code would take 4 s).
+  - `docs/ARCHITECTURE.md`: one paragraph on the seam and `stores/`.
+- Done when: the whole suite passes with no test's meaning changed; `test_async.py` passes; `python -m tutor_hub serve`
+  on a laptop serves the app and prints to the outbox as before; `python -m tutor_hub check` still works.
+- Tests: full suite; the concurrency test.
+- Committee: settled by C0.2.
+
+**P3b. Migrations and the store contract** (S)
+- Goal: today's schema as `tutor/migrations/0001_init.sql`, in SQL that D1 also runs (no PRAGMAs, `IF NOT EXISTS`); a
+  `schema_migrations(id, applied_at)` table; a runner in `stores/sqlite.py` that applies pending files in order at
+  `open()`; PRAGMAs stay in `SqliteStore`; the first contract test file, which every later store runs.
+- Files: `tutor/migrations/0001_init.sql`, `stores/sqlite.py`, `stores/base.py`, `tests/test_store_contract.py`
+  (parametrised over stores: SQLite now, the D1 fake in P6), `docs/ARCHITECTURE.md`; `store.py` deleted.
+- Done when: a fresh database and a database made by today's code both end with the same tables; running the
+  migrations twice changes nothing; the contract suite passes on SQLite.
+- Committee: settled by C0.2.
+
 **P1. Module manifests and cohort flags; `/api/hello` lists enabled modules** (S)
-- Goal: the smallest useful step. Manifests for `ask`, `lessons`, `print`, `check`, `teacher`; `cohorts`, `flags`,
-  `flag_log`; seed cohorts; flag resolution; `modules` in `/api/hello`; a switched-off module's routes return 404.
-  No behaviour change for cohort `hub`.
-- Files: `tutor/modules/*/module.json`, `hub/tutor_hub/{modules,flags}.py` (new), `store.py`, `server.py`,
-  `config.py` (`TUTOR_COHORT`), `tutor/cohorts/*.json`, `tools/validate_modules.py`, `tutor.yml`.
+- Goal: the smallest useful step. Manifests for `ask`, `lessons`, `print`, `check`, `teacher` in the trimmed shape of
+  3.2; `cohorts`, `flags`, `flag_log` as `migrations/0002_cohorts.sql`; seed cohorts with random ids and neutral
+  labels (F4); flag resolution; `modules` in `/api/hello`; a switched-off module's routes return 404. No behaviour
+  change for cohort `hub`.
+- Files: `tutor/modules/*/module.json`, `hub/tutor_hub/{modules,flags}.py` (new), `migrations/0002_cohorts.sql`,
+  `stores/sqlite.py`, `server.py`, `config.py` (`TUTOR_COHORT`), `tutor/cohorts/*.json`, `tools/validate_modules.py`,
+  `tutor.yml`.
 - Done when: `/api/hello` lists five modules for `hub`; `print` off makes `/api/print` 404 for that cohort; a broken
   manifest is left out with a logged reason; all existing tests pass.
 - Tests: `tests/test_modules.py` (validation; resolution with depends, maturity, bands); `test_api.py` additions.
-- Committee: settled by C0 (sections 3.2, 3.3).
+- Committee: settled by C0.1 and C0.2 (sections 3.2, 3.3).
 
 **P2. The app loads only enabled modules** (S)
-- Goal: a slot registry; tabs and Home tiles from `hello.modules`; off modules not loaded; cached list used offline.
+- Goal: a slot registry (`home.action`, `lesson.end`, `settings.row`); tabs and Home actions from `hello.modules`;
+  the shell shows one primary, one secondary and one list; off modules not loaded; cached list used offline. The clean
+  Home keeps Check my sheet and drops its Print button, since Print is a tab (F6).
 - Files: `app/js/modules.js` (new), `main.js`, `ui.js`, `screens/home.js`, `hub.js`.
 - Done when: with `print` off, the Print tab and "print today's sheet" vanish and nothing else moves.
 - Tests: `node --check`; first `node --test` file, `app/tests/modules.test.js`.
-- Committee: no (no new look).
-
-**P3. The async core on the hub** (M)
-- Goal: async routes and store calls; `stores/base.py` and `stores/sqlite.py`; `httpx.AsyncClient`; printing keeps its
-  thread; `tutor/migrations/0001_init.sql`.
-- Files: `server.py`, `store.py` (to `stores/`), `brain.py`, `llm.py`, `printing.py`, `tests/conftest.py`.
-- Done when: the whole suite passes unchanged in meaning; a laptop hub serves the app as before.
-- Tests: full suite; 20 concurrent asks complete.
-- Committee: settled by C0 (3.6).
+- Committee: settled by C0.1 (no new look).
 
 **P4. Events without names** (S)
 - Goal: `events`, `POST /api/events`, server-side events for ask, print, check and review; a phone queue.
@@ -469,28 +532,35 @@ Rules for every phase:
 - Tests: `tests/test_licences.py`; a fixture `sources.json` if the real one is not ready.
 - Committee: no; link card and Credits looks go to C2.
 
-**P9. Age bands, tone, bigger text** (M)
-- Goal: section 2: `data-band` and `data-tone`, tokens in `app.css`, bigger text, the speaker rule as a check.
-- Files: `app/css/app.css`, `state.js` (v2 migration), `ui.js`, `speech.js`, `docs/DESIGN.md`.
-- Done when: six bands render Home at phone, tablet and laptop sizes; every worded element has a speaker; v1 data
-  migrates.
-- Tests: `node --test` for the migration; browser screenshots per band.
-- Committee: **yes, C1**.
+**P9. Age bands, tone, bigger text, dark mode, recorded clips** (M)
+- Goal: section 2 and DESIGN.md's C1 spec: `app/js/bands.js`; `data-band`, `data-look` (replaces `data-mode`),
+  `data-tone`, `data-text`, `data-theme`; the token sweep (about 40 hard-coded colours and sizes in `app.css`) and the
+  token tables; "Bigger text"; dark mode; `speech.js` plays a recorded clip from `app/audio/<lang>/<key>.opus` before
+  any phone voice, with `app/audio/<lang>/manifest.json` naming who recorded each clip (F1); English interface strings;
+  the speaker rule as a check.
+- Files: `app/css/app.css`, `app/js/bands.js` (new), `state.js` (v2 migration: no `name`; picture, lock, consent,
+  text, theme), `ui.js`, `speech.js`, `i18n.js`, `docs/DESIGN.md`.
+- Done when: six bands render Home at phone, tablet and laptop sizes in light and dark; a contrast check in the browser
+  test passes per band; every worded element has a speaker; v1 data migrates with names dropped.
+- Tests: `node --test` for the migration; browser screenshots per band and theme.
+- Committee: settled by C1 (DESIGN.md). If the phase runs long, dark mode ships as tokens only.
 
 **P10. Sign-up, consent, PIN lock** (M)
-- Goal: band, year, language, guardian consent, optional nickname (phone only), optional cohort code, PIN lock
-  (4 digits, salted hash, locks after 5 idle minutes and on switching learner); `/api/join`, `/api/me`; draft alias
-  list.
-- Files: `screens/welcome.js`, `who.js`, new `consent.js` and `lock.js`, `state.js`, `mods/join.py`,
-  `migrations/0005_learners.sql`, `content/aliases.json`.
+- Goal: DESIGN.md's first-run spec: the Welcome doors with no name field; `?join=CODE` and "I have a class code";
+  the guardian consent screen and `content/consent/<lang>/<version>.json`; the alias picture (phone) and number
+  (server); the PIN lock with the visible 24-hour reset; Settings behind "Who is learning" (Bigger text, theme, lock,
+  nickname, remove learner, Credits); `/api/join`, `/api/me`.
+- Files: `screens/welcome.js`, `who.js`, new `signup.js`, `consent.js`, `lock.js`, `settings.js`, `sha256.js`,
+  `state.js`, `mods/join.py`, `migrations/0005_learners.sql`, `content/aliases.json`, `content/consent/`.
 - Done when: sign-up takes under 3 minutes in the browser check with every screen spoken; without consent AI and photo
-  modules are off; a forgotten PIN is reset without wiping (method from C1).
-- Tests: `tests/test_join.py`; JS tests for the lock.
-- Committee: **yes, C1**.
+  modules are off and no event is sent; a forgotten PIN resets after the 24-hour countdown without wiping; `qalam.v2`
+  holds no name.
+- Tests: `tests/test_join.py`; JS tests for the lock and the countdown.
+- Committee: settled by C1 (DESIGN.md).
 
 **P11. The online app shell** (M)
-- Goal: a configured HTTPS origin besides the hub; service worker cache; an upload queue that survives restarts;
-  token-keyed limits; CORS narrowed online.
+- Goal: a configured HTTPS origin besides the hub; service worker cache on HTTPS origins only (the hub keeps its
+  `localStorage` caching, F2); an upload queue that survives restarts; token-keyed limits; CORS narrowed online.
 - Files: `hub.js`, `app/sw.js` (new), `index.html`, `server.py`, `config.py`.
 - Done when: staging opened once survives a simulated two-day outage (lessons, Check my sheet, queued events); limits
   hold per token behind one address.
@@ -507,19 +577,22 @@ Rules for every phase:
 
 **P13. Sheets online, photo-ready layout** (M)
 - Goal: keys from code and seed online; "Get the sheet" as HTML; corner markers, a QR with code and seed, fixed answer
-  cells and a fixed name box; `make_sheets.py --batch` for facilitators.
+  cells and a fixed name box; `make_sheets.py --batch` for facilitators; `name` dropped from `PrintIn` and the sheet
+  routes (F3: the name line is written by hand).
 - Files: `sheets.py`, `screens/print.js`, `check.js`, `tools/make_sheets.py`.
 - Done when: every Pack 1 sheet fits one A4 page; online and hub keys match for a seed.
 - Tests: `test_sheets.py`; a layout test for marker and box positions.
 - Committee: **yes, C2**.
 
 **P14. Photo marking of Qalam sheets** (M)
-- Goal: camera capture (no gallery save where possible), find markers, crop the name box away, shrink to about
-  100 KB, upload; `read_sheet` reads the cells; the hub compares with the key; "what I read" for her to correct; right
-  or wrong per item and the hint ladder. "I can't read this" is valid; drawings are out.
+- Goal: in-page camera, or `<input type="file" accept="image/*" capture="environment">` where that is missing or
+  refused (C0.3); find markers; cut out the answer cells only, never the name box; greyscale, at most 600 px wide,
+  JPEG about 0.7, about 30 KB; upload; `read_sheet` reads the cells (`store: false`, no Files API); the hub compares
+  with the key; "what I read" for her to correct; right or wrong per item and the hint ladder. "Type my answers
+  instead" always shows; "I can't read this" is valid; drawings are out.
 - Files: `modules/photo/`, `mods/photo.py`, `app/js/modules/photo.js`, `tests/fixtures/photos/`.
 - Done when: fixtures mark correctly on the fake; no image byte is written to disk, D1, R2 or logs (every writer
-  patched in the test); the uploaded name box is blank.
+  patched in the test); the upload holds answer cells only.
 - Tests: `tests/test_photo.py`; browser check with a fixture camera.
 - Committee: **yes, C2**.
 
@@ -552,15 +625,18 @@ Rules for every phase:
 - Committee: no.
 
 **P19. The virtual school day** (M)
-- Goal: a cohort timetable (wake-up, opening, periods, breaks, worksheet time, close), bells on by default, off in one
-  tap, today's lessons from her plan; web notifications while open, real alarms in the APK (P23).
+- Goal: a cohort timetable (wake-up, opening, periods, breaks, worksheet time, close), bells on by default while the
+  app is open, off in one tap, today's lessons from her plan; web notifications while open; real alarms in the APK
+  (P23) only after she answers "this phone is mine" once; notifications say only "Qalam"; timetable requests carry
+  no token and no school-day event is sent (F5).
 - Files: `modules/timetable/`, `mods/timetable.py`, `app/js/modules/timetable.js`, bell sounds cleared in sources.json.
 - Done when: an out-of-school learner gets the day by default and can silence it; the kill switch removes it within a
   minute.
 - Committee: **yes, C3**.
 
 **P20. The teacher dashboard** (M)
-- Goal: held answers, waiting questions, counts, progress per alias, mastery per lesson, wishlist.
+- Goal: held answers, waiting questions, counts, progress per alias, mastery per lesson, wishlist; the 6-digit
+  PIN-reset code (`POST /api/me/pin-reset`, C1.6).
 - Done when: 30 held answers cleared in under 10 minutes in rehearsal; no name anywhere.
 - Committee: **yes, C3**.
 
@@ -608,8 +684,8 @@ that are off for the pilot cohort, so any gain can be attributed.
 
 | Sitting | When | Settles | Builders bring |
 |---|---|---|---|
-| C0 | now | this plan's design choices: manifest, slots, flags, async first, store, photo handling, aliases, bands | this file |
-| C1 | late October 2026 | bands, adult tone, visual identity and icon, bigger text, dark mode, sign-up order, consent screen, alias versus nickname, PIN lock and reset | a one-page note and an artifact of mock screens per band |
+| C0 | 16 Oct 2026, held | this plan's design choices: manifest, slots, flags, async first, store, photo handling, aliases, bands, licences | this file; decisions in `build-committee/decisions_fable.md` |
+| C1 | 16 Oct 2026, held with C0 | bands, adult tone, visual identity and icon, bigger text, dark mode, sign-up order, consent screen, alias versus nickname, PIN lock and reset | settled without mock screens; the spec is in DESIGN.md; P9's screenshots go to C2 for a look-over |
 | C2 | early December 2026 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits | note, mock screens, mock sheet |
 | C3 | early January 2027 | school day and bells, teacher dashboard, admin panel, review screens, "learn this" entry, APK screens | note, mock screens |
 | C4 | July 2027 | Year 1 modules | note, mock screens |
@@ -627,7 +703,7 @@ a UK post probably from early August. Ramadan about 8 February to 9 March 2027; 
 
 | When | Builders | Committee | Gates and events | Mo |
 |---|---|---|---|---|
-| 17 to 31 Oct 2026 | P1, P2, P3 | C0, C1 | | optional: build card, 5 minutes |
+| 17 to 31 Oct 2026 | P3a, P3b, P1, P2 | C0 and C1 held 16 Oct | | optional: build card, 5 minutes |
 | 1 to 22 Nov | P4 to P7 | | first staging deploy by 22 Nov | optional: read the verdict, 21 Nov |
 | 23 Nov to 22 Dec | P8 to P12 | C2 | full suite green on staging by 22 Dec | optional: January plan by 28 Nov; nothing 1 to 22 Dec |
 | 23 Dec to 19 Jan 2027 | P13 to P17 | C3 | | nothing (possible MSRA) |
@@ -658,8 +734,9 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
   (refused providers, budgets, recorder scans), privacy (name-like columns, photo writes, free text in events, names in
   logs), licences, hint leaks, fake vision fixtures.
 - **Browser checks:** Playwright with Chromium, in CI on batch and when `app/` changed: 360 by 740, 800 by 1280 and
-  1366 by 768, right to left, every band's Home, timed sign-up, a lesson, Check my sheet, photo marking with a fixture
-  camera, offline mode, and the speaker-on-every-text rule. Screenshots are attached to the run for the committee.
+  1366 by 768, right to left, every band's Home in light and dark with an ink-on-background contrast check, timed
+  sign-up, a lesson, Check my sheet, photo marking with a fixture camera, offline mode, and the speaker-on-every-text
+  rule. Screenshots are attached to the run for the committee.
 - **CI:** `tutor.yml` adds manifest validation, the contract suite and JS tests on every push; browser checks and the
   fallback image on batch (`[batch]` in the commit message, or manual). `tutor-worker.yml` deploys staging on push to
   the working branch. Production deploys only from `main` (or Qalam's own repository, D3) through a GitHub environment
@@ -680,7 +757,7 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 
 | Risk | What the plan does |
 |---|---|
-| The Python Worker cannot run the hub (memory, packages, cold starts) | async port first (P3), staging by 22 November, gate 31 January, Render kit ready (P12) |
+| The Python Worker cannot run the hub (memory, packages, cold starts) | async port first (P3a, P3b), staging by 22 November, gate 31 January, Render kit ready (P12) |
 | Workers Paid plan needed before Mo can act | spike under `pywrangler dev` until January (D6) |
 | OpenAI's clause on minors is stricter than summaries say | nothing identifying sent; consent before AI; AI per cohort and band; a person reads the live text before the pilot |
 | No API key until about 20 January | everything built on the fake; P18 is small |
@@ -721,5 +798,8 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | 16 Oct 2026 | Learner additions private first; "learn this" searches lessons first; sharing needs a teacher | committee | committee plan |
 | 16 Oct 2026 | Start the build: builders Opus 5.5 high; design by Opus 5.5 max and Fable 5.1 max; usage-efficient; all ages; free resources | Mo | Mo's message |
 | 16 Oct 2026 | Proposed, for C0: async port before features; photos in memory, no R2 in v1; server-made aliases; six bands with a tone; licence classes enforced in CI and at serve time; batched sittings | builder draft | this file |
+| 16 Oct 2026 | C0 (design committee): manifest trimmed to `id`, `version`, `maturity`, `depends`, `bands`, `slots`, `capabilities`, `ai`, `settings`, `needs`, `offline`; five slots, the shell enforces one primary, one secondary, one list; risk set by the core; Stage A order P3a, P3b, P1, P2; photos as an in-memory answer-cell strip with a file-input fallback, no R2; alias is a phone-picked picture plus a server number; six bands (`ey`, `p1`, `p2`, `s1`, `s2`, `ad`) with `data-look` and `data-tone`; sources.json the only licence truth, OpenStax link-only in 2027, section 4.1 corrected | design committee: Fable 5.1 (chair), Opus 5.5 | decisions_fable.md |
+| 16 Oct 2026 | C1 (design committee): one identity, accent by tone (green on mint for children, teal on white otherwise), `--warm` #c2540a; tokens times one `--scale`, Bigger text ×1.25, dark follows the phone with Phone, Light or Dark per learner; adult literacy is the bold look in the adult tone; Welcome doors with no name field, consent at first need, `?join=CODE`; four-line spoken consent with hold-to-agree and Not now; optional 4-digit lock, never for `ey`, with a visible 24-hour reset that deletes nothing; girl or boy not built (D1 stays Mo's) | design committee | decisions_fable.md; DESIGN.md |
+| 16 Oct 2026 | Flags (design committee): interface and lesson audio recorded by native speakers, no synthetic Dari or Pashto voice; the hub stays plain http and the APK is its secure context; names leave the phone and the sheet routes, certificates only; random cohort ids with neutral labels; bells on while the app is open, closed-app alarms only on a phone she says is hers; no R2 until needed; the clean Home keeps Check my sheet, not Print | design committee | decisions_fable.md |
 
 New decisions are added with date and source; a row is never edited, only superseded.
