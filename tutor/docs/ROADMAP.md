@@ -16,6 +16,15 @@ Built and tested on a laptop:
   with placeholder pictures. **Drafts: a Dari reader, a Pashto reader and subject teachers must check every word.**
 - Tests (`hub/tests`, 50+), a pack validator, sheet export for reviewers, hub install scripts.
 
+## Stage A: the modular, async core (October to November 2026)
+
+From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design committee set:
+
+- **P3a, done:** the async seam: async routes, one async store interface with SQLite behind a worker thread, an
+  async model client, WeasyPrint in the thread pool, start-up in the app's lifespan.
+- P3b: schema migrations and the store contract tests. P1: module manifests and cohort flags. P2: the app loads only
+  enabled modules. Then P4 to P7: events without names, the AI gateway, the D1 store, the Worker on staging.
+
 ## January 2027: buy and test
 
 - One hub computer, one ink-tank printer, two cheap Android phones.

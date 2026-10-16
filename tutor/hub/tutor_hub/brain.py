@@ -47,7 +47,7 @@ class Brain:
         self.model = model
         self.ai_langs = tuple(ai_langs)
 
-    def answer(self, question: str, *, lang="prs", subject=None, year=None, lesson=None) -> Answer:
+    async def answer(self, question: str, *, lang="prs", subject=None, year=None, lesson=None) -> Answer:
         lang = lang if lang in ("prs", "ps", "en") else "prs"
         q = (question or "").strip()
 
@@ -68,9 +68,9 @@ class Brain:
             return Answer(pick_text(d["a"], lang), lang, d["kind"], checked=True, lesson=d.get("lesson"))
 
         passages = self.index.search(q, subject=subject, lesson=lesson, limit=4)
-        if lang in self.ai_langs and self.model.available():
+        if lang in self.ai_langs and await self.model.available():
             notes = [pick_text(d["a"], lang) for _, cov, d in passages if cov > 0.2]
-            reply = self.model.chat(llm_mod.prompt(q, lang=lang, year=year, subject=subject, notes=notes))
+            reply = await self.model.chat(llm_mod.prompt(q, lang=lang, year=year, subject=subject, notes=notes))
             if reply:
                 c = mathcheck.check(reply)
                 if c.ok:

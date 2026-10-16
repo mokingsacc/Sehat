@@ -23,10 +23,23 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | Folder | What it is |
 |---|---|
 | `app/` | The phone app: plain HTML, CSS and JavaScript modules, no build step. The hub serves it at `/`. |
-| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `store.py` the database, `llm.py` the AI slot. |
+| `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database, `llm.py` the AI slot. |
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
 | `tools/` | `validate_pack.py` checks packs; `make_sheets.py` prints every sheet to PDF for reviewers. |
+
+## The async seam (stores/, October 2026)
+
+The same hub code is to run on the village hub (uvicorn) and online as a Cloudflare Python Worker, which has no
+threads and whose database (D1) answers with promises. So the request path is async: every route is `async def`;
+the store sits behind one async interface (`stores/base.py`, whose docstring is the contract); the model client uses
+one `httpx.AsyncClient`; `brain.answer()` awaits the model while rules, maths and search stay plain functions. On the
+hub, `stores/sqlite.py` (`SqliteStore`) runs every database call on a single worker thread, so calls reach SQLite one
+at a time and the event loop never waits on the disk; the print worker keeps its own thread and calls the inner,
+blocking store (`store.sync`). WeasyPrint runs in the thread pool. Nothing touches the database until the app's
+lifespan starts: it opens the store, deletes expired questions, fails jobs a restart interrupted, builds the search
+index and starts the print queue, and closes the store on shutdown. `tests/test_async.py` checks that 20 phones
+asking a slow model at once take about as long as one.
 
 ## Answering a question (brain.py)
 

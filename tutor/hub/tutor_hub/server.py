@@ -3,12 +3,14 @@
 Every phone on the hub's Wi-Fi opens http://10.42.0.1 (or scans the hub card) and gets the app from here.
 The API is small and plain JSON; docs/ARCHITECTURE.md lists every route.
 """
+import asyncio
 import hmac
 import logging
 import random
 import secrets
 import threading
 import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
@@ -16,6 +18,7 @@ from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 from . import __version__, search, sheets
@@ -25,7 +28,7 @@ from .llm import LLM
 from .packs import Library, picture_file
 from .packs import text as pick_text
 from .printing import Printer, PrintQueue
-from .store import Store
+from .stores import SqliteStore
 
 log = logging.getLogger("tutor.hub")
 LANGS = ("prs", "ps", "en")
@@ -87,27 +90,36 @@ def teacher_pin(data: Path) -> str:
 
 
 class Hub:
-    """Everything the routes share."""
+    """Everything the routes share. Making one touches no database: `start()` does that, from the app's lifespan."""
 
     def __init__(self, cfg: Config):
         self.cfg = cfg
         cfg.data.mkdir(parents=True, exist_ok=True)
-        self.store = Store(cfg.data / "hub.db")
-        self.store.prune(cfg.keep_days)
-        self.store.fail_unfinished_prints()
+        self.store = SqliteStore(cfg.data / "hub.db")
         self.library = Library(cfg.packs)
         self.llm = LLM(cfg.llm_url, cfg.llm_model, cfg.llm_timeout, cfg.llm_key)
-        self._ix_lock = threading.Lock()
-        self.brain = Brain(search.build(self.library, self.store.approved()), self.llm, cfg.ai_langs)
+        self._ix_lock = asyncio.Lock()
+        self.brain = Brain(None, self.llm, cfg.ai_langs)     # the search index is built in start()
         self.printer = Printer(cfg.print_backend, cfg.printer, cfg.data / "outbox")
-        self.prints = PrintQueue(self.store, self.printer, self.render_pdf)
+        self.prints: PrintQueue | None = None
         self.pin = teacher_pin(cfg.data)
         self._fails: dict[str, tuple[int, float, int, float]] = {}   # who -> wrong tries, locked until, rounds, last lock
         self._pin_lock = threading.Lock()
         self.clock = time.monotonic
-        self.print_lock = threading.Lock()
+        self.print_lock = asyncio.Lock()
         self.ask_limit = Limit(10, 60)
         self.pdf_limit = Limit(10, 60)
+
+    async def start(self):
+        await self.store.open()
+        await self.store.prune(self.cfg.keep_days)
+        await self.store.fail_unfinished_prints()
+        await self.reindex()
+        self.prints = PrintQueue(self.store.sync, self.printer, self.render_pdf)
+
+    async def stop(self):
+        await self.llm.aclose()
+        await self.store.close()
 
     def check_pin(self, pin: str | None, who: str):
         with self._pin_lock:
@@ -129,9 +141,9 @@ class Hub:
                 self._fails[who] = (n, 0.0, rounds, last)
             raise HTTPException(401, "teacher PIN needed")
 
-    def reindex(self):
-        with self._ix_lock:
-            self.brain.index = search.build(self.library, self.store.approved())
+    async def reindex(self):
+        async with self._ix_lock:
+            self.brain.index = search.build(self.library, await self.store.approved())
 
     def lesson(self, lid: str) -> dict:
         l = self.library.lessons.get(lid)
@@ -168,8 +180,8 @@ class Hub:
                                         name=spec.get("name"), for_pdf=True)
         return sheets.render_pdf(html_text, base_url=str(self.cfg.app))
 
-    def hello(self) -> dict:
-        ai_on = self.llm.available()
+    async def hello(self) -> dict:
+        ai_on = await self.llm.available()
         return {"hub": self.cfg.name, "version": __version__, "lessons": len(self.library.lessons),
                 "ai": {"on": ai_on, "langs": list(self.cfg.ai_langs) if ai_on else []},
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
@@ -187,29 +199,39 @@ def _who(request: Request) -> str:
 def create_app(cfg: Config | None = None) -> FastAPI:
     cfg = cfg or Config.from_env()
     hub = Hub(cfg)
-    app = FastAPI(title=f"{cfg.name} hub", version=__version__, docs_url=None, redoc_url=None, openapi_url=None)
+
+    @asynccontextmanager
+    async def lifespan(app):
+        await hub.start()
+        try:
+            yield
+        finally:
+            await hub.stop()
+
+    app = FastAPI(title=f"{cfg.name} hub", version=__version__, docs_url=None, redoc_url=None, openapi_url=None,
+                  lifespan=lifespan)
     app.state.hub = hub
     # the Android app (another origin) talks to the hub too
     app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"], allow_headers=["*"],
                        expose_headers=["X-Sheet-Seed"])
 
     @app.get("/api/hello")
-    def hello():
-        return hub.hello()
+    async def hello():
+        return await hub.hello()
 
     @app.get("/api/packs")
-    def packs():
+    async def packs():
         return {"packs": hub.library.summary()}
 
     @app.get("/api/lessons/{lid}")
-    def lesson(lid: str):
+    async def lesson(lid: str):
         l = hub.library.lesson_for_app(lid)
         if not l:
             raise HTTPException(404, "no such lesson")
         return l
 
     @app.get("/packs/{pid}/pictures/{fname}")
-    def picture(pid: str, fname: str):
+    async def picture(pid: str, fname: str):
         pack = hub.library.packs.get(pid)
         f = picture_file(pack["_dir"], Path(fname).stem) if pack else None
         if not f or f.name != fname:
@@ -218,25 +240,26 @@ def create_app(cfg: Config | None = None) -> FastAPI:
 
     # Ask
     @app.post("/api/ask")
-    def ask(a: AskIn, request: Request):
+    async def ask(a: AskIn, request: Request):
         hub.ask_limit.check(_who(request))
         lang = _lang(a.lang)
-        ans = hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson)
-        token = hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
-                                       question=a.text.strip(), answer=None if ans.waiting and ans.source != "rules" else ans.text,
-                                       source=ans.source, urgent=ans.urgent, waiting=ans.waiting)
+        ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson)
+        token = await hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
+                                             question=a.text.strip(),
+                                             answer=None if ans.waiting and ans.source != "rules" else ans.text,
+                                             source=ans.source, urgent=ans.urgent, waiting=ans.waiting)
         return dict(ans.dict(), id=token)
 
     @app.get("/api/ask/{token}")
-    def ask_status(token: str):
-        q = hub.store.question(token)
+    async def ask_status(token: str):
+        q = await hub.store.question(token)
         if not q:
             raise HTTPException(404, "no such question")
         return {"id": token, "status": q["status"], "teacher_answer": q["teacher_answer"]}
 
     @app.post("/api/ask/{token}/teacher")
-    def ask_teacher(token: str):
-        if not hub.store.send_to_teacher(token):
+    async def ask_teacher(token: str):
+        if not await hub.store.send_to_teacher(token):
             raise HTTPException(404, "no such question")
         return {"ok": True}
 
@@ -247,19 +270,21 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return random.randint(1000, 9999) if sheets.needs_seed(hub.lesson(lid)) else 0
 
     @app.get("/api/sheets/{lid}.html", response_class=HTMLResponse)
-    def sheet_page(lid: str, lang: str = "prs", seed: int | None = None, kind: str = "worksheet", name: str | None = None):
+    async def sheet_page(lid: str, lang: str = "prs", seed: int | None = None, kind: str = "worksheet", name: str | None = None):
         seed = _seed(lid, seed)
         kind = "answers" if kind == "answers" else "worksheet"
         return HTMLResponse(hub.sheet_html(lid, lang=_lang(lang), seed=seed, kind=kind, name=(name or "")[:40] or None),
                             headers={"X-Sheet-Seed": str(seed)})
 
     @app.get("/api/sheets/{lid}.pdf")
-    def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = None, kind: str = "worksheet"):
+    async def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = None, kind: str = "worksheet"):
         hub.pdf_limit.check(_who(request))
         seed = _seed(lid, seed)
         kind = "answers" if kind == "answers" else "worksheet"
         try:
-            pdf, _ = hub.render_pdf({"lesson": lid, "lang": _lang(lang), "seed": seed, "kind": kind})
+            # WeasyPrint keeps the processor busy for a while: it runs off the event loop
+            pdf, _ = await run_in_threadpool(hub.render_pdf, {"lesson": lid, "lang": _lang(lang), "seed": seed,
+                                                             "kind": kind})
         except RuntimeError as e:
             raise HTTPException(503, str(e))
         code = hub.lesson(lid)["sheet"]["code"] + (f"-{seed}" if seed else "")
@@ -267,7 +292,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                         headers={"Content-Disposition": f'inline; filename="{code}.pdf"', "X-Sheet-Seed": str(seed)})
 
     @app.get("/api/sheets/{lid}/key")
-    def sheet_key(lid: str, seed: int = 0, lang: str = "prs"):
+    async def sheet_key(lid: str, seed: int = 0, lang: str = "prs"):
         l = hub.lesson(lid)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
@@ -275,7 +300,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
 
     # printing
     @app.post("/api/print")
-    def print_sheet(p: PrintIn, request: Request, x_teacher_pin: str | None = Header(None)):
+    async def print_sheet(p: PrintIn, request: Request, x_teacher_pin: str | None = Header(None)):
         l = hub.lesson(p.lesson)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
@@ -284,10 +309,10 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         if teacher:
             hub.check_pin(x_teacher_pin, who)
         seed = _seed(p.lesson, p.seed)
-        with hub.print_lock:         # count and add together, so two quick taps can't both slip under the limit
-            if not teacher and hub.store.copies_last_hour(who) + p.copies > cfg.copies_per_hour:
+        async with hub.print_lock:   # count and add together, so two quick taps can't both slip under the limit
+            if not teacher and await hub.store.copies_last_hour(who) + p.copies > cfg.copies_per_hour:
                 raise HTTPException(429, "enough printing for now: ask the teacher")
-            jid = hub.store.add_print(lesson_id=p.lesson, kind=p.kind, copies=p.copies, lang=_lang(p.lang), seed=seed,
+            jid = await hub.store.add_print(lesson_id=p.lesson, kind=p.kind, copies=p.copies, lang=_lang(p.lang), seed=seed,
                                       device="teacher" if teacher else who)
         hub.prints.add(jid, {"lesson": p.lesson, "kind": p.kind, "copies": p.copies, "lang": _lang(p.lang),
                              "seed": seed, "name": (p.name or "").strip() or None,
@@ -295,22 +320,23 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return {"id": jid, "status": "queued", "seed": seed, "printer": hub.printer.status()}
 
     @app.get("/api/print/{jid}")
-    def print_status(jid: int):
-        j = hub.store.print_job(jid)
+    async def print_status(jid: int):
+        j = await hub.store.print_job(jid)
         if not j:
             raise HTTPException(404, "no such print job")
         return {"id": jid, "status": j["status"], "detail": j["detail"] if j["status"] == "failed" else None}
 
     # the teacher's page
     @app.get("/api/teacher/summary")
-    def teacher_summary(request: Request, x_teacher_pin: str | None = Header(None)):
+    async def teacher_summary(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
-        return {"counts": hub.store.counts(), "hello": hub.hello(), "pack_problems": hub.library.problems[:50]}
+        return {"counts": await hub.store.counts(), "hello": await hub.hello(),
+                "pack_problems": hub.library.problems[:50]}
 
     @app.get("/api/teacher/queue")
-    def teacher_queue(request: Request, x_teacher_pin: str | None = Header(None)):
+    async def teacher_queue(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
-        rows = hub.store.queue()
+        rows = await hub.store.queue()
         for r in rows:
             r.pop("token", None)
             l = hub.library.lessons.get(r.get("lesson_id") or "")
@@ -318,30 +344,31 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return {"questions": rows}
 
     @app.post("/api/teacher/answer/{qid}")
-    def teacher_answer(qid: int, body: ReviewIn, request: Request, x_teacher_pin: str | None = Header(None)):
+    async def teacher_answer(qid: int, body: ReviewIn, request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
-        q = hub.store.review(qid, answer=body.answer, approve=body.approve)
+        q = await hub.store.review(qid, answer=body.answer, approve=body.approve)
         if not q:
             raise HTTPException(404, "no such question")
         if body.approve:
-            hub.reindex()
+            await hub.reindex()
         q.pop("token", None)
         return q
 
     @app.get("/api/teacher/prints")
-    def teacher_prints(request: Request, x_teacher_pin: str | None = Header(None)):
+    async def teacher_prints(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
-        return {"printer": hub.printer.status(), "jobs": [{k: v for k, v in j.items() if k != "device"} for j in hub.store.prints()]}
+        return {"printer": hub.printer.status(), "jobs": [{k: v for k, v in j.items() if k != "device"}
+                                                     for j in await hub.store.prints()]}
 
     @app.post("/api/teacher/hub-card")
-    def teacher_card(request: Request, x_teacher_pin: str | None = Header(None)):
+    async def teacher_card(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
-        jid = hub.store.add_print(lesson_id=None, kind="card", copies=1, lang="prs", seed=0, device="teacher")
+        jid = await hub.store.add_print(lesson_id=None, kind="card", copies=1, lang="prs", seed=0, device="teacher")
         hub.prints.add(jid, {"card": True, "copies": 1, "title": "hub-card"})
         return {"id": jid, "status": "queued"}
 
     @app.exception_handler(HTTPException)
-    def http_error(request: Request, exc: HTTPException):
+    async def http_error(request: Request, exc: HTTPException):
         return JSONResponse({"error": exc.detail}, status_code=exc.status_code)
 
     app.mount("/fonts", StaticFiles(directory=cfg.app / "fonts"), name="fonts")

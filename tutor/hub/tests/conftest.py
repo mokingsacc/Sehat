@@ -40,10 +40,10 @@ class FakeModel:
     def __init__(self, reply="", up=True):
         self.reply, self.up, self.asked = reply, up, []
 
-    def available(self):
+    async def available(self):
         return self.up
 
-    def chat(self, messages, **kw):
+    async def chat(self, messages, **kw):
         self.asked.append(messages)
         return self.reply
 
@@ -51,3 +51,8 @@ class FakeModel:
 @pytest.fixture
 def fake_model():
     return FakeModel
+
+
+@pytest.fixture
+def anyio_backend():
+    return "asyncio"            # the hub runs on asyncio (uvicorn); trio is not used

@@ -85,7 +85,7 @@ def test_print_a_worksheet_to_the_outbox(hub_client, cfg):
     files = list((cfg.data / "outbox").glob("*.pdf"))
     assert len(files) == 1 and files[0].read_bytes().startswith(b"%PDF")
     # the name was printed once and never stored
-    row = hub_client.hub.store.print_job(r["id"])
+    row = hub_client.hub.store.sync.print_job(r["id"])
     assert "Maryam" not in str(row)
 
 
@@ -178,4 +178,4 @@ def test_health_question_points_to_sehat_and_waits_for_the_teacher(hub_client):
     q = hub_client.get("/api/teacher/queue", headers=pin).json()["questions"][0]
     assert q["source"] == "rules" and q["answer"]          # the teacher sees what the child was told
     hub_client.post(f"/api/teacher/answer/{q['id']}", headers=pin, json={"answer": "به کلینیک برو.", "approve": True})
-    assert hub_client.hub.store.approved() == []          # a safety message never becomes a reusable answer
+    assert hub_client.hub.store.sync.approved() == []          # a safety message never becomes a reusable answer

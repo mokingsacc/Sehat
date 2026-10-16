@@ -33,12 +33,24 @@ class LLM:
         self.timeout = timeout
         self.headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
         self._seen = (0.0, False)
+        self._client: httpx.AsyncClient | None = None
+
+    def _http(self) -> httpx.AsyncClient:
+        """One client for every call, made on first use, so connections to the model server are reused."""
+        if self._client is None:
+            self._client = httpx.AsyncClient()
+        return self._client
+
+    async def aclose(self):
+        if self._client is not None:
+            await self._client.aclose()
+            self._client = None
 
     @property
     def configured(self) -> bool:
         return bool(self.url)
 
-    def available(self) -> bool:
+    async def available(self) -> bool:
         """Is the model server answering? Checked at most every 30 seconds."""
         if not self.url:
             return False
@@ -46,19 +58,19 @@ class LLM:
         if time.monotonic() - at < 30:
             return ok
         try:
-            ok = httpx.get(f"{self.url}/models", headers=self.headers, timeout=3).status_code == 200
+            ok = (await self._http().get(f"{self.url}/models", headers=self.headers, timeout=3)).status_code == 200
         except httpx.HTTPError:
             ok = False
         self._seen = (time.monotonic(), ok)
         return ok
 
-    def chat(self, messages: list[dict], max_tokens: int = 350, temperature: float = 0.2) -> str | None:
+    async def chat(self, messages: list[dict], max_tokens: int = 350, temperature: float = 0.2) -> str | None:
         if not self.url:
             return None
         try:
-            r = httpx.post(f"{self.url}/chat/completions", headers=self.headers, timeout=self.timeout,
-                           json={"model": self.model, "messages": messages, "max_tokens": max_tokens,
-                                 "temperature": temperature, "stream": False})
+            r = await self._http().post(f"{self.url}/chat/completions", headers=self.headers, timeout=self.timeout,
+                                        json={"model": self.model, "messages": messages, "max_tokens": max_tokens,
+                                              "temperature": temperature, "stream": False})
             r.raise_for_status()
             text = r.json()["choices"][0]["message"]["content"]
         except (httpx.HTTPError, KeyError, IndexError, ValueError, TypeError, AttributeError) as e:
