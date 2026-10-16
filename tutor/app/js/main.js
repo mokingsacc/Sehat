@@ -12,6 +12,7 @@ import { busy, h, hubChip, nav } from './ui.js';
 
 import ask from './screens/ask.js';
 import check from './screens/check.js';
+import credits from './screens/credits.js';
 import home from './screens/home.js';
 import lesson from './screens/lesson.js';
 import print from './screens/print.js';
@@ -20,7 +21,7 @@ import teacher from './screens/teacher.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
-const SCREENS = { home, subject, lesson, ask, print, check, teacher, welcome, who };
+const SCREENS = { home, subject, lesson, ask, print, check, teacher, welcome, who, credits };
 const NEEDS_NO_CHILD = new Set(['welcome', 'teacher']);
 const app = document.getElementById('app');
 let current = null;

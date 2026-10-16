@@ -23,6 +23,9 @@ export function load(refresh = false) {
 }
 
 export const all = () => list;
+// drafts are served only where reviewers look (staging, a hub not in release mode): then the draft band shows
+export const isDraft = (l) => (l.draft ?? l.review !== 'checked');
+export const hasDrafts = () => list.some(isDraft);
 export const get = (id) => list.find((l) => l.id === id) || null;
 export const byCode = (code) => list.find((l) => l.code && l.code.toUpperCase() === String(code).toUpperCase()) || null;
 export const subjectOrder = (lang) => ORDER[lang] || ORDER.prs;

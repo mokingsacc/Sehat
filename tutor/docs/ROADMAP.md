@@ -48,6 +48,16 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   `tutor/` with a smoke test and measurements ([HOSTING.md](HOSTING.md)). Print and teacher are off online because
   the Worker lacks a printer and the teacher's PIN (`TUTOR_LACKS`). Stage A is complete.
 
+## Stage B: learners of all ages, and content (November to December 2026)
+
+- **P8, done:** the content pipeline. `content/sources.json` (41 sources) now uses the app's language codes and age
+  bands, with the committee's flags; the pack loader and `validate_pack.py` enforce the licence classes (AVOID
+  never; LINK, unpermitted ASK and no_ai only as link cards; NC only in NC packs; share-alike carried; verbatim
+  by hash), every lesson has a content hash that reviewers sign with initials (`signoffs`, `releases`, migration
+  0005), production (`TUTOR_RELEASE=1`) serves only signed lessons and cards with recorded clips for the youngest,
+  staging shows drafts under the draft band; link cards, a source note at each lesson's end and a Credits page
+  (plain until C2); `tools/import_bloom.py` for Afghan Children Read and other Bloom books.
+
 ## January 2027: buy and test
 
 - One hub computer, one ink-tank printer, two cheap Android phones.

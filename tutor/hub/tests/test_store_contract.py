@@ -428,6 +428,40 @@ async def test_prune_ai_usage_keeps_two_years(store):
     assert [r["day"] for r in await store.ai_usage("abcd1234ef")] == [new]
 
 
+# content: signoffs and releases (P8)
+
+H1, H2 = "sha256:" + "a" * 64, "sha256:" + "b" * 64
+
+
+async def test_signoffs_are_kept_per_hash_and_role(store):
+    so = dict(lesson="maths-7-fractions-add", content_hash=H1, role="Dari reader", initials="AB", signed_on="2027-02-14")
+    assert await store.add_signoff(**so) is True
+    assert await store.add_signoff(**so) is False                      # the same signature twice changes nothing
+    assert await store.add_signoff(**dict(so, role="maths teacher", initials="CD")) is True
+    assert await store.add_signoff(**dict(so, content_hash=H2)) is True    # a changed lesson is signed afresh
+    rows = await store.signoffs("maths-7-fractions-add")
+    assert [(r["content_hash"], r["role"], r["initials"]) for r in rows] == [
+        (H1, "Dari reader", "AB"), (H1, "maths teacher", "CD"), (H2, "Dari reader", "AB")]
+    assert set(rows[0]) == {"lesson", "content_hash", "role", "initials", "signed_on", "added_at"}
+    assert await store.signoffs("no-such-lesson") == []
+
+
+@pytest.mark.parametrize("bad", ["Ahmad Shah", "ab", "ABCDE", "", None])
+async def test_a_signoff_takes_initials_never_a_name(store, bad):
+    with pytest.raises(ValueError):
+        await store.add_signoff(lesson="x-1", content_hash=H1, role="Dari reader", initials=bad, signed_on="2027-02-14")
+    assert await store.signoffs("x-1") == []
+
+
+async def test_releases_newest_first_per_cohort(store):
+    a = await store.add_release(pack="starter", version="1", content_hash=H1, cohort="abcd1234ef", released_by="admin")
+    b = await store.add_release(pack="starter", version="2", content_hash=H2, cohort="abcd1234ef", released_by="admin")
+    await store.add_release(pack="starter", version="2", content_hash=H2, cohort="zz99yy88xx", released_by="admin")
+    assert isinstance(a, int) and b > a
+    rows = await store.releases("abcd1234ef")
+    assert [(r["version"], r["content_hash"], r["released_by"]) for r in rows] == [("2", H2, "admin"), ("1", H1, "admin")]
+
+
 # every store, at its edges
 
 async def test_rows_are_plain_python(store):

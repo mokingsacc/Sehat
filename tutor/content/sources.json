@@ -7,14 +7,18 @@
     "licence": "CC0 (public domain dedication) on 340 of 341 books; one Dari book is CC BY-NC",
     "licenceUrl": "https://bloomlibrary.org/afghan-children-read",
     "class": "BUNDLE",
+    "flags": [
+      "per_item_licence"
+    ],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "adult"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "ad"
     ],
     "subjects": [
       "reading-dari",
@@ -37,14 +41,18 @@
     "licence": "Per book (each book records its own licence: cc0, cc-by, cc-by-sa, cc-by-nc and others)",
     "licenceUrl": "https://bloomlibrary.org/",
     "class": "BUNDLE",
+    "flags": [
+      "per_item_licence"
+    ],
     "languages": [
       "prs",
-      "pus",
-      "eng"
+      "ps",
+      "en"
     ],
-    "ages": [
-      "early",
-      "g1-6"
+    "bands": [
+      "ey",
+      "p1",
+      "p2"
     ],
     "subjects": [
       "reading-dari",
@@ -69,17 +77,21 @@
     "licence": "CC BY 4.0 (per book; site says all content is openly licensed under CC 4.0)",
     "licenceUrl": "https://storyweaver.org.in/about",
     "class": "BUNDLE",
-    "languages": [
-      "pus",
-      "prs",
-      "fas",
-      "eng",
-      "zho"
+    "flags": [
+      "per_item_licence"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "beyond"
+    "languages": [
+      "ps",
+      "prs",
+      "fa",
+      "en",
+      "zh"
+    ],
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "ad"
     ],
     "subjects": [
       "reading-dari",
@@ -106,13 +118,17 @@
     "licence": "CC BY and CC BY-SA (primary licences); every item marked with its own licence",
     "licenceUrl": "https://digitallibrary.io/about/license/",
     "class": "BUNDLE",
-    "languages": [
-      "pus",
-      "eng"
+    "flags": [
+      "per_item_licence"
     ],
-    "ages": [
-      "early",
-      "g1-6"
+    "languages": [
+      "ps",
+      "en"
+    ],
+    "bands": [
+      "ey",
+      "p1",
+      "p2"
     ],
     "subjects": [
       "reading-pashto",
@@ -136,12 +152,14 @@
     "licence": "CC BY 4.0",
     "licenceUrl": "https://www.africanstorybook.org/",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "eng"
+      "en"
     ],
-    "ages": [
-      "early",
-      "g1-6"
+    "bands": [
+      "ey",
+      "p1",
+      "p2"
     ],
     "subjects": [
       "reading-dari",
@@ -165,13 +183,15 @@
     "licence": "BSD 2-Clause (code)",
     "licenceUrl": "https://github.com/curiouslearning/FeedTheMonster/blob/master/LICENSE",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "ara",
-      "eng"
+      "ar",
+      "en"
     ],
-    "ages": [
-      "early",
-      "g1-6"
+    "bands": [
+      "ey",
+      "p1",
+      "p2"
     ],
     "subjects": [
       "reading-dari",
@@ -193,17 +213,21 @@
     "licence": "Unclear: mixed Creative Commons per item (reported), site unreadable",
     "licenceUrl": "https://opentextbc.ca/oerdiscipline/chapter/pashto/",
     "class": "ASK",
+    "flags": [
+      "per_item_licence"
+    ],
     "languages": [
       "prs",
-      "pus",
-      "eng"
+      "ps",
+      "en"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "reading-dari",
@@ -233,14 +257,15 @@
     "licence": "All rights reserved; no terms of use or licence page",
     "licenceUrl": "https://begum-academy.org/en/",
     "class": "ASK",
+    "flags": [],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "beyond"
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "maths",
@@ -269,14 +294,15 @@
     "licence": "All rights reserved",
     "licenceUrl": "https://www.solax.org/en/faq",
     "class": "ASK",
+    "flags": [],
     "languages": [
       "prs",
-      "pus",
-      "eng"
+      "ps",
+      "en"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12"
+    "bands": [
+      "s1",
+      "s2"
     ],
     "subjects": [
       "maths",
@@ -299,15 +325,17 @@
     "licence": "Unclear: no licence or terms found",
     "licenceUrl": "",
     "class": "ASK",
+    "flags": [],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult"
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "maths",
@@ -331,14 +359,16 @@
     "licence": "All rights reserved",
     "licenceUrl": "https://moe.gov.af/en/node/450",
     "class": "LINK",
+    "flags": [],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12"
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2"
     ],
     "subjects": [
       "reading-dari",
@@ -366,15 +396,17 @@
     "licence": "CC BY-NC-SA (most Khan Academy-made videos and exercises); partner content excluded",
     "licenceUrl": "https://support.khanacademy.org/hc/en-us/articles/202262954-Can-I-use-Khan-Academy-s-videos-name-materials-links-in-my-project",
     "class": "BUNDLE-NC",
+    "flags": [],
     "languages": [
-      "fas",
-      "eng"
+      "fa",
+      "en"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "beyond"
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "maths",
@@ -397,16 +429,20 @@
     "licence": "CC BY 4.0 for HTML5 sims released before 29 March 2026; later sims under different terms",
     "licenceUrl": "https://phet.colorado.edu/en/licensing/html",
     "class": "BUNDLE",
-    "languages": [
-      "fas",
-      "pus",
-      "eng"
+    "flags": [
+      "exact_attribution"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "beyond"
+    "languages": [
+      "fa",
+      "ps",
+      "en"
+    ],
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "science",
@@ -428,12 +464,15 @@
     "licence": "CC BY-NC-SA 4.0, plus a ban on use in AI/LLM training or ingestion",
     "licenceUrl": "https://help.openstax.org/s/article/Licensing-information-of-OpenStax-textbooks",
     "class": "BUNDLE-NC",
-    "languages": [
-      "eng"
+    "flags": [
+      "no_ai"
     ],
-    "ages": [
-      "g10-12",
-      "beyond"
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
     ],
     "subjects": [
       "maths",
@@ -457,13 +496,15 @@
     "licence": "CK-12 Curriculum Materials License (educational purposes only; changes marked and shared under the same licence)",
     "licenceUrl": "https://help.ck12.org/hc/en-us/articles/50990257420955-CK-12-Materials-License",
     "class": "BUNDLE-NC",
+    "flags": [],
     "languages": [
-      "eng"
+      "en"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12"
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2"
     ],
     "subjects": [
       "maths",
@@ -486,13 +527,17 @@
     "licence": "CC BY 4.0 (first edition, 2019-2021); IM v.360 (2024) is CC BY-NC 4.0",
     "licenceUrl": "https://www.illustrativemathematics.org/terms-of-use",
     "class": "BUNDLE",
-    "languages": [
-      "eng"
+    "flags": [
+      "exact_attribution"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12"
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2"
     ],
     "subjects": [
       "maths"
@@ -514,16 +559,20 @@
     "licence": "Kolibri software MIT; each channel item carries its own licence",
     "licenceUrl": "https://github.com/learningequality/kolibri",
     "class": "BUNDLE",
-    "languages": [
-      "eng",
-      "fas"
+    "flags": [
+      "per_item_licence"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "beyond"
+    "languages": [
+      "en",
+      "fa"
+    ],
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "maths",
@@ -551,14 +600,16 @@
     "licence": "Public domain (VOA-produced material); AP, Reuters and AFP items excluded",
     "licenceUrl": "https://learningenglish.voanews.com/p/6861.html",
     "class": "BUNDLE",
-    "languages": [
-      "eng"
+    "flags": [
+      "exact_attribution"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "english"
@@ -581,13 +632,15 @@
     "licence": "Public domain (material produced exclusively by VOA); licensed third-party material excluded",
     "licenceUrl": "https://www.voanews.com/p/5338.html",
     "class": "BUNDLE",
+    "flags": [
+      "exact_attribution"
+    ],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "adult",
-      "beyond"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "social-studies",
@@ -612,14 +665,14 @@
     "licence": "All rights reserved; share or embed only with the BBC's own buttons; business use needs permission",
     "licenceUrl": "https://www.bbc.co.uk/usingthebbc/terms/can-i-share-things-from-the-bbc/",
     "class": "LINK",
+    "flags": [],
     "languages": [
-      "eng"
+      "en"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "english"
@@ -642,12 +695,13 @@
     "licence": "All rights reserved (BBC terms)",
     "licenceUrl": "https://www.bbc.co.uk/usingthebbc/terms/can-i-share-things-from-the-bbc/",
     "class": "LINK",
+    "flags": [],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "g7-9"
+    "bands": [
+      "s1"
     ],
     "subjects": [
       "maths",
@@ -670,15 +724,15 @@
     "licence": "CC BY-SA 4.0 (and GFDL)",
     "licenceUrl": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "fas",
-      "pus"
+      "fa",
+      "ps"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "science",
@@ -701,16 +755,16 @@
     "licence": "CC BY-SA 4.0 (and GFDL)",
     "licenceUrl": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "fas",
-      "pus",
-      "eng"
+      "fa",
+      "ps",
+      "en"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "reading-dari",
@@ -733,13 +787,14 @@
     "licence": "CC BY-SA 4.0 (and GFDL)",
     "licenceUrl": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "eng",
-      "zho",
-      "fas"
+      "en",
+      "zh",
+      "fa"
     ],
-    "ages": [
-      "beyond"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "chinese",
@@ -761,16 +816,20 @@
     "licence": "Tanzil terms: verbatim copies allowed with source named and link to tanzil.net; no changes",
     "licenceUrl": "https://tanzil.net/download/",
     "class": "BUNDLE",
-    "languages": [
-      "ara"
+    "flags": [
+      "verbatim",
+      "exact_attribution"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "languages": [
+      "ar"
+    ],
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "quran"
@@ -791,17 +850,21 @@
     "licence": "QuranEnc republishing terms: no changes, credit publisher and QuranEnc.com, state version, keep up to date",
     "licenceUrl": "https://quranenc.com/en/home/api",
     "class": "BUNDLE",
+    "flags": [
+      "verbatim",
+      "exact_attribution"
+    ],
     "languages": [
       "prs",
-      "pus",
-      "fas"
+      "ps",
+      "fa"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "quran"
@@ -823,16 +886,17 @@
     "licence": "Recitations licensed by reciters 'for free, non-commercial redistribution'; reciters may ask for removal",
     "licenceUrl": "https://alquran.cloud/terms-and-conditions",
     "class": "BUNDLE-NC",
+    "flags": [],
     "languages": [
-      "ara"
+      "ar"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "quran"
@@ -853,16 +917,17 @@
     "licence": "Unclear: search summaries report 'free general use in computer apps, broadcasting channels, and websites'; page unreachable",
     "licenceUrl": "https://qurancomplex.gov.sa/en/?p=3979",
     "class": "ASK",
+    "flags": [],
     "languages": [
-      "ara"
+      "ar"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "quran"
@@ -883,11 +948,12 @@
     "licence": "QuranicAudio: personal use only; EveryAyah: no licence stated",
     "licenceUrl": "https://www.quranicaudio.com/about",
     "class": "AVOID",
+    "flags": [],
     "languages": [
-      "ara"
+      "ar"
     ],
-    "ages": [
-      "adult"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "quran"
@@ -908,15 +974,16 @@
     "licence": "Unlicense (public domain dedication)",
     "licenceUrl": "https://github.com/fawazahmed0/hadith-api",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "ara",
-      "eng",
-      "urd"
+      "ar",
+      "en",
+      "ur"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "adult"
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "seerah"
@@ -937,13 +1004,14 @@
     "licence": "Hesperian open copyright: non-commercial copying and adapting encouraged; digital use needs written permission",
     "licenceUrl": "https://hesperian.org/open-copyright-policy/",
     "class": "ASK",
+    "flags": [],
     "languages": [
-      "pus",
-      "eng"
+      "ps",
+      "en"
     ],
-    "ages": [
-      "g10-12",
-      "adult"
+    "bands": [
+      "s2",
+      "ad"
     ],
     "subjects": [
       "life-skills"
@@ -965,11 +1033,12 @@
     "licence": "CC BY-NC-SA 4.0",
     "licenceUrl": "https://ocw.mit.edu/pages/privacy-and-terms-of-use/",
     "class": "BUNDLE-NC",
+    "flags": [],
     "languages": [
-      "eng"
+      "en"
     ],
-    "ages": [
-      "beyond"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "maths",
@@ -995,17 +1064,17 @@
     "licence": "CC BY 2.0 FR (sentences); audio licences vary per recording",
     "licenceUrl": "https://tatoeba.org/en/downloads",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "eng",
-      "zho",
-      "fas",
-      "pus"
+      "en",
+      "zh",
+      "fa",
+      "ps"
     ],
-    "ages": [
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "english",
@@ -1028,12 +1097,13 @@
     "licence": "CC BY-SA 4.0",
     "licenceUrl": "https://cc-cedict.org/wiki/",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "zho",
-      "eng"
+      "zh",
+      "en"
     ],
-    "ages": [
-      "beyond"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "chinese"
@@ -1054,18 +1124,19 @@
     "licence": "CC BY-NC 4.0",
     "licenceUrl": "https://huggingface.co/facebook/mms-tts-fas",
     "class": "BUNDLE-NC",
+    "flags": [],
     "languages": [
-      "fas",
-      "pus",
+      "fa",
+      "ps",
       "prs"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "speech-tools"
@@ -1086,16 +1157,17 @@
     "licence": "Voice repository MIT; fa_IR 'amir', 'ganji' and 'reza_ibrahim' datasets CC0; 'gyro' see source",
     "licenceUrl": "https://huggingface.co/rhasspy/piper-voices/blob/main/fa/fa_IR/amir/medium/MODEL_CARD",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "fas"
+      "fa"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "speech-tools"
@@ -1116,17 +1188,18 @@
     "licence": "CC0",
     "licenceUrl": "https://commonvoice.mozilla.org/en/datasets",
     "class": "BUNDLE",
+    "flags": [],
     "languages": [
-      "pus",
-      "fas"
+      "ps",
+      "fa"
     ],
-    "ages": [
-      "early",
-      "g1-6",
-      "g7-9",
-      "g10-12",
-      "adult",
-      "beyond"
+    "bands": [
+      "ey",
+      "p1",
+      "p2",
+      "s1",
+      "s2",
+      "ad"
     ],
     "subjects": [
       "speech-tools"
@@ -1148,12 +1221,12 @@
     "licence": "CC BY-NC 4.0 (as reported by search; page not read)",
     "licenceUrl": "https://datacollective.mozillafoundation.org/datasets/cmmdpikpq003imh077foix53d",
     "class": "BUNDLE-NC",
+    "flags": [],
     "languages": [
       "prs"
     ],
-    "ages": [
-      "adult",
-      "beyond"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "reading-dari"
@@ -1174,13 +1247,14 @@
     "licence": "Commercial; free only through a subscribing library",
     "licenceUrl": "https://www.transparent.com/blog/beginner-english-course-for-pashto-dari-speakers",
     "class": "AVOID",
+    "flags": [],
     "languages": [
       "prs",
-      "pus",
-      "eng"
+      "ps",
+      "en"
     ],
-    "ages": [
-      "adult"
+    "bands": [
+      "ad"
     ],
     "subjects": [
       "english"
@@ -1202,12 +1276,14 @@
     "licence": "Government copyright; reposted by third parties without a licence",
     "licenceUrl": "https://www.taleem360.com/categories/text-books-kpk",
     "class": "AVOID",
+    "flags": [],
     "languages": [
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "g1-6",
-      "g7-9"
+    "bands": [
+      "p1",
+      "p2",
+      "s1"
     ],
     "subjects": [
       "reading-pashto"
@@ -1228,12 +1304,14 @@
     "licence": "Unclear",
     "licenceUrl": "https://digitalcommons.unomaha.edu/daripashtobooks/",
     "class": "AVOID",
+    "flags": [],
     "languages": [
       "prs",
-      "pus"
+      "ps"
     ],
-    "ages": [
-      "g1-6"
+    "bands": [
+      "p1",
+      "p2"
     ],
     "subjects": [
       "reading-dari",

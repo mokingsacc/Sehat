@@ -350,3 +350,12 @@ h2 { font-size: 18px; }
 .selfcheck .btn { min-height: 44px; padding: 0 14px; font-size: 15px; }
 .selfcheck .link { align-self: flex-start; }
 .row > .btn { white-space: nowrap; }
+
+/* link cards and credits (P8): plain and token-styled until the design committee settles their look (C2) */
+.linkcards { padding-bottom: 8px; }
+.linkcard, .credit { display: flex; flex-direction: column; gap: 8px; }
+.linkcard small { display: block; font-size: 13px; font-weight: 700; }
+.linkcard .about, .credit p { margin: 0; line-height: 1.7; }
+.credit p { font-size: 14px; color: var(--muted); }
+.source-note { width: 100%; font-size: 14px; color: var(--muted); text-align: start; }
+.source-note p { margin: 0; }

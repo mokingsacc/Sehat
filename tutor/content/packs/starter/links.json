@@ -1,0 +1,16 @@
+[
+  {
+    "id": "begum-academy-maths",
+    "source": "begum-academy",
+    "title": "Begum Academy",
+    "about": {
+      "en": "Free video lessons in Dari and Pashto for years 7 to 12, made by Begum Academy.",
+      "prs": "درس‌های ویدیویی رایگان به دری و پشتو برای صنف‌های ۷ تا ۱۲، از اکادمی بیگم.",
+      "ps": "د ۷ تر ۱۲ ټولګیو لپاره په دري او پښتو وړیا ویډیويي لوستونه، د بېګم اکاډمۍ له خوا."
+    },
+    "url": "https://begum-academy.org/en/",
+    "subject": "maths",
+    "years": [7, 8, 9, 10, 11, 12],
+    "review": {"status": "draft", "needs": ["Dari reader", "Pashto reader"]}
+  }
+]

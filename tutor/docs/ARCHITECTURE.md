@@ -25,8 +25,9 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | `app/` | The phone app: plain HTML, CSS and JavaScript modules, no build step. The hub serves it at `/`. |
 | `hub/tutor_hub/` | The hub server (Python 3.10+): `server.py` routes, `events.py` nameless events, `brain.py` answers, `rules.py` safety, `mathcheck.py` exact sums, `search.py` finding answers, `sheets.py` worksheets, `printing.py` the queue, `stores/` the database (SQLite on the hub, D1 online), `ai/` the AI gateway, `llm.py` the model client. |
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
+| `content/sources.json` | Every outside source with its licence class and flags: the only record of what may be copied ([FREE-RESOURCES.md](FREE-RESOURCES.md)); `content/permissions/` holds written permissions for ASK sources. |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
-| `tools/` | `validate_pack.py` checks packs; `make_sheets.py` prints every sheet to PDF for reviewers. |
+| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests. |
 
 ## The async seam (stores/, October 2026)
 
@@ -167,6 +168,44 @@ The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted 
   know. `tests/test_events.py` also scans every table for a column that could hold a name, sex, birth date, phone
   number or address.
 
+## Content, licences and signatures (licences.py, packs.py)
+
+Outside material reaches a pack only as its licence allows, and nothing reaches learners unsigned.
+
+- **Licence classes** come from `content/sources.json` alone (`licences.Sources`, which checks the file itself):
+  BUNDLE may be copied with credit, BUNDLE-NC only into packs marked `"licence": "NC"`, LINK and ASK only as link
+  cards (ASK until `content/permissions/<id>.md` records a written permission), AVOID never. Flags: `verbatim`
+  (no changes, text matched by hash), `exact_attribution` (the owner's credit line), `no_ai` (OpenStax: never in a
+  pack or an AI context), `per_item_licence` (the item's own licence decides). Languages use the app's codes
+  (`prs`, `ps`, `en`, two letters otherwise) and `bands` replace the old age groups.
+- **Sources blocks:** a lesson (or a picture or clip, through pack.json `media`) names each outside item it uses:
+  `{id, item, title, url, licence, changes, checked}`, nothing else, so no copied text hides there. The pack
+  loader refuses AVOID, LINK, unpermitted ASK and no_ai sources, NC outside an NC pack, BY-SA with NC-SA in one
+  lesson, SA without `share_alike` on the pack, ND with changes, verbatim text whose hash differs, and a credit
+  line it cannot fill. A refused lesson is left out with the reason, as any broken lesson is.
+- **Link cards** (`links.json`): a title, our own description of at most 140 characters, an https address, and
+  where the card belongs. Any other field fails. `GET /api/links` serves them with `needs: ["internet"]`; the app
+  shows them on the subject page only while online.
+- **Content hashes and signoffs:** a lesson's hash covers the lesson without its review block, every picture's
+  bytes and every clip's recorded hash, speaker and placeholder mark. Each reviewer role signs that hash with
+  initials only; a lesson is signed when every role it needs has signed its current hash, so any change voids
+  it. `signoffs` and `releases` (`migrations/0005_content.sql`) keep the signatures and the pack versions given to
+  each cohort, on both stores (contract-tested); the pack mirrors the signoffs, which is what the loader checks.
+- **Release mode** (`TUTOR_RELEASE=1`, production): only signed lessons and cards are served, and lessons for years
+  0 to 3 and every letter step need recorded clips (never placeholders, never synthetic). Without it (staging, a
+  laptop), drafts are served marked `draft`, and the app shows the draft band on Home and in the lesson. The
+  Worker on staging is not in release mode, so reviewers see the starter drafts there.
+- **Credits:** `GET /api/credits` lists every source the served lessons, pictures, clips and cards use, with each
+  item's credit line, the links, and the fonts; each lesson from the hub carries its own `credits` lines for the
+  source note at its end. The Credits page is reached from Who is learning until Settings exists (P10). Link
+  cards, the source note and Credits are plain and token-styled until the design committee settles their look (C2).
+- **Recorded clips** in a pack (`audio/<lang>/manifest.json`: file, speaker code, placeholder, sha256) are known to
+  the hub by their manifest; the files are served at `/packs/<pack>/audio/<lang>/<file>` (online, as static
+  assets). `tools/validate_pack.py` checks every file against its hash and refuses an unlisted or synthetic clip.
+- **Import:** `tools/import_bloom.py` turns a Bloom book into a draft reading lesson with its sources block, after
+  the same licence check; pictures stay out unless asked for (the picture rule), and SVG line art it copies has
+  black strokes turned to `currentColor`.
+
 ## Answering a question (brain.py)
 
 The safest source answers first, and every answer says where it came from, so the app can label it.
@@ -246,8 +285,11 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | `GET /api/hello` | Hub name, version and `core`, lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
 | `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}` (`?cohort=`) |
 | `GET /api/packs` | Every pack and its lesson list (no lesson content) |
-| `GET /api/lessons/{id}` | One lesson, picture names turned into URLs, without the sheet |
+| `GET /api/lessons/{id}` | One lesson, picture and clip names turned into URLs, with `draft` and its `credits`, without the sheet, review or sources |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |
+| `GET /packs/{pack}/audio/{lang}/{file}` | A recorded clip named in the pack's audio manifest |
+| `GET /api/links` | Link cards (`?subject=`, `?year=`, `?lesson=`): title, owner, our description, address, `needs: ["internet"]` |
+| `GET /api/credits` | Every outside source in use, with credit lines and licences, the linked sources, and the fonts |
 | `POST /api/ask` | `{text, lang, year, subject, lesson}` -> answer, badge source, token |
 | `GET /api/ask/{token}` | Status and the teacher's answer |
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
@@ -258,9 +300,9 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
-pictures), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jobs), `check` (the sheet key),
-`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello`, `/api/events` and the app's files are
-always there.
+pictures, clips, link cards), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jobs), `check` (the sheet key),
+`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello`, `/api/events`, `/api/credits` and the app's
+files are always there.
 
 ## The app (app/js)
 

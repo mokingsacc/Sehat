@@ -114,7 +114,7 @@ class Hub:
             cfg.data.mkdir(parents=True, exist_ok=True)
             store = SqliteStore(cfg.data / "hub.db")
         self.store = store
-        self.library = Library(cfg.packs)
+        self.library = Library(cfg.packs, release=cfg.release)
         self.modules, self.module_problems = modules.load(cfg.modules)
         self.seeds, self.seed_problems = flags.load_seeds(cfg.cohorts)
         self.cohort_id = cfg.cohort or (self.seeds.get("hub") or {}).get("id")
@@ -250,7 +250,7 @@ class Hub:
         return {"hub": self.cfg.name, "version": __version__, "core": __version__, "lessons": len(self.library.lessons),
                 "ai": {"on": ai_on, "langs": list(self.cfg.ai_langs) if ai_on else []},
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
-                "url": self.cfg.public_url,
+                "url": self.cfg.public_url, "release": self.cfg.release,
                 "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
                 "modules": mods}
 
@@ -317,6 +317,25 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         if not f or f.name != fname:
             raise HTTPException(404, "no such picture")
         return FileResponse(f, headers={"Cache-Control": "public, max-age=86400"})
+
+    @app.get("/packs/{pid}/audio/{lang}/{fname}", dependencies=needs("lessons"))
+    async def clip(pid: str, lang: str, fname: str):
+        """A recorded clip named in the pack's audio/<lang>/manifest.json (online: a static asset, like pictures)."""
+        pack = hub.library.packs.get(pid)
+        files = {c.get("file") for c in (pack or {}).get("_clips", {}).get(lang, {}).values()}
+        f = pack["_dir"] / "audio" / lang / fname if pack and fname in files else None
+        if not f or not f.is_file():
+            raise HTTPException(404, "no such clip")
+        return FileResponse(f, headers={"Cache-Control": "public, max-age=86400"})
+
+    # link cards and credits: the licence data (licences.py); how they look is still to be designed (C2)
+    @app.get("/api/links", dependencies=needs("lessons"))
+    async def links(subject: str | None = None, year: int | None = None, lesson: str | None = None):
+        return {"links": hub.library.link_cards(subject=subject, year=year, lesson=lesson)}
+
+    @app.get("/api/credits")
+    async def credits():
+        return hub.library.credits()
 
     # Ask
     @app.post("/api/ask", dependencies=needs("ask"))

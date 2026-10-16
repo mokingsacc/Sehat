@@ -173,3 +173,16 @@ class SqliteStore(Store):
 
     async def prune_ai_usage(self, keep_days: int):
         return await self._run("prune_ai_usage", keep_days)
+
+    # content
+    async def add_signoff(self, **kw) -> bool:
+        return await self._run("add_signoff", **kw)
+
+    async def signoffs(self, lesson):
+        return await self._run("signoffs", lesson)
+
+    async def add_release(self, **kw) -> int:
+        return await self._run("add_release", **kw)
+
+    async def releases(self, cohort):
+        return await self._run("releases", cohort)

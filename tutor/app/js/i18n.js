@@ -66,6 +66,9 @@ const S = {
     look_at_paper: 'به کاغذ نگاه کن و بگو', of_right: '{a} از {b} درست', refresh: 'تازه کن',
     wait_minute: 'چند بار اشتباه شد. کمی صبر کن و بعد دوباره امتحان کن.', slow_down: 'کمی صبر کن، بعد دوباره بپرس.', hub_card: 'کارت مرکز',
     job_queued: 'در صف', job_printing: 'چاپ می‌شود', job_done: 'چاپ شد', job_saved: 'نگه داشته شد', job_failed: 'نشد', approved: 'جواب‌های تأییدشده', lang_prs: 'دری', lang_ps: 'پښتو', lang_en: 'انگلیسی',
+    links_title: 'برای دیدن و خواندن بیشتر (با انترنت)', open_link: 'باز کن',
+    credits: 'منابع', credits_used: 'از بیرون قلم', credits_linked: 'پیوندها', credits_app: 'خط‌ها',
+    credits_none: 'همه‌ی این درس‌ها برای قلم نوشته شده‌اند.',
   },
   ps: {
     app: 'قلم',
@@ -131,6 +134,9 @@ const S = {
     look_at_paper: 'کاغذ ته وګوره او ووایه', of_right: '{a} له {b} سم', refresh: 'تازه کول',
     wait_minute: 'څو ځله غلط شو. لږ صبر وکړه، بیا یې وازمایه.', slow_down: 'لږ صبر وکړه، بیا وپوښته.', hub_card: 'د مرکز کارت',
     job_queued: 'په کتار کې', job_printing: 'چاپېږي', job_done: 'چاپ شو', job_saved: 'وساتل شو', job_failed: 'ونه شو', approved: 'تایید شوي ځوابونه', lang_prs: 'دري', lang_ps: 'پښتو', lang_en: 'انګلیسي',
+    links_title: 'د لا لیدلو او لوستلو لپاره (له انټرنټ سره)', open_link: 'خلاص یې کړه',
+    credits: 'سرچینې', credits_used: 'له قلم څخه بهر', credits_linked: 'لینکونه', credits_app: 'لیکبڼې',
+    credits_none: 'دا ټول لوستونه د قلم لپاره لیکل شوي دي.',
   },
 };
 

@@ -27,6 +27,7 @@ export default function who() {
         c === active ? icon('check', 26, 3) : null)),
       h('a', { class: 'btn outline big', href: '#/welcome' }, icon('plus', 26, 2.6), s('add_child')),
       h('a', { class: 'btn', href: '#/welcome/edit' }, s('change_year'))),
-    h('div', { class: 'pad teacher-link' }, h('a', { class: 'link', href: '#/teacher' }, icon('lock', 20), s('teacher'))));
+    h('div', { class: 'pad teacher-link' }, h('a', { class: 'link', href: '#/teacher' }, icon('lock', 20), s('teacher'))),
+    h('div', { class: 'pad teacher-link' }, h('a', { class: 'link', href: '#/credits' }, icon('file', 20), s('credits'))));
   return { el, tab: null };
 }

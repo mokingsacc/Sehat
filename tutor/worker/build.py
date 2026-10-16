@@ -4,9 +4,12 @@
     build/src/vars.json                       wrangler.toml's [vars], so entry.py can build the app at import
     build/src/hub/tutor_hub/                  the hub's code, as it is
     build/src/{migrations,modules,cohorts}/   the shared SQL, the module manifests, the seed cohorts
-    build/src/content/packs/                  the packs as on the hub (the hub reads lessons and checks pictures as files)
-    build/public/                             the phone app (app/, without its tests), and the lesson pictures at
-                                              /packs/<pack>/pictures/<file>, the address the hub gives them
+    build/src/content/packs/                  the packs as on the hub (the hub reads lessons and checks pictures as files;
+                                              recorded clips stay out: the hub knows them by their manifest.json)
+    build/src/content/sources.json            the licence classes (licences.py), and permissions/ for ASK sources
+    build/public/                             the phone app (app/, without its tests), and the lesson pictures and clips
+                                              at /packs/<pack>/pictures/<file> and /packs/<pack>/audio/<lang>/<file>,
+                                              the addresses the hub gives them
 
 build/src mirrors tutor/, so the hub's defaults (config.TUTOR) find every folder without a setting. The pictures go
 twice: in the bundle, where the hub checks they exist, and as static assets, which is how phones get them online.
@@ -22,6 +25,7 @@ WORKER = Path(__file__).resolve().parent
 TUTOR = WORKER.parent
 BUILD = WORKER / "build"
 SKIP = shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Store")
+AUDIO = ("*.opus", "*.ogg", "*.mp3")
 
 
 def build(out: Path = BUILD) -> dict:
@@ -33,11 +37,15 @@ def build(out: Path = BUILD) -> dict:
     settings = tomllib.loads((WORKER / "wrangler.toml").read_text(encoding="utf-8")).get("vars", {})
     (src / "vars.json").write_text(json.dumps(settings, indent=1), encoding="utf-8")
     shutil.copytree(TUTOR / "hub" / "tutor_hub", src / "hub" / "tutor_hub", ignore=SKIP)
-    for folder in ("migrations", "modules", "cohorts", "content/packs"):
-        shutil.copytree(TUTOR / folder, src / folder, ignore=SKIP)
+    for folder in ("migrations", "modules", "cohorts", "content/packs", "content/permissions"):
+        shutil.copytree(TUTOR / folder, src / folder,
+                        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Store", *AUDIO))
+    shutil.copy2(TUTOR / "content" / "sources.json", src / "content" / "sources.json")
     shutil.copytree(TUTOR / "app", public, ignore=shutil.ignore_patterns("tests", "__pycache__", ".DS_Store"))
     for pictures in sorted((TUTOR / "content" / "packs").glob("*/pictures")):
         shutil.copytree(pictures, public / "packs" / pictures.parent.name / "pictures", ignore=SKIP)
+    for audio in sorted((TUTOR / "content" / "packs").glob("*/audio")):
+        shutil.copytree(audio, public / "packs" / audio.parent.name / "audio", ignore=SKIP)
     return {name: sum(f.stat().st_size for f in (out / name).rglob("*") if f.is_file()) for name in ("src", "public")}
 
 

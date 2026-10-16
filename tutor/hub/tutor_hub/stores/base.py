@@ -61,7 +61,18 @@ AI usage (the gateway's spending, ai/gateway.py)
   tokens, cost_micro, held}` from day `since` on (all when None), by day, module, purpose, provider, model.
 - `ai_spent(cid, day) -> {calls, tokens, cost_micro}`: the cohort's totals for one day; zeros when nothing was spent.
 - `prune_ai_usage(keep_days)`: deletes rows whose day is more than `keep_days` days ago.
+
+Content (signoffs and releases, packs.py decides what they mean; kept for good)
+- `add_signoff(*, lesson, content_hash, role, initials, signed_on) -> bool`: one reviewer role signing one content
+  hash; initials only (1 to 4 capital letters, else ValueError), never a name. Signing the same hash in the same
+  role again changes nothing and returns False.
+- `signoffs(lesson) -> list`: `{lesson, content_hash, role, initials, signed_on, added_at}`, oldest first.
+- `add_release(*, pack, version, content_hash, cohort, released_by) -> id`: a pack version published to a cohort;
+  `released_by` is a role.
+- `releases(cohort) -> list`: the cohort's releases, newest first.
 """
+
+import re
 
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
 
@@ -161,3 +172,23 @@ class Store:
 
     async def prune_ai_usage(self, keep_days: int) -> None:
         raise NotImplementedError
+
+    # content
+    async def add_signoff(self, *, lesson, content_hash, role, initials, signed_on) -> bool:
+        raise NotImplementedError
+
+    async def signoffs(self, lesson) -> list[dict]:
+        raise NotImplementedError
+
+    async def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
+        raise NotImplementedError
+
+    async def releases(self, cohort) -> list[dict]:
+        raise NotImplementedError
+
+
+def check_initials(initials) -> str:
+    """Initials only, 1 to 4 capital letters: a reviewer's name is never stored."""
+    if not isinstance(initials, str) or not re.fullmatch(r"[A-Z]{1,4}", initials):
+        raise ValueError("initials are 1 to 4 capital letters, never a name")
+    return initials

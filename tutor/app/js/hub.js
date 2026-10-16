@@ -103,6 +103,22 @@ export async function lesson(id) {
   } catch { return cache('lesson.' + id); }
 }
 
+// link cards (online only: they open a page elsewhere) and the credits (kept for when the hub is out of reach)
+export async function links({ subject, year } = {}) {
+  const q = new URLSearchParams();
+  if (subject) q.set('subject', subject);
+  if (year !== undefined && year !== null) q.set('year', String(year));
+  try { return (await call('/api/links?' + q, { ms: 8000 })).links || []; } catch { return []; }
+}
+
+export async function credits() {
+  try {
+    const j = await call('/api/credits', { ms: 8000 });
+    cache('credits', j);
+    return j;
+  } catch { return cache('credits'); }
+}
+
 export const ask = (q) => call('/api/ask', { method: 'POST', body: q, ms: 90000 });
 export const askStatus = (id) => call('/api/ask/' + id);
 export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST' });

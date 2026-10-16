@@ -25,11 +25,13 @@ def main(argv=None):
 
     if a.command == "check":
         from .packs import Library
-        lib = Library(cfg.packs)
-        for p in lib.problems:
+        lib = Library(cfg.packs, release=cfg.release)
+        for p in lib.sources.problems + lib.problems:
             print("problem:", p)
+        for p in lib.hidden:
+            print("not served (release mode):", p)
         print(f"{len(lib.lessons)} lessons in {len(lib.packs)} pack(s), {len(lib.problems)} problem(s)")
-        return 1 if lib.problems else 0
+        return 1 if lib.problems or lib.sources.problems else 0
 
     pin_file = cfg.data / "teacher-pin.txt"
     if a.command == "new-pin":

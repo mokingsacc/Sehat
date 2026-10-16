@@ -39,7 +39,8 @@ export default async function lesson([id]) {
   const prev = h('button', { class: 'btn', type: 'button', onClick: () => go(i - 1) }, icon('back'), s('back'));
   const next = h('button', { class: 'btn primary main', type: 'button', onClick: () => go(i + 1) });
   const actions = h('div', { class: 'actions' }, prev, next);
-  const root = h('div', { class: 'screen player' }, header, body, fb, actions);
+  const band = L.draft ? h('div', { class: 'draft' }, s('draft_note')) : null;
+  const root = h('div', { class: 'screen player' }, header, band, body, fb, actions);
 
   function mainText(st) {
     if (st.kind === 'letter') return [plain(st.text), pick(st.word)].filter(Boolean).join('. ');
@@ -167,14 +168,15 @@ export default async function lesson([id]) {
     const summary = library.get(id);
     const after = summary ? library.after(state.child(), summary) : null;
     [...segs.children].forEach((sp) => sp.classList.add('on'));
-    fill(root, header, h('div', { class: 'finish' },
+    fill(root, header, band, h('div', { class: 'finish' },
       h('div', { class: 'stars' }, [0, 1, 2].map((k) => star(48, k < stars))),
       h('h1', {}, s('lesson_done')),
       answers.length ? h('p', { class: 'muted' }, s('of', { a: right, b: answers.length })) : null,
       summary ? modules.lessonEnd({ child: state.child(), lesson: summary, look: state.mode() }) : null,
       after && after.id !== id ? h('a', { class: 'btn primary big', href: '#/lesson/' + encodeURIComponent(after.id) },
         s('next_lesson'), icon('next')) : null,
-      h('a', { class: 'link', href: '#/home' }, s('back'))));
+      h('a', { class: 'link', href: '#/home' }, s('back')),
+      sourceNote(L)));
     if (young && hasVoice(lang)) say(s('lesson_done'));
   }
 
@@ -187,4 +189,14 @@ export default async function lesson([id]) {
 
   draw();
   return { el: root, tab: null, cleanup: stop };
+}
+
+// the one-line source note at the end of a lesson that uses outside material (BUILD-PLAN 4.2); how it looks is
+// for the design committee (C2), so it is plain text with a speaker for now
+function sourceNote(L) {
+  const lines = (L.credits || []).map((c) => [c.line, pick(c.changes)].filter(Boolean).join(' '));
+  if (!lines.length) return null;
+  return h('div', { class: 'source-note' }, lines.map((t) => h('p', { class: 'row' },
+    h('span', { class: 'grow', dir: 'auto' }, t), speakerBtn(() => speak(t, 'en'), { size: 'sm' }))),
+    h('a', { class: 'link', href: '#/credits' }, s('credits')));
 }

@@ -27,10 +27,11 @@ binding = "DB"
 database_name = "qalam-staging"
 database_id = "00000000-0000-0000-0000-000000000000"   # set by the deploy job (find or create)
 
-# the lessons, their pictures and the migrations travel in the bundle, where the hub's code reads them as files
+# the lessons, their pictures, the licence records and the migrations travel in the bundle, where the hub's code
+# reads them as files (permissions are content/permissions/<id>.md); recorded clips are static assets only
 [[rules]]
 type = "Data"
-globs = ["**/*.json", "**/*.sql", "**/*.svg", "**/*.webp", "**/*.png", "**/*.jpg"]
+globs = ["**/*.json", "**/*.sql", "**/*.svg", "**/*.webp", "**/*.png", "**/*.jpg", "**/*.md"]
 fallthrough = false
 
 # no [observability]: Workers Logs stay off, as the hub keeps no access log (CPU time is read live with wrangler tail)

@@ -21,7 +21,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from .base import EVENT_FIELDS, Store
+from .base import EVENT_FIELDS, Store, check_initials
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -310,3 +310,23 @@ class D1Store(Store):
 
     async def prune_ai_usage(self, keep_days: int):
         await self._run("DELETE FROM ai_usage WHERE day<?", _ago(days=keep_days).strftime("%Y-%m-%d"))
+
+    # content
+
+    async def add_signoff(self, *, lesson, content_hash, role, initials, signed_on) -> bool:
+        check_initials(initials)
+        meta = await self._run("INSERT OR IGNORE INTO signoffs(lesson, content_hash, role, initials, signed_on, "
+                               "added_at) VALUES(?,?,?,?,?,?)", lesson, content_hash, role, initials, signed_on, now())
+        return (meta.changes or 0) == 1
+
+    async def signoffs(self, lesson):
+        return await self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs "
+                               "WHERE lesson=? ORDER BY id", lesson)
+
+    async def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
+        meta = await self._run("INSERT INTO releases(pack, version, content_hash, cohort, released_by, released_at) "
+                               "VALUES(?,?,?,?,?,?)", pack, version, content_hash, cohort, released_by, now())
+        return int(meta.last_row_id)
+
+    async def releases(self, cohort):
+        return await self._all("SELECT * FROM releases WHERE cohort=? ORDER BY id DESC", cohort)

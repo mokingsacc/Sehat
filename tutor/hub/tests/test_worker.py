@@ -92,6 +92,8 @@ def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
         f.name for f in (TUTOR / "migrations").glob("*.sql"))
     assert (src / "modules" / "teacher" / "module.json").is_file() and (src / "cohorts" / "staging.json").is_file()
     assert list((src / "content" / "packs").glob("*/lessons/*.json"))
+    assert (src / "content" / "sources.json").is_file() and (src / "content" / "permissions" / "README.md").is_file()
+    assert not list((src / "content").rglob("*.opus"))        # clips are static assets; the hub reads manifests
     assert (public / "index.html").is_file() and not (public / "tests").exists()
     assert list((public / "packs").glob("*/pictures/*.svg"))
     assert not list(out.rglob("__pycache__")) and not (src / "app").exists()

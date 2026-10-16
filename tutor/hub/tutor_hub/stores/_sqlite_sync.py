@@ -12,7 +12,7 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import EVENT_FIELDS
+from .base import EVENT_FIELDS, check_initials
 
 
 def now() -> str:
@@ -242,3 +242,21 @@ class Store:
     def prune_ai_usage(self, keep_days: int):
         cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime("%Y-%m-%d")
         self._x("DELETE FROM ai_usage WHERE day<?", (cut,))
+
+    # content
+    def add_signoff(self, *, lesson, content_hash, role, initials, signed_on) -> bool:
+        check_initials(initials)
+        cur = self._x("INSERT OR IGNORE INTO signoffs(lesson, content_hash, role, initials, signed_on, added_at) "
+                      "VALUES(?,?,?,?,?,?)", (lesson, content_hash, role, initials, signed_on, now()))
+        return cur.rowcount == 1
+
+    def signoffs(self, lesson):
+        return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs "
+                         "WHERE lesson=? ORDER BY id", (lesson,))
+
+    def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
+        return self._x("INSERT INTO releases(pack, version, content_hash, cohort, released_by, released_at) "
+                       "VALUES(?,?,?,?,?,?)", (pack, version, content_hash, cohort, released_by, now())).lastrowid
+
+    def releases(self, cohort):
+        return self._all("SELECT * FROM releases WHERE cohort=? ORDER BY id DESC", (cohort,))
