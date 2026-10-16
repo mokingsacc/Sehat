@@ -283,6 +283,12 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
   app sends no name at all: the learner writes hers in the sheet's name box by hand. The hub still accepts `name` on
   sheets and print jobs (P13 removes it); in outbox mode a PDF printed with one keeps it until the teacher deletes it.
 
+## The fallback container (tutor/deploy, P12)
+
+The same app as one container, for Render in Frankfurt if D6 goes that way ([HOSTING.md](HOSTING.md)): the hub's
+code, migrations, manifests, cohorts, content and app, run by `python -m tutor_hub serve` with the Worker's online
+settings and SQLite on `/data`. Not deployed; CI builds it and runs the smoke test against it.
+
 ## Learners without names (learners.py, P10)
 
 A learner is a token's hash, a class, a band and an alias, never a name (DESIGN.md 6 to 8). The table is

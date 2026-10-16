@@ -120,6 +120,25 @@ Nothing was bought or enabled. **This is decision D6 for Mo, after 22 December**
 failed requests, or the default in the build plan, Render in Frankfurt, if the Workers port fails its gate. The
 builder's view from these numbers: the port works; the Free plan's CPU limit is what does not.
 
+## The fallback kit (P12, not deployed)
+
+The third answer to D6 is ready in `tutor/deploy`, so choosing it costs an account and an hour rather than a build:
+
+- `Dockerfile` (built from `tutor/`) runs the hub's own app in online mode, as the Worker does: `TUTOR_HOME=online`,
+  `TUTOR_LACKS=printer,pin`, the fake AI provider, no WeasyPrint (`deploy/requirements.txt`, the hub's versions), a
+  non-root user, SQLite on the disk at `/data`. `FORWARDED_ALLOW_IPS=*` lets uvicorn take the phone's address from
+  the host's proxy, which the join limit counts.
+- `render.yaml` is a Render Blueprint for one web service in Frankfurt with a 1 GB disk, deploys by hand only.
+  Render's free instances have no disk, so it needs a paid one (its price list decides the cost). `TUTOR_COHORT`
+  and `TUTOR_ORIGINS` are typed in Render's dashboard; no secret is written in the repository. A real AI key would
+  go the same way, once BUILD-PLAN 3.7's gateway has one.
+- CI builds the image and runs `hub/tests/smoke_http.py` against it on every Tutor run (`tutor.yml`, job
+  `fallback-kit`); `hub/tests/test_fallback_kit.py` keeps its packages and settings equal to the hub's and the
+  Worker's.
+- What it does not have: Cloudflare's static asset serving (uvicorn serves the app and pictures itself, as on the
+  hub), D1 (SQLite instead, one instance), and Cloudflare Access for the staff pages (P20, P21 would need another
+  way in). It was built only because D6 is still open; once Mo chooses Workers, it can be deleted with its CI job.
+
 ## Reading the next runs
 
 Each run of `tutor-worker.yml` writes the same table to its job summary, so later changes can be compared. A run

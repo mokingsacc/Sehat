@@ -87,6 +87,10 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   ("Waiting to send", 7 days for a question, then "Send again"), events wait silently for 14 days. Online, Ask needs
   her token and consent, the limits count tokens rather than addresses, and CORS allows only `TUTOR_ORIGINS`.
   `tools/offline_check.mjs` cuts the network in Chromium and checks the round.
+- **P12, done (minimal):** the fallback kit in `tutor/deploy` (a Dockerfile in online mode without WeasyPrint, and a
+  Render Blueprint for Frankfurt with a disk), not deployed. Kept because D6 is still open: the Worker port works,
+  but the Free plan's CPU limit does not fit, so Render stays one of Mo's three answers. CI builds the image and
+  runs the smoke test against it ([HOSTING.md](HOSTING.md)). Stage B's build work is complete.
 
 ## January 2027: buy and test
 

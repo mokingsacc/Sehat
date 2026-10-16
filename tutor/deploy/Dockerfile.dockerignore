@@ -1,0 +1,9 @@
+# the build context is tutor/; the image copies only the folders the Dockerfile names
+data
+worker
+setup
+tools
+**/node_modules
+**/__pycache__
+**/*.pyc
+**/.venv

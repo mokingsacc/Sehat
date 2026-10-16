@@ -34,3 +34,16 @@ jobs:
         run: for f in app/js/*.js app/js/screens/*.js app/js/modules/*.js; do node --input-type=module --check < "$f" || exit 1; done
       - name: App tests
         run: node --test app/tests/*.test.js
+  fallback-kit:
+    # The fallback kit (BUILD-PLAN P12): the online container builds and passes the smoke test. Never deployed here.
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: tutor } }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build the image
+        run: docker build -f deploy/Dockerfile -t qalam-online .
+      - name: Smoke test against the container
+        run: |
+          docker run -d --name qalam -p 8080:8080 qalam-online
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8080/api/hello > /dev/null && break; sleep 2; done
+          python3 hub/tests/smoke_http.py http://127.0.0.1:8080 || { docker logs qalam; exit 1; }
