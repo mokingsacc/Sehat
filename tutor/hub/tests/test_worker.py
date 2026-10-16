@@ -47,6 +47,7 @@ def test_staging_runs_the_staging_cohort_on_the_fake_ai_without_printer_or_pin()
     staging = json.loads((TUTOR / "cohorts" / "staging.json").read_text(encoding="utf-8"))
     assert v["TUTOR_COHORT"] == staging["id"]
     assert v["TUTOR_AI_PROVIDER"] == "fake"
+    assert v["TUTOR_HOME"] == "online"                                   # the online consent text
     assert set(v["TUTOR_LACKS"].split(",")) == {"printer", "pin"}
     assert not any(k for k in v if "KEY" in k or "TOKEN" in k or "SECRET" in k or "PIN" in k)
 
@@ -93,6 +94,7 @@ def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
     assert (src / "modules" / "teacher" / "module.json").is_file() and (src / "cohorts" / "staging.json").is_file()
     assert list((src / "content" / "packs").glob("*/lessons/*.json"))
     assert (src / "content" / "sources.json").is_file() and (src / "content" / "permissions" / "README.md").is_file()
+    assert (src / "content" / "aliases.json").is_file() and list((src / "content" / "consent").glob("*/online-*.json"))
     assert not list((src / "content").rglob("*.opus"))        # clips are static assets; the hub reads manifests
     assert (public / "index.html").is_file() and not (public / "tests").exists()
     assert list((public / "packs").glob("*/pictures/*.svg"))
@@ -200,13 +202,17 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
                 ("ask, a sum", "POST", "/api/ask", {"text": "1/2 + 1/4", "lang": "en"}),
                 ("ask, the AI", "POST", "/api/ask", {"text": "Why does ice melt?", "lang": "en"}),
                 ("sheet key", "GET", "/api/sheets/maths-7-fractions-add/key?seed=4821", None),
+                ("join", "POST", "/api/join", {"band": "s1", "lang": "en", "picture": "key",
+                                               "consent": {"kind": "guardian-on-phone", "version": "online-2026-10"}}),
                 ("100 events", "POST", "/api/events", {"events": events})]:
             before = worker.db.calls
-            r = await c.request(method, path, json=body)
+            r = await c.request(method, path, json=body, headers=headers if path == "/api/events" else None)
             assert r.status_code == 200, (name, r.text)
+            if path == "/api/join":
+                headers = {"X-Learner-Token": r.json()["token"]}
             costs[name] = worker.db.calls - before
     assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
-    assert costs["100 events"] <= 3, costs
+    assert costs["100 events"] <= 4, costs                    # her record (and her day seen), then one batch
 
 
 async def test_the_spike_route_only_where_staging_asks_for_it(worker, monkeypatch):

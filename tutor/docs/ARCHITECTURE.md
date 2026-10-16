@@ -126,7 +126,7 @@ measurements and what it costs). Nothing of the hub is forked:
   serves the app through it, counts D1 calls per request (the first, which starts the hub, makes 16; the Free
   plan documents 50), checks the bundle layout and the deploy's guards.
 - Limits that remain online: the per-phone limits (Ask, events) know a phone by its address, which a Worker does
-  not see, so all phones reaching one isolate share them; learner tokens (P10) will replace this. Workers Logs
+  not see, so all phones reaching one isolate share them; P11 keys them by learner token. Workers Logs
   stay off (no `[observability]`), as the hub keeps no access log; the deploy job reads CPU times live with
   `wrangler tail` and keeps only the numbers.
 
@@ -151,14 +151,19 @@ switched-off module's routes answer 404 as if they were never there.
 
 An event says what happened, never who: `{at, verb, object, value}`, the UTC minute, a verb from the fixed list in
 `events.py`, an id (a lesson, or where an answer came from) and a number when the verb has one (stars, copies). The
-hub derives the module from the verb and adds the cohort; `token_hash` stays empty until learners have tokens (P10).
+hub derives the module from the verb and takes the cohort and `token_hash` from the learner token the phone sends
+(P10): `POST /api/events` needs `X-Learner-Token` (401 without a token the server knows) and her consent record
+(403 without it).
 The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted at start-up after that).
 
 - **From the phone** (`app/js/events.js`): `lesson.start` and `lesson.done`, recorded by `state.js`, and `check.done`
   (the lesson and the percent right, 0 to 100), recorded by the Check my sheet screen each time a sheet is marked (the
   Check button, or every row judged on a sheet with nothing to type), whether its key came from printing or from the
-  hub. All are kept in a queue on the phone (`qalam.events.v1`, at most 500) until the hub is in reach, then sent
-  with `POST /api/events`, at most 100 at a time. A batch that did not arrive stays queued; one the hub refuses is dropped.
+  hub. Only a learner whose grown-up agreed (or an adult who agreed) has events: `state.record` checks her consent.
+  All are kept in a queue on the phone (`qalam.events.v1`, at most 500), each marked with the learner on this phone
+  it belongs to (never sent), until the hub is in reach, then sent with her token, at most 100 at a time. A batch
+  that did not arrive stays queued; one the hub refuses is dropped; a 401 or 403 keeps them while `account.js` joins
+  her again or resends the consent.
 - **From the hub's own routes:** `ask.answered` (with the answer's source), `ask.to_teacher`, `print.queued` (lesson,
   copies), `review.approved` and `review.rejected` (the question's lesson). Fetching a sheet's key writes nothing.
   A phone cannot send these. Writing one never breaks the route that made it.
@@ -197,8 +202,10 @@ Outside material reaches a pack only as its licence allows, and nothing reaches 
   Worker on staging is not in release mode, so reviewers see the starter drafts there.
 - **Credits:** `GET /api/credits` lists every source the served lessons, pictures, clips and cards use, with each
   item's credit line, the links, and the fonts; each lesson from the hub carries its own `credits` lines for the
-  source note at its end. The Credits page is reached from Who is learning until Settings exists (P10). Link
-  cards, the source note and Credits are plain and token-styled; C2.6 settled their look (DESIGN-C2C3-SPECS.md, item 6).
+  source note at its end. The Credits screen (Settings → Credits, P10) is C2.6's: the sources grouped and opening
+  to their items, the linked sites ("all rights are theirs"), the voices as their recorders choose (only languages
+  with real recordings; `app/credits.json` names a recorder only on her written request), and the fonts, sounds and
+  code from `app/credits.json`. Link cards and the source note are still P8's plain cards.
 - **Recorded clips** in a pack (`audio/<lang>/manifest.json`: file, speaker code, placeholder, sha256) are known to
   the hub by their manifest; the files are served at `/packs/<pack>/audio/<lang>/<file>` (online, as static
   assets). `tools/validate_pack.py` checks every file against its hash and refuses an unlisted or synthetic clip.
@@ -271,14 +278,44 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
   app sends no name at all: the learner writes hers in the sheet's name box by hand. The hub still accepts `name` on
   sheets and print jobs (P13 removes it); in outbox mode a PDF printed with one keeps it until the teacher deletes it.
 
+## Learners without names (learners.py, P10)
+
+A learner is a token's hash, a class, a band and an alias, never a name (DESIGN.md 6 to 8). The table is
+`migrations/0006_learners.sql`: `token_hash`, `cohort`, `picture`, `number`, `band`, the consent record
+(`consent_kind`, `consent_version`, `consent_at`) and two days (`joined`, `last_seen`); the store contract adds
+`set_class_code`, `cohort_by_code`, `add_learner` (it draws the number: 1 to 99 free for that picture in that class,
+then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go with her) and `prune_learners`
+(12 months unseen, at start-up).
+
+- **Joining** (`POST /api/join {band, lang, picture, cohort_code?, consent?}`, at most 20 an hour per address): a
+  class code (8 letters and digits with no 0, O, 1, I or L, shown `K7QM-4PRT`; kept as `sha256("qalam-class:" +
+  code)`) joins that class, otherwise the server's own cohort (`TUTOR_COHORT`). The band and language must be the
+  class's and the picture one of `content/aliases.json`. The answer is a random token (the server keeps its
+  SHA-256 only), the number and the class. The phone sends the token as `X-Learner-Token`.
+- **Her record:** `GET /api/me`, `POST /api/me {band?, consent?}`, `DELETE /api/me` ("Stop sharing", or a learner
+  removed from a phone). A token the server does not know is 401, "join again".
+- **Consent:** `hello.consent` names the text to show: `hub-2026-10` on a hub, `online-2026-10` online
+  (`TUTOR_HOME=online`, set in `wrangler.toml`); `GET /api/consent?lang=&version=` serves
+  `content/consent/<lang>/<version>.json` (four rows and the full text; drafts). The record is the kind
+  (`guardian-on-phone`, `self` or `partner-paper`), the version and the minute; a minute in the future becomes now.
+- **Class codes** come from the hub's command line until the admin panel (P21): `python -m tutor_hub class-code
+  [COHORT]` prints the code and the card's link, `{public_url}/?join=CODE`.
+- **On the phone** (`app/js/account.js`): a learner with a class code joins once the consent screen is answered
+  (agreed or "Not now"); without one she joins only when her grown-up agrees. A consent given later and a new band
+  go to `/api/me`; "Stop sharing" and removing a learner queue her token for `DELETE /api/me` until the server is in
+  reach. Each runs whenever the server is in reach (`account.sync()`, on every screen change and reconnection).
+
 ## Privacy
 
 - The hub stores no names. A question is kept with a random token (so the asking phone can fetch the teacher's
   answer), the year, subject and lesson; questions are deleted after `TUTOR_KEEP_DAYS` (60).
 - Progress and the asked-questions list stay on the phone (`localStorage`, key `qalam.v2`). `qalam.v2` holds no name:
-  a learner is a band, a year or adult track, a language, an alias picture (P10), an optional nickname and her own
-  settings. The older `qalam.v1`, which could hold a child's name, is migrated once with the name dropped and removed.
-- Events (above) are verbs and ids with no name, no free text and, for now, no learner token; they stay on the hub.
+  a learner is a band, a year or adult track, a language, an alias picture, an optional nickname (never sent) and her
+  own settings; once she joins, the server's token, number and class, and her consent record. The PIN lock is a
+  salted hash on the phone (10,000 rounds of SHA-256 in `app/js/sha256.js`, since `crypto.subtle` needs HTTPS) and
+  is never sent. The older `qalam.v1`, which could hold a child's name, is migrated once with the name dropped and removed.
+- Events (above) are verbs and ids with no name and no free text, sent only with consent and kept against her
+  token's hash; they stay on the hub.
 - Nothing leaves the hub: there is no internet connection and no analytics.
 
 ## Routes
@@ -286,7 +323,10 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | Route | What |
 |---|---|
 | `GET /api/hello` | Hub name, version and `core`, lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
-| `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}` (`?cohort=`) |
+| `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}`; header `X-Learner-Token`, her consent needed |
+| `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
+| `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
+| `GET`, `POST`, `DELETE /api/me` | Her own record (`{band?, consent?}` to change it); header `X-Learner-Token` |
 | `GET /api/packs` | Every pack and its lesson list (no lesson content) |
 | `GET /api/lessons/{id}` | One lesson, picture and clip names turned into URLs, with `draft` and its `credits`, without the sheet, review or sources |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |
@@ -304,13 +344,23 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jobs), `check` (the sheet key),
-`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello`, `/api/events`, `/api/credits` and the app's
-files are always there.
+`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello`, `/api/events`, `/api/credits`, the
+learner routes and the app's files are always there.
 
 ## The app (app/js)
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/lesson/{id}`, `#/print/{id}`,
-  `#/check/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`).
+  `#/check/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
+  `#/lock`, `#/settings`, `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
+  learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
+  and the teacher's page stay open).
+- Sign-up (DESIGN.md 6 to 8): `screens/welcome.js` (the doors, no name field), `screens/signup.js` (the ordered
+  `STEPS` after Welcome, consent then the lock offer, and the class-code screen), `screens/consent.js` (four rows read
+  on open, "Read all", "Hold to agree" with `ui.holdable`, the ring the grown-up's corner also uses), `lock.js` (the
+  rules: pure functions, `app/tests/lock.test.js`) and `screens/lock.js` (the keypad, the waits, the visible 24-hour
+  reset), `screens/settings.js`, `aliases.js` (the pictures, kept equal to `content/aliases.json` by
+  `app/tests/aliases.test.js`) and `account.js` (the server side, `app/tests/account.test.js`). Ask opens the consent
+  screen before the first question it would send. `tools/signup_check.mjs` walks sign-up in Chromium.
 - `bands.js` turns the learner's year or adult track into five attributes on `<html>`: `data-band` (`ey`, `p1`, `p2`,
   `s1`, `s2`, `ad`), `data-look` (`bold` or `clean`; it replaced `data-mode`), `data-tone` (`child` or `adult`),
   `data-text` (`large` for Bigger text) and `data-theme` (`light`, `dark`, or absent to follow the phone). The CSS

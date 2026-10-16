@@ -32,10 +32,12 @@ class Smoke:
         self.timings: list[dict] = []
         self.failed: list[str] = []
 
-    def call(self, method, path, body=None):
+    def call(self, method, path, body=None, token=None):
         data = json.dumps(body).encode() if body is not None else None
-        req = urllib.request.Request(self.base + path, data=data, method=method,
-                                     headers={"Content-Type": "application/json", "User-Agent": "qalam-smoke"})
+        headers = {"Content-Type": "application/json", "User-Agent": "qalam-smoke"}
+        if token:
+            headers["X-Learner-Token"] = token
+        req = urllib.request.Request(self.base + path, data=data, method=method, headers=headers)
         t = time.perf_counter()
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -99,15 +101,31 @@ class Smoke:
             s, k = self.call("GET", "/api/sheets/maths-7-fractions-add/key?seed=4821&lang=prs")
             self.check("Check my sheet's key", s == 200 and k.get("items"), f"{s}")
 
+        # a learner joins with consent (a band, a language and an alias picture: nothing personal), sends events,
+        # then deletes herself, so each run leaves nothing behind
+        s, c = self.call("GET", f"/api/consent?lang=en&version={hello.get('consent')}")
+        self.check("the consent text hello names", s == 200 and set(c.get("rows", {})) == {"does", "keeps", "sees", "stop"},
+                   f"{s}")
+        s, j = self.call("POST", "/api/join", {"band": "s1", "lang": "en", "picture": "key",
+                                                "consent": {"kind": "guardian-on-phone", "version": hello.get("consent")}})
+        if not self.check("a learner joins", s == 200 and j.get("token") and j.get("number"), f"{s} {j}"):
+            return
+        t = j["token"]
         now = time.strftime("%Y-%m-%dT%H:%M", time.gmtime())
         evs = [{"at": now, "verb": "lesson.start", "object": "maths-7-fractions-add"},
                {"at": now, "verb": "check.done", "object": "maths-7-fractions-add", "value": 75}]
-        s, r = self.call("POST", "/api/events", {"events": evs})
+        s, _ = self.call("POST", "/api/events", {"events": evs})
+        self.check("events without a learner are refused", s == 401, f"{s}")
+        s, r = self.call("POST", "/api/events", {"events": evs}, token=t)
         self.check("events from a phone's queue", s == 200 and r == {"saved": 2, "expired": 0}, f"{s} {r}")
-        s, _ = self.call("POST", "/api/events", {"events": [dict(evs[0], note="free text")]})
+        s, _ = self.call("POST", "/api/events", {"events": [dict(evs[0], note="free text")]}, token=t)
         self.check("an event with free text is refused", s == 422, f"{s}")
-        s, _ = self.call("POST", "/api/events", {"events": [dict(evs[0], verb="print.queued", value=1)]})
+        s, _ = self.call("POST", "/api/events", {"events": [dict(evs[0], verb="print.queued", value=1)]}, token=t)
         self.check("a hub-only verb from a phone is refused", s == 422, f"{s}")
+        s, r = self.call("DELETE", "/api/me", token=t)
+        self.check("she deletes her record", s == 200 and r == {"deleted": True}, f"{s} {r}")
+        s, _ = self.call("GET", "/api/me", token=t)
+        self.check("and it is gone", s == 401, f"{s}")
 
 
 def main(argv=None):

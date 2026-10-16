@@ -21,7 +21,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from .base import EVENT_FIELDS, Store, check_initials
+from .base import EVENT_FIELDS, Store, check_changes, check_initials, draw_number
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -330,3 +330,52 @@ class D1Store(Store):
 
     async def releases(self, cohort):
         return await self._all("SELECT * FROM releases WHERE cohort=? ORDER BY id DESC", cohort)
+
+    # learners
+
+    async def set_class_code(self, cid, code_hash) -> bool:
+        return ((await self._run("UPDATE cohorts SET code_hash=? WHERE id=?", code_hash, cid)).changes or 0) > 0
+
+    async def cohort_by_code(self, code_hash):
+        return self._cohort(await self._one("SELECT id, label, langs, bands, settings, created FROM cohorts "
+                                            "WHERE code_hash=?", code_hash))
+
+    async def add_learner(self, *, token_hash, cohort, picture, band, consent_kind=None, consent_version=None,
+                          consent_at=None) -> int:
+        today = now()[:10]
+        for _ in range(8):                   # another isolate may take the same number at the same moment
+            used = [r["number"] for r in await self._all("SELECT number FROM learners WHERE cohort=? AND picture=?",
+                                                         cohort, picture)]
+            n = draw_number(used)
+            try:
+                await self._run("""INSERT INTO learners(token_hash, cohort, picture, number, band, consent_kind,
+                                   consent_version, consent_at, joined, last_seen) VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                                token_hash, cohort, picture, n, band, consent_kind, consent_version, consent_at, today,
+                                today)
+                return n
+            except Exception:
+                if await self.learner(token_hash):
+                    raise
+        raise RuntimeError("no free number for this picture")
+
+    async def learner(self, token_hash):
+        return await self._one("SELECT * FROM learners WHERE token_hash=?", token_hash)
+
+    async def update_learner(self, token_hash, **changes) -> bool:
+        check_changes(changes)
+        if not changes:
+            return await self.learner(token_hash) is not None
+        cols = ", ".join(f"{k}=?" for k in changes)
+        meta = await self._run(f"UPDATE learners SET {cols} WHERE token_hash=?", *changes.values(), token_hash)
+        return (meta.changes or 0) > 0
+
+    async def delete_learner(self, token_hash) -> bool:
+        res = await self._batch([self._stmt("DELETE FROM events WHERE token_hash=?", token_hash),
+                                 self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
+        return (res[1].meta.changes or 0) > 0
+
+    async def prune_learners(self, idle_days: int):
+        cut = _ago(days=idle_days).strftime("%Y-%m-%d")
+        await self._batch([self._stmt("DELETE FROM events WHERE token_hash IN "
+                                      "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
+                           self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])

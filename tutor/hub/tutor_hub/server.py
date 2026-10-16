@@ -21,7 +21,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
-from . import __version__, events, flags, modules, search, sheets
+from . import __version__, events, flags, learners, modules, search, sheets
 from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import Brain
 from .config import Config
@@ -63,6 +63,30 @@ class EventIn(BaseModel):
     verb: StrictStr = Field(..., max_length=32)
     object: StrictStr | None = Field(None, max_length=64)
     value: StrictInt | None = None
+
+
+class ConsentIn(BaseModel):
+    """A consent record: its kind, the text version shown and the minute; never who agreed."""
+    model_config = ConfigDict(extra="forbid")
+    kind: Literal["guardian-on-phone", "self", "partner-paper"]
+    version: StrictStr = Field(..., max_length=40)
+    at: StrictStr | None = Field(None, max_length=16)
+
+
+class JoinIn(BaseModel):
+    """Joining: a band, a language and an alias picture, a class code if she has one, consent if given. Nothing else."""
+    model_config = ConfigDict(extra="forbid")
+    cohort_code: StrictStr | None = Field(None, max_length=20)
+    band: Literal["ey", "p1", "p2", "s1", "s2", "ad"]
+    lang: Literal["prs", "ps", "en"]
+    picture: StrictStr = Field(..., max_length=24)
+    consent: ConsentIn | None = None
+
+
+class MeIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    band: Literal["ey", "p1", "p2", "s1", "s2", "ad"] | None = None
+    consent: ConsentIn | None = None
 
 
 class EventsIn(BaseModel):
@@ -134,6 +158,10 @@ class Hub:
         self.ask_limit = Limit(10, 60)
         self.pdf_limit = Limit(10, 60)
         self.event_limit = Limit(30, 60)
+        self.join_limit = Limit(20, 3600)
+        self.aliases = set(learners.load_aliases())
+        self.consent_texts = learners.load_consent()
+        self.consent_version = learners.CONSENT_VERSIONS[cfg.home]
 
     async def start(self):
         await self.store.open()
@@ -144,6 +172,7 @@ class Hub:
         await self.store.prune(self.cfg.keep_days)
         await self.store.prune_events(events.KEEP_DAYS)
         await self.store.prune_ai_usage(ai_gateway.KEEP_DAYS)
+        await self.store.prune_learners(learners.IDLE_DAYS)
         await self.store.fail_unfinished_prints()
         await self.reindex()
         if "printer" not in self.cfg.lacks:       # the queue's thread is the hub's; the Worker has no printer
@@ -186,6 +215,25 @@ class Hub:
             await self.store.add_events([events.row(e, cohort=cid)])
         except Exception:
             log.exception("event %s not kept", verb)
+
+    async def learner(self, request: Request, required: bool = True):
+        """The learner whose token the request carries (X-Learner-Token), with today as her last day seen; None
+        without one, or 401 when `required`."""
+        token = request.headers.get(learners.HEADER) or ""
+        row = await self.store.learner(learners.token_hash(token)) if learners.TOKEN.match(token) else None
+        if row is None:
+            if required:
+                raise HTTPException(401, "this learner is not known here: join again")
+            return None
+        today = learners.day()
+        if row["last_seen"] != today:
+            await self.store.update_learner(row["token_hash"], last_seen=today)
+        return row
+
+    def consent_changes(self, c) -> dict:
+        if c.version not in {v for (_, v) in self.consent_texts}:
+            raise HTTPException(422, "unknown consent text version")
+        return {"consent_kind": c.kind, "consent_version": c.version, "consent_at": learners.consent_at(c.at)}
 
     async def reindex(self):
         async with self._ix_lock:
@@ -250,7 +298,7 @@ class Hub:
         return {"hub": self.cfg.name, "version": __version__, "core": __version__, "lessons": len(self.library.lessons),
                 "ai": {"on": ai_on, "langs": list(self.cfg.ai_langs) if ai_on else []},
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
-                "url": self.cfg.public_url, "release": self.cfg.release,
+                "url": self.cfg.public_url, "release": self.cfg.release, "consent": self.consent_version,
                 "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
                 "modules": mods}
 
@@ -290,7 +338,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
                   lifespan=lifespan)
     app.state.hub = hub
     # the Android app (another origin) talks to the hub too
-    app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"], allow_headers=["*"],
+    app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST", "DELETE"], allow_headers=["*"],
                        expose_headers=["X-Sheet-Seed"])
 
     @app.get("/api/hello")
@@ -337,6 +385,62 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     async def credits():
         return hub.library.credits()
 
+    # learners: joining, her own record, the consent text (learners.py)
+    @app.get("/api/consent")
+    async def consent_text(lang: str = "prs", version: str | None = None):
+        doc = hub.consent_texts.get((_lang(lang), version or hub.consent_version))
+        if not doc:
+            raise HTTPException(404, "no such consent text")
+        return doc
+
+    @app.post("/api/join")
+    async def join(j: JoinIn, request: Request):
+        hub.join_limit.check(_who(request))
+        if j.cohort_code is not None:
+            code = learners.normal_code(j.cohort_code)
+            cohort = await hub.store.cohort_by_code(learners.code_hash(code)) if code else None
+            if not cohort:
+                raise HTTPException(404, "no class has this code")
+        else:
+            cohort = await hub.store.cohort(hub.cohort_id or "")
+            if not cohort:
+                raise HTTPException(404, "no such cohort")
+        if j.band not in cohort["bands"] or j.lang not in cohort["langs"]:
+            raise HTTPException(422, "this class is not for this year or language")
+        if j.picture not in hub.aliases:
+            raise HTTPException(422, "unknown picture")
+        c = hub.consent_changes(j.consent) if j.consent else {}
+        token = learners.new_token()
+        number = await hub.store.add_learner(token_hash=learners.token_hash(token), cohort=cohort["id"],
+                                             picture=j.picture, band=j.band, **c)
+        return {"token": token, "number": number, "picture": j.picture,
+                "cohort": {"id": cohort["id"], "label": cohort["label"]}}
+
+    @app.get("/api/me")
+    async def me(request: Request):
+        row = await hub.learner(request)
+        return learners.public(row, await hub.store.cohort(row["cohort"]))
+
+    @app.post("/api/me")
+    async def me_change(body: MeIn, request: Request):
+        row = await hub.learner(request)
+        changes = {}
+        if body.band:
+            cohort = await hub.store.cohort(row["cohort"])
+            if body.band not in (cohort or {}).get("bands", ()):
+                raise HTTPException(422, "this class is not for this year")
+            changes["band"] = body.band
+        if body.consent:
+            changes.update(hub.consent_changes(body.consent))
+        await hub.store.update_learner(row["token_hash"], **changes)
+        return learners.public(await hub.store.learner(row["token_hash"]), await hub.store.cohort(row["cohort"]))
+
+    @app.delete("/api/me")
+    async def me_delete(request: Request):
+        row = await hub.learner(request)
+        await hub.store.delete_learner(row["token_hash"])
+        return {"deleted": True}
+
     # Ask
     @app.post("/api/ask", dependencies=needs("ask"))
     async def ask(a: AskIn, request: Request):
@@ -366,17 +470,19 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         return {"ok": True}
 
     # events from the phones' queues: verbs and ids only (events.py)
+    # A phone's events belong to a learner who has joined (her token) and whose guardian, or who herself, agreed:
+    # without consent nothing of hers is kept (BUILD-PLAN 5.5). They go to her cohort, with her token's hash.
     @app.post("/api/events")
-    async def post_events(body: EventsIn, request: Request, cohort: str | None = None):
+    async def post_events(body: EventsIn, request: Request):
         hub.event_limit.check(_who(request))
-        c = await hub.store.cohort(cohort or hub.cohort_id or "")
-        if not c:
-            raise HTTPException(404, "no such cohort")
+        who = await hub.learner(request)
+        if not who["consent_kind"]:
+            raise HTTPException(403, "no consent: events are not kept")
         items = [e.model_dump() for e in body.events]
         problems = [f"event {i + 1}: {p}" for i, e in enumerate(items) for p in events.check(e, phone=True)]
         if problems:
             raise HTTPException(422, "; ".join(problems[:10]))
-        rows = [r for r in (events.row(e, cohort=c["id"]) for e in items) if r]
+        rows = [r for r in (events.row(e, cohort=who["cohort"], token_hash=who["token_hash"]) for e in items) if r]
         await hub.store.add_events(rows)
         return {"saved": len(rows), "expired": len(items) - len(rows)}
 

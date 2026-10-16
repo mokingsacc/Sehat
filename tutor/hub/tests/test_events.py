@@ -14,8 +14,22 @@ def minute(**ago) -> str:
     return events.minute(datetime.now(timezone.utc) - timedelta(**ago))
 
 
-def post(client, *evs, **params):
-    return client.post("/api/events", params=params, json={"events": list(evs)})
+def join(client, consent=True, **body):
+    """A learner joins (P10) and her token comes back; with consent unless asked not to."""
+    body = {"band": "p1", "lang": "prs", "picture": "book", **body}
+    if consent:
+        body["consent"] = {"kind": "guardian-on-phone", "version": client.hub.consent_version}
+    r = client.post("/api/join", json=body)
+    assert r.status_code == 200, r.text
+    return r.json()["token"]
+
+
+def post(client, *evs, token=None):
+    """Events from a phone's queue, as one learner with consent (the same learner each time on one client)."""
+    if token is None:
+        token = getattr(client, "_learner", None) or join(client)
+        client._learner = token
+    return client.post("/api/events", headers={"X-Learner-Token": token}, json={"events": list(evs)})
 
 
 def kept(client, limit=100):
@@ -32,7 +46,8 @@ def test_a_lesson_done_offline_arrives_as_two_events(hub_client):
     rows = kept(hub_client)
     assert [(e["verb"], e["module"], e["object"], e["value"]) for e in rows] == [
         ("lesson.done", "lessons", "maths-1-count-5", 3), ("lesson.start", "lessons", "maths-1-count-5", None)]
-    assert rows[0]["at"] == done["at"] and rows[0]["token_hash"] is None
+    from tutor_hub.learners import token_hash
+    assert rows[0]["at"] == done["at"] and rows[0]["token_hash"] == token_hash(hub_client._learner)
     assert rows[0]["cohort"] == hub_client.hub.cohort_id
 
 
@@ -71,13 +86,25 @@ def test_clocks_running_fast_or_far_behind(hub_client):
     assert kept(hub_client)[0]["at"] <= events.minute()
 
 
-def test_events_go_to_the_cohort_named(hub_client):
+def test_events_go_to_the_learners_cohort_with_her_token_hash(hub_client):
+    from tutor_hub import learners
     e = {"at": minute(), "verb": "lesson.start", "object": "dari-1-sheen"}
-    assert post(hub_client, e, cohort="nosuchcohort").status_code == 404
     other = hub_client.hub.seeds["open"]["id"]
-    assert post(hub_client, e, cohort=other).status_code == 200
+    code = learners.new_class_code()
+    hub_client.portal.call(hub_client.hub.store.set_class_code, other, learners.code_hash(learners.normal_code(code)))
+    token = join(hub_client, cohort_code=code.lower())                     # typed in small letters: still found
+    assert post(hub_client, e, token=token).status_code == 200
     assert kept(hub_client) == []
-    assert len(hub_client.portal.call(hub_client.hub.store.events, other)) == 1
+    [row] = hub_client.portal.call(hub_client.hub.store.events, other)
+    assert row["token_hash"] == learners.token_hash(token) and token not in str(row)
+
+
+def test_no_events_without_a_token_or_without_consent(hub_client):
+    e = {"at": minute(), "verb": "lesson.start", "object": "dari-1-sheen"}
+    assert hub_client.post("/api/events", json={"events": [e]}).status_code == 401
+    assert post(hub_client, e, token="x" * 32).status_code == 401
+    assert post(hub_client, e, token=join(hub_client, consent=False)).status_code == 403
+    assert kept(hub_client) == []
 
 
 def test_one_phone_cannot_flood_events(hub_client):

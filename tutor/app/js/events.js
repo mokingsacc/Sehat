@@ -4,6 +4,10 @@
 // refuses any other field, and so the queue holds no other field.
 // A batch the hub refuses (an old app sending a verb the hub no longer takes) is dropped, so it cannot block the
 // queue; a batch that did not arrive (no hub, a busy hub) stays for the next try.
+// Since P10 each queued event carries `l`, the id of the learner on this phone it belongs to (never sent), and is
+// sent with her learner token. Only learners whose grown-up agreed have events (state.record checks); a learner
+// with no token yet keeps hers until she has joined. The server answering 401 (it does not know her token) or 403
+// (it has no consent for her) keeps the events and tells account.js, which joins her again or sends the consent.
 
 import * as hub from './hub.js';
 
@@ -18,6 +22,13 @@ const DIGIT_RUN = /[0-9]{5,}/;      // the hub refuses these, so nothing like a 
 let seq = 0;
 let sending = null;
 let started = false;
+// account.js says which token a learner has and hears when the server does not know it (configure())
+let tokenFor = () => null;
+let onRefused = () => {};
+export function configure({ token, refused } = {}) {
+  if (token) tokenFor = token;
+  if (refused) onRefused = refused;
+}
 
 function read() {
   try {
@@ -34,42 +45,55 @@ function write(q) {
 export const minute = (d = new Date()) => d.toISOString().slice(0, 16);
 
 // the events waiting to be sent, as the hub will get them
-export function pending() { return read().map(({ n, ...e }) => e); }
+export function pending(learner) {
+  return read().filter((e) => !learner || e.l === learner).map(({ n, l, ...e }) => e);
+}
 
-// add one event to the queue and try to send it; a verb or object the hub would refuse is never queued
-export function record(verb, object = null, value = null) {
+// add one event for a learner on this phone and try to send it; a verb or object the hub would refuse is never queued
+export function record(verb, object = null, value = null, learner = null) {
+  if (typeof learner !== 'string' || !learner) return false;
   const v = VERBS[verb];
   if (!v || (object !== null && !(typeof object === 'string' && object.length <= 64 && LESSON.test(object) && !DIGIT_RUN.test(object)))) return false;
   if (v.value !== (value !== null)) return false;
-  const e = { n: `${Date.now()}.${++seq}`, at: minute(), verb, object };
+  const e = { n: `${Date.now()}.${++seq}`, l: learner, at: minute(), verb, object };
   if (value !== null) e.value = value;
   write([...read(), e].slice(-MAX_QUEUE));
   if (hub.online()) flush();
   return true;
 }
 
-// send what is queued while the hub is in reach; resolves when the queue is empty or the hub cannot take more
+// send what is queued while the hub is in reach; resolves when the queue is empty or the hub cannot take more. A call
+// while a send is running runs once more after it (a learner may have got her token meanwhile).
+let more = false;
 export function flush() {
-  if (sending) return sending;
+  if (sending) { more = true; return sending; }
   sending = (async () => {
     try {
-      while (hub.online()) {
-        const batch = read().slice(0, BATCH);
-        if (!batch.length) break;
-        let refused = false;
-        try {
-          await hub.sendEvents(batch.map(({ n, ...e }) => e));
-        } catch (e) {
-          refused = e.status === 400 || e.status === 422;
-          if (!refused) break;                 // not sent: keep them for the next try
-          console.warn('events refused by the hub', e.message);
-        }
-        const sent = new Set(batch.map((e) => e.n));
-        write(read().filter((e) => !sent.has(e.n)));
-      }
+      do { more = false; await sendAll(); } while (more && hub.online());
     } finally { sending = null; }
   })();
   return sending;
+}
+
+async function sendAll() {
+  const waiting = new Set();             // learners whose events stay this time (no token, or not known)
+  while (hub.online()) {
+    const first = read().find((e) => !waiting.has(e.l) && tokenFor(e.l));
+    if (!first) break;
+    const token = tokenFor(first.l);
+    const batch = read().filter((e) => e.l === first.l).slice(0, BATCH);
+    let refused = false;
+    try {
+      await hub.sendEvents(batch.map(({ n, l, ...e }) => e), token);
+    } catch (e) {
+      if (e.status === 401 || e.status === 403) { waiting.add(first.l); onRefused(first.l, e.status); continue; }
+      refused = e.status === 400 || e.status === 422;
+      if (!refused) break;                 // not sent: keep them for the next try
+      console.warn('events refused by the hub', e.message);
+    }
+    const sent = new Set(batch.map((e) => e.n));
+    write(read().filter((e) => !sent.has(e.n)));
+  }
 }
 
 // from start-up: send what earlier visits left, and again each time the hub comes back
@@ -80,5 +104,8 @@ export function start() {
   if (hub.online()) flush();
 }
 
+// a learner removed from this phone, or whose grown-up stopped sharing: her queued events go too
+export function drop(learner) { write(read().filter((e) => e.l !== learner)); }
+
 // for tests
-export function reset() { write([]); sending = null; }
+export function reset() { write([]); sending = null; more = false; }

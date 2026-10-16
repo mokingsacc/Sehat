@@ -12,7 +12,7 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import EVENT_FIELDS, check_initials
+from .base import EVENT_FIELDS, check_changes, check_initials, draw_number
 
 
 def now() -> str:
@@ -260,3 +260,63 @@ class Store:
 
     def releases(self, cohort):
         return self._all("SELECT * FROM releases WHERE cohort=? ORDER BY id DESC", (cohort,))
+
+    # learners
+    def set_class_code(self, cid, code_hash) -> bool:
+        return self._x("UPDATE cohorts SET code_hash=? WHERE id=?", (code_hash, cid)).rowcount > 0
+
+    def cohort_by_code(self, code_hash):
+        return self._cohort(self._one("SELECT id, label, langs, bands, settings, created FROM cohorts WHERE code_hash=?",
+                                      (code_hash,)))
+
+    def add_learner(self, *, token_hash, cohort, picture, band, consent_kind=None, consent_version=None,
+                    consent_at=None) -> int:
+        today = now()[:10]
+        for _ in range(8):                   # another phone may take the same number at the same moment
+            used = [r["number"] for r in self._all("SELECT number FROM learners WHERE cohort=? AND picture=?",
+                                                   (cohort, picture))]
+            n = draw_number(used)
+            try:
+                self._x("""INSERT INTO learners(token_hash, cohort, picture, number, band, consent_kind, consent_version,
+                           consent_at, joined, last_seen) VALUES(?,?,?,?,?,?,?,?,?,?)""",
+                        (token_hash, cohort, picture, n, band, consent_kind, consent_version, consent_at, today, today))
+                return n
+            except sqlite3.IntegrityError:
+                if self.learner(token_hash):
+                    raise
+        raise RuntimeError("no free number for this picture")
+
+    def learner(self, token_hash):
+        return self._one("SELECT * FROM learners WHERE token_hash=?", (token_hash,))
+
+    def update_learner(self, token_hash, **changes) -> bool:
+        check_changes(changes)
+        if not changes:
+            return self.learner(token_hash) is not None
+        cols = ", ".join(f"{k}=?" for k in changes)
+        return self._x(f"UPDATE learners SET {cols} WHERE token_hash=?", (*changes.values(), token_hash)).rowcount > 0
+
+    def delete_learner(self, token_hash) -> bool:
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                self.db.execute("DELETE FROM events WHERE token_hash=?", (token_hash,))
+                n = self.db.execute("DELETE FROM learners WHERE token_hash=?", (token_hash,)).rowcount
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+        return n > 0
+
+    def prune_learners(self, idle_days: int):
+        cut = (datetime.now(timezone.utc) - timedelta(days=idle_days)).strftime("%Y-%m-%d")
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                self.db.execute("DELETE FROM events WHERE token_hash IN "
+                                "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
+                self.db.execute("DELETE FROM learners WHERE last_seen<?", (cut,))
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise

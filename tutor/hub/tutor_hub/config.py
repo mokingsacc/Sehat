@@ -45,6 +45,8 @@ class Config:
     keep_days: int = 60                                   # questions are deleted after this (approved answers stay)
     lacks: tuple = ()                                     # module needs this host cannot meet: the Worker lacks
                                                           # printer and pin, so print and teacher are off there
+    home: str = "hub"                                     # hub (the village hub, plain http) or online (the Worker):
+                                                          # which consent text learners see
     release: bool = False                                 # production: serve only signed lessons (TUTOR_RELEASE=1);
                                                           # otherwise drafts are served, marked as drafts
     extra: dict = field(default_factory=dict)
@@ -73,6 +75,7 @@ class Config:
             wifi_password=_env("TUTOR_WIFI_PASSWORD"),
             keep_days=int(_env("TUTOR_KEEP_DAYS", cls.keep_days)),
             lacks=tuple(x.strip() for x in _env("TUTOR_LACKS", "").split(",") if x.strip()),
+            home="online" if _env("TUTOR_HOME", "hub").strip().lower() == "online" else "hub",
             release=_env("TUTOR_RELEASE", "0").strip().lower() in ("1", "true", "yes", "on"),
         )
         for k, v in over.items():

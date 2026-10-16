@@ -308,6 +308,19 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
 - Bigger text and the theme are kept per learner but get their switches with Settings (P10); Welcome lost its name
   field and gained English, and gets the early-years and adult doors in P10.
 
+## What P10 built, and where it differs
+
+- Welcome, consent, the lock and Settings are built as sections 5 to 8 say. Open for the next sitting: on Welcome the
+  speakers sit on each head ("Primary school · years 1 to 6") and on each worded door, not beside each year digit;
+  "Remove this learner" and its confirmation use `--bad` (a `--bad-soft` button with `--ink` text), the only new use
+  of a colour; the lock's keypad keeps 1 2 3 on top, left to right, in every language, with Erase bottom left.
+- The alias pictures are line drawings in the icon style, `--accent-ink` on the Who chip's `--accent-soft` circle;
+  Who is learning shows "Book ۲۷" once she has joined, "Book · waiting to connect" while a join waits.
+- The hold ring (consent, and the grown-up's corner) is drawn round the button's own shape; under reduced motion it
+  is not drawn and the pressed button has a 3 px accent outline instead.
+- A middle dot right after Persian digits reads as a zero ("۶ ·" looks like ۶۰): Dari and Pashto strings put a
+  colon or comma there instead.
+
 ---
 
 # C2 and C3 decisions

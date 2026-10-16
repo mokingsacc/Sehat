@@ -540,3 +540,72 @@ async def test_the_fake_enforces_foreign_keys_as_d1_does():
     await db.prepare("CREATE TABLE c(p TEXT REFERENCES p(id))").run()
     with pytest.raises(JsException, match="FOREIGN KEY"):
         await db.prepare("INSERT INTO c VALUES('nobody')").run()
+
+
+# learners (P10): a token's hash, an alias and a consent record; never a name
+
+COHORT = {"id": "lrn0cohort", "label": "Class", "langs": ["prs"], "bands": ["p1", "s1"], "settings": {}, "flags": {}}
+
+
+async def test_learners_get_a_free_number_for_their_picture(store, monkeypatch):
+    await store.seed_cohorts([COHORT])
+    numbers = [await store.add_learner(token_hash=f"h{i}", cohort="lrn0cohort", picture="book", band="p1")
+               for i in range(30)]
+    assert len(set(numbers)) == 30 and all(1 <= n <= 99 for n in numbers)
+    other = await store.add_learner(token_hash="k1", cohort="lrn0cohort", picture="key", band="s1")
+    assert 1 <= other <= 99                                      # numbers are per picture
+    me = await store.learner("h0")
+    assert me["cohort"] == "lrn0cohort" and me["band"] == "p1" and me["number"] == numbers[0]
+    assert me["consent_kind"] is None and me["joined"] == me["last_seen"] and len(me["joined"]) == 10
+    with pytest.raises(Exception):                               # one token, one learner
+        await store.add_learner(token_hash="h0", cohort="lrn0cohort", picture="book", band="p1")
+    # two phones drawing the same number at once: the second one draws again
+    from tutor_hub.stores import base
+    free = min(set(range(1, 100)) - set(numbers) - {other})
+    taken = iter([numbers[1], free])
+    monkeypatch.setattr(base, "draw_number", lambda used: next(taken))
+    import tutor_hub.stores.d1 as d1mod, tutor_hub.stores._sqlite_sync as sqmod
+    monkeypatch.setattr(d1mod, "draw_number", base.draw_number)
+    monkeypatch.setattr(sqmod, "draw_number", base.draw_number)
+    n = await store.add_learner(token_hash="late", cohort="lrn0cohort", picture="book", band="p1")
+    assert n == free
+
+
+async def test_a_learner_changes_band_and_consent_and_nothing_else(store):
+    await store.seed_cohorts([COHORT])
+    await store.add_learner(token_hash="h1", cohort="lrn0cohort", picture="cup", band="p1")
+    assert await store.update_learner("h1", band="s1", consent_kind="guardian-on-phone",
+                                      consent_version="hub-2026-10", consent_at="2026-10-16T09:41")
+    me = await store.learner("h1")
+    assert (me["band"], me["consent_kind"], me["consent_version"]) == ("s1", "guardian-on-phone", "hub-2026-10")
+    with pytest.raises(ValueError):
+        await store.update_learner("h1", picture="key")
+    with pytest.raises(ValueError):
+        await store.update_learner("h1", name="x")
+    assert not await store.update_learner("nobody", band="p1")
+
+
+async def test_deleting_a_learner_takes_her_events_with_her(store):
+    await store.seed_cohorts([COHORT])
+    await store.add_learner(token_hash="h1", cohort="lrn0cohort", picture="cup", band="p1")
+    await store.add_learner(token_hash="h2", cohort="lrn0cohort", picture="cup", band="p1")
+    await store.add_events([ev(cohort="lrn0cohort", token_hash="h1"), ev(cohort="lrn0cohort", token_hash="h2"),
+                            ev(cohort="lrn0cohort")])
+    assert await store.delete_learner("h1") and not await store.delete_learner("h1")
+    assert await store.learner("h1") is None and await store.learner("h2")
+    assert sorted(e["token_hash"] or "" for e in await store.events("lrn0cohort")) == ["", "h2"]
+
+
+async def test_class_codes_and_idle_learners(store):
+    await store.seed_cohorts([COHORT])
+    assert await store.cohort_by_code("c0de") is None
+    assert await store.set_class_code("lrn0cohort", "c0de") and not await store.set_class_code("nosuch", "x")
+    c = await store.cohort_by_code("c0de")
+    assert c["id"] == "lrn0cohort" and c["bands"] == ["p1", "s1"] and "code_hash" not in c
+    await store.add_learner(token_hash="old", cohort="lrn0cohort", picture="cup", band="p1")
+    await store.add_learner(token_hash="new", cohort="lrn0cohort", picture="cup", band="p1")
+    await store.update_learner("old", last_seen="2020-01-01")
+    await store.add_events([ev(cohort="lrn0cohort", token_hash="old")])
+    await store.prune_learners(365)
+    assert await store.learner("old") is None and await store.learner("new")
+    assert await store.events("lrn0cohort") == []

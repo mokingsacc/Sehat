@@ -1,19 +1,27 @@
 // What the phone remembers: the learners who use it, their band, year or track and language, their text size and
 // theme, lessons done, sheets printed and questions asked. It stays on this phone only (the hub keeps no names).
 // Storage can fail (private mode, full): the app then still works, it just forgets on reload. Starting and
-// finishing a lesson also join the events queue (events.js) as a verb and the lesson id, never the learner.
+// finishing a lesson also join the events queue (events.js) as a verb and the lesson id, and only for a learner
+// whose grown-up agreed (consent); the server learns which learner token sent them, never a name.
 //
-// qalam.v2 holds no name, ever (F3). A learner is an alias picture (chosen with sign-up, P10), an optional
-// nickname she may type in Settings (P10; never sent), her band, and these per-learner settings:
-// lock (P10), consent (P10), text ('normal' or 'large', "Bigger text") and theme ('phone', 'light' or 'dark').
+// qalam.v2 holds no name, ever (F3). A learner is an alias picture (aliases.js, given when she is added), an optional
+// nickname she may type in Settings (never sent), her band, and these per-learner settings: lock (lock.js), consent
+// {kind, version, at, sent}, text ('normal' or 'large', "Bigger text") and theme ('phone', 'light' or 'dark').
+// When she joins (account.js) the server's answer adds token, number and cohort {id, label}; `code` is the class
+// code she joined with (kept so the phone can join again if the server forgets her), `asked` that the consent screen
+// was answered (agreed or "Not now"), `sentBand` the band the server has. `forget` lists tokens of learners removed or withdrawn whose server record is still to be deleted.
 // The v1 record (qalam.v1, which could hold a child's name) is migrated once, the name dropped, and removed.
 
+import { known, pickFree } from './aliases.js';
 import { bandOf, BANDS, THEMES, TRACKS } from './bands.js';
 import * as events from './events.js';
 
 const KEY = 'qalam.v2';
 const OLD = 'qalam.v1';
-const empty = () => ({ v: 2, active: null, learners: [] });
+const empty = () => ({ v: 2, active: null, learners: [], forget: [] });
+const TOKEN = /^[A-Za-z0-9_-]{20,64}$/;
+const CODE = /^[A-HJKMNP-Z2-9]{8}$/;
+const KINDS = ['guardian-on-phone', 'self', 'partner-paper'];
 let data = load();
 
 function rid() {
@@ -32,10 +40,17 @@ function clean(l) {
     year: band === 'ad' ? null : year ?? { ey: 0, p1: 1, p2: 4, s1: 7, s2: 10 }[band],
     track: band === 'ad' ? (TRACKS.includes(l.track) ? l.track : 'literacy') : null,
     lang: ['prs', 'ps', 'en'].includes(l.lang) ? l.lang : 'prs',
-    picture: typeof l.picture === 'string' ? l.picture : null,
+    picture: known(l.picture) ? l.picture : null,
     nickname: typeof l.nickname === 'string' ? l.nickname.slice(0, 20) : '',
-    lock: l.lock && typeof l.lock === 'object' ? l.lock : null,
-    consent: l.consent && typeof l.consent === 'object' ? l.consent : null,
+    lock: l.lock && typeof l.lock === 'object' && typeof l.lock.hash === 'string' ? l.lock : null,
+    lockOffered: l.lockOffered === true,
+    asked: l.asked === true,
+    consent: cleanConsent(l.consent),
+    token: typeof l.token === 'string' && TOKEN.test(l.token) ? l.token : null,
+    number: Number.isInteger(l.number) && l.number > 0 && l.number < 1000 ? l.number : null,
+    cohort: l.cohort && typeof l.cohort.id === 'string' ? { id: l.cohort.id, label: String(l.cohort.label || '') } : null,
+    code: typeof l.code === 'string' && CODE.test(l.code) ? l.code : null,
+    sentBand: BANDS.includes(l.sentBand) ? l.sentBand : null,
     text: l.text === 'large' ? 'large' : 'normal',
     theme: THEMES.includes(l.theme) ? l.theme : 'phone',
     done: l.done && typeof l.done === 'object' ? l.done : {},
@@ -47,17 +62,33 @@ function clean(l) {
   };
 }
 
+function cleanConsent(c) {
+  if (!c || typeof c !== 'object' || !KINDS.includes(c.kind) || typeof c.version !== 'string') return null;
+  return { kind: c.kind, version: c.version.slice(0, 32), at: typeof c.at === 'string' ? c.at.slice(0, 16) : null,
+    sent: c.sent === true };
+}
+
+// every learner has a picture; one from before pictures gets one no other learner here has
+function pictures(list) {
+  for (const l of list) if (!l.picture) l.picture = pickFree(list.map((x) => x.picture).filter(Boolean));
+  return list;
+}
+
 // v1 -> v2: each child becomes a learner, the name dropped
 export function migrate(v1) {
   if (!v1 || v1.v !== 1 || !Array.isArray(v1.children)) return null;
-  const learners = v1.children.filter((c) => c && typeof c === 'object').map(clean);
-  return { v: 2, active: learners.some((l) => l.id === v1.active) ? v1.active : (learners[0] || {}).id || null, learners };
+  const learners = pictures(v1.children.filter((c) => c && typeof c === 'object').map(clean));
+  return { v: 2, active: learners.some((l) => l.id === v1.active) ? v1.active : (learners[0] || {}).id || null, learners,
+    forget: [] };
 }
 
 function load() {
   try {
     const d = JSON.parse(localStorage.getItem(KEY));
-    if (d && d.v === 2 && Array.isArray(d.learners)) return { ...d, learners: d.learners.map(clean) };
+    if (d && d.v === 2 && Array.isArray(d.learners)) {
+      return { v: 2, active: typeof d.active === 'string' ? d.active : null, learners: pictures(d.learners.map(clean)),
+        forget: Array.isArray(d.forget) ? d.forget.filter((t) => typeof t === 'string' && TOKEN.test(t)) : [] };
+    }
   } catch { /* first run, or storage is blocked */ }
   try {
     const moved = migrate(JSON.parse(localStorage.getItem(OLD)));
@@ -82,9 +113,10 @@ export function learner() {
 export const children = learners;
 export const child = learner;
 
-// a new learner: a year (0 to 12) or the adult door ({band: 'ad', track}); never a name
-export function addChild({ year = null, band = null, track = null, lang }) {
-  const c = clean({ year, band, track, lang });
+// a new learner: a year (0 to 12) or the adult door ({band: 'ad', track}), and the class code she came with; never a
+// name. She gets a picture no other learner on this phone has.
+export function addChild({ year = null, band = null, track = null, lang, code = null }) {
+  const c = clean({ year, band, track, lang, code, picture: pickFree(data.learners.map((l) => l.picture)) });
   data.learners.push(c);
   data.active = c.id;
   save();
@@ -100,6 +132,43 @@ export function updateChild(id, patch) {
   return data.learners[i];
 }
 
+export function byId(id) { return data.learners.find((l) => l.id === id) || null; }
+
+// remove a learner from this phone: her record and her queued events go; her server record (if she joined) is
+// deleted when the server is next in reach (account.js)
+export function removeLearner(id) {
+  const l = byId(id);
+  if (!l) return false;
+  if (l.token) forgetToken(l.token);
+  data.learners = data.learners.filter((x) => x.id !== id);
+  if (data.active === id) data.active = (data.learners[0] || {}).id || null;
+  unlocked.delete(id);
+  save();
+  events.drop(id);
+  return true;
+}
+
+// tokens whose server record must be deleted (a learner removed, or "Stop sharing")
+export function forgetToken(t) {
+  if (t && !data.forget.includes(t)) data.forget.push(t);
+  save();
+}
+export function toForget() { return [...data.forget]; }
+export function forgotten(t) { data.forget = data.forget.filter((x) => x !== t); save(); }
+
+// the learners unlocked since the app started (or came back after 5 minutes away): kept in memory only
+const unlocked = new Set();
+export const isUnlocked = (id) => unlocked.has(id);
+export function unlock(id) { unlocked.add(id); }
+export function lockAll() { unlocked.clear(); }
+
+// an event for the learner using the phone, only with her grown-up's (or, for adults, her own) agreement
+export function record(verb, object = null, value = null) {
+  const c = learner();
+  if (!c || !c.consent) return false;
+  return events.record(verb, object, value, c.id);
+}
+
 export function setActive(id) { data.active = id; save(); }
 
 export function band(c = learner()) { return c ? c.band : null; }
@@ -112,7 +181,7 @@ export function markDone(lessonId, stars) {
   delete c.step[lessonId];
   if (c.tries) delete c.tries[lessonId];
   save();
-  events.record('lesson.done', lessonId, stars);
+  record('lesson.done', lessonId, stars);
 }
 
 export function setStep(lessonId, i) {
@@ -122,7 +191,7 @@ export function setStep(lessonId, i) {
   c.step[lessonId] = i;
   c.last = lessonId;
   save();
-  if (fresh) events.record('lesson.start', lessonId);
+  if (fresh) record('lesson.start', lessonId);
 }
 
 // right or wrong on the first try, per question step, kept until the lesson is done so stars stay fair

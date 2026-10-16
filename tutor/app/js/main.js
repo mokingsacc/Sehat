@@ -1,29 +1,42 @@
 // Start-up and the router. One screen at a time, chosen by the address after # (so the phone's Back button
 // works). Each screen is a function that returns { el, tab, cleanup, onHub }.
+// Sign-up (P10): a class card's QR opens the app with ?join=CODE, which Welcome takes (signup.js). A learner with a
+// PIN lock sees the lock on start, on switching to her, and when the app comes back after 5 minutes away; Welcome,
+// Who is learning, the class code and the teacher's page stay open without it.
 
+import * as account from './account.js';
 import * as bands from './bands.js';
 import * as events from './events.js';
 import { dir, htmlLang, s, setLang, setTone } from './i18n.js';
 import * as hub from './hub.js';
 import * as library from './library.js';
+import * as lock from './lock.js';
 import * as modules from './modules.js';
 import * as state from './state.js';
 import { loadClips, stop } from './speech.js';
-import { busy, h, hubChip, nav, sayTab } from './ui.js';
+import { busy, h, hubChip, nav, sayTab, toast } from './ui.js';
 
 import ask from './screens/ask.js';
 import check from './screens/check.js';
+import consent from './screens/consent.js';
 import credits from './screens/credits.js';
 import home from './screens/home.js';
 import lesson from './screens/lesson.js';
+import lockScreen, { afterUnlock } from './screens/lock.js';
 import print from './screens/print.js';
+import settings from './screens/settings.js';
+import signup, { pendingCode } from './screens/signup.js';
 import subject from './screens/subject.js';
 import teacher from './screens/teacher.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
-const SCREENS = { home, subject, lesson, ask, print, check, teacher, welcome, who, credits };
-const NEEDS_NO_CHILD = new Set(['welcome', 'teacher']);
+const SCREENS = { home, subject, lesson, ask, print, check, teacher, welcome, who, credits, consent, lock: lockScreen,
+  settings, signup };
+const NEEDS_NO_CHILD = new Set(['welcome', 'teacher', 'signup']);
+const CLEAN = new Set(['welcome', 'teacher', 'signup']);          // the clean adult look, not the learner's
+const OPEN = new Set(['welcome', 'who', 'teacher', 'signup', 'lock']);   // shown without opening her lock
+const AWAY_MS = 5 * 60e3;
 const app = document.getElementById('app');
 let current = null;
 let seq = 0;
@@ -34,7 +47,7 @@ function applyLook(name) {
   const c = state.child();
   if (c) setLang(c.lang);
   const root = document.documentElement;
-  const own = c && name !== 'welcome' && name !== 'teacher';
+  const own = c && !CLEAN.has(name);
   bands.apply(root, own ? c : { text: c && c.text, theme: c && c.theme }, { setTone });
   root.lang = htmlLang();
   root.dir = dir();
@@ -50,6 +63,14 @@ async function route() {
   const [name = '', ...args] = location.hash.replace(/^#\/?/, '').split('/').map(decodeURIComponent);
   if (!state.child() && !NEEDS_NO_CHILD.has(name)) { location.replace('#/welcome'); return; }
   if (!modules.routeOn(name)) { location.replace(state.child() ? '#/home' : '#/welcome'); return; }   // switched off
+  const c = state.child();
+  if (c && c.lock && lock.allowed(c.band) && !state.isUnlocked(c.id) && !OPEN.has(name)) {
+    afterUnlock(location.hash);
+    location.replace('#/lock');
+    return;
+  }
+  if (account.useCohort()) hub.refresh().then(modulesChanged);     // another learner's class
+  account.sync();                                                 // a join, consent or band waiting to be sent
   const screen = SCREENS[name] || home;
   applyLook(SCREENS[name] ? name : 'home');
   let out;
@@ -90,9 +111,32 @@ async function hubCameBack() {
   if (current && current.onHub) current.onHub(true);
 }
 
+// ?join=CODE from a class card's QR: Welcome takes the code; the address loses it at once
+function joinFromAddress() {
+  let code = null;
+  try { code = account.normalCode(new URLSearchParams(location.search).get('join') || ''); } catch { /* no address */ }
+  if (!new URLSearchParams(location.search).has('join')) return;
+  if (code) pendingCode(code);
+  try { history.replaceState(null, '', location.pathname + '#/welcome'); } catch { location.hash = '#/welcome'; }
+}
+
+// back after 5 minutes away: every lock closes again (not on idle: she may be writing on paper)
+function watchAway() {
+  let away = 0;
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') { away = Date.now(); return; }
+    if (away && Date.now() - away > AWAY_MS) { state.lockAll(); route(); }
+    away = 0;
+  });
+}
+
 async function boot() {
+  joinFromAddress();
   const c = state.child();
   if (c) setLang(c.lang);
+  account.start();
+  account.onNote((key) => toast(s(key)));
+  watchAway();
   app.replaceChildren(busy());
   window.addEventListener('hashchange', route);
   hub.onChange(refreshChips);

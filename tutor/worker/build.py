@@ -7,6 +7,7 @@
     build/src/content/packs/                  the packs as on the hub (the hub reads lessons and checks pictures as files;
                                               recorded clips stay out: the hub knows them by their manifest.json)
     build/src/content/sources.json            the licence classes (licences.py), and permissions/ for ASK sources
+    build/src/content/{aliases.json,consent/} the alias pictures and the consent texts (learners.py)
     build/public/                             the phone app (app/, without its tests), and the lesson pictures and clips
                                               at /packs/<pack>/pictures/<file> and /packs/<pack>/audio/<lang>/<file>,
                                               the addresses the hub gives them
@@ -37,10 +38,11 @@ def build(out: Path = BUILD) -> dict:
     settings = tomllib.loads((WORKER / "wrangler.toml").read_text(encoding="utf-8")).get("vars", {})
     (src / "vars.json").write_text(json.dumps(settings, indent=1), encoding="utf-8")
     shutil.copytree(TUTOR / "hub" / "tutor_hub", src / "hub" / "tutor_hub", ignore=SKIP)
-    for folder in ("migrations", "modules", "cohorts", "content/packs", "content/permissions"):
+    for folder in ("migrations", "modules", "cohorts", "content/packs", "content/permissions", "content/consent"):
         shutil.copytree(TUTOR / folder, src / folder,
                         ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Store", *AUDIO))
     shutil.copy2(TUTOR / "content" / "sources.json", src / "content" / "sources.json")
+    shutil.copy2(TUTOR / "content" / "aliases.json", src / "content" / "aliases.json")
     shutil.copytree(TUTOR / "app", public, ignore=shutil.ignore_patterns("tests", "__pycache__", ".DS_Store"))
     for pictures in sorted((TUTOR / "content" / "packs").glob("*/pictures")):
         shutil.copytree(pictures, public / "packs" / pictures.parent.name / "pictures", ignore=SKIP)

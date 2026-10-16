@@ -54,6 +54,11 @@ const ICONS = {
   file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/>',
   users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14a6 6 0 0 1 3.5 6"/>',
   send: '<path d="M21 3 10 14"/><path d="M21 3l-7 18-4-7-7-4z"/>',
+  stop: '<circle cx="12" cy="12" r="9"/><rect x="9" y="9" width="6" height="6" rx="1"/>',
+  gear: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',
+  erase: '<path d="M21 5H9l-6 7 6 7h12z"/><path d="m12 9 6 6M18 9l-6 6"/>',
+  trash: '<path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/>',
+  card: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h6M7 14h10"/>',
 };
 
 export function icon(name, size = 24, sw = 2.2) {
@@ -140,6 +145,52 @@ export function readPage(root) { speak(readText(root), getLang()); }
 export function pageSpeaker(root) {
   return speakerBtn(() => readPage(root || document.getElementById('app') || document.body),
     { size: 'sm', label: s('hear_page'), page: true });
+}
+
+// Press and hold (the consent ring's component, DESIGN.md 7; the grown-up's corner, ruling 6): the button looks
+// pressed from the first touch, a ring fills round it over `ms`, the phone vibrates briefly at the end, and lifting
+// or leaving early cancels (a short tap calls onTap). Under reduced motion the ring is not drawn and the pressed
+// state alone shows it is working. Enter or Space held on a keyboard works the same.
+export function holdable(btn, { ms, onDone, onTap, buzz = 30 }) {
+  btn.classList.add('hold');
+  const ns = 'http://www.w3.org/2000/svg';
+  const ring = document.createElementNS(ns, 'svg');
+  ring.setAttribute('class', 'ring');
+  ring.setAttribute('aria-hidden', 'true');
+  const r = document.createElementNS(ns, 'rect');
+  r.setAttribute('pathLength', '100');
+  ring.append(r);
+  btn.append(ring);
+  let timer = null;
+  const begin = (e) => {
+    if (timer || (e.button !== undefined && e.button > 0)) return;
+    if (e.cancelable) e.preventDefault();
+    if (btn.setPointerCapture && e.pointerId !== undefined) { try { btn.setPointerCapture(e.pointerId); } catch { /* ignore */ } }
+    btn.style.setProperty('--hold-ms', ms + 'ms');
+    btn.classList.add('holding');
+    timer = setTimeout(() => {
+      timer = null;
+      btn.classList.remove('holding');
+      try { navigator.vibrate && navigator.vibrate(buzz); } catch { /* no vibration here */ }
+      onDone();
+    }, ms);
+  };
+  const cancel = (tap) => {
+    if (!timer) return;
+    clearTimeout(timer);
+    timer = null;
+    btn.classList.remove('holding');
+    if (tap && onTap) onTap();
+  };
+  btn.addEventListener('pointerdown', begin);
+  btn.addEventListener('pointerup', () => cancel(true));
+  btn.addEventListener('pointerleave', () => cancel(false));
+  btn.addEventListener('pointercancel', () => cancel(false));
+  btn.addEventListener('contextmenu', (e) => e.preventDefault());
+  btn.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && !e.repeat) begin(e); });
+  btn.addEventListener('keyup', (e) => { if (e.key === 'Enter' || e.key === ' ') cancel(true); });
+  btn.addEventListener('click', (e) => e.preventDefault());
+  return btn;
 }
 
 let toastTimer = null;

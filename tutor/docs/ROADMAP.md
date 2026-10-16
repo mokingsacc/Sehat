@@ -71,6 +71,15 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   school, the offline chip, link cards and Credits, early years' modules, the `open` cohort, the school day, the
   staff pages, Learn this and the Android app are specified (DESIGN.md, "C2 and C3 decisions", and
   DESIGN-C2C3-SPECS.md). D11, Google's developer verification, is Mo's, from 23 December.
+- **P10, done:** sign-up, consent and the PIN lock. Welcome has the doors (early years, the adults' two) and no
+  name field; a tap gives the learner an alias picture of her own; a class card's `?join=CODE` (or the typed code)
+  leads to the consent screen (read aloud, hold 3 seconds to agree, or "Not now") and the lock offer. The server
+  keeps a token's hash, the class, band, picture and number, and the consent record (`/api/join`, `/api/me`,
+  migration 0006); events need her token and her consent. The lock: four digits on the phone only, waits after five
+  wrong tries, a visible 24-hour reset that deletes nothing, never for early years. Settings (Bigger text, theme,
+  lock, nickname, consent and "Stop sharing", Credits as C2.6, About, remove a learner behind her PIN); the Teacher
+  link only while the teacher module is on; the grown-up's corner fills a ring as it is held.
+  `tools/signup_check.mjs` walks it in Chromium.
 
 ## January 2027: buy and test
 

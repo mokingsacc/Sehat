@@ -1,16 +1,30 @@
 {
   "id": "3w2lco2s8f",
   "label": "Open",
-  "langs": ["prs", "ps", "en"],
-  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "langs": [
+    "prs",
+    "ps",
+    "en"
+  ],
+  "bands": [
+    "ey",
+    "p1",
+    "p2",
+    "s1",
+    "s2",
+    "ad"
+  ],
   "settings": {
-    "maturity": ["pilot", "stable"]
+    "maturity": [
+      "pilot",
+      "stable"
+    ]
   },
   "modules": {
     "lessons": true,
-    "ask": true,
-    "print": true,
     "check": true,
-    "teacher": true
+    "ask": false,
+    "print": false,
+    "teacher": false
   }
 }

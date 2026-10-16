@@ -1,0 +1,12 @@
+{
+  "about": "What the app itself uses, for the Credits screen (DESIGN-C2C3-SPECS.md item 6): fonts, sounds and code, and the interface voices. A voice is credited only as the recorder chooses: by default 'a native Dari speaker'; a name only on the recorder's written request (then its line goes in `credit`). The packs' own sources come from the server's /api/credits.",
+  "fonts": [
+    {"name": "Vazirmatn", "owner": "The Vazirmatn Project Authors", "licence": "SIL Open Font License 1.1",
+     "licence_url": "https://openfontlicense.org", "url": "https://github.com/rastikerdar/vazirmatn"},
+    {"name": "Noto Naskh Arabic", "owner": "The Noto Project Authors", "licence": "SIL Open Font License 1.1",
+     "licence_url": "https://openfontlicense.org", "url": "https://github.com/notofonts/arabic"}
+  ],
+  "sounds": [],
+  "code": [],
+  "voices": {"prs": {"credit": null}, "ps": {"credit": null}}
+}

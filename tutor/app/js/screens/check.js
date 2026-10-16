@@ -2,10 +2,10 @@
 // are checked by value (2/4 is right but "make it simpler"); written answers, circled pictures and sorting are
 // shown so the child or a parent can compare with the paper. Tracing and drawing are for a grown-up to look at.
 // The answers come from the hub, and are kept on the phone when a sheet is printed, so this works at home too.
-// Each time a sheet is marked, one `check.done` joins the phone's events queue: the lesson and the percent right.
+// Each time a sheet is marked, one `check.done` joins the phone's events queue: the lesson and the percent right
+// (only with consent: state.record).
 
 import { fa, getLang, s } from '../i18n.js';
-import * as events from '../events.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import { latin, notSimplest, parse, same, show } from '../numbers.js';
@@ -74,7 +74,7 @@ export default async function check([id, seedText]) {
   // the sheet was marked: the Check button, or, on a sheet with nothing to type, every row judged
   function marked() {
     const vals = Object.values(results);
-    if (vals.length) events.record('check.done', id, Math.round((100 * vals.filter(Boolean).length) / vals.length));
+    if (vals.length) state.record('check.done', id, Math.round((100 * vals.filter(Boolean).length) / vals.length));
   }
 
   function drawScore() {

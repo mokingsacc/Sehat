@@ -385,6 +385,14 @@ def test_link_cards_and_credits_from_the_hub(hub_client):
     assert {a["name"] for a in cr["app"]} == {"Vazirmatn", "Noto Naskh Arabic"}
 
 
+def test_the_apps_credits_file_names_the_same_fonts():
+    """app/credits.json (the Credits screen's fonts, sounds, code and voices) and the hub's list agree."""
+    from tutor_hub.licences import APP_CREDITS
+    doc = json.loads((TUTOR / "app" / "credits.json").read_text(encoding="utf-8"))
+    assert doc["fonts"] == APP_CREDITS
+    assert all(v == {"credit": None} for v in doc["voices"].values())     # no recorder has asked to be named
+
+
 def test_a_lesson_from_outside_carries_its_credit_line(tmp_path):
     l = with_sources(use("afghan-children-read-bloom", licence="CC0", changes="Pictures left out"))
     lib, out = problems(make_pack(tmp_path, [l]))

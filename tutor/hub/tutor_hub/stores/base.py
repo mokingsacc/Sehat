@@ -70,11 +70,43 @@ Content (signoffs and releases, packs.py decides what they mean; kept for good)
 - `add_release(*, pack, version, content_hash, cohort, released_by) -> id`: a pack version published to a cohort;
   `released_by` is a role.
 - `releases(cohort) -> list`: the cohort's releases, newest first.
+
+Learners (learners.py decides what they mean; never a name)
+- `set_class_code(cid, code_hash) -> bool`: the cohort's class code, hashed; False if there is no such cohort.
+- `cohort_by_code(code_hash) -> dict | None`: the cohort with that code, as `cohort()` gives it.
+- `add_learner(*, token_hash, cohort, picture, band, consent_kind=None, consent_version=None, consent_at=None) -> int`:
+  a new learner with a number drawn for her picture in her cohort, one no other learner there has (1 to 99 while
+  any is free, then larger); returns the number. `joined` and `last_seen` are today (UTC).
+- `learner(token_hash) -> dict | None`: `{token_hash, cohort, picture, number, band, consent_kind, consent_version,
+  consent_at, joined, last_seen}`.
+- `update_learner(token_hash, **changes) -> bool`: changes only `band`, `consent_kind`, `consent_version`,
+  `consent_at` and `last_seen` (any other key raises ValueError); False if there is no such learner.
+- `delete_learner(token_hash) -> bool`: deletes the learner and every event carrying her token's hash, together.
+- `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events.
 """
 
+import random
 import re
 
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
+LEARNER_CHANGES = ("band", "consent_kind", "consent_version", "consent_at", "last_seen")
+
+
+def draw_number(used) -> int:
+    """A number for an alias picture that no learner with that picture in the cohort has: 1 to 99 while one is free."""
+    used = set(used)
+    for lo, hi in ((1, 99), (100, 999)):
+        free = [n for n in range(lo, hi + 1) if n not in used]
+        if free:
+            return random.choice(free)
+    return max(used) + 1
+
+
+def check_changes(changes: dict) -> dict:
+    bad = set(changes) - set(LEARNER_CHANGES)
+    if bad:
+        raise ValueError(f"a learner's {', '.join(sorted(bad))} cannot be changed")
+    return changes
 
 
 
@@ -184,6 +216,29 @@ class Store:
         raise NotImplementedError
 
     async def releases(self, cohort) -> list[dict]:
+        raise NotImplementedError
+
+    # learners
+    async def set_class_code(self, cid, code_hash) -> bool:
+        raise NotImplementedError
+
+    async def cohort_by_code(self, code_hash) -> dict | None:
+        raise NotImplementedError
+
+    async def add_learner(self, *, token_hash, cohort, picture, band, consent_kind=None, consent_version=None,
+                          consent_at=None) -> int:
+        raise NotImplementedError
+
+    async def learner(self, token_hash) -> dict | None:
+        raise NotImplementedError
+
+    async def update_learner(self, token_hash, **changes) -> bool:
+        raise NotImplementedError
+
+    async def delete_learner(self, token_hash) -> bool:
+        raise NotImplementedError
+
+    async def prune_learners(self, idle_days: int) -> None:
         raise NotImplementedError
 
 

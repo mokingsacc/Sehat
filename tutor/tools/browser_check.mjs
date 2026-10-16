@@ -9,7 +9,7 @@
 // of the app. Run from tutor/:
 //   PLAYWRIGHT=/path/to/node_modules/playwright CHROMIUM=/path/to/chrome \
 //     node tools/browser_check.mjs --hub http://127.0.0.1:8000 --out shots/ [--screen home] [--widths 390,768,1280]
-//       [--langs prs,ps,en] [--variants light,dark,bigger] [--bands p1,s1,ad-literacy] [--full]
+//       [--langs prs,ps,en] [--variants light,dark,bigger] [--bands p1,s1,ad-literacy] [--full] [--lock]
 // A shot is what the screen shows when the page opens (--full: the whole page, with the tab bar where the screen
 // ends); the checks always cover the whole page.
 // Exit code 1 when a check fails. No learner name is ever seeded: a learner is a band, a year and settings.
@@ -146,6 +146,10 @@ for (const width of WIDTHS) {
         const errors = [];
         page.on('pageerror', (e) => errors.push(String(e)));
         const learner = { id: 'l1', band: l.band, year: l.year ?? null, track: l.track || null, lang, text: v.text, theme: v.theme };
+        // --lock: she has a PIN lock with a reset waiting (the lock screen's shot); the hash opens nothing
+        if (args.lock && l.band !== 'ey') {
+          learner.lock = { salt: '00', hash: '00', tries: 0, until: 0, rounds: 0, last: 0, resetAt: Date.now() + 17 * 3600e3 - 60e3 };
+        }
         await page.addInitScript((d) => {
           try { localStorage.setItem('qalam.v2', JSON.stringify(d)); } catch { /* blocked */ }
         }, { v: 2, active: 'l1', learners: [learner] });

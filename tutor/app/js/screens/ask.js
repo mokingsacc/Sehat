@@ -1,6 +1,8 @@
 // Ask: a child's question goes to the hub, which answers from checked sources first (docs/ARCHITECTURE.md).
 // Every answer carries a badge saying where it came from. Away from the hub, the closest answer from a lesson
 // already on this phone is shown and marked as such; nothing is made up on the phone.
+// Consent (DESIGN.md 6 and 7): the first question she sends opens the consent screen; "Not now" keeps Ask on the
+// phone for this visit (the ready answers of lessons here, nothing sent), and it is asked again on a later visit.
 
 import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -8,6 +10,9 @@ import * as library from '../library.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, hubChip, icon, plain, rich, said, speakerBtn, toast, topbar } from '../ui.js';
+import { saidNotNow } from './signup.js';
+
+let held = null;           // the question she typed before the consent screen, sent when she comes back
 
 const BADGE = {
   rules: ['badge_rules', 'checked', 'check'], maths: ['badge_maths', 'checked', 'check'],
@@ -89,10 +94,17 @@ export default async function ask() {
     if (!text || pending) return;
     input.value = '';
     const entry = { id: null, q: text, at: Date.now(), lang };
-    if (!hub.online()) {
+    const agreed = !!state.child().consent;
+    if (hub.online() && !agreed && !saidNotNow(c.id)) {
+      held = { id: c.id, text };
+      location.hash = '#/consent/ask';
+      return;
+    }
+    if (!hub.online() || !agreed) {
       const a = offlineAnswer(text, lang);
-      if (!a) { toast(s('no_offline')); input.value = text; return; }
-      state.addAsk({ ...entry, a, source: 'offline', note: 'offline_ask', done: true });
+      const why = agreed ? 'offline_ask' : 'ask_local';
+      if (!a) { toast(s(agreed ? 'no_offline' : 'ask_local')); input.value = text; return; }
+      state.addAsk({ ...entry, a, source: 'offline', note: why, done: true });
       drawThread();
       return;
     }
@@ -143,6 +155,7 @@ export default async function ask() {
   drawThread();
   poll();
   const timer = setInterval(poll, POLL_MS);
+  if (held && held.id === c.id) { const q = held.text; held = null; setTimeout(() => send(q), 0); }
   const el = h('div', { class: 'screen' },
     topbar({ back: '#/home', title: s('ask_title'), sub: s('ask_scope'), extra: hubChip() }),
     thread, readyBox, composer);

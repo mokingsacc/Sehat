@@ -1,48 +1,80 @@
-// First screen: language and year. Tapping a year starts at once; the year sets the band and the look. No name is
-// ever asked (F3). The adult doors, the class code and the rest of sign-up arrive with P10 (DESIGN.md 6).
-// Also used as #/welcome/edit to change the year or language of the learner using the phone.
+// Welcome (DESIGN.md 6): one scrolling screen, its title read on open, a speaker on every head and door. Language;
+// primary years 1 to 6 and the dashed "Not in school yet" (year 0, early years); secondary years 7 to 12; the two
+// adult doors; at the foot "I have a class code" and, while the teacher module is on, "Teacher". No name field: one
+// tap on a year or door creates the learner on this phone with an alias picture no other learner here has, and goes
+// on through the sign-up steps (signup.js) to Home. With a class code (?join=CODE, or typed) the kicker says "Class
+// code found" and the steps are consent, then the lock offer.
+// Also #/welcome/edit, to change the year, door or language of the learner using the phone.
 
 import { dir, fa, getLang, htmlLang, s, setLang } from '../i18n.js';
+import * as modules from '../modules.js';
+import { hasVoice, speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, topbar } from '../ui.js';
+import { fill, h, icon, said, speakerBtn, topbar } from '../ui.js';
+import * as signup from './signup.js';
 
 const LANG_NAMES = [['prs', 'دری'], ['ps', 'پښتو'], ['en', 'English']];
+let readFor = null;          // the title is read once per visit to Welcome, not on every redraw
 
 export default function welcome([mode]) {
   const editing = mode === 'edit' ? state.child() : null;
   let lang = editing ? editing.lang : getLang();
-  const root = h('div', { class: 'screen' });
+  const code = editing ? null : signup.pendingCode();
+  const root = h('div', { class: 'screen welcome' });
 
-  function pick(year) {
-    if (editing) state.updateChild(editing.id, { year, band: null, lang });
-    else state.addChild({ year, lang });
-    location.hash = '#/home';
+  function pick(learner) {
+    if (editing) {
+      state.updateChild(editing.id, { year: null, band: null, track: null, ...learner, lang });
+      location.hash = '#/home';
+      return;
+    }
+    state.addChild({ ...learner, lang, code });
+    signup.pendingCode(null);
+    location.hash = signup.next('', 'home');
   }
+
+  const say = (text) => () => speak(text, getLang());
+  const head = (title, note) => h('div', { class: 'head' }, h('b', {}, title), h('span', { class: 'grow' }, note),
+    speakerBtn(say(`${title}. ${note}`), { size: 'sm' }));
 
   function draw() {
     setLang(lang);
     document.documentElement.lang = htmlLang(lang);
     document.documentElement.dir = dir(lang);
-    const yearBtn = (y) => h('button', { type: 'button', class: 'y' + y,
-      'aria-label': s('year_n', { n: y }), onClick: () => pick(y) }, fa(y));
+    const yearBtn = (y, cls = '') => h('button', { type: 'button', class: cls, 'aria-label': s('year_n', { n: y }),
+      onClick: () => pick({ year: y }) }, fa(y));
     fill(root,
-      topbar({ back: state.children().length ? '#/who' : null, sub: editing ? s('change_year') : s('welcome_kicker'),
-        title: s('welcome_title') }),
+      topbar({ back: state.children().length ? '#/who' : null,
+        sub: editing ? s('change_year') : code ? s('code_found') : s('welcome_kicker'), title: s('welcome_title') }),
       h('div', { class: 'langs', role: 'group', 'aria-label': s('language') },
-        LANG_NAMES.map(([code, label]) => h('button', { type: 'button', class: code === lang ? 'on' : '', lang: htmlLang(code),
-          'aria-pressed': code === lang ? 'true' : 'false', onClick: () => { lang = code; draw(); } }, label))),
+        LANG_NAMES.map(([c, label]) => h('button', { type: 'button', class: c === lang ? 'on' : '', lang: htmlLang(c),
+          'aria-pressed': c === lang ? 'true' : 'false', onClick: () => { lang = c; draw(); } }, label))),
       h('section', { class: 'yearbox primary' },
-        h('div', { class: 'head' }, h('b', {}, s('primary')), h('span', {}, s('primary_note'))),
-        h('div', { class: 'years' }, [1, 2, 3, 4, 5, 6].map(yearBtn)),
-        h('button', { type: 'button', class: 'dashed', onClick: () => pick(0) }, s('not_in_school'))),
+        head(s('primary'), s('primary_note')),
+        h('div', { class: 'years' }, [1, 2, 3, 4, 5, 6].map((y) => yearBtn(y, 'y' + y))),
+        said(h('button', { type: 'button', class: 'dashed', onClick: () => pick({ year: 0 }) }, s('not_in_school')))),
       h('section', { class: 'yearbox secondary' },
-        h('div', { class: 'head' }, h('b', {}, s('secondary')), h('span', {}, s('secondary_note'))),
-        h('div', { class: 'years' }, [7, 8, 9, 10, 11, 12].map((y) =>
-          h('button', { type: 'button', 'aria-label': s('year_n', { n: y }), onClick: () => pick(y) }, fa(y))))),
-      editing ? null : h('a', { class: 'link teacher-link', href: '#/teacher' }, s('teacher')),
+        head(s('secondary'), s('secondary_note')),
+        h('div', { class: 'years' }, [7, 8, 9, 10, 11, 12].map((y) => yearBtn(y)))),
+      h('section', { class: 'yearbox secondary adults' },
+        head(s('adults'), s('adults_note')),
+        h('div', { class: 'stack doors' },
+          ['literacy', 'reader'].map((track) => h('div', { class: 'row' },
+            h('button', { type: 'button', class: 'btn grow', onClick: () => pick({ band: 'ad', track }) },
+              s('track_' + track)),
+            speakerBtn(say(s('track_' + track)), { size: 'sm' }))))),
+      editing ? null : h('div', { class: 'foot' },
+        h('div', { class: 'row' }, h('a', { class: 'link grow', href: '#/signup/code' }, icon('card', 20), s('have_code')),
+          speakerBtn(say(s('have_code')), { size: 'sm' })),
+        modules.on('teacher') ? h('a', { class: 'link teacher-link', href: '#/teacher' }, icon('lock', 20), s('teacher')) : null),
     );
   }
 
   draw();
-  return { el: root, tab: null };
+  const key = (editing ? 'edit' : 'new') + (code || '');
+  if (readFor !== key && hasVoice(lang)) {
+    readFor = key;
+    setTimeout(() => speak(s('welcome_title'), getLang()), 400);
+  }
+  return { el: root, tab: null, cleanup: () => { readFor = null; } };
 }

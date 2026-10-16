@@ -4,6 +4,8 @@ serve    run the hub (default): python -m tutor_hub serve --port 8080
 pin      show the teacher PIN
 new-pin  make a new teacher PIN (the old one stops working when the hub restarts)
 check    check every lesson pack and list the problems (exit code 1 if there are any)
+class-code [COHORT]  make a new class code for a cohort (this hub's own by default) and print it for the
+         teacher's card; the old code stops working. Learners who type it or scan it join that cohort.
 """
 import argparse
 import logging
@@ -14,7 +16,8 @@ from .config import Config
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="python -m tutor_hub", description="The village learning hub.")
-    ap.add_argument("command", nargs="?", default="serve", choices=["serve", "pin", "new-pin", "check"])
+    ap.add_argument("command", nargs="?", default="serve", choices=["serve", "pin", "new-pin", "check", "class-code"])
+    ap.add_argument("cohort", nargs="?", help="class-code: the cohort's id")
     ap.add_argument("--host", default="0.0.0.0")
     ap.add_argument("--port", type=int, default=8080)
     a = ap.parse_args(argv)
@@ -33,6 +36,10 @@ def main(argv=None):
         print(f"{len(lib.lessons)} lessons in {len(lib.packs)} pack(s), {len(lib.problems)} problem(s)")
         return 1 if lib.problems or lib.sources.problems else 0
 
+    if a.command == "class-code":
+        import asyncio
+        return asyncio.run(_class_code(cfg, a.cohort))
+
     pin_file = cfg.data / "teacher-pin.txt"
     if a.command == "new-pin":
         pin_file.unlink(missing_ok=True)
@@ -47,6 +54,26 @@ def main(argv=None):
     # no access log: addresses with a child's name in them (the sheet preview) must never reach the system journal
     uvicorn.run(create_app(cfg), host=a.host, port=a.port, log_level="info", access_log=False)
     return 0
+
+
+async def _class_code(cfg, cohort_id):
+    from . import learners
+    from .server import Hub
+    hub = Hub(cfg)
+    await hub.store.open()
+    try:
+        from . import flags
+        await hub.store.seed_cohorts(flags.seed_rows(hub.seeds))
+        cid = cohort_id or hub.cohort_id
+        code = learners.new_class_code()
+        if not cid or not await hub.store.set_class_code(cid, learners.code_hash(learners.normal_code(code))):
+            print(f"no such cohort: {cid}")
+            return 1
+        print(f"Class code for cohort {cid}: {code}")
+        print(f"Card link: {cfg.public_url}/?join={code}")
+        return 0
+    finally:
+        await hub.store.close()
 
 
 if __name__ == "__main__":

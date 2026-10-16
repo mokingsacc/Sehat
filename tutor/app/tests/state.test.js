@@ -41,8 +41,9 @@ test('v1 migrates to v2 with every name dropped, and the v1 record leaves the ph
   assert.equal(b.prints['maths-7-fractions-add'], 4821);
   assert.equal(b.last, 'maths-7-fractions-add');
   for (const l of [a, b]) {
-    assert.deepEqual([l.picture, l.nickname, l.lock, l.consent, l.text, l.theme], [null, '', null, null, 'normal', 'phone']);
+    assert.deepEqual([l.nickname, l.lock, l.consent, l.token, l.number, l.text, l.theme], ['', null, null, null, null, 'normal', 'phone']);
   }
+  assert.ok(a.picture && b.picture && a.picture !== b.picture);       // each gets an alias picture of her own
   assert.equal(state.child().id, 'b');
 });
 
@@ -77,4 +78,40 @@ test('a v2 record is read back cleaned, and storage that fails leaves an empty p
   try {
     assert.deepEqual(state.reload().learners, []);
   } finally { globalThis.localStorage = real; }
+});
+
+test('every learner gets an alias picture no other learner on the phone has, until all twelve are taken', () => {
+  state.reload();
+  const pics = [];
+  for (let i = 0; i < 12; i++) pics.push(state.addChild({ year: 1 + (i % 12), lang: 'prs' }).picture);
+  assert.equal(new Set(pics).size, 12);
+  assert.ok(state.addChild({ year: 3, lang: 'prs' }).picture);       // a thirteenth still gets one
+});
+
+test('the server\'s answer is kept, nothing else: token, number, class, the code she joined with, consent', () => {
+  state.reload();
+  const c = state.addChild({ year: 8, lang: 'prs', code: 'K7QM4PRT' });
+  const l = state.updateChild(c.id, { token: 'tok_aaaaaaaaaaaaaaaaaaaaaaaa', number: 27, cohort: { id: 'c1', label: 'Class', x: 1 },
+    consent: { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10-16T09:41', sent: true, guardian: 'Fatima' } });
+  assert.deepEqual([l.token, l.number, l.cohort, l.code], ['tok_aaaaaaaaaaaaaaaaaaaaaaaa', 27, { id: 'c1', label: 'Class' }, 'K7QM4PRT']);
+  assert.deepEqual(l.consent, { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10-16T09:41', sent: true });
+  assert.ok(!store.get('qalam.v2').includes('Fatima'));
+  const bad = state.updateChild(c.id, { token: 'short', number: 5000, code: 'k7qm-4prt', consent: { kind: 'parent', version: 'x' } });
+  assert.deepEqual([bad.token, bad.number, bad.code, bad.consent], [null, null, null, null]);
+});
+
+test('without consent no event is recorded; removing a learner queues her token for deletion', () => {
+  state.reload();
+  const c = state.addChild({ year: 2, lang: 'prs' });
+  assert.equal(state.record('lesson.start', 'dari-1-sheen'), false);
+  state.updateChild(c.id, { consent: { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10-16T09:41' }, token: 'tok_aaaaaaaaaaaaaaaaaaaaaaaa' });
+  assert.equal(state.record('lesson.start', 'dari-1-sheen'), true);
+  state.unlock(c.id);
+  assert.equal(state.isUnlocked(c.id), true);
+  state.removeLearner(c.id);
+  assert.equal(state.isUnlocked(c.id), false);
+  assert.deepEqual(state.learners(), []);
+  assert.deepEqual(state.toForget(), ['tok_aaaaaaaaaaaaaaaaaaaaaaaa']);
+  state.forgotten('tok_aaaaaaaaaaaaaaaaaaaaaaaa');
+  assert.deepEqual(JSON.parse(store.get('qalam.v2')).forget, []);
 });

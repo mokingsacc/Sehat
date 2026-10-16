@@ -263,7 +263,7 @@ def test_a_budget_of_nothing_means_no_ai(fake_hub):
 def test_budgets_are_per_cohort(fake_hub):
     fake_hub.hub.gateway.budget = 1
     fake_hub.post("/api/ask", json={"text": "چرا آسمان آبی است؟", "lang": "prs"})
-    other = fake_hub.hub.seeds["open"]["id"]
+    other = fake_hub.hub.seeds["staging"]["id"]
     a = fake_hub.post(f"/api/ask?cohort={other}", json={"text": "زلزله چرا می‌آید؟", "lang": "prs"}).json()
     assert a["source"] == "ai"
     assert fake_hub.portal.call(fake_hub.hub.store.ai_spent, other, rows_day(fake_hub))["calls"] == 1

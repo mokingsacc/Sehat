@@ -14,7 +14,7 @@ import * as library from '../library.js';
 import * as modules from '../modules.js';
 import { hasVoice, sayKey, speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, hubChip, icon, pageSpeaker, readPage, said, speakerBtn } from '../ui.js';
+import { fill, h, holdable, hubChip, icon, pageSpeaker, readPage, said, speakerBtn } from '../ui.js';
 import { whoChip } from './who.js';
 
 const HOLD_MS = 2000;
@@ -34,20 +34,13 @@ export default async function home() {
   return { el: root, tab: 'lessons', onHub: draw, cleanup: () => { readFor = null; } };
 }
 
-// the grown-up's corner: a long press opens Who is learning (and Settings, Print behind it); a tap says "hold it"
+// the grown-up's corner: a 2-second press opens Who is learning (and Settings, Print behind it); a tap says "hold it".
+// It looks pressed from the first touch, the consent ring fills round the lock, the phone buzzes as Who opens, and
+// lifting or leaving early cancels (ruling 6)
 function grownUpCorner() {
-  let timer = null;
-  const start = (e) => {
-    e.preventDefault();
-    clearTimeout(timer);
-    timer = setTimeout(() => { timer = null; location.hash = '#/who'; }, HOLD_MS);
-  };
-  const end = () => {
-    if (timer) { clearTimeout(timer); timer = null; sayKey('hold_it', getLang()); }
-  };
-  return h('button', { type: 'button', class: 'round corner', 'aria-label': s('grown_up'),
-    onPointerdown: start, onPointerup: end, onPointerleave: () => { clearTimeout(timer); timer = null; },
-    onContextmenu: (e) => e.preventDefault() }, icon('lock', 22, 2.4));
+  const btn = h('button', { type: 'button', class: 'round corner', 'aria-label': s('grown_up') }, icon('lock', 22, 2.4));
+  return holdable(btn, { ms: HOLD_MS, buzz: 30, onDone: () => { location.hash = '#/who'; },
+    onTap: () => sayKey('hold_it', getLang()) });
 }
 
 function header(c, root) {

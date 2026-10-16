@@ -7,7 +7,8 @@ file does not know (the API refuses the whole batch).
 
 Some verbs come from the phone's queue (a lesson started or finished, a sheet marked on Check my sheet, even offline);
 the others only the hub writes, from its own routes (Ask, printing, the teacher's review), so a phone cannot send them.
-Learner tokens arrive with sign-up (P10); until then `token_hash` is empty.
+A phone's events carry the hash of the learner's token (P10) and are kept only when she has consent; the hub's own
+events carry none.
 """
 import re
 from dataclasses import dataclass

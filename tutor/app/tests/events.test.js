@@ -1,5 +1,6 @@
 // The phone's events queue (app/js/events.js): lessons done offline are kept and sent when the hub is back, as
-// verbs and lesson ids only. Run with: node --test app/tests/*.test.js   (no browser; fetch is a stand-in hub)
+// verbs and lesson ids only, each learner's with her own token, and only with consent (P10).
+// Run with: node --test app/tests/*.test.js   (no browser; fetch is a stand-in hub)
 
 import assert from 'node:assert/strict';
 import { beforeEach, test } from 'node:test';
@@ -14,17 +15,20 @@ globalThis.location = { protocol: 'http:', origin: 'http://10.42.0.1' };
 
 // a stand-in hub: answers /api/hello, takes or refuses /api/events, or is out of reach
 const posted = [];
+const tokens = [];         // the learner token each events call carried
 const keys = [];           // the sheet-key addresses the phone asked for
 let hubUp = false;
-let refuse = 0;          // the status the next events call gets (0: taken)
+let refuse = 0;          // the status every events call gets until it changes (0: taken)
 globalThis.fetch = async (url, opts = {}) => {
   if (!hubUp) throw new TypeError('network down');
   const reply = (status, body) => ({ ok: status < 400, status, json: async () => body });
-  if (url.endsWith('/api/hello')) return reply(200, { hub: 'Qalam', modules: [] });
+  if (url.includes('/api/hello')) return reply(200, { hub: 'Qalam', modules: [] });
   if (url.includes('/key?')) { keys.push(url); return reply(200, { items: [] }); }
-  if (url.endsWith('/api/events')) {
-    if (refuse) { const st = refuse; refuse = 0; return reply(st, { error: 'no' }); }
+  if (url.includes('/api/events')) {
+    if (refuse) return reply(refuse, { error: 'no' });
     const body = JSON.parse(opts.body);
+    if (!opts.headers['X-Learner-Token']) return reply(401, { error: 'join again' });
+    tokens.push(opts.headers['X-Learner-Token']);
     posted.push(body.events);
     return reply(200, { saved: body.events.length, expired: 0 });
   }
@@ -34,6 +38,16 @@ globalThis.fetch = async (url, opts = {}) => {
 const hub = await import('../js/hub.js');
 const state = await import('../js/state.js');
 const events = await import('../js/events.js');
+const account = await import('../js/account.js');
+account.start();
+
+const AGREED = { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10-16T09:41', sent: true };
+const TOKEN = 'tok_aaaaaaaaaaaaaaaaaaaaaaaa';
+// a learner who joined and whose grown-up agreed
+function joined(year = 1, token = TOKEN) {
+  const c = state.addChild({ year, lang: 'prs' });
+  return state.updateChild(c.id, { consent: AGREED, token, number: 27, cohort: { id: 'c1', label: 'Class' }, sentBand: c.band });
+}
 
 async function goOffline() { hubUp = false; await hub.connect(); }
 async function goOnline() { hubUp = true; await hub.connect(); await events.flush(); }
@@ -43,11 +57,16 @@ beforeEach(async () => {
   store.clear();
   events.reset();
   posted.length = 0;
+  tokens.length = 0;
   refuse = 0;
+  state.reload();
+  events.record('lesson.start', 'dari-1-sheen', null, 'nobody');     // drops nothing: the queue was cleared
+  events.reset();
 });
 
 test('a lesson done offline is two events once the hub is back, with no name in them', async () => {
-  state.addChild({ name: 'Maryam', year: 1, lang: 'prs' });
+  const c = state.addChild({ name: 'Maryam', year: 1, lang: 'prs' });
+  state.updateChild(c.id, { consent: AGREED, token: TOKEN, sentBand: 'p1' });
   state.setStep('maths-1-count-5', 0);
   state.setStep('maths-1-count-5', 1);          // the next step is not a new start
   state.markDone('maths-1-count-5', 3);
@@ -62,32 +81,85 @@ test('a lesson done offline is two events once the hub is back, with no name in 
     assert.match(e.at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/);
   }
   assert.ok(!JSON.stringify(posted).includes('Maryam'));
+  assert.deepEqual(tokens, [TOKEN]);
   assert.deepEqual(events.pending(), []);
 });
 
 test('a lesson opened again after it was done starts again', async () => {
-  state.addChild({ name: '', year: 7, lang: 'prs' });
+  joined(7);
   state.setStep('dari-1-sheen', 0);
   state.markDone('dari-1-sheen', 2);
   state.setStep('dari-1-sheen', 0);
   assert.deepEqual(events.pending().map((e) => e.verb), ['lesson.start', 'lesson.done', 'lesson.start']);
 });
 
-test('only known verbs and plain lesson ids are queued', () => {
-  assert.equal(events.record('lesson.start', 'Maryam from the third house'), false);
-  assert.equal(events.record('lesson.start', 'call-0799123456'), false);
-  assert.equal(events.record('print.queued', 'dari-1-sheen', 1), false);     // the hub writes that one itself
-  assert.equal(events.record('lesson.done', 'dari-1-sheen'), false);         // needs its stars
-  assert.equal(events.record('lesson.start', 'dari-1-sheen', 4), false);
-  assert.equal(events.record('lesson.start', 'dari-1-sheen'), true);
+test('only known verbs and plain lesson ids are queued, each for a learner on this phone', () => {
+  const l = joined().id;
+  assert.equal(events.record('lesson.start', 'Maryam from the third house', null, l), false);
+  assert.equal(events.record('lesson.start', 'call-0799123456', null, l), false);
+  assert.equal(events.record('print.queued', 'dari-1-sheen', 1, l), false);     // the hub writes that one itself
+  assert.equal(events.record('lesson.done', 'dari-1-sheen', null, l), false);   // needs its stars
+  assert.equal(events.record('lesson.start', 'dari-1-sheen', 4, l), false);
+  assert.equal(events.record('lesson.start', 'dari-1-sheen'), false);            // whose?
+  assert.equal(events.record('lesson.start', 'dari-1-sheen', null, l), true);
   assert.equal(events.pending().length, 1);
+  assert.deepEqual(Object.keys(events.pending()[0]).sort(), ['at', 'object', 'verb']);   // the learner id stays here
+});
+
+test('without consent nothing is queued; with consent but no token yet, events wait for her join', async () => {
+  const c = state.addChild({ year: 3, lang: 'prs' });
+  state.setStep('dari-1-sheen', 0);
+  state.markDone('dari-1-sheen', 3);
+  assert.deepEqual(events.pending(), []);
+  state.updateChild(c.id, { consent: AGREED });
+  state.setStep('dari-1-alif', 0);
+  await goOnline();
+  assert.equal(posted.length, 0);
+  assert.equal(events.pending().length, 1);
+  state.updateChild(c.id, { token: TOKEN });
+  await events.flush();
+  assert.deepEqual(posted.flat().map((e) => e.object), ['dari-1-alif']);
+});
+
+test('two learners on one phone send their own events with their own tokens', async () => {
+  const a = joined(2, 'tok_aaaaaaaaaaaaaaaaaaaaaaaa');
+  state.setStep('dari-1-sheen', 0);
+  joined(8, 'tok_bbbbbbbbbbbbbbbbbbbbbbbb');
+  state.setStep('maths-7-fractions-add', 0);
+  state.setActive(a.id);
+  state.markDone('dari-1-sheen', 2);
+  await goOnline();
+  assert.deepEqual(tokens, ['tok_aaaaaaaaaaaaaaaaaaaaaaaa', 'tok_bbbbbbbbbbbbbbbbbbbbbbbb']);
+  assert.deepEqual(posted.map((b) => b.map((e) => e.object)), [['dari-1-sheen', 'dari-1-sheen'], ['maths-7-fractions-add']]);
+});
+
+test('a token the server does not know keeps her events and clears the token for a new join', async () => {
+  const c = joined();
+  state.setStep('dari-1-sheen', 0);
+  refuse = 401;
+  hubUp = true;
+  await hub.connect();
+  await events.flush();
+  assert.equal(events.pending().length, 1);
+  assert.equal(state.byId(c.id).token, null);
+  assert.equal(state.byId(c.id).number, null);
+});
+
+test('removing a learner drops her queued events and queues her server record for deletion', () => {
+  const a = joined(2, 'tok_aaaaaaaaaaaaaaaaaaaaaaaa');
+  state.setStep('dari-1-sheen', 0);
+  joined(8, 'tok_bbbbbbbbbbbbbbbbbbbbbbbb');
+  state.setStep('maths-7-fractions-add', 0);
+  state.removeLearner(a.id);
+  assert.deepEqual(events.pending().map((e) => e.object), ['maths-7-fractions-add']);
+  assert.deepEqual(state.toForget(), ['tok_aaaaaaaaaaaaaaaaaaaaaaaa']);
 });
 
 test('a batch that did not arrive stays; one the hub refuses is dropped', async () => {
-  events.record('lesson.start', 'dari-1-sheen');
+  events.record('lesson.start', 'dari-1-sheen', null, joined().id);
+  refuse = 503;
   hubUp = true;
   await hub.connect();
-  refuse = 503;
   await events.flush();
   assert.equal(events.pending().length, 1);
   refuse = 422;
@@ -97,15 +169,17 @@ test('a batch that did not arrive stays; one the hub refuses is dropped', async 
 });
 
 test('more than a hundred go in batches of a hundred', async () => {
-  for (let i = 0; i < 230; i++) events.record('lesson.start', 'dari-1-sheen');
+  const l = joined().id;
+  for (let i = 0; i < 230; i++) events.record('lesson.start', 'dari-1-sheen', null, l);
   await goOnline();
   assert.deepEqual(posted.map((b) => b.length), [100, 100, 30]);
 });
 
 test('a marked sheet is a check.done with a percent; a key fetch is never an event', async () => {
-  assert.equal(events.record('check.done', 'maths-7-fractions-add'), false);     // needs its percent
-  assert.equal(events.record('check.key', 'maths-7-fractions-add'), false);      // gone
-  assert.equal(events.record('check.done', 'maths-7-fractions-add', 75), true);
+  const l = joined(7).id;
+  assert.equal(events.record('check.done', 'maths-7-fractions-add', null, l), false);     // needs its percent
+  assert.equal(events.record('check.key', 'maths-7-fractions-add', null, l), false);      // gone
+  assert.equal(events.record('check.done', 'maths-7-fractions-add', 75, l), true);
   await goOnline();
   keys.length = 0;
   await hub.sheetKey('maths-7-fractions-add', 4821, 'prs');

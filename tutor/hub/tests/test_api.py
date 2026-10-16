@@ -197,7 +197,7 @@ def test_hello_lists_the_five_modules_for_the_hub(hub_client):
 
 def test_print_off_makes_its_routes_404_for_that_cohort_only(hub_client):
     hub = hub_client.hub
-    open_id = hub.seeds["open"]["id"]
+    open_id = hub.seeds["staging"]["id"]
     hub.store.sync.set_flag(hub.cohort_id, "print", enabled=False, changed_by="admin")
     base = {"lesson": "maths-1-count-5", "lang": "prs"}
     assert hub_client.post("/api/print", json=base).status_code == 404

@@ -75,10 +75,22 @@ const SELF_ONLY = { code: 'D1-01', items: [
 const checks = () => events.pending().filter((e) => e.verb === 'check.done').map((e) => [e.object, e.value]);
 const button = (el, cls) => el.all((n) => n.tag === 'button' && n.className.split(' ').includes(cls));
 
+const AGREED = { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10-16T09:41', sent: true };
+
 beforeEach(() => {
   store.clear();
   events.reset();
-  state.addChild({ name: 'Maryam', year: 7, lang: 'prs' });
+  const c = state.addChild({ name: 'Maryam', year: 7, lang: 'prs' });
+  state.updateChild(c.id, { consent: AGREED });          // no event is kept without a grown-up's yes
+});
+
+test('without consent a marked sheet queues no event', async () => {
+  state.updateChild(state.child().id, { consent: null });
+  state.cache(`key.${LESSON}.4821`, KEY);
+  const { el } = await check([LESSON, '4821']);
+  el.all((n) => n.tag === 'input').forEach((i) => { i.value = '3/4'; });
+  button(el, 'main')[0].click();
+  assert.deepEqual(events.pending(), []);
 });
 
 test('pressing Check queues one check.done with the percent right, and no name', async () => {

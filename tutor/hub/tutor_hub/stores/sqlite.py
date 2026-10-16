@@ -17,7 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from . import _sqlite_sync
-from .base import Store
+from .base import Store, check_changes
 from .migrations import APPLIED, LEDGER, MIGRATIONS, NAME, RECORD, applied_at, migration_files, plan
 
 __all__ = ["SqliteStore", "migrate", "migration_files", "MIGRATIONS", "NAME"]
@@ -186,3 +186,26 @@ class SqliteStore(Store):
 
     async def releases(self, cohort):
         return await self._run("releases", cohort)
+
+    # learners
+    async def set_class_code(self, cid, code_hash) -> bool:
+        return await self._run("set_class_code", cid, code_hash)
+
+    async def cohort_by_code(self, code_hash):
+        return await self._run("cohort_by_code", code_hash)
+
+    async def add_learner(self, **kw) -> int:
+        return await self._run("add_learner", **kw)
+
+    async def learner(self, token_hash):
+        return await self._run("learner", token_hash)
+
+    async def update_learner(self, token_hash, **changes) -> bool:
+        check_changes(changes)                   # here too, so a stray key never reaches _run's own arguments
+        return await self._run("update_learner", token_hash, **changes)
+
+    async def delete_learner(self, token_hash) -> bool:
+        return await self._run("delete_learner", token_hash)
+
+    async def prune_learners(self, idle_days: int):
+        return await self._run("prune_learners", idle_days)
