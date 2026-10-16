@@ -80,6 +80,7 @@
 .sbig .s{font-size:14px;opacity:.95;line-height:1.4;overflow-wrap:anywhere}
 .sbig .s.url{font-size:12.5px;overflow-wrap:break-word;word-wrap:break-word} /* the address under "Send the link": breaks after a slash, not mid-word */
 .srowbig.off .sbig{background:#E9E5DF;color:#8A847C}
+.srowbig.keepapp .sbig{--c:#EBB027;color:#2E2100} /* the app file: yellow like the welcome screen's keep button (red is for Emergency) */
 .spk.big{width:56px;height:56px}
 .spk.big svg{width:26px;height:26px}
 .qrcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:10px 14px 6px;margin:14px 0 12px;text-align:center}

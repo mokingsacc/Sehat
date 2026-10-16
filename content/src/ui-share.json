@@ -219,9 +219,9 @@
    "en": "Get the Sehat app for Android. It works with no internet. Tap Get."
   },
   "ui.getapp.lead": {
-   "fa": "دکمهٔ سرخ را بزنید تا فایل برنامه را بگیرید. فقط برای گرفتن فایل انترنت لازم است. بعد این قدم‌ها را دنبال کنید.",
-   "ps": "سور تڼۍ ووهئ چې د اپ فایل واخلئ. یوازې د فایل اخیستلو لپاره انټرنېټ پکار دی. بیا دا ګامونه تعقیب کړئ.",
-   "en": "Tap the red button to get the app file. You need internet only to get the file. Then follow these steps."
+   "fa": "دکمهٔ زرد را بزنید تا فایل برنامه را بگیرید. فقط برای گرفتن فایل انترنت لازم است. بعد این قدم‌ها را دنبال کنید.",
+   "ps": "ژېړه تڼۍ ووهئ چې د اپ فایل واخلئ. یوازې د فایل اخیستلو لپاره انټرنېټ پکار دی. بیا دا ګامونه تعقیب کړئ.",
+   "en": "Tap the yellow button to get the app file. You need internet only to get the file. Then follow these steps."
   }
  }
 }

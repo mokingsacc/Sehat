@@ -40,7 +40,7 @@ const CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 const LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
 
 export function initShare(ctx) {
-  const { S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk } = ctx;
+  const { S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk, play, stopAudio } = ctx;
   const say = (id) => L(S.book.narration[id]);
   const sayRow = (id, cls = 'trow') => `<div class="${cls}" data-block="${esc(id)}"><div class="body">${esc(say(id))}</div>${spk(id)}</div>`;
   const url = () => String((S.book.config && S.book.config.appUrl) || SITE);
@@ -69,19 +69,26 @@ export function initShare(ctx) {
   // when the website was added to the home screen (display-mode standalone): that phone already opens Sehat like an app
   // and it already works offline there, so "Get the app" would only confuse; the Share page still offers the file.
   // × hides it for good on this phone (store: if the phone cannot keep it, the banner simply shows again next time).
-  // "Get" opens a sheet with the same red download button and install steps as the Share page.
+  // "Get" opens a sheet with the same yellow download button and install steps as the Share page.
   const BANNER_OFF = 'apkBannerOff';
   const bannerOn = () => platform() === 'android' && !inApk && !bridge() && !isStandalone() && !store.get(BANNER_OFF, false);
   function banner() {
     if (!bannerOn()) return '';
     return `<div class="getapp" data-block="ui.getapp"><button type="button" class="grow" data-share="banner-get"><span class="go">${ic('phone')}<span>${esc(T('getAppGo'))}</span></span><span class="tx">${esc(T('getAppBanner'))}</span></button>${spk('ui.getapp')}<button type="button" class="gx" data-share="banner-close" aria-label="${esc(T('close'))}">${CLOSE}</button></div>`;
   }
+  // the download button: yellow like the welcome screen's "keep Sehat on my phone" button (Mo, 16 Oct 2026: one way to
+  // install on Android, and red is for Emergency only)
+  const apkRow = () => row('ui.sh.b.apk', label(ic('phone'), T('getApk')), 'a', `data-share="apk" href="${esc(APK_URL)}" rel="noopener"`).replace('class="srowbig"', 'class="srowbig keepapp"');
+  // the sheet reads itself aloud as soon as it opens (many cannot read); Close or a tap outside stops the voice
   function apkSheet() {
     const ids = [];
     let h = sayRow('ui.getapp.lead', 'blk lead trow');
-    h += row('ui.sh.b.apk', label(ic('phone'), T('getApk')), 'a', `data-share="apk" href="${esc(APK_URL)}" rel="noopener" style="--c:#B6322D"`);
+    h += apkRow();
     h += installHelp(ids);
-    dialog(`<div class="getapp-sheet">${h}<button class="btn ghost" data-close>${esc(T('close'))}</button></div>`);
+    dialog(`<div class="getapp-sheet">${h}<button class="btn ghost" data-close>${esc(T('close'))}</button></div>`, (w) => {
+      w.addEventListener('click', (e) => { if (e.target === w || e.target.closest('[data-close]')) stopAudio(); });
+      play(['ui.getapp.lead', 'ui.sh.i1', 'ui.sh.i2', 'ui.sh.i3', 'ui.sh.i4']);
+    });
   }
 
   function qrBlock(ids) {
@@ -126,7 +133,7 @@ export function initShare(ctx) {
       if (platform() === 'android') {
         ids.push('ui.sh.apk', 'ui.sh.b.apk');
         body += sayRow('ui.sh.apk', 'blk tip trow');
-        body += row('ui.sh.b.apk', label(ic('phone'), T('getApk')), 'a', `data-share="apk" href="${esc(APK_URL)}" rel="noopener" style="--c:#B6322D"`);
+        body += apkRow();
         body += installHelp(ids);
       }
     }
@@ -175,5 +182,5 @@ export function initShare(ctx) {
     }
   });
 
-  return { screen, homeCard, homeSay, settingsRow, shareLink, banner };
+  return { screen, homeCard, homeSay, settingsRow, shareLink, banner, apkSheet };
 }

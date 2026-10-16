@@ -445,8 +445,9 @@ function screenWelcome() {
   return { html: `<div class="welcome onb">${onbHead()}<button class="onbspk" data-action="onbsay" aria-label="${esc(b.ui.listen.fa)} · ${esc(b.ui.listen.ps)}">${I.spk}</button>
     <div class="onbbtns">${btn('fa', 'blue')}${btn('ps', 'yellow')}</div></div>`, nav: false }; // English is in Settings only (Mo, 11 Oct 2026, audit S-02)
 }
-// the website can be kept on the phone: the phone's own install (Android), or the Share steps (iPhone)
-const canKeep = () => !IN_APK && !isStandalone() && (!!S.installEvt || platform() === 'ios');
+// the website can be kept on the phone: on an Android phone the app file (the same sheet as the "Get the app" banner:
+// one way to install, Mo 16 Oct 2026), on an iPhone the Share steps, elsewhere the browser's own install
+const canKeep = () => !IN_APK && !isStandalone() && (platform() === 'android' || !!S.installEvt || platform() === 'ios');
 function screenHello() {
   let keep = '';
   if (canKeep()) keep = `<button class="onbbtn yellow keep" data-action="install" data-onb="keep">${ic('phone')}<span class="t">${esc(T('onbKeep'))}</span></button>`;
@@ -470,7 +471,7 @@ async function onbLangVoice() {
   onbSpk('');
 }
 async function onbAboutVoice() {
-  clearTimeout(ONB.timer); if (!S.lang || route()[0] !== 'hello') return;
+  clearTimeout(ONB.timer); if (!S.lang || route()[0] !== 'hello' || $('.dialog-wrap')) return; // never talk over an open sheet (the keep button's)
   ONB.wait = false; P.blocked = false;
   await play(['ui.onb.about', 'ui.onb.help', 'ui.onb.parts', 'ui.onb.family', 'ui.onb.look', 'ui.onb.talk', ...($('[data-onb="keep"]') ? ['ui.onb.keep'] : []), 'ui.onb.net', 'ui.onb.next'], { quiet: true });
   if (P.blocked) onbBlocked();
@@ -1536,7 +1537,7 @@ const TL = initTools({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, ha
 const FD = initFinder({ S, esc, T, L, ic, I, spk, isAdultTopic });
 const NP = initNumpad({ S, esc, T, L, num, I, spk, play, dialog, toast });
 const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, backTo, openerTab, store, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, topicCard, NP, nameOf: (k) => FM.nameOf(k), children: () => FM.children(), render: () => render() });
-const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk: IN_APK });
+const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk: IN_APK, play, stopAudio });
 const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, disclaimer, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP, render: () => render() });
 
 /* ---------- titles that fit ----------
@@ -1734,6 +1735,7 @@ document.addEventListener('click', async (e) => {
 addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); S.installEvt = e; if (S.lang && ['home', 'hello'].includes(route()[0] || 'home')) render(); });
 addEventListener('appinstalled', () => { S.installEvt = null; S.kept = true; track('a2hs'); persistOnce(true); if (S.lang) render(); });
 async function doInstall() {
+  if (platform() === 'android' && !IN_APK) { SH.apkSheet(); return; } // Android: the app file, never the website's install (Mo, 16 Oct 2026)
   if (S.installEvt) { stopAudio(); S.installEvt.prompt(); const c = await S.installEvt.userChoice; track('a2hs-prompt', { ok: c.outcome }); if (c.outcome === 'accepted') S.kept = true; S.installEvt = null; render(); return; }
   // iPhone: Safari has no install button for a website, so the steps are shown, each with its speaker, and read aloud
   // as soon as the sheet opens (Mo, 15 Oct: "it's just written"). Close is grey: red is for Emergency only.

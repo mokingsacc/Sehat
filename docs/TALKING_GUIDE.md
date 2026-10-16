@@ -9,7 +9,7 @@ Many of the families Sehat is for cannot read, so the app talks them through its
    button"), then in Dari ("choose your language: for Dari, press the blue button"), lighting each button as it is
    named (Pashto first: Mo, 15 Oct 2026).
 2. **What Sehat is** (`#/hello`). It speaks by itself: `ui.onb.about`, a short tour of what Sehat can do (Mo, 15 Oct: "sell the app": `ui.onb.help` the red Emergency button and the sick-person checks, `ui.onb.parts` the Health and Home tabs, `ui.onb.family` the Family tab, `ui.onb.look` "look around"), `ui.onb.talk`, `ui.onb.keep`
-   (website only: the yellow "Keep Sehat on my phone" button, the phone's own install), `ui.onb.net` (keep the internet
+   (website only: the yellow "Keep Sehat on my phone" button; on an Android phone it opens the app-file sheet, the same as the "Get the app" banner, so there is one way to install (Mo, 16 Oct 2026); on an iPhone the Share steps), `ui.onb.net` (keep the internet
    on so the voices save) and `ui.onb.next` (press the blue button). Next opens the Health tab.
 
 Colours: red is only ever Emergency. In Pashto "shin" (شین) means both blue and green, so the welcome uses blue and

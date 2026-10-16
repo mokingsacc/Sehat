@@ -2,8 +2,11 @@
 //   - an Android phone in a browser sees it under the header, above the red Emergency card, in fa, ps and en at 320, 360
 //     and 412 px: right to left in fa and ps, no text touching its speaker, a 56 px speaker, a big close button, no
 //     sideways scroll; on a 360 x 640 phone the Emergency card and CPR and first aid stay whole on the first screen;
-//   - "Get" opens a sheet with the red download button (the same file as the Share page) and the install steps, each
-//     with a speaker; the download button starts the download, and with no internet it says so and stays in the app;
+//   - "Get" opens a sheet with the yellow download button (the same file as the Share page; red is for Emergency only)
+//     and the install steps, each with a speaker, and reads itself aloud; the download button starts the download, and
+//     with no internet it says so and stays in the app;
+//   - the welcome screen's yellow "keep Sehat on my phone" button opens the same sheet on an Android phone (one way to
+//     install, Mo 16 Oct 2026), even when the browser offers no install of its own; an iPhone still gets its own steps;
 //   - × hides it, and it stays hidden after the app is opened again; a phone that cannot keep that (storage blocked)
 //     simply shows it again; tapping Get and × are counted (tool-banner-getapk, tool-banner-close), nothing else;
 //   - never on an iPhone or a computer, never inside the Android app (its address, appassets.androidplatform.net, or its
@@ -118,17 +121,19 @@ const usage = () => localStorage.getItem('fhb.usage') || '';
     const sh = await p.evaluate(() => {
       const d = document.querySelector('.dialog .getapp-sheet'); if (!d) return null;
       const a = d.querySelector('a[data-share="apk"]');
-      return { href: a && a.href, steps: d.querySelectorAll('.step').length, spk: [...d.querySelectorAll('.spk')].map((s) => [s.dataset.say, Math.round(s.getBoundingClientRect().width)]), lead: !!d.querySelector('[data-block="ui.getapp.lead"] .spk') };
+      return { href: a && a.href, bg: a && getComputedStyle(a).backgroundColor, talking: !!d.querySelector('.speaking'), steps: d.querySelectorAll('.step').length, spk: [...d.querySelectorAll('.spk')].map((s) => [s.dataset.say, Math.round(s.getBoundingClientRect().width)]), lead: !!d.querySelector('[data-block="ui.getapp.lead"] .spk') };
     });
     ok(!!sh, `${lang}: Get opens the sheet`);
     if (sh) {
-      ok(sh.href === APK, `${lang}: the sheet's red button is the same app file as the Share page`, sh.href);
+      ok(sh.href === APK, `${lang}: the sheet's yellow button is the same app file as the Share page`, sh.href);
+      ok(sh.bg === 'rgb(235, 176, 39)', `${lang}: the download button is yellow, not red`, sh.bg);
+      ok(sh.talking, `${lang}: the sheet reads itself aloud`, sh.talking);
       ok(sh.steps === 4 && sh.lead, `${lang}: the sheet has its line and the four install steps`, sh);
       ok(sh.spk.length >= 7 && sh.spk.every(([id, w]) => id && w >= 56), `${lang}: every line in the sheet has a 56 px speaker`, sh.spk);
     }
     if (OUT) await p.screenshot({ path: `${OUT}/${lang}-360-get-sheet.png` });
     const [dl] = await Promise.all([p.waitForEvent('download', { timeout: 5000 }).catch(() => null), p.click('.dialog a[data-share="apk"]')]);
-    ok(!!dl && /sehat\.apk$/.test(dl.suggestedFilename()), `${lang}: the red button downloads sehat.apk`, dl && dl.suggestedFilename());
+    ok(!!dl && /sehat\.apk$/.test(dl.suggestedFilename()), `${lang}: the yellow button downloads sehat.apk`, dl && dl.suggestedFilename());
     ok(/127\.0\.0\.1/.test(p.url()), `${lang}: the app stays open while the file downloads`, p.url());
     // no internet: a message, and the app stays
     await p.click('.dialog [data-close]'); await p.waitForTimeout(100);
@@ -144,6 +149,38 @@ const usage = () => localStorage.getItem('fhb.usage') || '';
     const u = await p.evaluate(usage);
     ok(u.includes('act/tool-banner-getapk') && u.includes('act/tool-share-getapk'), `${lang}: Get and the download are counted`, u.slice(0, 300));
     ok(p.errs.length === 0, `${lang} Get: no page errors`, p.errs);
+    await ctx.close();
+  }
+
+  // 2b. the welcome screen's yellow "keep Sehat on my phone" button: on Android the same sheet (one way to install)
+  for (const lang of ['ps', 'fa']) {
+    const { ctx, p } = await phone({ lang });
+    await p.goto(BASE + 'index.html#/hello'); await p.waitForSelector('main .onb.hello', { timeout: 10000 }).catch(() => {});
+    await p.waitForTimeout(300);
+    const keep = await p.$('[data-onb="keep"]');
+    ok(!!keep, `${lang}: an Android phone in a browser gets the yellow keep button with no install offer from the browser`);
+    if (keep) {
+      await keep.click(); await p.waitForSelector('.dialog .getapp-sheet', { timeout: 3000 }).catch(() => {});
+      const sh = await p.evaluate(() => { const d = document.querySelector('.dialog .getapp-sheet'); if (!d) return null; const a = d.querySelector('a[data-share="apk"]'); return { href: a && a.href, steps: d.querySelectorAll('.step').length, talking: !!d.querySelector('.speaking') }; });
+      ok(!!sh && sh.href === APK && sh.steps === 4, `${lang}: the keep button opens the app-file sheet with its four steps`, sh);
+      ok(!!sh && sh.talking, `${lang}: and it reads itself aloud`, sh);
+      if (OUT) await p.screenshot({ path: `${OUT}/${lang}-360-hello-keep-sheet.png` });
+      await p.click('.dialog [data-close]'); await p.waitForTimeout(150);
+      ok(!(await p.$('.dialog-wrap')) && !(await p.evaluate(() => [...document.querySelectorAll('.speaking')].some((e) => /^ui\.(getapp|sh)\./.test(e.dataset.block || '')))), `${lang}: Close shuts the sheet and stops its voice`);
+      await p.waitForTimeout(2300);
+      ok(!(await p.evaluate(() => [...document.querySelectorAll('.speaking')].some((e) => /^ui\.(getapp|sh)\./.test(e.dataset.block || '')))), `${lang}: the sheet's lines do not start again`);
+    }
+    ok(p.errs.length === 0, `${lang} keep: no page errors`, p.errs);
+    await ctx.close();
+  }
+  {
+    const { ctx, p } = await phone({ ua: 'iphone', lang: 'ps' });
+    await p.goto(BASE + 'index.html#/hello'); await p.waitForSelector('main .onb.hello', { timeout: 10000 }).catch(() => {});
+    await p.waitForTimeout(300);
+    const keep = await p.$('[data-onb="keep"]');
+    if (keep) { await keep.click(); await p.waitForTimeout(400); }
+    ok(!!keep && !!(await p.$('.dialog .iosinst')) && !(await p.$('.dialog .getapp-sheet')), 'ps iPhone: the keep button still shows the iPhone steps, not the app file');
+    ok(p.errs.length === 0, 'ps iPhone keep: no page errors', p.errs);
     await ctx.close();
   }
 
