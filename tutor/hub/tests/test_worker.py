@@ -213,7 +213,9 @@ async def test_the_spike_route_only_where_staging_asks_for_it(worker, monkeypatc
         assert r.status_code == 200
         s = r.json()
         assert s["jsnull"] is True and s["batch_to_js"]["ok"] is True
-        assert s["queries"] == {"tried": 60, "single_after_batch": 60, "stopped_by": None}   # the fake has no limit
+        q = s["queries"]                                                                      # the fake has no limit
+        assert (q["tried"], q["single_after_batch"], q["stopped_by"]) == (60, 60, None)
+        assert q["wall_ms"] >= 0 and q["ms_per_query"] >= 0
         assert (await c.get("/api/_spike?n=5000")).json()["queries"]["tried"] == 1100
         monkeypatch.setenv("QALAM_SPIKE", "off")
         assert (await c.get("/api/_spike")).status_code == 404

@@ -16,17 +16,22 @@ import time
 import urllib.error
 import urllib.request
 
+PROBE = 120
 
-def get(url, body=None):
+
+def get(url, body=None, timeout=60):
+    """(status, body, ms); status 0 when the request timed out or failed to connect."""
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(url, data=data, method="POST" if data else "GET",
                                  headers={"Content-Type": "application/json", "User-Agent": "qalam-measure"})
     t = time.perf_counter()
     try:
-        with urllib.request.urlopen(req, timeout=60) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             status, raw = r.status, r.read()
     except urllib.error.HTTPError as e:
         status, raw = e.code, e.read()
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        status, raw = 0, f"{type(e).__name__}: {e}".encode()
     return status, raw, (time.perf_counter() - t) * 1000
 
 
@@ -128,9 +133,13 @@ def main(argv=None):
 
     s, raw, _ = get(base + "/api/_spike")
     spike = json.loads(raw) if s == 200 else {"status": s, "body": raw[:200].decode("utf-8", "replace")}
-    s, raw, _ = get(base + "/api/_spike?n=1001")         # past the Free plan's documented 50, to its 1000
-    probe = json.loads(raw).get("queries") if s == 200 else {"status": s, "body": raw[:160].decode("utf-8", "replace")}
     lat, bad = warm(base)
+    # Last, as it is slow: well past the Free plan's documented 50 queries per request. Each query waits for D1 in
+    # the EU, so the Paid plan's 1,000 would take minutes from here and is not probed.
+    s, raw, ms = get(base + f"/api/_spike?n={PROBE}", timeout=180)
+    probe = json.loads(raw).get("queries") if s == 200 else {"status": s, "body": raw[:160].decode("utf-8", "replace")}
+    if isinstance(probe, dict):
+        probe["request_ms"] = round(ms)
     m = {"where": a.where, "d1": a.d1, "first_request_ms": a.first_ms, "warm_ms": lat, "errors": bad,
          "deploy": deploy_facts(a.deploy_log) if a.deploy_log else {}, "tail": tail_facts(a.tail) if a.tail else None,
          "spike": spike, "query_probe": probe}
@@ -159,8 +168,9 @@ def main(argv=None):
         rows += [("Python", spike.get("python")), ("pyodide.ffi.jsnull exists", spike["jsnull"]),
                  ("A to_js list works with batch()", spike.get("batch_to_js")),
                  ("D1 queries one request may make", f"{q.get('single_after_batch')} of {q.get('tried')} single "
-                  f"queries after one batch; stopped by: {q.get('stopped_by') or 'nothing'}"),
-                 ("Probing to 1001 queries in one request", str(probe))]
+                  f"queries after one batch; stopped by: {q.get('stopped_by') or 'nothing'}; "
+                  f"{q.get('ms_per_query')} ms per query, waiting for D1"),
+                 (f"Probing {PROBE} queries in one request", str(probe))]
     if bad:
         rows.append(("Errors during the warm runs", "; ".join(bad[:5])))
     md = "### Qalam staging: measurements\n\n" + table(rows) + "\n"

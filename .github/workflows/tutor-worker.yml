@@ -170,7 +170,6 @@ jobs:
             --out measurements.json --summary "$GITHUB_STEP_SUMMARY" || echo "::warning::measuring failed"
           sleep 5; kill "$(cat tail.pid)" 2>/dev/null || true
           echo "tail: $(grep -c outcome tail.jsonl || true) events; $(head -c 300 tail.err)"
-          python3 measure.py "$URL" --tail tail.jsonl --where "tail only" | grep -i "cpu" || true
 
       - name: Blocked by the Free plan, or not deployed - smoke test under pywrangler dev (D6)
         if: >-

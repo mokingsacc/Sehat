@@ -22,6 +22,7 @@ request may make (`?n=`, at most 1100), and how big the WebAssembly memory is. I
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -61,7 +62,7 @@ async def _spike(n: int) -> dict:
         out["batch_to_js"] = {"ok": rows[0][0]["a"] is ffi.jsnull and rows[1][0]["b"] == 2, "calls": 1}
     except Exception as e:
         out["batch_to_js"] = {"ok": False, "error": str(e)[:300]}
-    done, stop = 0, None
+    done, stop, t0 = 0, None, time.time()    # a Worker's clock moves only across I/O, so this is D1 wait time
     for _ in range(n):                        # one query at a time, after the batch above
         try:
             await db.prepare("SELECT 1 AS x").first()
@@ -69,7 +70,9 @@ async def _spike(n: int) -> dict:
         except Exception as e:
             stop = str(e)[:300]
             break
-    out["queries"] = {"tried": n, "single_after_batch": done, "stopped_by": stop}
+    ms = (time.time() - t0) * 1000
+    out["queries"] = {"tried": n, "single_after_batch": done, "stopped_by": stop, "wall_ms": round(ms),
+                      "ms_per_query": round(ms / done, 1) if done else None}
     try:
         import pyodide_js
         out["wasm_memory_mib"] = round(pyodide_js._module.HEAP8.length / 2 ** 20, 1)
