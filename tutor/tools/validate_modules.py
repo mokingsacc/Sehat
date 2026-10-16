@@ -17,6 +17,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Check module manifests and seed cohorts.")
     ap.add_argument("modules", nargs="?", type=Path, default=TUTOR / "modules")
     ap.add_argument("--cohorts", type=Path, default=TUTOR / "cohorts")
+    ap.add_argument("--app", type=Path, default=TUTOR / "app")
     a = ap.parse_args(argv)
     found, problems = modules.load(a.modules)
     seeds, seed_problems = flags.load_seeds(a.cohorts)
@@ -24,6 +25,10 @@ def main(argv=None):
     ids = [c["id"] for c in seeds.values()]
     if len(set(ids)) != len(ids):
         problems.append("two seed cohorts share an id")
+    app_slots = {"home.action", "lesson.end", "settings.row", "teacher.panel", "admin.panel"}
+    for mid, m in found.items():             # the app loads app/js/modules/<id>.js for any module with a slot
+        if set(m["slots"]) & app_slots and not (a.app / "js" / "modules" / f"{mid}.js").is_file():
+            problems.append(f"{mid}: has slots but no app/js/modules/{mid}.js")
     for name, c in seeds.items():
         problems += [f"cohort {name}: switches unknown module {m}" for m in c["modules"] if m not in found]
     for p in problems:

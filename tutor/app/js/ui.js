@@ -3,6 +3,7 @@
 
 import { fa, getLang, pick, s } from './i18n.js';
 import * as hub from './hub.js';
+import * as modules from './modules.js';
 
 export function h(tag, props, ...kids) {
   const el = document.createElement(tag);
@@ -115,11 +116,11 @@ export function hubChip() {
     h('span', { class: 'dot' }), on ? s('hub_on') : s('hub_off'));
 }
 
+// the tabs of the modules that are on; each keeps its column, so a tab switched off leaves the others in place
 export function nav(active) {
-  const items = [['book', 'lessons', '#/home'], ['ask', 'ask', '#/ask'], ['printer', 'print', '#/print']];
   return h('nav', { class: 'tabs', 'aria-label': s('app') },
-    items.map(([ic, key, href]) => h('a', { href, class: key === active ? 'on' : '', 'aria-current': key === active ? 'page' : null },
-      icon(ic, 28, 2.3), h('span', {}, s(key)))));
+    modules.tabs().map(({ icon: ic, key, href }) => h('a', { href, class: key === active ? 'on' : '',
+      'aria-current': key === active ? 'page' : null }, icon(ic, 28, 2.3), h('span', {}, s(key)))));
 }
 
 export function topbar({ back = '#/home', title, sub, extra } = {}) {

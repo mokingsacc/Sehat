@@ -1,10 +1,12 @@
 // The lesson player: one step per screen, a speaker on every text, answers checked at once with the reason.
 // Young children (look C) hear each page read aloud when the phone has a voice for their language.
-// The end of every lesson points to its worksheet: pen and paper is where the practice happens.
+// The end of every lesson points to its worksheet (the print module's lesson.end offer): pen and paper is where
+// the practice happens.
 
 import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
+import * as modules from '../modules.js';
 import { notSimplest, parse, same, show } from '../numbers.js';
 import { canRecord, hasVoice, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
@@ -169,10 +171,7 @@ export default async function lesson([id]) {
       h('div', { class: 'stars' }, [0, 1, 2].map((k) => star(48, k < stars))),
       h('h1', {}, s('lesson_done')),
       answers.length ? h('p', { class: 'muted' }, s('of', { a: right, b: answers.length })) : null,
-      summary && summary.sheet ? h('div', { class: 'card lined sheet-card' },
-        icon('printer', 34, 2.2),
-        h('div', { class: 'grow' }, h('b', {}, s('worksheet')), h('small', {}, s('worksheet_note'))),
-        h('a', { class: 'btn warm', href: '#/print/' + encodeURIComponent(id) }, s('print_it'))) : null,
+      summary ? modules.lessonEnd({ child: state.child(), lesson: summary, look: state.mode() }) : null,
       after && after.id !== id ? h('a', { class: 'btn primary big', href: '#/lesson/' + encodeURIComponent(after.id) },
         s('next_lesson'), icon('next')) : null,
       h('a', { class: 'link', href: '#/home' }, s('back'))));

@@ -4,6 +4,7 @@
 import { getLang, s, setLang } from './i18n.js';
 import * as hub from './hub.js';
 import * as library from './library.js';
+import * as modules from './modules.js';
 import * as state from './state.js';
 import { stop } from './speech.js';
 import { busy, h, hubChip, nav } from './ui.js';
@@ -41,6 +42,7 @@ async function route() {
   current = null;
   const [name = '', ...args] = location.hash.replace(/^#\/?/, '').split('/').map(decodeURIComponent);
   if (!state.child() && !NEEDS_NO_CHILD.has(name)) { location.replace('#/welcome'); return; }
+  if (!modules.routeOn(name)) { location.replace(state.child() ? '#/home' : '#/welcome'); return; }   // switched off
   const screen = SCREENS[name] || home;
   applyLook(SCREENS[name] ? name : 'home');
   let out;
@@ -61,8 +63,21 @@ function refreshChips() {
   document.querySelectorAll('.hubchip').forEach((el) => el.replaceWith(hubChip()));
 }
 
+// the hub's list of modules changed (or was first heard): load what is new, redraw the tabs, leave a screen
+// whose module was switched off
+async function modulesChanged() {
+  if (!modules.sync()) return false;
+  await modules.load();
+  const name = location.hash.replace(/^#\/?/, '').split('/')[0];
+  if (!modules.routeOn(name)) { route(); return true; }
+  const tabs = app.querySelector('nav.tabs');
+  if (tabs && current && current.tab) tabs.replaceWith(nav(current.tab));
+  return true;
+}
+
 async function hubCameBack() {
   await library.load(true);
+  await modulesChanged();
   if (current && current.onHub) current.onHub(true);
 }
 
@@ -78,11 +93,19 @@ async function boot() {
   await Promise.race([connecting, new Promise((r) => setTimeout(r, 1500))]);
   const late = !answered;
   await library.load();
+  modules.sync();               // the hub's list, else the one kept on the phone, else the built-in five
+  await modules.load();
   await route();
   if (late) connecting.then((ok) => { if (ok) hubCameBack(); });
-  // walking into the hub's Wi-Fi lights the app up without a reload
+  // walking into the hub's Wi-Fi lights the app up without a reload; while connected, the modules switched on
+  // are read again every minute, so a module the teacher or admin switches off leaves the phones within a minute
+  let ticks = 0;
   setInterval(async () => {
-    if (!hub.online() && document.visibilityState === 'visible' && (await hub.connect())) hubCameBack();
+    if (document.visibilityState !== 'visible') return;
+    if (!hub.online()) { if (await hub.connect()) hubCameBack(); return; }
+    if (++ticks % 3 === 0 && (await hub.refresh()) && (await modulesChanged()) && current && current.onHub) {
+      current.onHub(true);
+    }
   }, 20000);
 }
 

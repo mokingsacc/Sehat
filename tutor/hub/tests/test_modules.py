@@ -57,6 +57,9 @@ def test_the_validator_tool_passes_and_fails(tmp_path):
     (bad / "module.json").write_text(json.dumps(manifest(maturity="beta")), encoding="utf-8")
     out = subprocess.run(tool + [str(tmp_path / "modules")], capture_output=True, text=True)
     assert out.returncode == 1 and "photo: maturity" in out.stdout
+    (bad / "module.json").write_text(json.dumps(manifest()), encoding="utf-8")       # valid, but no app code
+    out = subprocess.run(tool + [str(tmp_path / "modules")], capture_output=True, text=True)
+    assert out.returncode == 1 and "no app/js/modules/photo.js" in out.stdout
 
 
 # validation

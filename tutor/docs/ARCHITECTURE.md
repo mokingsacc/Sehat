@@ -139,6 +139,14 @@ pictures), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jo
   CSS tokens do the rest ([DESIGN.md](DESIGN.md)).
 - `hub.js` finds the hub (the website the app came from first, then the usual hotspot addresses), and caches the
   lesson list and opened lessons so they still show when the hub is out of reach.
+- `modules.js` is the shell: it takes the modules on from `hello.modules` (kept on the phone for offline use; the
+  built-in five when nothing is known), imports `js/modules/<id>.js` only for modules that are on and have a slot,
+  and lets them offer actions through slots (`home.action`, `lesson.end`, `settings.row`). The shell, not a module,
+  keeps screens sparse: at most three tabs (Lessons, Ask, Print, each while its module is on, each keeping its
+  place), and on Home one primary action, one secondary and one list. The clean Home has Check my sheet but no
+  Print button, since Print is a tab. A screen whose module is off sends the phone Home. While connected, the app
+  re-reads `/api/hello` every minute, so a module switched off leaves the phones within a minute.
+  `app/tests/modules.test.js` (`node --test`) checks the shell.
 - `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
   child's year, one subject after another. Every lesson stays open from the subject pages.
 - Text from lessons, the hub or the AI is always added as text, never as HTML.

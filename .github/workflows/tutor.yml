@@ -30,4 +30,6 @@ jobs:
         working-directory: tutor/hub
         run: ../.venv/bin/python -m pytest -q
       - name: App scripts parse
-        run: for f in app/js/*.js app/js/screens/*.js; do node --check "$f"; done
+        run: for f in app/js/*.js app/js/screens/*.js app/js/modules/*.js; do node --check "$f"; done
+      - name: App tests
+        run: node --test app/tests/*.test.js

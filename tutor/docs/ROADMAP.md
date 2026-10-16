@@ -25,7 +25,8 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **P3b, done:** schema migrations (`tutor/migrations`) and the store contract tests.
 - **P1, done:** module manifests for the five built features, cohorts and flags (seeded, logged), `/api/hello`
   listing the modules on, and a switched-off module's routes answering 404.
-- P2: the app loads only enabled modules. Then P4 to P7: events without names, the AI gateway, the D1 store, the Worker on staging.
+- **P2, done:** the app loads only the modules that are on: a slot registry, tabs and Home actions from
+  `hello.modules`, one primary, one secondary and one list on Home, the cached list offline. Then P4 to P7: events without names, the AI gateway, the D1 store, the Worker on staging.
 
 ## January 2027: buy and test
 

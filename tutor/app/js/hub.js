@@ -13,6 +13,18 @@ export function onChange(fn) { listeners.add(fn); }
 export function info() { return hello; }
 export function online() { return !!hello; }
 
+// The modules switched on for this hub's cohort (hello.modules), kept on the phone for when the hub is out of reach.
+// null means not known: a hub from before modules, or a first start away from the hub (modules.js then uses the
+// built-in five, as the app always had).
+function remember(h) {
+  if (h && Array.isArray(h.modules)) cache('modules', h.modules);
+}
+export function moduleList() {
+  if (hello) return Array.isArray(hello.modules) ? hello.modules : null;
+  const saved = cache('modules');
+  return Array.isArray(saved) ? saved : null;
+}
+
 async function get(url, ms = 4000) {
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), ms);
@@ -44,13 +56,14 @@ async function found(tries) {
   base = i >= 0 ? tries[i] : null;
   hello = i >= 0 ? answers[i].value : null;
   if (base) cache('hub', base);
+  remember(hello);
   return !!hello;
 }
 
 // fresh printer and AI state, for the screens that show them
 export async function refresh() {
   if (base === null) return null;
-  try { hello = await get(url('/api/hello'), 3000); } catch { /* keep the last one */ }
+  try { hello = await get(url('/api/hello'), 3000); remember(hello); } catch { /* keep the last one */ }
   return hello;
 }
 
