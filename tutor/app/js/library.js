@@ -15,7 +15,7 @@ let loading = null;
 export function load(refresh = false) {
   if (!loading || refresh) {
     loading = hub.packs().then((packs) => {
-      list = packs.flatMap((p) => p.lessons.map((l) => ({ ...l, pack: p.id })));
+      list = packs.flatMap((p) => p.lessons.map((l) => ({ ...l, pack: p.id, audience: p.audience || 'child' })));
       return list;
     });
   }
@@ -32,10 +32,17 @@ export const subjectOrder = (lang) => ORDER[lang] || ORDER.prs;
 
 const byOrder = (a, b) => a.year - b.year || a.order - b.order || a.id.localeCompare(b.id);
 
-// A subject's lessons for this child's year. Children not in school yet (year 0) get year 0 and 1 lessons.
+// Adults learn from adult packs only (adult objects, no childish pictures); children from the others.
+const forAdults = (c) => c && c.band === 'ad';
+const fits = (c, l) => (l.audience === 'adult') === forAdults(c);
+export const hasAdultLessons = () => list.some((l) => l.audience === 'adult');
+
+// A subject's lessons for this learner's year (an adult: every adult lesson in it). Children not in school yet
+// (year 0) get year 0 and 1 lessons.
 export function mine(c, subject) {
+  if (forAdults(c)) return list.filter((l) => l.subject === subject && fits(c, l)).sort(byOrder);
   const years = c.year === 0 ? [0, 1] : [c.year];
-  return list.filter((l) => l.subject === subject && years.includes(l.year)).sort(byOrder);
+  return list.filter((l) => l.subject === subject && years.includes(l.year) && fits(c, l)).sort(byOrder);
 }
 
 export function progress(c, subject) {
@@ -52,8 +59,9 @@ export function next(c) {
   const own = order.flatMap((s) => mine(c, s))
     .sort((a, b) => a.order - b.order || order.indexOf(a.subject) - order.indexOf(b.subject));
   if (own.length) return own.find((l) => !c.done[l.id]) || own[0];
+  if (forAdults(c)) return null;           // no adult pack yet: Home says lessons for adults are coming
   // no lessons for this year yet: the nearest year that has some (the lower one when two are as near)
-  const near = [...list].sort((a, b) => Math.abs(a.year - c.year) - Math.abs(b.year - c.year) || a.year - b.year
+  const near = list.filter((l) => fits(c, l)).sort((a, b) => Math.abs(a.year - c.year) - Math.abs(b.year - c.year) || a.year - b.year
     || a.order - b.order || order.indexOf(a.subject) - order.indexOf(b.subject));
   return near.find((l) => !c.done[l.id]) || near[0] || null;
 }

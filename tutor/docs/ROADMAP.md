@@ -57,6 +57,14 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   0005), production (`TUTOR_RELEASE=1`) serves only signed lessons and cards with recorded clips for the youngest,
   staging shows drafts under the draft band; link cards, a source note at each lesson's end and a Credits page
   (plain until C2); `tools/import_bloom.py` for Afghan Children Read and other Bloom books.
+- **P9, done:** age bands. `app/js/bands.js` sets `data-band`, `data-look` (replacing `data-mode`), `data-tone`,
+  `data-text` and `data-theme` from the learner's year or adult track; every colour and size in `app.css` is a token
+  (four palettes, one `--scale` for Bigger text, dark by the phone or by choice); Home per band (early years with the
+  grown-up's corner and no tabs, "lessons for adults are coming" until an adult pack is signed); English interface
+  strings; `qalam.v2` with no name (v1 migrated, names dropped; Welcome and Print lost their name fields);
+  `speech.js` plays recorded clips before the phone's voice, with labelled placeholder chimes until native speakers
+  record; `tools/browser_check.mjs` checks every band in light, dark and Bigger text. Bigger text and the theme get
+  their switches in P10's Settings.
 
 ## January 2027: buy and test
 

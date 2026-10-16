@@ -126,9 +126,9 @@ export const sendEvents = (list) => call('/api/events', { method: 'POST', body: 
 export const printSheet = (job, pin) => call('/api/print', { method: 'POST', body: job, pin });
 export const printStatus = (id) => call('/api/print/' + id);
 export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}`);
-export const sheetUrl = (id, { seed = 0, lang = 'prs', kind = 'worksheet', name = '', pdf = false } = {}) =>
-  url(`/api/sheets/${encodeURIComponent(id)}.${pdf ? 'pdf' : 'html'}?seed=${seed}&lang=${lang}&kind=${kind}` +
-      (name ? '&name=' + encodeURIComponent(name) : ''));
+// the phone keeps no name, so none is sent: the sheet has a blank name line to write on by hand
+export const sheetUrl = (id, { seed = 0, lang = 'prs', kind = 'worksheet', pdf = false } = {}) =>
+  url(`/api/sheets/${encodeURIComponent(id)}.${pdf ? 'pdf' : 'html'}?seed=${seed}&lang=${lang}&kind=${kind}`);
 
 export const teacher = {
   summary: (pin) => call('/api/teacher/summary', { pin }),

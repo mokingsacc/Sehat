@@ -26,7 +26,6 @@ export default async function print([id]) {
   }
   let kind = 'worksheet';
   let copies = 1;
-  let withName = !!c.name;
   const seed = L.seeded ? 1000 + Math.floor(Math.random() * 9000) : 0;
   let timer = null;
   const free = () => (hub.info() && hub.info().free_copies) || 3;
@@ -66,9 +65,8 @@ export default async function print([id]) {
     n.textContent = fa(copies);
     pinRow.classList.toggle('hidden', !needPin());
     if (needPin() && !pinIn.value) pinIn.value = state.pin();
-    const name = withName && kind === 'worksheet' ? c.name : '';
     if (hub.online()) {
-      const src = hub.sheetUrl(L.id, { seed, lang, kind, name });
+      const src = hub.sheetUrl(L.id, { seed, lang, kind });
       if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
     }
     pdf.setAttribute('href', hub.sheetUrl(L.id, { seed, lang, kind, pdf: true }));
@@ -82,8 +80,7 @@ export default async function print([id]) {
     go.disabled = true;
     say(s('printing'));
     try {
-      const r = await hub.printSheet({ lesson: L.id, kind, copies, lang, seed,
-        name: withName && kind === 'worksheet' ? c.name : null }, pin || undefined);
+      const r = await hub.printSheet({ lesson: L.id, kind, copies, lang, seed }, pin || undefined);
       if (pin) state.pin(pin);
       if (kind === 'worksheet') {
         state.rememberPrint(L.id, r.seed);
@@ -123,14 +120,12 @@ export default async function print([id]) {
       h('button', { type: 'button', 'aria-label': s('fewer'), onClick: () => { copies = Math.max(1, copies - 1); update(); } }, icon('minus')),
       n,
       h('button', { type: 'button', 'aria-label': s('more'), onClick: () => { copies = Math.min(60, copies + 1); update(); } }, icon('plus'))));
-  const nameToggle = c.name ? h('label', { class: 'toggle' }, s('name_on_sheet', { name: c.name }),
-    h('input', { type: 'checkbox', checked: withName, onChange: (e) => { withName = e.target.checked; update(); } })) : null;
 
   const el = h('div', { class: 'screen' },
     topbar({ back: '#/home', sub: s('todays_sheet'), title: plain(L.title), extra: hubChip() }),
     h('div', { class: 'seg2', role: 'group' }, segBtns),
     preview,
-    h('div', { class: 'card pad-card stack' }, stepper, nameToggle, pinRow, go, status, printerBox,
+    h('div', { class: 'card pad-card stack' }, stepper, pinRow, go, status, printerBox,
       h('div', { class: 'row between' }, pdf,
         h('a', { class: 'link', href: `#/check/${encodeURIComponent(L.id)}/${seed}` }, icon('check', 20), s('check_sheet')))));
   update();

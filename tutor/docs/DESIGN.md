@@ -274,6 +274,25 @@ voice if it has one for the language (Dari and English on most Android phones; P
 not ready yet" toast. No synthetic Dari or Pashto voice is ever shipped: a learner of letter sounds must hear a real
 speaker. Release of a pack needs clips for every `ey` and `p1` step and every `letter` step.
 
+## What P9 built, and where it differs
+
+- The tables in sections 2 and 3 are the tokens at the top of `app/css/app.css`, as written; no rule below them holds
+  a colour or a size except the fixed lesson glyphs and the always-white sheet preview. `app/tests/bands.test.js`
+  checks every text pair in all four palettes and fails on a stray colour or size; `tools/browser_check.mjs`
+  measures every visible piece of text per band in the browser (4.5:1, 3:1 for large text), clipped text, page
+  width, direction and the speaker rule. The screenshots for C2 are in the committee's `p9-screens` folder.
+- Text in the accent colour uses `--accent-ink`, not `--accent`: the active tab's teal on `--accent-soft` was 4.3:1.
+- The subject colours stay the same in dark: white on each is already 4.5:1 or better.
+- The speaker rule is met by one page speaker in each header that reads the screen in order (early years: the
+  listen button), not a speaker on every tile, tab and button. C2 to confirm.
+- Interface clips: `app/audio/<lang>/manifest.json` names each recording's speaker by a code, never a name. Until
+  native speakers record, the three clips there are two-note chimes marked `placeholder`, which play only on a
+  tester's phone; everyone else hears the phone's voice or the "voice not ready" toast.
+- English pages run left to right: the back, next and row arrows turn round, and Dari or Pashto pack text keeps its
+  own direction inside them.
+- Bigger text and the theme are kept per learner but get their switches with Settings (P10); Welcome lost its name
+  field and gained English, and gets the early-years and adult doors in P10.
+
 ## Still to design
 
 C2 (early December): sheet geometry for photos (four 12 mm corner squares, fixed answer cells, the hand-written name

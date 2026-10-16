@@ -267,14 +267,17 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
   by its address on the hub's Wi-Fi, which the phone can't choose. Five wrong PINs lock that phone out for a minute,
   the next five for 15 minutes, then an hour each time. Ask and PDF downloads take at most 10 a minute per phone.
 - **Names** go on the paper only: not in the database and not in the logs (the hub keeps no access log, because the
-  sheet preview's address carries the name), and `printer.sh` tells CUPS not to keep printed files. In outbox mode
-  the saved PDFs carry the name until the teacher prints and deletes them.
+  sheet preview's address could carry a name), and `printer.sh` tells CUPS not to keep printed files. Since P9 the
+  app sends no name at all: the learner writes hers in the sheet's name box by hand. The hub still accepts `name` on
+  sheets and print jobs (P13 removes it); in outbox mode a PDF printed with one keeps it until the teacher deletes it.
 
 ## Privacy
 
 - The hub stores no names. A question is kept with a random token (so the asking phone can fetch the teacher's
   answer), the year, subject and lesson; questions are deleted after `TUTOR_KEEP_DAYS` (60).
-- Progress, names and the asked-questions list stay on the phone (`localStorage`, key `qalam.v1`).
+- Progress and the asked-questions list stay on the phone (`localStorage`, key `qalam.v2`). `qalam.v2` holds no name:
+  a learner is a band, a year or adult track, a language, an alias picture (P10), an optional nickname and her own
+  settings. The older `qalam.v1`, which could hold a child's name, is migrated once with the name dropped and removed.
 - Events (above) are verbs and ids with no name, no free text and, for now, no learner token; they stay on the hub.
 - Nothing leaves the hub: there is no internet connection and no analytics.
 
@@ -308,8 +311,22 @@ files are always there.
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/lesson/{id}`, `#/print/{id}`,
   `#/check/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`).
-- The year a child picks sets `<html data-mode>`: `small` (years 0-6, look C) or `big` (years 7-12, look B). The
-  CSS tokens do the rest ([DESIGN.md](DESIGN.md)).
+- `bands.js` turns the learner's year or adult track into five attributes on `<html>`: `data-band` (`ey`, `p1`, `p2`,
+  `s1`, `s2`, `ad`), `data-look` (`bold` or `clean`; it replaced `data-mode`), `data-tone` (`child` or `adult`),
+  `data-text` (`large` for Bigger text) and `data-theme` (`light`, `dark`, or absent to follow the phone). The CSS
+  tokens do the rest ([DESIGN.md](DESIGN.md)); `i18n.js` picks `{child, adult}` wordings by tone. The band also
+  decides what is read aloud on open, whether the tabs show (not in early years, which has the grown-up's corner
+  instead) and whether a lesson ends in stars or a check mark. English is an interface language beside Dari and
+  Pashto and turns the page left to right; pack text keeps its own direction (`unicode-bidi: plaintext`).
+- `speech.js` plays a recorded clip first: the pack's clip for a lesson step, or an interface clip
+  `app/audio/<lang>/<key>.opus` listed in that folder's `manifest.json` (with the speaker's code, never a name, and
+  the file's SHA-256). Then the phone's own voice, then the "voice not ready" toast. There is no generated speech.
+  Clips marked `placeholder` (today's chimes) play only on a tester's phone (`localStorage['qalam.clips'] =
+  'placeholders'`); a release needs real ones.
+- `state.js` keeps the learners (above, under Privacy). `app/tests/state.test.js` checks the v1 migration,
+  `speech.test.js` the clip rules and manifests, `bands.test.js` the bands and every token pair's contrast.
+- `tools/browser_check.mjs` renders a screen per band in light, dark and Bigger text at any widths with Playwright
+  (not an app dependency) and checks contrast, clipped text, page width, direction and the speaker rule.
 - `hub.js` finds the hub (the website the app came from first, then the usual hotspot addresses), and caches the
   lesson list and opened lessons so they still show when the hub is out of reach.
 - `modules.js` is the shell: it takes the modules on from `hello.modules` (kept on the phone for offline use; the

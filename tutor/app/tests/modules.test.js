@@ -30,19 +30,19 @@ const CODE = {
   } },
   print: { register(shell) {
     shell.offer('home.action', { id: 'print-today', role: 'secondary', priority: 10,
-      when: (c) => c.look === 'small' && !!c.lesson.sheet, render: () => 'print today' });
+      when: (c) => c.look === 'bold' && c.band !== 'ey' && !!c.lesson.sheet, render: () => 'print today' });
     shell.offer('lesson.end', { id: 'worksheet', priority: 10, when: (c) => !!c.lesson.sheet, render: () => 'worksheet' });
   } },
   check: { register(shell) {
-    shell.offer('home.action', { id: 'check-sheet', role: 'secondary', priority: 10, when: (c) => c.look === 'big',
+    shell.offer('home.action', { id: 'check-sheet', role: 'secondary', priority: 10, when: (c) => c.look === 'clean',
       render: () => 'check my sheet' });
   } },
 };
 const imported = [];
 const importer = async (id) => { imported.push(id); if (!CODE[id]) throw new Error('no file'); return CODE[id]; };
 
-const small = { lesson: { id: 'maths-1-count-5', sheet: true }, look: 'small' };
-const big = { lesson: { id: 'maths-7-fractions-add', sheet: true }, look: 'big' };
+const small = { lesson: { id: 'maths-1-count-5', sheet: true }, look: 'bold', band: 'p1' };
+const big = { lesson: { id: 'maths-7-fractions-add', sheet: true }, look: 'clean', band: 's1' };
 const keys = (t) => t.map((x) => x.key);
 
 beforeEach(() => { modules.reset(); imported.length = 0; store.clear(); });

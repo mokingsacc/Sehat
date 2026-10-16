@@ -1,13 +1,14 @@
 // Start-up and the router. One screen at a time, chosen by the address after # (so the phone's Back button
 // works). Each screen is a function that returns { el, tab, cleanup, onHub }.
 
+import * as bands from './bands.js';
 import * as events from './events.js';
-import { getLang, s, setLang } from './i18n.js';
+import { dir, htmlLang, s, setLang, setTone } from './i18n.js';
 import * as hub from './hub.js';
 import * as library from './library.js';
 import * as modules from './modules.js';
 import * as state from './state.js';
-import { stop } from './speech.js';
+import { loadClips, stop } from './speech.js';
 import { busy, h, hubChip, nav } from './ui.js';
 
 import ask from './screens/ask.js';
@@ -27,14 +28,18 @@ const app = document.getElementById('app');
 let current = null;
 let seq = 0;
 
-// the look follows the child's year: bold for years 0 to 6, clean for 7 to 12
+// the band sets the look and tone (bands.js); Welcome and the teacher's page use the clean adult look, keeping
+// the learner's Bigger text and theme
 function applyLook(name) {
   const c = state.child();
   if (c) setLang(c.lang);
   const root = document.documentElement;
-  root.dataset.mode = name === 'welcome' || name === 'teacher' || !c ? 'big' : state.mode(c);
-  root.lang = getLang() === 'ps' ? 'ps-AF' : 'fa-AF';
+  const own = c && name !== 'welcome' && name !== 'teacher';
+  bands.apply(root, own ? c : { text: c && c.text, theme: c && c.theme }, { setTone });
+  root.lang = htmlLang();
+  root.dir = dir();
   document.title = s('app');
+  loadClips(c ? c.lang : 'prs');
 }
 
 async function route() {
@@ -56,8 +61,9 @@ async function route() {
   }
   if (n !== seq) { if (out && out.cleanup) out.cleanup(); return; }   // the child already tapped somewhere else
   current = out;
-  app.className = out.tab ? '' : 'no-nav';
-  app.replaceChildren(out.el, ...(out.tab ? [nav(out.tab)] : []));
+  const tabs = out.tab && bands.hasTabs(document.documentElement.dataset.band);
+  app.className = tabs ? '' : 'no-nav';
+  app.replaceChildren(out.el, ...(tabs ? [nav(out.tab)] : []));
   window.scrollTo(0, 0);
 }
 
@@ -72,8 +78,8 @@ async function modulesChanged() {
   await modules.load();
   const name = location.hash.replace(/^#\/?/, '').split('/')[0];
   if (!modules.routeOn(name)) { route(); return true; }
-  const tabs = app.querySelector('nav.tabs');
-  if (tabs && current && current.tab) tabs.replaceWith(nav(current.tab));
+  const bar = app.querySelector('nav.tabs');
+  if (bar && current && current.tab) bar.replaceWith(nav(current.tab));
   return true;
 }
 

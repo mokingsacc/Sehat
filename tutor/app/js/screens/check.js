@@ -85,7 +85,7 @@ export default async function check([id, seedText]) {
     score.classList.remove('hidden');
     score.classList.toggle('some-wrong', wrong > 0);
     fill(score, h('b', {}, s('of_right', { a: right, b: vals.length })),
-      h('div', { class: 'note' }, wrong ? s('look_again', { n: wrong }) : [s('all_right'), ' ', c.name ? s('well_done', { name: c.name }) : '']));
+      h('div', { class: 'note' }, wrong ? s('look_again', { n: wrong }) : s('all_right')));
   }
 
   for (const r of key.items) {

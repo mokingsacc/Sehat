@@ -56,7 +56,7 @@ const ICONS = {
 
 export function icon(name, size = 24, sw = 2.2) {
   const t = document.createElement('template');
-  t.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+  t.innerHTML = `<svg class="i i-${name}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
     `stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ''}</svg>`;
   return t.content.firstChild;
 }
@@ -69,7 +69,7 @@ export function playIcon(size = 48) {
 
 export function star(size = 18, on = true) {
   const t = document.createElement('template');
-  t.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${on ? '#f2b134' : 'none'}" stroke="#8a5a00" ` +
+  t.innerHTML = `<svg class="star" width="${size}" height="${size}" viewBox="0 0 24 24" fill="${on ? 'var(--star)' : 'none'}" stroke="var(--star-line)" ` +
     'stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>';
   return t.content.firstChild;
 }
@@ -94,9 +94,11 @@ export function rich(t, lang = getLang()) {
 
 export function plain(t, lang = getLang()) { return pick(t, lang).replace(/\$/g, ''); }
 
-export function speakerBtn(onClick, { size = 'md', label = s('hear'), solid = false } = {}) {
-  return h('button', { class: `speaker ${size}${solid ? ' solid' : ''}`, type: 'button', 'aria-label': label, onClick },
-    icon('speaker', size === 'lg' ? 32 : size === 'sm' ? 20 : 26));
+const SPEAKER_ICON = { sm: 20, md: 26, lg: 32, xl: 36 };
+// page: the header's speaker that reads the whole screen
+export function speakerBtn(onClick, { size = 'md', label = s('hear'), solid = false, page = false } = {}) {
+  return h('button', { class: `speaker ${size}${solid ? ' solid' : ''}`, type: 'button', 'aria-label': label, onClick,
+    'data-page': page || null }, icon('speaker', SPEAKER_ICON[size] || 26));
 }
 
 let toastTimer = null;

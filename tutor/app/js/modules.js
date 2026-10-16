@@ -6,9 +6,11 @@
 // - the end of a lesson: at most two `lesson.end` actions;
 // - `settings.row`: offers kept for the Settings screen (P10).
 // An offer is { id, role, priority, when(ctx), render(ctx) }: role is primary, secondary or list on Home; the
-// highest priority whose when(ctx) is true wins its place.
+// highest priority whose when(ctx) is true wins its place. ctx (context()) is { child, lesson, band, look, tone,
+// track }: look is bold or clean, tone child or adult (bands.js).
 // A module with app code (any slot in its manifest) lives in app/js/modules/<id>.js and exports register(shell).
 
+import { attrs } from './bands.js';
 import * as hub from './hub.js';
 
 export const SLOTS = ['home.action', 'lesson.end', 'settings.row'];
@@ -99,6 +101,12 @@ export function pick(slot, ctx) {
 
 function draw(o, ctx) {
   try { return o.render(ctx); } catch (e) { console.warn(`offer ${o.module}/${o.id}`, e); return null; }
+}
+
+// what offers decide by: the learner, the lesson in question, and her band's look and tone
+export function context(child, lesson) {
+  const a = attrs(child);
+  return { child, lesson, band: a.band, look: a.look, tone: a.tone, track: child ? child.track : null };
 }
 
 // Home: one primary, one secondary and one list, each drawn, or null

@@ -1,5 +1,6 @@
 // The lesson player: one step per screen, a speaker on every text, answers checked at once with the reason.
-// Young children (look C) hear each page read aloud when the phone has a voice for their language.
+// The bands that read lesson steps on open (bands.js: early years, years 1 to 6, adult literacy) hear each step
+// read aloud, from its recorded clip or the phone's voice. Children get stars at the end, adults a check mark.
 // The end of every lesson points to its worksheet (the print module's lesson.end offer): pen and paper is where
 // the practice happens.
 
@@ -8,7 +9,8 @@ import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as modules from '../modules.js';
 import { notSimplest, parse, same, show } from '../numbers.js';
-import { canRecord, hasVoice, recorder, speak, stop } from '../speech.js';
+import { praise, readsOnOpen } from '../bands.js';
+import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, rich, speakerBtn, star, toast, topbar } from '../ui.js';
 
@@ -23,7 +25,9 @@ export default async function lesson([id]) {
   }
   const lang = getLang();
   const steps = L.steps;
-  const young = state.mode(c) === 'small';
+  const band = state.band(c);
+  const young = readsOnOpen(band, c.track, 'step');          // read each step aloud when it opens
+  const adult = praise(band) === 'check';
   const results = state.firstTries(id);   // step number -> right on the first try (kept if the child leaves)
   let i = Math.min(Math.max(c.step[id] || 0, 0), steps.length - 1);
 
@@ -39,17 +43,21 @@ export default async function lesson([id]) {
   const prev = h('button', { class: 'btn', type: 'button', onClick: () => go(i - 1) }, icon('back'), s('back'));
   const next = h('button', { class: 'btn primary main', type: 'button', onClick: () => go(i + 1) });
   const actions = h('div', { class: 'actions' }, prev, next);
-  const band = L.draft ? h('div', { class: 'draft' }, s('draft_note')) : null;
-  const root = h('div', { class: 'screen player' }, header, band, body, fb, actions);
+  const draftBand = L.draft ? h('div', { class: 'draft' }, s('draft_note')) : null;
+  const root = h('div', { class: 'screen player' }, header, draftBand, body, fb, actions);
 
   function mainText(st) {
     if (st.kind === 'letter') return [plain(st.text), pick(st.word)].filter(Boolean).join('. ');
     if (st.kind === 'say') return st.english || plain(st.text);
     return plain(st.prompt || st.text);
   }
+  const stepLang = (st) => (st.kind === 'say' && st.english ? 'en' : lang);
+  // the step's recorded clip, when the pack has one (placeholders only for testers)
+  const stepClip = (st) => { const u = packClip((st.audio || {})[stepLang(st)]); return u ? hub.url(u) : null; };
+  const canSay = (st) => !!stepClip(st) || hasVoice(stepLang(st));
   function pageSpeak() {
     const st = steps[i];
-    say(mainText(st), st.kind === 'say' && st.english ? 'en' : lang);
+    speak(mainText(st), stepLang(st), stepClip(st));
   }
 
   function pics(st) {
@@ -80,13 +88,13 @@ export default async function lesson([id]) {
       h('div', { class: 'letter' }, st.letter),
       st.forms ? h('div', { class: 'forms' }, st.forms) : null,
       pics(st),
-      h('div', { class: 'row center' }, h('span', { class: 'word' }, pick(st.word)), speakerBtn(() => say(pick(st.word)))),
+      h('div', { class: 'row center' }, h('span', { class: 'word' }, pick(st.word)), speakerBtn(pageSpeak)),
       st.text ? h('p', { class: 'read' }, rich(st.text)) : null,
     ],
     read: (st) => [
       pics(st),
       st.english ? englishRow(st.english) : null,
-      h('div', { class: 'listen-row' }, speakerBtn(() => say(plain(st.text))), h('p', { class: 'read grow' }, rich(st.text))),
+      h('div', { class: 'listen-row' }, speakerBtn(pageSpeak), h('p', { class: 'read grow' }, rich(st.text))),
     ],
     choice: (st) => {
       let solved = false;
@@ -155,7 +163,7 @@ export default async function lesson([id]) {
     prev.classList.toggle('hidden', !i);
     next.disabled = QUESTION.has(st.kind) && results[i] === undefined;
     next.replaceChildren(i === steps.length - 1 ? s('done') : s('next'), icon('next'));
-    if (young && hasVoice(st.kind === 'say' && st.english ? 'en' : lang)) setTimeout(pageSpeak, 300);
+    if (young && canSay(st)) setTimeout(pageSpeak, 300);
     window.scrollTo(0, 0);
   }
 
@@ -168,16 +176,18 @@ export default async function lesson([id]) {
     const summary = library.get(id);
     const after = summary ? library.after(state.child(), summary) : null;
     [...segs.children].forEach((sp) => sp.classList.add('on'));
-    fill(root, header, band, h('div', { class: 'finish' },
-      h('div', { class: 'stars' }, [0, 1, 2].map((k) => star(48, k < stars))),
+    fill(root, header, draftBand, h('div', { class: 'finish' },
+      adult ? h('div', { class: 'done-big', 'aria-hidden': 'true' }, icon('check', 56, 3))
+        : h('div', { class: 'stars' }, [0, 1, 2].map((k) => star(48, k < stars))),
       h('h1', {}, s('lesson_done')),
-      answers.length ? h('p', { class: 'muted' }, s('of', { a: right, b: answers.length })) : null,
-      summary ? modules.lessonEnd({ child: state.child(), lesson: summary, look: state.mode() }) : null,
+      answers.length ? h('p', { class: 'muted' }, adult ? s('correct_of', { a: right, b: answers.length })
+        : s('of', { a: right, b: answers.length })) : null,
+      summary ? modules.lessonEnd(modules.context(state.child(), summary)) : null,
       after && after.id !== id ? h('a', { class: 'btn primary big', href: '#/lesson/' + encodeURIComponent(after.id) },
         s('next_lesson'), icon('next')) : null,
       h('a', { class: 'link', href: '#/home' }, s('back')),
       sourceNote(L)));
-    if (young && hasVoice(lang)) say(s('lesson_done'));
+    if (young) speak(s('lesson_done'), lang, { key: 'lesson_done' });
   }
 
   function go(k) {

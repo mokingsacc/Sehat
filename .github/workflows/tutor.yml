@@ -30,6 +30,7 @@ jobs:
         working-directory: tutor/hub
         run: ../.venv/bin/python -m pytest -q
       - name: App scripts parse
-        run: for f in app/js/*.js app/js/screens/*.js app/js/modules/*.js; do node --check "$f"; done
+        # as modules: "node --check file.js" with no package type does not report a module's early errors
+        run: for f in app/js/*.js app/js/screens/*.js app/js/modules/*.js; do node --input-type=module --check < "$f" || exit 1; done
       - name: App tests
         run: node --test app/tests/*.test.js
