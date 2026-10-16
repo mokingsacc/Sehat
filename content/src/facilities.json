@@ -1,7 +1,7 @@
 {
- "_note": "The clinic list the app shows (#/near, #/check). Made by the research in samangan-red-book/research/facilities-2026-10 (two researchers, two reviewers); every row's sources are in reviewed-facilities.json there. No phone numbers on purpose. where: building = the building's own pin; village / district = only the village or the district town is known; none = not on the map. checked: the date a person on the ground confirmed it (#/check answers on the dashboard).",
- "version": "2026-10-16",
- "updated": "2026-10-16",
+ "_note": "The clinic list the app shows (#/near, #/check). Made by the research in samangan-red-book/research/facilities-2026-10 (two researchers, two reviewers); every row's sources are in reviewed-facilities.json and final-review.md there. No phone numbers on purpose. where: building = the building's own pin; village / district = only the village or the district town is known; none = not on the map. checked: the date a person on the ground confirmed it (#/check answers on the dashboard).",
+ "version": "2026-10-16-reviewed",
+ "updated": "2026-10-16-reviewed",
  "sources": [
   "OpenStreetMap contributors (ODbL 1.0): pins, names of the Aybak private providers, villages; HOT/HDX export and OSM extract 8 Oct 2026",
   "GeoNames (CC BY 4.0): the Jowi Zendan, Bayanan and Qurghan village pins",
@@ -781,13 +781,7 @@
    "status": "unknown",
    "status_date": "2019-12-19",
    "checked": "",
-   "services": [
-    "vaccines",
-    "lab",
-    "nutrition",
-    "mental-health",
-    "pharmacy"
-   ],
+   "services": [],
    "outside": false,
    "confidence": "low"
   },
@@ -888,7 +882,9 @@
    "status_date": "2026-01-26",
    "checked": "",
    "services": [
-    "xray"
+    "xray",
+    "surgery",
+    "newborn"
    ],
    "outside": false,
    "confidence": "medium"
@@ -937,7 +933,7 @@
    "id": "dara-i-suf-payin-dehi-district-hospital",
    "name": {
     "fa": "شفاخانۀ ولسوالی دهی",
-    "ps": "د دهی د ولسوالۍ روغتون",
+    "ps": "د دهي د ولسوالۍ روغتون",
     "en": "Dehi District Hospital"
    },
    "type": "district-hospital",
@@ -991,7 +987,8 @@
    "checked": "",
    "services": [
     "surgery",
-    "newborn"
+    "newborn",
+    "maternity"
    ],
    "outside": false,
    "confidence": "high"
@@ -1103,7 +1100,7 @@
    "id": "unknown-balghali-phc",
    "name": {
     "fa": "کلینیک صحی بلغلی (بالا و پایین)",
-    "ps": "د بلغلي روغتیايي کلینیک (پورته او ښکته)",
+    "ps": "د بلغلي روغتیايي کلینیک (بالا او پایین)",
     "en": "Balghali Primary Health Care Clinic (Bala and Payeen)"
    },
    "type": "other",
@@ -1164,7 +1161,7 @@
     "icu"
    ],
    "outside": true,
-   "confidence": "high"
+   "confidence": "medium"
   },
   {
    "id": "outside-msf-kunduz-trauma-centre",

@@ -1547,9 +1547,9 @@
    "en": "Send my answers"
   },
   "chkSendN": {
-   "fa": "جواب‌هایم را بفرست ({n} جای)",
-   "ps": "زما ځوابونه ولېږه ({n} ځایونه)",
-   "en": "Send my answers ({n} places)"
+   "fa": "جواب‌هایم را بفرست ({n})",
+   "ps": "زما ځوابونه ولېږه ({n})",
+   "en": "Send my answers ({n})"
   },
   "chkSent": {
    "fa": "فرستاده شد. تشکر!",
@@ -1562,9 +1562,9 @@
    "en": "Saved. They will be sent when the phone has internet."
   },
   "chkWaiting": {
-   "fa": "{n} جواب منتظر انترنت است. خودشان فرستاده می‌شوند.",
-   "ps": "{n} ځوابونه د انټرنېټ په تمه دي. پخپله به ولېږل شي.",
-   "en": "{n} answers are waiting for internet. They will be sent by themselves."
+   "fa": "جواب‌های منتظر انترنت: {n}. خودشان فرستاده می‌شوند.",
+   "ps": "د انټرنېټ په تمه ځوابونه: {n}. پخپله به ولېږل شي.",
+   "en": "Answers waiting for internet: {n}. They will be sent by themselves."
   },
   "chkChooseDist": {
    "fa": "ولسوالی خود را انتخاب کنید",
@@ -1690,6 +1690,16 @@
    "fa": "دوا",
    "ps": "درمل",
    "en": "Medicines"
+  },
+  "facOld": {
+   "fa": "هنوز بررسی نشده. از سال {y} تا حال خبری از آن نداریم: شاید بسته شده باشد.",
+   "ps": "لا نه دی کتل شوی. له {y} کال راهیسې یې خبر نه لرو: کېدای شي تړل شوی وي.",
+   "en": "Not checked yet. No news of it since {y}: it may have closed."
+  },
+  "facOldSay": {
+   "fa": "از سال {y} تا حال خبری از آن نداریم: شاید بسته شده باشد.",
+   "ps": "له {y} کال راهیسې یې خبر نه لرو: کېدای شي تړل شوی وي.",
+   "en": "No news of it since {y}: it may have closed."
   }
  },
  "say": {

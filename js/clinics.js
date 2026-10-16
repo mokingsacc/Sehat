@@ -106,8 +106,15 @@ export function initClinics(ctx) {
 
   /* ---------- the cards ---------- */
   // how sure the app is about a place, in words: checked by people there, or not yet (with the date of the latest news)
+  // no news for over two years and nobody has checked it: said plainly, it may have closed (tools/build.py says it too)
+  function oldNews(f) {
+    const m = /^(\d{4})(?:-(\d{2}))?/.exec(String(f.status_date || '')); if (f.checked || f.status === 'open' || !m) return '';
+    const t = new Date(+m[1], m[2] ? +m[2] - 1 : 5, 15); if (Date.now() - t.getTime() < 730 * 864e5) return '';
+    return num(S.lang === 'en' ? +m[1] : m[2] ? toJalali(t).jy : +m[1] - 621);
+  }
   function trustLine(f) {
     if (f.checked) return `<span class="ftrust ok">${ic('check')}${esc(T('facChecked', { d: when(f.checked) }))}</span>`;
+    const y = oldNews(f); if (y) return `<span class="ftrust old">${esc(T('facOld', { y }))}</span>`;
     return `<span class="ftrust">${esc(f.status_date ? T('facNews', { d: when(f.status_date) }) : T('facNotChecked'))}</span>`;
   }
   // where the place is, in words, when the map cannot show the building
@@ -159,7 +166,7 @@ export function initClinics(ctx) {
       if (H.length) html += head('kindHs', 'ui.nearH') + cards(plain(H));
       if (Cl.length) {
         html += head('kindCs', 'ui.nearC');
-        if (d) html += cards(plain(Cl));
+        if (d) { html += cards(plain(Cl)); const unk = all.filter((f) => KIND(f) !== 'p' && f.district === 'unknown').sort(byRank); if (unk.length && d !== 'unknown') html += `<h3 class="dsub">${esc(distName('unknown'))}</h3>` + cards(plain(unk)); }
         else for (const x of districts()) { const part = Cl.filter((f) => f.district === x.id); if (part.length) html += `<h3 class="dsub">${esc(L(x.name))}</h3>` + cards(plain(part)); }
       }
       if (!H.length && !Cl.length) html += `<p class="muted center">${esc(T('noFacilitiesHere'))}</p>`;

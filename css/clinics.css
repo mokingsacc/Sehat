@@ -90,6 +90,7 @@
 .ftrow{margin-top:4px}
 .ftrust{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--mute)}
 .ftrust.ok{color:var(--green);font-weight:700}
+.ftrust.old{color:var(--amber);font-weight:600}
 .ftrust .ic{width:16px;height:16px}
 
 /* the check page */

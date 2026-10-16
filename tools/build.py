@@ -105,7 +105,19 @@ def place_line(f):
         k = "" if f.get("type") == "special" else kind[lg]  # a special place's name says what it is ("... trauma hospital")
         parts = [name] + [w.strip() for w in [k, dist[lg] if dist else ""] if w.strip() and w.strip().lower() not in name.lower()]
         out[lg] = ". ".join(parts) + "."
+        y = old_news(f, lg)
+        if y: out[lg] += " " + ui["text"]["facOldSay"][lg].replace("{y}", y)
     return out
+# no news for over two years and nobody has checked it (js/clinics.js oldNews): the year, in the Afghan calendar for Dari
+# and Pashto (the year the news is from, as the app shows it)
+def old_news(f, lg):
+    m = re.match(r"(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", str(f.get("status_date") or ""))
+    if f.get("checked") or f.get("status") == "open" or not m: return ""
+    y, mo, d = int(m.group(1)), int(m.group(2) or 6), int(m.group(3) or 15)
+    if (datetime.date.today() - datetime.date(y, mo, d)).days < 730: return ""
+    if lg == "en": return str(y)
+    jy = y - 621 if not m.group(2) or (mo, d) >= (3, 21) else y - 622
+    return str(jy).translate(str.maketrans("0123456789", "۰۱۲۳۴۵۶۷۸۹"))
 for f in facilities.get("facilities") or []:
     if f.get("status") != "closed": say(f"ui.fac.{f['id']}", place_line(f))
 
