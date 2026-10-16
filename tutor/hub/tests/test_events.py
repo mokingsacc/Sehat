@@ -94,7 +94,7 @@ def test_ask_print_check_and_review_write_events(hub_client):
                                           "lesson": "maths-7-fractions-add"}).json()
     hub_client.post(f"/api/ask/{a['id']}/teacher")
     hub_client.post("/api/print", json={"lesson": "maths-1-count-5", "copies": 2, "name": "Maryam"})
-    hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=4821")
+    hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=4821&for=check")
     pin = {"X-Teacher-Pin": hub_client.pin}
     q = {x["question"]: x["id"] for x in hub_client.get("/api/teacher/queue", headers=pin).json()["questions"]}
     hub_client.post(f"/api/teacher/answer/{q['زلزله چرا می‌آید؟']}", headers=pin, json={"answer": "...", "approve": True})
@@ -107,6 +107,16 @@ def test_ask_print_check_and_review_write_events(hub_client):
         ("teacher", "review.approved", "maths-7-fractions-add", None)]
     flat = str(rows)
     assert "Maryam" not in flat and "زلزله" not in flat and a["id"] not in flat and w["id"] not in flat
+
+
+def test_only_check_my_sheet_counts_a_key_fetch(hub_client):
+    """The phone keeps the key when it prints (no `for`); Check my sheet asks with for=check. Only that is a check."""
+    url = "/api/sheets/maths-7-fractions-add/key?seed=4821&lang=prs"
+    printing = hub_client.get(url)
+    assert printing.status_code == 200 and [e["verb"] for e in kept(hub_client)] == []
+    checking = hub_client.get(url + "&for=check")
+    assert checking.json() == printing.json()                  # the learner gets the same key either way
+    assert [(e["verb"], e["object"]) for e in kept(hub_client)] == [("check.key", "maths-7-fractions-add")]
 
 
 def test_an_event_that_fails_never_breaks_the_route(hub_client, monkeypatch):

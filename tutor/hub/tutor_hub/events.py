@@ -35,7 +35,7 @@ VERBS = {
     "ask.answered": Verb("ask", "source", None, False),                # where the answer came from
     "ask.to_teacher": Verb("ask", None, None, False),
     "print.queued": Verb("print", "lesson", (1, 60), False),           # copies
-    "check.key": Verb("check", "lesson", None, False),                 # Check my sheet fetched a key
+    "check.key": Verb("check", "lesson", None, False),                 # Check my sheet fetched a key (?for=check)
     "review.approved": Verb("teacher", "lesson", None, False),
     "review.rejected": Verb("teacher", "lesson", None, False),
 }

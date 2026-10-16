@@ -77,7 +77,8 @@ The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted 
   queue on the phone (`qalam.events.v1`, at most 500) until the hub is in reach, then sent with
   `POST /api/events`, at most 100 at a time. A batch that did not arrive stays queued; one the hub refuses is dropped.
 - **From the hub's own routes:** `ask.answered` (with the answer's source), `ask.to_teacher`, `print.queued` (lesson,
-  copies), `check.key` (a sheet's key was fetched), `review.approved` and `review.rejected` (the question's lesson).
+  copies), `check.key` (Check my sheet fetched a sheet's key, `?for=check`; the key the phone keeps when it
+  prints is fetched without it and is not counted), `review.approved` and `review.rejected` (the question's lesson).
   A phone cannot send these. Writing one never breaks the route that made it.
 - **Refused:** any field besides the four (so no free text), an unknown verb, an object that is not a plain id or
   has a run of five digits or more, a value out of range; the whole batch is refused (422). A time in the future
@@ -170,7 +171,7 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | `GET /api/ask/{token}` | Status and the teacher's answer |
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
 | `GET /api/sheets/{id}.html` / `.pdf` | The sheet (`seed`, `lang`, `kind=worksheet or answers`, `name`); header `X-Sheet-Seed` |
-| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`) |
+| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`; `for=check` when the Check my sheet screen asks, which writes `check.key`) |
 | `POST /api/print` | `{lesson, kind, copies, lang, seed, name}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |

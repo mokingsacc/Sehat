@@ -25,7 +25,7 @@ async function loadKey(id, seed, lang) {
   const k = state.cache(`key.${id}.${seed}`);
   if (k && k.items) return k;
   if (!hub.online()) return null;
-  await rememberKey(id, seed, lang);
+  await rememberKey(id, seed, lang, { check: true });
   return state.cache(`key.${id}.${seed}`);
 }
 

@@ -28,9 +28,9 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **P2, done:** the app loads only the modules that are on: a slot registry, tabs and Home actions from
   `hello.modules`, one primary, one secondary and one list on Home, the cached list offline.
 - **P4, done:** events without names: `events` (migration 0003), `POST /api/events` from a queue on the phone
-  (lesson started and done, kept offline), the hub's own events for Ask, printing, sheet keys and the teacher's
-  review; free text and unknown verbs refused; a scan that fails on any column that could hold a name, sex, birth
-  date, phone number or address.
+  (lesson started and done, kept offline), the hub's own events for Ask, printing, Check my sheet (only a key the
+  check screen fetches, not the one kept when printing) and the teacher's review; free text and unknown verbs
+  refused; a scan that fails on any column that could hold a name, sex, birth date, phone number or address.
 - **P5, done:** the AI gateway (`hub/tutor_hub/ai/`): provider policy in code (OpenAI, the hub's own model or the
   fake; Anthropic and Google hosts raise), a daily token budget per cohort (`ai_usage`, migration 0004) that falls
   back to checked answers and the teacher, the identifier filter, sums re-checked, hints that give the answer away

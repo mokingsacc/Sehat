@@ -387,7 +387,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
         key = sheets.answer_key(l, seed, _lang(lang), hub.picture_url(lid))
-        await hub.record("check.key", events.lesson_id(lid), cohort_id=request.query_params.get("cohort"))
+        if request.query_params.get("for") == "check":     # Check my sheet, not the phone keeping a printed key
+            await hub.record("check.key", events.lesson_id(lid), cohort_id=request.query_params.get("cohort"))
         return key
 
     # printing

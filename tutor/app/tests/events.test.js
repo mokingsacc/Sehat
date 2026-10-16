@@ -14,12 +14,14 @@ globalThis.location = { protocol: 'http:', origin: 'http://10.42.0.1' };
 
 // a stand-in hub: answers /api/hello, takes or refuses /api/events, or is out of reach
 const posted = [];
+const keys = [];           // the sheet-key addresses the phone asked for
 let hubUp = false;
 let refuse = 0;          // the status the next events call gets (0: taken)
 globalThis.fetch = async (url, opts = {}) => {
   if (!hubUp) throw new TypeError('network down');
   const reply = (status, body) => ({ ok: status < 400, status, json: async () => body });
   if (url.endsWith('/api/hello')) return reply(200, { hub: 'Qalam', modules: [] });
+  if (url.includes('/key?')) { keys.push(url); return reply(200, { items: [] }); }
   if (url.endsWith('/api/events')) {
     if (refuse) { const st = refuse; refuse = 0; return reply(st, { error: 'no' }); }
     const body = JSON.parse(opts.body);
@@ -98,4 +100,14 @@ test('more than a hundred go in batches of a hundred', async () => {
   for (let i = 0; i < 230; i++) events.record('lesson.start', 'dari-1-sheen');
   await goOnline();
   assert.deepEqual(posted.map((b) => b.length), [100, 100, 30]);
+});
+
+test('only Check my sheet asks the hub to count a key fetch; printing keeps the key quietly', async () => {
+  await goOnline();
+  keys.length = 0;
+  await hub.sheetKey('maths-7-fractions-add', 4821, 'prs');
+  await hub.sheetKey('maths-7-fractions-add', 4821, 'prs', { check: true });
+  assert.equal(keys.length, 2);
+  assert.ok(!keys[0].includes('for=check'));
+  assert.ok(keys[1].endsWith('&for=check'));
 });

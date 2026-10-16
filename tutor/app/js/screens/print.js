@@ -11,8 +11,8 @@ import { h, hubChip, icon, plain, topbar } from '../ui.js';
 
 const FINAL = new Set(['done', 'saved', 'failed']);
 
-export function rememberKey(lessonId, seed, lang) {
-  return hub.sheetKey(lessonId, seed, lang).then((k) => state.cache(`key.${lessonId}.${seed}`, k)).catch(() => null);
+export function rememberKey(lessonId, seed, lang, { check = false } = {}) {
+  return hub.sheetKey(lessonId, seed, lang, { check }).then((k) => state.cache(`key.${lessonId}.${seed}`, k)).catch(() => null);
 }
 
 export default async function print([id]) {
