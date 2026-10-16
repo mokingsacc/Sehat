@@ -5,8 +5,8 @@ an answer source) and a number when the verb has one. The module comes from the 
 name, no free text, no phone number (an object with a run of five digits or more is refused), and no field this
 file does not know (the API refuses the whole batch).
 
-Some verbs come from the phone's queue (a lesson started or finished, even offline); the others only the hub writes,
-from its own routes (Ask, printing, Check my sheet's key, the teacher's review), so a phone cannot send them.
+Some verbs come from the phone's queue (a lesson started or finished, a sheet marked on Check my sheet, even offline);
+the others only the hub writes, from its own routes (Ask, printing, the teacher's review), so a phone cannot send them.
 Learner tokens arrive with sign-up (P10); until then `token_hash` is empty.
 """
 import re
@@ -35,7 +35,7 @@ VERBS = {
     "ask.answered": Verb("ask", "source", None, False),                # where the answer came from
     "ask.to_teacher": Verb("ask", None, None, False),
     "print.queued": Verb("print", "lesson", (1, 60), False),           # copies
-    "check.key": Verb("check", "lesson", None, False),                 # Check my sheet fetched a key (?for=check)
+    "check.done": Verb("check", "lesson", (0, 100), True),             # a sheet marked: percent right
     "review.approved": Verb("teacher", "lesson", None, False),
     "review.rejected": Verb("teacher", "lesson", None, False),
 }

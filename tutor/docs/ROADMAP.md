@@ -38,7 +38,10 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **P6, done:** the D1 store (`stores/d1.py`) with every method of the contract, a D1 fake as strict as D1
   (`tests/fakes/d1.py`: no PRAGMA, transactions only through `batch()`, `jsnull` not None, at most 100 values a
   statement, JS proxies out), and one contract suite and one migration mechanism for both stores; the record of
-  applied migrations is `schema_migrations` alone, online as on the hub. `check.key` now counts only Check my sheet.
+  applied migrations is `schema_migrations` alone, online as on the hub.
+- **Check my sheet's event:** `check.done` (the lesson and the percent right), sent from the phone's queue each time
+  a sheet is marked, replaces the hub-side `check.key`, which missed every sheet checked with the key kept from
+  printing.
 - Then P7: the Worker on staging, which applies the migrations through the D1 store (never
   `wrangler d1 migrations apply`).
 

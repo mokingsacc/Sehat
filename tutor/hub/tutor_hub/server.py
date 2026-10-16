@@ -382,14 +382,11 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                         headers={"Content-Disposition": f'inline; filename="{code}.pdf"', "X-Sheet-Seed": str(seed)})
 
     @app.get("/api/sheets/{lid}/key", dependencies=needs("check"))
-    async def sheet_key(lid: str, request: Request, seed: int = 0, lang: str = "prs"):
+    async def sheet_key(lid: str, seed: int = 0, lang: str = "prs"):
         l = hub.lesson(lid)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
-        key = sheets.answer_key(l, seed, _lang(lang), hub.picture_url(lid))
-        if request.query_params.get("for") == "check":     # Check my sheet, not the phone keeping a printed key
-            await hub.record("check.key", events.lesson_id(lid), cohort_id=request.query_params.get("cohort"))
-        return key
+        return sheets.answer_key(l, seed, _lang(lang), hub.picture_url(lid))
 
     # printing
     @app.post("/api/print", dependencies=needs("print"))

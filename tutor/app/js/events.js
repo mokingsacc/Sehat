@@ -1,4 +1,4 @@
-// What the learner did, as verbs and ids only, queued on the phone and sent to the hub when it is in reach
+// What the learner did (a lesson started or done, a sheet marked on Check my sheet), as verbs and ids only, queued on the phone and sent to the hub when it is in reach
 // (POST /api/events, at most 100 at a time). An event is { at, verb, object, value }: the UTC minute, a verb the
 // hub knows, an id (a lesson) and a number when the verb has one. Never a name, never anything typed: the hub
 // refuses any other field, and so the queue holds no other field.
@@ -11,7 +11,7 @@ const KEY = 'qalam.events.v1';
 const MAX_QUEUE = 500;           // a phone away from the hub for months keeps the newest 500
 const BATCH = 100;
 // the verbs a phone may send (hub/tutor_hub/events.py); the hub writes the others itself
-export const VERBS = { 'lesson.start': { value: false }, 'lesson.done': { value: true } };
+export const VERBS = { 'lesson.start': { value: false }, 'lesson.done': { value: true }, 'check.done': { value: true } };
 const LESSON = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const DIGIT_RUN = /[0-9]{5,}/;      // the hub refuses these, so nothing like a phone number hides in an id
 

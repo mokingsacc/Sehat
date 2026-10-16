@@ -110,12 +110,13 @@ An event says what happened, never who: `{at, verb, object, value}`, the UTC min
 hub derives the module from the verb and adds the cohort; `token_hash` stays empty until learners have tokens (P10).
 The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted at start-up after that).
 
-- **From the phone** (`app/js/events.js`): `lesson.start` and `lesson.done`, recorded by `state.js` and kept in a
-  queue on the phone (`qalam.events.v1`, at most 500) until the hub is in reach, then sent with
-  `POST /api/events`, at most 100 at a time. A batch that did not arrive stays queued; one the hub refuses is dropped.
+- **From the phone** (`app/js/events.js`): `lesson.start` and `lesson.done`, recorded by `state.js`, and `check.done`
+  (the lesson and the percent right, 0 to 100), recorded by the Check my sheet screen each time a sheet is marked (the
+  Check button, or every row judged on a sheet with nothing to type), whether its key came from printing or from the
+  hub. All are kept in a queue on the phone (`qalam.events.v1`, at most 500) until the hub is in reach, then sent
+  with `POST /api/events`, at most 100 at a time. A batch that did not arrive stays queued; one the hub refuses is dropped.
 - **From the hub's own routes:** `ask.answered` (with the answer's source), `ask.to_teacher`, `print.queued` (lesson,
-  copies), `check.key` (Check my sheet fetched a sheet's key, `?for=check`; the key the phone keeps when it
-  prints is fetched without it and is not counted), `review.approved` and `review.rejected` (the question's lesson).
+  copies), `review.approved` and `review.rejected` (the question's lesson). Fetching a sheet's key writes nothing.
   A phone cannot send these. Writing one never breaks the route that made it.
 - **Refused:** any field besides the four (so no free text), an unknown verb, an object that is not a plain id or
   has a run of five digits or more, a value out of range; the whole batch is refused (422). A time in the future
@@ -208,7 +209,7 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | `GET /api/ask/{token}` | Status and the teacher's answer |
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
 | `GET /api/sheets/{id}.html` / `.pdf` | The sheet (`seed`, `lang`, `kind=worksheet or answers`, `name`); header `X-Sheet-Seed` |
-| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`; `for=check` when the Check my sheet screen asks, which writes `check.key`) |
+| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`) |
 | `POST /api/print` | `{lesson, kind, copies, lang, seed, name}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
@@ -234,8 +235,8 @@ always there.
   Print button, since Print is a tab. A screen whose module is off sends the phone Home. While connected, the app
   re-reads `/api/hello` every minute, so a module switched off leaves the phones within a minute.
   `app/tests/modules.test.js` (`node --test`) checks the shell.
-- `events.js` queues the phone's events (lesson started, lesson done) and sends them when the hub is in reach;
-  `app/tests/events.test.js` checks the queue.
+- `events.js` queues the phone's events (lesson started, lesson done, sheet marked) and sends them when the hub is in reach;
+  `app/tests/events.test.js` checks the queue, `app/tests/check.test.js` the Check my sheet screen's events.
 - `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
   child's year, one subject after another. Every lesson stays open from the subject pages.
 - Text from lessons, the hub or the AI is always added as text, never as HTML.

@@ -102,12 +102,14 @@ test('more than a hundred go in batches of a hundred', async () => {
   assert.deepEqual(posted.map((b) => b.length), [100, 100, 30]);
 });
 
-test('only Check my sheet asks the hub to count a key fetch; printing keeps the key quietly', async () => {
+test('a marked sheet is a check.done with a percent; a key fetch is never an event', async () => {
+  assert.equal(events.record('check.done', 'maths-7-fractions-add'), false);     // needs its percent
+  assert.equal(events.record('check.key', 'maths-7-fractions-add'), false);      // gone
+  assert.equal(events.record('check.done', 'maths-7-fractions-add', 75), true);
   await goOnline();
   keys.length = 0;
   await hub.sheetKey('maths-7-fractions-add', 4821, 'prs');
-  await hub.sheetKey('maths-7-fractions-add', 4821, 'prs', { check: true });
-  assert.equal(keys.length, 2);
-  assert.ok(!keys[0].includes('for=check'));
-  assert.ok(keys[1].endsWith('&for=check'));
+  assert.equal(keys.length, 1);
+  assert.ok(!keys[0].includes('for='));
+  assert.deepEqual(posted.flat().map((e) => [e.verb, e.object, e.value]), [['check.done', 'maths-7-fractions-add', 75]]);
 });

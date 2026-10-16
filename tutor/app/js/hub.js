@@ -109,9 +109,7 @@ export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST'
 export const sendEvents = (list) => call('/api/events', { method: 'POST', body: { events: list }, ms: 15000 });
 export const printSheet = (job, pin) => call('/api/print', { method: 'POST', body: job, pin });
 export const printStatus = (id) => call('/api/print/' + id);
-// `check`: the Check my sheet screen asked (the hub counts it); the key kept when printing is not a check
-export const sheetKey = (id, seed, lang, { check = false } = {}) =>
-  call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}` + (check ? '&for=check' : ''));
+export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}`);
 export const sheetUrl = (id, { seed = 0, lang = 'prs', kind = 'worksheet', name = '', pdf = false } = {}) =>
   url(`/api/sheets/${encodeURIComponent(id)}.${pdf ? 'pdf' : 'html'}?seed=${seed}&lang=${lang}&kind=${kind}` +
       (name ? '&name=' + encodeURIComponent(name) : ''));

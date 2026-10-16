@@ -1,6 +1,7 @@
 """Events without names (P4): the phones' queue, the hub's own events, and no table that could hold a person."""
 import re
 import sqlite3
+from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -88,13 +89,13 @@ def test_one_phone_cannot_flood_events(hub_client):
 
 # the hub's own events
 
-def test_ask_print_check_and_review_write_events(hub_client):
+def test_ask_print_and_review_write_events(hub_client):
     a = hub_client.post("/api/ask", json={"text": "۱/۲ + ۱/۴ چند می‌شود؟", "lang": "prs"}).json()
     w = hub_client.post("/api/ask", json={"text": "زلزله چرا می‌آید؟", "lang": "prs",
                                           "lesson": "maths-7-fractions-add"}).json()
     hub_client.post(f"/api/ask/{a['id']}/teacher")
     hub_client.post("/api/print", json={"lesson": "maths-1-count-5", "copies": 2, "name": "Maryam"})
-    hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=4821&for=check")
+    hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=4821")       # a key fetch is not a check
     pin = {"X-Teacher-Pin": hub_client.pin}
     q = {x["question"]: x["id"] for x in hub_client.get("/api/teacher/queue", headers=pin).json()["questions"]}
     hub_client.post(f"/api/teacher/answer/{q['زلزله چرا می‌آید؟']}", headers=pin, json={"answer": "...", "approve": True})
@@ -103,20 +104,51 @@ def test_ask_print_check_and_review_write_events(hub_client):
     assert [(e["module"], e["verb"], e["object"], e["value"]) for e in rows] == [
         ("ask", "ask.answered", "maths", None), ("ask", "ask.answered", "none", None),
         ("ask", "ask.to_teacher", None, None), ("print", "print.queued", "maths-1-count-5", 2),
-        ("check", "check.key", "maths-7-fractions-add", None),
         ("teacher", "review.approved", "maths-7-fractions-add", None)]
     flat = str(rows)
     assert "Maryam" not in flat and "زلزله" not in flat and a["id"] not in flat and w["id"] not in flat
 
 
-def test_only_check_my_sheet_counts_a_key_fetch(hub_client):
-    """The phone keeps the key when it prints (no `for`); Check my sheet asks with for=check. Only that is a check."""
+def test_a_sheet_marked_on_the_phone_is_one_check_done(hub_client):
+    """Check my sheet sends check.done (percent right) through the phone's queue, however the key reached it."""
+    done = {"at": minute(), "verb": "check.done", "object": "maths-7-fractions-add", "value": 75}
+    assert post(hub_client, done).json() == {"saved": 1, "expired": 0}
+    assert [(e["module"], e["verb"], e["object"], e["value"]) for e in kept(hub_client)] == [
+        ("check", "check.done", "maths-7-fractions-add", 75)]
+
+
+@pytest.mark.parametrize("value", [0, 100])
+def test_check_done_takes_nought_to_a_hundred(hub_client, value):
+    e = {"at": minute(), "verb": "check.done", "object": "maths-7-fractions-add", "value": value}
+    assert post(hub_client, e).status_code == 200
+
+
+@pytest.mark.parametrize("bad", [
+    {"verb": "check.done", "object": "maths-7-fractions-add"},                      # no percent
+    {"verb": "check.done", "object": "maths-7-fractions-add", "value": 101},
+    {"verb": "check.done", "object": "maths-7-fractions-add", "value": -1},
+    {"verb": "check.done", "object": "maths-7-fractions-add", "value": 75.5},
+    {"verb": "check.done", "object": "maths-7-fractions-add", "value": "75"},
+    {"verb": "check.done", "value": 75},                                             # no lesson
+    {"verb": "check.done", "object": "sheet of Maryam", "value": 75},
+    {"verb": "check.key", "object": "maths-7-fractions-add"},                        # gone
+])
+def test_check_done_is_refused_in_odd_shapes(hub_client, bad):
+    assert post(hub_client, {"at": minute(), **bad}).status_code == 422
+    assert kept(hub_client) == []
+
+
+def test_a_key_fetch_counts_nothing_and_check_key_is_gone(hub_client):
     url = "/api/sheets/maths-7-fractions-add/key?seed=4821&lang=prs"
-    printing = hub_client.get(url)
-    assert printing.status_code == 200 and [e["verb"] for e in kept(hub_client)] == []
-    checking = hub_client.get(url + "&for=check")
-    assert checking.json() == printing.json()                  # the learner gets the same key either way
-    assert [(e["verb"], e["object"]) for e in kept(hub_client)] == [("check.key", "maths-7-fractions-add")]
+    assert hub_client.get(url).status_code == 200
+    assert hub_client.get(url + "&for=check").json() == hub_client.get(url).json()    # the old parameter means nothing
+    assert kept(hub_client) == []
+    assert "check.key" not in events.VERBS
+    assert events.check({"at": minute(), "verb": "check.key", "object": "maths-7-fractions-add"}, phone=False)
+    tutor = Path(events.__file__).resolve().parents[2]
+    for f in [*(tutor / "hub" / "tutor_hub").rglob("*.py"), *(tutor / "app" / "js").rglob("*.js")]:
+        text = f.read_text(encoding="utf-8")
+        assert "check.key" not in text and "for=check" not in text, f
 
 
 def test_an_event_that_fails_never_breaks_the_route(hub_client, monkeypatch):
