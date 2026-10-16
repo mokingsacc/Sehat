@@ -102,8 +102,10 @@ function measure(MIN) {
   // text that no speaker covers (a to-do list: each needs a narration line in four voices first):
   // its nearest container with a speaker must hold just that one speaker
   // (.credit: licence and version lines in Latin letters; .agechip without a block: a person's own typed name and age,
-  // which no clip can say; their record says the name in their own recorded voice)
-  const SKIP = 'nav, .top, .topic-hero, .empill, button, select, option, input, textarea, label.chip, .sources, .credit, .agechip:not([data-block]), svg, [aria-hidden=true], .numpad, #toast, .anim-ctl, .anim-cap';
+  // which no clip can say; their record says the name in their own recorded voice; the clinic map's town and village
+  // names, drawn on the map like a picture, and its loading line; a district's name over its clinics, which each card's
+  // voice says)
+  const SKIP = 'nav, .top, .topic-hero, .empill, button, select, option, input, textarea, label.chip, .sources, .credit, .agechip:not([data-block]), svg, [aria-hidden=true], .numpad, #toast, .anim-ctl, .anim-cap, .cm-labs, .cm-msg, h3.dsub';
   const seen = new Set();
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let tn;
   while ((tn = w.nextNode())) {
@@ -190,7 +192,7 @@ function measure(MIN) {
     // 1. a breadth-first walk over every link, from the tabs, every topic, every list and every age
     const seen = new Set(); const queue = [];
     const add = (h, from) => { h = h.replace(/\/$/, ''); if (!seen.has(h)) { seen.add(h); queue.push([h, from]); } };
-    for (const h of ['#/home', '#/house', '#/family', '#/emergency', '#/firstaid', '#/children', '#/adults', '#/ask', '#/settings', '#/share', '#/feedback', '#/near', '#/privacy', '#/growth'])  add(h, 'start');
+    for (const h of ['#/home', '#/house', '#/family', '#/emergency', '#/firstaid', '#/children', '#/adults', '#/ask', '#/settings', '#/share', '#/feedback', '#/near', '#/check', '#/privacy', '#/growth'])  add(h, 'start');
     for (const a of book.config.emergency) add('#/emergency/' + a.id, 'start');
     for (const n of Object.keys(book.config.lists)) add('#/s/' + n, 'start');
     for (const t of Object.keys(book.topics)) add('#/topic/' + t, 'start');

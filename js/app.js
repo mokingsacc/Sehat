@@ -6,6 +6,7 @@ import { initFinder } from './search-ui.js'; // the symptom finder's results (js
 import { initGrowth } from './growth.js'; // growth tracker: #/growth (charts, results, how to measure)
 import { initShare } from './share.js'; // Share Sehat: #/share (the app file on Android, the link and a QR code on the web)
 import { initFamily } from './family.js'; // family records: #/family (people, vaccines, weight, medicines, doctor's notes, readings)
+import { initClinics } from './clinics.js'; // the clinic map: #/near (map, list, nearest, Google Maps) and #/check (is it right?)
 import { initNumpad } from './numpad.js'; // the big number pad that says each number
 import * as Stats from './stats.js';
 import { openAnimation, animPoster, stepsSetup, stepsHave, prefetchSteps, fetchSteps, onStepsReady, onWifi } from './anim.js'; // explainer animations (public API only; see docs/ANIMATIONS.md, docs/STEPS_PLAYER.md)
@@ -138,7 +139,7 @@ function mark(id) {
   if (ONB_LIT[id]) { const o = $(ONB_LIT[id]); if (o) o.classList.add('speaking'); return; } // the talking welcome
   const el = document.querySelector(`[data-block="${CSS.escape(id)}"]`) || document.querySelector(`.spk[data-say="${CSS.escape(id)}"]`);
   const fb = el && el.classList.contains('xtra') && el.closest('.alert.folded'); if (fb) unfold(fb); // reading a hidden sign opens its box
-  if (el) { el.classList.add('speaking'); const r = el.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight - 90) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  if (el) { el.classList.add('speaking'); const r = el.getBoundingClientRect(); if (!P.stay && (r.top < 70 || r.bottom > innerHeight - 90)) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
 }
 function updateListenBar() {
   const b = $('.listen'); if (!b) return;
@@ -147,13 +148,14 @@ function updateListenBar() {
   $('.lt', b).textContent = P.on && P.ids.length > 1 ? T('playing') : T('listenPage');
   $('.prog', b).textContent = P.on && P.ids.length > 1 ? `${num(P.i + 1)} / ${num(P.ids.length)}` : '';
 }
-// opt.slot: play in this language and voice; opt.strict: only that voice (the voice samples)
+// opt.slot: play in this language and voice; opt.strict: only that voice (the voice samples); opt.stay: the page does not
+// move to the part being read (the clinic map stays in view)
 // Returns a promise that resolves 'ended' when the last clip has finished or 'stopped' when it was cut off,
 // or null when there is nothing to play (the animation player then uses its own timer).
 function play(ids, opt = {}) {
   stopAudio();
   const token = ++P.token;
-  P.slot = opt.slot || slotOf(); P.strict = !!opt.strict;
+  P.slot = opt.slot || slotOf(); P.strict = !!opt.strict; P.stay = !!opt.stay;
   P.ids = ids.filter((id) => S.book.narration[id]); P.i = 0; P.on = true;
   if (!P.ids.length) { P.on = false; return null; }
   const any = P.ids.some((id) => hasAudio(id, P.slot, P.strict)) || ttsVoice(P.slot.slice(0, 2));
@@ -228,12 +230,13 @@ function flush() { flushReports(); Stats.send(); }
 function isStandalone() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
 // inside the Android app (android/: its WebView serves the app from this address)
 const IN_APK = location.hostname === 'appassets.androidplatform.net';
+const START_HASH = location.hash;
 function platform() { const u = navigator.userAgent; return /iPhone|iPad|iPod/.test(u) ? 'ios' : /Android/.test(u) ? 'android' : 'other'; }
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') { stopAudio(); flushReports(); clearTimeout(DQ.timer); }
   else { if (!DL.active) startDownloads(); askDistrictSoon(); } // opened again: is the district question due?
 });
-addEventListener('online', () => { flush(); sendFeedback(); clearTimeout(DL.retry); DL.wait = 15000; startDownloads(); });
+addEventListener('online', () => { flush(); sendFeedback(); CL.flush(); clearTimeout(DL.retry); DL.wait = 15000; startDownloads(); });
 addEventListener('offline', () => packsUI());
 
 /* ---------- disease watch: "does someone in your home have this now?" ---------- */
@@ -508,6 +511,8 @@ function pageSay(r) {
   if (k === 's' && LISTS()[r[1]]) return say('s/' + r[1], [LISTS()[r[1]].say, more], ['ui.name.' + r[1]]);
   if (k === 'share') return say(k, [SH.homeSay(), more], ['ui.name.share']);
   if (k === 'feedback') return say(k, ['ui.feedback', more], ['ui.name.feedback']);
+  if (k === 'near') return say(k, ['ui.near', more], ['ui.name.near']);
+  if (k === 'check') return say(k, ['ui.check', more], ['ui.name.clinicCheck']);
   if (k === 'topic' && b.topics[r[1]] && !r[2] && !inEmFlow(r)) return say('topic/' + r[1], [r[1] + '.title', r[1] + '.summary', more], [r[1] + '.title']);
   return null;
 }
@@ -1477,59 +1482,6 @@ async function sendFeedback() {
   }
 }
 
-/* ---------- nearest clinics (GPS, works offline with the built-in list) ---------- */
-const NEAR = { pos: store.get('lastPos', null), busy: false };
-function distKm(a, b) {
-  const R = 6371, r = Math.PI / 180, dLa = (b.lat - a.lat) * r, dLo = (b.lon - a.lon) * r;
-  const h = Math.sin(dLa / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLo / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(h));
-}
-function bearing(a, b) {
-  const r = Math.PI / 180, y = Math.sin((b.lon - a.lon) * r) * Math.cos(b.lat * r);
-  const x = Math.cos(a.lat * r) * Math.sin(b.lat * r) - Math.sin(a.lat * r) * Math.cos(b.lat * r) * Math.cos((b.lon - a.lon) * r);
-  return (Math.atan2(y, x) / r + 360) % 360;
-}
-function screenNear() {
-  const ids = ['ui.near'];
-  const list = ((S.book.facilities && S.book.facilities.facilities) || []).filter((f) => f.status !== 'closed');
-  let html = top(T('near')) + listenBar(ids);
-  html += `<div class="blk lead" data-block="ui.near"><div class="body">${esc(L(S.book.narration['ui.near']))}</div>${spk('ui.near')}</div>`;
-  html += `<button class="btn" data-action="locate">${ic('house')} ${esc(NEAR.busy ? T('locating') : T('findMe'))}</button>`;
-  const tab = openerTab('home'); // Back goes to the screen that opened it (top()), and its tab stays lit
-  if (!list.length) { html += `<p class="muted center">${esc(T('noFacilities'))}</p>`; return { html, nav: tab }; }
-  const me = NEAR.pos;
-  const rows = list.map((f) => ({ f, d: me ? distKm(me, f) : null, b: me ? bearing(me, f) : 0 })).sort((a, b) => (a.d || 0) - (b.d || 0));
-  // hospitals and maternity first, whatever the distance; then the nearest other clinics and doctors
-  const isMain = (f) => /hospital|maternity|chc|bhc/.test(f.type || '');
-  const main = rows.filter((r) => isMain(r.f)).slice(0, 6), other = rows.filter((r) => !isMain(r.f)).slice(0, 12);
-  const shown = [...main, ...other];
-  if (me) html += nearMap(me, shown.slice(0, 3).concat(other.slice(0, 5)).filter((r, i, a) => a.indexOf(r) === i), shown);
-  const card = (r) => { const { f, d, b } = r, n = shown.indexOf(r) + 1, sid = 'ui.fac.' + f.id;
-    if (S.book.narration[sid]) ids.push(sid);
-    const svc = (f.services || []).map((s) => `<span class="svc">${esc(T('svc_' + s))}</span>`).join('');
-    return `<div class="fac"${S.book.narration[sid] ? ` data-block="${esc(sid)}"` : ''}><div class="fh"><b>${me ? `<span class="facn${isMain(f) ? ' h' : ''}">${num(n)}</span> ` : ''}${esc(L(f.name))}</b>${d != null ? `<span class="dist"><svg viewBox="0 0 24 24" style="transform:rotate(${Math.round(b)}deg)" aria-hidden="true"><path d="M12 2 19 21 12 17 5 21z" fill="currentColor"/></svg>${esc(T('km', { n: num(d < 10 ? d.toFixed(1) : Math.round(d)) }))}</span>` : ''}${S.book.narration[sid] ? spk(sid) : ''}</div>
-      <div class="muted">${esc(T('ft_' + (f.type || 'other')))}${f.district ? ' · ' + esc(f.district) : ''}</div><div class="svcs">${svc}</div>
-      <div class="row2">${f.phone ? `<a class="sbtn" href="tel:${esc(f.phone)}">${ic('phone')} ${esc(f.phone)}</a>` : ''}<a class="sbtn" href="https://www.google.com/maps/dir/?api=1&destination=${f.lat},${f.lon}" target="_blank" rel="noopener">${esc(T('directions'))}</a></div></div>`; };
-  const head = (key, sid) => { ids.push(sid); return groupHead(T(key), sid); };
-  if (main.length) html += head('nearHospitals', 'ui.nearHospitals') + main.map(card).join('');
-  if (other.length) html += head('nearOther', 'ui.nearOther') + other.map(card).join('');
-  ids.push('ui.nearIncomplete');
-  html += `<div class="blk tip" data-block="ui.nearIncomplete"><div class="body">${esc(L(S.book.narration['ui.nearIncomplete']))}</div>${spk('ui.nearIncomplete')}</div>`;
-  html += `<p class="muted center credit" style="font-size:13px" dir="ltr">${esc(T('mapCredit'))}</p>`; // the map licence: shown, not read aloud
-  return { html, nav: tab };
-}
-function nearMap(me, rows, shown) {
-  // a simple offline map: you in the middle, clinics placed by direction and distance (square-root scale so near and far both fit)
-  const maxD = Math.max(1, ...rows.map((r) => r.d)); const W = 320, C = W / 2, R = C - 22;
-  const dots = rows.map((r) => { const i = shown.indexOf(r); const a = (r.b - 90) * Math.PI / 180, k = Math.sqrt(r.d / maxD) * R; return `<g><circle cx="${C + Math.cos(a) * k}" cy="${C + Math.sin(a) * k}" r="9" fill="${/hospital|maternity|chc|bhc/.test(r.f.type || '') ? '#B6322D' : '#1F6F7A'}"/><text x="${C + Math.cos(a) * k}" y="${C + Math.sin(a) * k + 4}" text-anchor="middle" font-size="10" fill="#fff" font-family="sans-serif">${num(i + 1)}</text></g>`; }).join('');
-  return `<svg class="nearmap" viewBox="0 0 ${W} ${W}" aria-hidden="true"><circle cx="${C}" cy="${C}" r="${R}" fill="#EAF3F4" stroke="#BFCBC9"/><circle cx="${C}" cy="${C}" r="${R / 2}" fill="none" stroke="#BFCBC9" stroke-dasharray="4 4"/><text x="${C}" y="14" text-anchor="middle" font-size="12" fill="#6B655E" font-family="sans-serif">N</text>${dots}<circle cx="${C}" cy="${C}" r="8" fill="#22201D" stroke="#fff" stroke-width="3"/></svg>`;
-}
-function locate() {
-  if (!navigator.geolocation) { toast(T('locFail')); return; }
-  NEAR.busy = true; render();
-  navigator.geolocation.getCurrentPosition((p) => { NEAR.pos = { lat: p.coords.latitude, lon: p.coords.longitude }; store.set('lastPos', NEAR.pos); NEAR.busy = false; track('near'); render(); },
-    () => { NEAR.busy = false; toast(T('locFail')); render(); }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 600000 });
-}
 let lastPage = 'home';
 
 /* ---------- tools: breathing counter, reading checker, home health kit (js/tools.js) ---------- */
@@ -1538,6 +1490,8 @@ const FD = initFinder({ S, esc, T, L, ic, I, spk, isAdultTopic });
 const NP = initNumpad({ S, esc, T, L, num, I, spk, play, dialog, toast });
 const GR = initGrowth({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, hasAudio, ttsVoice, track, listenBar, disclaimer, top, toast, backTo, openerTab, store, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, topicCard, NP, nameOf: (k) => FM.nameOf(k), children: () => FM.children(), render: () => render() });
 const SH = initShare({ S, esc, T, L, num, ic, I, spk, track, listenBar, disclaimer, top, toast, platform, mbText, store, dialog, isStandalone, inApk: IN_APK, play, stopAudio });
+const CL = initClinics({ S, esc, T, L, num, ic, I, spk, play, track, listenBar, top, toast, store, openerTab, groupHead, REC, askVoice: () => Stats.askVoice(), render: () => render(),
+  siteBase: () => { const site = (S.shipped && S.shipped.config.appUrl) || ''; return IN_APK && /^https:\/\//.test(site) ? site : ''; } });
 const FM = initFamily({ S, $, $$, esc, T, L, num, ic, I, spk, play, stopAudio, track, listenBar, disclaimer, top, toast, store, dialog, dateSelects, readDate, fmtDate, todayISO, ageText, saveKids, NP, render: () => render() });
 
 /* ---------- titles that fit ----------
@@ -1610,7 +1564,8 @@ function render() {
   else if (r[0] === 'ask') out = screenAsk();
   else if (r[0] === 'sym') out = screenSym(r[1], r[2]);
   else if (r[0] === 'feedback') out = screenFeedback();
-  else if (r[0] === 'near') out = screenNear();
+  else if (r[0] === 'near') out = CL.screen();
+  else if (r[0] === 'check') out = CL.check(); // the page Mo sends to people in Samangan (a link: #/check)
   else if (r[0] === 's') out = screenList(r[1]);
   else if (r[0] === 'house') out = screenHouse();
   else if (r[0] === 'firstaid') out = screenFirstAid();
@@ -1640,6 +1595,7 @@ function render() {
   const ff = $('#fbform'); if (ff) ff.addEventListener('submit', (e) => { e.preventDefault(); fbSubmit(ff.text.value.trim()); });
   fillPosters();
   fitText();
+  CL.mount(); // the clinic map draws itself in its box
 }
 let lastHash = location.hash;
 addEventListener('hashchange', () => {
@@ -1665,6 +1621,7 @@ document.addEventListener('click', (e) => {
 document.addEventListener('click', async (e) => {
   const t = e.target.closest('button, a, [data-block]'); if (!t) return;
   const d = t.dataset;
+  if (d.cl && CL.act(t)) { e.preventDefault(); return; } // the clinic map and the check page (js/clinics.js)
   if (d.tabsay) { if (t.getAttribute('aria-current') === 'page') { const pg = pageSay(route()); if (pg && pg.full.length) play(pg.full, { quiet: true }); } return; } // the tab it is on: what this page is
   if (d.say) {
     e.preventDefault(); const ids = [d.say, ...(d.then ? d.then.split(' ') : [])];
@@ -1677,7 +1634,7 @@ document.addEventListener('click', async (e) => {
     const first = !S.voice;
     setVoice(d.setlang, voiceFor(d.setlang)); // a language not chosen yet starts with the woman's voice
     if (first) persistOnce();
-    location.hash = '#/hello'; return; // its hashchange draws it and starts its voice
+    location.hash = START_HASH === '#/check' ? '#/check' : '#/hello'; return; // its hashchange draws it and starts its voice; a check link goes straight to its page
   }
   if (d.voice) { stopAudio(); await setVoice(S.lang, d.voice); render(); return; }
   if (d.lang) { stopAudio(); await setVoice(d.lang, voiceFor(d.lang)); render(); return; }
@@ -1721,7 +1678,6 @@ document.addEventListener('click', async (e) => {
     case 'mic': startMic(t); return;
     case 'fbrec': fbRecord(); return;
     case 'fbplay': if (FB.blob) { P.audio.src = URL.createObjectURL(FB.blob); P.audio.play(); } return;
-    case 'locate': locate(); return;
     case 'delvoices': deleteVoices(); return;
     case 'anim': e.preventDefault(); openAnim(d.anim, d.variant); return;
     case 'animget': e.preventDefault(); getFilm(t, d); return;
@@ -1811,7 +1767,7 @@ function useOverlay(ov) {
   try { b = normBook(applyOverlay(S.shippedBook, ov).book); } catch { return false; }
   if (!goodBook(b)) return false;
   const c = { ...(b.config || {}) };
-  for (const k of ['appUrl', 'analyticsUrl', 'feedbackUrl', 'contentUrl']) c[k] = S.shipped.config[k]; // addresses always come from the app itself
+  for (const k of ['appUrl', 'analyticsUrl', 'feedbackUrl', 'checkUrl', 'contentUrl']) c[k] = S.shipped.config[k]; // addresses always come from the app itself
   b.config = c; S.book = b; S.overlay = ov.version;
   return true;
 }
@@ -1876,6 +1832,6 @@ async function start() {
   setTimeout(() => checkUpdate(false), 3000);
   startDownloads();
   if (navigator.connection && navigator.connection.addEventListener) navigator.connection.addEventListener('change', () => { if (!DL.active) startDownloads(); packsUI(); });
-  flush(); sendFeedback();
+  flush(); sendFeedback(); CL.flush();
 }
 start().catch((e) => { console.error(e); if (window.sehatBootFail) window.sehatBootFail(); });

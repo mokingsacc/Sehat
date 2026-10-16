@@ -7,7 +7,8 @@
 // - the audit log is append-only and records sign-ins, views, exports, edits, publishes, corrections and role changes, with
 //   before and after;
 // - exports: ISO epi weeks, suppression of small cells, SHA-256 that matches the file, DHIS2 shape;
-// - every page answers 200, has no key in it, and every inline script carries the CSP nonce and the __name stub.
+// - every page answers 200, has no key in it, and every inline script carries the CSP nonce and the __name stub;
+// - clinic checks: POST /check keeps only what it should, /checks adds the answers up per place, exports and voice notes are logged.
 // Run: node tools/test_dashboard.mjs
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
@@ -172,7 +173,7 @@ ok(s.r.status === 429, 'after 30 wrong passwords in 10 minutes: wait', s.r.statu
 db.exec("DELETE FROM limits_daily WHERE k LIKE 'signin:%'");
 
 /* ---------------- pages ---------------- */
-const PAGES = ['/dashboard', '/dashboard?lang=fa', '/dashboard?lang=ps&district=aybak&days=7', '/usage', '/usage?district=ruyi-du-ab', '/watch', '/watch?share=1', '/watch/methods', '/inbox', '/data', '/admin', '/audit', '/audit?cat=export', '/people', '/about'];
+const PAGES = ['/dashboard', '/dashboard?lang=fa', '/dashboard?lang=ps&district=aybak&days=7', '/usage', '/usage?district=ruyi-du-ab', '/watch', '/watch?share=1', '/watch/methods', '/inbox', '/checks', '/checks?lang=ps', '/data', '/admin', '/audit', '/audit?cat=export', '/people', '/about'];
 for (const p of PAGES) {
   r = await call(p, { jar: owner.jar });
   const nonce = (/script-src 'nonce-([0-9a-f]+)'/.exec(r.headers.get('Content-Security-Policy') || '') || [])[1];
@@ -273,6 +274,104 @@ const fid = db.prepare('SELECT id FROM feedback WHERE audio IS NOT NULL').get().
 r = await call('/fb-audio/' + fid, { jar: owner.jar });
 ok(r.status === 200 && r.headers.get('Content-Type') === 'audio/ogg' && /sandbox/.test(r.headers.get('Content-Security-Policy')) && /attachment/.test(r.headers.get('Content-Disposition')), 'voice notes still served only as sound (H1)');
 ok((await call('/fb-audio/' + fid)).status === 404, 'voice notes need sign-in');
+
+/* ---------------- clinic checks: POST /check (the app's "Check the clinics" page) and /checks ---------------- */
+// the app sends text/plain (no CORS preflight)
+const check = (b) => W.fetch(new Request(O + '/check', { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: typeof b === 'string' ? b : JSON.stringify(b) }), env);
+const nChecks = () => db.prepare('SELECT COUNT(*) n FROM checks').get().n;
+const lastCheck = () => db.prepare('SELECT * FROM checks ORDER BY id DESC').get();
+const ogg = Buffer.from('OggS' + 'x'.repeat(100)).toString('base64');
+r = await check({ v: '2026.10.16-abc123', lang: 'ps', fac: 'quiet-clinic', d: 'aybak', open: 'yes', pin: '', here: null, text: 'Their phone is 0799 123 456' });
+let row = lastCheck();
+ok(r.status === 200 && r.headers.get('Access-Control-Allow-Origin') === '*' && row.fac === 'quiet-clinic' && row.district === 'aybak' && row.open === 'yes' && row.pin === null && row.lang === 'ps' && row.version === '2026.10.16-abc123', 'POST /check stores a good answer', row);
+ok(row.text === 'Their phone is 0799 123 456' && row.lat === null && row.audio === null && Math.abs(row.ts - Date.now()) < 60000, 'digits are kept in the text (a clinic\'s phone number); the time is the server\'s', row);
+const ncols = db.prepare('PRAGMA table_info(checks)').all().map((c) => c.name);
+ok(!ncols.some((c) => /iid|ip|install|name/.test(c)), 'checks keep no install id, address or name', ncols);
+let n0 = nChecks();
+for (const fac of ['Aybak', '-x', 'a'.repeat(81), '', null, 'a b', 7]) ok((await check({ fac, open: 'yes' })).status === 400, 'bad place id refused: ' + JSON.stringify(fac));
+ok((await check({ fac: 'x', d: 'Bad District', open: 'yes' })).status === 400 && (await check({ fac: 'x', open: 'maybe' })).status === 400 && (await check({ fac: 'x', pin: 1 })).status === 400, 'bad district or answer refused');
+ok((await check({ fac: 'x' })).status === 400 && (await check({ fac: 'new', text: '   ', open: '' })).status === 400 && (await check('not json')).status === 400, 'an empty answer is refused');
+ok((await check({ fac: 'x', here: { lat: 51.5, lon: -0.12, acc: 10 } })).status === 400, 'a position outside Afghanistan alone is dropped, leaving nothing: refused');
+ok(nChecks() === n0, 'nothing refused was stored', nChecks() - n0);
+for (const here of [{ lat: 36.2, lon: 80, acc: 10 }, { lat: 28.9, lon: 68, acc: 10 }, { lat: 36.2, lon: 68, acc: 20000 }, { lat: 36.2, lon: 68, acc: -1 }, { lat: '36.2', lon: 68, acc: 5 }]) {
+  r = await check({ fac: 'x', open: 'dk', here });
+  row = lastCheck();
+  ok(r.status === 200 && row.open === 'dk' && row.lat === null && row.lon === null && row.acc === null, 'out-of-range GPS dropped, the answer kept: ' + JSON.stringify(here), row);
+}
+r = await check({ fac: 'new', d: 'khulm', text: 'A new clinic by the bazaar', type: 'audio/ogg;codecs=opus', audio: ogg, here: { lat: 36.7, lon: 67.69, acc: 25 } });
+row = lastCheck();
+const chkVoice = row.id;
+ok(r.status === 200 && row.fac === 'new' && row.audio && row.type === 'audio/ogg' && row.lat === 36.7 && row.acc === 25, 'a missing place with a voice note and a position', { ...row, audio: !!row.audio });
+await check({ fac: 'x', open: 'yes', type: 'audio/ogg', audio: Buffer.from('<html><script>alert(1)</script></html>').toString('base64') });
+row = lastCheck();
+ok(row.audio === null && row.type === null, 'something that is not sound is not kept as a voice note', row);
+await check({ fac: 'x', open: 'yes', type: 'text/html', audio: ogg });
+ok(lastCheck().audio === null, 'a sound with a wrong type is not kept either');
+ok((await check({ fac: 'x', type: 'audio/ogg', audio: Buffer.from('nope').toString('base64') })).status === 400, 'a broken voice note alone is an empty answer');
+// the daily limit: the phone gets "busy" and keeps the answer
+const used = db.prepare('SELECT n FROM limits_daily WHERE k = ?').get('chk:' + dayOf(Date.now())).n;
+env.CHECKS_PER_DAY = String(used + 1);
+n0 = nChecks();
+const r1 = await check({ fac: 'x', open: 'no' }), r2 = await check({ fac: 'x', open: 'no' });
+ok(r1.status === 200 && r2.status === 429 && (await r2.text()) === 'busy' && nChecks() === n0 + 1, 'CHECKS_PER_DAY: busy (429) when the day\'s allowance is used up', { s1: r1.status, s2: r2.status });
+delete env.CHECKS_PER_DAY;
+env.CHECK_AUDIO_BYTES_PER_DAY = '10';
+ok((await check({ fac: 'x', open: 'no', type: 'audio/ogg', audio: ogg })).status === 429, 'CHECK_AUDIO_BYTES_PER_DAY: busy when voice bytes are used up');
+delete env.CHECK_AUDIO_BYTES_PER_DAY;
+db.exec("DELETE FROM limits_daily WHERE k LIKE 'chk%'");
+
+// a seeded case: three positions at one clinic, whose app pin is 36.1, 68.0
+const BOOK = { facilities: { districts: [{ id: 'aybak', name: { en: 'Aybak', fa: 'ایبک', ps: 'ايبک' } }], facilities: [
+  { id: 'test-clinic', name: { en: 'Test Clinic', fa: 'کلینیک', ps: 'کلینیک' }, district: 'aybak', lat: 36.1, lon: 68.0, where: 'building' },
+  { id: 'no-pos-clinic', name: { en: 'Clinic With No Pin', fa: 'ک', ps: 'ک' }, district: 'aybak', lat: null, lon: null, where: 'none' },
+  { id: 'quiet-clinic', name: { en: 'Quiet Clinic', fa: 'ک', ps: 'ک' }, district: 'aybak', lat: 36.3, lon: 68.0, where: 'village' }] } };
+let bookFetches = 0;
+globalThis.fetch = async (u) => (/\/content\/book\.json/.test(String(u)) ? (bookFetches++, Response.json(BOOK)) : new Response('', { status: 404 }));
+await check({ fac: 'test-clinic', open: 'yes', here: { lat: 36.0, lon: 68.0, acc: 8 } });
+await check({ fac: 'test-clinic', open: 'no', here: { lat: 36.2, lon: 68.3, acc: 8 } });
+await check({ fac: 'test-clinic', open: 'yes', pin: 'no', here: { lat: 36.1, lon: 68.1, acc: 8 }, type: 'audio/ogg', audio: ogg });
+await check({ fac: 'no-pos-clinic', pin: 'dk', here: { lat: 36.5, lon: 67.9, acc: 30 } });
+await check({ fac: 'quiet-clinic', open: 'yes' });
+const hav = (a, b) => { const R = 6371.0088, q = Math.PI / 180, x = Math.sin((b[0] - a[0]) * q / 2) ** 2 + Math.cos(a[0] * q) * Math.cos(b[0] * q) * Math.sin((b[1] - a[1]) * q / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); };
+const expKm = hav([36.1, 68.1], [36.1, 68.0]).toFixed(2), expSpread = Math.round(1000 * Math.max(hav([36.1, 68.1], [36.0, 68.0]), hav([36.1, 68.1], [36.2, 68.3]))).toLocaleString('en-US');
+r = await call('/people/api/add', { method: 'POST', jar: owner.jar, body: { name: 'Zahra', role: 'viewer' }, headers: { 'X-CSRF-Token': ownerCsrf } });
+const zahra = await signIn(r.json.key);
+r = await call('/checks', { jar: zahra.jar });
+const rowOf = (id) => (new RegExp(`<tr><td><b>[^<]*</b> <span class="s"><code>${id}</code>[\\s\\S]*?</tr>`).exec(r.text) || [''])[0];
+const tc = rowOf('test-clinic');
+ok(r.status === 200 && tc.includes('Test Clinic') && tc.includes('Aybak'), 'a viewer opens /checks; places named from the app\'s book', r.status);
+ok(tc.includes('36.10000, 68.10000') && tc.includes('query=36.10000,68.10000') && tc.includes(`<bdi dir="ltr">${expKm}</bdi>`) && tc.includes(`<bdi dir="ltr">${expSpread}</bdi>`), 'the middle point is the median latitude and longitude; its distance from the pin and the spread', { expKm, expSpread, tc: tc.slice(0, 900) });
+ok(tc.includes('<bdi dir="ltr">2 / 1 / 0</bdi>') && tc.includes('<bdi dir="ltr">0 / 1 / 0</bdi>') && tc.includes('people disagree') && tc.includes('far from the pin'), 'open and pin answers counted; disagreement and distance flagged');
+const np = rowOf('no-pos-clinic');
+ok(np.includes('36.50000, 67.90000') && /<td class="n"><\/td><td class="n"><bdi dir="ltr">0<\/bdi><\/td>/.test(np), 'no app position: the distance is left blank', np);
+ok(r.text.indexOf('<code>test-clinic</code>') < r.text.indexOf('<code>quiet-clinic</code>'), 'the place with disagreement comes before a newer quiet one');
+ok(r.text.includes('A new clinic by the bazaar') && r.text.includes(`/chk-audio/${chkVoice}`) && r.text.includes('query=36.70000,67.69000') && r.text.includes('Their phone is 0799 123 456'), 'missing places and all answers listed with voice notes, GPS and text');
+ok(/Answers<\/div><div class="v"><bdi dir="ltr">\d+<\/bdi>/.test(r.text) && r.text.includes('Missing places reported'), 'the top line: answers, places, GPS points, missing places');
+ok(L("action = 'view clinic checks' AND who = 'Zahra'").length === 1, 'opening /checks is in the audit log');
+await call('/checks?lang=fa', { jar: zahra.jar });
+ok(bookFetches === 1, 'the app\'s book is fetched once and kept', bookFetches);
+r = await call('/checks?lang=fa', { jar: zahra.jar });
+ok(r.text.includes('dir="rtl"') && r.text.includes('بررسی کلینیک‌ها') && r.text.includes('نقطهٔ میانی GPS'), 'the page in Dari');
+r = await call('/dashboard?lang=en', { jar: zahra.jar });
+ok(/href="\/checks"[\s\S]{0,200}Clinic checks[\s\S]{0,120}<bdi dir="ltr">\d+<\/bdi>[\s\S]{0,80}new answers this week/.test(r.text), 'the overview links to /checks with this week\'s answers');
+// voice notes and exports
+r = await call('/chk-audio/' + chkVoice, { jar: zahra.jar });
+ok(r.status === 200 && r.headers.get('Content-Type') === 'audio/ogg' && /sandbox/.test(r.headers.get('Content-Security-Policy')) && /attachment/.test(r.headers.get('Content-Disposition')) && r.headers.get('Cache-Control') === 'private, no-store', 'clinic-check voice notes served only as sound');
+ok(L("action = 'listen voice note'").some((x) => x.target === 'clinic check #' + chkVoice), 'listening is in the audit log');
+ok((await call('/chk-audio/' + chkVoice)).status === 404 && (await call('/checks')).status === 303 && (await call('/checks/export.csv')).status === 401, 'clinic checks need sign-in');
+r = await call('/checks/export.csv', { jar: zahra.jar });
+const csh = /# sha256: ([0-9a-f]{64})/.exec(r.text), crow = body(r.text).trim().split('\n');
+const cex = L("action = 'export clinic checks csv'")[0];
+ok(r.status === 200 && csh && sha(body(r.text)) === csh[1] && /not for sharing outside the team/.test(r.text) && crow[0].startsWith('id,received_utc,lang,app_version,place_id,place_name'), 'checks CSV: header, SHA-256 of its rows, the sharing note');
+ok(cex && cex.sha256 === csh[1] && cex.row_count === crow.length - 1 && cex.row_count === nChecks() && cex.who === 'Zahra', 'checks CSV export in the audit log', cex);
+r = await call('/checks/export.json', { jar: zahra.jar });
+const jex = L("action = 'export clinic checks json'")[0];
+ok(r.status === 200 && r.headers.get('X-Sehat-SHA256') === sha(r.text) && jex && jex.sha256 === sha(r.text) && jex.row_count === r.json.length && r.json.some((x) => x.place_name === 'Test Clinic'), 'checks JSON export: SHA-256 header, in the audit log', jex);
+// the daily clean-up deletes clinic-check voice notes 90 days after they arrived, like feedback voice notes
+db.prepare('UPDATE checks SET ts = ? WHERE id = ?').run(Date.now() - 91 * DAY, chkVoice);
+await W.scheduled({ scheduledTime: Date.now() }, env, null);
+ok(db.prepare('SELECT audio FROM checks WHERE id = ?').get(chkVoice).audio === null && db.prepare("SELECT COUNT(*) n FROM checks WHERE audio IS NOT NULL").get().n >= 1, 'voice notes deleted after 90 days, newer ones kept');
+ok((await call('/chk-audio/' + chkVoice, { jar: zahra.jar })).status === 404 && (await call('/checks?lang=en', { jar: zahra.jar })).text.includes('Voice note deleted'), 'a deleted voice note is gone and marked so');
 
 console.log(`${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

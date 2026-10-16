@@ -171,3 +171,20 @@ CREATE INDEX IF NOT EXISTS audit_log_cat ON audit_log(category, seq);
 CREATE INDEX IF NOT EXISTS audit_log_who ON audit_log(who_id, seq);
 CREATE TRIGGER IF NOT EXISTS audit_log_no_update BEFORE UPDATE ON audit_log BEGIN SELECT RAISE(ABORT, 'audit_log is append-only'); END;
 CREATE TRIGGER IF NOT EXISTS audit_log_no_delete BEFORE DELETE ON audit_log BEGIN SELECT RAISE(ABORT, 'audit_log is append-only'); END;
+-- ===== Clinic checks (16 October 2026): answers from the app's "Check the clinics" page (#/check). Only new tables. =====
+-- One row per place answered: is it open, is it in the right place on the map, a note or voice note, and the phone's position
+-- only when the person pressed "I am at this place now". No install id, no IP address, nothing that names the person.
+CREATE TABLE IF NOT EXISTS checks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ts INTEGER NOT NULL,           -- when the server received it (ms)
+  lang TEXT, version TEXT,       -- app language and book version
+  fac TEXT NOT NULL,             -- facility id from the app's clinic list, or 'new' (a place missing from the list)
+  district TEXT,                 -- district id the person chose, or empty
+  open TEXT, pin TEXT,           -- 'yes', 'no', 'dk' (does not know), or empty (not answered)
+  lat REAL, lon REAL, acc REAL,  -- phone position and its accuracy in metres, only after "I am at this place now"
+  text TEXT,                     -- what they wrote (up to 1,000 characters; numbers are kept: a clinic's phone number helps)
+  audio BLOB, type TEXT,         -- voice note (audio only), deleted 90 days after it arrived
+  status TEXT DEFAULT 'new'
+);
+CREATE INDEX IF NOT EXISTS checks_ts ON checks(ts);
+CREATE INDEX IF NOT EXISTS checks_fac ON checks(fac, ts);

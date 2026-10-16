@@ -1,16 +1,19 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.16-645c42';
+const VERSION = '2026.10.16-e10bf4';
 const PRECACHE = [
  "./",
  "index.html",
  "manifest.webmanifest",
  "content/book.json",
  "content/who-growth.json",
+ "content/map.json",
  "css/app.css",
+ "css/clinics.css",
  "css/family.css",
  "css/growth-share.css",
  "js/anim.js",
  "js/app.js",
+ "js/clinics.js",
  "js/family-data.js",
  "js/family.js",
  "js/growth-calc.js",

@@ -133,6 +133,7 @@ ui.privacy.phone	آنچه در گوشی شما می‌ماند: زبان شما�
 ui.privacy.usage	شمار استفاده: گوشی هر روز حساب می‌کند که کدام صفحه‌ها باز شد، چند دقیقه، و چند بار صدا شنیده شد. این شمار را روزی یک بار می‌فرستد، با نام ولسوالی اگر آن را انتخاب کرده باشید. هیچ نام، شمارۀ تلیفون، جای شما یا شمارۀ گوشی فرستاده نمی‌شود. چیزی که در جستجو می‌نویسید فرستاده نمی‌شود.	Usage counts: each day the phone adds up which pages were opened, for how many minutes, and how often audio played. It sends these totals once a day, with your district if you chose one. There is no name, no phone number, no location and no number for your phone. What you type in the search is not sent.
 ui.privacy.watchOn	دیدن مریضی‌های واگیر: وقتی یک مریضی واگیر را جستجو می‌کنید، یا می‌گویید کسی در خانه آن را دارد، گوشی فقط نام مریضی، ولسوالی، گروه سنی و روز را می‌فرستد، همراه با یک نمبر بی‌نام که هر ماه عوض می‌شود تا یک خبر دو بار حساب نشود. هیچ نام یا جای شما فرستاده نمی‌شود. این از اول روشن است، و می‌توانید آن را در تنظیمات خاموش کنید.	Disease watch: when you look up an illness that spreads, or say someone at home has one, the phone sends only the illness, your district, an age group and the day, with a random number that changes every month so one report is not counted twice. No names and no location are sent. It is on from the start, and you can switch it off in Settings.
 ui.privacy.voice	نظر شما: پیش از ثبت صدای شما، از شما می‌پرسیم. پیام‌ها به شما وصل نیستند. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند. لطفاً نام یا شمارۀ تلیفون نگویید و ننویسید؛ برنامه شمارۀ تلیفون را از نوشته پاک می‌کند.	Your ideas: we ask before recording your voice. Messages are not linked to you. Voice messages are deleted after 90 days. Please do not say or write names or phone numbers; the app removes phone numbers from writing.
+ui.privacy.check	بررسی کلینیک‌ها: اگر از این صفحه استفاده کنید و «بفرست» را بزنید، جواب‌های شما دربارۀ هر جای، با پیام صوتی یا نوشتۀ شما اگر ساخته باشید، به تیم صحت می‌رود. فقط وقتی «من حالا این‌جا هستم» را بزنید، جای گوشی شما در همان لحظه با آن‌ها فرستاده می‌شود. چیزی که نام شما را نشان دهد فرستاده نمی‌شود. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند.	Check the clinics: if you use this page and press Send, your answers about each place go to the Sehat team, with your voice or written note if you made one. Only when you press "I am at this place now" is the position of your phone at that moment sent with them. Nothing that names you is sent. Voice notes are deleted after 90 days.
 ui.privacy.who	فقط گروه صحت این شمار را می‌بیند، و هر بار که کسی آن را می‌بیند یا دانلود می‌کند، نوشته می‌شود. شمار کمتر از ۵ پنهان می‌شود تا هیچ خانواده‌ای شناخته نشود. معلومات مفصل کهنه بعد از ۱۲ ماه پاک می‌شود.	Only the Sehat team can see the numbers, and each time someone looks or downloads, it is written down. Numbers smaller than 5 are hidden, so no family can be recognised. Old detailed records are deleted after 12 months.
 ui.privacy.stop	هر وقت بخواهید، می‌توانید فرستادن را در تنظیمات خاموش کنید. برنامه بدون آن هم همان طور کار می‌کند.	You can stop sending at any time in Settings. The app works the same without it.
 ui.emergency	حالت عاجل. اول کسی را برای آوردن موتر بفرستید. بعد، سن مریض را انتخاب کنید و مشکل را بزنید.	Emergency. First, send someone for a car. Then choose the person's age and tap the problem.
@@ -156,9 +157,6 @@ ui.ageNewborn	نوزاد، همین حالا به دنیا آمده	Newborn, jus
 ui.ageBaby	شیرخوار کمتر از ۱ سال	Baby under 1 year
 ui.ageChild	طفل، از ۱ سال تا بلوغ	Child, 1 year to puberty
 ui.ageAdult	بزرگسال یا نوجوان	Adult or teenager
-ui.nearHospitals	شفاخانه‌ها و قابله‌ها. برای شنیدن نام هر جای، دکمۀ بلندگوی کنار آن را بزنید. برای دیدن راه، «راه» را بزنید.	Hospitals and midwives. Tap the speaker beside a place to hear its name. Tap Directions to see the way.
-ui.nearOther	کلینیک‌ها و داکتران نزدیک.	Nearby clinics and doctors.
-ui.nearIncomplete	این فهرست هنوز کامل نیست. شفاخانه ولایتی ایبک و کلینیک‌های دولتی به‌زودی اضافه می‌شوند.	This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon.
 ui.set.language	زبان: دری، پشتو یا انگلیسی را انتخاب کنید. تمام کتاب به همان زبان می‌شود.	Language: choose Dari, Pashto or English. The whole book changes to that language.
 ui.set.speed	سرعت صدا: اگر صدا خیلی تیز است، «آهسته» را بزنید.	Voice speed: if the voice is too fast, tap Slower.
 ui.set.voices	صداهای کتاب: صدای زن یا صدای مرد را انتخاب کنید. برای شنیدن هر کدام، دکمۀ بلندگوی زیر آن را بزنید.	Voices of the book: choose a woman's voice or a man's voice. Tap the speaker under each one to hear it.
@@ -209,6 +207,27 @@ ui.name.food	غذا و باغچه	Food and garden
 ui.name.wellbeing	زندگی صحتمند	Well-being
 ui.name.feedback	نظر شما	Your ideas
 ui.name.share	صحت را شریک کنید	Share Sehat
+ui.name.near	نزدیک‌ترین کلینیک	Nearest clinic
+ui.name.clinicCheck	بررسی کلینیک‌ها	Check the clinics
+ui.nearLead	این نقشه شفاخانه‌ها و کلینیک‌های سمنگان را نشان می‌دهد. برای دیدن نزدیک‌ترین‌ها، «جای من را پیدا کن» را بزنید. برای شنیدن نام هر جای، روی آن بزنید.	This map shows the hospitals and clinics of Samangan. To see the nearest ones, press "Find where I am". Press a place to hear its name.
+ui.nearGps	گوشی شما برای استفاده از موقعیت اجازه می‌خواهد. «اجازه» را بزنید. جای شما در گوشی شما می‌ماند؛ صحت آن را نمی‌فرستد.	Your phone will ask to use its location. Press Allow. Where you are stays on your phone; Sehat does not send it.
+ui.nearKey	نشانه‌های آبی شفاخانه‌ها هستند. نشانه‌های سبز کلینیک‌های دولتی هستند. نشانه‌های کوچک بنفش جاهای خصوصی هستند که در آن‌ها پول می‌دهید. نشانۀ سفید با لبۀ خط‌خط یعنی قریه یا شهرک را می‌دانیم، ولی ساختمان را هنوز نه.	Pins the colour of the sky are hospitals. Green pins are government clinics. Small purple pins are private places, where you pay. A white pin with a broken edge means we know the village or the town, but not the building yet.
+ui.nearHere	این‌ها نزدیک‌ترین جاها به شما هستند. نزدیک‌ترین آن:	These are the places nearest to you. The nearest one is:
+ui.nearH	شفاخانه‌ها.	Hospitals.
+ui.nearC	کلینیک‌های دولتی.	Government clinics.
+ui.nearO	شفاخانه‌های بزرگ بیرون از سمنگان. داکتران مریضی‌ها و زخم‌های سخت را به آن‌جا می‌فرستند.	Big hospitals outside Samangan. Doctors send people there for a serious illness or injury.
+ui.nearP	جاهای خصوصی. آن‌جا پول می‌دهید.	Private places. You pay there.
+ui.nearUnplaced	این جاها هم در ولسوالی شما هستند، ولی هنوز نمی‌دانیم روی نقشه کجا هستند.	These places are also in your district, but we do not know yet where they are on the map.
+ui.nearTrust	بیشتر جاهای این نقشه هنوز بررسی نشده‌اند. پیش از یک سفر دور، از کسی که به او اعتماد دارید بپرسید که آن جای باز است یا نه. اگر چیزی نادرست است، در صفحۀ «بررسی کلینیک‌ها» به ما بگویید.	Most places on this map have not been checked yet. Before a long journey, ask someone you trust whether the place is open. If something is wrong, tell us on the "Check the clinics" page.
+ui.nearHelp	آیا این جاها را می‌شناسید؟ کمک کنید نقشه درست شود.	Do you know these places? Help us make the map right.
+ui.check	کمک کنید این نقشه برای هر فامیل در سمنگان درست شود. ولسوالی خود را انتخاب کنید، بعد برای هر جایی که می‌شناسید جواب دهید. وقتی تمام شد، «بفرست» را بزنید.	Help make this map right for every family in Samangan. Choose your district, then answer for each place you know. When you finish, press Send.
+ui.checkDist	ولسوالی خود را انتخاب کنید.	Choose your district.
+ui.chkOpenQ	آیا حالا باز است؟ «بلی»، «نخیر» یا «نمی‌دانم» را بزنید.	Is it open now? Press yes, no, or I don't know.
+ui.chkPinQ	آیا روی نقشه در جای درست است؟ به نقشۀ بالا نگاه کنید، بعد «بلی»، «نخیر» یا «نمی‌دانم» را بزنید.	Is it in the right place on the map? Look at the map above, then press yes, no, or I don't know.
+ui.checkHere	این را فقط وقتی بزنید که در همان جای هستید. این دکمه جای فعلی گوشی را با جواب‌های شما می‌فرستد تا آن جای را روی نقشه بگذاریم. گوشی اول اجازه می‌خواهد.	Press this only when you are at the place. It sends where your phone is now with your answers, so we can put the place on the map. Your phone will ask first.
+ui.checkMissing	آیا کلینیک، شفاخانه، قابله یا کارکن صحی در فهرست نیست؟ نام و قریۀ آن را بگویید یا بنویسید.	Is a clinic, hospital, midwife or health worker missing from the list? Say its name and its village, or write them.
+ui.checkSend	وقتی تمام شد، «بفرست» را بزنید. جواب‌های شما به تیم صحت می‌رود. چیزی که نام شما را نشان دهد فرستاده نمی‌شود.	When you finish, press Send. Your answers go to the Sehat team. Nothing that names you is sent.
+ui.checkThanks	تشکر. جواب‌های شما به هر فامیل در سمنگان کمک می‌کند.	Thank you. Your answers help every family in Samangan.
 ui.ask.who	مریض کیست؟ یکی را بزنید.	Who is sick? Tap one.
 ui.ask.who.after	مادر بعد از ولادت	Mother after the birth
 ui.ask.who.anyone	هر کس	Anyone
@@ -573,46 +592,59 @@ ui.syn.tb	سرفه ۲ هفته یا بیشتر.	A cough for 2 weeks or more.
 ui.syn.jaundice	چشم یا پوست تازه زرد شده است (نه نوزاد).	Eyes or skin have recently turned yellow (not a newborn baby).
 ui.syn.meningitis	تب همراه با شخی گردن.	Fever with a stiff neck.
 ui.syn.leishmaniasis	زخم پوست که بعد از دو هفته جور نشده است.	A skin sore that has not healed after two weeks.
-ui.fac.ruyi-du-ab-hospital	شفاخانه ولسوالی دوآب، احتمالاً. شفاخانۀ ولسوالی.	Hospital at Ruyi Du Ab district centre, probably Do-Ab District Hospital. District hospital.
-ui.fac.aybak-private-hospital	شفاخانه شخصی. شفاخانۀ خصوصی.	Private hospital, Aybak. Private hospital.
-ui.fac.aybak-arian-hospital	شفاخانه آرین. شفاخانۀ خصوصی.	Arian Hospital. Private hospital.
-ui.fac.aybak-faiz-clinic	کلینیک فیض. مرکز صحی.	Faiz Clinic. Health centre.
-ui.fac.aybak-alshifa-clinic	کلینیک معالجوی الشفا. مرکز صحی.	Al-Shifa Treatment Clinic. Health centre.
-ui.fac.aybak-dr-ahmadshah-same	دوکتور احمدشاه سامع. مرکز صحی.	Dr Ahmad Shah Same, private doctor. Health centre.
-ui.fac.aybak-dr-mohammad-azam-sahak	داکتر محمد اعظم سهاک. مرکز صحی.	Dr Mohammad Azam Sahak, private doctor. Health centre.
-ui.fac.aybak-dr-jamaluddin-qarin	الحاج دوکتور جمال‌الدین قرین. مرکز صحی.	Alhaj Dr Jamaluddin Qarin, private doctor. Health centre.
-ui.fac.aybak-dr-fateh-mohammad	دوکتور فتح محمد. مرکز صحی.	Dr Fateh Mohammad, private doctor. Health centre.
-ui.fac.aybak-dr-serajuddin-nazari	دوکتور سراج‌الدین نظری. مرکز صحی.	Dr Serajuddin Nazari, private doctor. Health centre.
-ui.fac.aybak-dr-mohammadullah-moradi	دوکتور محمدالله مرادی. مرکز صحی.	Dr Mohammadullah Moradi, private doctor. Health centre.
-ui.fac.aybak-dr-bazgul-jahangir	داکتر بازگل جهانگیر. مرکز صحی.	Dr Bazgul Jahangir, private doctor. Health centre.
-ui.fac.aybak-midwife-1	قابله دیپلومه. زایشگاه.	Diploma midwife, private. Maternity.
-ui.fac.aybak-midwife-parwin	قابله دیپلومه پروین. زایشگاه.	Diploma midwife Parwin, private. Maternity.
-ui.fac.aybak-ultrasound-forotan-rahimi	کلینیک تشخیصیه التراسوند فروتن رحیمی. مرکز صحی.	Forotan Rahimi Ultrasound Diagnostic Clinic. Health centre.
-ui.fac.aybak-fawad-digital-xray	فواد دیجیتال اکسری. مرکز صحی.	Fawad Digital X-ray. Health centre.
-ui.fac.aybak-hamkar-xray	اکسری همکار. مرکز صحی.	Hamkar X-ray. Health centre.
-ui.fac.aybak-medical-laboratory	لابراتوار طبی. مرکز صحی.	Medical laboratory. Health centre.
-ui.fac.aybak-physiotherapy-centre	مرکز فزیوتراپی. مرکز صحی.	Physiotherapy centre. Health centre.
-ui.fac.aybak-alshifa-eye-centre	مرکز صحی چشم الشفا. مرکز صحی.	Al-Shifa Eye Health Centre. Health centre.
-ui.fac.aybak-dental-1	کلینیک دندان. مرکز صحی.	Dental clinic. Health centre.
-ui.fac.aybak-dental-2	کلینیک دندان. مرکز صحی.	Dental clinic. Health centre.
-ui.fac.aybak-dental-nouri	کلینیک دندان نوری. مرکز صحی.	Nouri Dental Clinic. Health centre.
-ui.fac.aybak-dental-almakka	کلینیک دندان المکه. مرکز صحی.	Al-Makka Dental Clinic. Health centre.
-ui.fac.aybak-dental-jalalabad	کلینیک دندان جلال‌آباد. مرکز صحی.	Jalalabad Dental Clinic. Health centre.
-ui.fac.aybak-dental-maiwand	کلینیک دندان میوند. مرکز صحی.	Maiwand Dental Clinic. Health centre.
-ui.fac.aybak-dental-insaf	کلینیک دندان انصاف. مرکز صحی.	Insaf Dental Clinic. Health centre.
-ui.fac.aybak-dental-labkhand-zeba	کلینیک دندان لبخند زیبا. مرکز صحی.	Labkhand-e Zeba Dental Clinic. Health centre.
-ui.fac.mazar-regional-hospital	شفاخانه حوزوی بلخ، مزارشریف. شفاخانۀ ولایتی.	Balkh Regional Hospital, Mazar-i-Sharif, main referral hospital. Provincial hospital.
-ui.fac.balkh-district-hospital	شفاخانه ولسوالی بلخ. شفاخانۀ ولسوالی.	Balkh District Hospital. District hospital.
-ui.fac.mazar-kesha-farabi-hospital	شفاخانه کیشا فارابی. شفاخانۀ خصوصی.	Kesha Farabi Hospital, private. Private hospital.
-ui.fac.mazar-aamoon-eye-centre	مرکز چشم آمون. مرکز صحی.	Aamoon Ophthalmic Center. Health centre.
-ui.fac.mazar-parween-midwife-clinic	کلینیک قابله پروین. زایشگاه.	Parween Midwife Clinic. Maternity.
-ui.fac.mazar-noor-khuda-clinic	کلینیک نورخدا. مرکز صحی.	Noor Khuda Clinic. Health centre.
-ui.fac.mazar-razavie-pharmacy	دواخانه رضوی. دواخانه.	Razavie Pharmacy. Pharmacy.
-ui.fac.pul-e-khumri-hospital	شفاخانه پلخمری. شفاخانۀ ولایتی.	Pul-e-Khumri Hospital, Baghlan provincial hospital, probable. Provincial hospital.
-ui.fac.pul-e-khumri-nasaji-hospital	شفاخانه نساجی و پوهنتون حکیم سنایی. مرکز صحی.	Nasaji and Hakim Sanai University Hospital. Health centre.
-ui.fac.baghlan-jadid-district-hospital	شفاخانه ولسوالی مرکزی بغلان. شفاخانۀ ولسوالی.	Central District Hospital, Baghlan-e-Jadid. District hospital.
-ui.fac.bamyan-hospital	شفاخانه بامیان. شفاخانۀ ولایتی.	Bamyan Hospital. Provincial hospital.
-ui.fac.bamyan-old-hospital	شفاخانه قدیم بامیان. مرکز صحی.	Old Bamyan Hospital. Health centre.
+ui.fac.aybak-delkhaki-kokjar-bhc	کلینیک صحی اساسی دلخاکی و کوکجر. ایبک.	Delkhaki and Kokjar Basic Health Centre. Aybak.
+ui.fac.aybak-jowi-zendan-bhc	کلینیک صحی اساسی جوی زندان. ایبک.	Jowi Zendan Basic Health Centre. Aybak.
+ui.fac.aybak-private-al-makka-dental-clinic	کلینیک دندان المکه. داکتر دندان. ایبک.	Al-Makka Dental Clinic. Dentist. Aybak.
+ui.fac.aybak-private-al-shifa-eye-centre	مرکز صحی چشم الشفا. کلینیک چشم. ایبک.	Al-Shifa Eye Health Centre. Eye clinic. Aybak.
+ui.fac.aybak-private-al-shifa-treatment-clinic	کلینیک معالجوی الشفا. کلینیک خصوصی. ایبک.	Al-Shifa Treatment Clinic. Private clinic. Aybak.
+ui.fac.aybak-private-arian-hospital	شفاخانه آرین. شفاخانۀ خصوصی. ایبک.	Arian Hospital, private. Private hospital. Aybak.
+ui.fac.aybak-private-dental-clinic-8838139296	کلینیک دندان. داکتر دندان. ایبک.	Dental clinic, no name on the map. Dentist. Aybak.
+ui.fac.aybak-private-dental-clinic-8856550771	کلینیک دندان. داکتر دندان. ایبک.	Dental clinic, no name on the map. Dentist. Aybak.
+ui.fac.aybak-private-diploma-midwife	قابله دیپلومه. ایبک.	Diploma midwife, no name on the map. Aybak.
+ui.fac.aybak-private-dr-ahmad-shah-sameh	دوکتور احمدشاه سامع. کلینیک خصوصی. ایبک.	Dr Ahmad Shah Sameh, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-dr-bazgul-jahangir	داکتر بازگل جهان گیر. کلینیک خصوصی. ایبک.	Dr Bazgul Jahangir, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-dr-fateh-mohammad	دوکتور فتح محمد. کلینیک خصوصی. ایبک.	Dr Fateh Mohammad, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-dr-jamaluddin-qarin	الحاج دوکتور جمال الدین قرین. کلینیک خصوصی. ایبک.	Alhaj Dr Jamaluddin Qarin, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-dr-mohammad-azam-sahak	داکتر محمد اعظم سهاک. کلینیک خصوصی. ایبک.	Dr Mohammad Azam Sahak, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-dr-mohammadullah-moradi	دوکتور محمد الله مرادی. کلینیک خصوصی. ایبک.	Dr Mohammadullah Moradi, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-dr-serajuddin-nazari	دوکتور سراج الدین نظری. کلینیک خصوصی. ایبک.	Dr Serajuddin Nazari, private doctor. Private clinic. Aybak.
+ui.fac.aybak-private-faiz-clinic	کلینیک فیض. کلینیک خصوصی. ایبک.	Faiz Clinic. Private clinic. Aybak.
+ui.fac.aybak-private-fawad-digital-x-ray	فواد دیجیتال اکسری. ایبک.	Fawad Digital X-ray. Aybak.
+ui.fac.aybak-private-frotan-rahimi-ultrasound-clinic	کلینیک تشخیصیه التراسوند فروتن رحیمی. ایبک.	Frotan Rahimi Ultrasound Diagnostic Clinic. Aybak.
+ui.fac.aybak-private-hamkar-x-ray	اکسری همکار. ایبک.	Hamkar X-ray. Aybak.
+ui.fac.aybak-private-insaf-dental-clinic	کلینیک دندان انصاف. داکتر دندان. ایبک.	Insaf Dental Clinic. Dentist. Aybak.
+ui.fac.aybak-private-jalalabad-dental-clinic	کلینیک دندان جلال آباد. داکتر دندان. ایبک.	Jalalabad Dental Clinic. Dentist. Aybak.
+ui.fac.aybak-private-labkhand-e-zeba-dental-clinic	کلینیک دندان لبخند زیبا. داکتر دندان. ایبک.	Labkhand-e Zeba Dental Clinic. Dentist. Aybak.
+ui.fac.aybak-private-maiwand-dental-clinic	کلینیک دندان میوند. داکتر دندان. ایبک.	Maiwand Dental Clinic. Dentist. Aybak.
+ui.fac.aybak-private-medical-laboratory	طبی لابراتوار. ایبک.	Medical laboratory. Aybak.
+ui.fac.aybak-private-noori-dental-clinic	کلینیک دندان نوری. داکتر دندان. ایبک.	Noori Dental Clinic. Dentist. Aybak.
+ui.fac.aybak-private-parween-midwife	دیپلومه قابله پروین. ایبک.	Parween, diploma midwife. Aybak.
+ui.fac.aybak-private-physiotherapy-centre	مرکز فزیوتراپی. ایبک.	Physiotherapy centre. Aybak.
+ui.fac.aybak-private-private-hospital-8838139282	شفاخانه شخصی. شفاخانۀ خصوصی. ایبک.	Private hospital, no name on the map. Aybak.
+ui.fac.aybak-provincial-hospital	شفاخانۀ ولایتی سمنگان، شفاخانه شهید داکتر اکرام‌الدین وکیل‌زاده. ایبک.	Samangan Provincial Hospital, Dr Ikramuddin Wakilzada Hospital. Aybak.
+ui.fac.aybak-rabatak-health-centre	مرکز صحی رباطک. ایبک.	Rabatak Health Centre. Aybak.
+ui.fac.aybak-tai-khanak-bhc	کلینیک صحی اساسی تای خانک. ایبک.	Tai Khanak Basic Health Centre. Aybak.
+ui.fac.hazrat-i-sultan-chc	کلینیک جامع صحی حضرت سلطان.	Hazrat-e-Sultan Comprehensive Health Centre. Hazrat-i-Sultan.
+ui.fac.hazrat-i-sultan-naiman-shc	مرکز صحی فرعی نایمن. حضرت سلطان.	Naiman Sub-Health Centre. Sub health centre. Hazrat-i-Sultan.
+ui.fac.feroz-nakhchir-bhc	کلینیک صحی اساسی فیروز نخچیر.	Feroz Nakhchir Basic Health Centre.
+ui.fac.khuram-wa-sarbagh-baba-qamber-shc	مرکز صحی فرعی بابا قنبر. خرم و سارباغ.	Baba Qamber Sub-Health Centre. Sub health centre. Khuram wa Sarbagh.
+ui.fac.ruyi-du-ab-ahangaran-bhc	کلینیک صحی اساسی آهنگران. روی دوآب.	Ahangaran Basic Health Centre. Ruyi Du Ab.
+ui.fac.ruyi-du-ab-do-ab-district-hospital	شفاخانۀ ولسوالی دوآب. روی دوآب.	Do-Ab District Hospital. Ruyi Du Ab.
+ui.fac.ruyi-du-ab-moho-bhc	کلینیک صحی اساسی موهو. روی دوآب.	Moho Basic Health Centre. Ruyi Du Ab.
+ui.fac.dara-i-suf-payin-bayanan-shc	مرکز صحی فرعی بیانان. دره صوف پایین.	Bayanan Sub-Health Centre. Sub health centre. Dara-i-Suf Payin.
+ui.fac.dara-i-suf-payin-dehi-district-hospital	شفاخانۀ ولسوالی دهی. دره صوف پایین.	Dehi District Hospital. Dara-i-Suf Payin.
+ui.fac.dara-i-suf-payin-toqsan-maqsood-chc	کلینیک جامع صحی توقسان مقصود. دره صوف پایین.	Toqsan Maqsood Comprehensive Health Centre. Dara-i-Suf Payin.
+ui.fac.dara-i-suf-bala-bazar-e-sokhta-district-hospital	شفاخانۀ ولسوالی بازار سوخته. دره صوف بالا.	Bazar-e-Sokhta District Hospital. Dara-i-Suf Bala.
+ui.fac.khulm-district-hospital	شفاخانۀ ولسوالی خلم.	Khulm District Hospital.
+ui.fac.khulm-logariha-shc	مرکز صحی فرعی لوگری‌ها. خلم.	Logariha Sub-Health Centre. Sub health centre. Khulm.
+ui.fac.khulm-oljato-shc	مرکز صحی فرعی اولجاتو. خلم.	Oljato Sub-Health Centre. Sub health centre. Khulm.
+ui.fac.khulm-qurghan-bhc	کلینیک صحی اساسی قرغان. خلم.	Qurghan Basic Health Centre. Khulm.
+ui.fac.khulm-sayad-shc	مرکز صحی فرعی صیاد. خلم.	Sayad Sub-Health Centre. Sub health centre. Khulm.
+ui.fac.unknown-balghali-phc	کلینیک صحی بلغلی، بالا و پایین. مرکز صحی.	Balghali Primary Health Care Clinic, Bala and Payeen. Health centre.
+ui.fac.unknown-dara-i-suf-bayan-bhc	کلینیک صحی اساسی بیان.	Bayan Basic Health Centre.
+ui.fac.outside-mazar-regional-hospital	شفاخانۀ حوزوی ابوعلی سینای بلخی، مزار شریف.	Mazar-i-Sharif Regional Hospital, Abu Ali Sina Balkhi.
+ui.fac.outside-msf-kunduz-trauma-centre	شفاخانۀ ترومای داکتران بدون سرحد، کندز.	MSF Kunduz Trauma Centre.
+ui.fac.outside-pul-e-khumri-provincial-hospital	شفاخانۀ ولایتی بغلان، پلخمری.	Baghlan Provincial Hospital, Pul-e-Khumri.
 ui.sym.notbreathing	نفس نمی‌کشد یا بی‌هوش است	Not breathing or unconscious
 ui.sym.cough	سرفه	Cough
 ui.sym.breathing	نفس تنگی	Breathing problems

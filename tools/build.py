@@ -90,15 +90,21 @@ for k, L in ui["say"].items(): say(k, L)
 if syndromes:
     for x in syndromes["syndromes"]:
         if x.get("active"): say(f"ui.syn.{x['id']}", x["ask"])
-# each place on the Nearest clinic list (content/src/facilities.json): its name and its kind, as its card shows them
-# (the speaker on its card). Brackets become a pause ("..., probably ..."): the voice reads the name as written, adds nothing.
+# each place on the Nearest clinic list (content/src/facilities.json): its name, its kind and its district, as its card
+# shows them (the speaker on its card); the kind or the district is left out when the name already says it. Brackets
+# become a pause ("..., probably ..."): the voice reads the name as written, adds nothing.
+fac_districts = {d["id"]: d["name"] for d in facilities.get("districts") or []}
 def place_line(f):
     kind = ui["text"].get("ft_" + (f.get("type") or "other")) or ui["text"]["ft_other"]
+    dist = None if f.get("outside") or f.get("district") == "unknown" else fac_districts.get(f.get("district"))
     out = {}
     for lg in LANGS:
         name = (f["name"].get(lg) or f["name"]["en"]).strip()
+        if lg != "en": name = re.sub(r"\s*\([A-Za-z0-9 .&-]+\)", "", name)  # "(MSF)": Latin letters the Dari and Pashto voices would spell out
         name = re.sub(r"\s*\(([^)]*)\)", ("، " if lg != "en" else ", ") + r"\1", name).strip().rstrip(".،,")
-        out[lg] = f"{name}. {kind[lg].strip()}."
+        k = "" if f.get("type") == "special" else kind[lg]  # a special place's name says what it is ("... trauma hospital")
+        parts = [name] + [w.strip() for w in [k, dist[lg] if dist else ""] if w.strip() and w.strip().lower() not in name.lower()]
+        out[lg] = ". ".join(parts) + "."
     return out
 for f in facilities.get("facilities") or []:
     if f.get("status") != "closed": say(f"ui.fac.{f['id']}", place_line(f))
@@ -329,7 +335,7 @@ book["packs"] = {"order": list(PACKS), "ids": pack_ids, "size": pack_size, "firs
 book["bundle"] = {"slots": [s for s in BUNDLE_SLOTS if audio.get(s)], "ids": first_ids}
 
 # precache list: everything the app needs offline except audio
-pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json",) if exists(p)]  # WHO growth tables (js/growth.js)
+pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json", "content/map.json") if exists(p)]  # WHO growth tables (js/growth.js); the clinic map (js/clinics.js)
 for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png", "img/symptoms/*.webp", "img/stills/*.webp"):
     pre += sorted(os.path.relpath(p, ROOT) for p in glob.glob(J(pat)))
 # js/cine/*.js is the CPR drawing kit and anim/cine/*.js the CPR versions built with it: js/anim.js loads anim/cine/<name>.js

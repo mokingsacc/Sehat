@@ -1,0 +1,119 @@
+/* The clinic map (#/near) and the check page (#/check): js/clinics.js.
+   Pins: blue = hospital, green = government clinic, purple = private (you pay); white with a broken edge = the village
+   or town is known, not the building. Red stays for Emergency only. */
+.cl-go{background:var(--teal)}
+.cl-go svg{width:24px;height:24px}
+.btn.cl-go.big{margin-top:16px}
+
+/* the map */
+.cmap{position:relative;direction:ltr;height:58vh;min-height:300px;max-height:460px;border-radius:18px;overflow:hidden;background:#ECE6D8;border:1px solid var(--line);touch-action:none;-webkit-user-select:none;user-select:none;margin:12px 0 8px}
+.cmap [hidden]{display:none!important}
+.cm-msg{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;color:var(--mute);font-size:15px}
+.cm-base{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0}
+.cm-land{fill:#ECE6D8}
+.cm-base path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.cm-w .w1{stroke:#5E9BCB;stroke-width:2.2}
+.cm-w .w2{stroke:#86B4DA;stroke-width:1.1}
+.cm-r .r4{stroke:#A69B88;stroke-width:1;stroke-dasharray:4 3}
+.cm-r .e3{stroke:#B5AA97;stroke-width:3.4}.cm-r .r3{stroke:#FFFDF8;stroke-width:2}
+.cm-r .e2{stroke:#B0812A;stroke-width:4.6}.cm-r .r2{stroke:#F4C95A;stroke-width:3}
+.cm-r .e1{stroke:#9A4A22;stroke-width:6}.cm-r .r1{stroke:#E98B3B;stroke-width:4}
+.z-far .cm-r .r4,.z-mid .cm-r .r4,.z-far .cm-r .e3,.z-far .cm-r .r3{display:none}
+
+/* names and pins: placed by js/clinics.js (a translate to the point) */
+.cm-labs,.cm-pins{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none}
+.cm-labs>*,.cm-pins>*{position:absolute;left:0;top:0}
+.cm-lab i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:#2B2925;border:1.5px solid #fff}
+.cm-lab b{position:absolute;left:0;top:11px;transform:translateX(-50%);white-space:nowrap;font-weight:700;font-size:13.5px;line-height:1.25;color:#2B2925;unicode-bidi:plaintext;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff,0 0 1px #fff}
+.cm-lab.district b,.cm-lab.city b{font-size:14.5px}
+.cm-lab.town b{font-size:12.5px;font-weight:600}
+.cm-lab.town i{width:6px;height:6px;left:-3px;top:-3px}
+.cm-lab.area b{top:-10px;font-size:15px;color:rgba(70,58,44,.55);letter-spacing:.04em;text-shadow:0 0 3px rgba(255,255,255,.8)}
+.z-xfar .cm-lab.town,.z-near .cm-lab.area{display:none}
+.cm-lab.v1,.cm-lab.v2,.cm-lab.v3{display:none}
+.z-vil .cm-lab.v1,.z-vil .cm-lab.v2,.z-vil .cm-lab.v3{display:block}
+.cm-lab.v1 i,.cm-lab.v2 i,.cm-lab.v3 i{width:5px;height:5px;left:-2.5px;top:-2.5px;background:#6B655E;border-width:1px}
+.cm-lab.v1 b,.cm-lab.v2 b,.cm-lab.v3 b{top:5px;font-size:11.5px;font-weight:500;color:#4A453E}
+.cm-lab.v1 b{font-size:12.5px;font-weight:600}
+.cm-lab.off{display:none}
+
+.pin{--kc:#1D5FA8;pointer-events:auto;position:absolute;width:32px;height:32px;margin:-16px 0 0 -16px;padding:0;border-radius:999px;border:2.5px solid #fff;background:var(--kc);color:#fff;display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.35);font:inherit;font-weight:700;font-size:13px;line-height:1;cursor:pointer}
+.pin::after{content:'';position:absolute;top:-8px;right:-8px;bottom:-8px;left:-8px;border-radius:999px} /* a bigger target for a finger */
+.pin svg{width:19px;height:19px}
+.pin.k-h{--kc:#1D5FA8}.pin.k-c{--kc:#2E7D4F}
+.pin.k-p{--kc:#7A4FA0;width:18px;height:18px;margin:-9px 0 0 -9px;border-width:2px}
+.pin.k-p b{font-size:10px}
+.pin.approx{background:#fff;color:var(--kc);border:2.5px dashed var(--kc)}
+.pin.sel{box-shadow:0 0 0 3px #fff,0 0 0 6px #22201D,0 2px 8px rgba(0,0,0,.4);z-index:2}
+.pin.dim{opacity:.4}
+.cm-me i{position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:#1A73E8;border:3px solid #fff;box-shadow:0 0 0 0 rgba(26,115,232,.55);animation:cm-me 2s ease-out infinite}
+@keyframes cm-me{0%{box-shadow:0 0 0 0 rgba(26,115,232,.55)}100%{box-shadow:0 0 0 18px rgba(26,115,232,0)}}
+
+.cm-ctl{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:8px;z-index:3}
+.cm-ctl button{width:46px;height:46px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 1px 4px rgba(0,0,0,.18);font-size:26px;font-weight:600;line-height:1;color:var(--ink);display:grid;place-items:center;padding:0}
+.cm-ctl svg{width:22px;height:22px}
+.cm-card{position:absolute;left:10px;right:10px;bottom:8px;z-index:4;background:var(--card);border-radius:16px;padding:10px 12px;box-shadow:0 4px 18px rgba(0,0,0,.25);font-size:15px}
+:root[dir=rtl] .cm-card{direction:rtl}
+.cm-card .fh{gap:8px}
+.cm-x{position:absolute;top:-14px;right:-4px;width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25);font-size:24px;line-height:1;color:var(--ink);padding:0;z-index:1} /* the corner, so the name has the room */
+:root[dir=rtl] .cm-x{right:auto;left:-4px}
+.cm-card .row2{margin-top:8px;flex-wrap:wrap}
+.cm-card .sbtn svg{width:18px;height:18px}
+
+/* the key under the map */
+.mkey{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 10px;margin:0 0 6px}
+.mkey .kk{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px}
+.mkey .kk span{display:inline-flex;align-items:center;gap:6px}
+
+/* the badge on a card (the same as its pin) */
+.fpin{--kc:#1D5FA8;width:34px;height:34px;border-radius:999px;background:var(--kc);color:#fff;display:inline-grid;place-items:center;flex:0 0 auto;font-style:normal;font-weight:700;font-size:15px;line-height:1;border:2px solid var(--kc)}
+.fpin svg{width:20px;height:20px}
+.fpin.k-c{--kc:#2E7D4F}.fpin.k-p{--kc:#7A4FA0}
+.mkey .fpin{width:26px;height:26px}.mkey .fpin svg{width:16px;height:16px}
+.mkey .fpin.k-p{width:14px;height:14px}
+.fpin.approx{background:#fff;color:var(--kc);border:2px dashed var(--kc)}
+
+/* the district buttons */
+.dchips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.dchip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;font:inherit;font-size:15.5px;min-height:44px;color:var(--ink)}
+.dchip[aria-pressed=true]{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
+.dsub{font-size:15.5px;color:var(--teal-d);margin:14px 2px 2px}
+
+/* the cards */
+.fac .fname{flex:1 1 auto;min-width:0;line-height:1.4}
+.fsub{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px}
+.fsub .dist{font-size:15px}
+.fac.sel{box-shadow:0 0 0 3px var(--teal) inset}
+.fac .row2{flex-wrap:wrap;margin-top:8px}
+.fac .sbtn svg{width:18px;height:18px}
+.approxline{font-size:13.5px;color:var(--amber);font-weight:600;margin-top:2px}
+.ftrow{margin-top:4px}
+.ftrust{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--mute)}
+.ftrust.ok{color:var(--green);font-weight:700}
+.ftrust .ic{width:16px;height:16px}
+
+/* the check page */
+.chq{display:flex;align-items:center;gap:10px;margin-top:12px}
+.chq b{flex:1 1 auto;font-size:16.5px}
+.yn{display:flex;gap:8px;margin-top:6px}
+.ynb{flex:1 1 0;min-height:54px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);font:inherit;font-size:17px;font-weight:700;color:var(--ink);padding:4px 6px;line-height:1.25}
+.ynb.yes[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}
+.ynb.no[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.ynb.dk[aria-pressed=true]{background:#857D72;border-color:#857D72;color:#fff}
+.chkrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.sbtn.here{display:inline-flex;align-items:center;gap:6px;min-height:48px;font-size:15.5px}
+.sbtn.here.done{background:var(--green)}
+.sbtn.here[disabled]{opacity:.6}
+.chkmsg{flex-basis:100%;display:flex;align-items:center;gap:6px;font-size:14px;color:var(--green);font-weight:600}
+.chkmsg.warn{color:var(--amber)}
+.chkmsg .ic{width:18px;height:18px}
+.notebtn{margin-top:10px}
+.chknote{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
+.chknote .grow{flex:1 1 auto;min-width:0}
+.chknote textarea{display:block;width:100%;font:inherit;font-size:17px;padding:8px 10px;border:1.5px solid var(--line);border-radius:12px;margin-top:4px;resize:vertical;background:#fff}
+.chkc .recbig{width:64px;height:64px;margin:0;flex:0 0 auto;background:var(--teal);box-shadow:0 4px 12px rgba(31,111,122,.35)}
+.chkc .recbig.on{background:#0E4F57}
+.chkc .recbig svg{width:28px;height:28px}
+.fac.chkc.done{border-color:var(--green);box-shadow:0 0 0 1px var(--green) inset}
+.fac.chkc.new{border-style:dashed}
+.chkq .ic{width:26px;height:26px;color:var(--green);flex:0 0 auto}

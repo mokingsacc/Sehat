@@ -78,6 +78,7 @@ const NAV = [
   ['/usage', 'nav.usage', () => true],
   ['/watch', 'nav.watch', () => true],
   ['/inbox', 'nav.inbox', () => true],
+  ['/checks', 'nav.checks', () => true],
   ['/data', 'nav.data', () => true],
   ['/admin', 'nav.editor', () => true],
   ['/audit', 'nav.audit', (me) => me.role === 'owner'],
@@ -91,7 +92,7 @@ function langHref(url, lg) {
   return u.pathname + u.search;
 }
 
-// One page: { url, me, lang, title, active, body, nonce, csrf, script, wide }
+// One page: { url, me, lang, title, active, body, nonce, csrf, script, wide, footer (in place of the usual privacy line) }
 export function shell(o) {
   const { me, lang, url, nonce } = o;
   const dir = RTL[lang] ? 'rtl' : 'ltr';
@@ -107,7 +108,7 @@ export function shell(o) {
 <form method="post" action="/signout" class="noprint" style="margin:0"><input type="hidden" name="csrf" value="${esc(o.csrf || '')}"><button class="link" type="submit">${esc(t(lang, 'signout'))}</button></form></div></div>
 <nav class="tabs" aria-label="${esc(t(lang, 'nav.menu'))}">${nav}</nav></header>
 <main id="main">${o.body}</main>
-<footer class="foot">${esc(t(lang, 'footer'))} ${esc(t(lang, 'logged'))}</footer>
+<footer class="foot">${esc(o.footer || t(lang, 'footer'))} ${esc(t(lang, 'logged'))}</footer>
 ${o.script ? `<script nonce="${nonce}">var __name = (f) => f;\n${o.script}</script>` : ''}</body></html>`;
 }
 

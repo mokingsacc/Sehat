@@ -26,13 +26,14 @@ export async function overview(env, url, me, ctx) {
   const one = (sql, ...a) => safe(env.DB.prepare(sql).bind(...a).first(), null);
   const all = (sql, ...a) => safe(env.DB.prepare(sql).bind(...a).all().then((r) => r.results || []), []);
   const dF = q.district ? ' AND district = ?' : '', dA = q.district ? [q.district] : [];
-  const [raw, weeksUse, legacyInst, fb, fresh, wk] = await Promise.all([
+  const [raw, weeksUse, legacyInst, fb, fresh, wk, chk] = await Promise.all([
     USAGE.load(env, q),
     all(`SELECT ${R.WEEK_SQL('day')} wk, SUM(devices) dd FROM usage_daily WHERE page = '_day' AND day >= ?${dF} GROUP BY wk ORDER BY wk`, SURV.weekStart(from12), ...dA),
     one('SELECT COUNT(*) n FROM installs'),
     one('SELECT COUNT(*) n FROM feedback WHERE ts >= ?', now - q.days * DAY),
     Promise.all([one("SELECT MAX(day) d FROM usage_daily WHERE page = '_day'"), one('SELECT MAX(received_ts) t FROM surv_reports'), one('SELECT MAX(ts) t FROM feedback')]),
     safe(SURV.weekly(env, { from: from12, to: cur, syndrome: null, place: null }), { rows: [], signals: [] }),
+    one('SELECT COUNT(*) n FROM checks WHERE ts >= ?', now - 7 * DAY), // answers from the app's "Check the clinics" page (/checks)
   ]);
   const v = raw.ok ? USAGE.view(raw, q) : null;
   const k = v ? v.kpi : null;
@@ -67,6 +68,7 @@ ${kpi(t(lang, 'kpi.minutes'), k ? (small(k.phoneDays) ? '<5' : fmtN(k.seconds / 
 ${kpi(t(lang, 'kpi.alerts'), String(recent.length), t(lang, 'kpi.alertsSub'), recent.length ? 'alert' : '', '/watch')}
 ${kpi(t(lang, 'kpi.reports'), show(reports4), t(lang, 'kpi.reportsSub'), '', '/watch')}
 ${kpi(t(lang, 'kpi.feedback'), fmtN((fb && +fb.n) || 0), t(lang, 'kpi.feedbackSub'), '', '/inbox')}
+${kpi(t(lang, 'kpi.checks'), fmtN((chk && +chk.n) || 0), t(lang, 'kpi.checksSub'), '', '/checks')}
 </div>`;
   // alerts and the map
   body += `<div class="grid">

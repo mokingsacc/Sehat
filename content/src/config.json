@@ -245,6 +245,8 @@
   "_quickTools": "Tool rows added by features (id, link, icon, ui text key for the label, narration id). growth: the growth tracker (js/growth.js).",
   "feedbackUrl": "https://sehat.mobinkingsacc.workers.dev/feedback",
   "_feedbackUrl": "The Cloudflare Worker /feedback address (same server as analyticsUrl).",
+  "checkUrl": "https://sehat.mobinkingsacc.workers.dev/check",
+  "_checkUrl": "The Cloudflare Worker /check address: the answers from the Check the clinics page (#/check). Same server.",
   "contentUrl": "https://sehat.mobinkingsacc.workers.dev",
   "_contentUrl": "The Cloudflare Worker address (no /e at the end), e.g. https://family-health-book.<you>.workers.dev. When set, phones also download the book published from the dashboard editor (/admin) when they are online. Empty = only the book built into the app.",
   "urgentTopics": [

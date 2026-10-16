@@ -3,7 +3,8 @@
 //    save times existed, then "Bring in app changes" after content merge 2, gave 73 errors ("The safety list names
 //    "home-safety", but there is no such topic"); the editor now moves such a draft over without losing the app's pages;
 // 2. the app updated while the editor is open; changes saved part by part; a stale window;
-// 3. the computer time each editor request takes on the whole book (the free plan allows about 10 ms a request).
+// 3. the computer time each editor request takes on the whole book (the free plan allows about 10 ms a request);
+// 4. the clinic list's new fields: where (a place with no position yet), districts from a list, confidence, checked.
 // Run: node tools/test_editor.mjs        (needs the git history for part 1; it is skipped without it)
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync, mkdtempSync, rmSync } from 'node:fs';
@@ -173,7 +174,7 @@ else {
   ok(x.status === 200 && st.units.length === 2, 'drop: back to the app\'s own version');
 
   // the app is updated: A2 changes topic X too (a fix), changes topic Y, and adds a page to the safety list
-  const A2 = clone(A1); A2.version = '2026.10.09-bbbbbb'; A2.built = '2026-10-09T00:00:00Z';
+  const A2 = clone(A1); A2.version = '2026.10.09-bbbbbb'; A2.built = new Date(Date.now() + 30000).toISOString(); // built after the editor's saves above
   const Y = 'fever'; A2.topics[Y].blocks[0].text.en = 'APP FIX Y';
   const newId = 'app-new-page'; A2.topics[newId] = { ...clone(A2.topics[A2.sections.safety[0]]), id: newId }; A2.topics[newId].blocks.forEach((b) => { b.id = b.id.replace(/^[^.]+/, newId); (b.items || []).forEach((it) => { it.id = it.id.replace(/^[^.]+/, newId); }); });
   A2.sections.safety.push(newId);
@@ -255,6 +256,39 @@ else {
   ok(med(T2.migrate) < 10, 'moving an old draft over stays under 10 ms a request', med(T2.migrate));
   for (const k of ['state', 'save (one topic)', 'check', 'publish', 'import (start again)']) ok(med(T[k]) < 10, `${k} stays under 10 ms of computer time`, med(T[k]));
   ok(st0 && true, 'measured');
+}
+
+/* ---------- 4. the clinic list: where, districts, and places with no position yet ---------- */
+{
+  const DIST = [{ id: 'aybak', name: { fa: 'ایبک', ps: 'ايبک', en: 'Aybak' } }, { id: 'khulm', name: { fa: 'خلم', ps: 'خلم', en: 'Khulm' } }];
+  const one = (o) => ({ ...clone(NEW.facilities.facilities.find((f) => f.lat != null && f.lon != null)), id: 'test-place', district: 'aybak', where: 'building', place: null, checked: '', outside: false, confidence: 'medium', ...o });
+  const book = (f, districts) => ({ topics: {}, sections: {}, narration: {}, config: {}, ui: NEW.ui, facilities: { ...(districts ? { districts } : {}), facilities: [f] } });
+  const errs = (f, districts = DIST) => CORE.checkBook(book(f, districts), true).errors.map((e) => e.msg).filter((m) => /^Place /.test(m));
+  ok(errs(one({})).length === 0, 'a place with the new fields passes', errs(one({})));
+  ok(errs(one({ where: 'none', lat: null, lon: null })).length === 0, 'where "none" with no latitude and longitude passes', errs(one({ where: 'none', lat: null, lon: null })));
+  ok(errs(one({ where: 'none', lat: 36.2, lon: 68.0 })).length === 0, 'where "none" may still have a position');
+  let e = errs(one({ where: 'building', lat: null, lon: null }));
+  ok(e.length === 1 && /location is wrong/.test(e[0]) && /set Where to "none"/.test(e[0]), 'no position with where "building" is refused, and says how to fix it', e);
+  e = errs(one({ where: 'none', lat: 36.2, lon: null }));
+  ok(e.length === 1 && /location is wrong/.test(e[0]), 'only one of the two numbers is refused, even with where "none"', e);
+  e = errs(one({ where: undefined, lat: null, lon: null }));
+  ok(e.length === 1 && /location is wrong/.test(e[0]) && errs(one({ where: undefined })).length === 0, 'a place from before "where" existed counts as "building"', e);
+  ok(errs(one({ where: 'gps' })).some((m) => /building, village, district or none/.test(m)), 'where must be one of the four');
+  ok(errs(one({ district: 'Aybak' })).some((m) => /district from the list/.test(m)) && errs(one({ district: 'Aybak' }), null).length === 0, 'with a district list the district must be one of its ids; without one, free text is fine');
+  ok(errs(one({ status: 'maybe' })).some((m) => /open, unknown or closed/.test(m)), 'status stays open, unknown or closed');
+  ok(errs(one({ confidence: 'sure' })).some((m) => /high, medium or low/.test(m)) && errs(one({ checked: '2 Nov' })).some((m) => /2026-11-02/.test(m)) && errs(one({ checked: '2026-11-02', place: { fa: 'بازار', ps: 'بازار', en: 'bazaar' } })).length === 0, 'confidence and the checked date');
+  // through the server: the places unit is saved and checked part by part (the app's district list is not in the part)
+  const D = d1(), env = mkEnv(D);
+  LIVE = NEW;
+  let x = await call(W, env, 'save', { units: { facilities: [one({ where: 'none', lat: null, lon: null })] }, prev: {}, base: { facilities: OV.fp(NEW.facilities.facilities) } });
+  let c = await call(W, env, 'check', {});
+  ok(x.status === 200 && c.body.errors.length === 0, 'the server saves and passes a place with where "none" and no position', c.body.errors);
+  const ts = (await call(W, env, 'state')).body.units.find((u) => u.k === 'facilities').ts;
+  x = await call(W, env, 'save', { units: { facilities: [one({ lat: null, lon: null })] }, prev: { facilities: ts }, base: { facilities: OV.fp(NEW.facilities.facilities) } });
+  c = await call(W, env, 'check', {});
+  ok(x.status === 200 && c.body.errors.some((m) => /location is wrong/.test(m.msg)), 'the server\'s check stops a building with no position', c.body.errors);
+  x = await call(W, env, 'publish', { app: { version: NEW.version }, audio: {} });
+  ok(x.status === 422, 'and publishing it is refused', x.status);
 }
 
 console.log(`editor tests: ${pass} passed, ${fail} failed`);

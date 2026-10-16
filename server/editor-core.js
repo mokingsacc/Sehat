@@ -30,6 +30,9 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
   const BELIEF_LEVELS = ['helps', 'unproven', 'harm'];
   const HOME_MODULES = { emergency: 'Emergency button (big, red: age picker, then first aid)', firstAid: 'CPR and first aid', children: 'Children (big picture button)', adults: 'Adults (big picture button)', share: 'Share Sehat', wellbeing: 'Well-being', install: 'Add to home screen banner', ask: 'Ask: symptom search', nextVaccine: 'Next vaccine due (when a child is added)', sections: 'Children and adults big pictures', quick: 'Quick buttons (vaccines, danger signs, my family, first aid)', near: 'Nearest clinic', feedback: 'Send feedback', disclaimer: 'Safety note', tools: 'Breathing counter and "what does the number mean?"', kit: 'Home health kit', safety: 'Home safety', hospital: 'Going to the clinic or hospital', checks: 'Early signs and health checks', 'food-help': 'Food that helps (what is true)', food: 'Food and garden', sendApp: 'Send the app to another phone (Android app only)' };
   const STATUSES = ['open', 'unknown', 'closed'];
+  // places (content/src/facilities.json): how well the position is known (none = no position yet), and how sure the list is
+  const WHERES = ['building', 'village', 'district', 'none'];
+  const CONFIDENCES = ['high', 'medium', 'low'];
   const LN = { fa: 'Dari', ps: 'Pashto', en: 'English' };
 
   const sayL = (L) => Object.fromEntries(LANGS.map((lg) => [lg, String((L && L[lg]) || '').trim()]));
@@ -244,6 +247,8 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
     }
     for (const [k, L] of Object.entries(b.narration || {})) if (k.startsWith('ui.')) checkL(`Spoken line "${k}"`, L);
     // places
+    // districts: ids from book.facilities.districts when the book has that list (an older book has free-text districts)
+    const dl = (b.facilities || {}).districts, dids = Array.isArray(dl) ? new Set(dl.map((d) => d && d.id)) : null;
     const fids = new Set(), ftypes = Object.keys(b.ui || {}).filter((k) => k.startsWith('ft_')).map((k) => k.slice(3)), svcs = Object.keys(b.ui || {}).filter((k) => k.startsWith('svc_')).map((k) => k.slice(4));
     ((b.facilities || {}).facilities || []).forEach((f, n) => {
       if (!f || typeof f !== 'object') { E(`Place ${n + 1}: the place is empty.`); return; }
@@ -251,8 +256,17 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
       if (typeof f.id !== 'string' || !ID_RE.test(f.id)) E(`${w}: bad id.`); else if (fids.has(f.id)) E(`${w}: the id "${f.id}" is used twice.`);
       fids.add(f.id);
       checkL(`${w} › name`, f.name);
-      if (typeof f.lat !== 'number' || typeof f.lon !== 'number' || !isFinite(f.lat) || !isFinite(f.lon) || Math.abs(f.lat) > 90 || Math.abs(f.lon) > 180) E(`${w}: the location is wrong. Latitude must be a number between -90 and 90 and longitude between -180 and 180 (Samangan is about 36, 68).`);
+      // a place from before "where" existed always had a position, so it counts as "building"
+      const where = f.where == null ? 'building' : f.where;
+      if (!WHERES.includes(where)) E(`${w}: "Where" must be building, village, district or none (how well the position is known).`);
+      // no position at all is allowed only when "Where" says so; otherwise both numbers, in range
+      if (!(where === 'none' && f.lat == null && f.lon == null) && (typeof f.lat !== 'number' || typeof f.lon !== 'number' || !isFinite(f.lat) || !isFinite(f.lon) || Math.abs(f.lat) > 90 || Math.abs(f.lon) > 180))
+        E(`${w}: the location is wrong. Latitude must be a number between -90 and 90 and longitude between -180 and 180 (Samangan is about 36, 68).${where === 'none' ? ' Or leave both empty.' : ' If nobody knows where it is yet, set Where to "none" and leave both empty.'}`);
       if (!STATUSES.includes(f.status)) E(`${w}: status must be open, unknown or closed.`);
+      if (dids && !dids.has(f.district)) E(`${w}: choose its district from the list.`);
+      if (f.confidence != null && f.confidence !== '' && !CONFIDENCES.includes(f.confidence)) E(`${w}: confidence must be high, medium or low.`);
+      if (f.checked != null && f.checked !== '' && !/^\d{4}-\d{2}-\d{2}$/.test(String(f.checked))) E(`${w}: "Checked" must be a date like 2026-11-02, or empty.`);
+      if (f.place != null && (typeof f.place !== 'object' || Array.isArray(f.place))) E(`${w}: the village or landmark must be three names (Dari, Pashto, English) or nothing.`);
       if (ftypes.length && !ftypes.includes(f.type || 'other')) E(`${w}: "${f.type}" is not a known type of place.`);
       for (const s of f.services || []) if (svcs.length && !svcs.includes(s)) E(`${w}: "${s}" is not a known service.`);
     });
@@ -325,6 +339,6 @@ heart stroke-face bp sugar foot lungs mask window weight-loss lump urine-blood s
   const unitName = (k) => (k.startsWith('topic:') ? 'topic ' + k.slice(6) : k.startsWith('list:') ? 'topic list ' + k.slice(5) : k.startsWith('ui:') ? 'words ' + k.slice(3)
     : k.startsWith('say:') ? 'spoken line ' + k.slice(4) : k.startsWith('search:') ? 'search words ' + k.slice(7) : k === 'home' ? 'home screen' : k === 'facilities' ? 'places' : k);
 
-  return { LANGS, SLOTS, PACKS, URGENT_TOPICS, SECTIONS, PAGE_LISTS, LISTS, TOOLS, LINK_RE, ID_RE, TOPIC_ID_RE, ICONS, ICON_SET, BLOCK_TYPES, BELIEF_LEVELS, HOME_MODULES, STATUSES,
+  return { LANGS, SLOTS, PACKS, URGENT_TOPICS, SECTIONS, PAGE_LISTS, LISTS, TOOLS, LINK_RE, ID_RE, TOPIC_ID_RE, ICONS, ICON_SET, BLOCK_TYPES, BELIEF_LEVELS, HOME_MODULES, STATUSES, WHERES, CONFIDENCES,
     sayL, hasText, cleanL, animNeeded, animBlockIds, topicNarration, rebuildNarration, normAudio, packIds, checkBook, cleanUnit, unitName, draftOf, oldChanges };
 }

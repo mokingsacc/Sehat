@@ -104,7 +104,8 @@ async function underLimit(env, now) {
 // Flood protection by the day: rows (or bytes) each anonymous endpoint may write per UTC day, all phones together.
 // A day's allowance used up = "busy" (HTTP 429) until 00:00 UTC; the phones keep what they have and send it later.
 // Allowances can be raised in wrangler.toml [vars] (for example on a paid Cloudflare plan); see docs/ABOUT.md.
-export const DAY_LIMITS = { u: ['USAGE_ROWS_PER_DAY', 40000], r: ['SURV_ROWS_PER_DAY', 10000], fb: ['FEEDBACK_PER_DAY', 300], fba: ['FEEDBACK_AUDIO_BYTES_PER_DAY', 5_000_000] };
+export const DAY_LIMITS = { u: ['USAGE_ROWS_PER_DAY', 40000], r: ['SURV_ROWS_PER_DAY', 10000], fb: ['FEEDBACK_PER_DAY', 300], fba: ['FEEDBACK_AUDIO_BYTES_PER_DAY', 5_000_000],
+  chk: ['CHECKS_PER_DAY', 2000], chka: ['CHECK_AUDIO_BYTES_PER_DAY', 5_000_000] };
 export async function spend(env, kind, n, now = Date.now()) {
   const [name, dflt] = DAY_LIMITS[kind], max = +env[name] > 0 ? +env[name] : dflt;
   try {
@@ -236,6 +237,7 @@ export async function cleanup(env, now = nowMs(env)) {
   const out = {};
   const run = async (name, sql, ...a) => { try { out[name] = changes(await env.DB.prepare(sql).bind(...a).run()); } catch (e) { out[name] = 'error: ' + (e && e.message); } };
   await run('voiceNotesDeleted', 'UPDATE feedback SET audio = NULL WHERE audio IS NOT NULL AND ts < ?', now - AUDIO_DAYS * DAY);
+  await run('checkVoiceNotesDeleted', 'UPDATE checks SET audio = NULL WHERE audio IS NOT NULL AND ts < ?', now - AUDIO_DAYS * DAY);
   await run('feedbackUnlinked', 'UPDATE feedback SET iid = NULL WHERE iid IS NOT NULL');
   await run('rawEventsDeleted', 'DELETE FROM events WHERE ts < ?', now - RAW_DAYS * DAY);
   await run('uploadIdsDeleted', 'DELETE FROM usage_seen WHERE ts < ?', now - SEEN_DAYS * DAY);
@@ -467,6 +469,7 @@ export function privacyPage() {
 <li><b>Installs</b> are counted with one message when the app is first used, with no id.</li>
 <li><b>Disease watch</b> (if you say someone at home has an illness that spreads): the illness, the district, an age group and the day. The phone uses a random number that changes every month so a report sent twice is not counted twice.</li>
 <li><b>Voice and written ideas</b> you send: the app asks before recording. They are not linked to you or your phone. Phone numbers are removed from writing. Voice recordings are deleted from the server after ${AUDIO_DAYS} days.</li>
+<li><b>Checking the clinics</b> (only if you open the "Check the clinics" page and answer): for each place you answer, whether it is open and whether it is in the right place on the map, and a written or voice note if you make one. Only when you press "I am at this place now" does the phone send where it is at that moment. Nothing that names you is sent; the app asks you not to write your own name or phone number. Voice recordings are deleted from the server after ${AUDIO_DAYS} days.</li>
 <li><b>Who can see it:</b> only the Sehat team, each with their own link. Every time someone opens the dashboard, listens to a voice note or downloads data, it is written in an access log (who, what, when).</li>
 <li><b>Small numbers are hidden:</b> any number made from fewer than ${MIN_CELL} phone-days is shown as "&lt;${MIN_CELL}", because small numbers in a village can identify a family.</li>
 <li><b>How long:</b> daily totals are kept to see change over time. Older detailed records from earlier versions of the app are deleted after 12 months.</li>

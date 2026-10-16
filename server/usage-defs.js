@@ -365,6 +365,7 @@ export default {
    "ui.privacy.usage",
    "ui.privacy.watchOn",
    "ui.privacy.voice",
+   "ui.privacy.check",
    "ui.privacy.who",
    "ui.privacy.stop"
   ],
@@ -388,6 +389,11 @@ export default {
     "fa": "نظر شما: پیش از ثبت صدای شما، از شما می‌پرسیم. پیام‌ها به شما وصل نیستند. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند. لطفاً نام یا شمارۀ تلیفون نگویید و ننویسید؛ برنامه شمارۀ تلیفون را از نوشته پاک می‌کند.",
     "ps": "ستاسو نظر: ستاسو د غږ له ثبتولو مخکې پوښتنه کوو. پیغامونه له تاسو سره نه تړل کېږي. غږیز پیغامونه له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ او مه یې لیکئ؛ اپ د ټیلیفون شمېره له لیکنې څخه پاکوي.",
     "en": "Your ideas: we ask before recording your voice. Messages are not linked to you. Voice messages are deleted after 90 days. Please do not say or write names or phone numbers; the app removes phone numbers from writing."
+   },
+   "ui.privacy.check": {
+    "fa": "بررسی کلینیک‌ها: اگر از این صفحه استفاده کنید و «بفرست» را بزنید، جواب‌های شما دربارۀ هر جای، با پیام صوتی یا نوشتۀ شما اگر ساخته باشید، به تیم صحت می‌رود. فقط وقتی «من حالا این‌جا هستم» را بزنید، جای گوشی شما در همان لحظه با آن‌ها فرستاده می‌شود. چیزی که نام شما را نشان دهد فرستاده نمی‌شود. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند.",
+    "ps": "د کلینیکونو کتنه: که دا پاڼه وکاروئ او «ولېږه» ووهئ، د هر ځای په اړه ستاسو ځوابونه، او که مو غږیز یا لیکلی یادښت جوړ کړی وي هغه هم، د صحت ټیم ته ځي. یوازې کله چې «زه اوس دلته یم» ووهئ، په هماغه شېبه کې ستاسو د ټیلیفون ځای ورسره لېږل کېږي. هېڅ داسې شی نه لېږل کېږي چې ستاسو نوم وښيي. غږیز پیغامونه له ۹۰ ورځو وروسته پاکېږي.",
+    "en": "Check the clinics: if you use this page and press Send, your answers about each place go to the Sehat team, with your voice or written note if you made one. Only when you press \"I am at this place now\" is the position of your phone at that moment sent with them. Nothing that names you is sent. Voice notes are deleted after 90 days."
    },
    "ui.privacy.who": {
     "fa": "فقط گروه صحت این شمار را می‌بیند، و هر بار که کسی آن را می‌بیند یا دانلود می‌کند، نوشته می‌شود. شمار کمتر از ۵ پنهان می‌شود تا هیچ خانواده‌ای شناخته نشود. معلومات مفصل کهنه بعد از ۱۲ ماه پاک می‌شود.",

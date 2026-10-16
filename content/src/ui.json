@@ -711,16 +711,6 @@
    "ps": "دا لېست لا بشپړ نه دی. د ایبک ولایتي روغتون او دولتي کلینیکونه به ژر ورزیات شي.",
    "en": "This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon."
   },
-  "nearHospitals": {
-   "fa": "شفاخانه‌ها",
-   "ps": "روغتونونه",
-   "en": "Hospitals"
-  },
-  "nearOther": {
-   "fa": "کلینیک‌ها و داکتران نزدیک",
-   "ps": "نږدې کلینیکونه او ډاکټران",
-   "en": "Nearby clinics and doctors"
-  },
   "voice": {
    "fa": "صدا",
    "ps": "غږ",
@@ -1330,6 +1320,376 @@
    "fa": "نام صفحه را می‌گوید؛ دو بار اول، این‌که برای چیست",
    "ps": "د پاڼې نوم وايي؛ لومړي دوه ځله، دا چې د څه لپاره ده",
    "en": "Says the page name; the first two times, what it is for"
+  },
+  "kmAbout": {
+   "fa": "حدود {n} کیلومتر",
+   "ps": "شاوخوا {n} کیلومتره",
+   "en": "about {n} km"
+  },
+  "wayVillage": {
+   "fa": "راه قریه",
+   "ps": "د کلي لار",
+   "en": "Way to the village"
+  },
+  "wayTown": {
+   "fa": "راه مرکز ولسوالی",
+   "ps": "د ولسوالۍ مرکز لار",
+   "en": "Way to the district centre"
+  },
+  "onMap": {
+   "fa": "روی نقشه",
+   "ps": "په نقشه کې",
+   "en": "On the map"
+  },
+  "allDistricts": {
+   "fa": "همه",
+   "ps": "ټول",
+   "en": "All"
+  },
+  "kindH": {
+   "fa": "شفاخانه",
+   "ps": "روغتون",
+   "en": "Hospital"
+  },
+  "kindC": {
+   "fa": "کلینیک دولتی",
+   "ps": "دولتي کلینیک",
+   "en": "Government clinic"
+  },
+  "kindP": {
+   "fa": "خصوصی (پولی)",
+   "ps": "خصوصي (پیسې اخلي)",
+   "en": "Private (you pay)"
+  },
+  "kindApprox": {
+   "fa": "ساختمان هنوز معلوم نیست",
+   "ps": "ودانۍ لا نه ده معلومه",
+   "en": "Building not known yet"
+  },
+  "kindHs": {
+   "fa": "شفاخانه‌ها",
+   "ps": "روغتونونه",
+   "en": "Hospitals"
+  },
+  "kindCs": {
+   "fa": "کلینیک‌های دولتی",
+   "ps": "دولتي کلینیکونه",
+   "en": "Government clinics"
+  },
+  "kindOs": {
+   "fa": "شفاخانه‌های بزرگ بیرون از سمنگان",
+   "ps": "له سمنګان بهر لوی روغتونونه",
+   "en": "Big hospitals outside Samangan"
+  },
+  "kindPs": {
+   "fa": "جاهای خصوصی (پولی)",
+   "ps": "خصوصي ځایونه (پیسې اخلي)",
+   "en": "Private places (you pay)"
+  },
+  "showPrivate": {
+   "fa": "نشان دادن جاهای خصوصی ({n})",
+   "ps": "خصوصي ځایونه وښایه ({n})",
+   "en": "Show private places ({n})"
+  },
+  "hidePrivate": {
+   "fa": "پنهان کردن جاهای خصوصی",
+   "ps": "خصوصي ځایونه پټ کړه",
+   "en": "Hide private places"
+  },
+  "mapLoading": {
+   "fa": "نقشه باز می‌شود…",
+   "ps": "نقشه پرانیستل کېږي…",
+   "en": "Opening the map…"
+  },
+  "mapFail": {
+   "fa": "نقشه باز نشد. فهرست پایین است.",
+   "ps": "نقشه پرانیستل نه شوه. لېست لاندې دی.",
+   "en": "The map could not open. The list is below."
+  },
+  "zoomIn": {
+   "fa": "نزدیک‌تر",
+   "ps": "نږدې",
+   "en": "Closer"
+  },
+  "zoomOut": {
+   "fa": "دورتر",
+   "ps": "لرې",
+   "en": "Further"
+  },
+  "mapAll": {
+   "fa": "تمام سمنگان",
+   "ps": "ټول سمنګان",
+   "en": "All of Samangan"
+  },
+  "more": {
+   "fa": "بیشتر",
+   "ps": "نور",
+   "en": "More"
+  },
+  "facChecked": {
+   "fa": "مردم سمنگان آن را تأیید کرده‌اند: {d}",
+   "ps": "د سمنګان خلکو تایید کړی: {d}",
+   "en": "Checked by people in Samangan: {d}"
+  },
+  "facNews": {
+   "fa": "هنوز بررسی نشده. آخرین خبر: {d}",
+   "ps": "لا نه دی کتل شوی. وروستی خبر: {d}",
+   "en": "Not checked yet. Latest news: {d}"
+  },
+  "facNotChecked": {
+   "fa": "هنوز بررسی نشده",
+   "ps": "لا نه دی کتل شوی",
+   "en": "Not checked yet"
+  },
+  "facNearVillage": {
+   "fa": "در این قریه یا نزدیک آن. جای دقیق ساختمان هنوز معلوم نیست.",
+   "ps": "په دې کلي کې یا ورسره نږدې. د ودانۍ سم ځای لا نه دی معلوم.",
+   "en": "In or near this village. The exact building is not known yet."
+  },
+  "facInTown": {
+   "fa": "در مرکز ولسوالی. جای دقیق ساختمان هنوز معلوم نیست.",
+   "ps": "د ولسوالۍ په مرکز کې. د ودانۍ سم ځای لا نه دی معلوم.",
+   "en": "In the district centre. The exact building is not known yet."
+  },
+  "facPlaceUnknown": {
+   "fa": "هنوز روی نقشه نیست: جای دقیق آن را نمی‌دانیم.",
+   "ps": "لا په نقشه کې نه دی: سم ځای یې نه پوهېږو.",
+   "en": "Not on the map yet: we do not know exactly where it is."
+  },
+  "noFacilitiesHere": {
+   "fa": "هنوز جایی در این ولسوالی نیست.",
+   "ps": "په دې ولسوالۍ کې لا کوم ځای نشته.",
+   "en": "No places in this district yet."
+  },
+  "nearHere": {
+   "fa": "نزدیک‌ترین‌ها به شما",
+   "ps": "تاسو ته تر ټولو نږدې",
+   "en": "Nearest to you"
+  },
+  "nearUnplaced": {
+   "fa": "در {d} هم، هنوز روی نقشه نیست",
+   "ps": "په {d} کې هم، لا په نقشه کې نه دي",
+   "en": "Also in {d}, not on the map yet"
+  },
+  "nearFar": {
+   "fa": "شما از سمنگان دور هستید. فاصله‌ها از جای فعلی شما است.",
+   "ps": "تاسو له سمنګان لرې یاست. واټنونه ستاسو له اوسني ځای څخه دي.",
+   "en": "You are far from Samangan. The distances are from where you are now."
+  },
+  "checkTitle": {
+   "fa": "بررسی کلینیک‌ها",
+   "ps": "د کلینیکونو کتنه",
+   "en": "Check the clinics"
+  },
+  "chk_yes": {
+   "fa": "بلی",
+   "ps": "هو",
+   "en": "Yes"
+  },
+  "chk_no": {
+   "fa": "نخیر",
+   "ps": "نه",
+   "en": "No"
+  },
+  "chk_dk": {
+   "fa": "نمی‌دانم",
+   "ps": "نه پوهېږم",
+   "en": "I don't know"
+  },
+  "chkOpen": {
+   "fa": "آیا حالا باز است؟",
+   "ps": "آیا اوس خلاص دی؟",
+   "en": "Is it open now?"
+  },
+  "chkPin": {
+   "fa": "آیا روی نقشه در جای درست است؟",
+   "ps": "آیا په نقشه کې په سم ځای کې دی؟",
+   "en": "Is it in the right place on the map?"
+  },
+  "chkHere": {
+   "fa": "من حالا این‌جا هستم",
+   "ps": "زه اوس دلته یم",
+   "en": "I am at this place now"
+  },
+  "chkHereOk": {
+   "fa": "جای شما ثبت شد (تا {n} متر)",
+   "ps": "ستاسو ځای ثبت شو (تر {n} مترو)",
+   "en": "Your place is saved (within {n} m)"
+  },
+  "chkHereWeak": {
+   "fa": "دقیق نیست ({n} متر). بیرون بروید و دوباره بزنید.",
+   "ps": "سم نه دی ({n} متره). بهر ووځئ او بیا یې ووهئ.",
+   "en": "Not exact ({n} m). Go outside and press again."
+  },
+  "chkNote": {
+   "fa": "چیزی بگویید یا بنویسید",
+   "ps": "یو څه ووایئ یا ولیکئ",
+   "en": "Say or write something"
+  },
+  "chkWrite": {
+   "fa": "این‌جا بنویسید. اگر شمارۀ تلیفون کلینیک را می‌دانید، بنویسید. نام یا شمارۀ خود را ننویسید.",
+   "ps": "دلته ولیکئ. که د کلینیک د ټیلیفون شمېره درته معلومه وي، ویې لیکئ. خپل نوم یا شمېره مه لیکئ.",
+   "en": "Write here. If you know the clinic's phone number, write it. Do not write your own name or number."
+  },
+  "chkMissing": {
+   "fa": "آیا جایی کم است؟",
+   "ps": "آیا کوم ځای پاتې دی؟",
+   "en": "Is a place missing?"
+  },
+  "chkMissingSub": {
+   "fa": "کلینیک، شفاخانه، قابله یا کارکن صحی که در فهرست نیست. نام و قریۀ آن را بگویید.",
+   "ps": "کلینیک، روغتون، قابله یا روغتیايي کارکوونکی چې په لېست کې نه دی. نوم او کلی یې ووایئ.",
+   "en": "A clinic, hospital, midwife or health worker that is not on the list. Say its name and village."
+  },
+  "chkSend": {
+   "fa": "جواب‌هایم را بفرست",
+   "ps": "زما ځوابونه ولېږه",
+   "en": "Send my answers"
+  },
+  "chkSendN": {
+   "fa": "جواب‌هایم را بفرست ({n} جای)",
+   "ps": "زما ځوابونه ولېږه ({n} ځایونه)",
+   "en": "Send my answers ({n} places)"
+  },
+  "chkSent": {
+   "fa": "فرستاده شد. تشکر!",
+   "ps": "ولېږل شول. مننه!",
+   "en": "Sent. Thank you!"
+  },
+  "chkSaved": {
+   "fa": "ذخیره شد. وقتی گوشی انترنت داشته باشد فرستاده می‌شود.",
+   "ps": "خوندي شول. کله چې ټیلیفون انټرنېټ ولري، لېږل کېږي.",
+   "en": "Saved. They will be sent when the phone has internet."
+  },
+  "chkWaiting": {
+   "fa": "{n} جواب منتظر انترنت است. خودشان فرستاده می‌شوند.",
+   "ps": "{n} ځوابونه د انټرنېټ په تمه دي. پخپله به ولېږل شي.",
+   "en": "{n} answers are waiting for internet. They will be sent by themselves."
+  },
+  "chkChooseDist": {
+   "fa": "ولسوالی خود را انتخاب کنید",
+   "ps": "خپله ولسوالي وټاکئ",
+   "en": "Choose your district"
+  },
+  "ft_regional-hospital": {
+   "fa": "شفاخانۀ حوزوی",
+   "ps": "سیمه‌ییز روغتون",
+   "en": "Regional hospital"
+  },
+  "ft_chc-plus": {
+   "fa": "کلینیک جامع صحی پلس",
+   "ps": "جامع روغتیايي مرکز پلس",
+   "en": "Comprehensive health centre plus"
+  },
+  "ft_fhh": {
+   "fa": "خانۀ صحی فامیل",
+   "ps": "د کورنۍ روغتیايي کور",
+   "en": "Family health house"
+  },
+  "ft_mht": {
+   "fa": "تیم سیار صحی",
+   "ps": "ګرځنده روغتیايي ټیم",
+   "en": "Mobile health team"
+  },
+  "ft_special": {
+   "fa": "مرکز صحی خاص",
+   "ps": "ځانګړی روغتیايي مرکز",
+   "en": "Special health centre"
+  },
+  "ft_private-clinic": {
+   "fa": "کلینیک خصوصی",
+   "ps": "خصوصي کلینیک",
+   "en": "Private clinic"
+  },
+  "ft_lab": {
+   "fa": "لابراتوار",
+   "ps": "لابراتوار",
+   "en": "Laboratory"
+  },
+  "ft_xray": {
+   "fa": "اکسری",
+   "ps": "اکسرې",
+   "en": "X-ray"
+  },
+  "ft_ultrasound": {
+   "fa": "التراسوند",
+   "ps": "الټراساونډ",
+   "en": "Ultrasound"
+  },
+  "ft_dental": {
+   "fa": "داکتر دندان",
+   "ps": "د غاښونو ډاکټر",
+   "en": "Dentist"
+  },
+  "ft_eye": {
+   "fa": "کلینیک چشم",
+   "ps": "د سترګو کلینیک",
+   "en": "Eye clinic"
+  },
+  "ft_physio": {
+   "fa": "فزیوتراپی",
+   "ps": "فزیوتراپي",
+   "en": "Physiotherapy"
+  },
+  "ft_midwife": {
+   "fa": "قابله",
+   "ps": "قابله",
+   "en": "Midwife"
+  },
+  "svc_caesarean": {
+   "fa": "عملیات سزارین",
+   "ps": "سیزیرین عملیات",
+   "en": "Caesarean"
+  },
+  "svc_newborn": {
+   "fa": "مراقبت نوزاد",
+   "ps": "د نوي ماشوم پاملرنه",
+   "en": "Newborn care"
+  },
+  "svc_children": {
+   "fa": "داکتر اطفال",
+   "ps": "د ماشومانو ډاکټر",
+   "en": "Children's doctor"
+  },
+  "svc_trauma": {
+   "fa": "زخمی‌ها",
+   "ps": "ټپیان",
+   "en": "Injuries"
+  },
+  "svc_ultrasound": {
+   "fa": "التراسوند",
+   "ps": "الټراساونډ",
+   "en": "Ultrasound"
+  },
+  "svc_mental-health": {
+   "fa": "صحت روان",
+   "ps": "رواني روغتیا",
+   "en": "Mental health"
+  },
+  "svc_dental": {
+   "fa": "دندان",
+   "ps": "غاښونه",
+   "en": "Teeth"
+  },
+  "svc_eye": {
+   "fa": "چشم",
+   "ps": "سترګې",
+   "en": "Eyes"
+  },
+  "svc_physio": {
+   "fa": "فزیوتراپی",
+   "ps": "فزیوتراپي",
+   "en": "Physiotherapy"
+  },
+  "svc_icu": {
+   "fa": "مراقبت ویژه",
+   "ps": "ځانګړې پاملرنه",
+   "en": "Intensive care"
+  },
+  "svc_pharmacy": {
+   "fa": "دوا",
+   "ps": "درمل",
+   "en": "Medicines"
   }
  },
  "say": {
@@ -2003,6 +2363,11 @@
    "ps": "ستاسو نظر: ستاسو د غږ له ثبتولو مخکې پوښتنه کوو. پیغامونه له تاسو سره نه تړل کېږي. غږیز پیغامونه له ۹۰ ورځو وروسته پاکېږي. مهرباني وکړئ نوم یا د ټیلیفون شمېره مه وایئ او مه یې لیکئ؛ اپ د ټیلیفون شمېره له لیکنې څخه پاکوي.",
    "en": "Your ideas: we ask before recording your voice. Messages are not linked to you. Voice messages are deleted after 90 days. Please do not say or write names or phone numbers; the app removes phone numbers from writing."
   },
+  "ui.privacy.check": {
+   "fa": "بررسی کلینیک‌ها: اگر از این صفحه استفاده کنید و «بفرست» را بزنید، جواب‌های شما دربارۀ هر جای، با پیام صوتی یا نوشتۀ شما اگر ساخته باشید، به تیم صحت می‌رود. فقط وقتی «من حالا این‌جا هستم» را بزنید، جای گوشی شما در همان لحظه با آن‌ها فرستاده می‌شود. چیزی که نام شما را نشان دهد فرستاده نمی‌شود. پیام‌های صوتی بعد از ۹۰ روز پاک می‌شوند.",
+   "ps": "د کلینیکونو کتنه: که دا پاڼه وکاروئ او «ولېږه» ووهئ، د هر ځای په اړه ستاسو ځوابونه، او که مو غږیز یا لیکلی یادښت جوړ کړی وي هغه هم، د صحت ټیم ته ځي. یوازې کله چې «زه اوس دلته یم» ووهئ، په هماغه شېبه کې ستاسو د ټیلیفون ځای ورسره لېږل کېږي. هېڅ داسې شی نه لېږل کېږي چې ستاسو نوم وښيي. غږیز پیغامونه له ۹۰ ورځو وروسته پاکېږي.",
+   "en": "Check the clinics: if you use this page and press Send, your answers about each place go to the Sehat team, with your voice or written note if you made one. Only when you press \"I am at this place now\" is the position of your phone at that moment sent with them. Nothing that names you is sent. Voice notes are deleted after 90 days."
+  },
   "ui.privacy.who": {
    "fa": "فقط گروه صحت این شمار را می‌بیند، و هر بار که کسی آن را می‌بیند یا دانلود می‌کند، نوشته می‌شود. شمار کمتر از ۵ پنهان می‌شود تا هیچ خانواده‌ای شناخته نشود. معلومات مفصل کهنه بعد از ۱۲ ماه پاک می‌شود.",
    "ps": "یوازې د صحت ډله دا شمېر ویني، او هر ځل چې څوک یې ګوري یا ښکته کوي، لیکل کېږي. له ۵ څخه کم شمېر پټېږي، څو هېڅ کورنۍ ونه پېژندل شي. زاړه تفصیلي معلومات له ۱۲ میاشتو وروسته پاکېږي.",
@@ -2117,21 +2482,6 @@
    "fa": "بزرگسال یا نوجوان",
    "ps": "لوی کس یا ځوان",
    "en": "Adult or teenager"
-  },
-  "ui.nearHospitals": {
-   "fa": "شفاخانه‌ها و قابله‌ها. برای شنیدن نام هر جای، دکمۀ بلندگوی کنار آن را بزنید. برای دیدن راه، «راه» را بزنید.",
-   "ps": "روغتونونه او قابلې. د هر ځای د نوم اورېدو لپاره، د هغه تر څنګ د سپیکر تڼۍ ووهئ. د لارې لیدو لپاره، «لار» ووهئ.",
-   "en": "Hospitals and midwives. Tap the speaker beside a place to hear its name. Tap Directions to see the way."
-  },
-  "ui.nearOther": {
-   "fa": "کلینیک‌ها و داکتران نزدیک.",
-   "ps": "نږدې کلینیکونه او ډاکټران.",
-   "en": "Nearby clinics and doctors."
-  },
-  "ui.nearIncomplete": {
-   "fa": "این فهرست هنوز کامل نیست. شفاخانه ولایتی ایبک و کلینیک‌های دولتی به‌زودی اضافه می‌شوند.",
-   "ps": "دا لېست لا بشپړ نه دی. د ایبک ولایتي روغتون او دولتي کلینیکونه به ژر ورزیات شي.",
-   "en": "This list is not complete yet. Aybak provincial hospital and the public clinics will be added soon."
   },
   "ui.set.language": {
    "fa": "زبان: دری، پشتو یا انگلیسی را انتخاب کنید. تمام کتاب به همان زبان می‌شود.",
@@ -2382,6 +2732,111 @@
    "fa": "صحت را شریک کنید",
    "ps": "صحت شریک کړئ",
    "en": "Share Sehat"
+  },
+  "ui.name.near": {
+   "fa": "نزدیک‌ترین کلینیک",
+   "ps": "نږدې کلینیک",
+   "en": "Nearest clinic"
+  },
+  "ui.name.clinicCheck": {
+   "fa": "بررسی کلینیک‌ها",
+   "ps": "د کلینیکونو کتنه",
+   "en": "Check the clinics"
+  },
+  "ui.nearLead": {
+   "fa": "این نقشه شفاخانه‌ها و کلینیک‌های سمنگان را نشان می‌دهد. برای دیدن نزدیک‌ترین‌ها، «جای من را پیدا کن» را بزنید. برای شنیدن نام هر جای، روی آن بزنید.",
+   "ps": "دا نقشه د سمنګان روغتونونه او کلینیکونه ښيي. د نږدې ځایونو لیدو لپاره، «زما ځای پیدا کړه» ووهئ. د هر ځای د نوم اورېدو لپاره، په هغه ووهئ.",
+   "en": "This map shows the hospitals and clinics of Samangan. To see the nearest ones, press \"Find where I am\". Press a place to hear its name."
+  },
+  "ui.nearGps": {
+   "fa": "گوشی شما برای استفاده از موقعیت اجازه می‌خواهد. «اجازه» را بزنید. جای شما در گوشی شما می‌ماند؛ صحت آن را نمی‌فرستد.",
+   "ps": "ستاسو ټیلیفون به د ځای کارولو اجازه وغواړي. «اجازه» ووهئ. ستاسو ځای ستاسو په ټیلیفون کې پاتې کېږي؛ صحت یې نه لېږي.",
+   "en": "Your phone will ask to use its location. Press Allow. Where you are stays on your phone; Sehat does not send it."
+  },
+  "ui.nearKey": {
+   "fa": "نشانه‌های آبی شفاخانه‌ها هستند. نشانه‌های سبز کلینیک‌های دولتی هستند. نشانه‌های کوچک بنفش جاهای خصوصی هستند که در آن‌ها پول می‌دهید. نشانۀ سفید با لبۀ خط‌خط یعنی قریه یا شهرک را می‌دانیم، ولی ساختمان را هنوز نه.",
+   "ps": "د اسمان په رنګ نښې روغتونونه دي. زرغونې نښې دولتي کلینیکونه دي. وړې بنفش نښې خصوصي ځایونه دي، چې هلته پیسې ورکوئ. سپینه نښه چې څنډه یې ماته ماته وي، مانا دا چې کلی یا ښارګوټی پېژنو، خو ودانۍ لا نه.",
+   "en": "Pins the colour of the sky are hospitals. Green pins are government clinics. Small purple pins are private places, where you pay. A white pin with a broken edge means we know the village or the town, but not the building yet."
+  },
+  "ui.nearHere": {
+   "fa": "این‌ها نزدیک‌ترین جاها به شما هستند. نزدیک‌ترین آن:",
+   "ps": "دا تاسو ته تر ټولو نږدې ځایونه دي. تر ټولو نږدې یې:",
+   "en": "These are the places nearest to you. The nearest one is:"
+  },
+  "ui.nearH": {
+   "fa": "شفاخانه‌ها.",
+   "ps": "روغتونونه.",
+   "en": "Hospitals."
+  },
+  "ui.nearC": {
+   "fa": "کلینیک‌های دولتی.",
+   "ps": "دولتي کلینیکونه.",
+   "en": "Government clinics."
+  },
+  "ui.nearO": {
+   "fa": "شفاخانه‌های بزرگ بیرون از سمنگان. داکتران مریضی‌ها و زخم‌های سخت را به آن‌جا می‌فرستند.",
+   "ps": "له سمنګان بهر لوی روغتونونه. ډاکټران سخت ناروغان او ټپیان هلته لېږي.",
+   "en": "Big hospitals outside Samangan. Doctors send people there for a serious illness or injury."
+  },
+  "ui.nearP": {
+   "fa": "جاهای خصوصی. آن‌جا پول می‌دهید.",
+   "ps": "خصوصي ځایونه. هلته پیسې ورکوئ.",
+   "en": "Private places. You pay there."
+  },
+  "ui.nearUnplaced": {
+   "fa": "این جاها هم در ولسوالی شما هستند، ولی هنوز نمی‌دانیم روی نقشه کجا هستند.",
+   "ps": "دا ځایونه هم ستاسو په ولسوالۍ کې دي، خو لا نه پوهېږو چې په نقشه کې چېرته دي.",
+   "en": "These places are also in your district, but we do not know yet where they are on the map."
+  },
+  "ui.nearTrust": {
+   "fa": "بیشتر جاهای این نقشه هنوز بررسی نشده‌اند. پیش از یک سفر دور، از کسی که به او اعتماد دارید بپرسید که آن جای باز است یا نه. اگر چیزی نادرست است، در صفحۀ «بررسی کلینیک‌ها» به ما بگویید.",
+   "ps": "د دې نقشې ډېر ځایونه لا نه دي کتل شوي. د اوږده سفر نه مخکې، له هغه چا وپوښتئ چې باور پرې لرئ چې ځای خلاص دی که نه. که کوم شی ناسم وي، د «د کلینیکونو کتنه» په پاڼه کې موږ ته ووایئ.",
+   "en": "Most places on this map have not been checked yet. Before a long journey, ask someone you trust whether the place is open. If something is wrong, tell us on the \"Check the clinics\" page."
+  },
+  "ui.nearHelp": {
+   "fa": "آیا این جاها را می‌شناسید؟ کمک کنید نقشه درست شود.",
+   "ps": "آیا دا ځایونه پېژنئ؟ مرسته وکړئ چې نقشه سمه شي.",
+   "en": "Do you know these places? Help us make the map right."
+  },
+  "ui.check": {
+   "fa": "کمک کنید این نقشه برای هر فامیل در سمنگان درست شود. ولسوالی خود را انتخاب کنید، بعد برای هر جایی که می‌شناسید جواب دهید. وقتی تمام شد، «بفرست» را بزنید.",
+   "ps": "مرسته وکړئ چې دا نقشه د سمنګان د هرې کورنۍ لپاره سمه شي. خپله ولسوالي وټاکئ، بیا د هر هغه ځای لپاره ځواب ورکړئ چې پېژنئ یې. کله چې خلاص شوئ، «ولېږه» ووهئ.",
+   "en": "Help make this map right for every family in Samangan. Choose your district, then answer for each place you know. When you finish, press Send."
+  },
+  "ui.checkDist": {
+   "fa": "ولسوالی خود را انتخاب کنید.",
+   "ps": "خپله ولسوالي وټاکئ.",
+   "en": "Choose your district."
+  },
+  "ui.chkOpenQ": {
+   "fa": "آیا حالا باز است؟ «بلی»، «نخیر» یا «نمی‌دانم» را بزنید.",
+   "ps": "آیا اوس خلاص دی؟ «هو»، «نه» یا «نه پوهېږم» ووهئ.",
+   "en": "Is it open now? Press yes, no, or I don't know."
+  },
+  "ui.chkPinQ": {
+   "fa": "آیا روی نقشه در جای درست است؟ به نقشۀ بالا نگاه کنید، بعد «بلی»، «نخیر» یا «نمی‌دانم» را بزنید.",
+   "ps": "آیا په نقشه کې په سم ځای کې دی؟ پورته نقشې ته وګورئ، بیا «هو»، «نه» یا «نه پوهېږم» ووهئ.",
+   "en": "Is it in the right place on the map? Look at the map above, then press yes, no, or I don't know."
+  },
+  "ui.checkHere": {
+   "fa": "این را فقط وقتی بزنید که در همان جای هستید. این دکمه جای فعلی گوشی را با جواب‌های شما می‌فرستد تا آن جای را روی نقشه بگذاریم. گوشی اول اجازه می‌خواهد.",
+   "ps": "دا یوازې هغه وخت ووهئ چې په هماغه ځای کې یاست. دا ستاسو د ټیلیفون اوسنی ځای له ځوابونو سره لېږي، چې هغه ځای په نقشه کې کېږدو. ټیلیفون به لومړی اجازه وغواړي.",
+   "en": "Press this only when you are at the place. It sends where your phone is now with your answers, so we can put the place on the map. Your phone will ask first."
+  },
+  "ui.checkMissing": {
+   "fa": "آیا کلینیک، شفاخانه، قابله یا کارکن صحی در فهرست نیست؟ نام و قریۀ آن را بگویید یا بنویسید.",
+   "ps": "آیا کوم کلینیک، روغتون، قابله یا روغتیايي کارکوونکی په لېست کې نشته؟ نوم او کلی یې ووایئ یا یې ولیکئ.",
+   "en": "Is a clinic, hospital, midwife or health worker missing from the list? Say its name and its village, or write them."
+  },
+  "ui.checkSend": {
+   "fa": "وقتی تمام شد، «بفرست» را بزنید. جواب‌های شما به تیم صحت می‌رود. چیزی که نام شما را نشان دهد فرستاده نمی‌شود.",
+   "ps": "کله چې خلاص شوئ، «ولېږه» ووهئ. ستاسو ځوابونه د صحت ټیم ته ځي. هېڅ داسې شی نه لېږل کېږي چې ستاسو نوم وښيي.",
+   "en": "When you finish, press Send. Your answers go to the Sehat team. Nothing that names you is sent."
+  },
+  "ui.checkThanks": {
+   "fa": "تشکر. جواب‌های شما به هر فامیل در سمنگان کمک می‌کند.",
+   "ps": "مننه. ستاسو ځوابونه د سمنګان له هرې کورنۍ سره مرسته کوي.",
+   "en": "Thank you. Your answers help every family in Samangan."
   }
  },
  "months": {

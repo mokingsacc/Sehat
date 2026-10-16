@@ -2,7 +2,7 @@
 // book editor. Bindings: D1 database "DB"; secret "DASH_KEY" (the owner's password; other people get their own key from /people);
 // var "APP_URL" (the app's public address: the editor lays its changes over <APP_URL>/content/book.json); optional secret
 // "ANTHROPIC_API_KEY" (for "Summarise feedback"); optional var "DHIS2_MAP" (HMIS ids for the DHIS2 export, server/codes.js).
-// Signed-in pages (docs/DASHBOARD.md): /dashboard (overview), /usage, /watch, /inbox (feedback), /data (codebook and exports),
+// Signed-in pages (docs/DASHBOARD.md): /dashboard (overview), /usage, /watch, /inbox (feedback), /checks (clinic checks), /data (codebook and exports),
 // /admin (editor), /audit and /people (owner), /about. Sign-in is a session cookie (server/auth.js); every change carries a
 // CSRF token; every sign-in, view, export, edit, publish, correction and change of access goes in the append-only audit log.
 import ABOUT from './about.js';
@@ -13,7 +13,7 @@ import * as LOG from './auditlog.js';
 import * as HOME from './home.js';
 import * as DATA from './research.js';
 import { t, pickLang } from './i18n.js';
-import { shell, htmlResponse, newNonce, esc as hesc, scriptJson, CSS as UI_CSS, periodForm, when } from './ui.js';
+import { shell, htmlResponse, newNonce, esc as hesc, scriptJson, CSS as UI_CSS, periodForm, when, ltr, fmtN } from './ui.js';
 import * as OV from '../js/overlay.js'; // editor changes as an overlay on the app's own book (docs/EDITOR_AND_RELEASES.md)
 import { editorCore } from './editor-core.js'; // the editor's rules, shared with the editor page
 const CORE = editorCore();
@@ -23,8 +23,9 @@ const json = (o, status = 200, headers = {}) => new Response(JSON.stringify(o), 
 const NOT_FOUND = () => new Response('Not found', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 
 // pages a person opens in the browser (an old ?key= link to one of them signs in and comes back without the key)
-const PAGES = new Set(['/dashboard', '/usage', '/watch', '/watch/methods', '/inbox', '/data', '/admin', '/audit', '/people', '/about']);
+const PAGES = new Set(['/dashboard', '/usage', '/watch', '/watch/methods', '/inbox', '/checks', '/data', '/admin', '/audit', '/people', '/about']);
 const SIGNED_IN = (p) => PAGES.has(p) || p.startsWith('/watch/') || p.startsWith('/fb-audio/') || p === '/feedback.json' || p === '/inbox/export.csv' || p === '/stats.json' || p === '/usage.csv'
+  || p.startsWith('/chk-audio/') || p === '/checks/export.csv' || p === '/checks/export.json'
   || p.startsWith('/admin/') || p === '/ai/summary' || p.startsWith('/people/') || p.startsWith('/audit/') || p.startsWith('/data/');
 
 export default {
@@ -37,6 +38,7 @@ export default {
     if (req.method === 'POST' && path === '/e') return USAGE.legacy(req, env); // old app versions: folded into the daily totals
     if (req.method === 'POST' && path === '/r') return SURV.ingest(req, env);
     if (req.method === 'POST' && path === '/feedback') return saveFeedback(req, env);
+    if (req.method === 'POST' && path === '/check') return saveCheck(req, env); // one answer from the app's "Check the clinics" page
     // public, read-only: the published book and uploaded narration (never the draft)
     if (req.method === 'GET' && (path === '/content/version.json' || path === '/content/book.json' || path === '/content/overlay.json')) return publicBook(env, path);
     if (req.method === 'GET' && path.startsWith('/a/')) return serveAudio(env, url);
@@ -70,7 +72,7 @@ export default {
     }
     if (!auth) {
       if (req.method === 'GET' && PAGES.has(path)) return new Response(null, { status: 303, headers: { Location: '/signin?next=' + encodeURIComponent(path + url.search), 'Cache-Control': 'no-store' } });
-      if (path.startsWith('/fb-audio/')) return NOT_FOUND();
+      if (path.startsWith('/fb-audio/') || path.startsWith('/chk-audio/')) return NOT_FOUND();
       return json({ error: 'Please sign in again (reload the page).', signin: true }, 401);
     }
     const me = auth.me;
@@ -133,13 +135,19 @@ async function route(req, env, url, path, me, ctx) {
     const row = await env.DB.prepare('SELECT audio, type FROM feedback WHERE id = ?').bind(id).first();
     if (!row || !row.audio) return NOT_FOUND();
     await L('view', 'listen voice note', { target: 'feedback #' + id });
-    // only ever served as sound: a fixed audio type, never sniffed, never run as a page (an old row may hold any type)
-    const ct = audioType(row.type) || 'application/octet-stream';
-    return new Response(new Uint8Array(row.audio), { headers: { 'Content-Type': ct, 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; sandbox",
-      'Content-Disposition': `attachment; filename="voice-note-${id}.${AUDIO_FILE_EXT[ct] || 'bin'}"`, 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer' } });
+    return soundOnly(row, `voice-note-${id}`);
+  }
+  if (path.startsWith('/chk-audio/')) {
+    const id = +path.split('/')[2];
+    const row = await env.DB.prepare('SELECT audio, type FROM checks WHERE id = ?').bind(id).first();
+    if (!row || !row.audio) return NOT_FOUND();
+    await L('view', 'listen voice note', { target: 'clinic check #' + id });
+    return soundOnly(row, `clinic-check-${id}`);
   }
   if (path === '/inbox') { await L('view', 'view feedback'); return inboxPage(env, url, me, ctx); }
   if (path === '/feedback.json' || path === '/inbox/export.csv') return feedbackExport(env, me, path.endsWith('.csv') ? 'csv' : 'json', ctx);
+  if (path === '/checks') { await L('view', 'view clinic checks'); return checksPage(env, url, me, ctx); }
+  if (path === '/checks/export.csv' || path === '/checks/export.json') return checksExport(env, url, me, path.endsWith('.csv') ? 'csv' : 'json', ctx);
   if (path === '/usage' || path === '/stats.json' || path === '/usage.csv') {
     const q = USAGE.parseQuery(url, env), raw = await USAGE.load(env, q), v = raw.ok ? USAGE.view(raw, q) : null;
     if (path === '/usage.csv') {
@@ -232,11 +240,7 @@ async function saveFeedback(req, env) {
   let b;
   try { const txt = await req.text(); if (txt.length > Math.ceil(MAX_FB_AUDIO * 4 / 3) + 20_000) throw 0; b = JSON.parse(txt); } catch { return new Response('bad', { status: 400, headers: CORS }); }
   if (!b || typeof b !== 'object') return new Response('bad', { status: 400, headers: CORS });
-  let audio = null;
-  if (typeof b.audio === 'string' && b.audio) { try { const bin = atob(b.audio); audio = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) audio[i] = bin.charCodeAt(i); } catch { audio = null; } }
-  // only real sound files of the usual recording types are kept as voice notes
-  const type = audio ? audioType(b.type) : null;
-  if (audio && (!type || audio.length > MAX_FB_AUDIO || !looksLikeAudio(audio))) audio = null;
+  const { audio, type } = voiceNote(b);
   const text = stripNumbers(clip(b.text, 2000) || '');
   if (!audio && !text.trim()) return new Response('empty', { status: 400, headers: CORS });
   // flood protection: a fixed number of messages and voice bytes a day from all phones together (the phone keeps it and tries later)
@@ -244,6 +248,53 @@ async function saveFeedback(req, env) {
   // not linked to any id; the time is when the server received it (the voice is deleted 90 days after that, see USAGE.cleanup)
   await env.DB.prepare('INSERT INTO feedback (iid, ts, lang, version, page, text, audio, type) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)')
     .bind(Date.now(), clip(b.lang, 4), clip(b.v, 32), clip(b.page, 80), text, audio, audio ? type : null).run();
+  return new Response('ok', { headers: CORS });
+}
+// the voice note in a post from the app (base64 in "audio", its type in "type"): only real sound files of the usual
+// recording types, up to MAX_FB_AUDIO, are kept; anything else is dropped (audio null)
+function voiceNote(b) {
+  let audio = null;
+  if (typeof b.audio === 'string' && b.audio) { try { const bin = atob(b.audio); audio = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) audio[i] = bin.charCodeAt(i); } catch { audio = null; } }
+  const type = audio ? audioType(b.type) : null;
+  if (audio && (!type || audio.length > MAX_FB_AUDIO || !looksLikeAudio(audio))) audio = null;
+  return { audio, type: audio ? type : null };
+}
+// a stored voice note, only ever served as sound: a fixed audio type, never sniffed, never run as a page (an old row may hold any type)
+function soundOnly(row, name) {
+  const ct = audioType(row.type) || 'application/octet-stream';
+  return new Response(new Uint8Array(row.audio), { headers: { 'Content-Type': ct, 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; sandbox",
+    'Content-Disposition': `attachment; filename="${name}.${AUDIO_FILE_EXT[ct] || 'bin'}"`, 'Cache-Control': 'private, no-store', 'Referrer-Policy': 'no-referrer' } });
+}
+
+// One answer from the app's "Check the clinics" page (#/check): one place, or a place missing from the list (fac "new").
+// { v, lang, fac, d (district id), open, pin (yes | no | dk | empty), here ({lat, lon, acc} when the person pressed "I am at
+// this place now"), text, type, audio }. Not linked to any id, and no address is kept. Digits stay in the text: people may
+// write a clinic's phone number, which nobody has found yet (the app asks them not to write their own name or number).
+const FAC_RE = /^[a-z0-9][a-z0-9-]{0,79}$/, ANSWERS = ['yes', 'no', 'dk'];
+// yes, no, dk (does not know) or null (not answered); undefined = not one of these
+const answerOf = (x) => (x == null || x === '' ? null : ANSWERS.includes(x) ? x : undefined);
+// the phone's position: only inside Afghanistan's box and with a believable accuracy (metres); anything else is dropped
+function hereOf(h) {
+  if (!h || typeof h !== 'object' || ![h.lat, h.lon, h.acc].every((x) => typeof x === 'number' && Number.isFinite(x))) return null;
+  if (h.lat < 29 || h.lat > 39.5 || h.lon < 60 || h.lon > 75.5 || h.acc < 0 || h.acc > 10000) return null;
+  return { lat: +h.lat.toFixed(6), lon: +h.lon.toFixed(6), acc: Math.round(h.acc * 10) / 10 };
+}
+async function saveCheck(req, env) {
+  const bad = (m) => new Response(m, { status: 400, headers: CORS });
+  let b;
+  try { const txt = await req.text(); if (txt.length > Math.ceil(MAX_FB_AUDIO * 4 / 3) + 20_000) throw 0; b = JSON.parse(txt); } catch { return bad('bad'); }
+  if (!b || typeof b !== 'object') return bad('bad');
+  const fac = b.fac === 'new' || (typeof b.fac === 'string' && FAC_RE.test(b.fac)) ? b.fac : null;
+  const district = b.d == null || b.d === '' ? '' : typeof b.d === 'string' && FAC_RE.test(b.d) ? b.d : null;
+  const open = answerOf(b.open), pin = answerOf(b.pin);
+  if (!fac || district === null || open === undefined || pin === undefined) return bad('bad');
+  const here = hereOf(b.here), text = clip(b.text, 1000) || '', { audio, type } = voiceNote(b);
+  if (!open && !pin && !here && !text.trim() && !audio) return bad('empty');
+  // flood protection, like feedback: answers and voice bytes a day from all phones together (the phone keeps it and tries later)
+  if (!(await USAGE.spend(env, 'chk', 1)) || (audio && !(await USAGE.spend(env, 'chka', audio.length)))) return new Response('busy', { status: 429, headers: CORS });
+  // the time is when the server received it (the voice is deleted 90 days after that, see USAGE.cleanup)
+  await env.DB.prepare('INSERT INTO checks (ts, lang, version, fac, district, open, pin, lat, lon, acc, text, audio, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+    .bind(Date.now(), LANGS.includes(b.lang) ? b.lang : null, clip(b.v, 32), fac, district, open, pin, here ? here.lat : null, here ? here.lon : null, here ? here.acc : null, text, audio, type).run();
   return new Response('ok', { headers: CORS });
 }
 // a time from the database as text; a broken value gives "?" instead of stopping the page
@@ -377,12 +428,128 @@ async function feedbackExport(env, me, format, ctx) {
   const head = `# Sehat feedback (newest 500)\n# generated_utc: ${new Date().toISOString()}\n# row_count: ${data.length}\n# sha256: ${hash} (grep -v "^#" file.csv | sha256sum)\n# Free text written by app users: not for sharing outside the team.\n`;
   return new Response(head + body, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Content-Disposition': `attachment; filename="sehat-feedback-${new Date().toISOString().slice(0, 10)}.csv"` } });
 }
+/* ================= Clinic checks (/checks): answers from the app's "Check the clinics" page ================= */
+// The app's published clinic list (book.facilities: names, districts, pins), to name the places on /checks. The book is
+// about 2 MB, so only this small part is kept, for about 10 minutes, in the Cache API (and in this worker's memory: the
+// Cache API does nothing on workers.dev). null when the book cannot be read: the page then shows the ids.
+const FAC_TTL = 600;
+let facMemo = null;
+async function appFacilities(env, origin) {
+  const base = String(env.APP_URL || '').trim().replace(/\/+$/, '');
+  if (!/^https?:\/\//.test(base)) return null;
+  if (facMemo && facMemo.base === base && Date.now() - facMemo.at < FAC_TTL * 1000) return facMemo.v;
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null, key = new Request(`${origin}/__cache/facilities?app=${encodeURIComponent(base)}`);
+  let v = null;
+  try { const hit = cache && (await cache.match(key)); if (hit) v = await hit.json(); } catch { v = null; }
+  if (!v) {
+    try {
+      const r = await fetch(base + '/content/book.json', { cf: { cacheTtl: FAC_TTL }, ...(typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? { signal: AbortSignal.timeout(5000) } : {}) });
+      const f = r.ok ? ((await r.json()) || {}).facilities : null;
+      if (f && Array.isArray(f.facilities)) {
+        v = { districts: Array.isArray(f.districts) ? f.districts : [], places: f.facilities.filter((x) => x && x.id).map((x) => ({ id: x.id, name: x.name || {}, district: x.district || '', lat: x.lat, lon: x.lon, where: x.where || '' })) };
+        if (cache) { try { await cache.put(key, new Response(JSON.stringify(v), { headers: { 'Content-Type': 'application/json', 'Cache-Control': `max-age=${FAC_TTL}` } })); } catch {} }
+      }
+    } catch { v = null; }
+  }
+  if (v) facMemo = { base, at: Date.now(), v };
+  return v;
+}
+// names from that list: a place's English name (else its id), a district in the page's language (else its id or old free text)
+function facNames(fac, lang) {
+  const P = new Map(((fac && fac.places) || []).map((p) => [p.id, p])), D = new Map(((fac && fac.districts) || []).filter((d) => d && d.id).map((d) => [d.id, d]));
+  return { P, place: (id) => (id === 'new' ? t(lang, 'checks.newPlace') : (P.get(id) && P.get(id).name && P.get(id).name.en) || id),
+    district: (id) => { const d = D.get(id); return (d && d.name && (d.name[lang] || d.name.en)) || id || ''; } };
+}
+// distance in km between two [lat, lon] points (haversine), and the middle value of a list of numbers
+const kmBetween = (a, b) => { const r = Math.PI / 180, h = Math.sin(((b[0] - a[0]) * r) / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(((b[1] - a[1]) * r) / 2) ** 2; return 2 * 6371.0088 * Math.asin(Math.min(1, Math.sqrt(h))); };
+const median = (xs) => { const s = [...xs].sort((p, q) => p - q), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+// "36.26512, 68.02011" and a Google Maps link to it
+const latLonText = (lat, lon) => `${(+lat).toFixed(5)}, ${(+lon).toFixed(5)}`;
+const mapLink = (lat, lon, extra = '') => `<a href="https://www.google.com/maps/search/?api=1&amp;query=${(+lat).toFixed(5)},${(+lon).toFixed(5)}" target="_blank" rel="noopener noreferrer">${ltr(latLonText(lat, lon) + extra)}</a>`;
+
+// One row per place: the answers added up, the middle GPS point (median latitude, median longitude), how far it is from the
+// app's pin and how spread the points are. Places where people disagree, or whose middle point is over 300 m from the pin, first.
+function checksByPlace(rows, P) {
+  const per = new Map();
+  for (const r of rows) {
+    let p = per.get(r.fac);
+    if (!p) per.set(r.fac, (p = { fac: r.fac, n: 0, open: { yes: 0, no: 0, dk: 0 }, pin: { yes: 0, no: 0, dk: 0 }, pts: [], voice: 0, last: 0 }));
+    p.n++; if (r.open in p.open) p.open[r.open]++; if (r.pin in p.pin) p.pin[r.pin]++;
+    if (r.lat != null && r.lon != null) p.pts.push([+r.lat, +r.lon]);
+    if (r.has_audio) p.voice++;
+    p.last = Math.max(p.last, +r.ts || 0);
+  }
+  for (const p of per.values()) {
+    const app = P.get(p.fac);
+    p.mid = p.pts.length ? [median(p.pts.map((x) => x[0])), median(p.pts.map((x) => x[1]))] : null;
+    p.spread = p.mid ? Math.round(1000 * Math.max(...p.pts.map((x) => kmBetween(p.mid, x)))) : null;
+    p.fromPin = p.mid && app && typeof app.lat === 'number' && typeof app.lon === 'number' ? kmBetween(p.mid, [app.lat, app.lon]) : null;
+    p.disagree = Math.min(p.open.yes, p.open.no) + Math.min(p.pin.yes, p.pin.no);
+    p.far = p.fromPin !== null && p.fromPin > 0.3;
+  }
+  const first = (p) => (p.disagree > 0 || p.far ? 1 : 0);
+  return [...per.values()].sort((a, b) => first(b) - first(a) || b.disagree - a.disagree || (b.fromPin || 0) - (a.fromPin || 0) || b.last - a.last);
+}
+async function checksPage(env, url, me, ctx) {
+  const lang = ctx.lang, e = hesc, d7 = Date.now() - 7 * 864e5;
+  const all = async (sql, ...a) => { try { return (await env.DB.prepare(sql).bind(...a).all()).results || []; } catch { return []; } };
+  const TOT = "SELECT COUNT(*) n, COUNT(DISTINCT CASE WHEN fac <> 'new' THEN fac END) places, COALESCE(SUM(lat IS NOT NULL), 0) gps, COALESCE(SUM(fac = 'new'), 0) missing FROM checks WHERE ts >= ?";
+  const COLS = 'id, ts, lang, fac, district, open, pin, lat, lon, acc, text, type, (audio IS NOT NULL) has_audio';
+  const [[tot = {}], [tot7 = {}], rows, missing, recent, fac] = await Promise.all([all(TOT, 0), all(TOT, d7),
+    all("SELECT fac, open, pin, lat, lon, ts, (audio IS NOT NULL) has_audio FROM checks WHERE fac <> 'new' ORDER BY ts DESC LIMIT 20000"),
+    all(`SELECT ${COLS} FROM checks WHERE fac = 'new' ORDER BY ts DESC LIMIT 300`), all(`SELECT ${COLS} FROM checks ORDER BY ts DESC LIMIT 300`), appFacilities(env, url.origin)]);
+  const N = facNames(fac, lang), list = checksByPlace(rows, N.P), T = (k, v) => e(t(lang, k, v));
+  const kpi = (label, all, wk) => `<div class="kpi"><div class="l">${T(label)}</div><div class="v">${ltr(fmtN(+all || 0))}</div><div class="sub">${T('checks.allTime', { n: fmtN(+wk || 0) })}</div></div>`;
+  const three = (x) => ltr(`${x.yes} / ${x.no} / ${x.dk}`);
+  const date = (ts) => ltr(when(ts).slice(0, 10));
+  const voice = (r) => (r.has_audio ? `<audio controls preload="none" src="/chk-audio/${+r.id}"></audio>` : /^audio\//.test(r.type || '') ? `<span class="s"><i>${T('checks.deleted')}</i></span>` : '');
+  const gps = (r) => (r.lat != null && r.lon != null ? mapLink(r.lat, r.lon, r.acc != null ? ` ± ${Math.round(r.acc)} m` : '') : '');
+  const said = (r) => [r.open ? `${T('checks.openQ')}: ${T('checks.' + r.open)}` : '', r.pin ? `${T('checks.pinQ')}: ${T('checks.' + r.pin)}` : ''].filter(Boolean).join(' · ');
+  const note = (r) => (r.text ? `<div dir="auto" style="white-space:pre-wrap">${e(r.text)}</div>` : '');
+  const empty = `<div class="empty">${T('checks.empty')}</div>`;
+  const placeRow = (p) => {
+    const app = N.P.get(p.fac);
+    return `<tr><td><b>${e(N.place(p.fac))}</b> <span class="s"><code>${e(p.fac)}</code></span>${p.disagree ? ` <span class="pill red">${T('checks.disagree')}</span>` : ''}${p.far ? ` <span class="pill red">${T('checks.far')}</span>` : ''}</td>
+<td>${e(N.district(app ? app.district : ''))}</td><td class="n">${three(p.open)}</td><td class="n">${three(p.pin)}</td><td class="n">${ltr(p.pts.length)}</td>
+<td>${p.mid ? mapLink(p.mid[0], p.mid[1]) : ''}</td><td class="n">${p.fromPin !== null ? ltr(p.fromPin.toFixed(2)) : ''}</td><td class="n">${p.spread !== null ? ltr(fmtN(p.spread)) : ''}</td>
+<td class="n">${ltr(p.voice)}</td><td>${date(p.last)}</td></tr>`;
+  };
+  const body = `<h1>${T('checks.title')}</h1><p class="lead">${T('checks.intro')}</p>
+${fac ? '' : `<div class="msg warn">${T('checks.noBook')}</div>`}
+<div class="kpis">${kpi('checks.answers', tot.n, tot7.n)}${kpi('checks.places', tot.places, tot7.places)}${kpi('checks.gps', tot.gps, tot7.gps)}${kpi('checks.missing', tot.missing, tot7.missing)}</div>
+<section class="card"><h2>${T('checks.byPlace')}</h2><p class="s">${T('checks.how')}</p>${list.length ? `<div class="tw"><table class="ck"><tr><th class="pl">${T('checks.place')}</th><th>${T('district')}</th><th class="n">${T('checks.open')}<div class="s">${T('checks.ynd')}</div></th><th class="n">${T('checks.pin')}<div class="s">${T('checks.ynd')}</div></th><th class="n">${T('checks.gps')}</th><th>${T('checks.middle')}</th><th class="n">${T('checks.fromPin')}</th><th class="n">${T('checks.spread')}</th><th class="n">${T('checks.voice')}</th><th>${T('checks.latest')}</th></tr>
+${list.map(placeRow).join('')}</table></div>` : empty}</section>
+<section class="card"><h2>${T('checks.missingTitle')}</h2>${missing.length ? `<div class="tw"><table class="ck"><tr><th>${T('checks.date')}</th><th>${T('district')}</th><th>${T('checks.note')}</th><th>${T('checks.voice')}</th><th>GPS</th></tr>
+${missing.map((r) => `<tr><td>${date(r.ts)}</td><td>${e(N.district(r.district))}</td><td>${note(r)}</td><td>${voice(r)}</td><td>${gps(r)}</td></tr>`).join('')}</table></div>` : empty}</section>
+<section class="card"><h2>${T('checks.all')}</h2><p class="noprint" style="display:flex;flex-wrap:wrap;gap:8px"><a class="btn" href="/checks/export.csv">${T('download')} CSV</a><a class="btn" href="/checks/export.json">${T('download')} JSON</a></p>
+${recent.length ? `<div class="tw"><table class="ck"><tr><th>${T('checks.date')}</th><th>${T('checks.place')}</th><th>${T('checks.given')}</th><th>GPS</th><th>${T('checks.note')}</th><th>${T('checks.voice')}</th></tr>
+${recent.map((r) => `<tr><td>${date(r.ts)}</td><td>${e(N.place(r.fac))}${r.district ? `<div class="s">${e(N.district(r.district))}</div>` : ''}</td><td>${said(r)}</td><td>${gps(r)}</td><td>${note(r)}</td><td>${voice(r)}</td></tr>`).join('')}</table></div>` : empty}</section>`;
+  const css = '.ck th.pl{min-width:170px}.ck code,.ck .pill,.ck bdi{white-space:nowrap}.ck td{min-width:4em}';
+  return htmlResponse(shell({ ...ctx, url, me, title: t(lang, 'nav.checks'), body, css, footer: t(lang, 'checks.footer') }), ctx.nonce);
+}
+// /checks/export.csv and .json: every answer (newest 5,000), with the place's English name from the app's list
+async function checksExport(env, url, me, format, ctx) {
+  const rows = (await env.DB.prepare('SELECT id, ts, lang, version, fac, district, open, pin, lat, lon, acc, text, type, (audio IS NOT NULL) has_audio FROM checks ORDER BY ts DESC LIMIT 5000').all()).results || [];
+  const N = facNames(await appFacilities(env, url.origin), 'en');
+  const data = rows.map((r) => ({ id: r.id, received_utc: when(r.ts) ? new Date(+r.ts).toISOString() : '', lang: r.lang || '', app_version: r.version || '', place_id: r.fac, place_name: N.place(r.fac),
+    district: r.district || '', open: r.open || '', pin: r.pin || '', lat: r.lat ?? '', lon: r.lon ?? '', accuracy_m: r.acc ?? '', has_voice_note: r.has_audio ? 1 : 0, text: r.text || '' }));
+  if (format === 'json') {
+    const body = JSON.stringify(data), hash = await LOG.sha256(body);
+    await LOG.log(env, me, 'export', 'export clinic checks json', { target: 'clinic checks', rows: data.length, sha256: hash, session: ctx.sid });
+    return new Response(body, { headers: { 'Content-Type': 'application/json; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'X-Sehat-SHA256': hash, 'X-Sehat-Note': 'Free text and phone positions sent by app users: not for sharing outside the team.' } });
+  }
+  const cols = ['id', 'received_utc', 'lang', 'app_version', 'place_id', 'place_name', 'district', 'open', 'pin', 'lat', 'lon', 'accuracy_m', 'has_voice_note', 'text'];
+  const body = DATA.csvBody(cols, data), hash = await LOG.sha256(body);
+  await LOG.log(env, me, 'export', 'export clinic checks csv', { target: 'clinic checks', rows: data.length, sha256: hash, session: ctx.sid });
+  const head = `# Sehat clinic checks (newest 5000)\n# generated_utc: ${new Date().toISOString()}\n# row_count: ${data.length}\n# sha256: ${hash} (grep -v "^#" file.csv | sha256sum)\n# Free text and phone positions sent by app users: not for sharing outside the team.\n`;
+  return new Response(head + body, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Content-Disposition': `attachment; filename="sehat-clinic-checks-${new Date().toISOString().slice(0, 10)}.csv"` } });
+}
 /* ================= book content: the editor's changes, the published overlay, audio ================= */
 // The editor keeps only what it changed, one row per unit (js/overlay.js) in the table edit_unit. The editor page
 // downloads the app's own book itself and lays those units over it, the same way phones do. So the draft always
 // starts from the app's newest book, and no request here reads, parses or writes the whole 2 MB book: the free plan
 // allows about 10 ms of computer time per request (docs/EDITOR_AND_RELEASES.md).
-const { LANGS, SLOTS, ID_RE, ICONS, BLOCK_TYPES, HOME_MODULES, STATUSES, TOOLS } = CORE;
+const { LANGS, SLOTS, ID_RE, ICONS, BLOCK_TYPES, HOME_MODULES, STATUSES, TOOLS, WHERES, CONFIDENCES } = CORE;
 const normSlot = (s) => (LANGS.includes(s) ? s + '-f' : SLOTS.includes(s) ? s : null);
 const MAX_AUDIO = 1_900_000; // D1 keeps at most 2 MB in one row
 const AUDIO_TYPES = { 'audio/mpeg': 'audio/mpeg', 'audio/mp3': 'audio/mpeg', 'audio/mp4': 'audio/mp4', 'audio/x-m4a': 'audio/mp4', 'audio/m4a': 'audio/mp4', 'audio/aac': 'audio/mp4', 'audio/webm': 'audio/webm', 'video/webm': 'audio/webm', 'audio/ogg': 'audio/ogg', 'application/ogg': 'audio/ogg', 'audio/opus': 'audio/ogg' };
@@ -911,7 +1078,7 @@ function peopleClient(cfg) {
 function adminPage(env, me, ctx) {
   const esc = hesc, who = me.role === 'owner' ? 'the owner' : `${me.name} · ${me.role}`;
   // csrf: every save, upload and publish carries this sign-in's token (server/auth.js)
-  const cfg = { csrf: ctx.csrf, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES, tools: TOOLS };
+  const cfg = { csrf: ctx.csrf, role: me.role, appUrl: String(env.APP_URL || '').trim().replace(/\/+$/, ''), icons: ICONS, home: HOME_MODULES, types: BLOCK_TYPES, statuses: STATUSES, tools: TOOLS, wheres: WHERES, confidences: CONFIDENCES };
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sehat · editor</title>
 <style>body{font-family:system-ui,sans-serif;background:#FBFAF7;color:#22201D;margin:0;font-size:16px}h1{font-size:20px;margin:0}h2{font-size:20px;margin:16px 0 8px}
 header{position:sticky;top:0;z-index:5;background:#FBFAF7;border-bottom:1px solid #E6E1D8;padding:10px 14px}.hrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -1116,6 +1283,9 @@ function adminClient(cfg) {
   function setField(el) {
     const [root, path] = el.dataset.f.split(/:(.*)/s);
     const ks = path.split('|'); let o = getRoot(root);
+    // a place's village or landmark: three names, or null when all three are empty
+    const fp = root === 'fac' && ks[1] === 'place' ? o[ks[0]] : null;
+    if (fp && !fp.place) fp.place = L0();
     for (const k of ks.slice(0, -1)) o = o[k] ?? (o[k] = {});
     let v = el.value;
     if ('num' in el.dataset) v = v.trim() === '' ? null : Number(v.replace(',', '.'));
@@ -1124,6 +1294,7 @@ function adminClient(cfg) {
     if (root === 'topic' && ks.length === 1 && last === 'section' && o.section !== v) moveSection(CUR, o.section, v);
     if (v === '' && 'opt' in el.dataset) delete o[last]; else o[last] = v;
     if (last === 'anim') delete o.pick; // a new animation: choose its variant again
+    if (fp && !hasL(fp.place)) fp.place = null;
     queueSave(root === 'topic' ? 'topic:' + CUR : root === 'fac' ? 'facilities' : root === 'search' ? 'search:' + ks[0] : root === 'say' ? 'say:' + ks[0] : 'ui:' + ks[0]);
   }
   // a topic moved to another section moves between the lists; a page only on a list page (kit, hospital ...) stays there only
@@ -1243,17 +1414,30 @@ function adminClient(cfg) {
     return `<div class="c"><div class="l">Add a place</div><label><span>Paste a Google Maps link, or type the two numbers like 36.2650, 68.0177</span><textarea id="np-loc" rows="2" dir="ltr"></textarea></label><label><span>English name</span><input id="np-en"></label><button class="primary" data-act="fadd">Add place</button><p class="s">After adding, fill in the Dari and Pashto names and the other details.</p></div>
       <div class="c"><input id="q-places" placeholder="Search places" value="${esc(Q.places)}"></div><div id="list-places">${placesList()}</div>`;
   }
+  // the clinic list's districts (book.facilities.districts: [{id, name}]); a book from before that list has free-text districts
+  const fdists = () => (Array.isArray(D.facilities.districts) ? D.facilities.districts : null);
+  const distName = (id) => { const x = (fdists() || []).find((d) => d.id === id); return (x && x.name && x.name.en) || id || ''; };
+  // how well the position is known, and how sure the list is about the place
+  const WHERE_N = { building: 'Building: the pin is on the building', village: 'Village: the pin is somewhere in the village', district: 'District: only the district centre is known', none: 'None: nobody knows where it is yet' };
+  const CONF_N = { high: 'High', medium: 'Medium', low: 'Low' };
   function placesList() {
-    const F = D.facilities.facilities;
-    return F.map((f, i) => [f, i]).filter(([f]) => match(Q.places, f.name, f.district, f.type, f.id)).map(([f, i]) => {
-      const P = `fac:${i}|`;
-      return `<details class="c"><summary><b>${esc((f.name && f.name.en) || f.id)}</b> <span class="s">· ${esc(f.district || '')} · ${esc(f.type || '')} · ${esc(f.status || '')}</span></summary>
+    const F = D.facilities.facilities, DL = fdists();
+    return F.map((f, i) => [f, i]).filter(([f]) => match(Q.places, f.name, f.place, f.district, distName(f.district), f.type, f.id)).map(([f, i]) => {
+      const P = `fac:${i}|`, pos = typeof f.lat === 'number' && typeof f.lon === 'number';
+      const dist = DL ? `<select data-f="${P}district">${opts(DL.map((d) => [d.id, (d.name && d.name.en) || d.id]), f.district, DL.some((d) => d.id === f.district) ? '' : 'choose…')}</select>` : `<input data-f="${P}district" value="${esc(f.district || '')}">`;
+      return `<details class="c"><summary><b>${esc((f.name && f.name.en) || f.id)}</b> <span class="s">· ${esc(distName(f.district))} · ${esc(f.type || '')} · ${esc(f.status || '')}${f.where === 'none' ? ' · no position yet' : ''}${f.checked ? ' · checked ' + esc(f.checked) : ''}</span></summary>
         <div class="l">Name</div>${tri(P + 'name', f.name, 1)}
-        <div class="g3"><label><span>Type</span><select data-f="${P}type">${opts(ftypes(), f.type)}</select></label><label><span>District</span><input data-f="${P}district" value="${esc(f.district || '')}"></label>
-        <label><span>Status</span><select data-f="${P}status">${opts(cfg.statuses, f.status)}</select></label><label><span>Phone</span><input data-f="${P}phone" type="tel" value="${esc(f.phone || '')}"></label>
-        <label><span>Latitude</span><input data-f="${P}lat" data-num inputmode="decimal" value="${esc(f.lat ?? '')}"></label><label><span>Longitude</span><input data-f="${P}lon" data-num inputmode="decimal" value="${esc(f.lon ?? '')}"></label></div>
+        <div class="l">Village or landmark (optional)</div>${tri(P + 'place', f.place, 1)}
+        <div class="g3"><label><span>Type</span><select data-f="${P}type">${opts(ftypes(), f.type)}</select></label><label><span>District</span>${dist}</label>
+        <label><span>Where: how well the position is known</span><select data-f="${P}where">${opts(cfg.wheres.map((w) => [w, WHERE_N[w] || w]), f.where || 'building')}</select></label>
+        <label><span>Status</span><select data-f="${P}status">${opts(cfg.statuses, f.status)}</select></label><label><span>Status as of (where it was heard, when)</span><input data-f="${P}status_date" value="${esc(f.status_date || '')}"></label>
+        <label><span>Confidence</span><select data-f="${P}confidence">${opts(cfg.confidences.map((c) => [c, CONF_N[c] || c]), f.confidence || '', f.confidence ? '' : 'choose…')}</select></label>
+        <label><span>Checked by people in Samangan on (empty = not yet)</span><input data-f="${P}checked" type="date" value="${esc(f.checked || '')}"></label>
+        <label><span>Phone</span><input data-f="${P}phone" type="tel" value="${esc(f.phone || '')}"></label>
+        <label><span>Latitude (empty when Where is none)</span><input data-f="${P}lat" data-num inputmode="decimal" value="${esc(f.lat ?? '')}"></label><label><span>Longitude</span><input data-f="${P}lon" data-num inputmode="decimal" value="${esc(f.lon ?? '')}"></label></div>
+        <div class="chk"><label><input type="checkbox" data-fout="${i}"${f.outside ? ' checked' : ''}>Outside Samangan (a referral hospital)</label></div>
         <div class="l">Services</div><div class="chk">${svcs().map(([v, t]) => `<label><input type="checkbox" data-svc="${i}" value="${esc(v)}"${(f.services || []).includes(v) ? ' checked' : ''}>${esc(t)}</label>`).join('')}</div>
-        <p><a href="https://www.google.com/maps/search/?api=1&query=${esc(f.lat)},${esc(f.lon)}" target="_blank" rel="noopener">See on Google Maps</a> · <button class="sm danger" data-act="fdel" data-i="${i}">Delete place</button></p></details>`;
+        <p>${pos ? `<a href="https://www.google.com/maps/search/?api=1&query=${esc(f.lat)},${esc(f.lon)}" target="_blank" rel="noopener">See on Google Maps</a> · ` : '<span class="s">No position yet. </span>'}<button class="sm danger" data-act="fdel" data-i="${i}">Delete place</button></p></details>`;
     }).join('') || '<p class="s">No places found.</p>';
   }
 
@@ -1363,6 +1547,7 @@ function adminClient(cfg) {
     else if (el.dataset.up) upload(el);
     else if (el.dataset.home) { const h = D.config.home = (D.config.home || []).filter((m) => m !== el.dataset.home); if (el.checked) h.push(el.dataset.home); queueSave('home'); render(); }
     else if (el.dataset.svc) { const f = D.facilities.facilities[+el.dataset.svc]; f.services = [...el.closest('.chk').querySelectorAll('input:checked')].map((x) => x.value); queueSave('facilities'); }
+    else if (el.dataset.fout) { D.facilities.facilities[+el.dataset.fout].outside = el.checked; queueSave('facilities'); }
   });
   document.addEventListener('click', async (e) => {
     const b = e.target.closest('[data-act]'); if (!b) return;
@@ -1446,7 +1631,7 @@ function adminClient(cfg) {
         if (!p) return alert('Could not find a place in that. Paste a Google Maps link, or the two numbers like 36.2650, 68.0177.');
         const F = D.facilities.facilities, ids = new Set(F.map((f) => f.id));
         let id = en.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'place'; if (ids.has(id)) { let n = 2; while (ids.has(id + '-' + n)) n++; id += '-' + n; }
-        F.unshift({ id, name: { fa: '', ps: '', en }, type: 'other', district: '', lat: p.lat, lon: p.lon, services: [], phone: '', status: 'open', source: 'Added in the editor ' + new Date().toISOString().slice(0, 10) });
+        F.unshift({ id, name: { fa: '', ps: '', en }, type: 'other', district: '', where: 'building', place: null, lat: p.lat, lon: p.lon, services: [], phone: '', status: 'open', checked: '', outside: false, confidence: 'medium', source: 'Added in the editor ' + new Date().toISOString().slice(0, 10) });
         queueSave('facilities'); Q.places = ''; render(); const first = document.querySelector('#list-places details'); if (first) first.open = true; return;
       }
       case 'fdel': if (!confirm('Delete this place?')) return; D.facilities.facilities.splice(i, 1); queueSave('facilities'); return render();

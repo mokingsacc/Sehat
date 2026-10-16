@@ -16,6 +16,7 @@ mkdir -p "$OUT/content"
 cp "$WEB/index.html" "$WEB/manifest.webmanifest" "$WEB/sw.js" "$OUT/"
 cp "$WEB/content/book.json" "$WEB/content/version.json" "$OUT/content/"
 if [ -f "$WEB/content/who-growth.json" ]; then cp "$WEB/content/who-growth.json" "$OUT/content/"; fi   # WHO growth tables (js/growth.js)
+if [ -f "$WEB/content/map.json" ]; then cp "$WEB/content/map.json" "$OUT/content/"; fi   # the clinic map's roads and rivers (js/clinics.js); its mountains and village roads (maps/) come from the website
 for d in css js fonts img anim; do if [ -d "$WEB/$d" ]; then cp -R "$WEB/$d" "$OUT/$d"; fi; done
 rm -rf "$OUT/img/_preview" "$OUT/js/sw.template.js" "$OUT/anim/demo.html"
 find "$OUT" -name '*.cjs' -delete   # local screenshot helpers (anim/cine/shots.cjs), not part of the app

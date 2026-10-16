@@ -15,6 +15,7 @@ remembered on that device.
 | `/usage` | App use in detail: pages, sections, languages, phone types, app builds (the old dashboard) | everyone |
 | `/watch`, `/watch/methods` | Disease watch: weekly counts by illness, district and age group, alerts, corrections, exports; how it works | everyone; corrections owner only |
 | `/inbox` | Feedback and voice notes, the "Summarise feedback" button | everyone |
+| `/checks` | Clinic checks: answers from the app's "Check the clinics" page. Top line: answers, places answered, GPS points and missing places reported (all time and last 7 days). One row per place (named from the app's published clinic list): open and pin answers (yes / no / don't know), GPS points, the middle point (median latitude, median longitude) with a Google Maps link, its distance from the app's pin and how spread the points are; places where people disagree or whose middle point is over 300 m from the pin come first. Then missing places, and the newest 300 answers with their notes and voice notes (`/chk-audio/<id>`, logged) | everyone |
 | `/data` | Data for research: exports, the codebook, data versions, place codes, export history | everyone; full exports owner only |
 | `/admin` | The book editor | everyone can look; editors and the owner change and publish |
 | `/audit` | The audit log | owner |
@@ -63,6 +64,10 @@ stays in `surv_reports` (see `/watch/methods`).
 
 - **Usage** (by day or ISO epi week, by district, language, phone type, app build and consent version, per page or for the
   whole app) and **installs** (by day or week, language, phone type, build).
+- **Clinic checks** (`/checks/export.csv` and `/checks/export.json`, everyone signed in): every answer from the "Check the
+  clinics" page (newest 5,000) with the place's English name, the answers, the GPS point and its accuracy, and the note.
+  The CSV has the usual `#` header with its SHA-256; the JSON carries it in the `X-Sehat-SHA256` header. Both hold free
+  text and phone positions: not for sharing outside the team. Every download is in the audit log.
 - **Disease watch** (`/watch/export.*`): weekly counts, alerts, symptom-finder searches, a DHIS2 file; for the owner also
   every report as received and every correction.
 - Every file has ISO dates (`YYYY-MM-DD`), ISO weeks (`YYYY-Www`, Monday start), stable place ids, the official district
@@ -75,7 +80,8 @@ stays in `surv_reports` (see `/watch/methods`).
   every export column, with a privacy level. A test (`tools/test_dashboard.mjs`) checks it against the real tables.
 - **Data versions** shows, for each app build, which consent wording its phones agreed to and which case definitions its
   reports used, so any row can be tied to the app build and consent version it came from.
-- No export has GPS or any address: the smallest place is the district.
+- No export has GPS or any address (the smallest place is the district), except the clinic checks: there a person chose to
+  send the phone's position while standing at a clinic, to put the clinic on the map.
 
 ### DHIS2
 
@@ -103,7 +109,9 @@ is always there. Add a code in `PCODES` once it is checked against the official 
 instead.
 
 New tables on 8 October 2026: `sessions` (sign-ins; ended and expired ones are deleted after 90 days by the nightly job,
-the audit log keeps the sign-in itself) and `audit_log`.
+the audit log keeps the sign-in itself) and `audit_log`. On 16 October 2026: `checks` (answers from the app's "Check the
+clinics" page, `POST /check`; no install id or address; voice notes deleted after 90 days by the nightly job; at most
+`CHECKS_PER_DAY` answers (2,000) and `CHECK_AUDIO_BYTES_PER_DAY` voice bytes (5 MB) a day from all phones together).
 
 ## Tests
 
