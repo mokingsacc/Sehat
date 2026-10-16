@@ -41,6 +41,14 @@ lifespan starts: it opens the store, deletes expired questions, fails jobs a res
 index and starts the print queue, and closes the store on shutdown. `tests/test_async.py` checks that 20 phones
 asking a slow model at once take about as long as one.
 
+**Migrations.** The tables are made by shared SQL files, `tutor/migrations/NNNN_name.sql`, written so D1 runs them
+too: no PRAGMA, every `CREATE` with `IF NOT EXISTS`. `0001_init.sql` is the schema as it was before migrations, so a
+hub database made by older code takes it without harm. When the store opens, `stores/sqlite.py` applies the files not
+yet in `schema_migrations(id, applied_at)`, in order, each in one transaction with its row; the PRAGMAs (WAL, full
+sync) stay in the SQLite store. `tests/test_store_contract.py` runs one set of tests against every store (SQLite
+now, a D1 fake later) and checks that fresh and old databases end the same and that a second run changes nothing.
+A new table is a new numbered file, never an edit to an old one.
+
 ## Answering a question (brain.py)
 
 The safest source answers first, and every answer says where it came from, so the app can label it.

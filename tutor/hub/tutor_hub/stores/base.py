@@ -5,8 +5,9 @@ SQLite store runs the same calls on one worker thread. A route never touches a d
 
 The contract, which tests/test_store_contract.py checks on every store:
 
-- `open()` makes the store ready (connects, brings the schema up to date) and may be called once before anything
-  else; `close()` lets go of it. Neither loses a committed row.
+- `open()` makes the store ready: it connects and applies, in order, the migrations in tutor/migrations it has not
+  applied before, recording each in `schema_migrations(id, applied_at)`; opening again changes nothing. `close()`
+  lets go of the store. Neither loses a committed row.
 - Rows come back as plain dicts with the column names as keys; nothing returned is tied to the database.
 - No method stores a name. Questions are anonymous: `add_question` returns a random 16-character token, which is
   how the asking phone finds its question again; the teacher's views never need it.

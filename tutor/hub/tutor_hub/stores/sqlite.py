@@ -3,19 +3,64 @@
 Every call runs on a single-thread executor, so calls reach the database one at a time and in order, and the event
 loop never waits on the disk. The print worker is a thread of its own and keeps calling the inner store directly
 (`sync`); the inner store's lock keeps the two apart.
+
+The tables come from the shared migrations in tutor/migrations (`NNNN_name.sql`, plain SQL that D1 also runs). At
+`open()` the files not yet listed in `schema_migrations` are applied in order, each in one transaction with its
+row in that table, so a cut in the middle leaves the database as it was. The PRAGMAs (WAL, full sync) are the
+hub's own and stay in the inner store, never in a migration.
 """
 import asyncio
 import functools
+import logging
+import re
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
 from pathlib import Path
 
+from ..config import TUTOR
 from . import _sqlite_sync
 from .base import Store
 
+log = logging.getLogger("tutor.store")
+MIGRATIONS = TUTOR / "migrations"
+NAME = re.compile(r"^[0-9]{4}_[a-z0-9_]+$")
+
+
+def migration_files(folder: Path = MIGRATIONS) -> list[Path]:
+    files = sorted(folder.glob("*.sql"))
+    bad = [f.name for f in files if not NAME.match(f.stem)]
+    if bad:
+        raise ValueError(f"migration files must be named like 0001_init.sql: {', '.join(bad)}")
+    return files
+
+
+def migrate(db: sqlite3.Connection, folder: Path = MIGRATIONS) -> list[str]:
+    """Apply the migrations `db` has not had yet, in order; return the ids applied. Safe to run any number of times."""
+    db.execute("CREATE TABLE IF NOT EXISTS schema_migrations(id TEXT PRIMARY KEY, applied_at TEXT NOT NULL)")
+    done = {r[0] for r in db.execute("SELECT id FROM schema_migrations")}
+    applied = []
+    for f in migration_files(folder):
+        if f.stem in done:
+            continue
+        at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        try:
+            # the id and time are safe to write in place: the id matched NAME and the time is ours
+            db.executescript(f"BEGIN;\n{f.read_text(encoding='utf-8')}\n;"
+                             f"INSERT INTO schema_migrations(id, applied_at) VALUES('{f.stem}', '{at}');\nCOMMIT;")
+        except sqlite3.Error:
+            if db.in_transaction:
+                db.execute("ROLLBACK")
+            raise
+        log.info("applied migration %s", f.stem)
+        applied.append(f.stem)
+    return applied
+
 
 class SqliteStore(Store):
-    def __init__(self, path: Path | str):
+    def __init__(self, path: Path | str, migrations: Path = MIGRATIONS):
         self.path = Path(path)
+        self.migrations = Path(migrations)
         self._inner: _sqlite_sync.Store | None = None
         self._pool: ThreadPoolExecutor | None = None
 
@@ -38,6 +83,11 @@ class SqliteStore(Store):
         self._pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="store")
         loop = asyncio.get_running_loop()
         self._inner = await loop.run_in_executor(self._pool, _sqlite_sync.Store, self.path)
+        await loop.run_in_executor(self._pool, self._migrate)
+
+    def _migrate(self):
+        with self._inner.lock:
+            migrate(self._inner.db, self.migrations)
 
     async def close(self) -> None:
         pool, inner = self._pool, self._inner
