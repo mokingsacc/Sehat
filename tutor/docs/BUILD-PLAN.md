@@ -490,7 +490,7 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 
 **P4. Events without names** (S)
 - Goal: `events`, `POST /api/events`, server-side events for ask, print, check and review; a phone queue.
-- Files: `events.py` (new), `migrations/0002_events.sql`, `server.py`, `app/js/events.js` (new), `state.js`.
+- Files: `events.py` (new), `migrations/0003_events.sql`, `server.py`, `app/js/events.js` (new), `state.js`.
 - Done when: a lesson done offline shows as two events after reconnecting; free text or an unknown verb is refused.
 - Tests: `tests/test_events.py`; a schema scan that fails on any name-, sex-, birth-, phone- or address-like column.
 - Committee: no.
@@ -498,7 +498,7 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 **P5. The AI gateway and fake provider** (M)
 - Goal: section 3.7; `brain.py` calls the gateway.
 - Files: `ai/{gateway,providers,policy,fake,filters}.py` (new), `brain.py`, `config.py` (`TUTOR_AI_PROVIDER`,
-  `TUTOR_AI_BUDGET`), `migrations/0003_ai_usage.sql`.
+  `TUTOR_AI_BUDGET`), `migrations/0004_ai_usage.sql`.
 - Done when: Ask works end to end on the fake; an Anthropic or Google host for a learner purpose raises; an
   over-budget cohort gets checked answers and the teacher, never an error; the recorder finds no nickname or digit run.
 - Tests: `tests/test_gateway.py`; brain tests through the gateway.
@@ -525,7 +525,7 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 **P8. Content pipeline and licence classes** (M)
 - Goal: section 4: sources.json enforcement, `sources` blocks, content hashes, `signoffs`, `TUTOR_RELEASE`, link cards,
   Credits data, one importer for a BUNDLE source.
-- Files: `tools/validate_pack.py`, `packs.py`, `docs/CONTENT.md`, `migrations/0004_content.sql`,
+- Files: `tools/validate_pack.py`, `packs.py`, `docs/CONTENT.md`, `migrations/0005_content.sql`,
   `content/permissions/README.md`, `tools/import_<kind>.py`.
 - Done when: fixtures citing AVOID, NC in a non-NC pack, or copied text in a LINK card fail CI; production hides the
   starter drafts, staging shows them under the draft band.
@@ -551,7 +551,7 @@ before the first new tables, so nothing is written twice. P3a needs no design in
   (server); the PIN lock with the visible 24-hour reset; Settings behind "Who is learning" (Bigger text, theme, lock,
   nickname, remove learner, Credits); `/api/join`, `/api/me`.
 - Files: `screens/welcome.js`, `who.js`, new `signup.js`, `consent.js`, `lock.js`, `settings.js`, `sha256.js`,
-  `state.js`, `mods/join.py`, `migrations/0005_learners.sql`, `content/aliases.json`, `content/consent/`.
+  `state.js`, `mods/join.py`, `migrations/0006_learners.sql`, `content/aliases.json`, `content/consent/`.
 - Done when: sign-up takes under 3 minutes in the browser check with every screen spoken; without consent AI and photo
   modules are off and no event is sent; a forgotten PIN resets after the 24-hour countdown without wiping; `qalam.v2`
   holds no name.
@@ -686,7 +686,7 @@ that are off for the pilot cohort, so any gain can be attributed.
 |---|---|---|---|
 | C0 | 16 Oct 2026, held | this plan's design choices: manifest, slots, flags, async first, store, photo handling, aliases, bands, licences | this file; decisions in `build-committee/decisions_fable.md` |
 | C1 | 16 Oct 2026, held with C0 | bands, adult tone, visual identity and icon, bigger text, dark mode, sign-up order, consent screen, alias versus nickname, PIN lock and reset | settled without mock screens; the spec is in DESIGN.md; P9's screenshots go to C2 for a look-over |
-| C2 | early December 2026 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits | note, mock screens, mock sheet |
+| C2 | early December 2026 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits; which modules `ey` gets (P1 left it out of Ask and Check my sheet) and which modules the `open` cohort switches on (the seed has all five, and Ask's last step is a teacher) | note, mock screens, mock sheet |
 | C3 | early January 2027 | school day and bells, teacher dashboard, admin panel, review screens, "learn this" entry, APK screens | note, mock screens |
 | C4 | July 2027 | Year 1 modules | note, mock screens |
 
@@ -801,5 +801,7 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | 16 Oct 2026 | C0 (design committee): manifest trimmed to `id`, `version`, `maturity`, `depends`, `bands`, `slots`, `capabilities`, `ai`, `settings`, `needs`, `offline`; five slots, the shell enforces one primary, one secondary, one list; risk set by the core; Stage A order P3a, P3b, P1, P2; photos as an in-memory answer-cell strip with a file-input fallback, no R2; alias is a phone-picked picture plus a server number; six bands (`ey`, `p1`, `p2`, `s1`, `s2`, `ad`) with `data-look` and `data-tone`; sources.json the only licence truth, OpenStax link-only in 2027, section 4.1 corrected | design committee: Fable 5.1 (chair), Opus 5.5 | decisions_fable.md |
 | 16 Oct 2026 | C1 (design committee): one identity, accent by tone (green on mint for children, teal on white otherwise), `--warm` #c2540a; tokens times one `--scale`, Bigger text ×1.25, dark follows the phone with Phone, Light or Dark per learner; adult literacy is the bold look in the adult tone; Welcome doors with no name field, consent at first need, `?join=CODE`; four-line spoken consent with hold-to-agree and Not now; optional 4-digit lock, never for `ey`, with a visible 24-hour reset that deletes nothing; girl or boy not built (D1 stays Mo's) | design committee | decisions_fable.md; DESIGN.md |
 | 16 Oct 2026 | Flags (design committee): interface and lesson audio recorded by native speakers, no synthetic Dari or Pashto voice; the hub stays plain http and the APK is its secure context; names leave the phone and the sheet routes, certificates only; random cohort ids with neutral labels; bells on while the app is open, closed-app alarms only on a phone she says is hers; no R2 until needed; the clean Home keeps Check my sheet, not Print | design committee | decisions_fable.md |
+
+| 16 Oct 2026 | Stage A part 1 built (P3a, P3b, P1, P2). Migrations after `0002_cohorts` move up by one. Provisional until C2: `ey` left out of Ask and Check my sheet; all five modules on for the `open` and `staging` seed cohorts. The lesson's end card now comes from the print module's `lesson.end` slot | builder; thread | commits 10b51e6a to b1f04507 |
 
 New decisions are added with date and source; a row is never edited, only superseded.
