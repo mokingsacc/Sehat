@@ -1,0 +1,1251 @@
+[
+  {
+    "id": "afghan-children-read-bloom",
+    "name": "Afghan Children Read graded readers (on Bloom Library)",
+    "url": "https://bloomlibrary.org/afghan-children-read",
+    "owner": "Creative Associates International (USAID-funded Afghan Children Read project, 2016-2021)",
+    "licence": "CC0 (public domain dedication) on 340 of 341 books; one Dari book is CC BY-NC",
+    "licenceUrl": "https://bloomlibrary.org/afghan-children-read",
+    "class": "BUNDLE",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "adult"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto"
+    ],
+    "formats": [
+      "text",
+      "pdf"
+    ],
+    "offline": true,
+    "attribution": "Story from Afghan Children Read (Creative Associates International, with USAID), CC0, via Bloom Library.",
+    "notes": "Bloom's own catalogue lists 209 Pashto and 132 Dari books on shelves such as 'Afghan-Children-Read-Pashto-Grade-3', written for the Afghan grade 1-3 reading programme; 131 Dari and all 209 Pashto carry licence 'cc0' (copyright line 'Copyright 2021 Creative Associates International'). Check each book's pictures against our no-living-beings rule and swap them where needed.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "bloom-library",
+    "name": "Bloom Library (other books)",
+    "url": "https://bloomlibrary.org/",
+    "owner": "SIL Global and individual book authors",
+    "licence": "Per book (each book records its own licence: cc0, cc-by, cc-by-sa, cc-by-nc and others)",
+    "licenceUrl": "https://bloomlibrary.org/",
+    "class": "BUNDLE",
+    "languages": [
+      "prs",
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "early",
+      "g1-6"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "life-skills"
+    ],
+    "formats": [
+      "text",
+      "audio",
+      "pdf"
+    ],
+    "offline": true,
+    "attribution": "\"{title}\" by {author}, {licence}, via Bloom Library (bloomlibrary.org).",
+    "notes": "BUNDLE only for books whose own licence field is cc0, cc-by or cc-by-sa; treat cc-by-nc books as BUNDLE-NC and anything else as LINK. Apart from Afghan Children Read, few Dari or Pashto books were found (2 more tagged Dari, 2 Persian).",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "storyweaver",
+    "name": "StoryWeaver",
+    "url": "https://storyweaver.org.in/",
+    "owner": "Pratham Books",
+    "licence": "CC BY 4.0 (per book; site says all content is openly licensed under CC 4.0)",
+    "licenceUrl": "https://storyweaver.org.in/about",
+    "class": "BUNDLE",
+    "languages": [
+      "pus",
+      "prs",
+      "fas",
+      "eng",
+      "zho"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "beyond"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "english",
+      "chinese",
+      "science"
+    ],
+    "formats": [
+      "text",
+      "pdf",
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "\"{title}\" by {author}, illustrated by {illustrator}, CC BY 4.0, via StoryWeaver (Pratham Books). Translated by Qalam.",
+    "notes": "StoryWeaver's search API today lists 122 Pashto, 12 'Dari' and 268 'Farsi' books (many 'Farsi' ones came from the Darakht-e Danesh partnership and may be Dari), plus 406 in Simplified Chinese for the Chinese track. Confirm the licence line on each book before copying; many pictures show people and animals.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "global-digital-library",
+    "name": "Global Digital Library (Global Book Alliance)",
+    "url": "https://digitallibrary.io/",
+    "owner": "Global Book Alliance / Norad-backed Global Digital Library",
+    "licence": "CC BY and CC BY-SA (primary licences); every item marked with its own licence",
+    "licenceUrl": "https://digitallibrary.io/about/license/",
+    "class": "BUNDLE",
+    "languages": [
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "early",
+      "g1-6"
+    ],
+    "subjects": [
+      "reading-pashto",
+      "maths",
+      "english"
+    ],
+    "formats": [
+      "text",
+      "pdf"
+    ],
+    "offline": true,
+    "attribution": "\"{title}\" by {author}, {licence}, via the Global Digital Library (digitallibrary.io).",
+    "notes": "Licence page: 'The primary licenses for content on the GDL are CC BY and CC BY-SA'. A third-party guide counts about 104 Pashto books (likely overlapping Afghan Children Read); no Dari listing was readable, and the site needs JavaScript so counts were not checked.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "african-storybook",
+    "name": "African Storybook",
+    "url": "https://www.africanstorybook.org/",
+    "owner": "Saide",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://www.africanstorybook.org/",
+    "class": "BUNDLE",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "early",
+      "g1-6"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "english"
+    ],
+    "formats": [
+      "text",
+      "pdf"
+    ],
+    "offline": true,
+    "attribution": "\"{title}\" by {author}, CC BY 4.0, African Storybook (Saide). Translated into Dari and Pashto by Qalam.",
+    "notes": "Footer: '© 2015-2026 Saide - Creative Commons Licence CC-BY-4.0'. No Dari or Pashto; useful only as simple English source stories to translate, and the African settings and pictures may not suit.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "feed-the-monster",
+    "name": "Feed the Monster (Curious Learning)",
+    "url": "https://github.com/curiouslearning/FeedTheMonster",
+    "owner": "Curious Learning (code originally by Apps Factory for EduApp4Syria)",
+    "licence": "BSD 2-Clause (code)",
+    "licenceUrl": "https://github.com/curiouslearning/FeedTheMonster/blob/master/LICENSE",
+    "class": "BUNDLE",
+    "languages": [
+      "ara",
+      "eng"
+    ],
+    "ages": [
+      "early",
+      "g1-6"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto"
+    ],
+    "formats": [
+      "interactive"
+    ],
+    "offline": true,
+    "attribution": "Letter game based on Feed the Monster by Curious Learning (BSD 2-Clause).",
+    "notes": "The code is BSD 2-Clause, so a Dari and Pashto letter game can be built from it; no Dari or Pashto version exists. The licence of the art and sound assets was not confirmed, so redraw or check them before reuse.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "darakht-e-danesh-library",
+    "name": "Darakht-e Danesh Library (Right to Learn Afghanistan)",
+    "url": "https://www.darakhtdanesh.org/",
+    "owner": "Right to Learn Afghanistan (formerly Canadian Women for Women in Afghanistan)",
+    "licence": "Unclear: mixed Creative Commons per item (reported), site unreadable",
+    "licenceUrl": "https://opentextbc.ca/oerdiscipline/chapter/pashto/",
+    "class": "ASK",
+    "languages": [
+      "prs",
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "maths",
+      "science",
+      "english",
+      "social-studies",
+      "life-skills"
+    ],
+    "formats": [
+      "text",
+      "pdf",
+      "video",
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "\"{title}\" by {author}, {licence}, from the Darakht-e Danesh Library (Right to Learn Afghanistan).",
+    "notes": "The biggest Dari/Pashto open library (3,000 to 9,000+ items, teacher-focused); listed as 'various CC licences' by BCcampus, but the site returned HTTP 403 so per-item licences were not read. Send the drafted Right to Learn email; any item whose own page says CC BY or CC BY-SA can be bundled once read.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "begum-academy",
+    "name": "Begum Academy",
+    "url": "https://begum-academy.org/en/",
+    "owner": "Begum Organization for Women (Paris)",
+    "licence": "All rights reserved; no terms of use or licence page",
+    "licenceUrl": "https://begum-academy.org/en/",
+    "class": "ASK",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "beyond"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "english",
+      "reading-dari",
+      "reading-pashto",
+      "social-studies",
+      "life-skills",
+      "quran"
+    ],
+    "formats": [
+      "video",
+      "interactive"
+    ],
+    "offline": false,
+    "attribution": "Lesson video by Begum Academy (begum-academy.org), shown with permission.",
+    "notes": "Footer: '© 2026 Begum Online Academy. All Rights Reserved.'; only a privacy policy and FAQ are linked. Until Begum answers, link out or use its own YouTube channels' players (@Begum.AcademyDari, @Begum.AcademyPashto); never download or re-host.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "solax",
+    "name": "SOLAx (School of Leadership Afghanistan, WhatsApp school)",
+    "url": "https://www.solax.org/en/faq",
+    "owner": "School of Leadership, Afghanistan (SOLA)",
+    "licence": "All rights reserved",
+    "licenceUrl": "https://www.solax.org/en/faq",
+    "class": "ASK",
+    "languages": [
+      "prs",
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "english"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": false,
+    "attribution": "Lesson by SOLAx (solax.org), used with permission.",
+    "notes": "Footer: 'Copyright © SOLAx 2025. All rights reserved.'; no terms of use; FAQ invites educators to contact them. Send the drafted email; meanwhile point learners to SOLAx's own WhatsApp sign-up.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "learn-afghanistan",
+    "name": "LEARN Afghanistan (Digital Lab / HELA app)",
+    "url": "https://globalvoices.org/2021/03/29/using-tablets-activist-gets-900-girls-and-women-educated-in-rural-afghanistan/",
+    "owner": "LEARN Afghanistan (Pashtana Durrani)",
+    "licence": "Unclear: no licence or terms found",
+    "licenceUrl": "",
+    "class": "ASK",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "life-skills"
+    ],
+    "formats": [
+      "text",
+      "video"
+    ],
+    "offline": true,
+    "attribution": "Content by LEARN Afghanistan, used with permission.",
+    "notes": "Reported offline library of grade 1-12 subjects in Dari and Pashto (via Rumie), plus financial literacy and safety material. No public page for a 'HELA' app or any licence was found; ask using the drafted email.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "moe-textbooks",
+    "name": "Afghan Ministry of Education textbooks",
+    "url": "https://moe.gov.af/en/node/450",
+    "owner": "Ministry of Education, Afghanistan",
+    "licence": "All rights reserved",
+    "licenceUrl": "https://moe.gov.af/en/node/450",
+    "class": "LINK",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "maths",
+      "science",
+      "english",
+      "social-studies",
+      "life-skills",
+      "quran"
+    ],
+    "formats": [
+      "pdf"
+    ],
+    "offline": false,
+    "attribution": "Follows the Afghan Ministry of Education curriculum.",
+    "notes": "Footer: 'Copyright © 2024 | MOE. All Rights Reserved'. Use as the curriculum map only, never copy text or pictures; the online PDFs are the 2019-2020 editions and predate the 2025 removals.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "khan-academy",
+    "name": "Khan Academy (including Farsi site)",
+    "url": "https://fa.khanacademy.org/",
+    "owner": "Khan Academy",
+    "licence": "CC BY-NC-SA (most Khan Academy-made videos and exercises); partner content excluded",
+    "licenceUrl": "https://support.khanacademy.org/hc/en-us/articles/202262954-Can-I-use-Khan-Academy-s-videos-name-materials-links-in-my-project",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "fas",
+      "eng"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "beyond"
+    ],
+    "subjects": [
+      "maths",
+      "science"
+    ],
+    "formats": [
+      "video",
+      "interactive"
+    ],
+    "offline": true,
+    "attribution": "Video by Khan Academy (khanacademy.org), CC BY-NC-SA. Khan Academy does not endorse Qalam.",
+    "notes": "Support page points reusers to CC BY-NC-SA, the terms of service and the brand policy; partner-made items (e.g. museums) are excluded, the name and logo may not be used, and the share-alike part means our adaptations must be BY-NC-SA. Farsi is Iranian Persian; there is no Dari or Pashto site.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "phet-simulations",
+    "name": "PhET Interactive Simulations",
+    "url": "https://phet.colorado.edu/",
+    "owner": "University of Colorado Boulder",
+    "licence": "CC BY 4.0 for HTML5 sims released before 29 March 2026; later sims under different terms",
+    "licenceUrl": "https://phet.colorado.edu/en/licensing/html",
+    "class": "BUNDLE",
+    "languages": [
+      "fas",
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "beyond"
+    ],
+    "subjects": [
+      "science",
+      "maths"
+    ],
+    "formats": [
+      "interactive"
+    ],
+    "offline": true,
+    "attribution": "Simulation by PhET Interactive Simulations, University of Colorado Boulder, licensed under CC BY 4.0 (https://phet.colorado.edu).",
+    "notes": "Use only versions released before 29 March 2026, keep the PhET logo visible and unaltered, and place the exact attribution (translation of it allowed) next to the sim. Persian translations exist for many sims and Pashto for a few; counts were not checked.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "openstax",
+    "name": "OpenStax textbooks",
+    "url": "https://openstax.org/",
+    "owner": "OpenStax, Rice University",
+    "licence": "CC BY-NC-SA 4.0, plus a ban on use in AI/LLM training or ingestion",
+    "licenceUrl": "https://help.openstax.org/s/article/Licensing-information-of-OpenStax-textbooks",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "g10-12",
+      "beyond"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "social-studies"
+    ],
+    "formats": [
+      "text",
+      "pdf"
+    ],
+    "offline": true,
+    "attribution": "\"{book}\" by OpenStax, CC BY-NC-SA 4.0 (openstax.org). Adapted by Qalam.",
+    "notes": "Books now say they 'may not be used in the training of large language models or otherwise be ingested into large language models' without permission, so keep them out of the AI tutor's sources. Older copies released under CC BY 4.0 keep that licence; check the statement inside each book.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "ck-12",
+    "name": "CK-12 FlexBooks",
+    "url": "https://www.ck12.org/",
+    "owner": "CK-12 Foundation",
+    "licence": "CK-12 Curriculum Materials License (educational purposes only; changes marked and shared under the same licence)",
+    "licenceUrl": "https://help.ck12.org/hc/en-us/articles/50990257420955-CK-12-Materials-License",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12"
+    ],
+    "subjects": [
+      "maths",
+      "science"
+    ],
+    "formats": [
+      "text",
+      "interactive"
+    ],
+    "offline": false,
+    "attribution": "Based on CK-12 Foundation material (ck12.org), used under the CK-12 Curriculum Materials License; changes by Qalam.",
+    "notes": "Not a Creative Commons licence: it allows copying and changing 'solely for Educational Purposes', requires marked changes and attribution, and grants CK-12 rights in our changes. The licence page refused our fetch (HTTP 403), so read it in full before bundling; low priority because it is English only.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "illustrative-mathematics",
+    "name": "Illustrative Mathematics K-12 Math (first edition)",
+    "url": "https://illustrativemathematics.org/",
+    "owner": "Illustrative Mathematics",
+    "licence": "CC BY 4.0 (first edition, 2019-2021); IM v.360 (2024) is CC BY-NC 4.0",
+    "licenceUrl": "https://www.illustrativemathematics.org/terms-of-use",
+    "class": "BUNDLE",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12"
+    ],
+    "subjects": [
+      "maths"
+    ],
+    "formats": [
+      "text",
+      "pdf"
+    ],
+    "offline": true,
+    "attribution": "Based on IM® K–12 Math authored by Illustrative Mathematics, licensed under CC BY 4.0. Translated and adapted by Qalam.",
+    "notes": "Use the first edition for BUNDLE; v.360 is BUNDLE-NC. The Illustrative Mathematics name and logo are not covered and must not appear in our titles (trademark policy).",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "kolibri",
+    "name": "Kolibri and Kolibri Studio public channels",
+    "url": "https://learningequality.org/kolibri/",
+    "owner": "Learning Equality",
+    "licence": "Kolibri software MIT; each channel item carries its own licence",
+    "licenceUrl": "https://github.com/learningequality/kolibri",
+    "class": "BUNDLE",
+    "languages": [
+      "eng",
+      "fas"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "beyond"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "english",
+      "reading-dari",
+      "reading-pashto"
+    ],
+    "formats": [
+      "video",
+      "interactive",
+      "pdf",
+      "text"
+    ],
+    "offline": true,
+    "attribution": "{item title}, {licence}, from {channel} via Kolibri (Learning Equality).",
+    "notes": "The software is MIT; channel items range from CC BY to 'All Rights Reserved', so bundle only items whose own licence allows it. No Dari or Pashto channel was found and the Khan Academy Farsi channel was never built.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "voa-learning-english",
+    "name": "VOA Learning English",
+    "url": "https://learningenglish.voanews.com/",
+    "owner": "Voice of America (US Government)",
+    "licence": "Public domain (VOA-produced material); AP, Reuters and AFP items excluded",
+    "licenceUrl": "https://learningenglish.voanews.com/p/6861.html",
+    "class": "BUNDLE",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "english"
+    ],
+    "formats": [
+      "text",
+      "audio",
+      "video"
+    ],
+    "offline": true,
+    "attribution": "From VOA Learning English (learningenglish.voanews.com), public domain.",
+    "notes": "Page says 'Learning English texts, MP3s, photos and videos are in the public domain' and may be reprinted 'for educational and commercial purposes' with credit. Skip any item credited to AP, Reuters or AFP; VOA's future has been uncertain since the 2025 US cuts, so take copies of chosen lessons early.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "voa-dari-pashto",
+    "name": "VOA Dari and Pashto services",
+    "url": "https://www.voanews.com/",
+    "owner": "Voice of America (US Government)",
+    "licence": "Public domain (material produced exclusively by VOA); licensed third-party material excluded",
+    "licenceUrl": "https://www.voanews.com/p/5338.html",
+    "class": "BUNDLE",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "social-studies",
+      "reading-dari",
+      "reading-pashto"
+    ],
+    "formats": [
+      "text",
+      "audio",
+      "video"
+    ],
+    "offline": true,
+    "attribution": "From Voice of America (voanews.com), public domain.",
+    "notes": "Copyright statement: 'All text, audio and video material produced exclusively by the Voice of America is in the public domain.' News, not lessons, and politically sensitive in Afghanistan; use only for adult reading practice after review, and the current state of the Afghan services was not checked.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "bbc-learning-english",
+    "name": "BBC Learning English",
+    "url": "https://www.bbc.co.uk/learningenglish",
+    "owner": "BBC",
+    "licence": "All rights reserved; share or embed only with the BBC's own buttons; business use needs permission",
+    "licenceUrl": "https://www.bbc.co.uk/usingthebbc/terms/can-i-share-things-from-the-bbc/",
+    "class": "LINK",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "english"
+    ],
+    "formats": [
+      "audio",
+      "video",
+      "text"
+    ],
+    "offline": false,
+    "attribution": "BBC Learning English (bbc.co.uk/learningenglish).",
+    "notes": "BBC terms: shareable items can be shared through the Share or Embed buttons, with rules, and any other use needs permission. Link out only.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "bbc-dars",
+    "name": "BBC Dars (Dari and Pashto lessons for ages 11-16)",
+    "url": "https://en.wikipedia.org/wiki/Dars_(TV_show)",
+    "owner": "BBC News Afghanistan",
+    "licence": "All rights reserved (BBC terms)",
+    "licenceUrl": "https://www.bbc.co.uk/usingthebbc/terms/can-i-share-things-from-the-bbc/",
+    "class": "LINK",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "g7-9"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "social-studies"
+    ],
+    "formats": [
+      "video"
+    ],
+    "offline": false,
+    "attribution": "BBC Dars, BBC News Afghanistan.",
+    "notes": "Half-hour Dari and Pashto episodes adapted from BBC Bitesize (2023-2024). Link to the BBC's own pages or players only.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "wikipedia-fa-ps",
+    "name": "Persian and Pashto Wikipedia",
+    "url": "https://ps.wikipedia.org/",
+    "owner": "Wikipedia contributors (Wikimedia Foundation)",
+    "licence": "CC BY-SA 4.0 (and GFDL)",
+    "licenceUrl": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+    "class": "BUNDLE",
+    "languages": [
+      "fas",
+      "pus"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "science",
+      "social-studies",
+      "general"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "From the {language} Wikipedia article \"{title}\" by Wikipedia contributors, CC BY-SA 4.0 (link to the article).",
+    "notes": "Good as a checked reference for the AI tutor's lookups; anything we adapt must stay CC BY-SA. Persian Wikipedia is Iranian in register, Pashto Wikipedia is small (about 21,000 articles), there is no Dari Wikipedia, and political and religious articles need review.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "wiktionary-fa-ps",
+    "name": "Persian and Pashto Wiktionary",
+    "url": "https://ps.wiktionary.org/",
+    "owner": "Wiktionary contributors (Wikimedia Foundation)",
+    "licence": "CC BY-SA 4.0 (and GFDL)",
+    "licenceUrl": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+    "class": "BUNDLE",
+    "languages": [
+      "fas",
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "english"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Word data from Wiktionary contributors, CC BY-SA 4.0.",
+    "notes": "Useful for word lists and an offline glossary; the English Wiktionary also has Dari and Pashto entries. Share-alike applies to any word list we build from it.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "wikibooks",
+    "name": "Wikibooks (incl. Chinese (Mandarin) and Persian books)",
+    "url": "https://en.wikibooks.org/wiki/Chinese_(Mandarin)",
+    "owner": "Wikibooks contributors (Wikimedia Foundation)",
+    "licence": "CC BY-SA 4.0 (and GFDL)",
+    "licenceUrl": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+    "class": "BUNDLE",
+    "languages": [
+      "eng",
+      "zho",
+      "fas"
+    ],
+    "ages": [
+      "beyond"
+    ],
+    "subjects": [
+      "chinese",
+      "general"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "From Wikibooks, \"{book}\", by Wikibooks contributors, CC BY-SA 4.0.",
+    "notes": "Uneven quality; the Mandarin book is a usable skeleton for a pinyin-and-tones starter that we would translate into Dari and Pashto. Persian and Pashto Wikibooks are very small.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "tanzil-quran-text",
+    "name": "Tanzil Quran text",
+    "url": "https://tanzil.net/download/",
+    "owner": "Tanzil Project",
+    "licence": "Tanzil terms: verbatim copies allowed with source named and link to tanzil.net; no changes",
+    "licenceUrl": "https://tanzil.net/download/",
+    "class": "BUNDLE",
+    "languages": [
+      "ara"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "quran"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Quran text: Tanzil Project (tanzil.net), unchanged.",
+    "notes": "'Permission is granted to copy and distribute verbatim copies of the Quran text ... but changing the text is not allowed.' Use it as the only Quran text in the app, shown by verse reference; never let the AI write or retype verses.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "quranenc-translations",
+    "name": "QuranEnc translations of the meanings (Dari and Pashto)",
+    "url": "https://quranenc.com/en/home/api",
+    "owner": "King Fahd Glorious Quran Printing Complex / QuranEnc.com (Rowwad Translation Center and others)",
+    "licence": "QuranEnc republishing terms: no changes, credit publisher and QuranEnc.com, state version, keep up to date",
+    "licenceUrl": "https://quranenc.com/en/home/api",
+    "class": "BUNDLE",
+    "languages": [
+      "prs",
+      "pus",
+      "fas"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "quran"
+    ],
+    "formats": [
+      "text",
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Translation of the meanings: {translator}, {publisher}, version {version}, from QuranEnc.com.",
+    "notes": "Seven conditions, starting 'No modification, addition, or deletion of the content'; also notify QuranEnc of notes and update to its latest version. Dari: Muhammad Anwar Badakhshani; Pashto: Rowwad, Abu Zakaria, Janbaz Sarfaraz. A religious reviewer should pick which translation to show.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "alquran-cloud-recitations",
+    "name": "Islamic Network / AlQuran Cloud recitation audio",
+    "url": "https://alquran.cloud/",
+    "owner": "Islamic Network; copyright stays with each reciter or estate",
+    "licence": "Recitations licensed by reciters 'for free, non-commercial redistribution'; reciters may ask for removal",
+    "licenceUrl": "https://alquran.cloud/terms-and-conditions",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "ara"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "quran"
+    ],
+    "formats": [
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Recitation by {reciter}, via Islamic Network (alquran.cloud). Copyright the reciter.",
+    "notes": "The best openly stated recitation route found: free non-commercial redistribution, files kept exactly as published. Keep a way to remove a reciter on request; pick one widely accepted Hafs reciter with a religious reviewer.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "king-fahd-complex-recitations",
+    "name": "King Fahd Glorious Quran Printing Complex recitations",
+    "url": "https://qurancomplex.gov.sa/en/?p=3979",
+    "owner": "King Fahd Glorious Quran Printing Complex",
+    "licence": "Unclear: search summaries report 'free general use in computer apps, broadcasting channels, and websites'; page unreachable",
+    "licenceUrl": "https://qurancomplex.gov.sa/en/?p=3979",
+    "class": "ASK",
+    "languages": [
+      "ara"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "quran"
+    ],
+    "formats": [
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Recitation from the King Fahd Glorious Quran Printing Complex.",
+    "notes": "The page returned HTTP 503 every time, so its grant could not be read. If it says what search summaries report, this becomes BUNDLE (unchanged files) and is the most authoritative recitation source.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "quranicaudio-everyayah",
+    "name": "QuranicAudio and EveryAyah",
+    "url": "https://www.quranicaudio.com/about",
+    "owner": "Various reciters and publishers",
+    "licence": "QuranicAudio: personal use only; EveryAyah: no licence stated",
+    "licenceUrl": "https://www.quranicaudio.com/about",
+    "class": "AVOID",
+    "languages": [
+      "ara"
+    ],
+    "ages": [
+      "adult"
+    ],
+    "subjects": [
+      "quran"
+    ],
+    "formats": [
+      "audio"
+    ],
+    "offline": false,
+    "attribution": "",
+    "notes": "QuranicAudio says files 'may be downloaded and used for personal use' and many come from CDs whose rules forbid resale; EveryAyah states no licence. Do not bundle; use Islamic Network or the King Fahd Complex instead.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "hadith-api",
+    "name": "hadith-api (open hadith collections)",
+    "url": "https://github.com/fawazahmed0/hadith-api",
+    "owner": "fawazahmed0 (volunteer)",
+    "licence": "Unlicense (public domain dedication)",
+    "licenceUrl": "https://github.com/fawazahmed0/hadith-api",
+    "class": "BUNDLE",
+    "languages": [
+      "ara",
+      "eng",
+      "urd"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "adult"
+    ],
+    "subjects": [
+      "seerah"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Hadith text from hadith-api (github.com/fawazahmed0/hadith-api), with its collection and number.",
+    "notes": "Arabic, English and Urdu only, no Dari or Pashto; any translation and selection needs a qualified Hanafi reviewer, and the source edition of each translation should be checked before use.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "hesperian-health-guides",
+    "name": "Hesperian Health Guides (incl. Pashto editions)",
+    "url": "https://languages.hesperian.org/pages/ps/index.html",
+    "owner": "Hesperian Health Guides",
+    "licence": "Hesperian open copyright: non-commercial copying and adapting encouraged; digital use needs written permission",
+    "licenceUrl": "https://hesperian.org/open-copyright-policy/",
+    "class": "ASK",
+    "languages": [
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "g10-12",
+      "adult"
+    ],
+    "subjects": [
+      "life-skills"
+    ],
+    "formats": [
+      "pdf",
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Adapted from Hesperian Health Guides (hesperian.org), with permission.",
+    "notes": "The 2020 'Where There Is No Doctor' asks people to contact permissions@hesperian.org for use 'in any digital format', so an app needs a quick written yes; Hesperian grants not-for-profit translation without fees. Strong fit for adult health and life skills.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "mit-opencourseware",
+    "name": "MIT OpenCourseWare",
+    "url": "https://ocw.mit.edu/",
+    "owner": "Massachusetts Institute of Technology",
+    "licence": "CC BY-NC-SA 4.0",
+    "licenceUrl": "https://ocw.mit.edu/pages/privacy-and-terms-of-use/",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "eng"
+    ],
+    "ages": [
+      "beyond"
+    ],
+    "subjects": [
+      "maths",
+      "science",
+      "chinese",
+      "general"
+    ],
+    "formats": [
+      "video",
+      "pdf",
+      "text"
+    ],
+    "offline": true,
+    "attribution": "\"{course}\" by MIT OpenCourseWare, CC BY-NC-SA 4.0 (ocw.mit.edu).",
+    "notes": "University-level English material for learners preparing for study abroad; includes beginner Chinese courses. Some third-party items inside courses are excluded and marked.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "tatoeba",
+    "name": "Tatoeba sentence pairs",
+    "url": "https://tatoeba.org/",
+    "owner": "Tatoeba Association and contributors",
+    "licence": "CC BY 2.0 FR (sentences); audio licences vary per recording",
+    "licenceUrl": "https://tatoeba.org/en/downloads",
+    "class": "BUNDLE",
+    "languages": [
+      "eng",
+      "zho",
+      "fas",
+      "pus"
+    ],
+    "ages": [
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "english",
+      "chinese"
+    ],
+    "formats": [
+      "text",
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Example sentences from Tatoeba (tatoeba.org), CC BY 2.0 FR.",
+    "notes": "Downloads page: 'These files are released under CC BY 2.0 FR.' Good for English and Chinese example sentences; Persian and Pashto coverage is thin and quality varies, so review before use.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "cc-cedict",
+    "name": "CC-CEDICT Chinese-English dictionary",
+    "url": "https://cc-cedict.org/wiki/",
+    "owner": "MDBG and CC-CEDICT contributors",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://cc-cedict.org/wiki/",
+    "class": "BUNDLE",
+    "languages": [
+      "zho",
+      "eng"
+    ],
+    "ages": [
+      "beyond"
+    ],
+    "subjects": [
+      "chinese"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Chinese dictionary data from CC-CEDICT, CC BY-SA 4.0.",
+    "notes": "'CC-CEDICT is licensed under a Creative Commons Attribution-Share Alike 4.0 License.' Gives pinyin and English meanings for a starter word list that we translate into Dari and Pashto; our list must then be CC BY-SA.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "meta-mms",
+    "name": "Meta MMS speech models",
+    "url": "https://huggingface.co/facebook/mms-1b-all",
+    "owner": "Meta",
+    "licence": "CC BY-NC 4.0",
+    "licenceUrl": "https://huggingface.co/facebook/mms-tts-fas",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "fas",
+      "pus",
+      "prs"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "speech-tools"
+    ],
+    "formats": [
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Speech model: Meta MMS, CC BY-NC 4.0.",
+    "notes": "Hugging Face tags mms-tts-fas (Persian voice) and mms-1b-all (speech recognition) as cc-by-nc-4.0. No public Pashto or Dari voice checkpoint was found (mms-tts-pus, -pbt, -pbu, -pst and -prs are not available), so only the Persian voice and the recogniser are usable.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "piper-voices",
+    "name": "Piper text-to-speech voices (Persian)",
+    "url": "https://huggingface.co/rhasspy/piper-voices",
+    "owner": "Rhasspy / Open Home Foundation and voice dataset owners",
+    "licence": "Voice repository MIT; fa_IR 'amir', 'ganji' and 'reza_ibrahim' datasets CC0; 'gyro' see source",
+    "licenceUrl": "https://huggingface.co/rhasspy/piper-voices/blob/main/fa/fa_IR/amir/medium/MODEL_CARD",
+    "class": "BUNDLE",
+    "languages": [
+      "fas"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "speech-tools"
+    ],
+    "formats": [
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Voice: Piper '{voice}' (fa_IR), trained on CC0 data.",
+    "notes": "Small enough for phones and fully offline, but the voices are Iranian Persian and none is Dari or Pashto. Piper's newer engine moved to a GPL fork, so check the engine licence before shipping.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "common-voice",
+    "name": "Mozilla Common Voice (Pashto and Persian)",
+    "url": "https://commonvoice.mozilla.org/en/datasets",
+    "owner": "Mozilla Foundation and volunteer speakers",
+    "licence": "CC0",
+    "licenceUrl": "https://commonvoice.mozilla.org/en/datasets",
+    "class": "BUNDLE",
+    "languages": [
+      "pus",
+      "fas"
+    ],
+    "ages": [
+      "early",
+      "g1-6",
+      "g7-9",
+      "g10-12",
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "speech-tools"
+    ],
+    "formats": [
+      "audio",
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Speech data: Mozilla Common Voice, CC0.",
+    "notes": "Training data, not lessons: about 147 hours of Pashto (March 2026) for building our own Pashto recogniser or voice. Sentence text is CC0 per the project's repository; read the current download terms before fetching.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "dari-literature-corpus",
+    "name": "Dari Literature Corpus (Anjuman-e Adabi Nayestan)",
+    "url": "https://datacollective.mozillafoundation.org/datasets/cmmdpikpq003imh077foix53d",
+    "owner": "Anjuman-e Adabi Nayestan",
+    "licence": "CC BY-NC 4.0 (as reported by search; page not read)",
+    "licenceUrl": "https://datacollective.mozillafoundation.org/datasets/cmmdpikpq003imh077foix53d",
+    "class": "BUNDLE-NC",
+    "languages": [
+      "prs"
+    ],
+    "ages": [
+      "adult",
+      "beyond"
+    ],
+    "subjects": [
+      "reading-dari"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": true,
+    "attribution": "Text from the Dari Literature Corpus by Anjuman-e Adabi Nayestan, CC BY-NC 4.0.",
+    "notes": "Possible source of real Dari reading passages for adults and for checking AI Dari; confirm the licence on the dataset page and screen every passage before use.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "transparent-language-english",
+    "name": "Transparent Language Beginner English for Dari and Pashto speakers",
+    "url": "https://www.transparent.com/blog/beginner-english-course-for-pashto-dari-speakers",
+    "owner": "Transparent Language",
+    "licence": "Commercial; free only through a subscribing library",
+    "licenceUrl": "https://www.transparent.com/blog/beginner-english-course-for-pashto-dari-speakers",
+    "class": "AVOID",
+    "languages": [
+      "prs",
+      "pus",
+      "eng"
+    ],
+    "ages": [
+      "adult"
+    ],
+    "subjects": [
+      "english"
+    ],
+    "formats": [
+      "interactive",
+      "audio"
+    ],
+    "offline": false,
+    "attribution": "",
+    "notes": "The only English course taught from Dari and Pashto found, but paid and library-locked, so not usable by Afghan learners or by us.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "kp-board-pashto-textbooks",
+    "name": "Khyber Pakhtunkhwa Textbook Board Pashto books (third-party PDFs)",
+    "url": "https://www.taleem360.com/categories/text-books-kpk",
+    "owner": "Khyber Pakhtunkhwa Textbook Board (Pakistan)",
+    "licence": "Government copyright; reposted by third parties without a licence",
+    "licenceUrl": "https://www.taleem360.com/categories/text-books-kpk",
+    "class": "AVOID",
+    "languages": [
+      "pus"
+    ],
+    "ages": [
+      "g1-6",
+      "g7-9"
+    ],
+    "subjects": [
+      "reading-pashto"
+    ],
+    "formats": [
+      "pdf"
+    ],
+    "offline": false,
+    "attribution": "",
+    "notes": "Copies sit on third-party sites with takedown disclaimers; Pakistani spelling and vocabulary also differ. Do not copy or link.",
+    "checked": "2026-10-16"
+  },
+  {
+    "id": "uno-historical-textbooks",
+    "name": "1980s-1990s Dari and Pashto textbooks (UNO Digital Commons)",
+    "url": "https://digitalcommons.unomaha.edu/daripashtobooks/",
+    "owner": "University of Nebraska Omaha (USAID-era publications)",
+    "licence": "Unclear",
+    "licenceUrl": "https://digitalcommons.unomaha.edu/daripashtobooks/",
+    "class": "AVOID",
+    "languages": [
+      "prs",
+      "pus"
+    ],
+    "ages": [
+      "g1-6"
+    ],
+    "subjects": [
+      "reading-dari",
+      "reading-pashto",
+      "maths"
+    ],
+    "formats": [
+      "pdf"
+    ],
+    "offline": false,
+    "attribution": "",
+    "notes": "Historical jihad-era material with violent content; unsuitable for children whatever the licence.",
+    "checked": "2026-10-16"
+  }
+]
