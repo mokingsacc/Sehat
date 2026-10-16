@@ -1,0 +1,192 @@
+# Puts Qalam's staging Worker on Cloudflare (tutor/worker; tutor/docs/HOSTING.md) when tutor/ changes on the working
+# branch, then checks it and measures it. It touches nothing of Sehat's: it creates only the Worker and the D1
+# database named qalam-staging (workers.dev address only; no R2, KV, routes or domains), sets no Worker secrets,
+# deletes nothing, and uses no secret but CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+# Without those two the deploy is skipped and the job stays green. If the Workers Free plan blocks the Python Worker,
+# the job says so, runs the same smoke test under `pywrangler dev` here instead, and ends green with a warning (D6).
+name: Tutor Worker (staging)
+on:
+  push:
+    branches: [claude/project-thread-sbgfoh]
+    paths: ["tutor/**", ".github/workflows/tutor-worker.yml"]
+permissions:
+  contents: read
+# one deploy at a time; a newer push waits rather than racing the database or the measurements
+concurrency: { group: tutor-worker-staging, cancel-in-progress: false }
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      # exact build tools: wrangler (as Sehat's server.yml), pywrangler (workers-py) and the uv it needs
+      WRANGLER_VERSION: 4.148.0
+      WORKERS_PY: workers-py==1.17.7
+      UV_VERSION: 0.12.21
+      WRANGLER_SEND_METRICS: "false"
+      NAME: qalam-staging
+    defaults: { run: { working-directory: tutor/worker } }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with: { node-version: 22 }
+
+      - name: Check the Cloudflare secrets
+        id: secrets
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            msg="No CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID in this repository's Actions secrets: the staging deploy is skipped. The smoke test runs under pywrangler dev instead."
+            echo "::warning::$msg"; echo "$msg" >> "$GITHUB_STEP_SUMMARY"
+            echo "deploy=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: "Guard: this job deploys qalam-staging and nothing else"
+        run: |
+          python3 - <<'EOF'
+          import sys, tomllib
+          w = tomllib.load(open("wrangler.toml", "rb"))
+          dbs = w.get("d1_databases", [])
+          problems = []
+          if w.get("name") != "qalam-staging":
+              problems.append(f'name must be "qalam-staging", not {w.get("name")!r}')
+          if len(dbs) != 1 or dbs[0].get("database_name") != "qalam-staging":
+              problems.append('exactly one D1 database, database_name = "qalam-staging"')
+          if any("migrations_dir" in d for d in dbs):
+              problems.append("no migrations_dir: D1Store.open() applies the migrations")
+          for key in ("routes", "route", "kv_namespaces", "r2_buckets", "queues", "durable_objects", "services"):
+              if key in w:
+                  problems.append(f"{key} is not allowed here")
+          if problems:
+              print("::error::wrangler.toml: " + "; ".join(problems)); sys.exit(1)
+          print("wrangler.toml names qalam-staging only")
+          EOF
+
+      - name: Install the build tools (pinned)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/uv" && "$RUNNER_TEMP/uv/bin/pip" install --quiet "uv==$UV_VERSION"
+          echo "$RUNNER_TEMP/uv/bin" >> "$GITHUB_PATH"
+          npm install --no-save --no-package-lock --no-audit --no-fund "wrangler@$WRANGLER_VERSION"
+          npx --no-install wrangler --version
+
+      - name: Build the bundle and its packages
+        run: |
+          python3 build.py
+          uvx --from "$WORKERS_PY" pywrangler sync
+
+      - name: Find or create the D1 database qalam-staging (EU)
+        id: d1
+        if: steps.secrets.outputs.deploy == 'yes'
+        run: |
+          W="npx --no-install wrangler"
+          find_db() { $W d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const d=JSON.parse(s).find(x=>x.name===process.env.NAME);process.stdout.write(d?d.uuid:"")})'; }
+          id=$(find_db)
+          if [ -n "$id" ]; then
+            where="existing database (kept as it was created)"
+          elif $W d1 create "$NAME" --jurisdiction eu > create.log 2>&1; then
+            where="jurisdiction eu"; id=$(find_db)
+          else
+            echo "The eu jurisdiction was refused:"; cat create.log
+            $W d1 create "$NAME" --location weur > create.log 2>&1 || { cat create.log; exit 1; }
+            where="location hint weur (the account refused the eu jurisdiction)"; id=$(find_db)
+          fi
+          if [ -z "$id" ]; then
+            id=$(grep -oE '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' create.log | head -1)
+          fi
+          [ -n "$id" ] || { echo "::error::could not find the qalam-staging database"; exit 1; }
+          $W d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const d=JSON.parse(s).find(x=>x.name===process.env.NAME)||{};const{uuid,...rest}=d;console.log("qalam-staging:",JSON.stringify(rest))})'
+          sed -i "s/^database_id = .*/database_id = \"$id\"/" wrangler.toml
+          echo "where=$where" >> "$GITHUB_OUTPUT"
+          echo "D1 qalam-staging: $where" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Deploy the Worker
+        id: deploy
+        if: steps.secrets.outputs.deploy == 'yes'
+        run: |
+          set +e
+          uvx --from "$WORKERS_PY" pywrangler deploy 2>&1 | tee deploy.log
+          code=${PIPESTATUS[0]}
+          set -e
+          url=$(sed 's/\x1b\[[0-9;]*m//g' deploy.log | grep -oE "https://$NAME\.[a-z0-9-]+\.workers\.dev" | head -1)
+          if [ "$code" = 0 ] && [ -n "$url" ]; then
+            echo "url=$url" >> "$GITHUB_OUTPUT"; echo "Staging: $url" | tee -a "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          # a limit of the Workers Free plan is a D6 question for Mo, not a failure of the code
+          if grep -qiE "exceeded (the )?(cpu|memory|size)|startup exceeded|10021|10027|script too large|workers paid|paid plan|not (available|enabled) (on|for) (your|the) (free )?(plan|account)" deploy.log; then
+            reason=$(grep -iE "exceeded|10021|10027|too large|paid|not (available|enabled)" deploy.log | head -3 | tr '\n' ' ')
+            echo "blocked=$reason" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          echo "::error::wrangler deploy failed (exit $code$( [ -z "$url" ] && echo ', no workers.dev address' ))"; exit 1
+
+      - name: Open the store (runs the migrations) with /api/hello
+        id: hello
+        if: steps.deploy.outputs.url != ''
+        env: { URL: "${{ steps.deploy.outputs.url }}" }
+        run: |
+          for i in $(seq 1 30); do
+            out=$(curl -sS -o hello.json -w "%{http_code} %{time_total}" "$URL/api/hello" || echo "000 0")
+            code=${out% *}
+            [ "$code" = 200 ] && break
+            # 1102: the Worker exceeded its CPU or memory limit (a plan limit, D6)
+            if grep -q "1102\|exceeded resource limits" hello.json 2>/dev/null; then
+              echo "blocked=Error 1102: the Worker exceeded the Free plan's resource limits on /api/hello" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "try $i: $code"; sleep 5
+          done
+          [ "$code" = 200 ] || { echo "::error::/api/hello answered $code"; cat hello.json; exit 1; }
+          ms=$(python3 -c "print(round(${out#* } * 1000))")
+          echo "first_ms=$ms" >> "$GITHUB_OUTPUT"
+          python3 -c "import json; h=json.load(open('hello.json')); print('hello:', h['cohort'], [m['id'] for m in h['modules']], h['lessons'], 'lessons')"
+
+      - name: Smoke test against the Worker
+        id: smoke
+        if: steps.hello.outputs.first_ms != ''
+        env: { URL: "${{ steps.deploy.outputs.url }}" }
+        run: |
+          set +e
+          npx --no-install wrangler tail "$NAME" --format json > tail.jsonl 2> tail.err &
+          echo $! > tail.pid
+          sleep 8
+          python3 ../hub/tests/smoke_http.py "$URL" --timings smoke-timings.json | tee smoke.log
+          code=${PIPESTATUS[0]}
+          set -e
+          if [ "$code" != 0 ] && grep -q "1102\|exceeded resource limits" smoke.log; then
+            echo "blocked=Error 1102 during the smoke test: a Free plan resource limit" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          exit $code
+
+      - name: Measure the Worker
+        if: steps.hello.outputs.first_ms != '' && steps.smoke.outputs.blocked == ''
+        env: { URL: "${{ steps.deploy.outputs.url }}" }
+        run: |
+          python3 measure.py "$URL" --first-ms "${{ steps.hello.outputs.first_ms }}" --deploy-log deploy.log \
+            --d1 "${{ steps.d1.outputs.where }}" --where "Cloudflare, workers.dev" --tail tail.jsonl \
+            --out measurements.json --summary "$GITHUB_STEP_SUMMARY" || echo "::warning::measuring failed"
+          sleep 5; kill "$(cat tail.pid)" 2>/dev/null || true
+          echo "tail: $(grep -c outcome tail.jsonl || true) events; $(head -c 300 tail.err)"
+          python3 measure.py "$URL" --tail tail.jsonl --where "tail only" | grep -i "cpu" || true
+
+      - name: Blocked by the Free plan, or not deployed - smoke test under pywrangler dev (D6)
+        if: >-
+          steps.secrets.outputs.deploy == 'no' || steps.deploy.outputs.blocked != '' ||
+          steps.hello.outputs.blocked != '' || steps.smoke.outputs.blocked != ''
+        env:
+          BLOCKED: "${{ steps.deploy.outputs.blocked }}${{ steps.hello.outputs.blocked }}${{ steps.smoke.outputs.blocked }}"
+        run: |
+          if [ -n "$BLOCKED" ]; then
+            msg="The Workers Free plan blocks Qalam's Python Worker: $BLOCKED. Nothing was bought or enabled; this is decision D6 for Mo (tutor/docs/HOSTING.md). The spike ran under pywrangler dev here instead."
+            echo "::warning::$msg"; echo "$msg" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          sed -i "s/^database_id = .*/database_id = \"00000000-0000-0000-0000-000000000000\"/" wrangler.toml
+          start=$(date +%s%3N)
+          uvx --from "$WORKERS_PY" pywrangler dev --port 8787 --ip 127.0.0.1 > dev.log 2>&1 &
+          for i in $(seq 1 90); do grep -q "Ready on" dev.log && break; sleep 2; done
+          grep -q "Ready on" dev.log || { cat dev.log; echo "::error::pywrangler dev did not start"; exit 1; }
+          first=$(curl -sS -o /dev/null -w "%{time_total}" http://127.0.0.1:8787/api/hello)
+          python3 ../hub/tests/smoke_http.py http://127.0.0.1:8787
+          python3 measure.py http://127.0.0.1:8787 --first-ms "$(python3 -c "print(round($first * 1000))")" \
+            --deploy-log dev.log --where "pywrangler dev on the GitHub runner (local D1)" --d1 "local (miniflare)" \
+            --summary "$GITHUB_STEP_SUMMARY"

@@ -23,7 +23,7 @@ export const BUILT_IN = [
   { id: 'check', slots: ['home.action'], needs: [] },
   { id: 'lessons', slots: ['home.action'], needs: [] },
   { id: 'print', slots: ['home.action', 'lesson.end'], needs: ['printer'] },
-  { id: 'teacher', slots: [], needs: [] },
+  { id: 'teacher', slots: [], needs: ['pin'] },
 ];
 
 // the tabs, in order, and the module each one belongs to

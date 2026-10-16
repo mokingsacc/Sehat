@@ -163,6 +163,26 @@ def test_bands_of_the_module_and_the_cohort():
     assert flags.enabled(ms, cohort(bands=["ad"]), flagged, band="s1") == []                  # cohort serves adults
 
 
+def test_a_module_needing_what_the_host_lacks_is_off():
+    ms = {"lessons": manifest("lessons"), "print": manifest("print", depends=["lessons"], needs=["printer"]),
+          "card": manifest("card", depends=["print"])}
+    flagged = on("lessons", "print", "card")
+    assert flags.enabled(ms, cohort(), flagged) == ["card", "lessons", "print"]
+    assert flags.enabled(ms, cohort(), flagged, lacks=("printer",)) == ["lessons"]          # and what depends on it
+    assert flags.enabled(ms, cohort(), flagged, lacks=("camera",)) == ["card", "lessons", "print"]
+
+
+def test_online_the_staging_cohort_keeps_three_of_its_five_modules():
+    """The Worker lacks a printer and the teacher's PIN (TUTOR_LACKS), whatever the cohort's flags say."""
+    seeds, _ = flags.load_seeds(TUTOR / "cohorts")
+    staging = seeds["staging"]
+    f = {m: {"enabled": v} for m, v in staging["modules"].items()}
+    assert all(staging["modules"].values())
+    assert flags.enabled(REAL, staging, f) == ["ask", "check", "lessons", "print", "teacher"]
+    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "lessons"]
+    assert REAL["teacher"]["needs"] == ["pin"]
+
+
 def test_the_real_hub_cohort_takes_the_five_built_modules():
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     hub = seeds["hub"]

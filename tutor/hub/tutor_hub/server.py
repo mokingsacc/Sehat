@@ -104,12 +104,16 @@ def teacher_pin(data: Path) -> str:
 
 
 class Hub:
-    """Everything the routes share. Making one touches no database: `start()` does that, from the app's lifespan."""
+    """Everything the routes share. Making one touches no database: `start()` does that, from the app's lifespan.
 
-    def __init__(self, cfg: Config):
+    `store`: SQLite in the data folder unless another is given (the Worker gives `D1Store(env.DB)`)."""
+
+    def __init__(self, cfg: Config, store=None):
         self.cfg = cfg
-        cfg.data.mkdir(parents=True, exist_ok=True)
-        self.store = SqliteStore(cfg.data / "hub.db")
+        if store is None:
+            cfg.data.mkdir(parents=True, exist_ok=True)
+            store = SqliteStore(cfg.data / "hub.db")
+        self.store = store
         self.library = Library(cfg.packs)
         self.modules, self.module_problems = modules.load(cfg.modules)
         self.seeds, self.seed_problems = flags.load_seeds(cfg.cohorts)
@@ -119,9 +123,10 @@ class Hub:
                                budget=cfg.ai_budget, timeout=cfg.llm_timeout, cohort=self.cohort_id)
         self._ix_lock = asyncio.Lock()
         self.brain = Brain(None, self.gateway)     # the search index is built in start()
-        self.printer = Printer(cfg.print_backend, cfg.printer, cfg.data / "outbox")
+        self.printer = Printer("off" if "printer" in cfg.lacks else cfg.print_backend, cfg.printer,
+                               cfg.data / "outbox")
         self.prints: PrintQueue | None = None
-        self.pin = teacher_pin(cfg.data)
+        self.pin = None if "pin" in cfg.lacks else teacher_pin(cfg.data)   # no PIN: the teacher module is off
         self._fails: dict[str, tuple[int, float, int, float]] = {}   # who -> wrong tries, locked until, rounds, last lock
         self._pin_lock = threading.Lock()
         self.clock = time.monotonic
@@ -141,7 +146,8 @@ class Hub:
         await self.store.prune_ai_usage(ai_gateway.KEEP_DAYS)
         await self.store.fail_unfinished_prints()
         await self.reindex()
-        self.prints = PrintQueue(self.store.sync, self.printer, self.render_pdf)
+        if "printer" not in self.cfg.lacks:       # the queue's thread is the hub's; the Worker has no printer
+            self.prints = PrintQueue(self.store.sync, self.printer, self.render_pdf)
 
     async def stop(self):
         await self.gateway.aclose()
@@ -155,7 +161,7 @@ class Hub:
                 raise HTTPException(429, "too many wrong PINs: wait and try again later")
             if rounds and now - last > 24 * 3600:         # a quiet day: back to a one-minute wait
                 rounds = 0
-            if pin and hmac.compare_digest(pin.strip().encode(), self.pin.encode()):
+            if pin and self.pin and hmac.compare_digest(pin.strip().encode(), self.pin.encode()):
                 self._fails.pop(who, None)
                 return
             n += 1
@@ -228,7 +234,7 @@ class Hub:
         if not cohort:
             return None, {}, []
         f = await self.store.flags(cohort["id"])
-        return cohort, f, flags.enabled(self.modules, cohort, f, band)
+        return cohort, f, flags.enabled(self.modules, cohort, f, band, self.cfg.lacks)
 
     async def hello(self, cohort_id: str | None = None, band: str | None = None) -> dict:
         cohort, f, on = await self.cohort_modules(cohort_id, band)
@@ -257,9 +263,11 @@ def _who(request: Request) -> str:
     return request.client.host if request.client else "?"
 
 
-def create_app(cfg: Config | None = None) -> FastAPI:
+def create_app(cfg: Config | None = None, store=None) -> FastAPI:
+    """The app, the same on the hub (uvicorn, SQLite) and online (the Worker passes its D1 store and starts the hub
+    itself, once per isolate, as tutor/worker/entry.py says)."""
     cfg = cfg or Config.from_env()
-    hub = Hub(cfg)
+    hub = Hub(cfg, store)
 
     def needs(*mids):
         """A route guard: the route exists only while these modules are on for the cohort asking (`?cohort=`, else
@@ -465,6 +473,8 @@ def create_app(cfg: Config | None = None) -> FastAPI:
     async def http_error(request: Request, exc: HTTPException):
         return JSONResponse({"error": exc.detail}, status_code=exc.status_code)
 
-    app.mount("/fonts", StaticFiles(directory=cfg.app / "fonts"), name="fonts")
-    app.mount("/", StaticFiles(directory=cfg.app, html=True), name="app")
+    # online the app's files are the Worker's static assets, served before the Worker, so there is no folder here
+    if cfg.app.is_dir():
+        app.mount("/fonts", StaticFiles(directory=cfg.app / "fonts"), name="fonts")
+        app.mount("/", StaticFiles(directory=cfg.app, html=True), name="app")
     return app

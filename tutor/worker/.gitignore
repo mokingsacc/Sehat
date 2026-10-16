@@ -1,0 +1,9 @@
+# made by build.py and pywrangler, never committed
+build/
+python_modules/
+.venv-workers/
+.wrangler/
+node_modules/
+package.json
+package-lock.json
+dist/

@@ -17,7 +17,7 @@ log = logging.getLogger("tutor.modules")
 BANDS = ("ey", "p1", "p2", "s1", "s2", "ad")
 SLOTS = ("home.action", "lesson.end", "settings.row", "teacher.panel", "admin.panel")
 MATURITY = ("draft", "pilot", "stable")
-NEEDS = ("internet", "printer", "camera")
+NEEDS = ("internet", "printer", "camera", "pin")     # pin: the teacher's PIN, kept on the hub only
 OFFLINE = ("yes", "partly", "no")
 AI_PURPOSES = ("explain", "hint", "read_sheet", "plan", "screen")
 # the core's table (BUILD-PLAN 3.2); "blocked" unless the cohort's moderation is paid-human (P21)

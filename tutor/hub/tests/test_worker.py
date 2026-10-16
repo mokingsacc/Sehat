@@ -1,0 +1,210 @@
+"""The online Worker (tutor/worker, P7): its entry point driving the hub's own app on the D1 fake, the bundle
+build.py makes, how many D1 calls a request costs, and the guards that keep the deploy off Sehat's own Worker."""
+import importlib.util
+import json
+import re
+import sys
+import tomllib
+from pathlib import Path
+from types import ModuleType, SimpleNamespace
+
+import httpx
+import pytest
+
+from fakes.d1 import FakeD1, Statement, ffi as fake_ffi
+from tutor_hub.stores import D1Store
+
+TUTOR = Path(__file__).resolve().parents[2]
+WORKER = TUTOR / "worker"
+WRANGLER = tomllib.loads((WORKER / "wrangler.toml").read_text(encoding="utf-8"))
+FREE_PLAN_QUERIES = 50          # D1 queries per Worker invocation on the Workers Free plan
+
+pytestmark = pytest.mark.anyio
+
+
+# the deploy's guards
+
+def test_wrangler_toml_names_only_qalam_staging():
+    assert WRANGLER["name"] == "qalam-staging"
+    [db] = WRANGLER["d1_databases"]
+    assert db["database_name"] == "qalam-staging" and db["binding"] == "DB"
+    assert "migrations_dir" not in db and not (WORKER / "migrations").exists()
+    text = (WORKER / "wrangler.toml").read_text(encoding="utf-8")
+    assert '"sehat"' not in text and "fhb" not in text
+
+
+def test_wrangler_toml_creates_nothing_else():
+    allowed = {"name", "main", "compatibility_date", "compatibility_flags", "workers_dev", "preview_urls", "vars",
+               "assets", "d1_databases", "rules", "observability"}
+    assert set(WRANGLER) <= allowed, set(WRANGLER) - allowed            # no routes, KV, R2, queues, secrets
+    assert WRANGLER["workers_dev"] is True
+    assert "python_workers" in WRANGLER["compatibility_flags"]
+    assert "binding" not in WRANGLER["assets"]
+
+
+def test_staging_runs_the_staging_cohort_on_the_fake_ai_without_printer_or_pin():
+    v = WRANGLER["vars"]
+    staging = json.loads((TUTOR / "cohorts" / "staging.json").read_text(encoding="utf-8"))
+    assert v["TUTOR_COHORT"] == staging["id"]
+    assert v["TUTOR_AI_PROVIDER"] == "fake"
+    assert set(v["TUTOR_LACKS"].split(",")) == {"printer", "pin"}
+    assert not any(k for k in v if "KEY" in k or "TOKEN" in k or "SECRET" in k or "PIN" in k)
+
+
+def test_the_worker_asks_only_for_packages_the_hub_already_uses():
+    deps = tomllib.loads((WORKER / "pyproject.toml").read_text(encoding="utf-8"))["project"]["dependencies"]
+    hub = {l.strip() for l in (TUTOR / "hub" / "requirements.txt").read_text().splitlines()
+           if l.strip() and not l.startswith("#")}
+    assert deps and set(deps) <= hub
+
+
+def test_the_deploy_workflow_keeps_to_its_own_worker():
+    wf = (TUTOR.parent / ".github" / "workflows" / "tutor-worker.yml").read_text(encoding="utf-8")
+    assert set(re.findall(r"secrets\.([A-Z_]+)", wf)) == {"CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID"}
+    assert "NAME: qalam-staging" in wf and "branches: [claude/project-thread-sbgfoh]" in wf
+    call = re.compile(r"(\$W|npx --no-install wrangler|pywrangler) [a-z]")
+    commands = [l for l in wf.splitlines() if call.search(l) and not l.strip().startswith(("#", "msg=", "echo"))]
+    assert any("d1 create" in l for l in commands) and any("pywrangler deploy" in l for l in commands)
+    for l in commands:                  # every call to Cloudflare: never Sehat's, never a delete, a secret or a route
+        for word in ("delete", "secret", "r2 ", "kv", "route", "domain", "migrations", "sehat", "fhb"):
+            assert word not in l.lower(), (word, l)
+        if re.search(r"(\$W|wrangler) d1 ", l):
+            assert "$NAME" in l or "d1 list" in l, l
+
+
+# the bundle
+
+def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
+    spec = importlib.util.spec_from_file_location("worker_build", WORKER / "build.py")
+    build = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(build)
+    out = tmp_path / "build"
+    build.build(out)
+    src, public = out / "src", out / "public"
+    # config.TUTOR is two folders above tutor_hub, so src/ stands where tutor/ stands
+    assert (src / "hub" / "tutor_hub" / "config.py").is_file() and (src / "entry.py").is_file()
+    assert sorted(f.name for f in (src / "migrations").glob("*.sql")) == sorted(
+        f.name for f in (TUTOR / "migrations").glob("*.sql"))
+    assert (src / "modules" / "teacher" / "module.json").is_file() and (src / "cohorts" / "staging.json").is_file()
+    assert list((src / "content" / "packs").glob("*/lessons/*.json"))
+    assert (public / "index.html").is_file() and not (public / "tests").exists()
+    assert list((public / "packs").glob("*/pictures/*.svg"))
+    assert not list(out.rglob("__pycache__")) and not (src / "app").exists()
+
+
+# the entry point, with the hub's app on the D1 fake
+
+class CountingD1(FakeD1):
+    """The fake, counting the calls that each cost the Worker one D1 query (a batch is one)."""
+
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+        self.calls = 0
+
+    async def batch(self, statements):
+        self.calls += 1
+        return await super().batch(statements)
+
+
+def count_statements(monkeypatch):
+    for name in ("all", "first", "run", "raw"):
+        real = getattr(Statement, name)
+
+        async def counted(self, *a, _real=real, **kw):
+            self._db.calls = getattr(self._db, "calls", 0) + 1
+            return await _real(self, *a, **kw)
+        monkeypatch.setattr(Statement, name, counted)
+
+
+@pytest.fixture
+def worker(monkeypatch, tmp_path):
+    """tutor/worker/entry.py loaded as the Worker loads it, with stand-ins for the runtime's modules: the
+    `cloudflare:workers` env (D1 fake and wrangler.toml's vars) and pyodide.ffi (the fake's)."""
+    count_statements(monkeypatch)
+    db = CountingD1()
+    env = SimpleNamespace(DB=db, **WRANGLER["vars"])
+    workers = ModuleType("workers")
+    workers.import_from_javascript = lambda name: SimpleNamespace(env=env)
+    workers.asgi = SimpleNamespace(entrypoint=lambda app: ("Default", app))
+    pyodide = ModuleType("pyodide")
+    pyodide.ffi = fake_ffi
+    for name, mod in {"workers": workers, "pyodide": pyodide, "pyodide.ffi": fake_ffi}.items():
+        monkeypatch.setitem(sys.modules, name, mod)
+    for k in WRANGLER["vars"]:
+        monkeypatch.delenv(k, raising=False)            # entry.py sets them from the env, as on Cloudflare
+    monkeypatch.setenv("TUTOR_DATA", str(tmp_path / "data"))
+    spec = importlib.util.spec_from_file_location("qalam_worker_entry", WORKER / "entry.py")
+    entry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(entry)
+    assert entry.Default == ("Default", entry.qalam)
+    entry.db, entry.tmp = db, tmp_path
+    return entry
+
+
+def client(entry):
+    return httpx.AsyncClient(transport=httpx.ASGITransport(app=entry.qalam), base_url="https://qalam-staging")
+
+
+async def test_the_worker_serves_the_hub_with_print_and_teacher_off(worker):
+    async with client(worker) as c:
+        r = await c.get("/api/hello")
+        assert r.status_code == 200
+        h = r.json()
+        assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons"]
+        assert h["cohort"]["label"] == "Staging" and h["lessons"] > 0 and h["ai"]["on"] is True
+        assert h["printer"]["state"] == "off"
+        assert (await c.get("/api/print/1")).status_code == 404
+        assert (await c.get("/api/teacher/summary", headers={"X-Teacher-Pin": "123456"})).status_code == 404
+        assert (await c.get("/api/sheets/maths-7-fractions-add.html")).status_code == 404
+        a = await c.post("/api/ask", json={"text": "Why does ice melt?", "lang": "en", "subject": "science"})
+        assert a.status_code == 200 and a.json()["source"] in ("ai", "bank", "lesson", "none")
+        assert (await c.get("/api/sheets/maths-7-fractions-add/key?seed=4821")).status_code == 200
+    assert not (worker.tmp / "data").exists()          # no PIN file, no SQLite, no outbox: nothing on a disk
+    tables = {r[0] for r in worker.db.sqlite.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    assert {"schema_migrations", "questions", "cohorts", "flags", "events", "ai_usage"} <= tables
+    assert "d1_migrations" not in tables
+
+
+async def test_the_hub_starts_once_per_isolate(worker):
+    async with client(worker) as c:
+        await c.get("/api/hello")
+        first = worker._app
+        await c.get("/api/hello")
+    assert worker._app is first
+    applied = [r[0] for r in worker.db.sqlite.execute("SELECT id FROM schema_migrations ORDER BY id")]
+    assert applied == sorted(f.stem for f in (TUTOR / "migrations").glob("*.sql"))
+
+
+async def test_every_request_stays_well_under_the_free_plans_query_limit(worker):
+    """The first request starts the hub (migrations, seeds, prunes, the index) and is the costliest."""
+    now = __import__("time").strftime("%Y-%m-%dT%H:%M", __import__("time").gmtime())
+    events = [{"at": now, "verb": "lesson.start", "object": "maths-7-fractions-add"}] * 100
+    costs = {}
+    async with client(worker) as c:
+        for name, method, path, body in [
+                ("first request (hub starts)", "GET", "/api/hello", None),
+                ("hello", "GET", "/api/hello", None),
+                ("packs", "GET", "/api/packs", None),
+                ("lesson", "GET", "/api/lessons/maths-7-fractions-add", None),
+                ("ask, a sum", "POST", "/api/ask", {"text": "1/2 + 1/4", "lang": "en"}),
+                ("ask, the AI", "POST", "/api/ask", {"text": "Why does ice melt?", "lang": "en"}),
+                ("sheet key", "GET", "/api/sheets/maths-7-fractions-add/key?seed=4821", None),
+                ("100 events", "POST", "/api/events", {"events": events})]:
+            before = worker.db.calls
+            r = await c.request(method, path, json=body)
+            assert r.status_code == 200, (name, r.text)
+            costs[name] = worker.db.calls - before
+    assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
+    assert costs["100 events"] <= 3, costs
+
+
+async def test_the_spike_route_only_where_staging_asks_for_it(worker, monkeypatch):
+    async with client(worker) as c:
+        r = await c.get("/api/_spike")
+        assert r.status_code == 200
+        s = r.json()
+        assert s["jsnull"] is True and s["batch_to_js"]["ok"] is True
+        assert s["queries"] == {"single_after_batch": 60, "stopped_by": None}      # the fake has no limit
+        env = worker.import_from_javascript("cloudflare:workers").env
+        monkeypatch.setattr(env, "QALAM_SPIKE", "off")
+        assert (await c.get("/api/_spike")).status_code == 404

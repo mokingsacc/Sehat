@@ -4,6 +4,7 @@ Two ways out:
 - cups:   the hub's printer through CUPS (`lp`). Any IPP Everywhere / AirPrint / Mopria printer works driverless
           over USB or Wi-Fi (setup/printer.sh adds it). An ink-tank printer suits solar power; a laser does not.
 - outbox: PDFs are saved in the hub's outbox folder instead (no printer yet, testing, or to copy to a USB stick).
+- off:    no printer and no outbox (the online Worker, which lacks `printer`, so the print module is off there).
 
 One job prints at a time, in order. A child's name, if they chose to have it printed, is used for that one page
 and never written down.
@@ -26,11 +27,13 @@ class Printer:
         self.backend = backend
         self.name = name
         self.outbox = Path(outbox) if outbox else None
-        if self.outbox:
+        if self.outbox and backend != "off":
             self.outbox.mkdir(parents=True, exist_ok=True)
 
     def status(self) -> dict:
         """{'ok': can print now, 'state': ready / busy / off / outbox, 'name': ..., 'detail': plain words}."""
+        if self.backend == "off":
+            return {"ok": False, "state": "off", "name": None, "detail": "no printer here"}
         if self.backend == "outbox":
             return {"ok": True, "state": "outbox", "name": "outbox", "detail": "PDFs are saved on the hub"}
         try:
@@ -52,6 +55,8 @@ class Printer:
 
     def send(self, pdf: bytes, *, copies: int, title: str) -> tuple[bool, str]:
         copies = max(1, int(copies))
+        if self.backend == "off":
+            return False, "no printer here"
         if self.backend == "outbox":
             stamp = time.strftime("%Y%m%d-%H%M%S")
             safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in title)[:60]

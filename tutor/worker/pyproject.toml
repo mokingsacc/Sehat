@@ -1,0 +1,10 @@
+# The Worker's Python packages: only what the hub already uses (hub/requirements.txt), at the same versions.
+# The build tools (workers-py's pywrangler, wrangler) are pinned in .github/workflows/tutor-worker.yml, not here.
+[project]
+name = "qalam-worker"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi==0.143.0",
+    "httpx==0.28.1",
+]

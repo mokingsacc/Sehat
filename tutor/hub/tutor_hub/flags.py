@@ -8,7 +8,9 @@ A module is on for a learner when (BUILD-PLAN 3.3):
 - its flag is on in her cohort (no flag means off),
 - every module it depends on is on by these same rules,
 - its maturity is one the cohort takes (`settings.maturity`; pilot cohorts take pilot and stable only),
-- her band is one the module lists and the cohort serves (when her band is known).
+- her band is one the module lists and the cohort serves (when her band is known),
+- the host can meet its `needs`: the online Worker lacks a printer and the teacher's PIN (`TUTOR_LACKS`), so print
+  and teacher are off there whatever the cohort says; the phone itself judges `internet` and `camera`.
 The committee dropped the manifest's `core` field (C0.1), so there is no core version to match yet.
 """
 import json
@@ -74,8 +76,10 @@ def load_seeds(folder: Path) -> tuple[dict[str, dict], list[str]]:
     return found, problems
 
 
-def enabled(manifests: dict[str, dict], cohort: dict, flags: dict[str, dict], band: str | None = None) -> list[str]:
-    """The ids of the modules that are on, in id order. `flags` maps module id -> {"enabled": bool, ...}."""
+def enabled(manifests: dict[str, dict], cohort: dict, flags: dict[str, dict], band: str | None = None,
+            lacks=()) -> list[str]:
+    """The ids of the modules that are on, in id order. `flags` maps module id -> {"enabled": bool, ...};
+    `lacks` the needs this host cannot meet."""
     maturity = set((cohort.get("settings") or {}).get("maturity") or DEFAULT_MATURITY)
     memo: dict[str, bool] = {}
 
@@ -87,6 +91,7 @@ def enabled(manifests: dict[str, dict], cohort: dict, flags: dict[str, dict], ba
               and bool((flags.get(mid) or {}).get("enabled"))
               and m["maturity"] in maturity
               and (band is None or (band in m["bands"] and band in cohort.get("bands", ())))
+              and not set(m["needs"]) & set(lacks)
               and all(on(d, path + (mid,)) for d in m["depends"]))
         memo[mid] = ok
         return ok

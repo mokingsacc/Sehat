@@ -18,7 +18,7 @@ const modules = await import('../js/modules.js');
 const HUB_LIST = [
   { id: 'ask', slots: [], needs: [] }, { id: 'check', slots: ['home.action'], needs: [] },
   { id: 'lessons', slots: ['home.action'], needs: [] },
-  { id: 'print', slots: ['home.action', 'lesson.end'], needs: ['printer'] }, { id: 'teacher', slots: [], needs: [] },
+  { id: 'print', slots: ['home.action', 'lesson.end'], needs: ['printer'] }, { id: 'teacher', slots: [], needs: ['pin'] },
 ];
 const without = (id) => HUB_LIST.filter((m) => m.id !== id);
 

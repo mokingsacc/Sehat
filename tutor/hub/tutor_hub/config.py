@@ -43,6 +43,8 @@ class Config:
     wifi_ssid: str | None = None                          # for the printed hub card's join code
     wifi_password: str | None = None
     keep_days: int = 60                                   # questions are deleted after this (approved answers stay)
+    lacks: tuple = ()                                     # module needs this host cannot meet: the Worker lacks
+                                                          # printer and pin, so print and teacher are off there
     extra: dict = field(default_factory=dict)
 
     @classmethod
@@ -68,6 +70,7 @@ class Config:
             wifi_ssid=_env("TUTOR_WIFI_SSID"),
             wifi_password=_env("TUTOR_WIFI_PASSWORD"),
             keep_days=int(_env("TUTOR_KEEP_DAYS", cls.keep_days)),
+            lacks=tuple(x.strip() for x in _env("TUTOR_LACKS", "").split(",") if x.strip()),
         )
         for k, v in over.items():
             setattr(c, k, v)

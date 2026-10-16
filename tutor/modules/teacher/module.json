@@ -7,6 +7,6 @@
   "slots": [],
   "capabilities": [],
   "settings": {},
-  "needs": [],
+  "needs": ["pin"],
   "offline": "no"
 }
