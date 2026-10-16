@@ -198,7 +198,7 @@ Outside material reaches a pack only as its licence allows, and nothing reaches 
 - **Credits:** `GET /api/credits` lists every source the served lessons, pictures, clips and cards use, with each
   item's credit line, the links, and the fonts; each lesson from the hub carries its own `credits` lines for the
   source note at its end. The Credits page is reached from Who is learning until Settings exists (P10). Link
-  cards, the source note and Credits are plain and token-styled until the design committee settles their look (C2).
+  cards, the source note and Credits are plain and token-styled; C2.6 settled their look (DESIGN-C2C3-SPECS.md, item 6).
 - **Recorded clips** in a pack (`audio/<lang>/manifest.json`: file, speaker code, placeholder, sha256) are known to
   the hub by their manifest; the files are served at `/packs/<pack>/audio/<lang>/<file>` (online, as static
   assets). `tools/validate_pack.py` checks every file against its hash and refuses an unlisted or synthetic clip.

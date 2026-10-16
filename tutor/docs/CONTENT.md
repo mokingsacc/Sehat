@@ -159,7 +159,7 @@ A lesson that copies, translates or adapts anything from outside names it in `so
 - Outside pictures and clips are listed in pack.json: `"media": {"pictures/x.svg": [sources...]}`.
 
 The app shows a one-line source note at the end of each lesson that uses outside material, and a Credits page
-lists every source in use with its licence (`GET /api/credits`). Their look is for the design committee (C2).
+lists every source in use with its licence (`GET /api/credits`). Their look is C2.6 (DESIGN-C2C3-SPECS.md, item 6).
 
 ### Link cards
 

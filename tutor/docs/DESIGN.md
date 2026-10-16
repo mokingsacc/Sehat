@@ -24,10 +24,11 @@ top of `app/css/app.css`; screens use only tokens, so a look is changed in one p
 - **One big button** on Home starts the right lesson: the one left half way, else the next one not done.
   Every lesson is still open from the subject pages; nothing is locked.
 - **A speaker on every text,** buttons included. A recorded clip plays first; the phone's own voice is the fallback.
-- **Three tabs only:** Lessons, Ask, Print. The teacher page is behind "Who is learning" and a PIN; so is Settings.
+- **Three tabs only:** Lessons, Ask, and Print (hub) or Sheets (online). The teacher page is behind "Who is learning" and a PIN; so is Settings.
 - **Plain words, the child's language,** Persian digits, right to left; sums and English left to right.
-- **Wrong answers teach:** the right one is shown with the reason, read aloud for young children. No scores to
-  lose, no timers. Stars at the end for children; "Correct, 8 of 10" and a check mark for adults.
+- **Wrong answers teach:** three hints (the lesson step, a worked example with other numbers, the first move), read
+  aloud for young children, never the answer. The answer page is the teacher's. No scores to lose, no timers. Stars
+  for children; "Correct, 8 of 10" for adults.
 - **Nothing breaks without the hub:** lessons already opened still work; Ask gives the closest checked answer
   from those lessons, marked as such; Print says to come to the hub.
 - **Every answer is labelled:** checked, worked out, from the lesson, from the teacher, or AI (not checked).
@@ -40,8 +41,9 @@ Mo's view, and the plan's: worksheets with pen and paper beat a screen for pract
 - **A4, black and white, one page,** big margins, line art with no faces, a name line and date at the top, written by
   hand; the phone never asks for the name.
 - **Grey letters to write over** (tracing), then empty boxes to write alone; stacked fractions with an answer box.
-- The **code in the corner** (`M7-03-4821`) brings the sheet back in "Check my sheet". The answer sheet prints
-  separately and needs the teacher's PIN.
+- The **code in the corner** (`M7-03-48217`, its last digit a check digit) brings the sheet back in "Check my
+  sheet". The answer sheet prints separately and needs the teacher's PIN.
+- No app name, URL or cohort on a learner sheet.
 - Sums are made fresh for each print, so a child can practise the same skill twice.
 - Sheets always print black on white, whatever the phone's theme.
 
@@ -86,8 +88,9 @@ learner's record (`app/js/bands.js`), never chosen by the learner:
 The server only ever learns the band. Strings in `i18n.js` may be `{child, adult}` objects where the tone changes the
 wording; `s()` picks by `data-tone`. English joins Dari and Pashto as an interface language (adults choose it).
 
-Rules per screen: one accent colour, at most three text sizes, banners only for "offline" and "draft", motion only the
-press-down of a button and the consent ring (`prefers-reduced-motion` removes both). Nothing hard-coded: the roughly
+Rules per screen: one accent colour, at most three text sizes, banners only for "draft" (offline is a chip, never a
+banner: C2.5), motion only the press-down of a button, the consent ring and the reading ring (`prefers-reduced-motion`
+removes all three). Nothing hard-coded: the roughly
 40 colours and sizes written into `app.css` selectors today move into the tokens below first (P9).
 
 ## 2. Colour tokens
@@ -293,10 +296,137 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
 - Bigger text and the theme are kept per learner but get their switches with Settings (P10); Welcome lost its name
   field and gained English, and gets the early-years and adult doors in P10.
 
-## Still to design
+---
 
-C2 (early December): sheet geometry for photos (four 12 mm corner squares, fixed answer cells, the hand-written name
-box), the camera screen and "what I read", results and hints, Home for in-school versus out-of-school learners,
-offline and "waiting to send" signs, link cards and Credits. C3 (early January): the school day and bells, the teacher
-dashboard, the admin panel, review screens, where "Learn this" sits, the Android download screen and permission
-prompts. Real pictures (from Mo's ChatGPT images, as line art for printing) arrive with Pack 1.
+# C2 and C3 decisions
+
+The design committee's note on sittings C2 and C3, as the chair wrote it (model names left out). Builders code from it
+and from the accepted specs in [DESIGN-C2C3-SPECS.md](DESIGN-C2C3-SPECS.md); where they differ, this note wins. The
+changes it makes to the C1 text above (2, 3, 5 and 6, and C2.5's banner rule) are already applied there. Real
+pictures (Mo's images, redrawn as line art for printing) still arrive with Pack 1.
+
+The chair and one member (the member's draft, the specs below, is filed as `DESIGN-C2C3-SPECS.md`). 16 October
+2026, held with C0 and C1. No web checks: the draft's one check (Android developer verification) agrees with what the chair knows, and
+no other item turns on a contested fact. "Accept" means the draft's spec for that item is the builder's spec, with
+the notes here applied; the draft's opening "Rules every spec below assumes" stand. The builder copies the draft into
+`tutor/docs/DESIGN-C2C3-SPECS.md` so the repository holds it. English strings are drafts until native speakers check
+them. Nothing here needs Mo before 22 December 2026; one decision, D11, is added for after it.
+
+## C2
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C2.1 | Sheet layout (P13) | **Accept** (draft item 1). | Four squares and a slot grid make every cell a function of the item list, so hub PDF, browser print and phone agree; a check digit refuses a mistyped code instead of marking it against another sheet; no app name, URL or cohort on paper fits the seized-paper threat. | P13 as drafted. The QR holds text, never a URL. Write the final height table into DESIGN.md. "Do it on screen" is offered only where there is no printer, after "Print or save as PDF". |
+| C2.2 | Camera and "what I read" (P14) | **Accept** (draft item 2), two notes. | A phone that says "closer" and "hold still", then takes the photo itself, gets a usable strip first time; a model that never sees the key cannot "read" the answer into a blur; the frame and strip live in variables only. | P14 as drafted. Note 1: "the server never learns right or wrong" is true of the photo route only; `check.item` events still carry results, as `check.done` does today. Note 2: in bold, each "What I read" row wraps to two lines (number, tile, reading; then the question) so 360 px stays readable. |
+| C2.3 | Results and the hint ladder (P15) | **Accept** (draft item 3), two clarifications. | She corrects misreads before anything is judged; three free rungs, the last one move from the answer, keep "hints, never answers" without a wall; "Check my answer" marks, it does not tell. | P15 as drafted. A value answer appears on no learner route: the answer page is on the hub behind the teacher PIN and online inside `/teacher/`. DESIGN.md's "Wrong answers teach: the right one is shown" bullet is superseded (change 3). The pilot report reads rung-3 and dispute rates from `hint.rung` and `check.dispute`, so a stalled self-learner is seen. |
+| C2.4 | Home for in-school and out-of-school learners | **Amend:** the day is on by default; the card confirms or switches. Spec below. | Mo's default is "on"; a default everyone in the cohort gets says nothing about her on a seized phone, while a chosen `day: on` said more; one tap still switches. | Build the replacement spec in P19 (the card is the timetable module's offer). |
+| C2.5 | Offline and "waiting to send" signs (P11) | **Accept** (draft item 5). | Hidden when all is well is the least busy sign; badges only on what she sent keeps events invisible. | P11 as drafted; `netChip()` replaces `hubChip()`. The C1 rule becomes "banners only for draft": offline is a chip, never a banner. |
+| C2.6 | Link cards and Credits | **Accept** (draft item 6), one line. | One card says whose it is, that it leaves Qalam and what it costs in data; no embeds means no third-party player inside a girls' app; voices are anonymous by default. | A named voice credit needs the recorder's written request and goes in `app/credits.json`; clip manifests keep a speaker code, never a name (P8). The card look lands with P9's tokens; the Credits screen with P10's Settings. |
+| C2.7 | Early years modules | **Accept** (draft item 7). | One play button and a voice; the grown-up looks at the paper. | `ey` leaves the `bands` of `photo`, `homework`, `timetable` and `plan`; the provisional decision-log row becomes final. |
+| C2.8 | The `open` cohort | **Accept** (draft item 8). | Every module left on is safe with no person behind it; Ask's maths path gives answers and its distress path promises a person, so it waits for a teacher or a budget. | `cohorts/open.json` as drafted; staging keeps everything on. `plan` carries `free.text`, so the consent screen comes before the first Learn this (C1.4). D7 stays Mo's. Revisit at C4. |
+| C2.9 | P9 screenshots | **Accept the checklist** as P9's deliverable. | Nothing exists to look at yet; a contact sheet with the contrast numbers beside each shot is what a look-over needs. | `build-committee/p9-screens/index.html` as drafted. The chair looks it over by thread when P9 lands; no sitting. Failures return to P9 before P10. |
+
+## C3
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C3.1 | The school day and bells (P19) | **Accept** (draft item 10), with C2.4's default. | Mo's "alarms on by default" is met as far as a web page can: bells ring by default whenever Qalam is on screen; closed-app alarms belong to the APK, on by default once "This phone is mine" is yes (F5). Web Push is refused: it needs a per-phone subscription on the server and Google's relay, and could ring in the family's hands. | P19 as drafted. Unlock audio on the first tap, as `speech.js` does, or the first bell is blocked. `subject: "auto"` takes the plan first. The kill switch stays silent. |
+| C3.2 | The teacher dashboard (P20) | **Amend:** `staff` holds no email. Spec below. Everything else as drafted. | The facilitator's and reviewers' emails would be the only real identities in D1 and its weekly export; Cloudflare Access already holds them. | `/teacher/` as drafted: one card at a time, no names, nothing cached on the teacher's phone, the 6-digit code; `teacher` loses `needs: pin` for a gate per host. |
+| C3.3 | The admin panel (P21) | **Accept** (draft item 12), with C3.2. | Kill switches at the top, a risk sentence on every toggle, every change logged with who; the hub's admin PIN is separate from the teacher's. | `/admin/` as drafted. The Staff page shows labels, roles and cohorts; an email is typed only to add someone, then discarded. |
+| C3.4 | The review screens (P17) | **Accept** (draft item 13). | A step seen in the learner's look with its recording, OK only after the clip has played, catches what a table would miss; the signature voids itself on one changed word. | `/review/` as drafted; `review_notes` and `signoffs` as drafted. |
+| C3.5 | "I want to learn this" (P22) | **Accept** (draft item 14). | The row sits exactly where the list ran out; typed only, because Chrome's speech input sends audio to Google (OpenAI-only). | `homeFooter()` in the shell, not a slot. BUILD-PLAN 5.1's "typed or spoken" is typed only in 2027. |
+| C3.6 | The Android app (P23) | **Accept** (draft item 15); D11 framed below. | Three pictured steps and prompts at first need, each after an explainer, are the least a sideload can be; no storage, microphone, contacts or location; the launcher stays "Qalam", because a disguised app found is worse. | P23 as drafted. Pilot phones are installed by facilitators over USB. The web app in Chrome does everything but closed-app alarms, so no learner depends on the APK. |
+
+## Replacement specs
+
+### C2.4 Home for in-school and out-of-school learners (replaces the spec of draft item 4)
+
+- `day` is on by default for bands `p1` to `s2` wherever the cohort's timetable template lists her band; unset counts
+  as on. `ey` and `ad` have no school day (adults: C4). The phone stores `day: 'on' | 'off'` per learner and nothing
+  about school; nothing is sent and no event is recorded.
+- The first time Home shows the Now card, the timetable module offers one card (`home.action`, role secondary, top
+  priority) and keeps offering it until it is answered:
+
+```
++- Your school day --------------------- [spk] -+
+| Qalam is your school: lessons at set    [spk] |
+| times, with bells.                            |
+| [ (bell) Yes, Qalam is my school ]      [spk] |  full width, primary
+| [ (bag)  I go to school: help me with   [spk] |  full width, outline
+|          homework ]                           |
++-----------------------------------------------+
+```
+
+- Primary: the card goes and the day stays on. Outline: `day: off`; Home becomes the band's default with Homework
+  help as secondary. When Homework help is unavailable (`homework` off, offline, or no AI for her language) the outline
+  reads "I go to school already" and Home becomes the band's default. There is no "Not now": a card she ignores leaves
+  the day on.
+- Home per band: the draft's table and mock-up stand, with two rules. In bold bands the Now card keeps the 100 px play
+  button under its kicker, so a six-year-old still sees one big button; the tiles stay subject tiles, in today's order,
+  with the time on each.
+- The bell toggle, Settings → School day and right-to-left: as drafted. The header toggle is P19's "off in one tap".
+- Says: the card's lines, read on open in bold bands; "Bells on" and "Bells off".
+
+### C3.2 The `staff` table (replaces the `staff` lines of draft items 11, 12 and 13)
+
+- `staff (email_hash, label, role, cohorts, initials)`. `email_hash` is SHA-256 over a server-side pepper (config,
+  never D1) and the lower-cased email. `label` is neutral and chosen by the admin ("Teacher A", "Dari reviewer 2").
+  `initials` are the reviewer's, as P8's signoffs already carry.
+- The Worker hashes the Access JWT's email and looks it up; no row means "Ask the admin to add you". On the hub the
+  PIN gate gives the role, and no row is needed.
+- The admin's Staff page lists labels, roles and cohorts. "Add" takes an email, hashes it and discards it. The Access
+  policy at Cloudflare, kept by the admin, is the only place the emails live.
+
+## The ten changes to settled text
+
+| # | Change | Decision | Note |
+|---|---|---|---|
+| 1 | P19: no web notifications; bells only while the page is on screen | **Accept** | F5. Mo's default is met on screen and in the APK (C3.1). |
+| 2 | C1's motion rule gains the reading ring | **Accept** | The consent ring's component; `prefers-reduced-motion` removes all three. |
+| 3 | `check.js` loses "Show answer" for value items | **Accept** | DESIGN.md's bullet becomes: "Wrong answers teach: three hints (the lesson step, a worked example with other numbers, the first move), read aloud for young children, never the answer. The answer page is the teacher's. No scores to lose, no timers. Stars for children; 'Correct, 8 of 10' for adults." |
+| 4 | `/api/m/photo/mark` returns readings only; the phone marks | **Accept** | BUILD-PLAN 3.5's row becomes "code, seed, lang, the strip → a reading per cell; no marks, no hints; the phone marks against the cached key". |
+| 5 | The sheet code gains a Damm check digit; no app name; no per-item working boxes | **Accept** | DESIGN.md "Paper first": the example becomes `M7-03-48217`; add "no app name, URL or cohort on a learner sheet". |
+| 6 | A `sheets` module splits from `print`; the third tab is Print on the hub, Sheets online | **Accept, shaped** | `sheets` holds the sheet document, the keys, "Get the sheet" and the lesson-end card; `print` depends on `sheets` and adds only the hub's print queue (`needs: printer`); `photo` depends on `sheets`. One set of screens, two manifests. DESIGN.md's "Three tabs only" reads "Lessons, Ask, and Print (hub) or Sheets (online)". |
+| 7 | The shell gains one fixed footer row on Home for `plan` | **Accept** | `homeFooter()`; not a slot; nothing else may use it. |
+| 8 | Staff pages at `/teacher/`, `/admin/`, `/review/`; `teacher` loses `needs: pin`; a `staff` table | **Accept, amended** | `staff` as C3.2. `TUTOR_LACKS` keeps `pin` online, but no manifest names it: the gate is per host. |
+| 9 | The `open` seed; `ey` final | **Accept** | Supersedes the provisional row of 16 October ("all five modules on for `open` and `staging`"): staging keeps all; `open` as C2.8. |
+| 10 | The learner record stores `day: on\|off`, never whether she is in school | **Accept, amended** | Unset counts as on where the template lists her band (C2.4). |
+
+## What needs Mo, and when
+
+- **D11 (new): Google's Android developer verification.** Register Qalam's package and signing key, and under whose
+  identity: Mo's own, or the organisation's once it exists (an organisation account needs a D-U-N-S number; a personal
+  one ties Mo's name to the app in Google's records). Earliest 23 December 2026; needed by 31 July 2027, before any
+  install beyond the pilot. Default: no registration during the pilot. Facilitators install pilot phones over USB,
+  which the verification does not block, and everyone else uses the web app, which lacks only closed-app alarms.
+- Nothing else. The school day on by default is Mo's own plan, not a new decision. D7 (open sign-up) keeps its date;
+  until it is decided, `open` runs with AI off, so "open to all" costs nothing it cannot afford.
+
+## For the build plan
+
+- **Sittings:** C2 and C3 held 16 October 2026 with C0 and C1; this note. P9's look-over is a thread review, not a
+  sitting. C4 (July 2027) adds: photo and homework for `open` with budgets; an adult study time; spoken goals.
+- **Section 2:** the `s2` row's "plus Learn this" becomes Home's last row for `s1`, `s2` and `ad` reader; the
+  "School day or Homework help" rule reads "the school day is on by default wherever the cohort has a timetable; one
+  card on Home switches to Homework help; `day: on|off` stays on the phone".
+- **3.2:** slots unchanged; `homeFooter()` is the shell's. Manifests: `sheets` new; `print` and `photo` depend on it;
+  `teacher` drops `needs: pin`; `ey` leaves `photo`, `homework`, `timetable`, `plan`.
+- **3.4:** add `staff` (C3.2) and `review_notes`. **3.5:** the photo row (change 4); `GET /api/m/timetable?cohort=&band=`
+  without a token; `/teacher/`, `/admin/`, `/review/` pages behind Access, PIN on the hub; `/get` and the APK asset.
+- **5.1:** typed only in 2027. **5.3:** add "no learner route shows a value answer; 'Check my answer' three tries".
+  **5.4:** add "staff emails live only in Cloudflare Access; D1 holds a peppered hash".
+- **P1 seeds:** `open.json` as C2.8. **P2 shell:** the third tab per host; the footer row; `netChip()`.
+- **P9:** deliverable `p9-screens/index.html` with the 13-point checklist; failures fixed before P10.
+- **P10:** the Credits screen as C2.6. **P11:** `netChip()`, the queue rules and empty states; no offline banner.
+- **P13:** C2.1; the `sheets` module; the Damm code; "Do it on screen"; the layout tests; final heights into DESIGN.md.
+- **P14:** C2.2; the route returns readings; the `read_sheet` prompt never carries the key.
+- **P15:** C2.3; `show_answer` removed; Homework help as `#/ask?hw=1`; `check.item`, `hint.rung`, `check.dispute`;
+  cached hints leak-checked when the key is made.
+- **P17:** C3.4. **P19:** goal text loses "web notifications while open"; C2.4's default and card; C3.1's audio
+  unlock; `app/audio/bells/*` in sources.json.
+- **P20:** C3.2; `/teacher/`. **P21:** C3.3; `/admin/`; the label filter; a Staff page without emails.
+- **P22:** C3.5. **P23:** C3.6; `/get`; the permissions table; USB installs for the pilot.
+- **9.2:** add D11. **9.3:** one row for C2 and C3, source this note.
+- **DESIGN.md:** replace "Still to design" with this note as "C2 and C3 decisions"; apply changes 2, 3, 5 and 6 to
+  the C1 and "Ease of use first" text; the draft's specs are the builder's detail, filed as
+  `docs/DESIGN-C2C3-SPECS.md`.

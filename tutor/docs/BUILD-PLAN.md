@@ -1,7 +1,7 @@
 # Qalam build plan
 
 Draft of 16 October 2026, revised the same day to the design committee's C0 and C1 decisions
-(`build-committee/decisions_fable.md`). Built on the code in this folder (branch `claude/project-thread-sbgfoh`,
+(`build-committee/decisions_fable.md`), and again to its C2 and C3 decisions (DESIGN.md, "C2 and C3 decisions"). Built on the code in this folder (branch `claude/project-thread-sbgfoh`,
 draft PR #1), the committee plan of 16 October and its two reviews, and Mo's instruction that day: start the build,
 builders on Opus 5.5 high, every design element settled by a committee of Opus 5.5 max and Fable 5.1 max,
 usage-efficient, methodical, for all ages, using the free resources out there.
@@ -84,7 +84,7 @@ a look; the band does, and one setting, "Bigger text", scales every size for any
 | `p1` | years 1 to 3 | bold, child | play, "print today's sheet", subject tiles; tabs Lessons, Ask, Print | Home and lesson steps read on open | short sentences, Naskh 22 px | guardian consent; AI answers held in the pilot; no photo upload |
 | `p2` | years 4 to 6 | bold, child | as `p1`; Check my sheet from Print and the lesson's end | lesson steps read on open; speaker elsewhere | two-clause sentences | guardian consent; photo help on Qalam sheets |
 | `s1` | years 7 to 9 | clean, adult | continue card, Check my sheet, subject list; three tabs | speaker to tap | textbook level, Vazirmatn 18 px | guardian consent; photo help; goals |
-| `s2` | years 10 to 12 | clean, adult | as `s1`, plus "Learn this" (C3 places it) | speaker to tap | textbook level | guardian consent under 18; university links |
+| `s2` | years 10 to 12 | clean, adult | as `s1` | speaker to tap | textbook level | guardian consent under 18; university links |
 | `ad` | 18 and over | track `literacy`: bold, adult; track `reader`: clean, adult | tracks instead of years: Literacy, Maths, English, Chinese, University | speaker; read on open in Literacy | first letters to university | own consent |
 
 Rules across bands:
@@ -95,13 +95,15 @@ Rules across bands:
   module, enforces it (C0.1). Settings lives behind "Who is learning", never on Home.
 - **Speaker on every text,** including buttons, answers, hints and teacher messages; the browser check fails otherwise.
 - **Pictures:** line art of objects, no faces (CONTENT.md); adult packs use adult objects (market, clinic, bus).
-- **School day or Homework help:** out-of-school learners get the school day, in-school learners get Homework help on
-  Home. Whether she is in school stays on the phone and is never sent.
+- **School day or Homework help:** the school day is on by default wherever the cohort has a timetable; one card on
+  Home switches to Homework help; `day: on|off` stays on the phone (C2.4).
+- **Learn this** is Home's last row for `s1`, `s2` and `ad` reader, the shell's `homeFooter()` (C3.5).
 - **Privacy rises with youth:** under 13, typed text reaches an AI only through the rules screen and identifier
   filter, and cohorts can hold AI answers for the teacher. Nothing relies on OpenAI's clause on minors, which nobody has
   yet read live.
 
-Bands, tone, the adult-literacy look and the sign-up order were settled by C1 on 16 October (DESIGN.md, decision log).
+Bands, tone, the adult-literacy look and the sign-up order were settled by C1 on 16 October (DESIGN.md, decision log);
+Home per band, early years' modules and the `open` cohort by C2.
 
 ---
 
@@ -156,6 +158,11 @@ before the pilot, and the shell rather than the modules keeps Home sparse.
   order in `brain.py` is safety code. A `home.action` offer is `{id, role, priority, when(state)}`; the shell shows one
   primary, one secondary and one list; `lesson.end` takes two actions at most. `app/js/modules/<id>.js` exports
   `register(shell)` and is loaded by `import()` only when the module is on, never from another origin.
+- **Since C2 and C3:** slots unchanged; `homeFooter()` is the shell's, not a slot, and only `plan` uses it. A `sheets`
+  module (the sheet document, the keys, "Get the sheet", the lesson-end card) splits from `print`; `print` depends on
+  it and adds only the hub's print queue (`needs: printer`); `photo` depends on it too. `teacher` drops `needs: pin`:
+  its gate is per host (Cloudflare Access online, the PIN on the hub). `ey` leaves the bands of `photo`, `homework`,
+  `timetable` and `plan`.
 - **Capabilities and risk:** the core's table, not the manifest, sets the risk the admin sees: `photo.upload` and
   `audio.record` high; `free.text` and `ai.call` medium; `share.public` and `child.contact` blocked unless the cohort's
   moderation is `paid-human`. A module with any risk loads only after consent. Hub route guards and a review checklist
@@ -194,6 +201,8 @@ Shared SQL migrations in `tutor/migrations/NNNN_name.sql`, run by the hub at sta
 | `wishlist` | cohort, band, language, screened text, count | 90 days |
 | `releases` | pack, version, content hash, cohort, by, when | permanent |
 | `signoffs` | lesson, content hash, role, initials, date | permanent; mirrored in the pack |
+| `staff` | email_hash (SHA-256 over a server-side pepper and the lower-cased email), neutral label, role, cohorts, initials (C3.2) | while active |
+| `review_notes` | lesson, step, role, chips, text, status, at (C3.4) | until resolved |
 | `certificates` (Year 1) | id, course, band, date, cohort; never a name | permanent |
 
 Never on the server: names, sex (unless Mo decides live classes need it, then as a routing flag only), date of birth,
@@ -216,11 +225,13 @@ Existing routes stay (ARCHITECTURE.md). New:
 | `GET` / `DELETE /api/me` | her cohort, band, alias; deletion of her server records (deliberate, behind her PIN) |
 | `POST /api/me/pin-reset` | (P20) a teacher's 6-digit code shortens a lock reset in cohorts that allow it |
 | `POST /api/events` | up to 100 queued events |
-| `POST /api/m/photo/mark` | sheet code, seed, the answer-cell strip (about 30 KB, held in memory for the call) → items read, right or wrong, hints |
+| `POST /api/m/photo/mark` | code, seed, lang, the strip → a reading per cell; no marks, no hints; the phone marks against the cached key (C2.2, change 4) |
 | `POST /api/m/homework/hint` | the next hint rung; never the answer |
 | `GET /api/m/plan?goal=` | signed lessons in order; a miss joins the wishlist |
-| `GET /api/m/timetable` | the cohort's timetable |
+| `GET /api/m/timetable?cohort=&band=` | the cohort's timetable for a band, without a token |
 | `/api/m/teacher/*`, `/api/m/admin/*`, `/api/m/review/*` | dashboards and review; Access online, PIN on the hub |
+| `/teacher/`, `/admin/`, `/review/` | the staff pages, behind Cloudflare Access online and the PIN on the hub (C3.2 to C3.4) |
+| `/get` | the Android download page, and the APK as a Worker static asset (C3.6) |
 
 Online, learner routes need the token, and rate limits key on it, because carrier NAT puts thousands of phones behind
 one address. The hub keeps its address-based limits.
@@ -345,7 +356,7 @@ Mo chooses Pack 1 (D2); the tools are the same either way.
 
 | Stage | When | What she can do | What is shared |
 |---|---|---|---|
-| v1 | pilot | "I want to learn this", typed or spoken, searched against signed lessons; a plan in pack order; misses go to the wishlist. Private notes and "my own questions" on the phone. A marked sheet adds the lessons behind wrong items to her plan | nothing; the admin sees screened wishlist text with counts, no token |
+| v1 | pilot | "I want to learn this", typed only in 2027 (C3.5), searched against signed lessons; a plan in pack order; misses go to the wishlist. Private notes and "my own questions" on the phone. A marked sheet adds the lessons behind wrong items to her plan | nothing; the admin sees screened wishlist text with counts, no token |
 | v2 | autumn 2027 | plans over a reviewed skills graph; the AI may choose and order nodes, never invent them; spaced review on the phone | nothing |
 | v3 | 2028, behind flags | her own questions and short lessons, private by default; "ask my teacher to check"; rules and moderation pre-screen; teacher approval before classmates see it; labelled "written by a learner", "checked by a teacher" | approved items, inside her cohort only |
 
@@ -371,6 +382,8 @@ withheld raised them.
   step again".
 - **The ladder:** rung 1 points to the lesson step; rung 2 is a worked example with other numbers, from the existing
   generators, not the model; rung 3 names the first step for this item. "More like this" gives fresh generated items.
+- **No learner route shows a value answer;** "Check my answer" allows three tries. The answer page is the teacher's:
+  behind the PIN on the hub, inside `/teacher/` online (C2.3).
 - **Other homework** (after the blind test): the model solves privately, the hint is checked against that solution,
   and two disagreeing runs send it to the teacher.
 
@@ -384,6 +397,7 @@ withheld raised them.
 - Events hold verbs and ids only. OpenAI zero data retention is requested in January; images are cropped to the answer
   cells. A daily job deletes what has expired (3.4).
 - Threat model from the research: any phone or server may be seized, so neither may say "girl, 14, not in school".
+- Staff emails live only in Cloudflare Access; D1 holds a peppered hash (C3.2).
 - The PIN lock stays; there is no quick wipe. Removing a learner is a deliberate Settings action behind her PIN, with
   a spoken confirmation.
 
@@ -477,6 +491,8 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 - Done when: `/api/hello` lists five modules for `hub`; `print` off makes `/api/print` 404 for that cohort; a broken
   manifest is left out with a logged reason; all existing tests pass.
 - Tests: `tests/test_modules.py` (validation; resolution with depends, maturity, bands); `test_api.py` additions.
+- Since C2: the `open` seed as C2.8 (lessons, sheets, check, timetable and plan on; ask, homework, photo, teacher,
+  review and print off; AI off); staging keeps everything on.
 - Committee: settled by C0.1 and C0.2 (sections 3.2, 3.3).
 
 **P2. The app loads only enabled modules** (S)
@@ -486,6 +502,7 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 - Files: `app/js/modules.js` (new), `main.js`, `ui.js`, `screens/home.js`, `hub.js`.
 - Done when: with `print` off, the Print tab and "print today's sheet" vanish and nothing else moves.
 - Tests: `node --check`; first `node --test` file, `app/tests/modules.test.js`.
+- Since C2 and C3: the third tab is Print on the hub and Sheets online; the `homeFooter()` row; `netChip()` (P11).
 - Committee: settled by C0.1 (no new look).
 
 **P4. Events without names** (S)
@@ -543,13 +560,16 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 - Done when: six bands render Home at phone, tablet and laptop sizes in light and dark; a contrast check in the browser
   test passes per band; every worded element has a speaker; v1 data migrates with names dropped.
 - Tests: `node --test` for the migration; browser screenshots per band and theme.
+- Deliverable (C2.9): `build-committee/p9-screens/index.html`, the contact sheet with the 13-point checklist and the
+  contrast numbers beside each shot; the chair looks it over by thread, and failures are fixed before P10.
 - Committee: settled by C1 (DESIGN.md). If the phase runs long, dark mode ships as tokens only.
 
 **P10. Sign-up, consent, PIN lock** (M)
 - Goal: DESIGN.md's first-run spec: the Welcome doors with no name field; `?join=CODE` and "I have a class code";
   the guardian consent screen and `content/consent/<lang>/<version>.json`; the alias picture (phone) and number
   (server); the PIN lock with the visible 24-hour reset; Settings behind "Who is learning" (Bigger text, theme, lock,
-  nickname, remove learner, Credits); `/api/join`, `/api/me`.
+  nickname, remove learner, Credits); `/api/join`, `/api/me`. The Credits screen as C2.6 (grouped by source, voices
+  as the recorders choose, `app/credits.json`).
 - Files: `screens/welcome.js`, `who.js`, new `signup.js`, `consent.js`, `lock.js`, `settings.js`, `sha256.js`,
   `state.js`, `mods/join.py`, `migrations/0006_learners.sql`, `content/aliases.json`, `content/consent/`.
 - Done when: sign-up takes under 3 minutes in the browser check with every screen spoken; without consent AI and photo
@@ -564,8 +584,10 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 - Files: `hub.js`, `app/sw.js` (new), `index.html`, `server.py`, `config.py`.
 - Done when: staging opened once survives a simulated two-day outage (lessons, Check my sheet, queued events); limits
   hold per token behind one address.
+- Since C2: `netChip()` replaces `hubChip()`; "waiting to send" only on what she sent (questions, teacher requests,
+  the join and the consent record), never events; the queue rules and empty states of C2.5; no offline banner.
 - Tests: browser check with the network cut; limit tests in both modes.
-- Committee: yes, light, C2 (offline and "waiting to send" signs).
+- Committee: settled by C2 (C2.5).
 
 **P12. The fallback kit** (S)
 - Goal: `tutor/deploy/render.yaml` and a Dockerfile (online mode, no WeasyPrint), not deployed, so the 31 January gate
@@ -581,8 +603,11 @@ before the first new tables, so nothing is written twice. P3a needs no design in
   routes (F3: the name line is written by hand).
 - Files: `sheets.py`, `screens/print.js`, `check.js`, `tools/make_sheets.py`.
 - Done when: every Pack 1 sheet fits one A4 page; online and hub keys match for a seed.
+- Since C2: C2.1 (four corner squares, a slot grid, the QR holding text, never a URL); the `sheets` module; the Damm
+  check digit; "Do it on screen" only where there is no printer, after "Print or save as PDF"; the layout tests; the
+  final height table into DESIGN.md.
 - Tests: `test_sheets.py`; a layout test for marker and box positions.
-- Committee: **yes, C2**.
+- Committee: settled by C2 (C2.1).
 
 **P14. Photo marking of Qalam sheets** (M)
 - Goal: in-page camera, or `<input type="file" accept="image/*" capture="environment">` where that is missing or
@@ -593,15 +618,18 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 - Files: `modules/photo/`, `mods/photo.py`, `app/js/modules/photo.js`, `tests/fixtures/photos/`.
 - Done when: fixtures mark correctly on the fake; no image byte is written to disk, D1, R2 or logs (every writer
   patched in the test); the upload holds answer cells only.
+- Since C2: C2.2; the route returns readings and the phone marks; the `read_sheet` prompt never carries the key.
 - Tests: `tests/test_photo.py`; browser check with a fixture camera.
-- Committee: **yes, C2**.
+- Committee: settled by C2 (C2.2).
 
 **P15. Homework mode and the hint ladder** (M)
 - Goal: section 5.3 for Ask and photos; Homework help on Home for in-school learners; "more like this".
 - Files: `ai/filters.py`, `brain.py`, `mods/homework.py`, `app/js/modules/homework.js`, `screens/ask.js`.
 - Done when: the hint set passes at 100% against a fake that tries to leak; Pashto hints come only from checked answers.
+- Since C2: C2.3; `show_answer` removed; Homework help as `#/ask?hw=1`; events `check.item`, `hint.rung`,
+  `check.dispute`; cached hints leak-checked when the key is made.
 - Tests: `tests/test_hints.py`.
-- Committee: **yes, C2**.
+- Committee: settled by C2 (C2.3).
 
 **P16. The blind-test kit** (S)
 - Goal: run questions and sheet photos through any provider via the gateway; anonymised grader sheets; scores against
@@ -614,7 +642,8 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 - Goal: reviewers read each step aloud, comment and sign on a phone; `tools/pull_signoffs.py`; a reviewer cohort.
 - Files: `modules/review/`, `mods/review.py`, `app/js/modules/review.js`, `tools/pull_signoffs.py`.
 - Done when: a lesson signed on staging passes `--release` after the pull; one changed word voids it.
-- Committee: **yes, C3**.
+- Since C3: C3.4, `/review/`, `review_notes` and `signoffs` as drafted.
+- Committee: settled by C3 (C3.4).
 
 **P18. OpenAI live on staging** (S, after Mo's key, from 20 January 2027)
 - Goal: the `openai` provider, key as an Actions secret, budget caps, moderation, zero retention requested; the real
@@ -626,35 +655,41 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 
 **P19. The virtual school day** (M)
 - Goal: a cohort timetable (wake-up, opening, periods, breaks, worksheet time, close), bells on by default while the
-  app is open, off in one tap, today's lessons from her plan; web notifications while open; real alarms in the APK
+  app is open, off in one tap, today's lessons from her plan; real alarms in the APK
   (P23) only after she answers "this phone is mine" once; notifications say only "Qalam"; timetable requests carry
   no token and no school-day event is sent (F5).
 - Files: `modules/timetable/`, `mods/timetable.py`, `app/js/modules/timetable.js`, bell sounds cleared in sources.json.
 - Done when: an out-of-school learner gets the day by default and can silence it; the kill switch removes it within a
   minute.
-- Committee: **yes, C3**.
+- Since C2 and C3: no web notifications, bells only while the page is on screen; C2.4's default and Home card; C3.1's
+  audio unlock on the first tap; `app/audio/bells/*` in sources.json.
+- Committee: settled by C2 and C3 (C2.4, C3.1).
 
 **P20. The teacher dashboard** (M)
 - Goal: held answers, waiting questions, counts, progress per alias, mastery per lesson, wishlist; the 6-digit
   PIN-reset code (`POST /api/me/pin-reset`, C1.6).
 - Done when: 30 held answers cleared in under 10 minutes in rehearsal; no name anywhere.
-- Committee: **yes, C3**.
+- Since C3: C3.2, `/teacher/`; the `staff` table without emails.
+- Committee: settled by C3 (C3.2).
 
 **P21. The admin panel** (M)
 - Goal: cohorts and codes, flags with risk, releases, AI spend, safety flags, kill switches; Access online, PIN on hub.
 - Done when: every change is logged; `child.contact` cannot be switched on without paid-human moderation.
-- Committee: **yes, C3** (light).
+- Since C3: C3.3, `/admin/`; the label filter; a Staff page without emails.
+- Committee: settled by C3 (C3.3).
 
 **P22. "I want to learn this" and the wishlist** (S)
 - Goal: section 5.1 v1. Files: `modules/plan/`, `mods/plan.py`, `app/js/modules/plan.js`, `search.py`.
 - Done when: a matching goal gives an ordered plan; a miss reaches the wishlist screened and without the token.
-- Committee: **yes, C3** (where the entry sits without cluttering Home).
+- Since C3: C3.5, typed only; `homeFooter()` in the shell.
+- Committee: settled by C3 (C3.5).
 
 **P23. The Android app** (M)
 - Goal: Sehat's shell wraps the app: lessons and audio on the phone, alarms, camera, a signed APK on GitHub Releases.
 - Files: `tutor/android/` (from Sehat's, kept separate), `.github/workflows/tutor-android.yml`.
 - Done when: it installs on two cheap phones, runs a lesson offline, fires the alarm, marks a photo on staging.
-- Committee: yes, light, C3 (download screen, permission prompts).
+- Since C3: C3.6; `/get`; the permissions table; pilot phones installed by facilitators over USB.
+- Committee: settled by C3 (C3.6).
 
 **P24. Pilot hardening and production** (M)
 - Goal: production Worker and D1 `qalam` (eu); retention cron; backups (Time Travel plus a weekly export); a 60-learner
@@ -686,9 +721,9 @@ that are off for the pilot cohort, so any gain can be attributed.
 |---|---|---|---|
 | C0 | 16 Oct 2026, held | this plan's design choices: manifest, slots, flags, async first, store, photo handling, aliases, bands, licences | this file; decisions in `build-committee/decisions_fable.md` |
 | C1 | 16 Oct 2026, held with C0 | bands, adult tone, visual identity and icon, bigger text, dark mode, sign-up order, consent screen, alias versus nickname, PIN lock and reset | settled without mock screens; the spec is in DESIGN.md; P9's screenshots go to C2 for a look-over |
-| C2 | early December 2026 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits; which modules `ey` gets (P1 left it out of Ask and Check my sheet) and which modules the `open` cohort switches on (the seed has all five, and Ask's last step is a teacher) | note, mock screens, mock sheet |
-| C3 | early January 2027 | school day and bells, teacher dashboard, admin panel, review screens, "learn this" entry, APK screens | note, mock screens |
-| C4 | July 2027 | Year 1 modules | note, mock screens |
+| C2 | 16 Oct 2026, held with C0 and C1 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits; which modules `ey` gets (P1 left it out of Ask and Check my sheet) and which modules the `open` cohort switches on (the seed has all five, and Ask's last step is a teacher) | note, mock screens, mock sheet |
+| C3 | 16 Oct 2026, held with C0 and C1 | school day and bells, teacher dashboard, admin panel, review screens, "learn this" entry, APK screens | decisions and specs in DESIGN.md and DESIGN-C2C3-SPECS.md; P9's look-over is a thread review, not a sitting |
+| C4 | July 2027 | Year 1 modules; also photo and homework for `open` with budgets, an adult study time, spoken goals | note, mock screens |
 
 Each sitting returns a short decision note for DESIGN.md and the decision log.
 
@@ -705,8 +740,8 @@ a UK post probably from early August. Ramadan about 8 February to 9 March 2027; 
 |---|---|---|---|---|
 | 17 to 31 Oct 2026 | P3a, P3b, P1, P2 | C0 and C1 held 16 Oct | | optional: build card, 5 minutes |
 | 1 to 22 Nov | P4 to P7 | | first staging deploy by 22 Nov | optional: read the verdict, 21 Nov |
-| 23 Nov to 22 Dec | P8 to P12 | C2 | full suite green on staging by 22 Dec | optional: January plan by 28 Nov; nothing 1 to 22 Dec |
-| 23 Dec to 19 Jan 2027 | P13 to P17 | C3 | | nothing (possible MSRA) |
+| 23 Nov to 22 Dec | P8 to P12 | C2 held 16 Oct | full suite green on staging by 22 Dec | optional: January plan by 28 Nov; nothing 1 to 22 Dec |
+| 23 Dec to 19 Jan 2027 | P13 to P17 | C3 held 16 Oct | | nothing (possible MSRA) |
 | 20 to 31 Jan | P18; blind-test runs | | key from 20 Jan; **port gate 31 Jan** | key, second admin, reviewer emails, name, Mazar contact |
 | February | P19 to P21; Pack 1 drafting | | blind test graded by 10 Feb; AI language decisions | scores; nothing 11 to 25 Feb |
 | March | P22, P23; Pack 1 corrections | | Pack 1 signed; DPIA drafted; pilot class by 31 Mar | solicitor, Pack 1 sign-off, pilot class |
@@ -785,6 +820,7 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | D8 | Partner class or home-based class | as the committee plan | 31 Mar | home-based, through the Mazar contact |
 | D9 | Live audio classes | July 2027 | 31 Jul | no until funded |
 | D10 | Ministry recognition | after 22 Dec | none | not in 2027 |
+| D11 | Google's Android developer verification: register Qalam's package and signing key under Mo's own identity or the organisation's (an organisation account needs a D-U-N-S number; a personal one ties Mo's name to the app in Google's records) | 23 Dec | 31 Jul 2027, before any install beyond the pilot | no registration during the pilot: facilitators install pilot phones over USB, everyone else uses the web app |
 
 ### 9.3 Decision log
 
@@ -806,5 +842,6 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | 16 Oct 2026 | Check my sheet's event is `check.done` (the lesson, the percent right), sent from the phone's queue each time a sheet is marked; it replaces the hub-side `check.key`, and the key route has no `for=check`. P7 built: the hub's own app as the Python Worker `qalam-staging` on workers.dev, D1 `qalam-staging` in `eu`, migrations applied by `D1Store.open()`, no secrets, `fake` AI. What a host lacks is a setting (`TUTOR_LACKS`, online `printer,pin`) matched against manifest `needs`; `teacher` needs `pin`, so print and teacher are off online. The Worker builds the app at import (deploy snapshot) and gives the store the plain JavaScript D1 binding; Workers Logs stay off. The Free plan served the spike, but most requests use more than its 10 ms of CPU (median 14 ms): D6 stays Mo's (HOSTING.md) | builder; thread | P7 commits, HOSTING.md |
 | 16 Oct 2026 | P8 built. sources.json takes the app's language codes, `bands` for ages and the C0.6 flags; the pack loader enforces the classes (a lesson that breaks them is left out). Builder's choices, to confirm: drafts are served wherever `TUTOR_RELEASE` is off (staging and laptops, any cohort), and production serves signed content only; link cards live in a pack's `links.json` and are signed like lessons; signoffs carry initials only and clip manifests a speaker code, never a name; release needs recorded clips for years 0 to 3 and every letter step in Dari and Pashto; Credits sits in Who is learning until Settings (P10); credit lines are sources.json's English wording | builder; thread | P8 commit |
 | 16 Oct 2026 | P9 built. Builder's choices, to confirm: the speaker rule is met by one page speaker in the header (early years: the listen button), not a speaker on every tile and button; Bigger text and the theme are stored per learner but have no switch until P10's Settings; Welcome lost its name field now and offers English, while early years and the adult doors arrive with P10's Welcome; an adult's Home says lessons are coming until an adult pack exists; interface clips are two-note placeholder chimes, labelled in each manifest, that play only on a tester's phone; text in the accent colour uses `--accent-ink` (the active tab was 4.3:1); English pages turn arrows round and keep pack text in its own direction; CI parses app scripts as modules (`node --check` alone missed a module's early errors) | builder | this thread |
+| 16 Oct 2026 | C2 and C3 (design committee): sheets with four corner squares, a slot grid, a text-only QR and a Damm check digit, no app name on paper; the camera takes the photo itself and the server returns readings only; three hint rungs, no value answer on any learner route; the school day on by default, one Home card switches to Homework help, `day: on\|off` on the phone; offline is a header chip, "waiting to send" only on what she sent; link cards with no embeds, voices anonymous by default; `ey` gets lessons and Print or Sheets only (final); `open` runs lessons, sheets, check, timetable and plan with AI off; bells only while the page is on screen, no web notifications; staff pages at `/teacher/`, `/admin/`, `/review/` behind Access, `staff` holds a peppered email hash; a `sheets` module splits from `print`; Learn this typed only, as Home's footer row; the APK installed over USB in the pilot; D11 added | design committee | DESIGN.md (C2 and C3 decisions); DESIGN-C2C3-SPECS.md |
 
 New decisions are added with date and source; a row is never edited, only superseded.

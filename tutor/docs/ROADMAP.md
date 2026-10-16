@@ -65,6 +65,10 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   `speech.js` plays recorded clips before the phone's voice, with labelled placeholder chimes until native speakers
   record; `tools/browser_check.mjs` checks every band in light, dark and Bigger text. Bigger text and the theme get
   their switches in P10's Settings.
+- **C2 and C3 held** with C0 and C1 on 16 October: the sheets, the camera, results and hints, Home in and out of
+  school, the offline chip, link cards and Credits, early years' modules, the `open` cohort, the school day, the
+  staff pages, Learn this and the Android app are specified (DESIGN.md, "C2 and C3 decisions", and
+  DESIGN-C2C3-SPECS.md). D11, Google's developer verification, is Mo's, from 23 December.
 
 ## January 2027: buy and test
 
