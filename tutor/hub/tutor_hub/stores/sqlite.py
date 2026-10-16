@@ -141,3 +141,22 @@ class SqliteStore(Store):
 
     async def fail_unfinished_prints(self):
         return await self._run("fail_unfinished_prints")
+
+    # cohorts and flags
+    async def seed_cohorts(self, cohorts) -> bool:
+        return await self._run("seed_cohorts", cohorts)
+
+    async def cohort(self, cid):
+        return await self._run("cohort", cid)
+
+    async def cohorts(self):
+        return await self._run("cohorts")
+
+    async def flags(self, cid):
+        return await self._run("flags", cid)
+
+    async def set_flag(self, cid, module, *, enabled, settings=None, changed_by):
+        return await self._run("set_flag", cid, module, enabled=enabled, settings=settings, changed_by=changed_by)
+
+    async def flag_log(self, cid, limit=50):
+        return await self._run("flag_log", cid, limit)

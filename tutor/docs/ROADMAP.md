@@ -23,7 +23,9 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **P3a, done:** the async seam: async routes, one async store interface with SQLite behind a worker thread, an
   async model client, WeasyPrint in the thread pool, start-up in the app's lifespan.
 - **P3b, done:** schema migrations (`tutor/migrations`) and the store contract tests.
-- P1: module manifests and cohort flags. P2: the app loads only enabled modules. Then P4 to P7: events without names, the AI gateway, the D1 store, the Worker on staging.
+- **P1, done:** module manifests for the five built features, cohorts and flags (seeded, logged), `/api/hello`
+  listing the modules on, and a switched-off module's routes answering 404.
+- P2: the app loads only enabled modules. Then P4 to P7: events without names, the AI gateway, the D1 store, the Worker on staging.
 
 ## January 2027: buy and test
 

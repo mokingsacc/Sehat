@@ -236,3 +236,38 @@ async def test_prune_keeps_approved_answers(store):
     await store.prune(-1)                          # a cut-off in the future: everything is "old"
     assert await store.question(t) is None and await store.prints() == []
     assert [a["answer"] for a in await store.approved()] == ["kept"]
+
+
+# cohorts and flags
+
+COHORTS = [{"id": "abcd1234ef", "label": "One", "langs": ["prs"], "bands": ["p1", "p2"],
+            "settings": {"maturity": ["pilot", "stable"]},
+            "flags": {"lessons": {"enabled": True, "settings": {}}, "ask": {"enabled": False, "settings": {}}}},
+           {"id": "zz99yy88xx", "label": "Two", "langs": ["prs", "ps"], "bands": ["ad"], "settings": {}, "flags": {}}]
+
+
+async def test_seeds_fill_only_empty_tables(store):
+    assert await store.seed_cohorts(COHORTS) is True
+    assert await store.seed_cohorts([dict(COHORTS[1], id="other00000")]) is False
+    assert [c["id"] for c in await store.cohorts()] == ["abcd1234ef", "zz99yy88xx"]
+    c = await store.cohort("abcd1234ef")
+    assert (c["label"], c["langs"], c["bands"], c["settings"]) == ("One", ["prs"], ["p1", "p2"],
+                                                                    {"maturity": ["pilot", "stable"]})
+    assert "code_hash" not in c and await store.cohort("nope") is None
+    f = await store.flags("abcd1234ef")
+    assert {k: v["enabled"] for k, v in f.items()} == {"lessons": True, "ask": False}
+    assert f["lessons"]["changed_by"] == "seed" and await store.flags("zz99yy88xx") == {}
+    assert len(await store.flag_log("abcd1234ef")) == 2
+
+
+async def test_every_flag_change_is_logged(store):
+    await store.seed_cohorts(COHORTS)
+    await store.set_flag("zz99yy88xx", "print", enabled=True, settings={"copies": 2}, changed_by="admin")
+    await store.set_flag("zz99yy88xx", "print", enabled=False, changed_by="admin")
+    f = await store.flags("zz99yy88xx")
+    assert f["print"]["enabled"] is False and f["print"]["settings"] == {} and f["print"]["changed_by"] == "admin"
+    log = await store.flag_log("zz99yy88xx")
+    assert [(r["module"], r["enabled"], r["settings"]) for r in log] == [("print", False, {}),
+                                                                         ("print", True, {"copies": 2})]
+    assert len(await store.flag_log("zz99yy88xx", limit=1)) == 1
+    assert len(await store.flag_log("abcd1234ef")) == 2          # another cohort's log is untouched

@@ -1,0 +1,16 @@
+{
+  "id": "qg1j2918yx",
+  "label": "Staging",
+  "langs": ["prs", "ps", "en"],
+  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "settings": {
+    "maturity": ["draft", "pilot", "stable"]
+  },
+  "modules": {
+    "lessons": true,
+    "ask": true,
+    "print": true,
+    "check": true,
+    "teacher": true
+  }
+}

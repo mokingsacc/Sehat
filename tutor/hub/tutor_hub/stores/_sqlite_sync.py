@@ -5,6 +5,7 @@ Privacy rule: the hub never stores a child's name. Questions are anonymous (a ra
 fetch the teacher's answer later), names printed on sheets are used once and not written down, and old
 questions are deleted after keep_days. Progress stays on each phone.
 """
+import json
 import secrets
 import sqlite3
 import threading
@@ -123,3 +124,67 @@ class Store:
         """After a restart (or a power cut) nothing is printing any more."""
         self._x("UPDATE prints SET status='failed', detail='the hub restarted: print again' "
                 "WHERE status IN ('queued','printing')")
+
+    # cohorts and flags
+    @staticmethod
+    def _cohort(r):
+        if not r:
+            return None
+        return dict(r, langs=json.loads(r["langs"]), bands=json.loads(r["bands"]), settings=json.loads(r["settings"]))
+
+    def seed_cohorts(self, cohorts) -> bool:
+        """Fill the cohort tables from the seed files, only when no cohort exists yet."""
+        with self.lock:
+            if self.db.execute("SELECT 1 FROM cohorts LIMIT 1").fetchone():
+                return False
+            at = now()
+            self.db.execute("BEGIN")
+            try:
+                for c in cohorts:
+                    self.db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?,?,?,?,?,?)",
+                                    (c["id"], c["label"], json.dumps(c["langs"]), json.dumps(c["bands"]),
+                                     json.dumps(c.get("settings") or {}), at))
+                    for module, f in (c.get("flags") or {}).items():
+                        row = (module, c["id"], int(bool(f["enabled"])), json.dumps(f.get("settings") or {}), "seed", at)
+                        self.db.execute("INSERT INTO flags(module, cohort, enabled, settings, changed_by, changed_at) "
+                                        "VALUES(?,?,?,?,?,?)", row)
+                        self.db.execute("INSERT INTO flag_log(module, cohort, enabled, settings, changed_by, "
+                                        "changed_at) VALUES(?,?,?,?,?,?)", row)
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+            return True
+
+    def cohort(self, cid):
+        return self._cohort(self._one("SELECT id, label, langs, bands, settings, created FROM cohorts WHERE id=?",
+                                      (cid,)))
+
+    def cohorts(self):
+        return [self._cohort(r) for r in self._all("SELECT id, label, langs, bands, settings, created FROM cohorts "
+                                                   "ORDER BY created, id")]
+
+    def flags(self, cid):
+        return {r["module"]: {"enabled": bool(r["enabled"]), "settings": json.loads(r["settings"]),
+                              "changed_by": r["changed_by"], "changed_at": r["changed_at"]}
+                for r in self._all("SELECT * FROM flags WHERE cohort=?", (cid,))}
+
+    def set_flag(self, cid, module, *, enabled, settings=None, changed_by):
+        row = (module, cid, int(bool(enabled)), json.dumps(settings or {}), changed_by, now())
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                self.db.execute("""INSERT INTO flags(module, cohort, enabled, settings, changed_by, changed_at)
+                                   VALUES(?,?,?,?,?,?) ON CONFLICT(cohort, module) DO UPDATE SET
+                                   enabled=excluded.enabled, settings=excluded.settings,
+                                   changed_by=excluded.changed_by, changed_at=excluded.changed_at""", row)
+                self.db.execute("INSERT INTO flag_log(module, cohort, enabled, settings, changed_by, changed_at) "
+                                "VALUES(?,?,?,?,?,?)", row)
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+
+    def flag_log(self, cid, limit=50):
+        return [dict(r, enabled=bool(r["enabled"]), settings=json.loads(r["settings"]))
+                for r in self._all("SELECT * FROM flag_log WHERE cohort=? ORDER BY id DESC LIMIT ?", (cid, limit))]

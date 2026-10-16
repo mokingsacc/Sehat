@@ -1,0 +1,15 @@
+{
+  "id": "ask",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": [],
+  "bands": ["p1", "p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": ["free.text", "ai.call"],
+  "ai": {
+    "purposes": ["explain"]
+  },
+  "settings": {},
+  "needs": [],
+  "offline": "partly"
+}

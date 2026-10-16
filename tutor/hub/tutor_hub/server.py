@@ -14,14 +14,14 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
-from . import __version__, search, sheets
+from . import __version__, flags, modules, search, sheets
 from .brain import Brain
 from .config import Config
 from .llm import LLM
@@ -97,6 +97,9 @@ class Hub:
         cfg.data.mkdir(parents=True, exist_ok=True)
         self.store = SqliteStore(cfg.data / "hub.db")
         self.library = Library(cfg.packs)
+        self.modules, self.module_problems = modules.load(cfg.modules)
+        self.seeds, self.seed_problems = flags.load_seeds(cfg.cohorts)
+        self.cohort_id = cfg.cohort or (self.seeds.get("hub") or {}).get("id")
         self.llm = LLM(cfg.llm_url, cfg.llm_model, cfg.llm_timeout, cfg.llm_key)
         self._ix_lock = asyncio.Lock()
         self.brain = Brain(None, self.llm, cfg.ai_langs)     # the search index is built in start()
@@ -112,6 +115,10 @@ class Hub:
 
     async def start(self):
         await self.store.open()
+        if await self.store.seed_cohorts(flags.seed_rows(self.seeds)):
+            log.info("cohorts seeded from %s", self.cfg.cohorts)
+        if not self.cohort_id or not await self.store.cohort(self.cohort_id):
+            log.error("this hub's cohort (TUTOR_COHORT=%s) does not exist: every module is off", self.cohort_id)
         await self.store.prune(self.cfg.keep_days)
         await self.store.fail_unfinished_prints()
         await self.reindex()
@@ -180,12 +187,33 @@ class Hub:
                                         name=spec.get("name"), for_pdf=True)
         return sheets.render_pdf(html_text, base_url=str(self.cfg.app))
 
-    async def hello(self) -> dict:
+    async def cohort_modules(self, cohort_id: str | None = None, band: str | None = None):
+        """(the cohort, its flags, the ids of the modules on for it); the cohort is None if there is no such cohort.
+
+        Read from the store on every call, so a switch the admin flips reaches the next request."""
+        cohort = await self.store.cohort(cohort_id or self.cohort_id or "")
+        if not cohort:
+            return None, {}, []
+        f = await self.store.flags(cohort["id"])
+        return cohort, f, flags.enabled(self.modules, cohort, f, band)
+
+    async def hello(self, cohort_id: str | None = None, band: str | None = None) -> dict:
+        cohort, f, on = await self.cohort_modules(cohort_id, band)
+        if cohort_id and not cohort:
+            raise HTTPException(404, "no such cohort")
         ai_on = await self.llm.available()
-        return {"hub": self.cfg.name, "version": __version__, "lessons": len(self.library.lessons),
+        mods = []
+        for mid in on:
+            m = self.modules[mid]
+            mods.append({"id": mid, "version": m["version"], "slots": m["slots"], "bands": m["bands"],
+                         "needs": m["needs"], "offline": m["offline"], "risk": modules.risk(m),
+                         "settings": flags.module_settings(m, (f.get(mid) or {}).get("settings"))})
+        return {"hub": self.cfg.name, "version": __version__, "core": __version__, "lessons": len(self.library.lessons),
                 "ai": {"on": ai_on, "langs": list(self.cfg.ai_langs) if ai_on else []},
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
-                "url": self.cfg.public_url}
+                "url": self.cfg.public_url,
+                "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
+                "modules": mods}
 
 
 def _lang(lang: str) -> str:
@@ -199,6 +227,15 @@ def _who(request: Request) -> str:
 def create_app(cfg: Config | None = None) -> FastAPI:
     cfg = cfg or Config.from_env()
     hub = Hub(cfg)
+
+    def needs(*mids):
+        """A route guard: the route exists only while these modules are on for the cohort asking (`?cohort=`, else
+        this hub's). A module that is off answers 404, exactly as a route that was never there."""
+        async def guard(request: Request):
+            _, _, on = await hub.cohort_modules(request.query_params.get("cohort"))
+            if not all(m in on for m in mids):
+                raise HTTPException(404, "Not Found")
+        return [Depends(guard)]
 
     @asynccontextmanager
     async def lifespan(app):
@@ -216,21 +253,23 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                        expose_headers=["X-Sheet-Seed"])
 
     @app.get("/api/hello")
-    async def hello():
-        return await hub.hello()
+    async def hello(cohort: str | None = None, band: str | None = None):
+        if band is not None and band not in modules.BANDS:
+            raise HTTPException(400, "unknown band")
+        return await hub.hello(cohort, band)
 
-    @app.get("/api/packs")
+    @app.get("/api/packs", dependencies=needs("lessons"))
     async def packs():
         return {"packs": hub.library.summary()}
 
-    @app.get("/api/lessons/{lid}")
+    @app.get("/api/lessons/{lid}", dependencies=needs("lessons"))
     async def lesson(lid: str):
         l = hub.library.lesson_for_app(lid)
         if not l:
             raise HTTPException(404, "no such lesson")
         return l
 
-    @app.get("/packs/{pid}/pictures/{fname}")
+    @app.get("/packs/{pid}/pictures/{fname}", dependencies=needs("lessons"))
     async def picture(pid: str, fname: str):
         pack = hub.library.packs.get(pid)
         f = picture_file(pack["_dir"], Path(fname).stem) if pack else None
@@ -239,7 +278,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return FileResponse(f, headers={"Cache-Control": "public, max-age=86400"})
 
     # Ask
-    @app.post("/api/ask")
+    @app.post("/api/ask", dependencies=needs("ask"))
     async def ask(a: AskIn, request: Request):
         hub.ask_limit.check(_who(request))
         lang = _lang(a.lang)
@@ -250,14 +289,14 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                                              source=ans.source, urgent=ans.urgent, waiting=ans.waiting)
         return dict(ans.dict(), id=token)
 
-    @app.get("/api/ask/{token}")
+    @app.get("/api/ask/{token}", dependencies=needs("ask"))
     async def ask_status(token: str):
         q = await hub.store.question(token)
         if not q:
             raise HTTPException(404, "no such question")
         return {"id": token, "status": q["status"], "teacher_answer": q["teacher_answer"]}
 
-    @app.post("/api/ask/{token}/teacher")
+    @app.post("/api/ask/{token}/teacher", dependencies=needs("ask"))
     async def ask_teacher(token: str):
         if not await hub.store.send_to_teacher(token):
             raise HTTPException(404, "no such question")
@@ -269,14 +308,14 @@ def create_app(cfg: Config | None = None) -> FastAPI:
             return seed
         return random.randint(1000, 9999) if sheets.needs_seed(hub.lesson(lid)) else 0
 
-    @app.get("/api/sheets/{lid}.html", response_class=HTMLResponse)
+    @app.get("/api/sheets/{lid}.html", response_class=HTMLResponse, dependencies=needs("print"))
     async def sheet_page(lid: str, lang: str = "prs", seed: int | None = None, kind: str = "worksheet", name: str | None = None):
         seed = _seed(lid, seed)
         kind = "answers" if kind == "answers" else "worksheet"
         return HTMLResponse(hub.sheet_html(lid, lang=_lang(lang), seed=seed, kind=kind, name=(name or "")[:40] or None),
                             headers={"X-Sheet-Seed": str(seed)})
 
-    @app.get("/api/sheets/{lid}.pdf")
+    @app.get("/api/sheets/{lid}.pdf", dependencies=needs("print"))
     async def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = None, kind: str = "worksheet"):
         hub.pdf_limit.check(_who(request))
         seed = _seed(lid, seed)
@@ -291,7 +330,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return Response(pdf, media_type="application/pdf",
                         headers={"Content-Disposition": f'inline; filename="{code}.pdf"', "X-Sheet-Seed": str(seed)})
 
-    @app.get("/api/sheets/{lid}/key")
+    @app.get("/api/sheets/{lid}/key", dependencies=needs("check"))
     async def sheet_key(lid: str, seed: int = 0, lang: str = "prs"):
         l = hub.lesson(lid)
         if not l.get("sheet"):
@@ -299,7 +338,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return sheets.answer_key(l, seed, _lang(lang), hub.picture_url(lid))
 
     # printing
-    @app.post("/api/print")
+    @app.post("/api/print", dependencies=needs("print"))
     async def print_sheet(p: PrintIn, request: Request, x_teacher_pin: str | None = Header(None)):
         l = hub.lesson(p.lesson)
         if not l.get("sheet"):
@@ -319,7 +358,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
                              "title": f"{l['sheet']['code']}-{seed}" if seed else l["sheet"]["code"]})
         return {"id": jid, "status": "queued", "seed": seed, "printer": hub.printer.status()}
 
-    @app.get("/api/print/{jid}")
+    @app.get("/api/print/{jid}", dependencies=needs("print"))
     async def print_status(jid: int):
         j = await hub.store.print_job(jid)
         if not j:
@@ -327,13 +366,13 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         return {"id": jid, "status": j["status"], "detail": j["detail"] if j["status"] == "failed" else None}
 
     # the teacher's page
-    @app.get("/api/teacher/summary")
+    @app.get("/api/teacher/summary", dependencies=needs("teacher"))
     async def teacher_summary(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
         return {"counts": await hub.store.counts(), "hello": await hub.hello(),
                 "pack_problems": hub.library.problems[:50]}
 
-    @app.get("/api/teacher/queue")
+    @app.get("/api/teacher/queue", dependencies=needs("teacher"))
     async def teacher_queue(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
         rows = await hub.store.queue()
@@ -343,7 +382,7 @@ def create_app(cfg: Config | None = None) -> FastAPI:
             r["lesson_title"] = pick_text(l["title"], r.get("lang") or "prs") if l else None
         return {"questions": rows}
 
-    @app.post("/api/teacher/answer/{qid}")
+    @app.post("/api/teacher/answer/{qid}", dependencies=needs("teacher"))
     async def teacher_answer(qid: int, body: ReviewIn, request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
         q = await hub.store.review(qid, answer=body.answer, approve=body.approve)
@@ -354,13 +393,13 @@ def create_app(cfg: Config | None = None) -> FastAPI:
         q.pop("token", None)
         return q
 
-    @app.get("/api/teacher/prints")
+    @app.get("/api/teacher/prints", dependencies=needs("teacher"))
     async def teacher_prints(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
         return {"printer": hub.printer.status(), "jobs": [{k: v for k, v in j.items() if k != "device"}
                                                      for j in await hub.store.prints()]}
 
-    @app.post("/api/teacher/hub-card")
+    @app.post("/api/teacher/hub-card", dependencies=needs("teacher", "print"))
     async def teacher_card(request: Request, x_teacher_pin: str | None = Header(None)):
         hub.check_pin(x_teacher_pin, _who(request))
         jid = await hub.store.add_print(lesson_id=None, kind="card", copies=1, lang="prs", seed=0, device="teacher")

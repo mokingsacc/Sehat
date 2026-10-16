@@ -1,0 +1,12 @@
+{
+  "id": "check",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["p1", "p2", "s1", "s2", "ad"],
+  "slots": ["home.action"],
+  "capabilities": [],
+  "settings": {},
+  "needs": [],
+  "offline": "yes"
+}

@@ -179,3 +179,79 @@ def test_health_question_points_to_sehat_and_waits_for_the_teacher(hub_client):
     assert q["source"] == "rules" and q["answer"]          # the teacher sees what the child was told
     hub_client.post(f"/api/teacher/answer/{q['id']}", headers=pin, json={"answer": "به کلینیک برو.", "approve": True})
     assert hub_client.hub.store.sync.approved() == []          # a safety message never becomes a reusable answer
+
+
+# modules and cohorts (P1)
+
+def test_hello_lists_the_five_modules_for_the_hub(hub_client):
+    h = hub_client.get("/api/hello").json()
+    assert h["cohort"]["id"] == hub_client.hub.cohort_id and h["core"] == h["version"]
+    assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "print", "teacher"]
+    ask = next(m for m in h["modules"] if m["id"] == "ask")
+    assert ask["risk"] == "medium" and "ey" not in ask["bands"]
+    assert hub_client.get(f"/api/hello?cohort={h['cohort']['id']}").json()["modules"] == h["modules"]
+    assert [m["id"] for m in hub_client.get("/api/hello?band=ey").json()["modules"]] == ["lessons", "print", "teacher"]
+    assert hub_client.get("/api/hello?cohort=nosuchcohort").status_code == 404
+    assert hub_client.get("/api/hello?band=k9").status_code == 400
+
+
+def test_print_off_makes_its_routes_404_for_that_cohort_only(hub_client):
+    hub = hub_client.hub
+    open_id = hub.seeds["open"]["id"]
+    hub.store.sync.set_flag(hub.cohort_id, "print", enabled=False, changed_by="admin")
+    base = {"lesson": "maths-1-count-5", "lang": "prs"}
+    assert hub_client.post("/api/print", json=base).status_code == 404
+    assert hub_client.get("/api/sheets/dari-1-sheen.html").status_code == 404
+    assert hub_client.post("/api/teacher/hub-card", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 404
+    assert "print" not in [m["id"] for m in hub_client.get("/api/hello").json()["modules"]]
+    # everything else still works, and Check my sheet keeps its key
+    assert hub_client.get("/api/lessons/maths-1-count-5").status_code == 200
+    assert hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=1234").status_code == 200
+    assert hub_client.post("/api/ask", json={"text": "۱ + ۱", "lang": "prs"}).status_code == 200
+    # another cohort keeps printing
+    assert hub_client.post(f"/api/print?cohort={open_id}", json=base).status_code == 200
+    hub.prints.wait()
+    # switched on again, the next request sees it; both changes are logged
+    hub.store.sync.set_flag(hub.cohort_id, "print", enabled=True, changed_by="admin")
+    assert hub_client.post("/api/print", json=base).status_code == 200
+    hub.prints.wait()
+    log = hub.store.sync.flag_log(hub.cohort_id)
+    assert [(r["module"], r["enabled"]) for r in log[:2]] == [("print", True), ("print", False)]
+
+
+def test_a_module_whose_dependency_is_off_is_off(hub_client):
+    hub = hub_client.hub
+    hub.store.sync.set_flag(hub.cohort_id, "lessons", enabled=False, changed_by="admin")
+    on = [m["id"] for m in hub_client.get("/api/hello").json()["modules"]]
+    assert on == ["ask", "teacher"]                 # print and check depend on lessons
+    assert hub_client.get("/api/packs").status_code == 404
+    assert hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=1").status_code == 404
+
+
+def test_a_broken_manifest_is_left_out_and_the_hub_still_runs(cfg, tmp_path, caplog):
+    import shutil
+
+    from tutor_hub.config import TUTOR
+    from tutor_hub.server import create_app
+    mods = tmp_path / "modules"
+    shutil.copytree(TUTOR / "modules", mods)
+    (mods / "print" / "module.json").write_text('{"id": "print", "version": "one"}', encoding="utf-8")
+    cfg.modules = mods
+    with caplog.at_level("WARNING", logger="tutor.modules"):
+        app = create_app(cfg)
+    assert "print: unknown fields" in caplog.text or "print: missing fields" in caplog.text
+    with TestClient(app) as c:
+        assert [m["id"] for m in c.get("/api/hello").json()["modules"]] == ["ask", "check", "lessons", "teacher"]
+        assert c.post("/api/print", json={"lesson": "maths-1-count-5"}).status_code == 404
+        assert c.get("/api/lessons/maths-1-count-5").status_code == 200
+
+
+def test_seeds_fill_empty_tables_once(cfg):
+    from tutor_hub.server import create_app
+    app = create_app(cfg)
+    with TestClient(app) as c:
+        hub = c.app.state.hub
+        hub.store.sync.set_flag(hub.cohort_id, "ask", enabled=False, changed_by="admin")
+    with TestClient(create_app(cfg)) as c:           # a restart keeps the admin's change
+        assert "ask" not in [m["id"] for m in c.get("/api/hello").json()["modules"]]
+        assert len(c.app.state.hub.store.sync.cohorts()) == 3

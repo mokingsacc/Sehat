@@ -24,6 +24,8 @@ jobs:
         run: python3 -m venv .venv && .venv/bin/pip install --quiet -r hub/requirements.txt
       - name: Check the lesson packs
         run: .venv/bin/python tools/validate_pack.py
+      - name: Check the module manifests and seed cohorts
+        run: .venv/bin/python tools/validate_modules.py
       - name: Hub tests
         working-directory: tutor/hub
         run: ../.venv/bin/python -m pytest -q

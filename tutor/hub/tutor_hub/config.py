@@ -17,6 +17,9 @@ class Config:
     data: Path = TUTOR / "data"                           # database, teacher PIN, outbox
     packs: Path = TUTOR / "content" / "packs"
     app: Path = TUTOR / "app"
+    modules: Path = TUTOR / "modules"                     # one module.json per module
+    cohorts: Path = TUTOR / "cohorts"                     # seed cohorts: hub, staging, open
+    cohort: str | None = None                             # this hub's cohort id; empty = the one in cohorts/hub.json
     llm_url: str | None = None                            # e.g. http://127.0.0.1:8081/v1 (llama-server)
     llm_model: str = "local"
     llm_key: str | None = None
@@ -39,6 +42,7 @@ class Config:
             data=Path(_env("TUTOR_DATA", cls.data)),
             packs=Path(_env("TUTOR_PACKS", cls.packs)),
             app=Path(_env("TUTOR_APP", cls.app)),
+            cohort=_env("TUTOR_COHORT"),
             llm_url=_env("TUTOR_LLM_URL"),
             llm_model=_env("TUTOR_LLM_MODEL", cls.llm_model),
             llm_key=_env("TUTOR_LLM_KEY"),

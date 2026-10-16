@@ -34,6 +34,16 @@ Print jobs
 - `print_job(pid) -> dict | None`; `prints(limit=20) -> list`, newest first.
 - `copies_last_hour(device) -> int`: copies this device asked for in the last hour, failed jobs not counted.
 - `fail_unfinished_prints()`: after a restart nothing is printing, so queued and printing jobs become failed.
+
+Cohorts and flags (flags.py decides what they mean)
+- `seed_cohorts(cohorts) -> bool`: only when there is no cohort yet, adds each `{id, label, langs, bands, settings,
+  flags: {module: {enabled, settings}}}` with its flags, all logged as changed by "seed"; True if it added them.
+- `cohort(cid) -> dict | None` and `cohorts() -> list`: `{id, label, langs, bands, settings, created}`, with langs and
+  bands as lists and settings as a dict. Never the hashed class code.
+- `flags(cid) -> {module: {enabled, settings, changed_by, changed_at}}`; a module with no row is off.
+- `set_flag(cid, module, *, enabled, settings=None, changed_by)`: sets the switch and adds the same row to the log,
+  together. `changed_by` is a role, never a name.
+- `flag_log(cid, limit=50) -> list`: the cohort's changes, newest first.
 """
 
 
@@ -87,4 +97,23 @@ class Store:
         raise NotImplementedError
 
     async def fail_unfinished_prints(self) -> None:
+        raise NotImplementedError
+
+    # cohorts and flags
+    async def seed_cohorts(self, cohorts: list[dict]) -> bool:
+        raise NotImplementedError
+
+    async def cohort(self, cid) -> dict | None:
+        raise NotImplementedError
+
+    async def cohorts(self) -> list[dict]:
+        raise NotImplementedError
+
+    async def flags(self, cid) -> dict[str, dict]:
+        raise NotImplementedError
+
+    async def set_flag(self, cid, module, *, enabled, settings=None, changed_by) -> None:
+        raise NotImplementedError
+
+    async def flag_log(self, cid, limit=50) -> list[dict]:
         raise NotImplementedError

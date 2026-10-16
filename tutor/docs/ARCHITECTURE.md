@@ -49,6 +49,23 @@ sync) stay in the SQLite store. `tests/test_store_contract.py` runs one set of t
 now, a D1 fake later) and checks that fresh and old databases end the same and that a second run changes nothing.
 A new table is a new numbered file, never an edit to an old one.
 
+## Modules and cohort flags (modules.py, flags.py)
+
+Each part of Qalam is a module with a manifest, `tutor/modules/<id>/module.json`, in the shape the design committee
+settled (BUILD-PLAN 3.2): `id`, `version`, `maturity`, `depends`, `bands`, `slots`, `capabilities`, `ai` (only when it
+calls a model), `settings`, `needs`, `offline`. The first five are today's features: `lessons`, `ask`, `print`,
+`check` (Check my sheet) and `teacher`. `modules.py` checks every manifest at start and leaves out a broken one, and
+any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
+risk a module carries comes from the core's table of capabilities, never from the module.
+
+A cohort is a group with the same settings, with a random id and a neutral label. The seed files
+`tutor/cohorts/{hub,staging,open}.json` fill the empty `cohorts` and `flags` tables once (`migrations/0002`); after
+that flags change only through the store's `set_flag`, which also writes `flag_log` (the admin panel, P21). A module
+is on when its flag is on, its `depends` are on, the cohort takes its maturity, and, when the band is known, both the
+module and the cohort serve that band. The hub's own cohort is `TUTOR_COHORT`, by default the id in `cohorts/hub.json`;
+a request may name another with `?cohort=`. Flags are read on every request, so a switch reaches the next one, and a
+switched-off module's routes answer 404 as if they were never there.
+
 ## Answering a question (brain.py)
 
 The safest source answers first, and every answer says where it came from, so the app can label it.
@@ -97,7 +114,7 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 
 | Route | What |
 |---|---|
-| `GET /api/hello` | Hub name, version, lesson count, AI on and its languages, printer state, free copies |
+| `GET /api/hello` | Hub name, version and `core`, lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
 | `GET /api/packs` | Every pack and its lesson list (no lesson content) |
 | `GET /api/lessons/{id}` | One lesson, picture names turned into URLs, without the sheet |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |
@@ -109,6 +126,10 @@ HTML, turns it into an A4 PDF with WeasyPrint and queues it. One worker prints o
 | `POST /api/print` | `{lesson, kind, copies, lang, seed, name}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
+
+Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
+pictures), `ask` (the three Ask routes), `print` (sheet pages and PDFs, print jobs), `check` (the sheet key),
+`teacher` (the teacher routes; the hub card also needs `print`). `/api/hello` and the app's files are always there.
 
 ## The app (app/js)
 

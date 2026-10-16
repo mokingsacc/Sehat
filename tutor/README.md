@@ -26,8 +26,10 @@ TUTOR_PRINT=outbox .venv/bin/python -m tutor_hub serve --port 8080    # then ope
 | `app/` | the phone app (HTML, CSS, JavaScript modules, no build) |
 | `hub/` | the hub server (Python, FastAPI) and its tests |
 | `content/packs/` | lessons as data: steps, worksheets, question banks |
+| `modules/`, `cohorts/` | one manifest per module; the seed cohorts and which modules they switch on |
+| `migrations/` | the database tables as numbered SQL files, shared by the hub and the online server |
 | `setup/` | installing a hub: service, Wi-Fi hotspot, printer, PIN |
-| `tools/` | `validate_pack.py`, `make_sheets.py` |
+| `tools/` | `validate_pack.py`, `validate_modules.py`, `make_sheets.py` |
 | `docs/` | [how it fits together](docs/ARCHITECTURE.md), [writing lessons](docs/CONTENT.md), [the two looks](docs/DESIGN.md), [setting up a hub](docs/HUB-SETUP.md), [roadmap](docs/ROADMAP.md) |
 
 It lives inside the Sehat repository for now, to reuse Sehat's Android shell and voices later; nothing in
