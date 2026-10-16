@@ -20,8 +20,9 @@ export default async function lesson([id]) {
   const c = state.child();
   const L = id ? await hub.lesson(id) : null;
   if (!L || !Array.isArray(L.steps)) {
-    return { el: h('div', { class: 'screen' }, topbar({ back: '#/home' }),
-      h('div', { class: 'empty' }, hub.online() ? s('no_lessons') : s('offline'))), tab: 'lessons' };
+    return { el: h('div', { class: 'screen' }, topbar({ back: '#/home', child: true }),
+      h('div', { class: 'empty' }, hub.online() ? s('no_lessons') : hub.home() === 'online' ? s('lesson_not_here') : s('offline'))),
+    tab: 'lessons' };
   }
   const lang = getLang();
   const steps = L.steps;

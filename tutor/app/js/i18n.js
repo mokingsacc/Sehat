@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9 and P10 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10 and P11 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -145,6 +145,28 @@ const S = {
     source: 'منبع',
     link_offline: 'وقتی وصل هستی بازش کن',
     ask_local: 'هنوز اجازه نیست، پس سوال در همین تلفن می‌ماند.',
+    // P11, drafts for a native speaker's check:
+    net_offline: 'وصل نیست',
+    net_waiting: '{n} منتظر',
+    net_sending: 'دارد می‌فرستد…',
+    net_hub: 'مرکز',
+    net_nohub: 'مرکز نیست',
+    net_off_text: 'وصل نیستی. درس‌های این تلفن کار می‌کنند. آنچه می‌فرستی منتظر می‌ماند تا وصل شوی.',
+    net_nohub_text: 'مرکز درسی در دسترس نیست. درس‌های این تلفن کار می‌کنند.',
+    net_hub_text: 'به مرکز درسی وصل هستی.',
+    wait_badge: 'منتظر فرستادن',
+    wait_question: 'یک سوال',
+    wait_teacher: 'یک سوال برای معلم',
+    wait_join: 'وصل شدن به صنف',
+    wait_consent: 'اجازه‌ی بزرگ‌ترها',
+    send_online: 'وقتی وصل شدم بفرست',
+    not_sent: 'فرستاده نشد',
+    send_again: 'دوباره بفرست',
+    cant_send: 'فرستاده نتوانست',
+    try_again: 'دوباره کوشش کن',
+    q_sent: 'سوالت فرستاده شد',
+    connect_once: 'یک بار به انترنت وصل شو تا درس‌هایت را بگیری.',
+    lesson_not_here: 'این درس هنوز در تلفنت نیست. یک بار وصل شو تا آن را بگیری.',
   },
   ps: {
     app: 'قلم',
@@ -286,6 +308,28 @@ const S = {
     source: 'سرچینه',
     link_offline: 'کله چې وصل یې، خلاص یې کړه',
     ask_local: 'لا اجازه نشته، نو پوښتنه پر همدې ټیلیفون پاتې کېږي.',
+    // P11, drafts for a native speaker's check:
+    net_offline: 'نه یې وصل',
+    net_waiting: '{n} په تمه',
+    net_sending: 'لېږل کېږي…',
+    net_hub: 'مرکز',
+    net_nohub: 'مرکز نشته',
+    net_off_text: 'نه یې وصل. د دې ټیلیفون لوستونه کار کوي. هغه څه چې لېږې، تر وصل کېدو پورې په تمه پاتې کېږي.',
+    net_nohub_text: 'د زده کړې مرکز په لاس کې نه دی. د دې ټیلیفون لوستونه کار کوي.',
+    net_hub_text: 'د زده کړې له مرکز سره وصل یې.',
+    wait_badge: 'د لېږلو په تمه',
+    wait_question: 'یوه پوښتنه',
+    wait_teacher: 'ښوونکي ته یوه پوښتنه',
+    wait_join: 'له ټولګي سره یوځای کېدل',
+    wait_consent: 'د لویانو اجازه',
+    send_online: 'کله چې وصل شوم، ولېږه',
+    not_sent: 'و نه لېږل شوه',
+    send_again: 'بیا یې ولېږه',
+    cant_send: 'ونه لېږل شوه',
+    try_again: 'بیا هڅه وکړه',
+    q_sent: 'ستا پوښتنه ولېږل شوه',
+    connect_once: 'یو ځل انټرنټ ته وصل شه چې خپل لوستونه واخلې.',
+    lesson_not_here: 'دا لوست لا ستا په ټیلیفون کې نشته. یو ځل وصل شه چې ویې اخلې.',
   },
   en: {
     app: 'Qalam',
@@ -426,6 +470,28 @@ const S = {
     source: 'Source',
     link_offline: "Open it when you're online",
     ask_local: 'Not agreed yet, so questions stay on this phone.',
+    // P11:
+    net_offline: 'Offline',
+    net_waiting: '{n} waiting',
+    net_sending: 'Sending…',
+    net_hub: 'Hub',
+    net_nohub: 'No hub',
+    net_off_text: "You're offline. Lessons on this phone still work. What you send will wait until you're online.",
+    net_nohub_text: 'The hub is out of reach. Lessons on this phone still work.',
+    net_hub_text: 'You are connected to the hub.',
+    wait_badge: 'Waiting to send',
+    wait_question: 'A question',
+    wait_teacher: 'A question for the teacher',
+    wait_join: 'Joining your class',
+    wait_consent: "The grown-up's agreement",
+    send_online: "Send when I'm online",
+    not_sent: 'Not sent',
+    send_again: 'Send again',
+    cant_send: "Couldn't send",
+    try_again: 'Try again',
+    q_sent: 'Your question was sent',
+    connect_once: 'Connect to the internet once to get your lessons.',
+    lesson_not_here: "This lesson isn't on your phone yet. Connect once to get it.",
   },
 };
 

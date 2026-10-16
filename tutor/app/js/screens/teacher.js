@@ -6,7 +6,7 @@ import { fa, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as state from '../state.js';
-import { fill, h, hubChip, icon, rich, toast, topbar } from '../ui.js';
+import { fill, h, icon, rich, toast, topbar } from '../ui.js';
 
 const REFRESH_MS = 30000;
 const time = (iso) => { try { return fa(new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })); } catch { return ''; } };
@@ -22,7 +22,7 @@ export default async function teacher() {
       'aria-label': s('teacher_pin'), placeholder: s('teacher_pin') });
     const err = h('div', { class: 'status err', role: 'status' }, msg || '');
     fill(root,
-      topbar({ back: state.child() ? '#/home' : '#/welcome', title: s('teacher'), extra: hubChip() }),
+      topbar({ back: state.child() ? '#/home' : '#/welcome', title: s('teacher') }),
       h('form', { class: 'card lined pad-card stack gate', onSubmit: (e) => { e.preventDefault(); enter(input.value.trim()); } },
         h('div', { class: 'row center' }, icon('lock', 40, 2)),
         h('div', { class: 'pin' }, input),

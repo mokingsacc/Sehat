@@ -12,9 +12,10 @@ import * as hub from './hub.js';
 import * as library from './library.js';
 import * as lock from './lock.js';
 import * as modules from './modules.js';
+import * as outbox from './outbox.js';
 import * as state from './state.js';
 import { loadClips, stop } from './speech.js';
-import { busy, h, hubChip, nav, sayTab, toast } from './ui.js';
+import { busy, h, nav, netChip, sayTab, toast } from './ui.js';
 
 import ask from './screens/ask.js';
 import check from './screens/check.js';
@@ -70,7 +71,7 @@ async function route() {
     return;
   }
   if (account.useCohort()) hub.refresh().then(modulesChanged);     // another learner's class
-  account.sync();                                                 // a join, consent or band waiting to be sent
+  outbox.flush();                       // a join, consent, band or question waiting to be sent
   const screen = SCREENS[name] || home;
   applyLook(SCREENS[name] ? name : 'home');
   let out;
@@ -90,7 +91,7 @@ async function route() {
 }
 
 function refreshChips() {
-  document.querySelectorAll('.hubchip').forEach((el) => el.replaceWith(hubChip()));
+  document.querySelectorAll('.netchip').forEach((el) => el.replaceWith(netChip()));
 }
 
 // the hub's list of modules changed (or was first heard): load what is new, redraw the tabs, leave a screen
@@ -120,6 +121,14 @@ function joinFromAddress() {
   try { history.replaceState(null, '', location.pathname + '#/welcome'); } catch { location.hash = '#/welcome'; }
 }
 
+// The service worker keeps the app on the phone where the page is secure (the online home over HTTPS, and a
+// laptop's localhost for testing). The hub is plain http, where browsers allow none: there the app keeps its lists
+// and lessons in localStorage, as before (F2). A new version takes over at the next start, without a banner.
+function serviceWorker() {
+  if (!globalThis.isSecureContext || !('serviceWorker' in navigator)) return;
+  navigator.serviceWorker.register('sw.js').catch((e) => console.warn('no service worker', e));
+}
+
 // back after 5 minutes away: every lock closes again (not on idle: she may be writing on paper)
 function watchAway() {
   let away = 0;
@@ -136,6 +145,10 @@ async function boot() {
   if (c) setLang(c.lang);
   account.start();
   account.onNote((key) => toast(s(key)));
+  outbox.onSent((msg) => toast(msg));
+  outbox.onChange(refreshChips);
+  hub.onChange((ok) => { if (ok) outbox.flush(); });
+  serviceWorker();
   watchAway();
   app.replaceChildren(busy());
   window.addEventListener('hashchange', route);
@@ -153,6 +166,9 @@ async function boot() {
   if (late) connecting.then((ok) => { if (ok) hubCameBack(); });
   // walking into the hub's Wi-Fi lights the app up without a reload; while connected, the modules switched on
   // are read again every minute, so a module the teacher or admin switches off leaves the phones within a minute
+  // and the browser's own word on the connection is heard at once
+  window.addEventListener('offline', () => hub.lost());
+  window.addEventListener('online', async () => { if (!hub.online() && (await hub.connect())) hubCameBack(); });
   let ticks = 0;
   setInterval(async () => {
     if (document.visibilityState !== 'visible') return;

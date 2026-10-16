@@ -321,6 +321,19 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
 - A middle dot right after Persian digits reads as a zero ("۶ ·" looks like ۶۰): Dari and Pashto strings put a
   colon or comma there instead.
 
+## What P11 built, and where it differs
+
+- The net chip, the badges, "Send when I'm online" and the empty states are built as C2.5 says. Open for the next
+  sitting: at 360 px a header with a long title or a kicker ("Ask", "Check my sheet") has no room for "Offline · 1
+  waiting" beside it, so the chip then takes a line of its own under the header, at the end (left in Dari and
+  Pashto); a short title keeps it beside. The title is given at least 6rem before the chip moves down.
+- On the hub, a question asked while the hub is out of reach gets the same "Send when I'm online" button; "online"
+  there means "the hub in reach". Open: a hub wording ("Send when the hub is near").
+- In early years the chip is off every screen the child uses (Home, lessons, subject pages) and on the grown-up's
+  screens behind the corner (Who is learning, Settings, Print, Credits).
+- The chip says "Offline" as soon as the browser says the network went, not only at the next round.
+- Dari and Pashto put a comma, not a middle dot, between "Offline" and the count, by the P10 rule.
+
 ---
 
 # C2 and C3 decisions

@@ -5,6 +5,8 @@ import { speakerPerButton } from './bands.js';
 import { fa, getLang, pick, s } from './i18n.js';
 import * as hub from './hub.js';
 import * as modules from './modules.js';
+import * as outbox from './outbox.js';
+import * as state from './state.js';
 import { sayKey, speak } from './speech.js';
 
 export function h(tag, props, ...kids) {
@@ -59,6 +61,7 @@ const ICONS = {
   erase: '<path d="M21 5H9l-6 7 6 7h12z"/><path d="m12 9 6 6M18 9l-6 6"/>',
   trash: '<path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/>',
   card: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h6M7 14h10"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
 };
 
 export function icon(name, size = 24, sw = 2.2) {
@@ -203,11 +206,41 @@ export function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
 }
 
-export function hubChip() {
+// The connection chip at the end of every header (C2.5; it replaced hubChip in P11). Online it hides while all is
+// well, says "Offline" (and how many things she sent are waiting) when the network is gone, and "Sending…" while
+// they go; on the hub it says "Hub" or "No hub". Tapping it opens a small sheet that says what that means and lists
+// what waits. Events are never counted. It is never read aloud with the page (data-silent).
+export function netChip() {
+  const online = hub.home() === 'online';
   const on = hub.online();
-  const i = hub.info();
-  return h('span', { class: `hubchip ${on ? 'on' : 'off'}`, title: on ? i.hub : '', 'data-silent': '' },
-    h('span', { class: 'dot' }), on ? s('hub_on') : s('hub_off'));
+  const waits = outbox.waiting();
+  const sep = getLang() === 'en' ? ' · ' : '، ';
+  let state;
+  let label;
+  if (online) {
+    if (on && outbox.sending()) { state = 'sending'; label = s('net_sending'); }
+    else if (on) return h('span', { class: 'netchip hidden', 'data-silent': '' });
+    else { state = 'off'; label = s('net_offline') + (waits.length ? sep + s('net_waiting', { n: waits.length }) : ''); }
+  } else {
+    state = on ? 'on' : 'off';
+    label = s(on ? 'net_hub' : 'net_nohub');
+  }
+  const text = online ? (on ? null : s('net_off_text')) : s(on ? 'net_hub_text' : 'net_nohub_text');
+  return h('button', { type: 'button', class: `netchip ${state}`, 'data-silent': '', 'aria-haspopup': 'dialog',
+    onClick: () => netSheet(text, waits) }, h('span', { class: 'dot' }), label);
+}
+
+function netSheet(text, waits) {
+  document.querySelectorAll('.netsheet').forEach((el) => el.remove());
+  if (!text && !waits.length) return;
+  const close = () => sheet.remove();
+  const said1 = [text, ...waits.map((k) => s(k))].filter(Boolean).join('. ');
+  const sheet = h('div', { class: 'netsheet', role: 'dialog', 'aria-modal': 'false', onClick: (e) => { if (e.target === sheet) close(); } },
+    h('div', { class: 'card stack' },
+      h('div', { class: 'row top' }, h('p', { class: 'grow' }, text), speakerBtn(() => speak(said1, getLang()), { size: 'sm' })),
+      waits.length ? h('ul', { class: 'waits' }, waits.map((k) => h('li', {}, icon('clock', 18), s(k)))) : null,
+      h('button', { type: 'button', class: 'btn', onClick: close }, s('close'))));
+  document.body.append(sheet);
 }
 
 // the tabs of the modules that are on; each keeps its column, so a tab switched off leaves the others in place
@@ -227,12 +260,17 @@ export function sayTab() {
   if (key) sayKey(key, getLang());
 }
 
-// every header keeps the page speaker (P9 look-over, ruling 1), which reads the whole screen
-export function topbar({ back = '#/home', title, sub, extra, speaker = true } = {}) {
+// every header keeps the page speaker (P9 look-over, ruling 1), which reads the whole screen, and ends with the
+// connection chip (C2.5; net: false where it must not show, as on an early-years child's own screens)
+// `child`: a screen the learner herself uses; in early years the net chip stays off those (C2.5: the grown-up's
+// screens only)
+export function topbar({ back = '#/home', title, sub, extra, speaker = true, net = true, child = false } = {}) {
+  const c = child ? state.child() : null;
+  if (c && c.band === 'ey') net = false;
   return h('header', { class: 'top' },
     back ? h('a', { class: 'round', href: back, 'aria-label': s('back') }, icon('back', 24, 2.5)) : null,
     h('div', { class: 'grow' }, sub ? h('div', { class: 'kicker' }, sub) : null, title ? h('h1', {}, title) : null),
-    speaker ? pageSpeaker() : null, extra || null);
+    speaker ? pageSpeaker() : null, extra || null, net ? netChip() : null);
 }
 
 export const SUBJECTS = ['maths', 'science', 'english', 'dari', 'pashto'];

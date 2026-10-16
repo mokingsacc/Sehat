@@ -166,8 +166,13 @@ async def test_the_worker_serves_the_hub_with_print_and_teacher_off(worker):
         assert (await c.get("/api/print/1")).status_code == 404
         assert (await c.get("/api/teacher/summary", headers={"X-Teacher-Pin": "123456"})).status_code == 404
         assert (await c.get("/api/sheets/maths-7-fractions-add.html")).status_code == 404
-        a = await c.post("/api/ask", json={"text": "Why does ice melt?", "lang": "en", "subject": "science"})
+        q = {"text": "Why does ice melt?", "lang": "en", "subject": "science"}
+        assert (await c.post("/api/ask", json=q)).status_code == 401           # online: a learner who agreed
+        j = await c.post("/api/join", json={"band": "s1", "lang": "en", "picture": "key",
+                                            "consent": {"kind": "self", "version": h["consent"]}})
+        a = await c.post("/api/ask", json=q, headers={"X-Learner-Token": j.json()["token"]})
         assert a.status_code == 200 and a.json()["source"] in ("ai", "bank", "lesson", "none")
+        assert h["home"] == "online"
         assert (await c.get("/api/sheets/maths-7-fractions-add/key?seed=4821")).status_code == 200
     assert not (worker.tmp / "data").exists()          # no PIN file, no SQLite, no outbox: nothing on a disk
     tables = {r[0] for r in worker.db.sqlite.execute("SELECT name FROM sqlite_master WHERE type='table'")}
@@ -199,14 +204,14 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
                 ("hello", "GET", "/api/hello", None),
                 ("packs", "GET", "/api/packs", None),
                 ("lesson", "GET", "/api/lessons/maths-7-fractions-add", None),
-                ("ask, a sum", "POST", "/api/ask", {"text": "1/2 + 1/4", "lang": "en"}),
-                ("ask, the AI", "POST", "/api/ask", {"text": "Why does ice melt?", "lang": "en"}),
                 ("sheet key", "GET", "/api/sheets/maths-7-fractions-add/key?seed=4821", None),
                 ("join", "POST", "/api/join", {"band": "s1", "lang": "en", "picture": "key",
                                                "consent": {"kind": "guardian-on-phone", "version": "online-2026-10"}}),
+                ("ask, a sum", "POST", "/api/ask", {"text": "1/2 + 1/4", "lang": "en"}),
+                ("ask, the AI", "POST", "/api/ask", {"text": "Why does ice melt?", "lang": "en"}),
                 ("100 events", "POST", "/api/events", {"events": events})]:
             before = worker.db.calls
-            r = await c.request(method, path, json=body, headers=headers if path == "/api/events" else None)
+            r = await c.request(method, path, json=body, headers=headers if path in ("/api/events", "/api/ask") else None)
             assert r.status_code == 200, (name, r.text)
             if path == "/api/join":
                 headers = {"X-Learner-Token": r.json()["token"]}

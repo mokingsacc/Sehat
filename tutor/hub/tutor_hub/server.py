@@ -99,7 +99,8 @@ PIN_LOCKS = (60, 15 * 60, 60 * 60)
 
 
 class Limit:
-    """At most `n` requests in `per` seconds from one phone, known by its address on the hub's Wi-Fi."""
+    """At most `n` requests in `per` seconds from one phone: on the hub known by its address on the hub's Wi-Fi;
+    online by her learner token, since many phones reach the Worker from one address (`Hub.who`)."""
 
     def __init__(self, n: int, per: float):
         self.n, self.per = n, per
@@ -230,6 +231,14 @@ class Hub:
             await self.store.update_learner(row["token_hash"], last_seen=today)
         return row
 
+    def who(self, request: Request) -> str:
+        """Whom a per-phone limit counts: online her learner token (by its hash) when the request carries one, since
+        a Worker sees many phones behind one address; on the hub, and without a token, the address."""
+        token = request.headers.get(learners.HEADER) or ""
+        if self.cfg.home == "online" and learners.TOKEN.match(token):
+            return "t:" + learners.token_hash(token)[:32]
+        return _who(request)
+
     def consent_changes(self, c) -> dict:
         if c.version not in {v for (_, v) in self.consent_texts}:
             raise HTTPException(422, "unknown consent text version")
@@ -299,6 +308,7 @@ class Hub:
                 "ai": {"on": ai_on, "langs": list(self.cfg.ai_langs) if ai_on else []},
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
                 "url": self.cfg.public_url, "release": self.cfg.release, "consent": self.consent_version,
+                "home": self.cfg.home,
                 "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
                 "modules": mods}
 
@@ -337,9 +347,10 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app = FastAPI(title=f"{cfg.name} hub", version=__version__, docs_url=None, redoc_url=None, openapi_url=None,
                   lifespan=lifespan)
     app.state.hub = hub
-    # the Android app (another origin) talks to the hub too
-    app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST", "DELETE"], allow_headers=["*"],
-                       expose_headers=["X-Sheet-Seed"])
+    # the Android app (another origin) talks to the hub too; online only the sites in TUTOR_ORIGINS may (the app's own
+    # page is the same site and needs no CORS)
+    app.add_middleware(CORSMiddleware, allow_origins=list(cfg.origins) if cfg.home == "online" else ["*"],
+                       allow_methods=["GET", "POST", "DELETE"], allow_headers=["*"], expose_headers=["X-Sheet-Seed"])
 
     @app.get("/api/hello")
     async def hello(cohort: str | None = None, band: str | None = None):
@@ -442,12 +453,17 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         return {"deleted": True}
 
     # Ask
+    # Online a question may reach the AI provider, so it needs a learner whose guardian (or who herself) agreed (BUILD-PLAN 5.5);
+    # on the hub nothing leaves the village and the phone asks for consent before its first question.
     @app.post("/api/ask", dependencies=needs("ask"))
     async def ask(a: AskIn, request: Request):
-        hub.ask_limit.check(_who(request))
+        who = await hub.learner(request, required=hub.cfg.home == "online")
+        if hub.cfg.home == "online" and not who["consent_kind"]:
+            raise HTTPException(403, "no consent: questions are not sent")
+        hub.ask_limit.check(hub.who(request))
         lang = _lang(a.lang)
-        ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson,
-                                     cohort=request.query_params.get("cohort") or hub.cohort_id)
+        cohort = request.query_params.get("cohort") or (who or {}).get("cohort") or hub.cohort_id
+        ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson, cohort=cohort)
         token = await hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
                                              question=a.text.strip(),
                                              answer=None if ans.waiting and ans.source != "rules" else ans.text,
@@ -474,7 +490,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     # without consent nothing of hers is kept (BUILD-PLAN 5.5). They go to her cohort, with her token's hash.
     @app.post("/api/events")
     async def post_events(body: EventsIn, request: Request):
-        hub.event_limit.check(_who(request))
+        hub.event_limit.check(hub.who(request))
         who = await hub.learner(request)
         if not who["consent_kind"]:
             raise HTTPException(403, "no consent: events are not kept")

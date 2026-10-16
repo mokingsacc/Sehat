@@ -7,7 +7,7 @@ import { fa, getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as state from '../state.js';
-import { h, hubChip, icon, plain, said, topbar } from '../ui.js';
+import { h, icon, plain, said, topbar } from '../ui.js';
 
 const FINAL = new Set(['done', 'saved', 'failed']);
 
@@ -21,7 +21,7 @@ export default async function print([id]) {
   const lang = getLang();
   const L = id ? library.get(id) : library.sheetLesson(c);
   if (!L || !L.sheet) {
-    return { el: h('div', { class: 'screen' }, topbar({ back: '#/home', title: s('print'), extra: hubChip() }),
+    return { el: h('div', { class: 'screen' }, topbar({ back: '#/home', title: s('print') }),
       h('div', { class: 'empty' }, library.all().length ? s('no_lessons') : s('no_hub_print'))), tab: 'print' };
   }
   let kind = 'worksheet';
@@ -123,7 +123,7 @@ export default async function print([id]) {
       h('button', { type: 'button', 'aria-label': s('more'), onClick: () => { copies = Math.min(60, copies + 1); update(); } }, icon('plus'))));
 
   const el = h('div', { class: 'screen' },
-    topbar({ back: '#/home', sub: s('todays_sheet'), title: plain(L.title), extra: hubChip() }),
+    topbar({ back: '#/home', sub: s('todays_sheet'), title: plain(L.title) }),
     h('div', { class: 'seg2', role: 'group' }, segBtns),
     preview,
     h('div', { class: 'card pad-card stack' }, stepper, pinRow, goBox, status, printerBox,

@@ -42,7 +42,7 @@ function pickSheet() {
     location.hash = `#/check/${encodeURIComponent(f.l.id)}/${f.seed}`;
   };
   return h('div', { class: 'screen' },
-    topbar({ back: '#/home', title: s('check_title'), sub: s('check_note') }),
+    topbar({ back: '#/home', title: s('check_title'), sub: s('check_note'), child: true }),
     printed.length ? h('div', { class: 'section-head' }, h('h2', {}, s('printed_sheets'))) : null,
     h('div', { class: 'lessons' }, printed.map(({ l, seed }) => h('a', { class: 'lesson-row',
       href: `#/check/${encodeURIComponent(l.id)}/${seed}` },

@@ -46,7 +46,10 @@ class Config:
     lacks: tuple = ()                                     # module needs this host cannot meet: the Worker lacks
                                                           # printer and pin, so print and teacher are off there
     home: str = "hub"                                     # hub (the village hub, plain http) or online (the Worker):
-                                                          # which consent text learners see
+                                                          # which consent text learners see; online, limits go by
+                                                          # learner token, Ask needs her consent, CORS is narrowed
+    origins: tuple = ()                                   # online: other sites that may call the API (the Android
+                                                          # app's, later); the app's own needs none. The hub allows any
     release: bool = False                                 # production: serve only signed lessons (TUTOR_RELEASE=1);
                                                           # otherwise drafts are served, marked as drafts
     extra: dict = field(default_factory=dict)
@@ -76,6 +79,7 @@ class Config:
             keep_days=int(_env("TUTOR_KEEP_DAYS", cls.keep_days)),
             lacks=tuple(x.strip() for x in _env("TUTOR_LACKS", "").split(",") if x.strip()),
             home="online" if _env("TUTOR_HOME", "hub").strip().lower() == "online" else "hub",
+            origins=tuple(x.strip() for x in _env("TUTOR_ORIGINS", "").split(",") if x.strip()),
             release=_env("TUTOR_RELEASE", "0").strip().lower() in ("1", "true", "yes", "on"),
         )
         for k, v in over.items():

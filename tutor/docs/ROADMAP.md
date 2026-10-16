@@ -80,6 +80,13 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   lock, nickname, consent and "Stop sharing", Credits as C2.6, About, remove a learner behind her PIN); the Teacher
   link only while the teacher module is on; the grown-up's corner fills a ring as it is held.
   `tools/signup_check.mjs` walks it in Chromium.
+- **P11, done:** the online app shell. A service worker on HTTPS (never on the hub's plain http) keeps the app's
+  files and the lessons and pictures she opened, so the online app opens and works with the network cut; the net
+  chip replaces the hub chip (hidden online while all is well, "Offline · 2 waiting" when cut off); questions and
+  teacher requests made offline, her join and her consent wait on the phone and go when the network is back
+  ("Waiting to send", 7 days for a question, then "Send again"), events wait silently for 14 days. Online, Ask needs
+  her token and consent, the limits count tokens rather than addresses, and CORS allows only `TUTOR_ORIGINS`.
+  `tools/offline_check.mjs` cuts the network in Chromium and checks the round.
 
 ## January 2027: buy and test
 

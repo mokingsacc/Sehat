@@ -12,7 +12,8 @@
 import * as hub from './hub.js';
 
 const KEY = 'qalam.events.v1';
-const MAX_QUEUE = 500;           // a phone away from the hub for months keeps the newest 500
+const MAX_QUEUE = 500;           // a phone away from the hub for months keeps the newest 500,
+const MAX_AGE = 14 * 24 * 3600e3;   // from the last 14 days; older ones are dropped without a word (C2.5)
 const BATCH = 100;
 // the verbs a phone may send (hub/tutor_hub/events.py); the hub writes the others itself
 export const VERBS = { 'lesson.start': { value: false }, 'lesson.done': { value: true }, 'check.done': { value: true } };
@@ -30,10 +31,12 @@ export function configure({ token, refused } = {}) {
   if (refused) onRefused = refused;
 }
 
+const fresh = (e, now = Date.now()) => !(now - Date.parse(e.at + ':00Z') > MAX_AGE);
+
 function read() {
   try {
     const q = JSON.parse(localStorage.getItem(KEY));
-    if (Array.isArray(q)) return q;
+    if (Array.isArray(q)) return q.filter((e) => e && fresh(e));
   } catch { /* first run, or storage is blocked */ }
   return [];
 }

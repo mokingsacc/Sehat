@@ -125,8 +125,13 @@ measurements and what it costs). Nothing of the hub is forked:
 - `tests/test_worker.py` loads `entry.py` with stand-ins for the runtime (the D1 fake, wrangler.toml's vars),
   serves the app through it, counts D1 calls per request (the first, which starts the hub, makes 16; the Free
   plan documents 50), checks the bundle layout and the deploy's guards.
-- Limits that remain online: the per-phone limits (Ask, events) know a phone by its address, which a Worker does
-  not see, so all phones reaching one isolate share them; P11 keys them by learner token. Workers Logs
+- **What changes with `TUTOR_HOME=online` (P11):** the per-phone limits (Ask, events) count a learner's token (the
+  first 32 characters of its hash), since many phones reach the Worker from one address and it may not see the
+  address at all; a request without a known token is counted by address, as on the hub. `POST /api/ask` needs her
+  token and her consent online (401, 403), since a question may go to the AI provider there; the hub still answers
+  without one. CORS allows only the sites in `TUTOR_ORIGINS` (comma separated, none by default: the app is served by
+  the Worker itself, so it needs none); the hub allows any origin, for the Android app later. `/api/hello` says
+  which home it is (`home`). `tests/test_online.py` checks all four. Workers Logs
   stay off (no `[observability]`), as the hub keeps no access log; the deploy job reads CPU times live with
   `wrangler tail` and keeps only the numbers.
 
@@ -322,7 +327,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 | Route | What |
 |---|---|
-| `GET /api/hello` | Hub name, version and `core`, lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
+| `GET /api/hello` | Hub name, version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
 | `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}`; header `X-Learner-Token`, her consent needed |
 | `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
 | `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
@@ -333,7 +338,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /packs/{pack}/audio/{lang}/{file}` | A recorded clip named in the pack's audio manifest |
 | `GET /api/links` | Link cards (`?subject=`, `?year=`, `?lesson=`): title, owner, our description, address, `needs: ["internet"]` |
 | `GET /api/credits` | Every outside source in use, with credit lines and licences, the linked sources, and the fonts |
-| `POST /api/ask` | `{text, lang, year, subject, lesson}` -> answer, badge source, token |
+| `POST /api/ask` | `{text, lang, year, subject, lesson}` -> answer, badge source, token; header `X-Learner-Token` (online: needed, with her consent) |
 | `GET /api/ask/{token}` | Status and the teacher's answer |
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
 | `GET /api/sheets/{id}.html` / `.pdf` | The sheet (`seed`, `lang`, `kind=worksheet or answers`, `name`); header `X-Sheet-Seed` |
@@ -381,8 +386,28 @@ learner routes and the app's files are always there.
   `speech.test.js` the clip rules and manifests, `bands.test.js` the bands and every token pair's contrast.
 - `tools/browser_check.mjs` renders a screen per band in light, dark and Bigger text at any widths with Playwright
   (not an app dependency) and checks contrast, clipped text, page width, direction and the speaker rule.
-- `hub.js` finds the hub (the website the app came from first, then the usual hotspot addresses), and caches the
-  lesson list and opened lessons so they still show when the hub is out of reach.
+- `hub.js` finds the hub (the website the app came from first, then, on a plain http page only, the usual hotspot
+  addresses), and caches the lesson list and opened lessons so they still show when the hub is out of reach. It
+  knows which home it talks to (`home()`: `hello.home`, else what it said last, else `online` on an https page) and
+  hears the browser's `offline` event and a refresh that gets no answer at once (`lost()`); the `online` event and
+  the 20-second round look again.
+- **Offline online (P11, DESIGN-C2C3-SPECS.md item 5):** `ui.netChip()` ends every header (`topbar`, Home) in place
+  of the old hub chip: online it is hidden while all is well, "Offline" with "· 2 waiting" when the phone is cut off,
+  "Sending…" while what waited goes; on the hub "Hub" or "No hub". Tapping it opens a small sheet (what offline
+  means, and the list of what waits). In early years it stays off the child's screens. `outbox.js` counts and sends
+  what she sent herself: questions and teacher requests made offline (in `qalam.v2`, 7 days, then "Not sent" and
+  "Send again"; a 4xx reply is "Couldn't send" and "Try again"), the class join and the consent record (until sent);
+  events are never counted or shown and keep 14 days at most. Ask offline with no cached answer offers "Send when
+  I'm online"; the question then carries "Waiting to send", and a toast says when it went. Home with nothing on the
+  phone online says "Connect to the internet once to get your lessons", a lesson not on the phone "This lesson isn't
+  on your phone yet". `app/tests/outbox.test.js` checks the queue.
+- **The service worker** (`app/sw.js`) is registered only on a secure page (the online home over HTTPS, or
+  localhost when testing); the hub's plain http keeps the `localStorage` caches above. It keeps the app's files
+  (`SHELL`, kept equal to the app folder by `app/tests/sw.test.js`) and serves them stale-while-revalidate, so a new
+  version applies at the next start with no banner; lesson pictures and clips go in a second cache as they are
+  opened; `/api/` is never cached by it. `tools/offline_check.mjs` cuts the network in Chromium against an
+  online-mode server and checks the whole round: reopen offline, Home and a lesson, a marked sheet, a question that
+  waits, the chip, a restart, and everything sent when the network comes back.
 - `modules.js` is the shell: it takes the modules on from `hello.modules` (kept on the phone for offline use; the
   built-in five when nothing is known), imports `js/modules/<id>.js` only for modules that are on and have a slot,
   and lets them offer actions through slots (`home.action`, `lesson.end`, `settings.row`). The shell, not a module,

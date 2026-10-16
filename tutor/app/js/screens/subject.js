@@ -31,7 +31,7 @@ export default async function subject([name]) {
   const el = h('div', { class: 'screen', 'data-speaks': '' });
   const row = (l, i) => said(lessonRow(l, i + 1, c));
   fill(el,
-    topbar({ back: '#/home', sub: yearLabel(c), title: s(name), extra: subjectBadge(name, 44) }),
+    topbar({ back: '#/home', sub: yearLabel(c), title: s(name), extra: subjectBadge(name, 44), child: true }),
     mine.length ? h('div', { class: 'section-head' }, h('h2', {}, s('this_year'))) : null,
     mine.length ? h('div', { class: 'lessons' }, mine.map(row)) : null,
     !mine.length && !others.length ? h('div', { class: 'empty' }, s('no_lessons')) : null,

@@ -10,11 +10,12 @@
 
 import { readsOnOpen } from '../bands.js';
 import { getLang, s } from '../i18n.js';
+import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as modules from '../modules.js';
 import { hasVoice, sayKey, speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, holdable, hubChip, icon, pageSpeaker, readPage, said, speakerBtn } from '../ui.js';
+import { fill, h, holdable, icon, netChip, pageSpeaker, readPage, said, speakerBtn } from '../ui.js';
 import { whoChip } from './who.js';
 
 const HOLD_MS = 2000;
@@ -46,11 +47,15 @@ function grownUpCorner() {
 function header(c, root) {
   if (c.band === 'ey') return h('header', { class: 'top' }, whoChip(c), h('div', { class: 'grow' }), grownUpCorner());
   return h('header', { class: 'top' }, whoChip(c), h('div', { class: 'grow' }),
-    pageSpeaker(root), hubChip());
+    pageSpeaker(root), netChip());
 }
 
+// nothing to show: no lessons for her yet, or (first open, away from the server) nothing on the phone yet
 function nothing() {
-  return h('div', { class: 'empty' }, library.all().length ? s('no_lessons') : s('offline'));
+  if (library.all().length) return h('div', { class: 'empty' }, s('no_lessons'));
+  if (hub.home() !== 'online') return h('div', { class: 'empty' }, s('offline'));
+  return h('div', { class: 'empty stack' }, h('p', {}, s('connect_once')),
+    said(h('button', { type: 'button', class: 'btn', onClick: () => location.reload() }, icon('refresh', 22), s('try_again'))));
 }
 
 function adultsComing() {

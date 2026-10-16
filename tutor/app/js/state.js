@@ -213,18 +213,29 @@ export function rememberPrint(lessonId, seed) {
   if (c) { c.prints[lessonId] = seed; save(); }
 }
 
+// a question in her list; `k` is the phone's own key for it (the server's id comes once it is sent)
 export function addAsk(entry) {
   const c = child();
-  if (!c) return;
-  c.asks.push(entry);
+  if (!c) return null;
+  const e = { k: rid(), ...entry };
+  c.asks.push(e);
   c.asks = c.asks.slice(-30);
   save();
+  return e;
 }
 
 export function updateAsk(id, patch) {
   const c = child();
   const a = c && c.asks.find((x) => x.id === id);
   if (a) { Object.assign(a, patch); save(); }
+}
+
+// change a question of any learner on this phone, by the phone's key (the outbox sends every learner's)
+export function updateAskOf(learnerId, k, patch) {
+  const l = byId(learnerId);
+  const a = l && l.asks.find((x) => x.k === k);
+  if (a) { Object.assign(a, patch); save(); }
+  return a || null;
 }
 
 // the teacher's PIN is kept only until this browser tab is closed

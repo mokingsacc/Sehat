@@ -1,5 +1,6 @@
-// Talking to the village hub. Phones normally get this app from the hub itself, so the hub is "this website";
-// the other addresses are for a copy of the app that came another way (the Android app later, or a laptop test).
+// Talking to the village hub, or to the online home. Phones normally get this app from the server itself, so the
+// server is "this website"; the other addresses are for a copy of the app that came another way (the Android app
+// later, or a laptop test). An app from an https site never tries them: they are plain http.
 
 import { latin } from './numbers.js';
 import { cache } from './state.js';
@@ -21,11 +22,21 @@ export function onChange(fn) { listeners.add(fn); }
 export function info() { return hello; }
 export function online() { return !!hello; }
 
+// 'hub' (the village hub) or 'online' (the Worker): hello says; away from both, what it said last, else an https
+// page is the online home
+export function home() {
+  if (hello && (hello.home === 'online' || hello.home === 'hub')) return hello.home;
+  const saved = cache('home');
+  if (saved === 'online' || saved === 'hub') return saved;
+  return globalThis.location && location.protocol === 'https:' ? 'online' : 'hub';
+}
+
 // The modules switched on for this hub's cohort (hello.modules), kept on the phone for when the hub is out of reach.
 // null means not known: a hub from before modules, or a first start away from the hub (modules.js then uses the
 // built-in five, as the app always had).
 function remember(h) {
   if (h && Array.isArray(h.modules)) cache('modules', h.modules);
+  if (h && (h.home === 'online' || h.home === 'hub')) cache('home', h.home);
 }
 export function moduleList() {
   if (hello) return Array.isArray(hello.modules) ? hello.modules : null;
@@ -54,7 +65,7 @@ async function helloFrom(b, ms) {
 export async function connect() {
   // the app normally comes from the hub itself, so ask this website first
   let ok = location.protocol.startsWith('http') && (await found(['']));
-  if (!ok) {
+  if (!ok && location.protocol !== 'https:') {
     const tries = [];
     const saved = cache('hub');
     if (saved) tries.push(saved);
@@ -79,8 +90,18 @@ async function found(tries) {
 // fresh printer and AI state, for the screens that show them
 export async function refresh() {
   if (base === null) return null;
-  try { hello = await helloFrom(base, 3000); remember(hello); } catch { /* keep the last one */ }
+  try { hello = await helloFrom(base, 3000); remember(hello); } catch (e) {
+    if (!e.status) lost();      // no answer at all: out of reach; an error reply keeps the last one
+  }
   return hello;
+}
+
+// the phone lost its connection (the browser says so, or the server stopped answering): the chip says "Offline"
+// (or "No hub") at once, and the next round looks again
+export function lost() {
+  if (!hello) return;
+  hello = null;
+  listeners.forEach((f) => f(false));
 }
 
 export function url(path) { return (base ?? '') + withCohort(path); }
@@ -136,7 +157,7 @@ export async function credits() {
   } catch { return cache('credits'); }
 }
 
-export const ask = (q) => call('/api/ask', { method: 'POST', body: q, ms: 90000 });
+export const ask = (q, token) => call('/api/ask', { method: 'POST', body: q, token, ms: 90000 });
 export const askStatus = (id) => call('/api/ask/' + id);
 export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST' });
 export const sendEvents = (list, token) => call('/api/events', { method: 'POST', body: { events: list }, token, ms: 15000 });

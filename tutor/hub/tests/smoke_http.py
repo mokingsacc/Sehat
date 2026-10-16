@@ -85,24 +85,12 @@ class Smoke:
             s, _ = self.call("GET", "/api/lessons/no-such-lesson")
             self.check("an unknown lesson is 404", s == 404, f"{s}")
 
-        if "ask" in on:
-            s, a = self.call("POST", "/api/ask", {"text": "۱/۲ + ۱/۴ چند می‌شود؟", "lang": "prs", "year": 7})
-            self.check("Ask works out a sum exactly", s == 200 and a.get("source") == "maths", f"{s} {a}")
-            if s == 200:
-                s2, st = self.call("GET", f"/api/ask/{a['id']}")
-                self.check("the question's status", s2 == 200 and st.get("status"), f"{s2}")
-            s, a = self.call("POST", "/api/ask", {"text": "Why does water boil?", "lang": "en", "year": 7,
-                                                  "subject": "science"})
-            self.check("Ask answers a lesson question", s == 200 and a.get("source") in SOURCES, f"{s} {a}")
-            s, _ = self.call("POST", "/api/ask", {"text": "", "lang": "prs"})
-            self.check("an empty question is refused", s == 422, f"{s}")
-
         if "check" in on:
             s, k = self.call("GET", "/api/sheets/maths-7-fractions-add/key?seed=4821&lang=prs")
             self.check("Check my sheet's key", s == 200 and k.get("items"), f"{s}")
 
-        # a learner joins with consent (a band, a language and an alias picture: nothing personal), sends events,
-        # then deletes herself, so each run leaves nothing behind
+        # a learner joins with consent (a band, a language and an alias picture: nothing personal), asks, sends
+        # events, then deletes herself, so each run leaves nothing behind
         s, c = self.call("GET", f"/api/consent?lang=en&version={hello.get('consent')}")
         self.check("the consent text hello names", s == 200 and set(c.get("rows", {})) == {"does", "keeps", "sees", "stop"},
                    f"{s}")
@@ -111,6 +99,21 @@ class Smoke:
         if not self.check("a learner joins", s == 200 and j.get("token") and j.get("number"), f"{s} {j}"):
             return
         t = j["token"]
+        if "ask" in on:
+            if hello.get("home") == "online":       # a question may reach the AI provider there: only with consent
+                s, _ = self.call("POST", "/api/ask", {"text": "۱ + ۱", "lang": "prs"})
+                self.check("online, Ask without a learner is refused", s == 401, f"{s}")
+            s, a = self.call("POST", "/api/ask", {"text": "۱/۲ + ۱/۴ چند می‌شود؟", "lang": "prs", "year": 7}, token=t)
+            self.check("Ask works out a sum exactly", s == 200 and a.get("source") == "maths", f"{s} {a}")
+            if s == 200:
+                s2, st = self.call("GET", f"/api/ask/{a['id']}")
+                self.check("the question's status", s2 == 200 and st.get("status"), f"{s2}")
+            s, a = self.call("POST", "/api/ask", {"text": "Why does water boil?", "lang": "en", "year": 7,
+                                                  "subject": "science"}, token=t)
+            self.check("Ask answers a lesson question", s == 200 and a.get("source") in SOURCES, f"{s} {a}")
+            s, _ = self.call("POST", "/api/ask", {"text": "", "lang": "prs"}, token=t)
+            self.check("an empty question is refused", s == 422, f"{s}")
+
         now = time.strftime("%Y-%m-%dT%H:%M", time.gmtime())
         evs = [{"at": now, "verb": "lesson.start", "object": "maths-7-fractions-add"},
                {"at": now, "verb": "check.done", "object": "maths-7-fractions-add", "value": 75}]
