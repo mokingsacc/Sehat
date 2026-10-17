@@ -60,7 +60,7 @@ export function initShare(ctx) {
   function installHelp(ids) {
     ids.push('ui.sh.i1', 'ui.sh.i2', 'ui.sh.i3', 'ui.sh.i4', 'ui.sh.iphone');
     let h = `<div class="group-h"><span class="t">${esc(T('installHelp'))}</span><span class="ln"></span></div>`;
-    h += `<img class="toolpic" src="img/pics/share-install.svg" alt="">`;
+    h += `<img class="toolpic" src="img/pics/share-install.webp" alt="">`;
     h += ['ui.sh.i1', 'ui.sh.i2', 'ui.sh.i3', 'ui.sh.i4'].map((id, i) => `<div class="blk step" data-block="${id}"><div class="body"><div class="h"><span class="num">${esc(num(i + 1))}</span></div><div class="x">${esc(say(id))}</div></div>${spk(id)}</div>`).join('');
     return h + sayRow('ui.sh.iphone', 'blk tip trow');
   }

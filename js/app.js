@@ -568,11 +568,11 @@ const tabTop = (ids) => top(T('appName'), { back: '', listen: ids });
 function shareCard(ids) {
   const b = S.book, c = (b.config || {}).shareCard || {}, and = typeof SH !== 'undefined' ? SH.homeSay() === c.say : !!window.FHBAndroid;
   const say = and ? c.say : c.webSay || c.say, sub = and ? c.sub : c.webSub || c.sub;
-  const pic = picImg('img/pics/row-share.svg'); // a small scene, cropped like the hospital and first-aid rows
+  const pic = picImg('img/pics/row-share.webp'); // a small scene, cropped like the hospital and first-aid rows
   if (c.href && b.ui[c.title] && b.narration[say]) return bigBtn('share pic' + colour('share'), c.href, pic, T(c.title), sub && b.ui[sub] ? T(sub) : '', say, ids);
   return bigBtn('share pic' + colour('share'), '', pic, T('share'), T('shareSub'), 'ui.share', ids, 'share');
 }
-const feedbackCard = (ids) => bigBtn('fbk pic' + colour('feedback'), '#/feedback', picImg('img/pics/row-feedback.svg'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids);
+const feedbackCard = (ids) => bigBtn('fbk pic' + colour('feedback'), '#/feedback', picImg('img/pics/row-feedback.webp'), T('feedback'), T('feedbackSub'), 'ui.feedback', ids);
 
 // Health (the start screen, #/home): config.home, top to bottom
 function screenHome() {
@@ -626,11 +626,11 @@ function screenHouse() {
 // avoid: a picture already big on the screen (a picture page's own picture): then the page's first step or still
 // picture, or the general picture of its section
 function topicPic(t, avoid) {
-  if (!t) return 'img/app/placeholder.svg';
+  if (!t) return 'img/app/placeholder.webp';
   const first = (t.blocks || []).find((x) => x.picture && x.picture !== avoid);
-  const p = !/-generic\.svg$/.test(t.image) ? t.image : first ? first.picture : t.image;
+  const p = !/-generic\.(svg|webp)$/.test(t.image) ? t.image : first ? first.picture : t.image;
   if (!avoid || p !== avoid) return p;
-  return first ? first.picture : `img/topics/${t.section === 'children' ? 'children' : 'adults'}-generic.svg`;
+  return first ? first.picture : `img/topics/${t.section === 'children' ? 'children' : 'adults'}-generic.webp`;
 }
 // a topic in a list: a big row with its picture, title, a short line and a big speaker
 function topicRow(tid, avoid) {
@@ -687,7 +687,7 @@ function screenAdults() { return screenGroups('adults'); }
 /* ---------- lists with their own page (#/s/<name>): config.lists + sections.json (kit, home safety, hospital, food and garden, well-being) ---------- */
 const LISTS = () => (S.book.config && S.book.config.lists) || {};
 const listOf = (name) => ((S.book.sections || {})[name] || []).filter((t) => S.book.topics[t]);
-const listPic = (c) => (c && S.book.topics[c.image] ? topicPic(S.book.topics[c.image]) : 'img/app/placeholder.svg');
+const listPic = (c) => (c && S.book.topics[c.image] ? topicPic(S.book.topics[c.image]) : 'img/app/placeholder.webp');
 const listTab = (name) => ((LISTS()[name] || {}).tab === 'health' ? 'health' : 'house');
 // a Home-tab page: a topic on one of the Home tab's lists. Mo (11 Oct 2026, audit T-23): the yellow "nearest clinic or
 // hospital" line stays on the Health pages and is left off the Home tab's lists and their pages.

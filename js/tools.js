@@ -280,7 +280,7 @@ export function initTools(ctx) {
   const verdict = () => ({ temp: verdictTemp, bp: verdictBp, sugar: verdictSugar, spo2: verdictSpo2, muac: verdictMuac }[RD.dev])();
 
   const devTitle = (d) => L(S.book.topics[DEV[d].topic] && S.book.topics[DEV[d].topic].title);
-  const devImg = (d) => (S.book.topics[DEV[d].topic] && S.book.topics[DEV[d].topic].image) || 'img/app/placeholder.svg';
+  const devImg = (d) => (S.book.topics[DEV[d].topic] && S.book.topics[DEV[d].topic].image) || 'img/app/placeholder.webp';
   const valueOk = () => {
     if (RD.dev === 'muac') return !!RD.colour;
     if (RD.dev === 'bp') return RD.a.length >= 2 && RD.b.length >= 2;
@@ -398,12 +398,12 @@ export function initTools(ctx) {
   }
   function homeKit() {
     const t = S.book.topics['kit-buy'];
-    return `<div class="kitcard adult" data-block="ui.kit"><a href="#/kit" class="kpic"><img src="${esc(t ? t.image : 'img/app/placeholder.svg')}" alt=""></a><a href="#/kit" class="grow"><div class="t">${esc(T('kit'))}</div><div class="s">${esc(T('kitSub'))}</div></a>${spk('ui.kit')}</div>`;
+    return `<div class="kitcard adult" data-block="ui.kit"><a href="#/kit" class="kpic"><img src="${esc(t ? t.image : 'img/app/placeholder.webp')}" alt=""></a><a href="#/kit" class="grow"><div class="t">${esc(T('kit'))}</div><div class="s">${esc(T('kitSub'))}</div></a>${spk('ui.kit')}</div>`;
   }
   function screenKit() {
     const list = kitTopics();
     const ids = ['ui.kit', 'ui.reading', 'ui.breaths', ...list.map((t) => t + '.title')];
-    let html = `<div class="topic-hero"><img src="${esc((S.book.topics['kit-buy'] || {}).image || 'img/app/placeholder.svg')}" alt=""><a class="round" href="#/home" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
+    let html = `<div class="topic-hero"><img src="${esc((S.book.topics['kit-buy'] || {}).image || 'img/app/placeholder.webp')}" alt=""><a class="round" href="#/home" aria-label="${esc(T('back'))}">${I.back}</a></div>`;
     html += `<div class="title-row" data-block="ui.kit"><h1>${esc(T('kit'))}</h1>${spk('ui.kit')}</div>` + listenBar(ids);
     html += `<div class="grid2">${toolCard('#/tool/reading', 'check', T('reading'), 'ui.reading', 'hl')}${toolCard('#/tool/breaths', 'breathing-fast', T('breaths'), 'ui.breaths', 'child')}</div>`;
     html += `<div class="tlist">${list.map(topicCard).join('')}</div>`;

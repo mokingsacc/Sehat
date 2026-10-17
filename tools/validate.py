@@ -117,7 +117,7 @@ def check_topic(f, d):
     if str(d.get("image", "")).startswith("img/"):
         pr = picture_path_problem(d["image"])
         if pr: err(f, "image: " + pr)
-    elif d.get("image") != tid and not (ID_RE.match(str(d.get("image", ""))) and os.path.exists(os.path.join(ROOT, "img/topics", str(d.get("image")) + ".svg"))):
+    elif d.get("image") != tid and not (ID_RE.match(str(d.get("image", ""))) and any(os.path.exists(os.path.join(ROOT, "img/topics", str(d.get("image")) + x)) for x in (".webp", ".svg"))):
         warn(f, "image should equal the topic id, name an existing picture in img/topics, or be a WebP path")
     blocks = d.get("blocks")
     if not isinstance(blocks, list) or not blocks: err(f, "blocks missing"); return
@@ -149,8 +149,8 @@ def check_topic(f, d):
             pr = picture_path_problem(b["picture"])
             if pr: err(f, f"{w}: {pr}")
         elif t in ("step", "link") and b.get("picture") is not None:
-            if not ID_RE.match(str(b["picture"])) or not os.path.exists(os.path.join(ROOT, "img/pics", str(b["picture"]) + ".svg")):
-                err(f, f"{w}: picture img/pics/{b['picture']}.svg not found")
+            if not ID_RE.match(str(b["picture"])) or not any(os.path.exists(os.path.join(ROOT, "img/pics", str(b["picture"]) + x)) for x in (".webp", ".svg")):
+                err(f, f"{w}: picture img/pics/{b['picture']} (.webp or .svg) not found")
         elif t in ("alert", "dont", "belief"):
             if t == "alert" and b.get("level") not in ("urgent", "soon"): err(f, f"{w}: level must be urgent or soon")
             if t == "belief":
@@ -745,8 +745,8 @@ def check_page_top_repeats():
     def hero(tid, t):  # as tools/build.py topic_image, then js/app.js topicPic (a general picture gives way to the first step picture)
         img, sec = t.get("image"), t.get("section")
         if not (isinstance(img, str) and img.startswith("img/") and img.endswith(".webp") and os.path.exists(os.path.join(ROOT, img))):
-            img = next((c for c in (f"img/topics/{tid}.svg", *([f"img/topics/{img}.svg"] if img and img != tid else []), f"img/topics/{'children' if sec == 'children' else 'adults'}-generic.svg") if os.path.exists(os.path.join(ROOT, c))), "img/app/placeholder.svg")
-        if img.endswith("-generic.svg"): img = next((b["picture"] for b in t.get("blocks") or [] if b.get("picture")), img)
+            img = next((c + x for c in (f"img/topics/{tid}", *([f"img/topics/{img}"] if img and img != tid else []), f"img/topics/{'children' if sec == 'children' else 'adults'}-generic") for x in (".webp", ".svg") if os.path.exists(os.path.join(ROOT, c + x))), "img/app/placeholder.webp")
+        if "-generic." in img: img = next((b["picture"] for b in t.get("blocks") or [] if b.get("picture")), img)
         return same(img)
     POSTER_SCENE = {"cpr": ("cpr-adult", 4), "cpr-newborn": ("cpr-newborn", 4), "cpr-baby": ("cpr-baby", 4), "cpr-child": ("cpr-child", 4), "cpr-adult": ("cpr-adult", 4)}  # js/app.js
     def poster(b):  # the frame a topic page's film poster shows: the key frame of its poster scene (js/steps.js keyOf)

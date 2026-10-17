@@ -25,7 +25,7 @@ export function initFamily(ctx) {
   const rerender = () => { ctx.render(); scrollTo(0, 0); };
   const go = (h) => { if (location.hash === h) rerender(); else location.hash = h; };
   const PIC_KEY = { baby: 'picBaby', child: 'picChild', woman: 'picWoman', man: 'picMan' };
-  const picSrc = (p) => `img/pics/person-${PICS.includes(p && p.pic) ? p.pic : 'child'}.svg`;
+  const picSrc = (p) => `img/pics/person-${PICS.includes(p && p.pic) ? p.pic : 'child'}.webp`;
   const F = { draft: null, med: null, rec: null, shown: {}, remind: null, urls: {}, pending: null, saving: 0, prev: '', cur: location.hash, sent: '', syncT: 0 };
   // the family's medicine times (#/family/times): the usual ones until the family changes them
   const MT = () => cleanTimes(store.get('medtimes', null));
@@ -302,7 +302,7 @@ export function initFamily(ctx) {
     const d = F.draft, ids = ['ui.fam.who', ...PICS.map((x) => 'ui.fam.pic.' + x)];
     let html = top(isNew ? T('addPerson') : T('editPerson'), { back: isNew ? '#/family' : '#/family/person' }) + listenBar(ids);
     html += sayRow('ui.fam.who', 'trow dq');
-    html += `<div class="ppick">${PICS.map((x) => `<div class="ppk"><button type="button" class="pbtn" data-fam-pic="${x}" aria-pressed="${d.pic === x}"><img src="img/pics/person-${x}.svg" alt=""><span>${esc(T(PIC_KEY[x]))}</span></button>${big('ui.fam.pic.' + x)}</div>`).join('')}</div>`;
+    html += `<div class="ppick">${PICS.map((x) => `<div class="ppk"><button type="button" class="pbtn" data-fam-pic="${x}" aria-pressed="${d.pic === x}"><img src="img/pics/person-${x}.webp" alt=""><span>${esc(T(PIC_KEY[x]))}</span></button>${big('ui.fam.pic.' + x)}</div>`).join('')}</div>`;
     if (d.pic === 'baby' || d.pic === 'child') {
       ids.push('ui.fam.sex', 'ui.fam.dob');
       html += sayRow('ui.fam.sex', 'trow dq');

@@ -52,9 +52,14 @@ def topic_image(tid, section, image=None):
     # pictures, docs/STEPS_PLAYER.md "Still pictures on the pages"), else its own picture, else the existing picture it
     # names ("image": another topic's id), else the general picture
     if image and is_path(image) and exists(image): return image
-    for cand in (f"img/topics/{tid}.svg", *([f"img/topics/{image}.svg"] if image and image != tid else []), f"img/topics/{'children' if section == 'children' else 'adults'}-generic.svg"):
-        if exists(cand): return cand
-    return "img/app/placeholder.svg"
+    # each drawing is a ChatGPT WebP since 17 Oct 2026, or still the old SVG where a redo is pending
+    for base in (f"img/topics/{tid}", *([f"img/topics/{image}"] if image and image != tid else []), f"img/topics/{'children' if section == 'children' else 'adults'}-generic"):
+        for cand in (base + ".webp", base + ".svg"):
+            if exists(cand): return cand
+    return "img/app/placeholder.webp"
+
+def pic_path(name):  # a step or link picture by name: the ChatGPT WebP, or the old SVG while its redo is pending
+    return f"img/pics/{name}.webp" if exists(f"img/pics/{name}.webp") else f"img/pics/{name}.svg"
 
 icon_names = set()
 def icon(name):
@@ -131,7 +136,7 @@ for tid, t in topics.items():
     for b in t["blocks"]:
         if b.get("icon"): b["icon"] = icon(b["icon"])
         ty = b["type"]
-        if b.get("picture"): b["picture"] = b["picture"] if is_path(b["picture"]) else f"img/pics/{b['picture']}.svg"
+        if b.get("picture"): b["picture"] = b["picture"] if is_path(b["picture"]) else pic_path(b['picture'])
         if ty == "clinic" and not b.get("icon"):  # what the clinic or the hospital does: a building icon
             b["icon"] = icon("hospital" if b["title"]["en"].lower().startswith("at the hospital") else "clinic")
         if ty in ("step", "link", "clinic"):
@@ -268,7 +273,7 @@ book = {
     # the dashboard editor uses this to check "anim" blocks and to rebuild the recording order like this script does
     "anims": {"groups": anim_groups, "ids": {n: ANIM.needed_ids(n) for n in ANIM.names()}},
     # as step and link "picture" in this book: the drawings, the stills (tools/steps_stills.py) and every WebP a page uses
-    "pictures": sorted({os.path.relpath(p, ROOT) for p in glob.glob(J("img/pics/*.svg")) + glob.glob(J("img/stills/*.webp"))}
+    "pictures": sorted({os.path.relpath(p, ROOT) for p in glob.glob(J("img/pics/*.svg")) + glob.glob(J("img/pics/*.webp")) + glob.glob(J("img/stills/*.webp"))}
                        | {b["picture"] for t in out_topics.values() for b in (t.get("blocks") or []) if is_path(b.get("picture"))}),
 }
 if syndromes and districts:
@@ -348,7 +353,7 @@ book["bundle"] = {"slots": [s for s in BUNDLE_SLOTS if audio.get(s)], "ids": fir
 
 # precache list: everything the app needs offline except audio
 pre = ["./", "index.html", "manifest.webmanifest", "content/book.json"] + [p for p in ("content/who-growth.json", "content/map.json") if exists(p)]  # WHO growth tables (js/growth.js); the clinic map (js/clinics.js)
-for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/pics/*.svg", "img/app/*.svg", "img/app/*.png", "img/symptoms/*.webp", "img/stills/*.webp"):
+for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js", "fonts/*.woff2", "fonts/*.css", "img/icons/*.svg", "img/topics/*.svg", "img/topics/*.webp", "img/pics/*.svg", "img/pics/*.webp", "img/app/*.svg", "img/app/*.png", "img/app/*.webp", "img/symptoms/*.webp", "img/stills/*.webp"):
     pre += sorted(os.path.relpath(p, ROOT) for p in glob.glob(J(pat)))
 # js/cine/*.js is the CPR drawing kit and anim/cine/*.js the CPR versions built with it: js/anim.js loads anim/cine/<name>.js
 # when it is there and falls back to the SVG version when it is not, so precache whatever exists (sub-folders are listed

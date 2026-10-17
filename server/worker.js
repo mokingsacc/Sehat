@@ -1261,7 +1261,7 @@ function adminClient(cfg) {
     return s;
   };
   const newId = (base) => { const u = usedIds(); if (!u.has(base)) return base; for (let n = 2; ; n++) if (!u.has(base + '-' + n)) return base + '-' + n; };
-  const images = () => [...new Set([...Object.values(D.topics).map((t) => t.image).filter(Boolean), 'img/topics/children-generic.svg', 'img/topics/adults-generic.svg'])].sort();
+  const images = () => [...new Set([...Object.values(D.topics).map((t) => t.image).filter(Boolean), 'img/topics/children-generic.webp', 'img/topics/adults-generic.webp'])].sort();
   const opts = (list, val, blank) => (blank ? `<option value="">${esc(blank)}</option>` : '') + list.map((x) => { const [v, t] = Array.isArray(x) ? x : [x, x]; return `<option value="${esc(v)}"${v === val ? ' selected' : ''}>${esc(t)}</option>`; }).join('');
   const tri = (base, L, rows) => `<div class="tri">${LANGS.map((lg) => `<label><span>${LN[lg]}</span><textarea data-f="${esc(base)}|${lg}" dir="${lg === 'en' ? 'ltr' : 'rtl'}" rows="${rows || 2}">${esc((L && L[lg]) || '')}</textarea></label>`).join('')}</div>`;
   const iconPick = (f, val, optional) => `<label class="ipick"><span>Icon</span><select data-f="${esc(f)}">${opts(cfg.icons, val, optional ? '(none)' : (val ? '' : 'choose…'))}</select>${val && cfg.appUrl ? `<img class="icp" src="${esc(cfg.appUrl)}/img/icons/${esc(val)}.svg" alt="">` : ''}</label>`;
@@ -1334,7 +1334,7 @@ function adminClient(cfg) {
       <label><span>Short id: small English letters and hyphens, like "skin-infection". It can never be changed.</span><input id="nt-id" autocapitalize="off" autocomplete="off"></label>
       <label><span>English title</span><input id="nt-en"></label>
       <div class="g3"><label><span>Section</span><select id="nt-sec">${opts(Object.entries(SECS), 'children')}</select></label>
-      <label><span>Picture</span><select id="nt-img">${opts(images(), 'img/topics/children-generic.svg')}</select></label>
+      <label><span>Picture</span><select id="nt-img">${opts(images(), 'img/topics/children-generic.webp')}</select></label>
       <label><span>Icon</span><select id="nt-icon">${opts(cfg.icons, '', '(none)')}</select></label></div>
       <button class="primary" data-act="tnew">Create topic</button></div>`;
     return h;

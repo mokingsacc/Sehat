@@ -8,6 +8,9 @@ The app has two kinds of pictures, and they must look like one set:
   the app still shows were redrawn in a softer style close to the stills, with a shared Python kit (people with an elbow
   solver for arms, headscarves drawn the way the stills draw them, walls, carpets, outdoor scenes). Each picture was then
   checked by two reviewers, one for how it looks on a phone and one for medical accuracy and culture, and fixed.
+  On 17 October 2026 Mo replaced 105 of the 106 with painted pictures in the stills' style (480 px WebP, same names,
+  .webp instead of .svg; tools/build.py and js/ prefer the .webp). look-rash-glass.svg stays until its redo arrives
+  (the glass must lie on its side across the spots).
 
 Rules for every picture (the rules below the line are the original brief and are partly out of date):
 - Warm plastered walls, mud-brick stones, red carpets with a diamond border, or dry hills and earth outdoors; soft
