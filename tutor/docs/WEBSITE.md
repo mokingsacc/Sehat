@@ -934,3 +934,64 @@ Where it differs, the builder's choices to confirm:
   `@noble/hashes` (`'@noble/hashes/crypto'` to `'./crypto.js'`) is patched, recorded in `noble.json`.
 - PBKDF2 uses `crypto.subtle` where the page has it (the same bytes; tested) and the vendored one on the hub's
   plain http.
+
+### W6: the relay
+
+Built:
+- Migration `0021_bags.sql` (`bags`, as 3.7, with `blob` as text; see below) in the one `qalam` database and the
+  hub's SQLite, applied by `D1Store.open()` and the hub's store like every migration. `TOKEN_TABLES` moves a bag with
+  her when two of her learners are merged or her token is renewed (`test_seats.py` fills it from its own columns).
+- The store's half (`stores/base.py` contract; SQLite and D1 alike): `bag`, `put_bag` (one conditional upsert, `ON
+  CONFLICT … DO UPDATE … WHERE` the etag and `w` match and the bag is not stopped, `RETURNING` the new etag, and in
+  the same transaction or D1 batch the seat's other live bags made tombstones) and `delete_bag`; `delete_learner`
+  and `prune_learners` make her bags tombstones with the rest of her rows.
+- The routes (`server.py`, the same on the Worker and the hub): `POST /api/bag/get`, `/put` and `/delete`, as 3.7.
+  `f`, `w` and the blob travel only in the body; `f` and `w` are 64 hex digits (bag.js `forRelay`); the blob is
+  the sealed bytes in standard base64 inside the JSON. A body over 96 KB is refused before it is read (413). Every
+  answer is `Cache-Control: no-store`. `hello` gains `bag: {max: 65536}`, so a phone knows the server relays.
+- The pepper (`Hub.bag_pepper`): the setting `TUTOR_BAG_PEPPER` when set (the Worker reads it from its secrets in
+  `entry.py`); else a server that keeps its own SQLite (the hub, the fallback container) makes `bag-pepper.txt`
+  (32 random bytes, mode 600) beside its database at first start; else production (`TUTOR_RELEASE=1`) refuses to
+  start, and staging uses `qalam-staging-dev-pepper-not-a-secret` with a warning. HOSTING.md has Mo's one command.
+- Retention: in `Hub.prune()`, so in the Worker's cron and the hub's daily task: bags not written for 12 months,
+  tombstones after 30 days. It runs inside `prune_learners`' transaction (one D1 batch), so the Worker's first
+  request costs no extra query (`test_worker.py`'s budget grows only by the migration, to 35 of the Free plan's 50).
+- The production tests run the production Worker with a stand-in pepper, and one checks it refuses to start
+  without one (`test_production.py`).
+- The consent texts `hub-2026-10c` and `online-2026-10c`, three languages each (Dari and Pashto drafts, marked
+  `draft` as the others): the b texts with `bag: true`, the row `bag` (3.6's line) and a paragraph on the bag in the
+  full text. A write needs a seat whose consent version names the bag (`consent_names_bag`). `hello.consent` still
+  names the b texts; W7 switches to c with the screens that make a bag.
+- Tests: `test_bags.py` (the store contract on SQLite and the D1 fake; the routes on a hub and on a Worker-shaped
+  app over the D1 fake: a round trip, 304, a stale write and two writes at once (412: exactly one of six concurrent
+  writes wins), a wrong W_r (403, the thief joined too), over 64 KB and a 200 KB body (413), malformed bodies and
+  blobs (422), no token (401), no consent or the old consent (403), a stopped bag (410 to pulls and writes), "Make a
+  new code" stopping the old bag, deletion with her, the limits, the pepper and production's refusal);
+  `test_privacy.py` (the retention rule, the retention job on live bags, tombstones and an idle learner's bag, and
+  the sentinel: bag.js seals a record holding a sentinel in Node, the hub and the D1 fake relay it, and neither
+  database, as a dump or as its raw files, holds the sentinel, the code, the keys, F_r, W_r or her token);
+  `smoke_http.py` walks every relay answer, so each staging deploy checks the relay on Cloudflare.
+
+Where it differs, the builder's choices to confirm:
+- `blob` is `TEXT` holding base64, not `BLOB`: a Python Worker binds text to D1 with no conversion through Pyodide,
+  and the bag travels as base64 anyway. It costs a third more room: a 10 KB bag is 13.3 KB, so 20,000 learners
+  fill about 270 MB of the Free plan's 500 MB rather than 200 MB.
+- The relay checks a blob's shape (a 24-byte nonce, whole KB of plaintext, a 16-byte tag, at most 64 KB) and
+  refuses anything else with 422; it cannot check more.
+- An etag write to a relay that has no such bag (12 months unwritten, a hub rebuilt) creates it, so the phone's copy
+  simply goes back; `if: "new"` is refused (412) only when a bag is there. A stopped bag answers 410 to writes too,
+  "new" included, for its 30 days; after that its id is free again.
+- `day` is the last write; a pull writes nothing (D1 row writes cost), so a bag only read for 12 months goes.
+- One bag per seat: every write tombstones the seat's other live bags, so after a merge of two seats the next write
+  leaves one.
+- What is refused anyway (410, 403, 412) is answered before the 10-second spacing, and only a stored write starts
+  it; a phone that gets 429 on a write tries again after 10 seconds.
+- A pull counts per caller: her token's hash when the phone sends one online, else the address; a 404 also counts on
+  the same 20 an hour per address as a wrong class code (C5 A2). A school behind one address (a carrier's NAT) whose
+  phones all meet the online relay for the first time in the same hour can reach it; they wait and try again.
+- `delete` of a bag the relay never had answers 204 and writes nothing; it needs a token (any seat of hers: W_r is
+  the proof), not the consent.
+- The consent row `bag` is a fifth row on the consent screen (W7), with the bag icon.
+
+Not verified here: the relay on the real Worker beyond the smoke test (it runs at each staging deploy), and the cost
+of a pull and a write in D1 rows on the dashboard.

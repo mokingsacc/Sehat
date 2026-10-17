@@ -10,7 +10,9 @@ switched-off module does. Exit status 0 when every check passes. `--timings` wri
 Not collected by pytest (its name does not start with test_): it needs a server.
 """
 import argparse
+import base64
 import json
+import secrets
 import sys
 import time
 import urllib.error
@@ -99,7 +101,7 @@ class Smoke:
         # a learner joins with consent (a band, a language and an alias picture: nothing personal), asks, sends
         # events, then deletes herself, so each run leaves nothing behind
         s, c = self.call("GET", f"/api/consent?lang=en&version={hello.get('consent')}")
-        self.check("the consent text hello names", s == 200 and set(c.get("rows", {})) == {"does", "keeps", "sees", "stop"},
+        self.check("the consent text hello names", s == 200 and {"does", "keeps", "sees", "stop"} <= set(c.get("rows", {})),
                    f"{s}")
         s, j = self.call("POST", "/api/join", {"band": "s1", "lang": "en", "picture": "key",
                                                 "consent": {"kind": "guardian-on-phone", "version": hello.get("consent")}})
@@ -132,10 +134,55 @@ class Smoke:
         self.check("an event with free text is refused", s == 422, f"{s}")
         s, _ = self.call("POST", "/api/events", {"events": [dict(evs[0], verb="print.queued", value=1)]}, token=t)
         self.check("a hub-only verb from a phone is refused", s == 422, f"{s}")
+        bag = self.bag(hello)
         s, r = self.call("DELETE", "/api/me", token=t)
         self.check("she deletes her record", s == 200 and r == {"deleted": True}, f"{s} {r}")
         s, _ = self.call("GET", "/api/me", token=t)
         self.check("and it is gone", s == 401, f"{s}")
+        if bag:
+            s, r = self.call("DELETE", "/api/me", token=bag["token"])
+            s, g = self.call("POST", "/api/bag/get", {"f": bag["f"]})
+            self.check("her school bag stops with her (410)", s == 410 and isinstance(g, dict) and g.get("gone"), f"{s}")
+
+    def bag(self, hello):
+        """The school bag's relay (W6): random F_r and W_r and random bytes shaped as a sealed bag (nothing of anyone's),
+        through every answer the relay gives; the learner is deleted afterwards, with the bag."""
+        if not self.check("hello names the bag relay", (hello.get("bag") or {}).get("max") == 65536, str(hello.get("bag"))):
+            return None
+        version = f"{hello.get('home')}-2026-10c"                 # the first consent text that names the bag (W6)
+        s, j = self.call("POST", "/api/join", {"band": "s1", "lang": "en", "picture": "cup",
+                                                "consent": {"kind": "self", "version": version}})
+        if not self.check("a learner joins under the text that names the bag", s == 200 and j.get("token"), f"{s}"):
+            return None
+        t, f, w = j["token"], secrets.token_hex(32), secrets.token_hex(32)
+        blob = base64.b64encode(secrets.token_bytes(24 + 2048 + 16)).decode()
+        s, _ = self.call("POST", "/api/bag/get", {"f": f})
+        self.check("a bag not here is 404", s == 404, f"{s}")
+        s, r = self.call("POST", "/api/bag/put", {"f": f, "w": w, "if": "new", "blob": blob})
+        self.check("a bag is not kept without a learner (401)", s == 401, f"{s}")
+        s, r = self.call("POST", "/api/bag/put", {"f": f, "w": w, "if": "new", "blob": blob}, token=t)
+        if not self.check("her bag is kept", s == 200 and isinstance(r, dict) and r.get("etag"), f"{s} {r}"):
+            return {"token": t, "f": f}
+        etag = r["etag"]
+        s, g = self.call("POST", "/api/bag/get", {"f": f})
+        self.check("and comes back as it went", s == 200 and g == {"etag": etag, "blob": blob}, f"{s}")
+        s, _ = self.call("POST", "/api/bag/get", {"f": f, "etag": etag})
+        self.check("unchanged is 304", s == 304, f"{s}")
+        s, r = self.call("POST", "/api/bag/put", {"f": f, "w": w, "if": "new", "blob": blob}, token=t)
+        self.check("a stale write is 412 with the etag to merge from", s == 412 and r == {"etag": etag}, f"{s} {r}")
+        s, _ = self.call("POST", "/api/bag/put", {"f": f, "w": secrets.token_hex(32), "if": etag, "blob": blob}, token=t)
+        self.check("a wrong write proof is 403", s == 403, f"{s}")
+        big = base64.b64encode(secrets.token_bytes(24 + 64 * 1024 + 16)).decode()
+        s, _ = self.call("POST", "/api/bag/put", {"f": f, "w": w, "if": etag, "blob": big}, token=t)
+        self.check("a bag over 64 KB is 413", s == 413, f"{s}")
+        s, _ = self.call("POST", "/api/bag/delete", {"f": f, "w": w}, token=t)
+        self.check("she stops her bag (204)", s == 204, f"{s}")
+        s, g = self.call("POST", "/api/bag/get", {"f": f, "etag": etag})
+        self.check("a stopped bag is 410", s == 410 and isinstance(g, dict) and g.get("gone"), f"{s}")
+        f2 = secrets.token_hex(32)
+        s, r = self.call("POST", "/api/bag/put", {"f": f2, "w": w, "if": "new", "blob": blob}, token=t)
+        self.check("a new bag for her", s == 200, f"{s}")
+        return {"token": t, "f": f2}
 
 
 def main(argv=None):

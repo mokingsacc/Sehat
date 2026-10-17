@@ -24,7 +24,8 @@ from pathlib import Path
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log, check_price, check_via,
                    check_note, check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json,
                    new_cert_id, question_status, MADE_DAYS, check_made, check_verdict, made_out, check_live_state,
-                   check_reason, live_out, live_prune_sql, live_prune_times, merge_statements, new_server_id, rekey_statements, SERVER_ID)
+                   check_reason, live_out, live_prune_sql, live_prune_times, merge_statements, new_server_id, rekey_statements, SERVER_ID,
+                   BAG_TOMB, bag_cuts, bag_put_statements, today)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -526,8 +527,9 @@ class D1Store(Store):
                                  self._stmt("DELETE FROM daily_counts WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM made WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM live_present WHERE token_hash=?", token_hash),
+                                 self._stmt(f"UPDATE bags SET {BAG_TOMB} WHERE token_hash=?", today(), token_hash),
                                  self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
-        return (res[5].meta.changes or 0) > 0
+        return (res[-1].meta.changes or 0) > 0
 
     async def merge_learners(self, keep, drop, **changes) -> bool:
         # D1 has no transaction to check inside: both rows are looked at first, then every change goes as one batch
@@ -546,8 +548,29 @@ class D1Store(Store):
     async def server_id(self) -> str:
         return (await self._one(SERVER_ID, new_server_id()))["v"]
 
+    # the school bag's relay (W6): sealed bags by peppered id; a write and the tombstones it makes are one batch,
+    # and the write is one conditional statement, so two phones writing at once cannot both win
+
+    async def bag(self, id):
+        return await self._one("SELECT * FROM bags WHERE id=?", id)
+
+    async def put_bag(self, *, id, w, token_hash, etag, size, blob, want) -> bool:
+        write, others = bag_put_statements(id=id, w=w, token_hash=token_hash, etag=etag, size=size, blob=blob,
+                                           want=want, day=today())
+        rows = await self._batch_rows([self._stmt(write[0], *write[1]), self._stmt(others[0], *others[1])])
+        return bool(rows[0])
+
+    async def delete_bag(self, id, w) -> str:
+        done, now = await self._batch_rows([
+            self._stmt(f"UPDATE bags SET {BAG_TOMB} WHERE id=? AND w=? AND gone IS NULL RETURNING id", today(), id, w),
+            self._stmt("SELECT w FROM bags WHERE id=?", id)])
+        if done:
+            return "done"
+        return "none" if not now else "done" if now[0]["w"] == w else "wrong"
+
     async def prune_learners(self, idle_days: int):
         cut = _ago(days=idle_days).strftime("%Y-%m-%d")
+        live, gone = bag_cuts()
         await self._batch([self._stmt("DELETE FROM events WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM reset_codes WHERE token_hash IN "
@@ -558,7 +581,12 @@ class D1Store(Store):
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM live_present WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
-                           self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])
+                           self._stmt(f"UPDATE bags SET {BAG_TOMB} WHERE token_hash IN "
+                                      "(SELECT token_hash FROM learners WHERE last_seen<?)", today(), cut),
+                           self._stmt("DELETE FROM learners WHERE last_seen<?", cut),
+                           # the relay's own retention (W6), in the same batch: no extra query for the cron
+                           self._stmt("DELETE FROM bags WHERE gone IS NULL AND day<?", live),
+                           self._stmt("DELETE FROM bags WHERE gone IS NOT NULL AND gone<?", gone)])
 
     # the wishlist (P22): no token, days only
 

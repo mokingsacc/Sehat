@@ -443,6 +443,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   the older (every `token_hash` table, `stores/base.py` `TOKEN_TABLES`, checked against the migrations by
   `test_seats.py`; daily counts summed; 409 across classes); `POST /api/me/token` gives her record a new token.
   Both are 5 a day per token.
+- **The school bag's relay (W6, WEBSITE.md 3.7):** `POST /api/bag/get`, `/put` and `/delete`, on the Worker and the
+  hub alike (`bags`, migration 0021). The relay keeps `HMAC(pepper, F_r)` as the bag's id, `SHA-256(W_r)`, the
+  sealed blob, the seat that last wrote it, an etag and the date; it can open nothing. A write is one conditional
+  statement (with the seat's other bags made tombstones in the same transaction or D1 batch), so two phones writing
+  at once cannot both win: the second gets 412 and merges. A write needs a seat whose consent text names the bag
+  (`bag: true`, the `-2026-10c` texts). The pepper is the Worker secret `TUTOR_BAG_PEPPER` (production refuses to
+  start without it) or the hub's `bag-pepper.txt`.
 - **The school bag's core (W5, WEBSITE.md 3.5, 3.6 and 3.8):** every write to a learner is stamped: `state.js`
   `save()` compares her record with the one it last saw and gives each changed part (a setting, a lesson's step or
   first try, a mark, a review item, a printed sheet, a university tick, a question, one of her own questions, a
@@ -497,13 +504,16 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 | Route | What |
 |---|---|
-| `GET /api/hello` | Hub name, `id` (this database's, W4) and `now` (UTC ms), version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; `apk {latest, min}` for the Android app (or null); the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
+| `GET /api/hello` | Hub name, `id` (this database's, W4) and `now` (UTC ms), `bag {max}` (the relay, W6), version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; `apk {latest, min}` for the Android app (or null); the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
 | `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}`; header `X-Learner-Token`, her consent needed |
 | `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
 | `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
 | `GET`, `POST`, `DELETE /api/me` | Her own record (`{band?, consent?}` to change it); header `X-Learner-Token` |
 | `POST /api/me/merge` | `{other}`, her second token for this server -> `{kept: "this" or "other", number, picture, cohort}`; 409 in different classes, 401 her token folded already; 5 a day per token (W4) |
 | `POST /api/me/token` | A new token for her record -> `{token}`; the old one dies; 5 a day per token (W4) |
+| `POST /api/bag/get` | `{f, etag?}` (F_r, 64 hex; no token) -> 200 `{etag, blob}` (the sealed bag, base64), 304 unchanged, 404 not here (counts as a wrong code: 20 an hour per address), 410 `{gone}` stopped; 60 an hour per caller (W6) |
+| `POST /api/bag/put` | `{f, w, if: etag or "new", blob}` with her token -> 200 `{etag}`; 412 `{etag}` another phone wrote first (pull, merge, write again); 403 a wrong W_r, or her seat's consent does not name the bag; 410 `{gone}`; 413 over 64 KB; 422 not a sealed bag's shape; 30 an hour per token, one stored write every 10 s per bag (W6) |
+| `POST /api/bag/delete` | `{f, w}` with her token -> 204, the bag a tombstone for 30 days; 403 a wrong W_r (W6) |
 | `GET /api/packs` | Every pack and its lesson list (no lesson content; an adult pack with its `tracks`, P26), and since P25a `graphs`: each skills graph's nodes (with the lessons this server serves), pathways and whether it is a draft, never its review block |
 | `GET /api/lessons/{id}` | One lesson, picture and clip names turned into URLs, with `draft` and its `credits`, without the sheet, review or sources |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |

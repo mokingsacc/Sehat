@@ -168,7 +168,7 @@ def test_the_seeds_and_migration_0016_turn_certificates_on_and_give_open_five_ph
                    "VALUES(?, 'x', '[]', '[]', '{}', 'now')", (cid,))
         db.execute("INSERT INTO flags(module, cohort, enabled, settings, changed_by, changed_at) "
                    "VALUES('photo', ?, 0, '{}', 'seed', 'now')", (cid,))
-    assert migrate(db) == ["0016_cert", "0017_made", "0018_prices", "0019_live", "0020_meta"]
+    assert migrate(db) == ["0016_cert", "0017_made", "0018_prices", "0019_live", "0020_meta", "0021_bags"]
     on = db.execute("SELECT cohort, enabled, changed_by FROM flags WHERE module='cert' ORDER BY cohort").fetchall()
     assert on == [("3w2lco2s8f", 1, "seed"), ("d6co6etep6", 1, "seed"), ("qg1j2918yx", 1, "seed")]
     photo = dict(db.execute("SELECT cohort, settings FROM flags WHERE module='photo'").fetchall())

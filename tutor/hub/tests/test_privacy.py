@@ -4,14 +4,22 @@ and goes with her. The rest of the suite lives beside what it guards: the schema
 event shapes (test_events.py), photo writes (test_photo.py, test_worker.py), names in logs (test_api.py), the gateway's
 recorder scans (test_gateway.py). The Worker's cron runs the same prune on D1 (test_worker.py). No network."""
 import asyncio
+import base64
+import json
 import logging
 import sqlite3
+import subprocess
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
 
+from fakes.d1 import FakeD1, ffi as fake_ffi
 from tutor_hub import learners
+from tutor_hub.config import Config
+from tutor_hub.stores import D1Store
+from tutor_hub.stores.sqlite import MIGRATIONS
 from tutor_hub.mods import teacher
 from tutor_hub.server import create_app, teacher_pin
 
@@ -43,6 +51,8 @@ RETENTION = {
                      "it ends, and it ends once its teacher is quiet for 10 minutes (C6.1)",
     "live_present": "while the class runs: deleted when it ends, when she leaves, with her, and after 6 hours (C6.1)",
     "meta": "for good: the server's own id (W4); no learner in it",
+    "bags": "12 months after its last write; a stopped bag (a tombstone: no blob, no token hash) 30 days; stopped "
+            "with her (DELETE /api/me) and with an idle learner. Sealed on her phone: nothing here can open it (W6)",
 }
 
 OLD, OLD_DAY = "2020-01-01T00:00:00+00:00", "2020-01-01"
@@ -104,6 +114,8 @@ def test_the_retention_job_deletes_what_is_past_its_time_and_keeps_the_rest(hub)
                          ("d-old", (now - timedelta(days=2)).strftime("%Y-%m-%d")), ("d-new", day)),
         "made": ("INSERT INTO made(cohort, token_hash, kind, body, lang, at) VALUES(?,?,'question','{}','en',?)",
                  (cid, "m-old", OLD), (cid, "m-new", recent)),
+        "bags": ("INSERT INTO bags(id, w, etag, size, blob, day) VALUES(?,'w','e',1,'b',?)",
+                 ("b-old", OLD_DAY), ("b-new", day)),
     }
     for insert, old, new in rows.values():
         sql(hub, insert, old)
@@ -114,10 +126,17 @@ def test_the_retention_job_deletes_what_is_past_its_time_and_keeps_the_rest(hub)
     sql(hub, "INSERT INTO daily_counts(token_hash, day, module, n) VALUES('l-old',?,'cert',1)", (day,))
     sql(hub, "INSERT INTO made(cohort, token_hash, kind, body, lang, at) VALUES(?,'l-old','question','{}','en',?)",
         (cid, recent))                                  # what an idle learner made goes with her too
+    gone = lambda d: (now - timedelta(days=d)).strftime("%Y-%m-%d")      # noqa: E731
+    for bid, d in (("t-old", 31), ("t-new", 29)):        # tombstones: "stopped" is said for 30 days
+        sql(hub, "INSERT INTO bags(id, w, etag, size, day, gone) VALUES(?,'w','e',0,?,?)", (bid, gone(d), gone(d)))
+    sql(hub, "INSERT INTO bags(id, w, token_hash, etag, size, blob, day) VALUES('b-idle','w','l-old','e',1,'b',?)",
+        (day,))                                         # an idle learner's bag stops with her
     hub.portal.call(hub.hub.prune)
+    assert {r[0] for r in sql(hub, "SELECT id FROM bags WHERE id LIKE 't-%'")} == {"t-new"}
+    assert sql(hub, "SELECT token_hash, blob, size, gone IS NOT NULL FROM bags WHERE id='b-idle'") == [(None, None, 0, 1)]
     key = {"questions": "token", "ladders": "token", "prints": "device", "reset_codes": "token_hash", "wishlist": "wkey",
            "events": "token_hash", "learners": "token_hash", "ai_usage": "model", "flag_log": "module",
-           "admin_log": "what", "daily_counts": "token_hash", "made": "token_hash"}
+           "admin_log": "what", "daily_counts": "token_hash", "made": "token_hash", "bags": "id"}
     for table, (_, old, new) in rows.items():
         left = {r[0] for r in sql(hub, f"SELECT {key[table]} FROM {table}")}
         i = {"wishlist": 1, "ai_usage": 2, "made": 1}.get(table, 0)              # where the row's marker is in its values
@@ -187,3 +206,57 @@ def test_a_reset_code_is_kept_as_a_hash_for_15_minutes_and_goes_with_her(hub, ca
     sql(hub, "UPDATE reset_codes SET expires=?", (OLD,))
     hub.portal.call(hub.hub.prune)
     assert sql(hub, "SELECT * FROM reset_codes") == []                        # an expired code goes at the next prune
+
+
+# the sentinel (WEBSITE.md 3.7): a bag sealed on a phone with a sentinel string in it goes through the relay of a hub
+# (SQLite) and of the Worker (the D1 fake); neither database, read as a dump or as the raw file, holds the sentinel,
+# the code, the keys or the F_r and W_r the phone sent. The seal is bag.js's own, run in Node as the phone runs it.
+APP_JS = Path(__file__).resolve().parents[2] / "app" / "js" / "bag.js"
+SENTINEL = "SENTINEL-Maryam-0799123456-Kabul"
+
+
+def seal_on_a_phone(relay_id: str) -> dict:
+    script = f"""
+const bag = await import({json.dumps(APP_JS.as_uri())});
+const code = bag.newCode();
+const k = await bag.keys(code);
+const r = bag.forRelay(k, {json.dumps(relay_id)});
+const record = {{ v: 1, s: {{ nickname: [{json.dumps(SENTINEL)}, ''] }},
+  asks: {{ q1: [{{ q: {json.dumps(SENTINEL)}, a: 'x' }}, ''] }} }};
+const blob = await bag.seal(record, k, {{ deflate: false }});
+console.log(JSON.stringify({{ code, k: k.k, ff: k.f, ww: k.w, ...r, blob: Buffer.from(blob).toString('base64') }}));
+"""
+    out = subprocess.run(["node", "--input-type=module", "-e", script], capture_output=True, text=True, timeout=120)
+    assert out.returncode == 0, out.stderr
+    return json.loads(out.stdout)
+
+
+@pytest.mark.parametrize("home", ["hub", "online"])
+def test_a_sealed_bag_leaves_no_trace_of_her_in_either_database(tmp_path, home):
+    kw = dict(data=tmp_path / "data", llm_url=None, openai_key=None, anthropic_key=None, gemini_key=None,
+              compat_key=None, print_backend="outbox")
+    if home == "hub":
+        app, path = create_app(Config.from_env(**kw)), tmp_path / "data" / "hub.db"
+    else:
+        path = tmp_path / "d1.db"
+        app = create_app(Config.from_env(**kw, home="online", lacks=("printer", "pin")),
+                         store=D1Store(FakeD1(path), ffi=fake_ffi, migrations=MIGRATIONS))
+    with TestClient(app) as c:
+        hello = c.get("/api/hello").json()
+        phone = seal_on_a_phone(hello["id"])
+        assert SENTINEL.encode() not in base64.b64decode(phone["blob"])          # sealed, even before it is sent
+        version = {"hub": "hub-2026-10c", "online": "online-2026-10c"}[home]
+        token = c.post("/api/join", json={"band": "s1", "lang": "en", "picture": "key",
+                                          "consent": {"kind": "self", "version": version}}).json()["token"]
+        r = c.post("/api/bag/put", json={"f": phone["f"], "w": phone["w"], "if": "new", "blob": phone["blob"]},
+                   headers={"X-Learner-Token": token})
+        assert r.status_code == 200, r.text
+        got = c.post("/api/bag/get", json={"f": phone["f"]}).json()
+        assert got["blob"] == phone["blob"]                                    # it comes back as it went
+    db = sqlite3.connect(path)
+    dump = "\n".join(db.iterdump())
+    raw = b"".join(f.read_bytes() for f in path.parent.iterdir() if f.name.startswith(path.name))
+    db.close()
+    for secret in (SENTINEL, phone["code"], phone["k"], phone["ff"], phone["ww"], phone["f"], phone["w"], token):
+        assert secret not in dump and secret.encode() not in raw, secret
+    assert phone["blob"] in dump                                               # the sealed bag is what is kept

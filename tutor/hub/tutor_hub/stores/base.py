@@ -146,6 +146,20 @@ What a server knows about itself (W4, migration 0020)
 - `server_id() -> str`: this database's id (`hello.id`): 20 random hex digits, made on the first call and the same
   from then on, whichever host or process asks.
 
+The school bag's relay (W6, migration 0021, WEBSITE.md 3.7): sealed bags the server cannot open, by peppered id
+- `bag(id) -> dict | None`: `{id, w, token_hash, etag, size, blob, day, gone}`; `gone` is set (and `blob` and
+  `token_hash` are None) when it is a tombstone.
+- `put_bag(*, id, w, token_hash, etag, size, blob, want) -> bool`: writes the bag in one statement (with the next, one
+  transaction), only when `want` holds: "new" writes it only if there is no row with that id; an etag writes it if
+  there is no row, or over a live row whose etag is `want` and whose `w` is this `w`. A write under an id the seat
+  has not used before makes the seat's other live bags tombstones (one bag per seat). `day` is today. False, with
+  nothing changed, when `want` does not hold (the caller reads `bag(id)` to say why: 410, 403 or 412).
+- `delete_bag(id, w) -> str`: "done" (a live bag with this `w` is now a tombstone, or it was one already), "none"
+  (no such bag) or "wrong" (another `w`).
+- `delete_learner` and `prune_learners` make her bags tombstones, together with the rest of her rows; `prune_learners`
+  also deletes, in the same transaction (one D1 batch, so the cron's start costs no extra query), live bags not
+  written for `BAG_DAYS` (365) and tombstones older than `BAG_GONE_DAYS` (30).
+
 The wishlist (P22): what learners wanted to learn and no lesson matched, never with a token
 - `add_wish(*, cohort, band, lang, wish, wkey) -> int`: one more ask for the wish `wkey` (its search form) in that
   cohort, band and language; the first keeps its text and day, each one moves the last day. Returns the count.
@@ -272,7 +286,9 @@ def draw_number(used) -> int:
 #   move: every row changes hands; sum: rows of the same key add up (her budget per day and module); keep: the kept
 #   learner's row wins where both have one (a reset code, a live class's seat); row: the learner herself
 TOKEN_TABLES = {"learners": "row", "events": "move", "made": "move", "daily_counts": "sum", "reset_codes": "keep",
-                "live_present": "keep"}
+                "live_present": "keep", "bags": "move"}
+# bags move with her (W6): after a merge the kept seat may hold two bags for a while; its next write under one id
+# makes the other a tombstone (one bag per seat)
 
 
 def merge_statements(keep: str, drop: str, changes: dict) -> list[tuple[str, tuple]]:
@@ -308,6 +324,41 @@ def new_server_id() -> str:
 
 # the id, made by the first caller and read by every later one, in one statement (a start costs one query)
 SERVER_ID = ("INSERT INTO meta(k, v) VALUES('server_id', ?) ON CONFLICT(k) DO UPDATE SET v=meta.v RETURNING v")
+
+
+BAG_DAYS = 365            # a bag not written for 12 months is deleted (WEBSITE.md 3.7, decision 7)
+BAG_GONE_DAYS = 30        # a tombstone says "stopped" (410) for 30 days, then goes
+BAG_MAX = 64 * 1024       # bytes sealed (bag.js MAX)
+# a live bag becomes a tombstone: nothing of hers is left in it, only the hashes, the etag and the dates
+BAG_TOMB = "token_hash=NULL, blob=NULL, size=0, gone=?"
+
+
+def bag_put_statements(*, id, w, token_hash, etag, size, blob, want, day) -> list[tuple[str, tuple]]:
+    """The statements of `put_bag`, for both stores: the write itself (RETURNING its etag when it happened), then the
+    seat's other live bags made tombstones, only if the write happened (its new etag is there)."""
+    cols = "INSERT INTO bags(id, w, token_hash, etag, size, blob, day, gone) VALUES(?,?,?,?,?,?,?,NULL) "
+    args = (id, w, token_hash, etag, size, blob, day)
+    if want == "new":
+        write = (cols + "ON CONFLICT(id) DO NOTHING RETURNING etag", args)
+    else:
+        write = (cols + "ON CONFLICT(id) DO UPDATE SET token_hash=excluded.token_hash, etag=excluded.etag, "
+                 "size=excluded.size, blob=excluded.blob, day=excluded.day "
+                 "WHERE bags.etag=? AND bags.w=excluded.w AND bags.gone IS NULL RETURNING etag", args + (want,))
+    others = (f"UPDATE bags SET {BAG_TOMB} WHERE token_hash=? AND id<>? AND gone IS NULL "
+              "AND EXISTS(SELECT 1 FROM bags WHERE id=? AND etag=?)", (day, token_hash, id, id, etag))
+    return [write, others]
+
+
+def bag_cuts() -> tuple[str, str]:
+    """(the day before which a live bag goes, the day before which a tombstone goes)."""
+    from datetime import datetime, timedelta, timezone
+    t = datetime.now(timezone.utc)
+    return ((t - timedelta(days=BAG_DAYS)).strftime("%Y-%m-%d"), (t - timedelta(days=BAG_GONE_DAYS)).strftime("%Y-%m-%d"))
+
+
+def today() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 
 def check_changes(changes: dict) -> dict:
@@ -526,6 +577,15 @@ class Store:
         raise NotImplementedError
 
     async def server_id(self) -> str:
+        raise NotImplementedError
+
+    async def bag(self, id) -> dict | None:
+        raise NotImplementedError
+
+    async def put_bag(self, *, id, w, token_hash, etag, size, blob, want) -> bool:
+        raise NotImplementedError
+
+    async def delete_bag(self, id, w) -> str:
         raise NotImplementedError
 
     async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:

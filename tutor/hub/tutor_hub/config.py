@@ -87,6 +87,10 @@ class Config:
     rtc_secret: str | None = field(default=None, repr=False)         # TUTOR_RTC_SECRET
     rtc_turn_key: str | None = field(default=None, repr=False)       # TUTOR_RTC_TURN_KEY
     rtc_turn_secret: str | None = field(default=None, repr=False)    # TUTOR_RTC_TURN_SECRET
+    # the school bag's relay (W6, WEBSITE.md 3.7): bag ids are HMAC(pepper, F_r), so a copy of the bags table alone
+    # cannot be tested against guessed codes. Online a Worker secret (TUTOR_BAG_PEPPER, docs/HOSTING.md); a hub, or
+    # any server that keeps its own SQLite, makes one at first start in its data folder (bag-pepper.txt)
+    bag_pepper: str | None = field(default=None, repr=False)
     rtc_gb_month: int = 900                               # TUTOR_RTC_GB_MONTH: no class starts once the month's
                                                           # estimate reaches it (inside the free 1,000 GB)
     extra: dict = field(default_factory=dict)
@@ -138,6 +142,7 @@ class Config:
             rtc_turn_key=_env("TUTOR_RTC_TURN_KEY"),
             rtc_turn_secret=_env("TUTOR_RTC_TURN_SECRET"),
             rtc_gb_month=max(0, int(_env("TUTOR_RTC_GB_MONTH", cls.rtc_gb_month))),
+            bag_pepper=_env("TUTOR_BAG_PEPPER"),
         )
         for k, v in over.items():
             setattr(c, k, v)

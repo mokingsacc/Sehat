@@ -16,7 +16,7 @@ from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check
                    check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, new_cert_id,
                    question_status, MADE_DAYS, check_made, check_verdict, made_out, check_live_state,
                    check_reason, live_out, live_prune_sql, live_prune_times, merge_statements, new_server_id,
-                   rekey_statements, SERVER_ID)
+                   rekey_statements, SERVER_ID, BAG_TOMB, bag_cuts, bag_put_statements, today)
 
 
 def now() -> str:
@@ -442,6 +442,7 @@ class Store:
                 self.db.execute("DELETE FROM daily_counts WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM made WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM live_present WHERE token_hash=?", (token_hash,))
+                self.db.execute(f"UPDATE bags SET {BAG_TOMB} WHERE token_hash=?", (today(), token_hash))
                 n = self.db.execute("DELETE FROM learners WHERE token_hash=?", (token_hash,)).rowcount
                 self.db.execute("COMMIT")
             except Exception:
@@ -477,6 +478,34 @@ class Store:
     def server_id(self) -> str:
         return self._one(SERVER_ID, (new_server_id(),))["v"]
 
+    # the school bag's relay (W6): sealed bags by peppered id
+    def bag(self, id):
+        return self._one("SELECT * FROM bags WHERE id=?", (id,))
+
+    def put_bag(self, *, id, w, token_hash, etag, size, blob, want) -> bool:
+        write, others = bag_put_statements(id=id, w=w, token_hash=token_hash, etag=etag, size=size, blob=blob,
+                                           want=want, day=today())
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                done = bool(self.db.execute(*write).fetchall())
+                if done:
+                    self.db.execute(*others)
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+        return done
+
+    def delete_bag(self, id, w) -> str:
+        with self.lock:
+            if self.db.execute(f"UPDATE bags SET {BAG_TOMB} WHERE id=? AND w=? AND gone IS NULL",
+                               (today(), id, w)).rowcount:
+                return "done"
+            r = self.db.execute("SELECT w FROM bags WHERE id=?", (id,)).fetchone()
+        return "none" if r is None else "done" if r["w"] == w else "wrong"
+
+
     def prune_learners(self, idle_days: int):
         cut = (datetime.now(timezone.utc) - timedelta(days=idle_days)).strftime("%Y-%m-%d")
         with self.lock:
@@ -492,7 +521,12 @@ class Store:
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM live_present WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
+                self.db.execute(f"UPDATE bags SET {BAG_TOMB} WHERE token_hash IN "
+                                "(SELECT token_hash FROM learners WHERE last_seen<?)", (today(), cut))
                 self.db.execute("DELETE FROM learners WHERE last_seen<?", (cut,))
+                live, gone = bag_cuts()           # the relay's own retention (W6), in the same transaction
+                self.db.execute("DELETE FROM bags WHERE gone IS NULL AND day<?", (live,))
+                self.db.execute("DELETE FROM bags WHERE gone IS NOT NULL AND gone<?", (gone,))
                 self.db.execute("COMMIT")
             except Exception:
                 self.db.execute("ROLLBACK")

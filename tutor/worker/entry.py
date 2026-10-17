@@ -62,6 +62,9 @@ KEY_SETTINGS = (("OPENAI_API_KEY", "openai_key"), ("ANTHROPIC_API_KEY", "anthrop
 # per environment (docs/HOSTING.md, "Live classes: the Realtime set-up"); without the first two `live` stays held off
 RTC_SETTINGS = (("TUTOR_RTC_APP", "rtc_app"), ("TUTOR_RTC_SECRET", "rtc_secret"),
                 ("TUTOR_RTC_TURN_KEY", "rtc_turn_key"), ("TUTOR_RTC_TURN_SECRET", "rtc_turn_secret"))
+# the school bag's pepper (W6, WEBSITE.md 3.7): a Worker secret Mo sets once per environment (docs/HOSTING.md, "The
+# school bag's pepper"); without it staging relays bags under a named staging pepper and production refuses to start
+BAG_SETTINGS = (("TUTOR_BAG_PEPPER", "bag_pepper"),)
 
 
 async def _start():
@@ -69,7 +72,7 @@ async def _start():
     env = _env()
     store.db = env.DB
     hub = app.state.hub
-    for name, attr in STAFF_SETTINGS + KEY_SETTINGS + RTC_SETTINGS:
+    for name, attr in STAFF_SETTINGS + KEY_SETTINGS + RTC_SETTINGS + BAG_SETTINGS:
         v = getattr(env, name, None)
         if isinstance(v, str) and v:
             setattr(hub.cfg, attr, v)

@@ -83,7 +83,7 @@ The first C5 review (`review_c5_opus.md`, part A) found three high, four medium 
   30 wrong PINs in an hour from any address, the hub checks one PIN every 10 seconds; **L3** an unknown Access key id
   fetches the keys at most once a minute; **L4** Ask's subject and lesson are at most 40 and 80 characters; **L8** the
   review page has Sign out.
-- **The owner's decisions:** production may use any provider the gateway speaks to over the internet (step 12 of
+- **The owner's decisions:** production may use any provider the gateway speaks to over the internet (step 13 of
   "Going live"), keys only as Worker secrets; and the AI spend page has a price table (US dollars per million input
   and output tokens, per provider and model or for any model; empty by default, in the Log), so the estimate is no
   longer $0 once a price is typed.
@@ -365,7 +365,31 @@ years. Both run it at start; the hub then once a day from a background task, and
 (`[triggers] crons = ["17 22 * * *"]`, 02:47 in Afghanistan, `entry.py`'s `scheduled`), since an isolate can live for
 days without a first request starting it again. A cron trigger is a schedule on the Worker, not a resource: the
 staging guard allows it, and the Free plan has five per account. `hub/tests/test_privacy.py` keeps a retention rule
-for every table, so a new table without one fails CI.
+for every table, so a new table without one fails CI. Since W6 the job also deletes school bags not written for 12
+months and the "stopped" tombstones after 30 days (in `prune_learners`' transaction); a learner deleted or pruned takes her bag with her.
+
+## The school bag's pepper (W6; a step for Mo, not done)
+
+The relay keeps each bag under `HMAC(pepper, F_r)` (WEBSITE.md 3.7), so a copy of the `bags` table alone cannot be
+tested against guessed bag codes. The pepper is a secret of each server, never in D1, `[vars]` or the repository:
+
+- **The village hub** makes its own at first start, `bag-pepper.txt` in its data folder (32 random bytes, readable by
+  the hub's user only), and keeps it there; a backup of the hub keeps it with the database. The fallback container
+  does the same on its disk.
+- **Production (`qalam`)** does not start without the Worker secret `TUTOR_BAG_PEPPER`: every request fails until it
+  is set (`Hub.bag_pepper`, tested in `test_bags.py`). Mo sets it once, from `tutor/worker`, with the one command
+
+      openssl rand -hex 32 | npx wrangler secret put TUTOR_BAG_PEPPER --name qalam
+
+  The value is made and piped straight into Cloudflare, so it is never shown, typed or kept anywhere else (it needs
+  no copy: nobody ever needs to read it).
+- **Staging (`qalam-staging`)** runs without it on a named staging pepper (`qalam-staging-dev-pepper-not-a-secret`,
+  logged as a warning), since staging holds no learner's work. The same command with `--name qalam-staging` gives
+  it a real one; the deploy job never sets it.
+
+Changing a pepper later loses no one's work, but every bag on that server is then under an id nobody can find: each
+phone writes its bag again at its next contact (a 404, then a new write), and the old rows go after 12 months. So
+change it only if it leaks.
 
 ## Going live: production (P24; ready, not deployed)
 
@@ -398,20 +422,23 @@ Worker, no secret. Staging stays the only deployed copy until Mo does the steps 
 7. **First deploy:** Actions > Tutor production > Run workflow, branch `main`, `deploy`; approve it. The summary
    gives `https://qalam.<account>.workers.dev`. `/api/hello` shows the open cohort with AI off; lessons appear as
    Pack 1's sign-offs land (release mode).
-8. **Staff pages:** repeat "Staff pages behind Cloudflare Access" for the production host, with the three secrets on
+8. **The school bag's pepper (W6):** `openssl rand -hex 32 | npx wrangler secret put TUTOR_BAG_PEPPER --name qalam`
+   ("The school bag's pepper", above). Production refuses to start until it is set, so do it right after the first
+   deploy (step 7), before the APK points at production.
+9. **Staff pages:** repeat "Staff pages behind Cloudflare Access" for the production host, with the three secrets on
    this Worker (`npx wrangler secret put TUTOR_ACCESS_TEAM --name qalam`, and `TUTOR_ACCESS_AUD`,
    `TUTOR_STAFF_PEPPER`; a new pepper, not staging's), and the first admin's row with
    `npx wrangler d1 execute qalam --remote --command "<the SQL staff-add prints>"`. Access needs a custom domain:
    adding one means a `routes` entry with `custom_domain = true` in `wrangler.production.toml` and in the guard's
    allowed keys, a reviewed change.
-9. **The pilot cohort:** in production's admin panel, a new cohort ("Mazar class", say) with its bands and
+10. **The pilot cohort:** in production's admin panel, a new cohort ("Mazar class", say) with its bands and
    languages, Held answers on (`hold`), the AI budget, and a class code for the class card.
-10. **The APK:** set `QALAM_ONLINE_URL` to the production address, build, sign and record it (the Android section
+11. **The APK:** set `QALAM_ONLINE_URL` to the production address, build, sign and record it (the Android section
     above), then `TUTOR_APK_LATEST` in `wrangler.production.toml`'s `[vars]` and deploy.
-11. **Backups:** run Tutor production with `export` once by hand, do the restore drill in `RELEASE.md`, then set the
+12. **Backups:** run Tutor production with `export` once by hand, do the restore drill in `RELEASE.md`, then set the
     repository variable `QALAM_LIVE = yes` for the weekly export (Sundays 21:41 UTC; kept 35 days, encrypted).
     D1 Time Travel needs nothing: it keeps 30 days on the Paid plan (7 on Free).
-12. **Learner AI:** `TUTOR_AI_PROVIDER` in `wrangler.production.toml` is the default for classes that pick none:
+13. **Learner AI:** `TUTOR_AI_PROVIDER` in `wrangler.production.toml` is the default for classes that pick none:
     `off`, `openai`, `anthropic`, `gemini` or `openai_compat` (with an https `TUTOR_COMPAT_URL`); the guard refuses
     `fake`, `local` and any key in `[vars]` (owner's decision, 17 Oct 2026, C5). Each key only as a Worker secret
     (`npx wrangler secret put ANTHROPIC_API_KEY --name qalam`, and so on); a class may pick any provider in the admin

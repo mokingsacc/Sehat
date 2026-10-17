@@ -4,10 +4,14 @@ Every phone on the hub's Wi-Fi opens http://10.42.0.1 (or scans the hub card) an
 The API is small and plain JSON; docs/ARCHITECTURE.md lists every route.
 """
 import asyncio
+import base64
+import binascii
+import hashlib
 import hmac
 import json
 import logging
 import random
+import re
 import secrets
 import threading
 import time
@@ -41,7 +45,7 @@ from .textnorm import digits_to_latin
 from .printing import Printer, PrintQueue
 from .rtc import Realtime
 from .stores import SqliteStore
-from .stores.base import CERT_ID
+from .stores.base import BAG_MAX, CERT_ID
 
 RETENTION_S = 24 * 3600                    # the retention job runs once a day (P24)
 log = logging.getLogger("tutor.hub")
@@ -121,6 +125,74 @@ HUB_WRONG, HUB_SPACING = 30, 10.0            # wrong PINs an hour from any addre
 _UNSET = object()
 
 
+# the school bag's relay (W6, WEBSITE.md 3.7)
+BAG_HEX = re.compile(r"^[0-9a-f]{64}$")          # F_r and W_r as the phone sends them (bag.forRelay)
+BAG_ETAG = re.compile(r"^[0-9a-f]{16}$")
+BAG_BODY_MAX = 96 * 1024                          # 64 KB sealed is 87,384 characters of base64, and the rest of the JSON
+# a server with no pepper of its own (the Worker, before Mo sets the secret) on staging only; production refuses to
+# start without TUTOR_BAG_PEPPER (Hub.bag_pepper). Named so no one takes it for a secret
+DEV_PEPPER = "qalam-staging-dev-pepper-not-a-secret"
+
+
+def bag_pepper_file(data: Path) -> str:
+    """The hub's bag pepper: 32 random bytes as hex, made at first start beside its database, never shown or sent."""
+    f = data / "bag-pepper.txt"
+    if not f.exists():
+        data.mkdir(parents=True, exist_ok=True)
+        f.write_text(secrets.token_hex(32) + "\n", encoding="utf-8")
+        f.chmod(0o600)
+        log.info("a new bag pepper was made in the data folder")
+    return f.read_text(encoding="utf-8").strip()
+
+
+async def capped_body(request: Request, cap: int) -> bytes:
+    """The request's body, refused with 413 once it passes `cap` bytes (before it is all read)."""
+    n = request.headers.get("content-length") or ""
+    if n.isdigit() and int(n) > cap:
+        raise HTTPException(413, "a school bag is at most 64 KB")
+    out = bytearray()
+    async for chunk in request.stream():
+        out += chunk
+        if len(out) > cap:
+            raise HTTPException(413, "a school bag is at most 64 KB")
+    return bytes(out)
+
+
+async def bag_body(request: Request, fields: tuple[str, ...]) -> dict:
+    """A relay request's JSON: exactly `fields`, `f` and `w` as 64 hex digits each (F_r and W_r, never a code)."""
+    try:
+        body = json.loads(await capped_body(request, BAG_BODY_MAX))
+    except ValueError:
+        raise HTTPException(422, "not JSON") from None
+    need = {k for k in fields if k != "etag"}
+    if not isinstance(body, dict) or set(body) - set(fields) or need - set(body):
+        raise HTTPException(422, f"the body is {{{', '.join(fields)}}}")
+    for k in ("f", "w"):
+        if k in fields and not (isinstance(body.get(k), str) and BAG_HEX.match(body[k])):
+            raise HTTPException(422, f"{k} is 64 hex digits")
+    if body.get("etag") is not None and not (isinstance(body["etag"], str) and BAG_ETAG.match(body["etag"])):
+        raise HTTPException(422, "etag is 16 hex digits")
+    return body
+
+
+def sealed_blob(text) -> bytes:
+    """The sealed bag from base64: at most 64 KB (413), and shaped as bag.js seals it (a nonce, whole KB of
+    plaintext and a tag), else 422. Nothing more can be checked: nobody here can open it."""
+    if not isinstance(text, str):
+        raise HTTPException(422, "blob is the sealed bag in base64")
+    if len(text) > (BAG_MAX + 2) // 3 * 4:
+        raise HTTPException(413, "a school bag is at most 64 KB")
+    try:
+        raw = base64.b64decode(text, validate=True)
+    except (binascii.Error, ValueError):
+        raise HTTPException(422, "blob is the sealed bag in base64") from None
+    if len(raw) > BAG_MAX:
+        raise HTTPException(413, "a school bag is at most 64 KB")
+    if len(raw) < 24 + 1024 + 16 or (len(raw) - 40) % 1024:
+        raise HTTPException(422, "this is not a sealed school bag")
+    return raw
+
+
 class Limit:
     """At most `n` requests in `per` seconds from one phone: on the hub known by its address on the hub's Wi-Fi;
     online by her learner token, since many phones reach the Worker from one address (`Hub.who`), else by the
@@ -171,6 +243,7 @@ class Hub:
 
     def __init__(self, cfg: Config, store=None):
         self.cfg = cfg
+        self._own_store = store is None              # a server that keeps its own SQLite keeps its pepper beside it
         if store is None:
             cfg.data.mkdir(parents=True, exist_ok=True)
             store = SqliteStore(cfg.data / "hub.db")
@@ -209,6 +282,12 @@ class Hub:
         self.cert_limit = Limit(30, 60)              # certificate checks an address a minute (C4.2)
         self.seat_limit = Limit(5, 24 * 3600)        # merges and new tokens a day, per token (W4, WEBSITE.md 3.7)
         self.server_id = None                        # hello.id (W4): this database's own, read in start()
+        # the school bag's relay (W6, WEBSITE.md 3.7): 60 pulls an hour per caller (a 404 also counts as a wrong
+        # code, `code_limit`); 30 writes an hour per token; one stored write every 10 seconds per bag
+        self.bag_get_limit = Limit(60, 3600)
+        self.bag_put_limit = Limit(30, 3600)
+        self.bag_spacing = Limit(1, 10)
+        self.pepper = None                           # the bag pepper, read in start()
         self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
         self.gateway.on_drop = lambda why, cid: self.record("safety.flag", why, cohort_id=cid)
         self.aliases = set(learners.load_aliases())
@@ -216,7 +295,31 @@ class Hub:
         self.consent_version = learners.CONSENT_VERSIONS[cfg.home]
         self.rtc = Realtime(cfg)                     # live classes' relay (P30a): called only while `live` is on
 
+    def bag_pepper(self) -> str:
+        """TUTOR_BAG_PEPPER when set (the Worker's secret); else a server with its own SQLite (the village hub, the
+        fallback container) makes a file beside its database; else a release server (production) refuses to start,
+        and staging uses DEV_PEPPER, with a warning."""
+        if self.cfg.bag_pepper:
+            return self.cfg.bag_pepper
+        if self._own_store:
+            return bag_pepper_file(self.cfg.data)
+        if self.cfg.release:
+            raise RuntimeError("TUTOR_BAG_PEPPER is not set: production does not start without the school bag's pepper "
+                               "(docs/HOSTING.md, 'The school bag's pepper')")
+        log.warning("TUTOR_BAG_PEPPER is not set: the school bag's relay uses the staging pepper, which is no secret")
+        return DEV_PEPPER
+
+    def bag_id(self, f: str) -> str:
+        """Where her bag lives here: HMAC-SHA256(pepper, F_r), so the table alone cannot be tested against codes."""
+        return hmac.new(self.pepper.encode(), bytes.fromhex(f), hashlib.sha256).hexdigest()
+
+    def consent_names_bag(self, version: str | None) -> bool:
+        """Whether a consent text version names the school bag (`bag: true` in every language's file of it, 3.6)."""
+        texts = [d for (_, v), d in self.consent_texts.items() if v == version] if version else []
+        return bool(texts) and all(d.get("bag") is True for d in texts)
+
     async def start(self):
+        self.pepper = self.bag_pepper()              # first: production without its pepper stops here
         await self.store.open()
         self.server_id = await self.store.server_id()
         if await self.store.seed_cohorts(flags.seed_rows(self.seeds)):
@@ -237,7 +340,7 @@ class Hub:
         await self.store.prune(self.cfg.keep_days)
         await self.store.prune_events(events.KEEP_DAYS)
         await self.store.prune_ai_usage(ai_gateway.KEEP_DAYS)
-        await self.store.prune_learners(learners.IDLE_DAYS)
+        await self.store.prune_learners(learners.IDLE_DAYS)     # and bags unwritten for 12 months, tombstones after 30 days
 
     async def retention_loop(self, every_s: float = RETENTION_S):
         while True:
@@ -437,6 +540,8 @@ class Hub:
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
                 "url": self.cfg.public_url, "release": self.cfg.release, "consent": self.consent_version,
                 "home": self.cfg.home,
+                # the school bag's relay (W6): a phone pushes and pulls her sealed bag here, at most this many bytes
+                "bag": {"max": BAG_MAX},
                 # the Android app (P23): its newest version on /get and the oldest this server still talks to
                 "apk": {"latest": self.cfg.apk_latest, "min": self.cfg.apk_min} if self.cfg.apk_latest else None,
                 "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
@@ -716,6 +821,73 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         if not await hub.store.rekey_learner(row["token_hash"], learners.token_hash(token)):
             raise HTTPException(401, "this learner is not known here: join again")
         return {"token": token}
+
+    # The school bag's relay (W6, WEBSITE.md 3.6 and 3.7): her whole record, sealed on her phone, kept here so it can
+    # follow her to her other phones; nobody here can open it. What finds it (F_r) and what lets her write it (W_r) and
+    # the bag itself come in the body, never in an address, so none of it reaches a URL or a log. A pull needs no token
+    # (a fresh phone restores her with her code alone); a write and a delete need a seat's token, and a write a
+    # consent text that names the bag. Answers are never cached.
+    NO_STORE = {"Cache-Control": "no-store"}
+
+    @app.post("/api/bag/get")
+    async def bag_get(request: Request):
+        addr = hub.addr(request)
+        hub.bag_get_limit.check("g:" + hub.who(request))
+        hub.code_limit.check(addr, add=False)            # a bag not here counts as a wrong code (20 an hour)
+        body = await bag_body(request, ("f", "etag"))
+        row = await hub.store.bag(hub.bag_id(body["f"]))
+        if row is None:
+            hub.code_limit.count(addr)
+            raise HTTPException(404, "no school bag here for this code")
+        if row["gone"]:
+            return JSONResponse({"gone": row["gone"]}, status_code=410, headers=NO_STORE)
+        if body.get("etag") == row["etag"]:
+            return Response(status_code=304, headers=NO_STORE)
+        return JSONResponse({"etag": row["etag"], "blob": row["blob"]}, headers=NO_STORE)
+
+    @app.post("/api/bag/put")
+    async def bag_put(request: Request):
+        who = await hub.learner(request)
+        hub.bag_put_limit.check("p:" + who["token_hash"])
+        body = await bag_body(request, ("f", "w", "if", "blob"))
+        if not (who["consent_kind"] and hub.consent_names_bag(who["consent_version"])):
+            raise HTTPException(403, "her consent does not name the school bag")
+        raw = sealed_blob(body["blob"])
+        want = body["if"]
+        if want != "new" and not (isinstance(want, str) and BAG_ETAG.match(want)):
+            raise HTTPException(422, 'if is "new" or the etag she has')
+        bid, w = hub.bag_id(body["f"]), hashlib.sha256(bytes.fromhex(body["w"])).hexdigest()
+
+        def refused(now):
+            if now and now["gone"]:
+                return JSONResponse({"gone": now["gone"]}, status_code=410, headers=NO_STORE)
+            if now and now["w"] != w:
+                raise HTTPException(403, "this is not this bag's code")
+            if now and (want == "new" or now["etag"] != want):       # another phone wrote first: pull, merge, again
+                return JSONResponse({"etag": now["etag"]}, status_code=412, headers=NO_STORE)
+            return None
+
+        out = refused(await hub.store.bag(bid))           # what is refused anyway is said first, and costs no write
+        if out:
+            return out
+        hub.bag_spacing.check("s:" + bid, add=False)     # one stored write every 10 seconds per bag
+        etag = secrets.token_hex(8)
+        if await hub.store.put_bag(id=bid, w=w, token_hash=who["token_hash"], etag=etag, size=len(raw),
+                                   blob=base64.b64encode(raw).decode(), want=want):
+            hub.bag_spacing.count("s:" + bid)
+            return JSONResponse({"etag": etag}, headers=NO_STORE)
+        # another write came between the look and the write (the write itself is conditional, so nothing was lost)
+        return refused(await hub.store.bag(bid)) or JSONResponse({"etag": None}, status_code=412, headers=NO_STORE)
+
+    @app.post("/api/bag/delete")
+    async def bag_delete(request: Request):
+        who = await hub.learner(request)
+        hub.bag_put_limit.check("p:" + who["token_hash"])
+        body = await bag_body(request, ("f", "w"))
+        got = await hub.store.delete_bag(hub.bag_id(body["f"]), hashlib.sha256(bytes.fromhex(body["w"])).hexdigest())
+        if got == "wrong":
+            raise HTTPException(403, "this is not this bag's code")
+        return Response(status_code=204, headers=NO_STORE)
 
     # "I have a code from my teacher" (C1.6, P20): six digits, 15 minutes, once, five tries; the lock is the phone's
     @app.post("/api/me/pin-reset")

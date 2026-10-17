@@ -289,6 +289,15 @@ class SqliteStore(Store):
     async def server_id(self) -> str:
         return await self._run("server_id")
 
+    async def bag(self, id):
+        return await self._run("bag", id)
+
+    async def put_bag(self, *, id, w, token_hash, etag, size, blob, want) -> bool:
+        return await self._run("put_bag", id=id, w=w, token_hash=token_hash, etag=etag, size=size, blob=blob, want=want)
+
+    async def delete_bag(self, id, w) -> str:
+        return await self._run("delete_bag", id, w)
+
     async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:
         return await self._run("add_wish", cohort=cohort, band=band, lang=lang, wish=wish, wkey=wkey)
 

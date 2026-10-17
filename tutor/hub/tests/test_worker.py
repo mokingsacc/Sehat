@@ -166,13 +166,14 @@ def count_statements(monkeypatch):
         monkeypatch.setattr(Statement, name, counted)
 
 
-def load_entry(monkeypatch, tmp_path, config=WORKER / "wrangler.toml"):
+def load_entry(monkeypatch, tmp_path, config=WORKER / "wrangler.toml", **secrets):
     """tutor/worker/entry.py loaded as the Worker loads it, with stand-ins for the runtime's modules: the
-    `cloudflare:workers` env (D1 fake and the wrangler file's vars) and pyodide.ffi (the fake's)."""
+    `cloudflare:workers` env (D1 fake, the wrangler file's vars and any `secrets`, as Cloudflare puts a Worker's
+    secrets beside its vars) and pyodide.ffi (the fake's)."""
     settings = tomllib.loads(Path(config).read_text(encoding="utf-8"))["vars"]
     count_statements(monkeypatch)
     db = CountingD1()
-    env = SimpleNamespace(DB=db, **settings)
+    env = SimpleNamespace(DB=db, **settings, **secrets)
     workers = ModuleType("workers")
     workers.import_from_javascript = lambda name: SimpleNamespace(env=env)
     # the SDK's asgi.entrypoint(app) returns a WorkerEntrypoint class with `fetch` (python_modules/workers/asgi.py)
@@ -181,7 +182,7 @@ def load_entry(monkeypatch, tmp_path, config=WORKER / "wrangler.toml"):
     pyodide.ffi = fake_ffi
     for name, mod in {"workers": workers, "pyodide": pyodide, "pyodide.ffi": fake_ffi}.items():
         monkeypatch.setitem(sys.modules, name, mod)
-    for k in {*WRANGLER["vars"], *settings}:            # entry.py sets them from the env, as on Cloudflare: so
+    for k in {*WRANGLER["vars"], *settings, *secrets}:  # entry.py sets them from the env, as on Cloudflare: so
         monkeypatch.setenv(k, "")                       # each is first recorded, and put back after the test
         monkeypatch.delenv(k)
     monkeypatch.setenv("TUTOR_DATA", str(tmp_path / "data"))
@@ -273,9 +274,10 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
             costs[name] = worker.db.calls - before
     # the start applies each migration once per database (one batch each), so on a fresh database it grows by one
     # with every migration file (an existing one applies only the new files); it stays near 60% of the plan's
-    # limit (34 since 0020), everything but the migrations at 14 (W4 reads the server's id), every other request at 20
+    # limit (35 since 0021, the bags), everything but the migrations at 14 (W4 reads the server's id; W6's bag retention
+    # rides the learners' prune batch), every other request at 20
     first = costs.pop("first request (hub starts)")
-    assert first <= 34 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 14, first
+    assert first <= 35 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 14, first
     assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
     assert costs["100 events"] <= 4, costs                    # her record (and her day seen), then one batch
 

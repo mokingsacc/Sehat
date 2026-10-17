@@ -89,8 +89,12 @@ def test_production_differs_from_staging_only_where_it_must():
     assert v["TUTOR_COHORT"] == "3w2lco2s8f" and (TUTOR / "cohorts" / "open.json").exists()
 
 
+# a stand-in for the Worker secret Mo sets (docs/HOSTING.md, "The school bag's pepper"); never the real one
+PEPPER = {"TUTOR_BAG_PEPPER": "test-pepper-for-the-production-tests-only"}
+
+
 async def test_the_production_worker_starts_with_ai_off_release_on_and_the_cron(monkeypatch, tmp_path):
-    entry = load_entry(monkeypatch, tmp_path, PRODUCTION)
+    entry = load_entry(monkeypatch, tmp_path, PRODUCTION, **PEPPER)
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=entry.qalam), base_url="https://qalam") as c:
         h = (await c.get("/api/hello")).json()
         assert h["home"] == "online" and h["printer"]["state"] == "off" and h["ai"]["on"] is False
@@ -99,7 +103,17 @@ async def test_the_production_worker_starts_with_ai_off_release_on_and_the_cron(
         assert (await c.get("/api/print/1")).status_code == 404
     hub = entry.app.state.hub
     assert hub.cfg.release is True and hub.gateway.provider is None
+    assert hub.pepper == PEPPER["TUTOR_BAG_PEPPER"]
     await entry.Default().scheduled(None, None, None)
+
+
+async def test_the_production_worker_does_not_start_without_the_bag_pepper(monkeypatch, tmp_path):
+    """W6: the relay's pepper is a Worker secret; production refuses to start without it (staging has a named dev
+    default), so a bag id is never made with a pepper anyone could know."""
+    entry = load_entry(monkeypatch, tmp_path, PRODUCTION)
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=entry.qalam), base_url="https://qalam") as c:
+        with pytest.raises(RuntimeError, match="TUTOR_BAG_PEPPER is not set"):
+            await c.get("/api/hello")
 
 
 def test_the_workflow_is_started_by_hand_from_main_behind_the_environment_and_creates_nothing():
@@ -139,7 +153,7 @@ async def test_a_d1_export_restores_into_a_working_store(monkeypatch, tmp_path):
     one, loads into a fresh SQLite file that the hub opens with every learner, wish and log row still there."""
     import sqlite3
     from tutor_hub.stores import SqliteStore
-    entry = load_entry(monkeypatch, tmp_path, PRODUCTION)
+    entry = load_entry(monkeypatch, tmp_path, PRODUCTION, **PEPPER)
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=entry.qalam), base_url="https://qalam") as c:
         h = (await c.get("/api/hello")).json()
         for picture in ("key", "cup", "book"):
