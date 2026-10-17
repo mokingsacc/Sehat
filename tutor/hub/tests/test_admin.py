@@ -167,6 +167,7 @@ def test_open_keeps_homework_help_off_in_2027_and_photo_behind_the_pilots_gate(h
     mods = {m["id"]: m for m in c["modules"]}
     assert (mods["photo"]["lock"], mods["homework"]["lock"], mods["ask"]["lock"]) == ("gate", "open", "open")
     assert mods["photo"]["settings"] == {"per_day": 5} and c["gate"]["open"] is False and c["gate"]["problems"]
+    assert [w["code"] for w in c["gate"]["why"]] == ["missing"]       # the page words it in the reader's language
     assert get(hub, f"/cohorts/{HUB}")["gate"] is None
     assert {m["id"]: m for m in get(hub, f"/cohorts/{HUB}")["modules"]}["photo"]["settings"] == {"per_day": 10}
     hub.hub.cfg.cohorts = tmp_path / "cohorts"            # a copy: the repository's gate file is the pilot's to write
@@ -178,7 +179,7 @@ def test_open_keeps_homework_help_off_in_2027_and_photo_behind_the_pilots_gate(h
             "tokens_per_mark": 1400, "d7": "decided"}
     gate.write_text(json.dumps(nums), encoding="utf-8")
     c = get(hub, f"/cohorts/{OPEN}")
-    assert c["gate"] == {"open": True, "problems": [], "tokens_per_mark": 1400}
+    assert c["gate"] == {"open": True, "problems": [], "why": [], "tokens_per_mark": 1400}
     assert post(hub, f"/cohorts/{OPEN}/flags/photo", {"enabled": True, "confirm": True, "both": True})["ok"]
 
 

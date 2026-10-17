@@ -56,7 +56,7 @@ let redraw = () => start();
 function top(back, title) {
   return h('header', { class: 'top staff-top' },
     back ? h('button', { type: 'button', class: 'round', 'aria-label': t('back'), onClick: back }, L.rtl() ? '→' : '←') : null,
-    h('div', { class: 'grow' }, h('h1', {}, title || t('title'))),
+    h('div', { class: 'grow' }, h('h1', {}, (document.title = title || t('title')))),
     me.via ? h('button', { type: 'button', class: 'chip signout', onClick: signOut }, t('sign_out')) : null,
     h('span', { class: 'brk', 'aria-hidden': 'true' }),
     L.picker(h, () => redraw()));
@@ -368,9 +368,9 @@ async function quranPage() {
     }));
   }
   const facts = h('dl', { class: 'facts', dir: 'ltr' },
-    h('dt', {}, 'Text'), h('dd', {}, `${S.credits.text} (${S.credits.edition})`),
+    h('dt', {}, t('set_text')), h('dd', {}, `${S.credits.text} (${S.credits.edition})`),
     (S.translations || []).flatMap((m) => [h('dt', {}, m.lang), h('dd', {}, `${S.credits.tr[m.lang].line} ${m.issued}; ${m.url}`)]),
-    (S.audio || []).flatMap((m) => [h('dt', {}, 'Recitation'), h('dd', {}, `${S.credits.audio.line} (${m.edition}, ${m.riwaya}, ${m.bitrate} kbps)`)]));
+    (S.audio || []).flatMap((m) => [h('dt', {}, t('set_recitation')), h('dd', {}, `${S.credits.audio.line} (${m.edition}, ${m.riwaya}, ${m.bitrate} kbps)`)]));
   const what = item(0, t('set_what'), [facts, h('details', {}, h('summary', {}, 'Tanzil'), h('pre', { class: 'small', dir: 'ltr' }, S.credits.notice))]);
   const surahItem = (x) => {
     const box = h('div', { class: 'stack' });

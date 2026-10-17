@@ -292,8 +292,8 @@ toast stands. The release rules that asked for a recorded clip (every `ey`, `p1`
 adult literacy track sees, every word of the English and Chinese packs) are met by a generated clip, each still played
 by the reviewer before OK (P17). Scripture is not a text Qalam writes: the Quran keeps its human reciter, and its
 translations take no phone voice at all (C4, change 7): an unvoiced translation shows without a speaker, marked
-`data-voice="none"`, which the browser check allows on those elements only. Until P36 renders the clips, the recorded
-clips and the phone's voice stand as before.
+`data-voice="none"`, which the browser check allows on those elements only. P36 (below) built the tool, the playback
+and the voice pack; until its clips are rendered the phone's voice and the toast stand as before.
 
 ## What P9 built, and where it differs
 
@@ -796,6 +796,28 @@ no other item turns on a contested fact. "Accept" means the draft's spec for tha
 the notes here applied; the draft's opening "Rules every spec below assumes" stand. The builder copies the draft into
 `tutor/docs/DESIGN-C2C3-SPECS.md` so the repository holds it. English strings are drafts until native speakers check
 them. Nothing here needs Mo before 22 December 2026; one decision, D11, is added for after it.
+
+## What P36 built, and where it differs
+
+- `tools/voice.py` (C5.6) voices every text Qalam writes with Gemini's text-to-speech through the Batch API, in one
+  prebuilt woman's voice per language named in `content/voice.json`, with Sehat's "DIRECTOR'S NOTES ... TRANSCRIPT"
+  prompt. A clip is named by its text's hash (`hub/tutor_hub/voicing.py`, the same hash in `app/js/speech.js`) and
+  carries a render hash, so an unchanged line is never voiced again and a changed voice re-renders its language. Each
+  clip is checked for length and loudness and made again if it is silent or the wrong length. On a payment or quota
+  refusal it stops, keeps what it made and deletes any file no manifest names. `--estimate` costs nothing.
+- Playback: `speech.js` finds a clip for any text by its hash, and plays a text joined from several (a page read
+  aloud, "title. note") as its parts' clips in order. The phone's voice reads a text only when a part with words has
+  no clip, so a learner never hears two voices in one text. Lessons bring their clips as `voices` (and the lesson
+  list its titles'); a step meets the release rule with a generated clip for each line it reads.
+- Differs: the clips stay out of the APK (the owner's note of 17 Oct: shared by Bluetooth, capped at 3 MB in CI).
+  The app downloads one **voice pack** per language (`audio/<lang>/voice.qvoice`: every clip of that language and the
+  bells in one file, about 3 MB at 12 kbit/s Opus) for her language only, keeps it on the phone, and can share it
+  through the phone's share sheet or open one shared to it (Settings, Voice). The hub makes the pack on request; the
+  Worker build writes it as a static file.
+- The chair's gate: `native_check` in `content/voice.json`. Staging and the hub play every clip; a release build and
+  a hub in release mode leave out a language's clips until its native listener has passed the 30-clip sample
+  (`voice.py --sample`), a line in RELEASE.md's checklist.
+- Staff strings are voiced (C5.6) but staff pages keep no speakers (rulings 13 and 20).
 
 ## C2
 

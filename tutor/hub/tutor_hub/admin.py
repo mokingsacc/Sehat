@@ -209,8 +209,9 @@ def router(hub) -> APIRouter:
 
     def photo_gate() -> dict:
         """The `open` recipe in the admin's hands (C4.9): the gate's problems, or its numbers and the budget rule."""
-        problems, g = gates.photo_open(hub.cfg.cohorts)
-        return {"open": not problems, "problems": problems,
+        why, g = gates.photo_open_why(hub.cfg.cohorts)
+        problems = [w["text"] for w in why]
+        return {"open": not problems, "problems": problems, "why": [{k: v for k, v in w.items() if k != "text"} for w in why],
                 "tokens_per_mark": None if problems else g["tokens_per_mark"]}
 
     async def day_spend(cid: str) -> dict:

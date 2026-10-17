@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Copies the phone app (tutor/app) into the APK's assets: app/src/main/assets/www/. Gradle runs this before every
 # build; by hand: bash tutor/android/sync-web.sh. Left out: the tests, the staff pages (/admin/, /teacher/,
-# /review/ and their scripts: staff use a browser) and /get/ (the download page and the APK itself).
+# /review/ and their scripts: staff use a browser), /get/ (the download page and the APK itself) and every sound
+# (app/audio: the voice clips and the bells, C5.6 and the owner's note of 17 Oct: the APK stays small enough to
+# share by Bluetooth; after install the app downloads the voice pack for her language, or opens one shared to it).
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,6 +19,15 @@ mkdir -p "$OUT"
 cp -R "$WEB/." "$OUT/"
 rm -rf "$OUT/tests" "$OUT/admin" "$OUT/teacher" "$OUT/review" "$OUT/get" \
        "$OUT/js/admin" "$OUT/js/teacher" "$OUT/js/review" "$OUT/js/staff" "$OUT/js/get.js"
+rm -rf "$OUT/audio"
+# the APK's own service worker keeps no audio either (the shell lists app/audio for the web app)
+python3 - "$OUT/sw.js" <<'PY'
+import re, sys
+p = sys.argv[1]
+src = open(p, encoding="utf-8").read()
+out = re.sub(r"^\s*'audio/[^']*',\n", "", src, flags=re.M)
+open(p, "w", encoding="utf-8").write(out)
+PY
 find "$OUT" -name '.*' -type f -delete
 find "$OUT" -name '__pycache__' -type d -prune -exec rm -rf {} +
 

@@ -5,7 +5,11 @@
 //   - a module id in modules/*/module.json without `module.<id>` and `module.<id>.what` in English;
 //   - a refusal code the server emits (refuse(status, "code", ...) in hub/tutor_hub/) without `error.<code>`;
 //   - a key a staff page asks for by name (t('...') in admin.js, teacher.js, review.js) that English does not have;
-//   - a file that is not a module with a default object and a `meta`.
+//   - a file that is not a module with a default object and a `meta`;
+//   - hard-coded English on a staff page: a string in admin.js, teacher.js, review.js or lang.js (comments left
+//     out) that the page shows (a child of h(), a textContent, a title, placeholder, alt or aria-label) with Latin
+//     words in it instead of asking t() for them, so a Dari or Pashto reader would see English. A string of Latin
+//     words that starts with a capital, or holds two Latin words, counts; codes and the few names in NAMES_OK do not.
 // Reports, without failing: the keys each language still lacks, a middle dot right after a digit or a {placeholder}
 // in Dari or Pashto (P10: it reads as a zero there; join() writes "، "), and Latin digits inside Dari or Pashto
 // strings (t() shows them in Persian shapes, but a native reader should see the string as it shows).
@@ -68,6 +72,39 @@ for (const [scope, f] of Object.entries(PAGES)) {
     if (k.endsWith('.') || k.endsWith('_')) continue;            // a prefix the page completes ('band.' + id)
     const ok = k.includes('.') ? k in en : `${scope}.${k}` in en || `common.${k}` in en;
     if (!ok) fail.push(`${f} asks for ${k}, which en.js does not have`);
+  }
+}
+
+// hard-coded English (C5.6 brief): what a page shows must come from the string files
+const NAMES_OK = new Set(['Tanzil', 'Qalam', 'QuranEnc', 'PDF', 'QR', 'PIN', 'AI', 'OK', 'English', 'Gemini']);
+const KEYS_OK = /^(Enter|Escape|Tab|Backspace|Arrow(Up|Down|Left|Right)|Home|End|True|False)$/;
+function code(src) {          // the source with comments blanked, strings kept
+  let out = '', i = 0, q = null;
+  while (i < src.length) {
+    const c = src[i], d = src[i + 1];
+    if (q) { out += c; if (c === '\\') { out += d ?? ''; i += 2; continue; } if (c === q) q = null; i++; continue; }
+    if (c === "'" || c === '"' || c === '`') { q = c; out += c; i++; continue; }
+    if (c === '/' && d === '/') { while (i < src.length && src[i] !== '\n') i++; continue; }
+    if (c === '/' && d === '*') { const e = src.indexOf('*/', i + 2); i = e < 0 ? src.length : e + 2; continue; }
+    out += c; i++;
+  }
+  return out;
+}
+function english(text) {
+  const words = (text.replace(/\$\{[^}]*\}/g, ' ').match(/[A-Za-z][A-Za-z’']+/g) || []).filter((w) => !NAMES_OK.has(w));
+  if (!words.length || /[{};]/.test(text)) return false;                                // none, or CSS
+  if (/^[A-Z][a-z]+(-[A-Z][a-z]+)+$/.test(text) || KEYS_OK.test(text)) return false;     // a header or key name
+  if (/^[a-z0-9_.\-/: ]*$/.test(text) && !/ [a-z]+ /.test(text)) return false;          // ids, classes, paths, codes
+  return /^[A-Z][a-z]/.test(words[0]) || words.length >= 2;
+}
+for (const f of [...Object.values(PAGES), 'app/js/staff/lang.js']) {
+  const src = code(readFileSync(join(ROOT, f), 'utf8'));
+  for (const m of src.matchAll(/(['"`])((?:\\.|(?!\1)[^\\])*)\1/g)) {
+    const before = src.slice(Math.max(0, m.index - 24), m.index);
+    // only where a page shows it: a child of h() (after the attributes or another child), a text or a label
+    const shown = /(\}|\bnull|\))\s*,\s*$|(textContent|innerText)\s*=\s*$|\b(title|placeholder|alt|'aria-label')\s*:\s*$/;
+    if (!shown.test(before)) continue;
+    if (english(m[2])) fail.push(`${f}: hard-coded English ${m[1]}${m[2].slice(0, 60)}${m[1]}: put it in the string files and ask t() for it`);
   }
 }
 

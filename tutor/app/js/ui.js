@@ -144,7 +144,10 @@ export function said(btn, text) {
 // what a page says, in reading order: its text, without the parts that are not for the learner (the draft band and
 // the connection chip, marked data-silent), without anything hidden (P9 look-over, ruling 8), and never a verse or
 // its translation (data-voice="none", P29: scripture takes no phone voice)
-export function readText(root) {
+export function readText(root) { return readParts(root).join(' ').replace(/\s+/g, ' ').trim(); }
+
+// the same, as the page's pieces of text in order, so each finds its clip (speech.js cover)
+export function readParts(root) {
   const out = [];
   const walk = (el) => {
     for (const n of el.childNodes) {
@@ -157,10 +160,10 @@ export function readText(root) {
     }
   };
   walk(root);
-  return out.join(' ').replace(/\s+/g, ' ').trim();
+  return out;
 }
 
-export function readPage(root) { speak(readText(root), getLang()); }
+export function readPage(root) { speak(readParts(root), getLang()); }
 
 // the header's page speaker, which reads the screen in order
 export function pageSpeaker(root) {

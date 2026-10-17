@@ -16,6 +16,12 @@ During the pilot: one release a week on a fixed day, after a day on staging. A s
 3. **The packs are signed.** Pull the sign-offs from staging (HOSTING.md, staff pages, step 6), then
    `python3 tools/validate_pack.py --release` passes and the packs are committed. Production runs `TUTOR_RELEASE=1`
    and serves only signed lessons.
+3b. **The voice gate (C5.6), the chair's flag.** For each language whose clips are to ship, a native listener has
+   heard its 30-clip sample (`python3 tools/voice.py --sample --estimate` lists what is voiced; the clips are in
+   `app/audio/<lang>/` and the packs' `audio/<lang>/`) and Mo has written `"passed": true`, their initials and the
+   date under `native_check` in `content/voice.json`. A production build (`TUTOR_RELEASE=1`) leaves out the clips of
+   every language not passed, and the hub in release mode does not serve them; staging and the hub play them
+   without it. The Chinese teacher reviewer listens for the tones before `chinese-1` leaves draft.
 4. **The privacy suite passes:** `hub/tests/test_privacy.py` (a retention rule for every table, the retention job,
    the wishlist and reset codes) with the schema scan and event shapes (`test_events.py`), photo writes
    (`test_photo.py`, `test_worker.py`), names in logs (`test_api.py`) and the gateway's recorder scans

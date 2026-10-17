@@ -65,8 +65,11 @@ jobs:
           mkdir -p out
           cp "$DEBUG" "out/qalam-$VERSION-debug.apk"
           cp "$RELEASE" "out/qalam-$VERSION-unsigned.apk"
+          # the owner's note of 17 Oct: the APK is shared by Bluetooth, so it carries no audio and stays under 3 MB
+          for f in out/*.apk; do echo "APK size: $(basename "$f") $(stat -c %s "$f") bytes ($(du -h "$f" | cut -f1))"; done
           size=$(stat -c %s "out/qalam-$VERSION-unsigned.apk")
-          [ "$size" -lt $((25 * 1024 * 1024)) ] || { echo "::error::the APK must stay under 25 MiB to be a Worker static asset"; exit 1; }
+          [ "$size" -le 3000000 ] || { echo "::error::the release APK is $size bytes; it must stay at or under 3 MB (3,000,000 bytes)"; exit 1; }
+          if unzip -l "$RELEASE" | grep -Eq '\.(opus|ogg|mp3|wav|m4a|qvoice)$'; then echo "::error::the APK must carry no audio (C5.6)"; exit 1; fi
           (cd out && sha256sum *.apk > SHA256SUMS)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           {

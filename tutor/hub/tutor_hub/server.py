@@ -22,7 +22,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
-from . import __version__, admin, cert, events, flags, graph, learners, modules, rules, search, sheets
+from . import __version__, admin, cert, events, flags, graph, learners, modules, rules, search, sheets, voicing
 from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import WAITING, Answer, Brain
 from .config import Config
@@ -519,11 +519,29 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     async def clip(pid: str, lang: str, fname: str):
         """A recorded clip named in the pack's audio/<lang>/manifest.json (online: a static asset, like pictures)."""
         pack = hub.library.packs.get(pid)
-        files = {c.get("file") for c in (pack or {}).get("_clips", {}).get(lang, {}).values()}
+        files = {c.get("file") for c in (hub.library.served_clips(pid) if pack else {}).get(lang, {}).values()}
         f = pack["_dir"] / "audio" / lang / fname if pack and fname in files else None
         if not f or not f.is_file():
             raise HTTPException(404, "no such clip")
         return FileResponse(f, headers={"Cache-Control": "public, max-age=86400"})
+
+    # the voice pack (C5.6, the owner's note of 17 Oct): every clip of one language in one file, for the Android app
+    # (which carries no audio) to keep, and for sharing phone to phone; made once from the files on disk. A release
+    # hub serves no pack for a language whose native listener has not passed the sample. Online it is a static file.
+    voice_packs: dict[str, bytes | None] = {}
+
+    @app.get("/audio/{lang}/voice.qvoice")
+    async def voice_pack(lang: str):
+        if lang not in voicing.LANGS or lang not in hub.library.voices_passed or not cfg.app.is_dir():
+            raise HTTPException(404, "no voice pack")
+        if lang not in voice_packs:
+            lib = hub.library
+            voice_packs[lang] = voicing.voice_pack(lang, cfg.app / "audio", [
+                (p["_dir"] / "audio" / lang, lib.served_clips(pid).get(lang, {})) for pid, p in lib.packs.items()])
+        if not voice_packs[lang]:
+            raise HTTPException(404, "no voice pack")
+        return Response(voice_packs[lang], media_type="application/octet-stream", headers={
+            "Cache-Control": "public, max-age=3600", "Content-Disposition": f'attachment; filename="qalam-voice-{lang}.qvoice"'})
 
     # the Quran reader (P29, C4.7): the set's surah list, one surah at a time, and the recitation files fetched to this
     # hub; online the same paths are static files (worker/build.py). The review page reads them too, so they answer

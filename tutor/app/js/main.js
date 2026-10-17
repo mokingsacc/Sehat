@@ -16,6 +16,7 @@ import * as modules from './modules.js';
 import * as outbox from './outbox.js';
 import * as state from './state.js';
 import { hasVoice, loadClips, stop } from './speech.js';
+import * as voicepack from './voicepack.js';
 import { busy, fitHead, h, nav, netChip, readPage, sayTab, toast, topbar } from './ui.js';
 
 import ask from './screens/ask.js';
@@ -63,8 +64,11 @@ function applyLook(name) {
   root.lang = htmlLang();
   root.dir = dir();
   document.title = s('app');
-  loadClips(c ? c.lang : 'prs');
+  const lang = c ? c.lang : 'prs';
+  loadClips(lang);
+  if (!packsLoaded.has(lang)) { packsLoaded.add(lang); voicepack.load(lang); }    // her voice pack, if kept here
 }
+const packsLoaded = new Set();
 
 async function route() {
   const n = ++seq;

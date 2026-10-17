@@ -333,7 +333,8 @@ def test_release_needs_recorded_clips_for_the_youngest_and_every_letter(tmp_path
     assert "dari-1-sheen" in Library(packs, release=True).lessons
 
 
-def test_a_clip_is_never_synthetic_and_never_unlisted(tmp_path, capsys):
+def test_a_made_clip_names_its_voice_and_no_clip_is_unlisted(tmp_path, capsys):
+    # C5.6: a clip tools/voice.py made says generated: true and its voice; "synthetic" is not how one says it
     packs = make_pack(tmp_path, [starter("maths-7-fractions-add")])
     d = packs / "p" / "audio" / "prs"
     d.mkdir(parents=True)
@@ -343,7 +344,7 @@ def test_a_clip_is_never_synthetic_and_never_unlisted(tmp_path, capsys):
                                                                   "sha256": "sha256:00"}}}))
     assert validate_pack.main([str(packs)]) == 1
     out = capsys.readouterr().out
-    assert "no synthetic voice" in out and "stray.opus: not in manifest.json" in out and "tts.opus" in out
+    assert "generated: true and its voice" in out and "stray.opus: not in manifest.json" in out and "tts.opus" in out
 
 
 # the hub serving it

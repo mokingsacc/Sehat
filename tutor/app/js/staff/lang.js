@@ -83,6 +83,9 @@ export function t(key, v = {}, fallback) {
 export const has = (key) => typeof en[key] === 'string';
 // a word by id with the id as its fallback: a new module or code never breaks the page
 export const word = (prefix, id) => t(`${prefix}.${id}`, {}, id);
+// a class's label as staff see it: the seed classes' English labels ("Open", "Village hub", "Staging") in the
+// reader's language (cohort.<label>); a label an admin typed shows as she typed it
+export const cohort = (label) => (label ? t(`cohort.${label}`, {}, label) : '');
 
 // 200000 -> "200,000" or "۲۰۰٬۰۰۰"; 0.5 -> "0.5" or "۰٫۵"
 export function num(n, l = cur) {

@@ -5,6 +5,7 @@
 //   - no clipped text, and contrast 4.5:1 (3:1 for large text) as the learner check counts it;
 //   - direction: Dari and Pashto right to left, English left to right, the header starting on the reading side;
 //   - the picker: three languages, the current one pressed; the draft line in Dari and Pashto;
+//   - no English words on a Dari or Pashto page outside what staff typed (dir="auto") and codes (dir="ltr");
 //   - no Content-Security-Policy violation and no page error.
 // Staff pages have no speakers (rulings 13 and 20), so there is no speaker rule. It needs a running hub (the PIN
 // gate: a hub with its data folder) and Playwright with a Chromium; neither is a dependency of the app. Run from tutor/:
@@ -132,6 +133,18 @@ function inspect() {
   if (pick.length !== 3) problems.push(`the language picker has ${pick.length} buttons`);
   else if ([...pick].filter((b) => b.getAttribute('aria-pressed') === 'true').length !== 1) problems.push('the picker shows no one language pressed');
   if (want === 'rtl' && !document.querySelector('.staff-draft')) problems.push('no "Draft translation" line in a draft language');
+  // no English left on a Dari or Pashto page: words the page writes come from the string files (a label or a name
+  // an admin typed, dir="auto", and codes, dir="ltr", are hers to write)
+  if (want === 'rtl') {
+    const OK = new Set(['PIN', 'AI', 'PDF', 'QR', 'OK', 'Tanzil', 'QuranEnc', 'Qalam', 'Gemini', 'kbps', 'OpenAI', 'Claude',
+      'Anthropic', 'Google', 'Ollama']);           // names of things, not words
+    for (const el of document.querySelectorAll('main *, .amodal *')) {
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join(' ');
+      const words = (own.match(/[A-Za-z]{3,}/g) || []).filter((w) => !OK.has(w));
+      if (!words.length || !visible(el) || el.closest('[dir="ltr"], [dir="auto"], code, pre, .m, option, select, textarea')) continue;
+      problems.push(`English on a ${html.lang} page: ${label(el)} "${own.trim().slice(0, 40)}"`);
+    }
+  }
   return { problems, texts, lowest: Number(lowest.toFixed(2)) };
 }
 

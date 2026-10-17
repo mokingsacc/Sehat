@@ -68,11 +68,17 @@ async function api(path, { method = 'GET', body } = {}) {
   return data;
 }
 
+// the photo gate's problems in the reader's language (gate.<code>), the server's English only for a code this page
+// does not know yet
+const gateWhy = (g) => (Array.isArray(g.why) ? g.why.map((w, i) => (L.has('gate.' + w.code)
+  ? t('gate.' + w.code, { ...w, lang: w.lang ? L.word('lang', w.lang) : '', n: num(w.n), min: num(w.min), a: num(w.a), b: num(w.b) })
+  : g.problems[i])) : g.problems);
+
 // --- the frame: header, menu, gate ---
 
 function header() {
   return h('header', { class: 'top staff-top' },
-    h('div', { class: 'grow' }, h('h1', {}, t('title'))),
+    h('div', { class: 'grow' }, h('h1', {}, (document.title = t('title')))),
     h('span', { class: 'brk', 'aria-hidden': 'true' }),
     me.label ? h('span', { class: 'chip who', dir: 'auto' }, me.label) : null,
     L.picker(h, () => draw()),
@@ -184,7 +190,7 @@ async function drawCohorts() {
   let d;
   try { d = await api('/cohorts'); } catch (e) { return failed(e); }
   const row = (c) => h('tr', {},
-    h('td', {}, h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawCohort(c.id); } }, h('b', { dir: 'auto' }, c.label)),
+    h('td', {}, h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawCohort(c.id); } }, h('b', { dir: 'auto' }, L.cohort(c.label))),
       c.own ? h('small', { class: 'muted' }, comma() + t('own')) : null),
     h('td', {}, num(c.learners)), h('td', {}, bandList(c.bands)), h('td', {}, langList(c.langs)),
     h('td', {}, h('span', { class: 'tag' + (c.ai ? '' : ' bad') }, t(c.ai ? 'ai_on' : 'ai_off'))),
@@ -224,7 +230,7 @@ async function drawCohort(cid) {
   const kill = async (sw) => {
     const on = sw === 'ai' ? !c.ai : !c.day;
     const all = h('label', { class: 'row' }, h('input', { type: 'checkbox' }), t('all_cohorts'));
-    const q = t((on ? 'unkill_q_' : 'kill_q_') + sw, { c: c.label });
+    const q = t((on ? 'unkill_q_' : 'kill_q_') + sw, { c: L.cohort(c.label) });
     if (!(await ask(q, [], [[t('confirm'), true]], all))) return;
     try {
       await api(`/cohorts/${cid}/kill`, { method: 'POST', body: { switch: sw, on, all: all.querySelector('input').checked } });
@@ -256,7 +262,7 @@ async function drawCohort(cid) {
   frame(
     h('div', { class: 'stack-sm acrumb' },
       h('div', { class: 'row wrap' }, h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawCohorts(); } }, t('cohorts')),
-        h('span', { 'aria-hidden': 'true' }, L.rtl() ? '‹' : '›'), h('h2', { class: 'grow', dir: 'auto' }, c.label)),
+        h('span', { 'aria-hidden': 'true' }, L.rtl() ? '‹' : '›'), h('h2', { class: 'grow', dir: 'auto' }, L.cohort(c.label))),
       state('ai', c.ai), state('day', c.day)),
     h('p', { class: 'aclass' }, [t('learners', { n: num(c.learners) }), bandList(c.bands), langList(c.langs)].join(comma())),
     h('section', { class: 'card stack acode' }, h('b', {}, t('code_row')), h('p', { class: 'small' }, t('code_why')),
@@ -286,7 +292,7 @@ function moduleTable(c, again) {
         const lines = e.data.risks.map((x) => `${modName(x.id)} (${t('risk.' + x.risk)}): ${(x.capabilities || []).length
           ? x.capabilities.map((k) => t('cap.' + k, {}, x.sentence)).join(' ') : x.sentence}`);
         if (e.data.missing.length) lines.push(t('also', { x: L.and(e.data.missing.map(modName)) }));
-        const ok = await ask(t('turn_on_q', { m: modName(row.id), c: c.label }), lines,
+        const ok = await ask(t('turn_on_q', { m: modName(row.id), c: L.cohort(c.label) }), lines,
           [[e.data.missing.length ? t('turn_on_both') : t('turn_on'), true]]);
         if (!ok) return again();
         Object.assign(body, { confirm: true, both: true });
@@ -314,7 +320,7 @@ function moduleTable(c, again) {
     h('td', { class: 'mnote' }, h('small', { class: 'muted' }, note(row))));
   // open's recipe (C4.9): what the photo gate still waits for, or the budget rule once it is passed
   const gate = c.gate ? h('p', { class: 'muted' }, c.gate.open ? t('gate_open', { n: num(c.gate.tokens_per_mark) })
-    : [t('gate_wait'), ...c.gate.problems].join(' ')) : null;
+    : [t('gate_wait'), ...gateWhy(c.gate)].join(' ')) : null;
   return h('div', { class: 'atable amods' }, h('table', {}, h('thead', {}, h('tr', {},
     [t('module'), t('risk'), t('maturity'), t('years'), t('on'), t('settings'), ''].map((x) => h('th', {}, x)))),
   h('tbody', {}, c.modules.map(tr))), gate);
@@ -487,7 +493,7 @@ function timetablePage(c, draft) {
     }
   };
   frame(
-    h('div', { class: 'row wrap acrumb' }, h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawCohort(c.id); } }, c.label),
+    h('div', { class: 'row wrap acrumb' }, h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawCohort(c.id); } }, L.cohort(c.label)),
       h('span', {}, '›'), h('h2', { class: 'grow' }, t('school_day'))),
     h('section', { class: 'card stack' }, days, h('label', {}, t('tt_holidays')), hol, ramadan),
     tt.bands.map(band),
@@ -533,7 +539,7 @@ async function drawContent() {
   let w;
   try { [d, w] = await Promise.all([api('/content'), api('/wishes')]); } catch (e) { return failed(e); }
   const act = async (kind, p, c) => {
-    const q = t(kind === 'publish' ? 'publish_q' : 'rollback_q', { p: title(p.title, p.id), v: p.version, c: c.label });
+    const q = t(kind === 'publish' ? 'publish_q' : 'rollback_q', { p: title(p.title, p.id), v: p.version, c: L.cohort(c.label) });
     if (!(await ask(q, [], [[t(kind === 'publish' ? 'publish' : 'rollback'), true]], null, { safe: kind !== 'publish' }))) return;
     try {
       const r = await api(`/content/${encodeURIComponent(p.id)}/${kind}`, { method: 'POST', body: { cohort: c.id } });
@@ -548,8 +554,8 @@ async function drawContent() {
   // pack that can be published, and a published pack says where and when; a class with a release keeps its row
   const where = (p, c) => {
     const rel = p.releases[c.id];
-    if (!rel) return h('span', { class: 'muted' }, t('not_published', { c: c.label }));
-    return [h('span', {}, t(rel.current ? 'published_to' : 'older', { c: c.label, d: L.date(rel.at) })), ' ',
+    if (!rel) return h('span', { class: 'muted' }, t('not_published', { c: L.cohort(c.label) }));
+    return [h('span', {}, t(rel.current ? 'published_to' : 'older', { c: L.cohort(c.label), d: L.date(rel.at) })), ' ',
       h('small', { class: 'muted' }, t('version', { v: '' }).trim(), ' ', m(rel.version)), ' ', m(rel.short)];
   };
   const pack = (p) => {
@@ -598,7 +604,7 @@ async function drawSpend() {
     const top = Math.max(1, c.cap || 0, ...c.days.map((x) => x.tokens));
     const purposes = Object.entries(c.by_purpose).map(([k, n]) => `${L.word('admin.purpose', k)} ${num(n)}`).join(comma());
     return h('section', { class: 'card stack' },
-      h('div', { class: 'row wrap' }, h('h3', { class: 'grow', dir: 'auto' }, c.label),
+      h('div', { class: 'row wrap' }, h('h3', { class: 'grow', dir: 'auto' }, L.cohort(c.label)),
         c.today.warn ? h('span', { class: 'tag warm' }, t('of_cap', { p: L.pct(c.today.pct) })) : null,
         c.ai ? null : h('span', { class: 'tag bad' }, t('ai_off'))),
       h('div', { class: 'days14', role: 'img', 'aria-label': t('days14') }, c.days.map((x) => h('span', {
@@ -673,7 +679,7 @@ async function drawSafety() {
   let d;
   try { d = await api('/safety'); } catch (e) { return failed(e); }
   const sum = (c, k) => c.days.reduce((a, x) => a + x[k], 0);
-  const one = (c) => h('section', { class: 'card stack' }, h('h3', { dir: 'auto' }, c.label),
+  const one = (c) => h('section', { class: 'card stack' }, h('h3', { dir: 'auto' }, L.cohort(c.label)),
     // totals over 14 days with today's number beside each (C4 look question 31)
     h('div', { class: 'stats four' }, d.kinds.map((k) => h('div', { class: 'stat' }, h('b', {}, num(sum(c, k))),
       h('small', {}, L.join([t(k), t('today_n', { n: num((c.days[c.days.length - 1] || {})[k] || 0) })])))),
@@ -700,7 +706,7 @@ async function drawStaff() {
   const label = h('input', { class: 'ainput', maxlength: 40, autocomplete: 'off', 'aria-label': t('label') });
   const role = h('select', { 'aria-label': t('role') }, d.roles.map((r) => h('option', { value: r }, L.word('role', r))));
   const initials = h('input', { class: 'ainput', maxlength: 4, autocomplete: 'off', 'aria-label': t('initials'), dir: 'ltr' });
-  const cohorts = ticks(t('cohorts'), cs.cohorts.map((c) => c.id), [], (id) => cs.cohorts.find((c) => c.id === id).label);
+  const cohorts = ticks(t('cohorts'), cs.cohorts.map((c) => c.id), [], (id) => L.cohort(cs.cohorts.find((c) => c.id === id).label));
   const add = async (e) => {
     e.preventDefault();
     try {
@@ -712,7 +718,7 @@ async function drawStaff() {
     } catch (err) { email.value = ''; failed(err); }
   };
   // "No class yet" for a teacher without one, nothing for other roles; roles in words (C5.B3 item 6)
-  const classes = (s) => (s.cohorts.length ? s.cohorts.map((c) => c.label).join(comma())
+  const classes = (s) => (s.cohorts.length ? s.cohorts.map((c) => L.cohort(c.label)).join(comma())
     : s.role === 'teacher' ? h('span', { class: 'tag warm' }, t('no_class')) : '');
   frame(h('h2', {}, t('staff')),
     h('div', { class: 'atable' }, h('table', {}, h('tbody', {}, d.staff.map((s) => h('tr', {},
@@ -733,7 +739,7 @@ async function drawLog(cohort = '') {
   let cs;
   try { [d, cs] = await Promise.all([api('/log' + (cohort ? '?cohort=' + encodeURIComponent(cohort) : '')), api('/cohorts')]); } catch (e) { return failed(e); }
   const pick = h('select', { 'aria-label': t('cohorts'), onChange: (e) => drawLog(e.target.value) },
-    h('option', { value: '' }, t('every')), cs.cohorts.map((c) => h('option', { value: c.id, selected: c.id === cohort }, c.label)));
+    h('option', { value: '' }, t('every')), cs.cohorts.map((c) => h('option', { value: c.id, selected: c.id === cohort }, L.cohort(c.label))));
   frame(h('div', { class: 'row wrap' }, h('h2', { class: 'grow' }, t('log')), pick),
     d.log.length ? h('div', { class: 'atable' }, h('table', {}, h('thead', {}, h('tr', {}, [t('when'), t('h_label'), t('what'), t('detail'), t('who')]
       .map((x) => h('th', {}, x)))),

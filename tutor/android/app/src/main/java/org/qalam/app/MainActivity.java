@@ -1,5 +1,9 @@
 package org.qalam.app;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.regex.Pattern;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,6 +19,7 @@ import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintManager;
 import android.provider.Settings;
+import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
@@ -33,6 +38,7 @@ import android.window.OnBackInvokedCallback;
 import android.window.OnBackInvokedDispatcher;
 
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.FileProvider;
 import androidx.webkit.ServiceWorkerClientCompat;
 import androidx.webkit.ServiceWorkerControllerCompat;
 import androidx.webkit.WebViewAssetLoader;
@@ -50,6 +56,7 @@ import androidx.webkit.WebViewFeature;
  * page's explainer. Links to other sites, the sheet's print page and /get open in the phone's browser.
  */
 public class MainActivity extends Activity {
+    static final Pattern SHARE_NAME = Pattern.compile("qalam-voice-[a-z]{2,3}\\.qvoice");
     static final String HOST = "appassets.androidplatform.net";
     static final String START_URL = "https://" + HOST + "/index.html";
     private static final int REQ_CAMERA = 1;
@@ -376,6 +383,36 @@ public class MainActivity extends Activity {
                         .setMediaSize(PrintAttributes.MediaSize.ISO_A4.asLandscape()).build();
                 pm.print(t, web.createPrintDocumentAdapter(t), attrs);
             });
+        }
+
+        /** The voice pack (C5.6, the owner's note of 17 Oct): the page hands the kept file over, and the phone's share
+         *  sheet sends it (Bluetooth, Files, a messenger). Only a file named like a voice pack, written to this app's
+         *  cache and handed out read-only through the FileProvider; no permission is needed. */
+        @JavascriptInterface
+        public boolean shareFile(String name, String base64) {
+            if (name == null || base64 == null || !SHARE_NAME.matcher(name).matches()) return false;
+            try {
+                byte[] bytes = Base64.decode(base64, Base64.NO_WRAP);
+                if (bytes.length > 40 * 1024 * 1024) return false;
+                File dir = new File(getCacheDir(), "share");
+                if (!dir.isDirectory() && !dir.mkdirs()) return false;
+                File f = new File(dir, name);
+                try (FileOutputStream out = new FileOutputStream(f)) {
+                    out.write(bytes);
+                }
+                Uri u = FileProvider.getUriForFile(MainActivity.this, getPackageName() + ".share", f);
+                Intent send = new Intent(Intent.ACTION_SEND).setType("application/octet-stream")
+                        .putExtra(Intent.EXTRA_STREAM, u).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                runOnUiThread(() -> {
+                    try {
+                        startActivity(Intent.createChooser(send, null));
+                    } catch (ActivityNotFoundException ignored) {
+                    }
+                });
+                return true;
+            } catch (IOException | IllegalArgumentException e) {
+                return false;
+            }
         }
 
         /** The phone's settings page for Qalam (to allow the camera or notifications after a refusal). */

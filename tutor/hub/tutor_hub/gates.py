@@ -28,35 +28,48 @@ OFF_IN_OPEN = ("ask", "homework")
 
 def photo_open(cohorts: Path) -> tuple[list[str], dict]:
     """(why photo marking may not be switched on in `open` yet, the gate's numbers); no problems means it may."""
+    why, g = photo_open_why(cohorts)
+    return [w["text"] for w in why], g
+
+
+def photo_open_why(cohorts: Path) -> tuple[list[dict], dict]:
+    """The same, each problem as {code, text, ...its numbers}: the staff pages show `gate.<code>` in the reader's
+    language (C5.1), `text` is the English sentence for logs and refusals."""
     f = Path(cohorts) / PHOTO_OPEN
     try:
         g = json.loads(f.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        return ["the pilot's four numbers are not in yet (cohorts/gates/photo-open.json)"], {}
+        return [_w("missing", "the pilot's four numbers are not in yet (cohorts/gates/photo-open.json)")], {}
     except (OSError, ValueError) as e:
-        return [f"cohorts/gates/photo-open.json is not readable ({e})"], {}
+        return [_w("unreadable", f"cohorts/gates/photo-open.json is not readable ({e})")], {}
     if not isinstance(g, dict):
-        return ["cohorts/gates/photo-open.json is one JSON object"], {}
+        return [_w("not_object", "cohorts/gates/photo-open.json is one JSON object")], {}
     p = []
     fix = g.get("fix")
     if not isinstance(fix, dict) or not fix:
-        p.append("(1) fix: the Fix rate per language")
+        p.append(_w("fix", "(1) fix: the Fix rate per language"))
     else:
         for lang, x in fix.items():
             ok = isinstance(x, dict) and all(type(x.get(k)) is int and x[k] >= 0 for k in ("sheets", "cells", "fixed"))
             if not ok or not x["cells"]:
-                p.append(f"(1) fix.{lang}: sheets, cells and fixed as whole numbers")
+                p.append(_w("fix_numbers", f"(1) fix.{lang}: sheets, cells and fixed as whole numbers", lang=lang))
             elif x["sheets"] < SHEETS_MIN:
-                p.append(f"(1) {lang}: {x['sheets']} sheets, at least {SHEETS_MIN} needed")
+                p.append(_w("fix_sheets", f"(1) {lang}: {x['sheets']} sheets, at least {SHEETS_MIN} needed",
+                            lang=lang, n=x["sheets"], min=SHEETS_MIN))
             elif x["fixed"] / x["cells"] >= FIX_MAX:
-                p.append(f"(1) {lang}: Fix on {x['fixed']} of {x['cells']} cells, fewer than 1 in 10 needed")
+                p.append(_w("fix_rate", f"(1) {lang}: Fix on {x['fixed']} of {x['cells']} cells, fewer than 1 in 10 needed",
+                            lang=lang, a=x["fixed"], b=x["cells"]))
     if g.get("leaks") != 0:
-        p.append("(2) leaks: no leaked answer in any rung a teacher saw (0)")
+        p.append(_w("leaks", "(2) leaks: no leaked answer in any rung a teacher saw (0)"))
     if type(g.get("tokens_per_mark")) is not int or g["tokens_per_mark"] <= 0:
-        p.append("(3) tokens_per_mark: the tokens one mark costs, measured")
+        p.append(_w("tokens", "(3) tokens_per_mark: the tokens one mark costs, measured"))
     if not isinstance(g.get("d7"), str) or not g["d7"].strip():
-        p.append("(4) d7: D7's decision")
+        p.append(_w("d7", "(4) d7: D7's decision"))
     return p, g
+
+
+def _w(code: str, text: str, **numbers) -> dict:
+    return {"code": code, "text": text, **numbers}
 
 
 def budget(tokens_per_mark: int, marks_a_day: int) -> int:

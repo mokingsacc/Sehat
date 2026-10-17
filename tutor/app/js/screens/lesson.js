@@ -32,7 +32,7 @@ import { TONE_PATH, words as pinyinWords } from '../pinyin.js';
 import * as made from '../modules/made.js';
 import * as recall from '../modules/recall.js';
 import * as Q from '../quran.js';
-import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
+import { addVoices, canRecord, hasClip, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, playIcon, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
 
@@ -62,6 +62,7 @@ export default async function lesson(args) {
       h('div', { class: 'empty' }, hub.online() ? s('no_lessons') : hub.home() === 'online' ? s('lesson_not_here') : s('offline'))),
     tab: 'lessons' };
   }
+  addVoices(L.voices, hub.url);                 // every line of the lesson in the one voice (C5.6)
   const lang = getLang();
   const steps = L.steps;
   const band = state.band(c);
@@ -123,7 +124,8 @@ export default async function lesson(args) {
   // the step's recorded clip, when the pack has one (placeholders only for testers)
   const clipIn = (st, l) => { const u = packClip((st.audio || {})[l]); return u ? hub.url(u) : null; };
   const stepClip = (st) => clipIn(st, stepLang(st));
-  const canSay = (st) => !!stepClip(st) || (!recordedOnly && hasVoice(stepLang(st)));
+  const canSay = (st) => !!stepClip(st) || hasClip(wordFirst(st) ? target(st).text : mainText(st), stepLang(st))
+    || (!recordedOnly && hasVoice(stepLang(st)));
   // the taught word's recording, never the phone's voice
   const sayWord = (st) => { const t = target(st); if (t) speak(t.text, t.lang, { audio: clipIn(st, t.lang), recorded: true }); };
   function pageSpeak() {

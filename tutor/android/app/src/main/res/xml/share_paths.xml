@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- the one folder the FileProvider hands out: the voice pack being shared (MainActivity.Bridge.shareFile) -->
+<paths>
+    <cache-path name="share" path="share/" />
+</paths>

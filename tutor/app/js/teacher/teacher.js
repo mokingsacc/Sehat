@@ -72,10 +72,10 @@ async function api(path, { method = 'GET', body, raw = false } = {}) {
 function header() {
   const pick = me.cohorts.length > 1
     ? h('select', { class: 'who', 'aria-label': t('class_of'), onChange: (e) => { me.cohort = e.target.value; start(); } },
-      me.cohorts.map((c) => h('option', { value: c.id, selected: c.id === me.cohort }, c.label)))
-    : me.cohorts.length ? h('span', { class: 'chip who', dir: 'auto' }, me.cohorts[0].label) : null;
+      me.cohorts.map((c) => h('option', { value: c.id, selected: c.id === me.cohort }, L.cohort(c.label))))
+    : me.cohorts.length ? h('span', { class: 'chip who', dir: 'auto' }, L.cohort(me.cohorts[0].label)) : null;
   return h('header', { class: 'top staff-top' },
-    h('div', { class: 'grow' }, h('h1', {}, t('title'))),
+    h('div', { class: 'grow' }, h('h1', {}, (document.title = t('title')))),
     me.via ? h('button', { type: 'button', class: 'chip signout', onClick: signOut }, t('sign_out')) : null,
     h('span', { class: 'brk', 'aria-hidden': 'true' }), pick,
     L.picker(h, () => (me.via ? draw() : pinGate(''))));

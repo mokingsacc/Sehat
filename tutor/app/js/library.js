@@ -3,6 +3,7 @@
 
 import { bandOfYear } from './bands.js';
 import * as hub from './hub.js';
+import { addVoices } from './speech.js';
 
 // the child's own language is learnt first, then the other subjects
 const ORDER = {
@@ -19,6 +20,7 @@ let loading = null;
 export function load(refresh = false) {
   if (!loading || refresh) {
     loading = hub.packs().then((packs) => {
+      for (const p of packs) addVoices(p.voices, hub.url);        // the titles' clips, in the one voice (C5.6)
       list = packs.flatMap((p) => p.lessons.map((l) => ({ ...l, pack: p.id, audience: p.audience || 'child',
         ...(p.audience === 'adult' || (p.bands || []).includes('ad')
           ? { tracks: Array.isArray(p.tracks) && p.tracks.length ? p.tracks : ['reader'] } : {}),

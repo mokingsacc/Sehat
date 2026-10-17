@@ -3,7 +3,8 @@
 // not your name"; never sent), Consent (what was agreed, and "Stop sharing", behind her PIN), the modules'
 // `settings.row` offers, "Update Qalam" in the Android app when a newer one is out (P23), Credits, About (with "Get
 // the Android app" in an Android phone's browser only), and "Remove this learner from this phone" (behind her PIN, with a spoken
-// confirmation). #/settings/<action> is that confirmation, after #/lock/check/<action> (or straight away when she
+// confirmation), and Voice (C5.6): the voice pack of her language on this phone: get it, share it, open one shared
+// to her. #/settings/<action> is that confirmation, after #/lock/check/<action> (or straight away when she
 // has no lock).
 
 import * as account from '../account.js';
@@ -14,6 +15,7 @@ import * as hub from '../hub.js';
 import * as lock from '../lock.js';
 import * as modules from '../modules.js';
 import { hasVoice, speak } from '../speech.js';
+import * as voicepack from '../voicepack.js';
 import * as state from '../state.js';
 import { fill, h, icon, said, speakerBtn, toast, topbar } from '../ui.js';
 import { checked } from './lock.js';
@@ -56,6 +58,39 @@ function confirm(c, action) {
       said(h('button', { type: 'button', class: 'btn danger big', onClick: yes },
         icon(action === 'remove' ? 'trash' : 'stop', 24), s(action === 'remove' ? 'remove_yes' : 'stop_sharing'))),
       said(h('a', { class: 'btn', href: '#/settings' }, s('cancel'))))), tab: null };
+}
+
+// Voice: the pack of her language on this phone (voicepack.js); the Android app carries no audio
+function voiceRow(lang) {
+  const note = h('small', {}, s('voice_none'));
+  const status = h('p', { class: 'muted small', role: 'status', 'aria-live': 'polite' });
+  const share = said(h('button', { type: 'button', class: 'btn', onClick: () => voicepack.share(lang) }, icon('download', 22), s('voice_share')));
+  share.classList.add('hidden');
+  const pick = h('input', { type: 'file', class: 'hidden', accept: '.qvoice,application/octet-stream',
+    onChange: async (e) => {
+      try { const head = await voicepack.openFile(e.target.files[0]); status.textContent = s('voice_done'); if (head.lang === lang) show(head); }
+      catch { status.textContent = s('voice_bad_file'); }
+      e.target.value = '';
+    } });
+  const get = h('button', { type: 'button', class: 'btn primary', onClick: async () => {
+    get.disabled = true;
+    status.textContent = s('voice_getting');
+    try { show(await voicepack.download(lang, (p) => { status.textContent = `${s('voice_getting')} ${fa(Math.round(p * 100))}%`; })); status.textContent = s('voice_done'); }
+    catch { status.textContent = s('voice_failed'); }
+    get.disabled = false;
+  } }, icon('download', 22), s('voice_download'));
+  function show(head) {
+    note.textContent = s('voice_kept', { mb: fa((head.bytes / 1e6).toFixed(1)) });
+    share.classList.remove('hidden');
+  }
+  voicepack.kept(lang).then((head) => { if (head) show(head); });
+  const box = h('section', { class: 'card lined set-row' },
+    h('div', { class: 'row' }, h('div', { class: 'grow' }, h('b', {}, s('voice_title')), note),
+      speakerBtn(() => speak([s('voice_title'), note.textContent].join('. '), getLang()), { size: 'sm' })),
+    h('div', { class: 'row wrap' }, said(get), share,
+      said(h('button', { type: 'button', class: 'btn', onClick: () => pick.click() }, icon('file', 22), s('voice_open'))), pick),
+    status);
+  return box;
 }
 
 export default function settings([action]) {
@@ -103,6 +138,7 @@ export default function settings([action]) {
         section(s('sharing'), consentNote,
           l.consent ? said(h('a', { class: 'btn', href: '#/settings/stop' }, icon('stop', 22), s('stop_sharing')))
             : said(h('a', { class: 'btn', href: '#/consent/settings' }, icon('file', 22), s('give_consent')))),
+        voiceRow(l.lang),
         offers,
         apk === 'update' && getApp ? section(s('update_app'), s('update_note'),
           said(h('a', { class: 'btn primary', href: getApp }, icon('download', 22), s('download')))) : null,

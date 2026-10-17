@@ -8,14 +8,18 @@
                                               recorded clips stay out: the hub knows them by their manifest.json)
     build/src/content/sources.json            the licence classes (licences.py), and permissions/ for ASK sources
     build/src/content/{aliases.json,consent/} the alias pictures and the consent texts (learners.py)
+    build/src/content/voice.json              the one voice per language and its native listener's gate (C5.6)
     build/src/content/quran/light.json        the Quran set as checked here (P29): its hash and state, the surah list
                                               and credits, the hashes of the verses lessons name; never the text
-    build/public/                             the phone app (app/, without its tests), and the lesson pictures and clips
+    build/public/                             the phone app (app/, without its tests, with its voice clips: app/audio,
+                                              C5.6; a release build only a language whose native listener passed),
+                                              and the lesson pictures and clips
                                               at /packs/<pack>/pictures/<file> and /packs/<pack>/audio/<lang>/<file>,
                                               the addresses the hub gives them; and the Quran set as the hub serves it,
                                               /quran/index.json, /quran/surah/<n>.json and the recitation files fetched
                                               here (/quran/audio/<edition>/<s>_<a>.mp3), only where the build is not for
                                               release or a Hanafi scholar has signed the set (C4.7)
+    build/public/audio/<lang>/voice.qvoice    each language's voice pack: every clip of it in one file (C5.6)
     build/public/_headers                     security headers for the static files (C5 M2; HEADERS below): Workers
                                               static assets read it and do not serve it
 
@@ -68,14 +72,62 @@ def build(out: Path = BUILD, config: Path | None = None) -> dict:
                         ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Store", *AUDIO))
     shutil.copy2(TUTOR / "content" / "sources.json", src / "content" / "sources.json")
     shutil.copy2(TUTOR / "content" / "aliases.json", src / "content" / "aliases.json")
+    shutil.copy2(TUTOR / "content" / "voice.json", src / "content" / "voice.json")
     shutil.copytree(TUTOR / "app", public, ignore=shutil.ignore_patterns("tests", "__pycache__", ".DS_Store"))
     for pictures in sorted((TUTOR / "content" / "packs").glob("*/pictures")):
         shutil.copytree(pictures, public / "packs" / pictures.parent.name / "pictures", ignore=SKIP)
     for audio in sorted((TUTOR / "content" / "packs").glob("*/audio")):
         shutil.copytree(audio, public / "packs" / audio.parent.name / "audio", ignore=SKIP)
-    quran_set(src, public, release=str(settings.get("TUTOR_RELEASE", "")) == "1")
+    release = str(settings.get("TUTOR_RELEASE", "")) == "1"
+    if release:
+        voice_gate(public)
+    voice_packs(public)
+    quran_set(src, public, release=release)
     (public / "_headers").write_text(HEADERS, encoding="utf-8")
     return {name: sum(f.stat().st_size for f in (out / name).rglob("*") if f.is_file()) for name in ("src", "public")}
+
+
+def voice_gate(public: Path) -> None:
+    """C5.6, the chair's gate: a release build serves a language's Gemini clips only once its native listener has
+    passed the sample (content/voice.json). Until then that language's clips are left out, and the app reads with
+    the phone's voice or shows the words, as before."""
+    sys.path.insert(0, str(TUTOR / "hub"))
+    from tutor_hub import voicing
+    ok = voicing.passed(TUTOR / "content")
+    for d in sorted((public / "audio").glob("*/record.json")):
+        lang = d.parent.name
+        if lang in ok:
+            continue
+        for f in d.parent.glob("*.opus"):
+            f.unlink()
+        m = json.loads((d.parent / "manifest.json").read_text(encoding="utf-8"))
+        (d.parent / "manifest.json").write_text(json.dumps({**m, "clips": {}}), encoding="utf-8")
+        d.unlink()
+        print(f"voice: {lang} waits for its native listener (content/voice.json): its clips are left out")
+    for m in sorted((public / "packs").glob("*/audio/*/manifest.json")):
+        if m.parent.name in ok:
+            continue
+        clips = json.loads(m.read_text(encoding="utf-8")).get("clips", {})
+        for c in clips.values():
+            if voicing.generated(c):
+                (m.parent / c["file"]).unlink(missing_ok=True)
+
+
+def voice_packs(public: Path) -> None:
+    """One file per language with every clip of it (C5.6, the owner's note of 17 Oct): what the Android app, which
+    carries no audio, downloads for her language and can share; the hub makes the same file on request."""
+    sys.path.insert(0, str(TUTOR / "hub"))
+    from tutor_hub import voicing
+    for lang in voicing.LANGS:
+        d = public / "audio" / lang
+        packs = []
+        for m in sorted((public / "packs").glob(f"*/audio/{lang}/manifest.json")):
+            packs.append((m.parent, json.loads(m.read_text(encoding="utf-8")).get("clips", {})))
+        blob = voicing.voice_pack(lang, public / "audio", packs)
+        if blob:
+            d.mkdir(parents=True, exist_ok=True)
+            (d / "voice.qvoice").write_bytes(blob)
+            print(f"voice pack {lang}: {len(blob) / 1e6:.2f} MB")
 
 
 def quran_set(src: Path, public: Path, *, release: bool) -> None:

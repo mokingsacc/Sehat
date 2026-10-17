@@ -15,7 +15,7 @@ import re
 from datetime import date
 from pathlib import Path
 
-from . import licences, mathcheck
+from . import licences, mathcheck, voicing
 
 log = logging.getLogger("tutor.packs")
 
@@ -125,10 +125,14 @@ def read_clips(pack_dir: Path) -> dict:
 
 
 def check_clips(clips: dict, where: str) -> list[str]:
-    """A clip manifest: every clip a file, who recorded it (a code, never a name), when, and whether it is only a
-    placeholder. No clip is ever made by a speech synthesiser."""
+    """A clip manifest: every clip a file, who recorded it (a code, never a name) or, for a clip tools/voice.py made
+    (C5.6), the one voice it was made with, and whether it is only a placeholder. One voice per language: every
+    generated clip of a language names the same voice."""
     p = []
     for lang, entries in clips.items():
+        made_with = {c.get("voice") for c in entries.values() if voicing.generated(c)}
+        if len(made_with) > 1:
+            p.append(f"{where} audio/{lang}: one voice per language, not {', '.join(sorted(map(str, made_with)))}")
         for name, c in entries.items():
             w = f"{where} audio/{lang}/{name}"
             if not _CLIP.match(str(name)) or not isinstance(c, dict):
@@ -136,12 +140,15 @@ def check_clips(clips: dict, where: str) -> list[str]:
                 continue
             if not isinstance(c.get("file"), str) or Path(c["file"]).suffix not in AUDIO_EXT or "/" in c["file"]:
                 p.append(f"{w}: file must be a {', '.join(AUDIO_EXT)} file in audio/{lang}/")
-            if not isinstance(c.get("speaker"), str) or not c["speaker"].strip():
+            if voicing.generated(c):
+                if not isinstance(c.get("voice"), str) or not c["voice"].strip():
+                    p.append(f"{w}: a generated clip names its voice")
+            elif not isinstance(c.get("speaker"), str) or not c["speaker"].strip():
                 p.append(f"{w}: speaker missing (who recorded it, as a code such as prs-01)")
             if not isinstance(c.get("placeholder"), bool):
                 p.append(f"{w}: placeholder must be true or false")
             if c.get("synthetic", False) is not False:
-                p.append(f"{w}: no synthetic voice, ever: clips are recordings by native speakers")
+                p.append(f"{w}: a made clip says generated: true and its voice (tools/voice.py), not synthetic")
             if not isinstance(c.get("sha256"), str) or not c["sha256"].startswith("sha256:"):
                 p.append(f"{w}: sha256 of the file missing")
     return p
@@ -434,6 +441,11 @@ def content_hash(item: dict, pack_dir: Path, clips: dict | None = None, qset=Non
             for v in o:
                 walk(v)
     walk(body)
+    if isinstance(body.get("steps"), list):      # the clips tools/voice.py made for its words (C5.6)
+        for al, t in voicing.lesson_texts(body, ("prs", "ps")):
+            c = clips.get(al, {}).get(voicing.clip_name(t))
+            if voicing.generated(c):
+                media[f"voice/{al}/{voicing.text_hash(t)}"] = c.get("sha256")
     blob = json.dumps({"content": body, "media": media}, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return licences.sha256_text(blob)
 
@@ -575,20 +587,29 @@ def release_problems(lesson: dict, state: str, pack: dict, clips: dict, qset=Non
         if not (young or st.get("kind") == "letter"):
             continue
         for al in [x for x in pack.get("langs", ["prs", "ps"]) if x in ("prs", "ps")]:
-            clip = (st.get("audio") or {}).get(al)
-            entry = clips.get(al, {}).get(clip) if clip else None
+            entry = step_clip(st, al, clips)
             if not entry:
-                p.append(f"{lid} step {i}: needs a recorded {al} clip before release (no synthetic voice)")
+                p.append(f"{lid} step {i}: needs a recorded {al} clip before release (or one voiced by tools/voice.py)")
             elif entry.get("placeholder"):
                 p.append(f"{lid} step {i}: the {al} clip is a placeholder, not a recording")
     for i, al in studied_clip_steps(lesson):
-        st = lesson["steps"][i - 1]
-        clip = (st.get("audio") or {}).get(al)
-        entry = clips.get(al, {}).get(clip) if clip else None
+        entry = step_clip(lesson["steps"][i - 1], al, clips)
         who = "a human English speaker" if al == "en" else "a native Mandarin speaker"
         if not entry or entry.get("placeholder"):
-            p.append(f"{lid} step {i}: needs its words recorded by {who} ({al}) before release")
+            p.append(f"{lid} step {i}: needs its words recorded by {who} ({al}) before release, or voiced by "
+                     "tools/voice.py")
     return p
+
+
+def step_clip(st: dict, al: str, clips: dict):
+    """The clip that meets the release rule for a step in a language: the step's own recorded clip, else the clips
+    tools/voice.py made for every line the step reads (C5.6: a generated clip meets the rule), else None."""
+    clip = (st.get("audio") or {}).get(al)
+    if clip:
+        return clips.get(al, {}).get(clip)
+    lines = voicing.step_lines(st, al)
+    made = [clips.get(al, {}).get(voicing.clip_name(t)) for t in lines]
+    return made[0] if lines and all(voicing.generated(c) for c in made) else None
 
 
 def clips_needed(lib) -> list[dict]:
@@ -604,7 +625,7 @@ def clips_needed(lib) -> list[dict]:
                     for al in pack.get("langs", ["prs", "ps"]) if al in ("prs", "ps")] + studied_clip_steps(l)
             for i, al in want:
                 st = l["steps"][i - 1]
-                entry = clips.get(al, {}).get((st.get("audio") or {}).get(al))
+                entry = step_clip(st, al, clips)
                 if entry and not entry.get("placeholder"):
                     continue
                 words = st.get("english") if al == "en" else st.get("zh") if al == "zh" else \
@@ -632,6 +653,8 @@ class Library:
     def __init__(self, packs_dir, *, release: bool = False, sources=None, quran=None):
         self.dir = Path(packs_dir)
         self.release = release
+        # C5.6: in a release build a language's generated clips wait for its native listener (content/voice.json)
+        self.voices_passed = voicing.passed(self.dir.parent) if release else set(voicing.LANGS)
         self.sources = sources if isinstance(sources, licences.Sources) else \
             licences.Sources(Path(sources) if sources else _sources_file(self.dir))
         # the Quran set (P29) beside the packs folder, unless another is given; an `ayah` step names its verses
@@ -721,7 +744,7 @@ class Library:
                 self.known[lid] = {"band": lesson_bands(lesson, pack)[0], "bands": lesson_bands(lesson, pack),
                                    "sheet": bool(lesson.get("sheet"))}
                 if self.release:
-                    why = release_problems(lesson, state, pack, clips, self.quran)
+                    why = release_problems(lesson, state, pack, self.gate(clips), self.quran)
                     if why:
                         self.hidden.extend(f"{pid}/{x}" for x in why)
                         continue
@@ -854,6 +877,25 @@ class Library:
             return
         self.checklists[pid] = {**cl, "_pack": pid, "_hash": chash, "_state": state, "_file": f}
 
+    def served_clips(self, pid: str) -> dict:
+        """A pack's clips as learners get them: in a release build, without the generated clips of a language whose
+        native listener has not passed the sample (C5.6)."""
+        return self.gate(self.packs[pid].get("_clips", {}))
+
+    def gate(self, clips: dict) -> dict:
+        return {al: {n: c for n, c in entries.items() if not voicing.generated(c) or al in self.voices_passed}
+                for al, entries in clips.items()}
+
+    def voices_for(self, pid: str, texts) -> dict:
+        """{lang: {text hash: URL}} for the generated clips of these (lang, text) pairs: how the app finds the clip
+        for a lesson's words, its options and its notes (app/js/speech.js addVoices)."""
+        clips, out = self.served_clips(pid), {}
+        for al, t in texts:
+            c = clips.get(al, {}).get(voicing.clip_name(t))
+            if voicing.generated(c):
+                out.setdefault(al, {})[voicing.text_hash(t)] = f"/packs/{pid}/audio/{al}/{c['file']}"
+        return out
+
     def card_set(self, pid: str) -> list[dict]:
         """A pack's card set as reviewers sign it (P28): its checklist, if any, then its link cards in order."""
         cl = self.checklists.get(pid)
@@ -901,7 +943,12 @@ class Library:
                                 "seeded": any(it.get("kind") == "generate" for it in (l.get("sheet") or {}).get("items", [])),
                                 "review": "checked" if self.states[lid] == "signed" else "draft",
                                 "draft": self.states[lid] != "signed"})
+            langs = [x for x in pack.get("langs", ["prs", "ps"]) if x in voicing.LANGS]
+            voices = self.voices_for(pid, voicing.field_texts(pack.get("title"), langs) + [
+                x for lid in pack["lessons"] for f in ("title", "unit")
+                for x in voicing.field_texts(self.lessons[lid].get(f), langs)])
             out.append({"id": pid, "title": pack.get("title"), "version": pack.get("version"),
+                        **({"voices": voices} if voices else {}),
                         "langs": pack.get("langs", []), "audience": pack.get("audience", "child"),
                         **({"tracks": tracks_of(pack)} if tracks_of(pack) else {}),
                         **({"bands": pack["bands"]} if pack.get("bands") else {}),
@@ -925,7 +972,7 @@ class Library:
             return None
         pid = self.lesson_pack[lesson_id]
         pdir = self.packs[pid]["_dir"]
-        clips = self.packs[pid].get("_clips", {})
+        clips = self.served_clips(pid)
 
         def url(name):
             f = picture_file(pdir, name) if name else None
@@ -943,6 +990,10 @@ class Library:
                                    "placeholder": bool(clips[al][c].get("placeholder"))}
                               for al, c in s["audio"].items() if c in clips.get(al, {})}
         out.pop("_bold", None)
+        langs = [x for x in self.packs[pid].get("langs", ["prs", "ps"]) if x in voicing.LANGS]
+        voices = self.voices_for(pid, voicing.lesson_texts(l, langs))
+        if voices:
+            out["voices"] = voices
         out["pack"] = pid
         out["draft"] = self.states[lesson_id] != "signed"
         out["credits"] = self.credits_for(lesson_id)

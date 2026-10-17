@@ -8,10 +8,12 @@ unpermitted ASK source, a no_ai source, or non-commercial material outside a pac
 so does a link card holding anything but our own short description.
 
 --release also refuses any lesson or link card its reviewers have not signed (each role in review.needs signing
-the current content hash), and lessons for the youngest learners without recorded clips (no synthetic voice).
+the current content hash), and lessons for the youngest learners without clips (recorded, or voiced by
+tools/voice.py: C5.6; in --release a language's voiced clips count only once content/voice.json says its native
+listener passed the sample).
 --hashes prints each lesson's and link card's content hash, which is what a reviewer signs.
 --clips prints the recording job (P27a): each clip release would want and the packs lack, with the words to say, as
-tab-separated lines for the recorders (pack, lesson, step, language, words). Recordings only: no synthetic voice.
+tab-separated lines (pack, lesson, step, language, words): since C5.6 mostly a list for tools/voice.py to fill.
 
 The skills graphs (content/graph/<subject>.json, P25a) are checked too, against the lessons that loaded (graph.py):
 --release refuses one its reviewers have not signed, and --hashes prints each graph's hash as graph:<subject>.
