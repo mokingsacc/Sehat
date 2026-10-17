@@ -53,3 +53,12 @@ test("the site's worker (site/js/sw.js) replaces the old root worker without dow
   // the app's addresses go to the network; staff pages, /get/, /v/ and the API are never touched
   assert.match(site, /NOT_SITE = \/\^\\\/\(app\|api\|teacher\|admin\|review\|get\|v\|packs\|quran\|audio\|fonts\)/);
 });
+
+test('since the move (W2) every sound is asked for at the root, never under /app/', () => {
+  const files = (dir) => readdirSync(new URL(dir, APP), { withFileTypes: true })
+    .flatMap((d) => (d.isDirectory() ? files(`${dir}${d.name}/`) : d.name.endsWith('.js') ? [dir + d.name] : []));
+  for (const f of files('js/')) {
+    const src = readFileSync(new URL(f, APP), 'utf8');
+    assert.doesNotMatch(src, /['"`]audio\/(?!webm|ogg|mpeg|wav|mp4)/, f);         // 'audio/bells/…' would be /app/audio/…
+  }
+});

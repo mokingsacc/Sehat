@@ -36,7 +36,7 @@ import { fill, h, icon, playIcon, plain, said, speakerBtn, subjectBadge, toast }
 import { aiFor } from './homework.js';
 import { canPlan, left } from './plan.js';
 
-const BELLS = { start: 'audio/bells/start.opus', break: 'audio/bells/break.opus', end: 'audio/bells/end.opus' };
+const BELLS = { start: '/audio/bells/start.opus', break: '/audio/bells/break.opus', end: '/audio/bells/end.opus' };   // at the root (W2)
 const REFRESH_MS = 30 * 60e3;          // the timetable is read again at most every half hour while online
 const BLOCK_ICON = { opening: 'bell', break: 'cup', sheet: 'file', close: 'bell', live: 'live' };
 const EVENT = 'qalam-day';             // the day moved on, or her day settings changed: Home redraws
