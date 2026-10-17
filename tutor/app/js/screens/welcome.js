@@ -5,12 +5,15 @@
 // on through the sign-up steps (signup.js) to Home. With a class code (?join=CODE, or typed) the kicker says "Class
 // code found" and the steps are consent, then the lock offer.
 // Also #/welcome/edit, to change the year, door or language of the learner using the phone.
+// W7: "I already use Qalam" (#/move) at the foot; a learner who comes back from it with a bag not found yet keeps its
+// code, so her work joins her when a relay has it.
 
 import { dir, fa, getLang, htmlLang, s, setLang } from '../i18n.js';
 import * as modules from '../modules.js';
 import { hasVoice, speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, said, speakerBtn, topbar } from '../ui.js';
+import { pendingBag } from './move.js';
 import * as signup from './signup.js';
 
 const LANG_NAMES = [['prs', 'دری'], ['ps', 'پښتو'], ['en', 'English']];
@@ -28,8 +31,10 @@ export default function welcome([mode]) {
       location.hash = '#/home';
       return;
     }
-    state.addChild({ ...learner, lang, code });
+    const c = state.addChild({ ...learner, lang, code });
     signup.pendingCode(null);
+    const bag = pendingBag(true);
+    if (bag) state.updateChild(c.id, { bag: { code: bag.code, ...bag.k } });
     location.hash = signup.next('', 'home');
   }
 
@@ -45,7 +50,8 @@ export default function welcome([mode]) {
       onClick: () => pick({ year: y }) }, fa(y));
     fill(root,
       topbar({ back: state.children().length ? '#/who' : null,
-        sub: editing ? s('change_year') : code ? s('code_found') : s('welcome_kicker'), title: s('welcome_title') }),
+        sub: editing ? s('change_year') : code ? s('code_found') : pendingBag() ? s('move_kicker') : s('welcome_kicker'),
+        title: s('welcome_title') }),
       h('div', { class: 'langs', role: 'group', 'aria-label': s('language') },
         LANG_NAMES.map(([c, label]) => h('button', { type: 'button', class: c === lang ? 'on' : '', lang: htmlLang(c),
           'aria-pressed': c === lang ? 'true' : 'false', onClick: () => { lang = c; draw(); } }, label))),
@@ -66,6 +72,8 @@ export default function welcome([mode]) {
       editing ? null : h('div', { class: 'foot' },
         h('div', { class: 'row' }, h('a', { class: 'link grow', href: '#/signup/code' }, icon('card', 20), s('have_code')),
           speakerBtn(say(s('have_code')), { size: 'sm' })),
+        pendingBag() ? null : h('div', { class: 'row' }, h('a', { class: 'link grow', href: '#/move' }, icon('bag', 20), s('move_title')),
+          speakerBtn(say(s('move_title')), { size: 'sm' })),
         modules.on('teacher') ? h('a', { class: 'link teacher-link', href: '/teacher/' }, icon('lock', 20), s('teacher')) : null),
     );
   }

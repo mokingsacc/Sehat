@@ -237,6 +237,12 @@ export function merge(token, other) {
   return call('/api/me/merge', { method: 'POST', body: { other }, token, ms: 15000 });
 }
 export const newToken = (token) => call('/api/me/token', { method: 'POST', token, ms: 15000 });
+// W7: the school bag's relay (WEBSITE.md 3.7). Its keys travel only in the body; a pull needs no token (a new phone
+// has none yet), and sends hers when this server issued one, so the limits count her and not the address
+export const relays = () => !!(hello && hello.bag && /^[0-9a-f]{20}$/.test(sid || ''));
+export const bagGet = (body, token = null) => call('/api/bag/get', { method: 'POST', body, token, ms: 20000 });
+export const bagPut = (body, token) => call('/api/bag/put', { method: 'POST', body, token, ms: 30000 });
+export const bagDelete = (body, token) => call('/api/bag/delete', { method: 'POST', body, token, ms: 15000 });
 // her own question sent for her teacher's check (P32), and the verdicts on hers
 export const madeSend = (body, token) => call('/api/m/made', { method: 'POST', body, token, ms: 15000 });
 export const madeMine = (token) => call('/api/m/made/mine', { token, ms: 15000 });

@@ -28,7 +28,7 @@ export function waiting(c = state.child()) {
   if (account.needsJoin(c)) out.push('wait_join');
   else if (c.token && c.consent && !c.consent.sent) out.push('wait_consent');
   for (const a of c.asks) {
-    if (a.queued) out.push('wait_question');
+    if (a.queued && state.mine(a)) out.push('wait_question');     // one queued on her other phone waits there (W7)
     else if (a.teacherQueued) out.push('wait_teacher');
   }
   return out;

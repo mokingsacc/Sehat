@@ -9,7 +9,11 @@
 // Since W4 (WEBSITE.md 3.3 and 3.11) all of this is per seat, for the server in reach only: a learner from before W4
 // has her token placed under that server's id first (tried only at the address she last used; a 401 means she joins
 // again), a 401 drops only that server's token, and two tokens of hers for one server are merged (/api/me/merge).
+// Since W7 (3.10 and 3.13) a learner with a school bag is asked about it before a seat joins again: a bag stopped
+// on another phone (her consent withdrawn, or a new code made there) keeps her seats from joining on their own; and
+// "Make a new code" gives each seat a new token at its next contact (/api/me/token), so a lost phone's token dies.
 
+import * as bagsync from './bagsync.js';
 import * as events from './events.js';
 import * as hub from './hub.js';
 import { latin } from './numbers.js';
@@ -95,6 +99,9 @@ async function one(id, sid) {
   let l = state.byId(id);
   if (!l || hub.id() !== sid) return;
   if (needsJoin(l)) {
+    if (l.bag && (await bagsync.check(id)) === 'stopped') return;     // she types her new code first (Settings)
+    l = state.byId(id);
+    if (!l || !needsJoin(l) || hub.id() !== sid) return;
     const c = l.consent;
     const body = { band: l.band, lang: l.lang, picture: l.picture };
     if (l.code) body.cohort_code = l.code;
@@ -112,6 +119,12 @@ async function one(id, sid) {
   }
   if (!l.token) return;
   try {
+    const seat = l.seats[sid];
+    if (seat && seat.renew && seat.token === l.token) {
+      const j = await hub.newToken(l.token);                // the old token dies on the server
+      state.setSeat(id, sid, { token: j.token, renew: false });
+      l = state.byId(id);
+    }
     if (l.consent && !l.consent.sent) {
       const c = l.consent;
       await hub.meUpdate(l.token, { consent: { kind: c.kind, version: c.version, at: c.at } });
@@ -174,18 +187,33 @@ export function agree(id, version) {
 // "Stop sharing": the consent goes, her server record is deleted (now, or when the server is next in reach), her
 // queued events are dropped, and she stays on this phone to learn as before
 // "Stop sharing" ends every seat: each server deletes her record when it is next in reach
+// Her school bag goes with it (3.8): a tombstone on the relay in reach now, on the others with her record there; and
+// this phone forgets its code, so a bag made after a new agreement has a new one.
 export function stopSharing(id) {
   const l = state.byId(id);
   if (!l) return null;
+  if (l.bag) {
+    bagsync.dropHere(id);                                  // reads her token before the seats are cleared below
+    state.updateChild(id, { bag: null });
+    bagsync.forget(id);
+  }
   state.clearSeats(id);
   events.drop(id);
   sync();
   return state.byId(id);
 }
 
-// remove a learner from this phone (Settings, behind her PIN): her server record goes too
-export function remove(id) {
-  state.removeLearner(id);
+// remove a learner from this phone (Settings, behind her PIN): her server records go too ("Everywhere"), and her
+// bag on the relay in reach; `here` (only for a learner with a bag, whose record lives on elsewhere: "From this
+// phone only") sends nothing
+export function remove(id, { here = false } = {}) {
+  const l = state.byId(id);
+  if (l && l.bag && here) state.removeHere(id);
+  else {
+    if (l && l.bag) bagsync.dropHere(id);
+    state.removeLearner(id);
+  }
+  bagsync.forget(id);
   sync();
 }
 

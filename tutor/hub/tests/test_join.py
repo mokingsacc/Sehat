@@ -17,11 +17,14 @@ def me(c, token, method="GET", **kw):
 
 def test_hello_names_the_consent_text_and_the_text_is_served(hub_client):
     v = hub_client.get("/api/hello").json()["consent"]
-    assert v == "hub-2026-10b"
+    assert v == "hub-2026-10c"                  # W7: the texts that name the school bag (WEBSITE.md 3.6)
     for lang in ("prs", "ps", "en"):
         doc = hub_client.get(f"/api/consent?lang={lang}").json()
-        assert doc["version"] == v and doc["lang"] == lang and doc["draft"] is True
-        assert set(doc["rows"]) == {"does", "keeps", "sees", "stop"} and len(doc["full"]) >= 3
+        assert doc["version"] == v and doc["lang"] == lang and doc["draft"] is True and doc["bag"] is True
+        assert set(doc["rows"]) == {"does", "keeps", "sees", "bag", "stop"} and len(doc["full"]) >= 3
+    # the b texts stay readable for the learners who agreed to them, and name no bag
+    old = hub_client.get("/api/consent?lang=en&version=hub-2026-10b").json()
+    assert set(old["rows"]) == {"does", "keeps", "sees", "stop"} and not old.get("bag")
     assert "centre's computer" in hub_client.get("/api/consent?lang=en").json()["rows"]["sees"]
     # the texts from before the provider switch stay readable, for the records that name them (C5 H3)
     assert "OpenAI" in hub_client.get("/api/consent?lang=en&version=online-2026-10").json()["rows"]["sees"]
@@ -34,7 +37,7 @@ def test_the_online_home_shows_the_online_text(cfg):
     from tutor_hub.server import create_app
     cfg.home = "online"
     with TestClient(create_app(cfg)) as c:
-        assert c.get("/api/hello").json()["consent"] == "online-2026-10b"
+        assert c.get("/api/hello").json()["consent"] == "online-2026-10c"
 
 
 def test_joining_without_a_code_joins_this_hubs_cohort(hub_client):

@@ -43,6 +43,14 @@ export const exactAlarms = () => (isApp() ? call('exactAlarms') !== false : true
 // that names no one; an older APK without it prints nothing, and the page says so
 export const canPrint = () => isApp() && typeof bridge().print === 'function';
 export const print = (title) => { call('print', String(title)); };
+// W7: a sealed school bag file handed to the phone's share sheet (Bluetooth, Files, a messenger), as the voice pack is
+export const shareFile = (name, base64) => isApp() && call('shareFile', String(name), String(base64)) === true;
+// W7 (3.10, case 18): the 16 digits the browser's "Open in the Qalam app" handed over (an intent's extra, never an
+// address), once; '' when there are none
+export function takeBag() {
+  const d = isApp() ? String(call('takeBag') || '') : '';
+  return /^\d{16}$/.test(d) ? d : '';
+}
 
 // "1.10.0" is newer than "1.9.2"
 export function newer(a, b) {

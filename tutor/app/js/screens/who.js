@@ -16,13 +16,13 @@ export const yearLabel = (c) => (c.band === 'ad' ? s(c.track === 'reader' ? 'tra
 
 // "Book ۲۷"; before she has joined just "Book", and "Book · waiting to connect" while a join waits to be sent
 export function aliasLabel(c, lang = getLang()) {
-  const name = aliasName(c.picture, lang);
+  const name = aliasName(state.pictureOf(c), lang);         // a stand-in on this phone, when another learner has hers
   if (c.number) return `${name} ${fa(c.number)}`;
   return needsJoin(c) ? `${name} · ${s('waiting_connect')}` : name;
 }
 
 // the alias picture on its accent-soft circle (never an initial, a nickname or a photo: ruling 4)
-export const aliasPic = (c, size = 22) => h('span', { class: 'ini' }, aliasIcon(c.picture, size, 2));
+export const aliasPic = (c, size = 22) => h('span', { class: 'ini' }, aliasIcon(state.pictureOf(c), size, 2));
 
 export function whoChip(c) {
   return h('a', { class: 'who', href: '#/who', 'aria-label': s('who_title') },
@@ -37,7 +37,7 @@ export default function who() {
     const said1 = [c.nickname, aliasLabel(c), yearLabel(c)].filter(Boolean).join('. ');
     return said(h('button', { type: 'button', class: 'who wide' + (c === active ? ' on' : ''),
       'aria-current': c === active ? 'true' : null, onClick: () => pickChild(c) },
-    h('span', { class: 'ini big' }, aliasIcon(c.picture, 30, 2)),
+    h('span', { class: 'ini big' }, aliasIcon(state.pictureOf(c), 30, 2)),
     h('span', { class: 'grow' }, h('b', {}, c.nickname || aliasLabel(c)),
       h('small', {}, c.nickname ? `${aliasLabel(c)} · ${yearLabel(c)}` : yearLabel(c))),
     c === active ? icon('check', 26, 3) : null), said1);

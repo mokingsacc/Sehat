@@ -6,6 +6,8 @@
 // confirmation), and Voice (C5.6): the voice pack of her language on this phone: get it, share it, open one shared
 // to her. #/settings/<action> is that confirmation, after #/lock/check/<action> (or straight away when she
 // has no lock).
+// W7: School bag (screens/bag.js: where it is, its code and card, the file, a new code), and for a learner with a
+// bag, removing her asks "From this phone only" (nothing sent: her bag and other phones keep her) or "Everywhere".
 
 import * as account from '../account.js';
 import * as android from '../android.js';
@@ -38,10 +40,11 @@ function confirm(c, action) {
     location.replace('#/settings');
     return null;
   }
-  const question = s(action === 'remove' ? 'remove_sure' : 'stop_sure');
-  const yes = () => {
+  const twoWays = action === 'remove' && !!c.bag;
+  const question = s(twoWays ? 'remove_where' : action === 'remove' ? 'remove_sure' : 'stop_sure');
+  const yes = (here = false) => {
     if (action === 'remove') {
-      account.remove(c.id);
+      account.remove(c.id, { here });
       toast(s('removed'));
       location.hash = state.children().length ? '#/who' : '#/welcome';
     } else {
@@ -55,8 +58,13 @@ function confirm(c, action) {
     topbar({ back: '#/settings', title: s(action === 'remove' ? 'remove_learner' : 'stop_sharing') }),
     h('div', { class: 'stack pad' },
       h('div', { class: 'row' }, h('p', { class: 'grow lead' }, question), speakerBtn(say(question), { size: 'sm' })),
-      said(h('button', { type: 'button', class: 'btn danger big', onClick: yes },
-        icon(action === 'remove' ? 'trash' : 'stop', 24), s(action === 'remove' ? 'remove_yes' : 'stop_sharing'))),
+      twoWays ? [
+        said(h('button', { type: 'button', class: 'btn danger-outline big', onClick: () => yes(true) }, icon('trash', 24),
+          h('span', { class: 'stack-sm' }, h('b', {}, s('remove_here')), h('small', {}, s('remove_here_note'))))),
+        said(h('button', { type: 'button', class: 'btn danger big', onClick: () => yes(false) }, icon('trash', 24),
+          h('span', { class: 'stack-sm' }, h('b', {}, s('remove_all')), h('small', {}, s('remove_all_note')))))]
+        : said(h('button', { type: 'button', class: 'btn danger big', onClick: () => yes() },
+          icon(action === 'remove' ? 'trash' : 'stop', 24), s(action === 'remove' ? 'remove_yes' : 'stop_sharing'))),
       said(h('a', { class: 'btn', href: '#/settings' }, s('cancel'))))), tab: null };
 }
 
@@ -138,6 +146,8 @@ export default function settings([action]) {
         section(s('sharing'), consentNote,
           l.consent ? said(h('a', { class: 'btn', href: '#/settings/stop' }, icon('stop', 22), s('stop_sharing')))
             : said(h('a', { class: 'btn', href: '#/consent/settings' }, icon('file', 22), s('give_consent')))),
+        section(s('bag_title'), s(l.bag ? 'bag_note_on' : 'bag_note_none'),
+          said(h('a', { class: 'btn', href: '#/bag' }, icon('bag', 22), s(l.bag ? 'bag_open' : 'bag_make')))),
         voiceRow(l.lang),
         offers,
         apk === 'update' && getApp ? section(s('update_app'), s('update_note'),

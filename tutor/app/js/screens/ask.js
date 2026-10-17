@@ -132,7 +132,11 @@ export default async function ask(args = []) {
     const asks = state.child().asks;
     fill(thread, asks.map((a) => {
       const out = [h('div', { class: 'bubble-q' }, a.q)];
-      if (a.queued) out.push(h('div', { class: 'note' }, h('span', { class: 'badge wait' }, icon('clock', 16), s('wait_badge'))));
+      // W7 (3.8): a question queued on her other phone is sent from there only, unless she sends it from this one
+      if (a.queued && !state.mine(a)) {
+        out.push(h('div', { class: 'note row wrap' }, h('span', { class: 'badge wait' }, icon('clock', 16), s('wait_other_phone')),
+          h('button', { type: 'button', class: 'link', onClick: () => { outbox.again(c.id, a.k); drawThread(); } }, s('send_here'))));
+      } else if (a.queued) out.push(h('div', { class: 'note' }, h('span', { class: 'badge wait' }, icon('clock', 16), s('wait_badge'))));
       if (a.notSent || a.failed) {
         out.push(h('div', { class: 'note row wrap' }, h('span', { class: 'badge wait' }, s(a.notSent ? 'not_sent' : 'cant_send')),
           h('button', { type: 'button', class: 'link', onClick: () => { outbox.again(c.id, a.k); drawThread(); } },

@@ -995,3 +995,73 @@ Where it differs, the builder's choices to confirm:
 
 Not verified here: the relay on the real Worker beyond the smoke test (it runs at each staging deploy), and the cost
 of a pull and a write in D1 rows on the dashboard.
+
+### W7: the bag screens
+
+Built:
+- The consent texts: `hello.consent` now names `hub-2026-10c` and `online-2026-10c`, whose fifth row is the bag's
+  line (`screens/consent.js` shows only the rows a text has). Agreeing to a text that names the bag makes her bag
+  (`bagsync.make`: a new code, its keys kept with her as `bag`, on this phone only) and shows "The school bag is
+  ready": her picture, the 16 digits in her own digits (read group by group), the text QR `Q1 BAG <16>` (`qr.js`, a
+  port of the hub's `qr.py`, checked against it by `test_bag_card.py`), "Print the card" and "I wrote it down", and
+  Continue; the card is never forced. It is offered once more on the way Home after her fifth finished lesson unless
+  it was printed or written down. A learner who agreed to an older text is shown the new one once on the way Home.
+- Sync (`bagsync.js`, in the shell; `bag.js` and `qr.js` load only when used): as 3.9. A pull per visit before a
+  seat joins again, so a stopped bag (410) keeps her seats from joining on their own; a quiet push 30 s after a
+  change, and at once when the app goes to the background with something unsent; pulls when a server comes in reach;
+  a 412 is pulled, merged and pushed again, 4 rounds at most. An unchanged bag costs no request (a hash of what the
+  relay holds is kept per relay with its etag). A 429 from the relay's 10-second spacing waits 11 s once and tries
+  again; a second 429 waits 5 minutes.
+- Settings → School bag (`#/bag`, `screens/schoolbag.js`): "On this phone: saved · At the centre: … · Online: …",
+  Sync now (which says what happened), "Card: not printed yet", the code and card behind her PIN, "Save as a file"
+  and "Open a bag file", the handoff between the browser and the Android app, "This is also me" (both PINs) and "Make
+  a new code" (her PIN). A stopped bag shows "Type the new code"; a bag from a newer app, "Update Qalam".
+- "I already use Qalam" (`#/move`, `screens/move.js`, a link on Welcome): the 16 digits typed in either digit set
+  (the check digit refuses a slip before anything is sent), scanned with `BarcodeDetector` where the browser has it,
+  handed over by `/m#<digits>` (sessionStorage) or the Android app's `qalam://bag` intent with the digits as an
+  extra (`takeBag()`, read once), or a `.qbag` file with its code typed. "Found: [her picture] ۶۷, year 8, 3 lessons. Is this you?" → Yes →
+  her PIN once → Home. Not found, or no relay in reach: "Start now", and the learner she makes on Welcome keeps the
+  code, so her work joins when a relay has it. A restored learner is added from a bag laid over `{id, seats: {}}`
+  (`state.restore`), never over one made by `addChild`, keeps her seats and tokens (no new join) and arrives locked.
+- The Android app: `qalam://bag` opens the app with the code (`MainActivity` keeps it for `takeBag()` and fires
+  `qalam-bag` when the app is already open); `SHARE_NAME` allows `qalam-bag.qbag`, shared with `shareFile()`.
+- "Make a new code": a new code and keys; its first write on each relay makes the old bag there a tombstone (one bag
+  per seat), and each seat asks its server for a new token (`/api/me/token`) at its next contact, so the old phone's
+  token dies and its next pull sees 410.
+- "Remove": for a learner with a bag, "From this phone only" (sends nothing) or "Everywhere" (the bag deleted on the
+  relay in reach, `DELETE /api/me` on each seat, which deletes her bags with her).
+- A stand-in picture (`stand`, never synced) when another learner on the phone shows hers. A question queued on her
+  other phone shows "Waiting on the other phone" with "Send from this phone", and only the phone that queued it sends it.
+- Tests: `app/tests/bagsync.test.js` (two stand-in relays and several phones: restore with the lock, two phones
+  converging through either relay, the 412 race, stop sharing, a new code, removal here or everywhere, "This is also
+  me" with a stand-in, the push budget and a newer app's bag); `tools/bag_check.mjs` (Playwright: the APK origin,
+  then Chrome by the handoff, then the APK at the hub, then Chrome at the hub on an insecure page with the vendored
+  PBKDF2, then a new phone, every request on poor 2G at 900 ms and 35 kbit/s: nothing lost, stars at the higher
+  value, the newest plan, each question sent once, the same token and no new join, the card's second offer, a new
+  code stopping the old phone, neither code nor keys in any request); `tools/signup_check.mjs` walks making the bag,
+  Settings → School bag and a new phone in Dari, Pashto and English.
+
+Decisions to confirm (the builder's choices where the spec is silent or differs):
+- The card is printed from the phone (the browser's print, or the Android app's), not on the hub's printer: a
+  print job on the hub would leave the code in the hub's queue and files. The page asks for A6 (`@page size: A6`,
+  the card 89 by 128 mm inside 8 mm margins); a printer with only A4 prints it the same size on A4.
+- Scanning uses the browser's `BarcodeDetector` only (Chrome on Android has it); elsewhere she types the digits. No
+  QR decoder is shipped.
+- A bag not found yet waits in memory only: if the app is closed before she picks her year, she types the code again.
+- "Stop sharing" forgets the code on this phone, so agreeing again makes a new bag with a new code.
+- A learner who agreed to an older text sees the new one once on the way Home ("Not now" changes nothing); she is
+  not asked again on later visits.
+- The two "Remove" choices appear only for a learner with a bag; without one, Remove is as before.
+- The push budget treats an unknown connection type as mobile data; "Sync now" is never budgeted.
+- The status line has one entry per kind of relay ("At the centre", "Online"), the last relay of that kind seen.
+- The browser's "Open in the Qalam app" falls back to `/get/` when the app is not installed.
+- "This is also me" keeps the active learner's code (or the other's when she has none); the other's bag becomes a
+  tombstone at the next write, since one seat keeps one bag.
+- A relay's refusals (404, 401, 4xx) carry `Cache-Control: no-store` too, not only its answers.
+- The card's second offer is a screen on the way Home (`#/bag/again`), not a banner.
+- The 412 loop is 4 rounds in all (the first try and 3 more), as 3.9's "up to 3 times".
+
+Not verified here: printing on a real Android phone (the print dialog and the A6 size on A4); a camera scan with
+`BarcodeDetector` on a phone; the `qalam://bag` intent and `takeBag()` in the built APK (the Java compiles in CI,
+but no device ran it); the handoff and the 2G timings on a real network rather than Chromium's throttling; the new
+Dari and Pashto strings (drafts, for the native speakers).

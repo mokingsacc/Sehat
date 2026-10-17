@@ -1028,3 +1028,21 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .contest-card { margin: 0 16px 12px; }
 .contest-card h2, .contest-card p { margin: 0; }
 .contest-takers li { gap: 10px; align-items: center; }
+
+
+/* the school bag (W7, WEBSITE.md 3.6 and 3.10): the code in four groups left to right, the A6 card (her picture, the
+   digits, the text QR, one line; no name, no app name, no address), the code box, the camera while scanning */
+.bag-code { margin: 0; font-size: var(--fs-xl); font-weight: 800; letter-spacing: .08em; text-align: center; unicode-bidi: isolate; direction: ltr; }
+.bag-card { margin: 0 auto; width: 100%; max-width: 340px; border: 2px dashed var(--line-strong); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; background: var(--card); text-align: center; }
+.bag-card .pic { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); }
+.bag-card .qr-box { background: #fff; padding: 6px; border-radius: 8px; line-height: 0; }
+.bag-card .qr-box svg { width: 34mm; height: 34mm; }
+.bag-card p.small { margin: 0; }
+.code-in.bag-in { width: 100%; min-height: 64px; font-size: var(--fs-big); font-weight: 800; letter-spacing: .12em; text-align: center; border-radius: 16px; border: 2px solid var(--line-strong); background: var(--card); color: var(--ink); }
+.move .found > .ini, .bag .lock-body > .ini { display: inline-flex; align-self: center; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); }
+.scan-video { width: 100%; max-height: 60vh; border-radius: 16px; background: var(--ink); object-fit: cover; }
+@media print {
+  body:has(.print-card) #app > *:not(.screen), body:has(.print-card) .screen > header, body:has(.print-card) .noprint, body:has(.print-card) .screen .pad > :not(.print-card), body:has(.print-card) #toast { display: none !important; }
+  @page { size: A6; margin: 8mm; }
+  .print-card { border: 0; max-width: none; width: 89mm; min-height: 128mm; justify-content: center; background: #fff; }
+}

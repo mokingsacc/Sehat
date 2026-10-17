@@ -6,6 +6,7 @@
 
 import * as account from './account.js';
 import * as android from './android.js';
+import * as bagsync from './bagsync.js';
 import * as bands from './bands.js';
 import * as events from './events.js';
 import { dir, getLang, htmlLang, s, setLang, setTone } from './i18n.js';
@@ -20,6 +21,7 @@ import * as voicepack from './voicepack.js';
 import { busy, fitHead, h, nav, netChip, readPage, sayTab, toast, topbar } from './ui.js';
 
 import ask from './screens/ask.js';
+import bag from './screens/schoolbag.js';
 import cert from './screens/cert.js';
 import check from './screens/check.js';
 import consent from './screens/consent.js';
@@ -37,6 +39,7 @@ import plan from './screens/plan.js';
 import quran from './screens/quran.js';
 import university from './screens/university.js';
 import made from './screens/made.js';
+import move from './screens/move.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
@@ -48,10 +51,10 @@ const live = (args) => import('./modules/live.js').then((m) => m.default(args));
 const contest = (args) => import('./screens/contest.js').then((m) => m.default(args));
 
 const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, live, contest, welcome, who, credits, consent, lock: lockScreen,
-  settings, signup, cert, quran, university, made };
-const NEEDS_NO_CHILD = new Set(['welcome', 'signup']);
-const CLEAN = new Set(['welcome', 'signup']);          // the clean adult look, not the learner's
-const OPEN = new Set(['welcome', 'who', 'signup', 'lock']);   // shown without opening her lock
+  settings, signup, cert, quran, university, made, bag, move };
+const NEEDS_NO_CHILD = new Set(['welcome', 'signup', 'move']);
+const CLEAN = new Set(['welcome', 'signup', 'move']);          // the clean adult look, not the learner's
+const OPEN = new Set(['welcome', 'who', 'signup', 'lock', 'move']);   // shown without opening her lock
 const AWAY_MS = 5 * 60e3;
 const app = document.getElementById('app');
 let current = null;
@@ -91,6 +94,8 @@ async function route() {
     location.replace('#/lock');
     return;
   }
+  if (name === 'home' && newText(c)) { location.replace('#/consent/home'); return; }
+  if (name === 'home' && cardAgain(c)) { location.replace('#/bag/again'); return; }
   if (account.useCohort()) hub.refresh().then(modulesChanged);     // another learner's class
   outbox.flush();                       // a join, consent, band or question waiting to be sent
   // the Android app older than the server's apk.min: one full-screen card, "Please update Qalam" (P23)
@@ -111,6 +116,34 @@ async function route() {
   app.replaceChildren(out.el, ...(tabs ? [nav(out.tab)] : []));
   window.scrollTo(0, 0);
   sayTab();                      // a tab tapped in years 1 to 3 or adult literacy says its label
+}
+
+// W7 (3.6): a learner who agreed to an older consent text than the one the server in reach names (the c texts name
+// the school bag) is shown the new one once, on her way Home; "Not now" changes nothing
+function newText(c) {
+  if (!c || c.bagAsked || c.bag || !c.consent || !c.token || !hub.online()) return false;
+  const v = hub.consentVersion();
+  if (!v || v === c.consent.version) return false;
+  state.updateChild(c.id, { bagAsked: true });
+  return true;
+}
+
+// W7 (3.6): the card is offered when the bag is made and once more after her fifth finished lesson, unless it was
+// printed or written down; never forced
+function cardAgain(c) {
+  if (!c || !c.bag || c.cardAgain || Object.keys(c.done).length < 5 || state.cache('bag.card.' + c.id) === true) return false;
+  state.updateChild(c.id, { cardAgain: true });
+  return true;
+}
+
+// the 16 digits the browser's "Open in the Qalam app" handed to the Android app (W7): kept for this tab, as /m does,
+// and #/move reads them
+function bagHandoff() {
+  const d = android.takeBag();
+  if (!d) return false;
+  try { sessionStorage.setItem('qalam.bag.handoff', d); } catch { return false; }
+  location.hash = '#/move';
+  return true;
 }
 
 // a screen that failed (C5.4): the sentence with the page speaker, "Try again" (the same screen with the same
@@ -201,6 +234,15 @@ async function boot() {
   const c = state.child();
   if (c) setLang(c.lang);
   if (!state.preview) account.start();       // a reviewer's preview (state.js) never joins
+  if (!state.preview) {
+    bagsync.start();                         // her school bag: pushed 30 s after a change, pulled when a relay answers
+    hub.onChange((ok) => { if (ok) account.sync().then(() => bagsync.syncAll()); });
+    bagHandoff();
+    window.addEventListener('qalam-bag', () => {                     // the app was open already
+      const was = location.hash;
+      if (bagHandoff() && was === '#/move') route();
+    });
+  }
   account.onNote((key) => toast(s(key)));
   outbox.onSent((msg) => toast(msg));
   outbox.onChange(refreshChips);

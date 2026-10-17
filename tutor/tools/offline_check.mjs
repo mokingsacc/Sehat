@@ -1,7 +1,8 @@
 // Browser check for the online app shell (P11), against a server in online mode (TUTOR_HOME=online) on a secure
 // page (https, or 127.0.0.1 for a local run), in Chromium through Playwright:
-//   1. Online: Welcome → year 7; Ask's first question opens consent (held), the lock offer (Not now), and the
-//      question goes once she has joined; a lesson and a sheet's key are opened, so the phone has them.
+//   1. Online: Welcome → year 7; Ask's first question opens consent (held; since W7 the text names the school bag,
+//      so "The school bag is ready" comes next, Continue), the lock offer (Not now), and the question goes once she
+//      has joined; a lesson and a sheet's key are opened, so the phone has them.
 //   2. The network is cut (the chip says so at once) and the app opened again: the service worker brings the app back; Home lists lessons;
 //      the lesson opens; Check my sheet marks the sheet (an event, queued, never shown); a question with no answer
 //      on the phone offers "Send when I'm online" and then says "Waiting to send"; the chip says "Offline" and that
@@ -62,11 +63,14 @@ await page.fill('.composer input', '1/2 + 1/4');
 await page.click('.composer button[type=submit]');
 await at('#/consent/ask');
 const hold = await page.$('.consent .hold');
+await hold.scrollIntoViewIfNeeded();                                               // five rows since W7: below the fold
 const b = await hold.boundingBox();
 await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
 await page.mouse.down();
 await page.waitForTimeout(3300);
 await page.mouse.up();
+await at('#/bag/ready/ask', 30000);                                                // W7: her school bag first
+await page.click('.bag .btn.outline');                                             // Continue
 await at('#/lock/offer/ask');
 await page.click('.lock .btn.outline');                                            // Not now
 await at('#/ask');

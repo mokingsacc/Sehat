@@ -176,7 +176,9 @@ def keys():
 def test_a_bag_travels_through_the_relay_and_comes_back_as_it_went(relay):
     c, me, k = relay, learner(relay), keys()
     assert c.get("/api/hello").json()["bag"] == {"max": BAG_MAX}
-    assert c.post("/api/bag/get", json={"f": k["f"]}).status_code == 404       # not here yet
+    none = c.post("/api/bag/get", json={"f": k["f"]})                         # not here yet
+    assert none.status_code == 404 and none.headers["cache-control"] == "no-store"   # refusals are never cached either
+    assert c.post("/api/bag/put", json={**k, "if": "new", "blob": "x"}).headers["cache-control"] == "no-store"   # 401
     blob = b64(sealed(3))
     r = c.post("/api/bag/put", json={**k, "if": "new", "blob": blob}, headers=me)
     assert r.status_code == 200 and re.fullmatch(r"[0-9a-f]{16}", r.json()["etag"])

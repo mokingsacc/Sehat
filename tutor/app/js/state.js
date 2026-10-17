@@ -71,6 +71,7 @@ const str = (x, n = MADE_CHARS) => (typeof x === 'string' ? x.slice(0, n) : '');
 // W5: each learner's stamped parts and tokens as save() last saw them (stamps.js parts)
 const seenParts = new Map();
 const seenTokens = new Map();
+const savedListeners = new Set();          // W7: onSaved, below
 let data = loaded(load());
 
 function loaded(d) {
@@ -173,6 +174,12 @@ function clean(l) {
     ...(cleanDead(l.dead).length ? { dead: cleanDead(l.dead) } : {}),
     ...(cleanBagx(l.bagx) ? { bagx: cleanBagx(l.bagx) } : {}),
     ...(cleanBag(l.bag) ? { bag: cleanBag(l.bag) } : {}),
+    // W7, on this phone only (never stamped, never in the bag): `stand`, a stand-in picture when another learner here
+    // already has hers (3.8, case 23); `bagAsked`, that the consent text naming the bag was offered once; `cardAgain`,
+    // that the card was offered the second time (3.6: after her fifth finished lesson)
+    ...(known(l.stand) && l.stand !== l.picture ? { stand: l.stand } : {}),
+    ...(l.bagAsked === true ? { bagAsked: true } : {}),
+    ...(l.cardAgain === true ? { cardAgain: true } : {}),
   });
 }
 
@@ -219,6 +226,8 @@ function cleanSeat(x) {
     joined: Number.isInteger(x.joined) && x.joined > 0 ? x.joined : null,
     // the unplaced seat of a learner from before W4: the address it was last used at ('' is this website)
     ...(typeof x.base === 'string' ? { base: x.base.slice(0, 200) } : {}),
+    // W7: "Make a new code" asks this server for a new token at the next contact (/api/me/token, account.js)
+    ...(x.renew === true && typeof x.token === 'string' && TOKEN.test(x.token) ? { renew: true } : {}),
     // more tokens of hers for the same server, to fold into this one (/api/me/merge, account.js)
     ...(Array.isArray(x.also) && x.also.some((t) => typeof t === 'string' && TOKEN.test(t))
       ? { also: [...new Set(x.also.filter((t) => typeof t === 'string' && TOKEN.test(t) && t !== x.token))].slice(0, 4) } : {}),
@@ -434,7 +443,10 @@ export function save() {
   if (preview) return;
   stampAll();
   try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* full or blocked: keep going */ }
+  for (const f of savedListeners) { try { f(); } catch (e) { console.warn(e); } }
 }
+// W7: told after every save (bagsync.js schedules her bag's next push from it)
+export function onSaved(fn) { savedListeners.add(fn); return () => savedListeners.delete(fn); }
 
 export function learners() { return data.learners; }
 export function learner() {
@@ -608,6 +620,52 @@ export function adopt(id, record) {
   seenTokens.set(id, tokensOf(l));
   save();
   return l;
+}
+
+// W7 (3.10 "She started fresh", "From this phone only"): a learner whose record came in a bag, as a new learner on
+// this phone. The record (bag.js unpack over {id, seats: {}}) is kept as it is, its stamps not made again, so her
+// own settings stay older than nothing; a stand-in picture if another learner here has hers. She is the active
+// learner, still locked (main.js asks her PIN once).
+export function restore(record) {
+  if (!record || typeof record !== 'object') return null;
+  stampAll();
+  const { name, ...rest } = record;
+  const l = clean({ ...rest, id: typeof rest.id === 'string' && rest.id && !byId(rest.id) ? rest.id : rid() });
+  data.learners.push(l);
+  data.active = l.id;
+  for (const s of [...Object.values(l.st || {}), ...Object.values(l.gone || {})]) seenStamp(data.clock, s);
+  seenParts.set(l.id, parts(l));
+  seenTokens.set(l.id, tokensOf(l));
+  standIn(l.id);
+  save();
+  return l;
+}
+
+// a stand-in picture for learner `id` when another learner on this phone shows hers (never synced: `stand`)
+export function standIn(id) {
+  const l = byId(id);
+  if (!l) return null;
+  const others = data.learners.filter((x) => x.id !== id).map((x) => x.stand || x.picture);
+  if (l.stand && !others.includes(l.stand) && !others.includes(l.picture)) return l.stand;
+  if (!others.includes(l.picture)) { if (l.stand) { delete l.stand; save(); } return null; }
+  if (!l.stand || others.includes(l.stand)) { l.stand = pickFree([...others, l.picture]); save(); }
+  return l.stand;
+}
+export const pictureOf = (l) => (l ? l.stand || l.picture : null);
+
+// "From this phone only" (3.10): her record and her queued events go, and nothing is sent: her seats, her bag and
+// her other phones keep her (her server records stay, and the 12-month rule ends a seat nobody uses)
+export function removeHere(id) {
+  const l = byId(id);
+  if (!l) return false;
+  data.learners = data.learners.filter((x) => x.id !== id);
+  seenParts.delete(id);
+  seenTokens.delete(id);
+  if (data.active === id) data.active = (data.learners[0] || {}).id || null;
+  unlocked.delete(id);
+  save();
+  events.drop(id);
+  return true;
 }
 
 // remove a learner from this phone: her record and her queued events go; her server record (if she joined) is

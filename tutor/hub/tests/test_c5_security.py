@@ -149,7 +149,9 @@ def test_h3_every_consent_text_in_use_names_no_company_and_says_what_may_leave()
             doc = texts[(lang, version)]
             words = json.dumps(doc, ensure_ascii=False).lower()
             assert not any(n in words for n in ("openai", "anthropic", "claude", "google", "gemini")), (lang, version)
-            assert doc["home"] == home and set(doc["rows"]) == {"does", "keeps", "sees", "stop"} and len(doc["full"]) == 4
+            # W7: the texts in use name the school bag, a fifth row and a fifth paragraph (WEBSITE.md 3.6)
+            assert doc["home"] == home and set(doc["rows"]) == {"does", "keeps", "sees", "bag", "stop"} and len(doc["full"]) == 5
+            assert doc["bag"] is True
         en = " ".join([*texts[("en", version)]["rows"].values(), *texts[("en", version)]["full"]])
         assert "AI service" in en and "no name" in en
         assert "nothing is sent over the internet" not in en and "nothing leaves" not in en

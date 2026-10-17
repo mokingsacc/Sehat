@@ -52,11 +52,15 @@ import androidx.webkit.WebViewFeature;
  *
  * window.QalamAndroid (Bridge below): the school day's alarms (setAlarms, cancelAlarms; day.js), the notification
  * question (notifyState, askNotify; asked after "This phone is mine" and its explainer), exactAlarms, openSettings,
- * version, online and print (a certificate, P25b). The camera is granted to the app's own page only, after the
+ * version, online and print (a certificate, P25b); shareFile (a voice pack, or a sealed school bag, W7) and takeBag
+ * (the school bag code the browser's "Open in the Qalam app" handed over, W7). The camera is granted to the app's own page only, after the
  * page's explainer. Links to other sites, the sheet's print page and /get open in the phone's browser.
  */
 public class MainActivity extends Activity {
-    static final Pattern SHARE_NAME = Pattern.compile("qalam-voice-[a-z]{2,3}\\.qvoice");
+    /** The files the page may hand to the share sheet: a voice pack (C5.6) or a sealed school bag (W7). */
+    static final Pattern SHARE_NAME = Pattern.compile("qalam-voice-[a-z]{2,3}\\.qvoice|qalam-bag\\.qbag");
+    /** A school bag code handed over by the browser (qalam://bag, its extra "code"): 16 digits, nothing else. */
+    static final Pattern BAG_CODE = Pattern.compile("[0-9]{16}");
     static final String HOST = "appassets.androidplatform.net";
     static final String START_URL = "https://" + HOST + "/index.html";
     private static final int REQ_CAMERA = 1;
@@ -73,6 +77,8 @@ public class MainActivity extends Activity {
     private ValueCallback<Uri[]> pendingFiles;
     private Object backCallback;
     private boolean backCallbackRegistered;
+    /** The bag code from the last qalam://bag intent, until the page takes it (Bridge.takeBag); kept in memory only. */
+    private volatile String bagCode;
 
     /** Whether the app is in front now: then the page rings its own bell and the alarm shows no notification. */
     static boolean onScreen() {
@@ -114,7 +120,27 @@ public class MainActivity extends Activity {
         web.addJavascriptInterface(new Bridge(), "QalamAndroid");
         web.setDownloadListener((url, userAgent, contentDisposition, mimeType, length) -> openExternal(Uri.parse(url)));
 
+        keepBagCode(getIntent());
         if (state == null || web.restoreState(state) == null) web.loadUrl(START_URL);
+    }
+
+    /* the app was open already: the page is told, and takes the code (W7) */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (keepBagCode(intent) && web != null) web.evaluateJavascript("window.dispatchEvent(new Event('qalam-bag'))", null);
+    }
+
+    /* a qalam://bag intent's 16 digits, kept until the page asks; anything else is ignored */
+    private boolean keepBagCode(Intent intent) {
+        if (intent == null || !Intent.ACTION_VIEW.equals(intent.getAction())) return false;
+        Uri u = intent.getData();
+        if (u == null || !"qalam".equals(u.getScheme()) || !"bag".equals(u.getHost())) return false;
+        String code = intent.getStringExtra("code");
+        if (code == null || !BAG_CODE.matcher(code).matches()) return false;
+        bagCode = code;
+        return true;
     }
 
     @Override
@@ -413,6 +439,14 @@ public class MainActivity extends Activity {
             } catch (IOException | IllegalArgumentException e) {
                 return false;
             }
+        }
+
+        /** W7: the school bag code the browser handed over, once (then forgotten); "" when there is none. */
+        @JavascriptInterface
+        public String takeBag() {
+            String c = bagCode;
+            bagCode = null;
+            return c == null ? "" : c;
         }
 
         /** The phone's settings page for Qalam (to allow the camera or notifications after a refusal). */

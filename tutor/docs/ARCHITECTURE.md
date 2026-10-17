@@ -459,8 +459,21 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   with its Damm check, the keys (PBKDF2 100 000 rounds in `crypto.subtle` or the vendored `@noble/hashes`; HKDF;
   HMAC per relay), seals the record with the vendored `@noble/ciphers` XChaCha20-Poly1305 (deflated, padded to the
   KB, at most 64 KB), and merges two records by the rules of 3.8, each a join; `state.adopt()` keeps a merged
-  record without stamping it again. The relay (W6) and the screens (W7) are still to come. `tools/vendor_noble.py`
-  vendors the two packages from npm and CI checks them against the pinned sha512.
+  record without stamping it again. `tools/vendor_noble.py` vendors the two packages from npm and CI checks them
+  against the pinned sha512.
+- **The school bag's screens and sync (W7, WEBSITE.md 3.6, 3.9, 3.10 and 3.13):** `bagsync.js` (in the shell; it
+  loads `bag.js` only for a learner with a bag) pulls, merges and pushes her bag with the relay in reach: a pull per
+  visit before a seat joins again (a bag stopped elsewhere keeps her seats from joining on their own), a quiet push
+  30 seconds after a change and at once when the app goes to the background, "Sync now", and a 412 answered by pull,
+  merge, push (up to 4 rounds). It keeps per learner and relay `{etag, held, st}` in the cache (`bag.<id>`), so an
+  unchanged bag sends nothing. On mobile data pushes are budgeted (6 a day, 30 minutes apart; 1 with Save-Data); the
+  hub's Wi-Fi and a Wi-Fi connection have none. Screens: the consent text's fifth row and the bag made on agreeing
+  (`screens/consent.js`), `screens/schoolbag.js` (`#/bag`: the status per relay, Sync now, the card behind her PIN
+  with the 16 digits and a text QR from `qr.js`, printed A6 by `@media print`, the file route, the browser-and-app
+  handoff, "This is also me", "Make a new code"), `screens/move.js` (`#/move`, "I already use Qalam": typed,
+  scanned with `BarcodeDetector`, handed over by `/m#<digits>` or the Android app's `qalam://bag` intent, or a
+  `.qbag` file), and the two-way "Remove" in Settings. `state.restore()` adds a learner from a bag, still locked;
+  `state.standIn()` gives a stand-in picture when another learner here shows hers.
 
 ## Privacy
 
@@ -557,7 +570,7 @@ learner routes, the admin panel's (behind its gate) and the app's files are alwa
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/subjects`, `#/lesson/{id}`, `#/print/{id}`,
   `#/check/{id}/{seed}`, `#/photo/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
-  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
+  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/bag` and `#/move` (W7), `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
   learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
   and the teacher's page stay open).
 - Sign-up (DESIGN.md 6 to 8): `screens/welcome.js` (the doors, no name field), `screens/signup.js` (the ordered

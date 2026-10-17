@@ -8,7 +8,8 @@
 //   on /teacher/ (15 minutes, once, five tries); the hub checks them against her token and she chooses a new PIN.
 // - #/lock/offer/<then>: "Lock with a number?", offered once after consent or a class join, with "Not now";
 // - #/lock/set/<then>: set or change it (Settings);
-// - #/lock/check/<action>: her PIN again before Settings removes her or stops sharing.
+// - #/lock/check/<action>: her PIN again before Settings removes her or stops sharing, and before her school bag's
+//   code, a new code or "This is also me" (W7: #/lock/check/bag-<what> goes on to #/bag/<what>).
 
 import * as hub from '../hub.js';
 import * as lock from '../lock.js';
@@ -25,12 +26,15 @@ let returnTo = '#/home';
 // where the lock goes once she has opened it (main.js sets it before showing #/lock)
 export function afterUnlock(hash) { returnTo = hash && !hash.startsWith('#/lock') ? hash : '#/home'; }
 
+// where #/lock/check/<action> goes once her PIN is right: the school bag's own screens (W7), else Settings
+const target = (action) => (/^bag-[a-z]+$/.test(action) ? '#/bag/' + action.slice(4) : '#/settings/' + action);
+
 // the action #/lock/check passed, for Settings to finish (cleared when read)
 let passed = null;
 export function checked(action) { const ok = passed === action; passed = null; return ok; }
 
-// four dots and a keypad; onDone(pin) with the four digits
-function pinPad(onDone) {
+// four dots and a keypad; onDone(pin) with the four digits (also "This is also me", the other learner's PIN)
+export function pinPad(onDone) {
   let entry = '';
   let busy = false;
   const dots = h('div', { class: 'dots', role: 'img' });
@@ -113,7 +117,7 @@ function opener(c, action) {
     state.updateChild(c.id, { lock: r.lock });
     if (r.ok) {
       state.unlock(c.id);
-      if (action) { passed = action; location.hash = '#/settings/' + action; } else location.hash = returnTo;
+      if (action) { passed = action; location.hash = target(action); } else location.hash = returnTo;
       return;
     }
     msg.textContent = r.wait ? s('lock_wait', { n: Math.ceil(r.wait / 60e3) }) : s('lock_wrong');
@@ -130,7 +134,7 @@ function opener(c, action) {
   const byCode = !action && c.token && modules.on('teacher')
     ? h('a', { class: 'link', href: '#/lock/code' }, icon('key', 20), s('lock_code_link')) : null;
   const el = h('div', { class: 'screen lock' },
-    topbar({ back: action ? '#/settings' : null, title: s('lock_title') }),
+    topbar({ back: action ? (action.startsWith('bag-') ? '#/bag' : '#/settings') : null, title: s('lock_title') }),
     h('div', { class: 'lock-body' },
       aliasPic(c, 30), reset, pad.dots, msg, pad.pad,
       h('div', { class: 'row center wrap' },
@@ -185,7 +189,7 @@ export default function lockScreen([mode, arg]) {
   }
   if (mode === 'set') return setter(c, { title: c.lock ? s('lock_change') : s('lock_set'), then });
   if (!c.lock || !lock.allowed(c.band)) {
-    if (mode === 'check') { passed = arg; location.replace('#/settings/' + arg); } else location.replace(returnTo);
+    if (mode === 'check') { passed = arg; location.replace(target(arg)); } else location.replace(returnTo);
     return { el: h('div'), tab: null };
   }
   if (mode === 'code') return byCode(c);

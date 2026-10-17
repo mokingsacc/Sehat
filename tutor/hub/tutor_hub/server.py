@@ -1102,7 +1102,10 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     @app.exception_handler(HTTPException)
     async def http_error(request: Request, exc: HTTPException):
         code = getattr(exc, "code", None)            # a staff refusal's stable code (C5.1), beside the sentence
-        return JSONResponse({"error": exc.detail, **({"code": code} if code else {})}, status_code=exc.status_code)
+        # the school bag's relay: every answer, refusals too, is never kept by a cache on the way (3.7)
+        headers = {**(exc.headers or {}), "Cache-Control": "no-store"} if request.url.path.startswith("/api/bag/") else None
+        return JSONResponse({"error": exc.detail, **({"code": code} if code else {})}, status_code=exc.status_code,
+                            headers=headers)
 
     # the website at /, the app at /app/, the staff pages and /get/ where they were (WEBSITE.md 2.2, sitetree.py).
     # Online they are the Worker's static assets, served before the Worker, so there is no folder here

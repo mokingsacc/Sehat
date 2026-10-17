@@ -6,6 +6,10 @@
 //      grown-up's corner opens Who is learning after a 2-second press.
 //   3. The lock: the learner of 1 opens the app again → the lock; a wrong PIN says so; "I forgot" shows the 24-hour
 //      reset; her PIN opens Home and cancels the reset.
+//   W7: the consent text names the school bag (a fifth row); agreeing makes her bag: "The school bag is ready" with
+//      the 16 digits and the card's QR, then the lock offer. Settings → School bag. 4. A new phone: Welcome → "I
+//      already use Qalam" → the 16 digits → "Found: … Is this you?" → her PIN once → Home, with her seat on the hub
+//      and her lesson; the code and the keys never left either phone.
 // Every screen is spoken: each one either reads itself on open or has a page speaker that, tapped, says something
 // (a stand-in voice records what would be said; nothing is played). Screenshots at 360 px go to --out.
 // Run from tutor/ (a class code from `python -m tutor_hub class-code`):
@@ -85,7 +89,7 @@ await spoken(a.page, 'Welcome');
 await shot(a.page, 'welcome');
 await a.page.click('.yearbox.secondary:not(.adults) .years button >> nth=1');        // year 8
 await at(a.page, '#/consent/');
-check((await a.page.$$('.consent-row')).length === 4, 'consent: four rows');
+check((await a.page.$$('.consent-row')).length === 5, 'consent: five rows, the school bag\'s among them');
 await spoken(a.page, 'Consent');
 await shot(a.page, 'consent');
 const hold = await a.page.$('.consent .hold');
@@ -99,6 +103,14 @@ check((await hash(a.page)).startsWith('#/consent/'), 'letting go early cancels')
 await a.page.mouse.down();
 await a.page.waitForTimeout(3300);
 await a.page.mouse.up();
+await at(a.page, '#/bag/ready/', 30000);                                   // PBKDF2 runs on the phone first
+await spoken(a.page, 'The school bag is ready');
+const latin = (t) => String(t || '').replace(/[۰-۹]/g, (x) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(x)).replace(/\s/g, '');
+const bagCode = latin(await a.page.getAttribute('.bag-card .bag-code', 'aria-label'));
+check(/^\d{16}$/.test(bagCode) && !!(await a.page.$('.bag-card svg.qr')), 'the bag is ready: 16 digits and the card\'s QR');
+check(!/[A-Za-z]{3}/.test((await a.page.textContent('.bag-card .bag-code')).replace(/[\u2066\u2069]/g, '')), 'the card holds no name, app name or address');
+await shot(a.page, 'bag-ready');
+await a.page.click('.bag .btn.outline');                                    // Continue (the card is never forced)
 await at(a.page, '#/lock/offer/');
 await spoken(a.page, 'Lock offer');
 await shot(a.page, 'lock-offer');
@@ -145,8 +157,55 @@ await at(a.page, '#/settings');
 check(!(await stored(a.page)).learners[0].lock.resetAt, 'her PIN cancels the reset');
 await spoken(a.page, 'Settings');
 await shot(a.page, 'settings');
+await a.page.goto(`${HUB}/app/#/bag`);
+await at(a.page, '#/bag');
+await spoken(a.page, 'School bag');
+await shot(a.page, 'school-bag');
+await a.page.click('.bag .btn.primary');                                     // Sync now
+await a.page.waitForFunction(() => { const b = document.querySelector('.bag .btn.primary'); return b && !b.disabled; }, null, { timeout: 30000 });
+check((await a.page.textContent('.bag [role=status]')).trim().length > 0, 'Sync now says what happened');
+check(await a.page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith('qalam.cache.bag.') && k !== 'qalam.cache.bag.budget')
+  .every((k) => Object.values(JSON.parse(localStorage.getItem(k)).at).every((r) => r.st === 'saved'))), 'Sync now saved her bag at the hub, her lock with it');
+const l1b = (await stored(a.page)).learners[0];
+check(l1b.bag && l1b.bag.code === bagCode, 'her bag keys are kept with her, on this phone');
 check(a.errors.length === 0, 'no page errors (class card)' + (a.errors.length ? ': ' + a.errors.join('; ') : ''));
+const secretSent = (sent, code, k) => sent.some(([, p, body]) => [code, k.k, k.f, k.w].some((x) => (p || '').includes(x) || (body || '').includes(x)));
+check(!secretSent(a.sent, bagCode, l1b.bag), 'the bag code and its keys never left the phone');
 await a.ctx.close();
+
+// 4. a new phone: her bag, found by its code at the hub
+const d = await newPhone();
+await d.page.goto(`${HUB}/app/`);
+await at(d.page, '#/welcome');
+if (LANG !== 'prs') { await d.page.click(`.langs button[lang="${LANG === 'ps' ? 'ps-AF' : 'en'}"]`); await d.page.waitForTimeout(300); }
+await d.page.click('a[href="#/move"]');
+await at(d.page, '#/move');
+await spoken(d.page, 'I already use Qalam');
+await shot(d.page, 'move');
+await d.page.fill('.bag-in', '1234 5678 9012 3456');                        // a slip: the check digit refuses it
+await d.page.click('.move form button[type=submit]');
+await d.page.waitForTimeout(300);
+check(!d.sent.some(([, p]) => p === '/api/bag/get'), 'a mistyped code is refused before anything is sent');
+const shown = LANG === 'en' ? bagCode : bagCode.replace(/\d/g, (x) => '۰۱۲۳۴۵۶۷۸۹'[x]);   // typed in her own digits
+await d.page.fill('.bag-in', shown);
+await d.page.click('.move form button[type=submit]');
+await d.page.waitForSelector('.move .found', { timeout: 30000 });
+await d.page.waitForTimeout(500);
+check(!!(await d.page.$('.move .found .btn.primary')), '"Found: … Is this you?"');
+await shot(d.page, 'move-found');
+await d.page.click('.move .found .btn.primary');
+await at(d.page, '#/lock');
+check(true, 'she arrives locked: her PIN once');
+await d.page.keyboard.type('1234');
+await at(d.page, '#/home');
+await d.page.waitForTimeout(1200);
+const l4 = (await stored(d.page)).learners[0];
+const s4 = (l4.seats || {})[hubId] || {};
+check(s4.token === s1.token && l4.lock && l4.bag && l4.bag.code === bagCode, 'the new phone has her seat (the same token), her lock and her bag');
+check(!d.sent.some(([m, p]) => m === 'POST' && p === '/api/join'), 'the new phone did not join again: she is the same learner');
+check(!secretSent(d.sent, bagCode, l4.bag), 'the new phone sent neither the code nor its keys');
+check(d.errors.length === 0, 'no page errors (a new phone)' + (d.errors.length ? ': ' + d.errors.join('; ') : ''));
+await d.ctx.close();
 
 // 2. no card, early years
 const b = await newPhone();

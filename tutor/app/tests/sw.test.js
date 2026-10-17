@@ -24,9 +24,9 @@ test('the service worker keeps every file the app opens with', () => {
   const vendor = (dir) => list(`js/vendor/${dir}/`, '.js');
   assert.deepEqual(lazy.sort(), ['/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus',
     '/audio/en/manifest.json', '/audio/prs/manifest.json', '/audio/ps/manifest.json',
-    'fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2', 'js/bag.js', ...vendor('noble-ciphers'), ...vendor('noble-hashes')].sort());
+    'fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2', 'js/bag.js', 'js/qr.js', ...vendor('noble-ciphers'), ...vendor('noble-hashes')].sort());
   for (const f of want.filter((x) => x.endsWith('.js') && !lazy.includes(x))) {
-    assert.doesNotMatch(readFileSync(new URL(f, APP), 'utf8'), /from '\.\.?\/(bag|vendor\/)/, `${f} imports the bag`);
+    assert.doesNotMatch(readFileSync(new URL(f, APP), 'utf8'), /from '\.\.?\/(bag\.js|qr\.js|vendor\/)/, `${f} imports the bag`);
   }
   assert.deepEqual([...shell].sort(), want.filter((f) => !lazy.includes(f)).sort());
 });
