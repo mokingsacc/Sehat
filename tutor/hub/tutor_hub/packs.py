@@ -326,7 +326,7 @@ def content_hash(item: dict, pack_dir: Path, clips: dict | None = None) -> str:
     clip's recorded hash, so a changed word, picture or recording voids the signatures."""
     if clips is None:
         clips = read_clips(pack_dir)
-    body = {k: v for k, v in item.items() if k != "review"}
+    body = {k: v for k, v in item.items() if k != "review" and not k.startswith("_")}      # `_bold`: the hub's own
     media = {}
 
     def walk(o):
@@ -369,6 +369,22 @@ def band_of_year(year: int) -> str:
     return "ey" if year == 0 else "p1" if year <= 3 else "p2" if year <= 6 else "s1" if year <= 9 else "s2"
 
 
+TRACKS = ("literacy", "reader")
+
+
+def tracks_of(pack: dict) -> list[str]:
+    """The adult tracks that see an adult pack (P26): `tracks`, by default the reader track only."""
+    return list(pack.get("tracks") or ["reader"]) if pack.get("audience") == "adult" else []
+
+
+def reads_every_step(lesson: dict, pack: dict) -> bool:
+    """Every step is read aloud on open, so needs a recorded clip: years 0 to 3, and (P26, C4.3) an adult pack the
+    literacy track sees. An adult lesson's year says nothing about who reads it."""
+    if pack.get("audience") == "adult":
+        return "literacy" in tracks_of(pack)
+    return band_of_year(lesson.get("year", 12)) in ("ey", "p1")
+
+
 def release_problems(lesson: dict, state: str, pack: dict, clips: dict) -> list[str]:
     """Why a lesson may not reach learners yet: unsigned, a reviewer role missing, or (F1) the youngest learners'
     steps and every letter step without a recorded clip in each of the pack's languages (placeholders don't count)."""
@@ -383,7 +399,7 @@ def release_problems(lesson: dict, state: str, pack: dict, clips: dict) -> list[
             p.append(f"{lid}: the review must include a {role}")
     if not any("teacher" in r for r in needs):
         p.append(f"{lid}: the review must include a subject teacher")
-    young = band_of_year(lesson.get("year", 12)) in ("ey", "p1")
+    young = reads_every_step(lesson, pack)
     for i, st in enumerate(lesson.get("steps") or [], 1):
         if not (young or st.get("kind") == "letter"):
             continue
@@ -496,6 +512,8 @@ class Library:
                     if why:
                         self.hidden.extend(f"{pid}/{x}" for x in why)
                         continue
+                if pack.get("audience") == "adult":
+                    lesson["_bold"] = "literacy" in tracks_of(pack)      # its sheets print bold (sheets.layout)
                 self.lessons[lid] = lesson
                 self.lesson_pack[lid] = pid
                 self.hashes[lid], self.states[lid] = chash, state
@@ -523,6 +541,12 @@ class Library:
             p.append(f"{pid}: share_alike must be true or false")
         if pack.get("audience", "child") not in ("child", "adult"):
             p.append(f"{pid}: audience must be \"adult\" or left out")
+        if "tracks" in pack:
+            tr = pack["tracks"]
+            if pack.get("audience") != "adult":
+                p.append(f"{pid}: tracks are for adult packs only")
+            elif not isinstance(tr, list) or not tr or any(x not in TRACKS for x in tr) or len(set(tr)) != len(tr):
+                p.append(f"{pid}: tracks must list \"literacy\" and/or \"reader\"")
         return p
 
     def _check_media(self, pack, pid, pack_nc) -> dict:
@@ -611,6 +635,7 @@ class Library:
                                 "draft": self.states[lid] != "signed"})
             out.append({"id": pid, "title": pack.get("title"), "version": pack.get("version"),
                         "langs": pack.get("langs", []), "audience": pack.get("audience", "child"),
+                        **({"tracks": tracks_of(pack)} if pack.get("audience") == "adult" else {}),
                         "licence": pack.get("licence", "open"), "lessons": lessons})
         return out
 
@@ -648,6 +673,7 @@ class Library:
                 s["audio"] = {al: {"url": f"/packs/{pid}/audio/{al}/{clips[al][c]['file']}",
                                    "placeholder": bool(clips[al][c].get("placeholder"))}
                               for al, c in s["audio"].items() if c in clips.get(al, {})}
+        out.pop("_bold", None)
         out["pack"] = pid
         out["draft"] = self.states[lesson_id] != "signed"
         out["credits"] = self.credits_for(lesson_id)

@@ -1,0 +1,12 @@
+{
+  "subject": "pashto",
+  "version": "2026.10.17",
+  "nodes": [
+    {"id": "letter-xin", "needs": [], "lessons": ["pashto-1-xin"], "title": {"prs": "حرف «ښ»", "ps": "توری «ښ»", "en": "The letter xin"}},
+    {"id": "letters-alef-beh", "needs": [], "lessons": ["adult-pashto-1-alef-beh"], "title": {"prs": "حرف‌های «ا» و «ب»", "ps": "توري «ا» او «ب»", "en": "The letters alef and beh"}}
+  ],
+  "pathways": [
+    {"id": "ad-read-pashto", "goal": ["letters-alef-beh"], "bands": ["ad"], "final": "adult-pashto-1-alef-beh", "certificate": true, "title": {"prs": "خواندن و نوشتن پښتو: گام‌های اول", "ps": "لوستل او لیکل: لومړني ګامونه", "en": "Read and write Pashto: first steps"}}
+  ],
+  "review": {"status": "draft", "needs": ["literacy teacher", "adult educator"]}
+}

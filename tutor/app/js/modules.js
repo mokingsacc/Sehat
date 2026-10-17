@@ -7,7 +7,8 @@
 // - the end of a lesson: at most two `lesson.end` actions;
 // - `settings.row`: offers kept for the Settings screen (P10);
 // - Home's footer (homeFooter, P22): one fixed row after the list, "+ I want to learn something else", only for the
-//   `plan` module and only in s1, s2 and for adult readers. It is not a slot, and nothing else may use it (C3.5).
+//   `plan` module and only in s1, s2 and for adults (adult literacy since 7c, C4.11). It is not a slot, and nothing
+//   else may use it (C3.5).
 // An offer is { id, role, priority, when(ctx), render(ctx) }: role is primary, secondary or list on Home; the
 // highest priority whose when(ctx) is true wins its place. ctx (context()) is { child, lesson, band, look, tone,
 // track }: look is bold or clean, tone child or adult (bands.js).
@@ -146,8 +147,7 @@ export function home(ctx) {
 export function homeFooter(ctx) {
   const c = ctx && ctx.child;
   if (!c || !on('plan') || !allows('plan', c.band) || !FOOTER_BANDS.includes(c.band)) return null;
-  if (c.band === 'ad' && c.track !== 'reader') return null;
-  return { href: '#/plan', key: 'plan_row' };
+  return { href: '#/plan', key: 'plan_row' };             // adult literacy too since 7c: the goal chips (C4.11)
 }
 
 // the end of a lesson: at most two actions, drawn

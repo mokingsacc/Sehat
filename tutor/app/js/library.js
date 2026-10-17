@@ -15,7 +15,8 @@ let loading = null;
 export function load(refresh = false) {
   if (!loading || refresh) {
     loading = hub.packs().then((packs) => {
-      list = packs.flatMap((p) => p.lessons.map((l) => ({ ...l, pack: p.id, audience: p.audience || 'child' })));
+      list = packs.flatMap((p) => p.lessons.map((l) => ({ ...l, pack: p.id, audience: p.audience || 'child',
+        ...(p.audience === 'adult' ? { tracks: Array.isArray(p.tracks) && p.tracks.length ? p.tracks : ['reader'] } : {}) })));
       return list;
     });
   }
@@ -32,10 +33,13 @@ export const subjectOrder = (lang) => ORDER[lang] || ORDER.prs;
 
 const byOrder = (a, b) => a.year - b.year || a.order - b.order || a.id.localeCompare(b.id);
 
-// Adults learn from adult packs only (adult objects, no childish pictures); children from the others.
+// Adults learn from adult packs only (adult objects, no childish pictures); children from the others. Since P26 an
+// adult pack says which tracks see it (`tracks`, the reader track by default): the literacy track sees reading and
+// everyday maths, the reader track every adult pack (C4.3).
 const forAdults = (c) => c && c.band === 'ad';
-const fits = (c, l) => (l.audience === 'adult') === forAdults(c);
-export const hasAdultLessons = () => list.some((l) => l.audience === 'adult');
+export const trackFits = (c, l) => !forAdults(c) || (l.tracks || ['reader']).includes(c.track === 'reader' ? 'reader' : 'literacy');
+const fits = (c, l) => (l.audience === 'adult') === forAdults(c) && trackFits(c, l);
+export const hasAdultLessons = (c = null) => list.some((l) => l.audience === 'adult' && (!c || trackFits(c, l)));
 
 // A subject's lessons for this learner's year (an adult: every adult lesson in it). Children not in school yet
 // (year 0) get year 0 and 1 lessons.

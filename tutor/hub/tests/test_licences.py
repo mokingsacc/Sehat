@@ -367,8 +367,8 @@ def test_production_hides_the_starter_drafts(release_client):
 
 
 def test_staging_shows_the_drafts_marked_as_drafts(hub_client):
-    rows = hub_client.get("/api/packs").json()["packs"][0]["lessons"]
-    assert len(rows) == 6 and all(r["draft"] for r in rows)
+    rows = [r for p in hub_client.get("/api/packs").json()["packs"] for r in p["lessons"]]
+    assert len(rows) == 12 and all(r["draft"] for r in rows)
     l = hub_client.get("/api/lessons/maths-7-fractions-add").json()
     assert l["draft"] is True and l["credits"] == [] and "review" not in l and "sources" not in l
     assert hub_client.get("/api/hello").json()["release"] is False

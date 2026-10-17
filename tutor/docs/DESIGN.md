@@ -590,6 +590,23 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   lasts one Home visit; pathway chips are outlined in the accent to tell them from unit chips; an s1 or s2 learner
   hears the adult "Quick practice", since bands.js gives those bands the adult tone.
 
+## What P26 and 7c built, and where they differ
+
+- Adult Home's list is "What to learn" with its speaker, then the track rows: reading and writing in her language
+  (Dari, or Pashto for a Pashto reader), everyday maths, English, Chinese and University, each shown only when she
+  has lessons in it (University when its module is on). Adult literacy: one row each, 64 px, badge, name, "0 of 2",
+  and a speaker at the row's end. Adult reader: badge, name, a bar, "0/2" and a chevron. A row opens its subject
+  page, where the pathway cards come first.
+- The switch card (secondary, once): "You can read now. Use the reader look?" with "Yes, switch" (primary) and "No,
+  keep this" (outline), after the last lesson of an adult pathway in her reading subject. Either answer ends it.
+- Badges: Chinese 中, University U, Quran ق and seerah س (Naskh) on the four new colours.
+- 7c: adult literacy's "I want to learn..." row opens "What do you want to learn?": up to six pathway chips, one per
+  row, 64 px, each with its subject's badge and a speaker; a chip starts its pathway at its next lesson (with the
+  warm-up); "Someone can type it for you" in the accent ink with its speaker opens the box.
+- Open look questions: the chips use the subject's badge as their picture (pathways have no picture of their own);
+  the chips list every adult pathway, so a Dari reader also sees the Pashto one; the adult subject page still lists
+  children's lessons under "Other years' lessons", as every subject page does; the switch card names no pathway.
+
 ---
 
 # C2 and C3 decisions

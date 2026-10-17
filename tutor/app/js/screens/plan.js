@@ -12,6 +12,9 @@
 // Since P25a (C4.1): a plan is built over the skills graph (graph.js): what the goal needs and she has not mastered
 // comes first, each row tagged "Learn first"; the pathways for her band are the first chips; starting a plan while
 // another has a lesson left asks once (plans.begin).
+// 7c (C4.11): for adult literacy the screen is "What do you want to learn?" and up to six pathway chips, one per row,
+// each with its subject's badge and its speaker; a chip starts its pathway. "Someone can type it for you" (muted)
+// opens the box above (#/plan?type=1). No microphone in 2027.
 
 import { getLang, s } from '../i18n.js';
 import * as graph from '../graph.js';
@@ -22,14 +25,38 @@ import * as plans from '../modules/plan.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, said, speakerBtn, subjectBadge, toast, topbar } from '../ui.js';
+import { sayKey } from '../speech.js';
 import { saidNotNow } from './signup.js';
 
 let held = null;          // what she typed before the consent screen, sent when she comes back
 
-export default async function plan() {
+// adult literacy's goal chips: her band's pathways, six at most, one per row
+function goalChips(c) {
+  const lang = getLang();
+  const mine = plans.bandLessons(c);
+  const paths = graph.pathways(c, mine).slice(0, plans.CHIPS_BOLD);
+  const start = async (x) => {
+    const p = graph.pathwayPlan(state.child(), x, plans.bandLessons(state.child()));
+    if (!(await plans.begin(state.child(), p.label, p.lessons, p.path))) return;
+    const next = p.lessons.find((id) => !(state.child().done || {})[id]) || p.lessons[0];
+    location.hash = next ? '#/lesson/' + encodeURIComponent(next) + '?warm=1' : '#/home';
+  };
+  const el = h('div', { class: 'screen plan', 'data-speaks': '' },
+    topbar({ back: '#/home', title: s('goals_title'), child: true }),
+    h('div', { class: 'stack pad' },
+      paths.length ? h('div', { class: 'goal-chips' }, paths.map((x) => said(h('button', { type: 'button', class: 'goal-chip', dir: 'auto',
+        onClick: () => start(x) }, subjectBadge(x.g.subject, 40), h('span', { class: 'grow' }, plain(x.p.title))), plain(x.p.title))))
+        : h('p', { class: 'empty' }, s('no_lessons')),
+      h('div', { class: 'row' }, h('a', { class: 'link muted grow', href: '#/plan?type=1' }, s('goals_type')),
+        speakerBtn(() => sayKey('goals_type', lang), { size: 'sm' }))));
+  return { el, tab: 'lessons' };
+}
+
+export default async function plan(args = []) {
   await library.load();
   const c = state.child();
   if (!plans.canPlan(c)) { location.replace('#/home'); return { el: h('div'), tab: null }; }
+  if (plans.chipsOnly(c) && !(args.query && args.query.get('type') === '1')) return goalChips(c);
   const lang = getLang();
   const say = (t) => () => speak(t, lang);
   const top = h('div', { class: 'plan-top' });

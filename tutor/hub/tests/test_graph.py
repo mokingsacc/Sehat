@@ -16,7 +16,15 @@ from tutor_hub.packs import Library
 from tutor_hub.server import create_app
 
 TUTOR = Path(__file__).resolve().parents[2]
-MATHS = json.loads((TUTOR / "content" / "graph" / "maths.json").read_text(encoding="utf-8"))
+# a small graph of the starter pack's lessons (the repo's own graphs are checked by the Library test below)
+MATHS = {"subject": "maths", "version": "2026.10.17",
+         "nodes": [{"id": "count-5", "needs": [], "lessons": ["maths-1-count-5"], "title": {"prs": "شمردن", "en": "Count to 5"}},
+                   {"id": "frac-what", "needs": [], "lessons": [], "title": {"prs": "کسر چیست", "en": "What a fraction is"}},
+                   {"id": "frac-add", "needs": ["frac-what"], "lessons": ["maths-7-fractions-add"],
+                    "title": {"prs": "جمع کسرها", "en": "Add fractions"}}],
+         "pathways": [{"id": "s1-fractions", "goal": ["frac-add"], "bands": ["s1"], "final": "maths-7-fractions-add",
+                       "certificate": True, "title": {"prs": "کسرها: جمع", "en": "Fractions: adding"}}],
+         "review": {"status": "draft", "needs": ["maths teacher"]}}
 KNOWN = {"maths-1-count-5": {"band": "p1", "sheet": True}, "maths-7-fractions-add": {"band": "s1", "sheet": True},
          "science-7-states-of-matter": {"band": "s1", "sheet": False}, "adult-money-1": {"band": "ad", "sheet": True}}
 STAGING = "qg1j2918yx"
@@ -86,8 +94,9 @@ def test_release_mode_hides_an_unsigned_graph_and_asks_an_adult_educator_for_adu
 
 
 def test_the_library_loads_the_graph_and_release_mode_hides_it(tmp_path):
-    lib = Library(TUTOR / "content" / "packs")
-    assert "maths" in lib.graphs and lib.graphs["maths"]["_state"] == "draft" and lib.problems == []
+    lib = Library(TUTOR / "content" / "packs")                    # the repo's graphs: all valid, all drafts
+    assert {"maths", "dari", "pashto"} <= set(lib.graphs) and lib.problems == []
+    assert all(g["_state"] == "draft" for g in lib.graphs.values())
     shutil.copytree(TUTOR / "content" / "packs", tmp_path / "packs")
     (tmp_path / "graph").mkdir()
     (tmp_path / "graph" / "maths.json").write_text(json.dumps(MATHS), encoding="utf-8")
@@ -119,6 +128,7 @@ def test_the_packs_route_carries_the_graphs(hub):
     j = hub.get("/api/packs").json()
     [m] = [x for x in j["graphs"] if x["subject"] == "maths"]
     assert {n["id"] for n in m["nodes"]} >= {"frac-add", "frac-what"} and m["pathways"][0]["id"] == "s1-fractions"
+    assert {p["id"] for x in j["graphs"] for p in x["pathways"]} >= {"ad-money", "ad-read-dari", "ad-read-pashto"}
 
 
 def test_a_goal_that_names_a_node_gives_that_nodes_lessons(hub):

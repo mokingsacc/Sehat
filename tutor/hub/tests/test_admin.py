@@ -250,7 +250,7 @@ def test_the_timetable_editor_saves_a_checked_template_that_phones_then_fetch(hu
 
 def test_a_pack_is_published_only_when_every_lesson_is_signed_and_rolls_back(hub, monkeypatch):
     d = get(hub, "/content")
-    [pack] = d["packs"]
+    pack = next(p for p in d["packs"] if p["id"] == "starter")
     assert pack["lessons"] and not pack["publishable"] and pack["problems"]
     assert all(set(v) == {"signed", "of"} for v in pack["roles"].values())
     r = post(hub, f"/content/{pack['id']}/publish", {"cohort": STAGING}, status=409)
@@ -265,7 +265,7 @@ def test_a_pack_is_published_only_when_every_lesson_is_signed_and_rolls_back(hub
                                    cohort=STAGING, released_by="admin")
     back = post(hub, f"/content/{pack['id']}/rollback", {"cohort": STAGING})
     assert back["version"] == "0.0.9" and back["current_files"] is False
-    rel = get(hub, "/content")["packs"][0]["releases"][STAGING]
+    rel = next(p for p in get(hub, "/content")["packs"] if p["id"] == "starter")["releases"][STAGING]
     assert rel["version"] == "0.0.9" and rel["current"] is False
     whats = [x["what"] for x in get(hub, f"/log?cohort={STAGING}")["log"]]
     assert "release" in whats and "rollback" in whats

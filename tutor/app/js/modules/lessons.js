@@ -3,9 +3,16 @@
 // Bold look (years 1 to 6, adult literacy): one huge play button with a listen button, and subject tiles (stars
 // for children).
 // Clean look (years 7 to 12, adult readers): a calm "continue" card with progress, and a subject list.
+// Adults (P26, C4.3): the list is "What to learn", the track rows in this order: reading and writing in her
+// language, everyday maths, English, Chinese, University; a row shows when she has lessons in it (University: when
+// its module is on). Adult literacy: one per row with "3 of 30" and a speaker at the end; adult readers: a bar and
+// "12/30". After the literacy pathway's last lesson, the secondary asks once "You can read now. Use the reader look?".
 
-import { getLang, s } from '../i18n.js';
+import { fa, getLang, s } from '../i18n.js';
+import * as graph from '../graph.js';
 import * as library from '../library.js';
+import { on } from '../modules.js';
+import * as state from '../state.js';
 import { speak } from '../speech.js';
 import { h, icon, perButton, playIcon, plain, said, speakerBtn, subjectBadge, star } from '../ui.js';
 
@@ -75,10 +82,60 @@ export function subjectList({ child: c }) {
     }))];
 }
 
+// the adult track rows: [subject, label key] in order, reading first in her language
+const TRACKS = (lang) => [[lang === 'ps' ? 'pashto' : 'dari', 'track_read'], ['maths', 'track_maths'], ['english', 'english'],
+  ['chinese', 'chinese'], ['university', 'university']];
+
+// the rows she has: { sub, key, href, p: {done, total} or null }
+export const trackList = (c) => TRACKS(c.lang).map(([sub, key]) => {
+  if (sub === 'university') return on('university') ? { sub, key, href: '#/university', p: null } : null;
+  const p = library.progress(c, sub);
+  return p.total ? { sub, key, href: '#/subject/' + sub, p } : null;
+}).filter(Boolean);
+
+export function trackRows({ child: c, look }) {
+  const rows = trackList(c);
+  if (!rows.length) return null;
+  const bold = look === 'bold';
+  return [h('div', { class: 'section-head row' }, h('h2', { class: 'grow' }, s('what_to_learn')),
+    speakerBtn(() => speak(s('what_to_learn'), getLang()), { size: 'sm' })),
+  h('nav', { class: 'tracks', 'aria-label': s('what_to_learn') }, rows.map((r) => {
+    const name = s(r.key);
+    const row = h('a', { class: 'track-row', href: r.href }, subjectBadge(r.sub, 42),
+      h('span', { class: 'grow' }, h('b', {}, name),
+        r.p && bold ? h('small', { class: 'muted' }, s('of', { a: r.p.done, b: r.p.total })) : null,
+        r.p && !bold ? h('div', { class: 'bar' }, h('span', { style: { width: Math.round((100 * r.p.done) / r.p.total) + '%' } })) : null),
+      r.p && !bold ? h('small', { class: 'muted' }, fa(`${r.p.done}/${r.p.total}`)) : null,
+      bold ? null : icon('chev', 22));
+    return bold ? said(row, [name, r.p ? s('of', { a: r.p.done, b: r.p.total }) : ''].join('. ')) : row;
+  }))];
+}
+
+// the literacy track's last lesson is done: a pathway for adults in her reading subject whose `final` she finished
+function readyToRead(c) {
+  if (!c || c.band !== 'ad' || c.track === 'reader' || c.readerAsked) return false;
+  const sub = c.lang === 'ps' ? 'pashto' : 'dari';
+  return graph.pathways(c, library.all().filter((l) => l.audience === 'adult'), sub)
+    .some(({ p }) => p.final && c.done && c.done[p.final]);
+}
+
+function switchCard({ child: c }) {
+  const answer = (yes) => {
+    state.updateChild(c.id, { readerAsked: true, ...(yes ? { track: 'reader' } : {}) });
+    window.dispatchEvent(new HashChangeEvent('hashchange'));   // Home again, in the look her track now has
+  };
+  return h('section', { class: 'card lined pad-card stack' },
+    h('div', { class: 'row' }, h('p', { class: 'grow lead' }, s('switch_q')), speakerBtn(() => speak(s('switch_q'), getLang()), { size: 'md' })),
+    said(h('button', { type: 'button', class: 'btn primary', onClick: () => answer(true) }, s('switch_yes'))),
+    said(h('button', { type: 'button', class: 'btn outline', onClick: () => answer(false) }, s('switch_no'))));
+}
+
 export function register(shell) {
+  shell.offer('home.action', { id: 'reader-switch', role: 'secondary', priority: 90, when: (ctx) => readyToRead(ctx.child),
+    render: switchCard });
   shell.offer('home.action', { id: 'next', role: 'primary', priority: 10, when: hasLesson,
     render: (ctx) => (ctx.band === 'ey' ? nextEarly(ctx) : ctx.look === 'bold' ? nextBold(ctx) : nextClean(ctx)) });
   shell.offer('home.action', { id: 'subjects', role: 'list', priority: 10, when: (ctx) => hasLesson(ctx) && ctx.band !== 'ey',
-    render: (ctx) => (ctx.look === 'bold' ? tiles(ctx) : subjectList(ctx)) });
+    render: (ctx) => (ctx.band === 'ad' ? trackRows(ctx) : ctx.look === 'bold' ? tiles(ctx) : subjectList(ctx)) });
 }
 

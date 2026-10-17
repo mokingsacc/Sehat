@@ -461,7 +461,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
 | `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
 | `GET`, `POST`, `DELETE /api/me` | Her own record (`{band?, consent?}` to change it); header `X-Learner-Token` |
-| `GET /api/packs` | Every pack and its lesson list (no lesson content), and since P25a `graphs`: each skills graph's nodes (with the lessons this server serves), pathways and whether it is a draft, never its review block |
+| `GET /api/packs` | Every pack and its lesson list (no lesson content; an adult pack with its `tracks`, P26), and since P25a `graphs`: each skills graph's nodes (with the lessons this server serves), pathways and whether it is a draft, never its review block |
 | `GET /api/lessons/{id}` | One lesson, picture and clip names turned into URLs, with `draft` and its `credits`, without the sheet, review or sources |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |
 | `GET /packs/{pack}/audio/{lang}/{file}` | A recorded clip named in the pack's audio manifest |

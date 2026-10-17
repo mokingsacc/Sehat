@@ -1,0 +1,14 @@
+{
+  "id": "adult-literacy-1",
+  "version": "2026.10.17",
+  "title": {"prs": "خواندن و نوشتن: گام‌های اول", "ps": "لوستل او لیکل: لومړني ګامونه", "en": "Read and write: first steps"},
+  "about": {"en": "The adult literacy pathway (P26, C4.3): letters in small groups, then words and short sentences from adult life. A first three lessons as drafts; the content team adds the rest (about 30 a language). Every Dari and Pashto line needs a native speaker's check, an adult educator's signature and a recorded clip for every step before release."},
+  "langs": ["prs", "ps"],
+  "audience": "adult",
+  "tracks": ["literacy", "reader"],
+  "lessons": [
+    "adult-dari-1-alef-beh",
+    "adult-dari-2-words",
+    "adult-pashto-1-alef-beh"
+  ]
+}

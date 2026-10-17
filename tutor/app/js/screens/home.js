@@ -94,7 +94,7 @@ function page(root) {
   const c = state.child();
   const ctx = modules.context(c, library.next(c));
   const out = [header(c, root), library.hasDrafts() ? h('div', { class: 'draft', 'data-silent': '' }, s('draft_note')) : null];
-  if (c.band === 'ad' && !library.hasAdultLessons()) return [...out, adultsComing(), footer(ctx)];
+  if (c.band === 'ad' && !library.hasAdultLessons(c)) return [...out, adultsComing(), footer(ctx)];
   // no lesson yet: the empty line in the primary's place, and the school day's secondary offer still under it (the
   // Android app's "Is this phone yours?" on a day with no lessons yet, C4 look question 35)
   if (!ctx.lesson) {

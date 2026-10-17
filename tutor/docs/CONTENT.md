@@ -4,7 +4,8 @@ Lessons are data, not code. A pack is a folder:
 
 ```
 content/packs/starter/
-  pack.json             id, version, title, languages, the lessons in order; licence, share_alike, audience, media
+  pack.json             id, version, title, languages, the lessons in order; licence, share_alike, audience, tracks,
+                        media
   lessons/<id>.json     one file per lesson
   pictures/<name>.svg   line art (svg, webp, png or jpg); named without the extension in lessons
   audio/<lang>/         recorded clips (.opus) and manifest.json, saying who recorded each (optional)
@@ -187,6 +188,16 @@ A card holds only these fields: a title, our own description (at most 140 charac
 (https), and where it belongs (`subject`, `years`, `lessons`, `unit`). Any other field (copied text, a transcript,
 an embed) fails the validator. Cards need the internet, so the app shows them only while online, and they are
 signed like lessons.
+
+### Adult packs and tracks
+
+An adult pack says `"audience": "adult"` and, since P26 (C4.3), which adult tracks see it: `"tracks": ["literacy",
+"reader"]` (left out: the reader track only). The literacy track sees reading and everyday maths, the reader track
+every adult pack. A pack the literacy track sees prints bold sheets and is read aloud on open, so every step needs a
+recorded clip in each of its languages before release, and its reviewers include an adult educator. An adult lesson's
+`year` says nothing about who reads it (use 0). `adult-literacy-1` and `adult-maths-1` are the first drafts: three
+lessons each, for the content team to grow (about 30 a language and 20). Money is drawn as plain line drawings with a
+number, never a copy of a real banknote.
 
 ### The skills graph
 

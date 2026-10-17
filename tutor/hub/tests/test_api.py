@@ -9,10 +9,10 @@ from tutor_hub.ai.filters import leaks
 
 def test_hello_and_lists(hub_client):
     h = hub_client.get("/api/hello").json()
-    assert h["hub"] == "Qalam" and h["lessons"] == 6 and h["ai"]["on"] is False
+    assert h["hub"] == "Qalam" and h["lessons"] == 12 and h["ai"]["on"] is False
     assert h["printer"]["state"] == "outbox"
     packs = hub_client.get("/api/packs").json()["packs"]
-    assert packs[0]["id"] == "starter"
+    assert "starter" in [p["id"] for p in packs] and [p["audience"] for p in packs].count("adult") == 2
 
 
 def test_app_and_pictures_are_served(hub_client):

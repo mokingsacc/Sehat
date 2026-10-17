@@ -47,16 +47,19 @@ beforeEach(async () => {
 
 const me = () => state.byId(c.id);
 
-test('Home shows the row in s1, s2 and to adult readers, while the module is on, and nothing else uses it', () => {
+test('Home shows the row in s1, s2 and to adults, while the module is on, and nothing else uses it', () => {
   const foot = (child) => modules.homeFooter(modules.context(child, null));
   assert.deepEqual(foot(me()), { href: '#/plan', key: 'plan_row' });
-  assert.ok(plan.canPlan(me()));
-  for (const [band, track, year] of [['p2', null, 5], ['ey', null, 0], ['ad', 'literacy', null]]) {
+  assert.ok(plan.canPlan(me()) && !plan.chipsOnly(me()));
+  for (const [band, track, year] of [['p2', null, 5], ['ey', null, 0]]) {
     const x = { ...me(), band, track, year };
     assert.equal(foot(x), null, band + track);
     assert.equal(plan.canPlan(x), false);
   }
   assert.ok(foot({ ...me(), band: 'ad', track: 'reader', year: null }));
+  // adult literacy since 7c (C4.11): the row opens the goal chips, not the box
+  const lit = { ...me(), band: 'ad', track: 'literacy', year: null };
+  assert.ok(foot(lit) && plan.canPlan(lit) && plan.chipsOnly(lit));
   modules.sync([LESSONS]);                                        // the module off (or the kill switch)
   assert.equal(foot(me()), null);
   assert.equal(modules.routeOn('plan'), false);

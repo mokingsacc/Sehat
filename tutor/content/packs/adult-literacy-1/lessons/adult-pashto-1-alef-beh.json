@@ -1,0 +1,30 @@
+{
+  "id": "adult-pashto-1-alef-beh",
+  "subject": "pashto",
+  "year": 0,
+  "order": 1,
+  "unit": {"prs": "حرف‌ها", "ps": "توري"},
+  "title": {"prs": "حرف‌های پښتو «ا» و «ب»", "ps": "توري «ا» او «ب»"},
+  "minutes": 10,
+  "steps": [
+    {"kind": "letter", "letter": "ا", "forms": "ا ـا", "word": "اوبه",
+     "text": {"prs": "این حرف «ا» است. «ا» مثل «اوبه» (آب).", "ps": "دا توری «ا» دی. «ا» لکه «اوبه»."}},
+    {"kind": "letter", "letter": "ب", "forms": "ب ـبـ بـ ـب", "word": "بازار",
+     "text": {"prs": "این حرف «ب» است. «ب» مثل «بازار».", "ps": "دا توری «ب» دی. «ب» لاندې یو ټکی لري. «ب» لکه «بازار»."}},
+    {"kind": "choice",
+     "prompt": {"prs": "کدام حرف «ا» است؟", "ps": "کوم توری «ا» دی؟"},
+     "options": ["ب", "ا"],
+     "answer": 1,
+     "why": {"prs": "«ا» یک خط ایستاده است، بی نقطه.", "ps": "«ا» یوه ولاړه کرښه ده، ټکی نه لري."}},
+    {"kind": "say", "text": "اوبه"}
+  ],
+  "sheet": {
+    "code": "AL-03",
+    "intro": {"prs": "روی حرف‌های خاکستری بنویس.", "ps": "د خړو تورو پر سر ولیکه."},
+    "items": [
+      {"kind": "trace", "text": "ا", "count": 6},
+      {"kind": "trace", "text": "ب", "count": 6}
+    ]
+  },
+  "review": {"status": "draft", "needs": ["Dari reader", "Pashto reader", "adult educator", "literacy teacher"]}
+}

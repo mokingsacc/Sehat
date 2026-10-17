@@ -241,31 +241,32 @@ def test_the_staff_command_prints_sql_with_a_hash_and_never_the_email(cfg, capsy
 def test_a_skills_graph_is_reviewed_node_by_node_signed_and_pulled_into_its_file(village, tmp_path):
     h, role = village.pin, "maths teacher"
     q = village.get("/api/m/review/queue", params={"role": role}, headers=h).json()
-    assert q["graphs"] == [{"subject": "maths", "version": q["graphs"][0]["version"], "nodes": 3, "status": "not_started"}]
+    assert q["graphs"] == [{"subject": "maths", "version": q["graphs"][0]["version"], "nodes": 6, "status": "not_started"}]
     assert village.get("/api/m/review/queue", params={"role": "Dari reader"}, headers=h).json()["graphs"] == []
     assert village.get("/api/m/review/graphs/maths", params={"role": "Dari reader"}, headers=h).status_code == 403
     d = village.get("/api/m/review/graphs/maths", params={"role": role}, headers=h).json()
-    assert len(d["steps"]) == 4 and "review" not in d["graph"] and d["lessons"][LESSON]["year"] == 7
-    sign = lambda: village.post("/api/m/review/graphs/maths/sign", headers=h,
-                                json={"hash": d["hash"], "role": role, "initials": "EF"})
-    assert sign().status_code == 409                                       # not every node is OK yet
-    for st in d["steps"]:
-        r = village.post(f"/api/m/review/graphs/maths/steps/{st['n']}", headers=h,
-                         json={"verdict": "ok", "step_hash": st["hash"], "role": role})
-        assert r.status_code == 200
+    assert len(d["steps"]) == 7 and "review" not in d["graph"] and d["lessons"][LESSON]["year"] == 7
+    sign = lambda r, ini: village.post("/api/m/review/graphs/maths/sign", headers=h,
+                                       json={"hash": d["hash"], "role": r, "initials": ini})
+    assert sign(role, "EF").status_code == 409                             # not every node is OK yet
     assert village.post("/api/m/review/graphs/maths/steps/1", headers=h,
                         json={"verdict": "ok", "step_hash": "sha256:old0000", "role": role}).status_code == 409
-    assert sign().status_code == 200
+    # an adult pathway: the maths teacher and an adult educator both sign
+    for r, ini in ((role, "EF"), ("adult educator", "GH")):
+        for st in d["steps"]:
+            assert village.post(f"/api/m/review/graphs/maths/steps/{st['n']}", headers=h,
+                                json={"verdict": "ok", "step_hash": st["hash"], "role": r}).status_code == 200
+        assert sign(r, ini).status_code == 200
     q = village.get("/api/m/review/queue", params={"role": role}, headers=h).json()
     assert q["graphs"][0]["status"] == "signed"
     offs = village.get("/api/m/review/signoffs", headers=h).json()["signoffs"]
-    assert [o["lesson"] for o in offs] == ["graph:maths"]
+    assert [o["lesson"] for o in offs] == ["graph:maths", "graph:maths"]
     shutil.copytree(PACKS, tmp_path / "packs")
     shutil.copytree(PACKS.parent / "graph", tmp_path / "graph")
     shutil.copy(PACKS.parent / "sources.json", tmp_path / "sources.json")
     assert Library(tmp_path / "packs", release=True).graphs == {}
     report = pull.pull(offs, tmp_path / "packs")
-    assert report["copied"] == [f"graph:maths: {role} EF {offs[0]['date']}"]
+    assert report["copied"] == [f"graph:maths: {role} EF {offs[0]['date']}", f"graph:maths: adult educator GH {offs[0]['date']}"]
     g = json.loads((tmp_path / "graph" / "maths.json").read_text(encoding="utf-8"))
-    assert g["review"]["status"] == "checked" and g["review"]["signoffs"][0]["initials"] == "EF"
+    assert g["review"]["status"] == "checked" and [o["initials"] for o in g["review"]["signoffs"]] == ["EF", "GH"]
     assert Library(tmp_path / "packs").graphs["maths"]["_state"] == "signed"

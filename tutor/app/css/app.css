@@ -21,6 +21,8 @@
   --good: #2f9e63; --good-soft: #e6f6ec; --good-ink: #1f5a35; --bad: #b42318; --bad-soft: #fdecea;
   --ai-ink: #8a4a06; --draft-bg: #fdf1e1;
   --s-maths: #1f4fa3; --s-science: #c2410c; --s-english: #7a4a9e; --s-dari: #0b6e4f; --s-pashto: #b23a48;
+  /* P26 (C4.3): four more subject badges, white on each 5.85 to 7.09:1, the same in dark */
+  --s-chinese: #9a3b7a; --s-university: #4a5a6a; --s-quran: #8a5a00; --s-seerah: #5d6b1e;
   --on-subject: #ffffff; --star: #f2b134; --star-line: #8a5a00; --shadow: rgba(20, 33, 61, .15);
   --picture-filter: none;
   color-scheme: light;
@@ -194,6 +196,8 @@ h2 { font-size: var(--fs-btn); }
 .sbadge .naskh { font-size: var(--fs-big); }
 .s-maths { background: var(--s-maths); } .s-science { background: var(--s-science); } .s-english { background: var(--s-english); }
 .s-dari { background: var(--s-dari); } .s-pashto { background: var(--s-pashto); }
+.s-chinese { background: var(--s-chinese); } .s-university { background: var(--s-university); }
+.s-quran { background: var(--s-quran); } .s-seerah { background: var(--s-seerah); }
 
 /* bottom tabs */
 .tabs {
@@ -822,3 +826,11 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .path-card .muted { margin: 0; }
 .plan-card.done .done-mark { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--good-soft); color: var(--good-ink); flex: none; }
 .chip.path { border-color: var(--accent); color: var(--accent-ink); }
+
+/* P26: Home's track rows for adults (C4.3), the switch card, and 7c's goal chips */
+.tracks { display: flex; flex-direction: column; gap: 10px; padding: 0 16px; }
+.track-row { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 8px 12px; border-radius: var(--r); border: var(--bw) solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; }
+.track-row b { display: block; font-size: var(--fs); }
+.track-row .bar { margin-top: 6px; }
+.goal-chips { display: flex; flex-direction: column; gap: 10px; }
+.goal-chip { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 8px 12px; border-radius: var(--r); border: var(--bw) solid var(--line-strong); background: var(--card); color: var(--ink); font-size: var(--fs-btn); font-weight: 800; text-align: start; }

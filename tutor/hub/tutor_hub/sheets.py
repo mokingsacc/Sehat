@@ -327,7 +327,8 @@ def layout(lesson: dict, seed: int, lang: str) -> dict:
 
     Returns {bold, rtl, marks, header, title, name, date, name_label, date_label, intro, example, prompts, items,
     work, qr, code, height, fits}; each item is {n, kind, x, y, w, h, cell} with cell {kind, x, y, w, h} or None."""
-    bold = lesson["year"] <= 6
+    # years 1 to 6 print bold, and adult packs the literacy track sees (P26: packs.Library marks them `_bold`)
+    bold = lesson.get("_bold", lesson["year"] <= 6)
     rtl = lang != "en"
     x0, y0, x1, y1 = BODY
 

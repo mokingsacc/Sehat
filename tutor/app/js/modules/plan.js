@@ -5,7 +5,8 @@
 //   (modules.homeFooter), not an offer.
 // - A lesson counts as done for the plan once she finished it, or, for a lesson a marked sheet added again (item 3,
 //   wrong items), once she finished it after that.
-// - Bands s1, s2 and adult readers; not adult literacy, since it is typed only until spoken input exists (C3.5).
+// - Bands s1, s2 and adults; adult literacy since 7c (C4.11) as a screen of goal chips read aloud (pathways), with
+//   "Someone can type it for you" opening the box.
 // - Offline, and for the chips, the phone matches her words against the lessons it knows (titles and units).
 // Nothing about the plan is sent; a typed goal goes to the server without her token (screens/plan.js).
 // Since P25a (C4.1): a plan is built over the skills graph (graph.js): what the goal needs that she has not mastered
@@ -29,9 +30,10 @@ export const CHIPS = 8;
 export const CHIPS_BOLD = 6;
 export const CLOSEST = 3;
 
-// she can make a plan: the module on for her band, and an adult only on the reader track
-export const canPlan = (c) => !!c && BANDS.includes(c.band) && (c.band !== 'ad' || c.track === 'reader')
-  && on('plan') && allows('plan', c.band);
+// she can make a plan: the module on for her band; an adult on the literacy track gets the goal chips, not the box
+// (7c, C4.11: goals she hears and taps)
+export const canPlan = (c) => !!c && BANDS.includes(c.band) && on('plan') && allows('plan', c.band);
+export const chipsOnly = (c) => !!c && c.band === 'ad' && c.track !== 'reader';
 
 // she can follow a plan or a pathway: the module on for her band (an adult on either track)
 export const canFollow = (c) => !!c && BANDS.includes(c.band) && on('plan') && allows('plan', c.band);
@@ -39,7 +41,7 @@ export const canFollow = (c) => !!c && BANDS.includes(c.band) && on('plan') && a
 // the lessons the phone knows for her band, in pack order (adults: adult packs; children: their band's years)
 export function bandLessons(c) {
   return library.all().filter((l) => (c.band === 'ad'
-    ? l.audience === 'adult' : l.audience !== 'adult' && bandOf({ year: l.year }) === c.band));
+    ? l.audience === 'adult' && library.trackFits(c, l) : l.audience !== 'adult' && bandOf({ year: l.year }) === c.band));
 }
 
 export function doneFor(c, id) {

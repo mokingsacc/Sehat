@@ -169,6 +169,13 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   may pick at most three node ids. Pathways are cards at the top of their subject and the first chips of "I want to
   learn..."; one plan at a time with a stop question; a finished plan says "Done" once. Spaced review (`recall`) is a
   warm-up of up to three due items inside the next lesson, on in `open`, staging and new cohorts.
+- **P26 with 7c, done (the content is a start):** adult tracks (C4.3): adult packs say which tracks see them; Home's
+  list for adults is "What to learn", the track rows (reading in her language, everyday maths, English, Chinese,
+  University), one per row with a speaker for adult literacy; the literacy track's packs print bold and need every
+  clip; four more badge colours; adult wording for "All correct" and the day's end; after the literacy pathway, one
+  card offers the reader look. `adult-literacy-1` and `adult-maths-1` are drafts of three lessons each, with their
+  pathways. 7c (C4.11): adult literacy gets "I want to learn..." as goal chips read aloud, each a pathway, with
+  "Someone can type it for you"; no microphone.
 
 ## January 2027: buy and test
 

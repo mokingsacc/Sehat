@@ -58,18 +58,19 @@ def _step_hashes(lib, lid: str) -> list[str]:
     raw = lib.lessons[lid]
     pid = lib.lesson_pack[lid]
     pdir, clips = lib.packs[pid]["_dir"], lib.packs[pid].get("_clips", {})
-    rest = {k: v for k, v in raw.items() if k not in ("steps", "review")}
+    rest = {k: v for k, v in raw.items() if k not in ("steps", "review") and not k.startswith("_")}
     return [packs.content_hash(rest, pdir, clips)] + [packs.content_hash({"step": st}, pdir, clips)
                                                       for st in raw.get("steps", [])]
 
 
 def _missing_clips(lib, lid: str, role: str) -> list[int]:
-    """Steps that need a recording in the role's language (years 0 to 3, and every letter step) and lack one."""
+    """Steps that need a recording in the role's language (years 0 to 3, an adult literacy pack, and every letter
+    step) and lack one."""
     raw = lib.lessons[lid]
     pack = lib.packs[lib.lesson_pack[lid]]
     clips = pack.get("_clips", {})
     langs = [x for x in pack.get("langs", ["prs", "ps"]) if x in LANG_OF_ROLE.get(role, ("prs", "ps"))]
-    young = packs.band_of_year(raw.get("year", 12)) in ("ey", "p1")
+    young = packs.reads_every_step(raw, pack)
     out = []
     for i, st in enumerate(raw.get("steps") or [], 1):
         if not (young or st.get("kind") == "letter"):

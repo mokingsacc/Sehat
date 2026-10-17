@@ -12,8 +12,8 @@ def lesson(name):
 
 
 def test_starter_pack_loads_clean(library):
-    assert len(library.lessons) == 6
-    assert set(library.packs) == {"starter"}
+    assert len(library.lessons) == 12
+    assert set(library.packs) == {"starter", "adult-literacy-1", "adult-maths-1"}         # the adult packs since P26
 
 
 def test_summary_has_what_the_app_lists(library):
@@ -78,3 +78,34 @@ def test_every_starter_lesson_is_still_a_draft():
     # drafts until a Dari reader, a Pashto reader and a subject teacher have checked them (docs/CONTENT.md)
     for f in (PACKS / "starter" / "lessons").glob("*.json"):
         assert json.loads(f.read_text(encoding="utf-8"))["review"]["status"] == "draft"
+
+
+# P26 (C4.3): adult packs say which tracks see them; the literacy track's packs print bold and need every clip
+
+def test_adult_packs_carry_their_tracks_and_the_literacy_ones_print_bold(library):
+    packs = {p["id"]: p for p in library.summary()}
+    assert packs["adult-literacy-1"]["tracks"] == ["literacy", "reader"] and "tracks" not in packs["starter"]
+    from tutor_hub import sheets
+    assert sheets.layout(library.lessons["adult-maths-2-change"], 1, "prs")["bold"] is True
+    assert sheets.layout(library.lessons["maths-7-fractions-add"], 1, "prs")["bold"] is False
+    assert "_bold" not in library.lesson_for_app("adult-maths-2-change")
+
+
+def test_tracks_are_checked_and_a_literacy_pack_needs_a_clip_for_every_step(tmp_path):
+    from tutor_hub.packs import release_problems, tracks_of
+    shutil.copytree(PACKS, tmp_path / "packs")
+    shutil.copy(PACKS.parent / "sources.json", tmp_path / "sources.json")
+    f = tmp_path / "packs" / "adult-maths-1" / "pack.json"
+    pack = json.loads(f.read_text(encoding="utf-8"))
+    for bad in (["writer"], [], "reader"):
+        f.write_text(json.dumps(dict(pack, tracks=bad)), encoding="utf-8")
+        assert any("tracks must list" in p for p in Library(tmp_path / "packs").problems), bad
+    s = tmp_path / "packs" / "starter" / "pack.json"
+    s.write_text(json.dumps(dict(json.loads(s.read_text(encoding="utf-8")), tracks=["reader"])), encoding="utf-8")
+    assert any("tracks are for adult packs only" in p for p in Library(tmp_path / "packs").problems)
+    assert tracks_of({"audience": "adult"}) == ["reader"] and tracks_of({}) == []
+    lesson = json.loads((PACKS / "adult-maths-1" / "lessons" / "adult-maths-2-change.json").read_text(encoding="utf-8"))
+    lit = release_problems(lesson, "signed", dict(pack), {})
+    assert sum("needs a recorded prs clip" in p for p in lit) == len(lesson["steps"])     # every step, not just letters
+    reader = release_problems(lesson, "signed", dict(pack, tracks=["reader"]), {})
+    assert not any("clip" in p for p in reader)

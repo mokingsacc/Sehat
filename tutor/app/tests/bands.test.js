@@ -84,7 +84,7 @@ test('the committee\'s colour fixes hold: warm #c2540a, no white on --good, the 
   assert.ok(bands.contrast('#ffffff', lightAdult.good) < 4.5);            // so nothing puts white text on it
   assert.doesNotMatch(css, /background: var\(--good\);[^}]*color: (#fff|var\(--on-accent\))/);
   assert.doesNotMatch(css, /color: var\(--accent-shadow\)/);
-  for (const sub of ['maths', 'science', 'english', 'dari', 'pashto']) {
+  for (const sub of ['maths', 'science', 'english', 'dari', 'pashto', 'chinese', 'university', 'quran', 'seerah']) {   // P26: four more
     assert.ok(bands.contrast('#ffffff', lightAdult['s-' + sub]) >= 4.5, sub);
   }
 });

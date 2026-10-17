@@ -299,12 +299,14 @@ export function topbar({ back = '#/home', title, sub, extra, speaker = true, net
 }
 
 export const SUBJECTS = ['maths', 'science', 'english', 'dari', 'pashto'];
-export const SUBJECT_GLYPH = { maths: '÷', science: null, english: 'Ab', dari: 'د', pashto: 'ښ' };
+// P26 adds the badges of the subjects to come (C4.3): Chinese, University, Quran, seerah
+export const SUBJECT_GLYPH = { maths: '÷', science: null, english: 'Ab', dari: 'د', pashto: 'ښ', chinese: '中', university: 'U',
+  quran: 'ق', seerah: 'س' };
 
 export function subjectBadge(subject, size = 40) {
   const g = SUBJECT_GLYPH[subject];
   return h('span', { class: `sbadge s-${subject}`, style: { width: size + 'px', height: size + 'px' } },
-    g ? h('span', { class: subject === 'dari' || subject === 'pashto' ? 'naskh' : '' }, g) : icon('flask', Math.round(size * 0.55), 2.2));
+    g ? h('span', { class: ['dari', 'pashto', 'quran', 'seerah'].includes(subject) ? 'naskh' : '' }, g) : icon('flask', Math.round(size * 0.55), 2.2));
 }
 
 export function busy() { return h('div', { class: 'busy' }, s('loading')); }

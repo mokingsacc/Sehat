@@ -85,6 +85,8 @@ function clean(l) {
     // school"); `alarms` 'off' when she switched closed-app bells off (on by default once the phone is hers, C3.1)
     ...(l.mine === 'yes' || l.mine === 'no' ? { mine: l.mine } : {}),
     ...(l.alarms === 'off' ? { alarms: 'off' } : {}),
+    // P26: an adult on the literacy track has answered "You can read now. Use the reader look?" (asked once)
+    ...(l.readerAsked === true ? { readerAsked: true } : {}),
     // C2.3: she has heard "I won't tell you the answer" once, the first time she reached a third hint
     ...(l.told === true ? { told: true } : {}),
     // P22: her plan (a label and lesson ids; lessons a marked sheet added again, with when) and the goals that
