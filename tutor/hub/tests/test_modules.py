@@ -39,10 +39,14 @@ def test_the_built_modules_are_valid():
     # P31 (C6.5): contests capture nothing of hers but a percent (no capability, no AI), on lessons, never for ey
     assert REAL["contest"]["capabilities"] == [] and "ai" not in REAL["contest"] and REAL["contest"]["depends"] == ["lessons"]
     assert REAL["contest"]["bands"] == ["p1", "p2", "s1", "s2", "ad"] and set(REAL["contest"]["settings"]) == {"per_day"}
-    # P30a (C6.1): live classes send no learner's audio (no capability, no AI), need the internet, never serve ey
-    assert REAL["live"]["capabilities"] == [] and "ai" not in REAL["live"] and REAL["live"]["needs"] == ["internet"]
+    # P30a (C6.1): live classes need the internet and never serve ey; since P30b (C6.4) an adult given the floor
+    # speaks, so the manifest says `audio.record` (high, the admin confirms its sentence) and the setting `floor` is off
+    assert REAL["live"]["capabilities"] == ["audio.record"] and "ai" not in REAL["live"]
+    assert REAL["live"]["needs"] == ["internet"] and REAL["live"]["version"] == "0.2.0"
     assert REAL["live"]["bands"] == ["p1", "p2", "s1", "s2", "ad"] and REAL["live"]["depends"] == ["lessons", "timetable"]
-    assert REAL["live"]["offline"] == "no" and set(REAL["live"]["settings"]) == {"max_minutes", "per_day"}
+    assert REAL["live"]["offline"] == "no" and set(REAL["live"]["settings"]) == {"max_minutes", "per_day", "floor"}
+    assert REAL["live"]["settings"]["floor"] == {"type": "bool", "default": False}
+    assert modules.risk(REAL["live"]) == "high" and "never recorded" in modules.risk_sentence(REAL["live"])
     # P32 (C4.8): her own questions are free text, off in every seed; `share.cohort` is registered and blocked
     assert REAL["made"]["capabilities"] == ["free.text"] and REAL["made"]["slots"] == ["lesson.end"]
     assert modules.CAPABILITY_RISK["share.cohort"] == "blocked"

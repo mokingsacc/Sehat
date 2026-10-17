@@ -1,14 +1,15 @@
 {
   "id": "live",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "maturity": "pilot",
   "depends": ["lessons", "timetable"],
   "bands": ["p1", "p2", "s1", "s2", "ad"],
   "slots": ["home.action"],
-  "capabilities": [],
+  "capabilities": ["audio.record"],
   "settings": {
     "max_minutes": {"type": "int", "default": 45, "min": 10, "max": 90},
-    "per_day": {"type": "int", "default": 2, "min": 1, "max": 6}
+    "per_day": {"type": "int", "default": 2, "min": 1, "max": 6},
+    "floor": {"type": "bool", "default": false}
   },
   "needs": ["internet"],
   "offline": "no"

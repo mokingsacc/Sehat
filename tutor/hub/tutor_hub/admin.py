@@ -382,6 +382,13 @@ def router(hub) -> APIRouter:
             raise HTTPException(422, "; ".join(p))
         f = await hub.store.flags(cid)
         settings = dict((f.get(mid) or {}).get("settings") or {}, **(body.settings or {}))
+        was = ((f.get(mid) or {}).get("settings") or {}).get("floor")
+        if mid == "live" and settings.get("floor") is True and not was:
+            # C6.4: the floor only for a class whose every band is adults, under a consent text naming live classes
+            if any(b != "ad" for b in c["bands"] or ["?"]):
+                raise refuse(409, "locked", "the floor is only for a class whose every band is adults")
+            if not hub.consent_names_live():
+                raise refuse(409, "locked", "the floor waits for a consent text that names live classes")
         if not body.enabled:
             await hub.store.set_flag(cid, mid, enabled=False, settings=settings, changed_by=by(me))
             return {"ok": True, "turned_on": []}

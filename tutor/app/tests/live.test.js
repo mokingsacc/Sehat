@@ -115,3 +115,54 @@ test("a live block's start rings the Android app's bell as a period's does", () 
   assert.deepEqual(plan.map((x) => [x.kind, new Date(x.at).getHours() * 60 + new Date(x.at).getMinutes()]),
     [['wake', 7 * 60 + 30], ['bell', 8 * 60 + 5], ['bell', 8 * 60 + 45], ['bell', 9 * 60 + 30], ['bell', 10 * 60]]);
 });
+
+// --- the floor (P30b, C6.4) ---
+
+test('the floor can be offered only to an adult, outside the APK, in a secure page with a microphone', async () => {
+  const floor = await import('../js/floor.js');
+  const md = { getUserMedia: async () => ({}) };
+  Object.defineProperty(globalThis, 'navigator', { value: { mediaDevices: md }, configurable: true, writable: true });
+  globalThis.RTCPeerConnection = class {};
+  globalThis.isSecureContext = true;
+  const adult = { id: 'x', band: 'ad', token: 't' };
+  assert.equal(floor.canSpeak(adult), true);
+  assert.equal(floor.canSpeak({ ...adult, band: 's2' }), false);                 // never a child
+  globalThis.isSecureContext = false;                                           // the hub's plain http
+  assert.equal(floor.canSpeak(adult), false);
+  globalThis.isSecureContext = true;
+  globalThis.QalamAndroid = { canRecord: () => true };                           // the APK: never
+  assert.equal(floor.canSpeak(adult), false);
+  delete globalThis.QalamAndroid;
+  delete globalThis.RTCPeerConnection;
+  assert.equal(floor.canSpeak(adult), false);
+  delete globalThis.isSecureContext;
+  assert.equal(floor.clock(90e3), '1:30');
+  assert.equal(floor.clock(4500), '0:05');
+  assert.equal(floor.clock(-1), '0:00');
+});
+
+test('floor.js records nothing, stops the track when the floor ends, and only the live screen loads it, for adults', () => {
+  const src = readFileSync(new URL('../js/floor.js', import.meta.url), 'utf8');
+  assert.ok(!/MediaRecorder|\bvideo\s*:/.test(src));
+  assert.match(src, /getUserMedia\(\{ audio: /);
+  const stop = src.slice(src.indexOf('function stop()'), src.indexOf('function finish('));
+  assert.match(stop, /track\.stop\(\)/);
+  assert.match(stop, /getTracks\(\)\.forEach\(\(t\) => t\.stop\(\)\)/);
+  const live = readFileSync(new URL('../js/modules/live.js', import.meta.url), 'utf8');
+  assert.match(live, /c\.band !== 'ad' \|\| globalThis\.QalamAndroid \|\| globalThis\.isSecureContext !== true/);
+  assert.match(live, /await import\('\.\.\/floor\.js'\)/);
+  assert.ok(!/^import .*floor\.js/m.test(live));                                   // never loaded with the screen
+  for (const f of ['../js/main.js', '../js/modules.js', '../js/screens/home.js']) {
+    assert.ok(!readFileSync(new URL(f, import.meta.url), 'utf8').includes('floor.js'), f);
+  }
+});
+
+test('the phone keeps only that she read the explainer', () => {
+  const c = state.addChild({ band: 'ad', lang: 'en' });
+  state.updateChild(c.id, { floorSeen: true });
+  state.reload();
+  assert.equal(state.byId(c.id).floorSeen, true);
+  state.updateChild(c.id, { floorSeen: 'yes' });
+  state.reload();
+  assert.ok(!('floorSeen' in state.byId(c.id)));
+});

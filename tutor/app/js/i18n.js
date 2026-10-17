@@ -449,6 +449,12 @@ const S = {
     live_over: 'صنف تمام شد',
     live_data: 'یک صنف در ۴۰ دقیقه حدود ۱۰ مگابایت انترنت مصرف می‌کند.',
     live_lost: 'صدا قطع شد. دوباره وصل می‌شود…',
+    // P30b (C6.4): the floor, for adults only (the polite plural)
+    live_floor: 'نوبت صحبت شماست',
+    live_floor_left: 'نوبت صحبت شماست · {t}',
+    live_explain: 'صدای شما زنده به معلم و صنف می‌رسد. چیزی ثبت نمی‌شود.',
+    live_speak: 'صحبت کنید',
+    live_done: 'تمام',
     // C6 (P31): contests; drafts for the native speakers
     contest: 'مسابقه',
     contests: 'مسابقه‌ها',
@@ -920,6 +926,12 @@ const S = {
     live_over: 'ټولګی پای ته ورسېد',
     live_data: 'یو ټولګی په ۴۰ دقیقو کې شاوخوا ۱۰ مېګابایټ انټرنېټ لګوي.',
     live_lost: 'غږ پرې شو. بیا وصلېږي…',
+    // P30b (C6.4): the floor, for adults only (the polite plural)
+    live_floor: 'د خبرو وار ستاسو دی',
+    live_floor_left: 'د خبرو وار ستاسو دی · {t}',
+    live_explain: 'ستاسو غږ ژوندی ښوونکي او ټولګي ته رسېږي. هېڅ شی نه ثبتېږي.',
+    live_speak: 'خبرې وکړئ',
+    live_done: 'بس دی',
     // C6 (P31): contests; drafts for the native speakers
     contest: 'سیالي',
     contests: 'سیالۍ',
@@ -1392,6 +1404,12 @@ const S = {
     live_over: 'The class is over',
     live_data: 'A class uses about 10 MB of data in 40 minutes.',
     live_lost: 'The sound stopped. Joining again…',
+    // P30b (C6.4): the floor, for adults only
+    live_floor: 'You have the floor',
+    live_floor_left: 'You have the floor · {t}',
+    live_explain: 'Your voice goes live to your teacher and the class. Nothing is recorded.',
+    live_speak: 'Speak',
+    live_done: 'Done',
     // C6 (P31): contests
     contest: 'Contest',
     contests: 'Contests',

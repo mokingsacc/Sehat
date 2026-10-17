@@ -238,6 +238,8 @@ export const liveAnswer = (id, sdp, token) => call(liveP(id, 'answer'), { method
 export const liveState = (id, v, token) => call(liveP(id, 'state') + (v ? `?v=${v}` : ''), { token, ms: 8000 });
 export const liveHand = (id, reason, token) => call(liveP(id, 'hand'), { method: 'POST', body: { reason }, token, ms: 8000 });
 export const liveLeave = (id, token) => call(liveP(id, 'leave'), { method: 'POST', token, ms: 8000 });
+// the floor (P30b, C6.4): an adult's own voice, published to the relay while she holds the floor; {done: true} gives it back
+export const liveSpeak = (id, body, token) => call(liveP(id, 'speak'), { method: 'POST', body, token, ms: 15000 });
 
 // contests (P31, C6.5): released to her class; the questions without their answers, her answers marked by the server
 // (only the percent is kept), the key after the close for the answers the phone kept

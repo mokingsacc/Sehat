@@ -355,19 +355,207 @@ def test_a_class_whose_teacher_went_quiet_or_ran_over_is_ended(online):
     assert roster(online, sid)["over"] is True                                # 45 minutes and a minute's grace
 
 
-def test_no_live_route_reads_a_body_over_16_kb_and_there_is_no_floor_in_p30a(online):
+def test_no_live_route_reads_a_body_over_16_kb(online):
     sid = start(online)["id"]
     me = learner_of(online, STAGING)
     big = json.dumps({"sdp": "v=0" + "x" * (16 * 1024)})
-    posts = [f"/api/m/live/{sid}/{p}" for p in ("join", "sdp", "answer", "hand", "leave")] + \
-        ["/api/m/teacher/live/start"] + [f"/api/m/teacher/live/{sid}/{p}" for p in ("sdp", "board", "lower", "end")]
+    posts = [f"/api/m/live/{sid}/{p}" for p in ("join", "sdp", "answer", "hand", "leave", "speak")] + \
+        ["/api/m/teacher/live/start"] + [f"/api/m/teacher/live/{sid}/{p}"
+                                         for p in ("sdp", "board", "lower", "end", "floor", "listen", "answer")]
     for path in posts:
         h = dict(me if "/teacher/" not in path else online.teacher, **{"content-type": "application/json"})
         assert online.post(path, headers=h, content=big).status_code == 413, path
-    routes = [getattr(r, "path", "") for r in online.app.router.routes]
-    assert not any("floor" in p or "speak" in p for p in routes)
-    assert online.post(f"/api/m/teacher/live/{sid}/floor", headers=online.teacher, json={}).status_code in (404, 405)
-    assert online.post(f"/api/m/live/{sid}/speak", headers=me, json={}).status_code in (404, 405)
+    # since P30b (C6.4) the floor and speak routes answer; the floor tests below say whom they refuse
+    assert online.post(f"/api/m/live/{sid}/speak", headers=me, json={}).status_code == 403        # a child: never
+    assert online.post(f"/api/m/teacher/live/{sid}/floor", headers=online.teacher, json={}).json()["floor"] is None
+
+
+# the floor (P30b, C6.4): an adult in an adult-only class, given the floor, speaks for at most 90 seconds
+
+def adults_only(c, floor=True, consent=True):
+    """STAGING made a class of adults only, its `floor` setting on, under a consent text naming live classes."""
+    sql(c, "UPDATE cohorts SET bands=? WHERE id=?", (json.dumps(["ad"]), STAGING))
+    c.hub.store.sync.set_flag(STAGING, "live", enabled=True, settings={"floor": floor, "per_day": 6},
+                                 changed_by="admin")
+    if consent:
+        for key in [k for k in c.hub.consent_texts if k[1] == c.hub.consent_version]:
+            c.hub.consent_texts[key] = dict(c.hub.consent_texts[key], live=True)
+
+
+def room(c, n=2, band="ad"):
+    """An open class with the teacher's sound on and `n` learners in the room."""
+    sid = start(c)["id"]
+    publish(c, sid)
+    people = [learner_of(c, STAGING, band=band) for _ in range(n)]
+    for p in people:
+        join(c, sid, p)
+    assert roster(c, sid)["audio"] == ("on" if n >= 2 else "off")
+    return sid, people
+
+
+def alias(c, h):
+    row = c.hub.store.sync.learner(learners.token_hash(h["X-Learner-Token"]))
+    return f"{row['picture']}-{row['number']}"
+
+
+def give(c, sid, who, status=200):
+    r = c.post(f"/api/m/teacher/live/{sid}/floor", headers=c.teacher, json={"alias": alias(c, who)})
+    assert r.status_code == status, r.text
+    return r.json()
+
+
+def speak(c, sid, who, status=200):
+    t = join(c, sid, who)["ticket"]
+    r = c.post(f"/api/m/live/{sid}/speak", headers=who, json={"ticket": t, "sdp": OFFER, "mid": "0"})
+    assert r.status_code == status, r.text
+    return r.json()
+
+
+def test_the_floor_goes_to_one_adult_and_her_voice_to_the_teacher_and_the_others(online):
+    adults_only(online)
+    sid, (a, b) = room(online)
+    assert online.get("/api/m/teacher/live", headers=online.teacher).json()["floor"] is True
+    f = give(online, sid, a)["floor"]
+    assert f["alias"] == alias(online, a) and f["on"] is False
+    until = datetime.fromisoformat(f["until"]) - datetime.now(timezone.utc)
+    assert timedelta(seconds=85) < until <= timedelta(seconds=90)
+    # her phone knows it is hers; the others see only that someone has the floor, never who
+    sa = online.get(f"/api/m/live/{sid}/state", headers=a).json()
+    sb = online.get(f"/api/m/live/{sid}/state", headers=b).json()
+    assert sa["floor_mine"] is True and sb["floor_mine"] is False
+    assert set(sb["floor"]) == {"until", "on"} and alias(online, a) not in json.dumps(sb)
+    assert give(online, sid, b, 409)["code"] == "floor_held"                         # one floor at a time
+    speak(online, sid, b, 403)                                                       # not hers
+    pub0 = online.hub.store.sync.live_session(sid)["state"]["rtc"]["pub"]
+    r = speak(online, sid, a)
+    assert "maxaveragebitrate=32000" in r["sdp"] and r["until"] == f["until"]
+    voice = [x for x in online.rtc.calls if x[0] == "publish"][-1]
+    assert voice[3] == "0" and voice[4] == "voice"
+    st = online.hub.store.sync.live_session(sid)["state"]
+    assert st["rtc"]["pub"] == pub0 + 1 and st["floor"]["published"] is True       # the phones pull again
+    # the others pull the teacher's mic and her voice; she never pulls her own
+    online.post(f"/api/m/live/{sid}/sdp", headers=b, json={"ticket": join(online, sid, b)["ticket"]})
+    many = [x for x in online.rtc.calls if x[0] == "pull_many"][-1]
+    assert many[2] == ((st["rtc"]["sfu"], "mic"), (st["floor"]["sfu"], "voice"))
+    n = len([x for x in online.rtc.calls if x[0] == "pull_many"])
+    online.post(f"/api/m/live/{sid}/sdp", headers=a, json={"ticket": join(online, sid, a)["ticket"]})
+    assert len([x for x in online.rtc.calls if x[0] == "pull_many"]) == n
+    assert [x for x in online.rtc.calls if x[0] == "pull"][-1][3] == "mic"
+    # the teacher hears her through a relay session of the page's own
+    p = online.post(f"/api/m/teacher/live/{sid}/listen", headers=online.teacher, json={}).json()
+    assert p["renegotiate"] is True
+    assert [x for x in online.rtc.calls if x[0] == "pull"][-1][2:] == (st["floor"]["sfu"], "voice")
+    r = online.post(f"/api/m/teacher/live/{sid}/answer", headers=online.teacher, json={"sdp": OFFER})
+    assert r.json() == {"ok": True}
+    assert roster(online, sid)["floor"] == {"alias": alias(online, a), "until": f["until"], "on": True}
+    sent = online.rtc.sent()
+    assert a["X-Learner-Token"] not in sent and learners.token_hash(a["X-Learner-Token"]) not in sent
+    assert online.fake.sent == []                                                     # no AI near it
+    assert sql(online, "SELECT COUNT(*) FROM events")[0][0] == 0                      # nothing written of anyone
+
+
+def test_the_floor_falls_at_90_seconds_and_with_take_back_done_or_leaving(online, monkeypatch):
+    adults_only(online)
+    sid, (a, b) = room(online)
+    give(online, sid, a)
+    speak(online, sid, a)
+    pub = online.hub.store.sync.live_session(sid)["state"]["rtc"]["pub"]
+    real = live_mod.now
+    monkeypatch.setattr(live_mod, "now", lambda: real() + timedelta(seconds=91))
+    st = online.get(f"/api/m/live/{sid}/state", headers=b).json()
+    assert st["floor"] is None and st["floor_mine"] is False and st["pub"] == pub + 1   # pull again, without her
+    assert online.hub.store.sync.live_session(sid)["state"]["floor"] is None
+    monkeypatch.setattr(live_mod, "now", real)
+    speak(online, sid, a, 403)                                                       # it has fallen
+    # "Take back the floor"
+    give(online, sid, a)
+    r = online.post(f"/api/m/teacher/live/{sid}/floor", headers=online.teacher, json={})
+    assert r.json()["floor"] is None and online.get(f"/api/m/live/{sid}/state", headers=a).json()["floor_mine"] is False
+    # her "Done"
+    give(online, sid, a)
+    assert online.post(f"/api/m/live/{sid}/speak", headers=a, json={"done": True}).json()["floor"] is None
+    # she leaves with it
+    give(online, sid, a)
+    online.post(f"/api/m/live/{sid}/leave", headers=a)
+    assert online.hub.store.sync.live_session(sid)["state"]["floor"] is None
+    # the sound goes off (fewer than two for two minutes): it falls with it
+    join(online, sid, a)
+    give(online, sid, a)
+    old = iso(datetime.now(timezone.utc) - timedelta(seconds=40))
+    sql(online, "UPDATE live_present SET seen_at=? WHERE token_hash=?", (old, learners.token_hash(b["X-Learner-Token"])))
+    s = online.hub.store.sync.live_session(sid)
+    low = iso(datetime.now(timezone.utc) - timedelta(seconds=121))
+    online.hub.store.sync.live_update(sid, state=dict(s["state"], low_since=low))
+    r = roster(online, sid)
+    assert r["audio"] == "off" and r["floor"] is None
+
+
+def test_the_floor_is_refused_to_a_child_a_mixed_class_without_the_setting_or_the_consent(online):
+    # a mixed class (the seed's every band): no floor, even with the setting and the consent text
+    adults_only(online)
+    sql(online, "UPDATE cohorts SET bands=? WHERE id=?", (json.dumps(["s2", "ad"]), STAGING))
+    sid, (a, b) = room(online)
+    assert online.get("/api/m/teacher/live", headers=online.teacher).json()["floor"] is False
+    assert give(online, sid, a, 409)["code"] == "locked"
+    online.post(f"/api/m/teacher/live/{sid}/end", headers=online.teacher)
+    # adults only, but the setting off
+    adults_only(online, floor=False)
+    sid, (a, b) = room(online)
+    assert give(online, sid, a, 409)["code"] == "locked"
+    online.post(f"/api/m/teacher/live/{sid}/end", headers=online.teacher)
+    # adults only and the setting on, but her consent text does not name live classes
+    adults_only(online)
+    sid, (a, b) = room(online)
+    for key in [k for k in online.hub.consent_texts if k[1] == online.hub.consent_version]:
+        online.hub.consent_texts[key] = dict(online.hub.consent_texts[key], live=False)
+    assert give(online, sid, a, 409)["code"] == "locked"
+    adults_only(online)
+    # a child's token: the floor is refused, and speak refuses her whatever the state says (403)
+    child = learner_of(online, STAGING, band="s1")
+    join(online, sid, child)
+    assert give(online, sid, child, 409)["code"] == "locked"
+    st = dict(online.hub.store.sync.live_session(sid)["state"],
+              floor={"alias": alias(online, child), "until": iso(datetime.now(timezone.utc) + timedelta(seconds=60)),
+                     "sfu": None, "published": False})
+    online.hub.store.sync.live_update(sid, state=st)
+    speak(online, sid, child, 403)
+    assert not [x for x in online.rtc.calls if x[0] == "publish" and x[4] == "voice"]
+    online.post(f"/api/m/teacher/live/{sid}/floor", headers=online.teacher, json={})
+    # fewer than two listening: the floor waits
+    online.post(f"/api/m/teacher/live/{sid}/end", headers=online.teacher)
+    sid, (a,) = room(online, n=1)
+    assert give(online, sid, a, 409)["code"] == "floor_few"
+    # the floor's routes are the teacher's own class's, with X-Qalam, as every live write
+    h = {k: v for k, v in online.teacher.items() if k != "X-Qalam"}
+    assert online.post(f"/api/m/teacher/live/{sid}/floor", headers=h, json={}).status_code == 403
+
+
+def test_the_admin_turns_the_floor_on_only_for_an_adult_only_class_under_a_consent_naming_live(online):
+    def floor_on():
+        return online.post(f"/api/m/admin/cohorts/{STAGING}/flags/live", headers=online.admin,
+                           json={"enabled": True, "settings": {"floor": True}, "confirm": True, "both": True})
+    for key in [k for k in online.hub.consent_texts if k[1] == online.hub.consent_version]:
+        online.hub.consent_texts[key] = dict(online.hub.consent_texts[key], live=True)
+    r = floor_on()
+    assert r.status_code == 409 and r.json()["code"] == "locked"                     # the seed's bands are mixed
+    sql(online, "UPDATE cohorts SET bands=? WHERE id=?", (json.dumps(["ad"]), STAGING))
+    for key in [k for k in online.hub.consent_texts if k[1] == online.hub.consent_version]:
+        online.hub.consent_texts[key] = dict(online.hub.consent_texts[key], live=False)
+    assert floor_on().status_code == 409                                             # the consent text first
+    for key in [k for k in online.hub.consent_texts if k[1] == online.hub.consent_version]:
+        online.hub.consent_texts[key] = dict(online.hub.consent_texts[key], live=True)
+    assert floor_on().status_code == 200
+    assert online.hub.store.sync.flags(STAGING)["live"]["settings"]["floor"] is True
+    # the switch's confirm names what the capability lets a learner do
+    online.hub.store.sync.set_flag(STAGING, "live", enabled=False, settings={}, changed_by="admin")
+    r = online.post(f"/api/m/admin/cohorts/{STAGING}/flags/live", headers=online.admin, json={"enabled": True, "both": True})
+    assert r.status_code == 409 and r.json()["code"] == "confirm_first"
+    assert "never recorded" in r.json()["risks"][0]["sentence"]
+
+
+def test_the_floor_is_off_in_every_seed():
+    for name in ("hub", "staging", "open"):
+        assert "floor" not in (TUTOR / "cohorts" / f"{name}.json").read_text()
 
 
 def test_the_admin_sees_the_months_line_against_the_cap(online):

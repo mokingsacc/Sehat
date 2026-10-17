@@ -27,7 +27,11 @@
 // the browser's RTCPeerConnection is a stub that "connects" and plays a silent track. home: Home's card outside a
 // block; block: a live block in the timetable (use --at inside it) and the Now card's Join; on the screen
 // (--screen live/abcdefgh23456789): listen (sound on, the board showing --board's step 0), reasons (the three
-// chips open), up (her hand up), coming (the sound off), over (the class ended).
+// chips open), up (her hand up), coming (the sound off), over (the class ended). The floor (P30b, C6.4): floor (her
+// teacher gave her the floor: an adult sees Speak and Not now, anyone else none and it goes back), speak (Speak
+// tapped: "You have the floor · 1:30" and Done), done (Done tapped: the microphone track must be stopped), taken
+// (the teacher takes it back while she speaks: the track must be stopped). --apk adds the Android app's bridge
+// (QalamAndroid), where Speak must never show.
 // --contest (P31, C6.6) turns the contest module on in hello with one contest, "Maths week 3", of five questions
 // from the starter lessons, and answers the contest routes as the hub would (no hub serves one without a signed
 // contest file). home: Home's row; card: #/contest/maths-week-3 with Join; run: the run on question 2 (she answered
@@ -49,7 +53,8 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
 const HUB = args.hub || 'http://127.0.0.1:8000';
 const OUT = args.out || 'shots';
 const SCREEN = args.screen || 'home';
-const SHOT = (args.contest && !args.screen ? `contest-${args.contest}` : SCREEN).replace(/[^a-z0-9]+/gi, '-');
+const SHOT = (args.contest && !args.screen ? `contest-${args.contest}`
+  : args.live && args.screen ? `${SCREEN}-${args.live}${args.apk ? '-apk' : ''}` : SCREEN).replace(/[^a-z0-9]+/gi, '-');
 const WIDTHS = (args.widths || '390').split(',').map(Number);
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
@@ -263,6 +268,11 @@ async function liveStubs(page, learner) {
     board: phase === 'listen' || phase === 'up' || phase === 'reasons' ? { lesson: args.board || 'maths-7-fractions-add', step: 0 } : null,
     hand: phase === 'up' ? 1 : null };
   const open = { id: LIVE_ID, subject: 'maths', since: '2027-01-02T08:45:00Z' };
+  // the floor is hers (the stand-in says so at join already, where the hub says it at her first poll)
+  const ctl = { taken: false };
+  if (['floor', 'speak', 'done', 'taken'].includes(phase)) {
+    Object.assign(state, { floor: { until: new Date(Date.now() + 90e3).toISOString(), on: false }, floor_mine: true });
+  }
   await page.route('**/api/hello*', async (route) => {
     const r = await route.fetch();
     const j = await r.json();
@@ -283,17 +293,35 @@ async function liveStubs(page, learner) {
   const json = (body, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) });
   await page.route('**/api/m/live?*', (route) => route.fulfill(json({ ...open, here: 12 })));
   await page.route('**/api/m/live', (route) => route.fulfill(json({ ...open, here: 12 })));
-  await page.route(/\/api\/m\/live\/[a-z0-9]+\/(join|sdp|answer|state|hand|leave)/, (route) => {
+  await page.route(/\/api\/m\/live\/[a-z0-9]+\/(join|sdp|answer|state|hand|leave|speak)/, (route) => {
     const what = new URL(route.request().url()).pathname.split('/').pop();
     if (what === 'join') return route.fulfill(json({ ticket: 'ticketticketticketticketab', ice: [], state, v: state.v }));
     if (what === 'sdp') return route.fulfill(json({ sdp: 'v=0\r\n', type: 'offer', renegotiate: true, answer: null, audio: state.audio }));
+    if (what === 'speak') {
+      const body = route.request().postDataJSON() || {};
+      ctl.spoke = ctl.spoke || !body.done;
+      return route.fulfill(json(body.done ? { floor: null, v: state.v + 1 } : { sdp: 'v=0\r\n', until: state.floor.until, v: state.v + 1 }));
+    }
+    if (what === 'state' && ctl.taken) return route.fulfill(json({ ...state, v: state.v + 2, floor: null, floor_mine: false }));
     if (what === 'state') return route.fulfill({ status: 204, body: '' });
     return route.fulfill(json({ ok: true }));
   });
-  await page.addInitScript(() => {
+  await page.addInitScript((apk) => {
+    if (apk) window.QalamAndroid = { canRecord: () => false, setAlarms: () => {} };   // the Android app's bridge
+    // the microphone: a quiet tone, kept as window.__mic so the check can see whether it was stopped
+    const mic = async () => {
+      const ac = new AudioContext();
+      const d = ac.createMediaStreamDestination();
+      ac.createOscillator().connect(d);
+      window.__mic = d.stream.getAudioTracks()[0];
+      return d.stream;
+    };
+    if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = mic;
     // a stand-in for the browser's WebRTC: it "connects" and hands the page a silent track
     window.RTCPeerConnection = class {
       constructor() { this.iceConnectionState = 'new'; this.localDescription = null; }
+      addTransceiver(track) { return { mid: '0', sender: { track } }; }
+      async createOffer() { return { type: 'offer', sdp: 'v=0\r\n' }; }
       async setRemoteDescription() {
         setTimeout(() => {
           const ac = new AudioContext();
@@ -307,7 +335,15 @@ async function liveStubs(page, learner) {
       async setLocalDescription(d) { this.localDescription = d; }
       close() {}
     };
-  });
+  }, !!args.apk);
+  if (args.apk) {
+    // the APK asks the hub's own addresses (hub.js CANDIDATES); here they all reach the hub under test
+    await page.route(/^http:\/\/(10\.42\.0\.1|qalam\.lan|192\.168\.4\.1)(:\d+)?\//, (route) => {
+      const u = new URL(route.request().url());
+      return route.fallback({ url: HUB + u.pathname + u.search });
+    });
+  }
+  return ctl;
 }
 
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });
@@ -345,7 +381,7 @@ for (const width of WIDTHS) {
           ];
         }
         if (args.plan) learner.plan = { label: 'Plan', lessons: args.plan.split(','), again: {} };
-        if (args.live) await liveStubs(page, learner);
+        const live = args.live ? await liveStubs(page, learner) : null;
         if (args.contest) await contestStubs(page, learner);
         await page.addInitScript(([d, cached]) => {
           try {
@@ -357,6 +393,26 @@ for (const width of WIDTHS) {
         await page.waitForSelector('#app .screen', { timeout: 10000 });
         await page.waitForTimeout(700);
         if (args.live === 'reasons') { await page.click('.live-raise'); await page.waitForTimeout(200); }
+        if (['floor', 'speak', 'done', 'taken'].includes(args.live)) {
+          // the floor (P30b): Speak for an adult in the web app only; the microphone stopped when the floor ends
+          await page.waitForTimeout(300);
+          const adult = l.band === 'ad' && !args.apk;
+          const speakBtn = await page.$('.live-speak');
+          if (adult && !speakBtn) errors.push('the floor: an adult given the floor sees no Speak');
+          if (!adult && speakBtn) errors.push(`the floor: Speak shows ${args.apk ? 'in the APK' : 'to a child'}`);
+          if (adult && args.live !== 'floor') {
+            await page.click('.live-speak');
+            await page.waitForTimeout(400);
+            if (!(await page.$('.live-floor-left'))) errors.push('the floor: no countdown after Speak');
+            if (await page.evaluate(() => !window.__mic || window.__mic.readyState !== 'live')) errors.push('the floor: no live microphone');
+            if (args.live === 'done') { await page.click('.live-floor .btn.primary'); await page.waitForTimeout(200); }
+            if (args.live === 'taken') { live.taken = true; await page.waitForTimeout(5600); }
+            if (args.live !== 'speak') {
+              if (await page.evaluate(() => window.__mic.readyState) !== 'ended') errors.push('the floor ended but the microphone track was not stopped');
+              if (await page.$('.live-floor')) errors.push('the floor ended but its panel still shows');
+            }
+          }
+        }
         if (args.contest === 'send' && !(await page.$('.contest-run'))) {
           if (l.band !== 'ey') errors.push('Send?: no contest run on the screen');      // early years never see one
         } else if (args.contest === 'send') {

@@ -1,6 +1,6 @@
 // Live audio classes (the `live` module, P30a; DESIGN-C6-SPECS.md C6.2). She listens to her teacher and raises her
-// hand with one of three reasons; her own sound never leaves the phone, because this screen never asks for the
-// phone's microphone and records nothing (a test reads this file for the names that would).
+// hand with one of three reasons. This screen never asks for the phone's microphone and records nothing (a test
+// reads this file for the names that would); only an adult given the floor speaks, through floor.js (P30b).
 // - Entry: the timetable's Now card in a live block ("Live class: Maths · Join"), or, outside a block, Home's
 //   secondary card "Live class: Maths" with Join (priority 25). Early years never see it.
 // - The screen #/live/<id>: the title and "Listening to your teacher", one <audio> playing the teacher's track as the
@@ -12,6 +12,9 @@
 //   dropped when it goes off. A dropped connection joins again with a fresh ticket, silently, five times at most.
 // - Kept on the phone: only `liveSeen`, the class she saw end, so a stale hello never offers it again. The data line
 //   ("A class uses about 10 MB...") shows until her first class has ended.
+// - The floor (P30b, C6.4): when the state says her teacher gave her the floor, an adult in the web app over HTTPS
+//   gets floor.js (loaded only then: the one file that opens a microphone) with Speak and Not now; any other phone
+//   gives the floor straight back, so the APK never shows Speak. A child is never given it (the server refuses).
 // - Inside a timetable's live block the phone asks /api/m/live every 20 seconds (liveclass.js), so Join appears on
 //   the Now card the moment the teacher starts; outside one, hello's `live` (read every minute) is the only source.
 
@@ -113,10 +116,11 @@ export default async function liveScreen(args) {
   const status = h('p', { class: 'lead live-status', role: 'status', 'aria-live': 'polite' }, s('live_coming'));
   const board = h('section', { class: 'card lined pad-card stack live-board hidden' });
   const hand = h('div', { class: 'stack live-hand' });
+  const floorBox = h('div', { class: 'live-floor-box' });
   const leave = said(h('button', { type: 'button', class: 'btn outline', onClick: () => { location.hash = '#/home'; } },
     s('live_leave')));
   const data = c.liveSeen ? null : h('small', { class: 'muted live-data' }, s('live_data'));
-  const body = h('div', { class: 'pad stack' }, sound, status, board, hand, data, leave);
+  const body = h('div', { class: 'pad stack' }, sound, status, board, floorBox, hand, data, leave);
   fill(root, topbar({ back: '#/home', title: titleFor(subject), lead: s('live_listening'), child: true }), body, audio);
 
   let pc = null;
@@ -130,6 +134,8 @@ export default async function liveScreen(args) {
   let boardKey = '';
   let myHand = null;
   let picking = false;
+  let mine = false;                    // the floor is hers (the state's floor_mine)
+  let floorP = null;                   // floor.js's panel while it shows
 
   // while the sound flows the drawing pulses and the header's lead says it; while it is off, "Your teacher is coming"
   const flowing = (on) => {
@@ -189,7 +195,7 @@ export default async function liveScreen(args) {
   // five tries spent: the error screen's shape (C5.4), "Try again" joins once more
   function lost() {
     fill(body, h('p', { class: 'lead' }, s('error_title')),
-      said(h('button', { type: 'button', class: 'btn primary', onClick: () => { tries = 0; fill(body, sound, status, board, hand, data, leave); again(); } },
+      said(h('button', { type: 'button', class: 'btn primary', onClick: () => { tries = 0; fill(body, sound, status, board, floorBox, hand, data, leave); again(); } },
         s('try_again'))),
       leave);
   }
@@ -231,10 +237,25 @@ export default async function liveScreen(args) {
     board.classList.remove('hidden');
   }
 
+  // the floor given to her, or taken back: only an adult outside the APK in a secure page loads floor.js
+  async function floorChanged(f) {
+    if (floorP) { floorP.stop(); floorP = null; }
+    fill(floorBox);
+    if (!mine || !f) return;
+    const giveBack = () => hub.liveSpeak(id, { done: true }, c.token).catch(() => {});
+    if (c.band !== 'ad' || globalThis.QalamAndroid || globalThis.isSecureContext !== true) { giveBack(); return; }
+    const floor = await import('../floor.js');
+    if (!mine || gone || floorP) return;
+    if (!floor.canSpeak(c)) { giveBack(); return; }
+    floorP = floor.floorPanel({ id, c, until: f.until, ended: () => { floorP = null; fill(floorBox); } });
+    fill(floorBox, floorP.el);
+  }
+
   function end() {
     over = true;
     gone = true;
     clearInterval(timer);
+    if (floorP) { floorP.stop(); floorP = null; }
     drop();
     state.updateChild(c.id, { liveSeen: id });
     fill(body, h('div', { class: 'live-sound', 'aria-hidden': 'true' }, icon('live', 120, 1.4)),
@@ -249,6 +270,7 @@ export default async function liveScreen(args) {
     if (st.over) { end(); return; }
     if ((st.hand ?? null) !== myHand && !picking) { myHand = st.hand ?? null; drawHand(); }
     drawBoard(st.board);
+    if (!!st.floor_mine !== mine) { mine = !!st.floor_mine; floorChanged(st.floor); }
     const on = st.audio === 'on';
     if (on && (!pc || st.pub !== pub)) {
       pub = st.pub;
@@ -278,6 +300,7 @@ export default async function liveScreen(args) {
     const wasOver = over;
     gone = true;
     clearInterval(timer);
+    if (floorP) { floorP.stop(); floorP = null; }
     drop();
     if (!wasOver) hub.liveLeave(id, c.token).catch(() => {});
   } };

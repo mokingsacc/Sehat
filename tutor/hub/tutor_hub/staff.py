@@ -49,8 +49,8 @@ class Refusal(HTTPException):
 
 def refuse(status: int, code: str, detail: str) -> Refusal:
     """The codes: last_admin, not_your_class, confirm_first, locked, photo_gate, budget, wrong_pin, wait, no_cohort,
-    access; since P30a live_open and cap; since P31 contest_sent and not_signed (tools/check_staff_strings.mjs checks
-    each has its sentence in en.js)."""
+    access; since P30a live_open and cap; since P31 contest_sent and not_signed; since P30b floor_held and floor_few
+    (tools/check_staff_strings.mjs checks each has its sentence in en.js)."""
     return Refusal(status, code, detail)
 
 

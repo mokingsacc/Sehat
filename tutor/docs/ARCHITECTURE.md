@@ -505,8 +505,8 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /v/{id}` | The check page a certificate's QR code opens (`app/js/certcheck.js`), served by Python on the hub and online |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
 | `GET /api/m/admin/me`, `cohorts`, `cohorts/{id}`, `content`, `wishes`, `spend`, `safety`, `staff`, `log`; `POST /api/m/admin/cohorts`, `cohorts/{id}/kill`, `cohorts/{id}/flags/{module}`, `cohorts/{id}/settings`, `cohorts/{id}/code`, `cohorts/{id}/cards`, `content/{pack}/publish`, `content/{pack}/rollback`, `content/contests/{id}/open`, `content/contests/{id}/close` (`{cohort}`), `content/contests/{id}/open-all`, `wishes`, `staff`; `DELETE /api/m/admin/staff/{id}` | The admin panel (P21); `X-Admin-Pin` on the hub, Cloudflare Access and an admin staff row online, 404 in the fallback container |
-| `GET /api/m/live`; `POST /api/m/live/{id}/join`, `sdp`, `answer`, `hand`, `leave`; `GET /api/m/live/{id}/state?v=` | A live class, the learner's side (P30a, C6.1): her token says her class (`?cohort=` never read), her consent needed; a ticket from `join` (16 bytes, once, 60 seconds) makes her relay session through `sdp`; `state` answers 204 while `v` is unchanged; bodies of 16 KB at most |
-| `GET /api/m/teacher/live`; `POST /api/m/teacher/live/start`, `{id}/sdp`, `{id}/board`, `{id}/lower`, `{id}/end`; `GET /api/m/teacher/live/{id}/roster` | A live class, the teacher's side (P30a, C6.1): the staff gate, her own class (`not_your_class`), `X-Qalam: 1` on every write; `start` refuses `live_open`, `budget` and `cap`; the roster says who is here, the hands in order and whether her sound goes out (two learners or more) |
+| `GET /api/m/live`; `POST /api/m/live/{id}/join`, `sdp`, `answer`, `hand`, `leave`, `speak`; `GET /api/m/live/{id}/state?v=` | A live class, the learner's side (P30a, C6.1): her token says her class (`?cohort=` never read), her consent needed; a ticket from `join` (16 bytes, once, 60 seconds) makes her relay session through `sdp`; `state` answers 204 while `v` is unchanged; bodies of 16 KB at most. `speak` `{ticket, sdp, mid}` or `{done: true}` (P30b, C6.4): only an `ad` token holding the floor (403 otherwise), 409 `locked` unless the class is adults only with `floor` on and her consent names live classes |
+| `GET /api/m/teacher/live`; `POST /api/m/teacher/live/start`, `{id}/sdp`, `{id}/board`, `{id}/lower`, `{id}/floor`, `{id}/listen`, `{id}/answer`, `{id}/end`; `GET /api/m/teacher/live/{id}/roster` | A live class, the teacher's side (P30a, C6.1): the staff gate, her own class (`not_your_class`), `X-Qalam: 1` on every write; `start` refuses `live_open`, `budget` and `cap`; the roster says who is here, the hands in order, whether her sound goes out (two learners or more) and who has the floor. `floor` `{alias}` or `{}` (P30b, C6.4) refuses `locked`, `floor_held` and `floor_few`; `listen` and `answer` pull the floor's voice into the page's own relay session |
 | `GET /api/m/contest?lang=`, `contest/{id}`, `contest/{id}/key`; `POST /api/m/contest/{id}/answers` | Contests, the learner's side (P31, C6.5): her token says her class (`?cohort=` never read). The list holds the contests released to her class for her band that are open or open within 7 days. The questions come without answer or why, only inside the window, with her consent, and count against `per_day` (3). Answers `{answers, started}` are taken once (409 `contest_sent`) until 10 minutes after the close, and come back as `{right, n, percent}`. The key is served from the close on |
 | `GET /api/m/teacher/contests?cohort=` | Contests, the teacher's side (P31): the staff gate and her own class. Each released contest shows "took part" against the learners of its bands, and who took part with their percent, in alias order |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`, `contests/{id}`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign`, `contests/{id}/steps/{n}`, `contests/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
@@ -827,6 +827,23 @@ the microphone (a test reads `modules/live.js` for the names). The timetable gai
 lesson is the live class while the module can show for her, else a period of its subject. Locks: `rtc` (the four
 secrets), `consent` (the consent version must say `live: true`) and, under `TUTOR_RELEASE`, `gate`
 (`cohorts/gates/live.json`). Tests use `tests/fakes/rtc.py`; nothing has been tried against the real relay.
+
+The floor (P30b, C6.4) is the one place an adult's voice leaves her phone. The manifest (0.2.0) lists `audio.record`,
+so the admin confirms its sentence when switching `live` on, and adds the setting `floor` (off). The admin can turn
+`floor` on only for a class whose every band is `ad`, under a consent text naming live classes. The floor route
+checks the same at every give, plus her band and her own consent version. `speak` refuses any token that is not
+`ad` with 403, whatever the state says.
+
+- The teacher gives the floor to one hand in the room for 90 seconds. It falls at the end of that time, on "Take
+  back the floor", on her Done, when she leaves or is no longer seen, and when the sound goes off (the two learners'
+  rule).
+- The state holds `{alias, until, sfu, published}` only while it lasts. Phones see `{until, on}` and their own
+  `floor_mine`, never whose it is.
+- She publishes the track `voice` from a relay session of its own. Listeners pull it beside `mic` in one offer
+  (`pull_many`), but never their own. The teacher's page pulls it into a receive-only session through `listen`.
+- On the phone, `modules/live.js` loads `floor.js` only for an adult outside the APK in a secure page. Any other
+  phone gives the floor straight back. `floor.js` opens the microphone on Speak and stops the track when the floor
+  ends. It records nothing, and the phone keeps only `floorSeen` (the explainer was read once).
 
 ## Contests (contests.py, mods/contest.py, app/js/modules/contest.js, app/js/screens/contest.js, P31)
 

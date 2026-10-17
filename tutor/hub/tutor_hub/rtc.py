@@ -2,7 +2,8 @@
 
 The Worker never sees media. It only asks Cloudflare's Realtime SFU, over HTTPS with the app's secret, to make a
 session for each participant, to publish the teacher's microphone as the track `mic` of her session, and to let each
-listener's session pull that one remote track; and it asks the TURN service for short-lived ICE credentials (2 hours)
+listener's session pull that remote track (and, in an adult-only class, the track `voice` of an adult given the
+floor, P30b); and it asks the TURN service for short-lived ICE credentials (2 hours)
 for phones that cannot reach the relay directly. What crosses this module is SDP text (the browsers' descriptions of
 a connection), session ids and track names: never sound, never a learner's token or anything that names her.
 
@@ -141,8 +142,13 @@ class Realtime:
     async def pull(self, session: str, remote: str, track: str) -> tuple[str | None, bool]:
         """Pulls `track` of the session `remote` into `session`: (the relay's offer, whether the browser must answer
         it now)."""
+        return await self.pull_many(session, [(remote, track)])
+
+    async def pull_many(self, session: str, tracks: list[tuple[str, str]]) -> tuple[str | None, bool]:
+        """Pulls several remote tracks, each `(session, track)`, into `session` in one offer: the teacher's `mic` and
+        the floor's `voice` (P30b)."""
         data = await self._app("POST", f"/sessions/{session}/tracks/new", {
-            "tracks": [{"location": "remote", "sessionId": remote, "trackName": track}]})
+            "tracks": [{"location": "remote", "sessionId": remote, "trackName": track} for remote, track in tracks]})
         sdp = (data.get("sessionDescription") or {}).get("sdp")
         return (sdp if isinstance(sdp, str) else None), bool(data.get("requiresImmediateRenegotiation"))
 

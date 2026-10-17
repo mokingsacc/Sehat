@@ -169,6 +169,8 @@ const SCREENS = {
     // the Live tab (P30a, C6.3) with the live routes, the microphone and WebRTC as stand-ins (liveStubs)
     ['live', async (p) => p.click('main .ttabs button:nth-child(5)')],
     ['live-room', async (p) => { await p.click('main section .chips button:nth-child(2)'); await p.click('main section .btn.primary'); await p.waitForTimeout(2600); }],
+    // the floor (P30b, C6.4): "Give the floor" on the first raised hand of an adult-only class, then her voice plays
+    ['live-floor', async (p) => { await p.click('main .live-hand-list .btn.primary'); await p.waitForTimeout(2600); }],
     ['live-end', async (p) => { await p.click('main .live-state .btn.kill'); }],
     // the Contests tab (P31, C6.5), sixth while the Live tab shows (contestStubs); Escape first leaves "End the class?"
     ['contests', async (p) => { await p.keyboard.press('Escape'); await p.click('main .ttabs button:nth-child(6)'); }],
@@ -186,21 +188,28 @@ const SCREENS = {
 let firstLesson;
 async function liveStubs(page) {
   const json = (body) => ({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
+  let floor = null;                      // the floor as the stand-in hub holds it (P30b)
   await page.route(/\/api\/m\/teacher\/live(\/[^?]*)?(\?|$)/, async (route) => {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith('/teacher/live')) {
-      return route.fulfill(json({ on: true, open: null, today: 1, per_day: 2, max_minutes: 45, month: { minutes: 340 },
+      return route.fulfill(json({ on: true, open: null, floor: true, today: 1, per_day: 2, max_minutes: 45, month: { minutes: 340 },
         subjects: ['maths', 'science', 'english', 'dari', 'pashto', 'class'] }));
     }
     if (path.endsWith('/start')) return route.fulfill(json({ id: 'abcdefgh23456789', ice: [], max_minutes: 45 }));
     if (path.endsWith('/sdp')) return route.fulfill(json({ sdp: 'v=0\r\n' }));
     if (path.endsWith('/roster')) {
       const first = await firstOf();
-      return route.fulfill(json({ v: 4, here: 14, audio: 'on', minutes: 41, max_minutes: 45, floor: null, over: false,
+      return route.fulfill(json({ v: 4, here: 14, audio: 'on', minutes: 41, max_minutes: 45, floor, over: false,
         board: first ? { lesson: first.id, step: 2 } : null,
         hands: [{ alias: 'key-3', picture: 'key', number: 3, reason: 1, since: new Date(Date.now() - 90e3).toISOString() },
           { alias: 'cup-11', picture: 'cup', number: 11, reason: 3, since: new Date(Date.now() - 30e3).toISOString() }] }));
     }
+    if (path.endsWith('/floor')) {
+      const body = route.request().postDataJSON() || {};
+      floor = body.alias ? { alias: body.alias, until: new Date(Date.now() + 90e3).toISOString(), on: true } : null;
+      return route.fulfill(json({ floor, v: 5 }));
+    }
+    if (path.endsWith('/listen')) return route.fulfill(json({ sdp: 'v=0\r\n', type: 'offer', renegotiate: true, answer: null }));
     return route.fulfill(json({ ok: true }));
   });
   await page.addInitScript(() => {
@@ -212,6 +221,7 @@ async function liveStubs(page) {
         return { mid: '0', sender };
       }
       async createOffer() { return { type: 'offer', sdp: 'v=0\r\n' }; }
+      async createAnswer() { return { type: 'answer', sdp: 'v=0\r\n' }; }
       async setLocalDescription(d) { this.localDescription = d; }
       async setRemoteDescription() {}
       close() {}

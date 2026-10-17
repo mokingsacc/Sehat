@@ -118,6 +118,7 @@ function clean(l) {
     ...(cleanMade(l.made).length ? { made: cleanMade(l.made) } : {}),
     // P30a (C6.2): the last live class she saw end, so a stale hello never offers it again; nothing else of a class
     ...(typeof l.liveSeen === 'string' && /^[a-z0-9]{16}$/.test(l.liveSeen) ? { liveSeen: l.liveSeen } : {}),
+    ...(l.floorSeen === true ? { floorSeen: true } : {}),          // she read the floor's explainer once (P30b)
     // P31 (C6.5): the contests she joined (at most 50): her answers until she sends them and after, for "See the
     // answers" once the key comes; the percent, right and n the server sent back. Never a place or anyone else's
     ...(cleanContests(l.contests).length ? { contests: cleanContests(l.contests) } : {}),

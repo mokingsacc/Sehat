@@ -41,6 +41,10 @@ class FakeRTC:
         self._check("pull", session, remote, track)
         return OFFER, True
 
+    async def pull_many(self, session, tracks):
+        self._check("pull_many", session, tuple(tracks))
+        return OFFER, True
+
     async def renegotiate(self, session, answer):
         self._check("renegotiate", session, answer)
 

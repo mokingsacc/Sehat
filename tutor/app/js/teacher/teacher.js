@@ -448,17 +448,21 @@ async function drawContests() {
 // action, Mute, the hands in the order raised, the board. The microphone is asked for only when she taps Start, on
 // this staff page; her track goes to Cloudflare's relay (the hub only passes the description of the connection) and
 // is sent only while two learners or more are here (the roster's `audio`). Nothing is recorded, here or anywhere.
+// The floor (P30b, C6.4): in a class whose every band is adults, with the admin's `floor` setting on (the server's
+// `floor`), each raised hand has "Give the floor"; the one who has it shows with her time left and "Take back the
+// floor", and her voice plays here through a relay session of this page's own while she speaks.
 
 const STUN = [{ urls: ['stun:stun.cloudflare.com:3478'] }];
 const LIVE_POLL_MS = 2000;
 const live = { sid: null, cohort: null, pc: null, sender: null, track: null, muted: false, max: 45, subject: null,
   roster: null, timer: null, els: null, handsKey: '', boardKey: null, picking: false, broken: false, summary: null,
-  titles: new Map() };
+  titles: new Map(), floorOk: false, ear: null, earKey: '', audio: null };
 
 const subjName = (sj) => t('subj_' + (sj || 'class'));
 
 function liveStop() {
   clearInterval(live.timer);
+  earClose();
   if (live.track) live.track.stop();
   if (live.pc) { try { live.pc.close(); } catch { /* closed already */ } }
   Object.assign(live, { sid: null, cohort: null, pc: null, sender: null, track: null, muted: false, roster: null,
@@ -493,6 +497,7 @@ async function drawLive() {
   let d;
   try { d = await api('/live'); } catch (e) { return failed(e); }
   if (!d.on) return page(h('p', { class: 'empty' }, t('live_off')));
+  live.floorOk = !!d.floor;
   const counts = h('p', { class: 'small muted' }, L.join([t('live_today', { a: num(d.today), b: num(d.per_day) }),
     t('live_month', { n: num((d.month && d.month.minutes) || 0) })]));
   if (d.open) {                    // open from before this page was loaded: speak to it again, or end it
@@ -583,6 +588,8 @@ async function livePoll() {
   live.roster = r;
   const want = r.audio === 'on' ? live.track : null;
   if (live.sender && live.sender.track !== want) live.sender.replaceTrack(want).catch(() => {});
+  const ek = r.floor && r.floor.on ? `${r.floor.alias}|${r.floor.until}` : '';
+  if (ek !== live.earKey) { live.earKey = ek; if (ek) earOpen(sid); else earClose(); }
   if (live.els && live.els.state.isConnected) drawRoom();
 }
 
@@ -632,20 +639,69 @@ function drawRoom() {
   live.broken ? h('button', { type: 'button', class: 'btn primary', onClick: () => liveGo(live.sid, live.subject, STUN, live.max) },
     t('live_resume')) : null,
   mute, h('button', { type: 'button', class: 'btn kill', onClick: () => liveEnd() }, t('end_class')));
-  const hk = JSON.stringify(r.hands);
+  const f = r.floor || null;
+  const hk = JSON.stringify([r.hands, f && f.alias, f && f.on, live.floorOk && r.audio === 'on']);
   if (hk !== live.handsKey) {
     live.handsKey = hk;
+    const canGive = live.floorOk && r.audio === 'on' && !f;
+    const who = f ? r.hands.find((x) => x.alias === f.alias) : null;
+    const [pic, n] = f ? [f.alias.replace(/-\d+$/, ''), f.alias.replace(/^.*-/, '')] : [];
     put(els.hands, h('div', { class: 'row wrap' }, h('h3', { class: 'grow' }, t('hands')),
       r.hands.length >= 2 ? h('button', { type: 'button', class: 'btn', onClick: () => lower({ all: true }) }, t('lower_all')) : null),
-    r.hands.length ? h('ol', { class: 'plain live-hand-list' }, r.hands.map((x) => h('li', { class: 'row' },
+    f ? h('div', { class: 'row wrap live-floor-now' }, h('span', { class: 'pic' }, aliasIcon((who && who.picture) || pic, 40)),
+      h('span', { class: 'grow stack-sm' }, h('b', {}, t('floor_has', { a: `${aliasName((who && who.picture) || pic)} ${fa(n)}` })),
+        h('small', { class: 'muted', role: 'timer' }, f.on ? t('floor_speaking') : t('floor_waiting'))),
+      h('button', { type: 'button', class: 'btn kill', onClick: () => giveFloor(null) }, t('take_floor'))) : null,
+    r.hands.length ? h('ol', { class: 'plain live-hand-list' }, r.hands.map((x) => h('li', { class: 'row wrap' },
       h('span', { class: 'pic' }, aliasIcon(x.picture, 40)),
       h('span', { class: 'grow stack-sm' }, h('b', {}, `${aliasName(x.picture)} ${fa(x.number)}`),
         h('small', { class: 'muted' }, L.join([x.reason ? t('hand_' + x.reason) : null, x.since ? ago(x.since) : null]))),
+      canGive ? h('button', { type: 'button', class: 'btn primary', onClick: () => giveFloor(x.alias) }, t('give_floor')) : null,
       h('button', { type: 'button', class: 'btn', onClick: () => lower({ alias: x.alias }) }, t('lower')))))
       : h('p', { class: 'muted small' }, t('no_hands')));
   }
   const bk = JSON.stringify(r.board || null);
   if (bk !== live.boardKey && !live.picking) { live.boardKey = bk; drawBoard(r.board); }
+}
+
+// the floor (P30b): give it to one raised hand (an adult in an adult-only class) or take it back (null)
+async function giveFloor(alias) {
+  try {
+    await api(`/live/${live.sid}/floor`, { method: 'POST', body: alias ? { alias } : {} });
+  } catch (e) {
+    if (e.status === 404) toast(t('floor_gone'));              // she left the room meanwhile
+    else failed(e);
+  }
+  return livePoll();
+}
+
+// her voice while she speaks: a receive-only connection of this page's own, through the relay, as a phone pulls
+async function earOpen(sid) {
+  earClose();
+  const pc = new RTCPeerConnection({ iceServers: STUN });
+  live.ear = pc;
+  if (!live.audio) { live.audio = h('audio', { autoplay: '', class: 'hidden' }); document.body.append(live.audio); }
+  pc.ontrack = (e) => {
+    live.audio.srcObject = e.streams && e.streams[0] ? e.streams[0] : new MediaStream([e.track]);
+    const p = live.audio.play();
+    if (p && p.catch) p.catch(() => {});
+  };
+  try {
+    const r = await api(`/live/${sid}/listen`, { method: 'POST', body: {} });
+    if (live.ear !== pc) return;
+    if (r.answer) await pc.setRemoteDescription({ type: 'answer', sdp: r.answer });
+    if (r.renegotiate && r.sdp) {
+      await pc.setRemoteDescription({ type: 'offer', sdp: r.sdp });
+      await pc.setLocalDescription(await pc.createAnswer());
+      await api(`/live/${sid}/answer`, { method: 'POST', body: { sdp: pc.localDescription.sdp } });
+    }
+  } catch { if (live.ear === pc) live.earKey = ''; }           // the next roster tries again
+}
+
+function earClose() {
+  if (live.ear) { try { live.ear.close(); } catch { /* closed already */ } }
+  live.ear = null;
+  if (live.audio) live.audio.srcObject = null;
 }
 
 async function lower(body) {

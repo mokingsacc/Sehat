@@ -17,6 +17,10 @@ Learner routes (her token, her class from it only, `needs("live")`, consent requ
 - `GET  /api/m/live/{id}/state?v=`: 204 while `v` is the same, else `{v, audio, board, floor, pub, over, hand,
   joined}` (`hand` her own raised hand's reason, which the teacher may lower); 20 a minute.
 - `POST /api/m/live/{id}/hand` `{reason: 1|2|3|null}`: 30 a minute. `POST /api/m/live/{id}/leave`.
+- `POST /api/m/live/{id}/speak` `{ticket, sdp, mid}` (P30b, C6.4): an adult who holds the floor publishes her
+  microphone as the track `voice` of a relay session of its own: `{sdp, until}`. 403 for a token whose band is not
+  `ad` and for anyone not holding the floor; 409 `locked` unless the class is adults only, its `floor` setting is on
+  and her consent version names live classes. `{done: true}` gives the floor back.
 
 Teacher routes (`/api/m/teacher/live/*`; the staff gate, role teacher or admin, her own class only, else 403
 `not_your_class`; `X-Qalam: 1` on every write, on the hub too):
@@ -29,6 +33,16 @@ Teacher routes (`/api/m/teacher/live/*`; the staff gate, role teacher or admin, 
   learners' rule lives here: the audio is on while two or more learners were seen in the last 30 seconds and she
   has published; off otherwise, after two minutes' grace once it was on.
 - `POST .../{id}/board` `{lesson, step}` or `{}`; `POST .../{id}/lower` `{alias}` or `{all: true}`; `POST .../{id}/end`.
+- `POST .../{id}/floor` `{alias}` gives the floor to one adult in the room for at most 90 seconds (P30b, C6.4): 409
+  `locked` unless every band of the class is `ad`, `floor` is on and her consent version names live classes;
+  `floor_held` while someone has it; `floor_few` while fewer than two learners listen. `{}` takes it back. The floor
+  also falls at 90 seconds, when the sound goes off, when she leaves or is no longer seen, and when she says Done.
+- `POST .../{id}/listen` `{sdp?}` and `.../{id}/answer` `{sdp}`: the teacher's page pulls the floor's `voice` into a
+  relay session of its own, as a phone pulls `mic`.
+
+The floor (P30b) is in the session's state only while it lasts: `{alias, until, sfu, published}`, never a token.
+Phones see `{until, on}` and whether it is their own; listeners pull `voice` beside `mic` (each publish bumps `pub`,
+so phones pull again, and again without it once the floor falls). Nothing is recorded and no event is written.
 
 Every route reads at most 16 KB of body (SDP text) and refuses more with 413 before reading it.
 """
@@ -48,6 +62,8 @@ from ..staff import WRITE_HEADER, refuse
 MODULE = "live"
 ROLES = ("teacher", "admin")
 TRACK = "mic"
+VOICE = "voice"                      # the track of an adult given the floor (P30b, C6.4)
+FLOOR_S = 90                         # the floor lasts at most 90 seconds
 BODY_MAX = 16 * 1024                 # bytes: an SDP is a few kilobytes; nothing else is sent
 TICKET_S = 60
 SEEN_S = 30                          # a learner seen in the last 30 seconds is in the room
@@ -150,11 +166,50 @@ def sdp_text(v, name="sdp") -> str:
     return v
 
 
+def alias_of(x: dict) -> str:
+    return f"{x['picture']}-{x['number']}"
+
+
+def floor_now(st: dict, t: datetime | None = None) -> dict | None:
+    """The floor while it lasts (at most 90 seconds from when it was given), else None."""
+    f = st.get("floor")
+    return f if f and when(f["until"]) > (t or now()) else None
+
+
+def fall(st: dict) -> bool:
+    """Ends the floor in a state; True when there was one. A voice that was published bumps `pub`, so the phones pull
+    again without it (her own phone stops its microphone when the state no longer names her)."""
+    f = st.get("floor")
+    if not f:
+        return False
+    st["floor"] = None
+    if f.get("published"):
+        st["rtc"] = dict(st.get("rtc") or {}, pub=int((st.get("rtc") or {}).get("pub") or 0) + 1)
+    return True
+
+
+def floor_lock(cohort: dict | None, settings: dict) -> str | None:
+    """Why this class cannot give the floor (C6.4, in code), or None: only a class whose every band is `ad`, and only
+    with its `floor` setting on. Her consent version is checked for her, at the floor and at speak."""
+    if not settings.get("floor"):
+        return "the floor is off for this class (the admin's live setting)"
+    bands = (cohort or {}).get("bands") or []
+    if not bands or any(b != "ad" for b in bands):
+        return "the floor is only for a class whose every band is adults"
+    return None
+
+
+def public_floor(f: dict | None) -> dict | None:
+    return {"until": f["until"], "on": bool(f.get("published"))} if f else None
+
+
 def public(s: dict) -> dict:
-    """What a learner's phone may see of the class: the audio switch, the board, the floor, the publish count."""
+    """What a learner's phone may see of the class: the audio switch, the board, the floor (its end and whether it
+    is sounding, never whose), the publish count."""
     st = s.get("state") or {}
-    return {"v": s["v"], "audio": st.get("audio", "off"), "board": st.get("board"), "floor": st.get("floor"),
-            "pub": (st.get("rtc") or {}).get("pub", 0), "over": bool(s.get("ended_at"))}
+    return {"v": s["v"], "audio": st.get("audio", "off"), "board": st.get("board"),
+            "floor": public_floor(floor_now(st)), "pub": (st.get("rtc") or {}).get("pub", 0),
+            "over": bool(s.get("ended_at"))}
 
 
 def router(hub, needs) -> APIRouter:
@@ -226,10 +281,16 @@ def router(hub, needs) -> APIRouter:
             raise HTTPException(422, "sound only")
         st = s["state"] or {}
         teacher = (st.get("rtc") or {}).get("sfu")
+        f = floor_now(st)
+        voice = f["sfu"] if f and f.get("published") and f["alias"] != alias_of(who) else None   # never her own
         try:
             sfu, answer = await hub.rtc.new_session(offer)
             pulled, again = (None, False)
-            if st.get("audio") == "on" and teacher and (st.get("rtc") or {}).get("published"):
+            mic = st.get("audio") == "on" and teacher and (st.get("rtc") or {}).get("published")
+            if st.get("audio") == "on" and voice:
+                tracks = ([(teacher, TRACK)] if mic else []) + [(voice, VOICE)]
+                pulled, again = await hub.rtc.pull_many(sfu, tracks)
+            elif mic:
                 pulled, again = await hub.rtc.pull(sfu, teacher, TRACK)
         except RtcError:
             raise HTTPException(503, "the live class cannot be reached now") from None
@@ -262,11 +323,18 @@ def router(hub, needs) -> APIRouter:
             s = await hub.store.live_session(sid)
         if s["ended_at"]:
             return {"v": s["v"], "audio": "off", "board": None, "floor": None, "pub": 0, "over": True}
+        st = dict(s["state"] or {})
+        if st.get("floor") and not floor_now(st):          # 90 seconds are over: the floor falls for everyone
+            fall(st)
+            await hub.store.live_update(sid, state=st, bump=True)
+            s = await hub.store.live_session(sid)
         await hub.store.live_seen(sid, who["token_hash"])
         if v is not None and v == s["v"]:
             return Response(status_code=204)
         row = await hub.store.live_present(sid, who["token_hash"])
-        return dict(public(s), hand=row["reason"] if row and row["hand_at"] else None, joined=bool(row))
+        f = floor_now(s["state"] or {})
+        return dict(public(s), hand=row["reason"] if row and row["hand_at"] else None, joined=bool(row),
+                    floor_mine=bool(f and f["alias"] == alias_of(who)))
 
     @r.post("/api/m/live/{sid}/hand", dependencies=needs(MODULE))
     async def hand(sid: str, request: Request):
@@ -289,7 +357,51 @@ def router(hub, needs) -> APIRouter:
         row = await hub.store.live_leave(sid, who["token_hash"])
         if row and not s["ended_at"]:
             await hub.store.live_update(sid, add_min=minutes_between(row["joined_at"], row["seen_at"]))
+            st = dict((await hub.store.live_session(sid))["state"] or {})
+            if (st.get("floor") or {}).get("alias") == alias_of(who) and fall(st):     # she left with the floor
+                await hub.store.live_update(sid, state=st, bump=True)
         return {"ok": True}
+
+    @r.post("/api/m/live/{sid}/speak", dependencies=needs(MODULE))
+    async def speak(sid: str, request: Request):
+        body = await body_of(request)
+        who = await her(request)
+        if who.get("band") != "ad":                        # C6.A3: no child's microphone, ever
+            raise HTTPException(403, "only an adult in an adult-only class may speak")
+        s = await her_session(sid, who)
+        st = dict(s["state"] or {})
+        f = floor_now(st)
+        if not f or f["alias"] != alias_of(who):
+            raise HTTPException(403, "you do not have the floor")
+        if body.get("done") is True:
+            fall(st)
+            v = await hub.store.live_update(sid, state=st, bump=True)
+            return {"floor": None, "v": v}
+        c, fl, _ = await hub.cohort_modules(hub.her_cohort(who))
+        why = floor_lock(c, settings_of(hub, fl))
+        if not why and not hub.consent_names_live(who.get("consent_version")):
+            why = "her consent text does not name live classes"
+        if why:
+            raise refuse(409, "locked", why)
+        ticket = body.get("ticket")
+        if not isinstance(ticket, str) or len(ticket) != 32 or not await hub.store.live_ticket(
+                sid, who["token_hash"], ticket, iso(now() - timedelta(seconds=TICKET_S))):
+            raise HTTPException(403, "join again")
+        offer = sdp_text(body.get("sdp"))
+        mid = body.get("mid")
+        if not isinstance(mid, str) or not 1 <= len(mid) <= 8:
+            raise HTTPException(422, "mid is the transceiver's mid")
+        if not no_video(offer):
+            raise HTTPException(422, "sound only")
+        try:
+            sfu, _ = await hub.rtc.new_session(None)
+            answer = await hub.rtc.publish(sfu, offer, mid, VOICE)
+        except RtcError:
+            raise HTTPException(503, "the live class cannot be reached now") from None
+        st["floor"] = dict(f, sfu=sfu, published=True)
+        st["rtc"] = dict(st.get("rtc") or {}, pub=int((st.get("rtc") or {}).get("pub") or 0) + 1)
+        v = await hub.store.live_update(sid, state=st, bump=True)
+        return {"sdp": answer, "until": f["until"], "v": v}
 
     # --- the teacher ---
 
@@ -334,6 +446,7 @@ def router(hub, needs) -> APIRouter:
             return {"on": False}
         s = await current(hub, c["id"], settings)
         return {"on": True, "open": {"id": s["id"], "subject": s["subject"], "since": s["started_at"]} if s else None,
+                "floor": floor_lock(c, settings) is None,
                 "today": await today_count(c["id"]), "per_day": settings["per_day"],
                 "max_minutes": settings["max_minutes"], "subjects": list(timetable.LIVE_SUBJECTS),
                 "month": await month_use(hub, c["id"])}
@@ -418,6 +531,9 @@ def router(hub, needs) -> APIRouter:
         else:
             low = None
         changed = audio != st.get("audio", "off")
+        f = st.get("floor")
+        if f and (not floor_now(st, t) or audio != "on" or not any(alias_of(x) == f["alias"] for x in here)):
+            changed = fall(st) or changed           # over 90 seconds, the sound off, or she is gone: it falls
         if changed or low != st.get("low_since"):
             st.update(audio=audio, low_since=low)
             v = await hub.store.live_update(sid, state=st, bump=changed, seen=True, peak=len(here))
@@ -425,8 +541,10 @@ def router(hub, needs) -> APIRouter:
             v = await hub.store.live_update(sid, seen=True, peak=len(here))
         hands = [{"alias": f"{x['picture']}-{x['number']}", "picture": x["picture"], "number": x["number"],
                   "reason": x["reason"], "since": x["hand_at"]} for x in room if x["hand_at"]]
+        f = floor_now(st, t)
         return {"v": v, "here": len(here), "hands": hands, "audio": audio, "board": st.get("board"),
-                "floor": st.get("floor"), "minutes": minutes_between(s["started_at"], iso(t)),
+                "floor": {"alias": f["alias"], "until": f["until"], "on": bool(f.get("published"))} if f else None,
+                "minutes": minutes_between(s["started_at"], iso(t)),
                 "max_minutes": settings["max_minutes"], "over": False}
 
     @r.post("/api/m/teacher/live/{sid}/board")
@@ -462,6 +580,77 @@ def router(hub, needs) -> APIRouter:
                 await hub.store.live_update(sid, bump=True)
                 return {"lowered": 1}
         raise HTTPException(404, "no such hand")
+
+    @r.post("/api/m/teacher/live/{sid}/floor")
+    async def floor(sid: str, request: Request):
+        body = await body_of(request)
+        _, s, settings = await her_live(request, sid)
+        if s["ended_at"]:
+            raise HTTPException(410, "the class is over")
+        st = dict(s["state"] or {})
+        alias = body.get("alias")
+        if alias is None:                                   # {}: "Take back the floor"
+            v = await hub.store.live_update(sid, state=st, bump=True) if fall(st) else s["v"]
+            return {"floor": None, "v": v}
+        if not isinstance(alias, str) or not 1 <= len(alias) <= 40:
+            raise HTTPException(422, "alias is a learner's picture and number")
+        c, _, _ = await hub.cohort_modules(s["cohort"])
+        if why := floor_lock(c, settings):
+            raise refuse(409, "locked", why)
+        t = now()
+        if floor_now(st, t):
+            raise refuse(409, "floor_held", "someone has the floor: take it back first")
+        if st.get("audio") != "on":
+            raise refuse(409, "floor_few", "the floor waits until two learners or more are listening")
+        x = next((x for x in await hub.store.live_here(sid)
+                  if alias_of(x) == alias and t - when(x["seen_at"]) <= timedelta(seconds=SEEN_S)), None)
+        if not x:
+            raise HTTPException(404, "no such learner in the room")
+        if x["band"] != "ad":
+            raise refuse(409, "locked", "only an adult may have the floor")
+        her_row = await hub.store.learner(x["token_hash"])
+        if not her_row or not hub.consent_names_live(her_row.get("consent_version")):
+            raise refuse(409, "locked", "her consent text does not name live classes")
+        st["floor"] = {"alias": alias, "until": iso(t + timedelta(seconds=FLOOR_S)), "sfu": None, "published": False}
+        v = await hub.store.live_update(sid, state=st, bump=True)
+        return {"floor": {"alias": alias, "until": st["floor"]["until"], "on": False}, "v": v}
+
+    @r.post("/api/m/teacher/live/{sid}/listen")
+    async def listen(sid: str, request: Request):
+        body = await body_of(request)
+        _, s, _ = await her_live(request, sid)
+        if s["ended_at"]:
+            raise HTTPException(410, "the class is over")
+        st = dict(s["state"] or {})
+        f = floor_now(st)
+        if not f or not f.get("published"):
+            raise HTTPException(409, "no one is speaking")
+        offer = sdp_text(body["sdp"]) if body.get("sdp") is not None else None
+        if offer and not no_video(offer):
+            raise HTTPException(422, "sound only")
+        try:
+            ear, answer = await hub.rtc.new_session(offer)
+            pulled, again = await hub.rtc.pull(ear, f["sfu"], VOICE)
+        except RtcError:
+            raise HTTPException(503, "the relay cannot be reached now") from None
+        st["rtc"] = dict(st.get("rtc") or {}, ear=ear)
+        await hub.store.live_update(sid, state=st)
+        if pulled and again:
+            return {"sdp": pulled, "type": "offer", "renegotiate": True, "answer": answer}
+        return {"sdp": answer, "type": "answer" if answer else None, "renegotiate": False}
+
+    @r.post("/api/m/teacher/live/{sid}/answer")
+    async def teacher_answer(sid: str, request: Request):
+        body = await body_of(request)
+        _, s, _ = await her_live(request, sid)
+        ear = ((s["state"] or {}).get("rtc") or {}).get("ear")
+        if s["ended_at"] or not ear:
+            raise HTTPException(409, "listen again")
+        try:
+            await hub.rtc.renegotiate(ear, sdp_text(body.get("sdp")))
+        except RtcError:
+            raise HTTPException(503, "the relay cannot be reached now") from None
+        return {"ok": True}
 
     @r.post("/api/m/teacher/live/{sid}/end")
     async def end(sid: str, request: Request):

@@ -991,11 +991,18 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .live-dot { color: var(--accent-ink); display: inline-flex; flex: none; }
 .live-offer h2 { margin: 0; }
 .live-now .lead { margin: 0; }
+/* the floor (P30b): an adult given the floor by her teacher */
+.live-floor-title { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--accent-ink); }
+.live-floor .live-explain { margin: 0; }
+.live-floor .row .said, .live-floor .row > .btn { flex: 1 1 auto; }
+.live-floor-left b { font-variant-numeric: tabular-nums; }
+.live-floor-box:empty { display: none; }
 /* the teacher's Live tab (C6.3): the state line and its actions wrap at 390 px, the hands under it */
 .live-state { margin: 0 16px; }
 .live-state .live-left { color: var(--warm-ink); font-weight: 800; }
 .live-hand-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; }
 .live-hand-list li { gap: 10px; align-items: center; }
+.live-floor-now { gap: 10px; align-items: center; padding: 8px; border-radius: 12px; background: var(--accent-soft, transparent); }
 .live-room .card { margin: 0 16px; }
 .live-title { margin: 12px 16px 0; }
 

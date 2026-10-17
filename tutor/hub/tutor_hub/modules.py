@@ -32,7 +32,8 @@ RISK_ORDER = ("none", "medium", "high", "blocked")
 RISK_SENTENCE = {
     "photo.upload": "Learners send a strip of their answer cells to be read; online it goes to the AI provider and is "
                     "never kept.",
-    "audio.record": "Learners record their voice.",
+    "audio.record": "A learner's voice leaves her phone: live to her class when given the floor (adults only, never "
+                    "recorded), or to be written as text (not built).",
     "free.text": "Learners type their own words; what they type reaches the server and may reach a teacher or the "
                  "AI provider.",
     "ai.call": "Questions go to the AI provider (OpenAI online, the hub's own model in the village), within the "

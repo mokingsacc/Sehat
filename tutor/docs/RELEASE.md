@@ -28,7 +28,9 @@ During the pilot: one release a week on a fixed day, after a day on staging. A s
    on live classes) and `contest.json` `{"opinion": "YYYY-MM-DD"}` (D15). Every field must be filled; the admin's row
    says "waits for D9 and the legal opinion" or "waits for the legal opinion" until then. `live` also needs the four
    Realtime secrets on `qalam` and a consent version whose files say `"live": true` (HOSTING.md, "Live classes: the
-   Realtime set-up").
+   Realtime set-up"). The floor (P30b, an adult speaking to her class) is the `live` setting `floor`, off by default.
+   The admin can turn it on only for a class whose every band is `ad`, under that consent version. Mixed classes
+   never get it: that is a question for Mo (DESIGN-C6-SPECS.md C6.4).
 4. **The privacy suite passes:** `hub/tests/test_privacy.py` (a retention rule for every table, the retention job,
    the wishlist and reset codes) with the schema scan and event shapes (`test_events.py`), photo writes
    (`test_photo.py`, `test_worker.py`), names in logs (`test_api.py`) and the gateway's recorder scans
