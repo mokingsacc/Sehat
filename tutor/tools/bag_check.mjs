@@ -16,6 +16,10 @@
 //   5. A new phone online: the code typed, her PIN once; nothing is lost: each lesson at its highest stars, the
 //      newest plan, both questions once each and never sent again, her seat's token and no new join. Her fifth
 //      lesson offers the card once more. Then "Make a new code" there, and the app finds its old code stopped.
+//   6. W8: a borrowed phone with its owner's learner: "Just for today": her PIN, the bar with Done on every screen, a
+//      lesson and a question (the online Ask failing); nothing reaches its storage (localStorage, sessionStorage,
+//      IndexedDB) and it is not asked to persist; Done pushes her bag and opens the app again with the owner's
+//      learner only; her own phone gets the lesson and sends the question once.
 // Each question reaches a server exactly once (the stand-in front logs every POST /api/ask), and neither the code
 // nor the keys ever leave a phone.
 // One front server stands in for the three hosts (a self-signed certificate; Chromium maps the names to it):
@@ -124,6 +128,12 @@ function fakes() {
   Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: {
     getVoices: () => [{ lang: 'fa-IR', name: 'stand-in' }], speak: (u) => window.__said.push(u.text), cancel() {}, onvoiceschanged: null } });
   navigator.vibrate = () => true;
+  window.__persist = 0;                       // how often the app asked to keep its storage (W8)
+  try {
+    const st = navigator.storage;
+    const keep = st.persist.bind(st);
+    st.persist = () => { window.__persist += 1; return keep(); };
+  } catch { /* no StorageManager */ }
   if (location.host === 'appassets.androidplatform.net') {
     window.QalamAndroid = { setAlarms() {}, canRecord: () => false, online: () => 'https://online.qalam.test', version: () => '',
       notifyState: () => 'off', exactAlarms: () => true, takeBag: () => '', shareFile: () => false };
@@ -344,6 +354,7 @@ try {
     'both questions, once each, neither waiting');
   check(dl.seats[webSid] && dl.seats[webSid].token === token, 'the new phone: her online seat, the same token');
   check(!!dl.lock, 'the new phone: her lock came with her');
+  check((await d.evaluate(() => window.__persist)) >= 1, 'the new phone asked to keep its storage (she came with her lessons)');
   check(!log.some((e) => e.phase === '5 new phone' && e.path === '/api/join'), 'the new phone joined nowhere again');
   check(asks('the first question').length === 1 && asks('the second question').length === 1,
     'each question reached a server exactly once');
@@ -383,10 +394,56 @@ try {
   check(!!(await app.$('a[href="#/bag/retype"]')), 'the app: the old code was stopped, "Type the new code"');
   await shot(app, 'stopped');
 
+  // 6. a borrowed phone that has its owner's learner: "Just for today"
+  phase = '6 borrowed phone';
+  const E = await phone('E');
+  const warmE = await E.ctx.newPage();
+  await warmE.goto(`${WEB}/app/`);
+  await warmE.waitForFunction(() => navigator.serviceWorker && navigator.serviceWorker.controller, null, { timeout: 30000 }).catch(() => {});
+  await warmE.close();
+  const e = await open(E, `${WEB}/app/`);
+  await at(e, '#/welcome');
+  await e.click('.yearbox.secondary:not(.adults) .years button >> nth=0');        // the owner: year 7
+  await at(e, '#/home');
+  const owner = (await learner(e)).id;
+  const snap = () => e.evaluate(async () => JSON.stringify({ l: Object.entries(localStorage).sort(), s: Object.entries(sessionStorage).sort(),
+    i: (await indexedDB.databases()).map((x) => x.name).sort() }));
+  await e.evaluate(() => { location.hash = '#/move'; });
+  await at(e, '#/move');
+  await e.fill('.bag-in', code2);
+  await e.click('.move form button[type=submit]');
+  await e.waitForSelector('.move .found .today-choice', { timeout: 90000 });
+  const before = await snap();
+  await e.click('.move .found .today-choice');
+  await pin(e);
+  await at(e, '#/home');
+  check(!!(await e.$('.today-bar a[href="#/today"]')), 'Just for today: the bar with Done on every screen');
+  await shot(e, 'just-for-today');
+  check((await e.evaluate(async () => (await import(new URL('js/state.js', document.baseURI).href)).learners().length)) === 1,
+    'Just for today: only her, and the owner\'s learner unseen');
+  await work(e, 'done', ['bagcheck-today', 2]);
+  reach.askDown = true;
+  await work(e, 'ask', 'bag check: the borrowed phone question');
+  await e.waitForTimeout(6000);
+  check((await snap()) === before, 'Just for today: nothing of hers reached the phone\'s storage');
+  check((await e.evaluate(() => window.__persist)) === 0, 'Just for today: the phone was not asked to keep anything');
+  await e.click('.today-bar a[href="#/today"]');
+  await e.waitForFunction(() => !document.querySelector('.today-bar') && document.querySelector('#app .screen.home'), null, { timeout: 90000 });
+  reach.askDown = false;
+  const after = await stored(e);
+  check(after.learners.length === 1 && after.learners[0].id === owner, 'Done: the phone opened again, with its owner\'s learner only');
+  await syncNow(d, 'her phone after the borrowed one');
+  await d.evaluate(async () => { const o = await import(new URL('js/outbox.js', document.baseURI).href); await o.flush(); });
+  await d.waitForTimeout(3000);
+  const dl2 = await learner(d);
+  check((dl2.done['bagcheck-today'] || {}).stars === 2, 'Done pushed her bag: today\'s lesson is on her phone');
+  check(asks('the borrowed phone question').length === 1 && asks('the borrowed phone question')[0].phase === '6 borrowed phone',
+    'the question left waiting on the borrowed phone was sent once, by her own phone');
+
   const all = seen.join('\n');
-  const keys = [dl.bag.k, dl.bag.f, dl.bag.w];
+  const keys = [dl.bag.k, dl.bag.f, dl.bag.w, dl2.bag.k, dl2.bag.f, dl2.bag.w];
   check(![code, code2, ...keys].some((x) => x && all.includes(x)), 'neither code nor its keys ever left a phone');
-  check(A.errors.length === 0 && D.errors.length === 0, 'no page errors' + [...A.errors, ...D.errors].map((e) => ': ' + e).join(''));
+  check(A.errors.length + D.errors.length + E.errors.length === 0, 'no page errors' + [...A.errors, ...D.errors, ...E.errors].map((e) => ': ' + e).join(''));
 } catch (e) {
   const where = (String(e.stack).match(/bag_check\.mjs:(\d+)/) || [])[1];
   check(false, `the walk stopped (line ${where}, in ${phase}): ${e.message.split('\n')[0]}`);

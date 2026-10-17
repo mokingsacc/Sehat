@@ -1046,3 +1046,7 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
   @page { size: A6; margin: 8mm; }
   .print-card { border: 0; max-width: none; width: 89mm; min-height: 128mm; justify-content: center; background: #fff; }
 }
+/* W8: "Just for today" on a borrowed phone: the bar with Done on every screen */
+.today-bar { position: sticky; top: 0; z-index: 5; gap: 8px; padding: 8px 16px; background: var(--accent-soft); color: var(--accent-ink); border-bottom: 1px solid var(--line); font-weight: 700; }
+.today-bar .grow { display: inline-flex; align-items: center; gap: 6px; }
+.today-bar .btn.small { min-height: 44px; padding: 6px 14px; }

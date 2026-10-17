@@ -59,7 +59,12 @@ export function when(e, skew = skewNow()) {
 const targetsOf = (e) => (Array.isArray(e.to) && e.to.length ? e.to : ['?']);   // from before W4: her unplaced seat
 const fresh = (e, now = Date.now()) => !(now + skewNow() - when(e) > (e.k ? LONG_AGE : MAX_AGE));
 
+// W8: "Just for today" (state.js startToday): the queue lives in memory only, and starts empty
+let mem = null;
+export function memoryOnly(on = true) { mem = on ? [] : null; }
+
 function read() {
+  if (mem) return mem.filter((e) => e && fresh(e));
   try {
     const q = JSON.parse(localStorage.getItem(KEY));
     if (Array.isArray(q)) return q.filter((e) => e && fresh(e));
@@ -68,6 +73,7 @@ function read() {
 }
 
 function write(q) {
+  if (mem) { mem = q; return; }
   try { localStorage.setItem(KEY, JSON.stringify(q)); } catch { /* full or blocked: the events are lost, nothing else */ }
 }
 

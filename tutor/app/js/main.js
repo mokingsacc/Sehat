@@ -40,6 +40,7 @@ import quran from './screens/quran.js';
 import university from './screens/university.js';
 import made from './screens/made.js';
 import move from './screens/move.js';
+import today, { bar as todayBar } from './screens/today.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
@@ -51,7 +52,7 @@ const live = (args) => import('./modules/live.js').then((m) => m.default(args));
 const contest = (args) => import('./screens/contest.js').then((m) => m.default(args));
 
 const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, live, contest, welcome, who, credits, consent, lock: lockScreen,
-  settings, signup, cert, quran, university, made, bag, move };
+  settings, signup, cert, quran, university, made, bag, move, today };
 const NEEDS_NO_CHILD = new Set(['welcome', 'signup', 'move']);
 const CLEAN = new Set(['welcome', 'signup', 'move']);          // the clean adult look, not the learner's
 const OPEN = new Set(['welcome', 'who', 'signup', 'lock', 'move']);   // shown without opening her lock
@@ -113,7 +114,9 @@ async function route() {
   current = out;
   const tabs = out.tab && bands.hasTabs(document.documentElement.dataset.band);
   app.className = tabs ? '' : 'no-nav';
-  app.replaceChildren(out.el, ...(tabs ? [nav(out.tab)] : []));
+  // W8: "Just for today": every screen carries the bar with Done (screens/today.js)
+  const just = state.justToday() && name !== 'today' ? [todayBar()] : [];
+  app.replaceChildren(...just, out.el, ...(tabs ? [nav(out.tab)] : []));
   window.scrollTo(0, 0);
   sayTab();                      // a tab tapped in years 1 to 3 or adult literacy says its label
 }
@@ -129,9 +132,9 @@ function newText(c) {
 }
 
 // W7 (3.6): the card is offered when the bag is made and once more after her fifth finished lesson, unless it was
-// printed or written down; never forced
+// printed or written down; never forced, and never on a borrowed phone ("Just for today")
 function cardAgain(c) {
-  if (!c || !c.bag || c.cardAgain || Object.keys(c.done).length < 5 || state.cache('bag.card.' + c.id) === true) return false;
+  if (!c || !c.bag || c.cardAgain || state.justToday() || Object.keys(c.done).length < 5 || state.cache('bag.card.' + c.id) === true) return false;
   state.updateChild(c.id, { cardAgain: true });
   return true;
 }

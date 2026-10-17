@@ -1065,3 +1065,44 @@ Not verified here: printing on a real Android phone (the print dialog and the A6
 `BarcodeDetector` on a phone; the `qalam://bag` intent and `takeBag()` in the built APK (the Java compiles in CI,
 but no device ran it); the handoff and the 2G timings on a real network rather than Chromium's throttling; the new
 Dari and Pashto strings (drafts, for the native speakers).
+
+### W8: Just for today, persistent storage and the iPhone advice
+
+Built:
+- "Just for today (a borrowed phone)" on "Found: … Is this you?" (`screens/move.js`), beside "Yes, this is me". It
+  calls `state.startToday()`: from then until the app is opened again her learner lives in memory only, as the
+  reviewer's preview does. `save()` writes nothing, `cache()` keeps to memory, the events queue is in memory
+  (`events.memoryOnly()`), and the learners already on the phone stay as they are, unseen. Her bag is restored into
+  that memory, her PIN is asked once, and every screen carries "Just for today · Done".
+- Done (`#/today`, `screens/today.js`): her questions and events go if a server is in reach; a question still
+  waiting is handed back to her own phones (its `dev` cleared, so the next phone of hers that reaches a server sends
+  it, once); her bag is pushed to the relay in reach ("Sync now" strength, never budgeted); then the app opens again
+  and the phone is as it was. With no relay in reach: "Today's work is not in the school bag yet", with "Try again",
+  "Done anyway (today's work is lost)" and Cancel. When "Just for today" is chosen with no relay in reach (a bag
+  file), she is warned first that today's work stays only until Qalam is closed.
+- `navigator.storage.persist()`: asked after her first finished lesson (since W2) and now also when a learner is
+  restored from her bag with lessons; never in "Just for today" or the preview.
+- The iPhone advice: on Safari on an iPhone or iPad outside the Home Screen (`android.iphoneBrowser()`), "The school
+  bag is ready" and Settings → School bag say that Safari can clear Qalam after a week without use, to add it to the
+  Home Screen and keep the card. `/families/` says the same, that nobody can open a bag without its code, and how
+  "Just for today" works.
+- Tests: `bagsync.test.js` (a borrowed phone with its owner's learner: nothing reaches its storage, Done pushes,
+  the owner is back, her own phone gets the lesson and the question); `tools/bag_check.mjs` phase 6 (the same in
+  Chromium on poor 2G, with localStorage, sessionStorage and IndexedDB compared before and during the visit, no
+  persist request, and the waiting question sent once by her own phone).
+
+Decisions to confirm:
+- "Just for today" is offered only on "Is this you?" (she needs her bag code); a borrowed phone's owner reaches it
+  through Who is learning → a new learner → "I already use Qalam".
+- The browser's Cache Storage still keeps the app's own files and the lesson pictures and clips she opens: content
+  every learner shares, not her data. Her record, the caches of her lists and her events are memory only.
+- The card's second offer is not shown in that mode (the code would show on someone else's phone); Settings →
+  School bag still shows the code behind her PIN.
+- Events meant for a server not in reach at Done are lost with the visit (her lessons and stars are in her bag;
+  her teacher's weekly counts may miss that day).
+- A page reload in that mode (the browser killing the tab) loses what was not pushed yet; the 30-second quiet push
+  still runs, so at most the last half minute is lost when a relay is in reach.
+- The advice names Safari and the Home Screen; it is not shown inside the Android app or on Android.
+
+Not verified here: a real iPhone (the advice's detection, Safari's 7-day rule, and the Home Screen exemption); a
+real borrowed Android phone; `persist()` being granted (Chrome decides by its own rules; the check counts the request).

@@ -19,6 +19,15 @@ export const isApp = () => !!bridge() && typeof bridge().setAlarms === 'function
 export const androidBrowser = (ua = (globalThis.navigator && navigator.userAgent) || '') =>
   !isApp() && /Android/i.test(ua) && !/QalamAndroid/.test(ua);
 
+// W8 (3.13 case 16): Safari on an iPhone or iPad, outside the Home Screen: it may clear a site's storage after seven
+// days without use, so the school bag's screens say to add Qalam to the Home Screen and keep the card
+export function iphoneBrowser(ua = (globalThis.navigator && navigator.userAgent) || '', nav = globalThis.navigator || {}) {
+  const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && nav.maxTouchPoints > 1);
+  let home = nav.standalone === true;
+  try { home ||= !!(globalThis.matchMedia && globalThis.matchMedia('(display-mode: standalone)').matches); } catch { /* none */ }
+  return ios && !home;
+}
+
 export function appVersion() {
   const v = isApp() ? String(call('version') || '') : '';
   return /^\d{1,4}(\.\d{1,4}){0,3}$/.test(v) ? v : '';

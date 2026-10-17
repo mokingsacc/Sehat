@@ -474,6 +474,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   scanned with `BarcodeDetector`, handed over by `/m#<digits>` or the Android app's `qalam://bag` intent, or a
   `.qbag` file), and the two-way "Remove" in Settings. `state.restore()` adds a learner from a bag, still locked;
   `state.standIn()` gives a stand-in picture when another learner here shows hers.
+- **Just for today (W8, WEBSITE.md 3.10):** on "Is this you?" a borrowed phone can take her for today only:
+  `state.startToday()` keeps her learner, the caches and the events queue in memory (as the reviewer's preview
+  does), so nothing of hers is written to the phone's storage and the owner's learners stay unseen. Every screen
+  carries "Just for today · Done" (`screens/today.js`); Done sends what waits, gives a question still waiting back
+  to her own phones, pushes her bag and opens the app again. `navigator.storage.persist()` is asked after her first
+  finished lesson and when a learner is restored with lessons, never in that mode; on Safari outside the Home Screen
+  the bag's screens advise adding Qalam to the Home Screen and keeping the card (`android.iphoneBrowser()`).
 
 ## Privacy
 
@@ -570,7 +577,7 @@ learner routes, the admin panel's (behind its gate) and the app's files are alwa
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/subjects`, `#/lesson/{id}`, `#/print/{id}`,
   `#/check/{id}/{seed}`, `#/photo/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
-  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/bag` and `#/move` (W7), `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
+  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/bag` and `#/move` (W7), `#/today` (W8), `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
   learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
   and the teacher's page stay open).
 - Sign-up (DESIGN.md 6 to 8): `screens/welcome.js` (the doors, no name field), `screens/signup.js` (the ordered

@@ -7,6 +7,9 @@
 // The Android app's "Use Qalam in this browser too" opens /m#<digits>, which keeps them for this tab only
 // (sessionStorage `qalam.bag.handoff`) and opens #/move; the browser's "Open in the Qalam app" hands them to the app
 // (android.takeBag). Either way the digits are read once and forgotten, and never reach an address a server sees.
+// W8: "Just for today (a borrowed phone)" beside Yes: she is kept in memory only (state.js startToday), with Done on
+// every screen (screens/today.js); with no relay in reach (a bag file) she is told first that today's work stays only
+// until Qalam is closed.
 
 import * as account from '../account.js';
 import { aliasIcon, aliasName } from '../aliases.js';
@@ -16,7 +19,7 @@ import { fa, getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, said, speakerBtn, topbar } from '../ui.js';
+import { fill, h, icon, said, speakerBtn, toast, topbar } from '../ui.js';
 import { codeInput } from './schoolbag.js';
 import { yearLabel } from './who.js';
 
@@ -129,8 +132,30 @@ export default function move() {
         h('span', { class: 'ini big' }, aliasIcon(sum.picture, 40, 2)),
         line(text, 'grow lead'),
         said(yes),
+        said(h('button', { type: 'button', class: 'btn today-choice', onClick: () => justToday(found, code) }, icon('clock', 22),
+          s('today_choice'))),
         said(h('button', { type: 'button', class: 'btn', onClick: () => { location.hash = '#/welcome'; } }, s('move_no')))));
     speak(text, getLang());
+  }
+
+  // "Just for today": her learner in memory only; nothing of hers reaches this phone's storage
+  function justToday(found, code, warned = false) {
+    if (!hub.relays() && !warned) {
+      const text = s('today_offline');
+      fill(root, topbar({ back, title: s('today_bar') }),
+        h('div', { class: 'stack pad' }, line(text, 'grow lead'),
+          said(h('button', { type: 'button', class: 'btn primary big', onClick: () => justToday(found, code, true) }, icon('next', 24), s('today_go'))),
+          said(h('button', { type: 'button', class: 'btn', onClick: () => confirm(found, code) }, s('cancel')))));
+      speak(text, getLang());
+      return;
+    }
+    state.startToday();
+    bagsync.restore(found, code).then((l) => {
+      if (!l) return;
+      toast(s('today_note'));
+      account.sync();
+      location.hash = '#/home';                              // locked: her PIN once
+    });
   }
 
   // not on this relay yet, or none in reach: she starts now, and the bag joins her when it is found (3.13 cases 5, 6)

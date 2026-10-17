@@ -207,6 +207,39 @@ test('a bag made at the hub reaches a new phone: found, "Is this you?", and she 
   nothingSecretSent(code, a.bag);
 });
 
+test('Just for today on a borrowed phone: nothing of hers reaches its storage, Done pushes her bag, and the owner is back', async () => {
+  const { id, code } = await madeAtHub();
+  state.setActive(id);
+  state.markDone('maths-3-add', 2);
+  now += 31e3;
+  await reach(HUB);
+  // the borrowed phone has its owner's learner
+  await phone('c');
+  await reach(HUB);
+  const owner = state.addChild({ year: 5, lang: 'ps' });
+  const found = await bagsync.lookUp(code);
+  const before = JSON.stringify([...store].sort());
+  state.startToday();
+  const l = await bagsync.restore(found, code);
+  assert.deepEqual(state.learners().map((x) => x.id), [l.id]);        // only her, and only in memory
+  assert.ok(state.justToday() && l.lock === null && l.done['maths-3-add'].stars === 2);
+  state.markDone('maths-3-sub', 3);
+  state.addAsk({ q: 'today?', at: now, lang: 'prs', queued: true });
+  await reach(HUB);
+  now += 31e3;
+  assert.equal(await bagsync.syncLearner(l.id, { force: true }), 'saved');   // Done
+  assert.equal(JSON.stringify([...store].sort()), before);           // nothing reached this phone's storage
+  assert.ok(HUB.events.some((e) => e.verb === 'lesson.done'));        // her events went with her token
+  state.reload();                                                     // the app opened again
+  assert.ok(!state.justToday());
+  assert.deepEqual(state.learners().map((x) => x.id), [owner.id]);
+  // her own phone: today's lesson and question came home
+  await phone('a');
+  await reach(HUB);
+  assert.equal(state.byId(id).done['maths-3-sub'].stars, 3);
+  assert.ok(state.byId(id).asks.some((a) => a.q === 'today?'));
+});
+
 test('two phones learn apart and meet through the hub and online: nothing lost, higher stars, newest plan, each question sent once', async () => {
   const { id, code } = await madeAtHub();
   state.setActive(id);

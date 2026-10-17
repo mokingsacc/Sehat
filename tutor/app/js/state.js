@@ -73,6 +73,20 @@ const seenParts = new Map();
 const seenTokens = new Map();
 const savedListeners = new Set();          // W7: onSaved, below
 let data = loaded(load());
+// W8 (WEBSITE.md 3.10): "Just for today" on a borrowed phone: from startToday() until the page is opened again, her
+// learner lives in memory only, like a reviewer's preview. Nothing is written to this browser's storage (her record,
+// the caches, the events queue); the learners kept on the phone stay as they are, unseen, and come back when the app
+// is opened again. Her bag is pushed on "Done" (screens/move.js).
+let today = false;
+export const justToday = () => today;
+export function startToday() {
+  today = true;
+  memory.clear();
+  events.memoryOnly();
+  unlocked.clear();
+  data = loaded(empty());
+  return data;
+}
 
 function loaded(d) {
   seenParts.clear();
@@ -442,7 +456,7 @@ function load() {
 export function save() {
   if (preview) return;
   stampAll();
-  try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* full or blocked: keep going */ }
+  if (!today) try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* full or blocked: keep going */ }
   for (const f of savedListeners) { try { f(); } catch (e) { console.warn(e); } }
 }
 // W7: told after every save (bagsync.js schedules her bag's next push from it)
@@ -638,6 +652,7 @@ export function restore(record) {
   seenTokens.set(l.id, tokensOf(l));
   standIn(l.id);
   save();
+  if (Object.keys(l.done).length) keepStorage();     // W8: a learner restored with her lessons, kept as one who did them
   return l;
 }
 
@@ -733,7 +748,7 @@ export function markDone(lessonId, stars) {
 // (WEBSITE.md 2.2 and 3.13 case 16): Chrome may evict an unpersisted origin, and her record is only here
 let persistAsked = false;
 function keepStorage() {
-  if (persistAsked || preview) return;
+  if (persistAsked || preview || today) return;
   persistAsked = true;
   try {
     const s = globalThis.navigator && navigator.storage;
@@ -816,7 +831,7 @@ export function pin(value) {
 
 // small caches so the lists and opened lessons still show when the hub is out of reach
 export function cache(key, value) {
-  if (preview) {
+  if (preview || today) {
     if (value !== undefined) memory.set(key, value);
     return value ?? memory.get(key) ?? null;
   }
@@ -828,4 +843,8 @@ export function cache(key, value) {
 }
 
 // for tests: read storage again
-export function reload() { data = loaded(load()); return data; }
+export function reload() {
+  if (today) { today = false; memory.clear(); events.memoryOnly(false); }
+  data = loaded(load());
+  return data;
+}

@@ -110,3 +110,13 @@ test('the manifest asks for exactly the spec\'s permissions', () => {
   const strings = readFileSync(new URL('../../android/app/src/main/res/values/strings.xml', import.meta.url), 'utf8');
   assert.match(strings, /<string name="app_name">Qalam<\/string>/);              // never a disguised name
 });
+
+test('W8: the iPhone advice is for Safari on an iPhone or iPad outside the Home Screen only', () => {
+  const iphone = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Version/17.5 Mobile/15E148 Safari/604.1';
+  const ipad = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Version/17.5 Safari/605.1.15';
+  assert.equal(android.iphoneBrowser(iphone, {}), true);
+  assert.equal(android.iphoneBrowser(iphone, { standalone: true }), false);         // added to the Home Screen
+  assert.equal(android.iphoneBrowser(ipad, { maxTouchPoints: 5 }), true);           // an iPad asks for the desktop site
+  assert.equal(android.iphoneBrowser(ipad, { maxTouchPoints: 0 }), false);          // a Mac
+  assert.equal(android.iphoneBrowser('Mozilla/5.0 (Linux; Android 13) Chrome/120', {}), false);
+});
