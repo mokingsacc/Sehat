@@ -39,7 +39,8 @@ Questions
 - `use_check(token, limit=3) -> dict | None`: one "Check my answer" try: `{solution, sure, checks, used}`, with
   `used` False (and nothing counted) once `limit` tries are spent; None when the question has no ladder.
 - `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`, lock reset codes
-  past their time and wishes not asked for in `WISH_DAYS` (90) days; approved answers stay.
+  past their time, wishes not asked for in `WISH_DAYS` (90) days, and `flag_log` and `admin_log` rows older than
+  `LOG_DAYS` (2 years); approved answers stay. The hub runs it at start, the Worker also once a day (its cron).
 
 Print jobs
 - `add_print(*, lesson_id, kind, copies, lang, seed, device) -> id`: a queued job.
@@ -57,6 +58,17 @@ Cohorts and flags (flags.py decides what they mean)
 - `set_flag(cid, module, *, enabled, settings=None, changed_by)`: sets the switch and adds the same row to the log,
   together. `changed_by` is a role, never a name.
 - `flag_log(cid, limit=50) -> list`: the cohort's changes, newest first.
+- `add_cohort(*, id, label, langs, bands, settings) -> bool`: a new cohort with no flags (every module off) and no
+  class code; False when the id is taken. Made by the admin panel (P21).
+- `set_cohort_settings(cid, settings) -> bool`: replaces the cohort's settings (a dict, checked by flags.py first);
+  False if there is no such cohort.
+- `learner_counts() -> {cid: n}`: how many learners each cohort has; a cohort with none is left out.
+
+The admin's log (P21; never a learner, never an email)
+- `add_admin_log(*, cohort, what, detail, changed_by) -> id`: one change that is not a module switch; `what` from
+  `ADMIN_WHAT`, `detail` at most 300 characters written by the hub, `changed_by` the admin's label.
+- `admin_log(cohort=None, limit=100) -> list`: `{id, at, cohort, what, detail, changed_by}`, newest first; with
+  `cohort`, that cohort's only.
 
 Events (events.py decides what may be in them)
 - `add_events(rows) -> int`: appends every row, all or none, and returns how many. A row has exactly the keys
@@ -93,11 +105,13 @@ Staff and review notes (P17, C3.2 and C3.4; never an email, never a name)
   capital letters (ValueError otherwise).
 - `staff_member(id_hash) -> dict | None`: `{label, role, cohorts: [ids], initials}`.
 - `remove_staff(id_hash) -> bool`.
+- `staff_list() -> list`: `{id_hash, label, role, cohorts: [ids], initials, added_at}` by label: what the admin's
+  Staff page shows (the hash is the row's key for removing it, and says nothing without the pepper).
 - `add_review_note(*, lesson, step, role, step_hash, status, chips, text) -> id`: a reviewer role's verdict on one
   step (0: the lesson as a whole): status `ok`, `change` or `done`; chips from REVIEW_CHIPS; text at most 500
   characters.
 - `review_notes(lesson, role=None) -> list`: `{id, lesson, step, role, step_hash, status, chips, text, at}`, oldest
-  first; the latest per step and role is the one that counts.
+  first; the latest per step and role is the one that counts. `lesson` None: every lesson's (the admin's Content).
 
 Learners (learners.py decides what they mean; never a name)
 - `set_class_code(cid, code_hash) -> bool`: the cohort's class code, hashed; False if there is no such cohort.
@@ -122,8 +136,10 @@ Learners (learners.py decides what they mean; never a name)
 The wishlist (P22): what learners wanted to learn and no lesson matched, never with a token
 - `add_wish(*, cohort, band, lang, wish, wkey) -> int`: one more ask for the wish `wkey` (its search form) in that
   cohort, band and language; the first keeps its text and day, each one moves the last day. Returns the count.
-- `wishes(cohort=None, limit=100) -> list[dict]`: `{cohort, band, lang, wish, wkey, count, first_day, last_day}`, the most
-  asked for first, then the latest; every cohort's when `cohort` is None.
+- `wishes(cohort=None, limit=100) -> list[dict]`: `{cohort, band, lang, wish, wkey, count, first_day, last_day,
+  status}`, the most asked for first, then the latest; every cohort's when `cohort` is None.
+- `set_wish_status(wkey, status) -> int`: the admin's mark (`WISH_STATUS`: new, planned, not_for_qalam) on every row
+  of that wish, in every cohort, band and language; returns how many rows.
 """
 
 import json
@@ -132,6 +148,10 @@ import re
 
 WISH_DAYS = 90             # a wish not asked for again in 90 days is deleted (BUILD-PLAN 3.4)
 WISH_MAX = 200            # characters of a wish kept
+WISH_STATUS = ("new", "planned", "not_for_qalam")
+LOG_DAYS = 730            # flag_log and admin_log are kept 2 years (BUILD-PLAN 3.4)
+ADMIN_WHAT = ("cohort.new", "cohort.settings", "cohort.kill", "cohort.code", "release", "rollback", "wish",
+              "staff.add", "staff.remove")
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
 # the teacher's list: held answers, and answered or waiting questions sent to the teacher; urgent first
 QUEUE = "status='held' OR (to_teacher=1 AND status IN ('answered','waiting'))"
@@ -257,6 +277,21 @@ class Store:
     async def flag_log(self, cid, limit=50) -> list[dict]:
         raise NotImplementedError
 
+    async def add_cohort(self, *, id, label, langs, bands, settings) -> bool:
+        raise NotImplementedError
+
+    async def set_cohort_settings(self, cid, settings) -> bool:
+        raise NotImplementedError
+
+    async def learner_counts(self) -> dict[str, int]:
+        raise NotImplementedError
+
+    async def add_admin_log(self, *, cohort, what, detail, changed_by) -> int:
+        raise NotImplementedError
+
+    async def admin_log(self, cohort=None, limit=100) -> list[dict]:
+        raise NotImplementedError
+
     # events
     async def add_events(self, rows: list[dict]) -> int:
         raise NotImplementedError
@@ -307,6 +342,9 @@ class Store:
     async def remove_staff(self, id_hash) -> bool:
         raise NotImplementedError
 
+    async def staff_list(self) -> list[dict]:
+        raise NotImplementedError
+
     async def add_review_note(self, *, lesson, step, role, step_hash, status, chips, text) -> int:
         raise NotImplementedError
 
@@ -353,6 +391,26 @@ class Store:
 
     async def wishes(self, cohort=None, limit=100) -> list[dict]:
         raise NotImplementedError
+
+    async def set_wish_status(self, wkey, status) -> int:
+        raise NotImplementedError
+
+
+def check_log(*, what, detail, changed_by) -> str:
+    """An admin_log row: a known change, a short line the hub wrote, and who by as a label (never an email)."""
+    if what not in ADMIN_WHAT:
+        raise ValueError(f"what is one of {', '.join(ADMIN_WHAT)}")
+    if not isinstance(detail, str) or len(detail) > 300:
+        raise ValueError("detail is a line of at most 300 characters")
+    if not isinstance(changed_by, str) or not 1 <= len(changed_by) <= 60 or "@" in changed_by:
+        raise ValueError("changed_by is a label, never an email")
+    return detail
+
+
+def check_wish_status(status) -> str:
+    if status not in WISH_STATUS:
+        raise ValueError(f"a wish is {', '.join(WISH_STATUS)}")
+    return status
 
 
 def check_initials(initials) -> str:

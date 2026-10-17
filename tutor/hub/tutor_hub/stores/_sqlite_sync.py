@@ -12,8 +12,8 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import (EVENT_FIELDS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_note, check_staff,
-                   WISH_DAYS, WISH_MAX, draw_number, hints_json, question_status)
+from .base import (EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_note,
+                   check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, question_status)
 
 
 def now() -> str:
@@ -132,6 +132,9 @@ class Store:
         self._x("DELETE FROM reset_codes WHERE expires<?", (now(),))
         self._x("DELETE FROM wishlist WHERE last_day<?",
                 ((datetime.now(timezone.utc) - timedelta(days=WISH_DAYS)).strftime("%Y-%m-%d"),))
+        logs = (datetime.now(timezone.utc) - timedelta(days=LOG_DAYS)).isoformat(timespec="seconds")
+        self._x("DELETE FROM flag_log WHERE changed_at<?", (logs,))
+        self._x("DELETE FROM admin_log WHERE at<?", (logs,))
 
     # print jobs
     def add_print(self, *, lesson_id, kind, copies, lang, seed, device) -> int:
@@ -224,6 +227,30 @@ class Store:
         return [dict(r, enabled=bool(r["enabled"]), settings=json.loads(r["settings"]))
                 for r in self._all("SELECT * FROM flag_log WHERE cohort=? ORDER BY id DESC LIMIT ?", (cid, limit))]
 
+    def add_cohort(self, *, id, label, langs, bands, settings) -> bool:
+        try:
+            self._x("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?,?,?,?,?,?)",
+                    (id, label, json.dumps(list(langs)), json.dumps(list(bands)), json.dumps(settings or {}), now()))
+            return True
+        except sqlite3.IntegrityError:
+            return False
+
+    def set_cohort_settings(self, cid, settings) -> bool:
+        return self._x("UPDATE cohorts SET settings=? WHERE id=?", (json.dumps(settings or {}), cid)).rowcount > 0
+
+    def learner_counts(self):
+        return {r["cohort"]: r["n"] for r in self._all("SELECT cohort, COUNT(*) AS n FROM learners GROUP BY cohort")}
+
+    def add_admin_log(self, *, cohort, what, detail, changed_by) -> int:
+        check_log(what=what, detail=detail, changed_by=changed_by)
+        return self._x("INSERT INTO admin_log(at, cohort, what, detail, changed_by) VALUES(?,?,?,?,?)",
+                       (now(), cohort, what, detail, changed_by)).lastrowid
+
+    def admin_log(self, cohort=None, limit=100):
+        if cohort is None:
+            return self._all("SELECT * FROM admin_log ORDER BY id DESC LIMIT ?", (int(limit),))
+        return self._all("SELECT * FROM admin_log WHERE cohort=? ORDER BY id DESC LIMIT ?", (cohort, int(limit)))
+
     # events
     def add_events(self, rows) -> int:
         """Append the rows, all or none; a row with a field outside EVENT_FIELDS is refused before anything is written."""
@@ -306,14 +333,21 @@ class Store:
     def remove_staff(self, id_hash) -> bool:
         return self._x("DELETE FROM staff WHERE id_hash=?", (id_hash,)).rowcount > 0
 
+    def staff_list(self):
+        return [dict(r, cohorts=json.loads(r["cohorts"])) for r in
+                self._all("SELECT id_hash, label, role, cohorts, initials, added_at FROM staff ORDER BY label, id_hash")]
+
     def add_review_note(self, *, lesson, step, role, step_hash, status, chips, text) -> int:
         cj = check_note(step=step, status=status, chips=chips, text=text)
         return self._x("INSERT INTO review_notes(lesson, step, role, step_hash, status, chips, text, at) "
                        "VALUES(?,?,?,?,?,?,?,?)", (lesson, step, role, step_hash, status, cj, text, now())).lastrowid
 
     def review_notes(self, lesson, role=None):
-        rows = self._all("SELECT * FROM review_notes WHERE lesson=? AND (? IS NULL OR role=?) ORDER BY id",
-                         (lesson, role, role))
+        if lesson is None:                   # every lesson's, for the admin's Content page
+            rows = self._all("SELECT * FROM review_notes WHERE (? IS NULL OR role=?) ORDER BY id", (role, role))
+        else:
+            rows = self._all("SELECT * FROM review_notes WHERE lesson=? AND (? IS NULL OR role=?) ORDER BY id",
+                             (lesson, role, role))
         return [dict(r, chips=json.loads(r["chips"])) for r in rows]
 
     def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
@@ -418,5 +452,8 @@ class Store:
 
     def wishes(self, cohort=None, limit=100):
         where, args = ("WHERE cohort=?", (cohort,)) if cohort else ("", ())
-        return self._all(f"""SELECT cohort, band, lang, wish, wkey, count, first_day, last_day FROM wishlist {where}
-                             ORDER BY count DESC, last_day DESC, wish LIMIT ?""", (*args, int(limit)))
+        return self._all(f"""SELECT cohort, band, lang, wish, wkey, count, first_day, last_day, status FROM wishlist
+                             {where} ORDER BY count DESC, last_day DESC, wish LIMIT ?""", (*args, int(limit)))
+
+    def set_wish_status(self, wkey, status) -> int:
+        return self._x("UPDATE wishlist SET status=? WHERE wkey=?", (check_wish_status(status), wkey)).rowcount

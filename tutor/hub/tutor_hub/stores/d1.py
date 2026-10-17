@@ -21,8 +21,9 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from .base import (EVENT_FIELDS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_note, check_staff,
-                   WISH_DAYS, WISH_MAX, draw_number, hints_json, question_status)
+from .base import (EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log,
+                   check_note, check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json,
+                   question_status)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -202,12 +203,15 @@ class D1Store(Store):
 
     async def prune(self, keep_days: int):
         cut = _ago(days=keep_days).isoformat(timespec="seconds")
+        logs = _ago(days=LOG_DAYS).isoformat(timespec="seconds")
         await self._batch([self._stmt("DELETE FROM questions WHERE created<?", cut),
                            self._stmt("DELETE FROM ladders WHERE created<?", cut),
                            self._stmt("DELETE FROM prints WHERE created<?", cut),
                            self._stmt("DELETE FROM reset_codes WHERE expires<?", now()),
                            self._stmt("DELETE FROM wishlist WHERE last_day<?",
-                                      _ago(days=WISH_DAYS).strftime("%Y-%m-%d"))])
+                                      _ago(days=WISH_DAYS).strftime("%Y-%m-%d")),
+                           self._stmt("DELETE FROM flag_log WHERE changed_at<?", logs),
+                           self._stmt("DELETE FROM admin_log WHERE at<?", logs)])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)
 
@@ -297,6 +301,38 @@ class D1Store(Store):
                 for r in await self._all("SELECT * FROM flag_log WHERE cohort=? ORDER BY id DESC LIMIT ?",
                                          cid, int(limit))]
 
+    async def add_cohort(self, *, id, label, langs, bands, settings) -> bool:
+        if await self._one("SELECT id FROM cohorts WHERE id=?", id):
+            return False
+        try:
+            await self._run("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?,?,?,?,?,?)",
+                            id, label, json.dumps(list(langs)), json.dumps(list(bands)), json.dumps(settings or {}),
+                            now())
+        except Exception:
+            if await self._one("SELECT id FROM cohorts WHERE id=?", id):
+                return False
+            raise
+        return True
+
+    async def set_cohort_settings(self, cid, settings) -> bool:
+        meta = await self._run("UPDATE cohorts SET settings=? WHERE id=?", json.dumps(settings or {}), cid)
+        return (meta.changes or 0) > 0
+
+    async def learner_counts(self):
+        return {r["cohort"]: r["n"] for r in await self._all("SELECT cohort, COUNT(*) AS n FROM learners "
+                                                             "GROUP BY cohort")}
+
+    async def add_admin_log(self, *, cohort, what, detail, changed_by) -> int:
+        check_log(what=what, detail=detail, changed_by=changed_by)
+        meta = await self._run("INSERT INTO admin_log(at, cohort, what, detail, changed_by) VALUES(?,?,?,?,?)",
+                               now(), cohort, what, detail, changed_by)
+        return int(meta.last_row_id)
+
+    async def admin_log(self, cohort=None, limit=100):
+        if cohort is None:
+            return await self._all("SELECT * FROM admin_log ORDER BY id DESC LIMIT ?", int(limit))
+        return await self._all("SELECT * FROM admin_log WHERE cohort=? ORDER BY id DESC LIMIT ?", cohort, int(limit))
+
     # events
 
     async def add_events(self, rows) -> int:
@@ -381,6 +417,11 @@ class D1Store(Store):
         meta = await self._run("DELETE FROM staff WHERE id_hash=?", id_hash)
         return (meta.changes or 0) > 0
 
+    async def staff_list(self):
+        return [dict(r, cohorts=json.loads(r["cohorts"])) for r in
+                await self._all("SELECT id_hash, label, role, cohorts, initials, added_at FROM staff "
+                                "ORDER BY label, id_hash")]
+
     async def add_review_note(self, *, lesson, step, role, step_hash, status, chips, text) -> int:
         cj = check_note(step=step, status=status, chips=chips, text=text)
         meta = await self._run("INSERT INTO review_notes(lesson, step, role, step_hash, status, chips, text, at) "
@@ -388,6 +429,9 @@ class D1Store(Store):
         return int(meta.last_row_id)
 
     async def review_notes(self, lesson, role=None):
+        if lesson is None:                   # every lesson's, for the admin's Content page
+            rows = await self._all("SELECT * FROM review_notes ORDER BY id")
+            return [dict(r, chips=json.loads(r["chips"])) for r in rows if role is None or r["role"] == role]
         if role is None:
             rows = await self._all("SELECT * FROM review_notes WHERE lesson=? ORDER BY id", lesson)
         else:
@@ -483,5 +527,10 @@ class D1Store(Store):
 
     async def wishes(self, cohort=None, limit=100):
         where, args = ("WHERE cohort=?", (cohort,)) if cohort else ("", ())
-        return await self._all(f"""SELECT cohort, band, lang, wish, wkey, count, first_day, last_day FROM wishlist {where}
-                                   ORDER BY count DESC, last_day DESC, wish LIMIT ?""", *args, int(limit))
+        return await self._all(f"""SELECT cohort, band, lang, wish, wkey, count, first_day, last_day, status
+                                   FROM wishlist {where} ORDER BY count DESC, last_day DESC, wish LIMIT ?""",
+                               *args, int(limit))
+
+    async def set_wish_status(self, wkey, status) -> int:
+        meta = await self._run("UPDATE wishlist SET status=? WHERE wkey=?", check_wish_status(status), wkey)
+        return int(meta.changes or 0)

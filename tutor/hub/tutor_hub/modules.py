@@ -24,6 +24,21 @@ AI_PURPOSES = ("explain", "hint", "read_sheet", "plan", "screen")
 CAPABILITY_RISK = {"photo.upload": "high", "audio.record": "high", "free.text": "medium", "ai.call": "medium",
                    "share.public": "blocked", "child.contact": "blocked"}
 RISK_ORDER = ("none", "medium", "high", "blocked")
+# the core's sentence for each capability, which the admin reads before turning a module on (P21); English, for the
+# admin, who reads English by default
+RISK_SENTENCE = {
+    "photo.upload": "Learners send a strip of their answer cells to be read; online it goes to the AI provider and is "
+                    "never kept.",
+    "audio.record": "Learners record their voice.",
+    "free.text": "Learners type their own words; what they type reaches the server and may reach a teacher or the "
+                 "AI provider.",
+    "ai.call": "Questions go to the AI provider (OpenAI online, the hub's own model in the village), within the "
+               "cohort's daily budget.",
+    "share.public": "Learners' work could be seen by people outside the class. Blocked unless moderation is paid "
+                    "human moderation.",
+    "child.contact": "Learners could reach other people directly. Blocked unless moderation is paid human "
+                     "moderation.",
+}
 FIELDS = ("id", "version", "maturity", "depends", "bands", "slots", "capabilities", "ai", "settings", "needs",
           "offline")
 OPTIONAL = {"ai"}
@@ -127,6 +142,11 @@ def risk(m: dict) -> str:
     """The highest risk among the module's capabilities, from the core's table."""
     levels = [CAPABILITY_RISK[c] for c in m.get("capabilities", [])] or ["none"]
     return max(levels, key=RISK_ORDER.index)
+
+
+def risk_sentence(m: dict) -> str:
+    """What the module's capabilities let learners do, in the core's words: the sentence beside the admin's switch."""
+    return " ".join(RISK_SENTENCE[c] for c in m.get("capabilities", []) if c in RISK_SENTENCE)
 
 
 def load(folder: Path) -> tuple[dict[str, dict], list[str]]:

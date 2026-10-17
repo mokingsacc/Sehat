@@ -10,6 +10,9 @@ Two gates, one per host, never both:
   to add you". The email is dropped as soon as it is hashed. The pepper is a secret (`TUTOR_STAFF_PEPPER`), never in
   D1 or the repository, so the table alone says nothing about anyone.
 
+The admin panel (P21, `/admin/`) asks `admin()`: online the staff row's role must be `admin`; on the hub it takes the
+hub's admin PIN (`X-Admin-Pin`), which is separate from the teacher's (C3.3).
+
 `TUTOR_STAFF_GATE` picks the gate: `auto` (the default) is the PIN on the hub and Access online, but only when the
 Access team, the audience and the pepper are all set; without them the staff pages are off (404). The fallback
 container sets `off`: nothing stands in front of it, so it serves no staff page at all. RS256 is checked here in
@@ -152,6 +155,19 @@ class Gate:
         if row is None:
             raise HTTPException(403, "Ask the admin to add you")
         return dict(row, via="access")
+
+    async def admin(self, request: Request) -> dict:
+        """The admin asking (P21): {label, role: admin, cohorts, initials, via}. On the hub the admin PIN, not the
+        teacher's; online a staff row whose role is admin (any other role: 403)."""
+        if self.mode == "off":
+            raise HTTPException(404, "Not Found")
+        if self.mode == "pin":
+            self.hub.check_pin(request.headers.get("x-admin-pin"), self.hub.who(request), admin=True)
+            return {"label": "hub", "role": "admin", "cohorts": [], "initials": "", "via": "pin"}
+        me = await self.who(request)
+        if me.get("role") != "admin":
+            raise HTTPException(403, "admins only")
+        return me
 
 
 def mode_of(cfg) -> str:

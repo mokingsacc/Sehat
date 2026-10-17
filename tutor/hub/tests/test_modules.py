@@ -226,7 +226,7 @@ def test_module_settings_use_valid_cohort_values_only():
 def test_cohort_checks():
     assert flags.check_cohort(cohort()) == []
     for change, words in (({"id": "hub"}, "id"), ({"bands": ["k1"]}, "bands"), ({"langs": ["fa"]}, "langs"),
-                          ({"settings": {"ai_budget": 3}}, "settings"), ({"modules": {"ask": "on"}}, "modules"),
+                          ({"settings": {"ai_budget": "lots"}}, "settings"), ({"settings": {"colour": 3}}, "settings"), ({"modules": {"ask": "on"}}, "modules"),
                           ({"name": "x"}, "unknown fields")):
         c = copy.deepcopy(cohort())
         c.update(change)

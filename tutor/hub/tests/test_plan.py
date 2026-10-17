@@ -54,7 +54,7 @@ def test_a_miss_reaches_the_wishlist_screened_counted_and_without_the_token(hub)
     [w] = wishes(hub)
     assert w["count"] == 2 and "Karim" not in w["wish"] and "0799123456" not in w["wish"] and "chemistry" in w["wish"]
     assert (w["cohort"], w["band"], w["lang"]) == (hub.hub.cohort_id, "s1", "en")
-    assert tok not in str(w) and set(w) == {"cohort", "band", "lang", "wish", "wkey", "count", "first_day", "last_day"}
+    assert tok not in str(w) and set(w) == {"cohort", "band", "lang", "wish", "wkey", "count", "first_day", "last_day", "status"}
     assert len(w["first_day"]) == 10                              # a day, never a time
     assert goal(hub, "the of and").json() == {"kind": "wish", "saved": False}   # nothing to keep
     assert goal(hub, "x" * 201).status_code == 422

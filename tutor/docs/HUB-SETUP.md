@@ -75,6 +75,15 @@ learning screen) and type the PIN. From there:
   Wi-Fi and one to open the app).
 - **Lessons:** how each lesson went, the hardest question, and the answer sheet.
 
+## 5a. The admin panel
+
+The admin (Mo or the hub's keeper, never the teacher) has a PIN of her own: `.venv/bin/python -m tutor_hub admin-pin`
+shows it and `new-admin-pin` makes a new one. Open `http://10.42.0.1/admin/` and type it. There: the class's code and
+its class cards (the code shows once, so print the cards then, or draw a new code), the modules switched on or off
+with their risks, the two kill switches (AI off, school day off), hold-for-teacher and lock reset codes (the
+`teacher` module's settings), the school day's timetable, the AI budget, the packs' releases, the wishlist, AI use,
+safety counts and the log of every change. On the hub there is no staff list: the two PINs are the staff gate.
+
 ## 6. The AI (optional)
 
 1. Build llama.cpp in `/opt/qalam/llama.cpp` (on a Jetson: `cmake -B build -DGGML_CUDA=ON && cmake --build build -j`).

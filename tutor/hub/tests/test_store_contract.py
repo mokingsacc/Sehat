@@ -723,7 +723,7 @@ async def test_the_wishlist_counts_each_wish_once_without_a_token_for_90_days(st
     assert await add("c2", "s1", "astronomy") == 1
     rows = await store.wishes("c1")
     assert [(w["band"], w["wish"], w["count"]) for w in rows] == [("s1", "chemistry", 2), ("s2", "chemistry", 1)]
-    assert set(rows[0]) == {"cohort", "band", "lang", "wish", "wkey", "count", "first_day", "last_day"}
+    assert set(rows[0]) == {"cohort", "band", "lang", "wish", "wkey", "count", "first_day", "last_day", "status"}
     assert len(await store.wishes()) == 3 and len(await store.wishes(limit=1)) == 1
     db = store.db.sqlite if isinstance(store, D1Store) else store._inner.db
     db.execute("UPDATE wishlist SET last_day='2020-01-01' WHERE cohort='c2'")
@@ -744,3 +744,59 @@ async def test_class_codes_and_idle_learners(store):
     await store.prune_learners(365)
     assert await store.learner("old") is None and await store.learner("new")
     assert await store.events("lrn0cohort") == []
+
+
+async def test_cohorts_the_admin_makes_and_changes(store):
+    await store.seed_cohorts([COHORT])
+    s = {"maturity": ["pilot", "stable"]}
+    assert await store.add_cohort(id="adm0cohort", label="Mazar class", langs=["prs"], bands=["s1"], settings=s)
+    assert not await store.add_cohort(id="adm0cohort", label="Again", langs=["prs"], bands=["s1"], settings={})
+    c = await store.cohort("adm0cohort")
+    assert (c["label"], c["langs"], c["bands"], c["settings"]) == ("Mazar class", ["prs"], ["s1"], s)
+    assert await store.flags("adm0cohort") == {}                               # every module off
+    assert await store.set_cohort_settings("adm0cohort", {"ai": False})
+    assert (await store.cohort("adm0cohort"))["settings"] == {"ai": False}
+    assert not await store.set_cohort_settings("nosuch", {})
+    assert await store.learner_counts() == {}
+    await store.add_learner(token_hash="h1", cohort="adm0cohort", picture="cup", band="s1")
+    await store.add_learner(token_hash="h2", cohort="adm0cohort", picture="key", band="s1")
+    assert await store.learner_counts() == {"adm0cohort": 2}
+
+
+async def test_the_admin_log_keeps_a_label_never_an_email_for_two_years(store):
+    await store.add_admin_log(cohort="c1", what="cohort.kill", detail="AI off", changed_by="admin:Admin A")
+    await store.add_admin_log(cohort=None, what="staff.add", detail="Teacher B (teacher)", changed_by="admin:Admin A")
+    assert [x["what"] for x in await store.admin_log()] == ["staff.add", "cohort.kill"]
+    [x] = await store.admin_log("c1")
+    assert set(x) == {"id", "at", "cohort", "what", "detail", "changed_by"} and x["detail"] == "AI off"
+    for bad in ({"what": "drop.table"}, {"changed_by": "mo@example.org"}, {"detail": "x" * 301}):
+        with pytest.raises(ValueError):
+            await store.add_admin_log(**{"cohort": None, "what": "wish", "detail": "", "changed_by": "admin:A", **bad})
+    await store.seed_cohorts([COHORT])
+    await store.set_flag("lrn0cohort", "ask", enabled=True, changed_by="admin:Admin A")
+    db = store.db.sqlite if isinstance(store, D1Store) else store._inner.db
+    db.execute("UPDATE admin_log SET at='2020-01-01T00:00:00+00:00' WHERE cohort='c1'")
+    db.execute("UPDATE flag_log SET changed_at='2020-01-01T00:00:00+00:00' WHERE module='ask'")
+    await store.prune(60)
+    assert [x["what"] for x in await store.admin_log()] == ["staff.add"]
+    assert [x["module"] for x in await store.flag_log("lrn0cohort")] == []
+
+
+async def test_the_staff_list_and_a_wish_marked_everywhere(store):
+    h = "ab" * 32
+    await store.add_staff(id_hash=h, label="Teacher A", role="teacher", cohorts=["c1"], initials="")
+    [row] = await store.staff_list()
+    assert row["id_hash"] == h and row["cohorts"] == ["c1"] and set(row) == {"id_hash", "label", "role", "cohorts",
+                                                                             "initials", "added_at"}
+    for cohort in ("c1", "c2"):
+        await store.add_wish(cohort=cohort, band="s1", lang="en", wish="chemistry", wkey="chemistry")
+    assert await store.set_wish_status("chemistry", "planned") == 2
+    assert {w["status"] for w in await store.wishes()} == {"planned"}
+    assert await store.set_wish_status("nothing", "planned") == 0
+    with pytest.raises(ValueError):
+        await store.set_wish_status("chemistry", "maybe")
+    await store.add_review_note(lesson="l1", step=1, role="Dari reader", step_hash="sha256:a", status="ok",
+                                chips=[], text="")
+    await store.add_review_note(lesson="l2", step=0, role="Pashto reader", step_hash="sha256:b", status="change",
+                                chips=["word"], text="x")
+    assert [n["lesson"] for n in await store.review_notes(None)] == ["l1", "l2"]

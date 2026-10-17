@@ -65,6 +65,7 @@ class Gateway:
         self.budget = budget                     # tokens per cohort per UTC day; None: no cap
         self.timeout = timeout
         self.cohort = cohort                     # the hub's own cohort, when a call names none
+        self.on_drop = None                      # async (why, cohort): a reply dropped by the leak or maths check
 
     async def available(self) -> bool:
         return self.provider is not None and await self.provider.available()
@@ -82,10 +83,26 @@ class Gateway:
         if not m or purpose not in (m.get("ai") or {}).get("purposes", ()):
             raise policy.PolicyError(f"module {module!r} may not use the AI for {purpose!r}")
 
-    async def over_budget(self, cohort: str | None) -> bool:
-        if self.store is None or self.budget is None or not cohort:
+    async def settings(self, cohort: str | None) -> dict:
+        """The cohort's settings (its kill switch and budget); empty without a store or a cohort."""
+        if self.store is None or not cohort:
+            return {}
+        try:
+            return ((await self.store.cohort(cohort)) or {}).get("settings") or {}
+        except Exception:
+            log.exception("cohort settings not read")
+            return {}
+
+    def cap(self, settings: dict) -> int | None:
+        """Tokens a UTC day for a cohort: its own `ai_budget`, else the hub's TUTOR_AI_BUDGET (None: no cap)."""
+        b = settings.get("ai_budget")
+        return b if type(b) is int and b >= 0 else self.budget
+
+    async def over_budget(self, cohort: str | None, settings: dict | None = None) -> bool:
+        cap = self.cap(settings if settings is not None else await self.settings(cohort))
+        if self.store is None or cap is None or not cohort:
             return False
-        return (await self.store.ai_spent(cohort, today()))["tokens"] >= self.budget
+        return (await self.store.ai_spent(cohort, today()))["tokens"] >= cap
 
     async def call(self, purpose: str, messages: list[dict], *, module: str, lang: str, cohort: str | None = None,
                    names=(), answers=None, images=None, max_tokens: int = 350, temperature: float = 0.2,
@@ -105,7 +122,10 @@ class Gateway:
         if purpose not in UNSCREENED and any(rules.screen(_text(m.get("content"))) for m in said):
             return Result(None, "rules")
         cohort = cohort or self.cohort
-        if await self.over_budget(cohort):
+        settings = await self.settings(cohort)
+        if settings.get("ai", True) is False:            # the cohort's kill switch (P21): silent, like the budget
+            return Result(None, "off")
+        if await self.over_budget(cohort, settings):
             log.info("AI budget for today used up in cohort %s: checked answers and the teacher only", cohort)
             return Result(None, "budget")
         if not await p.available():
@@ -119,14 +139,25 @@ class Gateway:
                 return r
             if purpose == "hint" and filters.leaks(r, answers):
                 log.info("a hint gave the answer away (try %d): dropped", attempt + 1)
+                await self._dropped("leak", cohort)
                 continue
             if purpose in MATHS_PURPOSES:
                 c = mathcheck.check(r)
                 if not c.ok:
+                    await self._dropped("maths", cohort)
                     return Result(None, "maths")       # a wrong sum: never shown
                 return Result(mathcheck.mark(r), "ok", maths_checked=c.checked, held=held)
             return Result(r, "ok", held=held)
         return Result(None, "leak")
+
+    async def _dropped(self, why: str, cohort: str | None):
+        """A reply the checks threw away: counted for the admin's Safety page (P21) through `on_drop`, never with
+        its text."""
+        if self.on_drop is not None:
+            try:
+                await self.on_drop(why, cohort)
+            except Exception:
+                log.exception("a dropped reply was not counted")
 
     async def _send(self, p, purpose, messages, *, module, cohort, images, max_tokens, temperature, held=False):
         """The reply's text, or a Result saying why there is none. Every reply is counted in ai_usage."""

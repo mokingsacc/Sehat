@@ -136,6 +136,15 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   hint steps, from nameless events. Print class card: a QR for `?join=CODE`. Hold-for-teacher is the `teacher`
   setting `hold`, off until the admin panel (P21) or a flag change turns it on. Online it stays off until Mo sets up
   Access and adds the teachers' staff rows.
+- **P21, done:** the admin panel (C3.3) at `/admin/`, behind its own PIN on the hub and Cloudflare Access with an
+  admin staff row online. Cohorts with neutral labels (the label filter) and class codes shown once; a page per
+  cohort with the two kill switches (AI off, school day off) at the top, the module table with the core's risk
+  sentence, confirms for risky modules and missing dependencies, blocked capabilities only with paid human
+  moderation, settings saved through a diff, and the school day's timetable editor; Class cards, eight to an A4 page.
+  Content (sign-offs, Publish and Roll back into `releases`, review notes, the wishlist across cohorts with Planned and
+  Not for Qalam), AI spend against the cap, Safety counts, Staff (online only, emails hashed and dropped) and the Log
+  of every change. The command line's `class-code` is gone. Online it stays closed until Mo sets up Access and adds
+  the first admin's staff row.
 - **P22, done:** "I want to learn this" (C3.5), typed only. Home's last row in s1, s2 and for adult readers opens a
   box and unit chips; a goal that matches gives a plan of lessons in pack order, which becomes Home's continue card
   and fills the school day's periods; a partial match gives the closest lessons; a miss joins the class's wishlist,

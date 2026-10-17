@@ -23,6 +23,9 @@ ITEM = re.compile(r"^([a-z][a-z0-9]*(?:-[a-z0-9]+)*):([1-9][0-9]?)$")     # a sh
 DIGIT_RUN = re.compile(r"[0-9]{5,}")
 SOURCES = ("rules", "maths", "bank", "approved", "ai", "lesson", "none")
 REASONS = ("wrong", "gives_answer", "unsafe", "not_school")      # why a held answer was not sent (P20)
+# what the admin's Safety page counts (P21): a question the rules screen stopped, by its kind (rules.py), and an AI
+# reply the hub threw away because a hint gave the answer away or a sum was wrong; counts only, never the words
+SAFETY = ("distress", "health", "off_limits", "too_long", "leak", "maths")
 
 
 @dataclass(frozen=True)
@@ -50,6 +53,7 @@ VERBS = {
     "held.sent": Verb("teacher", None, None, False),
     "held.edited": Verb("teacher", None, None, False),
     "held.dropped": Verb("teacher", "reason", None, False),
+    "safety.flag": Verb("ask", "safety", None, False),
 }
 
 
@@ -97,6 +101,8 @@ def check(e: dict, *, phone: bool) -> list[str]:
         p.append(f"{e['verb']} takes an answer source")
     elif v.obj == "reason" and o not in REASONS:
         p.append(f"{e['verb']} takes a reason: {', '.join(REASONS)}")
+    elif v.obj == "safety" and o not in SAFETY:
+        p.append(f"{e['verb']} takes a kind: {', '.join(SAFETY)}")
     n = e.get("value")
     if v.value is None and n is not None:
         p.append(f"{e['verb']} takes no value")

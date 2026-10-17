@@ -163,6 +163,21 @@ class SqliteStore(Store):
     async def set_flag(self, cid, module, *, enabled, settings=None, changed_by):
         return await self._run("set_flag", cid, module, enabled=enabled, settings=settings, changed_by=changed_by)
 
+    async def add_cohort(self, **kw) -> bool:
+        return await self._run("add_cohort", **kw)
+
+    async def set_cohort_settings(self, cid, settings) -> bool:
+        return await self._run("set_cohort_settings", cid, settings)
+
+    async def learner_counts(self):
+        return await self._run("learner_counts")
+
+    async def add_admin_log(self, **kw) -> int:
+        return await self._run("add_admin_log", **kw)
+
+    async def admin_log(self, cohort=None, limit=100):
+        return await self._run("admin_log", cohort, limit)
+
     async def flag_log(self, cid, limit=50):
         return await self._run("flag_log", cid, limit)
 
@@ -208,6 +223,9 @@ class SqliteStore(Store):
 
     async def staff_member(self, id_hash):
         return await self._run("staff_member", id_hash)
+
+    async def staff_list(self):
+        return await self._run("staff_list")
 
     async def remove_staff(self, id_hash) -> bool:
         return await self._run("remove_staff", id_hash)
@@ -261,3 +279,6 @@ class SqliteStore(Store):
 
     async def wishes(self, cohort=None, limit=100):
         return await self._run("wishes", cohort, limit)
+
+    async def set_wish_status(self, wkey, status) -> int:
+        return await self._run("set_wish_status", wkey, status)

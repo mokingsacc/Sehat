@@ -161,8 +161,12 @@ risk a module carries comes from the core's table of capabilities, never from th
 A cohort is a group with the same settings, with a random id and a neutral label. The seed files
 `tutor/cohorts/{hub,staging,open}.json` fill the empty `cohorts` and `flags` tables once (`migrations/0002`); after
 that flags change only through the store's `set_flag`, which also writes `flag_log` (the admin panel, P21). A module
-is on when its flag is on, its `depends` are on, the cohort takes its maturity, and, when the band is known, both the
-module and the cohort serve that band. The hub's own cohort is `TUTOR_COHORT`, by default the id in `cohorts/hub.json`;
+is on when its flag is on, its `depends` are on, the cohort takes its maturity, a blocked capability has the cohort's
+`paid-human` moderation, and, when the band is known, both the module and the cohort serve that band. A cohort's
+settings (`flags.SETTINGS`, checked by `flags.settings_problems`) are `maturity`, `timetable` (P19), `ai` (false is the
+kill switch "AI off": the gateway answers "off" for that cohort and `hello.ai_on` is false), `ai_budget` (its own daily
+tokens instead of the hub's `TUTOR_AI_BUDGET`) and `moderation` (`none`, `teacher` or `paid-human`). A label must
+not say who is in the class (`flags.label_problem`, F4: English words and their Dari and Pashto drafts). The hub's own cohort is `TUTOR_COHORT`, by default the id in `cohorts/hub.json`;
 a request may name another with `?cohort=`. Flags are read on every request, so a switch reaches the next one, and a
 switched-off module's routes answer 404 as if they were never there.
 
@@ -398,8 +402,9 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   (`TUTOR_HOME=online`, set in `wrangler.toml`); `GET /api/consent?lang=&version=` serves
   `content/consent/<lang>/<version>.json` (four rows and the full text; drafts). The record is the kind
   (`guardian-on-phone`, `self` or `partner-paper`), the version and the minute; a minute in the future becomes now.
-- **Class codes** come from the hub's command line until the admin panel (P21): `python -m tutor_hub class-code
-  [COHORT]` prints the code and the card's link, `{public_url}/?join=CODE`.
+- **Class codes** come from the admin panel (P21): a new cohort's code, or "New code", is shown once there (only its
+  hash is kept, so it cannot be shown again), and "Class cards" prints eight cards of the QR for
+  `{public_url}/?join=CODE` and the code. The command line's `class-code` is gone.
 - **On the phone** (`app/js/account.js`): a learner with a class code joins once the consent screen is answered
   (agreed or "Not now"); without one she joins only when her grown-up agrees. A consent given later and a new band
   go to `/api/me`; "Stop sharing" and removing a learner queue her token for `DELETE /api/me` until the server is in
@@ -455,12 +460,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `POST /api/m/plan` | `{goal, lang, band}` (s1, s2, ad) -> `{kind: plan, label, lessons}`, `{kind: closest, lessons}` (three at most), `{kind: wish, saved}` (the screened text joins the wishlist) or `{kind: rules, reason, text}` (nothing kept); no token read; 30 a minute an address |
 | `POST /api/me/pin-reset` | `{code}`, six digits in any script -> `{ok}`; 403 a wrong code, 404 none waiting; header `X-Learner-Token`; 10 tries in 10 minutes an address |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
+| `GET /api/m/admin/me`, `cohorts`, `cohorts/{id}`, `content`, `wishes`, `spend`, `safety`, `staff`, `log`; `POST /api/m/admin/cohorts`, `cohorts/{id}/kill`, `cohorts/{id}/flags/{module}`, `cohorts/{id}/settings`, `cohorts/{id}/code`, `cohorts/{id}/cards`, `content/{pack}/publish`, `content/{pack}/rollback`, `wishes`, `staff`; `DELETE /api/m/admin/staff/{id}` | The admin panel (P21); `X-Admin-Pin` on the hub, Cloudflare Access and an admin staff row online, 404 in the fallback container |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
 print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
-learner routes and the app's files are always there.
+learner routes, the admin panel's (behind its gate) and the app's files are always there.
 
 ## The app (app/js)
 
@@ -601,7 +607,7 @@ C3.5 and DESIGN-C2C3-SPECS item 14; typed only in 2027 (browser speech input wou
 
 Staff pages live on their own paths, apart from the learner app, so Cloudflare Access can guard them online (C3.2):
 `/review/` (`app/review/index.html`, `app/js/review/review.js`), `/teacher/` (`app/teacher/index.html`,
-`app/js/teacher/teacher.js`, P20), later `/admin/`. The learner
+`app/js/teacher/teacher.js`, P20), `/admin/` (`app/admin/index.html`, `app/js/admin/admin.js`, P21). The learner
 app's service worker leaves them alone, and they keep nothing in the browser.
 
 - **The gate** (`staff.py`, one per host). On the hub, the teacher's PIN. Online, Cloudflare Access: the Worker
@@ -640,6 +646,43 @@ app's service worker leaves them alone, and they keep nothing in the browser.
   signatures for each lesson's current hash into its `review` block, leaving the file's layout alone, and reports
   older ones as changed since signed; release mode then serves the lesson. One changed word gives a new hash and
   voids them.
+
+## The admin panel (admin.py, app/js/admin/admin.js, P21)
+
+The core's, not a module: it is what switches modules on and off, so it is always there behind its own gate
+(`staff.Gate.admin`). On the hub the admin PIN (`X-Admin-Pin`; `python -m tutor_hub admin-pin`, `new-admin-pin`),
+separate from the teacher's and locked out separately; online a `staff` row whose role is `admin`, behind Cloudflare
+Access; 404 in the fallback container. Routes are `/api/m/admin/*` (the table under Routes). Laptop first: a menu on
+the start side (Cohorts, Content, AI spend, Safety, Staff, Log), a select at the top on a phone; English by default
+with Dari drafts; nothing kept in the browser.
+
+- **Cohorts:** a table (label, learners counted, bands, languages, AI and school day), and "New cohort" (a neutral
+  label, bands, languages; a random 10-character id, every module off, the maturities pilot and stable, the default
+  timetable; the class code shown once). A cohort's page: the two kill switches at the top ("AI off" sets the
+  setting `ai`; "School day off" switches the `timetable` module), each with a confirm and a tick for every cohort;
+  New code and Class cards; the module table (risk tag and the core's risk sentence, maturity, bands, a switch, the
+  settings form from the manifest's schema, what locks it). A medium- or high-risk module needs a confirm (409
+  `need: confirm`), a missing dependency "Turn on both" (409 `need: both`, turned on deepest first), a blocked
+  capability paid-human moderation and a draft module a cohort that takes drafts (403, 409). Settings, the module's
+  or the cohort's, are saved only after a confirm that shows the diff. The school day's timetable: the default or
+  the cohort's own, edited day by day and block by block (school days, holidays, Ramadan's shorter day, and per band
+  a start and its blocks with the times worked out), checked by `timetable.check` on save; phones fetch it at their
+  next `/api/m/timetable`.
+- **Content:** each pack with its version, hash, lessons and their sign-offs per role, what blocks a release
+  (`packs.release_problems`), and its release per cohort; Publish (only when nothing blocks it) writes a `releases`
+  row and Roll back writes the previous one again (the files come from the repository). The open review notes (the
+  latest per lesson, step and role, where it asks for a change). The wishlist across cohorts, merged by its text,
+  with Planned, Not for Qalam and New (`wishlist.status`, `migrations/0014`).
+- **AI spend:** per cohort, fourteen days of token bars, today against the cap (warm at 80%), the estimated cost from
+  the provider's prices, calls by purpose and held answers.
+- **Safety:** counts only, per cohort over fourteen days: the rules' hits (distress, health, off limits) and the
+  gateway's drops (a hint that leaked the answer, a sum the checker refused; a teacher's edit refused for a leak
+  counts too), from `safety.flag` events (`{object: safety, value: kind}`, no text); the oldest held answer in hours;
+  disputes per sheet item.
+- **Staff** (online only; on the hub the PINs are the staff list): labels, roles and cohorts. Adding someone takes
+  the email once, hashes it with the pepper and drops it; the last admin cannot be removed.
+- **Log:** `flag_log` and `admin_log` (`migrations/0014`: a fixed `what`, a line the hub writes, the admin's label,
+  never an email) together, newest first, by cohort; both are kept two years (`store.prune`).
 
 ## Not built yet
 

@@ -22,7 +22,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
-from . import __version__, events, flags, learners, modules, search, sheets
+from . import __version__, admin, events, flags, learners, modules, rules, search, sheets
 from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import WAITING, Answer, Brain
 from .config import Config
@@ -126,15 +126,22 @@ class Limit:
             self._seen[who] = recent + [now]
 
 
-def teacher_pin(data: Path) -> str:
+def teacher_pin(data: Path, name: str = "teacher-pin.txt") -> str:
     """The teacher's PIN: made on first start, kept in the data folder, shown by `python -m tutor_hub pin`."""
-    f = data / "teacher-pin.txt"
+    f = data / name
     if not f.exists():
         data.mkdir(parents=True, exist_ok=True)
         f.write_text(f"{secrets.randbelow(900000) + 100000}\n", encoding="utf-8")
         f.chmod(0o600)
-        log.warning("a new teacher PIN was made: run `python -m tutor_hub pin` on the hub to see it")
+        which = "admin" if name.startswith("admin") else "teacher"
+        log.warning("a new %s PIN was made: run `python -m tutor_hub %s` on the hub to see it", which,
+                    "admin-pin" if which == "admin" else "pin")
     return f.read_text(encoding="utf-8").strip()
+
+
+def admin_pin(data: Path) -> str:
+    """The hub's admin PIN (P21, C3.3): separate from the teacher's, shown by `python -m tutor_hub admin-pin`."""
+    return teacher_pin(data, "admin-pin.txt")
 
 
 class Hub:
@@ -161,6 +168,7 @@ class Hub:
                                cfg.data / "outbox")
         self.prints: PrintQueue | None = None
         self.pin = None if "pin" in cfg.lacks else teacher_pin(cfg.data)   # no PIN: the teacher module is off
+        self.admin_pin = None if "pin" in cfg.lacks else admin_pin(cfg.data)   # the admin panel's, on the hub
         self._fails: dict[str, tuple[int, float, int, float]] = {}   # who -> wrong tries, locked until, rounds, last lock
         self._pin_lock = threading.Lock()
         self.clock = time.monotonic
@@ -173,6 +181,7 @@ class Hub:
         self.reset_limit = Limit(10, 600)            # lock reset codes tried per phone in ten minutes
         self.plan_limit = Limit(30, 60)              # "I want to learn this" goals a minute, by address (no token)
         self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
+        self.gateway.on_drop = lambda why, cid: self.record("safety.flag", why, cohort_id=cid)
         self.aliases = set(learners.load_aliases())
         self.consent_texts = learners.load_consent()
         self.consent_version = learners.CONSENT_VERSIONS[cfg.home]
@@ -196,7 +205,10 @@ class Hub:
         await self.gateway.aclose()
         await self.store.close()
 
-    def check_pin(self, pin: str | None, who: str):
+    def check_pin(self, pin: str | None, who: str, admin: bool = False):
+        """The teacher's PIN, or with `admin` the admin's (P21); each has its own count of wrong tries."""
+        want = self.admin_pin if admin else self.pin
+        who = f"admin:{who}" if admin else who
         with self._pin_lock:
             now = self.clock()
             n, until, rounds, last = self._fails.get(who, (0, 0.0, 0, 0.0))
@@ -204,17 +216,18 @@ class Hub:
                 raise HTTPException(429, "too many wrong PINs: wait and try again later")
             if rounds and now - last > 24 * 3600:         # a quiet day: back to a one-minute wait
                 rounds = 0
-            if pin and self.pin and hmac.compare_digest(pin.strip().encode(), self.pin.encode()):
+            if pin and want and hmac.compare_digest(pin.strip().encode(), want.encode()):
                 self._fails.pop(who, None)
                 return
             n += 1
             if n >= 5:
                 wait = PIN_LOCKS[min(rounds, len(PIN_LOCKS) - 1)]
                 self._fails[who] = (0, now + wait, rounds + 1, now)
-                log.warning("teacher PIN: 5 wrong tries from %s, locked for %d minutes", who, wait // 60)
+                log.warning("%s PIN: 5 wrong tries from %s, locked for %d minutes", "admin" if admin else "teacher",
+                            who, wait // 60)
             else:
                 self._fails[who] = (n, 0.0, rounds, last)
-            raise HTTPException(401, "teacher PIN needed")
+            raise HTTPException(401, "admin PIN needed" if admin else "teacher PIN needed")
 
     async def record(self, verb: str, obj=None, value=None, cohort_id: str | None = None):
         """An event the hub writes itself (Ask, printing, a sheet key, the teacher's review). It never breaks the
@@ -311,7 +324,7 @@ class Hub:
         cohort, f, on = await self.cohort_modules(cohort_id, band)
         if cohort_id and not cohort:
             raise HTTPException(404, "no such cohort")
-        ai_on = await self.gateway.available()
+        ai_on = await self.gateway.available() and flags.ai_on(cohort)    # the cohort's kill switch (P21)
         mods = []
         for mid in on:
             m = self.modules[mid]
@@ -515,6 +528,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         if ans.solution is not None:               # the answer behind the ladder stays here, for "Check my answer"
             await hub.store.add_ladder(token, solution=ans.solution, sure=not ans.unsure)
         await hub.record("ask.answered", ans.source, cohort_id=request.query_params.get("cohort"))
+        if ans.source == "rules" and (hit := rules.screen(a.text)):      # counted for the admin's Safety page (P21)
+            await hub.record("safety.flag", hit[0], cohort_id=cohort)
         if held:                                   # she hears only that it went to the teacher
             return dict(Answer(WAITING[lang], lang, "none", waiting=True).dict(), id=token)
         return dict(ans.dict(), id=token)
@@ -568,6 +583,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(teacher_mod.router(hub, needs))
     # "I want to learn this" (the `plan` module, P22): a goal to a plan of lessons, or to the wishlist, without a token
     app.include_router(plan_mod.router(hub, needs))
+    # The admin panel (P21, C3.3): the core's, not a module; behind the staff gate as admin, at /admin/ (app/admin/)
+    app.include_router(admin.router(hub))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
     # The answer page is the teacher's: here behind the teacher's PIN on the hub, and on no learner route (C2.3);

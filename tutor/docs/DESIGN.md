@@ -511,6 +511,31 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   whether "Closest lessons" should also offer "Add these to my plan"; how a finished plan should say so (it stays
   until stopped and leaves Home's card); the number of chips at 360 px in bold text sizes.
 
+## What P21 built, and where it differs
+
+- `/admin/` as item 12 draws it: the header (title, a language chip, Sign out), a 200 px menu on the start side at
+  1366 × 768 and a select at the top under 760 px; tables scroll inside their own box. Dari mirrors the page; codes,
+  times and hashes sit in `.m`. English by default; the Dari strings are drafts (the rest fall back to English).
+- A cohort's page: "Cohorts › Mazar class" with the two kill switches as outline `--bad` buttons at the end of the
+  line; learners, bands, languages and "join code ****" with New code and Class cards. **No Show button:** the code is
+  stored hashed (C3.3, P10), so it is shown once, when the cohort is made or a new code drawn, and Class cards asks
+  for it to be typed. Then the module table (risk tag: none and low on the good fill, medium on the warm fill, high
+  and blocked on the bad fill; the switch from Settings; a Settings chip only where the manifest has settings), one
+  Settings line with Edit, one School day line with "Edit the timetable", and AI today as a bar (warm from 80%).
+- Every confirm is one dialog: the question, any lines (the risk sentence, the diff, the dependencies), the confirm
+  button first and Cancel.
+- The timetable editor is a page of its own: school-day ticks, holidays one date a line, Ramadan's shorter day (a
+  tick, then from, to, start and minutes a period), then per band "has a school day", the start time and a table of
+  blocks (the time each starts, worked out; kind; subject for a period; minutes; ↑ and Remove), "Add a block", and
+  Save, Use the default, Cancel. Save shows the change band by band before it is sent.
+- Class cards: eight to an A4 page, two columns, the QR at 34 mm and the code; the menu and buttons do not print.
+- AI spend: fourteen bars a cohort in `--accent`, a warm tag at 80% of the cap. Safety: four tiles a cohort
+  (distress, health, off limits, hints and sums held back), the oldest held answer and disputes.
+- Open look questions: the spec's five rules kinds (distress, health, politics, religious rulings, weapons) are three
+  here, since the rules screen has one "off limits" kind for the last three; whether the Log should say `what` in
+  words rather than its fixed word; whether the kill switches should stay visible while the module table scrolls on a
+  laptop; whether Safety needs bars like AI spend rather than fourteen-day totals; the Dari menu's width at 200 px.
+
 ---
 
 # C2 and C3 decisions

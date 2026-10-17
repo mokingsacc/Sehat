@@ -64,7 +64,7 @@ def test_a_cohort_file_with_a_broken_timetable_is_refused():
     c["settings"]["timetable"] = {"days": ["fri"], "bands": {"p1": {"start": "25:00", "blocks": []}}}
     assert any(x.startswith("settings.timetable.bands.p1") for x in flags.check_cohort(c))
     c["settings"] = {"bells": "loud"}
-    assert flags.check_cohort(c) == ["settings may only hold maturity, timetable for now"]
+    assert flags.check_cohort(c) == ["settings may only hold maturity, timetable, ai, ai_budget, moderation for now"]
 
 
 # the route
@@ -118,7 +118,7 @@ def test_migration_0011_gives_an_existing_database_the_school_day(tmp_path):
     for cid in (*SEEDS, OTHER):
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) "
                    "VALUES(?, 'x', '[]', '[]', '{\"maturity\": [\"pilot\"]}', 'now')", (cid,))
-    assert migrate(db) == ["0011_timetable", "0012_teacher", "0013_plan"]
+    assert migrate(db) == ["0011_timetable", "0012_teacher", "0013_plan", "0014_admin"]
     rows = dict(db.execute("SELECT id, json_extract(settings, '$.timetable') FROM cohorts").fetchall())
     assert rows == {**{c: "default" for c in SEEDS}, OTHER: None}
     assert db.execute("SELECT json_extract(settings, '$.maturity[0]') FROM cohorts WHERE id=?",

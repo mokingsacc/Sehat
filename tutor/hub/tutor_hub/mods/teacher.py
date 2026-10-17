@@ -289,6 +289,7 @@ def router(hub, needs) -> APIRouter:
                 answers = [secret["solution"]] if secret else []
                 bad = [k for k, t in enumerate(new, 1) if hints_leak(t, answers)]
                 if bad:
+                    await hub.record("safety.flag", "leak", cohort_id=c["id"])     # the admin's Safety count (P21)
                     raise HTTPException(422, f"hint {bad[0]} gives the answer away")
                 rungs = [dict(h, text=t) for h, t in zip(hints, new)]
                 shown = "\n".join([q["answer"] or ""] + [f"{h['rung']}. {h['text']}" for h in rungs])
