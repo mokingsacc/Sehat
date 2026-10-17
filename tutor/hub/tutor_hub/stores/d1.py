@@ -24,7 +24,7 @@ from pathlib import Path
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log, check_price, check_via,
                    check_note, check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json,
                    new_cert_id, question_status, MADE_DAYS, check_made, check_verdict, made_out, check_live_state,
-                   check_reason, live_out, live_prune_sql, live_prune_times)
+                   check_reason, live_out, live_prune_sql, live_prune_times, merge_statements, new_server_id, rekey_statements, SERVER_ID)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -528,6 +528,23 @@ class D1Store(Store):
                                  self._stmt("DELETE FROM live_present WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
         return (res[5].meta.changes or 0) > 0
+
+    async def merge_learners(self, keep, drop, **changes) -> bool:
+        # D1 has no transaction to check inside: both rows are looked at first, then every change goes as one batch
+        # (a merge asked twice at once picks the same learner to keep, so the second batch moves nothing)
+        if keep == drop or len(await self._all("SELECT token_hash FROM learners WHERE token_hash IN (?, ?)", keep, drop)) != 2:
+            return False
+        await self._batch([self._stmt(sql, *args) for sql, args in merge_statements(keep, drop, changes)])
+        return True
+
+    async def rekey_learner(self, old, new) -> bool:
+        if await self.learner(old) is None:
+            return False
+        await self._batch([self._stmt(sql, *args) for sql, args in rekey_statements(old, new)])
+        return True
+
+    async def server_id(self) -> str:
+        return (await self._one(SERVER_ID, new_server_id()))["v"]
 
     async def prune_learners(self, idle_days: int):
         cut = _ago(days=idle_days).strftime("%Y-%m-%d")

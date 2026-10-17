@@ -6,6 +6,9 @@
 // - send a consent given after joining, and a changed band (`POST /api/me`);
 // - then send the events queue, which needs a token and a consent the server has.
 // Nothing here is a name: the join carries band, language, picture, the class code and the consent record.
+// Since W4 (WEBSITE.md 3.3 and 3.11) all of this is per seat, for the server in reach only: a learner from before W4
+// has her token placed under that server's id first (tried only at the address she last used; a 401 means she joins
+// again), a 401 drops only that server's token, and two tokens of hers for one server are merged (/api/me/merge).
 
 import * as events from './events.js';
 import * as hub from './hub.js';
@@ -47,8 +50,11 @@ export function sync() {
       do {
         again = false;
         if (!hub.online()) break;
-        await forgetAll();
-        for (const l of state.learners()) await one(l.id);
+        const sid = hub.id();
+        await forgetAll(sid);
+        for (const l of state.learners()) await place(l.id, sid);
+        for (const l of state.learners()) await one(l.id, sid);
+        for (const l of state.learners()) await merge(l.id, sid);
         useCohort();
       } while (again && hub.online());
       await events.flush();
@@ -57,8 +63,8 @@ export function sync() {
   return running;
 }
 
-async function forgetAll() {
-  for (const t of state.toForget()) {
+async function forgetAll(sid) {
+  for (const t of state.toForget(sid, hub.where())) {
     try { await hub.forget(t); state.forgotten(t); } catch (e) {
       if (e.status === 401) state.forgotten(t);          // already gone
       else if (!hub.online()) return;
@@ -66,9 +72,28 @@ async function forgetAll() {
   }
 }
 
-async function one(id) {
+// her unplaced seat (WEBSITE.md 3.11): one with no token simply belongs to the first server in reach; a token from
+// before W4 is asked about only at the address she last used, and becomes this server's seat if it knows it
+async function place(id, sid) {
+  const l = state.byId(id);
+  const p = l && l.seats[state.PENDING];
+  if (!p) return;
+  if (!p.token) { state.placeSeat(id, sid); return; }
+  if (p.base !== hub.where()) return;
+  try {
+    await hub.me(p.token);
+    state.placeSeat(id, sid);
+  } catch (e) {
+    if (e.status !== 401) return;                                  // later
+    state.setSeat(id, state.PENDING, { token: null, number: null, cohort: null, sentBand: null });
+    state.placeSeat(id, sid);                                      // she joins again, as she would have before
+    again = true;
+  }
+}
+
+async function one(id, sid) {
   let l = state.byId(id);
-  if (!l) return;
+  if (!l || hub.id() !== sid) return;
   if (needsJoin(l)) {
     const c = l.consent;
     const body = { band: l.band, lang: l.lang, picture: l.picture };
@@ -76,12 +101,12 @@ async function one(id) {
     if (c) body.consent = { kind: c.kind, version: c.version, at: c.at };
     try {
       const j = await hub.join(body);
-      state.updateChild(id, { token: j.token, number: j.number, cohort: j.cohort, sentBand: l.band,
+      state.setSeat(id, sid, { token: j.token, number: j.number, cohort: j.cohort, sentBand: l.band,
         consent: c ? { ...c, sent: true } : null });
     } catch (e) {
-      if (e.status === 404 && l.code) { state.updateChild(id, { code: null }); note('code_not_found'); again = true; }
-      else if (e.status === 422 && l.code) { state.updateChild(id, { code: null }); note('code_wrong_class'); again = true; }
-      else if (e.status === 422 && c) state.updateChild(id, { consent: null });   // a text the server no longer has
+      if (e.status === 404 && l.code) { state.setSeat(id, sid, { code: null }); note('code_not_found'); again = true; }
+      else if (e.status === 422 && l.code) { state.setSeat(id, sid, { code: null }); note('code_wrong_class'); again = true; }
+      else if (e.status === 422 && c) state.setSeat(id, sid, { consent: null });   // a text the server no longer has
     }
     return;
   }
@@ -90,21 +115,49 @@ async function one(id) {
     if (l.consent && !l.consent.sent) {
       const c = l.consent;
       await hub.meUpdate(l.token, { consent: { kind: c.kind, version: c.version, at: c.at } });
-      l = state.updateChild(id, { consent: { ...c, sent: true } });
+      state.setSeat(id, sid, { consent: { ...c, sent: true } });
+      l = state.byId(id);
     }
     if (l.sentBand !== l.band) {
       try { await hub.meUpdate(l.token, { band: l.band }); } catch (e) { if (e.status !== 422) throw e; }
-      state.updateChild(id, { sentBand: l.band });      // a class not for her new year keeps the old band
+      state.setSeat(id, sid, { sentBand: l.band });      // a class not for her new year keeps the old band
     }
   } catch (e) {
     if (e.status === 401) unknown(id);
-    else if (e.status === 422 && l.consent && !l.consent.sent) state.updateChild(id, { consent: null });
+    else if (e.status === 422 && l.consent && !l.consent.sent) state.setSeat(id, sid, { consent: null });
   }
 }
 
-// the server does not know her token (deleted after a year away, or another server): join again
+// two tokens of hers for this server (two devices joined it apart, W7's bag brings the second): the server folds
+// the newer learner into the older and says which token stays. A 401 means hers was folded already: the other is hers.
+async function merge(id, sid) {
+  for (;;) {
+    const l = state.byId(id);
+    const seat = l && l.seats[sid];
+    const other = seat && seat.token && (seat.also || [])[0];
+    if (!other || hub.id() !== sid) return;
+    const rest = (seat.also || []).slice(1);
+    try {
+      const k = await hub.merge(seat.token, other);
+      state.setSeat(id, sid, { also: rest, number: k.number, cohort: k.cohort, ...(k.kept === 'other' ? { token: other } : {}) });
+    } catch (e) {
+      if (e.status === 409) state.setSeat(id, sid, { also: rest });      // another class: hers stays, the other ages out
+      else if (e.status === 401) {
+        try {
+          const me = await hub.me(other);
+          state.setSeat(id, sid, { token: other, also: rest, number: me.number, cohort: me.cohort });
+        } catch (e2) {
+          if (e2.status === 401) state.setSeat(id, sid, { also: rest }); else return;
+        }
+      } else return;
+    }
+  }
+}
+
+// the server in reach does not know her token there (deleted after a year away): that seat only joins again
 function unknown(id) {
-  state.updateChild(id, { token: null, number: null, cohort: null, sentBand: null });
+  const sid = hub.id();
+  if (sid) state.setSeat(id, sid, { token: null, number: null, cohort: null, sentBand: null });
   again = true;
 }
 
@@ -120,14 +173,14 @@ export function agree(id, version) {
 
 // "Stop sharing": the consent goes, her server record is deleted (now, or when the server is next in reach), her
 // queued events are dropped, and she stays on this phone to learn as before
+// "Stop sharing" ends every seat: each server deletes her record when it is next in reach
 export function stopSharing(id) {
   const l = state.byId(id);
   if (!l) return null;
-  if (l.token) state.forgetToken(l.token);
+  state.clearSeats(id);
   events.drop(id);
-  const out = state.updateChild(id, { consent: null, token: null, number: null, cohort: null, code: null, sentBand: null });
   sync();
-  return out;
+  return state.byId(id);
 }
 
 // remove a learner from this phone (Settings, behind her PIN): her server record goes too
@@ -153,7 +206,9 @@ export function start() {
   if (started) return;
   started = true;
   events.configure({
-    token: (id) => sendable(state.byId(id)),
+    token: (id, sid) => sendable(state.seatOf(state.byId(id), sid)),
+    server: () => hub.id(),
+    skew: () => state.clock().skew,
     // the events wait; the next sync (start-up, or the server coming back) joins her again or resends the consent
     refused: (id, status) => {
       if (status === 401) unknown(id);

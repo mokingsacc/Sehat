@@ -41,7 +41,8 @@ test('v1 migrates to v2 with every name dropped, and the v1 record leaves the ph
   assert.equal(b.prints['maths-7-fractions-add'], 4821);
   assert.equal(b.last, 'maths-7-fractions-add');
   for (const l of [a, b]) {
-    assert.deepEqual([l.nickname, l.lock, l.consent, l.token, l.number, l.text, l.theme], ['', null, null, null, null, 'normal', 'phone']);
+    assert.deepEqual([l.nickname, l.lock, l.seats, l.text, l.theme], ['', null, {}, 'normal', 'phone']);   // no seat yet (W4)
+    assert.ok(!('token' in l) && !('consent' in l));
   }
   assert.ok(a.picture && b.picture && a.picture !== b.picture);       // each gets an alias picture of her own
   assert.equal(state.child().id, 'b');

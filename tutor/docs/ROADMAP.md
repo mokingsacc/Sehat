@@ -219,6 +219,9 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   app), `/credits/`, `/get/` as the site's page, `/m` (the bag code handed to the app) and the 404 page; the app's
   first open trimmed from 0.61 to 0.41 MB (fonts and voice manifests on first use, Naskh cut to the Arabic block).
   Still to do: the heading clips (`tools/voice.py`, with the voice key) and the partners' email address.
+- **W4, done:** seats and clocks: `hello.id` (migration 0020, `meta`) and `hello.now`; one seat per server in each
+  learner, a token sent only to the server that issued it; pre-W4 learners placed where they last were; events
+  with `to` and the clock's skew; `/api/me/merge` and `/api/me/token`.
 
 ## January 2027: buy and test
 

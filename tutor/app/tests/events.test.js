@@ -13,7 +13,8 @@ globalThis.localStorage = {
 };
 globalThis.location = { protocol: 'http:', origin: 'http://10.42.0.1' };
 
-// a stand-in hub: answers /api/hello, takes or refuses /api/events, or is out of reach
+// a stand-in hub: answers /api/hello (as the server HUB), takes or refuses /api/events, or is out of reach
+const HUB = 'a1a1a1a1a1a1a1a1a1a1';
 const posted = [];
 const tokens = [];         // the learner token each events call carried
 const keys = [];           // the sheet-key addresses the phone asked for
@@ -22,7 +23,7 @@ let refuse = 0;          // the status every events call gets until it changes (
 globalThis.fetch = async (url, opts = {}) => {
   if (!hubUp) throw new TypeError('network down');
   const reply = (status, body) => ({ ok: status < 400, status, json: async () => body });
-  if (url.includes('/api/hello')) return reply(200, { hub: 'Qalam', modules: [] });
+  if (url.includes('/api/hello')) return reply(200, { hub: 'Qalam', id: HUB, now: Date.now(), modules: [] });
   if (url.includes('/key?')) { keys.push(url); return reply(200, { items: [] }); }
   if (url.includes('/api/events')) {
     if (refuse) return reply(refuse, { error: 'no' });
@@ -43,11 +44,14 @@ account.start();
 
 const AGREED = { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10-16T09:41', sent: true };
 const TOKEN = 'tok_aaaaaaaaaaaaaaaaaaaaaaaa';
-// a learner who joined and whose grown-up agreed
+// a learner who joined the hub and whose grown-up agreed: her seat there (W4)
 function joined(year = 1, token = TOKEN) {
   const c = state.addChild({ year, lang: 'prs' });
-  return state.updateChild(c.id, { consent: AGREED, token, number: 27, cohort: { id: 'c1', label: 'Class' }, sentBand: c.band });
+  state.setSeat(c.id, HUB, { consent: AGREED, token, number: 27, cohort: { id: 'c1', label: 'Class' }, sentBand: c.band });
+  return state.byId(c.id);
 }
+// an event queued for the hub
+const toHub = { to: [HUB] };
 
 async function goOffline() { hubUp = false; await hub.connect(); }
 async function goOnline() { hubUp = true; await hub.connect(); await events.flush(); }
@@ -66,7 +70,7 @@ beforeEach(async () => {
 
 test('a lesson done offline is two events once the hub is back, with no name in them', async () => {
   const c = state.addChild({ name: 'Maryam', year: 1, lang: 'prs' });
-  state.updateChild(c.id, { consent: AGREED, token: TOKEN, sentBand: 'p1' });
+  state.setSeat(c.id, HUB, { consent: AGREED, token: TOKEN, sentBand: 'p1' });
   state.setStep('maths-1-count-5', 0);
   state.setStep('maths-1-count-5', 1);          // the next step is not a new start
   state.markDone('maths-1-count-5', 3);
@@ -95,26 +99,26 @@ test('a lesson opened again after it was done starts again', async () => {
 
 test('only known verbs and plain lesson ids are queued, each for a learner on this phone', () => {
   const l = joined().id;
-  assert.equal(events.record('lesson.start', 'Maryam from the third house', null, l), false);
-  assert.equal(events.record('lesson.start', 'call-0799123456', null, l), false);
-  assert.equal(events.record('print.queued', 'dari-1-sheen', 1, l), false);     // the hub writes that one itself
-  assert.equal(events.record('lesson.done', 'dari-1-sheen', null, l), false);   // needs its stars
-  assert.equal(events.record('lesson.start', 'dari-1-sheen', 4, l), false);
+  assert.equal(events.record('lesson.start', 'Maryam from the third house', null, l, toHub), false);
+  assert.equal(events.record('lesson.start', 'call-0799123456', null, l, toHub), false);
+  assert.equal(events.record('print.queued', 'dari-1-sheen', 1, l, toHub), false);     // the hub writes that one itself
+  assert.equal(events.record('lesson.done', 'dari-1-sheen', null, l, toHub), false);   // needs its stars
+  assert.equal(events.record('lesson.start', 'dari-1-sheen', 4, l, toHub), false);
   assert.equal(events.record('lesson.start', 'dari-1-sheen'), false);            // whose?
-  assert.equal(events.record('lesson.start', 'dari-1-sheen', null, l), true);
+  assert.equal(events.record('lesson.start', 'dari-1-sheen', null, l, toHub), true);
   assert.equal(events.pending().length, 1);
   assert.deepEqual(Object.keys(events.pending()[0]).sort(), ['at', 'object', 'verb']);   // the learner id stays here
 });
 
 test('the hint events name an item (lesson:n) and its rung or result, never a name', () => {
   const l = joined().id;
-  assert.equal(events.record('check.item', 'maths-7-fractions-add:3', 2, l), true);
-  assert.equal(events.record('check.item', 'maths-7-fractions-add:3', 3, l), false);       // 0, 1 or 2
-  assert.equal(events.record('check.item', 'maths-7-fractions-add', 1, l), false);         // which item?
-  assert.equal(events.record('hint.rung', 'maths-7-fractions-add:3', 1, l), true);
-  assert.equal(events.record('hint.rung', 'maths-7-fractions-add:3', 4, l), false);
-  assert.equal(events.record('check.dispute', 'maths-7-fractions-add:3', null, l), true);
-  assert.equal(events.record('check.dispute', 'Maryam:3', null, l), false);
+  assert.equal(events.record('check.item', 'maths-7-fractions-add:3', 2, l, toHub), true);
+  assert.equal(events.record('check.item', 'maths-7-fractions-add:3', 3, l, toHub), false);       // 0, 1 or 2
+  assert.equal(events.record('check.item', 'maths-7-fractions-add', 1, l, toHub), false);         // which item?
+  assert.equal(events.record('hint.rung', 'maths-7-fractions-add:3', 1, l, toHub), true);
+  assert.equal(events.record('hint.rung', 'maths-7-fractions-add:3', 4, l, toHub), false);
+  assert.equal(events.record('check.dispute', 'maths-7-fractions-add:3', null, l, toHub), true);
+  assert.equal(events.record('check.dispute', 'Maryam:3', null, l, toHub), false);
   assert.equal(events.pending().length, 3);
 });
 
@@ -123,12 +127,12 @@ test('without consent nothing is queued; with consent but no token yet, events w
   state.setStep('dari-1-sheen', 0);
   state.markDone('dari-1-sheen', 3);
   assert.deepEqual(events.pending(), []);
-  state.updateChild(c.id, { consent: AGREED });
+  state.setSeat(c.id, HUB, { consent: AGREED });
   state.setStep('dari-1-alif', 0);
   await goOnline();
   assert.equal(posted.length, 0);
   assert.equal(events.pending().length, 1);
-  state.updateChild(c.id, { token: TOKEN });
+  state.setSeat(c.id, HUB, { token: TOKEN });
   await events.flush();
   assert.deepEqual(posted.flat().map((e) => e.object), ['dari-1-alif']);
 });
@@ -168,7 +172,7 @@ test('removing a learner drops her queued events and queues her server record fo
 });
 
 test('a batch that did not arrive stays; one the hub refuses is dropped', async () => {
-  events.record('lesson.start', 'dari-1-sheen', null, joined().id);
+  events.record('lesson.start', 'dari-1-sheen', null, joined().id, toHub);
   refuse = 503;
   hubUp = true;
   await hub.connect();
@@ -182,16 +186,16 @@ test('a batch that did not arrive stays; one the hub refuses is dropped', async 
 
 test('more than a hundred go in batches of a hundred', async () => {
   const l = joined().id;
-  for (let i = 0; i < 230; i++) events.record('lesson.start', 'dari-1-sheen', null, l);
+  for (let i = 0; i < 230; i++) events.record('lesson.start', 'dari-1-sheen', null, l, toHub);
   await goOnline();
   assert.deepEqual(posted.map((b) => b.length), [100, 100, 30]);
 });
 
 test('a marked sheet is a check.done with a percent; a key fetch is never an event', async () => {
   const l = joined(7).id;
-  assert.equal(events.record('check.done', 'maths-7-fractions-add', null, l), false);     // needs its percent
-  assert.equal(events.record('check.key', 'maths-7-fractions-add', null, l), false);      // gone
-  assert.equal(events.record('check.done', 'maths-7-fractions-add', 75, l), true);
+  assert.equal(events.record('check.done', 'maths-7-fractions-add', null, l, toHub), false);     // needs its percent
+  assert.equal(events.record('check.key', 'maths-7-fractions-add', null, l, toHub), false);      // gone
+  assert.equal(events.record('check.done', 'maths-7-fractions-add', 75, l, toHub), true);
   await goOnline();
   keys.length = 0;
   await hub.sheetKey('maths-7-fractions-add', 4821, 'prs');

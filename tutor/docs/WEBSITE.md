@@ -813,8 +813,9 @@ Built:
   42 KB a weight, every shaping feature kept). 1,237 Dari, Pashto and Arabic texts of the lessons, the app and the
   site draw pixel for pixel the same in both weights, and `test_packs.py` fails if a lesson writes a letter the
   subset lacks. The first open: 0.61 MB gzip before, 0.41 MB gzip and 0.38 MB brotli after (73 files). Measured on
-  staging before the trim, with Cloudflare's own compression: 687 KB on the wire with headers, 68 s at EDGE's
-  80 kbit/s; the after figure is measured on staging once W3 is deployed (W4's notes).
+  staging, with Cloudflare's own compression, every file the app's worker keeps at install: before, 82 files and
+  687 KB on the wire with headers (68 s at EDGE's 80 kbit/s); after, 74 files, 417 KB of bodies and 478 KB with
+  headers (47 s).
 - `site_check.mjs` also checks `/m`, the `/get/` forwards and an unknown address; its server answers as Workers
   static assets do (`/m` is `m.html`, `404.html` with status 404).
 
@@ -828,3 +829,46 @@ Where it differs, the builder's choices to confirm:
 - A lesson with no English title shows its Dari title on the English catalogue, marked as Dari.
 - The examples in the page texts (a class code, the hub's address) are placeholders filled per language, so the
   Dari and Pashto strings hold no Latin digits.
+
+### W4: seats and clocks
+
+Built:
+- The server: migration `0020_meta.sql` (`meta(k, v)`; the school bag's table comes with the relay in W6, so it
+  is `0021_bags.sql`, not 0020); `server_id()` in both stores (one statement, `INSERT … ON CONFLICT … RETURNING`);
+  `hello.id` and `hello.now`; `POST /api/me/merge` and `POST /api/me/token`, 5 a day per token, on
+  `merge_learners` and `rekey_learner`, each one transaction (one D1 batch). `TOKEN_TABLES` in `stores/base.py`
+  says how each table with a `token_hash` moves (events and her own questions move, daily counts are summed, a
+  reset code or a live class's seat keeps the older learner's); `test_seats.py` reads the migrations and fails when
+  a table with that column is missing from it, and fills every such table from its own columns, so W6's `bags`
+  is checked the day it lands.
+- The phone: `seats` per learner (`state.js`), the learner record still reading `token`, `consent` and the rest from
+  the seat of the server in reach, so no screen changed; `setSeat`, `placeSeat`, `clearSeats`, `issuer`,
+  `targets`, `stamp`. `hub.js` keeps the server's id, sets the skew from `hello.now` and refuses to send a token to
+  any server but its issuer (`mayCarry`), the body's `other` token included. `account.js` places the unplaced seat,
+  joins, sends consents and bands, merges and forgets per server. `events.js` keeps `to`, `got`, the stamp and its
+  skew. Certificates keep the `server` that issued them.
+- `app/tests/seats.test.js`: two stand-in servers. The Android app goes hub, online, hub and keeps one token per
+  server, neither ever sent to the other, and her lessons done online reach her class's hub. A learner from before
+  W4 keeps her token, and every finished lesson stays under it, which is what a certificate is earned from. A
+  pre-W4 token is never sent anywhere but where it was used; a forgotten one means she joins again. Events from a
+  clock in 2010 (still wrong at the next contact, or put right before it, or on a phone that never met a server)
+  land inside the window. A 401 drops one seat only. "Stop sharing" tells each server with its own token.
+
+Where it differs, the builder's choices to confirm:
+- `meta` came a phase early (W4 needs `hello.id`), as its own migration; the bags' migration is renumbered to 0021,
+  as 3.7 allows.
+- A server from before W4 has no `hello.id`: the phone names it by its address (`b:<address>`), so its seat still
+  never mixes with another server's.
+- The time of an event: `max(phone clock + skew, the latest time the phone made or saw)`, as for the bag's stamps,
+  and when the skew has changed by the next contact the difference is added, but never more than a day back. Without
+  the floor, a clock put right before the next contact would date the events in 2010 and the server would drop
+  them; without the day's limit, the same clock would be moved back by the whole jump. A phone that ran ahead is
+  brought back by the server, which takes no future minute.
+- Events go to her class seats with consent, else to her first seat with consent; with no consent anywhere nothing
+  is kept, as before. "Stop sharing" ends every seat (each server deletes her record when next in reach), since the
+  grown-up's "stop" is not about one server.
+- `/api/me/merge` keeps the learner who joined first (the hash breaks a tie, so both devices asking at once agree),
+  takes the newer consent when the kept one has none or an older one, and answers `kept: "this" | "other"` so the
+  phone knows which token to keep. An `other` the server does not know is taken as folded already (200).
+- The phone asks for a merge only when a seat holds a second token (`also`), which only W7's bag brings; W4 tests it
+  with a stand-in.

@@ -72,7 +72,11 @@ await page.click('.lock .btn.outline');                                         
 await at('#/ask');
 await page.waitForTimeout(2500);
 let l = await learner();
-check(!!l.token && l.consent && l.consent.sent, 'joined with the consent');
+// since W4 her token and consent are her seat on this hub, kept under the hub's own id (WEBSITE.md 3.3)
+const hubId = (await (await fetch(`${HUB}/api/hello`)).json()).id;
+const seat = (l.seats || {})[hubId] || {};
+check(Object.keys(l.seats || {}).length === 1 && !!seat.token && seat.consent && seat.consent.sent,
+  `joined with the consent, her seat under the hub's id (${Object.keys(l.seats || {}).join(', ')})`);
 check(l.asks.length === 1 && !l.asks[0].queued && !!l.asks[0].a, 'the first question went once she had joined');
 await page.goto(`${HUB}/app/#/lesson/${LESSON}`);
 await at('#/lesson/');

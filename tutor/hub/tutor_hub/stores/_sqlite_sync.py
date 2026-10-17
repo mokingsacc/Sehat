@@ -15,7 +15,8 @@ from datetime import datetime, timedelta, timezone
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_price, check_via, check_note,
                    check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, new_cert_id,
                    question_status, MADE_DAYS, check_made, check_verdict, made_out, check_live_state,
-                   check_reason, live_out, live_prune_sql, live_prune_times)
+                   check_reason, live_out, live_prune_sql, live_prune_times, merge_statements, new_server_id,
+                   rekey_statements, SERVER_ID)
 
 
 def now() -> str:
@@ -447,6 +448,34 @@ class Store:
                 self.db.execute("ROLLBACK")
                 raise
         return n > 0
+
+    def _together(self, statements, check=None):
+        """Statements as one transaction; `check(db)` runs first inside it and returning False changes nothing."""
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                if check is not None and not check(self.db):
+                    self.db.execute("ROLLBACK")
+                    return False
+                for sql, args in statements:
+                    self.db.execute(sql, args)
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+        return True
+
+    def merge_learners(self, keep, drop, **changes) -> bool:
+        both = lambda db: keep != drop and db.execute(
+            "SELECT COUNT(*) FROM learners WHERE token_hash IN (?, ?)", (keep, drop)).fetchone()[0] == 2
+        return self._together(merge_statements(keep, drop, changes), both)
+
+    def rekey_learner(self, old, new) -> bool:
+        there = lambda db: db.execute("SELECT 1 FROM learners WHERE token_hash=?", (old,)).fetchone() is not None
+        return self._together(rekey_statements(old, new), there)
+
+    def server_id(self) -> str:
+        return self._one(SERVER_ID, (new_server_id(),))["v"]
 
     def prune_learners(self, idle_days: int):
         cut = (datetime.now(timezone.utc) - timedelta(days=idle_days)).strftime("%Y-%m-%d")

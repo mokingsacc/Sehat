@@ -7,7 +7,7 @@
 // the site's root (/audio/), shared with the website's speakers; the site's own worker at /sw.js keeps the website and
 // shares media-v1 and quran-v1 with this one. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-w3-1';
+const VERSION = 'qalam-w4-1';     // a new name installs the whole shell at once: W4's state.js, hub.js and account.js go together
 const SHELL_CACHE = 'app-shell-' + VERSION;      // not shell-*: the site's worker deletes the old root worker's cache
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const QURAN_CACHE = 'quran-v1';                // P29: each surah and verse recitation once opened, never all at once

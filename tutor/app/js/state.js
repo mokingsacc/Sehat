@@ -7,9 +7,17 @@
 // qalam.v2 holds no name, ever (F3). A learner is an alias picture (aliases.js, given when she is added), an optional
 // nickname she may type in Settings (never sent), her band, and these per-learner settings: lock (lock.js), consent
 // {kind, version, at, sent}, text ('normal' or 'large', "Bigger text") and theme ('phone', 'light' or 'dark').
-// When she joins (account.js) the server's answer adds token, number and cohort {id, label}; `code` is the class
-// code she joined with (kept so the phone can join again if the server forgets her), `asked` that the consent screen
-// was answered (agreed or "Not now"), `sentBand` the band the server has. `forget` lists tokens of learners removed or withdrawn whose server record is still to be deleted.
+// Since W4 (WEBSITE.md 3.3) her place on each server is a seat, `seats: {<server id>: seat}`: when she joins
+// (account.js) the server's answer gives the seat its token, number and cohort {id, label}; `code` is the class code
+// she joined with (kept so the phone can join again if the server forgets her), `consent` the grown-up's agreement
+// to that server's own text, `asked` that its consent screen was answered (agreed or "Not now"), `sentBand` the
+// band the server has, `joined` when. A token goes only to the server whose id issued it (hub.js checks every call).
+// The seat '?' is one not placed yet: a learner who joined before W4 (with `base`, the address she used then, the
+// only one it is ever tried at), or one added away from every server. The learner record still reads `token`,
+// `number`, `cohort`, `code`, `consent`, `asked` and `sentBand`: those of the seat of the server in reach (else of
+// the last one), so the screens need not know about seats. `forget` lists tokens of learners removed or withdrawn
+// whose server record is still to be deleted, each with the server it belongs to. `clock` is the device's own
+// {dev, skew, last}: a random id, the server's time minus this phone's, and the latest time it made or saw (3.5).
 // The v1 record (qalam.v1, which could hold a child's name) is migrated once, the name dropped, and removed.
 
 import { known, pickFree } from './aliases.js';
@@ -18,7 +26,7 @@ import * as events from './events.js';
 
 const KEY = 'qalam.v2';
 const OLD = 'qalam.v1';
-const empty = () => ({ v: 2, active: null, learners: [], forget: [] });
+const empty = () => ({ v: 2, active: null, learners: [], forget: [], here: null, clock: cleanClock() });
 const TOKEN = /^[A-Za-z0-9_-]{20,64}$/;
 const CODE = /^[A-HJKMNP-Z2-9]{8}$/;
 const KINDS = ['guardian-on-phone', 'self', 'partner-paper'];
@@ -39,6 +47,13 @@ export const preview = (() => {
   } catch { return null; }
 })();
 const memory = new Map();
+// W4: the seats (WEBSITE.md 3.3); declared before the first load() below reads them
+const SEAT_KEYS = ['token', 'number', 'cohort', 'code', 'consent', 'asked', 'sentBand'];
+const NO_SEAT = { token: null, number: null, cohort: null, code: null, consent: null, asked: false, sentBand: null };
+const SID = /^(?:[0-9a-f]{20}|b:[\x21-\x7e]{1,200}|\?)$/;
+export const PENDING = '?';
+let here = null;               // the server in reach (its hello.id), null away from every server
+let hereBase = null;           // the address it answered at ('' is this website)
 // P32: her own questions' limits; above `data`, which is cleaned with them as the module loads
 export const MADE_MAX = 50;
 export const MADE_CHARS = 300;
@@ -57,7 +72,7 @@ function rid() {
 function clean(l) {
   const year = Number.isInteger(l.year) && l.year >= 0 && l.year <= 12 ? l.year : null;
   const band = l.band === 'ad' ? 'ad' : bandOf({ year }) || (BANDS.includes(l.band) ? l.band : 'p1');
-  return {
+  return view({
     id: typeof l.id === 'string' && l.id ? l.id : rid(),
     band,
     year: band === 'ad' ? null : year ?? { ey: 0, p1: 1, p2: 4, s1: 7, s2: 10 }[band],
@@ -67,13 +82,7 @@ function clean(l) {
     nickname: typeof l.nickname === 'string' ? l.nickname.slice(0, 20) : '',
     lock: l.lock && typeof l.lock === 'object' && typeof l.lock.hash === 'string' ? l.lock : null,
     lockOffered: l.lockOffered === true,
-    asked: l.asked === true,
-    consent: cleanConsent(l.consent),
-    token: typeof l.token === 'string' && TOKEN.test(l.token) ? l.token : null,
-    number: Number.isInteger(l.number) && l.number > 0 && l.number < 1000 ? l.number : null,
-    cohort: l.cohort && typeof l.cohort.id === 'string' ? { id: l.cohort.id, label: String(l.cohort.label || '') } : null,
-    code: typeof l.code === 'string' && CODE.test(l.code) ? l.code : null,
-    sentBand: BANDS.includes(l.sentBand) ? l.sentBand : null,
+    seats: cleanSeats(l),
     text: l.text === 'large' ? 'large' : 'normal',
     theme: THEMES.includes(l.theme) ? l.theme : 'phone',
     done: l.done && typeof l.done === 'object' ? l.done : {},
@@ -122,7 +131,88 @@ function clean(l) {
     // P31 (C6.5): the contests she joined (at most 50): her answers until she sends them and after, for "See the
     // answers" once the key comes; the percent, right and n the server sent back. Never a place or anyone else's
     ...(cleanContests(l.contests).length ? { contests: cleanContests(l.contests) } : {}),
+  });
+}
+
+// a seat (W4): the fields that came with joining one server, and its consent; null when it holds nothing
+function cleanSeat(x) {
+  if (!x || typeof x !== 'object') return null;
+  const seat = {
+    token: typeof x.token === 'string' && TOKEN.test(x.token) ? x.token : null,
+    number: Number.isInteger(x.number) && x.number > 0 && x.number < 1000 ? x.number : null,
+    cohort: x.cohort && typeof x.cohort.id === 'string' ? { id: x.cohort.id, label: String(x.cohort.label || '') } : null,
+    code: typeof x.code === 'string' && CODE.test(x.code) ? x.code : null,
+    consent: cleanConsent(x.consent),
+    asked: x.asked === true,
+    sentBand: BANDS.includes(x.sentBand) ? x.sentBand : null,
+    joined: Number.isInteger(x.joined) && x.joined > 0 ? x.joined : null,
+    // the unplaced seat of a learner from before W4: the address it was last used at ('' is this website)
+    ...(typeof x.base === 'string' ? { base: x.base.slice(0, 200) } : {}),
+    // more tokens of hers for the same server, to fold into this one (/api/me/merge, account.js)
+    ...(Array.isArray(x.also) && x.also.some((t) => typeof t === 'string' && TOKEN.test(t))
+      ? { also: [...new Set(x.also.filter((t) => typeof t === 'string' && TOKEN.test(t) && t !== x.token))].slice(0, 4) } : {}),
   };
+  return seat.token || seat.code || seat.consent || seat.asked ? seat : null;
+}
+
+function cleanSeats(l) {
+  const out = {};
+  if (l.seats && typeof l.seats === 'object') {
+    for (const [k, v] of Object.entries(l.seats)) {
+      const seat = SID.test(k) ? cleanSeat(v) : null;
+      if (seat) out[k] = seat;
+    }
+    return out;
+  }
+  // a learner from before W4 (WEBSITE.md 3.11): her one token and what came with it become the unplaced seat, tried
+  // only at the address the phone last used (account.js places it under that server's id, or drops it on a 401)
+  const legacy = cleanSeat({ ...Object.fromEntries(SEAT_KEYS.map((k) => [k, l[k]])), base: lastBase() });
+  if (legacy) {
+    if (!legacy.token) delete legacy.base;
+    out[PENDING] = legacy;
+  }
+  return out;
+}
+
+// the address the app last reached a server at, as hub.js keeps it; before W4 it kept only another address than
+// this website's, so none kept means this website ('') (the Android app never asks its own page, so '' is never
+// tried there)
+function lastBase() {
+  try {
+    const b = JSON.parse(localStorage.getItem('qalam.cache.hub'));
+    return typeof b === 'string' ? b : '';
+  } catch { return ''; }
+}
+
+function cleanClock(c) {
+  const ok = c && typeof c === 'object';
+  return {
+    dev: ok && typeof c.dev === 'string' && /^[0-9a-f]{16}$/.test(c.dev) ? c.dev : rid(),
+    skew: ok && Number.isFinite(c.skew) ? Math.round(c.skew) : 0,
+    last: ok && Number.isFinite(c.last) && c.last > 0 ? c.last : 0,
+  };
+}
+
+function cleanForget(f) {
+  if (!Array.isArray(f)) return [];
+  const out = [];
+  for (const x of f) {
+    if (typeof x === 'string' && TOKEN.test(x)) out.push({ t: x, s: null, b: lastBase() });   // from before W4
+    else if (x && typeof x.t === 'string' && TOKEN.test(x.t)) {
+      out.push({ t: x.t, s: typeof x.s === 'string' && SID.test(x.s) && x.s !== PENDING ? x.s : null,
+        b: typeof x.b === 'string' ? x.b.slice(0, 200) : null });
+    }
+  }
+  return out.slice(-50);
+}
+
+// the learner as the screens read her: her seat's fields for the server in reach (else the last one, else her
+// unplaced seat), never stored with her
+function view(l) {
+  for (const k of SEAT_KEYS) {
+    Object.defineProperty(l, k, { get: () => (seatOf(l) || NO_SEAT)[k], enumerable: false, configurable: true });
+  }
+  return l;
 }
 
 // (its helpers live inside it: the store is read while this module loads, before later constants exist)
@@ -173,7 +263,9 @@ function cleanCerts(v) {
   return v.filter((x) => x && typeof x.path === 'string' && /^(contest:)?[a-z0-9][a-z0-9-]{0,47}$/.test(x.path)
     && typeof x.id === 'string' && /^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$/.test(x.id)
     && typeof x.month === 'string' && /^\d{4}-\d{2}$/.test(x.month))
-    .slice(-50).map((x) => ({ path: x.path, id: x.id, month: x.month }));
+    .slice(-50).map((x) => ({ path: x.path, id: x.id, month: x.month,
+      // W4 (WEBSITE.md 3.4): the server that issued it, which can check it (its /v/ page)
+      ...(typeof x.server === 'string' && SID.test(x.server) && x.server !== PENDING ? { server: x.server } : {}) }));
 }
 
 // a study time: on the half hour from 5:00 to 22:30, 15, 30, 45 or 60 minutes long (day.js STUDY); else null
@@ -239,19 +331,20 @@ export function migrate(v1) {
   if (!v1 || v1.v !== 1 || !Array.isArray(v1.children)) return null;
   const learners = pictures(v1.children.filter((c) => c && typeof c === 'object').map(clean));
   return { v: 2, active: learners.some((l) => l.id === v1.active) ? v1.active : (learners[0] || {}).id || null, learners,
-    forget: [] };
+    forget: [], here: null, clock: cleanClock() };
 }
 
 function load() {
   if (preview) {
-    return { v: 2, active: 'preview', forget: [],
+    return { v: 2, active: 'preview', forget: [], here: null, clock: cleanClock(),
       learners: pictures([clean({ id: 'preview', band: preview.band, lang: preview.lang, track: 'reader', asked: true })]) };
   }
   try {
     const d = JSON.parse(localStorage.getItem(KEY));
     if (d && d.v === 2 && Array.isArray(d.learners)) {
       return { v: 2, active: typeof d.active === 'string' ? d.active : null, learners: pictures(d.learners.map(clean)),
-        forget: Array.isArray(d.forget) ? d.forget.filter((t) => typeof t === 'string' && TOKEN.test(t)) : [] };
+        forget: cleanForget(d.forget), here: typeof d.here === 'string' && SID.test(d.here) && d.here !== PENDING ? d.here : null,
+        clock: cleanClock(d.clock) };
     }
   } catch { /* first run, or storage is blocked */ }
   try {
@@ -281,20 +374,145 @@ export const child = learner;
 // a new learner: a year (0 to 12) or the adult door ({band: 'ad', track}), and the class code she came with; never a
 // name. She gets a picture no other learner on this phone has.
 export function addChild({ year = null, band = null, track = null, lang, code = null }) {
-  const c = clean({ year, band, track, lang, code, picture: pickFree(data.learners.map((l) => l.picture)) });
+  const c = clean({ year, band, track, lang, seats: {}, picture: pickFree(data.learners.map((l) => l.picture)) });
   data.learners.push(c);
   data.active = c.id;
+  if (code) setSeat(c.id, writeKey(c), { code });
   save();
   return c;
 }
 
+// a patch may hold seat fields (token, number, cohort, code, consent, asked, sentBand): they go to her seat of the
+// server in reach (away from every server, the last one's if she has it, else her unplaced seat)
 export function updateChild(id, patch) {
   const i = data.learners.findIndex((x) => x.id === id);
   if (i < 0) return null;
   const { name, ...rest } = patch || {};             // a name is never kept
-  data.learners[i] = clean({ ...data.learners[i], ...rest });
+  const seatPart = {};
+  for (const k of SEAT_KEYS) if (k in rest) { seatPart[k] = rest[k]; delete rest[k]; }
+  const l = clean({ ...data.learners[i], ...rest });
+  data.learners[i] = l;
+  if (Object.keys(seatPart).length) setSeat(id, writeKey(l), seatPart);
   save();
   return data.learners[i];
+}
+
+// seats (W4, WEBSITE.md 3.3)
+
+// the seat the screens read: the server in reach's, else (away from every server) the last one's; else her unplaced
+// seat, unless it is a pre-W4 token for an address other than the one in reach
+function readKey(l) {
+  const at = here || data.here;
+  if (at && l.seats[at]) return at;
+  const p = l.seats[PENDING];
+  return p && (!p.token || !here || p.base === hereBase) ? PENDING : at;
+}
+function writeKey(l) {
+  if (here) return here;
+  return data.here && l.seats[data.here] ? data.here : PENDING;
+}
+export function seatOf(l, sid = l ? readKey(l) : null) { return (l && sid && l.seats[sid]) || null; }
+export const seats = (l) => (l ? l.seats : {});
+
+// change (or make) one seat; a seat left holding nothing goes
+export function setSeat(id, sid, patch) {
+  const l = byId(id);
+  if (!l || !SID.test(sid)) return null;
+  const now = { ...(l.seats[sid] || {}), ...patch };
+  if (patch.token && !now.joined) now.joined = Date.now();
+  const seat = cleanSeat(now);
+  if (seat) l.seats[sid] = seat; else delete l.seats[sid];
+  save();
+  return seat;
+}
+
+export function dropSeat(id, sid) {
+  const l = byId(id);
+  if (l && l.seats[sid]) { delete l.seats[sid]; save(); }
+}
+
+// the unplaced seat becomes the seat of the server `sid` (account.js, once that server knows its token or it has
+// none). A seat she already has there keeps its own fields; a second token for it waits to be merged into hers.
+export function placeSeat(id, sid) {
+  const l = byId(id);
+  const p = l && l.seats[PENDING];
+  if (!p || !SID.test(sid) || sid === PENDING) return null;
+  const { base, ...from } = p;
+  const to = l.seats[sid];
+  let seat = from;
+  if (to) {
+    seat = { ...from, ...Object.fromEntries(Object.entries(to).filter(([, v]) => v !== null && v !== false)) };
+    if (to.consent && from.consent && (from.consent.at || '') > (to.consent.at || '')) seat.consent = from.consent;
+    if (to.token && from.token && to.token !== from.token) seat.also = [...(to.also || []), from.token];
+    else if (!to.token && from.token) Object.assign(seat, { token: from.token, number: from.number, cohort: from.cohort,
+      sentBand: from.sentBand });
+    seat.joined = Math.min(to.joined || Infinity, from.joined || Infinity);
+    if (!Number.isFinite(seat.joined)) seat.joined = null;
+  }
+  delete l.seats[PENDING];
+  const clean = cleanSeat(seat);
+  if (clean) l.seats[sid] = clean;
+  save();
+  events.retarget(id, PENDING, sid);
+  return clean;
+}
+
+// every seat goes ("Stop sharing"): their tokens are kept until each server is told
+export function clearSeats(id) {
+  const l = byId(id);
+  if (!l) return;
+  for (const [sid, seat] of Object.entries(l.seats)) {
+    for (const t of [seat.token, ...(seat.also || [])]) if (t) forgetToken(t, sid === PENDING ? null : sid, seat.base ?? null);
+  }
+  l.seats = {};
+  save();
+}
+
+// where a token came from: the seat (or a token waiting to be forgotten) that holds it, {sid, base}; null if none.
+// hub.js sends a token only to that server, or, for the unplaced seat, only to the address it was last used at.
+export function issuer(token) {
+  if (!token) return null;
+  for (const l of data.learners) {
+    for (const [sid, seat] of Object.entries(l.seats)) {
+      if (seat.token === token || (seat.also || []).includes(token)) return { sid, base: seat.base ?? null };
+    }
+  }
+  const f = data.forget.find((x) => x.t === token);
+  return f ? { sid: f.s || PENDING, base: f.b } : null;
+}
+
+// the server in reach (hub.js): its id and address, or null when none answers
+export function setHere(sid, base = null) {
+  here = sid && SID.test(sid) && sid !== PENDING ? sid : null;
+  hereBase = here ? base : null;
+  if (here && data.here !== here) { data.here = here; save(); }
+}
+export const serverHere = () => here;
+
+// her events' servers (WEBSITE.md 3.4): the seats she joined with a class code and has consent for; with none, the
+// first seat she has consent for. Empty: nobody agreed, so nothing is kept.
+export function targets(l) {
+  const agreed = Object.entries(l ? l.seats : {}).filter(([, x]) => x.consent);
+  const cls = agreed.filter(([, x]) => x.code).map(([k]) => k);
+  if (cls.length) return cls;
+  agreed.sort((a, b) => (a[1].joined || Infinity) - (b[1].joined || Infinity));
+  return agreed.length ? [agreed[0][0]] : [];
+}
+
+// the clock (WEBSITE.md 3.5): the server's time as this phone best knows it, never behind the latest time it made
+// or saw, so a phone whose clock fell back to 2010 keeps stamping after what it knew
+export const clock = () => data.clock;
+export function stamp() {
+  const c = data.clock;
+  const t = Math.max(Date.now() + c.skew, c.last);
+  c.last = t;
+  return { t, sk: t - Date.now() };
+}
+export function setSkew(skew, serverNow) {
+  if (!Number.isFinite(skew)) return;
+  data.clock.skew = Math.round(skew);
+  if (Number.isFinite(serverNow)) data.clock.last = Math.max(data.clock.last, serverNow);
+  save();
 }
 
 export function byId(id) { return data.learners.find((l) => l.id === id) || null; }
@@ -304,7 +522,7 @@ export function byId(id) { return data.learners.find((l) => l.id === id) || null
 export function removeLearner(id) {
   const l = byId(id);
   if (!l) return false;
-  if (l.token) forgetToken(l.token);
+  clearSeats(id);
   data.learners = data.learners.filter((x) => x.id !== id);
   if (data.active === id) data.active = (data.learners[0] || {}).id || null;
   unlocked.delete(id);
@@ -313,13 +531,17 @@ export function removeLearner(id) {
   return true;
 }
 
-// tokens whose server record must be deleted (a learner removed, or "Stop sharing")
-export function forgetToken(t) {
-  if (t && !data.forget.includes(t)) data.forget.push(t);
+// tokens whose server record must be deleted (a learner removed, or "Stop sharing"), each with its server's id (or,
+// for a token from before W4, the address it was used at); sent only there
+export function forgetToken(t, sid = null, base = null) {
+  if (t && TOKEN.test(t) && !data.forget.some((x) => x.t === t)) data.forget.push({ t, s: sid, b: sid ? null : base });
   save();
 }
-export function toForget() { return [...data.forget]; }
-export function forgotten(t) { data.forget = data.forget.filter((x) => x !== t); save(); }
+// all of them, or those for the server `sid` answering at `base`
+export function toForget(sid, base) {
+  return data.forget.filter((x) => sid === undefined || x.s === sid || (!x.s && x.b === base)).map((x) => x.t);
+}
+export function forgotten(t) { data.forget = data.forget.filter((x) => x.t !== t); save(); }
 
 // the learners unlocked since the app started (or came back after 5 minutes away): kept in memory only
 const unlocked = new Set();
@@ -327,11 +549,16 @@ export const isUnlocked = (id) => unlocked.has(id);
 export function unlock(id) { unlocked.add(id); }
 export function lockAll() { unlocked.clear(); }
 
-// an event for the learner using the phone, only with her grown-up's (or, for adults, her own) agreement
+// an event for the learner using the phone, only with her grown-up's (or, for adults, her own) agreement, for the
+// servers it goes to (targets) and stamped by the clock
 export function record(verb, object = null, value = null) {
   const c = learner();
-  if (!c || !c.consent) return false;
-  return events.record(verb, object, value, c.id);
+  const to = targets(c);
+  if (!c || !to.length) return false;
+  const long = to.some((sid) => c.seats[sid] && c.seats[sid].code);
+  const ok = events.record(verb, object, value, c.id, { to, long, ...stamp() });
+  save();
+  return ok;
 }
 
 export function setActive(id) { data.active = id; save(); }

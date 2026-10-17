@@ -228,6 +228,7 @@ Shared SQL migrations in `tutor/migrations/NNNN_name.sql`, run by the hub at sta
 | `daily_counts` (Year 1, 7a) | token hash, day, module, n (C4.9) | two days |
 | `live_sessions` (Year 1, P30a) | id, cohort, subject, host (the staff label), started_at, ended_at, peak, listener_min, v, state (C6.1) | 12 months; `state` blanked at the end |
 | `live_present` (Year 1, P30a) | session, token hash, relay session, ticket, ticket_at, joined_at, seen_at, hand_at, reason (C6.1) | deleted when the class ends; 6 hours at most |
+| `meta` (W4, WEBSITE.md 3.3) | k, v: the server's own id (`hello.id`), made once; nothing about a learner | permanent |
 
 Since C6: `events` gains the hub-written verb `contest.done` (the contest id, the percent) and `releases` carries
 contests as `pack = "contest:<id>"` (C6.5).

@@ -202,7 +202,11 @@ The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted 
   All are kept in a queue on the phone (`qalam.events.v1`, at most 500), each marked with the learner on this phone
   it belongs to (never sent), until the hub is in reach, then sent with her token, at most 100 at a time. A batch
   that did not arrive stays queued; one the hub refuses is dropped; a 401 or 403 keeps them while `account.js` joins
-  her again or resends the consent.
+  her again or resends the consent. Since W4 each event names its servers (`to`: her class seats', else her first
+  seat's, WEBSITE.md 3.4) and is sent to each with that server's own token, leaving the queue once all have it; one
+  waiting for her class's server stays 60 days, not 14. Its time is the phone's clock corrected by the skew from
+  `hello.now` (`state.stamp`: never behind the latest time the phone made or saw), so a clock that fell back to
+  2010 still sends minutes inside the server's window.
 - **Hints (P15, C2.3):** `check.item` (object `lesson:n`, the sheet's item; value 0 wrong, 1 right first time, 2
   right after hints or another try), `hint.rung` (`lesson:n`, the rung opened, 1 to 3) and `check.dispute`
   (`lesson:n`, no value: "Something looks wrong?"). They carry no text. A ladder in Ask sends none (its object would
@@ -429,6 +433,16 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   (agreed or "Not now"); without one she joins only when her grown-up agrees. A consent given later and a new band
   go to `/api/me`; "Stop sharing" and removing a learner queue her token for `DELETE /api/me` until the server is in
   reach. Each runs whenever the server is in reach (`account.sync()`, on every screen change and reconnection).
+- **Seats (W4, WEBSITE.md 3.3):** `hello.id` names the database (`meta.server_id`, migration 0020, made once by the
+  store; every hostname of one database answers the same), and the phone keeps one seat per server id in each
+  learner (`seats`: token, number, class, code, consent, asked, sent band, joined). The learner record still reads
+  `token`, `consent` and the rest: those of the seat of the server in reach. `hub.js` sends a token only to the
+  server whose id issued it (`mayCarry`); a 401 drops only that seat. A token from before W4 is the unplaced seat
+  `?`, asked about (`GET /api/me`) only at the address the phone last used: a 200 places it under that server's
+  id, a 401 means she joins again. `POST /api/me/merge {other}` folds a second learner of hers on one server into
+  the older (every `token_hash` table, `stores/base.py` `TOKEN_TABLES`, checked against the migrations by
+  `test_seats.py`; daily counts summed; 409 across classes); `POST /api/me/token` gives her record a new token.
+  Both are 5 a day per token.
 
 ## Privacy
 
@@ -472,11 +486,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 | Route | What |
 |---|---|
-| `GET /api/hello` | Hub name, version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; `apk {latest, min}` for the Android app (or null); the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
+| `GET /api/hello` | Hub name, `id` (this database's, W4) and `now` (UTC ms), version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; `apk {latest, min}` for the Android app (or null); the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
 | `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}`; header `X-Learner-Token`, her consent needed |
 | `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
 | `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
 | `GET`, `POST`, `DELETE /api/me` | Her own record (`{band?, consent?}` to change it); header `X-Learner-Token` |
+| `POST /api/me/merge` | `{other}`, her second token for this server -> `{kept: "this" or "other", number, picture, cohort}`; 409 in different classes, 401 her token folded already; 5 a day per token (W4) |
+| `POST /api/me/token` | A new token for her record -> `{token}`; the old one dies; 5 a day per token (W4) |
 | `GET /api/packs` | Every pack and its lesson list (no lesson content; an adult pack with its `tracks`, P26), and since P25a `graphs`: each skills graph's nodes (with the lessons this server serves), pathways and whether it is a draft, never its review block |
 | `GET /api/lessons/{id}` | One lesson, picture and clip names turned into URLs, with `draft` and its `credits`, without the sheet, review or sources |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |

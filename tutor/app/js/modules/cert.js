@@ -2,8 +2,9 @@
 // finished pathway's card, and opens #/cert/<pathway> (screens/cert.js).
 // - Bands p1 to ad (a grown-up types for a young child), never ey; never for Quran or seerah (the graph has no
 //   certificate there). The server reads her own events, so it needs her consent and her token.
-// - The phone keeps `certs: [{path, id, month}]` per learner (state.js) and the paper the server drew for it (the
-//   cache, `cert.<id>`: no name in it), so "My certificate" prints again with no request; it never asks twice.
+// - The phone keeps `certs: [{path, id, month, server}]` per learner (state.js; `server` is the id of the server that
+//   issued it, W4) and the paper the server drew for it (the cache, `cert.<id>`: no name in it), so "My certificate"
+//   prints again with no request; it never asks twice.
 // - The name she types lives in one variable on the certificate screen; it is written into the paper only as the
 //   paper prints (`printPaper`), then the paper leaves the page. Never in storage, a URL, the title, an event, a log
 //   or a request. On the hub the print queue gets the id only and the paper has an empty line.
@@ -31,7 +32,8 @@ export function ready(c, x) {
 // ask the server; keep the id, the month and the paper. Throws the server's refusal (409 with `missing`, 429, 403).
 export async function earn(c, x, lang) {
   const r = await hub.certEarn({ path: x.p.id, version: x.g.version, lang }, c.token);
-  const certs = [...((c.certs || []).filter((y) => y.path !== x.p.id)), { path: x.p.id, id: r.id, month: r.month }];
+  const certs = [...((c.certs || []).filter((y) => y.path !== x.p.id)),
+    { path: x.p.id, id: r.id, month: r.month, ...(hub.id() ? { server: hub.id() } : {}) }];
   state.updateChild(c.id, { certs });
   state.cache('cert.' + r.id, { lang, lessons: r.lessons, months: r.months, url: r.url, paper: r.paper });
   return certOf(state.byId(c.id), x.p.id);

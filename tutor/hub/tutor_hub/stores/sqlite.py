@@ -280,6 +280,15 @@ class SqliteStore(Store):
     async def prune_learners(self, idle_days: int):
         return await self._run("prune_learners", idle_days)
 
+    async def merge_learners(self, keep, drop, **changes) -> bool:
+        return await self._run("merge_learners", keep, drop, **changes)
+
+    async def rekey_learner(self, old, new) -> bool:
+        return await self._run("rekey_learner", old, new)
+
+    async def server_id(self) -> str:
+        return await self._run("server_id")
+
     async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:
         return await self._run("add_wish", cohort=cohort, band=band, lang=lang, wish=wish, wkey=wkey)
 

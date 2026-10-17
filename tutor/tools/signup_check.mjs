@@ -89,6 +89,7 @@ check((await a.page.$$('.consent-row')).length === 4, 'consent: four rows');
 await spoken(a.page, 'Consent');
 await shot(a.page, 'consent');
 const hold = await a.page.$('.consent .hold');
+await hold.scrollIntoViewIfNeeded();                                       // below the fold in English at 360 px
 const box = await hold.boundingBox();
 await a.page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
 await a.page.mouse.down();
@@ -108,7 +109,11 @@ await at(a.page, '#/home');
 await spoken(a.page, 'Home');
 await a.page.waitForTimeout(1500);                                         // the join goes out
 const l1 = (await stored(a.page)).learners[0];
-check(!!l1.token && !!l1.number && l1.consent && l1.consent.sent === true, 'joined: a token, a number, the consent sent');
+// since W4 what came with joining is her seat on this hub, under the hub's id (WEBSITE.md 3.3)
+const hubId = (await (await fetch(`${HUB}/api/hello`)).json()).id;
+const s1 = (l1.seats || {})[hubId] || {};
+check(!!s1.token && !!s1.number && s1.consent && s1.consent.sent === true && s1.code === CODE.replace('-', ''),
+  "joined: a token, a number, the class code and the consent sent, her seat under the hub's id");
 check(!!l1.lock && !JSON.stringify(l1).includes('1234'), 'the lock is kept as a hash, never the PIN');
 check(!('name' in l1), 'qalam.v2 holds no name');
 const join1 = a.sent.find(([m, p]) => m === 'POST' && p === '/api/join');
@@ -151,7 +156,7 @@ await b.page.click('.yearbox.primary .dashed');
 await at(b.page, '#/home');
 await b.page.waitForTimeout(1500);
 const l2 = (await stored(b.page)).learners[0];
-check(l2.band === 'ey' && !l2.token && !l2.consent && l2.picture, 'early years: on the phone only, with an alias picture');
+check(l2.band === 'ey' && !Object.keys(l2.seats || {}).length && l2.picture, 'early years: on the phone only, with an alias picture');
 check(!b.sent.some(([, p]) => p === '/api/join' || p === '/api/events' || p === '/api/me'), 'no join, no consent, no event left the phone');
 const corner = await b.page.$('.round.corner');
 const cb = await corner.boundingBox();

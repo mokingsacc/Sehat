@@ -3,8 +3,9 @@
 // Workers static assets do (ETag, `max-age=0, must-revalidate`, the _headers rules, /app to /app/); /api/ and /v/ go
 // to a hub. In Chromium through Playwright:
 //   1. The old tree: Welcome, year 1, a lesson with pictures; a voice clip is put in the old worker's cache, as a
-//      phone that heard one has it.
-//   2. The new tree: the phone opens / and the site's worker takes over. It keeps her learners; the old shell-* cache
+//      phone that heard one has it; she joined the hub with her grown-up's yes, as the old app kept it.
+//   2. The new tree: the phone opens / and the site's worker takes over. It keeps her learners, her token placed as
+//      her seat under the hub's id (W4, WEBSITE.md 3.11) once the hub knew it; the old shell-* cache
 //      is gone and the clip is in media-v1; / opens /app/ for her; the lesson's pictures and the clip are not
 //      downloaded again (no 200 for them after the move: a 304 is a check, not a download); no 404 under /app/.
 //   3. An old class QR (/?join=CODE) still opens Welcome with the code; the staff pages load with their CSP and
@@ -140,7 +141,21 @@ await page.evaluate(async (clip) => {                     // a voice clip she ha
   const shell = (await self.caches.keys()).find((k) => k.startsWith('shell-'));
   await (await self.caches.open(shell)).put(clip, new Response(new Uint8Array(64), { headers: { 'content-type': 'audio/ogg' } }));
 }, CLIP);
+// she joined with her grown-up's yes, as the old app's account.js left it (W4 places this token after the move)
+await page.evaluate(async () => {
+  const consent = (await (await fetch('/api/hello')).json()).consent;
+  const at = new Date().toISOString().slice(0, 16);
+  const r = await (await fetch('/api/join', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ band: 'p1', lang: 'prs', picture: 'cup', consent: { kind: 'guardian-on-phone', version: consent, at } }) })).json();
+  const d = JSON.parse(localStorage.getItem('qalam.v2'));
+  Object.assign(d.learners[0], { picture: 'cup', token: r.token, number: r.number, cohort: r.cohort, asked: true, sentBand: 'p1',
+    consent: { kind: 'guardian-on-phone', version: consent, at, sent: true } });
+  localStorage.setItem('qalam.v2', JSON.stringify(d));
+});
+await page.reload();
+await hashIs('#/');
 const before = { learners: await learners(), caches: await caches() };
+const oldToken = before.learners[0].token;
 const oldShell = Object.keys(before.caches).find((k) => k.startsWith('shell-'));
 const pictures = (before.caches['media-v1'] || []).filter((p) => p.startsWith('/packs/'));
 check(!!oldShell && before.learners.length === 1, `the old tree: one learner, the worker's ${oldShell}`);
@@ -157,8 +172,22 @@ await page.goto(BASE + '/');
 await page.waitForURL((u) => u.pathname === '/app/', { timeout: 15000 }).catch(() => {});
 check(new URL(page.url()).pathname === '/app/', `/ opens /app/ for her (${new URL(page.url()).pathname})`);
 await hashIs('#/home').catch(() => {});
-const after = await learners();
-check(JSON.stringify(after) === JSON.stringify(before.learners), 'her learners are kept as they were');
+// everything she had, as it was; since W4 her token, number, class and consent are her seat on this server, placed
+// under its id once it knew her token (WEBSITE.md 3.11)
+const SEAT = ['token', 'number', 'cohort', 'code', 'consent', 'asked', 'sentBand'];
+const rest = (l) => JSON.stringify(Object.fromEntries(Object.entries(l).filter(([k]) => !SEAT.includes(k) && k !== 'seats')));
+const hubId = (await page.evaluate(() => fetch('/api/hello').then((r) => r.json()))).id;
+const placed = await until(async () => {
+  const now = await learners();
+  return now.length === before.learners.length && now.every((l, i) => {
+    const was = before.learners[i];
+    const seat = (l.seats || {})[hubId] || (l.seats || {})['?'] || {};
+    const none = (k) => (k === 'asked' ? false : null);
+    return rest(l) === rest(was) && SEAT.every((k) => JSON.stringify(seat[k] ?? none(k)) === JSON.stringify(was[k] ?? none(k)));
+  });
+});
+check(placed && !!oldToken && (await learners())[0].seats[hubId].token === oldToken,
+  'her learners are kept as they were; her token, placed under this server\'s id, is the one she joined with');
 await until(() => page.evaluate(async () => !!(await navigator.serviceWorker.getRegistration('/app/'))?.active));
 await page.goto(`${BASE}/app/#/lesson/${LESSON}`);
 await page.reload();                                      // now under the app's own worker

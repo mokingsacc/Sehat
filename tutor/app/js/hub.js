@@ -3,14 +3,18 @@
 // a laptop test). An app from an https site never tries them, since they are plain http, except the Android app
 // (P23): its page is the APK's own, so it tries the hub's addresses (its network settings allow only those over
 // http) and then the online home it was built for.
+// Since W4 (WEBSITE.md 3.3 and 3.5) hello names the server (`id`, the same for every address of one database) and its
+// time (`now`): the phone keeps its clock's skew, and `call` sends a learner's token only to the server whose id
+// issued it (state.issuer), or, for a token from before W4 not placed yet, only to the address it was last used at.
 
 import * as android from './android.js';
 import { latin } from './numbers.js';
-import { cache } from './state.js';
+import { cache, issuer, PENDING, setHere, setSkew } from './state.js';
 
 const CANDIDATES = ['http://10.42.0.1', 'http://10.42.0.1:8080', 'http://qalam.lan', 'http://192.168.4.1:8080'];
 let base = null;            // '' means the same website the app came from
 let hello = null;
+let sid = null;             // the id of the server that answered hello
 let cohortId = null;        // the class the learner using the phone joined (P10), when it is not the server's own
 const listeners = new Set();
 
@@ -24,6 +28,11 @@ function withCohort(path) {
 export function onChange(fn) { listeners.add(fn); }
 export function info() { return hello; }
 export function online() { return !!hello; }
+// the server in reach: its id (a server from before W4 has none, and is known by its address) and the address
+export const id = () => (hello ? sid : null);
+export const where = () => (hello ? base : null);
+const idOf = (h, b) => (typeof h.id === 'string' && /^[0-9a-f]{20}$/.test(h.id) ? h.id
+  : 'b:' + (b || (globalThis.location && location.origin) || 'here').slice(0, 200));
 
 // 'hub' (the village hub) or 'online' (the Worker): hello says; away from both, what it said last, else an https
 // page is the online home
@@ -58,12 +67,24 @@ async function get(url, ms = 4000) {
   } finally { clearTimeout(t); }
 }
 
-// hello for the learner's class; a server that does not know the class (404) answers for its own
+// hello for the learner's class; a server that does not know the class (404) answers for its own. The skew is the
+// server's time less the phone's halfway through the request.
 async function helloFrom(b, ms) {
-  try { return await get(b + withCohort('/api/hello'), ms); } catch (e) {
-    if (e.status === 404 && cohortId) return get(b + '/api/hello', ms);
-    throw e;
+  const t0 = Date.now();
+  let h;
+  try { h = await get(b + withCohort('/api/hello'), ms); } catch (e) {
+    if (e.status === 404 && cohortId) h = await get(b + '/api/hello', ms);
+    else throw e;
   }
+  if (h && Number.isFinite(h.now)) h.skew = h.now - Math.round((t0 + Date.now()) / 2);
+  return h;
+}
+
+// a server answered: it is the one in reach, and its time sets the clock's skew
+function arrived() {
+  sid = hello ? idOf(hello, base) : null;
+  setHere(sid, hello ? base : null);
+  if (hello && Number.isFinite(hello.skew)) setSkew(hello.skew, hello.now);
 }
 
 export async function connect() {
@@ -89,15 +110,16 @@ async function found(tries) {
   const i = answers.findIndex((a) => a.status === 'fulfilled' && a.value && a.value.hub);
   base = i >= 0 ? tries[i] : null;
   hello = i >= 0 ? answers[i].value : null;
-  if (base) cache('hub', base);
+  if (base !== null) cache('hub', base);
   remember(hello);
+  arrived();
   return !!hello;
 }
 
 // fresh printer and AI state, for the screens that show them
 export async function refresh() {
   if (base === null) return null;
-  try { hello = await helloFrom(base, 3000); remember(hello); } catch (e) {
+  try { hello = await helloFrom(base, 3000); remember(hello); arrived(); } catch (e) {
     if (!e.status) lost();      // no answer at all: out of reach; an error reply keeps the last one
   }
   return hello;
@@ -108,7 +130,16 @@ export async function refresh() {
 export function lost() {
   if (!hello) return;
   hello = null;
+  arrived();
   listeners.forEach((f) => f(false));
+}
+
+// the token-to-issuer check (L6 closed): a token goes only to the server whose id issued it; one from before W4,
+// not placed yet, only to the address it was last used at
+export function mayCarry(token) {
+  const who = issuer(token);
+  if (!who || !hello) return false;
+  return who.sid === sid || (who.sid === PENDING && who.base !== null && who.base === base);
 }
 
 export function url(path) { return (base ?? '') + withCohort(path); }
@@ -121,13 +152,16 @@ async function call(path, { method = 'GET', body, pin, token, ms = 30000 } = {})
     const headers = { 'Content-Type': 'application/json' };
     // a PIN typed with Persian digits is sent as 0-9; a header with other letters would never leave the phone
     if (pin) headers['X-Teacher-Pin'] = latin(pin).replace(/[^\x21-\x7e]/g, '');
-    if (token) headers['X-Learner-Token'] = token;
+    if (token) {
+      if (!mayCarry(token)) throw Object.assign(new Error('this token is for another server'), { status: 0, other: true });
+      headers['X-Learner-Token'] = token;
+    }
     const r = await fetch(url(path), { method, headers, body: body ? JSON.stringify(body) : undefined, signal: ctl.signal });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) throw Object.assign(new Error(j.error || j.detail || r.status), { status: r.status, code: j.code || null });
     return j;
   } catch (e) {
-    if (e.status === undefined && e.name !== 'AbortError') { hello = null; listeners.forEach((f) => f(false)); }   // the hub went away
+    if (e.status === undefined && e.name !== 'AbortError') { hello = null; arrived(); listeners.forEach((f) => f(false)); }   // the hub went away
     throw e;
   } finally { clearTimeout(t); }
 }
@@ -196,6 +230,13 @@ export const join = (body) => call('/api/join', { method: 'POST', body, ms: 1500
 export const me = (token) => call('/api/me', { token, ms: 15000 });
 export const meUpdate = (token, body) => call('/api/me', { method: 'POST', body, token, ms: 15000 });
 export const forget = (token) => call('/api/me', { method: 'DELETE', token, ms: 15000 });
+// W4: her other token for this server folded into one learner ({kept: 'this' | 'other', number, picture, cohort}),
+// and a new token for her record (the old one dies); the other token is checked like the header's
+export function merge(token, other) {
+  if (!mayCarry(other)) return Promise.reject(Object.assign(new Error('this token is for another server'), { status: 0, other: true }));
+  return call('/api/me/merge', { method: 'POST', body: { other }, token, ms: 15000 });
+}
+export const newToken = (token) => call('/api/me/token', { method: 'POST', token, ms: 15000 });
 // her own question sent for her teacher's check (P32), and the verdicts on hers
 export const madeSend = (body, token) => call('/api/m/made', { method: 'POST', body, token, ms: 15000 });
 export const madeMine = (token) => call('/api/m/made/mine', { token, ms: 15000 });

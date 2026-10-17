@@ -135,6 +135,16 @@ Learners (learners.py decides what they mean; never a name)
 - `delete_learner(token_hash) -> bool`: deletes the learner, every event carrying her token's hash and her reset
   code, together.
 - `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events and reset codes.
+- `merge_learners(keep, drop, **changes) -> bool` (W4, `/api/me/merge`): folds the learner `drop` into `keep`, both
+  token hashes, in one transaction: every row of every table in TOKEN_TABLES moves to `keep` as its rule says (her
+  daily counts summed, so a merge never resets a budget), `changes` (as `update_learner` takes them) go on `keep`'s
+  row, and `drop`'s row is deleted. False, with nothing changed, unless both learners exist.
+- `rekey_learner(old, new) -> bool` (W4, `/api/me/token`): the learner and every row of hers move to the token hash
+  `new`, in one transaction; the old hash then finds nothing. False if there is no such learner.
+
+What a server knows about itself (W4, migration 0020)
+- `server_id() -> str`: this database's id (`hello.id`): 20 random hex digits, made on the first call and the same
+  from then on, whichever host or process asks.
 
 The wishlist (P22): what learners wanted to learn and no lesson matched, never with a token
 - `add_wish(*, cohort, band, lang, wish, wkey) -> int`: one more ask for the wish `wkey` (its search form) in that
@@ -254,6 +264,50 @@ def draw_number(used) -> int:
         if free:
             return random.choice(free)
     return max(used) + 1
+
+
+# W4 (WEBSITE.md 3.3): every table with a learner's token_hash, and how a merge moves her rows from the newer learner
+# to the older one. hub/tests/test_seats.py reads the migrations and fails when a table with a token_hash column is
+# missing here, so a later table (the school bag's, say) cannot be left behind by a merge or a new token.
+#   move: every row changes hands; sum: rows of the same key add up (her budget per day and module); keep: the kept
+#   learner's row wins where both have one (a reset code, a live class's seat); row: the learner herself
+TOKEN_TABLES = {"learners": "row", "events": "move", "made": "move", "daily_counts": "sum", "reset_codes": "keep",
+                "live_present": "keep"}
+
+
+def merge_statements(keep: str, drop: str, changes: dict) -> list[tuple[str, tuple]]:
+    """The statements of `merge_learners`, in order, for both stores (D1 sends them as one batch)."""
+    out = []
+    for table, rule in TOKEN_TABLES.items():
+        if rule == "move":
+            out.append((f"UPDATE {table} SET token_hash=? WHERE token_hash=?", (keep, drop)))
+        elif rule == "sum":
+            out.append((f"INSERT INTO {table}(token_hash, day, module, n) SELECT ?, day, module, n FROM {table} "
+                        "WHERE token_hash=? ON CONFLICT(token_hash, day, module) DO UPDATE SET n = n + excluded.n",
+                        (keep, drop)))
+            out.append((f"DELETE FROM {table} WHERE token_hash=?", (drop,)))
+        elif rule == "keep":
+            out.append((f"UPDATE OR IGNORE {table} SET token_hash=? WHERE token_hash=?", (keep, drop)))
+            out.append((f"DELETE FROM {table} WHERE token_hash=?", (drop,)))
+    check_changes(changes)
+    if changes:
+        out.append((f"UPDATE learners SET {', '.join(f'{k}=?' for k in changes)} WHERE token_hash=?",
+                    (*changes.values(), keep)))
+    out.append(("DELETE FROM learners WHERE token_hash=?", (drop,)))
+    return out
+
+
+def rekey_statements(old: str, new: str) -> list[tuple[str, tuple]]:
+    """The statements of `rekey_learner`: nothing has the new hash yet, so every row simply changes hands."""
+    return [(f"UPDATE {table} SET token_hash=? WHERE token_hash=?", (new, old)) for table in TOKEN_TABLES]
+
+
+def new_server_id() -> str:
+    return secrets.token_hex(10)
+
+
+# the id, made by the first caller and read by every later one, in one statement (a start costs one query)
+SERVER_ID = ("INSERT INTO meta(k, v) VALUES('server_id', ?) ON CONFLICT(k) DO UPDATE SET v=meta.v RETURNING v")
 
 
 def check_changes(changes: dict) -> dict:
@@ -463,6 +517,15 @@ class Store:
         raise NotImplementedError
 
     async def prune_learners(self, idle_days: int) -> None:
+        raise NotImplementedError
+
+    async def merge_learners(self, keep, drop, **changes) -> bool:
+        raise NotImplementedError
+
+    async def rekey_learner(self, old, new) -> bool:
+        raise NotImplementedError
+
+    async def server_id(self) -> str:
         raise NotImplementedError
 
     async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:

@@ -98,6 +98,12 @@ class MeIn(BaseModel):
     consent: ConsentIn | None = None
 
 
+class MergeIn(BaseModel):
+    """Her other token for this server (W4, WEBSITE.md 3.3): two of her devices joined it apart."""
+    model_config = ConfigDict(extra="forbid")
+    other: StrictStr = Field(..., min_length=20, max_length=64)
+
+
 class PinResetIn(BaseModel):
     """The six digits her teacher read out to her (C1.6, P20); Persian digits too."""
     model_config = ConfigDict(extra="forbid")
@@ -201,6 +207,8 @@ class Hub:
         self.reset_limit = Limit(10, 600)            # lock reset codes tried per phone in ten minutes
         self.plan_limit = Limit(30, 60)              # "I want to learn this" goals a minute, by address (no token)
         self.cert_limit = Limit(30, 60)              # certificate checks an address a minute (C4.2)
+        self.seat_limit = Limit(5, 24 * 3600)        # merges and new tokens a day, per token (W4, WEBSITE.md 3.7)
+        self.server_id = None                        # hello.id (W4): this database's own, read in start()
         self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
         self.gateway.on_drop = lambda why, cid: self.record("safety.flag", why, cohort_id=cid)
         self.aliases = set(learners.load_aliases())
@@ -210,6 +218,7 @@ class Hub:
 
     async def start(self):
         await self.store.open()
+        self.server_id = await self.store.server_id()
         if await self.store.seed_cohorts(flags.seed_rows(self.seeds)):
             log.info("cohorts seeded from %s", self.cfg.cohorts)
         if not self.cohort_id or not await self.store.cohort(self.cohort_id):
@@ -420,7 +429,10 @@ class Hub:
             mods.append({"id": mid, "version": m["version"], "slots": m["slots"], "bands": m["bands"],
                          "needs": m["needs"], "offline": m["offline"], "risk": modules.risk(m),
                          "settings": flags.module_settings(m, (f.get(mid) or {}).get("settings"))})
-        return {"hub": self.cfg.name, "version": __version__, "core": __version__, "lessons": len(self.library.lessons),
+        # W4 (WEBSITE.md 3.3 and 3.5): `id` names the database that issues this server's tokens, the same from every
+        # hostname, so a phone sends each token only where it came from; `now` (UTC ms) gives the phone its clock's skew
+        return {"hub": self.cfg.name, "id": self.server_id, "now": int(time.time() * 1000),
+                "version": __version__, "core": __version__, "lessons": len(self.library.lessons),
                 "ai": {"on": ai_on, "langs": list(self.cfg.ai_langs) if ai_on else []},
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
                 "url": self.cfg.public_url, "release": self.cfg.release, "consent": self.consent_version,
@@ -667,6 +679,43 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         row = await hub.learner(request)
         await hub.store.delete_learner(row["token_hash"])
         return {"deleted": True}
+
+    # W4 (WEBSITE.md 3.3 and 3.7): two of her devices joined this server apart, so she has two learners here. The
+    # newer folds into the older (joined first; the hash breaks a tie, so a merge asked from both devices at once
+    # keeps the same one): her events, her own questions, her daily counts (summed, so a budget never starts again)
+    # and the rest move to it, and the newer row goes. Learners in different classes are not merged (409). A token
+    # already folded is not known any more (401); an `other` not known here is taken as folded already.
+    @app.post("/api/me/merge")
+    async def me_merge(body: MergeIn, request: Request):
+        row = await hub.learner(request)
+        hub.seat_limit.check("merge:" + row["token_hash"])
+        other = await hub.store.learner(learners.token_hash(body.other)) if learners.TOKEN.match(body.other) else None
+        if other is not None and other["token_hash"] != row["token_hash"]:
+            if other["cohort"] != row["cohort"]:
+                raise HTTPException(409, "these are in different classes: not merged")
+            keep, drop = sorted((row, other), key=lambda r: (r["joined"], r["token_hash"]))
+            changes = {"last_seen": max(keep["last_seen"], drop["last_seen"])}
+            if drop["consent_kind"] and (not keep["consent_kind"] or (drop["consent_at"] or "") > (keep["consent_at"] or "")):
+                changes.update(consent_kind=drop["consent_kind"], consent_version=drop["consent_version"],
+                               consent_at=drop["consent_at"])
+            await hub.store.merge_learners(keep["token_hash"], drop["token_hash"], **changes)
+            kept = "this" if keep is row else "other"
+        else:
+            keep, kept = row, "this"
+        now = await hub.store.learner(keep["token_hash"])
+        cohort = await hub.store.cohort(now["cohort"])
+        return {"kept": kept, "number": now["number"], "picture": now["picture"],
+                "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None}
+
+    # W4: a new token for the same learner (her bag's "Make a new code", W7); the old one finds nothing from now on
+    @app.post("/api/me/token")
+    async def me_token(request: Request):
+        row = await hub.learner(request)
+        hub.seat_limit.check("token:" + row["token_hash"])
+        token = learners.new_token()
+        if not await hub.store.rekey_learner(row["token_hash"], learners.token_hash(token)):
+            raise HTTPException(401, "this learner is not known here: join again")
+        return {"token": token}
 
     # "I have a code from my teacher" (C1.6, P20): six digits, 15 minutes, once, five tries; the lock is the phone's
     @app.post("/api/me/pin-reset")
