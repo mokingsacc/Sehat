@@ -7,6 +7,7 @@ import { fa, getLang, pick, s } from '../i18n.js';
 import * as graph from '../graph.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
+import * as certs from '../modules/cert.js';
 import * as plans from '../modules/plan.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
@@ -48,7 +49,10 @@ function pathCard(c, x) {
     h('p', { class: 'muted small' }, line),
     h('div', { class: 'bar' }, h('span', { style: { width: (ids.length ? Math.round((100 * done) / ids.length) : 0) + '%' } })),
     left ? said(h('button', { type: 'button', class: 'btn primary', onClick: go },
-      running ? s('continue') : s('path_start'), icon('next', 22))) : h('p', { class: 'muted small' }, s('path_done')));
+      running ? s('continue') : s('path_start'), icon('next', 22))) : h('p', { class: 'muted small' }, s('path_done')),
+    // a finished pathway's certificate (P25b): "Get my certificate", then "My certificate" to print it again
+    !left && certs.ready(c, x) ? said(h('a', { class: 'btn outline', href: '#/cert/' + encodeURIComponent(x.p.id) },
+      icon('printer', 22), s(certs.certOf(c, x.p.id) ? 'cert_mine' : 'cert_get'))) : null);
 }
 
 export default async function subject([name]) {

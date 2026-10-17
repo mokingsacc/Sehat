@@ -834,3 +834,7 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .track-row .bar { margin-top: 6px; }
 .goal-chips { display: flex; flex-direction: column; gap: 10px; }
 .goal-chip { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 8px 12px; border-radius: var(--r); border: var(--bw) solid var(--line-strong); background: var(--card); color: var(--ink); font-size: var(--fs-btn); font-weight: 800; text-align: start; }
+
+/* P25b: the certificate screen; the paper itself is the server's (.cert-paper), drawn only for print (cert.js) */
+.plan-card.done.with-cert .btn { align-self: flex-start; }
+.v-found { font-weight: 800; }

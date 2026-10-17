@@ -21,7 +21,8 @@ import * as library from '../library.js';
 import { allows, on } from '../modules.js';
 import * as state from '../state.js';
 import * as graph from '../graph.js';
-import { confirmSheet, h, icon, playIcon, plain, speakerBtn } from '../ui.js';
+import { confirmSheet, h, icon, playIcon, plain, said, speakerBtn } from '../ui.js';
+import * as certs from './cert.js';
 import { speak } from '../speech.js';
 
 export const BANDS = ['s1', 's2', 'ad'];
@@ -161,12 +162,16 @@ function finishedNow(c) {
 }
 export const lastFinished = (c) => (c ? finished.get(c.id) || null : null);
 
+// a finished pathway with a certificate adds "Get my certificate" (P25b), or "My certificate" once she has it
 function doneCard({ child: c }) {
   const f = finished.get(c.id);
   const line = s('plan_done', { label: f.label });
-  return h('section', { class: 'card soft continue plan-card done' },
+  const x = f.path ? graph.findPathway(f.path) : null;
+  const cert = x && certs.ready(c, x) ? said(h('a', { class: 'btn outline', href: '#/cert/' + encodeURIComponent(x.p.id) },
+    icon('printer', 22), s(certs.certOf(c, x.p.id) ? 'cert_mine' : 'cert_get'))) : null;
+  return h('section', { class: 'card soft continue plan-card done' + (cert ? ' with-cert' : '') },
     h('span', { class: 'done-mark', 'aria-hidden': 'true' }, icon('check', 26, 3)),
-    h('div', { class: 'grow' }, h('div', { class: 'title' }, line)),
+    h('div', { class: 'grow stack-sm' }, h('div', { class: 'title' }, line), cert),
     speakerBtn(() => speak(line, getLang()), { size: 'sm' }));
 }
 

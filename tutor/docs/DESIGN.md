@@ -627,6 +627,26 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   22:30, so the time never crosses midnight; the study card has no picture; switching it on in Settings starts at 7:00
   in the evening for 30 minutes rather than remembering an earlier time.
 
+## What P25b and 7a built, and where they differ
+
+- "Your certificate" (`#/cert/<pathway>`): the back arrow to the pathway's subject, the title with the page's speaker,
+  a card with the pathway's title and speaker, "2 lessons · October 2027" (the month in her language's calendar), the
+  name line and its speaker, the box (autocomplete off, no `name`, in no form), "Qalam does not keep this name. It is
+  printed, then forgotten." in `--muted`, then "Print or save" (warm, full width, printer icon) and the number in
+  small muted text. On the hub with its printer: "The hub prints it with an empty line. Write the name by hand." in
+  place of the box, and the button says "Print"; a toast says it went to the printer.
+- "Get my certificate" (outline, printer icon) on a finished pathway's card under "You finished this pathway", and on
+  Home's Done card under "Done: ..."; "My certificate" once she has it.
+- The paper as drafted, with a double frame; on the hub's PDF the inner line is missing (the PDF maker has no outline).
+- `/v/<id>`: "Check a certificate" with its speaker, the three language chips, "Number QC-…", then the found line in
+  bold and the names line, each with a speaker; or "We can't find this number. Check it and try again."
+- 7a: the admin's module table says "waits for the pilot's four numbers" or "off in open in 2027" beside a locked
+  switch, and under the table for `open` what the gate still waits for, or the budget rule once it is passed.
+- Open look questions: the Solar Hijri month printed is the one holding the 10th of the Gregorian month, since the row
+  keeps no day (October is always Mizan); the Pashto word for certificate (`تصدیق‌لیک`) and the Afghan month names are
+  drafts; the paper has no Qalam mark or picture; the certificate screen shows no preview of the paper; the hub's
+  print sends one copy and asks no PIN (it counts against the phone's copies an hour).
+
 ---
 
 # C2 and C3 decisions

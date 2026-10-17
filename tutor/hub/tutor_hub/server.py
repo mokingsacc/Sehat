@@ -22,10 +22,11 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
-from . import __version__, admin, events, flags, graph, learners, modules, rules, search, sheets
+from . import __version__, admin, cert, events, flags, graph, learners, modules, rules, search, sheets
 from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import WAITING, Answer, Brain
 from .config import Config
+from .mods import cert as cert_mod
 from .mods import homework as homework_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
@@ -37,6 +38,7 @@ from .packs import Library, band_of_year, picture_file
 from .textnorm import digits_to_latin
 from .printing import Printer, PrintQueue
 from .stores import SqliteStore
+from .stores.base import CERT_ID
 
 RETENTION_S = 24 * 3600                    # the retention job runs once a day (P24)
 log = logging.getLogger("tutor.hub")
@@ -181,6 +183,7 @@ class Hub:
         self.photo_limit = Limit(6, 60)              # photos of sheets read per phone a minute
         self.reset_limit = Limit(10, 600)            # lock reset codes tried per phone in ten minutes
         self.plan_limit = Limit(30, 60)              # "I want to learn this" goals a minute, by address (no token)
+        self.cert_limit = Limit(30, 60)              # certificate checks an address a minute (C4.2)
         self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
         self.gateway.on_drop = lambda why, cid: self.record("safety.flag", why, cohort_id=cid)
         self.aliases = set(learners.load_aliases())
@@ -317,6 +320,11 @@ class Hub:
         return url
 
     def render_pdf(self, spec: dict):
+        if spec.get("cert"):                          # a certificate (P25b): its id and course only, the name line blank
+            body = cert.paper_body(titles=spec["titles"], lang=spec["lang"], cid=spec["cert"], month=spec["month"],
+                                   lessons=spec["lessons"], url=f"{self.cfg.public_url.rstrip('/')}/v/{spec['cert']}")
+            html_text = cert.document(body, cid=spec["cert"], fonts=(self.cfg.app / "fonts").resolve().as_uri())
+            return sheets.render_pdf(html_text, base_url=str(self.cfg.app))
         if spec.get("card"):
             html_text = sheets.hub_card(name=self.cfg.name, url=self.cfg.public_url, ssid=self.cfg.wifi_ssid,
                                         password=self.cfg.wifi_password,
@@ -604,6 +612,25 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(teacher_mod.router(hub, needs))
     # "I want to learn this" (the `plan` module, P22): a goal to a plan of lessons, or to the wishlist, without a token
     app.include_router(plan_mod.router(hub, needs))
+    # Certificates (the `cert` module, P25b): earned from her own events, printed with a name that is never sent
+    app.include_router(cert_mod.router(hub, needs))
+
+    # checking a certificate (P25b, C4.2): the core's, always on even where `cert` is off; no token
+    @app.get("/api/cert/{cid}")
+    async def cert_check(cid: str, request: Request):
+        hub.cert_limit.check(_who(request))
+        row = await hub.store.certificate(cid.upper()) if CERT_ID.match(cid.upper()) else None
+        found = graph.find_pathway(hub.library.graphs, row["course"]) if row else None
+        if not row:
+            raise HTTPException(404, "no such certificate")
+        title = found[1]["title"] if found else {"en": row["course"]}
+        return {"id": row["id"], "course": {x: title.get(x) or title.get("en") or row["course"] for x in LANGS},
+                "month": row["month"], "months": cert.month_labels(row["month"])}
+
+    @app.get("/v/{cid}", response_class=HTMLResponse)
+    async def cert_page(cid: str):
+        return HTMLResponse(cert.check_page(), headers={"Cache-Control": "no-store", "Referrer-Policy": "no-referrer"})
+
     # The admin panel (P21, C3.3): the core's, not a module; behind the staff gate as admin, at /admin/ (app/admin/)
     app.include_router(admin.router(hub))
 

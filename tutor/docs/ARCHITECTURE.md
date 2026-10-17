@@ -105,7 +105,8 @@ measurements and what it costs). Nothing of the hub is forked:
   it. The store gets the plain JavaScript binding (from `cloudflare:workers`): the SDK's `self.env` wraps bindings
   in its own Python converters, and D1Store does its own (jsnull, to_js, to_py), as its contract and the fake
   expect.
-- Static assets are served before the Worker; only `/api/*` reaches Python (`run_worker_first`). So the hub's
+- Static assets are served before the Worker; only `/api/*` and, since P25b, a certificate's check page `/v/*`
+  reach Python (`run_worker_first`, which `guard.py` holds to exactly those two). So the hub's
   picture route and its `StaticFiles` mounts are not used online, and `create_app` mounts the app folder only
   where it exists.
 - **What a host lacks** (`TUTOR_LACKS`, empty on the hub): online it is `printer,pin`. A module whose manifest
@@ -444,6 +445,12 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   the AI with the ids and titles of her band's nodes and never her token, and at most three existing ids come back.
 - Spaced review (P25a) keeps her items, boxes and due days on the phone only (at most 300); only the event
   `recall.item` (lesson:n, 0 or 1) leaves it, with consent, as the other events do. No table was added.
+- Certificates (P25b, C4.2): the row is `certificates (id, course, version, month, cohort)`, with no token hash,
+  band, day, name or name hash, kept for good so its check page answers. The name she types is drawn into the paper
+  as it prints and is never stored, sent, logged or put in a title or address (`tools/cert_check.mjs` types a
+  sentinel and looks for it everywhere). The phone keeps `certs: [{path, id, month}]` and the paper without a name.
+- `daily_counts (token_hash, day, module, n)` (7a, C4.9): a learner's photos read and certificates asked for today,
+  against each module's `per_day`; kept two days and deleted with her (`migrations/0016`).
 - A lock reset code (P20) is kept only as a hash with her token's hash, for 15 minutes, used once, ended by five
   wrong tries, and deleted with her record (`reset_codes`, `migrations/0012`).
 - Nothing leaves the hub: there is no internet connection and no analytics.
@@ -480,20 +487,24 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/m/teacher/me`, `todo`, `class`, `class/{alias}`, `lessons`, `lessons/{id}`, `answers/{id}.html`, `wishes`; `POST /api/m/teacher/todo/{id}`, `class/{alias}/reset-code`, `class-card`, `hub-card` | The teacher dashboard (P20); the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online, role teacher or admin), `?cohort=` one of hers |
 | `POST /api/m/plan` | `{goal, lang, band}` (s1, s2, ad) -> `{kind: plan, label, lessons}`, `{kind: closest, lessons}` (three at most), `{kind: wish, saved}` (the screened text joins the wishlist) or `{kind: rules, reason, text}` (nothing kept); no token read; 30 a minute an address |
 | `POST /api/me/pin-reset` | `{code}`, six digits in any script -> `{ok}`; 403 a wrong code, 404 none waiting; header `X-Learner-Token`; 10 tries in 10 minutes an address |
+| `POST /api/m/cert` | `{path, version, lang}` -> `{id, month, months, url, lessons, paper: {css, body}}` when her own events show every lesson of the pathway (409 `{missing}` when not); header `X-Learner-Token`, her consent needed; `per_day` (5) a token |
+| `POST /api/m/cert/print` | `{id, lang, lessons}` -> the hub's print queue, the paper with an empty name line; the hub only (`print`) |
+| `GET /api/cert/{id}` | `{id, course: {prs, ps, en}, month, months}` or 404; the core's, always on; no token; 30 a minute an address |
+| `GET /v/{id}` | The check page a certificate's QR code opens (`app/js/certcheck.js`), served by Python on the hub and online |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
 | `GET /api/m/admin/me`, `cohorts`, `cohorts/{id}`, `content`, `wishes`, `spend`, `safety`, `staff`, `log`; `POST /api/m/admin/cohorts`, `cohorts/{id}/kill`, `cohorts/{id}/flags/{module}`, `cohorts/{id}/settings`, `cohorts/{id}/code`, `cohorts/{id}/cards`, `content/{pack}/publish`, `content/{pack}/rollback`, `wishes`, `staff`; `DELETE /api/m/admin/staff/{id}` | The admin panel (P21); `X-Admin-Pin` on the hub, Cloudflare Access and an admin staff row online, 404 in the fallback container |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes, the admin panel's (behind its gate) and the app's files are always there.
 
 ## The app (app/js)
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/subjects`, `#/lesson/{id}`, `#/print/{id}`,
   `#/check/{id}/{seed}`, `#/photo/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
-  `#/lock`, `#/settings`, `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
+  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
   learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
   and the teacher's page stay open).
 - Sign-up (DESIGN.md 6 to 8): `screens/welcome.js` (the doors, no name field), `screens/signup.js` (the ordered
@@ -710,6 +721,37 @@ with Dari drafts; nothing kept in the browser.
   the email once, hashes it with the pepper and drops it; the last admin cannot be removed.
 - **Log:** `flag_log` and `admin_log` (`migrations/0014`: a fixed `what`, a line the hub writes, the admin's label,
   never an email) together, newest first, by cohort; both are kept two years (`store.prune`).
+
+## Certificates (cert.py, mods/cert.py, app/js/modules/cert.js, app/js/screens/cert.js, P25b)
+
+C4.2 and DESIGN-C4-SPECS item 1. The module `cert` is on wherever a pathway with `certificate: true` is served,
+`open` included (the seeds, new cohorts and `migrations/0016`); bands p1 to ad; never for Quran or seerah.
+
+- **Earning** (`POST /api/m/cert`): with her token and consent, the server reads her token hash's events for the
+  pathway's lessons in her audience (`graph.pathway_lessons`: every node the goal needs, then the goal's own): each
+  counts with a `lesson.done` or a `check.done` of 80 or more, and the `final` lesson needs its `check.done` of 80
+  or more (`cert.missing`). Lessons done before consent left no events, so the phone says to do their sheets again.
+  Then a `certificates` row under `QC-` and ten Crockford base32 characters (50 random bits), and the paper.
+- **The paper** (`cert.paper_body`): A4 landscape, black on white, its own CSS under `.cert-paper`: "Qalam ·
+  certificate", the name line (empty), "has finished the lessons and practice sheets of", the course in her language
+  then English, the number of lessons, the month in Solar Hijri (the month holding the 10th, Afghan names) then
+  Gregorian, the QR of `<home>/v/<id>` (`qr.svg`, byte mode) and "Qalam keeps no names". The phone keeps it in its
+  cache and prints it in the page (`cert.printPaper`): the typed name goes into the line, the page's print CSS shows
+  only the paper, the title is "Qalam certificate QC-…", and the paper leaves the page after printing. In the APK the
+  bridge's `print(title)` opens the phone's print dialog for the same page. On the hub with `print` on, the queue
+  prints it (`render_pdf`, the id and course only), so the line stays empty for a name written by hand.
+- **Checking**: `/v/<id>` is a plain page in the clean look, with a language switch and a speaker per line; it asks
+  `GET /api/cert/<id>`. The service worker leaves `/v/` to the server. Hub certificates are checked on the hub;
+  online ones online (P33 may carry hub rows).
+
+## The pilot's gates for `open` (gates.py, 7a)
+
+C4.9. The admin panel refuses `ask` and `homework` in the `open` cohort in 2027 (lock "open"), and `photo` there
+(lock "gate") until `cohorts/gates/photo-open.json` holds the pilot report's four numbers and they pass: per language
+at least 200 photographed sheets with Fix on fewer than 1 cell in 10, no leaked answer, the tokens a mark costs, and
+D7's decision. The cohort page then shows the budget rule (marks a day × tokens a mark × 1.2) for `ai_budget`.
+`photo` has a `per_day` setting (10; 5 in `open`, from its seed and `migrations/0016`), counted per token hash in
+`daily_counts`; over it the route answers 503 "budget" and the phone says photo checking is resting today.
 
 ## The Android app (tutor/android, app/js/android.js, app/get, P23)
 

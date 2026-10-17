@@ -19,6 +19,7 @@ import { loadClips, stop } from './speech.js';
 import { busy, h, nav, netChip, sayTab, toast } from './ui.js';
 
 import ask from './screens/ask.js';
+import cert from './screens/cert.js';
 import check from './screens/check.js';
 import consent from './screens/consent.js';
 import credits from './screens/credits.js';
@@ -39,7 +40,7 @@ import who from './screens/who.js';
 const photo = (args) => import('./modules/photo.js').then((m) => m.default(args));
 
 const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, welcome, who, credits, consent, lock: lockScreen,
-  settings, signup };
+  settings, signup, cert };
 const NEEDS_NO_CHILD = new Set(['welcome', 'signup']);
 const CLEAN = new Set(['welcome', 'signup']);          // the clean adult look, not the learner's
 const OPEN = new Set(['welcome', 'who', 'signup', 'lock']);   // shown without opening her lock

@@ -8,7 +8,7 @@ The village hub needs none of this: it is the same app under uvicorn on a small 
 | Part | Online (staging) | Village hub |
 |---|---|---|
 | The app (phone pages, scripts, lesson pictures) | Workers static assets, served before the Worker | the hub's `StaticFiles` |
-| `/api/*` | Cloudflare Python Worker `qalam-staging` (the hub's own FastAPI app) | uvicorn |
+| `/api/*`, `/v/*` (a certificate's check page, P25b) | Cloudflare Python Worker `qalam-staging` (the hub's own FastAPI app) | uvicorn |
 | Store | D1 `qalam-staging`, `eu` jurisdiction (`D1Store`) | SQLite file (`SqliteStore`) |
 | Migrations | applied by `D1Store.open()` on an isolate's first request, from the SQL in the bundle | applied by `SqliteStore.open()` |
 | AI | `fake` provider; the Worker has no secrets | the gateway, as configured |

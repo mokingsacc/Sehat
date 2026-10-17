@@ -5,6 +5,8 @@ wishlist across cohorts; AI spend and safety counts; staff without emails; and e
 the AI is the fake."""
 import asyncio
 import copy
+import json
+import shutil
 import sqlite3
 
 import pytest
@@ -13,6 +15,7 @@ from fastapi.testclient import TestClient
 from tutor_hub import admin as admin_mod
 from tutor_hub import flags, learners, staff
 from tutor_hub.ai.fake import FakeProvider
+from tutor_hub.config import Config
 from tutor_hub.server import admin_pin, create_app, teacher_pin
 
 from test_review import PEPPER, STAGING, online, rsa, token  # noqa: F401  (fixtures and helpers)
@@ -97,14 +100,14 @@ def test_a_label_that_says_who_is_in_the_class_is_refused(hub, label):
     assert r.status_code == 422 and "who is in the class" in r.json()["error"]
 
 
-def test_a_new_cohort_has_a_random_id_every_module_but_recall_off_and_its_code_shown_once(hub, cfg):
+def test_a_new_cohort_has_a_random_id_every_module_but_recall_and_cert_off_and_its_code_shown_once(hub, cfg):
     out = post(hub, "/cohorts", {"label": "Mazar class", "langs": ["prs", "ps"], "bands": ["s1", "p1"]})
     cid, code = out["id"], out["code"]
     assert flags.COHORT_ID.match(cid) and learners.normal_code(code)
     c = get(hub, f"/cohorts/{cid}")
     assert c["bands"] == ["p1", "s1"] and c["settings"]["maturity"] == ["pilot", "stable"] and c["learners"] == 0
-    # spaced review is switched on in a new cohort (C4.1); it shows only once `lessons` is on
-    assert [m["id"] for m in c["modules"] if m["enabled"]] == ["recall"]
+    # spaced review (C4.1) and certificates (C4.2) are switched on in a new cohort; they show only once `lessons` is on
+    assert [m["id"] for m in c["modules"] if m["enabled"]] == ["cert", "recall"]
     assert not any(m["on"] for m in c["modules"])
     assert code not in str(c) and code.replace("-", "") not in str(c)
     db = sqlite3.connect(cfg.data / "hub.db")
@@ -133,15 +136,15 @@ def test_a_new_code_stops_the_old_one_and_the_cards_need_the_code(hub):
 # module switches
 
 def test_a_risky_module_needs_a_confirm_and_a_missing_dependency_turns_on_both(hub):
-    post(hub, f"/cohorts/{OPEN}/flags/ask", {"enabled": False})
-    post(hub, f"/cohorts/{OPEN}/flags/homework", {"enabled": False})
-    r = post(hub, f"/cohorts/{OPEN}/flags/homework", {"enabled": True}, status=409)
+    post(hub, f"/cohorts/{HUB}/flags/ask", {"enabled": False})
+    post(hub, f"/cohorts/{HUB}/flags/homework", {"enabled": False})
+    r = post(hub, f"/cohorts/{HUB}/flags/homework", {"enabled": True}, status=409)
     assert set(r["need"]) == {"both", "confirm"} and r["missing"] == ["ask"]
     assert {x["id"] for x in r["risks"]} == {"ask", "homework"} and all(x["sentence"] for x in r["risks"])
-    post(hub, f"/cohorts/{OPEN}/flags/homework", {"enabled": True, "confirm": True}, status=409)
-    out = post(hub, f"/cohorts/{OPEN}/flags/homework", {"enabled": True, "confirm": True, "both": True})
+    post(hub, f"/cohorts/{HUB}/flags/homework", {"enabled": True, "confirm": True}, status=409)
+    out = post(hub, f"/cohorts/{HUB}/flags/homework", {"enabled": True, "confirm": True, "both": True})
     assert out["turned_on"] == ["ask", "homework"]
-    mods = {m["id"]: m for m in get(hub, f"/cohorts/{OPEN}")["modules"]}
+    mods = {m["id"]: m for m in get(hub, f"/cohorts/{HUB}")["modules"]}
     assert mods["homework"]["enabled"] and mods["ask"]["enabled"] and mods["homework"]["risk"] == "medium"
     assert mods["homework"]["changed_by"] == "admin:hub"
     # a module without risk needs no confirm: the plan flag off and on again
@@ -149,8 +152,34 @@ def test_a_risky_module_needs_a_confirm_and_a_missing_dependency_turns_on_both(h
     assert post(hub, f"/cohorts/{OPEN}/flags/timetable", {"enabled": True})["turned_on"] == ["timetable"]
     post(hub, f"/cohorts/{OPEN}/flags/plan", {"enabled": False})
     assert post(hub, f"/cohorts/{OPEN}/flags/plan", {"enabled": True, "confirm": True})["ok"]
-    log = get(hub, f"/log?cohort={OPEN}")["log"]
+    log = get(hub, f"/log?cohort={HUB}")["log"]
     assert any(x["what"] == "module" and x["detail"].startswith("homework on") and x["by"] == "admin:hub" for x in log)
+
+
+def test_open_keeps_homework_help_off_in_2027_and_photo_behind_the_pilots_gate(hub, tmp_path):
+    # C4.9: ask and homework are refused in open; photo waits for cohorts/gates/photo-open.json to pass
+    for mid in ("ask", "homework"):
+        r = post(hub, f"/cohorts/{OPEN}/flags/{mid}", {"enabled": True, "confirm": True, "both": True}, status=409)
+        assert "off in open in 2027" in r["error"]
+    r = post(hub, f"/cohorts/{OPEN}/flags/photo", {"enabled": True, "confirm": True, "both": True}, status=409)
+    assert "four numbers" in r["error"]
+    c = get(hub, f"/cohorts/{OPEN}")
+    mods = {m["id"]: m for m in c["modules"]}
+    assert (mods["photo"]["lock"], mods["homework"]["lock"], mods["ask"]["lock"]) == ("gate", "open", "open")
+    assert mods["photo"]["settings"] == {"per_day": 5} and c["gate"]["open"] is False and c["gate"]["problems"]
+    assert get(hub, f"/cohorts/{HUB}")["gate"] is None
+    assert {m["id"]: m for m in get(hub, f"/cohorts/{HUB}")["modules"]}["photo"]["settings"] == {"per_day": 10}
+    hub.hub.cfg.cohorts = tmp_path / "cohorts"            # a copy: the repository's gate file is the pilot's to write
+    shutil.copytree(cfg_cohorts := Config().cohorts, hub.hub.cfg.cohorts)
+    assert not (cfg_cohorts / "gates" / "photo-open.json").exists()
+    gate = hub.hub.cfg.cohorts / "gates" / "photo-open.json"
+    gate.parent.mkdir(parents=True, exist_ok=True)
+    nums = {"report": "pilot report", "fix": {"prs": {"sheets": 240, "cells": 3000, "fixed": 150}}, "leaks": 0,
+            "tokens_per_mark": 1400, "d7": "decided"}
+    gate.write_text(json.dumps(nums), encoding="utf-8")
+    c = get(hub, f"/cohorts/{OPEN}")
+    assert c["gate"] == {"open": True, "problems": [], "tokens_per_mark": 1400}
+    assert post(hub, f"/cohorts/{OPEN}/flags/photo", {"enabled": True, "confirm": True, "both": True})["ok"]
 
 
 def test_the_teachers_hold_and_lock_codes_are_settings_checked_against_the_schema(hub):

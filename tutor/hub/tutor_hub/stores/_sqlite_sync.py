@@ -12,8 +12,9 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import (EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_note,
-                   check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, question_status)
+from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_note,
+                   check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, new_cert_id,
+                   question_status)
 
 
 def now() -> str:
@@ -135,6 +136,8 @@ class Store:
         logs = (datetime.now(timezone.utc) - timedelta(days=LOG_DAYS)).isoformat(timespec="seconds")
         self._x("DELETE FROM flag_log WHERE changed_at<?", (logs,))
         self._x("DELETE FROM admin_log WHERE at<?", (logs,))
+        self._x("DELETE FROM daily_counts WHERE day<?",
+                ((datetime.now(timezone.utc) - timedelta(days=COUNT_DAYS - 1)).strftime("%Y-%m-%d"),))
 
     # print jobs
     def add_print(self, *, lesson_id, kind, copies, lang, seed, device) -> int:
@@ -418,6 +421,7 @@ class Store:
             try:
                 self.db.execute("DELETE FROM events WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (token_hash,))
+                self.db.execute("DELETE FROM daily_counts WHERE token_hash=?", (token_hash,))
                 n = self.db.execute("DELETE FROM learners WHERE token_hash=?", (token_hash,)).rowcount
                 self.db.execute("COMMIT")
             except Exception:
@@ -433,6 +437,8 @@ class Store:
                 self.db.execute("DELETE FROM events WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM reset_codes WHERE token_hash IN "
+                                "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
+                self.db.execute("DELETE FROM daily_counts WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM learners WHERE last_seen<?", (cut,))
                 self.db.execute("COMMIT")
@@ -457,3 +463,34 @@ class Store:
 
     def set_wish_status(self, wkey, status) -> int:
         return self._x("UPDATE wishlist SET status=? WHERE wkey=?", (check_wish_status(status), wkey)).rowcount
+
+    # certificates (P25b): no token hash, band, day or name
+    def add_certificate(self, *, course, version, month, cohort) -> str:
+        for _ in range(5):
+            cid = new_cert_id()
+            if self._x("INSERT OR IGNORE INTO certificates(id, course, version, month, cohort) VALUES(?,?,?,?,?)",
+                       (cid, course, version, month, cohort)).rowcount == 1:
+                return cid
+        raise RuntimeError("no free certificate id")
+
+    def certificate(self, cid):
+        return self._one("SELECT id, course, version, month, cohort FROM certificates WHERE id=?", (cid,))
+
+    def results(self, token_hash, lessons):
+        lessons = list(lessons)
+        if not lessons:
+            return {}
+        marks = ",".join("?" * len(lessons))
+        rows = self._all(f"""SELECT object, MAX(verb='lesson.done') AS done,
+                                    MAX(CASE WHEN verb='check.done' THEN value END) AS best
+                             FROM events WHERE token_hash=? AND verb IN ('lesson.done','check.done')
+                             AND object IN ({marks}) GROUP BY object""", (token_hash, *lessons))
+        return {r["object"]: {"done": bool(r["done"]), "best": r["best"]} for r in rows}
+
+    # daily counts (7a): today's, per token and module, kept two days
+    def count_today(self, token_hash, module) -> int:
+        day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        r = self._one("""INSERT INTO daily_counts(token_hash, day, module, n) VALUES(?,?,?,1)
+                         ON CONFLICT(token_hash, day, module) DO UPDATE SET n=n+1 RETURNING n""",
+                      (token_hash, day, module))
+        return int(r["n"])

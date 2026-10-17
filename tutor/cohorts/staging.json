@@ -19,6 +19,7 @@
     "review": true,
     "timetable": true,
     "plan": true,
-    "recall": true
+    "recall": true,
+    "cert": true
   }
 }

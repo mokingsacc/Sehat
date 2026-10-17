@@ -105,8 +105,12 @@ def check_cohort(c) -> list[str]:
         if not isinstance(v, list) or not v or any(x not in allowed for x in v):
             p.append(f"{key} must list some of {', '.join(allowed)}")
     p += settings_problems(c["settings"])
-    if not isinstance(c["modules"], dict) or not all(isinstance(v, bool) for v in c["modules"].values()):
-        p.append("modules must map module ids to true or false")
+    # a module is true or false, or {enabled, settings} when the seed sets its settings too (7a: open's photo limit)
+    if not isinstance(c["modules"], dict) or not all(
+            isinstance(v, bool) or (isinstance(v, dict) and set(v) == {"enabled", "settings"}
+                                    and isinstance(v["enabled"], bool) and isinstance(v["settings"], dict))
+            for v in c["modules"].values()):
+        p.append("modules must map module ids to true or false, or to {enabled, settings}")
     return p
 
 
@@ -170,5 +174,6 @@ def module_settings(manifest: dict, chosen: dict | None) -> dict:
 def seed_rows(seeds: dict[str, dict]) -> list[dict]:
     """The seed cohorts as the store's seed_cohorts() takes them."""
     return [{"id": c["id"], "label": c["label"], "langs": c["langs"], "bands": c["bands"], "settings": c["settings"],
-             "flags": {mid: {"enabled": on, "settings": {}} for mid, on in c["modules"].items()}}
+             "flags": {mid: ({"enabled": on, "settings": {}} if isinstance(on, bool) else dict(on))
+                       for mid, on in c["modules"].items()}}
             for c in seeds.values()]

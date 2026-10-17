@@ -87,6 +87,8 @@ function clean(l) {
     ...(l.alarms === 'off' ? { alarms: 'off' } : {}),
     // 7b (C4.10): an adult's study time, {at: "19:00", min: 30} or 'off' once she answered "A time to study"
     ...(cleanStudy(l.study) !== null ? { study: cleanStudy(l.study) } : {}),
+    // P25b (C4.2): her certificates, [{path, id, month}], never a name (the paper itself is in the cache)
+    ...(cleanCerts(l.certs).length ? { certs: cleanCerts(l.certs) } : {}),
     // P26: an adult on the literacy track has answered "You can read now. Use the reader look?" (asked once)
     ...(l.readerAsked === true ? { readerAsked: true } : {}),
     // C2.3: she has heard "I won't tell you the answer" once, the first time she reached a third hint
@@ -100,6 +102,14 @@ function clean(l) {
     ...(Object.keys(cleanMarks(l.marks)).length ? { marks: cleanMarks(l.marks) } : {}),
     ...(Object.keys(cleanRecall(l.recall)).length ? { recall: cleanRecall(l.recall) } : {}),
   };
+}
+
+function cleanCerts(v) {
+  if (!Array.isArray(v)) return [];
+  return v.filter((x) => x && typeof x.path === 'string' && /^[a-z0-9][a-z0-9-]{0,47}$/.test(x.path)
+    && typeof x.id === 'string' && /^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$/.test(x.id)
+    && typeof x.month === 'string' && /^\d{4}-\d{2}$/.test(x.month))
+    .slice(-50).map((x) => ({ path: x.path, id: x.id, month: x.month }));
 }
 
 // a study time: on the half hour from 5:00 to 22:30, 15, 30, 45 or 60 minutes long (day.js STUDY); else null

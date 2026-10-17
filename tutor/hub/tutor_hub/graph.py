@@ -246,3 +246,41 @@ def match(graphs: dict, goal: str, lessons) -> tuple[dict, list[str]] | None:
         if s >= 0.5 and s > share:
             best, share = (n, ls), s
     return best
+
+
+def find_pathway(graphs: dict, pid: str) -> tuple[dict, dict] | None:
+    """(graph, pathway) for a pathway id, or None."""
+    for g in graphs.values():
+        for p in g.get("pathways") or []:
+            if p["id"] == pid:
+                return g, p
+    return None
+
+
+def closure(g: dict, goal) -> list[dict]:
+    """Every node the goal nodes need, deepest first, then the goal nodes themselves, each once (graph.js closure)."""
+    by_id = {n["id"]: n for n in g["nodes"]}
+    seen, out = set(), []
+
+    def visit(n):
+        if not n or n["id"] in seen:
+            return
+        seen.add(n["id"])
+        for m in n.get("needs") or []:
+            visit(by_id.get(m))
+        out.append(n)
+    for x in goal:
+        visit(by_id.get(x))
+    return out
+
+
+def pathway_lessons(g: dict, p: dict, lessons) -> list[str]:
+    """The pathway's lessons in her audience (`lessons`, her band's in pack order): the lessons of every node its goal
+    needs and of the goal's own nodes, node by node, each node's in pack order."""
+    order = {lid: i for i, lid in enumerate(lessons)}
+    out = []
+    for n in closure(g, p.get("goal") or []):
+        for lid in sorted((x for x in n.get("lessons") or [] if x in order), key=order.get):
+            if lid not in out:
+                out.append(lid)
+    return out

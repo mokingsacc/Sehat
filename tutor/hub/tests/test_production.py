@@ -56,7 +56,9 @@ def test_the_guard_refuses_staging_sehat_and_anything_but_the_pilots_settings():
                    lambda w: w["vars"].update(QALAM_SPIKE="on"), lambda w: w["vars"].update(TUTOR_RELEASE="0"),
                    lambda w: w["vars"].update(TUTOR_LACKS="printer"), lambda w: w["vars"].update(TUTOR_HOME="hub"),
                    lambda w: w["vars"].pop("TUTOR_ORIGINS"), lambda w: w.pop("triggers"),
-                   lambda w: w.update(preview_urls=True)):
+                   lambda w: w.update(preview_urls=True),
+                   lambda w: w["assets"].update(run_worker_first=["/*"]),
+                   lambda w: w["assets"].update(run_worker_first=["/api/*"])):
         w = copy.deepcopy(PROD)
         change(w)
         bad.append(bool(g.problems(w, TEXT)))

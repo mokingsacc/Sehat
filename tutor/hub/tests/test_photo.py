@@ -149,6 +149,19 @@ def test_when_the_reader_cannot_help_the_phone_is_told_why(online):
     assert len(online.fake.sent) == n
 
 
+def test_her_reads_a_day_stop_at_the_cohorts_per_day_and_say_resting(online):
+    # 7a (C4.9): `per_day` (ten; five in open) counted by her token's hash in daily_counts; others still read
+    online.portal.call(lambda: online.hub.store.set_flag(STAGING, "photo", enabled=True, settings={"per_day": 2},
+                                                         changed_by="admin:t"))
+    h = join(online)
+    n = len(online.fake.sent)
+    assert [send(online, headers=h).status_code for _ in range(3)] == [200, 200, 503]
+    assert send(online, headers=h).json() == {"error": "budget"} and len(online.fake.sent) == n + 2
+    assert send(online).status_code == 200                           # another learner has her own count
+    db = online.hub.store.sync.db
+    assert sorted(r[0] for r in db.execute("SELECT n FROM daily_counts WHERE module='photo'")) == [1, 4]
+
+
 def test_a_picture_nobody_knows_reads_as_question_marks(online):
     online.fake.vision.clear()
     r = send(online)
@@ -220,7 +233,8 @@ def test_no_image_byte_is_written_anywhere(online, monkeypatch, caplog, tmp_path
                                                           "strip": b64})
     assert r.status_code == 200
     assert written == []
-    assert {c[0] for c in calls} <= {"learner", "update_learner", "cohort", "flags", "ai_spent", "add_ai_usage"}, calls
+    assert {c[0] for c in calls} <= {"learner", "update_learner", "cohort", "flags", "count_today", "ai_spent",
+                                         "add_ai_usage"}, calls
     flat = repr(calls)
     assert not any(m.decode("latin-1") in flat if isinstance(m, bytes) else m in flat for m in marks)
     assert all(not isinstance(x, (bytes, bytearray)) for _, a, kw in calls for x in (*a, *kw.values()))
@@ -291,7 +305,7 @@ def test_migration_0008_lets_an_existing_staging_database_try_photos(tmp_path):
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?, 'x', '[]', '[]', '{}', 'now')",
                    (cid,))
     assert migrate(db) == ["0008_photo_flag", "0009_homework", "0010_review", "0011_timetable",
-                           "0012_teacher", "0013_plan", "0014_admin", "0015_recall"]
+                           "0012_teacher", "0013_plan", "0014_admin", "0015_recall", "0016_cert"]
     rows = db.execute("SELECT cohort, enabled, changed_by FROM flags WHERE module='photo'").fetchall()
     assert rows == [(STAGING, 1, "seed")]
     assert db.execute("SELECT COUNT(*) FROM flag_log WHERE module='photo'").fetchone() == (1,)

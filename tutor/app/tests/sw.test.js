@@ -23,3 +23,8 @@ test('it caches no API answer and takes over only at the next start', () => {
   assert.match(sw, /url\.pathname\.startsWith\('\/api\/'\)\) return;/);
   assert.doesNotMatch(sw, /skipWaiting|clients\.claim/);
 });
+
+test("a certificate's check page is the server's, never the app's page from the cache", () => {
+  assert.match(sw, /url\.pathname\.startsWith\('\/v\/'\)\) return;/);
+  assert.ok(sw.indexOf("startsWith('/v/')") < sw.indexOf("req.mode === 'navigate'"));
+});

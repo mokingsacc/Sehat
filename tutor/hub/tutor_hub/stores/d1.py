@@ -21,9 +21,9 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from .base import (EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log,
+from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log,
                    check_note, check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json,
-                   question_status)
+                   new_cert_id, question_status)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -211,7 +211,9 @@ class D1Store(Store):
                            self._stmt("DELETE FROM wishlist WHERE last_day<?",
                                       _ago(days=WISH_DAYS).strftime("%Y-%m-%d")),
                            self._stmt("DELETE FROM flag_log WHERE changed_at<?", logs),
-                           self._stmt("DELETE FROM admin_log WHERE at<?", logs)])
+                           self._stmt("DELETE FROM admin_log WHERE at<?", logs),
+                           self._stmt("DELETE FROM daily_counts WHERE day<?",
+                                      _ago(days=COUNT_DAYS - 1).strftime("%Y-%m-%d"))])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)
 
@@ -504,14 +506,17 @@ class D1Store(Store):
     async def delete_learner(self, token_hash) -> bool:
         res = await self._batch([self._stmt("DELETE FROM events WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM reset_codes WHERE token_hash=?", token_hash),
+                                 self._stmt("DELETE FROM daily_counts WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
-        return (res[2].meta.changes or 0) > 0
+        return (res[3].meta.changes or 0) > 0
 
     async def prune_learners(self, idle_days: int):
         cut = _ago(days=idle_days).strftime("%Y-%m-%d")
         await self._batch([self._stmt("DELETE FROM events WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM reset_codes WHERE token_hash IN "
+                                      "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
+                           self._stmt("DELETE FROM daily_counts WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])
 
@@ -534,3 +539,36 @@ class D1Store(Store):
     async def set_wish_status(self, wkey, status) -> int:
         meta = await self._run("UPDATE wishlist SET status=? WHERE wkey=?", check_wish_status(status), wkey)
         return int(meta.changes or 0)
+
+    # certificates (P25b): no token hash, band, day or name
+
+    async def add_certificate(self, *, course, version, month, cohort) -> str:
+        for _ in range(5):
+            cid = new_cert_id()
+            meta = await self._run("INSERT OR IGNORE INTO certificates(id, course, version, month, cohort) "
+                                   "VALUES(?,?,?,?,?)", cid, course, version, month, cohort)
+            if (meta.changes or 0) == 1:
+                return cid
+        raise RuntimeError("no free certificate id")
+
+    async def certificate(self, cid):
+        return await self._one("SELECT id, course, version, month, cohort FROM certificates WHERE id=?", cid)
+
+    async def results(self, token_hash, lessons):
+        lessons = list(lessons)[:90]                     # D1: at most 100 bound values in one statement
+        if not lessons:
+            return {}
+        marks = ",".join("?" * len(lessons))
+        rows = await self._all(f"""SELECT object, MAX(verb='lesson.done') AS done,
+                                          MAX(CASE WHEN verb='check.done' THEN value END) AS best
+                                   FROM events WHERE token_hash=? AND verb IN ('lesson.done','check.done')
+                                   AND object IN ({marks}) GROUP BY object""", token_hash, *lessons)
+        return {r["object"]: {"done": bool(r["done"]), "best": r["best"]} for r in rows}
+
+    # daily counts (7a): today's, per token and module, kept two days
+
+    async def count_today(self, token_hash, module) -> int:
+        r = await self._one("""INSERT INTO daily_counts(token_hash, day, module, n) VALUES(?,?,?,1)
+                               ON CONFLICT(token_hash, day, module) DO UPDATE SET n=n+1 RETURNING n""",
+                            token_hash, _ago().strftime("%Y-%m-%d"), module)
+        return int(r["n"])

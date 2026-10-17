@@ -10,6 +10,10 @@ keeps, as for typed answers, so on this route the server never learns right or w
 The strip lives in this request's memory only. It is never written to the database, R2, a file or a log, and the
 provider is asked not to keep it (`store: false`, no Files API). Only the call itself is counted in `ai_usage`
 (tokens, never the picture). `tests/test_photo.py` patches every writer to check this.
+
+A learner's reads a day are counted (7a, C4.9): the module's `per_day` setting (ten; five in `open`) against
+`daily_counts`, by her token's hash, kept two days. Over it the route answers 503 "budget", as the cohort's AI budget
+does, and the phone says "Photo checking is resting today. Type your answers instead."
 """
 import base64
 import binascii
@@ -20,7 +24,7 @@ import re
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 
-from .. import sheets
+from .. import flags, sheets
 from ..textnorm import digits_to_latin
 
 log = logging.getLogger("tutor.photo")
@@ -143,6 +147,12 @@ def router(hub, needs) -> APIRouter:
         if size != (STRIP_W, strip_height(len(cells))):
             raise HTTPException(422, "the strip is not this sheet's cells")
         cohort = request.query_params.get("cohort") or who["cohort"]
+        # her photos today against the cohort's `per_day` (C4.9: five in `open`, ten elsewhere), counted by her token's
+        # hash in daily_counts (two days); over it, the phone says photo checking is resting today
+        f = await hub.store.flags(cohort)
+        per_day = flags.module_settings(hub.modules[MODULE], (f.get(MODULE) or {}).get("settings"))["per_day"]
+        if await hub.store.count_today(who["token_hash"], MODULE) > per_day:
+            raise HTTPException(503, "budget")
         res = await hub.gateway.call("read_sheet", prompt(cells, lang), module=MODULE, lang=lang, cohort=cohort,
                                      images=[data], max_tokens=60 + 20 * len(cells), temperature=0.0)
         del data, raw

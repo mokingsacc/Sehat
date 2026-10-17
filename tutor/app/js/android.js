@@ -39,6 +39,10 @@ export const askNotify = () => { call('askNotify'); };
 export const openSettings = () => { call('openSettings'); };
 // false only on Android 12 without exact alarms (bells then come within 5 minutes); true in a browser
 export const exactAlarms = () => (isApp() ? call('exactAlarms') !== false : true);
+// P25b: the phone's own print dialog for what this page shows for print (a certificate, A4 landscape), under a title
+// that names no one; an older APK without it prints nothing, and the page says so
+export const canPrint = () => isApp() && typeof bridge().print === 'function';
+export const print = (title) => { call('print', String(title)); };
 
 // "1.10.0" is newer than "1.9.2"
 export function newer(a, b) {

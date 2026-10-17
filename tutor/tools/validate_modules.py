@@ -10,7 +10,7 @@ from pathlib import Path
 TUTOR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TUTOR / "hub"))
 
-from tutor_hub import flags, modules  # noqa: E402
+from tutor_hub import admin, flags, modules  # noqa: E402
 
 
 def main(argv=None):
@@ -31,6 +31,9 @@ def main(argv=None):
             problems.append(f"{mid}: has slots but no app/js/modules/{mid}.js")
     for name, c in seeds.items():
         problems += [f"cohort {name}: switches unknown module {m}" for m in c["modules"] if m not in found]
+        for mid, v in c["modules"].items():          # a seed's own settings for a module (7a), as the admin's are
+            if isinstance(v, dict) and mid in found:
+                problems += [f"cohort {name}: {mid}.{x}" for x in admin.module_settings_problems(found[mid], v["settings"])]
     for p in problems:
         print("problem:", p)
     print(f"{len(found)} module(s), {len(seeds)} seed cohort(s), {len(problems)} problem(s)")

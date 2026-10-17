@@ -19,10 +19,11 @@ TUTOR_HOME = "online"                  # learners see the online consent text (O
 TUTOR_ORIGINS = "https://appassets.androidplatform.net"   # the Android app's own page (P23) may call the API
 QALAM_SPIKE = "on"                     # staging only: GET /api/_spike answers the P7 questions (entry.py)
 
-# the app and the lesson pictures, served before the Worker; only /api/ reaches Python
+# the app and the lesson pictures, served before the Worker; only /api/ and /v/ (a certificate's check page, P25b)
+# reach Python
 [assets]
 directory = "build/public"
-run_worker_first = ["/api/*"]
+run_worker_first = ["/api/*", "/v/*"]
 
 [[d1_databases]]
 binding = "DB"

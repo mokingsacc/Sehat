@@ -46,8 +46,9 @@ def problems(w: dict, text: str = "", *, deploy: bool = False, ref: str | None =
         out.append("preview_urls = false")
     if "python_workers" not in w.get("compatibility_flags", []):
         out.append("compatibility_flags needs python_workers")
-    if "binding" in w.get("assets", {}) or w.get("assets", {}).get("run_worker_first") != ["/api/*"]:
-        out.append('assets: no binding, run_worker_first = ["/api/*"]')
+    # only the API and the certificate check page (/v/<id>, P25b) reach Python; the app is static
+    if "binding" in w.get("assets", {}) or w.get("assets", {}).get("run_worker_first") != ["/api/*", "/v/*"]:
+        out.append('assets: no binding, run_worker_first = ["/api/*", "/v/*"]')
     if w.get("triggers") != {"crons": ["17 22 * * *"]}:
         out.append('triggers: the daily retention cron only, crons = ["17 22 * * *"]')
     v = w.get("vars", {})

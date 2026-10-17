@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,6 +12,8 @@ import android.graphics.Insets;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.print.PrintManager;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +46,8 @@ import androidx.webkit.WebViewFeature;
  *
  * window.QalamAndroid (Bridge below): the school day's alarms (setAlarms, cancelAlarms; day.js), the notification
  * question (notifyState, askNotify; asked after "This phone is mine" and its explainer), exactAlarms, openSettings,
- * version and online. The camera is granted to the app's own page only, after the page's explainer. Links to other
- * sites, the sheet's print page and /get open in the phone's browser.
+ * version, online and print (a certificate, P25b). The camera is granted to the app's own page only, after the
+ * page's explainer. Links to other sites, the sheet's print page and /get open in the phone's browser.
  */
 public class MainActivity extends Activity {
     static final String HOST = "appassets.androidplatform.net";
@@ -352,6 +355,20 @@ public class MainActivity extends Activity {
         @JavascriptInterface
         public boolean exactAlarms() {
             return Alarms.exactAllowed(MainActivity.this);
+        }
+
+        /** P25b: the phone's print dialog for this page as it prints (a certificate, A4 landscape). The title names
+         *  no one ("Qalam certificate QC-..."); the typed name is only in the page, and nothing is kept here. */
+        @JavascriptInterface
+        public void print(String title) {
+            runOnUiThread(() -> {
+                PrintManager pm = (PrintManager) getSystemService(Context.PRINT_SERVICE);
+                if (pm == null) return;
+                String t = title == null ? "Qalam" : title;
+                PrintAttributes attrs = new PrintAttributes.Builder()
+                        .setMediaSize(PrintAttributes.MediaSize.ISO_A4.asLandscape()).build();
+                pm.print(t, web.createPrintDocumentAdapter(t), attrs);
+            });
         }
 
         /** The phone's settings page for Qalam (to allow the camera or notifications after a refusal). */

@@ -180,6 +180,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   that asks only the time (from 7:00 in the evening, 30 minutes); "Study time: 20 minutes left" on Home during it, with
   a bell at its start and end while Qalam is open, and the APK's alarm once the phone is hers; Settings → Study time
   for on or off, the time and the length. Nothing is sent.
+- **P25b with 7a, done:** certificates (C4.2): a finished pathway with a certificate offers "Get my certificate" on
+  its card and on the Done card; the server reads her own events (with consent) and writes a row with no learner in
+  it; she may type a name that is printed and forgotten, never sent; the paper is A4 landscape with a QR code to
+  `/v/<id>`, which says whether a certificate is real. On the hub the printer prints it with an empty line. 7a
+  (C4.9): photo marking for `open` waits for the pilot's four numbers in the admin's hands, with five reads a day a
+  learner there (ten elsewhere); Ask and Homework help stay off in `open` in 2027.
 
 ## January 2027: buy and test
 

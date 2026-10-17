@@ -282,3 +282,15 @@ class SqliteStore(Store):
 
     async def set_wish_status(self, wkey, status) -> int:
         return await self._run("set_wish_status", wkey, status)
+
+    async def add_certificate(self, *, course, version, month, cohort) -> str:
+        return await self._run("add_certificate", course=course, version=version, month=month, cohort=cohort)
+
+    async def certificate(self, cid):
+        return await self._run("certificate", cid)
+
+    async def results(self, token_hash, lessons):
+        return await self._run("results", token_hash, list(lessons))
+
+    async def count_today(self, token_hash, module) -> int:
+        return await self._run("count_today", token_hash, module)

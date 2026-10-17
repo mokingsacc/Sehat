@@ -28,11 +28,12 @@
     "ask": false,
     "print": false,
     "teacher": false,
-    "photo": false,
+    "photo": {"enabled": false, "settings": {"per_day": 5}},
     "homework": false,
     "review": false,
     "timetable": true,
     "plan": true,
-    "recall": true
+    "recall": true,
+    "cert": true
   }
 }

@@ -18,10 +18,11 @@ TUTOR_HOME = "online"                  # the online consent text
 TUTOR_RELEASE = "1"                    # serve only signed lessons from released packs
 TUTOR_ORIGINS = "https://appassets.androidplatform.net"   # the Android app's own page may call the API
 
-# the app and the lesson pictures, served before the Worker; only /api/ reaches Python
+# the app and the lesson pictures, served before the Worker; only /api/ and /v/ (a certificate's check page, P25b)
+# reach Python
 [assets]
 directory = "build/public"
-run_worker_first = ["/api/*"]
+run_worker_first = ["/api/*", "/v/*"]
 
 [[d1_databases]]
 binding = "DB"

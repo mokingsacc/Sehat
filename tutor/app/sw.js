@@ -5,7 +5,7 @@
 // as it does on the hub, where plain http allows no service worker (F2). A new version of this file takes over at
 // the next start, without a banner. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-7b-1';
+const VERSION = 'qalam-p25b-1';
 const SHELL_CACHE = 'shell-' + VERSION;
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const SHELL = [
@@ -18,6 +18,7 @@ const SHELL = [
   'js/android.js',
   'js/aliases.js',
   'js/bands.js',
+  'js/certcheck.js',
   'js/day.js',
   'js/events.js',
   'js/graph.js',
@@ -37,6 +38,7 @@ const SHELL = [
   'js/state.js',
   'js/ui.js',
   'js/screens/ask.js',
+  'js/screens/cert.js',
   'js/screens/check.js',
   'js/screens/consent.js',
   'js/screens/credits.js',
@@ -52,6 +54,7 @@ const SHELL = [
   'js/screens/update.js',
   'js/screens/welcome.js',
   'js/screens/who.js',
+  'js/modules/cert.js',
   'js/modules/check.js',
   'js/modules/homework.js',
   'js/modules/lessons.js',
@@ -107,6 +110,7 @@ self.addEventListener('fetch', (e) => {
   // staff pages and their scripts: never kept (/review/ P17, /teacher/ P20, /admin/ P21)
   if (/^\/(review|teacher|admin|js\/review|js\/teacher|js\/admin)\//.test(url.pathname) || url.searchParams.has('preview')) return;
   if (url.pathname.startsWith('/get/')) return;                         // the download page and the APK (P23): never kept
+  if (url.pathname.startsWith('/v/')) return;                           // a certificate's check page (P25b): the server's
   if (req.mode === 'navigate') {                                       // /, /?join=CODE, /#/...: the app's page
     e.respondWith(staleWhileRevalidate(req, SHELL_CACHE, new Request(new URL('./', self.location).href)));
     return;

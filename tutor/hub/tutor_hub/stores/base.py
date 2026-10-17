@@ -140,15 +140,29 @@ The wishlist (P22): what learners wanted to learn and no lesson matched, never w
   status}`, the most asked for first, then the latest; every cohort's when `cohort` is None.
 - `set_wish_status(wkey, status) -> int`: the admin's mark (`WISH_STATUS`: new, planned, not_for_qalam) on every row
   of that wish, in every cohort, band and language; returns how many rows.
+
+Certificates (P25b, C4.2): a pathway finished in a month, never who finished it
+- `add_certificate(*, course, version, month, cohort) -> id`: a new row under a fresh random id (`new_cert_id`).
+- `certificate(cid) -> dict | None`: `{id, course, version, month, cohort}`.
+- `results(token_hash, lessons) -> {lesson: {done, best}}`: from her own events, for each of `lessons` she has any:
+  `done` when a `lesson.done` exists, `best` the highest `check.done` (None without one).
+
+Daily counts (7a, C4.9): what a learner's token did today against a module's limit
+- `count_today(token_hash, module) -> int`: one more for today (UTC) and the new count. Rows older than yesterday
+  go at the next prune (`COUNT_DAYS`, two days), and with the learner.
 """
 
 import json
 import random
 import re
+import secrets
 
 WISH_DAYS = 90             # a wish not asked for again in 90 days is deleted (BUILD-PLAN 3.4)
 WISH_MAX = 200            # characters of a wish kept
 WISH_STATUS = ("new", "planned", "not_for_qalam")
+COUNT_DAYS = 2            # daily_counts: today and yesterday (C4.9)
+CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+CERT_ID = re.compile(r"^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$")
 LOG_DAYS = 730            # flag_log and admin_log are kept 2 years (BUILD-PLAN 3.4)
 ADMIN_WHAT = ("cohort.new", "cohort.settings", "cohort.kill", "cohort.code", "release", "rollback", "wish",
               "staff.add", "staff.remove")
@@ -171,6 +185,12 @@ def hints_json(hints) -> str | None:
         raise ValueError("hints are a list of at most three rungs, each {rung, text}")
     return json.dumps(hints, ensure_ascii=False)
 LEARNER_CHANGES = ("band", "consent_kind", "consent_version", "consent_at", "last_seen")
+
+
+def new_cert_id() -> str:
+    """`QC-` and ten Crockford base32 characters (50 random bits) in two groups: QC-7K3M9-TQX2A."""
+    x = "".join(secrets.choice(CROCKFORD) for _ in range(10))
+    return f"QC-{x[:5]}-{x[5:]}"
 
 
 def draw_number(used) -> int:

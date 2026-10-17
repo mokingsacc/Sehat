@@ -800,3 +800,30 @@ async def test_the_staff_list_and_a_wish_marked_everywhere(store):
     await store.add_review_note(lesson="l2", step=0, role="Pashto reader", step_hash="sha256:b", status="change",
                                 chips=["word"], text="x")
     assert [n["lesson"] for n in await store.review_notes(None)] == ["l1", "l2"]
+
+
+async def test_a_certificate_row_holds_no_learner_and_her_results_come_from_her_own_events(store):
+    # P25b (C4.2): an id, a course, a version, a month and a cohort; nothing about who
+    cid = await store.add_certificate(course="ad-money", version="1", month="2027-10", cohort="c1")
+    assert re.fullmatch(r"QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}", cid)
+    assert await store.certificate(cid) == {"id": cid, "course": "ad-money", "version": "1", "month": "2027-10",
+                                            "cohort": "c1"}
+    assert await store.certificate("QC-00000-00000") is None
+    assert cid != await store.add_certificate(course="ad-money", version="1", month="2027-10", cohort="c1")
+    await store.add_events([ev(token_hash="her", verb="lesson.done", object="a-1", value=3),
+                            ev(token_hash="her", verb="check.done", module="check", object="a-2", value=60),
+                            ev(token_hash="her", verb="check.done", module="check", object="a-2", value=90),
+                            ev(token_hash="other", verb="lesson.done", object="a-3", value=3)])
+    assert await store.results("her", ["a-1", "a-2", "a-3"]) == {"a-1": {"done": True, "best": None},
+                                                                 "a-2": {"done": False, "best": 90}}
+    assert await store.results("her", []) == {}
+
+
+async def test_daily_counts_count_today_and_go_after_two_days(store):
+    # 7a (C4.9): per token and module, today (UTC)
+    assert [await store.count_today("t1", "photo") for _ in range(3)] == [1, 2, 3]
+    assert await store.count_today("t1", "cert") == 1 and await store.count_today("t2", "photo") == 1
+    db = store.db.sqlite if isinstance(store, D1Store) else store._inner.db
+    db.execute("UPDATE daily_counts SET day='2020-01-01' WHERE token_hash='t2'")
+    await store.prune(60)
+    assert [r[0] for r in db.execute("SELECT token_hash FROM daily_counts ORDER BY module")] == ["t1", "t1"]

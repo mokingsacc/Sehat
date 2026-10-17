@@ -34,6 +34,9 @@ const T = {
     new_code_q: 'Make a new class code? The old one stops working at once.',
     modules: 'Modules', module: 'Module', risk: 'Risk', maturity: 'Maturity', on: 'On', settings: 'Settings',
     needs: 'needs {x}', locked_moderation: 'locked: needs paid human moderation', locked_maturity: 'only where drafts are taken',
+    locked_gate: "waits for the pilot's four numbers", locked_open: 'off in open in 2027',
+    gate_wait: "Photo marking in open waits for the pilot's four numbers:",
+    gate_open: 'The gate is passed. The budget for open: marks a day × {n} tokens a mark × 1.2.',
     host: 'not on this host ({x})', depends: 'depends on {x}', turn_on: 'Turn on', turn_on_both: 'Turn on both',
     turn_on_q: 'Turn on {m} for {c}?', also: 'This also turns on: {x}.', edit: 'Edit', save: 'Save',
     diff_q: 'Save these changes?', no_change: 'Nothing changed.',
@@ -354,7 +357,7 @@ function moduleTable(c, again) {
       }
     }
   };
-  const note = (row) => [row.lock === 'moderation' ? t('locked_moderation') : row.lock === 'maturity' ? t('locked_maturity') : null,
+  const note = (row) => [row.lock ? t('locked_' + row.lock) : null,
     row.host.length ? t('host', { x: row.host.join(', ') }) : null,
     row.depends.length ? t('depends', { x: row.depends.join(', ') }) : null].filter(Boolean).join(' · ');
   const tr = (row) => h('tr', { class: row.lock && !row.enabled ? 'locked' : null },
@@ -366,9 +369,12 @@ function moduleTable(c, again) {
     h('td', {}, Object.keys(row.schema).length ? h('button', { type: 'button', class: 'chip', onClick: () => moduleSettings(c, row, again) },
       t('settings')) : null),
     h('td', {}, h('small', { class: 'muted' }, note(row))));
+  // open's recipe (C4.9): what the photo gate still waits for, or the budget rule once it is passed
+  const gate = c.gate ? h('p', { class: 'muted' }, c.gate.open ? t('gate_open', { n: num(c.gate.tokens_per_mark) })
+    : [t('gate_wait'), ...c.gate.problems].join(' ')) : null;
   return h('div', { class: 'atable' }, h('table', {}, h('thead', {}, h('tr', {},
     [t('module'), t('risk'), t('maturity'), t('bands', { b: '' }).trim(), t('on'), t('settings'), ''].map((x) => h('th', {}, x)))),
-  h('tbody', {}, c.modules.map(tr))));
+  h('tbody', {}, c.modules.map(tr))), gate);
 }
 
 const show = (v) => (v === true ? 'on' : v === false ? 'off' : v === undefined || v === null || v === '' ? '—' : String(v));

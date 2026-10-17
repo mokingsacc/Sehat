@@ -11,7 +11,7 @@ Every change is logged with the admin's label: a module switch in `flag_log` (as
 
 - `GET  /api/m/admin/me`: her label and how she came in.
 - `GET  /api/m/admin/cohorts`; `POST /api/m/admin/cohorts` `{label, langs, bands}`: a new cohort, with a random id,
-  every module off and a class code shown once.
+  every module off but `recall` and `cert` (C4.1, C4.2) and a class code shown once.
 - `GET  /api/m/admin/cohorts/{id}`: the cohort, its learner count, the kill switches, its settings, today's AI, and
   the module table (risk and the core's sentence, maturity, bands, on, settings and their schema, what locks it).
 - `POST /api/m/admin/cohorts/{id}/kill` `{switch: ai|day, on, all?}`: the two kill switches (BUILD-PLAN 3.3).
@@ -44,7 +44,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import flags, learners, modules, packs, qr, timetable
+from . import flags, gates, learners, modules, packs, qr, timetable
 from .modules import BANDS
 from .staff import id_hash
 from .stores.base import WISH_STATUS
@@ -171,15 +171,29 @@ def router(hub) -> APIRouter:
     def base_url(request: Request) -> str:
         return hub.cfg.public_url if hub.cfg.home == "hub" else f"{request.url.scheme}://{request.url.netloc}"
 
+    def open_id() -> str | None:
+        return (hub.seeds.get("open") or {}).get("id")
+
     def lock_of(m: dict, cohort: dict) -> str | None:
         """Why a module cannot be switched on in this cohort: blocked without paid-human moderation, or a maturity
         the cohort does not take (drafts only where the cohort takes drafts: staging)."""
         if modules.risk(m) == "blocked" and not flags.paid_human(cohort):
             return "moderation"
+        if cohort["id"] == open_id():                  # C4.9: the pilot's gate for photo; no Homework help in 2027
+            if m["id"] in gates.OFF_IN_OPEN:
+                return "open"
+            if m["id"] == "photo" and gates.photo_open(hub.cfg.cohorts)[0]:
+                return "gate"
         maturity = set((cohort.get("settings") or {}).get("maturity") or flags.DEFAULT_MATURITY)
         if m["maturity"] not in maturity:
             return "maturity"
         return None
+
+    def photo_gate() -> dict:
+        """The `open` recipe in the admin's hands (C4.9): the gate's problems, or its numbers and the budget rule."""
+        problems, g = gates.photo_open(hub.cfg.cohorts)
+        return {"open": not problems, "problems": problems,
+                "tokens_per_mark": None if problems else g["tokens_per_mark"]}
 
     async def day_spend(cid: str) -> dict:
         today = days_back(1)[0]
@@ -233,9 +247,11 @@ def router(hub) -> APIRouter:
         else:
             raise HTTPException(503, "try again")
         # spaced review is on in new cohorts (C4.1): no AI, no free text, only its event leaves the phone; it shows
-        # once the admin turns `lessons` on
-        if "recall" in hub.modules:
-            await hub.store.set_flag(cid, "recall", enabled=True, settings={}, changed_by=by(me))
+        # once the admin turns `lessons` on;
+        # and certificates (C4.2): no AI, no free text, no name sent; they show where a pathway has one
+        for mid in ("recall", "cert"):
+            if mid in hub.modules:
+                await hub.store.set_flag(cid, mid, enabled=True, settings={}, changed_by=by(me))
         code = learners.new_class_code()
         await hub.store.set_class_code(cid, learners.code_hash(learners.normal_code(code)))
         await log(me, "cohort.new", f"{body.label.strip()} ({', '.join(body.bands)}; {', '.join(body.langs)})", cid)
@@ -266,6 +282,7 @@ def router(hub) -> APIRouter:
                 "learners": counts.get(cid, 0), "settings": c["settings"], "ai": flags.ai_on(c),
                 "day": bool((f.get("timetable") or {}).get("enabled")), "own": cid == hub.cohort_id,
                 "budget": hub.gateway.budget, "cap": cap, "spend": dict(spend, pct=pct(spend["tokens"], cap)),
+                "gate": photo_gate() if cid == open_id() else None,
                 "modules": rows, "moderation": flags.MODERATION, "maturities": modules.MATURITY,
                 "timetable": {"default": timetable.DEFAULT, "days": timetable.DAYS, "kinds": timetable.KINDS,
                               "bands": timetable.BANDS, "subjects": timetable.SUBJECTS}}
@@ -325,6 +342,11 @@ def router(hub) -> APIRouter:
                 raise HTTPException(403, f"{x} needs paid human moderation")
             if why == "maturity":
                 raise HTTPException(409, f"this cohort does not take {hub.modules[x]['maturity']} modules ({x})")
+            if why == "open":
+                raise HTTPException(409, f"{x} stays off in open in 2027 (C4.9)")
+            if why == "gate":
+                raise HTTPException(409, "photo marking waits for the pilot's four numbers: "
+                                    + "; ".join(gates.photo_open(hub.cfg.cohorts)[0]))
         missing = [x for x in todo if x != mid]
         risky = [x for x in todo if modules.risk(hub.modules[x]) in ("medium", "high")
                  and not (x == mid and (f.get(x) or {}).get("enabled"))]
