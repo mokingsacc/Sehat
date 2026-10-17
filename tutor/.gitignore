@@ -3,3 +3,6 @@ data/
 .venv/
 .pytest_cache/
 review-sheets/
+# the Quran set's recitation files beyond Al-Fatiha: fetched with tools/quran_set.py fetch-audio (tens of MB)
+content/quran/audio/*/*.mp3
+!content/quran/audio/*/1_*.mp3

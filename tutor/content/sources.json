@@ -839,8 +839,8 @@
     ],
     "offline": true,
     "attribution": "Quran text: Tanzil Project (tanzil.net), unchanged.",
-    "notes": "'Permission is granted to copy and distribute verbatim copies of the Quran text ... but changing the text is not allowed.' Use it as the only Quran text in the app, shown by verse reference; never let the AI write or retype verses.",
-    "checked": "2026-10-16"
+    "notes": "'Permission is granted to copy and distribute verbatim copies of the Quran text ... but changing the text is not allowed.' Use it as the only Quran text in the app, shown by verse reference; never let the AI write or retype verses. Imported 17 Oct 2026 (P29): the Uthmani text, version 1.1, byte for byte with its notice block, and Tanzil's quran-data.xml, in content/quran/ under their SHA-256.",
+    "checked": "2026-10-17"
   },
   {
     "id": "quranenc-translations",
@@ -875,8 +875,8 @@
     ],
     "offline": true,
     "attribution": "Translation of the meanings: {translator}, {publisher}, version {version}, from QuranEnc.com.",
-    "notes": "Seven conditions, starting 'No modification, addition, or deletion of the content'; also notify QuranEnc of notes and update to its latest version. Dari: Muhammad Anwar Badakhshani; Pashto: Rowwad, Abu Zakaria, Janbaz Sarfaraz. A religious reviewer should pick which translation to show.",
-    "checked": "2026-10-16"
+    "notes": "Seven conditions, starting 'No modification, addition, or deletion of the content'; also notify QuranEnc of notes and update to its latest version. Dari: Muhammad Anwar Badakhshani; Pashto: Rowwad, Abu Zakaria, Janbaz Sarfaraz. A religious reviewer should pick which translation to show. Re-read at import, 17 Oct 2026 (P29): Dari Badakhshani V1.0.0 (16 Feb 2021) and Pashto Rowwad 1.0.1 (15 Feb 2024) are bundled as published, footnotes kept, as the candidates; Abu Zakaria (V1.0.1) and Sarfaraz (V1.0.0) can replace Rowwad with tools/quran_set.py if the scholar picks one.",
+    "checked": "2026-10-17"
   },
   {
     "id": "alquran-cloud-recitations",
@@ -906,8 +906,8 @@
     ],
     "offline": true,
     "attribution": "Recitation by {reciter}, via Islamic Network (alquran.cloud). Copyright the reciter.",
-    "notes": "The best openly stated recitation route found: free non-commercial redistribution, files kept exactly as published. Keep a way to remove a reciter on request; pick one widely accepted Hafs reciter with a religious reviewer.",
-    "checked": "2026-10-16"
+    "notes": "The best openly stated recitation route found: free non-commercial redistribution, files kept exactly as published. Keep a way to remove a reciter on request; pick one widely accepted Hafs reciter with a religious reviewer. Terms re-read 17 Oct 2026: 'licensed to us by the reciters or their estates for free, non-commercial redistribution at the bitrates we publish'. Bundled (P29) as ar.husary at 64 kbps, as published: the list of Al-Fatiha and Juz 'Amma (571 files, 40 MB) in content/quran/audio/, Al-Fatiha's files in the repository, the rest fetched and hash-checked by tools/quran_set.py; quran-1 is NC.",
+    "checked": "2026-10-17"
   },
   {
     "id": "king-fahd-complex-recitations",
@@ -937,8 +937,8 @@
     ],
     "offline": true,
     "attribution": "Recitation from the King Fahd Glorious Quran Printing Complex.",
-    "notes": "The page returned HTTP 503 every time, so its grant could not be read. If it says what search summaries report, this becomes BUNDLE (unchanged files) and is the most authoritative recitation source.",
-    "checked": "2026-10-16"
+    "notes": "The page returned HTTP 503 every time, so its grant could not be read. If it says what search summaries report, this becomes BUNDLE (unchanged files) and is the most authoritative recitation source. Read again at import (P29), 17 Oct 2026: the page and the site's home were unreachable (connection reset), so the grant is still unread: it stays ASK and nothing of it is bundled.",
+    "checked": "2026-10-17"
   },
   {
     "id": "quranicaudio-everyayah",
@@ -965,6 +965,36 @@
     "attribution": "",
     "notes": "QuranicAudio says files 'may be downloaded and used for personal use' and many come from CDs whose rules forbid resale; EveryAyah states no licence. Do not bundle; use Islamic Network or the King Fahd Complex instead.",
     "checked": "2026-10-16"
+  },
+  {
+    "id": "islamhouse",
+    "name": "IslamHouse Dari and Pashto books",
+    "url": "https://islamhouse.com/",
+    "owner": "IslamHouse.com",
+    "licence": "No terms of use found (home page read 17 Oct 2026)",
+    "licenceUrl": "https://islamhouse.com/",
+    "class": "ASK",
+    "flags": [],
+    "languages": [
+      "prs",
+      "ps"
+    ],
+    "bands": [
+      "s1",
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "seerah"
+    ],
+    "formats": [
+      "text",
+      "pdf"
+    ],
+    "offline": false,
+    "attribution": "From IslamHouse.com, with permission.",
+    "notes": "Registered by C4.7 so that nothing of it is copied: no terms were found, so it is ASK (a link at most until content/permissions/islamhouse.md records a written permission). Seerah is our own text, drafted with the scholar; IslamHouse is not a source for it.",
+    "checked": "2026-10-17"
   },
   {
     "id": "hadith-api",

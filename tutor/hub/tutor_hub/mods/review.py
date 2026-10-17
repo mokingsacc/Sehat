@@ -21,6 +21,13 @@ Since P25a (C4.1) a skills graph is one more page type, kept under the name `gra
 its nodes are its steps 1 to N (each with its needs and lessons), step 0 the rest (the pathways and the version).
 The queue lists the graphs that need her role under `graphs`; the routes are the lessons' under
 `/api/m/review/graphs/{subject}`: GET, `POST .../steps/{n}`, `POST .../sign`.
+
+Since P29 (C4.7) the Quran set is one more, kept as `quran:set`, for the "Hanafi scholar" its review block needs:
+step 0 is what the set is (the text's edition, each translation's version and credit, the reciter, Tanzil's notice),
+steps 1 to 114 the surahs (each its verses' text, translations with their footnotes, and the listed recitation's
+hash). The page reads each surah from `/quran/surah/<n>.json` as the reader does; OK on a surah waits until every
+recitation it has here has played. `GET /api/m/review/quran`, `POST .../steps/{n}`, `POST .../sign`. Once pulled
+into content/quran/index.json (tools/pull_signoffs.py), the admin may switch the reader on.
 """
 import json
 from datetime import datetime, timezone
@@ -59,7 +66,7 @@ def _step_hashes(lib, lid: str) -> list[str]:
     pid = lib.lesson_pack[lid]
     pdir, clips = lib.packs[pid]["_dir"], lib.packs[pid].get("_clips", {})
     rest = {k: v for k, v in raw.items() if k not in ("steps", "review") and not k.startswith("_")}
-    return [packs.content_hash(rest, pdir, clips)] + [packs.content_hash({"step": st}, pdir, clips)
+    return [packs.content_hash(rest, pdir, clips)] + [packs.content_hash({"step": st}, pdir, clips, lib.quran)
                                                       for st in raw.get("steps", [])]
 
 
@@ -112,6 +119,17 @@ def _graph_status(g, role, notes, signs) -> dict:
     return {"status": "step", "step": min(max(seen) + 1, len(g["nodes"])), "of": len(g["nodes"])}
 
 
+QURAN = "quran:set"
+
+
+def _quran_hashes(q) -> list[str]:
+    """The set's steps: what it is as step 0 (index.json without its review: every file's hash), then each surah
+    (its verses as an ayah step would show them)."""
+    def h(x):
+        return licences.sha256_text(json.dumps(x, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    return [q.hash] + [h([q.verse_hash(s["n"], a) for a in range(1, s["ayas"] + 1)]) for s in q.surahs]
+
+
 def _latest(notes: list[dict]) -> dict[int, dict]:
     out = {}
     for n in notes:
@@ -151,6 +169,12 @@ def router(hub, needs) -> APIRouter:
             raise HTTPException(403, "this lesson does not need your role")
         return role
 
+    def quran_set():
+        """The whole Quran set, when it is here and checked (the Worker keeps only its light copy: the text is
+        static there, and the review reads it from /quran/surah/<n>.json all the same)."""
+        q = hub.library.quran
+        return q if q is not None and q.ok and q.index else None
+
     def lesson_or_404(lid: str):
         if lid not in hub.library.lessons:
             raise HTTPException(404, "no such lesson")
@@ -159,7 +183,9 @@ def router(hub, needs) -> APIRouter:
     @r.get("/me", dependencies=needs(MODULE))
     async def me(request: Request):
         m = await staff(request)
-        roles = sorted({x for l in [*hub.library.lessons.values(), *hub.library.graphs.values()]
+        q = quran_set()
+        roles = sorted({x for l in [*hub.library.lessons.values(), *hub.library.graphs.values(),
+                                    *([q.index] if q else [])]
                         for x in (l.get("review") or {}).get("needs") or []})
         return {"label": m["label"], "role": m["role"], "initials": m["initials"], "via": m["via"], "roles": roles}
 
@@ -187,7 +213,13 @@ def router(hub, needs) -> APIRouter:
                 key = "graph:" + sub
                 st = _graph_status(g, role, await hub.store.review_notes(key, role), await hub.store.signoffs(key))
                 graphs.append({"subject": sub, "version": g["version"], "nodes": len(g["nodes"]), **st})
-        return {"role": role, "packs": out, "graphs": graphs}
+        q = quran_set()
+        qrow = None
+        if q and role in ((q.index.get("review") or {}).get("needs") or []):
+            st = _graph_status({"_hash": q.hash, "nodes": q.surahs}, role, await hub.store.review_notes(QURAN, role),
+                               await hub.store.signoffs(QURAN))
+            qrow = {"surahs": len(q.surahs), "short": q.hash[7:15], **st}
+        return {"role": role, "packs": out, "graphs": graphs, "quran": qrow}
 
     @r.get("/lessons/{lid}", dependencies=needs(MODULE))
     async def lesson(lid: str, request: Request, role: str | None = None):
@@ -329,6 +361,72 @@ def router(hub, needs) -> APIRouter:
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": g["_hash"][7:15]}
+
+    def quran_role(me: dict, asked: str | None):
+        q = quran_set()
+        if q is None:
+            raise HTTPException(404, "no Quran set here")
+        role = me["role"] or (asked or "").strip()
+        if not role:
+            raise HTTPException(422, "say which role you review for")
+        if role not in ((q.index.get("review") or {}).get("needs") or []):
+            raise HTTPException(403, "the Quran set does not need your role")
+        return q, role
+
+    @r.get("/quran", dependencies=needs(MODULE))
+    async def quran_page(request: Request, role: str | None = None):
+        m = await staff(request)
+        q, role = quran_role(m, role)
+        hashes = _quran_hashes(q)
+        latest = _latest(await hub.store.review_notes(QURAN, role))
+        steps = [{"n": k, "hash": hashes[k], "last": (latest[k]["status"] if k in latest else None),
+                  "changed": k in latest and latest[k]["step_hash"] != hashes[k],
+                  "chips": latest[k]["chips"] if k in latest else [], "text": latest[k]["text"] if k in latest else ""}
+                 for k in range(len(hashes))]
+        idx = q.index
+        signs = await hub.store.signoffs(QURAN)
+        return {"set": {"text": idx.get("text"), "translations": idx.get("translations"), "audio": idx.get("audio"),
+                        "credits": q.credits(), "surahs": q.summary()["surahs"]},
+                "hash": q.hash, "short": q.hash[7:15], "role": role,
+                "needs": (idx.get("review") or {}).get("needs") or [], "steps": steps,
+                "signed": [{"role": s["role"], "initials": s["initials"], "date": s["signed_on"],
+                            "current": s["content_hash"] == q.hash} for s in signs]}
+
+    @r.post("/quran/steps/{n}", dependencies=needs(MODULE))
+    async def quran_note(n: int, body: NoteIn, request: Request):
+        m = await staff(request)
+        q, role = quran_role(m, body.role)
+        hashes = _quran_hashes(q)
+        if not 0 <= n < len(hashes):
+            raise HTTPException(404, "no such surah")
+        if body.step_hash != hashes[n]:
+            raise HTTPException(409, "this surah changed: open it again")
+        if any(c not in REVIEW_CHIPS for c in body.chips):
+            raise HTTPException(422, f"chips come from {', '.join(REVIEW_CHIPS)}")
+        text = filters.scrub(body.text.strip())[0] if body.verdict == "change" else ""
+        await hub.store.add_review_note(lesson=QURAN, step=n, role=role, step_hash=hashes[n], status=body.verdict,
+                                        chips=body.chips if body.verdict == "change" else [], text=text)
+        return {"ok": True}
+
+    @r.post("/quran/sign", dependencies=needs(MODULE))
+    async def quran_sign(body: SignIn, request: Request):
+        m = await staff(request)
+        q, role = quran_role(m, body.role)
+        if body.hash != q.hash:
+            raise HTTPException(409, "the Quran set changed: open it again")
+        hashes = _quran_hashes(q)
+        latest = _latest(await hub.store.review_notes(QURAN, role))
+        todo = [k for k in range(len(hashes))
+                if k not in latest or latest[k]["status"] != "ok" or latest[k]["step_hash"] != hashes[k]]
+        if todo:
+            raise HTTPException(409, f"not OK yet: {', '.join(map(str, todo[:20]))}" + (" ..." if len(todo) > 20 else ""))
+        initials = m["initials"] or (body.initials or "").strip().upper()
+        try:
+            new = await hub.store.add_signoff(lesson=QURAN, content_hash=q.hash, role=role, initials=initials,
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from None
+        return {"signed": True, "new": new, "role": role, "short": q.hash[7:15]}
 
     @r.get("/signoffs", dependencies=needs(MODULE))
     async def all_signoffs(request: Request):

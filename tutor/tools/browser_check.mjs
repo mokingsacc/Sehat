@@ -4,7 +4,8 @@
 //   - clipping: no text cut by its box, and no page wider than the screen (no sideways scroll);
 //   - direction: Dari and Pashto pages run right to left, English left to right, and the header starts on the
 //     reading side;
-//   - the speaker rule: a page with words has a page speaker (or, in early years, the listen button).
+//   - the speaker rule: a page with words has a page speaker (or, in early years, the listen button), and scripture
+//     (data-voice="none", P29) carries no phone speaker.
 // It needs a running hub (the app and the starter pack) and Playwright with a Chromium; neither is a dependency
 // of the app. Run from tutor/:
 //   PLAYWRIGHT=/path/to/node_modules/playwright CHROMIUM=/path/to/chrome \
@@ -136,6 +137,14 @@ function inspect() {
   const band = html.dataset.band;
   const speaker = document.querySelector('#app [data-page]') || (band === 'ey' && document.querySelector('#app .speaker'));
   if (root && !speaker) problems.push('a screen that speaks has no page speaker');
+  // scripture's exemption (P29, C4.7): a verse and its translation take no phone voice, marked data-voice="none",
+  // which only scripture may carry; a speaker inside it plays a native speaker's recording (data-recorded) or none
+  for (const el of document.querySelectorAll('#app [data-voice="none"]')) {
+    if (!el.classList.contains('scripture')) problems.push('data-voice="none" on something that is not scripture');
+    for (const sp of el.querySelectorAll('.speaker')) {
+      if (!sp.hasAttribute('data-recorded')) problems.push("a phone speaker on scripture (only a recording's)");
+    }
+  }
   return {
     problems, texts, lowest: Number(lowest.toFixed(2)),
     attrs: { band, look: html.dataset.look, tone: html.dataset.tone, text: html.dataset.text || '', theme: html.dataset.theme || '' },

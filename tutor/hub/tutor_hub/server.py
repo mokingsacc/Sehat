@@ -342,7 +342,13 @@ class Hub:
         if not cohort:
             return None, {}, []
         f = await self.store.flags(cohort["id"])
-        return cohort, f, flags.enabled(self.modules, cohort, f, band, self.cfg.lacks)
+        return cohort, f, flags.enabled(self.modules, cohort, f, band, self.cfg.lacks, self.held())
+
+    def held(self) -> tuple:
+        """Modules held off whatever the flags say (P29, C4.7): the Quran reader while its set is missing or broken,
+        and on a release hub until a Hanafi scholar has signed the set at its current hash."""
+        q = self.library.quran
+        return ("quran",) if q is None or not q.ok or (self.cfg.release and not q.signed) else ()
 
     async def hello(self, cohort_id: str | None = None, band: str | None = None) -> dict:
         cohort, f, on = await self.cohort_modules(cohort_id, band)
@@ -442,6 +448,36 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         if not f or not f.is_file():
             raise HTTPException(404, "no such clip")
         return FileResponse(f, headers={"Cache-Control": "public, max-age=86400"})
+
+    # the Quran reader (P29, C4.7): the set's surah list, one surah at a time, and the recitation files fetched to this
+    # hub; online the same paths are static files (worker/build.py). The review page reads them too, so they answer
+    # while `review` is on as well (the scholar reads the set before the reader may be switched on)
+    def needs_any(*mids):
+        async def guard(request: Request):
+            _, _, on = await hub.cohort_modules(request.query_params.get("cohort"))
+            q = hub.library.quran
+            if not any(m in on for m in mids) or q is None or not q.ok or q.light is not None:
+                raise HTTPException(404, "Not Found")
+        return [Depends(guard)]
+
+    @app.get("/quran/index.json", dependencies=needs_any("quran", "review"))
+    async def quran_index():
+        return JSONResponse(hub.library.quran.summary(), headers={"Cache-Control": "no-cache"})
+
+    @app.get("/quran/surah/{fname}", dependencies=needs_any("quran", "review"))
+    async def quran_surah(fname: str):
+        n = fname[:-5] if fname.endswith(".json") else ""
+        doc = hub.library.quran.surah(int(n)) if n.isdigit() and len(n) <= 3 else None
+        if not doc:
+            raise HTTPException(404, "no such surah")
+        return JSONResponse(doc, headers={"Cache-Control": "no-cache"})
+
+    @app.get("/quran/audio/{edition}/{fname}", dependencies=needs_any("quran", "review"))
+    async def quran_audio(edition: str, fname: str):
+        f = hub.library.quran.audio_path(edition, fname)
+        if not f:
+            raise HTTPException(404, "no such recitation here")
+        return FileResponse(f, media_type="audio/mpeg", headers={"Cache-Control": "public, max-age=604800"})
 
     # link cards and credits: the licence data (licences.py); how they look is still to be designed (C2)
     @app.get("/api/links", dependencies=needs("lessons"))

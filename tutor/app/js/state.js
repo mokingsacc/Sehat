@@ -101,6 +101,9 @@ function clean(l) {
     // spaced-review items, "<lesson>:<step>": [box, due day] (box 0: retired), at most 300 (modules/recall.js)
     ...(Object.keys(cleanMarks(l.marks)).length ? { marks: cleanMarks(l.marks) } : {}),
     ...(Object.keys(cleanRecall(l.recall)).length ? { recall: cleanRecall(l.recall) } : {}),
+    // P29 (C4.7): where the Quran reader was last, [surah, verse]; the reader sends no events
+    ...(Array.isArray(l.quran) && l.quran.length === 2 && l.quran.every(Number.isInteger) && l.quran[0] >= 1
+      && l.quran[0] <= 114 && l.quran[1] >= 1 && l.quran[1] <= 286 ? { quran: [l.quran[0], l.quran[1]] } : {}),
   };
 }
 

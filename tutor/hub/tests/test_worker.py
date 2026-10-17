@@ -168,8 +168,8 @@ async def test_the_worker_serves_the_hub_with_print_off_and_sheets_and_teacher_o
         r = await c.get("/api/hello")
         assert r.status_code == 200
         h = r.json()
-        assert [m["id"] for m in h["modules"]] == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "recall", "review",
-                                                  "sheets", "teacher", "timetable"]
+        assert [m["id"] for m in h["modules"]] == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "quran", "recall",
+                                                  "review", "sheets", "teacher", "timetable"]
         assert h["cohort"]["label"] == "Staging" and h["lessons"] > 0 and h["ai"]["on"] is True
         assert h["printer"]["state"] == "off"
         assert (await c.get("/api/print/1")).status_code == 404

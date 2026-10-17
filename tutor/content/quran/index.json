@@ -1,0 +1,73 @@
+{
+ "version": 1,
+ "text": {
+  "source": "tanzil-quran-text",
+  "file": "tanzil-uthmani.txt",
+  "edition": "Uthmani",
+  "version": "1.1",
+  "url": "https://tanzil.net/download/",
+  "checked": "2026-10-17"
+ },
+ "metadata": {
+  "source": "tanzil-quran-text",
+  "file": "tanzil-data.xml",
+  "url": "https://tanzil.net/res/text/metadata/quran-data.xml",
+  "checked": "2026-10-17"
+ },
+ "translations": [
+  {
+   "lang": "prs",
+   "key": "dari_badkhashani",
+   "source": "quranenc-translations",
+   "title": "Dari Translation - Muhammad Anwar Badakhshani",
+   "translator": "Mawlawi Muhammad Anwar Badakhshani",
+   "publisher": "QuranEnc.com (Encyclopedia of the Noble Quran)",
+   "version": "1.0.0",
+   "issued": "2021-02-16",
+   "url": "https://quranenc.com/en/browse/dari_badkhashani",
+   "file": "translations/dari_badkhashani.json",
+   "source_sha256": "sha256:1def4e5523266b70c183f3661720ee1a0ecab635bd74f54db489f871dcae067d",
+   "checked": "2026-10-17"
+  },
+  {
+   "lang": "ps",
+   "key": "pashto_rwwad",
+   "source": "quranenc-translations",
+   "title": "Pashto Translation - Rowwad Translation Center",
+   "translator": "the team of the Rowwad Translation Center",
+   "publisher": "the Rowwad Translation Center, with the Rabwah Dawah Association, the Islamic Content Service Association in Languages and IslamHouse.com",
+   "version": "1.0.1",
+   "issued": "2024-02-15",
+   "url": "https://quranenc.com/en/browse/pashto_rwwad",
+   "file": "translations/pashto_rwwad.json",
+   "source_sha256": "sha256:83ef43964732332343eb209423eea8b680d0679dcd493356ebeda9cbda13ca87",
+   "checked": "2026-10-17"
+  }
+ ],
+ "audio": [
+  {
+   "edition": "ar.husary",
+   "reciter": "Mahmoud Khalil Al-Husary",
+   "riwaya": "Hafs",
+   "bitrate": 64,
+   "source": "alquran-cloud-recitations",
+   "list": "audio/ar.husary.json",
+   "url": "https://cdn.islamic.network/quran/audio/64/ar.husary/",
+   "checked": "2026-10-17"
+  }
+ ],
+ "files": {
+  "audio/ar.husary.json": "sha256:1c1c5109edf26284d93b2790b737c8150dbfcccca6df22f4ac37894e57d20caa",
+  "tanzil-data.xml": "sha256:8867c1d88191472adec9db694b3cd9f135b1a2ef580574d32cf888dcb22c5c7a",
+  "tanzil-uthmani.txt": "sha256:bf4f57b968d03f4131c070b1e285da9be0e0a108a21c910e872801ca273312c8",
+  "translations/dari_badkhashani.json": "sha256:1605514bf3994e3d1863f03a98077e88ad324896d1eac24e9a38e5a933471a1d",
+  "translations/pashto_rwwad.json": "sha256:ced3fa851e9180681c9cd407edf958aafaa1add9b1d89dbfcaa2d9798f0ce2e9"
+ },
+ "review": {
+  "status": "draft",
+  "needs": [
+   "Hanafi scholar"
+  ],
+  "signoffs": []
+ }
+}

@@ -189,7 +189,7 @@ class Brain:
         r = rules.screen(q)
         if r:
             reason, urgent = r
-            return Answer(rules.MESSAGES[reason][lang], lang, "rules", urgent=urgent,
+            return Answer(rules.message(q, reason, lang), lang, "rules", urgent=urgent,
                           waiting=urgent or reason == "health")
 
         if is_exercise(q):

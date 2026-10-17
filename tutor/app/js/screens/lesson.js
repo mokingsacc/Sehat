@@ -16,8 +16,13 @@
 // English letter (`script: "latn"`) is drawn left to right. A `choice` with a word plays it as the question, its text
 // hidden with `hide` (listening). "Say it" records only where the phone can (canRecord): in the APK and on the hub it
 // is "hear it, say it", with no mic.
+// Quran and seerah (P29, C4.7) take no phone voice either. An `ayah` step names a verse; its text, translation and
+// recitation come from the Quran set (quran.js), never from the lesson: the verse in Amiri Quran, Listen (the
+// recitation), "Repeat after" (the verse, then a pause as long as the verse for her to say it, three times, nothing
+// recorded), the translation with its speaker only where a native speaker's recording exists, its notes folded and
+// its exact credit. The page speaker plays the recitation.
 
-import { getLang, pick, s } from '../i18n.js';
+import { fa, getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as modules from '../modules.js';
@@ -25,12 +30,14 @@ import { notSimplest, parse, same } from '../numbers.js';
 import { praise, readsOnOpen } from '../bands.js';
 import { TONE_PATH, words as pinyinWords } from '../pinyin.js';
 import * as recall from '../modules/recall.js';
+import * as Q from '../quran.js';
 import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, playIcon, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
 
 const QUESTION = new Set(['choice', 'number']);
 const STUDIED = new Set(['english', 'chinese']);        // their words are recordings only (P27a)
+const RELIGIOUS = new Set(['quran', 'seerah']);         // recordings only too, and the verses the reciter's (P29)
 
 // the word a step teaches: {lang, text}, or null
 const target = (st) => (st.english ? { lang: 'en', text: st.english } : st.zh ? { lang: 'zh', text: st.zh } : null);
@@ -75,7 +82,7 @@ export default async function lesson(args) {
     if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
   };
 
-  const recordedOnly = STUDIED.has(L.subject);           // English and Chinese lessons: no phone voice (P27a)
+  const recordedOnly = STUDIED.has(L.subject) || RELIGIOUS.has(L.subject);    // no phone voice (P27a, P29)
   const say = (text, l = lang) => speak(text, l, recordedOnly ? { recorded: true } : undefined);
   const segs = h('div', { class: 'segs grow', style: { gridTemplateColumns: `repeat(${warm.length + steps.length}, minmax(0, 1fr))` } },
     warm.map(() => h('span', { class: 'w' })), steps.map(() => h('span')));
@@ -113,6 +120,7 @@ export default async function lesson(args) {
   const sayWord = (st) => { const t = target(st); if (t) speak(t.text, t.lang, { audio: clipIn(st, t.lang), recorded: true }); };
   function pageSpeak() {
     const st = cur();
+    if (st.kind === 'ayah') { if (st._verse) Q.recite(st._verse); return; }
     if (wordFirst(st)) { sayWord(st); return; }
     speak(mainText(st), stepLang(st), { audio: stepClip(st), recorded: recordedOnly });
   }
@@ -144,7 +152,35 @@ export default async function lesson(args) {
     if (young && !recordedOnly && hasVoice(lang)) say([msg, shown ? plain(shown) : ''].filter(Boolean).join('. '));
   }
 
+  // a verse from the Quran set (P29): drawn once its surah has come
+  function ayahStep(st) {
+    const box = h('div', { class: 'ayah-step stack' }, h('p', { class: 'muted' }, s('loading')));
+    (async () => {
+      const [idx, d] = [await Q.load(), await Q.surah(st.surah)];
+      const v = d && d.verses[st.ayah - 1];
+      if (!v) { fill(box, h('p', { class: 'empty' }, s('quran_not_here'))); return; }
+      st._verse = v;
+      const tl = Q.trLang(idx, lang);
+      let stopRep = null;
+      const status = h('span', {}, s('quran_repeat'));
+      const rep = h('button', { type: 'button', class: 'btn outline' }, icon('repeat', 22), status);
+      rep.addEventListener('click', () => {
+        if (stopRep) { stopRep(); return; }
+        stopRep = Q.repeatAfter(v, (n) => {
+          status.textContent = n ? s('quran_repeat_n', { n: fa(n) }) : s('quran_repeat');
+          if (!n) stopRep = null;
+        });
+      });
+      fill(box, h('p', { class: 'muted small' }, h('bdi', { dir: 'ltr' }, d.tname), ' · ', s('quran_verse', { a: fa(v.a) })),
+        Q.verseView(v, { lang: tl, credits: d.credits, clip: clipIn(st, tl), big: true }),
+        v.audio ? [said(h('button', { type: 'button', class: 'btn primary', onClick: () => Q.recite(v) }, playIcon(20), s('quran_listen'))),
+          said(rep)] : null);
+    })();
+    return [box];
+  }
+
   const KINDS = {
+    ayah: ayahStep,
     letter: (st) => (st.script === 'latn' ? [            // an English letter, its picture word and their recording
       h('div', { class: 'letter latn', dir: 'ltr', lang: 'en' }, st.letter),
       pics(st),

@@ -18,10 +18,16 @@ from . import licences, mathcheck
 
 log = logging.getLogger("tutor.packs")
 
-SUBJECTS = ("maths", "science", "english", "dari", "pashto", "chinese")
+SUBJECTS = ("maths", "science", "english", "dari", "pashto", "chinese", "quran", "seerah")
 LANGS = ("prs", "ps", "en")          # Dari, Pashto, English
 CLIP_LANGS = LANGS + ("zh",)         # recorded clips: the three, and Mandarin for a Chinese lesson's words (P27a)
-STEP_KINDS = ("read", "letter", "choice", "number", "say")
+STEP_KINDS = ("read", "letter", "choice", "number", "say", "ayah")
+# religious subjects (P29, C4.7): drafted by a person with a Hanafi scholar, never by a tool or a model; no AI reads
+# them (they never enter Ask's index or a prompt); a Quran lesson is its verses (`ayah`, from the Quran set) and
+# read steps, seerah is read steps only (no question steps, so no warm-ups and no certificates); not for ey in 2027
+RELIGIOUS = ("quran", "seerah")
+RELIGIOUS_KINDS = {"quran": ("read", "ayah"), "seerah": ("read",)}
+AYAH_KEYS = {"kind", "surah", "ayah", "audio"}
 ITEM_KINDS = ("trace", "circle", "draw", "count", "sum", "write", "sort", "generate")
 
 
@@ -140,8 +146,9 @@ def check_clips(clips: dict, where: str) -> list[str]:
     return p
 
 
-def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> list[str]:
-    """Every problem with a lesson, in plain words (an empty list means it is fine)."""
+def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None, qset=None) -> list[str]:
+    """Every problem with a lesson, in plain words (an empty list means it is fine). `qset`: the Quran set
+    (quran.py), which an `ayah` step names a verse of."""
     if clips is None:
         clips = read_clips(pack_dir)
     p = []
@@ -154,6 +161,13 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
     if not isinstance(y, int) or not 0 <= y <= 12:
         p.append(f"{lid}: year must be 0 (not in school yet) to 12")
     _check_text(lesson.get("title"), f"{lid} title", p)
+    sub = lesson.get("subject")
+    if sub in RELIGIOUS:
+        if not isinstance(lesson.get("drafted_by"), str) or not _INITIALS.match(lesson["drafted_by"]):
+            p.append(f"{lid}: drafted_by must be the initials of the person who wrote it with the scholar (never a "
+                     "tool or a model)")
+        if y == 0:
+            p.append(f"{lid}: no {sub} lessons for the early years in 2027")
 
     def pic(name, where):
         if name and not picture_file(pack_dir, name):
@@ -169,6 +183,22 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
         if k not in STEP_KINDS:
             p.append(f"{w}: kind must be one of {', '.join(STEP_KINDS)}")
             continue
+        if sub in RELIGIOUS and k not in RELIGIOUS_KINDS[sub]:
+            p.append(f"{w}: a {sub} lesson has only {' and '.join(RELIGIOUS_KINDS[sub])} steps (no question steps)")
+        if k == "ayah":
+            if sub != "quran":
+                p.append(f"{w}: an ayah step belongs to a Quran lesson")
+            extra = set(s) - AYAH_KEYS
+            if extra:
+                p.append(f"{w}: an ayah step names a verse only ({', '.join(sorted(extra))} not allowed: the text, "
+                         "its translation and its recitation come from the Quran set, never typed into a lesson)")
+            sa, aa = s.get("surah"), s.get("ayah")
+            if type(sa) is not int or type(aa) is not int:
+                p.append(f"{w}: surah and ayah are numbers")
+            elif qset is None or not qset.ok:
+                p.append(f"{w}: the Quran set (content/quran) is not here or not whole, so no verse can be shown")
+            elif not qset.has(sa, aa):
+                p.append(f"{w}: there is no verse {sa}:{aa}")
         pic(s.get("picture"), w)
         pc = s.get("picture_count", 1)
         if not isinstance(pc, int) or not 1 <= pc <= 10:
@@ -369,9 +399,11 @@ def check_review(r, where) -> list[str]:
     return p
 
 
-def content_hash(item: dict, pack_dir: Path, clips: dict | None = None) -> str:
+def content_hash(item: dict, pack_dir: Path, clips: dict | None = None, qset=None) -> str:
     """What reviewers sign: the lesson (or link card) without its review, plus every picture's bytes and every
-    clip's recorded hash, so a changed word, picture or recording voids the signatures."""
+    clip's recorded hash, so a changed word, picture or recording voids the signatures; and for an `ayah` step the
+    verse as the Quran set shows it (text, translations, the recitation's hash), so a new translation version voids
+    them too."""
     if clips is None:
         clips = read_clips(pack_dir)
     body = {k: v for k, v in item.items() if k != "review" and not k.startswith("_")}      # `_bold`: the hub's own
@@ -379,6 +411,8 @@ def content_hash(item: dict, pack_dir: Path, clips: dict | None = None) -> str:
 
     def walk(o):
         if isinstance(o, dict):
+            if o.get("kind") == "ayah" and qset is not None and qset.has(o.get("surah"), o.get("ayah")):
+                media[f"quran/{o['surah']}:{o['ayah']}"] = qset.verse_hash(o["surah"], o["ayah"])
             for k, v in o.items():
                 if k == "picture" and isinstance(v, str):
                     f = picture_file(pack_dir, v)
@@ -439,7 +473,9 @@ def lesson_bands(lesson: dict, pack: dict) -> list[str]:
 def reads_every_step(lesson: dict, pack: dict) -> bool:
     """Every step is read aloud on open, so needs a recorded clip: years 0 to 3, and (P26, C4.3) an adult pack the
     literacy track sees. An adult lesson's year says nothing about who reads it, nor does any lesson's in a pack with
-    `bands`."""
+    `bands`. A Quran or seerah lesson too (C4.7): narration and translations in a native speaker's voice."""
+    if lesson.get("subject") in RELIGIOUS:
+        return True
     if pack.get("audience") == "adult" or pack.get("bands"):
         bands = lesson_bands(lesson, pack)
         return bool({"ey", "p1"} & set(bands)) or ("ad" in bands and "literacy" in tracks_of(pack))
@@ -461,7 +497,7 @@ def studied_clip_steps(lesson: dict) -> list[tuple[int, str]]:
             if field in st or (field == "english" and st.get("kind") == "say")]
 
 
-def release_problems(lesson: dict, state: str, pack: dict, clips: dict) -> list[str]:
+def release_problems(lesson: dict, state: str, pack: dict, clips: dict, qset=None) -> list[str]:
     """Why a lesson may not reach learners yet: unsigned, a reviewer role missing, or (F1) the youngest learners'
     steps and every letter step without a recorded clip in each of the pack's languages (placeholders don't count)."""
     lid = lesson.get("id", "?")
@@ -469,13 +505,22 @@ def release_problems(lesson: dict, state: str, pack: dict, clips: dict) -> list[
     if state != "signed":
         p.append(f"{lid}: not signed by its reviewers yet" + (" (changed since it was signed)" if state == "changed" else ""))
     needs = (lesson.get("review") or {}).get("needs") or []
-    want = ["Dari reader", "Pashto reader"] + (["adult educator"] if pack.get("audience") == "adult" else [])
+    religious = lesson.get("subject") in RELIGIOUS
+    want = ["Dari reader", "Pashto reader"] + (["adult educator"] if pack.get("audience") == "adult" else []) + \
+        (["Hanafi scholar"] if religious else [])
     for role in want:
         if role not in needs:
             p.append(f"{lid}: the review must include a {role}")
-    if not any("teacher" in r for r in needs):
+    if not religious and not any("teacher" in r for r in needs):
         p.append(f"{lid}: the review must include a subject teacher")
+    # Quran and seerah (C4.7): every step in a native speaker's voice, in each of the pack's languages (an ayah
+    # step's clip is its translation, read aloud; its recitation is the reciter's), and every verse's recitation
     young = reads_every_step(lesson, pack)
+    if any(st.get("kind") == "ayah" for st in lesson.get("steps") or []) and not (qset is not None and qset.signed):
+        p.append(f"{lid}: the Quran set (content/quran) is not signed by a Hanafi scholar at its current hash")
+    for i, st in enumerate(lesson.get("steps") or [], 1):
+        if st.get("kind") == "ayah" and not (qset is not None and qset.listed(st.get("surah"), st.get("ayah"))):
+            p.append(f"{lid} step {i}: verse {st.get('surah')}:{st.get('ayah')} has no recitation in the set's list")
     for i, st in enumerate(lesson.get("steps") or [], 1):
         if not (young or st.get("kind") == "letter"):
             continue
@@ -514,6 +559,9 @@ def clips_needed(lib) -> list[dict]:
                     continue
                 words = st.get("english") if al == "en" else st.get("zh") if al == "zh" else \
                     text(st.get("text") or st.get("prompt") or st.get("word"), al, ())
+                if st.get("kind") == "ayah" and lib.quran is not None and lib.quran.has(st["surah"], st["ayah"]) \
+                        and al in lib.quran.tr:      # the translation, read exactly as QuranEnc publishes it
+                    words = f"{st['surah']}:{st['ayah']} " + lib.quran.tr[al]["verses"][(st["surah"], st["ayah"])][0]
                 out.append({"pack": pid, "lesson": lid, "step": i, "lang": al, "words": words or "",
                             "placeholder": bool(entry)})
     return out
@@ -531,11 +579,14 @@ class Library:
     `release`: production. Only signed lessons and link cards are served (the rest are listed in `hidden`), and
     a lesson for the youngest learners needs its recorded clips. Otherwise drafts are served, marked `draft`."""
 
-    def __init__(self, packs_dir, *, release: bool = False, sources=None):
+    def __init__(self, packs_dir, *, release: bool = False, sources=None, quran=None):
         self.dir = Path(packs_dir)
         self.release = release
         self.sources = sources if isinstance(sources, licences.Sources) else \
             licences.Sources(Path(sources) if sources else _sources_file(self.dir))
+        # the Quran set (P29) beside the packs folder, unless another is given; an `ayah` step names its verses
+        from . import quran as quran_mod
+        self.quran = quran if quran is not None else quran_mod.QuranSet(self.dir.parent / "quran", self.sources)
         self.packs: dict[str, dict] = {}
         self.lessons: dict[str, dict] = {}
         self.lesson_pack: dict[str, str] = {}
@@ -584,7 +635,12 @@ class Library:
                 f = pdir / "lessons" / f"{lid}.json"
                 try:
                     lesson = json.loads(f.read_text(encoding="utf-8"))
-                    probs = validate_lesson(lesson, pdir, clips) if isinstance(lesson, dict) else ["must be an object"]
+                    probs = validate_lesson(lesson, pdir, clips, self.quran) if isinstance(lesson, dict) \
+                        else ["must be an object"]
+                    if isinstance(lesson, dict) and not pack_nc and self._nc_recitation() and any(
+                            isinstance(st, dict) and st.get("kind") == "ayah" for st in lesson.get("steps") or []):
+                        probs.append(f"{lid}: its verses play Islamic Network's recitation (non-commercial), so "
+                                     "pack.json must say \"licence\": \"NC\"")
                     terms = {"nc": False, "sa": False, "nc_sa": False, "by_sa": False}
                     if isinstance(lesson, dict) and isinstance(lesson.get("sources", []), list):
                         for j, e in enumerate(lesson.get("sources", []), 1):
@@ -609,12 +665,12 @@ class Library:
                 if probs:
                     self.problems.extend(f"{pid}/{x}" for x in probs)
                     continue
-                chash = content_hash(lesson, pdir, clips)
+                chash = content_hash(lesson, pdir, clips, self.quran)
                 state = review_state(lesson, chash)
                 self.known[lid] = {"band": lesson_bands(lesson, pack)[0], "bands": lesson_bands(lesson, pack),
                                    "sheet": bool(lesson.get("sheet"))}
                 if self.release:
-                    why = release_problems(lesson, state, pack, clips)
+                    why = release_problems(lesson, state, pack, clips, self.quran)
                     if why:
                         self.hidden.extend(f"{pid}/{x}" for x in why)
                         continue
@@ -638,6 +694,12 @@ class Library:
             log.warning("pack problem: %s", x)
         if self.hidden:
             log.info("release mode: %d lesson(s) or card(s) not served until signed", len(self.hidden))
+
+    def _nc_recitation(self) -> bool:
+        """The set's recitation comes from a non-commercial source (Islamic Network: BUNDLE-NC)."""
+        q = self.quran
+        return any(sid in self.sources.by_id and self.sources.effective_class(sid) == "BUNDLE-NC"
+                   for sid in (q.audio_sources() if q is not None else []))
 
     def _check_pack(self, pack, pid) -> list[str]:
         p = []
@@ -792,6 +854,7 @@ class Library:
         out["credits"] = self.credits_for(lesson_id)
         out.pop("sheet", None)       # the sheet is fetched as a page or PDF; its answers stay on the hub
         out.pop("review", None)      # who signed stays in the pack
+        out.pop("drafted_by", None)  # and who drafted it
         out.pop("sources", None)     # the credits say it for the learner
         return out
 

@@ -80,6 +80,17 @@ export async function speak(text, lang, opts) {
   sayWithVoice(text, lang, o.shown);
 }
 
+// a recording only, never the phone's voice (P29: a verse's recitation, a translation's reading): onend after it
+// has played to its end, onfail when it cannot play ("not recorded yet" unless onfail says otherwise)
+export function play(url, { onend, onfail } = {}) {
+  stop();
+  const a = new Audio(url);
+  current = a;
+  a.addEventListener('ended', () => { if (current === a) current = null; if (onend) onend(a); });
+  a.play().catch(() => (onfail ? onfail() : toast(s('not_recorded'))));
+  return a;
+}
+
 // an interface string by its key: its clip, else the phone's voice reading the words
 export function sayKey(key, lang, vars, opts = {}) { return speak(s(key, vars), lang, { key, ...opts }); }
 

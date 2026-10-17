@@ -1,0 +1,27 @@
+{
+  "id": "seerah-1",
+  "version": "2026.10.17",
+  "title": {
+    "prs": "سیرت",
+    "ps": "سیرت",
+    "en": "Seerah"
+  },
+  "about": {
+    "en": "Seerah (P29, C4.7): 8 to 10 short lessons on the Prophet's life (his birth and youth, the trustworthy, the revelation, the Hijra, Madinah, his kindness and teaching), our own text drafted by or with a Hanafi scholar, each citing its classical source by reference only (Ibn Hisham's Sirah; no edition's text, no hadith text in 2027). Read steps only, no question steps; a line map and no other picture; narration recorded by native speakers. No lessons yet: none is written by a tool or a model."
+  },
+  "langs": [
+    "prs",
+    "ps"
+  ],
+  "bands": [
+    "p1",
+    "p2",
+    "s1",
+    "s2",
+    "ad"
+  ],
+  "tracks": [
+    "reader"
+  ],
+  "lessons": []
+}

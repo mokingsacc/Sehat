@@ -8,9 +8,14 @@
                                               recorded clips stay out: the hub knows them by their manifest.json)
     build/src/content/sources.json            the licence classes (licences.py), and permissions/ for ASK sources
     build/src/content/{aliases.json,consent/} the alias pictures and the consent texts (learners.py)
+    build/src/content/quran/light.json        the Quran set as checked here (P29): its hash and state, the surah list
+                                              and credits, the hashes of the verses lessons name; never the text
     build/public/                             the phone app (app/, without its tests), and the lesson pictures and clips
                                               at /packs/<pack>/pictures/<file> and /packs/<pack>/audio/<lang>/<file>,
-                                              the addresses the hub gives them
+                                              the addresses the hub gives them; and the Quran set as the hub serves it,
+                                              /quran/index.json, /quran/surah/<n>.json and the recitation files fetched
+                                              here (/quran/audio/<edition>/<s>_<a>.mp3), only where the build is not for
+                                              release or a Hanafi scholar has signed the set (C4.7)
 
 build/src mirrors tutor/, so the hub's defaults (config.TUTOR) find every folder without a setting. The pictures go
 twice: in the bundle, where the hub checks they exist, and as static assets, which is how phones get them online.
@@ -50,7 +55,38 @@ def build(out: Path = BUILD, config: Path | None = None) -> dict:
         shutil.copytree(pictures, public / "packs" / pictures.parent.name / "pictures", ignore=SKIP)
     for audio in sorted((TUTOR / "content" / "packs").glob("*/audio")):
         shutil.copytree(audio, public / "packs" / audio.parent.name / "audio", ignore=SKIP)
+    quran_set(src, public, release=str(settings.get("TUTOR_RELEASE", "")) == "1")
     return {name: sum(f.stat().st_size for f in (out / name).rglob("*") if f.is_file()) for name in ("src", "public")}
+
+
+def quran_set(src: Path, public: Path, *, release: bool) -> None:
+    """The Quran set, checked here in full (the Worker cannot hold its text in the bundle): light.json for the hub,
+    the reader's files as static assets. A set that fails its checks is left out, so the reader stays off."""
+    sys.path.insert(0, str(TUTOR / "hub"))
+    from tutor_hub import quran
+    from tutor_hub.packs import Library
+    lib = Library(TUTOR / "content" / "packs", release=release)
+    q = lib.quran
+    if q is None or not q.ok:
+        print("the Quran set is missing or fails its checks: left out" + "".join(f"\n  {p}" for p in q.problems))
+        return
+    (src / "content" / "quran").mkdir(parents=True, exist_ok=True)
+    light = q.light_doc(quran.lesson_refs(lib.lessons.values()))
+    (src / "content" / "quran" / quran.LIGHT).write_text(json.dumps(light, ensure_ascii=False), encoding="utf-8")
+    if release and not q.signed:
+        print("the Quran set is not signed by a Hanafi scholar: its text stays out of this release build")
+        return
+    out = public / "quran"
+    (out / "surah").mkdir(parents=True)
+    (out / "index.json").write_text(json.dumps(q.summary(), ensure_ascii=False), encoding="utf-8")
+    for s in q.surahs:
+        (out / "surah" / f"{s['n']}.json").write_text(json.dumps(q.surah(s["n"]), ensure_ascii=False,
+                                                                 separators=(",", ":")), encoding="utf-8")
+    for ed in q.audio:
+        for f in sorted((q.dir / "audio" / ed).glob("*.mp3")):
+            if q.audio_path(ed, f.name):
+                (out / "audio" / ed).mkdir(parents=True, exist_ok=True)
+                shutil.copy2(f, out / "audio" / ed / f.name)
 
 
 if __name__ == "__main__":

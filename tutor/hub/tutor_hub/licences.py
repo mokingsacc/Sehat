@@ -57,6 +57,8 @@ APP_CREDITS = [
     {"name": "Noto Sans SC (Chinese, a subset)", "owner": "Adobe and The Noto Project Authors",
      "licence": "SIL Open Font License 1.1", "licence_url": "https://openfontlicense.org",
      "url": "https://github.com/notofonts/noto-cjk"},
+    {"name": "Amiri Quran", "owner": "The Amiri Project Authors", "licence": "SIL Open Font License 1.1",
+     "licence_url": "https://openfontlicense.org", "url": "https://github.com/aliftype/amiri"},
 ]
 
 

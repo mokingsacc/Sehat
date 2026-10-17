@@ -179,6 +179,8 @@ def router(hub) -> APIRouter:
         the cohort does not take (drafts only where the cohort takes drafts: staging)."""
         if modules.risk(m) == "blocked" and not flags.paid_human(cohort):
             return "moderation"
+        if m["id"] == "quran" and not (hub.library.quran is not None and hub.library.quran.signed):
+            return "scholar"                           # C4.7: locked until a Hanafi scholar signs the set
         if cohort["id"] == open_id():                  # C4.9: the pilot's gate for photo; no Homework help in 2027
             if m["id"] in gates.OFF_IN_OPEN:
                 return "open"
@@ -263,7 +265,7 @@ def router(hub) -> APIRouter:
         await admin(request)
         c = await cohort_or_404(cid)
         f = await hub.store.flags(cid)
-        on = set(flags.enabled(hub.modules, c, f, None, hub.cfg.lacks))
+        on = set(flags.enabled(hub.modules, c, f, None, hub.cfg.lacks, hub.held()))
         rows = []
         for mid in sorted(hub.modules):
             m = hub.modules[mid]
@@ -344,6 +346,9 @@ def router(hub) -> APIRouter:
                 raise HTTPException(409, f"this cohort does not take {hub.modules[x]['maturity']} modules ({x})")
             if why == "open":
                 raise HTTPException(409, f"{x} stays off in open in 2027 (C4.9)")
+            if why == "scholar":
+                raise HTTPException(409, "the Quran reader stays off until a Hanafi scholar has signed the Quran set "
+                                    "(content/quran) at its current hash")
             if why == "gate":
                 raise HTTPException(409, "photo marking waits for the pilot's four numbers: "
                                     + "; ".join(gates.photo_open(hub.cfg.cohorts)[0]))

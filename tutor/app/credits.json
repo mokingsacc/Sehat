@@ -6,7 +6,9 @@
     {"name": "Noto Naskh Arabic", "owner": "The Noto Project Authors", "licence": "SIL Open Font License 1.1",
      "licence_url": "https://openfontlicense.org", "url": "https://github.com/notofonts/arabic"},
     {"name": "Noto Sans SC (Chinese, a subset)", "owner": "Adobe and The Noto Project Authors", "licence": "SIL Open Font License 1.1",
-     "licence_url": "https://openfontlicense.org", "url": "https://github.com/notofonts/noto-cjk"}
+     "licence_url": "https://openfontlicense.org", "url": "https://github.com/notofonts/noto-cjk"},
+    {"name": "Amiri Quran", "owner": "The Amiri Project Authors", "licence": "SIL Open Font License 1.1",
+     "licence_url": "https://openfontlicense.org", "url": "https://github.com/aliftype/amiri"}
   ],
   "sounds": [
     {"name": "School-day bells", "owner": "Qalam", "licence": "CC0 1.0 (public domain)",

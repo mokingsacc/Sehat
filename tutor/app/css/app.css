@@ -12,6 +12,7 @@
 @font-face { font-family: 'Naskh'; font-weight: 500; font-display: swap; src: url(../fonts/naskh-500.woff2) format('woff2'); }
 @font-face { font-family: 'Naskh'; font-weight: 700; font-display: swap; src: url(../fonts/naskh-700.woff2) format('woff2'); }
 /* P27a: the Chinese subset (Noto Sans SC, only the packs' characters, tools/make_fonts.py), also pinyin's tone marks */
+@font-face { font-family: 'AmiriQuran'; font-weight: 400; font-display: swap; src: url(../fonts/amiri-quran.woff2) format('woff2'); }
 @font-face { font-family: 'NotoSC'; font-weight: 500; font-display: swap; src: url(../fonts/noto-sc.woff2) format('woff2'); }
 
 /* colour: light, adult (also Welcome and the teacher's page) */
@@ -84,12 +85,12 @@
 :root {
   --scale: 1; --tap-add: 0px;
   --fs-sm-b: 14px; --fs-b: 16px; --fs-read-b: 18px; --fs-h1-b: 23px; --fs-btn-b: 17px; --fs-big-b: 21px; --fs-xl-b: 26px;
-  --tap-b: 48px; --r: 16px; --r-lg: 24px; --bw: 2px;
+  --tap-b: 48px; --r: 16px; --r-lg: 24px; --bw: 2px; --fs-verse-b: 28px;
   --read-font: 'Vazirmatn', 'Noto Naskh Arabic', sans-serif;
 }
 :root[data-look="bold"] {
   --fs-sm-b: 16px; --fs-b: 18px; --fs-read-b: 22px; --fs-h1-b: 27px; --fs-btn-b: 19px; --fs-big-b: 23px; --fs-xl-b: 28px;
-  --tap-b: 60px; --r: 20px; --r-lg: 28px; --bw: 3px;
+  --tap-b: 60px; --r: 20px; --r-lg: 28px; --bw: 3px; --fs-verse-b: 34px;
   --read-font: 'Naskh', 'Noto Naskh Arabic', serif;
 }
 :root[data-band="ey"] { --tap-b: 72px; }
@@ -847,3 +848,24 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 /* P25b: the certificate screen; the paper itself is the server's (.cert-paper), drawn only for print (cert.js) */
 .plan-card.done.with-cert .btn { align-self: flex-start; }
 .v-found { font-weight: 800; }
+
+/* P29 (C4.7): the Quran reader and the ayah step. A verse is Tanzil's text in Amiri Quran, 34 px in the bold look and
+   28 px in the clean one (times Bigger text); its translation in the reading font; the playing verse on --soft */
+.quran-find input { flex: 1; min-width: 0; }
+.sname { font-family: 'AmiriQuran', 'Naskh', serif; font-weight: 400; }
+.ayahs { display: flex; flex-direction: column; gap: 4px; padding: 0 16px; }
+.ayah { padding: 12px; border-radius: var(--r); border: var(--bw) solid transparent; }
+.ayah.playing { background: var(--soft); }
+.ayah.found { border-color: var(--line); }
+.ayah-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ayah-n { font-size: var(--fs-sm); color: var(--muted); direction: ltr; }
+.scripture.verse { font-family: 'AmiriQuran', serif; font-weight: 400; font-size: calc(var(--fs-verse-b) * var(--scale));
+  line-height: 2.1; text-align: center; margin: 8px 0; overflow-wrap: anywhere; }
+.scripture.tr { align-items: flex-start; font-family: var(--read-font); font-size: var(--fs-read); }
+.scripture.tr p { margin: 0; }
+.notes summary { cursor: pointer; color: var(--muted); font-size: var(--fs-sm); min-height: var(--tap); display: flex; align-items: center; }
+.notes p { font-size: var(--fs-sm); white-space: pre-wrap; }
+.quran-credit p { margin: 4px 0; }
+.notice { white-space: pre-wrap; overflow-wrap: anywhere; font-size: var(--fs-sm); margin: 0; }
+.ayah-step .row { gap: 8px; flex-wrap: wrap; }
+

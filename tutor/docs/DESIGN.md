@@ -669,6 +669,36 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   unrecorded draft is silent there too; Chinese lessons carry year 0, as adult lessons do, and their sheet's corner tag
   says "Starting".
 
+## What P29 built, and where it differs
+
+- **The reader** (`#/quran`, module `quran`, for s1, s2 and adult readers; reached from a "Read the Quran" row at the
+  end of the subject list): a search box ("Surah name or number, or 2:255": a number, `surah:verse` in either digit set, a
+  surah's name as Tanzil writes it, or one word of the translation), her last place as a soft card, then the 114
+  surahs as subject rows (number badge, Tanzil's Arabic name in Amiri Quran, the transliterated name and the verse
+  count). The draft banner sits under the top bar until the scholar signs.
+- **A surah** (`#/quran/<n>`, or `/<n>/<a>` at a verse): the name in the top bar, "Play from the top" (outline), then
+  each verse: its number (left to right, muted) and its round play button, the verse centred in Amiri Quran (34 px
+  bold look, 28 px clean, times Bigger text, line height 2.1), the translation in the reading font, and its notes
+  folded under "Notes (n)". The playing verse sits on `--soft`; a verse opened from the search has a `--line` edge.
+  The credit lines and Tanzil's notice (folded) end every surah, in English, left to right.
+- **The voice rule (C4.7, question 6):** a verse and its translation never take the phone's voice. They carry class
+  `scripture` and `data-voice="none"`; the page speaker skips them, and the browser check fails any phone speaker
+  inside them (a translation's speaker is allowed only when it plays a native speaker's recording, `data-recorded`).
+  A verse without a recording here says "This verse's recitation is not here yet" in place of its button.
+- **An `ayah` step** in a lesson: the surah's name and verse number, the verse (big), its translation with the
+  recorded speaker where the lesson has a clip, then "Listen" (primary) and "Repeat after" (outline, repeat icon:
+  the verse, then a pause as long as it, three times, the button counting "Repeat after: 1 of 3"; nothing is recorded).
+- Search runs in the phone's code only, over the surahs she has opened; "Search every surah" downloads the rest
+  first (about 4 MB). The service worker keeps each surah and recitation once fetched (`quran-v1`), never the whole set by default.
+- The admin's module table shows the `quran` switch locked with "locked until a Hanafi scholar signs the Quran set" until the
+  set is signed; a release hub serves nothing of it till then.
+- Open look questions: the reader's entry is a row at the end of the subject list, not a Home card; the verse number is
+  Latin `s:a` rather than an ornamented end-of-verse mark (the font's marks would be the scholar's call); the
+  translation shows under every verse rather than behind a tap; the playing verse is shown by `--soft` only, with no
+  word-by-word highlight; "Repeat after" pauses as long as the verse, with no setting; the credit block is English
+  only (the publishers' own wording); Husary (64 kbps) stands in as the reciter until the scholar names one; the draft
+  banner's words are drafts for native speakers like every new Dari and Pashto string.
+
 ---
 
 # C2 and C3 decisions

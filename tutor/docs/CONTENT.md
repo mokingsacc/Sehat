@@ -92,6 +92,7 @@ naming a clip in `audio/<lang>/manifest.json`. No synthetic voice, ever: clips a
 | `choice` | `prompt`, `options` (2-4: text, `{"prs","ps"}`, or `{"picture","text"}`), `answer` (from 0), `why`; optional `english` or `zh` (the word plays as the question) and `"hide": true` (its text hidden: listening) | taps one; sees why |
 | `number` | `prompt`, `answer` (one number or fraction such as `1/2`, `0.5` or `1 1/2`, never a sum), `why` | types it; 2/4 is right but "make it simpler" |
 | `say` | `text` (the words to say) or `english` (or `zh` with `pinyin`) plus `text` as the instruction; `answers` (below) | hears it, records themself where the phone can, hears it back |
+| `ayah` | `surah`, `ayah` (numbers) and `audio` only: a Quran lesson's verse, its text, translation and recitation all from the Quran set | reads the verse, hears its recitation, "Repeat after" |
 
 ### English and Chinese lessons (P27a, C4.4)
 
@@ -114,6 +115,47 @@ naming a clip in `audio/<lang>/manifest.json`. No synthetic voice, ever: clips a
 - **The font:** Chinese is drawn in a subset of Noto Sans SC holding only the packs' characters and pinyin
   (`app/fonts/noto-sc.woff2`), which the sheets embed too. Run `python3 tools/make_fonts.py --source
   NotoSansSC-Regular.otf` whenever a pack's Chinese changes; a hub test fails while a character is missing.
+
+### Quran and seerah lessons (P29, C4.7)
+
+- **Drafted by a person with a Hanafi scholar, never by a tool or a model.** A Quran or seerah lesson carries
+  `"drafted_by": "<initials>"` and lists `Hanafi scholar` in `review.needs` (in place of a subject teacher); AI is
+  off for both subjects (they never enter Ask's search index or a prompt, and the Ask screen answers a question about
+  a ruling with "please ask a scholar you trust"). No lessons for the early years (year 0 is refused).
+- **Read steps only, no question steps.** A seerah lesson is `read` steps (8 to 10 lessons, a line map as its
+  picture, narration recorded); a Quran lesson is `read` and `ayah` steps. Every step needs a native speaker's
+  recording in each of the pack's languages before release, as the youngest learners' do; an `ayah` step's clip is
+  its translation read aloud, while the verse itself is only ever the reciter's recording. No phone voice ever reads
+  a verse or its translation.
+- **No verse is typed by hand anywhere**, lessons, docs and tests included: an `ayah` step names `surah` and `ayah`
+  and nothing else, and the hub fills in the text, the translation and the recitation from the set. A hub test
+  scans the repository for any line of the Tanzil text outside `content/quran/`.
+- **Release:** an `ayah` lesson needs the set signed at its current hash and every verse it names in the set's
+  recitation list. The recitation is NC, so an `ayah` lesson goes only in an NC pack (`quran-1`).
+
+### The Quran set
+
+`content/quran/` holds the Quran as published, each file byte for byte from its source:
+
+| file | from | licence |
+|---|---|---|
+| `tanzil-uthmani.txt`, `tanzil-data.xml` | Tanzil text (Uthmani, 1.1) and metadata | Tanzil's terms (verbatim, with its notice; a link to tanzil.net) |
+| `translations/<key>.json` | one QuranEnc translation per language (Dari, Pashto), rows as published, footnotes kept | QuranEnc's terms (unchanged, credited) |
+| `audio/<edition>.json` and `audio/<edition>/<s>_<a>.mp3` | one Hafs reciter per verse from Islamic Network's CDN | NC |
+| `index.json` | each file's source, version, date checked and SHA-256, and the scholar's review | ours |
+
+- The hub checks the set at start (hashes, Tanzil's notice, 6,236 verses in every file, one translation per
+  language, every listed recording on disk matching its hash) and holds the `quran` module off while anything fails.
+- **The scholar signs the whole set** (its hash: everything in `index.json` but `review`) on the `quran:set` page in
+  `/review/`, one step per surah after the set itself; `tools/pull_signoffs.py` copies the signature in. Any new file
+  (a new Tanzil version, another translation or reciter) changes the hash, so it needs a new signature. A release
+  hub serves nothing of the set and keeps the `quran` switch locked until it is signed; a staging hub serves it as a
+  draft.
+- `tools/quran_set.py` makes and refreshes it: `text`, `translation`, `audio-list`, `fetch-audio` and `check` (its
+  docstring has the commands). Git keeps only Al-Fatiha's recordings; `fetch-audio` brings the rest of the list
+  (about 40 MB for Al-Fatiha and Juz 'Amma) and checks each against the list.
+- Never in the set: King Fahd Complex files, IslamHouse, any hadith text, or the KFGQPC font. The verse font is
+  Amiri Quran (OFL, `app/fonts/amiri-quran.woff2`).
 
 ### The worksheet
 

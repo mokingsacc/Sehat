@@ -33,6 +33,7 @@ import subject from './screens/subject.js';
 import subjects from './screens/subjects.js';
 import update from './screens/update.js';
 import plan from './screens/plan.js';
+import quran from './screens/quran.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
@@ -40,7 +41,7 @@ import who from './screens/who.js';
 const photo = (args) => import('./modules/photo.js').then((m) => m.default(args));
 
 const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, welcome, who, credits, consent, lock: lockScreen,
-  settings, signup, cert };
+  settings, signup, cert, quran };
 const NEEDS_NO_CHILD = new Set(['welcome', 'signup']);
 const CLEAN = new Set(['welcome', 'signup']);          // the clean adult look, not the learner's
 const OPEN = new Set(['welcome', 'who', 'signup', 'lock']);   // shown without opening her lock

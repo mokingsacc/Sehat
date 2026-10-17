@@ -15,6 +15,10 @@ tab-separated lines for the recorders (pack, lesson, step, language, words). Rec
 
 The skills graphs (content/graph/<subject>.json, P25a) are checked too, against the lessons that loaded (graph.py):
 --release refuses one its reviewers have not signed, and --hashes prints each graph's hash as graph:<subject>.
+
+So is the Quran set (content/quran, P29): every file against its hash, the text against Tanzil's verse counts, each
+translation whole (tutor_hub/quran.py). --hashes prints its hash as quran:set; unsigned, the reader stays off on a
+release hub, which is a note here, not a problem.
 """
 import argparse
 import json
@@ -57,6 +61,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
     lib = Library(a.packs, release=a.release, sources=a.sources)
     problems = list(lib.sources.problems) + list(lib.problems)
+    q = lib.quran
+    problems += [f"content/quran: {x}" for x in (q.problems if q is not None else [])]
     for pid, pack in lib.packs.items():
         listed = set(json.loads((pack["_dir"] / "pack.json").read_text(encoding="utf-8")).get("lessons", []))
         for f in sorted((pack["_dir"] / "lessons").glob("*.json")):
@@ -72,6 +78,8 @@ def main(argv=None):
             print(f"links:{c['id']}\t{c['_hash']}\t{c['_state']}")
         for sub, g in sorted(lib.graphs.items()):
             print(f"graph:{sub}\t{g['_hash']}\t{g['_state']}")
+        if q is not None and q.ok:
+            print(f"quran:set\t{q.hash}\t{q.state}")
     if a.clips:
         for c in clips_needed(lib):
             print("\t".join([c["pack"], c["lesson"], str(c["step"]), c["lang"], c["words"].replace("\t", " ")]
@@ -82,6 +90,10 @@ def main(argv=None):
         print(f"{len(lib.graphs)} skills graph(s): " + ", ".join(
             f"{sub} ({len(g['nodes'])} nodes, {len(g.get('pathways') or [])} pathways, {g['_state']})"
             for sub, g in sorted(lib.graphs.items())))
+    if q is not None and q.present:
+        print(f"the Quran set: {len(q.surahs)} surahs, translations {', '.join(sorted(q.tr)) or '-'}, recitation "
+              f"{q.edition() or '-'}, {q.state}" + ("" if q.signed else " (the reader stays off on a release hub until "
+                                                     "a Hanafi scholar signs it)"))
     print(f"{len(lib.lessons)} lesson(s) and {len(lib.links)} link card(s) in {len(lib.packs)} pack(s); "
           f"{len(problems)} problem(s); {len(unsigned)} still waiting for their native-speaker and teacher check")
     return 1 if problems else 0

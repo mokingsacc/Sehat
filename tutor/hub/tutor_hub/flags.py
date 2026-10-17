@@ -12,7 +12,9 @@ A module is on for a learner when (BUILD-PLAN 3.3):
 - the host can meet its `needs`: the online Worker lacks a printer and the teacher's PIN (`TUTOR_LACKS`), so print
   and teacher are off there whatever the cohort says; the phone itself judges `internet` and `camera`;
 - none of its capabilities is blocked (`share.public`, `child.contact`), unless the cohort's moderation is
-  `paid-human` (P21: the admin panel refuses the switch too).
+  `paid-human` (P21: the admin panel refuses the switch too),
+- the hub does not hold it off: `quran` while the Quran set is missing, broken, or (on a release hub) not signed by
+  a Hanafi scholar at its current hash (P29, C4.7; the admin panel refuses the switch until it is signed).
 The committee dropped the manifest's `core` field (C0.1), so there is no core version to match yet.
 """
 import json
@@ -135,9 +137,9 @@ def load_seeds(folder: Path) -> tuple[dict[str, dict], list[str]]:
 
 
 def enabled(manifests: dict[str, dict], cohort: dict, flags: dict[str, dict], band: str | None = None,
-            lacks=()) -> list[str]:
+            lacks=(), held=()) -> list[str]:
     """The ids of the modules that are on, in id order. `flags` maps module id -> {"enabled": bool, ...};
-    `lacks` the needs this host cannot meet."""
+    `lacks` the needs this host cannot meet; `held` the modules the hub holds off whatever the flags say."""
     maturity = set((cohort.get("settings") or {}).get("maturity") or DEFAULT_MATURITY)
     moderated = paid_human(cohort)
     memo: dict[str, bool] = {}
@@ -147,6 +149,7 @@ def enabled(manifests: dict[str, dict], cohort: dict, flags: dict[str, dict], ba
             return memo[mid]
         m = manifests.get(mid)
         ok = (m is not None and mid not in path                       # a loop of depends switches all of it off
+              and mid not in held
               and bool((flags.get(mid) or {}).get("enabled"))
               and m["maturity"] in maturity
               and (band is None or (band in m["bands"] and band in cohort.get("bands", ())))

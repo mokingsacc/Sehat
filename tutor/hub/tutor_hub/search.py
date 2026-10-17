@@ -7,7 +7,7 @@ when coverage is high, and otherwise passes the best passages to the AI, or to t
 import math
 from collections import Counter
 
-from .packs import text as pick_text
+from .packs import RELIGIOUS, text as pick_text
 from .textnorm import norm, tokens
 
 K1, B = 1.2, 0.75
@@ -68,6 +68,8 @@ def build(library, approved_rows=()) -> Index:
     """One index over the packs and the teacher's approved answers."""
     ix = Index()
     for lid, l in library.lessons.items():
+        if l["subject"] in RELIGIOUS:       # C4.7: Quran and seerah never enter Ask's index, so never a prompt
+            continue
         meta = {"lesson": lid, "subject": l["subject"], "year": l["year"]}
         for i, b in enumerate(l.get("bank") or []):
             q, a = b["q"], b["a"]

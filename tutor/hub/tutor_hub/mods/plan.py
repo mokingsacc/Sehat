@@ -110,7 +110,7 @@ def router(hub, needs) -> APIRouter:
         said = rules.screen(goal)
         if said:
             reason = said[0]
-            text = HEALTH[lang] if reason == "health" else rules.MESSAGES[reason][lang]
+            text = HEALTH[lang] if reason == "health" else rules.message(goal, reason, lang)
             return {"kind": "rules", "reason": reason, "text": text}
         clean, _ = filters.scrub(goal)
         mine = lessons_for(hub.library, body.band)

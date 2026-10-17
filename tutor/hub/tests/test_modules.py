@@ -34,8 +34,10 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "print", "recall", "review", "sheets",
-                           "teacher", "timetable"]
+    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "print", "quran", "recall", "review",
+                           "sheets", "teacher", "timetable"]
+    # P29 (C4.7): the Quran reader has no AI, no capability, and serves s1, s2 and adult readers only
+    assert "ai" not in REAL["quran"] and REAL["quran"]["capabilities"] == [] and REAL["quran"]["bands"] == ["s1", "s2", "ad"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
     assert REAL["print"]["needs"] == ["printer"]
     # C2, change 6: `sheets` holds the sheet, its keys, "Get the sheet" and the lesson-end card; `print` depends on it
@@ -190,9 +192,11 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
     assert flags.enabled(REAL, staging, f) == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "print",
-                                              "recall", "review", "sheets", "teacher", "timetable"]
+                                              "quran", "recall", "review", "sheets", "teacher", "timetable"]
+    # held off by the hub (P29: the Quran set missing, broken or, on a release hub, unsigned), whatever the flag says
+    assert "quran" not in flags.enabled(REAL, staging, f, held=("quran",))
     assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == [
-        "ask", "cert", "check", "homework", "lessons", "photo", "plan", "recall", "review", "sheets", "teacher",
+        "ask", "cert", "check", "homework", "lessons", "photo", "plan", "quran", "recall", "review", "sheets", "teacher",
         "timetable"]
     assert REAL["teacher"]["needs"] == []                 # C3.2: a gate per host, no `pin` need (staff.py)
 

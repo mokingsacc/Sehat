@@ -9,6 +9,10 @@
 // the link cards and the sources. Signing is a 3-second hold, like the consent screen's.
 // Since P25a (C4.1) a skills graph is one more page: every node with what it needs and its lessons, each OK or
 // Change (saved at once), the pathways as one more item, then "Hold to sign" once every one is OK.
+// Since P29 (C4.7) the Quran set is one more, for the Hanafi scholar: what the set is (the text's edition, each
+// translation's version and credit, the reciter, Tanzil's notice) as item 0, then each surah, opened from the hub's
+// /quran/surah/<n>.json as the reader shows it; OK on a surah waits until it is open and every recitation it has
+// here has played to its end. Nothing in the set can be edited: Change says why it may not be used.
 
 const API = '../api/m/review';
 const BAND_OF_YEAR = (y) => (y === 0 ? 'ey' : y <= 3 ? 'p1' : y <= 6 ? 'p2' : y <= 9 ? 's1' : 's2');
@@ -36,6 +40,10 @@ const T = {
     graphs: 'Skills graphs', graph_of: 'Skills graph: {s}', node_needs: 'Needs', node_lessons: 'Lessons', nodes_n: '{n} skills',
     pathways: 'Pathways', certificate: 'with a certificate', final: 'Last lesson', no_lessons: 'No lesson yet',
     sign_graph: 'Sign this graph', todo_graph: 'Every skill and the pathways need OK before signing.', save_note: 'Save',
+    quran: 'The Quran set', quran_of: 'The Quran set {h}', surahs_n: '{n} surahs', set_what: 'What the set is',
+    open_surah: 'Open the surah', play_all: 'Play every verse', heard: '{a} of {b} recitations played',
+    sign_set: 'Sign the Quran set', todo_set: 'Every surah and the set itself need OK before signing.',
+    no_tr: 'No translation', notes_n: 'Notes ({n})',
   },
   prs: {
     title: 'بررسی', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
@@ -55,6 +63,10 @@ const T = {
     graphs: 'نقشه‌های مهارت', graph_of: 'نقشهٔ مهارت: {s}', node_needs: 'پیش از آن', node_lessons: 'درس‌ها', nodes_n: '{n} مهارت',
     pathways: 'راه‌ها', certificate: 'با تصدیق‌نامه', final: 'درس آخر', no_lessons: 'هنوز درسی نیست',
     sign_graph: 'این نقشه را امضا کن', todo_graph: 'پیش از امضا هر مهارت و راه‌ها باید درست باشند.', save_note: 'ذخیره',
+    quran: 'مجموعهٔ قرآن', quran_of: 'مجموعهٔ قرآن {h}', surahs_n: '{n} سوره', set_what: 'این مجموعه چیست',
+    open_surah: 'سوره را باز کن', play_all: 'همهٔ آیه‌ها را بشنو', heard: '{a} از {b} تلاوت شنیده شد',
+    sign_set: 'مجموعهٔ قرآن را امضا کن', todo_set: 'پیش از امضا هر سوره و خود مجموعه باید درست باشند.',
+    no_tr: 'ترجمه نیست', notes_n: 'یادداشت‌ها ({n})',
   },
 };
 
@@ -166,9 +178,14 @@ async function queue() {
     h('nav', { class: 'subjects' }, q.graphs.map((g) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); graphPage(g.subject); } },
       h('span', { class: 'grow' }, h('b', { dir: 'ltr' }, g.subject), h('small', { class: 'muted' }, t('nodes_n', { n: g.nodes }), ' · ', h('span', { dir: 'ltr' }, g.version))),
       h('span', { class: TAG[g.status] || 'tag' }, g.status === 'step' ? t('step_of', { a: g.step, b: g.of }) : t(g.status)))))] : [];
+  const qs = q.quran ? [h('div', { class: 'section-head' }, h('h2', {}, t('quran'))),
+    h('nav', { class: 'subjects' }, h('a', { href: '#', onClick: (e) => { e.preventDefault(); quranPage(); } },
+      h('span', { class: 'grow' }, h('b', {}, t('quran')), h('small', { class: 'muted' }, t('surahs_n', { n: q.quran.surahs }), ' · ',
+        h('span', { dir: 'ltr' }, q.quran.short))),
+      h('span', { class: TAG[q.quran.status] || 'tag' }, q.quran.status === 'step' ? t('step_of', { a: q.quran.step, b: q.quran.of }) : t(q.quran.status))))] : [];
   show(h('div', { class: 'screen' }, top(null, t('for_you')),
     h('p', { class: 'pad muted small' }, `${t('role')}: ${q.role}`),
-    rows.length || graphs.length ? [rows, graphs] : h('p', { class: 'empty' }, t('none'))));
+    rows.length || graphs.length || qs.length ? [rows, graphs, qs] : h('p', { class: 'empty' }, t('none'))));
 }
 
 // a hold-to-sign button: `run` after HOLD_MS held down
@@ -245,6 +262,92 @@ async function graphPage(sub) {
     p.final ? ` · ${t('final')}: ${lessonLine(p.final)}` : '', p.certificate ? ` · ${t('certificate')}` : ''))) : h('p', { class: 'muted' }, t('nothing')));
   show(h('div', { class: 'screen' }, top(queue, t('graph_of', { s: sub })),
     h('div', { class: 'stack pad' }, nodes, paths, signBox, status)));
+  drawSign();
+}
+
+// the Quran set (P29): item 0 what it is, items 1 to 114 the surahs; OK waits until the surah is open and every
+// recitation it has here has played
+async function quranPage() {
+  let d;
+  try { d = await api('/quran'); } catch (e) { return failed(e); }
+  const S = d.set;
+  const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
+  const verdict = {};
+  for (const x of d.steps) if (x.last && !x.changed) verdict[x.n] = x.last;
+  const signBox = h('div', { class: 'stack' });
+  const save = async (k, v, text) => {
+    const st = d.steps[k];
+    try {
+      await api(`/quran/steps/${k}`, { method: 'POST', body: { verdict: v, chips: [], text: v === 'change' ? text : '',
+        step_hash: st.hash, role: me.via === 'pin' ? me.role : null } });
+      verdict[k] = v; st.last = v; st.changed = false; status.textContent = ''; drawSign();
+      return true;
+    } catch (e) { if (e.status === 409) quranPage(); else status.textContent = t('save_fail'); return false; }
+  };
+  function item(k, head, body, ready = () => true) {
+    const st = d.steps[k];
+    const okBtn = h('button', { type: 'button', class: 'btn ok-btn' + (verdict[k] === 'ok' ? ' on' : ''), disabled: ready() || verdict[k] === 'ok' ? null : true }, t('ok'));
+    const chBtn = h('button', { type: 'button', class: 'btn' + (verdict[k] === 'change' ? ' warm' : '') }, t('change'));
+    const note = h('textarea', { class: 'field hidden', rows: 2, maxlength: 500, 'aria-label': t('comment'), placeholder: t('comment'), dir: 'auto' });
+    note.value = st.text || '';
+    const saveBtn = h('button', { type: 'button', class: 'btn outline small hidden' }, t('save_note'));
+    okBtn.addEventListener('click', async () => { if (await save(k, 'ok')) { okBtn.classList.add('on'); chBtn.classList.remove('warm'); } });
+    chBtn.addEventListener('click', () => { note.classList.remove('hidden'); saveBtn.classList.remove('hidden'); });
+    saveBtn.addEventListener('click', async () => { if (await save(k, 'change', note.value)) { chBtn.classList.add('warm'); okBtn.classList.remove('on'); } });
+    const card = h('div', { class: 'card pad-card stack graph-node' },
+      h('div', { class: 'row wrap' }, h('b', { class: 'grow', dir: 'auto' }, head),
+        st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
+        st.last === 'ok' && !st.changed ? h('span', { class: 'tag good' }, t('ok_last')) : null),
+      body, h('div', { class: 'row' }, okBtn, chBtn), note, saveBtn);
+    card.unlock = () => { if (ready()) okBtn.disabled = false; };
+    return card;
+  }
+  function drawSign() {
+    const notOk = d.steps.some((x) => verdict[x.n] !== 'ok');
+    put(signBox, h('h2', {}, t('sign_set')), h('dl', { class: 'facts' },
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials)), notOk ? h('p', { class: 'muted' }, t('todo_set')) : null,
+    holdButton(notOk, async () => {
+      try {
+        await api('/quran/sign', { method: 'POST', body: { hash: d.hash, role: me.via === 'pin' ? me.role : null,
+          initials: me.via === 'pin' ? me.initials : null } });
+        put(signBox, h('p', { class: 'done-big' }, t('done_sign')), h('button', { type: 'button', class: 'btn', onClick: queue }, t('back')));
+      } catch (e) { if (e.status === 409) quranPage(); else status.textContent = t('save_fail'); }
+    }));
+  }
+  const facts = h('dl', { class: 'facts', dir: 'ltr' },
+    h('dt', {}, 'Text'), h('dd', {}, `${S.credits.text} (${S.credits.edition})`),
+    (S.translations || []).flatMap((m) => [h('dt', {}, m.lang), h('dd', {}, `${S.credits.tr[m.lang].line} ${m.issued}; ${m.url}`)]),
+    (S.audio || []).flatMap((m) => [h('dt', {}, 'Recitation'), h('dd', {}, `${S.credits.audio.line} (${m.edition}, ${m.riwaya}, ${m.bitrate} kbps)`)]));
+  const what = item(0, t('set_what'), [facts, h('details', {}, h('summary', {}, 'Tanzil'), h('pre', { class: 'small', dir: 'ltr' }, S.credits.notice))]);
+  const surahItem = (x) => {
+    const box = h('div', { class: 'stack' });
+    let open = false;
+    const heard = new Set();
+    let want = 0;
+    const count = h('small', { class: 'muted' });
+    const card = item(x.n, `${x.n}. ${x.ar} · ${x.tname} (${x.ayas})`, [box],
+      () => open && heard.size >= want);
+    const openBtn = h('button', { type: 'button', class: 'btn outline small', onClick: async () => {
+      let s;
+      try { const r = await fetch(`../quran/surah/${x.n}.json`, { cache: 'no-store', headers: me.pin ? { 'x-teacher-pin': me.pin } : {} }); s = r.ok ? await r.json() : null; } catch { s = null; }
+      if (!s) { status.textContent = t('save_fail'); return; }
+      open = true;
+      want = s.verses.filter((v) => v.audio).length;
+      const mark = () => { count.textContent = want ? t('heard', { a: heard.size, b: want }) : ''; card.unlock(); };
+      put(box, count, s.verses.map((v) => h('div', { class: 'stack' },
+        h('p', { lang: 'ar', dir: 'rtl', class: 'verse-review' }, `${v.a}. ${v.ar}`),
+        v.audio ? h('audio', { controls: true, preload: 'none', src: '..' + v.audio.url, onEnded: () => { heard.add(v.a); mark(); } }) : null,
+        Object.entries(v.tr || {}).map(([l, tr]) => h('div', { dir: 'rtl', lang: l === 'ps' ? 'ps' : 'fa-AF' },
+          h('p', {}, `${l}: ${tr.t}`), tr.f ? h('details', {}, h('summary', {}, t('notes_n', { n: tr.f.split(/\n+/).filter(Boolean).length })),
+            h('p', { class: 'small' }, tr.f)) : null)))));
+      mark();
+    } }, t('open_surah'));
+    box.append(openBtn);
+    return card;
+  };
+  show(h('div', { class: 'screen' }, top(queue, t('quran_of', { h: d.short })),
+    h('div', { class: 'stack pad' }, what, S.surahs.map((x) => surahItem({ ...x, ar: x.ar })), signBox, status)));
   drawSign();
 }
 

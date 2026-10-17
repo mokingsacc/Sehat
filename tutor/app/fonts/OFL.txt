@@ -3,6 +3,8 @@ Noto Naskh Arabic: Copyright 2022 The Noto Project Authors (https://github.com/n
 Noto Sans SC: Copyright 2014-2021 Adobe (http://www.adobe.com/), with the Noto Project Authors
 (https://github.com/notofonts/noto-cjk); noto-sc.woff2 is a subset holding only the Chinese packs' characters and
 pinyin (tools/make_fonts.py, P27a), made from NotoSansSC-Regular.otf
+Amiri Quran: Copyright 2010-2022 The Amiri Quran Project Authors (https://github.com/aliftype/amiri); amiri-quran.woff2
+is AmiriQuran-Regular.ttf (Amiri 1.003, from Google Fonts) as WOFF2, every glyph kept, for the Quran text (P29)
 
 Both fonts are static instances from Google Fonts (Vazirmatn 500 and 800, Noto Naskh Arabic 500 and 700),
 whole files rather than split subsets, so the printed sheets (WeasyPrint) and the app use the very same files.

@@ -5,9 +5,10 @@
 // as it does on the hub, where plain http allows no service worker (F2). A new version of this file takes over at
 // the next start, without a banner. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-p27a-1';
+const VERSION = 'qalam-p29-1';
 const SHELL_CACHE = 'shell-' + VERSION;
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
+const QURAN_CACHE = 'quran-v1';                // P29: each surah and verse recitation once opened, never all at once
 const SHELL = [
   './',
   'index.html',
@@ -31,6 +32,7 @@ const SHELL = [
   'js/modules.js',
   'js/numbers.js',
   'js/pinyin.js',
+  'js/quran.js',
   'js/outbox.js',
   'js/scan.js',
   'js/sha256.js',
@@ -47,6 +49,7 @@ const SHELL = [
   'js/screens/lesson.js',
   'js/screens/lock.js',
   'js/screens/plan.js',
+  'js/screens/quran.js',
   'js/screens/print.js',
   'js/screens/settings.js',
   'js/screens/signup.js',
@@ -64,6 +67,7 @@ const SHELL = [
   'js/modules/recall.js',
   'js/modules/sheets.js',
   'js/modules/timetable.js',
+  'fonts/amiri-quran.woff2',
   'fonts/naskh-500.woff2',
   'fonts/naskh-700.woff2',
   'fonts/noto-sc.woff2',
@@ -84,7 +88,8 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((keys) => Promise.all(keys
-    .filter((k) => k.startsWith('shell-') && k !== SHELL_CACHE).map((k) => caches.delete(k)))));
+    .filter((k) => (k.startsWith('shell-') && k !== SHELL_CACHE) || (k.startsWith('quran-') && k !== QURAN_CACHE))
+    .map((k) => caches.delete(k)))));        // a new QURAN_CACHE name drops a removed reciter's files (C4.7)
 });
 
 // the cached copy at once, and a fresh one into the cache for next time
@@ -106,6 +111,7 @@ self.addEventListener('fetch', (e) => {
   // kept like the hub's own, so a lesson opened once plays offline; nothing else from another site is kept
   if (url.origin !== self.location.origin) {
     if (url.pathname.startsWith('/packs/')) e.respondWith(staleWhileRevalidate(req, MEDIA_CACHE));
+    else if (url.pathname.startsWith('/quran/')) e.respondWith(staleWhileRevalidate(req, QURAN_CACHE));
     return;
   }
   if (url.pathname.startsWith('/api/')) return;                        // the network, or the app's own fallback
@@ -119,6 +125,10 @@ self.addEventListener('fetch', (e) => {
   }
   if (url.pathname.startsWith('/packs/')) {
     e.respondWith(staleWhileRevalidate(req, MEDIA_CACHE));
+    return;
+  }
+  if (url.pathname.startsWith('/quran/')) {                             // the Quran set (P29), kept as opened
+    e.respondWith(staleWhileRevalidate(req, QURAN_CACHE));
     return;
   }
   e.respondWith(staleWhileRevalidate(req, SHELL_CACHE));
