@@ -34,6 +34,7 @@ from workers import asgi, import_from_javascript  # noqa: E402
 
 from tutor_hub.config import Config  # noqa: E402
 from tutor_hub.server import create_app  # noqa: E402
+from tutor_hub.staff import mode_of as staff_mode  # noqa: E402
 from tutor_hub.stores import D1Store  # noqa: E402
 
 store = D1Store(None)                         # the binding arrives with the first request
@@ -45,10 +46,23 @@ def _env():
     return import_from_javascript("cloudflare:workers").env       # the plain JavaScript env, not the SDK's wrapper
 
 
+# staff pages (staff.py): the Access team, its audience and the pepper are Worker secrets Mo sets once Access is in
+# place (docs/HOSTING.md); without all three the staff gate stays off. Bindings exist only from the first request.
+STAFF_SETTINGS = (("TUTOR_ACCESS_TEAM", "access_team"), ("TUTOR_ACCESS_AUD", "access_aud"),
+                  ("TUTOR_STAFF_PEPPER", "staff_pepper"))
+
+
 async def _start():
     global _started
-    store.db = _env().DB
-    await app.state.hub.start()
+    env = _env()
+    store.db = env.DB
+    hub = app.state.hub
+    for name, attr in STAFF_SETTINGS:
+        v = getattr(env, name, None)
+        if isinstance(v, str) and v:
+            setattr(hub.cfg, attr, v)
+    hub.staff.mode = staff_mode(hub.cfg)
+    await hub.start()
     _started = True
 
 

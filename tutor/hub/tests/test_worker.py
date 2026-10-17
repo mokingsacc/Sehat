@@ -261,3 +261,14 @@ async def test_a_photo_is_read_on_the_worker_and_nothing_of_it_reaches_d1(worker
     dump = "\n".join(repr(tuple(row)) for t in tables for row in db.execute(f'SELECT * FROM "{t}"'))
     assert b64[100:160] not in dump and strip[100:140].hex() not in dump
     assert "read_sheet" in dump                                # the call was counted, and only counted
+
+
+async def test_staff_pages_stay_off_until_the_three_access_secrets_are_set(worker):
+    async with client(worker) as c:
+        assert (await c.get("/api/m/review/me")).status_code == 404
+    worker._started = False                                             # a new isolate, after Mo sets the secrets
+    env = sys.modules["workers"].import_from_javascript("cloudflare:workers").env
+    env.TUTOR_ACCESS_TEAM, env.TUTOR_ACCESS_AUD, env.TUTOR_STAFF_PEPPER = "team", "aud", "pepper"
+    async with client(worker) as c:
+        assert (await c.get("/api/m/review/me")).status_code == 401    # now it asks for Access's token
+    assert worker.app.state.hub.staff.mode == "access"
