@@ -1,0 +1,30 @@
+{
+  "about": "A sample set for the dry run and for the shape of the real one. Not for grading: the Dari and Pashto questions and reference answers are drafts for a native speaker's check, and the real set (200 questions) is written in January.",
+  "questions": [
+    {"id": "s-prs-1", "lang": "prs", "subject": "science", "year": 7, "text": "چرا آب در زمستان یخ می‌زند؟",
+     "reference": "وقتی هوا خیلی سرد شود، آب گرمی‌اش را از دست می‌دهد. در صفر درجه آب جامد می‌شود و یخ می‌زند."},
+    {"id": "s-prs-2", "lang": "prs", "subject": "maths", "year": 7, "text": "مخرج مشترک یعنی چه؟",
+     "reference": "مخرج مشترک عددی است که هر دو مخرج در آن پوره تقسیم می‌شوند، مثل ۴ برای ۲ و ۴."},
+    {"id": "s-ps-1", "lang": "ps", "subject": "science", "year": 7, "text": "اوبه په ژمي کې ولې کنګل کېږي؟",
+     "reference": "کله چې هوا ډېره سړه شي، اوبه خپله تودوخه له لاسه ورکوي. په صفر درجو کې اوبه کلکې او کنګل کېږي."},
+    {"id": "s-ps-2", "lang": "ps", "subject": "maths", "year": 7, "text": "ګډ مخرج څه ته وايي؟",
+     "reference": "ګډ مخرج هغه عدد دی چې دواړه مخرجونه پرې پوره ویشل کېږي، لکه ۴ د ۲ او ۴ لپاره."},
+    {"id": "s-en-1", "lang": "en", "subject": "science", "year": 7, "text": "Why does water freeze in winter?",
+     "reference": "When the air is very cold, water loses its heat. At 0 degrees it turns solid: it freezes into ice."},
+    {"id": "s-en-2", "lang": "en", "subject": "maths", "year": 7, "text": "What is a common denominator?",
+     "reference": "A number that both bottom numbers divide into exactly, like 4 for halves and quarters."}
+  ],
+  "sheets": [
+    {"id": "p-prs-1", "lang": "prs", "lesson": "maths-7-fractions-add", "seed": 4821,
+     "strip": "../../hub/tests/fixtures/photos/m7-prs-tilted.jpg",
+     "written": [{"n": 1, "read": "2/5"}, {"n": 2, "read": "5/7"}, {"n": 3, "read": "1/2"}, {"n": 4, "read": "5/6"},
+                 {"n": 5, "read": ""}, {"n": 6, "read": "7/10"}, {"n": 8, "read": "13/20"}]},
+    {"id": "p-en-1", "lang": "en", "lesson": "maths-7-fractions-add", "seed": 1234,
+     "strip": "../../hub/tests/fixtures/photos/m7-en-turned.jpg",
+     "written": [{"n": 1, "read": "7/9"}, {"n": 2, "read": "1"}, {"n": 3, "read": "3/4"}, {"n": 4, "read": "9/14"},
+                 {"n": 5, "read": "5/12"}, {"n": 6, "read": "9/10"}, {"n": 8, "read": "13/20"}]},
+    {"id": "p-prs-2", "lang": "prs", "lesson": "maths-1-count-5", "seed": 0,
+     "strip": "../../hub/tests/fixtures/photos/m1-prs-upside-down.jpg",
+     "written": [{"n": 2, "read": "4"}, {"n": 3, "read": "5"}, {"n": 4, "read": "2"}, {"n": 5, "read": "4"}]}
+  ]
+}

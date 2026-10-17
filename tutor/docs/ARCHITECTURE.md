@@ -27,7 +27,7 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `content/sources.json` | Every outside source with its licence class and flags: the only record of what may be copied ([FREE-RESOURCES.md](FREE-RESOURCES.md)); `content/permissions/` holds written permissions for ASK sources. |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
-| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers, or a batch of one for facilitators; `sheet_check.mjs` checks the sheets in Chromium's print; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests. |
+| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers, or a batch of one for facilitators; `sheet_check.mjs` checks the sheets in Chromium's print; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests; `blindtest/blindtest.py` runs the blind test (P16): questions and sheet strips through the gateway, blind grader sheets, a score against the nine-in-ten rule ([content/blindtest/README.md](../content/blindtest/README.md)). |
 
 ## The async seam (stores/, October 2026)
 

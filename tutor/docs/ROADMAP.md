@@ -113,6 +113,11 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   "Something looks wrong?". No learner screen shows a value answer, lessons included. Ask sends exercises to the
   ladder; Homework help (module `homework`, on in staging) adds the model's private solve, twice, and "Check my
   answer", three tries. New events `check.item`, `hint.rung`, `check.dispute`, with no names.
+- **P16, done:** the blind-test kit (`tools/blindtest/`, `content/blindtest/`). It runs a question set and sheet
+  strips through the hub's own gateway and prompts, mixes the AI's answers with teachers' reference answers on
+  shuffled grader sheets under random codes (the key stays with the organiser), and scores each provider, language
+  and purpose against the nine-in-ten rule, the references as the control. Dry-run on the fake in the tests; the real
+  run waits for the key in January.
 
 ## January 2027: buy and test
 
