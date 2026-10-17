@@ -36,4 +36,8 @@ type = "Data"
 globs = ["**/*.json", "**/*.sql", "**/*.svg", "**/*.webp", "**/*.png", "**/*.jpg", "**/*.md"]
 fallthrough = false
 
+# the retention job (P24): once a day, 22:17 UTC, 02:47 in Afghanistan (worker/entry.py `scheduled`); a schedule, not a resource
+[triggers]
+crons = ["17 22 * * *"]
+
 # no [observability]: Workers Logs stay off, as the hub keeps no access log (CPU time is read live with wrangler tail)

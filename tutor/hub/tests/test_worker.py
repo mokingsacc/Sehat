@@ -35,8 +35,9 @@ def test_wrangler_toml_names_only_qalam_staging():
 
 def test_wrangler_toml_creates_nothing_else():
     allowed = {"name", "main", "compatibility_date", "compatibility_flags", "workers_dev", "preview_urls", "vars",
-               "assets", "d1_databases", "rules", "observability"}
+               "assets", "d1_databases", "rules", "observability", "triggers"}
     assert set(WRANGLER) <= allowed, set(WRANGLER) - allowed            # no routes, KV, R2, queues, secrets
+    assert set(WRANGLER["triggers"]) == {"crons"} and len(WRANGLER["triggers"]["crons"]) == 1   # a schedule only
     assert WRANGLER["workers_dev"] is True
     assert "python_workers" in WRANGLER["compatibility_flags"]
     assert "binding" not in WRANGLER["assets"]
@@ -125,30 +126,37 @@ def count_statements(monkeypatch):
         monkeypatch.setattr(Statement, name, counted)
 
 
-@pytest.fixture
-def worker(monkeypatch, tmp_path):
+def load_entry(monkeypatch, tmp_path, config=WORKER / "wrangler.toml"):
     """tutor/worker/entry.py loaded as the Worker loads it, with stand-ins for the runtime's modules: the
-    `cloudflare:workers` env (D1 fake and wrangler.toml's vars) and pyodide.ffi (the fake's)."""
+    `cloudflare:workers` env (D1 fake and the wrangler file's vars) and pyodide.ffi (the fake's)."""
+    settings = tomllib.loads(Path(config).read_text(encoding="utf-8"))["vars"]
     count_statements(monkeypatch)
     db = CountingD1()
-    env = SimpleNamespace(DB=db, **WRANGLER["vars"])
+    env = SimpleNamespace(DB=db, **settings)
     workers = ModuleType("workers")
     workers.import_from_javascript = lambda name: SimpleNamespace(env=env)
-    workers.asgi = SimpleNamespace(entrypoint=lambda app: ("Default", app))
+    # the SDK's asgi.entrypoint(app) returns a WorkerEntrypoint class with `fetch` (python_modules/workers/asgi.py)
+    workers.asgi = SimpleNamespace(entrypoint=lambda app: type("Default", (), {"app": app}))
     pyodide = ModuleType("pyodide")
     pyodide.ffi = fake_ffi
     for name, mod in {"workers": workers, "pyodide": pyodide, "pyodide.ffi": fake_ffi}.items():
         monkeypatch.setitem(sys.modules, name, mod)
-    for k in WRANGLER["vars"]:
-        monkeypatch.delenv(k, raising=False)            # entry.py sets them from the env, as on Cloudflare
+    for k in {*WRANGLER["vars"], *settings}:            # entry.py sets them from the env, as on Cloudflare: so
+        monkeypatch.setenv(k, "")                       # each is first recorded, and put back after the test
+        monkeypatch.delenv(k)
     monkeypatch.setenv("TUTOR_DATA", str(tmp_path / "data"))
-    load_build().build(tmp_path / "build")          # entry.py reads build/src/vars.json, made from wrangler.toml
+    load_build().build(tmp_path / "build", config)   # entry.py reads build/src/vars.json, made from the wrangler file
     spec = importlib.util.spec_from_file_location("qalam_worker_entry", tmp_path / "build" / "src" / "entry.py")
     entry = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(entry)
-    assert entry.Default == ("Default", entry.qalam)
+    assert entry.Default.app is entry.qalam and callable(entry.Default.scheduled)
     entry.db, entry.tmp = db, tmp_path
     return entry
+
+
+@pytest.fixture
+def worker(monkeypatch, tmp_path):
+    return load_entry(monkeypatch, tmp_path)
 
 
 def client(entry):
@@ -276,3 +284,25 @@ async def test_staff_pages_stay_off_until_the_three_access_secrets_are_set(worke
     async with client(worker) as c:
         assert (await c.get("/api/m/review/me")).status_code == 401    # now it asks for Access's token
     assert worker.app.state.hub.staff.mode == "access"
+
+
+async def test_the_daily_cron_prunes_expired_reset_codes_old_wishes_and_old_logs(worker):
+    """P24: the retention job is the Worker's cron (wrangler.toml [triggers]); `scheduled` runs the hub's prune(),
+    starting the hub first when the cron is this isolate's first event."""
+    assert WRANGLER["triggers"]["crons"] == ["17 22 * * *"]
+    assert not worker._started
+    await worker.Default().scheduled(SimpleNamespace(cron="17 22 * * *"), None, None)      # starts, and so prunes
+    assert worker._started
+    db = worker.db.sqlite
+    db.execute("INSERT INTO reset_codes(token_hash, code_hash, expires) VALUES('a', 'x', '2020-01-01T00:00:00+00:00')")
+    db.execute("INSERT INTO reset_codes(token_hash, code_hash, expires) VALUES('b', 'y', '2999-01-01T00:00:00+00:00')")
+    for key, day in (("old", "2020-01-01"), ("new", "2999-01-01")):
+        db.execute("INSERT INTO wishlist(cohort, band, lang, wish, wkey, first_day, last_day) "
+                   "VALUES('staging', 's1', 'en', ?, ?, ?, ?)", (key, key, day, day))
+    db.execute("INSERT INTO admin_log(at, what, changed_by) VALUES('2020-01-01T00:00:00+00:00', 'release', 'seed')")
+    calls = worker.db.calls
+    await worker.Default().scheduled()                                     # a later day: the isolate is warm
+    assert worker.db.calls - calls <= 6                                     # one batch and the other three prunes
+    assert [r[0] for r in db.execute("SELECT token_hash FROM reset_codes")] == ["b"]
+    assert [r[0] for r in db.execute("SELECT wkey FROM wishlist")] == ["new"]
+    assert db.execute("SELECT COUNT(*) FROM admin_log WHERE at < '2021'").fetchone()[0] == 0

@@ -38,6 +38,7 @@ from .textnorm import digits_to_latin
 from .printing import Printer, PrintQueue
 from .stores import SqliteStore
 
+RETENTION_S = 24 * 3600                    # the retention job runs once a day (P24)
 log = logging.getLogger("tutor.hub")
 LANGS = ("prs", "ps", "en")
 
@@ -192,14 +193,29 @@ class Hub:
             log.info("cohorts seeded from %s", self.cfg.cohorts)
         if not self.cohort_id or not await self.store.cohort(self.cohort_id):
             log.error("this hub's cohort (TUTOR_COHORT=%s) does not exist: every module is off", self.cohort_id)
-        await self.store.prune(self.cfg.keep_days)
-        await self.store.prune_events(events.KEEP_DAYS)
-        await self.store.prune_ai_usage(ai_gateway.KEEP_DAYS)
-        await self.store.prune_learners(learners.IDLE_DAYS)
+        await self.prune()
         await self.store.fail_unfinished_prints()
         await self.reindex()
         if "printer" not in self.cfg.lacks:       # the queue's thread is the hub's; the Worker has no printer
             self.prints = PrintQueue(self.store.sync, self.printer, self.render_pdf)
+
+    async def prune(self):
+        """The retention job (P24): questions, ladders and prints after `keep_days`; reset codes once expired; wishes
+        after 90 days; flag and admin logs after two years (store.prune); events after 12 months; AI usage rows;
+        learners unseen for 12 months, with their events. At start, then daily: on the hub a background task
+        (`retention_loop`), online the Worker's cron (worker/entry.py `scheduled`)."""
+        await self.store.prune(self.cfg.keep_days)
+        await self.store.prune_events(events.KEEP_DAYS)
+        await self.store.prune_ai_usage(ai_gateway.KEEP_DAYS)
+        await self.store.prune_learners(learners.IDLE_DAYS)
+
+    async def retention_loop(self, every_s: float = RETENTION_S):
+        while True:
+            await asyncio.sleep(every_s)
+            try:
+                await self.prune()
+            except Exception:                  # a locked or busy database: try again tomorrow, never stop the hub
+                log.exception("retention: pruning failed; trying again in a day")
 
     async def stop(self):
         await self.gateway.aclose()
@@ -368,9 +384,11 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app):
         await hub.start()
+        retention = asyncio.create_task(hub.retention_loop())      # daily, while the hub runs (the Worker: its cron)
         try:
             yield
         finally:
+            retention.cancel()
             await hub.stop()
 
     app = FastAPI(title=f"{cfg.name} hub", version=__version__, docs_url=None, redoc_url=None, openapi_url=None,

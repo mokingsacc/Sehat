@@ -156,6 +156,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   photo marking, "Update Qalam" and the "Please update Qalam" card from hello's `apk`, and `/get` with three pictured
   steps. CI builds a debug APK and an unsigned release APK (about 0.5 MB) as an artifact, with no secrets. Pilot
   phones are installed over USB; release signing and Google's developer verification (D11) are Mo's, in HOSTING.md.
+- **P24, done (built; production waits for Mo's steps and the dress rehearsal for people):** the daily retention job
+  on the hub and as the Worker's cron; the privacy suite (a retention rule for every table, the wishlist and reset
+  codes); a 60-learner load test (`tools/load_test.py`, in every CI run: no request failed, about 44 D1 queries a
+  learner); production ready but not deployed (`wrangler.production.toml`, its guard, and a hand-started workflow from
+  `main` behind an approved environment, with a weekly encrypted D1 export); `docs/RELEASE.md` with the checklist,
+  rollback and the restore drill. What Mo does to go live is in HOSTING.md, "Going live".
 
 ## January 2027: buy and test
 

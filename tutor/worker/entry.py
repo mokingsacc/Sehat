@@ -13,7 +13,10 @@ What differs from the hub, all of it through the hub's existing seams:
   its own conversions (jsnull, to_js, to_py), as its contract and its strict test fake expect;
 - `TUTOR_LACKS=printer,pin` switches print and teacher off through their manifests' `needs`;
 - the hub starts (store opened, migrations, seeds, prunes, search index) once per isolate, on its first request,
-  not in the ASGI lifespan, which the Workers adapter would run around every request.
+  not in the ASGI lifespan, which the Workers adapter would run around every request;
+- the retention job (P24) is the Worker's cron (`[triggers] crons` in wrangler.toml): `scheduled` runs the hub's own
+  `prune()` once a day (expired reset codes, 90-day wishes, old questions, events, AI usage, idle learners, two-year
+  logs), since an isolate may live for days without a restart.
 
 On staging only (`QALAM_SPIKE = "on"`), `GET /api/_spike` answers the P7 spike's questions about this runtime
 (docs/HOSTING.md): does `pyodide.ffi.jsnull` exist, does a `to_js` list work with `batch()`, how many D1 queries one
@@ -113,4 +116,14 @@ async def qalam(scope, receive, send):
     await app(scope, receive, send)
 
 
-Default = asgi.entrypoint(qalam)
+async def retention():
+    """The daily cron: start the hub if this isolate has not (start prunes), else prune."""
+    if not _started:
+        await _start()
+    else:
+        await app.state.hub.prune()
+
+
+class Default(asgi.entrypoint(qalam)):
+    async def scheduled(self, *args):          # (controller, env, ctx): nothing from them is needed
+        await retention()

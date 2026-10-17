@@ -135,6 +135,17 @@ measurements and what it costs). Nothing of the hub is forked:
   which home it is (`home`). `tests/test_online.py` checks all four. Workers Logs
   stay off (no `[observability]`), as the hub keeps no access log; the deploy job reads CPU times live with
   `wrangler tail` and keeps only the numbers.
+- **The retention job (P24):** `Hub.prune()` deletes what is past its time (questions, ladders and prints after
+  `TUTOR_KEEP_DAYS`, expired reset codes, 90-day wishes, 12-month events and idle learners, AI usage and two-year
+  logs). Both run it at start; the hub then daily from a task in the app's lifespan (`retention_loop`, which logs a
+  failure and tries the next day), the Worker from its cron trigger: `entry.py`'s `Default` subclasses the SDK's ASGI
+  entrypoint with `scheduled`, which starts the hub if the isolate has not (start prunes) and otherwise prunes.
+- **Production (P24, not deployed):** `worker/wrangler.production.toml` (`qalam`, release mode, the open cohort, AI
+  off until P18), checked by `worker/guard.py`, deployed only by `.github/workflows/tutor-production.yml` by hand from
+  `main` through the GitHub environment `production`, which copies it over `wrangler.toml` on the runner first, so
+  `build.py` and `pywrangler` run as for staging. The same workflow's `export` makes the weekly encrypted D1 export.
+  `tests/test_production.py` checks the file, the guard, the workflow, the production Worker on the D1 fake, and a
+  restore of an export into the hub's SQLite store. `docs/RELEASE.md` is the release checklist and restore drill.
 
 ## Modules and cohort flags (modules.py, flags.py)
 
@@ -430,6 +441,8 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 - Nothing leaves the hub: there is no internet connection and no analytics.
 - Sheet photos (online, P14): only a strip of the answer cells leaves the phone, never the name box; it is read in
   memory and never stored or logged, on the phone or the server (above, "Photo marking").
+- Every table has a retention rule (`hub/tests/test_privacy.py`, the privacy suite of the pilot gate), which the
+  daily retention job keeps (above, "Online: the Worker"); a new table without a rule fails CI.
 
 ## Routes
 

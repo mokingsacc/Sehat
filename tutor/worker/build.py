@@ -29,13 +29,15 @@ SKIP = shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Stor
 AUDIO = ("*.opus", "*.ogg", "*.mp3")
 
 
-def build(out: Path = BUILD) -> dict:
+def build(out: Path = BUILD, config: Path | None = None) -> dict:
+    """`config` is the wrangler file whose [vars] go in vars.json: wrangler.toml unless a test names another (the
+    production workflow copies wrangler.production.toml over wrangler.toml first, so wrangler deploys the same)."""
     if out.exists():
         shutil.rmtree(out)
     src, public = out / "src", out / "public"
     src.mkdir(parents=True)
     shutil.copy2(WORKER / "entry.py", src / "entry.py")
-    settings = tomllib.loads((WORKER / "wrangler.toml").read_text(encoding="utf-8")).get("vars", {})
+    settings = tomllib.loads((config or WORKER / "wrangler.toml").read_text(encoding="utf-8")).get("vars", {})
     (src / "vars.json").write_text(json.dumps(settings, indent=1), encoding="utf-8")
     shutil.copytree(TUTOR / "hub" / "tutor_hub", src / "hub" / "tutor_hub", ignore=SKIP)
     for folder in ("migrations", "modules", "cohorts", "content/packs", "content/permissions", "content/consent"):

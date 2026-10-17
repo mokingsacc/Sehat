@@ -15,6 +15,7 @@ The village hub needs none of this: it is the same app under uvicorn on a small 
 | Print, teacher | off: the host lacks a printer and the teacher's PIN (`TUTOR_LACKS=printer,pin`) | on |
 | Address | `https://qalam-staging.<account>.workers.dev` only: no route, no custom domain | the hub's own address |
 
+Production (`qalam`) is the same Worker with the pilot's settings, ready but not deployed ("Going live" below).
 How it is built and deployed is in `ARCHITECTURE.md` ("Online: the Worker"). In short: `worker/build.py` copies the
 hub, migrations, manifests, cohorts and packs into a bundle; `.github/workflows/tutor-worker.yml` deploys it on every
 push of `tutor/` to the working branch, opens the store with `/api/hello`, runs `hub/tests/smoke_http.py` against the
@@ -219,6 +220,66 @@ use. Before the rollout reaches Afghanistan, Mo decides whose identity registers
 verifies that developer account in the Android Developer Console, and registers the package with the release key's
 certificate from step 1 (a key must exist first, and every later APK must use it). Until then the pilot stays on USB
 installs and `/get` is for testers.
+
+## The retention job (P24)
+
+The hub and the Worker prune on the same rules (`Hub.prune()`, BUILD-PLAN 3.4): questions, ladders and prints after
+`TUTOR_KEEP_DAYS` (60), reset codes once expired, wishes 90 days after they were last asked for, events after 12
+months, learners unseen for 12 months with their events and codes, AI usage counts, flag and admin logs after two
+years. Both run it at start; the hub then once a day from a background task, and the Worker from its cron trigger
+(`[triggers] crons = ["17 22 * * *"]`, 02:47 in Afghanistan, `entry.py`'s `scheduled`), since an isolate can live for
+days without a first request starting it again. A cron trigger is a schedule on the Worker, not a resource: the
+staging guard allows it, and the Free plan has five per account. `hub/tests/test_privacy.py` keeps a retention rule
+for every table, so a new table without one fails CI.
+
+## Going live: production (P24; ready, not deployed)
+
+Production is a second Worker and D1 database, both named `qalam`, from `worker/wrangler.production.toml`: the open
+cohort for learners without a class code (classes join with the codes the admin panel makes), release mode (only
+signed lessons), the online consent text, no printer and no PIN, the Android app's origin, the daily cron, no spike,
+and learner AI off until P18 brings the OpenAI key. `worker/guard.py` refuses any other name, database, binding,
+route, store or setting, and any deploy that is not from `main`. Nothing of production exists yet: no database, no
+Worker, no secret. Staging stays the only deployed copy until Mo does the steps below, on his own machine with
+`npx wrangler` logged in to the account, and in GitHub's settings:
+
+1. **Decide D6** (above): the Workers Paid plan is what the measurements point to.
+2. **Make the database, once:** `npx wrangler d1 create qalam --jurisdiction eu`, and copy the id it prints. (If the
+   account refuses `eu`, `--location weur`, as staging did not need.) The workflow never creates it.
+3. **Make two Cloudflare API tokens** (My Profile > API Tokens > Create Token > Custom), each for this account only:
+   one for deploys with *Workers Scripts: Edit* and *D1: Edit*, and one for backups with *D1: Edit* only. Keep them
+   in the password manager. They are new tokens, not staging's and never Sehat's.
+4. **Make Mo's backup key pair:** `gpg --full-generate-key` (RSA 4096 or ed25519/cv25519), then
+   `gpg --armor --export <key id>` for the public half. The private key stays offline with Mo; without it no
+   backup can be read.
+5. **GitHub, before the first run** (Settings > Environments; GitHub would make an unprotected environment on first
+   use, so make these first):
+   - `production`: Required reviewers Mo and the second admin; Deployment branches: `main` only. Secrets
+     `QALAM_PROD_CF_TOKEN` (the deploy token) and `QALAM_PROD_CF_ACCOUNT` (the account id).
+   - `production-backup`: no reviewers; Deployment branches: `main` only. Secrets `QALAM_PROD_CF_TOKEN` (the backup
+     token) and `QALAM_PROD_CF_ACCOUNT`.
+   - Repository variables (Settings > Secrets and variables > Actions > Variables): `QALAM_PROD_D1_ID` (the id from
+     step 2) and `QALAM_BACKUP_PUBKEY` (the armoured public key from step 4). Neither is a secret.
+6. **Merge to `main`** (production deploys only from there, or from Qalam's own repository if D3 moves it).
+7. **First deploy:** Actions > Tutor production > Run workflow, branch `main`, `deploy`; approve it. The summary
+   gives `https://qalam.<account>.workers.dev`. `/api/hello` shows the open cohort with AI off; lessons appear as
+   Pack 1's sign-offs land (release mode).
+8. **Staff pages:** repeat "Staff pages behind Cloudflare Access" for the production host, with the three secrets on
+   this Worker (`npx wrangler secret put TUTOR_ACCESS_TEAM --name qalam`, and `TUTOR_ACCESS_AUD`,
+   `TUTOR_STAFF_PEPPER`; a new pepper, not staging's), and the first admin's row with
+   `npx wrangler d1 execute qalam --remote --command "<the SQL staff-add prints>"`. Access needs a custom domain:
+   adding one means a `routes` entry with `custom_domain = true` in `wrangler.production.toml` and in the guard's
+   allowed keys, a reviewed change.
+9. **The pilot cohort:** in production's admin panel, a new cohort ("Mazar class", say) with its bands and
+   languages, Held answers on (`hold`), the AI budget, and a class code for the class card.
+10. **The APK:** set `QALAM_ONLINE_URL` to the production address, build, sign and record it (the Android section
+    above), then `TUTOR_APK_LATEST` in `wrangler.production.toml`'s `[vars]` and deploy.
+11. **Backups:** run Tutor production with `export` once by hand, do the restore drill in `RELEASE.md`, then set the
+    repository variable `QALAM_LIVE = yes` for the weekly export (Sundays 21:41 UTC; kept 35 days, encrypted).
+    D1 Time Travel needs nothing: it keeps 30 days on the Paid plan (7 on Free).
+12. **After P18:** `TUTOR_AI_PROVIDER = "openai"` in `wrangler.production.toml` (the guard allows only `off` and
+    `openai`) and the key as a Worker secret, as P18 names it; nothing else changes.
+
+Every later release follows `RELEASE.md`.
 
 ## Reading the next runs
 
