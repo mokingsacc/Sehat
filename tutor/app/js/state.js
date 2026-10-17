@@ -104,7 +104,14 @@ function clean(l) {
     // P29 (C4.7): where the Quran reader was last, [surah, verse]; the reader sends no events
     ...(Array.isArray(l.quran) && l.quran.length === 2 && l.quran.every(Number.isInteger) && l.quran[0] >= 1
       && l.quran[0] <= 114 && l.quran[1] >= 1 && l.quran[1] <= 286 ? { quran: [l.quran[0], l.quran[1]] } : {}),
+    // P28 (C4.6): the university checklist's steps she ticked (numbers 1 to 12), kept on this phone and never sent
+    ...(cleanUni(l.uni).length ? { uni: cleanUni(l.uni) } : {}),
   };
+}
+
+function cleanUni(v) {
+  if (!Array.isArray(v)) return [];
+  return [...new Set(v.filter((x) => Number.isInteger(x) && x >= 1 && x <= 12))].sort((a, b) => a - b);
 }
 
 function cleanCerts(v) {

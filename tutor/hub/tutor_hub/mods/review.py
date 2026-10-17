@@ -28,6 +28,11 @@ steps 1 to 114 the surahs (each its verses' text, translations with their footno
 hash). The page reads each surah from `/quran/surah/<n>.json` as the reader does; OK on a surah waits until every
 recitation it has here has played. `GET /api/m/review/quran`, `POST .../steps/{n}`, `POST .../sign`. Once pulled
 into content/quran/index.json (tools/pull_signoffs.py), the admin may switch the reader on.
+
+Since P28 (C4.6) a pack's card set is one more, kept as `cards:<pack>`: its checklist (if it has one) then its link
+cards, one step each (steps 1 to N), signed as one hash over theirs. The queue lists the sets with an item that needs
+her role under `cards`. `GET /api/m/review/cards/{pack}`, `POST .../steps/{n}`, `POST .../sign`. Pulled in, each item
+that needs her role gets her signature at its own hash, so a later change to one card voids only that card's.
 """
 import json
 from datetime import datetime, timezone
@@ -120,6 +125,7 @@ def _graph_status(g, role, notes, signs) -> dict:
 
 
 QURAN = "quran:set"
+CARDS = "cards:"
 
 
 def _quran_hashes(q) -> list[str]:
@@ -184,8 +190,9 @@ def router(hub, needs) -> APIRouter:
     async def me(request: Request):
         m = await staff(request)
         q = quran_set()
+        sets = [x for pid in hub.library.packs for x in hub.library.card_set(pid)]
         roles = sorted({x for l in [*hub.library.lessons.values(), *hub.library.graphs.values(),
-                                    *([q.index] if q else [])]
+                                    *([q.index] if q else []), *sets]
                         for x in (l.get("review") or {}).get("needs") or []})
         return {"label": m["label"], "role": m["role"], "initials": m["initials"], "via": m["via"], "roles": roles}
 
@@ -219,7 +226,15 @@ def router(hub, needs) -> APIRouter:
             st = _graph_status({"_hash": q.hash, "nodes": q.surahs}, role, await hub.store.review_notes(QURAN, role),
                                await hub.store.signoffs(QURAN))
             qrow = {"surahs": len(q.surahs), "short": q.hash[7:15], **st}
-        return {"role": role, "packs": out, "graphs": graphs, "quran": qrow}
+        cards = []
+        for pid in sorted(lib.packs):
+            items = lib.card_set(pid)
+            if items and any(role in ((x.get("review") or {}).get("needs") or []) for x in items):
+                key = CARDS + pid
+                st = _graph_status({"_hash": lib.card_set_hash(pid), "nodes": items}, role,
+                                   await hub.store.review_notes(key, role), await hub.store.signoffs(key))
+                cards.append({"pack": pid, "title": lib.packs[pid].get("title"), "items": len(items), **st})
+        return {"role": role, "packs": out, "graphs": graphs, "quran": qrow, "cards": cards}
 
     @r.get("/lessons/{lid}", dependencies=needs(MODULE))
     async def lesson(lid: str, request: Request, role: str | None = None):
@@ -427,6 +442,75 @@ def router(hub, needs) -> APIRouter:
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": q.hash[7:15]}
+
+    def card_set_role(me: dict, pid: str, asked: str | None):
+        lib = hub.library
+        items = lib.card_set(pid) if pid in lib.packs else []
+        if not items:
+            raise HTTPException(404, "no such card set")
+        role = me["role"] or (asked or "").strip()
+        if not role:
+            raise HTTPException(422, "say which role you review for")
+        if not any(role in ((x.get("review") or {}).get("needs") or []) for x in items):
+            raise HTTPException(403, "this card set does not need your role")
+        return items, role
+
+    @r.get("/cards/{pid}", dependencies=needs(MODULE))
+    async def cards_page(pid: str, request: Request, role: str | None = None):
+        m = await staff(request)
+        items, role = card_set_role(m, pid, role)
+        lib = hub.library
+        latest = _latest(await hub.store.review_notes(CARDS + pid, role))
+        steps = [{"n": k, "hash": x["_hash"], "last": (latest[k]["status"] if k in latest else None),
+                  "changed": k in latest and latest[k]["step_hash"] != x["_hash"],
+                  "chips": latest[k]["chips"] if k in latest else [], "text": latest[k]["text"] if k in latest else "",
+                  "needs": (x.get("review") or {}).get("needs") or [],
+                  "item": {**{k2: v for k2, v in x.items() if not k2.startswith("_") and k2 != "review"},
+                           "type": "checklist" if "steps" in x else "card",
+                           "owner": (lib.sources.get(x.get("source")) or {}).get("owner")}}
+                 for k, x in enumerate(items, 1)]
+        h = lib.card_set_hash(pid)
+        signs = await hub.store.signoffs(CARDS + pid)
+        return {"pack": pid, "title": lib.packs[pid].get("title"), "hash": h, "short": h[7:15], "role": role,
+                "steps": steps, "today": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                "signed": [{"role": s["role"], "initials": s["initials"], "date": s["signed_on"],
+                            "current": s["content_hash"] == h} for s in signs]}
+
+    @r.post("/cards/{pid}/steps/{n}", dependencies=needs(MODULE))
+    async def cards_note(pid: str, n: int, body: NoteIn, request: Request):
+        m = await staff(request)
+        items, role = card_set_role(m, pid, body.role)
+        if not 1 <= n <= len(items):
+            raise HTTPException(404, "no such card")
+        if body.step_hash != items[n - 1]["_hash"]:
+            raise HTTPException(409, "this card changed: open it again")
+        if any(c not in REVIEW_CHIPS for c in body.chips):
+            raise HTTPException(422, f"chips come from {', '.join(REVIEW_CHIPS)}")
+        text = filters.scrub(body.text.strip())[0] if body.verdict == "change" else ""
+        await hub.store.add_review_note(lesson=CARDS + pid, step=n, role=role, step_hash=items[n - 1]["_hash"],
+                                        status=body.verdict, chips=body.chips if body.verdict == "change" else [],
+                                        text=text)
+        return {"ok": True}
+
+    @r.post("/cards/{pid}/sign", dependencies=needs(MODULE))
+    async def cards_sign(pid: str, body: SignIn, request: Request):
+        m = await staff(request)
+        items, role = card_set_role(m, pid, body.role)
+        h = hub.library.card_set_hash(pid)
+        if body.hash != h:
+            raise HTTPException(409, "the card set changed: open it again")
+        latest = _latest(await hub.store.review_notes(CARDS + pid, role))
+        todo = [k for k, x in enumerate(items, 1)
+                if k not in latest or latest[k]["status"] != "ok" or latest[k]["step_hash"] != x["_hash"]]
+        if todo:
+            raise HTTPException(409, f"cards not OK yet: {', '.join(map(str, todo))}")
+        initials = m["initials"] or (body.initials or "").strip().upper()
+        try:
+            new = await hub.store.add_signoff(lesson=CARDS + pid, content_hash=h, role=role, initials=initials,
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from None
+        return {"signed": True, "new": new, "role": role, "short": h[7:15]}
 
     @r.get("/signoffs", dependencies=needs(MODULE))
     async def all_signoffs(request: Request):

@@ -1,0 +1,12 @@
+{
+  "id": "university",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["s2", "ad"],
+  "slots": [],
+  "capabilities": [],
+  "settings": {},
+  "needs": [],
+  "offline": "partly"
+}

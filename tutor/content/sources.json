@@ -1087,6 +1087,199 @@
     "checked": "2026-10-16"
   },
   {
+    "id": "edx",
+    "name": "edX",
+    "url": "https://www.edx.org/",
+    "owner": "edX LLC",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://www.edx.org/edx-terms-service",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university",
+      "general"
+    ],
+    "formats": [
+      "video",
+      "text"
+    ],
+    "offline": false,
+    "attribution": "edX (www.edx.org).",
+    "notes": "Online university courses. Many can be audited free (watched without a certificate); certificates and some courses cost money. Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
+    "id": "coursera",
+    "name": "Coursera",
+    "url": "https://www.coursera.org/",
+    "owner": "Coursera Inc.",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://www.coursera.org/about/terms",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university",
+      "general"
+    ],
+    "formats": [
+      "video",
+      "text"
+    ],
+    "offline": false,
+    "attribution": "Coursera (www.coursera.org).",
+    "notes": "Online university courses. Many can be audited free; certificates cost money, with financial aid on some. Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
+    "id": "uopeople",
+    "name": "University of the People",
+    "url": "https://www.uopeople.edu/",
+    "owner": "University of the People",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://www.uopeople.edu/",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": false,
+    "attribution": "University of the People (www.uopeople.edu).",
+    "notes": "An online, tuition-free university in English: no tuition, but application and assessment fees, for which it says scholarships are available (its Tuition-Free page, checked 17 Oct 2026). Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
+    "id": "turkiye-burslari",
+    "name": "Türkiye Scholarships",
+    "url": "https://www.turkiyeburslari.gov.tr/",
+    "owner": "Republic of Türkiye (Presidency for Turks Abroad and Related Communities)",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://www.turkiyeburslari.gov.tr/",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": false,
+    "attribution": "Türkiye Scholarships (www.turkiyeburslari.gov.tr).",
+    "notes": "The Turkish government's scholarships for international students, from bachelor's to PhD; who may apply and when is on the official site each year. Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
+    "id": "daad",
+    "name": "DAAD scholarship database",
+    "url": "https://www.daad.de/en/studying-in-germany/scholarships/",
+    "owner": "German Academic Exchange Service (DAAD)",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://www.daad.de/en/",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": false,
+    "attribution": "DAAD scholarship database (www.daad.de/en/studying-in-germany/scholarships).",
+    "notes": "Germany's scholarship database for international students; each scholarship says who may apply. Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
+    "id": "fulbright-foreign-student",
+    "name": "Fulbright Foreign Student Program",
+    "url": "https://foreign.fulbrightonline.org/",
+    "owner": "U.S. Department of State, Bureau of Educational and Cultural Affairs",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://foreign.fulbrightonline.org/",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": false,
+    "attribution": "Fulbright Foreign Student Program (foreign.fulbrightonline.org).",
+    "notes": "Graduate study in the United States for students from listed countries; on 17 Oct 2026 the official country list included Afghanistan. Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
+    "id": "educationusa",
+    "name": "EducationUSA",
+    "url": "https://educationusa.state.gov/",
+    "owner": "U.S. Department of State",
+    "licence": "All rights reserved (the site's own terms); link only",
+    "licenceUrl": "https://educationusa.state.gov/",
+    "class": "LINK",
+    "flags": [],
+    "languages": [
+      "en"
+    ],
+    "bands": [
+      "s2",
+      "ad"
+    ],
+    "subjects": [
+      "university"
+    ],
+    "formats": [
+      "text"
+    ],
+    "offline": false,
+    "attribution": "EducationUSA (educationusa.state.gov).",
+    "notes": "Official, free advice on applying to study in the United States, with advising centres and online events. Linked from a university card only (P28, C4.6): nothing copied; an adviser checks the page and the card hides six months later.",
+    "checked": "2026-10-17"
+  },
+  {
     "id": "tatoeba",
     "name": "Tatoeba sentence pairs",
     "url": "https://tatoeba.org/",

@@ -177,7 +177,7 @@ def test_the_reader_is_held_off_on_a_release_hub_and_the_admin_cannot_switch_it_
     c, cfg = hub_on(tmp_path, root, release=True)
     with c:
         hub = c.app.state.hub
-        assert hub.held() == ("quran",)
+        assert "quran" in hub.held()
         pin = {"X-Admin-Pin": admin_pin(cfg.data)}
         row = next(m for m in c.get(f"/api/m/admin/cohorts/{STAGING}", headers=pin).json()["modules"] if m["id"] == "quran")
         assert row["lock"] == "scholar" and not row["on"]
@@ -190,7 +190,7 @@ def test_the_reader_is_held_off_on_a_release_hub_and_the_admin_cannot_switch_it_
     c, cfg = hub_on(tmp_path, root, release=True)
     with c:
         hub = c.app.state.hub
-        assert hub.library.quran.signed and hub.held() == ()
+        assert hub.library.quran.signed and "quran" not in hub.held()
         pin = {"X-Admin-Pin": admin_pin(cfg.data)}
         row = next(m for m in c.get(f"/api/m/admin/cohorts/{HUB}", headers=pin).json()["modules"] if m["id"] == "quran")
         assert row["lock"] is None
@@ -204,7 +204,7 @@ def test_a_set_that_fails_its_checks_holds_the_reader_off_everywhere(tmp_path):
     (root / "quran" / "tanzil-data.xml").write_text("<quran/>", encoding="utf-8")
     c, _ = hub_on(tmp_path, root)
     with c:
-        assert c.app.state.hub.held() == ("quran",)
+        assert "quran" in c.app.state.hub.held()
         assert "quran" not in [m["id"] for m in c.get("/api/hello").json()["modules"]]
 
 
@@ -354,7 +354,7 @@ def test_the_scholar_reads_every_surah_signs_the_set_and_the_switch_unlocks(tmp_
     # the set's hash ignores its review block, so the signature holds; one changed file voids it
     c, _ = hub_on(tmp_path, root, release=True)
     with c:
-        assert c.app.state.hub.held() == ()
+        assert "quran" not in c.app.state.hub.held()
     shutil.copy2(root / "quran" / "translations" / "pashto_rwwad.json", tmp_path / "keep.json")
     t = root / "quran" / "translations" / "pashto_rwwad.json"
     doc = json.loads(t.read_text(encoding="utf-8"))

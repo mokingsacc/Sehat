@@ -181,6 +181,8 @@ def router(hub) -> APIRouter:
             return "moderation"
         if m["id"] == "quran" and not (hub.library.quran is not None and hub.library.quran.signed):
             return "scholar"                           # C4.7: locked until a Hanafi scholar signs the set
+        if m["id"] == "university" and not hub.library.university_ready():
+            return "adviser"                           # C4.6: locked until the first card set is signed
         if cohort["id"] == open_id():                  # C4.9: the pilot's gate for photo; no Homework help in 2027
             if m["id"] in gates.OFF_IN_OPEN:
                 return "open"
@@ -349,6 +351,9 @@ def router(hub) -> APIRouter:
             if why == "scholar":
                 raise HTTPException(409, "the Quran reader stays off until a Hanafi scholar has signed the Quran set "
                                     "(content/quran) at its current hash")
+            if why == "adviser":
+                raise HTTPException(409, "university preparation stays off until its first card set (the checklist "
+                                    "and a card) is signed by an adviser and the Dari and Pashto readers")
             if why == "gate":
                 raise HTTPException(409, "photo marking waits for the pilot's four numbers: "
                                     + "; ".join(gates.photo_open(hub.cfg.cohorts)[0]))
@@ -590,7 +595,11 @@ def router(hub) -> APIRouter:
             raise HTTPException(409, "on the hub the PINs open the staff pages: there is no staff list")
 
     def roles() -> list[str]:
-        lesson_roles = {x for l in hub.library.lessons.values() for x in (l.get("review") or {}).get("needs") or []}
+        lib = hub.library                 # every reviewer role a lesson, graph, the Quran set or a card set names
+        q = lib.quran.index if lib.quran is not None and lib.quran.ok and lib.quran.index else None
+        pages = [*lib.lessons.values(), *lib.graphs.values(), *([q] if q else []),
+                 *[x for pid in lib.packs for x in lib.card_set(pid)]]
+        lesson_roles = {x for l in pages for x in (l.get("review") or {}).get("needs") or []}
         return list(ROLES) + sorted(lesson_roles)
 
     @r.get("/staff")

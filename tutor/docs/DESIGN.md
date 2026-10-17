@@ -699,6 +699,28 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   only (the publishers' own wording); Husary (64 kbps) stands in as the reciter until the scholar names one; the draft
   banner's words are drafts for native speakers like every new Dari and Pashto string.
 
+## What P28 built, and where it differs
+
+- **The row:** "University" with the U badge (`--s-university`), the last row of s2's subject list before the Quran
+  reader, and among the adult reader track's rows; it opens `#/university`.
+- **The screen** (`#/university`): "Getting ready for university" in the top bar, the draft band while anything is
+  unsigned, then "Steps you can take. Qalam can't promise a place or a scholarship." (`--muted`) with its speaker;
+  "Your steps: 3 of 8" in bold; the eight steps as rows with a 32 px tick box (`accent-color: --accent`), the step's
+  words, a 44 px round chevron where the step opens a subject (maths, English), and a speaker; under them "Your ticks
+  stay on this phone." Then the cards under section heads with speakers: Courses, Tests, Scholarships, Advice (a head
+  only where it has cards). A card is C2.6's card plus "Who: ..." and one line of facts: the cost in bold and
+  "Checked: October 2026" muted. The screen ends with the warning "Never pay anyone to apply. Apply only on the
+  official site." in bold `--warm-ink` on `--warm-soft` with a 4 px `--warm` edge and its speaker. Offline the
+  checklist works from the phone's copy and the cards say "The cards need the internet."
+- No event for a tick, a card opened or the screen visited.
+- **The review page** for a card set: the checklist as one item, then each card with its facts and "Open the page";
+  OK stays grey until the page was opened from there.
+- Open look questions: the cards' first head says "Courses", not "Free courses", since University of the People
+  charges fees; the warning closes the screen rather than staying fixed on it; "Checked" gives the Gregorian month
+  with its Afghan name (Mizan is not used, as the card's date is the site's own); a step's chevron opens the subject
+  page, not one pathway; no card of kind `test` yet (no free test page was verified), so step 3 has no cards; the
+  checklist's count has its own speaker on top of the page speaker.
+
 ---
 
 # C2 and C3 decisions

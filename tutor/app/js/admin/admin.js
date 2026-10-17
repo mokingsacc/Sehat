@@ -36,6 +36,7 @@ const T = {
     needs: 'needs {x}', locked_moderation: 'locked: needs paid human moderation', locked_maturity: 'only where drafts are taken',
     locked_gate: "waits for the pilot's four numbers", locked_open: 'off in open in 2027',
     locked_scholar: 'locked until a Hanafi scholar signs the Quran set',
+    locked_adviser: 'locked until an adviser signs the first university cards',
     gate_wait: "Photo marking in open waits for the pilot's four numbers:",
     gate_open: 'The gate is passed. The budget for open: marks a day × {n} tokens a mark × 1.2.',
     host: 'not on this host ({x})', depends: 'depends on {x}', turn_on: 'Turn on', turn_on_both: 'Turn on both',

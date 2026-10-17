@@ -12,6 +12,7 @@ learners without recorded clips, is never served; otherwise drafts are served ma
 import json
 import logging
 import re
+from datetime import date
 from pathlib import Path
 
 from . import licences, mathcheck
@@ -437,6 +438,55 @@ def content_hash(item: dict, pack_dir: Path, clips: dict | None = None, qset=Non
     return licences.sha256_text(blob)
 
 
+CHECKLIST_KEYS = {"steps", "review"}
+CHECKLIST_STEP_KEYS = {"id", "text", "open"}
+CHECKLIST_ROLES = ("adviser", "Dari reader", "Pashto reader")
+
+
+def check_checklist(cl, where: str) -> list[str]:
+    """A pack's checklist (P28, C4.6): 1 to 12 steps, each our own words in Dari and Pashto (English optional), at
+    most 140 characters, promising nothing; a step may open a subject (`"open": "subject:maths"`). Signed by an
+    adviser and the Dari and Pashto readers."""
+    if not isinstance(cl, dict):
+        return [f"{where}: must be an object {{steps, review}}"]
+    p = []
+    if extra := set(cl) - CHECKLIST_KEYS:
+        p.append(f"{where}: unknown field {sorted(extra)}")
+    steps = cl.get("steps")
+    if not isinstance(steps, list) or not 1 <= len(steps) <= 12:
+        return p + [f"{where}: steps must be a list of 1 to 12 steps"]
+    seen = set()
+    for i, st in enumerate(steps, 1):
+        w = f"{where} step {i}"
+        if not isinstance(st, dict):
+            p.append(f"{w}: must be an object {{id, text, open}}")
+            continue
+        if extra := set(st) - CHECKLIST_STEP_KEYS:
+            p.append(f"{w}: unknown field {sorted(extra)}")
+        if not isinstance(st.get("id"), str) or not _ID.match(st["id"]) or st["id"] in seen:
+            p.append(f"{w}: id must be lower-case letters, digits and dashes, each once")
+        seen.add(st.get("id"))
+        t = st.get("text")
+        if not isinstance(t, dict) or not all(isinstance(t.get(l), str) and t[l].strip() for l in ("prs", "ps")):
+            p.append(f"{w}: text must be our own words, {{\"prs\": ..., \"ps\": ...}}")
+        else:
+            for lang, x in t.items():
+                if lang not in LANGS or not isinstance(x, str) or len(x) > licences.CARD_ABOUT_MAX:
+                    p.append(f"{w}: text ({lang}) must be at most {licences.CARD_ABOUT_MAX} characters")
+                elif bad := licences.promises(x):
+                    p.append(f"{w}: promises what no one can promise ({', '.join(bad)})")
+        if "open" in st:
+            kind, _, what = str(st["open"]).partition(":")
+            if kind != "subject" or what not in SUBJECTS:
+                p.append(f"{w}: open must be \"subject:<subject>\" (one of {', '.join(SUBJECTS)})")
+    p += check_review(cl.get("review"), where)
+    needs = (cl.get("review") or {}).get("needs") or [] if isinstance(cl.get("review"), dict) else []
+    for role in CHECKLIST_ROLES:
+        if role not in needs:
+            p.append(f"{where}: the review must include {'an' if role == 'adviser' else 'a'} {role}")
+    return p
+
+
 def review_state(item: dict, chash: str) -> str:
     """signed (every role it needs signed this exact content), changed (signed once, edited since) or draft."""
     r = item.get("review") or {}
@@ -594,6 +644,7 @@ class Library:
         self.states: dict[str, str] = {}          # lesson id -> signed, changed or draft
         self.terms: dict[str, dict] = {}          # lesson id -> {nc, sa} from its sources
         self.links: list[dict] = []               # link cards, each with its pack and state
+        self.checklists: dict[str, dict] = {}     # pack id -> its checklist (P28: the university pack), with state
         self.hidden: list[str] = []               # release mode: what is not served, and why
         self.problems: list[str] = []
         self.known: dict[str, dict] = {}          # every lesson that loaded, served or not: {band, sheet} (the graph)
@@ -605,7 +656,7 @@ class Library:
         for x in (self.packs, self.lessons, self.lesson_pack, self.hashes, self.states, self.terms, self.known,
                   self.graphs):
             x.clear()
-        self.links.clear(); self.hidden.clear(); self.problems.clear()
+        self.links.clear(); self.hidden.clear(); self.problems.clear(); self.checklists.clear()
         if not self.dir.is_dir():
             self.problems.append(f"no packs folder at {self.dir}")
             return
@@ -685,6 +736,7 @@ class Library:
             pack["_media_terms"] = media_terms
             self.packs[pid] = pack
             self._load_links(pack, pid, pdir, clips)
+            self._load_checklist(pid, pdir, clips)
         from . import graph                   # the skills graphs map nodes to the lessons just loaded
         graphs, probs, hidden = graph.load(self.graph_dir, self.known, release=self.release)
         self.graphs.update(graphs)
@@ -781,6 +833,48 @@ class Library:
                 continue
             self.links.append({**c, "_pack": pid, "_hash": chash, "_state": state})
 
+    def _load_checklist(self, pid, pdir, clips):
+        """checklist.json (P28, C4.6): the steps she ticks on her phone, the pack's own text, signed like a card."""
+        f = pdir / "checklist.json"
+        if not f.is_file():
+            return
+        try:
+            cl = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as e:
+            self.problems.append(f"{pid}/checklist.json: {e}")
+            return
+        probs = check_checklist(cl, f"{pid}/checklist.json")
+        if probs:
+            self.problems.extend(probs)
+            return
+        chash = content_hash(cl, pdir, clips)
+        state = review_state(cl, chash)
+        if self.release and state != "signed":
+            self.hidden.append(f"{pid}/checklist.json: not signed by its reviewers yet")
+            return
+        self.checklists[pid] = {**cl, "_pack": pid, "_hash": chash, "_state": state, "_file": f}
+
+    def card_set(self, pid: str) -> list[dict]:
+        """A pack's card set as reviewers sign it (P28): its checklist, if any, then its link cards in order."""
+        cl = self.checklists.get(pid)
+        return ([cl] if cl else []) + [c for c in self.links if c["_pack"] == pid]
+
+    def card_set_hash(self, pid: str) -> str:
+        return licences.sha256_text("\n".join([f"cards:{pid}"] + [x["_hash"] for x in self.card_set(pid)]))
+
+    def university(self, today: str | None = None) -> dict:
+        """What the university screen shows (P28): the checklist and the cards still within their review_by date."""
+        cl = next((c for _, c in sorted(self.checklists.items())), None)
+        cards = self.link_cards(subject="university", today=today)
+        return {"checklist": None if cl is None else {
+                    "steps": cl["steps"], "draft": cl["_state"] != "signed"},
+                "cards": cards}
+
+    def university_ready(self) -> bool:
+        """The first card set is signed (C4.6): a signed checklist and at least one signed university card."""
+        return any(c["_state"] == "signed" for c in self.checklists.values()) and any(
+            c["_state"] == "signed" and c.get("subject") == "university" for c in self.links)
+
     def pack_dir(self, lesson_id: str):
         pid = self.lesson_pack.get(lesson_id)
         return self.packs[pid]["_dir"] if pid else None
@@ -858,10 +952,16 @@ class Library:
         out.pop("sources", None)     # the credits say it for the learner
         return out
 
-    def link_cards(self, *, subject=None, year=None, lesson=None) -> list[dict]:
-        """Link cards for the app: our words about a page elsewhere, the owner and the address. Online only."""
+    def link_cards(self, *, subject=None, year=None, lesson=None, today: str | None = None) -> list[dict]:
+        """Link cards for the app: our words about a page elsewhere, the owner and the address. Online only. A card
+        past its `review_by` date is not served (P28: six months after a person checked the page)."""
         out = []
+        today = today or date.today().isoformat()
         for c in self.links:
+            if c.get("review_by") and c["review_by"] < today:
+                continue
+            if (c.get("subject") == "university") != (subject == "university"):
+                continue                      # university cards show on the university screen only
             if subject and c.get("subject") and c["subject"] != subject:
                 continue
             if year is not None and c.get("years") and year not in c["years"]:
@@ -872,7 +972,8 @@ class Library:
             out.append({"id": c["id"], "title": c["title"], "about": c["about"], "url": c["url"],
                         "owner": src.get("owner"), "source": c["source"], "subject": c.get("subject"),
                         "years": c.get("years", []), "lessons": c.get("lessons", []), "unit": c.get("unit"),
-                        "needs": ["internet"], "draft": c["_state"] != "signed"})
+                        "needs": ["internet"], "draft": c["_state"] != "signed",
+                        **{k: c[k] for k in licences.UNI_FIELDS if k in c}})
         return out
 
     def credits(self) -> dict:

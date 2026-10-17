@@ -160,6 +160,16 @@ export async function links({ subject, year } = {}) {
   try { return (await call('/api/links?' + q, { ms: 8000 })).links || []; } catch { return []; }
 }
 
+// university preparation (P28): the checklist and the cards, kept for offline (the checklist works without the hub;
+// the cards open only online). Nothing she ticks or opens is sent
+export async function university() {
+  try {
+    const j = await call('/api/m/university', { ms: 8000 });
+    cache('university', j);
+    return j;
+  } catch { return cache('university'); }
+}
+
 export async function credits() {
   try {
     const j = await call('/api/credits', { ms: 8000 });

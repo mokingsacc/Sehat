@@ -76,7 +76,7 @@ def card(**kw):
 
 def test_the_real_sources_file_is_clean_and_uses_the_apps_codes():
     s = Sources(SOURCES)
-    assert s.problems == [] and len(s.by_id) == 43              # P29 lists IslamHouse as ASK
+    assert s.problems == [] and len(s.by_id) == 50              # P29 lists IslamHouse as ASK; P28 seven LINK sites
     langs = {l for x in s.by_id.values() for l in x["languages"]}
     assert langs <= {"prs", "ps", "en", "fa", "ar", "zh", "ur"} and "pus" not in langs and "eng" not in langs
     assert all("ages" not in x and set(x["bands"]) <= {"ey", "p1", "p2", "s1", "s2", "ad"} for x in s.by_id.values())
@@ -382,7 +382,9 @@ def test_link_cards_and_credits_from_the_hub(hub_client):
     assert hub_client.get("/api/links?subject=science").json()["links"] == []
     cr = hub_client.get("/api/credits").json()
     assert [x["id"] for x in cr["sources"]] == ["cc-cedict"]          # the Chinese starter (P27a)
-    assert [x["id"] for x in cr["linked"]] == ["begum-academy"]
+    assert [x["id"] for x in cr["linked"]] == ["begum-academy", "coursera", "daad", "educationusa", "edx",
+                                               "fulbright-foreign-student", "khan-academy", "mit-opencourseware",
+                                               "openstax", "turkiye-burslari", "uopeople"]   # P28's cards
     assert {a["name"] for a in cr["app"]} == {"Vazirmatn", "Noto Naskh Arabic", "Noto Sans SC (Chinese, a subset)",
                                               "Amiri Quran"}
 

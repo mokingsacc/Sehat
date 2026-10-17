@@ -13,6 +13,8 @@
 // translation's version and credit, the reciter, Tanzil's notice) as item 0, then each surah, opened from the hub's
 // /quran/surah/<n>.json as the reader shows it; OK on a surah waits until it is open and every recitation it has
 // here has played to its end. Nothing in the set can be edited: Change says why it may not be used.
+// Since P28 (C4.6) a pack's card set is one more: its checklist and each link card, OK on a card only once its page
+// has been opened from here, then "Hold to sign".
 
 const API = '../api/m/review';
 const BAND_OF_YEAR = (y) => (y === 0 ? 'ey' : y <= 3 ? 'p1' : y <= 6 ? 'p2' : y <= 9 ? 's1' : 's2');
@@ -44,6 +46,11 @@ const T = {
     open_surah: 'Open the surah', play_all: 'Play every verse', heard: '{a} of {b} recitations played',
     sign_set: 'Sign the Quran set', todo_set: 'Every surah and the set itself need OK before signing.',
     no_tr: 'No translation', notes_n: 'Notes ({n})',
+    card_sets: 'Card sets', cards_of: 'Cards: {p}', items_n: '{n} items', checklist: 'The checklist',
+    open_page: 'Open the page', open_first: 'Open the page first, and check it says what the card says.',
+    kind: 'Kind', cost: 'Cost', who: 'Who may apply', checked: 'Checked', review_by: 'Hidden after',
+    expired: 'Past its date: hidden on phones', step_opens: 'opens {s}',
+    sign_cards: 'Sign this card set', todo_cards: 'Every card and the checklist need OK before signing.',
   },
   prs: {
     title: 'بررسی', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
@@ -67,6 +74,11 @@ const T = {
     open_surah: 'سوره را باز کن', play_all: 'همهٔ آیه‌ها را بشنو', heard: '{a} از {b} تلاوت شنیده شد',
     sign_set: 'مجموعهٔ قرآن را امضا کن', todo_set: 'پیش از امضا هر سوره و خود مجموعه باید درست باشند.',
     no_tr: 'ترجمه نیست', notes_n: 'یادداشت‌ها ({n})',
+    card_sets: 'مجموعه‌های کارت', cards_of: 'کارت‌ها: {p}', items_n: '{n} مورد', checklist: 'فهرست قدم‌ها',
+    open_page: 'صفحه را باز کن', open_first: 'اول صفحه را باز کن و ببین که همان چیزی را می‌گوید که کارت می‌گوید.',
+    kind: 'نوع', cost: 'هزینه', who: 'چه کسی', checked: 'بررسی شده', review_by: 'پنهان بعد از',
+    expired: 'تاریخش گذشته: روی تلفن‌ها پنهان است', step_opens: '{s} را باز می‌کند',
+    sign_cards: 'این مجموعهٔ کارت را امضا کن', todo_cards: 'پیش از امضا هر کارت و فهرست قدم‌ها باید درست باشند.',
   },
 };
 
@@ -183,9 +195,13 @@ async function queue() {
       h('span', { class: 'grow' }, h('b', {}, t('quran')), h('small', { class: 'muted' }, t('surahs_n', { n: q.quran.surahs }), ' · ',
         h('span', { dir: 'ltr' }, q.quran.short))),
       h('span', { class: TAG[q.quran.status] || 'tag' }, q.quran.status === 'step' ? t('step_of', { a: q.quran.step, b: q.quran.of }) : t(q.quran.status))))] : [];
+  const cs = (q.cards || []).length ? [h('div', { class: 'section-head' }, h('h2', {}, t('card_sets'))),
+    h('nav', { class: 'subjects' }, q.cards.map((x) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); cardsPage(x.pack); } },
+      h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(x.title, lang) || x.pack), h('small', { class: 'muted' }, t('items_n', { n: x.items }))),
+      h('span', { class: TAG[x.status] || 'tag' }, x.status === 'step' ? t('step_of', { a: x.step, b: x.of }) : t(x.status)))))] : [];
   show(h('div', { class: 'screen' }, top(null, t('for_you')),
     h('p', { class: 'pad muted small' }, `${t('role')}: ${q.role}`),
-    rows.length || graphs.length || qs.length ? [rows, graphs, qs] : h('p', { class: 'empty' }, t('none'))));
+    rows.length || graphs.length || qs.length || cs.length ? [rows, graphs, qs, cs] : h('p', { class: 'empty' }, t('none'))));
 }
 
 // a hold-to-sign button: `run` after HOLD_MS held down
@@ -262,6 +278,83 @@ async function graphPage(sub) {
     p.final ? ` · ${t('final')}: ${lessonLine(p.final)}` : '', p.certificate ? ` · ${t('certificate')}` : ''))) : h('p', { class: 'muted' }, t('nothing')));
   show(h('div', { class: 'screen' }, top(queue, t('graph_of', { s: sub })),
     h('div', { class: 'stack pad' }, nodes, paths, signBox, status)));
+  drawSign();
+}
+
+// a pack's card set (P28): its checklist, then each link card, items 1 to N; OK on a card waits until its page has
+// been opened from here, so the reviewer checks the page says what the card says (an adviser: who may apply, the cost,
+// and that it is the official site)
+async function cardsPage(pid) {
+  let d;
+  try { d = await api('/cards/' + encodeURIComponent(pid)); } catch (e) { return failed(e); }
+  const lang = LANG_OF_ROLE[d.role] || ui;
+  const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
+  const verdict = {};
+  for (const x of d.steps) if (x.last && !x.changed) verdict[x.n] = x.last;
+  const signBox = h('div', { class: 'stack' });
+
+  function item(st) {
+    const it = st.item;
+    const isCard = it.type === 'card';
+    let opened = !isCard;
+    const okBtn = h('button', { type: 'button', class: 'btn ok-btn' + (verdict[st.n] === 'ok' ? ' on' : ''),
+      disabled: opened || verdict[st.n] === 'ok' ? null : true }, t('ok'));
+    const chBtn = h('button', { type: 'button', class: 'btn' + (verdict[st.n] === 'change' ? ' warm' : '') }, t('change'));
+    const note = h('textarea', { class: 'field' + (verdict[st.n] === 'change' ? '' : ' hidden'), rows: 2, maxlength: 500,
+      'aria-label': t('comment'), placeholder: t('comment'), dir: 'auto' });
+    note.value = st.text || '';
+    const saveBtn = h('button', { type: 'button', class: 'btn outline small' + (verdict[st.n] === 'change' ? '' : ' hidden') }, t('save_note'));
+    async function save(v) {
+      try {
+        await api(`/cards/${encodeURIComponent(pid)}/steps/${st.n}`, { method: 'POST', body: { verdict: v, chips: [],
+          text: v === 'change' ? note.value : '', step_hash: st.hash, role: me.via === 'pin' ? me.role : null } });
+        verdict[st.n] = v; st.last = v; st.changed = false;
+        okBtn.classList.toggle('on', v === 'ok'); chBtn.classList.toggle('warm', v === 'change');
+        status.textContent = '';
+        drawSign();
+      } catch (e) { if (e.status === 409) cardsPage(pid); else status.textContent = t('save_fail'); }
+    }
+    okBtn.addEventListener('click', () => { if (!opened) { status.textContent = t('open_first'); return; }
+      note.classList.add('hidden'); saveBtn.classList.add('hidden'); save('ok'); });
+    chBtn.addEventListener('click', () => { note.classList.remove('hidden'); saveBtn.classList.remove('hidden'); chBtn.classList.add('warm'); okBtn.classList.remove('on'); });
+    saveBtn.addEventListener('click', () => save('change'));
+    const body = isCard ? [
+      h('p', { dir: 'auto' }, pick(it.about, lang)),
+      h('dl', { class: 'facts' },
+        h('dt', {}, t('who')), h('dd', { dir: 'auto' }, pick(it.who, lang) || t('nothing')),
+        h('dt', {}, t('kind')), h('dd', { dir: 'ltr' }, it.kind || t('nothing')),
+        h('dt', {}, t('cost')), h('dd', { dir: 'ltr' }, it.cost || t('nothing')),
+        h('dt', {}, t('checked')), h('dd', { dir: 'ltr' }, it.checked || t('nothing')),
+        h('dt', {}, t('review_by')), h('dd', { dir: 'ltr' }, it.review_by || t('nothing'))),
+      it.review_by && it.review_by < d.today ? h('p', { class: 'tag warm' }, t('expired')) : null,
+      h('p', { dir: 'ltr', class: 'small' }, h('a', { href: it.url, target: '_blank', rel: 'noopener noreferrer',
+        onClick: () => { opened = true; okBtn.disabled = false; } }, t('open_page')), ' · ', it.url),
+    ] : h('ol', {}, (it.steps || []).map((x) => h('li', { dir: 'auto' }, pick(x.text, lang),
+      x.open ? h('small', { class: 'muted' }, ' (', t('step_opens', { s: x.open.replace(/^subject:/, '') }), ')') : null)));
+    return h('div', { class: 'card pad-card stack graph-node' },
+      h('div', { class: 'row wrap' }, h('b', { class: 'grow', dir: 'auto' }, isCard ? `${pick(it.title, lang)}${it.owner ? '  ·  ' + it.owner : ''}` : t('checklist')),
+        st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
+        st.last === 'ok' && !st.changed ? h('span', { class: 'tag good' }, t('ok_last')) : null),
+      body, h('div', { class: 'row' }, okBtn, chBtn), note, saveBtn);
+  }
+
+  function drawSign() {
+    const notOk = d.steps.some((x) => verdict[x.n] !== 'ok');
+    const facts = h('dl', { class: 'facts' },
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials));
+    put(signBox, h('h2', {}, t('sign_cards')), facts, notOk ? h('p', { class: 'muted' }, t('todo_cards')) : null,
+      holdButton(notOk, async () => {
+        try {
+          await api(`/cards/${encodeURIComponent(pid)}/sign`, { method: 'POST',
+            body: { hash: d.hash, role: me.via === 'pin' ? me.role : null, initials: me.via === 'pin' ? me.initials : null } });
+          put(signBox, h('p', { class: 'done-big' }, t('done_sign')), h('button', { type: 'button', class: 'btn', onClick: queue }, t('back')));
+        } catch (e) { if (e.status === 409) cardsPage(pid); else status.textContent = t('save_fail'); }
+      }));
+  }
+
+  show(h('div', { class: 'screen' }, top(queue, t('cards_of', { p: pick(d.title, lang) || pid })),
+    h('div', { class: 'stack pad' }, d.steps.map(item), signBox, status)));
   drawSign();
 }
 

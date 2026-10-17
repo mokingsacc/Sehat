@@ -869,3 +869,18 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .notice { white-space: pre-wrap; overflow-wrap: anywhere; font-size: var(--fs-sm); margin: 0; }
 .ayah-step .row { gap: 8px; flex-wrap: wrap; }
 
+
+/* P28 (C4.6): getting ready for university. The checklist's 32 px tick boxes, her count in bold, the cards' cost and
+   checked lines, and the scam warning in --warm-ink on --warm-soft at the end of the screen */
+.uni-count { flex: 1; margin: 8px 0; font-weight: 800; }
+.uni-steps { list-style: none; margin: 0; padding: 0 16px; display: flex; flex-direction: column; }
+.uni-step { display: flex; align-items: center; gap: 8px; min-height: var(--tap); border-bottom: var(--bw) solid var(--line); }
+.uni-step label { gap: 12px; padding: 8px 0; cursor: pointer; align-items: center; }
+.uni-step input[type="checkbox"] { width: 32px; height: 32px; flex: none; margin: 0; accent-color: var(--accent); }
+.round.uni-open { width: 44px; height: 44px; }
+.uni-card .uni-who, .uni-card .facts { margin: 0; line-height: 1.6; }
+.uni-card .facts { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: var(--fs-sm); }
+.uni-card .cost { font-weight: 800; }
+.uni-warning { margin: 16px; padding: 12px; gap: 8px; align-items: center; background: var(--warm-soft); color: var(--warm-ink);
+  border-inline-start: 4px solid var(--warm); border-radius: var(--r); font-weight: 800; }
+.uni-warning p { margin: 0; }

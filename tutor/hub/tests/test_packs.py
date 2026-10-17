@@ -15,7 +15,8 @@ def test_starter_pack_loads_clean(library):
     assert len(library.lessons) == 18
     assert set(library.packs) == {"starter", "adult-literacy-1", "adult-maths-1",         # the adult packs since P26
                                   "english-adult-1", "chinese-1",                       # and P27a's
-                                  "quran-1", "seerah-1"}                                # and P29's, with no lessons yet
+                                  "quran-1", "seerah-1",                                # and P29's, with no lessons yet
+                                  "university-1"}                                       # and P28's cards
 
 
 def test_summary_has_what_the_app_lists(library):

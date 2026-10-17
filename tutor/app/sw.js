@@ -5,7 +5,7 @@
 // as it does on the hub, where plain http allows no service worker (F2). A new version of this file takes over at
 // the next start, without a banner. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-p29-1';
+const VERSION = 'qalam-p28-1';
 const SHELL_CACHE = 'shell-' + VERSION;
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const QURAN_CACHE = 'quran-v1';                // P29: each surah and verse recitation once opened, never all at once
@@ -50,6 +50,7 @@ const SHELL = [
   'js/screens/lock.js',
   'js/screens/plan.js',
   'js/screens/quran.js',
+  'js/screens/university.js',
   'js/screens/print.js',
   'js/screens/settings.js',
   'js/screens/signup.js',

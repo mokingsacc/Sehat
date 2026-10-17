@@ -35,7 +35,9 @@ def on(*ids):
 
 def test_the_built_modules_are_valid():
     assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "print", "quran", "recall", "review",
-                           "sheets", "teacher", "timetable"]
+                           "sheets", "teacher", "timetable", "university"]
+    # P28 (C4.6): university preparation has no capability (no events) and serves s2 and adults only
+    assert REAL["university"]["capabilities"] == [] and REAL["university"]["bands"] == ["s2", "ad"]
     # P29 (C4.7): the Quran reader has no AI, no capability, and serves s1, s2 and adult readers only
     assert "ai" not in REAL["quran"] and REAL["quran"]["capabilities"] == [] and REAL["quran"]["bands"] == ["s1", "s2", "ad"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
@@ -192,12 +194,13 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
     assert flags.enabled(REAL, staging, f) == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "print",
-                                              "quran", "recall", "review", "sheets", "teacher", "timetable"]
+                                              "quran", "recall", "review", "sheets", "teacher", "timetable",
+                                              "university"]
     # held off by the hub (P29: the Quran set missing, broken or, on a release hub, unsigned), whatever the flag says
     assert "quran" not in flags.enabled(REAL, staging, f, held=("quran",))
     assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == [
         "ask", "cert", "check", "homework", "lessons", "photo", "plan", "quran", "recall", "review", "sheets", "teacher",
-        "timetable"]
+        "timetable", "university"]
     assert REAL["teacher"]["needs"] == []                 # C3.2: a gate per host, no `pin` need (staff.py)
 
 

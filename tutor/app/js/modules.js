@@ -42,7 +42,7 @@ const TABS = [
 ];
 // screens that belong to a module (#/name/...); every other screen belongs to the shell
 const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', lesson: 'lessons',
-  subject: 'lessons', subjects: 'lessons', plan: 'plan', cert: 'cert', quran: 'quran' };
+  subject: 'lessons', subjects: 'lessons', plan: 'plan', cert: 'cert', quran: 'quran', university: 'university' };
 const FOOTER_BANDS = ['s1', 's2', 'ad'];
 
 let list = BUILT_IN;

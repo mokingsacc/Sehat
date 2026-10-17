@@ -253,6 +253,29 @@ A card holds only these fields: a title, our own description (at most 140 charac
 an embed) fails the validator. Cards need the internet, so the app shows them only while online, and they are
 signed like lessons.
 
+### University cards and the checklist (P28, C4.6)
+
+The `university-1` pack (`bands: ["s2", "ad"]`, `tracks: ["reader"]`, no lessons) holds the university screen:
+
+- **`checklist.json`**: `{"steps": [{"id", "text": {"prs", "ps", "en"}, "open": "subject:maths"}], "review": ...}`, 1
+  to 12 steps of our own words (at most 140 characters each); `open` sends a step to a subject's page. She ticks the
+  steps on her phone; the ticks are never sent.
+- **A university card** (`"subject": "university"`) is a link card with five more fields: `kind` (`course`,
+  `scholarship`, `test` or `guide`), `cost` (`free`: "Free", or "Free to apply" on a scholarship; `audit`: "Free to
+  watch; certificates cost money"; `fees`: "Fees for exams; ask about help"), `who` (who may apply, our words, at most
+  140 characters a language, nothing about travel), `checked` (the day a person opened the page and found it says what
+  the card says) and `review_by` (at most six months later). After `review_by` the card is not served, and the phone
+  hides it by its own date too, until someone checks the page again and moves both dates. Its source is in
+  sources.json as LINK or better (never ASK or AVOID), and its review needs an `adviser` besides the Dari and Pashto
+  readers.
+- **The no-promise lint** refuses, on any card and in the checklist, words that promise a place, a scholarship or a
+  result: "guarantee", "you will get", "100%", "everyone gets", "free scholarship", "sure to", "certain to", and their
+  Dari and Pashto drafts (`licences.PROMISES`). Say what the page offers, never what she will get.
+- **Signing:** a pack's checklist and cards are one page in `/review/`, `cards:<pack>`: each item OK (a card's OK waits
+  until its page was opened from the review), then "Hold to sign". `tools/pull_signoffs.py` writes each signature
+  into every item that needs that role, at the item's own hash. The `university` module stays locked in the admin,
+  and held off on a release hub, until a checklist and at least one university card are signed.
+
 ### Adult packs and tracks
 
 An adult pack says `"audience": "adult"` and, since P26 (C4.3), which adult tracks see it: `"tracks": ["literacy",

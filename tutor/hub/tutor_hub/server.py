@@ -345,10 +345,16 @@ class Hub:
         return cohort, f, flags.enabled(self.modules, cohort, f, band, self.cfg.lacks, self.held())
 
     def held(self) -> tuple:
-        """Modules held off whatever the flags say (P29, C4.7): the Quran reader while its set is missing or broken,
-        and on a release hub until a Hanafi scholar has signed the set at its current hash."""
+        """Modules held off whatever the flags say: the Quran reader while its set is missing or broken, and on a
+        release hub until a Hanafi scholar has signed the set at its current hash (P29, C4.7); university preparation
+        while no pack has its checklist, and on a release hub until the first card set is signed (P28, C4.6)."""
         q = self.library.quran
-        return ("quran",) if q is None or not q.ok or (self.cfg.release and not q.signed) else ()
+        out = []
+        if q is None or not q.ok or (self.cfg.release and not q.signed):
+            out.append("quran")
+        if not self.library.checklists or (self.cfg.release and not self.library.university_ready()):
+            out.append("university")
+        return tuple(out)
 
     async def hello(self, cohort_id: str | None = None, band: str | None = None) -> dict:
         cohort, f, on = await self.cohort_modules(cohort_id, band)
@@ -480,6 +486,13 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         return FileResponse(f, media_type="audio/mpeg", headers={"Cache-Control": "public, max-age=604800"})
 
     # link cards and credits: the licence data (licences.py); how they look is still to be designed (C2)
+    # university preparation (P28, C4.6): the checklist (she ticks it on her phone; the ticks are never sent) and the
+    # cards within their review_by date. The phone keeps the answer for offline and hides a card past its date by its
+    # own clock too. No event is written for opening a card or ticking a step
+    @app.get("/api/m/university", dependencies=needs("university"))
+    async def university():
+        return hub.library.university()
+
     @app.get("/api/links", dependencies=needs("lessons"))
     async def links(subject: str | None = None, year: int | None = None, lesson: str | None = None):
         return {"links": hub.library.link_cards(subject=subject, year=year, lesson=lesson)}

@@ -1,5 +1,7 @@
 """Copy reviewers' signatures from the hub or staging into the lesson packs (P17), the skills graphs (P25a) and the
-Quran set (P29: `quran:set`, into content/quran/index.json, whose hash is the set's).
+Quran set (P29: `quran:set`, into content/quran/index.json, whose hash is the set's) and the card sets (P28:
+`cards:<pack>`, a signature for the set's current hash copied into its checklist.json and each card in links.json that
+needs the role, at the item's own hash).
 
 The review screens write each signature to the `signoffs` table: a role, initials, a date and the lesson's content
 hash. Release mode reads only the pack's own review blocks, so before a release the content lead pulls them in:
@@ -121,6 +123,54 @@ def pull_page(key: str, g: dict, signs: list[dict], report: dict):
         f.write_text(put_review(f.read_text(encoding="utf-8"), review), encoding="utf-8")
 
 
+def pull_cards(lib, pid: str, signs: list[dict], report: dict):
+    """A pack's card set (P28): signed as one hash; each item that needs the role gets the signature at its own."""
+    key = "cards:" + pid
+    items = lib.card_set(pid) if pid in lib.packs else []
+    if not items:
+        report["unknown"].append(key)
+        return
+    h = lib.card_set_hash(pid)
+    touched = set()
+    for s in signs:
+        if s["hash"] != h:
+            report["stale"].append(f"{key} ({s['role']}, {s['date']}): changed since it was signed")
+            continue
+        hit = False
+        for x in items:
+            review = dict(x.get("review") or {"status": "draft", "needs": []})
+            needs = review.get("needs") or []
+            if s["role"] not in needs:
+                continue
+            hit = True
+            name = f"{key} {'checklist' if 'steps' in x else x['id']}"
+            offs = [dict(o) for o in review.get("signoffs") or []]
+            if any(o.get("role") == s["role"] and o.get("hash") == x["_hash"] for o in offs):
+                report["already"].append(f"{name}: {s['role']}")
+                continue
+            offs = [o for o in offs if o.get("role") != s["role"]]
+            offs.append({"role": s["role"], "initials": s["initials"], "date": s["date"], "hash": x["_hash"]})
+            review["signoffs"] = sorted(offs, key=lambda o: needs.index(o["role"]) if o["role"] in needs else 99)
+            review["status"] = "checked" if review_state({"review": review}, x["_hash"]) == "signed" else "draft"
+            x["review"] = review
+            touched.add("checklist" if "steps" in x else "links")
+            report["copied"].append(f"{name}: {s['role']} {s['initials']} {s['date']}")
+        if not hit:
+            report["not_needed"].append(f"{key}: {s['role']}")
+    pdir = lib.packs[pid]["_dir"]
+    if "checklist" in touched:
+        cl = items[0]
+        cl["_file"].write_text(put_review(cl["_file"].read_text(encoding="utf-8"), cl["review"]), encoding="utf-8")
+    if "links" in touched:
+        f = pdir / "links.json"
+        cards = json.loads(f.read_text(encoding="utf-8"))
+        by_id = {x["id"]: x for x in items if "steps" not in x}
+        for c in cards:
+            if c.get("id") in by_id:
+                c["review"] = by_id[c["id"]]["review"]
+        f.write_text(json.dumps(cards, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def pull(rows: list[dict], packs_dir: Path) -> dict:
     lib = Library(packs_dir)
     report = {"copied": [], "already": [], "stale": [], "unknown": [], "not_needed": []}
@@ -130,6 +180,9 @@ def pull(rows: list[dict], packs_dir: Path) -> dict:
     for lid, signs in sorted(by_lesson.items()):
         if lid.startswith("graph:"):
             pull_graph(lib, lid.split(":", 1)[1], signs, report)
+            continue
+        if lid.startswith("cards:"):
+            pull_cards(lib, lid.split(":", 1)[1], signs, report)
             continue
         if lid == "quran:set":
             q = lib.quran

@@ -35,9 +35,46 @@ USE_REQUIRED = ("id", "item", "title", "url", "licence", "checked")
 
 # a link card: a title, the owner's site, our own description, where it belongs. Any other field (text, body,
 # transcript, quote, embed ...) would be copied material and is refused.
-CARD_KEYS = ("id", "source", "title", "about", "url", "subject", "years", "lessons", "unit", "review")
+CARD_KEYS = ("id", "source", "title", "about", "url", "subject", "years", "lessons", "unit", "review",
+             "kind", "cost", "who", "checked", "review_by")
 CARD_ABOUT_MAX = 140
 CARD_TITLE_MAX = 120
+# a university card (P28, C4.6) says what it is, what it costs and who may apply, when a person checked the page, and
+# when it hides (at most six months later); its source is LINK or better, and an adviser signs it
+CARD_KINDS = ("course", "scholarship", "test", "guide")
+CARD_COSTS = ("free", "audit", "fees")       # "Free" / "Free to watch; certificates cost money" / "Fees for exams; ..."
+UNI_FIELDS = ("kind", "cost", "who", "checked", "review_by")
+UNI_SOURCE_CLASSES = ("LINK", "BUNDLE", "BUNDLE-NC")
+CARD_MONTHS = 6
+
+# the no-promise lint (C4.6): words that promise a place, a scholarship or a result. The Dari and Pashto lines are
+# drafts for native speakers to complete
+PROMISES = {
+    "en": ("guarantee", "you will get", "100%", "everyone gets", "free scholarship", "sure to", "certain to"),
+    "prs": ("تضمین", "ضمانت", "حتماً می‌گیرید", "حتما می‌گیرید", "حتماً قبول", "۱۰۰٪", "۱۰۰ ٪", "همه می‌گیرند",
+            "بورسیه رایگان", "بورس رایگان"),
+    "ps": ("تضمین", "ضمانت", "حتماً به یې ترلاسه کړئ", "خامخا به", "۱۰۰٪", "۱۰۰ ٪", "ټول یې ترلاسه کوي",
+           "وړیا بورس", "وړیا بورسیه"),
+}
+
+
+def promises(text: str) -> list[str]:
+    """The promising words in a text (any language's list: a Dari card may quote English)."""
+    def norm(x):    # the half-space, Arabic letter forms and Persian digits do not hide a word
+        x = str(x or "").lower().replace("\u200c", " ").replace("ي", "ی").replace("ك", "ک").replace("ً", "")
+        x = x.translate(str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩٪", "01234567890123456789%"))
+        return re.sub(r"\s+", " ", x)
+    t = norm(text)
+    return sorted({w for ws in PROMISES.values() for w in ws if norm(w) in t})
+
+
+def add_months(day: str, n: int) -> str:
+    """YYYY-MM-DD plus n months, on the same day or the month's last."""
+    y, m, d = (int(x) for x in day.split("-"))
+    m += n
+    y, m = y + (m - 1) // 12, (m - 1) % 12 + 1
+    last = [31, 29 if y % 4 == 0 and (y % 100 or y % 400 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1]
+    return f"{y:04d}-{m:02d}-{min(d, last):02d}"
 
 # sources whose items Qalam takes only without share-alike, by a committee ruling: Tatoeba's recordings only CC0 or
 # CC BY, never SA (C4.4), so the English pack stays free of share-alike
@@ -330,4 +367,47 @@ class Sources:
             p.append(f"{w}: years must be a list of years 0 to 12")
         if "lessons" in c and not (isinstance(c["lessons"], list) and all(isinstance(x, str) for x in c["lessons"])):
             p.append(f"{w}: lessons must be a list of lesson ids")
+        for t in _texts(c.get("title")) + _texts(c.get("about")) + _texts(c.get("who")):
+            if bad := promises(t):
+                p.append(f"{w}: promises what no one can promise ({', '.join(bad)}): say what the page offers")
+        if c.get("subject") == "university" or any(k in c for k in UNI_FIELDS):
+            p += self._check_uni_card(c, w)
+        return p
+
+    def _check_uni_card(self, c, w: str) -> list[str]:
+        """A university card's own fields (P28, C4.6)."""
+        p = []
+        for k in UNI_FIELDS:
+            if k not in c:
+                p.append(f"{w}: a university card needs {k}")
+        if "kind" in c and c["kind"] not in CARD_KINDS:
+            p.append(f"{w}: kind must be one of {', '.join(CARD_KINDS)}")
+        if "cost" in c and c["cost"] not in CARD_COSTS:
+            p.append(f"{w}: cost must be one of {', '.join(CARD_COSTS)}")
+        if "who" in c:
+            if not isinstance(c["who"], dict) or not _has_text(c["who"]):
+                p.append(f"{w}: who says who may apply, {{\"prs\": ..., \"ps\": ...}}")
+            else:
+                for lang, t in c["who"].items():
+                    if lang not in ("prs", "ps", "en") or not isinstance(t, str) or len(t) > CARD_ABOUT_MAX:
+                        p.append(f"{w}: who ({lang}) must be our own words, at most {CARD_ABOUT_MAX} characters")
+        ok = True
+        for k in ("checked", "review_by"):
+            if k in c and not (isinstance(c[k], str) and _DATE.match(c[k])):
+                p.append(f"{w}: {k} must be a date, YYYY-MM-DD")
+                ok = False
+        if ok and "checked" in c and "review_by" in c:
+            if c["review_by"] <= c["checked"]:
+                p.append(f"{w}: review_by comes after checked")
+            elif c["review_by"] > add_months(c["checked"], CARD_MONTHS):
+                p.append(f"{w}: review_by is at most {CARD_MONTHS} months after checked "
+                         f"({add_months(c['checked'], CARD_MONTHS)})")
+        src = self.by_id.get(c.get("source"))
+        if src and self.effective_class(c["source"]) not in UNI_SOURCE_CLASSES:
+            p.append(f"{w}: a university card's source must be LINK or better, not {src['class']}")
+        needs = (c.get("review") or {}).get("needs") or [] if isinstance(c.get("review"), dict) else []
+        for role in ("adviser", "Dari reader", "Pashto reader"):
+            if role not in needs:
+                p.append(f"{w}: a university card's review must include an {role}" if role == "adviser"
+                         else f"{w}: a university card's review must include a {role}")
         return p

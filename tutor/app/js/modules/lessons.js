@@ -8,7 +8,8 @@
 // its module is on). Adult literacy: one per row with "3 of 30" and a speaker at the end; adult readers: a bar and
 // "12/30". After the literacy pathway's last lesson, the secondary asks once "You can read now. Use the reader look?".
 // The Quran reader (P29, the `quran` module: s1, s2 and adult readers) is the last row of the clean list and of the
-// reader track's rows, while its module is on.
+// reader track's rows, while its module is on; university preparation (P28, the `university` module: s2 and adult
+// readers) just before it.
 
 import { fa, getLang, s } from '../i18n.js';
 import * as graph from '../graph.js';
@@ -74,6 +75,8 @@ export function tiles({ child: c, tone }) {
 // the reader's row (P29): only where the module is on, which the hub decides by her band
 const readerRow = () => h('a', { href: '#/quran' }, subjectBadge('quran', 42),
   h('span', { class: 'grow' }, h('b', {}, s('quran_reader'))), icon('chev', 22));
+const uniRow = () => h('a', { href: '#/university' }, subjectBadge('university', 42),
+  h('span', { class: 'grow' }, h('b', {}, s('university'))), icon('chev', 22));
 
 export function subjectList({ child: c, band }) {
   return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects')), h('span', {}, s('every_lesson_open'))),
@@ -85,7 +88,8 @@ export function subjectList({ child: c, band }) {
           p.total ? h('small', { class: 'muted' }, s('of', { a: p.done, b: p.total })) : null,
           p.total ? h('div', { class: 'bar' }, h('span', { style: { width: Math.round((100 * p.done) / p.total) + '%' } })) : null),
         icon('chev', 22));
-    }), on('quran') && allows('quran', band) ? readerRow() : null)];
+    }), on('university') && allows('university', band) ? uniRow() : null,
+    on('quran') && allows('quran', band) ? readerRow() : null)];
 }
 
 // the adult track rows: [subject, label key] in order, reading first in her language
@@ -94,7 +98,7 @@ const TRACKS = (lang) => [[lang === 'ps' ? 'pashto' : 'dari', 'track_read'], ['m
 
 // the rows she has: { sub, key, href, p: {done, total} or null }
 export const trackList = (c) => TRACKS(c.lang).map(([sub, key]) => {
-  if (sub === 'university') return on('university') ? { sub, key, href: '#/university', p: null } : null;
+  if (sub === 'university') return on('university') && c.track === 'reader' ? { sub, key, href: '#/university', p: null } : null;
   if (sub === 'quran') return on('quran') && c.track === 'reader' ? { sub, key, href: '#/quran', p: null } : null;
   const p = library.progress(c, sub);
   return p.total ? { sub, key, href: '#/subject/' + sub, p } : null;
