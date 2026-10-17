@@ -868,3 +868,66 @@ async def test_her_own_questions_wait_for_the_teacher_and_go_with_her_or_after_s
     assert sorted(r[0] for r in db.execute("SELECT id FROM made")) == [b]
     await store.delete_learner("her")
     assert list(db.execute("SELECT id FROM made")) == []
+
+
+async def test_a_live_class_keeps_counts_and_its_room_only_while_it_runs(store):
+    # P30a (C6.1): one open session a cohort; the room by token hash with a one-time ticket; nothing about who after
+    st = {"audio": "off", "board": None, "floor": None, "rtc": {"sfu": None, "published": False, "pub": 0}}
+    assert await store.live_start(id="s1", cohort="c1", subject="maths", host="teacher:Teacher A", state=st) is True
+    assert await store.live_start(id="s2", cohort="c1", subject="maths", host="teacher:Teacher A", state=st) is False
+    assert await store.live_start(id="s3", cohort="c2", subject="class", host="admin:Admin A", state=st) is True
+    s = await store.live_open("c1")
+    assert s["id"] == "s1" and s["state"] == st and s["v"] == 1 and s["ended_at"] is None and s["peak"] == 0
+    with pytest.raises(ValueError):
+        await store.live_start(id="s4", cohort="c3", subject="maths", host="t", state="not a dict")
+    await store.add_cohort(id="c1", label="Class A", langs=["prs"], bands=["s1"], settings={})
+    await store.add_learner(token_hash="her", cohort="c1", picture="key", band="s1")
+    await store.add_learner(token_hash="him", cohort="c1", picture="cup", band="s1")
+    await store.live_join("s1", "her", "a" * 32)
+    await store.live_join("s1", "him", "b" * 32)
+    long_ago, recent = "2020-01-01T00:00:00+00:00", "2000-01-01T00:00:00+00:00"
+    assert await store.live_ticket("s1", "her", "b" * 32, recent) is False         # not hers
+    assert await store.live_ticket("s1", "her", "a" * 32, "2999-01-01T00:00:00+00:00") is False   # too old
+    assert await store.live_ticket("s1", "her", "a" * 32, recent) is True
+    assert await store.live_ticket("s1", "her", "a" * 32, recent) is False          # used once
+    assert await store.live_hand("s1", "him", 2) is True and await store.live_hand("s1", "her", 1) is True
+    with pytest.raises(ValueError):
+        await store.live_hand("s1", "her", 7)
+    room = await store.live_here("s1")
+    assert [(r["picture"], r["reason"]) for r in room] == [("cup", 2), ("key", 1)]     # in hand order
+    assert set(room[0]) == {"token_hash", "picture", "number", "band", "sfu", "joined_at", "seen_at", "hand_at",
+                            "reason"}
+    assert await store.live_lower_all("s1") == 2 and all(r["hand_at"] is None for r in await store.live_here("s1"))
+    assert await store.live_set_sfu("s1", "her", "sfu-1") and (await store.live_present("s1", "her"))["sfu"] == "sfu-1"
+    assert await store.live_seen("s1", "her") and not await store.live_seen("s1", "nobody")
+    v = await store.live_update("s1", state=dict(st, audio="on"), bump=True, seen=True, peak=2)
+    assert v == 2 and (await store.live_session("s1"))["state"]["audio"] == "on"
+    assert await store.live_update("s1", peak=1) == 2 and (await store.live_session("s1"))["peak"] == 2
+    left = await store.live_leave("s1", "him")
+    assert set(left) == {"joined_at", "seen_at"} and await store.live_leave("s1", "him") is None
+    assert await store.live_update("s1", add_min=7) == 2
+    assert await store.live_end("s1", add_min=3) is True and await store.live_end("s1") is False
+    s = await store.live_session("s1")
+    assert s["ended_at"] and s["state"] == {} and s["listener_min"] == 10 and s["v"] == 3
+    assert await store.live_here("s1") == [] and await store.live_open("c1") is None
+    assert await store.live_update("s1", bump=True) is None                          # not open: nothing changes
+    assert [x["id"] for x in await store.live_sessions_since(recent)] == ["s1", "s3"]
+    assert [x["id"] for x in await store.live_sessions_since(recent, "c2")] == ["s3"]
+    assert "state" not in (await store.live_sessions_since(recent))[0]
+    # the retention job: a session whose teacher went quiet ends with its room's minutes; old rows go
+    db = store.db.sqlite if isinstance(store, D1Store) else store._inner.db
+    await store.live_join("s3", "her", "c" * 32)
+    db.execute("UPDATE live_present SET joined_at='2026-01-01T10:00:00+00:00', seen_at='2026-01-01T10:20:00+00:00'")
+    db.execute("UPDATE live_sessions SET seen_at=? WHERE id='s3'", (long_ago,))
+    await store.prune(60)
+    s3 = await store.live_session("s3")
+    assert s3["ended_at"] and s3["listener_min"] == 20 and s3["state"] == {}
+    assert list(db.execute("SELECT * FROM live_present")) == []
+    db.execute("UPDATE live_sessions SET ended_at=? WHERE id='s1'", (long_ago,))
+    await store.prune(60)
+    assert [r[0] for r in db.execute("SELECT id FROM live_sessions")] == ["s3"]
+    # a learner who is deleted leaves the room with her
+    assert await store.live_start(id="s5", cohort="c1", subject="maths", host="teacher:Teacher A", state=st)
+    await store.live_join("s5", "her", "d" * 32)
+    await store.delete_learner("her")
+    assert list(db.execute("SELECT * FROM live_present")) == []

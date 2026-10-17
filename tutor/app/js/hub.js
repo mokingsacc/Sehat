@@ -228,3 +228,13 @@ export const sheetUrl = (id, { seed = 0, lang = 'prs', pdf = false, print = fals
 
 // "I have a code from my teacher" (P20): the six digits she was given open a new PIN; the lock is the phone's
 export const pinReset = (token, code) => call('/api/me/pin-reset', { method: 'POST', body: { code }, token, ms: 15000 });
+
+// live classes (P30a, C6.1): her token says her class; the sound itself goes through the relay, never through here
+const liveP = (id, what) => `/api/m/live/${encodeURIComponent(id)}/${what}`;
+export const liveNow = (token) => call('/api/m/live', { token, ms: 8000 });
+export const liveJoin = (id, token) => call(liveP(id, 'join'), { method: 'POST', token, ms: 15000 });
+export const liveSdp = (id, body, token) => call(liveP(id, 'sdp'), { method: 'POST', body, token, ms: 15000 });
+export const liveAnswer = (id, sdp, token) => call(liveP(id, 'answer'), { method: 'POST', body: { sdp }, token, ms: 15000 });
+export const liveState = (id, v, token) => call(liveP(id, 'state') + (v ? `?v=${v}` : ''), { token, ms: 8000 });
+export const liveHand = (id, reason, token) => call(liveP(id, 'hand'), { method: 'POST', body: { reason }, token, ms: 8000 });
+export const liveLeave = (id, token) => call(liveP(id, 'leave'), { method: 'POST', token, ms: 8000 });

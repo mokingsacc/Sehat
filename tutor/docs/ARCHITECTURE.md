@@ -505,11 +505,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /v/{id}` | The check page a certificate's QR code opens (`app/js/certcheck.js`), served by Python on the hub and online |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
 | `GET /api/m/admin/me`, `cohorts`, `cohorts/{id}`, `content`, `wishes`, `spend`, `safety`, `staff`, `log`; `POST /api/m/admin/cohorts`, `cohorts/{id}/kill`, `cohorts/{id}/flags/{module}`, `cohorts/{id}/settings`, `cohorts/{id}/code`, `cohorts/{id}/cards`, `content/{pack}/publish`, `content/{pack}/rollback`, `wishes`, `staff`; `DELETE /api/m/admin/staff/{id}` | The admin panel (P21); `X-Admin-Pin` on the hub, Cloudflare Access and an admin staff row online, 404 in the fallback container |
+| `GET /api/m/live`; `POST /api/m/live/{id}/join`, `sdp`, `answer`, `hand`, `leave`; `GET /api/m/live/{id}/state?v=` | A live class, the learner's side (P30a, C6.1): her token says her class (`?cohort=` never read), her consent needed; a ticket from `join` (16 bytes, once, 60 seconds) makes her relay session through `sdp`; `state` answers 204 while `v` is unchanged; bodies of 16 KB at most |
+| `GET /api/m/teacher/live`; `POST /api/m/teacher/live/start`, `{id}/sdp`, `{id}/board`, `{id}/lower`, `{id}/end`; `GET /api/m/teacher/live/{id}/roster` | A live class, the teacher's side (P30a, C6.1): the staff gate, her own class (`not_your_class`), `X-Qalam: 1` on every write; `start` refuses `live_open`, `budget` and `cap`; the roster says who is here, the hands in order and whether her sound goes out (two learners or more) |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `made` (`/api/m/made`, `/api/m/made/mine`; the teacher's `/api/m/teacher/made/{id}` needs `teacher` and `made`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `live` (`/api/m/live/*` and `/api/m/teacher/live/*`; held while the relay's secrets are missing, so never on a hub), `made` (`/api/m/made`, `/api/m/made/mine`; the teacher's `/api/m/teacher/made/{id}` needs `teacher` and `made`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes, the admin panel's (behind its gate) and the app's files are always there.
 
 ## The app (app/js)
@@ -805,6 +807,24 @@ pages and `/get`. The release APK is about 0.5 MB.
   links it in an Android phone's browser only.
 - **CI:** `.github/workflows/tutor-android.yml`: the alarm plan's plain-Java test, then the debug APK and the
   unsigned release APK as an artifact, with the permission list and the name checked. No secrets.
+
+## Live classes (rtc.py, mods/live.py, app/js/liveclass.js, app/js/modules/live.js, P30a)
+
+C6.1 to C6.3. A teacher speaks to her class from the teacher page; learners listen on the phone and raise a hand with
+one of three reasons. The sound goes through Cloudflare Realtime's SFU, never through the Worker: `rtc.py` asks the
+relay's HTTPS API for a session per person, publishes the teacher's microphone as the track `mic` (the answer's Opus
+line set to mono at 32 kbps) and lets each listener's session pull it, and fetches 2-hour TURN credentials per join.
+Only SDP text crosses the hub, in bodies of 16 KB at most. The two-learner rule lives in the teacher's roster poll
+(every 2 seconds): her sound goes out while two learners or more were seen in the last 30 seconds, and stops after a
+two-minute grace; the teacher page replaces her track with nothing while it is off. Phones poll the class's state
+every 5 seconds (`v` grows on every change). Tables: `live_sessions` (counts only, 12 months; `state` blanked at the
+end) and `live_present` (one row per learner in the room, deleted at the end, 6 hours at most); their retention runs
+inside `store.prune()`, which also ends a class whose teacher went quiet for 10 minutes or that ran past 105
+minutes. The phone keeps only `liveSeen`, the id of the last class she saw end. The learner's screen never asks for
+the microphone (a test reads `modules/live.js` for the names). The timetable gains a `live` block: a period whose
+lesson is the live class while the module can show for her, else a period of its subject. Locks: `rtc` (the four
+secrets), `consent` (the consent version must say `live: true`) and, under `TUTOR_RELEASE`, `gate`
+(`cohorts/gates/live.json`). Tests use `tests/fakes/rtc.py`; nothing has been tried against the real relay.
 
 ## Not built yet
 

@@ -252,9 +252,9 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
             costs[name] = worker.db.calls - before
     # the start applies each migration once per database (one batch each), so on a fresh database it grows by one
     # with every migration file (an existing one applies only the new files); it stays near 60% of the plan's
-    # limit (31 since 0018), everything but the migrations at 13, every other request at 20
+    # limit (32 since 0019), everything but the migrations at 13, every other request at 20
     first = costs.pop("first request (hub starts)")
-    assert first <= 31 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
+    assert first <= 32 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
     assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
     assert costs["100 events"] <= 4, costs                    # her record (and her day seen), then one batch
 

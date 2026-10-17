@@ -75,7 +75,8 @@ def test_online_only_an_admin_row_and_never_without_access(online, rsa, cfg):
     assert online.get("/api/m/admin/me", headers=online.pin).json()["error"] == "admins only"
     as_admin(online, rsa)
     me = get(online, "/me")
-    assert me == {"label": "Admin A", "via": "access", "home": "online", "staff": True}
+    assert me == {"label": "Admin A", "via": "access", "home": "online", "staff": True,     # which relay secrets are set,
+                  "rtc": {"app": False, "secret": False, "turn_key": False, "turn_secret": False}}   # never a value
     cfg2 = copy.copy(cfg)
     cfg2.access_team = cfg2.access_aud = cfg2.staff_pepper = None
     with TestClient(create_app(cfg2)) as c:                       # no Access settings: there is no admin panel

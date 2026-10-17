@@ -299,7 +299,9 @@ function moduleTable(c, again) {
       }
     }
   };
-  const note = (row) => L.join([row.lock ? t('locked_' + row.lock) : null,
+  // a gate other than photo's has its own words: what that module waits for (C6.A8)
+  const lockWord = (row) => (row.lock === 'gate' && row.id !== 'photo' ? t('locked_gate_' + row.id) : t('locked_' + row.lock));
+  const note = (row) => L.join([row.lock ? lockWord(row) : null,
     row.host.length ? t('host', { x: row.host.join(', ') }) : null,
     row.depends.length ? t('depends', { x: L.and(row.depends.map(modName)) }) : null]);
   const years = (row) => (row.bands.length === BANDS.length ? t('band.all') : row.bands.map((b) => t('band.' + b)).join(comma()));
@@ -323,7 +325,20 @@ function moduleTable(c, again) {
     : [t('gate_wait'), ...gateWhy(c.gate)].join(' ')) : null;
   return h('div', { class: 'atable amods' }, h('table', {}, h('thead', {}, h('tr', {},
     [t('module'), t('risk'), t('maturity'), t('years'), t('on'), t('settings'), ''].map((x) => h('th', {}, x)))),
-  h('tbody', {}, c.modules.map(tr))), gate);
+  h('tbody', {}, c.modules.map(tr))), gate, liveMonth(c));
+}
+
+// under the live classes' row while they are on (C6.1): this month's classes, hours listened and the data estimate
+// against the cap; the cap is the server's configuration, shown read-only
+function liveMonth(c) {
+  const row = c.modules.find((x) => x.id === 'live');
+  const u = c.live;
+  if (!row || !row.enabled || !u) return null;
+  return h('section', { class: 'card stack-sm alive' }, h('b', {}, modName('live')),
+    h('div', { class: 'bar spendbar' + (u.pct >= 80 ? ' warn' : '') }, h('span', { style: `width:${Math.min(100, u.pct || 0)}%` })),
+    h('small', {}, L.join([t('live_month', { n: num(u.classes), m: num(u.hours), g: num(u.gb), cap: num(u.cap) }),
+      u.classes ? t('live_peak', { n: num(u.peak) }) : null])),
+    h('small', { class: 'muted' }, t(u.full ? 'live_full' : 'live_cap')));
 }
 
 const show = (v) => (v === true ? t('common.on') : v === false ? t('common.off') : v === undefined || v === null || v === '' ? t('common.unset')
@@ -459,11 +474,15 @@ function timetablePage(c, draft) {
       return h('tr', {},
         h('td', {}, m(hhmm(from))),
         h('td', {}, h('select', { 'aria-label': t('k_' + blk.kind), onChange: (e) => {
-          x.blocks[i] = e.target.value === 'period' ? { kind: 'period', subject: 'auto', min: blk.min } : { kind: e.target.value, min: blk.min };
+          const k = e.target.value;
+          x.blocks[i] = k === 'period' ? { kind: 'period', subject: 'auto', min: blk.min }
+            : k === 'live' ? { kind: 'live', subject: 'class', min: blk.min } : { kind: k, min: blk.min };
           again();
         } }, tt.kinds.map((k) => h('option', { value: k, selected: k === blk.kind }, t('k_' + k))))),
         h('td', {}, blk.kind === 'period' ? h('select', { onChange: (e) => { blk.subject = e.target.value; } },
-          tt.subjects.map((sj) => h('option', { value: sj, selected: sj === (blk.subject || 'auto') }, t('s_' + sj)))) : null),
+          tt.subjects.map((sj) => h('option', { value: sj, selected: sj === (blk.subject || 'auto') }, t('s_' + sj))))
+          : blk.kind === 'live' ? h('select', { 'aria-label': t('k_live'), onChange: (e) => { blk.subject = e.target.value; } },
+            (tt.live_subjects || []).map((sj) => h('option', { value: sj, selected: sj === blk.subject }, t('s_' + sj)))) : null),
         h('td', {}, h('input', { class: 'ainput short', type: 'number', min: 5, max: 120, value: blk.min, 'aria-label': t('tt_min'),
           onChange: (e) => { blk.min = Number(L.latin(e.target.value)); again(); } }), ' ', t('tt_min')),
         h('td', {}, i ? h('button', { type: 'button', class: 'chip', 'aria-label': t('tt_up'), onClick: () => {

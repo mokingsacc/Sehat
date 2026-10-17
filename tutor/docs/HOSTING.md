@@ -228,6 +228,50 @@ The third answer to D6 is ready in `tutor/deploy`, so choosing it costs an accou
 - What it does not have: Cloudflare's static asset serving (uvicorn serves the app and pictures itself, as on the
   hub), D1 (SQLite instead, one instance), and Cloudflare Access for the staff pages: it sets `TUTOR_STAFF_GATE=off`, so it serves none. It was built only because D6 is still open; once Mo chooses Workers, it can be deleted with its CI job.
 
+## Live classes: the Realtime set-up (P30a, C6; a step for Mo, not done)
+
+A live class (DESIGN-C6-SPECS.md C6.1) carries the teacher's voice through Cloudflare Realtime: its SFU relays the
+sound and its TURN service helps phones on networks that block a direct connection. It is the one outside service
+besides the AI providers. The Worker never sees sound: it asks the relay, over HTTPS, to make a session per person and
+to forward the teacher's one audio track, and hands each phone the relay's answer and 2-hour TURN credentials
+(`hub/tutor_hub/rtc.py`). Until the secrets below exist the module `live` is held (`server.held()`): no route, no
+Home card, and the admin's row says "locked until the audio service is set up". Nothing has been created yet, and
+nothing in CI creates it.
+
+**The steps** (once for the account; staging and production each hold their own copy of the secrets):
+
+1. In the Cloudflare dashboard, Realtime, SFU: create one application (for example `qalam`). Copy its App ID and its
+   App Secret (the API token).
+2. Realtime, TURN Server: create one TURN key. Copy its Turn Token ID and its API token.
+3. From `tutor/worker`, for staging (the same four for `qalam` when production takes live classes):
+   `npx wrangler secret put TUTOR_RTC_APP --name qalam-staging` (the App ID), `TUTOR_RTC_SECRET` (the App Secret),
+   `TUTOR_RTC_TURN_KEY` (the Turn Token ID) and `TUTOR_RTC_TURN_SECRET` (the TURN API token). Each asks for the value;
+   none is ever printed, written to D1 or put in `[vars]`. The admin's `/me` says only which are set.
+4. The consent text of the class must name live classes (`"live": true` in each language's file of that consent
+   version under `content/consent/`, with the words the committee approved): until then the switch says "locked
+   until this class's consent text names live classes".
+5. Under `TUTOR_RELEASE` (production), the gate file `cohorts/gates/live.json` must hold D9's decision and the date of
+   the legal opinion (RELEASE.md, 3c). Staging has no gate.
+6. Then the admin turns `live` on per class (Cohorts, the class, Modules). It is off in every seed.
+
+**The cap.** `TUTOR_RTC_GB_MONTH` (a `[vars]` value, 900 when unset) is the month's data estimate, in GB, for every
+class on the server: listener-minutes this month × 0.24 MB. When it is reached, "Start a class" answers `cap` until
+the next month. The admin's row shows the month's classes, hours listened and the estimate against the cap; the
+cap itself is changed only here.
+
+**What cannot work without a paid service** (C6.A9, said plainly):
+
+1. Above 1,000 GB a month the relay bills US$0.05 per GB (about US$15 per 1,000 further classes), so the cap stays
+   at 900 until Mo raises it with a card on file.
+2. The Workers Free plan's 100,000 requests a day would hold about six classes and nothing else, so live classes
+   assume D6's Paid plan like the rest of the app.
+3. The village hub has no internet, so it has no live classes; a hub with a link would join as any online phone does,
+   not in 2027 or 2028.
+4. A learner with no data or no smartphone cannot be reached without a telephony service, which is paid and not
+   built.
+5. Whether enabling Realtime needs a card, the pricing page does not say; if it does, the module stays off until Mo
+   decides.
+
 ## Staff pages behind Cloudflare Access (P17; a step for Mo, not done)
 
 The review screens (`/review/`, P17), the teacher dashboard (`/teacher/`, P20) and the admin panel (`/admin/`, P21)

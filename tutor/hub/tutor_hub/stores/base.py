@@ -40,7 +40,7 @@ Questions
   `used` False (and nothing counted) once `limit` tries are spent; None when the question has no ladder.
 - `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`, lock reset codes
   past their time, wishes not asked for in `WISH_DAYS` (90) days, and `flag_log` and `admin_log` rows older than
-  `LOG_DAYS` (2 years); approved answers stay. The hub runs it at start, the Worker also once a day (its cron).
+  `LOG_DAYS` (2 years); and the live classes' rows past their time (below); approved answers stay. The hub runs it at start, the Worker also once a day (its cron).
 
 Print jobs
 - `add_print(*, lesson_id, kind, copies, lang, seed, device) -> id`: a queued job.
@@ -159,6 +159,36 @@ Her own questions (P32, C4.8): sent for her teacher's check, kept 60 days after 
 Daily counts (7a, C4.9): what a learner's token did today against a module's limit
 - `count_today(token_hash, module) -> int`: one more for today (UTC) and the new count. Rows older than yesterday
   go at the next prune (`COUNT_DAYS`, two days), and with the learner.
+
+Live classes (P30a, C6.1): a class held, with counts only, and who is in the room while it runs; nothing of the sound
+- `live_start(*, id, cohort, subject, host, state) -> bool`: a new open session, unless the cohort already has one
+  (False). `state` is a dict, kept as JSON; `started_at` and `seen_at` are now, `v` 1.
+- `live_session(sid) -> dict | None` and `live_open(cohort) -> dict | None` (the cohort's open session): `{id, cohort,
+  subject, host, started_at, ended_at, seen_at, peak, listener_min, v, state}`, `state` as a dict.
+- `live_sessions_since(since, cohort=None) -> list`: the sessions started from `since` on (every cohort's when None),
+  oldest first, without `state`: the day's budget, the month's estimate and the admin's line are made from them.
+- `live_update(sid, *, state=None, bump=False, seen=False, peak=None, add_min=0) -> int | None`: on an open
+  session, replaces `state` (a dict), adds one to `v` when `bump`, sets `seen_at` to now when `seen` (the teacher's
+  poll), raises `peak` to `peak` when higher, adds `add_min` listened minutes (a learner who left); returns the new
+  `v`, or None when the session is not open.
+- `live_end(sid, *, add_min=0) -> bool`: ends an open session: `ended_at` now, `listener_min` grows by `add_min`,
+  `state` blanked to {}, `v` grows, and every `live_present` row of it deleted, together. False if it was not open.
+- `live_join(session, token_hash, ticket)`: her row, made or refreshed: a new ticket at now, `seen_at` now, `joined_at`
+  kept from an earlier join.
+- `live_ticket(session, token_hash, ticket, since) -> bool`: uses up her ticket if it is this one and was made at
+  `since` or later; a ticket works once.
+- `live_here(session) -> list`: the room: `{token_hash, picture, number, band, sfu, joined_at, seen_at, hand_at,
+  reason}` with her alias from `learners`, by when the hand went up, then by picture and number.
+- `live_present(session, token_hash) -> dict | None`: her row.
+- `live_seen(session, token_hash) -> bool`; `live_set_sfu(session, token_hash, sfu) -> bool`;
+  `live_hand(session, token_hash, reason) -> bool` (a reason 1 to 3 raises it at now, to the millisecond so hands
+  keep the order they went up in; None lowers it);
+  `live_lower_all(session) -> int`.
+- `live_leave(session, token_hash) -> dict | None`: deletes her row and returns its `{joined_at, seen_at}`.
+- The retention job's part is in `prune()`: it ends every open session whose teacher has not polled for
+  `LIVE_IDLE_MIN` (10) minutes or that began more than `LIVE_LONGEST_MIN` (105) minutes ago, adding its room's minutes
+  and deleting its room; deletes `live_present` rows of learners who joined more than `LIVE_PRESENT_HOURS` (6) ago,
+  and sessions that ended more than `LIVE_DAYS` (365) days ago.
 """
 
 import json
@@ -177,6 +207,11 @@ MADE_CHIPS = ("spelling", "answer_wrong", "unclear", "unsafe", "not_school")
 MADE_MAX = 300            # characters of a question, its answer or its why
 CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 CERT_ID = re.compile(r"^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$")
+LIVE_DAYS = 365           # live_sessions: 12 months (C6.1)
+LIVE_PRESENT_HOURS = 6    # live_present: deleted when the class ends, and after 6 hours at most
+LIVE_IDLE_MIN = 10        # a class whose teacher has not polled for 10 minutes is ended
+LIVE_LONGEST_MIN = 105    # nor does any class outlive the longest max_minutes (90) and 15 minutes
+LIVE_REASONS = (1, 2, 3)  # a raised hand's reason: a chip code, never text
 LOG_DAYS = 730            # flag_log and admin_log are kept 2 years (BUILD-PLAN 3.4)
 ADMIN_WHAT = ("cohort.new", "cohort.settings", "cohort.kill", "cohort.code", "release", "rollback", "wish",
               "staff.add", "staff.remove", "teacher.lock_code", "prices")   # C5: a teacher's lock code; AI prices
@@ -449,6 +484,36 @@ class Store:
 
     async def decide_made(self, mid, *, status, chips, reply) -> bool:
         raise NotImplementedError
+    async def live_start(self, *, id, cohort, subject, host, state) -> bool:
+        raise NotImplementedError
+    async def live_session(self, sid) -> dict | None:
+        raise NotImplementedError
+    async def live_open(self, cohort) -> dict | None:
+        raise NotImplementedError
+    async def live_sessions_since(self, since, cohort=None) -> list[dict]:
+        raise NotImplementedError
+    async def live_update(self, sid, *, state=None, bump=False, seen=False, peak=None, add_min=0) -> int | None:
+        raise NotImplementedError
+    async def live_end(self, sid, *, add_min=0) -> bool:
+        raise NotImplementedError
+    async def live_join(self, session, token_hash, ticket) -> None:
+        raise NotImplementedError
+    async def live_ticket(self, session, token_hash, ticket, since) -> bool:
+        raise NotImplementedError
+    async def live_here(self, session) -> list[dict]:
+        raise NotImplementedError
+    async def live_present(self, session, token_hash) -> dict | None:
+        raise NotImplementedError
+    async def live_seen(self, session, token_hash) -> bool:
+        raise NotImplementedError
+    async def live_set_sfu(self, session, token_hash, sfu) -> bool:
+        raise NotImplementedError
+    async def live_hand(self, session, token_hash, reason) -> bool:
+        raise NotImplementedError
+    async def live_lower_all(self, session) -> int:
+        raise NotImplementedError
+    async def live_leave(self, session, token_hash) -> dict | None:
+        raise NotImplementedError
 
 
 def check_log(*, what, detail, changed_by) -> str:
@@ -558,6 +623,33 @@ def check_verdict(*, status, chips, reply) -> str:
     return json.dumps(sorted(set(chips)))
 
 
+def live_out(r: dict | None) -> dict | None:
+    """A `live_sessions` row with its `state` as a dict."""
+    if r is None:
+        return None
+    out = dict(r)
+    if isinstance(out.get("state"), str):
+        out["state"] = json.loads(out["state"] or "{}")
+    return out
+
+
+def check_live_state(state) -> str:
+    """A session's state as JSON: a dict of at most 2,000 characters (the audio, the board, the floor, the relay's
+    session id), never a name."""
+    if not isinstance(state, dict):
+        raise ValueError("a live session's state is a dict")
+    s = json.dumps(state, ensure_ascii=False, sort_keys=True)
+    if len(s) > 2000:
+        raise ValueError("a live session's state is at most 2,000 characters")
+    return s
+
+
+def check_reason(reason):
+    if reason is not None and reason not in LIVE_REASONS:
+        raise ValueError("a hand's reason is 1, 2 or 3")
+    return reason
+
+
 def made_out(r: dict | None) -> dict | None:
     if r is None:
         return None
@@ -567,3 +659,24 @@ def made_out(r: dict | None) -> dict | None:
     if "chips" in out and isinstance(out["chips"], str):
         out["chips"] = json.loads(out["chips"])
     return out
+
+
+def live_prune_sql(now_iso: str, idle_iso: str, longest_iso: str, present_iso: str, old_iso: str) -> list[tuple]:
+    """The retention job's statements for the live tables, in order, with their arguments: the same SQL on SQLite
+    and D1. A stale session's room minutes are added before its room is deleted."""
+    stale = "ended_at IS NULL AND (seen_at<? OR started_at<?)"
+    minutes = ("COALESCE((SELECT SUM(MAX(0, CAST(ROUND((julianday(p.seen_at)-julianday(p.joined_at))*1440) AS INTEGER))) "
+               "FROM live_present p WHERE p.session=live_sessions.id), 0)")
+    return [(f"UPDATE live_sessions SET listener_min=listener_min+{minutes}, ended_at=?, state='{{}}', v=v+1 WHERE {stale}",
+             (now_iso, idle_iso, longest_iso)),
+            ("DELETE FROM live_present WHERE joined_at<? OR session NOT IN "
+             "(SELECT id FROM live_sessions WHERE ended_at IS NULL)", (present_iso,)),
+            ("DELETE FROM live_sessions WHERE ended_at IS NOT NULL AND ended_at<?", (old_iso,))]
+
+
+def live_prune_times() -> tuple:
+    from datetime import datetime, timedelta, timezone
+    t = datetime.now(timezone.utc)
+    iso = lambda x: x.isoformat(timespec="seconds")      # noqa: E731
+    return (iso(t), iso(t - timedelta(minutes=LIVE_IDLE_MIN)), iso(t - timedelta(minutes=LIVE_LONGEST_MIN)),
+            iso(t - timedelta(hours=LIVE_PRESENT_HOURS)), iso(t - timedelta(days=LIVE_DAYS)))

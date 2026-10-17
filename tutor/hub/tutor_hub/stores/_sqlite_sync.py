@@ -14,7 +14,8 @@ from datetime import datetime, timedelta, timezone
 
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_price, check_via, check_note,
                    check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, new_cert_id,
-                   question_status, MADE_DAYS, check_made, check_verdict, made_out)
+                   question_status, MADE_DAYS, check_made, check_verdict, made_out, check_live_state,
+                   check_reason, live_out, live_prune_sql, live_prune_times)
 
 
 def now() -> str:
@@ -140,6 +141,8 @@ class Store:
                 ((datetime.now(timezone.utc) - timedelta(days=COUNT_DAYS - 1)).strftime("%Y-%m-%d"),))
         self._x("DELETE FROM made WHERE COALESCE(decided_at, at)<?",
                 ((datetime.now(timezone.utc) - timedelta(days=MADE_DAYS)).isoformat(timespec="seconds"),))
+        for sql, args in live_prune_sql(*live_prune_times()):
+            self._x(sql, args)
 
     # print jobs
     def add_print(self, *, lesson_id, kind, copies, lang, seed, device) -> int:
@@ -437,6 +440,7 @@ class Store:
                 self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM daily_counts WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM made WHERE token_hash=?", (token_hash,))
+                self.db.execute("DELETE FROM live_present WHERE token_hash=?", (token_hash,))
                 n = self.db.execute("DELETE FROM learners WHERE token_hash=?", (token_hash,)).rowcount
                 self.db.execute("COMMIT")
             except Exception:
@@ -456,6 +460,8 @@ class Store:
                 self.db.execute("DELETE FROM daily_counts WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM made WHERE token_hash IN "
+                                "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
+                self.db.execute("DELETE FROM live_present WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM learners WHERE last_seen<?", (cut,))
                 self.db.execute("COMMIT")
@@ -534,3 +540,97 @@ class Store:
                          ON CONFLICT(token_hash, day, module) DO UPDATE SET n=n+1 RETURNING n""",
                       (token_hash, day, module))
         return int(r["n"])
+
+    # live classes (P30a, C6.1): counts and the room, never the sound
+    LIVE_COLS = "id, cohort, subject, host, started_at, ended_at, seen_at, peak, listener_min, v, state"
+    LIVE_HERE = """SELECT p.token_hash, l.picture, l.number, l.band, p.sfu, p.joined_at, p.seen_at, p.hand_at, p.reason
+                   FROM live_present p LEFT JOIN learners l ON l.token_hash=p.token_hash WHERE p.session=?
+                   ORDER BY p.hand_at IS NULL, p.hand_at, l.picture, l.number"""
+
+    def live_start(self, *, id, cohort, subject, host, state) -> bool:
+        t = now()
+        return self._x("""INSERT INTO live_sessions(id, cohort, subject, host, started_at, seen_at, state)
+                          SELECT ?,?,?,?,?,?,? WHERE NOT EXISTS
+                          (SELECT 1 FROM live_sessions WHERE cohort=? AND ended_at IS NULL)""",
+                       (id, cohort, subject, host, t, t, check_live_state(state), cohort)).rowcount == 1
+
+    def live_session(self, sid):
+        return live_out(self._one(f"SELECT {self.LIVE_COLS} FROM live_sessions WHERE id=?", (sid,)))
+
+    def live_open(self, cohort):
+        return live_out(self._one(f"SELECT {self.LIVE_COLS} FROM live_sessions WHERE cohort=? AND ended_at IS NULL "
+                                  "ORDER BY started_at DESC LIMIT 1", (cohort,)))
+
+    def live_sessions_since(self, since, cohort=None):
+        where, args = ("AND cohort=?", (cohort,)) if cohort else ("", ())
+        return self._all(f"""SELECT id, cohort, subject, host, started_at, ended_at, peak, listener_min FROM live_sessions
+                             WHERE started_at>=? {where} ORDER BY started_at, id""", (since, *args))
+
+    def live_update(self, sid, *, state=None, bump=False, seen=False, peak=None, add_min=0):
+        sets, args = ["v=v+?"], [1 if bump else 0]
+        if state is not None:
+            sets.append("state=?")
+            args.append(check_live_state(state))
+        if seen:
+            sets.append("seen_at=?")
+            args.append(now())
+        if peak is not None:
+            sets.append("peak=MAX(peak, ?)")
+            args.append(int(peak))
+        if add_min:
+            sets.append("listener_min=listener_min+?")
+            args.append(int(add_min))
+        r = self._one(f"UPDATE live_sessions SET {', '.join(sets)} WHERE id=? AND ended_at IS NULL RETURNING v",
+                      (*args, sid))
+        return int(r["v"]) if r else None
+
+    def live_end(self, sid, *, add_min=0) -> bool:
+        with self.lock:
+            self.db.execute("BEGIN")
+            try:
+                n = self.db.execute("""UPDATE live_sessions SET ended_at=?, listener_min=listener_min+?, state='{}',
+                                       v=v+1 WHERE id=? AND ended_at IS NULL""", (now(), int(add_min), sid)).rowcount
+                self.db.execute("DELETE FROM live_present WHERE session=?", (sid,))
+                self.db.execute("COMMIT")
+            except Exception:
+                self.db.execute("ROLLBACK")
+                raise
+        return n == 1
+
+    def live_join(self, session, token_hash, ticket):
+        t = now()
+        self._x("""INSERT INTO live_present(session, token_hash, ticket, ticket_at, joined_at, seen_at)
+                   VALUES(?,?,?,?,?,?) ON CONFLICT(session, token_hash)
+                   DO UPDATE SET ticket=excluded.ticket, ticket_at=excluded.ticket_at, seen_at=excluded.seen_at""",
+                (session, token_hash, ticket, t, t, t))
+
+    def live_ticket(self, session, token_hash, ticket, since) -> bool:
+        return self._one("""UPDATE live_present SET ticket=NULL WHERE session=? AND token_hash=? AND ticket=?
+                            AND ticket_at>=? RETURNING session""", (session, token_hash, ticket, since)) is not None
+
+    def live_here(self, session):
+        return self._all(self.LIVE_HERE, (session,))
+
+    def live_present(self, session, token_hash):
+        return self._one("SELECT * FROM live_present WHERE session=? AND token_hash=?", (session, token_hash))
+
+    def live_seen(self, session, token_hash) -> bool:
+        return self._x("UPDATE live_present SET seen_at=? WHERE session=? AND token_hash=?",
+                       (now(), session, token_hash)).rowcount == 1
+
+    def live_set_sfu(self, session, token_hash, sfu) -> bool:
+        return self._x("UPDATE live_present SET sfu=? WHERE session=? AND token_hash=?",
+                       (sfu, session, token_hash)).rowcount == 1
+
+    def live_hand(self, session, token_hash, reason) -> bool:
+        reason = check_reason(reason)
+        return self._x("UPDATE live_present SET hand_at=?, reason=?, seen_at=? WHERE session=? AND token_hash=?",
+                       (datetime.now(timezone.utc).isoformat(timespec="milliseconds") if reason else None, reason, now(), session, token_hash)).rowcount == 1
+
+    def live_lower_all(self, session) -> int:
+        return self._x("UPDATE live_present SET hand_at=NULL, reason=NULL WHERE session=? AND hand_at IS NOT NULL",
+                       (session,)).rowcount
+
+    def live_leave(self, session, token_hash):
+        return self._one("DELETE FROM live_present WHERE session=? AND token_hash=? RETURNING joined_at, seen_at",
+                         (session, token_hash))

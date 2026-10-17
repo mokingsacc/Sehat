@@ -13,7 +13,7 @@
 //     node tools/browser_check.mjs --hub http://127.0.0.1:8000 --out shots/ [--screen home] [--widths 390,768,1280]
 //       [--langs prs,ps,en] [--variants light,dark,bigger] [--bands p1,s1,ad-literacy] [--full] [--lock]
 //       [--at 2027-01-02T09:00] [--day on|off|unset] [--recall maths-7-fractions-add:5,...] [--plan id,id]
-//       [--study 19:00|off] [--made 1]
+//       [--study 19:00|off] [--made 1] [--live home|block|listen|reasons|up|coming|over] [--board <lesson id>]
 // --at fixes the phone's clock (the school day's Now card and Today list, P19); --day sets her answer to the
 // one-time school-day card (unset: the card shows).
 // --recall gives her those spaced-review items, due today, with their lessons on the phone (P25a: open a lesson as
@@ -21,6 +21,12 @@
 // --study gives an adult her study time at that hour for 30 minutes, or "off" (7b; unset: "A time to study" shows).
 // --made gives her three of her own questions, due today (P32): one kept on the phone, one sent and checked, one
 // with a change asked for (the warm-up shows one when a lesson opens with ?warm=1).
+// --live (P30a, C6.2) turns the live module on for her class in hello, with an open class "Live class: Maths", and
+// answers the live routes with stand-ins (no hub serves live classes: they are held without the relay's secrets);
+// the browser's RTCPeerConnection is a stub that "connects" and plays a silent track. home: Home's card outside a
+// block; block: a live block in the timetable (use --at inside it) and the Now card's Join; on the screen
+// (--screen live/abcdefgh23456789): listen (sound on, the board showing --board's step 0), reasons (the three
+// chips open), up (her hand up), coming (the sound off), over (the class ended).
 // A shot is what the screen shows when the page opens (--full: the whole page, with the tab bar where the screen
 // ends); the checks always cover the whole page.
 // Exit code 1 when a check fails. No learner name is ever seeded: a learner is a band, a year and settings.
@@ -177,6 +183,63 @@ for (const key of RECALL) {
   if (!CACHED[id]) CACHED[id] = await (await fetch(`${HUB}/api/lessons/${encodeURIComponent(id)}`)).json();
 }
 
+// --live: hello says live is on and a class is open; the live routes answer as the hub would; WebRTC is a stub
+const LIVE_ID = 'abcdefgh23456789';
+async function liveStubs(page, learner) {
+  const phase = args.live;
+  // a token the hub would not know: sentBand keeps account.js from asking the hub about it
+  Object.assign(learner, { token: 'tok_browsercheck_0000000000', number: 7, picture: 'apple', sentBand: learner.band });
+  const state = { v: 3, audio: phase === 'coming' ? 'off' : 'on', floor: null, pub: 1, over: phase === 'over',
+    board: phase === 'listen' || phase === 'up' || phase === 'reasons' ? { lesson: args.board || 'maths-7-fractions-add', step: 0 } : null,
+    hand: phase === 'up' ? 1 : null };
+  const open = { id: LIVE_ID, subject: 'maths', since: '2027-01-02T08:45:00Z' };
+  await page.route('**/api/hello*', async (route) => {
+    const r = await route.fetch();
+    const j = await r.json();
+    j.modules = [...(j.modules || []), { id: 'live', version: '0.1.0', slots: ['home.action'], bands: ['p1', 'p2', 's1', 's2', 'ad'],
+      needs: ['internet'], offline: false, risk: 'low', settings: { max_minutes: 45, per_day: 2 } }];
+    j.live = open;
+    await route.fulfill({ response: r, json: j });
+  });
+  if (phase === 'block') {
+    await page.route('**/api/m/timetable*', async (route) => {
+      const r = await route.fetch();
+      const j = await r.json();
+      const i = j.timetable && j.timetable.blocks ? j.timetable.blocks.findIndex((b, k) => b.kind === 'period' && k > 1) : -1;
+      if (i >= 0) j.timetable.blocks[i] = { kind: 'live', subject: 'maths', min: j.timetable.blocks[i].min };
+      await route.fulfill({ response: r, json: j });
+    });
+  }
+  const json = (body, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) });
+  await page.route('**/api/m/live?*', (route) => route.fulfill(json({ ...open, here: 12 })));
+  await page.route('**/api/m/live', (route) => route.fulfill(json({ ...open, here: 12 })));
+  await page.route(/\/api\/m\/live\/[a-z0-9]+\/(join|sdp|answer|state|hand|leave)/, (route) => {
+    const what = new URL(route.request().url()).pathname.split('/').pop();
+    if (what === 'join') return route.fulfill(json({ ticket: 'ticketticketticketticketab', ice: [], state, v: state.v }));
+    if (what === 'sdp') return route.fulfill(json({ sdp: 'v=0\r\n', type: 'offer', renegotiate: true, answer: null, audio: state.audio }));
+    if (what === 'state') return route.fulfill({ status: 204, body: '' });
+    return route.fulfill(json({ ok: true }));
+  });
+  await page.addInitScript(() => {
+    // a stand-in for the browser's WebRTC: it "connects" and hands the page a silent track
+    window.RTCPeerConnection = class {
+      constructor() { this.iceConnectionState = 'new'; this.localDescription = null; }
+      async setRemoteDescription() {
+        setTimeout(() => {
+          const ac = new AudioContext();
+          const stream = ac.createMediaStreamDestination().stream;
+          if (this.ontrack) this.ontrack({ streams: [stream], track: stream.getAudioTracks()[0] });
+          this.iceConnectionState = 'connected';
+          if (this.oniceconnectionstatechange) this.oniceconnectionstatechange();
+        }, 50);
+      }
+      async createAnswer() { return { type: 'answer', sdp: 'v=0\r\n' }; }
+      async setLocalDescription(d) { this.localDescription = d; }
+      close() {}
+    };
+  });
+}
+
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });
 mkdirSync(OUT, { recursive: true });
 const report = [];
@@ -212,6 +275,7 @@ for (const width of WIDTHS) {
           ];
         }
         if (args.plan) learner.plan = { label: 'Plan', lessons: args.plan.split(','), again: {} };
+        if (args.live) await liveStubs(page, learner);
         await page.addInitScript(([d, cached]) => {
           try {
             localStorage.setItem('qalam.v2', JSON.stringify(d));
@@ -221,6 +285,7 @@ for (const width of WIDTHS) {
         await page.goto(`${HUB}/#/${SCREEN}`);
         await page.waitForSelector('#app .screen', { timeout: 10000 });
         await page.waitForTimeout(700);
+        if (args.live === 'reasons') { await page.click('.live-raise'); await page.waitForTimeout(200); }
         const name = `${SHOT}-${l.tag}-${v.tag}${LANGS.length > 1 ? '-' + lang : ''}${WIDTHS.length > 1 ? '-' + width : ''}.png`;
         await page.screenshot({ path: join(OUT, name), fullPage: !!args.full });
         const r = await page.evaluate(inspect);

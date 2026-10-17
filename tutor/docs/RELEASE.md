@@ -22,6 +22,13 @@ During the pilot: one release a week on a fixed day, after a day on staging. A s
    date under `native_check` in `content/voice.json`. A production build (`TUTOR_RELEASE=1`) leaves out the clips of
    every language not passed, and the hub in release mode does not serve them; staging and the hub play them
    without it. The Chinese teacher reviewer listens for the tones before `chinese-1` leaves draft.
+3c. **The C6 gate files (live classes and contests).** Under `TUTOR_RELEASE` the admin cannot switch `live` or
+   `contest` on until its gate file is in `cohorts/gates/` (it travels with the seed cohorts, as `photo-open.json`
+   does): `live.json` `{"d9": "<D9's decision, in words>", "opinion": "YYYY-MM-DD"}` (the date of the legal opinion
+   on live classes) and `contest.json` `{"opinion": "YYYY-MM-DD"}` (D15). Every field must be filled; the admin's row
+   says "waits for D9 and the legal opinion" or "waits for the legal opinion" until then. `live` also needs the four
+   Realtime secrets on `qalam` and a consent version whose files say `"live": true` (HOSTING.md, "Live classes: the
+   Realtime set-up").
 4. **The privacy suite passes:** `hub/tests/test_privacy.py` (a retention rule for every table, the retention job,
    the wishlist and reset codes) with the schema scan and event shapes (`test_events.py`), photo writes
    (`test_photo.py`, `test_worker.py`), names in logs (`test_api.py`) and the gateway's recorder scans

@@ -23,7 +23,8 @@ from pathlib import Path
 
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log, check_price, check_via,
                    check_note, check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json,
-                   new_cert_id, question_status, MADE_DAYS, check_made, check_verdict, made_out)
+                   new_cert_id, question_status, MADE_DAYS, check_made, check_verdict, made_out, check_live_state,
+                   check_reason, live_out, live_prune_sql, live_prune_times)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -215,7 +216,8 @@ class D1Store(Store):
                            self._stmt("DELETE FROM daily_counts WHERE day<?",
                                       _ago(days=COUNT_DAYS - 1).strftime("%Y-%m-%d")),
                            self._stmt("DELETE FROM made WHERE COALESCE(decided_at, at)<?",
-                                      _ago(days=MADE_DAYS).isoformat(timespec="seconds"))])
+                                      _ago(days=MADE_DAYS).isoformat(timespec="seconds"))]
+                          + [self._stmt(sql, *args) for sql, args in live_prune_sql(*live_prune_times())])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)
 
@@ -523,8 +525,9 @@ class D1Store(Store):
                                  self._stmt("DELETE FROM reset_codes WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM daily_counts WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM made WHERE token_hash=?", token_hash),
+                                 self._stmt("DELETE FROM live_present WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
-        return (res[4].meta.changes or 0) > 0
+        return (res[5].meta.changes or 0) > 0
 
     async def prune_learners(self, idle_days: int):
         cut = _ago(days=idle_days).strftime("%Y-%m-%d")
@@ -535,6 +538,8 @@ class D1Store(Store):
                            self._stmt("DELETE FROM daily_counts WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM made WHERE token_hash IN "
+                                      "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
+                           self._stmt("DELETE FROM live_present WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])
 
@@ -616,3 +621,97 @@ class D1Store(Store):
                                ON CONFLICT(token_hash, day, module) DO UPDATE SET n=n+1 RETURNING n""",
                             token_hash, _ago().strftime("%Y-%m-%d"), module)
         return int(r["n"])
+
+    # live classes (P30a, C6.1): counts and the room, never the sound
+
+    LIVE_COLS = "id, cohort, subject, host, started_at, ended_at, seen_at, peak, listener_min, v, state"
+    LIVE_HERE = """SELECT p.token_hash, l.picture, l.number, l.band, p.sfu, p.joined_at, p.seen_at, p.hand_at, p.reason
+                   FROM live_present p LEFT JOIN learners l ON l.token_hash=p.token_hash WHERE p.session=?
+                   ORDER BY p.hand_at IS NULL, p.hand_at, l.picture, l.number"""
+
+    async def live_start(self, *, id, cohort, subject, host, state) -> bool:
+        t = now()
+        meta = await self._run("""INSERT INTO live_sessions(id, cohort, subject, host, started_at, seen_at, state)
+                                  SELECT ?,?,?,?,?,?,? WHERE NOT EXISTS
+                                  (SELECT 1 FROM live_sessions WHERE cohort=? AND ended_at IS NULL)""",
+                               id, cohort, subject, host, t, t, check_live_state(state), cohort)
+        return (meta.changes or 0) == 1
+
+    async def live_session(self, sid):
+        return live_out(await self._one(f"SELECT {self.LIVE_COLS} FROM live_sessions WHERE id=?", sid))
+
+    async def live_open(self, cohort):
+        return live_out(await self._one(f"SELECT {self.LIVE_COLS} FROM live_sessions WHERE cohort=? AND ended_at IS NULL "
+                                        "ORDER BY started_at DESC LIMIT 1", cohort))
+
+    async def live_sessions_since(self, since, cohort=None):
+        where, args = ("AND cohort=?", (cohort,)) if cohort else ("", ())
+        return await self._all(f"""SELECT id, cohort, subject, host, started_at, ended_at, peak, listener_min
+                                   FROM live_sessions WHERE started_at>=? {where} ORDER BY started_at, id""",
+                               since, *args)
+
+    async def live_update(self, sid, *, state=None, bump=False, seen=False, peak=None, add_min=0):
+        sets, args = ["v=v+?"], [1 if bump else 0]
+        if state is not None:
+            sets.append("state=?")
+            args.append(check_live_state(state))
+        if seen:
+            sets.append("seen_at=?")
+            args.append(now())
+        if peak is not None:
+            sets.append("peak=MAX(peak, ?)")
+            args.append(int(peak))
+        if add_min:
+            sets.append("listener_min=listener_min+?")
+            args.append(int(add_min))
+        r = await self._one(f"UPDATE live_sessions SET {', '.join(sets)} WHERE id=? AND ended_at IS NULL RETURNING v",
+                            *args, sid)
+        return int(r["v"]) if r else None
+
+    async def live_end(self, sid, *, add_min=0) -> bool:
+        res = await self._batch([
+            self._stmt("""UPDATE live_sessions SET ended_at=?, listener_min=listener_min+?, state='{}', v=v+1
+                          WHERE id=? AND ended_at IS NULL""", now(), int(add_min), sid),
+            self._stmt("DELETE FROM live_present WHERE session=?", sid)])
+        return (res[0].meta.changes or 0) == 1
+
+    async def live_join(self, session, token_hash, ticket):
+        t = now()
+        await self._run("""INSERT INTO live_present(session, token_hash, ticket, ticket_at, joined_at, seen_at)
+                           VALUES(?,?,?,?,?,?) ON CONFLICT(session, token_hash)
+                           DO UPDATE SET ticket=excluded.ticket, ticket_at=excluded.ticket_at, seen_at=excluded.seen_at""",
+                        session, token_hash, ticket, t, t, t)
+
+    async def live_ticket(self, session, token_hash, ticket, since) -> bool:
+        return await self._one("""UPDATE live_present SET ticket=NULL WHERE session=? AND token_hash=? AND ticket=?
+                                  AND ticket_at>=? RETURNING session""", session, token_hash, ticket, since) is not None
+
+    async def live_here(self, session):
+        return await self._all(self.LIVE_HERE, session)
+
+    async def live_present(self, session, token_hash):
+        return await self._one("SELECT * FROM live_present WHERE session=? AND token_hash=?", session, token_hash)
+
+    async def live_seen(self, session, token_hash) -> bool:
+        meta = await self._run("UPDATE live_present SET seen_at=? WHERE session=? AND token_hash=?",
+                               now(), session, token_hash)
+        return (meta.changes or 0) == 1
+
+    async def live_set_sfu(self, session, token_hash, sfu) -> bool:
+        meta = await self._run("UPDATE live_present SET sfu=? WHERE session=? AND token_hash=?", sfu, session, token_hash)
+        return (meta.changes or 0) == 1
+
+    async def live_hand(self, session, token_hash, reason) -> bool:
+        reason = check_reason(reason)
+        meta = await self._run("UPDATE live_present SET hand_at=?, reason=?, seen_at=? WHERE session=? AND token_hash=?",
+                               datetime.now(timezone.utc).isoformat(timespec="milliseconds") if reason else None, reason, now(), session, token_hash)
+        return (meta.changes or 0) == 1
+
+    async def live_lower_all(self, session) -> int:
+        meta = await self._run("UPDATE live_present SET hand_at=NULL, reason=NULL WHERE session=? AND hand_at IS NOT NULL",
+                               session)
+        return int(meta.changes or 0)
+
+    async def live_leave(self, session, token_hash):
+        return await self._one("DELETE FROM live_present WHERE session=? AND token_hash=? RETURNING joined_at, seen_at",
+                               session, token_hash)

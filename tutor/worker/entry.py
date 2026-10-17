@@ -58,6 +58,10 @@ STAFF_SETTINGS = (("TUTOR_ACCESS_TEAM", "access_team"), ("TUTOR_ACCESS_AUD", "ac
 # put`; a cohort picks its provider in the admin panel. Read from the env here, never from D1 or vars
 KEY_SETTINGS = (("OPENAI_API_KEY", "openai_key"), ("ANTHROPIC_API_KEY", "anthropic_key"),
                 ("GEMINI_API_KEY", "gemini_key"), ("TUTOR_COMPAT_API_KEY", "compat_key"))
+# live audio classes (P30a, C6.1): Cloudflare Realtime's app id and secret and its TURN key, Worker secrets Mo sets
+# per environment (docs/HOSTING.md, "Live classes: the Realtime set-up"); without the first two `live` stays held off
+RTC_SETTINGS = (("TUTOR_RTC_APP", "rtc_app"), ("TUTOR_RTC_SECRET", "rtc_secret"),
+                ("TUTOR_RTC_TURN_KEY", "rtc_turn_key"), ("TUTOR_RTC_TURN_SECRET", "rtc_turn_secret"))
 
 
 async def _start():
@@ -65,7 +69,7 @@ async def _start():
     env = _env()
     store.db = env.DB
     hub = app.state.hub
-    for name, attr in STAFF_SETTINGS + KEY_SETTINGS:
+    for name, attr in STAFF_SETTINGS + KEY_SETTINGS + RTC_SETTINGS:
         v = getattr(env, name, None)
         if isinstance(v, str) and v:
             setattr(hub.cfg, attr, v)

@@ -166,6 +166,10 @@ const SCREENS = {
     ['class', async (p) => p.click('main .ttabs button:nth-child(2)')],
     ['lessons', async (p) => p.click('main .ttabs button:nth-child(3)')],
     ['wishes', async (p) => p.click('main .ttabs button:nth-child(4)')],
+    // the Live tab (P30a, C6.3) with the live routes, the microphone and WebRTC as stand-ins (liveStubs)
+    ['live', async (p) => p.click('main .ttabs button:nth-child(5)')],
+    ['live-room', async (p) => { await p.click('main section .chips button:nth-child(2)'); await p.click('main section .btn.primary'); await p.waitForTimeout(2600); }],
+    ['live-end', async (p) => { await p.click('main .live-state .btn.kill'); }],
   ],
   review: [
     ['pin', async () => {}],
@@ -173,6 +177,53 @@ const SCREENS = {
     ['queue', async (p) => { await p.fill('main form input[maxlength="4"]', 'AB'); await p.click('main form button[type=submit]'); }],
   ],
 };
+// The teacher page's Live tab: no hub serves live classes without the relay's secrets, so /me says live is on and
+// the live routes answer as the hub would; getUserMedia gives a silent track and RTCPeerConnection is a stub. The
+// learner side of the same rule is in browser_check.mjs --live.
+let firstLesson;
+async function liveStubs(page) {
+  const json = (body) => ({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
+  await page.route('**/api/m/teacher/me*', async (route) => {
+    const r = await route.fetch();
+    await route.fulfill({ response: r, json: { ...(await r.json()), live: true } });
+  });
+  await page.route(/\/api\/m\/teacher\/live(\/[^?]*)?(\?|$)/, async (route) => {
+    const path = new URL(route.request().url()).pathname;
+    if (path.endsWith('/teacher/live')) {
+      return route.fulfill(json({ on: true, open: null, today: 1, per_day: 2, max_minutes: 45, month: { minutes: 340 },
+        subjects: ['maths', 'science', 'english', 'dari', 'pashto', 'class'] }));
+    }
+    if (path.endsWith('/start')) return route.fulfill(json({ id: 'abcdefgh23456789', ice: [], max_minutes: 45 }));
+    if (path.endsWith('/sdp')) return route.fulfill(json({ sdp: 'v=0\r\n' }));
+    if (path.endsWith('/roster')) {
+      if (firstLesson === undefined) {          // once: the class's first lesson, for the board
+        const d = await (await fetch(`${HUB}/api/m/teacher/lessons`, { headers: { 'x-teacher-pin': PIN } })).json().catch(() => ({}));
+        firstLesson = (d.lessons || [])[0] || null;
+      }
+      const first = firstLesson;
+      return route.fulfill(json({ v: 4, here: 14, audio: 'on', minutes: 41, max_minutes: 45, floor: null, over: false,
+        board: first ? { lesson: first.id, step: 2 } : null,
+        hands: [{ alias: 'key-3', picture: 'key', number: 3, reason: 1, since: new Date(Date.now() - 90e3).toISOString() },
+          { alias: 'cup-11', picture: 'cup', number: 11, reason: 3, since: new Date(Date.now() - 30e3).toISOString() }] }));
+    }
+    return route.fulfill(json({ ok: true }));
+  });
+  await page.addInitScript(() => {
+    const silent = () => new AudioContext().createMediaStreamDestination().stream;
+    if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = async () => silent();
+    window.RTCPeerConnection = class {
+      addTransceiver(track) {
+        const sender = { track, replaceTrack: async (x) => { sender.track = x; } };
+        return { mid: '0', sender };
+      }
+      async createOffer() { return { type: 'offer', sdp: 'v=0\r\n' }; }
+      async setLocalDescription(d) { this.localDescription = d; }
+      async setRemoteDescription() {}
+      close() {}
+    };
+  });
+}
+
 async function pin(p, value) {
   await p.fill('main form input[type=password]', value);
   await p.click('main form button[type=submit]');
@@ -198,6 +249,7 @@ for (const name of PAGES) {
         try { localStorage.setItem('qalam.staff.lang', l); } catch { /* blocked */ }
         document.addEventListener('securitypolicyviolation', (e) => console.error(`Content Security Policy: ${e.violatedDirective} ${e.blockedURI}`));
       }, lang);
+      if (name === 'teacher') await liveStubs(page);
       await page.goto(`${HUB}/${name}/`);
       for (const [screen, go] of SCREENS[name]) {
         try {

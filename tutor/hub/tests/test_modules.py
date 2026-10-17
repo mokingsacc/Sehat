@@ -34,8 +34,12 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "made", "photo", "plan", "print", "quran", "recall",
-                           "review", "sheets", "speak", "teacher", "timetable", "university"]
+    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "live", "made", "photo", "plan", "print", "quran",
+                           "recall", "review", "sheets", "speak", "teacher", "timetable", "university"]
+    # P30a (C6.1): live classes send no learner's audio (no capability, no AI), need the internet, never serve ey
+    assert REAL["live"]["capabilities"] == [] and "ai" not in REAL["live"] and REAL["live"]["needs"] == ["internet"]
+    assert REAL["live"]["bands"] == ["p1", "p2", "s1", "s2", "ad"] and REAL["live"]["depends"] == ["lessons", "timetable"]
+    assert REAL["live"]["offline"] == "no" and set(REAL["live"]["settings"]) == {"max_minutes", "per_day"}
     # P32 (C4.8): her own questions are free text, off in every seed; `share.cohort` is registered and blocked
     assert REAL["made"]["capabilities"] == ["free.text"] and REAL["made"]["slots"] == ["lesson.end"]
     assert modules.CAPABILITY_RISK["share.cohort"] == "blocked"

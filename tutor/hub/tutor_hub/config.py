@@ -81,6 +81,14 @@ class Config:
     apk_latest: str | None = None                         # the Android app (P23): the newest version on /get
     apk_min: str | None = None                            # (TUTOR_APK_LATEST), and the oldest that may still talk to
                                                           # this server (TUTOR_APK_MIN); both "1.2.3", not secrets
+    # live audio classes (P30a, C6.1): Cloudflare Realtime's SFU app and TURN key, Worker secrets only (never in D1,
+    # the repository or any answer); the module `live` is held off while the app id or its secret is missing
+    rtc_app: str | None = field(default=None, repr=False)            # TUTOR_RTC_APP
+    rtc_secret: str | None = field(default=None, repr=False)         # TUTOR_RTC_SECRET
+    rtc_turn_key: str | None = field(default=None, repr=False)       # TUTOR_RTC_TURN_KEY
+    rtc_turn_secret: str | None = field(default=None, repr=False)    # TUTOR_RTC_TURN_SECRET
+    rtc_gb_month: int = 900                               # TUTOR_RTC_GB_MONTH: no class starts once the month's
+                                                          # estimate reaches it (inside the free 1,000 GB)
     extra: dict = field(default_factory=dict)
 
     @classmethod
@@ -125,6 +133,11 @@ class Config:
             staff_pepper=_env("TUTOR_STAFF_PEPPER"),
             apk_latest=_version(_env("TUTOR_APK_LATEST")),
             apk_min=_version(_env("TUTOR_APK_MIN")),
+            rtc_app=_env("TUTOR_RTC_APP"),
+            rtc_secret=_env("TUTOR_RTC_SECRET"),
+            rtc_turn_key=_env("TUTOR_RTC_TURN_KEY"),
+            rtc_turn_secret=_env("TUTOR_RTC_TURN_SECRET"),
+            rtc_gb_month=max(0, int(_env("TUTOR_RTC_GB_MONTH", cls.rtc_gb_month))),
         )
         for k, v in over.items():
             setattr(c, k, v)

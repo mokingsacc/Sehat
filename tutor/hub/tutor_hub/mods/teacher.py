@@ -255,7 +255,7 @@ def router(hub, needs) -> APIRouter:
         if cohorts:
             _, settings, on = await cohort(request, me)
             out.update(hold=settings["hold"], lock_codes=settings["lock_codes"], printer="print" in on,
-                       sheets="sheets" in on)
+                       sheets="sheets" in on, live="live" in on)
         return out
 
     @r.get("/todo", dependencies=needs(MODULE))

@@ -1,1 +1,2 @@
-"""Stand-ins for what tests cannot reach: d1.py is a D1 database as a Python Worker sees it."""
+"""Stand-ins for what tests cannot reach: d1.py is a D1 database as a Python Worker sees it; rtc.py is Cloudflare
+Realtime, the relay of live classes."""

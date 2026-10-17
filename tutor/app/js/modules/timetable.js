@@ -14,6 +14,8 @@
 //   to the notification explainer (Android 13+ asks); No says bells ring only while Qalam is open. Settings → School
 //   day then has "This phone is mine", "Bells when Qalam is closed" and, when notifications are off, a way to allow them.
 // Nothing about her day is sent and no event is recorded (F5).
+// - Live blocks (P30a, C6.1): while the live module can show for her, a `live` block is a period whose lesson is the
+//   live class (the Now card's Join, liveclass.js); otherwise it is a period of its subject, as before.
 // - Adults (7b, C4.10): one study time a day, Saturday to Thursday, off until she says yes. "A time to study" once on
 //   Home (secondary, top priority, until answered); "Yes, choose a time" opens a sheet that asks only the time;
 //   during it Home's primary is "Study time: 20 minutes left" over her next lesson; a bell at its start and end while
@@ -25,6 +27,7 @@ import * as day from '../day.js';
 import { getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
+import * as liveclass from '../liveclass.js';
 import { allows, on } from '../modules.js';
 import { chime, hasVoice, sayKey, speak, unlockOnFirstTap } from '../speech.js';
 import { readsOnOpen } from '../bands.js';
@@ -35,7 +38,7 @@ import { canPlan, left } from './plan.js';
 
 const BELLS = { start: 'audio/bells/start.opus', break: 'audio/bells/break.opus', end: 'audio/bells/end.opus' };
 const REFRESH_MS = 30 * 60e3;          // the timetable is read again at most every half hour while online
-const BLOCK_ICON = { opening: 'bell', break: 'cup', sheet: 'file', close: 'bell' };
+const BLOCK_ICON = { opening: 'bell', break: 'cup', sheet: 'file', close: 'bell', live: 'live' };
 const EVENT = 'qalam-day';             // the day moved on, or her day settings changed: Home redraws
 
 const fetched = new Map();             // cache key -> when it was last asked for
@@ -58,7 +61,8 @@ const planLessons = (c) => (canPlan(c) ? left(c) : []);
 
 export function today(c, now = new Date()) {
   const d = day.dayOf(day.cached(c), now, c.shift || 0);
-  return day.fill(d, { plan: planLessons(c), subjects: library.subjectOrder(c.lang), queue: queue(c), dayIndex: dayIndex(now) });
+  return day.fill(d, { plan: planLessons(c), subjects: library.subjectOrder(c.lang), queue: queue(c), dayIndex: dayIndex(now),
+    live: liveclass.can(c) });
 }
 
 const changed = () => { try { window.dispatchEvent(new Event(EVENT)); } catch { /* no window in tests */ } };
@@ -84,6 +88,8 @@ function announce(c, b, d) {
   const lang = getLang();
   if (b.kind === 'period') {
     toast(s('bell_period', { n: b.n, subject: b.subject ? s(b.subject) : s('block_period') }));
+  } else if (b.kind === 'live') {
+    toast(s('bell_period', { n: b.n, subject: liveclass.titleFor(b.subject) }));
   } else if (b.kind === 'opening') {
     const subjects = [...new Set(d.blocks.filter((x) => x.subject).map((x) => s(x.subject)))];
     const list = subjects.join(lang === 'en' ? ', ' : '، ');
@@ -204,7 +210,7 @@ function mineCard() {
 const lessonHref = (l) => '#/lesson/' + encodeURIComponent(l.id);
 const titleOf = (b) => (b.kind === 'period'
   ? [b.subject ? s(b.subject) : s('block_period'), b.lesson ? plain(b.lesson.title) : null].filter(Boolean).join(' · ')
-  : s('block_' + b.kind));
+  : b.kind === 'live' ? liveclass.titleFor(b.subject) : s('block_' + b.kind));
 
 function kicker(d, w, words) {
   const t = (m) => day.clock(m, words);
@@ -212,7 +218,7 @@ function kicker(d, w, words) {
   if (w.phase === 'before') return s('day_starts', { t: t(d.blocks[0].start) });
   if (w.phase === 'after') return s('day_done');
   const b = w.block;
-  if (b.kind === 'period') return s('day_period', { n: b.n, a: t(b.start), b: t(b.end) });
+  if (b.kind === 'period' || b.kind === 'live') return s('day_period', { n: b.n, a: t(b.start), b: t(b.end) });
   if (b.kind === 'opening') return s('day_opening', { a: t(b.start), b: t(b.end) });
   if (b.kind === 'break') return s('day_break', { t: t(b.end) });
   if (b.kind === 'sheet') return s('day_sheet_title');
@@ -222,7 +228,26 @@ function kicker(d, w, words) {
 // The Now card: the period on now with its lesson and play button; before school, the time it starts above the
 // first lesson; in the break, a cup and no play button; in sheet time, today's sheet; after the close, on a day
 // with no school, the next lesson as the continue card would show it. In bold bands the 100 px play button sits
-// under the kicker.
+// under the kicker. In a live block (P30a, C6.1): "Live class: Maths" with Join while the class is open, else "Your
+// teacher is coming"; when the next block is a live one, "Live class at 10:00" under the card's lesson.
+function liveNow(ctx, w, top, progress) {
+  const b = w.block;
+  const open = liveclass.current(ctx.child);
+  const title = liveclass.titleFor(open ? open.subject : b.subject);
+  const join = open ? said(h('a', { class: 'btn primary big live-join', href: '#/live/' + open.id },
+    icon('live', 26, 2.2), s('live_join'))) : null;
+  const waiting = open ? null : h('p', { class: 'lead' }, s('live_coming'));
+  const pic = h('span', { class: 'nowpic live-dot', 'aria-hidden': 'true' }, icon('live', 56, 2));
+  const data = open && !ctx.child.liveSeen ? h('small', { class: 'muted' }, s('live_data')) : null;
+  if (ctx.look === 'bold') {
+    return h('section', { class: 'card next-card now live-now' }, h('span', { class: 'tag' }, top), pic,
+      h('div', { class: 'title' }, title), waiting, join, data, progress);
+  }
+  return h('section', { class: 'card soft continue now live-now' }, pic,
+    h('div', { class: 'grow stack-sm' }, h('div', { class: 'kicker' }, top), h('div', { class: 'title' }, title),
+      waiting, join, data, progress));
+}
+
 function nowCard(ctx) {
   const c = ctx.child;
   const now = new Date();
@@ -240,6 +265,9 @@ function nowCard(ctx) {
   const progress = d.school && w.phase === 'in'
     ? [h('div', { class: 'bar' }, h('span', { style: { width: Math.round((100 * done) / d.blocks.length) + '%' } })),
       h('small', { class: 'muted' }, s('day_progress', { a: done, b: d.blocks.length }))] : null;
+  if (b && b.kind === 'live') return liveNow(ctx, w, top, progress);
+  const nextLive = w.next && w.next.kind === 'live'
+    ? h('small', { class: 'muted live-next' }, s('live_at', { t: day.clock(w.next.start, words) })) : null;
   const note = b && b.kind === 'period' ? h('small', { class: 'muted' }, s('day_paper')) : null;
   const what = lesson ? (b && b.kind === 'period' ? titleOf(b) : [s(lesson.subject), plain(lesson.title)].join(' · ')) : null;
   const tomorrow = w.phase === 'after' ? tomorrowLine(c, now) : null;
@@ -251,21 +279,21 @@ function nowCard(ctx) {
   if (ctx.look === 'bold') {
     return h('section', { class: 'card next-card now' },
       h('span', { class: 'tag' }, top), cup, play(52),
-      what ? h('div', { class: 'title' }, what) : null, note, progress, sheetBtn, tomorrow);
+      what ? h('div', { class: 'title' }, what) : null, note, nextLive, progress, sheetBtn, tomorrow);
   }
   return h('section', { class: 'card soft continue now' }, cup || play(44),
     h('div', { class: 'grow stack-sm' }, h('div', { class: 'kicker' }, top),
-      what ? h('div', { class: 'title' }, what) : null, note, progress, sheetBtn, tomorrow));
+      what ? h('div', { class: 'title' }, what) : null, note, nextLive, progress, sheetBtn, tomorrow));
 }
 
 // after the close on a school day (C4 look question 17): "Tomorrow: Maths at 8:00", when tomorrow is a school day
 function tomorrowLine(c, now) {
   const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 1);
   const d = today(c, next);
-  const first = d.school && d.blocks.find((x) => x.kind === 'period');
+  const first = d.school && d.blocks.find((x) => x.kind === 'period' || x.kind === 'live');
   if (!first) return null;
-  return h('small', { class: 'muted' }, s('day_tomorrow', { subject: first.subject ? s(first.subject) : s('block_period'),
-    t: day.clock(first.start, day.crossesNoon(d)) }));
+  const subject = first.kind === 'live' ? liveclass.titleFor(first.subject) : first.subject ? s(first.subject) : s('block_period');
+  return h('small', { class: 'muted' }, s('day_tomorrow', { subject, t: day.clock(first.start, day.crossesNoon(d)) }));
 }
 
 // The Today list: one row per block, the time at the row's start, a subject badge or the block's icon, the title, ✓
@@ -285,9 +313,12 @@ function todayList(ctx) {
     const empty = b.kind === 'period' && !b.lesson;
     const past = b.end <= m;
     const over = !empty && (past || (b.lesson && c.done[b.lesson.id]));
+    const open = b.kind === 'live' && isNow ? liveclass.current(c) : null;
     const href = b.kind === 'period' && b.lesson ? lessonHref(b.lesson)
-      : b.kind === 'sheet' && library.sheetLesson(c) ? '#/print/' + encodeURIComponent(library.sheetLesson(c).id) : null;
-    const badge = b.kind === 'period' && b.subject ? subjectBadge(b.subject, bold ? 46 : 36)
+      : b.kind === 'sheet' && library.sheetLesson(c) ? '#/print/' + encodeURIComponent(library.sheetLesson(c).id)
+        : open ? '#/live/' + open.id : null;
+    const badge = (b.kind === 'period' || b.kind === 'live') && b.subject && b.subject !== 'class'
+      ? subjectBadge(b.subject, bold ? 46 : 36)
       : h('span', { class: 'bicon' }, icon(BLOCK_ICON[b.kind] || 'clock', bold ? 28 : 22, 2.2));
     const kids = [h('span', { class: 'time' }, day.clock(b.start, words)), badge,
       h('span', { class: 'grow' }, h('b', {}, titleOf(b))),

@@ -315,3 +315,49 @@ class SqliteStore(Store):
 
     async def decide_made(self, mid, *, status, chips, reply) -> bool:
         return await self._run("decide_made", mid, status=status, chips=chips, reply=reply)
+
+    # live classes (P30a, C6.1)
+    async def live_start(self, *, id, cohort, subject, host, state) -> bool:
+        return await self._run("live_start", id=id, cohort=cohort, subject=subject, host=host, state=state)
+
+    async def live_session(self, sid):
+        return await self._run("live_session", sid)
+
+    async def live_open(self, cohort):
+        return await self._run("live_open", cohort)
+
+    async def live_sessions_since(self, since, cohort=None):
+        return await self._run("live_sessions_since", since, cohort)
+
+    async def live_update(self, sid, *, state=None, bump=False, seen=False, peak=None, add_min=0):
+        return await self._run("live_update", sid, state=state, bump=bump, seen=seen, peak=peak, add_min=add_min)
+
+    async def live_end(self, sid, *, add_min=0) -> bool:
+        return await self._run("live_end", sid, add_min=add_min)
+
+    async def live_join(self, session, token_hash, ticket):
+        return await self._run("live_join", session, token_hash, ticket)
+
+    async def live_ticket(self, session, token_hash, ticket, since) -> bool:
+        return await self._run("live_ticket", session, token_hash, ticket, since)
+
+    async def live_here(self, session):
+        return await self._run("live_here", session)
+
+    async def live_present(self, session, token_hash):
+        return await self._run("live_present", session, token_hash)
+
+    async def live_seen(self, session, token_hash) -> bool:
+        return await self._run("live_seen", session, token_hash)
+
+    async def live_set_sfu(self, session, token_hash, sfu) -> bool:
+        return await self._run("live_set_sfu", session, token_hash, sfu)
+
+    async def live_hand(self, session, token_hash, reason) -> bool:
+        return await self._run("live_hand", session, token_hash, reason)
+
+    async def live_lower_all(self, session) -> int:
+        return await self._run("live_lower_all", session)
+
+    async def live_leave(self, session, token_hash):
+        return await self._run("live_leave", session, token_hash)

@@ -9,7 +9,7 @@ and an email is typed only to add someone, then hashed with the pepper and dropp
 Every change is logged with the admin's label: a module switch in `flag_log` (as `admin:<label>`), anything else in
 `admin_log`. Phones see a change at their next `/api/hello`, within a minute.
 
-- `GET  /api/m/admin/me`: her label and how she came in.
+- `GET  /api/m/admin/me`: her label and how she came in; which of the live relay's four secrets are set (never a value).
 - `GET  /api/m/admin/cohorts`; `POST /api/m/admin/cohorts` `{label, langs, bands}`: a new cohort, with a random id,
   every module off but `recall` and `cert` (C4.1, C4.2) and a class code shown once.
 - `GET  /api/m/admin/cohorts/{id}`: the cohort, its learner count, the kill switches, its settings, today's AI, and
@@ -48,6 +48,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from . import flags, gates, learners, modules, packs, qr, timetable
+from .mods import live as live_mod
 from .ai import policy
 from .ai.providers import keys_set
 from .modules import BANDS
@@ -197,6 +198,14 @@ def router(hub) -> APIRouter:
             return "scholar"                           # C4.7: locked until a Hanafi scholar signs the set
         if m["id"] == "university" and not hub.library.university_ready():
             return "adviser"                           # C4.6: locked until the first card set is signed
+        if m["id"] == "live":                          # C6.A8: the relay's secrets, the consent text, the gate file
+            c = hub.cfg
+            if not (c.rtc_app and c.rtc_secret and c.rtc_turn_key and c.rtc_turn_secret):
+                return "rtc"
+            if not hub.consent_names_live():
+                return "consent"
+            if c.release and not gates.module_gate_open(c.cohorts, "live"):
+                return "gate"
         if cohort["id"] == open_id():                  # C4.9: the pilot's gate for photo; no Homework help in 2027
             if m["id"] in gates.OFF_IN_OPEN:
                 return "open"
@@ -232,7 +241,12 @@ def router(hub) -> APIRouter:
     @r.get("/me")
     async def me_(request: Request):
         me = await admin(request)
-        return {"label": me["label"], "via": me["via"], "home": hub.cfg.home, "staff": hub.staff.mode == "access"}
+        c = hub.cfg
+        # which of the relay's secrets are set (C6.1): true or false, never a value
+        rtc = {"app": bool(c.rtc_app), "secret": bool(c.rtc_secret), "turn_key": bool(c.rtc_turn_key),
+               "turn_secret": bool(c.rtc_turn_secret)}
+        return {"label": me["label"], "via": me["via"], "home": c.home, "staff": hub.staff.mode == "access",
+                "rtc": rtc}
 
     # --- cohorts ---
 
@@ -313,10 +327,13 @@ def router(hub) -> APIRouter:
                 "day": bool((f.get("timetable") or {}).get("enabled")), "own": cid == hub.cohort_id,
                 "budget": hub.gateway.budget, "cap": cap, "spend": dict(spend, pct=pct(spend["tokens"], cap)),
                 "gate": photo_gate() if cid == open_id() else None,
+                # live classes this month (C6.1): the class's counts and every class's estimate against the cap
+                "live": live_mod.month_line(await live_mod.month_use(hub, cid)) if "live" in hub.modules else None,
                 "modules": rows, "moderation": flags.MODERATION, "maturities": modules.MATURITY,
                 "ai_choice": ai_choice(),
                 "timetable": {"default": timetable.DEFAULT, "days": timetable.DAYS, "kinds": timetable.KINDS,
-                              "bands": timetable.BANDS, "subjects": timetable.SUBJECTS}}
+                              "bands": timetable.BANDS, "subjects": timetable.SUBJECTS,
+                              "live_subjects": timetable.LIVE_SUBJECTS}}
 
     def ai_choice() -> dict:
         """The AI provider switch: the providers, the hub's default, each provider's default model, and which keys
@@ -391,6 +408,13 @@ def router(hub) -> APIRouter:
             if why == "adviser":
                 raise refuse(409, "locked", "university preparation stays off until its first card set (the checklist "
                                     "and a card) is signed by an adviser and the Dari and Pashto readers")
+            if why == "rtc":
+                raise refuse(409, "locked", "live classes stay off until the audio service (Cloudflare Realtime) is "
+                                    "set up: its four secrets")
+            if why == "consent":
+                raise refuse(409, "locked", "live classes stay off until this class's consent text names them")
+            if why == "gate" and x != "photo":
+                raise refuse(409, "locked", f"{x} waits for the legal opinion (cohorts/gates/{x}.json)")
             if why == "gate":
                 raise refuse(409, "photo_gate", "photo marking waits for the pilot's four numbers: "
                                     + "; ".join(gates.photo_open(hub.cfg.cohorts)[0]))

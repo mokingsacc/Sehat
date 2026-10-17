@@ -29,6 +29,7 @@ from .config import Config
 from .mods import cert as cert_mod
 from .mods import made as made_mod
 from .mods import homework as homework_mod
+from .mods import live as live_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
 from .mods import plan as plan_mod
@@ -38,6 +39,7 @@ from .staff import Gate, refuse
 from .packs import Library, band_of_year, picture_file
 from .textnorm import digits_to_latin
 from .printing import Printer, PrintQueue
+from .rtc import Realtime
 from .stores import SqliteStore
 from .stores.base import CERT_ID
 
@@ -204,6 +206,7 @@ class Hub:
         self.aliases = set(learners.load_aliases())
         self.consent_texts = learners.load_consent()
         self.consent_version = learners.CONSENT_VERSIONS[cfg.home]
+        self.rtc = Realtime(cfg)                     # live classes' relay (P30a): called only while `live` is on
 
     async def start(self):
         await self.store.open()
@@ -237,6 +240,7 @@ class Hub:
 
     async def stop(self):
         await self.gateway.aclose()
+        await self.rtc.aclose()
         await self.store.close()
 
     def check_pin(self, pin: str | None, who: str, admin: bool = False):
@@ -319,6 +323,13 @@ class Hub:
             return "t:" + learners.token_hash(token)[:32]
         return self.addr(request)
 
+    def consent_names_live(self, version: str | None = None) -> bool:
+        """Whether a consent text version names live classes (`live: true` in every language's file of it, C6.A8 and
+        D14): the version this server shows when None. No version does until Mo's reviewers and solicitor sign one."""
+        version = version or self.consent_version
+        texts = [d for (_, v), d in self.consent_texts.items() if v == version]
+        return bool(texts) and all(d.get("live") is True for d in texts)
+
     def consent_changes(self, c) -> dict:
         if c.version not in {v for (_, v) in self.consent_texts}:
             raise HTTPException(422, "unknown consent text version")
@@ -382,13 +393,16 @@ class Hub:
     def held(self) -> tuple:
         """Modules held off whatever the flags say: the Quran reader while its set is missing or broken, and on a
         release hub until a Hanafi scholar has signed the set at its current hash (P29, C4.7); university preparation
-        while no pack has its checklist, and on a release hub until the first card set is signed (P28, C4.6)."""
+        while no pack has its checklist, and on a release hub until the first card set is signed (P28, C4.6); live
+        classes while the Realtime app or its secret is missing (P30a, C6.1), so the village hub never serves them."""
         q = self.library.quran
         out = []
         if q is None or not q.ok or (self.cfg.release and not q.signed):
             out.append("quran")
         if not self.library.checklists or (self.cfg.release and not self.library.university_ready()):
             out.append("university")
+        if not (self.cfg.rtc_app and self.cfg.rtc_secret):
+            out.append("live")                     # C6.1: no relay, no live classes (the hub has none, ever)
         return tuple(out)
 
     async def hello(self, cohort_id: str | None = None, band: str | None = None) -> dict:
@@ -410,6 +424,8 @@ class Hub:
                 # the Android app (P23): its newest version on /get and the oldest this server still talks to
                 "apk": {"latest": self.cfg.apk_latest, "min": self.cfg.apk_min} if self.cfg.apk_latest else None,
                 "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
+                # the class's open live class (P30a, C6.A10): the phone shows Join; null while `live` is off
+                "live": await live_mod.current_for_hello(self, cohort, f) if "live" in on else None,
                 "modules": mods}
 
 
@@ -756,6 +772,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     # Certificates (the `cert` module, P25b): earned from her own events, printed with a name that is never sent
     app.include_router(cert_mod.router(hub, needs))
     app.include_router(made_mod.router(hub, needs))
+    # Live audio classes (the `live` module, P30a): the relay carries the sound, the server only the class's state
+    app.include_router(live_mod.router(hub, needs))
 
     # checking a certificate (P25b, C4.2): the core's, always on even where `cert` is off; no token
     @app.get("/api/cert/{cid}")

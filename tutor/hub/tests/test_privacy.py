@@ -39,6 +39,9 @@ RETENTION = {
     "daily_counts": "two days (today and yesterday); with the learner (C4.9)",
     "made": "60 days after it was sent or decided, whichever is later; with the learner (C4.8)",
     "ai_prices": "until the admin changes it: a provider, a model and two prices; no learner in them (C5)",
+    "live_sessions": "12 months: a class held, its subject, its host's staff label and counts; its state is blanked when "
+                     "it ends, and it ends once its teacher is quiet for 10 minutes (C6.1)",
+    "live_present": "while the class runs: deleted when it ends, when she leaves, with her, and after 6 hours (C6.1)",
 }
 
 OLD, OLD_DAY = "2020-01-01T00:00:00+00:00", "2020-01-01"

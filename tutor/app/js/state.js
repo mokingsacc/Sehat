@@ -115,6 +115,8 @@ function clean(l) {
     // P32 (C4.8): her own questions (at most 50), kept on this phone; one she sent for a check keeps its number
     // there and the verdict that came back (modules/made.js)
     ...(cleanMade(l.made).length ? { made: cleanMade(l.made) } : {}),
+    // P30a (C6.2): the last live class she saw end, so a stale hello never offers it again; nothing else of a class
+    ...(typeof l.liveSeen === 'string' && /^[a-z0-9]{16}$/.test(l.liveSeen) ? { liveSeen: l.liveSeen } : {}),
   };
 }
 

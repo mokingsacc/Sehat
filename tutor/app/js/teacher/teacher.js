@@ -6,7 +6,8 @@
 // Tabs: To do (one card at a time: needs care, held answers and ladders, questions sent to her; S sends, E edits,
 // D doesn't send, J and K move), Class (four counts, the class by picture and number, her page, the lock reset code,
 // the class card), Lessons (did it, mastered, the hardest item, disputes, hint rungs; bars per item; the answer
-// sheet) and Wishes (the screened wishlist, read only).
+// sheet), Wishes (the screened wishlist, read only) and Live (a live audio class, P30a, C6.3: shown while the class
+// has live classes on).
 
 import { aliasIcon, aliasName as nameOf } from '../aliases.js';
 import * as L from '../staff/lang.js';
@@ -37,7 +38,7 @@ const put = (el, ...kids) => el.replaceChildren(...kids.flat(Infinity).filter((k
 
 const root = document.getElementById('teacher');
 const me = { pin: '', via: null, cohorts: [], cohort: null, label: '', hold: false, lock_codes: false, printer: false,
-  sheets: false };
+  sheets: false, live: false };
 let tab = 'todo';
 let todo = { items: [], at: 0 };
 let keys = null;
@@ -86,7 +87,7 @@ function tabs() {
     class: 'chip' + (tab === k ? ' on' : ''), onClick: () => { tab = k; draw(); } }, t(k),
   n ? h('span', { class: 'count' }, fa(n)) : null);
   return h('nav', { class: 'chips ttabs', role: 'tablist' }, one('todo', todo.items.length), one('class'), one('lessons'),
-    one('wishes'));
+    one('wishes'), me.live || live.sid ? one('live') : null);
 }
 
 const page = (...kids) => put(root, h('div', { class: 'screen' }, header(), me.via ? tabs() : null, kids, L.draftNote(h)));
@@ -122,7 +123,7 @@ async function start() {
   try {
     const m = await api('/me');
     Object.assign(me, { via: m.via, label: m.label, cohorts: m.cohorts, hold: !!m.hold, lock_codes: !!m.lock_codes,
-      printer: !!m.printer, sheets: !!m.sheets });
+      printer: !!m.printer, sheets: !!m.sheets, live: !!m.live });
     if (!me.cohort || !m.cohorts.some((c) => c.id === me.cohort)) me.cohort = m.cohorts.length ? m.cohorts[0].id : null;
   } catch (e) { return failed(e); }
   if (!me.cohort) return say(t('not_staff'));
@@ -135,6 +136,7 @@ async function draw() {
   if (tab === 'todo') return drawTodo();
   if (tab === 'class') return drawClass();
   if (tab === 'lessons') return drawLessons();
+  if (tab === 'live') return me.live || live.sid ? drawLive() : page(h('p', { class: 'empty' }, t('live_off')));
   return drawWishes();
 }
 
@@ -417,6 +419,272 @@ async function drawWishes() {
       h('small', { class: 'muted' }, L.join([t('wish_n', { n: num(w.count) }), (w.bands || []).map((b) => t(BAND[b] || b)).join(L.lang() === 'en' ? ', ' : '، ')])))))
     : h('p', { class: 'empty' }, t('no_wishes')));
 }
+
+// --- Live (P30a, C6.3): a live audio class ---
+// One row to start (the subject, the day's classes, the month's minutes), then the room: the state line and its
+// action, Mute, the hands in the order raised, the board. The microphone is asked for only when she taps Start, on
+// this staff page; her track goes to Cloudflare's relay (the hub only passes the description of the connection) and
+// is sent only while two learners or more are here (the roster's `audio`). Nothing is recorded, here or anywhere.
+
+const STUN = [{ urls: ['stun:stun.cloudflare.com:3478'] }];
+const LIVE_POLL_MS = 2000;
+const live = { sid: null, cohort: null, pc: null, sender: null, track: null, muted: false, max: 45, subject: null,
+  roster: null, timer: null, els: null, handsKey: '', boardKey: null, picking: false, broken: false, summary: null,
+  titles: new Map() };
+
+const subjName = (sj) => t('subj_' + (sj || 'class'));
+
+function liveStop() {
+  clearInterval(live.timer);
+  if (live.track) live.track.stop();
+  if (live.pc) { try { live.pc.close(); } catch { /* closed already */ } }
+  Object.assign(live, { sid: null, cohort: null, pc: null, sender: null, track: null, muted: false, roster: null,
+    timer: null, els: null, handsKey: '', boardKey: null, picking: false, broken: false });
+}
+
+// a confirm for something that cannot be undone: Escape cancels and the focus starts on Cancel (as the admin's)
+function ask(question, yes) {
+  return new Promise((resolve) => {
+    const back = document.activeElement;
+    const close = (v) => { box.remove(); document.removeEventListener('keydown', esc, true); if (back && back.focus) back.focus(); resolve(v); };
+    const esc = (e) => { if (e.key === 'Escape') { e.preventDefault(); close(false); } };
+    const cancel = h('button', { type: 'button', class: 'btn', onClick: () => close(false) }, t('cancel'));
+    const box = h('div', { class: 'amodal', role: 'dialog', 'aria-modal': 'true' },
+      h('div', { class: 'card stack' }, h('b', {}, question),
+        h('div', { class: 'row wrap' }, h('button', { type: 'button', class: 'btn primary', onClick: () => close(true) }, yes), cancel)));
+    document.body.append(box);
+    document.addEventListener('keydown', esc, true);
+    cancel.focus();
+  });
+}
+
+async function drawLive() {
+  if (live.sid) return liveRoom();
+  if (live.summary) {
+    const x = live.summary;
+    return page(h('section', { class: 'card pad-card stack' },
+      h('b', {}, t('live_summary', { s: subjName(x.subject), m: num(x.minutes || 0), n: num(x.peak || 0) })),
+      x.timedOut ? h('p', { class: 'small' }, t('live_timed_out')) : null,
+      h('button', { type: 'button', class: 'btn', onClick: () => { live.summary = null; drawLive(); } }, t('live_new'))));
+  }
+  let d;
+  try { d = await api('/live'); } catch (e) { return failed(e); }
+  if (!d.on) return page(h('p', { class: 'empty' }, t('live_off')));
+  const counts = h('p', { class: 'small muted' }, L.join([t('live_today', { a: num(d.today), b: num(d.per_day) }),
+    t('live_month', { n: num((d.month && d.month.minutes) || 0) })]));
+  if (d.open) {                    // open from before this page was loaded: speak to it again, or end it
+    return page(h('section', { class: 'card pad-card stack' }, h('h2', {}, subjName(d.open.subject)),
+      h('p', {}, t('live_open_now')), h('p', { class: 'small' }, t('live_explain')),
+      h('div', { class: 'row wrap' },
+        h('button', { type: 'button', class: 'btn primary', onClick: () => liveGo(d.open.id, d.open.subject, STUN, d.max_minutes) },
+          t('live_resume')),
+        h('button', { type: 'button', class: 'btn kill', onClick: () => liveEnd(d.open.id, d.open.subject) }, t('end_class')))));
+  }
+  let subject = d.subjects.includes(live.subject) ? live.subject : 'class';
+  const used = d.today >= d.per_day;
+  const chips = h('div', { class: 'chips wrap', role: 'group', 'aria-label': t('live_subject') });
+  const drawChips = () => put(chips, d.subjects.map((sj) => h('button', { type: 'button', class: 'chip' + (sj === subject ? ' on' : ''),
+    'aria-pressed': String(sj === subject), onClick: () => { subject = sj; drawChips(); } }, subjName(sj))));
+  drawChips();
+  const go = async (btn) => {
+    btn.disabled = true;
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true,
+        autoGainControl: true, channelCount: 1 }, video: false });
+    } catch { btn.disabled = false; return toast(t('mic_no')); }
+    let r;
+    try {
+      r = await api('/live/start', { method: 'POST', body: { cohort: me.cohort, subject } });
+    } catch (e) {
+      stream.getTracks().forEach((x) => x.stop());
+      btn.disabled = false;
+      if (e.code === 'budget') return toast(t('live_used', { n: num(d.per_day) }));
+      return failed(e);
+    }
+    live.subject = subject;
+    return livePublish(r.id, subject, r.ice, r.max_minutes, stream);
+  };
+  const start = h('button', { type: 'button', class: 'btn primary', disabled: used || null, onClick: (e) => go(e.currentTarget) },
+    t('start'));
+  page(h('section', { class: 'card pad-card stack' }, h('h2', {}, t('start_class')), chips, counts,
+    used ? h('p', { class: 'small' }, t('live_used', { n: num(d.per_day) })) : h('p', { class: 'small' }, t('live_explain')), start));
+}
+
+// speak to a class that is open already (after a reload): the microphone again, then publish
+async function liveGo(sid, subject, ice, max) {
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true,
+      autoGainControl: true, channelCount: 1 }, video: false });
+  } catch { return toast(t('mic_no')); }
+  return livePublish(sid, subject, ice, max, stream);
+}
+
+// her microphone as the one send-only audio track; the relay's answer comes back through the hub
+async function livePublish(sid, subject, ice, max, stream) {
+  if (live.sid && live.sid !== sid) liveStop();
+  if (live.track && live.track !== stream.getAudioTracks()[0]) live.track.stop();
+  if (live.pc) { try { live.pc.close(); } catch { /* closed already */ } }
+  const track = stream.getAudioTracks()[0];
+  const pc = new RTCPeerConnection({ iceServers: Array.isArray(ice) && ice.length ? ice : STUN });
+  const tr = pc.addTransceiver(track, { direction: 'sendonly', streams: [stream] });
+  Object.assign(live, { sid, cohort: me.cohort, subject, pc, sender: tr.sender, track, max: max || live.max, broken: false });
+  track.enabled = !live.muted;
+  try {
+    await pc.setLocalDescription(await pc.createOffer());
+    const r = await api(`/live/${sid}/sdp`, { method: 'POST', body: { sdp: pc.localDescription.sdp, mid: tr.mid } });
+    await pc.setRemoteDescription({ type: 'answer', sdp: r.sdp });
+  } catch (e) {
+    if (e.status === 410) return liveDone({ subject, minutes: 0, peak: 0 }, true);
+    live.broken = true;
+    toast(t('relay_no'));
+  }
+  await tr.sender.replaceTrack(null).catch(() => {});     // nothing is sent until two learners are here
+  clearInterval(live.timer);
+  live.timer = setInterval(livePoll, LIVE_POLL_MS);
+  livePoll();
+  if (tab === 'live') liveRoom();
+}
+
+async function livePoll() {
+  const sid = live.sid;
+  if (!sid) return;
+  let r;
+  try { r = await api(`/live/${sid}/roster`); } catch (e) {
+    if (e.status === 404) liveDone({ subject: live.subject, minutes: 0, peak: 0 }, true);
+    return;                                                  // offline for a moment: the next round asks again
+  }
+  if (sid !== live.sid) return;
+  if (r.over) { liveDone(r, true); return; }
+  live.roster = r;
+  const want = r.audio === 'on' ? live.track : null;
+  if (live.sender && live.sender.track !== want) live.sender.replaceTrack(want).catch(() => {});
+  if (live.els && live.els.state.isConnected) drawRoom();
+}
+
+function liveDone(r, timedOut) {
+  const subject = r.subject || live.subject;
+  liveStop();
+  live.summary = { subject, minutes: r.minutes, peak: r.peak, timedOut };
+  if (tab === 'live') drawLive();
+}
+
+async function liveEnd(sid = live.sid, subject = live.subject) {
+  if (!(await ask(t('end_q'), t('end_class')))) return;
+  try {
+    const r = await api(`/live/${sid}/end`, { method: 'POST' });
+    liveDone({ ...r, subject: r.subject || subject }, false);
+  } catch (e) { failed(e); }
+}
+
+function liveRoom() {
+  live.els = { state: h('div', { class: 'astate row wrap live-state' }), hands: h('section', { class: 'card pad-card stack live-hands' }),
+    board: h('section', { class: 'card pad-card stack live-board' }) };
+  live.handsKey = '';
+  live.boardKey = null;
+  page(h('div', { class: 'stack live-room' }, h('h2', { class: 'live-title' }, subjName(live.subject)), live.els.state, live.els.hands,
+    live.els.board));
+  drawRoom();
+  if (!live.titles.size) {                  // the board's line names the lesson: the class's lessons, once
+    api('/lessons').then((d) => {
+      for (const l of d.lessons) live.titles.set(l.id, l.title || l.id);
+      live.boardKey = null;
+      if (live.els && live.els.state.isConnected) drawRoom();
+    }).catch(() => {});
+  }
+}
+
+function drawRoom() {
+  const els = live.els;
+  const r = live.roster || { here: 0, minutes: 0, hands: [], audio: 'off', board: null, max_minutes: live.max };
+  const left = (r.max_minutes || live.max) - r.minutes;
+  const line = r.audio === 'on' ? t('live_here', { n: num(r.here), m: num(r.minutes) }) : t('waiting', { n: num(r.here) });
+  const mute = h('button', { type: 'button', class: 'btn' + (live.muted ? ' on' : ''), 'aria-pressed': String(live.muted),
+    onClick: () => { live.muted = !live.muted; if (live.track) live.track.enabled = !live.muted; drawRoom(); } },
+  t(live.muted ? 'muted' : 'mute'));
+  put(els.state, h('div', { class: 'grow stack-sm' }, h('b', { role: 'status' }, line),
+    left <= 5 ? h('small', { class: 'live-left' }, t('live_left', { n: num(Math.max(0, left)) }))
+      : r.audio !== 'on' ? h('small', {}, t('live_two')) : null),
+  live.broken ? h('button', { type: 'button', class: 'btn primary', onClick: () => liveGo(live.sid, live.subject, STUN, live.max) },
+    t('live_resume')) : null,
+  mute, h('button', { type: 'button', class: 'btn kill', onClick: () => liveEnd() }, t('end_class')));
+  const hk = JSON.stringify(r.hands);
+  if (hk !== live.handsKey) {
+    live.handsKey = hk;
+    put(els.hands, h('div', { class: 'row wrap' }, h('h3', { class: 'grow' }, t('hands')),
+      r.hands.length >= 2 ? h('button', { type: 'button', class: 'btn', onClick: () => lower({ all: true }) }, t('lower_all')) : null),
+    r.hands.length ? h('ol', { class: 'plain live-hand-list' }, r.hands.map((x) => h('li', { class: 'row' },
+      h('span', { class: 'pic' }, aliasIcon(x.picture, 40)),
+      h('span', { class: 'grow stack-sm' }, h('b', {}, `${aliasName(x.picture)} ${fa(x.number)}`),
+        h('small', { class: 'muted' }, L.join([x.reason ? t('hand_' + x.reason) : null, x.since ? ago(x.since) : null]))),
+      h('button', { type: 'button', class: 'btn', onClick: () => lower({ alias: x.alias }) }, t('lower')))))
+      : h('p', { class: 'muted small' }, t('no_hands')));
+  }
+  const bk = JSON.stringify(r.board || null);
+  if (bk !== live.boardKey && !live.picking) { live.boardKey = bk; drawBoard(r.board); }
+}
+
+async function lower(body) {
+  try { await api(`/live/${live.sid}/lower`, { method: 'POST', body }); } catch (e) { return failed(e); }
+  return livePoll();
+}
+
+// the board: the step on it, "Show a lesson step" (the class's lessons, then the lesson's steps) and Clear
+function drawBoard(b) {
+  const title = b ? live.titles.get(b.lesson) || b.lesson : null;
+  put(live.els.board, h('h3', {}, t('board')),
+    b ? h('p', { dir: 'auto' }, t('board_now', { l: title, n: num(b.step + 1) })) : h('p', { class: 'muted small' }, t('board_empty')),
+    h('div', { class: 'row wrap' }, h('button', { type: 'button', class: 'btn', onClick: pickLesson }, t('show_step')),
+      b ? h('button', { type: 'button', class: 'btn', onClick: () => setBoard({}) }, t('clear_board')) : null));
+}
+
+const textOf = (x) => (x == null ? '' : typeof x === 'string' ? x : x[L.lang()] || x.prs || x.ps || x.en || '');
+const stepLine = (st) => {
+  const s = [st.letter, textOf(st.prompt || st.text)].filter(Boolean).join(' ').replace(/[$*_]/g, '').trim();
+  return s.length > 70 ? s.slice(0, 69) + '…' : s;
+};
+
+async function pickLesson() {
+  live.picking = true;
+  const close = () => { live.picking = false; live.boardKey = null; drawRoom(); };
+  let d;
+  try { d = await api('/lessons'); } catch (e) { live.picking = false; return failed(e); }
+  for (const l of d.lessons) live.titles.set(l.id, l.title || l.id);
+  put(live.els.board, h('div', { class: 'row' }, h('h3', { class: 'grow' }, t('pick_lesson')),
+    h('button', { type: 'button', class: 'btn', onClick: close }, t('cancel'))),
+  h('nav', { class: 'subjects' }, d.lessons.map((l) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); pickStep(l, close); } },
+    h('span', { class: 'grow' }, h('b', { dir: 'auto' }, l.title || l.id))))));
+}
+
+async function pickStep(l, close) {
+  let lesson;
+  try {
+    const r = await fetch(`../api/lessons/${encodeURIComponent(l.id)}?cohort=${encodeURIComponent(me.cohort)}`,
+      { cache: 'no-store', credentials: 'same-origin' });
+    if (!r.ok) throw Object.assign(new Error(String(r.status)), { status: r.status });
+    lesson = await r.json();
+  } catch (e) { close(); return failed(e); }
+  put(live.els.board, h('div', { class: 'row' }, h('h3', { class: 'grow', dir: 'auto' }, l.title || l.id),
+    h('button', { type: 'button', class: 'btn', onClick: close }, t('cancel'))),
+  h('p', { class: 'small muted' }, t('pick_step')),
+  h('nav', { class: 'subjects' }, (lesson.steps || []).map((st, i) => h('a', { href: '#',
+    onClick: (e) => { e.preventDefault(); setBoard({ lesson: l.id, step: i }); } },
+  h('span', { class: 'grow' }, h('b', {}, t('step_n', { n: num(i + 1) })), ' ', h('span', { dir: 'auto' }, stepLine(st)))))));
+}
+
+async function setBoard(body) {
+  try {
+    const r = await api(`/live/${live.sid}/board`, { method: 'POST', body });
+    if (live.roster) live.roster.board = r.board;
+  } catch (e) { failed(e); }
+  live.picking = false;
+  live.boardKey = null;
+  if (live.els) drawRoom();
+}
+
+// leaving the page in a class: the browser asks first (the class would go on without her sound)
+window.addEventListener('beforeunload', (e) => { if (live.sid) { e.preventDefault(); e.returnValue = ''; } });
 
 window.addEventListener('online', () => draw());
 window.addEventListener('offline', () => say(t('connect')));

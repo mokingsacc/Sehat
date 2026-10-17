@@ -968,3 +968,26 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .made-field textarea.field { margin: 0; width: 100%; min-height: 88px; padding: 10px 14px; font: inherit; color: var(--ink); line-height: 1.7; display: block; }
 .made-warn { margin: 0; padding: 12px; background: var(--warm-soft); color: var(--warm-ink); border-radius: var(--r); font-weight: 800; }
 .made-ans { margin: 0; padding: 12px; background: var(--accent-soft); border-radius: var(--r); line-height: 1.7; }
+
+
+/* P30a (C6.2): the live class. The sound drawing pulses while the teacher's sound flows (still while it is off,
+   and still for reduced motion), the three reasons wrap and are never cut, and her hand's state in bold */
+.live-sound { display: flex; justify-content: center; color: var(--accent-ink); padding: 8px 0; }
+.live-sound svg { border-radius: 50%; }
+.live-sound.on svg { animation: live-pulse 1.6s ease-in-out infinite alternate; }
+@keyframes live-pulse { from { transform: scale(1); opacity: 1; } to { transform: scale(1.08); opacity: .75; } }
+@media (prefers-reduced-motion: reduce) { .live-sound.on svg { animation: none; } }
+.live-status { text-align: center; margin: 0; }
+.live-reasons { display: flex; flex-wrap: wrap; gap: 8px; }
+.live-reasons .btn { flex: 1 1 auto; min-width: 0; white-space: normal; height: auto; min-height: var(--tap); line-height: 1.5; }
+.live-up { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--accent-ink); font-size: var(--fs-btn); }
+.live-dot { color: var(--accent-ink); display: inline-flex; flex: none; }
+.live-offer h2 { margin: 0; }
+.live-now .lead { margin: 0; }
+/* the teacher's Live tab (C6.3): the state line and its actions wrap at 390 px, the hands under it */
+.live-state { margin: 0 16px; }
+.live-state .live-left { color: var(--warm-ink); font-weight: 800; }
+.live-hand-list { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; }
+.live-hand-list li { gap: 10px; align-items: center; }
+.live-room .card { margin: 0 16px; }
+.live-title { margin: 12px 16px 0; }

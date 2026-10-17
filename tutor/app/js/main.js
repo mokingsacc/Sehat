@@ -42,8 +42,10 @@ import who from './screens/who.js';
 
 // the photo screens load only when opened (the `photo` module, online only)
 const photo = (args) => import('./modules/photo.js').then((m) => m.default(args));
+// the live class screen loads only when opened (the `live` module, online only, P30a)
+const live = (args) => import('./modules/live.js').then((m) => m.default(args));
 
-const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, welcome, who, credits, consent, lock: lockScreen,
+const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, live, welcome, who, credits, consent, lock: lockScreen,
   settings, signup, cert, quran, university, made };
 const NEEDS_NO_CHILD = new Set(['welcome', 'signup']);
 const CLEAN = new Set(['welcome', 'signup']);          // the clean adult look, not the learner's

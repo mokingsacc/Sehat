@@ -5,6 +5,8 @@ day, and for each band a start time and the day's blocks in order (opening, peri
 `"default"` names the core's own template below. The phone fetches its band's part without a token
 (`GET /api/m/timetable?cohort=&band=`, mods/timetable.py), keeps it, and works out the day itself: the clock, the
 bells and which lesson fills each period. Nothing about the school day is sent back and no event is recorded (F5).
+A `live` block (P30a, C6.A10) is a period whose lesson is the live class: `{kind: live, min, subject}`; where the
+module `live` is off the phone fills it as a period of its subject.
 
 Bands: p1 to s2. Early years have no school day; adults wait for C4's study time. A band the template does not list
 has no school day in that cohort, so Home asks nothing and shows the band's usual Home.
@@ -12,9 +14,11 @@ has no school day in that cohort, so Home asks nothing and shows the band's usua
 import re
 
 DAYS = ("sat", "sun", "mon", "tue", "wed", "thu", "fri")
-KINDS = ("opening", "period", "break", "sheet", "close")
+KINDS = ("opening", "period", "break", "sheet", "close", "live")      # live: a live class's block (P30a, C6.A10)
 BANDS = ("p1", "p2", "s1", "s2")
 SUBJECTS = ("auto", "maths", "science", "english", "dari", "pashto")
+# a live class's subject: a subject the teacher names (never "auto", which the phone fills), or the class as a whole
+LIVE_SUBJECTS = tuple(x for x in SUBJECTS if x != "auto") + ("class",)
 FIELDS = {"days", "holidays", "bands", "ramadan"}
 MAX_BLOCKS = 16
 MAX_DAY_MIN = 9 * 60                          # a school day of at most nine hours
@@ -65,7 +69,7 @@ def _check_band(b, where) -> list[str]:
         if not isinstance(x, dict) or x.get("kind") not in KINDS:
             p.append(f"{w}: kind is one of {', '.join(KINDS)}")
             continue
-        allowed = {"kind", "min", "subject"} if x["kind"] == "period" else {"kind", "min"}
+        allowed = {"kind", "min", "subject"} if x["kind"] in ("period", "live") else {"kind", "min"}
         if set(x) - allowed:
             p.append(f"{w}: unknown {', '.join(sorted(set(x) - allowed))}")
         if type(x.get("min")) is not int or not 5 <= x["min"] <= 120:
@@ -74,7 +78,9 @@ def _check_band(b, where) -> list[str]:
             total += x["min"]
         if x["kind"] == "period" and x.get("subject", "auto") not in SUBJECTS:
             p.append(f"{w}.subject: one of {', '.join(SUBJECTS)}")
-    if not any(isinstance(x, dict) and x.get("kind") == "period" for x in blocks):
+        if x["kind"] == "live" and x.get("subject") not in LIVE_SUBJECTS:
+            p.append(f"{w}.subject: a live class's subject is one of {', '.join(LIVE_SUBJECTS)}")
+    if not any(isinstance(x, dict) and x.get("kind") in ("period", "live") for x in blocks):
         p.append(f"{where}: at least one period")
     if total > MAX_DAY_MIN:
         p.append(f"{where}: a day of at most {MAX_DAY_MIN // 60} hours")

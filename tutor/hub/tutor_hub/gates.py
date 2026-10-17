@@ -18,6 +18,7 @@ off in `open` in 2027 (lock "open"): their hints are AI text no person sees ther
 teacher who is not there (C2.8). The code changes when a sitting changes that.
 """
 import json
+from datetime import datetime
 from pathlib import Path
 
 PHOTO_OPEN = Path("gates") / "photo-open.json"
@@ -75,3 +76,30 @@ def _w(code: str, text: str, **numbers) -> dict:
 def budget(tokens_per_mark: int, marks_a_day: int) -> int:
     """The `ai_budget` the recipe gives: marks a day x tokens a mark x 1.2."""
     return int(marks_a_day * tokens_per_mark * 1.2)
+
+
+# C6.A8 and C6.B8: live audio classes and contests are built, off, and switched on per cohort only once the legal
+# opinions are in. Where TUTOR_RELEASE is on, the admin panel refuses to switch them on (lock "gate") until the
+# gate file holds the decision and the opinion's date; staging needs neither, so the committee can look.
+#   cohorts/gates/live.json     {"d9": "decided: ...", "opinion": "2027-07-20"}    (D9 and the live-class opinion)
+#   cohorts/gates/contest.json  {"opinion": "2027-03-15"}                          (D15, the competitions opinion)
+LIVE_GATE = Path("gates") / "live.json"
+CONTEST_GATE = Path("gates") / "contest.json"
+GATE_FILES = {"live": (LIVE_GATE, ("d9", "opinion")), "contest": (CONTEST_GATE, ("opinion",))}
+
+
+def module_gate_open(cohorts: Path, mid: str) -> bool:
+    """Whether `cohorts/gates/<mid>.json` holds what C6 asks of it: each field a non-empty string, and `opinion` a
+    date (YYYY-MM-DD). A missing, unreadable or incomplete file keeps the gate shut."""
+    rel, fields = GATE_FILES[mid]
+    try:
+        g = json.loads((Path(cohorts) / rel).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(g, dict) or not all(isinstance(g.get(k), str) and g[k].strip() for k in fields):
+        return False
+    try:
+        datetime.strptime(g["opinion"].strip(), "%Y-%m-%d")
+    except ValueError:
+        return False
+    return True

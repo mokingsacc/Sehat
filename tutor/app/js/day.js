@@ -36,7 +36,9 @@ export function valid(tt) {
 
 // Today's day for a date: {school, why ('weekend', 'holiday' or 'none' when there is no school), blocks}, each block
 // {i, kind, subject, start, end, n}: minutes from midnight, n the period's number (0 for other blocks). In Ramadan
-// the day starts at the Ramadan time and periods take its shorter length.
+// the day starts at the Ramadan time and periods take its shorter length. A live block (P30a, C6.1) is a period whose
+// lesson is the live class: it is numbered with the periods, its subject one of the subjects or 'class', and it keeps
+// its own length (the teacher's class).
 export function dayOf(tt, date, shift = 0) {
   if (!valid(tt)) return { school: false, why: 'none', blocks: [] };
   const key = dateKey(date);
@@ -47,8 +49,8 @@ export function dayOf(tt, date, shift = 0) {
   let n = 0;
   const blocks = tt.blocks.map((b, i) => {
     const len = b.kind === 'period' && r ? r.period_min : b.min;
-    const x = { i, kind: b.kind, subject: b.kind === 'period' ? b.subject || 'auto' : null, start: t, end: t + len,
-      n: b.kind === 'period' ? ++n : 0 };
+    const subject = b.kind === 'period' ? b.subject || 'auto' : b.kind === 'live' ? b.subject || 'class' : null;
+    const x = { i, kind: b.kind, subject, start: t, end: t + len, n: b.kind === 'period' || b.kind === 'live' ? ++n : 0 };
     t += len;
     return x;
   });
@@ -79,7 +81,13 @@ export const bellOf = (kind) => (kind === 'break' ? 'break' : kind === 'close' ?
 // Each period gets a lesson. A period with its own subject takes that subject's next lesson. An "auto" period takes
 // her plan's next lesson first (P22), else the next lesson not done, the subjects taking turns from one day to the
 // next. `queue(subject)` lists a subject's lessons for her, not done first; `plan` lists her plan's lessons not done.
-export function fill(day, { plan = [], subjects = [], queue = () => [], dayIndex = 0 } = {}) {
+// A live block stays one while `live` is true (the live module can show for her); otherwise it is a period of its
+// subject ('class' an auto period), so the day reads as it did before live classes.
+export function fill(day, { plan = [], subjects = [], queue = () => [], dayIndex = 0, live: liveOn = false } = {}) {
+  if (!liveOn) {
+    day = { ...day, blocks: day.blocks.map((b) => (b.kind === 'live'
+      ? { ...b, kind: 'period', subject: b.subject === 'class' ? 'auto' : b.subject } : b)) };
+  }
   const used = new Set();
   const take = (list) => { const l = (list || []).find((x) => x && !used.has(x.id)); if (l) used.add(l.id); return l || null; };
   const periods = day.blocks.filter((b) => b.kind === 'period').length || 1;
@@ -107,7 +115,8 @@ export function clock(m, words = false) {
 export const crossesNoon = (day) => day.blocks.length > 0 && day.blocks[0].start < 720 && day.blocks[day.blocks.length - 1].end > 720;
 
 // The Android app's alarms (P23): the next `days` days from `from`, the wake-up 30 minutes before the start and a
-// bell at each period's start, as times in ms. Only what the alarms need: no lesson, no subject, no learner.
+// bell at each period's start (a live block's too), as times in ms. Only what the alarms need: no lesson, no
+// subject, no learner.
 export function alarmPlan(tt, from, shift = 0, days = 7) {
   const out = [];
   for (let d = 0; d < days; d++) {
@@ -116,7 +125,7 @@ export function alarmPlan(tt, from, shift = 0, days = 7) {
     if (!day.school) continue;
     const at = (m) => new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, m).getTime();
     out.push({ at: at(day.blocks[0].start - WAKE_BEFORE), kind: 'wake' });
-    for (const b of day.blocks) if (b.kind === 'period') out.push({ at: at(b.start), kind: 'bell' });
+    for (const b of day.blocks) if (b.kind === 'period' || b.kind === 'live') out.push({ at: at(b.start), kind: 'bell' });
   }
   return out.filter((x) => x.at > from.getTime());
 }

@@ -26,7 +26,7 @@ ALLOWED = {"name", "main", "compatibility_date", "compatibility_flags", "workers
            "assets", "d1_databases", "rules", "triggers"}
 VARS = {"TUTOR_COHORT", "TUTOR_AI_PROVIDER", "TUTOR_LACKS", "TUTOR_HOME", "TUTOR_RELEASE", "TUTOR_ORIGINS",
         "TUTOR_APK_LATEST", "TUTOR_APK_MIN", "TUTOR_KEEP_DAYS", "TUTOR_OPENAI_MODEL", "TUTOR_ANTHROPIC_MODEL",
-        "TUTOR_GEMINI_MODEL", "TUTOR_COMPAT_URL", "TUTOR_COMPAT_MODEL"}
+        "TUTOR_GEMINI_MODEL", "TUTOR_COMPAT_URL", "TUTOR_COMPAT_MODEL", "TUTOR_RTC_GB_MONTH"}
 # learner AI in production: off, or a provider over the internet; each key is a Worker secret (wrangler secret put)
 PROVIDERS = ("off", "openai", "anthropic", "gemini", "openai_compat")
 FORBIDDEN_WORDS = ("qalam-staging", "sehat", "fhb")
