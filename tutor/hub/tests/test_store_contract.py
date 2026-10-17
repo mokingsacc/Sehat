@@ -714,6 +714,23 @@ async def test_a_lock_reset_code_is_used_once_and_ends_after_five_wrong_tries(st
     assert await store.use_reset_code("h1", "right") == "none"                 # gone with her
 
 
+async def test_the_wishlist_counts_each_wish_once_without_a_token_for_90_days(store):
+    add = lambda cohort, band, wish: store.add_wish(cohort=cohort, band=band, lang="prs",  # noqa: E731
+                                                    wish=wish, wkey=" ".join(wish.split()))
+    assert await add("c1", "s1", "chemistry") == 1
+    assert await add("c1", "s1", "chemistry") == 2
+    assert await add("c1", "s2", "chemistry") == 1                             # per band
+    assert await add("c2", "s1", "astronomy") == 1
+    rows = await store.wishes("c1")
+    assert [(w["band"], w["wish"], w["count"]) for w in rows] == [("s1", "chemistry", 2), ("s2", "chemistry", 1)]
+    assert set(rows[0]) == {"cohort", "band", "lang", "wish", "wkey", "count", "first_day", "last_day"}
+    assert len(await store.wishes()) == 3 and len(await store.wishes(limit=1)) == 1
+    db = store.db.sqlite if isinstance(store, D1Store) else store._inner.db
+    db.execute("UPDATE wishlist SET last_day='2020-01-01' WHERE cohort='c2'")
+    await store.prune(60)
+    assert [w["cohort"] for w in await store.wishes()] == ["c1", "c1"]         # 90 days after it was last asked
+
+
 async def test_class_codes_and_idle_learners(store):
     await store.seed_cohorts([COHORT])
     assert await store.cohort_by_code("c0de") is None

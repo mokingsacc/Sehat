@@ -17,6 +17,7 @@
     "photo": true,
     "homework": true,
     "review": true,
-    "timetable": true
+    "timetable": true,
+    "plan": true
   }
 }

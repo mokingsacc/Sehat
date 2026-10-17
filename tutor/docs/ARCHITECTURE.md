@@ -150,7 +150,9 @@ ladder) depends on `ask`, serves p2, s1 and s2, calls the model for `hint`, need
 staging (`migrations/0009`). `review` (P17, the review screens at `/review/`) depends on `lessons`, has no slot in
 the learner app and is on only in staging (`migrations/0010`). `timetable` (P19, the virtual school day) depends on
 `lessons`, serves p1 to s2, has the slots `home.action` and `settings.row`, and is on in all three seed cohorts
-(`migrations/0011`, which also sets their `timetable` setting to `"default"`). `migrations/0007` switches `sheets` on in every cohort made before it
+(`migrations/0011`, which also sets their `timetable` setting to `"default"`). `plan` (P22, "I want to learn this")
+depends on `lessons`, serves s1, s2 and adults (the phone shows it only to adult readers), carries `free.text` and is
+on in all three seed cohorts (`migrations/0013`, C2.8). `migrations/0007` switches `sheets` on in every cohort made before it
 wherever `print` or `check` was; `migrations/0008` switches `photo` on for the staging seed cohort in a database
 seeded before it. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
@@ -414,6 +416,10 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   is never sent. The older `qalam.v1`, which could hold a child's name, is migrated once with the name dropped and removed.
 - Events (above) are verbs and ids with no name and no free text, sent only with consent and kept against her
   token's hash; they stay on the hub.
+- "I want to learn this" (P22) sends her typed goal without her token. A goal no lesson matches joins the cohort's
+  `wishlist` after the rules and the identifier filter: the band, the language, the screened text, a count and the
+  first and last day, never who typed it; kept 90 days after it was last asked for (`migrations/0013`). Her plan
+  stays on the phone.
 - A lock reset code (P20) is kept only as a hash with her token's hash, for 15 minutes, used once, ended by five
   wrong tries, and deleted with her record (`reset_codes`, `migrations/0012`).
 - Nothing leaves the hub: there is no internet connection and no analytics.
@@ -446,13 +452,14 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
 | `GET /api/m/teacher/me`, `todo`, `class`, `class/{alias}`, `lessons`, `lessons/{id}`, `answers/{id}.html`, `wishes`; `POST /api/m/teacher/todo/{id}`, `class/{alias}/reset-code`, `class-card`, `hub-card` | The teacher dashboard (P20); the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online, role teacher or admin), `?cohort=` one of hers |
+| `POST /api/m/plan` | `{goal, lang, band}` (s1, s2, ad) -> `{kind: plan, label, lessons}`, `{kind: closest, lessons}` (three at most), `{kind: wish, saved}` (the screened text joins the wishlist) or `{kind: rules, reason, text}` (nothing kept); no token read; 30 a minute an address |
 | `POST /api/me/pin-reset` | `{code}`, six digits in any script -> `{ok}`; 403 a wrong code, 404 none waiting; header `X-Learner-Token`; 10 tries in 10 minutes an address |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
@@ -566,6 +573,30 @@ DESIGN-C2C3-SPECS item 10: p1 two periods of 25 minutes, p2 three of 30, s1 and 
   before the start and each period's bell) with the title "Qalam"; `cancelAlarms()` otherwise. A browser has no
   bridge, so nothing happens there.
 
+## "I want to learn this" (search.py, mods/plan.py, app/js/modules/plan.js, app/js/screens/plan.js, P22)
+
+C3.5 and DESIGN-C2C3-SPECS item 14; typed only in 2027 (browser speech input would send her voice to a third party).
+
+- **Where:** Home's last row, "+ I want to learn something else", drawn by the shell (`modules.homeFooter()`, not a
+  slot, nothing else may use it) where `plan` is on and the band is s1, s2 or adult reader. It opens `#/plan`: a box,
+  up to eight unit chips of her band's lessons, and the answer.
+- **The search** (`search.plan_for`, no AI): her words against each lesson's title, unit, subject and reading steps
+  in every language, a word matching give or take an ending (three letters at least; Ask's spelling clean-up). At
+  least half her words in a title, unit or subject: a plan of those lessons and the rest of the best one's unit, in
+  pack order, twelve at most. Otherwise a third of her words anywhere: the closest lessons, three at most. Nothing:
+  a miss. Only the lessons the hub serves to her band (children by year, adults from adult packs). The chips give
+  a unit's lessons on the phone, sending nothing.
+- **A miss** joins the cohort's wishlist screened: the rules first (distress, health and off-limits words get the
+  kind message and nothing is kept; nothing goes to a teacher from here), then `ai/filters.scrub`; the same words
+  count once (`add_wish`). Offline the phone matches titles and units itself and keeps a missed goal (five at most,
+  7 days) for the outbox, which sends it without the token once she has agreed. The first goal she sends opens the
+  consent screen (`free.text`); "Not now" keeps the search on the phone.
+- **Her plan** (`qalam.v2`): a label and lesson ids, and lessons a marked sheet added again with when. It is Home's
+  continue card ("Your plan · lesson 2 of 4", priority 30, under the school day's Now card) and fills the school
+  day's `auto` periods first; the plan screen shows "Your plan: Fractions, 2 of 4" with "Stop this plan". One plan
+  at a time. A marked sheet with wrong items adds its lesson ("Added to your plan"), which counts as done again only
+  once she finishes it after that.
+
 ## Staff pages: review and the teacher dashboard (staff.py, mods/review.py, mods/teacher.py, P17, P20)
 
 Staff pages live on their own paths, apart from the learner app, so Cloudflare Access can guard them online (C3.2):
@@ -603,7 +634,7 @@ app's service worker leaves them alone, and they keep nothing in the browser.
   - *Lessons*: did it, mastered (her latest sheet at 80% or more), the hardest item, disputes and hint steps, and
     per item right, wrong, disputes and hints, all counted from events over their retention; the answer sheet
     opens from here.
-  - *Wishes*: read only (filled by P22).
+  - *Wishes*: read only: each wish of her class with its count, bands and days (P22).
   - Nothing is cached: the page keeps the PIN in memory only, and offline says "Connect to see your class".
 - **Into the pack:** `tools/pull_signoffs.py` (from `/api/m/review/signoffs` or a hub's database) writes the
   signatures for each lesson's current hash into its `review` block, leaving the file's layout alone, and reports

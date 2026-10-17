@@ -38,8 +38,8 @@ Questions
 - `ladder(token) -> dict | None`: `{solution, sure}` behind a question's ladder, for the teacher's eyes only.
 - `use_check(token, limit=3) -> dict | None`: one "Check my answer" try: `{solution, sure, checks, used}`, with
   `used` False (and nothing counted) once `limit` tries are spent; None when the question has no ladder.
-- `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`, and lock reset codes
-  past their time; approved answers stay.
+- `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`, lock reset codes
+  past their time and wishes not asked for in `WISH_DAYS` (90) days; approved answers stay.
 
 Print jobs
 - `add_print(*, lesson_id, kind, copies, lang, seed, device) -> id`: a queued job.
@@ -118,12 +118,20 @@ Learners (learners.py decides what they mean; never a name)
 - `delete_learner(token_hash) -> bool`: deletes the learner, every event carrying her token's hash and her reset
   code, together.
 - `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events and reset codes.
+
+The wishlist (P22): what learners wanted to learn and no lesson matched, never with a token
+- `add_wish(*, cohort, band, lang, wish, wkey) -> int`: one more ask for the wish `wkey` (its search form) in that
+  cohort, band and language; the first keeps its text and day, each one moves the last day. Returns the count.
+- `wishes(cohort=None, limit=100) -> list[dict]`: `{cohort, band, lang, wish, wkey, count, first_day, last_day}`, the most
+  asked for first, then the latest; every cohort's when `cohort` is None.
 """
 
 import json
 import random
 import re
 
+WISH_DAYS = 90             # a wish not asked for again in 90 days is deleted (BUILD-PLAN 3.4)
+WISH_MAX = 200            # characters of a wish kept
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
 # the teacher's list: held answers, and answered or waiting questions sent to the teacher; urgent first
 QUEUE = "status='held' OR (to_teacher=1 AND status IN ('answered','waiting'))"
@@ -338,6 +346,12 @@ class Store:
         raise NotImplementedError
 
     async def prune_learners(self, idle_days: int) -> None:
+        raise NotImplementedError
+
+    async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:
+        raise NotImplementedError
+
+    async def wishes(self, cohort=None, limit=100) -> list[dict]:
         raise NotImplementedError
 
 

@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10, P11, P13, P14, P15, P19 and P20 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10, P11, P13, P14, P15, P19, P20 and P22 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -249,6 +249,14 @@ const S = {
     lock_code_link: 'معلمم یک کد به من داده', lock_code_title: 'کد معلم', lock_code_lead: 'شش رقمی را که معلمت داد بنویس.',
     lock_code_six: 'شش رقم بنویس.', lock_code_wrong: 'این کد درست نیست.', lock_code_open: 'باز کن',
     lock_code_none: 'حالا کدی برایت نیست. دوباره از معلمت بپرس.',
+    // P22: "I want to learn this" (drafts, for a native speaker's check)
+    plan_row: 'می‌خواهم چیز دیگری یاد بگیرم', plan_title: 'می‌خواهم یاد بگیرم...',
+    plan_type: 'بنویس چه می‌خواهی یاد بگیری', plan_pick: 'یا یکی را انتخاب کن:', plan_here: 'این پلان توست: {n} درس',
+    plan_next: 'بعدی', plan_start: 'پلانم را شروع کن', plan_started: 'پلانت شروع شد', plan_closest: 'نزدیک‌ترین درس‌ها',
+    plan_miss: 'هنوز برای این درس نداریم. آن را به فهرست خود اضافه کردیم.',
+    plan_miss_later: 'هنوز برای این درس نداریم. وقتی وصل شوی، آن را به فهرست خود اضافه می‌کنیم.',
+    plan_miss_here: 'هنوز برای این درس نداریم.', plan_now: 'پلان تو: {label}، {n} از {b}', plan_stop: 'پلان را بس کن',
+    plan_stopped: 'پلانت بس شد', plan_kicker: 'پلان تو · درس {n} از {b}', plan_added: 'به پلانت اضافه شد: {t}',
   },
   ps: {
     app: 'قلم',
@@ -494,6 +502,14 @@ const S = {
     lock_code_link: 'ښوونکي راته یو کوډ راکړی', lock_code_title: 'د ښوونکي کوډ', lock_code_lead: 'هغه شپږ عددونه ولیکه چې ښوونکي درکړل.',
     lock_code_six: 'شپږ عددونه ولیکه.', lock_code_wrong: 'دا کوډ سم نه دی.', lock_code_open: 'خلاص یې کړه',
     lock_code_none: 'اوس ستا لپاره کوډ نشته. بیا له ښوونکي وپوښته.',
+    // P22: "I want to learn this" (drafts, for a native speaker's check)
+    plan_row: 'زه غواړم بل څه زده کړم', plan_title: 'زه غواړم زده کړم...',
+    plan_type: 'ولیکه چې څه غواړې زده یې کړې', plan_pick: 'یا یو یې وټاکه:', plan_here: 'ستا پلان: {n} لوستونه',
+    plan_next: 'بل', plan_start: 'زما پلان پیل کړه', plan_started: 'ستا پلان پیل شو', plan_closest: 'تر ټولو نږدې لوستونه',
+    plan_miss: 'د دې لپاره لا لوستونه نه لرو. موږ دا خپل لېست ته ور زیات کړ.',
+    plan_miss_later: 'د دې لپاره لا لوستونه نه لرو. کله چې وصل شې، دا به خپل لېست ته ور زیات کړو.',
+    plan_miss_here: 'د دې لپاره لا لوستونه نه لرو.', plan_now: 'ستا پلان: {label}، {n} له {b}', plan_stop: 'دا پلان ودروه',
+    plan_stopped: 'ستا پلان ودرول شو', plan_kicker: 'ستا پلان · لوست {n} له {b}', plan_added: 'ستا پلان ته ور زیات شو: {t}',
   },
   en: {
     app: 'Qalam',
@@ -739,6 +755,15 @@ const S = {
     lock_code_lead: 'Type the six digits your teacher gave you.', lock_code_six: 'Type six digits.',
     lock_code_wrong: 'That code is not right.', lock_code_open: 'Open',
     lock_code_none: 'There is no code for you now. Ask your teacher again.',
+    // P22: "I want to learn this"
+    plan_row: 'I want to learn something else', plan_title: 'I want to learn...',
+    plan_type: 'Type what you want to learn', plan_pick: 'Or pick one:', plan_here: "Here's your plan: {n} lessons",
+    plan_next: 'next', plan_start: 'Start my plan', plan_started: 'Your plan has started', plan_closest: 'Closest lessons',
+    plan_miss: "We don't have lessons for this yet. We've added it to our list.",
+    plan_miss_later: "We don't have lessons for this yet. We'll add it to our list when you're online.",
+    plan_miss_here: "We don't have lessons for this yet.", plan_now: 'Your plan: {label} · {n} of {b}',
+    plan_stop: 'Stop this plan', plan_stopped: 'Your plan has stopped', plan_kicker: 'Your plan · lesson {n} of {b}',
+    plan_added: 'Added to your plan: {t}',
   },
 };
 

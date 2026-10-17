@@ -14,7 +14,7 @@ hub's own), named by `?cohort=`. No name anywhere: learners are a picture and a 
 - `GET  /api/m/teacher/class/{alias}`: her lessons with % right, hints used; `POST .../reset-code`: a lock reset code.
 - `GET  /api/m/teacher/lessons`, `/lessons/{id}`: did it, mastered, the hardest item, disputes, hint rungs; bars per
   item. `GET /api/m/teacher/answers/{id}.html`: the answer sheet (C2.3: the answers are the teacher's).
-- `GET  /api/m/teacher/wishes`: the cohort's screened wishlist (P22).
+- `GET  /api/m/teacher/wishes`: the cohort's screened wishlist (P22): text, count, bands, days; never who asked.
 - `POST /api/m/teacher/class-card`: `{code}` -> the class card's address and QR for `?join=CODE`.
 - `POST /api/m/teacher/hub-card`: the hub's Wi-Fi card, printed (the hub only).
 """
@@ -149,6 +149,21 @@ def lesson_stats(evs: list[dict]) -> dict[str, dict]:
                     "hardest": hard, "disputes": sum(i["disputes"] for i in its.values()), "hints": rungs.get(lid, {1: 0, 2: 0, 3: 0}),
                     "items": {n: dict(its[n]) for n in sorted(its)}}
     return out
+
+
+def wish_rows(rows: list[dict]) -> list[dict]:
+    """The class's wishlist for the Wishes tab: one row a wish (the same words in any band or language), with its
+    text as first typed, the count, the bands and the days; the most asked for first. Never who asked."""
+    out: dict[str, dict] = {}
+    for w in rows:
+        x = out.setdefault(w["wkey"], {"text": w["wish"], "count": 0, "bands": [], "langs": [],
+                                       "first_day": w["first_day"], "last_day": w["last_day"]})
+        x["count"] += w["count"]
+        x["bands"] = sorted(set(x["bands"]) | {w["band"]})
+        x["langs"] = sorted(set(x["langs"]) | {w["lang"]})
+        x["first_day"], x["last_day"] = min(x["first_day"], w["first_day"]), max(x["last_day"], w["last_day"])
+    latest = sorted(out.values(), key=lambda x: x["last_day"], reverse=True)
+    return sorted(latest, key=lambda x: -x["count"])[:200]
 
 
 def router(hub, needs) -> APIRouter:
@@ -386,8 +401,8 @@ def router(hub, needs) -> APIRouter:
     @r.get("/wishes", dependencies=needs(MODULE))
     async def wishes(request: Request):
         me = await staff(request)
-        await cohort(request, me)
-        return {"wishes": []}                     # the wishlist arrives with P22
+        c, _, _ = await cohort(request, me)
+        return {"wishes": wish_rows(await hub.store.wishes(c["id"], limit=500))}
 
     @r.post("/class-card", dependencies=needs(MODULE))
     async def class_card(body: CardIn, request: Request):

@@ -221,7 +221,7 @@ def test_health_question_points_to_sehat_and_waits_for_the_teacher(hub_client):
 def test_hello_lists_the_seven_modules_for_the_hub(hub_client):
     h = hub_client.get("/api/hello").json()
     assert h["cohort"]["id"] == hub_client.hub.cohort_id and h["core"] == h["version"]
-    assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "print", "sheets", "teacher",
+    assert [m["id"] for m in h["modules"]] == ["ask", "check", "lessons", "plan", "print", "sheets", "teacher",
                                                   "timetable"]
     ask = next(m for m in h["modules"] if m["id"] == "ask")
     assert ask["risk"] == "medium" and "ey" not in ask["bands"]
@@ -279,8 +279,8 @@ def test_a_broken_manifest_is_left_out_and_the_hub_still_runs(cfg, tmp_path, cap
         app = create_app(cfg)
     assert "print: unknown fields" in caplog.text or "print: missing fields" in caplog.text
     with TestClient(app) as c:
-        assert [m["id"] for m in c.get("/api/hello").json()["modules"]] == ["ask", "check", "lessons", "sheets", "teacher",
-                                                                                   "timetable"]
+        assert [m["id"] for m in c.get("/api/hello").json()["modules"]] == ["ask", "check", "lessons", "plan", "sheets",
+                                                                                   "teacher", "timetable"]
         assert c.post("/api/print", json={"lesson": "maths-1-count-5"}).status_code == 404
         assert c.get("/api/lessons/maths-1-count-5").status_code == 200
 

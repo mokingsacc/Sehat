@@ -84,3 +84,84 @@ def build(library, approved_rows=()) -> Index:
                 "q": {r["lang"]: r["question"]}, "a": {r["lang"]: r["answer"]}}, r["question"])
     ix.finish()
     return ix
+
+
+# --- "I want to learn this" (P22, C3.5): her typed goal against the lessons the hub serves, no AI ---------------
+
+# where a word of her goal is found counts for more in a lesson's title or unit than in its subject or its steps
+FIELD_WEIGHT = {"title": 3.0, "unit": 3.0, "subject": 2.0, "step": 1.0}
+STRONG = ("title", "unit", "subject")
+PLAN_COVER = 0.5          # this share of her words in a lesson's title, unit or subject: a plan
+CLOSE_COVER = 0.34        # this share anywhere in a lesson: one of the closest lessons
+PLAN_MAX = 12
+CLOSE_MAX = 3
+
+
+def _same(a: str, b: str) -> bool:
+    """One word, give or take an ending: "fraction" and "fractions", کسر and کسرها (three letters at least)."""
+    if a == b:
+        return True
+    short, long_ = (a, b) if len(a) <= len(b) else (b, a)
+    return len(short) >= 3 and long_.startswith(short) and len(long_) - len(short) <= 3
+
+
+def lesson_fields(lesson: dict, subject_names: dict) -> dict[str, set[str]]:
+    """The search words of a lesson, by field, in every language it has."""
+    def words(v):
+        return set(tokens(" ".join(pick_text(v, c) for c in ("prs", "ps", "en")))) if v else set()
+    steps = " ".join(pick_text(s.get("text"), c) for s in lesson.get("steps", []) if s.get("kind") == "read"
+                     for c in ("prs", "ps", "en"))
+    return {"title": words(lesson.get("title")), "unit": words(lesson.get("unit")),
+            "subject": set(tokens(" ".join([lesson.get("subject", "")] +
+                                           list((subject_names.get(lesson.get("subject")) or {}).values())))),
+            "step": set(tokens(steps))}
+
+
+def match_lessons(goal: str, lessons: list[tuple[str, dict]], subject_names: dict) -> list[dict]:
+    """[{id, score, strong, cover}] for every lesson that holds a word of the goal, best first.
+
+    `lessons` is [(id, lesson)] in pack order; `strong` is the share of her words found in the title, unit or subject,
+    `cover` the share found anywhere."""
+    want = list(dict.fromkeys(tokens(goal)))
+    if not want:
+        return []
+    out = []
+    for i, (lid, l) in enumerate(lessons):
+        fields = lesson_fields(l, subject_names)
+        score, strong, cover = 0.0, 0, 0
+        for w in want:
+            best = max((FIELD_WEIGHT[f] for f, ws in fields.items() if any(_same(w, x) for x in ws)), default=0.0)
+            if best:
+                score += best
+                cover += 1
+                strong += any(any(_same(w, x) for x in fields[f]) for f in STRONG)
+        if score:
+            out.append({"id": lid, "score": score, "strong": strong / len(want), "cover": cover / len(want),
+                        "order": i})
+    out.sort(key=lambda m: (-m["strong"], -m["score"], m["order"]))
+    return out
+
+
+def plan_for(goal: str, lessons: list[tuple[str, dict]], subject_names: dict) -> dict:
+    """{kind: "plan", lessons, unit} (a plan in pack order), {kind: "closest", lessons} (three at most) or
+    {kind: "miss"}.
+
+    A plan is every lesson whose title, unit or subject holds at least half her words, with the other lessons of the
+    best one's unit, in pack order; without one, the closest lessons are those holding a third of her words anywhere."""
+    found = match_lessons(goal, lessons, subject_names)
+    if not found:
+        return {"kind": "miss"}
+    by_id = dict(lessons)
+    order = {lid: i for i, (lid, _) in enumerate(lessons)}
+    best = found[0]
+    if best["strong"] >= PLAN_COVER:
+        top = by_id[best["id"]]
+        unit = (top["subject"], pick_text(top.get("unit"), "prs") or pick_text(top.get("unit"), "en"))
+        ids = {m["id"] for m in found if m["strong"] >= PLAN_COVER}
+        if unit[1]:
+            ids |= {lid for lid, l in lessons
+                    if (l["subject"], pick_text(l.get("unit"), "prs") or pick_text(l.get("unit"), "en")) == unit}
+        return {"kind": "plan", "lessons": sorted(ids, key=order.get)[:PLAN_MAX], "unit": top.get("unit"),
+                "title": top.get("title")}
+    close = [m["id"] for m in found if m["cover"] >= CLOSE_COVER][:CLOSE_MAX]
+    return {"kind": "closest", "lessons": close} if close else {"kind": "miss"}

@@ -22,7 +22,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from .base import (EVENT_FIELDS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_note, check_staff,
-                   draw_number, hints_json, question_status)
+                   WISH_DAYS, WISH_MAX, draw_number, hints_json, question_status)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -205,7 +205,9 @@ class D1Store(Store):
         await self._batch([self._stmt("DELETE FROM questions WHERE created<?", cut),
                            self._stmt("DELETE FROM ladders WHERE created<?", cut),
                            self._stmt("DELETE FROM prints WHERE created<?", cut),
-                           self._stmt("DELETE FROM reset_codes WHERE expires<?", now())])
+                           self._stmt("DELETE FROM reset_codes WHERE expires<?", now()),
+                           self._stmt("DELETE FROM wishlist WHERE last_day<?",
+                                      _ago(days=WISH_DAYS).strftime("%Y-%m-%d"))])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)
 
@@ -468,3 +470,18 @@ class D1Store(Store):
                            self._stmt("DELETE FROM reset_codes WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])
+
+    # the wishlist (P22): no token, days only
+
+    async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:
+        day = _ago().strftime("%Y-%m-%d")
+        r = await self._one("""INSERT INTO wishlist(cohort, band, lang, wish, wkey, count, first_day, last_day)
+                       VALUES(?,?,?,?,?,1,?,?) ON CONFLICT(cohort, band, lang, wkey)
+                       DO UPDATE SET count=count+1, last_day=excluded.last_day RETURNING count""",
+                            cohort, band, lang, wish[:WISH_MAX], wkey[:WISH_MAX], day, day)
+        return int(r["count"])
+
+    async def wishes(self, cohort=None, limit=100):
+        where, args = ("WHERE cohort=?", (cohort,)) if cohort else ("", ())
+        return await self._all(f"""SELECT cohort, band, lang, wish, wkey, count, first_day, last_day FROM wishlist {where}
+                                   ORDER BY count DESC, last_day DESC, wish LIMIT ?""", *args, int(limit))

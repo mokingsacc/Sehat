@@ -1,0 +1,140 @@
+// "I want to learn this" (P22; C3.5, DESIGN-C2C3-SPECS.md item 14, BUILD-PLAN 5.1 v1). Her plan lives on the phone:
+// { label, lessons: [lesson ids in pack order], again: { id: when it was added again } }. One plan at a time.
+// - Home: while a plan has a lesson left, it is Home's continue card ("Your plan · lesson 2 of 4", primary); the
+//   school day's `auto` periods take it first (timetable.js). The row that opens #/plan is the shell's
+//   (modules.homeFooter), not an offer.
+// - A lesson counts as done for the plan once she finished it, or, for a lesson a marked sheet added again (item 3,
+//   wrong items), once she finished it after that.
+// - Bands s1, s2 and adult readers; not adult literacy, since it is typed only until spoken input exists (C3.5).
+// - Offline, and for the chips, the phone matches her words against the lessons it knows (titles and units).
+// Nothing about the plan is sent; a typed goal goes to the server without her token (screens/plan.js).
+
+import { bandOf } from '../bands.js';
+import { getLang, pick, s } from '../i18n.js';
+import * as library from '../library.js';
+import { allows, on } from '../modules.js';
+import * as state from '../state.js';
+import { h, playIcon, plain } from '../ui.js';
+
+export const BANDS = ['s1', 's2', 'ad'];
+export const MAX = 12;
+export const CHIPS = 8;
+export const CLOSEST = 3;
+
+// she can make a plan: the module on for her band, and an adult only on the reader track
+export const canPlan = (c) => !!c && BANDS.includes(c.band) && (c.band !== 'ad' || c.track === 'reader')
+  && on('plan') && allows('plan', c.band);
+
+// the lessons the phone knows for her band, in pack order (adults: adult packs; children: their band's years)
+export function bandLessons(c) {
+  return library.all().filter((l) => (c.band === 'ad'
+    ? l.audience === 'adult' : l.audience !== 'adult' && bandOf({ year: l.year }) === c.band));
+}
+
+export function doneFor(c, id) {
+  const d = c.done && c.done[id];
+  const again = c.plan && c.plan.again && c.plan.again[id];
+  return !!d && (!again || (d.at || 0) > again);
+}
+
+// where her plan is: { label, lessons, done, total, next, n } (n: the next lesson's place, from 1), or null
+export function where(c) {
+  const p = c && c.plan;
+  if (!p || !Array.isArray(p.lessons)) return null;
+  const lessons = p.lessons.map((id) => library.get(id)).filter(Boolean);
+  if (!lessons.length) return null;
+  const i = lessons.findIndex((l) => !doneFor(c, l.id));
+  return { label: p.label || '', lessons, total: lessons.length, done: lessons.filter((l) => doneFor(c, l.id)).length,
+    next: i < 0 ? null : lessons[i], n: i < 0 ? lessons.length : i + 1 };
+}
+
+// the plan's lessons not done yet, for the school day's periods (timetable.js)
+export const left = (c) => { const w = where(c); return w ? w.lessons.filter((l) => !doneFor(c, l.id)) : []; };
+
+export function start(c, label, ids) {
+  const lessons = [...new Set(ids)].filter((id) => library.get(id)).slice(0, MAX);
+  state.updateChild(c.id, { plan: lessons.length ? { label: String(label || '').slice(0, 60), lessons, again: {} } : null });
+  return lessons.length > 0;
+}
+
+export function stop(c) { state.updateChild(c.id, { plan: null }); }
+
+// a marked sheet with wrong items adds its lesson to her plan, once (C2.3 item 3): a new plan named after the lesson
+// when none runs. Returns true when the lesson is in her plan, waiting to be done again.
+export function addAgain(c, lessonId, now = Date.now()) {
+  const l = library.get(lessonId);
+  if (!l || !canPlan(c)) return false;
+  const p = c.plan && Array.isArray(c.plan.lessons) ? c.plan : null;
+  if (p && p.lessons.includes(lessonId) && !doneFor(c, lessonId)) return true;      // already waiting
+  const lessons = p ? (p.lessons.includes(lessonId) ? p.lessons : [...p.lessons, lessonId].slice(-MAX)) : [lessonId];
+  const again = { ...((p && p.again) || {}), [lessonId]: now };
+  state.updateChild(c.id, { plan: { label: p ? p.label : plain(l.unit || l.title), lessons, again } });
+  return true;
+}
+
+// "Or pick one": the unit names of her band's lessons, up to eight, in pack order
+export function units(c) {
+  const seen = new Map();
+  for (const l of bandLessons(c)) {
+    const name = plain(l.unit || '');
+    if (name && !seen.has(name)) seen.set(name, l);
+  }
+  return [...seen.keys()].slice(0, CHIPS);
+}
+
+export function unitPlan(c, name) {
+  const lessons = bandLessons(c).filter((l) => plain(l.unit || '') === name);
+  return { kind: lessons.length ? 'plan' : 'miss', label: name, lessons: lessons.map((l) => l.id) };
+}
+
+// words for matching on the phone, spelt as Ask spells them (ی and ي, ک and ك: the same letter)
+export const words = (t) => String(t || '').toLowerCase()
+  .replace(/[ً-ٰٟ]/g, '').replace(/[يى]/g, 'ی').replace(/ك/g, 'ک').replace(/[أإآ]/g, 'ا').replace(/‌/g, ' ')
+  .replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 1);
+
+const same = (a, b) => {
+  if (a === b) return true;
+  const [x, y] = a.length <= b.length ? [a, b] : [b, a];
+  return x.length >= 3 && y.startsWith(x) && y.length - x.length <= 3;
+};
+
+// her goal against the titles and units the phone knows: a plan (half her words or more in a lesson's title or
+// unit), the closest lessons (three at most), or a miss; as the server does, without the lessons' text
+export function localSearch(c, text, lang = getLang()) {
+  const want = [...new Set(words(text))];
+  if (!want.length) return { kind: 'miss' };
+  const ls = bandLessons(c);
+  const scored = ls.map((l, i) => {
+    const have = words(['prs', 'ps', 'en'].map((x) => pick(l.title, x) + ' ' + pick(l.unit || '', x)).join(' ')
+      + ' ' + s(l.subject));
+    const hit = want.filter((w) => have.some((x) => same(w, x))).length;
+    return { l, i, share: hit / want.length };
+  }).filter((x) => x.share > 0).sort((a, b) => b.share - a.share || a.i - b.i);
+  if (!scored.length) return { kind: 'miss' };
+  const best = scored[0];
+  if (best.share >= 0.5) {
+    const unit = plain(best.l.unit || '', lang);
+    const ids = new Set(scored.filter((x) => x.share >= 0.5).map((x) => x.l.id));
+    if (unit) ls.filter((l) => l.subject === best.l.subject && plain(l.unit || '', lang) === unit).forEach((l) => ids.add(l.id));
+    return { kind: 'plan', label: unit || plain(best.l.title, lang), lessons: ls.filter((l) => ids.has(l.id)).map((l) => l.id).slice(0, MAX) };
+  }
+  return { kind: 'closest', lessons: scored.slice(0, CLOSEST).map((x) => x.l.id) };
+}
+
+// Home's continue card while a plan has a lesson left: "Your plan · lesson 2 of 4"
+function planCard({ child: c }) {
+  const w = where(c);
+  const l = w.next;
+  return h('section', { class: 'card soft continue plan-card' },
+    h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id), 'aria-label': s('start_lesson') }, playIcon(44)),
+    h('div', { class: 'grow' },
+      h('div', { class: 'kicker' }, s('plan_kicker', { n: w.n, b: w.total })),
+      h('div', { class: 'title' }, plain(l.title)),
+      h('div', { class: 'muted small' }, [w.label, s(l.subject)].filter(Boolean).join(' · ')),
+      h('div', { class: 'bar' }, h('span', { style: { width: Math.round((100 * w.done) / w.total) + '%' } }))));
+}
+
+export function register(shell) {
+  shell.offer('home.action', { id: 'plan-next', role: 'primary', priority: 30,
+    when: (ctx) => canPlan(ctx.child) && !!(where(ctx.child) || {}).next, render: planCard });
+}

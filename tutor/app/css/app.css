@@ -705,3 +705,15 @@ details.credit[open] summary { margin-bottom: 8px; }
 @media print { .teacher header, .teacher .ttabs, .noprint, #toast { display: none !important; } .class-card { border: 0; } }
 .lock .code-in { width: 100%; max-width: 280px; margin: 0 auto; min-height: 64px; font-size: calc(var(--fs-xl) * 1.2); font-weight: 800; letter-spacing: .2em; text-align: center; border-radius: 16px; border: 2px solid var(--line-strong); background: var(--card); color: var(--ink); }   /* the teacher's six digits (P20) */
 
+
+/* "I want to learn this" (P22, C3.5): Home's fixed last row (the shell's, not a slot), the #/plan screen, and the line
+   a marked sheet adds when its lesson joins her plan */
+.learn-else { min-height: 48px; margin-top: 8px; padding: 0 20px; gap: 8px; }
+.learn-else a { display: flex; align-items: center; gap: 10px; min-height: 48px; font-size: var(--fs); font-weight: 800; color: var(--accent-ink); text-decoration: none; }
+.plan .plan-form { position: static; padding: 0; background: transparent; }
+.plan .chips { flex-wrap: wrap; }
+.plan-now { align-items: center; gap: 10px; }
+.plan-out h2 { font-size: var(--fs-big); margin: 0; }
+.plan-out .kind { background: var(--warm-soft); color: var(--warm-ink); }
+.score:has(.plan-added) { flex-wrap: wrap; }
+.plan-added { flex: 1 0 100%; gap: 8px; align-items: center; color: var(--warm-ink); font-weight: 700; }

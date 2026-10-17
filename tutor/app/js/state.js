@@ -78,7 +78,30 @@ function clean(l) {
     ...(Number.isInteger(l.shift) && l.shift !== 0 && Math.abs(l.shift) <= 120 && l.shift % 30 === 0 ? { shift: l.shift } : {}),
     // C2.3: she has heard "I won't tell you the answer" once, the first time she reached a third hint
     ...(l.told === true ? { told: true } : {}),
+    // P22: her plan (a label and lesson ids; lessons a marked sheet added again, with when) and the goals that
+    // found no lesson while offline, waiting to join the wishlist (sent without her token, outbox.js)
+    ...(cleanPlan(l.plan) ? { plan: cleanPlan(l.plan) } : {}),
+    ...(cleanWishes(l.wishes).length ? { wishes: cleanWishes(l.wishes) } : {}),
   };
+}
+
+const LESSON_ID = /^[a-z0-9][a-z0-9-]{0,63}$/;
+function cleanPlan(p) {
+  if (!p || typeof p !== 'object' || !Array.isArray(p.lessons)) return null;
+  const lessons = [...new Set(p.lessons.filter((id) => typeof id === 'string' && LESSON_ID.test(id)))].slice(0, 12);
+  if (!lessons.length) return null;
+  const again = {};
+  for (const [id, at] of Object.entries(p.again && typeof p.again === 'object' ? p.again : {})) {
+    if (lessons.includes(id) && Number.isFinite(at)) again[id] = at;
+  }
+  return { label: typeof p.label === 'string' ? p.label.slice(0, 60) : '', lessons, again };
+}
+
+function cleanWishes(w) {
+  if (!Array.isArray(w)) return [];
+  return w.filter((x) => x && typeof x.q === 'string' && x.q.trim() && Number.isFinite(x.at))
+    .map((x) => ({ q: x.q.slice(0, 200), lang: ['prs', 'ps', 'en'].includes(x.lang) ? x.lang : 'prs', at: x.at }))
+    .slice(-5);
 }
 
 function cleanConsent(c) {

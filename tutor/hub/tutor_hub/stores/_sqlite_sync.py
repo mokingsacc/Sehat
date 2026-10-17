@@ -13,7 +13,7 @@ import threading
 from datetime import datetime, timedelta, timezone
 
 from .base import (EVENT_FIELDS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_note, check_staff,
-                   draw_number, hints_json, question_status)
+                   WISH_DAYS, WISH_MAX, draw_number, hints_json, question_status)
 
 
 def now() -> str:
@@ -130,6 +130,8 @@ class Store:
         self._x("DELETE FROM ladders WHERE created<?", (cut,))
         self._x("DELETE FROM prints WHERE created<?", (cut,))
         self._x("DELETE FROM reset_codes WHERE expires<?", (now(),))
+        self._x("DELETE FROM wishlist WHERE last_day<?",
+                ((datetime.now(timezone.utc) - timedelta(days=WISH_DAYS)).strftime("%Y-%m-%d"),))
 
     # print jobs
     def add_print(self, *, lesson_id, kind, copies, lang, seed, device) -> int:
@@ -403,3 +405,18 @@ class Store:
             except Exception:
                 self.db.execute("ROLLBACK")
                 raise
+
+    # the wishlist (P22): no token, days only
+    def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:
+        day = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        with self.lock:
+            r = self.db.execute("""INSERT INTO wishlist(cohort, band, lang, wish, wkey, count, first_day, last_day)
+                       VALUES(?,?,?,?,?,1,?,?) ON CONFLICT(cohort, band, lang, wkey)
+                       DO UPDATE SET count=count+1, last_day=excluded.last_day RETURNING count""",
+                                (cohort, band, lang, wish[:WISH_MAX], wkey[:WISH_MAX], day, day)).fetchone()
+        return int(r[0])
+
+    def wishes(self, cohort=None, limit=100):
+        where, args = ("WHERE cohort=?", (cohort,)) if cohort else ("", ())
+        return self._all(f"""SELECT cohort, band, lang, wish, wkey, count, first_day, last_day FROM wishlist {where}
+                             ORDER BY count DESC, last_day DESC, wish LIMIT ?""", (*args, int(limit)))

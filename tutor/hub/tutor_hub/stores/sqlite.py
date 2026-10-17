@@ -255,3 +255,9 @@ class SqliteStore(Store):
 
     async def prune_learners(self, idle_days: int):
         return await self._run("prune_learners", idle_days)
+
+    async def add_wish(self, *, cohort, band, lang, wish, wkey) -> int:
+        return await self._run("add_wish", cohort=cohort, band=band, lang=lang, wish=wish, wkey=wkey)
+
+    async def wishes(self, cohort=None, limit=100):
+        return await self._run("wishes", cohort, limit)

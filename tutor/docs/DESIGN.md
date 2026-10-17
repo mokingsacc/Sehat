@@ -491,6 +491,26 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   whether it carries the class label; the order of the To do groups when a class has many held answers; how the
   "needs help" rule (three items still wrong after the last hint) should read to a teacher.
 
+## What P22 built, and where it differs
+
+- Home's last row, after the list: "+ I want to learn something else" in the accent ink at the body size, 48 px,
+  with a speaker at the row's end. It also shows under "Lessons for adults are coming" for an adult reader, since
+  the wishlist is most use where there are no lessons yet.
+- `#/plan`, titled "I want to learn...": while a plan runs, a soft card at the top, "Your plan: Fractions, 2 of 4"
+  (a Persian comma in Dari and Pashto, since a middle dot before a digit reads as a zero) with its speaker and
+  "Stop this plan"; then Ask's own box (56 px, round send button), "Or pick one:" with its speaker and the unit chips
+  (wrapping), then the answer. A plan: "Here's your plan: 4 lessons" and numbered rows (subject badge, title, a tick
+  when done, "next" on the first not done), then "Start my plan", which goes Home with a toast. "Closest lessons":
+  the same rows, with no button. A miss or a rules message: one card with its speaker (the rules'
+  message on the warm fill).
+- Home's continue card for a plan: "Your plan · lesson 2 of 4", the lesson's title, "Fractions · Maths" and the
+  plan's progress bar, under the school day's Now card while the day is on.
+- Check my sheet: with wrong items, a line under the score, "Added to your plan: Adding fractions", with a book icon
+  and a speaker.
+- Open look questions: whether the row should show for adult literacy as a "coming" row until spoken input exists;
+  whether "Closest lessons" should also offer "Add these to my plan"; how a finished plan should say so (it stays
+  until stopped and leaves Home's card); the number of chips at 360 px in bold text sizes.
+
 ---
 
 # C2 and C3 decisions

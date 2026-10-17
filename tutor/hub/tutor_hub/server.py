@@ -29,6 +29,7 @@ from .config import Config
 from .mods import homework as homework_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
+from .mods import plan as plan_mod
 from .mods import teacher as teacher_mod
 from .mods import timetable as timetable_mod
 from .staff import Gate
@@ -170,6 +171,7 @@ class Hub:
         self.join_limit = Limit(20, 3600)
         self.photo_limit = Limit(6, 60)              # photos of sheets read per phone a minute
         self.reset_limit = Limit(10, 600)            # lock reset codes tried per phone in ten minutes
+        self.plan_limit = Limit(30, 60)              # "I want to learn this" goals a minute, by address (no token)
         self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
         self.aliases = set(learners.load_aliases())
         self.consent_texts = learners.load_consent()
@@ -564,6 +566,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(timetable_mod.router(hub, needs))
     # The teacher dashboard (the `teacher` module, P20): behind the staff gate, at /teacher/ (app/teacher/)
     app.include_router(teacher_mod.router(hub, needs))
+    # "I want to learn this" (the `plan` module, P22): a goal to a plan of lessons, or to the wishlist, without a token
+    app.include_router(plan_mod.router(hub, needs))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
     # The answer page is the teacher's: here behind the teacher's PIN on the hub, and on no learner route (C2.3);

@@ -136,6 +136,11 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   hint steps, from nameless events. Print class card: a QR for `?join=CODE`. Hold-for-teacher is the `teacher`
   setting `hold`, off until the admin panel (P21) or a flag change turns it on. Online it stays off until Mo sets up
   Access and adds the teachers' staff rows.
+- **P22, done:** "I want to learn this" (C3.5), typed only. Home's last row in s1, s2 and for adult readers opens a
+  box and unit chips; a goal that matches gives a plan of lessons in pack order, which becomes Home's continue card
+  and fills the school day's periods; a partial match gives the closest lessons; a miss joins the class's wishlist,
+  screened, without the token, kept 90 days, and shows in the teacher's Wishes tab. A marked sheet with wrong items
+  adds its lesson to her plan. On in all three seed cohorts, `open` included (C2.8).
 
 ## January 2027: buy and test
 

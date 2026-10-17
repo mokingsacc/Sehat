@@ -118,7 +118,7 @@ def test_migration_0011_gives_an_existing_database_the_school_day(tmp_path):
     for cid in (*SEEDS, OTHER):
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) "
                    "VALUES(?, 'x', '[]', '[]', '{\"maturity\": [\"pilot\"]}', 'now')", (cid,))
-    assert migrate(db) == ["0011_timetable", "0012_teacher"]
+    assert migrate(db) == ["0011_timetable", "0012_teacher", "0013_plan"]
     rows = dict(db.execute("SELECT id, json_extract(settings, '$.timetable') FROM cohorts").fetchall())
     assert rows == {**{c: "default" for c in SEEDS}, OTHER: None}
     assert db.execute("SELECT json_extract(settings, '$.maturity[0]') FROM cohorts WHERE id=?",

@@ -3,7 +3,9 @@
 // "· 2 waiting"); events never are. Everything waits in qalam.v2, so it survives a restart:
 // - questions: up to 7 days, then "Not sent" with "Send again"; a refusal (4xx) shows "Couldn't send" and "Try again";
 // - the join and the consent: until sent (account.js);
-// - events: their own queue (events.js), up to 500 or 14 days, never shown.
+// - events: their own queue (events.js), up to 500 or 14 days, never shown;
+// - goals from "I want to learn this" that found no lesson offline (P22): five at most, 7 days, sent without her
+//   token for the wishlist, and only with her consent; not counted, since nothing comes back to wait for.
 // flush() sends what waits whenever the server is in reach: the joins and consents first, since online a question
 // needs her token.
 
@@ -49,6 +51,7 @@ export function flush() {
       if (had) { sendingNow = true; changed(); }
       await account.sync();
       for (const l of state.learners()) await sendAsks(l.id);
+      for (const l of state.learners()) await sendWishes(l.id);
     } finally {
       running = null;
       if (sendingNow) { sendingNow = false; }
@@ -82,6 +85,31 @@ async function sendAsks(id) {
         if (!e.status || e.status >= 500 || e.status === 429) return;
         state.updateAskOf(id, a.k, { teacherQueued: false });
       }
+    }
+  }
+}
+
+// a goal no lesson matched while offline: kept for the wishlist until the server is in reach
+export function queueWish(id, q, lang, now = Date.now()) {
+  const l = state.byId(id);
+  if (!l) return;
+  state.updateChild(id, { wishes: [...(l.wishes || []), { q, lang, at: now }] });
+  flush();
+}
+
+async function sendWishes(id, now = Date.now()) {
+  for (;;) {
+    const l = state.byId(id);
+    const w = l && (l.wishes || [])[0];
+    if (!w || !hub.online()) return;
+    const rest = () => state.updateChild(id, { wishes: (state.byId(id).wishes || []).slice(1) });
+    if (!l.consent || now - w.at > QUESTION_DAYS * DAY) { rest(); continue; }   // not agreed (any more), or too old
+    try {
+      await hub.plan({ goal: w.q, lang: w.lang, band: l.band });            // no token: the wishlist never has one
+      rest();
+    } catch (e) {
+      if (!e.status || e.status >= 500 || e.status === 429) return;           // later
+      rest();                                                                 // refused (the module off): dropped
     }
   }
 }

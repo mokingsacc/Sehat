@@ -5,7 +5,9 @@
 //   belongs to `sheets`, and says Print where the hub's `print` queue is on), each shown only while its module is on;
 // - Home: one primary action, one secondary action and one list, picked from the modules' `home.action` offers;
 // - the end of a lesson: at most two `lesson.end` actions;
-// - `settings.row`: offers kept for the Settings screen (P10).
+// - `settings.row`: offers kept for the Settings screen (P10);
+// - Home's footer (homeFooter, P22): one fixed row after the list, "+ I want to learn something else", only for the
+//   `plan` module and only in s1, s2 and for adult readers. It is not a slot, and nothing else may use it (C3.5).
 // An offer is { id, role, priority, when(ctx), render(ctx) }: role is primary, secondary or list on Home; the
 // highest priority whose when(ctx) is true wins its place. ctx (context()) is { child, lesson, band, look, tone,
 // track }: look is bold or clean, tone child or adult (bands.js).
@@ -39,7 +41,8 @@ const TABS = [
 ];
 // screens that belong to a module (#/name/...); every other screen belongs to the shell
 const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', lesson: 'lessons',
-  subject: 'lessons', subjects: 'lessons' };
+  subject: 'lessons', subjects: 'lessons', plan: 'plan' };
+const FOOTER_BANDS = ['s1', 's2', 'ad'];
 
 let list = BUILT_IN;
 const offers = new Map(SLOTS.map((s) => [s, []]));
@@ -136,6 +139,15 @@ export function home(ctx) {
     out[role] = o ? draw(o, ctx) : null;
   }
   return out;
+}
+
+// Home's last row (C3.5): where "I want to learn this" opens, or null. Typed only, so adult literacy waits for
+// spoken input; Home draws it after the list
+export function homeFooter(ctx) {
+  const c = ctx && ctx.child;
+  if (!c || !on('plan') || !allows('plan', c.band) || !FOOTER_BANDS.includes(c.band)) return null;
+  if (c.band === 'ad' && c.track !== 'reader') return null;
+  return { href: '#/plan', key: 'plan_row' };
 }
 
 // the end of a lesson: at most two actions, drawn

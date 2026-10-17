@@ -23,6 +23,7 @@ ROUTES_OF = {      # a route of each module, which must answer 404 while that mo
     "sheets": ("GET", "/api/sheets/maths-7-fractions-add/key?seed=4821"),
     "teacher": ("GET", "/api/m/teacher/me"),
     "photo": ("POST", "/api/m/photo/mark"),
+    "plan": ("POST", "/api/m/plan"),
 }
 SOURCES = {"rules", "maths", "bank", "approved", "ai", "lesson", "none"}
 

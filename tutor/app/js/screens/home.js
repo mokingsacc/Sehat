@@ -81,13 +81,22 @@ function adultsComing() {
     said(h('a', { class: 'btn outline', href: '#/welcome/edit' }, s('pick_year'))));
 }
 
+// the shell's fixed last row (modules.homeFooter, P22): "+ I want to learn something else", with its speaker
+function footer(ctx) {
+  const f = modules.homeFooter(ctx);
+  if (!f) return null;
+  return h('div', { class: 'row learn-else' },
+    h('a', { class: 'grow', href: f.href }, icon('plus', 22, 2.6), h('span', {}, s(f.key))),
+    speakerBtn(() => sayKey(f.key, getLang()), { size: 'sm' }));
+}
+
 function page(root) {
   const c = state.child();
   const ctx = modules.context(c, library.next(c));
   const out = [header(c, root), library.hasDrafts() ? h('div', { class: 'draft', 'data-silent': '' }, s('draft_note')) : null];
-  if (c.band === 'ad' && !library.hasAdultLessons()) return [...out, adultsComing()];
+  if (c.band === 'ad' && !library.hasAdultLessons()) return [...out, adultsComing(), footer(ctx)];
   if (!ctx.lesson) return [...out, nothing()];
   const { primary, secondary, list } = modules.home(ctx);
   if (!primary && !secondary && !list) return [...out, nothing()];
-  return [...out, primary, secondary, list];
+  return [...out, primary, secondary, list, footer(ctx)];
 }

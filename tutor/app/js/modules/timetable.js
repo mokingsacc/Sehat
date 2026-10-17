@@ -22,6 +22,7 @@ import { readsOnOpen } from '../bands.js';
 import * as state from '../state.js';
 import { fill, h, icon, playIcon, plain, said, speakerBtn, subjectBadge, toast } from '../ui.js';
 import { aiFor } from './homework.js';
+import { canPlan, left } from './plan.js';
 
 const BELLS = { start: 'audio/bells/start.opus', break: 'audio/bells/break.opus', end: 'audio/bells/end.opus' };
 const REFRESH_MS = 30 * 60e3;          // the timetable is read again at most every half hour while online
@@ -43,11 +44,8 @@ function queue(c) {
   };
 }
 
-// her plan's lessons not done yet (P22 keeps the plan on the phone)
-function planLessons(c) {
-  const ids = (c.plan && Array.isArray(c.plan.lessons) && c.plan.lessons) || [];
-  return ids.map((id) => library.get(id)).filter((l) => l && !c.done[l.id]);
-}
+// her plan's lessons not done yet (P22 keeps the plan on the phone; plan.js says what counts as done)
+const planLessons = (c) => (canPlan(c) ? left(c) : []);
 
 export function today(c, now = new Date()) {
   const d = day.dayOf(day.cached(c), now, c.shift || 0);

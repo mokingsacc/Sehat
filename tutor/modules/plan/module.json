@@ -1,0 +1,12 @@
+{
+  "id": "plan",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["s1", "s2", "ad"],
+  "slots": ["home.action"],
+  "capabilities": ["free.text"],
+  "settings": {},
+  "needs": [],
+  "offline": "partly"
+}

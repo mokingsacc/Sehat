@@ -31,6 +31,7 @@ import * as sheetcode from '../sheetcode.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
+import { addAgain } from '../modules/plan.js';
 import { rememberKey } from './print.js';
 
 // what is printed at the sheet's foot, typed any way: m7-03-48217, M7 03 48217, ۴۸۲۱۷ in Persian digits;
@@ -215,9 +216,13 @@ export default async function check([id, seedText, mode]) {
     const selfs = Object.entries(results).filter(([k]) => k[0] === 's').map(([, v]) => v);
     score.classList.remove('hidden');
     score.classList.toggle('some-wrong', wrong > 0);
+    // wrong items put the lesson behind them in her plan (P22, item 3), where plans are on for her
+    const added = wrong > 0 && L && addAgain(state.child(), id) ? s('plan_added', { t: plain(L.title) }) : null;
     fill(score, h('div', { class: 'row wrap' }, scoreOf(right, vals.length,
       firsts.filter((st) => st.first).length + selfs.filter(Boolean).length, firsts.length + selfs.length)),
-    h('div', { class: 'note' }, wrong ? s('look_again', { n: wrong }) : s('all_right')));
+    h('div', { class: 'note' }, wrong ? s('look_again', { n: wrong }) : s('all_right')),
+    added ? h('div', { class: 'row plan-added' }, icon('book', 20), h('span', { class: 'grow' }, added),
+      speakerBtn(() => speak(added, lang), { size: 'sm' })) : null);
   }
 
   // "Ask my teacher" (C2.3): the sheet's code, the item and what she wrote, as a question the teacher answers

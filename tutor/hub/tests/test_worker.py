@@ -160,8 +160,8 @@ async def test_the_worker_serves_the_hub_with_print_off_and_sheets_and_teacher_o
         r = await c.get("/api/hello")
         assert r.status_code == 200
         h = r.json()
-        assert [m["id"] for m in h["modules"]] == ["ask", "check", "homework", "lessons", "photo", "review", "sheets",
-                                                  "teacher", "timetable"]
+        assert [m["id"] for m in h["modules"]] == ["ask", "check", "homework", "lessons", "photo", "plan", "review",
+                                                  "sheets", "teacher", "timetable"]
         assert h["cohort"]["label"] == "Staging" and h["lessons"] > 0 and h["ai"]["on"] is True
         assert h["printer"]["state"] == "off"
         assert (await c.get("/api/print/1")).status_code == 404
@@ -215,6 +215,7 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
                                                "consent": {"kind": "guardian-on-phone", "version": "online-2026-10"}}),
                 ("ask, a sum", "POST", "/api/ask", {"text": "1/2 + 1/4", "lang": "en"}),
                 ("ask, the AI", "POST", "/api/ask", {"text": "Why does ice melt?", "lang": "en"}),
+                ("learn this, a miss", "POST", "/api/m/plan", {"goal": "astronomy", "lang": "en", "band": "s1"}),
                 ("100 events", "POST", "/api/events", {"events": events})]:
             before = worker.db.calls
             r = await c.request(method, path, json=body, headers=headers if path in ("/api/events", "/api/ask") else None)
@@ -222,10 +223,11 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
             if path == "/api/join":
                 headers = {"X-Learner-Token": r.json()["token"]}
             costs[name] = worker.db.calls - before
-    # the start applies each migration once per database (one batch each), so it grows by one with every migration
-    # file; it stays at half the plan's limit, every other request at 20
+    # the start applies each migration once per database (one batch each), so on a fresh database it grows by one
+    # with every migration file (an existing one applies only the new files); it stays under 60% of the plan's
+    # limit, everything but the migrations at 13, every other request at 20
     first = costs.pop("first request (hub starts)")
-    assert first <= 25 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
+    assert first <= 30 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
     assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
     assert costs["100 events"] <= 4, costs                    # her record (and her day seen), then one batch
 

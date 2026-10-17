@@ -164,6 +164,8 @@ export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST'
 export const checkAnswer = (id, answer, token) => call('/api/m/homework/check', { method: 'POST', body: { id, answer }, token });
 // the school day's timetable for her band (P19): no token, so the request says nothing about who asks (F5); the
 // learner's class is added as ?cohort= like every route's
+// "I want to learn this" (P22): her typed goal, never with her token; a miss joins the cohort's wishlist screened
+export const plan = (body) => call('/api/m/plan', { method: 'POST', body, ms: 15000 });
 export const timetable = (band) => call('/api/m/timetable?band=' + encodeURIComponent(band), { ms: 8000 });
 export const sendEvents = (list, token) => call('/api/events', { method: 'POST', body: { events: list }, token, ms: 15000 });
 

@@ -27,7 +27,7 @@ export const STEPS = [
     wanted: (l) => lock.allowed(l.band) && !l.lock && !l.lockOffered && !!(l.code || l.consent) },
 ];
 
-const THEN = { home: '#/home', ask: '#/ask', settings: '#/settings' };
+const THEN = { home: '#/home', ask: '#/ask', settings: '#/settings', plan: '#/plan' };
 export const thenHash = (then) => THEN[then] || '#/home';
 
 // the route after `from` ('' for Welcome) for the learner using the phone
