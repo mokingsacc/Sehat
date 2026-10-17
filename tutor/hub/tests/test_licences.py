@@ -386,7 +386,7 @@ def test_link_cards_and_credits_from_the_hub(hub_client):
     assert [x["id"] for x in cr["linked"]] == ["begum-academy", "coursera", "daad", "educationusa", "edx",
                                                "fulbright-foreign-student", "khan-academy", "mit-opencourseware",
                                                "openstax", "turkiye-burslari", "uopeople"]   # P28's cards
-    assert {a["name"] for a in cr["app"]} == {"Vazirmatn", "Noto Naskh Arabic", "Noto Sans SC (Chinese, a subset)",
+    assert {a["name"] for a in cr["app"]} == {"Vazirmatn", "Noto Naskh Arabic (Arabic script, a subset)", "Noto Sans SC (Chinese, a subset)",
                                               "Amiri Quran"}
 
 

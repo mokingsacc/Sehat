@@ -18,3 +18,16 @@
 .ct dt{font-weight:700}
 .ct dd{margin:0}
 @media (min-width:760px){.ph{padding:36px 48px}.prose .card{padding:24px 28px}.cts{display:grid;grid-template-columns:1fr 1fr;gap:24px}}
+/* W3: a page head's button, the credits' rows, the lesson catalogue, an address or hash that must wrap */
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.prose .btn{align-self:flex-start}
+.u{direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere;font-size:15px;color:var(--muted)}
+.cr,.lsns{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cr li{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--line)}
+.cr li:first-child{border-top:0;padding-top:0}
+.lsn{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;min-height:56px;padding:8px 14px;border:2px solid var(--line);border-radius:16px;text-decoration:none}
+.lsn b{flex:1 1 12em}
+.lsn .sub{font-size:14px;font-weight:700;color:var(--acink)}
+.lsn .muted{font-size:15px}
+.lsn:hover{border-color:var(--ac)}
+@media (min-width:1024px){.lsns{grid-template-columns:1fr 1fr}}

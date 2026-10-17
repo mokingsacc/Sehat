@@ -51,10 +51,11 @@ def test_online_only_the_origins_named_and_staging_names_the_apk(cfg):
 
 
 def test_get_is_a_static_page_and_any_apk_there_matches_its_record(hub_client):
-    r = hub_client.get("/get/")
-    assert r.status_code == 200 and "get.js" in r.text
+    r = hub_client.get("/get/")              # the site's page now (WEBSITE.md W3); app/get holds only a release's files
+    assert r.status_code == 200 and 'lang="fa-AF"' in r.text and "default-src 'none'" in r.headers["content-security-policy"]
     get = TUTOR / "app" / "get"
-    apks = list(get.glob("*.apk"))           # none until a release puts one there with apk.json (docs/HOSTING.md)
+    assert not (get / "index.html").exists() and not (get / "get.js").exists()
+    apks = list(get.glob("*.apk")) if get.is_dir() else []   # none until a release puts one there with apk.json (docs/HOSTING.md)
     if apks:
         info = json.loads((get / "apk.json").read_text())
         assert [a.name for a in apks] == [info["file"]] and info["file"] == f"qalam-{info['version']}.apk"

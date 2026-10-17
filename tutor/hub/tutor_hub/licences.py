@@ -89,7 +89,7 @@ _PLACEHOLDER = re.compile(r"\{([a-z][a-z ]*)\}")
 APP_CREDITS = [
     {"name": "Vazirmatn", "owner": "The Vazirmatn Project Authors", "licence": "SIL Open Font License 1.1",
      "licence_url": "https://openfontlicense.org", "url": "https://github.com/rastikerdar/vazirmatn"},
-    {"name": "Noto Naskh Arabic", "owner": "The Noto Project Authors", "licence": "SIL Open Font License 1.1",
+    {"name": "Noto Naskh Arabic (Arabic script, a subset)", "owner": "The Noto Project Authors", "licence": "SIL Open Font License 1.1",
      "licence_url": "https://openfontlicense.org", "url": "https://github.com/notofonts/arabic"},
     {"name": "Noto Sans SC (Chinese, a subset)", "owner": "Adobe and The Noto Project Authors",
      "licence": "SIL Open Font License 1.1", "licence_url": "https://openfontlicense.org",

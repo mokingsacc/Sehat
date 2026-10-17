@@ -1,5 +1,5 @@
 """Put a signed Qalam APK on /get (P23): copies it to app/get/qalam-<version>.apk and writes app/get/apk.json
-{version, file, size, sha256, cert}, which the page shows ("For teachers: check the file"). Any older APK there is
+{version, file, size, sha256, cert}, which /get/ shows (site/templates/get.html, rendered by tools/make_site.py: "For teachers: check the file"). Any older APK there is
 removed. Refuses a file over 25 MiB (a Worker static asset's limit) or a version that is not like 1.2.3.
 
     python3 tools/apk_record.py path/to/signed.apk --version 0.1.0 --cert "AB:CD:..."
@@ -30,6 +30,7 @@ def record(apk: Path, version: str, cert: str = "", get: Path = GET) -> dict:
     if cert and not re.fullmatch(r"[0-9A-Fa-f:]{64,95}", cert.strip()):
         raise ValueError("the certificate is its SHA-256, hex digits with or without colons")
     name = f"qalam-{version}.apk"
+    get.mkdir(parents=True, exist_ok=True)               # since W3 the folder holds only the release's files
     for old in get.glob("qalam-*.apk"):
         old.unlink()
     shutil.copyfile(apk, get / name)

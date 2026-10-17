@@ -804,9 +804,11 @@ pages and `/get`. The release APK is about 0.5 MB.
 - **Updates:** `hello.apk {latest, min}` (`TUTOR_APK_LATEST`, `TUTOR_APK_MIN`; null when unset). Newer: Settings'
   "Update Qalam". Below `min`: one full-screen "Please update Qalam" (`screens/update.js`); Download opens `/get` in
   the phone's browser. The app never installs updates itself.
-- **`/get`** (`app/get/`): three pictured steps, a speaker on every line, the reader's language; the APK and
-  `apk.json` sit beside it once released (`tools/apk_record.py`), else it says the app is not ready. Settings → About
-  links it in an Android phone's browser only.
+- **`/get`** (the website's page since W3, `site/templates/get.html`): the APK's size, version, SHA-256 and
+  certificate fingerprint, three steps, a speaker on every heading, in the reader's language (`?lang=`, a saved
+  choice or a Pashto phone, `site/js/lang.js`); before a release it says the app is not ready and offers the
+  browser. `app/get/` holds only the APK and `apk.json` (`tools/apk_record.py`), served beside the page as
+  `/get/<file>`. Settings → About links `/get/?lang=<hers>` in an Android phone's browser only.
 - **CI:** `.github/workflows/tutor-android.yml`: the alarm plan's plain-Java test, then the debug APK and the
   unsigned release APK as an artifact, with the permission list and the name checked. No secrets.
 

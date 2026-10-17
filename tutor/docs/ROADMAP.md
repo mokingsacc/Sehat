@@ -215,6 +215,10 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **W2, done:** the move: the website at `/`, the app at `/app/` on the Worker and the hub, the staff pages and
   `/get/` where they were; the site's service worker and `/offline/`; the app takes the site's year, track and
   language doors; `tools/move_check.mjs` checks that a phone with today's app keeps its learners, pictures and clips.
+- **W3, done:** `/families/`, `/teachers/`, `/partners/`, `/lessons/` (the real catalogue, each lesson opening in the
+  app), `/credits/`, `/get/` as the site's page, `/m` (the bag code handed to the app) and the 404 page; the app's
+  first open trimmed from 0.61 to 0.41 MB (fonts and voice manifests on first use, Naskh cut to the Arabic block).
+  Still to do: the heading clips (`tools/voice.py`, with the voice key) and the partners' email address.
 
 ## January 2027: buy and test
 

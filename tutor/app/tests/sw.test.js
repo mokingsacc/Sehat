@@ -10,14 +10,20 @@ const sw = readFileSync(new URL('sw.js', APP), 'utf8');
 const list = (dir, ext) => readdirSync(new URL(dir, APP)).filter((f) => f.endsWith(ext)).map((f) => dir + f);
 
 test('the service worker keeps every file the app opens with', () => {
-  const shell = JSON.parse(sw.slice(sw.indexOf('const SHELL = [') + 14, sw.indexOf('];', sw.indexOf('const SHELL')) + 1)
+  const shell = JSON.parse(sw.slice(sw.indexOf('const SHELL = [') + 14, sw.indexOf('];', sw.indexOf('const SHELL = [')) + 1)
     .replace(/'/g, '"').replace(/,\s*\]/, ']'));
   const want = ['./', 'index.html', 'icon.svg', 'credits.json', 'css/app.css',
     ...list('js/', '.js'), ...list('js/screens/', '.js'), ...list('js/modules/', '.js'), ...list('fonts/', '.woff2'),
     ...readdirSync(new URL('audio/', APP), { withFileTypes: true }).filter((d) => d.isDirectory())
       .map((d) => `/audio/${d.name}/manifest.json`), ...list('audio/bells/', '.opus').map((f) => '/' + f)];   // the bells ring offline too (P19);
-  // the voice clips and their manifests stay at the site's root since the move to /app/ (WEBSITE.md 2.2)
-  assert.deepEqual([...shell].sort(), [...want].sort());
+  // the voice clips and their manifests stay at the site's root since the move to /app/ (WEBSITE.md 2.2); the
+  // Quran's and the Chinese fonts and the voice manifests are kept when first asked for (W3's trim), and named in LAZY
+  const lazy = JSON.parse(sw.slice(sw.indexOf('const LAZY = [') + 13, sw.indexOf('];', sw.indexOf('const LAZY')) + 1)
+    .replace(/'/g, '"').replace(/\s+/g, ' '));
+  assert.deepEqual(lazy.sort(), ['/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus',
+    '/audio/en/manifest.json', '/audio/prs/manifest.json', '/audio/ps/manifest.json',
+    'fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2']);
+  assert.deepEqual([...shell].sort(), want.filter((f) => !lazy.includes(f)).sort());
 });
 
 test('it caches no API answer and takes over only at the next start', () => {

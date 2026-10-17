@@ -6,6 +6,7 @@ import html
 import hashlib
 import importlib.util
 import json
+import shutil
 import re
 from pathlib import Path
 
@@ -81,7 +82,11 @@ def test_forward_script_is_the_first_script_on_each_home(built):
     out, rep = built
     for p in rep["pages"]:
         doc = (out / p["file"]).read_text(encoding="utf-8")
-        first = re.search(r"<script>(.*?)</script>", doc, re.S).group(1)
+        found = re.search(r"<script>(.*?)</script>", doc, re.S)
+        if not found:                          # the 404 page runs no script at all
+            assert p["page"] == "notfound"
+            continue
+        first = found.group(1)
         if p["page"] == "home":
             assert doc.index("<script>") < doc.index("<title>")
             assert "join=" in first and "/app/" in first and "qalam.site.lang" in first and "site" in first
@@ -95,7 +100,7 @@ def test_numbers_and_codes_per_language(built):
     en = (out / "en" / "index.html").read_text(encoding="utf-8")
     assert '<span class="code m">۴۸۲۱ ۷۵۹۰ ۳۶۶۱ ۲۰۴۳</span>' in prs and '<span class="code m">4821 7590 3661 2043</span>' in en
     assert 'href="/app/?year=3&amp;lang=prs"' in prs and 'aria-label="صنف ۳"' in prs
-    assert "۰٫۶ میگابایت" in prs or "۰٫۵ میگابایت" in prs           # the app's real first open, compressed
+    assert re.search(r"۰٫[۰-۹]{1,2} میگابایت", prs)                # the app's real first open, compressed
     assert not re.search(r"[۰-۹]\s*·|·\s*[۰-۹]", re.sub(r"<[^>]+>", " ", prs))
 
 
@@ -123,6 +128,8 @@ def test_strings_match_across_languages(make_site):
     ("<h2>For girls</h2>", "girls"), ("<p>صنف ۶ · بعد</p>", "middle dot"), ('<p style="color:red">x</p>', "inline style"),
     ('<a href="/nowhere/">x</a>', "does not exist"), ("<p>a school in Mazar</p>", "below the province"),
     ("<style>@font-face{font-family:x}</style>", "web font"),
+    ('<svg><symbol id="hub"></symbol></svg><section id="hub"></section>', "used twice"),
+    ("<p>About {apk_mb} MB</p>", "placeholder"),
 ])
 def test_the_lint_refuses(make_site, bad, why):
     found = make_site.lint("/x/", f"<html><body><main>{bad}</main></body></html>", {"/", "/privacy/"})
@@ -167,8 +174,8 @@ def test_the_hub_serves_the_site_at_the_root_and_the_app_at_app(hub_client):
     assert hub_client.get("/audio/prs/manifest.json").status_code == 200
 
 
-def test_the_staff_pages_and_get_keep_their_addresses_with_paths_into_app(hub_client):
-    for page in ("/teacher/", "/admin/", "/review/", "/get/"):
+def test_the_staff_pages_keep_their_addresses_with_paths_into_app(hub_client):
+    for page in ("/teacher/", "/admin/", "/review/"):
         r = hub_client.get(page)
         assert r.status_code == 200 and "../" not in r.text and 'href="/app/css/app.css"' in r.text, page
         assert hub_client.get(re.search(r'href="(/app/[^"]+\.css)"', r.text).group(1)).status_code == 200
@@ -176,6 +183,45 @@ def test_the_staff_pages_and_get_keep_their_addresses_with_paths_into_app(hub_cl
         assert "frame-ancestors 'none'" in hub_client.get(page).headers["content-security-policy"]
         script = re.search(r'src="(/app/js/[^"]+\.js)"', hub_client.get(page).text).group(1)
         assert hub_client.get(script).status_code == 200
-    get = hub_client.get("/get/get.js").text
-    assert "from '/app/js/i18n.js'" in get and "'../" not in get
     assert hub_client.get("/teacher", follow_redirects=False).headers["location"] == "/teacher/"
+
+
+# W3, the pages (WEBSITE.md 2.4 to 2.7): /get/ is the site's own page now, /m hands a bag code to the app, and any
+# address no file answers gets the 404 page with its own policy in a <meta>
+
+def test_the_hub_serves_the_w3_pages_m_and_the_404_page(hub_client):
+    for path in ("/families/", "/teachers/", "/partners/", "/lessons/", "/credits/", "/get/", "/en/get/", "/ps/lessons/"):
+        r = hub_client.get(path)
+        assert r.status_code == 200 and "default-src 'none'" in r.headers["content-security-policy"], path
+    assert 'href="/app/?' in hub_client.get("/lessons/").text                  # each lesson opens in the app
+    m = hub_client.get("/m")
+    assert m.status_code == 200 and 'name="robots" content="noindex"' in m.text and "qalam.bag.handoff" in m.text
+    assert "default-src 'none'" in m.headers["content-security-policy"]
+    gone = hub_client.get("/no/such/page")
+    assert gone.status_code == 404 and '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'' in gone.text
+    assert "frame-ancestors" not in re.search(r'http-equiv="Content-Security-Policy" content="([^"]+)"', gone.text).group(1)
+    assert hub_client.get("/get/qalam-0.0.0.apk").status_code == 404        # only a release's own files, when it has some
+    assert hub_client.get("/get/get.js").status_code == 404
+    api = hub_client.get("/api/no-such-route")                  # the API's 404 stays JSON, as on the Worker
+    assert api.status_code == 404 and api.json()["detail"]
+
+
+def test_the_get_page_names_the_apk_and_serves_it_with_its_record(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+    from tutor_hub import sitetree
+    app_dir = tmp_path / "app"
+    shutil.copytree(TUTOR / "app", app_dir, ignore=shutil.ignore_patterns("tests", "audio", "packs"))
+    (app_dir / "audio").mkdir()
+    apk = b"PK\x03\x04" + b"q" * 2000
+    (app_dir / "get").mkdir(exist_ok=True)
+    (app_dir / "get" / "qalam-1.2.3.apk").write_bytes(apk)
+    (app_dir / "get" / "apk.json").write_text(json.dumps({"version": "1.2.3", "file": "qalam-1.2.3.apk", "size": len(apk),
+        "sha256": hashlib.sha256(apk).hexdigest(), "cert": "AB:CD"}))
+    from fastapi import FastAPI
+    app = FastAPI()
+    sitetree.mount(app, app_dir)
+    c = TestClient(app)
+    page = c.get("/en/get/").text
+    assert "/get/qalam-1.2.3.apk" in page and hashlib.sha256(apk).hexdigest() in page and "AB:CD" in page
+    assert c.get("/get/qalam-1.2.3.apk").content == apk and c.get("/get/apk.json").json()["version"] == "1.2.3"
+    assert c.get("/app/get/apk.json").status_code == 404

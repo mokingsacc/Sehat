@@ -343,7 +343,8 @@ a release key (below) before the pilot starts and keep it.
    repository's `ANDROID_*` secrets, which are Sehat's. Nothing is set up for this today.
 
 **Putting it on /get.** `python3 tools/apk_record.py qalam-<v>.apk --version <v> --cert "<SHA-256 digest>"` copies it
-to `app/get/qalam-<v>.apk` with `app/get/apk.json` (size, SHA-256, certificate), which the page shows to teachers. It
+to `app/get/qalam-<v>.apk` with `app/get/apk.json` (size, SHA-256, certificate), which the website's `/get/` page shows to teachers (the build
+reads them; `app/get/` holds nothing else). It
 must stay under 25 MiB (today about 0.5 MB). Commit both; the next deploy serves them as static assets. Then set
 `TUTOR_APK_LATEST = "<v>"` in the Worker's `[vars]` (and on a hub in its settings) so phones with an older APK see
 "Update Qalam"; set `TUTOR_APK_MIN` only when old versions must stop (they then see one "Please update Qalam" card).

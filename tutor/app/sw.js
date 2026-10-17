@@ -7,11 +7,18 @@
 // the site's root (/audio/), shared with the website's speakers; the site's own worker at /sw.js keeps the website and
 // shares media-v1 and quran-v1 with this one. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-w2-1';
+const VERSION = 'qalam-w3-1';
 const SHELL_CACHE = 'app-shell-' + VERSION;      // not shell-*: the site's worker deletes the old root worker's cache
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const QURAN_CACHE = 'quran-v1';                // P29: each surah and verse recitation once opened, never all at once
 const BASE = new URL('./', self.location).pathname;   // /app/ online and on the hub; / in the APK
+// The first open (W3's trim, WEBSITE.md 2.5: at most 0.45 MB): the app's own files and its everyday fonts. Kept as
+// they are first asked for instead (below, like any app file): the Quran's Amiri and the Chinese subset, which only
+// those lessons draw; each language's voice manifest, which speech.js asks for in her own language only; and the
+// bells, which the school day fetches at her first tap while it is on (timetable.js unlockOnFirstTap), so they still
+// ring offline.
+const LAZY = ['fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2', '/audio/en/manifest.json', '/audio/prs/manifest.json',
+  '/audio/ps/manifest.json', '/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus'];
 const SHELL = [
   './',
   'index.html',
@@ -81,19 +88,11 @@ const SHELL = [
   'js/modules/recall.js',
   'js/modules/sheets.js',
   'js/modules/timetable.js',
-  'fonts/amiri-quran.woff2',
   'fonts/naskh-500.woff2',
   'fonts/naskh-700.woff2',
-  'fonts/noto-sc.woff2',
   'fonts/vazirmatn-500.woff2',
   'fonts/vazirmatn-800.woff2',
-  '/audio/bells/break.opus',
-  '/audio/bells/end.opus',
   '/audio/bells/manifest.json',
-  '/audio/bells/start.opus',
-  '/audio/en/manifest.json',
-  '/audio/prs/manifest.json',
-  '/audio/ps/manifest.json',
 ];
 
 self.addEventListener('install', (e) => {

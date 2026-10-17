@@ -188,3 +188,21 @@ def test_the_chinese_font_subset_holds_every_character_the_packs_write():
     cmap = TTFont(PACKS.parents[1] / "app" / "fonts" / "noto-sc.woff2").getBestCmap()
     assert {"你", "好", "水", "ǎ"} <= make_fonts.needed()
     assert not [c for c in make_fonts.needed() if ord(c) not in cmap]
+
+
+def test_the_naskh_subset_holds_every_arabic_letter_a_lesson_or_the_app_writes():
+    """app/fonts/naskh-500 and naskh-700 (tools/make_fonts.py --naskh, W3's shell trim): Dari, Pashto and Arabic only."""
+    import sys
+    from fontTools.ttLib import TTFont
+    tutor = PACKS.parents[1]
+    sys.path.insert(0, str(tutor / "tools"))
+    import make_fonts
+    app_text = (tutor / "app" / "js" / "i18n.js").read_text(encoding="utf-8")
+    wanted = make_fonts.arabic_texts() | {c for c in app_text if 0x600 <= ord(c) <= 0x8ff}
+    assert {"ټ", "ښ", "ګ", "پ", "ژ"} <= wanted                        # Pashto's and Dari's own letters among them
+    for weight in (500, 700):
+        font = TTFont(tutor / "app" / "fonts" / f"naskh-{weight}.woff2")
+        cmap = font.getBestCmap()
+        assert not [c for c in wanted if ord(c) not in cmap], weight
+        assert all(make_fonts.naskh_kept(c) for c in cmap)            # the subset, not the whole font
+        assert "openfontlicense" in font["name"].getDebugName(14)           # the licence line kept in the file

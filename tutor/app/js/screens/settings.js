@@ -117,7 +117,7 @@ export default function settings([action]) {
     });
     const version = hub.info() && hub.info().version;
     // the Android app: /get opens in the phone's browser; only while the server is in reach (its address is known)
-    const getApp = hub.online() ? hub.url('/get/') : null;
+    const getApp = hub.online() ? hub.url('/get/?lang=' + getLang()) : null;   // the page in her language (W3)
     const apk = android.apkState(hub.info() && hub.info().apk);
     fill(root,
       topbar({ back: '#/who', title: s('settings') }),

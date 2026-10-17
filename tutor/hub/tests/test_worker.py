@@ -125,10 +125,15 @@ def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
     assert (public / "app" / "sw.js").is_file() and not (public / "app" / "tests").exists()
     assert not any((public / "app" / d).exists() for d in ("teacher", "admin", "review", "get", "audio"))
     assert list((public / "audio").glob("*/manifest.json"))
-    for page in ("teacher", "admin", "review", "get"):
+    for page in ("teacher", "admin", "review"):
         doc = (public / page / "index.html").read_text(encoding="utf-8")
         assert "../" not in doc and 'href="/app/css/app.css"' in doc, page
-    assert "'/app/js/i18n.js'" in (public / "get" / "get.js").read_text(encoding="utf-8")
+    # W3: /get/ is the site's page (the release's APK and apk.json beside it), /m is m.html, 404.html answers the rest
+    assert 'lang="fa-AF"' in (public / "get" / "index.html").read_text(encoding="utf-8")
+    assert not (public / "get" / "get.js").exists() and (public / "m.html").is_file()
+    assert 'http-equiv="Content-Security-Policy"' in (public / "404.html").read_text(encoding="utf-8")
+    assert WRANGLER["assets"]["not_found_handling"] == "404-page"
+    assert "\n/m\n  Content-Security-Policy: default-src 'none'" in headers
     assert "site-" in (public / "sw.js").read_text(encoding="utf-8") and "__VERSION__" not in (public / "sw.js").read_text()
     assert json.loads((public / "manifest.webmanifest").read_text())["start_url"] == "/app/"
     site = headers.split("\n/\n", 1)[1]

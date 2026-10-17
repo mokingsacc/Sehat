@@ -25,6 +25,7 @@ QALAM_SPIKE = "on"                     # staging only: GET /api/_spike answers t
 [assets]
 directory = "build/public"
 run_worker_first = ["/api/*", "/v/*"]
+not_found_handling = "404-page"          # any other address no file answers: the site's 404.html (WEBSITE.md W3)
 
 [[d1_databases]]
 binding = "DB"

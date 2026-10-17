@@ -888,5 +888,5 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     if cfg.app.is_dir():
         from . import sitetree
         app.add_middleware(StaffHeaders)
-        sitetree.mount(app, cfg.app)
+        sitetree.mount(app, cfg.app, cfg.release)
     return app

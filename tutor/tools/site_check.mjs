@@ -9,7 +9,9 @@
 //     over 3.5 s (EDGE: 600 ms, 80 kbit/s) or 5.5 s (poor 2G: 900 ms, 35 kbit/s), three round trips added for DNS,
 //     TCP and TLS;
 //   - a forward that does not happen: /?join=CODE to /app/?join=CODE, a phone with a learner to /app/ (not with
-//     ?site, which shows her picture instead), a Pashto phone or a saved choice from / to its home.
+//     ?site, which shows her picture instead), a Pashto phone or a saved choice from / to its home, /get/ by ?lang
+//     or a Pashto phone, /m to the app's #/move with the code kept for the tab only (W3);
+//   - an unknown address that does not answer 404 with the 404 page and its own policy (W3).
 // It serves the folder itself (brotli when asked, and the folder's _headers, so the CSP is the real one); --base
 // checks a running server instead (the hub, or staging). Run from tutor/:
 //   python3 tools/make_site.py /tmp/site
@@ -67,6 +69,9 @@ if (!BASE) {
     let p = normalize(decodeURIComponent(url.pathname)).replace(/^(\.\.[/\\])+/, '');
     let f = join(ROOT, p);
     if (existsSync(f) && statSync(f).isDirectory()) f = join(f, 'index.html');
+    let status = 200;                                          // as Workers static assets: /m is m.html, and with
+    if (!existsSync(f) && existsSync(f + '.html')) f += '.html';  // not_found_handling = "404-page", 404.html answers
+    if (!existsSync(f) && existsSync(join(ROOT, '404.html'))) { f = join(ROOT, '404.html'); status = 404; }
     if (!existsSync(f)) { res.writeHead(404, { 'content-type': 'text/plain' }); res.end('not here'); return; }
     let body = readFileSync(f);
     const head = { 'content-type': TYPES[extname(f)] || 'application/octet-stream', 'cache-control': 'no-store' };
@@ -81,7 +86,7 @@ if (!BASE) {
       head['content-encoding'] = 'br';
     }
     head['content-length'] = body.length;
-    res.writeHead(200, head);
+    res.writeHead(status, head);
     res.end(body);
   });
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
@@ -209,7 +214,8 @@ for (const p of report.pages) {
       page.on('pageerror', (e) => errors.push(String(e)));
       page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
       page.on('request', (r) => { if (!r.url().startsWith('data:')) requests.push(r.url()); });
-      await page.goto(BASE + p.url + (p.page === 'home' ? '?site' : ''), { waitUntil: 'load' });
+      // a home with ?site, which stays; /m as m.html, where its forward to the app stays still
+      await page.goto(BASE + (p.page === 'm' ? '/m.html' : p.url) + (p.page === 'home' ? '?site' : ''), { waitUntil: 'load' });
       await page.waitForTimeout(150);
       const r = await page.evaluate(inspect, want);
       if (p.page === 'offline') {                     // and as the site worker sends it for /app/ before the app is here
@@ -217,7 +223,7 @@ for (const p of report.pages) {
         await page.evaluate(() => document.documentElement.setAttribute('data-app', 'none'));
         const none = await page.evaluate(inspect, want);
         const words = await page.$eval('.multi', (b) => b.innerText);
-        if (!/0\.6|۰٫۶|0\.5|۰٫۵/.test(words) || !/[\u0600-\u06ff]/.test(words)) none.problems.push(`"not on this phone yet" lacks its size: ${words.slice(0, 60)}`);
+        if (!/[0-9۰-۹][.٫][0-9۰-۹]/.test(words) || !/[\u0600-\u06ff]/.test(words)) none.problems.push(`"not on this phone yet" lacks its size: ${words.slice(0, 60)}`);
         r.problems.push(...none.problems.map((x) => `(no app) ${x}`));
         p.shot = `site-${p.page}-noapp-${p.lang}`;
       }
@@ -276,6 +282,41 @@ f = await landing('/', { locale: 'ps-AF', saved: 'prs' });
 check(f.url.pathname === '/', `forward: a saved choice wins over the phone (${f.url.pathname})`);
 f = await landing('/?site', { saved: 'en' });
 check(f.url.pathname === '/en/' && f.url.search === '?site', `forward: a saved English choice goes to ${f.url.pathname}${f.url.search}`);
+
+// W3: /m keeps the bag code for this tab only and opens the app's #/move with no digits in the address; /get/ by
+// ?lang; any address no file answers gets the 404 page, status 404, with its own policy working
+{
+  const ctx = await browser.newContext({ serviceWorkers: 'block' });
+  const page = await ctx.newPage();
+  const navs = [];                                  // with the fragment, as the address bar shows it (the app may tidy it)
+  page.on('framenavigated', (fr) => { if (fr === page.mainFrame()) navs.push(fr.url()); });
+  await page.goto(BASE + '/m#1234-5678-9012-3452', { waitUntil: 'load' }).catch(() => {});
+  await page.waitForTimeout(300);
+  const kept = await page.evaluate(() => sessionStorage.getItem('qalam.bag.handoff')).catch(() => null);
+  const last = new URL(navs.find((u) => new URL(u).pathname === '/app/') || page.url());
+  check(last.pathname === '/app/' && last.hash === '#/move' && kept === '1234567890123452' && !/[0-9]{4}/.test(last.href.split('#')[1] || ''),
+    `/m: the code kept for this tab (${kept}), the app opened at ${last.pathname}${last.hash}`);
+  await ctx.close();
+}
+f = await landing('/get/?lang=ps');
+check(f.url.pathname === '/ps/get/', `forward: /get/?lang=ps opens ${f.url.pathname}`);
+f = await landing('/get/', { locale: 'ps-AF' });
+check(f.url.pathname === '/ps/get/', `forward: /get/ on a Pashto phone opens ${f.url.pathname}`);
+f = await landing('/get/', { locale: 'en-US' });
+check(f.url.pathname === '/get/', `forward: /get/ on an English phone stays in Dari (${f.url.pathname})`);
+{
+  const ctx = await browser.newContext({ serviceWorkers: 'block' });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => { if (m.type() === 'error' && !/status of 404/.test(m.text())) errors.push(m.text()); });
+  const res = await page.goto(BASE + '/no/such/page', { waitUntil: 'load' });
+  const meta = await page.$eval('meta[http-equiv="Content-Security-Policy"]', (m) => m.content).catch(() => '');
+  const home = await page.$$eval('a[href="/?site"], a[href="/ps/?site"], a[href="/en/?site"]', (a) => a.length);
+  check(res.status() === 404 && meta.startsWith("default-src 'none'") && home === 3 && !errors.length,
+    `an unknown address: ${res.status()}, the 404 page with its policy and the three homes${errors.length ? ': ' + errors[0].slice(0, 120) : ''}`);
+  await ctx.close();
+}
 
 // first paint on a cold, throttled line (one request; three round trips added for DNS, TCP and TLS)
 if (!QUICK) {

@@ -785,3 +785,46 @@ Where it differs, the builder's choices to confirm:
   if there is one, instead of making a second learner; a class code on the way always makes a new one, as Welcome
   does.
 - On `/offline/` English comes first only for a reader who chose it, as on the homes.
+
+### W3: the pages and the shell trim
+
+Built:
+- The pages, each in three languages (`make_site.py` `PAGES`, `site/templates`, 116 new strings a language; Dari and
+  Pashto are drafts): `/families/` (cost, privacy, one phone for the family, the Android app, another phone, wiping),
+  `/teachers/` (codes, sheets, the centre, a forgotten PIN), `/partners/`, `/lessons/` (the catalogue the server
+  really serves, by year, then older learners, then adults; each lesson opens `/app/?year=…&lang=…#/lesson/<id>`
+  through W2's door, and a draft says so; a release hub lists signed lessons only), `/credits/` (from
+  `app/credits.json`), and `/get/` restyled (the APK with its size, version, SHA-256 and certificate fingerprint
+  from `app/get/apk.json`, or, before a release, the browser). Each is 5 to 7 KB brotli.
+- `/m` (`m.html`, no index): the Android app's "use Qalam in this browser too" opens `/m#<16 digits>`; `m.js` keeps
+  the digits in `sessionStorage` `qalam.bag.handoff` and replaces the address with `/app/#/move` before anything is
+  drawn, so the code is in no address bar or history. The `#/move` screen that reads it is W7's.
+- The 404 page (`404.html`, three languages in one file, 1.6 KB): `not_found_handling = "404-page"` in both
+  wrangler files (the guard checks only the binding and `run_worker_first`, unchanged), and on the hub any address
+  no file answers. It is served at any address, where no `_headers` rule names it, so it carries its own policy in a
+  `<meta>` (the same one without `frame-ancestors`, which the `/*` rule's `frame-ancestors 'self'` covers).
+- `/get/` is the site's page: `app/get/index.html` and `get.js` are gone, and `app/get/` holds only what
+  `tools/apk_record.py` puts there at release (the APK and `apk.json`), served beside the page at `/get/<file>`. The
+  app's Settings link is `/get/?lang=<her language>`; `lang.js` opens the Pashto or English page from `?lang`, a
+  saved choice or a Pashto phone.
+- The shell trim (2.5): Amiri, Noto SC, the three voice manifests and the bells are kept on first use instead of
+  at install (`sw.js` `LAZY`; the bells at the first tap of a school day, so they still ring offline), and Noto
+  Naskh Arabic is cut to the Arabic block, Latin to Extended-A and the punctuation (`make_fonts.py --naskh`; 72 to
+  42 KB a weight, every shaping feature kept). 1,237 Dari, Pashto and Arabic texts of the lessons, the app and the
+  site draw pixel for pixel the same in both weights, and `test_packs.py` fails if a lesson writes a letter the
+  subset lacks. The first open: 0.61 MB gzip before, 0.41 MB gzip and 0.38 MB brotli after (73 files). Measured on
+  staging before the trim, with Cloudflare's own compression: 687 KB on the wire with headers, 68 s at EDGE's
+  80 kbit/s; the after figure is measured on staging once W3 is deployed (W4's notes).
+- `site_check.mjs` also checks `/m`, the `/get/` forwards and an unknown address; its server answers as Workers
+  static assets do (`/m` is `m.html`, `404.html` with status 404).
+
+Where it differs, the builder's choices to confirm:
+- The heading clips are not made: `tools/voice.py` needs the voice key, which this build had not got. Until they
+  are, each speaker falls back to the phone's voice as 2.4 says. Run `voice.py` for the site's headings at release,
+  and have them heard by the native listener (C5.6).
+- `/partners/` has no email address yet (`CONTACT = None`): it says one will be there once Qalam's own address is
+  set up. Set `CONTACT` in `make_site.py` then.
+- A price tag under 1 MB rounds to the nearest 0.05 ("0.4 MB" now).
+- A lesson with no English title shows its Dari title on the English catalogue, marked as Dari.
+- The examples in the page texts (a class code, the hub's address) are placeholders filled per language, so the
+  Dari and Pashto strings hold no Latin digits.
