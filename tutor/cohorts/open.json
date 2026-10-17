@@ -27,6 +27,7 @@
     "ask": false,
     "print": false,
     "teacher": false,
-    "photo": false
+    "photo": false,
+    "homework": false
   }
 }

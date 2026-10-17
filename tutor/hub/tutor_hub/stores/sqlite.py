@@ -101,6 +101,12 @@ class SqliteStore(Store):
     async def queue(self, limit=50):
         return await self._run("queue", limit)
 
+    async def add_ladder(self, token, *, solution, sure) -> None:
+        return await self._run("add_ladder", token, solution=solution, sure=sure)
+
+    async def use_check(self, token, limit=3):
+        return await self._run("use_check", token, limit)
+
     async def review(self, qid, *, answer=None, approve=True):
         return await self._run("review", qid, answer=answer, approve=approve)
 

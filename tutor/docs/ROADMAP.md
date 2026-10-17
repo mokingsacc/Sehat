@@ -107,6 +107,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   strip, `read_sheet` reads it through the AI gateway (on the fake until the provider key comes in January), and
   "What I read" shows her own writing beside each reading to fix before the phone marks it. The server returns
   readings only and never learns right or wrong; photos and strips are never stored or logged.
+- **P15, done:** hints, never answers (C2.3). Check my sheet marks each item with "Look again", three hint rungs
+  made by code with the sheet's key (the lesson step, a worked example with other numbers, the first move; checked
+  for leaks in every form and cached for offline), "You're close" with "More like this" and "Ask my teacher", and
+  "Something looks wrong?". No learner screen shows a value answer, lessons included. Ask sends exercises to the
+  ladder; Homework help (module `homework`, on in staging) adds the model's private solve, twice, and "Check my
+  answer", three tries. New events `check.item`, `hint.rung`, `check.dispute`, with no names.
 
 ## January 2027: buy and test
 

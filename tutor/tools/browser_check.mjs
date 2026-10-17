@@ -117,9 +117,11 @@ function inspect() {
     problems.push(`direction is ${html.dir}/${getComputedStyle(document.body).direction}, want ${want}`);
   }
   const head = document.querySelector('#app header.top');
-  if (head && head.children.length > 1) {
-    const first = head.children[0].getBoundingClientRect();
-    const last = head.children[head.children.length - 1].getBoundingClientRect();
+  // only what shows: online, the net chip is in the header but hidden while all is well
+  const shown = head ? [...head.children].filter((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0; }) : [];
+  if (shown.length > 1) {
+    const first = shown[0].getBoundingClientRect();
+    const last = shown[shown.length - 1].getBoundingClientRect();
     if (want === 'rtl' ? first.right < last.right : first.left > last.left) problems.push('header runs the wrong way');
   }
   // the speaker rule

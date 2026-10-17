@@ -1,4 +1,8 @@
-// The lesson player: one step per screen, a speaker on every text, answers checked at once with the reason.
+// The lesson player: one step per screen, a speaker on every text, answers checked at once.
+// Hints, never answers (C2.3): a wrong pick or number says "No, look again" and she tries again; the right option is
+// never marked for her and the reason ("why", which holds the answer) shows only once she has it right. Next opens
+// after her first try, so nobody is stuck. #/lesson/<id>/<n> opens step n from a hint ("Open that step"): it does
+// not move her place in the lesson, and the close button goes back to where she came from.
 // The bands that read lesson steps on open (bands.js: early years, years 1 to 6, adult literacy) hear each step
 // read aloud, from its recorded clip or the phone's voice. Children get stars at the end, adults a check mark.
 // The end of every lesson points to its worksheet (the sheets module's lesson.end offer): pen and paper is where
@@ -8,7 +12,7 @@ import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as modules from '../modules.js';
-import { notSimplest, parse, same, show } from '../numbers.js';
+import { notSimplest, parse, same } from '../numbers.js';
 import { praise, readsOnOpen } from '../bands.js';
 import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
@@ -16,7 +20,7 @@ import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } fro
 
 const QUESTION = new Set(['choice', 'number']);
 
-export default async function lesson([id]) {
+export default async function lesson([id, stepText]) {
   const c = state.child();
   const L = id ? await hub.lesson(id) : null;
   if (!L || !Array.isArray(L.steps)) {
@@ -30,13 +34,15 @@ export default async function lesson([id]) {
   const young = readsOnOpen(band, c.track, 'step');          // read each step aloud when it opens
   const adult = praise(band) === 'check';
   const results = state.firstTries(id);   // step number -> right on the first try (kept if the child leaves)
-  let i = Math.min(Math.max(c.step[id] || 0, 0), steps.length - 1);
+  const peek = stepText !== undefined && /^[0-9]+$/.test(stepText);     // opened from a hint, at that step
+  let i = Math.min(Math.max(peek ? +stepText - 1 : c.step[id] || 0, 0), steps.length - 1);
 
   const say = (text, l = lang) => speak(text, l);
   const segs = h('div', { class: 'segs grow', style: { gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` } },
     steps.map(() => h('span')));
   const header = h('header', { class: 'top' },
-    h('a', { class: 'round', href: '#/home', 'aria-label': s('close') }, icon('x', 24, 2.6)),
+    h('a', { class: 'round', href: '#/home', 'aria-label': s('close'),
+      onClick: peek ? (e) => { e.preventDefault(); history.back(); } : null }, icon('x', 24, 2.6)),
     segs,
     speakerBtn(() => pageSpeak(), { size: 'sm', label: s('hear_page'), page: true }));
   const body = h('div', { class: 'step' });
@@ -76,16 +82,17 @@ export default async function lesson([id]) {
   const englishRow = (t) => h('div', { class: 'row center' },
     h('span', { class: 'english', dir: 'ltr', lang: 'en' }, t), speakerBtn(() => say(t, 'en')));
 
-  function feedback(ok, why, answer, note) {
+  // right: the reason; wrong: "No, look again", never the answer, and she tries again
+  function feedback(ok, why, note) {
     next.disabled = false;
     fb.className = 'feedback ' + (ok ? 'right' : 'wrong');
     const msg = note || (ok ? s('right') : s('wrong'));
+    const shown = ok ? why : null;
     fill(fb,
       h('div', { class: 'msg' }, icon(ok ? 'check' : 'x', 26, 3), msg),
-      !ok && answer ? h('div', { class: 'why' }, s('answer_is', { a: '' }), rich(answer)) : null,
-      why ? h('div', { class: 'listen-row' }, speakerBtn(() => say(plain(why)), { size: 'sm' }),
-        h('div', { class: 'why grow' }, rich(why))) : null);
-    if (young && hasVoice(lang)) say([msg, why ? plain(why) : ''].filter(Boolean).join('. '));
+      shown ? h('div', { class: 'listen-row' }, speakerBtn(() => say(plain(shown)), { size: 'sm' }),
+        h('div', { class: 'why grow' }, rich(shown))) : null);
+    if (young && hasVoice(lang)) say([msg, shown ? plain(shown) : ''].filter(Boolean).join('. '));
   }
 
   const KINDS = {
@@ -106,16 +113,14 @@ export default async function lesson([id]) {
       const optBody = (o) => (o && typeof o === 'object' && ('picture' in o || 'text' in o)
         ? [o.picture ? h('img', { src: hub.url(o.picture), alt: '' }) : null, o.text ? h('span', { class: 'naskh' }, pick(o.text)) : null]
         : rich(o));
-      const optText = (o) => (o && typeof o === 'object' && 'text' in o ? pick(o.text) : pick(o));
       const opts = st.options.map((o, k) => h('button', { type: 'button', class: 'opt', onClick: () => choose(k) }, optBody(o)));
       function choose(k) {
-        if (solved) return;
-        solved = true;
+        if (solved || opts[k].disabled) return;
         const ok = k === st.answer;
         if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
         opts[k].classList.add(ok ? 'right' : 'wrong');
-        opts[st.answer].classList.add('right');
-        feedback(ok, st.why, optText(st.options[st.answer]));
+        if (ok) solved = true; else opts[k].disabled = true;      // that one is out: she picks again
+        feedback(ok, st.why);
       }
       return [pics(st), promptRow(st.prompt), h('div', { class: 'options' + (opts.length === 3 ? ' three' : '') }, opts)];
     },
@@ -128,7 +133,7 @@ export default async function lesson([id]) {
         const ok = same(v, right);
         if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
         inp.className = ok ? 'right' : 'wrong';
-        feedback(ok, st.why, `$${show(right)}$`, ok && notSimplest(inp.value) ? s('simplify', { a: show(right) }) : null);
+        feedback(ok, st.why, ok && notSimplest(inp.value) ? s('simplify') : null);
       }
       return [pics(st), promptRow(st.prompt),
         h('form', { class: 'answer-in', onSubmit: (e) => { e.preventDefault(); check(); } },
@@ -159,7 +164,7 @@ export default async function lesson([id]) {
 
   function draw() {
     stop();
-    state.setStep(id, i);
+    if (!peek) state.setStep(id, i);
     const st = steps[i];
     [...segs.children].forEach((sp, k) => sp.classList.toggle('on', k <= i));
     fill(body, (KINDS[st.kind] || KINDS.read)(st));

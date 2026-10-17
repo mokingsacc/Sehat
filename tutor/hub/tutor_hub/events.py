@@ -5,7 +5,8 @@ an answer source) and a number when the verb has one. The module comes from the 
 name, no free text, no phone number (an object with a run of five digits or more is refused), and no field this
 file does not know (the API refuses the whole batch).
 
-Some verbs come from the phone's queue (a lesson started or finished, a sheet marked on Check my sheet, even offline);
+Some verbs come from the phone's queue (a lesson started or finished, a sheet marked on Check my sheet, and since P15
+each item of it, a hint rung opened and an item disputed, as `lesson:n`, even offline);
 the others only the hub writes, from its own routes (Ask, printing, the teacher's review), so a phone cannot send them.
 A phone's events carry the hash of the learner's token (P10) and are kept only when she has consent; the hub's own
 events carry none.
@@ -18,6 +19,7 @@ MAX_BATCH = 100
 KEEP_DAYS = 365                         # 12 months (BUILD-PLAN 3.4); counts later
 AT = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$")
 LESSON = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
+ITEM = re.compile(r"^([a-z][a-z0-9]*(?:-[a-z0-9]+)*):([1-9][0-9]?)$")     # a sheet's item: lesson:n, n 1 to 99
 DIGIT_RUN = re.compile(r"[0-9]{5,}")
 SOURCES = ("rules", "maths", "bank", "approved", "ai", "lesson", "none")
 
@@ -25,7 +27,7 @@ SOURCES = ("rules", "maths", "bank", "approved", "ai", "lesson", "none")
 @dataclass(frozen=True)
 class Verb:
     module: str
-    obj: str | None                     # what the object is: "lesson", "source", or None for no object
+    obj: str | None                     # what the object is: "lesson", "item" (lesson:n), "source", or None
     value: tuple[int, int] | None       # the allowed range of the value, or None for no value
     phone: bool                         # True: the phone sends it; False: only the hub writes it
 
@@ -37,6 +39,10 @@ VERBS = {
     "ask.to_teacher": Verb("ask", None, None, False),
     "print.queued": Verb("print", "lesson", (1, 60), False),           # copies
     "check.done": Verb("check", "lesson", (0, 100), True),             # a sheet marked: percent right
+    # one item of a marked sheet (C2.3): 0 wrong, 1 right first time, 2 right after hints or another try
+    "check.item": Verb("check", "item", (0, 2), True),
+    "hint.rung": Verb("check", "item", (1, 3), True),                  # a hint opened on that item: its rung
+    "check.dispute": Verb("check", "item", None, True),                # "Something looks wrong?" on that item
     "review.approved": Verb("teacher", "lesson", None, False),
     "review.rejected": Verb("teacher", "lesson", None, False),
 }
@@ -49,6 +55,14 @@ def minute(t: datetime | None = None) -> str:
 def lesson_id(x) -> str | None:
     """x if it looks like a lesson id (and nothing else could hide in it), else None."""
     return x if isinstance(x, str) and len(x) <= 64 and LESSON.match(x) and not DIGIT_RUN.search(x) else None
+
+
+def item_id(x) -> str | None:
+    """x if it is a sheet item as lesson:n (n 1 to 99) with nothing else hidden in it, else None."""
+    if not isinstance(x, str) or len(x) > 64:
+        return None
+    m = ITEM.match(x)
+    return x if m and lesson_id(m[1]) else None
 
 
 def check(e: dict, *, phone: bool) -> list[str]:
@@ -72,6 +86,8 @@ def check(e: dict, *, phone: bool) -> list[str]:
         p.append(f"{e['verb']} takes no object")
     elif v.obj == "lesson" and lesson_id(o) is None:
         p.append(f"{e['verb']} takes a lesson id")
+    elif v.obj == "item" and item_id(o) is None:
+        p.append(f"{e['verb']} takes a sheet item, lesson:n")
     elif v.obj == "source" and o not in SOURCES:
         p.append(f"{e['verb']} takes an answer source")
     n = e.get("value")

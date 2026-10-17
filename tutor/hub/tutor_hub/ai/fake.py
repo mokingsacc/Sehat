@@ -17,9 +17,20 @@ from pathlib import Path
 
 from .providers import Provider, ProviderError, Reply
 
+def practice_hint(messages) -> str:
+    """Homework help's calls (brain.py) on the fake: a private answer, then three plainly marked practice hints."""
+    said = " ".join(str(m.get("content", "")) for m in messages)
+    if "ANSWER:" in said:
+        return "ANSWER: practice"
+    if "three hints" in said:
+        return json.dumps(["Practice hint 1 from the test AI.", "Practice hint 2 from the test AI.",
+                           "Practice hint 3 from the test AI."])
+    return "Look again at the first step of the lesson."
+
+
 PRACTICE = {
     "explain": "This is a practice answer from the test AI. A teacher will check real answers.",
-    "hint": "Look again at the first step of the lesson.",
+    "hint": practice_hint,
     "plan": "[]",
     "screen": "ok",
 }

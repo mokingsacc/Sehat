@@ -5,7 +5,7 @@
 // as it does on the hub, where plain http allows no service worker (F2). A new version of this file takes over at
 // the next start, without a banner. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-p14-1';
+const VERSION = 'qalam-p15-1';
 const SHELL_CACHE = 'shell-' + VERSION;
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const SHELL = [
@@ -48,6 +48,7 @@ const SHELL = [
   'js/screens/welcome.js',
   'js/screens/who.js',
   'js/modules/check.js',
+  'js/modules/homework.js',
   'js/modules/lessons.js',
   'js/modules/photo.js',
   'js/modules/sheets.js',

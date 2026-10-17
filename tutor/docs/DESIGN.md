@@ -394,6 +394,35 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
 | intro beside the example | full | 16 / 18 | none |
 | Working (what is left) | full | at least 20 | never photographed |
 
+## What P15 built, and where it differs
+
+- Check my sheet: one row per item. Right is a plain ✓. Wrong says "Look again" with Hint and Try again; an empty row
+  "Not done" with "Type it". The score counts right answers ("Correct: 5 of 6"), with stars in the child tone and a
+  check in the adult tone for those right first time. Hints open one rung at a time in a warm card ("Hint 1 of 3",
+  with its speaker; p2 and adult literacy hear each rung as it opens). Rung 1 has "Open that step", and Back returns
+  to the same results. Rungs for Qalam sheets come with the key, so they work offline.
+- Rung 1 says the step's number and first sentence, or only "this step" when the step's number is the answer.
+  Fraction sheets point same-bottom sums to the step that teaches them (`step_same` on a generator).
+- After rung 3 and another wrong try: "You're close. Try it again on paper." with "More like this" and, where
+  `teacher` is on, "Ask my teacher". The first time she ever opens a third hint, the one spoken line about hints,
+  not answers.
+- "Something looks wrong?" under the results: she taps an item number, and the screen says "Thank you. A teacher
+  will look at this item."
+- Lessons: a wrong choice is greyed out and she picks again; the right one is never revealed. "Why" shows only once
+  she is right. A wrong number says "Not yet". "Make it simpler" no longer shows the simpler form.
+- Ask: an exercise gets "Let's work it out together. Here are hints, one at a time." and the ladder instead of an
+  answer, from either door. Homework help (`#/ask?hw=1`) has its title, the placeholder "Type the question from your
+  book", subject chips, and "Check my answer" under the ladder ("Yes, that's right", "Not yet: try the next hint.
+  2 more tries.", "I'm not sure about this one. Ask your teacher."). On Home it is the secondary action for p2, s1 and
+  s2 while her day is not set to school (P19 adds the question). Offline, Home keeps the usual secondary and
+  Homework help says it needs the internet.
+- The answer box's placeholder lost its example ("like 3/4"), which could have been the answer.
+- Fixed from P11: an English header with a Dari title now starts at the reading side under its kicker. The browser
+  check had also counted the hidden network chip as the header's last item.
+- Not built (open look questions): "Hints are resting for today" when the AI budget is spent (the exercise goes to the
+  teacher instead); hold-for-teacher (P20); in bold English the homework placeholder is cut at 390 px; the leak
+  check's Dari and Pashto number words need a native speaker's list.
+
 ---
 
 # C2 and C3 decisions

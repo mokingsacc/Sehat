@@ -160,6 +160,8 @@ export async function credits() {
 export const ask = (q, token) => call('/api/ask', { method: 'POST', body: q, token, ms: 90000 });
 export const askStatus = (id) => call('/api/ask/' + id);
 export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST' });
+// Homework help's "Check my answer" (P15): right or not yet, never the answer; three tries a question
+export const checkAnswer = (id, answer, token) => call('/api/m/homework/check', { method: 'POST', body: { id, answer }, token });
 export const sendEvents = (list, token) => call('/api/events', { method: 'POST', body: { events: list }, token, ms: 15000 });
 
 // learners (P10): joining, her own record, withdrawing, and the consent text the server names

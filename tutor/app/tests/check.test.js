@@ -57,7 +57,7 @@ globalThis.document = {
 
 const state = await import('../js/state.js');
 const events = await import('../js/events.js');
-const { default: check } = await import('../js/screens/check.js');
+const { default: check, forget } = await import('../js/screens/check.js');
 
 const LESSON = 'maths-7-fractions-add';
 const KEY = { code: 'M7-03', items: [
@@ -80,6 +80,7 @@ const AGREED = { kind: 'guardian-on-phone', version: 'hub-2026-10', at: '2026-10
 beforeEach(() => {
   store.clear();
   events.reset();
+  forget();
   const c = state.addChild({ name: 'Maryam', year: 7, lang: 'prs' });
   state.updateChild(c.id, { consent: AGREED });          // no event is kept without a grown-up's yes
 });
@@ -196,4 +197,77 @@ test('"Take a photo" only where photo is on for her band; offline it says photos
   assert.equal(photoOffer(c), 'offline');                             // listed, but the phone is offline
   assert.equal(photoOffer({ ...c, band: 'p1' }), null);               // p1 types with a grown-up; ey never
   modules.sync(null);
+});
+
+// P15 (C2.3): results per item, the hint ladder, "You're close", "Something looks wrong?"
+const HINTED = { code: 'M7-03', items: [
+  { n: 1, check: 'value', q: '1/2 + 1/4', a: '3/4', hints: [
+    { rung: 1, text: 'Look at step 4 of the lesson', step: 4, lesson: LESSON },
+    { rung: 2, text: 'Like $1/3 + 1/3 = 2/3$' },
+    { rung: 3, text: 'Make the bottom numbers the same first.' }] },
+  { n: 2, check: 'value', q: '1/3 + 1/3', a: '2/3' },
+] };
+const items = (verb) => events.pending().filter((e) => e.verb === verb).map((e) => [e.object, e.value]);
+
+test('each value item is one check.item: 1 right first time, 0 wrong, then 2 when put right', async () => {
+  state.cache(`key.${LESSON}.4821`, HINTED);
+  const { el } = await check([LESSON, '4821']);
+  const [a, b] = el.all((n) => n.tag === 'input');
+  a.value = '2/6'; b.value = '2/3';
+  button(el, 'main')[0].click();
+  assert.deepEqual(items('check.item'), [[`${LESSON}:1`, 0], [`${LESSON}:2`, 1]]);
+  a.value = '3/4';
+  button(el, 'main')[0].click();
+  button(el, 'main')[0].click();                                     // checking again adds nothing new
+  assert.deepEqual(items('check.item'), [[`${LESSON}:1`, 0], [`${LESSON}:2`, 1], [`${LESSON}:1`, 2]]);
+});
+
+test('the ladder opens one rung at a time, each a hint.rung; after rung 3 and a wrong try: "You\'re close"', async () => {
+  state.cache(`key.${LESSON}.4821`, HINTED);
+  const { el } = await check([LESSON, '4821']);
+  const [a] = el.all((n) => n.tag === 'input');
+  a.value = '2/6';
+  button(el, 'main')[0].click();
+  const hint = button(el, 'hint')[0];
+  assert.ok(hint);
+  hint.click();
+  const link = el.all((n) => n.tag === 'a' && (n.attrs.href || '').startsWith('#/lesson/'));
+  assert.ok(link.length >= 1 && link[0].attrs.href === `#/lesson/${LESSON}/4`);   // rung 1 opens the step
+  hint.click(); hint.click();
+  assert.deepEqual(items('hint.rung'), [[`${LESSON}:1`, 1], [`${LESSON}:1`, 2], [`${LESSON}:1`, 3]]);
+  assert.ok(hint.className.includes('hidden'));
+  assert.equal(el.all((n) => n.className === 'told').length, 1);   // once ever: why there is no answer
+  assert.equal(state.child().told, true);
+  a.value = '1/2';
+  button(el, 'main')[0].click();
+  const close = el.all((n) => (n.className || '').startsWith('so-close'))[0];
+  assert.ok(!close.className.includes('hidden'));
+  assert.ok(close.all((n) => n.tag === 'a' && n.attrs.href === `#/print/${LESSON}`).length === 1);
+  assert.ok(!el.textContent.includes('3/4') && !el.textContent.includes('۳/۴'));
+});
+
+test('back from a lesson step, the sheet shows the same results and rungs, and sends nothing again', async () => {
+  state.cache(`key.${LESSON}.4821`, HINTED);
+  const first = await check([LESSON, '4821']);
+  const [a] = first.el.all((n) => n.tag === 'input');
+  a.value = '2/6';
+  button(first.el, 'main')[0].click();
+  button(first.el, 'hint')[0].click();
+  const before = events.pending().length;
+  const { el } = await check([LESSON, '4821']);
+  assert.equal(el.all((n) => n.tag === 'input')[0].value, '2/6');
+  assert.equal(el.all((n) => n.className === 'hint-card').length, 1);
+  assert.equal(events.pending().length, before);
+});
+
+test('"Something looks wrong?" sends check.dispute with the item only, once', async () => {
+  state.cache(`key.${LESSON}.4821`, HINTED);
+  const { el } = await check([LESSON, '4821']);
+  el.all((n) => n.tag === 'input')[1].value = '2/3';
+  button(el, 'main')[0].click();
+  const chips = el.all((n) => n.tag === 'button' && n.className === 'btn chip');
+  assert.equal(chips.length, 1);                                     // only the judged item
+  chips[0].click(); chips[0].click();
+  assert.deepEqual(events.pending().filter((e) => e.verb === 'check.dispute').map((e) => [e.object, e.value ?? null]),
+    [[`${LESSON}:2`, null]]);
 });

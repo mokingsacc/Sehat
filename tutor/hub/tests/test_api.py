@@ -1,7 +1,10 @@
 """The hub as the phones see it: lessons, Ask, worksheets, printing (to the outbox) and the teacher's page."""
+import json
+
 from fastapi.testclient import TestClient
 
 from tutor_hub import sheets
+from tutor_hub.ai.filters import leaks
 
 
 def test_hello_and_lists(hub_client):
@@ -24,9 +27,12 @@ def test_lesson_never_carries_sheet_answers(hub_client):
     assert "sheet" not in l and l["pack"] == "starter"
 
 
-def test_ask_a_sum(hub_client):
+def test_ask_a_sum_gets_hints_never_the_answer(hub_client):
     a = hub_client.post("/api/ask", json={"text": "۱/۲ + ۱/۴ چند می‌شود؟", "lang": "prs", "year": 7}).json()
-    assert a["source"] == "maths" and a["text"] == "$1/2 + 1/4 = 3/4$" and len(a["id"]) == 16
+    assert a["source"] == "maths" and a["checked"] and len(a["id"]) == 16
+    assert [r["rung"] for r in a["ladder"]] == [1, 2, 3] and "solution" not in a
+    assert not leaks(json.dumps(a, ensure_ascii=False), ["3/4"])          # hints, never answers (C2.3)
+    assert a["ladder"][0]["lesson"] == "maths-7-fractions-add" and a["ladder"][0]["step"] == 4
 
 
 def test_question_waits_for_the_teacher_then_gets_an_answer(hub_client):

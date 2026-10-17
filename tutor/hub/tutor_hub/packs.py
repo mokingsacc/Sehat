@@ -243,6 +243,14 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
                     p.append(f"{w}: answer must give a group number for every word")
             if "step" in it and not _int_in(it["step"], 1, len(steps)):
                 p.append(f"{w}: step must be the number of one of the lesson's steps, counting from 1")
+            if "step_same" in it and (k != "generate" or it.get("type") != "fraction_add"
+                                      or not _int_in(it["step_same"], 1, len(steps))):
+                p.append(f"{w}: step_same is for fraction_add items: the step for sums whose bottom numbers match")
+            if k in ("sum", "count", "generate") and "step" not in it:
+                p.append(f"{w}: step must name the lesson step that teaches it (the first hint points there)")
+            if k in ("sum", "count"):
+                from . import hints           # the hint ladder (C2.3): rungs 2 and 3 code cannot make come from the pack
+                p += [f"{w}: {e}" for e in hints.check_own(it)]
             if "mixed" in it and (k != "sum" or not isinstance(it["mixed"], bool)):
                 p.append(f"{w}: mixed (true or false) is for a sum whose answer is a mixed number")
             if k == "generate":
@@ -254,7 +262,7 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
                 if "work" in it and not isinstance(it["work"], bool):
                     p.append(f"{w}: work must be true or false")
                 for opt, v in it.items():
-                    if opt in ("kind", "type", "count", "prompt", "work", "step") or t not in GENERATORS:
+                    if opt in ("kind", "type", "count", "prompt", "work", "step", "step_same") or t not in GENERATORS:
                         continue
                     if opt not in GENERATORS[t]:
                         p.append(f"{w}: {t} has no option '{opt}' (it has {', '.join(GENERATORS[t]) or 'none'})")

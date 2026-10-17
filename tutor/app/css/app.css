@@ -370,6 +370,27 @@ h2 { font-size: var(--fs-btn); }
 .objs { display: inline-flex; flex-wrap: wrap; gap: 4px; max-width: 100%; vertical-align: middle; }
 .objs img { width: 34px; height: 34px; }
 .objs img[src$=".svg"] { filter: var(--picture-filter); }
+/* the hint ladder (C2.3, P15): Check my sheet and Ask share it; never an answer */
+.ladder { display: flex; flex-direction: column; gap: 8px; margin: 0 0 8px; }
+.ladder:empty { display: none; }
+.hint-card { background: var(--warm-soft); color: var(--warm-ink); border-inline-start: 4px solid var(--warm); border-radius: 14px; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.hint-card .hint-text { margin: 0; line-height: 1.8; color: var(--ink); }
+.hint-card .link { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; }
+.btn.hint { background: var(--warm-soft); border-color: var(--warm); color: var(--warm-ink); }
+.fix .row { gap: 8px; }
+.so-close { background: var(--soft); border-radius: 14px; padding: 10px 12px; margin: 0 0 8px; gap: 8px; }
+.so-close p { margin: 0; font-weight: 800; }
+.told { margin: 0; padding: 8px 12px; border-radius: 12px; background: var(--soft); font-weight: 700; }
+.stars.small { display: inline-flex; gap: 4px; flex: none; }
+.dispute { display: flex; flex-direction: column; gap: 8px; }
+.dispute .chips { flex-wrap: wrap; }
+.check-result { margin: 4px 0 0; font-weight: 800; }
+.check-result.right { color: var(--good-ink); }
+.check-result.not_yet, .check-result.used_up { color: var(--warm-ink); }
+.check-result.unsure { color: var(--muted); }
+.ladder-a .answer-in { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+.ladder-a .answer-in input { flex: 1 1 120px; min-width: 0; }
+.btn.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .sheet-intro { margin: 12px 16px 0; line-height: 1.8; }
 .sheet-intro .example { background: var(--soft); border-radius: 12px; padding: 8px 12px; }
 
@@ -468,6 +489,8 @@ h2 { font-size: var(--fs-btn); }
 /* the arrows are drawn for right to left; an English page turns them round */
 :root[dir="ltr"] :is(.i-back, .i-next, .i-chev) { transform: scaleX(-1); }
 :root[dir="ltr"] :is(.title, .read, .prompt, .word, .why, .opt, .naskh, .step h1, .top h1, .grow > b) { unicode-bidi: plaintext; }
+/* a Dari or Pashto title in an English header still starts where the header starts, under its kicker (P15) */
+:root[dir="ltr"] .top h1 { text-align: left; }
 @media (prefers-reduced-motion: reduce) { .btn:active { transform: none; } }
 
 /* a speaker beside every worded button, tile and row in years 1 to 3 and adult literacy (P9 look-over, ruling 1) */

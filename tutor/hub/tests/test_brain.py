@@ -2,6 +2,7 @@ import pytest
 
 from tutor_hub import search
 from tutor_hub.ai import Gateway
+from tutor_hub.ai.filters import leaks
 from tutor_hub.brain import Brain
 
 
@@ -28,9 +29,12 @@ async def test_rules_come_first(library, fake_ai):
 
 
 @pytest.mark.anyio
-async def test_plain_sums_are_worked_out(library, fake_ai):
-    a = await brain(library, model_of(fake_ai)()).answer("۱/۲ + ۱/۴ چند می‌شود؟", lang="prs")
-    assert a.source == "maths" and a.checked and a.text == "$1/2 + 1/4 = 3/4$"
+async def test_plain_sums_get_the_codes_ladder_never_their_value(library, fake_ai):
+    m = model_of(fake_ai)("should not be asked")
+    a = await brain(library, m).answer("۱/۲ + ۱/۴ چند می‌شود؟", lang="prs")
+    assert a.source == "maths" and a.checked and len(a.ladder) == 3 and a.solution == "3/4"
+    assert not leaks(a.text + " ".join(r["text"] for r in a.ladder), ["3/4"]) and not m.asked
+    assert "solution" not in a.dict() and a.checkable is False          # "Check my answer" is Homework help's
 
 
 @pytest.mark.anyio

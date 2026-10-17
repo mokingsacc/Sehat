@@ -34,7 +34,7 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "check", "lessons", "photo", "print", "sheets", "teacher"]
+    assert sorted(REAL) == ["ask", "check", "homework", "lessons", "photo", "print", "sheets", "teacher"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
     assert REAL["print"]["needs"] == ["printer"]
     # C2, change 6: `sheets` holds the sheet, its keys, "Get the sheet" and the lesson-end card; `print` depends on it
@@ -188,8 +188,10 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     staging = seeds["staging"]
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
-    assert flags.enabled(REAL, staging, f) == ["ask", "check", "lessons", "photo", "print", "sheets", "teacher"]
-    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "lessons", "photo", "sheets"]
+    assert flags.enabled(REAL, staging, f) == ["ask", "check", "homework", "lessons", "photo", "print", "sheets",
+                                              "teacher"]
+    assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "homework", "lessons", "photo",
+                                                                         "sheets"]
     assert REAL["teacher"]["needs"] == ["pin"]
 
 

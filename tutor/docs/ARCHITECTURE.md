@@ -144,7 +144,9 @@ calls a model), `settings`, `needs`, `offline`. The first six are today's featur
 (the sheet document, the keys, "Get the sheet" and the lesson-end card, C2 change 6), `print` (only the hub's print
 queue; it depends on `sheets` and needs `printer`), `check` (Check my sheet, which depends on `sheets`) and
 `teacher`. `photo` (P14, photo marking of Qalam sheets) depends on `sheets` and `check`, serves p2 to adult, needs
-the internet and is on only in staging so far. `migrations/0007` switches `sheets` on in every cohort made before it
+the internet and is on only in staging so far. `homework` (P15, Homework help: "Check my answer" under Ask's hint
+ladder) depends on `ask`, serves p2, s1 and s2, calls the model for `hint`, needs the internet and is on only in
+staging (`migrations/0009`). `migrations/0007` switches `sheets` on in every cohort made before it
 wherever `print` or `check` was; `migrations/0008` switches `photo` on for the staging seed cohort in a database
 seeded before it. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
@@ -175,6 +177,10 @@ The table is `migrations/0003_events.sql`, append-only, kept 12 months (deleted 
   it belongs to (never sent), until the hub is in reach, then sent with her token, at most 100 at a time. A batch
   that did not arrive stays queued; one the hub refuses is dropped; a 401 or 403 keeps them while `account.js` joins
   her again or resends the consent.
+- **Hints (P15, C2.3):** `check.item` (object `lesson:n`, the sheet's item; value 0 wrong, 1 right first time, 2
+  right after hints or another try), `hint.rung` (`lesson:n`, the rung opened, 1 to 3) and `check.dispute`
+  (`lesson:n`, no value: "Something looks wrong?"). They carry no text. A ladder in Ask sends none (its object would
+  not be a sheet's item).
 - **From the hub's own routes:** `ask.answered` (with the answer's source), `ask.to_teacher`, `print.queued` (lesson,
   copies), `review.approved` and `review.rejected` (the question's lesson). Fetching a sheet's key writes nothing.
   A phone cannot send these. Writing one never breaks the route that made it.
@@ -231,7 +237,17 @@ The safest source answers first, and every answer says where it came from, so th
 1. **Rules** (`rules.py`). Distress words: a kind "tell a trusted adult now" message, and the question goes to the
    top of the teacher's list. Health: points to a health worker or the Sehat app, and the teacher sees it.
    Politics, religious rulings, weapons: "I only help with lessons". Words match whole words only.
-2. **Maths.** A plain sum (`۱/۲ + ۱/۴ چند می‌شود؟`) is worked out exactly with fractions. Badge: worked out.
+2. **Exercises get hints, never answers (C2.3, P15).** A question that looks like an exercise (a sum, "solve",
+   "find", "how many", digits with an operator) goes to the hint ladder, from either door of Ask. A sum code can
+   hint at (two fractions, two whole numbers added, taken away or multiplied; `hints.py`) gets the code's three
+   rungs: the lesson step that teaches that kind of sum, a worked example with other numbers, and the first move.
+   Badge: worked out. The sum's value is kept on the hub (`ladders`, `migrations/0009`) for "Check my answer" and
+   never sent. Where `homework` is on and the AI speaks her language, any other exercise is solved by the model
+   privately, twice (`hint` purpose, module `homework`), then three hints are asked for and checked against both
+   answers in every form (digits in any script, fractions, decimals, percentages, mixed numbers, number words in
+   English, Dari and Pashto: `ai/filters.leaks`); one leak and the whole ladder is dropped. Rung 1 points to a
+   lesson when the search finds one. Otherwise the exercise waits for the teacher; an exercise never gets an
+   explanation that might hold its answer.
 3. **Checked answers.** A lesson's question bank, or an answer the teacher approved, when it explains at least
    60% of the question (BM25 search, `search.py`). Badge: checked.
 4. **AI**, through the AI gateway (below), only in the languages trusted so far (`TUTOR_AI_LANGS`, Dari and English
@@ -410,12 +426,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /packs/{pack}/audio/{lang}/{file}` | A recorded clip named in the pack's audio manifest |
 | `GET /api/links` | Link cards (`?subject=`, `?year=`, `?lesson=`): title, owner, our description, address, `needs: ["internet"]` |
 | `GET /api/credits` | Every outside source in use, with credit lines and licences, the linked sources, and the fonts |
-| `POST /api/ask` | `{text, lang, year, subject, lesson}` -> answer, badge source, token; header `X-Learner-Token` (online: needed, with her consent) |
+| `POST /api/ask` | `{text, lang, year, subject, lesson, teacher?}` -> answer, badge source, token; an exercise gets `ladder` (three rungs), `checkable` and `unsure` instead of an answer; `teacher: true` sends it straight to the teacher ("Ask my teacher"); header `X-Learner-Token` (online: needed, with her consent) |
 | `GET /api/ask/{token}` | Status and the teacher's answer |
 | `POST /api/ask/{token}/teacher` | The child asks the teacher to look |
 | `GET /api/sheets/{id}.html` | The sheet (`seed`, `lang`, `print=1` to open the print dialog); `kind=answers` needs `X-Teacher-Pin` and is 404 where there is no PIN; header `X-Sheet-Seed` |
 | `GET /api/sheets/{id}.pdf` | The same as a PDF, on the hub only (`print`); the file is named by the code |
-| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`), with each cell's place in mm |
+| `GET /api/sheets/{id}/key` | The answers for "Check my sheet" (`seed`, `lang`), with each cell's place in mm and each value item's three hints |
+| `POST /api/m/homework/check` | `{id, answer}` -> `{result: right, not_yet, unsure or used_up, left}`; three checks a question; online her token and consent |
 | `POST /api/print` | `{lesson, kind, copies, lang, seed}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
@@ -423,7 +440,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
@@ -490,7 +507,13 @@ learner routes and the app's files are always there.
   primary action, one secondary and one list. The clean Home has Check my sheet but no Print button, since Print is
   a tab. `screens/print.js` is one screen for both: the hub's queue where `print` is on, else "Print or save as PDF"
   then "Do it on screen" (`#/check/{id}/{seed}/screen`: the typed check with the sheet's intro and example, and trace
-  and draw items as "Do this one on paper"). A wrong sum on Check my sheet shows no answer (C2.3). Where `photo` is on, Check
+  and draw items as "Do this one on paper"). No learner screen shows a value answer (C2.3, P15): on Check my sheet a
+  wrong row says "Look again" with Hint and Try again, the hint ladder (`ladder()` in `screens/check.js`, shared
+  with Ask) opens one rung at a time from the key's cached hints, so it works offline; after rung 3 and another
+  wrong try the row offers "More like this" (a new sheet) and, where `teacher` is on, "Ask my teacher". A lesson's
+  wrong choice is greyed out and she picks again; a wrong number says "Not yet". Homework help (`#/ask?hw=1`,
+  `modules/homework.js`) is Home's secondary for p2, s1 and s2 when her day is not set to school, online and with
+  the AI on for her language. Where `photo` is on, Check
   my sheet opens with "This sheet?" for the last sheet she got: "Take a photo", then "Type my answers"; offline it
   says "Photos need the internet" instead. A screen whose module is off sends the phone Home. While connected, the app
   re-reads `/api/hello` every minute, so a module switched off leaves the phones within a minute.

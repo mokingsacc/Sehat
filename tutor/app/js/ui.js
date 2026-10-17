@@ -64,6 +64,7 @@ const ICONS = {
   trash: '<path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/>',
   card: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h6M7 14h10"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/>',
 };
 
 export function icon(name, size = 24, sw = 2.2) {
@@ -93,7 +94,7 @@ export function rich(t, lang = getLang()) {
   const text = pick(t, lang);
   const frag = document.createDocumentFragment();
   if (LATIN_ONLY.test(text)) {
-    frag.append(h('span', { dir: 'ltr', lang: 'en', class: 'en' }, text));
+    frag.append(h('span', { dir: 'ltr', lang: 'en', class: 'en' }, text.replace(/\$/g, '')));   // an English line's sums need no island
     return frag;
   }
   const digits = (x) => (lang === 'en' ? x : fa(x));

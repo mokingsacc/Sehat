@@ -5,14 +5,23 @@
 // phone for this visit (the ready answers of lessons here, nothing sent), and it is asked again on a later visit.
 // Offline (C2.5): when no answer on the phone fits, one button, "Send when I'm online", queues the question
 // (outbox.js); it shows "Waiting to send" until it goes, "Not sent" after 7 days, "Couldn't send" if refused.
+// Hints, never answers (C2.3, P15): an exercise (a sum, "solve", "find"...) comes back as a hint ladder, "Hint 1 of
+// 3" one rung at a time (check.js's ladder), never its answer. In Homework help (#/ask?hw=1, the `homework` module:
+// the title, "Type the question from your book" and her band's subject chips) a ladder can also offer "Check my
+// answer": she types hers and hears "Yes, that's right" or "Not yet", three tries a question; "I'm not sure about
+// this one" when the model's two runs disagreed. Offline, Homework help says it needs the internet and Ask's ready
+// answers on the phone work as before. Each ladder can still go to the teacher.
 
 import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as outbox from '../outbox.js';
+import { readsOnOpen } from '../bands.js';
+import * as modules from '../modules.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, rich, said, speakerBtn, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, rich, said, speakerBtn, SUBJECTS, toast, topbar } from '../ui.js';
+import { ladder, toldLine } from './check.js';
 import { saidNotNow } from './signup.js';
 
 let held = null;           // the question she typed before the consent screen, sent when she comes back
@@ -52,9 +61,15 @@ function offlineAnswer(q, lang) {
   return best && best.score >= 0.5 ? best.a : null;
 }
 
-export default async function ask() {
+const RESULT = { right: 'its_right', not_yet: 'not_yet', unsure: 'not_sure', used_up: 'no_more_checks' };
+
+export default async function ask(args = []) {
   const c = state.child();
   const lang = getLang();
+  // Homework help's door (C2.3): only where the module is on for her band
+  const hw = !!(args.query && args.query.get('hw') === '1') && modules.listed('homework') && modules.allows('homework', c.band);
+  let subject = null;
+  const reads = readsOnOpen(c.band, c.track, 'step');
   await library.load();
   const context = library.next(c);
   const full = context ? await hub.lesson(context.id) : null;
@@ -65,7 +80,8 @@ export default async function ask() {
 
   const thread = h('div', { class: 'thread', 'aria-live': 'polite' });
   const readyBox = h('div', { class: 'ready' });
-  const input = h('input', { placeholder: s('ask_placeholder'), 'aria-label': s('ask_placeholder'), maxlength: 400,
+  const place = s(hw ? 'hw_placeholder' : 'ask_placeholder');
+  const input = h('input', { placeholder: place, 'aria-label': place, maxlength: 400,
     autocomplete: 'off', enterkeyhint: 'send' });
   const composer = h('form', { class: 'composer', onSubmit: (e) => { e.preventDefault(); send(input.value); } },
     input, h('button', { type: 'submit', 'aria-label': s('send') }, icon('send', 26, 2.3)));
@@ -74,6 +90,35 @@ export default async function ask() {
     h('div', { class: 'text' }, rich(text)),
     h('div', { class: 'meta' }, badgeEl,
       h('span', { class: 'row' }, extra || null, speakerBtn(() => speak(plain(text), lang), { size: 'sm' }))));
+
+  // a ladder in place of an answer: the line, the hints one at a time, and in Homework help "Check my answer"
+  function ladderBubble(a, extra) {
+    const lad = ladder(a.ladder, { reads, told: toldLine, onRung: (k) => state.updateAsk(a.id, { rungs: k }) });
+    for (let k = 0; k < (a.rungs || 0); k += 1) lad.open(true);
+    const result = a.result ? h('p', { class: 'check-result ' + a.result, role: 'status' }, s(RESULT[a.result] || 'error'),
+      a.result === 'not_yet' && a.left ? [' ', s('tries_left', { n: a.left })] : null) : null;
+    let form = null;
+    if (a.checkable && !a.unsure && a.result !== 'right' && a.left !== 0 && hub.online()) {
+      const box = h('input', { dir: 'ltr', autocomplete: 'off', maxlength: 40, 'aria-label': s('your_answer'), placeholder: s('your_answer') });
+      form = h('form', { class: 'answer-in', onSubmit: async (e) => {
+        e.preventDefault();
+        const v = box.value.trim();
+        if (!v) { toast(s('your_answer')); return; }
+        try {
+          const r = await hub.checkAnswer(a.id, v, state.child().token);
+          state.updateAsk(a.id, { result: r.result, left: r.left });
+        } catch (err) { toast(err.status === 429 ? s('slow_down') : hub.online() ? s('error') : s('offline')); }
+        drawThread();
+      } }, box, said(h('button', { class: 'btn primary', type: 'submit' }, icon('check', 20), s('check_my_answer'))));
+    }
+    return h('div', { class: 'bubble-a ladder-a' },
+      h('div', { class: 'text' }, rich(a.a)), lad.cards,
+      lad.size ? h('div', { class: 'row wrap' }, lad.button) : null,
+      a.unsure ? h('p', { class: 'muted' }, s('not_sure')) : null,
+      form, result,
+      h('div', { class: 'meta' }, badge(a.source, a.mc), h('span', { class: 'row' }, extra || null,
+        speakerBtn(() => speak(plain(a.a), lang), { size: 'sm' }))));
+  }
 
   function drawThread() {
     const asks = state.child().asks;
@@ -87,11 +132,11 @@ export default async function ask() {
       }
       if (a.note) out.push(h('div', { class: 'note' }, s(a.note)));
       if (a.a) {
-        const canSend = a.id && !a.sent && !a.done && (a.source === 'ai' || a.source === 'lesson');
+        const canSend = a.id && !a.sent && !a.done && (a.source === 'ai' || a.source === 'lesson' || !!a.ladder);
         const extra = a.teacherQueued ? h('span', { class: 'badge wait' }, icon('clock', 16), s('wait_badge'))
           : canSend ? h('button', { class: 'link', type: 'button', onClick: () => toTeacher(a) }, s('send_teacher'))
             : (a.sent || (a.waiting && a.source === 'rules')) && !a.done ? h('span', { class: 'badge wait' }, s('sent_teacher')) : null;
-        out.push(answerBubble(a.a, badge(a.source, a.mc), extra));
+        out.push(a.ladder ? ladderBubble(a, extra) : answerBubble(a.a, badge(a.source, a.mc), extra));
       }
       if (a.teacher) out.push(answerBubble(a.teacher, badge('teacher')));
       return out;
@@ -139,8 +184,9 @@ export default async function ask() {
     drawThread();
     composer.scrollIntoView({ block: 'end', behavior: 'smooth' });
     try {
-      const r = await hub.ask({ text, lang, year: c.year, lesson: context ? context.id : null }, state.child().token);
-      state.addAsk({ ...entry, id: r.id, a: r.text, source: r.source, mc: r.maths_checked, waiting: r.waiting });
+      const r = await hub.ask({ text, lang, year: c.year, subject, lesson: context ? context.id : null }, state.child().token);
+      state.addAsk({ ...entry, id: r.id, a: r.text, source: r.source, mc: r.maths_checked, waiting: r.waiting,
+        ...(Array.isArray(r.ladder) ? { ladder: r.ladder, checkable: !!r.checkable, unsure: !!r.unsure, rungs: 0 } : {}) });
     } catch (e) {
       toast(e.status === 429 ? s('slow_down') : hub.online() ? s('error') : s('offline'));
       input.value = text;
@@ -189,8 +235,19 @@ export default async function ask() {
   const timer = setInterval(poll, POLL_MS);
   const unwatch = outbox.onChange(drawThread);
   if (held && held.id === c.id) { const q = held.text; held = null; setTimeout(() => send(q), 0); }
+  // Homework help: her band's subjects as chips (optional), and offline a line saying it needs the internet
+  const chips = hw ? h('div', { class: 'chips pad row wrap' }, SUBJECTS.filter((x) => x !== 'english' || c.year >= 4).map((x) => {
+    const b = h('button', { type: 'button', class: 'btn chip', 'aria-pressed': 'false' }, s(x));
+    b.addEventListener('click', () => {
+      subject = subject === x ? null : x;
+      chips.querySelectorAll?.('button').forEach((y) => y.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', subject === x ? 'true' : 'false');
+    });
+    return b;
+  })) : null;
+  const hwOffline = hw && !hub.online() ? h('p', { class: 'empty small' }, s('hw_offline')) : null;
   const el = h('div', { class: 'screen' },
-    topbar({ back: '#/home', title: s('ask_title'), sub: s('ask_scope'), child: true }),
-    thread, readyBox, composer, offerBox);
+    topbar({ back: '#/home', title: s(hw ? 'hw_title' : 'ask_title'), sub: hw ? null : s('ask_scope'), child: true }),
+    hwOffline, chips, thread, readyBox, composer, offerBox);
   return { el, tab: 'ask', cleanup: () => { clearInterval(timer); unwatch(); }, onHub: poll };
 }

@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10, P11, P13 and P14 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10, P11, P13, P14 and P15 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -24,8 +24,8 @@ const S = {
     back: 'برگشت', close: 'بستن', next: 'بعدی', done: 'تمام',
     say_it: 'بگو: «{w}»', say_note: 'صدایت ضبط می‌شود و دوباره می‌شنوی', say_aloud: 'بلند بگو: «{w}»',
     recording: 'دارد ضبط می‌کند… برای تمام کردن دوباره بزن',
-    right: { child: 'درست! آفرین', adult: 'درست است' }, wrong: 'نه، دوباره ببین', answer_is: 'جواب درست: {a}', why: 'چرا؟',
-    check_answer: 'ببین', your_answer: 'جوابت را بنویس، مثل ۳/۴',
+    right: { child: 'درست! آفرین', adult: 'درست است' }, wrong: 'نه، دوباره ببین', why: 'چرا؟',
+    check_answer: 'ببین', your_answer: 'جوابت را بنویس',
     lesson_done: { child: 'درس تمام شد! آفرین', adult: 'درس تمام شد' },
     ask_title: 'بپرس', ask_scope: 'فقط درباره‌ی درس‌های مکتب جواب می‌دهد',
     ask_placeholder: 'سوالت را بنویس…', send: 'بفرست', ready_questions: 'یکی را انتخاب کن یا خودت بنویس',
@@ -48,7 +48,7 @@ const S = {
     check_title: 'ورق را چک کن', check_note: 'جواب‌های کاغذ را این‌جا بنویس',
     sheet_code: 'عدد گوشه‌ی پایین ورق', open_code: 'باز کن', check_btn: 'چک کن',
     look_again: '{n} تا را دوباره ببین.', all_right: 'همه درست است!',
-    simplify: 'درست، ولی ساده‌اش کن: {a}', show_answer: 'جواب را نشانم بده', was_it_right: 'درست بود؟',
+    simplify: 'درست! می‌توانی ساده‌ترش بنویسی؟', was_it_right: 'درست بود؟',
     yes: 'بله', no: 'نه', print_new: 'ورق تازه', check_with_teacher: 'این را معلم یا پدر و مادر می‌بیند',
     teacher: 'صفحه‌ی معلم', teacher_pin: 'رمز معلم', enter: 'ورود', wrong_pin: 'رمز درست نیست',
     questions_review: 'سوال‌ها برای بررسی', correct_btn: 'درست است', fix_btn: 'اصلاح', reject_btn: 'رد',
@@ -220,6 +220,18 @@ const S = {
     check_it: 'چک کن!',
     this_is_sheet: 'این ورق {c} است',
     delete: 'پاک کن',
+    // P15, drafts for a native Dari speaker's check:
+    hint: 'راهنمایی', hint_n: 'راهنمایی {a} از {b}', another_hint: 'راهنمایی دیگر', open_step: 'آن قدم را باز کن',
+    look_again_row: 'دوباره ببین', not_done: 'حل نشده', type_it: 'بنویس',
+    so_close: 'خیلی نزدیک هستی. یک بار دیگر روی کاغذ حل کن.', more_like_this: 'تمرین‌های مثل این',
+    ask_my_teacher: 'از معلمم بپرس', teacher_q: 'ورق {c}، شماره‌ی {n}: من {a} نوشتم.',
+    no_answers: { child: 'جواب را به تو نمی‌گویم: خودت پیدایش می‌کنی!', adult: 'قلم راهنمایی می‌دهد، نه جواب: کار کردن خودت است که در یادت می‌ماند.' },
+    n_right: { child: '{a} تا درست!', adult: 'درست: {a} از {b}' },
+    something_wrong: 'چیزی درست نیست؟', which_item: 'کدام شماره؟', dispute_thanks: 'تشکر. یک معلم این شماره را می‌بیند.',
+    hw_title: 'کمک در کارخانگی', hw_placeholder: 'سوال کتابت را بنویس', hw_offline: 'کمک در کارخانگی به انترنت ضرورت دارد.',
+    check_my_answer: 'جوابم را ببین', its_right: 'بلی، درست است!', not_yet: 'هنوز نه: راهنمایی بعدی را ببین.',
+    not_sure: 'در این یکی مطمئن نیستم. از معلمت بپرس.', tries_left: '{n} بار دیگر می‌توانی ببینی.',
+    no_more_checks: 'برای این یکی دیگر نمی‌شود. روی کاغذ حل کن یا از معلمت بپرس.',
   },
   ps: {
     app: 'قلم',
@@ -240,8 +252,8 @@ const S = {
     back: 'بېرته', close: 'بندول', next: 'بل', done: 'پای',
     say_it: 'ووایه: «{w}»', say_note: 'غږ دې ثبتېږي او بیا یې اورې', say_aloud: 'په لوړ غږ ووایه: «{w}»',
     recording: 'ثبتوي… د بشپړولو لپاره بیا یې کېکاږه',
-    right: { child: 'سم دی! شاباس', adult: 'سم دی' }, wrong: 'نه، بیا یې وګوره', answer_is: 'سم ځواب: {a}', why: 'ولې؟',
-    check_answer: 'وګوره', your_answer: 'خپل ځواب ولیکه، لکه ۳/۴',
+    right: { child: 'سم دی! شاباس', adult: 'سم دی' }, wrong: 'نه، بیا یې وګوره', why: 'ولې؟',
+    check_answer: 'وګوره', your_answer: 'خپل ځواب ولیکه',
     lesson_done: { child: 'لوست پای ته ورسېد! شاباس', adult: 'لوست پای ته ورسېد' },
     ask_title: 'وپوښته', ask_scope: 'یوازې د ښوونځي د لوستونو په اړه ځواب ورکوي',
     ask_placeholder: 'خپله پوښتنه ولیکه…', send: 'ولېږه', ready_questions: 'یوه یې غوره کړه یا پخپله ولیکه',
@@ -264,7 +276,7 @@ const S = {
     check_title: 'پاڼه وګوره', check_note: 'د کاغذ ځوابونه دلته ولیکه',
     sheet_code: 'د پاڼې په لاندې کونج کې عدد', open_code: 'خلاص یې کړه', check_btn: 'وګوره',
     look_again: '{n} یې بیا وګوره.', all_right: 'ټول سم دي!',
-    simplify: 'سم دی، خو ساده یې کړه: {a}', show_answer: 'ځواب راوښیه', was_it_right: 'سم و؟',
+    simplify: 'سم دی! ساده یې لیکلی شې؟', was_it_right: 'سم و؟',
     yes: 'هو', no: 'نه', print_new: 'نوې پاڼه', check_with_teacher: 'دا ښوونکی یا مور او پلار ګوري',
     teacher: 'د ښوونکي پاڼه', teacher_pin: 'د ښوونکي رمز', enter: 'ننوځه', wrong_pin: 'رمز سم نه دی',
     questions_review: 'د کتلو لپاره پوښتنې', correct_btn: 'سم دی', fix_btn: 'سمول', reject_btn: 'ردول',
@@ -436,6 +448,18 @@ const S = {
     check_it: 'وې ګوره!',
     this_is_sheet: 'دا پاڼه {c} ده',
     delete: 'پاک یې کړه',
+    // P15, drafts for a native Pashto speaker's check:
+    hint: 'لارښوونه', hint_n: 'لارښوونه {a} له {b}', another_hint: 'بله لارښوونه', open_step: 'هغه ګام پرانیزه',
+    look_again_row: 'بیا یې وګوره', not_done: 'نه دی حل شوی', type_it: 'ولیکه',
+    so_close: 'ډېر نږدې یې. یو ځل بیا یې په کاغذ حل کړه.', more_like_this: 'ورته تمرینونه',
+    ask_my_teacher: 'له ښوونکي مې وپوښته', teacher_q: 'پاڼه {c}، شمېره {n}: ما {a} ولیکل.',
+    no_answers: { child: 'ځواب درته نه وایم: ته یې پخپله پیدا کولی شې!', adult: 'قلم لارښوونه کوي، نه ځواب: پخپله کار کول یې په یاد ساتي.' },
+    n_right: { child: '{a} سم!', adult: 'سم: {a} له {b}' },
+    something_wrong: 'یو څه سم نه دي؟', which_item: 'کومه شمېره؟', dispute_thanks: 'مننه. یو ښوونکی به دا شمېره وګوري.',
+    hw_title: 'د کورني کار مرسته', hw_placeholder: 'د خپل کتاب پوښتنه ولیکه', hw_offline: 'د کورني کار مرسته انټرنېټ ته اړتیا لري.',
+    check_my_answer: 'زما ځواب وګوره', its_right: 'هو، سم دی!', not_yet: 'لا نه: بله لارښوونه وګوره.',
+    not_sure: 'په دې یوه ډاډه نه یم. له خپل ښوونکي وپوښته.', tries_left: '{n} ځله نور یې کتلی شې.',
+    no_more_checks: 'د دې لپاره نور نه کېږي. په کاغذ یې حل کړه یا له ښوونکي وپوښته.',
   },
   en: {
     app: 'Qalam',
@@ -456,8 +480,8 @@ const S = {
     back: 'Back', close: 'Close', next: 'Next', done: 'Done',
     say_it: 'Say: “{w}”', say_note: 'Your voice is recorded and played back to you', say_aloud: 'Say it aloud: “{w}”',
     recording: 'Recording… tap again to stop',
-    right: { child: 'Right! Well done', adult: 'Correct' }, wrong: 'No, look again', answer_is: 'The right answer: {a}',
-    why: 'Why?', check_answer: 'Check', your_answer: 'Write your answer, like 3/4',
+    right: { child: 'Right! Well done', adult: 'Correct' }, wrong: 'No, look again', 
+    why: 'Why?', check_answer: 'Check', your_answer: 'Write your answer',
     lesson_done: { child: 'Lesson done! Well done', adult: 'Lesson done' },
     ask_title: 'Ask', ask_scope: 'Answers questions about school lessons only',
     ask_placeholder: 'Write your question…', send: 'Send', ready_questions: 'Pick one or write your own',
@@ -480,7 +504,7 @@ const S = {
     check_title: 'Check my sheet', check_note: 'Write the answers from your paper here',
     sheet_code: "The number in the sheet's bottom corner", open_code: 'Open', check_btn: 'Check',
     look_again: 'Look at {n} again.', all_right: 'All correct!',
-    simplify: 'Right, but make it simpler: {a}', show_answer: 'Show me the answer', was_it_right: 'Was it right?',
+    simplify: 'Right! Can you write it simpler?', was_it_right: 'Was it right?',
     yes: 'Yes', no: 'No', print_new: 'New sheet', check_with_teacher: 'A teacher or parent looks at this',
     teacher: 'Teacher', teacher_pin: "Teacher's PIN", enter: 'Enter', wrong_pin: 'That PIN is not right',
     questions_review: 'Questions to review', correct_btn: 'Correct', fix_btn: 'Fix', reject_btn: 'Reject',
@@ -651,6 +675,18 @@ const S = {
     check_it: 'Check it!',
     this_is_sheet: 'This is sheet {c}',
     delete: 'Delete',
+    // P15:
+    hint: 'Hint', hint_n: 'Hint {a} of {b}', another_hint: 'Another hint', open_step: 'Open that step',
+    look_again_row: 'Look again', not_done: 'Not done', type_it: 'Type it',
+    so_close: "You're close. Try it again on paper.", more_like_this: 'More like this',
+    ask_my_teacher: 'Ask my teacher', teacher_q: 'Sheet {c}, number {n}: I wrote {a}.',
+    no_answers: { child: "I won't tell you the answer: you can find it!", adult: 'Qalam gives hints, not answers: working it out is what makes it stick.' },
+    n_right: { child: '{a} right!', adult: 'Correct: {a} of {b}' },
+    something_wrong: 'Something looks wrong?', which_item: 'Which one?', dispute_thanks: 'Thank you. A teacher will look at this item.',
+    hw_title: 'Homework help', hw_placeholder: 'Type the question from your book', hw_offline: 'Homework help needs the internet.',
+    check_my_answer: 'Check my answer', its_right: "Yes, that's right!", not_yet: 'Not yet: try the next hint.',
+    not_sure: "I'm not sure about this one. Ask your teacher.", tries_left: '{n} more tries.',
+    no_more_checks: 'No more tries for this one. Try it on paper, or ask your teacher.',
   },
 };
 

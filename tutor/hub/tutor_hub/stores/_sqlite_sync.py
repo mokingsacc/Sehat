@@ -96,9 +96,22 @@ class Store:
                 "ai_today": r.get("ai") or 0, "for_teacher": r.get("for_teacher") or 0,
                 "pages_today": p.get("pages") or 0, "approved_answers": a.get("n") or 0}
 
+    def add_ladder(self, token, *, solution, sure) -> None:
+        self._x("INSERT OR REPLACE INTO ladders(token, solution, sure, checks, created) VALUES(?,?,?,0,?)",
+                (token, str(solution), int(bool(sure)), now()))
+
+    def use_check(self, token, limit=3):
+        with self.lock:
+            cur = self.db.execute("UPDATE ladders SET checks=checks+1 WHERE token=? AND checks<?", (token, limit))
+            r = self.db.execute("SELECT solution, sure, checks FROM ladders WHERE token=?", (token,)).fetchone()
+        if not r:
+            return None
+        return {"solution": r["solution"], "sure": bool(r["sure"]), "checks": r["checks"], "used": cur.rowcount > 0}
+
     def prune(self, keep_days: int):
         cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).isoformat(timespec="seconds")
         self._x("DELETE FROM questions WHERE created<?", (cut,))
+        self._x("DELETE FROM ladders WHERE created<?", (cut,))
         self._x("DELETE FROM prints WHERE created<?", (cut,))
 
     # print jobs

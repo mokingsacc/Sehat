@@ -128,6 +128,20 @@ class D1Store(Store):
                                token)
         return (meta.changes or 0) > 0
 
+    async def add_ladder(self, token, *, solution, sure) -> None:
+        await self._run("INSERT OR REPLACE INTO ladders(token, solution, sure, checks, created) VALUES(?,?,?,0,?)",
+                        token, str(solution), int(bool(sure)), now())
+
+    async def use_check(self, token, limit=3):
+        rows = await self._batch_rows([
+            self._stmt("UPDATE ladders SET checks=checks+1 WHERE token=? AND checks<? RETURNING checks", token,
+                       int(limit)),
+            self._stmt("SELECT solution, sure, checks FROM ladders WHERE token=?", token)])
+        if not rows[1]:
+            return None
+        r = rows[1][0]
+        return {"solution": r["solution"], "sure": bool(r["sure"]), "checks": r["checks"], "used": bool(rows[0])}
+
     async def queue(self, limit=50):
         return await self._all("""SELECT * FROM questions WHERE to_teacher=1 AND status IN ('answered','waiting')
                                   ORDER BY urgent DESC, status='waiting' DESC, id LIMIT ?""", int(limit))
@@ -172,6 +186,7 @@ class D1Store(Store):
     async def prune(self, keep_days: int):
         cut = _ago(days=keep_days).isoformat(timespec="seconds")
         await self._batch([self._stmt("DELETE FROM questions WHERE created<?", cut),
+                           self._stmt("DELETE FROM ladders WHERE created<?", cut),
                            self._stmt("DELETE FROM prints WHERE created<?", cut)])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)

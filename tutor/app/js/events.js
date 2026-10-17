@@ -1,4 +1,4 @@
-// What the learner did (a lesson started or done, a sheet marked on Check my sheet), as verbs and ids only, queued on the phone and sent to the hub when it is in reach
+// What the learner did (a lesson started or done, a sheet and its items marked on Check my sheet), as verbs and ids only, queued on the phone and sent to the hub when it is in reach
 // (POST /api/events, at most 100 at a time). An event is { at, verb, object, value }: the UTC minute, a verb the
 // hub knows, an id (a lesson) and a number when the verb has one. Never a name, never anything typed: the hub
 // refuses any other field, and so the queue holds no other field.
@@ -15,9 +15,14 @@ const KEY = 'qalam.events.v1';
 const MAX_QUEUE = 500;           // a phone away from the hub for months keeps the newest 500,
 const MAX_AGE = 14 * 24 * 3600e3;   // from the last 14 days; older ones are dropped without a word (C2.5)
 const BATCH = 100;
-// the verbs a phone may send (hub/tutor_hub/events.py); the hub writes the others itself
-export const VERBS = { 'lesson.start': { value: false }, 'lesson.done': { value: true }, 'check.done': { value: true } };
+// the verbs a phone may send (hub/tutor_hub/events.py); the hub writes the others itself. Since P15 a sheet's items
+// too (C2.3): check.item (0 wrong, 1 right first time, 2 right later), hint.rung (1 to 3) and check.dispute, each
+// with the item as lesson:n
+export const VERBS = { 'lesson.start': { value: false }, 'lesson.done': { value: true }, 'check.done': { value: true },
+  'check.item': { value: true, item: true, range: [0, 2] }, 'hint.rung': { value: true, item: true, range: [1, 3] },
+  'check.dispute': { value: false, item: true } };
 const LESSON = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
+const ITEM = /^([a-z][a-z0-9]*(?:-[a-z0-9]+)*):([1-9][0-9]?)$/;
 const DIGIT_RUN = /[0-9]{5,}/;      // the hub refuses these, so nothing like a phone number hides in an id
 
 let seq = 0;
@@ -56,8 +61,10 @@ export function pending(learner) {
 export function record(verb, object = null, value = null, learner = null) {
   if (typeof learner !== 'string' || !learner) return false;
   const v = VERBS[verb];
-  if (!v || (object !== null && !(typeof object === 'string' && object.length <= 64 && LESSON.test(object) && !DIGIT_RUN.test(object)))) return false;
+  const id = v && v.item && typeof object === 'string' ? (object.match(ITEM) || [])[1] : object;
+  if (!v || (v.item && !id) || (object !== null && !(typeof id === 'string' && object.length <= 64 && LESSON.test(id) && !DIGIT_RUN.test(id)))) return false;
   if (v.value !== (value !== null)) return false;
+  if (v.range && !(Number.isInteger(value) && value >= v.range[0] && value <= v.range[1])) return false;
   const e = { n: `${Date.now()}.${++seq}`, l: learner, at: minute(), verb, object };
   if (value !== null) e.value = value;
   write([...read(), e].slice(-MAX_QUEUE));

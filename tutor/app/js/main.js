@@ -64,7 +64,10 @@ async function route() {
   stop();
   if (current && current.cleanup) current.cleanup();
   current = null;
-  const [name = '', ...args] = location.hash.replace(/^#\/?/, '').split('/').map(decodeURIComponent);
+  // #/ask?hw=1: what follows ? reaches the screen as args.query (Homework help's door, C2.3)
+  const [path, query = ''] = location.hash.replace(/^#\/?/, '').split('?');
+  const [name = '', ...args] = path.split('/').map(decodeURIComponent);
+  args.query = new URLSearchParams(query);
   if (!state.child() && !NEEDS_NO_CHILD.has(name)) { location.replace('#/welcome'); return; }
   if (!modules.routeOn(name)) { location.replace(state.child() ? '#/home' : '#/welcome'); return; }   // switched off
   const c = state.child();
@@ -102,7 +105,7 @@ function refreshChips() {
 async function modulesChanged() {
   if (!modules.sync()) return false;
   await modules.load();
-  const name = location.hash.replace(/^#\/?/, '').split('/')[0];
+  const name = location.hash.replace(/^#\/?/, '').split(/[/?]/)[0];
   if (!modules.routeOn(name)) { route(); return true; }
   const bar = app.querySelector('nav.tabs');
   if (bar && current && current.tab) bar.replaceWith(nav(current.tab));

@@ -23,10 +23,11 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
 from . import __version__, events, flags, learners, modules, search, sheets
 from .ai import Gateway, gateway as ai_gateway, make_provider
-from .brain import Brain
+from .brain import WAITING, Answer, Brain
 from .config import Config
+from .mods import homework as homework_mod
 from .mods import photo as photo_mod
-from .packs import Library, picture_file
+from .packs import Library, band_of_year, picture_file
 from .packs import text as pick_text
 from .printing import Printer, PrintQueue
 from .stores import SqliteStore
@@ -41,6 +42,7 @@ class AskIn(BaseModel):
     subject: str | None = None
     year: int | None = Field(None, ge=0, le=12)
     lesson: str | None = None
+    teacher: bool = False        # "Ask my teacher" from a sheet's hint ladder: straight to the teacher, no answer
 
 
 class ReviewIn(BaseModel):
@@ -147,7 +149,7 @@ class Hub:
         self.gateway = Gateway(make_provider(cfg), store=self.store, manifests=self.modules, ai_langs=cfg.ai_langs,
                                budget=cfg.ai_budget, timeout=cfg.llm_timeout, cohort=self.cohort_id)
         self._ix_lock = asyncio.Lock()
-        self.brain = Brain(None, self.gateway)     # the search index is built in start()
+        self.brain = Brain(None, self.gateway, self.library)     # the search index is built in start()
         self.printer = Printer("off" if "printer" in cfg.lacks else cfg.print_backend, cfg.printer,
                                cfg.data / "outbox")
         self.prints: PrintQueue | None = None
@@ -465,11 +467,19 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         hub.ask_limit.check(hub.who(request))
         lang = _lang(a.lang)
         cohort = request.query_params.get("cohort") or (who or {}).get("cohort") or hub.cohort_id
-        ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson, cohort=cohort)
+        if a.teacher:            # "Ask my teacher" (C2.3): the sheet's code, the item and what she wrote
+            ans = Answer(WAITING[lang], lang, "none", waiting=True)
+        else:
+            band = (who or {}).get("band") or (band_of_year(a.year) if a.year is not None else None)
+            _, _, on = await hub.cohort_modules(cohort, band)
+            ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson,
+                                         cohort=cohort, homework="homework" in on)
         token = await hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
                                              question=a.text.strip(),
-                                             answer=None if ans.waiting and ans.source != "rules" else ans.text,
+                                             answer=None if ans.waiting and ans.source != "rules" else ans.shown(),
                                              source=ans.source, urgent=ans.urgent, waiting=ans.waiting)
+        if ans.solution is not None:               # the answer behind the ladder stays here, for "Check my answer"
+            await hub.store.add_ladder(token, solution=ans.solution, sure=not ans.unsure)
         await hub.record("ask.answered", ans.source, cohort_id=request.query_params.get("cohort"))
         return dict(ans.dict(), id=token)
 
@@ -506,6 +516,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
 
     # photo marking (the `photo` module, P14): readings only, the phone marks (mods/photo.py)
     app.include_router(photo_mod.router(hub, needs))
+    # Homework help (the `homework` module, P15): "Check my answer" against the answer kept behind a ladder
+    app.include_router(homework_mod.router(hub, needs))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
     # The answer page is the teacher's: behind the teacher's PIN on the hub, and on no learner route (C2.3); online

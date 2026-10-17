@@ -13,6 +13,7 @@
     "print": true,
     "check": true,
     "teacher": true,
-    "photo": true
+    "photo": true,
+    "homework": true
   }
 }

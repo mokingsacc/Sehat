@@ -282,6 +282,20 @@ async def test_counts(store):
                  "approved_answers": 0}
 
 
+async def test_a_ladder_keeps_its_answer_for_three_checks(store):
+    t = await ask(store, "1/2 + 1/4", source="maths")
+    await store.add_ladder(t, solution="3/4", sure=True)
+    tries = [await store.use_check(t) for _ in range(4)]
+    assert [(r["checks"], r["used"]) for r in tries] == [(1, True), (2, True), (3, True), (3, False)]
+    assert tries[0]["solution"] == "3/4" and tries[0]["sure"] is True
+    assert await store.use_check("0" * 16) is None
+    u = await ask(store, "solve it", source="ai")
+    await store.add_ladder(u, solution="x = 2", sure=False)
+    assert (await store.use_check(u))["sure"] is False
+    await store.prune(-1)                          # the ladder goes with its question
+    assert await store.use_check(t) is None
+
+
 # print jobs
 
 async def test_print_jobs(store):

@@ -22,7 +22,7 @@ import random
 import re
 from fractions import Fraction
 
-from . import mathcheck, qr
+from . import hints, mathcheck, qr
 from .packs import picture_file
 from .packs import text as pick_text
 from .textnorm import digits_to_fa
@@ -241,7 +241,17 @@ GENERATORS = {"fraction_add": gen_fraction_add, "add_sub": gen_add_sub, "times":
 # the cell a generator's answers are written in: decided by the generator, never by one answer, so the box's shape
 # says nothing about the answer
 GENERATOR_CELL = {"fraction_add": "frac", "add_sub": "int", "times": "int"}
-ITEM_OPTS = ("kind", "type", "count", "prompt", "work", "step")
+ITEM_OPTS = ("kind", "type", "count", "prompt", "work", "step", "step_same")
+
+
+def _step_for(it: dict, q: str):
+    """The lesson step a generated sum's first hint points to: `step_same` for a fraction sum whose bottom numbers
+    already match (when the lesson teaches that in its own step), else `step`."""
+    if it.get("step_same"):
+        k = hints.kind_of(q)
+        if k and k[0] == "frac" and k[2] == k[4]:
+            return it["step_same"]
+    return it.get("step")
 
 
 def needs_seed(lesson: dict) -> bool:
@@ -260,7 +270,7 @@ def expand(lesson: dict, seed: int):
             for s in sums:
                 n += 1
                 group.append({"kind": "sum", "n": n, "q": s["q"], "a": s["a"], "cell": GENERATOR_CELL[it["type"]],
-                              "step": it.get("step")})
+                              "step": _step_for(it, s["q"])})
             out.append({"kind": "sums", "prompt": it.get("prompt"), "items": group, "work": it.get("work", True)})
         else:
             n += 1
@@ -449,7 +459,8 @@ def frame_box(x, y, w, h) -> dict:
 
 def answer_key(lesson: dict, seed: int, lang: str, picture_url) -> dict:
     """What the app needs for "Check my sheet": every numbered item, how to check it and, for a value item, where its
-    answer cell is (C2.1); the sheet's code, language and frame; and the intro and example for "Do it on screen"."""
+    answer cell is (C2.1) and its three hints (C2.3, `hints.py`, leak-checked here, so they are cached on the phone
+    with the key); the sheet's code, language and frame; and the intro and example for "Do it on screen"."""
     lay = layout(lesson, seed, lang)
     rows = []
     for li in lay["items"]:
@@ -457,10 +468,12 @@ def answer_key(lesson: dict, seed: int, lang: str, picture_url) -> dict:
         k = it["kind"]
         row = {"n": it["n"], "kind": k, "step": it.get("step")}
         if k == "sum":
-            row.update(q=it["q"], a=it["a"], check="value", prompt=pick_text(it.get("prompt"), lang) or None)
+            row.update(q=it["q"], a=it["a"], check="value", prompt=pick_text(it.get("prompt"), lang) or None,
+                       hints=hints.for_item(lesson, it, lang, seed))
         elif k == "count":
             row.update(a=str(it["how_many"]), check="value", prompt=pick_text(it.get("prompt"), lang) or None,
-                       picture=picture_url(it["picture"]))          # "Do it on screen" draws the objects to count
+                       picture=picture_url(it["picture"]),          # "Do it on screen" draws the objects to count
+                       hints=hints.for_item(lesson, it, lang, seed))
         elif k == "write":
             row.update(a=pick_text(it.get("a"), lang) if it.get("a") else "", check="self",
                        prompt=pick_text(it.get("prompt"), lang))

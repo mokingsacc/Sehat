@@ -26,7 +26,12 @@ Questions
 - `approved() -> list`: every approved answer, oldest first.
 - `counts() -> dict`: the last day's `asked_today`, `checked_today`, `ai_today`, `for_teacher`, `pages_today`,
   and all `approved_answers`.
-- `prune(keep_days)`: deletes questions and print jobs older than `keep_days`; approved answers stay.
+- `add_ladder(token, *, solution, sure)`: the private answer behind a question's hint ladder (P15), never sent to a
+  phone; `sure` is False when the model's two runs disagreed.
+- `use_check(token, limit=3) -> dict | None`: one "Check my answer" try: `{solution, sure, checks, used}`, with
+  `used` False (and nothing counted) once `limit` tries are spent; None when the question has no ladder.
+- `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`; approved answers
+  stay.
 
 Print jobs
 - `add_print(*, lesson_id, kind, copies, lang, seed, device) -> id`: a queued job.
@@ -120,6 +125,12 @@ class Store:
     # questions
     async def add_question(self, *, lang, subject, year, lesson_id, question, answer, source, urgent,
                            waiting) -> str:
+        raise NotImplementedError
+
+    async def add_ladder(self, token, *, solution, sure) -> None:
+        raise NotImplementedError
+
+    async def use_check(self, token, limit=3) -> dict | None:
         raise NotImplementedError
 
     async def question(self, token) -> dict | None:

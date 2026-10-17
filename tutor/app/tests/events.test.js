@@ -106,6 +106,18 @@ test('only known verbs and plain lesson ids are queued, each for a learner on th
   assert.deepEqual(Object.keys(events.pending()[0]).sort(), ['at', 'object', 'verb']);   // the learner id stays here
 });
 
+test('the hint events name an item (lesson:n) and its rung or result, never a name', () => {
+  const l = joined().id;
+  assert.equal(events.record('check.item', 'maths-7-fractions-add:3', 2, l), true);
+  assert.equal(events.record('check.item', 'maths-7-fractions-add:3', 3, l), false);       // 0, 1 or 2
+  assert.equal(events.record('check.item', 'maths-7-fractions-add', 1, l), false);         // which item?
+  assert.equal(events.record('hint.rung', 'maths-7-fractions-add:3', 1, l), true);
+  assert.equal(events.record('hint.rung', 'maths-7-fractions-add:3', 4, l), false);
+  assert.equal(events.record('check.dispute', 'maths-7-fractions-add:3', null, l), true);
+  assert.equal(events.record('check.dispute', 'Maryam:3', null, l), false);
+  assert.equal(events.pending().length, 3);
+});
+
 test('without consent nothing is queued; with consent but no token yet, events wait for her join', async () => {
   const c = state.addChild({ year: 3, lang: 'prs' });
   state.setStep('dari-1-sheen', 0);
