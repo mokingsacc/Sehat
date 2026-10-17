@@ -35,7 +35,7 @@ def on(*ids):
 
 def test_the_built_modules_are_valid():
     assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "made", "photo", "plan", "print", "quran", "recall",
-                           "review", "sheets", "teacher", "timetable", "university"]
+                           "review", "sheets", "speak", "teacher", "timetable", "university"]
     # P32 (C4.8): her own questions are free text, off in every seed; `share.cohort` is registered and blocked
     assert REAL["made"]["capabilities"] == ["free.text"] and REAL["made"]["slots"] == ["lesson.end"]
     assert modules.CAPABILITY_RISK["share.cohort"] == "blocked"

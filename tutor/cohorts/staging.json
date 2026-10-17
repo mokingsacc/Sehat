@@ -22,7 +22,6 @@
     "recall": true,
     "cert": true,
     "quran": true,
-    "university": true,
-    "speak": false
+    "university": true
   }
 }

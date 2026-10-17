@@ -77,7 +77,7 @@ test('speak: no AI, no capability, off in every seed cohort', () => {
   assert.equal(m.offline, 'yes');
   for (const c of ['open', 'hub', 'staging']) {
     const doc = JSON.parse(readFileSync(new URL(`../../cohorts/${c}.json`, import.meta.url), 'utf8'));
-    assert.equal(doc.modules.speak, false, `${c}: speak is off by default`);
+    assert.ok(!doc.modules.speak, `${c}: speak is off by default`);
   }
   const src = readFileSync(new URL('../js/speak.js', import.meta.url), 'utf8');
   assert.ok(!/fetch\(|localStorage|indexedDB|sendBeacon|XMLHttpRequest|import /.test(src), 'speak.js imports and writes nothing');
