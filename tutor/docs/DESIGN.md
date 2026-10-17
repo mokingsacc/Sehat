@@ -1702,3 +1702,33 @@ L2, L5, L6, L7 when the hub is next touched). The C5 builder starts P33 once M1 
 3. **Native listeners** for the four voices and the staff drafts, by the end of January. Default: the January
    reviewers.
 4. **C6's date** for P30 and P31. Default: when a member's draft exists; both stay off.
+
+## What P33 and P34 built (builder notes)
+
+- **P33:** as C5.1. The Solar Hijri day is computed (the 33-year rules with their break years), not looked up; one
+  table of 25 known days (`hub/tests/hijri_dates.json`) tests the page's copy and `cert.py`'s.
+- **P34:** as C5.B3 and C5.2. The hub adds `code` beside the sentence on ten refusals (`wrong_pin`, `wait`,
+  `access`, `no_cohort`, `not_your_class`, `locked`, `photo_gate`, `confirm_first`, `last_admin`, `budget`); a plain
+  refusal keeps its old shape. The cohort page's `since` (when and by whom a kill switch went off) is read from the
+  Log, so nothing new is stored. A risky module's confirm reads each capability's sentence from the string files
+  (`cap.<capability>`), the module's own English line where it has none.
+
+### Open look questions (the builder's choice, for the chair)
+
+1. The "since" line shows the Log's last switch-off for the class; a switch thrown with "All cohorts" logs each
+   class, so each says its own time. A class switched off before the Log existed says only "AI is off for this
+   class".
+2. The kill-switch buttons are plain outline buttons in every state; the red is the band, not the button's border
+   (a red border on a "Switch AI on" button would read as danger).
+3. The class code's row is a card of its own under the class line, with the two buttons at full size, since it is
+   the one thing on the page an admin cannot undo by herself.
+4. On Content a pack that is not ready keeps its rows for classes that already have a release (for Roll back), with
+   no Publish button; a pack with no release and nothing publishable has no rows at all.
+5. Versions and short hashes stay in Latin digits, left to right, as codes do, in all three languages.
+6. `band.all` is lowercase ("all years") because it sits inside a sentence; as a table cell it reads the same.
+7. The chair's text names `app/modules/*/manifest.json`; the modules are `modules/<id>/module.json`, which the
+   strings check reads.
+8. The 25 Solar Hijri days were computed and cross-checked between two copies of the rules (Nowruz 1405 = 21 March
+   2026), not yet against a printed Afghan calendar: the January reviewers should check three of them.
+9. The staff browser check needs a freshly started hub: each page opening asks `/me` before the PIN is typed, which
+   the hub counts as a wrong try (L2 is kept as built).

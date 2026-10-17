@@ -59,8 +59,10 @@ async function api(path, { method = 'GET', body, raw = false } = {}) {
   const r = await fetch(`${API}${path}${path.includes('?') ? '&' : '?'}${q}`, { method, headers, cache: 'no-store',
     credentials: 'same-origin', body: body ? JSON.stringify(body) : undefined });
   if (!r.ok) {
-    const e = new Error((await r.json().catch(() => ({}))).error || String(r.status));
+    const data = await r.json().catch(() => ({}));
+    const e = new Error(data.error || String(r.status));
     e.status = r.status;
+    e.code = data.code;
     throw e;
   }
   return raw ? r.text() : r.json();
@@ -95,8 +97,8 @@ function failed(e) {
   if (e.status === 404) return say(t('off'));
   if (e.status === 429) return me.via === 'pin' || !me.via ? pinGate(t('wait')) : say(t('wait'));
   if (e.status === 401) return location.protocol === 'http:' || me.pin ? pinGate(me.pin ? t('wrong_pin') : '') : say(t('access'));
-  if (e.status === 403) return say(/admin/i.test(e.message) ? t('not_staff') : t('access'));
-  return toast(t('save_fail'));
+  if (e.status === 403) return say(e.code === 'not_your_class' ? t('error.not_your_class') : /admin/i.test(e.message) ? t('not_staff') : t('access'));
+  return toast(e.code && L.has('error.' + e.code) ? t('error.' + e.code) : t('save_fail'));
 }
 
 function signOut() {

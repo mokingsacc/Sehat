@@ -34,7 +34,7 @@ from .mods import review as review_mod
 from .mods import plan as plan_mod
 from .mods import teacher as teacher_mod
 from .mods import timetable as timetable_mod
-from .staff import Gate
+from .staff import Gate, refuse
 from .packs import Library, band_of_year, picture_file
 from .textnorm import digits_to_latin
 from .printing import Printer, PrintQueue
@@ -247,12 +247,12 @@ class Hub:
             now = self.clock()
             n, until, rounds, last = self._fails.get(who, (0, 0.0, 0, 0.0))
             if now < until:
-                raise HTTPException(429, "too many wrong PINs: wait and try again later")
+                raise refuse(429, "wait", "too many wrong PINs: wait and try again later")
             # hub-wide (C5 L2): a phone that rejoins the Wi-Fi gets a new address and fresh tries, so after 30 wrong
             # PINs in an hour from anywhere, one PIN is checked every 10 seconds, whoever asks
             self._wrong = [t for t in self._wrong if now - t < 3600]
             if len(self._wrong) >= HUB_WRONG and now - self._last_try < HUB_SPACING:
-                raise HTTPException(429, "too many wrong PINs: wait and try again later")
+                raise refuse(429, "wait", "too many wrong PINs: wait and try again later")
             self._last_try = now
             if rounds and now - last > 24 * 3600:         # a quiet day: back to a one-minute wait
                 rounds = 0
@@ -268,7 +268,7 @@ class Hub:
                             who, wait // 60)
             else:
                 self._fails[who] = (n, 0.0, rounds, last)
-            raise HTTPException(401, "admin PIN needed" if admin else "teacher PIN needed")
+            raise refuse(401, "wrong_pin", "admin PIN needed" if admin else "teacher PIN needed")
 
     async def record(self, verb: str, obj=None, value=None, cohort_id: str | None = None):
         """An event the hub writes itself (Ask, printing, a sheet key, the teacher's review). It never breaks the
@@ -837,7 +837,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
 
     @app.exception_handler(HTTPException)
     async def http_error(request: Request, exc: HTTPException):
-        return JSONResponse({"error": exc.detail}, status_code=exc.status_code)
+        code = getattr(exc, "code", None)            # a staff refusal's stable code (C5.1), beside the sentence
+        return JSONResponse({"error": exc.detail, **({"code": code} if code else {})}, status_code=exc.status_code)
 
     # online the app's files are the Worker's static assets, served before the Worker, so there is no folder here
     if cfg.app.is_dir():

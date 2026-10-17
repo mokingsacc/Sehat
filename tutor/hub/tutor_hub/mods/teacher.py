@@ -38,6 +38,7 @@ from ..ai import filters
 from ..brain import hints_leak
 from ..packs import band_of_year
 from ..packs import text as pick_text
+from ..staff import refuse
 
 MODULE = "teacher"
 ROLES = ("teacher", "admin")
@@ -192,10 +193,10 @@ def router(hub, needs) -> APIRouter:
     async def cohort(request: Request, me: dict):
         cid = request.query_params.get("cohort") or (me["cohorts"] or [None])[0]
         if not cid or cid not in me["cohorts"]:
-            raise HTTPException(403, "not your class")
+            raise refuse(403, "not_your_class", "not your class")
         c, f, on = await hub.cohort_modules(cid)
         if not c:
-            raise HTTPException(404, "no such cohort")
+            raise refuse(404, "no_cohort", "no such cohort")
         settings = flags.module_settings(hub.modules[MODULE], (f.get(MODULE) or {}).get("settings"))
         return c, settings, on
 

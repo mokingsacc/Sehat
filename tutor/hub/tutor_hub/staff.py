@@ -38,6 +38,21 @@ LEEWAY = 60
 SHA256_INFO = bytes.fromhex("3031300d060960864801650304020105000420")
 
 
+class Refusal(HTTPException):
+    """A staff refusal with a stable `code` beside its sentence (C5.1): the staff pages show `error.<code>` from their
+    string files in the reader's language, and the server's sentence for anything without a code."""
+
+    def __init__(self, status: int, code: str, detail: str):
+        super().__init__(status, detail)
+        self.code = code
+
+
+def refuse(status: int, code: str, detail: str) -> Refusal:
+    """The ten codes: last_admin, not_your_class, confirm_first, locked, photo_gate, budget, wrong_pin, wait,
+    no_cohort, access (tools/check_staff_strings.mjs checks each has its sentence in en.js)."""
+    return Refusal(status, code, detail)
+
+
 def id_hash(pepper: str, email: str) -> str:
     """The staff row's key: SHA-256 over the pepper and the lower-cased email."""
     return hashlib.sha256(pepper.encode() + b"\n" + email.strip().lower().encode()).hexdigest()
@@ -152,14 +167,14 @@ class Gate:
             raise HTTPException(403, "a staff change needs the X-Qalam header")
         token = request.headers.get(ACCESS_HEADER)
         if not token:
-            raise HTTPException(401, "sign in through Cloudflare Access")
+            raise refuse(401, "access", "sign in through Cloudflare Access")
         cfg = self.hub.cfg
         try:
             kid = json.loads(_b64(token.split(".")[0])).get("kid")
             claims = verify(token, keys=await self.keys(kid), team=cfg.access_team, aud=cfg.access_aud)
         except ValueError as e:
             log.info("staff token refused: %s", e)
-            raise HTTPException(403, "not signed in for Qalam") from None
+            raise refuse(403, "access", "not signed in for Qalam") from None
         except Exception:
             log.exception("Access keys not fetched")
             raise HTTPException(503, "cannot check the sign-in now") from None

@@ -51,7 +51,7 @@ from . import flags, gates, learners, modules, packs, qr, timetable
 from .ai import policy
 from .ai.providers import keys_set
 from .modules import BANDS
-from .staff import id_hash
+from .staff import id_hash, refuse
 from .stores.base import WISH_STATUS
 
 DAYS = 14                                    # AI spend and safety counts: two weeks
@@ -176,7 +176,7 @@ def router(hub) -> APIRouter:
     async def cohort_or_404(cid: str) -> dict:
         c = await hub.store.cohort(cid)
         if not c:
-            raise HTTPException(404, "no such cohort")
+            raise refuse(404, "no_cohort", "no such cohort")
         return c
 
     async def log(me, what, detail="", cohort=None):
@@ -287,6 +287,7 @@ def router(hub) -> APIRouter:
             m = hub.modules[mid]
             flag = f.get(mid) or {}
             rows.append({"id": mid, "version": m["version"], "maturity": m["maturity"], "bands": m["bands"],
+                         "capabilities": m.get("capabilities", []),
                          "depends": m["depends"], "needs": m["needs"], "risk": modules.risk(m),
                          "sentence": modules.risk_sentence(m), "enabled": bool(flag.get("enabled")), "on": mid in on,
                          "host": sorted(set(m["needs"]) & set(hub.cfg.lacks)),
@@ -296,7 +297,17 @@ def router(hub) -> APIRouter:
         spend = await day_spend(cid)
         cap = hub.gateway.cap(c["settings"])
         counts = await hub.store.learner_counts()
-        return {"id": c["id"], "label": c["label"], "langs": c["langs"], "bands": c["bands"],
+        # since when, and by whom, a kill switch is off (C5.2: "AI is off for this class since 14:30 (Teacher A)"),
+        # from the Log; nothing new is stored
+        since = {"ai": None, "day": None}
+        for x in await hub.store.admin_log(cid, limit=200):
+            if x["what"] != "cohort.kill":
+                continue
+            sw = "ai" if x["detail"].startswith("AI") else "day"
+            if sw in since and since[sw] is None:
+                since[sw] = {"off": x["detail"].endswith("off"), "at": x["at"], "by": x["changed_by"]}
+        since = {k: ({"at": v["at"], "by": v["by"]} if v and v["off"] else None) for k, v in since.items()}
+        return {"id": c["id"], "label": c["label"], "langs": c["langs"], "bands": c["bands"], "since": since,
                 "learners": counts.get(cid, 0), "settings": c["settings"], "ai": flags.ai_on(c),
                 "day": bool((f.get("timetable") or {}).get("enabled")), "own": cid == hub.cohort_id,
                 "budget": hub.gateway.budget, "cap": cap, "spend": dict(spend, pct=pct(spend["tokens"], cap)),
@@ -368,27 +379,28 @@ def router(hub) -> APIRouter:
         for x in todo:
             why = lock_of(hub.modules[x], c)
             if why == "moderation":
-                raise HTTPException(403, f"{x} needs paid human moderation")
+                raise refuse(403, "locked", f"{x} needs paid human moderation")
             if why == "maturity":
-                raise HTTPException(409, f"this cohort does not take {hub.modules[x]['maturity']} modules ({x})")
+                raise refuse(409, "locked", f"this cohort does not take {hub.modules[x]['maturity']} modules ({x})")
             if why == "open":
-                raise HTTPException(409, f"{x} stays off in open in 2027 (C4.9)")
+                raise refuse(409, "locked", f"{x} stays off in open in 2027 (C4.9)")
             if why == "scholar":
-                raise HTTPException(409, "the Quran reader stays off until a Hanafi scholar has signed the Quran set "
+                raise refuse(409, "locked", "the Quran reader stays off until a Hanafi scholar has signed the Quran set "
                                     "(content/quran) at its current hash")
             if why == "adviser":
-                raise HTTPException(409, "university preparation stays off until its first card set (the checklist "
+                raise refuse(409, "locked", "university preparation stays off until its first card set (the checklist "
                                     "and a card) is signed by an adviser and the Dari and Pashto readers")
             if why == "gate":
-                raise HTTPException(409, "photo marking waits for the pilot's four numbers: "
+                raise refuse(409, "photo_gate", "photo marking waits for the pilot's four numbers: "
                                     + "; ".join(gates.photo_open(hub.cfg.cohorts)[0]))
         missing = [x for x in todo if x != mid]
         risky = [x for x in todo if modules.risk(hub.modules[x]) in ("medium", "high")
                  and not (x == mid and (f.get(x) or {}).get("enabled"))]
         need = (["both"] if missing and not body.both else []) + (["confirm"] if risky and not body.confirm else [])
         if need:
-            return JSONResponse({"error": "confirm first", "need": need, "missing": missing,
+            return JSONResponse({"error": "confirm first", "code": "confirm_first", "need": need, "missing": missing,
                                  "risks": [{"id": x, "risk": modules.risk(hub.modules[x]),
+                                            "capabilities": hub.modules[x].get("capabilities", []),
                                             "sentence": modules.risk_sentence(hub.modules[x])} for x in risky]},
                                 status_code=409)
         for x in todo:
@@ -407,6 +419,8 @@ def router(hub) -> APIRouter:
             else:
                 new[k] = v
         if p := flags.settings_problems(new):
+            if any(x.startswith("settings.ai_budget") for x in p):
+                raise refuse(422, "budget", "; ".join(p))
             raise HTTPException(422, "; ".join(p))
         try:
             hub.gateway.provider_for(new)             # a provider this hub cannot make is refused here, not at a call
@@ -693,7 +707,7 @@ def router(hub) -> APIRouter:
         if row is None:
             raise HTTPException(404, "no such staff member")
         if row["role"] == "admin" and sum(1 for s in rows if s["role"] == "admin") == 1:
-            raise HTTPException(409, "the last admin cannot be removed")
+            raise refuse(409, "last_admin", "the last admin cannot be removed")
         await hub.store.remove_staff(sid)
         await log(me, "staff.remove", f"{row['label']} ({row['role']})")
         return {"ok": True}

@@ -191,6 +191,14 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   three-way picker in the header, remembered in this browser only; right to left with Persian digits and Solar Hijri
   dates in Dari and Pashto; "Draft translation" until a native speaker signs each file; `check_staff_strings.mjs` and
   `staff_check.mjs`.
+- **P34, done:** staff usability (C5.B3): modules in words with their line (the id and version under Details), as
+  cards under 760 px; the kill switches as state lines with their action beside them, a red band only while off,
+  saying since when and by whom (from the Log); the class line in words and the class-code row that says why the
+  code cannot be shown again; Content says how many packs are ready and what is missing, and where and when each is
+  published; the Staff page's "No class yet" and roles in words; empty states that say what comes next; the
+  cohorts table's heads in plain words; the Log's detail line in the reader's words and digits; Escape cancels
+  every dialog and Cancel takes the focus where a change cannot be taken back; the ten commonest refusals carry a
+  code the pages show in the reader's language.
 
 ## January 2027: buy and test
 
