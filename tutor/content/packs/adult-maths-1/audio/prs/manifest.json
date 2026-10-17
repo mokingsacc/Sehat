@@ -1,0 +1,107 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-052971d3a21f": {
+"file": "t-052971d3a21f.opus",
+"generated": true,
+"placeholder": false,
+"r": "f9bd64950db2",
+"s": 2.67,
+"sha256": "sha256:5cf26efcaf4da38f993296c207e1bfd9dea7ee7133a0a908228327bbbfd3e56a",
+"text": "۷۰",
+"voice": "Kore"
+},
+"t-1cf982ef60d2": {
+"file": "t-1cf982ef60d2.opus",
+"generated": true,
+"placeholder": false,
+"r": "195163e81789",
+"s": 0.68,
+"sha256": "sha256:2eeaad2a5c604a19c83817422a8b7e6163197e80dab8673695a75e1b765879dc",
+"text": "۸",
+"voice": "Kore"
+},
+"t-2e3bc8409224": {
+"file": "t-2e3bc8409224.opus",
+"generated": true,
+"placeholder": false,
+"r": "f9d27e986aca",
+"s": 2.1,
+"sha256": "sha256:4dba5d5b94b45223d2f53e34fa22d570bea8bf313c8173d5179afcfe103936a0",
+"text": "۳",
+"voice": "Kore"
+},
+"t-3417a2be45d1": {
+"file": "t-3417a2be45d1.opus",
+"generated": true,
+"placeholder": false,
+"r": "8e0de645ecc2",
+"s": 1.88,
+"sha256": "sha256:00163eba8f32fc8890b42afa44878753e33b52d5fa34da56e96cb0172f8d7580",
+"text": "۳۰",
+"voice": "Kore"
+},
+"t-59b3401e2289": {
+"file": "t-59b3401e2289.opus",
+"generated": true,
+"placeholder": false,
+"r": "631f4f195fcc",
+"s": 1.46,
+"sha256": "sha256:fd7b06ab6c0d84d06e33b8bb8fca533f629dfd6cb7d9edb8fdf28efd35fe0ecc",
+"text": "۲۰",
+"voice": "Kore"
+},
+"t-5b0a493e525f": {
+"file": "t-5b0a493e525f.opus",
+"generated": true,
+"placeholder": false,
+"r": "4475bc10e504",
+"s": 0.49,
+"sha256": "sha256:31881bd8cd663cd5c0096d50d8984249849a8418592c19e423672d7015fbaae5",
+"text": "۶",
+"voice": "Kore"
+},
+"t-835425c36e97": {
+"file": "t-835425c36e97.opus",
+"generated": true,
+"placeholder": false,
+"r": "3314c9013fbc",
+"s": 1.61,
+"sha256": "sha256:01fe8be746a554e98f67e429595280d5e025e80cfbac58b9f4520e86d9031e50",
+"text": "ریاضی روزمره",
+"voice": "Kore"
+},
+"t-8f3d295d1cc0": {
+"file": "t-8f3d295d1cc0.opus",
+"generated": true,
+"placeholder": false,
+"r": "3e31f1f4d3ba",
+"s": 31.51,
+"sha256": "sha256:6e2222624734ea4846d8409d78d45721ecffd6404d00e8a6549cc0ecc7960ccd",
+"text": "۲۰۰",
+"voice": "Kore"
+},
+"t-bc9c03bb975e": {
+"file": "t-bc9c03bb975e.opus",
+"generated": true,
+"placeholder": false,
+"r": "cfedc1d4b9ef",
+"s": 1.42,
+"sha256": "sha256:fff7c6a6747e29902110996c8f1f0cebc186450193fbbbac8a0c613e19603017",
+"text": "۲",
+"voice": "Kore"
+},
+"t-cff5fead8492": {
+"file": "t-cff5fead8492.opus",
+"generated": true,
+"placeholder": false,
+"r": "a9800aa01fde",
+"s": 1.88,
+"sha256": "sha256:6b131c881f3355f47da4969cef1b8d9e741090988c1a2f92818f3062ee411213",
+"text": "۱۲",
+"voice": "Kore"
+}
+},
+"lang": "prs",
+"voice": "Kore"
+}

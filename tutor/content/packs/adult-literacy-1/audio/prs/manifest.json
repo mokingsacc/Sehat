@@ -1,0 +1,67 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-2e3bc8409224": {
+"file": "t-2e3bc8409224.opus",
+"generated": true,
+"placeholder": false,
+"r": "f9d27e986aca",
+"s": 2.1,
+"sha256": "sha256:4dba5d5b94b45223d2f53e34fa22d570bea8bf313c8173d5179afcfe103936a0",
+"text": "۳",
+"voice": "Kore"
+},
+"t-63e5775e0230": {
+"file": "t-63e5775e0230.opus",
+"generated": true,
+"placeholder": false,
+"r": "72a0d8f3d6e4",
+"s": 0.62,
+"sha256": "sha256:56562dda5593c75c886971438c2134298cb43833144a82de2983a816a0bf79fc",
+"text": "آب",
+"voice": "Kore"
+},
+"t-6a9b00bf691b": {
+"file": "t-6a9b00bf691b.opus",
+"generated": true,
+"placeholder": false,
+"r": "c373d28e3aab",
+"s": 0.43,
+"sha256": "sha256:9249431de4ded56f2b3ba81761ce4446c4bd0bb2b75fefd792d6253f47a281c3",
+"text": "ت",
+"voice": "Kore"
+},
+"t-bc9c03bb975e": {
+"file": "t-bc9c03bb975e.opus",
+"generated": true,
+"placeholder": false,
+"r": "cfedc1d4b9ef",
+"s": 1.42,
+"sha256": "sha256:fff7c6a6747e29902110996c8f1f0cebc186450193fbbbac8a0c613e19603017",
+"text": "۲",
+"voice": "Kore"
+},
+"t-be0fa08bb8f1": {
+"file": "t-be0fa08bb8f1.opus",
+"generated": true,
+"placeholder": false,
+"r": "ea5642afa994",
+"s": 1.51,
+"sha256": "sha256:69269dd7a7835ba3f16c9aa6bdb6088c20b14f3d53140e7cf58e95f96d2c3f19",
+"text": "ا",
+"voice": "Kore"
+},
+"t-cb22e4a91421": {
+"file": "t-cb22e4a91421.opus",
+"generated": true,
+"placeholder": false,
+"r": "f799e707b286",
+"s": 0.34,
+"sha256": "sha256:2844862da7e6309f2e767367959df0be1a56484a02625c783634900066057204",
+"text": "ب",
+"voice": "Kore"
+}
+},
+"lang": "prs",
+"voice": "Kore"
+}

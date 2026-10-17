@@ -1,6 +1,7411 @@
 {
 "about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py. Not loaded by the app: manifest.json is.",
-"clips": {},
+"clips": {
+"009acbcedcdb": {
+"file": "009acbcedcdb.opus",
+"keys": [
+"tries_left{n=9}"
+],
+"learner": true,
+"r": "0bf1d75eb8c4",
+"s": 4.01,
+"sha256": "sha256:6584427dbc6ddc642a77294c17ba1ea9d3edb4314b00ccd8415d8a5456b72f5f"
+},
+"013eeed6468c": {
+"file": "013eeed6468c.opus",
+"keys": [
+"refresh"
+],
+"learner": true,
+"r": "252adb40fdf2",
+"s": 0.97,
+"sha256": "sha256:5ff4994bc563e14a44da569d5a0fe4aa5ae42dfe0682d1826b5874d31ffdf104"
+},
+"0257d7a09727": {
+"file": "0257d7a09727.opus",
+"keys": [
+"find_lesson"
+],
+"learner": true,
+"r": "7812149dc5aa",
+"s": 1.66,
+"sha256": "sha256:3ce9fc0ff5ca133a535811a12bb06ad486d1d2df97268d035ddbb45894abdbe8"
+},
+"0263e072589f": {
+"file": "0263e072589f.opus",
+"keys": [
+"pages_today",
+"todays_sheet"
+],
+"learner": true,
+"r": "4b5fd7b6eb28",
+"s": 1.39,
+"sha256": "sha256:ddfbf54f75084bf3e9ed3659a11fa9109c1476d5bc9264668865dab7d521c535"
+},
+"02874c05f6af": {
+"file": "02874c05f6af.opus",
+"keys": [
+"lock_wrong"
+],
+"learner": true,
+"r": "a4c9ef30f0c6",
+"s": 3.21,
+"sha256": "sha256:074d1cf31bcef4e8dc649918fba84a4f30ab038943f751066469afb66c1cc1a4"
+},
+"032258a0e1eb": {
+"file": "032258a0e1eb.opus",
+"keys": [
+"mine_row"
+],
+"learner": true,
+"r": "8f1a889a5547",
+"s": 4.81,
+"sha256": "sha256:e993a6722929ab909b51f0018e8fb18fa7971eb6c2b708805e5a2ee9c3dd8d91"
+},
+"032f9279994c": {
+"file": "032f9279994c.opus",
+"keys": [
+"send_online"
+],
+"learner": true,
+"r": "3560e5a0b7a4",
+"s": 2.38,
+"sha256": "sha256:f0d5a574fc8898d9a39dc2cfd0ec66bba88390fee2f5a07fe100fdf0e8afc6d2"
+},
+"0364c55c04ba": {
+"file": "0364c55c04ba.opus",
+"keys": [
+"live_speak"
+],
+"learner": true,
+"r": "35998c59a1ed",
+"s": 1.04,
+"sha256": "sha256:15a8d5324f980d3393894d3a1f9b5f1ae82a0af36e0e685cd62133f9d0000198"
+},
+"0370b8fff479": {
+"file": "0370b8fff479.opus",
+"keys": [
+"grown_up"
+],
+"learner": true,
+"r": "19d75549045d",
+"s": 1.4,
+"sha256": "sha256:d96c7464d3b959ed7038c0f45627d9a0c22e636f835def22c31792fb5cb3c839"
+},
+"03a388b6a48b": {
+"file": "03a388b6a48b.opus",
+"keys": [
+"quran_notes{n=9}"
+],
+"learner": true,
+"r": "1d57402f64a2",
+"s": 1.76,
+"sha256": "sha256:9ef2528561537fae18b3abcc215b2dcf3443b0aa7a792549830f84d9943519c1"
+},
+"044ee6f2ba43": {
+"file": "044ee6f2ba43.opus",
+"keys": [
+"voice_share"
+],
+"learner": true,
+"r": "b5f0e8638f72",
+"s": 2.14,
+"sha256": "sha256:315fa599222ba1d998dd3be0637a12bda42957029fddd0e636a3f5fe54ddd632"
+},
+"0486df55c685": {
+"file": "0486df55c685.opus",
+"keys": [
+"show_four"
+],
+"learner": true,
+"r": "aede28488491",
+"s": 2.92,
+"sha256": "sha256:b050a8a4099df86e40c3018a438854dc49105c3a2f116ddca065b6929ef076b9"
+},
+"05179f21ac4c": {
+"file": "05179f21ac4c.opus",
+"keys": [
+"day_no_hw"
+],
+"learner": true,
+"r": "dec876835535",
+"s": 5.81,
+"sha256": "sha256:4409b94d6ef260265d944d6cbc737c2958df3e206376554b8ed83afcdb270d8f"
+},
+"056eb5073a79": {
+"file": "056eb5073a79.opus",
+"keys": [
+"study_no"
+],
+"learner": true,
+"r": "0e550f4dff22",
+"s": 1.56,
+"sha256": "sha256:ce35b29616cc7cd7bca1c6754127f95c98841a0e0eb2dbc94b12b76ffb98dda9"
+},
+"05e0ea4a37c8": {
+"file": "05e0ea4a37c8.opus",
+"keys": [
+"path_cert",
+"review.certificate"
+],
+"learner": true,
+"r": "ce3149b42938",
+"s": 1.77,
+"sha256": "sha256:2dbd5ab2a7b5d30406e7a5165a86e24a2f2e820bb64b9a71a6bc35861bf26f23"
+},
+"065d18e51a60": {
+"file": "065d18e51a60.opus",
+"keys": [
+"delete",
+"erase",
+"made_delete"
+],
+"learner": true,
+"r": "f1e082398963",
+"s": 0.93,
+"sha256": "sha256:51a3f7bff6b291e0abe970f03678981858a80390f10eeca0d4da4b08a5652928"
+},
+"066b9239192a": {
+"file": "066b9239192a.opus",
+"keys": [
+"get_step2"
+],
+"learner": true,
+"r": "ac82446da0ac",
+"s": 4.61,
+"sha256": "sha256:f204110dc350fe91a6ace54f720fd3ea03d6fa43f06c841ffbce0061a68731ed"
+},
+"067816efdb18": {
+"file": "067816efdb18.opus",
+"keys": [
+"quran_found{n=1}",
+"quran_verses{n=1}"
+],
+"learner": true,
+"r": "eb0a3d359623",
+"s": 2.19,
+"sha256": "sha256:c54ab364cc1e108c19386b3df72b5299ea315da8e72cb2684567a89bd07ba0da"
+},
+"07982f27cbad": {
+"file": "07982f27cbad.opus",
+"keys": [
+"quran_repeat"
+],
+"learner": true,
+"r": "08d3c2464385",
+"s": 2.54,
+"sha256": "sha256:be045f98b7398c594a70dc8c10bf1b9c166773cb69d9aa10286d458c438b9f94"
+},
+"07f7e33e13f8": {
+"file": "07f7e33e13f8.opus",
+"keys": [
+"job_saved"
+],
+"learner": true,
+"r": "8a3d0d3b7f79",
+"s": 1.83,
+"sha256": "sha256:ccdc0b953a32937426dd6c4c97a922fd5d3be00b9d14762f137d83de25f16082"
+},
+"0818f0bf498b": {
+"file": "0818f0bf498b.opus",
+"keys": [
+"other_years"
+],
+"learner": true,
+"r": "a62ff7b4b941",
+"s": 2.44,
+"sha256": "sha256:f2302c37d414a97e8e00295d43b02a45423601d1d36bc4b2fd04f29e432ac7b3"
+},
+"08ca54f9ff11": {
+"file": "08ca54f9ff11.opus",
+"keys": [
+"another_hint"
+],
+"learner": true,
+"r": "245d77e1cfb3",
+"s": 1.62,
+"sha256": "sha256:6e119ad059102d10dae269c870a414c7f4a59bd73dd39e7141c1b9124e6b2050"
+},
+"09bb92f2b6b2": {
+"file": "09bb92f2b6b2.opus",
+"keys": [
+"who_title"
+],
+"learner": true,
+"r": "0816a035cff4",
+"s": 1.72,
+"sha256": "sha256:1cc58e2b81685f6072d1d770545f34064fa2006355a1a57a801da6d3ae4521dd"
+},
+"09e38c72d714": {
+"file": "09e38c72d714.opus",
+"keys": [
+"plan_here{n=11}"
+],
+"learner": true,
+"r": "3f8d56ea261c",
+"s": 3.31,
+"sha256": "sha256:805da314af8e742b7bc4050571d5e79c1ad92525079f7c1411cb2e98b3e09916"
+},
+"09eac25872fd": {
+"file": "09eac25872fd.opus",
+"keys": [
+"job_done"
+],
+"learner": true,
+"r": "f83f32c5380b",
+"s": 0.79,
+"sha256": "sha256:522ed5e50d88145d82e6c9ad4043d5d8b882bd8e509ebe877f7eded3f565d85d"
+},
+"0a05bc0c2bf5": {
+"file": "0a05bc0c2bf5.opus",
+"keys": [
+"reset_waiting{n=6}"
+],
+"learner": true,
+"r": "c0445dbb3ddf",
+"s": 5.21,
+"sha256": "sha256:8bc1c97f4b2a43952c2e60be51ecf6774d88a968a00b6580d7be7a2dd7d25381"
+},
+"0a1237d9ffef": {
+"file": "0a1237d9ffef.opus",
+"keys": [
+"made_rules"
+],
+"learner": true,
+"r": "2f56e72acd62",
+"s": 7.21,
+"sha256": "sha256:18b49bd3a742bfea16babc0655fde2d487da881164faafc51878fbabcc8feed7"
+},
+"0a2a1f67e879": {
+"file": "0a2a1f67e879.opus",
+"keys": [
+"quran_notice"
+],
+"learner": true,
+"r": "899c37332e4b",
+"s": 2.75,
+"sha256": "sha256:8541405d38c61f10dc1aab2ea7999037e5ae880f40b324a31cd0d2fff9b4cbd1"
+},
+"0affe228a264": {
+"file": "0affe228a264.opus",
+"keys": [
+"primary"
+],
+"learner": true,
+"r": "d918b2cadd65",
+"s": 2.56,
+"sha256": "sha256:f20e19921386f04a9d03e0927c532e8f099c3da1f73b115954deef7317017b00"
+},
+"0b157d019e6b": {
+"file": "0b157d019e6b.opus",
+"keys": [
+"hw_title",
+"module.homework"
+],
+"learner": true,
+"r": "684c1802d181",
+"s": 2.18,
+"sha256": "sha256:84574d1de43a4af411fabb5b229943f2f4977a0da65a6b231eb88542d728d5cb"
+},
+"0b3f42ac3f28": {
+"file": "0b3f42ac3f28.opus",
+"keys": [
+"sheets_word"
+],
+"learner": true,
+"r": "01a15bdc8de7",
+"s": 0.71,
+"sha256": "sha256:4dd2a41713ec8f68b8e6eab03c0f7ed4d732a561f518f551188448019283cd2c"
+},
+"0d00a0ab477e": {
+"file": "0d00a0ab477e.opus",
+"keys": [
+"made_delete_q"
+],
+"learner": true,
+"r": "a6fca32a0bbd",
+"s": 3.21,
+"sha256": "sha256:272152b5855d3a05ca678572b9e7dbdfcee4cb91de3c235c335e2f91d5e55039"
+},
+"0d046aacb819": {
+"file": "0d046aacb819.opus",
+"keys": [
+"pick_year"
+],
+"learner": true,
+"r": "36c87f158a2a",
+"s": 3.31,
+"sha256": "sha256:8662e805675b31a70a8c1f4fb0cdb695ce01ccfc1a20eb9c799a6f9d3b083d1e"
+},
+"0d1a13bb8c2a": {
+"file": "0d1a13bb8c2a.opus",
+"keys": [
+"net_waiting{n=1}"
+],
+"learner": true,
+"r": "cf4607a70541",
+"s": 2.85,
+"sha256": "sha256:61ce7cb35dfda2bd81de786457c007a6aa299a9215c0ad80285c57a562940270"
+},
+"0d4e96fd75d3": {
+"file": "0d4e96fd75d3.opus",
+"keys": [
+"lock_code_none"
+],
+"learner": true,
+"r": "5c0d15602b13",
+"s": 4.31,
+"sha256": "sha256:f2ff2f212a9710367c76f977d0d7d7830d490f581e4c0c96eaec96cd106ebff9"
+},
+"0d6f6cb447c3": {
+"file": "0d6f6cb447c3.opus",
+"keys": [
+"check_my_answer"
+],
+"learner": true,
+"r": "7e3c747f70ec",
+"s": 1.43,
+"sha256": "sha256:36c8df874cf974fed668be4ae6afc1b492e605989f3af6e19846d08cee7611fe"
+},
+"0d97901c01d4": {
+"file": "0d97901c01d4.opus",
+"keys": [
+"lock_wait{n=1}"
+],
+"learner": true,
+"r": "8e09d940a64d",
+"s": 5.51,
+"sha256": "sha256:4f8b8ec695938ce197ddfea1f6c25bad25f91f80036da93644e1ec3da54c87aa"
+},
+"0da6d500832e": {
+"file": "0da6d500832e.opus",
+"keys": [
+"contest_sent"
+],
+"learner": true,
+"r": "44905e98a22f",
+"s": 4.61,
+"sha256": "sha256:8d50893d2534ef9a8e120c558f3a78f7bc4caeee784f05c809c54e9a5ea990cb"
+},
+"0debbbac0255": {
+"file": "0debbbac0255.opus",
+"keys": [
+"tries_left{n=12}"
+],
+"learner": true,
+"r": "9efb0d3b17f0",
+"s": 5.81,
+"sha256": "sha256:0073ba0ce95e468316d6c55bea142c039dd010bd466fc4ca501b888d2ef17b3e"
+},
+"0eb7cd495190": {
+"file": "0eb7cd495190.opus",
+"keys": [
+"plan_make"
+],
+"learner": true,
+"r": "f14861efe083",
+"s": 3.51,
+"sha256": "sha256:010b4e03ad1665c967a5f4c03a4d62ea194d9c835cf5775ad099a6f35d2c1bac"
+},
+"0ed28ad46de3": {
+"file": "0ed28ad46de3.opus",
+"keys": [
+"made_show"
+],
+"learner": true,
+"r": "8a0d81bba9ce",
+"s": 1.64,
+"sha256": "sha256:5a1ffe1cd7b08ff0d187e9e6e1e47241da6d2e76c3c2c5a158bb4830c976f004"
+},
+"0ed5f6e90e6c": {
+"file": "0ed5f6e90e6c.opus",
+"keys": [
+"plan_row"
+],
+"learner": true,
+"r": "dcfc2a7f0986",
+"s": 3.91,
+"sha256": "sha256:eb42b688ecd227f15896be413db8796f7d9c33be7a5844b3fbc0f4a225be056e"
+},
+"0f366f6a4e17": {
+"file": "0f366f6a4e17.opus",
+"keys": [
+"study_when"
+],
+"learner": true,
+"r": "019344d3b7e7",
+"s": 2.03,
+"sha256": "sha256:a03db9144a3702428a71aafa98b82037e643f9b45f7ac45cba94e6cd902cc66a"
+},
+"0f6358212646": {
+"file": "0f6358212646.opus",
+"keys": [
+"study_left{n=12}"
+],
+"learner": true,
+"r": "7e8a4d3d5c35",
+"s": 3.41,
+"sha256": "sha256:3f87bbf5d4bad9562bcaf927015aec55e858a3767f06bff98b208f06cf3b5c91"
+},
+"0fa0a21338d7": {
+"file": "0fa0a21338d7.opus",
+"keys": [
+"made_why"
+],
+"learner": true,
+"r": "9ec6bc9f1241",
+"s": 2.58,
+"sha256": "sha256:69806660293d747a5740e3be95b6dd7f87ec36a6a58dd001e9ca97200b21dedf"
+},
+"1075bd4d8011": {
+"file": "1075bd4d8011.opus",
+"keys": [
+"year_n{n=8}"
+],
+"learner": true,
+"r": "0303d8637fdd",
+"s": 1.92,
+"sha256": "sha256:97e0ac75b4eeae229df07900dafee3b417121aec14bfa3b38ad820121b3e53c7"
+},
+"10bcb9a62552": {
+"file": "10bcb9a62552.opus",
+"keys": [
+"back",
+"common.back",
+"log.rollback"
+],
+"learner": true,
+"r": "bd878bb31979",
+"s": 1.13,
+"sha256": "sha256:5a1373bd85d6b6feb255b88cfa2850c5afd56b8801b36c2c7e1b5be44626a195"
+},
+"113193bef6ef": {
+"file": "113193bef6ef.opus",
+"keys": [
+"minutes{n=1}"
+],
+"learner": true,
+"r": "36600564d567",
+"s": 1.17,
+"sha256": "sha256:fdddc265202ecd3ad261a3f93f98a0c25b3e84c08f9dd64e1efe6b8574e17388"
+},
+"1156e45289cc": {
+"file": "1156e45289cc.opus",
+"keys": [
+"contest_offline"
+],
+"learner": true,
+"r": "c0305660dd35",
+"s": 4.01,
+"sha256": "sha256:d513051bb138d580a7dc9c022f5008d97d17c590a455ea3248b8992b08d6fe7e"
+},
+"11f56a93623c": {
+"file": "11f56a93623c.opus",
+"keys": [
+"day_sheet"
+],
+"learner": true,
+"r": "b45056f46112",
+"s": 5.01,
+"sha256": "sha256:27f411cdadaaf6e44401b477cb9669a85c61da0d33a8c6d3db39471d7bd40d5e"
+},
+"1228ca92ffae": {
+"file": "1228ca92ffae.opus",
+"keys": [
+"start_camera"
+],
+"learner": true,
+"r": "5d27d838fa16",
+"s": 1.95,
+"sha256": "sha256:2393648c8b94cb95588a6548aafe24d34df8e54b6fa801b20a3d8b40daaf3e51"
+},
+"12617a8a193f": {
+"file": "12617a8a193f.opus",
+"keys": [
+"get_sha"
+],
+"learner": true,
+"r": "c2914f021a54",
+"s": 2.04,
+"sha256": "sha256:163086d6796693bbb387fb78701b938d85ffa19550b3ac2b8f8841f5cf894d71"
+},
+"129d396c70f7": {
+"file": "129d396c70f7.opus",
+"keys": [
+"no_offline"
+],
+"learner": true,
+"r": "adcdb8cedd77",
+"s": 5.41,
+"sha256": "sha256:e55666a2c3d7d927e48141798e021f1a8461b7a76bbf6f34aace3cb91775f91e"
+},
+"130e66279ea9": {
+"file": "130e66279ea9.opus",
+"keys": [
+"why"
+],
+"learner": true,
+"r": "b038daeeb6ee",
+"s": 0.49,
+"sha256": "sha256:07807b0daf1f2ba24955318a42fb434991bdb654815c261925a4aa37257a9451"
+},
+"135f3eef4ce5": {
+"file": "135f3eef4ce5.opus",
+"keys": [
+"speak_record"
+],
+"learner": true,
+"r": "7b2eed896959",
+"s": 0.91,
+"sha256": "sha256:96f0d06209f7f32322195b8399e69417381100a65f10b60dbf3ea80cc022c00b"
+},
+"138245a414c8": {
+"file": "138245a414c8.opus",
+"keys": [
+"ready_questions"
+],
+"learner": true,
+"r": "b9bc4157eece",
+"s": 5.11,
+"sha256": "sha256:00a4ef45e3a81bc3ac056c82b5cb57ef64a46e3ba5bb9d3c8831ca7593842c44"
+},
+"13879d459a08": {
+"file": "13879d459a08.opus",
+"keys": [
+"plan_here{n=5}"
+],
+"learner": true,
+"r": "b928df645d18",
+"s": 2.91,
+"sha256": "sha256:47579b37649e6a8bd3e78490d11ceee91376f61e45adaaee06f259b5051da418"
+},
+"13a1215963d0": {
+"file": "13a1215963d0.opus",
+"keys": [
+"lock_title"
+],
+"learner": true,
+"r": "0c733b62686d",
+"s": 2.08,
+"sha256": "sha256:7e9c1b685e672832b45a18ea8184573175e59d68d02850f61e7d73e0027275cf"
+},
+"13bdf4436cdd": {
+"file": "13bdf4436cdd.opus",
+"keys": [
+"v_missing"
+],
+"learner": true,
+"r": "21d0e79387c7",
+"s": 6.91,
+"sha256": "sha256:b005a453781b5f02a683a666b4364dfbda0db6a889644b4c75d42e80504fa665"
+},
+"13e7336429e9": {
+"file": "13e7336429e9.opus",
+"keys": [
+"plan_here{n=1}"
+],
+"learner": true,
+"r": "e54597eebe36",
+"s": 4.41,
+"sha256": "sha256:aba330a4859563e7effbfb73b13ac51202e37e8bde53c5aa600ea249139c0879"
+},
+"14f397e50790": {
+"file": "14f397e50790.opus",
+"keys": [
+"consent:online-2026-10:sees"
+],
+"learner": true,
+"r": "97a870e5134d",
+"s": 15.21,
+"sha256": "sha256:46e26654886d9d1f41808faed72752085ab90ff971e6822ea1181bbc2ad4374d"
+},
+"14f8dd103916": {
+"file": "14f8dd103916.opus",
+"keys": [
+"study_left{n=11}"
+],
+"learner": true,
+"r": "dafad51765c7",
+"s": 3.41,
+"sha256": "sha256:380b58a2690204377c1dc870942ac5cb4428114610f67fedcc1dc71987498203"
+},
+"1583f726cb7c": {
+"file": "1583f726cb7c.opus",
+"keys": [
+"subjects"
+],
+"learner": true,
+"r": "3304c8a547e2",
+"s": 1.08,
+"sha256": "sha256:36aed13e21cc8da37a34b9cbb8328f4d7ab54b5678b30bc2e32c897ceb96a525"
+},
+"1584ecb29336": {
+"file": "1584ecb29336.opus",
+"keys": [
+"camera_off"
+],
+"learner": true,
+"r": "e13a814b2b48",
+"s": 4.81,
+"sha256": "sha256:e196b51b6d20d11f0291096677f283c2db0174f9b385dfcd7d9e7a62be533c69"
+},
+"158ca9ff797a": {
+"file": "158ca9ff797a.opus",
+"keys": [
+"live_over"
+],
+"learner": true,
+"r": "08dd328a0fa7",
+"s": 1.81,
+"sha256": "sha256:a68edd69da1a776f09d43a62eb43b294d4bcdab95c048c8c9801a3a61ee13bc3"
+},
+"15d8dd092940": {
+"file": "15d8dd092940.opus",
+"keys": [
+"camera_note"
+],
+"learner": true,
+"r": "e14af2981824",
+"s": 9.11,
+"sha256": "sha256:d560602bf3fed4900a4c4f7df4d03c3965936872bb83e36eccf7f427d6cc5fb7"
+},
+"161b49983e63": {
+"file": "161b49983e63.opus",
+"keys": [
+"code_hint"
+],
+"learner": true,
+"r": "f8a9ed25a39d",
+"s": 5.21,
+"sha256": "sha256:4bbf02a351a9525ae72bebc3fcf509812e4213a9e09e3a4b0aa74565cbf80791"
+},
+"1659991e639e": {
+"file": "1659991e639e.opus",
+"keys": [
+"contest_after"
+],
+"learner": true,
+"r": "6de7b6c99017",
+"s": 4.91,
+"sha256": "sha256:df226a91dacedd2d287f8a06d52f8e69f528b73e7bab96841d9f1977ddb19574"
+},
+"16d2b2b4508a": {
+"file": "16d2b2b4508a.opus",
+"keys": [
+"quran_notes{n=3}"
+],
+"learner": true,
+"r": "aa3e9cbc37de",
+"s": 3.0,
+"sha256": "sha256:50e17812145ee43bc3e617771cfc3d10e614fa7c1e4cbfe5f68c9b0afb322f18"
+},
+"172678d4481e": {
+"file": "172678d4481e.opus",
+"keys": [
+"quran_found{n=9}",
+"quran_verses{n=9}"
+],
+"learner": true,
+"r": "b7ce3f48e919",
+"s": 1.99,
+"sha256": "sha256:60e4c46992f1f247ea6b719b7c3e325b07d0d945f43b41ddd772fa0d80a98602"
+},
+"18754358a551": {
+"file": "18754358a551.opus",
+"keys": [
+"minutes{n=12}"
+],
+"learner": true,
+"r": "4302e4780151",
+"s": 1.96,
+"sha256": "sha256:d23fe6bd91f78e560e28c457dc85c478efaf503e565e40ed4d3748b0d9aa1f00"
+},
+"18f696e07540": {
+"file": "18f696e07540.opus",
+"keys": [
+"printer_ready"
+],
+"learner": true,
+"r": "2c945133943a",
+"s": 4.51,
+"sha256": "sha256:cd77c82e72a1bc6311ad839ab25039d7f22e49732b235e9cad416a9b4dbabef1"
+},
+"193d18aceffe": {
+"file": "193d18aceffe.opus",
+"keys": [
+"net_waiting{n=12}"
+],
+"learner": true,
+"r": "ec821ab0ef99",
+"s": 3.11,
+"sha256": "sha256:5e0d4f8674a29c35d20064d29187e29dcc6521f3efa92ae64d59bf8a507811b9"
+},
+"19a65adfbd05": {
+"file": "19a65adfbd05.opus",
+"keys": [
+"quran_searched{n=12}"
+],
+"learner": true,
+"r": "a79f9ae16c74",
+"s": 4.21,
+"sha256": "sha256:e9a8a3299dc5e95b4240d14d681be1c0b19f897a92849c187a6fd224c120a668"
+},
+"1a41299486b9": {
+"file": "1a41299486b9.opus",
+"keys": [
+"credits_theirs"
+],
+"learner": true,
+"r": "5b8613038201",
+"s": 5.51,
+"sha256": "sha256:6a7418634859f69dff3d92b63809c2780f11035f63c0399b73bda1d5e135a13b"
+},
+"1a55098b7972": {
+"file": "1a55098b7972.opus",
+"keys": [
+"enter"
+],
+"learner": true,
+"r": "30baa0f97864",
+"s": 0.74,
+"sha256": "sha256:bd0fe4a1f9f3f2861ae25230d02f3f6a149e03c9de81ef0651ab7d60062c3ce5"
+},
+"1a92b8086698": {
+"file": "1a92b8086698.opus",
+"keys": [
+"switch_no"
+],
+"learner": true,
+"r": "5ed0b2f44bf9",
+"s": 2.32,
+"sha256": "sha256:fe3030a4cd263f5dbf6c0d697e2ee400a1bcf87c22390f0ff10c6942ed009f4a"
+},
+"1a9dc63999ad": {
+"file": "1a9dc63999ad.opus",
+"keys": [
+"this_sheet"
+],
+"learner": true,
+"r": "e7ead8dbf96b",
+"s": 1.5,
+"sha256": "sha256:0ab8be565f1888bf688c165edd759d10e645bb19ead5ec36ca0092e4eda42123"
+},
+"1ae9aaa386f1": {
+"file": "1ae9aaa386f1.opus",
+"keys": [
+"get_cert"
+],
+"learner": true,
+"r": "e770a7c465f7",
+"s": 2.06,
+"sha256": "sha256:7dd7cbbcd25c84ddd0215526d54f3f7bf2956beed88deda155ce1c0638cc7675"
+},
+"1b0c67b1d839": {
+"file": "1b0c67b1d839.opus",
+"keys": [
+"made_full{n=1}"
+],
+"learner": true,
+"r": "f181be4aea3a",
+"s": 4.91,
+"sha256": "sha256:584117580555aac2e604290615a7c2601a6068c25b9724ac38daa23ca97daf15"
+},
+"1b2bf87c08b9": {
+"file": "1b2bf87c08b9.opus",
+"keys": [
+"made_title"
+],
+"learner": true,
+"r": "1ddc102d7bad",
+"s": 1.51,
+"sha256": "sha256:821a36b8fcb491134d23182011ed841a9e57481fd68364820e8e11e21d51d5b2"
+},
+"1b3c70712410": {
+"file": "1b3c70712410.opus",
+"keys": [
+"lock_wait{n=6}"
+],
+"learner": true,
+"r": "500ac2bb6aa4",
+"s": 4.11,
+"sha256": "sha256:1ff77fe5333182f43de839a911fd2c49fea7ece794c659cfa3a2cec8d378762b"
+},
+"1bf9990ff574": {
+"file": "1bf9990ff574.opus",
+"keys": [
+"net_waiting{n=11}"
+],
+"learner": true,
+"r": "784120e0838b",
+"s": 2.41,
+"sha256": "sha256:980d011cd0775633ab99eb548b8b993af3c86ee80e5775e7fc70a763e59eeecb"
+},
+"1bffdece534d": {
+"file": "1bffdece534d.opus",
+"keys": [
+"made_count{n=6}"
+],
+"learner": true,
+"r": "2baaa73fcdcc",
+"s": 2.11,
+"sha256": "sha256:a846fae5c339c1e6ed20f69fb6858a569fb3f7f7cb1591c01103508463280755"
+},
+"1c665b5d80ea": {
+"file": "1c665b5d80ea.opus",
+"keys": [
+"made_count{n=8}"
+],
+"learner": true,
+"r": "439ef542ae0e",
+"s": 1.91,
+"sha256": "sha256:885386a42d7de62768789ee50987dd7bc651c0855c07248bf439943308fd8116"
+},
+"1ca4627b8d17": {
+"file": "1ca4627b8d17.opus",
+"keys": [
+"net_nohub"
+],
+"learner": true,
+"r": "21b732329deb",
+"s": 2.03,
+"sha256": "sha256:27350a6cdb742a7d6322284f0499c3068a7deed29ed0f89b9b69181dd09786c7"
+},
+"1d685c5cc245": {
+"file": "1d685c5cc245.opus",
+"keys": [
+"plan_here{n=6}"
+],
+"learner": true,
+"r": "50c45ab59367",
+"s": 3.91,
+"sha256": "sha256:9cc9d2226693d873c8749fc33d12a853480f735caac6c4802c1ed44b117beefe"
+},
+"1d84dc2287c4": {
+"file": "1d84dc2287c4.opus",
+"keys": [
+"made_count{n=10}"
+],
+"learner": true,
+"r": "b754a384add6",
+"s": 2.07,
+"sha256": "sha256:e9838208a97900591bb620f0a802add737e98c46971c66b7d8c9a5b6e1a81a32"
+},
+"1e3d75c9f8d8": {
+"file": "1e3d75c9f8d8.opus",
+"keys": [
+"fit_squares"
+],
+"learner": true,
+"r": "a52e554680ad",
+"s": 5.21,
+"sha256": "sha256:6e23f98048fae2fe33142c70cda60880afc7dfe1aa5bb30ec1284c09b13e4809"
+},
+"1e4119265160": {
+"file": "1e4119265160.opus",
+"keys": [
+"reset_waiting{n=8}"
+],
+"learner": true,
+"r": "55908abfaf09",
+"s": 5.21,
+"sha256": "sha256:6bebe5a2d0c504a294fd716c6db187fa61a56acf017177e5d892e94ffb9f56a5"
+},
+"1e7a5163a55b": {
+"file": "1e7a5163a55b.opus",
+"keys": [
+"quran_found{n=11}",
+"quran_verses{n=11}"
+],
+"learner": true,
+"r": "fba5b986438b",
+"s": 2.36,
+"sha256": "sha256:cb342afaba688504a5da7915e64bccf867d64410278929f1352db6dad92a5214"
+},
+"1ebfb10a5f69": {
+"file": "1ebfb10a5f69.opus",
+"keys": [
+"job_queued"
+],
+"learner": true,
+"r": "30841ed970dd",
+"s": 0.73,
+"sha256": "sha256:41f86b6cec41580864c945f4e39fd4e588c00368418c2aaa583a8d0a10d53474"
+},
+"1f4b1717663a": {
+"file": "1f4b1717663a.opus",
+"keys": [
+"wait_join"
+],
+"learner": true,
+"r": "dfdcb97fc83d",
+"s": 1.93,
+"sha256": "sha256:fb1a7952dcbcd0f187363509b24e66e111ade5ca463c3a613de25c3bbf789dde"
+},
+"2040a587b595": {
+"file": "2040a587b595.opus",
+"keys": [
+"cert_get"
+],
+"learner": true,
+"r": "01f65e150335",
+"s": 1.83,
+"sha256": "sha256:08f3545c7074f9f73509c67be0b697b5acf96fb26339c2dbbd6af0e97402a5a6"
+},
+"2061c34955e6": {
+"file": "2061c34955e6.opus",
+"keys": [
+"photo_intro"
+],
+"learner": true,
+"r": "c61e98048274",
+"s": 6.81,
+"sha256": "sha256:ce1940978eb02da5bcb7ec97f3babe42ae6d1f7c01522fccd2776c8b19a83f2a"
+},
+"20726ed466cf": {
+"file": "20726ed466cf.opus",
+"keys": [
+"live_r3"
+],
+"learner": true,
+"r": "209e937e2a1a",
+"s": 1.1,
+"sha256": "sha256:6dc2c106a492fdc40d6807d644161a84dd98e8976cd15acd6dd8e38e16a4ef5e"
+},
+"20a723eb88c0": {
+"file": "20a723eb88c0.opus",
+"keys": [
+"made_full{n=2}"
+],
+"learner": true,
+"r": "19c5bc8bc1de",
+"s": 5.41,
+"sha256": "sha256:9bbb745c836f1d6f89ca15f26a0abaca86d365db995106267bef69b2b4d1c146"
+},
+"20da09d6fdc0": {
+"file": "20da09d6fdc0.opus",
+"keys": [
+"plan_closest"
+],
+"learner": true,
+"r": "c8599aa61866",
+"s": 2.26,
+"sha256": "sha256:d47b411749547d09dcdc015ecf112405ccd21900098a466ab5510209b999242b"
+},
+"21a1dd29c3ff": {
+"file": "21a1dd29c3ff.opus",
+"keys": [
+"update_text"
+],
+"learner": true,
+"r": "463c450a3743",
+"s": 5.91,
+"sha256": "sha256:a6c63045a79e6341ef6a3b0051a1058e7ff007c4932c0062d84a260f379d4960"
+},
+"21c7b03b1230": {
+"file": "21c7b03b1230.opus",
+"keys": [
+"plan_started"
+],
+"learner": true,
+"r": "b27a2f3e9db8",
+"s": 1.28,
+"sha256": "sha256:4a9b782a9ffe00ed02a40a2c03cc901628c8a3523d5a063c2c0d9372fd3dd22b"
+},
+"241810839a58": {
+"file": "241810839a58.opus",
+"keys": [
+"what_i_read"
+],
+"learner": true,
+"r": "b7fbd47c019b",
+"s": 1.51,
+"sha256": "sha256:7baf543b2e62d5563d2b22277a8fb856b80fc8687c8f3d6c08978dc028d4b920"
+},
+"243c391828aa": {
+"file": "243c391828aa.opus",
+"keys": [
+"plan_title"
+],
+"learner": true,
+"r": "e1a100a3f40f",
+"s": 2.52,
+"sha256": "sha256:3816d7289b2e8e06e5e3e730be68354793799355c1a2dd9120ab4f8472860a43"
+},
+"24e4ec7c5fa5": {
+"file": "24e4ec7c5fa5.opus",
+"keys": [
+"made_count{n=1}"
+],
+"learner": true,
+"r": "ced3bc0e61d5",
+"s": 1.58,
+"sha256": "sha256:d2e0990daf8d727755a690eb69807cbb98ea2a2c87b71b43ad02f1f0996a26af"
+},
+"24ef5665e030": {
+"file": "24ef5665e030.opus",
+"keys": [
+"year_n{n=9}"
+],
+"learner": true,
+"r": "9730ef1ada9d",
+"s": 1.95,
+"sha256": "sha256:7cd003fcf12c94a4b50808ad7d7bac452d1364095207c27ddf9f038b66144730"
+},
+"24facc2f509d": {
+"file": "24facc2f509d.opus",
+"keys": [
+"remove_yes"
+],
+"learner": true,
+"r": "acb19a4788ea",
+"s": 1.64,
+"sha256": "sha256:b4565041b0715dd22f7bbee790256f0a94797d427ac8d60638644695e30806e2"
+},
+"2530d69d0ebb": {
+"file": "2530d69d0ebb.opus",
+"keys": [
+"cert_missing"
+],
+"learner": true,
+"r": "ef2b78859360",
+"s": 11.91,
+"sha256": "sha256:e16f3f0cd40facdcf5417fa0b9a1d972a60fec9a765c8f73b3904c8d1734dac0"
+},
+"25683a28c50a": {
+"file": "25683a28c50a.opus",
+"keys": [
+"year_n{n=10}"
+],
+"learner": true,
+"r": "a48747bb7d41",
+"s": 1.67,
+"sha256": "sha256:7343925f33e6ef3a041bc038033a760be173468adf52fa47eb52a4d5ac54e2a4"
+},
+"25b5ff4c46d4": {
+"file": "25b5ff4c46d4.opus",
+"keys": [
+"study_note"
+],
+"learner": true,
+"r": "24f474454950",
+"s": 5.01,
+"sha256": "sha256:7469d215d64fcd18c33db4b212958814d797d9a8377db524253bf4eeb6c51e81"
+},
+"25ebb11e561f": {
+"file": "25ebb11e561f.opus",
+"keys": [
+"day_no"
+],
+"learner": true,
+"r": "f7aadefe514a",
+"s": 2.44,
+"sha256": "sha256:437d7d94a9772a42cba5b7e295b3833f0d0cffba2fe2994227affee3f4c68fb2"
+},
+"25fc58ccaea0": {
+"file": "25fc58ccaea0.opus",
+"keys": [
+"read_all"
+],
+"learner": true,
+"r": "43ed1c6ba31d",
+"s": 0.92,
+"sha256": "sha256:cd3d1436543aff7e1afc8a4ddd7a624a10d7efa8168ff80505231853a3af7be8"
+},
+"260a7a50f805": {
+"file": "260a7a50f805.opus",
+"keys": [
+"on_paper"
+],
+"learner": true,
+"r": "206495b0d306",
+"s": 3.11,
+"sha256": "sha256:690f932475297afb4ac830942f67545d5ded645eed42895fbdcc4e2381fe0eb9"
+},
+"263e28331676": {
+"file": "263e28331676.opus",
+"keys": [
+"day_over"
+],
+"learner": true,
+"r": "450ff98594c7",
+"s": 2.66,
+"sha256": "sha256:b717997702fae69b149378aa2f0fff6e9262f4405d19433f4c71986125ea98fa"
+},
+"26541b518c4c": {
+"file": "26541b518c4c.opus",
+"keys": [
+"tries_left{n=10}"
+],
+"learner": true,
+"r": "84a27095ab24",
+"s": 2.22,
+"sha256": "sha256:78a21bac34fa484eff94ddbbbbcc19cb8f27a3eb7530ee579d39ae5750771aff"
+},
+"26ba3a59f816": {
+"file": "26ba3a59f816.opus",
+"keys": [
+"voice_done"
+],
+"learner": true,
+"r": "abf20b0dfdc8",
+"s": 3.51,
+"sha256": "sha256:4a56ff514d6894ceb92cf4dc3593bb0249767525ee9845653c069581c93a52d7"
+},
+"27235d79d900": {
+"file": "27235d79d900.opus",
+"keys": [
+"tone_2"
+],
+"learner": true,
+"r": "001a00346b5c",
+"s": 2.7,
+"sha256": "sha256:e563535b9ecb8125ab07b9eec9e526092d1de5f51efefc3c305b191235c50f79"
+},
+"2753fe5a2034": {
+"file": "2753fe5a2034.opus",
+"keys": [
+"on_screen"
+],
+"learner": true,
+"r": "78e0b51dd9c6",
+"s": 2.37,
+"sha256": "sha256:8e653d27eaea0b4189cb2227083e7438b372c041030b56036fbecefc63141a93"
+},
+"2758be46de90": {
+"file": "2758be46de90.opus",
+"keys": [
+"quran_repeat_n{n=7}"
+],
+"learner": true,
+"r": "16fbf1d058c4",
+"s": 3.91,
+"sha256": "sha256:e61921a64b8b6475c22b2ed75e34add18e9a4900065074401d9adca16895573d"
+},
+"275b03811a64": {
+"file": "275b03811a64.opus",
+"keys": [
+"flash"
+],
+"learner": true,
+"r": "c5b9e81f9d35",
+"s": 0.64,
+"sha256": "sha256:040cc5586d8b7ba86f21ba071e3e82473e41c8671b70263d1a77607990205db1"
+},
+"27cad4d0116d": {
+"file": "27cad4d0116d.opus",
+"keys": [
+"change_year"
+],
+"learner": true,
+"r": "6c555de9445d",
+"s": 3.21,
+"sha256": "sha256:006dc5ee2e97dd94b187e9979a395c6ef12e31ee6a2dd700242872cf568b3de5"
+},
+"27e89cede131": {
+"file": "27e89cede131.opus",
+"keys": [
+"live_floor"
+],
+"learner": true,
+"r": "d1ebd473cde5",
+"s": 3.61,
+"sha256": "sha256:9749c8f04c2e007cfd425fe628d53014a97aefe8c98cb07a5e0ae0f069fdf7c6"
+},
+"282bc7806603": {
+"file": "282bc7806603.opus",
+"keys": [
+"quran_searched{n=4}"
+],
+"learner": true,
+"r": "3038422c52bc",
+"s": 4.51,
+"sha256": "sha256:81d5d36058ec206b72260fd756ab7b036e1639fb082046099fb1a82a060c087f"
+},
+"2853bccb88ef": {
+"file": "2853bccb88ef.opus",
+"keys": [
+"uni_guides"
+],
+"learner": true,
+"r": "8e7642c33409",
+"s": 1.12,
+"sha256": "sha256:adf5e225cbdefb7e3b88be73bf5fed2c5af9a75321a92a8d8a3a9f6d59e90789"
+},
+"28ec0053900d": {
+"file": "28ec0053900d.opus",
+"keys": [
+"printer_busy"
+],
+"learner": true,
+"r": "af1e155bb69c",
+"s": 4.61,
+"sha256": "sha256:208a0ae5890847be7fbc7dd0f6e6f550428e865e16e32c27a898494f0184295d"
+},
+"28fb712c0b62": {
+"file": "28fb712c0b62.opus",
+"keys": [
+"reset_waiting{n=10}"
+],
+"learner": true,
+"r": "d7a38e305443",
+"s": 7.21,
+"sha256": "sha256:5b7dfb09fe01940f5ca396e54950936fb4868b7ac1985c93aa6e2edc3bb14d90"
+},
+"28fca5fc1501": {
+"file": "28fca5fc1501.opus",
+"keys": [
+"get_none"
+],
+"learner": true,
+"r": "662bcd1eaa36",
+"s": 7.01,
+"sha256": "sha256:751c7d278cb29ff204dcc027efdd7c162810cb6536b7193a0dd04f3b75bda601"
+},
+"29e225075e06": {
+"file": "29e225075e06.opus",
+"keys": [
+"look_again{n=12}"
+],
+"learner": true,
+"r": "7d899170050d",
+"s": 2.6,
+"sha256": "sha256:fa2d0dcb056c237b66ad627014f95a4f93bbc8c9a09d271acff2d3c1e71ce516"
+},
+"29e78d8a15e5": {
+"file": "29e78d8a15e5.opus",
+"keys": [
+"lock_wait{n=3}"
+],
+"learner": true,
+"r": "da6130cf9150",
+"s": 5.91,
+"sha256": "sha256:c9e4d3de61d39ab4a0b7cf2d40e93cbaeb457f39a2753dd18a4901799ed291e3"
+},
+"2a484d62f6d6": {
+"file": "2a484d62f6d6.opus",
+"keys": [
+"contest_join"
+],
+"learner": true,
+"r": "0f8c13fcd5d7",
+"s": 2.39,
+"sha256": "sha256:9dd2834ce724bc68fa235db2dd47cacbc42dc64159217c30cd82954a35d9c558"
+},
+"2add7baec813": {
+"file": "2add7baec813.opus",
+"keys": [
+"job_failed"
+],
+"learner": true,
+"r": "50bb9710fe90",
+"s": 0.73,
+"sha256": "sha256:713936e6bceccc2ff196a7af26484c092d5b993ff35e97ba16378dbe4e18320b"
+},
+"2b8c1083154b": {
+"file": "2b8c1083154b.opus",
+"keys": [
+"net_waiting{n=5}"
+],
+"learner": true,
+"r": "9b7fd9fb6336",
+"s": 2.83,
+"sha256": "sha256:d8a156b54c01e6c68a2186c62ff3fcc629a736a87e66910544d71d852c6a79b2"
+},
+"2b9e5522dd3f": {
+"file": "2b9e5522dd3f.opus",
+"keys": [
+"about"
+],
+"learner": true,
+"r": "fa65d7c49ae5",
+"s": 1.67,
+"sha256": "sha256:4f66de4e3559fd571e702bda93c7e684a0f2f45631125763c46ae4737f12fa80"
+},
+"2b9ea225d51e": {
+"file": "2b9ea225d51e.opus",
+"keys": [
+"quran_searched{n=1}"
+],
+"learner": true,
+"r": "8576ffbe0cc7",
+"s": 4.01,
+"sha256": "sha256:4726e8547047865bfaf7d9368d81bae8e6dbc7ee3005532aa09a6adfd8065474"
+},
+"2bcee34ea268": {
+"file": "2bcee34ea268.opus",
+"keys": [
+"add_child",
+"welcome_kicker"
+],
+"learner": true,
+"r": "d761306d314c",
+"s": 2.19,
+"sha256": "sha256:e2156c392028c925e6695ce6a976d17a964a44166cc3adaadaf9f9d7fd3f1144"
+},
+"2bf289784a76": {
+"file": "2bf289784a76.opus",
+"keys": [
+"someone_else"
+],
+"learner": true,
+"r": "09bd7fef417f",
+"s": 1.52,
+"sha256": "sha256:b6c4970cbaacbf2a0c3c8e2f98c252e4d0ffa4b8db7cc70a876dd0196108f9be"
+},
+"2c07e560289a": {
+"file": "2c07e560289a.opus",
+"keys": [
+"type_answers"
+],
+"learner": true,
+"r": "30c2460cd76f",
+"s": 2.59,
+"sha256": "sha256:cb244d3db07939e19e3ec58c36478dc7783048a4ba30c0e9752e4bf6c9fd26a4"
+},
+"2c5b8c450cd1": {
+"file": "2c5b8c450cd1.opus",
+"keys": [
+"made_full{n=10}"
+],
+"learner": true,
+"r": "b78d063d60b6",
+"s": 4.81,
+"sha256": "sha256:5553f6b84b0e7ed3674f1d9095eb397ae49d259f46df756a93b4b2ce49ef5281"
+},
+"2cbd4925cf3c": {
+"file": "2cbd4925cf3c.opus",
+"keys": [
+"quran_notes{n=1}"
+],
+"learner": true,
+"r": "21279a772908",
+"s": 1.98,
+"sha256": "sha256:8dde8315b10357bb3c55674f13440595d820c51f727e201f085b4831589c143f"
+},
+"2d1e22d7343d": {
+"file": "2d1e22d7343d.opus",
+"keys": [
+"cert_mine"
+],
+"learner": true,
+"r": "e6cded14785f",
+"s": 1.42,
+"sha256": "sha256:82b023dc47b8a5402f9c8d614656ed4fadfabe36712743f01b0f2100204cdbeb"
+},
+"2e66e49c8ecc": {
+"file": "2e66e49c8ecc.opus",
+"keys": [
+"study_left{n=6}"
+],
+"learner": true,
+"r": "b5b8c2422980",
+"s": 2.77,
+"sha256": "sha256:7445d9c9338c6daf312cb3ced2240a315d850dc9832a392a022b5c4bb74ac971"
+},
+"2f3990370722": {
+"file": "2f3990370722.opus",
+"keys": [
+"v_names"
+],
+"learner": true,
+"r": "b734d25638da",
+"s": 10.21,
+"sha256": "sha256:8b504ed004a19b70f5b1d614a781f907ce2d4f2f154a55207de0502d0ea00005"
+},
+"2f56cbbd5ec6": {
+"file": "2f56cbbd5ec6.opus",
+"keys": [
+"plan_pick"
+],
+"learner": true,
+"r": "6a5956b8f408",
+"s": 2.17,
+"sha256": "sha256:e1f7fe93e3a39d50b69346f62916bca0175777cfc533874965687be0f4b7f1b2"
+},
+"2f781c7d34ce": {
+"file": "2f781c7d34ce.opus",
+"keys": [
+"year_n{n=12}"
+],
+"learner": true,
+"r": "93bd3c5a6c1b",
+"s": 2.23,
+"sha256": "sha256:e760ed73ffec5ba0630b1f870e2e9a1fa034e20bd92ef6385a35fbbcaa613458"
+},
+"2fb0b72c695e": {
+"file": "2fb0b72c695e.opus",
+"keys": [
+"voice_ps"
+],
+"learner": true,
+"r": "cbdf03cd98b6",
+"s": 5.81,
+"sha256": "sha256:637765f9807dded98a54b16b3062dd92b41d372ecb4eb0b76ea6559bd7870ce5"
+},
+"2fd6f4af08fa": {
+"file": "2fd6f4af08fa.opus",
+"keys": [
+"made_not_sent"
+],
+"learner": true,
+"r": "d0c8cfce7e59",
+"s": 3.11,
+"sha256": "sha256:b546cbd0c1ebafd5c477e2c940d8f9b8611e6544168427a750017ece248b294d"
+},
+"300c521ebaaf": {
+"file": "300c521ebaaf.opus",
+"keys": [
+"code_bad"
+],
+"learner": true,
+"r": "a02badf115a4",
+"s": 4.41,
+"sha256": "sha256:9da0ad3e1ddbb25a2d4cc4732a186df7d1e655ffb89b0bb2646121f4fd18c625"
+},
+"30550b507395": {
+"file": "30550b507395.opus",
+"keys": [
+"recording"
+],
+"learner": true,
+"r": "8050d5d32503",
+"s": 4.71,
+"sha256": "sha256:6002b39f3b1469c4be37c44f1514d576040f50e37bbf49b33796f312b5e5cc47"
+},
+"30db1658ca7a": {
+"file": "30db1658ca7a.opus",
+"keys": [
+"slow_down"
+],
+"learner": true,
+"r": "2ce29a84e4b1",
+"s": 3.41,
+"sha256": "sha256:6fbcb5b03221687427b7ae6210fb5915f6c44af10265e61c9dc3201a7d9a1101"
+},
+"30fd3c955416": {
+"file": "30fd3c955416.opus",
+"keys": [
+"made_count{n=7}"
+],
+"learner": true,
+"r": "c1cee73df4af",
+"s": 2.55,
+"sha256": "sha256:9bd01dd64de7ccb7261f7ad8b832ead72bb3d15841778cc2f13d1dc7a07812da"
+},
+"3121226d30fe": {
+"file": "3121226d30fe.opus",
+"keys": [
+"live_lost"
+],
+"learner": true,
+"r": "7e1b5a02d81d",
+"s": 3.21,
+"sha256": "sha256:ea51c1327c4186c47e28979bdbda3ede7cc2d0007e89002c49e0c38eab0b752c"
+},
+"3139397bff8d": {
+"file": "3139397bff8d.opus",
+"keys": [
+"secondary"
+],
+"learner": true,
+"r": "6fecb587c9b7",
+"s": 2.95,
+"sha256": "sha256:0b45635b89e7b2f0e6234242fa59cd5a76f2964a47211030f5ff6ed6997530c8"
+},
+"313bf39f3710": {
+"file": "313bf39f3710.opus",
+"keys": [
+"quran_none"
+],
+"learner": true,
+"r": "6dd953699665",
+"s": 2.74,
+"sha256": "sha256:10babf4e5e446ae92eee1f8459ddcba17e4053cd907f9f7c0bfb15f113be77fd"
+},
+"313cbecb4dd3": {
+"file": "313cbecb4dd3.opus",
+"keys": [
+"close"
+],
+"learner": true,
+"r": "9e78dd1a3c52",
+"s": 0.89,
+"sha256": "sha256:35da8f261bc0e99cdc450a6f88db8cc628a3d59137888469e2c2a85c636cb3cd"
+},
+"31f412196484": {
+"file": "31f412196484.opus",
+"keys": [
+"tone_3"
+],
+"learner": true,
+"r": "dc3e35cf5cb3",
+"s": 2.85,
+"sha256": "sha256:15f0c3b64afabf27046cfc2d373cd10f13b2bff1d07030fe24f1ad1015720e5f"
+},
+"31fb2f685c67": {
+"file": "31fb2f685c67.opus",
+"keys": [
+"need_pin"
+],
+"learner": true,
+"r": "89f424ac2677",
+"s": 4.01,
+"sha256": "sha256:26d7f698745941431ad457f6d6e065c159901c31300b04f178829b54662ee013"
+},
+"330fc36540aa": {
+"file": "330fc36540aa.opus",
+"keys": [
+"locked"
+],
+"learner": true,
+"r": "f06e0c5c2e79",
+"s": 1.9,
+"sha256": "sha256:09ded6543495dd5edbb753240519e844fae9f614c4003276b3c914a7fb01b8d6"
+},
+"33cfa7b2b682": {
+"file": "33cfa7b2b682.opus",
+"keys": [
+"lock_code_link"
+],
+"learner": true,
+"r": "f554a15b42b9",
+"s": 2.54,
+"sha256": "sha256:19843aaf015421f01575b21769b139e27b99370dcffd62cd29eec9dd2a868813"
+},
+"33d7bd7d09ac": {
+"file": "33d7bd7d09ac.opus",
+"keys": [
+"made_off"
+],
+"learner": true,
+"r": "1d614b3a38f4",
+"s": 3.41,
+"sha256": "sha256:a7ba027adadae37d0d0dae28180a28c41a1aed65372019c61b9948aebb74e644"
+},
+"36e297a92bcc": {
+"file": "36e297a92bcc.opus",
+"keys": [
+"day_card"
+],
+"learner": true,
+"r": "5ea4300555cf",
+"s": 9.31,
+"sha256": "sha256:69f9849dea4fb5e04e3dfa9c7a6e42acb627b2f2c665bc218ada15056ec28a13"
+},
+"372ad3692d6a": {
+"file": "372ad3692d6a.opus",
+"keys": [
+"answer_saved"
+],
+"learner": true,
+"r": "9a3447141983",
+"s": 2.63,
+"sha256": "sha256:35c4b000531c47744442c26251bda3679eee356190d04dcd22392d55ed770541"
+},
+"376858528b7f": {
+"file": "376858528b7f.opus",
+"keys": [
+"admin.code_once",
+"admin.code_row",
+"code_title",
+"teacher.code"
+],
+"learner": true,
+"r": "a3e0a671f189",
+"s": 1.13,
+"sha256": "sha256:ee6587977dc39f42eccdb919a06bbe209b43fcc2639079ff11d2dfd4aa12eb24"
+},
+"3850cb4adc9e": {
+"file": "3850cb4adc9e.opus",
+"keys": [
+"use_anyway"
+],
+"learner": true,
+"r": "7bc01a31ebd8",
+"s": 1.99,
+"sha256": "sha256:f6e6bd626833f67ee715d0005a97847005624b57c449d4e91de21bdb7e89ea19"
+},
+"389e7c35002a": {
+"file": "389e7c35002a.opus",
+"keys": [
+"look_again{n=1}"
+],
+"learner": true,
+"r": "54f88c7fa11d",
+"s": 4.51,
+"sha256": "sha256:3618a6f533774e61cd361fe0bdd62332862cec434d8f04f237717cf5d94b0025"
+},
+"38e8070f28fe": {
+"file": "38e8070f28fe.opus",
+"keys": [
+"all_subjects"
+],
+"learner": true,
+"r": "4c158ee8ee14",
+"s": 1.53,
+"sha256": "sha256:39e61eccd6303ee5bac9a11ff401c7ea1dbb527ae656cc08a1043128d181de42"
+},
+"3910fbbcd3ef": {
+"file": "3910fbbcd3ef.opus",
+"keys": [
+"net_waiting{n=10}"
+],
+"learner": true,
+"r": "89c8098d6fed",
+"s": 2.42,
+"sha256": "sha256:7cee3abd73e70c1b476134a3dc4e6cfe58de0803a4910ce60494ecae8b76cef3"
+},
+"391fec881124": {
+"file": "391fec881124.opus",
+"keys": [
+"lock_remove"
+],
+"learner": true,
+"r": "511a77428f39",
+"s": 2.4,
+"sha256": "sha256:29f5633ddfae55750da984bb37d4b4aa755d3aeffa952d10f195c20b6157500d"
+},
+"39c62d38b9c1": {
+"file": "39c62d38b9c1.opus",
+"keys": [
+"badge_rules"
+],
+"learner": true,
+"r": "85aa6738979d",
+"s": 0.8,
+"sha256": "sha256:8f1a687e7ad655d31652a5165cf83649f23fcbbd90326f17404120691d2056ab"
+},
+"39f11c5e7f7b": {
+"file": "39f11c5e7f7b.opus",
+"keys": [
+"quran_searched{n=11}"
+],
+"learner": true,
+"r": "6acde33a704c",
+"s": 3.71,
+"sha256": "sha256:e81fcd6af80d36f74a2611f81cc8364e73ef51b6d0bd2fb155815e752b3af330"
+},
+"3a232e657427": {
+"file": "3a232e657427.opus",
+"keys": [
+"switch_yes"
+],
+"learner": true,
+"r": "955ef4f85924",
+"s": 1.87,
+"sha256": "sha256:ae280c9cfc6ac65a1f55cdfdc7f861c2ac58b58fefa322ef0a2de82dfa8b25bd"
+},
+"3b15ef5a6e60": {
+"file": "3b15ef5a6e60.opus",
+"keys": [
+"credits"
+],
+"learner": true,
+"r": "8ab533d05cc1",
+"s": 0.83,
+"sha256": "sha256:6384723fed1ca8f3a491d5e59b57f9245435df73552a0a74a18b805b005af111"
+},
+"3b34dd26f862": {
+"file": "3b34dd26f862.opus",
+"keys": [
+"wait_consent"
+],
+"learner": true,
+"r": "f497442e8810",
+"s": 2.19,
+"sha256": "sha256:94962dcf6198c169c194f0b205d0771b774cc5861763535e5dbb26bc6f81f570"
+},
+"3b75d661ed35": {
+"file": "3b75d661ed35.opus",
+"keys": [
+"lock_again"
+],
+"learner": true,
+"r": "dae13e6b8662",
+"s": 1.22,
+"sha256": "sha256:25cf9e9f9efd2d3727ef6467156a94ffb0823c90e3ceb1e62c68c1f610e16522"
+},
+"3b8f31144645": {
+"file": "3b8f31144645.opus",
+"keys": [
+"quran_play_all"
+],
+"learner": true,
+"r": "c47990eac19b",
+"s": 1.47,
+"sha256": "sha256:7b9bbe197d4c694f0e91e945b4aacc42d9635ab2e498c2216651104d6ecb690d"
+},
+"3b99790794bf": {
+"file": "3b99790794bf.opus",
+"keys": [
+"minutes{n=5}"
+],
+"learner": true,
+"r": "c92261018250",
+"s": 1.03,
+"sha256": "sha256:3160797a9e27bf65d50e3bb7c9cfb417f5d97d4b0d88bbc8507a649045bed3a7"
+},
+"3c0d51dcb104": {
+"file": "3c0d51dcb104.opus",
+"keys": [
+"quran_repeat_n{n=2}"
+],
+"learner": true,
+"r": "3a970e65ed01",
+"s": 3.71,
+"sha256": "sha256:bfb33c29b528aba2356134ce0b613809efa3c2c067f9a779b5d67facb8aebd91"
+},
+"3c12d157fc9c": {
+"file": "3c12d157fc9c.opus",
+"keys": [
+"wrong"
+],
+"learner": true,
+"r": "b6c9b07b57c3",
+"s": 1.91,
+"sha256": "sha256:121386ce3f78e17e129ecc59164fcda7e9e4bc33bc368566787dee8b0e625dbb"
+},
+"3c854691d805": {
+"file": "3c854691d805.opus",
+"keys": [
+"welcome_title"
+],
+"learner": true,
+"r": "5c8f735e993c",
+"s": 1.78,
+"sha256": "sha256:b4f38f78f5980efc4be91cb58a400aa3170051352005c520c5e61d5618333149"
+},
+"3cc5d93eb36f": {
+"file": "3cc5d93eb36f.opus",
+"keys": [
+"consent:online-2026-10b:sees"
+],
+"learner": true,
+"r": "39efee8ff525",
+"s": 25.01,
+"sha256": "sha256:55bc5aad3c2b12beedac8983f2887a4623706a542b12f547c9edcc49d5ce63f7"
+},
+"3cdb81d2a483": {
+"file": "3cdb81d2a483.opus",
+"keys": [
+"plan_miss_here"
+],
+"learner": true,
+"r": "8cfe57e9b568",
+"s": 3.61,
+"sha256": "sha256:8550d1976b55cf398e9a4804199ad2d50733b10464fdbad375dc4f26e6c80267"
+},
+"3d26abec87a7": {
+"file": "3d26abec87a7.opus",
+"keys": [
+"study_left{n=7}"
+],
+"learner": true,
+"r": "d214ec266b6b",
+"s": 4.91,
+"sha256": "sha256:a05af43d6ace334a5f48482507c225df625706de8a56c94b0e4bad3e5cb9709e"
+},
+"3d73c0e55264": {
+"file": "3d73c0e55264.opus",
+"keys": [
+"quran_stop",
+"speak_stop"
+],
+"learner": true,
+"r": "841543d9daa1",
+"s": 0.8,
+"sha256": "sha256:8a843bb4d5ee30163ffde03d78828487cc499b5d94784218d4ea65c85e21a87b"
+},
+"3d8cd896198f": {
+"file": "3d8cd896198f.opus",
+"keys": [
+"consent_none"
+],
+"learner": true,
+"r": "55b24ba741a7",
+"s": 5.21,
+"sha256": "sha256:de9dd114556838436d836d8020ebe701cdfdc68f72a86eb6eeba62bf60944369"
+},
+"3e069ba6ba7b": {
+"file": "3e069ba6ba7b.opus",
+"keys": [
+"year_n{n=4}"
+],
+"learner": true,
+"r": "dd828248a424",
+"s": 2.32,
+"sha256": "sha256:66c6fceb2364d5b613d5dd0830b2fbc5da13198b90cde277c9643afb71e5805f"
+},
+"3e0b956dc4b0": {
+"file": "3e0b956dc4b0.opus",
+"keys": [
+"quran_searched{n=5}"
+],
+"learner": true,
+"r": "50c5a868dfbc",
+"s": 4.01,
+"sha256": "sha256:f23de6dac69afb0f2f65a7753e7f38dd10ea61e3f7f40175b9673440a9136c3a"
+},
+"3ec89a9b4941": {
+"file": "3ec89a9b4941.opus",
+"keys": [
+"voice_bad_file"
+],
+"learner": true,
+"r": "dbe9edf31663",
+"s": 2.71,
+"sha256": "sha256:9aa373125d2e6bd39a9476d949950d62e063a84a82362e9da7f74ececc45554f"
+},
+"3f491f31d977": {
+"file": "3f491f31d977.opus",
+"keys": [
+"was_it_right"
+],
+"learner": true,
+"r": "928ae9fe25bf",
+"s": 0.82,
+"sha256": "sha256:a462fc5a0aee0f5b2250cdd5a105bdc169a5e6ed174906c7619967e789c3f57f"
+},
+"3f76ae85ed9e": {
+"file": "3f76ae85ed9e.opus",
+"keys": [
+"admin.k_break",
+"block_break"
+],
+"learner": true,
+"r": "47696f237775",
+"s": 0.72,
+"sha256": "sha256:7f22434790e07d2ca9073b48aff87012436f5fc61fa04e1eb30e1ef65d0a3eb1"
+},
+"3fa74c240025": {
+"file": "3fa74c240025.opus",
+"keys": [
+"error_title"
+],
+"learner": true,
+"r": "8bbdba9be1e1",
+"s": 3.31,
+"sha256": "sha256:a0ded0e16af8727cfaf245eb67a720f0209182bb4dec1f2c0ebacb7e24685be9"
+},
+"3ff5a0302619": {
+"file": "3ff5a0302619.opus",
+"keys": [
+"credits_none"
+],
+"learner": true,
+"r": "6baf927bcf60",
+"s": 4.81,
+"sha256": "sha256:16dea313241cea39735f84a186d662f82045dab1753940095f079e883bca4793"
+},
+"405c8179006c": {
+"file": "405c8179006c.opus",
+"keys": [
+"print_new"
+],
+"learner": true,
+"r": "2f05207e38c2",
+"s": 1.63,
+"sha256": "sha256:6e773ff9c91fa41a3bb61fecaafb598e39509120d00d3a0d97da30ff133aabec"
+},
+"408e5a59fc57": {
+"file": "408e5a59fc57.opus",
+"keys": [
+"track_reader"
+],
+"learner": true,
+"r": "39bd91cf3bb6",
+"s": 1.97,
+"sha256": "sha256:10f0f77042c52aef69d44d7a01986f7197890ad013f28ed8885db30f444534f0"
+},
+"40a8af90748c": {
+"file": "40a8af90748c.opus",
+"keys": [
+"printed"
+],
+"learner": true,
+"r": "bfc36add424d",
+"s": 3.71,
+"sha256": "sha256:879e43dd56145e94af0d18ca01e262cc087ca7cb065cd1f8788813a0e3310ede"
+},
+"40ba2984e0c5": {
+"file": "40ba2984e0c5.opus",
+"keys": [
+"made_ask_teacher"
+],
+"learner": true,
+"r": "9cebee5db98d",
+"s": 2.96,
+"sha256": "sha256:35ccea024a7b5cca1c26fcb345286a5fe83d1820527d44e0d9cf4edf85bba630"
+},
+"41039fc6d55e": {
+"file": "41039fc6d55e.opus",
+"keys": [
+"live_join"
+],
+"learner": true,
+"r": "b978151aa74b",
+"s": 1.1,
+"sha256": "sha256:be40f7d2416fe3ec302c4e0560b84a9e693a74ff0232c198655218aa073a6a9c"
+},
+"41292060f432": {
+"file": "41292060f432.opus",
+"keys": [
+"links_title"
+],
+"learner": true,
+"r": "387706f39533",
+"s": 6.21,
+"sha256": "sha256:e2bb24d928db8c7147b7f096439395c777a5fed4f067b293e582cec210e5955f"
+},
+"42a75939417c": {
+"file": "42a75939417c.opus",
+"keys": [
+"minutes{n=11}"
+],
+"learner": true,
+"r": "2811fd2b7cb1",
+"s": 2.36,
+"sha256": "sha256:7cf444d35d498d7fb48f0165ebd0e6be2188519856507f2b6ac83229ecd3b101"
+},
+"42ad50d2ad55": {
+"file": "42ad50d2ad55.opus",
+"keys": [
+"study_left{n=5}"
+],
+"learner": true,
+"r": "81be04f9e18c",
+"s": 2.69,
+"sha256": "sha256:3984226b3d43422583d095972c369ddf7e0789d35c8b2359e1a4393a6ccc5d42"
+},
+"42b989c1fe3a": {
+"file": "42b989c1fe3a.opus",
+"keys": [
+"net_stopped"
+],
+"learner": true,
+"r": "8ac965082b0c",
+"s": 4.81,
+"sha256": "sha256:94bd092becb5e757d4f3001df0afd8127f07ea6f99a57555963308de87cd182c"
+},
+"445688b2295b": {
+"file": "445688b2295b.opus",
+"keys": [
+"quran_found{n=10}",
+"quran_verses{n=10}"
+],
+"learner": true,
+"r": "72968cb55392",
+"s": 1.97,
+"sha256": "sha256:9ef9041f9e49dbf9f01b7016ae6e360eac698bbd015f7d6196bce06075a1c611"
+},
+"44d23ad70cd8": {
+"file": "44d23ad70cd8.opus",
+"keys": [
+"sheets"
+],
+"learner": true,
+"r": "09c897af2b93",
+"s": 0.98,
+"sha256": "sha256:7daced6d693d9043a51b25fbbfbf9b73a624f15092116d8222e282886840ba0b"
+},
+"44d8e03f9263": {
+"file": "44d8e03f9263.opus",
+"keys": [
+"hear"
+],
+"learner": true,
+"r": "d1ad1a026d31",
+"s": 0.85,
+"sha256": "sha256:6199127bdbf01385201bf4edc40b9b18d83cb5df54bc6ed48a9c07d08fa8c8b2"
+},
+"44e03f0113f2": {
+"file": "44e03f0113f2.opus",
+"keys": [
+"quran_find"
+],
+"learner": true,
+"r": "e21c27615b86",
+"s": 7.41,
+"sha256": "sha256:55ddfb2c6086781c098a94a2902ee3968bc0d4ba0098fb03e6ecab90b82eb76d"
+},
+"4524a4728ed0": {
+"file": "4524a4728ed0.opus",
+"keys": [
+"send_hub"
+],
+"learner": true,
+"r": "da5edb16b3fa",
+"s": 6.11,
+"sha256": "sha256:b4ff3bc98e94db8157031f73af184277ef0943f92658cbe6dd88ee9afa53823d"
+},
+"452ad5da6908": {
+"file": "452ad5da6908.opus",
+"keys": [
+"look_again{n=5}"
+],
+"learner": true,
+"r": "c12d833968b6",
+"s": 2.92,
+"sha256": "sha256:de5e12e2866fb6273da9e66d701735f13f9e65b9141f48bdd2f47466f3c5c49d"
+},
+"4615afdae40a": {
+"file": "4615afdae40a.opus",
+"keys": [
+"waiting_connect"
+],
+"learner": true,
+"r": "5e3e81e2fe89",
+"s": 2.38,
+"sha256": "sha256:351270432e9769803aee571f35c9cb947e0a0b11bc7ef0b5bf06600acb758d68"
+},
+"467f597c2959": {
+"file": "467f597c2959.opus",
+"keys": [
+"gallery_note"
+],
+"learner": true,
+"r": "b5744ee8c8c6",
+"s": 8.21,
+"sha256": "sha256:918e2a3a5be3a01bf17891b4de7b4b8473f59a88767265b07d4ac5e463ecd652"
+},
+"46f873fb58fd": {
+"file": "46f873fb58fd.opus",
+"keys": [
+"made_full{n=4}"
+],
+"learner": true,
+"r": "c74caac06d52",
+"s": 5.61,
+"sha256": "sha256:02bab0f96a43e9eb9ecaf42cef194f3df5849440d4fec2faff55bfa4a14d72cb"
+},
+"4758bc0af730": {
+"file": "4758bc0af730.opus",
+"keys": [
+"speak_voice"
+],
+"learner": true,
+"r": "8322abc46007",
+"s": 1.43,
+"sha256": "sha256:0b709e565e78db598309780806ffb327f6f3b8fd3e5763c85677a60c7486cffd"
+},
+"47733c601e55": {
+"file": "47733c601e55.opus",
+"keys": [
+"reset_started"
+],
+"learner": true,
+"r": "a7d9d72c6fac",
+"s": 9.71,
+"sha256": "sha256:dacbd2362bce7679b04de92a9a82809ffc4e5120be017bba720b46eb2812233c"
+},
+"477497808c45": {
+"file": "477497808c45.opus",
+"keys": [
+"plan_here{n=8}"
+],
+"learner": true,
+"r": "fdf6d76a216a",
+"s": 4.21,
+"sha256": "sha256:41d7604397182340a59c4ded04546549027d3a384d86372e1e0a385447287b06"
+},
+"48039b918534": {
+"file": "48039b918534.opus",
+"keys": [
+"study_left{n=2}"
+],
+"learner": true,
+"r": "86337c557706",
+"s": 2.15,
+"sha256": "sha256:a1fe87faa57fa8d61f88db8d0bad97d1604545b04a7c15d8a6d93b54ea2756f3"
+},
+"4830651e44b6": {
+"file": "4830651e44b6.opus",
+"keys": [
+"made_not_yet",
+"speak_not_yet"
+],
+"learner": true,
+"r": "f1c6a99ab162",
+"s": 1.68,
+"sha256": "sha256:ea05ff3f82a2030adab21f99e1cca8a0c2c79f6c19dc2b661ef6a65fc4ae1aa4"
+},
+"486a938ed77d": {
+"file": "486a938ed77d.opus",
+"keys": [
+"tries_left{n=3}"
+],
+"learner": true,
+"r": "4c475b4d55b0",
+"s": 5.21,
+"sha256": "sha256:3a563245051ea564b728719129ef2f752963baad753016bd496614e5e8e81a0a"
+},
+"486ca9ccc704": {
+"file": "486ca9ccc704.opus",
+"keys": [
+"day_done"
+],
+"learner": true,
+"r": "c45056f931e8",
+"s": 3.21,
+"sha256": "sha256:02c40810197b44af6ecbc262af5bfe497b2230cb26159c29bc9490024a95d16b"
+},
+"48a1571d9ad2": {
+"file": "48a1571d9ad2.opus",
+"keys": [
+"year_n{n=7}"
+],
+"learner": true,
+"r": "90d29762ca16",
+"s": 1.67,
+"sha256": "sha256:67c487bff986fce24a8eac2d4c42136c68395bcedeb81d52b470682e2efdfbd1"
+},
+"48c35b129dc4": {
+"file": "48c35b129dc4.opus",
+"keys": [
+"quran_meaning"
+],
+"learner": true,
+"r": "c16ca7783d50",
+"s": 1.77,
+"sha256": "sha256:ea6fe43cd6e7834197eb0f403ff17ce0ad755fcaa6ca50dd93609a54e8246b7b"
+},
+"4a3ca6185288": {
+"file": "4a3ca6185288.opus",
+"keys": [
+"lock_why"
+],
+"learner": true,
+"r": "915f13e58c7b",
+"s": 6.11,
+"sha256": "sha256:56335cac226f168635cd8122b814d20b7c31a9fcd567dec3db93c0094eadc13a"
+},
+"4a3d7481821b": {
+"file": "4a3d7481821b.opus",
+"keys": [
+"start_time"
+],
+"learner": true,
+"r": "a643b62361be",
+"s": 0.99,
+"sha256": "sha256:bb9c13a617652b0de1d9b805a440ce1178a4b756b4880387dbb5bf06bb572c4f"
+},
+"4ac0ed0af37c": {
+"file": "4ac0ed0af37c.opus",
+"keys": [
+"university"
+],
+"learner": true,
+"r": "270b36280f9b",
+"s": 1.05,
+"sha256": "sha256:09ff29300078fa9ab5ba642dcf91f39f420279111e55716bd9115f5d8c499681"
+},
+"4ad5ed6fa27f": {
+"file": "4ad5ed6fa27f.opus",
+"keys": [
+"ask_my_teacher"
+],
+"learner": true,
+"r": "93df7b2bdaa2",
+"s": 2.16,
+"sha256": "sha256:600327e9c972832397bcfc55aedb9e0bd4488c28abfc7fbc25594ccaa0a5b336"
+},
+"4b09821078a3": {
+"file": "4b09821078a3.opus",
+"keys": [
+"update_note"
+],
+"learner": true,
+"r": "19e5c659a9d4",
+"s": 2.92,
+"sha256": "sha256:1ca854dc7ad2864d6cb4e21908c7828b15702f32234202e8370b18819a48bb26"
+},
+"4b0a8fe0e897": {
+"file": "4b0a8fe0e897.opus",
+"keys": [
+"quran_repeat_n{n=9}"
+],
+"learner": true,
+"r": "ae1ca74b7eac",
+"s": 3.11,
+"sha256": "sha256:8eaeaddf5c874bc9af144df98be361648a8ea16cea51633c51d58d02e547121d"
+},
+"4b207e03d8c9": {
+"file": "4b207e03d8c9.opus",
+"keys": [
+"school_day_note"
+],
+"learner": true,
+"r": "a3d63570c8e6",
+"s": 5.51,
+"sha256": "sha256:769656d3c628a45a6ccde6f7a7b47a6620d0649f41eee3d77256735abbf70b30"
+},
+"4b614b07af5a": {
+"file": "4b614b07af5a.opus",
+"keys": [
+"printed_sheets"
+],
+"learner": true,
+"r": "bd37bebb192d",
+"s": 2.31,
+"sha256": "sha256:b4356438747592007bba4a58b9b2e0f1901a2509fb23073cbf6e647043cc3e54"
+},
+"4b704ce67b5f": {
+"file": "4b704ce67b5f.opus",
+"keys": [
+"no_more_checks"
+],
+"learner": true,
+"r": "40b24527998c",
+"s": 6.71,
+"sha256": "sha256:afd599a55b49aac59476688687a42dc95e1612ab97e13d0774cb5c59b4a0743b"
+},
+"4c7a1262059c": {
+"file": "4c7a1262059c.opus",
+"keys": [
+"quran_repeat_n{n=1}"
+],
+"learner": true,
+"r": "6fd83bba93fd",
+"s": 5.01,
+"sha256": "sha256:47508e0d1bbd4d2e35c33cde957f646102c4081982f9835e0598a64b50c429b4"
+},
+"4c882d54a93f": {
+"file": "4c882d54a93f.opus",
+"keys": [
+"mine_no_said"
+],
+"learner": true,
+"r": "ceb4210900c7",
+"s": 4.61,
+"sha256": "sha256:12e2c1fbcb6b61e7d4b22a775f667c40d47b7fbcca4e41c0f7292acd0e05b78f"
+},
+"4d7babf83103": {
+"file": "4d7babf83103.opus",
+"keys": [
+"get_title"
+],
+"learner": true,
+"r": "2974efdb5506",
+"s": 3.71,
+"sha256": "sha256:ced5e3b3349ede67bc58026df6c63ac50e1db278e5d001b3e12740c3956a0f59"
+},
+"4dabb6b036d9": {
+"file": "4dabb6b036d9.opus",
+"keys": [
+"uni_cost_fees"
+],
+"learner": true,
+"r": "53e8222ca1bc",
+"s": 4.21,
+"sha256": "sha256:89c746c0966982f5344d9cf531561eef531a856f614545c0dc84aa59e6857169"
+},
+"4de16d6ea29d": {
+"file": "4de16d6ea29d.opus",
+"keys": [
+"year_n{n=6}"
+],
+"learner": true,
+"r": "d03912daba37",
+"s": 1.72,
+"sha256": "sha256:99936836d5f113529e5783bdad84fee01d08fb732e76911ee251f7238b1b2f43"
+},
+"4e48ab5332c3": {
+"file": "4e48ab5332c3.opus",
+"keys": [
+"study_card"
+],
+"learner": true,
+"r": "08633ed117e0",
+"s": 6.31,
+"sha256": "sha256:c4233ca176393732325cca03822df78737e75a197d548cd9dd233ab4c7119b43"
+},
+"4f370f92b330": {
+"file": "4f370f92b330.opus",
+"keys": [
+"hw_placeholder",
+"hw_placeholder_short"
+],
+"learner": true,
+"r": "e5cc5698bc2f",
+"s": 2.1,
+"sha256": "sha256:43a387d4bd8f89eaa07c47416080ea183a37497104e2eeef98cbf1a6772784aa"
+},
+"4f3e978ce91d": {
+"file": "4f3e978ce91d.opus",
+"keys": [
+"uni_tests"
+],
+"learner": true,
+"r": "f216d9401a9c",
+"s": 0.99,
+"sha256": "sha256:d05275027a9153b6afd0cc7e5fc9853a066a92a57abd1824ab48b5c3eb9ea33f"
+},
+"4f6c3be05a4c": {
+"file": "4f6c3be05a4c.opus",
+"keys": [
+"still_reading"
+],
+"learner": true,
+"r": "9eb4201d269c",
+"s": 2.73,
+"sha256": "sha256:ed6f83187dd2edefb5725896a8f41afbc3913414d24f0d044f52adf81aa93dee"
+},
+"4fd5bb99a0a2": {
+"file": "4fd5bb99a0a2.opus",
+"keys": [
+"check_with_teacher"
+],
+"learner": true,
+"r": "f4e586461ab7",
+"s": 4.61,
+"sha256": "sha256:041d47c9f09fdec98956ee118be9319f910290857a84d9dc2af2a0500dc7f85a"
+},
+"5042ce50cb1b": {
+"file": "5042ce50cb1b.opus",
+"keys": [
+"quran_no_audio"
+],
+"learner": true,
+"r": "d97f88252541",
+"s": 4.11,
+"sha256": "sha256:b0d5ad33503ff669549dae8b81a5c603f76c29e4d75de48a7633f40d6bfe97e9"
+},
+"515191ea67ff": {
+"file": "515191ea67ff.opus",
+"keys": [
+"cant_read_photo"
+],
+"learner": true,
+"r": "4d06b251cae7",
+"s": 3.0,
+"sha256": "sha256:22d259974fab939f2cd0a6e09a5f84297fc4010fca73e8df77f15bd043b5d8ee"
+},
+"515ce19b1449": {
+"file": "515ce19b1449.opus",
+"keys": [
+"minutes{n=10}"
+],
+"learner": true,
+"r": "cdb7a4f23be2",
+"s": 1.48,
+"sha256": "sha256:08a5e4ba14199bfa382de5fa75605d6a3cc24076f08478511aef9c71b8795b29"
+},
+"516385db8078": {
+"file": "516385db8078.opus",
+"keys": [
+"admin.lessons",
+"lessons",
+"module.lessons",
+"review.node_lessons",
+"teacher.her_lessons",
+"teacher.lessons"
+],
+"learner": true,
+"r": "4d371c5d61e4",
+"s": 0.84,
+"sha256": "sha256:25957d616cec023f828e3c33244065946544f6306cb8c8ca648a524edd58fdf3"
+},
+"5190d81af189": {
+"file": "5190d81af189.opus",
+"keys": [
+"study_left{n=1}"
+],
+"learner": true,
+"r": "bd992fa0d2f8",
+"s": 4.81,
+"sha256": "sha256:7fd1813e8fe3cbd08224a1f6c051d00ab505e87dd8d6f1e2fcd6fe200c32f92d"
+},
+"51da4a87dfa7": {
+"file": "51da4a87dfa7.opus",
+"keys": [
+"minutes{n=3}"
+],
+"learner": true,
+"r": "e3c2624d923f",
+"s": 1.5,
+"sha256": "sha256:383d30d5d0a2c00c73299e3a72119503e6c6b993b9505e0bafcd81d85ebe520c"
+},
+"525170cee431": {
+"file": "525170cee431.opus",
+"keys": [
+"voice_failed"
+],
+"learner": true,
+"r": "bc8a628ca0d7",
+"s": 8.01,
+"sha256": "sha256:414931c84b30da681062eb8799816ba0d10b87d0e30bc4dcc80ebbf5ba27ec83"
+},
+"5273a908236b": {
+"file": "5273a908236b.opus",
+"keys": [
+"made_full{n=8}"
+],
+"learner": true,
+"r": "60c787f394b2",
+"s": 6.01,
+"sha256": "sha256:5b2f5562a95e4106d2a5e0140c05bb96ca2c530f03c8c9e9b37923bb020a79b7"
+},
+"52afc06cad86": {
+"file": "52afc06cad86.opus",
+"keys": [
+"lock_change"
+],
+"learner": true,
+"r": "e6028a380b14",
+"s": 1.71,
+"sha256": "sha256:84284485450074ab684db6e05199b871eaae20d801fceb20c3d62555d680c394"
+},
+"52d7601c5f14": {
+"file": "52d7601c5f14.opus",
+"keys": [
+"quran_reader"
+],
+"learner": true,
+"r": "6282b9e607ad",
+"s": 1.12,
+"sha256": "sha256:8f757e78f6345f39a1bd3fd6ec9c6d118664b2897dda2120f67142e953b03786"
+},
+"5350edc55e73": {
+"file": "5350edc55e73.opus",
+"keys": [
+"tone_1"
+],
+"learner": true,
+"r": "3f8f4fb0512f",
+"s": 1.47,
+"sha256": "sha256:f7714b85258754bfab2de6a88fdaa836b66a858ff10a7aca57a0b7d74a77bcb6"
+},
+"53b950b87316": {
+"file": "53b950b87316.opus",
+"keys": [
+"badge_ai"
+],
+"learner": true,
+"r": "8ff091e4a6da",
+"s": 4.11,
+"sha256": "sha256:f61b25ff8ae0ab3f0e41d800dd0cef0d3d8edfd04672877bf570ca20bfc2ae21"
+},
+"543098185682": {
+"file": "543098185682.opus",
+"keys": [
+"lock_wait{n=8}"
+],
+"learner": true,
+"r": "68fd22109453",
+"s": 4.31,
+"sha256": "sha256:1e084e0dd369e0f590b171edf44fc6023e8191637fd7d7a80162fce542351972"
+},
+"543281da8d7e": {
+"file": "543281da8d7e.opus",
+"keys": [
+"fix_btn"
+],
+"learner": true,
+"r": "2058c032b8c6",
+"s": 0.86,
+"sha256": "sha256:913fdc5aed8379e7ac0afb7e0764968e3a1176b794452b02455acc2d541bdf51"
+},
+"54430325b228": {
+"file": "54430325b228.opus",
+"keys": [
+"made_chip_unclear"
+],
+"learner": true,
+"r": "a1de9676cb21",
+"s": 1.19,
+"sha256": "sha256:c42a0a087ea8392096154773caaf65889401938f2853ec62aed5e35f1da99d85"
+},
+"5449a364697c": {
+"file": "5449a364697c.opus",
+"keys": [
+"theme"
+],
+"learner": true,
+"r": "4bf6b4184bd3",
+"s": 1.51,
+"sha256": "sha256:9a935f4299e810a5ae9bcf79adfda77f2f108d0e07791782b60f412a9bb998fc"
+},
+"54c76a432164": {
+"file": "54c76a432164.opus",
+"keys": [
+"mine_no"
+],
+"learner": true,
+"r": "9342fa0ad8ff",
+"s": 2.25,
+"sha256": "sha256:70ed2f683e92ea93e5315af84561b103d171e34ce843c3b92a30703d2636e7f6"
+},
+"5510087fd474": {
+"file": "5510087fd474.opus",
+"keys": [
+"hw_offline"
+],
+"learner": true,
+"r": "a357fdfb1fb1",
+"s": 6.81,
+"sha256": "sha256:2cb8c4f99c4e06e7f029cb8a92a53fcfaed4a09b07215627baad77acb08596a0"
+},
+"5623f0e56019": {
+"file": "5623f0e56019.opus",
+"keys": [
+"no_key"
+],
+"learner": true,
+"r": "9c93e1ad3cb0",
+"s": 6.11,
+"sha256": "sha256:cbbb47f423dfbaf2e70eb811a4de7d1610fc216242ba0f9cd7ce1d8a49041cc2"
+},
+"566ea32ccdc9": {
+"file": "566ea32ccdc9.opus",
+"keys": [
+"lesson_done"
+],
+"learner": true,
+"r": "b6817ea259b9",
+"s": 1.47,
+"sha256": "sha256:0e9a99a949e822300b21f88510635686f8f397e05d65c07e0de8c8ce74b3b47f"
+},
+"5678f57f2a76": {
+"file": "5678f57f2a76.opus",
+"keys": [
+"net_waiting{n=9}"
+],
+"learner": true,
+"r": "4b4bf65b9e16",
+"s": 2.39,
+"sha256": "sha256:5ec8d68bf4ee1be717a8b69f4fcd0c140aa186d30f89cd9841db8c9402229292"
+},
+"578786ff448b": {
+"file": "578786ff448b.opus",
+"keys": [
+"contest_you"
+],
+"learner": true,
+"r": "45977de69252",
+"s": 0.59,
+"sha256": "sha256:12201844a98a127ef4d41cbadbed5e20f462f85972f9bd5f16e89532092bdeb8"
+},
+"582bf1bcb1fd": {
+"file": "582bf1bcb1fd.opus",
+"keys": [
+"cert_offline"
+],
+"learner": true,
+"r": "c3527e6e6731",
+"s": 3.71,
+"sha256": "sha256:02a5fecc54330f2aca402089957543d4dd190415a5d1f65bfe7f14cab57f9c9b"
+},
+"58618686ab21": {
+"file": "58618686ab21.opus",
+"keys": [
+"ask_scope"
+],
+"learner": true,
+"r": "7de964df490a",
+"s": 6.01,
+"sha256": "sha256:47ebf2253ec9d99d05f2da959b27c4d17014a9f151542d1863ec3f8e55ac7aff"
+},
+"5870901b7ecc": {
+"file": "5870901b7ecc.opus",
+"keys": [
+"live_coming"
+],
+"learner": true,
+"r": "6370a57b4394",
+"s": 2.32,
+"sha256": "sha256:01f4d9ebcaf6fbe1ed6826beca43c603c9d15839ea51fed3bfbd1a8c564aa233"
+},
+"587c6a814501": {
+"file": "587c6a814501.opus",
+"keys": [
+"quran_found{n=7}",
+"quran_verses{n=7}"
+],
+"learner": true,
+"r": "a35f504ffd31",
+"s": 1.13,
+"sha256": "sha256:45d016ba4d66beac7723e2043675dd7714f8b28b88b7e9dc02c5622abdf6f94c"
+},
+"58b0fe3f7a05": {
+"file": "58b0fe3f7a05.opus",
+"keys": [
+"made_full{n=9}"
+],
+"learner": true,
+"r": "5b92fbb87084",
+"s": 5.81,
+"sha256": "sha256:27709f2ecf4a92a54040bbecb127309ab3ac9ad14cd1887e84b9ff3ecf9b10ff"
+},
+"59202a3ea805": {
+"file": "59202a3ea805.opus",
+"keys": [
+"retake"
+],
+"learner": true,
+"r": "705616d6c610",
+"s": 1.42,
+"sha256": "sha256:1ac141cf10b019ddefa546b2534ac4e8d665b2e9c97a9b52ec5a8b9df787f51b"
+},
+"59294e8a550d": {
+"file": "59294e8a550d.opus",
+"keys": [
+"printing"
+],
+"learner": true,
+"r": "5300cdb59ab4",
+"s": 2.99,
+"sha256": "sha256:7ba07a55038570ea116eb1563d8988f3bf1976d027657c290ba462a22a9a221b"
+},
+"597721d5f8bd": {
+"file": "597721d5f8bd.opus",
+"keys": [
+"not_in_school"
+],
+"learner": true,
+"r": "31da4ab9e544",
+"s": 3.71,
+"sha256": "sha256:16c1bd82b81237a83c50768c38a82af6c7f8240d3b21b301ab8a9b402654beee"
+},
+"599a1fb26077": {
+"file": "599a1fb26077.opus",
+"keys": [
+"badge_lesson"
+],
+"learner": true,
+"r": "8e9e3647dfc6",
+"s": 1.14,
+"sha256": "sha256:811feed68861ca0406677f6bf114d7f7a3fcf54c828d559a8fd616048b2deef1"
+},
+"5a81f3d78dba": {
+"file": "5a81f3d78dba.opus",
+"keys": [
+"consent_offline"
+],
+"learner": true,
+"r": "8696431a11a7",
+"s": 2.76,
+"sha256": "sha256:f10afddd11353c6459dfe8e4843c4db2fed6323a08bf3bda551ebf0673c3b127"
+},
+"5ae9d77201f9": {
+"file": "5ae9d77201f9.opus",
+"keys": [
+"year_n{n=5}"
+],
+"learner": true,
+"r": "d57b3ba4df0e",
+"s": 1.26,
+"sha256": "sha256:4f2e8a86714004829c2b31d54728e0a46c9899c3d7834dc431fc2248444469f0"
+},
+"5bd4a6927a22": {
+"file": "5bd4a6927a22.opus",
+"keys": [
+"voice_prs"
+],
+"learner": true,
+"r": "42e226877d66",
+"s": 5.31,
+"sha256": "sha256:32d8936e173ffe78c995cb53681d0337326bee4ec15ae13364193d0e29ebb826"
+},
+"5d47e8f7b90e": {
+"file": "5d47e8f7b90e.opus",
+"keys": [
+"tries_left{n=11}"
+],
+"learner": true,
+"r": "a833a2e4fd15",
+"s": 3.91,
+"sha256": "sha256:20e960bb835bffe30977fd5071eabb8dd4ce98949c13db0682a882666012544d"
+},
+"5d64c2e9f6e0": {
+"file": "5d64c2e9f6e0.opus",
+"keys": [
+"quran_searched{n=6}"
+],
+"learner": true,
+"r": "81eed151f27b",
+"s": 4.01,
+"sha256": "sha256:434cda27d72743f26256bdde3e383358c172105c69ea3e01dba7476a7f615d94"
+},
+"5dca3ed3ca50": {
+"file": "5dca3ed3ca50.opus",
+"keys": [
+"bells_off"
+],
+"learner": true,
+"r": "42f6c8a7f964",
+"s": 1.95,
+"sha256": "sha256:4f489836479c61e625f9b6fd21508d6f631731f279949232e5fc3d45cb83c375"
+},
+"5e10fc66488f": {
+"file": "5e10fc66488f.opus",
+"keys": [
+"admin.h_ai",
+"ai",
+"setting.ai"
+],
+"learner": true,
+"r": "7d8ffa39d92d",
+"s": 1.86,
+"sha256": "sha256:a6e4c39bd4c78f4c6c770a7c9a76470d6bdc1a9f5958f3f669bee0b9b594c575"
+},
+"5e360c00f3a2": {
+"file": "5e360c00f3a2.opus",
+"keys": [
+"contest_answers"
+],
+"learner": true,
+"r": "cc6d22743b95",
+"s": 1.69,
+"sha256": "sha256:9ce7299fd5c34899227dcf472c5e2c4358585e44b9e93d7c30965e942fbcb791"
+},
+"5ec3adb628a7": {
+"file": "5ec3adb628a7.opus",
+"keys": [
+"tries_left{n=2}"
+],
+"learner": true,
+"r": "1066487062a9",
+"s": 2.55,
+"sha256": "sha256:0ebf2a3d522920cb88f942708124d57282a2bb2acbd50d27bb5e581db5e44a0a"
+},
+"5f7c1bb5348c": {
+"file": "5f7c1bb5348c.opus",
+"keys": [
+"goals_title"
+],
+"learner": true,
+"r": "dac9f4c9be00",
+"s": 2.18,
+"sha256": "sha256:d8974b6c8d9ec4f826f3c0bc3383c467be4988889df360c32b44272d57cc1c92"
+},
+"5fd1191bda0b": {
+"file": "5fd1191bda0b.opus",
+"keys": [
+"credits_linked"
+],
+"learner": true,
+"r": "10ffd1eb6481",
+"s": 4.81,
+"sha256": "sha256:28f265396d18308a456d3378034f06649f59c10bad00056deba357fc16cf14da"
+},
+"5fef615cb6b7": {
+"file": "5fef615cb6b7.opus",
+"keys": [
+"reading"
+],
+"learner": true,
+"r": "90a0638ec8ec",
+"s": 4.01,
+"sha256": "sha256:b37ea54f9c32bb3221eec3bb13609fb5f09082d49508c5108b126ead2ed7043d"
+},
+"602f96c35e8e": {
+"file": "602f96c35e8e.opus",
+"keys": [
+"cant_read_it"
+],
+"learner": true,
+"r": "973e23209729",
+"s": 2.7,
+"sha256": "sha256:c9689f4c1643717b99eb78698e327249ffa71134653d515ea6a8bb8ad733dc26"
+},
+"60fcdc3e4cdc": {
+"file": "60fcdc3e4cdc.opus",
+"keys": [
+"lock_wait{n=9}"
+],
+"learner": true,
+"r": "6ea8058a0b35",
+"s": 5.61,
+"sha256": "sha256:bb4f1d177236263433a0765d1558797586c49933ff9e57d9b3cf60c0ff065fe6"
+},
+"611e211b9254": {
+"file": "611e211b9254.opus",
+"keys": [
+"study_length"
+],
+"learner": true,
+"r": "b811452246dc",
+"s": 0.73,
+"sha256": "sha256:8c986b22b2b191a7da77aeab5c86741493572fb15b9d7343915a60fdb94b1208"
+},
+"616123926a64": {
+"file": "616123926a64.opus",
+"keys": [
+"consent_title_self"
+],
+"learner": true,
+"r": "b8fb6ab079bb",
+"s": 0.82,
+"sha256": "sha256:27ce22b8f30509dc4ef0adbf459f9b3dc7e85ff806b902fe415a9b94fbacd12d"
+},
+"616825269b84": {
+"file": "616825269b84.opus",
+"keys": [
+"listen",
+"quran_listen"
+],
+"learner": true,
+"r": "d18c0655397d",
+"s": 0.92,
+"sha256": "sha256:663779636bac5c975b5e78ac0bfa5459ba233a0e13e4aef1be7882ea2f35d7b9"
+},
+"61cb7a32b6f1": {
+"file": "61cb7a32b6f1.opus",
+"keys": [
+"lock_wait{n=4}"
+],
+"learner": true,
+"r": "74045f5311b4",
+"s": 4.01,
+"sha256": "sha256:4b64ddf6dc70232a6116a7c25a7c791086dffc43a04e4e0a5963a41864924435"
+},
+"61d09a3be9a9": {
+"file": "61d09a3be9a9.opus",
+"keys": [
+"tries_left{n=5}"
+],
+"learner": true,
+"r": "4b5a6d5c2c6f",
+"s": 2.6,
+"sha256": "sha256:720537f10666ad89a9d5d9c3e01cb01cea60d572c64a62b5ea8a0b01746472b4"
+},
+"61f4f68f5d91": {
+"file": "61f4f68f5d91.opus",
+"keys": [
+"consent:hub-2026-10:stop",
+"consent:hub-2026-10b:stop",
+"consent:online-2026-10:stop",
+"consent:online-2026-10b:stop"
+],
+"learner": true,
+"r": "14f748010653",
+"s": 5.31,
+"sha256": "sha256:7742c956c31cd94cfecc634cccfa959f99104bd92f80af1162650ac1c9c4db54"
+},
+"6237d1cd89d1": {
+"file": "6237d1cd89d1.opus",
+"keys": [
+"no_lessons_year"
+],
+"learner": true,
+"r": "0c36838d26dc",
+"s": 3.41,
+"sha256": "sha256:4696631841c0dab4cd6833f1041a714c24866e4dfdb36cf31d4b5dcadd668f4e"
+},
+"623a3a1323d1": {
+"file": "623a3a1323d1.opus",
+"keys": [
+"alarms_row",
+"notify_title"
+],
+"learner": true,
+"r": "e661b7675fbb",
+"s": 4.11,
+"sha256": "sha256:f3b89fd929265db6fb5a2c70e391cb4495fd23c3161029658340b5173ba6e9fc"
+},
+"62baa5b98e6f": {
+"file": "62baa5b98e6f.opus",
+"keys": [
+"send_teacher"
+],
+"learner": true,
+"r": "172695f19b69",
+"s": 3.51,
+"sha256": "sha256:a02c75cc6bec1e56c99ae093e4f60740232a146ff45af80b0bb93f860b5b7a98"
+},
+"62c0cf65a549": {
+"file": "62c0cf65a549.opus",
+"keys": [
+"lock_offer"
+],
+"learner": true,
+"r": "0449642ddc53",
+"s": 2.33,
+"sha256": "sha256:a008eb3afea0c1564c0e686e9e30d9f91afad0277b9434e86b28b512772c0b07"
+},
+"62d08e154bdb": {
+"file": "62d08e154bdb.opus",
+"keys": [
+"contest_closed"
+],
+"learner": true,
+"r": "58f9af3b5033",
+"s": 3.71,
+"sha256": "sha256:63ca8611cf99a09165141a693caae72b9c2540b27214177aad7a8bafbfccf0a7"
+},
+"62dfbb2b6e2b": {
+"file": "62dfbb2b6e2b.opus",
+"keys": [
+"made_count{n=4}"
+],
+"learner": true,
+"r": "4328bba5978f",
+"s": 2.87,
+"sha256": "sha256:94a7865cb7fcbc2803c600162c11858deb2bca8e2015e39255d4bde7d7ed1a93"
+},
+"6312f2197a1b": {
+"file": "6312f2197a1b.opus",
+"keys": [
+"net_hub_text"
+],
+"learner": true,
+"r": "c8323e54d00b",
+"s": 2.33,
+"sha256": "sha256:87d9d5327a81f4cf5f8c29cb017c6166b3d6ecd1086418533d36c5f1f2116936"
+},
+"6330b8f8f677": {
+"file": "6330b8f8f677.opus",
+"keys": [
+"badge_ai_checked"
+],
+"learner": true,
+"r": "50c16277295f",
+"s": 3.61,
+"sha256": "sha256:12d8bb04f0e75c2ff26330bfdec94d96ccdfcc1a8ceebf12d5a7b13f13f6579f"
+},
+"63f7dc4c0ffe": {
+"file": "63f7dc4c0ffe.opus",
+"keys": [
+"live_hand_up"
+],
+"learner": true,
+"r": "4cfff9b30286",
+"s": 2.57,
+"sha256": "sha256:fa7b3e785c0ad6aa9a76d8152095c5f1a378e74385eea088d5a2a7803f343f81"
+},
+"644f263830eb": {
+"file": "644f263830eb.opus",
+"keys": [
+"study_left{n=9}"
+],
+"learner": true,
+"r": "9f21115ed461",
+"s": 2.72,
+"sha256": "sha256:7e8c03ebc591c065b0dbb1f94eb16ceb77b484a3f735a5fd7c9c38748a528972"
+},
+"647c7f1c3b2f": {
+"file": "647c7f1c3b2f.opus",
+"keys": [
+"hub_off",
+"net_offline"
+],
+"learner": true,
+"r": "2a042d5b130c",
+"s": 1.81,
+"sha256": "sha256:3e7e9191a0a66fda8e38fc8907efcc7660b63fb7cafb2c0fec9647fd4e680f0c"
+},
+"647d08d48f86": {
+"file": "647d08d48f86.opus",
+"keys": [
+"look_again{n=3}"
+],
+"learner": true,
+"r": "d4362a2e6844",
+"s": 2.78,
+"sha256": "sha256:efcd371945c63b42543bf42f552527bf518b1720e87e3558da66ff2d45b5f465"
+},
+"64f74d32bc75": {
+"file": "64f74d32bc75.opus",
+"keys": [
+"look_again{n=8}"
+],
+"learner": true,
+"r": "fc4cfdcd09be",
+"s": 1.75,
+"sha256": "sha256:7cdf72f5cac1e7cf4caafc6090441419afa2c72cc28f931945db44f787394dff"
+},
+"654285a6fa70": {
+"file": "654285a6fa70.opus",
+"keys": [
+"quran_found{n=4}",
+"quran_verses{n=4}"
+],
+"learner": true,
+"r": "197afe58adba",
+"s": 2.24,
+"sha256": "sha256:241ba5b4c6777c22a81b4fd66e3a6828bb43ab6c30afb55ae6cfc40e27cbf6a8"
+},
+"656f88d26e27": {
+"file": "656f88d26e27.opus",
+"keys": [
+"lock_none"
+],
+"learner": true,
+"r": "dc1a0881ee7e",
+"s": 1.19,
+"sha256": "sha256:1394372cfd6643f7a2e82429e09a7130b4e35ddb1f5566d51ddd569206b251db"
+},
+"65d25b445023": {
+"file": "65d25b445023.opus",
+"keys": [
+"done",
+"live_done"
+],
+"learner": true,
+"r": "8a941527584f",
+"s": 0.71,
+"sha256": "sha256:cc3877a4b30018f56183bdedb816019bb489da75d74b44c31b696a754f4b3280"
+},
+"66490eb00669": {
+"file": "66490eb00669.opus",
+"keys": [
+"uni_courses"
+],
+"learner": true,
+"r": "a1751434620d",
+"s": 1.0,
+"sha256": "sha256:800eca275647ab0391c8903395fe47ca42006ab5693aeef4b06b62c7bb7129ec"
+},
+"67ef9d453d47": {
+"file": "67ef9d453d47.opus",
+"keys": [
+"every_lesson_open"
+],
+"learner": true,
+"r": "9c307f122169",
+"s": 1.88,
+"sha256": "sha256:660a326c390f54f4a66aa9869db198fd3cd5539058d6bf68957aa288dfe3bbf8"
+},
+"6803f008b06f": {
+"file": "6803f008b06f.opus",
+"keys": [
+"credits_used"
+],
+"learner": true,
+"r": "656e3bee06ab",
+"s": 1.66,
+"sha256": "sha256:f5083d6eca6924a69e9a965c16019be7a428df9e3b1a3ff62417b88c143b2644"
+},
+"6893e6f3134c": {
+"file": "6893e6f3134c.opus",
+"keys": [
+"plan_here{n=3}"
+],
+"learner": true,
+"r": "a07959a7b119",
+"s": 3.91,
+"sha256": "sha256:cfcd27c532260a7f284618b0737445e1c5ae3b2da48cf288383f0f2fca8e6f8f"
+},
+"68da9fb12105": {
+"file": "68da9fb12105.opus",
+"keys": [
+"speak_again"
+],
+"learner": true,
+"r": "3d87126d34f3",
+"s": 3.51,
+"sha256": "sha256:fccd0de95df02e1cf11b4de42b02a7c9c0bd2ce9213b08c4699a86b75a54b64a"
+},
+"6914af258326": {
+"file": "6914af258326.opus",
+"keys": [
+"look_at_paper"
+],
+"learner": true,
+"r": "6773380ec24a",
+"s": 2.06,
+"sha256": "sha256:b66e2cafbfeb5ef148604cdb3a70fc8080091d0dbdf40046e455969e43e2ce95"
+},
+"69444c37f84f": {
+"file": "69444c37f84f.opus",
+"keys": [
+"look_again{n=2}"
+],
+"learner": true,
+"r": "f61c06caea83",
+"s": 1.99,
+"sha256": "sha256:c95527ca07b9bd58be3096378868b04a295df5f4e64d15bf2d571120a9e1d747"
+},
+"697c588ea425": {
+"file": "697c588ea425.opus",
+"keys": [
+"get_teachers"
+],
+"learner": true,
+"r": "1d8eae084371",
+"s": 3.71,
+"sha256": "sha256:4abf774c8c17522d0ab0979c69dd8519ce149e75fadf7b15a6cc2e967a59a274"
+},
+"698a06f22db6": {
+"file": "698a06f22db6.opus",
+"keys": [
+"minutes{n=8}"
+],
+"learner": true,
+"r": "b4f6e1d2c77e",
+"s": 1.64,
+"sha256": "sha256:ef56fee783f99e395e5a2907e530b7b7e646411397ed2b608b3cb39dd09c43b6"
+},
+"6a3d71187e4c": {
+"file": "6a3d71187e4c.opus",
+"keys": [
+"how_many"
+],
+"learner": true,
+"r": "5a027cb4a51d",
+"s": 1.26,
+"sha256": "sha256:ec53d304d4f73f46469b43762387189b38eb3fab0b6d66a8d392cadf58a018ec"
+},
+"6a4a92096f3e": {
+"file": "6a4a92096f3e.opus",
+"keys": [
+"blurry"
+],
+"learner": true,
+"r": "a03fd42a5d56",
+"s": 4.01,
+"sha256": "sha256:7d518974a4908007a93bb25fe7f6738ac5df59bba696ac85cf53dd9f701c07fc"
+},
+"6b039f0a5d4a": {
+"file": "6b039f0a5d4a.opus",
+"keys": [
+"status_done"
+],
+"learner": true,
+"r": "4c447a7ae4a5",
+"s": 2.53,
+"sha256": "sha256:4c31c0836cd9254d6d3e6dc5695ca9158cc713c3b9034f6f9304d318c8cbfcb9"
+},
+"6b1b1362b804": {
+"file": "6b1b1362b804.opus",
+"keys": [
+"all_right"
+],
+"learner": true,
+"r": "ff93f912318b",
+"s": 1.78,
+"sha256": "sha256:150d6d447db1adab4ec94a2a93bc4696ce2b4af4b465053567635699e864dcf6"
+},
+"6b813303accc": {
+"file": "6b813303accc.opus",
+"keys": [
+"quran_repeat_n{n=12}"
+],
+"learner": true,
+"r": "427d6c747307",
+"s": 3.61,
+"sha256": "sha256:3fd6d86a8143076535d901029774ceaa7d482d731e84358887653a29c8fa029e"
+},
+"6badcac8c181": {
+"file": "6badcac8c181.opus",
+"keys": [
+"admin.cohort_settings",
+"admin.settings",
+"log.cohort.settings",
+"settings"
+],
+"learner": true,
+"r": "7a7e5d0f74d8",
+"s": 0.87,
+"sha256": "sha256:7bd277962f46a682e70717159c0c59d5bf33157df961e46832e634e6856ea6aa"
+},
+"6ce8dc4602ab": {
+"file": "6ce8dc4602ab.opus",
+"keys": [
+"hold_still"
+],
+"learner": true,
+"r": "4d6e6595bd8d",
+"s": 1.54,
+"sha256": "sha256:3eab0aad6bcf30a909ea5bffb9ca733e2c7b3bd43bbdc680dab1a35d052933be"
+},
+"6d0e8a625800": {
+"file": "6d0e8a625800.opus",
+"keys": [
+"yes"
+],
+"learner": true,
+"r": "6e3dfe5960b2",
+"s": 0.56,
+"sha256": "sha256:e17354f128cd8b4f09339f36ccd23d0559c981fa31da0f6bfb583f4b338e7750"
+},
+"6d56a0350b55": {
+"file": "6d56a0350b55.opus",
+"keys": [
+"plan_here{n=2}"
+],
+"learner": true,
+"r": "704889617ad4",
+"s": 3.71,
+"sha256": "sha256:0f7ae8a98053b8f954d259abb28bb267c0facc463500edc368a8e1fb4e02df86"
+},
+"6da68cbef66d": {
+"file": "6da68cbef66d.opus",
+"keys": [
+"net_nohub_text"
+],
+"learner": true,
+"r": "b2bdda494461",
+"s": 7.31,
+"sha256": "sha256:662ede676e0f93590edbd877b15bf92fd41b8c8275f72b254e25282f21dec326"
+},
+"6ee7ee647516": {
+"file": "6ee7ee647516.opus",
+"keys": [
+"hub_card"
+],
+"learner": true,
+"r": "f423b51e1cc2",
+"s": 1.81,
+"sha256": "sha256:cc4cb4bb346a1a0f08cafdcb06474dc033fe8d7d2ffd57de0b7d43eeddd78e33"
+},
+"6ef94fb48667": {
+"file": "6ef94fb48667.opus",
+"keys": [
+"not_recorded"
+],
+"learner": true,
+"r": "e0df5863091d",
+"s": 3.31,
+"sha256": "sha256:64ff8ed8cf8e222e50d930b393f48e3dd6edcc60564390b0890ad5fcc9df1031"
+},
+"6fddeed2da5e": {
+"file": "6fddeed2da5e.opus",
+"keys": [
+"theme_phone"
+],
+"learner": true,
+"r": "f488266d6582",
+"s": 1.57,
+"sha256": "sha256:77f506b8a703c19ff6dfeabcd7358e621644a3368518e81b517eed1a783bae08"
+},
+"7060c60f301f": {
+"file": "7060c60f301f.opus",
+"keys": [
+"reset_waiting{n=11}"
+],
+"learner": true,
+"r": "e995c2a68636",
+"s": 5.11,
+"sha256": "sha256:d3c5cccafc63d0b3870c5b6dec10061d778b647993052bb1d3467a1129e064cc"
+},
+"7168a45b29f2": {
+"file": "7168a45b29f2.opus",
+"keys": [
+"quran_searched{n=3}"
+],
+"learner": true,
+"r": "db1fbba1fb05",
+"s": 4.01,
+"sha256": "sha256:9d9f38d1431aa5deda3ac074bad11dc90b74c4cda55f8507990ef09ecdde3272"
+},
+"7168eaea0a05": {
+"file": "7168eaea0a05.opus",
+"keys": [
+"cert_number"
+],
+"learner": true,
+"r": "da6dbf7590e7",
+"s": 0.71,
+"sha256": "sha256:c7c4864cf04952babd1128be53b0bf00ec0069c4a1e8c6e2559c2a38e430f1d2"
+},
+"730986d94715": {
+"file": "730986d94715.opus",
+"keys": [
+"lock_wait{n=11}"
+],
+"learner": true,
+"r": "c230caebb58d",
+"s": 5.51,
+"sha256": "sha256:73687b0b3e6cb29f79da9e2ee1204491a16255f28682648fb6909a339ed73a6e"
+},
+"7450e444868f": {
+"file": "7450e444868f.opus",
+"keys": [
+"photo_resting"
+],
+"learner": true,
+"r": "200daf8eeee5",
+"s": 7.01,
+"sha256": "sha256:88949edabf99ba409fcaa5394691ed361d73ac8a55234a564ddd9052aed3da0b"
+},
+"7456a388f526": {
+"file": "7456a388f526.opus",
+"keys": [
+"made_empty"
+],
+"learner": true,
+"r": "2a7be041eb18",
+"s": 8.11,
+"sha256": "sha256:92365a6adf7f6463ed498f2a76d07ae99210e3242620b3635d6cc0640a0ef36c"
+},
+"7476727d654a": {
+"file": "7476727d654a.opus",
+"keys": [
+"lock_wait{n=12}"
+],
+"learner": true,
+"r": "0633cf3c414e",
+"s": 4.61,
+"sha256": "sha256:73990730616118b8ba71a210eafb3ac8fd6ecfa0d22567392f6308d80525f1af"
+},
+"74ca3fcb3ed0": {
+"file": "74ca3fcb3ed0.opus",
+"keys": [
+"more_like_this"
+],
+"learner": true,
+"r": "6adc9477b6c6",
+"s": 2.58,
+"sha256": "sha256:82f6468f8305ed7134d03d23fda8074b8193a83de5182cfd3ce1d1ee10caee38"
+},
+"750c15c36247": {
+"file": "750c15c36247.opus",
+"keys": [
+"quran_repeat_n{n=8}"
+],
+"learner": true,
+"r": "ebc26146af72",
+"s": 4.11,
+"sha256": "sha256:61944e5de208d16396d8c40148601b823b11cd0dc914cd19a2bac257cbb656d7"
+},
+"755626c06472": {
+"file": "755626c06472.opus",
+"keys": [
+"look_again{n=11}"
+],
+"learner": true,
+"r": "eed94d441e31",
+"s": 3.81,
+"sha256": "sha256:8172219df0eb646c303840dc9c16aede9f3110a37f176a2f0419c003c5c960e8"
+},
+"757cddd56d83": {
+"file": "757cddd56d83.opus",
+"keys": [
+"live_data"
+],
+"learner": true,
+"r": "406f14a1ece7",
+"s": 8.51,
+"sha256": "sha256:d6132ee1b7b088c4fddced09ca752b0eb96cad843082d68fa02c66cdf1a89216"
+},
+"7590c04deb87": {
+"file": "7590c04deb87.opus",
+"keys": [
+"thinking"
+],
+"learner": true,
+"r": "9ef755108116",
+"s": 2.33,
+"sha256": "sha256:c93f371ab9b187e4f6a74b05367c23d805b825162bf8369548d6f9d54d5078a8"
+},
+"75abe691cc56": {
+"file": "75abe691cc56.opus",
+"keys": [
+"not_yet"
+],
+"learner": true,
+"r": "be30d62d7507",
+"s": 4.01,
+"sha256": "sha256:0ccc52bf0f1d77bc6272aab75e5e63a2db6c76793bce31028e95d9bdbe06b63c"
+},
+"77151be432dd": {
+"file": "77151be432dd.opus",
+"keys": [
+"live_r1"
+],
+"learner": true,
+"r": "3d13a69c8d79",
+"s": 0.96,
+"sha256": "sha256:a685af7056bfe704db8482b49718edd7aa667cd9ca23f7223b74bc5b3f4b2533"
+},
+"778d9a87c72e": {
+"file": "778d9a87c72e.opus",
+"keys": [
+"which_item"
+],
+"learner": true,
+"r": "5ff3622a8551",
+"s": 1.43,
+"sha256": "sha256:82093c3e29f73ffa5bea606b80eff20d2bb09a6ec7d1b9d1179b9fe7ea19cd91"
+},
+"77c3162bae00": {
+"file": "77c3162bae00.opus",
+"keys": [
+"net_waiting{n=3}"
+],
+"learner": true,
+"r": "f8c187fbf634",
+"s": 2.43,
+"sha256": "sha256:f87b02a5a311e88278830de9f327faa2b018b8dd5a06686f70636216cd9a5972"
+},
+"77dcf023ba2c": {
+"file": "77dcf023ba2c.opus",
+"keys": [
+"photo_offline"
+],
+"learner": true,
+"r": "9c3a796e09cb",
+"s": 3.11,
+"sha256": "sha256:e68d62b33d457eaccf82e451ced80af09246319b039b07d8ff6315ff2ff06c37"
+},
+"77ea2de6c41c": {
+"file": "77ea2de6c41c.opus",
+"keys": [
+"made_full{n=5}"
+],
+"learner": true,
+"r": "91fd449dc698",
+"s": 5.91,
+"sha256": "sha256:b2f18c3f2db9d8ecc824ab6e76c91b0cb84d7717a1e47ee04324f5183724fa1c"
+},
+"7815a91262fc": {
+"file": "7815a91262fc.opus",
+"keys": [
+"lock"
+],
+"learner": true,
+"r": "c2d80fb0239c",
+"s": 0.66,
+"sha256": "sha256:436c11ff818ae3ab6e4939b32e4068d4477922e381059c9fd31cfa436f5948e7"
+},
+"78857cf9419b": {
+"file": "78857cf9419b.opus",
+"keys": [
+"reset_waiting{n=2}"
+],
+"learner": true,
+"r": "216d70dda0d3",
+"s": 5.71,
+"sha256": "sha256:b50c2438c71d7581d3bc163b8b539f406f22359c3abffdf0a9943412a7d10c18"
+},
+"792808e4cd89": {
+"file": "792808e4cd89.opus",
+"keys": [
+"reset_waiting{n=4}"
+],
+"learner": true,
+"r": "9f4002c3a3f7",
+"s": 4.91,
+"sha256": "sha256:c5c58f3c4b1a0ea16ae6f2412ead8c4f9112fb76fe29d51b5dc31a61350e5202"
+},
+"79ea36c5331c": {
+"file": "79ea36c5331c.opus",
+"keys": [
+"connect_once"
+],
+"learner": true,
+"r": "e0f0a28ca891",
+"s": 4.51,
+"sha256": "sha256:6da1b1b0576543d0ebfa79ea65c39fc4c3a188289a73dec1e2add5e1d52fa81b"
+},
+"79ecf5b3318a": {
+"file": "79ecf5b3318a.opus",
+"keys": [
+"cert_consent"
+],
+"learner": true,
+"r": "47a8bf11594b",
+"s": 7.01,
+"sha256": "sha256:c972ea75b3675242ccd47a244468de3932568bbdb52ac5e0eda035c4b13a9f7e"
+},
+"7a2d5139cdda": {
+"file": "7a2d5139cdda.opus",
+"keys": [
+"is_it_right"
+],
+"learner": true,
+"r": "c83ce1d4e0a9",
+"s": 1.63,
+"sha256": "sha256:0666cc453f80b88a1c0bfd79899988511cadd8ce7e9feb028a78140eac34301d"
+},
+"7ab05840ff2d": {
+"file": "7ab05840ff2d.opus",
+"keys": [
+"job_printing"
+],
+"learner": true,
+"r": "1060c9873ea7",
+"s": 1.34,
+"sha256": "sha256:52a6bc4defa6ba71af73b489cbf7dd5b91e409c9f9923fb98c00b8c56ad54e07"
+},
+"7b01105f6514": {
+"file": "7b01105f6514.opus",
+"keys": [
+"plan_switch_yes"
+],
+"learner": true,
+"r": "bd5ee2bc33f7",
+"s": 2.71,
+"sha256": "sha256:00d69b265036a4ba97d4dac3432cd15555fadb82afdc66b6184bb7264c12a22b"
+},
+"7b58a3d0e659": {
+"file": "7b58a3d0e659.opus",
+"keys": [
+"no_hub_print"
+],
+"learner": true,
+"r": "fc0ffbd14317",
+"s": 4.31,
+"sha256": "sha256:996de05d1ed082209a541ff7286fe5433a9652a32904861ddab3d2049b1850b8"
+},
+"7b6f67317c31": {
+"file": "7b6f67317c31.opus",
+"keys": [
+"mark_it"
+],
+"learner": true,
+"r": "361866818ba5",
+"s": 1.87,
+"sha256": "sha256:ef4cd611adc8431c3d6e53d6241d7784ea4da92e2d45cb5687040515298870ce"
+},
+"7c81e405a5ca": {
+"file": "7c81e405a5ca.opus",
+"keys": [
+"pashto_teacher"
+],
+"learner": true,
+"r": "1b3d13f8b351",
+"s": 4.31,
+"sha256": "sha256:41e1eda114d52995212ff05ea9ed325edbb3ddde24ace15c9e34f11f0a5cfb06"
+},
+"7c93c168190c": {
+"file": "7c93c168190c.opus",
+"keys": [
+"badge_maths"
+],
+"learner": true,
+"r": "91c468e40318",
+"s": 1.78,
+"sha256": "sha256:9e55e68af7d528f211dfb107d1bdbcdede699412cc9b88103fb7e1c00bfbce9f"
+},
+"7d096f0f68f1": {
+"file": "7d096f0f68f1.opus",
+"keys": [
+"give_consent"
+],
+"learner": true,
+"r": "2bb6fccd34d9",
+"s": 2.58,
+"sha256": "sha256:2546bb8e2baec6292808d2475daca6b731d30b285ff019b4ff25c682453678ce"
+},
+"7d344a67074b": {
+"file": "7d344a67074b.opus",
+"keys": [
+"made_count{n=2}"
+],
+"learner": true,
+"r": "7a17558a5650",
+"s": 2.15,
+"sha256": "sha256:7344b1efffe6ae050a05856311a277afae4b242227dca7694f2bfebeb7381464"
+},
+"7d5ef9cadc09": {
+"file": "7d5ef9cadc09.opus",
+"keys": [
+"plan_here{n=4}"
+],
+"learner": true,
+"r": "b31dfe6c4d58",
+"s": 4.01,
+"sha256": "sha256:40858f3cb487ac72a158666d6698b9cf40e1eebbc2127759b20b79768eec5337"
+},
+"7d622fb972a2": {
+"file": "7d622fb972a2.opus",
+"keys": [
+"consent:hub-2026-10:does",
+"consent:hub-2026-10b:does",
+"consent:online-2026-10:does",
+"consent:online-2026-10b:does"
+],
+"learner": true,
+"r": "fbb8b93d3892",
+"s": 7.71,
+"sha256": "sha256:09555d271b717acfab670594c0e5e1bcfa8746fe7811df61b39741d3c0a9c9cd"
+},
+"7d7bdebafe36": {
+"file": "7d7bdebafe36.opus",
+"keys": [
+"year_n{n=3}"
+],
+"learner": true,
+"r": "9c7b1f1a2af7",
+"s": 1.17,
+"sha256": "sha256:5fc92702b2cf715eb3f69c47ba0a675d087133def3e957412d10884691de1da5"
+},
+"7e44a948a2ee": {
+"file": "7e44a948a2ee.opus",
+"keys": [
+"cert_wait"
+],
+"learner": true,
+"r": "b1ea62f7b03f",
+"s": 3.71,
+"sha256": "sha256:dc79517abb579ab21c018000d915a0de1aa65fc7a0a485b411a810cd1dbef492"
+},
+"7ee85c78a80f": {
+"file": "7ee85c78a80f.opus",
+"keys": [
+"sent_teacher"
+],
+"learner": true,
+"r": "b176d62ba00f",
+"s": 2.27,
+"sha256": "sha256:d923c9017a7176e6ebfd892d34fdb6664f56c4ea7bee442c3af5b796d01769f2"
+},
+"7f0f548960ce": {
+"file": "7f0f548960ce.opus",
+"keys": [
+"wrong_pin"
+],
+"learner": true,
+"r": "c102911636b5",
+"s": 2.27,
+"sha256": "sha256:7e7067f563948b19e1f0a34cae4c82713a5f11aca7eb53d0439209a33e7f61e3"
+},
+"7faa876f0d9e": {
+"file": "7faa876f0d9e.opus",
+"keys": [
+"cert_print"
+],
+"learner": true,
+"r": "a8b1ff6a1506",
+"s": 2.56,
+"sha256": "sha256:3d5c06ecf0a7d11c6ff68d075c8225e12e4265ea9c2723b60b982bee9e947fb7"
+},
+"7fc74355b45e": {
+"file": "7fc74355b45e.opus",
+"keys": [
+"start_later"
+],
+"learner": true,
+"r": "8e3f3023d6d4",
+"s": 0.99,
+"sha256": "sha256:6deb92fe36f92e3a609842f4edf392ff3f5175c1b978409dc7e1d254e2ab2545"
+},
+"7fe50dcabc39": {
+"file": "7fe50dcabc39.opus",
+"keys": [
+"right"
+],
+"learner": true,
+"r": "b16248a3f1f7",
+"s": 1.98,
+"sha256": "sha256:6120cd05751ade43cc24bbfdcebf1878ea809636c07fef1f3f24e302ab155a06"
+},
+"803f220908ac": {
+"file": "803f220908ac.opus",
+"keys": [
+"voice_en"
+],
+"learner": true,
+"r": "56d7656b8b9f",
+"s": 6.41,
+"sha256": "sha256:278ff11d13a7b2611d95334ea92865033a045531abddd6f0e4fbfea83cce6a74"
+},
+"80580324db54": {
+"file": "80580324db54.opus",
+"keys": [
+"review.pin",
+"teacher.pin",
+"teacher_pin"
+],
+"learner": true,
+"r": "0854c20466db",
+"s": 1.7,
+"sha256": "sha256:0c04a83c3f1776a8c00781ee3e2cbb994b0dc9a5ad6a3e1fbac82f8bed01c27f"
+},
+"807e5160e7b0": {
+"file": "807e5160e7b0.opus",
+"keys": [
+"get_lead"
+],
+"learner": true,
+"r": "0328113e4def",
+"s": 7.01,
+"sha256": "sha256:1e819e46a74f20d4c23224da5c6dfcd5d4081d831a2681557cfad00f2f73a552"
+},
+"8157c7d1227a": {
+"file": "8157c7d1227a.opus",
+"keys": [
+"contest_send",
+"send"
+],
+"learner": true,
+"r": "e85c92f6e29b",
+"s": 0.88,
+"sha256": "sha256:25f0c49a8df0eb25967d84f0d2722a35029802122f958d32c58fb53dd23799b3"
+},
+"819a8621a517": {
+"file": "819a8621a517.opus",
+"keys": [
+"remove_learner"
+],
+"learner": true,
+"r": "4632161edcd7",
+"s": 3.21,
+"sha256": "sha256:87fcd14e69ffb3b834ce6894dca964258e4231e0dcc9dbc68dda0ded7bda9e10"
+},
+"828e934b8e06": {
+"file": "828e934b8e06.opus",
+"keys": [
+"v_title"
+],
+"learner": true,
+"r": "796fa744f6e5",
+"s": 1.81,
+"sha256": "sha256:e90655092f856bd960699bbcd22834c9bd66cc1e2f939808770df4673bae5006"
+},
+"835425c36e97": {
+"file": "835425c36e97.opus",
+"keys": [
+"track_maths"
+],
+"learner": true,
+"r": "3314c9013fbc",
+"s": 1.61,
+"sha256": "sha256:01fe8be746a554e98f67e429595280d5e025e80cfbac58b9f4520e86d9031e50"
+},
+"836142e61d9c": {
+"file": "836142e61d9c.opus",
+"keys": [
+"quran_draft"
+],
+"learner": true,
+"r": "639dd6615194",
+"s": 6.81,
+"sha256": "sha256:af9e818bb52394beb0632e1178dab8391bd7176345a293428acb24810e2549d6"
+},
+"841b8cb3418c": {
+"file": "841b8cb3418c.opus",
+"keys": [
+"admin.p_off",
+"common.off",
+"off"
+],
+"learner": true,
+"r": "26ba5eb31b50",
+"s": 0.9,
+"sha256": "sha256:4ab1fbcd21fe7294ec947220d314946d1685a238b3f8ac804b70d8b773064b1a"
+},
+"8489d5eeb51a": {
+"file": "8489d5eeb51a.opus",
+"keys": [
+"made_full{n=6}"
+],
+"learner": true,
+"r": "fc31fb47c721",
+"s": 6.11,
+"sha256": "sha256:d5b6dffd56ca675c7adafa3c9cbe1278420daa4e83a7c5b7c40b1f8d99fac2df"
+},
+"855209af85ca": {
+"file": "855209af85ca.opus",
+"keys": [
+"credits_app"
+],
+"learner": true,
+"r": "b3a2f83644e0",
+"s": 4.71,
+"sha256": "sha256:6a88b244f24d85dcce293aeb3761eac98b95c21d0a8cdaa55e8b6ff985a7a4d1"
+},
+"85b537dd362b": {
+"file": "85b537dd362b.opus",
+"keys": [
+"reading_title"
+],
+"learner": true,
+"r": "d5a6771d57c1",
+"s": 1.0,
+"sha256": "sha256:d585ad40683cfae917fab3564656e687642b1e2e252199715445191886f83cde"
+},
+"85ffc278600f": {
+"file": "85ffc278600f.opus",
+"keys": [
+"quran_notes{n=4}"
+],
+"learner": true,
+"r": "872b9b7bf9c7",
+"s": 2.13,
+"sha256": "sha256:a642c60268fbb1ebfa114b241216eaf5f0e6acf1f520c5034f5078fff0336224"
+},
+"866f11a001e6": {
+"file": "866f11a001e6.opus",
+"keys": [
+"quran_repeat_n{n=6}"
+],
+"learner": true,
+"r": "e0074eac745d",
+"s": 5.11,
+"sha256": "sha256:9b899284bd4708ff840759b8bffea8c77a65b8b4128e851da4b5775ada2791cd"
+},
+"881774b4b379": {
+"file": "881774b4b379.opus",
+"keys": [
+"uni_draft"
+],
+"learner": true,
+"r": "81cd5462f2fa",
+"s": 7.61,
+"sha256": "sha256:8f7ebcf692556bf7d89a69c605b61c977296d5a16c457d18dc8b2a9ac3427efe"
+},
+"881854d65c6f": {
+"file": "881854d65c6f.opus",
+"keys": [
+"tries_left{n=8}"
+],
+"learner": true,
+"r": "cb54f940da89",
+"s": 3.51,
+"sha256": "sha256:9c1365b299548bde610d2c808882ca0afc3788f85208c789e9ad659bba19c92b"
+},
+"8825b6bbfe2c": {
+"file": "8825b6bbfe2c.opus",
+"keys": [
+"q_sent"
+],
+"learner": true,
+"r": "4a18f7f08680",
+"s": 2.36,
+"sha256": "sha256:9804438098afce2e7d0b0fbefcffcbbf7ac76a20d8fde9a052f9dc194809515c"
+},
+"88a15a325bdd": {
+"file": "88a15a325bdd.opus",
+"keys": [
+"keep_waiting"
+],
+"learner": true,
+"r": "f31ed6e99806",
+"s": 1.24,
+"sha256": "sha256:19b18b61d2f6b7cf9071a2d2baba245fb807202b6654093fe85506cb5b2a30f2"
+},
+"896869b485cf": {
+"file": "896869b485cf.opus",
+"keys": [
+"plan_here{n=12}"
+],
+"learner": true,
+"r": "3d140c9ddded",
+"s": 3.71,
+"sha256": "sha256:1dd95b69834d258790de508cd3045c51862c1dc3245f7ba03a4c59a03282e590"
+},
+"8a2425a447a6": {
+"file": "8a2425a447a6.opus",
+"keys": [
+"admin.s_english",
+"english",
+"lang.en",
+"lang_en",
+"teacher.subj_english"
+],
+"learner": true,
+"r": "46bc6371f127",
+"s": 1.33,
+"sha256": "sha256:48d62a415ec3cf9b4d50de0e054fe96a204d96d0d20f73f0f57330013527edd2"
+},
+"8a24bd2734a2": {
+"file": "8a24bd2734a2.opus",
+"keys": [
+"have_code"
+],
+"learner": true,
+"r": "d01ce0af8d26",
+"s": 2.29,
+"sha256": "sha256:7c6943dd560b70827a624b453a74afa6cf3d754c4d78f71f657e5f3233cd5c93"
+},
+"8a52f7bc3f5c": {
+"file": "8a52f7bc3f5c.opus",
+"keys": [
+"source"
+],
+"learner": true,
+"r": "f9774c2b6e4a",
+"s": 0.61,
+"sha256": "sha256:e3131634b0285babe8d8034905a8bd32aadd8cbd32e7872dd4fba5ad4cf71ed8"
+},
+"8a7c200f3231": {
+"file": "8a7c200f3231.opus",
+"keys": [
+"code_wrong"
+],
+"learner": true,
+"r": "c4c23208be1c",
+"s": 3.81,
+"sha256": "sha256:6144dcc4fb652cacd2801883fdbd6ea2a61ce1ada900218a3575eeb7948ac45d"
+},
+"8ae32529a03a": {
+"file": "8ae32529a03a.opus",
+"keys": [
+"quran_searched{n=7}"
+],
+"learner": true,
+"r": "4ef222d92842",
+"s": 4.81,
+"sha256": "sha256:97e4c4c19a3f5bd3aff112212dc5e51abf57f7b7851b22b0f8a6f972f1018313"
+},
+"8aec64dacbb3": {
+"file": "8aec64dacbb3.opus",
+"keys": [
+"printer_hub"
+],
+"learner": true,
+"r": "4020cf6f2205",
+"s": 2.34,
+"sha256": "sha256:7d55f54511a6787eadf24a18dd9cb06c053f66eee67d062f5ccb9c1507021972"
+},
+"8aee8df1278e": {
+"file": "8aee8df1278e.opus",
+"keys": [
+"dark_light"
+],
+"learner": true,
+"r": "8cd60f233d96",
+"s": 3.71,
+"sha256": "sha256:43f4329bd8c797f8ccfec3e3125599a3c2f0ff3b394f8173d53fe788e7473476"
+},
+"8b1677724327": {
+"file": "8b1677724327.opus",
+"keys": [
+"live_leave"
+],
+"learner": true,
+"r": "449460fffa83",
+"s": 2.51,
+"sha256": "sha256:98da54896114da58c655cc17dc4f68c997170f7af6889733d9c42e1e3c7126ec"
+},
+"8b358592db7c": {
+"file": "8b358592db7c.opus",
+"keys": [
+"wait_minute"
+],
+"learner": true,
+"r": "ebdea27ce03c",
+"s": 5.71,
+"sha256": "sha256:92279de1735fec8c7d30231e8bdb829284b807c9380bf998b13dfbc7b5bddbd7"
+},
+"8b4e95f2fa37": {
+"file": "8b4e95f2fa37.opus",
+"keys": [
+"contest_consent"
+],
+"learner": true,
+"r": "05d02f0ccaa5",
+"s": 7.01,
+"sha256": "sha256:ac325f579f1e06ffc8129745fcc372d941fb8995594ef978be9146d92cdc7684"
+},
+"8bbfab3eeafe": {
+"file": "8bbfab3eeafe.opus",
+"keys": [
+"send_again"
+],
+"learner": true,
+"r": "33196dec6c99",
+"s": 1.58,
+"sha256": "sha256:85347e3f84ae649f2e2a0a419ee01e642adcd472b681031a8e3e724698f389ef"
+},
+"8bd1bae8c78e": {
+"file": "8bd1bae8c78e.opus",
+"keys": [
+"offline"
+],
+"learner": true,
+"r": "4dfe702fb50f",
+"s": 4.21,
+"sha256": "sha256:6754f162e9ba3afe4270bbedbf1b6fea02511e250c4802058db35a1c5bebbc4e"
+},
+"8c471f14ee5a": {
+"file": "8c471f14ee5a.opus",
+"keys": [
+"block_period"
+],
+"learner": true,
+"r": "008500556209",
+"s": 0.89,
+"sha256": "sha256:9b4cdf6bb1a13a16438334bfb6cf43beb477cb0530bdc6fa3cc948fa0f19e2e5"
+},
+"8cd01e529384": {
+"file": "8cd01e529384.opus",
+"keys": [
+"removed"
+],
+"learner": true,
+"r": "f52506507493",
+"s": 1.06,
+"sha256": "sha256:e51eaf4458cffd6a696bfb601f2612c091a32a8884799f9b2d7dcd8aabfe6bff"
+},
+"8cfe257aece4": {
+"file": "8cfe257aece4.opus",
+"keys": [
+"common.save",
+"made_save",
+"review.save_note"
+],
+"learner": true,
+"r": "2a4fd02e2d4e",
+"s": 1.21,
+"sha256": "sha256:c7a08d25207621a18ce5678ad3cc9c34f298ff2200bcb9622fdb7d28b4696464"
+},
+"8d4525dba8b6": {
+"file": "8d4525dba8b6.opus",
+"keys": [
+"cancel",
+"common.cancel"
+],
+"learner": true,
+"r": "3ecaaa0d16c2",
+"s": 0.76,
+"sha256": "sha256:5aaafc49fa86cd72dc27402857b705728b5fd3d8abdde920f7659a96a340e5d4"
+},
+"8d4d799a502a": {
+"file": "8d4d799a502a.opus",
+"keys": [
+"sheet_offline"
+],
+"learner": true,
+"r": "a76040f88ffe",
+"s": 4.31,
+"sha256": "sha256:af0f85604cbd3ec2eba5bf190fac5d9d1a9639af22a98ba47ddb25dc5c760687"
+},
+"8d9b2d765725": {
+"file": "8d9b2d765725.opus",
+"keys": [
+"admin.contests",
+"contests",
+"module.contest",
+"review.contests",
+"teacher.contests"
+],
+"learner": true,
+"r": "cedd2d4f3239",
+"s": 0.94,
+"sha256": "sha256:d300581fda3e4fb185e18f834147ad293adf99c9672eced8426589ceb7b356a3"
+},
+"8dd15f741049": {
+"file": "8dd15f741049.opus",
+"keys": [
+"uni_none"
+],
+"learner": true,
+"r": "0f514b2c3241",
+"s": 2.64,
+"sha256": "sha256:c91b3d050a620e15a80afe78cfc3c27d0df537eb4e47d331ef29f9104c3bc23e"
+},
+"8dec7895d6e9": {
+"file": "8dec7895d6e9.opus",
+"keys": [
+"continue"
+],
+"learner": true,
+"r": "2645b5a88fec",
+"s": 0.81,
+"sha256": "sha256:acf9a046f52816d1dcfd4303feb8c126f46e79e3249b2324656bbfe48a364b48"
+},
+"8eb50aa9c1d1": {
+"file": "8eb50aa9c1d1.opus",
+"keys": [
+"credits_intro"
+],
+"learner": true,
+"r": "f4382a683a83",
+"s": 11.21,
+"sha256": "sha256:83ea9963fdf9e98c953c0207f686a102cd6ba2fe367459d9b638c913da3527a9"
+},
+"8eed4288d0c9": {
+"file": "8eed4288d0c9.opus",
+"keys": [
+"your_turn"
+],
+"learner": true,
+"r": "69d9dc34e0e8",
+"s": 1.85,
+"sha256": "sha256:be9ac291db53763c9a24875cbde268cd1389cde38f732aef398747558eb1aa4e"
+},
+"90a8049a52c8": {
+"file": "90a8049a52c8.opus",
+"keys": [
+"no_answers"
+],
+"learner": true,
+"r": "665b60ecc1d7",
+"s": 7.31,
+"sha256": "sha256:0795955cc725dd36d59235d39a235249d99da32db446074e1c82ceef68407234"
+},
+"90adced1f629": {
+"file": "90adced1f629.opus",
+"keys": [
+"admin.purpose.hint",
+"hint"
+],
+"learner": true,
+"r": "96f98a6e71bd",
+"s": 1.41,
+"sha256": "sha256:fa8b48fde7060479be39b5d3bbd4db075d62a934b18b85ce1e88f93e72ba8092"
+},
+"90cae352d642": {
+"file": "90cae352d642.opus",
+"keys": [
+"open_step"
+],
+"learner": true,
+"r": "3f4e341f69bf",
+"s": 2.02,
+"sha256": "sha256:a7da0eadb074380fc7949e2a02cf769de5dfd67d0cca961b842fc7f9565d1b62"
+},
+"90d057460915": {
+"file": "90d057460915.opus",
+"keys": [
+"notify_allow"
+],
+"learner": true,
+"r": "b7898b087496",
+"s": 4.11,
+"sha256": "sha256:58b3b3a5d2cc25956233c57acf0a57d117c3668d93491a2e3a0d0cc926febdc4"
+},
+"90d1d44ea62d": {
+"file": "90d1d44ea62d.opus",
+"keys": [
+"bells"
+],
+"learner": true,
+"r": "8d69ca820aad",
+"s": 0.89,
+"sha256": "sha256:1f02bc8c8259f50ccec2a4e2e20db43e135c953d44ae1b7b8921925b8f8c9d74"
+},
+"91a79ccf14bb": {
+"file": "91a79ccf14bb.opus",
+"keys": [
+"uni_cost_audit"
+],
+"learner": true,
+"r": "fae71ac553ba",
+"s": 4.71,
+"sha256": "sha256:ee893381004250cd0d047673f240e4b30264c997c7844d53b440a75097aa68eb"
+},
+"91c919832211": {
+"file": "91c919832211.opus",
+"keys": [
+"day_paper"
+],
+"learner": true,
+"r": "769bcb6b3cf4",
+"s": 3.51,
+"sha256": "sha256:ae3d60d60347053ebef8c5867a1cfa0008e80f3acb7e129829f36b1be1cabf94"
+},
+"91cc10cf8ccc": {
+"file": "91cc10cf8ccc.opus",
+"keys": [
+"hub_on"
+],
+"learner": true,
+"r": "8646416ea9d5",
+"s": 0.6,
+"sha256": "sha256:f874b2cd59c714f313e53f863ba77ef1c4a656a4044c09dcf2957d7ddb6fb881"
+},
+"91d343579eba": {
+"file": "91d343579eba.opus",
+"keys": [
+"urgent"
+],
+"learner": true,
+"r": "42bdff31b88e",
+"s": 5.61,
+"sha256": "sha256:3769616d2f77dc8291c3f513353746b4c18112ca8100fe3e3a569924f9cc1403"
+},
+"91d57060d9b1": {
+"file": "91d57060d9b1.opus",
+"keys": [
+"lock_code_open",
+"open_code",
+"open_link"
+],
+"learner": true,
+"r": "86e3bc29d3df",
+"s": 0.67,
+"sha256": "sha256:40661547d468735732212ab60b1b1d85d6127db2fccf379218988c522bf6533a"
+},
+"928852e3cd49": {
+"file": "928852e3cd49.opus",
+"keys": [
+"worksheet_note"
+],
+"learner": true,
+"r": "892c96c3f3ef",
+"s": 4.81,
+"sha256": "sha256:6eede8f0c88ff120183e054ede2f84d00378b319875ab57af7583cf585f928dd"
+},
+"92db42212657": {
+"file": "92db42212657.opus",
+"keys": [
+"plan_start"
+],
+"learner": true,
+"r": "cd79f1da8041",
+"s": 1.74,
+"sha256": "sha256:690f0db2e5b35b1581f5d2d67e9507587ecf5da1f0f30f17053605f4998e88e0"
+},
+"93022358cd32": {
+"file": "93022358cd32.opus",
+"keys": [
+"day_done"
+],
+"learner": true,
+"r": "e86dbbed4a8f",
+"s": 2.51,
+"sha256": "sha256:ecb5b70aeeac9258b238a3f2d3ba27ef9987405262a634207939b1d3b58b8a13"
+},
+"9375bb40e2ad": {
+"file": "9375bb40e2ad.opus",
+"keys": [
+"fix"
+],
+"learner": true,
+"r": "cd71be5a5016",
+"s": 0.73,
+"sha256": "sha256:bf8b509b962f71b9839510891cc677dfd7fb188b794c6a53b6997696f17e0255"
+},
+"93e43b42a4dc": {
+"file": "93e43b42a4dc.opus",
+"keys": [
+"empty"
+],
+"learner": true,
+"r": "5fc5beec0d6d",
+"s": 1.01,
+"sha256": "sha256:fc22f7ca0a6e04313366ddeef515a50fb4aab5ca180c1927e5bbadd5d583c714"
+},
+"9457b58d7909": {
+"file": "9457b58d7909.opus",
+"keys": [
+"no_lessons",
+"review.no_lessons"
+],
+"learner": true,
+"r": "a056167079e4",
+"s": 1.97,
+"sha256": "sha256:c988d24e4a4bd172e2ad18fadeb6a7dda0e6a9ab885f0d2bf433296cb6508125"
+},
+"94cb2cb37321": {
+"file": "94cb2cb37321.opus",
+"keys": [
+"tries_left{n=7}"
+],
+"learner": true,
+"r": "e784535f308a",
+"s": 3.81,
+"sha256": "sha256:167a6f0699dcfaa564bcf00b53e1bd384ec0045fe6b16686354197813eaf103e"
+},
+"94ea37bd7071": {
+"file": "94ea37bd7071.opus",
+"keys": [
+"practice_sheet",
+"worksheet"
+],
+"learner": true,
+"r": "7feda3699f89",
+"s": 1.7,
+"sha256": "sha256:2ac0d08d4b14494519b8728d4b6ff279ab5f7b8fab0e9f5924984c4599423a5d"
+},
+"9511b7718f24": {
+"file": "9511b7718f24.opus",
+"keys": [
+"nickname_hint"
+],
+"learner": true,
+"r": "2b306880fafa",
+"s": 2.36,
+"sha256": "sha256:2a96d302a2b349a82091e9f82ebb7da1b624a328f82740f6012f4ace59a81a3f"
+},
+"9518da8f1562": {
+"file": "9518da8f1562.opus",
+"keys": [
+"tone_4"
+],
+"learner": true,
+"r": "d16fd16eb0d1",
+"s": 2.29,
+"sha256": "sha256:5f8830a3116fb3b19e27525c9c50deb9d1ab575e9ed1fe43150bf8395a76c816"
+},
+"953a2a004c96": {
+"file": "953a2a004c96.opus",
+"keys": [
+"hear_page"
+],
+"learner": true,
+"r": "2ca1d0b19fcb",
+"s": 1.75,
+"sha256": "sha256:e3284edcaec3ec09808e754e55663546a17ae973e99044b85d4569e865b45f3e"
+},
+"9598bb987b8a": {
+"file": "9598bb987b8a.opus",
+"keys": [
+"live_hand"
+],
+"learner": true,
+"r": "63805449de59",
+"s": 2.03,
+"sha256": "sha256:a0ae8f497f6e30c2a6c299fe3c60e6714a21c4362943e21a8dd240ef0c246841"
+},
+"95e06188247a": {
+"file": "95e06188247a.opus",
+"keys": [
+"uni_scholarships"
+],
+"learner": true,
+"r": "ad71d59e40b8",
+"s": 1.05,
+"sha256": "sha256:cf5c6b79de2f6e48ef249152724559f415ac194e87aca68bc9f3a58a139915cf"
+},
+"961f8cab3017": {
+"file": "961f8cab3017.opus",
+"keys": [
+"too_dark"
+],
+"learner": true,
+"r": "637d6564ad6e",
+"s": 5.21,
+"sha256": "sha256:80aae2781c9dc647ea4875efe9247066ae6958c352890d01bca16a93f8ab55fa"
+},
+"9631469b4c6a": {
+"file": "9631469b4c6a.opus",
+"keys": [
+"plan_here{n=9}"
+],
+"learner": true,
+"r": "6faa3920b526",
+"s": 3.51,
+"sha256": "sha256:cfb63faf405a2442481c0219606059403c4e372cdae07c1b5291d1730ce7389e"
+},
+"9638e4bf8646": {
+"file": "9638e4bf8646.opus",
+"keys": [
+"study_title"
+],
+"learner": true,
+"r": "141f3fa1d55c",
+"s": 1.6,
+"sha256": "sha256:3ee3a647789f37436804dbcb24f03bcef54960e2f9d9a7a3d878d5a82a7ad3da"
+},
+"964e114c3388": {
+"file": "964e114c3388.opus",
+"keys": [
+"made_no_ids"
+],
+"learner": true,
+"r": "cfbbd2b629b3",
+"s": 7.71,
+"sha256": "sha256:ea4ddc92845c4e75b6aa843e6bde0bbce053c576f5c5ad2e21a2a17086510f2d"
+},
+"96b19d935d43": {
+"file": "96b19d935d43.opus",
+"keys": [
+"draft_note"
+],
+"learner": true,
+"r": "a491ac09ee9e",
+"s": 3.21,
+"sha256": "sha256:ed59752a413bb9d5ec09a43e428d481a8d319a1079963957d01c4ab275536b10"
+},
+"9796cc555104": {
+"file": "9796cc555104.opus",
+"keys": [
+"plan_here{n=10}"
+],
+"learner": true,
+"r": "7aca3eeabc1f",
+"s": 3.11,
+"sha256": "sha256:0620e3f26190d2a6f90d7cba1f697dca1795fee2a728828874e3c79af4a42818"
+},
+"9808f9572f90": {
+"file": "9808f9572f90.opus",
+"keys": [
+"so_close"
+],
+"learner": true,
+"r": "e5b783ef9b6b",
+"s": 4.11,
+"sha256": "sha256:c2eceeebd2b9b7d17d50c01df87e4953b77b6af744f6a04d5e6803ede942a859"
+},
+"982af3a3afdd": {
+"file": "982af3a3afdd.opus",
+"keys": [
+"made_offline"
+],
+"learner": true,
+"r": "d99c09000136",
+"s": 5.01,
+"sha256": "sha256:7147b524e9652b0af8315a1dd3dea99e6010e97c692422c1a01146b82ad0b930"
+},
+"98cf9ff9a155": {
+"file": "98cf9ff9a155.opus",
+"keys": [
+"about_text"
+],
+"learner": true,
+"r": "df8e6139bdb2",
+"s": 7.31,
+"sha256": "sha256:0995c77091ad59f505a428cce9b6de6f3cbd6d4d2c876c1f77b1ae3145bc4e3b"
+},
+"98d878779abf": {
+"file": "98d878779abf.opus",
+"keys": [
+"start_earlier"
+],
+"learner": true,
+"r": "eba4c0b729c5",
+"s": 0.98,
+"sha256": "sha256:b2134a78c398b7bd4e051ea197d4438d9ccc1768e51ca548e68eaa55932f62b2"
+},
+"99105a366865": {
+"file": "99105a366865.opus",
+"keys": [
+"start_lesson"
+],
+"learner": true,
+"r": "1fe47da99040",
+"s": 1.52,
+"sha256": "sha256:7bf5cad0961d907cce017873ffcd07b4cc47fd533d3c83fb8688c0c2c3c60646"
+},
+"99f2292450e5": {
+"file": "99f2292450e5.opus",
+"keys": [
+"is_clear"
+],
+"learner": true,
+"r": "3ef63f84a3ff",
+"s": 0.82,
+"sha256": "sha256:838582d610c903545f2a74a0b922ff34329d8508cdcaffc444b358cca318403f"
+},
+"99f48dd55ed6": {
+"file": "99f48dd55ed6.opus",
+"keys": [
+"uni_cost_free_apply"
+],
+"learner": true,
+"r": "442f8b4ec544",
+"s": 2.11,
+"sha256": "sha256:8ba02ca19862328c52ed24669a6c6f979e4d3c01378fff852f20e79a3f75005c"
+},
+"9a0be82749f7": {
+"file": "9a0be82749f7.opus",
+"keys": [
+"theme_dark"
+],
+"learner": true,
+"r": "64989be37d9c",
+"s": 1.1,
+"sha256": "sha256:0de94d7a3d66309f3f56937ff554c0fa3cedbc3c311e946a688a8f7db703220c"
+},
+"9a76dcc7ada5": {
+"file": "9a76dcc7ada5.opus",
+"keys": [
+"made_full{n=12}"
+],
+"learner": true,
+"r": "d199eb0c02cc",
+"s": 5.41,
+"sha256": "sha256:98e23f2108f13e2f03e82cbb4b2af3e52492a4a507daafb7be1c633daa79789d"
+},
+"9a8e4bfdd18e": {
+"file": "9a8e4bfdd18e.opus",
+"keys": [
+"common.today",
+"today"
+],
+"learner": true,
+"r": "ed40d26f3225",
+"s": 0.74,
+"sha256": "sha256:ae2c956785695638bfd709ae604a5bb27ed83d22c7ae13c40da853c3acb42d29"
+},
+"9b5751bfe089": {
+"file": "9b5751bfe089.opus",
+"keys": [
+"admin.k_opening",
+"block_opening"
+],
+"learner": true,
+"r": "be29f76d4f75",
+"s": 1.13,
+"sha256": "sha256:ef0750b49f0eadff644df342966ceca97e4c49f206f80d5f0895b81a5259d054"
+},
+"9b5bea38f826": {
+"file": "9b5bea38f826.opus",
+"keys": [
+"remove_sure"
+],
+"learner": true,
+"r": "8137a2130457",
+"s": 7.71,
+"sha256": "sha256:db51aff6207f410e2e9bb88e822829a556a14e5fae89ad80f75591cd8e2cf558"
+},
+"9b5ddf4e33b8": {
+"file": "9b5ddf4e33b8.opus",
+"keys": [
+"hold_it",
+"save"
+],
+"learner": true,
+"r": "fa68be926201",
+"s": 0.9,
+"sha256": "sha256:1854e6466c03376fd81f500a2aab541724994e2e0a8f8b95ad974aac2c1e0cea"
+},
+"9b61c026401f": {
+"file": "9b61c026401f.opus",
+"keys": [
+"quran_notes{n=12}"
+],
+"learner": true,
+"r": "7b06082e3421",
+"s": 1.96,
+"sha256": "sha256:b5fc7a701d1caee7cff8e24d5074cad9d5e014a247f01ec114e772753a8e2554"
+},
+"9bf13dfa15fb": {
+"file": "9bf13dfa15fb.opus",
+"keys": [
+"download"
+],
+"learner": true,
+"r": "1535363142b5",
+"s": 1.29,
+"sha256": "sha256:455f61017f82365be24df0d7452a4671daffd2a0049bdb238267d1a8582a1561"
+},
+"9c6732f8447f": {
+"file": "9c6732f8447f.opus",
+"keys": [
+"check_answer"
+],
+"learner": true,
+"r": "1f6027661fcb",
+"s": 0.64,
+"sha256": "sha256:1a183d3ae6e3eac5256c24ad028ba58f37d7be91209af13ed8cb22db6341d5cc"
+},
+"9c9d1b7b8c79": {
+"file": "9c9d1b7b8c79.opus",
+"keys": [
+"adults",
+"band.ad"
+],
+"learner": true,
+"r": "4341baf8a356",
+"s": 1.27,
+"sha256": "sha256:019a30cdd4ac9aeaf73244c4251d7583f5431aa0cbca6dfb17d8183861eda6d7"
+},
+"9d3d0bbd8acb": {
+"file": "9d3d0bbd8acb.opus",
+"keys": [
+"hold_3"
+],
+"learner": true,
+"r": "f9549a42d1ad",
+"s": 2.08,
+"sha256": "sha256:e504ebce2592c711925ddcd236a2f1e91fd68b58f515d55396487bf7cf2893fd"
+},
+"9d520dde5cb1": {
+"file": "9d520dde5cb1.opus",
+"keys": [
+"made_why_is"
+],
+"learner": true,
+"r": "890d9142b25f",
+"s": 0.41,
+"sha256": "sha256:de43325b265c0f4abc5331f85abd9ecc962a5d127bf9629551664b9f8b6eef2f"
+},
+"9dedd9344081": {
+"file": "9dedd9344081.opus",
+"keys": [
+"get_app"
+],
+"learner": true,
+"r": "a8424b1655b2",
+"s": 2.48,
+"sha256": "sha256:cf80f738266fe74a100f4d28ed2659d36248c533cc29235a1148c17c213ce361"
+},
+"9e14994f9b81": {
+"file": "9e14994f9b81.opus",
+"keys": [
+"open_settings"
+],
+"learner": true,
+"r": "4df8ab2b61d7",
+"s": 1.37,
+"sha256": "sha256:556756a55bc36b60d99d1d541706dc22ef7509fb2a467fbef33046d877ad8e51"
+},
+"9ea9541a9ecf": {
+"file": "9ea9541a9ecf.opus",
+"keys": [
+"mine_yes"
+],
+"learner": true,
+"r": "4320e4da6256",
+"s": 2.11,
+"sha256": "sha256:ec51d1b707087c04e12fe5c52ce04ef1e7e502670e8dbf19bddb6a52a483335a"
+},
+"9ef6e30821a1": {
+"file": "9ef6e30821a1.opus",
+"keys": [
+"study_yes"
+],
+"learner": true,
+"r": "8e41681c94be",
+"s": 3.21,
+"sha256": "sha256:1b3ba7edacbb40a5410949d43e4050b29f7094f619eb814a79d28c9bbd79ad8d"
+},
+"9f220fa2ab0b": {
+"file": "9f220fa2ab0b.opus",
+"keys": [
+"tries_left{n=4}"
+],
+"learner": true,
+"r": "2dea95f62678",
+"s": 4.41,
+"sha256": "sha256:dc94fadd879bf8b48ec2354d8fca72def10692631a966f4d7cdbc982048c74eb"
+},
+"9f2f77fe93e6": {
+"file": "9f2f77fe93e6.opus",
+"keys": [
+"printer_off"
+],
+"learner": true,
+"r": "144f694d4fea",
+"s": 2.22,
+"sha256": "sha256:11b537bf7e325ab83e766296b5e6e85ba61856ad4dc9a353d19add62b832e866"
+},
+"9f9fc18c4aea": {
+"file": "9f9fc18c4aea.opus",
+"keys": [
+"badge_teacher"
+],
+"learner": true,
+"r": "599050f104b6",
+"s": 2.25,
+"sha256": "sha256:a3a285140822335fe8490f61bf0c0630818a0c9b94425310d2e2bc0ce42602e9"
+},
+"9fb705e2bc56": {
+"file": "9fb705e2bc56.opus",
+"keys": [
+"primary_note"
+],
+"learner": true,
+"r": "f2503409193e",
+"s": 6.31,
+"sha256": "sha256:44081d289a39a952dbc6920b79907542dc6d619c01cdd46dc8f09dab67bedf81"
+},
+"a01668f36bb1": {
+"file": "a01668f36bb1.opus",
+"keys": [
+"voice_none"
+],
+"learner": true,
+"r": "410c437d874b",
+"s": 7.31,
+"sha256": "sha256:4aa7d15ef0ab51225959e8d14b3a7d33e0b35eb3406dd72f33e07dbe1f0dffd7"
+},
+"a023ed09701f": {
+"file": "a023ed09701f.opus",
+"keys": [
+"fewer"
+],
+"learner": true,
+"r": "ad605fb7401b",
+"s": 0.79,
+"sha256": "sha256:7dd3afcee6e2e340e48ff943d510a5b43ca8a9aa51e800cf6634fd8ede58117b"
+},
+"a037917f8dfb": {
+"file": "a037917f8dfb.opus",
+"keys": [
+"uni_title"
+],
+"learner": true,
+"r": "e72f49efdbac",
+"s": 2.33,
+"sha256": "sha256:23553352d281c7fa272b27830b603d68b3d23d05e7bf55c2d86bb6e618ef1e0f"
+},
+"a0539df6b0dc": {
+"file": "a0539df6b0dc.opus",
+"keys": [
+"file_note"
+],
+"learner": true,
+"r": "5c786724eb98",
+"s": 5.81,
+"sha256": "sha256:93660fa859e19b7ffcfd60f657cc0564bedcaf6089e818b3ecd8228166161436"
+},
+"a0c2480b73c3": {
+"file": "a0c2480b73c3.opus",
+"keys": [
+"plan_here{n=7}"
+],
+"learner": true,
+"r": "d900a29184e9",
+"s": 3.91,
+"sha256": "sha256:cd5e1fad37edae7851627ade661fde780874325dba92db35570369a7001d86f6"
+},
+"a10bf3d5d306": {
+"file": "a10bf3d5d306.opus",
+"keys": [
+"quran_found{n=5}",
+"quran_verses{n=5}"
+],
+"learner": true,
+"r": "52891a9e56b4",
+"s": 1.58,
+"sha256": "sha256:e38e3bb5ddefd0d3cf9c83926cdfa6803afcf6350f4e4c7450f23e1dede47fa7"
+},
+"a1a248dae250": {
+"file": "a1a248dae250.opus",
+"keys": [
+"contest_none"
+],
+"learner": true,
+"r": "21025513598b",
+"s": 2.4,
+"sha256": "sha256:a8ec3cd15a0688687cca8225a91611f5493bb836f25d28463e293dc829d9ffca"
+},
+"a2793de6b285": {
+"file": "a2793de6b285.opus",
+"keys": [
+"get_step1"
+],
+"learner": true,
+"r": "160224f9e4ed",
+"s": 2.11,
+"sha256": "sha256:e35d3685115e9dc13b3c8b0acb61c05cebaea1f363b8e7c22419394746b23911"
+},
+"a2daf7853bb5": {
+"file": "a2daf7853bb5.opus",
+"keys": [
+"track_literacy",
+"track_read"
+],
+"learner": true,
+"r": "fc2aee5987ba",
+"s": 2.09,
+"sha256": "sha256:667e3436ae9275f976425ba4fbbb00640fec9643c472c2c27aaaad62ec86289e"
+},
+"a34fa4a51054": {
+"file": "a34fa4a51054.opus",
+"keys": [
+"quran_notes{n=6}"
+],
+"learner": true,
+"r": "768a74af5f56",
+"s": 1.95,
+"sha256": "sha256:86d837bd88f50774604afb7184d45d7c3b8fe707081dff1f44053b18aa6ac584"
+},
+"a381bb5c90e2": {
+"file": "a381bb5c90e2.opus",
+"keys": [
+"common.next",
+"next",
+"plan_next"
+],
+"learner": true,
+"r": "225613a40200",
+"s": 0.68,
+"sha256": "sha256:66f0d3d016d6ef93e6e4c411a6736899583704fea6eb908d1f3abfe54c0bced7"
+},
+"a390ce1a3bac": {
+"file": "a390ce1a3bac.opus",
+"keys": [
+"dispute_thanks"
+],
+"learner": true,
+"r": "621e84255f72",
+"s": 3.61,
+"sha256": "sha256:1da72d93220e9e8a852e074672835eb8d818419d747aee4dc64e7cc604122614"
+},
+"a400fdd77780": {
+"file": "a400fdd77780.opus",
+"keys": [
+"look_again{n=6}"
+],
+"learner": true,
+"r": "641fa2063bd7",
+"s": 2.5,
+"sha256": "sha256:4fb87b38507bc411c52147392afbb4410d673002b613a305972f91dc7297ff3a"
+},
+"a41ec0a6fb1d": {
+"file": "a41ec0a6fb1d.opus",
+"keys": [
+"made_a"
+],
+"learner": true,
+"r": "03603767c5d4",
+"s": 0.89,
+"sha256": "sha256:8fcea450cd7d50c19b05443f3885e061cb8e99828e8df0a8b91f9a43468262cc"
+},
+"a46ed6085db6": {
+"file": "a46ed6085db6.opus",
+"keys": [
+"quran_found{n=12}",
+"quran_verses{n=12}"
+],
+"learner": true,
+"r": "adf1523474bb",
+"s": 2.57,
+"sha256": "sha256:c186e6e2f21b325d1863fa57616f829ec976941d0f098237d0588a8ece3c53ac"
+},
+"a4ee6c2c5969": {
+"file": "a4ee6c2c5969.opus",
+"keys": [
+"cert_sent",
+"teacher.queued"
+],
+"learner": true,
+"r": "2c7e78ec5b66",
+"s": 2.68,
+"sha256": "sha256:f8551c42698b53338b9baeb992659a266352b165feeca2aff24caf9723f80d5b"
+},
+"a626e9130b6e": {
+"file": "a626e9130b6e.opus",
+"keys": [
+"update_app"
+],
+"learner": true,
+"r": "4ac9248f7703",
+"s": 1.83,
+"sha256": "sha256:fd9e245ff0c43eeeed925680421dd861c3f31ffbd7979d9a3bd8ef817255ef60"
+},
+"a69d2111d1f0": {
+"file": "a69d2111d1f0.opus",
+"keys": [
+"teacher"
+],
+"learner": true,
+"r": "4a6787ae7dbf",
+"s": 1.72,
+"sha256": "sha256:419811025efeb5772e0f7af4dd0dd657054913bde903b4e82ef6b2530aac3ab2"
+},
+"a6ce01bbefa5": {
+"file": "a6ce01bbefa5.opus",
+"keys": [
+"quran_notes{n=8}"
+],
+"learner": true,
+"r": "73e976f4532d",
+"s": 2.36,
+"sha256": "sha256:dadf2ff8ab7cb84e50efd088fbed6f11e339708f7699a424db60e7aac78a28d5"
+},
+"a6f1305ada7c": {
+"file": "a6f1305ada7c.opus",
+"keys": [
+"get_today"
+],
+"learner": true,
+"r": "1faa86255d66",
+"s": 2.63,
+"sha256": "sha256:ff00b373509b14dca844b2758a4f4e055f1c12c20c6271ce51620e1457842ae7"
+},
+"a75157f0122e": {
+"file": "a75157f0122e.opus",
+"keys": [
+"made_chip_unsafe"
+],
+"learner": true,
+"r": "81c821e469de",
+"s": 1.94,
+"sha256": "sha256:527797d6f77d1edb8d90a218b4e5162f3a48225ef4a80477c1394fba3d2d7647"
+},
+"a7776e7edd9a": {
+"file": "a7776e7edd9a.opus",
+"keys": [
+"sharing"
+],
+"learner": true,
+"r": "0309bf45a5e0",
+"s": 0.74,
+"sha256": "sha256:e000a12cf12a744b4e983ec6485c02081d6fb19ead1007851a726b14d9688569"
+},
+"a7792906a7cc": {
+"file": "a7792906a7cc.opus",
+"keys": [
+"plan_stopped"
+],
+"learner": true,
+"r": "974e0a48b658",
+"s": 1.9,
+"sha256": "sha256:feca81a16578ecfb5ef2f5fa99d248e576cb7991482e8caa16bdf698f0537e7c"
+},
+"a7a175b5e1e5": {
+"file": "a7a175b5e1e5.opus",
+"keys": [
+"made_waiting"
+],
+"learner": true,
+"r": "fa3d0bcf0e55",
+"s": 1.54,
+"sha256": "sha256:da4ba600ccd93a16dc4f0c1f44e819e9aeda4e2f045edb7afdf5e492d94188df"
+},
+"a7b14f1e8482": {
+"file": "a7b14f1e8482.opus",
+"keys": [
+"live_listening"
+],
+"learner": true,
+"r": "cbbaaab4c25e",
+"s": 2.25,
+"sha256": "sha256:7c05d82b6088ad57c2e2b55636d3e6da59b384fc96094ead2a01c3b4d640d7c5"
+},
+"a7b9c22946cd": {
+"file": "a7b9c22946cd.opus",
+"keys": [
+"live_explain"
+],
+"learner": true,
+"r": "1963ef6653bb",
+"s": 9.01,
+"sha256": "sha256:560a38acd9dc0522d2ab4d8b092a7619b220c6024564ecb81a8ed2f0dcfd842e"
+},
+"a7dd5dacbca5": {
+"file": "a7dd5dacbca5.opus",
+"keys": [
+"taking_long"
+],
+"learner": true,
+"r": "77c4872a515c",
+"s": 1.84,
+"sha256": "sha256:2f0abfc173d39c410602630602f215890570e48b4898ebcc860ad1e49b0f6c10"
+},
+"a8857d775f29": {
+"file": "a8857d775f29.opus",
+"keys": [
+"made_count{n=9}"
+],
+"learner": true,
+"r": "687b8efa46ac",
+"s": 1.91,
+"sha256": "sha256:1888ae80aeca864224f03101373aa66bbec4ae6e90e463b2182c9bf9f6bd8647"
+},
+"a9cfaac36a87": {
+"file": "a9cfaac36a87.opus",
+"keys": [
+"net_hub"
+],
+"learner": true,
+"r": "dbc4eaa1ec15",
+"s": 0.97,
+"sha256": "sha256:0654010565e8d00c4d61f841ca34ba2b7525a0d6b50c161693d025b3c79b8a32"
+},
+"aa1103074067": {
+"file": "aa1103074067.opus",
+"keys": [
+"no_answers"
+],
+"learner": true,
+"r": "4e7dddad0fef",
+"s": 4.61,
+"sha256": "sha256:615f211c70e95b774e91cbc745ec754a3487eb0e7d2935385c2bd51b8b361970"
+},
+"aab7f4fb9000": {
+"file": "aab7f4fb9000.opus",
+"keys": [
+"learn_first"
+],
+"learner": true,
+"r": "5e2af8c13a0c",
+"s": 2.0,
+"sha256": "sha256:4fbf7e18f19a9e9920fdd4771aaafaa4560daf2d5c3236a7cbd1d4ec09ce609f"
+},
+"aad44747052e": {
+"file": "aad44747052e.opus",
+"keys": [
+"admin.k_close",
+"block_close"
+],
+"learner": true,
+"r": "72575eab82c5",
+"s": 0.75,
+"sha256": "sha256:ac034420a41756a719a6b51bd8efdda69428fb7b7180c0a88ff5f88bd6e60dbb"
+},
+"ab7fe486a90e": {
+"file": "ab7fe486a90e.opus",
+"keys": [
+"get_open"
+],
+"learner": true,
+"r": "0363ecca0f9e",
+"s": 1.35,
+"sha256": "sha256:d6b87a3867cb0dbda7ea30abd672d88f30a6b329573303212d9f1b2105906018"
+},
+"abd85d7e7937": {
+"file": "abd85d7e7937.opus",
+"keys": [
+"day_yes"
+],
+"learner": true,
+"r": "6a92335914d5",
+"s": 3.41,
+"sha256": "sha256:c057dc9ee1a579adf70603a298d56ddd5ca2db73c9a932a7434df91c681e3538"
+},
+"abe065ca6ce0": {
+"file": "abe065ca6ce0.opus",
+"keys": [
+"badge_checked",
+"checked_today"
+],
+"learner": true,
+"r": "f4194e140c59",
+"s": 1.99,
+"sha256": "sha256:3b18ff7cd41411535ece71a5202d4daf22dddf4c9aeec6cf8587d9c1f406baf9"
+},
+"ac62dc891f75": {
+"file": "ac62dc891f75.opus",
+"keys": [
+"lock_choose"
+],
+"learner": true,
+"r": "48274612944e",
+"s": 4.01,
+"sha256": "sha256:ea456f82445501e9294946f91369355e5b5429bd5e8241b74424b4f9248bf569"
+},
+"acd7ed5b31c7": {
+"file": "acd7ed5b31c7.opus",
+"keys": [
+"tries_left{n=6}"
+],
+"learner": true,
+"r": "eb38278ded7e",
+"s": 3.11,
+"sha256": "sha256:8729be5736c24cd9b33a507e339d77fd8b3bb7216fb1729f0eac4d1003a4ca21"
+},
+"ad86f92802f7": {
+"file": "ad86f92802f7.opus",
+"keys": [
+"cert_name"
+],
+"learner": true,
+"r": "fdaec779f801",
+"s": 7.91,
+"sha256": "sha256:1826012206adcf588b34cd5d4f83e3da14a24442ed1dbe83fe3bca6a9d6ff4b5"
+},
+"ae20bad975f3": {
+"file": "ae20bad975f3.opus",
+"keys": [
+"look_again{n=4}"
+],
+"learner": true,
+"r": "955aa50ba422",
+"s": 2.63,
+"sha256": "sha256:38d35e43797e3ff64a6b485f33ebf9cd5d8215593ab646a405fc18e6fedd5fcc"
+},
+"ae95fd198efc": {
+"file": "ae95fd198efc.opus",
+"keys": [
+"quran_searched{n=8}"
+],
+"learner": true,
+"r": "7ba8e2e23f00",
+"s": 3.31,
+"sha256": "sha256:83f45c1d5f92b39757da65b538baaddd2d1050cf0ca518223bbabe02ca48293f"
+},
+"ae982d1275dc": {
+"file": "ae982d1275dc.opus",
+"keys": [
+"ask_placeholder"
+],
+"learner": true,
+"r": "0c030c1ffc0c",
+"s": 2.35,
+"sha256": "sha256:9fa8610ef44c2bab1a9d8a5254b24ec4cb19d83801a11146a929762757a7153c"
+},
+"b0189fd57127": {
+"file": "b0189fd57127.opus",
+"keys": [
+"made_full{n=7}"
+],
+"learner": true,
+"r": "391909c24f87",
+"s": 6.41,
+"sha256": "sha256:d1a1d425c1339729ead109d938cddf07886273218f9217f22c750501317f8c98"
+},
+"b0240b8add2e": {
+"file": "b0240b8add2e.opus",
+"keys": [
+"simplify"
+],
+"learner": true,
+"r": "9e87d5d28158",
+"s": 3.81,
+"sha256": "sha256:5d233860c17e7f8b1f8ae5a51849fc1fdc7d5909381f1a6daf63311c12062160"
+},
+"b053a33b287f": {
+"file": "b053a33b287f.opus",
+"keys": [
+"wait_badge"
+],
+"learner": true,
+"r": "71fa3d0fcfa0",
+"s": 2.2,
+"sha256": "sha256:f91f043bdcc504365f643de7dc2a0aee15b78269a28d0b415f9709ca56274d6e"
+},
+"b0dcea0c5a25": {
+"file": "b0dcea0c5a25.opus",
+"keys": [
+"asked_today"
+],
+"learner": true,
+"r": "bec4940edf5e",
+"s": 1.41,
+"sha256": "sha256:3e32c85fcce66f7602222afa3dd5947b94d2bf3f3cd4dbe4b0d1fe3d42f0061b"
+},
+"b0e91feb1451": {
+"file": "b0e91feb1451.opus",
+"keys": [
+"no",
+"review.contest_cert_no"
+],
+"learner": true,
+"r": "11a7b91f5b6c",
+"s": 0.45,
+"sha256": "sha256:e2ac307f08ea7deba1c6f9de8256039caf16dd0180e7ad9e7212d14755667ef2"
+},
+"b0fb269502d9": {
+"file": "b0fb269502d9.opus",
+"keys": [
+"look_again{n=9}"
+],
+"learner": true,
+"r": "a03243abb16c",
+"s": 3.61,
+"sha256": "sha256:f86c4a3f936b42708b47057b33ce4dccc3d7dc1c6ce76c0ed061504a352299dc"
+},
+"b140bca6a5a2": {
+"file": "b140bca6a5a2.opus",
+"keys": [
+"quran_searched{n=10}"
+],
+"learner": true,
+"r": "cc06d700f8d6",
+"s": 3.81,
+"sha256": "sha256:68a0c807be368eebd53575f32a055b91941485938e0463032745a2dd7b045786"
+},
+"b1ccc7f1cdc9": {
+"file": "b1ccc7f1cdc9.opus",
+"keys": [
+"plan_stop"
+],
+"learner": true,
+"r": "356d4ee0aa9a",
+"s": 1.52,
+"sha256": "sha256:fdb20f7fe3a92f617d9315e23b74fe4c72355b52fe04e10005f56cb26293b768"
+},
+"b1d7dfbf37a2": {
+"file": "b1d7dfbf37a2.opus",
+"keys": [
+"day_over"
+],
+"learner": true,
+"r": "2ef3fa758dd0",
+"s": 3.51,
+"sha256": "sha256:5e952b1cb62f68fbc14e6d9300ea77b659aea5c306636ca5bb18fe31636f76ac"
+},
+"b1d8f27ddb6e": {
+"file": "b1d8f27ddb6e.opus",
+"keys": [
+"quran_notes{n=2}"
+],
+"learner": true,
+"r": "bec9a6111b0d",
+"s": 1.54,
+"sha256": "sha256:ddc89c810186edac8d2634a302a6e5751386918ca3ad2b0717b11c8746c578a6"
+},
+"b255366ac309": {
+"file": "b255366ac309.opus",
+"keys": [
+"contest_sent"
+],
+"learner": true,
+"r": "f2be37c6ea39",
+"s": 3.61,
+"sha256": "sha256:ea380ad2c378ea1d984ca303e3ff53762cd2ae86aaa5c23d24e6297489d1e172"
+},
+"b26cd3aa6aa2": {
+"file": "b26cd3aa6aa2.opus",
+"keys": [
+"all_right"
+],
+"learner": true,
+"r": "185ac5573dd2",
+"s": 2.22,
+"sha256": "sha256:4548c5d4726b8d747cdd472be7f753158dca064d81e70e95e9345cf142721009"
+},
+"b31bccee5a17": {
+"file": "b31bccee5a17.opus",
+"keys": [
+"made_about"
+],
+"learner": true,
+"r": "b4db5962a4c8",
+"s": 7.41,
+"sha256": "sha256:45e3506263dd9c175d9750e2acc2b9f4fd281b26de70c61e71831e0ced74704f"
+},
+"b3251dcf64b9": {
+"file": "b3251dcf64b9.opus",
+"keys": [
+"credits_voices"
+],
+"learner": true,
+"r": "ce0c4c98aaff",
+"s": 1.25,
+"sha256": "sha256:26cbf937d82c3f67c45943beeaf74c7cd74774adc0a6be7843451ff17b42133c"
+},
+"b3649c113f94": {
+"file": "b3649c113f94.opus",
+"keys": [
+"now_tag"
+],
+"learner": true,
+"r": "0fcb76953107",
+"s": 0.51,
+"sha256": "sha256:5ccfd36653903046c16907ca62cd6bb076e2b73bb7b883dc54f30ad2b51caa40"
+},
+"b3825f522396": {
+"file": "b3825f522396.opus",
+"keys": [
+"cert_failed"
+],
+"learner": true,
+"r": "a2d9ac7f74fb",
+"s": 2.71,
+"sha256": "sha256:4a1f9e596e77c3e693792a2ffc1630894a998c48014ccdc4de1544f5cc6bc265"
+},
+"b3a9e928bf58": {
+"file": "b3a9e928bf58.opus",
+"keys": [
+"contest_you"
+],
+"learner": true,
+"r": "b52e28de1e9b",
+"s": 0.47,
+"sha256": "sha256:e2eb72876bab0f2e4fade679a1bbf65d9e2ce0f94199c4b6d739719382c01efc"
+},
+"b3be6efaa060": {
+"file": "b3be6efaa060.opus",
+"keys": [
+"print_pdf"
+],
+"learner": true,
+"r": "c733c7505564",
+"s": 4.61,
+"sha256": "sha256:b26bd579d5340e90a5ffe8f6950223ae7f16c9f55aebf4d61364c28714e42c69"
+},
+"b3df978e705b": {
+"file": "b3df978e705b.opus",
+"keys": [
+"plan_miss"
+],
+"learner": true,
+"r": "a7d175913dfc",
+"s": 6.41,
+"sha256": "sha256:938488ba9065e005981eb0951fc6fdc423e9743fbaaa63388b1096793f35b9ba"
+},
+"b4278d0e664b": {
+"file": "b4278d0e664b.opus",
+"keys": [
+"lesson_done"
+],
+"learner": true,
+"r": "9964dc1f58a2",
+"s": 2.71,
+"sha256": "sha256:f0d175dc927afeb1618f33262270f3a632e3a79e38e56deeea2d58450fd8ce5a"
+},
+"b429626a047d": {
+"file": "b429626a047d.opus",
+"keys": [
+"path_done"
+],
+"learner": true,
+"r": "10c0d9e56108",
+"s": 2.17,
+"sha256": "sha256:2bf54f4beb8c9c3e4c2eae3113ae213389ad21b159bb36a3def1a0eabc62cb06"
+},
+"b5586e6c61e3": {
+"file": "b5586e6c61e3.opus",
+"keys": [
+"net_sending"
+],
+"learner": true,
+"r": "421606829793",
+"s": 2.11,
+"sha256": "sha256:54403299380a8d83d8707ac87a23d1e648c92491906088104e232f37c04ee9bb"
+},
+"b59808424763": {
+"file": "b59808424763.opus",
+"keys": [
+"quran_repeat_n{n=10}"
+],
+"learner": true,
+"r": "a2d9f0fdc9ec",
+"s": 4.21,
+"sha256": "sha256:b8363b0f542ffba73df20f15aaab440bcaf7154a7924be2bf659cf1f7c735c8c"
+},
+"b62062c1aa6d": {
+"file": "b62062c1aa6d.opus",
+"keys": [
+"reset_waiting{n=5}"
+],
+"learner": true,
+"r": "49814ab5f795",
+"s": 4.91,
+"sha256": "sha256:0b01a21bbc9ca11a5c193e992a4a4ea65b3d69bfc24087083c0db117744056c4"
+},
+"b636766b78e6": {
+"file": "b636766b78e6.opus",
+"keys": [
+"no_questions"
+],
+"learner": true,
+"r": "2bb30b29169d",
+"s": 3.41,
+"sha256": "sha256:40cf5af14e827d5275a435261c367b6a9d67229ce66720b6413c1eff3551dd10"
+},
+"b676b54c8175": {
+"file": "b676b54c8175.opus",
+"keys": [
+"made_change"
+],
+"learner": true,
+"r": "e108c2f52550",
+"s": 2.49,
+"sha256": "sha256:6017707b6f46a792e834aaf62a4aa6c9ce933f86a4d6997d9d44c0471260deb6"
+},
+"b6d7eb0c0cb7": {
+"file": "b6d7eb0c0cb7.opus",
+"keys": [
+"made_full{n=11}"
+],
+"learner": true,
+"r": "55f9c617cd3b",
+"s": 5.01,
+"sha256": "sha256:43f0333e818422fdff21918f9acfee0a41428f077e7cb76b1c62415890467bbd"
+},
+"b74cdd9160e5": {
+"file": "b74cdd9160e5.opus",
+"keys": [
+"adults_note"
+],
+"learner": true,
+"r": "15043dcdd024",
+"s": 2.89,
+"sha256": "sha256:427609101ea09993471610bd69b112f27a04ed56514894263565e418754dd6b8"
+},
+"ba45269573fd": {
+"file": "ba45269573fd.opus",
+"keys": [
+"no_squares"
+],
+"learner": true,
+"r": "15dc4a905996",
+"s": 4.61,
+"sha256": "sha256:bbfc11d4095d692d57ca72d4afe57b17bb179eea5a35591096f0a44610a9690e"
+},
+"ba57a4422550": {
+"file": "ba57a4422550.opus",
+"keys": [
+"lock_wait{n=10}"
+],
+"learner": true,
+"r": "9d12dd02ee98",
+"s": 3.71,
+"sha256": "sha256:68266956d4ca5b1d867f542150f3355ea736c81427802182c74ef67b1e288e05"
+},
+"ba5cbf9fd60a": {
+"file": "ba5cbf9fd60a.opus",
+"keys": [
+"get_sheet"
+],
+"learner": true,
+"r": "7613fca59c0f",
+"s": 1.89,
+"sha256": "sha256:7aab3c54d69662d0522e10a6e480bfe108b535ae919dfc946651df3c7b41348f"
+},
+"ba78a874d253": {
+"file": "ba78a874d253.opus",
+"keys": [
+"get_pdf"
+],
+"learner": true,
+"r": "dc25a3e6b5a2",
+"s": 2.49,
+"sha256": "sha256:37a57016d900d5dc26aeae5216df01c238f295ebc6a497cc04fa655e9942212f"
+},
+"babd45c4bddc": {
+"file": "babd45c4bddc.opus",
+"keys": [
+"licence"
+],
+"learner": true,
+"r": "632480649170",
+"s": 0.92,
+"sha256": "sha256:43bb71c5f9134fadfb3163c94c49622d50793276504474be89779a1943c3b8d8"
+},
+"bae3fdab589d": {
+"file": "bae3fdab589d.opus",
+"keys": [
+"later",
+"teacher.contest_later"
+],
+"learner": true,
+"r": "9822d0991b97",
+"s": 0.94,
+"sha256": "sha256:74dc1f5cf4061ae7a3ac0d367c046f9516d12c9e98ffc6ac342fa45be14ac99c"
+},
+"bb67c405fbef": {
+"file": "bb67c405fbef.opus",
+"keys": [
+"what_to_learn"
+],
+"learner": true,
+"r": "ab3a9d1b32a2",
+"s": 2.04,
+"sha256": "sha256:5a04d24231bd8fe978d3c72d418225c0c6f4a133aabeb85de23ee9fb5b4ef8a7"
+},
+"bbb371ee225f": {
+"file": "bbb371ee225f.opus",
+"keys": [
+"loading"
+],
+"learner": true,
+"r": "2084bab9e0ec",
+"s": 0.86,
+"sha256": "sha256:e331e8030c223c52859bb799a25bf502a45948ea7f4243bc13a251f5f80c479e"
+},
+"bbdc93034ae8": {
+"file": "bbdc93034ae8.opus",
+"keys": [
+"lock_code_wrong"
+],
+"learner": true,
+"r": "9131d0400d51",
+"s": 2.2,
+"sha256": "sha256:bf1ef9fdb9f9db1a1a1e0ccffbaff40867a22f63df835c69caf80aa73759ce09"
+},
+"bc331e4441ef": {
+"file": "bc331e4441ef.opus",
+"keys": [
+"correct_btn",
+"review.ok",
+"right",
+"teacher.made_ok"
+],
+"learner": true,
+"r": "139501ad6afe",
+"s": 0.89,
+"sha256": "sha256:4e55b41f3a554f8aa80f8ff6ece7349174fcc9e7809d22340da9215a68e47e97"
+},
+"bc440d777655": {
+"file": "bc440d777655.opus",
+"keys": [
+"net_off_text"
+],
+"learner": true,
+"r": "7779ca4ddfd6",
+"s": 8.11,
+"sha256": "sha256:3d5e698406affea521c5a823a2c7ff8859fae569afb22941dc78c772c0a5c500"
+},
+"bc45df6051e5": {
+"file": "bc45df6051e5.opus",
+"keys": [
+"get_step3"
+],
+"learner": true,
+"r": "e679dd098591",
+"s": 1.58,
+"sha256": "sha256:eef239d169cb1d27fd2bf0b046e8c0504747ae18b44789a9f13233917570bdb8"
+},
+"bc5b8406f466": {
+"file": "bc5b8406f466.opus",
+"keys": [
+"no_voice"
+],
+"learner": true,
+"r": "bb29239a78e9",
+"s": 2.77,
+"sha256": "sha256:5299534c312e9d5eec55f75126e34a3347764f84a2f193fedb9039909163f2a5"
+},
+"bd567b0f70e1": {
+"file": "bd567b0f70e1.opus",
+"keys": [
+"quran_repeat_n{n=5}"
+],
+"learner": true,
+"r": "8463d0ca8b44",
+"s": 4.01,
+"sha256": "sha256:bcfbf56e32bcdc765544afb3393c3f9ac7b2679489028427db5650daecff9fc3"
+},
+"bd63a353540a": {
+"file": "bd63a353540a.opus",
+"keys": [
+"plan_type"
+],
+"learner": true,
+"r": "319767032f35",
+"s": 3.71,
+"sha256": "sha256:f20e1cf076441c00516090afddb5b8659f7bbaa989588d993ff7ff368a44f3f1"
+},
+"bdad5b51d216": {
+"file": "bdad5b51d216.opus",
+"keys": [
+"stop_sharing"
+],
+"learner": true,
+"r": "5417047ba972",
+"s": 2.53,
+"sha256": "sha256:25219777015f1342b9e59ac46cb069cef5fb8d527e8a85d4cf1519807ddd802f"
+},
+"bdddcdae76ea": {
+"file": "bdddcdae76ea.opus",
+"keys": [
+"quran_found{n=2}",
+"quran_verses{n=2}"
+],
+"learner": true,
+"r": "699a4b704405",
+"s": 1.83,
+"sha256": "sha256:f45df36c634c975cfb94233c078134594a96a8b9aca08662a6dc04d875294168"
+},
+"be7c704fddfc": {
+"file": "be7c704fddfc.opus",
+"keys": [
+"mine_q"
+],
+"learner": true,
+"r": "fbfd1cce409b",
+"s": 3.61,
+"sha256": "sha256:75ce755fc9daa8b5c76a7e65d9872c38a1c4740809f1d1cf872f6a74c63af280"
+},
+"be9fd3bd1ba1": {
+"file": "be9fd3bd1ba1.opus",
+"keys": [
+"admin.on",
+"common.on",
+"on",
+"theme_light"
+],
+"learner": true,
+"r": "7dae4ee7c211",
+"s": 0.92,
+"sha256": "sha256:077b0be7c5e265d1e4e133661eecaddc05635be4ea46af3d5805e3eb1704c6b1"
+},
+"beb3cda828ca": {
+"file": "beb3cda828ca.opus",
+"keys": [
+"write_answer"
+],
+"learner": true,
+"r": "e8a8fa441a58",
+"s": 2.18,
+"sha256": "sha256:db1f65b340f1e441f1c3d02d88138729118d45ff61e3dc145ca47eef6f74a77c"
+},
+"bf01538c3b05": {
+"file": "bf01538c3b05.opus",
+"keys": [
+"contest",
+"review.contest_whole"
+],
+"learner": true,
+"r": "df7d996b5b88",
+"s": 0.96,
+"sha256": "sha256:a384251ed87088424fbd4a48307ff255be3fd29d064ab003e11a8808d3f63565"
+},
+"bf4f485d0ade": {
+"file": "bf4f485d0ade.opus",
+"keys": [
+"contest_blank"
+],
+"learner": true,
+"r": "e904a39af8a0",
+"s": 1.0,
+"sha256": "sha256:3b79b383ebf98c3c8a5ab31675bd53747524443789ef922ff10b461c82b4a207"
+},
+"bf666026c667": {
+"file": "bf666026c667.opus",
+"keys": [
+"quran_notes{n=5}"
+],
+"learner": true,
+"r": "9fa3d4f3cf67",
+"s": 2.4,
+"sha256": "sha256:00d397d5bdb8a763fd96802e41b8a026f108b9569a01dccd8d15b0c279f333e5"
+},
+"bf82bd48c9e1": {
+"file": "bf82bd48c9e1.opus",
+"keys": [
+"admin.s_pashto",
+"lang.ps",
+"lang_ps",
+"pashto",
+"teacher.subj_pashto"
+],
+"learner": true,
+"r": "ec8644960608",
+"s": 0.59,
+"sha256": "sha256:939f4edf78aa49b231f48559b507cf610b45da123005bc1c4082f178867f3a50"
+},
+"bfa6d29d701e": {
+"file": "bfa6d29d701e.opus",
+"keys": [
+"offline_ask"
+],
+"learner": true,
+"r": "fcba020f601e",
+"s": 7.11,
+"sha256": "sha256:8c0b749571b5109136cb2ad267deeef291c266c2e393f9627ed729df709d79be"
+},
+"bfc020670e84": {
+"file": "bfc020670e84.opus",
+"keys": [
+"problems"
+],
+"learner": true,
+"r": "e6263f434e83",
+"s": 1.99,
+"sha256": "sha256:e4b525239c4e245b2e47f097c540dcdf639f89eb059df9658a832bb3c3254b08"
+},
+"c020115321ce": {
+"file": "c020115321ce.opus",
+"keys": [
+"made_ok"
+],
+"learner": true,
+"r": "4ef90d28610b",
+"s": 3.41,
+"sha256": "sha256:24a511d3b6420a575e79174fffbd9e2ab42e60143b6b6ee69c030386da581221"
+},
+"c02ba85a441c": {
+"file": "c02ba85a441c.opus",
+"keys": [
+"beginner"
+],
+"learner": true,
+"r": "751431fd3a95",
+"s": 1.1,
+"sha256": "sha256:86cadca488bd642900003ef9d23595e19614d3fabede3c147bc1a3f1e7f88c83"
+},
+"c02ec7f80332": {
+"file": "c02ec7f80332.opus",
+"keys": [
+"made_yours"
+],
+"learner": true,
+"r": "e9e4b8fca750",
+"s": 1.48,
+"sha256": "sha256:c94f817cea4b2d55a5aa2e0c915022c9234e3f6c72610fed3e725730b1cff819"
+},
+"c0d0119f4b71": {
+"file": "c0d0119f4b71.opus",
+"keys": [
+"look_again{n=7}"
+],
+"learner": true,
+"r": "c1f54de5b46b",
+"s": 1.81,
+"sha256": "sha256:bf2449e97c124ce9f9debf18fc89c47bc2549ac9116c5c5d58b22d11a9d9f342"
+},
+"c115091e1532": {
+"file": "c115091e1532.opus",
+"keys": [
+"check_note"
+],
+"learner": true,
+"r": "fccef3806aca",
+"s": 4.31,
+"sha256": "sha256:aa3e03d04628450a55ed1e8bc1e09ff756997dc7e568d71cb467d4231a3dec27"
+},
+"c12fe8bec94d": {
+"file": "c12fe8bec94d.opus",
+"keys": [
+"voice_open"
+],
+"learner": true,
+"r": "c40e2ca0ccfa",
+"s": 2.05,
+"sha256": "sha256:81a3e8dc2523de1f853b91ff618e7d383507ed15dcaad679da0350984bf08c79"
+},
+"c139d2a98c97": {
+"file": "c139d2a98c97.opus",
+"keys": [
+"quran_repeat_n{n=11}"
+],
+"learner": true,
+"r": "2c17735e8fc2",
+"s": 3.81,
+"sha256": "sha256:6dfad9be076c9901b7fc6308aa4613a7365a3f6e13918bac8cad5d25ff78df9d"
+},
+"c1dd486450da": {
+"file": "c1dd486450da.opus",
+"keys": [
+"answer_sheet"
+],
+"learner": true,
+"r": "b37a51bccf37",
+"s": 3.51,
+"sha256": "sha256:6fc5e4cd89c6683ec417a8dfefef4e7fb20c9b252a2cd63744afc286598699d7"
+},
+"c1e293ef9704": {
+"file": "c1e293ef9704.opus",
+"keys": [
+"forgot"
+],
+"learner": true,
+"r": "0ffc6a3f315e",
+"s": 1.02,
+"sha256": "sha256:1241dc1656cc0e92f5ff67e9884ec2517fffe66a53a7b9a083fb8fd0ff4b2fba"
+},
+"c2f659fcd59e": {
+"file": "c2f659fcd59e.opus",
+"keys": [
+"net_waiting{n=8}"
+],
+"learner": true,
+"r": "1d43e876f627",
+"s": 2.64,
+"sha256": "sha256:64ab6a501547e754282f16e3ecc19f70710216ddcd4c8e705c97fe1e7cc7dd5f"
+},
+"c30d8d84efd9": {
+"file": "c30d8d84efd9.opus",
+"keys": [
+"live_board"
+],
+"learner": true,
+"r": "3cf74fbede89",
+"s": 2.04,
+"sha256": "sha256:1573216f9cd8ae0976c818a3b5874cc7b0bba60b423103670ea24ecbe6b15589"
+},
+"c323f0f0d088": {
+"file": "c323f0f0d088.opus",
+"keys": [
+"your_answer"
+],
+"learner": true,
+"r": "9766daf017b8",
+"s": 1.59,
+"sha256": "sha256:6b331c83c6ecfbaf0ee069a748aa2bc140dd778b334f47b602ce90d87f7b1353"
+},
+"c35e9d99b392": {
+"file": "c35e9d99b392.opus",
+"keys": [
+"lock_code_six"
+],
+"learner": true,
+"r": "9d41b4968aba",
+"s": 2.47,
+"sha256": "sha256:e2aa792ed011f9f583c8111258ce2d08af0f348d2b730eb62491e0b760d649f1"
+},
+"c44b6a1e8b77": {
+"file": "c44b6a1e8b77.opus",
+"keys": [
+"too_many_prints"
+],
+"learner": true,
+"r": "293f12ac2749",
+"s": 3.41,
+"sha256": "sha256:8ec8e5e56a0b6ac12f75bc912d7ecd8b0bc59e1ca382c004ac9821a111f5869a"
+},
+"c58ad2024d66": {
+"file": "c58ad2024d66.opus",
+"keys": [
+"quran_not_here"
+],
+"learner": true,
+"r": "9b886b9ced53",
+"s": 7.31,
+"sha256": "sha256:4005095c9dd55c19aa092c43aa82257e734e8b9cb2fd46ba65f4ce9d18f9f7b0"
+},
+"c597f5dbd28a": {
+"file": "c597f5dbd28a.opus",
+"keys": [
+"cert_forget"
+],
+"learner": true,
+"r": "442f9c74bc68",
+"s": 7.71,
+"sha256": "sha256:49bfc3e20c721722a02a371208a690019874d8c0071c3773bec68f9506ba558f"
+},
+"c6437534d4ce": {
+"file": "c6437534d4ce.opus",
+"keys": [
+"speak_mine"
+],
+"learner": true,
+"r": "795e72c8d4f0",
+"s": 1.98,
+"sha256": "sha256:76a9b0ef2e2e7574e322a76d280745409fa05687b4fb150827504dbd59adf51b"
+},
+"c74c96674369": {
+"file": "c74c96674369.opus",
+"keys": [
+"lock_set"
+],
+"learner": true,
+"r": "0dbe7502f212",
+"s": 0.85,
+"sha256": "sha256:24f551ec308016a0debb44fd7bfc7748ad05baa7b9e7c63e63e1bb07a184d98b"
+},
+"c74fcd4b3cc5": {
+"file": "c74fcd4b3cc5.opus",
+"keys": [
+"contest_send_q"
+],
+"learner": true,
+"r": "114c288df0c1",
+"s": 5.51,
+"sha256": "sha256:87e454afd5fbd03f2303e1c12adc35f81637a4ce8494026a3258366ba4e386f6"
+},
+"c78d11ac9f8e": {
+"file": "c78d11ac9f8e.opus",
+"keys": [
+"type_it"
+],
+"learner": true,
+"r": "7822ffd735f2",
+"s": 0.78,
+"sha256": "sha256:4504d17bf871270a283e9295b34cf27240e8eb8c0af1d6b04c717b75a16b6958"
+},
+"c794859b1a9d": {
+"file": "c794859b1a9d.opus",
+"keys": [
+"compare"
+],
+"learner": true,
+"r": "46e63daf4d3e",
+"s": 4.91,
+"sha256": "sha256:77260cba08bff43cd532e6eba478cff92d64510908e290f11b51a56068e925a2"
+},
+"c831cdc8748f": {
+"file": "c831cdc8748f.opus",
+"keys": [
+"secondary_note"
+],
+"learner": true,
+"r": "d8547c170ce1",
+"s": 3.91,
+"sha256": "sha256:53e7bb1ddec23557ca2f3445f049492512e2d61f5ebfde69f294be74595a0497"
+},
+"c87571cb7602": {
+"file": "c87571cb7602.opus",
+"keys": [
+"quran"
+],
+"learner": true,
+"r": "6d0df26d4a31",
+"s": 0.76,
+"sha256": "sha256:74739540341e740e869432194d8bc887e7df32541dae7641c9aa5b5f959a4570"
+},
+"c88850750200": {
+"file": "c88850750200.opus",
+"keys": [
+"look_again{n=10}"
+],
+"learner": true,
+"r": "df23c3dfe3ec",
+"s": 2.38,
+"sha256": "sha256:62b437c1a087ae303e3e623e90509d9dd864952c9d4b8db20227e0c8cb4d3ca4"
+},
+"c89330d366a7": {
+"file": "c89330d366a7.opus",
+"keys": [
+"reset_waiting{n=9}"
+],
+"learner": true,
+"r": "e1a43bf352d5",
+"s": 4.61,
+"sha256": "sha256:337e9f45f177e58e6661f490bdaa8b9b047c19ccc5fe5c58ba1c47c41cba2b85"
+},
+"c8d40648b961": {
+"file": "c8d40648b961.opus",
+"keys": [
+"voice_download"
+],
+"learner": true,
+"r": "69a26ed50f3a",
+"s": 1.91,
+"sha256": "sha256:c9084fe0dc621291a14c04c0da567d969eae58b60cba41fad45b2ec8fe7c4b5d"
+},
+"c8d8be1e11fb": {
+"file": "c8d8be1e11fb.opus",
+"keys": [
+"adults_coming"
+],
+"learner": true,
+"r": "373e90846b23",
+"s": 6.11,
+"sha256": "sha256:79791376a522a563e8524ccaa2641405a4266e5d10d1d5a2c343ca22a7851acb"
+},
+"c8fb041310f7": {
+"file": "c8fb041310f7.opus",
+"keys": [
+"printer_outbox"
+],
+"learner": true,
+"r": "228b5fff54ee",
+"s": 6.71,
+"sha256": "sha256:cbb4d8327225aaf5de892964b82a518d8ed8ed640564273caff2d81dcab2ecc4"
+},
+"c9d25bafe8db": {
+"file": "c9d25bafe8db.opus",
+"keys": [
+"take_photo"
+],
+"learner": true,
+"r": "822665ad421b",
+"s": 0.88,
+"sha256": "sha256:652d83bd6f7af3e27a31670946eef1f187ff63e5ede6f369075c5a0f2c01aa47"
+},
+"c9f8c6be3665": {
+"file": "c9f8c6be3665.opus",
+"keys": [
+"made_chip_answer_wrong",
+"teacher.c_answer_wrong"
+],
+"learner": true,
+"r": "163bdd4a2acf",
+"s": 1.94,
+"sha256": "sha256:ca1378d9b2b84c74fcfe043d76bc59b0efde975c1f9d2864d9664cd466c65ab2"
+},
+"ca3acc8f7129": {
+"file": "ca3acc8f7129.opus",
+"keys": [
+"study_row"
+],
+"learner": true,
+"r": "94bc83296227",
+"s": 1.6,
+"sha256": "sha256:02c1bdd26bb5e535a0c6bca77d2e32e78f87bd0535184bbcbb69c3a207343b67"
+},
+"cabc0373bb49": {
+"file": "cabc0373bb49.opus",
+"keys": [
+"made_count{n=5}"
+],
+"learner": true,
+"r": "7cfb420c67b0",
+"s": 2.14,
+"sha256": "sha256:b4431af93551e7a676667e05a9e7f8db1ed3d814594f35a5cf0e62feece42b67"
+},
+"cace3d205a27": {
+"file": "cace3d205a27.opus",
+"keys": [
+"net_waiting{n=6}"
+],
+"learner": true,
+"r": "5c82065b4c8a",
+"s": 2.75,
+"sha256": "sha256:ab7e6983962d3d89790340ab692ad1f11473316b6584b846afbfe1f6750254ea"
+},
+"cad0168ace4d": {
+"file": "cad0168ace4d.opus",
+"keys": [
+"year_n{n=2}"
+],
+"learner": true,
+"r": "b7ea7c4f31a0",
+"s": 1.68,
+"sha256": "sha256:e069a89c2fdd5d15ba8d388e6b924900c1d630708fbf360ef3f01c9f7b68c65b"
+},
+"cb8520ad82a2": {
+"file": "cb8520ad82a2.opus",
+"keys": [
+"app"
+],
+"learner": true,
+"r": "806fb2f8e174",
+"s": 0.67,
+"sha256": "sha256:86fd165ac1e7e396e9c57163dd545a05ee958d53d5fe739c292058787564ec42"
+},
+"cbb4a9c2ebe9": {
+"file": "cbb4a9c2ebe9.opus",
+"keys": [
+"admin.s_maths",
+"maths",
+"review.chip_maths",
+"teacher.subj_maths"
+],
+"learner": true,
+"r": "d08602507c8b",
+"s": 0.89,
+"sha256": "sha256:2154429da71314eb2b58d862725950286b4088484e198b29080dcc5a1b3706dd"
+},
+"cbcf498fb1f8": {
+"file": "cbcf498fb1f8.opus",
+"keys": [
+"print_it"
+],
+"learner": true,
+"r": "69f2015a4f63",
+"s": 0.83,
+"sha256": "sha256:7a4ca368ca075195f3e2b8122889476db37c5a503a891dc5c99fc5dc95f7992f"
+},
+"cc198dbfaeba": {
+"file": "cc198dbfaeba.opus",
+"keys": [
+"uni_warning"
+],
+"learner": true,
+"r": "a9b99abf325b",
+"s": 8.21,
+"sha256": "sha256:b754a76534d04a1e56ad2a7be999ebd5e2c56f0c233e8b82c4b07086a7737966"
+},
+"cc2b477986b9": {
+"file": "cc2b477986b9.opus",
+"keys": [
+"get_warning"
+],
+"learner": true,
+"r": "4f10b341c161",
+"s": 7.41,
+"sha256": "sha256:181f3d979d86aa6c0af4579cd7d911c8b221094b17fd3a5e40226d3bc9a3938f"
+},
+"cc41778a67ae": {
+"file": "cc41778a67ae.opus",
+"keys": [
+"got_it"
+],
+"learner": true,
+"r": "98604e776ad9",
+"s": 2.76,
+"sha256": "sha256:50ac2677526d76f5cd7bae16df16593b0b567a864b0c028ca48af62d3ddcf40b"
+},
+"cc522e594117": {
+"file": "cc522e594117.opus",
+"keys": [
+"reject_btn"
+],
+"learner": true,
+"r": "e68ce9c4b02c",
+"s": 0.47,
+"sha256": "sha256:9d6380456f683807265279aaecbcf256ca19909877b73d9b5e0154e5d951d8d7"
+},
+"cc82c7fbe1d1": {
+"file": "cc82c7fbe1d1.opus",
+"keys": [
+"seerah"
+],
+"learner": true,
+"r": "91b6f0e2fee4",
+"s": 0.84,
+"sha256": "sha256:12cb0ddf620913666b7654bd053c827a6d667450f32e966ba86ef3cb0f1b6920"
+},
+"cc8637f27e5c": {
+"file": "cc8637f27e5c.opus",
+"keys": [
+"made_count{n=12}"
+],
+"learner": true,
+"r": "afb477f21950",
+"s": 1.71,
+"sha256": "sha256:89a38cb18011d9d6dab2e0c3fa048c3dfc0ec7f248fdaf3c0733ec31afd835e0"
+},
+"cce71f79cfaa": {
+"file": "cce71f79cfaa.opus",
+"keys": [
+"quran_go"
+],
+"learner": true,
+"r": "2736860be551",
+"s": 0.75,
+"sha256": "sha256:c1b401572e676d29bcc95d3bccc234895be4f5203e30bf7e3eca039368dfc9e9"
+},
+"cd5d4edbbf6e": {
+"file": "cd5d4edbbf6e.opus",
+"keys": [
+"update_title"
+],
+"learner": true,
+"r": "63af68b9abc6",
+"s": 2.07,
+"sha256": "sha256:ca1e2c3018d38b13e01d56c8613b96777ddc08be8f9b7ad47e82511f544cdcc7"
+},
+"cd6c0100e62d": {
+"file": "cd6c0100e62d.opus",
+"keys": [
+"quran_notes{n=11}"
+],
+"learner": true,
+"r": "23da5b0da5bd",
+"s": 2.45,
+"sha256": "sha256:bd4b9e69930df6abcc5d39add705d42228868d07c8e69341ef436a570921423a"
+},
+"cd7cdaacee94": {
+"file": "cd7cdaacee94.opus",
+"keys": [
+"quran_repeat_n{n=4}"
+],
+"learner": true,
+"r": "b155178a7d01",
+"s": 3.81,
+"sha256": "sha256:d69c030be0efa0003ec9bf303db977553f51ed58041e38ebb03d12a82af73d7e"
+},
+"cda98c967f8a": {
+"file": "cda98c967f8a.opus",
+"keys": [
+"code_not_found"
+],
+"learner": true,
+"r": "daaae4bb85df",
+"s": 6.21,
+"sha256": "sha256:4377c5634b270e3ac5148101ea8f02bbd59a50603567ab12516995fb6c27f0c0"
+},
+"cdee088e2687": {
+"file": "cdee088e2687.opus",
+"keys": [
+"made_full{n=3}"
+],
+"learner": true,
+"r": "f77e3837ce8a",
+"s": 6.11,
+"sha256": "sha256:ca3487459a3aa8f0aeb41edb3e73182b2fc181589c1f668d6fe7e63449bc5cf3"
+},
+"ce81a7322534": {
+"file": "ce81a7322534.opus",
+"keys": [
+"wait_teacher"
+],
+"learner": true,
+"r": "f226cd9cafb1",
+"s": 2.39,
+"sha256": "sha256:93a91216fde854f94f785cff26839d4ff576c0681a9fffe4f083cae8380ee2d0"
+},
+"cf895f06fd0c": {
+"file": "cf895f06fd0c.opus",
+"keys": [
+"bigger_text"
+],
+"learner": true,
+"r": "7489672ee3e4",
+"s": 2.28,
+"sha256": "sha256:5c8996aead0080850e03476fc542e10d14da1027153fe04e7c5aa33ae6485075"
+},
+"cfe07245bd87": {
+"file": "cfe07245bd87.opus",
+"keys": [
+"wait_question"
+],
+"learner": true,
+"r": "7262a3eae9a0",
+"s": 1.84,
+"sha256": "sha256:0dda265b462c3a4ff24ffb4e896092c6babdb964efec31b6d5e2ec6492865946"
+},
+"d0df19b60234": {
+"file": "d0df19b60234.opus",
+"keys": [
+"reset_waiting{n=1}"
+],
+"learner": true,
+"r": "8632c6baf7a4",
+"s": 7.51,
+"sha256": "sha256:f7ff629a241848a57927905bb3a0de9c9c4d1de70755085e425cabc3963f6244"
+},
+"d12e25d6730a": {
+"file": "d12e25d6730a.opus",
+"keys": [
+"lock_wait{n=7}"
+],
+"learner": true,
+"r": "a94f3dd3d702",
+"s": 5.31,
+"sha256": "sha256:5cac8b39a5f75696d48743165497ddb48b097d0fb69c236040f531a2d75a4ec9"
+},
+"d1910dfd77b9": {
+"file": "d1910dfd77b9.opus",
+"keys": [
+"year_n{n=1}"
+],
+"learner": true,
+"r": "8584d5679833",
+"s": 1.17,
+"sha256": "sha256:6f3d8155d34aefd07ebf74603b33a50b31c6c198d4551c2ad77a10144d8befc5"
+},
+"d1ffec8d170d": {
+"file": "d1ffec8d170d.opus",
+"keys": [
+"reset_new"
+],
+"learner": true,
+"r": "9a40a37179c1",
+"s": 2.17,
+"sha256": "sha256:e446cfdbdbb4119fd894ec8afd53a7154bafae23a7ca4790ad72c636113d69d8"
+},
+"d239a47f24b8": {
+"file": "d239a47f24b8.opus",
+"keys": [
+"more"
+],
+"learner": true,
+"r": "4a282aafb2d9",
+"s": 1.06,
+"sha256": "sha256:163fa563b67f82794bc4f730f78d49ad4e012ecfacf3a8523daa55da84fe0834"
+},
+"d2a38971825a": {
+"file": "d2a38971825a.opus",
+"keys": [
+"uni_offline"
+],
+"learner": true,
+"r": "31f03961cb95",
+"s": 2.34,
+"sha256": "sha256:b2f15b36d27f4f7e22ac36c577c7ef24a7b813367ded0a1383bfc32c52c231ad"
+},
+"d2ca395f44d5": {
+"file": "d2ca395f44d5.opus",
+"keys": [
+"cant_send"
+],
+"learner": true,
+"r": "e59a7770cb1c",
+"s": 2.51,
+"sha256": "sha256:191ba8c2c6a966ff160508c2e3a29bcc8de75da0a4d3eda35f65c6cd438e4cd9"
+},
+"d3a6a3fa9193": {
+"file": "d3a6a3fa9193.opus",
+"keys": [
+"block_sheet",
+"day_sheet_title"
+],
+"learner": true,
+"r": "1165623aeec3",
+"s": 2.23,
+"sha256": "sha256:1a06eaeb62cebcdc2031d9a8d4e84c0611d7d89f0110562636e8231f34e7c5d9"
+},
+"d3b8162ccf93": {
+"file": "d3b8162ccf93.opus",
+"keys": [
+"speak_said"
+],
+"learner": true,
+"r": "6623ef109823",
+"s": 0.7,
+"sha256": "sha256:d3931966fc3475bc3293be2744c37cc8a92efd65a5e149abcc994a1622696865"
+},
+"d43a30da399c": {
+"file": "d43a30da399c.opus",
+"keys": [
+"this_year"
+],
+"learner": true,
+"r": "408c943bd64e",
+"s": 2.76,
+"sha256": "sha256:dceb2dbe7df5c9b802d6ee7d790233f8da3a6f178762cda4746520272d526c1a"
+},
+"d44ed18613fd": {
+"file": "d44ed18613fd.opus",
+"keys": [
+"quran_found{n=8}",
+"quran_verses{n=8}"
+],
+"learner": true,
+"r": "c054ec7727c6",
+"s": 2.79,
+"sha256": "sha256:4b9ceecf37a0e9ddf6898ad740561bee233cbe9f04de7859c3c812ccec11e9b9"
+},
+"d4646f2f9c01": {
+"file": "d4646f2f9c01.opus",
+"keys": [
+"admin.s_science",
+"science",
+"teacher.subj_science"
+],
+"learner": true,
+"r": "18c094b92f54",
+"s": 0.97,
+"sha256": "sha256:19e83d1d828cd1c658f4b800cd6c158d19af6b89086f83705aa4bc414c833b85"
+},
+"d4d25dbc2c20": {
+"file": "d4d25dbc2c20.opus",
+"keys": [
+"made_chip_not_school",
+"teacher.c_not_school",
+"teacher.r_not_school"
+],
+"learner": true,
+"r": "31b2df857aca",
+"s": 1.43,
+"sha256": "sha256:f124cc9d6be7cc593096d2a55c88a02927a317f08394f1335512802895838306"
+},
+"d4e8c67cc6fb": {
+"file": "d4e8c67cc6fb.opus",
+"keys": [
+"next_lesson"
+],
+"learner": true,
+"r": "7605d66000f8",
+"s": 1.65,
+"sha256": "sha256:464517a180e0b48c8b9db739f6cd4419dec2aa5ae1849639f99fa1d11818daf5"
+},
+"d54b1bb962e9": {
+"file": "d54b1bb962e9.opus",
+"keys": [
+"consent:hub-2026-10:keeps",
+"consent:hub-2026-10b:keeps",
+"consent:online-2026-10:keeps",
+"consent:online-2026-10b:keeps"
+],
+"learner": true,
+"r": "9b18761f4719",
+"s": 15.01,
+"sha256": "sha256:2142fea5e403b05f7b495fb8f59e556eb5676500a051678bf55c9a232159c648"
+},
+"d57f36a27f2a": {
+"file": "d57f36a27f2a.opus",
+"keys": [
+"not_done"
+],
+"learner": true,
+"r": "1974930deeda",
+"s": 1.25,
+"sha256": "sha256:4d8c0d13d7573643aa0d70cc37d7b5f0ad0126582f5b73591457cd77d28585ea"
+},
+"d5d42b272f3a": {
+"file": "d5d42b272f3a.opus",
+"keys": [
+"not_now"
+],
+"learner": true,
+"r": "3966209d7ea5",
+"s": 1.05,
+"sha256": "sha256:7864af07e52fed43acbe919284b379d1d8d7dd3e28ffec1132ff7e4ec5eff909"
+},
+"d662128d2b7f": {
+"file": "d662128d2b7f.opus",
+"keys": [
+"day_title"
+],
+"learner": true,
+"r": "a322f30db067",
+"s": 3.81,
+"sha256": "sha256:6388c0e5c06522847abca3ea69f7a23c9ea4d177a019c3cf1868b65337374748"
+},
+"d68062ea1359": {
+"file": "d68062ea1359.opus",
+"keys": [
+"quran_notes{n=7}"
+],
+"learner": true,
+"r": "76fc55b6874b",
+"s": 2.51,
+"sha256": "sha256:593b13facab390f3ec39d33a4842ae674717995fff9ff84be88aebb0664103c6"
+},
+"d77d53f1e466": {
+"file": "d77d53f1e466.opus",
+"keys": [
+"quran_searched{n=2}"
+],
+"learner": true,
+"r": "0250fc0ff4bb",
+"s": 4.21,
+"sha256": "sha256:8ae8d92286423f7a42d62e857a50f2cec003228be5d11ac6511e64acbb69246e"
+},
+"d7a653060938": {
+"file": "d7a653060938.opus",
+"keys": [
+"bells_on"
+],
+"learner": true,
+"r": "5f01f6d4c05c",
+"s": 2.3,
+"sha256": "sha256:47b84091079cab788115035983649075dcf7ad440aebcd3898636695f9f6997e"
+},
+"d9618278870d": {
+"file": "d9618278870d.opus",
+"keys": [
+"lock_code_lead"
+],
+"learner": true,
+"r": "441d4ee0a68c",
+"s": 2.83,
+"sha256": "sha256:4e66534c7e8b278fcfcc4efdfd0a1b949d1e6b61ebe8b930355d496a686827c8"
+},
+"d9dc0b03c941": {
+"file": "d9dc0b03c941.opus",
+"keys": [
+"notify_text"
+],
+"learner": true,
+"r": "b447125131ec",
+"s": 11.01,
+"sha256": "sha256:1c4fa2573f8b8655633d2f66e1cdced31f485db7cdd86c0da1bcb1da724420bf"
+},
+"da10e9bc9899": {
+"file": "da10e9bc9899.opus",
+"keys": [
+"voice_getting"
+],
+"learner": true,
+"r": "813efd812d4e",
+"s": 2.09,
+"sha256": "sha256:0b3f4e04251aff0be14c055be48ccee834f660e13bda3f01cec11ba0ab5c06ea"
+},
+"dac0b76b2d41": {
+"file": "dac0b76b2d41.opus",
+"keys": [
+"check_sheet",
+"check_title"
+],
+"learner": true,
+"r": "ee72c9981c3a",
+"s": 1.91,
+"sha256": "sha256:6ac968b5de21c8f5ecf00e52d3ec51f03784a106f4753936f190425578322b10"
+},
+"dafcad8730f0": {
+"file": "dafcad8730f0.opus",
+"keys": [
+"not_sure"
+],
+"learner": true,
+"r": "1cae87fc5f4c",
+"s": 4.21,
+"sha256": "sha256:b860e3ec58a9e5fe72b225af5a668ed0db4cfff4a54375d1803fc476d8c1efd6"
+},
+"dafcba310b30": {
+"file": "dafcba310b30.opus",
+"keys": [
+"hold_agree"
+],
+"learner": true,
+"r": "ba0fd4ccb3e9",
+"s": 2.83,
+"sha256": "sha256:34c2dcc5da866819939bfcd5fa20176d56304519bfe367bab4479af1e9f265c8"
+},
+"db1a4661c966": {
+"file": "db1a4661c966.opus",
+"keys": [
+"consent:hub-2026-10:sees"
+],
+"learner": true,
+"r": "8694718006eb",
+"s": 10.21,
+"sha256": "sha256:43784a90e1e5f3ff5384c539370eb4bb13aa340e5b719287f973e92f2d5951d3"
+},
+"db699bf03aad": {
+"file": "db699bf03aad.opus",
+"keys": [
+"print_today"
+],
+"learner": true,
+"r": "7969b2a8851e",
+"s": 3.41,
+"sha256": "sha256:37d173d9775bb2117b505510b9d46b47048ed0a4f5a812dceecb81b5f68230e1"
+},
+"dbb985ea7b12": {
+"file": "dbb985ea7b12.opus",
+"keys": [
+"ask",
+"ask_title"
+],
+"learner": true,
+"r": "fd066c5abac2",
+"s": 0.73,
+"sha256": "sha256:8bda4016b1a9893a546e0fdf987f48716ab05309b1600df23f032789e4119ac1"
+},
+"dc9d361d30fc": {
+"file": "dc9d361d30fc.opus",
+"keys": [
+"made_knew"
+],
+"learner": true,
+"r": "3e6f3e24b395",
+"s": 1.14,
+"sha256": "sha256:579954f7c7a2a860c83f154a27dc06943f0f635058595dfb53c7b1368c339f8b"
+},
+"dcd6a441dde0": {
+"file": "dcd6a441dde0.opus",
+"keys": [
+"nickname"
+],
+"learner": true,
+"r": "d94527b0b90c",
+"s": 0.74,
+"sha256": "sha256:c1b7c348106764280624c5629e4a35399b1bbac5435e610bd41c109ca0554b7d"
+},
+"dd2f062ce09a": {
+"file": "dd2f062ce09a.opus",
+"keys": [
+"minutes{n=9}"
+],
+"learner": true,
+"r": "67f116d585b4",
+"s": 1.64,
+"sha256": "sha256:8609857915a7bf5efd775b6e141226e92f79bb00591e2dac6192fa0ceacb284f"
+},
+"dd4406842d8a": {
+"file": "dd4406842d8a.opus",
+"keys": [
+"lock_on"
+],
+"learner": true,
+"r": "50c69c7b2676",
+"s": 1.96,
+"sha256": "sha256:e32cdaae4bc0a49dd73a32c168fcb4ba7f0b2c6269f8e3b53b5a32ce127ec16a"
+},
+"dd6e45a5aa3f": {
+"file": "dd6e45a5aa3f.opus",
+"keys": [
+"stop_sure"
+],
+"learner": true,
+"r": "346bacbf1047",
+"s": 8.01,
+"sha256": "sha256:58a768db486995b367f31473ac8e473ce3a374145f3878734bc47b47fdb576d0"
+},
+"dd79eb17e4db": {
+"file": "dd79eb17e4db.opus",
+"keys": [
+"plan_miss_later"
+],
+"learner": true,
+"r": "bcc64c859e40",
+"s": 7.01,
+"sha256": "sha256:f878f2b884d6d967ff24e341733f1497c749d89b0f7088893cff5ff192e5e75b"
+},
+"dda7ff297492": {
+"file": "dda7ff297492.opus",
+"keys": [
+"uni_cost_free"
+],
+"learner": true,
+"r": "339fc4f5e570",
+"s": 1.19,
+"sha256": "sha256:e9f982f2c62760f1dfa5249c86c9db230eff91f0302bc9ee96972da912997666"
+},
+"ddf274daa45d": {
+"file": "ddf274daa45d.opus",
+"keys": [
+"quran_notes{n=10}"
+],
+"learner": true,
+"r": "d3bb61c3c65e",
+"s": 1.83,
+"sha256": "sha256:b437b81d83251a7cac9c603506faf69fd3ca3b10343b73271300a2066ba8cc40"
+},
+"de0e4992eca3": {
+"file": "de0e4992eca3.opus",
+"keys": [
+"look_again_row"
+],
+"learner": true,
+"r": "5bd5ab4912f9",
+"s": 0.98,
+"sha256": "sha256:cea43294f0ea4e2d68d99be538a03a729ee444b1963f09bfebebf220d9d661d4"
+},
+"de820f81c555": {
+"file": "de820f81c555.opus",
+"keys": [
+"day_none"
+],
+"learner": true,
+"r": "4dbb090067f6",
+"s": 2.84,
+"sha256": "sha256:1e897e91c67bea4cd54834406326afa1185be89cc79d81e1d4c4b49be407fa80"
+},
+"ded82a2dc296": {
+"file": "ded82a2dc296.opus",
+"keys": [
+"stopped"
+],
+"learner": true,
+"r": "6d0de36c5509",
+"s": 2.15,
+"sha256": "sha256:8915f01f36e5e92c1da5a4bb4e747613b4132a8c375db64e743cf37a74633d33"
+},
+"deeeeec47ea1": {
+"file": "deeeeec47ea1.opus",
+"keys": [
+"uni_not_here"
+],
+"learner": true,
+"r": "0f874399b77c",
+"s": 7.31,
+"sha256": "sha256:839cfa1e589a15d7e0b8313be1df2f5956f41c2acd816a18acfb9a52b02f5f53"
+},
+"df8100f6d515": {
+"file": "df8100f6d515.opus",
+"keys": [
+"error"
+],
+"learner": true,
+"r": "62f0750ba463",
+"s": 5.01,
+"sha256": "sha256:0ea3bf3cb17488759ba7dd15109b888195082af1d37b1346e7329634695db9fa"
+},
+"dfaea6a1ef4b": {
+"file": "dfaea6a1ef4b.opus",
+"keys": [
+"speak_go_on"
+],
+"learner": true,
+"r": "b68f02b332d5",
+"s": 1.17,
+"sha256": "sha256:f6bd814801b4a8cf20634249cf775db5f3339cf11c84e56fc7fbef1fd31a9e81"
+},
+"e0231db9ef9f": {
+"file": "e0231db9ef9f.opus",
+"keys": [
+"admin.s_dari",
+"dari",
+"lang.prs",
+"lang_prs",
+"teacher.subj_dari"
+],
+"learner": true,
+"r": "bfb9b2ad86ca",
+"s": 0.54,
+"sha256": "sha256:92ceff3491170596903ab06fa9f9f2ed35523d7929b209d23dc886485f33b42b"
+},
+"e0c9cd66ee5b": {
+"file": "e0c9cd66ee5b.opus",
+"keys": [
+"print_failed"
+],
+"learner": true,
+"r": "869742f3242a",
+"s": 4.01,
+"sha256": "sha256:ccc2dba90382353a98a99926d65d441763776e112cc3af8621a002105576241b"
+},
+"e0fdb9556961": {
+"file": "e0fdb9556961.opus",
+"keys": [
+"check_it"
+],
+"learner": true,
+"r": "12c7916cf2b3",
+"s": 0.63,
+"sha256": "sha256:fb217d421c87ec5218358f2deac61c06f2d08fff12e66d5e934e4c647494ca9a"
+},
+"e15833a7eb2f": {
+"file": "e15833a7eb2f.opus",
+"keys": [
+"say_note"
+],
+"learner": true,
+"r": "780934107721",
+"s": 4.01,
+"sha256": "sha256:0ce7b5ee5e3e5f25421c2fe7e4d6a1c8899d61ce543b5b1c2a52faea7adaa3f7"
+},
+"e198fbf418d8": {
+"file": "e198fbf418d8.opus",
+"keys": [
+"speak_mic_note"
+],
+"learner": true,
+"r": "6e53acc2880b",
+"s": 9.41,
+"sha256": "sha256:a9deac04c0338da9aa33d8e3b7656571a617e5693c5eb5fb715591ff5176aed9"
+},
+"e1e70122aa3d": {
+"file": "e1e70122aa3d.opus",
+"keys": [
+"made_answer_is"
+],
+"learner": true,
+"r": "7b96da3faaf5",
+"s": 0.72,
+"sha256": "sha256:501500935417d103d24b1fc3a8d699d95f93d43e850f0091ac50983303eb44a6"
+},
+"e224b4283114": {
+"file": "e224b4283114.opus",
+"keys": [
+"go_home"
+],
+"learner": true,
+"r": "ca41cad04095",
+"s": 0.61,
+"sha256": "sha256:eb1c6d482bf45f5eb9be3b2e51d8322a5bf28ec0ed66e53c3c1202b9f2ce970e"
+},
+"e2367149c0d1": {
+"file": "e2367149c0d1.opus",
+"keys": [
+"minutes{n=2}"
+],
+"learner": true,
+"r": "8f2cb0558c0f",
+"s": 1.73,
+"sha256": "sha256:6e894ffd7125bcda32f9659a2c5dc8d635dca6ba2b91da69b2abd57671d20f2d"
+},
+"e285800263f0": {
+"file": "e285800263f0.opus",
+"keys": [
+"code_wrong_class"
+],
+"learner": true,
+"r": "8765a6a9c26e",
+"s": 5.41,
+"sha256": "sha256:45eaf2436b69e724b880ea8dedaaf59f1cff0b3b57dd4007b5c66bd4c1a022ee"
+},
+"e2c23158c5fe": {
+"file": "e2c23158c5fe.opus",
+"keys": [
+"minutes{n=7}"
+],
+"learner": true,
+"r": "05246e98fcb6",
+"s": 1.94,
+"sha256": "sha256:aa3f0b4f0b01451889b15890e75d61c347228e4ca260198a546b174edc720141"
+},
+"e2dbb190209e": {
+"file": "e2dbb190209e.opus",
+"keys": [
+"not_sent"
+],
+"learner": true,
+"r": "5eec2ea12344",
+"s": 2.81,
+"sha256": "sha256:41cce3ba51e64663ff807be870587d41a0503ef41bcce2217ed9752c947cafb2"
+},
+"e2e7c87fb3a5": {
+"file": "e2e7c87fb3a5.opus",
+"keys": [
+"net_waiting{n=2}"
+],
+"learner": true,
+"r": "2b0d18437b76",
+"s": 2.1,
+"sha256": "sha256:4cc0d97b01d5405c5ae6277b69a1009d8b9cc861ee7fb595003ad37365a817d5"
+},
+"e2ebcc61e16f": {
+"file": "e2ebcc61e16f.opus",
+"keys": [
+"study_left{n=10}"
+],
+"learner": true,
+"r": "32d398d2730e",
+"s": 3.11,
+"sha256": "sha256:cc2d4258648eb5661376d53eee55005639dab8c0afcf71d9241072ee4fc99191"
+},
+"e32df27369fc": {
+"file": "e32df27369fc.opus",
+"keys": [
+"live_r2"
+],
+"learner": true,
+"r": "0a2fdfb6047e",
+"s": 2.51,
+"sha256": "sha256:250a4fbad1054c5117c732629ec9bb34854f440e3e99aa4c08d8f08200b952b5"
+},
+"e37bfc4de895": {
+"file": "e37bfc4de895.opus",
+"keys": [
+"its_right"
+],
+"learner": true,
+"r": "5827a26b3349",
+"s": 2.19,
+"sha256": "sha256:d790e3bb68451d9f67ae31a154c36d00eabfac8be58509ab3a8a9bafe1bcedab"
+},
+"e37da98a0ee5": {
+"file": "e37da98a0ee5.opus",
+"keys": [
+"agreed"
+],
+"learner": true,
+"r": "ef8b15cb7f0b",
+"s": 1.14,
+"sha256": "sha256:e53d0f013e4545cbaeb3f7457583420235a67ac376d9fb15438694e41cd3009a"
+},
+"e3c5401fc2a7": {
+"file": "e3c5401fc2a7.opus",
+"keys": [
+"reset_waiting{n=12}"
+],
+"learner": true,
+"r": "fb49309dc073",
+"s": 6.81,
+"sha256": "sha256:1c326f9681b257dc8d603340a75878ac9efc3c768ef1f3f30c56b4da36a7a907"
+},
+"e43a5e0d0eae": {
+"file": "e43a5e0d0eae.opus",
+"keys": [
+"common.print",
+"module.print",
+"print"
+],
+"learner": true,
+"r": "d48a173db022",
+"s": 0.67,
+"sha256": "sha256:d429aa5bd0e007bb5655d2418c881eee50eeefec3ff39cc0ff113555b3b760c5"
+},
+"e49bb38bc610": {
+"file": "e49bb38bc610.opus",
+"keys": [
+"reset_waiting{n=7}"
+],
+"learner": true,
+"r": "362bd16d4bdd",
+"s": 4.81,
+"sha256": "sha256:a3a605f52571526c55ad91878d6db5bc969ed2bd6a4ff8ca6487b0dc73808cc9"
+},
+"e538e555af0d": {
+"file": "e538e555af0d.opus",
+"keys": [
+"lesson_not_here"
+],
+"learner": true,
+"r": "8692f35afea4",
+"s": 5.61,
+"sha256": "sha256:8117a2974d0dfc6375cb0192142fae407caa5410dc0cbb164735645ef1384464"
+},
+"e58cffedb704": {
+"file": "e58cffedb704.opus",
+"keys": [
+"uni_no_promise"
+],
+"learner": true,
+"r": "a1a3ce4d70cc",
+"s": 9.71,
+"sha256": "sha256:9ba6bf590e25201fc80a93c83284b645febaf5e908c287b8ce85360f8c95ac6f"
+},
+"e6815b5f6f18": {
+"file": "e6815b5f6f18.opus",
+"keys": [
+"study_left{n=3}"
+],
+"learner": true,
+"r": "68ccb8e3b707",
+"s": 2.72,
+"sha256": "sha256:2138396bdfbfd2f1b92e0de1438d29adbdd950daac97d5cf2f53f0bd015060e3"
+},
+"e6e0c2b7eabf": {
+"file": "e6e0c2b7eabf.opus",
+"keys": [
+"uni_kept"
+],
+"learner": true,
+"r": "91fcb92b7c8f",
+"s": 4.31,
+"sha256": "sha256:749b0b42ee8ffa025cd1603694769327fdb407fc65a4e733fbddfd67a49ecf02"
+},
+"e6fefa3cfe8e": {
+"file": "e6fefa3cfe8e.opus",
+"keys": [
+"made_count{n=11}"
+],
+"learner": true,
+"r": "ab6c9d3035c3",
+"s": 2.61,
+"sha256": "sha256:0420cf4ef60743b678370be5635eb23ffa49996c963a21172d394e7dd9deac60"
+},
+"e782d60b5eff": {
+"file": "e782d60b5eff.opus",
+"keys": [
+"live_lower"
+],
+"learner": true,
+"r": "955c517dea76",
+"s": 2.68,
+"sha256": "sha256:eab1bc7e1d52cde8bef247085dc7103d680ecf1daa82d637a43a4b8460ff99f0"
+},
+"e788c855b7c6": {
+"file": "e788c855b7c6.opus",
+"keys": [
+"minutes{n=6}"
+],
+"learner": true,
+"r": "bdd4d6aafe08",
+"s": 2.27,
+"sha256": "sha256:9b587c856cd499a8d0584a1e7009b585fe5e633acded079dbd55ba582e211794"
+},
+"e81168b1b319": {
+"file": "e81168b1b319.opus",
+"keys": [
+"review.connect",
+"v_offline"
+],
+"learner": true,
+"r": "9b702a7a1a9a",
+"s": 3.81,
+"sha256": "sha256:3bf6190018081944a3df3a536074777ca9b36e3e8e598874c02adbbb48e1c0a7"
+},
+"e83427d2804a": {
+"file": "e83427d2804a.opus",
+"keys": [
+"net_waiting{n=4}"
+],
+"learner": true,
+"r": "783be4d743dd",
+"s": 2.9,
+"sha256": "sha256:e56c5f304fabdcc82a842d8d7a8393c57f97c50a713c0cba7e76ba72023753e1"
+},
+"e9c59b8e858f": {
+"file": "e9c59b8e858f.opus",
+"keys": [
+"quran_found{n=3}",
+"quran_verses{n=3}"
+],
+"learner": true,
+"r": "fddab4877c2d",
+"s": 2.29,
+"sha256": "sha256:329715a32db55ae83e358d8d01ff7cc28dfbdfb6b1490deac3bd5fcbdaf864e5"
+},
+"e9dc4bc61b99": {
+"file": "e9dc4bc61b99.opus",
+"keys": [
+"quran_found{n=6}",
+"quran_verses{n=6}"
+],
+"learner": true,
+"r": "4ff644101841",
+"s": 2.2,
+"sha256": "sha256:84c4af9dbd8fcc0c783c485baf8b8d5a15fe734c4044fac199606c5e123aa58c"
+},
+"e9ef39c5e79d": {
+"file": "e9ef39c5e79d.opus",
+"keys": [
+"year_n{n=11}"
+],
+"learner": true,
+"r": "b996fc23511e",
+"s": 1.62,
+"sha256": "sha256:fd0bb72fdbf450a4333dc4c4f176fe88d6c0bfb910925a136940802e64e57227"
+},
+"eb54e27bf45d": {
+"file": "eb54e27bf45d.opus",
+"keys": [
+"try_again"
+],
+"learner": true,
+"r": "595cd9fb6f1a",
+"s": 1.3,
+"sha256": "sha256:3aecfd12603ff2eb76fc14a0bad28fa4f957e7653de65a47d8c6816674175bbe"
+},
+"ed3d7d398de4": {
+"file": "ed3d7d398de4.opus",
+"keys": [
+"code_found"
+],
+"learner": true,
+"r": "89ae9c74b76a",
+"s": 1.63,
+"sha256": "sha256:41b7540db353631d068b5f9fb25297e74ffcf38f5ded646b05a4beba356355b3"
+},
+"edd0aba98b4e": {
+"file": "edd0aba98b4e.opus",
+"keys": [
+"common.language",
+"language",
+"review.lang"
+],
+"learner": true,
+"r": "51b882fd885d",
+"s": 1.08,
+"sha256": "sha256:fcc4ac2145e62dc78b8ad48112aa113669a39147715366ec71c36df8964289c1"
+},
+"eef17efe56df": {
+"file": "eef17efe56df.opus",
+"keys": [
+"badge_waiting"
+],
+"learner": true,
+"r": "98c8471b1b87",
+"s": 2.93,
+"sha256": "sha256:bb337d8041a443ad0672a64f9771d117a17c4b6183a1ee1963483721e7a7b956"
+},
+"ef1f219efa66": {
+"file": "ef1f219efa66.opus",
+"keys": [
+"made_make"
+],
+"learner": true,
+"r": "2b602c7fb272",
+"s": 3.51,
+"sha256": "sha256:ec20bc92e36f30e8b29d9bfa605a1d84ac845ddd4aba4d6bca222a33d6b7e99f"
+},
+"ef3f51e20017": {
+"file": "ef3f51e20017.opus",
+"keys": [
+"sheet_code"
+],
+"learner": true,
+"r": "be2dd1349544",
+"s": 4.61,
+"sha256": "sha256:eb78aaeb3d9ab89413b6a6310ca19a6c1d47f924f85877d3f7403b9310f32e43"
+},
+"ef56dbafabdb": {
+"file": "ef56dbafabdb.opus",
+"keys": [
+"lock_mismatch"
+],
+"learner": true,
+"r": "481817041a37",
+"s": 4.41,
+"sha256": "sha256:4ef9ac9bc23619149e15a4f3db60ce18fc99ff96e369a8bb878d262141b6de0e"
+},
+"f065e08195fb": {
+"file": "f065e08195fb.opus",
+"keys": [
+"made_q"
+],
+"learner": true,
+"r": "980009c65501",
+"s": 1.69,
+"sha256": "sha256:ac298de611bf965e1619a430af83083d0d441d01c512bbaebfaf5fe9a2adab44"
+},
+"f07d6069bd00": {
+"file": "f07d6069bd00.opus",
+"keys": [
+"net_waiting{n=7}"
+],
+"learner": true,
+"r": "167408776ad2",
+"s": 2.33,
+"sha256": "sha256:6d52c37631f42ce085a19a482cdf10d9de1039c8309c970e10f9b9c26be3ce7d"
+},
+"f0b770875da0": {
+"file": "f0b770875da0.opus",
+"keys": [
+"recent_prints"
+],
+"learner": true,
+"r": "b9502910919d",
+"s": 1.93,
+"sha256": "sha256:965cae09dfdf327f52455000840b7f8b67112a04ad32e7c2fe330cf1ac584b6e"
+},
+"f0bfa0940106": {
+"file": "f0bfa0940106.opus",
+"keys": [
+"too_shiny"
+],
+"learner": true,
+"r": "f627452db408",
+"s": 4.81,
+"sha256": "sha256:eb19ecdbc5cb7daac1a783939e7189a345ab191b4a29abeb564d8247990f07b7"
+},
+"f0d2d2dcbc92": {
+"file": "f0d2d2dcbc92.opus",
+"keys": [
+"tries_left{n=1}"
+],
+"learner": true,
+"r": "5ee5093c09e9",
+"s": 2.83,
+"sha256": "sha256:19012064282795c4f7ea9021d08f71c9de7b0afa1a9963f39d12301201c67f20"
+},
+"f0dbc06f9367": {
+"file": "f0dbc06f9367.opus",
+"keys": [
+"review.chip_audio",
+"voice_title"
+],
+"learner": true,
+"r": "d7a8ce913076",
+"s": 0.6,
+"sha256": "sha256:5e505c6d5f30e3ff92f6af630dbd4f5642e59be12fadf41ac9bde52dcc867ed6"
+},
+"f0f0689d94e0": {
+"file": "f0f0689d94e0.opus",
+"keys": [
+"cert_hub_note"
+],
+"learner": true,
+"r": "b21b86e8386f",
+"s": 6.61,
+"sha256": "sha256:7fd5cd89f9f17b9d9801d4b8872ea14906b3e5c2c0557602d87a0dc53eb7af3d"
+},
+"f1114b8591bc": {
+"file": "f1114b8591bc.opus",
+"keys": [
+"made_new",
+"made_new_title"
+],
+"learner": true,
+"r": "be68f2db9b0b",
+"s": 1.27,
+"sha256": "sha256:b9ebe783a8c620a9a429c03ae8b237d09cb49943cce918e6cd92aaa3c5317717"
+},
+"f214c1fc180a": {
+"file": "f214c1fc180a.opus",
+"keys": [
+"something_wrong"
+],
+"learner": true,
+"r": "069bcc6bffa6",
+"s": 1.77,
+"sha256": "sha256:e1f9ae9930a7cc640983533626f153c8dad546a5fb5c5164b222551da85031e0"
+},
+"f248996a59b0": {
+"file": "f248996a59b0.opus",
+"keys": [
+"contest_start",
+"path_start"
+],
+"learner": true,
+"r": "38d7ba92f459",
+"s": 0.87,
+"sha256": "sha256:0ff6cd0074596a708e8b195e60eb8aa36b5a76f0661870c2264b74b85265e351"
+},
+"f2d71610718b": {
+"file": "f2d71610718b.opus",
+"keys": [
+"quran_search_all"
+],
+"learner": true,
+"r": "33db27c88551",
+"s": 7.01,
+"sha256": "sha256:cdb39fca3ac841ed8d44778ab0ba871f8597d272e53331e2c24fc4b8996291a0"
+},
+"f2e77161c461": {
+"file": "f2e77161c461.opus",
+"keys": [
+"consent_title_school"
+],
+"learner": true,
+"r": "1b5de4d29531",
+"s": 3.91,
+"sha256": "sha256:711c9710124cd6ae96080b24c4079f594084f1c6c7c0ef70abc5d9d6ef2940f7"
+},
+"f2e9538dd616": {
+"file": "f2e9538dd616.opus",
+"keys": [
+"got_it"
+],
+"learner": true,
+"r": "c11cc33ebe08",
+"s": 0.89,
+"sha256": "sha256:aaafabb5583bc1bb354ab27538947b9dd3d9ca3545b43161d92cf22fc0feaa6f"
+},
+"f31d3562e68c": {
+"file": "f31d3562e68c.opus",
+"keys": [
+"reset_waiting{n=3}"
+],
+"learner": true,
+"r": "9687c05bd538",
+"s": 5.61,
+"sha256": "sha256:a39cc680f5199ebf6091160be99cacbc7246279b0200486271b8b086ccfb9cd2"
+},
+"f3829b2335e7": {
+"file": "f3829b2335e7.opus",
+"keys": [
+"made_count{n=3}"
+],
+"learner": true,
+"r": "34471528f0e6",
+"s": 3.11,
+"sha256": "sha256:1eaf4bed6e54ecb5a2d52645bb9051e609ec52245465d5338641dbc8b96b9245"
+},
+"f38a32bd74e7": {
+"file": "f38a32bd74e7.opus",
+"keys": [
+"cert_title"
+],
+"learner": true,
+"r": "dc6ab6dc2759",
+"s": 1.09,
+"sha256": "sha256:fb8a2ca589304ef88018bc4d52f73e64a7b262d602fa2ae4d2ffc05f87aeda7d"
+},
+"f3f968ce2da2": {
+"file": "f3f968ce2da2.opus",
+"keys": [
+"made_chip_spelling",
+"review.chip_spelling",
+"teacher.c_spelling"
+],
+"learner": true,
+"r": "10e779cdb379",
+"s": 0.98,
+"sha256": "sha256:fee79e51cebdb635cb266d684fe35e53403241834b17dd4f10ef118a1ce092d3"
+},
+"f4f28679bdde": {
+"file": "f4f28679bdde.opus",
+"keys": [
+"link_offline"
+],
+"learner": true,
+"r": "fa59618f02ff",
+"s": 3.21,
+"sha256": "sha256:faf4761644cb390bff3d5d09bd737ad95d470c5b8c4fac8a75e77946359831a6"
+},
+"f54290c7fd52": {
+"file": "f54290c7fd52.opus",
+"keys": [
+"approved"
+],
+"learner": true,
+"r": "4f4809f82ce1",
+"s": 2.38,
+"sha256": "sha256:20f8509e2b67d11276626f430e4beefc51cb2e489ddd7610b21bf207c28981a5"
+},
+"f5605ea6b8a9": {
+"file": "f5605ea6b8a9.opus",
+"keys": [
+"check_btn"
+],
+"learner": true,
+"r": "fba9a88f9f6d",
+"s": 0.83,
+"sha256": "sha256:6a8846d46538b9e7808d56289b5e4d53b357446550271e35025d02030046ad0b"
+},
+"f5cb462369d5": {
+"file": "f5cb462369d5.opus",
+"keys": [
+"admin.k_live",
+"live_title"
+],
+"learner": true,
+"r": "3307ecec03d6",
+"s": 1.21,
+"sha256": "sha256:8b2e91d4000a8f390cc60f2b3323dcca82d48aed38a0577a898960b52182949c"
+},
+"f67083459d73": {
+"file": "f67083459d73.opus",
+"keys": [
+"made_sent"
+],
+"learner": true,
+"r": "d0921b48c585",
+"s": 2.47,
+"sha256": "sha256:c7eda405f9d3345241be1090c9808314a2e255527d7b36501ce758552fd7ddb2"
+},
+"f6b76d78670a": {
+"file": "f6b76d78670a.opus",
+"keys": [
+"questions_review"
+],
+"learner": true,
+"r": "9509f3312f30",
+"s": 2.23,
+"sha256": "sha256:dbf3802278fb467c95d29d32fee47da29ab73cd665b50196b1afee2d4f485e95"
+},
+"f727a49ccfbf": {
+"file": "f727a49ccfbf.opus",
+"keys": [
+"study_left{n=8}"
+],
+"learner": true,
+"r": "a6905a778bd9",
+"s": 2.38,
+"sha256": "sha256:be41f7fe253a9ac352e0887e3ec50872b2cc0952b81de2aecbe9cea90dd440c3"
+},
+"f89571ce1abd": {
+"file": "f89571ce1abd.opus",
+"keys": [
+"chinese",
+"lang.zh"
+],
+"learner": true,
+"r": "08dbf0a4c2b4",
+"s": 0.78,
+"sha256": "sha256:075f8625218638faca45009be87683571890a4a66902cc16f1f7db69a0910ee8"
+},
+"f9c11f97844f": {
+"file": "f9c11f97844f.opus",
+"keys": [
+"study_left{n=4}"
+],
+"learner": true,
+"r": "66fabc244524",
+"s": 2.88,
+"sha256": "sha256:8af043c02b6ba3ab724c947b2306f84f4d217908b17bc1edd500567b1f5c3a41"
+},
+"fa04910a11c3": {
+"file": "fa04910a11c3.opus",
+"keys": [
+"ask_local"
+],
+"learner": true,
+"r": "828a66acaad1",
+"s": 5.31,
+"sha256": "sha256:db1fbfd5f4efb173edb971dabb67db7372ae9b05977fef16f2a4cf101881bbc0"
+},
+"fa09bbd62976": {
+"file": "fa09bbd62976.opus",
+"keys": [
+"quran_searched{n=9}"
+],
+"learner": true,
+"r": "6e09e2e2cc4b",
+"s": 3.61,
+"sha256": "sha256:1da1b0da63684ae1cb7ff550be6b4f2520d1a79dfb24e9b4af7398c690253cf3"
+},
+"fa693ab07af3": {
+"file": "fa693ab07af3.opus",
+"keys": [
+"quran_repeat_n{n=3}"
+],
+"learner": true,
+"r": "ad376a19e245",
+"s": 4.21,
+"sha256": "sha256:d6ca7577daff4a73d1d5cc11aed09f3248390a6b4d4941d65acb5ea63ec7248f"
+},
+"faf1369edf9b": {
+"file": "faf1369edf9b.opus",
+"keys": [
+"goals_type"
+],
+"learner": true,
+"r": "0c49df757204",
+"s": 3.51,
+"sha256": "sha256:433dfc28d75334485a4cc351f789454a94916bad23553f1f7def495610464364"
+},
+"fb87c14ed09a": {
+"file": "fb87c14ed09a.opus",
+"keys": [
+"lock_wait{n=5}"
+],
+"learner": true,
+"r": "1add04e6f449",
+"s": 3.31,
+"sha256": "sha256:3e516e5be06a2acd2683934f79dab5562bfc83cb3413b0e9fc7e8b1fde002915"
+},
+"fbebb6201fd0": {
+"file": "fbebb6201fd0.opus",
+"keys": [
+"consent:hub-2026-10b:sees"
+],
+"learner": true,
+"r": "38d4e2c90d75",
+"s": 27.11,
+"sha256": "sha256:1d0966ea820c15cead4818488d265831d72931f4cc74a866e4e42ef908a87411"
+},
+"fc6e5850cc01": {
+"file": "fc6e5850cc01.opus",
+"keys": [
+"move_back"
+],
+"learner": true,
+"r": "54f32d68cb09",
+"s": 2.19,
+"sha256": "sha256:b298d488f3a4e730c5c2c50dee9143358f2bd13f8b10fce8fefcd983b1608588"
+},
+"fc9d7a2a82f6": {
+"file": "fc9d7a2a82f6.opus",
+"keys": [
+"switch_q"
+],
+"learner": true,
+"r": "012e9f9b4a14",
+"s": 5.11,
+"sha256": "sha256:c345a5ee5bd8ffbd9445b8c2e1c5264e18ee0394084fd0cad7a6b555c48f0986"
+},
+"fd16359d9c5c": {
+"file": "fd16359d9c5c.opus",
+"keys": [
+"saved"
+],
+"learner": true,
+"r": "bca6ac181e15",
+"s": 7.01,
+"sha256": "sha256:47ba5d4569b0841d22a1f960ea5ac49e5099822715b7ea13dd9533b82d6beace"
+},
+"feabe2d10daf": {
+"file": "feabe2d10daf.opus",
+"keys": [
+"admin.h_day",
+"admin.school_day",
+"module.timetable",
+"school_day"
+],
+"learner": true,
+"r": "17a89963f4ba",
+"s": 1.74,
+"sha256": "sha256:d153ee3e0eea4a652792c96f7504a3dfe2fc4189c219af76cd38c0ba9e44c70a"
+},
+"ff1199842783": {
+"file": "ff1199842783.opus",
+"keys": [
+"minutes{n=4}"
+],
+"learner": true,
+"r": "55c63c0b28e7",
+"s": 1.8,
+"sha256": "sha256:06b77e0ebdeb316b857eb88564018d7ac58d536aef16b0c0068898438c9336d9"
+},
+"ffd177d788e3": {
+"file": "ffd177d788e3.opus",
+"keys": [
+"lock_wait{n=2}"
+],
+"learner": true,
+"r": "8fe8e583c948",
+"s": 4.21,
+"sha256": "sha256:f0d699d288f05433a2907a4f3ac3fea61ce367301b7e899f5a75e48be68929f5"
+}
+},
 "lang": "prs",
 "voice": "Kore"
 }

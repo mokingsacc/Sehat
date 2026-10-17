@@ -1,0 +1,87 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-084b42f6e95e": {
+"file": "t-084b42f6e95e.opus",
+"generated": true,
+"placeholder": false,
+"r": "03c6c5583b39",
+"s": 1.82,
+"sha256": "sha256:533d176ffcfe10ed01b078c0cbff5a7466b553ae39baaf2c6b19ab6c4f2b32c3",
+"text": "二",
+"voice": "Kore"
+},
+"t-1be968f12524": {
+"file": "t-1be968f12524.opus",
+"generated": true,
+"placeholder": false,
+"r": "6e9dc76fe81a",
+"s": 0.88,
+"sha256": "sha256:1525064955e11a42e93039fc029ffcc63d38519bb9881bb3d9694fcfeec6ce0b",
+"text": "书",
+"voice": "Kore"
+},
+"t-1bf7ac688560": {
+"file": "t-1bf7ac688560.opus",
+"generated": true,
+"placeholder": false,
+"r": "ad63adce8126",
+"s": 0.64,
+"sha256": "sha256:593ed8818c019cc1a3574ddff6fa7bbc9962cd78104411b569a7a1b3c45c9c42",
+"text": "谢谢",
+"voice": "Kore"
+},
+"t-327b54d04f71": {
+"file": "t-327b54d04f71.opus",
+"generated": true,
+"placeholder": false,
+"r": "2bdbdad8a1c1",
+"s": 0.79,
+"sha256": "sha256:14127a21c4209802d0cb93e6320e910c970c8dedc1ff1642b7b73db7b7b7f52a",
+"text": "水",
+"voice": "Kore"
+},
+"t-51a75f4634df": {
+"file": "t-51a75f4634df.opus",
+"generated": true,
+"placeholder": false,
+"r": "938c9b3ae0b9",
+"s": 0.63,
+"sha256": "sha256:cee31d6b075f421c29c1528a636559ebcfdb202251ed36bcc4133d484797b01d",
+"text": "一",
+"voice": "Kore"
+},
+"t-670d9743542c": {
+"file": "t-670d9743542c.opus",
+"generated": true,
+"placeholder": false,
+"r": "4e3cfbb0c3a2",
+"s": 2.48,
+"sha256": "sha256:64d9642817a8047095e329f577dcf5019e1b821fa386ee55aaced09c1d329828",
+"text": "你好",
+"voice": "Kore"
+},
+"t-a4c3313deb18": {
+"file": "t-a4c3313deb18.opus",
+"generated": true,
+"placeholder": false,
+"r": "3585a21bbc33",
+"s": 0.8,
+"sha256": "sha256:6cdd64292160deaa32c5d7828382b80624a07e2432362f207612d1756df38f27",
+"text": "三",
+"voice": "Kore"
+},
+"t-c90a1cdb561d": {
+"file": "t-c90a1cdb561d.opus",
+"generated": true,
+"placeholder": false,
+"r": "12fdca0f2b87",
+"s": 0.51,
+"sha256": "sha256:3e031f3aea45dfd620d1252858249a5644b1eb2190daa9f9367ac0e9d5421473",
+"text": "再见",
+"voice": "Kore"
+}
+},
+"lang": "zh",
+"voice": "Kore"
+}

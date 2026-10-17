@@ -1,0 +1,37 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-2e3bc8409224": {
+"file": "t-2e3bc8409224.opus",
+"generated": true,
+"placeholder": false,
+"r": "0c44bdb56bf3",
+"s": 2.28,
+"sha256": "sha256:5a5f8a6d2d464c5b2ed96b15b710160c424f635d2061096ca9f4cbf946db598b",
+"text": "۳",
+"voice": "Kore"
+},
+"t-62b67013987e": {
+"file": "t-62b67013987e.opus",
+"generated": true,
+"placeholder": false,
+"r": "27e47dee9740",
+"s": 19.41,
+"sha256": "sha256:e85902f383d0a50c147e5557b12480c16228b3c4e5c6b941784b6050ca85852d",
+"text": "۱",
+"voice": "Kore"
+},
+"t-bc9c03bb975e": {
+"file": "t-bc9c03bb975e.opus",
+"generated": true,
+"placeholder": false,
+"r": "e49345112017",
+"s": 2.09,
+"sha256": "sha256:a8b54dd7fd68bb1196eade18450cae66d8b5dd766e2a8da872f6c31ef30a6708",
+"text": "۲",
+"voice": "Kore"
+}
+},
+"lang": "ps",
+"voice": "Kore"
+}

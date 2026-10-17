@@ -1,0 +1,17 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-f32648d9fdec": {
+"file": "t-f32648d9fdec.opus",
+"generated": true,
+"placeholder": false,
+"r": "2cfd1fb3d147",
+"s": 0.71,
+"sha256": "sha256:1d72f360ca61af060c0a9363558ba75b1c37d083aa23949dfe95346e55882e88",
+"text": "Quran",
+"voice": "Kore"
+}
+},
+"lang": "en",
+"voice": "Kore"
+}

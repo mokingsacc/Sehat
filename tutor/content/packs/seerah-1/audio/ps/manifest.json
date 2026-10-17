@@ -1,0 +1,17 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-cc82c7fbe1d1": {
+"file": "t-cc82c7fbe1d1.opus",
+"generated": true,
+"placeholder": false,
+"r": "f1b816e7a99d",
+"s": 0.83,
+"sha256": "sha256:37627d6f898d624f00e759d242416997e477eda0738be4d09f658f1a5dcbc62e",
+"text": "سیرت",
+"voice": "Kore"
+}
+},
+"lang": "ps",
+"voice": "Kore"
+}

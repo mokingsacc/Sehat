@@ -1,0 +1,17 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-a037917f8dfb": {
+"file": "t-a037917f8dfb.opus",
+"generated": true,
+"placeholder": false,
+"r": "e72f49efdbac",
+"s": 2.33,
+"sha256": "sha256:23553352d281c7fa272b27830b603d68b3d23d05e7bf55c2d86bb6e618ef1e0f",
+"text": "آمادگی برای پوهنتون",
+"voice": "Kore"
+}
+},
+"lang": "prs",
+"voice": "Kore"
+}

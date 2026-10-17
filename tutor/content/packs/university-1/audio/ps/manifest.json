@@ -1,0 +1,17 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py, each clip played by the reviewer before OK (P17).",
+"clips": {
+"t-61b8f0560aee": {
+"file": "t-61b8f0560aee.opus",
+"generated": true,
+"placeholder": false,
+"r": "56aebcf8332d",
+"s": 2.32,
+"sha256": "sha256:9d7e0df25d466a247023e1fdca16363f431eb5aac76df272ce303d060213574e",
+"text": "پوهنتون ته چمتووالی",
+"voice": "Kore"
+}
+},
+"lang": "ps",
+"voice": "Kore"
+}
