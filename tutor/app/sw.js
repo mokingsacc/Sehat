@@ -5,7 +5,7 @@
 // as it does on the hub, where plain http allows no service worker (F2). A new version of this file takes over at
 // the next start, without a banner. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-p15-1';
+const VERSION = 'qalam-p17-1';
 const SHELL_CACHE = 'shell-' + VERSION;
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const SHELL = [
@@ -86,6 +86,7 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (req.method !== 'GET' || url.origin !== self.location.origin) return;
   if (url.pathname.startsWith('/api/')) return;                        // the network, or the app's own fallback
+  if (url.pathname.startsWith('/review/') || url.searchParams.has('preview')) return;   // staff pages: never kept
   if (req.mode === 'navigate') {                                       // /, /?join=CODE, /#/...: the app's page
     e.respondWith(staleWhileRevalidate(req, SHELL_CACHE, new Request(new URL('./', self.location).href)));
     return;

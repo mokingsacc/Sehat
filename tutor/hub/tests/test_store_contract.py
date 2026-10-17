@@ -296,6 +296,44 @@ async def test_a_ladder_keeps_its_answer_for_three_checks(store):
     assert await store.use_check(t) is None
 
 
+# staff and review notes (P17)
+
+async def test_staff_are_a_hash_a_label_a_role_and_initials_never_an_email(store):
+    h = "a" * 64
+    await store.add_staff(id_hash=h, label="Dari reviewer 1", role="Dari reader", cohorts=["qg1j2918yx"], initials="AB")
+    assert await store.staff_member(h) == {"label": "Dari reviewer 1", "role": "Dari reader",
+                                           "cohorts": ["qg1j2918yx"], "initials": "AB"}
+    await store.add_staff(id_hash=h, label="Dari reviewer 1", role="maths teacher", cohorts=[], initials="AB")
+    assert (await store.staff_member(h))["role"] == "maths teacher"            # added again: replaced
+    for bad in ({"id_hash": "someone@example.org"}, {"label": "someone@example.org"}, {"initials": "Ahmad"}):
+        with pytest.raises(ValueError):
+            await store.add_staff(**{"id_hash": "b" * 64, "label": "x", "role": "teacher", "cohorts": [],
+                                     "initials": "", **bad})
+    assert await store.staff_member("b" * 64) is None
+    assert await store.remove_staff(h) and not await store.remove_staff(h)
+    assert await store.staff_member(h) is None
+
+
+async def test_review_notes_keep_each_verdict_against_the_steps_hash(store):
+    a = await store.add_review_note(lesson="m7", step=1, role="Dari reader", step_hash="sha256:1", status="ok",
+                                    chips=[], text="")
+    b = await store.add_review_note(lesson="m7", step=2, role="Dari reader", step_hash="sha256:2", status="change",
+                                    chips=["spelling", "maths"], text="The second sum")
+    await store.add_review_note(lesson="m7", step=2, role="maths teacher", step_hash="sha256:2", status="ok",
+                                chips=[], text="")
+    assert b > a
+    mine = await store.review_notes("m7", "Dari reader")
+    assert [(n["step"], n["status"], n["chips"]) for n in mine] == [(1, "ok", []), (2, "change", ["maths", "spelling"])]
+    assert len(await store.review_notes("m7")) == 3 and await store.review_notes("other") == []
+    for bad in ({"status": "maybe"}, {"chips": ["rude"]}, {"text": "x" * 501}, {"step": -1}):
+        with pytest.raises(ValueError):
+            await store.add_review_note(**{"lesson": "m7", "step": 1, "role": "r", "step_hash": "h", "status": "ok",
+                                           "chips": [], "text": "", **bad})
+    await store.add_signoff(lesson="m7", content_hash="sha256:x", role="Dari reader", initials="AB",
+                            signed_on="2027-02-14")
+    assert [s["lesson"] for s in await store.all_signoffs()] == ["m7"]
+
+
 # print jobs
 
 async def test_print_jobs(store):

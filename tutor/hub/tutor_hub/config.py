@@ -52,6 +52,13 @@ class Config:
                                                           # app's, later); the app's own needs none. The hub allows any
     release: bool = False                                 # production: serve only signed lessons (TUTOR_RELEASE=1);
                                                           # otherwise drafts are served, marked as drafts
+    staff_gate: str = "auto"                              # staff pages (/review/, P17): auto, pin, access or off.
+                                                          # auto: the teacher PIN on the hub; online, Cloudflare
+                                                          # Access when the three settings below are all set; else off
+    access_team: str | None = None                        # online: the Access team name (<team>.cloudflareaccess.com)
+    access_aud: str | None = None                         # online: the Access application's audience tag
+    staff_pepper: str | None = None                       # a secret, never in D1 or the repository: staff rows keep
+                                                          # SHA-256(pepper + email), so without it no one is staff
     extra: dict = field(default_factory=dict)
 
     @classmethod
@@ -81,6 +88,10 @@ class Config:
             home="online" if _env("TUTOR_HOME", "hub").strip().lower() == "online" else "hub",
             origins=tuple(x.strip() for x in _env("TUTOR_ORIGINS", "").split(",") if x.strip()),
             release=_env("TUTOR_RELEASE", "0").strip().lower() in ("1", "true", "yes", "on"),
+            staff_gate=_env("TUTOR_STAFF_GATE", cls.staff_gate).strip().lower(),
+            access_team=_env("TUTOR_ACCESS_TEAM"),
+            access_aud=_env("TUTOR_ACCESS_AUD"),
+            staff_pepper=_env("TUTOR_STAFF_PEPPER"),
         )
         for k, v in over.items():
             setattr(c, k, v)

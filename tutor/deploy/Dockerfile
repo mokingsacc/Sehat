@@ -12,8 +12,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TUTOR_HOME=online \
     TUTOR_LACKS=printer,pin \
     TUTOR_AI_PROVIDER=fake \
+    TUTOR_STAFF_GATE=off \
     FORWARDED_ALLOW_IPS=* \
     PORT=8080
+# TUTOR_STAFF_GATE=off: no Cloudflare Access stands in front of this container, so it serves no staff page (/review/)
 # FORWARDED_ALLOW_IPS: the host's proxy is the only way in, so its X-Forwarded-For names the phone's address (the
 # join limit counts addresses); never set it where the container can be reached directly
 

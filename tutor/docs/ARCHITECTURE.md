@@ -27,7 +27,7 @@ The looks: [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi
 | `content/packs/` | Lessons as data. One folder per pack (format in [CONTENT.md](CONTENT.md)). |
 | `content/sources.json` | Every outside source with its licence class and flags: the only record of what may be copied ([FREE-RESOURCES.md](FREE-RESOURCES.md)); `content/permissions/` holds written permissions for ASK sources. |
 | `setup/` | Installing a hub: services, Wi-Fi hotspot, printer ([HUB-SETUP.md](HUB-SETUP.md)). |
-| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers, or a batch of one for facilitators; `sheet_check.mjs` checks the sheets in Chromium's print; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests; `blindtest/blindtest.py` runs the blind test (P16): questions and sheet strips through the gateway, blind grader sheets, a score against the nine-in-ten rule ([content/blindtest/README.md](../content/blindtest/README.md)). |
+| `tools/` | `validate_pack.py` checks packs and licences (`--release`, `--hashes`); `make_sheets.py` prints every sheet to PDF for reviewers, or a batch of one for facilitators; `sheet_check.mjs` checks the sheets in Chromium's print; `import_bloom.py` imports a Bloom book as a draft lesson; `validate_modules.py` checks manifests; `pull_signoffs.py` copies reviewers' signatures into the packs; `blindtest/blindtest.py` runs the blind test (P16): questions and sheet strips through the gateway, blind grader sheets, a score against the nine-in-ten rule ([content/blindtest/README.md](../content/blindtest/README.md)). |
 
 ## The async seam (stores/, October 2026)
 
@@ -146,7 +146,8 @@ queue; it depends on `sheets` and needs `printer`), `check` (Check my sheet, whi
 `teacher`. `photo` (P14, photo marking of Qalam sheets) depends on `sheets` and `check`, serves p2 to adult, needs
 the internet and is on only in staging so far. `homework` (P15, Homework help: "Check my answer" under Ask's hint
 ladder) depends on `ask`, serves p2, s1 and s2, calls the model for `hint`, needs the internet and is on only in
-staging (`migrations/0009`). `migrations/0007` switches `sheets` on in every cohort made before it
+staging (`migrations/0009`). `review` (P17, the review screens at `/review/`) depends on `lessons`, has no slot in
+the learner app and is on only in staging (`migrations/0010`). `migrations/0007` switches `sheets` on in every cohort made before it
 wherever `print` or `check` was; `migrations/0008` switches `photo` on for the staging seed cohort in a database
 seeded before it. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
@@ -437,10 +438,11 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
+| `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
@@ -524,6 +526,31 @@ learner routes and the app's files are always there.
 - `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
   child's year, one subject after another. Every lesson stays open from the subject pages.
 - Text from lessons, the hub or the AI is always added as text, never as HTML.
+
+## Staff pages and review (staff.py, mods/review.py, P17)
+
+Staff pages live on their own paths, apart from the learner app, so Cloudflare Access can guard them online (C3.2):
+`/review/` first (`app/review/index.html`, `app/js/review/review.js`), later `/teacher/` and `/admin/`. The learner
+app's service worker leaves them alone, and they keep nothing in the browser.
+
+- **The gate** (`staff.py`, one per host). On the hub, the teacher's PIN. Online, Cloudflare Access: the Worker
+  checks the `Cf-Access-Jwt-Assertion` token itself (RS256 against the team's published keys, in plain Python;
+  audience, issuer, expiry) and looks up SHA-256(pepper, lower-cased email) in `staff` (`migrations/0010`:
+  `id_hash`, a neutral `label`, `role`, `cohorts`, `initials`; never the email). The pepper is a secret
+  (`TUTOR_STAFF_PEPPER`), never in D1. Without the Access team, the audience and the pepper, or with
+  `TUTOR_STAFF_GATE=off` (the fallback container), staff routes answer 404. `python -m tutor_hub staff-add` prints the
+  SQL for a staff row after hashing an email it never keeps.
+- **Review** (`/api/m/review/*`, module `review`): a queue of the lessons that need her role, each lesson step by step
+  drawn by the learner app itself in a frame (`/?preview=<band>&lang=<lang>#/lesson/<id>/<n>`: `state.js` keeps that
+  learner in memory only, with no consent, so nothing is stored or sent), then the worksheet with its key and hints,
+  the link cards and the sources. Each verdict (OK, or a change with chips and a comment, identifiers scrubbed) is a
+  `review_notes` row against that step's own hash, so a changed step shows "changed". On a step with a recording, OK
+  waits until the clip has played (in the page); a step that needs a recording and has none blocks signing. Signing
+  (a 3-second hold) writes a `signoffs` row for the current content hash, initials only, once every step is OK.
+- **Into the pack:** `tools/pull_signoffs.py` (from `/api/m/review/signoffs` or a hub's database) writes the
+  signatures for each lesson's current hash into its `review` block, leaving the file's layout alone, and reports
+  older ones as changed since signed; release mode then serves the lesson. One changed word gives a new hash and
+  voids them.
 
 ## Not built yet
 

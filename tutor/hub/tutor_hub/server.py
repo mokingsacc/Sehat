@@ -27,6 +27,8 @@ from .brain import WAITING, Answer, Brain
 from .config import Config
 from .mods import homework as homework_mod
 from .mods import photo as photo_mod
+from .mods import review as review_mod
+from .staff import Gate
 from .packs import Library, band_of_year, picture_file
 from .packs import text as pick_text
 from .printing import Printer, PrintQueue
@@ -163,6 +165,7 @@ class Hub:
         self.event_limit = Limit(30, 60)
         self.join_limit = Limit(20, 3600)
         self.photo_limit = Limit(6, 60)              # photos of sheets read per phone a minute
+        self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
         self.aliases = set(learners.load_aliases())
         self.consent_texts = learners.load_consent()
         self.consent_version = learners.CONSENT_VERSIONS[cfg.home]
@@ -518,6 +521,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(photo_mod.router(hub, needs))
     # Homework help (the `homework` module, P15): "Check my answer" against the answer kept behind a ladder
     app.include_router(homework_mod.router(hub, needs))
+    # The review screens (the `review` module, P17): behind the staff gate, at /review/ (app/review/)
+    app.include_router(review_mod.router(hub, needs))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
     # The answer page is the teacher's: behind the teacher's PIN on the hub, and on no learner route (C2.3); online

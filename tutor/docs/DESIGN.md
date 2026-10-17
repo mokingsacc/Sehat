@@ -423,6 +423,25 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   teacher instead); hold-for-teacher (P20); in bold English the homework placeholder is cut at 390 px; the leak
   check's Dari and Pashto number words need a native speaker's list.
 
+## What P17 built, and where it differs
+
+- `/review/` is its own page in the clean look and adult tone, English or Dari (a switch in the header; the Dari
+  strings are drafts). Online it opens through Cloudflare Access; on the hub, through the teacher's PIN, then "I
+  review as" (the roles lessons need) and "My initials".
+- "Lessons for you", grouped by pack, with a tag per lesson: Not started, Step n of N, Changes asked, Signed,
+  Changed since you signed.
+- Each step is the learner app itself in a 360 px frame, in the lesson's band look and the reviewer's language
+  (Dari readers see Dari, Pashto readers Pashto; others switch). Under it: "Play the recording" where there is one
+  (OK waits until it has played), "No recording yet" where one is needed, OK and Change; Change shows the chips
+  (spelling, Afghan word, maths, picture, audio, too hard, unsafe) and a comment box. Tags "changed" and "OK last
+  time"; "Next changed step" skips the rest.
+- After the last step, one page for the worksheet ("Open the sheet", and its key with each item's hints), the link
+  cards and the sources. It needs its own OK, since its hash is part of what is signed.
+- "Sign this lesson" shows the short hash, the role, the initials and the date; "Hold to sign" fills over 3 seconds.
+  If any step asked for a change, the button is "Send my changes" (the notes are already saved).
+- Not built (open look questions): "Print for review" (the paper list) and "signed on paper"; speakers on the staff
+  page; the admin's view of review notes (P21); the frame is a fixed 640 px tall.
+
 ---
 
 # C2 and C3 decisions

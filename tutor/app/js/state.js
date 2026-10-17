@@ -22,6 +22,18 @@ const empty = () => ({ v: 2, active: null, learners: [], forget: [] });
 const TOKEN = /^[A-Za-z0-9_-]{20,64}$/;
 const CODE = /^[A-HJKMNP-Z2-9]{8}$/;
 const KINDS = ['guardian-on-phone', 'self', 'partner-paper'];
+// A reviewer's preview (P17): /review/ shows a lesson step in a learner's look, in a frame opened at
+// ?preview=<band>&lang=<lang>. That page keeps one learner in memory only: nothing is read from or written to this
+// browser's storage, no event is kept (she has no consent), and she never joins.
+export const preview = (() => {
+  try {
+    const q = new URLSearchParams((globalThis.location && globalThis.location.search) || '');
+    const b = q.get('preview');
+    const lang = ['prs', 'ps', 'en'].includes(q.get('lang')) ? q.get('lang') : 'prs';
+    return BANDS.includes(b) ? { band: b, lang } : null;
+  } catch { return null; }
+})();
+const memory = new Map();
 let data = load();
 
 function rid() {
@@ -87,6 +99,10 @@ export function migrate(v1) {
 }
 
 function load() {
+  if (preview) {
+    return { v: 2, active: 'preview', forget: [],
+      learners: pictures([clean({ id: 'preview', band: preview.band, lang: preview.lang, track: 'reader', asked: true })]) };
+  }
   try {
     const d = JSON.parse(localStorage.getItem(KEY));
     if (d && d.v === 2 && Array.isArray(d.learners)) {
@@ -106,6 +122,7 @@ function load() {
 }
 
 export function save() {
+  if (preview) return;
   try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* full or blocked: keep going */ }
 }
 
@@ -253,6 +270,10 @@ export function pin(value) {
 
 // small caches so the lists and opened lessons still show when the hub is out of reach
 export function cache(key, value) {
+  if (preview) {
+    if (value !== undefined) memory.set(key, value);
+    return value ?? memory.get(key) ?? null;
+  }
   try {
     if (value === undefined) return JSON.parse(localStorage.getItem('qalam.cache.' + key));
     localStorage.setItem('qalam.cache.' + key, JSON.stringify(value));

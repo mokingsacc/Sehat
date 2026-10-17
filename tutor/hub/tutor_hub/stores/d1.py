@@ -21,7 +21,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from .base import EVENT_FIELDS, Store, check_changes, check_initials, draw_number
+from .base import EVENT_FIELDS, Store, check_changes, check_initials, check_note, check_staff, draw_number
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -337,6 +337,38 @@ class D1Store(Store):
     async def signoffs(self, lesson):
         return await self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs "
                                "WHERE lesson=? ORDER BY id", lesson)
+
+    async def all_signoffs(self):
+        return await self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs "
+                               "ORDER BY id")
+
+    # staff and review notes
+
+    async def add_staff(self, *, id_hash, label, role, cohorts, initials) -> None:
+        cs = check_staff(id_hash=id_hash, label=label, role=role, cohorts=cohorts, initials=initials)
+        await self._run("INSERT OR REPLACE INTO staff(id_hash, label, role, cohorts, initials, added_at) "
+                        "VALUES(?,?,?,?,?,?)", id_hash, label.strip(), role.strip(), cs, initials, now())
+
+    async def staff_member(self, id_hash):
+        r = await self._one("SELECT label, role, cohorts, initials FROM staff WHERE id_hash=?", id_hash)
+        return dict(r, cohorts=json.loads(r["cohorts"])) if r else None
+
+    async def remove_staff(self, id_hash) -> bool:
+        meta = await self._run("DELETE FROM staff WHERE id_hash=?", id_hash)
+        return (meta.changes or 0) > 0
+
+    async def add_review_note(self, *, lesson, step, role, step_hash, status, chips, text) -> int:
+        cj = check_note(step=step, status=status, chips=chips, text=text)
+        meta = await self._run("INSERT INTO review_notes(lesson, step, role, step_hash, status, chips, text, at) "
+                               "VALUES(?,?,?,?,?,?,?,?)", lesson, step, role, step_hash, status, cj, text, now())
+        return int(meta.last_row_id)
+
+    async def review_notes(self, lesson, role=None):
+        if role is None:
+            rows = await self._all("SELECT * FROM review_notes WHERE lesson=? ORDER BY id", lesson)
+        else:
+            rows = await self._all("SELECT * FROM review_notes WHERE lesson=? AND role=? ORDER BY id", lesson, role)
+        return [dict(r, chips=json.loads(r["chips"])) for r in rows]
 
     async def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
         meta = await self._run("INSERT INTO releases(pack, version, content_hash, cohort, released_by, released_at) "

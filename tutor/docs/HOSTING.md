@@ -136,8 +136,37 @@ The third answer to D6 is ready in `tutor/deploy`, so choosing it costs an accou
   `fallback-kit`); `hub/tests/test_fallback_kit.py` keeps its packages and settings equal to the hub's and the
   Worker's.
 - What it does not have: Cloudflare's static asset serving (uvicorn serves the app and pictures itself, as on the
-  hub), D1 (SQLite instead, one instance), and Cloudflare Access for the staff pages (P20, P21 would need another
-  way in). It was built only because D6 is still open; once Mo chooses Workers, it can be deleted with its CI job.
+  hub), D1 (SQLite instead, one instance), and Cloudflare Access for the staff pages: it sets `TUTOR_STAFF_GATE=off`, so it serves none. It was built only because D6 is still open; once Mo chooses Workers, it can be deleted with its CI job.
+
+## Staff pages behind Cloudflare Access (P17; a step for Mo, not done)
+
+The review screens (`/review/`, P17) are the first staff pages; the teacher's (`/teacher/`, P20) and the admin's
+(`/admin/`, P21) will sit behind the same gate. Online, Cloudflare Access is the only place staff emails live
+(C3.2). Until the steps below are done, every staff route answers 404 online, which is the safe default; the page
+`/review/` itself holds no data and simply says that review is not open. On the village hub the teacher's PIN opens
+it instead, and the fallback container sets `TUTOR_STAFF_GATE=off` because nothing stands in front of it.
+
+1. In Cloudflare Zero Trust, pick the team name (the team domain is `<team>.cloudflareaccess.com`).
+2. Give the staff paths a hostname Access can cover path by path. Access's one-click switch for `workers.dev`
+   protects the whole Worker, which would lock learners out, so this most likely needs a custom domain on the
+   account routed to `qalam-staging` (to be confirmed when it is set up).
+3. Add a self-hosted Access application for `<host>/review/*` and `<host>/api/m/review/*` (later also
+   `/teacher/*`, `/api/m/teacher/*`, `/admin/*`, `/api/m/admin/*`). Its policy allows the reviewers' and teachers'
+   emails, with a second factor for admins. Copy the application's audience tag (AUD).
+4. Set three Worker secrets (the deploy job never touches secrets, so they stay across deploys):
+   `wrangler secret put TUTOR_ACCESS_TEAM` (the team name), `TUTOR_ACCESS_AUD` (the AUD tag) and
+   `TUTOR_STAFF_PEPPER` (a long random string, for example from
+   `python3 -c "import secrets; print(secrets.token_urlsafe(32))"`; keep a copy in the password manager, since every
+   staff row depends on it). With all three set, the Worker checks each request's Access token itself (signature,
+   audience, issuer, expiry) and looks up the hashed email in `staff`.
+5. Add each staff member without writing the email anywhere: `TUTOR_STAFF_PEPPER=... python -m tutor_hub staff-add
+   --label "Dari reviewer 1" --role "Dari reader" --initials AB --cohorts qg1j2918yx` asks for the email, prints SQL
+   holding only its peppered hash, and `wrangler d1 execute qalam-staging --remote --command "<that SQL>"` adds the
+   row. `staff-remove` prints the SQL that removes one. Roles are the ones lessons name in `review.needs`
+   ("Dari reader", "Pashto reader", "maths teacher", ...), or `teacher` and `admin` for later pages.
+6. Before a release, open `/api/m/review/signoffs` while signed in, save it as `signoffs.json`, run
+   `python3 tools/pull_signoffs.py --json signoffs.json`, check with `python3 tools/validate_pack.py --release`, and
+   commit the packs.
 
 ## Reading the next runs
 

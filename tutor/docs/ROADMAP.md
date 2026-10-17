@@ -118,6 +118,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   shuffled grader sheets under random codes (the key stays with the organiser), and scores each provider, language
   and purpose against the nine-in-ten rule, the references as the control. Dry-run on the fake in the tests; the real
   run waits for the key in January.
+- **P17, done:** the review screens (C3.4) at `/review/`, on in staging. Reviewers see each lesson step drawn by the
+  learner app in the lesson's own look, play its recording, mark it OK or ask for a change with chips and a comment,
+  then see the worksheet with its key and hints, the link cards and the sources, and sign the content hash with a
+  3-second hold. `staff` keeps a peppered hash of the email, a neutral label, the role and initials (C3.2); online the
+  Worker checks Cloudflare Access's token itself, and the staff pages stay off until Mo sets up Access and its three
+  secrets (HOSTING.md). `tools/pull_signoffs.py` copies signatures into the packs for release.
 
 ## January 2027: buy and test
 

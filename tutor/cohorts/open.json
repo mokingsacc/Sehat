@@ -28,6 +28,7 @@
     "print": false,
     "teacher": false,
     "photo": false,
-    "homework": false
+    "homework": false,
+    "review": false
   }
 }

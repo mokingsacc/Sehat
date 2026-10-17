@@ -1,0 +1,297 @@
+// The review screens (P17, C3.4), at /review/: reviewers read each lesson step in the learner's own look, mark it OK
+// or ask for a change, and sign the lesson's content hash. A staff page, apart from the learner app: it keeps
+// nothing in this browser (no storage, no service worker cache), and offline it says "Connect to review".
+// Online, Cloudflare Access lets the reviewer in and the hub knows her role and initials from `staff`; on the hub,
+// the teacher's PIN opens it, and she picks her role and types her initials (kept in this page's memory only).
+// Each step is drawn by the learner app itself, in a frame: /?preview=<band>&lang=<lang>#/lesson/<id>/<n>
+// (state.js keeps that learner in memory only). On a step with a recording, OK waits until the clip has played once;
+// a step that needs a recording and has none blocks signing. The last page is the worksheet with its key and hints,
+// the link cards and the sources. Signing is a 3-second hold, like the consent screen's.
+
+const API = '../api/m/review';
+const BAND_OF_YEAR = (y) => (y === 0 ? 'ey' : y <= 3 ? 'p1' : y <= 6 ? 'p2' : y <= 9 ? 's1' : 's2');
+const LANG_OF_ROLE = { 'Dari reader': 'prs', 'Pashto reader': 'ps' };
+const CHIPS = ['spelling', 'word', 'maths', 'picture', 'audio', 'too_hard', 'unsafe'];
+const HOLD_MS = 3000;
+
+// English, and Dari drafts for a native speaker's check
+const T = {
+  en: {
+    title: 'Review', loading: 'Loading…', connect: 'Connect to review.', off: 'Review is not open here.',
+    access: 'Sign in through Cloudflare Access, then open this page again.', not_staff: 'Ask the admin to add you.',
+    pin: "Teacher's PIN", open: 'Open', wrong_pin: 'That PIN is not right.', role: 'I review as', initials: 'My initials',
+    for_you: 'Lessons for you', none: 'No lesson needs your role.', not_started: 'Not started', step_of: 'Step {a} of {b}',
+    changes: 'Changes asked', signed: 'Signed', changed: 'Changed since you signed', back: 'Back',
+    play: 'Play the recording', no_rec: 'No recording yet', ok: 'OK', change: 'Change', next: 'Next',
+    next_changed: 'Next changed step', ok_last: 'OK last time', changed_tag: 'changed', comment: 'Comment (no names)',
+    whole: 'Worksheet, cards and sources', sheet: 'The worksheet', open_sheet: 'Open the sheet', key: 'The key and its hints',
+    cards: 'Link cards', sources: 'Sources', nothing: 'None', sign: 'Sign this lesson', hold: 'Hold to sign',
+    send: 'Send my changes', sent: 'Your changes are sent.', done_sign: 'Signed. Thank you.', save_fail: "Couldn't save. Try again.",
+    play_first: 'Play the recording first.', blocked: 'Steps without a recording cannot be signed yet.',
+    todo: 'Every step needs OK before signing.', short: 'Hash', date: 'Date', lang: 'Language',
+    chip_spelling: 'Spelling', chip_word: 'Afghan word', chip_maths: 'Maths', chip_picture: 'Picture',
+    chip_audio: 'Audio', chip_too_hard: 'Too hard', chip_unsafe: 'Unsafe',
+  },
+  prs: {
+    title: 'بررسی', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
+    access: 'از راه Cloudflare Access وارد شو و این صفحه را دوباره باز کن.', not_staff: 'از مدیر بخواه تو را اضافه کند.',
+    pin: 'رمز معلم', open: 'باز کن', wrong_pin: 'این رمز درست نیست.', role: 'نقش من', initials: 'حروف اول نام من',
+    for_you: 'درس‌ها برای تو', none: 'هیچ درسی به نقش تو نیاز ندارد.', not_started: 'شروع نشده', step_of: 'قدم {a} از {b}',
+    changes: 'تغییر خواسته شده', signed: 'امضا شده', changed: 'بعد از امضای تو تغییر کرده', back: 'برگشت',
+    play: 'صدا را بشنو', no_rec: 'هنوز صدا ثبت نشده', ok: 'درست است', change: 'تغییر', next: 'بعدی',
+    next_changed: 'قدم تغییرکردهٔ بعدی', ok_last: 'دفعهٔ قبل درست بود', changed_tag: 'تغییر کرده', comment: 'نظر (بدون نام)',
+    whole: 'ورق کار، کارت‌ها و منبع‌ها', sheet: 'ورق کار', open_sheet: 'ورق را باز کن', key: 'جواب‌ها و راهنمایی‌ها',
+    cards: 'کارت‌های پیوند', sources: 'منبع‌ها', nothing: 'هیچ', sign: 'این درس را امضا کن', hold: 'نگه دار تا امضا شود',
+    send: 'تغییرهایم را بفرست', sent: 'تغییرهای تو فرستاده شد.', done_sign: 'امضا شد. تشکر.', save_fail: 'ذخیره نشد. دوباره کوشش کن.',
+    play_first: 'اول صدا را بشنو.', blocked: 'قدم‌های بی‌صدا هنوز امضا نمی‌شوند.',
+    todo: 'پیش از امضا هر قدم باید درست باشد.', short: 'هش', date: 'تاریخ', lang: 'زبان',
+    chip_spelling: 'املا', chip_word: 'کلمهٔ افغانی', chip_maths: 'ریاضی', chip_picture: 'تصویر',
+    chip_audio: 'صدا', chip_too_hard: 'خیلی سخت', chip_unsafe: 'ناامن',
+  },
+};
+
+let ui = 'en';
+const t = (k, v = {}) => (T[ui][k] ?? T.en[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? '');
+const pick = (x, lang) => (x && typeof x === 'object' ? x[lang] || x.prs || x.en || '' : x || '');
+
+function h(tag, attrs = {}, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === null || v === undefined || v === false) continue;
+    if (k.startsWith('on')) el.addEventListener(k.slice(2).toLowerCase(), v);
+    else if (k === 'class') el.className = v;
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const k of kids.flat(Infinity)) if (k !== null && k !== undefined && k !== false) el.append(k);
+  return el;
+}
+
+const root = document.getElementById('review');
+const me = { pin: '', role: '', initials: '', via: null, roles: [] };      // this page's memory only
+const put = (el, ...kids) => el.replaceChildren(...kids.flat(Infinity).filter((k) => k !== null && k !== undefined && k !== false));
+const show = (...kids) => put(root, ...kids);
+const say = (msg) => show(h('div', { class: 'screen' }, top(), h('p', { class: 'empty' }, msg)));
+
+function setUi(lang) {
+  ui = lang === 'prs' ? 'prs' : 'en';
+  document.documentElement.lang = ui === 'prs' ? 'fa-AF' : 'en';
+  document.documentElement.dir = ui === 'prs' ? 'rtl' : 'ltr';
+}
+
+function top(back, title) {
+  return h('header', { class: 'top' },
+    back ? h('button', { type: 'button', class: 'round', 'aria-label': t('back'), onClick: back }, ui === 'prs' ? '→' : '←') : null,
+    h('div', { class: 'grow' }, h('h1', {}, title || t('title'))),
+    h('button', { type: 'button', class: 'chip', onClick: () => { setUi(ui === 'en' ? 'prs' : 'en'); start(); } },
+      ui === 'en' ? 'دری' : 'English'));
+}
+
+async function api(path, { method = 'GET', body } = {}) {
+  const headers = { 'content-type': 'application/json' };
+  if (me.pin) headers['x-teacher-pin'] = me.pin;
+  const sep = path.includes('?') ? '&' : '?';
+  const url = API + path + (me.via === 'pin' && me.role && method === 'GET' && path !== '/me' ? `${sep}role=${encodeURIComponent(me.role)}` : '');
+  const r = await fetch(url, { method, headers, body: body ? JSON.stringify(body) : undefined, cache: 'no-store',
+    credentials: 'same-origin' });
+  if (!r.ok) {
+    const e = new Error(r.status === 403 ? (await r.json().catch(() => ({}))).error || '' : String(r.status));
+    e.status = r.status;
+    throw e;
+  }
+  return r.json();
+}
+
+function failed(e) {
+  if (!navigator.onLine || e instanceof TypeError) return say(t('connect'));
+  if (e.status === 404) return say(t('off'));
+  if (e.status === 401) return me.via === 'pin' || location.protocol === 'http:' ? pinGate(true) : say(t('access'));
+  if (e.status === 403) return say(/admin/i.test(e.message) ? t('not_staff') : t('access'));
+  return say(t('save_fail'));
+}
+
+function pinGate(wrong = false) {
+  const box = h('input', { type: 'password', inputmode: 'numeric', autocomplete: 'off', 'aria-label': t('pin') });
+  show(h('div', { class: 'screen' }, top(),
+    h('form', { class: 'card pad-card stack', onSubmit: (e) => { e.preventDefault(); me.pin = box.value.trim(); start(); } },
+      h('label', {}, t('pin')), box, wrong && me.pin ? h('p', { class: 'muted' }, t('wrong_pin')) : null,
+      h('button', { class: 'btn primary', type: 'submit' }, t('open')))));
+}
+
+async function start() {
+  say(t('loading'));
+  try {
+    const m = await api('/me');
+    Object.assign(me, { via: m.via, roles: m.roles });
+    if (m.role) me.role = m.role;
+    if (m.initials) me.initials = m.initials;
+  } catch (e) { return failed(e); }
+  if (me.via === 'pin' && (!me.role || !me.initials)) return pickRole();
+  return queue();
+}
+
+// on the hub: which role she signs for, and her initials (kept in memory only)
+function pickRole() {
+  const role = h('select', { 'aria-label': t('role') }, me.roles.map((r) => h('option', { value: r, selected: r === me.role }, r)));
+  const ini = h('input', { maxlength: 4, autocomplete: 'off', value: me.initials, 'aria-label': t('initials'), dir: 'ltr' });
+  show(h('div', { class: 'screen' }, top(),
+    h('form', { class: 'card pad-card stack', onSubmit: (e) => {
+      e.preventDefault();
+      const v = ini.value.trim().toUpperCase();
+      if (!/^[A-Z]{1,4}$/.test(v)) { ini.focus(); return; }
+      me.role = role.value; me.initials = v; queue();
+    } }, h('label', {}, t('role')), role, h('label', {}, t('initials')), ini, h('button', { class: 'btn primary', type: 'submit' }, t('open')))));
+}
+
+const TAG = { not_started: '', step: '', changes: 'tag warm', signed: 'tag good', changed: 'tag warm' };
+
+async function queue() {
+  let q;
+  try { q = await api('/queue'); } catch (e) { return failed(e); }
+  const lang = LANG_OF_ROLE[q.role] || ui;
+  const row = (l) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); lesson(l.id); } },
+    h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(l.title, lang)), h('small', { class: 'muted', dir: 'ltr' }, l.code || l.id)),
+    h('span', { class: TAG[l.status] || 'tag' }, l.status === 'step' ? t('step_of', { a: l.step, b: l.of }) : t(l.status)));
+  const rows = q.packs.flatMap((p) => [
+    h('div', { class: 'section-head' }, h('h2', {}, pick(p.title, lang) || p.pack)),
+    h('nav', { class: 'subjects' }, p.lessons.map(row))]);
+  show(h('div', { class: 'screen' }, top(null, t('for_you')),
+    h('p', { class: 'pad muted small' }, `${t('role')}: ${q.role}`),
+    rows.length ? rows : h('p', { class: 'empty' }, t('none'))));
+}
+
+async function lesson(id, at = 1) {
+  let d;
+  try { d = await api('/lessons/' + encodeURIComponent(id)); } catch (e) { return failed(e); }
+  const L = d.lesson;
+  const n = L.steps.length;
+  let lang = LANG_OF_ROLE[d.role] || 'prs';
+  const band = BAND_OF_YEAR(Number.isInteger(L.year) ? L.year : 12);
+  const verdict = {};                       // step -> 'ok' | 'change', this visit
+  for (const s of d.steps) if (s.last && !s.changed) verdict[s.n] = s.last;
+  const body = h('div', { class: 'review-step' });
+  const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
+  const note_ = (msg) => { status.textContent = msg; };
+
+  function stepPage(k) {
+    shown = k;
+    const st = d.steps[k];
+    const step = k ? L.steps[k - 1] : null;
+    const clip = step && step.audio && step.audio[lang] && step.audio[lang].url;
+    const noRec = k && d.no_recording.includes(k);
+    let played = !clip;
+    const okBtn = h('button', { type: 'button', class: 'btn ok-btn' + (verdict[k] === 'ok' ? ' on' : ''), disabled: !played || null }, t('ok'));
+    const chBtn = h('button', { type: 'button', class: 'btn' + (verdict[k] === 'change' ? ' warm' : '') }, t('change'));
+    const chosen = new Set(st.chips || []);
+    const chips = h('div', { class: 'chips wrap' + (verdict[k] === 'change' ? '' : ' hidden') }, CHIPS.map((c) =>
+      h('button', { type: 'button', class: 'chip' + (chosen.has(c) ? ' on' : ''), onClick: (e) => {
+        if (chosen.has(c)) chosen.delete(c); else chosen.add(c);
+        e.currentTarget.classList.toggle('on', chosen.has(c));
+      } }, t('chip_' + c))));
+    const note = h('textarea', { class: 'field' + (verdict[k] === 'change' ? '' : ' hidden'), rows: 3, maxlength: 500,
+      'aria-label': t('comment'), placeholder: t('comment'), dir: 'auto' });
+    note.value = st.text || '';
+    okBtn.addEventListener('click', () => {
+      if (!played) { note_(t('play_first')); return; }
+      verdict[k] = 'ok'; okBtn.classList.add('on'); chBtn.classList.remove('warm');
+      chips.classList.add('hidden'); note.classList.add('hidden');
+    });
+    chBtn.addEventListener('click', () => {
+      verdict[k] = 'change'; chBtn.classList.add('warm'); okBtn.classList.remove('on');
+      chips.classList.remove('hidden'); note.classList.remove('hidden');
+    });
+    const audio = clip ? h('audio', { src: clip, preload: 'none' }) : null;
+    if (audio) audio.addEventListener('ended', () => { played = true; okBtn.disabled = false; });
+    const tags = h('div', { class: 'row wrap' },
+      h('b', { class: 'grow' }, k ? t('step_of', { a: k, b: n }) : t('whole')),
+      st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
+      st.last === 'ok' && !st.changed ? h('span', { class: 'tag good' }, t('ok_last')) : null,
+      noRec ? h('span', { class: 'tag warm' }, t('no_rec')) : null);
+    const view = k
+      ? h('div', { class: 'frame' }, h('iframe', { title: t('step_of', { a: k, b: n }), loading: 'eager',
+        src: `../?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(id)}/${k}` }))
+      : whole(d, L, lang);
+    const save = async (go) => {
+      if (!verdict[k]) { go(); return; }
+      try {
+        await api(`/lessons/${encodeURIComponent(id)}/steps/${k}`, { method: 'POST', body: { verdict: verdict[k],
+          chips: verdict[k] === 'change' ? [...chosen] : [], text: verdict[k] === 'change' ? note.value : '', step_hash: st.hash,
+          role: me.via === 'pin' ? me.role : null } });
+        st.last = verdict[k]; st.changed = false;
+        go();
+      } catch (e) { if (e.status === 409) lesson(id, k); else note_(t('save_fail')); }
+    };
+    const nextChanged = d.steps.find((s) => s.n > k && s.changed);
+    const order = [...Array(n).keys()].map((x) => x + 1).concat([0]);
+    const after = order[order.indexOf(k) + 1];
+    put(body, tags,
+      langSwitch(),
+      view,
+      audio ? h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn outline', onClick: () => audio.play() }, '▶ ', t('play')), audio) : null,
+      h('div', { class: 'row' }, okBtn, chBtn), chips, note,
+      h('div', { class: 'row wrap' },
+        h('button', { type: 'button', class: 'btn primary', onClick: () => save(() => (after === undefined ? signPage() : stepPage(after))) }, t('next')),
+        nextChanged ? h('button', { type: 'button', class: 'link', onClick: () => save(() => stepPage(nextChanged.n)) }, t('next_changed')) : null));
+  }
+
+  function langSwitch() {
+    if (LANG_OF_ROLE[d.role]) return null;              // a Dari or Pashto reader reviews her own language
+    return h('div', { class: 'chips' }, ['prs', 'ps'].map((x) => h('button', { type: 'button', class: 'chip' + (x === lang ? ' on' : ''),
+      onClick: () => { lang = x; stepPage(current()); } }, x === 'prs' ? 'دری' : 'پښتو')));
+  }
+  let shown = at;
+  const current = () => shown;
+
+  function signPage() {
+    const notOk = d.steps.filter((s) => verdict[s.n] !== 'ok').map((s) => s.n);
+    const asked = d.steps.some((s) => verdict[s.n] === 'change');
+    if (asked) {
+      put(body, h('p', {}, t('sent')), h('button', { type: 'button', class: 'btn primary', onClick: queue }, t('send')));
+      return;
+    }
+    const facts = h('dl', { class: 'facts' },
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials), h('dt', {}, t('date')),
+      h('dd', { dir: 'ltr' }, new Date().toISOString().slice(0, 10)));
+    const why = notOk.length ? t('todo') : d.no_recording.length ? t('blocked') : null;
+    const btn = h('button', { type: 'button', class: 'btn primary hold', disabled: why ? true : null }, h('span', { class: 'ring' }), t('hold'));
+    let timer = null;
+    const cancel = () => { clearTimeout(timer); timer = null; btn.classList.remove('holding'); };
+    btn.addEventListener('pointerdown', () => {
+      btn.classList.add('holding');
+      timer = setTimeout(async () => {
+        cancel();
+        try {
+          await api(`/lessons/${encodeURIComponent(id)}/sign`, { method: 'POST',
+            body: { hash: d.hash, role: me.via === 'pin' ? me.role : null, initials: me.via === 'pin' ? me.initials : null } });
+          put(body, h('p', { class: 'done-big' }, t('done_sign')), h('button', { type: 'button', class: 'btn', onClick: queue }, t('back')));
+        } catch (e) { if (e.status === 409) lesson(id); else note_(t('save_fail')); }
+      }, HOLD_MS);
+    });
+    for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) btn.addEventListener(ev, cancel);
+    put(body, h('h2', {}, t('sign')), facts, why ? h('p', { class: 'muted' }, why) : null, btn);
+  }
+
+  show(h('div', { class: 'screen' }, top(queue, `${L.code || ''} ${pick(L.title, lang)}`.trim()), body, status));
+  const first = d.steps.find((s) => s.n >= 1 && (s.changed || !s.last));
+  stepPage(at !== 1 ? at : first ? first.n : 1);
+}
+
+// the last page: the worksheet (its A4 preview and its key with the hints), the link cards and the sources
+function whole(d, L, lang) {
+  const sheet = d.key ? [h('h3', {}, t('sheet')),
+    h('a', { class: 'btn outline', href: `../api/sheets/${encodeURIComponent(L.id)}.html?lang=${lang}`, target: '_blank', rel: 'noopener' }, t('open_sheet')),
+    h('h3', {}, t('key')),
+    h('ol', { class: 'key-list' }, d.key.items.map((r) => h('li', {},
+      h('span', { dir: 'ltr', class: 'm' }, r.q ? `${r.q} = ${r.a ?? ''}` : (typeof r.a === 'string' ? r.a : '')),
+      r.prompt ? h('small', { class: 'muted', dir: 'auto' }, ' ', r.prompt) : null,
+      (r.hints || []).length ? h('ol', { class: 'hint-list' }, r.hints.map((x) => h('li', { dir: 'auto' }, String(x.text).replace(/\$/g, '')))) : null)))] : [];
+  const cards = [h('h3', {}, t('cards')), d.cards.length
+    ? h('ul', {}, d.cards.map((c) => h('li', { dir: 'auto' }, pick(c.title, lang), ' — ', h('span', { dir: 'ltr' }, c.url || '')))) : h('p', { class: 'muted' }, t('nothing'))];
+  const srcs = [h('h3', {}, t('sources')), d.sources.length
+    ? h('ul', {}, d.sources.map((s) => h('li', { dir: 'auto' }, [s.id, s.what || s.note || ''].filter(Boolean).join(': ')))) : h('p', { class: 'muted' }, t('nothing'))];
+  return h('div', { class: 'card pad-card stack whole' }, sheet, cards, srcs);
+}
+
+setUi((navigator.language || '').startsWith('fa') ? 'prs' : 'en');
+window.addEventListener('online', start);
+start();

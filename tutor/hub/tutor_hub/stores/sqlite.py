@@ -187,6 +187,25 @@ class SqliteStore(Store):
     async def signoffs(self, lesson):
         return await self._run("signoffs", lesson)
 
+    async def all_signoffs(self):
+        return await self._run("all_signoffs")
+
+    # staff and review notes
+    async def add_staff(self, **kw) -> None:
+        return await self._run("add_staff", **kw)
+
+    async def staff_member(self, id_hash):
+        return await self._run("staff_member", id_hash)
+
+    async def remove_staff(self, id_hash) -> bool:
+        return await self._run("remove_staff", id_hash)
+
+    async def add_review_note(self, **kw) -> int:
+        return await self._run("add_review_note", **kw)
+
+    async def review_notes(self, lesson, role=None):
+        return await self._run("review_notes", lesson, role)
+
     async def add_release(self, **kw) -> int:
         return await self._run("add_release", **kw)
 

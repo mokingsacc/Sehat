@@ -14,6 +14,7 @@
     "check": true,
     "teacher": true,
     "photo": false,
-    "homework": false
+    "homework": false,
+    "review": false
   }
 }

@@ -72,9 +72,22 @@ Content (signoffs and releases, packs.py decides what they mean; kept for good)
   hash; initials only (1 to 4 capital letters, else ValueError), never a name. Signing the same hash in the same
   role again changes nothing and returns False.
 - `signoffs(lesson) -> list`: `{lesson, content_hash, role, initials, signed_on, added_at}`, oldest first.
+- `all_signoffs() -> list`: every signoff, oldest first (tools/pull_signoffs.py copies them into the packs).
 - `add_release(*, pack, version, content_hash, cohort, released_by) -> id`: a pack version published to a cohort;
   `released_by` is a role.
 - `releases(cohort) -> list`: the cohort's releases, newest first.
+
+Staff and review notes (P17, C3.2 and C3.4; never an email, never a name)
+- `add_staff(*, id_hash, label, role, cohorts, initials) -> None`: a staff member by the peppered hash of the email
+  Access vouches for (64 hex characters); adding the same hash again replaces the row. `initials` are '' or 1 to 4
+  capital letters (ValueError otherwise).
+- `staff_member(id_hash) -> dict | None`: `{label, role, cohorts: [ids], initials}`.
+- `remove_staff(id_hash) -> bool`.
+- `add_review_note(*, lesson, step, role, step_hash, status, chips, text) -> id`: a reviewer role's verdict on one
+  step (0: the lesson as a whole): status `ok`, `change` or `done`; chips from REVIEW_CHIPS; text at most 500
+  characters.
+- `review_notes(lesson, role=None) -> list`: `{id, lesson, step, role, step_hash, status, chips, text, at}`, oldest
+  first; the latest per step and role is the one that counts.
 
 Learners (learners.py decides what they mean; never a name)
 - `set_class_code(cid, code_hash) -> bool`: the cohort's class code, hashed; False if there is no such cohort.
@@ -90,6 +103,7 @@ Learners (learners.py decides what they mean; never a name)
 - `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events.
 """
 
+import json
 import random
 import re
 
@@ -223,7 +237,26 @@ class Store:
     async def signoffs(self, lesson) -> list[dict]:
         raise NotImplementedError
 
+    async def all_signoffs(self) -> list[dict]:
+        raise NotImplementedError
+
     async def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
+        raise NotImplementedError
+
+    # staff and review notes
+    async def add_staff(self, *, id_hash, label, role, cohorts, initials) -> None:
+        raise NotImplementedError
+
+    async def staff_member(self, id_hash) -> dict | None:
+        raise NotImplementedError
+
+    async def remove_staff(self, id_hash) -> bool:
+        raise NotImplementedError
+
+    async def add_review_note(self, *, lesson, step, role, step_hash, status, chips, text) -> int:
+        raise NotImplementedError
+
+    async def review_notes(self, lesson, role=None) -> list[dict]:
         raise NotImplementedError
 
     async def releases(self, cohort) -> list[dict]:
@@ -258,3 +291,34 @@ def check_initials(initials) -> str:
     if not isinstance(initials, str) or not re.fullmatch(r"[A-Z]{1,4}", initials):
         raise ValueError("initials are 1 to 4 capital letters, never a name")
     return initials
+
+
+REVIEW_CHIPS = ("spelling", "word", "maths", "picture", "audio", "too_hard", "unsafe")
+REVIEW_STATUS = ("ok", "change", "done")
+
+
+def check_staff(*, id_hash, label, role, cohorts, initials):
+    """A staff row holds a hash, a neutral label, a role, cohort ids and initials: nothing that names a person."""
+    if not isinstance(id_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", id_hash):
+        raise ValueError("id_hash is the 64-character SHA-256 of the pepper and the email, never the email")
+    if not isinstance(label, str) or not 1 <= len(label.strip()) <= 40 or "@" in label:
+        raise ValueError("label is a neutral name of 1 to 40 characters, like 'Dari reviewer 2'")
+    if not isinstance(role, str) or not 1 <= len(role.strip()) <= 40:
+        raise ValueError("role is a reviewer role, teacher or admin")
+    if not isinstance(cohorts, (list, tuple)) or not all(isinstance(c, str) for c in cohorts):
+        raise ValueError("cohorts is a list of cohort ids")
+    if initials != "":
+        check_initials(initials)
+    return json.dumps(list(cohorts))
+
+
+def check_note(*, step, status, chips, text):
+    if type(step) is not int or not 0 <= step <= 200:
+        raise ValueError("step is the step's number, or 0 for the lesson as a whole")
+    if status not in REVIEW_STATUS:
+        raise ValueError(f"status is one of {', '.join(REVIEW_STATUS)}")
+    if not isinstance(chips, (list, tuple)) or not all(c in REVIEW_CHIPS for c in chips):
+        raise ValueError(f"chips come from {', '.join(REVIEW_CHIPS)}")
+    if not isinstance(text, str) or len(text) > 500:
+        raise ValueError("a comment is at most 500 characters")
+    return json.dumps(sorted(set(chips)))

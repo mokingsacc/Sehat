@@ -12,7 +12,7 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import EVENT_FIELDS, check_changes, check_initials, draw_number
+from .base import EVENT_FIELDS, check_changes, check_initials, check_note, check_staff, draw_number
 
 
 def now() -> str:
@@ -266,6 +266,32 @@ class Store:
     def signoffs(self, lesson):
         return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs "
                          "WHERE lesson=? ORDER BY id", (lesson,))
+
+    def all_signoffs(self):
+        return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs ORDER BY id")
+
+    # staff and review notes
+    def add_staff(self, *, id_hash, label, role, cohorts, initials) -> None:
+        cs = check_staff(id_hash=id_hash, label=label, role=role, cohorts=cohorts, initials=initials)
+        self._x("INSERT OR REPLACE INTO staff(id_hash, label, role, cohorts, initials, added_at) VALUES(?,?,?,?,?,?)",
+                (id_hash, label.strip(), role.strip(), cs, initials, now()))
+
+    def staff_member(self, id_hash):
+        r = self._one("SELECT label, role, cohorts, initials FROM staff WHERE id_hash=?", (id_hash,))
+        return dict(r, cohorts=json.loads(r["cohorts"])) if r else None
+
+    def remove_staff(self, id_hash) -> bool:
+        return self._x("DELETE FROM staff WHERE id_hash=?", (id_hash,)).rowcount > 0
+
+    def add_review_note(self, *, lesson, step, role, step_hash, status, chips, text) -> int:
+        cj = check_note(step=step, status=status, chips=chips, text=text)
+        return self._x("INSERT INTO review_notes(lesson, step, role, step_hash, status, chips, text, at) "
+                       "VALUES(?,?,?,?,?,?,?,?)", (lesson, step, role, step_hash, status, cj, text, now())).lastrowid
+
+    def review_notes(self, lesson, role=None):
+        rows = self._all("SELECT * FROM review_notes WHERE lesson=? AND (? IS NULL OR role=?) ORDER BY id",
+                         (lesson, role, role))
+        return [dict(r, chips=json.loads(r["chips"])) for r in rows]
 
     def add_release(self, *, pack, version, content_hash, cohort, released_by) -> int:
         return self._x("INSERT INTO releases(pack, version, content_hash, cohort, released_by, released_at) "

@@ -63,7 +63,8 @@ in `needs` adds one signoff, with initials only (one to four capital letters, ne
 
 A lesson is signed when every role it needs has signed its current hash; changing a word, a picture or a clip
 gives it a new hash and it is a draft again ("changed since it was signed"). The hub keeps signoffs in its
-`signoffs` table too (the Review module, P17, writes them; `tools/pull_signoffs.py` will copy them into the pack).
+`signoffs` table too: the review screens (`/review/`, P17) write them, and `tools/pull_signoffs.py` copies those for
+the current hash into the pack (from `/api/m/review/signoffs` saved as JSON, or a hub's database).
 Until a lesson is signed it is served only by a hub that is not in release mode (staging and laptops), marked
 `draft`, and the app shows the draft band on Home and in the lesson.
 

@@ -290,7 +290,7 @@ def test_migration_0008_lets_an_existing_staging_database_try_photos(tmp_path):
     for cid in (STAGING, HUB_COHORT):
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?, 'x', '[]', '[]', '{}', 'now')",
                    (cid,))
-    assert migrate(db) == ["0008_photo_flag", "0009_homework"]
+    assert migrate(db) == ["0008_photo_flag", "0009_homework", "0010_review"]
     rows = db.execute("SELECT cohort, enabled, changed_by FROM flags WHERE module='photo'").fetchall()
     assert rows == [(STAGING, 1, "seed")]
     assert db.execute("SELECT COUNT(*) FROM flag_log WHERE module='photo'").fetchone() == (1,)
