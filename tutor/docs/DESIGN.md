@@ -30,6 +30,8 @@ top of `app/css/app.css`; screens use only tokens, so a look is changed in one p
 - **Wrong answers teach:** three hints (the lesson step, a worked example with other numbers, the first move), read
   aloud for young children, never the answer. The answer page is the teacher's. No scores to lose, no timers. Stars
   for children; "Correct, 8 of 10" for adults.
+- **A live class is a period:** the Now card may say "Live class at 10:00", then "Live class: Maths · Join" once
+  the teacher is there; one button joins, one raises a hand (C6, change 11).
 - **Nothing breaks without the hub:** lessons already opened still work; Ask gives the closest checked answer
   from those lessons, marked as such; Print says to come to the hub.
 - **Every answer is labelled:** checked, worked out, from the lesson, from the teacher, or AI (not checked).
@@ -234,8 +236,9 @@ module with any risk; "Not now" keeps Ask on the phone (cached banks, nothing se
 Adults see the same screen with "Before you start" and record `kind: self`.
 
 **Girl or boy:** nothing is built. If Mo decides yes (D1, by 15 March 2027), it is one step after consent and before
-the lock, with "prefer not to say", kept on the phone and sent only as a live-class routing flag. Interface text must
-not need gender agreement, so the decision stays policy, not code.
+the lock, with "prefer not to say", kept on the phone. Live classes need no routing flag: "women teachers for girls'
+classes" is kept by whom the admin assigns to a class, not by a field, so D1 is not needed by P30 and stays unbuilt (C6,
+change 3). Interface text must not need gender agreement, so the decision stays policy, not code.
 
 ## 7. The guardian consent screen
 
@@ -1040,7 +1043,10 @@ The rules this sitting applied to every item, beyond C0 to C3:
 - No name, nickname, alias number or band on any new server row; a name is typed only on the certificate screen,
   kept in one variable, and gone when the screen closes.
 - Learner AI only through the gateway: `openai` online, `local` on the hub, `fake` in tests; never Claude or Gemini.
-- No child's voice leaves a phone: anything that sends audio is for adults only, enforced in code, not policy.
+- No child's voice leaves a phone: anything that sends audio is for adults only, enforced in code, not policy. Live
+  classes included (C6, change 1): a child listens and raises her hand with a reason; her microphone is never opened.
+  An adult's voice goes live only in an adult-only class when her teacher gives her the floor, under a consent version
+  naming live classes, and is never recorded (C6, change 2).
 - No synthetic Dari or Pashto voice; scripture takes no phone voice at all.
 - Ease of use above all: the fewest options on the path, the rest in Settings; content copied only where its licence
   allows copying, and an unconfirmed licence is no licence.
@@ -1159,7 +1165,8 @@ The rules this sitting applied to every item, beyond C0 to C3:
 ### C4.2 Certificates (replaces the row, the request and the name lines of draft item 1)
 
 - `certificates (id, course, version, month, cohort)`: no band, no day, no token hash, no name or name hash.
-  Permanent. BUILD-PLAN 3.4's row becomes this.
+  Permanent. BUILD-PLAN 3.4's row becomes this. The `course` may be `contest:<id>` for a contest whose set says
+  `certificate: true`; its paper says "took part in" the contest's title and the month, never a score (C6, change 9).
 - `POST /api/m/cert {path, version}` with her token, five a day a token. The server reads her token hash's events:
   each lesson of the pathway in her audience counts with a `lesson.done` or a `check.done` of 80 or more; every lesson
   must count; where the pathway names a `final` lesson its `check.done` must be 80 or more. It writes the row and
@@ -1412,7 +1419,8 @@ none is reopened.
 - Drafts are marked as drafts until a native speaker signs, in both apps; a missing string falls back to English,
   never to a key name.
 - Hints never answers; no name on any row; no child's voice leaves a phone (anything that sends audio is for adults
-  only, enforced in code): unchanged, and nothing here touches them. Speech practice sends nothing, so it serves
+  only, enforced in code; for live classes, only an adult in an adult-only class given the floor, never recorded: C6,
+  changes 1 and 2): unchanged, and nothing here touches them. Speech practice sends nothing, so it serves
   every band its pack serves.
 - Calendars and digits follow the reader: Solar Hijri and Persian digits in Dari and Pashto, Gregorian and Latin in
   English; codes, PINs, versions and hashes never convert.
@@ -1666,7 +1674,7 @@ What Mo configures (after 22 December, staging first, then production), and what
 | 1 | C4 rule 3 ("never Claude or Gemini"): any provider, through the gateway, bounded by the class's consent version | **Accept** (Mo, 17 Oct) | C5.A3. |
 | 2 | F1, DESIGN 9, C4 rule 5 ("no synthetic Dari or Pashto voice"): one Gemini woman's voice per language for every text Qalam writes; scripture keeps its reciter | **Accept** (Mo, 17 Oct) | C5.6. |
 | 3 | C4.5 and D12: `speak` sends nothing; no AI in speech practice | **Accept** (Mo, 17 Oct) | C5.5. D12 withdrawn. |
-| 4 | C4's "P30 and P31 out of scope": built, off by default; specified at C6 | **Accept** (Mo, 17 Oct) | The code rule "anything that sends audio is for adults only" stands until C6 and the legal opinions say otherwise for children; D9 and the opinions gate switching P30 on for children, not building it. |
+| 4 | C4's "P30 and P31 out of scope": built, off by default; specified at C6 | **Accept** (Mo, 17 Oct) | The code rule "anything that sends audio is for adults only" stands until C6 and the legal opinions say otherwise for children; D9 and the opinions gate switching P30 on for children, not building it. C6 kept it for 2027: children listen and raise a hand (C6, change 1). |
 | 5 | C4.4: "the Chinese pack stays a draft until a native Mandarin speaker records the tones" becomes "until a native Mandarin speaker has listened to its clips" | **Accept** | Change 2. |
 | 6 | C4's question 4 to Mo (four recorders) withdrawn; a native listener per language instead | **Accept** | Change 2. |
 | 7 | P11: the hub chip hidden while the hub is in reach | **Accept** | C5.3; C2.5's reason on both hosts. |
@@ -1779,3 +1787,203 @@ L2, L5, L6, L7 when the hub is next touched). The C5 builder starts P33 once M1 
 12. A subject with nothing for her year keeps an empty, invisible bar so its row has the same height as the others.
 13. Subjects' "Every lesson is open" moved from the section head (now gone) to the header's lead.
 14. The Dari "yes" lines changed are the five the chair named; three more Dari lines already said "بلی".
+
+# C6 decisions
+
+The design committee's note on sitting C6, as the chair wrote it (model names left out). The chair wrote the specs
+directly, with no member's draft, so every "accept" below is the chair's own ruling; the specs C6.1 to C6.7, the
+phases' tests and the string table are filed as [DESIGN-C6-SPECS.md](DESIGN-C6-SPECS.md), and where the two differ
+this note wins. The changes it makes to the earlier text above (1, 2, 3, 9 and 11) are applied there.
+
+17 October 2026, held early with C0 to C5, on Mo's decision of the same day that live audio classes (P30) and
+competitions (P31) are built now and switched off by default. Mo was not available, so every open point is decided
+here with a safe default and recorded for him to overrule in the decision log. Two web checks were made, both on one
+fact the design turns on: Cloudflare's Realtime pricing page (its SFU and TURN services cost US$0.05 per GB of egress,
+the first 1,000 GB each month free, one allowance shared by both, traffic published into Cloudflare free; the page
+says nothing about a Workers plan or a card being needed). Nothing else turns on a contested fact. English strings are
+drafts; every Dari and Pashto line is checked by native speakers before a learner or a teacher sees it as final, and
+every new string is voiced by P36's one voice per language (C5.6). The chair read the code each ruling turns on:
+`server.py` (`learner`, `her_cohort`, `held`, `hello`, `needs`), `flags.py`, `admin.py` (`lock_of`, `set_flag`),
+`gates.py`, `staff.py`, `events.py`, `timetable.py`, `mods/cert.py`, `mods/teacher.py`, `worker/build.py` (the
+headers) and `worker/entry.py`.
+
+## Mo's decision of 17 October, recorded
+
+**Live audio classes (P30) and competitions and Olympiads (P31) are built, switched off by default** (C5, Mo's decision
+4). C4 had both out of scope, gated on D9 and the legal opinions. This note keeps C5's reading of it: D9 and the opinions
+gate *switching on*, not building. Both modules ship off in every cohort, and the admin panel refuses to switch either on
+until the gates in C6.A8 and C6.B8 are met. Nothing in this note reopens any decision of C0 to C5.
+
+## The rules this sitting applied, beyond C0 to C5
+
+- No child's voice leaves a phone (C4's rule, kept by C5 change 4 "until C6 and the legal opinions say otherwise"): the
+  opinions are not in, so this sitting keeps it in code for 2027. A child listens and raises her hand; her microphone is
+  never opened by Qalam.
+- A seized server describes no one (F4): no sex, no "girls" field, no routing flag; a live session's row and a contest's
+  event say what happened to a class, never who was there by name. "Women teachers for girls' classes" is kept by whom the
+  admin assigns, not by a field.
+- No places, no prizes: nothing orders learners by score on any route, and no screen says "first", "winner" or "prize",
+  in any language, to anyone.
+- Nothing is recorded, nothing is transcribed, and no AI touches a live class or a contest: no purpose, no call, no
+  gateway path; the hint rule ("hints never answers") is met by having no hints in a contest at all.
+- Hands off the ground truth of C5: a learner's class comes from her token only (`her_cohort()`); `?cohort=` is ignored on
+  every new learner route; staff writes carry `X-Qalam: 1`; the staff CSP (`default-src 'self'`, no third-party script)
+  stays as built, since nothing new loads from another origin.
+- Fewest options: one button to join, one to raise a hand, three reasons, one to leave; the teacher gets start, hands,
+  one board, end. Everything else is a setting, and most settings are not built.
+- Simplest technology that runs on the Worker and costs nothing new: no WebSocket, no Durable Object, no SDK script;
+  HTTPS polling against D1 for state, and Cloudflare's own media relay for sound, inside its free allowance, with a cap
+  so nothing can cost money until the admin raises it.
+- Three languages everywhere, the polite plural on staff pages (C5.B2), Persian digits and Solar Hijri dates where C5.1
+  puts them.
+
+## A. P30, live audio classes
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C6.A1 | The sound path | **WebRTC audio through Cloudflare Realtime SFU, with Cloudflare's TURN service for phones that cannot reach it directly; no video; nothing of the media passes through the Worker.** The Worker only talks to the Realtime HTTPS API (session and track calls with the app secret, from `httpx` as the AI providers do) and to the TURN credentials endpoint (short-lived ICE credentials, 2 hours). | A teacher's one upload (about 32 kbps) is fanned out by the relay to the whole class, so a $60 phone on 3G sends one stream and receives one; peer-to-peer would need 30 uplinks from her phone. The relay is on the same Cloudflare account, has a free 1,000 GB a month (about 3,400 classes of 30 listeners for 40 minutes), and needs no new vendor, no library on the phone and no change to the staff CSP. TURN over TCP 443 carries phones on carriers that block UDP. | Spec C6.1. Four Worker secrets (`TUTOR_RTC_APP`, `TUTOR_RTC_SECRET`, `TUTOR_RTC_TURN_KEY`, `TUTOR_RTC_TURN_SECRET`), per environment, shown only as set or not set; the module held off while any is missing (lock `rtc`). |
+| C6.A2 | The control plane | **HTTPS polling, no sockets.** Learners `GET` the session's state every 5 seconds (204 when nothing changed), the teacher her roster every 2 seconds; hands, the board and the floor are small `POST`s. State lives in two D1 rows per session, nothing in memory. | A Python Worker without Durable Objects, WebSockets or a second runtime is the code that already exists; a hand that reaches the teacher within 2 seconds is enough. A class of 30 for 40 minutes is about 15,000 requests, inside the Paid plan (D6) that everything else already assumes. | Spec C6.1; the limits in it. |
+| C6.A3 | Children's voices | **Listen only for children in 2027, in code.** Bands `p1` to `s2` hear the teacher and raise a hand with one of three reasons; no child's microphone is ever opened; the floor route refuses any token whose band is not `ad`. `ey` is not served at all. The legal opinions and a later sitting may change this for children; nothing here does. | C4's rule stands until the opinions say otherwise, and they are not in. A hand with a reason lets the teacher answer aloud, which is most of what a child's voice would add. | `bands: p1, p2, s1, s2, ad`; the refusal and its test (C6.1, tests). |
+| C6.A4 | Adults' voices: the floor | **Built as a second, small phase (P30b), for adult-only cohorts, off by default.** The teacher gives the floor to one raised hand at a time, for at most 90 seconds; only in a cohort whose every band is `ad`; only in the web app over HTTPS (never the APK, C3.6; never the hub's plain http); only under a consent version that carries `live: true`; after a one-line explainer on the first tap. Nothing is recorded. | An adult's live voice to a class of adults is the one case every prior rule allows; her voice heard by children in a mixed cohort is a form of contact this sitting will not open without the opinions. | Spec C6.4. Manifest capability `audio.record` added by P30b only, its sentence rewritten (change 5). |
+| C6.A5 | "Women teachers for girls' classes" | **Kept by assignment, not by a field.** Only a teacher the admin has assigned to the cohort may start its class; the admin places learners by class code and teachers by assignment; the safeguarding policy writes the rule down; every session's row names its host by the staff label. No sex, no "girls" anywhere on the server (F4). D1 (girl or boy at sign-up) is **not needed** by P30 as designed and stays unbuilt (default). | The server cannot check the rule without describing people, which a seized server must never do; a class code already routes a girl to her class. | `not_your_class` (403) on every teacher live route; the host label in `live_sessions`. |
+| C6.A6 | Unique links | **No links at all.** A learner joins from Home with her token; the server gives a one-time ticket (random, 60 seconds, bound to her token hash and the session) that creates her relay session and dies; the teacher joins through her signed-in page. No URL opens a class. | A link can be forwarded; a ticket bound to a token cannot, and there is nothing to type or to leak in a chat. | Spec C6.1 (join, ticket). |
+| C6.A7 | No one-to-one, no recording | **A session is the class, and sound flows only while two or more learners are present;** with one, the teacher's page says "Waiting for the class: 1 here" and nothing is relayed; if the count falls to one for two minutes the sound pauses with the same line. **Nothing records:** no route, no table, no setting, no call to the relay's recording features, no `MediaRecorder` on the live screen; a recording feature would need a new consent version and a sitting. | An adult is never alone in a private channel with one child; a lecture to one listener is such a channel in effect. "No recording by default" becomes "no recording in 2027", which is simpler to prove. | The two-learner rule and its test; the no-audio-through-the-Worker test; the browser test that fails if `MediaRecorder` is constructed. |
+| C6.A8 | On, off and the gates | **Off in every cohort; the admin's switch per cohort, locked until three things hold:** (1) the four secrets are set (lock `rtc`); (2) the cohort's consent version carries `live: true` (lock `consent`); (3) `cohorts/gates/live.json` holds D9's decision and the opinion's date, required where `TUTOR_RELEASE` is on (lock `gate`; staging needs it not, so the committee can look). Settings: `max_minutes` (45, at most 90) and `per_day` (2 sessions a cohort a day). A global cap `TUTOR_RTC_GB_MONTH` (900, inside the free allowance) is checked at session start, never mid-class. | Built now, off, and nothing can start a class, or a bill, until Mo has set up the service, the consent text names live classes, and the gate file carries his decision. | `lock_of()` gains the three codes; `held()` gains `live` while the secrets are missing (so the hub, which has none, never serves it); the cap and its test. |
+| C6.A9 | What cannot work without a paid service | **Said plainly:** (1) above 1,000 GB a month the relay bills US$0.05 per GB (about US$15 per 1,000 further classes), so the cap stays at 900 until Mo raises it with a card on file; (2) the Workers Free plan's 100,000 requests a day would hold about six classes and nothing else, so P30 assumes D6's Paid plan like the rest of the app; (3) the village hub has no internet, so it has no live classes; a hub with a link would join as any online phone does, not in 2027 or 2028; (4) a learner with no data or no smartphone cannot be reached without a telephony service, which is paid and not built; (5) whether enabling Realtime needs a card, the pricing page does not say; if it does, the module stays off until Mo decides. | The owner asked for the line between free and paid to be drawn where he can see it. | HOSTING.md gains "Live classes: the Realtime set-up" with these five lines (For the build plan). |
+| C6.A10 | The timetable and Home | **A timetable block kind `live` with a subject**, so the Now card can say "Live class at 10:00" and ring the bell as for any period; **Join** appears on the card the moment a session is open, from `/api/hello`'s new `live` field (re-read every few minutes as today) or from the live poll inside a `live` block. A teacher may also start a class outside the timetable ("Start a class"), which reaches Home at the next hello. | The C4 hook reserved exactly this; the bell is the school day's own. | `timetable.KINDS` gains `live` (fields `kind`, `min`, `subject`); the admin's editor shows it; `hello.live`. |
+
+## B. P31, competitions and Olympiads
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C6.B1 | What a contest is | **A signed question set over existing lessons, open for a window, marked by code on the server.** `content/contests/<id>.json` lists 5 to 30 `{lesson, step}` items, each a `choice` or `number` step of a signed lesson (the C4 hook: code-checkable steps only), a subject, bands, languages, `opens_at`, `closes_at`, `minutes` and a title in three languages; signed on a review page `contest:<id>` by a subject teacher and the Dari and Pashto readers, pulled by `pull_signoffs.py`, hidden in release mode until signed. | Reviewed questions with known answers need no model, no moderator and no new content type; the server holds the key, so nothing leaks to a phone during the window. | Spec C6.5; `tools/validate_pack.py` gains `--contests`. |
+| C6.B2 | Who may take part | **Opt-in on the phone, each contest, with the consent she already has.** "Join the contest" is a tap; nothing more leaves the phone than a sheet does today (her token's hash, the contest id and a score, as `check.done` already carries). No new consent paragraph. | A contest entry is a marked sheet by another name. | The verb `contest.done` (hub-written, value the percent); `per_day` 3 entries a token. |
+| C6.B3 | Marking and answers | **The server marks once, at once; the answers show after the window closes.** `POST .../answers` is accepted once per token (409 after), within the window plus 10 minutes for a queued send; it answers `{right, n, percent}` and keeps no per-item answers; from `closes_at` the key route opens and the phone marks her kept answers against it, as Check my sheet does. **No hints in a contest at all.** | The score reveals nothing exploitable; which items were wrong, shown while others are still answering, would. | Spec C6.5; the leak test (no key value in the questions response). |
+| C6.B4 | Results, places, avatars | **"Took part", a score out of n, and her own best per subject on the phone; never a place.** No route orders learners by score; the teacher's list is by alias number; the admin sees counts per class; a learner sees only herself, as her alias picture and number. No leaderboard, no top ten, no "first", for anyone in any cohort, since the server cannot know who is a girl (F4) and the plan forbids places for girls. | The only safe reading of "no places shown for girls" on a server that stores no sex is no places shown to anyone. | The order test; the strings list (C6.7) has no rank words. |
+| C6.B5 | Prizes and the certificate | **No prizes of any kind; a participation certificate where the set says `certificate: true`**, as `cert` course `contest:<id>` (C4.2's row, no band, day, token hash or name), earned from her own `contest.done` event, the paper saying "took part in <title>" and the month, never a score. The no-promise lint (P28) grows a contest list and refuses "prize", "money", "win", "winner", "first", "award" and their Dari and Pashto forms in a contest's texts. | Money prizes are out of scope for 2027 (BUILD-PLAN 1.2) and a certificate that ranks is a place. | `mods/cert.py`'s contest branch; the lint and its test. |
+| C6.B6 | Class contests and Olympiads | **One mechanism, released per class like a pack.** The admin's Content page lists signed contests with "Open to this class" per cohort and one "All classes" tick; an Olympiad is a contest opened to many classes in one window. Results stay per class to each teacher; Qalam's admin sees counts per class and in all. Teachers do not make contests in 2027 (`recall` and sheets are their quizzes). | Fewest knobs: a release row the admin already understands, and nothing passes between classes. | `releases` rows with `pack = "contest:<id>"`; the Content page rows. |
+| C6.B7 | Where it runs | **Both hosts.** The hub marks on its own network; online the Worker; a phone away from both sees "Contests need the hub or the internet". `offline: partly`: the list is kept on the phone, the questions are fetched when she starts, the answers go by the outbox if the network drops. | The key must stay off the phone during the window, so a server must mark. | Manifest in C6.5. |
+| C6.B8 | On, off and the gate | **Off in every cohort; the admin's switch per cohort, locked where `TUTOR_RELEASE` is on until `cohorts/gates/contest.json` holds the opinion's date** (lock `gate`); staging needs it not. No capability, no AI, no setting but `per_day`. | Mo's decision: built, off; the plan: switching on gated on the opinions. | `lock_of()`; the gate reader beside `gates.photo_open`. |
+
+## The questions the chair settled
+
+Without a draft there were no member's questions; these are the ones the chair put to herself, each with its answer.
+
+1. **Relay or own fan-out?** Cloudflare's relay (C6.A1). An own relay (chunks over a socket, played through Media
+   Source Extensions) would need a Durable Object in a Python Worker, late-joiner header handling and a 1 to 2 second
+   delay; the relay is the documented path, costs nothing inside its allowance, and leaves no audio in our code.
+2. **Sockets or polling?** Polling (C6.A2). Nothing in a 40-minute class needs a second's latency except the sound,
+   which the relay carries.
+3. **May a child speak?** Not in 2027 (C6.A3). A hand with a reason is built instead.
+4. **May an adult speak?** In an adult-only cohort, given the floor, under a consent version naming it, never in the
+   APK (C6.A4). Mixed cohorts: no floor; a question for Mo.
+5. **D1, girl or boy?** Not needed; stays unbuilt (C6.A5).
+6. **Should a session need two learners before sound flows?** Yes (C6.A7). The cost is a minute's wait on a quiet
+   morning; the gain is that no adult is ever alone with one child in a channel nobody else hears.
+7. **Teacher's audio on the hub?** No: the hub has no internet, so no remote teacher; a teacher in the room needs no
+   relay. `live` is held off on every hub.
+8. **Scheduled only, or "Start a class" too?** Both (C6.A10); the pilot's facilitator will want an ad hoc class.
+9. **A visual aid?** One: the board, a lesson step the teacher picks, shown on every phone from content already on it
+   (C6.3). No slides, no screen share, no free text, no chat.
+10. **Events for live classes?** None per learner, as the timetable sends none (F5): a session row with counts only.
+11. **Contest keys on the phone?** Never during the window; the server marks (C6.B3).
+12. **Places for boys' classes?** No places for anyone (C6.B4).
+13. **A new consent paragraph for contests?** No (C6.B2); for live classes yes, the live paragraph as versioned data
+    (D14, What needs Mo).
+14. **Can the pilot cohort get either?** No: the pilot freeze (Stage D) keeps both off for it; new cohorts only.
+
+## Specs
+
+The specs C6.1 (module `live`), C6.2 (the learner's live screen), C6.3 (the teacher's Live tab), C6.4 (the floor),
+C6.5 (module `contest`), C6.6 (the contest screens) and C6.7 (the strings) are in
+[DESIGN-C6-SPECS.md](DESIGN-C6-SPECS.md), with the tests for each phase.
+
+## The phases, and what is on by default
+
+| Phase | Builds | On by default | Admin switches and locks | New on the server |
+|---|---|---|---|---|
+| P30a (M) | module `live`: the relay plumbing (sessions, tracks, TURN credentials), the learner routes, the teacher routes, `hello.live`, the timetable kind `live`, the learner's live screen, the teacher's Live tab, the admin's row, locks and month line, the retention rules | no, in every cohort; never on a hub (`held`) | per cohort, locked by `rtc`, `consent` and `gate`; settings `max_minutes` 45, `per_day` 2; the cap `TUTOR_RTC_GB_MONTH` 900 in config | `live_sessions` (12 months, counts), `live_present` (deleted at the end, 6 hours at most); four secrets; nothing about anyone |
+| P30b (S) | the floor for adult-only cohorts: `audio.record` on the manifest, the setting `floor`, the floor and speak routes, the explainer, "Give the floor" | no; `floor` off even where `live` is on | `floor` per cohort, refused unless every band is `ad` and the consent version carries `live: true` | nothing |
+| P31 (M) | module `contest`: the content files, the validator and lint, the review page and signing, releases per class, the learner and teacher routes, the certificate branch, the screens | no, in every cohort | per cohort, locked by `gate` where `TUTOR_RELEASE` is on; `per_day` 3; releases per class on Content | the verb `contest.done` (12 months); `releases` rows; `daily_counts` use |
+
+The pilot cohort takes none of the three (the Stage D freeze); staging takes all three for the committee's look.
+
+## The changes to settled text
+
+| # | Change | Decision | Note |
+|---|---|---|---|
+| 1 | C4 rule 4 and C5 change 4: "no child's voice leaves a phone" holds for live classes in 2027; a child listens and raises a hand | **Accept** | C6.A3. |
+| 2 | C5's "anything that sends audio is for adults only": an adult's live voice, only in an adult-only cohort with the floor, never recorded | **Accept** | C6.A4, C6.4. |
+| 3 | BUILD-PLAN 3.4's "sex (unless Mo decides live classes need it, then as a routing flag only)": live classes need no routing flag; D1 stays unbuilt | **Accept, default** | C6.A5; Mo may overrule (question 4). |
+| 4 | BUILD-PLAN 3.2: modules `live` and `contest`; `timetable.KINDS` gains `live`; cohort setting "live classes" (3.3) is the module's flag | **Accept** | C6.1, C6.5. |
+| 5 | `modules.RISK_SENTENCE["audio.record"]` rewritten for the live case | **Accept** | C6.4; P30b only. |
+| 6 | BUILD-PLAN 3.4: `live_sessions`, `live_present`; `releases` rows for contests; `events` gains `contest.done` | **Accept** | C6.1, C6.5. |
+| 7 | BUILD-PLAN 3.5: the live, teacher-live and contest routes; `hello.live` | **Accept** | C6.1, C6.5. |
+| 8 | BUILD-PLAN 1.2 "live audio classes and competitions only if funded and approved": built now, off; funded and approved gate switching on | **Accept** (Mo, 17 Oct) | C6.A8, C6.B8. |
+| 9 | C4.2: the certificate's `course` may be `contest:<id>`, the paper "took part in" | **Accept** | C6.5. |
+| 10 | P28's no-promise lint gains a contest word list | **Accept** | C6.B5. |
+| 11 | DESIGN "Ease of use first": the Now card may say "Live class at 10:00 · Join" | **Accept** | C6.A10. |
+| 12 | HOSTING.md: Realtime SFU and TURN as the one outside service besides the AI providers, inside its free allowance, with the cap | **Accept** | C6.A9. |
+| 13 | The Stage D timeline's "P30, P31 if approved" becomes "P30a, P30b, P31 built; switched on only if approved" | **Accept** | Mo, 17 Oct. |
+
+## What needs Mo, and when
+
+- **The Realtime set-up** (after 22 December, staging first): enable Realtime SFU and TURN on the Cloudflare account,
+  make one app and one TURN key, set the four secrets per environment, and tell the committee whether enabling it
+  asked for a card. Default: not before the pilot; both modules stay off.
+- **D9 and the legal opinion on live classes** (July 2027 in the plan), and the safeguarding policy's live-class page
+  (women teachers for girls' classes, no one-to-one, no recording). Default: no live classes in 2027; the code waits.
+- **D14 (new): the live paragraph in the consent text,** as versioned data (`live: true`): that her teacher's voice
+  reaches her live, that nothing is recorded, and, for adult-only classes, that her own voice may be heard live when
+  she chooses to speak. To the reviewers in January and the solicitor in March with D13. Default: no consent version
+  names it, so no class can be switched on.
+- **D15 (new): the legal opinion on competitions** (`cohorts/gates/contest.json`), chiefly that a contest with no
+  places and no prizes raises nothing new. Default: off until it is in.
+- **The monthly cap** (`TUTOR_RTC_GB_MONTH`, 900): raise only with a card on file. Default: 900.
+- Nothing else is new. D1 stays as it is, unneeded by P30 unless Mo wants girls-only cohorts routed by a flag.
+
+## For the build plan
+
+- **Sittings:** C6 held 17 October 2026 with C0 to C5, without a member's draft; this note. No further sitting is
+  planned; the legal opinions open the gates by thread review.
+- **Section 1.2:** "live audio classes and competitions only if funded and approved" reads "built in 2027 behind
+  locks; switched on per class only if funded and approved".
+- **3.2:** modules `live` and `contest` as C6.1 and C6.5; `audio.record`'s sentence (P30b); the timetable kind
+  `live`. **3.3:** "live classes" is the `live` flag with `max_minutes` and `per_day`. **3.4:** the two live tables
+  with their retention; `contest.done`; `releases` for contests. **3.5:** the routes of C6.1 and C6.5; `hello.live`.
+  **3.7:** unchanged: no AI purpose is added; a test asserts no gateway call from either module.
+- **5.5:** add "no child's voice leaves a phone, live classes included; an adult's voice goes live only in an
+  adult-only class with the floor, under a consent version naming it, and is never recorded".
+- **6, Stage D:** P30 becomes P30a and P30b, P31 as the table above, each "Since C6" pointing at its row here; the
+  builder order below. **7:** "Oct to Dec 2027: P30a, P30b, P31 built; on only if approved".
+- **9.2:** D1's "Needed by" note "not needed by P30 as designed (C6.A5)"; D9 reworded "switch live classes on"; D14 and
+  D15 added. **9.3:** one row for C6, source this note.
+- **DESIGN.md:** append this note as "C6 decisions"; apply changes 1, 2, 3, 9 and 11 to the earlier text; the specs
+  filed as `docs/DESIGN-C6-SPECS.md`.
+- **HOSTING.md:** "Live classes: the Realtime set-up" with the five lines of C6.A9, the four secrets and the cap.
+  **RELEASE.md:** the two gate files and the locks in the pre-release checklist.
+- **CONTENT.md:** `content/contests/<id>.json`, its fields, the lint, the review page `contest:<id>`.
+
+## Builder order
+
+One builder, after P36 and P27b in C5's order; each session reads only its phase's files and this note's rows.
+
+1. **P30a:** the migration and the two tables; `held()` and the config; the relay client with its fake; the learner
+   routes; the teacher routes and the two-learner rule; `hello.live` and the timetable kind; the learner's live
+   screen; the Live tab; the admin's row, locks and month line; the tests; screenshots at 360 (learner) and 390 and
+   1366 px (teacher), three languages.
+2. **P31:** the content format, validator and lint; the review page and `pull_signoffs.py`; releases per class; the
+   routes and marking; the certificate branch; the screens; the tests; screenshots.
+3. **P30b:** only if P30a's browser check is green and time allows; otherwise 2028, nothing lost.
+
+## Questions for Mo after 22 Dec
+
+1. **Enable Cloudflare Realtime (SFU and TURN)** and set the four secrets, staging first; did it ask for a card?
+   Default: not before the pilot; both modules stay off.
+2. **D9 and the live-class opinion, and D14 (the live paragraph):** commission with D13 for March? Default: no live
+   classes in 2027; built and locked.
+3. **The floor in mixed classes** (adults among children): never in 2027 (the default), or with the opinion?
+4. **D1:** stays unbuilt; girls-only classes are a class code, not a field. Default: unbuilt.
+5. **D15, the competitions opinion:** commission with the rest? Default: contests off until it is in.
+6. **The audio cap:** 900 GB a month inside the free allowance; raise only with a card on file. Default: 900.
+7. **"Start a class" outside the timetable:** keep (the default), or scheduled blocks only?
