@@ -227,6 +227,7 @@ function nowCard(ctx) {
       h('small', { class: 'muted' }, s('day_progress', { a: done, b: d.blocks.length }))] : null;
   const note = b && b.kind === 'period' ? h('small', { class: 'muted' }, s('day_paper')) : null;
   const what = lesson ? (b && b.kind === 'period' ? titleOf(b) : [s(lesson.subject), plain(lesson.title)].join(' · ')) : null;
+  const tomorrow = w.phase === 'after' ? tomorrowLine(c, now) : null;
   const play = (size) => (lesson ? h('a', { class: 'play', href: lessonHref(lesson), 'aria-label': s('start_lesson') }, playIcon(size)) : null);
   const cup = b && b.kind === 'break' ? h('span', { class: 'nowpic', 'aria-hidden': 'true' }, icon('cup', 56, 2)) : null;
   const sheetBtn = sheet ? said(h('a', { class: 'btn warm', href: '#/print/' + encodeURIComponent(sheet.id) }, icon('file', 22),
@@ -234,15 +235,26 @@ function nowCard(ctx) {
   if (ctx.look === 'bold') {
     return h('section', { class: 'card next-card now' },
       h('span', { class: 'tag' }, top), cup, play(52),
-      what ? h('div', { class: 'title' }, what) : null, note, progress, sheetBtn);
+      what ? h('div', { class: 'title' }, what) : null, note, progress, sheetBtn, tomorrow);
   }
   return h('section', { class: 'card soft continue now' }, cup || play(44),
     h('div', { class: 'grow stack-sm' }, h('div', { class: 'kicker' }, top),
-      what ? h('div', { class: 'title' }, what) : null, note, progress, sheetBtn));
+      what ? h('div', { class: 'title' }, what) : null, note, progress, sheetBtn, tomorrow));
+}
+
+// after the close on a school day (C4 look question 17): "Tomorrow: Maths at 8:00", when tomorrow is a school day
+function tomorrowLine(c, now) {
+  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 1);
+  const d = today(c, next);
+  const first = d.school && d.blocks.find((x) => x.kind === 'period');
+  if (!first) return null;
+  return h('small', { class: 'muted' }, s('day_tomorrow', { subject: first.subject ? s(first.subject) : s('block_period'),
+    t: day.clock(first.start, day.crossesNoon(d)) }));
 }
 
 // The Today list: one row per block, the time at the row's start, a subject badge or the block's icon, the title, ✓
-// when it is over or its lesson is done, and "now". Then "All subjects", which opens #/subjects. In bold bands the
+// when it is over or its lesson is done, and "now". A past period that had no lesson gets no tick and goes muted (C4
+// look question 16). Then "All subjects", which opens #/subjects. In bold bands the
 // same list as tiles, with the time on each (one per row where every button has its speaker).
 function todayList(ctx) {
   const c = ctx.child;
@@ -254,7 +266,9 @@ function todayList(ctx) {
   const bold = ctx.look === 'bold';
   const rows = d.blocks.map((b) => {
     const isNow = m >= b.start && m < b.end;
-    const over = b.end <= m || (b.lesson && c.done[b.lesson.id]);
+    const empty = b.kind === 'period' && !b.lesson;
+    const past = b.end <= m;
+    const over = !empty && (past || (b.lesson && c.done[b.lesson.id]));
     const href = b.kind === 'period' && b.lesson ? lessonHref(b.lesson)
       : b.kind === 'sheet' && library.sheetLesson(c) ? '#/print/' + encodeURIComponent(library.sheetLesson(c).id) : null;
     const badge = b.kind === 'period' && b.subject ? subjectBadge(b.subject, bold ? 46 : 36)
@@ -262,7 +276,7 @@ function todayList(ctx) {
     const kids = [h('span', { class: 'time' }, day.clock(b.start, words)), badge,
       h('span', { class: 'grow' }, h('b', {}, titleOf(b))),
       isNow ? h('span', { class: 'tag' }, s('now_tag')) : over ? icon('check', 22, 2.6) : null];
-    const cls = (bold ? 'tile trow' : 'trow') + (isNow ? ' now' : '');
+    const cls = (bold ? 'tile trow' : 'trow') + (isNow ? ' now' : '') + (past && empty ? ' past' : '');
     return said(href ? h('a', { class: cls, href }, kids) : h('div', { class: cls }, kids));
   });
   const all = said(h('a', { class: bold ? 'tile trow all' : 'trow all', href: '#/subjects' },

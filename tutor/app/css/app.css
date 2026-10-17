@@ -185,6 +185,7 @@ h2 { font-size: var(--fs-btn); }
 .card { background: var(--card); border-radius: var(--r-lg); padding: 16px; }
 :root[data-look="clean"] .card.soft { background: var(--soft); }
 :root[data-look="clean"] .card.lined { border: var(--bw) solid var(--line); }
+:root[data-look="clean"] .card.this-sheet { border: var(--bw) solid var(--line); }   /* the link card's edge (C4 look q. 8) */
 .tag { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); font-weight: 800; border-radius: 999px; padding: 3px 12px; background: var(--accent-soft); color: var(--accent-ink); }
 .draft { margin: 4px 16px 0; font-size: var(--fs-sm); font-weight: 800; color: var(--ai-ink); background: var(--draft-bg); border-radius: 10px; padding: 4px 10px; text-align: center; }
 
@@ -633,7 +634,7 @@ details.credit[open] summary { margin-bottom: 8px; }
 .review { max-width: 720px; margin: 0 auto; min-height: 100vh; }
 .review .screen { padding-bottom: 24px; }
 .review-step { display: flex; flex-direction: column; gap: 12px; padding: 12px 16px 0; }
-.review-step .frame { width: 100%; max-width: 360px; height: 640px; margin: 0 auto; border: 2px solid var(--line-strong); border-radius: 20px; overflow: hidden; background: var(--bg); }
+.review-step .frame { width: 100%; max-width: 360px; height: 740px; margin: 0 auto; border: 2px solid var(--line-strong); border-radius: 20px; overflow: hidden; background: var(--bg); }
 .review-step .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 .review-step textarea.field { margin: 0; padding: 10px 14px; min-height: 88px; font: inherit; color: var(--ink); }
 .review-step .chips.wrap { flex-wrap: wrap; }
@@ -674,6 +675,7 @@ details.credit[open] summary { margin-bottom: 8px; }
 .subjects.today .trow.now { background: var(--accent-soft); border-radius: 10px; }
 .trow > svg.i-check { color: var(--good-ink); flex: none; }
 .trow.all { color: var(--accent-ink); }
+.trow.past b, .trow.past .time { color: var(--muted); }            /* a past period that had no lesson (C4 look q. 16) */
 .stepper-v { min-width: 4em; text-align: center; font-weight: 800; font-size: var(--fs-btn); }
 .round[disabled] { opacity: .45; }
 
@@ -702,7 +704,8 @@ details.credit[open] summary { margin-bottom: 8px; }
 .class-card { margin: 0 16px; border: 2px dashed var(--line-strong); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--card); }
 .class-card svg { width: 40mm; height: 40mm; }
 @media (hover: none) { .keys-hint { display: none; } }
-@media print { .teacher header, .teacher .ttabs, .noprint, #toast { display: none !important; } .class-card { border: 0; } }
+@media print { .teacher header, .teacher .ttabs, .noprint, #toast { display: none !important; } .class-card { border: 0; }
+  .class-card.a6 { margin: 0; width: 89mm; min-height: 128mm; justify-content: center; } }
 .lock .code-in { width: 100%; max-width: 280px; margin: 0 auto; min-height: 64px; font-size: calc(var(--fs-xl) * 1.2); font-weight: 800; letter-spacing: .2em; text-align: center; border-radius: 16px; border: 2px solid var(--line-strong); background: var(--card); color: var(--ink); }   /* the teacher's six digits (P20) */
 
 
@@ -733,6 +736,8 @@ details.credit[open] summary { margin-bottom: 8px; }
 .amenu .chip { justify-content: flex-start; color: var(--ink); }
 .amenu .chip.on { color: var(--on-accent); }
 .amenu-select { display: none; }
+.amenu .chip { white-space: normal; text-align: start; height: auto; min-height: 44px; }
+@media (min-width: 1200px) { [dir="rtl"] .alayout { grid-template-columns: 240px minmax(0, 1fr); } }   /* the Dari menu (C4 look q. 32) */
 @media (max-width: 759px) {
   .alayout { grid-template-columns: minmax(0, 1fr); }
   .amenu { display: none; }
@@ -756,7 +761,8 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .ticks legend { font-weight: 800; padding: 0; margin-bottom: 4px; }
 .ticks label { min-height: 40px; }
 .ticks input[type="checkbox"], .amodal input[type="checkbox"] { width: 20px; height: 20px; }
-.acrumb { padding-top: 4px; }
+/* the cohort line with both kill switches stays in view while the module table scrolls (C4 look q. 30) */
+.acrumb { padding-top: 4px; position: sticky; top: 0; z-index: 3; background: var(--bg); padding-bottom: 8px; }
 .acrumb a { font-weight: 800; color: var(--accent-ink); }
 .btn.kill { border-color: var(--bad); background: var(--card); color: var(--ink); min-height: 44px; font-size: var(--fs-sm); }
 .tag.bad { background: var(--bad-soft); color: var(--ink); }

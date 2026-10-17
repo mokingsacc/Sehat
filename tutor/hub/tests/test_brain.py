@@ -84,3 +84,21 @@ def test_lesson_context_boosts_but_does_not_filter(library):
     ix = search.build(library)
     hits = ix.search("فرق س و ش", lesson="dari-1-sheen")
     assert hits and hits[0][2]["lesson"] == "dari-1-sheen"
+
+
+@pytest.mark.anyio
+async def test_an_exercise_with_no_hints_offers_the_lessons_search_and_says_teacher_only_where_there_is_one(library, fake_ai):
+    """C4 look question 9: the budget spent, "Hints are resting for today"; no teacher, no promise of one."""
+    m = model_of(fake_ai)("should not be asked")
+    b = brain(library, m)
+    q = "Solve the exercise on page 12 of my book"
+
+    async def spent(cohort, settings=None):
+        return True
+    b.gateway.over_budget = spent
+    a = await b.answer(q, lang="en", homework=True)
+    assert a.source == "none" and a.search and not a.waiting and a.text.startswith("Hints are resting")
+    a = await brain(library, m).answer(q, lang="en", teacher=False)
+    assert a.search and not a.waiting and "teacher" not in a.text.lower()
+    a = await brain(library, m).answer(q, lang="en")
+    assert a.waiting and not a.search and "teacher" in a.text.lower()

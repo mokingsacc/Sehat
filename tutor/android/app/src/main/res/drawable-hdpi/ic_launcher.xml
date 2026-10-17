@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Qalam's icon drawn for small sizes (C4 look question 36): the teal square and the nib alone, in thicker strokes,
+     so 48 px on mdpi and hdpi phones (Android 5 to 7) still reads as a pen; Android 8+ uses the adaptive icon -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="64" android:viewportHeight="64">
+    <path android:fillColor="#0D7C7E" android:pathData="M14,0h36a14,14 0,0 1,14 14v36a14,14 0,0 1,-14 14h-36a14,14 0,0 1,-14 -14v-36a14,14 0,0 1,14 -14z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M14,50l6,-20 14,-14 14,14 -14,14z" />
+    <path android:strokeColor="#0D7C7E" android:strokeWidth="4" android:strokeLineCap="round" android:pathData="M17,47l10,-10" />
+</vector>

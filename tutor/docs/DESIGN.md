@@ -180,8 +180,8 @@ picks them from the modules' `home.action` offers, and no module can add a tile 
 | `ey` | a 120 px play button for the next activity, its picture above it | a 72 px listen button | none | none |
 | `p1`, `p2` | the 100 px play button with the next lesson's glyph and title | "Print today's sheet" (warm, full width) | subject tiles with stars | Lessons, Ask, Print |
 | `s1`, `s2` | the continue card with progress | "Check my sheet" | subject list with progress bars | Lessons, Ask, Print |
-| `ad` literacy | "Continue" with the next letter or word at 84 px, play and listen | "Print today's sheet" | enabled tracks | Lessons, Ask, Print |
-| `ad` reader | the continue card | "Check my sheet" | enabled tracks | Lessons, Ask, Print |
+| `ad` literacy | "Continue" with the next letter or word at 84 px, play and listen | "Print today's sheet" | track rows: Reading and writing, Everyday maths | Lessons, Ask, Print |
+| `ad` reader | the continue card | "Check my sheet" | track rows: up to five, where their packs and modules are on | Lessons, Ask, Print |
 
 **Early years (`ey`):** `data-look="bold" data-tone="child"`, `--tap` 72 px. No tabs, no Ask, no text the child must
 read: everything is read on open from recorded clips. The alias picture sits at the top start; the grown-up's corner
@@ -192,8 +192,10 @@ vibration as Who opens, a cancel when the finger lifts or leaves early (ruling 6
 phones but is never spoken (ruling 8). Lesson steps advance with one 72 px "next"; stars at the end. No PIN lock.
 
 **Adult literacy (`ad`, track `literacy`):** `data-look="bold" data-tone="adult"`: Naskh 22 px, 60 px buttons, read
-on open, on the adult palette (white, teal). Home as in the table; the tracks list shows only tracks the cohort has
-enabled (Literacy, Maths, English, Chinese, University). Lessons end with a check mark and "Correct, 8 of 10", never
+on open, on the adult palette (white, teal). Home as in the table; the track rows are subject rows (C4, change 6): the
+literacy track lists Reading and writing and Everyday maths only, the reader track up to five (reading in her
+language, Everyday maths, English, Chinese, University), each where the cohort serves an adult pack of that subject to
+her track. Lessons end with a check mark and "Correct, 8 of 10", never
 stars. Packs for adults carry `audience: adult` and use adult objects (market, clinic, bus, money). Until an adult
 pack is signed, an adult's Home says, with a speaker, "Lessons for adults are coming" and offers "Pick another year".
 
@@ -280,7 +282,10 @@ The lock is a privacy curtain on a shared phone, not security: it stops a siblin
 about 300 per language, recorded by a native speaker; `manifest.json` names who recorded each), then the phone's own
 voice if it has one for the language (Dari and English on most Android phones; Pashto on none), then today's "voice
 not ready yet" toast. No synthetic Dari or Pashto voice is ever shipped: a learner of letter sounds must hear a real
-speaker. Release of a pack needs clips for every `ey` and `p1` step and every `letter` step.
+speaker. Release of a pack needs clips for every `ey` and `p1` step and every `letter` step, and for every step of a
+pack the adult literacy track sees (C4.3). Scripture and its translations take no phone voice at all (C4, change 7):
+an unrecorded translation shows without a speaker, marked `data-voice="none"`, which the browser check allows on
+those elements only.
 
 ## What P9 built, and where it differs
 
@@ -314,7 +319,8 @@ speaker. Release of a pack needs clips for every `ey` and `p1` step and every `l
 - Welcome, consent, the lock and Settings are built as sections 5 to 8 say. Open for the next sitting: on Welcome the
   speakers sit on each head ("Primary school · years 1 to 6") and on each worded door, not beside each year digit;
   "Remove this learner" and its confirmation use `--bad` (a `--bad-soft` button with `--ink` text), the only new use
-  of a colour; the lock's keypad keeps 1 2 3 on top, left to right, in every language, with Erase bottom left.
+  of a colour; the lock's keypad keeps 1 2 3 on top, left to right, in every language, with Erase bottom left. C4
+  settled all three as built (look questions 1 to 3; change 12: the keypad is a left-to-right island like a sum).
 - The alias pictures are line drawings in the icon style, `--accent-ink` on the Who chip's `--accent-soft` circle;
   Who is learning shows "Book ۲۷" once she has joined, "Book · waiting to connect" while a join waits.
 - The hold ring (consent, and the grown-up's corner) is drawn round the button's own shape; under reduced motion it
@@ -604,7 +610,7 @@ them. Nothing here needs Mo before 22 December 2026; one decision, D11, is added
 ### C2.4 Home for in-school and out-of-school learners (replaces the spec of draft item 4)
 
 - `day` is on by default for bands `p1` to `s2` wherever the cohort's timetable template lists her band; unset counts
-  as on. `ey` and `ad` have no school day (adults: C4). The phone stores `day: 'on' | 'off'` per learner and nothing
+  as on. `ey` has no school day; adults have a study time, off until they say yes (C4, change 4: C4.10). The phone stores `day: 'on' | 'off'` per learner and nothing
   about school; nothing is sent and no event is recorded.
 - The first time Home shows the Now card, the timetable module offers one card (`home.action`, role secondary, top
   priority) and keeps offering it until it is answered:
@@ -756,3 +762,345 @@ could not be checked; 11 is interim. The fixes are listed at the end, and P9 is 
 - Shots at 360 px, not 390: Home in Pashto with Bigger text for every band, and a lesson step, Ask, Print and Check
   for one band per look and tone; the reports' JSON is the contact sheet, and no `index.html` is needed. Welcome,
   consent and lock wait for P10, which rebuilds them. The chair looks at the new shots in this thread.
+
+---
+
+# C4 decisions
+
+The design committee's note on sitting C4, as the chair wrote it (model names left out). Builders code from it and
+from the accepted specs in [DESIGN-C4-SPECS.md](DESIGN-C4-SPECS.md); where they differ, this note wins. The changes it
+makes to the C1 text above (4, 6, 7 and 12) are already applied there, and the look-question answers that change a
+built screen are built (the BUILD-PLAN decision log says which, and where).
+
+The chair and one member (the member's draft, filed as `DESIGN-C4-SPECS.md`). 17 October 2026, held early and
+batched as C2 and C3 were (the calendar put C4 in July 2027). Whatever turns on the pilot is written here as a gate
+with its numbers, so the pilot report opens a gate or keeps it shut and nothing comes back to a sitting. No web
+checks: every licence this sitting turns on is already recorded in `content/sources.json` (16 October), and the two
+the draft could not confirm (the King Fahd Complex's grant, IslamHouse's terms) are ruled not bundled, which needs no
+check. "Accept" means the draft's spec for that item is the builder's spec with the notes here applied; the draft's
+"Rules every spec below assumes" stand. Where the two differ, this note wins. English strings are drafts; every Dari
+and Pashto line is written and recorded by native speakers. P30 (live audio) and P31 (competitions) are out of scope,
+gated on D9 and the legal opinions; the draft's section 9 hooks are noted for the record and nothing of them is built.
+
+The rules this sitting applied to every item, beyond C0 to C3:
+
+- Hints, never answers: no new screen shows a value answer, and "I heard" is never "Correct".
+- No name, nickname, alias number or band on any new server row; a name is typed only on the certificate screen,
+  kept in one variable, and gone when the screen closes.
+- Learner AI only through the gateway: `openai` online, `local` on the hub, `fake` in tests; never Claude or Gemini.
+- No child's voice leaves a phone: anything that sends audio is for adults only, enforced in code, not policy.
+- No synthetic Dari or Pashto voice; scripture takes no phone voice at all.
+- Ease of use above all: the fewest options on the path, the rest in Settings; content copied only where its licence
+  allows copying, and an unconfirmed licence is no licence.
+
+## C4
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C4.1 | P25a: skills graph, plans, spaced review, pathways | **Accept, amended:** the graph maps nodes to lessons; mastery simplified. | Only a reviewed graph lets a plan say "learn this first" without a model inventing the order; a warm-up puts review where she already taps and adds nothing to Home; a mapping kept in the graph leaves Pack 1's signatures whole. | Replacement spec C4.1. `recall` on in `open` and in new cohorts, the pilot cohort after its report; no learner setting; `recall.item` only with consent; none in `ey`, none from Quran or seerah lessons. `plan_ai` off everywhere; the model picks node ids from a list and writes nothing she sees. |
+| C4.2 | P25b: certificates | **Accept, amended:** earned from her own events; `band` dropped and the day becomes the month; the paper carries Qalam's name and the check address. | Reading her events makes the paper mean "did it"; a row with no token hash, name, band or day cannot be tied to a learner on a seized server; a certificate exists to be shown, so it must say what it is, and she chooses whether to print it, which a daily sheet never does (C2.1). | Replacement spec C4.2. On wherever a pathway with `certificate: true` is served, `open` included; the consent screen first; never for Quran or seerah pathways; not `ey`. |
+| C4.3 | P26: adult tracks | **Accept** (draft item 2). | Two doors for an adult who cannot read yet, five once she can; the bold adult look P9 built, filled. | P26 as drafted. The UNESCO ELA primers are not used (no licence found: ASK, nothing copied); the money drawings never copy a banknote; the four badge colours stand (chair's check: white on each 5.85 to 7.09:1); every step of a literacy-track pack needs a recorded clip; the switch card shows once. Adult packs are released per cohort like any pack. |
+| C4.4 | P27a: English and Chinese lessons | **Accept** (draft item 3, the lessons), one note on recording. | A real voice for every word she copies; no Dari-script spelling, because the recording is the model; CC-CEDICT makes the Chinese pack BY-SA and keeps NC out of it. | P27a as drafted. Hear-yourself stays as today in a browser (in memory, 8 s at most, never stored or sent) and is not a capability. The APK has no microphone (C3.6) and gains none in 2027, and the hub's plain http has none, so there the `say` step is "hear it, say it": `canRecord()` is false in the APK (the bridge says so) and no mic is drawn. Tatoeba recordings in the English pack only CC0 or CC BY, never SA. The Chinese pack stays a draft until a native Mandarin speaker records the tones. |
+| C4.5 | P27b: `speak` | **Accept as a gated phase**, built last and only once its consent sentence exists. | Mo's plan says "speech input only for short known answers"; adults, English, fixed phrases and a request that never carries the phrase keep it inside the rules. But audio leaving a phone needs the consent text, a DPIA line and a measured gate, none of which exists, so built earlier it would be a dormant risk. | Replacement spec C4.5. Off everywhere and blocked in code until three conditions are met; bands `ad` only, refused by a gateway test for any other band; the online web app in a browser only. |
+| C4.6 | P28: university preparation | **Accept** (draft item 4), the role settled. | Scams and false hope are the dangers; a checklist on the phone, cards that expire and words that promise nothing are the honest minimum. | No new permission: `adviser` is a reviewer role in `signoffs` like `adult educator`, held by a person Mo names; six months before a card hides; the no-promise lint; the warning on every screen; no events, no `link.open`; LINK cards only, nothing copied. Off until the first card set is signed. |
+| C4.7 | P29: Quran and seerah | **Accept, with the licence gate:** confirmed sources bundled, unconfirmed ones not; the mechanism built either way and locked until a scholar signs. | Verbatim text from one verified source, a human voice and a scholar's signature are the only way religious content is right every time; an unconfirmed grant is no grant. | Replacement spec C4.7. `quran-1` is `licence: NC` (Islamic Network's audio); the King Fahd Complex stays ASK until its page is read at import; IslamHouse stays ASK and nothing of it is copied; no hadith text in 2027; the scholar picks the script and the translations; no phone voice on scripture, with a browser-check exemption. Off and locked until signed. |
+| C4.8 | P32: learner-made content v1 | **Accept, trimmed:** her own questions, private and checked by a teacher; no lesson authoring and no class sharing in 2027. | Writing her own questions is strong practice that needs nobody; a lesson editor is a second product; nothing passes between learners before paid moderators exist (5.1). | Replacement spec C4.8. `made` off everywhere; `share.cohort` registered and blocked like `child.contact`, with no screen behind it. |
+| C4.9 | Photo and homework help for `open` | **Accept** (draft 7a): photo after the gate, with budgets; Homework help off in 2027. | Photo marking is code against a known key and she confirms every reading, so no AI text reaches her; Homework help's hints are AI text seen by no person in `open`, and its distress path promises a teacher who is not there (C2.8). | The gate's four numbers as drafted; `daily_counts (token_hash, day, module, n)` kept two days; `per_day` 5 in `open`, 10 elsewhere; `ai_budget` from the measured cost × 1.2; Pashto sheets only once Pashto is trusted for `read_sheet`; `ask` stays off in `open`. Homework returns to a sitting with the held-answer numbers (at least 300). D7 decides whether `open` holds anyone. |
+| C4.10 | An adult study time | **Accept, trimmed:** the offer asks only the time. | An adult plans her own day, and a bell in a household that may not approve is not ours to set; one choice on the path, the rest in Settings. | Replacement spec C4.10. Off until she says yes; asked once; bells only while Qalam is on screen; APK alarms only after "This phone is mine"; no events, no token; "School day off" removes it. |
+| C4.11 | Spoken goals | **Accept** the chips; speech-to-text goals not in 2027. | Reviewed chips with pictures, read aloud, need no recogniser and cannot mishear; a Dari recogniser has no gate run, and Pashto has no voice to read her words back. | 7c as drafted: `homeFooter()` for the literacy track where `plan` is on; `#/plan` there is up to six pathway chips and no box, with "Someone can type it for you" opening P22's box; the mic beside the box is not built. |
+| C4.12 | The 36 open look questions | **Accept 34; two differ** (3 and 12). | Each one line, below. | The list below; the fixes land with the phase that next touches each screen, none as a phase of its own. |
+
+## The seventeen questions
+
+1. **Speech.** Build P27b `speak` (adults, English phrases, OpenAI online), off and blocked until its gate, last in
+   the order and only once the consent sentence is signed (C4.5). Hear-yourself for everyone in a browser; nothing
+   records in the APK or on the hub.
+2. **Certificates** are earned from her own events, so consent comes first; `band` is dropped; the month, not the day.
+3. **Qalam's name and the check address on the paper: yes.** The committee's call, not Mo's: C2.1 took the name off
+   sheets because practice paper lies about; a certificate is printed once, by her choice, to be shown, and is
+   useless without them. Recorded in the decision log; Mo may overrule there.
+4. **Spaced review** is a warm-up inside the next lesson; nothing new on Home.
+5. **Recitation:** Islamic Network now, the pack marked NC. The King Fahd Complex stays ASK until the P29 builder has
+   read its page at import; a reciter swap is a pack update.
+6. **The voice rule for scripture: accepted.** Scripture and its translations take no phone voice; an unrecorded
+   translation shows without a speaker; the browser check learns `data-voice="none"`, allowed on those elements only.
+7. **Quran lessons in early years:** not in 2027.
+8. **Script and translations:** the scholar picks; the Dari and Pashto readers are consulted on readability only,
+   since nothing in a verbatim text can be edited; a second scholar reads what the first signed, if Mo finds one.
+9. **Adult literacy's Home with two track rows until she switches:** yes.
+10. **The adult study time:** off until she says yes.
+11. **Homework help for `open`:** off in 2027; back with the held-answer numbers.
+12. **The photo gate for `open`:** Fix used on fewer than 1 cell in 10 over at least 200 photographed sheets per
+    language; no leaked answer in any rung a teacher saw; the cost of a mark measured; D7 decided. All four.
+13. **University cards:** `adviser` as a reviewer role, no new permission; six months before a card hides.
+14. **P32 layer 3:** no. Layers 1 and 2 only, and layer 1 is questions only (C4.8).
+15. **Chinese for `s2` as well as adults, and CC BY-SA for the whole pack:** yes to both.
+16. **No Dari-script spelling of English words:** yes.
+17. **The splits:** yes, P25a, P25b, P27a, P27b.
+
+## The thirty-six open look questions
+
+1. Speakers on Welcome's heads and worded doors, not beside each digit: accept.
+2. "Remove this learner" on `--bad-soft` with `--ink` text: accept.
+3. The keypad: **keep as built**, 1 2 3 on top and Erase bottom left in every language. The keypad is a left-to-right
+   island like a sum, and Android's own lock pad puts delete there; a learner who knows any phone finds it.
+4. The chip on its own line under a long header at 360 px, the title given 6rem first: accept.
+5. "Send when the hub is near", chosen by `hello.home`: accept.
+6. M7-03 at 214 mm with no Working box: accept.
+7. Strips of 45 to 50 KB from noisy fixtures: accept; JPEG 0.6 if real pilot phones give a median above 40 KB.
+8. "This sheet?" in the clean look takes the link card's edge (`--line` at `--bw`): accept.
+9. "Hints are resting for today" as specs item 3, with the lessons search; "Your teacher will look at this" only where
+   `teacher` is on: accept.
+10. The homework placeholder is "Type the question" in bold English; no placeholder is ever cut: accept.
+11. The leak check's Dari and Pashto number words are content, the reviewers' January list: accept.
+12. "Print for review" and "signed on paper": **narrower.** Print for review (the text only) is built in P29 only if
+    the scholar asks for it; no signature is ever on paper, because OK waits for the clip to play.
+13. No speakers on the staff pages; "Play the recording" stays: accept.
+14. The admin's view of review notes is built (P21): closed.
+15. The review frame at 740 px, scrolling inside: accept.
+16. No tick on a past period that had no lesson; it goes `--muted`: accept.
+17. The Now card at the close adds one line on school days, "Tomorrow: Maths at 8:00": accept.
+18. Qalam's CC0 tones for 2027; a musician's set replaces them through sources.json: accept.
+19. No wake-up line in the app: accept.
+20. No speakers on the teacher page: accept.
+21. The class card is A6 without the class label: accept.
+22. To do: Needs care first, then held answers oldest first, then questions, then "Made by a learner"; each group's
+    count in the header: accept.
+23. "Stuck on 3" as the tag; "3 items still wrong after the third hint this week" on her page: accept.
+24. The row for adult literacy, now, as the goal-chips screen: accept (C4.11).
+25. "Closest lessons" gains "Make these my plan": accept.
+26. A finished plan says "Done: Fractions" once on Home's card, then clears: accept.
+27. Chips at 360 px: six at most in bold, eight in clean, wrapping, never cut: accept.
+28. Three rules kinds, one "off limits": accept.
+29. The Log shows `what` in words from `i18n`, stored as the fixed word: accept.
+30. A sticky cohort line holding both kill switches while the module table scrolls: accept.
+31. Safety as totals with today's number beside each; bars only if a pilot week shows the need: accept.
+32. The Dari menu at 240 px above 1200 px, labels wrapping: accept.
+33. No `/get` on the class card: accept; C3.3 stands.
+34. Drawings, not screenshots, on `/get`: accept.
+35. The mine card in the secondary place when the day has no lessons yet: accept.
+36. A 48 px launcher drawing (the nib alone) for mdpi and hdpi: accept.
+
+## Replacement specs
+
+### C4.1 The graph's mapping, mastery and review (replaces those lines of draft item 1)
+
+- `content/graph/<subject>.json` as drafted, with `nodes[].lessons: [lesson ids]` in place of a `skill` field in each
+  lesson. One place holds the mapping, so a lesson's content hash and signatures do not move when the graph does, and
+  Pack 1 is not re-signed. Validator: ids unique and lower case; every `needs` exists; no cycles; every listed lesson
+  exists and is listed once; a lesson in no node is allowed (its plans fall back to pack order, as P22); every
+  pathway's goal has a lesson for each of its bands; `final` is a lesson with a sheet. The graph is signed like
+  `links.json` (its hash; a subject teacher; an adult educator where a pathway lists `ad`); `/review/` gains the graph
+  page as drafted.
+- Mastered, on the phone: her latest sheet for a lesson of that node at 80% or more (P20's rule); a lesson without a
+  sheet, finished (`lesson.done`). Nothing else.
+- Plans over the graph, the "Learn first" tag, pathways, one plan at a time with the stop dialog, the pathway card,
+  the finished plan's line: as drafted. AI (`plan`) only when the search missed, `plan_ai` is on (default off; never
+  in `open`, whose AI is off) and her language is trusted; the request carries the screened goal and her band's node
+  ids and titles, never her token; at most three existing ids come back and anything else is a miss.
+- `recall` as drafted: the items (steps marked `recall: true`, else the last two `choice` or `number` steps; three at
+  most a lesson), the five boxes (1, 3, 7, 21 and 60 days), the warm-up of up to three before a lesson the big button,
+  the Now card or a plan starts, drawn as the mock-up, `recall` on the phone at 300 items, `recall.item` events. P32's
+  questions join it, marked by her ("I knew it", "Not yet"). No warm-up in `ey`, in a lesson opened from a hint, or
+  for an item whose lesson is not on the phone.
+
+### C4.2 Certificates (replaces the row, the request and the name lines of draft item 1)
+
+- `certificates (id, course, version, month, cohort)`: no band, no day, no token hash, no name or name hash.
+  Permanent. BUILD-PLAN 3.4's row becomes this.
+- `POST /api/m/cert {path, version}` with her token, five a day a token. The server reads her token hash's events:
+  each lesson of the pathway in her audience counts with a `lesson.done` or a `check.done` of 80 or more; every lesson
+  must count; where the pathway names a `final` lesson its `check.done` must be 80 or more. It writes the row and
+  answers `{id, month}`. There is no "find": the phone keeps `certs: [{path, id, month}]` per learner and never asks
+  twice for one pathway ("My certificate" on the pathway card prints again with no request); a lost phone is a new
+  token and a new id. Missing events: "Qalam can't see all of this pathway's lessons yet. Do their practice sheets
+  again with sharing on, then try again."
+- The screen, the id (`QC-` and ten Crockford base32 characters in two groups), the paper and its wording ("has
+  finished the lessons and practice sheets of", never "passed" or a level), the hub's blank line (the print queue
+  holds the course and the id only), `/v/<id>` and `GET /api/cert/<id>` (a core route, always on, no token, 30 an
+  address a minute, the three languages and a speaker per line): as drafted. The QR holds the check URL; C2.1's
+  text-only rule is for sheets.
+- The name: a plain input (`autocomplete="off"`, no `name` attribute, in no form that submits), one variable, drawn
+  into the print document, gone when the screen closes; never in storage, a URL, the title, an event, a log, a request
+  or the hub's queue. `document.title` is "Qalam certificate QC-…". The browser test types a sentinel, prints, and
+  finds it in no request, storage, log or title.
+- Months in Solar Hijri for Dari and Pashto and Gregorian for English, both on the paper; a native speaker checks
+  the month names the phone produces.
+
+### C4.5 `speak` (replaces the manifest, host and default lines of draft item 3)
+
+- Manifest: bands `ad` (the reader track, by the phone's rule); depends `lessons`; capabilities `audio.record` (high)
+  and `ai.call`; purposes `listen`; setting `per_day` (default 20); `needs: internet`; `offline: no`.
+- Where it runs: the online web app in a browser over HTTPS. Not the APK, which has no microphone permission (C3.6
+  stands), and not the hub, whose plain http has none; the hub's `local` Whisper-class provider waits for a hub with a
+  secure context.
+- The call: `POST /api/m/speak` (multipart: webm/opus, mono, at most 4 s; `lang: en`) with her token; the gateway's
+  `listen` gives the provider the audio and the language only, never the phrase, the step or her token, and answers
+  `{heard}`. The audio is held in memory for the call and dropped: never disk, D1, a log or a queue, every writer
+  patched in the test (P14's pattern). The phone compares `heard` with the step's `answers` (lower case, no
+  punctuation, each word within one letter) and shows "That's it!" or "I heard: '…'. Listen and try again." The
+  transcript is shown once and never stored or sent in an event; three checks a step, then "Let's go on."; Next is
+  never blocked.
+- Code, not policy: a gateway test refuses `listen` for any token whose band is not `ad`; the validator refuses a
+  `say.answers` entry with a blank ("...") or a personal slot (name, age, city, phone number), so "My name is ..."
+  stays hear-yourself and no name leaves a phone in her own voice.
+- Her choice: the first tap of the mic shows the explainer as drafted ("…A short recording of your voice goes to
+  OpenAI to be written as text, then it is thrown away."), "Yes, check my speaking" and "No, just let me hear
+  myself"; Settings gets "Check my speaking"; `speak: yes | no` on the phone.
+- Blocked, not merely off: the admin panel refuses the switch for a cohort unless (1) the cohort's consent version
+  carries the voice paragraph (`voice: true` in its JSON, seen by the solicitor), (2) a passed gate report is filed in
+  `content/blindtest/speak/` (P16's kit on 100 phrase clips recorded by consenting adult reviewers, never learners:
+  right phrases accepted 9 in 10 times or more, wrong ones 1 in 10 or fewer) and (3) Mo's yes is in the decision log.
+  Budget: the cohort's `ai_budget` (transcription cost in `ai_usage`) and `per_day` in `daily_counts`.
+- Built only if (1) is in hand when Builder 2 reaches it; otherwise the phase slides to 2028 and `say.answers` waits
+  in the content for it.
+
+### C4.7 What P29 may bundle (replaces the sources table of draft item 5)
+
+| Source | sources.json | Ruling |
+|---|---|---|
+| Tanzil text (Uthmani or Simple) | BUNDLE, verbatim, checked 16 Oct | Bundle. Its notice travels with every copy; the only Quran text anywhere in the repository, fixtures and docs included. |
+| QuranEnc: Dari (Badakhshani); Pashto (Rowwad, Abu Zakaria or Sarfaraz) | BUNDLE, verbatim, checked 16 Oct | Bundle. Version stated, credit exact, footnotes kept and folded, nothing deleted; a translation whose footnotes the scholar rejects is not used; a new version is a new hash and a new signature. |
+| Islamic Network per-verse recitation | BUNDLE-NC, checked 16 Oct | Bundle into `quran-1` marked `licence: NC` (Tanzil and QuranEnc carry no share-alike, so the pack is clean). Files as published, no re-encoding or trimming, hash-checked; one Hafs reciter the scholar picks; one audio list per reciter, so removal on request is a pack update. |
+| King Fahd Complex recitations and translation audio | ASK, page unreachable | Not bundled. The P29 builder reads the page at import and records the date and the exact words in sources.json; only a recorded grant moves it to BUNDLE (unchanged files, `exact_attribution`), and then a reciter swap is a pack update. |
+| IslamHouse Dari and Pashto books | not registered; no terms found | Not bundled, nothing copied; registered as ASK. Seerah is our own text, drafted with the scholar. |
+| Ibn Hisham's Sirah | the work is public domain | Cited by reference; no edition's text or notes copied. |
+| hadith-api | BUNDLE (the repository), editions unchecked | Not used in 2027: no hadith text in any pack; seerah lessons cite by reference. |
+| Amiri Quran font | SIL OFL 1.1, known | Bundle with its OFL file, confirmed at import as Vazirmatn's was. |
+| KFGQPC Uthmanic Hafs font | unknown | Not used. |
+| QuranicAudio, EveryAyah | AVOID | Never. |
+
+The mechanism is built whatever the content's state, as drafted: `content/quran/` (the Tanzil file with its notice,
+the chosen translations with their versions, the audio list with each file's SHA-256), the `ayah` step, "Repeat
+after" with a pause as long as the verse and nothing recorded, the reader with code-only search (number, name in
+three scripts, "surah:verse" in either digit set, an exact word of the translation), the exact credit lines, audio per
+surah on demand and never the whole Quran by default, no AI anywhere (the packs never enter Ask's index or a prompt;
+a recorder test fails on any Tanzil line in a request; `rules.py` keeps religious rulings declined), the "Hanafi
+scholar" role required by `release_problems` for subjects `quran` and `seerah` beside the Dari and Pashto readers,
+`drafted_by` a person in those subjects, the scholar playing every clip before OK, and the admin's `quran` switch
+refused until `content/quran/` carries a scholar's signature at its current hash. Quran lessons p1 to ad, the reader
+s1, s2 and adult readers, no `ey`. Seerah: 8 to 10 lessons, no question steps, a line map and no other picture,
+narration recorded by native speakers. The browser check's speaker rule exempts elements marked `data-voice="none"`,
+used only for scripture and its translations.
+
+### C4.8 P32 trimmed (replaces the spec of draft item 6)
+
+- `made`: bands `s1`, `s2`, `ad` (the reader track, by the phone's rule); depends `lessons`; slots `lesson.end`;
+  capabilities `free.text` (medium) and `share.cohort` (blocked unless moderation is `paid-human`; no screen behind it
+  in 2027).
+- Layer 1: a question, its answer and an optional why, each at most 300 characters, in her language, text only; the
+  identifier filter's rules refuse a URL, an email shape or a run of 7 digits as she types. Kept on the phone (`made`,
+  at most 50 items); joins her warm-ups, self-marked. Entry: the lesson's end as its second action ("Make a question
+  about this lesson"); each subject page's last row, "My questions" (`#/made`). Nothing on Home.
+- Layer 2, where `teacher` is on: "Ask my teacher to check" sends `{kind, body, lang}` with her token after `rules.py`
+  and the identifier filter (distress goes to Needs care, as today). To do gains the kind "Made by a learner", last
+  in the order: the item as she wrote it, "Looks right" or "Needs a change" with chips (spelling, answer wrong,
+  unclear, unsafe, not school) and an optional short reply through the leak and identifier filters; the verdict
+  reaches her at `#/made`. Server: `made (id, cohort, token_hash, kind, body, lang, status, chips, reply, at,
+  decided_at)`, kept 60 days after sending or deciding; `DELETE /api/me` removes hers. Learner items never become
+  pack content.
+- Not built: "New lesson", "Share with the class", "From your class".
+
+### C4.10 The study-time offer (replaces the sheet lines of draft item 7b)
+
+- The card as drafted: the timetable module's offer for band `ad`, secondary role, top priority, until answered;
+  "Yes, choose a time" opens the sheet, "No, thank you" ends it for good.
+- The sheet asks the time only: a stepper in 30-minute steps from "7:00 in the evening" (P19's words), Save. The
+  length is 30 minutes. Settings → Study time holds on or off, the time, the length (15, 30, 45 or 60) and, in the
+  APK, "This phone is mine" and closed-app bells.
+- During the time: "Study time: 20 minutes left" as Home's primary in the Now card's shape over the next lesson; a
+  bell at the start and the end while Qalam is on screen; the APK's alarm at the start, after "This phone is mine".
+  Phone: `study: {at: "19:00", min: 30}` or `"off"`; nothing sent, no event.
+
+## The phases, and what is on by default
+
+| Phase | Builds | On by default | New on the server |
+|---|---|---|---|
+| P25a (M) | graph files and validator, the graph page in `/review/`, plans over the graph, module `recall`, pathways and their cards, `plan_ai` setting | `recall`: `open` and new cohorts yes, the pilot cohort after its report; `plan_ai`: no; pathways: with their packs | nothing |
+| P25b (S) | module `cert`, the certificate screen and print document, `POST /api/m/cert`, `GET /api/cert/<id>`, `/v/<id>` | yes wherever a pathway with `certificate: true` is served, `open` included | `certificates (id, course, version, month, cohort)` |
+| P26 (M) | pack fields `tracks` and `bands`, the track rows, bold sheets for the literacy track, the `{child, adult}` sweep, the switch card, four badges, `adult-literacy-1` and `adult-maths-1` as drafts | packs released per cohort by the admin | nothing |
+| P27a (M) | `letter.script`, `choice.english` and `hide`, `say.answers`, the release rules, the fonts, `english-adult-1` and `chinese-1` as drafts, `canRecord()` false in the APK | packs released per cohort (reader track) | nothing |
+| P27b (S, gated) | module `speak` | no; blocked until C4.5's three conditions | `POST /api/m/speak` (audio in memory only); `ai_usage` and `daily_counts` rows |
+| P28 (S) | module `university`, the pack and its `links.json` fields, the `adviser` role, the lint, the checklist screen | no; the admin's choice once the first card set is signed | nothing |
+| P29 (M) | `content/quran/`, the `ayah` step, module `quran` (the reader), the scholar gate and the locked switch, `quran-1` and `seerah-1` as drafts | no; locked until the scholar signs, then the admin's choice per cohort | nothing |
+| P32 (S) | module `made`, layers 1 and 2, the To do kind | no | `made (…)`, 60 days |
+| 7a (S) | `daily_counts`, `photo.per_day`, the `open` recipe in the admin's hands | `photo` in `open` no, until the gate | `daily_counts (token_hash, day, module, n)`, two days |
+| 7b (S) | `timetable` gains band `ad`, the offer, the sheet, Settings → Study time | off until she says yes | nothing |
+| 7c (S) | the chips screen for the literacy track, `canPlan` admits it | on wherever `plan` is on | nothing |
+
+## The changes to settled text
+
+| # | Change | Decision | Note |
+|---|---|---|---|
+| 1 | BUILD-PLAN 3.4: `certificates (id, course, version, month, cohort)`, no band, the month not the day | **Accept** | C4.2. |
+| 2 | BUILD-PLAN 3.2: `audio.record` (high) means audio leaving the phone; hear-yourself on the phone is no capability; `share.cohort` blocked unless `paid-human` | **Accept** | The APK and the hub have no microphone at all (change 11). |
+| 3 | BUILD-PLAN 3.7: learner purposes gain `listen` | **Accept** | Adults only, refused by a gateway test for any other band. |
+| 4 | C2.4: "`ey` and `ad` have no school day" becomes "adults have a study time, off until they say yes"; `timetable` gains `ad` | **Accept, as C4.10** | The offer asks the time only. |
+| 5 | C3.5 and specs item 14: Learn this shows for adult literacy as the chips screen; `canPlan` admits that track | **Accept** | Typed goals stay typed; the box is reached through "Someone can type it for you". |
+| 6 | DESIGN 5's "enabled tracks": the literacy track lists Reading and writing and Everyday maths only | **Accept** | The reader track lists five where their packs and modules are on. |
+| 7 | DESIGN 9: scripture and its translations take no phone voice; an unrecorded translation shows without a speaker | **Accept** | `data-voice="none"`, allowed on those elements only; the browser check fails on it anywhere else. |
+| 8 | C2.6: the university module sends no `link.open` event | **Accept** | What she prepares for says more about her than her year does. |
+| 9 | CONTENT.md: steps `ayah`, `letter.script`, `choice.english` and `hide`, `say.answers`, `recall`; packs `bands` and `tracks`; graph files; release rules for English, Chinese, adult literacy and religious subjects; no AI drafting in `quran` and `seerah` | **Accept, amended** | The graph's `nodes[].lessons`, not a lesson `skill` field; no learner-written lessons (C4.8). |
+| 10 | BUILD-PLAN 6: P25 and P27 split | **Accept** | P25a, P25b, P27a, P27b. |
+| 11 | New: C3.6 stands, the APK gains no microphone in 2027; `speak` runs in a browser online only | **Accept** | The `say` step in the APK and on the hub is "hear it, say it", with no mic drawn. |
+| 12 | New: P10's keypad stays as built, Erase bottom left in every language | **Accept** | Look question 3. |
+| 13 | New: BUILD-PLAN 5.1 v3 in 2027 is questions only; lessons and class sharing wait for 2028 and paid moderation | **Accept** | C4.8. |
+
+## What needs Mo, and when
+
+- **D12 (new): `speak`'s consent sentence and DPIA line.** A short recording of an adult's voice goes to OpenAI to be
+  written as text and is thrown away; adults only, English only. To the solicitor with the rest in March, or not in
+  2027. Default: not in 2027; P27b slides to 2028 and nothing records.
+- The rest is people, listed at the end. The certificate paper (question 3) is the committee's decision and is in the
+  log for him to overrule, not a question.
+
+## For the build plan
+
+- **Sittings:** C4 held 17 October 2026 with C0 to C3; this note. The July 2027 slot becomes a thread review of the
+  pilot report against the gates here (photo for `open`, `recall` for the pilot cohort, homework's numbers), not a
+  sitting.
+- **Section 2:** the `ad` row's Home list becomes "track rows: two for the literacy track, five for the reader track
+  where their packs are on"; adults gain "a study time, off until she says yes".
+- **3.2:** modules `recall`, `cert`, `speak`, `university`, `quran`, `made` as the table above; `timetable` gains
+  `ad`; `plan` gains the setting `plan_ai`; `photo` gains `per_day`; capabilities as change 2.
+- **3.4:** `certificates` as change 1; add `made` (60 days) and `daily_counts` (two days). **3.5:** `POST /api/m/cert`,
+  `GET /api/cert/<id>` and `/v/<id>` (core), `POST /api/m/speak`, `/api/m/made/*`.
+- **3.7:** purposes gain `listen` (adults only). **4.1:** the King Fahd Complex stays ASK; IslamHouse registered as
+  ASK; sources.json stays the only truth. **4.4:** the AD row gains "a certificate per pathway".
+- **5.1:** v2 as C4.1; v3 in 2027 is questions only. **5.4:** add "a certificate row holds no token hash, name, band
+  or day; the typed name exists in one variable on the phone". **5.5:** add "audio leaves a phone only for adults who
+  said yes on the explainer, under a consent version that names it".
+- **P25a, P25b, P26, P27a, P27b, P28, P29, P32** and the three extras: the table above, with each phase's "Since C4"
+  line pointing at its row here. **9.2:** add D12. **9.3:** one row for C4, source this note, and one for the
+  certificate paper (question 3).
+- **DESIGN.md:** append this note as "C4 decisions"; apply changes 4, 6, 7 and 12 to the C1 text; the draft's specs
+  are the builder's detail, filed as `docs/DESIGN-C4-SPECS.md`.
+
+## Builder order
+
+Two builders, one after the other, each session reading only its phase's files and this note's rows.
+
+**Builder 1 (July to mid-August 2027, once the pilot report is in hand)**
+1. P25a: the graph, plans over it, `recall`, pathways.
+2. P26 with 7c: the adult tracks, the literacy Home's rows and goal chips, the pack fields and release rules; content
+   drafting runs beside it.
+3. 7b: the adult study time.
+4. P25b with 7a: certificates and `/v/<id>`; `daily_counts`, `per_day`, the `open` recipe.
+
+**Builder 2 (mid-August to December 2027)**
+5. P27a: the step kinds, release rules, fonts and the English and Chinese pack skeletons.
+6. P29: the Quran set, `ayah`, the reader and the scholar gate; content lands when the scholar does.
+7. P28: university preparation.
+8. P32: her own questions, layers 1 and 2.
+9. P27b: `speak`, only if D12's sentence is signed by then; otherwise 2028.
+
+## Questions for Mo after 22 Dec
+
+1. **D12:** the voice sentence and DPIA line for `speak`: to the solicitor in March, or not in 2027? Default: not in
+   2027.
+2. **A Hanafi scholar, and a second,** for P29 by August 2027, who will sign on a phone or laptop (no paper
+   signatures). Default: no scholar, no Quran or seerah in 2027; the mechanism waits.
+3. **A person for the `adviser` role** (university cards: who may apply, and what is a scam) by October 2027. Default:
+   the module stays off.
+4. **Recorders:** a native English speaker and a native Mandarin speaker, besides Pack 1's Dari and Pashto recorders,
+   who face the year's largest recording job in the two adult packs. Default: those packs stay drafts.

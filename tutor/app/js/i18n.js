@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10, P11, P13, P14, P15, P19, P20, P22 and P23 (marked below) are new drafts.
+// learners use the app; the strings added for P9 to P23, the C4 look questions and Stage D (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -272,6 +272,12 @@ const S = {
     get_warning: 'اگر هشداری آمد، «جزئیات بیشتر» و بعد «به هر حال نصب کن» را بزن.', get_teachers: 'برای معلمان: فایل را وارسی کنید',
     get_sha: 'نشان انگشت فایل', get_cert: 'تصدیق امضا',
     get_none: 'برنامهٔ اندروید هنوز آماده نیست. قلم در همین مرورگر کار می‌کند.', get_open: 'قلم را باز کن',
+    // C4 look questions (drafts, for a native speaker's check)
+    send_hub: 'وقتی به مرکز درسی نزدیک شدم بفرست',
+    hw_placeholder_short: 'سوال کتابت را بنویس',
+    find_lesson: 'درس پیدا کن',
+    day_tomorrow: 'فردا: {subject} ساعت {t}',
+    plan_make: 'این‌ها را پلان من کن',
   },
   ps: {
     app: 'قلم',
@@ -540,6 +546,12 @@ const S = {
     get_warning: 'که خبرداری راغی، «نور جزئیات» او بیا «بیا هم نصب کړه» ووهه.', get_teachers: 'د ښوونکو لپاره: فایل وګورئ',
     get_sha: 'د فایل د ګوتې نښه', get_cert: 'د لاسلیک سند',
     get_none: 'د اندروید اپ لا چمتو نه دی. قلم په همدې براوزر کې کار کوي.', get_open: 'قلم پرانیزه',
+    // C4 look questions (drafts, for a native speaker's check)
+    send_hub: 'کله چې د زده کړې مرکز ته نږدې شوم، ولېږه',
+    hw_placeholder_short: 'د خپل کتاب پوښتنه ولیکه',
+    find_lesson: 'لوست پیدا کړه',
+    day_tomorrow: 'سبا: {subject} په {t}',
+    plan_make: 'دا زما پلان کړه',
   },
   en: {
     app: 'Qalam',
@@ -809,6 +821,12 @@ const S = {
     get_warning: 'If a warning appears, tap "More details", then "Install anyway".', get_teachers: 'For teachers: check the file',
     get_sha: 'Fingerprint of the file', get_cert: 'Signing certificate',
     get_none: 'The Android app is not ready yet. Qalam works in this browser.', get_open: 'Open Qalam',
+    // C4 look questions (drafts, for a native speaker's check)
+    send_hub: 'Send when the hub is near',
+    hw_placeholder_short: 'Type the question',
+    find_lesson: 'Find a lesson',
+    day_tomorrow: 'Tomorrow: {subject} at {t}',
+    plan_make: 'Make these my plan',
   },
 };
 

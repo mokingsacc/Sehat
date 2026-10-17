@@ -11,6 +11,10 @@
 // answer": she types hers and hears "Yes, that's right" or "Not yet", three tries a question; "I'm not sure about
 // this one" when the model's two runs disagreed. Offline, Homework help says it needs the internet and Ask's ready
 // answers on the phone work as before. Each ladder can still go to the teacher.
+// No hints now (C4 look question 9): "Hints are resting for today" when the day's AI budget is spent, or "We have no
+// hints for this one" where no teacher looks; either way the line offers the lessons search (#/plan where she can
+// plan, else every subject). In bold English the Homework help placeholder is the short "Type the question" (look
+// question 10), and on the hub "Send when I'm online" is "Send when the hub is near" (look question 5).
 
 import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -21,6 +25,7 @@ import * as modules from '../modules.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, rich, said, speakerBtn, SUBJECTS, toast, topbar } from '../ui.js';
+import { canPlan } from '../modules/plan.js';
 import { ladder, toldLine } from './check.js';
 import { saidNotNow } from './signup.js';
 
@@ -80,14 +85,17 @@ export default async function ask(args = []) {
 
   const thread = h('div', { class: 'thread', 'aria-live': 'polite' });
   const readyBox = h('div', { class: 'ready' });
-  const place = s(hw ? 'hw_placeholder' : 'ask_placeholder');
+  const bold = document.documentElement.dataset.look === 'bold';
+  const place = s(hw ? (bold && lang === 'en' ? 'hw_placeholder_short' : 'hw_placeholder') : 'ask_placeholder');
   const input = h('input', { placeholder: place, 'aria-label': place, maxlength: 400,
     autocomplete: 'off', enterkeyhint: 'send' });
   const composer = h('form', { class: 'composer', onSubmit: (e) => { e.preventDefault(); send(input.value); } },
     input, h('button', { type: 'submit', 'aria-label': s('send') }, icon('send', 26, 2.3)));
 
-  const answerBubble = (text, badgeEl, extra) => h('div', { class: 'bubble-a' },
-    h('div', { class: 'text' }, rich(text)),
+  const findLesson = () => said(h('a', { class: 'btn outline', href: canPlan(state.child()) ? '#/plan' : '#/subjects' },
+    icon('book', 22), s('find_lesson')));
+  const answerBubble = (text, badgeEl, extra, search = false) => h('div', { class: 'bubble-a' },
+    h('div', { class: 'text' }, rich(text)), search ? findLesson() : null,
     h('div', { class: 'meta' }, badgeEl,
       h('span', { class: 'row' }, extra || null, speakerBtn(() => speak(plain(text), lang), { size: 'sm' }))));
 
@@ -136,7 +144,7 @@ export default async function ask(args = []) {
         const extra = a.teacherQueued ? h('span', { class: 'badge wait' }, icon('clock', 16), s('wait_badge'))
           : canSend ? h('button', { class: 'link', type: 'button', onClick: () => toTeacher(a) }, s('send_teacher'))
             : (a.sent || (a.waiting && a.source === 'rules')) && !a.done ? h('span', { class: 'badge wait' }, s('sent_teacher')) : null;
-        out.push(a.ladder ? ladderBubble(a, extra) : answerBubble(a.a, badge(a.source, a.mc), extra));
+        out.push(a.ladder ? ladderBubble(a, extra) : answerBubble(a.a, badge(a.source, a.mc), extra, !!a.search));
       }
       if (a.teacher) out.push(answerBubble(a.teacher, badge('teacher')));
       return out;
@@ -145,7 +153,7 @@ export default async function ask(args = []) {
       outbox.queue({ id: null, q: offer, at: Date.now(), lang, lesson: context ? context.id : null });
       offer = null;
       drawThread();
-    } }, icon('clock', 22), s('send_online'))) : null);
+    } }, icon('clock', 22), s(hub.home() === 'online' ? 'send_online' : 'send_hub'))) : null);
     fill(readyBox, asks.length || pending || offer || !ready.length ? null : [
       h('div', { class: 'muted small' }, s('ready_questions')),
       ready.map((q) => said(h('button', { type: 'button', onClick: () => send(q) }, icon('ask', 22), q)))]);
@@ -186,6 +194,7 @@ export default async function ask(args = []) {
     try {
       const r = await hub.ask({ text, lang, year: c.year, subject, lesson: context ? context.id : null }, state.child().token);
       state.addAsk({ ...entry, id: r.id, a: r.text, source: r.source, mc: r.maths_checked, waiting: r.waiting,
+        ...(r.search ? { search: true, done: true } : {}),
         ...(Array.isArray(r.ladder) ? { ladder: r.ladder, checkable: !!r.checkable, unsure: !!r.unsure, rungs: 0 } : {}) });
     } catch (e) {
       toast(e.status === 429 ? s('slow_down') : hub.online() ? s('error') : s('offline'));

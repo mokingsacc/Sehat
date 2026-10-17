@@ -98,7 +98,7 @@ def class_rows(rows: list[dict], week: list[dict], today: str) -> list[dict]:
                     "days": max(0, _days(r["last_seen"], today)),
                     "lessons": sum(1 for e in evs if e["verb"] == "lesson.done"),
                     "sheets": len(sheets), "average": round(sum(sheets) / len(sheets)) if sheets else None,
-                    "needs_help": stuck_items(evs) >= NEEDS_HELP})
+                    "needs_help": stuck_items(evs) >= NEEDS_HELP, "stuck": stuck_items(evs)})
     return out
 
 
@@ -115,7 +115,7 @@ def learner_view(evs: list[dict]) -> dict:
                 x["pct"] = e["value"]
         elif e["verb"] == "hint.rung" and e["value"] in rungs:
             rungs[e["value"]] += 1
-    return {"lessons": lessons, "hints": rungs, "needs_help": stuck_items(evs) >= NEEDS_HELP}
+    return {"lessons": lessons, "hints": rungs, "needs_help": stuck_items(evs) >= NEEDS_HELP, "stuck": stuck_items(evs)}
 
 
 def lesson_stats(evs: list[dict]) -> dict[str, dict]:
@@ -258,7 +258,9 @@ def router(hub, needs) -> APIRouter:
         for g in groups.values():
             g.sort(key=lambda x: x["id"])            # oldest first within each group
         items = groups["care"] + groups["held"] + groups["question"]
-        return {"count": len(items), "items": items}
+        # each group's count for the header (C4 look question 22): needs care first, then held answers oldest first,
+        # then questions sent to her
+        return {"count": len(items), "items": items, "groups": {k: len(v) for k, v in groups.items()}}
 
     @r.post("/todo/{qid}", dependencies=needs(MODULE))
     async def act(qid: int, body: TodoIn, request: Request):
@@ -346,7 +348,7 @@ def router(hub, needs) -> APIRouter:
         lessons.sort(key=lambda x: order.index(x["id"]) if x["id"] in order else len(order))
         return {"alias": alias, "picture": row["picture"], "number": row["number"], "band": row["band"],
                 "days": max(0, _days(row["last_seen"], now().strftime("%Y-%m-%d"))), "lessons": lessons,
-                "hints": v["hints"], "needs_help": v["needs_help"], "lock_codes": settings["lock_codes"]}
+                "hints": v["hints"], "needs_help": v["needs_help"], "stuck": v["stuck"], "lock_codes": settings["lock_codes"]}
 
     @r.post("/class/{alias}/reset-code", dependencies=needs(MODULE))
     async def reset_code(alias: str, request: Request):

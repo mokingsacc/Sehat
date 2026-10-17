@@ -2,7 +2,7 @@
 // Chrome's sends her voice to Google). A 56 px box and a send button, "Or pick one" with up to eight unit chips of
 // her band's lessons, then the answer:
 // - a match: "Here's your plan: 4 lessons", the lessons in order (done ones ticked, the next marked), "Start my plan";
-// - a partial match: "Closest lessons", three at most;
+// - a partial match: "Closest lessons", three at most, with "Make these my plan" (C4 look question 25);
 // - a miss: "We don't have lessons for this yet. We've added it to our list." The text goes to the wishlist screened
 //   and without her token; offline it waits on the phone (outbox.js) and goes when the server is back;
 // - distress, health or off-limits words: the rules' kind message, and nothing is kept.
@@ -68,7 +68,14 @@ export default async function plan() {
   function showClosest(ids) {
     const lessons = ids.map((id) => library.get(id)).filter(Boolean);
     fill(out, h('div', { class: 'row' }, h('h2', { class: 'grow' }, s('plan_closest')), speakerBtn(say(s('plan_closest')), { size: 'sm' })),
-      h('nav', { class: 'subjects today' }, lessons.map((l, i) => row(l, i, null))));
+      h('nav', { class: 'subjects today' }, lessons.map((l, i) => row(l, i, null))),
+      said(h('button', { type: 'button', class: 'btn outline', onClick: () => {
+        const first = lessons[0];
+        if (first && plans.start(state.child(), plain(first.unit || first.title), lessons.map((l) => l.id))) {
+          toast(s('plan_started'));
+          location.hash = '#/home';
+        }
+      } }, icon('next', 22), s('plan_make'))));
   }
 
   function showLine(text, cls = '') {
@@ -112,7 +119,8 @@ export default async function plan() {
 
   const form = h('form', { class: 'composer plan-form', onSubmit: (e) => { e.preventDefault(); send(input.value); } },
     input, h('button', { type: 'submit', 'aria-label': s('send') }, icon('send', 26, 2.3)));
-  const chips = plans.units(c);
+  // six chips at most in the bold sizes, eight in clean, wrapping, never cut (C4 look question 27)
+  const chips = plans.units(c, document.documentElement.dataset.look === 'bold' ? plans.CHIPS_BOLD : plans.CHIPS);
   const el = h('div', { class: 'screen plan' },
     topbar({ back: '#/home', title: s('plan_title'), child: true }),
     h('div', { class: 'stack pad' }, top, form,

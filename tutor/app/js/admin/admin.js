@@ -55,7 +55,11 @@ const T = {
     add_staff: 'Add someone', email: 'Email (as Cloudflare Access knows it)', role: 'Role', initials: 'Initials',
     email_note: 'The email is hashed and forgotten. Cloudflare Access keeps the list of who may sign in.',
     remove: 'Remove', remove_q: 'Remove {l}?', added: 'added {d}', last_admin: 'The last admin cannot be removed.',
-    every: 'every cohort', when: 'When', what: 'What', who: 'By',
+    every: 'every cohort', when: 'When', what: 'What', who: 'By', today_n: 'today {n}',
+    // the Log's `what`, in words (C4 look question 29); the stored value stays the fixed word
+    w_module: 'Module switch', 'w_cohort.new': 'New cohort', 'w_cohort.settings': 'Settings', 'w_cohort.kill': 'Kill switch',
+    'w_cohort.code': 'New class code', w_release: 'Release', w_rollback: 'Rollback', w_wish: 'Wish marked',
+    'w_staff.add': 'Staff added', 'w_staff.remove': 'Staff removed',
     band_ey: 'early years', band_p1: 'years 1-3', band_p2: 'years 4-6', band_s1: 'years 7-9', band_s2: 'years 10-12',
     band_ad: 'adult', lang_prs: 'Dari', lang_ps: 'Pashto', lang_en: 'English',
     pick_some: 'Tick at least one language and one band.', all_bands: 'every band', school_day: 'School day', tt_default: 'the default timetable', tt_own: 'this cohort’s own timetable',
@@ -84,7 +88,10 @@ const T = {
     settings: 'تنظیمات', turn_on: 'روشن کن', turn_on_both: 'هر دو را روشن کن', edit: 'تغییر', save: 'ذخیره',
     diff_q: 'این تغییرها ذخیره شود؟', no_change: 'چیزی تغییر نکرد.', cohort_settings: 'تنظیمات',
     publish: 'نشر کن', rollback: 'برگردان', notes: 'یادداشت‌های بازبین', planned: 'در برنامه', not_for_qalam: 'برای قلم نیست',
-    new: 'تازه', remove: 'حذف', add_staff: 'کسی را اضافه کن', when: 'وقت', what: 'چه', who: 'توسط',
+    new: 'تازه', remove: 'حذف', add_staff: 'کسی را اضافه کن', when: 'وقت', what: 'چه', who: 'توسط', today_n: 'امروز {n}',
+    w_module: 'روشن یا خاموش کردن بخش', 'w_cohort.new': 'گروه تازه', 'w_cohort.settings': 'تنظیمات', 'w_cohort.kill': 'کلید قطع',
+    'w_cohort.code': 'کد تازهٔ صنف', w_release: 'نشر', w_rollback: 'برگشت', w_wish: 'نشانی خواهش',
+    'w_staff.add': 'کارمند اضافه شد', 'w_staff.remove': 'کارمند حذف شد',
     counts_only: 'فقط شمار: کلمه‌ها نزد معلم می‌مانند.',
     band_ey: 'سال‌های اول', band_p1: 'صنف ۱ تا ۳', band_p2: 'صنف ۴ تا ۶', band_s1: 'صنف ۷ تا ۹', band_s2: 'صنف ۱۰ تا ۱۲',
     band_ad: 'بزرگسال', lang_prs: 'دری', lang_ps: 'پښتو', lang_en: 'انگلیسی',
@@ -606,6 +613,9 @@ async function drawSpend() {
   frame(h('h2', {}, t('spend')), d.cohorts.map(one));
 }
 
+// the Log's fixed word in the page's words; an unknown one as it is
+const whatWord = (w) => { const k = 'w_' + w; const x = t(k); return x === k ? w : x; };
+
 // --- Safety: counts only ---
 
 async function drawSafety() {
@@ -613,7 +623,9 @@ async function drawSafety() {
   try { d = await api('/safety'); } catch (e) { return failed(e); }
   const sum = (c, k) => c.days.reduce((a, x) => a + x[k], 0);
   const one = (c) => h('section', { class: 'card stack' }, h('h3', { dir: 'auto' }, c.label),
-    h('div', { class: 'stats four' }, d.kinds.map((k) => h('div', { class: 'stat' }, h('b', {}, num(sum(c, k))), h('small', {}, t(k)))),
+    // totals over 14 days with today's number beside each (C4 look question 31)
+    h('div', { class: 'stats four' }, d.kinds.map((k) => h('div', { class: 'stat' }, h('b', {}, num(sum(c, k))),
+      h('small', {}, t(k), ' · ', t('today_n', { n: num((c.days[c.days.length - 1] || {})[k] || 0) })))),
       h('div', { class: 'stat' }, h('b', {}, num(c.drops.leak + c.drops.maths)), h('small', {}, `${t('leak')} / ${t('maths')}`))),
     h('small', {}, [t('days14'), c.oldest_held_hours === null ? t('no_held') : t('oldest', { n: c.oldest_held_hours })].join(' · ')),
     c.disputes.length ? h('p', { class: 'small' }, `${t('disputes')}: `, c.disputes.map((x) => [m(x.item), ` ${fa(x.n)}  `])) : null);
@@ -668,7 +680,7 @@ async function drawLog(cohort = '') {
   frame(h('div', { class: 'row wrap' }, h('h2', { class: 'grow' }, t('log')), pick),
     h('div', { class: 'atable' }, h('table', {}, h('thead', {}, h('tr', {}, [t('when'), t('cohorts'), t('what'), '', t('who')].map((x) => h('th', {}, x)))),
       h('tbody', {}, d.log.map((x) => h('tr', {}, h('td', {}, m(x.at.slice(0, 16).replace('T', ' '))), h('td', { dir: 'auto' }, x.cohort),
-        h('td', {}, x.what), h('td', { dir: 'auto' }, x.detail), h('td', { dir: 'auto' }, x.by)))))));
+        h('td', {}, whatWord(x.what)), h('td', { dir: 'auto' }, x.detail), h('td', { dir: 'auto' }, x.by)))))));
 }
 
 window.addEventListener('online', () => draw());

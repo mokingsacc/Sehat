@@ -1,7 +1,8 @@
 # Qalam build plan
 
 Draft of 16 October 2026, revised the same day to the design committee's C0 and C1 decisions
-(`build-committee/decisions_fable.md`), and again to its C2 and C3 decisions (DESIGN.md, "C2 and C3 decisions"). Built on the code in this folder (branch `claude/project-thread-sbgfoh`,
+(`build-committee/decisions_fable.md`), again to its C2 and C3 decisions (DESIGN.md, "C2 and C3 decisions"), and on 17 October to its C4 decisions
+(DESIGN.md, "C4 decisions"). Built on the code in this folder (branch `claude/project-thread-sbgfoh`,
 draft PR #1), the committee plan of 16 October and its two reviews, and Mo's instruction that day: start the build,
 builders on Opus 5.5 high, every design element settled by a committee of Opus 5.5 max and Fable 5.1 max,
 usage-efficient, methodical, for all ages, using the free resources out there.
@@ -85,7 +86,7 @@ a look; the band does, and one setting, "Bigger text", scales every size for any
 | `p2` | years 4 to 6 | bold, child | as `p1`; Check my sheet from Print and the lesson's end | lesson steps read on open; speaker elsewhere | two-clause sentences | guardian consent; photo help on Qalam sheets |
 | `s1` | years 7 to 9 | clean, adult | continue card, Check my sheet, subject list; three tabs | speaker to tap | textbook level, Vazirmatn 18 px | guardian consent; photo help; goals |
 | `s2` | years 10 to 12 | clean, adult | as `s1` | speaker to tap | textbook level | guardian consent under 18; university links |
-| `ad` | 18 and over | track `literacy`: bold, adult; track `reader`: clean, adult | tracks instead of years: Literacy, Maths, English, Chinese, University | speaker; read on open in Literacy | first letters to university | own consent |
+| `ad` | 18 and over | track `literacy`: bold, adult; track `reader`: clean, adult | track rows instead of years: two for the literacy track (Reading and writing, Everyday maths), five for the reader track where their packs are on (C4); a study time, off until she says yes | speaker; read on open in Literacy | first letters to university | own consent |
 
 Rules across bands:
 
@@ -96,7 +97,8 @@ Rules across bands:
 - **Speaker on every text,** including buttons, answers, hints and teacher messages; the browser check fails otherwise.
 - **Pictures:** line art of objects, no faces (CONTENT.md); adult packs use adult objects (market, clinic, bus).
 - **School day or Homework help:** the school day is on by default wherever the cohort has a timetable; one card on
-  Home switches to Homework help; `day: on|off` stays on the phone (C2.4).
+  Home switches to Homework help; `day: on|off` stays on the phone (C2.4). Adults have a study time instead, off until
+  she says yes; only its time is asked (C4.10).
 - **Learn this** is Home's last row for `s1`, `s2` and `ad` reader, the shell's `homeFooter()` (C3.5).
 - **Privacy rises with youth:** under 13, typed text reaches an AI only through the rules screen and identifier
   filter, and cohorts can hold AI answers for the teacher. Nothing relies on OpenAI's clause on minors, which nobody has
@@ -163,8 +165,12 @@ before the pilot, and the shell rather than the modules keeps Home sparse.
   it and adds only the hub's print queue (`needs: printer`); `photo` depends on it too. `teacher` drops `needs: pin`:
   its gate is per host (Cloudflare Access online, the PIN on the hub). `ey` leaves the bands of `photo`, `homework`,
   `timetable` and `plan`.
+- **Since C4:** modules `recall` (spaced review, P25a), `cert` (P25b), `speak` (P27b, blocked until its gate),
+  `university` (P28), `quran` (P29) and `made` (P32), as DESIGN.md's C4 phase table; `timetable` gains band `ad` (the
+  adult study time); `plan` gains the setting `plan_ai` (off); `photo` gains `per_day` (5 in `open`, 10 elsewhere).
 - **Capabilities and risk:** the core's table, not the manifest, sets the risk the admin sees: `photo.upload` and
-  `audio.record` high; `free.text` and `ai.call` medium; `share.public` and `child.contact` blocked unless the cohort's
+  `audio.record` high (`audio.record` means audio leaving the phone; hearing yourself on the phone is no capability,
+  C4); `free.text` and `ai.call` medium; `share.public`, `share.cohort` and `child.contact` blocked unless the cohort's
   moderation is `paid-human`. A module with any risk loads only after consent. Hub route guards and a review checklist
   replace the dropped `scopes` field; JS modules in one page cannot be walled off.
 
@@ -203,7 +209,9 @@ Shared SQL migrations in `tutor/migrations/NNNN_name.sql`, run by the hub at sta
 | `signoffs` | lesson, content hash, role, initials, date | permanent; mirrored in the pack |
 | `staff` | email_hash (SHA-256 over a server-side pepper and the lower-cased email), neutral label, role, cohorts, initials (C3.2) | while active |
 | `review_notes` | lesson, step, role, chips, text, status, at (C3.4) | until resolved |
-| `certificates` (Year 1) | id, course, band, date, cohort; never a name | permanent |
+| `certificates` (Year 1) | id, course, version, month, cohort; no band, no day, no token hash, never a name or a name's hash (C4.2) | permanent |
+| `made` (Year 1, P32) | id, cohort, token hash, kind, body, lang, status, chips, reply, at, decided_at (C4.8) | 60 days after sending or deciding |
+| `daily_counts` (Year 1, 7a) | token hash, day, module, n (C4.9) | two days |
 
 Never on the server: names, sex (unless Mo decides live classes need it, then as a routing flag only), date of birth,
 school status, phone number, location, photos, audio. The **alias** is a picture the phone picks from a reviewed list
@@ -232,6 +240,10 @@ Existing routes stay (ARCHITECTURE.md). New:
 | `/api/m/teacher/*`, `/api/m/admin/*`, `/api/m/review/*` | dashboards and review; Access online, PIN on the hub |
 | `/teacher/`, `/admin/`, `/review/` | the staff pages, behind Cloudflare Access online and the PIN on the hub (C3.2 to C3.4) |
 | `/get` | the Android download page, and the APK as a Worker static asset (C3.6) |
+| `POST /api/m/cert` | (P25b) `{path, version}` with her token, five a day: reads her own events and answers `{id, month}` (C4.2) |
+| `GET /api/cert/<id>`, `/v/<id>` | (P25b) the check of a certificate: core, always on, no token, 30 an address a minute |
+| `POST /api/m/speak` | (P27b, gated) a short adult's English phrase, audio in memory only, answers `{heard}` (C4.5) |
+| `/api/m/made/*` | (P32) her own questions sent to her teacher to check (C4.8) |
 
 Online, learner routes need the token, and rate limits key on it, because carrier NAT puts thousands of phones behind
 one address. The hub keeps its address-based limits.
@@ -267,8 +279,8 @@ one address. The hub keeps its address-based limits.
 - **Provider policy:** learner purposes may use `openai` (online), `local` (hub) or `fake` (tests, and staging until a
   key exists). Any other host, Anthropic and Google included, is refused by code and by a test. Claude may serve only
   UK-side drafting and evaluation tools in `tools/`, which carry no learner data.
-- **Purposes:** `explain`, `hint`, `read_sheet` (vision against a known key), `plan` (Year 1), `screen`. Manifests say
-  which a module may use.
+- **Purposes:** `explain`, `hint`, `read_sheet` (vision against a known key), `plan` (Year 1), `screen`, and `listen`
+  (Year 1, adults only, refused by a gateway test for any other band; C4.5). Manifests say which a module may use.
 - **Before a call:** rules screen, identifier filter (nicknames sent by mistake, phone numbers, long digit runs, email
   shapes), cohort budget, language check (Pashto off until nine in ten reviewed answers are right and none unsafe).
 - **After a call:** maths re-check (as now), answer-leak check for hints (5.3), source badge, hold-for-teacher, an
@@ -292,7 +304,7 @@ sources.json ever differ, sources.json wins and this table is wrong (the committ
 | BUNDLE | copying and changes allowed (CC BY, CC BY-SA, CC0, public domain, OFL, "verbatim with credit") | import into any pack with attribution; share-alike carried to the pack; `verbatim` items unchanged | Afghan Children Read (CC0), StoryWeaver, Global Digital Library, Bloom (per book), African Storybook, Feed the Monster code, PhET (before 29 March 2026), Illustrative Mathematics first edition, VOA, Wikipedia, Wiktionary, Wikibooks, Tatoeba, CC-CEDICT, hadith-api, Tanzil and QuranEnc (verbatim), Kolibri (per item), Piper voices, Common Voice |
 | BUNDLE-NC | non-commercial licences (CC BY-NC, BY-NC-SA, CK-12's licence, the reciters' NC grant) | import only into packs marked `licence: NC`, kept apart; never with BY-SA in one lesson | Khan Academy (Iranian vocabulary needs Afghan review), CK-12, OpenStax (`no_ai`: link cards only in 2027), MIT OpenCourseWare, Islamic Network recitations, Meta MMS, Dari Literature Corpus |
 | LINK | free to view, all rights reserved | a link card (title, owner, our description of at most 140 characters, URL), no copied text, no embeds, `needs: internet` | Ministry of Education textbooks (syllabus map only), BBC Learning English, BBC Dars |
-| ASK | needs written permission | treated as LINK until `content/permissions/<id>.md` says otherwise | Begum Academy, SOLAx, LEARN Afghanistan, Darakht-e Danesh (Right to Learn), Hesperian, King Fahd Complex recitations |
+| ASK | needs written permission | treated as LINK until `content/permissions/<id>.md` says otherwise | Begum Academy, SOLAx, LEARN Afghanistan, Darakht-e Danesh (Right to Learn), Hesperian, King Fahd Complex recitations (stays ASK until P29 reads its page, C4.7); IslamHouse is to be registered as ASK by P29, nothing of it copied |
 | AVOID | never used | the validator refuses any reference | QuranicAudio and EveryAyah, Transparent Language, KP Board Pashto books, 1980s UNO textbooks |
 
 Flags the validator also enforces (C0.6): `verbatim` (no edits, hash-checked: Tanzil, QuranEnc), `exact_attribution`
@@ -343,7 +355,7 @@ never ships unsigned.
 | P2 | none | years 4 to 6 maths and reading starter |
 | S1 | Pack 1b: year 7 maths and science, 10 lessons each, if Mo picks it | years 7 to 9 maths and science; Begum link cards per unit |
 | S2 | none | maths practice sheets and links; university preparation |
-| AD | none | adult literacy starter, English beginner, Chinese starter, university and scholarship links |
+| AD | none | adult literacy starter, English beginner, Chinese starter, university and scholarship links; a certificate per pathway (C4.2) |
 | all | | Quran and seerah, retrieval only |
 
 Mo chooses Pack 1 (D2); the tools are the same either way.
@@ -357,8 +369,9 @@ Mo chooses Pack 1 (D2); the tools are the same either way.
 | Stage | When | What she can do | What is shared |
 |---|---|---|---|
 | v1 | pilot | "I want to learn this", typed only in 2027 (C3.5), searched against signed lessons; a plan in pack order; misses go to the wishlist. Private notes and "my own questions" on the phone. A marked sheet adds the lessons behind wrong items to her plan | nothing; the admin sees screened wishlist text with counts, no token |
-| v2 | autumn 2027 | plans over a reviewed skills graph; the AI may choose and order nodes, never invent them; spaced review on the phone | nothing |
-| v3 | 2028, behind flags | her own questions and short lessons, private by default; "ask my teacher to check"; rules and moderation pre-screen; teacher approval before classmates see it; labelled "written by a learner", "checked by a teacher" | approved items, inside her cohort only |
+| v2 | autumn 2027 | plans over a reviewed skills graph whose nodes map to lessons (C4.1); the AI (off by default, `plan_ai`) may only pick node ids from a list, never invent them; spaced review on the phone as a warm-up inside the next lesson; pathways | nothing |
+| v3 | 2027, behind flags | her own questions only (C4.8), private by default; "ask my teacher to check"; rules and the identifier filter pre-screen | nothing between learners |
+| v3, later | 2028, with paid moderation | short lessons; teacher approval before classmates see them; labelled "written by a learner", "checked by a teacher" | approved items, inside her cohort only |
 
 Nothing passes between learners before paid human moderators exist.
 
@@ -398,6 +411,7 @@ withheld raised them.
   cells. A daily job deletes what has expired (3.4).
 - Threat model from the research: any phone or server may be seized, so neither may say "girl, 14, not in school".
 - Staff emails live only in Cloudflare Access; D1 holds a peppered hash (C3.2).
+- A certificate row holds no token hash, name, band or day; the typed name exists in one variable on the phone (C4.2).
 - The PIN lock stays; there is no quick wipe. Removing a learner is a deliberate Settings action behind her PIN, with
   a spoken confirmation.
 
@@ -412,6 +426,8 @@ withheld raised them.
 - **Adults** consent for themselves. **Withdrawal:** `DELETE /api/me`, or the admin on request.
 - The lawful basis for under-13s and the final wording are for the solicitor in March (Mo); consent text is versioned
   data, so it changes without code.
+- **Audio** leaves a phone only for adults who said yes on the explainer, under a consent version that names it
+  (C4.5); no child's voice leaves a phone.
 - **Moderation:** until paid human moderators exist, the only learner-originated content anyone else sees is a question
   a teacher has rewritten or approved, as today.
 
@@ -703,17 +719,28 @@ before the first new tables, so nothing is written twice. P3a needs no design in
 During the pilot the pilot cohort's modules are frozen: weekly safety and bug fixes only. New modules ship behind flags
 that are off for the pilot cohort, so any gain can be attributed.
 
-| Phase | Goal | Committee |
-|---|---|---|
-| P25 Skills graph, spaced review, pathways, certificates (M) | reviewed prerequisite graph; plans over it; review dates on the phone; pathways; certificates with a typed name, verifiable by id with no name stored | yes, C4 |
-| P26 Adult tracks (M) | literacy in C size with adult tone; everyday maths; tracks on Home | yes, C4 |
-| P27 English and Chinese (M) | English beginner through Dari and Pashto with recorded voices; Chinese starter from sources.json; speech input only for short known answers | yes, C4 |
-| P28 University preparation (S) | link cards to verified free courses and scholarships; a checklist pathway; no promises | yes, C4, light |
-| P29 Quran and seerah (M) | verified text and translations (`verbatim`), per-verse audio, retrieval only, AI off, scholar sign-off | yes, C4 |
-| P30 Live audio classes (M; only if Mo approves in July and six months are funded) | audio only, listen by default, hand-raising, unique links, no one-to-one, no recording by default, women teachers | yes, C4 |
-| P31 Competitions and Olympiads (M; only after the sanctions and safeguarding opinions) | opt-in, avatars, no places for girls, no money prizes | yes, C4 |
-| P32 Learner-made content v1 (M) | section 5.1 v3 | yes, C4 |
-| P33 Box parity and USB sync (M) | every offline module on the hub; USB export and import of packs, approved answers, flags, counts; ready for spring 2028 | yes, light |
+Since C4 (DESIGN.md, "C4 decisions", held 17 October 2026): P25 and P27 are split, and the three C4 extras are
+phases of their own. Each row's "Since C4" is the row of that note's phase table.
+
+| Phase | Goal | Since C4 | Committee |
+|---|---|---|---|
+| P25a Skills graph, plans, spaced review, pathways (M) | reviewed prerequisite graph whose nodes map to lessons; plans over it; spaced review as a warm-up inside the next lesson; pathways | C4.1: graph files and validator, the graph page in `/review/`, module `recall` (`open` and new cohorts yes, the pilot cohort after its report), `plan_ai` off; nothing new on the server | settled by C4 |
+| P25b Certificates (S) | certificates earned from her own events, a typed name never sent, verifiable by id | C4.2: module `cert`, `POST /api/m/cert`, `GET /api/cert/<id>`, `/v/<id>`; `certificates (id, course, version, month, cohort)`; on wherever a pathway with `certificate: true` is served | settled by C4 |
+| P26 Adult tracks (M) | literacy in C size with adult tone; everyday maths; tracks on Home | C4.3: pack fields `tracks` and `bands`, the track rows, bold sheets for the literacy track, the `{child, adult}` sweep, the switch card, four badges, `adult-literacy-1` and `adult-maths-1` as drafts | settled by C4 |
+| P27a English and Chinese lessons (M) | English beginner through Dari and Pashto with recorded voices; Chinese starter from sources.json | C4.4: `letter.script`, `choice.english` and `hide`, `say.answers`, release rules, fonts, the two packs as drafts, `canRecord()` false in the APK | settled by C4 |
+| P27b `speak` (S, gated) | speech checking for adults' short English phrases only | C4.5: off and blocked in code until its three conditions (D12) | settled by C4 |
+| P28 University preparation (S) | link cards to verified free courses and scholarships; a checklist pathway; no promises | C4.6: the `adviser` reviewer role, six months before a card hides, the no-promise lint, no events | settled by C4 |
+| P29 Quran and seerah (M) | verified text and translations (`verbatim`), per-verse audio, retrieval only, AI off, scholar sign-off | C4.7: confirmed sources bundled, unconfirmed ones not; locked until a scholar signs | settled by C4 |
+| P30 Live audio classes (M; only if Mo approves in July and six months are funded) | audio only, listen by default, hand-raising, unique links, no one-to-one, no recording by default, women teachers | out of C4's scope, gated on D9 | yes |
+| P31 Competitions and Olympiads (M; only after the sanctions and safeguarding opinions) | opt-in, avatars, no places for girls, no money prizes | out of C4's scope, gated on the legal opinions | yes |
+| P32 Learner-made content v1 (S) | section 5.1 v3: her own questions, private, checked by a teacher | C4.8: module `made` off; `share.cohort` blocked; no lesson authoring or class sharing in 2027 | settled by C4 |
+| P33 Box parity and USB sync (M) | every offline module on the hub; USB export and import of packs, approved answers, flags, counts; ready for spring 2028 | | yes, light |
+| 7a Photo and homework for `open` (S) | photo marking for `open` behind the pilot's four-number gate, with budgets; Homework help off in 2027 | C4.9: `daily_counts`, `photo.per_day`, the `open` recipe in the admin's hands | settled by C4 |
+| 7b An adult study time (S) | one study time a day, off until she says yes | C4.10: `timetable` gains `ad`, the offer, the time-only sheet, Settings → Study time | settled by C4 |
+| 7c Spoken goals (S) | goal chips she hears and taps for adult literacy; no speech-to-text in 2027 | C4.11: the chips screen for the literacy track; `canPlan` admits it | settled by C4 |
+
+Builder order (C4): Builder 1 builds P25a, then P26 with 7c, then 7b, then P25b with 7a; Builder 2 builds P27a, P29,
+P28, P32, and P27b only if D12's sentence is signed by then.
 
 ### Committee sittings
 
@@ -723,7 +750,7 @@ that are off for the pilot cohort, so any gain can be attributed.
 | C1 | 16 Oct 2026, held with C0 | bands, adult tone, visual identity and icon, bigger text, dark mode, sign-up order, consent screen, alias versus nickname, PIN lock and reset | settled without mock screens; the spec is in DESIGN.md; P9's screenshots go to C2 for a look-over |
 | C2 | 16 Oct 2026, held with C0 and C1 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits; which modules `ey` gets (P1 left it out of Ask and Check my sheet) and which modules the `open` cohort switches on (the seed has all five, and Ask's last step is a teacher) | note, mock screens, mock sheet |
 | C3 | 16 Oct 2026, held with C0 and C1 | school day and bells, teacher dashboard, admin panel, review screens, "learn this" entry, APK screens | decisions and specs in DESIGN.md and DESIGN-C2C3-SPECS.md; P9's look-over is a thread review, not a sitting |
-| C4 | July 2027 | Year 1 modules; also photo and homework for `open` with budgets, an adult study time, spoken goals | note, mock screens |
+| C4 | 17 Oct 2026, held early with C0 to C3 | Year 1 modules (P25 to P29, P32); photo and homework for `open` with budgets, an adult study time, spoken goals; the 36 open look questions | decisions in DESIGN.md ("C4 decisions") and specs in DESIGN-C4-SPECS.md; the July 2027 slot becomes a thread review of the pilot report against C4's gates (photo for `open`, `recall` for the pilot cohort, homework's numbers), not a sitting |
 
 Each sitting returns a short decision note for DESIGN.md and the decision log.
 
@@ -747,9 +774,9 @@ a UK post probably from early August. Ramadan about 8 February to 9 March 2027; 
 | March | P22, P23; Pack 1 corrections | | Pack 1 signed; DPIA drafted; pilot class by 31 Mar | solicitor, Pack 1 sign-off, pilot class |
 | 1 to 25 Apr | P24; dress rehearsal | | production approved about 19 Apr | sign DPIA and safeguarding policy |
 | 26 Apr to 25 Jun | fixes only; Year 1 behind flags | | **pilot**, Mazar-i-Sharif; pause at Eid al-Adha | weekly 30-minute check-in |
-| July | P25, P26 | C4 | results by 31 Jul; live-class decision | results, live classes |
-| Aug to Sep | P27 to P29 | | scholar sign-off for P29 | monthly check-in |
-| Oct to Dec 2027 | P30, P31 if approved; P32, P33 | | Kabul and Herat cohorts by flag; CIO application | cohorts, CIO |
+| July | P25a, P26 with 7c, 7b, P25b with 7a | C4 held 17 Oct 2026; thread review of the pilot report | results by 31 Jul; live-class decision; the C4 gates | results, live classes |
+| Aug to Sep | P27a, P29, P28 | | scholar sign-off for P29 | monthly check-in |
+| Oct to Dec 2027 | P30, P31 if approved; P32, P27b if D12 is signed, P33 | | Kabul and Herat cohorts by flag; CIO application | cohorts, CIO |
 | Spring 2028 | | | village-hub pilot | |
 
 About 24 sessions before the pilot across 27 weeks leaves slack: a missed week slides a week, not a gate. If the port
@@ -821,6 +848,7 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | D9 | Live audio classes | July 2027 | 31 Jul | no until funded |
 | D10 | Ministry recognition | after 22 Dec | none | not in 2027 |
 | D11 | Google's Android developer verification: register Qalam's package and signing key under Mo's own identity or the organisation's (an organisation account needs a D-U-N-S number; a personal one ties Mo's name to the app in Google's records) | 23 Dec | 31 Jul 2027, before any install beyond the pilot | no registration during the pilot: facilitators install pilot phones over USB, everyone else uses the web app |
+| D12 | `speak`'s consent sentence and DPIA line: a short recording of an adult's voice goes to OpenAI to be written as text and is thrown away; adults only, English only (C4.5) | 23 Dec | to the solicitor in March 2027, or not in 2027 | not in 2027: P27b slides to 2028 and nothing records |
 
 ### 9.3 Decision log
 
@@ -858,5 +886,8 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | 17 Oct 2026 | P21 built. Builder's choices, to confirm: the panel is the core's (`admin.py`, always on behind `staff.Gate.admin`), not a module, at `/api/m/admin/*`; the hub's admin PIN is its own file (`admin-pin.txt`, `admin-pin` and `new-admin-pin` commands) with its own lockout, and "hub" is its label in the log; the cohort settings gain `ai` (the kill switch "AI off": the gateway answers "off" and hello says AI is off), `ai_budget` (a cohort's own daily tokens) and `moderation` (`none`, `teacher`, `paid-human`); "School day off" switches the `timetable` module; a blocked capability is refused in `flags.enabled` too, not only in the panel; a cohort's code cannot be shown again (only its hash is kept), so it shows once and Class cards needs it typed; the command line's `class-code` is gone and `staff-add` stays for the first admin only; Publish writes a `releases` row only when `packs.release_problems` finds nothing, and Roll back writes the previous release again, the files coming from the repository; changes other than module switches go to `admin_log` (`migrations/0014`, a fixed `what`, a hub-written line, the admin's label), and `flag_log` and `admin_log` are pruned after two years; a cohort label must be unique; the wishlist's mark is `wishlist.status` (new, planned, not_for_qalam); Safety counts come from new `safety.flag` events (the rules' distress, health and off limits, and the gateway's leak and maths drops, a teacher's edit refused for a leak included), so the spec's politics, religious rulings and weapons are one "off limits"; Staff is online only; a timetable edit is saved whole and logged by its fingerprint | builder | this thread |
 | 17 Oct 2026 | P23 built. Builder's choices, to confirm: `tutor/android` is its own project copied from Sehat's way (Gradle 8.14.3, plugin 8.13.0, `androidx.webkit` 1.12.1, `androidx.core` 1.13.1), package `org.qalam.app`, minimum Android 5, vector icons only; the APK serves the app at the whole `https://appassets.androidplatform.net/` origin and reaches the hub's plain-http addresses (cleartext allowed for those only, mixed content allowed) and then the online home set at build time from the repository variable `QALAM_ONLINE_URL` (not a secret; unset means hub only); staging's `TUTOR_ORIGINS` names the APK's origin; the service worker now keeps `/packs/` media from the hub or the online home, so lessons opened once play offline in the APK; alarms are one at a time from the page's seven-day plan, a bell more than 10 minutes late is skipped, and none rings while the app is on screen; the app's version is `tutor/android/VERSION` and hello's `apk {latest, min}` comes from `TUTOR_APK_LATEST` and `TUTOR_APK_MIN` (null when unset); `/get` is `app/get/` with `apk.json` written by `tools/apk_record.py` at release, the APK committed beside it while under 25 MiB; CI (`tutor-android.yml`) builds a debug APK (the build tools' throwaway debug key on the runner) and an unsigned release APK as an artifact with no secrets, and checks the seven permissions and the name; the class card does not carry `/get` (C3.3's "nothing else" kept); `androidx.core` adds its own internal receiver permission | builder | this thread |
 | 17 Oct 2026 | P24 built (production not deployed). Builder's choices, to confirm: the retention job is the hub's `prune()` at start and then daily (a task in the app's lifespan on the hub; the Worker's cron trigger `17 22 * * *`, 02:47 in Afghanistan, through `scheduled` on a subclass of the SDK's ASGI entrypoint); a cron trigger is allowed on staging, as a schedule rather than a resource; every table has a written retention rule in the privacy suite (`test_privacy.py`), and the identifier filter catches "my name is ..." but not a bare "I am Karim", which stays a known limit; production is `qalam` with the open cohort as its join-without-a-code cohort, `TUTOR_RELEASE=1`, learner AI `off` until P18 (the guard allows only `off` or `openai`), deployed by hand from `main` through the environment `production` with its own `QALAM_PROD_CF_*` secrets, never staging's; the database is made by Mo by hand (`d1 create qalam --jurisdiction eu`) and only referred to by the repository variable `QALAM_PROD_D1_ID`, which the workflow checks names `qalam`; the weekly export runs Sundays 21:41 UTC in a second environment `production-backup` (no approval, a D1-only token), encrypted to Mo's public key and kept 35 days as an artifact, and starts only once `QALAM_LIVE = yes`; the post-deploy check is read only (no learner is made in production); the load test is in-process (each learner her own address, all at once, the fake AI) on SQLite and the D1 fake, and does not measure Cloudflare CPU, which staging's measurements do; the restore drill's offline half is a test | builder | this thread |
+| 17 Oct 2026 | C4 (design committee, held early): P25 and P27 split (P25a, P25b, P27a, P27b); the skills graph maps nodes to lessons in `content/graph/`, so no lesson gains a `skill` field and Pack 1's signatures stay whole; mastery is her latest sheet at 80% or, without a sheet, a finished lesson; spaced review (`recall`) is a warm-up inside the next lesson, on in `open` and new cohorts, for the pilot cohort after its report; `plan_ai` off everywhere; certificates earned from her own events with consent, the row `certificates (id, course, version, month, cohort)` with no band, day, token hash or name; adult tracks with two rows for the literacy track; English and Chinese packs with every word in a human voice; `speak` built last and blocked in code until D12; university cards with an `adviser` reviewer role; Quran and seerah from confirmed sources only, locked until a scholar signs; P32 is her own questions only; photo for `open` behind a four-number gate, Homework help off in `open` in 2027; an adult study time off until she says yes, asking only the time; spoken goals are heard and tapped chips; 34 of the 36 open look questions accepted, the keypad kept as built and "Print for review" only if the scholar asks | design committee | DESIGN.md, "C4 decisions"; DESIGN-C4-SPECS.md |
+| 17 Oct 2026 | Certificates carry Qalam's name and the check address on the paper (C4 question 3): a certificate is printed once, by her choice, to be shown, and is useless without them; C2.1's rule stays for practice sheets. The committee's call, recorded here for Mo to overrule | design committee | DESIGN.md, "C4 decisions" |
+| 17 Oct 2026 | C4 filed and its look answers built where they change a built screen. Built: on the hub "Send when the hub is near" (5); the "This sheet?" card's edge in the clean look (8); an exercise with no hints says "Hints are resting for today" when the day's AI budget is spent, or "We have no hints for this one" where no teacher looks, each with "Find a lesson" (the lessons search, `#/plan`, or every subject where she cannot plan), and "your question went to the teacher" only where `teacher` is on (9); "Type the question" in bold English (10); the review frame 740 px (15); a past period with no lesson unticked and muted (16); "Tomorrow: Maths at 8:00" after the close (17); the class card A6 with the QR and the code only (21, 33); To do's group counts above the card (22); "Stuck on 3" and her page's line (23); "Make these my plan" under Closest lessons (25); six chips in bold, eight in clean (27); the Log's `what` in words (29); the cohort line sticky (30); Safety's today numbers (31); the Dari menu 240 px above 1200 px (32); the school day's secondary card under the empty line when no lesson is there yet (35); a nib-only launcher drawing for mdpi and hdpi (36). Answered as built: 1 to 4, 6, 7, 13, 14, 18 to 20, 28, 34. Later: 24 and 26 with P26 and P25a, 11 with the reviewers' list, 12 with P29. Builder's choices, to confirm: the no-teacher line and its lessons search are a reading of item 9's second half; the "past" mark is for periods only | builder | this thread |
 
 New decisions are added with date and source; a row is never edited, only superseded.

@@ -535,7 +535,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
             hold = "teacher" in on and flags.module_settings(hub.modules["teacher"],
                                                              (f.get("teacher") or {}).get("settings"))["hold"]
             ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson,
-                                         cohort=cohort, homework="homework" in on, hold=hold)
+                                         cohort=cohort, homework="homework" in on, hold=hold, teacher="teacher" in on)
         held = ans.held and ans.source == "ai"
         if held:
             shown, hints = ans.text, ans.ladder

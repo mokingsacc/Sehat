@@ -34,6 +34,8 @@ const T = {
     active: 'Active this week', finished: 'Lessons finished', checked: 'Sheets checked', questions: 'Questions',
     seen_today: 'last seen today', seen_days: 'last seen {n} days ago',
     lessons_week: 'lessons this week: {n}', sheets_n: 'sheets: {n}', avg: '{n}% right', needs_help: 'needs help', none: 'No learners yet.',
+    stuck: 'Stuck on {n}', stuck_line: '{n} items still wrong after the third hint this week',
+    groups: 'Needs care {a} · Held answers {b} · Questions {c}',
     her_lessons: 'Lessons', pct: '{n}% right', not_marked: 'not marked', done_n: 'done {n}×', hints_used: 'Hints used',
     rung: 'hint {n}: {m}', reset: 'Lock reset code', make_code: 'Make a code', code_for: 'Valid for {n} minutes, once.',
     code_tell: 'Tell her the code. She taps "I forgot", then "I have a code from my teacher".',
@@ -63,6 +65,8 @@ const T = {
     active: 'فعال این هفته', finished: 'درس‌های تمام شده', checked: 'ورق‌های چک شده', questions: 'سوال‌ها',
     seen_today: 'امروز دیده شد', seen_days: '{n} روز پیش دیده شد',
     lessons_week: '{n} درس این هفته', sheets_n: '{n} ورق', avg: '{n}٪ درست', needs_help: 'کمک لازم دارد', none: 'هنوز شاگردی نیست.',
+    stuck: 'در {n} مانده', stuck_line: '{n} سوال این هفته بعد از راهنمایی سوم هنوز غلط است',
+    groups: 'نیاز به توجه {a} · جواب نگه‌داشته {b} · سوال‌ها {c}',
     her_lessons: 'درس‌ها', pct: '{n}٪ درست', not_marked: 'چک نشده', done_n: '{n} بار تمام شد', hints_used: 'راهنمایی‌های استفاده شده',
     rung: 'راهنمایی {n}: {m}', reset: 'کد باز کردن قفل', make_code: 'کد بساز', code_for: 'برای {n} دقیقه، یک بار.',
     code_tell: 'کد را به او بگو. او «یادم رفت» و بعد «معلمم یک کد به من داده» را می‌زند.',
@@ -299,7 +303,9 @@ function showCard(i) {
     };
   }
   document.addEventListener('keydown', keys);
-  page(h('section', { class: 'qcard' + (q.kind === 'care' ? ' urgent' : '') }, body),
+  const g = todo.groups;
+  page(g ? h('p', { class: 'muted small pad' }, t('groups', { a: fa(g.care), b: fa(g.held), c: fa(g.question) })) : null,
+    h('section', { class: 'qcard' + (q.kind === 'care' ? ' urgent' : '') }, body),
     h('div', { class: 'row pad' },
       h('button', { type: 'button', class: 'btn', disabled: i === 0 || null, onClick: () => go(i - 1) }, t('prev')),
       h('span', { class: 'grow' }),
@@ -323,7 +329,7 @@ async function drawClass() {
       h('small', { class: 'muted' }, [t(BAND[r.band] || r.band), seen(r.days),
         t('lessons_week', { n: r.lessons }),
         t('sheets_n', { n: r.sheets }) + (r.average != null ? ' · ' + t('avg', { n: r.average }) : '')].join(' · '))),
-    r.needs_help ? h('span', { class: 'tag help' }, t('needs_help')) : null);
+    r.needs_help ? h('span', { class: 'tag help' }, t('stuck', { n: fa(r.stuck) })) : null);
   page(h('div', { class: 'stats four' }, stat(t('n_of', { a: c.active, b: c.learners }), t('active')),
     stat(fa(c.lessons), t('finished')), stat(fa(c.sheets), t('checked')), stat(fa(c.questions), t('questions'))),
   h('nav', { class: 'subjects class-list' }, c.rows.length ? c.rows.map(row) : h('p', { class: 'empty' }, t('none'))),
@@ -351,7 +357,8 @@ async function drawLearner(alias) {
       h('div', { class: 'row' }, h('span', { class: 'pic' }, aliasIcon(d.picture, 40)),
         h('div', { class: 'grow' }, h('h2', {}, `${aliasName(d.picture)} ${fa(d.number)}`),
           h('small', { class: 'muted' }, `${t(BAND[d.band] || d.band)} · ${seen(d.days)}`)),
-        d.needs_help ? h('span', { class: 'tag help' }, t('needs_help')) : null),
+        d.needs_help ? h('span', { class: 'tag help' }, t('stuck', { n: fa(d.stuck) })) : null),
+      d.needs_help ? h('p', { class: 'small' }, t('stuck_line', { n: fa(d.stuck) })) : null,
       h('h3', {}, t('her_lessons')),
       d.lessons.length ? h('ul', { class: 'plain' }, d.lessons.map((l) => h('li', { class: 'row' },
         h('span', { class: 'grow', dir: 'auto' }, l.title),
@@ -371,8 +378,9 @@ function classCard() {
     try {
       const r = await api('/class-card', { method: 'POST', body: { code: box.value } });
       const svg = new DOMParser().parseFromString(r.svg, 'image/svg+xml').documentElement;
-      put(out, h('div', { class: 'class-card' }, h('b', {}, r.label), document.importNode(svg, true),
-        h('p', { class: 'code-big latin', dir: 'ltr' }, r.code), h('p', { class: 'small', dir: 'ltr' }, r.url)),
+      // A6, the QR and the code only: no class label, no address (C3.3; C4 look questions 21 and 33)
+      put(out, h('style', {}, '@page { size: A6; margin: 8mm; }'),
+        h('div', { class: 'class-card a6' }, document.importNode(svg, true), h('p', { class: 'code-big latin', dir: 'ltr' }, r.code)),
       h('button', { type: 'button', class: 'btn primary noprint', onClick: () => window.print() }, t('print')));
     } catch (err) { if (err.status === 404) toast(t('not_code')); else failed(err); }
   };

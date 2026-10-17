@@ -39,6 +39,18 @@ LADDER = {
     "ps": "راځه چې یوځای یې حل کړو. لارښوونې یوه یوه دلته دي.",
     "en": "Let's work it out together. Here are hints, one at a time.",
 }
+# an exercise the AI cannot hint at now (C4 look question 9): the day's AI budget is spent, or no teacher is there to
+# look at it; the phone adds the lessons search under the line (drafts, for a native speaker's check)
+RESTING = {
+    "prs": "راهنمایی‌ها امروز استراحت می‌کنند. درسی درباره‌ی آن پیدا کن.",
+    "ps": "لارښوونې نن دمه کوي. د دې په اړه یو لوست پیدا کړه.",
+    "en": "Hints are resting for today. Find a lesson about it.",
+}
+NO_HINTS = {
+    "prs": "برای این یکی راهنمایی نداریم. درسی درباره‌ی آن پیدا کن.",
+    "ps": "د دې لپاره لارښوونه نه لرو. د دې په اړه یو لوست پیدا کړه.",
+    "en": "We have no hints for this one. Find a lesson about it.",
+}
 CONFIDENT = 0.6      # share of the question a checked answer must explain
 PASSAGE_OK = 0.45    # share of the question a lesson passage must explain to be shown on its own
 
@@ -88,6 +100,7 @@ class Answer:
     checkable: bool = False      # "Check my answer" is offered (Homework help, and the answer is sure)
     unsure: bool = False         # the model's two runs disagreed: "Ask your teacher"
     held: bool = False           # the AI's answer or ladder waits for the teacher (the cohort's hold, P20)
+    search: bool = False         # no hints now: the phone offers the lessons search under the line (C4 look q. 9)
     solution: str | None = field(default=None, repr=False)    # the private answer: never in dict()
 
     def dict(self):
@@ -164,9 +177,12 @@ class Brain:
         return (self.library.lessons[best[0]], best[1]) if best else (None, None)
 
     async def answer(self, question: str, *, lang="prs", subject=None, year=None, lesson=None,
-                     cohort: str | None = None, homework: bool = False, hold: bool = False) -> Answer:
+                     cohort: str | None = None, homework: bool = False, hold: bool = False,
+                     teacher: bool = True) -> Answer:
         """`hold`: the cohort holds AI answers for the teacher (P20): an answer or ladder the model wrote comes back
-        with `held`, and the route keeps it for the teacher instead of showing it."""
+        with `held`, and the route keeps it for the teacher instead of showing it. `teacher`: a teacher looks at what
+        goes to her (the `teacher` module is on); without one, an exercise with no hints says so instead of "your
+        question went to the teacher" (C4 look question 9)."""
         lang = lang if lang in ("prs", "ps", "en") else "prs"
         q = (question or "").strip()
 
@@ -178,7 +194,7 @@ class Brain:
 
         if is_exercise(q):
             return await self.exercise(q, lang=lang, subject=subject, year=year, lesson=lesson, cohort=cohort,
-                                       homework=homework, hold=hold)
+                                       homework=homework, hold=hold, teacher=teacher)
 
         hits = self.index.search(q, kinds={"bank", "approved"}, subject=subject, lesson=lesson, limit=3)
         if hits and hits[0][1] >= CONFIDENT:
@@ -200,8 +216,11 @@ class Brain:
 
         return Answer(WAITING[lang], lang, "none", waiting=True)
 
-    async def exercise(self, q: str, *, lang, subject, year, lesson, cohort, homework, hold=False) -> Answer:
-        """Hints, never answers: the code's ladder for a sum it can work out, else Homework help's, else the teacher."""
+    async def exercise(self, q: str, *, lang, subject, year, lesson, cohort, homework, hold=False,
+                       teacher=True) -> Answer:
+        """Hints, never answers: the code's ladder for a sum it can work out, else Homework help's, else the teacher.
+        With Homework help's budget spent for the day: "Hints are resting for today" and the lessons search; with no
+        teacher: "We have no hints for this one" and the lessons search."""
         solved = mathcheck.solve(q)
         if solved:
             shown, value = solved
@@ -218,6 +237,10 @@ class Brain:
                                            hold=hold)
             if a:
                 return a
+            if await self.gateway.over_budget(cohort or self.gateway.cohort):
+                return Answer(RESTING[lang], lang, "none", search=True)
+        if not teacher:
+            return Answer(NO_HINTS[lang], lang, "none", search=True)
         return Answer(WAITING[lang], lang, "none", waiting=True)
 
     async def homework_ladder(self, q, *, lang, subject, year, lesson, cohort, hold=False) -> Answer | None:

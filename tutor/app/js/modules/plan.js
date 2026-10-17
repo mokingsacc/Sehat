@@ -19,6 +19,7 @@ import { h, playIcon, plain } from '../ui.js';
 export const BANDS = ['s1', 's2', 'ad'];
 export const MAX = 12;
 export const CHIPS = 8;
+export const CHIPS_BOLD = 6;
 export const CLOSEST = 3;
 
 // she can make a plan: the module on for her band, and an adult only on the reader track
@@ -72,14 +73,14 @@ export function addAgain(c, lessonId, now = Date.now()) {
   return true;
 }
 
-// "Or pick one": the unit names of her band's lessons, up to eight, in pack order
-export function units(c) {
+// "Or pick one": the unit names of her band's lessons, up to eight (six in the bold sizes), in pack order
+export function units(c, max = CHIPS) {
   const seen = new Map();
   for (const l of bandLessons(c)) {
     const name = plain(l.unit || '');
     if (name && !seen.has(name)) seen.set(name, l);
   }
-  return [...seen.keys()].slice(0, CHIPS);
+  return [...seen.keys()].slice(0, max);
 }
 
 export function unitPlan(c, name) {
