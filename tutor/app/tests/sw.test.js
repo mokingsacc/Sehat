@@ -20,9 +20,14 @@ test('the service worker keeps every file the app opens with', () => {
   // Quran's and the Chinese fonts and the voice manifests are kept when first asked for (W3's trim), and named in LAZY
   const lazy = JSON.parse(sw.slice(sw.indexOf('const LAZY = [') + 13, sw.indexOf('];', sw.indexOf('const LAZY')) + 1)
     .replace(/'/g, '"').replace(/\s+/g, ' '));
+  // the school bag (W5) and every file of its vendored crypto, which no file of the shell imports
+  const vendor = (dir) => list(`js/vendor/${dir}/`, '.js');
   assert.deepEqual(lazy.sort(), ['/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus',
     '/audio/en/manifest.json', '/audio/prs/manifest.json', '/audio/ps/manifest.json',
-    'fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2']);
+    'fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2', 'js/bag.js', ...vendor('noble-ciphers'), ...vendor('noble-hashes')].sort());
+  for (const f of want.filter((x) => x.endsWith('.js') && !lazy.includes(x))) {
+    assert.doesNotMatch(readFileSync(new URL(f, APP), 'utf8'), /from '\.\.?\/(bag|vendor\/)/, `${f} imports the bag`);
+  }
   assert.deepEqual([...shell].sort(), want.filter((f) => !lazy.includes(f)).sort());
 });
 

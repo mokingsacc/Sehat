@@ -17,12 +17,20 @@
 // `number`, `cohort`, `code`, `consent`, `asked` and `sentBand`: those of the seat of the server in reach (else of
 // the last one), so the screens need not know about seats. `forget` lists tokens of learners removed or withdrawn
 // whose server record is still to be deleted, each with the server it belongs to. `clock` is the device's own
-// {dev, skew, last}: a random id, the server's time minus this phone's, and the latest time it made or saw (3.5).
+// {dev, skew, last, n}: a random id, the server's time minus this phone's, the latest time it made or saw (3.5), and
+// the counter of the stamps made in that ms.
+// Since W5 (WEBSITE.md 3.5 and 3.8) every write is stamped, so two copies of her record can be merged (bag.js): save()
+// compares each learner with the record it last saw and gives each changed part the clock's next stamp (stamps.js),
+// in `st` {part: stamp}; a removed question, question of her own or contest leaves `gone` {part: stamp}; `dead` lists
+// her tokens that died (a 401, a fold, a new token, "Stop sharing"), so a copy from another phone never brings one
+// back; `bagx` keeps what a newer app's bag held that this one does not know; `bag` is her school bag's code and
+// keys {code, k, f, w} (bag.js), never sent. A value from before W5 has no stamp, the oldest.
 // The v1 record (qalam.v1, which could hold a child's name) is migrated once, the name dropped, and removed.
 
 import { known, pickFree } from './aliases.js';
 import { bandOf, BANDS, THEMES, TRACKS } from './bands.js';
 import * as events from './events.js';
+import { next as nextStamp, ms as stampMs, parts, restamp, seen as seenStamp, valid as validStamp } from './stamps.js';
 
 const KEY = 'qalam.v2';
 const OLD = 'qalam.v1';
@@ -60,7 +68,35 @@ export const MADE_CHARS = 300;
 const MADE_STATUS = ['waiting', 'ok', 'change'];
 const MADE_CHIPS = ['spelling', 'answer_wrong', 'unclear', 'unsafe', 'not_school'];
 const str = (x, n = MADE_CHARS) => (typeof x === 'string' ? x.slice(0, n) : '');
-let data = load();
+// W5: each learner's stamped parts and tokens as save() last saw them (stamps.js parts)
+const seenParts = new Map();
+const seenTokens = new Map();
+let data = loaded(load());
+
+function loaded(d) {
+  seenParts.clear();
+  seenTokens.clear();
+  for (const l of d.learners) { seenParts.set(l.id, parts(l)); seenTokens.set(l.id, tokensOf(l)); }
+  return d;
+}
+
+function tokensOf(l) {
+  const out = new Set();
+  for (const seat of Object.values(l.seats || {})) for (const t of [seat.token, ...(seat.also || [])]) if (t) out.add(t);
+  return out;
+}
+
+// what a write changed: its parts stamped, and her tokens that left every seat listed as dead
+function stampAll() {
+  for (const l of data.learners) {
+    seenParts.set(l.id, restamp(l, seenParts.get(l.id) || new Map(), data.clock));
+    const had = seenTokens.get(l.id);
+    const has = tokensOf(l);
+    const left = had ? [...had].filter((t) => !has.has(t)) : [];
+    if (left.length) l.dead = cleanDead([...(l.dead || []), ...left]);
+    seenTokens.set(l.id, has);
+  }
+}
 
 function rid() {
   const a = new Uint8Array(8);
@@ -131,7 +167,42 @@ function clean(l) {
     // P31 (C6.5): the contests she joined (at most 50): her answers until she sends them and after, for "See the
     // answers" once the key comes; the percent, right and n the server sent back. Never a place or anyone else's
     ...(cleanContests(l.contests).length ? { contests: cleanContests(l.contests) } : {}),
+    // W5: the stamps, tombstones and dead tokens the bag merges by; a newer app's parts; her bag's code and keys
+    ...(Object.keys(cleanStamps(l.st, 3000)).length ? { st: cleanStamps(l.st, 3000) } : {}),
+    ...(Object.keys(cleanGone(l.gone)).length ? { gone: cleanGone(l.gone) } : {}),
+    ...(cleanDead(l.dead).length ? { dead: cleanDead(l.dead) } : {}),
+    ...(cleanBagx(l.bagx) ? { bagx: cleanBagx(l.bagx) } : {}),
+    ...(cleanBag(l.bag) ? { bag: cleanBag(l.bag) } : {}),
   });
+}
+
+// W5's parts of a learner (stamps.js, bag.js): stamps by part name; at most `n`, the newest
+function cleanStamps(o, n) {
+  if (!o || typeof o !== 'object') return {};
+  const ok = Object.entries(o).filter(([k, v]) => k.length <= 200 && validStamp(v));
+  if (ok.length > n) ok.sort((a, b) => (a[1] < b[1] ? 1 : -1)).splice(n);
+  return Object.fromEntries(ok);
+}
+// tombstones: at most as many per list as the list keeps (bag.js CAPS), the newest
+function cleanGone(o) {
+  const all = cleanStamps(o, 1000);
+  const out = {};
+  for (const [list, n] of [['asks', 30], ['made', 50], ['contests', 50]]) {
+    Object.assign(out, cleanStamps(Object.fromEntries(Object.entries(all).filter(([k]) => k.startsWith(list + ':'))), n));
+  }
+  return out;
+}
+function cleanDead(v) {
+  return Array.isArray(v) ? [...new Set(v.filter((t) => typeof t === 'string' && TOKEN.test(t)))].slice(-50) : [];
+}
+function cleanBagx(x) {
+  if (!x || typeof x !== 'object' || Array.isArray(x)) return null;
+  try { return Object.keys(x).length && JSON.stringify(x).length <= 16384 ? x : null; } catch { return null; }
+}
+function cleanBag(b) {
+  const hex = (v) => typeof v === 'string' && /^[0-9a-f]{64}$/.test(v);
+  return b && typeof b === 'object' && typeof b.code === 'string' && /^\d{16}$/.test(b.code) && hex(b.k) && hex(b.f) && hex(b.w)
+    ? { code: b.code, k: b.k, f: b.f, w: b.w } : null;
 }
 
 // a seat (W4): the fields that came with joining one server, and its consent; null when it holds nothing
@@ -189,7 +260,8 @@ function cleanClock(c) {
   return {
     dev: ok && typeof c.dev === 'string' && /^[0-9a-f]{16}$/.test(c.dev) ? c.dev : rid(),
     skew: ok && Number.isFinite(c.skew) ? Math.round(c.skew) : 0,
-    last: ok && Number.isFinite(c.last) && c.last > 0 ? c.last : 0,
+    last: ok && Number.isFinite(c.last) && c.last > 0 ? Math.floor(c.last) : 0,
+    n: ok && Number.isInteger(c.n) && c.n >= 0 && c.n < 46656 ? c.n : 0,
   };
 }
 
@@ -360,6 +432,7 @@ function load() {
 
 export function save() {
   if (preview) return;
+  stampAll();
   try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { /* full or blocked: keep going */ }
 }
 
@@ -502,20 +575,40 @@ export function targets(l) {
 // the clock (WEBSITE.md 3.5): the server's time as this phone best knows it, never behind the latest time it made
 // or saw, so a phone whose clock fell back to 2010 keeps stamping after what it knew
 export const clock = () => data.clock;
+// this phone, as a question names the phone that may send it (3.8: a question copied by her bag from another phone
+// waits for that phone; "Send again" here makes it this one's)
+export const device = () => data.clock.dev.slice(0, 8);
+export const mine = (ask) => !ask || !ask.dev || ask.dev === device();
 export function stamp() {
   const c = data.clock;
-  const t = Math.max(Date.now() + c.skew, c.last);
-  c.last = t;
+  const t = Math.max(Math.floor(Date.now() + c.skew), c.last);
+  if (t > c.last) { c.last = t; c.n = 0; }
   return { t, sk: t - Date.now() };
 }
 export function setSkew(skew, serverNow) {
   if (!Number.isFinite(skew)) return;
   data.clock.skew = Math.round(skew);
-  if (Number.isFinite(serverNow)) data.clock.last = Math.max(data.clock.last, serverNow);
+  if (Number.isFinite(serverNow) && serverNow > data.clock.last) { data.clock.last = Math.floor(serverNow); data.clock.n = 0; }
   save();
 }
 
 export function byId(id) { return data.learners.find((l) => l.id === id) || null; }
+
+// her record as a bag left it (bag.js unpack): kept as it is, its stamps not made again, and the clock moved past
+// every stamp it holds; null when she is not on this phone
+export function adopt(id, record) {
+  const i = data.learners.findIndex((x) => x.id === id);
+  if (i < 0 || !record || typeof record !== 'object') return null;
+  stampAll();                                        // anything written before it keeps its own stamps
+  const { name, ...rest } = record;
+  const l = clean({ ...rest, id });
+  data.learners[i] = l;
+  for (const s of [...Object.values(l.st || {}), ...Object.values(l.gone || {})]) seenStamp(data.clock, s);
+  seenParts.set(id, parts(l));
+  seenTokens.set(id, tokensOf(l));
+  save();
+  return l;
+}
 
 // remove a learner from this phone: her record and her queued events go; her server record (if she joined) is
 // deleted when the server is next in reach (account.js)
@@ -569,7 +662,8 @@ export function markDone(lessonId, stars) {
   const c = child();
   if (!c) return;
   const old = c.done[lessonId];
-  c.done[lessonId] = { stars: Math.max(stars, old ? old.stars : 0), at: Date.now() };
+  // `at` on the stamps' clock: a step stamped before it, on any phone, is of the run this ends (bag.js merge)
+  c.done[lessonId] = { stars: Math.max(stars, old ? old.stars : 0), at: Math.max(stampMs(nextStamp(data.clock)), old ? old.at : 0) };
   delete c.step[lessonId];
   if (c.tries) delete c.tries[lessonId];
   save();
@@ -632,7 +726,7 @@ export function rememberPrint(lessonId, seed) {
 export function addAsk(entry) {
   const c = child();
   if (!c) return null;
-  const e = { k: rid(), ...entry };
+  const e = { k: rid(), ...entry, dev: data.clock.dev.slice(0, 8) };   // the phone that may send it (bag.js, 3.8)
   c.asks.push(e);
   c.asks = c.asks.slice(-30);
   save();
@@ -676,4 +770,4 @@ export function cache(key, value) {
 }
 
 // for tests: read storage again
-export function reload() { data = load(); return data; }
+export function reload() { data = loaded(load()); return data; }

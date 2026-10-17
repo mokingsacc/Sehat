@@ -1,0 +1,37 @@
+{
+  "about": "Vendored by tools/vendor_noble.py: the npm release's files, one import line patched (PATCHES)",
+  "packages": {
+    "@noble/ciphers": {
+      "version": "1.3.0",
+      "integrity": "sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==",
+      "dir": "noble-ciphers",
+      "patched": [],
+      "files": {
+        "LICENSE": "f36671a5487c9c5050efacb58011c37c24c55a889803cb036cf9d9a6347c1e2d",
+        "_arx.js": "d4c0112267f8b6f7d4de238edf87b19e60e373aa438c5400ebf189ed1e42f95c",
+        "_poly1305.js": "9c7e5aaa972f03d8ca7fe3aa41340b6d4d1ee1228d414634e25e1beb539ac69f",
+        "chacha.js": "ad0a9595ab6c083500fbb81c5ea14af4b79f57aa9b1a56b2d3ad738918865a9e",
+        "utils.js": "306e36d8c59519a289756f5775e2fc2faed9b02b6b60029a7c8e3e943522e441"
+      }
+    },
+    "@noble/hashes": {
+      "version": "1.8.0",
+      "integrity": "sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==",
+      "dir": "noble-hashes",
+      "patched": [
+        "utils.js"
+      ],
+      "files": {
+        "LICENSE": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec",
+        "_md.js": "cefb1557e7715cb2117c83f82ef3e3175c7e0391c80bd5795b2d4effc45fc582",
+        "_u64.js": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54",
+        "crypto.js": "9211d026c5d21e60e0126dd6f01150d87da5ba7261b8f468215c1264372ff5a5",
+        "hkdf.js": "4bdbfb687cfb409aaffb80a6223fc718bbab79ef083fd6191a6e063d68ddd16a",
+        "hmac.js": "a330af1af3fb00ebdbba2f023dd5e023aa367669081cd51c7d172eb499533d0b",
+        "pbkdf2.js": "dab190f2112ba5fdef75fe027aecc1183a79bad3cdffdf42014c40ecc75bbf78",
+        "sha2.js": "e729088b82e5450bff54c3a0013582aa42e1fe8f58dd31f5967f6ebe34c52299",
+        "utils.js": "6939d5778fbd4a10feb224e1b9158ea59fb160b59dcaa43ea2ebb49f85c3b4ce"
+      }
+    }
+  }
+}

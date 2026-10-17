@@ -173,9 +173,11 @@ await page.waitForURL((u) => u.pathname === '/app/', { timeout: 15000 }).catch((
 check(new URL(page.url()).pathname === '/app/', `/ opens /app/ for her (${new URL(page.url()).pathname})`);
 await hashIs('#/home').catch(() => {});
 // everything she had, as it was; since W4 her token, number, class and consent are her seat on this server, placed
-// under its id once it knew her token (WEBSITE.md 3.11)
+// under its id once it knew her token (WEBSITE.md 3.11); since W5 the app also keeps the stamps of what it wrote
+// (`st`; placing her seat stamps its consent), which the old tree had no use for
 const SEAT = ['token', 'number', 'cohort', 'code', 'consent', 'asked', 'sentBand'];
-const rest = (l) => JSON.stringify(Object.fromEntries(Object.entries(l).filter(([k]) => !SEAT.includes(k) && k !== 'seats')));
+const W5 = ['st', 'gone', 'dead'];
+const rest = (l) => JSON.stringify(Object.fromEntries(Object.entries(l).filter(([k]) => !SEAT.includes(k) && k !== 'seats' && !W5.includes(k))));
 const hubId = (await page.evaluate(() => fetch('/api/hello').then((r) => r.json()))).id;
 const placed = await until(async () => {
   const now = await learners();

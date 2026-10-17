@@ -222,6 +222,9 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
 - **W4, done:** seats and clocks: `hello.id` (migration 0020, `meta`) and `hello.now`; one seat per server in each
   learner, a token sent only to the server that issued it; pre-W4 learners placed where they last were; events
   with `to` and the clock's skew; `/api/me/merge` and `/api/me/token`.
+- **W5, done:** the school bag's core: every write stamped (`stamps.js`), the code, keys, seal and merge
+  (`bag.js`), `@noble/ciphers` and `@noble/hashes` vendored and pinned. Next, W6: the relay (`0021_bags.sql`, the
+  three routes, the pepper, retention).
 
 ## January 2027: buy and test
 

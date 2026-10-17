@@ -872,3 +872,65 @@ Where it differs, the builder's choices to confirm:
   phone knows which token to keep. An `other` the server does not know is taken as folded already (200).
 - The phone asks for a merge only when a seat holds a second token (`also`), which only W7's bag brings; W4 tests it
   with a stand-in.
+
+### W5: the school bag's core
+
+Built:
+- `app/js/stamps.js`, in the shell: the hybrid logical clock of 3.5. A stamp is one string,
+  `<ms, 9 base-36 digits>.<counter, 3>.<device, 8 hex>`, so two stamps compare as strings; `next` never stamps
+  before the latest stamp made or seen, and nothing caps a stamp. `parts()` names every stamped part of a learner
+  and `restamp()` stamps what a write changed. `state.js` `save()` runs it for every write (the screens did not
+  change): a changed part gets the next stamp, a removed question, question of her own or contest leaves a
+  tombstone (`gone`), a token that left her seats goes in `dead`, and nothing is stamped by loading, so a value from
+  before W5 stays the oldest. `adopt()` keeps a merged record without stamping it again and moves the clock past it.
+  `clock` gains `n`, the counter.
+- `app/js/bag.js`, loaded only when a bag is used (`sw.js` LAZY): `newCode` (15 digits from
+  `crypto.getRandomValues`, bytes 250 to 255 skipped so no digit is likelier, and the Damm check digit), `readCode`
+  (Persian, Arabic-Indic or Latin digits, spaces, dashes and the isolate marks), `showCode`, `groups`, `qrText` and
+  `fromQr`; `keys` (`{k, f, w}`) and `forRelay` (`{f, w}` for one `hello.id`); `seal`, `open` and `sealFitted`;
+  `pack` (her learner as a bag record), `merge`, `unpack` (a record laid over her learner) and `writable`.
+- The vendored crypto: `@noble/ciphers` 1.3.0 (XChaCha20-Poly1305) and `@noble/hashes` 1.8.0 (PBKDF2, HKDF, HMAC,
+  SHA-256), the release files as they are in `app/js/vendor/`, with `noble.json` (each file's sha256 and the
+  tarball's sha512). `tools/vendor_noble.py --check` fetches both tarballs in CI, checks the registry's sha512 and
+  compares every file. The credits name both (MIT).
+- `app/tests/bag.test.js`: the XChaCha draft's vector; PBKDF2 and HKDF against OpenSSL (RFC 7914, RFC 5869); the
+  bag's keys, relay keys and a sealed blob for a fixed code and nonce, worked out separately in Python with OpenSSL;
+  the browser's PBKDF2 and the vendored one agree; a wrong key, another bag's F, any changed byte or a cut blob is
+  refused. Every single wrong digit and every swap of two neighbours is refused. The merge over 400 random triples
+  of records (clocks in 2010, 2026 and 2030, small caps so they bite, tombstones, dead tokens, a newer app's
+  parts) is commutative, associative and idempotent. A newer app's parts are kept and its bag is never written.
+  Two phones, one of them in 2010 and later one in 2030: a write on the 2010 phone still wins over what it had
+  seen, a phone running ahead wins only until the others have seen its stamps, a token dead on one phone never
+  comes back, and both phones end with the same record.
+
+Measured:
+- A full record (400 lessons done, 300 marks, 300 review items, 300 printed sheets, 30 questions and 50 of her own
+  at 120 characters a text, 50 certificates, a plan, a lock, a seat): 120 KB of JSON, 19.5 KB sealed. At the
+  longest texts allowed (300 characters): 28.7 KB sealed. Both under 64 KB.
+- PBKDF2 at 100 000 rounds with HKDF (`tools/bag_timing.mjs`, Chromium on the build machine): `crypto.subtle`
+  about 20 ms at every CPU slowdown (it runs outside the page's thread); the vendored one 0.23 s, 1.0 s with the CPU
+  slowed 4 times and 1.45 s slowed 6 times. Not yet timed on the slowest pilot phone (W10); 100 000 rounds kept.
+
+Where it differs, the builder's choices to confirm:
+- `done.at` is now written on the stamps' clock (the phone's time corrected by the server's), so a step on another
+  phone can be compared with the finish.
+- `tries` travel as a set of first tries per question (each with its stamp), and the phone reads the earliest after
+  the lesson's last finish. Keeping only the earliest would make the merge depend on the order copies meet in.
+- The caps in the bag keep the newest by stamp, tombstones counted (a removed question holds its place until 30
+  newer changes push it out); only that keeps the merge associative. The phone keeps its own caps, as before.
+- The bag carries only seats of servers with an id: the unplaced seat and a pre-W4 server's (`b:<address>`) stay on
+  the phone. All her tokens for one server travel; the oldest (by `joined`) is used and the rest wait in `also` for
+  `/api/me/merge`. Dead tokens travel too (up to 50 kept on a phone).
+- `lockOffered`, `floorSeen` and `liveSeen` travel as settings and `contests` as items with tombstones; 3.8 does
+  not name them.
+- A question carries the phone that queued it (`dev`), and `outbox.js` sends only this phone's; "Send again" makes
+  it this phone's.
+- Deflate is the zlib format (`CompressionStream('deflate')`, Chrome 80, Safari 16.4), not the raw one (Chrome 103).
+  A phone without `DecompressionStream` cannot open a deflated bag (`BagError('inflate')`): W7 should say so, and if
+  a pilot phone is one of them, a small inflater can be vendored. Without `CompressionStream` a full record does not
+  fit: `sealFitted` trims the bag copy (retired review items first, then review items, marks, printed sheets, her
+  own questions and questions), never the phone; lessons done, stars, seats and settings always travel.
+- The plaintext starts with a flag byte and the body's length, then the padding; one import line of
+  `@noble/hashes` (`'@noble/hashes/crypto'` to `'./crypto.js'`) is patched, recorded in `noble.json`.
+- PBKDF2 uses `crypto.subtle` where the page has it (the same bytes; tested) and the vendored one on the hub's
+  plain http.

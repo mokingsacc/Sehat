@@ -65,6 +65,7 @@ async function sendAsks(id) {
   for (const a of [...(state.byId(id) || {}).asks || []]) {
     const l = state.byId(id);
     if (!l || !hub.online()) return;
+    if (!state.mine(a)) continue;                    // queued on her other phone (her bag, W5): sent from there only
     if (a.queued && stale(a)) { state.updateAskOf(id, a.k, { queued: false, notSent: true }); continue; }
     if (a.queued) {
       if (!l.consent || (hub.home() === 'online' && !l.token)) continue;      // her join goes first
@@ -124,7 +125,7 @@ function sent(id) {
 
 // "Send again" and "Try again": back in the queue, as if asked now
 export function again(id, k) {
-  state.updateAskOf(id, k, { queued: true, notSent: false, failed: false, at: Date.now() });
+  state.updateAskOf(id, k, { queued: true, notSent: false, failed: false, at: Date.now(), dev: state.device() });
   changed();
   return flush();
 }

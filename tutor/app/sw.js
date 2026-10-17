@@ -7,7 +7,7 @@
 // the site's root (/audio/), shared with the website's speakers; the site's own worker at /sw.js keeps the website and
 // shares media-v1 and quran-v1 with this one. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-w4-1';     // a new name installs the whole shell at once: W4's state.js, hub.js and account.js go together
+const VERSION = 'qalam-w5-1';     // a new name installs the whole shell at once: W5's state.js and stamps.js go together
 const SHELL_CACHE = 'app-shell-' + VERSION;      // not shell-*: the site's worker deletes the old root worker's cache
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const QURAN_CACHE = 'quran-v1';                // P29: each surah and verse recitation once opened, never all at once
@@ -16,9 +16,14 @@ const BASE = new URL('./', self.location).pathname;   // /app/ online and on the
 // they are first asked for instead (below, like any app file): the Quran's Amiri and the Chinese subset, which only
 // those lessons draw; each language's voice manifest, which speech.js asks for in her own language only; and the
 // bells, which the school day fetches at her first tap while it is on (timetable.js unlockOnFirstTap), so they still
-// ring offline.
+// ring offline; and the school bag's code and its vendored crypto (W5), loaded only when her bag is used.
 const LAZY = ['fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2', '/audio/en/manifest.json', '/audio/prs/manifest.json',
-  '/audio/ps/manifest.json', '/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus'];
+  '/audio/ps/manifest.json', '/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus',
+  'js/bag.js', 'js/vendor/noble-ciphers/chacha.js', 'js/vendor/noble-ciphers/_arx.js',
+  'js/vendor/noble-ciphers/_poly1305.js', 'js/vendor/noble-ciphers/utils.js', 'js/vendor/noble-hashes/pbkdf2.js',
+  'js/vendor/noble-hashes/hkdf.js', 'js/vendor/noble-hashes/hmac.js', 'js/vendor/noble-hashes/sha2.js',
+  'js/vendor/noble-hashes/_md.js', 'js/vendor/noble-hashes/_u64.js', 'js/vendor/noble-hashes/utils.js',
+  'js/vendor/noble-hashes/crypto.js'];
 const SHELL = [
   './',
   'index.html',
@@ -52,6 +57,7 @@ const SHELL = [
   'js/sheetcode.js',
   'js/speak.js',
   'js/speech.js',
+  'js/stamps.js',
   'js/state.js',
   'js/ui.js',
   'js/voicepack.js',

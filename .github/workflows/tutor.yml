@@ -34,6 +34,8 @@ jobs:
         run: for f in app/js/*.js app/js/screens/*.js app/js/modules/*.js app/js/review/*.js app/js/teacher/*.js app/js/admin/*.js app/js/staff/*.js app/js/staff/strings/*.js site/js/*.js; do node --input-type=module --check < "$f" || exit 1; done
       - name: App tests
         run: node --test app/tests/*.test.js
+      - name: The school bag's vendored crypto is the pinned releases (fetched from npm, sha512 checked)
+        run: python3 tools/vendor_noble.py --check
       - name: Staff strings
         run: node tools/check_staff_strings.mjs
   site:

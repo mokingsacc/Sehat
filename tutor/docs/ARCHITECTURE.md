@@ -443,6 +443,17 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   the older (every `token_hash` table, `stores/base.py` `TOKEN_TABLES`, checked against the migrations by
   `test_seats.py`; daily counts summed; 409 across classes); `POST /api/me/token` gives her record a new token.
   Both are 5 a day per token.
+- **The school bag's core (W5, WEBSITE.md 3.5, 3.6 and 3.8):** every write to a learner is stamped: `state.js`
+  `save()` compares her record with the one it last saw and gives each changed part (a setting, a lesson's step or
+  first try, a mark, a review item, a printed sheet, a university tick, a question, one of her own questions, a
+  contest, a seat's consent) the next stamp of a hybrid logical clock (`stamps.js`: `[ms, counter, device]` as one
+  fixed-width string, never before the latest stamp made or seen). Removed questions leave tombstones (`gone`) and
+  tokens that left her seats are kept as `dead`. `bag.js` (loaded only when a bag is used) makes the 16-digit code
+  with its Damm check, the keys (PBKDF2 100 000 rounds in `crypto.subtle` or the vendored `@noble/hashes`; HKDF;
+  HMAC per relay), seals the record with the vendored `@noble/ciphers` XChaCha20-Poly1305 (deflated, padded to the
+  KB, at most 64 KB), and merges two records by the rules of 3.8, each a join; `state.adopt()` keeps a merged
+  record without stamping it again. The relay (W6) and the screens (W7) are still to come. `tools/vendor_noble.py`
+  vendors the two packages from npm and CI checks them against the pinned sha512.
 
 ## Privacy
 

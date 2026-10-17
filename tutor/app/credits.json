@@ -14,6 +14,11 @@
     {"name": "School-day bells", "owner": "Qalam", "licence": "CC0 1.0 (public domain)",
      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/", "url": null}
   ],
-  "code": [],
+  "code": [
+    {"name": "@noble/ciphers 1.3.0", "owner": "Paul Miller", "licence": "MIT License",
+     "licence_url": "https://opensource.org/license/mit", "url": "https://github.com/paulmillr/noble-ciphers"},
+    {"name": "@noble/hashes 1.8.0", "owner": "Paul Miller", "licence": "MIT License",
+     "licence_url": "https://opensource.org/license/mit", "url": "https://github.com/paulmillr/noble-hashes"}
+  ],
   "voices": {"prs": {"credit": null}, "ps": {"credit": null}, "en": {"credit": null}}
 }
