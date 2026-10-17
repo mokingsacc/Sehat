@@ -736,6 +736,25 @@ details.credit[open] summary { margin-bottom: 8px; }
 .plan-added { flex: 1 0 100%; gap: 8px; align-items: center; color: var(--warm-ink); font-weight: 700; }
 
 
+/* the staff pages' header and language picker (P33, C5.1): the learner's segmented picker in the staff tokens; at
+   760 px and above it sits in the header's row, under 760 px on its own row under the title (the teacher's: title
+   and Sign out, then her class and the picker, then the tabs). The draft line closes every staff page. */
+.staff-top { flex-wrap: wrap; row-gap: 8px; }
+.staff-top .brk { display: none; }
+.staff-langs { margin: 0; width: auto; min-width: 16rem; flex: 0 0 auto; }
+.staff-langs button { min-height: 40px; font-size: var(--fs); padding: 0 10px; }
+.staff-top .who { max-width: 100%; min-width: 0; overflow-wrap: anywhere; white-space: normal; }
+.staff-top select.who { font: inherit; color: var(--ink); background: var(--card); border: 2px solid var(--line-strong); border-radius: 12px; min-height: 44px; padding: 0 10px; }
+.staff-draft { text-align: center; padding: 16px; margin: 0; }
+@media (max-width: 759px) {
+  .staff-top > .grow { order: 1; flex: 1 1 0; }
+  .staff-top > .round { order: 0; }
+  .staff-top > .signout, .staff-top > button.chip:last-child { order: 2; }
+  .staff-top .brk { display: block; order: 3; flex: 0 0 100%; height: 0; }
+  .staff-top > .who, .staff-top > .chip:not(.signout) { order: 4; }
+  .staff-top > .staff-langs { order: 5; flex: 1 1 14rem; min-width: 0; }
+}
+
 /* the admin panel (P21, /admin/): a staff page in the clean look, adult tone; laptop first (1366 x 768) with the menu
    on the start side; under 760 px the menu is a select at the top. Tables scroll inside their box, never the page. */
 .admin { max-width: 1280px; margin: 0 auto; min-height: 100vh; padding-bottom: 32px; }

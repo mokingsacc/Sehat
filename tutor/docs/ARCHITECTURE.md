@@ -658,7 +658,12 @@ C3.5 and DESIGN-C2C3-SPECS item 14; typed only in 2027 (browser speech input wou
 Staff pages live on their own paths, apart from the learner app, so Cloudflare Access can guard them online (C3.2):
 `/review/` (`app/review/index.html`, `app/js/review/review.js`), `/teacher/` (`app/teacher/index.html`,
 `app/js/teacher/teacher.js`, P20), `/admin/` (`app/admin/index.html`, `app/js/admin/admin.js`, P21). The learner
-app's service worker leaves them alone, and they keep nothing in the browser.
+app's service worker leaves them alone, and they keep nothing in the browser but one choice: since P33 (C5.1) the
+staff language, in `localStorage` `qalam.staff.lang`, never on a staff row. `app/js/staff/lang.js` loads
+`app/js/staff/strings/<lang>.js` (`en` always, `prs` and `ps` when picked; a missing key shows its English), sets
+`<html lang dir>`, and gives `t()`, `num()`, `money()`, `date()` (Solar Hijri in Dari and Pashto, with the
+certificate's month names; `cert.hijri_date()` is the Python copy and `hub/tests/hijri_dates.json` tests both),
+`when()`, `join()`, `and()` and the picker. `tools/check_staff_strings.mjs` runs in CI.
 
 - **The gate** (`staff.py`, one per host). On the hub, the teacher's PIN. Online, Cloudflare Access: the Worker
   checks the `Cf-Access-Jwt-Assertion` token itself (RS256 against the team's published keys, in plain Python;

@@ -16,7 +16,7 @@ rm -rf "$OUT"
 mkdir -p "$OUT"
 cp -R "$WEB/." "$OUT/"
 rm -rf "$OUT/tests" "$OUT/admin" "$OUT/teacher" "$OUT/review" "$OUT/get" \
-       "$OUT/js/admin" "$OUT/js/teacher" "$OUT/js/review" "$OUT/js/get.js"
+       "$OUT/js/admin" "$OUT/js/teacher" "$OUT/js/review" "$OUT/js/staff" "$OUT/js/get.js"
 find "$OUT" -name '.*' -type f -delete
 find "$OUT" -name '__pycache__' -type d -prune -exec rm -rf {} +
 

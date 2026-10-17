@@ -15,6 +15,7 @@
 - `/v/<id>` is a plain page (`check_page`) whose script asks `GET /api/cert/<id>`.
 The Dari and Pashto words here are drafts for a native speaker's check.
 """
+from datetime import date
 from html import escape as esc
 
 from . import graph, qr
@@ -49,10 +50,55 @@ def word(key: str, lang: str, **kw) -> str:
     return digits_to_fa(t) if lang in ("prs", "ps") else t
 
 
+# the 33-year leap rules' break years (C5.1 item 8): with them the arithmetic matches the astronomical calendar Iran
+# and Afghanistan keep for these centuries. The JavaScript copy is the staff pages' lang.js; one table of known days
+# (tests/hijri_dates.json) tests both.
+_BREAKS = (-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178)
+
+
+def _div(a: int, b: int) -> int:
+    return int(a / b)
+
+
+def _mod(a: int, b: int) -> int:
+    return a - int(a / b) * b
+
+
+def nowruz(jy: int) -> int:
+    """The day of March on which Solar Hijri year `jy` begins (Hamal 1)."""
+    gy, leap_j, jp, jump = jy + 621, -14, _BREAKS[0], 0
+    for jm in _BREAKS[1:]:
+        jump = jm - jp
+        if jy < jm:
+            break
+        leap_j += _div(jump, 33) * 8 + _div(_mod(jump, 33), 4)
+        jp = jm
+    n = jy - jp
+    leap_j += _div(n, 33) * 8 + _div(_mod(n, 33) + 3, 4)
+    if _mod(jump, 33) == 4 and jump - n == 4:
+        leap_j += 1
+    leap_g = _div(gy, 4) - _div((_div(gy, 100) + 1) * 3, 4) - 150
+    return 20 + leap_j - leap_g
+
+
+def hijri_date(day: date) -> tuple[int, int, int]:
+    """(Solar Hijri year, month 1 to 12, day) of a Gregorian day: Hamal first, six months of 31 days, five of 30, Hut
+    29 or 30."""
+    jy = day.year - 621
+    start = date(day.year, 3, nowruz(jy))
+    if day < start:
+        jy -= 1
+        start = date(day.year - 1, 3, nowruz(jy))
+    k = (day - start).days
+    if k < 186:
+        return jy, k // 31 + 1, k % 31 + 1
+    return jy, 7 + (k - 186) // 30, (k - 186) % 30 + 1
+
+
 def hijri(month: str) -> tuple[int, int]:
     """(Solar Hijri year, month 1 to 12) holding the 10th of a Gregorian month "YYYY-MM"."""
-    y, m = int(month[:4]), int(month[5:7])
-    return (y - 621 if m >= 4 else y - 622), (m - 4) % 12 + 1
+    y, m, _ = hijri_date(date(int(month[:4]), int(month[5:7]), 10))
+    return y, m
 
 
 def month_label(month: str, lang: str) -> str:

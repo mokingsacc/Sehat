@@ -186,6 +186,11 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   `/v/<id>`, which says whether a certificate is real. On the hub the printer prints it with an empty line. 7a
   (C4.9): photo marking for `open` waits for the pilot's four numbers in the admin's hands, with five reads a day a
   learner there (ten elsewhere); Ask and Homework help stay off in `open` in 2027.
+- **P33, done:** the staff pages (admin, teacher, review, their PIN and Access screens included) in English, Dari
+  and Pashto (C5.1): one string file per language in `app/js/staff/strings/`, one `lang.js`, the learner app's
+  three-way picker in the header, remembered in this browser only; right to left with Persian digits and Solar Hijri
+  dates in Dari and Pashto; "Draft translation" until a native speaker signs each file; `check_staff_strings.mjs` and
+  `staff_check.mjs`.
 
 ## January 2027: buy and test
 

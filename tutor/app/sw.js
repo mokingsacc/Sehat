@@ -118,8 +118,8 @@ self.addEventListener('fetch', (e) => {
     return;
   }
   if (url.pathname.startsWith('/api/')) return;                        // the network, or the app's own fallback
-  // staff pages and their scripts: never kept (/review/ P17, /teacher/ P20, /admin/ P21)
-  if (/^\/(review|teacher|admin|js\/review|js\/teacher|js\/admin)\//.test(url.pathname) || url.searchParams.has('preview')) return;
+  // staff pages and their scripts: never kept (/review/ P17, /teacher/ P20, /admin/ P21, their strings P33)
+  if (/^\/(review|teacher|admin|js\/review|js\/teacher|js\/admin|js\/staff)\//.test(url.pathname) || url.searchParams.has('preview')) return;
   if (url.pathname.startsWith('/get/')) return;                         // the download page and the APK (P23): never kept
   if (url.pathname.startsWith('/v/')) return;                           // a certificate's check page (P25b): the server's
   if (req.mode === 'navigate') {                                       // /, /?join=CODE, /#/...: the app's page

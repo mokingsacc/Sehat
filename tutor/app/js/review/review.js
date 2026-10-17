@@ -16,74 +16,20 @@
 // Since P28 (C4.6) a pack's card set is one more: its checklist and each link card, OK on a card only once its page
 // has been opened from here, then "Hold to sign".
 
+import * as L from '../staff/lang.js';
+
 const API = '../api/m/review';
 const BAND_OF_YEAR = (y) => (y === 0 ? 'ey' : y <= 3 ? 'p1' : y <= 6 ? 'p2' : y <= 9 ? 's1' : 's2');
 const LANG_OF_ROLE = { 'Dari reader': 'prs', 'Pashto reader': 'ps' };
 const CHIPS = ['spelling', 'word', 'maths', 'picture', 'audio', 'too_hard', 'unsafe'];
 const HOLD_MS = 3000;
 
-// English, and Dari drafts for a native speaker's check
-const T = {
-  en: {
-    title: 'Review', sign_out: 'Sign out', loading: 'Loading…', connect: 'Connect to review.', off: 'Review is not open here.',
-    access: 'Sign in through Cloudflare Access, then open this page again.', not_staff: 'Ask the admin to add you.',
-    pin: "Teacher's PIN", open: 'Open', wrong_pin: 'That PIN is not right.', role: 'I review as', initials: 'My initials',
-    for_you: 'Lessons for you', none: 'No lesson needs your role.', not_started: 'Not started', step_of: 'Step {a} of {b}',
-    changes: 'Changes asked', signed: 'Signed', changed: 'Changed since you signed', back: 'Back',
-    play: 'Play the recording', no_rec: 'No recording yet', ok: 'OK', change: 'Change', next: 'Next',
-    next_changed: 'Next changed step', ok_last: 'OK last time', changed_tag: 'changed', comment: 'Comment (no names)',
-    whole: 'Worksheet, cards and sources', sheet: 'The worksheet', open_sheet: 'Open the sheet', key: 'The key and its hints',
-    cards: 'Link cards', sources: 'Sources', nothing: 'None', sign: 'Sign this lesson', hold: 'Hold to sign',
-    send: 'Send my changes', sent: 'Your changes are sent.', done_sign: 'Signed. Thank you.', save_fail: "Couldn't save. Try again.",
-    play_first: 'Play the recording first.', blocked: 'Steps without a recording cannot be signed yet.',
-    todo: 'Every step needs OK before signing.', short: 'Hash', date: 'Date', lang: 'Language',
-    chip_spelling: 'Spelling', chip_word: 'Afghan word', chip_maths: 'Maths', chip_picture: 'Picture',
-    chip_audio: 'Audio', chip_too_hard: 'Too hard', chip_unsafe: 'Unsafe',
-    graphs: 'Skills graphs', graph_of: 'Skills graph: {s}', node_needs: 'Needs', node_lessons: 'Lessons', nodes_n: '{n} skills',
-    pathways: 'Pathways', certificate: 'with a certificate', final: 'Last lesson', no_lessons: 'No lesson yet',
-    sign_graph: 'Sign this graph', todo_graph: 'Every skill and the pathways need OK before signing.', save_note: 'Save',
-    quran: 'The Quran set', quran_of: 'The Quran set {h}', surahs_n: '{n} surahs', set_what: 'What the set is',
-    open_surah: 'Open the surah', play_all: 'Play every verse', heard: '{a} of {b} recitations played',
-    sign_set: 'Sign the Quran set', todo_set: 'Every surah and the set itself need OK before signing.',
-    no_tr: 'No translation', notes_n: 'Notes ({n})',
-    card_sets: 'Card sets', cards_of: 'Cards: {p}', items_n: '{n} items', checklist: 'The checklist',
-    open_page: 'Open the page', open_first: 'Open the page first, and check it says what the card says.',
-    kind: 'Kind', cost: 'Cost', who: 'Who may apply', checked: 'Checked', review_by: 'Hidden after',
-    expired: 'Past its date: hidden on phones', step_opens: 'opens {s}',
-    sign_cards: 'Sign this card set', todo_cards: 'Every card and the checklist need OK before signing.',
-  },
-  prs: {
-    title: 'بررسی', sign_out: 'خروج', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
-    access: 'از راه Cloudflare Access وارد شو و این صفحه را دوباره باز کن.', not_staff: 'از مدیر بخواه تو را اضافه کند.',
-    pin: 'رمز معلم', open: 'باز کن', wrong_pin: 'این رمز درست نیست.', role: 'نقش من', initials: 'حروف اول نام من',
-    for_you: 'درس‌ها برای تو', none: 'هیچ درسی به نقش تو نیاز ندارد.', not_started: 'شروع نشده', step_of: 'قدم {a} از {b}',
-    changes: 'تغییر خواسته شده', signed: 'امضا شده', changed: 'بعد از امضای تو تغییر کرده', back: 'برگشت',
-    play: 'صدا را بشنو', no_rec: 'هنوز صدا ثبت نشده', ok: 'درست است', change: 'تغییر', next: 'بعدی',
-    next_changed: 'قدم تغییرکردهٔ بعدی', ok_last: 'دفعهٔ قبل درست بود', changed_tag: 'تغییر کرده', comment: 'نظر (بدون نام)',
-    whole: 'ورق کار، کارت‌ها و منبع‌ها', sheet: 'ورق کار', open_sheet: 'ورق را باز کن', key: 'جواب‌ها و راهنمایی‌ها',
-    cards: 'کارت‌های پیوند', sources: 'منبع‌ها', nothing: 'هیچ', sign: 'این درس را امضا کن', hold: 'نگه دار تا امضا شود',
-    send: 'تغییرهایم را بفرست', sent: 'تغییرهای تو فرستاده شد.', done_sign: 'امضا شد. تشکر.', save_fail: 'ذخیره نشد. دوباره کوشش کن.',
-    play_first: 'اول صدا را بشنو.', blocked: 'قدم‌های بی‌صدا هنوز امضا نمی‌شوند.',
-    todo: 'پیش از امضا هر قدم باید درست باشد.', short: 'هش', date: 'تاریخ', lang: 'زبان',
-    chip_spelling: 'املا', chip_word: 'کلمهٔ افغانی', chip_maths: 'ریاضی', chip_picture: 'تصویر',
-    chip_audio: 'صدا', chip_too_hard: 'خیلی سخت', chip_unsafe: 'ناامن',
-    graphs: 'نقشه‌های مهارت', graph_of: 'نقشهٔ مهارت: {s}', node_needs: 'پیش از آن', node_lessons: 'درس‌ها', nodes_n: '{n} مهارت',
-    pathways: 'راه‌ها', certificate: 'با تصدیق‌نامه', final: 'درس آخر', no_lessons: 'هنوز درسی نیست',
-    sign_graph: 'این نقشه را امضا کن', todo_graph: 'پیش از امضا هر مهارت و راه‌ها باید درست باشند.', save_note: 'ذخیره',
-    quran: 'مجموعهٔ قرآن', quran_of: 'مجموعهٔ قرآن {h}', surahs_n: '{n} سوره', set_what: 'این مجموعه چیست',
-    open_surah: 'سوره را باز کن', play_all: 'همهٔ آیه‌ها را بشنو', heard: '{a} از {b} تلاوت شنیده شد',
-    sign_set: 'مجموعهٔ قرآن را امضا کن', todo_set: 'پیش از امضا هر سوره و خود مجموعه باید درست باشند.',
-    no_tr: 'ترجمه نیست', notes_n: 'یادداشت‌ها ({n})',
-    card_sets: 'مجموعه‌های کارت', cards_of: 'کارت‌ها: {p}', items_n: '{n} مورد', checklist: 'فهرست قدم‌ها',
-    open_page: 'صفحه را باز کن', open_first: 'اول صفحه را باز کن و ببین که همان چیزی را می‌گوید که کارت می‌گوید.',
-    kind: 'نوع', cost: 'هزینه', who: 'چه کسی', checked: 'بررسی شده', review_by: 'پنهان بعد از',
-    expired: 'تاریخش گذشته: روی تلفن‌ها پنهان است', step_opens: '{s} را باز می‌کند',
-    sign_cards: 'این مجموعهٔ کارت را امضا کن', todo_cards: 'پیش از امضا هر کارت و فهرست قدم‌ها باید درست باشند.',
-  },
-};
-
-let ui = 'en';
-const t = (k, v = {}) => (T[ui][k] ?? T.en[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? '');
+// Strings: the staff pages' string files (app/js/staff/strings/, P33, C5.1): review.* and the shared common.*;
+// English, Dari and Pashto, picked in the header and remembered in this browser. The lesson itself shows in the
+// reviewer's language (a Dari or Pashto reader's own), not the page's.
+const t = (k, v) => L.t(k.includes('.') ? k : L.has('review.' + k) ? 'review.' + k : 'common.' + k, v);
+const num = (n) => L.num(n);
+const roleWord = (r) => L.word('role', r);
 const pick = (x, lang) => (x && typeof x === 'object' ? x[lang] || x.prs || x.en || '' : x || '');
 
 function h(tag, attrs = {}, ...kids) {
@@ -102,21 +48,18 @@ const root = document.getElementById('review');
 const me = { pin: '', role: '', initials: '', via: null, roles: [] };      // this page's memory only
 const put = (el, ...kids) => el.replaceChildren(...kids.flat(Infinity).filter((k) => k !== null && k !== undefined && k !== false));
 const show = (...kids) => put(root, ...kids);
-const say = (msg) => show(h('div', { class: 'screen' }, top(), h('p', { class: 'empty' }, msg)));
+const say = (msg) => show(h('div', { class: 'screen' }, top(), h('p', { class: 'empty' }, msg), L.draftNote(h)));
 
-function setUi(lang) {
-  ui = lang === 'prs' ? 'prs' : 'en';
-  document.documentElement.lang = ui === 'prs' ? 'fa-AF' : 'en';
-  document.documentElement.dir = ui === 'prs' ? 'rtl' : 'ltr';
-}
-
+// the header: back, the title, the language picker (its own row on a phone) and Sign out; a new language draws the
+// page again from the queue (or the PIN screen)
+let redraw = () => start();
 function top(back, title) {
-  return h('header', { class: 'top' },
-    back ? h('button', { type: 'button', class: 'round', 'aria-label': t('back'), onClick: back }, ui === 'prs' ? '→' : '←') : null,
+  return h('header', { class: 'top staff-top' },
+    back ? h('button', { type: 'button', class: 'round', 'aria-label': t('back'), onClick: back }, L.rtl() ? '→' : '←') : null,
     h('div', { class: 'grow' }, h('h1', {}, title || t('title'))),
-    h('button', { type: 'button', class: 'chip', onClick: () => { setUi(ui === 'en' ? 'prs' : 'en'); start(); } },
-      ui === 'en' ? 'دری' : 'English'),
-    me.via ? h('button', { type: 'button', class: 'chip', onClick: signOut }, t('sign_out')) : null);
+    me.via ? h('button', { type: 'button', class: 'chip signout', onClick: signOut }, t('sign_out')) : null,
+    h('span', { class: 'brk', 'aria-hidden': 'true' }),
+    L.picker(h, () => redraw()));
 }
 
 // as on the teacher and admin pages (C5 L8): Access's own sign-out online; on the hub the PIN, role and initials
@@ -152,11 +95,12 @@ function failed(e) {
 }
 
 function pinGate(wrong = false) {
-  const box = h('input', { type: 'password', inputmode: 'numeric', autocomplete: 'off', 'aria-label': t('pin') });
+  redraw = () => pinGate(wrong);
+  const box = h('input', { type: 'password', inputmode: 'numeric', autocomplete: 'off', 'aria-label': t('pin'), dir: 'ltr' });
   show(h('div', { class: 'screen' }, top(),
-    h('form', { class: 'card pad-card stack', onSubmit: (e) => { e.preventDefault(); me.pin = box.value.trim(); start(); } },
+    h('form', { class: 'card pad-card stack', onSubmit: (e) => { e.preventDefault(); me.pin = L.latin(box.value).trim(); start(); } },
       h('label', {}, t('pin')), box, wrong && me.pin ? h('p', { class: 'muted' }, t('wrong_pin')) : null,
-      h('button', { class: 'btn primary', type: 'submit' }, t('open')))));
+      h('button', { class: 'btn primary', type: 'submit' }, t('open'))), L.draftNote(h)));
 }
 
 async function start() {
@@ -173,7 +117,8 @@ async function start() {
 
 // on the hub: which role she signs for, and her initials (kept in memory only)
 function pickRole() {
-  const role = h('select', { 'aria-label': t('role') }, me.roles.map((r) => h('option', { value: r, selected: r === me.role }, r)));
+  redraw = pickRole;
+  const role = h('select', { 'aria-label': t('role') }, me.roles.map((r) => h('option', { value: r, selected: r === me.role }, roleWord(r))));
   const ini = h('input', { maxlength: 4, autocomplete: 'off', value: me.initials, 'aria-label': t('initials'), dir: 'ltr' });
   show(h('div', { class: 'screen' }, top(),
     h('form', { class: 'card pad-card stack', onSubmit: (e) => {
@@ -181,37 +126,38 @@ function pickRole() {
       const v = ini.value.trim().toUpperCase();
       if (!/^[A-Z]{1,4}$/.test(v)) { ini.focus(); return; }
       me.role = role.value; me.initials = v; queue();
-    } }, h('label', {}, t('role')), role, h('label', {}, t('initials')), ini, h('button', { class: 'btn primary', type: 'submit' }, t('open')))));
+    } }, h('label', {}, t('role')), role, h('label', {}, t('initials')), ini, h('button', { class: 'btn primary', type: 'submit' }, t('open'))), L.draftNote(h)));
 }
 
 const TAG = { not_started: '', step: '', changes: 'tag warm', signed: 'tag good', changed: 'tag warm' };
 
 async function queue() {
+  redraw = queue;
   let q;
   try { q = await api('/queue'); } catch (e) { return failed(e); }
-  const lang = LANG_OF_ROLE[q.role] || ui;
+  const lang = LANG_OF_ROLE[q.role] || L.lang();
   const row = (l) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); lesson(l.id); } },
     h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(l.title, lang)), h('small', { class: 'muted', dir: 'ltr' }, l.code || l.id)),
-    h('span', { class: TAG[l.status] || 'tag' }, l.status === 'step' ? t('step_of', { a: l.step, b: l.of }) : t(l.status)));
+    h('span', { class: TAG[l.status] || 'tag' }, l.status === 'step' ? t('step_of', { a: num(l.step), b: num(l.of) }) : t(l.status)));
   const rows = q.packs.flatMap((p) => [
     h('div', { class: 'section-head' }, h('h2', {}, pick(p.title, lang) || p.pack)),
     h('nav', { class: 'subjects' }, p.lessons.map(row))]);
   const graphs = (q.graphs || []).length ? [h('div', { class: 'section-head' }, h('h2', {}, t('graphs'))),
     h('nav', { class: 'subjects' }, q.graphs.map((g) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); graphPage(g.subject); } },
-      h('span', { class: 'grow' }, h('b', { dir: 'ltr' }, g.subject), h('small', { class: 'muted' }, t('nodes_n', { n: g.nodes }), ' · ', h('span', { dir: 'ltr' }, g.version))),
-      h('span', { class: TAG[g.status] || 'tag' }, g.status === 'step' ? t('step_of', { a: g.step, b: g.of }) : t(g.status)))))] : [];
+      h('span', { class: 'grow' }, h('b', { dir: 'ltr' }, g.subject), h('small', { class: 'muted' }, t('nodes_n', { n: num(g.nodes) }), ' · ', h('span', { dir: 'ltr' }, g.version))),
+      h('span', { class: TAG[g.status] || 'tag' }, g.status === 'step' ? t('step_of', { a: num(g.step), b: num(g.of) }) : t(g.status)))))] : [];
   const qs = q.quran ? [h('div', { class: 'section-head' }, h('h2', {}, t('quran'))),
     h('nav', { class: 'subjects' }, h('a', { href: '#', onClick: (e) => { e.preventDefault(); quranPage(); } },
-      h('span', { class: 'grow' }, h('b', {}, t('quran')), h('small', { class: 'muted' }, t('surahs_n', { n: q.quran.surahs }), ' · ',
+      h('span', { class: 'grow' }, h('b', {}, t('quran')), h('small', { class: 'muted' }, t('surahs_n', { n: num(q.quran.surahs) }), ' · ',
         h('span', { dir: 'ltr' }, q.quran.short))),
-      h('span', { class: TAG[q.quran.status] || 'tag' }, q.quran.status === 'step' ? t('step_of', { a: q.quran.step, b: q.quran.of }) : t(q.quran.status))))] : [];
+      h('span', { class: TAG[q.quran.status] || 'tag' }, q.quran.status === 'step' ? t('step_of', { a: num(q.quran.step), b: num(q.quran.of) }) : t(q.quran.status))))] : [];
   const cs = (q.cards || []).length ? [h('div', { class: 'section-head' }, h('h2', {}, t('card_sets'))),
     h('nav', { class: 'subjects' }, q.cards.map((x) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); cardsPage(x.pack); } },
-      h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(x.title, lang) || x.pack), h('small', { class: 'muted' }, t('items_n', { n: x.items }))),
-      h('span', { class: TAG[x.status] || 'tag' }, x.status === 'step' ? t('step_of', { a: x.step, b: x.of }) : t(x.status)))))] : [];
+      h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(x.title, lang) || x.pack), h('small', { class: 'muted' }, t('items_n', { n: num(x.items) }))),
+      h('span', { class: TAG[x.status] || 'tag' }, x.status === 'step' ? t('step_of', { a: num(x.step), b: num(x.of) }) : t(x.status)))))] : [];
   show(h('div', { class: 'screen' }, top(null, t('for_you')),
-    h('p', { class: 'pad muted small' }, `${t('role')}: ${q.role}`),
-    rows.length || graphs.length || qs.length || cs.length ? [rows, graphs, qs, cs] : h('p', { class: 'empty' }, t('none'))));
+    h('p', { class: 'pad muted small' }, t('role_line', { r: roleWord(q.role) })),
+    rows.length || graphs.length || qs.length || cs.length ? [rows, graphs, qs, cs] : h('p', { class: 'empty' }, t('none')), L.draftNote(h)));
 }
 
 // a hold-to-sign button: `run` after HOLD_MS held down
@@ -226,10 +172,11 @@ function holdButton(disabled, run) {
 
 // one skills graph (P25a): its nodes as items 1 to N, its pathways as item 0; each verdict is saved when given
 async function graphPage(sub) {
+  redraw = () => graphPage(sub);
   let d;
   try { d = await api('/graphs/' + encodeURIComponent(sub)); } catch (e) { return failed(e); }
   const G = d.graph;
-  const lang = LANG_OF_ROLE[d.role] || ui;
+  const lang = LANG_OF_ROLE[d.role] || L.lang();
   const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
   const verdict = {};
   for (const s of d.steps) if (s.last && !s.changed) verdict[s.n] = s.last;
@@ -268,7 +215,7 @@ async function graphPage(sub) {
   function drawSign() {
     const notOk = d.steps.some((s) => verdict[s.n] !== 'ok');
     const facts = h('dl', { class: 'facts' },
-      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, roleWord(d.role)),
       h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials));
     put(signBox, h('h2', {}, t('sign_graph')), facts, notOk ? h('p', { class: 'muted' }, t('todo_graph')) : null,
       holdButton(notOk, async () => {
@@ -281,11 +228,11 @@ async function graphPage(sub) {
   }
 
   const nodes = G.nodes.map((n, i) => item(i + 1, `${pick(n.title, lang)}  ·  ${n.id}`, h('dl', { class: 'facts' },
-    h('dt', {}, t('node_needs')), h('dd', { dir: 'auto' }, (n.needs || []).length ? n.needs.map(title).join('، ') : t('nothing')),
+    h('dt', {}, t('node_needs')), h('dd', { dir: 'auto' }, (n.needs || []).length ? n.needs.map(title).join('، ') : t('common.none')),
     h('dt', {}, t('node_lessons')), h('dd', { dir: 'auto' }, (n.lessons || []).length ? n.lessons.map(lessonLine).join('، ') : t('no_lessons')))));
   const paths = item(0, t('pathways'), (G.pathways || []).length ? h('ul', {}, G.pathways.map((p) => h('li', { dir: 'auto' },
     h('b', {}, pick(p.title, lang)), ` (${(p.bands || []).join(', ')}): `, (p.goal || []).map(title).join('، '),
-    p.final ? ` · ${t('final')}: ${lessonLine(p.final)}` : '', p.certificate ? ` · ${t('certificate')}` : ''))) : h('p', { class: 'muted' }, t('nothing')));
+    p.final ? ` · ${t('final')}: ${lessonLine(p.final)}` : '', p.certificate ? ` · ${t('certificate')}` : ''))) : h('p', { class: 'muted' }, t('common.none')));
   show(h('div', { class: 'screen' }, top(queue, t('graph_of', { s: sub })),
     h('div', { class: 'stack pad' }, nodes, paths, signBox, status)));
   drawSign();
@@ -295,9 +242,10 @@ async function graphPage(sub) {
 // been opened from here, so the reviewer checks the page says what the card says (an adviser: who may apply, the cost,
 // and that it is the official site)
 async function cardsPage(pid) {
+  redraw = () => cardsPage(pid);
   let d;
   try { d = await api('/cards/' + encodeURIComponent(pid)); } catch (e) { return failed(e); }
-  const lang = LANG_OF_ROLE[d.role] || ui;
+  const lang = LANG_OF_ROLE[d.role] || L.lang();
   const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
   const verdict = {};
   for (const x of d.steps) if (x.last && !x.changed) verdict[x.n] = x.last;
@@ -331,11 +279,11 @@ async function cardsPage(pid) {
     const body = isCard ? [
       h('p', { dir: 'auto' }, pick(it.about, lang)),
       h('dl', { class: 'facts' },
-        h('dt', {}, t('who')), h('dd', { dir: 'auto' }, pick(it.who, lang) || t('nothing')),
-        h('dt', {}, t('kind')), h('dd', { dir: 'ltr' }, it.kind || t('nothing')),
-        h('dt', {}, t('cost')), h('dd', { dir: 'ltr' }, it.cost || t('nothing')),
-        h('dt', {}, t('checked')), h('dd', { dir: 'ltr' }, it.checked || t('nothing')),
-        h('dt', {}, t('review_by')), h('dd', { dir: 'ltr' }, it.review_by || t('nothing'))),
+        h('dt', {}, t('who')), h('dd', { dir: 'auto' }, pick(it.who, lang) || t('common.none')),
+        h('dt', {}, t('kind')), h('dd', { dir: 'ltr' }, it.kind || t('common.none')),
+        h('dt', {}, t('cost')), h('dd', { dir: 'ltr' }, it.cost || t('common.none')),
+        h('dt', {}, t('checked')), h('dd', { dir: 'ltr' }, it.checked || t('common.none')),
+        h('dt', {}, t('review_by')), h('dd', { dir: 'ltr' }, it.review_by || t('common.none'))),
       it.review_by && it.review_by < d.today ? h('p', { class: 'tag warm' }, t('expired')) : null,
       h('p', { dir: 'ltr', class: 'small' }, h('a', { href: it.url, target: '_blank', rel: 'noopener noreferrer',
         onClick: () => { opened = true; okBtn.disabled = false; } }, t('open_page')), ' · ', it.url),
@@ -351,7 +299,7 @@ async function cardsPage(pid) {
   function drawSign() {
     const notOk = d.steps.some((x) => verdict[x.n] !== 'ok');
     const facts = h('dl', { class: 'facts' },
-      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, roleWord(d.role)),
       h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials));
     put(signBox, h('h2', {}, t('sign_cards')), facts, notOk ? h('p', { class: 'muted' }, t('todo_cards')) : null,
       holdButton(notOk, async () => {
@@ -371,6 +319,7 @@ async function cardsPage(pid) {
 // the Quran set (P29): item 0 what it is, items 1 to 114 the surahs; OK waits until the surah is open and every
 // recitation it has here has played
 async function quranPage() {
+  redraw = quranPage;
   let d;
   try { d = await api('/quran'); } catch (e) { return failed(e); }
   const S = d.set;
@@ -408,7 +357,7 @@ async function quranPage() {
   function drawSign() {
     const notOk = d.steps.some((x) => verdict[x.n] !== 'ok');
     put(signBox, h('h2', {}, t('sign_set')), h('dl', { class: 'facts' },
-      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, roleWord(d.role)),
       h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials)), notOk ? h('p', { class: 'muted' }, t('todo_set')) : null,
     holdButton(notOk, async () => {
       try {
@@ -437,12 +386,12 @@ async function quranPage() {
       if (!s) { status.textContent = t('save_fail'); return; }
       open = true;
       want = s.verses.filter((v) => v.audio).length;
-      const mark = () => { count.textContent = want ? t('heard', { a: heard.size, b: want }) : ''; card.unlock(); };
+      const mark = () => { count.textContent = want ? t('heard', { a: num(heard.size), b: num(want) }) : ''; card.unlock(); };
       put(box, count, s.verses.map((v) => h('div', { class: 'stack' },
         h('p', { lang: 'ar', dir: 'rtl', class: 'verse-review' }, `${v.a}. ${v.ar}`),
         v.audio ? h('audio', { controls: true, preload: 'none', src: '..' + v.audio.url, onEnded: () => { heard.add(v.a); mark(); } }) : null,
         Object.entries(v.tr || {}).map(([l, tr]) => h('div', { dir: 'rtl', lang: l === 'ps' ? 'ps' : 'fa-AF' },
-          h('p', {}, `${l}: ${tr.t}`), tr.f ? h('details', {}, h('summary', {}, t('notes_n', { n: tr.f.split(/\n+/).filter(Boolean).length })),
+          h('p', {}, `${l}: ${tr.t}`), tr.f ? h('details', {}, h('summary', {}, t('notes_n', { n: num(tr.f.split(/\n+/).filter(Boolean).length) })),
             h('p', { class: 'small' }, tr.f)) : null)))));
       mark();
     } }, t('open_surah'));
@@ -455,6 +404,7 @@ async function quranPage() {
 }
 
 async function lesson(id, at = 1) {
+  redraw = () => lesson(id, shown);
   let d;
   try { d = await api('/lessons/' + encodeURIComponent(id)); } catch (e) { return failed(e); }
   const L = d.lesson;
@@ -502,12 +452,12 @@ async function lesson(id, at = 1) {
       return a;
     });
     const tags = h('div', { class: 'row wrap' },
-      h('b', { class: 'grow' }, k ? t('step_of', { a: k, b: n }) : t('whole')),
+      h('b', { class: 'grow' }, k ? t('step_of', { a: num(k), b: num(n) }) : t('whole')),
       st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
       st.last === 'ok' && !st.changed ? h('span', { class: 'tag good' }, t('ok_last')) : null,
       noRec ? h('span', { class: 'tag warm' }, t('no_rec')) : null);
     const view = k
-      ? h('div', { class: 'frame' }, h('iframe', { title: t('step_of', { a: k, b: n }), loading: 'eager',
+      ? h('div', { class: 'frame' }, h('iframe', { title: t('step_of', { a: num(k), b: num(n) }), loading: 'eager',
         src: `../?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(id)}/${k}` }))
       : whole(d, L, lang);
     const save = async (go) => {
@@ -549,9 +499,9 @@ async function lesson(id, at = 1) {
       return;
     }
     const facts = h('dl', { class: 'facts' },
-      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, roleWord(d.role)),
       h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials), h('dt', {}, t('date')),
-      h('dd', { dir: 'ltr' }, new Date().toISOString().slice(0, 10)));
+      h('dd', {}, L.date(new Date().toISOString())));
     const why = notOk.length ? t('todo') : d.no_recording.length ? t('blocked') : null;
     const btn = h('button', { type: 'button', class: 'btn primary hold', disabled: why ? true : null }, h('span', { class: 'ring' }), t('hold'));
     let timer = null;
@@ -586,12 +536,11 @@ function whole(d, L, lang) {
       r.prompt ? h('small', { class: 'muted', dir: 'auto' }, ' ', r.prompt) : null,
       (r.hints || []).length ? h('ol', { class: 'hint-list' }, r.hints.map((x) => h('li', { dir: 'auto' }, String(x.text).replace(/\$/g, '')))) : null)))] : [];
   const cards = [h('h3', {}, t('cards')), d.cards.length
-    ? h('ul', {}, d.cards.map((c) => h('li', { dir: 'auto' }, pick(c.title, lang), ' — ', h('span', { dir: 'ltr' }, c.url || '')))) : h('p', { class: 'muted' }, t('nothing'))];
+    ? h('ul', {}, d.cards.map((c) => h('li', { dir: 'auto' }, pick(c.title, lang), ' — ', h('span', { dir: 'ltr' }, c.url || '')))) : h('p', { class: 'muted' }, t('common.none'))];
   const srcs = [h('h3', {}, t('sources')), d.sources.length
-    ? h('ul', {}, d.sources.map((s) => h('li', { dir: 'auto' }, [s.id, s.what || s.note || ''].filter(Boolean).join(': ')))) : h('p', { class: 'muted' }, t('nothing'))];
+    ? h('ul', {}, d.sources.map((s) => h('li', { dir: 'auto' }, [s.id, s.what || s.note || ''].filter(Boolean).join(': ')))) : h('p', { class: 'muted' }, t('common.none'))];
   return h('div', { class: 'card pad-card stack whole' }, sheet, cards, srcs);
 }
 
-setUi((navigator.language || '').startsWith('fa') ? 'prs' : 'en');
 window.addEventListener('online', start);
-start();
+L.useLang(L.firstLang(), { keep: false }).then(start);

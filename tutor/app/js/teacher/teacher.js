@@ -9,94 +9,18 @@
 // sheet) and Wishes (the screened wishlist, read only).
 
 import { aliasIcon, aliasName as nameOf } from '../aliases.js';
+import * as L from '../staff/lang.js';
 
 const API = '../api/m/teacher';
 const REASONS = ['wrong', 'gives_answer', 'unsafe', 'not_school'];
 const MADE_CHIPS = ['spelling', 'answer_wrong', 'unclear', 'unsafe', 'not_school'];   // P32, as stores/base.py MADE_CHIPS
-const BAND = { ey: 'band_ey', p1: 'band_p1', p2: 'band_p2', s1: 'band_s1', s2: 'band_s2', ad: 'band_ad' };
+const BAND = { ey: 'band.ey', p1: 'band.p1', p2: 'band.p2', s1: 'band.s1', s2: 'band.s2', ad: 'band.ad' };
 
-// English, and Dari drafts for a native speaker's check
-const T = {
-  en: {
-    title: 'Teacher', loading: 'Loading…', connect: 'Connect to see your class.', off: 'The teacher pages are not open here.',
-    access: 'Sign in through Cloudflare Access, then open this page again.', not_staff: 'Ask the admin to add you.',
-    pin: "Teacher's PIN", open: 'Open', wrong_pin: 'That PIN is not right.', wait: 'Too many tries. Wait and try again.',
-    sign_out: 'Sign out', class_of: 'Class', todo: 'To do', class: 'Class', lessons: 'Lessons', wishes: 'Wishes',
-    n_of: '{a} of {b}', empty: 'Nothing waiting. Well done.', save_fail: "Couldn't save. Try again.",
-    care: 'Needs care', held: 'Held answer', held_ladder: 'Held hints', question: 'Sent to you',
-    year: 'year {n}', ago_min: '{n} minutes ago', ago_h: '{n} hours ago', ago_d: '{n} days ago', now: 'just now',
-    told: 'Qalam told her:', qalam_said: 'Qalam answered:', no_answer: 'No answer yet.',
-    for_you: 'For you only', answer_is: 'answer {a}', maths_ok: 'maths ok', maths_bad: 'maths not checked',
-    leak_ok: 'leak check ok', leak_bad: 'a hint may give the answer away', unsure: 'the two solves disagreed',
-    send: 'Send', edit: 'Edit', drop: "Don't send", save_send: 'Send', cancel: 'Cancel', reply: 'Reply', seen: 'Seen',
-    dismiss: 'Dismiss', no_names: 'No names, please', reuse: 'Use it for others too', why_not: 'Why not?',
-    r_wrong: 'Wrong', r_gives_answer: 'Gives the answer', r_unsafe: 'Unsafe', r_not_school: 'Not school work',
-    prev: 'Previous', next: 'Next', keys: 'Keys: S send, E edit, D don\'t send, J and K move',
-    active: 'Active this week', finished: 'Lessons finished', checked: 'Sheets checked', questions: 'Questions',
-    seen_today: 'last seen today', seen_days: 'last seen {n} days ago',
-    lessons_week: 'lessons this week: {n}', sheets_n: 'sheets: {n}', avg: '{n}% right', needs_help: 'needs help', none: 'No learners yet.',
-    stuck: 'Stuck on {n}', stuck_line: '{n} items still wrong after the third hint this week',
-    groups: 'Needs care {a} · Held answers {b} · Questions {c}',
-    groups_made: 'Needs care {a} · Held answers {b} · Questions {c} · Made {d}',
-    made: 'Made by a learner', made_q: 'Her question', made_a: 'Her answer', made_why: 'Why',
-    made_ok: 'Looks right', made_change: 'Needs a change', made_what: 'What needs changing?',
-    made_reply: 'A short note for her (optional)', made_no_answer: "Don't give the answer",
-    c_spelling: 'Spelling', c_answer_wrong: 'Answer is wrong', c_unclear: 'Not clear', c_unsafe: 'Unsafe',
-    c_not_school: 'Not school work',
-    her_lessons: 'Lessons', pct: '{n}% right', not_marked: 'not marked', done_n: 'done {n}×', hints_used: 'Hints used',
-    rung: 'hint {n}: {m}', reset: 'Lock reset code', make_code: 'Make a code', code_for: 'Valid for {n} minutes, once.',
-    code_tell: 'Tell her the code. She taps "I forgot", then "I have a code from my teacher".',
-    did: 'did it', mastered: 'mastered', hardest: 'hardest item: {n}', disputes: '{n} disputes', no_lessons: 'No lessons.',
-    item: 'item {n}', right: 'right', wrong: 'wrong', answers: 'Open the answer sheet', hints_by_rung: 'Hints opened',
-    no_wishes: 'No wishes yet.', wish_n: '{n} asked', class_card: 'Print class card', code: 'Class code',
-    card_go: 'Make the card', print: 'Print', not_code: 'That is not your class code.', hub_card: 'Print the hub card',
-    queued: 'Sent to the printer.', back: 'Back', lang: 'دری',
-    band_ey: 'early years', band_p1: 'years 1-3', band_p2: 'years 4-6', band_s1: 'years 7-9', band_s2: 'years 10-12',
-    band_ad: 'adult',
-  },
-  prs: {
-    title: 'معلم', loading: 'صبر کن…', connect: 'برای دیدن صنفت به انترنت وصل شو.', off: 'صفحه‌های معلم این‌جا باز نیست.',
-    access: 'از راه Cloudflare Access وارد شو و این صفحه را دوباره باز کن.', not_staff: 'از مدیر بخواه تو را اضافه کند.',
-    pin: 'رمز معلم', open: 'باز کن', wrong_pin: 'این رمز درست نیست.', wait: 'کوشش زیاد شد. صبر کن و دوباره کوشش کن.',
-    sign_out: 'خروج', class_of: 'صنف', todo: 'کارها', class: 'صنف', lessons: 'درس‌ها', wishes: 'آرزوها',
-    n_of: '{a} از {b}', empty: 'چیزی در انتظار نیست. آفرین.', save_fail: 'ذخیره نشد. دوباره کوشش کن.',
-    care: 'نیاز به توجه', held: 'جواب نگه‌داشته', held_ladder: 'راهنمایی‌های نگه‌داشته', question: 'برای تو فرستاده شده',
-    year: 'صنف {n}', ago_min: '{n} دقیقه پیش', ago_h: '{n} ساعت پیش', ago_d: '{n} روز پیش', now: 'همین حالا',
-    told: 'قلم به او گفت:', qalam_said: 'جواب قلم:', no_answer: 'هنوز جوابی نیست.',
-    for_you: 'فقط برای تو', answer_is: 'جواب {a}', maths_ok: 'حساب درست', maths_bad: 'حساب بررسی نشده',
-    leak_ok: 'جواب در راهنمایی نیست', leak_bad: 'شاید راهنمایی جواب را بگوید', unsure: 'دو حل با هم فرق داشتند',
-    send: 'بفرست', edit: 'تغییر', drop: 'نفرست', save_send: 'بفرست', cancel: 'لغو', reply: 'جواب بده', seen: 'دیدم',
-    dismiss: 'کنار بگذار', no_names: 'لطفاً بدون نام', reuse: 'برای دیگران هم استفاده شود', why_not: 'چرا نه؟',
-    r_wrong: 'غلط', r_gives_answer: 'جواب را می‌گوید', r_unsafe: 'ناامن', r_not_school: 'کار مکتب نیست',
-    prev: 'قبلی', next: 'بعدی', keys: 'کلیدها: S بفرست، E تغییر، D نفرست، J و K حرکت',
-    active: 'فعال این هفته', finished: 'درس‌های تمام شده', checked: 'ورق‌های چک شده', questions: 'سوال‌ها',
-    seen_today: 'امروز دیده شد', seen_days: '{n} روز پیش دیده شد',
-    lessons_week: '{n} درس این هفته', sheets_n: '{n} ورق', avg: '{n}٪ درست', needs_help: 'کمک لازم دارد', none: 'هنوز شاگردی نیست.',
-    stuck: 'در {n} مانده', stuck_line: '{n} سوال این هفته بعد از راهنمایی سوم هنوز غلط است',
-    groups: 'نیاز به توجه {a} · جواب نگه‌داشته {b} · سوال‌ها {c}',
-    // P32: drafts for a native speaker's check
-    groups_made: 'نیاز به توجه {a} · جواب نگه‌داشته {b} · سوال‌ها {c} · ساخته شده {d}',
-    made: 'ساختهٔ یک شاگرد', made_q: 'سوال او', made_a: 'جواب او', made_why: 'چرا',
-    made_ok: 'درست است', made_change: 'تغییر لازم دارد', made_what: 'چه چیز تغییر لازم دارد؟',
-    made_reply: 'یک یادداشت کوتاه برای او (اختیاری)', made_no_answer: 'جواب را نگو',
-    c_spelling: 'املا', c_answer_wrong: 'جواب غلط است', c_unclear: 'واضح نیست', c_unsafe: 'ناامن',
-    c_not_school: 'کار مکتب نیست',
-    her_lessons: 'درس‌ها', pct: '{n}٪ درست', not_marked: 'چک نشده', done_n: '{n} بار تمام شد', hints_used: 'راهنمایی‌های استفاده شده',
-    rung: 'راهنمایی {n}: {m}', reset: 'کد باز کردن قفل', make_code: 'کد بساز', code_for: 'برای {n} دقیقه، یک بار.',
-    code_tell: 'کد را به او بگو. او «یادم رفت» و بعد «معلمم یک کد به من داده» را می‌زند.',
-    did: 'انجام داده', mastered: 'یاد گرفته', hardest: 'سخت‌ترین سوال: {n}', disputes: '{n} اعتراض', no_lessons: 'درسی نیست.',
-    item: 'سوال {n}', right: 'درست', wrong: 'غلط', answers: 'ورق جواب‌ها را باز کن', hints_by_rung: 'راهنمایی‌های باز شده',
-    no_wishes: 'هنوز آرزویی نیست.', wish_n: '{n} بار', class_card: 'کارت صنف را چاپ کن', code: 'کد صنف',
-    card_go: 'کارت را بساز', print: 'چاپ', not_code: 'این کد صنف تو نیست.', hub_card: 'کارت مرکز را چاپ کن',
-    queued: 'به چاپگر فرستاده شد.', back: 'برگشت', lang: 'English',
-    band_ey: 'سال‌های اول', band_p1: 'صنف ۱ تا ۳', band_p2: 'صنف ۴ تا ۶', band_s1: 'صنف ۷ تا ۹', band_s2: 'صنف ۱۰ تا ۱۲',
-    band_ad: 'بزرگسال',
-  },
-};
-
-let ui = /^fa|^prs/i.test(navigator.language || '') ? 'prs' : 'en';
-const fa = (x) => (ui === 'prs' ? String(x).replace(/[0-9]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]) : String(x));
-const t = (k, v = {}) => fa((T[ui][k] ?? T.en[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? ''));
+// Strings: the staff pages' string files (app/js/staff/strings/, P33, C5.1): teacher.* and the shared common.*;
+// English, Dari and Pashto, picked in the header and remembered in this browser
+const t = (k, v) => L.t(k.includes('.') ? k : L.has('teacher.' + k) ? 'teacher.' + k : 'common.' + k, v);
+const fa = (x) => L.digits(x);
+const num = (n) => L.num(n);
 
 function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -126,17 +50,11 @@ function toast(msg) {
   toast.timer = setTimeout(() => el.classList.remove('show'), 4000);
 }
 
-function setUi(lang) {
-  ui = lang === 'prs' ? 'prs' : 'en';
-  document.documentElement.lang = ui === 'prs' ? 'fa-AF' : 'en';
-  document.documentElement.dir = ui === 'prs' ? 'rtl' : 'ltr';
-}
-
 async function api(path, { method = 'GET', body, raw = false } = {}) {
   const headers = { 'content-type': 'application/json' };
   if (me.pin) headers['x-teacher-pin'] = me.pin;
   if (method !== 'GET') headers['x-qalam'] = '1';      // a staff write (C5 M1): a form from another site cannot send it
-  const q = new URLSearchParams({ lang: ui === 'prs' ? 'prs' : 'en' });
+  const q = new URLSearchParams({ lang: L.lang() });
   if (me.cohort) q.set('cohort', me.cohort);
   const r = await fetch(`${API}${path}${path.includes('?') ? '&' : '?'}${q}`, { method, headers, cache: 'no-store',
     credentials: 'same-origin', body: body ? JSON.stringify(body) : undefined });
@@ -148,15 +66,17 @@ async function api(path, { method = 'GET', body, raw = false } = {}) {
   return raw ? r.text() : r.json();
 }
 
+// the header: the title and Sign out, the class and the language picker, then the tabs (on a phone, three rows)
 function header() {
   const pick = me.cohorts.length > 1
-    ? h('select', { 'aria-label': t('class_of'), onChange: (e) => { me.cohort = e.target.value; start(); } },
+    ? h('select', { class: 'who', 'aria-label': t('class_of'), onChange: (e) => { me.cohort = e.target.value; start(); } },
       me.cohorts.map((c) => h('option', { value: c.id, selected: c.id === me.cohort }, c.label)))
-    : me.cohorts.length ? h('span', { class: 'chip' }, me.cohorts[0].label) : null;
-  return h('header', { class: 'top' },
-    h('div', { class: 'grow' }, h('h1', {}, t('title'))), pick,
-    h('button', { type: 'button', class: 'chip', onClick: () => { setUi(ui === 'en' ? 'prs' : 'en'); draw(); } }, t('lang')),
-    me.via ? h('button', { type: 'button', class: 'chip', onClick: signOut }, t('sign_out')) : null);
+    : me.cohorts.length ? h('span', { class: 'chip who', dir: 'auto' }, me.cohorts[0].label) : null;
+  return h('header', { class: 'top staff-top' },
+    h('div', { class: 'grow' }, h('h1', {}, t('title'))),
+    me.via ? h('button', { type: 'button', class: 'chip signout', onClick: signOut }, t('sign_out')) : null,
+    h('span', { class: 'brk', 'aria-hidden': 'true' }), pick,
+    L.picker(h, () => (me.via ? draw() : pinGate(''))));
 }
 
 function tabs() {
@@ -167,7 +87,7 @@ function tabs() {
     one('wishes'));
 }
 
-const page = (...kids) => put(root, h('div', { class: 'screen' }, header(), me.via ? tabs() : null, kids));
+const page = (...kids) => put(root, h('div', { class: 'screen' }, header(), me.via ? tabs() : null, kids, L.draftNote(h)));
 const say = (msg) => page(h('p', { class: 'empty' }, msg));
 
 function failed(e) {
@@ -189,9 +109,9 @@ function pinGate(msg) {
   me.via = null;
   const box = h('input', { type: 'password', inputmode: 'numeric', autocomplete: 'off', 'aria-label': t('pin'), dir: 'ltr' });
   put(root, h('div', { class: 'screen' }, header(),
-    h('form', { class: 'card pad-card stack', onSubmit: (e) => { e.preventDefault(); me.pin = box.value.trim(); start(); } },
+    h('form', { class: 'card pad-card stack', onSubmit: (e) => { e.preventDefault(); me.pin = L.latin(box.value).trim(); start(); } },
       h('label', {}, t('pin')), box, msg ? h('p', { class: 'muted' }, msg) : null,
-      h('button', { class: 'btn primary', type: 'submit' }, t('open')))));
+      h('button', { class: 'btn primary', type: 'submit' }, t('open'))), L.draftNote(h)));
   setTimeout(() => box.focus(), 50);
 }
 
@@ -221,9 +141,9 @@ async function draw() {
 function ago(iso) {
   const m = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 60e3));
   if (m < 2) return t('now');
-  if (m < 60) return t('ago_min', { n: m });
-  if (m < 48 * 60) return t('ago_h', { n: Math.round(m / 60) });
-  return t('ago_d', { n: Math.round(m / 1440) });
+  if (m < 60) return t('ago_min', { n: num(m) });
+  if (m < 48 * 60) return t('ago_h', { n: num(Math.round(m / 60)) });
+  return t('ago_d', { n: num(Math.round(m / 1440)) });
 }
 
 async function drawTodo(at = 0) {
@@ -247,10 +167,10 @@ function showCard(i) {
     items.splice(i, 1);
     showCard(Math.min(i, items.length - 1));
   };
-  const meta = [q.year != null ? t('year', { n: q.year }) : null, q.lesson, ago(q.created)].filter(Boolean).join(' · ');
+  const meta = L.join([q.year != null ? t('year', { n: num(q.year) }) : null, q.lesson, ago(q.created)]);
   const kind = q.kind === 'held' ? (q.hints ? 'held_ladder' : 'held') : q.kind;
   const head = h('div', { class: 'row wrap' }, h('span', { class: 'tag' + (q.kind === 'care' ? ' warm' : '') }, t(kind)),
-    h('span', { class: 'grow muted small' }, meta), h('b', { class: 'small' }, t('n_of', { a: i + 1, b: items.length })));
+    h('span', { class: 'grow muted small' }, meta), h('b', { class: 'small' }, t('n_of', { a: num(i + 1), b: num(items.length) })));
   const question = h('p', { class: 'q', dir: 'auto' }, q.question);
   let actions;
   if (q.kind === 'held') {
@@ -259,18 +179,18 @@ function showCard(i) {
     const shown = q.hints
       ? h('ol', { class: 'hints' }, q.hints.map((x) => h('li', { dir: 'auto' }, x)))
       : h('div', { class: 'a', dir: 'auto' }, q.shown);
-    const checks = [q.private ? t('answer_is', { a: q.private.answer }) : null,
+    const checks = [q.private ? t('answer_is', { a: fa(q.private.answer) }) : null,
       q.checks && q.checks.maths !== null ? t(q.checks.maths ? 'maths_ok' : 'maths_bad') : null,
       q.checks && q.checks.leak !== null ? t(q.checks.leak ? 'leak_ok' : 'leak_bad') : null,
       q.private && !q.private.sure ? t('unsure') : null].filter(Boolean);
     const secret = checks.length ? h('p', { class: 'private small' }, h('b', {}, t('for_you') + ': '),
-      h('span', { dir: 'auto' }, checks.join(' · '))) : null;
+      h('span', { dir: 'auto' }, L.join(checks))) : null;
     const edit = () => {
       const boxes = q.hints ? q.hints.map((x) => h('textarea', { class: 'field', rows: 2, maxlength: 400, dir: 'auto' }, x))
         : [h('textarea', { class: 'field', rows: 4, maxlength: 1500, dir: 'auto' }, q.shown || '')];
       put(body, head, question, boxes, h('div', { class: 'btns two' },
         h('button', { type: 'button', class: 'btn primary', onClick: () => done(q.hints
-          ? { action: 'edit', hints: boxes.map((b) => b.value) } : { action: 'edit', text: boxes[0].value }) }, t('save_send')),
+          ? { action: 'edit', hints: boxes.map((b) => b.value) } : { action: 'edit', text: boxes[0].value }) }, t('send')),
         h('button', { type: 'button', class: 'btn', onClick: () => showCard(i) }, t('cancel'))));
       boxes[0].focus();
     };
@@ -352,9 +272,8 @@ function showCard(i) {
   }
   document.addEventListener('keydown', keys);
   const g = todo.groups;
-  page(g ? h('p', { class: 'muted small pad' }, g.made !== undefined
-    ? t('groups_made', { a: fa(g.care), b: fa(g.held), c: fa(g.question), d: fa(g.made) })
-    : t('groups', { a: fa(g.care), b: fa(g.held), c: fa(g.question) })) : null,
+  page(g ? h('p', { class: 'muted small pad' }, L.join([t('g_care', { n: num(g.care) }), t('g_held', { n: num(g.held) }),
+    t('g_question', { n: num(g.question) }), g.made !== undefined ? t('g_made', { n: num(g.made) }) : null])) : null,
     h('section', { class: 'qcard' + (q.kind === 'care' ? ' urgent' : '') }, body),
     h('div', { class: 'row pad' },
       h('button', { type: 'button', class: 'btn', disabled: i === 0 || null, onClick: () => go(i - 1) }, t('prev')),
@@ -365,8 +284,8 @@ function showCard(i) {
 
 // --- Class ---
 
-const aliasName = (id) => nameOf(id, ui === 'prs' ? 'prs' : 'en');
-const seen = (d) => (d === 0 ? t('seen_today') : t('seen_days', { n: d }));
+const aliasName = (id) => nameOf(id, L.lang());
+const seen = (d) => (d === 0 ? t('seen_today') : t('seen_days', { n: num(d) }));
 
 async function drawClass() {
   let c;
@@ -376,11 +295,11 @@ async function drawClass() {
     h('span', { class: 'pic' }, aliasIcon(r.picture, 40)),
     h('span', { class: 'grow' },
       h('b', {}, `${aliasName(r.picture)} ${fa(r.number)}`),
-      h('small', { class: 'muted' }, [t(BAND[r.band] || r.band), seen(r.days),
-        t('lessons_week', { n: r.lessons }),
-        t('sheets_n', { n: r.sheets }) + (r.average != null ? ' · ' + t('avg', { n: r.average }) : '')].join(' · '))),
+      h('small', { class: 'muted' }, L.join([t(BAND[r.band] || r.band), seen(r.days),
+        t('lessons_week', { n: num(r.lessons) }), t('sheets_n', { n: num(r.sheets) }),
+        r.average != null ? t('avg', { n: L.pct(r.average) }) : null]))),
     r.needs_help ? h('span', { class: 'tag help' }, t('stuck', { n: fa(r.stuck) })) : null);
-  page(h('div', { class: 'stats four' }, stat(t('n_of', { a: c.active, b: c.learners }), t('active')),
+  page(h('div', { class: 'stats four' }, stat(t('n_of', { a: num(c.active), b: num(c.learners) }), t('active')),
     stat(fa(c.lessons), t('finished')), stat(fa(c.sheets), t('checked')), stat(fa(c.questions), t('questions'))),
   h('nav', { class: 'subjects class-list' }, c.rows.length ? c.rows.map(row) : h('p', { class: 'empty' }, t('none'))),
   h('div', { class: 'row pad wrap' },
@@ -397,7 +316,7 @@ async function drawLearner(alias) {
       const r = await api(`/class/${encodeURIComponent(alias)}/reset-code`, { method: 'POST' });
       const latin = r.code.replace(/(\d{3})(\d{3})/, '$1 $2');
       put(codeBox, h('p', { class: 'code-big', dir: 'ltr' }, latin.replace(/[0-9]/g, (x) => '۰۱۲۳۴۵۶۷۸۹'[x])),
-        h('p', { class: 'code-big latin', dir: 'ltr' }, latin), h('p', { class: 'muted small' }, t('code_for', { n: r.minutes })),
+        h('p', { class: 'code-big latin', dir: 'ltr' }, latin), h('p', { class: 'muted small' }, t('code_for', { n: num(r.minutes) })),
         h('p', { class: 'small' }, t('code_tell')));
     } catch (e) { failed(e); }
   };
@@ -406,16 +325,16 @@ async function drawLearner(alias) {
     h('section', { class: 'card pad-card stack' },
       h('div', { class: 'row' }, h('span', { class: 'pic' }, aliasIcon(d.picture, 40)),
         h('div', { class: 'grow' }, h('h2', {}, `${aliasName(d.picture)} ${fa(d.number)}`),
-          h('small', { class: 'muted' }, `${t(BAND[d.band] || d.band)} · ${seen(d.days)}`)),
+          h('small', { class: 'muted' }, L.join([t(BAND[d.band] || d.band), seen(d.days)]))),
         d.needs_help ? h('span', { class: 'tag help' }, t('stuck', { n: fa(d.stuck) })) : null),
       d.needs_help ? h('p', { class: 'small' }, t('stuck_line', { n: fa(d.stuck) })) : null,
       h('h3', {}, t('her_lessons')),
       d.lessons.length ? h('ul', { class: 'plain' }, d.lessons.map((l) => h('li', { class: 'row' },
         h('span', { class: 'grow', dir: 'auto' }, l.title),
-        h('small', { class: 'muted' }, [l.pct != null ? t('pct', { n: l.pct }) : t('not_marked'),
-          l.done ? t('done_n', { n: l.done }) : null].filter(Boolean).join(' · '))))) : h('p', { class: 'muted' }, t('no_lessons')),
+        h('small', { class: 'muted' }, L.join([l.pct != null ? t('pct', { n: L.pct(l.pct) }) : t('not_marked'),
+          l.done ? t('done_n', { n: num(l.done) }) : null]))))) : h('p', { class: 'muted' }, t('no_lessons')),
       h('h3', {}, t('hints_used')),
-      h('p', { class: 'small' }, [1, 2, 3].map((n) => t('rung', { n, m: d.hints[n] || 0 })).join(' · ')),
+      h('p', { class: 'small' }, L.join([1, 2, 3].map((n) => t('rung', { n: num(n), m: num(d.hints[n] || 0) })))),
       d.lock_codes ? [h('h3', {}, t('reset')), codeBox,
         h('button', { type: 'button', class: 'btn primary', onClick: make }, t('make_code'))] : null));
 }
@@ -451,9 +370,9 @@ async function drawLessons() {
   try { d = await api('/lessons'); } catch (e) { return failed(e); }
   const row = (l) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawLesson(l.id); } },
     h('span', { class: 'grow' }, h('b', { dir: 'auto' }, l.title || l.id),
-      h('small', { class: 'muted' }, [`${fa(l.did)} ${t('did')}`, `${fa(l.mastered)} ${t('mastered')}`,
-        l.hardest ? t('hardest', { n: l.hardest }) : null, l.disputes ? t('disputes', { n: l.disputes }) : null,
-        `${t('hints_by_rung')} ${fa(l.hints[1] || 0)}/${fa(l.hints[2] || 0)}/${fa(l.hints[3] || 0)}`].filter(Boolean).join(' · '))));
+      h('small', { class: 'muted' }, L.join([`${fa(l.did)} ${t('did')}`, `${fa(l.mastered)} ${t('mastered')}`,
+        l.hardest ? t('hardest', { n: num(l.hardest) }) : null, l.disputes ? t('disputes', { n: num(l.disputes) }) : null,
+        `${t('hints_by_rung')} ${fa(l.hints[1] || 0)}/${fa(l.hints[2] || 0)}/${fa(l.hints[3] || 0)}`]))));
   page(h('nav', { class: 'subjects' }, d.lessons.length ? d.lessons.map(row) : h('p', { class: 'empty' }, t('no_lessons'))));
 }
 
@@ -464,9 +383,9 @@ async function drawLesson(id) {
     const all = it.right + it.wrong;
     const share = all ? Math.round((100 * it.right) / all) : 0;
     return h('li', { class: 'stack-sm' },
-      h('div', { class: 'row' }, h('b', { class: 'grow' }, t('item', { n: it.n })),
-        h('small', { class: 'muted' }, `${fa(it.right)} ${t('right')} · ${fa(it.wrong)} ${t('wrong')}`
-          + (it.disputes ? ' · ' + t('disputes', { n: it.disputes }) : ''))),
+      h('div', { class: 'row' }, h('b', { class: 'grow' }, t('item', { n: num(it.n) })),
+        h('small', { class: 'muted' }, L.join([`${fa(it.right)} ${t('right')}`, `${fa(it.wrong)} ${t('wrong')}`,
+          it.disputes ? t('disputes', { n: num(it.disputes) }) : null]))),
       h('div', { class: 'bar good-bar', role: 'img', 'aria-label': `${share}%` }, h('span', { style: `width:${share}%` })));
   };
   const openAnswers = async () => {
@@ -479,8 +398,8 @@ async function drawLesson(id) {
   };
   page(h('div', { class: 'row pad' }, h('button', { type: 'button', class: 'btn', onClick: () => drawLessons() }, t('back'))),
     h('section', { class: 'card pad-card stack' }, h('h2', { dir: 'auto' }, d.title || d.id),
-      h('p', { class: 'small muted' }, [`${fa(d.did)} ${t('did')}`, `${fa(d.mastered)} ${t('mastered')}`,
-        d.hardest ? t('hardest', { n: d.hardest }) : null].filter(Boolean).join(' · ')),
+      h('p', { class: 'small muted' }, L.join([`${fa(d.did)} ${t('did')}`, `${fa(d.mastered)} ${t('mastered')}`,
+        d.hardest ? t('hardest', { n: num(d.hardest) }) : null])),
       d.items.length ? h('ol', { class: 'plain bars' }, d.items.map(bar)) : null,
       d.answers ? h('button', { type: 'button', class: 'btn', onClick: openAnswers }, t('answers')) : null));
 }
@@ -493,12 +412,10 @@ async function drawWishes() {
   page(d.wishes.length
     ? h('ul', { class: 'subjects plain' }, d.wishes.map((w) => h('li', { class: 'row wish' },
       h('span', { class: 'grow', dir: 'auto' }, w.text),
-      h('small', { class: 'muted' }, [t('wish_n', { n: w.count }), (w.bands || []).map((b) => t(BAND[b] || b)).join(', ')]
-        .filter(Boolean).join(' · ')))))
+      h('small', { class: 'muted' }, L.join([t('wish_n', { n: num(w.count) }), (w.bands || []).map((b) => t(BAND[b] || b)).join(L.lang() === 'en' ? ', ' : '، ')])))))
     : h('p', { class: 'empty' }, t('no_wishes')));
 }
 
 window.addEventListener('online', () => draw());
 window.addEventListener('offline', () => say(t('connect')));
-setUi(ui);
-start();
+L.useLang(L.firstLang(), { keep: false }).then(start);

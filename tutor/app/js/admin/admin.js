@@ -9,124 +9,21 @@
 // wishlist across cohorts), AI spend, Safety, Staff and Log. English by default; the Dari strings are drafts for a
 // native speaker's check.
 
+import * as L from '../staff/lang.js';
+
 const API = '../api/m/admin';
 const BANDS = ['ey', 'p1', 'p2', 's1', 's2', 'ad'];
 const LANGS = ['prs', 'ps', 'en'];
 const PAGES = ['cohorts', 'content', 'spend', 'safety', 'staff', 'log'];
 
-const T = {
-  en: {
-    title: 'Qalam admin', loading: 'Loading…', connect: 'Connect to manage Qalam.', off: 'The admin panel is not open here.',
-    access: 'Sign in through Cloudflare Access, then open this page again.', not_admin: 'This page is for admins only.',
-    pin: 'Admin PIN', open: 'Open', wrong_pin: 'That PIN is not right.', wait: 'Too many tries. Wait and try again.',
-    sign_out: 'Sign out', lang: 'دری', save_fail: "Couldn't save. Nothing changed.", saved: 'Saved.',
-    cohorts: 'Cohorts', content: 'Content', spend: 'AI spend', safety: 'Safety', staff: 'Staff', log: 'Log',
-    learners: '{n} learners', bands: 'bands {b}', ai_on: 'AI on', ai_off_now: 'AI is off', day_on: 'school day on',
-    day_off_now: 'school day off', own: 'this hub', new_cohort: 'New cohort', label: 'Label', langs: 'Languages',
-    make: 'Make it', label_hint: 'Neutral words only, like "Mazar class". Never who is in it.',
-    code_once: 'Class code (shown once, write it on the class cards now):', back: 'Back',
-    kill_ai: 'AI off', kill_day: 'School day off', unkill_ai: 'AI on again', unkill_day: 'School day on again',
-    kill_q_ai: 'Turn AI off for {c}? Phones follow within a minute.',
-    kill_q_day: 'Turn the school day and bells off for {c}? Phones follow within a minute.',
-    unkill_q_ai: 'Turn AI on again for {c}?', unkill_q_day: 'Turn the school day and bells on again for {c}?',
-    all_cohorts: 'All cohorts', confirm: 'Confirm', cancel: 'Cancel',
-    join_code: 'join code', new_code: 'New code', class_cards: 'Class cards', code: 'Class code', print: 'Print',
-    new_code_q: 'Make a new class code? The old one stops working at once.',
-    modules: 'Modules', module: 'Module', risk: 'Risk', maturity: 'Maturity', on: 'On', settings: 'Settings',
-    needs: 'needs {x}', locked_moderation: 'locked: needs paid human moderation', locked_maturity: 'only where drafts are taken',
-    locked_gate: "waits for the pilot's four numbers", locked_open: 'off in open in 2027',
-    locked_scholar: 'locked until a Hanafi scholar signs the Quran set',
-    locked_adviser: 'locked until an adviser signs the first university cards',
-    gate_wait: "Photo marking in open waits for the pilot's four numbers:",
-    gate_open: 'The gate is passed. The budget for open: marks a day × {n} tokens a mark × 1.2.',
-    host: 'not on this host ({x})', depends: 'depends on {x}', turn_on: 'Turn on', turn_on_both: 'Turn on both',
-    turn_on_q: 'Turn on {m} for {c}?', also: 'This also turns on: {x}.', edit: 'Edit', save: 'Save',
-    diff_q: 'Save these changes?', no_change: 'Nothing changed.',
-    r_none: 'none', r_medium: 'medium', r_high: 'high', r_blocked: 'blocked',
-    cohort_settings: 'Settings', budget: 'AI tokens a day', budget_hub: 'the hub’s ({n})', moderation: 'Moderation',
-    m_none: 'none', m_teacher: 'a teacher', 'm_paid-human': 'paid human moderation', maturities: 'Takes modules',
-    ai_provider: 'AI provider', provider: 'Provider', model: 'Model', p_hub: 'the hub’s ({p})',
-    model_hint: 'Empty: the provider’s default. Takes effect on the next question, no redeploy.',
-    key_set: 'key set', key_unset: 'key not set', p_openai: 'OpenAI', p_anthropic: 'Claude (Anthropic)',
-    p_gemini: 'Gemini (Google)', p_openai_compat: 'OpenAI-compatible', p_local: 'this hub’s model', p_fake: 'test AI (fake)', p_off: 'off',
-    ai_today: 'AI today', calls: '{n} calls', est: 'about {c}', no_cap: 'no cap',
-    packs: 'Packs', version: 'version {v}', signed_of: '{a}/{b}', lessons: 'Lessons', problems: 'What blocks a release',
-    release: 'Release', none_yet: 'not released', current: 'current', older: 'not the current files', publish: 'Publish',
-    rollback: 'Roll back', publish_q: 'Publish {p} {v} to {c}?', rollback_q: 'Go back to the previous release of {p} for {c}?',
-    published: 'Published.', rolled: 'Rolled back to {v}.', notes: 'Review notes', no_notes: 'No changes asked for.',
-    step: 'step {n}', step0: 'the sheet, cards and sources', wishlist: 'Wishlist across cohorts', no_wishes: 'No wishes yet.',
-    asked: '{n} asked', first_seen: 'first {d}', planned: 'Planned', not_for_qalam: 'Not for Qalam', new: 'New',
-    cap: 'cap {n}', of_cap: '{p}% of the cap', held: '{n} held', by_purpose: 'calls: {x}', no_spend: 'No AI used.',
-    days14: 'last 14 days', distress: 'distress', health: 'health', off_limits: 'off limits', leak: 'hints held back',
-    maths: 'sums held back', oldest: 'oldest held answer: {n} hours', no_held: 'nothing held', disputes: 'disputes',
-    item: 'item {n}', counts_only: 'Counts only: the words stay with the teacher.',
-    staff_hub: 'On the hub the teacher’s and admin’s PINs open the staff pages: there is no staff list.',
-    add_staff: 'Add someone', email: 'Email (as Cloudflare Access knows it)', role: 'Role', initials: 'Initials',
-    email_note: 'The email is hashed and forgotten. Cloudflare Access keeps the list of who may sign in.',
-    remove: 'Remove', remove_q: 'Remove {l}?', added: 'added {d}', last_admin: 'The last admin cannot be removed.',
-    every: 'every cohort', when: 'When', what: 'What', who: 'By', today_n: 'today {n}',
-    // the Log's `what`, in words (C4 look question 29); the stored value stays the fixed word
-    w_module: 'Module switch', 'w_cohort.new': 'New cohort', 'w_cohort.settings': 'Settings', 'w_cohort.kill': 'Kill switch',
-    'w_cohort.code': 'New class code', w_release: 'Release', w_rollback: 'Rollback', w_wish: 'Wish marked',
-    'w_staff.add': 'Staff added', 'w_staff.remove': 'Staff removed', 'w_teacher.lock_code': 'Lock reset code', w_prices: 'AI prices',
-    prices: 'AI prices', prices_what: 'US dollars per million tokens, from the provider’s price page. Empty: the estimate stays $0.',
-    no_prices: 'No prices yet.', provider: 'Provider', model: 'Model', any_model: 'any model', usd_in: 'Input, $ per million',
-    usd_out: 'Output, $ per million',
-    band_ey: 'early years', band_p1: 'years 1-3', band_p2: 'years 4-6', band_s1: 'years 7-9', band_s2: 'years 10-12',
-    band_ad: 'adult', lang_prs: 'Dari', lang_ps: 'Pashto', lang_en: 'English',
-    pick_some: 'Tick at least one language and one band.', all_bands: 'every band', school_day: 'School day', tt_default: 'the default timetable', tt_own: 'this cohort’s own timetable',
-    tt_edit: 'Edit the timetable', tt_use_default: 'Use the default', tt_days: 'School days',
-    tt_holidays: 'Holidays: one date a line, like 2027-03-21', tt_ramadan: 'Ramadan’s shorter day', tt_from: 'From',
-    tt_to: 'To', tt_start: 'Starts at', tt_period_min: 'Minutes a period', tt_has_day: 'has a school day',
-    tt_add: 'Add a block', tt_up: 'Move up', tt_drop: 'Remove', tt_min: 'min', tt_ends: 'ends {x}',
-    tt_bad: 'The hub did not take this timetable:', k_opening: 'opening', k_period: 'period', k_break: 'break',
-    k_sheet: 'sheet time', k_close: 'close', s_auto: 'her next lesson', s_maths: 'maths', s_science: 'science',
-    s_english: 'English', s_dari: 'Dari', s_pashto: 'Pashto',
-    d_sat: 'Sat', d_sun: 'Sun', d_mon: 'Mon', d_tue: 'Tue', d_wed: 'Wed', d_thu: 'Thu', d_fri: 'Fri',
-  },
-  prs: {
-    title: 'مدیریت قلم', loading: 'صبر کن…', connect: 'برای مدیریت قلم به انترنت وصل شو.', off: 'صفحهٔ مدیریت این‌جا باز نیست.',
-    access: 'از راه Cloudflare Access وارد شو و این صفحه را دوباره باز کن.', not_admin: 'این صفحه فقط برای مدیران است.',
-    pin: 'رمز مدیر', open: 'باز کن', wrong_pin: 'این رمز درست نیست.', wait: 'کوشش زیاد شد. صبر کن و دوباره کوشش کن.',
-    sign_out: 'خروج', lang: 'English', save_fail: 'ذخیره نشد. چیزی تغییر نکرد.', saved: 'ذخیره شد.',
-    cohorts: 'گروه‌ها', content: 'محتوا', spend: 'مصرف هوش مصنوعی', safety: 'ایمنی', staff: 'کارمندان', log: 'یادداشت تغییرات',
-    learners: '{n} شاگرد', bands: 'سطح‌ها {b}', ai_on: 'هوش مصنوعی روشن', ai_off_now: 'هوش مصنوعی خاموش', day_on: 'روز مکتب روشن',
-    day_off_now: 'روز مکتب خاموش', own: 'همین مرکز', new_cohort: 'گروه تازه', label: 'نام گروه', langs: 'زبان‌ها',
-    make: 'بساز', label_hint: 'فقط کلمه‌های بی‌طرف، مثل «صنف مزار». هرگز نگو چه کسانی در آن هستند.',
-    code_once: 'کد صنف (فقط یک بار دیده می‌شود؛ همین حالا روی کارت‌ها بنویس):', back: 'برگشت',
-    kill_ai: 'هوش مصنوعی خاموش', kill_day: 'روز مکتب خاموش', unkill_ai: 'هوش مصنوعی دوباره روشن', unkill_day: 'روز مکتب دوباره روشن',
-    all_cohorts: 'همهٔ گروه‌ها', confirm: 'تأیید', cancel: 'لغو', new_code: 'کد تازه', class_cards: 'کارت‌های صنف',
-    code: 'کد صنف', print: 'چاپ', modules: 'بخش‌ها', module: 'بخش', risk: 'خطر', maturity: 'آمادگی', on: 'روشن',
-    settings: 'تنظیمات', turn_on: 'روشن کن', turn_on_both: 'هر دو را روشن کن', edit: 'تغییر', save: 'ذخیره',
-    diff_q: 'این تغییرها ذخیره شود؟', no_change: 'چیزی تغییر نکرد.', cohort_settings: 'تنظیمات',
-    // the AI provider switch: drafts for a native speaker's check
-    ai_provider: 'فراهم‌کنندهٔ هوش مصنوعی', provider: 'فراهم‌کننده', model: 'مدل', key_set: 'کلید گذاشته شده',
-    key_unset: 'کلید گذاشته نشده', p_hub: 'پیش‌فرض مرکز ({p})', p_fake: 'هوش مصنوعی آزمایشی',
-    model_hint: 'خالی: مدل پیش‌فرض همین فراهم‌کننده. از سوال بعدی اثر می‌کند.',
-    publish: 'نشر کن', rollback: 'برگردان', notes: 'یادداشت‌های بازبین', planned: 'در برنامه', not_for_qalam: 'برای قلم نیست',
-    new: 'تازه', remove: 'حذف', add_staff: 'کسی را اضافه کن', when: 'وقت', what: 'چه', who: 'توسط', today_n: 'امروز {n}',
-    w_module: 'روشن یا خاموش کردن بخش', 'w_cohort.new': 'گروه تازه', 'w_cohort.settings': 'تنظیمات', 'w_cohort.kill': 'کلید قطع',
-    'w_cohort.code': 'کد تازهٔ صنف', w_release: 'نشر', w_rollback: 'برگشت', w_wish: 'نشانی خواهش',
-    'w_staff.add': 'کارمند اضافه شد', 'w_staff.remove': 'کارمند حذف شد', 'w_teacher.lock_code': 'کد باز کردن قفل', w_prices: 'قیمت هوش مصنوعی',
-    counts_only: 'فقط شمار: کلمه‌ها نزد معلم می‌مانند.',
-    band_ey: 'سال‌های اول', band_p1: 'صنف ۱ تا ۳', band_p2: 'صنف ۴ تا ۶', band_s1: 'صنف ۷ تا ۹', band_s2: 'صنف ۱۰ تا ۱۲',
-    band_ad: 'بزرگسال', lang_prs: 'دری', lang_ps: 'پښتو', lang_en: 'انگلیسی',
-    pick_some: 'دست کم یک زبان و یک سطح را نشانی کن.', all_bands: 'همهٔ سطح‌ها', every: 'همهٔ گروه‌ها',
-    packs: 'بسته‌ها', lessons: 'درس‌ها', wishlist: 'خواهش‌های همهٔ گروه‌ها', school_day: 'روز مکتب', tt_default: 'تقسیم اوقات معمول', tt_own: 'تقسیم اوقات خود این گروه',
-    tt_edit: 'تقسیم اوقات را تغییر بده', tt_use_default: 'همان معمول', tt_days: 'روزهای مکتب', tt_from: 'از', tt_to: 'تا',
-    tt_start: 'شروع', tt_has_day: 'روز مکتب دارد', tt_add: 'یک بخش اضافه کن', tt_drop: 'حذف',
-    k_opening: 'آغاز', k_period: 'ساعت درسی', k_break: 'تفریح', k_sheet: 'وقت ورقه', k_close: 'ختم',
-    d_sat: 'شنبه', d_sun: 'یکشنبه', d_mon: 'دوشنبه', d_tue: 'سه‌شنبه', d_wed: 'چهارشنبه', d_thu: 'پنجشنبه', d_fri: 'جمعه',
-  },
-};
-
-let ui = 'en';
-const fa = (x) => (ui === 'prs' ? String(x).replace(/[0-9]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]) : String(x));
-const t = (k, v = {}) => fa((T[ui][k] ?? T.en[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? ''));
-const num = (n) => fa(Number(n || 0).toLocaleString('en-US'));
-const money = (micro) => '$' + (Number(micro || 0) / 1e6).toFixed(2);
-const m = (x) => h('span', { class: 'm', dir: 'ltr' }, String(x));
-const title = (x, fallback) => (x && typeof x === 'object' ? x[ui] || x.en || x.prs || x.ps : x) || fallback;   // {prs, ps, en}          // codes, hashes and ids stay left to right
+// Strings: the staff pages' string files (app/js/staff/strings/, P33, C5.1); the page's own keys are admin.*, shared
+// ones common.*; English, Dari and Pashto, picked in the header and remembered in this browser.
+const t = (k, v) => L.t(k.includes('.') ? k : L.has('admin.' + k) ? 'admin.' + k : 'common.' + k, v);
+const fa = (x) => L.digits(x);
+const num = (n) => L.num(n);
+const money = (micro) => L.money(micro);
+const m = (x) => h('span', { class: 'm', dir: 'ltr' }, String(x));          // codes, hashes and ids stay left to right
+const title = (x, fallback) => (x && typeof x === 'object' ? x[L.lang()] || x.en || x.prs || x.ps : x) || fallback;   // {prs, ps, en}
 
 function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -153,12 +50,6 @@ function toast(msg) {
   toast.timer = setTimeout(() => el.classList.remove('show'), 4000);
 }
 
-function setUi(lang) {
-  ui = lang === 'prs' ? 'prs' : 'en';
-  document.documentElement.lang = ui === 'prs' ? 'fa-AF' : 'en';
-  document.documentElement.dir = ui === 'prs' ? 'rtl' : 'ltr';
-}
-
 async function api(path, { method = 'GET', body } = {}) {
   const headers = { 'content-type': 'application/json' };
   if (me.pin) headers['x-admin-pin'] = me.pin;
@@ -180,11 +71,12 @@ async function api(path, { method = 'GET', body } = {}) {
 // --- the frame: header, menu, gate ---
 
 function header() {
-  return h('header', { class: 'top' },
+  return h('header', { class: 'top staff-top' },
     h('div', { class: 'grow' }, h('h1', {}, t('title'))),
-    me.label ? h('span', { class: 'chip' }, me.label) : null,
-    h('button', { type: 'button', class: 'chip', onClick: () => { setUi(ui === 'en' ? 'prs' : 'en'); draw(); } }, t('lang')),
-    me.via ? h('button', { type: 'button', class: 'chip', onClick: signOut }, t('sign_out')) : null);
+    h('span', { class: 'brk', 'aria-hidden': 'true' }),
+    me.label ? h('span', { class: 'chip who', dir: 'auto' }, me.label) : null,
+    L.picker(h, () => draw()),
+    me.via ? h('button', { type: 'button', class: 'chip signout', onClick: signOut }, t('sign_out')) : null);
 }
 
 function menu() {
@@ -198,7 +90,7 @@ function menu() {
 }
 
 const frame = (...kids) => put(root, header(), me.via ? h('div', { class: 'alayout' }, menu(), h('div', { class: 'amain' }, kids))
-  : h('div', { class: 'amain' }, kids));
+  : h('div', { class: 'amain' }, kids), L.draftNote(h));
 const say = (msg) => frame(h('p', { class: 'empty' }, msg));
 
 function failed(e) {
@@ -221,9 +113,9 @@ function pinGate(msg) {
   me.via = null;
   const box = h('input', { type: 'password', inputmode: 'numeric', autocomplete: 'off', 'aria-label': t('pin'), dir: 'ltr' });
   put(root, header(), h('div', { class: 'amain' },
-    h('form', { class: 'card stack agate', onSubmit: (e) => { e.preventDefault(); me.pin = box.value.trim(); start(); } },
+    h('form', { class: 'card stack agate', onSubmit: (e) => { e.preventDefault(); me.pin = L.latin(box.value).trim(); start(); } },
       h('label', {}, t('pin')), box, msg ? h('p', { class: 'muted' }, msg) : null,
-      h('button', { class: 'btn primary', type: 'submit' }, t('open')))));
+      h('button', { class: 'btn primary', type: 'submit' }, t('open')))), L.draftNote(h));
   setTimeout(() => box.focus(), 50);
 }
 
@@ -251,7 +143,7 @@ async function start() {
 }
 
 function draw() {
-  if (!me.via) return start();
+  if (!me.via) return me.pin || location.protocol === 'http:' ? pinGate('') : start();
   if (page === 'content') return drawContent();
   if (page === 'spend') return drawSpend();
   if (page === 'safety') return drawSafety();
@@ -262,8 +154,8 @@ function draw() {
 
 // --- cohorts ---
 
-const bandList = (bs) => (bs.length === BANDS.length ? t('all_bands') : bs.map((b) => t('band_' + b)).join(', '));
-const langList = (ls) => ls.map((l) => t('lang_' + l)).join(', ');
+const bandList = (bs) => (bs.length === BANDS.length ? t('band.all') : bs.map((b) => t('band.' + b)).join(', '));
+const langList = (ls) => ls.map((l) => t('lang.' + l)).join(', ');
 
 function ticks(name, values, chosen, label) {
   return h('fieldset', { class: 'ticks' }, h('legend', {}, name), values.map((v) => h('label', { class: 'row' },
@@ -278,11 +170,11 @@ async function drawCohorts() {
     h('td', {}, h('a', { href: '#', onClick: (e) => { e.preventDefault(); drawCohort(c.id); } }, h('b', { dir: 'auto' }, c.label)),
       c.own ? h('small', { class: 'muted' }, ' · ' + t('own')) : null),
     h('td', {}, num(c.learners)), h('td', {}, bandList(c.bands)), h('td', {}, langList(c.langs)),
-    h('td', {}, h('span', { class: 'tag' + (c.ai ? '' : ' bad') }, t(c.ai ? 'ai_on' : 'ai_off_now'))),
-    h('td', {}, h('span', { class: 'tag' + (c.day ? '' : ' bad') }, t(c.day ? 'day_on' : 'day_off_now'))));
+    h('td', {}, h('span', { class: 'tag' + (c.ai ? '' : ' bad') }, t(c.ai ? 'ai_on' : 'ai_off'))),
+    h('td', {}, h('span', { class: 'tag' + (c.day ? '' : ' bad') }, t(c.day ? 'day_on' : 'day_off'))));
   const label = h('input', { class: 'ainput', maxlength: 40, 'aria-label': t('label'), autocomplete: 'off' });
-  const langs = ticks(t('langs'), LANGS, ['prs', 'ps'], (l) => t('lang_' + l));
-  const bands = ticks(t('bands', { b: '' }).trim(), BANDS, [], (b) => t('band_' + b));
+  const langs = ticks(t('langs'), LANGS, ['prs', 'ps'], (l) => t('lang.' + l));
+  const bands = ticks(t('years'), BANDS, [], (b) => t('band.' + b));
   const out = h('div');
   const make = async (e) => {
     e.preventDefault();
@@ -290,12 +182,12 @@ async function drawCohorts() {
     try {
       const r = await api('/cohorts', { method: 'POST', body: { label: label.value.trim(), langs: ticked(langs), bands: ticked(bands) } });
       put(out, h('div', { class: 'card stack soft' }, h('p', {}, t('code_once')), h('p', { class: 'code-big' }, m(r.code)),
-        h('div', { class: 'row wrap' }, h('button', { type: 'button', class: 'btn', onClick: () => classCards(r.id, r.code) }, t('class_cards')),
+        h('div', { class: 'row wrap' }, h('button', { type: 'button', class: 'btn', onClick: () => classCards(r.id, r.code) }, t('print_cards')),
           h('button', { type: 'button', class: 'btn', onClick: () => drawCohort(r.id) }, r.label))));
     } catch (err) { failed(err); }
   };
   frame(h('h2', {}, t('cohorts')),
-    h('div', { class: 'atable' }, h('table', {}, h('thead', {}, h('tr', {}, [t('label'), t('learners', { n: '' }).trim(), t('bands', { b: '' }).trim(),
+    h('div', { class: 'atable' }, h('table', {}, h('thead', {}, h('tr', {}, [t('label'), t('h_learners'), t('years'),
       t('langs'), 'AI', t('day_on')].map((x) => h('th', {}, x)))), h('tbody', {}, d.cohorts.map(row)))),
     h('form', { class: 'card stack', onSubmit: make }, h('h3', {}, t('new_cohort')), h('label', {}, t('label')), label,
       h('small', { class: 'muted' }, t('label_hint')), langs, bands, h('button', { type: 'submit', class: 'btn primary' }, t('make'))),
@@ -303,7 +195,7 @@ async function drawCohorts() {
 }
 
 function riskTag(r) {
-  return h('span', { class: 'tag risk-' + r }, t('r_' + r));
+  return h('span', { class: 'tag risk-' + r }, t('risk.' + r));
 }
 
 async function drawCohort(cid) {
@@ -325,12 +217,12 @@ async function drawCohort(cid) {
     if (!(await ask(t('new_code_q')))) return;
     try {
       const r = await api(`/cohorts/${cid}/code`, { method: 'POST' });
-      await ask(t('code_once'), [], [[t('class_cards'), true]], h('p', { class: 'code-big' }, m(r.code))) && classCards(cid, r.code);
+      await ask(t('code_once'), [], [[t('print_cards'), true]], h('p', { class: 'code-big' }, m(r.code))) && classCards(cid, r.code);
     } catch (e) { failed(e); }
   };
   const cardsFromCode = async () => {
-    const box = h('input', { class: 'ainput', 'aria-label': t('code'), autocomplete: 'off', dir: 'ltr' });
-    if (await ask(t('code'), [], [[t('class_cards'), true]], box)) classCards(cid, box.value.trim());
+    const box = h('input', { class: 'ainput', 'aria-label': t('code_row'), autocomplete: 'off', dir: 'ltr' });
+    if (await ask(t('code_row'), [], [[t('print_cards'), true]], box)) classCards(cid, box.value.trim());
   };
   const s = c.spend;
   const purposes = Object.entries(s.by_purpose || {}).map(([k, n]) => `${k} ${num(n)}`).join(', ');
@@ -339,10 +231,10 @@ async function drawCohort(cid) {
       h('span', {}, '›'), h('h2', { class: 'grow', dir: 'auto' }, c.label),
       h('button', { type: 'button', class: 'btn kill', onClick: () => kill('ai') }, t(c.ai ? 'kill_ai' : 'unkill_ai')),
       h('button', { type: 'button', class: 'btn kill', onClick: () => kill('day') }, t(c.day ? 'kill_day' : 'unkill_day'))),
-    h('p', { class: 'row wrap' }, t('learners', { n: num(c.learners) }), ' · ', t('bands', { b: bandList(c.bands) }), ' · ',
-      langList(c.langs), ' · ', t('join_code'), ' ', m('****'),
+    h('p', { class: 'row wrap' }, t('learners', { n: num(c.learners) }), ' · ', bandList(c.bands), ' · ',
+      langList(c.langs), ' · ', t('code_row'), ' ', m('****'),
       h('button', { type: 'button', class: 'chip', onClick: newCode }, t('new_code')),
-      h('button', { type: 'button', class: 'chip', onClick: cardsFromCode }, t('class_cards'))),
+      h('button', { type: 'button', class: 'chip', onClick: cardsFromCode }, t('print_cards'))),
     h('h3', {}, t('modules')), moduleTable(c, again),
     cohortSettings(c, again),
     aiProvider(c, again),
@@ -363,7 +255,7 @@ function moduleTable(c, again) {
         return again();
       } catch (e) {
         if (e.status !== 409 || !e.data.need) { failed(e); return again(); }
-        const lines = e.data.risks.map((x) => `${x.id} (${t('r_' + x.risk)}): ${x.sentence}`);
+        const lines = e.data.risks.map((x) => `${x.id} (${t('risk.' + x.risk)}): ${x.sentence}`);
         if (e.data.missing.length) lines.push(t('also', { x: e.data.missing.join(', ') }));
         const ok = await ask(t('turn_on_q', { m: row.id, c: c.label }), lines,
           [[e.data.missing.length ? t('turn_on_both') : t('turn_on'), true]]);
@@ -388,7 +280,7 @@ function moduleTable(c, again) {
   const gate = c.gate ? h('p', { class: 'muted' }, c.gate.open ? t('gate_open', { n: num(c.gate.tokens_per_mark) })
     : [t('gate_wait'), ...c.gate.problems].join(' ')) : null;
   return h('div', { class: 'atable' }, h('table', {}, h('thead', {}, h('tr', {},
-    [t('module'), t('risk'), t('maturity'), t('bands', { b: '' }).trim(), t('on'), t('settings'), ''].map((x) => h('th', {}, x)))),
+    [t('module'), t('risk'), t('maturity'), t('years'), t('on'), t('settings'), ''].map((x) => h('th', {}, x)))),
   h('tbody', {}, c.modules.map(tr))), gate);
 }
 
@@ -420,7 +312,7 @@ async function moduleSettings(c, row, again) {
 
 function cohortSettings(c, again) {
   const s = c.settings;
-  const line = [t(c.ai ? 'ai_on' : 'ai_off_now'), `${t('budget')}: ${s.ai_budget !== undefined ? num(s.ai_budget)
+  const line = [t(c.ai ? 'ai_on' : 'ai_off'), `${t('budget')}: ${s.ai_budget !== undefined ? num(s.ai_budget)
     : t('budget_hub', { n: c.budget === null ? t('no_cap') : num(c.budget) })}`,
   `${t('moderation')}: ${t('m_' + (s.moderation || 'none'))}`, `${t('maturities')}: ${(s.maturity || ['stable']).join(', ')}`].join(' · ');
   const edit = async () => {
@@ -482,7 +374,7 @@ const mins = (x) => { const [a, b] = String(x || '00:00').split(':').map(Number)
 function schoolDay(c) {
   const own = c.settings.timetable && c.settings.timetable !== 'default';
   return h('section', { class: 'card row wrap' }, h('b', {}, t('school_day') + ':'),
-    h('span', { class: 'grow' }, [t(own ? 'tt_own' : 'tt_default'), t(c.day ? 'day_on' : 'day_off_now')].join(' · ')),
+    h('span', { class: 'grow' }, [t(own ? 'tt_own' : 'tt_default'), t(c.day ? 'day_on' : 'day_off')].join(' · ')),
     h('button', { type: 'button', class: 'chip', onClick: () => timetablePage(c) }, t('tt_edit')));
 }
 
@@ -494,7 +386,7 @@ function timetablePage(c, draft) {
   const again = () => timetablePage(c, d);
   const days = h('fieldset', { class: 'ticks' }, h('legend', {}, t('tt_days')), tt.days.map((x) => h('label', { class: 'row' },
     h('input', { type: 'checkbox', checked: d.days.includes(x) || null,
-      onChange: (e) => { d.days = tt.days.filter((y) => (y === x ? e.target.checked : d.days.includes(y))); } }), t('d_' + x))));
+      onChange: (e) => { d.days = tt.days.filter((y) => (y === x ? e.target.checked : d.days.includes(y))); } }), t('day.' + x))));
   const hol = h('textarea', { class: 'field ainput', rows: 3, dir: 'ltr', 'aria-label': t('tt_holidays'),
     onInput: (e) => { d.holidays = e.target.value.split(/[\s,]+/).filter(Boolean); } }, (d.holidays || []).join('\n'));
   const r = d.ramadan;
@@ -514,7 +406,7 @@ function timetablePage(c, draft) {
     const has = h('label', { class: 'row' }, h('input', { type: 'checkbox', checked: x ? true : null, onChange: (e) => {
       if (e.target.checked) d.bands[b] = JSON.parse(JSON.stringify(tt.default.bands[b])); else delete d.bands[b];
       again();
-    } }), h('b', {}, t('band_' + b)), ' ', t('tt_has_day'));
+    } }), h('b', {}, t('band.' + b)), ' ', t('tt_has_day'));
     if (!x) return h('section', { class: 'card stack' }, has);
     let at = mins(x.start);
     const rows = x.blocks.map((blk, i) => {
@@ -569,7 +461,7 @@ function timetablePage(c, draft) {
 // the confirm's lines: what the save changes, in words
 function summary(a, b) {
   const out = [];
-  if (a.days.join() !== b.days.join()) out.push(`${t('tt_days')}: ${a.days.map((x) => t('d_' + x)).join(' ')} → ${b.days.map((x) => t('d_' + x)).join(' ')}`);
+  if (a.days.join() !== b.days.join()) out.push(`${t('tt_days')}: ${a.days.map((x) => t('day.' + x)).join(' ')} → ${b.days.map((x) => t('day.' + x)).join(' ')}`);
   if ((a.holidays || []).join() !== (b.holidays || []).join()) out.push(`${t('tt_holidays').split(':')[0]}: ${(b.holidays || []).join(', ') || '—'}`);
   if (JSON.stringify(a.ramadan) !== JSON.stringify(b.ramadan)) {
     out.push(`${t('tt_ramadan')}: ${b.ramadan ? `${b.ramadan.from} – ${b.ramadan.to}, ${b.ramadan.start}, ${b.ramadan.period_min} ${t('tt_min')}` : '—'}`);
@@ -579,7 +471,7 @@ function summary(a, b) {
     const y = b.bands[k];
     if (JSON.stringify(x) === JSON.stringify(y)) continue;
     const line = (z) => (z ? `${z.start}, ${z.blocks.map((q) => `${t('k_' + q.kind)} ${q.min}`).join(', ')}` : '—');
-    out.push(`${t('band_' + k)}: ${line(x)} → ${line(y)}`);
+    out.push(`${t('band.' + k)}: ${line(x)} → ${line(y)}`);
   }
   return out;
 }
@@ -627,7 +519,7 @@ async function drawContent() {
       const rel = p.releases[c.id];
       return h('tr', {}, h('td', { dir: 'auto' }, c.label),
         h('td', {}, rel ? [t('version', { v: rel.version }), ' ', m(rel.short), ' ', h('span', { class: 'tag' + (rel.current ? ' good' : '') },
-          t(rel.current ? 'current' : 'older'))] : h('span', { class: 'muted' }, t('none_yet'))),
+          t(rel.current ? 'current' : 'older_tag'))] : h('span', { class: 'muted' }, t('none_yet'))),
         h('td', {}, h('button', { type: 'button', class: 'btn', disabled: p.publishable ? null : true, onClick: () => act('publish', p, c) }, t('publish')),
           rel && rel.earlier ? h('button', { type: 'button', class: 'btn', onClick: () => act('rollback', p, c) }, t('rollback')) : null));
     })))));
@@ -658,7 +550,7 @@ async function drawSpend() {
     return h('section', { class: 'card stack' },
       h('div', { class: 'row wrap' }, h('h3', { class: 'grow', dir: 'auto' }, c.label),
         c.today.warn ? h('span', { class: 'tag warm' }, t('of_cap', { p: c.today.pct })) : null,
-        c.ai ? null : h('span', { class: 'tag bad' }, t('ai_off_now'))),
+        c.ai ? null : h('span', { class: 'tag bad' }, t('ai_off'))),
       h('div', { class: 'days14', role: 'img', 'aria-label': t('days14') }, c.days.map((x) => h('span', {
         title: `${x.day}: ${x.tokens}`, style: `height:${Math.max(2, Math.round((100 * x.tokens) / top))}%` }))),
       h('small', {}, [`${num(c.today.tokens)} / ${c.cap === null ? t('no_cap') : num(c.cap)}`, t('est', { c: money(c.cost_micro) }) + ' · ' + t('days14'),
@@ -691,7 +583,7 @@ function prices(d) {
 }
 
 // the Log's fixed word in the page's words; an unknown one as it is
-const whatWord = (w) => { const k = 'w_' + w; const x = t(k); return x === k ? w : x; };
+const whatWord = (w) => L.word('log', w);
 
 // --- Safety: counts only ---
 
@@ -762,5 +654,4 @@ async function drawLog(cohort = '') {
 
 window.addEventListener('online', () => draw());
 window.addEventListener('offline', () => say(t('connect')));
-setUi(ui);
-start();
+L.useLang(L.firstLang(), { keep: false }).then(start);
