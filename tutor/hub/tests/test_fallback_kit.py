@@ -38,7 +38,7 @@ def test_the_container_runs_online_as_the_worker_does():
 
 def test_the_container_copies_every_folder_the_hub_reads():
     copied = set(re.findall(r"^COPY (\S+) ", (DEPLOY / "Dockerfile").read_text(), re.M))
-    for folder in ("hub/tutor_hub", "migrations", "modules", "cohorts", "content", "app"):
+    for folder in ("hub/tutor_hub", "migrations", "modules", "cohorts", "content", "app", "site", "tools/make_site.py"):
         assert folder in copied, folder
 
 

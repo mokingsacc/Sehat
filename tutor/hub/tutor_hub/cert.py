@@ -209,8 +209,8 @@ def check_page() -> str:
     return ('<!doctype html><html lang="fa-AF" dir="rtl" data-look="clean" data-tone="adult"><head>'
             '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
             '<meta name="theme-color" content="#0d7c7e"><meta name="robots" content="noindex">'
-            '<title>Qalam</title><link rel="icon" href="/icon.svg" type="image/svg+xml">'
-            '<link rel="stylesheet" href="/css/app.css"></head><body>'
+            '<title>Qalam</title><link rel="icon" href="/app/icon.svg" type="image/svg+xml">'
+            '<link rel="stylesheet" href="/app/css/app.css"></head><body>'
             '<main id="v" class="get"><p class="empty">…</p></main>'
             '<div id="toast" role="status" aria-live="polite"></div>'
-            '<script type="module" src="/js/certcheck.js"></script></body></html>')
+            '<script type="module" src="/app/js/certcheck.js"></script></body></html>')

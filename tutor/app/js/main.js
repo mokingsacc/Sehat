@@ -29,7 +29,7 @@ import lesson from './screens/lesson.js';
 import lockScreen, { afterUnlock } from './screens/lock.js';
 import print from './screens/print.js';
 import settings from './screens/settings.js';
-import signup, { pendingCode } from './screens/signup.js';
+import signup, { door, next as signupNext, pendingCode } from './screens/signup.js';
 import subject from './screens/subject.js';
 import subjects from './screens/subjects.js';
 import update from './screens/update.js';
@@ -152,13 +152,30 @@ async function hubCameBack() {
   if (current && current.onHub) current.onHub(true);
 }
 
-// ?join=CODE from a class card's QR: Welcome takes the code; the address loses it at once
+// ?join=CODE from a class card's QR: Welcome takes the code. ?year=, ?track= and ?lang= from the website's doors
+// (signup.js door): a year or door makes the learner as Welcome's tap does, or chooses the one on this phone with that
+// year or door and language, so the site's door never makes her twice. The address loses the query at once.
 function joinFromAddress() {
   let code = null;
-  try { code = account.normalCode(new URLSearchParams(location.search).get('join') || ''); } catch { /* no address */ }
-  if (!new URLSearchParams(location.search).has('join')) return;
+  let q = null;
+  try { q = new URLSearchParams(location.search); code = account.normalCode(q.get('join') || ''); } catch { /* no address */ }
+  const d = door(location.search);
+  if (!q || (!q.has('join') && !d)) return;
   if (code) pendingCode(code);
-  try { history.replaceState(null, '', location.pathname + '#/welcome'); } catch { location.hash = '#/welcome'; }
+  let hash = q.has('join') ? '#/welcome' : location.hash;
+  if (d && d.lang) setLang(d.lang);
+  if (d && d.learner) {
+    const lang = d.lang || getLang();
+    const want = d.learner;
+    const withCode = pendingCode();
+    const same = !withCode && state.learners().find((l) => l.lang === lang
+      && (want.track ? l.band === 'ad' && l.track === want.track : l.year === want.year && !l.track));
+    if (same) state.setActive(same.id);
+    else { state.addChild({ ...want, lang, code: withCode }); pendingCode(null); }
+    const then = signupNext('', 'home');
+    hash = then === '#/home' && /^#\/lesson\//.test(location.hash) ? location.hash : then;   // /lessons/ opens one
+  }
+  try { history.replaceState(null, '', location.pathname + hash); } catch { location.hash = hash || '#/welcome'; }
 }
 
 // The service worker keeps the app on the phone where the page is secure (the online home over HTTPS, and a

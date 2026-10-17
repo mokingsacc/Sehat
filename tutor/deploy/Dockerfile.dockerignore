@@ -2,7 +2,9 @@
 data
 worker
 setup
-tools
+tools/*
+!tools/make_site.py
+site/build
 **/node_modules
 **/__pycache__
 **/*.pyc

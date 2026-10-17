@@ -37,6 +37,9 @@ def test_every_page_in_three_languages_with_its_lang_dir_and_alternates(built):
         hl, d = {"prs": ("fa-AF", "rtl"), "ps": ("ps-AF", "rtl"), "en": ("en", "ltr")}[p["lang"]]
         assert doc.startswith(f'<!doctype html><html lang="{hl}" dir="{d}"')
         alts = re.findall(r'<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">', doc)
+        if p["multi"]:                         # /offline/: the three languages in one file, each in its own block
+            assert not alts and all(f'data-l="{x}"' in doc for x in ("prs", "ps", "en")), p["url"]
+            continue
         assert sorted(h for h, _ in alts) == ["en", "fa-AF", "ps-AF"]
         assert all(href in urls for _, href in alts)
         assert "data-t=" not in doc and "{{" not in doc and "{app_mb}" not in doc
@@ -136,3 +139,43 @@ def test_a_missing_string_stops_the_build(make_site, monkeypatch):
     monkeypatch.setattr(make_site.json, "loads", lose)
     with pytest.raises(make_site.SiteError, match="ps.json lacks home.h1"):
         make_site.strings()
+
+
+# W2, the move (WEBSITE.md 2.2 and 2.8): the hub serves the same tree as the Worker
+
+def test_the_hub_serves_the_site_at_the_root_and_the_app_at_app(hub_client):
+    for path, lang in (("/", "fa-AF"), ("/ps/", "ps-AF"), ("/en/", "en"), ("/privacy/", "fa-AF"), ("/en/privacy/", "en")):
+        r = hub_client.get(path)
+        assert r.status_code == 200 and f'<html lang="{lang}"' in r.text, path
+        csp = r.headers["content-security-policy"]
+        assert csp.startswith("default-src 'none'; script-src 'sha256-") and "frame-ancestors 'none'" in csp
+        assert r.headers["referrer-policy"] == "no-referrer" and r.headers["x-frame-options"] == "DENY"
+        assert "camera=()" in r.headers["permissions-policy"]
+        sha = lambda t: "'sha256-" + base64.b64encode(hashlib.sha256(t.encode()).digest()).decode() + "'"
+        assert all(sha(s) in csp for s in re.findall(r"<script>(.*?)</script>", r.text, re.S))
+    app = hub_client.get("/app/")
+    assert app.status_code == 200 and "js/main.js" in app.text
+    assert "content-security-policy" not in app.headers and "x-frame-options" not in app.headers   # review frames it
+    r = hub_client.get("/app?join=K7QM4PRT", follow_redirects=False)
+    assert r.status_code == 307 and r.headers["location"] == "/app/?join=K7QM4PRT"
+    assert hub_client.get("/app/sw.js").status_code == 200 and "app-shell-" in hub_client.get("/app/sw.js").text
+    site_sw = hub_client.get("/sw.js").text
+    assert "site-" in site_sw and "__VERSION__" not in site_sw and "content-security-policy" not in hub_client.get("/sw.js").headers
+    assert json.loads(hub_client.get("/manifest.webmanifest").text)["start_url"] == "/app/"
+    for hidden in ("/app/tests/sw.test.js", "/app/teacher/", "/app/get/", "/app/audio/prs/manifest.json"):
+        assert hub_client.get(hidden).status_code == 404, hidden
+    assert hub_client.get("/audio/prs/manifest.json").status_code == 200
+
+
+def test_the_staff_pages_and_get_keep_their_addresses_with_paths_into_app(hub_client):
+    for page in ("/teacher/", "/admin/", "/review/", "/get/"):
+        r = hub_client.get(page)
+        assert r.status_code == 200 and "../" not in r.text and 'href="/app/css/app.css"' in r.text, page
+        assert hub_client.get(re.search(r'href="(/app/[^"]+\.css)"', r.text).group(1)).status_code == 200
+    for page in ("/teacher/", "/admin/", "/review/"):
+        assert "frame-ancestors 'none'" in hub_client.get(page).headers["content-security-policy"]
+        script = re.search(r'src="(/app/js/[^"]+\.js)"', hub_client.get(page).text).group(1)
+        assert hub_client.get(script).status_code == 200
+    get = hub_client.get("/get/get.js").text
+    assert "from '/app/js/i18n.js'" in get and "'../" not in get
+    assert hub_client.get("/teacher", follow_redirects=False).headers["location"] == "/teacher/"

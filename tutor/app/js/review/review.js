@@ -367,7 +367,7 @@ async function contestPage(cid) {
     const body = it ? [
       h('p', { class: 'muted small', dir: 'auto' }, t('contest_step', { l: pick(it.title, lang) || it.lesson, n: num(it.step) })),
       h('div', { class: 'frame' }, h('iframe', { title: t('step_of', { a: num(st.n), b: num(d.steps.length - 1) }), loading: 'lazy',
-        src: `../?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(it.lesson)}/${it.step}` })),
+        src: `/app/?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(it.lesson)}/${it.step}` })),
       h('dl', { class: 'facts' },
         h('dt', {}, t('contest_answer')), h('dd', { dir: 'auto' }, answerOf(it)),
         h('dt', {}, t('contest_why')), h('dd', { dir: 'auto' }, pick(it.why, lang) || t('common.none'))),
@@ -547,7 +547,7 @@ async function lesson(id, at = 1) {
       noRec ? h('span', { class: 'tag warm' }, t('no_rec')) : null);
     const view = k
       ? h('div', { class: 'frame' }, h('iframe', { title: t('step_of', { a: num(k), b: num(n) }), loading: 'eager',
-        src: `../?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(id)}/${k}` }))
+        src: `/app/?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(id)}/${k}` }))
       : whole(d, L, lang);
     const save = async (go) => {
       if (!verdict[k]) { go(); return; }

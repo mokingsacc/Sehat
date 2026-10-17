@@ -190,3 +190,13 @@ test('the sign-up order: a class code goes to consent, then the lock offer; neve
   account.agree(ey.id, 'hub-2026-10');
   assert.equal(signup.next('consent'), '#/home');
 });
+
+test("the website's doors (WEBSITE.md 2.2): ?year=, ?track= and ?lang= are read, anything else is no door", async () => {
+  const { door } = await import('../js/screens/signup.js');
+  assert.deepEqual(door('?year=3&lang=ps'), { lang: 'ps', learner: { year: 3 } });
+  assert.deepEqual(door('?year=0'), { lang: null, learner: { year: 0 } });
+  assert.deepEqual(door('?track=reader&lang=en'), { lang: 'en', learner: { band: 'ad', track: 'reader' } });
+  assert.deepEqual(door('?lang=en'), { lang: 'en', learner: null });
+  for (const bad of ['', '?site', '?year=13', '?year=-1', '?year=3.5', '?year=03x', '?track=teacher', '?lang=fr', '?join=K7QM4PRT'])
+    assert.equal(door(bad), null, bad);
+});

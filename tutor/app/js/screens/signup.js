@@ -51,6 +51,20 @@ export function pendingCode(code) {
   return code || null;
 }
 
+// the website's doors (WEBSITE.md 2.2): /app/?year=3&lang=ps, /app/?track=reader, /app/?lang=en. A year (0 to 12) or
+// an adult door is the same tap as on Welcome; a language only opens Welcome in it. Anything else is no door.
+const DOOR_LANGS = ['prs', 'ps', 'en'];
+const DOOR_TRACKS = ['literacy', 'reader'];
+export function door(search) {
+  let q;
+  try { q = new URLSearchParams(search || ''); } catch { return null; }
+  const lang = DOOR_LANGS.includes(q.get('lang')) ? q.get('lang') : null;
+  const y = q.get('year');
+  const learner = y !== null && /^(?:[0-9]|1[0-2])$/.test(y) ? { year: Number(y) }
+    : DOOR_TRACKS.includes(q.get('track')) ? { band: 'ad', track: q.get('track') } : null;
+  return lang || learner ? { lang, learner } : null;
+}
+
 // #/signup/code: "I have a class code"
 export default function signup([what]) {
   if (what !== 'code') { location.replace('#/welcome'); return { el: h('div'), tab: null }; }

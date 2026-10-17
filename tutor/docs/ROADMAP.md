@@ -212,6 +212,9 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   `/privacy/` in each language, rendered by `tools/make_site.py` from `site/` (templates, CSS, two small scripts,
   strings in three languages as drafts) with its content lint and the CSP's hashes; `tools/site_check.mjs` in CI
   (budgets, three languages at 360 and 1280 px in light and dark, throttled first paint, the forwards).
+- **W2, done:** the move: the website at `/`, the app at `/app/` on the Worker and the hub, the staff pages and
+  `/get/` where they were; the site's service worker and `/offline/`; the app takes the site's year, track and
+  language doors; `tools/move_check.mjs` checks that a phone with today's app keeps its learners, pictures and clips.
 
 ## January 2027: buy and test
 

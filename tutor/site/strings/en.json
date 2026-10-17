@@ -108,5 +108,13 @@
  "privacy.stop_p2": "Removing a learner from a phone deletes her record on that phone.",
  "site.skip_main": "Skip to the page",
  "site.version": "Version",
- "site.year_label": "Year {n}"
+ "site.year_label": "Year {n}",
+ "offline.title": "Qalam · offline",
+ "offline.desc": "You are offline.",
+ "offline.h1": "You are offline",
+ "offline.p": "This page is not on this phone yet. The lessons already on this phone still work.",
+ "offline.noapp_h1": "Qalam is not on this phone yet",
+ "offline.noapp_p": "Connect to the internet once ({app_mb} MB), or get Qalam at the learning centre or from a friend’s phone.",
+ "offline.open": "Open my lessons",
+ "offline.again": "Try again"
 }

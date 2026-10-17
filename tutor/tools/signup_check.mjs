@@ -115,11 +115,11 @@ const join1 = a.sent.find(([m, p]) => m === 'POST' && p === '/api/join');
 check(!!join1 && Object.keys(JSON.parse(join1[2])).sort().join() === 'band,cohort_code,consent,lang,picture', 'the join carries no name');
 const secs = (Date.now() - t0) / 1000;
 check(secs < 180, `sign-up with a class card took ${secs.toFixed(0)} s (under 3 minutes)`);
-await a.page.goto(`${HUB}/#/who`);
+await a.page.goto(`${HUB}/app/#/who`);
 await at(a.page, '#/who');
 await spoken(a.page, 'Who is learning');
 await shot(a.page, 'who');
-await a.page.goto(`${HUB}/#/settings`);
+await a.page.goto(`${HUB}/app/#/settings`);
 await a.page.reload();                                                      // the app opened again
 await at(a.page, '#/');
 check((await hash(a.page)).startsWith('#/lock'), 'Settings is behind her lock after a reload');
@@ -145,7 +145,7 @@ await a.ctx.close();
 
 // 2. no card, early years
 const b = await newPhone();
-await b.page.goto(`${HUB}/`);
+await b.page.goto(`${HUB}/app/`);
 await at(b.page, '#/welcome');
 await b.page.click('.yearbox.primary .dashed');
 await at(b.page, '#/home');

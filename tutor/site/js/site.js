@@ -49,4 +49,7 @@ d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest(
  if(a.id=='install'){if(bip){bip.prompt();bip=null}else toast(T.install_help)}});
 window.addEventListener('online',state);window.addEventListener('offline',state);
 state();if(d.readyState=='complete')weight();else window.addEventListener('load',weight);
+// the site's worker (/sw.js, W2): keeps the pages she saw, and answers /app/ offline before the app is here. Only on a
+// secure page: the hub's plain http allows none
+if(window.isSecureContext&&navigator.serviceWorker)window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})});
 })();

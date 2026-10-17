@@ -58,8 +58,11 @@ class Smoke:
         return ok
 
     def run(self):
-        s, page = self.call("GET", "/")
-        self.check("the app's page", s == 200 and b"<html" in page.lower(), f"{s}")
+        for path, lang in (("/", b'lang="fa-AF"'), ("/ps/", b'lang="ps-AF"'), ("/en/", b'lang="en"')):
+            s, page = self.call("GET", path)
+            self.check(f"the website's home {path}", s == 200 and lang in page, f"{s}")
+        s, page = self.call("GET", "/app/")
+        self.check("the app's page /app/", s == 200 and b"js/main.js" in page, f"{s}")
         s, hello = self.call("GET", "/api/hello")
         if not self.check("GET /api/hello", s == 200 and isinstance(hello, dict) and hello.get("hub"), f"{s} {hello}"):
             return

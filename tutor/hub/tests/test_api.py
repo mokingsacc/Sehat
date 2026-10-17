@@ -17,7 +17,7 @@ def test_hello_and_lists(hub_client):
 
 
 def test_app_and_pictures_are_served(hub_client):
-    assert "js/main.js" in hub_client.get("/").text
+    assert "js/main.js" in hub_client.get("/app/").text
     assert hub_client.get("/packs/starter/pictures/milk.svg").status_code == 200
     assert hub_client.get("/packs/starter/pictures/..%2Fpack.json").status_code == 404
     assert hub_client.get("/api/lessons/nope").status_code == 404

@@ -28,7 +28,7 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
   return acc;
 }, []));
 const ROOT = args.root || 'site/build';
-const APP = args.app || 'app';
+const APP = args.app || (existsSync(join(ROOT, 'app', 'sw.js')) ? join(ROOT, 'app') : 'app');   // a --tree build holds the app
 const OUT = args.out || 'shots';
 const QUICK = !!args.quick;
 const require = createRequire(import.meta.url);
@@ -157,7 +157,12 @@ function inspect(want) {
   const alt = [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => `${l.hreflang} ${l.getAttribute('href')}`).sort();
   if (JSON.stringify(alt) !== JSON.stringify([...want.alternates].sort())) problems.push(`hreflang: ${alt.join(', ')}`);
   const sw = [...document.querySelectorAll('.langs a')];
-  if (sw.length !== 3 || sw.filter((a) => a.getAttribute('aria-current') === 'page').length !== 1) problems.push('the language switch is not three links with one current');
+  if (want.multi) {                                  // three languages in one file: each block says its own lang and dir
+    const blocks = [...document.querySelectorAll('.multi')].map((b) => `${b.lang} ${b.dir} ${getComputedStyle(b).direction}`);
+    if (blocks.sort().join() !== 'en ltr ltr,fa-AF rtl rtl,ps-AF rtl rtl') problems.push(`the language blocks: ${blocks.join(', ')}`);
+  } else if (sw.length !== 3 || sw.filter((a) => a.getAttribute('aria-current') === 'page').length !== 1) {
+    problems.push('the language switch is not three links with one current');
+  }
   if (document.images.length) problems.push(`${document.images.length} <img>`);
   for (const s of document.styleSheets) {
     for (const r of s.cssRules) if (r instanceof CSSFontFaceRule || r instanceof CSSImportRule) problems.push('a web font or @import');
@@ -192,7 +197,8 @@ for (const p of report.pages) {
   sizes.push(`${p.url} ${kb.toFixed(1)} KB`);
   check(kb <= budget(p.page), `${p.url}: ${kb.toFixed(1)} KB brotli, budget ${budget(p.page)} KB`);
   const same = report.pages.filter((q) => q.page === p.page);
-  const want = { hl: HL[p.lang], dir: p.lang === 'en' ? 'ltr' : 'rtl', alternates: same.map((q) => `${HL[q.lang]} ${q.url}`) };
+  const want = { hl: HL[p.lang], dir: p.lang === 'en' ? 'ltr' : 'rtl', multi: !!p.multi,
+    alternates: p.multi ? [] : same.map((q) => `${HL[q.lang]} ${q.url}`) };
   for (const width of QUICK ? [360] : [360, 1280]) {
     for (const scheme of QUICK ? ['light'] : ['light', 'dark']) {
       const ctx = await browser.newContext({ viewport: { width, height: width < 600 ? 740 : 800 }, colorScheme: scheme,
@@ -206,6 +212,15 @@ for (const p of report.pages) {
       await page.goto(BASE + p.url + (p.page === 'home' ? '?site' : ''), { waitUntil: 'load' });
       await page.waitForTimeout(150);
       const r = await page.evaluate(inspect, want);
+      if (p.page === 'offline') {                     // and as the site worker sends it for /app/ before the app is here
+        await page.screenshot({ path: join(OUT, `site-${p.page}-${p.lang}-${width}-${scheme}.png`), fullPage: true });
+        await page.evaluate(() => document.documentElement.setAttribute('data-app', 'none'));
+        const none = await page.evaluate(inspect, want);
+        const words = await page.$eval('.multi', (b) => b.innerText);
+        if (!/0\.6|۰٫۶|0\.5|۰٫۵/.test(words) || !/[\u0600-\u06ff]/.test(words)) none.problems.push(`"not on this phone yet" lacks its size: ${words.slice(0, 60)}`);
+        r.problems.push(...none.problems.map((x) => `(no app) ${x}`));
+        p.shot = `site-${p.page}-noapp-${p.lang}`;
+      }
       const where = `${p.url} ${width} ${scheme}`;
       const foreign = requests.filter((u) => new URL(u).host !== HOST);
       const shown = requests.filter((u) => !/\/(sw\.js|manifest\.webmanifest)$/.test(new URL(u).pathname));
@@ -223,7 +238,7 @@ for (const p of report.pages) {
           check(Math.abs(apk * 1e6 - report.apk) / report.apk <= 0.15, `${where}: the APK's tag ${apk} MB is within 15% of its size`);
         }
       }
-      await page.screenshot({ path: join(OUT, `site-${p.page}-${p.lang}-${width}-${scheme}.png`), fullPage: true });
+      await page.screenshot({ path: join(OUT, `${p.shot || `site-${p.page}-${p.lang}`}-${width}-${scheme}.png`), fullPage: true });
       await ctx.close();
     }
   }
@@ -239,9 +254,11 @@ async function landing(path, { learner = null, saved = null, locale = 'fa-AF' } 
     if (s) localStorage.setItem('qalam.site.lang', s);
   }, [learner, saved]);
   const page = await ctx.newPage();
+  const navs = [];                                  // the addresses opened, before the app (in a --tree build) tidies its own
+  page.on('request', (r) => { if (r.isNavigationRequest() && r.frame() === page.mainFrame()) navs.push(new URL(r.url())); });
   await page.goto(BASE + path, { waitUntil: 'load' }).catch(() => {});
   await page.waitForTimeout(300);
-  const out = { url: new URL(page.url()), cont: await page.$eval('#cont', (e) => !e.hidden && e.innerText).catch(() => null) };
+  const out = { url: navs.at(-1) || new URL(page.url()), cont: await page.$eval('#cont', (e) => !e.hidden && e.innerText).catch(() => null) };
   await ctx.close();
   return out;
 }

@@ -25,7 +25,7 @@ python3 - "$OUT/sw.js" <<'PY'
 import re, sys
 p = sys.argv[1]
 src = open(p, encoding="utf-8").read()
-out = re.sub(r"^\s*'audio/[^']*',\n", "", src, flags=re.M)
+out = re.sub(r"^\s*'/?audio/[^']*',\n", "", src, flags=re.M)
 open(p, "w", encoding="utf-8").write(out)
 PY
 find "$OUT" -name '.*' -type f -delete

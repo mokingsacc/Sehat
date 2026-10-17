@@ -1,7 +1,9 @@
 # Setting up a hub
 
 A hub is one computer with a Wi-Fi hotspot and a printer. Phones join its Wi-Fi (no internet anywhere) and open
-`http://10.42.0.1`. It works without an AI model; the model only adds answers to new questions.
+`http://10.42.0.1`: Qalam's website, whose year tiles open the app at `http://10.42.0.1/app/` (a phone that already
+has a learner goes straight there, and a class card's `/?join=` code too). It works without an AI model; the model
+only adds answers to new questions.
 
 ## What to buy (estimates from the plan, January 2027 tests decide)
 

@@ -748,3 +748,40 @@ Where it differs, the builder's choices to confirm:
   rides D13 and the bag screens come in W7.
 - The lint's list of places below the province is short (the pilot's city, Mazar-i-Sharif, and two districts near it);
   reviewers extend it in `make_site.py`.
+
+### W2: the move
+
+Built: the app at `/app/` and the website at `/`, on the Worker and on the hub, from one layout.
+- `make_site.py` `site_root()` writes the pages, the site's worker (`site/js/sw.js`, its version a hash of the pages)
+  and `manifest.webmanifest`; `assemble()` adds `app/` at `/app/` (without its tests, clips and the moved folders),
+  `app/audio/` at `/audio/`, and `teacher`, `admin`, `review` and `get` at their old addresses with `../` read as
+  `/app/`. `worker/build.py` calls `assemble()` and appends the site's `_headers` rules to its own.
+- The hub (`tutor_hub/sitetree.py`) renders `site_root()` once per process into a folder of its own and serves the
+  rest from `app/` as it is on disk (a voice pack or an APK written there is served at once): `/app/` refuses the
+  tests, clips and moved folders; the moved folders get the same `../` rewrite as the build; the site's pages carry
+  the site's CSP; `/app` and `/teacher` without their slash go to the address with it. `StaffHeaders` and `/fonts`
+  stay.
+- The app: `speech.js` reads `/audio/…`; `sw.js` is `app-shell-<VERSION>` with `/audio/…` entries, keeps voice
+  clips in `media-v1` and leaves the site's pages to the site's worker; `review.js` frames `/app/?preview=`;
+  `main.js` takes `?year=`, `?track=` and `?lang=` (`signup.js` `door()`); `state.js` asks for persistent storage
+  after the first finished lesson; `index.html` links the manifest. `/v/<id>` names `/app/` for its icon, CSS and
+  script. `sync-web.sh` still drops the shell's audio lines (`'/?audio/`).
+- `site.js` registers the site's worker on a secure page (never on the hub's plain http), so a new phone keeps
+  the pages it saw and is told "not on this phone yet" offline; a phone with today's app gets it as the update
+  of its worker at `/sw.js`.
+- `/offline/`: one file in three languages, the reader's own first, on a small shell of its own (`tiny.html`,
+  `tiny.css`, `tiny.js`): 1.9 KB brotli. The site's worker sends it for `/app/` before the app is on the phone, marked
+  `data-app="none"`, which shows "Qalam is not on this phone yet".
+- `tools/move_check.mjs` serves the tree of the last commit before the move, then the new one, on one address, and
+  checks the move as a phone sees it; `site_check.mjs` also checks a whole tree (`make_site.py --tree`).
+
+Where it differs, the builder's choices to confirm:
+- The hub renders the site itself rather than reading a built folder, so a hub updated by `install.sh` needs no
+  build step; the fallback container copies `site/` and `tools/make_site.py` for this.
+- A page of the old app still open at `/` when the site's worker takes over asks for its next files at their old
+  addresses (`/js/…`, `/css/…`); the site's worker fetches them from `/app/…`, so that page keeps working until it is
+  reloaded.
+- A site door with a year or adult track opens the learner on this phone who has that year (or track) and language,
+  if there is one, instead of making a second learner; a class code on the way always makes a new one, as Welcome
+  does.
+- On `/offline/` English comes first only for a reader who chose it, as on the homes.

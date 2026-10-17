@@ -16,6 +16,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     FORWARDED_ALLOW_IPS=* \
     PORT=8080
 # TUTOR_AI_PROVIDER: as staging, Claude when ANTHROPIC_API_KEY is set in the host's settings, else the fake
+# site/ and tools/make_site.py: the hub renders the website at / and serves the app at /app/ (WEBSITE.md 2.2)
 # TUTOR_STAFF_GATE=off: no Cloudflare Access stands in front of this container, so it serves no staff page (/review/)
 # FORWARDED_ALLOW_IPS: the host's proxy is the only way in, so its X-Forwarded-For names the phone's address (the
 # join limit counts addresses); never set it where the container can be reached directly
@@ -30,6 +31,8 @@ COPY modules modules
 COPY cohorts cohorts
 COPY content content
 COPY app app
+COPY site site
+COPY tools/make_site.py tools/make_site.py
 
 RUN useradd --system --uid 10001 qalam && mkdir -p /data && chown qalam /data
 USER qalam

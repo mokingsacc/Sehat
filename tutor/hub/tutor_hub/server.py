@@ -18,7 +18,6 @@ from typing import Literal
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
-from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
@@ -884,9 +883,10 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         code = getattr(exc, "code", None)            # a staff refusal's stable code (C5.1), beside the sentence
         return JSONResponse({"error": exc.detail, **({"code": code} if code else {})}, status_code=exc.status_code)
 
-    # online the app's files are the Worker's static assets, served before the Worker, so there is no folder here
+    # the website at /, the app at /app/, the staff pages and /get/ where they were (WEBSITE.md 2.2, sitetree.py).
+    # Online they are the Worker's static assets, served before the Worker, so there is no folder here
     if cfg.app.is_dir():
+        from . import sitetree
         app.add_middleware(StaffHeaders)
-        app.mount("/fonts", StaticFiles(directory=cfg.app / "fonts"), name="fonts")
-        app.mount("/", StaticFiles(directory=cfg.app, html=True), name="app")
+        sitetree.mount(app, cfg.app)
     return app

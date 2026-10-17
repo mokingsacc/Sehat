@@ -107,8 +107,8 @@ measurements and what it costs). Nothing of the hub is forked:
   expect.
 - Static assets are served before the Worker; only `/api/*` and, since P25b, a certificate's check page `/v/*`
   reach Python (`run_worker_first`, which `guard.py` holds to exactly those two). So the hub's
-  picture route and its `StaticFiles` mounts are not used online, and `create_app` mounts the app folder only
-  where it exists.
+  picture route and its `StaticFiles` mounts are not used online, and `create_app` mounts the site and the app
+  (`sitetree.py`, W2) only where the app folder exists.
 - **What a host lacks** (`TUTOR_LACKS`, empty on the hub): online it is `printer,pin`. A module whose manifest
   `needs` something the host lacks is off for every cohort there, whatever its flag says, and so is any module that
   depends on it. `print` needs `printer`, and `teacher` now needs `pin` (the teacher's PIN, which only the hub has),
@@ -878,7 +878,7 @@ host has a signed contest. The module is off in every seed cohort.
 `stores` gain `contest_takers(cohort, contest, since)`, the best percent per token since the window opened. No
 table is added.
 
-## The website (site/, tools/make_site.py, W1; WEBSITE.md)
+## The website (site/, tools/make_site.py, W1 and W2; WEBSITE.md)
 
 A light website for families, teachers and partners, ruled by the website committee ([WEBSITE.md](WEBSITE.md)). Each
 page is one request in one language: Dari at the root, Pashto under `/ps/`, English under `/en/`. Its CSS, script,
@@ -904,6 +904,17 @@ icons (inline SVG) and favicon (a data: URI) are inside the page; there is no we
 - `tools/site_check.mjs` serves the rendered folder with brotli and its `_headers`, so the browser enforces the real
   CSP, and checks what WEBSITE.md 2.5 lists; CI runs it (tutor.yml, job `site`). `hub/tests/test_site.py` checks
   the renderer, the CSP's hashes and the lint without a browser.
+- **The move (W2, WEBSITE.md 2.2).** One layout on the Worker and the hub: the site at `/` (with `/sw.js` and
+  `/manifest.webmanifest`), the app at `/app/`, its voice clips at `/audio/`, and `/teacher/`, `/admin/`,
+  `/review/` and `/get/` where they were, their `../` read as `/app/`. `make_site.py assemble()` builds that tree for
+  `worker/build.py`; the hub's `tutor_hub/sitetree.py` renders only the site's own files (once per process, into a
+  folder of its own) and serves the rest from `app/` on disk, with the site's headers on the site's pages and none on
+  the app's. The site's worker (`site/js/sw.js`, scope `/`) keeps the site's pages (`site-<version>`, `/offline/`
+  at install), deletes the old app worker's `shell-*` after moving its voice clips into `media-v1`, sends `/app/`
+  to the network (offline, before the app is here, `/offline/` says "not on this phone yet") and never touches
+  `app-shell-*`, `media-v1` or `quran-v1`. The app's worker is `/app/sw.js` (scope `/app/`, `app-shell-<VERSION>`).
+  The app takes the site's doors: `/app/?year=3&lang=ps`, `?track=reader`, `?lang=en` (`signup.js` `door()`).
+  `tools/move_check.mjs` checks the move as a phone with the old worker meets it.
 
 ## Not built yet
 

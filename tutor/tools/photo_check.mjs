@@ -104,7 +104,7 @@ const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || 
 // 1. the in-page camera
 {
   const { ctx, page, errors, sent } = await open(browser);
-  await page.goto(`${HUB}/#/check`);
+  await page.goto(`${HUB}/app/#/check`);
   await page.waitForSelector('.this-sheet', { timeout: 15000 });
   await page.screenshot({ path: join(OUT, '1-this-sheet.png') });
   check('"This sheet?" offers "Take a photo" first, then "Type my answers"',
@@ -158,7 +158,7 @@ const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || 
 // 2. the camera refused: the phone's own camera through a file input
 {
   const { ctx, page, errors, sent } = await open(browser, { camera: false });
-  await page.goto(`${HUB}/#/photo/${VISION.cases[CASE].lesson}/${VISION.cases[CASE].seed}`);
+  await page.goto(`${HUB}/app/#/photo/${VISION.cases[CASE].lesson}/${VISION.cases[CASE].seed}`);
   await page.waitForSelector('.photo .btn.primary', { timeout: 15000 });
   await page.click('.photo .btn.primary');                         // the explainer's Start: refused, so the fallback
   await page.waitForSelector('input[type=file]', { state: 'attached', timeout: 10000 });
@@ -176,7 +176,7 @@ const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || 
 // 3. the server out of reach: "Photos need the internet" in place of "Take a photo"
 {
   const { ctx, page } = await open(browser);
-  await page.goto(`${HUB}/#/check`);
+  await page.goto(`${HUB}/app/#/check`);
   await page.waitForSelector('.this-sheet', { timeout: 15000 });
   await page.route('**/api/**', (r) => r.abort());
   await page.reload();

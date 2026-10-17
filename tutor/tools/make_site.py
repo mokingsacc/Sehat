@@ -17,7 +17,7 @@ numbers, maps, embeds, forms, share buttons, other hosts, web fonts, inline styl
 neither), "girls" in a title, heading or address, a middle dot touching a Persian digit (the P10 rule), a string
 missing in any language, and a link to a page that does not exist or is not planned.
 
-worker/build.py and the hub (W2) use render() and headers(); tools/site_check.mjs checks the pages in a browser.
+worker/build.py uses assemble() and the hub site_root() (W2); tools/site_check.mjs checks the pages in a browser.
 """
 import ast
 import base64
@@ -26,8 +26,9 @@ import hashlib
 import html
 import json
 import re
+import shutil
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 TUTOR = Path(__file__).resolve().parents[1]
@@ -52,17 +53,20 @@ class Page:
     forward: bool = False            # the homes: the forward script first in the head
     skip: str = "main"               # where "skip" leads
     read: str = ".ph"                # what the header's speaker reads
-    extra: dict = field(default_factory=dict)
+    multi: bool = False              # one file in all three languages, at the root only (/offline/, the 404 page)
+    shell: str = "page.html"         # tiny.html: the small pages (at most 4 KB), with no header, footer or site.js
+    js: str = "site.js"
 
 
 PAGES = (
     Page("home", "", "home.html", css=("base", "home"), forward=True, skip="doors", read="#hero .ht,#dh"),
     Page("privacy", "privacy/", "privacy.html"),
+    Page("offline", "offline/", "offline.html", css=("tiny",), multi=True, shell="tiny.html", js="tiny.js"),
 )
 # pages the ruling names that later phases build (W3): a link to one is allowed before it exists
 PLANNED = ("families/", "teachers/", "partners/", "credits/", "lessons/")
 # the app's own addresses, which the site may link to (WEBSITE.md 2.1)
-APP_LINKS = re.compile(r"^/(app/|get/|teacher/|admin/|review/|m(?:$|#))")
+APP_LINKS = re.compile(r"^/(app/|get/|teacher/|admin/|review/|m(?:$|#)|manifest\.webmanifest$)")
 
 # the lint's lists (WEBSITE.md 2.9); kept short and plain so a reviewer can extend them
 GIRLS = re.compile(r"\bgirls?\b|دختر|نجلۍ|نجونې|انجونې", re.I)
@@ -258,7 +262,7 @@ def localise(raw: dict, lang: str, sizes: dict) -> dict:
 def render_page(page: Page, lang: str, raw: dict, sizes: dict) -> tuple[str, dict]:
     S = localise(raw, lang, sizes)
     css = minify_css("".join((SITE / "css" / f"{c}.css").read_text(encoding="utf-8") for c in page.css))
-    js = minify_js((SITE / "js" / "site.js").read_text(encoding="utf-8"))
+    js = minify_js((SITE / "js" / page.js).read_text(encoding="utf-8"))
     fwd = minify_js((SITE / "js" / "forward.js").read_text(encoding="utf-8")) if page.forward else None
     pics = aliases()
     V = {"lang": lang, "root": PREFIX[lang], "home": home_url(lang)}
@@ -273,19 +277,27 @@ def render_page(page: Page, lang: str, raw: dict, sizes: dict) -> tuple[str, dic
         )
     if page.id == "privacy":
         V["consents"] = consent_html(lang, S)
-    body = fill((SITE / "templates" / page.template).read_text(encoding="utf-8"), S, V, f"{page.template} ({lang})")
+    tpl = (SITE / "templates" / page.template).read_text(encoding="utf-8")
+    if page.multi:                     # each language in its own block, the reader's own first (site.js)
+        body = "".join(f'<div class="multi" lang="{HTML_LANG[x]}" dir="{"ltr" if x == "en" else "rtl"}" data-l="{x}">'
+                       + fill(tpl, localise(RAW[x], x, sizes), {**V, "lang": x, "root": PREFIX[x], "home": home_url(x)},
+                              f"{page.template} ({x})") + "</div>" for x in LANGS)
+    else:
+        body = fill(tpl, S, V, f"{page.template} ({lang})")
     runtime = {"no_voice": S["site.no_voice"], "install_help": S["site.install_help"], "weight": S["site.weight"],
                "year_label": S["site.year_label"]}
     if page.id == "home":
         runtime.update(someone_new=S["home.someone_new"], adults=S["home.adults"],
                        pics={a["id"]: a["name"][lang] for a in pics})
-    alternates = "".join(f'<link rel="alternate" hreflang="{HTML_LANG[x]}" href="{page_url(page, x)}">' for x in LANGS)
+    alternates = "" if page.multi else "".join(
+        f'<link rel="alternate" hreflang="{HTML_LANG[x]}" href="{page_url(page, x)}">' for x in LANGS)
+
     def switch(x, current=""):
-        href = home_url(x) if page.id == "home" else page_url(page, x)
+        href = home_url(x) if page.id == "home" or page.multi else page_url(page, x)
         return f'<a href="{href}" data-switch="{x}" lang="{HTML_LANG[x]}"{current}>{LANG_NAMES[x]}</a>'
     langs = "".join(switch(x, ' aria-current="page"' if x == lang else "") for x in LANGS)
     foot_langs = "".join(switch(x) for x in LANGS if x != lang)
-    shell = (SITE / "templates" / "page.html").read_text(encoding="utf-8")
+    shell = (SITE / "templates" / page.shell).read_text(encoding="utf-8")
     favicon = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' "
                "height='64' rx='14' fill='%230d7c7e'/%3E%3Cpath d='M18 46l3-10 21-21a4.2 4.2 0 0 1 6 6L27 42z' fill='none' "
                "stroke='%23fff' stroke-width='4.5' stroke-linejoin='round'/%3E%3Cpath d='M16 50h32' stroke='%23f2b134' "
@@ -299,6 +311,7 @@ def render_page(page: Page, lang: str, raw: dict, sizes: dict) -> tuple[str, dic
          "draft": f'<p class="w draft">{S["site.draft"]}</p>' if raw.get("_draft") else "",
          "body": body, "runtime": json.dumps(runtime, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"),
          "js": js}
+    W["manifest"] = '<link rel="manifest" href="/manifest.webmanifest">' if page.id == "home" else ""
     out = fill(shell, S, W, f"page.html ({page.id}, {lang})")
     out = re.sub(r">\n\s*<", "><", out).replace("\n\n", "\n")
     scripts = [s for s in re.findall(r"<script>(.*?)</script>", out, re.S)]
@@ -376,17 +389,21 @@ def lint(path: str, page: str, known: set[str]) -> list[str]:
     return out
 
 
-def render(out: Path, app: Path = APP) -> dict:
+RAW: dict = {}
+
+
+def render(out: Path, app: Path = APP, *, report_file: bool = True) -> dict:
     """Every page in every language into `out` (index.html files), plus site-report.json; returns the report.
     Raises SiteError with every problem found."""
     raw = strings()
+    RAW.update(raw)
     if damm(EXAMPLE_CODE.replace(" ", "")) != 0:
         raise SiteError("the example bag code's check digit is wrong")
     sizes = {"app": app_bytes(app), "apk": apk_bytes(app)}
     pages, hashes, problems = [], {"scripts": set(), "styles": set()}, []
     known = {page_url(p, x) for p in PAGES for x in LANGS}
     for p in PAGES:
-        for lang in LANGS:
+        for lang in (("prs",) if p.multi else LANGS):
             doc, inline = render_page(p, lang, raw[lang], sizes)
             hashes["scripts"] |= {sha(s) for s in inline["scripts"]}
             hashes["styles"] |= {sha(s) for s in inline["styles"]}
@@ -396,21 +413,80 @@ def render(out: Path, app: Path = APP) -> dict:
             f.parent.mkdir(parents=True, exist_ok=True)
             f.write_text(doc, encoding="utf-8")
             pages.append({"url": url, "page": p.id, "lang": lang, "file": str(f.relative_to(out)),
-                          "bytes": len(doc.encode("utf-8"))})
+                          "bytes": len(doc.encode("utf-8")), "multi": p.multi})
     if problems:
         raise SiteError("\n".join(problems))
     report = {"pages": pages, "app_gzip": sizes["app"], "apk": sizes["apk"],
               "app_shell": [str(f.relative_to(app)) for f in shell_files(app)],
               "csp": csp(hashes), "headers": headers_file(hashes),
-              "hashes": {k: sorted(v) for k, v in hashes.items()}, "draft": {x: bool(raw[x].get("_draft")) for x in LANGS}}
-    (out / "site-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
+              "hashes": {k: sorted(v) for k, v in hashes.items()}, "draft": {x: bool(raw[x].get("_draft")) for x in LANGS},
+              "version": hashlib.sha256("".join(sorted(p["file"] + str(p["bytes"]) for p in pages)).encode()
+                                        + "".join(sorted(hashes["scripts"] | hashes["styles"])).encode()).hexdigest()[:12]}
+    if report_file:
+        (out / "site-report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
+    return report
+
+
+# the app's own folders that keep their root address after the move (WEBSITE.md 2.2): staff pages and /get/
+MOVED = ("teacher", "admin", "review", "get")
+MANIFEST = {"name": "Qalam", "short_name": "Qalam", "start_url": "/app/", "scope": "/", "display": "standalone",
+            "background_color": "#ffffff", "theme_color": "#0d7c7e",
+            "icons": [{"src": "/app/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]}
+
+
+def rewrite(text: str) -> str:
+    """A staff page or /get/ at its root address: every ../ (the icon, app.css, the page's script, get.js's
+    imports and its link back to the app) now points into /app/."""
+    return text.replace("../", "/app/")
+
+
+def site_worker(version: str) -> str:
+    return (SITE / "js" / "sw.js").read_text(encoding="utf-8").replace("__VERSION__", version)
+
+
+def site_root(public: Path, app: Path = APP) -> dict:
+    """What sits at the root and is the site's own: the pages, the site's worker at /sw.js and the manifest. The hub
+    (tutor_hub/sitetree.py) serves this folder at / and the rest of the tree from app/ itself."""
+    report = render(public, app, report_file=False)
+    (public / "sw.js").write_text(site_worker(report["version"]), encoding="utf-8")
+    (public / "manifest.webmanifest").write_text(json.dumps(MANIFEST, indent=1), encoding="utf-8")
+    return report
+
+
+def assemble(public: Path, app: Path = APP) -> dict:
+    """The whole tree the Worker serves (WEBSITE.md 2.2): site_root(), the app at /app/ (without its tests, voice
+    clips and the moved folders), the clips at /audio/, the staff pages and /get/ at their old addresses with ../
+    rewritten. Returns render()'s report."""
+    report = site_root(public, app)
+    skip = set(MOVED) | {"tests", "audio"}
+
+    def ignore(folder, names):
+        return [n for n in names if n in ("__pycache__", ".DS_Store") or (Path(folder) == app and n in skip)]
+    shutil.copytree(app, public / "app", ignore=ignore)
+    if (app / "audio").is_dir():
+        shutil.copytree(app / "audio", public / "audio", ignore=shutil.ignore_patterns("__pycache__", ".DS_Store"))
+    for d in MOVED:
+        if not (app / d).is_dir():
+            continue
+        shutil.copytree(app / d, public / d, ignore=shutil.ignore_patterns("__pycache__", ".DS_Store"))
+        for f in (public / d).rglob("*"):
+            if f.suffix in (".html", ".js"):
+                f.write_text(rewrite(f.read_text(encoding="utf-8")), encoding="utf-8")
     return report
 
 
 if __name__ == "__main__":
-    target = Path(sys.argv[1]) if len(sys.argv) > 1 else SITE / "build"
+    tree = "--tree" in sys.argv          # the whole tree as the Worker serves it (the site, /app/, staff pages)
+    argv = [a for a in sys.argv[1:] if a != "--tree"]
+    target = Path(argv[0]) if argv else SITE / "build"
+    if (target / "site-report.json").is_file() or (target / "index.html").is_file():
+        shutil.rmtree(target)                # a site rendered here before, and nothing else
+    elif target.exists() and any(target.iterdir()):
+        sys.exit(f"make_site: {target} is not empty and holds no site")
     try:
-        rep = render(target)
+        rep = assemble(target) if tree else render(target)
+        if tree:
+            (target / "site-report.json").write_text(json.dumps(rep, ensure_ascii=False, indent=1), encoding="utf-8")
     except SiteError as e:
         print(f"make_site: {e}", file=sys.stderr)
         sys.exit(1)

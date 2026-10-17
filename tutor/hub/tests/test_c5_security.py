@@ -177,7 +177,7 @@ def test_m2_the_hub_sends_the_staff_pages_with_their_headers_and_leaves_the_rest
         assert r.status_code == 200 and r.headers["x-frame-options"] == "DENY", page
         assert "frame-ancestors 'none'" in r.headers["content-security-policy"]
         assert r.headers["x-content-type-options"] == "nosniff" and r.headers["referrer-policy"] == "no-referrer"
-    assert "x-frame-options" not in hub_client.get("/").headers                     # the review page frames the app
+    assert "x-frame-options" not in hub_client.get("/app/").headers                 # the review page frames the app
     assert "x-frame-options" not in hub_client.get("/api/sheets/dari-1-sheen.html").headers   # the APK frames sheets
 
 

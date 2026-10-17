@@ -63,7 +63,7 @@ await page.addInitScript(([learner]) => {
   sentBand: 'ad', consent: { kind: 'self', version: hello.consent, at, sent: true },
   done: { 'adult-maths-1-numbers': { stars: 3 }, 'adult-maths-2-change': { stars: 2 } } }]);
 
-await page.goto(HUB + '/#/cert/ad-money');
+await page.goto(HUB + '/app/#/cert/ad-money');
 await page.waitForSelector('.cert-in', { timeout: 15000 });
 const id = (await page.textContent('.cert-screen .m')).trim();
 ok(/^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$/.test(id), `the certificate's number (${id})`);
@@ -83,7 +83,7 @@ await page.setViewportSize({ width: 390, height: 844 });
 await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
 ok(await page.evaluate(() => !document.querySelector('.cert-print') && !document.title.includes('Zarghuna')),
   'after printing the paper leaves the page');
-await page.goto(HUB + '/#/home');
+await page.goto(HUB + '/app/#/home');
 await page.waitForSelector('#app .screen');
 const stored = await page.evaluate(async () => {
   const out = [JSON.stringify({ ...localStorage }), JSON.stringify({ ...sessionStorage }), document.title, document.cookie];

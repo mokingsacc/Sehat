@@ -347,6 +347,19 @@ export function markDone(lessonId, stars) {
   if (c.tries) delete c.tries[lessonId];
   save();
   record('lesson.done', lessonId, stars);
+  keepStorage();
+}
+
+// after her first finished lesson the browser is asked to keep this site's storage when the phone runs short
+// (WEBSITE.md 2.2 and 3.13 case 16): Chrome may evict an unpersisted origin, and her record is only here
+let persistAsked = false;
+function keepStorage() {
+  if (persistAsked || preview) return;
+  persistAsked = true;
+  try {
+    const s = globalThis.navigator && navigator.storage;
+    if (s && s.persist) s.persisted().then((on) => on || s.persist()).catch(() => {});
+  } catch { /* not offered here */ }
 }
 
 // her latest mark on a lesson's sheet (Check my sheet), kept on the phone whether or not events are sent

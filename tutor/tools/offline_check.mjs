@@ -48,7 +48,7 @@ const queued = () => page.evaluate(() => JSON.parse(localStorage.getItem('qalam.
   .filter((e) => e.verb === 'check.done').length);
 
 // 1. online
-await page.goto(`${HUB}/`);
+await page.goto(`${HUB}/app/`);
 await at('#/welcome');
 await page.click('.yearbox.secondary:not(.adults) .years button >> nth=0');            // year 7
 await at('#/home');
@@ -56,7 +56,7 @@ await page.evaluate(() => navigator.serviceWorker && navigator.serviceWorker.rea
 check(await page.evaluate(() => !!(navigator.serviceWorker && navigator.serviceWorker.controller) || 'pending'),
   'the service worker is registered');
 check(await page.evaluate(() => !document.querySelector('.netchip:not(.hidden)')), 'online with nothing waiting: no chip');
-await page.goto(`${HUB}/#/ask`);
+await page.goto(`${HUB}/app/#/ask`);
 await at('#/ask');
 await page.fill('.composer input', '1/2 + 1/4');
 await page.click('.composer button[type=submit]');
@@ -74,9 +74,9 @@ await page.waitForTimeout(2500);
 let l = await learner();
 check(!!l.token && l.consent && l.consent.sent, 'joined with the consent');
 check(l.asks.length === 1 && !l.asks[0].queued && !!l.asks[0].a, 'the first question went once she had joined');
-await page.goto(`${HUB}/#/lesson/${LESSON}`);
+await page.goto(`${HUB}/app/#/lesson/${LESSON}`);
 await at('#/lesson/');
-await page.goto(`${HUB}/#/check/${LESSON}/${SEED}`);
+await page.goto(`${HUB}/app/#/check/${LESSON}/${SEED}`);
 await at('#/check/');
 await page.waitForTimeout(800);
 const before = await queued();
@@ -85,24 +85,24 @@ const before = await queued();
 await ctx.setOffline(true);
 await page.waitForTimeout(300);
 check(!!(await page.$('.netchip.off')), 'the chip says "Offline" as soon as the phone loses the network');
-await page.goto(`${HUB}/#/home`);
+await page.goto(`${HUB}/app/#/home`);
 await page.reload();
 await at('#/home', 15000);
 await page.waitForTimeout(3500);
 check(/\S/.test(await page.textContent('.netchip.off').catch(() => '')), 'offline, opened again: the chip says "Offline"');
 check((await page.$$('#app .tiles a, #app .subjects a, #app .continue, #app .next-card')).length > 0, 'offline: Home lists her lessons');
 await shot('home');
-await page.goto(`${HUB}/#/lesson/${LESSON}`);
+await page.goto(`${HUB}/app/#/lesson/${LESSON}`);
 await at('#/lesson/');
 check(!(await page.$('#app .empty')), 'offline: the lesson opens');
-await page.goto(`${HUB}/#/check/${LESSON}/${SEED}`);
+await page.goto(`${HUB}/app/#/check/${LESSON}/${SEED}`);
 await at('#/check/');
 const inputs = await page.$$('#app input');
 for (const i of inputs) await i.fill('3/4');
 await page.click('#app button.main');
 await page.waitForTimeout(300);
 check(await queued() === before + 1, 'offline: a marked sheet queues its event');
-await page.goto(`${HUB}/#/ask`);
+await page.goto(`${HUB}/app/#/ask`);
 await at('#/ask');
 await page.fill('.composer input', 'qqq zzz xxyy');
 await page.click('.composer button[type=submit]');

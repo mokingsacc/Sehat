@@ -118,6 +118,22 @@ def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
     assert not list((src / "content").rglob("*.opus"))        # clips are static assets; the hub reads manifests
     assert (public / "index.html").is_file() and not (public / "tests").exists()
     assert list((public / "packs").glob("*/pictures/*.svg"))
+    # W2 (WEBSITE.md 2.2): the site at /, the app at /app/, the clips at /audio/, staff pages and /get/ where they were
+    assert 'lang="fa-AF"' in (public / "index.html").read_text(encoding="utf-8")
+    assert (public / "ps" / "index.html").is_file() and (public / "en" / "index.html").is_file()
+    assert "js/main.js" in (public / "app" / "index.html").read_text(encoding="utf-8")
+    assert (public / "app" / "sw.js").is_file() and not (public / "app" / "tests").exists()
+    assert not any((public / "app" / d).exists() for d in ("teacher", "admin", "review", "get", "audio"))
+    assert list((public / "audio").glob("*/manifest.json"))
+    for page in ("teacher", "admin", "review", "get"):
+        doc = (public / page / "index.html").read_text(encoding="utf-8")
+        assert "../" not in doc and 'href="/app/css/app.css"' in doc, page
+    assert "'/app/js/i18n.js'" in (public / "get" / "get.js").read_text(encoding="utf-8")
+    assert "site-" in (public / "sw.js").read_text(encoding="utf-8") and "__VERSION__" not in (public / "sw.js").read_text()
+    assert json.loads((public / "manifest.webmanifest").read_text())["start_url"] == "/app/"
+    site = headers.split("\n/\n", 1)[1]
+    assert site.startswith("  Content-Security-Policy: default-src 'none'; script-src 'sha256-")
+    assert "\n/app" not in headers                    # the app keeps the /* rule only, and the camera
     assert not list(out.rglob("__pycache__")) and not (src / "app").exists()
 
 

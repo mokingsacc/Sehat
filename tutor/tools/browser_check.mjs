@@ -389,7 +389,7 @@ for (const width of WIDTHS) {
             for (const [id, l] of Object.entries(cached)) localStorage.setItem('qalam.cache.lesson.' + id, JSON.stringify(l));
           } catch { /* blocked */ }
         }, [{ v: 2, active: 'l1', learners: [learner] }, CACHED]);
-        await page.goto(`${HUB}/#/${args.contest && !args.screen ? CONTEST_SCREEN[args.contest] : SCREEN}`);
+        await page.goto(`${HUB}/app/#/${args.contest && !args.screen ? CONTEST_SCREEN[args.contest] : SCREEN}`);
         await page.waitForSelector('#app .screen', { timeout: 10000 });
         await page.waitForTimeout(700);
         if (args.live === 'reasons') { await page.click('.live-raise'); await page.waitForTimeout(200); }

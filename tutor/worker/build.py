@@ -12,8 +12,11 @@
     build/src/content/voice.json              the one voice per language and its native listener's gate (C5.6)
     build/src/content/quran/light.json        the Quran set as checked here (P29): its hash and state, the surah list
                                               and credits, the hashes of the verses lessons name; never the text
-    build/public/                             the phone app (app/, without its tests, with its voice clips: app/audio,
-                                              C5.6; a release build only a language whose native listener passed),
+    build/public/                             the website at / (/ps/, /en/, /privacy/, /offline/, /sw.js, the
+                                              manifest: tools/make_site.py, WEBSITE.md 2.2), the phone app at /app/
+                                              (app/, without its tests), its voice clips at /audio/ (app/audio, C5.6; a
+                                              release build only a language whose native listener passed), the staff
+                                              pages and /get/ at their own addresses with ../ read as /app/,
                                               and the lesson pictures and clips
                                               at /packs/<pack>/pictures/<file> and /packs/<pack>/audio/<lang>/<file>,
                                               the addresses the hub gives them; and the Quran set as the hub serves it,
@@ -21,13 +24,15 @@
                                               here (/quran/audio/<edition>/<s>_<a>.mp3), only where the build is not for
                                               release or a Hanafi scholar has signed the set (C4.7)
     build/public/audio/<lang>/voice.qvoice    each language's voice pack: every clip of it in one file (C5.6)
-    build/public/_headers                     security headers for the static files (C5 M2; HEADERS below): Workers
-                                              static assets read it and do not serve it
+    build/public/_headers                     security headers for the static files (C5 M2; HEADERS below, then the
+                                              site pages' own CSP of hashes): Workers static assets read it and do not
+                                              serve it
 
 build/src mirrors tutor/, so the hub's defaults (config.TUTOR) find every folder without a setting. The pictures go
 twice: in the bundle, where the hub checks they exist, and as static assets, which is how phones get them online.
 Run: python3 build.py   (then pywrangler dev or deploy from tutor/worker)
 """
+import importlib.util
 import json
 import shutil
 import sys
@@ -57,6 +62,14 @@ for _staff in ("admin", "teacher", "review"):
 """
 
 
+def make_site():
+    """tools/make_site.py (WEBSITE.md 2.2), loaded as a module: the site's pages, their CSP and the tree's layout."""
+    spec = importlib.util.spec_from_file_location("qalam_make_site", TUTOR / "tools" / "make_site.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def build(out: Path = BUILD, config: Path | None = None) -> dict:
     """`config` is the wrangler file whose [vars] go in vars.json: wrangler.toml unless a test names another (the
     production workflow copies wrangler.production.toml over wrangler.toml first, so wrangler deploys the same)."""
@@ -77,7 +90,7 @@ def build(out: Path = BUILD, config: Path | None = None) -> dict:
     shutil.copy2(TUTOR / "content" / "sources.json", src / "content" / "sources.json")
     shutil.copy2(TUTOR / "content" / "aliases.json", src / "content" / "aliases.json")
     shutil.copy2(TUTOR / "content" / "voice.json", src / "content" / "voice.json")
-    shutil.copytree(TUTOR / "app", public, ignore=shutil.ignore_patterns("tests", "__pycache__", ".DS_Store"))
+    site = make_site().assemble(public)            # the site at /, the app at /app/, staff pages where they were (W2)
     for pictures in sorted((TUTOR / "content" / "packs").glob("*/pictures")):
         shutil.copytree(pictures, public / "packs" / pictures.parent.name / "pictures", ignore=SKIP)
     for audio in sorted((TUTOR / "content" / "packs").glob("*/audio")):
@@ -87,7 +100,7 @@ def build(out: Path = BUILD, config: Path | None = None) -> dict:
         voice_gate(public)
     voice_packs(public)
     quran_set(src, public, release=release)
-    (public / "_headers").write_text(HEADERS, encoding="utf-8")
+    (public / "_headers").write_text(HEADERS + site["headers"], encoding="utf-8")
     return {name: sum(f.stat().st_size for f in (out / name).rglob("*") if f.is_file()) for name in ("src", "public")}
 
 

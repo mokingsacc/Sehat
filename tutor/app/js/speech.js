@@ -92,7 +92,7 @@ export function soundUrl(url) {
 // audio, so it asks the hub or the online home, and asks again later if they were out of reach.
 export function loadClips(lang) {
   if (!manifests.has(lang)) {
-    const at = android.isApp() ? hubUrl(`/audio/${lang}/manifest.json`) : `audio/${lang}/manifest.json`;
+    const at = android.isApp() ? hubUrl(`/audio/${lang}/manifest.json`) : `/audio/${lang}/manifest.json`;   // at the root (W2)
     manifests.set(lang, fetch(at).then((r) => (r.ok ? r.json() : android.isApp() ? Promise.reject(new Error(r.status)) : {}))
       .then((m) => {
         const clips = (m && m.clips && typeof m.clips === 'object') ? m.clips : {};
