@@ -218,7 +218,11 @@ export default async function ask(args = []) {
     for (const a of open) {
       try {
         const r = await hub.askStatus(a.id);
-        if (r.status === 'reviewed' && r.teacher_answer) {
+        if (r.status === 'reviewed' && Array.isArray(r.ladder)) {     // a held ladder the teacher sent (P20)
+          state.updateAsk(a.id, { a: r.line || a.a, ladder: r.ladder, checkable: !!r.checkable, rungs: 0, source: 'ai',
+            waiting: false, done: true });
+          changed = true;
+        } else if (r.status === 'reviewed' && r.teacher_answer) {
           const same = r.teacher_answer.trim() === String(a.a || '').trim();
           state.updateAsk(a.id, same ? { source: 'teacher', done: true } : { teacher: r.teacher_answer, done: true });
           changed = true;

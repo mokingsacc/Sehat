@@ -5,6 +5,7 @@ The API is small and plain JSON; docs/ARCHITECTURE.md lists every route.
 """
 import asyncio
 import hmac
+import json
 import logging
 import random
 import secrets
@@ -28,10 +29,11 @@ from .config import Config
 from .mods import homework as homework_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
+from .mods import teacher as teacher_mod
 from .mods import timetable as timetable_mod
 from .staff import Gate
 from .packs import Library, band_of_year, picture_file
-from .packs import text as pick_text
+from .textnorm import digits_to_latin
 from .printing import Printer, PrintQueue
 from .stores import SqliteStore
 
@@ -46,11 +48,6 @@ class AskIn(BaseModel):
     year: int | None = Field(None, ge=0, le=12)
     lesson: str | None = None
     teacher: bool = False        # "Ask my teacher" from a sheet's hint ladder: straight to the teacher, no answer
-
-
-class ReviewIn(BaseModel):
-    answer: str | None = Field(None, max_length=4000)
-    approve: bool = True
 
 
 class PrintIn(BaseModel):
@@ -92,6 +89,12 @@ class MeIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     band: Literal["ey", "p1", "p2", "s1", "s2", "ad"] | None = None
     consent: ConsentIn | None = None
+
+
+class PinResetIn(BaseModel):
+    """The six digits her teacher read out to her (C1.6, P20); Persian digits too."""
+    model_config = ConfigDict(extra="forbid")
+    code: StrictStr = Field(..., min_length=6, max_length=12)
 
 
 class EventsIn(BaseModel):
@@ -166,6 +169,7 @@ class Hub:
         self.event_limit = Limit(30, 60)
         self.join_limit = Limit(20, 3600)
         self.photo_limit = Limit(6, 60)              # photos of sheets read per phone a minute
+        self.reset_limit = Limit(10, 600)            # lock reset codes tried per phone in ten minutes
         self.staff = Gate(self)                      # the staff pages' gate (staff.py): PIN, Access or off
         self.aliases = set(learners.load_aliases())
         self.consent_texts = learners.load_consent()
@@ -460,6 +464,22 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         await hub.store.delete_learner(row["token_hash"])
         return {"deleted": True}
 
+    # "I have a code from my teacher" (C1.6, P20): six digits, 15 minutes, once, five tries; the lock is the phone's
+    @app.post("/api/me/pin-reset")
+    async def pin_reset(body: PinResetIn, request: Request):
+        hub.reset_limit.check(hub.who(request))
+        row = await hub.learner(request)
+        code = digits_to_latin(body.code).replace(" ", "")
+        if not code.isdigit() or len(code) != 6:
+            raise HTTPException(422, "six digits, please")
+        got = await hub.store.use_reset_code(row["token_hash"], teacher_mod.code_hash(row["token_hash"], code),
+                                             teacher_mod.CODE_TRIES)
+        if got == "wrong":
+            raise HTTPException(403, "that code is not right")
+        if got == "none":
+            raise HTTPException(404, "no code from your teacher now")
+        return {"ok": True}
+
     # Ask
     # Online a question may reach the AI provider, so it needs a learner whose guardian (or who herself) agreed (BUILD-PLAN 5.5);
     # on the hub nothing leaves the village and the phone asks for consent before its first question.
@@ -475,16 +495,26 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
             ans = Answer(WAITING[lang], lang, "none", waiting=True)
         else:
             band = (who or {}).get("band") or (band_of_year(a.year) if a.year is not None else None)
-            _, _, on = await hub.cohort_modules(cohort, band)
+            _, f, on = await hub.cohort_modules(cohort, band)
+            # the cohort holds the AI's answers for the teacher (P20): she sends, edits or drops each one first
+            hold = "teacher" in on and flags.module_settings(hub.modules["teacher"],
+                                                             (f.get("teacher") or {}).get("settings"))["hold"]
             ans = await hub.brain.answer(a.text, lang=lang, subject=a.subject, year=a.year, lesson=a.lesson,
-                                         cohort=cohort, homework="homework" in on)
+                                         cohort=cohort, homework="homework" in on, hold=hold)
+        held = ans.held and ans.source == "ai"
+        if held:
+            shown, hints = ans.text, ans.ladder
+        else:
+            shown, hints = (None if ans.waiting and ans.source != "rules" else ans.shown()), None
         token = await hub.store.add_question(lang=lang, subject=a.subject, year=a.year, lesson_id=a.lesson,
-                                             question=a.text.strip(),
-                                             answer=None if ans.waiting and ans.source != "rules" else ans.shown(),
-                                             source=ans.source, urgent=ans.urgent, waiting=ans.waiting)
+                                             question=a.text.strip(), answer=shown, source=ans.source,
+                                             urgent=ans.urgent, waiting=ans.waiting, cohort=cohort, held=held,
+                                             hints=hints)
         if ans.solution is not None:               # the answer behind the ladder stays here, for "Check my answer"
             await hub.store.add_ladder(token, solution=ans.solution, sure=not ans.unsure)
         await hub.record("ask.answered", ans.source, cohort_id=request.query_params.get("cohort"))
+        if held:                                   # she hears only that it went to the teacher
+            return dict(Answer(WAITING[lang], lang, "none", waiting=True).dict(), id=token)
         return dict(ans.dict(), id=token)
 
     @app.get("/api/ask/{token}", dependencies=needs("ask"))
@@ -492,7 +522,13 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         q = await hub.store.question(token)
         if not q:
             raise HTTPException(404, "no such question")
-        return {"id": token, "status": q["status"], "teacher_answer": q["teacher_answer"]}
+        out = {"id": token, "status": "waiting" if q["status"] == "held" else q["status"],
+               "teacher_answer": q["teacher_answer"]}
+        if q["status"] == "reviewed" and q.get("hints"):   # a held ladder the teacher sent: the rungs, never the answer
+            secret = await hub.store.ladder(token)
+            out.update(teacher_answer=None, line=q["answer"], ladder=json.loads(q["hints"]),
+                       checkable=bool(secret and secret["sure"]))
+        return out
 
     @app.post("/api/ask/{token}/teacher", dependencies=needs("ask"))
     async def ask_teacher(token: str, request: Request):
@@ -526,10 +562,12 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(review_mod.router(hub, needs))
     # The school day (the `timetable` module, P19): the cohort's timetable for a band, without a token
     app.include_router(timetable_mod.router(hub, needs))
+    # The teacher dashboard (the `teacher` module, P20): behind the staff gate, at /teacher/ (app/teacher/)
+    app.include_router(teacher_mod.router(hub, needs))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
-    # The answer page is the teacher's: behind the teacher's PIN on the hub, and on no learner route (C2.3); online
-    # there is no PIN, so there it is not served at all (the teacher's pages come with P20).
+    # The answer page is the teacher's: here behind the teacher's PIN on the hub, and on no learner route (C2.3);
+    # online there is no PIN, so here it is not served at all: the teacher opens it inside /teacher/ (P20).
     def _seed(lid, seed):
         if seed is not None:
             return seed
@@ -603,49 +641,6 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         if not j:
             raise HTTPException(404, "no such print job")
         return {"id": jid, "status": j["status"], "detail": j["detail"] if j["status"] == "failed" else None}
-
-    # the teacher's page
-    @app.get("/api/teacher/summary", dependencies=needs("teacher"))
-    async def teacher_summary(request: Request, x_teacher_pin: str | None = Header(None)):
-        hub.check_pin(x_teacher_pin, _who(request))
-        return {"counts": await hub.store.counts(), "hello": await hub.hello(),
-                "pack_problems": hub.library.problems[:50]}
-
-    @app.get("/api/teacher/queue", dependencies=needs("teacher"))
-    async def teacher_queue(request: Request, x_teacher_pin: str | None = Header(None)):
-        hub.check_pin(x_teacher_pin, _who(request))
-        rows = await hub.store.queue()
-        for r in rows:
-            r.pop("token", None)
-            l = hub.library.lessons.get(r.get("lesson_id") or "")
-            r["lesson_title"] = pick_text(l["title"], r.get("lang") or "prs") if l else None
-        return {"questions": rows}
-
-    @app.post("/api/teacher/answer/{qid}", dependencies=needs("teacher"))
-    async def teacher_answer(qid: int, body: ReviewIn, request: Request, x_teacher_pin: str | None = Header(None)):
-        hub.check_pin(x_teacher_pin, _who(request))
-        q = await hub.store.review(qid, answer=body.answer, approve=body.approve)
-        if not q:
-            raise HTTPException(404, "no such question")
-        await hub.record("review.approved" if q["status"] == "reviewed" else "review.rejected",
-                         events.lesson_id(q.get("lesson_id")), cohort_id=request.query_params.get("cohort"))
-        if body.approve:
-            await hub.reindex()
-        q.pop("token", None)
-        return q
-
-    @app.get("/api/teacher/prints", dependencies=needs("teacher"))
-    async def teacher_prints(request: Request, x_teacher_pin: str | None = Header(None)):
-        hub.check_pin(x_teacher_pin, _who(request))
-        return {"printer": hub.printer.status(), "jobs": [{k: v for k, v in j.items() if k != "device"}
-                                                     for j in await hub.store.prints()]}
-
-    @app.post("/api/teacher/hub-card", dependencies=needs("teacher", "print"))
-    async def teacher_card(request: Request, x_teacher_pin: str | None = Header(None)):
-        hub.check_pin(x_teacher_pin, _who(request))
-        jid = await hub.store.add_print(lesson_id=None, kind="card", copies=1, lang="prs", seed=0, device="teacher")
-        hub.prints.add(jid, {"card": True, "copies": 1, "title": "hub-card"})
-        return {"id": jid, "status": "queued"}
 
     @app.exception_handler(HTTPException)
     async def http_error(request: Request, exc: HTTPException):

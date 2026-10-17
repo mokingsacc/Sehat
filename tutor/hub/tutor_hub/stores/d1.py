@@ -21,7 +21,8 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from .base import EVENT_FIELDS, Store, check_changes, check_initials, check_note, check_staff, draw_number
+from .base import (EVENT_FIELDS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_note, check_staff,
+                   draw_number, hints_json, question_status)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -112,13 +113,26 @@ class D1Store(Store):
     # questions
 
     async def add_question(self, *, lang, subject, year, lesson_id, question, answer, source, urgent,
-                           waiting) -> str:
+                           waiting, cohort=None, held=False, hints=None) -> str:
         token = secrets.token_hex(8)
         await self._run("""INSERT INTO questions(token, created, lang, subject, year, lesson_id, question, answer,
-                           source, urgent, to_teacher, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+                           source, urgent, to_teacher, status, cohort, hints) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                         token, now(), lang, subject, year, lesson_id, question, answer, source, int(bool(urgent)),
-                        int(bool(waiting or urgent)), "waiting" if waiting else "answered")
+                        int(bool(waiting or urgent or held)), question_status(waiting, held), cohort,
+                        hints_json(hints))
         return token
+
+    async def question_row(self, qid):
+        return await self._one("SELECT * FROM questions WHERE id=?", int(qid))
+
+    async def question_count(self, cid, since, own=False) -> int:
+        r = await self._one("SELECT COUNT(*) AS n FROM questions WHERE (cohort=? OR (? AND cohort IS NULL)) "
+                            "AND created>=?", cid, int(bool(own)), since)
+        return (r or {}).get("n") or 0
+
+    async def ladder(self, token):
+        r = await self._one("SELECT solution, sure FROM ladders WHERE token=?", token)
+        return {"solution": r["solution"], "sure": bool(r["sure"])} if r else None
 
     async def question(self, token):
         return await self._one("SELECT * FROM questions WHERE token=?", token)
@@ -142,20 +156,23 @@ class D1Store(Store):
         r = rows[1][0]
         return {"solution": r["solution"], "sure": bool(r["sure"]), "checks": r["checks"], "used": bool(rows[0])}
 
-    async def queue(self, limit=50):
-        return await self._all("""SELECT * FROM questions WHERE to_teacher=1 AND status IN ('answered','waiting')
-                                  ORDER BY urgent DESC, status='waiting' DESC, id LIMIT ?""", int(limit))
+    async def queue(self, limit=50, cohort=None, own=False):
+        if cohort is None:
+            return await self._all(f"SELECT * FROM questions WHERE {QUEUE} ORDER BY {QUEUE_ORDER} LIMIT ?",
+                                   int(limit))
+        return await self._all(f"SELECT * FROM questions WHERE ({QUEUE}) AND (cohort=? OR (? AND cohort IS NULL)) "
+                               f"ORDER BY {QUEUE_ORDER} LIMIT ?", cohort, int(bool(own)), int(limit))
 
-    async def review(self, qid, *, answer=None, approve=True):
+    async def review(self, qid, *, answer=None, approve=True, hints=None, reuse=True):
         q = await self._one("SELECT * FROM questions WHERE id=?", qid)
         if not q:
             return None
         final = (answer or "").strip() or q["answer"]
         if approve and final:
             at = now()
-            group = [self._stmt("UPDATE questions SET status='reviewed', teacher_answer=?, reviewed=? WHERE id=?",
-                                final, at, qid)]
-            if not q["urgent"] and q["source"] != "rules":     # safety messages are never reused as answers
+            group = [self._stmt("UPDATE questions SET status='reviewed', teacher_answer=?, reviewed=?, "
+                                "hints=COALESCE(?, hints) WHERE id=?", final, at, hints_json(hints), qid)]
+            if reuse and not q["urgent"] and q["source"] != "rules":     # safety messages are never reused
                 group.append(self._stmt("""INSERT INTO approved(created, lang, subject, year, lesson_id, question,
                                            answer) VALUES(?,?,?,?,?,?,?)""",
                                         at, q["lang"] or "prs", q["subject"], q["year"], q["lesson_id"],
@@ -187,7 +204,8 @@ class D1Store(Store):
         cut = _ago(days=keep_days).isoformat(timespec="seconds")
         await self._batch([self._stmt("DELETE FROM questions WHERE created<?", cut),
                            self._stmt("DELETE FROM ladders WHERE created<?", cut),
-                           self._stmt("DELETE FROM prints WHERE created<?", cut)])
+                           self._stmt("DELETE FROM prints WHERE created<?", cut),
+                           self._stmt("DELETE FROM reset_codes WHERE expires<?", now())])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)
 
@@ -299,6 +317,10 @@ class D1Store(Store):
     async def events(self, cid, limit=100):
         return await self._all(f"SELECT id, {', '.join(EVENT_FIELDS)} FROM events WHERE cohort=? "
                                "ORDER BY at DESC, id DESC LIMIT ?", cid, int(limit))
+
+    async def events_since(self, cid, since):
+        return await self._all("SELECT token_hash, at, verb, object, value FROM events WHERE cohort=? AND at>=? "
+                               "ORDER BY at, id", cid, since)
 
     async def prune_events(self, keep_days: int):
         await self._run("DELETE FROM events WHERE at<?", _ago(days=keep_days).strftime("%Y-%m-%dT%H:%M"))
@@ -416,13 +438,33 @@ class D1Store(Store):
         meta = await self._run(f"UPDATE learners SET {cols} WHERE token_hash=?", *changes.values(), token_hash)
         return (meta.changes or 0) > 0
 
+    async def learners_in(self, cid):
+        return await self._all("SELECT token_hash, picture, number, band, joined, last_seen FROM learners "
+                               "WHERE cohort=? ORDER BY picture, number", cid)
+
+    async def set_reset_code(self, token_hash, code_hash, expires) -> None:
+        await self._run("INSERT OR REPLACE INTO reset_codes(token_hash, code_hash, expires, tries) VALUES(?,?,?,0)",
+                        token_hash, code_hash, expires)
+
+    async def use_reset_code(self, token_hash, code_hash, tries=5) -> str:
+        t = now()
+        ok, wrong = await self._batch_rows([      # one round trip: a right code is used up, a wrong one counted
+            self._stmt("DELETE FROM reset_codes WHERE token_hash=? AND code_hash=? AND expires>=? AND tries<? "
+                       "RETURNING token_hash", token_hash, code_hash, t, int(tries)),
+            self._stmt("UPDATE reset_codes SET tries=tries+1 WHERE token_hash=? AND code_hash!=? AND expires>=? "
+                       "AND tries<? RETURNING tries", token_hash, code_hash, t, int(tries))])
+        return "ok" if ok else "wrong" if wrong else "none"
+
     async def delete_learner(self, token_hash) -> bool:
         res = await self._batch([self._stmt("DELETE FROM events WHERE token_hash=?", token_hash),
+                                 self._stmt("DELETE FROM reset_codes WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
-        return (res[1].meta.changes or 0) > 0
+        return (res[2].meta.changes or 0) > 0
 
     async def prune_learners(self, idle_days: int):
         cut = _ago(days=idle_days).strftime("%Y-%m-%d")
         await self._batch([self._stmt("DELETE FROM events WHERE token_hash IN "
+                                      "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
+                           self._stmt("DELETE FROM reset_codes WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])

@@ -98,8 +98,17 @@ class SqliteStore(Store):
     async def send_to_teacher(self, token) -> bool:
         return await self._run("send_to_teacher", token)
 
-    async def queue(self, limit=50):
-        return await self._run("queue", limit)
+    async def question_row(self, qid):
+        return await self._run("question_row", qid)
+
+    async def question_count(self, cid, since, own=False) -> int:
+        return await self._run("question_count", cid, since, own)
+
+    async def queue(self, limit=50, cohort=None, own=False):
+        return await self._run("queue", limit, cohort, own)
+
+    async def ladder(self, token):
+        return await self._run("ladder", token)
 
     async def add_ladder(self, token, *, solution, sure) -> None:
         return await self._run("add_ladder", token, solution=solution, sure=sure)
@@ -107,8 +116,8 @@ class SqliteStore(Store):
     async def use_check(self, token, limit=3):
         return await self._run("use_check", token, limit)
 
-    async def review(self, qid, *, answer=None, approve=True):
-        return await self._run("review", qid, answer=answer, approve=approve)
+    async def review(self, qid, *, answer=None, approve=True, hints=None, reuse=True):
+        return await self._run("review", qid, answer=answer, approve=approve, hints=hints, reuse=reuse)
 
     async def approved(self):
         return await self._run("approved")
@@ -163,6 +172,9 @@ class SqliteStore(Store):
 
     async def events(self, cid, limit=100):
         return await self._run("events", cid, limit)
+
+    async def events_since(self, cid, since):
+        return await self._run("events_since", cid, since)
 
     async def prune_events(self, keep_days: int):
         return await self._run("prune_events", keep_days)
@@ -228,6 +240,15 @@ class SqliteStore(Store):
     async def update_learner(self, token_hash, **changes) -> bool:
         check_changes(changes)                   # here too, so a stray key never reaches _run's own arguments
         return await self._run("update_learner", token_hash, **changes)
+
+    async def learners_in(self, cid):
+        return await self._run("learners_in", cid)
+
+    async def set_reset_code(self, token_hash, code_hash, expires) -> None:
+        return await self._run("set_reset_code", token_hash, code_hash, expires)
+
+    async def use_reset_code(self, token_hash, code_hash, tries=5) -> str:
+        return await self._run("use_reset_code", token_hash, code_hash, tries)
 
     async def delete_learner(self, token_hash) -> bool:
         return await self._run("delete_learner", token_hash)

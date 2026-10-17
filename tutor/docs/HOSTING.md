@@ -140,8 +140,8 @@ The third answer to D6 is ready in `tutor/deploy`, so choosing it costs an accou
 
 ## Staff pages behind Cloudflare Access (P17; a step for Mo, not done)
 
-The review screens (`/review/`, P17) are the first staff pages; the teacher's (`/teacher/`, P20) and the admin's
-(`/admin/`, P21) will sit behind the same gate. Online, Cloudflare Access is the only place staff emails live
+The review screens (`/review/`, P17) and the teacher dashboard (`/teacher/`, P20) are the staff pages so far; the
+admin's (`/admin/`, P21) will sit behind the same gate. Online, Cloudflare Access is the only place staff emails live
 (C3.2). Until the steps below are done, every staff route answers 404 online, which is the safe default; the page
 `/review/` itself holds no data and simply says that review is not open. On the village hub the teacher's PIN opens
 it instead, and the fallback container sets `TUTOR_STAFF_GATE=off` because nothing stands in front of it.
@@ -150,8 +150,8 @@ it instead, and the fallback container sets `TUTOR_STAFF_GATE=off` because nothi
 2. Give the staff paths a hostname Access can cover path by path. Access's one-click switch for `workers.dev`
    protects the whole Worker, which would lock learners out, so this most likely needs a custom domain on the
    account routed to `qalam-staging` (to be confirmed when it is set up).
-3. Add a self-hosted Access application for `<host>/review/*` and `<host>/api/m/review/*` (later also
-   `/teacher/*`, `/api/m/teacher/*`, `/admin/*`, `/api/m/admin/*`). Its policy allows the reviewers' and teachers'
+3. Add a self-hosted Access application for `<host>/review/*`, `<host>/api/m/review/*`, `<host>/teacher/*` and
+   `<host>/api/m/teacher/*` (later also `/admin/*`, `/api/m/admin/*`). Its policy allows the reviewers' and teachers'
    emails, with a second factor for admins. Copy the application's audience tag (AUD).
 4. Set three Worker secrets (the deploy job never touches secrets, so they stay across deploys):
    `wrangler secret put TUTOR_ACCESS_TEAM` (the team name), `TUTOR_ACCESS_AUD` (the AUD tag) and
@@ -163,7 +163,8 @@ it instead, and the fallback container sets `TUTOR_STAFF_GATE=off` because nothi
    --label "Dari reviewer 1" --role "Dari reader" --initials AB --cohorts qg1j2918yx` asks for the email, prints SQL
    holding only its peppered hash, and `wrangler d1 execute qalam-staging --remote --command "<that SQL>"` adds the
    row. `staff-remove` prints the SQL that removes one. Roles are the ones lessons name in `review.needs`
-   ("Dari reader", "Pashto reader", "maths teacher", ...), or `teacher` and `admin` for later pages.
+   ("Dari reader", "Pashto reader", "maths teacher", ...), or `teacher` (the dashboard, for the cohorts listed) and
+   `admin`.
 6. Before a release, open `/api/m/review/signoffs` while signed in, save it as `signoffs.json`, run
    `python3 tools/pull_signoffs.py --json signoffs.json`, check with `python3 tools/validate_pack.py --release`, and
    commit the packs.

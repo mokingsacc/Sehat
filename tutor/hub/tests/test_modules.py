@@ -192,8 +192,8 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     assert flags.enabled(REAL, staging, f) == ["ask", "check", "homework", "lessons", "photo", "print", "review",
                                               "sheets", "teacher", "timetable"]
     assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "homework", "lessons", "photo",
-                                                                         "review", "sheets", "timetable"]
-    assert REAL["teacher"]["needs"] == ["pin"]
+                                                                         "review", "sheets", "teacher", "timetable"]
+    assert REAL["teacher"]["needs"] == []                 # C3.2: a gate per host, no `pin` need (staff.py)
 
 
 def test_the_real_hub_cohort_takes_the_built_modules():

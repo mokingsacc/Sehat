@@ -14,24 +14,32 @@ The contract, which tests/test_store_contract.py checks on every store:
 - Times are UTC ISO strings to the second, made by the store.
 
 Questions
-- `add_question(*, lang, subject, year, lesson_id, question, answer, source, urgent, waiting) -> token`: a question
-  that is `waiting` or `urgent` goes to the teacher's list; status is "waiting" when `waiting`, else "answered".
-- `question(token) -> dict | None`.
+- `add_question(*, lang, subject, year, lesson_id, question, answer, source, urgent, waiting, cohort=None,
+  held=False, hints=None) -> token`: a question that is `waiting`, `urgent` or `held` goes to the teacher's list;
+  status is "held" when `held` (an AI answer kept for the teacher, P20), else "waiting" when `waiting`, else
+  "answered". `hints` is a held ladder's rungs, kept as JSON; `cohort` is the asking learner's (or the hub's).
+- `question(token) -> dict | None`; `question_row(qid) -> dict | None`, by the row's id, for the teacher's pages.
+- `question_count(cid, since, own=False) -> int`: the cohort's questions since `since` (an ISO time); `own` also
+  counts questions with no cohort (asked before P20), which are the hub's own.
 - `send_to_teacher(token) -> bool`: puts an answered or waiting question on the teacher's list; False if there is
   no such open question.
-- `queue(limit=50) -> list`: the teacher's list: urgent first, then unanswered, then oldest first.
-- `review(qid, *, answer=None, approve=True) -> dict | None`: approving with an answer (or the shown answer) marks
-  it reviewed and, unless it was urgent or a rules message, adds it to the approved answers; otherwise it is
-  rejected. None if there is no such question.
+- `queue(limit=50, cohort=None, own=False) -> list`: the teacher's list (held answers, and answered or waiting
+  questions sent to the teacher): urgent first, then unanswered, then oldest first; with `cohort`, that cohort's
+  only (and with `own`, those with no cohort too).
+- `review(qid, *, answer=None, approve=True, hints=None, reuse=True) -> dict | None`: approving with an answer (or
+  the shown answer) marks it reviewed, keeps `hints` when given (a held ladder, edited), and, when `reuse` and
+  unless it was urgent or a rules message, adds it to the approved answers; otherwise it is rejected. None if there
+  is no such question.
 - `approved() -> list`: every approved answer, oldest first.
 - `counts() -> dict`: the last day's `asked_today`, `checked_today`, `ai_today`, `for_teacher`, `pages_today`,
   and all `approved_answers`.
 - `add_ladder(token, *, solution, sure)`: the private answer behind a question's hint ladder (P15), never sent to a
   phone; `sure` is False when the model's two runs disagreed.
+- `ladder(token) -> dict | None`: `{solution, sure}` behind a question's ladder, for the teacher's eyes only.
 - `use_check(token, limit=3) -> dict | None`: one "Check my answer" try: `{solution, sure, checks, used}`, with
   `used` False (and nothing counted) once `limit` tries are spent; None when the question has no ladder.
-- `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`; approved answers
-  stay.
+- `prune(keep_days)`: deletes questions, their ladders and print jobs older than `keep_days`, and lock reset codes
+  past their time; approved answers stay.
 
 Print jobs
 - `add_print(*, lesson_id, kind, copies, lang, seed, device) -> id`: a queued job.
@@ -56,6 +64,8 @@ Events (events.py decides what may be in them)
   of these, raises ValueError and nothing is written, so no stray field (a name, free text) can reach the table.
   `at` is the caller's UTC minute, kept as given.
 - `events(cid, limit=100) -> list`: the cohort's events, newest first (by `at`, then the order they were added).
+- `events_since(cid, since) -> list`: the cohort's events from the minute `since` on, oldest first, each
+  `{token_hash, at, verb, object, value}`: what the teacher's counts are made from.
 - `prune_events(keep_days)`: deletes events whose `at` is more than `keep_days` days old.
 
 AI usage (the gateway's spending, ai/gateway.py)
@@ -99,8 +109,15 @@ Learners (learners.py decides what they mean; never a name)
   consent_at, joined, last_seen}`.
 - `update_learner(token_hash, **changes) -> bool`: changes only `band`, `consent_kind`, `consent_version`,
   `consent_at` and `last_seen` (any other key raises ValueError); False if there is no such learner.
-- `delete_learner(token_hash) -> bool`: deletes the learner and every event carrying her token's hash, together.
-- `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events.
+- `learners_in(cid) -> list`: the cohort's learners by picture and number, each `{token_hash, picture, number,
+  band, joined, last_seen}`, for the teacher's class list (which never shows the hash).
+- `set_reset_code(token_hash, code_hash, expires)`: a lock reset code the teacher made for her (P20, C1.6), hashed,
+  replacing any earlier one, with no tries used; `expires` is an ISO time.
+- `use_reset_code(token_hash, code_hash, tries=5) -> str`: "ok" (the code is right: it is used up), "wrong" (one
+  more try counted) or "none" (no code, past its time, or `tries` wrong tries spent).
+- `delete_learner(token_hash) -> bool`: deletes the learner, every event carrying her token's hash and her reset
+  code, together.
+- `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events and reset codes.
 """
 
 import json
@@ -108,6 +125,23 @@ import random
 import re
 
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
+# the teacher's list: held answers, and answered or waiting questions sent to the teacher; urgent first
+QUEUE = "status='held' OR (to_teacher=1 AND status IN ('answered','waiting'))"
+QUEUE_ORDER = "urgent DESC, status='held' DESC, status='waiting' DESC, id"
+
+
+def question_status(waiting, held) -> str:
+    return "held" if held else "waiting" if waiting else "answered"
+
+
+def hints_json(hints) -> str | None:
+    """A held ladder's rungs as JSON: a list of {rung, text, ...}, at most three."""
+    if hints is None:
+        return None
+    if not isinstance(hints, list) or len(hints) > 3 or not all(isinstance(r, dict) and isinstance(r.get("text"), str)
+                                                                 for r in hints):
+        raise ValueError("hints are a list of at most three rungs, each {rung, text}")
+    return json.dumps(hints, ensure_ascii=False)
 LEARNER_CHANGES = ("band", "consent_kind", "consent_version", "consent_at", "last_seen")
 
 
@@ -138,7 +172,16 @@ class Store:
 
     # questions
     async def add_question(self, *, lang, subject, year, lesson_id, question, answer, source, urgent,
-                           waiting) -> str:
+                           waiting, cohort=None, held=False, hints=None) -> str:
+        raise NotImplementedError
+
+    async def question_row(self, qid) -> dict | None:
+        raise NotImplementedError
+
+    async def question_count(self, cid, since, own=False) -> int:
+        raise NotImplementedError
+
+    async def ladder(self, token) -> dict | None:
         raise NotImplementedError
 
     async def add_ladder(self, token, *, solution, sure) -> None:
@@ -153,10 +196,10 @@ class Store:
     async def send_to_teacher(self, token) -> bool:
         raise NotImplementedError
 
-    async def queue(self, limit=50) -> list[dict]:
+    async def queue(self, limit=50, cohort=None, own=False) -> list[dict]:
         raise NotImplementedError
 
-    async def review(self, qid, *, answer=None, approve=True) -> dict | None:
+    async def review(self, qid, *, answer=None, approve=True, hints=None, reuse=True) -> dict | None:
         raise NotImplementedError
 
     async def approved(self) -> list[dict]:
@@ -211,6 +254,9 @@ class Store:
         raise NotImplementedError
 
     async def events(self, cid, limit=100) -> list[dict]:
+        raise NotImplementedError
+
+    async def events_since(self, cid, since) -> list[dict]:
         raise NotImplementedError
 
     async def prune_events(self, keep_days: int) -> None:
@@ -277,6 +323,15 @@ class Store:
         raise NotImplementedError
 
     async def update_learner(self, token_hash, **changes) -> bool:
+        raise NotImplementedError
+
+    async def learners_in(self, cid) -> list[dict]:
+        raise NotImplementedError
+
+    async def set_reset_code(self, token_hash, code_hash, expires) -> None:
+        raise NotImplementedError
+
+    async def use_reset_code(self, token_hash, code_hash, tries=5) -> str:
         raise NotImplementedError
 
     async def delete_learner(self, token_hash) -> bool:

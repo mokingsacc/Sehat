@@ -143,7 +143,8 @@ settled (BUILD-PLAN 3.2): `id`, `version`, `maturity`, `depends`, `bands`, `slot
 calls a model), `settings`, `needs`, `offline`. The first six are today's features: `lessons`, `ask`, `sheets`
 (the sheet document, the keys, "Get the sheet" and the lesson-end card, C2 change 6), `print` (only the hub's print
 queue; it depends on `sheets` and needs `printer`), `check` (Check my sheet, which depends on `sheets`) and
-`teacher`. `photo` (P14, photo marking of Qalam sheets) depends on `sheets` and `check`, serves p2 to adult, needs
+`teacher` (the teacher dashboard at `/teacher/` since P20; no `needs` since a staff gate guards it on every host,
+C3.2; settings `hold`, off by default, and `lock_codes`, on by default). `photo` (P14, photo marking of Qalam sheets) depends on `sheets` and `check`, serves p2 to adult, needs
 the internet and is on only in staging so far. `homework` (P15, Homework help: "Check my answer" under Ask's hint
 ladder) depends on `ask`, serves p2, s1 and s2, calls the model for `hint`, needs the internet and is on only in
 staging (`migrations/0009`). `review` (P17, the review screens at `/review/`) depends on `lessons`, has no slot in
@@ -256,7 +257,10 @@ The safest source answers first, and every answer says where it came from, so th
 4. **AI**, through the AI gateway (below), only in the languages trusted so far (`TUTOR_AI_LANGS`, Dari and English
    at first) and while the cohort's daily budget lasts. The model gets the
    closest lesson passages. Every sum it writes is recomputed; an answer with a wrong sum is never shown. Badge: AI,
-   or "AI, sums checked".
+   or "AI, sums checked". Where the cohort's teacher holds AI answers (the `teacher` setting `hold`, P20), the
+   answer, or a Homework help ladder, is kept as a held question (status `held`, the ladder in `hints`) and she sees
+   only that her question went to the teacher; the teacher sends, edits (the ladder's leak check again) or does not
+   send it. A sent answer is not added to the checked answers; the AI usage row is marked `held`.
 5. **Lesson passage**, if it explains at least 45% of the question. Badge: from the lesson.
 6. **Teacher.** Nothing fits: the child sees "your question went to the teacher", and the answer appears on the
    phone when the teacher writes it.
@@ -402,7 +406,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 ## Privacy
 
 - The hub stores no names. A question is kept with a random token (so the asking phone can fetch the teacher's
-  answer), the year, subject and lesson; questions are deleted after `TUTOR_KEEP_DAYS` (60).
+  answer), the year, subject, lesson and class (cohort id); questions are deleted after `TUTOR_KEEP_DAYS` (60).
 - Progress and the asked-questions list stay on the phone (`localStorage`, key `qalam.v2`). `qalam.v2` holds no name:
   a learner is a band, a year or adult track, a language, an alias picture, an optional nickname (never sent) and her
   own settings; once she joins, the server's token, number and class, and her consent record. The PIN lock is a
@@ -410,6 +414,8 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   is never sent. The older `qalam.v1`, which could hold a child's name, is migrated once with the name dropped and removed.
 - Events (above) are verbs and ids with no name and no free text, sent only with consent and kept against her
   token's hash; they stay on the hub.
+- A lock reset code (P20) is kept only as a hash with her token's hash, for 15 minutes, used once, ended by five
+  wrong tries, and deleted with her record (`reset_codes`, `migrations/0012`).
 - Nothing leaves the hub: there is no internet connection and no analytics.
 - Sheet photos (online, P14): only a strip of the answer cells leaves the phone, never the name box; it is read in
   memory and never stored or logged, on the phone or the server (above, "Photo marking").
@@ -439,13 +445,14 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `POST /api/print` | `{lesson, kind, copies, lang, seed}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
-| `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
+| `GET /api/m/teacher/me`, `todo`, `class`, `class/{alias}`, `lessons`, `lessons/{id}`, `answers/{id}.html`, `wishes`; `POST /api/m/teacher/todo/{id}`, `class/{alias}/reset-code`, `class-card`, `hub-card` | The teacher dashboard (P20); the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online, role teacher or admin), `?cohort=` one of hers |
+| `POST /api/me/pin-reset` | `{code}`, six digits in any script -> `{ok}`; 403 a wrong code, 404 none waiting; header `X-Learner-Token`; 10 tries in 10 minutes an address |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
@@ -559,10 +566,11 @@ DESIGN-C2C3-SPECS item 10: p1 two periods of 25 minutes, p2 three of 30, s1 and 
   before the start and each period's bell) with the title "Qalam"; `cancelAlarms()` otherwise. A browser has no
   bridge, so nothing happens there.
 
-## Staff pages and review (staff.py, mods/review.py, P17)
+## Staff pages: review and the teacher dashboard (staff.py, mods/review.py, mods/teacher.py, P17, P20)
 
 Staff pages live on their own paths, apart from the learner app, so Cloudflare Access can guard them online (C3.2):
-`/review/` first (`app/review/index.html`, `app/js/review/review.js`), later `/teacher/` and `/admin/`. The learner
+`/review/` (`app/review/index.html`, `app/js/review/review.js`), `/teacher/` (`app/teacher/index.html`,
+`app/js/teacher/teacher.js`, P20), later `/admin/`. The learner
 app's service worker leaves them alone, and they keep nothing in the browser.
 
 - **The gate** (`staff.py`, one per host). On the hub, the teacher's PIN. Online, Cloudflare Access: the Worker
@@ -579,6 +587,24 @@ app's service worker leaves them alone, and they keep nothing in the browser.
   `review_notes` row against that step's own hash, so a changed step shows "changed". On a step with a recording, OK
   waits until the clip has played (in the page); a step that needs a recording and has none blocks signing. Signing
   (a 3-second hold) writes a `signoffs` row for the current content hash, initials only, once every step is OK.
+- **The teacher dashboard** (`/api/m/teacher/*`, module `teacher`, DESIGN-C2C3-SPECS item 11). On the hub the
+  PIN gives the hub's own class; online the staff row's role must be teacher or admin, and `?cohort=` one of her
+  cohorts. No names anywhere: a learner is her alias (picture and number), a question its year and time.
+  - *To do*, one card at a time, oldest first in three groups: needs care (Reply, Seen), held answers and ladders
+    (Send, Edit with the leak check, Don't send with a reason chip: wrong, gives the answer, unsafe, not school;
+    counted as `held.sent`, `held.edited`, `held.dropped` events), and questions sent to the teacher (Reply with
+    "Use it for others too", Dismiss). Replies and edits go through the identifier filter. Keys S, E, D, J and K.
+  - *Class*: active this week, learners, lessons finished and sheets checked this week, questions; each alias by
+    picture and number with band, last seen, lessons, sheets and average, and "needs help" when three or more items
+    stayed wrong after the last hint. Her page: lessons with her latest score, hint steps used, and the lock reset
+    code (six digits, 15 minutes, once, five tries; `POST /api/me/pin-reset` from her lock screen's "I have a code
+    from my teacher"). "Print class card": the teacher types the class code (only its hash is kept) and gets a QR
+    of `<address>/?join=CODE` (byte mode, `qr.py`) with the code in text; the hub card stays on the hub.
+  - *Lessons*: did it, mastered (her latest sheet at 80% or more), the hardest item, disputes and hint steps, and
+    per item right, wrong, disputes and hints, all counted from events over their retention; the answer sheet
+    opens from here.
+  - *Wishes*: read only (filled by P22).
+  - Nothing is cached: the page keeps the PIN in memory only, and offline says "Connect to see your class".
 - **Into the pack:** `tools/pull_signoffs.py` (from `/api/m/review/signoffs` or a hub's database) writes the
   signatures for each lesson's current hash into its `review` block, leaving the file's layout alone, and reports
   older ones as changed since signed; release mode then serves the lesson. One changed word gives a new hash and
@@ -587,4 +613,4 @@ app's service worker leaves them alone, and they keep nothing in the browser.
 ## Not built yet
 
 See [ROADMAP.md](ROADMAP.md): the Android app (lessons kept on the phone, recording yourself over plain http,
-finding the hub), speech input, recorded voices for lessons, progress counts for the teacher, updates by USB stick.
+finding the hub), speech input, recorded voices for lessons, updates by USB stick.

@@ -196,10 +196,5 @@ export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURICompone
 export const sheetUrl = (id, { seed = 0, lang = 'prs', pdf = false, print = false } = {}) =>
   url(`/api/sheets/${encodeURIComponent(id)}.${pdf ? 'pdf' : 'html'}?seed=${seed}&lang=${lang}${print ? '&print=1' : ''}`);
 
-export const teacher = {
-  summary: (pin) => call('/api/teacher/summary', { pin }),
-  queue: (pin) => call('/api/teacher/queue', { pin }),
-  answer: (pin, id, body) => call('/api/teacher/answer/' + id, { method: 'POST', body, pin }),
-  prints: (pin) => call('/api/teacher/prints', { pin }),
-  card: (pin) => call('/api/teacher/hub-card', { method: 'POST', pin }),
-};
+// "I have a code from my teacher" (P20): the six digits she was given open a new PIN; the lock is the phone's
+export const pinReset = (token, code) => call('/api/me/pin-reset', { method: 'POST', body: { code }, token, ms: 15000 });

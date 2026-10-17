@@ -407,8 +407,6 @@ h2 { font-size: var(--fs-btn); }
 .qcard textarea { width: 100%; min-height: 96px; border-radius: 12px; border: 2px solid var(--line-strong); background: var(--card); padding: 10px; line-height: 1.7; }
 .qcard .btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .qcard .btns .btn { min-height: 46px; font-size: var(--fs-sm); padding: 0 6px; }
-.jobs { padding: 6px 16px 0; font-size: var(--fs-sm); }
-.jobs div { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 6px 0; }
 
 #toast {
   position: fixed; left: 50%; bottom: 100px; transform: translateX(-50%) translateY(20px); opacity: 0; transition: .25s;
@@ -678,3 +676,32 @@ details.credit[open] summary { margin-bottom: 8px; }
 .trow.all { color: var(--accent-ink); }
 .stepper-v { min-width: 4em; text-align: center; font-weight: 800; font-size: var(--fs-btn); }
 .round[disabled] { opacity: .45; }
+
+/* the teacher dashboard (P20, /teacher/): a staff page in the clean look, adult tone; a 480 px column on phones, up
+   to 720 px on laptops. Nothing about learners here but a picture and a number. */
+.teacher { max-width: 720px; margin: 0 auto; min-height: 100vh; }
+.teacher .screen { padding-bottom: 24px; }
+.teacher .row.wrap { flex-wrap: wrap; }
+.ttabs { padding: 4px 16px 0; flex-wrap: wrap; }
+.ttabs .count { margin-inline-start: 6px; min-width: 22px; padding: 0 6px; border-radius: 999px; background: var(--warm); color: var(--on-warm); font-size: var(--fs-sm); text-align: center; }
+.stats.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 600px) { .stats.four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.teacher .pic { width: 48px; height: 48px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.class-list small { display: block; }
+.tag.help { background: var(--warm-soft); color: var(--warm-ink); }
+.qcard .hints { margin: 0; padding-inline-start: 22px; line-height: 1.75; display: flex; flex-direction: column; gap: 4px; }
+.qcard .private { background: var(--soft); border-radius: 10px; padding: 8px 10px; margin: 0; }
+.qcard .btns.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.qcard .chips.wrap { flex-wrap: wrap; align-items: center; }
+.teacher textarea.field { width: 100%; margin: 0; padding: 10px 14px; font: inherit; color: var(--ink); }
+.teacher .plain { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.teacher .wish { min-height: 52px; border-bottom: 1.5px solid var(--line); gap: 12px; }
+.code-big { font-size: calc(var(--fs-xl) * 1.5); font-weight: 800; letter-spacing: .12em; text-align: center; margin: 0; }
+.bar.good-bar { height: 10px; background: var(--soft); }
+.bar.good-bar span { background: var(--good); }
+.class-card { margin: 0 16px; border: 2px dashed var(--line-strong); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--card); }
+.class-card svg { width: 40mm; height: 40mm; }
+@media (hover: none) { .keys-hint { display: none; } }
+@media print { .teacher header, .teacher .ttabs, .noprint, #toast { display: none !important; } .class-card { border: 0; } }
+.lock .code-in { width: 100%; max-width: 280px; margin: 0 auto; min-height: 64px; font-size: calc(var(--fs-xl) * 1.2); font-weight: 800; letter-spacing: .2em; text-align: center; border-radius: 16px; border: 2px solid var(--line-strong); background: var(--card); color: var(--ink); }   /* the teacher's six digits (P20) */
+

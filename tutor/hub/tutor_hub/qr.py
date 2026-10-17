@@ -1,5 +1,7 @@
 """A small QR code maker for the sheet's footer (C2.1): alphanumeric text only, error correction level M, versions 1
 to 3, which is all a sheet code needs ("Q1 M7-03-48217 PRS" is 18 characters; version 1 holds 20, version 3 holds 61).
+The teacher's class card (P20) is the one code that holds an address, `<the app>/?join=CODE`: `url=True` writes it
+in byte mode, versions 1 to 6 (up to 106 characters at level M), never on a learner's sheet.
 
 Written here because the online home (the Worker) and the fallback kit carry no QR library, and the sheet must look
 the same from every home. The hub's card (sheets.hub_card) still uses segno, which the hub has; the tests check this
@@ -8,7 +10,9 @@ maker against segno, mask by mask. The code holds text, never a URL (C2.1).
 ALNUM = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:"
 # version: (data codewords, error correction codewords) at level M, one block each
 CAPACITY = {1: (16, 10), 2: (28, 16), 3: (44, 26)}
-ALIGN = {1: None, 2: 18, 3: 22}          # the one alignment pattern's centre (row and column), version 2 and up
+# version: (blocks, data codewords per block, error correction codewords per block) at level M
+BLOCKS = {1: (1, 16, 10), 2: (1, 28, 16), 3: (1, 44, 26), 4: (2, 32, 18), 5: (2, 43, 24), 6: (4, 27, 16)}
+ALIGN = {1: None, 2: 18, 3: 22, 4: 26, 5: 30, 6: 34}   # the one alignment pattern's centre, version 2 and up
 FORMAT_M = 0b00                          # level M's two format bits
 
 
@@ -55,19 +59,31 @@ def fits(text: str) -> bool:
     return all(c in ALNUM for c in text) and len(text) <= 61
 
 
-def _bits(text: str, version: int) -> list[int]:
+def _data_words(version: int) -> int:
+    n, d, _ = BLOCKS[version]
+    return n * d
+
+
+def _bits(text: str, version: int, byte: bool = False) -> list[int]:
     out: list[int] = []
 
     def put(v, n):
         out.extend((v >> (n - 1 - i)) & 1 for i in range(n))
 
-    put(0b0010, 4)
-    put(len(text), 9)
-    for i in range(0, len(text) - 1, 2):
-        put(ALNUM.index(text[i]) * 45 + ALNUM.index(text[i + 1]), 11)
-    if len(text) % 2:
-        put(ALNUM.index(text[-1]), 6)
-    cap = CAPACITY[version][0] * 8
+    if byte:
+        raw = text.encode("ascii")
+        put(0b0100, 4)
+        put(len(raw), 8)
+        for b in raw:
+            put(b, 8)
+    else:
+        put(0b0010, 4)
+        put(len(text), 9)
+        for i in range(0, len(text) - 1, 2):
+            put(ALNUM.index(text[i]) * 45 + ALNUM.index(text[i + 1]), 11)
+        if len(text) % 2:
+            put(ALNUM.index(text[-1]), 6)
+    cap = _data_words(version) * 8
     put(0, min(4, cap - len(out)))
     while len(out) % 8:
         out.append(0)
@@ -79,17 +95,25 @@ def _bits(text: str, version: int) -> list[int]:
     return out
 
 
-def _codewords(text: str, version: int) -> list[int]:
-    bits = _bits(text, version)
-    data = [int("".join(map(str, bits[i:i + 8])), 2) for i in range(0, len(bits), 8)]
-    return data + _ec(data, CAPACITY[version][1])
+def _codewords(text: str, version: int, byte: bool = False) -> list[int]:
+    bits = _bits(text, version, byte)
+    return _final([int("".join(map(str, bits[i:i + 8])), 2) for i in range(0, len(bits), 8)], version)
 
 
-def _version(text: str) -> int:
-    for v in sorted(CAPACITY):
-        if 4 + 9 + 11 * (len(text) // 2) + 6 * (len(text) % 2) <= CAPACITY[v][0] * 8:
+def _final(data: list[int], version: int) -> list[int]:
+    """The data codewords cut into the version's blocks, each with its error correction, interleaved."""
+    n, d, e = BLOCKS[version]
+    blocks = [data[k * d:(k + 1) * d] for k in range(n)]
+    ecs = [_ec(b, e) for b in blocks]
+    return [b[i] for i in range(d) for b in blocks] + [c[i] for i in range(e) for c in ecs]   # interleaved
+
+
+def _version(text: str, byte: bool = False) -> int:
+    need = 4 + 8 + 8 * len(text) if byte else 4 + 9 + 11 * (len(text) // 2) + 6 * (len(text) % 2)
+    for v in (sorted(BLOCKS) if byte else sorted(CAPACITY)):
+        if need <= _data_words(v) * 8:
             return v
-    raise ValueError("too long for a sheet's QR code")
+    raise ValueError("too long for a QR code here")
 
 
 def _base(version: int):
@@ -228,12 +252,19 @@ def _penalty(m) -> int:
     return p
 
 
-def matrix(text: str, mask: int | None = None) -> list[list[int]]:
-    """The QR code for `text` as rows of 0 (light) and 1 (dark), without the quiet zone."""
-    if not all(c in ALNUM for c in text):
+def matrix(text: str, mask: int | None = None, *, url: bool = False) -> list[list[int]]:
+    """The QR code for `text` as rows of 0 (light) and 1 (dark), without the quiet zone. `url`: an address in byte
+    mode (the class card only)."""
+    if url:
+        if not (text.startswith(("http://", "https://")) and all(32 < ord(c) < 127 for c in text)):
+            raise ValueError("a class card's QR code holds one plain web address")
+    elif not all(c in ALNUM for c in text):
         raise ValueError("a sheet's QR code holds capitals, digits and a few signs only")
-    version = _version(text)
-    words = _codewords(text, version)
+    version = _version(text, url)
+    return _draw(_codewords(text, version, url), version, mask)
+
+
+def _draw(words: list[int], version: int, mask: int | None = None) -> list[list[int]]:
     base, reserved = _base(version)
     _place(base, reserved, words)
     best = None
@@ -253,10 +284,10 @@ def matrix(text: str, mask: int | None = None) -> list[list[int]]:
     return best[1]
 
 
-def svg(text: str, size_mm: float) -> str:
+def svg(text: str, size_mm: float, *, url: bool = False) -> str:
     """The QR code as inline SVG for an HTML page, `size_mm` wide, black on white, with no quiet zone (the sheet keeps
     it clear)."""
-    m = matrix(text)
+    m = matrix(text, url=url)
     n = len(m)
     path = "".join(f"M{x} {y}h1v1h-1z" for y in range(n) for x in range(n) if m[y][x])
     return (f'<svg class="qr" viewBox="0 0 {n} {n}" width="{size_mm}mm" '

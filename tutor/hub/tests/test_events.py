@@ -124,8 +124,8 @@ def test_ask_print_and_review_write_events(hub_client):
     hub_client.post("/api/print", json={"lesson": "maths-1-count-5", "copies": 2, "name": "Maryam"})
     hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=4821")       # a key fetch is not a check
     pin = {"X-Teacher-Pin": hub_client.pin}
-    q = {x["question"]: x["id"] for x in hub_client.get("/api/teacher/queue", headers=pin).json()["questions"]}
-    hub_client.post(f"/api/teacher/answer/{q['زلزله چرا می‌آید؟']}", headers=pin, json={"answer": "...", "approve": True})
+    q = {x["question"]: x["id"] for x in hub_client.get("/api/m/teacher/todo", headers=pin).json()["items"]}
+    hub_client.post(f"/api/m/teacher/todo/{q['زلزله چرا می‌آید؟']}", headers=pin, json={"action": "reply", "text": "..."})
     hub_client.hub.prints.wait()
     rows = list(reversed(kept(hub_client)))
     assert [(e["module"], e["verb"], e["object"], e["value"]) for e in rows] == [

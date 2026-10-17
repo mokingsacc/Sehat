@@ -12,7 +12,8 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import EVENT_FIELDS, check_changes, check_initials, check_note, check_staff, draw_number
+from .base import (EVENT_FIELDS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_note, check_staff,
+                   draw_number, hints_json, question_status)
 
 
 def now() -> str:
@@ -43,13 +44,22 @@ class Store:
             return dict(r) if r else None
 
     # questions
-    def add_question(self, *, lang, subject, year, lesson_id, question, answer, source, urgent, waiting) -> str:
+    def add_question(self, *, lang, subject, year, lesson_id, question, answer, source, urgent, waiting,
+                     cohort=None, held=False, hints=None) -> str:
         token = secrets.token_hex(8)
         self._x("""INSERT INTO questions(token, created, lang, subject, year, lesson_id, question, answer, source,
-                   urgent, to_teacher, status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)""",
+                   urgent, to_teacher, status, cohort, hints) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                 (token, now(), lang, subject, year, lesson_id, question, answer, source, int(urgent),
-                 int(waiting or urgent), "waiting" if waiting else "answered"))
+                 int(waiting or urgent or held), question_status(waiting, held), cohort, hints_json(hints)))
         return token
+
+    def question_row(self, qid):
+        return self._one("SELECT * FROM questions WHERE id=?", (qid,))
+
+    def question_count(self, cid, since, own=False) -> int:
+        r = self._one("SELECT COUNT(*) AS n FROM questions WHERE (cohort=? OR (? AND cohort IS NULL)) AND created>=?",
+                      (cid, int(bool(own)), since))
+        return (r or {}).get("n") or 0
 
     def question(self, token):
         return self._one("SELECT * FROM questions WHERE token=?", (token,))
@@ -58,20 +68,22 @@ class Store:
         return self._x("UPDATE questions SET to_teacher=1 WHERE token=? AND status IN ('answered','waiting')",
                        (token,)).rowcount > 0
 
-    def queue(self, limit=50):
+    def queue(self, limit=50, cohort=None, own=False):
         """What the teacher should look at: urgent first, then questions with no answer, then ones sent to them."""
-        return self._all("""SELECT * FROM questions WHERE to_teacher=1 AND status IN ('answered','waiting')
-                            ORDER BY urgent DESC, status='waiting' DESC, id LIMIT ?""", (limit,))
+        where, args = QUEUE, ()
+        if cohort is not None:
+            where, args = f"({QUEUE}) AND (cohort=? OR (? AND cohort IS NULL))", (cohort, int(bool(own)))
+        return self._all(f"SELECT * FROM questions WHERE {where} ORDER BY {QUEUE_ORDER} LIMIT ?", (*args, limit))
 
-    def review(self, qid, *, answer=None, approve=True):
+    def review(self, qid, *, answer=None, approve=True, hints=None, reuse=True):
         q = self._one("SELECT * FROM questions WHERE id=?", (qid,))
         if not q:
             return None
         final = (answer or "").strip() or q["answer"]
         if approve and final:
-            self._x("UPDATE questions SET status='reviewed', teacher_answer=?, reviewed=? WHERE id=?",
-                    (final, now(), qid))
-            if not q["urgent"] and q["source"] != "rules":   # safety messages are never reused as answers
+            self._x("UPDATE questions SET status='reviewed', teacher_answer=?, reviewed=?, hints=COALESCE(?, hints) "
+                    "WHERE id=?", (final, now(), hints_json(hints), qid))
+            if reuse and not q["urgent"] and q["source"] != "rules":   # safety messages are never reused
                 self._x("""INSERT INTO approved(created, lang, subject, year, lesson_id, question, answer)
                            VALUES(?,?,?,?,?,?,?)""",
                         (now(), q["lang"] or "prs", q["subject"], q["year"], q["lesson_id"], q["question"], final))
@@ -100,6 +112,10 @@ class Store:
         self._x("INSERT OR REPLACE INTO ladders(token, solution, sure, checks, created) VALUES(?,?,?,0,?)",
                 (token, str(solution), int(bool(sure)), now()))
 
+    def ladder(self, token):
+        r = self._one("SELECT solution, sure FROM ladders WHERE token=?", (token,))
+        return {"solution": r["solution"], "sure": bool(r["sure"])} if r else None
+
     def use_check(self, token, limit=3):
         with self.lock:
             cur = self.db.execute("UPDATE ladders SET checks=checks+1 WHERE token=? AND checks<?", (token, limit))
@@ -113,6 +129,7 @@ class Store:
         self._x("DELETE FROM questions WHERE created<?", (cut,))
         self._x("DELETE FROM ladders WHERE created<?", (cut,))
         self._x("DELETE FROM prints WHERE created<?", (cut,))
+        self._x("DELETE FROM reset_codes WHERE expires<?", (now(),))
 
     # print jobs
     def add_print(self, *, lesson_id, kind, copies, lang, seed, device) -> int:
@@ -230,6 +247,10 @@ class Store:
         return self._all(f"SELECT id, {', '.join(EVENT_FIELDS)} FROM events WHERE cohort=? "
                          "ORDER BY at DESC, id DESC LIMIT ?", (cid, limit))
 
+    def events_since(self, cid, since):
+        return self._all("SELECT token_hash, at, verb, object, value FROM events WHERE cohort=? AND at>=? "
+                         "ORDER BY at, id", (cid, since))
+
     def prune_events(self, keep_days: int):
         cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime("%Y-%m-%dT%H:%M")
         self._x("DELETE FROM events WHERE at<?", (cut,))
@@ -335,11 +356,32 @@ class Store:
         cols = ", ".join(f"{k}=?" for k in changes)
         return self._x(f"UPDATE learners SET {cols} WHERE token_hash=?", (*changes.values(), token_hash)).rowcount > 0
 
+    def learners_in(self, cid):
+        return self._all("SELECT token_hash, picture, number, band, joined, last_seen FROM learners WHERE cohort=? "
+                         "ORDER BY picture, number", (cid,))
+
+    def set_reset_code(self, token_hash, code_hash, expires) -> None:
+        self._x("INSERT OR REPLACE INTO reset_codes(token_hash, code_hash, expires, tries) VALUES(?,?,?,0)",
+                (token_hash, code_hash, expires))
+
+    def use_reset_code(self, token_hash, code_hash, tries=5) -> str:
+        with self.lock:
+            r = self.db.execute("SELECT code_hash, expires, tries FROM reset_codes WHERE token_hash=?",
+                                (token_hash,)).fetchone()
+            if not r or r["expires"] < now() or r["tries"] >= tries:
+                return "none"
+            if r["code_hash"] != code_hash:
+                self.db.execute("UPDATE reset_codes SET tries=tries+1 WHERE token_hash=?", (token_hash,))
+                return "wrong"
+            self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (token_hash,))
+            return "ok"
+
     def delete_learner(self, token_hash) -> bool:
         with self.lock:
             self.db.execute("BEGIN")
             try:
                 self.db.execute("DELETE FROM events WHERE token_hash=?", (token_hash,))
+                self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (token_hash,))
                 n = self.db.execute("DELETE FROM learners WHERE token_hash=?", (token_hash,)).rowcount
                 self.db.execute("COMMIT")
             except Exception:
@@ -353,6 +395,8 @@ class Store:
             self.db.execute("BEGIN")
             try:
                 self.db.execute("DELETE FROM events WHERE token_hash IN "
+                                "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
+                self.db.execute("DELETE FROM reset_codes WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM learners WHERE last_seen<?", (cut,))
                 self.db.execute("COMMIT")

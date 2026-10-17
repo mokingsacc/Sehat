@@ -129,6 +129,13 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   Today's timetable, each period filled with a lesson. Bells ring while Qalam is on screen; no web notifications.
   On in all three seed cohorts; switching `timetable` off is the kill switch. Closed-app alarms wait for the Android
   app (P23), through a hook already in place.
+- **P20, done:** the teacher dashboard (C3.2) at `/teacher/`, behind the PIN on the hub and Cloudflare Access
+  online. To do, one card at a time: needs care first, then held answers and ladders (Send, Edit with the leak check,
+  Don't send with a counted reason), then questions sent to the teacher. Class: who was active, each alias with
+  "needs help", her page with a six-digit lock reset code. Lessons: did it, mastered, the hardest item, disputes and
+  hint steps, from nameless events. Print class card: a QR for `?join=CODE`. Hold-for-teacher is the `teacher`
+  setting `hold`, off until the admin panel (P21) or a flag change turns it on. Online it stays off until Mo sets up
+  Access and adds the teachers' staff rows.
 
 ## January 2027: buy and test
 
@@ -137,7 +144,8 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   or three open models with the hub's own pipeline; two paid reviewers grade them. The computer and the model are
   chosen on these scores. A model is trusted in a language (`TUTOR_AI_LANGS`) only when at least 9 in 10 of its
   reviewed answers are right and none is unsafe.
-- Add a setting to hold every AI answer for the teacher before a child sees it, for the pilot's first weeks.
+- Turn on the `hold` setting (built in P20) for the pilot cohorts' first weeks, so every AI answer waits for the
+  teacher before a child sees it.
 
 ## February-March 2027: first packs
 
@@ -151,7 +159,6 @@ worksheets and question banks. Real pictures as line art. Reviewers sign every l
   cannot offer).
 - **Speech input** for Dari and English questions (a Whisper-class model on the hub).
 - **Recorded voices** for lessons (the pack's `audio` per step), as in Sehat.
-- **Progress counts for the teacher** without names: how many sheets and lessons per year and subject.
 - **Updates by USB stick:** packs and approved answers between hubs; backups.
 - A solar test. Done when 30 phones share one hub, 30 sheets print in ten minutes, and answers arrive in under
   ten seconds.

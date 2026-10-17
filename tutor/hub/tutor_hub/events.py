@@ -22,12 +22,13 @@ LESSON = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
 ITEM = re.compile(r"^([a-z][a-z0-9]*(?:-[a-z0-9]+)*):([1-9][0-9]?)$")     # a sheet's item: lesson:n, n 1 to 99
 DIGIT_RUN = re.compile(r"[0-9]{5,}")
 SOURCES = ("rules", "maths", "bank", "approved", "ai", "lesson", "none")
+REASONS = ("wrong", "gives_answer", "unsafe", "not_school")      # why a held answer was not sent (P20)
 
 
 @dataclass(frozen=True)
 class Verb:
     module: str
-    obj: str | None                     # what the object is: "lesson", "item" (lesson:n), "source", or None
+    obj: str | None                     # what the object is: "lesson", "item" (lesson:n), "source", "reason", or None
     value: tuple[int, int] | None       # the allowed range of the value, or None for no value
     phone: bool                         # True: the phone sends it; False: only the hub writes it
 
@@ -45,6 +46,10 @@ VERBS = {
     "check.dispute": Verb("check", "item", None, True),                # "Something looks wrong?" on that item
     "review.approved": Verb("teacher", "lesson", None, False),
     "review.rejected": Verb("teacher", "lesson", None, False),
+    # a held AI answer (P20): sent as it was, edited and sent, or not sent with a reason chip, counted
+    "held.sent": Verb("teacher", None, None, False),
+    "held.edited": Verb("teacher", None, None, False),
+    "held.dropped": Verb("teacher", "reason", None, False),
 }
 
 
@@ -90,6 +95,8 @@ def check(e: dict, *, phone: bool) -> list[str]:
         p.append(f"{e['verb']} takes a sheet item, lesson:n")
     elif v.obj == "source" and o not in SOURCES:
         p.append(f"{e['verb']} takes an answer source")
+    elif v.obj == "reason" and o not in REASONS:
+        p.append(f"{e['verb']} takes a reason: {', '.join(REASONS)}")
     n = e.get("value")
     if v.value is None and n is not None:
         p.append(f"{e['verb']} takes no value")

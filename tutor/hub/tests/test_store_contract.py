@@ -296,6 +296,37 @@ async def test_a_ladder_keeps_its_answer_for_three_checks(store):
     assert await store.use_check(t) is None
 
 
+async def test_held_answers_wait_for_the_teacher_per_cohort(store):
+    rungs = [{"rung": 1, "text": "Look at the bottom numbers."}, {"rung": 2, "text": "1/5 + 2/5 = 3/5"},
+             {"rung": 3, "text": "The bottom number stays 4."}]
+    held = await store.add_question(lang="prs", subject="maths", year=7, lesson_id=None, question="3/4 + 2/4",
+                                    answer="hints", source="ai", urgent=False, waiting=False, cohort="abcd1234ef",
+                                    held=True, hints=rungs)
+    other = await store.add_question(lang="prs", subject=None, year=None, lesson_id=None, question="other class",
+                                     answer=None, source="none", urgent=False, waiting=True, cohort="zz99yy88xx")
+    old = await ask(store, "before P20", waiting=True, answer=None, source="none")
+    q = await store.question(held)
+    assert q["status"] == "held" and q["cohort"] == "abcd1234ef" and q["to_teacher"] == 1
+    assert __import__("json").loads(q["hints"])[2]["text"] == "The bottom number stays 4."
+    assert await store.question_row(q["id"]) == q and await store.question_row(99999) is None
+    assert [x["question"] for x in await store.queue(cohort="abcd1234ef")] == ["3/4 + 2/4"]
+    assert [x["question"] for x in await store.queue(cohort="abcd1234ef", own=True)] == ["3/4 + 2/4", "before P20"]
+    assert [x["question"] for x in await store.queue()] == ["3/4 + 2/4", "other class", "before P20"]
+    assert await store.question_count("abcd1234ef", "2000-01-01") == 1
+    assert await store.question_count("abcd1234ef", "2000-01-01", own=True) == 2
+    assert await store.question_count("abcd1234ef", "2999-01-01") == 0
+    edited = [dict(rungs[0], text="Look again at the bottom numbers.")] + rungs[1:]
+    r = await store.review(q["id"], approve=True, hints=edited, reuse=False)
+    assert r["status"] == "reviewed" and __import__("json").loads(r["hints"])[0]["text"].startswith("Look again")
+    assert await store.approved() == [] and await store.queue(cohort="abcd1234ef") == []
+    with pytest.raises(ValueError):
+        await store.add_question(lang="prs", subject=None, year=None, lesson_id=None, question="x", answer="y",
+                                 source="ai", urgent=False, waiting=False, held=True, hints=[{"rung": 1}])
+    await store.add_ladder(held, solution="5/4", sure=True)
+    assert await store.ladder(held) == {"solution": "5/4", "sure": True} and await store.ladder(other) is None
+    assert other and old
+
+
 # staff and review notes (P17)
 
 async def test_staff_are_a_hash_a_label_a_role_and_initials_never_an_email(store):
@@ -646,6 +677,41 @@ async def test_deleting_a_learner_takes_her_events_with_her(store):
     assert await store.delete_learner("h1") and not await store.delete_learner("h1")
     assert await store.learner("h1") is None and await store.learner("h2")
     assert sorted(e["token_hash"] or "" for e in await store.events("lrn0cohort")) == ["", "h2"]
+
+
+async def test_the_class_list_and_events_for_the_teacher(store):
+    await store.seed_cohorts([COHORT])
+    await store.add_learner(token_hash="h2", cohort="lrn0cohort", picture="key", band="s1")
+    await store.add_learner(token_hash="h1", cohort="lrn0cohort", picture="cup", band="p1")
+    rows = await store.learners_in("lrn0cohort")
+    assert [(r["picture"], r["token_hash"]) for r in rows] == [("cup", "h1"), ("key", "h2")]
+    assert set(rows[0]) == {"token_hash", "picture", "number", "band", "joined", "last_seen"}
+    assert await store.learners_in("nosuch") == []
+    await store.add_events([ev(cohort="lrn0cohort", token_hash="h1", at="2026-10-10T08:00"),
+                            ev("lesson.done", cohort="lrn0cohort", token_hash="h1", at="2026-10-16T09:00", value=3),
+                            ev(cohort="other00000", token_hash="h1", at="2026-10-16T09:00")])
+    got = await store.events_since("lrn0cohort", "2026-10-12T00:00")
+    assert got == [{"token_hash": "h1", "at": "2026-10-16T09:00", "verb": "lesson.done", "object": "dari-1-sheen",
+                    "value": 3}]
+
+
+async def test_a_lock_reset_code_is_used_once_and_ends_after_five_wrong_tries(store):
+    await store.seed_cohorts([COHORT])
+    await store.add_learner(token_hash="h1", cohort="lrn0cohort", picture="cup", band="p1")
+    soon = "2999-01-01T00:00:00+00:00"
+    assert await store.use_reset_code("h1", "right") == "none"
+    await store.set_reset_code("h1", "right", soon)
+    assert await store.use_reset_code("h1", "wrong") == "wrong"
+    assert await store.use_reset_code("h1", "right") == "ok"
+    assert await store.use_reset_code("h1", "right") == "none"                 # used once
+    await store.set_reset_code("h1", "right", soon)
+    assert [await store.use_reset_code("h1", "x") for _ in range(6)] == ["wrong"] * 5 + ["none"]
+    assert await store.use_reset_code("h1", "right") == "none"                 # five wrong tries end it
+    await store.set_reset_code("h1", "right", "2000-01-01T00:00:00+00:00")
+    assert await store.use_reset_code("h1", "right") == "none"                 # past its time
+    await store.set_reset_code("h1", "right", soon)
+    await store.delete_learner("h1")
+    assert await store.use_reset_code("h1", "right") == "none"                 # gone with her
 
 
 async def test_class_codes_and_idle_learners(store):

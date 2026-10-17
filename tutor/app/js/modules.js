@@ -27,7 +27,7 @@ export const BUILT_IN = [
   { id: 'lessons', slots: ['home.action'], needs: [] },
   { id: 'print', slots: [], needs: ['printer'] },
   { id: 'sheets', slots: ['home.action', 'lesson.end'], needs: [] },
-  { id: 'teacher', slots: [], needs: ['pin'] },
+  { id: 'teacher', slots: [], needs: [] },          // its pages are /teacher/, behind the staff gate (P20)
 ];
 
 // the tabs, in order, and the module each one belongs to; the third says Print where the hub prints
@@ -38,7 +38,7 @@ const TABS = [
     href: '#/print' },
 ];
 // screens that belong to a module (#/name/...); every other screen belongs to the shell
-const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', teacher: 'teacher', lesson: 'lessons',
+const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', lesson: 'lessons',
   subject: 'lessons', subjects: 'lessons' };
 
 let list = BUILT_IN;

@@ -64,12 +64,16 @@ A USB printer that is not driverless needs its maker's Linux driver first. Witho
 ## 5. The teacher
 
 Give the PIN to the teacher only: `sudo setup/pin.sh` shows it, `sudo setup/pin.sh new` makes a new one.
-On a phone: tap the child's name on Home (Who is learning), then Teacher page. From there:
+On a phone or laptop on the hub's Wi-Fi, open `http://10.42.0.1/teacher/` (or tap Teacher on the app's Who is
+learning screen) and type the PIN. From there:
 
-- **Print the hub card** and put it on the wall: a QR code to join the Wi-Fi and one to open the app.
-- **Questions to look at:** urgent ones first (a child may be in danger: talk to them), then questions nobody
-  could answer, then answers children sent to you. Correct, fix or reject; every approved answer helps the next child.
-- **Printing:** recent jobs and problems.
+- **To do**, one card at a time: a child who may be in danger first (talk to her), then answers held for you (when
+  hold-for-teacher is on), then questions sent to you. Reply, send, edit or don't send; a reply marked "Use it for
+  others too" helps the next child.
+- **Class:** who was active this week, each child by her picture and number, "needs help", and a lock reset code
+  when she forgot her PIN. **Print class card** and **Print the hub card** (put it on the wall: a QR code to join the
+  Wi-Fi and one to open the app).
+- **Lessons:** how each lesson went, the hardest question, and the answer sheet.
 
 ## 6. The AI (optional)
 
@@ -85,7 +89,8 @@ until a model passes the Pashto question set.
 ## 7. Check it works
 
 On a cheap Android phone: join the Wi-Fi, scan the card, pick a year, start a lesson, print its sheet, ask
-`۱/۲ + ۱/۴ چند می‌شود؟`. On the teacher page the question count goes up and the print shows as done.
+`۱/۲ + ۱/۴ چند می‌شود؟`. On the teacher page (`/teacher/`) the question waits under To do if nobody could answer it, and the print shows in
+the outbox or on paper.
 
 ## Keeping it going
 

@@ -87,6 +87,7 @@ class Answer:
     ladder: list | None = None   # three hint rungs instead of an answer (C2.3): [{rung, text, step?, lesson?}]
     checkable: bool = False      # "Check my answer" is offered (Homework help, and the answer is sure)
     unsure: bool = False         # the model's two runs disagreed: "Ask your teacher"
+    held: bool = False           # the AI's answer or ladder waits for the teacher (the cohort's hold, P20)
     solution: str | None = field(default=None, repr=False)    # the private answer: never in dict()
 
     def dict(self):
@@ -163,7 +164,9 @@ class Brain:
         return (self.library.lessons[best[0]], best[1]) if best else (None, None)
 
     async def answer(self, question: str, *, lang="prs", subject=None, year=None, lesson=None,
-                     cohort: str | None = None, homework: bool = False) -> Answer:
+                     cohort: str | None = None, homework: bool = False, hold: bool = False) -> Answer:
+        """`hold`: the cohort holds AI answers for the teacher (P20): an answer or ladder the model wrote comes back
+        with `held`, and the route keeps it for the teacher instead of showing it."""
         lang = lang if lang in ("prs", "ps", "en") else "prs"
         q = (question or "").strip()
 
@@ -175,7 +178,7 @@ class Brain:
 
         if is_exercise(q):
             return await self.exercise(q, lang=lang, subject=subject, year=year, lesson=lesson, cohort=cohort,
-                                       homework=homework)
+                                       homework=homework, hold=hold)
 
         hits = self.index.search(q, kinds={"bank", "approved"}, subject=subject, lesson=lesson, limit=3)
         if hits and hits[0][1] >= CONFIDENT:
@@ -185,9 +188,9 @@ class Brain:
         passages = self.index.search(q, subject=subject, lesson=lesson, limit=4)
         notes = [pick_text(d["a"], lang) for _, cov, d in passages if cov > 0.2]
         r = await self.gateway.call("explain", llm_mod.prompt(q, lang=lang, year=year, subject=subject, notes=notes),
-                                    module="ask", lang=lang, cohort=cohort)
+                                    module="ask", lang=lang, cohort=cohort, held=hold)
         if r.text:
-            return Answer(r.text, lang, "ai", maths_checked=r.maths_checked,
+            return Answer(r.text, lang, "ai", maths_checked=r.maths_checked, held=r.held,
                           lesson=passages[0][2].get("lesson") if passages else None)
         # no AI this time (off, untrusted language, budget, a wrong sum...): the lesson, else the teacher
 
@@ -197,7 +200,7 @@ class Brain:
 
         return Answer(WAITING[lang], lang, "none", waiting=True)
 
-    async def exercise(self, q: str, *, lang, subject, year, lesson, cohort, homework) -> Answer:
+    async def exercise(self, q: str, *, lang, subject, year, lesson, cohort, homework, hold=False) -> Answer:
         """Hints, never answers: the code's ladder for a sum it can work out, else Homework help's, else the teacher."""
         solved = mathcheck.solve(q)
         if solved:
@@ -211,12 +214,13 @@ class Brain:
                 return Answer(LADDER[lang], lang, "maths", checked=True, ladder=rungs, checkable=homework,
                               solution=answer, lesson=l["id"] if l else None)
         if homework:
-            a = await self.homework_ladder(q, lang=lang, subject=subject, year=year, lesson=lesson, cohort=cohort)
+            a = await self.homework_ladder(q, lang=lang, subject=subject, year=year, lesson=lesson, cohort=cohort,
+                                           hold=hold)
             if a:
                 return a
         return Answer(WAITING[lang], lang, "none", waiting=True)
 
-    async def homework_ladder(self, q, *, lang, subject, year, lesson, cohort) -> Answer | None:
+    async def homework_ladder(self, q, *, lang, subject, year, lesson, cohort, hold=False) -> Answer | None:
         """The model solves it privately, twice; then three hints, checked against both answers in every form. None
         when there is no AI this time, no answer, or no hints that keep the answer back."""
         ask = [{"role": "system", "content": SOLVE_SYSTEM}, {"role": "user", "content": q}]
@@ -233,7 +237,7 @@ class Brain:
         system = HINT_SYSTEM.format(year=year or "", language=LANGUAGE[lang])
         msg = [{"role": "system", "content": system}, {"role": "user", "content": q}]
         h = await self.gateway.call("hint", msg, module="homework", lang=lang, cohort=cohort, answers=answers,
-                                    max_tokens=400)
+                                    max_tokens=400, held=hold)
         texts = _parse_hints(h.text)
         if not texts or any(hints_leak(t, answers) for t in texts):
             return None
@@ -245,7 +249,7 @@ class Brain:
             if not hints_leak(r1["text"], answers):
                 rungs[0] = r1
         return Answer(LADDER[lang], lang, "ai", maths_checked=h.maths_checked, ladder=rungs, checkable=sure,
-                      unsure=not sure, solution=a1, lesson=lid)
+                      unsure=not sure, solution=a1, lesson=lid, held=h.held)
 
 
 def hints_leak(text: str, answers) -> bool:

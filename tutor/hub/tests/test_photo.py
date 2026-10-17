@@ -228,7 +228,7 @@ def test_no_image_byte_is_written_anywhere(online, monkeypatch, caplog, tmp_path
     assert b64[200:240] not in logged and "base64" not in logged
     usage = [kw for n, _, kw in calls if n == "add_ai_usage"]
     assert len(usage) == 1 and set(usage[0]) == {"day", "cohort", "module", "purpose", "provider", "model", "tokens",
-                                                 "cost_micro"}
+                                                 "cost_micro", "held"}
     # and the database on disk holds nothing of it
     for f in (online.hub.cfg.data).rglob("*"):
         if f.is_file():
@@ -290,7 +290,8 @@ def test_migration_0008_lets_an_existing_staging_database_try_photos(tmp_path):
     for cid in (STAGING, HUB_COHORT):
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?, 'x', '[]', '[]', '{}', 'now')",
                    (cid,))
-    assert migrate(db) == ["0008_photo_flag", "0009_homework", "0010_review", "0011_timetable"]
+    assert migrate(db) == ["0008_photo_flag", "0009_homework", "0010_review", "0011_timetable",
+                           "0012_teacher"]
     rows = db.execute("SELECT cohort, enabled, changed_by FROM flags WHERE module='photo'").fetchall()
     assert rows == [(STAGING, 1, "seed")]
     assert db.execute("SELECT COUNT(*) FROM flag_log WHERE module='photo'").fetchone() == (1,)

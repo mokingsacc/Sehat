@@ -2,7 +2,7 @@
 // works). Each screen is a function that returns { el, tab, cleanup, onHub }.
 // Sign-up (P10): a class card's QR opens the app with ?join=CODE, which Welcome takes (signup.js). A learner with a
 // PIN lock sees the lock on start, on switching to her, and when the app comes back after 5 minutes away; Welcome,
-// Who is learning, the class code and the teacher's page stay open without it.
+// Who is learning and the class code stay open without it. The teacher's pages are /teacher/, apart (P20).
 
 import * as account from './account.js';
 import * as bands from './bands.js';
@@ -29,24 +29,23 @@ import settings from './screens/settings.js';
 import signup, { pendingCode } from './screens/signup.js';
 import subject from './screens/subject.js';
 import subjects from './screens/subjects.js';
-import teacher from './screens/teacher.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
 
 // the photo screens load only when opened (the `photo` module, online only)
 const photo = (args) => import('./modules/photo.js').then((m) => m.default(args));
 
-const SCREENS = { home, subject, subjects, lesson, ask, print, check, photo, teacher, welcome, who, credits, consent, lock: lockScreen,
+const SCREENS = { home, subject, subjects, lesson, ask, print, check, photo, welcome, who, credits, consent, lock: lockScreen,
   settings, signup };
-const NEEDS_NO_CHILD = new Set(['welcome', 'teacher', 'signup']);
-const CLEAN = new Set(['welcome', 'teacher', 'signup']);          // the clean adult look, not the learner's
-const OPEN = new Set(['welcome', 'who', 'teacher', 'signup', 'lock']);   // shown without opening her lock
+const NEEDS_NO_CHILD = new Set(['welcome', 'signup']);
+const CLEAN = new Set(['welcome', 'signup']);          // the clean adult look, not the learner's
+const OPEN = new Set(['welcome', 'who', 'signup', 'lock']);   // shown without opening her lock
 const AWAY_MS = 5 * 60e3;
 const app = document.getElementById('app');
 let current = null;
 let seq = 0;
 
-// the band sets the look and tone (bands.js); Welcome and the teacher's page use the clean adult look, keeping
+// the band sets the look and tone (bands.js); Welcome and sign-up use the clean adult look, keeping
 // the learner's Bigger text and theme
 function applyLook(name) {
   const c = state.child();

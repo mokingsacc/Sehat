@@ -66,7 +66,7 @@ export default function welcome([mode]) {
       editing ? null : h('div', { class: 'foot' },
         h('div', { class: 'row' }, h('a', { class: 'link grow', href: '#/signup/code' }, icon('card', 20), s('have_code')),
           speakerBtn(say(s('have_code')), { size: 'sm' })),
-        modules.on('teacher') ? h('a', { class: 'link teacher-link', href: '#/teacher' }, icon('lock', 20), s('teacher')) : null),
+        modules.on('teacher') ? h('a', { class: 'link teacher-link', href: '/teacher/' }, icon('lock', 20), s('teacher')) : null),
     );
   }
 

@@ -466,6 +466,31 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   more at the close than the next lesson; the bells' sound (Qalam's own tones, placeholders a musician may replace);
   a wake-up line in the app (the wake-up is only the Android app's alarm, 30 minutes before the start).
 
+## What P20 built, and where it differs
+
+- `/teacher/` is its own page in the clean adult look, English or Dari (the Dari strings are drafts for a native
+  speaker's check), with four tabs: To do (with a count), Class, Lessons, Wishes. On the hub it opens with the
+  teacher's PIN, kept in the page's memory only; online Cloudflare Access signs her in and "Sign out" ends the Access
+  session. Offline it says "Connect to see your class" and keeps nothing.
+- To do shows one card at a time, "1 of 3" at its top right, Previous and Next under it, and the keys hint below
+  (S send, E edit, D don't send, J and K move). A card shows its kind as a tag (Needs care, Held answer, Held hints,
+  Question) and how long ago it came, never who asked: questions stay anonymous on the hub, so the card cannot show
+  an alias. A needs-care card has a red border and shows what Qalam told her. A held card shows the answer or the
+  three hints, then "For you only": the worked answer, maths checked or not, and whether the hints pass the leak
+  check. Edit opens the text (or three hint boxes) in place; Don't send opens the four reason chips.
+- Class: four tiles (active this week "3 of 12", lessons finished, sheets checked, questions), then the aliases
+  sorted by picture and number, each with band, last seen, lessons this week, sheets and average, and an amber
+  "needs help" tag. Her page adds her lessons, the hint steps she used and the lock reset code, shown large twice
+  (Persian and Latin digits) with "Valid for 15 minutes, once." The band is shown where the spec said year, since
+  the hub keeps her band, not her year.
+- Print class card asks for the class code (the hub keeps only its hash), then prints an A6 card with the QR and the
+  code in text through the browser. The hub card (Wi-Fi) stays, on the hub only.
+- Lessons: one row per lesson in the library's order with its counts; a lesson's page draws a bar per item (right
+  against wrong, with disputes and hint steps) and opens the answer sheet.
+- Open look questions: whether the staff page needs speakers (it has none; staff read); the class card's size and
+  whether it carries the class label; the order of the To do groups when a class has many held answers; how the
+  "needs help" rule (three items still wrong after the last hint) should read to a teacher.
+
 ---
 
 # C2 and C3 decisions

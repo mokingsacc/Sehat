@@ -54,7 +54,7 @@ export default function who() {
         ? said(h('a', { class: 'btn', href: '#/print' }, icon(modules.printer() ? 'printer' : 'file', 22),
           s(modules.printer() ? 'print' : 'sheets'))) : null),
     modules.on('teacher')
-      ? h('div', { class: 'pad teacher-link' }, h('a', { class: 'link', href: '#/teacher' }, icon('lock', 20), s('teacher')))
+      ? h('div', { class: 'pad teacher-link' }, h('a', { class: 'link', href: '/teacher/' }, icon('lock', 20), s('teacher')))
       : null);
   return { el, tab: null };
 }

@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10, P11, P13, P14, P15 and P19 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10, P11, P13, P14, P15, P19 and P20 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -245,6 +245,10 @@ const S = {
     bells: 'زنگ‌ها', bells_on: 'زنگ روشن', bells_off: 'زنگ خاموش',
     school_day: 'روز مکتب', school_day_note: 'درس‌ها در وقت معین، با زنگ، وقتی قلم باز است.',
     start_time: 'وقت شروع', start_earlier: 'زودتر', start_later: 'دیرتر', day_am: '{t} صبح', day_pm: '{t} بعد از ظهر',
+    // P20: a lock reset code from the teacher (drafts, for a native speaker's check)
+    lock_code_link: 'معلمم یک کد به من داده', lock_code_title: 'کد معلم', lock_code_lead: 'شش رقمی را که معلمت داد بنویس.',
+    lock_code_six: 'شش رقم بنویس.', lock_code_wrong: 'این کد درست نیست.', lock_code_open: 'باز کن',
+    lock_code_none: 'حالا کدی برایت نیست. دوباره از معلمت بپرس.',
   },
   ps: {
     app: 'قلم',
@@ -486,6 +490,10 @@ const S = {
     bells: 'زنګونه', bells_on: 'زنګ روښانه', bells_off: 'زنګ بند',
     school_day: 'د ښوونځي ورځ', school_day_note: 'لوستونه په ټاکلو وختونو، له زنګ سره، کله چې قلم خلاص وي.',
     start_time: 'د پیل وخت', start_earlier: 'وختي', start_later: 'وروسته', day_am: '{t} سهار', day_pm: '{t} ماسپښین',
+    // P20: a lock reset code from the teacher (drafts, for a native speaker's check)
+    lock_code_link: 'ښوونکي راته یو کوډ راکړی', lock_code_title: 'د ښوونکي کوډ', lock_code_lead: 'هغه شپږ عددونه ولیکه چې ښوونکي درکړل.',
+    lock_code_six: 'شپږ عددونه ولیکه.', lock_code_wrong: 'دا کوډ سم نه دی.', lock_code_open: 'خلاص یې کړه',
+    lock_code_none: 'اوس ستا لپاره کوډ نشته. بیا له ښوونکي وپوښته.',
   },
   en: {
     app: 'Qalam',
@@ -726,6 +734,11 @@ const S = {
     bells: 'Bells', bells_on: 'Bells on', bells_off: 'Bells off',
     school_day: 'School day', school_day_note: 'Lessons at set times, with bells, while Qalam is open.',
     start_time: 'Start time', start_earlier: 'Earlier', start_later: 'Later', day_am: '{t} in the morning', day_pm: '{t} in the afternoon',
+    // P20: a lock reset code from the teacher
+    lock_code_link: 'I have a code from my teacher', lock_code_title: "My teacher's code",
+    lock_code_lead: 'Type the six digits your teacher gave you.', lock_code_six: 'Type six digits.',
+    lock_code_wrong: 'That code is not right.', lock_code_open: 'Open',
+    lock_code_none: 'There is no code for you now. Ask your teacher again.',
   },
 };
 

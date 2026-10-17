@@ -40,10 +40,10 @@ def test_question_waits_for_the_teacher_then_gets_an_answer(hub_client):
     assert a["waiting"] and a["source"] == "none"
     assert hub_client.get(f"/api/ask/{a['id']}").json()["status"] == "waiting"
     pin = {"X-Teacher-Pin": hub_client.pin}
-    q = hub_client.get("/api/teacher/queue", headers=pin).json()["questions"]
-    assert len(q) == 1 and "token" not in q[0]
-    r = hub_client.post(f"/api/teacher/answer/{q[0]['id']}", headers=pin,
-                        json={"answer": "زمین از تکان خوردن لایه‌های زیر خاک می‌لرزد.", "approve": True})
+    q = hub_client.get("/api/m/teacher/todo", headers=pin).json()["items"]
+    assert len(q) == 1 and "token" not in q[0] and q[0]["kind"] == "question"
+    r = hub_client.post(f"/api/m/teacher/todo/{q[0]['id']}", headers=pin,
+                        json={"action": "reply", "text": "زمین از تکان خوردن لایه‌های زیر خاک می‌لرزد."})
     assert r.status_code == 200
     s = hub_client.get(f"/api/ask/{a['id']}").json()
     assert s["status"] == "reviewed" and "زمین" in s["teacher_answer"]
@@ -56,16 +56,16 @@ def test_distress_goes_to_the_top_of_the_teacher_list(hub_client):
     hub_client.post("/api/ask", json={"text": "زلزله چرا می‌آید؟", "lang": "prs"})
     a = hub_client.post("/api/ask", json={"text": "پدرم مرا می‌زند", "lang": "prs"}).json()
     assert a["urgent"] and a["source"] == "rules"
-    q = hub_client.get("/api/teacher/queue", headers={"X-Teacher-Pin": hub_client.pin}).json()["questions"]
-    assert q[0]["urgent"] == 1
+    q = hub_client.get("/api/m/teacher/todo", headers={"X-Teacher-Pin": hub_client.pin}).json()["items"]
+    assert q[0]["kind"] == "care" and q[0]["shown"] and q[1]["kind"] == "question"
 
 
 def test_child_can_send_an_answer_to_the_teacher(hub_client):
     a = hub_client.post("/api/ask", json={"text": "مخرج مشترک چیست؟", "lang": "prs"}).json()
     assert a["source"] == "bank"
     assert hub_client.post(f"/api/ask/{a['id']}/teacher").json() == {"ok": True}
-    q = hub_client.get("/api/teacher/queue", headers={"X-Teacher-Pin": hub_client.pin}).json()["questions"]
-    assert q and q[0]["answer"]
+    q = hub_client.get("/api/m/teacher/todo", headers={"X-Teacher-Pin": hub_client.pin}).json()["items"]
+    assert q and q[0]["shown"]
 
 
 def test_sheet_page_seed_and_key(hub_client):
@@ -146,10 +146,10 @@ def test_hourly_limit_is_per_phone_address(hub_client):
 
 
 def test_teacher_pages_need_the_pin_and_lock_after_wrong_tries(hub_client):
-    assert hub_client.get("/api/teacher/summary").status_code == 401          # a missing PIN counts as a try
+    assert hub_client.get("/api/m/teacher/me").status_code == 401          # a missing PIN counts as a try
     for _ in range(4):
-        assert hub_client.get("/api/teacher/summary", headers={"X-Teacher-Pin": "000000"}).status_code == 401
-    assert hub_client.get("/api/teacher/summary", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 429
+        assert hub_client.get("/api/m/teacher/me", headers={"X-Teacher-Pin": "000000"}).status_code == 401
+    assert hub_client.get("/api/m/teacher/me", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 429
 
 
 def test_wrong_pins_wait_longer_each_round(hub_client):
@@ -159,19 +159,19 @@ def test_wrong_pins_wait_longer_each_round(hub_client):
 
     def five_wrong():
         for _ in range(5):
-            assert hub_client.get("/api/teacher/summary", headers=wrong).status_code == 401
+            assert hub_client.get("/api/m/teacher/me", headers=wrong).status_code == 401
     five_wrong()
-    assert hub_client.get("/api/teacher/summary", headers=right).status_code == 429
+    assert hub_client.get("/api/m/teacher/me", headers=right).status_code == 429
     clock[0] += 61
     five_wrong()
     clock[0] += 61                         # the second wait is 15 minutes
-    assert hub_client.get("/api/teacher/summary", headers=right).status_code == 429
+    assert hub_client.get("/api/m/teacher/me", headers=right).status_code == 429
     clock[0] += 15 * 60
-    assert hub_client.get("/api/teacher/summary", headers=right).status_code == 200
+    assert hub_client.get("/api/m/teacher/me", headers=right).status_code == 200
 
 
 def test_a_pin_in_other_letters_is_only_wrong(hub_client):
-    r = hub_client.get("/api/teacher/summary", headers={"X-Teacher-Pin": "۱۲۳۴۵۶".encode()})
+    r = hub_client.get("/api/m/teacher/me", headers={"X-Teacher-Pin": "۱۲۳۴۵۶".encode()})
     assert r.status_code == 401
 
 
@@ -196,23 +196,23 @@ def test_the_hub_keeps_no_access_log(monkeypatch, tmp_path):
     assert seen["access_log"] is False
 
 
-def test_teacher_summary_and_hub_card(hub_client):
+def test_teacher_me_and_hub_card(hub_client):
     pin = {"X-Teacher-Pin": hub_client.pin}
-    s = hub_client.get("/api/teacher/summary", headers=pin).json()
-    assert s["counts"]["asked_today"] == 0 and s["pack_problems"] == []
-    j = hub_client.post("/api/teacher/hub-card", headers=pin).json()
+    s = hub_client.get("/api/m/teacher/me", headers=pin).json()
+    assert s["via"] == "pin" and [c["id"] for c in s["cohorts"]] == [hub_client.hub.cohort_id]
+    assert s["printer"] is True and s["hold"] is False and s["lock_codes"] is True
+    j = hub_client.post("/api/m/teacher/hub-card", headers=pin).json()
     hub_client.hub.prints.wait()
     assert hub_client.get(f"/api/print/{j['id']}").json()["status"] == "saved"
-    assert hub_client.get("/api/teacher/prints", headers=pin).json()["jobs"][0]["kind"] == "card"
 
 
 def test_health_question_points_to_sehat_and_waits_for_the_teacher(hub_client):
     a = hub_client.post("/api/ask", json={"text": "وقتی تب دارم چه دوا بخورم؟", "lang": "prs"}).json()
     assert a["source"] == "rules" and a["waiting"] and not a["urgent"] and "صحت" in a["text"]
     pin = {"X-Teacher-Pin": hub_client.pin}
-    q = hub_client.get("/api/teacher/queue", headers=pin).json()["questions"][0]
-    assert q["source"] == "rules" and q["answer"]          # the teacher sees what the child was told
-    hub_client.post(f"/api/teacher/answer/{q['id']}", headers=pin, json={"answer": "به کلینیک برو.", "approve": True})
+    q = hub_client.get("/api/m/teacher/todo", headers=pin).json()["items"][0]
+    assert q["source"] == "rules" and q["shown"]          # the teacher sees what the child was told
+    hub_client.post(f"/api/m/teacher/todo/{q['id']}", headers=pin, json={"action": "reply", "text": "به کلینیک برو."})
     assert hub_client.hub.store.sync.approved() == []          # a safety message never becomes a reusable answer
 
 
@@ -239,7 +239,7 @@ def test_print_off_makes_its_routes_404_for_that_cohort_only(hub_client):
     base = {"lesson": "maths-1-count-5", "lang": "prs"}
     assert hub_client.post("/api/print", json=base).status_code == 404
     assert hub_client.get("/api/sheets/dari-1-sheen.pdf").status_code == 404
-    assert hub_client.post("/api/teacher/hub-card", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 404
+    assert hub_client.post("/api/m/teacher/hub-card", headers={"X-Teacher-Pin": hub_client.pin}).status_code == 404
     assert "print" not in [m["id"] for m in hub_client.get("/api/hello").json()["modules"]]
     # everything else still works: the sheet itself (the `sheets` module), its key, Ask
     assert hub_client.get("/api/sheets/dari-1-sheen.html").status_code == 200

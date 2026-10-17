@@ -4,12 +4,17 @@
 //   digits work too), "I forgot" and "Someone else". The keys make no sound (spoken digits would give the PIN away);
 //   the title is spoken. Five wrong tries: a wait of 1, then 15, then 60 minutes. "I forgot" starts the visible
 //   24-hour reset; her right PIN cancels it; once it is due the next opener chooses a new PIN. Nothing is deleted.
+//   Where her class has a teacher, "I have a code from my teacher" (P20, C1.6) takes the six digits her teacher made
+//   on /teacher/ (15 minutes, once, five tries); the hub checks them against her token and she chooses a new PIN.
 // - #/lock/offer/<then>: "Lock with a number?", offered once after consent or a class join, with "Not now";
 // - #/lock/set/<then>: set or change it (Settings);
 // - #/lock/check/<action>: her PIN again before Settings removes her or stops sharing.
 
+import * as hub from '../hub.js';
 import * as lock from '../lock.js';
+import * as modules from '../modules.js';
 import { fa, getLang, s } from '../i18n.js';
+import { latin } from '../numbers.js';
 import { hasVoice, speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, said, toast, topbar } from '../ui.js';
@@ -120,17 +125,53 @@ function opener(c, action) {
     msg.textContent = s('reset_started');
     showState();
   };
+  // a code from her teacher: only for a learner the hub knows, in a class with a teacher (offline, the code screen
+  // says so when she sends it)
+  const byCode = !action && c.token && modules.on('teacher')
+    ? h('a', { class: 'link', href: '#/lock/code' }, icon('key', 20), s('lock_code_link')) : null;
   const el = h('div', { class: 'screen lock' },
     topbar({ back: action ? '#/settings' : null, title: s('lock_title') }),
     h('div', { class: 'lock-body' },
       aliasPic(c, 30), reset, pad.dots, msg, pad.pad,
       h('div', { class: 'row center wrap' },
         h('button', { type: 'button', class: 'link', onClick: forgot }, s('forgot')),
-        action ? null : h('a', { class: 'link', href: '#/who' }, icon('users', 20), s('someone_else')))));
+        action ? null : h('a', { class: 'link', href: '#/who' }, icon('users', 20), s('someone_else'))),
+      byCode ? h('div', { class: 'row center' }, byCode) : null));
   showState();
   timer = setInterval(showState, 15000);
   if (hasVoice(getLang())) setTimeout(() => speak(s('lock_title'), getLang()), 300);
   return { el, tab: null, cleanup: () => { pad.stop(); clearInterval(timer); } };
+}
+
+// #/lock/code: the six digits from her teacher; when the hub says they are right, she chooses a new PIN at once
+function byCode(c) {
+  const msg = h('p', { class: 'msg', role: 'status' });
+  const box = h('input', { class: 'code-in', inputmode: 'numeric', autocomplete: 'one-time-code', maxlength: 12, dir: 'ltr',
+    'aria-label': s('lock_code_title') });
+  let busy = false;
+  const send = async (e) => {
+    e.preventDefault();
+    const code = latin(box.value).replace(/\s+/g, '');
+    if (busy || !/^[0-9]{6}$/.test(code)) { msg.textContent = s('lock_code_six'); return; }
+    busy = true;
+    try {
+      await hub.pinReset(c.token, code);
+      state.updateChild(c.id, { lock: { ...state.byId(c.id).lock, resetAt: Date.now() } });   // the reset is due now
+      location.replace('#/lock');
+    } catch (err) {
+      msg.textContent = err.status === 403 ? s('lock_code_wrong') : err.status === 404 ? s('lock_code_none')
+        : err.status === 429 ? s('slow_down') : hub.online() ? s('error') : s('offline');
+      box.value = '';
+    } finally { busy = false; }
+  };
+  const el = h('div', { class: 'screen lock' },
+    topbar({ back: '#/lock', title: s('lock_code_title') }),
+    h('form', { class: 'lock-body stack', onSubmit: send },
+      aliasPic(c, 30), h('p', { class: 'lead' }, s('lock_code_lead')), box, msg,
+      said(h('button', { type: 'submit', class: 'btn primary big' }, icon('key', 24), s('lock_code_open')))));
+  setTimeout(() => box.focus(), 50);
+  if (hasVoice(getLang())) setTimeout(() => speak(s('lock_code_lead'), getLang()), 300);
+  return { el, tab: null };
 }
 
 export default function lockScreen([mode, arg]) {
@@ -147,6 +188,7 @@ export default function lockScreen([mode, arg]) {
     if (mode === 'check') { passed = arg; location.replace('#/settings/' + arg); } else location.replace(returnTo);
     return { el: h('div'), tab: null };
   }
+  if (mode === 'code') return byCode(c);
   // the reset came due: whoever opens it now chooses a new PIN, and nothing is deleted
   if (mode !== 'check' && lock.resetDue(c.lock)) {
     return setter(c, { title: s('reset_new'), then: (returnTo.replace(/^#\//, '').split('/')[0]) || 'home' });
