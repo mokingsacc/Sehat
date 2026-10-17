@@ -22,7 +22,7 @@ import * as sheetcode from '../sheetcode.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { keypad } from '../keypad.js';
-import { fill, h, icon, plain, said, speakerBtn, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, said, speakerBtn, titleText, toast, topbar } from '../ui.js';
 
 const LOOP_MS = 200;
 const SLOW_MS = 500;                    // a phone whose search takes more than 150 ms looks less often
@@ -155,7 +155,7 @@ export default async function photoScreen([id, seedText]) {
     const flash = caps.torch ? h('button', { class: 'round hidden', type: 'button', 'aria-label': s('flash'),
       onClick: () => { torch = !torch; track.applyConstraints({ advanced: [{ torch }] }).catch(() => {}); } }, icon('flash', 22)) : null;
     show(h('div', { class: 'cam-wrap', 'data-theme': 'dark' },
-      topbar({ back: typeHref(), title: plain(L.title), net: false }),
+      topbar({ back: typeHref(), title: titleText(L.title), net: false }),
       h('div', { class: 'guide' }, video, ...corners),
       h('div', { class: 'row coach-row' }, line, speakerBtn(() => speak(line.textContent, lang), { size: 'sm' })),
       h('div', { class: 'row between cam-actions' }, typeBtn(), shutter, flash || h('span', { class: 'round-gap' }))));

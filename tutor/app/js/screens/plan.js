@@ -24,7 +24,7 @@ import * as outbox from '../outbox.js';
 import * as plans from '../modules/plan.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, said, speakerBtn, subjectBadge, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, said, speakerBtn, subjectBadge, titleText, toast, topbar } from '../ui.js';
 import { sayKey } from '../speech.js';
 import { saidNotNow } from './signup.js';
 
@@ -80,7 +80,7 @@ export default async function plan(args = []) {
 
   const row = (l, i, mark, learnFirst = false) => said(h('a', { class: 'trow', href: '#/lesson/' + encodeURIComponent(l.id) },
     h('span', { class: 'time' }, String(i + 1)), subjectBadge(l.subject, 36),
-    h('span', { class: 'grow' }, h('b', {}, plain(l.title))),
+    h('span', { class: 'grow' }, h('b', {}, titleText(l.title))),
     learnFirst && mark !== 'done' ? h('span', { class: 'tag first' }, s('learn_first')) : null,
     mark === 'done' ? icon('check', 22, 2.6) : mark === 'next' ? h('span', { class: 'tag' }, s('plan_next')) : null));
 

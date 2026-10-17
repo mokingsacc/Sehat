@@ -134,6 +134,13 @@ h2 { font-size: var(--fs-btn); }
 .top > .grow:not(:empty) { flex: 1 1 6rem; min-width: 0; }
 .top > .netchip { margin-inline-start: auto; }
 .top .kicker { font-size: var(--fs-sm); font-weight: 800; color: var(--muted); }
+/* the lead: a sentence under the title in the small size (C5.3); the page speaker reads it after the title */
+.top .top-lead { margin: 2px 0 0; font-size: var(--fs-sm); font-weight: 600; color: var(--muted); line-height: 1.5; }
+/* when the title would wrap beside them, the things after the speaker take a row of their own, at the end (C5.3) */
+.top > .brk { display: none; }
+.top.wrapped > .brk { display: block; flex: 0 0 100%; height: 0; margin: -6px 0 0; }
+.top.wrapped > .brk ~ * { margin-inline-start: 0; }
+.top.wrapped > .brk + * { margin-inline-start: auto; }
 .round {
   width: 48px; height: 48px; flex: none; border-radius: 50%; border: var(--bw) solid var(--line); background: var(--card);
   display: inline-flex; align-items: center; justify-content: center; color: var(--ink); text-decoration: none; padding: 0;
@@ -193,6 +200,15 @@ h2 { font-size: var(--fs-btn); }
 :root[data-look="clean"] .card.this-sheet { border: var(--bw) solid var(--line); }   /* the link card's edge (C4 look q. 8) */
 .tag { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); font-weight: 800; border-radius: 999px; padding: 3px 12px; background: var(--accent-soft); color: var(--accent-ink); }
 .draft { margin: 4px 16px 0; font-size: var(--fs-sm); font-weight: 800; color: var(--ai-ink); background: var(--draft-bg); border-radius: 10px; padding: 4px 10px; text-align: center; }
+/* the draft banner is one short line (C5 part C, item 8) */
+.draft { white-space: nowrap; }
+/* a subject with nothing for her year keeps the row's height: the bar's place stays, empty (item 6) */
+.bar.nothing { visibility: hidden; }
+/* the sheet's corner on Check (item 4): a line drawing in the text colour, so dark mode needs no filter */
+.corner-art { padding: 0 16px; color: var(--ink); }
+.corner-art svg { display: block; width: 100%; max-width: 240px; height: auto; margin-inline-start: auto; }
+/* the error screen (C5.4): "Try again" at the band's tap size (60 px bold, 72 px early years), Home under it */
+.error-screen .btn { width: 100%; min-height: var(--tap); font-size: var(--fs-big); font-weight: 800; }
 
 /* subject badges */
 .sbadge { display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; color: var(--on-subject); font-weight: 800; font-size: var(--fs); flex: none; }

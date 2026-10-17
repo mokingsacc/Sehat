@@ -11,6 +11,7 @@ import { subjectList, tiles } from '../modules/lessons.js';
 export default async function subjects() {
   await library.load();
   const ctx = modules.context(state.child(), null);
-  return { el: h('div', { class: 'screen' }, topbar({ back: '#/home', title: s('all_subjects'), child: true }),
-    ctx.look === 'bold' ? tiles(ctx) : subjectList(ctx)), tab: 'lessons' };
+  const bold = ctx.look === 'bold';
+  return { el: h('div', { class: 'screen' }, topbar({ back: '#/home', title: s('all_subjects'), lead: bold ? null : s('every_lesson_open'), child: true }),
+    bold ? tiles({ ...ctx, head: false }) : subjectList({ ...ctx, head: false })), tab: 'lessons' };
 }

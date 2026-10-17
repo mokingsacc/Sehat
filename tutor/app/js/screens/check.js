@@ -23,7 +23,7 @@
 
 import * as android from '../android.js';
 import { readsOnOpen } from '../bands.js';
-import { fa, getLang, getTone, s } from '../i18n.js';
+import { dir, fa, getLang, getTone, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as modules from '../modules.js';
@@ -31,7 +31,7 @@ import { notSimplest, parse, same } from '../numbers.js';
 import * as sheetcode from '../sheetcode.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
+import { fill, h, icon, plain, rich, said, speakerBtn, star, titleText, toast, topbar } from '../ui.js';
 import { addAgain } from '../modules/plan.js';
 import { rememberKey } from './print.js';
 
@@ -127,7 +127,7 @@ function thisSheet({ l, seed }) {
   const at = `${encodeURIComponent(l.id)}/${seed}`;
   return h('div', { class: 'card pad-card stack this-sheet' },
     h('div', { class: 'row' }, icon('file', 30), h('div', { class: 'grow' }, h('small', { class: 'muted' }, s('this_sheet')),
-      h('b', {}, plain(l.title)), h('small', {}, h('bdi', { dir: 'ltr' }, codeOf(l, seed))))),
+      h('b', {}, titleText(l.title)), h('small', {}, h('bdi', { dir: 'ltr' }, codeOf(l, seed))))),
     offer === 'on' ? said(h('a', { class: 'btn primary main', href: '#/photo/' + at }, icon('camera'), s('take_photo'))) : null,
     said(h('a', { class: offer === 'on' ? 'btn outline' : 'btn primary main', href: '#/check/' + at }, icon('pencil'), s('type_answers'))),
     offer === 'offline' ? h('p', { class: 'muted small' }, s('photo_offline')) : null,
@@ -136,12 +136,34 @@ function thisSheet({ l, seed }) {
       ? h('button', { type: 'button', class: 'link', onClick: android.openSettings }, s('open_settings')) : null);
 }
 
+// where the code is (C5 part C, item 4): a line drawing of the sheet's bottom corner, the QR at the end side and the
+// code beside it, circled. A line drawing in the text colour (`line: true`): dark mode draws it light on dark. The
+// drawing carries the example, so the field has no placeholder. Our own drawing, a fixed string: no learner text
+function cornerDrawing() {
+  const rtl = dir() === 'rtl';
+  const x = (n) => (rtl ? 240 - n : n);
+  const qr = [[0, 0], [20, 0], [0, 20]].map(([a, b]) => `<rect x="${x(rtl ? 180 + a + 8 : 180 + a)}" y="${62 + b}" width="8" height="8"/>`).join('');
+  const svg = `<svg viewBox="0 0 240 112" width="240" height="112" aria-hidden="true" focusable="false" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M${x(6)} 104 H${x(222)} V6"/>
+    <path d="M${x(24)} 22 H${x(200)} M${x(24)} 40 H${x(170)}" opacity=".45"/>
+    <rect x="${x(rtl ? 210 : 180)}" y="62" width="30" height="30" rx="2"/>
+    <g fill="currentColor" stroke="none">${qr}</g>
+    <text x="${x(166)}" y="82" direction="ltr" text-anchor="${rtl ? 'start' : 'end'}" fill="currentColor" stroke="none"
+      font-family="ui-monospace, monospace" font-size="13" font-weight="700">M7-03-48217</text>
+    <ellipse cx="${x(114)}" cy="77" rx="60" ry="16" stroke-width="2.5"/>
+  </svg>`;
+  const el = h('div', { class: 'corner-art line', 'data-line': 'true', 'data-silent': '' });
+  el.innerHTML = svg;
+  return el;
+}
+
 function pickSheet() {
   const c = state.child();
   const all = Object.entries(c.prints).map(([id, seed]) => ({ l: library.get(id), seed })).filter((x) => x.l);
   const last = all.at(-1);
   const printed = all.slice(0, -1).reverse();
-  const input = h('input', { dir: 'ltr', autocomplete: 'off', placeholder: 'M7-03-48217', 'aria-label': s('sheet_code') });
+  const input = h('input', { dir: 'ltr', autocomplete: 'off', 'aria-label': s('sheet_code') });
   const open = (e) => {
     e.preventDefault();
     const f = fromCode(input.value);
@@ -149,14 +171,15 @@ function pickSheet() {
     location.hash = `#/check/${encodeURIComponent(f.l.id)}/${f.seed}`;
   };
   return h('div', { class: 'screen' },
-    topbar({ back: '#/home', title: s('check_title'), sub: s('check_note'), child: true }),
+    topbar({ back: '#/home', title: s('check_title'), lead: s('check_note'), child: true }),
     last ? thisSheet(last) : null,
     printed.length ? h('div', { class: 'section-head' }, h('h2', {}, s('printed_sheets'))) : null,
     h('div', { class: 'lessons' }, printed.map(({ l, seed }) => said(h('a', { class: 'lesson-row',
       href: `#/check/${encodeURIComponent(l.id)}/${seed}` },
-    icon('file', 26), h('span', { class: 'grow' }, h('b', {}, plain(l.title)),
+    icon('file', 26), h('span', { class: 'grow' }, h('b', {}, titleText(l.title)),
       h('small', { dir: 'ltr' }, codeOf(l, seed))), icon('chev', 20))))),
     h('div', { class: 'section-head' }, h('h2', {}, s('sheet_code'))),
+    cornerDrawing(),
     h('form', { class: 'pad row', onSubmit: open }, h('div', { class: 'field grow flat' }, input),
       said(h('button', { class: 'btn primary', type: 'submit' }, s('open_code')))));
 }

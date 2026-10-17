@@ -12,7 +12,7 @@ import * as made from '../modules/made.js';
 import * as plans from '../modules/plan.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
-import { fill, h, icon, plain, said, speakerBtn, star, subjectBadge, topbar } from '../ui.js';
+import { fill, h, icon, plain, said, speakerBtn, star, subjectBadge, titleText, topbar } from '../ui.js';
 import { yearLabel } from './who.js';
 
 export function lessonRow(l, n, c) {
@@ -22,7 +22,7 @@ export function lessonRow(l, n, c) {
   return h('a', { class: 'lesson-row', href: '#/lesson/' + encodeURIComponent(l.id) },
     done ? h('span', { class: 'done-mark', 'aria-label': s('status_done') }, icon('check', 18, 3))
       : h('span', { class: `sbadge s-${l.subject}`, style: { width: '30px', height: '30px', fontSize: '15px' } }, fa(n)),
-    h('span', { class: 'grow' }, h('b', {}, plain(l.title)),
+    h('span', { class: 'grow' }, h('b', {}, titleText(l.title)),
       h('small', {}, bits.flatMap((b, k) => (k ? [' · ', b] : [b])), l.sheet ? [' · ', icon('printer', 15, 2.2)] : null)),
     done ? h('span', { class: 'stars-sm' }, [0, 1, 2].map((k) => star(14, k < done.stars))) : null,
     icon('chev', 20));

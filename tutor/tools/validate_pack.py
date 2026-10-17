@@ -108,6 +108,15 @@ def main(argv=None):
     for c in lib.links:
         if c.get("review_by") and c["review_by"] < today:
             print(f"note: {c['_pack']}/links.json {c['id']}: past its review_by date ({c['review_by']}), so hidden")
+    # a pack offered in English whose lesson has no English title shows another language's on an English screen
+    # (C5 part C, item 9): a note, never a refusal
+    for pid, pack in lib.packs.items():
+        if "en" not in (pack.get("langs") or []):
+            continue
+        for f in sorted((pack["_dir"] / "lessons").glob("*.json")):
+            t = json.loads(f.read_text(encoding="utf-8")).get("title")
+            if isinstance(t, dict) and not t.get("en"):
+                print(f"note: {pid}/{f.stem}: offered in English without an English title")
     if lib.checklists:
         uni = [c for c in lib.links if c.get("subject") == "university"]
         print(f"university preparation: {sum(len(c['steps']) for c in lib.checklists.values())} checklist step(s), "

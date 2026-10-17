@@ -20,7 +20,7 @@ import * as library from '../library.js';
 import { allows, on } from '../modules.js';
 import * as state from '../state.js';
 import * as graph from '../graph.js';
-import { confirmSheet, h, icon, playIcon, plain, said, speakerBtn } from '../ui.js';
+import { confirmSheet, h, icon, plain, playIcon, said, speakerBtn, titleText } from '../ui.js';
 import * as certs from './cert.js';
 import { speak } from '../speech.js';
 
@@ -184,7 +184,7 @@ function planCard(ctx) {
     h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id) + '?warm=1', 'aria-label': s('start_lesson') }, playIcon(44)),
     h('div', { class: 'grow' },
       h('div', { class: 'kicker' }, s('plan_kicker', { n: w.n, b: w.total })),
-      h('div', { class: 'title' }, plain(l.title)),
+      h('div', { class: 'title' }, titleText(l.title)),
       h('div', { class: 'muted small' }, [w.label, s(l.subject)].filter(Boolean).join(' · ')),
       h('div', { class: 'bar' }, h('span', { style: { width: Math.round((100 * w.done) / w.total) + '%' } }))));
 }

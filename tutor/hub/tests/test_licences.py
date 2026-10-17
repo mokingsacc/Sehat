@@ -480,3 +480,11 @@ def test_tatoeba_items_are_never_share_alike(tmp_path):
     assert "share-alike is refused here" in out
     _, out = problems(make_pack(tmp_path / "b", [with_sources(use("tatoeba", licence="CC BY 2.0 FR"))]))
     assert out == ""
+
+
+def test_an_english_pack_lesson_without_an_english_title_is_a_note(tmp_path, capsys):
+    packs = make_pack(tmp_path, [starter("maths-1-count-5")], langs=["prs", "ps", "en"])
+    assert validate_pack.main([str(packs)]) == 0
+    assert "maths-1-count-5: offered in English without an English title" in capsys.readouterr().out
+    assert validate_pack.main([str(make_pack(tmp_path / "b", [starter("maths-1-count-5")]))]) == 0
+    assert "without an English title" not in capsys.readouterr().out

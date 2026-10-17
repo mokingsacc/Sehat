@@ -8,15 +8,15 @@ import * as account from './account.js';
 import * as android from './android.js';
 import * as bands from './bands.js';
 import * as events from './events.js';
-import { dir, htmlLang, s, setLang, setTone } from './i18n.js';
+import { dir, getLang, htmlLang, s, setLang, setTone } from './i18n.js';
 import * as hub from './hub.js';
 import * as library from './library.js';
 import * as lock from './lock.js';
 import * as modules from './modules.js';
 import * as outbox from './outbox.js';
 import * as state from './state.js';
-import { loadClips, stop } from './speech.js';
-import { busy, h, nav, netChip, sayTab, toast } from './ui.js';
+import { hasVoice, loadClips, stop } from './speech.js';
+import { busy, fitHead, h, nav, netChip, readPage, sayTab, toast, topbar } from './ui.js';
 
 import ask from './screens/ask.js';
 import cert from './screens/cert.js';
@@ -94,7 +94,7 @@ async function route() {
     out = await screen(args);
   } catch (e) {
     console.error(e);
-    out = { el: h('div', { class: 'empty' }, s('error')), tab: 'lessons' };
+    out = errorScreen();
   }
   if (n !== seq) { if (out && out.cleanup) out.cleanup(); return; }   // the child already tapped somewhere else
   current = out;
@@ -105,8 +105,25 @@ async function route() {
   sayTab();                      // a tab tapped in years 1 to 3 or adult literacy says its label
 }
 
+// a screen that failed (C5.4): the sentence with the page speaker, "Try again" (the same screen with the same
+// arguments: the hash is unchanged) and, in a band with no tab bar, "Home". Nothing is sent, no event
+function errorScreen() {
+  const c = state.child();
+  const tabs = bands.hasTabs(document.documentElement.dataset.band);
+  const root = h('div', { class: 'screen error-screen' }, topbar({ back: null, title: s('error_title') }),
+    h('div', { class: 'pad stack' },
+      h('button', { type: 'button', class: 'btn primary', onClick: () => route() }, s('try_again')),
+      tabs ? null : h('a', { class: 'btn', href: '#/home', onClick: (e) => { if (location.hash === '#/home') { e.preventDefault(); route(); } } }, s('go_home'))));
+  if (c && bands.readsOnOpen(c.band, c.track, 'home') && hasVoice(getLang())) setTimeout(() => { if (root.isConnected) readPage(root.closest('#app') || root); }, 400);
+  return { el: root, tab: 'lessons' };
+}
+
 function refreshChips() {
-  document.querySelectorAll('.netchip').forEach((el) => el.replaceWith(netChip()));
+  document.querySelectorAll('.netchip').forEach((el) => {
+    const head = el.closest('header.top');
+    el.replaceWith(netChip());
+    if (head) fitHead(head);           // a chip that appears may push the title onto two lines (C5.3)
+  });
 }
 
 // the hub's list of modules changed (or was first heard): load what is new, redraw the tabs, leave a screen

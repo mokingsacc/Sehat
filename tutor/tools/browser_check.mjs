@@ -4,6 +4,7 @@
 //   - clipping: no text cut by its box, and no page wider than the screen (no sideways scroll);
 //   - direction: Dari and Pashto pages run right to left, English left to right, and the header starts on the
 //     reading side;
+//   - the title on one line beside the chip (C5.3), and the draft banner on one whole line (C5 part C, item 8);
 //   - the speaker rule: a page with words has a page speaker (or, in early years, the listen button), and scripture
 //     (data-voice="none", P29) carries no phone speaker.
 // It needs a running hub (the app and the starter pack) and Playwright with a Chromium; neither is a dependency
@@ -133,6 +134,21 @@ function inspect() {
     const first = shown[0].getBoundingClientRect();
     const last = shown[shown.length - 1].getBoundingClientRect();
     if (want === 'rtl' ? first.right < last.right : first.left > last.left) problems.push('header runs the wrong way');
+  }
+  // the title never wraps beside the chip (C5.3): when it would, what follows the speaker has a row of its own
+  const h1 = head && head.querySelector(':scope > .grow > h1');
+  if (h1 && !head.classList.contains('wrapped')) {
+    const after = [...head.querySelectorAll(':scope > .brk ~ *')].some((x) => x.offsetWidth > 0);
+    const lh = parseFloat(getComputedStyle(h1).lineHeight) || parseFloat(getComputedStyle(h1).fontSize) * 1.3;
+    if (after && h1.getBoundingClientRect().height > lh * 1.5) problems.push('the title wraps beside the chip');
+  }
+  // the draft banner is one line (C5 part C, item 8), whole
+  for (const el of document.querySelectorAll('#app .draft')) {
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || parseFloat(getComputedStyle(el).fontSize) * 1.3;
+    const pad = parseFloat(getComputedStyle(el).paddingTop) + parseFloat(getComputedStyle(el).paddingBottom);
+    if (el.getBoundingClientRect().height - pad > lh * 1.5 || el.scrollWidth > el.clientWidth + 1) {
+      problems.push(`the draft banner is not one whole line: "${el.textContent.slice(0, 30)}"`);
+    }
   }
   // the speaker rule
   const root = document.querySelector('#app [data-speaks]');

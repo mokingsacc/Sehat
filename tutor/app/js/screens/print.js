@@ -13,7 +13,7 @@ import * as library from '../library.js';
 import * as modules from '../modules.js';
 import * as sheetcode from '../sheetcode.js';
 import * as state from '../state.js';
-import { h, icon, plain, said, topbar } from '../ui.js';
+import { h, icon, plain, said, titleText, topbar } from '../ui.js';
 
 const FINAL = new Set(['done', 'saved', 'failed']);
 
@@ -49,7 +49,7 @@ export default async function print([id]) {
     if (frame.getAttribute('src') !== src) frame.setAttribute('src', src);
   };
   const checkLink = said(h('a', { class: 'link', href: `#/check/${encodeURIComponent(L.id)}/${seed}` }, icon('check', 20), s('check_sheet')));
-  const head = topbar({ back: '#/home', sub: s('todays_sheet'), title: plain(L.title) });
+  const head = topbar({ back: '#/home', sub: s('todays_sheet'), title: titleText(L.title) });
   const panel = printing ? hubPanel(L, seed, lang, say, status, checkLink) : getPanel(L, seed, lang, say, status, checkLink);
   showPreview();
   const el = h('div', { class: 'screen' }, head, panel.top || null, preview, panel.el);

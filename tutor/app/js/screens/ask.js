@@ -260,7 +260,7 @@ export default async function ask(args = []) {
   })) : null;
   const hwOffline = hw && !hub.online() ? h('p', { class: 'empty small' }, s('hw_offline')) : null;
   const el = h('div', { class: 'screen' },
-    topbar({ back: '#/home', title: s(hw ? 'hw_title' : 'ask_title'), sub: hw ? null : s('ask_scope'), child: true }),
+    topbar({ back: '#/home', title: s(hw ? 'hw_title' : 'ask_title'), lead: hw ? null : s('ask_scope'), child: true }),
     hwOffline, chips, thread, readyBox, composer, offerBox);
   return { el, tab: 'ask', cleanup: () => { clearInterval(timer); unwatch(); }, onHub: poll };
 }

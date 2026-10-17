@@ -113,6 +113,12 @@ export function rich(t, lang = getLang()) {
 }
 
 export function plain(t, lang = getLang()) { return pick(t, lang).replace(/\$/g, ''); }
+// a lesson title as shown (C5 part C, item 9): in a <bdi> with the language it is written in, so an English title
+// with a Dari word, or a Dari title on an English screen, keeps its own order and its own font
+export function titleText(t, lang = getLang()) {
+  const l = t == null || typeof t === 'string' ? lang : t[lang] ? lang : ['prs', 'ps', 'en'].find((x) => t[x]) || lang;
+  return h('bdi', { lang: l === 'en' ? 'en' : l === 'ps' ? 'ps-AF' : 'fa-AF' }, plain(t, lang));
+}
 
 const SPEAKER_ICON = { sm: 20, md: 26, lg: 32, xl: 36 };
 // page: the header's speaker that reads the whole screen
@@ -218,25 +224,22 @@ export function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
 }
 
-// The connection chip at the end of every header (C2.5; it replaced hubChip in P11). Online it hides while all is
-// well, says "Offline" (and how many things she sent are waiting) when the network is gone, and "Sending…" while
-// they go; on the hub it says "Hub" or "No hub". Tapping it opens a small sheet that says what that means and lists
-// what waits. Events are never counted. It is never read aloud with the page (data-silent).
+// The connection chip at the end of every header (C2.5; it replaced hubChip in P11; one rule on both hosts since
+// C5.3). It hides while all is well (the network up, or the hub answering, and nothing sending or waiting); it says
+// "Offline" or "No hub" when that is gone, "Sending…" while things go, and how many things she sent wait. Tapping it
+// opens a small sheet that says what that means and lists what waits. Events are never counted. It is never read
+// aloud with the page (data-silent).
 export function netChip() {
   const online = hub.home() === 'online';
   const on = hub.online();
   const waits = outbox.waiting();
   const sep = getLang() === 'en' ? ' · ' : '، ';
+  if (on && !outbox.sending() && !waits.length) return h('span', { class: 'netchip hidden', 'data-silent': '' });
   let state;
   let label;
-  if (online) {
-    if (on && outbox.sending()) { state = 'sending'; label = s('net_sending'); }
-    else if (on) return h('span', { class: 'netchip hidden', 'data-silent': '' });
-    else { state = 'off'; label = s('net_offline') + (waits.length ? sep + s('net_waiting', { n: waits.length }) : ''); }
-  } else {
-    state = on ? 'on' : 'off';
-    label = s(on ? 'net_hub' : 'net_nohub');
-  }
+  if (on && outbox.sending()) { state = 'sending'; label = s('net_sending'); }
+  else if (on) { state = 'on'; label = online ? s('net_waiting', { n: waits.length }) : s('net_hub') + sep + s('net_waiting', { n: waits.length }); }
+  else { state = 'off'; label = s(online ? 'net_offline' : 'net_nohub') + (waits.length ? sep + s('net_waiting', { n: waits.length }) : ''); }
   const text = online ? (on ? null : s('net_off_text')) : s(on ? 'net_hub_text' : 'net_nohub_text');
   return h('button', { type: 'button', class: `netchip ${state}`, 'data-silent': '', 'aria-haspopup': 'dialog',
     onClick: () => netSheet(text, waits) }, h('span', { class: 'dot' }), label);
@@ -291,14 +294,41 @@ export function sayTab() {
 // every header keeps the page speaker (P9 look-over, ruling 1), which reads the whole screen, and ends with the
 // connection chip (C2.5; net: false where it must not show, as on an early-years child's own screens)
 // `child`: a screen the learner herself uses; in early years the net chip stays off those (C2.5: the grown-up's
-// screens only)
-export function topbar({ back = '#/home', title, sub, extra, speaker = true, net = true, child = false } = {}) {
+// screens only). `sub` is the kicker, a few words above the title; `lead` a sentence under it in the small size,
+// which the page speaker reads after the title (C5.3). The title gets the whole row first: when it would wrap, the
+// chip and anything else after the speaker take a row of their own at the end (measured once drawn, see fitHead)
+export function topbar({ back = '#/home', title, sub, lead, extra, speaker = true, net = true, child = false } = {}) {
   const c = child ? state.child() : null;
   if (c && c.band === 'ey') net = false;
-  return h('header', { class: 'top' },
+  const head = h('header', { class: 'top' },
     back ? h('a', { class: 'round', href: back, 'aria-label': s('back') }, icon('back', 24, 2.5)) : null,
-    h('div', { class: 'grow' }, sub ? h('div', { class: 'kicker' }, sub) : null, title ? h('h1', {}, title) : null),
-    speaker ? pageSpeaker() : null, extra || null, net ? netChip() : null);
+    h('div', { class: 'grow' }, sub ? h('div', { class: 'kicker' }, sub) : null, title ? h('h1', {}, title) : null,
+      lead ? h('p', { class: 'top-lead' }, lead) : null),
+    speaker ? pageSpeaker() : null, h('span', { class: 'brk', 'aria-hidden': 'true' }), extra || null, net ? netChip() : null);
+  fitSoon(head, 0);
+  return head;
+}
+
+// the title on one line beside what follows it, or the things after the speaker on a row of their own
+export function fitHead(head) {
+  head.classList.remove('wrapped');
+  const t = head.querySelector(':scope > .grow > h1');
+  const after = [...head.querySelectorAll(':scope > .brk ~ *')].some((x) => x.offsetWidth > 0);
+  if (!t || !after) return;
+  const cs = getComputedStyle(t);
+  const line = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.3;
+  if (t.getBoundingClientRect().height > line * 1.5) head.classList.add('wrapped');
+}
+function fitSoon(head, n) {
+  if (typeof requestAnimationFrame !== 'function') return;
+  requestAnimationFrame(() => { if (head.isConnected) fitHead(head); else if (n < 20) fitSoon(head, n + 1); });
+}
+if (typeof window !== 'undefined') {
+  let tick = null;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(tick);
+    tick = requestAnimationFrame(() => document.querySelectorAll('header.top:not(.staff-top)').forEach(fitHead));
+  });
 }
 
 export const SUBJECTS = ['maths', 'science', 'english', 'dari', 'pashto'];

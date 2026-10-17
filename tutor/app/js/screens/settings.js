@@ -75,7 +75,7 @@ export default function settings([action]) {
       ? s('consent_given', { d: '\u2066' + fa(String(l.consent.at || '').slice(0, 10)) + '\u2069' })   // the date kept left to right
       : s('consent_none');
     const nick = h('input', { class: 'nick', maxlength: 20, autocomplete: 'off', value: l.nickname,
-      'aria-label': s('nickname'), placeholder: s('nickname_hint'),
+      'aria-label': s('nickname'),
       onChange: (e) => { state.updateChild(l.id, { nickname: e.target.value.trim() }); } });
     const offers = modules.pick('settings.row', modules.context(l, null)).map((o) => {
       try { return o.render(modules.context(l, null)); } catch { return null; }

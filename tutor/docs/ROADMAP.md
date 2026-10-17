@@ -199,6 +199,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   cohorts table's heads in plain words; the Log's detail line in the reader's words and digits; Escape cancels
   every dialog and Cancel takes the focus where a change cannot be taken back; the ten commonest refusals carry a
   code the pages show in the reader's language.
+- **P35, done:** the nine learner polish items (C5 part C): the hub chip hides on both hosts while all is well; the
+  header's `lead` under the title (Ask's and Check's sentences), and the things after the speaker take their own
+  row whenever the title would wrap; an error screen with "Try again" and, without a tab bar, "Home"; a line
+  drawing of the sheet's corner on Check in place of the placeholder; one Dari "yes" ("بلی"); one subject row
+  shape, with "No lessons for your year yet"; the nickname field empty; the draft banner on one line; lesson titles
+  in `bdi` with their own language, and a pack-check note for an English pack's lesson without an English title.
 
 ## January 2027: buy and test
 

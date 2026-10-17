@@ -17,7 +17,7 @@ import * as library from '../library.js';
 import { allows, on } from '../modules.js';
 import * as state from '../state.js';
 import { speak } from '../speech.js';
-import { h, icon, perButton, playIcon, plain, said, speakerBtn, subjectBadge, star } from '../ui.js';
+import { h, icon, perButton, plain, playIcon, said, speakerBtn, star, subjectBadge, titleText } from '../ui.js';
 
 const hasLesson = (ctx) => !!ctx.lesson;
 // the big button starts the lesson with its warm-up of due review items (P25a; none in early years: recall.js)
@@ -32,7 +32,7 @@ function nextBold({ child: c, lesson: l }) {
   return h('section', { class: 'card next-card' },
     h('span', { class: 'tag' }, started ? s('continue') : s('next_lesson')),
     l.glyph ? h('div', { class: 'glyph', 'aria-hidden': 'true' }, l.glyph) : subjectBadge(l.subject, 72),
-    h('div', { class: 'title' }, plain(l.title)),
+    h('div', { class: 'title' }, titleText(l.title)),
     h('div', { class: 'muted' }, subjectLine(l)),
     h('div', { class: 'row big-row' },
       speakerBtn(() => speak(plain(l.title), getLang()), { size: 'md', label: s('listen') }),
@@ -54,21 +54,23 @@ function nextClean({ child: c, lesson: l }) {
     h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id) + WARM, 'aria-label': s('start_lesson') }, playIcon(44)),
     h('div', { class: 'grow' },
       h('div', { class: 'kicker' }, at !== undefined ? s('continue') : s('next_lesson')),
-      h('div', { class: 'title' }, plain(l.title)),
+      h('div', { class: 'title' }, titleText(l.title)),
       h('div', { class: 'muted small' }, [subjectLine(l), l.unit ? plain(l.unit) : null].filter(Boolean).join(' · ')),
       at !== undefined ? h('div', { class: 'bar' }, h('span', { style: { width: pct + '%' } })) : null));
 }
 
 // subject tiles; in the bands with a speaker per button they go one per row, each with its speaker at the end
-export function tiles({ child: c, tone }) {
+// `head: false` where the screen's own title already says it (Subjects: one head, C5.3)
+export function tiles({ child: c, tone, head = true }) {
   const one = perButton();
-  return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects'))),
+  return [head ? h('div', { class: 'section-head' }, h('h2', {}, s('subjects'))) : null,
     h('div', { class: 'tiles' + (one ? ' one' : '') }, library.subjectsFor(c).map((sub) => {
       const p = library.progress(c, sub);
       return said(h('a', { class: 'tile', href: '#/subject/' + sub },
         subjectBadge(sub, 46),
         h('span', { class: 'grow' }, h('b', {}, s(sub)),
-          p.total ? h('small', {}, tone === 'child' ? star(14, p.done > 0) : null, s('of', { a: p.done, b: p.total })) : null)));
+          p.total ? h('small', {}, tone === 'child' ? star(14, p.done > 0) : null, s('of', { a: p.done, b: p.total }))
+            : h('small', { class: 'muted' }, s('no_lessons_year')))));
     }))];
 }
 
@@ -78,15 +80,17 @@ const readerRow = () => h('a', { href: '#/quran' }, subjectBadge('quran', 42),
 const uniRow = () => h('a', { href: '#/university' }, subjectBadge('university', 42),
   h('span', { class: 'grow' }, h('b', {}, s('university'))), icon('chev', 22));
 
-export function subjectList({ child: c, band }) {
-  return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects')), h('span', {}, s('every_lesson_open'))),
+// one row shape (C5 part C, item 6): the name, then "0 of 1" and the bar under it, the chevron at the end; a subject
+// with nothing for her year says so, muted, at the same height
+export function subjectList({ child: c, band, head = true }) {
+  return [head ? h('div', { class: 'section-head' }, h('h2', {}, s('subjects')), h('span', {}, s('every_lesson_open'))) : null,
     h('nav', { class: 'subjects', 'aria-label': s('subjects') }, library.subjectsFor(c).map((sub) => {
       const p = library.progress(c, sub);
       return h('a', { href: '#/subject/' + sub },
         subjectBadge(sub, 42),
         h('span', { class: 'grow' }, h('b', {}, s(sub)),
-          p.total ? h('small', { class: 'muted' }, s('of', { a: p.done, b: p.total })) : null,
-          p.total ? h('div', { class: 'bar' }, h('span', { style: { width: Math.round((100 * p.done) / p.total) + '%' } })) : null),
+          h('small', { class: 'muted' }, p.total ? s('of', { a: p.done, b: p.total }) : s('no_lessons_year')),
+          h('div', { class: 'bar' + (p.total ? '' : ' nothing') }, h('span', { style: { width: (p.total ? Math.round((100 * p.done) / p.total) : 0) + '%' } }))),
         icon('chev', 22));
     }), on('university') && allows('university', band) ? uniRow() : null,
     on('quran') && allows('quran', band) ? readerRow() : null)];

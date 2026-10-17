@@ -1703,7 +1703,7 @@ L2, L5, L6, L7 when the hub is next touched). The C5 builder starts P33 once M1 
    reviewers.
 4. **C6's date** for P30 and P31. Default: when a member's draft exists; both stay off.
 
-## What P33 and P34 built (builder notes)
+## What P33, P34 and P35 built (builder notes)
 
 - **P33:** as C5.1. The Solar Hijri day is computed (the 33-year rules with their break years), not looked up; one
   table of 25 known days (`hub/tests/hijri_dates.json`) tests the page's copy and `cert.py`'s.
@@ -1712,6 +1712,10 @@ L2, L5, L6, L7 when the hub is next touched). The C5 builder starts P33 once M1 
   refusal keeps its old shape. The cohort page's `since` (when and by whom a kill switch went off) is read from the
   Log, so nothing new is stored. A risky module's confirm reads each capability's sentence from the string files
   (`cap.<capability>`), the module's own English line where it has none.
+
+- **P35:** as C5.3, C5.4 and part C. The title's wrap is measured once the header is drawn, again when the window
+  changes size and when the chip changes; the header's own `.brk` takes the row's end. `browser_check.mjs` gains
+  two rules: the title never wraps beside the chip, and the draft banner is one whole line.
 
 ### Open look questions (the builder's choice, for the chair)
 
@@ -1732,3 +1736,11 @@ L2, L5, L6, L7 when the hub is next touched). The C5 builder starts P33 once M1 
    2026), not yet against a printed Afghan calendar: the January reviewers should check three of them.
 9. The staff browser check needs a freshly started hub: each page opening asks `/me` before the PIN is typed, which
    the hub counts as a wrong try (L2 is kept as built).
+10. The sheet's corner on Check is drawn inline in the text colour (`currentColor`), which is what `line: true`
+    asks for: dark mode draws it light on dark with no filter. The corner sits at the reading end (bottom right in
+    English, bottom left in Dari and Pashto), as the printed QR does.
+11. On the error screen the tab bar stays where the band has one, so "Home" shows only without a tab bar; "Try
+    again" re-runs the route, which is the same screen with the same arguments since the address has not changed.
+12. A subject with nothing for her year keeps an empty, invisible bar so its row has the same height as the others.
+13. Subjects' "Every lesson is open" moved from the section head (now gone) to the header's lead.
+14. The Dari "yes" lines changed are the five the chair named; three more Dari lines already said "بلی".
