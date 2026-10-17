@@ -32,7 +32,8 @@ import { TONE_PATH, words as pinyinWords } from '../pinyin.js';
 import * as made from '../modules/made.js';
 import * as recall from '../modules/recall.js';
 import * as Q from '../quran.js';
-import { addVoices, canRecord, hasClip, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
+import * as practice from '../speak.js';
+import { addVoices, canRecord, hasClip, hasVoice, packClip, play, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, playIcon, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
 
@@ -271,7 +272,9 @@ export default async function lesson(args) {
         t && st.text ? h('p', { class: 'read' }, rich(st.text)) : null,
         speakerBtn(() => (t ? sayWord(st) : say(word, lang)), { size: 'lg', label: s('hear') }),
       ];
-      if (canRecord()) {
+      if (canRecord() && modules.on('speak') && modules.allows('speak', c && c.band)) {
+        out.splice(out.length - 1, 1, practiceRow(() => (t ? sayWord(st) : say(word, lang))));   // "Play the voice" in its place
+      } else if (canRecord()) {
         const note = h('small', {}, s('say_note'));
         const mic = h('button', { class: 'mic', type: 'button', 'aria-label': s('your_turn') }, icon('mic', 44, 2.4));
         mic.addEventListener('click', recorder((on) => {
@@ -286,8 +289,42 @@ export default async function lesson(args) {
     },
   };
 
+  // speech practice (C5.5, module `speak`): play the voice, record (8 s, in memory), play mine beside the voice, then
+  // her own mark; three goes, then "Let's go on." Next is never blocked; the recording goes when the step closes.
+  let drops = [];
+  const dropAll = () => { drops.forEach((f) => f()); drops = []; };
+  function practiceRow(playVoice) {
+    const status = h('p', { class: 'muted small', role: 'status', 'aria-live': 'polite' });
+    const btn = (label, ic, onClick, cls = 'btn') => h('button', { type: 'button', class: cls, onClick }, ic, s(label));
+    const recBtn = btn('speak_record', icon('mic', 22), () => rec(), 'btn primary');
+    const mine = btn('speak_mine', playIcon(20), () => { const u = P.mine(); if (u) play(u, { onfail: () => {} }); });
+    const yes = btn('speak_said', icon('check', 22), () => marked(true));
+    const no = btn('speak_not_yet', null, () => marked(false));
+    const after = h('div', { class: 'row wrap hidden' }, said(mine), said(yes), said(no));
+    const P = practice.session({ onChange: (st) => {
+      recBtn.replaceChildren(icon('mic', 22), s(st === 'recording' ? 'speak_stop' : 'speak_record'));
+      recBtn.classList.toggle('rec', st === 'recording');
+      if (st === 'recorded') { after.classList.remove('hidden'); status.textContent = ''; }
+    } });
+    drops.push(P.drop);
+    async function rec() {
+      if (practice.firstTap()) status.textContent = s('speak_mic_note');
+      stop();
+      try { await P.record(); } catch { status.textContent = s('error'); }
+    }
+    function marked(ok) {
+      const r = P.mark(ok);
+      after.classList.add('hidden');
+      if (r === 'said' || r === 'go_on') { recBtn.classList.add('hidden'); status.textContent = r === 'go_on' ? s('speak_go_on') : ''; }
+      else status.textContent = s('speak_again');
+    }
+    return h('div', { class: 'stack speak-row' },
+      h('div', { class: 'row wrap' }, said(btn('speak_voice', playIcon(20), playVoice)), said(recBtn)), after, status);
+  }
+
   // a warm-up item: its kicker, then the step as in its own lesson; Next opens after her first try
   function drawWarm() {
+    dropAll();
     stop();
     const it = warm[w];
     [...segs.children].forEach((sp, k) => sp.classList.toggle('on', k <= w));
@@ -305,6 +342,7 @@ export default async function lesson(args) {
   }
 
   function draw() {
+    dropAll();
     stop();
     if (!peek) state.setStep(id, i);
     const st = steps[i];
@@ -321,6 +359,7 @@ export default async function lesson(args) {
   }
 
   function finish() {
+    dropAll();
     stop();
     const answers = Object.values(results);
     const right = answers.filter(Boolean).length;
@@ -357,7 +396,7 @@ export default async function lesson(args) {
   }
 
   if (w >= 0) drawWarm(); else draw();
-  return { el: root, tab: null, cleanup: stop };
+  return { el: root, tab: null, cleanup: () => { dropAll(); stop(); } };
 }
 
 // the one-line source note at the end of a lesson that uses outside material (BUILD-PLAN 4.2); how it looks is

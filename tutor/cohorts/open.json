@@ -34,6 +34,7 @@
     "timetable": true,
     "plan": true,
     "recall": true,
-    "cert": true
+    "cert": true,
+    "speak": false
   }
 }

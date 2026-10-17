@@ -1,0 +1,12 @@
+{
+  "id": "speak",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": [],
+  "settings": {},
+  "needs": [],
+  "offline": "yes"
+}

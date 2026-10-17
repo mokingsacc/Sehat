@@ -37,6 +37,7 @@ const SHELL = [
   'js/scan.js',
   'js/sha256.js',
   'js/sheetcode.js',
+  'js/speak.js',
   'js/speech.js',
   'js/state.js',
   'js/ui.js',

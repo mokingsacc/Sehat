@@ -819,6 +819,19 @@ them. Nothing here needs Mo before 22 December 2026; one decision, D11, is added
   (`voice.py --sample`), a line in RELEASE.md's checklist.
 - Staff strings are voiced (C5.6) but staff pages keep no speakers (rulings 13 and 20).
 
+## What P27b built, and where it differs
+
+- Module `speak` (C5.5): bands p2, s1, s2 and ad (the English, Chinese and literacy-track `say` steps); depends
+  `lessons`; no capability, no setting; offline. Off in every seed cohort and in new ones; the admin's switch per
+  cohort, logged like any switch.
+- Where it is on and the page may record (a browser over HTTPS; never the APK or the hub's plain http), a `say` step
+  shows "Play the voice" and "Record" (8 s at most; the first tap in a run of the app shows "Qalam uses the microphone
+  for 8 seconds. Nothing is kept or sent."), then "Play mine", "I said it" and "Not yet"; after three goes, "Let's go
+  on." Next is never blocked. Elsewhere the step is as P27a built it.
+- `app/js/speak.js` holds the recording in memory and drops it when the step closes (Next, Back, leaving the
+  lesson). `app/tests/speak.test.js` patches every writer (storage, IndexedDB, fetch, beacons, sockets, the console)
+  and fails if one is called. No transcript, no machine mark; `say.answers` stays as the model phrase only.
+
 ## C2
 
 | # | Item | Decision | Why | The builder must |

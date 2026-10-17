@@ -20,6 +20,7 @@
     "timetable": true,
     "plan": true,
     "recall": false,
-    "cert": true
+    "cert": true,
+    "speak": false
   }
 }
