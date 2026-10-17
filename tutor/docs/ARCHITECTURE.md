@@ -599,6 +599,12 @@ DESIGN-C2C3-SPECS item 10: p1 two periods of 25 minutes, p2 three of 30, s1 and 
   the app will add, `globalThis.QalamAndroid.setAlarms(json)`, a seven-day plan of times only (a wake-up 30 minutes
   before the start and each period's bell) with the title "Qalam"; `cancelAlarms()` otherwise. A browser has no
   bridge, so nothing happens there.
+- **An adult's study time** (7b, C4.10; the module's bands include `ad`, with no timetable from the hub): one time a
+  day, Saturday to Thursday, off until she says yes. The phone keeps `study`, `{at: "19:00", min: 30}` (on the half
+  hour from 5:00 to 22:30; 15, 30, 45 or 60 minutes) or `"off"`; unset means Home's card "A time to study" has not been
+  answered. During it Home's primary is "Study time: 20 minutes left" over her next lesson; the bells ring at its start
+  and end while Qalam is on screen; in the APK, once the phone is hers, one alarm at its start each day
+  (`day.studyAlarms`). The module's switch takes it away with the school day. Nothing is sent.
 
 ## "I want to learn this" (search.py, mods/plan.py, app/js/modules/plan.js, app/js/screens/plan.js, P22)
 

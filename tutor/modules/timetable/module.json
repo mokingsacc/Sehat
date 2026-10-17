@@ -1,9 +1,9 @@
 {
   "id": "timetable",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "maturity": "pilot",
   "depends": ["lessons"],
-  "bands": ["p1", "p2", "s1", "s2"],
+  "bands": ["p1", "p2", "s1", "s2", "ad"],
   "slots": ["home.action", "settings.row"],
   "capabilities": [],
   "settings": {},

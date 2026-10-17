@@ -85,6 +85,8 @@ function clean(l) {
     // school"); `alarms` 'off' when she switched closed-app bells off (on by default once the phone is hers, C3.1)
     ...(l.mine === 'yes' || l.mine === 'no' ? { mine: l.mine } : {}),
     ...(l.alarms === 'off' ? { alarms: 'off' } : {}),
+    // 7b (C4.10): an adult's study time, {at: "19:00", min: 30} or 'off' once she answered "A time to study"
+    ...(cleanStudy(l.study) !== null ? { study: cleanStudy(l.study) } : {}),
     // P26: an adult on the literacy track has answered "You can read now. Use the reader look?" (asked once)
     ...(l.readerAsked === true ? { readerAsked: true } : {}),
     // C2.3: she has heard "I won't tell you the answer" once, the first time she reached a third hint
@@ -98,6 +100,14 @@ function clean(l) {
     ...(Object.keys(cleanMarks(l.marks)).length ? { marks: cleanMarks(l.marks) } : {}),
     ...(Object.keys(cleanRecall(l.recall)).length ? { recall: cleanRecall(l.recall) } : {}),
   };
+}
+
+// a study time: on the half hour from 5:00 to 22:30, 15, 30, 45 or 60 minutes long (day.js STUDY); else null
+function cleanStudy(v) {
+  if (v === 'off') return 'off';
+  if (!v || typeof v !== 'object' || typeof v.at !== 'string' || !/^\d\d:(00|30)$/.test(v.at)) return null;
+  const m = Number(v.at.slice(0, 2)) * 60 + Number(v.at.slice(3));
+  return m >= 300 && m <= 1350 && [15, 30, 45, 60].includes(v.min) ? { at: v.at, min: v.min } : null;
 }
 
 function cleanMarks(m) {

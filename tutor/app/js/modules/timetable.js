@@ -14,6 +14,11 @@
 //   to the notification explainer (Android 13+ asks); No says bells ring only while Qalam is open. Settings → School
 //   day then has "This phone is mine", "Bells when Qalam is closed" and, when notifications are off, a way to allow them.
 // Nothing about her day is sent and no event is recorded (F5).
+// - Adults (7b, C4.10): one study time a day, Saturday to Thursday, off until she says yes. "A time to study" once on
+//   Home (secondary, top priority, until answered); "Yes, choose a time" opens a sheet that asks only the time;
+//   during it Home's primary is "Study time: 20 minutes left" over her next lesson; a bell at its start and end while
+//   Qalam is on screen; in the APK the alarm at its start once the phone is hers. Settings → Study time holds the
+//   rest. Kept as `study` on the phone (day.js); nothing sent.
 
 import * as android from '../android.js';
 import * as day from '../day.js';
@@ -95,7 +100,14 @@ function announce(c, b, d) {
 function fire() {
   timer = null;
   const c = state.child();
-  if (document.visibilityState === 'visible' && day.dayOn(c)) {
+  if (document.visibilityState === 'visible' && day.studyOn(c)) {
+    const now = new Date();
+    const t = day.studyOf(c.study, now);
+    const m = day.minuteOf(now);
+    if (t && m === t.start) { chime(BELLS.start); toast(s('study_row')); }
+    if (t && m === t.end) { chime(BELLS.end); setTimeout(() => sayKey('day_over', getLang(), null, { shown: true }), 1600); }
+    changed();
+  } else if (document.visibilityState === 'visible' && day.dayOn(c)) {
     const now = new Date();
     const d = today(c, now);
     const b = d.blocks.find((x) => x.start === day.minuteOf(now));
@@ -115,9 +127,12 @@ export function arm() {
   timer = null;
   const c = state.child();
   day.syncAlarms(c);
-  if (typeof document === 'undefined' || document.visibilityState !== 'visible' || !day.dayOn(c)) return;
+  const study = day.studyOn(c);
+  if (typeof document === 'undefined' || document.visibilityState !== 'visible' || (!day.dayOn(c) && !study)) return;
   const now = new Date();
-  const next = day.nextBoundary(day.dayOf(day.cached(c), now, c.shift || 0), day.minuteOf(now));
+  // in her study time Home's "minutes left" moves on each minute; the bells ring only at its start and end (fire)
+  const next = study ? (day.studyLeft(c.study, now) !== null ? day.minuteOf(now) + 1 : day.studyNext(c.study, now))
+    : day.nextBoundary(day.dayOf(day.cached(c), now, c.shift || 0), day.minuteOf(now));
   const at = next === null ? new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 1)
     : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, next, 0, 200);
   timer = setTimeout(next === null ? arm : fire, Math.max(250, at - now));
@@ -333,18 +348,120 @@ function appRows(c, sw, set) {
   ];
 }
 
+// --- an adult's study time (7b, C4.10) ---
+
+// the timetable module is on for adults here (the cohort's "School day off" switch takes the study time away)
+export const studyCan = (c) => !!c && c.band === 'ad' && on('timetable') && allows('timetable', 'ad');
+
+// "A time to study", until she answers it: Yes opens the time sheet, No ends it for good
+function studyCard() {
+  const lines = [s('study_title'), s('study_card')].join('. ');
+  return h('section', { class: 'card lined pad-card stack daycard' },
+    h('div', { class: 'row' }, h('h2', { class: 'grow' }, s('study_title')),
+      speakerBtn(() => speak(lines, getLang()), { size: 'sm' })),
+    h('p', { class: 'lead' }, s('study_card')),
+    said(h('button', { type: 'button', class: 'btn primary big', onClick: () => studySheet() },
+      icon('bell', 26, 2.2), s('study_yes'))),
+    said(h('button', { type: 'button', class: 'btn outline big', onClick: () => daySet({ study: 'off' }) },
+      s('study_no'))));
+}
+
+// a stepper over the half hours from 5:00 to 22:30
+function timeStepper(at, set) {
+  const m = day.toMin(at);
+  const to = (x) => `${String(Math.floor(x / 60)).padStart(2, '0')}:${String(x % 60).padStart(2, '0')}`;
+  return h('div', { class: 'row' },
+    h('button', { type: 'button', class: 'round', 'aria-label': s('start_earlier'), disabled: m <= day.STUDY.earliest || null,
+      onClick: () => set(to(m - day.STUDY.step)) }, icon('minus', 22)),
+    h('span', { class: 'stepper-v grow', 'aria-live': 'polite' }, day.studyClock(m)),
+    h('button', { type: 'button', class: 'round', 'aria-label': s('start_later'), disabled: m >= day.STUDY.latest || null,
+      onClick: () => set(to(m + day.STUDY.step)) }, icon('plus', 22)));
+}
+
+// the time sheet (the net sheet's shape): the time only, from 7:00 in the evening, and Save; the length is 30
+// minutes (Settings changes it). Tapping outside closes it and the card stays.
+export function studySheet() {
+  document.querySelectorAll('.netsheet').forEach((el) => el.remove());
+  let at = day.STUDY.from;
+  const close = () => sheet.remove();
+  const body = h('div', { class: 'card stack' });
+  const draw = () => fill(body,
+    h('div', { class: 'row top' }, h('b', { class: 'grow' }, s('study_when')),
+      speakerBtn(() => speak([s('study_when'), day.studyClock(day.toMin(at))].join('. '), getLang()), { size: 'sm' })),
+    timeStepper(at, (v) => { at = v; draw(); }),
+    said(h('button', { type: 'button', class: 'btn primary', onClick: () => {
+      close();
+      daySet({ study: { at, min: day.STUDY.min } });
+      toast(s('study_set', { t: day.studyClock(day.toMin(at)) }));
+    } }, s('save'))));
+  const sheet = h('div', { class: 'netsheet study-sheet', role: 'dialog', 'aria-modal': 'true',
+    onClick: (e) => { if (e.target === sheet) close(); } }, body);
+  draw();
+  document.body.append(sheet);
+}
+
+// during the study time: "Study time: 20 minutes left" over her next lesson, in the Now card's shape
+function studyNow(ctx) {
+  const n = day.studyLeft(ctx.child.study, new Date());
+  const top = s('study_left', { n });
+  const lesson = ctx.lesson;
+  const what = lesson ? [s(lesson.subject), plain(lesson.title)].join(' · ') : null;
+  const play = (size) => (lesson ? h('a', { class: 'play', href: lessonHref(lesson) + '?warm=1', 'aria-label': s('start_lesson') },
+    playIcon(size)) : null);
+  const clock = h('span', { class: 'nowpic', 'aria-hidden': 'true' }, icon('clock', 56, 2));
+  if (ctx.look === 'bold') {
+    return h('section', { class: 'card next-card now study-now' }, h('span', { class: 'tag' }, top), play(52) || clock,
+      what ? h('div', { class: 'title' }, what) : null);
+  }
+  return h('section', { class: 'card soft continue now study-now' }, play(44) || clock,
+    h('div', { class: 'grow stack-sm' }, h('div', { class: 'kicker' }, top), what ? h('div', { class: 'title' }, what) : null));
+}
+
+// Settings → Study time: on or off, the time, the length; in the APK, "This phone is mine" and closed-app bells
+function studyRow() {
+  const box = h('section', { class: 'card lined set-row study-row' });
+  const sw = (label, onNow, toggle) => h('div', { class: 'row' }, h('b', { class: 'grow' }, label),
+    h('button', { type: 'button', class: 'switch' + (onNow ? ' on' : ''), role: 'switch', 'aria-checked': String(onNow),
+      'aria-label': label, onClick: toggle }, h('span', { class: 'knob' })));
+  const draw = () => {
+    const c = state.child();
+    const st = c.study && typeof c.study === 'object' ? c.study : null;
+    const set = (patch) => { daySet(patch); draw(); };
+    fill(box,
+      h('div', { class: 'row' }, h('div', { class: 'grow' }, h('b', {}, s('study_row')), h('small', {}, s('study_note'))),
+        speakerBtn(() => speak([s('study_row'), s('study_note')].join('. '), getLang()), { size: 'sm' })),
+      sw(s('study_row'), !!st, () => set({ study: st ? 'off' : { at: day.STUDY.from, min: day.STUDY.min } })),
+      st ? h('div', { class: 'stack-sm' }, h('b', {}, s('start_time')), timeStepper(st.at, (at) => set({ study: { ...st, at } }))) : null,
+      st ? h('div', { class: 'stack-sm' }, h('b', {}, s('study_length')),
+        h('div', { class: 'chips', role: 'group', 'aria-label': s('study_length') }, day.STUDY.lens.map((n) =>
+          h('button', { type: 'button', class: 'chip' + (st.min === n ? ' on' : ''), 'aria-pressed': String(st.min === n),
+            onClick: () => set({ study: { ...st, min: n } }) }, s('minutes', { n }))))) : null,
+      st && android.isApp() ? appRows(c, sw, set) : null);
+  };
+  const onNotify = () => { if (box.isConnected) draw(); else window.removeEventListener('qalam-notify', onNotify); };
+  window.addEventListener('qalam-notify', onNotify);
+  draw();
+  return box;
+}
+
 // the school day can be hers: her band has one in the timetable kept on the phone
 const hasDay = (ctx) => !!ctx.child && day.BANDS.includes(ctx.band) && allows('timetable', ctx.band) && !!day.cached(ctx.child);
 
 export function register(shell) {
   shell.offer('home.action', { id: 'day-card', role: 'secondary', priority: 100,
     when: (ctx) => day.dayOn(ctx.child) && !day.asked(ctx.child), render: dayCard });
+  shell.offer('home.action', { id: 'study-card', role: 'secondary', priority: 100,
+    when: (ctx) => studyCan(ctx.child) && !day.studyAsked(ctx.child), render: studyCard });
   shell.offer('home.action', { id: 'mine-card', role: 'secondary', priority: 90,
-    when: (ctx) => android.isApp() && day.dayOn(ctx.child) && ctx.child.day === 'on' && !ctx.child.mine, render: mineCard });
+    when: (ctx) => android.isApp() && !ctx.child.mine
+      && ((day.dayOn(ctx.child) && ctx.child.day === 'on') || day.studyOn(ctx.child)), render: mineCard });
+  shell.offer('home.action', { id: 'study-now', role: 'primary', priority: 60,
+    when: (ctx) => day.studyOn(ctx.child) && day.studyLeft(ctx.child.study, new Date()) !== null, render: studyNow });
   shell.offer('home.action', { id: 'now', role: 'primary', priority: 50, when: (ctx) => day.dayOn(ctx.child), render: nowCard });
   shell.offer('home.action', { id: 'today', role: 'list', priority: 50,
     when: (ctx) => day.dayOn(ctx.child) && today(ctx.child).school, render: todayList });
   shell.offer('settings.row', { id: 'school-day', priority: 10, when: hasDay, render: settingsRow });
+  shell.offer('settings.row', { id: 'study-time', priority: 10, when: (ctx) => studyCan(ctx.child), render: studyRow });
   unlockOnFirstTap(Object.values(BELLS));
   watch();
   refresh(state.child(), true);

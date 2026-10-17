@@ -176,6 +176,10 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   card offers the reader look. `adult-literacy-1` and `adult-maths-1` are drafts of three lessons each, with their
   pathways. 7c (C4.11): adult literacy gets "I want to learn..." as goal chips read aloud, each a pathway, with
   "Someone can type it for you"; no microphone.
+- **7b, done:** an adult's study time (C4.10): "A time to study" once on adult Home, off until she says yes; a sheet
+  that asks only the time (from 7:00 in the evening, 30 minutes); "Study time: 20 minutes left" on Home during it, with
+  a bell at its start and end while Qalam is open, and the APK's alarm once the phone is hers; Settings → Study time
+  for on or off, the time and the length. Nothing is sent.
 
 ## January 2027: buy and test
 

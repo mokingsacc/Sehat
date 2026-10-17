@@ -100,9 +100,11 @@ def test_the_kill_switch_takes_the_school_day_away(hub_client):
     assert hub_client.get("/api/m/timetable", params={"band": "s1"}).status_code == 200
 
 
-def test_the_module_is_for_the_school_bands_only(hub_client):
+def test_the_module_is_for_the_school_bands_and_adults_study_time(hub_client):
+    # 7b: adults are in the module's bands for their study time, which lives on the phone; no timetable is served them
     tt = next(m for m in hub_client.get("/api/hello").json()["modules"] if m["id"] == "timetable")
-    assert tt["bands"] == ["p1", "p2", "s1", "s2"] and tt["risk"] == "none"
+    assert tt["bands"] == ["p1", "p2", "s1", "s2", "ad"] and tt["risk"] == "none"
+    assert hub_client.get("/api/m/timetable", params={"band": "ad", "cohort": hub_client.hub.cohort_id}).status_code == 404
 
 
 # migration 0011

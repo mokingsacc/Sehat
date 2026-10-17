@@ -137,15 +137,64 @@ export function dayOn(c) {
 export const asked = (c) => !!c && (c.day === 'on' || c.day === 'off');
 export const bellsOn = (c) => !!c && c.bells !== 'off';
 
+// --- an adult's study time (7b, C4.10) ---
+// One time a day, Saturday to Thursday, off until she says yes: `study` is {at: "19:00", min: 30} or 'off'; unset
+// means the Home card has not been answered. The timetable module's switch (the cohort's "School day off") takes it
+// away like the school day. Nothing is sent and no event is recorded.
+
+export const STUDY = { from: '19:00', min: 30, lens: [15, 30, 45, 60], earliest: 5 * 60, latest: 22 * 60 + 30, step: 30 };
+const STUDY_REST = 5;                                                       // Friday: Date.getDay() 5
+
+export const studyAsked = (c) => !!c && c.study !== undefined;
+export const studyOn = (c) => !!c && c.band === 'ad' && modules.on('timetable') && modules.allows('timetable', 'ad')
+  && !!c.study && typeof c.study === 'object';
+// the study time's minutes for a date ({start, end}), or null on Friday
+export function studyOf(study, date) {
+  if (!study || typeof study !== 'object' || date.getDay() === STUDY_REST) return null;
+  const start = toMin(study.at);
+  return { start, end: start + study.min };
+}
+// minutes left of the study time at `now`, or null outside it
+export function studyLeft(study, now) {
+  const t = studyOf(study, now);
+  const m = minuteOf(now);
+  return t && m >= t.start && m < t.end ? t.end - m : null;
+}
+// the next bell after minute m today (the start or the end), or null
+export function studyNext(study, now) {
+  const t = studyOf(study, now);
+  const m = minuteOf(now);
+  if (!t) return null;
+  return t.start > m ? t.start : t.end > m ? t.end : null;
+}
+// "7:00 in the evening": P19's words, with the evening's from 17:00 (the study time is in her own day)
+export function studyClock(m) {
+  const hh = Math.floor(m / 60) % 24;
+  const t = `${hh % 12 || 12}:${pad2(m % 60)}`;
+  return s(hh < 12 ? 'day_am' : hh < 17 ? 'day_pm' : 'day_eve', { t });
+}
+// the Android app's alarms for the study time: one at its start each day for `days` days
+export function studyAlarms(study, from, days = 7) {
+  const out = [];
+  for (let d = 0; d < days; d++) {
+    const date = new Date(from.getFullYear(), from.getMonth(), from.getDate() + d);
+    const t = studyOf(study, date);
+    if (t) out.push({ at: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, t.start).getTime(), kind: 'bell' });
+  }
+  return out.filter((x) => x.at > from.getTime());
+}
+
 // hand the Android app its alarms, or cancel them; nothing happens in a browser. `mine` and `alarms` are the APK's
-// own settings (P23), unset here, so until then every call cancels.
+// own settings (P23), unset here, so until then every call cancels. An adult's are her study time's (7b).
 export function syncAlarms(c, now = new Date()) {
   const bridge = globalThis.QalamAndroid;
   if (!bridge || typeof bridge.setAlarms !== 'function') return false;
-  if (!dayOn(c) || c.mine !== 'yes' || c.alarms === 'off') {
+  const adult = studyOn(c);
+  if ((!dayOn(c) && !adult) || c.mine !== 'yes' || c.alarms === 'off') {
     if (typeof bridge.cancelAlarms === 'function') bridge.cancelAlarms();
     return true;
   }
-  bridge.setAlarms(JSON.stringify({ title: 'Qalam', alarms: alarmPlan(cached(c), now, c.shift || 0) }));
+  const alarms = adult ? studyAlarms(c.study, now) : alarmPlan(cached(c), now, c.shift || 0);
+  bridge.setAlarms(JSON.stringify({ title: 'Qalam', alarms }));
   return true;
 }

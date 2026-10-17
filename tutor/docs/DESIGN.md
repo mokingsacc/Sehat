@@ -607,6 +607,26 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   the chips list every adult pathway, so a Dari reader also sees the Pashto one; the adult subject page still lists
   children's lessons under "Other years' lessons", as every subject page does; the switch card names no pathway.
 
+## What 7b built, and where it differs
+
+- Adult Home: "A time to study" in the school-day card's shape (title, speaker, the line, "Yes, choose a time" with
+  the bell, "No, thank you" in outline), secondary, until answered. "No, thank you" stores `"off"` and it never
+  returns; Settings can still switch the study time on.
+- The time sheet in the net sheet's shape: "What time will you study?" with its speaker, a stepper (minus, the time,
+  plus) from "7:00 in the evening" in half hours, and Save. Tapping outside closes it and the card stays. Save says
+  "Study time: 7:00 in the evening" in the toast.
+- During the time, Home's primary is the Now card's shape: "Study time: 20 minutes left" as the kicker over her next
+  lesson with its play button (and the warm-up); the minutes move each minute while Qalam is on screen. At its start
+  the start bell and the toast "Study time"; at its end the end bell and "Study time is over for today" said aloud.
+- Settings → Study time: the title and "One time each day, Saturday to Thursday." with a speaker, the switch, "Start
+  time" with the stepper, "Length" as four chips (15, 30, 45, 60 minutes); in the APK, the school day's "This phone is
+  mine" and closed-app bell rows. In the APK, "Is this phone yours?" follows a saved study time as it follows "Yes,
+  Qalam is my school".
+- Open look questions: the evening words ("7:00 in the evening", new key `day_eve`) start at 17:00, since P19's two
+  words would say "in the afternoon" at 19:00, and the school day's clock is unchanged; the stepper runs from 5:00 to
+  22:30, so the time never crosses midnight; the study card has no picture; switching it on in Settings starts at 7:00
+  in the evening for 30 minutes rather than remembering an earlier time.
+
 ---
 
 # C2 and C3 decisions
