@@ -721,6 +721,41 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   page, not one pathway; no card of kind `test` yet (no free test page was verified), so step 3 has no cards; the
   checklist's count has its own speaker on top of the page speaker.
 
+## What P32 built, and where it differs
+
+- **Off everywhere.** Module `made` has no seed row; an admin turns it on per cohort (`free.text`, medium: the
+  admin confirms). `share.cohort` is in the core's table as blocked, with no route or screen, and is **not** in
+  `made`'s manifest: listed there it would make the whole module blocked without paid-human moderation, so layers 1
+  and 2 could never be turned on. It belongs to the 2028 module (or `made`'s next version) that shares.
+- **Entry:** the lesson's end offers "Make a question about this lesson" (`lesson.end`, priority 5, an outline button,
+  none for Quran or seerah, none once she has 50); each subject page ends with the row "My questions" (accent badge
+  with a pencil, "3 questions"). Nothing on Home.
+- **`#/made`:** "My questions" in the top bar; "Your own questions stay on this phone. They come back in your
+  warm-ups." with its speaker; "+ New question" (primary); her questions newest first, each a lined card: the
+  question in bold with a speaker, "Answer: ..." and "Why: ..." small, the lesson's title muted, then her status
+  line: nothing before she sends it, "Waiting for your teacher" (clock, muted), "Your teacher checked it and it is
+  right" (check, `--good-ink`) or "Your teacher asks for a change" (pencil, `--warm-ink`) with the chips in small text
+  and the teacher's note; "Ask my teacher to check" (outline, send icon) where she can send; "Delete", which asks
+  "Delete? Tap again" on the first tap. Verdicts are fetched when she opens the list and something is waiting.
+- **`#/made/new[/lesson]`:** three labelled boxes with speakers (question, its answer, "why (if you like)"), 300
+  characters each, "Words only. No names, phone numbers, emails or web addresses.", and Save, grey until both the
+  question and the answer have words. A name, seven digits, an email or a web address shows the warning in
+  `--warm-ink` on `--warm-soft` and keeps Save grey.
+- **Warm-ups:** her due questions fill what spaced review leaves of the warm-up (at most `recall.WARM` in all), never
+  one from the lesson being opened: "Your own question", the question with its speaker, "Show the answer", then the
+  answer (and why) in an `--accent-soft` box with "I knew it" and "Not yet", which enables Next. "I knew it" brings it
+  back in a week, "Not yet" tomorrow; nothing is recorded or sent.
+- **Teacher's To do:** "Made by a learner" last, with the header "... · Made 2"; her question, answer and why as she
+  wrote them; "Looks right" or "Needs a change", which opens the five chips and "A short note for her (optional)"
+  with the placeholder "Don't give the answer". A note holding her answer is refused (the hub's leak check), and a
+  name or number in it is scrubbed.
+- Strings: Dari and Pashto are drafts for native speakers (app i18n and the teacher page's Dari).
+- Open look questions: the status lines are words with an icon, not the spec's badges; the card shows "Ask my
+  teacher to check" only before she sends it, and nothing lets her send a changed question again (she makes a new
+  one); the warm-up's self-marking uses plain buttons, not the sheet's tick and cross; "My questions" shows on every
+  subject page but Quran and seerah, even with none made; the teacher's keyboard hint still names S, E and D, which
+  do nothing on this card; "my name is ..." is caught in English, Dari and Pashto only by a few fixed phrases.
+
 ---
 
 # C2 and C3 decisions

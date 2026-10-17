@@ -884,3 +884,19 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .uni-warning { margin: 16px; padding: 12px; gap: 8px; align-items: center; background: var(--warm-soft); color: var(--warm-ink);
   border-inline-start: 4px solid var(--warm); border-radius: var(--r); font-weight: 800; }
 .uni-warning p { margin: 0; }
+
+
+/* P32 (C4.8): her own questions. The list's status lines (checked in --good-ink, a change asked for in --warm-ink),
+   the form's three boxes, the identifier warning in --warm-ink on --warm-soft, and the warm-up's revealed answer */
+.s-made { background: var(--accent); color: var(--on-accent); }
+.made-card { gap: 8px; }
+.made-card p { margin: 0; line-height: 1.6; }
+.made-status { margin: 0; display: flex; flex-direction: column; gap: 4px; font-weight: 800; }
+.made-status > p, p.made-status { display: flex; align-items: center; gap: 6px; flex-direction: row; }
+.made-status.ok { color: var(--good-ink); }
+.made-status.change { color: var(--warm-ink); }
+.made-status .reply { font-weight: 400; color: var(--ink); }
+.made-field { gap: 6px; }
+.made-field textarea.field { margin: 0; width: 100%; min-height: 88px; padding: 10px 14px; font: inherit; color: var(--ink); line-height: 1.7; display: block; }
+.made-warn { margin: 0; padding: 12px; background: var(--warm-soft); color: var(--warm-ink); border-radius: var(--r); font-weight: 800; }
+.made-ans { margin: 0; padding: 12px; background: var(--accent-soft); border-radius: var(--r); line-height: 1.7; }

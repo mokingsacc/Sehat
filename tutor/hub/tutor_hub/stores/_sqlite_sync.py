@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_note,
                    check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, new_cert_id,
-                   question_status)
+                   question_status, MADE_DAYS, check_made, check_verdict, made_out)
 
 
 def now() -> str:
@@ -138,6 +138,8 @@ class Store:
         self._x("DELETE FROM admin_log WHERE at<?", (logs,))
         self._x("DELETE FROM daily_counts WHERE day<?",
                 ((datetime.now(timezone.utc) - timedelta(days=COUNT_DAYS - 1)).strftime("%Y-%m-%d"),))
+        self._x("DELETE FROM made WHERE COALESCE(decided_at, at)<?",
+                ((datetime.now(timezone.utc) - timedelta(days=MADE_DAYS)).isoformat(timespec="seconds"),))
 
     # print jobs
     def add_print(self, *, lesson_id, kind, copies, lang, seed, device) -> int:
@@ -422,6 +424,7 @@ class Store:
                 self.db.execute("DELETE FROM events WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (token_hash,))
                 self.db.execute("DELETE FROM daily_counts WHERE token_hash=?", (token_hash,))
+                self.db.execute("DELETE FROM made WHERE token_hash=?", (token_hash,))
                 n = self.db.execute("DELETE FROM learners WHERE token_hash=?", (token_hash,)).rowcount
                 self.db.execute("COMMIT")
             except Exception:
@@ -439,6 +442,8 @@ class Store:
                 self.db.execute("DELETE FROM reset_codes WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM daily_counts WHERE token_hash IN "
+                                "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
+                self.db.execute("DELETE FROM made WHERE token_hash IN "
                                 "(SELECT token_hash FROM learners WHERE last_seen<?)", (cut,))
                 self.db.execute("DELETE FROM learners WHERE last_seen<?", (cut,))
                 self.db.execute("COMMIT")
@@ -486,6 +491,29 @@ class Store:
                              FROM events WHERE token_hash=? AND verb IN ('lesson.done','check.done')
                              AND object IN ({marks}) GROUP BY object""", (token_hash, *lessons))
         return {r["object"]: {"done": bool(r["done"]), "best": r["best"]} for r in rows}
+
+    # her own questions (P32): for her teacher's check, kept 60 days
+    def add_made(self, *, cohort, token_hash, kind, body, lang) -> int:
+        b = check_made(kind=kind, body=body, lang=lang)
+        return self._x("INSERT INTO made(cohort, token_hash, kind, body, lang, status, chips, at) "
+                       "VALUES(?,?,?,?,?, 'waiting', '[]', ?)", (cohort, token_hash, kind, b, lang, now())).lastrowid
+
+    def made_mine(self, token_hash):
+        return [made_out(r) for r in self._all("SELECT id, status, chips, reply, at, decided_at FROM made "
+                                               "WHERE token_hash=? ORDER BY id", (token_hash,))]
+
+    def made_waiting(self, cohort, limit=100):
+        return [made_out(r) for r in self._all("SELECT id, kind, body, lang, at FROM made WHERE cohort IS ? "
+                                               "AND status='waiting' ORDER BY id LIMIT ?", (cohort, int(limit)))]
+
+    def made_row(self, mid):
+        return made_out(self._one("SELECT id, cohort, kind, body, lang, status, chips, reply, at, decided_at "
+                                  "FROM made WHERE id=?", (int(mid),)))
+
+    def decide_made(self, mid, *, status, chips, reply) -> bool:
+        c = check_verdict(status=status, chips=chips, reply=reply)
+        return self._x("UPDATE made SET status=?, chips=?, reply=?, decided_at=? WHERE id=? AND status='waiting'",
+                       (status, c, reply or None, now(), int(mid))).rowcount > 0
 
     # daily counts (7a): today's, per token and module, kept two days
     def count_today(self, token_hash, module) -> int:

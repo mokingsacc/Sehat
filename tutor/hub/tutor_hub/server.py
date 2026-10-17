@@ -27,6 +27,7 @@ from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import WAITING, Answer, Brain
 from .config import Config
 from .mods import cert as cert_mod
+from .mods import made as made_mod
 from .mods import homework as homework_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
@@ -663,6 +664,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(plan_mod.router(hub, needs))
     # Certificates (the `cert` module, P25b): earned from her own events, printed with a name that is never sent
     app.include_router(cert_mod.router(hub, needs))
+    app.include_router(made_mod.router(hub, needs))
 
     # checking a certificate (P25b, C4.2): the core's, always on even where `cert` is off; no token
     @app.get("/api/cert/{cid}")

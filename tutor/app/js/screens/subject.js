@@ -8,6 +8,7 @@ import * as graph from '../graph.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as certs from '../modules/cert.js';
+import * as made from '../modules/made.js';
 import * as plans from '../modules/plan.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
@@ -75,7 +76,12 @@ export default async function subject([name]) {
     years.map((y) => [
       h('div', { class: 'year-head' }, y === 0 ? s('beginner') : s('year_n', { n: y })),
       h('div', { class: 'lessons' }, others.filter((l) => l.year === y).map(row)),
-    ]));
+    ]),
+    // P32 (C4.8): the last row, her own questions, where the module is hers
+    made.canMake(c) && !['quran', 'seerah'].includes(name) ? h('nav', { class: 'subjects made-row' },
+      h('a', { href: '#/made' }, h('span', { class: 'sbadge s-made', style: { width: '42px', height: '42px' } }, icon('pencil', 24)),
+        h('span', { class: 'grow' }, h('b', {}, s('made_title')),
+          h('small', { class: 'muted' }, s('made_count', { n: fa((c.made || []).length) }))), icon('chev', 22))) : null);
   const cards = h('div', { class: 'linkcards' });
   el.append(cards);
   const drawLinks = async () => fill(cards, hub.online() ? linkCards(await hub.links({ subject: name, year: c.year })) : null);

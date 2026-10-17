@@ -147,6 +147,12 @@ Certificates (P25b, C4.2): a pathway finished in a month, never who finished it
 - `results(token_hash, lessons) -> {lesson: {done, best}}`: from her own events, for each of `lessons` she has any:
   `done` when a `lesson.done` exists, `best` the highest `check.done` (None without one).
 
+Her own questions (P32, C4.8): sent for her teacher's check, kept 60 days after sending or deciding, and with her
+- `add_made(*, cohort, token_hash, kind, body, lang) -> int`: a waiting row (`body` a dict {q, a, why}).
+- `made_mine(token_hash) -> list[dict]`: `{id, status, chips, reply, at, decided_at}`, hers only.
+- `made_waiting(cohort, limit=100) -> list[dict]`: `{id, kind, body, lang, at}` waiting in that cohort, oldest first.
+- `made_row(mid) -> dict | None`, `decide_made(mid, *, status, chips, reply) -> bool` (only while waiting).
+
 Daily counts (7a, C4.9): what a learner's token did today against a module's limit
 - `count_today(token_hash, module) -> int`: one more for today (UTC) and the new count. Rows older than yesterday
   go at the next prune (`COUNT_DAYS`, two days), and with the learner.
@@ -161,6 +167,11 @@ WISH_DAYS = 90             # a wish not asked for again in 90 days is deleted (B
 WISH_MAX = 200            # characters of a wish kept
 WISH_STATUS = ("new", "planned", "not_for_qalam")
 COUNT_DAYS = 2            # daily_counts: today and yesterday (C4.9)
+MADE_DAYS = 60            # made: 60 days after it was sent or decided (C4.8)
+MADE_KINDS = ("question",)
+MADE_STATUS = ("waiting", "ok", "change")
+MADE_CHIPS = ("spelling", "answer_wrong", "unclear", "unsafe", "not_school")
+MADE_MAX = 300            # characters of a question, its answer or its why
 CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 CERT_ID = re.compile(r"^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$")
 LOG_DAYS = 730            # flag_log and admin_log are kept 2 years (BUILD-PLAN 3.4)
@@ -415,6 +426,21 @@ class Store:
     async def set_wish_status(self, wkey, status) -> int:
         raise NotImplementedError
 
+    async def add_made(self, *, cohort, token_hash, kind, body, lang) -> int:
+        raise NotImplementedError
+
+    async def made_mine(self, token_hash) -> list[dict]:
+        raise NotImplementedError
+
+    async def made_waiting(self, cohort, limit=100) -> list[dict]:
+        raise NotImplementedError
+
+    async def made_row(self, mid) -> dict | None:
+        raise NotImplementedError
+
+    async def decide_made(self, mid, *, status, chips, reply) -> bool:
+        raise NotImplementedError
+
 
 def check_log(*, what, detail, changed_by) -> str:
     """An admin_log row: a known change, a short line the hub wrote, and who by as a label (never an email)."""
@@ -469,3 +495,39 @@ def check_note(*, step, status, chips, text):
     if not isinstance(text, str) or len(text) > 500:
         raise ValueError("a comment is at most 500 characters")
     return json.dumps(sorted(set(chips)))
+
+
+def check_made(*, kind, body, lang) -> str:
+    """A learner's own question: {q, a, why} of at most 300 characters each, q and a not empty; JSON for the row."""
+    if kind not in MADE_KINDS:
+        raise ValueError(f"kind is one of {', '.join(MADE_KINDS)}")
+    if lang not in ("prs", "ps", "en"):
+        raise ValueError("lang is prs, ps or en")
+    if not isinstance(body, dict) or set(body) - {"q", "a", "why"}:
+        raise ValueError("body is {q, a, why}")
+    if not all(isinstance(body.get(k, ""), str) and len(body.get(k, "")) <= MADE_MAX for k in ("q", "a", "why")):
+        raise ValueError(f"each part is at most {MADE_MAX} characters")
+    if not (body.get("q") or "").strip() or not (body.get("a") or "").strip():
+        raise ValueError("a question and its answer")
+    return json.dumps({k: body.get(k, "") for k in ("q", "a", "why")}, ensure_ascii=False)
+
+
+def check_verdict(*, status, chips, reply) -> str:
+    if status not in ("ok", "change"):
+        raise ValueError("status is ok or change")
+    if not isinstance(chips, (list, tuple)) or not all(c in MADE_CHIPS for c in chips):
+        raise ValueError(f"chips come from {', '.join(MADE_CHIPS)}")
+    if reply is not None and (not isinstance(reply, str) or len(reply) > MADE_MAX):
+        raise ValueError(f"a reply is at most {MADE_MAX} characters")
+    return json.dumps(sorted(set(chips)))
+
+
+def made_out(r: dict | None) -> dict | None:
+    if r is None:
+        return None
+    out = dict(r)
+    if "body" in out and isinstance(out["body"], str):
+        out["body"] = json.loads(out["body"])
+    if "chips" in out and isinstance(out["chips"], str):
+        out["chips"] = json.loads(out["chips"])
+    return out

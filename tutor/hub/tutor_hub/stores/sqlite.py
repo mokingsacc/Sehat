@@ -294,3 +294,18 @@ class SqliteStore(Store):
 
     async def count_today(self, token_hash, module) -> int:
         return await self._run("count_today", token_hash, module)
+
+    async def add_made(self, *, cohort, token_hash, kind, body, lang) -> int:
+        return await self._run("add_made", cohort=cohort, token_hash=token_hash, kind=kind, body=body, lang=lang)
+
+    async def made_mine(self, token_hash):
+        return await self._run("made_mine", token_hash)
+
+    async def made_waiting(self, cohort, limit=100):
+        return await self._run("made_waiting", cohort, limit)
+
+    async def made_row(self, mid):
+        return await self._run("made_row", mid)
+
+    async def decide_made(self, mid, *, status, chips, reply) -> bool:
+        return await self._run("decide_made", mid, status=status, chips=chips, reply=reply)

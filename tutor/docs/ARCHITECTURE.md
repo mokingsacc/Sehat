@@ -451,6 +451,11 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
   sentinel and looks for it everywhere). The phone keeps `certs: [{path, id, month}]` and the paper without a name.
 - `daily_counts (token_hash, day, module, n)` (7a, C4.9): a learner's photos read and certificates asked for today,
   against each module's `per_day`; kept two days and deleted with her (`migrations/0016`).
+- Her own questions (P32, C4.8): on the phone as `made` (at most 50; question, answer and why, each at most 300
+  characters), never sent unless she taps "Ask my teacher to check". Then the row `made (id, cohort, token_hash, kind,
+  body, lang, status, chips, reply, at, decided_at)` holds what she wrote and the teacher's verdict, with no alias,
+  band or number; kept 60 days after it was sent or decided and deleted with her (`migrations/0017`). No learner
+  item becomes pack content, and nothing passes between learners (`share.cohort` is registered and blocked).
 - A lock reset code (P20) is kept only as a hash with her token's hash, for 15 minutes, used once, ended by five
   wrong tries, and deleted with her record (`reset_codes`, `migrations/0012`).
 - Nothing leaves the hub: there is no internet connection and no analytics.
@@ -489,6 +494,9 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `POST /api/me/pin-reset` | `{code}`, six digits in any script -> `{ok}`; 403 a wrong code, 404 none waiting; header `X-Learner-Token`; 10 tries in 10 minutes an address |
 | `POST /api/m/cert` | `{path, version, lang}` -> `{id, month, months, url, lessons, paper: {css, body}}` when her own events show every lesson of the pathway (409 `{missing}` when not); header `X-Learner-Token`, her consent needed; `per_day` (5) a token |
 | `POST /api/m/cert/print` | `{id, lang, lessons}` -> the hub's print queue, the paper with an empty name line; the hub only (`print`) |
+| `POST /api/m/made` | `{kind: "question", body: {q, a, why}, lang}` (each part at most 300 characters) -> `{id}`; header `X-Learner-Token`; only where `teacher` is on too; `rules.py` first (distress -> `{id: null, care: true, message}` and Needs care; anything else it stops, 422 with its message), then the identifier filter (a name she gave, seven digits, an email or a web address: 422, "take it out"); `per_day` (10) a token (P32) |
+| `GET /api/m/made/mine` | her items' verdicts, `{items: [{id, status, chips, reply}]}`; header `X-Learner-Token` (P32) |
+| `POST /api/m/teacher/made/{id}` | `{verdict: ok\|change, chips, reply?}`: the teacher's check of a learner's question; the reply passes the identifier filter (scrubbed) and may not hold her answer (422); the staff gate (P32) |
 | `GET /api/cert/{id}` | `{id, course: {prs, ps, en}, month, months}` or 404; the core's, always on; no token; 30 a minute an address |
 | `GET /v/{id}` | The check page a certificate's QR code opens (`app/js/certcheck.js`), served by Python on the hub and online |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
@@ -497,7 +505,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `made` (`/api/m/made`, `/api/m/made/mine`; the teacher's `/api/m/teacher/made/{id}` needs `teacher` and `made`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes, the admin panel's (behind its gate) and the app's files are always there.
 
 ## The app (app/js)

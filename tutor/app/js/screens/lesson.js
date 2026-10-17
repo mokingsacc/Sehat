@@ -29,6 +29,7 @@ import * as modules from '../modules.js';
 import { notSimplest, parse, same } from '../numbers.js';
 import { praise, readsOnOpen } from '../bands.js';
 import { TONE_PATH, words as pinyinWords } from '../pinyin.js';
+import * as made from '../modules/made.js';
 import * as recall from '../modules/recall.js';
 import * as Q from '../quran.js';
 import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
@@ -70,13 +71,19 @@ export default async function lesson(args) {
   const peek = stepText !== undefined && /^[0-9]+$/.test(stepText);     // opened from a hint, at that step
   let i = Math.min(Math.max(peek ? +stepText - 1 : c.step[id] || 0, 0), steps.length - 1);
   // the warm-up: never from a hint, never in early years (recall.canRecall), only items whose lesson is on the phone
-  const warm = !peek && args.query && args.query.get('warm') === '1' ? recall.due(c, id) : [];
+  const warmOn = !peek && args.query && args.query.get('warm') === '1';
+  const warm = warmOn ? recall.due(c, id) : [];
+  if (warmOn) warm.push(...made.due(c, id, recall.WARM - warm.length));     // P32: her own questions fill the rest
   let w = warm.length ? 0 : -1;                 // the warm-up item shown, or -1 once the lesson's own steps play
   const cur = () => (w >= 0 ? warm[w].step : steps[i]);
   // her first try on a question: the lesson's own steps keep it for the stars; a warm-up item moves its box
   const first = (ok) => {
     if (w >= 0) {
-      if (warm[w].ok === undefined) { warm[w].ok = ok; recall.answer(state.child(), warm[w].key, ok); }
+      if (warm[w].ok === undefined) {
+        warm[w].ok = ok;
+        if (warm[w].made) made.answer(state.child(), warm[w].made.id, ok);     // self-marked; nothing recorded
+        else recall.answer(state.child(), warm[w].key, ok);
+      }
       return;
     }
     if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
@@ -107,6 +114,7 @@ export default async function lesson(args) {
   function mainText(st) {
     if (st.kind === 'letter') return [plain(st.text), pick(st.word)].filter(Boolean).join('. ');
     if (st.kind === 'say') return st.english || plain(st.text);
+    if (st.kind === 'made') return st.q;
     return plain(st.prompt || st.text);
   }
   // a say step, and a choice that plays its word, speak the word; every other step its words in her language
@@ -181,6 +189,26 @@ export default async function lesson(args) {
 
   const KINDS = {
     ayah: ayahStep,
+    // P32: one of her own questions in the warm-up: the answer behind a tap, then she marks herself
+    made: (st) => {
+      const ans = h('div', { class: 'made-ans stack hidden' }, h('p', { class: 'read', dir: 'auto' }, st.a),
+        st.why ? h('p', { class: 'muted', dir: 'auto' }, st.why) : null);
+      const mark = (ok) => () => {
+        first(ok);
+        knew.disabled = true; notYet.disabled = true;
+        (ok ? knew : notYet).classList.add('on');
+        next.disabled = false;
+      };
+      const knew = h('button', { type: 'button', class: 'btn', onClick: mark(true) }, icon('check', 20), s('made_knew'));
+      const notYet = h('button', { type: 'button', class: 'btn', onClick: mark(false) }, s('made_not_yet'));
+      const marks = h('div', { class: 'btns two hidden' }, said(knew), said(notYet));
+      const show = h('button', { type: 'button', class: 'btn outline', onClick: () => {
+        show.classList.add('hidden'); ans.classList.remove('hidden'); marks.classList.remove('hidden');
+      } }, s('made_show'));
+      return [h('p', { class: 'kicker' }, s('made_yours')),
+        h('div', { class: 'listen-row' }, speakerBtn(pageSpeak), h('p', { class: 'read grow', dir: 'auto' }, st.q)),
+        said(show), ans, marks];
+    },
     letter: (st) => (st.script === 'latn' ? [            // an English letter, its picture word and their recording
       h('div', { class: 'letter latn', dir: 'ltr', lang: 'en' }, st.letter),
       pics(st),

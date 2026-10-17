@@ -39,6 +39,12 @@ export const preview = (() => {
   } catch { return null; }
 })();
 const memory = new Map();
+// P32: her own questions' limits; above `data`, which is cleaned with them as the module loads
+export const MADE_MAX = 50;
+export const MADE_CHARS = 300;
+const MADE_STATUS = ['waiting', 'ok', 'change'];
+const MADE_CHIPS = ['spelling', 'answer_wrong', 'unclear', 'unsafe', 'not_school'];
+const str = (x, n = MADE_CHARS) => (typeof x === 'string' ? x.slice(0, n) : '');
 let data = load();
 
 function rid() {
@@ -106,7 +112,28 @@ function clean(l) {
       && l.quran[0] <= 114 && l.quran[1] >= 1 && l.quran[1] <= 286 ? { quran: [l.quran[0], l.quran[1]] } : {}),
     // P28 (C4.6): the university checklist's steps she ticked (numbers 1 to 12), kept on this phone and never sent
     ...(cleanUni(l.uni).length ? { uni: cleanUni(l.uni) } : {}),
+    // P32 (C4.8): her own questions (at most 50), kept on this phone; one she sent for a check keeps its number
+    // there and the verdict that came back (modules/made.js)
+    ...(cleanMade(l.made).length ? { made: cleanMade(l.made) } : {}),
   };
+}
+
+function cleanMade(v) {
+  if (!Array.isArray(v)) return [];
+  const seen = new Set();
+  return v.filter((x) => x && typeof x.id === 'string' && /^[a-z0-9]{6,16}$/.test(x.id) && !seen.has(x.id) && seen.add(x.id)
+    && typeof x.q === 'string' && x.q.trim() && typeof x.a === 'string' && x.a.trim())
+    .slice(-MADE_MAX)
+    .map((x) => ({
+      id: x.id, q: str(x.q), a: str(x.a), why: str(x.why), lang: ['prs', 'ps', 'en'].includes(x.lang) ? x.lang : 'prs',
+      lesson: typeof x.lesson === 'string' && /^[a-z0-9][a-z0-9-]{0,63}$/.test(x.lesson) ? x.lesson : null,
+      at: Number.isInteger(x.at) ? x.at : 0, due: Number.isInteger(x.due) ? x.due : 0,
+      ...(Number.isInteger(x.sent) && x.sent > 0 ? { sent: x.sent } : {}),
+      ...(MADE_STATUS.includes(x.status) ? { status: x.status } : {}),
+      ...(Array.isArray(x.chips) && x.chips.some((c) => MADE_CHIPS.includes(c))
+        ? { chips: [...new Set(x.chips.filter((c) => MADE_CHIPS.includes(c)))] } : {}),
+      ...(typeof x.reply === 'string' && x.reply.trim() ? { reply: str(x.reply) } : {}),
+    }));
 }
 
 function cleanUni(v) {

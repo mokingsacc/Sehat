@@ -827,3 +827,39 @@ async def test_daily_counts_count_today_and_go_after_two_days(store):
     db.execute("UPDATE daily_counts SET day='2020-01-01' WHERE token_hash='t2'")
     await store.prune(60)
     assert [r[0] for r in db.execute("SELECT token_hash FROM daily_counts ORDER BY module")] == ["t1", "t1"]
+
+
+async def test_her_own_questions_wait_for_the_teacher_and_go_with_her_or_after_sixty_days(store):
+    # P32 (C4.8): a token hash, a cohort, what she wrote and the verdict; nothing else about who
+    q = {"q": "What is 3/4 of 12?", "a": "9", "why": ""}
+    a = await store.add_made(cohort="c1", token_hash="her", kind="question", body=q, lang="en")
+    b = await store.add_made(cohort="c1", token_hash="her", kind="question", body={**q, "a": "8"}, lang="prs")
+    c = await store.add_made(cohort="c2", token_hash="other", kind="question", body=q, lang="en")
+    assert isinstance(a, int) and a < b < c
+    for bad in ({"kind": "lesson"}, {"lang": "de"}, {"body": {**q, "name": "x"}}, {"body": {**q, "q": "x" * 301}},
+                {"body": {**q, "a": " "}}):
+        with pytest.raises(ValueError):
+            await store.add_made(**{"cohort": "c1", "token_hash": "her", "kind": "question", "body": q, "lang": "en",
+                                    **bad})
+    assert [m["id"] for m in await store.made_waiting("c1")] == [a, b]
+    assert (await store.made_waiting("c1"))[0]["body"] == q
+    assert await store.decide_made(a, status="ok", chips=[], reply=None) is True
+    assert await store.decide_made(a, status="change", chips=[], reply=None) is False      # decided once
+    with pytest.raises(ValueError):
+        await store.decide_made(b, status="maybe", chips=[], reply=None)
+    with pytest.raises(ValueError):
+        await store.decide_made(b, status="change", chips=["rude"], reply=None)
+    assert await store.decide_made(b, status="change", chips=["answer_wrong"], reply="Count again") is True
+    mine = {m["id"]: m for m in await store.made_mine("her")}
+    assert (mine[a]["status"], mine[b]["status"], mine[b]["chips"], mine[b]["reply"]) == \
+        ("ok", "change", ["answer_wrong"], "Count again")
+    row = await store.made_row(b)
+    assert row["cohort"] == "c1" and row["body"]["a"] == "8" and "token_hash" not in row
+    assert await store.made_row(999999) is None and await store.made_waiting("c1") == []
+    db = store.db.sqlite if isinstance(store, D1Store) else store._inner.db
+    db.execute("UPDATE made SET at='2020-01-01T00:00:00+00:00' WHERE id=?", (c,))
+    db.execute("UPDATE made SET at='2020-01-01T00:00:00+00:00', decided_at='2020-01-02T00:00:00+00:00' WHERE id=?", (a,))
+    await store.prune(60)
+    assert sorted(r[0] for r in db.execute("SELECT id FROM made")) == [b]
+    await store.delete_learner("her")
+    assert list(db.execute("SELECT id FROM made")) == []

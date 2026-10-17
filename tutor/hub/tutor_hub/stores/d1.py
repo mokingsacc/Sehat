@@ -23,7 +23,7 @@ from pathlib import Path
 
 from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, Store, check_changes, check_initials, check_log,
                    check_note, check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json,
-                   new_cert_id, question_status)
+                   new_cert_id, question_status, MADE_DAYS, check_made, check_verdict, made_out)
 from .migrations import APPLIED, LEDGER, MIGRATIONS, RECORD, applied_at, plan
 
 log = logging.getLogger("tutor.store")
@@ -213,7 +213,9 @@ class D1Store(Store):
                            self._stmt("DELETE FROM flag_log WHERE changed_at<?", logs),
                            self._stmt("DELETE FROM admin_log WHERE at<?", logs),
                            self._stmt("DELETE FROM daily_counts WHERE day<?",
-                                      _ago(days=COUNT_DAYS - 1).strftime("%Y-%m-%d"))])
+                                      _ago(days=COUNT_DAYS - 1).strftime("%Y-%m-%d")),
+                           self._stmt("DELETE FROM made WHERE COALESCE(decided_at, at)<?",
+                                      _ago(days=MADE_DAYS).isoformat(timespec="seconds"))])
 
     # print jobs (the hub prints; online there is no printer, but the contract is the same)
 
@@ -507,8 +509,9 @@ class D1Store(Store):
         res = await self._batch([self._stmt("DELETE FROM events WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM reset_codes WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM daily_counts WHERE token_hash=?", token_hash),
+                                 self._stmt("DELETE FROM made WHERE token_hash=?", token_hash),
                                  self._stmt("DELETE FROM learners WHERE token_hash=?", token_hash)])
-        return (res[3].meta.changes or 0) > 0
+        return (res[4].meta.changes or 0) > 0
 
     async def prune_learners(self, idle_days: int):
         cut = _ago(days=idle_days).strftime("%Y-%m-%d")
@@ -517,6 +520,8 @@ class D1Store(Store):
                            self._stmt("DELETE FROM reset_codes WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM daily_counts WHERE token_hash IN "
+                                      "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
+                           self._stmt("DELETE FROM made WHERE token_hash IN "
                                       "(SELECT token_hash FROM learners WHERE last_seen<?)", cut),
                            self._stmt("DELETE FROM learners WHERE last_seen<?", cut)])
 
@@ -564,6 +569,32 @@ class D1Store(Store):
                                    FROM events WHERE token_hash=? AND verb IN ('lesson.done','check.done')
                                    AND object IN ({marks}) GROUP BY object""", token_hash, *lessons)
         return {r["object"]: {"done": bool(r["done"]), "best": r["best"]} for r in rows}
+
+    # her own questions (P32): for her teacher's check, kept 60 days
+
+    async def add_made(self, *, cohort, token_hash, kind, body, lang) -> int:
+        b = check_made(kind=kind, body=body, lang=lang)
+        r = await self._one("INSERT INTO made(cohort, token_hash, kind, body, lang, status, chips, at) "
+                            "VALUES(?,?,?,?,?, 'waiting', '[]', ?) RETURNING id", cohort, token_hash, kind, b, lang, now())
+        return int(r["id"])
+
+    async def made_mine(self, token_hash):
+        return [made_out(r) for r in await self._all("SELECT id, status, chips, reply, at, decided_at FROM made "
+                                                     "WHERE token_hash=? ORDER BY id", token_hash)]
+
+    async def made_waiting(self, cohort, limit=100):
+        return [made_out(r) for r in await self._all("SELECT id, kind, body, lang, at FROM made WHERE cohort IS ? "
+                                                     "AND status='waiting' ORDER BY id LIMIT ?", cohort, int(limit))]
+
+    async def made_row(self, mid):
+        return made_out(await self._one("SELECT id, cohort, kind, body, lang, status, chips, reply, at, decided_at "
+                                        "FROM made WHERE id=?", int(mid)))
+
+    async def decide_made(self, mid, *, status, chips, reply) -> bool:
+        c = check_verdict(status=status, chips=chips, reply=reply)
+        meta = await self._run("UPDATE made SET status=?, chips=?, reply=?, decided_at=? WHERE id=? AND status='waiting'",
+                               status, c, reply or None, now(), int(mid))
+        return (meta.changes or 0) > 0
 
     # daily counts (7a): today's, per token and module, kept two days
 

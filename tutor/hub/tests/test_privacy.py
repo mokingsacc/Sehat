@@ -37,6 +37,7 @@ RETENTION = {
     "schema_migrations": "for good: migration ids",
     "certificates": "for good: a pathway, its version, a month and a cohort; no learner in them (C4.2)",
     "daily_counts": "two days (today and yesterday); with the learner (C4.9)",
+    "made": "60 days after it was sent or decided, whichever is later; with the learner (C4.8)",
 }
 
 OLD, OLD_DAY = "2020-01-01T00:00:00+00:00", "2020-01-01"
@@ -96,6 +97,8 @@ def test_the_retention_job_deletes_what_is_past_its_time_and_keeps_the_rest(hub)
                       ("a-old", OLD), ("a-new", recent)),
         "daily_counts": ("INSERT INTO daily_counts(token_hash, day, module, n) VALUES(?,?,'photo',1)",
                          ("d-old", (now - timedelta(days=2)).strftime("%Y-%m-%d")), ("d-new", day)),
+        "made": ("INSERT INTO made(cohort, token_hash, kind, body, lang, at) VALUES(?,?,'question','{}','en',?)",
+                 (cid, "m-old", OLD), (cid, "m-new", recent)),
     }
     for insert, old, new in rows.values():
         sql(hub, insert, old)
@@ -104,17 +107,20 @@ def test_the_retention_job_deletes_what_is_past_its_time_and_keeps_the_rest(hub)
         (recent[:16], cid))                             # a recent event of an idle learner goes with her
     sql(hub, "INSERT INTO reset_codes(token_hash, code_hash, expires) VALUES('l-old','h',?)", (later,))
     sql(hub, "INSERT INTO daily_counts(token_hash, day, module, n) VALUES('l-old',?,'cert',1)", (day,))
+    sql(hub, "INSERT INTO made(cohort, token_hash, kind, body, lang, at) VALUES(?,'l-old','question','{}','en',?)",
+        (cid, recent))                                  # what an idle learner made goes with her too
     hub.portal.call(hub.hub.prune)
     key = {"questions": "token", "ladders": "token", "prints": "device", "reset_codes": "token_hash", "wishlist": "wkey",
            "events": "token_hash", "learners": "token_hash", "ai_usage": "model", "flag_log": "module",
-           "admin_log": "what", "daily_counts": "token_hash"}
+           "admin_log": "what", "daily_counts": "token_hash", "made": "token_hash"}
     for table, (_, old, new) in rows.items():
         left = {r[0] for r in sql(hub, f"SELECT {key[table]} FROM {table}")}
-        i = {"wishlist": 1, "ai_usage": 2}.get(table, 0)              # where the row's marker is in its values
+        i = {"wishlist": 1, "ai_usage": 2, "made": 1}.get(table, 0)              # where the row's marker is in its values
         assert old[i] not in left and new[i] in left, table
     assert sql(hub, "SELECT COUNT(*) FROM events WHERE token_hash='l-old'") == [(0,)]
     assert sql(hub, "SELECT COUNT(*) FROM reset_codes WHERE token_hash='l-old'") == [(0,)]
     assert sql(hub, "SELECT COUNT(*) FROM daily_counts WHERE token_hash='l-old'") == [(0,)]
+    assert sql(hub, "SELECT COUNT(*) FROM made WHERE token_hash='l-old'") == [(0,)]
 
 
 @pytest.mark.anyio

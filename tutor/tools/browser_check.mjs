@@ -12,12 +12,14 @@
 //     node tools/browser_check.mjs --hub http://127.0.0.1:8000 --out shots/ [--screen home] [--widths 390,768,1280]
 //       [--langs prs,ps,en] [--variants light,dark,bigger] [--bands p1,s1,ad-literacy] [--full] [--lock]
 //       [--at 2027-01-02T09:00] [--day on|off|unset] [--recall maths-7-fractions-add:5,...] [--plan id,id]
-//       [--study 19:00|off]
+//       [--study 19:00|off] [--made 1]
 // --at fixes the phone's clock (the school day's Now card and Today list, P19); --day sets her answer to the
 // one-time school-day card (unset: the card shows).
 // --recall gives her those spaced-review items, due today, with their lessons on the phone (P25a: open a lesson as
 // --screen "lesson/<id>?warm=1" to see the warm-up); --plan gives her a plan of those lessons.
 // --study gives an adult her study time at that hour for 30 minutes, or "off" (7b; unset: "A time to study" shows).
+// --made gives her three of her own questions, due today (P32): one kept on the phone, one sent and checked, one
+// with a change asked for (the warm-up shows one when a lesson opens with ?warm=1).
 // A shot is what the screen shows when the page opens (--full: the whole page, with the tab bar where the screen
 // ends); the checks always cover the whole page.
 // Exit code 1 when a check fails. No learner name is ever seeded: a learner is a band, a year and settings.
@@ -180,6 +182,19 @@ for (const width of WIDTHS) {
         if (args.day === 'on' || args.day === 'off') learner.day = args.day;
         if (args.study && learner.band === 'ad') learner.study = args.study === 'off' ? 'off' : { at: args.study, min: 30 };
         if (RECALL.length) learner.recall = Object.fromEntries(RECALL.map((k) => [k, [1, Math.floor(Date.now() / 864e5)]]));
+        if (args.made) {
+          const day = Math.floor(Date.now() / 864e5);
+          const q = lang === 'en' ? ['What is 3/4 of 12?', '9', '12 split into 4 is 3, and 3 of them is 9']
+            : lang === 'ps' ? ['د ۱۲ درې څلورمه څو ده؟', '۹', '']
+              : ['سه چهارم ۱۲ چند است؟', '۹', '۱۲ تقسیم بر ۴ می‌شود ۳، و سه تا ۳ می‌شود ۹'];
+          learner.made = [
+            { id: 'made0001', q: q[0], a: q[1], why: q[2], lang, lesson: null, at: day - 1, due: day },
+            { id: 'made0002', q: q[0], a: q[1], why: '', lang, lesson: null, at: day - 3, due: day + 5, sent: 1, status: 'ok' },
+            { id: 'made0003', q: q[0], a: '8', why: '', lang, lesson: null, at: day - 2, due: day + 1, sent: 2, status: 'change',
+              chips: ['answer_wrong', 'unclear'], reply: lang === 'en' ? 'Count the groups again.'
+                : lang === 'ps' ? 'ډلې بیا وشمېره.' : 'گروه‌ها را دوباره بشمار.' },
+          ];
+        }
         if (args.plan) learner.plan = { label: 'Plan', lessons: args.plan.split(','), again: {} };
         await page.addInitScript(([d, cached]) => {
           try {

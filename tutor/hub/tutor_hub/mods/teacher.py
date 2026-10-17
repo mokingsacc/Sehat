@@ -10,6 +10,11 @@ hub's own), named by `?cohort=`. No name anywhere: learners are a picture and a 
 - `GET  /api/m/teacher/todo`: the To do queue, one card at a time on the page: needs care (rules flagged distress),
   held answers and ladders (the cohort's `hold` setting), questions sent to the teacher.
 - `POST /api/m/teacher/todo/{id}`: `{action: send|edit|drop|reply|seen|dismiss, text?, hints?, reason?, reuse?}`.
+- Since P32 (C4.8), where `made` is on: To do's last kind, "Made by a learner" (`kind: made`, `mid`): her question,
+  its answer and why as she wrote them. `POST /api/m/teacher/made/{mid}`: `{verdict: ok|change, chips, reply?}`,
+  "Looks right" or "Needs a change" with chips (spelling, answer_wrong, unclear, unsafe, not_school) and a short
+  reply through the identifier filter and the leak check (a reply that hands her the answer is refused). The verdict
+  reaches her phone at `#/made`.
 - `GET  /api/m/teacher/class`: four counts for this week and the class list by picture and number.
 - `GET  /api/m/teacher/class/{alias}`: her lessons with % right, hints used; `POST .../reset-code`: a lock reset code.
 - `GET  /api/m/teacher/lessons`, `/lessons/{id}`: did it, mastered, the hardest item, disputes, hint rungs; bars per
@@ -50,6 +55,13 @@ class TodoIn(BaseModel):
     hints: list[str] | None = Field(None, min_length=3, max_length=3)
     reason: str | None = Field(None, max_length=20)
     reuse: bool = True
+
+
+class VerdictIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    verdict: str = Field(pattern="^(ok|change)$")
+    chips: list[str] = Field(default_factory=list, max_length=5)
+    reply: str | None = Field(None, max_length=300)
 
 
 class CardIn(BaseModel):
@@ -257,10 +269,34 @@ def router(hub, needs) -> APIRouter:
             groups[item["kind"]].append(item)
         for g in groups.values():
             g.sort(key=lambda x: x["id"])            # oldest first within each group
-        items = groups["care"] + groups["held"] + groups["question"]
+        # P32 (C4.8): her own questions sent for a check, last in the order
+        _, _, on = await hub.cohort_modules(c["id"])
+        if "made" in on:
+            groups["made"] = [{"id": f"m{m['id']}", "mid": m["id"], "kind": "made", "created": m["at"],
+                               "lang": m["lang"], "made": m["body"], "year": None, "lesson": None,
+                               "question": m["body"]["q"]} for m in await hub.store.made_waiting(c["id"])]
+        items = groups["care"] + groups["held"] + groups["question"] + groups.get("made", [])
         # each group's count for the header (C4 look question 22): needs care first, then held answers oldest first,
-        # then questions sent to her
+        # then questions sent to her, then (P32) what learners made
         return {"count": len(items), "items": items, "groups": {k: len(v) for k, v in groups.items()}}
+
+    @r.post("/made/{mid}", dependencies=needs(MODULE, "made"))
+    async def made_verdict(mid: int, body: VerdictIn, request: Request):
+        me = await staff(request)
+        c, _, on = await cohort(request, me)
+        if "made" not in on:
+            raise HTTPException(404, "Not Found")
+        m = await hub.store.made_row(mid)
+        if not m or m["cohort"] != c["id"] or m["status"] != "waiting":
+            raise HTTPException(404, "nothing waiting with this number")
+        reply = filters.scrub((body.reply or "").strip())[0] or None
+        if reply and filters.leaks(reply, [m["body"]["a"]]):
+            raise HTTPException(422, "the reply gives her answer away: point her to where to look")
+        try:
+            await hub.store.decide_made(mid, status=body.verdict, chips=body.chips, reply=reply)
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from None
+        return {"ok": True}
 
     @r.post("/todo/{qid}", dependencies=needs(MODULE))
     async def act(qid: int, body: TodoIn, request: Request):

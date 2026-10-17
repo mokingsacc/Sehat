@@ -12,6 +12,7 @@ import { aliasIcon, aliasName as nameOf } from '../aliases.js';
 
 const API = '../api/m/teacher';
 const REASONS = ['wrong', 'gives_answer', 'unsafe', 'not_school'];
+const MADE_CHIPS = ['spelling', 'answer_wrong', 'unclear', 'unsafe', 'not_school'];   // P32, as stores/base.py MADE_CHIPS
 const BAND = { ey: 'band_ey', p1: 'band_p1', p2: 'band_p2', s1: 'band_s1', s2: 'band_s2', ad: 'band_ad' };
 
 // English, and Dari drafts for a native speaker's check
@@ -36,6 +37,12 @@ const T = {
     lessons_week: 'lessons this week: {n}', sheets_n: 'sheets: {n}', avg: '{n}% right', needs_help: 'needs help', none: 'No learners yet.',
     stuck: 'Stuck on {n}', stuck_line: '{n} items still wrong after the third hint this week',
     groups: 'Needs care {a} · Held answers {b} · Questions {c}',
+    groups_made: 'Needs care {a} · Held answers {b} · Questions {c} · Made {d}',
+    made: 'Made by a learner', made_q: 'Her question', made_a: 'Her answer', made_why: 'Why',
+    made_ok: 'Looks right', made_change: 'Needs a change', made_what: 'What needs changing?',
+    made_reply: 'A short note for her (optional)', made_no_answer: "Don't give the answer",
+    c_spelling: 'Spelling', c_answer_wrong: 'Answer is wrong', c_unclear: 'Not clear', c_unsafe: 'Unsafe',
+    c_not_school: 'Not school work',
     her_lessons: 'Lessons', pct: '{n}% right', not_marked: 'not marked', done_n: 'done {n}×', hints_used: 'Hints used',
     rung: 'hint {n}: {m}', reset: 'Lock reset code', make_code: 'Make a code', code_for: 'Valid for {n} minutes, once.',
     code_tell: 'Tell her the code. She taps "I forgot", then "I have a code from my teacher".',
@@ -67,6 +74,13 @@ const T = {
     lessons_week: '{n} درس این هفته', sheets_n: '{n} ورق', avg: '{n}٪ درست', needs_help: 'کمک لازم دارد', none: 'هنوز شاگردی نیست.',
     stuck: 'در {n} مانده', stuck_line: '{n} سوال این هفته بعد از راهنمایی سوم هنوز غلط است',
     groups: 'نیاز به توجه {a} · جواب نگه‌داشته {b} · سوال‌ها {c}',
+    // P32: drafts for a native speaker's check
+    groups_made: 'نیاز به توجه {a} · جواب نگه‌داشته {b} · سوال‌ها {c} · ساخته شده {d}',
+    made: 'ساختهٔ یک شاگرد', made_q: 'سوال او', made_a: 'جواب او', made_why: 'چرا',
+    made_ok: 'درست است', made_change: 'تغییر لازم دارد', made_what: 'چه چیز تغییر لازم دارد؟',
+    made_reply: 'یک یادداشت کوتاه برای او (اختیاری)', made_no_answer: 'جواب را نگو',
+    c_spelling: 'املا', c_answer_wrong: 'جواب غلط است', c_unclear: 'واضح نیست', c_unsafe: 'ناامن',
+    c_not_school: 'کار مکتب نیست',
     her_lessons: 'درس‌ها', pct: '{n}٪ درست', not_marked: 'چک نشده', done_n: '{n} بار تمام شد', hints_used: 'راهنمایی‌های استفاده شده',
     rung: 'راهنمایی {n}: {m}', reset: 'کد باز کردن قفل', make_code: 'کد بساز', code_for: 'برای {n} دقیقه، یک بار.',
     code_tell: 'کد را به او بگو. او «یادم رفت» و بعد «معلمم یک کد به من داده» را می‌زند.',
@@ -224,7 +238,7 @@ function showCard(i) {
   const go = (k) => { if (k >= 0 && k < items.length) showCard(k); };
   const done = async (payload) => {
     try {
-      await api('/todo/' + q.id, { method: 'POST', body: payload });
+      await api(q.kind === 'made' ? '/made/' + q.mid : '/todo/' + q.id, { method: 'POST', body: payload });
     } catch (e) {
       if (e.status === 422) { toast(e.message); return; }
       return failed(e);
@@ -273,6 +287,39 @@ function showCard(i) {
       else if (k === 'j') go(i + 1);
       else if (k === 'k') go(i - 1);
     };
+  } else if (q.kind === 'made') {
+    // P32: what she made, checked as it stands; the note goes through the hub's name filter and must not give the answer
+    const m = q.made || {};
+    const part = (k, v) => (v ? h('div', { class: 'a' }, h('small', { class: 'muted' }, t(k)), h('p', { dir: 'auto' }, v)) : null);
+    const change = () => {
+      const picked = new Set();
+      const chips = h('div', { class: 'chips wrap' }, MADE_CHIPS.map((c) => {
+        const b = h('button', { type: 'button', class: 'chip', 'aria-pressed': 'false', onClick: () => {
+          if (picked.has(c)) picked.delete(c); else picked.add(c);
+          b.setAttribute('aria-pressed', String(picked.has(c)));
+          b.classList.toggle('on', picked.has(c));
+        } }, t('c_' + c));
+        return b;
+      }));
+      const box = h('textarea', { class: 'field', rows: 3, maxlength: 300, dir: 'auto', placeholder: t('made_no_answer'),
+        'aria-label': t('made_reply') });
+      put(body, head, part('made_q', m.q), part('made_a', m.a), part('made_why', m.why),
+        h('p', { class: 'muted small' }, t('made_what')), chips, h('small', { class: 'muted' }, t('made_reply')), box,
+        h('div', { class: 'btns two' },
+          h('button', { type: 'button', class: 'btn primary', onClick: () => done({ verdict: 'change', chips: [...picked],
+            reply: box.value }) }, t('send')),
+          h('button', { type: 'button', class: 'btn', onClick: () => showCard(i) }, t('cancel'))));
+    };
+    actions = h('div', { class: 'btns two' },
+      h('button', { type: 'button', class: 'btn primary', onClick: () => done({ verdict: 'ok', chips: [], reply: '' }) }, t('made_ok')),
+      h('button', { type: 'button', class: 'btn', onClick: change }, t('made_change')));
+    put(body, head, part('made_q', m.q), part('made_a', m.a), part('made_why', m.why), actions);
+    keys = (e) => {
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+      const k = e.key.toLowerCase();
+      if (k === 'j') go(i + 1);
+      else if (k === 'k') go(i - 1);
+    };
   } else {
     const told = q.kind === 'care'
       ? h('div', { class: 'a' }, h('small', { class: 'muted' }, t('told')), h('p', { dir: 'auto' }, q.shown || ''))
@@ -304,7 +351,9 @@ function showCard(i) {
   }
   document.addEventListener('keydown', keys);
   const g = todo.groups;
-  page(g ? h('p', { class: 'muted small pad' }, t('groups', { a: fa(g.care), b: fa(g.held), c: fa(g.question) })) : null,
+  page(g ? h('p', { class: 'muted small pad' }, g.made !== undefined
+    ? t('groups_made', { a: fa(g.care), b: fa(g.held), c: fa(g.question), d: fa(g.made) })
+    : t('groups', { a: fa(g.care), b: fa(g.held), c: fa(g.question) })) : null,
     h('section', { class: 'qcard' + (q.kind === 'care' ? ' urgent' : '') }, body),
     h('div', { class: 'row pad' },
       h('button', { type: 'button', class: 'btn', disabled: i === 0 || null, onClick: () => go(i - 1) }, t('prev')),

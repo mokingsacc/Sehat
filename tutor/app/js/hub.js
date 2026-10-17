@@ -195,6 +195,9 @@ export const join = (body) => call('/api/join', { method: 'POST', body, ms: 1500
 export const me = (token) => call('/api/me', { token, ms: 15000 });
 export const meUpdate = (token, body) => call('/api/me', { method: 'POST', body, token, ms: 15000 });
 export const forget = (token) => call('/api/me', { method: 'DELETE', token, ms: 15000 });
+// her own question sent for her teacher's check (P32), and the verdicts on hers
+export const madeSend = (body, token) => call('/api/m/made', { method: 'POST', body, token, ms: 15000 });
+export const madeMine = (token) => call('/api/m/made/mine', { token, ms: 15000 });
 export async function consentText(lang, version) {
   const key = `consent.${lang}.${version}`;
   try {

@@ -22,7 +22,10 @@ OFFLINE = ("yes", "partly", "no")
 AI_PURPOSES = ("explain", "hint", "read_sheet", "plan", "screen")
 # the core's table (BUILD-PLAN 3.2); "blocked" unless the cohort's moderation is paid-human (P21)
 CAPABILITY_RISK = {"photo.upload": "high", "audio.record": "high", "free.text": "medium", "ai.call": "medium",
-                   "share.public": "blocked", "child.contact": "blocked"}
+                   "share.public": "blocked", "child.contact": "blocked",
+                   # P32 (C4.8): learners' own questions shown to their class; registered and blocked, with no screen
+                   # or route behind it in 2027 (the `made` module does not list it)
+                   "share.cohort": "blocked"}
 RISK_ORDER = ("none", "medium", "high", "blocked")
 # the core's sentence for each capability, which the admin reads before turning a module on (P21); English, for the
 # admin, who reads English by default
@@ -38,6 +41,8 @@ RISK_SENTENCE = {
                     "human moderation.",
     "child.contact": "Learners could reach other people directly. Blocked unless moderation is paid human "
                      "moderation.",
+    "share.cohort": "Learners' own work could be seen by their class. Blocked unless moderation is paid human "
+                    "moderation.",
 }
 FIELDS = ("id", "version", "maturity", "depends", "bands", "slots", "capabilities", "ai", "settings", "needs",
           "offline")

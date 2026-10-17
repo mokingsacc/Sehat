@@ -11,10 +11,11 @@ A module is on for a learner when (BUILD-PLAN 3.3):
 - her band is one the module lists and the cohort serves (when her band is known),
 - the host can meet its `needs`: the online Worker lacks a printer and the teacher's PIN (`TUTOR_LACKS`), so print
   and teacher are off there whatever the cohort says; the phone itself judges `internet` and `camera`;
-- none of its capabilities is blocked (`share.public`, `child.contact`), unless the cohort's moderation is
+- none of its capabilities is blocked (`share.public`, `child.contact`, `share.cohort`), unless the cohort's moderation is
   `paid-human` (P21: the admin panel refuses the switch too),
 - the hub does not hold it off: `quran` while the Quran set is missing, broken, or (on a release hub) not signed by
-  a Hanafi scholar at its current hash (P29, C4.7; the admin panel refuses the switch until it is signed).
+  a Hanafi scholar at its current hash (P29, C4.7; the admin panel refuses the switch until it is signed), and
+  `university` while no pack has its checklist or (on a release hub) until the first card set is signed (P28, C4.6).
 The committee dropped the manifest's `core` field (C0.1), so there is no core version to match yet.
 """
 import json

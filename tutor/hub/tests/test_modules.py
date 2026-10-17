@@ -34,8 +34,11 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "photo", "plan", "print", "quran", "recall", "review",
-                           "sheets", "teacher", "timetable", "university"]
+    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "made", "photo", "plan", "print", "quran", "recall",
+                           "review", "sheets", "teacher", "timetable", "university"]
+    # P32 (C4.8): her own questions are free text, off in every seed; `share.cohort` is registered and blocked
+    assert REAL["made"]["capabilities"] == ["free.text"] and REAL["made"]["slots"] == ["lesson.end"]
+    assert modules.CAPABILITY_RISK["share.cohort"] == "blocked"
     # P28 (C4.6): university preparation has no capability (no events) and serves s2 and adults only
     assert REAL["university"]["capabilities"] == [] and REAL["university"]["bands"] == ["s2", "ad"]
     # P29 (C4.7): the Quran reader has no AI, no capability, and serves s1, s2 and adult readers only
