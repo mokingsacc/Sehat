@@ -719,4 +719,32 @@ To see the other states, use "Mock-up only: show other states" in the footer: a 
 
 ## What the phases built, and where they differ
 
-Nothing yet: W1 starts here.
+### W1: the site's first pages
+
+Built: `site/` (the shell, the home and privacy bodies, the icons, the CSS, `forward.js`, `site.js`, the strings in
+three languages), `tools/make_site.py` (render, lint, CSP hashes, `_headers`, `site-report.json`),
+`tools/site_check.mjs` (CI job `site` in tutor.yml) and `hub/tests/test_site.py`. The homes are the final mock-up's
+page with its mock-only parts taken out; measured: the Dari home 9.8 KB brotli, the Pashto 9.8, the English 9.4, the
+privacy pages about 6; first paint on EDGE 1.37 s (3.2 s cold), on poor 2G 2.42 s (5.1 s cold); the first year
+tile at 612 px in a 360x740 screen (670 in English).
+
+Where it differs, the builder's choices to confirm:
+- The pages are rendered and checked on their own in W1; they reach the Worker's build and the hub with the move
+  (W2), since the Dari home needs `/`.
+- The CSP adds `media-src 'self'` (the heading clips of W3 play through `Audio`) and `manifest-src 'self'` (the
+  install prompt), and the site's rules add `X-Frame-Options: DENY` beside `frame-ancestors 'none'` for old
+  browsers. Inline `style` attributes are gone (the mock's glyph delays and sprite are classes), so the CSP needs no
+  `'unsafe-hashes'`.
+- The words a script needs are a `<script type="application/json">` block in the page's language, which the CSP
+  does not run; nothing is written with `innerHTML`.
+- The price tag of the app is worked out at build time as gzip (Python has no brotli); the site check measures
+  brotli and allows 15%. The Android app's tag is left out until a release puts `app/get/apk.json` beside `/get/`
+  (the mock-up's "1 MB" had no file behind it).
+- The Continue card (at `/?site` only) shows the active learner's own picture from all twelve, with her year or
+  "Adults".
+- Only the Dari home sends a reader on by language (a Pashto phone, or a saved choice); `/ps/` and `/en/` are a
+  reader's explicit choice and stay.
+- `/privacy/` explains the school bag with the tag "With the next consent text", because the bag's consent line
+  rides D13 and the bag screens come in W7.
+- The lint's list of places below the province is short (the pilot's city, Mazar-i-Sharif, and two districts near it);
+  reviewers extend it in `make_site.py`.

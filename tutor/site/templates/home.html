@@ -1,0 +1,113 @@
+<section class="w cont" id="cont" hidden aria-labelledby="ch">
+ <div class="card">
+  <span class="who"><svg class="i" id="whopic"><use href="#a-book"/></svg></span>
+  <div class="grow"><b id="ch" data-t="home.on_phone"></b><span class="muted" id="wholine"></span></div>
+  <a class="btn pri" href="/app/"><svg class="i"><use href="#play"/></svg><span data-t="home.continue"></span></a>
+ </div>
+</section>
+
+<section class="w hero" id="hero" data-area>
+ <svg class="pat" aria-hidden="true"><defs><pattern id="kilim" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M17 5 29 17 17 29 5 17z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="17" r="2.2" fill="currentColor"/></pattern></defs><rect width="100%" height="100%" fill="url(#kilim)"/></svg>
+ <div class="ht">
+  <p class="kick" data-t="home.kicker"></p>
+  <h1 data-t="home.h1"></h1>
+  <p class="lead" data-t="home.lead"></p>
+ </div>
+ <svg class="scene" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <path d="M58 98q6-6 12 0 6-6 12 0M92 76q5-5 10 0 5-5 10 0" fill="none" stroke="var(--m2)" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="296" cy="196" r="48" fill="var(--halo)"/>
+  <circle cx="296" cy="196" r="30" fill="var(--star)"/>
+  <path d="M0 228 44 194 76 212 128 158 176 204 212 186 250 168 300 214 352 160 400 196V300H0z" fill="var(--m1)"/>
+  <path d="M128 158 113 174 121 171 127 177 134 170 143 172zM250 168 234 176 241 175 247 181 253 175 261 178zM352 160 338 175 345 172 351 179 358 171 366 170z" fill="var(--snow)"/>
+  <path d="M0 250c70-28 140-12 200-20 70-8 130 6 200-10v80H0z" fill="var(--m2)"/>
+  <path d="M0 276c100-14 300-6 400-18v42H0z" fill="var(--m3)"/>
+  <path class="road" pathLength="1" d="M200 258c-4-20-38-16-44-32-4-12 4-18-8-26"/>
+  <g transform="translate(141 148) rotate(-8)"><path d="M0 52 4 38 34 8a6 6 0 0 1 9 9L13 47z" fill="var(--card)" stroke="var(--acink)" stroke-width="4" stroke-linejoin="round"/><path d="m4 38 9 9" stroke="var(--acink)" stroke-width="3"/></g>
+  <g fill="var(--card)" stroke="var(--acink)" stroke-width="3.5" stroke-linejoin="round"><path d="M200 290c-22-10-50-10-70-2v-30c20-8 48-8 70 2z"/><path d="M200 290c22-10 50-10 70-2v-30c-20-8-48-8-70 2z"/></g>
+  <path d="M143 269c14-4 30-4 44 1m-44 9c14-4 30-4 44 1m26-10c14-5 30-5 44-1m-44 10c14-5 30-5 44-1" fill="none" stroke="var(--m2)" stroke-width="3" stroke-linecap="round"/>
+  <text class="glyph" x="224" y="248">ب</text><text class="glyph d2" x="250" y="226">۳</text><text class="glyph d3" x="226" y="200">پ</text><text class="glyph d4" x="352" y="240">a</text>
+  <path d="M196 144v12m-6-6h12M60 172v10m-5-5h10M384 146v10m-5-5h10" stroke="var(--star)" stroke-width="3" stroke-linecap="round"/>
+ </svg>
+</section>
+
+<section class="w doors" id="doors" data-area aria-labelledby="dh">
+ <div class="sh"><h2 id="dh" data-t="home.doors_h"></h2><button class="spk" type="button" data-read="#doors .sh,#doors .gh,#doors .dash" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+ <div class="dgrid">
+  <div class="grp">
+   <div class="gh"><div><b data-t="home.primary"></b><span data-t="home.primary_note"></span></div></div>
+   <div class="tiles">{{=tiles_primary}}</div>
+   <a class="door dash" href="/app/?year=0&amp;lang={{=lang}}" data-t="home.not_in_school"></a>
+  </div>
+  <div class="grp">
+   <div class="gh"><div><b data-t="home.secondary"></b><span data-t="home.secondary_note"></span></div></div>
+   <div class="tiles">{{=tiles_secondary}}</div>
+  </div>
+  <div class="grp ad">
+   <div class="gh"><div><b data-t="home.adults"></b><span data-t="home.adults_note"></span></div></div>
+   <div class="drow"><a class="door" href="/app/?track=literacy&amp;lang={{=lang}}"><svg class="i"><use href="#pencil"/></svg><span id="lit" data-t="home.track_literacy"></span></a><button class="spk" type="button" data-read="#lit" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+   <div class="drow"><a class="door" href="/app/?track=reader&amp;lang={{=lang}}"><svg class="i"><use href="#book"/></svg><span id="rdr" data-t="home.track_reader"></span></a><button class="spk" type="button" data-read="#rdr" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+  </div>
+ </div>
+ <p class="cost"><svg class="i"><use href="#dl"/></svg><span data-cost="{{home.cost}}" data-hub="{{home.cost_hub}}" data-off="{{home.cost_off}}" data-t="home.cost"></span></p>
+ <p class="links"><a href="/app/#/signup/code" data-t="home.have_code"></a> · <a href="/app/#/move" data-t="home.already"></a></p>
+</section>
+
+<section class="w" data-area aria-labelledby="bh">
+ <div class="card bag">
+  <svg class="art" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="19" width="38" height="39" rx="11" fill="var(--card)"/><path d="M24 19v-4a8 8 0 0 1 16 0v4M13 36h38"/><rect x="26" y="40" width="12" height="9" rx="2"/><path d="m50 6 1.8 3.7 4 .6-2.9 2.8.7 4L50 15.2l-3.6 1.9.7-4-2.9-2.8 4-.6z" fill="var(--star)" stroke="none"/></svg>
+  <div>
+   <h3 id="bh" data-t="home.move_h"></h3>
+   <p data-t="home.move_p"></p>
+   <p class="ex"><span data-t="home.example"></span> <span class="code m">{{=example_code}}</span></p>
+   <a class="btn" href="/app/#/move" data-t="home.move_btn"></a>
+   <p class="lockl"><svg class="i"><use href="#lock"/></svg><span data-t="home.bag_lock"></span></p>
+  </div>
+  <ol class="trip">
+   <li><span class="ic"><svg class="i"><use href="#phone"/></svg></span><span data-t="home.trip1"></span></li>
+   <li><span class="ic"><svg class="i"><use href="#web"/></svg></span><span data-t="home.trip2"></span></li>
+   <li><span class="ic"><svg class="i"><use href="#hub"/></svg></span><span data-t="home.trip3"></span></li>
+  </ol>
+ </div>
+</section>
+
+<section class="w" data-area aria-labelledby="wh">
+ <div class="sh"><h2 id="wh" data-t="home.ways_h"></h2><button class="spk" type="button" data-read="" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+ <div class="g3">
+  <article class="card way"><span class="ic"><svg class="i"><use href="#web"/></svg></span><h3 data-t="home.way1_h"></h3><p data-t="home.way1_p"></p><span class="tag" data-t="home.way1_tag"></span><button class="btn pri" type="button" id="install" data-t="home.way1_btn"></button></article>
+  <article class="card way"><span class="ic"><svg class="i"><use href="#phone"/></svg></span><h3 data-t="home.way2_h"></h3><p data-t="home.way2_p"></p>{{=apk_tag}}<a class="btn" href="/get/"><svg class="i"><use href="#dl"/></svg><span data-t="home.way2_btn"></span></a></article>
+  <article class="card way"><span class="ic"><svg class="i"><use href="#hub"/></svg></span><h3 data-t="home.way3_h"></h3><p data-t="home.way3_p"></p><span class="tag" data-t="home.way3_tag"></span><a class="btn" href="{{=root}}teachers/#hub" data-t="home.way3_btn"></a></article>
+ </div>
+</section>
+
+<section class="w" data-area aria-labelledby="fh">
+ <div class="sh"><h2 id="fh" data-t="home.inside_h"></h2><button class="spk" type="button" data-read="" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+ <div class="g4">
+  <div class="card feat"><span class="ic"><svg class="i"><use href="#s"/></svg></span><div><h3 data-t="home.f1_h"></h3><p data-t="home.f1_p"></p></div></div>
+  <div class="card feat"><span class="ic"><svg class="i"><use href="#print"/></svg></span><div><h3 data-t="home.f2_h"></h3><p data-t="home.f2_p"></p></div></div>
+  <div class="card feat"><span class="ic"><svg class="i"><use href="#check"/></svg></span><div><h3 data-t="home.f3_h"></h3><p data-t="home.f3_p"></p></div></div>
+  <div class="card feat"><span class="ic"><svg class="i"><use href="#ask"/></svg></span><div><h3 data-t="home.f4_h"></h3><p data-t="home.f4_p"></p></div></div>
+ </div>
+</section>
+
+<section class="w fam" data-area aria-labelledby="mh">
+ <div class="sh"><h2 id="mh" data-t="home.fam_h"></h2><button class="spk" type="button" data-read="" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+ <ul>
+  <li><svg class="i"><use href="#lock"/></svg><span data-t="home.fam1"></span></li>
+  <li><svg class="i"><use href="#users"/></svg><span data-t="home.fam3"></span></li>
+  <li><svg class="i"><use href="#off"/></svg><span data-t="home.fam4"></span></li>
+ </ul>
+ <div class="pics">
+  <p data-t="home.fam2"></p>
+  <div class="alias">{{=aliases}}</div>
+ </div>
+ <a class="more" href="{{=root}}families/" data-t="home.fam_more"></a>
+</section>
+
+<section class="w" data-area aria-labelledby="ah">
+ <div class="sh"><h2 id="ah" data-t="home.aud_h"></h2><button class="spk" type="button" data-read="" aria-label="{{site.hear}}"><svg class="i"><use href="#s"/></svg></button></div>
+ <div class="g3">
+  <a class="card aud" href="{{=root}}families/"><span class="who"><svg class="i"><use href="#users"/></svg></span><div><h3 data-t="home.aud1_h"></h3><p data-t="home.aud1_p"></p></div><svg class="i chev flip"><use href="#chev"/></svg></a>
+  <a class="card aud" href="{{=root}}teachers/"><span class="who"><svg class="i"><use href="#pencil"/></svg></span><div><h3 data-t="home.aud2_h"></h3><p data-t="home.aud2_p"></p></div><svg class="i chev flip"><use href="#chev"/></svg></a>
+  <a class="card aud" href="{{=root}}partners/"><span class="who"><svg class="i"><use href="#seed"/></svg></span><div><h3 data-t="home.aud3_h"></h3><p data-t="home.aud3_p"></p></div><svg class="i chev flip"><use href="#chev"/></svg></a>
+ </div>
+</section>

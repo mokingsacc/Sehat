@@ -36,6 +36,31 @@ jobs:
         run: node --test app/tests/*.test.js
       - name: Staff strings
         run: node tools/check_staff_strings.mjs
+  site:
+    # The website (docs/WEBSITE.md 2.5): rendered and linted by tools/make_site.py, then every page in Dari, Pashto and
+    # English at 360 and 1280 px, light and dark, in Chromium: the weight budgets, one request, no other host, 44 px
+    # targets, 14 px text, lang, dir and hreflang, the P10 rule, the price tags, throttled first paint and the forwards.
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: tutor } }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with: { node-version: 22 }
+      - name: Render and lint the website
+        run: python3 tools/make_site.py "$RUNNER_TEMP/site"
+      - name: Install Playwright and its Chromium (pinned)
+        run: |
+          npm install --no-save --no-package-lock --no-audit --no-fund playwright@1.56.1
+          npx --no-install playwright install --with-deps chromium
+      - name: Check the website in a browser
+        run: node tools/site_check.mjs --root "$RUNNER_TEMP/site" --out "$RUNNER_TEMP/site-shots"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: site-shots
+          path: ${{ runner.temp }}/site-shots/
+          if-no-files-found: ignore
+          retention-days: 14
   fallback-kit:
     # The fallback kit (BUILD-PLAN P12): the online container builds and passes the smoke test. Never deployed here.
     runs-on: ubuntu-latest

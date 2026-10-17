@@ -878,6 +878,33 @@ host has a signed contest. The module is off in every seed cohort.
 `stores` gain `contest_takers(cohort, contest, since)`, the best percent per token since the window opened. No
 table is added.
 
+## The website (site/, tools/make_site.py, W1; WEBSITE.md)
+
+A light website for families, teachers and partners, ruled by the website committee ([WEBSITE.md](WEBSITE.md)). Each
+page is one request in one language: Dari at the root, Pashto under `/ps/`, English under `/en/`. Its CSS, script,
+icons (inline SVG) and favicon (a data: URI) are inside the page; there is no web font, no `<img>` and no other host.
+
+- `site/templates/` holds the shell (`page.html`), each page's body and `icons.svg`; `site/css/` the shared look
+  (`base.css`, Welcome's tokens) and each page kind's own; `site/js/forward.js` (the homes' first script) and
+  `site/js/site.js` (every page's one script); `site/strings/{prs,ps,en}.json` the words, drafts (`_draft`, the
+  draft strip) until native reviewers sign them.
+- `tools/make_site.py` fills an empty element that names a string (`data-t`, then dropped), `{{key}}` in attributes
+  and `{{=value}}` from code; it fills the price tags from the real files (the app's first open: its service
+  worker's files, gzip; the APK from `app/get/apk.json`, left out until one is released), renders every page in
+  every language, lints them (photos, faces, titles, places below the province, phone numbers, maps, embeds, forms,
+  share buttons, other hosts, fonts, inline style or event attributes, "girls" in a title, heading or address, a
+  middle dot touching a Persian digit, links to pages that do not exist), and writes the site's `_headers`: a CSP
+  with `default-src 'none'` and the sha256 of each inline script and style (plus `media-src 'self'` for heading
+  clips and `manifest-src 'self'`), `Referrer-Policy: no-referrer`, a `Permissions-Policy` with no camera,
+  microphone or place, and `X-Frame-Options: DENY`, on `/`, each site folder and `/ps/*` and `/en/*`, never on the
+  app's paths. It also writes `site-report.json` (pages, sizes, the shell's files).
+- The forward script: `/?join=CODE` goes to `/app/?join=CODE`; a phone whose `qalam.v2` holds a learner goes to
+  `/app/` (the hash kept) unless the address has `?site`; the Dari home sends a phone whose language is Pashto, or a
+  reader who chose Pashto or English (`qalam.site.lang`, the only thing the site keeps), to that home.
+- `tools/site_check.mjs` serves the rendered folder with brotli and its `_headers`, so the browser enforces the real
+  CSP, and checks what WEBSITE.md 2.5 lists; CI runs it (tutor.yml, job `site`). `hub/tests/test_site.py` checks
+  the renderer, the CSP's hashes and the lint without a browser.
+
 ## Not built yet
 
 See [ROADMAP.md](ROADMAP.md): speech input, recorded voices for lessons, updates by USB stick, the release key and

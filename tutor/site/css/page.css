@@ -1,0 +1,20 @@
+/* The reading pages (privacy, families, teachers, partners, credits): a page head on the sky, then sections as
+   cards, each with its heading and a speaker */
+.ph{margin-top:10px;background:var(--sky);border-radius:28px;padding:22px 18px}
+.ph h1{font-size:clamp(28px,7vw,46px);text-wrap:balance}
+.ph .lead{margin-top:6px;color:var(--muted);max-width:36em}
+.prose{display:grid;gap:14px}
+.prose .card{display:grid;gap:10px}
+.prose .sh{margin-bottom:0}
+.prose h2{font-size:clamp(21px,5vw,28px)}
+.prose h3{font-size:18px}
+.prose p,.prose li{max-width:40em}
+.prose ul{margin:0;padding-inline-start:22px}
+.prose .tag{margin-top:2px}
+.prose .fine{color:var(--muted);font-size:15px}
+.ver{font-size:14px;color:var(--muted)}
+.ct{border-inline-start:4px solid var(--acsoft);padding-inline-start:14px;display:grid;gap:8px}
+.ct dl{margin:0;display:grid;gap:6px}
+.ct dt{font-weight:700}
+.ct dd{margin:0}
+@media (min-width:760px){.ph{padding:36px 48px}.prose .card{padding:24px 28px}.cts{display:grid;grid-template-columns:1fr 1fr;gap:24px}}

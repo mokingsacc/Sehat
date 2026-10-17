@@ -9,3 +9,6 @@ content/quran/audio/*/*.mp3
 # tools/voice.py: a batch sent and not yet collected, and its working files
 .voice-batch.json*
 .voice-tmp/
+# tools/make_site.py: the website rendered here by hand (worker/build.py renders into its own build/)
+site/build/
+node_modules/

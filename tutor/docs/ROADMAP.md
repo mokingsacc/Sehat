@@ -206,6 +206,13 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   shape, with "No lessons for your year yet"; the nickname field empty; the draft banner on one line; lesson titles
   in `bdi` with their own language, and a pack-check note for an English pack's lesson without an English title.
 
+## Stage W: the website and the school bag (from October 2026; WEBSITE.md)
+
+- **W1, done:** the site's first pages: the three homes (`/` in Dari, `/ps/`, `/en/`) from the final mock-up and
+  `/privacy/` in each language, rendered by `tools/make_site.py` from `site/` (templates, CSS, two small scripts,
+  strings in three languages as drafts) with its content lint and the CSP's hashes; `tools/site_check.mjs` in CI
+  (budgets, three languages at 360 and 1280 px in light and dark, throttled first paint, the forwards).
+
 ## January 2027: buy and test
 
 - One hub computer, one ink-tank printer, two cheap Android phones.
