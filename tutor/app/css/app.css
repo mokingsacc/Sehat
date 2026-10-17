@@ -653,3 +653,28 @@ details.credit[open] summary { margin-bottom: 8px; }
 .key-list, .hint-list { margin: 0; padding-inline-start: 22px; display: flex; flex-direction: column; gap: 6px; }
 .hint-list { color: var(--muted); font-size: var(--fs-sm); }
 @media (prefers-reduced-motion: reduce) { .btn.hold.holding .ring { transition: none; } }
+
+/* the school day (P19, DESIGN-C2C3-SPECS.md items 4 and 10) */
+.round.bell { width: 44px; height: 44px; color: var(--muted); }
+.round.bell.on { color: var(--accent); }
+.daycard h2 { margin: 0; font-size: var(--fs-h1); }
+.now .tag { white-space: normal; }
+.now .nowpic { color: var(--accent-ink); display: inline-flex; }
+.continue.now .nowpic { width: 88px; justify-content: center; flex: none; }
+.now small { display: block; font-weight: 800; }
+.stack-sm { display: flex; flex-direction: column; gap: 4px; }
+.now .btn { margin-top: 6px; }
+.subjects.today .trow { display: flex; align-items: center; gap: 12px; min-height: 48px; border-bottom: 1.5px solid var(--line);
+  text-decoration: none; color: var(--ink); padding: 0 4px; }
+.trow .time { min-width: 4.2em; font-weight: 800; font-size: var(--fs-sm); color: var(--muted); white-space: nowrap; }
+.trow .bicon { width: 36px; height: 36px; flex: none; border-radius: 50%; background: var(--soft); color: var(--accent-ink);
+  display: inline-flex; align-items: center; justify-content: center; }
+.tile.trow { min-height: 60px; }
+.tile.trow .bicon { width: 46px; height: 46px; }
+.trow b { font-size: var(--fs); }
+.trow.now { border-color: var(--accent); }
+.subjects.today .trow.now { background: var(--accent-soft); border-radius: 10px; }
+.trow > svg.i-check { color: var(--good-ink); flex: none; }
+.trow.all { color: var(--accent-ink); }
+.stepper-v { min-width: 4em; text-align: center; font-weight: 800; font-size: var(--fs-btn); }
+.round[disabled] { opacity: .45; }

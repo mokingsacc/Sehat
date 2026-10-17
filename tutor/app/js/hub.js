@@ -162,6 +162,9 @@ export const askStatus = (id) => call('/api/ask/' + id);
 export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST' });
 // Homework help's "Check my answer" (P15): right or not yet, never the answer; three tries a question
 export const checkAnswer = (id, answer, token) => call('/api/m/homework/check', { method: 'POST', body: { id, answer }, token });
+// the school day's timetable for her band (P19): no token, so the request says nothing about who asks (F5); the
+// learner's class is added as ?cohort= like every route's
+export const timetable = (band) => call('/api/m/timetable?band=' + encodeURIComponent(band), { ms: 8000 });
 export const sendEvents = (list, token) => call('/api/events', { method: 'POST', body: { events: list }, token, ms: 15000 });
 
 // learners (P10): joining, her own record, withdrawing, and the consent text the server names

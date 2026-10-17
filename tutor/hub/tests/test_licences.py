@@ -76,7 +76,7 @@ def card(**kw):
 
 def test_the_real_sources_file_is_clean_and_uses_the_apps_codes():
     s = Sources(SOURCES)
-    assert s.problems == [] and len(s.by_id) == 41
+    assert s.problems == [] and len(s.by_id) == 42
     langs = {l for x in s.by_id.values() for l in x["languages"]}
     assert langs <= {"prs", "ps", "en", "fa", "ar", "zh", "ur"} and "pus" not in langs and "eng" not in langs
     assert all("ages" not in x and set(x["bands"]) <= {"ey", "p1", "p2", "s1", "s2", "ad"} for x in s.by_id.values())

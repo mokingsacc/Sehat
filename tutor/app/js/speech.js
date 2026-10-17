@@ -57,8 +57,9 @@ export function stop() {
   if (globalThis.speechSynthesis) speechSynthesis.cancel();
 }
 
-// text: plain text to read; lang: prs, ps or en; opts: a pack clip (URL or {url, placeholder}), or {audio, key}
-// where key is the i18n key of an interface string, whose recorded clip plays first
+// text: plain text to read; lang: prs, ps or en; opts: a pack clip (URL or {url, placeholder}), or {audio, key, shown}
+// where key is the i18n key of an interface string, whose recorded clip plays first; with `shown`, a phone without
+// a voice shows the words in a toast instead of "voice not ready" (the school day's bells: P19)
 export async function speak(text, lang, opts) {
   stop();
   const o = opts && typeof opts === 'object' && !('url' in opts) ? opts : { audio: opts };
@@ -67,22 +68,81 @@ export async function speak(text, lang, opts) {
   if (url) {
     const a = new Audio(url);
     current = a;
-    a.play().catch(() => sayWithVoice(text, lang));
+    a.play().catch(() => sayWithVoice(text, lang, o.shown));
     return;
   }
-  sayWithVoice(text, lang);
+  sayWithVoice(text, lang, o.shown);
 }
 
 // an interface string by its key: its clip, else the phone's voice reading the words
-export function sayKey(key, lang, vars) { return speak(s(key, vars), lang, { key }); }
+export function sayKey(key, lang, vars, opts = {}) { return speak(s(key, vars), lang, { key, ...opts }); }
 
-function sayWithVoice(text, lang) {
+function sayWithVoice(text, lang, shown = false) {
   const clean = String(text || '').replace(/\$/g, '').trim();
   const v = voiceFor(lang);
-  if (!clean || !globalThis.speechSynthesis || !v) { toast(s('no_voice')); return; }
+  if (!clean || !globalThis.speechSynthesis || !v) { toast(shown && clean ? clean : s('no_voice')); return; }
   const u = new SpeechSynthesisUtterance(clean);
   u.voice = v; u.lang = v.lang; u.rate = 0.9;
   speechSynthesis.speak(u);
+}
+
+// Sounds that play without a tap (the school day's bells, P19). Browsers block sound until the page has had a tap,
+// so the first tap anywhere unlocks it (C3.1): an AudioContext is made and resumed inside that tap, and the bells are
+// fetched and decoded then, so the first bell is not blocked. Where Web Audio cannot decode a file, a plain Audio
+// element plays it, which a page that has had a tap may also do.
+let actx = null;
+const decoded = new Map();          // url -> Promise of an AudioBuffer, or null
+
+export function unlockAudio(preload = []) {
+  const AC = globalThis.AudioContext || globalThis.webkitAudioContext;
+  try {
+    if (!actx && AC) actx = new AC();
+    if (actx && actx.state === 'suspended') actx.resume().catch(() => {});
+    if (actx) {                                  // a silent sample, played inside the tap
+      const src = actx.createBufferSource();
+      src.buffer = actx.createBuffer(1, 1, 22050);
+      src.connect(actx.destination);
+      src.start(0);
+    }
+  } catch { actx = null; }
+  for (const url of preload) buffer(url);
+}
+
+// unlock on the first tap or key, once
+export function unlockOnFirstTap(preload = []) {
+  if (!globalThis.document) return;
+  const go = () => {
+    document.removeEventListener('pointerdown', go, true);
+    document.removeEventListener('keydown', go, true);
+    unlockAudio(preload);
+  };
+  document.addEventListener('pointerdown', go, true);
+  document.addEventListener('keydown', go, true);
+}
+
+function buffer(url) {
+  if (!actx) return Promise.resolve(null);
+  if (!decoded.has(url)) {
+    decoded.set(url, fetch(url).then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(r.status))))
+      .then((b) => new Promise((ok, no) => actx.decodeAudioData(b, ok, no))).catch(() => null));
+  }
+  return decoded.get(url);
+}
+
+// play a short sound file; true if it could start
+export async function chime(url) {
+  if (actx && actx.state === 'suspended') await actx.resume().catch(() => {});
+  if (actx && actx.state === 'running') {
+    const b = await buffer(url);
+    if (b) {
+      const src = actx.createBufferSource();
+      src.buffer = b;
+      src.connect(actx.destination);
+      src.start(0);
+      return true;
+    }
+  }
+  try { await new Audio(url).play(); return true; } catch { return false; }
 }
 
 // voices load late on some phones

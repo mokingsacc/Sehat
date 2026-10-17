@@ -15,7 +15,7 @@ test('the service worker keeps every file the app opens with', () => {
   const want = ['./', 'index.html', 'icon.svg', 'credits.json', 'css/app.css',
     ...list('js/', '.js'), ...list('js/screens/', '.js'), ...list('js/modules/', '.js'), ...list('fonts/', '.woff2'),
     ...readdirSync(new URL('audio/', APP), { withFileTypes: true }).filter((d) => d.isDirectory())
-      .map((d) => `audio/${d.name}/manifest.json`)];
+      .map((d) => `audio/${d.name}/manifest.json`), ...list('audio/bells/', '.opus')];   // the bells ring offline too (P19)
   assert.deepEqual([...shell].sort(), [...want].sort());
 });
 

@@ -5,7 +5,7 @@
 // as it does on the hub, where plain http allows no service worker (F2). A new version of this file takes over at
 // the next start, without a banner. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-p17-1';
+const VERSION = 'qalam-p19-1';
 const SHELL_CACHE = 'shell-' + VERSION;
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const SHELL = [
@@ -17,6 +17,7 @@ const SHELL = [
   'js/account.js',
   'js/aliases.js',
   'js/bands.js',
+  'js/day.js',
   'js/events.js',
   'js/hub.js',
   'js/i18n.js',
@@ -44,6 +45,7 @@ const SHELL = [
   'js/screens/settings.js',
   'js/screens/signup.js',
   'js/screens/subject.js',
+  'js/screens/subjects.js',
   'js/screens/teacher.js',
   'js/screens/welcome.js',
   'js/screens/who.js',
@@ -52,10 +54,15 @@ const SHELL = [
   'js/modules/lessons.js',
   'js/modules/photo.js',
   'js/modules/sheets.js',
+  'js/modules/timetable.js',
   'fonts/naskh-500.woff2',
   'fonts/naskh-700.woff2',
   'fonts/vazirmatn-500.woff2',
   'fonts/vazirmatn-800.woff2',
+  'audio/bells/break.opus',
+  'audio/bells/end.opus',
+  'audio/bells/manifest.json',
+  'audio/bells/start.opus',
   'audio/en/manifest.json',
   'audio/prs/manifest.json',
   'audio/ps/manifest.json',

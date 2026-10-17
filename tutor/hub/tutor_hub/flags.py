@@ -18,6 +18,7 @@ import logging
 import re
 from pathlib import Path
 
+from . import timetable
 from .modules import BANDS, MATURITY
 
 log = logging.getLogger("tutor.flags")
@@ -27,6 +28,9 @@ COHORT_ID = re.compile(r"^[a-z0-9]{8,32}$")
 COHORT_FIELDS = ("id", "label", "langs", "bands", "settings", "modules")
 DEFAULT_MATURITY = ("stable",)       # a cohort that says nothing takes only stable modules
 SEEDS = ("hub", "staging", "open")
+# a cohort's settings (BUILD-PLAN 3.3), each checked here: the maturities it takes; its school-day timetable (P19:
+# "default" or a template, timetable.py)
+SETTINGS = ("maturity", "timetable")
 
 
 def check_cohort(c) -> list[str]:
@@ -47,10 +51,13 @@ def check_cohort(c) -> list[str]:
         if not isinstance(v, list) or not v or any(x not in allowed for x in v):
             p.append(f"{key} must list some of {', '.join(allowed)}")
     s = c["settings"]
-    if not isinstance(s, dict) or set(s) - {"maturity"}:
-        p.append("settings may only hold maturity for now")
-    elif "maturity" in s and (not isinstance(s["maturity"], list) or any(x not in MATURITY for x in s["maturity"])):
-        p.append(f"settings.maturity must list some of {', '.join(MATURITY)}")
+    if not isinstance(s, dict) or set(s) - set(SETTINGS):
+        p.append(f"settings may only hold {', '.join(SETTINGS)} for now")
+    else:
+        if "maturity" in s and (not isinstance(s["maturity"], list) or any(x not in MATURITY for x in s["maturity"])):
+            p.append(f"settings.maturity must list some of {', '.join(MATURITY)}")
+        if "timetable" in s:
+            p += [f"settings.{x}" for x in timetable.check(s["timetable"])]
     if not isinstance(c["modules"], dict) or not all(isinstance(v, bool) for v in c["modules"].values()):
         p.append("modules must map module ids to true or false")
     return p

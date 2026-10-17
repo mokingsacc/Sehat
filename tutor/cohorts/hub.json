@@ -4,7 +4,8 @@
   "langs": ["prs", "ps", "en"],
   "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
   "settings": {
-    "maturity": ["pilot", "stable"]
+    "maturity": ["pilot", "stable"],
+    "timetable": "default"
   },
   "modules": {
     "lessons": true,
@@ -15,6 +16,7 @@
     "teacher": true,
     "photo": false,
     "homework": false,
-    "review": false
+    "review": false,
+    "timetable": true
   }
 }

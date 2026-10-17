@@ -9,6 +9,7 @@
 // the whole page; early years, years 1 to 3 and adult literacy hear Home read when it opens.
 
 import { readsOnOpen } from '../bands.js';
+import * as day from '../day.js';
 import { getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
@@ -19,6 +20,7 @@ import { fill, h, holdable, icon, netChip, pageSpeaker, readPage, said, speakerB
 import { whoChip } from './who.js';
 
 const HOLD_MS = 2000;
+const DAY_EVENT = 'qalam-day';
 let readFor = null;          // read Home aloud once per learner and visit, not on every redraw
 
 export default async function home() {
@@ -26,13 +28,14 @@ export default async function home() {
   const root = h('div', { class: 'screen home', 'data-speaks': '' });
   const draw = () => fill(root, page(root));
   draw();
+  window.addEventListener(DAY_EVENT, draw);          // a bell, or her school day changed (the timetable module)
   const c = state.child();
   const key = c && c.id + location.hash;
   if (c && readsOnOpen(c.band, c.track, 'home') && readFor !== key && hasVoice(getLang())) {
     readFor = key;
     setTimeout(() => readPage(root.closest('#app') || root), 400);
   }
-  return { el: root, tab: 'lessons', onHub: draw, cleanup: () => { readFor = null; } };
+  return { el: root, tab: 'lessons', onHub: draw, cleanup: () => { readFor = null; window.removeEventListener(DAY_EVENT, draw); } };
 }
 
 // the grown-up's corner: a 2-second press opens Who is learning (and Settings, Print behind it); a tap says "hold it".
@@ -44,10 +47,23 @@ function grownUpCorner() {
     onTap: () => sayKey('hold_it', getLang()) });
 }
 
+// the bells' switch (P19, item 4): a 44 px round button, only while her school day is on; one tap switches them
+// and says "Bells off" or "Bells on" (or shows it, on a phone without a voice)
+function bellToggle(c) {
+  const on = day.bellsOn(c);
+  return h('button', { type: 'button', class: 'round bell' + (on ? ' on' : ''), 'aria-pressed': String(on),
+    'aria-label': s(on ? 'bells_on' : 'bells_off'),
+    onClick: () => {
+      state.updateChild(c.id, { bells: on ? 'off' : 'on' });
+      sayKey(on ? 'bells_off' : 'bells_on', getLang(), null, { shown: true });
+      window.dispatchEvent(new Event(DAY_EVENT));
+    } }, icon(on ? 'bell' : 'bell-off', 22, 2.2));
+}
+
 function header(c, root) {
   if (c.band === 'ey') return h('header', { class: 'top' }, whoChip(c), h('div', { class: 'grow' }), grownUpCorner());
   return h('header', { class: 'top' }, whoChip(c), h('div', { class: 'grow' }),
-    pageSpeaker(root), netChip());
+    pageSpeaker(root), day.dayOn(c) ? bellToggle(c) : null, netChip());
 }
 
 // nothing to show: no lessons for her yet, or (first open, away from the server) nothing on the phone yet

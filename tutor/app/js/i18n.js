@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10, P11, P13, P14 and P15 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10, P11, P13, P14, P15 and P19 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -232,6 +232,19 @@ const S = {
     check_my_answer: 'جوابم را ببین', its_right: 'بلی، درست است!', not_yet: 'هنوز نه: راهنمایی بعدی را ببین.',
     not_sure: 'در این یکی مطمئن نیستم. از معلمت بپرس.', tries_left: '{n} بار دیگر می‌توانی ببینی.',
     no_more_checks: 'برای این یکی دیگر نمی‌شود. روی کاغذ حل کن یا از معلمت بپرس.',
+    // P19, drafts for a native Dari speaker's check:
+    day_title: 'روز مکتب تو', day_card: 'قلم مکتب توست: درس‌ها در وقت معین، با زنگ.',
+    day_yes: 'بلی، قلم مکتب من است', day_no_hw: 'من به مکتب می‌روم: در کارخانگی کمکم کن', day_no: 'من به مکتب می‌روم',
+    day_starts: 'مکتب ساعت {t} شروع می‌شود', day_opening: 'آغاز روز، {a} تا {b}', day_period: 'ساعت درسی {n}، {a} تا {b}',
+    day_break: 'تفریح تا {t}', day_sheet_title: 'وقت ورق', day_sheet: 'وقت ورق: ورق امروز را روی کاغذ حل کن.',
+    day_done: { child: 'مکتب امروز تمام شد. آفرین!', adult: 'مکتب امروز تمام شد.' }, day_none: 'امروز مکتب نیست',
+    day_progress: '{a} از {b} امروز', day_paper: 'اول درس، بعد تمرین روی کاغذ',
+    day_greeting: 'صبح بخیر! امروز: {list}', day_over: 'مکتب امروز تمام شد. آفرین.', bell_period: 'ساعت درسی {n}: {subject}',
+    today: 'امروز', all_subjects: 'همه‌ی مضمون‌ها', now_tag: 'حالا',
+    block_opening: 'آغاز', block_period: 'درس', block_break: 'تفریح', block_sheet: 'وقت ورق', block_close: 'ختم',
+    bells: 'زنگ‌ها', bells_on: 'زنگ روشن', bells_off: 'زنگ خاموش',
+    school_day: 'روز مکتب', school_day_note: 'درس‌ها در وقت معین، با زنگ، وقتی قلم باز است.',
+    start_time: 'وقت شروع', start_earlier: 'زودتر', start_later: 'دیرتر', day_am: '{t} صبح', day_pm: '{t} بعد از ظهر',
   },
   ps: {
     app: 'قلم',
@@ -460,6 +473,19 @@ const S = {
     check_my_answer: 'زما ځواب وګوره', its_right: 'هو، سم دی!', not_yet: 'لا نه: بله لارښوونه وګوره.',
     not_sure: 'په دې یوه ډاډه نه یم. له خپل ښوونکي وپوښته.', tries_left: '{n} ځله نور یې کتلی شې.',
     no_more_checks: 'د دې لپاره نور نه کېږي. په کاغذ یې حل کړه یا له ښوونکي وپوښته.',
+    // P19, drafts for a native Pashto speaker's check:
+    day_title: 'ستا د ښوونځي ورځ', day_card: 'قلم ستا ښوونځی دی: لوستونه په ټاکلو وختونو، له زنګ سره.',
+    day_yes: 'هو، قلم زما ښوونځی دی', day_no_hw: 'زه ښوونځي ته ځم: د کورني کار مرسته راسره وکړه', day_no: 'زه ښوونځي ته ځم',
+    day_starts: 'ښوونځی په {t} پیلېږي', day_opening: 'د ورځې پیل، {a} تر {b}', day_period: 'درسي ساعت {n}، {a} تر {b}',
+    day_break: 'تفریح تر {t} پورې', day_sheet_title: 'د پاڼې وخت', day_sheet: 'د پاڼې وخت: د نن پاڼه په کاغذ حل کړه.',
+    day_done: { child: 'د نن ښوونځی پای ته ورسېد. شاباس!', adult: 'د نن ښوونځی پای ته ورسېد.' }, day_none: 'نن ښوونځی نشته',
+    day_progress: 'نن {a} له {b}', day_paper: 'لومړی لوست، بیا په کاغذ تمرین',
+    day_greeting: 'سهار مو پخیر! نن: {list}', day_over: 'د نن ښوونځی پای ته ورسېد. شاباس.', bell_period: 'درسي ساعت {n}: {subject}',
+    today: 'نن', all_subjects: 'ټول مضمونونه', now_tag: 'اوس',
+    block_opening: 'پیل', block_period: 'لوست', block_break: 'تفریح', block_sheet: 'د پاڼې وخت', block_close: 'پای',
+    bells: 'زنګونه', bells_on: 'زنګ روښانه', bells_off: 'زنګ بند',
+    school_day: 'د ښوونځي ورځ', school_day_note: 'لوستونه په ټاکلو وختونو، له زنګ سره، کله چې قلم خلاص وي.',
+    start_time: 'د پیل وخت', start_earlier: 'وختي', start_later: 'وروسته', day_am: '{t} سهار', day_pm: '{t} ماسپښین',
   },
   en: {
     app: 'Qalam',
@@ -687,6 +713,19 @@ const S = {
     check_my_answer: 'Check my answer', its_right: "Yes, that's right!", not_yet: 'Not yet: try the next hint.',
     not_sure: "I'm not sure about this one. Ask your teacher.", tries_left: '{n} more tries.',
     no_more_checks: 'No more tries for this one. Try it on paper, or ask your teacher.',
+    // P19:
+    day_title: 'Your school day', day_card: 'Qalam is your school: lessons at set times, with bells.',
+    day_yes: 'Yes, Qalam is my school', day_no_hw: 'I go to school: help me with homework', day_no: 'I go to school already',
+    day_starts: 'School starts at {t}', day_opening: 'Opening · {a}–{b}', day_period: 'Period {n} · {a}–{b}',
+    day_break: 'Break until {t}', day_sheet_title: 'Sheet time', day_sheet: "Sheet time: do today's sheet on paper.",
+    day_done: { child: "School's done for today. Well done!", adult: "Today's school is done." }, day_none: 'No school today',
+    day_progress: '{a} of {b} today', day_paper: 'Lesson, then practise on paper',
+    day_greeting: 'Good morning! Today: {list}', day_over: 'School is over for today. Well done.', bell_period: 'Period {n}: {subject}',
+    today: 'Today', all_subjects: 'All subjects', now_tag: 'now',
+    block_opening: 'Opening', block_period: 'Lesson', block_break: 'Break', block_sheet: 'Sheet time', block_close: 'Close',
+    bells: 'Bells', bells_on: 'Bells on', bells_off: 'Bells off',
+    school_day: 'School day', school_day_note: 'Lessons at set times, with bells, while Qalam is open.',
+    start_time: 'Start time', start_earlier: 'Earlier', start_later: 'Later', day_am: '{t} in the morning', day_pm: '{t} in the afternoon',
   },
 };
 

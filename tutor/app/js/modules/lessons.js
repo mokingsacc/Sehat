@@ -48,7 +48,7 @@ function nextClean({ child: c, lesson: l }) {
 }
 
 // subject tiles; in the bands with a speaker per button they go one per row, each with its speaker at the end
-function tiles({ child: c, tone }) {
+export function tiles({ child: c, tone }) {
   const one = perButton();
   return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects'))),
     h('div', { class: 'tiles' + (one ? ' one' : '') }, library.subjectOrder(c.lang).map((sub) => {
@@ -60,7 +60,7 @@ function tiles({ child: c, tone }) {
     }))];
 }
 
-function subjectList({ child: c }) {
+export function subjectList({ child: c }) {
   return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects')), h('span', {}, s('every_lesson_open'))),
     h('nav', { class: 'subjects', 'aria-label': s('subjects') }, library.subjectOrder(c.lang).map((sub) => {
       const p = library.progress(c, sub);

@@ -18,7 +18,8 @@
     "maturity": [
       "pilot",
       "stable"
-    ]
+    ],
+    "timetable": "default"
   },
   "modules": {
     "lessons": true,
@@ -29,6 +30,7 @@
     "teacher": false,
     "photo": false,
     "homework": false,
-    "review": false
+    "review": false,
+    "timetable": true
   }
 }

@@ -147,7 +147,9 @@ queue; it depends on `sheets` and needs `printer`), `check` (Check my sheet, whi
 the internet and is on only in staging so far. `homework` (P15, Homework help: "Check my answer" under Ask's hint
 ladder) depends on `ask`, serves p2, s1 and s2, calls the model for `hint`, needs the internet and is on only in
 staging (`migrations/0009`). `review` (P17, the review screens at `/review/`) depends on `lessons`, has no slot in
-the learner app and is on only in staging (`migrations/0010`). `migrations/0007` switches `sheets` on in every cohort made before it
+the learner app and is on only in staging (`migrations/0010`). `timetable` (P19, the virtual school day) depends on
+`lessons`, serves p1 to s2, has the slots `home.action` and `settings.row`, and is on in all three seed cohorts
+(`migrations/0011`, which also sets their `timetable` setting to `"default"`). `migrations/0007` switches `sheets` on in every cohort made before it
 wherever `print` or `check` was; `migrations/0008` switches `photo` on for the staging seed cohort in a database
 seeded before it. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
@@ -438,16 +440,17 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
 | `GET /api/teacher/summary`, `queue`, `prints`; `POST /api/teacher/answer/{id}`, `hub-card` | Teacher page; header `X-Teacher-Pin` |
+| `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
 | `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (the teacher routes; the hub card also needs `print`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes and the app's files are always there.
 
 ## The app (app/js)
 
-- `main.js` starts up and routes by the address after `#` (`#/home`, `#/lesson/{id}`, `#/print/{id}`,
+- `main.js` starts up and routes by the address after `#` (`#/home`, `#/subjects`, `#/lesson/{id}`, `#/print/{id}`,
   `#/check/{id}/{seed}`, `#/photo/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
   `#/lock`, `#/settings`, `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
   learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
@@ -526,6 +529,35 @@ learner routes and the app's files are always there.
 - `library.js` decides what the big button starts: the lesson left half way, else the first not done in the
   child's year, one subject after another. Every lesson stays open from the subject pages.
 - Text from lessons, the hub or the AI is always added as text, never as HTML.
+
+## The virtual school day (timetable.py, mods/timetable.py, app/js/day.js, P19)
+
+A cohort's settings may hold `timetable`: `"default"` (the core's template in `timetable.py`) or a template of its own,
+checked by `timetable.check` when a seed file or the admin sets it. A template has the school days of the week,
+holidays, Ramadan's dates with its start time and shorter periods, and per band (p1 to s2) a start time and the day's
+blocks in order: `opening`, `period` (with a subject, or `auto`), `break`, `sheet`, `close`. The default follows
+DESIGN-C2C3-SPECS item 10: p1 two periods of 25 minutes, p2 three of 30, s1 and s2 four of 40, Saturday to Thursday.
+
+- **The hub** serves one band's part without a token (`GET /api/m/timetable`), so the request says nothing about who
+  asks, and records nothing. Switching the `timetable` module off for a cohort is the kill switch (school day and
+  bells off): the route answers 404 and the phones drop the day at their next `/api/hello`.
+- **The phone** (`day.js`, pure functions tested in `app/tests/day.test.js`) keeps the band's timetable in its cache and
+  works the day out offline: today's blocks, where the day is, the next bell, which lesson fills each period (her
+  plan's next lesson first, P22, else the next lesson not done, the subjects taking turns), the clock in her digits.
+  Per learner the phone keeps `day` (`on` or `off`; unset counts as on, C2.4), `bells` (`off` only when she switched
+  them off) and `shift` (her start time moved by up to two hours, in steps of 30 minutes). Nothing about the day is
+  sent and no event is recorded.
+- **Home** (`modules/timetable.js`): the one-time card "Your school day" ("Yes, Qalam is my school" or "I go to
+  school" / Homework help) until she answers; then the Now card (before school, a period with its lesson and play
+  button, the break, sheet time, the close, no school today) and the Today list, with "All subjects" (`#/subjects`).
+  A bell button in Home's header switches the bells. Homework help shows only while the school day is off.
+- **Bells** ring only while Qalam is on screen: one timer to the next boundary, armed while the page is visible, no
+  catch-up for bells missed while hidden. Audio is unlocked on her first tap. The bells are Qalam's own tones
+  (`tools/make_bells.py`, CC0, `app/audio/bells/`). No web notification and no Web Push are used.
+- **Closed-app alarms** belong to the Android app (P23), after "This phone is mine": `day.syncAlarms` hands a bridge
+  the app will add, `globalThis.QalamAndroid.setAlarms(json)`, a seven-day plan of times only (a wake-up 30 minutes
+  before the start and each period's bell) with the title "Qalam"; `cancelAlarms()` otherwise. A browser has no
+  bridge, so nothing happens there.
 
 ## Staff pages and review (staff.py, mods/review.py, P17)
 

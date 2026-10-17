@@ -39,7 +39,7 @@ const TABS = [
 ];
 // screens that belong to a module (#/name/...); every other screen belongs to the shell
 const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', teacher: 'teacher', lesson: 'lessons',
-  subject: 'lessons' };
+  subject: 'lessons', subjects: 'lessons' };
 
 let list = BUILT_IN;
 const offers = new Map(SLOTS.map((s) => [s, []]));

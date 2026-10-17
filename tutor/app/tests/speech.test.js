@@ -40,7 +40,9 @@ test('a pack clip from the hub follows the same rule', () => {
 });
 
 test('every interface clip is listed, matches its hash, names a speaker code and is never synthetic', () => {
-  const langs = readdirSync(AUDIO, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort();
+  // app/audio/bells holds the school day's bells (P19): tones, not words; day.test.js checks them
+  const langs = readdirSync(AUDIO, { withFileTypes: true }).filter((d) => d.isDirectory() && d.name !== 'bells')
+    .map((d) => d.name).sort();
   assert.deepEqual(langs, ['en', 'prs', 'ps']);
   for (const lang of langs) {
     const dir = new URL(lang + '/', AUDIO);

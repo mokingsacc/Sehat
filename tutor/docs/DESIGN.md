@@ -442,6 +442,30 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
 - Not built (open look questions): "Print for review" (the paper list) and "signed on paper"; speakers on the staff
   page; the admin's view of review notes (P21); the frame is a fixed 640 px tall.
 
+## What P19 built, and where it differs
+
+- The school day is on wherever her cohort's timetable lists her band (p1 to s2) and she has not switched it off;
+  unset counts as on (C2.4). Home's first offer is the one-time card "Your school day": "Yes, Qalam is my school"
+  (primary, bell icon) and "I go to school" (outline, bag icon; "I go to school: Homework help" where Homework help
+  is on). In p2 the card's lines are read on open; p1 has a speaker per button.
+- The Now card replaces the continue card while the day is on. Before school: "School starts at 8:00" over the first
+  period's lesson. In a period: "Period 2 · 8:45–9:25", the subject and lesson, the play button, "Lesson, then
+  practise on paper" and the day's progress bar ("3 of 8 today"). The opening says its times; the break shows a cup and "Break
+  until 9:40", no play button; sheet time shows today's sheet button; after the close, or on a day with no school,
+  the next lesson as the continue card would show it. In bold bands the play button sits under the kicker, as on
+  the continue card.
+- Today's timetable lists every block with its time at the row's start, a subject badge or the block's icon (bell,
+  cup, sheet), the title, a tick once the block is over or its lesson done, and "now". A period whose subjects have
+  no lesson left says "Lesson". "All subjects" opens a new screen, `#/subjects`, with the band's usual subject list or
+  tiles. In bold bands the rows are tiles, one per row, each with its speaker in p1.
+- A bell button sits in Home's header between the page speaker and the hub chip while the day is on (bell or bell
+  with a stroke); Settings has School day, Bells and Start time (earlier or later by 30 minutes, up to two hours).
+- At each bell: the sound, a toast ("Period 2: Maths"), and Home moves on. The clock is in her digits, with "in the
+  morning" or "in the afternoon" only when the day crosses noon.
+- Open look questions: the Today list's tick on a past period that had no lesson; whether the Now card should say
+  more at the close than the next lesson; the bells' sound (Qalam's own tones, placeholders a musician may replace);
+  a wake-up line in the app (the wake-up is only the Android app's alarm, 30 minutes before the start).
+
 ---
 
 # C2 and C3 decisions

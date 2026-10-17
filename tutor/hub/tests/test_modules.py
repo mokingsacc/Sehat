@@ -34,7 +34,8 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "check", "homework", "lessons", "photo", "print", "review", "sheets", "teacher"]
+    assert sorted(REAL) == ["ask", "check", "homework", "lessons", "photo", "print", "review", "sheets", "teacher",
+                           "timetable"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
     assert REAL["print"]["needs"] == ["printer"]
     # C2, change 6: `sheets` holds the sheet, its keys, "Get the sheet" and the lesson-end card; `print` depends on it
@@ -189,9 +190,9 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
     assert flags.enabled(REAL, staging, f) == ["ask", "check", "homework", "lessons", "photo", "print", "review",
-                                              "sheets", "teacher"]
+                                              "sheets", "teacher", "timetable"]
     assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "homework", "lessons", "photo",
-                                                                         "review", "sheets"]
+                                                                         "review", "sheets", "timetable"]
     assert REAL["teacher"]["needs"] == ["pin"]
 
 
@@ -199,7 +200,8 @@ def test_the_real_hub_cohort_takes_the_built_modules():
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     hub = seeds["hub"]
     f = {m: {"enabled": v} for m, v in hub["modules"].items()}
-    assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "print", "sheets", "teacher"]   # no photo on the hub
+    assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "print", "sheets", "teacher",
+                                       "timetable"]   # no photo on the hub
     assert hub["modules"]["photo"] is False and seeds["open"]["modules"]["photo"] is False
     assert flags.enabled(REAL, hub, f, band="ey") == ["lessons", "print", "sheets", "teacher"]     # no Ask for ey
 
@@ -208,7 +210,7 @@ def test_the_open_cohort_has_sheets_and_no_print():
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     c = seeds["open"]
     f = {m: {"enabled": v} for m, v in c["modules"].items()}
-    assert flags.enabled(REAL, c, f, lacks=("printer", "pin")) == ["check", "lessons", "sheets"]
+    assert flags.enabled(REAL, c, f, lacks=("printer", "pin")) == ["check", "lessons", "sheets", "timetable"]
 
 
 def test_module_settings_use_valid_cohort_values_only():

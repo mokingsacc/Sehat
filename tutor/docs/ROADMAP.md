@@ -124,6 +124,11 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   3-second hold. `staff` keeps a peppered hash of the email, a neutral label, the role and initials (C3.2); online the
   Worker checks Cloudflare Access's token itself, and the staff pages stay off until Mo sets up Access and its three
   secrets (HOSTING.md). `tools/pull_signoffs.py` copies signatures into the packs for release.
+- **P19, done:** the virtual school day (C2.4, C3.1). Each cohort's timetable gives every school band an opening,
+  periods, a break, sheet time and a close; Home asks once whether Qalam is her school, then shows the Now card and
+  Today's timetable, each period filled with a lesson. Bells ring while Qalam is on screen; no web notifications.
+  On in all three seed cohorts; switching `timetable` off is the kill switch. Closed-app alarms wait for the Android
+  app (P23), through a hook already in place.
 
 ## January 2027: buy and test
 

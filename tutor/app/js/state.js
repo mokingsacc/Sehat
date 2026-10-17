@@ -71,8 +71,11 @@ function clean(l) {
     asks: Array.isArray(l.asks) ? l.asks : [],
     ...(l.tries && typeof l.tries === 'object' ? { tries: l.tries } : {}),
     ...(typeof l.last === 'string' ? { last: l.last } : {}),
-    // C2.4 (P19 builds the card): her school day, 'on' or 'off'; unset counts as on. Never whether she is in school.
+    // C2.4 and P19: her school day, 'on' or 'off' (unset counts as on); her bells, kept only when she switched them
+    // off; her start time moved by -120 to +120 minutes in steps of 30 (day.js). Never whether she is in school.
     ...(l.day === 'on' || l.day === 'off' ? { day: l.day } : {}),
+    ...(l.bells === 'off' ? { bells: 'off' } : {}),
+    ...(Number.isInteger(l.shift) && l.shift !== 0 && Math.abs(l.shift) <= 120 && l.shift % 30 === 0 ? { shift: l.shift } : {}),
     // C2.3: she has heard "I won't tell you the answer" once, the first time she reached a third hint
     ...(l.told === true ? { told: true } : {}),
   };

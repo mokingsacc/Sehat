@@ -28,6 +28,7 @@ from .config import Config
 from .mods import homework as homework_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
+from .mods import timetable as timetable_mod
 from .staff import Gate
 from .packs import Library, band_of_year, picture_file
 from .packs import text as pick_text
@@ -523,6 +524,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(homework_mod.router(hub, needs))
     # The review screens (the `review` module, P17): behind the staff gate, at /review/ (app/review/)
     app.include_router(review_mod.router(hub, needs))
+    # The school day (the `timetable` module, P19): the cohort's timetable for a band, without a token
+    app.include_router(timetable_mod.router(hub, needs))
 
     # worksheets (the `sheets` module, C2.1): the sheet as HTML on every home, and its key for Check my sheet.
     # The answer page is the teacher's: behind the teacher's PIN on the hub, and on no learner route (C2.3); online

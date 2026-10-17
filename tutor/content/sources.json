@@ -1325,5 +1325,32 @@
     "attribution": "",
     "notes": "Historical jihad-era material with violent content; unsuitable for children whatever the licence.",
     "checked": "2026-10-16"
+  },
+  {
+    "id": "qalam-bells",
+    "name": "Qalam school-day bells",
+    "url": "https://github.com/mokingsacc/Sehat/tree/main/tutor/app/audio/bells",
+    "owner": "Qalam (made by tools/make_bells.py)",
+    "licence": "CC0 (public domain dedication)",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "class": "BUNDLE",
+    "flags": [],
+    "languages": [],
+    "bands": [
+      "p1",
+      "p2",
+      "s1",
+      "s2"
+    ],
+    "subjects": [
+      "school-day"
+    ],
+    "formats": [
+      "audio"
+    ],
+    "offline": true,
+    "attribution": "Bells: Qalam's own tones, CC0.",
+    "notes": "app/audio/bells/start.opus, break.opus and end.opus (P19): struck tones made by ffmpeg from tools/make_bells.py, no recording and no voice. Their hashes are in app/audio/bells/manifest.json.",
+    "checked": "2026-10-17"
   }
 ]
