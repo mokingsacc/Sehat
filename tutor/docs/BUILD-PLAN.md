@@ -107,6 +107,9 @@ Rules across bands:
 Bands, tone, the adult-literacy look and the sign-up order were settled by C1 on 16 October (DESIGN.md, decision log);
 Home per band, early years' modules and the `open` cohort by C2.
 
+The staff pages (teacher, admin, review) are in English, Dari and Pashto, a picker on every page, remembered per
+device (C5.1); dates in Solar Hijri and Persian digits in Dari and Pashto, Gregorian and Latin in English.
+
 ---
 
 ## 3. Architecture
@@ -168,6 +171,9 @@ before the pilot, and the shell rather than the modules keeps Home sparse.
 - **Since C4:** modules `recall` (spaced review, P25a), `cert` (P25b), `speak` (P27b, blocked until its gate),
   `university` (P28), `quran` (P29) and `made` (P32), as DESIGN.md's C4 phase table; `timetable` gains band `ad` (the
   adult study time); `plan` gains the setting `plan_ai` (off); `photo` gains `per_day` (5 in `open`, 10 elsewhere).
+- **Since C5:** `speak` as C5.5: no capability (hearing yourself on the phone is none), bands as the pack's `say` steps
+  serve, depends `lessons`, no setting, `offline: yes`, off in every cohort; `audio.record` stays defined and unused in
+  2027.
 - **Capabilities and risk:** the core's table, not the manifest, sets the risk the admin sees: `photo.upload` and
   `audio.record` high (`audio.record` means audio leaving the phone; hearing yourself on the phone is no capability,
   C4); `free.text` and `ai.call` medium; `share.public`, `share.cohort` and `child.contact` blocked unless the cohort's
@@ -242,8 +248,13 @@ Existing routes stay (ARCHITECTURE.md). New:
 | `/get` | the Android download page, and the APK as a Worker static asset (C3.6) |
 | `POST /api/m/cert` | (P25b) `{path, version}` with her token, five a day: reads her own events and answers `{id, month}` (C4.2) |
 | `GET /api/cert/<id>`, `/v/<id>` | (P25b) the check of a certificate: core, always on, no token, 30 an address a minute |
-| `POST /api/m/speak` | (P27b, gated) a short adult's English phrase, audio in memory only, answers `{heard}` (C4.5) |
+| `POST /api/m/speak` | (P27b, gated) a short adult's English phrase, audio in memory only, answers `{heard}` (C4.5). *Withdrawn by C5.5: speech practice sends nothing, so there is no route.* |
 | `/api/m/made/*` | (P32) her own questions sent to her teacher to check (C4.8) |
+
+Since C5: `signoffs` gains `via` (`pin` or `access`, C5.A6); a learner route takes her class from her token only
+(`her_cohort()`, C5.A1); the commonest staff refusals carry a stable `code` beside the sentence (`last_admin`,
+`not_your_class`, `confirm_first`, `locked`, `photo_gate`, `budget`, `wrong_pin`, `wait`, `no_cohort`, `access`), which
+the staff pages show in the chosen language (C5.1).
 
 Online, learner routes need the token, and rate limits key on it, because carrier NAT puts thousands of phones behind
 one address. The hub keeps its address-based limits.
@@ -280,9 +291,12 @@ one address. The hub keeps its address-based limits.
   key exists). Any other host, Anthropic and Google included, is refused by code and by a test. Claude may serve only
   UK-side drafting and evaluation tools in `tools/`, which carry no learner data. *Superseded 17 Oct 2026 (decision
   log): any of `anthropic`, `openai`, `gemini`, `openai_compat`, `local` or `fake`, picked per cohort in the admin
-  panel; each goes only to its own host; staging's default is Claude when its key is set, else the fake.*
+  panel; each goes only to its own host; staging's default is Claude when its key is set, else the fake.* Bounded
+  since C5 (C5.A3) by what the class's consent text names: the provider-neutral consent versions of 17 October and
+  the new consent version Mo commissions (What needs Mo).
 - **Purposes:** `explain`, `hint`, `read_sheet` (vision against a known key), `plan` (Year 1), `screen`, and `listen`
-  (Year 1, adults only, refused by a gateway test for any other band; C4.5). Manifests say which a module may use.
+  (Year 1, adults only, refused by a gateway test for any other band; C4.5; *C5: `listen` leaves the purposes once
+  P27b is rebuilt as C5.5*). Manifests say which a module may use.
 - **Before a call:** rules screen, identifier filter (nicknames sent by mistake, phone numbers, long digit runs, email
   shapes), cohort budget, language check (Pashto off until nine in ten reviewed answers are right and none unsafe).
 - **After a call:** maths re-check (as now), answer-leak check for hints (5.3), source badge, hold-for-teacher, an
@@ -326,7 +340,9 @@ app's (`prs`, `ps`, `en`; two-letter ISO elsewhere) and `ages` map to bands (`ea
 3. **Validate** in CI: today's checks plus no unknown or AVOID ids, NC only in NC packs, SA and NC-SA never in one
    lesson, no copied text in LINK or unpermitted ASK items, `no_ai` sources in no pack and no AI context, `verbatim`
    text matching its source by hash, attribution present, and recorded audio for every `ey` and `p1` step and every
-   `letter` step before release (F1: no synthetic Dari or Pashto voice, ever).
+   `letter` step before release (F1: no synthetic Dari or Pashto voice, ever; *superseded at C5, change 2: one
+   generated woman's voice per language from `tools/voice.py` meets the rule, each clip played by the reviewer before
+   OK, after a native listener passes a 30-clip sample per language; scripture keeps its human reciter*).
 4. **Review:** a Dari reader, a Pashto reader and a subject teacher; a Hanafi scholar for religious content; an adult
    educator for adult packs. On phones in the Review module (P17) or on printed review sheets.
 5. **Sign** the lesson's content hash; any later change voids it. Signatures live in `signoffs` and are written back
@@ -412,7 +428,8 @@ withheld raised them.
 - Events hold verbs and ids only. OpenAI zero data retention is requested in January; images are cropped to the answer
   cells. A daily job deletes what has expired (3.4).
 - Threat model from the research: any phone or server may be seized, so neither may say "girl, 14, not in school".
-- Staff emails live only in Cloudflare Access; D1 holds a peppered hash (C3.2).
+- Staff emails live only in Cloudflare Access; D1 holds a peppered hash (C3.2). A staff member's language is kept in
+  her browser, never on her row (C5).
 - A certificate row holds no token hash, name, band or day; the typed name exists in one variable on the phone (C4.2).
 - The PIN lock stays; there is no quick wipe. Removing a learner is a deliberate Settings action behind her PIN, with
   a spoken confirmation.
@@ -429,7 +446,8 @@ withheld raised them.
 - The lawful basis for under-13s and the final wording are for the solicitor in March (Mo); consent text is versioned
   data, so it changes without code.
 - **Audio** leaves a phone only for adults who said yes on the explainer, under a consent version that names it
-  (C4.5); no child's voice leaves a phone.
+  (C4.5); no child's voice leaves a phone. Since C5: nothing a learner says or records leaves the phone in 2027
+  (speech practice, C5.5, sends nothing).
 - **Moderation:** until paid human moderators exist, the only learner-originated content anyone else sees is a question
   a teacher has rewritten or approved, as today.
 
@@ -730,16 +748,23 @@ phases of their own. Each row's "Since C4" is the row of that note's phase table
 | P25b Certificates (S) | certificates earned from her own events, a typed name never sent, verifiable by id | C4.2: module `cert`, `POST /api/m/cert`, `GET /api/cert/<id>`, `/v/<id>`; `certificates (id, course, version, month, cohort)`; on wherever a pathway with `certificate: true` is served | settled by C4 |
 | P26 Adult tracks (M) | literacy in C size with adult tone; everyday maths; tracks on Home | C4.3: pack fields `tracks` and `bands`, the track rows, bold sheets for the literacy track, the `{child, adult}` sweep, the switch card, four badges, `adult-literacy-1` and `adult-maths-1` as drafts | settled by C4 |
 | P27a English and Chinese lessons (M) | English beginner through Dari and Pashto with recorded voices; Chinese starter from sources.json | C4.4: `letter.script`, `choice.english` and `hide`, `say.answers`, release rules, fonts, the two packs as drafts, `canRecord()` false in the APK | settled by C4 |
-| P27b `speak` (S, gated) | speech checking for adults' short English phrases only | C4.5: off and blocked in code until its three conditions (D12) | settled by C4 |
+| P27b `speak` (S, rewritten at C5) | speech practice with no AI: she records, plays herself back beside the voice, and marks herself; nothing leaves the phone | C5.5 replaces C4.5: module `speak`, no capability, off by default, the admin's switch per cohort; after P35 | settled by C5 |
 | P28 University preparation (S) | link cards to verified free courses and scholarships; a checklist pathway; no promises | C4.6: the `adviser` reviewer role, six months before a card hides, the no-promise lint, no events | settled by C4 |
 | P29 Quran and seerah (M) | verified text and translations (`verbatim`), per-verse audio, retrieval only, AI off, scholar sign-off | C4.7: confirmed sources bundled, unconfirmed ones not; locked until a scholar signs | settled by C4 |
-| P30 Live audio classes (M; only if Mo approves in July and six months are funded) | audio only, listen by default, hand-raising, unique links, no one-to-one, no recording by default, women teachers | out of C4's scope, gated on D9 | yes |
-| P31 Competitions and Olympiads (M; only after the sanctions and safeguarding opinions) | opt-in, avatars, no places for girls, no money prizes | out of C4's scope, gated on the legal opinions | yes |
+| P30 Live audio classes (M; built off by default since C5; switching on gated on D9 and the opinions) | audio only, listen by default, hand-raising, unique links, no one-to-one, no recording by default, women teachers | out of C4's scope, gated on D9 | yes |
+| P31 Competitions and Olympiads (M; built off by default since C5; switching on gated on the opinions) | opt-in, avatars, no places for girls, no money prizes | out of C4's scope, gated on the legal opinions | yes |
 | P32 Learner-made content v1 (S) | section 5.1 v3: her own questions, private, checked by a teacher | C4.8: module `made` off; `share.cohort` blocked; no lesson authoring or class sharing in 2027 | settled by C4 |
-| P33 Box parity and USB sync (M) | every offline module on the hub; USB export and import of packs, approved answers, flags, counts; ready for spring 2028 | | yes, light |
+| P37 Box parity and USB sync (M; numbered P33 before C5) | every offline module on the hub; USB export and import of packs, approved answers, flags, counts; ready for spring 2028 | | yes, light |
+| P33 Staff languages (M) | the staff string files (`app/js/staff/strings/en.js`, `prs.js`, `ps.js`), `lang.js`, the three-way picker on every staff page, the PIN and Access screens included, remembered per device, right to left, Persian digits, Solar Hijri dates, drafts marked, `tools/check_staff_strings.mjs` in CI | C5.1 | settled by C5 |
+| P34 Staff usability (M) | words not ids, numbers, money, dates, refusal codes, B4's ten changes, C5.2, the cohorts table's heads and the Log's detail line in words; the staff browser check at 390 and 1366 px in three languages | C5.B3, C5.2 | settled by C5 |
+| P35 Learner polish (S) | the nine items: the hub chip, one-line titles with a `lead`, the error screen, the sheet drawing on Check, one Dari "yes", one subject row, the nickname field, the one-line draft banner, `bdi` titles | C5 part C, C5.3, C5.4 | settled by C5 |
+| P36 One voice per language (M) | `tools/voice.py`, clips for four languages, the manifests, the release rules met by generated clips, the 30-clip sample per language | C5.6; as soon as the Gemini key is set | settled by C5 |
 | 7a Photo and homework for `open` (S) | photo marking for `open` behind the pilot's four-number gate, with budgets; Homework help off in 2027 | C4.9: `daily_counts`, `photo.per_day`, the `open` recipe in the admin's hands | settled by C4 |
 | 7b An adult study time (S) | one study time a day, off until she says yes | C4.10: `timetable` gains `ad`, the offer, the time-only sheet, Settings → Study time | settled by C4 |
 | 7c Spoken goals (S) | goal chips she hears and taps for adult literacy; no speech-to-text in 2027 | C4.11: the chips screen for the literacy track; `canPlan` admits it | settled by C4 |
+
+Builder order (C5): P33, P34, P35 in one builder session after the security fixes; P36 beside them once the Gemini
+key is set; P27b as C5.5 after P35; P30 and P31 after C6.
 
 Builder order (C4): Builder 1 builds P25a, then P26 with 7c, then 7b, then P25b with 7a; Builder 2 builds P27a, P29,
 P28, P32, and P27b only if D12's sentence is signed by then.
@@ -753,6 +778,8 @@ P28, P32, and P27b only if D12's sentence is signed by then.
 | C2 | 16 Oct 2026, held with C0 and C1 | sheet layout for photos, camera and "what I read", results and hints, Home for in-school versus out-of-school, offline signs, link cards and Credits; which modules `ey` gets (P1 left it out of Ask and Check my sheet) and which modules the `open` cohort switches on (the seed has all five, and Ask's last step is a teacher) | note, mock screens, mock sheet |
 | C3 | 16 Oct 2026, held with C0 and C1 | school day and bells, teacher dashboard, admin panel, review screens, "learn this" entry, APK screens | decisions and specs in DESIGN.md and DESIGN-C2C3-SPECS.md; P9's look-over is a thread review, not a sitting |
 | C4 | 17 Oct 2026, held early with C0 to C3 | Year 1 modules (P25 to P29, P32); photo and homework for `open` with budgets, an adult study time, spoken goals; the 36 open look questions | decisions in DESIGN.md ("C4 decisions") and specs in DESIGN-C4-SPECS.md; the July 2027 slot becomes a thread review of the pilot report against C4's gates (photo for `open`, `recall` for the pilot cohort, homework's numbers), not a sitting |
+| C5 | 17 Oct 2026, held early with C0 to C4 | security (part A), staff pages in English, Dari and Pashto, staff usability, nine learner polish items, Mo's four decisions of 17 October, the login set-up | decisions in DESIGN.md ("C5 decisions") and specs in DESIGN-C5-SPECS.md |
+| C6 | when a member's draft exists | P30 (live audio classes) and P31 (competitions), both built off by default | a member's draft |
 
 Each sitting returns a short decision note for DESIGN.md and the decision log.
 
@@ -778,7 +805,7 @@ a UK post probably from early August. Ramadan about 8 February to 9 March 2027; 
 | 26 Apr to 25 Jun | fixes only; Year 1 behind flags | | **pilot**, Mazar-i-Sharif; pause at Eid al-Adha | weekly 30-minute check-in |
 | July | P25a, P26 with 7c, 7b, P25b with 7a | C4 held 17 Oct 2026; thread review of the pilot report | results by 31 Jul; live-class decision; the C4 gates | results, live classes |
 | Aug to Sep | P27a, P29, P28 | | scholar sign-off for P29 | monthly check-in |
-| Oct to Dec 2027 | P30, P31 if approved; P32, P27b if D12 is signed, P33 | | Kabul and Herat cohorts by flag; CIO application | cohorts, CIO |
+| Oct to Dec 2027 | P30, P31 if approved; P32, P27b if D12 is signed, P37 | | Kabul and Herat cohorts by flag; CIO application | cohorts, CIO |
 | Spring 2028 | | | village-hub pilot | |
 
 About 24 sessions before the pilot across 27 weeks leaves slack: a missed week slides a week, not a gate. If the port
@@ -850,7 +877,8 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | D9 | Live audio classes | July 2027 | 31 Jul | no until funded |
 | D10 | Ministry recognition | after 22 Dec | none | not in 2027 |
 | D11 | Google's Android developer verification: register Qalam's package and signing key under Mo's own identity or the organisation's (an organisation account needs a D-U-N-S number; a personal one ties Mo's name to the app in Google's records) | 23 Dec | 31 Jul 2027, before any install beyond the pilot | no registration during the pilot: facilitators install pilot phones over USB, everyone else uses the web app |
-| D12 | `speak`'s consent sentence and DPIA line: a short recording of an adult's voice goes to OpenAI to be written as text and is thrown away; adults only, English only (C4.5) | 23 Dec | to the solicitor in March 2027, or not in 2027 | not in 2027: P27b slides to 2028 and nothing records |
+| D12 | *Withdrawn at C5 (C5.5: speech practice sends nothing).* `speak`'s consent sentence and DPIA line: a short recording of an adult's voice goes to OpenAI to be written as text and is thrown away; adults only, English only (C4.5) | 23 Dec | to the solicitor in March 2027, or not in 2027 | not in 2027: P27b slides to 2028 and nothing records |
+| D13 | The consent text naming the providers a class may use (each provider, its country, its retention), online and hub, in the four spoken lines and the full text, three languages (C5.A3) | 23 Dec | to the reviewers in January, the solicitor in March | until signed, the pilot runs on OpenAI online and `local` on the hub |
 
 ### 9.3 Decision log
 
@@ -901,5 +929,10 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | 17 Oct 2026 | P32 built, trimmed by C4.8: module `made` (s1, s2 and adult readers; depends `lessons`; slot `lesson.end`; capability `free.text`; `per_day` 10; off in every seed, no migration seed), layer 1 on the phone (state `made`, at most 50, question, answer and why at most 300 characters each, typing refuses a web address, an email, seven digits or "my name is"; her due questions fill the warm-up after spaced review, self-marked, a week on or tomorrow; "Make a question about this lesson" at the lesson's end, never for Quran or seerah; "My questions" at each subject page's end; `#/made`), layer 2 where `teacher` is on (`POST /api/m/made` after `rules.py` and the identifier filter, distress to Needs care; `GET /api/m/made/mine`; To do's last kind "Made by a learner" and `POST /api/m/teacher/made/{id}` with the five chips and a short reply through the leak and identifier filters); `made` table (`migrations/0017`) kept 60 days after sending or deciding and deleted with her; `share.cohort` registered as blocked with no route or screen. Builder's choices, to confirm: `share.cohort` is not in `made`'s manifest (listed there it would block the whole module without paid-human moderation); anything `rules.py` stops other than distress is refused with its message rather than sent on; a learner sends to her own cohort only (no `?cohort=`); a teacher's reply with a name or number is scrubbed, one with her answer refused; "my name is" is caught as she types too; she cannot resend a question after a change is asked (she makes a new one); delete takes two taps | builder | this thread |
 | 17 Oct 2026 | The AI provider switch, superseding "OpenAI only" (16 Oct): any provider for any cohort, picked with its model in the admin panel (cohort settings `ai_provider`, `ai_model`; in `admin_log`; used from the next request): `anthropic` (Claude's Messages API over HTTPS), `openai`, `gemini` (its OpenAI-compatible endpoint), `openai_compat` (any OpenAI-compatible server, Chinese-hosted ones included, at `TUTOR_COMPAT_URL`), `local`, `fake`. Each goes only to its own host; no code gate for regions, ages or China (each provider's terms noted in HOSTING.md); keys only as Worker secrets or environment variables, shown only as set or not set. Staging's default is `anthropic,fake`: Claude when `ANTHROPIC_API_KEY` is set (the deploy job puts the repository secret of that name on `qalam-staging`), else the fake. The owner: Claude for testing, not used in Afghanistan. Filter, rules screen and budgets unchanged for every provider | Mo | Mo's messages, 17 Oct; HOSTING.md |
 | 17 Oct 2026 | C5 security fixes (review_c5_opus.md part A) and two owner's decisions. H1: a learner's request takes its class only from her token (`Hub.her_cohort`), so the kill switch, hold, budget, provider and module switches are her class's and `?cohort=` naming another is ignored; without a token a write is the hub's own cohort's, and `?cohort=` is read only on GET reads and the staff routes; the phone now sends her token with "Ask my teacher", goals (superseding P22's "no token is read or sent": the wish is still kept without it), certificate prints and prints. H2: online, tokenless limits count `CF-Connecting-IP` (never trusted where a socket address exists); joins 300 an hour an address, wrong class codes 20. H3: provider-neutral consent texts `hub-2026-10b` and `online-2026-10b` in three languages (drafts; the old ones stay for their records), instead of the review's per-consent provider table, since any provider may now be picked. M1: staff writes online need `X-Qalam: 1` (403). M2: `_headers` from the Worker build (`frame-ancestors 'self'` everywhere, as the review page frames the app; a full CSP and DENY on the staff pages) and the same on the hub's staff pages. M4: `signoffs.via` (`migrations/0018_prices`); `pull_signoffs.py` copies PIN-made signatures only with `--hub-ok`; `validate_pack --release` does not list them (the pack's signoff shape is unchanged). L1 lock codes in the admin Log, L2 hub-wide PIN spacing (30 wrong an hour, then one check per 10 s), L3 one key fetch a minute for unknown key ids, L4 subject 40 and lesson 80, L8 Sign out on review. M3 and the Access set-up are Mo's (HOSTING.md "Security fixes (C5)"); L5, L6, L7 wait for the next hub work. Owner: production may default to `openai`, `anthropic`, `gemini` or `openai_compat` (guard.py; not `fake` or `local`, and no key in `[vars]`), superseding P24's "only off or openai"; an AI price table on the spend page (`ai_prices`, USD per million input/output tokens per provider and model or any model, empty by default, logged). The Worker test's bound for a fresh database's first request is now 31 queries | builder | this thread |
+| 17 Oct 2026 | Mo: any AI provider for any class (Claude, OpenAI, Gemini, open or Chinese models), picked per cohort in the admin panel, each only to its own host, through the gateway, bounded by what the class's consent text names (C5.A3); supersedes C4's "never Claude or Gemini" | Mo | DESIGN.md "C5 decisions" |
+| 17 Oct 2026 | Mo: every text Qalam writes is voiced with Gemini in one woman's voice per language (Dari, Pashto, English, Mandarin), rendered at build time from strings and pack text, never from anything a learner typed; scripture keeps its human reciter; supersedes F1, DESIGN 9 and C4 rule 5 (C5.6) | Mo | DESIGN.md "C5 decisions" |
+| 17 Oct 2026 | Mo: speech practice uses no AI: she records, plays herself back beside the voice and marks herself; nothing leaves the phone; supersedes C4.5; D12 withdrawn (C5.5) | Mo | DESIGN.md "C5 decisions" |
+| 17 Oct 2026 | Mo: speech practice, live audio classes (P30) and competitions (P31) are built, switched off by default; P30 and P31 specified at C6 | Mo | DESIGN.md "C5 decisions" |
+| 17 Oct 2026 | C5 (design committee, held early): the six security rulings (C5.A1 to A6: the class from her token; `CF-Connecting-IP`, 20 wrong codes and 300 joins an hour an address; consent names the providers; one Access application with independent MFA for every staff member; Lax cookie, 24-hour sessions, `workers_dev = false`; PIN signatures `via: pin`, never a scholar's or adviser's); staff pages in English, Dari and Pashto with one string file per language, the polite plural, Solar Hijri dates (C5.1); B4's ten usability changes with C5.2 and two of the chair's; the nine learner polish items with C5.3 and C5.4 ("بلی" everywhere in Dari); phases P33 to P36 and P27b rewritten; the old P33 (box parity) renumbered P37; D13 (the consent text naming the providers) added | design committee | DESIGN.md "C5 decisions"; DESIGN-C5-SPECS.md; decisions_c5_fable.md |
 
 New decisions are added with date and source; a row is never edited, only superseded.

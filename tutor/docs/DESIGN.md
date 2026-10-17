@@ -23,7 +23,8 @@ top of `app/css/app.css`; screens use only tokens, so a look is changed in one p
   picture stands for her, and names appear only on certificates (Year 1).
 - **One big button** on Home starts the right lesson: the one left half way, else the next one not done.
   Every lesson is still open from the subject pages; nothing is locked.
-- **A speaker on every text,** buttons included. A recorded clip plays first; the phone's own voice is the fallback.
+- **A speaker on every text,** buttons included. The language's one voice plays first; the phone's own voice is the
+  fallback (C5, change 13).
 - **Three tabs only:** Lessons, Ask, and Print (hub) or Sheets (online). The teacher page is behind "Who is learning" and a PIN; so is Settings.
 - **Plain words, the child's language,** Persian digits, right to left; sums and English left to right.
 - **Wrong answers teach:** three hints (the lesson step, a worked example with other numbers, the first move), read
@@ -278,16 +279,21 @@ The lock is a privacy curtain on a shared phone, not security: it stops a siblin
 
 ## 9. Voice
 
-`speech.js` plays, in order: a recorded clip from the pack or from `app/audio/<lang>/<key>.opus` (interface clips,
-about 300 per language, recorded by a native speaker; `manifest.json` names who recorded each), then the phone's own
-voice if it has one for the language (Dari and English on most Android phones; Pashto on none), then today's "voice
-not ready yet" toast. No synthetic Dari or Pashto voice is ever shipped: a learner of letter sounds must hear a real
-speaker. Release of a pack needs clips for every `ey` and `p1` step and every `letter` step, and for every step of a
-pack the adult literacy track sees (C4.3). An English or Chinese lesson takes no phone voice at all (P27a, C4.4):
-every word she copies is a human voice, and an unrecorded one says "This word is not recorded yet". Scripture and its
-translations take no phone voice at all (C4, change 7):
-an unrecorded translation shows without a speaker, marked `data-voice="none"`, which the browser check allows on
-those elements only.
+Rewritten at C5 (change 2, replacement spec C5.6; Mo's decision of 17 October). `speech.js` plays, in order: the
+language's clip from the pack or from `app/audio/<lang>/<key>.opus`, then the phone's own voice if it has one for the
+language, then the "voice not ready yet" toast. Every text Qalam writes (interface strings, the staff strings, and the
+lesson texts, phrases and letter sounds a pack marks for voice) is voiced at build time by `tools/voice.py` with one
+fixed woman's voice per language (`prs`, `ps`, `en`, `zh`); the voice id is recorded in
+`app/audio/<lang>/manifest.json` and in each pack's audio manifest, and a changed voice re-renders every clip of that
+language, so one language is always one voice. Only Qalam's own strings and pack text go to the voice service, never
+anything a learner typed, a name, an event or anything from D1 or a hub. Before any clip of a language ships, a native
+listener passes a sample of 30 clips; a language with no voice good enough waits, and there the phone's voice or the
+toast stands. The release rules that asked for a recorded clip (every `ey`, `p1` and `letter` step, every step the
+adult literacy track sees, every word of the English and Chinese packs) are met by a generated clip, each still played
+by the reviewer before OK (P17). Scripture is not a text Qalam writes: the Quran keeps its human reciter, and its
+translations take no phone voice at all (C4, change 7): an unvoiced translation shows without a speaker, marked
+`data-voice="none"`, which the browser check allows on those elements only. Until P36 renders the clips, the recorded
+clips and the phone's voice stand as before.
 
 ## What P9 built, and where it differs
 
@@ -335,7 +341,10 @@ those elements only.
 - The net chip, the badges, "Send when I'm online" and the empty states are built as C2.5 says. Open for the next
   sitting: at 360 px a header with a long title or a kicker ("Ask", "Check my sheet") has no room for "Offline · 1
   waiting" beside it, so the chip then takes a line of its own under the header, at the end (left in Dari and
-  Pashto); a short title keeps it beside. The title is given at least 6rem before the chip moves down.
+  Pashto); a short title keeps it beside. The title is given at least 6rem before the chip moves down. Since C5
+  (changes 7 and 8, C5.3): the chip is hidden on both hosts while all is well (online with the network up, or on the
+  hub with the hub in reach, nothing sending or waiting), and it moves down whenever the title would wrap beside it,
+  measured after the screen is drawn; a sentence under the title is a `lead`, the kicker keeps a few words.
 - On the hub, a question asked while the hub is out of reach gets the same "Send when I'm online" button; "online"
   there means "the hub in reach". Open: a hub wording ("Send when the hub is near").
 - In early years the chip is off every screen the child uses (Home, lessons, subject pages) and on the grown-up's
@@ -434,7 +443,8 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
 ## What P17 built, and where it differs
 
 - `/review/` is its own page in the clean look and adult tone, English or Dari (a switch in the header; the Dari
-  strings are drafts). Online it opens through Cloudflare Access; on the hub, through the teacher's PIN, then "I
+  strings are drafts). Since C5 (change 9, C5.1): English, Dari or Pashto, the same three-way picker on every staff
+  page, remembered per device; dates in Solar Hijri for Dari and Pashto (change 12). Online it opens through Cloudflare Access; on the hub, through the teacher's PIN, then "I
   review as" (the roles lessons need) and "My initials".
 - "Lessons for you", grouped by pack, with a tag per lesson: Not started, Step n of N, Changes asked, Signed,
   Changed since you signed.
@@ -477,7 +487,7 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
 ## What P20 built, and where it differs
 
 - `/teacher/` is its own page in the clean adult look, English or Dari (the Dari strings are drafts for a native
-  speaker's check), with four tabs: To do (with a count), Class, Lessons, Wishes. On the hub it opens with the
+  speaker's check; since C5, English, Dari or Pashto through the staff picker, remembered per device), with four tabs: To do (with a count), Class, Lessons, Wishes. On the hub it opens with the
   teacher's PIN, kept in the page's memory only; online Cloudflare Access signs her in and "Sign out" ends the Access
   session. Offline it says "Connect to see your class" and keeps nothing.
 - To do shows one card at a time, "1 of 3" at its top right, Previous and Next under it, and the keys hint below
@@ -524,6 +534,7 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
 - `/admin/` as item 12 draws it: the header (title, a language chip, Sign out), a 200 px menu on the start side at
   1366 × 768 and a select at the top under 760 px; tables scroll inside their own box. Dari mirrors the page; codes,
   times and hashes sit in `.m`. English by default; the Dari strings are drafts (the rest fall back to English).
+  Since C5 (change 9, C5.1): English, Dari or Pashto through the staff picker, remembered per device.
 - A cohort's page: "Cohorts › Mazar class" with the two kill switches as outline `--bad` buttons at the end of the
   line; learners, bands, languages and "join code ****" with New code and Class cards. **No Show button:** the code is
   stored hashed (C3.3, P10), so it is shown once, when the cohort is made or a new code drawn, and Class cards asks
@@ -531,7 +542,12 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   and blocked on the bad fill; the switch from Settings; a Settings chip only where the manifest has settings), one
   Settings line with Edit, one School day line with "Edit the timetable", and AI today as a bar (warm from 80%).
 - Every confirm is one dialog: the question, any lines (the risk sentence, the diff, the dependencies), the confirm
-  button first and Cancel.
+  button first and Cancel. Since C5 (change 11): for a change that cannot be taken back (a new code, removing staff,
+  a rollback) focus lands on Cancel; Escape cancels every dialog.
+- Since C5 (change 10, C5.2): the module table speaks in words (the module's name and what it does, risk as a word,
+  bands as years; the id under Details), and under 760 px each module is a card; the kill switches are a state line
+  with its action ("AI is on · Switch AI off"); the class line says what Qalam can do and the class code has its own
+  row with "Print class cards" and "Make a new code".
 - The timetable editor is a page of its own: school-day ticks, holidays one date a line, Ramadan's shorter day (a
   tick, then from, to, start and minutes a period), then per band "has a school day", the start time and a table of
   blocks (the time each starts, worked out; kind; subject for a period; minutes; ↑ and Remove), "Add a block", and
@@ -1305,3 +1321,384 @@ Two builders, one after the other, each session reading only its phase's files a
    the module stays off.
 4. **Recorders:** a native English speaker and a native Mandarin speaker, besides Pack 1's Dari and Pashto recorders,
    who face the year's largest recording job in the two adult packs. Default: those packs stay drafts.
+
+# C5 decisions
+
+The design committee's note on sitting C5, as the chair wrote it (model names left out). Builders code from it and
+from the accepted specs in [DESIGN-C5-SPECS.md](DESIGN-C5-SPECS.md); where they differ, this note wins. The changes it
+makes to the earlier text above (2, 7, 8, 10, 12 and 13) are applied there, and section 9 (Voice) is rewritten as
+C5.6. What P33, P34 and P35 built is recorded at the end of this note.
+
+The chair and one member (the draft, filed as `DESIGN-C5-SPECS.md`, with its screenshots in the committee's `c5-shots/`).
+17 October 2026, held early with C0 to C4, on the day Mo set the goal this sitting serves: "a very beautiful, high
+quality app usable for its intended purpose, and a very user-friendly administration interface in English, Dari and
+Pashto, interchangeable, swap languages easily; think about security and methods of logging in." Mo was not available,
+so every open point is decided here with a sensible default and recorded for him to overrule in the decision log. No
+web checks: the draft's two Cloudflare look-ups are taken as read, and nothing else turns on a contested fact. Part A
+(security) is being built by a separate builder exactly as the draft proposes; this note rules only on the six
+security questions the draft asks (questions 1 to 6) and settles the login set-up Mo will configure. "Accept" means
+the draft's spec for that item is the builder's spec with the notes here applied. The builder copies the draft into
+`tutor/docs/DESIGN-C5-SPECS.md`; where the two differ, this note wins. English strings are drafts; every Dari and
+Pashto line is checked by native speakers before a learner or a teacher sees it as final. The chair looked at a02, a03,
+a04, a07, a10, a11, a12, a13, a14, t02, t08 and r04, and at nine learner shots (Home for p1, for s1 in English and for
+adult literacy with Bigger text; Welcome, Ask, Check, Subjects, Settings; the adult lesson with Bigger text), and read
+the code the draft cites where a ruling turns on it.
+
+## Mo's decisions of 17 October, recorded
+
+Four decisions Mo made on 17 October supersede committee text. They are recorded here, as the draft asks (A3.4), and
+none is reopened.
+
+1. **Any AI provider for any class** (Claude, OpenAI, Gemini, open or Chinese models), picked per cohort in the admin
+   panel, each only to its own host, through the gateway as before. This supersedes C4's rule "never Claude or Gemini"
+   and BUILD-PLAN 3.7's provider policy (already marked superseded there). What a class may actually use is bounded
+   by what its learners' guardians agreed to: the draft's H3 fix (providers limited to those the class's consent
+   version names, refused at save and at call time) is the code form of that, and a consent version naming each
+   provider, its country and its retention is the content it needs (What needs Mo).
+2. **Every text Qalam writes is voiced with Gemini in one woman's voice per language** (Dari, Pashto, English,
+   Mandarin), replacing the human-recordings rule (F1, DESIGN 9, C4's rule 5). The clips are rendered at build time
+   from strings and pack text, never from anything a learner typed, and ship as files as the recorded clips did; the
+   voice is one fixed voice id per language, so no learner hears two voices in one language. Scripture is not a text
+   Qalam writes: the Quran keeps its human reciter and its translations keep `data-voice="none"` (C4.7).
+   Replacement spec C5.6.
+3. **Speech practice uses no AI:** she records, plays herself back beside the voice, and marks herself. Nothing
+   leaves the phone. This supersedes C4.5 (`speak` through OpenAI) and withdraws D12. Replacement spec C5.5.
+4. **Speech practice, live audio classes (P30) and competitions (P31) are built, switched off by default.** C4 had
+   P30 and P31 out of scope. Speech practice is specified here (C5.5), since it is small; P30 and P31 need a member's
+   draft and a sitting of their own (C6), and this note fixes only their default (off) and what gates switching
+   them on (change 4).
+
+## The rules this sitting applied, beyond C0 to C4
+
+- Ease of use above all: words, never ids, on a staff page; one language control, the same in both apps; the fewest
+  things on a phone screen; a state and its action, never a button that reads as a state.
+- Nothing new on the server describes a person: a staff member's language lives in her browser, not on her row; no
+  staff setting row is added.
+- Drafts are marked as drafts until a native speaker signs, in both apps; a missing string falls back to English,
+  never to a key name.
+- Hints never answers; no name on any row; no child's voice leaves a phone (anything that sends audio is for adults
+  only, enforced in code): unchanged, and nothing here touches them. Speech practice sends nothing, so it serves
+  every band its pack serves.
+- Calendars and digits follow the reader: Solar Hijri and Persian digits in Dari and Pashto, Gregorian and Latin in
+  English; codes, PINs, versions and hashes never convert.
+
+## A. Security: the six rulings the draft asked for
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C5.A1 | H1: the class comes from her token | **Accept.** A learner route takes her class from her token only; a tokenless call uses the hub's own cohort; `?cohort=` survives only on `/api/hello` and the timetable read. | There is no case where a phone acts in a class other than its token's: a shared phone carries one token per learner, a learner who changes class joins again, and staff act through staff routes. | As the draft: `her_cohort()` in `needs()`, `needs_any()`, ask, photo, cert, plan and the three `record()` calls; the three tests. |
+| C5.A2 | H2: the online limiter | **Accept the numbers:** `CF-Connecting-IP` online, the socket on the hub; 20 wrong class codes an hour per address; 300 successful joins an hour per address. | 20 wrong tries keep an 8-of-31 code unguessable; 300 lets a whole school join behind one carrier address on its first morning. | As the draft, with its three tests. |
+| C5.A3 | H3: consent names the providers | **Accept.** A class with learners may use only the providers its consent version names: `openai` and `fake` under `online-2026-10`; `local`, `fake` and `openai_compat` on the hub's own network under `hub-2026-10`; staging keeps a version of its own that names all six. Refused at save ("Learners in this class agreed to OpenAI only. A new consent text is needed first.") and again at call time. | Mo's decision widens what Qalam may use; it cannot widen what a guardian agreed to. The gate makes the two meet in the consent text, which is where they belong. | As the draft: the table in `ai/policy.py`, the 422, the gateway refusal, the two tests, the key-leak test (A3.3). The new consent version is content (What needs Mo). |
+| C5.A4 | Login: one Access application | **One application, independent MFA for every staff member.** The second application is not built. | A second list and a fourth secret are the drift M3 describes, kept twice; an admin's extra protection is the last-admin guard, the Log, and two registered factors each. | Nothing beyond A2; `TUTOR_ACCESS_ADMIN_AUD` is not built. |
+| C5.A5 | Cookie, session, hostname | **Accept:** SameSite Lax with the binding cookie, HttpOnly, 24-hour sessions, `workers_dev = false` in production once the custom domain serves. | Lax stops the forged form (M1) without breaking the sign-in redirect; a day is one sign-in a working day; one hostname is one door. | `workers_dev = false` lands with Mo's Access step (login list, item 1). |
+| C5.A6 | Hub sign-offs by PIN | **(a), with one exclusion:** a signature made with the shared PIN is stored `via: pin`, never copied by `pull_signoffs.py` without `--hub-ok "<who vouches>"`, and listed by `validate_pack.py --release`; the scholar's and the adviser's signatures count only from a named online row, whatever the voucher says. | Village readers may well sit at a hub, and a named voucher is accountability enough for a reading; a religious or a university gate is met by a person the server can name, not by whoever knows a PIN. | `via` on `signoffs`; the pull tool's flag; `release_problems` and the admin's locked switches (admin.py:187-189) refuse a `pin` row for the roles `scholar` and `adviser`. |
+
+## B. Staff pages in English, Dari and Pashto
+
+| # | Item | Decision | Why | The builder must |
+|---|---|---|---|---|
+| C5.B1 | B2: one string file per language, a three-way switch on every staff page | **Accept, amended** (replacement spec C5.1). | Today the admin panel is 58% Dari and 0% Pashto, the teacher page starts in whatever the browser says, the review page writes Latin digits in Dari, and nothing is remembered; three pages keeping three private dictionaries is how it got that way. One file per language, one `lang.js`, the picker the learner app already taught, remembered in the browser, is the least that makes "interchangeable" true. | C5.1. Phase P33. |
+| C5.B2 | B3: the draft strings and the register | **Accept the drafts; the polite plural** ("کنید", "کړئ") on every staff page in both languages. | Staff are adults addressed by an institution; the polite plural is what Afghan software and letters use for them. The learner app keeps the singular for children; its adult tone's register is the native reader's call in January, not this sitting's. | Rewrite the existing informal Dari staff strings as drafts in the plural; the native speakers check the register with the rest (question 8). |
+| C5.B3 | B4: the ten usability changes | **Accept all ten,** amendments on 2, 3, 4, 5 and 10 below. | Each one takes a thing an admin must know (what "ask 0.1.0 medium pilot" means; that the code cannot be shown again; that a grey Publish button is a missing check) and puts it in a sentence where she is looking. | The list below; replacement spec C5.2 for the cohort page's head. Phase P34. |
+
+**The ten changes (B4)**
+
+1. Words, not ids, in the module table: accept (C5.1 item 5).
+2. Modules as cards under 760 px: accept; a card is the name and its line, the switch on the same row, the risk tag
+   and the years as small text under the name, Settings under that. The 390 px table that cuts the switches in half
+   (a14) is not shipped again.
+3. Kill buttons say what they do: accept, shaped as C5.2: a state line with its action beside it; `--bad` only while
+   the thing is off.
+4. The class line and the code: accept, worded as C5.2: the row says what Qalam can do, not what it once did.
+5. Content page: accept. "0 of 8 packs ready" at the top; one line per pack, "Not ready: 31 checks missing", opening
+   the list; the Publish rows only for a pack that can be published; a published pack says where and when
+   ("Published to Village hub, 25 Mizan").
+6. Staff page: accept; "No class yet" for a teacher without one, nothing for other roles; roles in words; the Access
+   reminder under "Add someone".
+7. Empty states that say what comes next: accept, one sentence each, in the string files so the native speakers see
+   them.
+8. Teacher page on a phone: accept; the keys line hidden under `(hover: none)`; "، " after numbers in Dari and
+   Pashto through `join()`.
+9. Finish Dari and add Pashto: accept (C5.B1).
+10. Confirm dialogs: accept. For a change that cannot be taken back (new code, remove staff, rollback) focus lands on
+    Cancel; Escape cancels every dialog; the button order stays as P21 built it (confirm first, Cancel last), since
+    an order that changes per dialog is its own trap; the kill switches keep the quick path and their "All cohorts"
+    box.
+
+**Two more from the chair's look** (fixed in P34, no phase of their own): the cohorts table's heads go to sentence
+case and plain words ("Learners", "Years", "Languages", "AI", "School day"; "every band" becomes "all years"); the
+Log's detail line is written through `t()` and `num()` ("AI budget: not set → ۲۰۰٬۰۰۰"; "the hub's admin" and "the
+seed" for `admin:hub` and `seed`), as C4 q29 already asks of `what`.
+
+## C. The learner app: the nine polish items
+
+The draft is right that the app is already clean (26 of 26 screens pass the browser check; the chair saw nothing the
+nine miss). Each in one line; the fixes land as phase P35 with screenshots at 360 px in all three languages, light,
+dark and Bigger text.
+
+1. Hide the hub chip while the hub is in reach: **accept** (question 10). One rule on both hosts: the chip shows only
+   for "No hub" or "Offline", for "Sending…", and while items wait. Replacement spec C5.3.
+2. One-line titles at 360 px: **accept** (question 11): the header gains a `lead` slot under the title for a sentence,
+   the kicker keeps a few words; the chip moves down whenever the title would wrap; Subjects loses its second head.
+   C5.3.
+3. An error screen with a way forward: **accept, extended:** "Try again" re-runs the screen; in a band with no tab
+   bar a second button, "Home". C5.4.
+4. Check my sheet: **accept:** a line drawing of the sheet's bottom corner with the code circled, marked `line: true`
+   so dark inverts it; no placeholder once the drawing is there (the drawing carries the example `M7-03-48217`).
+5. One Dari "yes": **"بلی"** everywhere (question 12): the five "بله" at i18n.js 52, 133, 261, 300 and 307 become
+   "بلی" now; the native reader may overrule in January and sweeps the other doublets. Chair's check: the Pashto
+   "بله" (i18n.js 641, "بله لارښوونه", "another hint") is a different word and is not touched.
+6. Subject rows share one layout: **accept:** one row shape (the name, then "۰ از ۱" and the bar under the name
+   column, the chevron at the end); where her year has no lessons, the muted "No lessons for your year yet" in place
+   of the count, at the same height.
+7. Settings, the nickname card: **accept:** the caption stays, the field is empty with no placeholder (an example
+   nickname would be copied, and some would read as a name).
+8. The draft banner on one line: **accept:** "Draft: not checked yet" with its Dari and Pashto drafts
+   ("پیش‌نویس: هنوز بررسی نشده", "مسوده: لا نه ده کتل شوې"), one line at 360 px with Bigger text in all three; the
+   browser check gains that rule for `.draft`.
+9. Mixed scripts in English titles: **accept:** each lesson title in a `bdi` with its own `lang`; the pack validator
+   lists (warns, never refuses) lessons offered in English without an English title.
+
+## The twelve questions
+
+1. **H1:** accept; no such case exists, so `?cohort=` is ignored on every learner route and kept only for
+   `/api/hello` and the timetable read.
+2. **H2:** accept the numbers: `CF-Connecting-IP`, 20 wrong codes an hour per address, 300 successful joins an hour
+   per address.
+3. **H3:** accept; Mo's 17 October decision is recorded above as a supersession of C4's rule, and the new consent
+   version naming each provider, its country and its retention is content for Mo, the reviewers and the solicitor in
+   March (default until signed: OpenAI online, `local` on the hub, anything on staging).
+4. **Login:** one Access application with independent MFA for every staff member; the second application is not
+   built.
+5. **Cookie, session, hostname:** accept all three (C5.A5).
+6. **Hub sign-offs:** (a), and the scholar's and adviser's signatures count only from a named online row (C5.A6).
+7. **Staff languages:** accept B2 as C5.1; the learner app's `i18n.js` moves to one file per language as its own
+   small phase after the native speakers' January check, keys and behaviour unchanged, `bands.test.js` and the
+   browser check green before and after; not in this run.
+8. **Register:** the polite plural on every staff page; the native Dari and Pashto speakers who check the learner
+   strings check the staff drafts, by the end of January 2027, the teacher page first because the facilitator uses
+   it from the pilot's first day.
+9. **Staff dates:** Solar Hijri with the certificate's month names in Dari and Pashto, Gregorian in English; the
+   day-level `hijri()` and its test table as C5.1 item 8.
+10. **The hub chip:** accept; P11's hub chip follows C2.5's reason on both hosts.
+11. **Ruling 4 refined:** accept; the chip moves down whenever the title would wrap, and a sentence kicker goes
+    under the title as a `lead`.
+12. **"بلی":** yes, everywhere in Dari now, pending the native reader; the Pashto "بله" is a different word and stays.
+
+## Replacement specs
+
+### C5.1 The staff language layer (B2, amended)
+
+- Files and helpers as the draft's items 1 to 4, 9 and 10, with these notes. `en.js` is imported statically (it is
+  the fallback and always present); `prs.js` and `ps.js` by dynamic import; a failed import keeps English and says
+  nothing.
+- **The picker:** the learner app's segmented control, in the staff tokens: `English`, `دری`, `پښتو`, the current
+  cell filled with `aria-pressed="true"`. In the header at 760 px and above; under 760 px (the one breakpoint the
+  staff pages already use) on its own row under the title. The teacher page at 390 px: title and Sign out on the
+  first row, the cohort chip and the picker on the second, the tabs on the third, so its header stays three rows.
+  The PIN screen and the "sign in through Access" message carry the same picker above their one line, since a
+  teacher's first screen must be in her language. No speakers (rulings 13 and 20).
+- **Remembered:** `localStorage` `qalam.staff.lang`, read and written in try/catch; first visit from
+  `navigator.languages` (`fa` or `prs`: Dari; `ps`: Pashto; else English); never on a staff row.
+- **`<html lang dir>`:** the values the learner app's `htmlLang()` gives for the same languages (`fa-AF` for Dari,
+  `ps-AF` for Pashto, `en` for English); the admin's menu, the teacher's tabs and the review frame mirror; `m()`
+  keeps codes, emails, ids, model names, versions, hashes and URLs left to right.
+- **Words, not ids** (item 5): `module.<id>`, `module.<id>.what`, `band.<id>`, `risk.<level>`, `maturity.<level>`,
+  `role.<name>`, `log.<what>` and `error.<code>` in the string files, never in a manifest; the id in small `m()`
+  text under Details. `check_staff_strings.mjs` fails when a module id in `app/modules/*/manifest.json` has no
+  `module.<id>` in `en.js`, or a `code` the server emits has no `error.<code>` in `en.js`. A module or a code with
+  no string shows its id, so a new module never breaks the page.
+- **Refusals** (item 6): the ten codes as the draft lists them, `code` beside `detail`; the page shows
+  `error.<code>`, else the server's sentence.
+- **Numbers** (item 7): as the draft, Persian digits for Dari and Pashto alike (the learner app's `fa()` already
+  converts for both); the PIN field and the class-code field accept either digit set and convert before sending, as
+  the learner app reads answers in any digits.
+- **Dates** (item 8): as the draft. `hijri()` in `cert.py` is month-level today (`hijri(month) -> (year, month)`);
+  it grows to the day in Python, with a JavaScript copy in `lang.js`, and one table in `tests/` of 25 known dates
+  (the first and the fifteenth of each month of 1405, and Nowruz 1406) feeds both; the builder checks the table
+  against a printed Afghan calendar, and a native speaker reads the month names on the page. Chair's check:
+  17 October 2026 is 25 Mizan 1405 (six months of 31 days from 21 March, then Mizan), as the draft writes. Times in
+  the viewer's zone; the server keeps ISO.
+- **Drafts** (item 9): `meta.checked` per file; "Draft translation" in the footer while false; the native speaker's
+  initials set it, as a sign-off.
+
+### C5.2 The cohort page's head (B4 items 3 and 4)
+
+- The two kill switches become two state lines at the top of the cohort page, each with its action beside it:
+  "AI is on · Switch AI off" and "School day is on · Switch the school day off" (through `join()` in Dari and
+  Pashto), plain outline buttons, the confirm dialog as built, "All cohorts" kept. While a thing is off, its line is
+  a `--bad-soft` band with `--ink` text, "AI is off for this class since 14:30 (Teacher A)", and the one button
+  "Switch AI on". The sticky line (C4 q30) holds the same two lines while the module table scrolls. The cohorts list
+  keeps its "AI on" and "School day off" tags, which are states and read as states.
+- The class line: "8 learners, all years, Dari, Pashto and English" (words from the strings, through `join()`).
+  Under it one row, "Class code", with a sentence: "Qalam keeps only a scrambled copy of the code, so it cannot be
+  shown again. Printing the class cards asks you to type it. Lost it? Make a new code; the old one stops working."
+  Two buttons: "Print class cards" and "Make a new code". The code is shown once, large, in `m()`, when the cohort is
+  made or a new code is drawn, with "Write it down now".
+
+### C5.3 The learner header and the chip (Part C items 1 and 2)
+
+- `netChip()` returns the hidden chip on both hosts while all is well: online when the network is up and nothing is
+  sending or waiting (as today); on the hub when the hub answers and nothing is sending or waiting. It shows for
+  "No hub" or "Offline", for "Sending…", and while items wait, with the sheet behind it as P11 built. Early years
+  keeps its rule (no chip on the child's screens).
+- The header takes `kicker` (a few words above the title: "New learner", a subject name) and `lead` (a sentence
+  under the title in the small size, which the page speaker reads after the title). Ask's and Check's sentences
+  become leads; Welcome keeps its kicker. The title gets the whole row first: the chip and anything else after the
+  speaker move to their own row at the end whenever the title would wrap on one line (measured after render, not at
+  6rem), and the title never wraps beside them. Subjects: one head, the title.
+
+### C5.4 The error screen (Part C item 3)
+
+- `main.js` draws the error as a screen: "Something did not work." with the page speaker, a primary "Try again"
+  (60 px in bold bands, 72 px in early years, read on open where Home is read on open) that runs the same screen
+  with the same arguments, and, in a band with no tab bar, an outline "Home". The tab bar stays where the band has
+  one. Nothing is sent, no event.
+
+### C5.5 Speech practice without AI (replaces C4.5)
+
+- Module `speak`: bands as the pack's `say` steps serve (English, Chinese, the literacy track's letters); depends
+  `lessons`; no capability (hear-yourself on the phone is none, C4 change 2); no setting; `offline: yes`. Off by
+  default in every cohort, the admin's switch per cohort, logged like any switch.
+- Where it runs: the web app over HTTPS. Not the APK, which has no microphone (C3.6 stands for 2027), and not the
+  hub's plain http (F2): there the `say` step is "hear it, say it" with no mic drawn, as C4.4 built it.
+- The step, where `speak` is on: "Play the voice", "Record" (8 s at most, in memory only; the first tap shows one
+  line, "Qalam uses the microphone for 8 seconds. Nothing is kept or sent.", before the browser asks), then
+  "Play mine" beside "Play the voice", then "I said it" or "Not yet"; three goes, then "Let's go on."; Next is never
+  blocked. The recording is dropped when the step closes: never storage, a request, an event or a log, every writer
+  patched in the test (P14's pattern). No transcript, no mark from a machine, no "Correct": she marks herself, as
+  `recall` lets her.
+- D12 is withdrawn; `say.answers` stays in the content as the model phrase only; `listen` leaves the purposes.
+
+### C5.6 The one voice per language (replaces DESIGN 9's recording rule)
+
+- `tools/voice.py` (UK side, never on a phone or a hub) renders every interface string in `i18n.js` and the staff
+  string files, and every lesson text, phrase and letter sound a pack marks for voice, to clips with Gemini's
+  text-to-speech, one fixed woman's voice per language (`prs`, `ps`, `en`, `zh`); the voice id is recorded in
+  `app/audio/<lang>/manifest.json` and in each pack's audio manifest in place of the speaker code. A changed voice
+  re-renders every clip of that language, so one language is always one voice.
+- What goes to Gemini: Qalam's own strings and pack text, at build time. Never a learner's text, a name, an event or
+  anything from D1 or a hub: the tool reads only `app/js/`, `app/js/staff/strings/` and `content/`, and a test
+  asserts it opens nothing under `data/`.
+- Before any clip of a language ships, a native listener passes a sample of 30 clips (letters, numbers, the four
+  consent lines) in that language; a language with no voice good enough waits, and there the phone's voice or the
+  toast stands as today.
+- The release rules that asked for "a recorded clip" (every `ey`, `p1` and `letter` step; every step of the literacy
+  track; every word of the English and Chinese packs) are met by a generated clip. Each clip is still played by the
+  reviewer before OK (P17), so a mispronounced letter is caught by a native ear; the Chinese teacher reviewer listens
+  for the tones before the pack leaves draft. The January recording job becomes a listening job.
+- `speech.js` keeps its order (clip, then the phone's voice, then the toast); with clips for every string, the
+  phone's voice is reached only for a string no build has voiced yet. Scripture: C4.7 unchanged.
+
+## The login set-up
+
+What Mo configures (after 22 December, staging first, then production), and what the code enforces around it:
+
+1. **Online staff:** one Cloudflare Access self-hosted application on the production custom domain covering
+   `/admin/*`, `/api/m/admin/*`, `/teacher/*`, `/api/m/teacher/*`, `/review/*`, `/api/m/review/*`;
+   `workers_dev = false` once it serves.
+2. **Ways in:** one-time PIN by email, and Google; nothing else.
+3. **Second factor:** independent MFA required on the application for every staff member: the phone's fingerprint or
+   face unlock, a security key, or an authenticator app. Mo and each admin register two (one spare).
+4. **Who:** one Access list "Qalam staff" of emails, one Allow policy; the panel's Staff page adds the role row, the
+   list adds the door (the reminder of B4 item 6).
+5. **Session:** 24 hours; Sign out ends it at once, on every staff page, the review page included (L8).
+6. **Cookie:** SameSite Lax, HttpOnly, binding cookie on.
+7. **Secrets:** `TUTOR_ACCESS_TEAM`, `TUTOR_ACCESS_AUD`, `TUTOR_STAFF_PEPPER` per environment, in the password manager.
+8. **Weekly:** the Access log of denied sign-ins.
+9. **The hub:** the 6-digit teacher PIN and the separate admin PIN, read on the hub's screen; changed each term with
+   the Wi-Fi password; no email or internet sign-in on the hub; the hub-wide slow-down after 30 wrong PINs an hour
+   (L2).
+10. **Learners:** no login. Tapping a year starts the app; a class code from the card joins a class; the optional
+    4-digit lock is a curtain, not a credential. Nothing here changes.
+
+## The phases, and what is on by default
+
+| Phase | Builds | On by default | New on the server |
+|---|---|---|---|
+| A (separate builder) | H1 to H3, M1 to M4, L1 to L8 as the draft orders them | the fixes | `via` on `signoffs`; `code` beside `detail`; nothing stored about anyone |
+| P33 (M) | the staff string files, `lang.js`, the picker, remembered language, RTL for Pashto, drafts marked, `check_staff_strings.mjs` | three languages on every staff page | nothing |
+| P34 (M) | words not ids, numbers, money, dates, refusal codes, the ten usability changes, C5.2, the chair's two items | yes | nothing |
+| P35 (S) | the nine learner items, C5.3, C5.4 | yes | nothing |
+| P36 (M) | `tools/voice.py`, the clips for four languages, the manifests, the release rules met | clips ship with the app and the packs | nothing |
+| P27b (S, rewritten) | module `speak` as C5.5 | no; the admin's switch per cohort | nothing |
+| P30, P31 | to C6 | no | to C6 |
+
+## The changes to settled text
+
+| # | Change | Decision | Note |
+|---|---|---|---|
+| 1 | C4 rule 3 ("never Claude or Gemini"): any provider, through the gateway, bounded by the class's consent version | **Accept** (Mo, 17 Oct) | C5.A3. |
+| 2 | F1, DESIGN 9, C4 rule 5 ("no synthetic Dari or Pashto voice"): one Gemini woman's voice per language for every text Qalam writes; scripture keeps its reciter | **Accept** (Mo, 17 Oct) | C5.6. |
+| 3 | C4.5 and D12: `speak` sends nothing; no AI in speech practice | **Accept** (Mo, 17 Oct) | C5.5. D12 withdrawn. |
+| 4 | C4's "P30 and P31 out of scope": built, off by default; specified at C6 | **Accept** (Mo, 17 Oct) | The code rule "anything that sends audio is for adults only" stands until C6 and the legal opinions say otherwise for children; D9 and the opinions gate switching P30 on for children, not building it. |
+| 5 | C4.4: "the Chinese pack stays a draft until a native Mandarin speaker records the tones" becomes "until a native Mandarin speaker has listened to its clips" | **Accept** | Change 2. |
+| 6 | C4's question 4 to Mo (four recorders) withdrawn; a native listener per language instead | **Accept** | Change 2. |
+| 7 | P11: the hub chip hidden while the hub is in reach | **Accept** | C5.3; C2.5's reason on both hosts. |
+| 8 | P11's ruling 4 (6rem): the chip moves down whenever the title would wrap; `lead` under the title | **Accept** | C5.3. |
+| 9 | P17, P20, P21: three languages on every staff page, remembered per device; `/review/` and `/teacher/` lose their own first-visit rules | **Accept** | C5.1. |
+| 10 | P21: the module table in words, cards under 760 px, the kill switches as state and action, the class-code row | **Accept** | C5.2. |
+| 11 | P21: confirm dialogs focus Cancel for irreversible changes; Escape cancels | **Accept** | B4 item 10. |
+| 12 | Staff dates in Solar Hijri (Dari, Pashto) and Gregorian (English); `hijri()` to the day | **Accept** | C5.1. |
+| 13 | DESIGN "Ease of use first": "A recorded clip plays first" reads "The language's one voice plays first; the phone's own voice is the fallback" | **Accept** | Change 2. |
+| 14 | The learner's `i18n.js` to one file per language, later, unchanged in behaviour | **Accept, deferred** | Question 7. |
+| 15 | BUILD-PLAN 3.5: `signoffs` gains `via`; the ten refusal codes; `her_cohort()` | **Accept** | C5.A6, C5.A1, C5.1. |
+
+## What needs Mo, and when
+
+- **The consent text naming the providers.** A new consent version (online and hub) that names each provider a
+  class may use, its country and its retention, in the four spoken lines and the full text, in the three languages;
+  to the reviewers in January and the solicitor in March with the rest. Until it is signed, a class with learners
+  uses OpenAI online and `local` on the hub; staging uses anything. Default: the pilot runs on OpenAI.
+- **The Access set-up** as the login list, after 22 December, staging first.
+- **A Gemini key** for `tools/voice.py` (UK side only), and a native listener per language (Dari, Pashto, English,
+  Mandarin) to pass the sample before the first clips ship, in January.
+- **C6:** a member's draft for P30 (live audio classes) and P31 (competitions), built off by default. Default: both
+  built in 2027 if the year allows, both off.
+- D12 is withdrawn. Nothing else is new.
+
+## For the build plan
+
+- **Sittings:** C5 held 17 October 2026 with C0 to C4; this note. C6 (P30, P31) when a draft exists.
+- **Section 2:** staff pages "in English, Dari and Pashto, a picker on every page, remembered per device".
+- **3.2:** `speak` as C5.5 (no capability, bands by the pack); `audio.record` stays defined and unused in 2027.
+- **3.5:** `via` on `signoffs`; the ten refusal codes; `her_cohort()`.
+- **3.7:** the provider policy as C5.A3 (consent-named providers); `listen` leaves the purposes.
+- **4 (voice):** `tools/voice.py`, one voice id per language in the manifests, the release rules met by generated
+  clips, the 30-clip sample per language.
+- **5.4:** add "a staff member's language is kept in her browser, never on her row". **5.5:** add "nothing a learner
+  says or records leaves the phone in 2027".
+- **6:** P33, P34, P35, P36; P27b as C5.5; P30 and P31 as C6's.
+- **9.2:** D12 withdrawn; the consent-providers item added. **9.3:** one row for C5, source this note; one for each
+  of Mo's four decisions of 17 October.
+- **DESIGN.md:** append this note as "C5 decisions"; apply changes 2, 7, 8, 10, 12 and 13 to the earlier text;
+  section 9 (Voice) rewritten as C5.6; the draft's specs are the builder's detail, filed as
+  `docs/DESIGN-C5-SPECS.md`.
+- **HOSTING.md:** the login list, verbatim, in "Going live".
+
+## Builder order
+
+The security builder runs first and alone on Part A in the draft's order (H1, H2; H3; M1, M2; M4, L1, L3, L4, L8;
+L2, L5, L6, L7 when the hub is next touched). The C5 builder starts P33 once M1 (the `X-Qalam` header in the three
+`api()` helpers) and L8 (Sign out on review) have landed, since P33 rewrites the same headers and helpers.
+
+1. P33: the string files, `lang.js`, the picker, remembered language, RTL for Pashto, the drafts marked, the CI
+   check.
+2. P34: words, numbers, money, dates, refusal codes, the ten usability changes, C5.2, the chair's two items;
+   screenshots at 390 and 1366 px in all three languages; the browser check extended to the staff pages (contrast,
+   clipping, width, direction; no speaker rule).
+3. P35: the nine learner items, C5.3, C5.4; screenshots at 360 px, three languages, light, dark, Bigger text.
+4. P36: the one voice, as soon as the Gemini key is set; it can run beside 1 to 3 in a second session, since it
+   touches `tools/` and the audio folders only.
+5. P27b as C5.5, after P35.
+6. P30 and P31 after C6.
+
+## Questions for Mo after 22 Dec
+
+1. **The provider consent text:** commission it for January, to the solicitor in March? Default: yes; until signed,
+   the pilot runs on OpenAI online.
+2. **The Access set-up** as listed, and the custom domain: when? Default: with the staging deploy in January,
+   production before the dress rehearsal.
+3. **Native listeners** for the four voices and the staff drafts, by the end of January. Default: the January
+   reviewers.
+4. **C6's date** for P30 and P31. Default: when a member's draft exists; both stay off.

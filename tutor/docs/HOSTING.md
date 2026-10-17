@@ -372,6 +372,26 @@ Worker, no secret. Staging stays the only deployed copy until Mo does the steps 
     (`npx wrangler secret put ANTHROPIC_API_KEY --name qalam`, and so on); a class may pick any provider in the admin
     panel as on staging.
 
+**The login set-up (C5, the chair's list, verbatim).** What Mo configures (after 22 December, staging first, then production), and what the code enforces around it:
+
+1. **Online staff:** one Cloudflare Access self-hosted application on the production custom domain covering
+   `/admin/*`, `/api/m/admin/*`, `/teacher/*`, `/api/m/teacher/*`, `/review/*`, `/api/m/review/*`;
+   `workers_dev = false` once it serves.
+2. **Ways in:** one-time PIN by email, and Google; nothing else.
+3. **Second factor:** independent MFA required on the application for every staff member: the phone's fingerprint or
+   face unlock, a security key, or an authenticator app. Mo and each admin register two (one spare).
+4. **Who:** one Access list "Qalam staff" of emails, one Allow policy; the panel's Staff page adds the role row, the
+   list adds the door (the reminder of B4 item 6).
+5. **Session:** 24 hours; Sign out ends it at once, on every staff page, the review page included (L8).
+6. **Cookie:** SameSite Lax, HttpOnly, binding cookie on.
+7. **Secrets:** `TUTOR_ACCESS_TEAM`, `TUTOR_ACCESS_AUD`, `TUTOR_STAFF_PEPPER` per environment, in the password manager.
+8. **Weekly:** the Access log of denied sign-ins.
+9. **The hub:** the 6-digit teacher PIN and the separate admin PIN, read on the hub's screen; changed each term with
+   the Wi-Fi password; no email or internet sign-in on the hub; the hub-wide slow-down after 30 wrong PINs an hour
+   (L2).
+10. **Learners:** no login. Tapping a year starts the app; a class code from the card joins a class; the optional
+    4-digit lock is a curtain, not a credential. Nothing here changes.
+
 Every later release follows `RELEASE.md`.
 
 ## Reading the next runs
