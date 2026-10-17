@@ -311,6 +311,13 @@ public class MainActivity extends Activity {
 
     /** window.QalamAndroid. Methods run on a background thread; none returns anything about a learner. */
     final class Bridge {
+        // P27a (C4.4): the APK has no microphone permission (C3.6), so the page draws no mic and "say it" is "hear it,
+        // say it"; nothing records here in 2027
+        @JavascriptInterface
+        public boolean canRecord() {
+            return false;
+        }
+
         @JavascriptInterface
         public String version() {
             return versionName();

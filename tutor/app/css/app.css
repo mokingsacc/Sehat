@@ -11,6 +11,8 @@
 @font-face { font-family: 'Vazirmatn'; font-weight: 800; font-display: swap; src: url(../fonts/vazirmatn-800.woff2) format('woff2'); }
 @font-face { font-family: 'Naskh'; font-weight: 500; font-display: swap; src: url(../fonts/naskh-500.woff2) format('woff2'); }
 @font-face { font-family: 'Naskh'; font-weight: 700; font-display: swap; src: url(../fonts/naskh-700.woff2) format('woff2'); }
+/* P27a: the Chinese subset (Noto Sans SC, only the packs' characters, tools/make_fonts.py), also pinyin's tone marks */
+@font-face { font-family: 'NotoSC'; font-weight: 500; font-display: swap; src: url(../fonts/noto-sc.woff2) format('woff2'); }
 
 /* colour: light, adult (also Welcome and the teacher's page) */
 :root {
@@ -103,7 +105,7 @@
 html { background: var(--bg); }
 body {
   margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink);
-  font-family: 'Vazirmatn', 'Noto Naskh Arabic', system-ui, sans-serif; font-weight: 500; font-size: var(--fs); line-height: 1.6;
+  font-family: 'Vazirmatn', 'Noto Naskh Arabic', 'NotoSC', system-ui, sans-serif; font-weight: 500; font-size: var(--fs); line-height: 1.6;
   -webkit-tap-highlight-color: transparent;
 }
 #app { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 96px; }
@@ -273,6 +275,13 @@ h2 { font-size: var(--fs-btn); }
 .step .word { font-family: 'Naskh', serif; font-size: 50px; font-weight: 700; line-height: 1.3; }
 .step .read { font-family: var(--read-font); font-size: var(--fs-read); line-height: 1.9; text-align: start; }
 .step .english { direction: ltr; font-size: calc(var(--fs-xl) * 1.25); font-weight: 800; line-height: 1.3; }
+/* P27a: an English letter, and a Chinese word over its pinyin with a line per tone */
+.step .letter.latn { font-family: 'Vazirmatn', sans-serif; font-weight: 800; }
+.zh-word { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+.zh { font-family: 'NotoSC', sans-serif; font-size: calc(var(--fs-xl) * 1.9); line-height: 1.2; }
+.pinyin { display: inline-flex; gap: 14px; font-family: 'NotoSC', sans-serif; font-size: var(--fs-xl); }
+.pinyin .syl { display: inline-flex; flex-direction: column; align-items: center; }
+.pinyin .tones { display: inline-flex; gap: 2px; min-height: 15px; color: var(--accent-ink); }
 .step .prompt { font-family: var(--read-font); font-size: var(--fs-read); font-weight: 800; line-height: 1.7; }
 .pics { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .pics img { width: 110px; height: 110px; }

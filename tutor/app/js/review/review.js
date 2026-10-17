@@ -265,9 +265,11 @@ async function lesson(id, at = 1) {
     shown = k;
     const st = d.steps[k];
     const step = k ? L.steps[k - 1] : null;
-    const clip = step && step.audio && step.audio[lang] && step.audio[lang].url;
+    // the step's recordings: hers in the reviewer's language, and (P27a) the English or Chinese word it teaches
+    const clips = [...new Set([lang, 'en', 'zh'].map((l) => step && step.audio && step.audio[l] && step.audio[l].url).filter(Boolean))];
     const noRec = k && d.no_recording.includes(k);
-    let played = !clip;
+    const heard = new Set();
+    let played = !clips.length;
     const okBtn = h('button', { type: 'button', class: 'btn ok-btn' + (verdict[k] === 'ok' ? ' on' : ''), disabled: !played || null }, t('ok'));
     const chBtn = h('button', { type: 'button', class: 'btn' + (verdict[k] === 'change' ? ' warm' : '') }, t('change'));
     const chosen = new Set(st.chips || []);
@@ -288,8 +290,11 @@ async function lesson(id, at = 1) {
       verdict[k] = 'change'; chBtn.classList.add('warm'); okBtn.classList.remove('on');
       chips.classList.remove('hidden'); note.classList.remove('hidden');
     });
-    const audio = clip ? h('audio', { src: clip, preload: 'none' }) : null;
-    if (audio) audio.addEventListener('ended', () => { played = true; okBtn.disabled = false; });
+    const audios = clips.map((u) => {
+      const a = h('audio', { src: u, preload: 'none' });
+      a.addEventListener('ended', () => { heard.add(u); played = heard.size === clips.length; okBtn.disabled = !played; });
+      return a;
+    });
     const tags = h('div', { class: 'row wrap' },
       h('b', { class: 'grow' }, k ? t('step_of', { a: k, b: n }) : t('whole')),
       st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
@@ -315,7 +320,7 @@ async function lesson(id, at = 1) {
     put(body, tags,
       langSwitch(),
       view,
-      audio ? h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn outline', onClick: () => audio.play() }, '▶ ', t('play')), audio) : null,
+      audios.map((a) => h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn outline', onClick: () => a.play() }, '▶ ', t('play')), a)),
       h('div', { class: 'row' }, okBtn, chBtn), chips, note,
       h('div', { class: 'row wrap' },
         h('button', { type: 'button', class: 'btn primary', onClick: () => save(() => (after === undefined ? signPage() : stepPage(after))) }, t('next')),

@@ -18,8 +18,9 @@ from . import licences, mathcheck
 
 log = logging.getLogger("tutor.packs")
 
-SUBJECTS = ("maths", "science", "english", "dari", "pashto")
+SUBJECTS = ("maths", "science", "english", "dari", "pashto", "chinese")
 LANGS = ("prs", "ps", "en")          # Dari, Pashto, English
+CLIP_LANGS = LANGS + ("zh",)         # recorded clips: the three, and Mandarin for a Chinese lesson's words (P27a)
 STEP_KINDS = ("read", "letter", "choice", "number", "say")
 ITEM_KINDS = ("trace", "circle", "draw", "count", "sum", "write", "sort", "generate")
 
@@ -41,6 +42,17 @@ _ID = re.compile(r"^[a-z0-9][a-z0-9-]{1,63}$")
 _CLIP = re.compile(r"^[a-z0-9][a-z0-9._-]{0,79}$")
 _INITIALS = re.compile(r"^[A-Z]{1,4}$")              # initials only: a reviewer's name is never written down
 _DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# P27a (C4.4): the words she learns are written in their own script, never spelt in Dari letters (the recording is the
+# model). English in Latin letters; Chinese in characters with pinyin in Latin letters and tone marks
+_LATIN = re.compile(r"^[A-Za-z0-9 .,!?'\u2019\"\u2026:;()-]+$")
+_HAN = re.compile(r"^[\u3400-\u4dbf\u4e00-\u9fff\uff0c\u3002\uff01\uff1f\u3001]+$")
+_PINYIN = re.compile(r"^[A-Za-z\u00fc\u00dc\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec"
+                     r"\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dc .,!?'-]+$")
+# a `say` step's fixed phrases (for P27b's check, which waits for D12): never a blank to fill, never a personal slot,
+# so no name, age or place ever leaves a phone in her own voice
+_SAY_SLOT = re.compile(r"\.\.\.|\u2026|_|\b(name|names|age|aged|old|years?|city|town|village|live|lives|address|"
+                       r"phone|number|from)\b", re.I)
+_SAY_ANSWER = re.compile(r"^[a-z' ]+$", re.I)
 TUTOR = Path(__file__).resolve().parents[2]
 SIGNOFF_KEYS = ("role", "initials", "date", "hash")
 REVIEW_KEYS = ("status", "needs", "signoffs")
@@ -165,12 +177,39 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
             p.append(f"{w}: recall is true, on a choice or number step (spaced review, P25a)")
         if "english" in s and (not isinstance(s["english"], str) or not s["english"].strip()):
             p.append(f"{w}: english must be the English words to show and say")
+        elif "english" in s and not _LATIN.match(s["english"]):
+            p.append(f"{w}: english is written in English letters (no Dari or Pashto spelling: the recording is the model)")
+        if "zh" in s and (not isinstance(s["zh"], str) or not _HAN.match(s["zh"])):
+            p.append(f"{w}: zh must be Chinese characters")
+        if ("zh" in s) != ("pinyin" in s):
+            p.append(f"{w}: zh and pinyin go together (the characters, and their sound with tone marks)")
+        elif "pinyin" in s and (not isinstance(s["pinyin"], str) or not _PINYIN.match(s["pinyin"])):
+            p.append(f"{w}: pinyin is Latin letters with tone marks, like ni\u01d0 h\u01ceo")
+        if "english" in s and "zh" in s:
+            p.append(f"{w}: a step teaches English or Chinese, not both")
+        if "hide" in s and (s["hide"] is not True or k != "choice" or not ("english" in s or "zh" in s)):
+            p.append(f"{w}: hide is true, on a choice that plays its English or Chinese word (listening)")
+        if "script" in s and (s["script"] != "latn" or k != "letter"):
+            p.append(f"{w}: script is \"latn\", on a letter step (an English letter)")
+        if "answers" in s:
+            a = s["answers"]
+            if k != "say" or "english" not in s:
+                p.append(f"{w}: answers belong to a say step with english")
+            elif not isinstance(a, list) or not 1 <= len(a) <= 5 or not all(isinstance(x, str) for x in a):
+                p.append(f"{w}: answers must be one to five fixed phrases")
+            else:
+                for x in a:
+                    if _SAY_SLOT.search(x):
+                        p.append(f"{w}: answer {x!r} has a blank or a personal slot (name, age, city, phone number): "
+                                 "leave it out, so it stays hear-yourself")
+                    elif not _SAY_ANSWER.match(x) or not 1 <= len(x.split()) <= 4:
+                        p.append(f"{w}: answer {x!r} must be one to four English words")
         if "audio" in s:
             if not isinstance(s["audio"], dict) or not s["audio"]:
                 p.append(f"{w}: audio must name a recorded clip per language, {{\"prs\": \"clip-name\"}}")
             else:
                 for al, clip in s["audio"].items():
-                    if al not in LANGS or clip not in clips.get(al, {}):
+                    if al not in CLIP_LANGS or clip not in clips.get(al, {}):
                         p.append(f"{w}: audio {al}/{clip} is not in audio/{al}/manifest.json")
         if k == "read":
             _check_text(s.get("text"), w, p)
@@ -178,7 +217,14 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
         elif k == "letter":
             if not isinstance(s.get("letter"), str) or not s["letter"].strip():
                 p.append(f"{w}: letter missing")
-            _check_text(s.get("word"), w + " word", p)
+            if s.get("script") == "latn":      # an English letter: "Aa", and its picture word in English (P27a)
+                if not re.match(r"^[A-Za-z]{1,2}$", str(s.get("letter", ""))):
+                    p.append(f"{w}: an English letter is written like Aa")
+                if "english" not in s:
+                    p.append(f"{w}: an English letter needs its picture word in english")
+                _check_text(s.get("word"), w + " word", p, required=False)
+            else:
+                _check_text(s.get("word"), w + " word", p)
         elif k == "choice":
             _check_text(s.get("prompt"), w + " prompt", p)
             opts = s.get("options")
@@ -202,6 +248,8 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
                 p.append(f"{w}: answer must be one number or fraction such as 3/4, not a sum")
         elif k == "say":
             _check_text(s.get("text"), w, p)
+        if k in ("read", "say") and lesson.get("subject") == "chinese" and "english" in s:
+            p.append(f"{w}: a Chinese lesson's words are zh and pinyin")
 
     sheet = lesson.get("sheet")
     if sheet is not None:
@@ -370,19 +418,47 @@ def band_of_year(year: int) -> str:
 
 
 TRACKS = ("literacy", "reader")
+BANDS = ("ey", "p1", "p2", "s1", "s2", "ad")
 
 
 def tracks_of(pack: dict) -> list[str]:
-    """The adult tracks that see an adult pack (P26): `tracks`, by default the reader track only."""
-    return list(pack.get("tracks") or ["reader"]) if pack.get("audience") == "adult" else []
+    """The adult tracks that see an adult pack (P26), or a pack whose `bands` hold adults (P27a): `tracks`, by
+    default the reader track only."""
+    adult = pack.get("audience") == "adult" or "ad" in (pack.get("bands") or [])
+    return list(pack.get("tracks") or ["reader"]) if adult else []
+
+
+def lesson_bands(lesson: dict, pack: dict) -> list[str]:
+    """Who a lesson is for: the pack's `bands` where it names them (P27a: a pack outside the school years, such as the
+    Chinese starter for s2 and adult readers), else adults for an adult pack, else the band of the lesson's year."""
+    if pack.get("bands"):
+        return list(pack["bands"])
+    return ["ad"] if pack.get("audience") == "adult" else [band_of_year(lesson.get("year", 12))]
 
 
 def reads_every_step(lesson: dict, pack: dict) -> bool:
     """Every step is read aloud on open, so needs a recorded clip: years 0 to 3, and (P26, C4.3) an adult pack the
-    literacy track sees. An adult lesson's year says nothing about who reads it."""
-    if pack.get("audience") == "adult":
-        return "literacy" in tracks_of(pack)
+    literacy track sees. An adult lesson's year says nothing about who reads it, nor does any lesson's in a pack with
+    `bands`."""
+    if pack.get("audience") == "adult" or pack.get("bands"):
+        bands = lesson_bands(lesson, pack)
+        return bool({"ey", "p1"} & set(bands)) or ("ad" in bands and "literacy" in tracks_of(pack))
     return band_of_year(lesson.get("year", 12)) in ("ey", "p1")
+
+
+# the words a language lesson teaches, and the clip each needs before release (P27a, C4.4): every `english` field and
+# every `say` step of an English lesson in a human English voice, every `zh` field of a Chinese one in a native
+# Mandarin voice; no synthetic voice, and placeholders never count
+STUDIED = {"english": ("english", "en"), "chinese": ("zh", "zh")}
+
+
+def studied_clip_steps(lesson: dict) -> list[tuple[int, str]]:
+    """(step number, clip language) for each step whose taught words need a recording."""
+    field, al = STUDIED.get(lesson.get("subject"), (None, None))
+    if not field:
+        return []
+    return [(i, al) for i, st in enumerate(lesson.get("steps") or [], 1)
+            if field in st or (field == "english" and st.get("kind") == "say")]
 
 
 def release_problems(lesson: dict, state: str, pack: dict, clips: dict) -> list[str]:
@@ -410,7 +486,37 @@ def release_problems(lesson: dict, state: str, pack: dict, clips: dict) -> list[
                 p.append(f"{lid} step {i}: needs a recorded {al} clip before release (no synthetic voice)")
             elif entry.get("placeholder"):
                 p.append(f"{lid} step {i}: the {al} clip is a placeholder, not a recording")
+    for i, al in studied_clip_steps(lesson):
+        st = lesson["steps"][i - 1]
+        clip = (st.get("audio") or {}).get(al)
+        entry = clips.get(al, {}).get(clip) if clip else None
+        who = "a human English speaker" if al == "en" else "a native Mandarin speaker"
+        if not entry or entry.get("placeholder"):
+            p.append(f"{lid} step {i}: needs its words recorded by {who} ({al}) before release")
     return p
+
+
+def clips_needed(lib) -> list[dict]:
+    """The recording job (P27a's slots for human voices): every clip release would want and the pack lacks, or has
+    only as a placeholder, with the words to say. `validate_pack.py --clips` prints it for the recorders."""
+    out = []
+    for pid, pack in lib.packs.items():
+        clips = pack.get("_clips", {})
+        for lid in pack["lessons"]:
+            l = lib.lessons[lid]
+            young = reads_every_step(l, pack)
+            want = [(i, al) for i, st in enumerate(l.get("steps") or [], 1) if young or st.get("kind") == "letter"
+                    for al in pack.get("langs", ["prs", "ps"]) if al in ("prs", "ps")] + studied_clip_steps(l)
+            for i, al in want:
+                st = l["steps"][i - 1]
+                entry = clips.get(al, {}).get((st.get("audio") or {}).get(al))
+                if entry and not entry.get("placeholder"):
+                    continue
+                words = st.get("english") if al == "en" else st.get("zh") if al == "zh" else \
+                    text(st.get("text") or st.get("prompt") or st.get("word"), al, ())
+                out.append({"pack": pid, "lesson": lid, "step": i, "lang": al, "words": words or "",
+                            "placeholder": bool(entry)})
+    return out
 
 
 def _sources_file(packs_dir: Path) -> Path:
@@ -505,14 +611,14 @@ class Library:
                     continue
                 chash = content_hash(lesson, pdir, clips)
                 state = review_state(lesson, chash)
-                self.known[lid] = {"band": "ad" if pack.get("audience") == "adult" else band_of_year(lesson["year"]),
+                self.known[lid] = {"band": lesson_bands(lesson, pack)[0], "bands": lesson_bands(lesson, pack),
                                    "sheet": bool(lesson.get("sheet"))}
                 if self.release:
                     why = release_problems(lesson, state, pack, clips)
                     if why:
                         self.hidden.extend(f"{pid}/{x}" for x in why)
                         continue
-                if pack.get("audience") == "adult":
+                if pack.get("audience") == "adult" or pack.get("bands"):
                     lesson["_bold"] = "literacy" in tracks_of(pack)      # its sheets print bold (sheets.layout)
                 self.lessons[lid] = lesson
                 self.lesson_pack[lid] = pid
@@ -541,10 +647,16 @@ class Library:
             p.append(f"{pid}: share_alike must be true or false")
         if pack.get("audience", "child") not in ("child", "adult"):
             p.append(f"{pid}: audience must be \"adult\" or left out")
+        if "bands" in pack:
+            b = pack["bands"]
+            if not isinstance(b, list) or not b or any(x not in BANDS for x in b) or len(set(b)) != len(b):
+                p.append(f"{pid}: bands must list bands, like [\"s2\", \"ad\"]")
+            elif pack.get("audience") == "adult" and b != ["ad"]:
+                p.append(f"{pid}: an adult pack is for adults; a pack for children and adults leaves audience out")
         if "tracks" in pack:
             tr = pack["tracks"]
-            if pack.get("audience") != "adult":
-                p.append(f"{pid}: tracks are for adult packs only")
+            if pack.get("audience") != "adult" and "ad" not in (pack.get("bands") or []):
+                p.append(f"{pid}: tracks are for adult packs (or packs whose bands hold \"ad\") only")
             elif not isinstance(tr, list) or not tr or any(x not in TRACKS for x in tr) or len(set(tr)) != len(tr):
                 p.append(f"{pid}: tracks must list \"literacy\" and/or \"reader\"")
         return p
@@ -635,7 +747,8 @@ class Library:
                                 "draft": self.states[lid] != "signed"})
             out.append({"id": pid, "title": pack.get("title"), "version": pack.get("version"),
                         "langs": pack.get("langs", []), "audience": pack.get("audience", "child"),
-                        **({"tracks": tracks_of(pack)} if pack.get("audience") == "adult" else {}),
+                        **({"tracks": tracks_of(pack)} if tracks_of(pack) else {}),
+                        **({"bands": pack["bands"]} if pack.get("bands") else {}),
                         "licence": pack.get("licence", "open"), "lessons": lessons})
         return out
 

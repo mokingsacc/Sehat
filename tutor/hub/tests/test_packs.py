@@ -12,8 +12,9 @@ def lesson(name):
 
 
 def test_starter_pack_loads_clean(library):
-    assert len(library.lessons) == 12
-    assert set(library.packs) == {"starter", "adult-literacy-1", "adult-maths-1"}         # the adult packs since P26
+    assert len(library.lessons) == 18
+    assert set(library.packs) == {"starter", "adult-literacy-1", "adult-maths-1",         # the adult packs since P26
+                                  "english-adult-1", "chinese-1"}                       # and P27a's
 
 
 def test_summary_has_what_the_app_lists(library):
@@ -102,10 +103,86 @@ def test_tracks_are_checked_and_a_literacy_pack_needs_a_clip_for_every_step(tmp_
         assert any("tracks must list" in p for p in Library(tmp_path / "packs").problems), bad
     s = tmp_path / "packs" / "starter" / "pack.json"
     s.write_text(json.dumps(dict(json.loads(s.read_text(encoding="utf-8")), tracks=["reader"])), encoding="utf-8")
-    assert any("tracks are for adult packs only" in p for p in Library(tmp_path / "packs").problems)
+    assert any("tracks are for adult packs" in p for p in Library(tmp_path / "packs").problems)
     assert tracks_of({"audience": "adult"}) == ["reader"] and tracks_of({}) == []
     lesson = json.loads((PACKS / "adult-maths-1" / "lessons" / "adult-maths-2-change.json").read_text(encoding="utf-8"))
     lit = release_problems(lesson, "signed", dict(pack), {})
     assert sum("needs a recorded prs clip" in p for p in lit) == len(lesson["steps"])     # every step, not just letters
     reader = release_problems(lesson, "signed", dict(pack, tracks=["reader"]), {})
     assert not any("clip" in p for p in reader)
+
+
+# P27a (C4.4): English and Chinese lessons
+
+def _en(name):
+    return json.loads((PACKS / "english-adult-1" / "lessons" / f"{name}.json").read_text(encoding="utf-8"))
+
+
+def test_english_and_chinese_words_are_in_their_own_script_and_say_answers_have_no_slot():
+    pdir = PACKS / "english-adult-1"
+    bad = copy.deepcopy(_en("english-adult-1-hello"))
+    bad["steps"][0]["english"] = "هلو"                              # English spelt in Dari letters
+    bad["steps"][1]["hide"] = True                                  # hide is for a choice that plays its word
+    bad["steps"][3]["answers"] = ["my name is ..."]                 # a blank she would fill with her name
+    bad["steps"][4]["answers"] = ["i am from kabul"]                # a place
+    bad["steps"][2]["zh"] = "你好"                                   # zh without pinyin, and beside english
+    problems = "\n".join(validate_lesson(bad, pdir))
+    assert "written in English letters" in problems
+    assert "hide is true, on a choice" in problems
+    assert problems.count("personal slot") == 2
+    assert "zh and pinyin go together" in problems and "English or Chinese, not both" in problems
+    letters = copy.deepcopy(_en("english-adult-2-letters"))
+    del letters["steps"][0]["english"]
+    letters["steps"][1]["script"] = "cyrl"
+    problems = "\n".join(validate_lesson(letters, pdir))
+    assert "needs its picture word in english" in problems and 'script is "latn"' in problems
+    zh = json.loads((PACKS / "chinese-1" / "lessons" / "chinese-1-hello.json").read_text(encoding="utf-8"))
+    zh["steps"][0]["pinyin"] = "ni3 hao3"                           # tone marks, not numbers
+    zh["steps"][1]["zh"] = "xiexie"
+    problems = "\n".join(validate_lesson(zh, PACKS / "chinese-1"))
+    assert "pinyin is Latin letters with tone marks" in problems and "zh must be Chinese characters" in problems
+    assert validate_lesson(_en("english-adult-1-hello"), pdir) == []
+
+
+def test_every_taught_word_needs_a_human_recording_before_release(library):
+    from tutor_hub.packs import clips_needed, release_problems, studied_clip_steps
+    l = library.lessons["english-adult-1-hello"]
+    pack = library.packs["english-adult-1"]
+    assert [i for i, _ in studied_clip_steps(l)] == [1, 2, 3, 4, 5]          # every english field and every say step
+    why = release_problems(l, "signed", pack, {})
+    assert sum("recorded by a human English speaker (en)" in p for p in why) == 5
+    clips = {"en": {"hello": {"file": "hello.opus", "speaker": "en-01", "placeholder": True, "sha256": "sha256:" + "0" * 64}}}
+    one = copy.deepcopy(l)
+    one["steps"][0]["audio"] = {"en": "hello"}
+    assert any(p.startswith("english-adult-1-hello step 1: needs its words recorded") for p in release_problems(one, "signed", pack, clips))
+    zh = library.lessons["chinese-1-hello"]
+    assert sum("native Mandarin speaker (zh)" in p for p in release_problems(zh, "signed", library.packs["chinese-1"], {})) == 5
+    jobs = [c for c in clips_needed(library) if c["lesson"] == "chinese-1-hello"]
+    assert [c["words"] for c in jobs][:2] == ["你好", "谢谢"] and {c["lang"] for c in jobs} == {"zh"}
+
+
+def test_a_pack_with_bands_is_for_those_bands_whatever_the_year(library):
+    from tutor_hub.mods.plan import lessons_for
+    from tutor_hub.packs import lesson_bands, reads_every_step, tracks_of
+    pack = library.packs["chinese-1"]
+    assert lesson_bands(library.lessons["chinese-1-hello"], pack) == ["s2", "ad"] and tracks_of(pack) == ["reader"]
+    assert not reads_every_step(library.lessons["chinese-1-hello"], pack) and pack.get("share_alike") is True
+    rows = {p["id"]: p for p in library.summary()}
+    assert rows["chinese-1"]["bands"] == ["s2", "ad"] and rows["chinese-1"]["tracks"] == ["reader"]
+    assert "chinese-1-hello" in dict(lessons_for(library, "s2")) and "chinese-1-hello" in dict(lessons_for(library, "ad"))
+    assert "chinese-1-hello" not in dict(lessons_for(library, "s1"))
+    p = []
+    for bad in ({"bands": ["s3"]}, {"bands": ["s2", "s2"]}, {"bands": ["s2"], "audience": "adult"}):
+        p += [x for x in library._check_pack(dict(pack, **bad), "x") if "tracks" not in x]
+    assert len(p) == 3
+
+
+def test_the_chinese_font_subset_holds_every_character_the_packs_write():
+    """app/fonts/noto-sc.woff2 (tools/make_fonts.py): remake it when a pack's Chinese changes."""
+    import sys
+    from fontTools.ttLib import TTFont
+    sys.path.insert(0, str(PACKS.parents[1] / "tools"))
+    import make_fonts
+    cmap = TTFont(PACKS.parents[1] / "app" / "fonts" / "noto-sc.woff2").getBestCmap()
+    assert {"你", "好", "水", "ǎ"} <= make_fonts.needed()
+    assert not [c for c in make_fonts.needed() if ord(c) not in cmap]

@@ -1,0 +1,129 @@
+{
+  "id": "english-adult-1-hello",
+  "subject": "english",
+  "year": 0,
+  "order": 1,
+  "unit": {
+    "prs": "سلام و احوال‌پرسی",
+    "ps": "سلام او احوال پوښتنه"
+  },
+  "title": {
+    "prs": "سلام و صبح بخیر",
+    "ps": "سلام او سهار مو پخیر"
+  },
+  "minutes": 10,
+  "steps": [
+    {
+      "kind": "read",
+      "english": "Hello!",
+      "text": {
+        "prs": "این کلمه یعنی سلام. گوش بده و با صدا بگو.",
+        "ps": "دا کلمه یعنې سلام. غوږ ونیسه او په غږ یې ووایه."
+      }
+    },
+    {
+      "kind": "read",
+      "english": "Good morning!",
+      "picture": "sun",
+      "text": {
+        "prs": "صبح‌ها این را می‌گوییم: صبح بخیر.",
+        "ps": "سهار دا وایو: سهار مو پخیر."
+      }
+    },
+    {
+      "kind": "choice",
+      "english": "Good morning!",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. این یعنی چه؟",
+        "ps": "غوږ ونیسه. دا یعنې څه؟"
+      },
+      "options": [
+        {
+          "prs": "صبح بخیر",
+          "ps": "سهار مو پخیر"
+        },
+        {
+          "prs": "تشکر",
+          "ps": "مننه"
+        },
+        {
+          "prs": "خدا حافظ",
+          "ps": "په مخه دې ښه"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "prs": "این صبح بخیر است.",
+        "ps": "دا سهار مو پخیر دی."
+      }
+    },
+    {
+      "kind": "say",
+      "english": "Good morning!",
+      "answers": [
+        "good morning"
+      ],
+      "text": {
+        "prs": "گوش بده، بعد خودت بگو.",
+        "ps": "غوږ ونیسه، بیا یې پخپله ووایه."
+      }
+    },
+    {
+      "kind": "say",
+      "english": "Thank you.",
+      "answers": [
+        "thank you"
+      ],
+      "text": {
+        "prs": "این یعنی تشکر. گوش بده و بگو.",
+        "ps": "دا یعنې مننه. غوږ ونیسه او ووایه."
+      }
+    }
+  ],
+  "sheet": {
+    "code": "EA-01",
+    "intro": {
+      "prs": "کلمه‌های انگلیسی را با پنسل بنویس.",
+      "ps": "انګلیسي کلمې په پنسل ولیکه."
+    },
+    "items": [
+      {
+        "kind": "trace",
+        "text": "Hello",
+        "count": 3
+      },
+      {
+        "kind": "trace",
+        "text": "Good morning",
+        "count": 2
+      },
+      {
+        "kind": "trace",
+        "text": "Thank you",
+        "count": 2
+      }
+    ]
+  },
+  "bank": [
+    {
+      "q": {
+        "prs": "صبح بخیر به انگلیسی چه می‌شود؟",
+        "ps": "سهار مو پخیر په انګلیسي څه کېږي؟"
+      },
+      "a": {
+        "prs": "«Good morning» یعنی صبح بخیر.",
+        "ps": "«Good morning» یعنې سهار مو پخیر."
+      }
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "needs": [
+      "Dari reader",
+      "Pashto reader",
+      "English teacher",
+      "adult educator"
+    ]
+  }
+}

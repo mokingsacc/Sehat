@@ -1,0 +1,117 @@
+{
+  "id": "chinese-3-things",
+  "subject": "chinese",
+  "year": 0,
+  "order": 3,
+  "unit": {
+    "prs": "چیزهای خانه",
+    "ps": "د کور شیان"
+  },
+  "title": {
+    "prs": "آب و کتاب",
+    "ps": "اوبه او کتاب"
+  },
+  "minutes": 10,
+  "steps": [
+    {
+      "kind": "read",
+      "zh": "水",
+      "pinyin": "shuǐ",
+      "picture": "water",
+      "text": {
+        "prs": "این یعنی آب. لحن سوم پایین می‌رود و بالا می‌آید.",
+        "ps": "دا یعنې اوبه. درېیم غږ ښکته ځي او بیا پورته راځي."
+      }
+    },
+    {
+      "kind": "read",
+      "zh": "书",
+      "pinyin": "shū",
+      "picture": "book",
+      "text": {
+        "prs": "این یعنی کتاب.",
+        "ps": "دا یعنې کتاب."
+      }
+    },
+    {
+      "kind": "choice",
+      "zh": "书",
+      "pinyin": "shū",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. کدام است؟",
+        "ps": "غوږ ونیسه. کوم یو دی؟"
+      },
+      "options": [
+        {
+          "picture": "water"
+        },
+        {
+          "picture": "apple"
+        },
+        {
+          "picture": "book"
+        }
+      ],
+      "answer": 2,
+      "why": {
+        "prs": "«shū» یعنی کتاب.",
+        "ps": "«shū» یعنې کتاب."
+      }
+    },
+    {
+      "kind": "say",
+      "zh": "水",
+      "pinyin": "shuǐ",
+      "text": {
+        "prs": "گوش بده، بعد خودت بگو.",
+        "ps": "غوږ ونیسه، بیا یې پخپله ووایه."
+      }
+    }
+  ],
+  "sheet": {
+    "code": "ZH-03",
+    "intro": {
+      "prs": "حرف‌ها را با پنسل بنویس.",
+      "ps": "توري په پنسل ولیکه."
+    },
+    "items": [
+      {
+        "kind": "trace",
+        "text": "水",
+        "count": 4
+      },
+      {
+        "kind": "trace",
+        "text": "书",
+        "count": 4
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "cc-cedict",
+      "item": "水",
+      "title": "CC-CEDICT entry 水",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    },
+    {
+      "id": "cc-cedict",
+      "item": "书",
+      "title": "CC-CEDICT entry 书",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "needs": [
+      "Dari reader",
+      "Pashto reader",
+      "Chinese teacher"
+    ]
+  }
+}

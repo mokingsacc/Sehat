@@ -368,7 +368,7 @@ def test_production_hides_the_starter_drafts(release_client):
 
 def test_staging_shows_the_drafts_marked_as_drafts(hub_client):
     rows = [r for p in hub_client.get("/api/packs").json()["packs"] for r in p["lessons"]]
-    assert len(rows) == 12 and all(r["draft"] for r in rows)
+    assert len(rows) == 18 and all(r["draft"] for r in rows)
     l = hub_client.get("/api/lessons/maths-7-fractions-add").json()
     assert l["draft"] is True and l["credits"] == [] and "review" not in l and "sources" not in l
     assert hub_client.get("/api/hello").json()["release"] is False
@@ -381,8 +381,9 @@ def test_link_cards_and_credits_from_the_hub(hub_client):
     assert set(cards[0]) >= {"title", "about", "url", "owner"} and "text" not in cards[0]
     assert hub_client.get("/api/links?subject=science").json()["links"] == []
     cr = hub_client.get("/api/credits").json()
-    assert cr["sources"] == [] and [x["id"] for x in cr["linked"]] == ["begum-academy"]
-    assert {a["name"] for a in cr["app"]} == {"Vazirmatn", "Noto Naskh Arabic"}
+    assert [x["id"] for x in cr["sources"]] == ["cc-cedict"]          # the Chinese starter (P27a)
+    assert [x["id"] for x in cr["linked"]] == ["begum-academy"]
+    assert {a["name"] for a in cr["app"]} == {"Vazirmatn", "Noto Naskh Arabic", "Noto Sans SC (Chinese, a subset)"}
 
 
 def test_the_apps_credits_file_names_the_same_fonts():
@@ -467,3 +468,12 @@ def test_imported_svg_line_art_follows_the_theme(tmp_path):
     assert pack["media"]["pictures/dari-1-reader-01-1.svg"][0]["id"] == "afghan-children-read-bloom"
     lib, out = problems(packs)
     assert out == "" and lib.credits()["sources"][0]["items"][-1]["used_in"] == "p/pictures/dari-1-reader-01-1.svg"
+
+
+def test_tatoeba_items_are_never_share_alike(tmp_path):
+    """C4.4: Tatoeba recordings in the English pack only CC0 or CC BY, never SA."""
+    sa = with_sources(use("tatoeba", licence="CC BY-SA 2.0 FR"))
+    _, out = problems(make_pack(tmp_path, [sa], share_alike=True))
+    assert "share-alike is refused here" in out
+    _, out = problems(make_pack(tmp_path / "b", [with_sources(use("tatoeba", licence="CC BY 2.0 FR"))]))
+    assert out == ""

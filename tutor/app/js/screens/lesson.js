@@ -10,6 +10,12 @@
 // Spaced review (P25a, modules/recall.js): opened as #/lesson/<id>?warm=1 (the big button, the Now card, a plan's
 // card), up to three due items from earlier lessons play first, each drawn as in its own lesson, under three warm
 // segments and "Do you remember? 1 of 3" ("Quick practice" for adults). Finishing a lesson adds its items.
+// English and Chinese (P27a, C4.4): the words she learns are drawn in their own script, English left to right, Chinese
+// as characters over pinyin with a small line for each tone, and play only their recording (a human English voice, a
+// native Mandarin one): such a lesson takes no phone voice at all, so an unrecorded word says "not recorded yet". An
+// English letter (`script: "latn"`) is drawn left to right. A `choice` with a word plays it as the question, its text
+// hidden with `hide` (listening). "Say it" records only where the phone can (canRecord): in the APK and on the hub it
+// is "hear it, say it", with no mic.
 
 import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -17,12 +23,27 @@ import * as library from '../library.js';
 import * as modules from '../modules.js';
 import { notSimplest, parse, same } from '../numbers.js';
 import { praise, readsOnOpen } from '../bands.js';
+import { TONE_PATH, words as pinyinWords } from '../pinyin.js';
 import * as recall from '../modules/recall.js';
 import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
 
 const QUESTION = new Set(['choice', 'number']);
+const STUDIED = new Set(['english', 'chinese']);        // their words are recordings only (P27a)
+
+// the word a step teaches: {lang, text}, or null
+const target = (st) => (st.english ? { lang: 'en', text: st.english } : st.zh ? { lang: 'zh', text: st.zh } : null);
+
+// a pinyin line with each word's tones drawn over it
+function pinyinLine(pinyin) {
+  return h('span', { class: 'pinyin', lang: 'zh-Latn-pinyin', dir: 'ltr' }, pinyinWords(pinyin).map(({ word, tones }) => {
+    const t = document.createElement('template');
+    t.innerHTML = '<span class="tones" aria-hidden="true">' + tones.map((n) => '<svg width="24" height="15" viewBox="0 0 24 15" '
+      + `fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="${TONE_PATH[n]}"/></svg>`).join('') + '</span>';
+    return h('span', { class: 'syl', title: tones.map((n) => s('tone_' + n)).join(', ') || null }, t.content.firstChild, h('span', {}, word));
+  }));
+}
 
 export default async function lesson(args) {
   const [id, stepText] = args;
@@ -54,7 +75,8 @@ export default async function lesson(args) {
     if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
   };
 
-  const say = (text, l = lang) => speak(text, l);
+  const recordedOnly = STUDIED.has(L.subject);           // English and Chinese lessons: no phone voice (P27a)
+  const say = (text, l = lang) => speak(text, l, recordedOnly ? { recorded: true } : undefined);
   const segs = h('div', { class: 'segs grow', style: { gridTemplateColumns: `repeat(${warm.length + steps.length}, minmax(0, 1fr))` } },
     warm.map(() => h('span', { class: 'w' })), steps.map(() => h('span')));
   const header = h('header', { class: 'top' },
@@ -80,13 +102,19 @@ export default async function lesson(args) {
     if (st.kind === 'say') return st.english || plain(st.text);
     return plain(st.prompt || st.text);
   }
-  const stepLang = (st) => (st.kind === 'say' && st.english ? 'en' : lang);
+  // a say step, and a choice that plays its word, speak the word; every other step its words in her language
+  const wordFirst = (st) => !!target(st) && (st.kind === 'say' || st.kind === 'choice');
+  const stepLang = (st) => (st.kind === 'say' && st.english ? 'en' : wordFirst(st) ? target(st).lang : lang);
   // the step's recorded clip, when the pack has one (placeholders only for testers)
-  const stepClip = (st) => { const u = packClip((st.audio || {})[stepLang(st)]); return u ? hub.url(u) : null; };
-  const canSay = (st) => !!stepClip(st) || hasVoice(stepLang(st));
+  const clipIn = (st, l) => { const u = packClip((st.audio || {})[l]); return u ? hub.url(u) : null; };
+  const stepClip = (st) => clipIn(st, stepLang(st));
+  const canSay = (st) => !!stepClip(st) || (!recordedOnly && hasVoice(stepLang(st)));
+  // the taught word's recording, never the phone's voice
+  const sayWord = (st) => { const t = target(st); if (t) speak(t.text, t.lang, { audio: clipIn(st, t.lang), recorded: true }); };
   function pageSpeak() {
     const st = cur();
-    speak(mainText(st), stepLang(st), stepClip(st));
+    if (wordFirst(st)) { sayWord(st); return; }
+    speak(mainText(st), stepLang(st), { audio: stepClip(st), recorded: recordedOnly });
   }
 
   function pics(st) {
@@ -97,8 +125,11 @@ export default async function lesson(args) {
   }
   const promptRow = (t) => h('div', { class: 'listen-row' },
     speakerBtn(() => say(plain(t))), h('p', { class: 'prompt grow' }, rich(t)));
-  const englishRow = (t) => h('div', { class: 'row center' },
-    h('span', { class: 'english', dir: 'ltr', lang: 'en' }, t), speakerBtn(() => say(t, 'en')));
+  // the taught word: English left to right, or Chinese characters over their pinyin; its speaker plays the recording
+  const wordRow = (st) => h('div', { class: 'row center' },
+    st.zh ? h('div', { class: 'zh-word', dir: 'ltr' }, h('span', { class: 'zh', lang: 'zh-Hans' }, st.zh), pinyinLine(st.pinyin))
+      : h('span', { class: 'english', dir: 'ltr', lang: 'en' }, st.english),
+    speakerBtn(() => sayWord(st)));
 
   // right: the reason; wrong: "No, look again", never the answer, and she tries again
   function feedback(ok, why, note) {
@@ -110,20 +141,25 @@ export default async function lesson(args) {
       h('div', { class: 'msg' }, icon(ok ? 'check' : 'x', 26, 3), msg),
       shown ? h('div', { class: 'listen-row' }, speakerBtn(() => say(plain(shown)), { size: 'sm' }),
         h('div', { class: 'why grow' }, rich(shown))) : null);
-    if (young && hasVoice(lang)) say([msg, shown ? plain(shown) : ''].filter(Boolean).join('. '));
+    if (young && !recordedOnly && hasVoice(lang)) say([msg, shown ? plain(shown) : ''].filter(Boolean).join('. '));
   }
 
   const KINDS = {
-    letter: (st) => [
+    letter: (st) => (st.script === 'latn' ? [            // an English letter, its picture word and their recording
+      h('div', { class: 'letter latn', dir: 'ltr', lang: 'en' }, st.letter),
+      pics(st),
+      wordRow(st),
+      st.text ? h('div', { class: 'listen-row' }, speakerBtn(pageSpeak), h('p', { class: 'read grow' }, rich(st.text))) : null,
+    ] : [
       h('div', { class: 'letter' }, st.letter),
       st.forms ? h('div', { class: 'forms' }, st.forms) : null,
       pics(st),
       h('div', { class: 'row center' }, h('span', { class: 'word' }, pick(st.word)), speakerBtn(pageSpeak)),
       st.text ? h('p', { class: 'read' }, rich(st.text)) : null,
-    ],
+    ]),
     read: (st) => [
       pics(st),
-      st.english ? englishRow(st.english) : null,
+      target(st) ? wordRow(st) : null,
       h('div', { class: 'listen-row' }, speakerBtn(pageSpeak), h('p', { class: 'read grow' }, rich(st.text))),
     ],
     choice: (st) => {
@@ -140,7 +176,10 @@ export default async function lesson(args) {
         if (ok) solved = true; else opts[k].disabled = true;      // that one is out: she picks again
         feedback(ok, st.why);
       }
-      return [pics(st), promptRow(st.prompt), h('div', { class: 'options' + (opts.length === 3 ? ' three' : '') }, opts)];
+      // a word to listen for: its big speaker is the question, and `hide` keeps its text off the screen
+      const word = target(st) ? (st.hide ? h('div', { class: 'row center' }, speakerBtn(() => sayWord(st), { size: 'lg', label: s('hear') }))
+        : wordRow(st)) : null;
+      return [pics(st), word, promptRow(st.prompt), h('div', { class: 'options' + (opts.length === 3 ? ' three' : '') }, opts)];
     },
     number: (st) => {
       const right = parse(st.answer);
@@ -158,12 +197,13 @@ export default async function lesson(args) {
           inp, said(h('button', { class: 'btn primary', type: 'submit' }, s('check_answer'))))];
     },
     say: (st) => {
-      const en = !!st.english;
-      const word = en ? st.english : plain(st.text);
+      const t = target(st);
+      const word = t ? t.text : plain(st.text);
       const out = [
-        en ? h('div', { class: 'english', dir: 'ltr', lang: 'en' }, word) : h('div', { class: 'word' }, word),
-        en && st.text ? h('p', { class: 'read' }, rich(st.text)) : null,
-        speakerBtn(() => say(word, en ? 'en' : lang), { size: 'lg', label: s('hear') }),
+        st.zh ? h('div', { class: 'zh-word', dir: 'ltr' }, h('span', { class: 'zh', lang: 'zh-Hans' }, st.zh), pinyinLine(st.pinyin))
+          : t ? h('div', { class: 'english', dir: 'ltr', lang: 'en' }, word) : h('div', { class: 'word' }, word),
+        t && st.text ? h('p', { class: 'read' }, rich(st.text)) : null,
+        speakerBtn(() => (t ? sayWord(st) : say(word, lang)), { size: 'lg', label: s('hear') }),
       ];
       if (canRecord()) {
         const note = h('small', {}, s('say_note'));

@@ -1,0 +1,107 @@
+{
+  "id": "english-adult-3-numbers",
+  "subject": "english",
+  "year": 0,
+  "order": 3,
+  "unit": {
+    "prs": "عددها به انگلیسی",
+    "ps": "عددونه په انګلیسي"
+  },
+  "title": {
+    "prs": "یک، دو، سه",
+    "ps": "یو، دوه، درې"
+  },
+  "minutes": 10,
+  "steps": [
+    {
+      "kind": "read",
+      "english": "one, two, three",
+      "text": {
+        "prs": "عددهای ۱، ۲ و ۳ به انگلیسی. گوش بده و بشمار.",
+        "ps": "عددونه ۱، ۲ او ۳ په انګلیسي. غوږ ونیسه او وشمېره."
+      }
+    },
+    {
+      "kind": "choice",
+      "english": "three",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. کدام عدد است؟",
+        "ps": "غوږ ونیسه. کوم عدد دی؟"
+      },
+      "options": [
+        "۱",
+        "۲",
+        "۳"
+      ],
+      "answer": 2,
+      "why": {
+        "prs": "این سه است: ۳.",
+        "ps": "دا درې دي: ۳."
+      }
+    },
+    {
+      "kind": "choice",
+      "english": "two",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. کدام عدد است؟",
+        "ps": "غوږ ونیسه. کوم عدد دی؟"
+      },
+      "options": [
+        "۲",
+        "۳",
+        "۱"
+      ],
+      "answer": 0,
+      "why": {
+        "prs": "این دو است: ۲.",
+        "ps": "دا دوه دي: ۲."
+      }
+    },
+    {
+      "kind": "say",
+      "english": "one, two, three",
+      "answers": [
+        "one two three"
+      ],
+      "text": {
+        "prs": "گوش بده، بعد خودت بشمار.",
+        "ps": "غوږ ونیسه، بیا پخپله وشمېره."
+      }
+    }
+  ],
+  "sheet": {
+    "code": "EA-03",
+    "intro": {
+      "prs": "کلمه‌ها را با پنسل بنویس.",
+      "ps": "کلمې په پنسل ولیکه."
+    },
+    "items": [
+      {
+        "kind": "trace",
+        "text": "one",
+        "count": 3
+      },
+      {
+        "kind": "trace",
+        "text": "two",
+        "count": 3
+      },
+      {
+        "kind": "trace",
+        "text": "three",
+        "count": 3
+      }
+    ]
+  },
+  "review": {
+    "status": "draft",
+    "needs": [
+      "Dari reader",
+      "Pashto reader",
+      "English teacher",
+      "adult educator"
+    ]
+  }
+}

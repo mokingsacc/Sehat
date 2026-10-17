@@ -1103,6 +1103,7 @@
       "en"
     ],
     "bands": [
+      "s2",
       "ad"
     ],
     "subjects": [
@@ -1113,8 +1114,8 @@
     ],
     "offline": true,
     "attribution": "Chinese dictionary data from CC-CEDICT, CC BY-SA 4.0.",
-    "notes": "'CC-CEDICT is licensed under a Creative Commons Attribution-Share Alike 4.0 License.' Gives pinyin and English meanings for a starter word list that we translate into Dari and Pashto; our list must then be CC BY-SA.",
-    "checked": "2026-10-16"
+    "notes": "'CC-CEDICT is licensed under a Creative Commons Attribution-Share Alike 4.0 License.' Gives pinyin and English meanings for a starter word list that we translate into Dari and Pashto; our list must then be CC BY-SA. P27a (17 Oct 2026): the licence line read again in the downloaded file's header (\"Creative Commons Attribution-ShareAlike 4.0 International License\"); the Chinese starter (chinese-1, for s2 and adult readers, C4 question 15) checks its words and pinyin against it and is BY-SA as a whole.",
+    "checked": "2026-10-17"
   },
   {
     "id": "meta-mms",

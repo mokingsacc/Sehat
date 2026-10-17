@@ -334,6 +334,12 @@ const S = {
     v_names: 'قلم هیچ نامی نگه نمی‌دارد: نام روی کاغذ را با تذکره‌ی آن شخص مقایسه کنید.',
     v_missing: 'این شماره پیدا نشد. آن را بررسی کنید و دوباره کوشش کنید.',
     v_offline: 'برای بررسی به انترنت وصل شوید.',
+    // P27a (C4.4): English and Chinese words; drafts for a native speaker's check
+    not_recorded: 'این کلمه هنوز ضبط نشده است',
+    tone_1: 'لحن صاف',
+    tone_2: 'لحن بالارونده',
+    tone_3: 'لحن پایین و بالا',
+    tone_4: 'لحن پایین‌رونده',
   },
   ps: {
     app: 'قلم',
@@ -664,6 +670,12 @@ const S = {
     v_names: 'قلم هیڅ نوم نه ساتي: پر کاغذ نوم د هغه کس له تذکرې سره پرتله کړئ.',
     v_missing: 'دا شمېره ونه موندل شوه. وې ګورئ او بیا هڅه وکړئ.',
     v_offline: 'د کتلو لپاره انټرنټ ته وصل شئ.',
+    // P27a (C4.4): English and Chinese words; drafts for a native speaker's check
+    not_recorded: 'دا کلمه لا نه ده ثبت شوې',
+    tone_1: 'برابر غږ',
+    tone_2: 'پورته تلونکی غږ',
+    tone_3: 'ښکته او پورته غږ',
+    tone_4: 'ښکته تلونکی غږ',
   },
   en: {
     app: 'Qalam',
@@ -995,6 +1007,12 @@ const S = {
     v_names: "Qalam keeps no names: check the name on the paper against the person's ID.",
     v_missing: "We can't find this number. Check it and try again.",
     v_offline: 'Connect to the internet to check.',
+    // P27a (C4.4): English and Chinese words; drafts for a native speaker's check
+    not_recorded: 'This word is not recorded yet',
+    tone_1: 'level tone',
+    tone_2: 'rising tone',
+    tone_3: 'dipping tone',
+    tone_4: 'falling tone',
   },
 };
 

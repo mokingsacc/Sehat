@@ -283,7 +283,9 @@ about 300 per language, recorded by a native speaker; `manifest.json` names who 
 voice if it has one for the language (Dari and English on most Android phones; Pashto on none), then today's "voice
 not ready yet" toast. No synthetic Dari or Pashto voice is ever shipped: a learner of letter sounds must hear a real
 speaker. Release of a pack needs clips for every `ey` and `p1` step and every `letter` step, and for every step of a
-pack the adult literacy track sees (C4.3). Scripture and its translations take no phone voice at all (C4, change 7):
+pack the adult literacy track sees (C4.3). An English or Chinese lesson takes no phone voice at all (P27a, C4.4):
+every word she copies is a human voice, and an unrecorded one says "This word is not recorded yet". Scripture and its
+translations take no phone voice at all (C4, change 7):
 an unrecorded translation shows without a speaker, marked `data-voice="none"`, which the browser check allows on
 those elements only.
 
@@ -646,6 +648,26 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   keeps no day (October is always Mizan); the Pashto word for certificate (`تصدیق‌لیک`) and the Afghan month names are
   drafts; the paper has no Qalam mark or picture; the certificate screen shows no preview of the paper; the hub's
   print sends one copy and asks no PIN (it counts against the phone's copies an hour).
+
+## What P27a built, and where it differs
+
+- A taught word sits under the picture in its own row: English left to right in `--fs-xl` × 1.25 bold; Chinese as
+  characters (Noto Sans SC subset, `--fs-xl` × 1.9) over the pinyin, with a 24 by 15 px line in `--accent-ink` above
+  each marked syllable (level, rising, dipping, falling; the tone's name as the syllable's title). Its speaker plays
+  the recording only; without one, the toast "This word is not recorded yet".
+- An English letter (`script: "latn"`) is the 150 px letter in Vazirmatn bold, left to right, then the picture, then its
+  English picture word with the speaker, then the instruction with its speaker.
+- A listening `choice` (`hide`) shows one large speaker in place of the word, above the question; without `hide` the
+  word row shows.
+- "Say it" draws the mic only where the phone can record and keep it in memory (a secure browser page); in the APK and on
+  the hub's plain http the step is the word, the speaker and "Your turn", with no mic.
+- Chinese for s2 joins the subject list after the school subjects, only for a learner with lessons in it; adults reach
+  English and Chinese from the track rows as P26 built them.
+- Open look questions: the big button never starts a Chinese (or, later, Quran or seerah) lesson on its own, since a
+  chosen subject waits for her tap; the tone line sits between the characters and the pinyin rather than over the
+  characters; the Chinese and English lesson's instruction (Dari or Pashto) also plays only its recording, so an
+  unrecorded draft is silent there too; Chinese lessons carry year 0, as adult lessons do, and their sheet's corner tag
+  says "Starting".
 
 ---
 

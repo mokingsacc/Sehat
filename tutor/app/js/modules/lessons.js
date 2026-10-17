@@ -60,7 +60,7 @@ function nextClean({ child: c, lesson: l }) {
 export function tiles({ child: c, tone }) {
   const one = perButton();
   return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects'))),
-    h('div', { class: 'tiles' + (one ? ' one' : '') }, library.subjectOrder(c.lang).map((sub) => {
+    h('div', { class: 'tiles' + (one ? ' one' : '') }, library.subjectsFor(c).map((sub) => {
       const p = library.progress(c, sub);
       return said(h('a', { class: 'tile', href: '#/subject/' + sub },
         subjectBadge(sub, 46),
@@ -71,7 +71,7 @@ export function tiles({ child: c, tone }) {
 
 export function subjectList({ child: c }) {
   return [h('div', { class: 'section-head' }, h('h2', {}, s('subjects')), h('span', {}, s('every_lesson_open'))),
-    h('nav', { class: 'subjects', 'aria-label': s('subjects') }, library.subjectOrder(c.lang).map((sub) => {
+    h('nav', { class: 'subjects', 'aria-label': s('subjects') }, library.subjectsFor(c).map((sub) => {
       const p = library.progress(c, sub);
       return h('a', { href: '#/subject/' + sub },
         subjectBadge(sub, 42),

@@ -37,7 +37,7 @@ that fails). Print every sheet for the reviewers with `python tools/make_sheets.
 ```jsonc
 {
   "id": "maths-7-fractions-add",          // lower case, digits and dashes; the file name too
-  "subject": "maths",                      // maths, science, english, dari or pashto
+  "subject": "maths",                      // maths, science, english, dari, pashto or chinese
   "year": 7,                               // 0 (not in school yet) to 12
   "order": 3,                              // its place in the year
   "unit": {"prs": "کسرها", "ps": "کسرونه"},
@@ -87,11 +87,33 @@ naming a clip in `audio/<lang>/manifest.json`. No synthetic voice, ever: clips a
 
 | kind | fields | the child |
 |---|---|---|
-| `read` | `text`, optional `picture`, `picture_count` (1-10), `english` | reads or listens |
-| `letter` | `letter`, `forms` (the joined shapes), `word`, `picture`, `text` | sees a big letter, hears it |
-| `choice` | `prompt`, `options` (2-4: text, `{"prs","ps"}`, or `{"picture","text"}`), `answer` (from 0), `why` | taps one; sees why |
+| `read` | `text`, optional `picture`, `picture_count` (1-10), `english`, or `zh` with `pinyin` | reads or listens |
+| `letter` | `letter`, `forms` (the joined shapes), `word`, `picture`, `text`; an English letter: `"script": "latn"`, `letter` like `Aa`, `english` (its picture word) | sees a big letter, hears it |
+| `choice` | `prompt`, `options` (2-4: text, `{"prs","ps"}`, or `{"picture","text"}`), `answer` (from 0), `why`; optional `english` or `zh` (the word plays as the question) and `"hide": true` (its text hidden: listening) | taps one; sees why |
 | `number` | `prompt`, `answer` (one number or fraction such as `1/2`, `0.5` or `1 1/2`, never a sum), `why` | types it; 2/4 is right but "make it simpler" |
-| `say` | `text` (the words to say) or `english` plus `text` as the instruction | hears it, records themself, hears it back |
+| `say` | `text` (the words to say) or `english` (or `zh` with `pinyin`) plus `text` as the instruction; `answers` (below) | hears it, records themself where the phone can, hears it back |
+
+### English and Chinese lessons (P27a, C4.4)
+
+- **The words she learns are written in their own script and played only from a recording.** `english` is Latin
+  letters; `zh` is Chinese characters with `pinyin` in Latin letters and tone marks (`nǐ hǎo`), and the app draws a
+  small line over each tone (level, rising, dipping, falling). No Dari-script spelling of an English word: the
+  recording is the model. An English or Chinese lesson takes no phone voice at all.
+- **Release:** every `english` field and every `say` step of an `english` lesson needs a clip recorded by a human
+  English speaker (`"audio": {"en": "clip-name"}`, in `audio/en/manifest.json`); every `zh` field of a `chinese`
+  lesson one by a native Mandarin speaker (`audio/zh/`). Placeholders never count. `validate_pack.py --clips` prints
+  the recording job with the words to say. Tatoeba items only under CC0 or CC BY, never SA.
+- **`say.answers`:** one to five fixed phrases of one to four English words, kept for P27b's speech check (which waits
+  for D12). Never a blank ("My name is ...") or a personal slot (name, age, city, phone number): those stay
+  hear-yourself, so no name leaves a phone in her own voice.
+- **A pack outside the school years** names who it is for: `"bands": ["s2", "ad"]` (the Chinese starter), with
+  `tracks` for its adults. Its lessons show to those bands whatever their year (use year 0), and never to the
+  literacy track unless `tracks` says so. CC-CEDICT makes the Chinese pack `"share_alike": true`, so it holds no NC
+  item. "Say it" records only in a browser with a microphone: the APK (no microphone permission) and the hub's plain
+  http draw no mic, and the step is "hear it, say it".
+- **The font:** Chinese is drawn in a subset of Noto Sans SC holding only the packs' characters and pinyin
+  (`app/fonts/noto-sc.woff2`), which the sheets embed too. Run `python3 tools/make_fonts.py --source
+  NotoSansSC-Regular.otf` whenever a pack's Chinese changes; a hub test fails while a character is missing.
 
 ### The worksheet
 

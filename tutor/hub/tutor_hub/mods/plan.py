@@ -27,7 +27,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 
 from .. import flags, graph, rules, search
 from ..ai import filters
-from ..packs import band_of_year
+from ..packs import lesson_bands
 from ..packs import text as pick_text
 from ..sheets import SUBJECT_NAMES
 from ..textnorm import tokens
@@ -54,13 +54,10 @@ class PlanIn(BaseModel):
 
 
 def lessons_for(library, band: str) -> list[tuple[str, dict]]:
-    """The lessons this hub serves to her band, in pack order: adults from adult packs, children by year."""
-    out = []
-    for lid, l in library.lessons.items():
-        adult = (library.packs.get(library.lesson_pack.get(lid)) or {}).get("audience", "child") == "adult"
-        if (band == "ad") == adult and (adult or band_of_year(l["year"]) == band):
-            out.append((lid, l))
-    return out
+    """The lessons this hub serves to her band, in pack order: adults from adult packs, children by year, and a pack
+    with `bands` (P27a) to those bands."""
+    return [(lid, l) for lid, l in library.lessons.items()
+            if band in lesson_bands(l, library.packs.get(library.lesson_pack.get(lid)) or {})]
 
 
 AI_PICKS = 3

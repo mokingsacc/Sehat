@@ -1,0 +1,29 @@
+{
+  "id": "chinese-1",
+  "version": "2026.10.17",
+  "title": {
+    "prs": "چینایی برای آغاز",
+    "ps": "چینايي د پیل لپاره",
+    "en": "Chinese: first steps"
+  },
+  "about": {
+    "en": "A Chinese starter for s2 and adult readers (P27a, C4.4), taught through Dari and Pashto: characters, pinyin with tone marks, and each tone drawn as a small line. A first three lessons as drafts (about ten to come). Words and pinyin checked against CC-CEDICT, so the pack is CC BY-SA and holds no NC item. It stays a draft until a native Mandarin speaker records every word and tone; the Dari and Pashto lines are drafts for native speakers."
+  },
+  "langs": [
+    "prs",
+    "ps"
+  ],
+  "bands": [
+    "s2",
+    "ad"
+  ],
+  "tracks": [
+    "reader"
+  ],
+  "share_alike": true,
+  "lessons": [
+    "chinese-1-hello",
+    "chinese-2-numbers",
+    "chinese-3-things"
+  ]
+}

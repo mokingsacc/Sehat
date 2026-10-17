@@ -33,6 +33,7 @@ SUBJECT_NAMES = {
     "english": {"prs": "انگلیسی", "ps": "انګلیسي", "en": "English"},
     "dari": {"prs": "دری", "ps": "دري", "en": "Dari"},
     "pashto": {"prs": "پښتو", "ps": "پښتو", "en": "Pashto"},
+    "chinese": {"prs": "چینایی", "ps": "چینايي", "en": "Chinese"},
 }
 WORDS = {
     "name": {"prs": "نام", "ps": "نوم", "en": "Name"},
@@ -96,6 +97,11 @@ def esc(s) -> str:
 
 def is_latin(s: str) -> bool:
     return bool(re.search(r"[A-Za-z]", s)) and not re.search(r"[؀-ۿ]", s)
+
+
+def is_han(s: str) -> bool:
+    """Chinese characters (P27a): traced in the Chinese font subset, app/fonts/noto-sc.woff2."""
+    return bool(re.search(r"[\u3400-\u9fff]", s))
 
 
 def digits(s, lang: str) -> str:
@@ -507,9 +513,10 @@ CSS = """
 @font-face{font-family:'Vazirmatn';font-weight:800;src:url(FONTS/vazirmatn-800.woff2) format('woff2')}
 @font-face{font-family:'Naskh';font-weight:500;src:url(FONTS/naskh-500.woff2) format('woff2')}
 @font-face{font-family:'Naskh';font-weight:700;src:url(FONTS/naskh-700.woff2) format('woff2')}
+@font-face{font-family:'NotoSC';font-weight:500;src:url(FONTS/noto-sc.woff2) format('woff2')}
 *{box-sizing:border-box}
 html{color:#000;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{margin:0;font-family:Vazirmatn,'Noto Naskh Arabic',sans-serif;font-weight:500;line-height:1.5}
+body{margin:0;font-family:Vazirmatn,'Noto Naskh Arabic','NotoSC',sans-serif;font-weight:500;line-height:1.5}
 .m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:Vazirmatn,sans-serif}
 .en{direction:ltr;unicode-bidi:isolate}
 .fr{display:inline-block;vertical-align:middle;text-align:center;margin:0 .6mm;line-height:1.15}
@@ -551,6 +558,7 @@ SHEET_CSS = """
 .bold .trace{font-size:38pt}
 .trace.word{font-size:28pt}.bold .trace.word{font-size:31pt}
 .trace.latin{font-family:Vazirmatn,sans-serif;font-weight:500;direction:ltr;font-size:24pt}.bold .trace.latin{font-size:26pt}
+.trace.han{font-family:'NotoSC',sans-serif;font-weight:500;direction:ltr;font-size:30pt}
 .write-row{display:flex;gap:2.5mm;margin-top:2mm}
 .write-row span{flex:1;height:12mm;border:1.2pt solid #000;border-radius:2.5mm}
 .bold .write-row span{height:13mm}
@@ -628,7 +636,7 @@ def _item_body(it: dict, li: dict, lang: str, pic, bold: bool) -> str:
         t = str(it["text"])
         word = len(t) > 1
         count = it.get("count", 6 if not word else 3)
-        cls = "trace" + (" word" if word else "") + (" latin" if is_latin(t) else "")
+        cls = "trace" + (" word" if word else "") + (" latin" if is_latin(t) else " han" if is_han(t) else "")
         body = f'<div class="{cls}">' + "".join(f"<span>{esc(t)}</span>" for _ in range(count)) + "</div>"
         boxes = it.get("boxes", min(count, 6) if not word else 3)
         if boxes:

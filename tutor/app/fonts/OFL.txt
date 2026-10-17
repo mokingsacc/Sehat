@@ -1,5 +1,8 @@
 Vazirmatn: Copyright 2015 The Vazirmatn Project Authors (https://github.com/rastikerdar/vazirmatn)
 Noto Naskh Arabic: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic)
+Noto Sans SC: Copyright 2014-2021 Adobe (http://www.adobe.com/), with the Noto Project Authors
+(https://github.com/notofonts/noto-cjk); noto-sc.woff2 is a subset holding only the Chinese packs' characters and
+pinyin (tools/make_fonts.py, P27a), made from NotoSansSC-Regular.otf
 
 Both fonts are static instances from Google Fonts (Vazirmatn 500 and 800, Noto Naskh Arabic 500 and 700),
 whole files rather than split subsets, so the printed sheets (WeasyPrint) and the app use the very same files.

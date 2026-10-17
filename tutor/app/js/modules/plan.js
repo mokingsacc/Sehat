@@ -15,7 +15,6 @@
 // One plan at a time: starting another while one has a lesson left asks once, "Stop 'Fractions' and start 'Money'?"
 // (begin). A finished plan: Home's card says once "Done: Fractions", then the plan clears.
 
-import { bandOf } from '../bands.js';
 import { getLang, pick, s } from '../i18n.js';
 import * as library from '../library.js';
 import { allows, on } from '../modules.js';
@@ -41,8 +40,7 @@ export const canFollow = (c) => !!c && BANDS.includes(c.band) && on('plan') && a
 
 // the lessons the phone knows for her band, in pack order (adults: adult packs; children: their band's years)
 export function bandLessons(c) {
-  return library.all().filter((l) => (c.band === 'ad'
-    ? l.audience === 'adult' && library.trackFits(c, l) : l.audience !== 'adult' && bandOf({ year: l.year }) === c.band));
+  return library.all().filter((l) => library.serves(c, l));           // a pack with bands too (P27a)
 }
 
 export function doneFor(c, id) {

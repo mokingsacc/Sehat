@@ -65,7 +65,7 @@ def _step_hashes(lib, lid: str) -> list[str]:
 
 def _missing_clips(lib, lid: str, role: str) -> list[int]:
     """Steps that need a recording in the role's language (years 0 to 3, an adult literacy pack, and every letter
-    step) and lack one."""
+    step) and lack one; for a subject teacher, also every English or Chinese word without its recording (P27a)."""
     raw = lib.lessons[lid]
     pack = lib.packs[lib.lesson_pack[lid]]
     clips = pack.get("_clips", {})
@@ -81,7 +81,12 @@ def _missing_clips(lib, lid: str, role: str) -> list[int]:
             if not entry or entry.get("placeholder"):
                 out.append(i)
                 break
-    return out
+    if role not in LANG_OF_ROLE:            # P27a: the subject teacher hears every English or Chinese word recorded
+        for i, al in packs.studied_clip_steps(raw):
+            entry = clips.get(al, {}).get((raw["steps"][i - 1].get("audio") or {}).get(al))
+            if (not entry or entry.get("placeholder")) and i not in out:
+                out.append(i)
+    return sorted(out)
 
 
 def _graph_hashes(g: dict) -> list[str]:

@@ -1,0 +1,25 @@
+{
+  "id": "english-adult-1",
+  "version": "2026.10.17",
+  "title": {
+    "prs": "انگلیسی برای آغاز",
+    "ps": "انګلیسي د پیل لپاره",
+    "en": "English: first steps"
+  },
+  "about": {
+    "en": "English for adult readers (P27a, C4.4), taught through Dari and Pashto. A first three lessons as drafts; the content team adds the rest (about ten). Every English word is recorded by a human English speaker and every instruction by native Dari and Pashto speakers before release; no Dari-script spelling of English words, because the recording is the model. The Dari and Pashto lines are drafts for native speakers."
+  },
+  "langs": [
+    "prs",
+    "ps"
+  ],
+  "audience": "adult",
+  "tracks": [
+    "reader"
+  ],
+  "lessons": [
+    "english-adult-1-hello",
+    "english-adult-2-letters",
+    "english-adult-3-numbers"
+  ]
+}

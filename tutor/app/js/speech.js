@@ -4,6 +4,10 @@
 // language (most Android phones read Persian; few read Pashto yet), then the "voice not ready yet" note.
 // No synthetic Dari or Pashto voice is ever shipped: every clip is a recording by a native speaker. Clips marked
 // as placeholders (stand-ins to test the plumbing, not speech) are skipped unless a tester turns them on.
+// Since P27a (C4.4) an English or Chinese lesson takes no phone voice at all (`recorded: true`): every word she
+// copies is a human voice, so an unrecorded one says "not recorded yet" rather than a phone reading it.
+// "Say it" records only in a browser (P27a, C4.4): the APK has no microphone (C3.6, its bridge says so) and the hub's
+// plain http gives a page none, so there the step is "hear it, say it" with no mic drawn.
 
 import { s } from './i18n.js';
 import { toast } from './ui.js';
@@ -57,9 +61,10 @@ export function stop() {
   if (globalThis.speechSynthesis) speechSynthesis.cancel();
 }
 
-// text: plain text to read; lang: prs, ps or en; opts: a pack clip (URL or {url, placeholder}), or {audio, key, shown}
-// where key is the i18n key of an interface string, whose recorded clip plays first; with `shown`, a phone without
-// a voice shows the words in a toast instead of "voice not ready" (the school day's bells: P19)
+// text: plain text to read; lang: prs, ps, en or zh; opts: a pack clip (URL or {url, placeholder}), or {audio, key,
+// shown, recorded} where key is the i18n key of an interface string, whose recorded clip plays first; with `shown`, a
+// phone without a voice shows the words in a toast instead of "voice not ready" (the school day's bells: P19); with
+// `recorded`, only a recording plays, never the phone's voice (P27a)
 export async function speak(text, lang, opts) {
   stop();
   const o = opts && typeof opts === 'object' && !('url' in opts) ? opts : { audio: opts };
@@ -68,9 +73,10 @@ export async function speak(text, lang, opts) {
   if (url) {
     const a = new Audio(url);
     current = a;
-    a.play().catch(() => sayWithVoice(text, lang, o.shown));
+    a.play().catch(() => (o.recorded ? toast(s('not_recorded')) : sayWithVoice(text, lang, o.shown)));
     return;
   }
+  if (o.recorded) { toast(s('not_recorded')); return; }
   sayWithVoice(text, lang, o.shown);
 }
 
@@ -149,6 +155,9 @@ export async function chime(url) {
 if (globalThis.speechSynthesis) speechSynthesis.onvoiceschanged = () => {};
 
 export function canRecord() {
+  const app = globalThis.QalamAndroid;
+  if (app) { try { if (typeof app.canRecord !== 'function' || app.canRecord() !== true) return false; } catch { return false; } }
+  if (globalThis.isSecureContext === false) return false;
   return !!(globalThis.navigator && navigator.mediaDevices && navigator.mediaDevices.getUserMedia && globalThis.MediaRecorder);
 }
 

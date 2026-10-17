@@ -1,0 +1,135 @@
+{
+  "id": "chinese-1-hello",
+  "subject": "chinese",
+  "year": 0,
+  "order": 1,
+  "unit": {
+    "prs": "سلام و تشکر",
+    "ps": "سلام او مننه"
+  },
+  "title": {
+    "prs": "سلام به چینایی",
+    "ps": "په چینايي سلام"
+  },
+  "minutes": 10,
+  "steps": [
+    {
+      "kind": "read",
+      "zh": "你好",
+      "pinyin": "nǐ hǎo",
+      "text": {
+        "prs": "این یعنی سلام. خط بالای هر هجا لحن آن را نشان می‌دهد. گوش بده.",
+        "ps": "دا یعنې سلام. د هر څپې پورته کرښه یې غږ ښيي. غوږ ونیسه."
+      }
+    },
+    {
+      "kind": "read",
+      "zh": "谢谢",
+      "pinyin": "xièxie",
+      "text": {
+        "prs": "این یعنی تشکر.",
+        "ps": "دا یعنې مننه."
+      }
+    },
+    {
+      "kind": "read",
+      "zh": "再见",
+      "pinyin": "zàijiàn",
+      "text": {
+        "prs": "این یعنی خدا حافظ.",
+        "ps": "دا یعنې په مخه دې ښه."
+      }
+    },
+    {
+      "kind": "choice",
+      "zh": "你好",
+      "pinyin": "nǐ hǎo",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. این یعنی چه؟",
+        "ps": "غوږ ونیسه. دا یعنې څه؟"
+      },
+      "options": [
+        {
+          "prs": "تشکر",
+          "ps": "مننه"
+        },
+        {
+          "prs": "سلام",
+          "ps": "سلام"
+        },
+        {
+          "prs": "خدا حافظ",
+          "ps": "په مخه دې ښه"
+        }
+      ],
+      "answer": 1,
+      "why": {
+        "prs": "«nǐ hǎo» یعنی سلام.",
+        "ps": "«nǐ hǎo» یعنې سلام."
+      }
+    },
+    {
+      "kind": "say",
+      "zh": "你好",
+      "pinyin": "nǐ hǎo",
+      "text": {
+        "prs": "گوش بده، بعد خودت بگو.",
+        "ps": "غوږ ونیسه، بیا یې پخپله ووایه."
+      }
+    }
+  ],
+  "sheet": {
+    "code": "ZH-01",
+    "intro": {
+      "prs": "حرف‌های چینایی را با پنسل بنویس.",
+      "ps": "چینايي توري په پنسل ولیکه."
+    },
+    "items": [
+      {
+        "kind": "trace",
+        "text": "你好",
+        "count": 4
+      },
+      {
+        "kind": "trace",
+        "text": "谢谢",
+        "count": 4
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "cc-cedict",
+      "item": "你好",
+      "title": "CC-CEDICT entry 你好",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    },
+    {
+      "id": "cc-cedict",
+      "item": "谢谢",
+      "title": "CC-CEDICT entry 谢谢",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    },
+    {
+      "id": "cc-cedict",
+      "item": "再见",
+      "title": "CC-CEDICT entry 再见",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "needs": [
+      "Dari reader",
+      "Pashto reader",
+      "Chinese teacher"
+    ]
+  }
+}

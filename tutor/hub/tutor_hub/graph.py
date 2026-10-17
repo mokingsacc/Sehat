@@ -138,7 +138,8 @@ def check(g, known: dict, where: str) -> list[str]:
         if not isinstance(bands, list) or not bands or any(b not in BANDS for b in bands):
             p.append(f"{w} ({pid}): bands must list bands, like [\"ad\"]")
             bands = []
-        have = {known[lid]["band"] for x in goal for lid in by_id[x].get("lessons", []) if lid in known}
+        have = {b for x in goal for lid in by_id[x].get("lessons", []) if lid in known
+                for b in known[lid].get("bands", [known[lid]["band"]])}
         for b in bands:
             if b not in have:
                 p.append(f"{w} ({pid}): its goal has no lesson for band {b}")

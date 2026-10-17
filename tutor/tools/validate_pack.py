@@ -10,6 +10,8 @@ so does a link card holding anything but our own short description.
 --release also refuses any lesson or link card its reviewers have not signed (each role in review.needs signing
 the current content hash), and lessons for the youngest learners without recorded clips (no synthetic voice).
 --hashes prints each lesson's and link card's content hash, which is what a reviewer signs.
+--clips prints the recording job (P27a): each clip release would want and the packs lack, with the words to say, as
+tab-separated lines for the recorders (pack, lesson, step, language, words). Recordings only: no synthetic voice.
 
 The skills graphs (content/graph/<subject>.json, P25a) are checked too, against the lessons that loaded (graph.py):
 --release refuses one its reviewers have not signed, and --hashes prints each graph's hash as graph:<subject>.
@@ -23,7 +25,7 @@ TUTOR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TUTOR / "hub"))
 
 from tutor_hub.licences import sha256_bytes  # noqa: E402
-from tutor_hub.packs import AUDIO_EXT, Library  # noqa: E402
+from tutor_hub.packs import AUDIO_EXT, Library, clips_needed  # noqa: E402
 
 
 def audio_problems(pid: str, pdir: Path, clips: dict) -> list[str]:
@@ -51,6 +53,7 @@ def main(argv=None):
                     help="also refuse lessons and link cards that are not signed, and young learners' lessons without clips")
     ap.add_argument("--sources", type=Path, default=None, help="the sources file (default content/sources.json)")
     ap.add_argument("--hashes", action="store_true", help="print the content hash of every lesson and link card")
+    ap.add_argument("--clips", action="store_true", help="print the clips still to record, with their words")
     a = ap.parse_args(argv)
     lib = Library(a.packs, release=a.release, sources=a.sources)
     problems = list(lib.sources.problems) + list(lib.problems)
@@ -69,6 +72,10 @@ def main(argv=None):
             print(f"links:{c['id']}\t{c['_hash']}\t{c['_state']}")
         for sub, g in sorted(lib.graphs.items()):
             print(f"graph:{sub}\t{g['_hash']}\t{g['_state']}")
+    if a.clips:
+        for c in clips_needed(lib):
+            print("\t".join([c["pack"], c["lesson"], str(c["step"]), c["lang"], c["words"].replace("\t", " ")]
+                            + (["(placeholder now)"] if c["placeholder"] else [])))
     for p in problems:
         print("problem:", p)
     if lib.graphs:

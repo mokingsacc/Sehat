@@ -39,6 +39,10 @@ CARD_KEYS = ("id", "source", "title", "about", "url", "subject", "years", "lesso
 CARD_ABOUT_MAX = 140
 CARD_TITLE_MAX = 120
 
+# sources whose items Qalam takes only without share-alike, by a committee ruling: Tatoeba's recordings only CC0 or
+# CC BY, never SA (C4.4), so the English pack stays free of share-alike
+NO_SHARE_ALIKE = {"tatoeba": "C4.4: Tatoeba items only under CC0 or CC BY, never SA"}
+
 _DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 _SHA = re.compile(r"^sha256:[0-9a-f]{64}$")
 _ID = re.compile(r"^[a-z0-9][a-z0-9-]{1,63}$")
@@ -50,6 +54,9 @@ APP_CREDITS = [
      "licence_url": "https://openfontlicense.org", "url": "https://github.com/rastikerdar/vazirmatn"},
     {"name": "Noto Naskh Arabic", "owner": "The Noto Project Authors", "licence": "SIL Open Font License 1.1",
      "licence_url": "https://openfontlicense.org", "url": "https://github.com/notofonts/arabic"},
+    {"name": "Noto Sans SC (Chinese, a subset)", "owner": "Adobe and The Noto Project Authors",
+     "licence": "SIL Open Font License 1.1", "licence_url": "https://openfontlicense.org",
+     "url": "https://github.com/notofonts/noto-cjk"},
 ]
 
 
@@ -240,6 +247,8 @@ class Sources:
         t = item_terms(e.get("licence", ""))
         if "per_item_licence" in flags and cls in COPYABLE and not t["open"]:
             p.append(f"{w}: the item's own licence ({e.get('licence')!r}) does not allow copying; link to it instead")
+        if sid in NO_SHARE_ALIKE and t["sa"]:
+            p.append(f"{w}: share-alike is refused here ({NO_SHARE_ALIKE[sid]})")
         nc = cls == "BUNDLE-NC" or t["nc"]
         if nc and not pack_nc:
             p.append(f"{w}: non-commercial (NC) material goes only into packs marked \"licence\": \"NC\"")
