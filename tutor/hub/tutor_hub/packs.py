@@ -673,11 +673,13 @@ class Library:
         self.known: dict[str, dict] = {}          # every lesson that loaded, served or not: {band, sheet} (the graph)
         self.graphs: dict[str, dict] = {}         # the skills graphs by subject (graph.py, P25a)
         self.graph_dir = self.dir.parent / "graph"
+        self.contests: dict[str, dict] = {}       # the contests (contests.py, P31), checked against these lessons
+        self.contest_dir = self.dir.parent / "contests"
         self.load()
 
     def load(self):
         for x in (self.packs, self.lessons, self.lesson_pack, self.hashes, self.states, self.terms, self.known,
-                  self.graphs):
+                  self.graphs, self.contests):
             x.clear()
         self.links.clear(); self.hidden.clear(); self.problems.clear(); self.checklists.clear()
         if not self.dir.is_dir():
@@ -763,6 +765,11 @@ class Library:
         from . import graph                   # the skills graphs map nodes to the lessons just loaded
         graphs, probs, hidden = graph.load(self.graph_dir, self.known, release=self.release)
         self.graphs.update(graphs)
+        self.problems.extend(probs)
+        self.hidden.extend(hidden)
+        from . import contests                # a contest asks the served lessons' own steps (P31)
+        found, probs, hidden = contests.load(self.contest_dir, self, release=self.release)
+        self.contests.update(found)
         self.problems.extend(probs)
         self.hidden.extend(hidden)
         for x in self.problems:

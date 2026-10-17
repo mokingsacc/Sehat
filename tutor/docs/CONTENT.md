@@ -313,6 +313,36 @@ lesson's content hash and signatures do not move when the graph changes, and no 
 - A step a reviewer wants in spaced review can say `"recall": true` (only on a `choice` or `number` step); without
   any, a lesson's last two such steps are used (C4.1).
 
+### Contests (P31, C6.5)
+
+A contest is `content/contests/<id>.json`: a short set of questions taken from signed lessons, which the admin opens
+to a class for a while. Its only words of its own are its title; every question is a lesson step that the lesson's
+reviewers already read.
+
+```json
+{"id": "maths-week-3", "title": {"prs": "...", "ps": "...", "en": "Maths week 3"}, "subject": "maths",
+ "bands": ["s1"], "langs": ["prs", "ps", "en"], "opens_at": "2027-10-25T08:00", "closes_at": "2027-10-26T08:00",
+ "minutes": 20, "items": [{"lesson": "maths-7-fractions-add", "step": 3}, ...], "certificate": true,
+ "scope": "class", "review": {"status": "draft", "needs": ["Dari reader", "Pashto reader", "maths teacher"]}}
+```
+
+- The id is lower case with dashes and is the file's name. Times are UTC minutes. The window runs from one hour to
+  14 days, and `minutes` (her own time once she starts) from 5 to 60.
+- There are 5 to 30 items, each used once. Each one names a `choice` or `number` step of a lesson of the contest's
+  subject, counted from 1, and that lesson must be served to every listed band and language.
+- The title is in Dari, Pashto and English, at most 80 characters each. It passes the no-promise lint and the contest
+  list: no prize, money, winner, first place or award, in any of the three languages. A contest gives no prize and
+  shows no ranking. `"certificate": true` gives a "took part in" paper, never a score.
+- `scope` (`class` or `all`) is advice to the admin. A contest reaches a class only when the admin opens it there
+  on the Content screen, and only once all its reviewers signed it at its current hash.
+- The hash is the file without its review, plus each item's lesson hash, so a changed lesson voids the contest's
+  signatures. Reviewers sign on the contest page in `/review/`: item 0 is the contest itself, and each question
+  shows with its answer and why. `tools/pull_signoffs.py` copies the signatures in. In release mode, a contest
+  that is unsigned, or that asks a lesson that is unsigned or not served, is held. `tools/validate_pack.py
+  --contests` (or `--hashes`) prints each contest's hash as `contest:<id>`.
+- No contest file ships with the content yet. The `contest` module is off in every seed cohort, and under
+  `TUTOR_RELEASE` it stays locked until `cohorts/gates/contest.json` is filled (RELEASE.md 3c).
+
 ### Importing
 
 `tools/import_bloom.py` turns a Bloom book (Afghan Children Read, or another Bloom Library book whose own licence

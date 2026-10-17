@@ -1,0 +1,14 @@
+{
+  "id": "contest",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["p1", "p2", "s1", "s2", "ad"],
+  "slots": ["home.action"],
+  "capabilities": [],
+  "settings": {
+    "per_day": {"type": "int", "default": 3, "min": 1, "max": 10}
+  },
+  "needs": [],
+  "offline": "partly"
+}

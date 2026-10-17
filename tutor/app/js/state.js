@@ -93,7 +93,8 @@ function clean(l) {
     ...(l.alarms === 'off' ? { alarms: 'off' } : {}),
     // 7b (C4.10): an adult's study time, {at: "19:00", min: 30} or 'off' once she answered "A time to study"
     ...(cleanStudy(l.study) !== null ? { study: cleanStudy(l.study) } : {}),
-    // P25b (C4.2): her certificates, [{path, id, month}], never a name (the paper itself is in the cache)
+    // P25b (C4.2): her certificates, [{path, id, month}], never a name (the paper itself is in the cache); since P31
+    // a contest's path is `contest:<id>`
     ...(cleanCerts(l.certs).length ? { certs: cleanCerts(l.certs) } : {}),
     // P26: an adult on the literacy track has answered "You can read now. Use the reader look?" (asked once)
     ...(l.readerAsked === true ? { readerAsked: true } : {}),
@@ -117,7 +118,30 @@ function clean(l) {
     ...(cleanMade(l.made).length ? { made: cleanMade(l.made) } : {}),
     // P30a (C6.2): the last live class she saw end, so a stale hello never offers it again; nothing else of a class
     ...(typeof l.liveSeen === 'string' && /^[a-z0-9]{16}$/.test(l.liveSeen) ? { liveSeen: l.liveSeen } : {}),
+    // P31 (C6.5): the contests she joined (at most 50): her answers until she sends them and after, for "See the
+    // answers" once the key comes; the percent, right and n the server sent back. Never a place or anyone else's
+    ...(cleanContests(l.contests).length ? { contests: cleanContests(l.contests) } : {}),
   };
+}
+
+// (its helpers live inside it: the store is read while this module loads, before later constants exist)
+function cleanContests(v) {
+  if (!Array.isArray(v)) return [];
+  const CONTEST_ID = /^[a-z][a-z0-9-]{1,47}$/;
+  const MINUTE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+  const count = (x, lo, hi) => Number.isInteger(x) && x >= lo && x <= hi;
+  const answerOf = (a) => (count(a, 0, 9) || (typeof a === 'string' && a.length <= 40) ? a : null);
+  const seen = new Set();
+  return v.filter((x) => x && typeof x.id === 'string' && CONTEST_ID.test(x.id) && !seen.has(x.id) && seen.add(x.id)
+    && count(x.joined, 1, 8.64e15) && typeof x.closes === 'string' && MINUTE.test(x.closes))
+    .slice(-50)
+    .map((x) => ({
+      id: x.id, subject: typeof x.subject === 'string' && /^[a-z]{2,16}$/.test(x.subject) ? x.subject : null,
+      joined: x.joined, closes: x.closes,
+      answers: (Array.isArray(x.answers) ? x.answers : []).slice(0, 30).map(answerOf),
+      ...(count(x.n, 1, 30) && count(x.right, 0, x.n) && count(x.percent, 0, 100) && count(x.at, 1, 8.64e15)
+        ? { n: x.n, right: x.right, percent: x.percent, at: x.at } : {}),
+    }));
 }
 
 function cleanMade(v) {
@@ -145,7 +169,7 @@ function cleanUni(v) {
 
 function cleanCerts(v) {
   if (!Array.isArray(v)) return [];
-  return v.filter((x) => x && typeof x.path === 'string' && /^[a-z0-9][a-z0-9-]{0,47}$/.test(x.path)
+  return v.filter((x) => x && typeof x.path === 'string' && /^(contest:)?[a-z0-9][a-z0-9-]{0,47}$/.test(x.path)
     && typeof x.id === 'string' && /^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$/.test(x.id)
     && typeof x.month === 'string' && /^\d{4}-\d{2}$/.test(x.month))
     .slice(-50).map((x) => ({ path: x.path, id: x.id, month: x.month }));

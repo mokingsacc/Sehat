@@ -74,6 +74,7 @@ const ICONS = {
   bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/>',
   // live classes (P30a): a raised hand, and the sound of a class going live
   hand: '<path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11"/><path d="M11 10V4a1.5 1.5 0 0 1 3 0v6"/><path d="M14 10V5.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-.5a6 6 0 0 1-4.6-2.2l-3.1-3.9a1.6 1.6 0 0 1 2.4-2.1L8 14.5"/>',
+  flag: '<path d="M5 21V4"/><path d="M5 4h12l-2.5 4.5L17 13H5"/>',
   live: '<circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8"/>',
 };
 
@@ -265,17 +266,22 @@ function netSheet(text, waits) {
 }
 
 // one question with two answers, in the net sheet's shape (P25a: "Stop 'Fractions' and start 'Money'?"): the
-// confirming button first, then Cancel. Resolves true or false; tapping outside is Cancel.
-export function confirmSheet(text, yes, no = s('cancel')) {
+// confirming button first, then Cancel. Resolves true or false; tapping outside, or Escape, is Cancel. `safe`: what
+// cannot be undone (a contest's Send, P31) puts the focus on Cancel.
+export function confirmSheet(text, yes, no = s('cancel'), { safe = false } = {}) {
   document.querySelectorAll('.netsheet').forEach((el) => el.remove());
   return new Promise((done) => {
-    const close = (v) => { sheet.remove(); done(v); };
+    const close = (v) => { sheet.remove(); document.removeEventListener('keydown', esc); done(v); };
+    const esc = (e) => { if (e.key === 'Escape') close(false); };
+    const cancel = h('button', { type: 'button', class: 'btn sheet-no', onClick: () => close(false) }, no);
     const sheet = h('div', { class: 'netsheet', role: 'dialog', 'aria-modal': 'true', onClick: (e) => { if (e.target === sheet) close(false); } },
       h('div', { class: 'card stack' },
         h('div', { class: 'row top' }, h('p', { class: 'grow', dir: 'auto' }, text), speakerBtn(() => speak(text, getLang()), { size: 'sm' })),
         said(h('button', { type: 'button', class: 'btn primary', onClick: () => close(true) }, yes)),
-        said(h('button', { type: 'button', class: 'btn', onClick: () => close(false) }, no))));
+        said(cancel)));
     document.body.append(sheet);
+    document.addEventListener('keydown', esc);
+    if (safe) cancel.focus();
   });
 }
 

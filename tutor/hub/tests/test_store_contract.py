@@ -824,6 +824,20 @@ async def test_a_certificate_row_holds_no_learner_and_her_results_come_from_her_
     assert await store.results("her", []) == {}
 
 
+async def test_a_contests_results_come_from_its_done_events_for_her_and_for_her_class(store):
+    # P31 (C6.5): one percent a contest; the teacher's count is the class's, from the contest's opening minute
+    await store.add_events([ev(token_hash="her", verb="contest.done", module="contest", object="maths-week-3", value=70),
+                            ev(token_hash="him", verb="contest.done", module="contest", object="maths-week-3", value=40),
+                            ev(token_hash="her", verb="contest.done", module="contest", object="dari-week-1", value=100),
+                            ev(token_hash="her", verb="lesson.done", object="maths-week-3", value=3),
+                            ev(token_hash="x", verb="contest.done", module="contest", object="maths-week-3", value=90,
+                               cohort="zz99yy88xx")])
+    assert await store.contests_done("her") == {"maths-week-3": 70, "dari-week-1": 100}
+    assert await store.contests_done("nobody") == {}
+    assert await store.contest_takers("abcd1234ef", "maths-week-3", "2000-01-01T00:00") == {"her": 70, "him": 40}
+    assert await store.contest_takers("abcd1234ef", "maths-week-3", "2999-01-01T00:00") == {}
+
+
 async def test_daily_counts_count_today_and_go_after_two_days(store):
     # 7a (C4.9): per token and module, today (UTC)
     assert [await store.count_today("t1", "photo") for _ in range(3)] == [1, 2, 3]

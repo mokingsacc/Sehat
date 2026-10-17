@@ -47,7 +47,8 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
-from . import flags, gates, learners, modules, packs, qr, timetable
+from . import contests, flags, gates, learners, modules, packs, qr, timetable
+from .mods import contest as contest_mod
 from .mods import live as live_mod
 from .ai import policy
 from .ai.providers import keys_set
@@ -206,6 +207,8 @@ def router(hub) -> APIRouter:
                 return "consent"
             if c.release and not gates.module_gate_open(c.cohorts, "live"):
                 return "gate"
+        if m["id"] == "contest" and hub.cfg.release and not gates.module_gate_open(hub.cfg.cohorts, "contest"):
+            return "gate"                              # C6.B8: the competitions opinion (D15), where TUTOR_RELEASE is on
         if cohort["id"] == open_id():                  # C4.9: the pilot's gate for photo; no Homework help in 2027
             if m["id"] in gates.OFF_IN_OPEN:
                 return "open"
@@ -535,7 +538,72 @@ def router(hub) -> APIRouter:
                  for n in latest.values() if n["status"] == "change"]
         notes.sort(key=lambda n: n["at"], reverse=True)
         return {"packs": out, "notes": notes[:200], "cohorts": [{"id": c["id"], "label": c["label"]} for c in cohorts],
-                "release_mode": hub.cfg.release}
+                "release_mode": hub.cfg.release, "contests": await contests_view(cohorts)}
+
+    # --- contests (P31, C6.5): released per class like a pack; counts per class and in all, nothing per learner ---
+
+    async def contests_view(cohorts: list[dict]) -> list[dict]:
+        out = []
+        for cid_, c in sorted(hub.library.contests.items(), key=lambda x: (x[1]["opens_at"], x[0])):
+            roles = contests.signed_roles(c, await hub.store.signoffs(contest_mod.PACK + cid_))
+            rows, total = {}, 0
+            for k in cohorts:
+                rel = [x for x in await hub.store.releases(k["id"]) if x["pack"] == contest_mod.PACK + cid_]
+                if not rel:
+                    continue
+                n = len(await contest_mod.took_part(hub, k["id"], c))
+                total += n
+                rows[k["id"]] = {"open": bool(rel[0]["version"]) and rel[0]["content_hash"] == c["_hash"],
+                                 "earlier": bool(rel[0]["version"]) and rel[0]["content_hash"] != c["_hash"],
+                                 "at": rel[0]["released_at"], "took_part": n}
+            out.append({**contest_mod.summary(hub, c), "short": c["_hash"][7:15], "roles": roles,
+                        "signed": bool(roles) and all(roles.values()),
+                        "phase": contests.phase(c, contest_mod.now()), "releases": rows, "took_part": total})
+        return out
+
+    def contest_or_404(cid_: str) -> dict:
+        c = hub.library.contests.get(cid_)
+        if not c:
+            raise HTTPException(404, "no such contest")
+        return c
+
+    async def contest_release(me, c: dict, cohort: str, *, open_: bool):
+        await hub.store.add_release(pack=contest_mod.PACK + c["id"], version=c["_hash"] if open_ else "",
+                                    content_hash=c["_hash"], cohort=cohort, released_by="admin")
+        await log(me, "release", f"contest:{c['id']} {'open' if open_ else 'closed'} ({c['_hash'][7:15]})", cohort)
+
+    async def signed_or_409(c: dict):
+        roles = contests.signed_roles(c, await hub.store.signoffs(contest_mod.PACK + c["id"]))
+        if not roles or not all(roles.values()):
+            raise refuse(409, "not_signed", "the contest is not signed by its reviewers at this version")
+
+    @r.post("/content/contests/{cid_}/open")
+    async def contest_open(cid_: str, body: CohortIn, request: Request):
+        me = await admin(request)
+        c = contest_or_404(cid_)
+        await cohort_or_404(body.cohort)
+        await signed_or_409(c)
+        await contest_release(me, c, body.cohort, open_=True)
+        return {"ok": True, "short": c["_hash"][7:15]}
+
+    @r.post("/content/contests/{cid_}/open-all")
+    async def contest_open_all(cid_: str, request: Request):
+        me = await admin(request)
+        c = contest_or_404(cid_)
+        await signed_or_409(c)
+        done = []
+        for k in await hub.store.cohorts():
+            await contest_release(me, c, k["id"], open_=True)
+            done.append(k["id"])
+        return {"ok": True, "short": c["_hash"][7:15], "cohorts": done}
+
+    @r.post("/content/contests/{cid_}/close")
+    async def contest_close(cid_: str, body: CohortIn, request: Request):
+        me = await admin(request)
+        c = contest_or_404(cid_)
+        await cohort_or_404(body.cohort)
+        await contest_release(me, c, body.cohort, open_=False)
+        return {"ok": True}
 
     @r.post("/content/{pid}/publish")
     async def publish(pid: str, body: CohortIn, request: Request):

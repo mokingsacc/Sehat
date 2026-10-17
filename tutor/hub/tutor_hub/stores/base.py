@@ -149,6 +149,10 @@ Certificates (P25b, C4.2): a pathway finished in a month, never who finished it
 - `certificate(cid) -> dict | None`: `{id, course, version, month, cohort}`.
 - `results(token_hash, lessons) -> {lesson: {done, best}}`: from her own events, for each of `lessons` she has any:
   `done` when a `lesson.done` exists, `best` the highest `check.done` (None without one).
+- `contests_done(token_hash) -> {contest: percent}`: from her own `contest.done` events (P31: one a contest, the
+  hub writes it), the percent of each contest she sent.
+- `contest_takers(cohort, contest, since) -> {token_hash: percent}`: the class's learners who sent a contest's answers
+  at or after `since` (its opening minute; her teacher's view and the admin's counts; never sorted by percent).
 
 Her own questions (P32, C4.8): sent for her teacher's check, kept 60 days after sending or deciding, and with her
 - `add_made(*, cohort, token_hash, kind, body, lang) -> int`: a waiting row (`body` a dict {q, a, why}).
@@ -468,6 +472,12 @@ class Store:
         raise NotImplementedError
 
     async def set_wish_status(self, wkey, status) -> int:
+        raise NotImplementedError
+
+    async def contests_done(self, token_hash) -> dict:
+        raise NotImplementedError
+
+    async def contest_takers(self, cohort, contest, since) -> dict:
         raise NotImplementedError
 
     async def add_made(self, *, cohort, token_hash, kind, body, lang) -> int:

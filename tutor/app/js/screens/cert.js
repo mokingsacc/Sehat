@@ -3,12 +3,15 @@
 // (after the consent screen where she has none, and after sending her waiting events); then the paper is on the phone
 // and prints again with no request. On the hub with its printer, the queue prints it with an empty line instead, and
 // the name box is not shown. modules/cert.js has the rules.
+// Since P31 the same screen is #/cert/contest:<id> for a contest that gives one: "took part in", with no count of
+// lessons and never a score (the paper is the server's).
 
 import * as account from '../account.js';
 import * as graph from '../graph.js';
 import * as hub from '../hub.js';
 import { getLang, s } from '../i18n.js';
 import * as certs from '../modules/cert.js';
+import * as contests from '../modules/contest.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, said, speakerBtn, toast, topbar } from '../ui.js';
@@ -16,8 +19,12 @@ import { saidNotNow } from './signup.js';
 
 export default async function certScreen([path = '']) {
   const c = state.child();
-  const x = graph.findPathway(path);
-  const back = x ? '#/subject/' + encodeURIComponent(x.g.subject) : '#/home';
+  const contestId = (/^contest:([a-z][a-z0-9-]{1,47})$/.exec(path) || [])[1];
+  const cx = contestId ? contests.find(c, contestId) : null;
+  // a contest stands in for a pathway: its id as the path, no version (the server takes the contest's own hash)
+  const x = contestId ? (cx ? { p: { id: path, title: cx.title, certificate: !!cx.certificate }, g: { version: '', subject: cx.subject } }
+    : null) : graph.findPathway(path);
+  const back = contestId ? '#/contest/' + encodeURIComponent(contestId) : x ? '#/subject/' + encodeURIComponent(x.g.subject) : '#/home';
   const el = h('div', { class: 'screen cert-screen', 'data-speaks': '' });
   const body = h('div', { class: 'card lined pad-card stack' });
   const title = x ? plain(x.p.title) : '';
@@ -40,7 +47,8 @@ export default async function certScreen([path = '']) {
     const input = h('input', { class: 'nick cert-in', type: 'text', autocomplete: 'off', autocapitalize: 'words',
       spellcheck: 'false', maxlength: 60, dir: 'auto', 'aria-label': s('cert_name'),
       onInput: (e) => { name = e.target.value; } });
-    const when = kept.months ? s('cert_when', { n: kept.lessons, month: kept.months[getLang()] || cert.month }) : null;
+    const month = kept.months ? kept.months[getLang()] || cert.month : null;
+    const when = month && kept.lessons ? s('cert_when', { n: kept.lessons, month }) : month;
     const go = said(h('button', { type: 'button', class: 'btn warm big', onClick: () => print(cert, kept) },
       icon('printer', 28, 2.4), s(hubbed ? 'print_it' : 'cert_print')));
     fill(body,

@@ -124,7 +124,7 @@ async function call(path, { method = 'GET', body, pin, token, ms = 30000 } = {})
     if (token) headers['X-Learner-Token'] = token;
     const r = await fetch(url(path), { method, headers, body: body ? JSON.stringify(body) : undefined, signal: ctl.signal });
     const j = await r.json().catch(() => ({}));
-    if (!r.ok) throw Object.assign(new Error(j.error || j.detail || r.status), { status: r.status });
+    if (!r.ok) throw Object.assign(new Error(j.error || j.detail || r.status), { status: r.status, code: j.code || null });
     return j;
   } catch (e) {
     if (e.status === undefined && e.name !== 'AbortError') { hello = null; listeners.forEach((f) => f(false)); }   // the hub went away
@@ -238,3 +238,11 @@ export const liveAnswer = (id, sdp, token) => call(liveP(id, 'answer'), { method
 export const liveState = (id, v, token) => call(liveP(id, 'state') + (v ? `?v=${v}` : ''), { token, ms: 8000 });
 export const liveHand = (id, reason, token) => call(liveP(id, 'hand'), { method: 'POST', body: { reason }, token, ms: 8000 });
 export const liveLeave = (id, token) => call(liveP(id, 'leave'), { method: 'POST', token, ms: 8000 });
+
+// contests (P31, C6.5): released to her class; the questions without their answers, her answers marked by the server
+// (only the percent is kept), the key after the close for the answers the phone kept
+const contestP = (id, what = '') => `/api/m/contest/${encodeURIComponent(id)}${what ? '/' + what : ''}`;
+export const contests = (lang, token) => call('/api/m/contest?lang=' + encodeURIComponent(lang), { token, ms: 8000 });
+export const contestQuestions = (id, token) => call(contestP(id), { token, ms: 15000 });
+export const contestSend = (id, body, token) => call(contestP(id, 'answers'), { method: 'POST', body, token, ms: 20000 });
+export const contestKey = (id, token) => call(contestP(id, 'key'), { token, ms: 15000 });

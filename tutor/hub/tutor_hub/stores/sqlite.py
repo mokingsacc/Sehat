@@ -298,6 +298,12 @@ class SqliteStore(Store):
     async def results(self, token_hash, lessons):
         return await self._run("results", token_hash, list(lessons))
 
+    async def contests_done(self, token_hash):
+        return await self._run("contests_done", token_hash)
+
+    async def contest_takers(self, cohort, contest, since):
+        return await self._run("contest_takers", cohort, contest, since)
+
     async def count_today(self, token_hash, module) -> int:
         return await self._run("count_today", token_hash, module)
 

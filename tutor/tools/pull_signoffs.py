@@ -1,7 +1,7 @@
 """Copy reviewers' signatures from the hub or staging into the lesson packs (P17), the skills graphs (P25a) and the
 Quran set (P29: `quran:set`, into content/quran/index.json, whose hash is the set's) and the card sets (P28:
 `cards:<pack>`, a signature for the set's current hash copied into its checklist.json and each card in links.json that
-needs the role, at the item's own hash).
+needs the role, at the item's own hash) and the contests (P31: `contest:<id>`, into content/contests/<id>.json).
 
 The review screens write each signature to the `signoffs` table: a role, initials, a date and the lesson's content
 hash. Release mode reads only the pack's own review blocks, so before a release the content lead pulls them in:
@@ -198,6 +198,13 @@ def pull(rows: list[dict], packs_dir: Path, hub_ok: str | None = None) -> dict:
             continue
         if lid.startswith("cards:"):
             pull_cards(lib, lid.split(":", 1)[1], signs, report)
+            continue
+        if lid.startswith("contest:"):
+            c = lib.contests.get(lid.split(":", 1)[1])
+            if c is None:
+                report["unknown"].append(lid)
+            else:
+                pull_page(lid, c, signs, report)
             continue
         if lid == "quran:set":
             q = lib.quran

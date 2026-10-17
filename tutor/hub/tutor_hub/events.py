@@ -8,7 +8,8 @@ file does not know (the API refuses the whole batch).
 Some verbs come from the phone's queue (a lesson started or finished, a sheet marked on Check my sheet, and since P15
 each item of it, a hint rung opened and an item disputed, as `lesson:n`, even offline; since P25a a warm-up item,
 `recall.item`, its object the lesson and step as `lesson:n`);
-the others only the hub writes, from its own routes (Ask, printing, the teacher's review), so a phone cannot send them.
+the others only the hub writes, from its own routes (Ask, printing, the teacher's review, and since P31 a contest's
+marked answers, `contest.done`), so a phone cannot send them.
 A phone's events carry the hash of the learner's token (P10) and are kept only when she has consent; the hub's own
 events carry none.
 """
@@ -22,6 +23,7 @@ AT = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$")
 LESSON = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*$")
 ITEM = re.compile(r"^([a-z][a-z0-9]*(?:-[a-z0-9]+)*):([1-9][0-9]?)$")     # a sheet's item: lesson:n, n 1 to 99
 DIGIT_RUN = re.compile(r"[0-9]{5,}")
+CONTEST = re.compile(r"^[a-z][a-z0-9-]{1,47}$")                       # a contest's id (contests.py, P31)
 SOURCES = ("rules", "maths", "bank", "approved", "ai", "lesson", "none")
 REASONS = ("wrong", "gives_answer", "unsafe", "not_school")      # why a held answer was not sent (P20)
 # what the admin's Safety page counts (P21): a question the rules screen stopped, by its kind (rules.py), and an AI
@@ -32,7 +34,8 @@ SAFETY = ("distress", "health", "off_limits", "too_long", "leak", "maths")
 @dataclass(frozen=True)
 class Verb:
     module: str
-    obj: str | None                     # what the object is: "lesson", "item" (lesson:n), "source", "reason", or None
+    obj: str | None                     # what the object is: "lesson", "item" (lesson:n), "source", "reason",
+    #                                     "safety", "contest", or None
     value: tuple[int, int] | None       # the allowed range of the value, or None for no value
     phone: bool                         # True: the phone sends it; False: only the hub writes it
 
@@ -57,6 +60,8 @@ VERBS = {
     "held.edited": Verb("teacher", None, None, False),
     "held.dropped": Verb("teacher", "reason", None, False),
     "safety.flag": Verb("ask", "safety", None, False),
+    # P31 (C6.5): she sent a contest's answers; the percent right, written by the hub when it marks them
+    "contest.done": Verb("contest", "contest", (0, 100), False),
 }
 
 
@@ -106,6 +111,8 @@ def check(e: dict, *, phone: bool) -> list[str]:
         p.append(f"{e['verb']} takes a reason: {', '.join(REASONS)}")
     elif v.obj == "safety" and o not in SAFETY:
         p.append(f"{e['verb']} takes a kind: {', '.join(SAFETY)}")
+    elif v.obj == "contest" and not (isinstance(o, str) and CONTEST.match(o) and not DIGIT_RUN.search(o)):
+        p.append(f"{e['verb']} takes a contest id")
     n = e.get("value")
     if v.value is None and n is not None:
         p.append(f"{e['verb']} takes no value")

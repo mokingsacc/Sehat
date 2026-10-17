@@ -41,7 +41,7 @@ const TABS = [
     href: '#/print' },
 ];
 // screens that belong to a module (#/name/...); every other screen belongs to the shell
-const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', live: 'live', lesson: 'lessons',
+const ROUTES = { ask: 'ask', print: 'sheets', check: 'check', photo: 'photo', live: 'live', contest: 'contest', lesson: 'lessons',
   subject: 'lessons', subjects: 'lessons', plan: 'plan', cert: 'cert', quran: 'quran', university: 'university', made: 'made' };
 const FOOTER_BANDS = ['s1', 's2', 'ad'];
 

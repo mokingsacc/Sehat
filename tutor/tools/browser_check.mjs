@@ -14,6 +14,7 @@
 //       [--langs prs,ps,en] [--variants light,dark,bigger] [--bands p1,s1,ad-literacy] [--full] [--lock]
 //       [--at 2027-01-02T09:00] [--day on|off|unset] [--recall maths-7-fractions-add:5,...] [--plan id,id]
 //       [--study 19:00|off] [--made 1] [--live home|block|listen|reasons|up|coming|over] [--board <lesson id>]
+//       [--contest home|card|run|send|result|answers|cert]
 // --at fixes the phone's clock (the school day's Now card and Today list, P19); --day sets her answer to the
 // one-time school-day card (unset: the card shows).
 // --recall gives her those spaced-review items, due today, with their lessons on the phone (P25a: open a lesson as
@@ -27,6 +28,12 @@
 // block; block: a live block in the timetable (use --at inside it) and the Now card's Join; on the screen
 // (--screen live/abcdefgh23456789): listen (sound on, the board showing --board's step 0), reasons (the three
 // chips open), up (her hand up), coming (the sound off), over (the class ended).
+// --contest (P31, C6.6) turns the contest module on in hello with one contest, "Maths week 3", of five questions
+// from the starter lessons, and answers the contest routes as the hub would (no hub serves one without a signed
+// contest file). home: Home's row; card: #/contest/maths-week-3 with Join; run: the run on question 2 (she answered
+// the first), the countdown in the header; send: the last question with "Send?" open (the focus must be on
+// Cancel); result: sent, before the close; answers: after the close, her answers against the key; cert: the
+// contest's certificate screen. The screen is set for each phase.
 // A shot is what the screen shows when the page opens (--full: the whole page, with the tab bar where the screen
 // ends); the checks always cover the whole page.
 // Exit code 1 when a check fails. No learner name is ever seeded: a learner is a band, a year and settings.
@@ -42,7 +49,7 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
 const HUB = args.hub || 'http://127.0.0.1:8000';
 const OUT = args.out || 'shots';
 const SCREEN = args.screen || 'home';
-const SHOT = SCREEN.replace(/[^a-z0-9]+/gi, '-');
+const SHOT = (args.contest && !args.screen ? `contest-${args.contest}` : SCREEN).replace(/[^a-z0-9]+/gi, '-');
 const WIDTHS = (args.widths || '390').split(',').map(Number);
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT || 'playwright');
@@ -183,6 +190,69 @@ for (const key of RECALL) {
   if (!CACHED[id]) CACHED[id] = await (await fetch(`${HUB}/api/lessons/${encodeURIComponent(id)}`)).json();
 }
 
+// --contest: hello says contest is on; the contest routes answer as the hub would, with real lesson steps
+const CONTEST = 'maths-week-3';
+const CONTEST_ITEMS = [['maths-7-fractions-add', 3], ['maths-7-fractions-add', 5], ['maths-7-fractions-add', 6],
+  ['adult-maths-1-numbers', 2], ['adult-maths-1-numbers', 4]];
+const CONTEST_STEPS = [];
+if (args.contest) {
+  for (const [id, n] of CONTEST_ITEMS) {
+    const L = await (await fetch(`${HUB}/api/lessons/${id}`)).json();
+    CONTEST_STEPS.push(L.steps[n - 1]);
+  }
+}
+async function contestStubs(page, learner) {
+  const phase = args.contest;
+  Object.assign(learner, { token: 'tok_browsercheck_0000000000', number: 7, picture: 'apple', sentBand: learner.band,
+    consent: { kind: 'self', version: 1, at: '2027-01-01T08:00' } });
+  const now = Date.now();
+  const iso = (t) => new Date(t).toISOString().slice(0, 16);
+  const closed = phase === 'answers' || phase === 'cert';
+  const opens = closed ? now - 3 * 3600e3 : now - 3600e3;
+  const closes = closed ? now - 3600e3 : now + 2 * 3600e3;
+  const title = { prs: 'مسابقهٔ ریاضی، هفتهٔ سوم', ps: 'د ریاضي سیالي، درېیمه اونۍ', en: 'Maths week 3' };
+  const strip = (st) => Object.fromEntries(Object.entries(st).filter(([k]) => !['answer', 'why', 'hints', 'recall'].includes(k)));
+  const questions = CONTEST_STEPS.map(strip);
+  const item = { id: CONTEST, title, subject: 'maths', opens_at: iso(opens), closes_at: iso(closes), minutes: 20, n: questions.length,
+    certificate: true, phase: closed ? 'closed' : 'open', mine: null };
+  const sent = { n: 5, right: 3, percent: 60, at: now - 600e3 };
+  if (phase === 'run' || phase === 'send') {
+    learner.contests = [{ id: CONTEST, subject: 'maths', joined: now - 4 * 60e3, closes: iso(closes),
+      answers: phase === 'send' ? [1, '1/2', 0, 1, null] : [1, null, null, null, null] }];
+  }
+  if (phase === 'result' || closed) {
+    learner.contests = [{ id: CONTEST, subject: 'maths', joined: now - 30 * 60e3, closes: iso(closes), answers: [1, '2/4', 0, 1, '12'], ...sent }];
+  }
+  if (phase === 'cert') learner.certs = [{ path: 'contest:' + CONTEST, id: 'QC-ABCDE-FGHJK', month: '2027-10' }];
+  const cached = phase === 'card' || phase === 'home' ? {} : { [`contest.${CONTEST}`]: { title, subject: 'maths', opens_at: iso(opens),
+    closes_at: iso(closes), minutes: 20, certificate: true, questions } };
+  if (phase === 'cert') {
+    cached['cert.QC-ABCDE-FGHJK'] = { lang: learner.lang, lessons: 0, months: { prs: 'عقرب ۱۴۰۶', ps: 'لړم ۱۴۰۶', en: 'Aqrab 1406' },
+      url: `${HUB}/v/QC-ABCDE-FGHJK`, paper: { css: '', body: '<div class="cert-paper"><div class="cert-name"></div></div>' } };
+  }
+  await page.addInitScript((c) => {
+    try { for (const [k, v] of Object.entries(c)) localStorage.setItem('qalam.cache.' + k, JSON.stringify(v)); } catch { /* blocked */ }
+  }, cached);
+  await page.route('**/api/hello*', async (route) => {
+    const r = await route.fetch();
+    const j = await r.json();
+    j.modules = [...(j.modules || []), { id: 'contest', version: '0.1.0', slots: ['home.action'], bands: ['p1', 'p2', 's1', 's2', 'ad'],
+      needs: [], offline: 'partly', risk: 'low', settings: { per_day: 3 } }];
+    if (!j.modules.some((m) => m.id === 'cert')) j.modules.push({ id: 'cert', version: '0.1.0', slots: [], bands: ['p1', 'p2', 's1', 's2', 'ad'], needs: [] });
+    await route.fulfill({ response: r, json: j });
+  });
+  const json = (body, status = 200) => ({ status, contentType: 'application/json', body: JSON.stringify(body) });
+  await page.route('**/api/m/contest?*', (route) => route.fulfill(json({ contests: closed ? [] : [{ ...item, mine: phase === 'result' ? { percent: 60 } : null }] })));
+  await page.route(/\/api\/m\/contest\/[a-z0-9-]+(\/(answers|key))?(\?|$)/, (route) => {
+    const what = new URL(route.request().url()).pathname.split('/').pop();
+    if (what === 'answers') return route.fulfill(json({ right: 3, n: 5, percent: 60 }));
+    if (what === 'key') return route.fulfill(json({ id: CONTEST, key: CONTEST_STEPS.map((st) => ({ kind: st.kind, answer: st.answer, why: st.why })) }));
+    return route.fulfill(json({ id: CONTEST, title, subject: 'maths', minutes: 20, closes_at: iso(closes), questions }));
+  });
+}
+const CONTEST_SCREEN = { home: 'home', card: `contest/${CONTEST}`, run: `contest/${CONTEST}/run`, send: `contest/${CONTEST}/run`,
+  result: `contest/${CONTEST}`, answers: `contest/${CONTEST}/answers`, cert: `cert/contest:${CONTEST}` };
+
 // --live: hello says live is on and a class is open; the live routes answer as the hub would; WebRTC is a stub
 const LIVE_ID = 'abcdefgh23456789';
 async function liveStubs(page, learner) {
@@ -276,16 +346,37 @@ for (const width of WIDTHS) {
         }
         if (args.plan) learner.plan = { label: 'Plan', lessons: args.plan.split(','), again: {} };
         if (args.live) await liveStubs(page, learner);
+        if (args.contest) await contestStubs(page, learner);
         await page.addInitScript(([d, cached]) => {
           try {
             localStorage.setItem('qalam.v2', JSON.stringify(d));
             for (const [id, l] of Object.entries(cached)) localStorage.setItem('qalam.cache.lesson.' + id, JSON.stringify(l));
           } catch { /* blocked */ }
         }, [{ v: 2, active: 'l1', learners: [learner] }, CACHED]);
-        await page.goto(`${HUB}/#/${SCREEN}`);
+        await page.goto(`${HUB}/#/${args.contest && !args.screen ? CONTEST_SCREEN[args.contest] : SCREEN}`);
         await page.waitForSelector('#app .screen', { timeout: 10000 });
         await page.waitForTimeout(700);
         if (args.live === 'reasons') { await page.click('.live-raise'); await page.waitForTimeout(200); }
+        if (args.contest === 'send' && !(await page.$('.contest-run'))) {
+          if (l.band !== 'ey') errors.push('Send?: no contest run on the screen');      // early years never see one
+        } else if (args.contest === 'send') {
+          // to the last question, then Send: the sheet opens with the focus on Cancel, and the run shows no hint or why
+          for (let k = 0; k < CONTEST_STEPS.length && !(await page.$('.netsheet')); k++) {
+            await page.click('.contest-run .actions .main');
+            await page.waitForTimeout(80);
+          }
+          await page.waitForSelector('.netsheet');
+          const focus = await page.evaluate(() => document.activeElement && document.activeElement.classList.contains('sheet-no'));
+          if (!focus) errors.push('Send?: the focus is not on Cancel');
+        }
+        if (args.contest === 'run' || args.contest === 'send') {
+          const leak = await page.evaluate(() => [...document.querySelectorAll('.contest-run .why, .contest-run .hint, .contest-run .feedback')].length);
+          if (leak) errors.push('the run shows a hint, a why or feedback');
+          const lines = await page.evaluate(() => { const el = document.querySelector('.contest-left'); if (!el) return 0;
+            const r = document.createRange(); r.selectNodeContents(el);
+            return new Set([...r.getClientRects()].map((x) => Math.round(x.top))).size; });
+          if (lines > 1) errors.push('the countdown wraps');
+        }
         const name = `${SHOT}-${l.tag}-${v.tag}${LANGS.length > 1 ? '-' + lang : ''}${WIDTHS.length > 1 ? '-' + width : ''}.png`;
         await page.screenshot({ path: join(OUT, name), fullPage: !!args.full });
         const r = await page.evaluate(inspect);

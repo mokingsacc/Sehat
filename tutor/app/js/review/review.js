@@ -15,6 +15,9 @@
 // here has played to its end. Nothing in the set can be edited: Change says why it may not be used.
 // Since P28 (C4.6) a pack's card set is one more: its checklist and each link card, OK on a card only once its page
 // has been opened from here, then "Hold to sign".
+// Since P31 (C6.5) a contest is one more: what it is (its title in three languages, subject, bands, window, minutes,
+// certificate) as item 0, then each question in the learner's look (the lesson step in a frame) with its answer and
+// why beside it for the reviewer only, then "Hold to sign". An OK on a question lasts while its lesson is unchanged.
 
 import * as L from '../staff/lang.js';
 
@@ -155,9 +158,14 @@ async function queue() {
     h('nav', { class: 'subjects' }, q.cards.map((x) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); cardsPage(x.pack); } },
       h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(x.title, lang) || x.pack), h('small', { class: 'muted' }, t('items_n', { n: num(x.items) }))),
       h('span', { class: TAG[x.status] || 'tag' }, x.status === 'step' ? t('step_of', { a: num(x.step), b: num(x.of) }) : t(x.status)))))] : [];
+  const ks = (q.contests || []).length ? [h('div', { class: 'section-head' }, h('h2', {}, t('contests'))),
+    h('nav', { class: 'subjects' }, q.contests.map((x) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); contestPage(x.id); } },
+      h('span', { class: 'grow' }, h('b', { dir: 'auto' }, pick(x.title, lang) || x.id), h('small', { class: 'muted' }, t('items_n', { n: num(x.items) }))),
+      h('span', { class: TAG[x.status] || 'tag' }, x.status === 'step' ? t('step_of', { a: num(x.step), b: num(x.of) }) : t(x.status)))))] : [];
   show(h('div', { class: 'screen' }, top(null, t('for_you')),
     h('p', { class: 'pad muted small' }, t('role_line', { r: roleWord(q.role) })),
-    rows.length || graphs.length || qs.length || cs.length ? [rows, graphs, qs, cs] : h('p', { class: 'empty' }, t('none')), L.draftNote(h)));
+    rows.length || graphs.length || qs.length || cs.length || ks.length ? [rows, graphs, qs, cs, ks] : h('p', { class: 'empty' }, t('none')),
+    L.draftNote(h)));
 }
 
 // a hold-to-sign button: `run` after HOLD_MS held down
@@ -234,7 +242,7 @@ async function graphPage(sub) {
     h('b', {}, pick(p.title, lang)), ` (${(p.bands || []).join(', ')}): `, (p.goal || []).map(title).join('، '),
     p.final ? ` · ${t('final')}: ${lessonLine(p.final)}` : '', p.certificate ? ` · ${t('certificate')}` : ''))) : h('p', { class: 'muted' }, t('common.none')));
   show(h('div', { class: 'screen' }, top(queue, t('graph_of', { s: sub })),
-    h('div', { class: 'stack pad' }, nodes, paths, signBox, status)));
+    h('div', { class: 'stack pad' }, nodes, paths, signBox, status), L.draftNote(h)));
   drawSign();
 }
 
@@ -312,7 +320,88 @@ async function cardsPage(pid) {
   }
 
   show(h('div', { class: 'screen' }, top(queue, t('cards_of', { p: pick(d.title, lang) || pid })),
-    h('div', { class: 'stack pad' }, d.steps.map(item), signBox, status)));
+    h('div', { class: 'stack pad' }, d.steps.map(item), signBox, status), L.draftNote(h)));
+  drawSign();
+}
+
+// a contest (P31): item 0 what it is, then each question as the learner sees it (no answer on her screen) with the
+// answer and why beside it here; each verdict is saved when given
+async function contestPage(cid) {
+  redraw = () => contestPage(cid);
+  let d;
+  try { d = await api('/contests/' + encodeURIComponent(cid)); } catch (e) { return failed(e); }
+  const C = d.contest;
+  const lang = LANG_OF_ROLE[d.role] || (C.langs.includes(L.lang()) ? L.lang() : C.langs[0]);
+  const band = C.bands[0];
+  const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
+  const verdict = {};
+  for (const x of d.steps) if (x.last && !x.changed) verdict[x.n] = x.last;
+  const signBox = h('div', { class: 'stack' });
+  const answerOf = (it) => {
+    if (it.question.kind !== 'choice') return String(it.answer);
+    const o = (it.question.options || [])[it.answer];
+    return `${num(it.answer + 1)}: ${o && typeof o === 'object' ? pick(o.text || o, lang) || o.picture || '' : o}`;
+  };
+
+  function item(st) {
+    const okBtn = h('button', { type: 'button', class: 'btn ok-btn' + (verdict[st.n] === 'ok' ? ' on' : '') }, t('ok'));
+    const chBtn = h('button', { type: 'button', class: 'btn' + (verdict[st.n] === 'change' ? ' warm' : '') }, t('change'));
+    const note = h('textarea', { class: 'field' + (verdict[st.n] === 'change' ? '' : ' hidden'), rows: 2, maxlength: 500,
+      'aria-label': t('comment'), placeholder: t('comment'), dir: 'auto' });
+    note.value = st.text || '';
+    const saveBtn = h('button', { type: 'button', class: 'btn outline small' + (verdict[st.n] === 'change' ? '' : ' hidden') }, t('save_note'));
+    async function save(v) {
+      try {
+        await api(`/contests/${encodeURIComponent(cid)}/steps/${st.n}`, { method: 'POST', body: { verdict: v, chips: [],
+          text: v === 'change' ? note.value : '', step_hash: st.hash, role: me.via === 'pin' ? me.role : null } });
+        verdict[st.n] = v; st.last = v; st.changed = false;
+        okBtn.classList.toggle('on', v === 'ok'); chBtn.classList.toggle('warm', v === 'change');
+        status.textContent = '';
+        drawSign();
+      } catch (e) { if (e.status === 409) contestPage(cid); else status.textContent = t('save_fail'); }
+    }
+    okBtn.addEventListener('click', () => { note.classList.add('hidden'); saveBtn.classList.add('hidden'); save('ok'); });
+    chBtn.addEventListener('click', () => { note.classList.remove('hidden'); saveBtn.classList.remove('hidden'); chBtn.classList.add('warm'); okBtn.classList.remove('on'); });
+    saveBtn.addEventListener('click', () => save('change'));
+    const it = st.item;
+    const body = it ? [
+      h('p', { class: 'muted small', dir: 'auto' }, t('contest_step', { l: pick(it.title, lang) || it.lesson, n: num(it.step) })),
+      h('div', { class: 'frame' }, h('iframe', { title: t('step_of', { a: num(st.n), b: num(d.steps.length - 1) }), loading: 'lazy',
+        src: `../?preview=${band}&lang=${lang}#/lesson/${encodeURIComponent(it.lesson)}/${it.step}` })),
+      h('dl', { class: 'facts' },
+        h('dt', {}, t('contest_answer')), h('dd', { dir: 'auto' }, answerOf(it)),
+        h('dt', {}, t('contest_why')), h('dd', { dir: 'auto' }, pick(it.why, lang) || t('common.none'))),
+    ] : h('dl', { class: 'facts' },
+      h('dt', {}, t('contest_title')), h('dd', {}, ['prs', 'ps', 'en'].map((l) => h('div', { dir: 'auto', lang: l }, C.title[l]))),
+      h('dt', {}, t('contest_subject')), h('dd', {}, L.t('admin.s_' + C.subject, {}, C.subject)),
+      h('dt', {}, t('contest_for')), h('dd', { dir: 'ltr' }, `${C.bands.join(', ')} · ${C.langs.join(', ')}`),
+      h('dt', {}, t('contest_window')), h('dd', {}, `${L.when(C.opens_at)} – ${L.when(C.closes_at)}`),
+      h('dt', {}, t('contest_minutes')), h('dd', {}, num(C.minutes)),
+      h('dt', {}, t('contest_certificate')), h('dd', {}, t(C.certificate ? 'contest_cert_yes' : 'contest_cert_no')));
+    return h('div', { class: 'card pad-card stack graph-node' },
+      h('div', { class: 'row wrap' }, h('b', { class: 'grow', dir: 'auto' }, st.n ? t('step_of', { a: num(st.n), b: num(d.steps.length - 1) }) : t('contest_whole')),
+        st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
+        st.last === 'ok' && !st.changed ? h('span', { class: 'tag good' }, t('ok_last')) : null),
+      body, h('div', { class: 'row' }, okBtn, chBtn), note, saveBtn);
+  }
+
+  function drawSign() {
+    const notOk = d.steps.some((x) => verdict[x.n] !== 'ok');
+    const facts = h('dl', { class: 'facts' },
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, roleWord(d.role)),
+      h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials));
+    put(signBox, h('h2', {}, t('sign_contest')), facts, notOk ? h('p', { class: 'muted' }, t('todo_contest')) : null,
+      holdButton(notOk, async () => {
+        try {
+          await api(`/contests/${encodeURIComponent(cid)}/sign`, { method: 'POST',
+            body: { hash: d.hash, role: me.via === 'pin' ? me.role : null, initials: me.via === 'pin' ? me.initials : null } });
+          put(signBox, h('p', { class: 'done-big' }, t('done_sign')), h('button', { type: 'button', class: 'btn', onClick: queue }, t('back')));
+        } catch (e) { if (e.status === 409) contestPage(cid); else status.textContent = t('save_fail'); }
+      }));
+  }
+
+  show(h('div', { class: 'screen' }, top(queue, t('contest_of', { t: pick(C.title, lang) || cid })),
+    h('div', { class: 'stack pad' }, d.steps.map(item), signBox, status), L.draftNote(h)));
   drawSign();
 }
 
@@ -399,7 +488,7 @@ async function quranPage() {
     return card;
   };
   show(h('div', { class: 'screen' }, top(queue, t('quran_of', { h: d.short })),
-    h('div', { class: 'stack pad' }, what, S.surahs.map((x) => surahItem({ ...x, ar: x.ar })), signBox, status)));
+    h('div', { class: 'stack pad' }, what, S.surahs.map((x) => surahItem({ ...x, ar: x.ar })), signBox, status), L.draftNote(h)));
   drawSign();
 }
 

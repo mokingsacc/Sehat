@@ -596,6 +596,38 @@ async function drawContent() {
             rel && rel.earlier ? h('button', { type: 'button', class: 'btn', onClick: () => act('rollback', p, c) }, t('rollback')) : null));
       })))) : null);
   };
+  // contests (P31, C6.5): open to a class (or all classes) once its reviewers signed it; counts only, nobody's score
+  const contestAct = async (kind, x, c) => {
+    const q = t(kind === 'open' ? 'contest_open_q' : kind === 'close' ? 'contest_close_q' : 'contest_all_q',
+      { p: title(x.title, x.id), c: c ? L.cohort(c.label) : '' });
+    if (!(await ask(q, [], [[t(kind === 'open' ? 'open_to_class' : kind === 'close' ? 'close_class' : 'all_classes'), true]], null,
+      { safe: kind === 'close' }))) return;
+    try {
+      await api(`/content/contests/${encodeURIComponent(x.id)}/${kind === 'all' ? 'open-all' : kind}`,
+        { method: 'POST', body: kind === 'all' ? undefined : { cohort: c.id } });
+      toast(t(kind === 'close' ? 'contest_closed_now' : 'contest_opened'));
+    } catch (e) { failed(e); }
+    drawContent();
+  };
+  const contest = (x) => h('section', { class: 'card stack' },
+    h('div', { class: 'row wrap' }, h('h3', { class: 'grow', dir: 'auto' }, title(x.title, x.id)),
+      h('small', { class: 'muted' }, L.join([L.t('admin.s_' + x.subject, {}, x.subject), t('contest_shape', { n: num(x.n), m: num(x.minutes) })])),
+      m(x.short)),
+    h('p', { class: 'small' }, t('contest_window', { a: L.when(x.opens_at), b: L.when(x.closes_at) })),
+    x.signed ? h('span', { class: 'tag good' }, t('ready'))
+      : h('p', { class: 'small' }, t('contest_unsigned'), ' ',
+        L.join(Object.entries(x.roles).map(([role, ok]) => `${L.word('role', role)} ${ok ? '✓' : '·'}`))),
+    h('p', { class: 'lead-line' }, t('contest_took', { n: num(x.took_part) })),
+    h('div', { class: 'atable' }, h('table', {}, h('tbody', {}, d.cohorts.map((c) => {
+      const rel = x.releases[c.id];
+      const state = !rel ? t('contest_not_open', { c: L.cohort(c.label) })
+        : rel.open ? t('contest_is_open', { c: L.cohort(c.label), d: L.date(rel.at) })
+          : rel.earlier ? t('contest_earlier', { c: L.cohort(c.label) }) : t('contest_is_closed', { c: L.cohort(c.label) });
+      return h('tr', {}, h('td', { dir: 'auto' }, state, rel ? h('small', { class: 'muted' }, ' · ', t('contest_took', { n: num(rel.took_part) })) : null),
+        h('td', {}, x.signed && !(rel && rel.open) ? h('button', { type: 'button', class: 'btn', onClick: () => contestAct('open', x, c) }, t('open_to_class')) : null,
+          rel && rel.open ? h('button', { type: 'button', class: 'btn', onClick: () => contestAct('close', x, c) }, t('close_class')) : null));
+    })))),
+    x.signed ? h('div', { class: 'row' }, h('button', { type: 'button', class: 'btn', onClick: () => contestAct('all', x, null) }, t('all_classes'))) : null);
   const note = (n) => h('li', { class: 'stack-sm' }, h('b', { dir: 'auto' }, title(n.title, n.lesson)),
     h('small', {}, L.join([n.step ? t('step', { n: num(n.step) }) : t('step0'), n.role ? L.word('role', n.role) : null, n.chips.join(comma()), L.date(n.at)])),
     n.text ? h('span', { dir: 'auto' }, n.text) : null);
@@ -610,6 +642,7 @@ async function drawContent() {
   frame(h('h2', {}, t('packs')),
     h('p', { class: 'lead-line' }, h('b', {}, t('packs_ready', { a: num(d.packs.filter((p) => p.publishable).length), b: num(d.packs.length) }))),
     d.packs.map(pack),
+    (d.contests || []).length ? [h('h2', {}, t('contests')), d.contests.map(contest)] : null,
     h('h2', {}, t('notes')), d.notes.length ? h('ul', { class: 'plain card' }, d.notes.map(note)) : h('p', { class: 'empty' }, t('no_notes')),
     h('h2', {}, t('wishlist')), w.wishes.length ? h('ul', { class: 'plain card' }, w.wishes.map(wish)) : h('p', { class: 'empty' }, t('no_wishes')));
 }
@@ -687,6 +720,7 @@ function detailLine(what, detail) {
   if (what === 'teacher.lock_code' && (x = /^a lock reset code for (.+)$/.exec(d))) return t('log.lock_code', { a: x[1] });
   if (what === 'wish' && (x = /^a wish marked (.+)$/.exec(d))) return t('log.wish_marked', { s: L.t('admin.' + x[1].replace(/ /g, '_'), {}, x[1]).toLowerCase() });
   if (what === 'rollback' && (x = /^(\S+) back to (\S+) \((\w+)\)$/.exec(d))) return t('log.back_to', { p: x[1], v: x[2] });
+  if (what === 'release' && (x = /^contest:(\S+) (open|closed) \((\w+)\)$/.exec(d))) return t('log.contest_' + x[2], { p: x[1] });
   if (what === 'prices' && (x = /^(.+): removed$/.exec(d))) return t('log.removed', { x: x[1] });
   if ((what === 'staff.add' || what === 'staff.remove') && (x = /^(.+) \((.+)\)$/.exec(d))) return `${x[1]} (${L.word('role', x[2])})`;
   return d;

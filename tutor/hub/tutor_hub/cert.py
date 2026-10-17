@@ -27,6 +27,8 @@ WORDS = {
     "finished": {"prs": "درس‌ها و ورق‌های تمرین این دوره را تمام کرده است:",
                  "ps": "د دې دورې درسونه او د تمرین پاڼې یې بشپړې کړې دي:",
                  "en": "has finished the lessons and practice sheets of"},
+    # P31 (C6.5): a contest's paper says she took part, never a score or a place (drafts in Dari and Pashto)
+    "took_part": {"prs": "شرکت کرد در", "ps": "ګډون یې وکړ په", "en": "took part in"},
     "lessons": {"prs": "{n} درس", "ps": "{n} درسونه", "en": "{n} lessons"},
     "check": {"prs": "بررسی کنید:", "ps": "وګورئ:", "en": "Check it:"},
     "names": {"prs": "قلم هیچ نامی نگه نمی‌دارد. این نام را با تذکره مقایسه کنید.",
@@ -51,8 +53,8 @@ def word(key: str, lang: str, **kw) -> str:
 
 
 # the 33-year leap rules' break years (C5.1 item 8): with them the arithmetic matches the astronomical calendar Iran
-# and Afghanistan keep for these centuries. The JavaScript copy is the staff pages' lang.js; one table of known days
-# (tests/hijri_dates.json) tests both.
+# and Afghanistan keep for these centuries. The JavaScript copy is app/js/calendar.js (the staff pages and, since
+# P31, the learner's contests); one table of known days (tests/hijri_dates.json) tests both.
 _BREAKS = (-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178)
 
 
@@ -131,8 +133,22 @@ def missing(lessons: list[str], final: str | None, results: dict) -> list[str]:
     return out
 
 
-def can_certify(g: dict, p: dict) -> bool:
+def can_certify(g: dict, p: dict | None = None) -> bool:
+    """A pathway's certificate (graph, pathway), or since P31 a contest's (the contest alone): it says `certificate:
+    true`, and never for Quran or seerah."""
+    if p is None:
+        return bool(g.get("certificate")) and g.get("subject") not in graph.NO_CERTIFICATE
     return bool(p.get("certificate")) and g.get("subject") not in graph.NO_CERTIFICATE
+
+
+def course_of(lib, course: str) -> dict | None:
+    """A certificate row's course as the paper and the check page name it: {title: {prs, ps, en}, did} with `did`
+    "finished" for a pathway and "took_part" for a contest (`contest:<id>`); None for one this server does not know."""
+    if course.startswith("contest:"):
+        c = lib.contests.get(course[len("contest:"):])
+        return {"title": c["title"], "did": "took_part"} if c else None
+    found = graph.find_pathway(lib.graphs, course)
+    return {"title": found[1]["title"], "did": "finished"} if found else None
 
 
 CSS = """
@@ -155,8 +171,9 @@ CSS = """
 """
 
 
-def paper_body(*, titles: dict, lang: str, cid: str, month: str, lessons: int, url: str) -> str:
-    """The certificate's paper, with an empty name line (`.cert-name`), as one `.cert-paper` element."""
+def paper_body(*, titles: dict, lang: str, cid: str, month: str, lessons: int, url: str, did: str = "finished") -> str:
+    """The certificate's paper, with an empty name line (`.cert-name`), as one `.cert-paper` element. `did` is
+    "finished" (a pathway: its lessons counted) or "took_part" (a contest: no count, no score)."""
     lang = lang if lang in ("prs", "ps", "en") else "prs"
     rtl = lang != "en"
     title = titles.get(lang) or titles.get("en") or ""
@@ -164,12 +181,12 @@ def paper_body(*, titles: dict, lang: str, cid: str, month: str, lessons: int, u
     course = esc(title) + (f'<span class="en" lang="en">{esc(en)}</span>' if rtl and en and en != title else "")
     hy, hm = hijri(month)
     when = f"{HIJRI['en' if lang == 'en' else lang][hm - 1]} {hy}"
-    meta = " · ".join([esc(word("lessons", lang, n=lessons)), esc(digits_to_fa(when) if rtl else when),
-                       f'<bdi lang="en">{esc(month_label(month, "en"))}</bdi>'])
+    meta = " · ".join(([esc(word("lessons", lang, n=lessons))] if did == "finished" else [])
+                      + [esc(digits_to_fa(when) if rtl else when), f'<bdi lang="en">{esc(month_label(month, "en"))}</bdi>'])
     return (f'<div class="cert-paper" dir="{"rtl" if rtl else "ltr"}" lang="{"fa-AF" if lang == "prs" else "ps-AF" if lang == "ps" else "en"}">'
             f'<div class="cert-head">{esc(word("head", lang))}</div>'
             f'<div class="cert-name"></div>'
-            f'<div class="cert-did">{esc(word("finished", lang))}</div>'
+            f'<div class="cert-did">{esc(word("took_part" if did == "took_part" else "finished", lang))}</div>'
             f'<div class="cert-course">{course}</div>'
             f'<div class="cert-meta">{meta}</div>'
             f'<div class="cert-foot">{qr.svg(url, 30, url=True)}<div>'

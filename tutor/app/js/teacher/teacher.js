@@ -6,8 +6,8 @@
 // Tabs: To do (one card at a time: needs care, held answers and ladders, questions sent to her; S sends, E edits,
 // D doesn't send, J and K move), Class (four counts, the class by picture and number, her page, the lock reset code,
 // the class card), Lessons (did it, mastered, the hardest item, disputes, hint rungs; bars per item; the answer
-// sheet), Wishes (the screened wishlist, read only) and Live (a live audio class, P30a, C6.3: shown while the class
-// has live classes on).
+// sheet), Wishes (the screened wishlist, read only), Live (a live audio class, P30a, C6.3: shown while the class
+// has live classes on) and Contests (P31, C6.5: who took part, by picture and number, never sorted by score).
 
 import { aliasIcon, aliasName as nameOf } from '../aliases.js';
 import * as L from '../staff/lang.js';
@@ -38,7 +38,7 @@ const put = (el, ...kids) => el.replaceChildren(...kids.flat(Infinity).filter((k
 
 const root = document.getElementById('teacher');
 const me = { pin: '', via: null, cohorts: [], cohort: null, label: '', hold: false, lock_codes: false, printer: false,
-  sheets: false, live: false };
+  sheets: false, live: false, contest: false };
 let tab = 'todo';
 let todo = { items: [], at: 0 };
 let keys = null;
@@ -87,7 +87,7 @@ function tabs() {
     class: 'chip' + (tab === k ? ' on' : ''), onClick: () => { tab = k; draw(); } }, t(k),
   n ? h('span', { class: 'count' }, fa(n)) : null);
   return h('nav', { class: 'chips ttabs', role: 'tablist' }, one('todo', todo.items.length), one('class'), one('lessons'),
-    one('wishes'), me.live || live.sid ? one('live') : null);
+    one('wishes'), me.live || live.sid ? one('live') : null, me.contest ? one('contests') : null);
 }
 
 const page = (...kids) => put(root, h('div', { class: 'screen' }, header(), me.via ? tabs() : null, kids, L.draftNote(h)));
@@ -123,7 +123,7 @@ async function start() {
   try {
     const m = await api('/me');
     Object.assign(me, { via: m.via, label: m.label, cohorts: m.cohorts, hold: !!m.hold, lock_codes: !!m.lock_codes,
-      printer: !!m.printer, sheets: !!m.sheets, live: !!m.live });
+      printer: !!m.printer, sheets: !!m.sheets, live: !!m.live, contest: !!m.contest });
     if (!me.cohort || !m.cohorts.some((c) => c.id === me.cohort)) me.cohort = m.cohorts.length ? m.cohorts[0].id : null;
   } catch (e) { return failed(e); }
   if (!me.cohort) return say(t('not_staff'));
@@ -137,6 +137,7 @@ async function draw() {
   if (tab === 'class') return drawClass();
   if (tab === 'lessons') return drawLessons();
   if (tab === 'live') return me.live || live.sid ? drawLive() : page(h('p', { class: 'empty' }, t('live_off')));
+  if (tab === 'contests') return me.contest ? drawContests() : page(h('p', { class: 'empty' }, t('contests_off')));
   return drawWishes();
 }
 
@@ -418,6 +419,28 @@ async function drawWishes() {
       h('span', { class: 'grow', dir: 'auto' }, w.text),
       h('small', { class: 'muted' }, L.join([t('wish_n', { n: num(w.count) }), (w.bands || []).map((b) => t(BAND[b] || b)).join(L.lang() === 'en' ? ', ' : '، ')])))))
     : h('p', { class: 'empty' }, t('no_wishes')));
+}
+
+// --- Contests (P31, C6.5): each contest open to the class, how many took part, and each learner who did with her
+// percent right, in the class list's order (picture, then number): never sorted by the percent, never a place ---
+
+async function drawContests() {
+  let d;
+  try { d = await api('/contests'); } catch (e) { return failed(e); }
+  const title = (x) => x.title[L.lang()] || x.title.en || x.id;
+  const card = (x) => h('section', { class: 'card pad-card stack contest-card' },
+    h('div', { class: 'row wrap' }, h('h2', { class: 'grow', dir: 'auto' }, title(x)),
+      h('span', { class: 'tag' + (x.phase === 'open' ? ' on' : '') }, t('contest_' + x.phase))),
+    h('p', { class: 'muted small' }, L.join([subjName(x.subject), t('contest_shape', { n: num(x.n), m: num(x.minutes) }),
+      t('contest_window', { a: L.when(x.opens_at), b: L.when(x.closes_at) })])),
+    h('p', { class: 'lead' }, t('took_part', { a: num(x.took_part), b: num(x.of) })),
+    x.learners.length ? h('ul', { class: 'subjects plain contest-takers' }, x.learners.map((r) => h('li', { class: 'row' },
+      h('span', { class: 'pic' }, aliasIcon(r.picture, 32)),
+      h('span', { class: 'grow' }, h('b', {}, `${aliasName(r.picture)} ${fa(r.number)}`),
+        h('small', { class: 'muted' }, ' ', t(BAND[r.band] || r.band))),
+      h('span', {}, L.pct(r.percent))))) : null);
+  page(h('p', { class: 'muted small pad' }, t('contest_note')),
+    d.contests.length ? d.contests.map(card) : h('p', { class: 'empty' }, t('no_contests')));
 }
 
 // --- Live (P30a, C6.3): a live audio class ---

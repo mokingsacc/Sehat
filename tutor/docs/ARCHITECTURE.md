@@ -504,14 +504,16 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/cert/{id}` | `{id, course: {prs, ps, en}, month, months}` or 404; the core's, always on; no token; 30 a minute an address |
 | `GET /v/{id}` | The check page a certificate's QR code opens (`app/js/certcheck.js`), served by Python on the hub and online |
 | `GET /api/m/timetable` | `?band=` (and `?cohort=`) -> `{cohort, band, timetable: {days, holidays, ramadan, start, blocks}}`, the cohort's school day for that band; 404 where it has none; no token |
-| `GET /api/m/admin/me`, `cohorts`, `cohorts/{id}`, `content`, `wishes`, `spend`, `safety`, `staff`, `log`; `POST /api/m/admin/cohorts`, `cohorts/{id}/kill`, `cohorts/{id}/flags/{module}`, `cohorts/{id}/settings`, `cohorts/{id}/code`, `cohorts/{id}/cards`, `content/{pack}/publish`, `content/{pack}/rollback`, `wishes`, `staff`; `DELETE /api/m/admin/staff/{id}` | The admin panel (P21); `X-Admin-Pin` on the hub, Cloudflare Access and an admin staff row online, 404 in the fallback container |
+| `GET /api/m/admin/me`, `cohorts`, `cohorts/{id}`, `content`, `wishes`, `spend`, `safety`, `staff`, `log`; `POST /api/m/admin/cohorts`, `cohorts/{id}/kill`, `cohorts/{id}/flags/{module}`, `cohorts/{id}/settings`, `cohorts/{id}/code`, `cohorts/{id}/cards`, `content/{pack}/publish`, `content/{pack}/rollback`, `content/contests/{id}/open`, `content/contests/{id}/close` (`{cohort}`), `content/contests/{id}/open-all`, `wishes`, `staff`; `DELETE /api/m/admin/staff/{id}` | The admin panel (P21); `X-Admin-Pin` on the hub, Cloudflare Access and an admin staff row online, 404 in the fallback container |
 | `GET /api/m/live`; `POST /api/m/live/{id}/join`, `sdp`, `answer`, `hand`, `leave`; `GET /api/m/live/{id}/state?v=` | A live class, the learner's side (P30a, C6.1): her token says her class (`?cohort=` never read), her consent needed; a ticket from `join` (16 bytes, once, 60 seconds) makes her relay session through `sdp`; `state` answers 204 while `v` is unchanged; bodies of 16 KB at most |
 | `GET /api/m/teacher/live`; `POST /api/m/teacher/live/start`, `{id}/sdp`, `{id}/board`, `{id}/lower`, `{id}/end`; `GET /api/m/teacher/live/{id}/roster` | A live class, the teacher's side (P30a, C6.1): the staff gate, her own class (`not_your_class`), `X-Qalam: 1` on every write; `start` refuses `live_open`, `budget` and `cap`; the roster says who is here, the hands in order and whether her sound goes out (two learners or more) |
-| `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
+| `GET /api/m/contest?lang=`, `contest/{id}`, `contest/{id}/key`; `POST /api/m/contest/{id}/answers` | Contests, the learner's side (P31, C6.5): her token says her class (`?cohort=` never read). The list holds the contests released to her class for her band that are open or open within 7 days. The questions come without answer or why, only inside the window, with her consent, and count against `per_day` (3). Answers `{answers, started}` are taken once (409 `contest_sent`) until 10 minutes after the close, and come back as `{right, n, percent}`. The key is served from the close on |
+| `GET /api/m/teacher/contests?cohort=` | Contests, the teacher's side (P31): the staff gate and her own class. Each released contest shows "took part" against the learners of its bands, and who took part with their percent, in alias order |
+| `GET /api/m/review/me`, `queue`, `lessons/{id}`, `signoffs`, `contests/{id}`; `POST /api/m/review/lessons/{id}/steps/{n}`, `lessons/{id}/sign`, `contests/{id}/steps/{n}`, `contests/{id}/sign` | The review screens; the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online) |
 
 Each route belongs to a module and answers 404 while that module is off for the cohort: `lessons` (packs, lessons,
 pictures, clips, link cards), `ask` (the three Ask routes), `sheets` (the sheet page and the key), `print` (PDFs and
-print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `live` (`/api/m/live/*` and `/api/m/teacher/live/*`; held while the relay's secrets are missing, so never on a hub), `made` (`/api/m/made`, `/api/m/made/mine`; the teacher's `/api/m/teacher/made/{id}` needs `teacher` and `made`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
+print jobs), `teacher` (`/api/m/teacher/*`, behind the staff gate too; the hub card also needs `print`, the answer sheet `sheets`), `photo` (`/api/m/photo/mark`), `homework` (`/api/m/homework/check`), `timetable` (`/api/m/timetable`), `plan` (`/api/m/plan`), `cert` (`/api/m/cert`; its print route also needs `print`), `live` (`/api/m/live/*` and `/api/m/teacher/live/*`; held while the relay's secrets are missing, so never on a hub), `contest` (`/api/m/contest*` and `/api/m/teacher/contests`; the review routes for contests also), `made` (`/api/m/made`, `/api/m/made/mine`; the teacher's `/api/m/teacher/made/{id}` needs `teacher` and `made`), `review` (`/api/m/review/*`, behind the staff gate too). `check` has no route of its own. `/api/hello`, `/api/events`, `/api/credits`, the
 learner routes, the admin panel's (behind its gate) and the app's files are always there.
 
 ## The app (app/js)
@@ -825,6 +827,39 @@ the microphone (a test reads `modules/live.js` for the names). The timetable gai
 lesson is the live class while the module can show for her, else a period of its subject. Locks: `rtc` (the four
 secrets), `consent` (the consent version must say `live: true`) and, under `TUTOR_RELEASE`, `gate`
 (`cohorts/gates/live.json`). Tests use `tests/fakes/rtc.py`; nothing has been tried against the real relay.
+
+## Contests (contests.py, mods/contest.py, app/js/modules/contest.js, app/js/screens/contest.js, P31)
+
+C6.5 to C6.7. A contest is a file of lesson steps with a window (CONTENT.md, "Contests"). `contests.py` checks it
+when the hub starts and in `tools/validate_pack.py`. It hashes the contest with its lessons' hashes, holds it in
+release mode until it is signed, and marks a set of answers with the lesson's own rules: a number answer is read in
+either script, and fractions count by value.
+
+The admin opens a contest per class, or for all classes, on the Content screen. Each open or close is a `releases`
+row, pack `contest:<id>`, and only the newest row at the current hash counts as open. The log records it as
+`release`.
+
+The learner's side:
+- The phone reads the list every 5 minutes while online. Home's secondary card (priority 20) shows the one open,
+  or opening within a week, that she has not sent.
+- "Join the contest" fetches the questions, which are kept in the cache without the key. "Start" begins her time:
+  her minutes, never after the close.
+- The run draws no hint, no why and no "Check my answer". The countdown is never read aloud. Send asks first, with
+  the focus on Cancel, and the phone sends by itself when her time runs out.
+- The hub marks the answers and keeps one number: the percent in a hub-written `contest.done` event (no answers,
+  no time, no place).
+- After the close, "See the answers" fetches the key and marks her kept answers on the phone.
+- The phone keeps at most 50 records: `{id, subject, joined, closes, answers, n, right, percent, at}`.
+- A contest with `certificate: true` gives a "took part in" paper (`mods/cert.py`, course `contest:<id>`), with no
+  score or lesson count on it.
+
+The teacher sees counts and each taker's percent in the class list's order, never sorted by score. Nobody sees a
+place or anyone else's score.
+
+Locks: under `TUTOR_RELEASE`, `gate` (`cohorts/gates/contest.json`), and `held()` holds the module until the
+host has a signed contest. The module is off in every seed cohort.
+`stores` gain `contest_takers(cohort, contest, since)`, the best percent per token since the window opened. No
+table is added.
 
 ## Not built yet
 

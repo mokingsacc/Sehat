@@ -29,6 +29,7 @@ from .config import Config
 from .mods import cert as cert_mod
 from .mods import made as made_mod
 from .mods import homework as homework_mod
+from .mods import contest as contest_mod
 from .mods import live as live_mod
 from .mods import photo as photo_mod
 from .mods import review as review_mod
@@ -368,7 +369,8 @@ class Hub:
     def render_pdf(self, spec: dict):
         if spec.get("cert"):                          # a certificate (P25b): its id and course only, the name line blank
             body = cert.paper_body(titles=spec["titles"], lang=spec["lang"], cid=spec["cert"], month=spec["month"],
-                                   lessons=spec["lessons"], url=f"{self.cfg.public_url.rstrip('/')}/v/{spec['cert']}")
+                                   lessons=spec["lessons"], url=f"{self.cfg.public_url.rstrip('/')}/v/{spec['cert']}",
+                                   did=spec.get("did", "finished"))
             html_text = cert.document(body, cid=spec["cert"], fonts=(self.cfg.app / "fonts").resolve().as_uri())
             return sheets.render_pdf(html_text, base_url=str(self.cfg.app))
         if spec.get("card"):
@@ -394,7 +396,8 @@ class Hub:
         """Modules held off whatever the flags say: the Quran reader while its set is missing or broken, and on a
         release hub until a Hanafi scholar has signed the set at its current hash (P29, C4.7); university preparation
         while no pack has its checklist, and on a release hub until the first card set is signed (P28, C4.6); live
-        classes while the Realtime app or its secret is missing (P30a, C6.1), so the village hub never serves them."""
+        classes while the Realtime app or its secret is missing (P30a, C6.1), so the village hub never serves them;
+        contests on a release hub until one is signed (P31, C6.5)."""
         q = self.library.quran
         out = []
         if q is None or not q.ok or (self.cfg.release and not q.signed):
@@ -403,6 +406,8 @@ class Hub:
             out.append("university")
         if not (self.cfg.rtc_app and self.cfg.rtc_secret):
             out.append("live")                     # C6.1: no relay, no live classes (the hub has none, ever)
+        if self.cfg.release and not any(c["_state"] == "signed" for c in self.library.contests.values()):
+            out.append("contest")                  # C6.5: a release host waits for its first signed contest
         return tuple(out)
 
     async def hello(self, cohort_id: str | None = None, band: str | None = None) -> dict:
@@ -774,18 +779,21 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     app.include_router(made_mod.router(hub, needs))
     # Live audio classes (the `live` module, P30a): the relay carries the sound, the server only the class's state
     app.include_router(live_mod.router(hub, needs))
+    # Contests (the `contest` module, P31): questions from signed lessons, marked by the hub, never ranked
+    app.include_router(contest_mod.router(hub, needs))
 
     # checking a certificate (P25b, C4.2): the core's, always on even where `cert` is off; no token
     @app.get("/api/cert/{cid}")
     async def cert_check(cid: str, request: Request):
         hub.cert_limit.check(hub.addr(request))
         row = await hub.store.certificate(cid.upper()) if CERT_ID.match(cid.upper()) else None
-        found = graph.find_pathway(hub.library.graphs, row["course"]) if row else None
         if not row:
             raise HTTPException(404, "no such certificate")
-        title = found[1]["title"] if found else {"en": row["course"]}
+        course = cert.course_of(hub.library, row["course"])                # a pathway, or a contest (P31)
+        title = course["title"] if course else {"en": row["course"]}
         return {"id": row["id"], "course": {x: title.get(x) or title.get("en") or row["course"] for x in LANGS},
-                "month": row["month"], "months": cert.month_labels(row["month"])}
+                "month": row["month"], "months": cert.month_labels(row["month"]),
+                "did": course["did"] if course else "finished"}
 
     @app.get("/v/{cid}", response_class=HTMLResponse)
     async def cert_page(cid: str):

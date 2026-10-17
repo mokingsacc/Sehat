@@ -30,7 +30,8 @@ export const STEPS = [
 const THEN = { home: '#/home', ask: '#/ask', settings: '#/settings', plan: '#/plan' };
 // a certificate's screen comes back after consent as `cert.<pathway>` (P25b)
 export const thenHash = (then) => THEN[then]
-  || (/^cert\.[a-z0-9][a-z0-9-]{0,47}$/.test(then) ? '#/cert/' + then.slice(5) : '#/home');
+  || (/^cert\.(contest:)?[a-z0-9][a-z0-9-]{0,47}$/.test(then) ? '#/cert/' + then.slice(5)
+    : /^contest\.[a-z][a-z0-9-]{1,47}$/.test(then) ? '#/contest/' + then.slice(8) : '#/home');
 
 // the route after `from` ('' for Welcome) for the learner using the phone
 export function next(from = '', then = 'home') {

@@ -588,6 +588,17 @@ class D1Store(Store):
                                    AND object IN ({marks}) GROUP BY object""", token_hash, *lessons)
         return {r["object"]: {"done": bool(r["done"]), "best": r["best"]} for r in rows}
 
+    async def contests_done(self, token_hash):
+        rows = await self._all("SELECT object, MAX(value) AS percent FROM events WHERE token_hash=? "
+                               "AND verb='contest.done' GROUP BY object", token_hash)
+        return {r["object"]: r["percent"] for r in rows}
+
+    async def contest_takers(self, cohort, contest, since):
+        rows = await self._all("SELECT token_hash, MAX(value) AS percent FROM events WHERE cohort=? AND at>=? "
+                               "AND verb='contest.done' AND object=? AND token_hash IS NOT NULL GROUP BY token_hash",
+                               cohort, since, contest)
+        return {r["token_hash"]: r["percent"] for r in rows}
+
     # her own questions (P32): for her teacher's check, kept 60 days
 
     async def add_made(self, *, cohort, token_hash, kind, body, lang) -> int:

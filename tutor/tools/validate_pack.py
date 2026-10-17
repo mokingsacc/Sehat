@@ -26,6 +26,12 @@ A pack's checklist.json and university cards (P28, C4.6) are checked as well: th
 cost, who, checked and review_by (at most six months later), a source that is LINK or better, and an adviser among
 the reviewers. --hashes prints each pack's card set as cards:<pack>. A card past its review_by date is listed as
 hidden on the phone (a note: the adviser checks the page again and moves the dates).
+
+The contests (content/contests/<id>.json, P31, C6.5) are always checked against the lessons that loaded
+(tutor_hub/contests.py): 5 to 30 `choice` or `number` steps of the contest's subject for each band and language it
+lists, the window and minutes, the title through the no-promise lint and the contest list in three languages, and a
+subject teacher and both readers among its reviewers. --contests (and --hashes) prints each one's hash as
+contest:<id>, which its reviewers sign; --release refuses one they have not signed at that hash.
 """
 from datetime import date
 import argparse
@@ -66,6 +72,7 @@ def main(argv=None):
     ap.add_argument("--sources", type=Path, default=None, help="the sources file (default content/sources.json)")
     ap.add_argument("--hashes", action="store_true", help="print the content hash of every lesson and link card")
     ap.add_argument("--clips", action="store_true", help="print the clips still to record, with their words")
+    ap.add_argument("--contests", action="store_true", help="print the content hash of every contest")
     a = ap.parse_args(argv)
     lib = Library(a.packs, release=a.release, sources=a.sources)
     problems = list(lib.sources.problems) + list(lib.problems)
@@ -92,6 +99,9 @@ def main(argv=None):
             if lib.card_set(pid):
                 states = {x["_state"] for x in lib.card_set(pid)}
                 print(f"cards:{pid}\t{lib.card_set_hash(pid)}\t{states.pop() if len(states) == 1 else 'mixed'}")
+    if a.hashes or a.contests:
+        for cid, c in sorted(lib.contests.items()):
+            print(f"contest:{cid}\t{c['_hash']}\t{c['_state']}")
     if a.clips:
         for c in clips_needed(lib):
             print("\t".join([c["pack"], c["lesson"], str(c["step"]), c["lang"], c["words"].replace("\t", " ")]
@@ -124,6 +134,9 @@ def main(argv=None):
         print(f"university preparation: {sum(len(c['steps']) for c in lib.checklists.values())} checklist step(s), "
               f"{len(uni)} card(s); " + ("first card set signed" if lib.university_ready() else
                                          "the module stays locked until an adviser signs the first card set"))
+    if lib.contests or lib.contest_dir.is_dir():
+        print(f"{len(lib.contests)} contest(s): " + (", ".join(f"{cid} ({c['_state']})" for cid, c in
+                                                              sorted(lib.contests.items())) or "-"))
     print(f"{len(lib.lessons)} lesson(s) and {len(lib.links)} link card(s) in {len(lib.packs)} pack(s); "
           f"{len(problems)} problem(s); {len(unsigned)} still waiting for their native-speaker and teacher check")
     return 1 if problems else 0

@@ -8,6 +8,11 @@
 - `POST /api/m/cert/print` `{id, lang, lessons}` (the hub, with `print` on): the paper with a blank name line goes to
   the print queue as the certificate's id only; the course comes from its row.
 The core's `GET /api/cert/<id>` and `/v/<id>` (server.py) check a certificate, whether this module is on or not.
+
+Since P31 (C6.5) `path` may be `contest:<id>` (`version` is not read): the contest says `certificate: true`, is
+released to her class at its current hash, is for her band, and her events hold its `contest.done`; the row's course
+is `contest:<id>`, its version the contest's hash; the paper says "took part in" the title with the month, never a
+score (`cert.paper_body(did="took_part")`).
 """
 import re
 
@@ -15,18 +20,19 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from .. import cert, flags, graph, learners
+from .. import cert, contests, flags, graph, learners
 from ..stores.base import CERT_ID
 from .plan import lessons_for
 
 MODULE = "cert"
 LANGS = ("prs", "ps", "en")
 PATH = re.compile(r"^[a-z0-9][a-z0-9-]{0,47}$")
+CONTEST = re.compile(r"^contest:([a-z][a-z0-9-]{1,47})$")
 
 
 class CertIn(BaseModel):
-    path: str = Field(max_length=48)
-    version: str = Field(max_length=32)
+    path: str = Field(max_length=56)
+    version: str = Field("", max_length=32)
     lang: str = Field("prs", max_length=3)
 
 
@@ -52,6 +58,8 @@ def router(hub, needs) -> APIRouter:
         cohort, f, on = await hub.cohort_modules(hub.her_cohort(who), who["band"])     # her own class (C5 H1)
         if not cohort or MODULE not in on:
             raise HTTPException(404, "Not Found")
+        if m := CONTEST.match(body.path):
+            return await earn_contest(m[1], who, cohort, f, body, request)
         found = graph.find_pathway(hub.library.graphs, body.path) if PATH.match(body.path) else None
         if not found or not cert.can_certify(*found) or who["band"] not in found[1]["bands"]:
             raise HTTPException(404, "no certificate for this pathway")
@@ -78,11 +86,31 @@ def router(hub, needs) -> APIRouter:
                 "paper": {"css": cert.CSS, "body": cert.paper_body(titles=p["title"], lang=lang, cid=cid, month=month,
                                                                    lessons=len(lessons), url=url)}}
 
+    async def earn_contest(cid: str, who: dict, cohort: dict, f: dict, body: CertIn, request: Request):
+        from . import contest as contest_mod
+        c = (await contest_mod.released(hub, cohort["id"])).get(cid)
+        if not c or not c["certificate"] or who["band"] not in c["bands"]:
+            raise HTTPException(404, "no certificate for this contest")
+        if cid not in await hub.store.contests_done(who["token_hash"]):
+            return JSONResponse({"error": "Qalam can't see this contest's answers from you", "missing": [cid]},
+                                status_code=409)
+        per_day = flags.module_settings(hub.modules[MODULE], (f.get(MODULE) or {}).get("settings"))["per_day"]
+        if await hub.store.count_today(who["token_hash"], MODULE) > per_day:
+            raise HTTPException(429, "enough certificates for today")
+        month = learners.day()[:7]
+        new = await hub.store.add_certificate(course=contest_mod.PACK + cid, version=c["_hash"], month=month,
+                                              cohort=cohort["id"])
+        lang = body.lang if body.lang in LANGS else "prs"
+        url = f"{base_url(hub, request)}/v/{new}"
+        return {"id": new, "month": month, "months": cert.month_labels(month), "url": url, "lessons": 0,
+                "paper": {"css": cert.CSS, "body": cert.paper_body(titles=c["title"], lang=lang, cid=new, month=month,
+                                                                   lessons=0, url=url, did="took_part")}}
+
     @r.post("/print", dependencies=needs(MODULE, "print"))
     async def print_cert(body: PrintIn, request: Request):
         row = await hub.store.certificate(body.id) if CERT_ID.match(body.id) else None
-        found = graph.find_pathway(hub.library.graphs, row["course"]) if row else None
-        if not found:
+        course = cert.course_of(hub.library, row["course"]) if row else None
+        if not course:
             raise HTTPException(404, "no such certificate")
         if hub.prints is None:
             raise HTTPException(503, "this hub has no printer")
@@ -92,8 +120,9 @@ def router(hub, needs) -> APIRouter:
                 raise HTTPException(429, "enough printing for now: ask the teacher")
             jid = await hub.store.add_print(lesson_id=row["id"], kind="certificate", copies=1,
                                             lang=body.lang if body.lang in LANGS else "prs", seed=0, device=who)
-        hub.prints.add(jid, {"cert": row["id"], "titles": found[1]["title"], "month": row["month"],
-                             "lessons": body.lessons, "lang": body.lang if body.lang in LANGS else "prs", "copies": 1,
+        hub.prints.add(jid, {"cert": row["id"], "titles": course["title"], "month": row["month"],
+                             "lessons": 0 if course["did"] == "took_part" else body.lessons, "did": course["did"],
+                             "lang": body.lang if body.lang in LANGS else "prs", "copies": 1,
                              "title": f"Qalam certificate {row['id']}"})
         return {"id": jid, "status": "queued", "printer": hub.printer.status()}
 

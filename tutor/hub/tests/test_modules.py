@@ -34,8 +34,11 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "cert", "check", "homework", "lessons", "live", "made", "photo", "plan", "print", "quran",
-                           "recall", "review", "sheets", "speak", "teacher", "timetable", "university"]
+    assert sorted(REAL) == ["ask", "cert", "check", "contest", "homework", "lessons", "live", "made", "photo", "plan", "print",
+                           "quran", "recall", "review", "sheets", "speak", "teacher", "timetable", "university"]
+    # P31 (C6.5): contests capture nothing of hers but a percent (no capability, no AI), on lessons, never for ey
+    assert REAL["contest"]["capabilities"] == [] and "ai" not in REAL["contest"] and REAL["contest"]["depends"] == ["lessons"]
+    assert REAL["contest"]["bands"] == ["p1", "p2", "s1", "s2", "ad"] and set(REAL["contest"]["settings"]) == {"per_day"}
     # P30a (C6.1): live classes send no learner's audio (no capability, no AI), need the internet, never serve ey
     assert REAL["live"]["capabilities"] == [] and "ai" not in REAL["live"] and REAL["live"]["needs"] == ["internet"]
     assert REAL["live"]["bands"] == ["p1", "p2", "s1", "s2", "ad"] and REAL["live"]["depends"] == ["lessons", "timetable"]

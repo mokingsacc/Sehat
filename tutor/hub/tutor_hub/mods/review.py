@@ -33,6 +33,12 @@ Since P28 (C4.6) a pack's card set is one more, kept as `cards:<pack>`: its chec
 cards, one step each (steps 1 to N), signed as one hash over theirs. The queue lists the sets with an item that needs
 her role under `cards`. `GET /api/m/review/cards/{pack}`, `POST .../steps/{n}`, `POST .../sign`. Pulled in, each item
 that needs her role gets her signature at its own hash, so a later change to one card voids only that card's.
+
+Since P31 (C6.5) a contest is one more, kept as `contest:<id>`: step 0 is the contest itself (title, subject, bands,
+window, minutes, certificate), steps 1 to N its questions, each shown as the learner sees it with its answer and why
+beside it for the reviewer, each hashed with its lesson's hash so an OK lasts only while that lesson is unchanged.
+It needs a subject teacher and the Dari and Pashto readers. The queue lists the contests that need her role under
+`contests`. `GET /api/m/review/contests/{id}`, `POST .../steps/{n}`, `POST .../sign`.
 """
 import json
 from datetime import datetime, timezone
@@ -40,7 +46,7 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field
 
-from .. import licences, packs, sheets
+from .. import contests, licences, packs, sheets
 from ..ai import filters
 from ..stores.base import REVIEW_CHIPS
 
@@ -126,6 +132,7 @@ def _graph_status(g, role, notes, signs) -> dict:
 
 QURAN = "quran:set"
 CARDS = "cards:"
+CONTEST = "contest:"
 
 
 def _quran_hashes(q) -> list[str]:
@@ -192,7 +199,7 @@ def router(hub, needs) -> APIRouter:
         q = quran_set()
         sets = [x for pid in hub.library.packs for x in hub.library.card_set(pid)]
         roles = sorted({x for l in [*hub.library.lessons.values(), *hub.library.graphs.values(),
-                                    *([q.index] if q else []), *sets]
+                                    *([q.index] if q else []), *sets, *hub.library.contests.values()]
                         for x in (l.get("review") or {}).get("needs") or []})
         return {"label": m["label"], "role": m["role"], "initials": m["initials"], "via": m["via"], "roles": roles}
 
@@ -234,7 +241,14 @@ def router(hub, needs) -> APIRouter:
                 st = _graph_status({"_hash": lib.card_set_hash(pid), "nodes": items}, role,
                                    await hub.store.review_notes(key, role), await hub.store.signoffs(key))
                 cards.append({"pack": pid, "title": lib.packs[pid].get("title"), "items": len(items), **st})
-        return {"role": role, "packs": out, "graphs": graphs, "quran": qrow, "cards": cards}
+        rows = []
+        for cid, c in sorted(lib.contests.items()):
+            if role in ((c.get("review") or {}).get("needs") or []):
+                key = CONTEST + cid
+                st = _graph_status({"_hash": c["_hash"], "nodes": c["items"]}, role,
+                                   await hub.store.review_notes(key, role), await hub.store.signoffs(key))
+                rows.append({"id": cid, "title": c["title"], "subject": c["subject"], "items": len(c["items"]), **st})
+        return {"role": role, "packs": out, "graphs": graphs, "quran": qrow, "cards": cards, "contests": rows}
 
     @r.get("/lessons/{lid}", dependencies=needs(MODULE))
     async def lesson(lid: str, request: Request, role: str | None = None):
@@ -511,6 +525,77 @@ def router(hub, needs) -> APIRouter:
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": h[7:15]}
+
+    def contest_role(me: dict, cid: str, asked: str | None):
+        c = hub.library.contests.get(cid)
+        if not c:
+            raise HTTPException(404, "no such contest")
+        role = me["role"] or (asked or "").strip()
+        if not role:
+            raise HTTPException(422, "say which role you review for")
+        if role not in ((c.get("review") or {}).get("needs") or []):
+            raise HTTPException(403, "this contest does not need your role")
+        return c, role
+
+    @r.get("/contests/{cid}", dependencies=needs(MODULE))
+    async def contest_page(cid: str, request: Request, role: str | None = None):
+        m = await staff(request)
+        c, role = contest_role(m, cid, role)
+        lib = hub.library
+        hashes = contests.item_hashes(c, lib)
+        latest = _latest(await hub.store.review_notes(CONTEST + cid, role))
+        keys = contests.key(lib, c)
+        steps = [{"n": k, "hash": hashes[k], "last": (latest[k]["status"] if k in latest else None),
+                  "changed": k in latest and latest[k]["step_hash"] != hashes[k],
+                  "chips": latest[k]["chips"] if k in latest else [], "text": latest[k]["text"] if k in latest else "",
+                  **({"item": {**c["items"][k - 1], "title": lib.lessons[c["items"][k - 1]["lesson"]].get("title"),
+                               "question": contests.question(lib, c["items"][k - 1]), "answer": keys[k - 1]["answer"],
+                               "why": keys[k - 1]["why"]}} if k else {})}
+                 for k in range(len(hashes))]
+        signs = await hub.store.signoffs(CONTEST + cid)
+        return {"contest": {k: v for k, v in c.items() if not k.startswith("_") and k not in ("review", "items")},
+                "hash": c["_hash"], "short": c["_hash"][7:15], "role": role,
+                "needs": (c.get("review") or {}).get("needs") or [], "steps": steps,
+                "signed": [{"role": s["role"], "initials": s["initials"], "date": s["signed_on"],
+                            "current": s["content_hash"] == c["_hash"]} for s in signs]}
+
+    @r.post("/contests/{cid}/steps/{n}", dependencies=needs(MODULE))
+    async def contest_note(cid: str, n: int, body: NoteIn, request: Request):
+        m = await staff(request)
+        c, role = contest_role(m, cid, body.role)
+        hashes = contests.item_hashes(c, hub.library)
+        if not 0 <= n < len(hashes):
+            raise HTTPException(404, "no such question")
+        if body.step_hash != hashes[n]:
+            raise HTTPException(409, "this question changed: open it again")
+        if any(x not in REVIEW_CHIPS for x in body.chips):
+            raise HTTPException(422, f"chips come from {', '.join(REVIEW_CHIPS)}")
+        text = filters.scrub(body.text.strip())[0] if body.verdict == "change" else ""
+        await hub.store.add_review_note(lesson=CONTEST + cid, step=n, role=role, step_hash=hashes[n],
+                                        status=body.verdict, chips=body.chips if body.verdict == "change" else [],
+                                        text=text)
+        return {"ok": True}
+
+    @r.post("/contests/{cid}/sign", dependencies=needs(MODULE))
+    async def contest_sign(cid: str, body: SignIn, request: Request):
+        m = await staff(request)
+        c, role = contest_role(m, cid, body.role)
+        if body.hash != c["_hash"]:
+            raise HTTPException(409, "the contest or one of its lessons changed: open it again")
+        hashes = contests.item_hashes(c, hub.library)
+        latest = _latest(await hub.store.review_notes(CONTEST + cid, role))
+        todo = [k for k in range(len(hashes))
+                if k not in latest or latest[k]["status"] != "ok" or latest[k]["step_hash"] != hashes[k]]
+        if todo:
+            raise HTTPException(409, f"not OK yet: {', '.join(map(str, todo))}")
+        initials = m["initials"] or (body.initials or "").strip().upper()
+        try:
+            new = await hub.store.add_signoff(lesson=CONTEST + cid, content_hash=c["_hash"], role=role,
+                                              initials=initials,
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"), via=m["via"])
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from None
+        return {"signed": True, "new": new, "role": role, "short": c["_hash"][7:15]}
 
     @r.get("/signoffs", dependencies=needs(MODULE))
     async def all_signoffs(request: Request):

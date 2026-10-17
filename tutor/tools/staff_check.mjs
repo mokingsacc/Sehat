@@ -170,23 +170,22 @@ const SCREENS = {
     ['live', async (p) => p.click('main .ttabs button:nth-child(5)')],
     ['live-room', async (p) => { await p.click('main section .chips button:nth-child(2)'); await p.click('main section .btn.primary'); await p.waitForTimeout(2600); }],
     ['live-end', async (p) => { await p.click('main .live-state .btn.kill'); }],
+    // the Contests tab (P31, C6.5), sixth while the Live tab shows (contestStubs); Escape first leaves "End the class?"
+    ['contests', async (p) => { await p.keyboard.press('Escape'); await p.click('main .ttabs button:nth-child(6)'); }],
   ],
   review: [
     ['pin', async () => {}],
     ['role', async (p) => { await pin(p, PIN); }],
     ['queue', async (p) => { await p.fill('main form input[maxlength="4"]', 'AB'); await p.click('main form button[type=submit]'); }],
+    ['contest', async (p) => { await p.click('main nav.subjects a[href="#"] >> nth=-1'); await p.waitForTimeout(800); }],
   ],
 };
-// The teacher page's Live tab: no hub serves live classes without the relay's secrets, so /me says live is on and
+// The teacher page's Live tab: no hub serves live classes without the relay's secrets, so /me says live is on (contestStubs) and
 // the live routes answer as the hub would; getUserMedia gives a silent track and RTCPeerConnection is a stub. The
 // learner side of the same rule is in browser_check.mjs --live.
 let firstLesson;
 async function liveStubs(page) {
   const json = (body) => ({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
-  await page.route('**/api/m/teacher/me*', async (route) => {
-    const r = await route.fetch();
-    await route.fulfill({ response: r, json: { ...(await r.json()), live: true } });
-  });
   await page.route(/\/api\/m\/teacher\/live(\/[^?]*)?(\?|$)/, async (route) => {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith('/teacher/live')) {
@@ -196,11 +195,7 @@ async function liveStubs(page) {
     if (path.endsWith('/start')) return route.fulfill(json({ id: 'abcdefgh23456789', ice: [], max_minutes: 45 }));
     if (path.endsWith('/sdp')) return route.fulfill(json({ sdp: 'v=0\r\n' }));
     if (path.endsWith('/roster')) {
-      if (firstLesson === undefined) {          // once: the class's first lesson, for the board
-        const d = await (await fetch(`${HUB}/api/m/teacher/lessons`, { headers: { 'x-teacher-pin': PIN } })).json().catch(() => ({}));
-        firstLesson = (d.lessons || [])[0] || null;
-      }
-      const first = firstLesson;
+      const first = await firstOf();
       return route.fulfill(json({ v: 4, here: 14, audio: 'on', minutes: 41, max_minutes: 45, floor: null, over: false,
         board: first ? { lesson: first.id, step: 2 } : null,
         hands: [{ alias: 'key-3', picture: 'key', number: 3, reason: 1, since: new Date(Date.now() - 90e3).toISOString() },
@@ -222,6 +217,50 @@ async function liveStubs(page) {
       close() {}
     };
   });
+}
+
+// Contests (P31, C6.5) on all three pages: no contest file ships with the content, so the admin's Content, the
+// teacher's Contests tab and the review queue get one made-up contest (on a real lesson, for the review preview) in
+// the shapes the hub answers with; the routes themselves are tested in hub/tests/test_contest.py.
+async function contestStubs(page) {
+  const lesson = await firstOf();
+  const soon = (h) => new Date(Date.now() + h * 3600e3).toISOString().slice(0, 16);
+  const X = { id: 'maths-week-3', title: { prs: 'مسابقهٔ ریاضی، هفتهٔ سوم', ps: 'د ریاضي سیالي، درېیمه اوونۍ', en: 'Maths week 3' },
+    subject: 'maths', bands: ['s1', 's2'], langs: ['prs', 'ps', 'en'], opens_at: soon(-1), closes_at: soon(47), minutes: 20, n: 5,
+    certificate: true, scope: 'class' };
+  const json = (body) => ({ status: 200, contentType: 'application/json', body: JSON.stringify(body) });
+  const merged = async (route, add) => {
+    const r = await route.fetch();
+    const j = await r.json().catch(() => ({}));
+    await route.fulfill({ response: r, json: { ...j, ...add(j) } });
+  };
+  await page.route('**/api/m/admin/content*', (route) => merged(route, (j) => ({ contests: [{ ...X, short: '3f9a1c2e',
+    roles: { 'Dari reader': true, 'Pashto reader': true, 'maths teacher': true }, signed: true, phase: 'open', took_part: 9,
+    releases: Object.fromEntries((j.cohorts || []).slice(0, 1).map((c) => [c.id, { open: true, earlier: false, at: new Date().toISOString(), took_part: 9 }])) },
+  { ...X, id: 'science-week-1', title: { prs: 'مسابقهٔ ساینس', ps: 'د ساینس سیالي', en: 'Science week 1' }, subject: 'science',
+    opens_at: soon(30), closes_at: soon(54), short: '81b0d4aa', roles: { 'Dari reader': true, 'Pashto reader': false, 'science teacher': false },
+    signed: false, phase: 'soon', took_part: 0, releases: {} }] })));
+  await page.route('**/api/m/teacher/me*', (route) => merged(route, () => ({ live: true, contest: true })));   // and the Live tab
+  await page.route('**/api/m/teacher/contests*', (route) => route.fulfill(json({ contests: [{ ...X, phase: 'open', took_part: 3, of: 6,
+    learners: [{ picture: 'book', number: 1, band: 's1', percent: 80 }, { picture: 'cup', number: 3, band: 's1', percent: 40 },
+      { picture: 'key', number: 2, band: 's2', percent: 100 }] }] })));
+  await page.route('**/api/m/review/queue*', (route) => merged(route, () => ({ contests: [{ id: X.id, title: X.title, subject: 'maths',
+    items: 5, status: 'todo' }] })));
+  await page.route(/\/api\/m\/review\/contests\/[^/?]+(\?|$)/, (route) => route.fulfill(json({ contest: X, hash: 'sha256:3f9a1c2e',
+    short: '3f9a1c2e', role: 'maths teacher', needs: ['Dari reader', 'Pashto reader', 'maths teacher'], signed: [],
+    steps: [{ n: 0, hash: 'sha256:0', last: 'ok', changed: false, chips: [], text: '' },
+      ...[1, 2].map((n) => ({ n, hash: 'sha256:' + n, last: null, changed: false, chips: [], text: '',
+        item: { lesson: lesson ? lesson.id : 'none', step: n + 1, title: lesson ? lesson.title : { en: 'A lesson' },
+          question: { kind: 'choice', options: [{ en: '1/2', prs: '۱/۲', ps: '۱/۲' }, { en: '2/3', prs: '۲/۳', ps: '۲/۳' }] },
+          answer: 0, why: { en: 'Half of the shape is shaded.', prs: 'نیم شکل رنگ شده است.', ps: 'د شکل نیمه رنګ شوې ده.' } } }))] })));
+}
+
+async function firstOf() {               // the class's first lesson, once (the live board and the review preview)
+  if (firstLesson === undefined) {
+    const d = await (await fetch(`${HUB}/api/m/teacher/lessons`, { headers: { 'x-teacher-pin': PIN } })).json().catch(() => ({}));
+    firstLesson = (d.lessons || [])[0] || null;
+  }
+  return firstLesson;
 }
 
 async function pin(p, value) {
@@ -250,6 +289,7 @@ for (const name of PAGES) {
         document.addEventListener('securitypolicyviolation', (e) => console.error(`Content Security Policy: ${e.violatedDirective} ${e.blockedURI}`));
       }, lang);
       if (name === 'teacher') await liveStubs(page);
+      await contestStubs(page);
       await page.goto(`${HUB}/${name}/`);
       for (const [screen, go] of SCREENS[name]) {
         try {
