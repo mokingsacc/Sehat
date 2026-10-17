@@ -1,4 +1,4 @@
-"""Copy reviewers' signatures from the hub or staging into the lesson packs (P17).
+"""Copy reviewers' signatures from the hub or staging into the lesson packs (P17), and the skills graphs (P25a).
 
 The review screens write each signature to the `signoffs` table: a role, initials, a date and the lesson's content
 hash. Release mode reads only the pack's own review blocks, so before a release the content lead pulls them in:
@@ -86,6 +86,35 @@ def lesson_file(pack_dir: Path, lid: str) -> Path:
     raise FileNotFoundError(lid)
 
 
+def pull_graph(lib, sub: str, signs: list[dict], report: dict):
+    """A skills graph's signatures (P25a), kept as `graph:<subject>`, into content/graph/<subject>.json."""
+    g = lib.graphs.get(sub)
+    if g is None:
+        report["unknown"].append("graph:" + sub)
+        return
+    review = dict(g.get("review") or {"status": "draft", "needs": []})
+    needs = review.get("needs") or []
+    offs = [dict(so) for so in review.get("signoffs") or []]
+    changed = False
+    for s in signs:
+        if s["hash"] != g["_hash"]:
+            report["stale"].append(f"graph:{sub} ({s['role']}, {s['date']}): changed since it was signed")
+        elif s["role"] not in needs:
+            report["not_needed"].append(f"graph:{sub}: {s['role']}")
+        elif any(o.get("role") == s["role"] and o.get("hash") == g["_hash"] for o in offs):
+            report["already"].append(f"graph:{sub}: {s['role']}")
+        else:
+            offs = [o for o in offs if o.get("role") != s["role"]]
+            offs.append({"role": s["role"], "initials": s["initials"], "date": s["date"], "hash": g["_hash"]})
+            report["copied"].append(f"graph:{sub}: {s['role']} {s['initials']} {s['date']}")
+            changed = True
+    if changed:
+        review["signoffs"] = sorted(offs, key=lambda o: needs.index(o["role"]) if o["role"] in needs else 99)
+        review["status"] = "checked" if review_state({"review": review}, g["_hash"]) == "signed" else "draft"
+        f = g["_file"]
+        f.write_text(put_review(f.read_text(encoding="utf-8"), review), encoding="utf-8")
+
+
 def pull(rows: list[dict], packs_dir: Path) -> dict:
     lib = Library(packs_dir)
     report = {"copied": [], "already": [], "stale": [], "unknown": [], "not_needed": []}
@@ -93,6 +122,9 @@ def pull(rows: list[dict], packs_dir: Path) -> dict:
     for r in rows:
         by_lesson.setdefault(r["lesson"], []).append(r)
     for lid, signs in sorted(by_lesson.items()):
+        if lid.startswith("graph:"):
+            pull_graph(lib, lid.split(":", 1)[1], signs, report)
+            continue
         if lid not in lib.lessons:
             report["unknown"].append(lid)
             continue

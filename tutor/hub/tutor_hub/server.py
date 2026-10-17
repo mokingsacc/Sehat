@@ -22,7 +22,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 
-from . import __version__, admin, events, flags, learners, modules, rules, search, sheets
+from . import __version__, admin, events, flags, graph, learners, modules, rules, search, sheets
 from .ai import Gateway, gateway as ai_gateway, make_provider
 from .brain import WAITING, Answer, Brain
 from .config import Config
@@ -407,7 +407,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
 
     @app.get("/api/packs", dependencies=needs("lessons"))
     async def packs():
-        return {"packs": hub.library.summary()}
+        # and the skills graphs (P25a): nodes, their lessons here and the pathways, content only
+        return {"packs": hub.library.summary(), "graphs": graph.for_app(hub.library.graphs, hub.library.lessons)}
 
     @app.get("/api/lessons/{lid}", dependencies=needs("lessons"))
     async def lesson(lid: str):

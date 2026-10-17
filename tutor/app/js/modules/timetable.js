@@ -228,7 +228,8 @@ function nowCard(ctx) {
   const note = b && b.kind === 'period' ? h('small', { class: 'muted' }, s('day_paper')) : null;
   const what = lesson ? (b && b.kind === 'period' ? titleOf(b) : [s(lesson.subject), plain(lesson.title)].join(' · ')) : null;
   const tomorrow = w.phase === 'after' ? tomorrowLine(c, now) : null;
-  const play = (size) => (lesson ? h('a', { class: 'play', href: lessonHref(lesson), 'aria-label': s('start_lesson') }, playIcon(size)) : null);
+  // the Now card starts its lesson with the warm-up (spaced review, P25a)
+  const play = (size) => (lesson ? h('a', { class: 'play', href: lessonHref(lesson) + '?warm=1', 'aria-label': s('start_lesson') }, playIcon(size)) : null);
   const cup = b && b.kind === 'break' ? h('span', { class: 'nowpic', 'aria-hidden': 'true' }, icon('cup', 56, 2)) : null;
   const sheetBtn = sheet ? said(h('a', { class: 'btn warm', href: '#/print/' + encodeURIComponent(sheet.id) }, icon('file', 22),
     s('day_sheet'))) : null;

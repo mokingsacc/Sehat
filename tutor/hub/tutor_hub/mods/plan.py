@@ -2,7 +2,9 @@
 
 - `POST /api/m/plan` `{goal, lang, band}` (and `?cohort=`) -> one of
   - `{kind: "plan", label, lessons}`: every lesson whose title, unit or subject holds her words, with the rest of the
-    best one's unit, in pack order (search.plan_for); the phone keeps it as her plan;
+    best one's unit, in pack order (search.plan_for); else, since P25a, the lessons of the skills-graph node whose
+    title holds half her words (graph.match). The phone builds the plan from them: the graph's `needs` she has not
+    mastered first, marked "Learn first" (C4.1);
   - `{kind: "closest", lessons}`: three at most, when nothing matches well enough for a plan;
   - `{kind: "wish", saved}`: no lesson for it yet; the screened text joins the cohort's wishlist;
   - `{kind: "rules", reason, text}`: distress, health or off-limits words get the rules' kind message, and nothing
@@ -11,12 +13,19 @@
 No token is read and none is sent (BUILD-PLAN 5.1: what is shared is screened wishlist text with counts, no token):
 the wishlist row holds the cohort, the band, the language, the text with identifiers replaced (ai/filters.scrub),
 a count and two days. The goal is never logged. Typed only in 2027 (C3.5): browser speech input would send her voice
-to a third party. No AI: the search is code over titles, units, subjects and lesson text.
+to a third party. The search is code over titles, units, subjects, lesson text and node titles.
+
+AI (purpose `plan`, C4.1) only when all of that missed, the cohort's `plan_ai` setting is on (off by default and
+everywhere so far; `open` has AI off) and her language is trusted (the gateway's check): the gateway gets the screened
+goal and the ids and titles of her band's nodes, never her token, and at most three ids that exist are kept. Anything
+else is a miss. The model never writes a word she sees: the label is the node's own title.
 """
+import json
+
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 
-from .. import rules, search
+from .. import flags, graph, rules, search
 from ..ai import filters
 from ..packs import band_of_year
 from ..packs import text as pick_text
@@ -54,6 +63,34 @@ def lessons_for(library, band: str) -> list[tuple[str, dict]]:
     return out
 
 
+AI_PICKS = 3
+
+
+def ai_messages(goal: str, nodes: list[tuple[dict, list[str]]], lang: str) -> list[dict]:
+    """What the gateway sends for `plan`: the node list (ids and titles, nothing about her) and the screened goal."""
+    listed = "\n".join(f"{n['id']}: {pick_text(n['title'], 'en')} / {pick_text(n['title'], lang)}" for n, _ in nodes)
+    return [{"role": "system", "content": "A learner typed what she wants to learn. Pick the skills from this list "
+             "that fit her goal best, at most three. Answer only with a JSON list of their ids, like [\"frac-add\"], "
+             "or [] when none fits.\n" + listed},
+            {"role": "user", "content": goal}]
+
+
+def ai_picks(text: str | None, nodes: list[tuple[dict, list[str]]]) -> list[tuple[dict, list[str]]]:
+    """The model's reply as nodes: a JSON list of ids from the list, three at most; anything else picks nothing."""
+    try:
+        ids = json.loads(text or "")
+    except ValueError:
+        return []
+    if not isinstance(ids, list) or not all(isinstance(x, str) for x in ids):
+        return []
+    by_id = {n["id"]: (n, ls) for n, ls in nodes}
+    out = []
+    for x in ids:
+        if x in by_id and by_id[x] not in out:
+            out.append(by_id[x])
+    return out[:AI_PICKS]
+
+
 def wish_key(text: str) -> str:
     """The same wish typed twice counts once: its search words, in order."""
     return " ".join(tokens(text))
@@ -66,7 +103,7 @@ def router(hub, needs) -> APIRouter:
     async def plan(body: PlanIn, request: Request):
         hub.plan_limit.check(hub.who(request))
         lang = body.lang if body.lang in LANGS else "prs"
-        cohort, _, on = await hub.cohort_modules(request.query_params.get("cohort"),
+        cohort, f, on = await hub.cohort_modules(request.query_params.get("cohort"),
                                                  body.band if body.band in BANDS else None)
         if not cohort or body.band not in BANDS or MODULE not in on:
             raise HTTPException(404, "Not Found")
@@ -79,12 +116,26 @@ def router(hub, needs) -> APIRouter:
             text = HEALTH[lang] if reason == "health" else rules.MESSAGES[reason][lang]
             return {"kind": "rules", "reason": reason, "text": text}
         clean, _ = filters.scrub(goal)
-        found = search.plan_for(clean, lessons_for(hub.library, body.band), SUBJECT_NAMES)
+        mine = lessons_for(hub.library, body.band)
+        found = search.plan_for(clean, mine, SUBJECT_NAMES)
         if found["kind"] == "plan":
             label = pick_text(found.get("unit"), lang) or pick_text(found.get("title"), lang)
             return {"kind": "plan", "label": label, "lessons": found["lessons"]}
+        ids = [lid for lid, _ in mine]
+        node = graph.match(hub.library.graphs, clean, ids)
+        if node:
+            return {"kind": "plan", "label": pick_text(node[0]["title"], lang), "lessons": node[1]}
         if found["kind"] == "closest":
             return {"kind": "closest", "lessons": found["lessons"]}
+        settings = flags.module_settings(hub.modules[MODULE], (f.get(MODULE) or {}).get("settings"))
+        nodes = graph.band_nodes(hub.library.graphs, ids) if settings.get("plan_ai") else []
+        if nodes:
+            res = await hub.gateway.call("plan", ai_messages(clean, nodes, lang), module=MODULE, lang=lang,
+                                         cohort=cohort["id"], max_tokens=60, temperature=0.0)
+            picked = ai_picks(res.text, nodes)
+            if picked:
+                lessons = list(dict.fromkeys(lid for _, ls in picked for lid in ls))[:search.PLAN_MAX]
+                return {"kind": "plan", "label": pick_text(picked[0][0]["title"], lang), "lessons": lessons}
         key = wish_key(clean)
         saved = bool(key)
         if saved:

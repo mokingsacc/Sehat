@@ -11,6 +11,8 @@ content/packs/starter/
   links.json            link cards: pages elsewhere, described in our own words (optional)
 ```
 
+Next to the packs, `content/graph/<subject>.json` holds that subject's skills graph (P25a, below).
+
 Check a pack with `python tools/validate_pack.py` (the hub runs the same checks at start and leaves out any lesson
 that fails). Print every sheet for the reviewers with `python tools/make_sheets.py --out review-sheets`.
 
@@ -185,6 +187,33 @@ A card holds only these fields: a title, our own description (at most 140 charac
 (https), and where it belongs (`subject`, `years`, `lessons`, `unit`). Any other field (copied text, a transcript,
 an embed) fails the validator. Cards need the internet, so the app shows them only while online, and they are
 signed like lessons.
+
+### The skills graph
+
+`content/graph/<subject>.json` (P25a, C4.1) is one reviewed prerequisite graph per subject. Its nodes are skills;
+each lists the skills it `needs` and the `lessons` that teach it. The graph, not the lesson, holds the mapping, so a
+lesson's content hash and signatures do not move when the graph changes, and no lesson gains a `skill` field:
+
+```json
+{"subject": "maths", "version": "2026.10.17",
+ "nodes": [{"id": "frac-what", "needs": [], "lessons": [], "title": {"prs": "...", "ps": "...", "en": "What a fraction is"}},
+           {"id": "frac-add", "needs": ["frac-what"], "lessons": ["maths-7-fractions-add"], "title": {...}}],
+ "pathways": [{"id": "s1-fractions", "goal": ["frac-add"], "bands": ["s1"], "final": "maths-7-fractions-add",
+               "certificate": true, "title": {...}}],
+ "review": {"status": "draft", "needs": ["maths teacher"]}}
+```
+
+- Node ids are lower case with dashes, each once; every `needs` names a node; no circles; every listed lesson exists
+  and is listed in one node only. A lesson in no node is allowed: its plans follow pack order.
+- A pathway is a named goal that runs as a plan: its goal must have a lesson for each of its `bands`, `final` (the
+  lesson whose sheet ends it) must have a sheet, and a Quran or seerah pathway never has a certificate (a scholar's
+  to give, C4.2).
+- The graph is signed like `links.json`: its content hash (everything but `review`), by a subject teacher, and by an
+  adult educator too where a pathway lists `ad`. Reviewers sign it on the graph page in `/review/` (each node OK or
+  Change, then "Hold to sign"); `tools/pull_signoffs.py` copies the signatures in. In release mode an unsigned graph
+  is not served, and `tools/validate_pack.py --hashes` prints its hash as `graph:<subject>`.
+- A step a reviewer wants in spaced review can say `"recall": true` (only on a `choice` or `number` step); without
+  any, a lesson's last two such steps are used (C4.1).
 
 ### Importing
 

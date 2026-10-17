@@ -232,6 +232,10 @@ def router(hub) -> APIRouter:
                 break
         else:
             raise HTTPException(503, "try again")
+        # spaced review is on in new cohorts (C4.1): no AI, no free text, only its event leaves the phone; it shows
+        # once the admin turns `lessons` on
+        if "recall" in hub.modules:
+            await hub.store.set_flag(cid, "recall", enabled=True, settings={}, changed_by=by(me))
         code = learners.new_class_code()
         await hub.store.set_class_code(cid, learners.code_hash(learners.normal_code(code)))
         await log(me, "cohort.new", f"{body.label.strip()} ({', '.join(body.bands)}; {', '.join(body.langs)})", cid)

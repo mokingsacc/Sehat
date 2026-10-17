@@ -136,9 +136,13 @@ export async function packs() {
   try {
     const j = await call('/api/packs', { ms: 8000 });
     cache('packs', j.packs);
+    cache('graphs', Array.isArray(j.graphs) ? j.graphs : []);
     return j.packs;
   } catch { return cache('packs') || []; }
 }
+
+// the skills graphs (P25a) that came with the packs: content only, kept for when the hub is out of reach
+export const graphs = () => cache('graphs') || [];
 
 export async function lesson(id) {
   try {

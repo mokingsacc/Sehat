@@ -207,7 +207,10 @@ export default async function check([id, seedText, mode]) {
   // the sheet was marked: the Check button, or, on a sheet with nothing to type, every row judged
   function marked() {
     const vals = Object.values(results);
-    if (vals.length) state.record('check.done', id, Math.round((100 * vals.filter(Boolean).length) / vals.length));
+    if (!vals.length) return;
+    const pct = Math.round((100 * vals.filter(Boolean).length) / vals.length);
+    state.setMark(id, pct);                  // her latest mark, for the skills graph's "mastered" (P25a)
+    state.record('check.done', id, pct);
   }
 
   function drawScore() {

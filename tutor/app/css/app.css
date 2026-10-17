@@ -811,3 +811,14 @@ textarea.ainput { padding: 8px 12px; min-height: 80px; margin: 0; }
 .update-card { min-height: 80vh; justify-content: center; text-align: start; }
 .update-card .nowpic { color: var(--accent-ink); }
 .netsheet .explainer p { margin: 0; line-height: 1.6; }
+
+/* P25a: the warm-up's segments and kicker, pathway cards, a finished plan, the pathway chips (C4.1) */
+.segs span.w { background: var(--line); }
+.segs span.w.on { background: var(--warm); }
+.warm-kicker { padding: 4px 16px 0; }
+.warm-kicker .kicker { margin: 0; font-size: var(--fs-sm); font-weight: 800; color: var(--accent-ink); }
+.path-cards { display: flex; flex-direction: column; gap: 10px; padding: 8px 16px 0; }
+.path-card .bar { margin: 2px 0; }
+.path-card .muted { margin: 0; }
+.plan-card.done .done-mark { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--good-soft); color: var(--good-ink); flex: none; }
+.chip.path { border-color: var(--accent); color: var(--accent-ink); }

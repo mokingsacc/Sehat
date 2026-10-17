@@ -18,6 +18,7 @@
     "homework": true,
     "review": true,
     "timetable": true,
-    "plan": true
+    "plan": true,
+    "recall": true
   }
 }

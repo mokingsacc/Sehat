@@ -252,6 +252,21 @@ function netSheet(text, waits) {
   document.body.append(sheet);
 }
 
+// one question with two answers, in the net sheet's shape (P25a: "Stop 'Fractions' and start 'Money'?"): the
+// confirming button first, then Cancel. Resolves true or false; tapping outside is Cancel.
+export function confirmSheet(text, yes, no = s('cancel')) {
+  document.querySelectorAll('.netsheet').forEach((el) => el.remove());
+  return new Promise((done) => {
+    const close = (v) => { sheet.remove(); done(v); };
+    const sheet = h('div', { class: 'netsheet', role: 'dialog', 'aria-modal': 'true', onClick: (e) => { if (e.target === sheet) close(false); } },
+      h('div', { class: 'card stack' },
+        h('div', { class: 'row top' }, h('p', { class: 'grow', dir: 'auto' }, text), speakerBtn(() => speak(text, getLang()), { size: 'sm' })),
+        said(h('button', { type: 'button', class: 'btn primary', onClick: () => close(true) }, yes)),
+        said(h('button', { type: 'button', class: 'btn', onClick: () => close(false) }, no))));
+    document.body.append(sheet);
+  });
+}
+
 // the tabs of the modules that are on; each keeps its column, so a tab switched off leaves the others in place.
 // `active` is a tab's key or its module's id (the sheets screens say 'sheets', whose tab reads Print on the hub)
 export function nav(active) {

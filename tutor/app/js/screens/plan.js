@@ -9,8 +9,12 @@
 // While a plan runs, the top says "Your plan: Fractions · 2 of 4" with "Stop this plan". One plan at a time.
 // Free text (C2.8, C1.4): the first goal she sends opens the consent screen; "Not now" keeps the search on the phone
 // and sends nothing. The chips never send anything.
+// Since P25a (C4.1): a plan is built over the skills graph (graph.js): what the goal needs and she has not mastered
+// comes first, each row tagged "Learn first"; the pathways for her band are the first chips; starting a plan while
+// another has a lesson left asks once (plans.begin).
 
 import { getLang, s } from '../i18n.js';
+import * as graph from '../graph.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
 import * as outbox from '../outbox.js';
@@ -47,31 +51,38 @@ export default async function plan() {
       } }, s('plan_stop')))) : null);
   }
 
-  const row = (l, i, mark) => said(h('a', { class: 'trow', href: '#/lesson/' + encodeURIComponent(l.id) },
+  const row = (l, i, mark, learnFirst = false) => said(h('a', { class: 'trow', href: '#/lesson/' + encodeURIComponent(l.id) },
     h('span', { class: 'time' }, String(i + 1)), subjectBadge(l.subject, 36),
     h('span', { class: 'grow' }, h('b', {}, plain(l.title))),
+    learnFirst && mark !== 'done' ? h('span', { class: 'tag first' }, s('learn_first')) : null,
     mark === 'done' ? icon('check', 22, 2.6) : mark === 'next' ? h('span', { class: 'tag' }, s('plan_next')) : null));
 
-  function showPlan(label, ids) {
+  function showPlan(label, ids, first = new Set(), path = null) {
     const lessons = ids.map((id) => library.get(id)).filter(Boolean);
     const cur = state.child();
     const firstLeft = lessons.findIndex((l) => !(cur.done && cur.done[l.id]));
     const head = s('plan_here', { n: lessons.length });
     fill(out, h('div', { class: 'row' }, h('h2', { class: 'grow' }, head), speakerBtn(say(head), { size: 'sm' })),
       h('nav', { class: 'subjects today' }, lessons.map((l, i) => row(l, i,
-        cur.done && cur.done[l.id] ? 'done' : i === firstLeft ? 'next' : null))),
-      said(h('button', { type: 'button', class: 'btn primary', onClick: () => {
-        if (plans.start(state.child(), label, ids)) { toast(s('plan_started')); location.hash = '#/home'; }
+        cur.done && cur.done[l.id] ? 'done' : i === firstLeft ? 'next' : null, first.has(l.id)))),
+      said(h('button', { type: 'button', class: 'btn primary', onClick: async () => {
+        if (await plans.begin(state.child(), label, ids, path)) { toast(s('plan_started')); location.hash = '#/home'; }
       } }, icon('next', 22), s('plan_start'))));
+  }
+
+  // a search's plan, built over the skills graph: what it needs first, then its own lessons
+  function graphPlan(label, ids) {
+    const x = graph.expand(state.child(), ids, plans.bandLessons(state.child()));
+    showPlan(label, x.lessons, x.first);
   }
 
   function showClosest(ids) {
     const lessons = ids.map((id) => library.get(id)).filter(Boolean);
     fill(out, h('div', { class: 'row' }, h('h2', { class: 'grow' }, s('plan_closest')), speakerBtn(say(s('plan_closest')), { size: 'sm' })),
       h('nav', { class: 'subjects today' }, lessons.map((l, i) => row(l, i, null))),
-      said(h('button', { type: 'button', class: 'btn outline', onClick: () => {
+      said(h('button', { type: 'button', class: 'btn outline', onClick: async () => {
         const first = lessons[0];
-        if (first && plans.start(state.child(), plain(first.unit || first.title), lessons.map((l) => l.id))) {
+        if (first && await plans.begin(state.child(), plain(first.unit || first.title), lessons.map((l) => l.id))) {
           toast(s('plan_started'));
           location.hash = '#/home';
         }
@@ -84,7 +95,7 @@ export default async function plan() {
   }
 
   function show(r) {
-    if (r.kind === 'plan' && r.lessons.length) return showPlan(r.label, r.lessons);
+    if (r.kind === 'plan' && r.lessons.length) return graphPlan(r.label, r.lessons);
     if (r.kind === 'closest' && r.lessons.length) return showClosest(r.lessons);
     if (r.kind === 'rules') return showLine(r.text, 'kind');
     return showLine(s(r.saved ? 'plan_miss' : r.queued ? 'plan_miss_later' : 'plan_miss_here'));
@@ -120,12 +131,19 @@ export default async function plan() {
   const form = h('form', { class: 'composer plan-form', onSubmit: (e) => { e.preventDefault(); send(input.value); } },
     input, h('button', { type: 'submit', 'aria-label': s('send') }, icon('send', 26, 2.3)));
   // six chips at most in the bold sizes, eight in clean, wrapping, never cut (C4 look question 27)
-  const chips = plans.units(c, document.documentElement.dataset.look === 'bold' ? plans.CHIPS_BOLD : plans.CHIPS);
+  // the pathways for her band come first (C4.1), then the units, together within the same count
+  const max = document.documentElement.dataset.look === 'bold' ? plans.CHIPS_BOLD : plans.CHIPS;
+  const paths = graph.pathways(c, plans.bandLessons(c)).slice(0, max);
+  const chips = plans.units(c, max - paths.length);
+  const pathChips = paths.map((x) => h('button', { type: 'button', class: 'chip path', dir: 'auto', onClick: () => {
+    const p = graph.pathwayPlan(state.child(), x, plans.bandLessons(state.child()));
+    showPlan(p.label, p.lessons, p.first, p.path);
+  } }, plain(x.p.title)));
   const el = h('div', { class: 'screen plan' },
     topbar({ back: '#/home', title: s('plan_title'), child: true }),
     h('div', { class: 'stack pad' }, top, form,
-      chips.length ? h('div', { class: 'row' }, h('p', { class: 'grow muted' }, s('plan_pick')), speakerBtn(say(s('plan_pick')), { size: 'sm' })) : null,
-      chips.length ? h('div', { class: 'chips' }, chips.map((name) => h('button', { type: 'button', class: 'chip', dir: 'auto',
+      chips.length || paths.length ? h('div', { class: 'row' }, h('p', { class: 'grow muted' }, s('plan_pick')), speakerBtn(say(s('plan_pick')), { size: 'sm' })) : null,
+      chips.length || paths.length ? h('div', { class: 'chips' }, pathChips, chips.map((name) => h('button', { type: 'button', class: 'chip', dir: 'auto',
         onClick: () => { const r = plans.unitPlan(state.child(), name); show(r); } }, name))) : null,
       out));
   drawTop();

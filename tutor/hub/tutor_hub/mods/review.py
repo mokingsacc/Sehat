@@ -16,13 +16,19 @@ initials when she signs. A signature is a `signoffs` row (initials only), for th
 - `POST /api/m/review/lessons/{id}/sign`: `{hash, role?, initials?}`: only when the hash is the current one, every
   step is OK for this role at its current hash, and no step that needs a recording lacks one.
 - `GET  /api/m/review/signoffs`: every signoff, for `tools/pull_signoffs.py`.
+
+Since P25a (C4.1) a skills graph is one more page type, kept under the name `graph:<subject>` in the same tables:
+its nodes are its steps 1 to N (each with its needs and lessons), step 0 the rest (the pathways and the version).
+The queue lists the graphs that need her role under `graphs`; the routes are the lessons' under
+`/api/m/review/graphs/{subject}`: GET, `POST .../steps/{n}`, `POST .../sign`.
 """
+import json
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field
 
-from .. import packs, sheets
+from .. import licences, packs, sheets
 from ..ai import filters
 from ..stores.base import REVIEW_CHIPS
 
@@ -77,6 +83,29 @@ def _missing_clips(lib, lid: str, role: str) -> list[int]:
     return out
 
 
+def _graph_hashes(g: dict) -> list[str]:
+    """A graph's steps: the rest (pathways, version) as step 0, then each node."""
+    def h(x):
+        return licences.sha256_text(json.dumps(x, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    rest = {k: v for k, v in g.items() if k not in ("nodes", "review") and not k.startswith("_")}
+    return [h(rest)] + [h(n) for n in g["nodes"]]
+
+
+def _graph_status(g, role, notes, signs) -> dict:
+    mine = [s for s in signs if s["role"] == role]
+    if any(s["content_hash"] == g["_hash"] for s in mine):
+        return {"status": "signed"}
+    if mine:
+        return {"status": "changed"}
+    latest = _latest(notes)
+    if any(n["status"] == "change" for n in latest.values()):
+        return {"status": "changes"}
+    seen = [k for k in range(1, len(g["nodes"]) + 1) if k in latest]
+    if not seen:
+        return {"status": "not_started"}
+    return {"status": "step", "step": min(max(seen) + 1, len(g["nodes"])), "of": len(g["nodes"])}
+
+
 def _latest(notes: list[dict]) -> dict[int, dict]:
     out = {}
     for n in notes:
@@ -124,7 +153,8 @@ def router(hub, needs) -> APIRouter:
     @r.get("/me", dependencies=needs(MODULE))
     async def me(request: Request):
         m = await staff(request)
-        roles = sorted({x for l in hub.library.lessons.values() for x in (l.get("review") or {}).get("needs") or []})
+        roles = sorted({x for l in [*hub.library.lessons.values(), *hub.library.graphs.values()]
+                        for x in (l.get("review") or {}).get("needs") or []})
         return {"label": m["label"], "role": m["role"], "initials": m["initials"], "via": m["via"], "roles": roles}
 
     @r.get("/queue", dependencies=needs(MODULE))
@@ -145,7 +175,13 @@ def router(hub, needs) -> APIRouter:
                              "steps": len(raw.get("steps", [])), **st})
             if rows:
                 out.append({"pack": pid, "title": pack.get("title"), "lessons": rows})
-        return {"role": role, "packs": out}
+        graphs = []
+        for sub, g in sorted(lib.graphs.items()):
+            if role in ((g.get("review") or {}).get("needs") or []):
+                key = "graph:" + sub
+                st = _graph_status(g, role, await hub.store.review_notes(key, role), await hub.store.signoffs(key))
+                graphs.append({"subject": sub, "version": g["version"], "nodes": len(g["nodes"]), **st})
+        return {"role": role, "packs": out, "graphs": graphs}
 
     @r.get("/lessons/{lid}", dependencies=needs(MODULE))
     async def lesson(lid: str, request: Request, role: str | None = None):
@@ -212,6 +248,81 @@ def router(hub, needs) -> APIRouter:
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": lib.hashes[lid][7:15]}
+
+    def graph_or_404(sub: str) -> dict:
+        if sub not in hub.library.graphs:
+            raise HTTPException(404, "no such graph")
+        return hub.library.graphs[sub]
+
+    def graph_role(me: dict, g: dict, asked: str | None) -> str:
+        role = me["role"] or (asked or "").strip()
+        if not role:
+            raise HTTPException(422, "say which role you review for")
+        if role not in ((g.get("review") or {}).get("needs") or []):
+            raise HTTPException(403, "this graph does not need your role")
+        return role
+
+    @r.get("/graphs/{sub}", dependencies=needs(MODULE))
+    async def graph_page(sub: str, request: Request, role: str | None = None):
+        m = await staff(request)
+        g = graph_or_404(sub)
+        role = graph_role(m, g, role)
+        lib = hub.library
+        hashes = _graph_hashes(g)
+        latest = _latest(await hub.store.review_notes("graph:" + sub, role))
+        steps = [{"n": k, "hash": hashes[k], "last": (latest[k]["status"] if k in latest else None),
+                  "changed": k in latest and latest[k]["step_hash"] != hashes[k],
+                  "chips": latest[k]["chips"] if k in latest else [], "text": latest[k]["text"] if k in latest else ""}
+                 for k in range(len(hashes))]
+        titles = {lid: {"title": l.get("title"), "year": l.get("year"),
+                        "audience": lib.packs[lib.lesson_pack[lid]].get("audience", "child")}
+                  for lid, l in lib.lessons.items()}
+        signs = await hub.store.signoffs("graph:" + sub)
+        return {"graph": {k: v for k, v in g.items() if not k.startswith("_") and k != "review"},
+                "lessons": titles, "hash": g["_hash"], "short": g["_hash"][7:15], "role": role,
+                "needs": (g.get("review") or {}).get("needs") or [], "steps": steps,
+                "signed": [{"role": s["role"], "initials": s["initials"], "date": s["signed_on"],
+                            "current": s["content_hash"] == g["_hash"]} for s in signs]}
+
+    @r.post("/graphs/{sub}/steps/{n}", dependencies=needs(MODULE))
+    async def graph_note(sub: str, n: int, body: NoteIn, request: Request):
+        m = await staff(request)
+        g = graph_or_404(sub)
+        role = graph_role(m, g, body.role)
+        hashes = _graph_hashes(g)
+        if not 0 <= n < len(hashes):
+            raise HTTPException(404, "no such node")
+        if body.step_hash != hashes[n]:
+            raise HTTPException(409, "this node changed: open it again")
+        if any(c not in REVIEW_CHIPS for c in body.chips):
+            raise HTTPException(422, f"chips come from {', '.join(REVIEW_CHIPS)}")
+        text = filters.scrub(body.text.strip())[0] if body.verdict == "change" else ""
+        await hub.store.add_review_note(lesson="graph:" + sub, step=n, role=role, step_hash=hashes[n],
+                                        status=body.verdict, chips=body.chips if body.verdict == "change" else [],
+                                        text=text)
+        return {"ok": True}
+
+    @r.post("/graphs/{sub}/sign", dependencies=needs(MODULE))
+    async def graph_sign(sub: str, body: SignIn, request: Request):
+        m = await staff(request)
+        g = graph_or_404(sub)
+        role = graph_role(m, g, body.role)
+        if body.hash != g["_hash"]:
+            raise HTTPException(409, "the graph changed: open it again")
+        hashes = _graph_hashes(g)
+        latest = _latest(await hub.store.review_notes("graph:" + sub, role))
+        todo = [k for k in range(len(hashes))
+                if k not in latest or latest[k]["status"] != "ok" or latest[k]["step_hash"] != hashes[k]]
+        if todo:
+            raise HTTPException(409, f"nodes not OK yet: {', '.join(map(str, todo))}")
+        initials = m["initials"] or (body.initials or "").strip().upper()
+        try:
+            new = await hub.store.add_signoff(lesson="graph:" + sub, content_hash=g["_hash"], role=role,
+                                              initials=initials,
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from None
+        return {"signed": True, "new": new, "role": role, "short": g["_hash"][7:15]}
 
     @r.get("/signoffs", dependencies=needs(MODULE))
     async def all_signoffs(request: Request):

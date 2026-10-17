@@ -1,0 +1,17 @@
+{
+  "subject": "maths",
+  "version": "2026.10.17",
+  "nodes": [
+    {"id": "count-5", "needs": [], "lessons": ["maths-1-count-5"],
+     "title": {"prs": "شمردن تا ۵", "ps": "تر ۵ پورې شمېرل", "en": "Count to 5"}},
+    {"id": "frac-what", "needs": [], "lessons": [],
+     "title": {"prs": "کسر چیست", "ps": "کسر څه دی", "en": "What a fraction is"}},
+    {"id": "frac-add", "needs": ["frac-what"], "lessons": ["maths-7-fractions-add"],
+     "title": {"prs": "جمع کسرها", "ps": "د کسرونو جمع", "en": "Add fractions"}}
+  ],
+  "pathways": [
+    {"id": "s1-fractions", "goal": ["frac-add"], "bands": ["s1"], "final": "maths-7-fractions-add", "certificate": true,
+     "title": {"prs": "کسرها: جمع", "ps": "کسرونه: جمع", "en": "Fractions: adding"}}
+  ],
+  "review": {"status": "draft", "needs": ["maths teacher"]}
+}

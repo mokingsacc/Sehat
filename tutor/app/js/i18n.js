@@ -278,6 +278,16 @@ const S = {
     find_lesson: 'درس پیدا کن',
     day_tomorrow: 'فردا: {subject} ساعت {t}',
     plan_make: 'این‌ها را پلان من کن',
+    // P25a: the skills graph, pathways and spaced review (drafts, for a native speaker's check)
+    learn_first: 'اول این را یاد بگیر',
+    recall_kicker: { child: 'یادت هست؟ {n} از {b}', adult: 'تمرین کوتاه {n} از {b}' },
+    path_start: 'شروع کن',
+    path_line: '{n} درس، {k} تمام شده',
+    path_cert: 'با تصدیق‌نامه',
+    path_done: 'این راه تمام شد',
+    plan_done: 'تمام شد: {label}',
+    plan_switch: '«{a}» را بس کنم و «{b}» را شروع کنم؟',
+    plan_switch_yes: 'بس کن و شروع کن',
   },
   ps: {
     app: 'قلم',
@@ -552,6 +562,16 @@ const S = {
     find_lesson: 'لوست پیدا کړه',
     day_tomorrow: 'سبا: {subject} په {t}',
     plan_make: 'دا زما پلان کړه',
+    // P25a: the skills graph, pathways and spaced review (drafts, for a native speaker's check)
+    learn_first: 'لومړی دا زده کړه',
+    recall_kicker: { child: 'درته یاد دي؟ {n} له {b}', adult: 'لنډ تمرین {n} له {b}' },
+    path_start: 'پیل کړه',
+    path_line: '{n} لوستونه، {k} بشپړ',
+    path_cert: 'له سند سره',
+    path_done: 'دا لاره بشپړه شوه',
+    plan_done: 'بشپړ شو: {label}',
+    plan_switch: '«{a}» ودروم او «{b}» پیل کړم؟',
+    plan_switch_yes: 'ودروه او پیل کړه',
   },
   en: {
     app: 'Qalam',
@@ -827,6 +847,16 @@ const S = {
     find_lesson: 'Find a lesson',
     day_tomorrow: 'Tomorrow: {subject} at {t}',
     plan_make: 'Make these my plan',
+    // P25a: the skills graph, pathways and spaced review (drafts, for a native speaker's check)
+    learn_first: 'Learn first',
+    recall_kicker: { child: 'Do you remember? {n} of {b}', adult: 'Quick practice {n} of {b}' },
+    path_start: 'Start',
+    path_line: '{n} lessons, {k} done',
+    path_cert: 'a certificate',
+    path_done: 'You finished this pathway',
+    plan_done: 'Done: {label}',
+    plan_switch: 'Stop “{a}” and start “{b}”?',
+    plan_switch_yes: 'Stop and start',
   },
 };
 

@@ -20,7 +20,9 @@ const BATCH = 100;
 // with the item as lesson:n
 export const VERBS = { 'lesson.start': { value: false }, 'lesson.done': { value: true }, 'check.done': { value: true },
   'check.item': { value: true, item: true, range: [0, 2] }, 'hint.rung': { value: true, item: true, range: [1, 3] },
-  'check.dispute': { value: false, item: true } };
+  'check.dispute': { value: false, item: true },
+  // P25a: a warm-up item (spaced review): the lesson's step as lesson:n, 0 wrong or 1 right on her first try
+  'recall.item': { value: true, item: true, range: [0, 1] } };
 const LESSON = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 const ITEM = /^([a-z][a-z0-9]*(?:-[a-z0-9]+)*):([1-9][0-9]?)$/;
 const DIGIT_RUN = /[0-9]{5,}/;      // the hub refuses these, so nothing like a phone number hides in an id

@@ -7,6 +7,8 @@
 // (state.js keeps that learner in memory only). On a step with a recording, OK waits until the clip has played once;
 // a step that needs a recording and has none blocks signing. The last page is the worksheet with its key and hints,
 // the link cards and the sources. Signing is a 3-second hold, like the consent screen's.
+// Since P25a (C4.1) a skills graph is one more page: every node with what it needs and its lessons, each OK or
+// Change (saved at once), the pathways as one more item, then "Hold to sign" once every one is OK.
 
 const API = '../api/m/review';
 const BAND_OF_YEAR = (y) => (y === 0 ? 'ey' : y <= 3 ? 'p1' : y <= 6 ? 'p2' : y <= 9 ? 's1' : 's2');
@@ -31,6 +33,9 @@ const T = {
     todo: 'Every step needs OK before signing.', short: 'Hash', date: 'Date', lang: 'Language',
     chip_spelling: 'Spelling', chip_word: 'Afghan word', chip_maths: 'Maths', chip_picture: 'Picture',
     chip_audio: 'Audio', chip_too_hard: 'Too hard', chip_unsafe: 'Unsafe',
+    graphs: 'Skills graphs', graph_of: 'Skills graph: {s}', node_needs: 'Needs', node_lessons: 'Lessons', nodes_n: '{n} skills',
+    pathways: 'Pathways', certificate: 'with a certificate', final: 'Last lesson', no_lessons: 'No lesson yet',
+    sign_graph: 'Sign this graph', todo_graph: 'Every skill and the pathways need OK before signing.', save_note: 'Save',
   },
   prs: {
     title: 'بررسی', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
@@ -47,6 +52,9 @@ const T = {
     todo: 'پیش از امضا هر قدم باید درست باشد.', short: 'هش', date: 'تاریخ', lang: 'زبان',
     chip_spelling: 'املا', chip_word: 'کلمهٔ افغانی', chip_maths: 'ریاضی', chip_picture: 'تصویر',
     chip_audio: 'صدا', chip_too_hard: 'خیلی سخت', chip_unsafe: 'ناامن',
+    graphs: 'نقشه‌های مهارت', graph_of: 'نقشهٔ مهارت: {s}', node_needs: 'پیش از آن', node_lessons: 'درس‌ها', nodes_n: '{n} مهارت',
+    pathways: 'راه‌ها', certificate: 'با تصدیق‌نامه', final: 'درس آخر', no_lessons: 'هنوز درسی نیست',
+    sign_graph: 'این نقشه را امضا کن', todo_graph: 'پیش از امضا هر مهارت و راه‌ها باید درست باشند.', save_note: 'ذخیره',
   },
 };
 
@@ -154,9 +162,90 @@ async function queue() {
   const rows = q.packs.flatMap((p) => [
     h('div', { class: 'section-head' }, h('h2', {}, pick(p.title, lang) || p.pack)),
     h('nav', { class: 'subjects' }, p.lessons.map(row))]);
+  const graphs = (q.graphs || []).length ? [h('div', { class: 'section-head' }, h('h2', {}, t('graphs'))),
+    h('nav', { class: 'subjects' }, q.graphs.map((g) => h('a', { href: '#', onClick: (e) => { e.preventDefault(); graphPage(g.subject); } },
+      h('span', { class: 'grow' }, h('b', { dir: 'ltr' }, g.subject), h('small', { class: 'muted' }, t('nodes_n', { n: g.nodes }), ' · ', h('span', { dir: 'ltr' }, g.version))),
+      h('span', { class: TAG[g.status] || 'tag' }, g.status === 'step' ? t('step_of', { a: g.step, b: g.of }) : t(g.status)))))] : [];
   show(h('div', { class: 'screen' }, top(null, t('for_you')),
     h('p', { class: 'pad muted small' }, `${t('role')}: ${q.role}`),
-    rows.length ? rows : h('p', { class: 'empty' }, t('none'))));
+    rows.length || graphs.length ? [rows, graphs] : h('p', { class: 'empty' }, t('none'))));
+}
+
+// a hold-to-sign button: `run` after HOLD_MS held down
+function holdButton(disabled, run) {
+  const btn = h('button', { type: 'button', class: 'btn primary hold', disabled: disabled ? true : null }, h('span', { class: 'ring' }), t('hold'));
+  let timer = null;
+  const cancel = () => { clearTimeout(timer); timer = null; btn.classList.remove('holding'); };
+  btn.addEventListener('pointerdown', () => { btn.classList.add('holding'); timer = setTimeout(() => { cancel(); run(); }, HOLD_MS); });
+  for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) btn.addEventListener(ev, cancel);
+  return btn;
+}
+
+// one skills graph (P25a): its nodes as items 1 to N, its pathways as item 0; each verdict is saved when given
+async function graphPage(sub) {
+  let d;
+  try { d = await api('/graphs/' + encodeURIComponent(sub)); } catch (e) { return failed(e); }
+  const G = d.graph;
+  const lang = LANG_OF_ROLE[d.role] || ui;
+  const status = h('p', { class: 'muted', role: 'status', 'aria-live': 'polite' });
+  const verdict = {};
+  for (const s of d.steps) if (s.last && !s.changed) verdict[s.n] = s.last;
+  const title = (id) => { const n = G.nodes.find((x) => x.id === id); return n ? pick(n.title, lang) : id; };
+  const lessonLine = (lid) => { const l = d.lessons[lid]; return l ? `${pick(l.title, lang)} (${l.audience === 'adult' ? 'ad' : BAND_OF_YEAR(l.year)})` : lid; };
+  const signBox = h('div', { class: 'stack' });
+
+  function item(k, head, body) {
+    const st = d.steps[k];
+    const okBtn = h('button', { type: 'button', class: 'btn ok-btn' + (verdict[k] === 'ok' ? ' on' : '') }, t('ok'));
+    const chBtn = h('button', { type: 'button', class: 'btn' + (verdict[k] === 'change' ? ' warm' : '') }, t('change'));
+    const note = h('textarea', { class: 'field' + (verdict[k] === 'change' ? '' : ' hidden'), rows: 2, maxlength: 500,
+      'aria-label': t('comment'), placeholder: t('comment'), dir: 'auto' });
+    note.value = st.text || '';
+    const saveBtn = h('button', { type: 'button', class: 'btn outline small' + (verdict[k] === 'change' ? '' : ' hidden') }, t('save_note'));
+    async function save(v) {
+      try {
+        await api(`/graphs/${encodeURIComponent(sub)}/steps/${k}`, { method: 'POST', body: { verdict: v, chips: [],
+          text: v === 'change' ? note.value : '', step_hash: st.hash, role: me.via === 'pin' ? me.role : null } });
+        verdict[k] = v; st.last = v; st.changed = false;
+        okBtn.classList.toggle('on', v === 'ok'); chBtn.classList.toggle('warm', v === 'change');
+        status.textContent = '';
+        drawSign();
+      } catch (e) { if (e.status === 409) graphPage(sub); else status.textContent = t('save_fail'); }
+    }
+    okBtn.addEventListener('click', () => { note.classList.add('hidden'); saveBtn.classList.add('hidden'); save('ok'); });
+    chBtn.addEventListener('click', () => { note.classList.remove('hidden'); saveBtn.classList.remove('hidden'); chBtn.classList.add('warm'); okBtn.classList.remove('on'); });
+    saveBtn.addEventListener('click', () => save('change'));
+    return h('div', { class: 'card pad-card stack graph-node' },
+      h('div', { class: 'row wrap' }, h('b', { class: 'grow', dir: 'auto' }, head),
+        st.changed ? h('span', { class: 'tag warm' }, t('changed_tag')) : null,
+        st.last === 'ok' && !st.changed ? h('span', { class: 'tag good' }, t('ok_last')) : null),
+      body, h('div', { class: 'row' }, okBtn, chBtn), note, saveBtn);
+  }
+
+  function drawSign() {
+    const notOk = d.steps.some((s) => verdict[s.n] !== 'ok');
+    const facts = h('dl', { class: 'facts' },
+      h('dt', {}, t('short')), h('dd', { dir: 'ltr' }, d.short), h('dt', {}, t('role')), h('dd', {}, d.role),
+      h('dt', {}, t('initials')), h('dd', { dir: 'ltr' }, me.initials));
+    put(signBox, h('h2', {}, t('sign_graph')), facts, notOk ? h('p', { class: 'muted' }, t('todo_graph')) : null,
+      holdButton(notOk, async () => {
+        try {
+          await api(`/graphs/${encodeURIComponent(sub)}/sign`, { method: 'POST',
+            body: { hash: d.hash, role: me.via === 'pin' ? me.role : null, initials: me.via === 'pin' ? me.initials : null } });
+          put(signBox, h('p', { class: 'done-big' }, t('done_sign')), h('button', { type: 'button', class: 'btn', onClick: queue }, t('back')));
+        } catch (e) { if (e.status === 409) graphPage(sub); else status.textContent = t('save_fail'); }
+      }));
+  }
+
+  const nodes = G.nodes.map((n, i) => item(i + 1, `${pick(n.title, lang)}  ·  ${n.id}`, h('dl', { class: 'facts' },
+    h('dt', {}, t('node_needs')), h('dd', { dir: 'auto' }, (n.needs || []).length ? n.needs.map(title).join('، ') : t('nothing')),
+    h('dt', {}, t('node_lessons')), h('dd', { dir: 'auto' }, (n.lessons || []).length ? n.lessons.map(lessonLine).join('، ') : t('no_lessons')))));
+  const paths = item(0, t('pathways'), (G.pathways || []).length ? h('ul', {}, G.pathways.map((p) => h('li', { dir: 'auto' },
+    h('b', {}, pick(p.title, lang)), ` (${(p.bands || []).join(', ')}): `, (p.goal || []).map(title).join('، '),
+    p.final ? ` · ${t('final')}: ${lessonLine(p.final)}` : '', p.certificate ? ` · ${t('certificate')}` : ''))) : h('p', { class: 'muted' }, t('nothing')));
+  show(h('div', { class: 'screen' }, top(queue, t('graph_of', { s: sub })),
+    h('div', { class: 'stack pad' }, nodes, paths, signBox, status)));
+  drawSign();
 }
 
 async function lesson(id, at = 1) {

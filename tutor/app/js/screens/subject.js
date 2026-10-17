@@ -1,8 +1,13 @@
 // One subject: this child's lessons first, then every other year's (every lesson is open to everyone).
+// Since P25a (C4.1) the subject's pathways for her band come first, as cards: the title, "8 lessons, 3 done, a
+// certificate", a bar, and Start (before the first lesson) or Continue. Start runs the pathway as her plan (asking
+// first when another plan has a lesson left) and opens its first lesson with the warm-up.
 
 import { fa, getLang, pick, s } from '../i18n.js';
+import * as graph from '../graph.js';
 import * as hub from '../hub.js';
 import * as library from '../library.js';
+import * as plans from '../modules/plan.js';
 import { speak } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, said, speakerBtn, star, subjectBadge, topbar } from '../ui.js';
@@ -21,6 +26,31 @@ export function lessonRow(l, n, c) {
     icon('chev', 20));
 }
 
+// one pathway's card: what it holds for her now (its running plan, or what starting it would give her)
+function pathCard(c, x) {
+  const mine = plans.bandLessons(c);
+  const running = c.plan && c.plan.path === x.p.id ? plans.where(c) : null;
+  const p = graph.pathwayPlan(c, x, mine);
+  const ids = running ? running.lessons.map((l) => l.id) : p.lessons;
+  const done = ids.filter((id) => (running ? plans.doneFor(c, id) : c.done && c.done[id])).length;
+  const title = plain(x.p.title);
+  const line = [s('path_line', { n: ids.length, k: done }), x.p.certificate ? s('path_cert') : null].filter(Boolean)
+    .join(getLang() === 'en' ? ', ' : '، ');
+  const left = ids.find((id) => !(running ? plans.doneFor(c, id) : c.done && c.done[id]));
+  const go = async () => {
+    if (!running && !(await plans.begin(c, title, p.lessons, x.p.id))) return;
+    const next = running ? running.next : library.get(left) || library.get(p.lessons[0]);
+    if (next) location.hash = '#/lesson/' + encodeURIComponent(next.id) + '?warm=1';
+  };
+  return h('section', { class: 'card lined pad-card stack path-card' },
+    h('div', { class: 'row' }, h('h2', { class: 'grow', dir: 'auto' }, title),
+      speakerBtn(() => speak([title, line].join('. '), getLang()), { size: 'sm' })),
+    h('p', { class: 'muted small' }, line),
+    h('div', { class: 'bar' }, h('span', { style: { width: (ids.length ? Math.round((100 * done) / ids.length) : 0) + '%' } })),
+    left ? said(h('button', { type: 'button', class: 'btn primary', onClick: go },
+      running ? s('continue') : s('path_start'), icon('next', 22))) : h('p', { class: 'muted small' }, s('path_done')));
+}
+
 export default async function subject([name]) {
   await library.load();
   const c = state.child();
@@ -30,8 +60,10 @@ export default async function subject([name]) {
   const years = [...new Set(others.map((l) => l.year))];
   const el = h('div', { class: 'screen', 'data-speaks': '' });
   const row = (l, i) => said(lessonRow(l, i + 1, c));
+  const paths = plans.canFollow(c) ? graph.pathways(c, plans.bandLessons(c), name) : [];
   fill(el,
     topbar({ back: '#/home', sub: yearLabel(c), title: s(name), extra: subjectBadge(name, 44), child: true }),
+    paths.length ? h('div', { class: 'path-cards' }, paths.map((x) => pathCard(c, x))) : null,
     mine.length ? h('div', { class: 'section-head' }, h('h2', {}, s('this_year'))) : null,
     mine.length ? h('div', { class: 'lessons' }, mine.map(row)) : null,
     !mine.length && !others.length ? h('div', { class: 'empty' }, s('no_lessons')) : null,

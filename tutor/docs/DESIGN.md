@@ -564,6 +564,32 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   nothing else", so it does not yet); the pictures on `/get` are drawings, not screenshots of a real phone; where the
   mine card sits when the day has no lessons yet; a launcher icon drawn for small sizes.
 
+## What P25a built, and where it differs
+
+- The warm-up (C4.1): a lesson opened from the big button, the Now card or the plan's card plays up to three due
+  items first. The segments bar holds the warm-up's segments first (in `--warm` once reached), then the lesson's; a
+  row under the header says "Do you remember? 1 of 3" (child tone) or "Quick practice 1 of 3" (adult tone, which
+  bands.js gives s1 and s2 too) in `--fs-sm` bold `--accent-ink` with its speaker; the step is drawn as in its own
+  lesson, Next opens after her first try, and Back is hidden until the lesson's own steps. Nothing on Home.
+- Pathway cards at the top of a subject's page, before "This year": the title with its speaker, "1 lesson, 0 done, a
+  certificate" (a Persian comma in Dari and Pashto) in `--muted`, the bar, and "Start" (before the first lesson) or
+  "Continue" as the primary button, which opens the next lesson with its warm-up. A finished pathway says "You
+  finished this pathway" in place of the button.
+- "I want to learn...": the pathways come first among the chips, outlined in the accent; they and the unit chips
+  share the eight (six in bold). A plan built over the graph tags each row its goal needs first with "Learn first"
+  (`--accent-soft`, `--accent-ink`, the "next" tag's shape).
+- One plan at a time: starting another while a plan has a lesson left asks in a bottom sheet (the offline sheet's
+  shape), "Stop “Fractions” and start “Money”?", with "Stop and start" (primary) above Cancel.
+- A finished plan: Home's plan card turns into "Done: Fractions" with a check on `--good-soft` and its speaker, on the
+  first Home visit after; the plan clears, and leaving Home ends the line (C4 look question 26, P22's open question).
+- The graph page in `/review/`: every node as a card (title and id, "Needs", "Lessons" with each lesson's band), OK
+  or Change with a comment saved at once, the pathways as one more card, then the hash, role and initials and "Hold
+  to sign".
+- Open look questions: the warm-up's kicker sits in a row under the header, not inside the step, so the step keeps
+  its centred place; "Start" on a pathway card opens the first lesson at once rather than going Home; the "Done" line
+  lasts one Home visit; pathway chips are outlined in the accent to tell them from unit chips; an s1 or s2 learner
+  hears the adult "Quick practice", since bands.js gives those bands the adult tone.
+
 ---
 
 # C2 and C3 decisions

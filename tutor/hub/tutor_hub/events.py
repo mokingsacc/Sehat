@@ -6,7 +6,8 @@ name, no free text, no phone number (an object with a run of five digits or more
 file does not know (the API refuses the whole batch).
 
 Some verbs come from the phone's queue (a lesson started or finished, a sheet marked on Check my sheet, and since P15
-each item of it, a hint rung opened and an item disputed, as `lesson:n`, even offline);
+each item of it, a hint rung opened and an item disputed, as `lesson:n`, even offline; since P25a a warm-up item,
+`recall.item`, its object the lesson and step as `lesson:n`);
 the others only the hub writes, from its own routes (Ask, printing, the teacher's review), so a phone cannot send them.
 A phone's events carry the hash of the learner's token (P10) and are kept only when she has consent; the hub's own
 events carry none.
@@ -47,6 +48,8 @@ VERBS = {
     "check.item": Verb("check", "item", (0, 2), True),
     "hint.rung": Verb("check", "item", (1, 3), True),                  # a hint opened on that item: its rung
     "check.dispute": Verb("check", "item", None, True),                # "Something looks wrong?" on that item
+    # P25a (C4.1): one warm-up item, a lesson's step as lesson:n, 0 wrong or 1 right on her first try
+    "recall.item": Verb("recall", "item", (0, 1), True),
     "review.approved": Verb("teacher", "lesson", None, False),
     "review.rejected": Verb("teacher", "lesson", None, False),
     # a held AI answer (P20): sent as it was, edited and sent, or not sent with a reason chip, counted

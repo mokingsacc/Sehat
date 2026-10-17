@@ -10,6 +10,8 @@ import { speak } from '../speech.js';
 import { h, icon, perButton, playIcon, plain, said, speakerBtn, subjectBadge, star } from '../ui.js';
 
 const hasLesson = (ctx) => !!ctx.lesson;
+// the big button starts the lesson with its warm-up of due review items (P25a; none in early years: recall.js)
+const WARM = '?warm=1';
 
 function subjectLine(l) {
   return [s(l.subject), l.minutes ? s('minutes', { n: l.minutes }) : null].filter(Boolean).join(' · ');
@@ -24,14 +26,14 @@ function nextBold({ child: c, lesson: l }) {
     h('div', { class: 'muted' }, subjectLine(l)),
     h('div', { class: 'row big-row' },
       speakerBtn(() => speak(plain(l.title), getLang()), { size: 'md', label: s('listen') }),
-      h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id), 'aria-label': s('start_lesson') }, playIcon(52)),
+      h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id) + WARM, 'aria-label': s('start_lesson') }, playIcon(52)),
       h('span', { class: 'spacer' })));
 }
 
 function nextEarly({ lesson: l }) {
   return h('section', { class: 'early' },
     l.glyph ? h('div', { class: 'glyph', 'aria-hidden': 'true' }, l.glyph) : subjectBadge(l.subject, 96),
-    h('a', { class: 'play huge', href: '#/lesson/' + encodeURIComponent(l.id), 'aria-label': s('start_lesson') }, playIcon(64)),
+    h('a', { class: 'play huge', href: '#/lesson/' + encodeURIComponent(l.id) + WARM, 'aria-label': s('start_lesson') }, playIcon(64)),
     speakerBtn(() => speak(plain(l.title), getLang()), { size: 'xl', label: s('listen') }));
 }
 
@@ -39,7 +41,7 @@ function nextClean({ child: c, lesson: l }) {
   const at = c.step[l.id];
   const pct = at !== undefined && l.steps ? Math.round((100 * at) / l.steps) : 0;
   return h('section', { class: 'card soft continue' },
-    h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id), 'aria-label': s('start_lesson') }, playIcon(44)),
+    h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id) + WARM, 'aria-label': s('start_lesson') }, playIcon(44)),
     h('div', { class: 'grow' },
       h('div', { class: 'kicker' }, at !== undefined ? s('continue') : s('next_lesson')),
       h('div', { class: 'title' }, plain(l.title)),

@@ -32,6 +32,7 @@
     "homework": false,
     "review": false,
     "timetable": true,
-    "plan": true
+    "plan": true,
+    "recall": true
   }
 }

@@ -4,7 +4,7 @@
     build/src/vars.json                       wrangler.toml's [vars], so entry.py can build the app at import
     build/src/hub/tutor_hub/                  the hub's code, as it is
     build/src/{migrations,modules,cohorts}/   the shared SQL, the module manifests, the seed cohorts
-    build/src/content/packs/                  the packs as on the hub (the hub reads lessons and checks pictures as files;
+    build/src/content/{packs,graph}/          the packs as on the hub, and the skills graphs (P25a) (the hub reads lessons and checks pictures as files;
                                               recorded clips stay out: the hub knows them by their manifest.json)
     build/src/content/sources.json            the licence classes (licences.py), and permissions/ for ASK sources
     build/src/content/{aliases.json,consent/} the alias pictures and the consent texts (learners.py)
@@ -40,7 +40,7 @@ def build(out: Path = BUILD, config: Path | None = None) -> dict:
     settings = tomllib.loads((config or WORKER / "wrangler.toml").read_text(encoding="utf-8")).get("vars", {})
     (src / "vars.json").write_text(json.dumps(settings, indent=1), encoding="utf-8")
     shutil.copytree(TUTOR / "hub" / "tutor_hub", src / "hub" / "tutor_hub", ignore=SKIP)
-    for folder in ("migrations", "modules", "cohorts", "content/packs", "content/permissions", "content/consent"):
+    for folder in ("migrations", "modules", "cohorts", "content/packs", "content/graph", "content/permissions", "content/consent"):
         shutil.copytree(TUTOR / folder, src / folder,
                         ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Store", *AUDIO))
     shutil.copy2(TUTOR / "content" / "sources.json", src / "content" / "sources.json")

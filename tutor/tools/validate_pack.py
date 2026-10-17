@@ -10,6 +10,9 @@ so does a link card holding anything but our own short description.
 --release also refuses any lesson or link card its reviewers have not signed (each role in review.needs signing
 the current content hash), and lessons for the youngest learners without recorded clips (no synthetic voice).
 --hashes prints each lesson's and link card's content hash, which is what a reviewer signs.
+
+The skills graphs (content/graph/<subject>.json, P25a) are checked too, against the lessons that loaded (graph.py):
+--release refuses one its reviewers have not signed, and --hashes prints each graph's hash as graph:<subject>.
 """
 import argparse
 import json
@@ -64,8 +67,14 @@ def main(argv=None):
             print(f"{lid}\t{lib.hashes[lid]}\t{lib.states[lid]}")
         for c in lib.links:
             print(f"links:{c['id']}\t{c['_hash']}\t{c['_state']}")
+        for sub, g in sorted(lib.graphs.items()):
+            print(f"graph:{sub}\t{g['_hash']}\t{g['_state']}")
     for p in problems:
         print("problem:", p)
+    if lib.graphs:
+        print(f"{len(lib.graphs)} skills graph(s): " + ", ".join(
+            f"{sub} ({len(g['nodes'])} nodes, {len(g.get('pathways') or [])} pathways, {g['_state']})"
+            for sub, g in sorted(lib.graphs.items())))
     print(f"{len(lib.lessons)} lesson(s) and {len(lib.links)} link card(s) in {len(lib.packs)} pack(s); "
           f"{len(problems)} problem(s); {len(unsigned)} still waiting for their native-speaker and teacher check")
     return 1 if problems else 0

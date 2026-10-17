@@ -163,7 +163,11 @@ the learner app and is on only in staging (`migrations/0010`). `timetable` (P19,
 `lessons`, serves p1 to s2, has the slots `home.action` and `settings.row`, and is on in all three seed cohorts
 (`migrations/0011`, which also sets their `timetable` setting to `"default"`). `plan` (P22, "I want to learn this")
 depends on `lessons`, serves s1, s2 and adults (the phone shows it only to adult readers), carries `free.text` and is
-on in all three seed cohorts (`migrations/0013`, C2.8). `migrations/0007` switches `sheets` on in every cohort made before it
+on in all three seed cohorts (`migrations/0013`, C2.8); since P25a it also carries `ai.call` for the purpose `plan`,
+used only when its setting `plan_ai` is on (off by default and everywhere so far). `recall` (P25a, spaced review)
+depends on `lessons`, serves p1 to adults, has no slot, capability or setting (its code is `app/js/modules/recall.js`,
+which the lesson player imports) and is on in `open` and staging (`migrations/0015`) and in every cohort the admin
+makes; the pilot cohort gets it after its report (C4.1). `migrations/0007` switches `sheets` on in every cohort made before it
 wherever `print` or `check` was; `migrations/0008` switches `photo` on for the staging seed cohort in a database
 seeded before it. `modules.py` checks every manifest at start and leaves out a broken one, and
 any module depending on it, with the reason in the log; `tools/validate_modules.py` runs the same checks in CI. The
@@ -435,7 +439,11 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 - "I want to learn this" (P22) sends her typed goal without her token. A goal no lesson matches joins the cohort's
   `wishlist` after the rules and the identifier filter: the band, the language, the screened text, a count and the
   first and last day, never who typed it; kept 90 days after it was last asked for (`migrations/0013`). Her plan
-  stays on the phone.
+  stays on the phone. Since P25a the plan is built over the skills graph on the phone (`app/js/graph.js`), from
+  her own marks and finished lessons, which never leave it; where `plan_ai` is on, a goal nothing matched goes to
+  the AI with the ids and titles of her band's nodes and never her token, and at most three existing ids come back.
+- Spaced review (P25a) keeps her items, boxes and due days on the phone only (at most 300); only the event
+  `recall.item` (lesson:n, 0 or 1) leaves it, with consent, as the other events do. No table was added.
 - A lock reset code (P20) is kept only as a hash with her token's hash, for 15 minutes, used once, ended by five
   wrong tries, and deleted with her record (`reset_codes`, `migrations/0012`).
 - Nothing leaves the hub: there is no internet connection and no analytics.
@@ -453,7 +461,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
 | `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
 | `GET`, `POST`, `DELETE /api/me` | Her own record (`{band?, consent?}` to change it); header `X-Learner-Token` |
-| `GET /api/packs` | Every pack and its lesson list (no lesson content) |
+| `GET /api/packs` | Every pack and its lesson list (no lesson content), and since P25a `graphs`: each skills graph's nodes (with the lessons this server serves), pathways and whether it is a draft, never its review block |
 | `GET /api/lessons/{id}` | One lesson, picture and clip names turned into URLs, with `draft` and its `credits`, without the sheet, review or sources |
 | `GET /packs/{pack}/pictures/{file}` | A lesson picture |
 | `GET /packs/{pack}/audio/{lang}/{file}` | A recorded clip named in the pack's audio manifest |

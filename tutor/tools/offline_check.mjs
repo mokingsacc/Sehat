@@ -43,7 +43,9 @@ const at = async (want, ms = 10000) => {
 };
 const shot = (name) => page.screenshot({ path: join(OUT, `offline-${name}-360.png`) });
 const learner = () => page.evaluate(() => JSON.parse(localStorage.getItem('qalam.v2')).learners[0]);
-const queued = () => page.evaluate(() => JSON.parse(localStorage.getItem('qalam.events.v1') || '[]').length);
+// the sheets marked and waiting to be sent (since P15 each item queues its own `check.item` too)
+const queued = () => page.evaluate(() => JSON.parse(localStorage.getItem('qalam.events.v1') || '[]')
+  .filter((e) => e.verb === 'check.done').length);
 
 // 1. online
 await page.goto(`${HUB}/`);

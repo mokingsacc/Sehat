@@ -7,6 +7,9 @@
 // read aloud, from its recorded clip or the phone's voice. Children get stars at the end, adults a check mark.
 // The end of every lesson points to its worksheet (the sheets module's lesson.end offer): pen and paper is where
 // the practice happens.
+// Spaced review (P25a, modules/recall.js): opened as #/lesson/<id>?warm=1 (the big button, the Now card, a plan's
+// card), up to three due items from earlier lessons play first, each drawn as in its own lesson, under three warm
+// segments and "Do you remember? 1 of 3" ("Quick practice" for adults). Finishing a lesson adds its items.
 
 import { getLang, pick, s } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -14,13 +17,15 @@ import * as library from '../library.js';
 import * as modules from '../modules.js';
 import { notSimplest, parse, same } from '../numbers.js';
 import { praise, readsOnOpen } from '../bands.js';
+import * as recall from '../modules/recall.js';
 import { canRecord, hasVoice, packClip, recorder, speak, stop } from '../speech.js';
 import * as state from '../state.js';
 import { fill, h, icon, plain, rich, said, speakerBtn, star, toast, topbar } from '../ui.js';
 
 const QUESTION = new Set(['choice', 'number']);
 
-export default async function lesson([id, stepText]) {
+export default async function lesson(args) {
+  const [id, stepText] = args;
   const c = state.child();
   const L = id ? await hub.lesson(id) : null;
   if (!L || !Array.isArray(L.steps)) {
@@ -36,10 +41,22 @@ export default async function lesson([id, stepText]) {
   const results = state.firstTries(id);   // step number -> right on the first try (kept if the child leaves)
   const peek = stepText !== undefined && /^[0-9]+$/.test(stepText);     // opened from a hint, at that step
   let i = Math.min(Math.max(peek ? +stepText - 1 : c.step[id] || 0, 0), steps.length - 1);
+  // the warm-up: never from a hint, never in early years (recall.canRecall), only items whose lesson is on the phone
+  const warm = !peek && args.query && args.query.get('warm') === '1' ? recall.due(c, id) : [];
+  let w = warm.length ? 0 : -1;                 // the warm-up item shown, or -1 once the lesson's own steps play
+  const cur = () => (w >= 0 ? warm[w].step : steps[i]);
+  // her first try on a question: the lesson's own steps keep it for the stars; a warm-up item moves its box
+  const first = (ok) => {
+    if (w >= 0) {
+      if (warm[w].ok === undefined) { warm[w].ok = ok; recall.answer(state.child(), warm[w].key, ok); }
+      return;
+    }
+    if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
+  };
 
   const say = (text, l = lang) => speak(text, l);
-  const segs = h('div', { class: 'segs grow', style: { gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` } },
-    steps.map(() => h('span')));
+  const segs = h('div', { class: 'segs grow', style: { gridTemplateColumns: `repeat(${warm.length + steps.length}, minmax(0, 1fr))` } },
+    warm.map(() => h('span', { class: 'w' })), steps.map(() => h('span')));
   const header = h('header', { class: 'top' },
     h('a', { class: 'round', href: '#/home', 'aria-label': s('close'),
       onClick: peek ? (e) => { e.preventDefault(); history.back(); } : null }, icon('x', 24, 2.6)),
@@ -55,7 +72,8 @@ export default async function lesson([id, stepText]) {
   if (nextBox !== next) nextBox.classList.add('main');
   const actions = h('div', { class: 'actions' }, prevBox, nextBox);
   const draftBand = L.draft ? h('div', { class: 'draft', 'data-silent': '' }, s('draft_note')) : null;
-  const root = h('div', { class: 'screen player' }, header, draftBand, body, fb, actions);
+  const warmHead = h('div', { class: 'listen-row warm-kicker hidden' });         // "Do you remember? 1 of 3"
+  const root = h('div', { class: 'screen player' }, header, draftBand, warmHead, body, fb, actions);
 
   function mainText(st) {
     if (st.kind === 'letter') return [plain(st.text), pick(st.word)].filter(Boolean).join('. ');
@@ -67,7 +85,7 @@ export default async function lesson([id, stepText]) {
   const stepClip = (st) => { const u = packClip((st.audio || {})[stepLang(st)]); return u ? hub.url(u) : null; };
   const canSay = (st) => !!stepClip(st) || hasVoice(stepLang(st));
   function pageSpeak() {
-    const st = steps[i];
+    const st = cur();
     speak(mainText(st), stepLang(st), stepClip(st));
   }
 
@@ -117,7 +135,7 @@ export default async function lesson([id, stepText]) {
       function choose(k) {
         if (solved || opts[k].disabled) return;
         const ok = k === st.answer;
-        if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
+        first(ok);
         opts[k].classList.add(ok ? 'right' : 'wrong');
         if (ok) solved = true; else opts[k].disabled = true;      // that one is out: she picks again
         feedback(ok, st.why);
@@ -131,7 +149,7 @@ export default async function lesson([id, stepText]) {
         const v = parse(inp.value);
         if (!v) { toast(s('your_answer')); inp.focus(); return; }
         const ok = same(v, right);
-        if (results[i] === undefined) { results[i] = ok; state.firstTry(id, i, ok); }
+        first(ok);
         inp.className = ok ? 'right' : 'wrong';
         feedback(ok, st.why, ok && notSimplest(inp.value) ? s('simplify') : null);
       }
@@ -162,11 +180,30 @@ export default async function lesson([id, stepText]) {
     },
   };
 
+  // a warm-up item: its kicker, then the step as in its own lesson; Next opens after her first try
+  function drawWarm() {
+    stop();
+    const it = warm[w];
+    [...segs.children].forEach((sp, k) => sp.classList.toggle('on', k <= w));
+    const kicker = s('recall_kicker', { n: w + 1, b: warm.length });
+    warmHead.classList.remove('hidden');
+    fill(warmHead, h('p', { class: 'kicker grow' }, kicker), speakerBtn(() => say(kicker), { size: 'sm' }));
+    fill(body, (KINDS[it.step.kind] || KINDS.read)(it.step));
+    fb.className = 'feedback hidden';
+    fb.replaceChildren();
+    prevBox.classList.add('hidden');
+    next.disabled = it.ok === undefined;
+    next.replaceChildren(s('next'), icon('next'));
+    if (young && canSay(it.step)) setTimeout(() => say(kicker), 300);
+    window.scrollTo(0, 0);
+  }
+
   function draw() {
     stop();
     if (!peek) state.setStep(id, i);
     const st = steps[i];
-    [...segs.children].forEach((sp, k) => sp.classList.toggle('on', k <= i));
+    warmHead.classList.add('hidden');
+    [...segs.children].forEach((sp, k) => sp.classList.toggle('on', k < warm.length || k - warm.length <= i));
     fill(body, (KINDS[st.kind] || KINDS.read)(st));
     fb.className = 'feedback hidden';
     fb.replaceChildren();
@@ -183,6 +220,7 @@ export default async function lesson([id, stepText]) {
     const right = answers.filter(Boolean).length;
     const stars = !answers.length || right === answers.length ? 3 : right * 2 >= answers.length ? 2 : 1;
     state.markDone(id, stars);
+    recall.add(state.child(), L);                  // its review items, due tomorrow (none in ey, Quran or seerah)
     const summary = library.get(id);
     const after = summary ? library.after(state.child(), summary) : null;
     [...segs.children].forEach((sp) => sp.classList.add('on'));
@@ -201,13 +239,18 @@ export default async function lesson([id, stepText]) {
   }
 
   function go(k) {
+    if (w >= 0) {                                  // the warm-up: its next item, then the lesson where she was
+      w = w + 1 < warm.length ? w + 1 : -1;
+      if (w >= 0) drawWarm(); else draw();
+      return;
+    }
     if (k < 0) return;
     if (k >= steps.length) { finish(); return; }
     i = k;
     draw();
   }
 
-  draw();
+  if (w >= 0) drawWarm(); else draw();
   return { el: root, tab: null, cleanup: stop };
 }
 

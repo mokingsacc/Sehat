@@ -162,6 +162,13 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   learner); production ready but not deployed (`wrangler.production.toml`, its guard, and a hand-started workflow from
   `main` behind an approved environment, with a weekly encrypted D1 export); `docs/RELEASE.md` with the checklist,
   rollback and the restore drill. What Mo does to go live is in HOSTING.md, "Going live".
+- **P25a, done:** the skills graph (C4.1): `content/graph/<subject>.json` maps nodes to lessons, checked at start
+  and by `validate_pack.py`, signed on a graph page in `/review/` and hidden in release mode until signed. Plans
+  follow it on the phone: what the goal needs and she has not mastered (latest sheet at 80%, or a finished lesson
+  without a sheet) comes first, tagged "Learn first"; a node's title is matched too, and `plan_ai` (off everywhere)
+  may pick at most three node ids. Pathways are cards at the top of their subject and the first chips of "I want to
+  learn..."; one plan at a time with a stop question; a finished plan says "Done" once. Spaced review (`recall`) is a
+  warm-up of up to three due items inside the next lesson, on in `open`, staging and new cohorts.
 
 ## January 2027: buy and test
 

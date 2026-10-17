@@ -8,13 +8,20 @@
 // - Bands s1, s2 and adult readers; not adult literacy, since it is typed only until spoken input exists (C3.5).
 // - Offline, and for the chips, the phone matches her words against the lessons it knows (titles and units).
 // Nothing about the plan is sent; a typed goal goes to the server without her token (screens/plan.js).
+// Since P25a (C4.1): a plan is built over the skills graph (graph.js): what the goal needs that she has not mastered
+// comes first, tagged "Learn first". A pathway runs as a plan ({..., path: id}); pathways are tapped, so they are for
+// every band the plan module allows, adult literacy too (canFollow), while typing a goal stays for readers (canPlan).
+// One plan at a time: starting another while one has a lesson left asks once, "Stop 'Fractions' and start 'Money'?"
+// (begin). A finished plan: Home's card says once "Done: Fractions", then the plan clears.
 
 import { bandOf } from '../bands.js';
 import { getLang, pick, s } from '../i18n.js';
 import * as library from '../library.js';
 import { allows, on } from '../modules.js';
 import * as state from '../state.js';
-import { h, playIcon, plain } from '../ui.js';
+import * as graph from '../graph.js';
+import { confirmSheet, h, icon, playIcon, plain, speakerBtn } from '../ui.js';
+import { speak } from '../speech.js';
 
 export const BANDS = ['s1', 's2', 'ad'];
 export const MAX = 12;
@@ -25,6 +32,9 @@ export const CLOSEST = 3;
 // she can make a plan: the module on for her band, and an adult only on the reader track
 export const canPlan = (c) => !!c && BANDS.includes(c.band) && (c.band !== 'ad' || c.track === 'reader')
   && on('plan') && allows('plan', c.band);
+
+// she can follow a plan or a pathway: the module on for her band (an adult on either track)
+export const canFollow = (c) => !!c && BANDS.includes(c.band) && on('plan') && allows('plan', c.band);
 
 // the lessons the phone knows for her band, in pack order (adults: adult packs; children: their band's years)
 export function bandLessons(c) {
@@ -52,10 +62,21 @@ export function where(c) {
 // the plan's lessons not done yet, for the school day's periods (timetable.js)
 export const left = (c) => { const w = where(c); return w ? w.lessons.filter((l) => !doneFor(c, l.id)) : []; };
 
-export function start(c, label, ids) {
+export function start(c, label, ids, path = null) {
   const lessons = [...new Set(ids)].filter((id) => library.get(id)).slice(0, MAX);
-  state.updateChild(c.id, { plan: lessons.length ? { label: String(label || '').slice(0, 60), lessons, again: {} } : null });
+  state.updateChild(c.id, { plan: lessons.length
+    ? { label: String(label || '').slice(0, 60), lessons, again: {}, ...(path ? { path } : {}) } : null });
   return lessons.length > 0;
+}
+
+// start a plan, asking first when another one still has a lesson left (one dialog, the confirming button first)
+export async function begin(c, label, ids, path = null, ask = confirmSheet) {
+  const w = where(c);
+  const same = w && (path ? c.plan.path === path : w.label === String(label || '').slice(0, 60));
+  if (w && w.next && !same && !(await ask(s('plan_switch', { a: w.label, b: label }), s('plan_switch_yes')))) {
+    return false;
+  }
+  return start(state.child(), label, ids, path);
 }
 
 export function stop(c) { state.updateChild(c.id, { plan: null }); }
@@ -111,6 +132,8 @@ export function localSearch(c, text, lang = getLang()) {
     const hit = want.filter((w) => have.some((x) => same(w, x))).length;
     return { l, i, share: hit / want.length };
   }).filter((x) => x.share > 0).sort((a, b) => b.share - a.share || a.i - b.i);
+  const node = !scored.length || scored[0].share < 0.5 ? graph.matchNode(text, ls, words, same) : null;
+  if (node) return { kind: 'plan', label: plain(node.n.title, lang), lessons: node.lessons };
   if (!scored.length) return { kind: 'miss' };
   const best = scored[0];
   if (best.share >= 0.5) {
@@ -122,12 +145,38 @@ export function localSearch(c, text, lang = getLang()) {
   return { kind: 'closest', lessons: scored.slice(0, CLOSEST).map((x) => x.l.id) };
 }
 
-// Home's continue card while a plan has a lesson left: "Your plan · lesson 2 of 4"
-function planCard({ child: c }) {
+// a plan she finished: Home says so once ("Done: Fractions"), then the plan clears. Kept in memory until she leaves
+// Home, so a redraw of Home still shows it.
+const finished = new Map();
+function finishedNow(c) {
+  if (!c) return null;
+  const w = where(c);
+  if (w && !w.next) {
+    finished.set(c.id, { label: w.label, path: c.plan.path || null });
+    state.updateChild(c.id, { plan: null });
+  }
+  return finished.get(c.id) || null;
+}
+export const lastFinished = (c) => (c ? finished.get(c.id) || null : null);
+
+function doneCard({ child: c }) {
+  const f = finished.get(c.id);
+  const line = s('plan_done', { label: f.label });
+  return h('section', { class: 'card soft continue plan-card done' },
+    h('span', { class: 'done-mark', 'aria-hidden': 'true' }, icon('check', 26, 3)),
+    h('div', { class: 'grow' }, h('div', { class: 'title' }, line)),
+    speakerBtn(() => speak(line, getLang()), { size: 'sm' }));
+}
+
+// Home's continue card while a plan has a lesson left: "Your plan · lesson 2 of 4"; it starts the lesson with its
+// warm-up (spaced review, P25a)
+function planCard(ctx) {
+  const c = ctx.child;
+  if (!where(c) && finished.has(c.id)) return doneCard(ctx);
   const w = where(c);
   const l = w.next;
   return h('section', { class: 'card soft continue plan-card' },
-    h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id), 'aria-label': s('start_lesson') }, playIcon(44)),
+    h('a', { class: 'play', href: '#/lesson/' + encodeURIComponent(l.id) + '?warm=1', 'aria-label': s('start_lesson') }, playIcon(44)),
     h('div', { class: 'grow' },
       h('div', { class: 'kicker' }, s('plan_kicker', { n: w.n, b: w.total })),
       h('div', { class: 'title' }, plain(l.title)),
@@ -137,5 +186,9 @@ function planCard({ child: c }) {
 
 export function register(shell) {
   shell.offer('home.action', { id: 'plan-next', role: 'primary', priority: 30,
-    when: (ctx) => canPlan(ctx.child) && !!(where(ctx.child) || {}).next, render: planCard });
+    when: (ctx) => canFollow(ctx.child) && (!!(where(ctx.child) || {}).next || !!finishedNow(ctx.child)), render: planCard });
+  // "Done" is said once: leaving Home forgets it
+  globalThis.addEventListener?.('hashchange', () => {
+    if (!/^#\/?(home)?$/.test(globalThis.location.hash)) finished.clear();
+  });
 }

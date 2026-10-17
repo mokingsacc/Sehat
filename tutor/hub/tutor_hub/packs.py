@@ -161,6 +161,8 @@ def validate_lesson(lesson: dict, pack_dir: Path, clips: dict | None = None) -> 
         pc = s.get("picture_count", 1)
         if not isinstance(pc, int) or not 1 <= pc <= 10:
             p.append(f"{w}: picture_count must be 1 to 10")
+        if "recall" in s and (s["recall"] is not True or k not in ("choice", "number")):
+            p.append(f"{w}: recall is true, on a choice or number step (spaced review, P25a)")
         if "english" in s and (not isinstance(s["english"], str) or not s["english"].strip()):
             p.append(f"{w}: english must be the English words to show and say")
         if "audio" in s:
@@ -421,10 +423,14 @@ class Library:
         self.links: list[dict] = []               # link cards, each with its pack and state
         self.hidden: list[str] = []               # release mode: what is not served, and why
         self.problems: list[str] = []
+        self.known: dict[str, dict] = {}          # every lesson that loaded, served or not: {band, sheet} (the graph)
+        self.graphs: dict[str, dict] = {}         # the skills graphs by subject (graph.py, P25a)
+        self.graph_dir = self.dir.parent / "graph"
         self.load()
 
     def load(self):
-        for x in (self.packs, self.lessons, self.lesson_pack, self.hashes, self.states, self.terms):
+        for x in (self.packs, self.lessons, self.lesson_pack, self.hashes, self.states, self.terms, self.known,
+                  self.graphs):
             x.clear()
         self.links.clear(); self.hidden.clear(); self.problems.clear()
         if not self.dir.is_dir():
@@ -483,6 +489,8 @@ class Library:
                     continue
                 chash = content_hash(lesson, pdir, clips)
                 state = review_state(lesson, chash)
+                self.known[lid] = {"band": "ad" if pack.get("audience") == "adult" else band_of_year(lesson["year"]),
+                                   "sheet": bool(lesson.get("sheet"))}
                 if self.release:
                     why = release_problems(lesson, state, pack, clips)
                     if why:
@@ -497,6 +505,11 @@ class Library:
             pack["_media_terms"] = media_terms
             self.packs[pid] = pack
             self._load_links(pack, pid, pdir, clips)
+        from . import graph                   # the skills graphs map nodes to the lessons just loaded
+        graphs, probs, hidden = graph.load(self.graph_dir, self.known, release=self.release)
+        self.graphs.update(graphs)
+        self.problems.extend(probs)
+        self.hidden.extend(hidden)
         for x in self.problems:
             log.warning("pack problem: %s", x)
         if self.hidden:

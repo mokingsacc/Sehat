@@ -34,7 +34,7 @@ def on(*ids):
 # the manifests in the repository
 
 def test_the_built_modules_are_valid():
-    assert sorted(REAL) == ["ask", "check", "homework", "lessons", "photo", "plan", "print", "review", "sheets",
+    assert sorted(REAL) == ["ask", "check", "homework", "lessons", "photo", "plan", "print", "recall", "review", "sheets",
                            "teacher", "timetable"]
     assert modules.risk(REAL["ask"]) == "medium" and modules.risk(REAL["lessons"]) == "none"
     assert REAL["print"]["needs"] == ["printer"]
@@ -190,10 +190,10 @@ def test_online_the_staging_cohort_keeps_sheets_but_not_print():
     f = {m: {"enabled": v} for m, v in staging["modules"].items()}
     assert all(staging["modules"].values())
     assert flags.enabled(REAL, staging, f) == ["ask", "check", "homework", "lessons", "photo", "plan", "print",
-                                              "review", "sheets", "teacher", "timetable"]
+                                              "recall", "review", "sheets", "teacher", "timetable"]
     assert flags.enabled(REAL, staging, f, lacks=("printer", "pin")) == ["ask", "check", "homework", "lessons", "photo",
-                                                                         "plan", "review", "sheets", "teacher",
-                                                                         "timetable"]
+                                                                         "plan", "recall", "review", "sheets",
+                                                                         "teacher", "timetable"]
     assert REAL["teacher"]["needs"] == []                 # C3.2: a gate per host, no `pin` need (staff.py)
 
 
@@ -202,7 +202,7 @@ def test_the_real_hub_cohort_takes_the_built_modules():
     hub = seeds["hub"]
     f = {m: {"enabled": v} for m, v in hub["modules"].items()}
     assert flags.enabled(REAL, hub, f) == ["ask", "check", "lessons", "plan", "print", "sheets", "teacher",
-                                       "timetable"]   # no photo on the hub
+                                       "timetable"]   # no photo on the hub; recall after the pilot's report (C4.1)
     assert hub["modules"]["photo"] is False and seeds["open"]["modules"]["photo"] is False
     assert flags.enabled(REAL, hub, f, band="ey") == ["lessons", "print", "sheets", "teacher"]     # no Ask for ey
 
@@ -211,7 +211,7 @@ def test_the_open_cohort_has_sheets_and_no_print():
     seeds, _ = flags.load_seeds(TUTOR / "cohorts")
     c = seeds["open"]
     f = {m: {"enabled": v} for m, v in c["modules"].items()}
-    assert flags.enabled(REAL, c, f, lacks=("printer", "pin")) == ["check", "lessons", "plan", "sheets",
+    assert flags.enabled(REAL, c, f, lacks=("printer", "pin")) == ["check", "lessons", "plan", "recall", "sheets",
                                                                      "timetable"]   # C2.8: Learn this in `open`
 
 

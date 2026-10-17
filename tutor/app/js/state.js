@@ -22,6 +22,11 @@ const empty = () => ({ v: 2, active: null, learners: [], forget: [] });
 const TOKEN = /^[A-Za-z0-9_-]{20,64}$/;
 const CODE = /^[A-HJKMNP-Z2-9]{8}$/;
 const KINDS = ['guardian-on-phone', 'self', 'partner-paper'];
+// declared before the first load() below reads them (a const read before its line throws, and the learners would be
+// lost: P22's plan was, on every reload, until P25a moved this here)
+const LESSON_ID = /^[a-z0-9][a-z0-9-]{0,63}$/;
+const ITEM_KEY = /^[a-z0-9][a-z0-9-]{0,63}:[1-9][0-9]?$/;
+export const RECALL_MAX = 300;
 // A reviewer's preview (P17): /review/ shows a lesson step in a learner's look, in a frame opened at
 // ?preview=<band>&lang=<lang>. That page keeps one learner in memory only: nothing is read from or written to this
 // browser's storage, no event is kept (she has no consent), and she never joins.
@@ -86,10 +91,32 @@ function clean(l) {
     // found no lesson while offline, waiting to join the wishlist (sent without her token, outbox.js)
     ...(cleanPlan(l.plan) ? { plan: cleanPlan(l.plan) } : {}),
     ...(cleanWishes(l.wishes).length ? { wishes: cleanWishes(l.wishes) } : {}),
+    // P25a (C4.1): her latest mark per lesson's sheet (percent right, for "mastered" in the skills graph), and her
+    // spaced-review items, "<lesson>:<step>": [box, due day] (box 0: retired), at most 300 (modules/recall.js)
+    ...(Object.keys(cleanMarks(l.marks)).length ? { marks: cleanMarks(l.marks) } : {}),
+    ...(Object.keys(cleanRecall(l.recall)).length ? { recall: cleanRecall(l.recall) } : {}),
   };
 }
 
-const LESSON_ID = /^[a-z0-9][a-z0-9-]{0,63}$/;
+function cleanMarks(m) {
+  const out = {};
+  if (!m || typeof m !== 'object') return out;
+  for (const [id, pct] of Object.entries(m).slice(-300)) {
+    if (LESSON_ID.test(id) && Number.isInteger(pct) && pct >= 0 && pct <= 100) out[id] = pct;
+  }
+  return out;
+}
+
+function cleanRecall(r) {
+  if (!r || typeof r !== 'object') return {};
+  const ok = Object.entries(r).filter(([k, v]) => ITEM_KEY.test(k) && Array.isArray(v) && v.length === 2
+    && Number.isInteger(v[0]) && v[0] >= 0 && v[0] <= 5 && Number.isInteger(v[1]) && v[1] >= 0);
+  // over the cap: retired items go first, then the ones furthest from due
+  const keep = ok.length <= RECALL_MAX ? ok
+    : [...ok].sort((a, b) => (a[1][0] === 0) - (b[1][0] === 0) || a[1][1] - b[1][1]).slice(0, RECALL_MAX);
+  return Object.fromEntries(keep.map(([k, v]) => [k, [v[0], v[1]]]));
+}
+
 function cleanPlan(p) {
   if (!p || typeof p !== 'object' || !Array.isArray(p.lessons)) return null;
   const lessons = [...new Set(p.lessons.filter((id) => typeof id === 'string' && LESSON_ID.test(id)))].slice(0, 12);
@@ -98,7 +125,8 @@ function cleanPlan(p) {
   for (const [id, at] of Object.entries(p.again && typeof p.again === 'object' ? p.again : {})) {
     if (lessons.includes(id) && Number.isFinite(at)) again[id] = at;
   }
-  return { label: typeof p.label === 'string' ? p.label.slice(0, 60) : '', lessons, again };
+  return { label: typeof p.label === 'string' ? p.label.slice(0, 60) : '', lessons, again,
+    ...(typeof p.path === 'string' && LESSON_ID.test(p.path) ? { path: p.path } : {}) };
 }
 
 function cleanWishes(w) {
@@ -233,6 +261,16 @@ export function markDone(lessonId, stars) {
   if (c.tries) delete c.tries[lessonId];
   save();
   record('lesson.done', lessonId, stars);
+}
+
+// her latest mark on a lesson's sheet (Check my sheet), kept on the phone whether or not events are sent
+export function setMark(lessonId, pct) {
+  const c = child();
+  if (!c || !LESSON_ID.test(lessonId) || !Number.isFinite(pct)) return;
+  const marks = { ...(c.marks || {}) };
+  delete marks[lessonId];
+  marks[lessonId] = Math.max(0, Math.min(100, Math.round(pct)));
+  updateChild(c.id, { marks });
 }
 
 export function setStep(lessonId, i) {

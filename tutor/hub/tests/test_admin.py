@@ -97,13 +97,15 @@ def test_a_label_that_says_who_is_in_the_class_is_refused(hub, label):
     assert r.status_code == 422 and "who is in the class" in r.json()["error"]
 
 
-def test_a_new_cohort_has_a_random_id_every_module_off_and_its_code_shown_once(hub, cfg):
+def test_a_new_cohort_has_a_random_id_every_module_but_recall_off_and_its_code_shown_once(hub, cfg):
     out = post(hub, "/cohorts", {"label": "Mazar class", "langs": ["prs", "ps"], "bands": ["s1", "p1"]})
     cid, code = out["id"], out["code"]
     assert flags.COHORT_ID.match(cid) and learners.normal_code(code)
     c = get(hub, f"/cohorts/{cid}")
     assert c["bands"] == ["p1", "s1"] and c["settings"]["maturity"] == ["pilot", "stable"] and c["learners"] == 0
-    assert not any(m["enabled"] for m in c["modules"])
+    # spaced review is switched on in a new cohort (C4.1); it shows only once `lessons` is on
+    assert [m["id"] for m in c["modules"] if m["enabled"]] == ["recall"]
+    assert not any(m["on"] for m in c["modules"])
     assert code not in str(c) and code.replace("-", "") not in str(c)
     db = sqlite3.connect(cfg.data / "hub.db")
     dump = "\n".join(db.iterdump())
