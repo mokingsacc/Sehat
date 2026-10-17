@@ -171,6 +171,55 @@ it instead, and the fallback container sets `TUTOR_STAFF_GATE=off` because nothi
    `python3 tools/pull_signoffs.py --json signoffs.json`, check with `python3 tools/validate_pack.py --release`, and
    commit the packs.
 
+## The Android app (P23): builds, USB installs, release signing and Google's verification (D11)
+
+**What CI makes.** `.github/workflows/tutor-android.yml` builds `tutor/android` on every pull request that touches
+`tutor/android/` or `tutor/app/`, and on demand (Actions > Tutor Android > Run workflow). It reads no secret and signs
+nothing with a release key. The run's artifact `qalam-android-<version>` holds `qalam-<version>-debug.apk` (signed
+by the build tools' throwaway debug key on the runner), `qalam-<version>-unsigned.apk` (minified, for signing) and
+`SHA256SUMS`; the job summary gives their sizes. The job fails if the APK asks for any permission but the seven of
+item 15, or is not named "Qalam". Sehat's `android/`, its workflow and its signing secrets are never used.
+
+**The online home inside the APK.** The app looks for a village hub first (`http://10.42.0.1` and the other hub
+addresses, the only plain-http hosts it may reach) and then the online home it was built for. Set that address as
+a repository *variable*, not a secret: Settings > Secrets and variables > Actions > Variables > `QALAM_ONLINE_URL` =
+`https://qalam-staging.<account>.workers.dev` for staging (later the production address). Unset, the APK finds only
+a hub. The online Worker must allow the APK's page as an origin: staging's `wrangler.toml` already sets
+`TUTOR_ORIGINS = "https://appassets.androidplatform.net"`; production needs the same line.
+
+**The pilot: installs over USB, no registration (the default until D11 is decided).** On the hub laptop with
+Android's platform tools: on each phone turn on Developer options and USB debugging, connect it, then
+`adb install -r qalam-<version>-debug.apk`. Installs over ADB are exempt from Google's developer verification.
+Note: each CI run's debug key is new, so a later debug build will not install over an earlier one; `adb uninstall
+org.qalam.app` first loses that phone's learners and progress. For the whole pilot, install one build, or switch to
+a release key (below) before the pilot starts and keep it.
+
+**Release signing (Mo, on his own machine; never in this repository, never Sehat's key).**
+1. Make Qalam's own key once and keep it and its passwords in the password manager, with an offline copy:
+   `keytool -genkeypair -v -keystore qalam-release.jks -alias qalam -keyalg RSA -keysize 4096 -validity 10000`.
+   Losing it means phones can never take an update; it is Qalam's, not Sehat's.
+2. Sign an unsigned build from CI: `zipalign -p 4 qalam-<v>-unsigned.apk aligned.apk` then
+   `apksigner sign --ks qalam-release.jks --ks-key-alias qalam --out qalam-<v>.apk aligned.apk`, and
+   `apksigner verify --print-certs qalam-<v>.apk` (copy the certificate's SHA-256 digest). Or build signed locally:
+   `QALAM_KEYSTORE_FILE=... QALAM_KEYSTORE_PASSWORD=... QALAM_KEY_ALIAS=qalam QALAM_KEY_PASSWORD=... ./gradlew
+   assembleRelease` in `tutor/android`.
+3. If signing should move into CI later, use a GitHub *environment* with required reviewers holding four new
+   secrets (`QALAM_KEYSTORE_BASE64`, `QALAM_KEYSTORE_PASSWORD`, `QALAM_KEY_ALIAS`, `QALAM_KEY_PASSWORD`), never the
+   repository's `ANDROID_*` secrets, which are Sehat's. Nothing is set up for this today.
+
+**Putting it on /get.** `python3 tools/apk_record.py qalam-<v>.apk --version <v> --cert "<SHA-256 digest>"` copies it
+to `app/get/qalam-<v>.apk` with `app/get/apk.json` (size, SHA-256, certificate), which the page shows to teachers. It
+must stay under 25 MiB (today about 0.5 MB). Commit both; the next deploy serves them as static assets. Then set
+`TUTOR_APK_LATEST = "<v>"` in the Worker's `[vars]` (and on a hub in its settings) so phones with an older APK see
+"Update Qalam"; set `TUTOR_APK_MIN` only when old versions must stop (they then see one "Please update Qalam" card).
+
+**Google's developer verification (D11, after 22 December).** From 2027 Android installs only apps whose package
+and signing key a verified developer has registered, except through ADB or a long "advanced flow" learners cannot
+use. Before the rollout reaches Afghanistan, Mo decides whose identity registers `org.qalam.app` (his or the CIO's),
+verifies that developer account in the Android Developer Console, and registers the package with the release key's
+certificate from step 1 (a key must exist first, and every later APK must use it). Until then the pilot stays on USB
+installs and `/get` is for testers.
+
 ## Reading the next runs
 
 Each run of `tutor-worker.yml` writes the same table to its job summary, so later changes can be compared. A run

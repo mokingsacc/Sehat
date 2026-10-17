@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Plain http only to the village hub's own addresses (hub.js CANDIDATES): the hub stays plain http on its Wi-Fi
+     and the app is its secure context (C0 flags). Everything else is https. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">10.42.0.1</domain>
+        <domain includeSubdomains="false">qalam.lan</domain>
+        <domain includeSubdomains="false">192.168.4.1</domain>
+    </domain-config>
+</network-security-config>

@@ -536,6 +536,28 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   words rather than its fixed word; whether the kill switches should stay visible while the module table scrolls on a
   laptop; whether Safety needs bars like AI spend rather than fourteen-day totals; the Dari menu's width at 200 px.
 
+## What P23 built, and where it differs
+
+- "Is this phone yours?" is a Home card under the Now card (secondary, after "Your school day"), in the APK only:
+  the question with its speaker, "Yes, it's mine" (bell icon, primary) and "No, I share it" (outline). No shows a
+  toast, "Bells will ring only while Qalam is open."; Yes opens the notification explainer as a bottom sheet (the
+  offline sheet's shape): a bell, "Bells when Qalam is closed" with its speaker, the line from item 15, Continue and
+  Not now. Only Android 13+ asks; elsewhere nothing is shown.
+- Settings → School day, in the APK: two more switches, "This phone is mine" and "Bells when Qalam is closed", and
+  when notifications are off one button, "Allow notifications to ring bells" (the explainer first, or the phone's
+  settings after a refusal). "Update Qalam" is its own Settings card above Credits with a primary Download; About
+  shows "Android app 0.1.0" and, in an Android phone's browser only, "Get the Android app".
+- "Please update Qalam" is a whole screen: a download picture, the title with its speaker, one line and Download.
+  Credits stay open.
+- `/get` follows item 15's drawing, a 480 px column in the clean look and the reader's language, a speaker on every
+  line; the three pictures are line drawings of a phone (the file, the switch, the Install button). "For teachers"
+  folds open to the file's SHA-256 and the certificate's. Before a release it says the app is not ready and offers
+  "Open Qalam". The size reads in MB with one decimal.
+- After a camera refusal, Check my sheet adds a text link "Open Settings" under the existing line in the APK.
+- Open look questions: whether the class card should carry `/get` (item 15 says so; C3.3's card is "QR and code,
+  nothing else", so it does not yet); the pictures on `/get` are drawings, not screenshots of a real phone; where the
+  mine card sits when the day has no lessons yet; a launcher icon drawn for small sizes.
+
 ---
 
 # C2 and C3 decisions

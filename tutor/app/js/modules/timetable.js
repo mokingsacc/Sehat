@@ -10,8 +10,12 @@
 //   changes. The opening, sheet time and the close also say their line.
 // - The kill switch (the cohort's timetable module off) takes it all away at the next read of /api/hello, silently.
 // - No web notification and no Web Push, ever; closed-app alarms are the Android app's (day.syncAlarms, P23).
+// - In the Android app only (P23, item 15): right after "Yes, Qalam is my school", "Is this phone yours?". Yes leads
+//   to the notification explainer (Android 13+ asks); No says bells ring only while Qalam is open. Settings → School
+//   day then has "This phone is mine", "Bells when Qalam is closed" and, when notifications are off, a way to allow them.
 // Nothing about her day is sent and no event is recorded (F5).
 
+import * as android from '../android.js';
 import * as day from '../day.js';
 import { getLang, s } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -125,6 +129,7 @@ function watch() {
   });
   window.addEventListener('hashchange', () => { arm(); refresh(state.child()); });
   window.addEventListener(EVENT, () => { if (!timer) arm(); });
+  window.addEventListener('qalam-notify', () => day.syncAlarms(state.child()));   // allowed or not: the APK answered
 }
 
 // --- Home ---
@@ -151,6 +156,34 @@ function dayCard(ctx) {
       icon('bell', 26, 2.2), s('day_yes'))),
     said(h('button', { type: 'button', class: 'btn outline big', onClick: () => daySet({ day: 'off' }) },
       icon('bag', 26, 2.2), s(hw ? 'day_no_hw' : 'day_no'))));
+}
+
+// --- the Android app: "Is this phone yours?" and the notification explainer (P23) ---
+
+// the explainer before the phone's own question: a picture, two lines, a speaker, Continue and Not now
+export function notifyExplainer() {
+  if (android.notifyState() !== 'ask') return;
+  document.querySelectorAll('.netsheet').forEach((el) => el.remove());
+  const close = () => sheet.remove();
+  const lines = [s('notify_title'), s('notify_text')].join('. ');
+  const sheet = h('div', { class: 'netsheet', role: 'dialog', 'aria-modal': 'true' },
+    h('div', { class: 'card stack explainer' },
+      h('div', { class: 'row' }, h('span', { class: 'nowpic', 'aria-hidden': 'true' }, icon('bell', 48, 2)),
+        h('b', { class: 'grow' }, s('notify_title')), speakerBtn(() => speak(lines, getLang()), { size: 'sm' })),
+      h('p', {}, s('notify_text')),
+      said(h('button', { type: 'button', class: 'btn primary', onClick: () => { close(); android.askNotify(); } }, s('continue'))),
+      said(h('button', { type: 'button', class: 'btn', onClick: close }, s('not_now')))));
+  document.body.append(sheet);
+}
+
+function mineCard() {
+  const line = s('mine_q');
+  return h('section', { class: 'card lined pad-card stack daycard' },
+    h('div', { class: 'row' }, h('h2', { class: 'grow' }, line), speakerBtn(() => speak(line, getLang()), { size: 'sm' })),
+    said(h('button', { type: 'button', class: 'btn primary big', onClick: () => { daySet({ mine: 'yes' }); notifyExplainer(); } },
+      icon('bell', 26, 2.2), s('mine_yes'))),
+    said(h('button', { type: 'button', class: 'btn outline big', onClick: () => { daySet({ mine: 'no' }); toast(s('mine_no_said')); } },
+      s('mine_no'))));
 }
 
 const lessonHref = (l) => '#/lesson/' + encodeURIComponent(l.id);
@@ -262,10 +295,27 @@ function settingsRow(ctx) {
           onClick: () => set({ shift: shift - day.SHIFT.step }) }, icon('minus', 22)),
         h('span', { class: 'stepper-v', 'aria-live': 'polite' }, day.clock(start)),
         h('button', { type: 'button', class: 'round', 'aria-label': s('start_later'), disabled: shift >= day.SHIFT.max || null,
-          onClick: () => set({ shift: shift + day.SHIFT.step }) }, icon('plus', 22))) : null);
+          onClick: () => set({ shift: shift + day.SHIFT.step }) }, icon('plus', 22))) : null,
+      dayIsOn && android.isApp() ? appRows(c, sw, set) : null);
   };
+  const onNotify = () => { if (box.isConnected) draw(); else window.removeEventListener('qalam-notify', onNotify); };
+  window.addEventListener('qalam-notify', onNotify);       // the phone's notification question was answered
   draw();
   return box;
+}
+
+// the Android app's rows: whose phone it is, closed-app bells, and notifications when they are off
+function appRows(c, sw, set) {
+  const mine = c.mine === 'yes';
+  const ns = android.notifyState();
+  return [
+    sw(s('mine_row'), mine, () => set({ mine: mine ? 'no' : 'yes' })),
+    mine ? sw(s('alarms_row'), c.alarms !== 'off', () => set({ alarms: c.alarms === 'off' ? 'on' : 'off' })) : null,
+    !mine ? h('small', { class: 'muted' }, s('mine_no_said')) : null,
+    // notifications off: "Allow notifications to ring bells" (the explainer first, or the phone's settings after a refusal)
+    mine && c.alarms !== 'off' && ns !== 'on' ? said(h('button', { type: 'button', class: 'btn',
+      onClick: () => (ns === 'ask' ? notifyExplainer() : android.openSettings()) }, icon('bell', 22), s('notify_allow'))) : null,
+  ];
 }
 
 // the school day can be hers: her band has one in the timetable kept on the phone
@@ -274,6 +324,8 @@ const hasDay = (ctx) => !!ctx.child && day.BANDS.includes(ctx.band) && allows('t
 export function register(shell) {
   shell.offer('home.action', { id: 'day-card', role: 'secondary', priority: 100,
     when: (ctx) => day.dayOn(ctx.child) && !day.asked(ctx.child), render: dayCard });
+  shell.offer('home.action', { id: 'mine-card', role: 'secondary', priority: 90,
+    when: (ctx) => android.isApp() && day.dayOn(ctx.child) && ctx.child.day === 'on' && !ctx.child.mine, render: mineCard });
   shell.offer('home.action', { id: 'now', role: 'primary', priority: 50, when: (ctx) => day.dayOn(ctx.child), render: nowCard });
   shell.offer('home.action', { id: 'today', role: 'list', priority: 50,
     when: (ctx) => day.dayOn(ctx.child) && today(ctx.child).school, render: todayList });

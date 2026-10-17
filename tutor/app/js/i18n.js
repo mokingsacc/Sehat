@@ -2,7 +2,7 @@
 // comes from the packs, not from here. A string may be {child, adult} where the tone changes the wording; s()
 // picks by the learner's tone (data-tone, set by bands.js).
 // Drafts: a native Dari speaker and a native Pashto speaker must check every Dari and Pashto string before
-// learners use the app; the strings added for P9, P10, P11, P13, P14, P15, P19, P20 and P22 (marked below) are new drafts.
+// learners use the app; the strings added for P9, P10, P11, P13, P14, P15, P19, P20, P22 and P23 (marked below) are new drafts.
 
 const S = {
   prs: {
@@ -257,6 +257,21 @@ const S = {
     plan_miss_later: 'هنوز برای این درس نداریم. وقتی وصل شوی، آن را به فهرست خود اضافه می‌کنیم.',
     plan_miss_here: 'هنوز برای این درس نداریم.', plan_now: 'پلان تو: {label}، {n} از {b}', plan_stop: 'پلان را بس کن',
     plan_stopped: 'پلانت بس شد', plan_kicker: 'پلان تو · درس {n} از {b}', plan_added: 'به پلانت اضافه شد: {t}',
+    // P23: the Android app (drafts, for a native speaker's check)
+    mine_q: 'این تلفن از خودت است؟', mine_yes: 'بله، از خودم است', mine_no: 'نه، شریکی است',
+    mine_no_said: 'زنگ‌ها فقط وقتی قلم باز است می‌زنند.', mine_row: 'این تلفن از خودم است',
+    alarms_row: 'زنگ وقتی قلم بسته است', notify_title: 'زنگ وقتی قلم بسته است',
+    notify_text: 'قلم می‌تواند وقتی بسته است هم زنگ‌هایت را بزند. در اطلاعیه فقط «قلم» نوشته می‌شود.',
+    notify_allow: 'برای زنگ‌ها اطلاعیه را اجازه بده', open_settings: 'تنظیمات را باز کن',
+    update_title: 'لطفاً قلم را تازه کن', update_text: 'این قلم برای مکتبت کهنه شده. قلم تازه را دانلود کن.',
+    update_app: 'قلم را تازه کن', update_note: 'قلم تازه آماده است.', download: 'دانلود', get_app: 'برنامهٔ اندروید را بگیر',
+    app_version: 'برنامهٔ اندروید {v}',
+    get_title: 'قلم برای اندروید', get_lead: 'بدون انترنت کار می‌کند. می‌تواند زنگ‌های مکتبت را بزند.',
+    get_download: 'دانلود · {mb} میگابایت', get_version: 'نسخهٔ {v} · اندروید ۵ یا تازه‌تر',
+    get_step1: 'فایل را باز کن', get_step2: 'برای کروم «نصب برنامه‌های ناشناس» را اجازه بده', get_step3: 'نصب را بزن',
+    get_warning: 'اگر هشداری آمد، «جزئیات بیشتر» و بعد «به هر حال نصب کن» را بزن.', get_teachers: 'برای معلمان: فایل را وارسی کنید',
+    get_sha: 'نشان انگشت فایل', get_cert: 'تصدیق امضا',
+    get_none: 'برنامهٔ اندروید هنوز آماده نیست. قلم در همین مرورگر کار می‌کند.', get_open: 'قلم را باز کن',
   },
   ps: {
     app: 'قلم',
@@ -510,6 +525,21 @@ const S = {
     plan_miss_later: 'د دې لپاره لا لوستونه نه لرو. کله چې وصل شې، دا به خپل لېست ته ور زیات کړو.',
     plan_miss_here: 'د دې لپاره لا لوستونه نه لرو.', plan_now: 'ستا پلان: {label}، {n} له {b}', plan_stop: 'دا پلان ودروه',
     plan_stopped: 'ستا پلان ودرول شو', plan_kicker: 'ستا پلان · لوست {n} له {b}', plan_added: 'ستا پلان ته ور زیات شو: {t}',
+    // P23: the Android app (drafts, for a native speaker's check)
+    mine_q: 'دا تلیفون ستا خپل دی؟', mine_yes: 'هو، زما خپل دی', mine_no: 'نه، شریک دی',
+    mine_no_said: 'زنګونه یوازې هغه وخت وهل کېږي چې قلم خلاص وي.', mine_row: 'دا تلیفون زما خپل دی',
+    alarms_row: 'زنګ کله چې قلم تړل وي', notify_title: 'زنګ کله چې قلم تړل وي',
+    notify_text: 'قلم کولی شي ستا زنګونه هغه وخت هم ووهي چې تړل وي. په خبرتیا کې یوازې «قلم» لیکل کېږي.',
+    notify_allow: 'د زنګونو لپاره خبرتیاوو ته اجازه ورکړه', open_settings: 'تنظیمات پرانیزه',
+    update_title: 'مهرباني وکړه قلم نوی کړه', update_text: 'دا قلم اوس ستا د ښوونځي لپاره زوړ دی. نوی قلم ښکته کړه.',
+    update_app: 'قلم نوی کړه', update_note: 'نوی قلم چمتو دی.', download: 'ښکته کول', get_app: 'د اندروید اپ واخله',
+    app_version: 'د اندروید اپ {v}',
+    get_title: 'قلم د اندروید لپاره', get_lead: 'له انټرنېټ پرته کار کوي. ستا د ښوونځي زنګونه وهلی شي.',
+    get_download: 'ښکته کول · {mb} میګابایټه', get_version: 'نسخه {v} · اندروید ۵ یا نوی',
+    get_step1: 'فایل پرانیزه', get_step2: 'کروم ته د «نامعلومو اپونو نصبولو» اجازه ورکړه', get_step3: 'نصب ووهه',
+    get_warning: 'که خبرداری راغی، «نور جزئیات» او بیا «بیا هم نصب کړه» ووهه.', get_teachers: 'د ښوونکو لپاره: فایل وګورئ',
+    get_sha: 'د فایل د ګوتې نښه', get_cert: 'د لاسلیک سند',
+    get_none: 'د اندروید اپ لا چمتو نه دی. قلم په همدې براوزر کې کار کوي.', get_open: 'قلم پرانیزه',
   },
   en: {
     app: 'Qalam',
@@ -764,6 +794,21 @@ const S = {
     plan_miss_here: "We don't have lessons for this yet.", plan_now: 'Your plan: {label} · {n} of {b}',
     plan_stop: 'Stop this plan', plan_stopped: 'Your plan has stopped', plan_kicker: 'Your plan · lesson {n} of {b}',
     plan_added: 'Added to your plan: {t}',
+    // P23: the Android app (its questions, Settings rows, the update card and the /get page)
+    mine_q: 'Is this phone yours?', mine_yes: "Yes, it's mine", mine_no: 'No, I share it',
+    mine_no_said: 'Bells will ring only while Qalam is open.', mine_row: 'This phone is mine',
+    alarms_row: 'Bells when Qalam is closed', notify_title: 'Bells when Qalam is closed',
+    notify_text: "Qalam can ring your bells when it is closed. The notification only says 'Qalam'.",
+    notify_allow: 'Allow notifications to ring bells', open_settings: 'Open Settings',
+    update_title: 'Please update Qalam', update_text: 'This Qalam is too old for your school now. Download the new one.',
+    update_app: 'Update Qalam', update_note: 'A new Qalam is ready.', download: 'Download', get_app: 'Get the Android app',
+    app_version: 'Android app {v}',
+    get_title: 'Qalam for Android', get_lead: 'Works without internet. Can ring your school bells.',
+    get_download: 'Download · {mb} MB', get_version: 'Version {v} · Android 5 or newer',
+    get_step1: 'Open the file', get_step2: 'Allow "Install unknown apps" for Chrome', get_step3: 'Tap Install',
+    get_warning: 'If a warning appears, tap "More details", then "Install anyway".', get_teachers: 'For teachers: check the file',
+    get_sha: 'Fingerprint of the file', get_cert: 'Signing certificate',
+    get_none: 'The Android app is not ready yet. Qalam works in this browser.', get_open: 'Open Qalam',
   },
 };
 

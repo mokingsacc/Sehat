@@ -1,11 +1,13 @@
 // Settings (DESIGN.md 5), behind "Who is learning", on this phone only and per learner, each row with a speaker:
 // Bigger text, Theme (Phone, Light, Dark), Lock (set, change, remove; never for early years), Nickname ("a nickname,
 // not your name"; never sent), Consent (what was agreed, and "Stop sharing", behind her PIN), the modules'
-// `settings.row` offers, Credits, About, and "Remove this learner from this phone" (behind her PIN, with a spoken
+// `settings.row` offers, "Update Qalam" in the Android app when a newer one is out (P23), Credits, About (with "Get
+// the Android app" in an Android phone's browser only), and "Remove this learner from this phone" (behind her PIN, with a spoken
 // confirmation). #/settings/<action> is that confirmation, after #/lock/check/<action> (or straight away when she
 // has no lock).
 
 import * as account from '../account.js';
+import * as android from '../android.js';
 import * as bands from '../bands.js';
 import { fa, getLang, s, setTone } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -79,6 +81,9 @@ export default function settings([action]) {
       try { return o.render(modules.context(l, null)); } catch { return null; }
     });
     const version = hub.info() && hub.info().version;
+    // the Android app: /get opens in the phone's browser; only while the server is in reach (its address is known)
+    const getApp = hub.online() ? hub.url('/get/') : null;
+    const apk = android.apkState(hub.info() && hub.info().apk);
     fill(root,
       topbar({ back: '#/who', title: s('settings') }),
       h('div', { class: 'stack pad' },
@@ -99,8 +104,12 @@ export default function settings([action]) {
           l.consent ? said(h('a', { class: 'btn', href: '#/settings/stop' }, icon('stop', 22), s('stop_sharing')))
             : said(h('a', { class: 'btn', href: '#/consent/settings' }, icon('file', 22), s('give_consent')))),
         offers,
+        apk === 'update' && getApp ? section(s('update_app'), s('update_note'),
+          said(h('a', { class: 'btn primary', href: getApp }, icon('download', 22), s('download')))) : null,
         said(h('a', { class: 'btn', href: '#/credits' }, icon('file', 22), s('credits'))),
-        section(s('about'), s('about_text'), version ? h('p', { class: 'muted small', dir: 'ltr' }, s('version', { v: version })) : null),
+        section(s('about'), s('about_text'), version ? h('p', { class: 'muted small', dir: 'ltr' }, s('version', { v: version })) : null,
+          android.appVersion() ? h('p', { class: 'muted small', dir: 'ltr' }, s('app_version', { v: android.appVersion() })) : null,
+          android.androidBrowser() && getApp ? said(h('a', { class: 'btn', href: getApp }, icon('download', 22), s('get_app'))) : null),
         said(h('a', { class: 'btn danger-outline', href: '#/settings/remove' }, icon('trash', 22), s('remove_learner')))));
   }
   draw();

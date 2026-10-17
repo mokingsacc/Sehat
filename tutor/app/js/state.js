@@ -76,6 +76,10 @@ function clean(l) {
     ...(l.day === 'on' || l.day === 'off' ? { day: l.day } : {}),
     ...(l.bells === 'off' ? { bells: 'off' } : {}),
     ...(Number.isInteger(l.shift) && l.shift !== 0 && Math.abs(l.shift) <= 120 && l.shift % 30 === 0 ? { shift: l.shift } : {}),
+    // P23, the Android app only: `mine` 'yes' or 'no' ("Is this phone yours?", asked after "Yes, Qalam is my
+    // school"); `alarms` 'off' when she switched closed-app bells off (on by default once the phone is hers, C3.1)
+    ...(l.mine === 'yes' || l.mine === 'no' ? { mine: l.mine } : {}),
+    ...(l.alarms === 'off' ? { alarms: 'off' } : {}),
     // C2.3: she has heard "I won't tell you the answer" once, the first time she reached a third hint
     ...(l.told === true ? { told: true } : {}),
     // P22: her plan (a label and lesson ids; lessons a marked sheet added again, with when) and the goals that

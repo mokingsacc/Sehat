@@ -1,5 +1,6 @@
 """Hub settings, from environment variables (setup/hub.env on a real hub) with plain defaults for a laptop."""
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -9,6 +10,12 @@ TUTOR = Path(__file__).resolve().parents[2]      # the tutor/ folder
 def _env(name, default=None):
     v = os.environ.get(name)
     return v if v not in (None, "") else default
+
+
+def _version(v: str | None) -> str | None:
+    """An app version like 1.2.3 (TUTOR_APK_LATEST, TUTOR_APK_MIN); anything else is no version."""
+    v = (v or "").strip()
+    return v if re.fullmatch(r"\d{1,4}(\.\d{1,4}){0,3}", v) else None
 
 
 def _budget(v):
@@ -59,6 +66,9 @@ class Config:
     access_aud: str | None = None                         # online: the Access application's audience tag
     staff_pepper: str | None = None                       # a secret, never in D1 or the repository: staff rows keep
                                                           # SHA-256(pepper + email), so without it no one is staff
+    apk_latest: str | None = None                         # the Android app (P23): the newest version on /get
+    apk_min: str | None = None                            # (TUTOR_APK_LATEST), and the oldest that may still talk to
+                                                          # this server (TUTOR_APK_MIN); both "1.2.3", not secrets
     extra: dict = field(default_factory=dict)
 
     @classmethod
@@ -92,6 +102,8 @@ class Config:
             access_team=_env("TUTOR_ACCESS_TEAM"),
             access_aud=_env("TUTOR_ACCESS_AUD"),
             staff_pepper=_env("TUTOR_STAFF_PEPPER"),
+            apk_latest=_version(_env("TUTOR_APK_LATEST")),
+            apk_min=_version(_env("TUTOR_APK_MIN")),
         )
         for k, v in over.items():
             setattr(c, k, v)

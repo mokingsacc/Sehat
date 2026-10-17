@@ -150,6 +150,12 @@ From the build plan (`docs/BUILD-PLAN.md`, section 6), in the order the design c
   and fills the school day's periods; a partial match gives the closest lessons; a miss joins the class's wishlist,
   screened, without the token, kept 90 days, and shows in the teacher's Wishes tab. A marked sheet with wrong items
   adds its lesson to her plan. On in all three seed cohorts, `open` included (C2.8).
+- **P23, done (built; the phone trials wait for devices):** the Android app (C3.6) in `tutor/android`, Sehat's way of
+  building but its own project: the phone app in one WebView, the hub first and then the online home, bells when
+  Qalam is closed on a phone she says is hers (exact alarms, a notification that says only "Qalam"), the camera for
+  photo marking, "Update Qalam" and the "Please update Qalam" card from hello's `apk`, and `/get` with three pictured
+  steps. CI builds a debug APK and an unsigned release APK (about 0.5 MB) as an artifact, with no secrets. Pilot
+  phones are installed over USB; release signing and Google's developer verification (D11) are Mo's, in HOSTING.md.
 
 ## January 2027: buy and test
 

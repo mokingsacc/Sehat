@@ -16,6 +16,7 @@ TUTOR_COHORT = "qg1j2918yx"            # the staging seed cohort (cohorts/stagin
 TUTOR_AI_PROVIDER = "fake"             # learner-facing AI stays on the fake until a key exists (BUILD-PLAN 3.7)
 TUTOR_LACKS = "printer,pin"            # no printer and no teacher PIN online: print and teacher are off here
 TUTOR_HOME = "online"                  # learners see the online consent text (OpenAI reads questions), not the hub's
+TUTOR_ORIGINS = "https://appassets.androidplatform.net"   # the Android app's own page (P23) may call the API
 QALAM_SPIKE = "on"                     # staging only: GET /api/_spike answers the P7 questions (entry.py)
 
 # the app and the lesson pictures, served before the Worker; only /api/ reaches Python

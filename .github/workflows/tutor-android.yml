@@ -1,0 +1,88 @@
+# Qalam's Android app (tutor/android, P23): builds the APK and keeps it as a workflow artifact. Nothing is signed
+# with a release key and no secret is read: the debug APK (signed by the build tools' throwaway debug key on this
+# runner, for installing over USB in the pilot) and the release APK unsigned (minified, for Mo to sign on his own
+# machine, docs/HOSTING.md). Sehat's Android workflow, its android/ folder and its signing secrets are not touched.
+# QALAM_ONLINE_URL is a repository variable (Settings > Secrets and variables > Actions > Variables, not a secret):
+# the online home the app calls when no village hub answers; unset, the APK finds only a hub.
+name: Tutor Android
+on:
+  push:
+    branches: [main]
+    paths: ["tutor/android/**", "tutor/app/**", ".github/workflows/tutor-android.yml"]
+  pull_request:
+    paths: ["tutor/android/**", "tutor/app/**", ".github/workflows/tutor-android.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency: { group: "tutor-android-${{ github.ref }}", cancel-in-progress: true }
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: tutor/android
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
+
+      - name: Install Android platform 36
+        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0" > /dev/null
+
+      - name: The alarm plan's tests (plain Java)
+        run: |
+          javac -d "$RUNNER_TEMP/alarmtest" app/src/main/java/org/qalam/app/AlarmPlan.java test/AlarmPlanTest.java
+          java -cp "$RUNNER_TEMP/alarmtest" org.qalam.app.AlarmPlanTest
+
+      - name: Build the debug APK and the unsigned release APK
+        env:
+          QALAM_ONLINE_URL: ${{ vars.QALAM_ONLINE_URL }}
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon --stacktrace assembleDebug assembleRelease
+
+      - name: Check the permissions, name and size, then name the files
+        id: apk
+        run: |
+          set -euo pipefail
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          AAPT2=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)aapt2
+          DEBUG=app/build/outputs/apk/debug/app-debug.apk
+          RELEASE=app/build/outputs/apk/release/app-release-unsigned.apk
+          for apk in "$DEBUG" "$RELEASE"; do
+            got=$("$AAPT2" dump permissions "$apk" | sed -n "s/^uses-permission: name='android.permission.\([A-Z_]*\)'.*/\1/p" | sort | tr '\n' ' ')
+            want="CAMERA INTERNET POST_NOTIFICATIONS RECEIVE_BOOT_COMPLETED SCHEDULE_EXACT_ALARM USE_EXACT_ALARM VIBRATE "
+            [ "$got" = "$want" ] || { echo "::error::$apk asks for: $got (the spec allows: $want)"; exit 1; }
+            "$AAPT2" dump badging "$apk" | grep -q "application-label:'Qalam'" || { echo "::error::the launcher name must be Qalam"; exit 1; }
+          done
+          mkdir -p out
+          cp "$DEBUG" "out/qalam-$VERSION-debug.apk"
+          cp "$RELEASE" "out/qalam-$VERSION-unsigned.apk"
+          size=$(stat -c %s "out/qalam-$VERSION-unsigned.apk")
+          [ "$size" -lt $((25 * 1024 * 1024)) ] || { echo "::error::the APK must stay under 25 MiB to be a Worker static asset"; exit 1; }
+          (cd out && sha256sum *.apk > SHA256SUMS)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          {
+            echo "### Qalam for Android $VERSION"
+            echo "| file | size |"
+            echo "|---|---|"
+            for f in out/*.apk; do echo "| $(basename "$f") | $(du -h "$f" | cut -f1) ($(stat -c %s "$f") bytes) |"; done
+            echo
+            echo "Online home: ${QALAM_ONLINE_URL:-none (hub only)}. The debug APK installs over USB (adb install -r); the unsigned one is for signing."
+          } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          QALAM_ONLINE_URL: ${{ vars.QALAM_ONLINE_URL }}
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: qalam-android-${{ steps.apk.outputs.version }}
+          path: tutor/android/out/
+          if-no-files-found: error
+          retention-days: 30

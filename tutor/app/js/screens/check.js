@@ -21,6 +21,7 @@
 // that button is "Photos need the internet". The photo screen (modules/photo.js) hands back what she confirmed she
 // wrote, which is typed in here and marked like typed answers: the server never learns right or wrong from it.
 
+import * as android from '../android.js';
 import { readsOnOpen } from '../bands.js';
 import { fa, getLang, getTone, s } from '../i18n.js';
 import * as hub from '../hub.js';
@@ -130,7 +131,9 @@ function thisSheet({ l, seed }) {
     offer === 'on' ? said(h('a', { class: 'btn primary main', href: '#/photo/' + at }, icon('camera'), s('take_photo'))) : null,
     said(h('a', { class: offer === 'on' ? 'btn outline' : 'btn primary main', href: '#/check/' + at }, icon('pencil'), s('type_answers'))),
     offer === 'offline' ? h('p', { class: 'muted small' }, s('photo_offline')) : null,
-    offer === 'on' && cameraRefused ? h('p', { class: 'muted small' }, s('camera_off')) : null);
+    offer === 'on' && cameraRefused ? h('p', { class: 'muted small' }, s('camera_off')) : null,
+    offer === 'on' && cameraRefused && android.isApp()              // the Android app: straight to Qalam's settings (P23)
+      ? h('button', { type: 'button', class: 'link', onClick: android.openSettings }, s('open_settings')) : null);
 }
 
 function pickSheet() {

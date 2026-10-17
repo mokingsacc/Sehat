@@ -336,6 +336,8 @@ class Hub:
                 "printer": self.printer.status(), "free_copies": self.cfg.free_copies,
                 "url": self.cfg.public_url, "release": self.cfg.release, "consent": self.consent_version,
                 "home": self.cfg.home,
+                # the Android app (P23): its newest version on /get and the oldest this server still talks to
+                "apk": {"latest": self.cfg.apk_latest, "min": self.cfg.apk_min} if self.cfg.apk_latest else None,
                 "cohort": {"id": cohort["id"], "label": cohort["label"]} if cohort else None,
                 "modules": mods}
 

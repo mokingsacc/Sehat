@@ -1,0 +1,6 @@
+// Qalam's Android app (P23, C3.6, DESIGN-C2C3-SPECS item 15): one WebView around the phone app (tutor/app), built
+// the way Sehat's android/ is (same Gradle, plugin and libraries), but a project of its own: nothing here is shared
+// with Sehat's app, its workflow or its signing.
+plugins {
+    id 'com.android.application' version '8.13.0' apply false
+}

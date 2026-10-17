@@ -435,7 +435,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 | Route | What |
 |---|---|
-| `GET /api/hello` | Hub name, version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
+| `GET /api/hello` | Hub name, version and `core`, `home` (`hub` or `online`), lesson count, AI on and its languages, printer state, free copies; `apk {latest, min}` for the Android app (or null); the `cohort` (id, label) and the `modules` on for it, each with version, slots, bands, needs, offline, risk and settings (`?cohort=`, `?band=`) |
 | `POST /api/events` | `{events: [{at, verb, object, value}]}`, 1 to 100 from the phone's queue -> `{saved, expired}`; header `X-Learner-Token`, her consent needed |
 | `GET /api/consent` | The consent text (`?lang=`, `?version=`, default `hello.consent`) |
 | `POST /api/join` | `{band, lang, picture, cohort_code?, consent?}` -> `{token, number, picture, cohort}` |
@@ -684,7 +684,43 @@ with Dari drafts; nothing kept in the browser.
 - **Log:** `flag_log` and `admin_log` (`migrations/0014`: a fixed `what`, a line the hub writes, the admin's label,
   never an email) together, newest first, by cohort; both are kept two years (`store.prune`).
 
+## The Android app (tutor/android, app/js/android.js, app/get, P23)
+
+One WebView around the phone app, built as Sehat's is (the same Gradle wrapper, Android plugin, `androidx.webkit` and
+`androidx.core`), in a project of its own: package `org.qalam.app`, launcher "Qalam" with today's icon (vector
+drawables, no bitmaps), minimum Android 5. `sync-web.sh` copies `tutor/app` into the APK without its tests, the staff
+pages and `/get`. The release APK is about 0.5 MB.
+
+- **The page** is the APK's own, `https://appassets.androidplatform.net/` (`WebViewAssetLoader`, `AppPathHandler`
+  serving the whole origin; anything not in the APK is a 404, never the network). It is a secure origin, so the
+  service worker, localStorage and the camera work as on a website. `hub.js` then skips "this website" and asks the
+  hub's plain-http addresses (`network_security_config.xml` allows cleartext only to those; mixed content is allowed
+  for them) and, last, the online home baked in at build time (`QALAM_ONLINE_URL`, `QalamAndroid.online()`). The
+  online Worker allows the page's origin (`TUTOR_ORIGINS`). The service worker also keeps lesson pictures and clips
+  that come from the hub or the online home (`/packs/`), so a lesson opened once plays offline.
+- **The bridge** `window.QalamAndroid`: `setAlarms(json)` and `cancelAlarms()` (day.js `syncAlarms`, unchanged),
+  `notifyState()`, `askNotify()`, `exactAlarms()`, `openSettings()`, `version()`, `online()`. `android.js` wraps it and
+  answers as a browser where it is absent.
+- **Alarms** (`Alarms.java`, `AlarmPlan.java`, `AlarmReceiver.java`): the page's seven-day plan, times only, kept in
+  the app's preferences; one alarm at a time, exact (`USE_EXACT_ALARM` on Android 13+, `SCHEDULE_EXACT_ALARM` up to
+  12) or, when not allowed, `setWindow` within 5 minutes; set again after a restart, a clock or time zone change or an
+  update. The notification says only "Qalam" and opens the app; none while the app is on screen (the page rings its
+  own bell); a bell more than 10 minutes late is not rung.
+- **Asked at first need:** "Is this phone yours?" right after "Yes, Qalam is my school" (APK only; the learner's
+  `mine`); Yes leads to the notification explainer, then Android 13+'s own question; No says bells ring only while
+  Qalam is open. Settings → School day: "This phone is mine", "Bells when Qalam is closed" (`alarms`) and, when
+  notifications are off, "Allow notifications to ring bells". The camera is asked by the page's photo explainer
+  (P14) and granted only to the APK's own page; after a refusal Check my sheet offers "Open Settings".
+- **Updates:** `hello.apk {latest, min}` (`TUTOR_APK_LATEST`, `TUTOR_APK_MIN`; null when unset). Newer: Settings'
+  "Update Qalam". Below `min`: one full-screen "Please update Qalam" (`screens/update.js`); Download opens `/get` in
+  the phone's browser. The app never installs updates itself.
+- **`/get`** (`app/get/`): three pictured steps, a speaker on every line, the reader's language; the APK and
+  `apk.json` sit beside it once released (`tools/apk_record.py`), else it says the app is not ready. Settings → About
+  links it in an Android phone's browser only.
+- **CI:** `.github/workflows/tutor-android.yml`: the alarm plan's plain-Java test, then the debug APK and the
+  unsigned release APK as an artifact, with the permission list and the name checked. No secrets.
+
 ## Not built yet
 
-See [ROADMAP.md](ROADMAP.md): the Android app (lessons kept on the phone, recording yourself over plain http,
-finding the hub), speech input, recorded voices for lessons, updates by USB stick.
+See [ROADMAP.md](ROADMAP.md): speech input, recorded voices for lessons, updates by USB stick, the release key and
+Google's developer verification (D11).

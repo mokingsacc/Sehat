@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Qalam (P23, DESIGN-C2C3-SPECS item 15): exactly the permissions the spec lists, each asked at first need after the
+     page's explainer. None for storage, microphone, contacts or location; no REQUEST_INSTALL_PACKAGES (the app never
+     installs its own updates). -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- the village hub or the online home -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- photo marking: the first "Take a photo", after the page's explainer; only the app's own page gets it -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- the school day's bells when Qalam is closed (Android 13+ asks, after "This phone is mine") -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- bells on time: granted without asking on Android 13+; on 12 the older permission; never asked -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+    <!-- setting the alarms again after a restart -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- none of these are required: the app installs on phones without a camera -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Qalam"
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|navigation|uiMode|density|fontScale|locale|layoutDirection"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- the bell's alarm, and setting it again after a restart, a clock or time zone change, an update -->
+        <receiver
+            android:name=".AlarmReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

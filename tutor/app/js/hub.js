@@ -1,7 +1,10 @@
 // Talking to the village hub, or to the online home. Phones normally get this app from the server itself, so the
-// server is "this website"; the other addresses are for a copy of the app that came another way (the Android app
-// later, or a laptop test). An app from an https site never tries them: they are plain http.
+// server is "this website"; the other addresses are for a copy of the app that came another way (the Android app, or
+// a laptop test). An app from an https site never tries them, since they are plain http, except the Android app
+// (P23): its page is the APK's own, so it tries the hub's addresses (its network settings allow only those over
+// http) and then the online home it was built for.
 
+import * as android from './android.js';
 import { latin } from './numbers.js';
 import { cache } from './state.js';
 
@@ -28,6 +31,7 @@ export function home() {
   if (hello && (hello.home === 'online' || hello.home === 'hub')) return hello.home;
   const saved = cache('home');
   if (saved === 'online' || saved === 'hub') return saved;
+  if (android.isApp()) return android.onlineHome() ? 'online' : 'hub';
   return globalThis.location && location.protocol === 'https:' ? 'online' : 'hub';
 }
 
@@ -63,13 +67,16 @@ async function helloFrom(b, ms) {
 }
 
 export async function connect() {
-  // the app normally comes from the hub itself, so ask this website first
-  let ok = location.protocol.startsWith('http') && (await found(['']));
-  if (!ok && location.protocol !== 'https:') {
+  // the app normally comes from the hub itself, so ask this website first (never in the APK: its page is its own)
+  const app = android.isApp();
+  let ok = !app && location.protocol.startsWith('http') && (await found(['']));
+  if (!ok && (app || location.protocol !== 'https:')) {
     const tries = [];
     const saved = cache('hub');
-    if (saved) tries.push(saved);
+    const online = android.onlineHome();
+    if (saved && (!app || CANDIDATES.includes(saved))) tries.push(saved);   // in the APK the online home always comes last
     for (const c of CANDIDATES) if (!tries.includes(c) && location.origin !== c) tries.push(c);
+    if (online && !tries.includes(online)) tries.push(online);       // the village hub first, then the online home
     ok = await found(tries);
   }
   listeners.forEach((f) => f(ok));

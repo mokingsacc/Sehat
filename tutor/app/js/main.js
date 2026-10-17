@@ -5,6 +5,7 @@
 // Who is learning and the class code stay open without it. The teacher's pages are /teacher/, apart (P20).
 
 import * as account from './account.js';
+import * as android from './android.js';
 import * as bands from './bands.js';
 import * as events from './events.js';
 import { dir, htmlLang, s, setLang, setTone } from './i18n.js';
@@ -29,6 +30,7 @@ import settings from './screens/settings.js';
 import signup, { pendingCode } from './screens/signup.js';
 import subject from './screens/subject.js';
 import subjects from './screens/subjects.js';
+import update from './screens/update.js';
 import plan from './screens/plan.js';
 import welcome from './screens/welcome.js';
 import who from './screens/who.js';
@@ -79,8 +81,10 @@ async function route() {
   }
   if (account.useCohort()) hub.refresh().then(modulesChanged);     // another learner's class
   outbox.flush();                       // a join, consent, band or question waiting to be sent
-  const screen = SCREENS[name] || home;
-  applyLook(SCREENS[name] ? name : 'home');
+  // the Android app older than the server's apk.min: one full-screen card, "Please update Qalam" (P23)
+  const tooOld = android.apkState(hub.info() && hub.info().apk) === 'required' && name !== 'credits';
+  const screen = tooOld ? update : SCREENS[name] || home;
+  applyLook(SCREENS[name] && !tooOld ? name : 'home');
   let out;
   try {
     out = await screen(args);
