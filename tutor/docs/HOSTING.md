@@ -11,7 +11,7 @@ The village hub needs none of this: it is the same app under uvicorn on a small 
 | `/api/*`, `/v/*` (a certificate's check page, P25b) | Cloudflare Python Worker `qalam-staging` (the hub's own FastAPI app) | uvicorn |
 | Store | D1 `qalam-staging`, `eu` jurisdiction (`D1Store`) | SQLite file (`SqliteStore`) |
 | Migrations | applied by `D1Store.open()` on an isolate's first request, from the SQL in the bundle | applied by `SqliteStore.open()` |
-| AI | `fake` provider; the Worker has no secrets | the gateway, as configured |
+| AI | Claude (`anthropic`) when the Worker secret `ANTHROPIC_API_KEY` is set, else the `fake`; a cohort may pick its own provider in the admin panel ("The AI provider switch" below) | the gateway, as configured |
 | Print, teacher | off: the host lacks a printer and the teacher's PIN (`TUTOR_LACKS=printer,pin`) | on |
 | Address | `https://qalam-staging.<account>.workers.dev` only: no route, no custom domain | the hub's own address |
 
@@ -20,7 +20,38 @@ How it is built and deployed is in `ARCHITECTURE.md` ("Online: the Worker"). In 
 hub, migrations, manifests, cohorts and packs into a bundle; `.github/workflows/tutor-worker.yml` deploys it on every
 push of `tutor/` to the working branch, opens the store with `/api/hello`, runs `hub/tests/smoke_http.py` against the
 Worker and then `worker/measure.py`. The job only ever touches the Worker and the D1 database named `qalam-staging`,
-uses only `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, sets no Worker secrets and deletes nothing.
+uses only `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` (and `ANTHROPIC_API_KEY`, below), and deletes nothing.
+
+## The AI provider switch (17 Oct 2026)
+
+Every model call goes through the gateway (`hub/tutor_hub/ai/`), whichever provider answers: the identifier filter,
+the rules screen, the daily budget, the maths and leak checks and the `ai_usage` count apply to all of them.
+
+| Provider | Goes to | Key (a Worker secret or an environment variable, never D1 or the repository) | Default model |
+|---|---|---|---|
+| `anthropic` (Claude) | `https://api.anthropic.com` (Messages API) | `ANTHROPIC_API_KEY` | `TUTOR_ANTHROPIC_MODEL`, set in config.py |
+| `openai` | `https://api.openai.com` | `OPENAI_API_KEY` (or `TUTOR_LLM_KEY`) | `TUTOR_OPENAI_MODEL`, else `TUTOR_LLM_MODEL` |
+| `gemini` | `https://generativelanguage.googleapis.com` (its OpenAI-compatible endpoint) | `GEMINI_API_KEY` | `TUTOR_GEMINI_MODEL`, set in config.py |
+| `openai_compat` | `TUTOR_COMPAT_URL`: any OpenAI-compatible server over https (an open-weight Qwen or DeepSeek model on a host such as Together or Groq, a provider's own endpoint) or on the hub's network | `TUTOR_COMPAT_API_KEY` | `TUTOR_COMPAT_MODEL` |
+| `local` | the hub's own model server (`TUTOR_LLM_URL`) | none | `TUTOR_LLM_MODEL` |
+| `fake` | nowhere (scripted practice answers) | none | |
+
+Each provider's own terms apply and no code gate stands for them: Anthropic's and Google's lists of supported
+countries do not include Afghanistan, and the Gemini API's terms bar services likely to be used by people under 18.
+
+- **Staging's default** is `TUTOR_AI_PROVIDER = "anthropic,fake"` in `worker/wrangler.toml`: Claude once the Worker
+  has `ANTHROPIC_API_KEY`, the fake until then (the fallback container's Dockerfile says the same). The deploy job sets
+  that secret on `qalam-staging` when the repository has an Actions secret of the same name (piped to `wrangler secret
+  put`, never printed) and says "staging's AI stays on the fake" when it has none; the job stays green either way. To
+  set it by hand instead, once, from `tutor/worker`: `npx wrangler secret put ANTHROPIC_API_KEY --name qalam-staging`
+  (it asks for the key; the next request uses it).
+- **Per cohort**, in the admin panel: Cohorts, the cohort, "AI provider", Edit: pick the provider (or "the hub's"),
+  type a model or leave it empty for the provider's default, Save. The change is in `admin_log` and is used from the
+  next question, with no redeploy; the card says, for each provider, only "key set" or "key not set". A provider
+  whose key is missing is simply off for that cohort. Online the admin panel needs the Access steps below first.
+- **An OpenAI-compatible host:** add `TUTOR_COMPAT_URL` (for example `https://api.together.xyz/v1`) and
+  `TUTOR_COMPAT_MODEL` to `[vars]` (neither is a secret), and `npx wrangler secret put TUTOR_COMPAT_API_KEY --name
+  qalam-staging`; then pick `openai_compat` for a cohort. Gemini and OpenAI need only their key as a secret.
 
 ## Where the spike ran
 

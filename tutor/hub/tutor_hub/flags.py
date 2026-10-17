@@ -24,6 +24,7 @@ import re
 from pathlib import Path
 
 from . import timetable
+from .ai.policy import PROVIDERS
 from .modules import BANDS, MATURITY, risk
 
 log = logging.getLogger("tutor.flags")
@@ -36,8 +37,11 @@ SEEDS = ("hub", "staging", "open")
 # a cohort's settings (BUILD-PLAN 3.3), each checked here: the maturities it takes; its school-day timetable (P19:
 # "default" or a template, timetable.py); since P21, `ai` (false is the kill switch "AI off"; unset counts as on),
 # `ai_budget` (AI tokens a UTC day for this cohort, instead of TUTOR_AI_BUDGET) and `moderation` (who reads what
-# learners send: none, teacher or paid-human; only paid-human lets a blocked capability on)
-SETTINGS = ("maturity", "timetable", "ai", "ai_budget", "moderation")
+# learners send: none, teacher or paid-human; only paid-human lets a blocked capability on); since the AI provider
+# switch (17 Oct 2026), `ai_provider` and `ai_model`: the cohort's own provider (ai/policy.py PROVIDERS) and model,
+# instead of the hub's default. Never a key: keys are Worker secrets or environment variables
+SETTINGS = ("maturity", "timetable", "ai", "ai_budget", "moderation", "ai_provider", "ai_model")
+MODEL_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/@-]{0,99}$")
 MODERATION = ("none", "teacher", "paid-human")
 AI_BUDGET_MAX = 10_000_000
 # F4: a cohort's label names no one. Words that would say who is in it, in English and (drafts for a native
@@ -78,6 +82,10 @@ def settings_problems(s) -> list[str]:
         p.append(f"settings.ai_budget is a whole number of tokens from 0 to {AI_BUDGET_MAX}")
     if "moderation" in s and s["moderation"] not in MODERATION:
         p.append(f"settings.moderation is one of {', '.join(MODERATION)}")
+    if "ai_provider" in s and s["ai_provider"] not in PROVIDERS:
+        p.append(f"settings.ai_provider is one of {', '.join(PROVIDERS)}")
+    if "ai_model" in s and not (isinstance(s["ai_model"], str) and MODEL_ID.match(s["ai_model"])):
+        p.append("settings.ai_model is a model name: letters, digits and . _ : / @ -, at most 100")
     return p
 
 

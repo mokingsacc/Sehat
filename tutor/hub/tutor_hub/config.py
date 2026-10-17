@@ -37,10 +37,22 @@ class Config:
     cohort: str | None = None                             # this hub's cohort id; empty = the one in cohorts/hub.json
     llm_url: str | None = None                            # e.g. http://127.0.0.1:8081/v1 (llama-server)
     llm_model: str = "local"
-    llm_key: str | None = None
+    llm_key: str | None = field(default=None, repr=False)
     llm_timeout: float = 60.0
     ai_langs: tuple = ("prs", "en")                       # Pashto joins when its answers test well (docs/ROADMAP.md)
-    ai_provider: str | None = None                        # off, local, openai or fake; empty = local if llm_url is set
+    ai_provider: str | None = None                        # the hub's default provider (ai/policy.py PROVIDERS, or off);
+                                                          # empty = local if llm_url is set. A cohort may pick its
+                                                          # own in the admin panel (settings.ai_provider, ai_model)
+    openai_model: str | None = None                       # each provider's default model; empty = llm_model
+    anthropic_model: str = "claude-haiku-5-5"
+    gemini_model: str = "gemini-3.8-flash"
+    compat_url: str | None = None                         # openai_compat: the chat server's base URL, e.g. .../v1
+    compat_model: str | None = None
+    # API keys: Worker secrets or environment variables only, never in D1, the repository or any API answer
+    openai_key: str | None = field(default=None, repr=False)        # OPENAI_API_KEY (else TUTOR_LLM_KEY)
+    anthropic_key: str | None = field(default=None, repr=False)     # ANTHROPIC_API_KEY
+    gemini_key: str | None = field(default=None, repr=False)        # GEMINI_API_KEY
+    compat_key: str | None = field(default=None, repr=False)        # TUTOR_COMPAT_API_KEY
     ai_budget: int | None = 300_000                       # AI tokens per cohort per UTC day; empty = no cap, 0 = no AI
     print_backend: str = "auto"                           # cups, outbox, or auto (cups if installed)
     printer: str | None = None                            # CUPS queue name; empty = the system default
@@ -85,6 +97,15 @@ class Config:
             llm_timeout=float(_env("TUTOR_LLM_TIMEOUT", cls.llm_timeout)),
             ai_langs=tuple(x.strip() for x in _env("TUTOR_AI_LANGS", "prs,en").split(",") if x.strip()),
             ai_provider=_env("TUTOR_AI_PROVIDER"),
+            openai_model=_env("TUTOR_OPENAI_MODEL"),
+            anthropic_model=_env("TUTOR_ANTHROPIC_MODEL", cls.anthropic_model),
+            gemini_model=_env("TUTOR_GEMINI_MODEL", cls.gemini_model),
+            compat_url=_env("TUTOR_COMPAT_URL"),
+            compat_model=_env("TUTOR_COMPAT_MODEL"),
+            openai_key=_env("OPENAI_API_KEY"),
+            anthropic_key=_env("ANTHROPIC_API_KEY"),
+            gemini_key=_env("GEMINI_API_KEY"),
+            compat_key=_env("TUTOR_COMPAT_API_KEY"),
             ai_budget=_budget(os.environ.get("TUTOR_AI_BUDGET")),
             print_backend=_env("TUTOR_PRINT", cls.print_backend),
             printer=_env("TUTOR_PRINTER"),

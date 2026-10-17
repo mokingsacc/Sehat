@@ -35,6 +35,7 @@ for k, v in json.loads((HERE / "vars.json").read_text(encoding="utf-8")).items()
 
 from workers import asgi, import_from_javascript  # noqa: E402
 
+from tutor_hub.ai import make_provider  # noqa: E402
 from tutor_hub.config import Config  # noqa: E402
 from tutor_hub.server import create_app  # noqa: E402
 from tutor_hub.staff import mode_of as staff_mode  # noqa: E402
@@ -53,6 +54,10 @@ def _env():
 # place (docs/HOSTING.md); without all three the staff gate stays off. Bindings exist only from the first request.
 STAFF_SETTINGS = (("TUTOR_ACCESS_TEAM", "access_team"), ("TUTOR_ACCESS_AUD", "access_aud"),
                   ("TUTOR_STAFF_PEPPER", "staff_pepper"))
+# the AI providers' keys (the AI provider switch, docs/HOSTING.md): Worker secrets Mo sets with `wrangler secret
+# put`; a cohort picks its provider in the admin panel. Read from the env here, never from D1 or vars
+KEY_SETTINGS = (("OPENAI_API_KEY", "openai_key"), ("ANTHROPIC_API_KEY", "anthropic_key"),
+                ("GEMINI_API_KEY", "gemini_key"), ("TUTOR_COMPAT_API_KEY", "compat_key"))
 
 
 async def _start():
@@ -60,11 +65,14 @@ async def _start():
     env = _env()
     store.db = env.DB
     hub = app.state.hub
-    for name, attr in STAFF_SETTINGS:
+    for name, attr in STAFF_SETTINGS + KEY_SETTINGS:
         v = getattr(env, name, None)
         if isinstance(v, str) and v:
             setattr(hub.cfg, attr, v)
     hub.staff.mode = staff_mode(hub.cfg)
+    # the hub's default provider was made at import, before the secrets could be read: made again with them
+    await hub.gateway.aclose()
+    hub.gateway.provider = make_provider(hub.cfg)
     await hub.start()
     _started = True
 

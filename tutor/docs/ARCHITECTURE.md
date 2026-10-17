@@ -297,11 +297,15 @@ Nothing calls a model except through `ai/gateway.py`; `brain.py` asks it for the
 
 - **Policy** (`ai/policy.py`, code, not configuration): learner purposes (`explain`, `hint`, `read_sheet`, `plan`,
   `screen`) may go to `local` (a model server on the hub's own network only), `openai` (only
-  `https://api.openai.com`) or `fake`. Any other provider, and any Anthropic or Google host whatever the provider is
-  called, raises `PolicyError`: at start-up the hub refuses to start, and each provider checks again before a call.
-  A module may use only the purposes its manifest lists.
-- **Choosing:** `TUTOR_AI_PROVIDER` (`local` when `TUTOR_LLM_URL` is set, else `off`; `openai`; `fake` for tests and
-  for staging until a key exists). `openai` without a key is simply off and is never pinged.
+  `https://api.openai.com`), `anthropic` (only `https://api.anthropic.com`), `gemini` (only
+  `https://generativelanguage.googleapis.com`), `openai_compat` (`TUTOR_COMPAT_URL`, https or the hub's network) or
+  `fake`. Any other provider, or a provider sent to a host not its own, raises `PolicyError`: at start-up the hub
+  refuses to start, and each provider checks again before a call. A module may use only the purposes its manifest
+  lists.
+- **Choosing:** `TUTOR_AI_PROVIDER` is the hub's default (`local` when `TUTOR_LLM_URL` is set, else `off`; a list
+  such as staging's `anthropic,fake` takes the first whose key is set). A cohort may pick its own provider and model
+  in the admin panel (settings `ai_provider`, `ai_model`), read at each call. An online provider without its key is
+  simply off and is never pinged. Keys are Worker secrets or environment variables (HOSTING.md).
 - **Pictures.** `call(..., images=[jpeg bytes])` passes pictures to the provider. The OpenAI provider puts them in
   the last user message as `image_url` parts (data URIs, never an uploaded file) and asks the provider not to keep
   the request (`store: false`); the fake reads them by hash. `read_sheet` skips the rules screen (its text is our own

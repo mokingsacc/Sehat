@@ -12,22 +12,45 @@ from tutor_hub.ai.fake import FakeProvider
 from tutor_hub.ai.providers import HttpProvider
 from tutor_hub.server import create_app
 
-REFUSED_URLS = ["https://api.anthropic.com/v1", "https://claude.ai/api", "https://generativelanguage.googleapis.com/v1",
-                "https://us-central1-aiplatform.googleapis.com/v1", "https://gemini.google.com",
-                "https://www.google.com", "http://anthropic-proxy.lan/v1"]
+# the AI provider switch (17 Oct 2026): any provider may serve any cohort, but each goes only to its own host
+OTHER_HOSTS = ["https://api.anthropic.com/v1", "https://claude.ai/api", "https://generativelanguage.googleapis.com/v1",
+               "https://api.example.com/v1", "https://api.openai.com.example.com/v1"]
 
 
 # the policy
 
-@pytest.mark.parametrize("url", REFUSED_URLS)
+@pytest.mark.parametrize("url", OTHER_HOSTS)
 @pytest.mark.parametrize("purpose", policy.PURPOSES)
 @pytest.mark.parametrize("provider", ["openai", "local", "fake"])
-def test_anthropic_and_google_hosts_raise_for_every_learner_purpose(url, purpose, provider):
+def test_a_provider_goes_only_to_its_own_host_for_every_learner_purpose(url, purpose, provider):
     with pytest.raises(PolicyError):
         policy.check(provider, url, purpose)
 
 
-@pytest.mark.parametrize("name", ["anthropic", "claude", "google", "gemini", "vertex", "other"])
+@pytest.mark.parametrize("provider,home", [("openai", policy.OPENAI_URL), ("anthropic", policy.ANTHROPIC_URL),
+                                           ("gemini", policy.GEMINI_URL)])
+def test_each_online_provider_has_one_https_home(provider, home):
+    for purpose in policy.PURPOSES:
+        policy.check(provider, home, purpose)
+    for url in (home.replace("https://", "http://"), "https://api.example.com/v1", "http://127.0.0.1:8081/v1", None):
+        with pytest.raises(PolicyError):
+            policy.check(provider, url, "explain")
+
+
+@pytest.mark.parametrize("url,ok", [("https://api.together.example/v1", True), ("https://api.deepseek.com/v1", True),
+                                    ("https://dashscope.aliyuncs.com/compatible-mode/v1", True),
+                                    ("https://generativelanguage.googleapis.com/v1beta/openai", True),
+                                    ("http://127.0.0.1:8081/v1", True), ("http://modelbox.lan/v1", True),
+                                    ("http://api.example.com/v1", False), (None, False)])
+def test_openai_compatible_goes_anywhere_over_https_or_on_the_hubs_network(url, ok):
+    if ok:
+        policy.check("openai_compat", url, "hint")
+    else:
+        with pytest.raises(PolicyError):
+            policy.check("openai_compat", url, "hint")
+
+
+@pytest.mark.parametrize("name", ["claude", "google", "vertex", "other"])
 def test_other_providers_are_refused(cfg, name):
     cfg.ai_provider = name
     with pytest.raises(PolicyError):
@@ -36,14 +59,14 @@ def test_other_providers_are_refused(cfg, name):
 
 @pytest.mark.parametrize("provider,url", [("local", "https://api.anthropic.com/v1"),
                                           ("openai", "https://generativelanguage.googleapis.com/v1beta/openai")])
-def test_a_hub_configured_for_a_refused_host_does_not_start(cfg, provider, url):
+def test_a_hub_configured_for_a_host_not_its_providers_does_not_start(cfg, provider, url):
     cfg.ai_provider, cfg.llm_url = provider, url
     with pytest.raises(PolicyError):
         create_app(cfg)
 
 
 @pytest.mark.anyio
-async def test_a_refused_host_raises_at_call_time_too_and_nothing_is_sent():
+async def test_a_wrong_host_raises_at_call_time_too_and_nothing_is_sent():
     p = HttpProvider("local", "http://127.0.0.1:8081/v1", "current", 5)
     p.url = "https://api.anthropic.com/v1"              # changed after start-up
     with pytest.raises(PolicyError):

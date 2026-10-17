@@ -11,6 +11,7 @@ from types import ModuleType, SimpleNamespace
 import httpx
 import pytest
 
+from tutor_hub.ai import make_provider
 from fakes.d1 import FakeD1, Statement, ffi as fake_ffi
 from tutor_hub.stores import D1Store
 
@@ -43,11 +44,15 @@ def test_wrangler_toml_creates_nothing_else():
     assert "binding" not in WRANGLER["assets"]
 
 
-def test_staging_runs_the_staging_cohort_on_the_fake_ai_without_printer_or_pin():
+def test_staging_runs_the_staging_cohort_on_claude_with_its_key_else_the_fake_without_printer_or_pin(cfg):
     v = WRANGLER["vars"]
     staging = json.loads((TUTOR / "cohorts" / "staging.json").read_text(encoding="utf-8"))
     assert v["TUTOR_COHORT"] == staging["id"]
-    assert v["TUTOR_AI_PROVIDER"] == "fake"
+    assert v["TUTOR_AI_PROVIDER"] == "anthropic,fake"            # the owner's choice, 17 Oct 2026
+    cfg.ai_provider, cfg.anthropic_key = v["TUTOR_AI_PROVIDER"], None
+    assert make_provider(cfg).name == "fake"
+    cfg.anthropic_key = "sk-test-not-real"
+    assert make_provider(cfg).name == "anthropic"
     assert v["TUTOR_HOME"] == "online"                                   # the online consent text
     assert set(v["TUTOR_LACKS"].split(",")) == {"printer", "pin"}
     assert not any(k for k in v if "KEY" in k or "TOKEN" in k or "SECRET" in k or "PIN" in k)
@@ -62,14 +67,21 @@ def test_the_worker_asks_only_for_packages_the_hub_already_uses():
 
 def test_the_deploy_workflow_keeps_to_its_own_worker():
     wf = (TUTOR.parent / ".github" / "workflows" / "tutor-worker.yml").read_text(encoding="utf-8")
-    assert set(re.findall(r"secrets\.([A-Z_]+)", wf)) == {"CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID"}
+    assert set(re.findall(r"secrets\.([A-Z_]+)", wf)) == {"CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID",
+                                                         "ANTHROPIC_API_KEY"}
     assert "NAME: qalam-staging" in wf and "branches: [claude/project-thread-sbgfoh]" in wf
     call = re.compile(r"(\$W|npx --no-install wrangler|pywrangler) [a-z]")
     commands = [l for l in wf.splitlines() if call.search(l) and not l.strip().startswith(("#", "msg=", "echo"))]
     assert any("d1 create" in l for l in commands) and any("pywrangler deploy" in l for l in commands)
-    for l in commands:                  # every call to Cloudflare: never Sehat's, never a delete, a secret or a route
-        for word in ("delete", "secret", "r2 ", "kv", "route", "domain", "migrations", "sehat", "fhb"):
+    # one secret only: Claude's key, put on qalam-staging from the repository secret, piped and never printed
+    puts = [l for l in commands if "secret" in l.lower()]
+    assert len(puts) == 1 and 'printf \'%s\' "$ANTHROPIC_API_KEY" | npx --no-install wrangler secret put ' \
+        'ANTHROPIC_API_KEY --name "$NAME" > secret.log' in puts[0], puts
+    assert not any("echo" in l and "$ANTHROPIC_API_KEY" in l for l in wf.splitlines())     # never printed
+    for l in commands:                  # every call to Cloudflare: never Sehat's, never a delete or a route
+        for word in ("delete", "r2 ", "kv", "route", "domain", "migrations", "sehat", "fhb"):
             assert word not in l.lower(), (word, l)
+        assert "secret" not in l.lower() or l in puts
         if re.search(r"(\$W|wrangler) d1 ", l):
             assert "$NAME" in l or "d1 list" in l, l
 
@@ -284,6 +296,22 @@ async def test_staff_pages_stay_off_until_the_three_access_secrets_are_set(worke
     async with client(worker) as c:
         assert (await c.get("/api/m/review/me")).status_code == 401    # now it asks for Access's token
     assert worker.app.state.hub.staff.mode == "access"
+
+
+async def test_staging_ai_is_the_fake_until_claudes_key_is_a_worker_secret_and_the_key_is_never_served(worker):
+    async with client(worker) as c:
+        assert (await c.get("/api/hello")).json()["ai"]["on"] is True
+    assert worker.app.state.hub.gateway.provider.name == "fake"
+    worker._started = False                                             # a new isolate, after the deploy job's put
+    env = sys.modules["workers"].import_from_javascript("cloudflare:workers").env
+    env.ANTHROPIC_API_KEY = "sk-ant-NOT-REAL-5555"
+    async with client(worker) as c:
+        r = await c.get("/api/hello")
+    hub = worker.app.state.hub
+    assert hub.gateway.provider.name == "anthropic" and hub.cfg.anthropic_key == env.ANTHROPIC_API_KEY
+    assert r.json()["ai"]["on"] is True and env.ANTHROPIC_API_KEY not in r.text
+    dump = "\n".join(repr(tuple(row)) for row in worker.db.sqlite.execute("SELECT * FROM cohorts"))
+    assert env.ANTHROPIC_API_KEY not in dump
 
 
 async def test_the_daily_cron_prunes_expired_reset_codes_old_wishes_and_old_logs(worker):

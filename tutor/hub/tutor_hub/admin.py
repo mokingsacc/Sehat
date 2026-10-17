@@ -18,8 +18,10 @@ Every change is logged with the admin's label: a module switch in `flag_log` (as
 - `POST /api/m/admin/cohorts/{id}/flags/{module}` `{enabled, settings?, confirm?, both?}`: a module on or off and its
   settings. A medium- or high-risk module needs `confirm`; a module whose dependencies are off needs `both`; a
   blocked capability needs paid-human moderation; a maturity the cohort does not take is refused. 409 says which.
-- `POST /api/m/admin/cohorts/{id}/settings` `{settings}`: the cohort's settings (budget, moderation, maturity, and
-  the school day's timetable: "default" or the cohort's own template, checked by timetable.check).
+- `POST /api/m/admin/cohorts/{id}/settings` `{settings}`: the cohort's settings (budget, moderation, maturity, the
+  school day's timetable: "default" or the cohort's own template, checked by timetable.check; and its AI provider
+  and model, `ai_provider` and `ai_model`, used from the next request). The cohort's page says which providers have
+  their key set, as true or false: a key is a Worker secret or an environment variable, never shown or stored.
 - `POST /api/m/admin/cohorts/{id}/code`: a new class code, shown once (the old one stops working);
   `POST .../cards` `{code}`: the class cards' address and QR (eight to an A4 page, nothing else on them).
 - `GET  /api/m/admin/content`: packs, their lessons' sign-offs per role, what blocks a release, each cohort's
@@ -45,6 +47,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from . import flags, gates, learners, modules, packs, qr, timetable
+from .ai import policy
+from .ai.providers import keys_set
 from .modules import BANDS
 from .staff import id_hash
 from .stores.base import WISH_STATUS
@@ -288,8 +292,19 @@ def router(hub) -> APIRouter:
                 "budget": hub.gateway.budget, "cap": cap, "spend": dict(spend, pct=pct(spend["tokens"], cap)),
                 "gate": photo_gate() if cid == open_id() else None,
                 "modules": rows, "moderation": flags.MODERATION, "maturities": modules.MATURITY,
+                "ai_choice": ai_choice(),
                 "timetable": {"default": timetable.DEFAULT, "days": timetable.DAYS, "kinds": timetable.KINDS,
                               "bands": timetable.BANDS, "subjects": timetable.SUBJECTS}}
+
+    def ai_choice() -> dict:
+        """The AI provider switch: the providers, the hub's default, each provider's default model, and which keys
+        are set (true or false, never a key)."""
+        p, cfg = hub.gateway.provider, hub.cfg
+        return {"providers": list(policy.PROVIDERS), "default": p.name if p is not None else "off",
+                "models": {"openai": cfg.openai_model or cfg.llm_model, "anthropic": cfg.anthropic_model,
+                           "gemini": cfg.gemini_model, "openai_compat": cfg.compat_model, "local": cfg.llm_model,
+                           "fake": "fake"},
+                "keys": keys_set(cfg), "compat_host": policy.host_of(cfg.compat_url) if cfg.compat_url else None}
 
     async def kill_one(me, c: dict, switch: str, on: bool):
         if switch == "ai":
@@ -383,6 +398,10 @@ def router(hub) -> APIRouter:
                 new[k] = v
         if p := flags.settings_problems(new):
             raise HTTPException(422, "; ".join(p))
+        try:
+            hub.gateway.provider_for(new)             # a provider this hub cannot make is refused here, not at a call
+        except policy.PolicyError as e:
+            raise HTTPException(422, str(e)) from None
         line = diff_line(c["settings"], new)
         if line:
             await hub.store.set_cohort_settings(cid, new)

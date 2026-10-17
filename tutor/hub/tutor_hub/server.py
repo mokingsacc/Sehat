@@ -165,7 +165,8 @@ class Hub:
         self.cohort_id = cfg.cohort or (self.seeds.get("hub") or {}).get("id")
         # the AI gateway: a provider the policy refuses stops the hub here, before it serves anyone
         self.gateway = Gateway(make_provider(cfg), store=self.store, manifests=self.modules, ai_langs=cfg.ai_langs,
-                               budget=cfg.ai_budget, timeout=cfg.llm_timeout, cohort=self.cohort_id)
+                               budget=cfg.ai_budget, timeout=cfg.llm_timeout, cohort=self.cohort_id,
+                               make=lambda name, model: make_provider(self.cfg, name, model))
         self._ix_lock = asyncio.Lock()
         self.brain = Brain(None, self.gateway, self.library)     # the search index is built in start()
         self.printer = Printer("off" if "printer" in cfg.lacks else cfg.print_backend, cfg.printer,
@@ -361,7 +362,7 @@ class Hub:
         cohort, f, on = await self.cohort_modules(cohort_id, band)
         if cohort_id and not cohort:
             raise HTTPException(404, "no such cohort")
-        ai_on = await self.gateway.available() and flags.ai_on(cohort)    # the cohort's kill switch (P21)
+        ai_on = await self.gateway.available(cohort) and flags.ai_on(cohort)    # the cohort's kill switch (P21)
         mods = []
         for mid in on:
             m = self.modules[mid]

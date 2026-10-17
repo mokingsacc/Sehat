@@ -64,7 +64,7 @@ def test_a_cohort_file_with_a_broken_timetable_is_refused():
     c["settings"]["timetable"] = {"days": ["fri"], "bands": {"p1": {"start": "25:00", "blocks": []}}}
     assert any(x.startswith("settings.timetable.bands.p1") for x in flags.check_cohort(c))
     c["settings"] = {"bells": "loud"}
-    assert flags.check_cohort(c) == ["settings may only hold maturity, timetable, ai, ai_budget, moderation for now"]
+    assert flags.check_cohort(c) == [f"settings may only hold {', '.join(flags.SETTINGS)} for now"]
 
 
 # the route

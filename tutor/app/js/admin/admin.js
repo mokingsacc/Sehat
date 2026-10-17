@@ -45,6 +45,10 @@ const T = {
     r_none: 'none', r_medium: 'medium', r_high: 'high', r_blocked: 'blocked',
     cohort_settings: 'Settings', budget: 'AI tokens a day', budget_hub: 'the hub’s ({n})', moderation: 'Moderation',
     m_none: 'none', m_teacher: 'a teacher', 'm_paid-human': 'paid human moderation', maturities: 'Takes modules',
+    ai_provider: 'AI provider', provider: 'Provider', model: 'Model', p_hub: 'the hub’s ({p})',
+    model_hint: 'Empty: the provider’s default. Takes effect on the next question, no redeploy.',
+    key_set: 'key set', key_unset: 'key not set', p_openai: 'OpenAI', p_anthropic: 'Claude (Anthropic)',
+    p_gemini: 'Gemini (Google)', p_openai_compat: 'OpenAI-compatible', p_local: 'this hub’s model', p_fake: 'test AI (fake)', p_off: 'off',
     ai_today: 'AI today', calls: '{n} calls', est: 'about {c}', no_cap: 'no cap',
     packs: 'Packs', version: 'version {v}', signed_of: '{a}/{b}', lessons: 'Lessons', problems: 'What blocks a release',
     release: 'Release', none_yet: 'not released', current: 'current', older: 'not the current files', publish: 'Publish',
@@ -92,6 +96,10 @@ const T = {
     code: 'کد صنف', print: 'چاپ', modules: 'بخش‌ها', module: 'بخش', risk: 'خطر', maturity: 'آمادگی', on: 'روشن',
     settings: 'تنظیمات', turn_on: 'روشن کن', turn_on_both: 'هر دو را روشن کن', edit: 'تغییر', save: 'ذخیره',
     diff_q: 'این تغییرها ذخیره شود؟', no_change: 'چیزی تغییر نکرد.', cohort_settings: 'تنظیمات',
+    // the AI provider switch: drafts for a native speaker's check
+    ai_provider: 'فراهم‌کنندهٔ هوش مصنوعی', provider: 'فراهم‌کننده', model: 'مدل', key_set: 'کلید گذاشته شده',
+    key_unset: 'کلید گذاشته نشده', p_hub: 'پیش‌فرض مرکز ({p})', p_fake: 'هوش مصنوعی آزمایشی',
+    model_hint: 'خالی: مدل پیش‌فرض همین فراهم‌کننده. از سوال بعدی اثر می‌کند.',
     publish: 'نشر کن', rollback: 'برگردان', notes: 'یادداشت‌های بازبین', planned: 'در برنامه', not_for_qalam: 'برای قلم نیست',
     new: 'تازه', remove: 'حذف', add_staff: 'کسی را اضافه کن', when: 'وقت', what: 'چه', who: 'توسط', today_n: 'امروز {n}',
     w_module: 'روشن یا خاموش کردن بخش', 'w_cohort.new': 'گروه تازه', 'w_cohort.settings': 'تنظیمات', 'w_cohort.kill': 'کلید قطع',
@@ -333,6 +341,7 @@ async function drawCohort(cid) {
       h('button', { type: 'button', class: 'chip', onClick: cardsFromCode }, t('class_cards'))),
     h('h3', {}, t('modules')), moduleTable(c, again),
     cohortSettings(c, again),
+    aiProvider(c, again),
     schoolDay(c),
     h('section', { class: 'card stack' }, h('b', {}, t('ai_today')),
       h('div', { class: 'bar spendbar' + (s.pct >= 80 ? ' warn' : '') }, h('span', { style: `width:${Math.min(100, s.pct || 0)}%` })),
@@ -426,6 +435,39 @@ function cohortSettings(c, again) {
   };
   return h('section', { class: 'card row wrap' }, h('b', {}, t('cohort_settings') + ':'), h('span', { class: 'grow' }, line),
     h('button', { type: 'button', class: 'chip', onClick: edit }, t('edit')));
+}
+
+// --- the AI provider switch: a cohort's own provider and model, from the next request; keys only as set or not set ---
+
+function aiProvider(c, again) {
+  const s = c.settings;
+  const a = c.ai_choice;
+  const pName = (x) => t('p_' + x);
+  const now = s.ai_provider || a.default;
+  const keyLine = ['openai', 'anthropic', 'gemini', 'openai_compat']
+    .map((x) => `${pName(x)} ${t(a.keys[x] ? 'key_set' : 'key_unset')}`).join(' · ');
+  const line = [`${s.ai_provider ? pName(s.ai_provider) : t('p_hub', { p: pName(a.default) })}`,
+    `${t('model')}: ${s.ai_model || a.models[now] || '-'}`].join(' · ');
+  const edit = async () => {
+    const prov = h('select', { 'aria-label': t('provider') }, h('option', { value: '', selected: !s.ai_provider }, t('p_hub', { p: pName(a.default) })),
+      a.providers.map((x) => h('option', { value: x, selected: s.ai_provider === x }, pName(x))));
+    const model = h('input', { class: 'ainput', dir: 'ltr', value: s.ai_model || '', placeholder: a.models[now] || '', 'aria-label': t('model') });
+    prov.addEventListener('change', () => { model.placeholder = a.models[prov.value || a.default] || ''; });
+    const form = h('div', { class: 'stack' }, h('label', {}, t('provider')), prov, h('label', {}, t('model')), model,
+      h('small', {}, t('model_hint')), h('small', {}, keyLine),
+      a.compat_host ? h('small', {}, `${pName('openai_compat')}: `, m(a.compat_host)) : null);
+    if (!(await ask(t('ai_provider'), [], [[t('save'), true]], form))) return;
+    const want = { ai_provider: prov.value || null, ai_model: model.value.trim() || null };
+    const lines = diffLines({ ai_provider: s.ai_provider ?? null, ai_model: s.ai_model ?? null }, want);
+    if (!lines.length) { toast(t('no_change')); return; }
+    if (!(await ask(t('diff_q'), lines, [[t('save'), true]]))) return;
+    try { await api(`/cohorts/${c.id}/settings`, { method: 'POST', body: { settings: want } }); toast(t('saved')); } catch (e) { failed(e); }
+    again();
+  };
+  return h('section', { class: 'card stack' },
+    h('div', { class: 'row wrap' }, h('b', {}, t('ai_provider') + ':'), h('span', { class: 'grow', dir: 'auto' }, line),
+      h('button', { type: 'button', class: 'chip', onClick: edit }, t('edit'))),
+    h('small', {}, keyLine));
 }
 
 // --- the school day's timetable (P19's setting; edited here since P21): the default, or the cohort's own template ---

@@ -1,5 +1,9 @@
 """The AI gateway: the only way any part of Qalam reaches a model (BUILD-PLAN 3.7).
 
+The provider is the cohort's own choice when the admin panel set one (settings `ai_provider` and `ai_model`, read
+at each call, so a change takes effect on the next request), else the hub's default (TUTOR_AI_PROVIDER). Every
+provider passes the same checks below: the identifier filter, the rules screen and the budget.
+
 Before a call, in order: the purpose must be one the module's manifest lists and the provider and host must pass the
 policy (both raise PolicyError: a coding or configuration mistake, never a learner's); then, each a quiet "no AI
 this time" that sends the question on to the next source: no provider or it is down, a language the AI is not
@@ -57,8 +61,11 @@ def today() -> str:
 
 class Gateway:
     def __init__(self, provider: Provider | None, *, store=None, manifests: dict | None = None,
-                 ai_langs=("prs", "en"), budget: int | None = None, timeout: float = 60.0, cohort: str | None = None):
-        self.provider = provider
+                 ai_langs=("prs", "en"), budget: int | None = None, timeout: float = 60.0, cohort: str | None = None,
+                 make=None):
+        self.provider = provider                 # the hub's default
+        self.make = make                         # (name, model) -> Provider | None: a cohort's own choice
+        self._made: dict[tuple, Provider | None] = {}
         self.store = store                       # None: no budget and no usage rows (unit tests)
         self.manifests = manifests               # None: every purpose allowed (unit tests)
         self.ai_langs = tuple(ai_langs)
@@ -67,12 +74,31 @@ class Gateway:
         self.cohort = cohort                     # the hub's own cohort, when a call names none
         self.on_drop = None                      # async (why, cohort): a reply dropped by the leak or maths check
 
-    async def available(self) -> bool:
-        return self.provider is not None and await self.provider.available()
+    def provider_for(self, settings: dict | None) -> Provider | None:
+        """The cohort's provider: its `ai_provider` and `ai_model` when set, else the hub's default. Made once per
+        choice and kept; raises PolicyError for a choice the policy refuses."""
+        s = settings or {}
+        name, model = s.get("ai_provider"), s.get("ai_model") or None
+        p = self.provider
+        if not name or self.make is None or (p is not None and name == p.name and not model):
+            return p
+        if (name, model) not in self._made:
+            self._made[(name, model)] = self.make(name, model)
+        return self._made[(name, model)]
+
+    async def available(self, cohort: dict | None = None) -> bool:
+        """Is there a provider for this cohort (a cohort row, or None for the hub's default) and is it up?"""
+        try:
+            p = self.provider_for((cohort or {}).get("settings"))
+        except policy.PolicyError as e:
+            log.warning("cohort %s has an AI provider the policy refuses: %s", (cohort or {}).get("id"), e)
+            return False
+        return p is not None and await p.available()
 
     async def aclose(self):
-        if self.provider is not None:
-            await self.provider.aclose()
+        for p in {id(x): x for x in [self.provider, *self._made.values()] if x is not None}.values():
+            await p.aclose()
+        self._made.clear()
 
     def _allowed(self, module: str, purpose: str):
         if purpose not in policy.PURPOSES:
@@ -110,7 +136,9 @@ class Gateway:
         """`held`: the reply waits for the teacher before the learner sees it (the cohort's hold setting, P20); the
         call is counted in `ai_usage.held` as well as in calls."""
         self._allowed(module, purpose)
-        p = self.provider
+        cohort = cohort or self.cohort
+        settings = await self.settings(cohort)
+        p = self.provider_for(settings)
         if p is None:
             return Result(None, "off")
         policy.check(p.name, p.url, purpose)
@@ -121,8 +149,6 @@ class Gateway:
         # of tiles, and the strip, which holds digits she wrote in boxes
         if purpose not in UNSCREENED and any(rules.screen(_text(m.get("content"))) for m in said):
             return Result(None, "rules")
-        cohort = cohort or self.cohort
-        settings = await self.settings(cohort)
         if settings.get("ai", True) is False:            # the cohort's kill switch (P21): silent, like the budget
             return Result(None, "off")
         if await self.over_budget(cohort, settings):

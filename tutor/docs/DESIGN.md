@@ -544,6 +544,15 @@ mm (y 34 to 264), with 4 mm between rows; a sheet whose rows need more fails the
   words rather than its fixed word; whether the kill switches should stay visible while the module table scrolls on a
   laptop; whether Safety needs bars like AI spend rather than fourteen-day totals; the Dari menu's width at 200 px.
 
+## AI provider switch (17 Oct 2026)
+
+- A cohort's page has one more card under Settings: "AI provider: <provider> · Model: <model>" with Edit, and a
+  small line "OpenAI key set · Claude (Anthropic) key not set · ..." for the four online providers. Edit opens the
+  usual dialog: a Provider select (first "the hub's (<default>)", then each provider by its plain name), a Model
+  field (empty: the provider's default, shown as its placeholder), the line "Takes effect on the next question, no
+  redeploy." and the key line; Save shows the diff for a confirm, as every setting does. Keys are never shown, only
+  "key set" or "key not set". The Dari strings are drafts for a native speaker; the provider names stay in English.
+
 ## What P23 built, and where it differs
 
 - "Is this phone yours?" is a Home card under the Now card (secondary, after "Your school day"), in the APK only:

@@ -21,7 +21,8 @@ def library():
 @pytest.fixture
 def cfg(tmp_path):
     return Config.from_env(data=tmp_path / "data", print_backend="outbox", llm_url=None, free_copies=3,
-                           copies_per_hour=12, wifi_ssid="Qalam", wifi_password="learn1234")
+                           copies_per_hour=12, wifi_ssid="Qalam", wifi_password="learn1234",
+                           openai_key=None, anthropic_key=None, gemini_key=None, compat_key=None)  # none from the shell
 
 
 @pytest.fixture

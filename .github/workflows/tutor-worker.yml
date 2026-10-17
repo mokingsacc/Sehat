@@ -1,8 +1,9 @@
 # Puts Qalam's staging Worker on Cloudflare (tutor/worker; tutor/docs/HOSTING.md) when tutor/ changes on the working
 # branch, then checks it and measures it. It touches nothing of Sehat's: it creates only the Worker and the D1
-# database named qalam-staging (workers.dev address only; no R2, KV, routes or domains), sets no Worker secrets,
-# deletes nothing, and uses no secret but CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
-# Without those two the deploy is skipped and the job stays green. If the Workers Free plan blocks the Python Worker,
+# database named qalam-staging (workers.dev address only; no R2, KV, routes or domains), deletes nothing, and uses no
+# secret but CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID, and ANTHROPIC_API_KEY: when the repository has that one,
+# it becomes qalam-staging's one Worker secret (piped, never printed), and staging's AI is Claude; without it the
+# step says so and staging stays on the fake. Without the first two the deploy is skipped and the job stays green. If the Workers Free plan blocks the Python Worker,
 # the job says so, runs the same smoke test under `pywrangler dev` here instead, and ends green with a warning (D6).
 name: Tutor Worker (staging)
 on:
@@ -120,6 +121,18 @@ jobs:
             echo "blocked=$reason" >> "$GITHUB_OUTPUT"; exit 0
           fi
           echo "::error::wrangler deploy failed (exit $code$( [ -z "$url" ] && echo ', no workers.dev address' ))"; exit 1
+
+      - name: Claude's key for qalam-staging, when the repository has one
+        if: steps.deploy.outputs.url != ''
+        env: { ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}" }
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "No ANTHROPIC_API_KEY in this repository's Actions secrets: staging's AI stays on the fake." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          printf '%s' "$ANTHROPIC_API_KEY" | npx --no-install wrangler secret put ANTHROPIC_API_KEY --name "$NAME" > secret.log 2>&1 \
+            || { tail -5 secret.log; echo "::error::the key was not set on $NAME"; exit 1; }
+          echo "ANTHROPIC_API_KEY is set on $NAME: staging's AI is Claude." | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Open the store (runs the migrations) with /api/hello
         id: hello
