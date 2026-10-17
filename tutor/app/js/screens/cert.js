@@ -55,7 +55,7 @@ export default async function certScreen([path = '']) {
   async function print(cert, kept) {
     if (certs.hubPrints()) {
       try {
-        await hub.certPrint({ id: cert.id, lang: kept.lang || getLang(), lessons: kept.lessons || 1 });
+        await hub.certPrint({ id: cert.id, lang: kept.lang || getLang(), lessons: kept.lessons || 1 }, (state.child() || {}).token);
         toast(s('cert_sent'));
       } catch {
         toast(s('cert_failed'));

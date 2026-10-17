@@ -108,9 +108,16 @@ def test_only_a_learner_who_agreed_and_only_where_photo_is_on(online):
     assert send(online, headers={"X-Learner-Token": "x" * 32}).status_code == 401
     assert send(online, headers=join(online, consent=False)).status_code == 403
     assert send(online).status_code == 200
-    r = online.post(f"/api/m/photo/mark?cohort={HUB_COHORT}", json={"code": "M7-03-48217", "seed": 4821,
-                    "lang": "prs", "strip": base64.b64encode(strip("m7-prs-tilted")).decode()}, headers=join(online))
-    assert r.status_code == 404                      # the hub's cohort and open have photo off
+    body = {"code": "M7-03-48217", "seed": 4821, "lang": "prs", "strip": base64.b64encode(strip("m7-prs-tilted")).decode()}
+    h = join(online)
+    # her own class's switch decides, never the class a link names (C5 H1): the hub's cohort has photo off
+    assert online.post(f"/api/m/photo/mark?cohort={HUB_COHORT}", json=body, headers=h).status_code == 200
+    online.hub.store.sync.set_flag(STAGING, "photo", enabled=False, changed_by="admin")
+    online.hub.store.sync.set_flag(HUB_COHORT, "photo", enabled=True, changed_by="admin")
+    for q in ("", f"?cohort={HUB_COHORT}"):
+        assert online.post("/api/m/photo/mark" + q, json=body, headers=h).status_code == 404
+    online.hub.store.sync.set_flag(STAGING, "photo", enabled=True, changed_by="admin")
+    online.hub.store.sync.set_flag(HUB_COHORT, "photo", enabled=False, changed_by="admin")
     hello = online.get("/api/hello").json()
     assert "photo" in [m["id"] for m in hello["modules"]]
     assert "photo" not in [m["id"] for m in online.get(f"/api/hello?cohort={HUB_COHORT}").json()["modules"]]
@@ -234,7 +241,7 @@ def test_no_image_byte_is_written_anywhere(online, monkeypatch, caplog, tmp_path
     assert r.status_code == 200
     assert written == []
     assert {c[0] for c in calls} <= {"learner", "update_learner", "cohort", "flags", "count_today", "ai_spent",
-                                         "add_ai_usage"}, calls
+                                         "add_ai_usage", "ai_prices"}, calls          # the price table (C5)
     flat = repr(calls)
     assert not any(m.decode("latin-1") in flat if isinstance(m, bytes) else m in flat for m in marks)
     assert all(not isinstance(x, (bytes, bytearray)) for _, a, kw in calls for x in (*a, *kw.values()))
@@ -305,7 +312,7 @@ def test_migration_0008_lets_an_existing_staging_database_try_photos(tmp_path):
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) VALUES(?, 'x', '[]', '[]', '{}', 'now')",
                    (cid,))
     assert migrate(db) == ["0008_photo_flag", "0009_homework", "0010_review", "0011_timetable",
-                           "0012_teacher", "0013_plan", "0014_admin", "0015_recall", "0016_cert", "0017_made"]
+                           "0012_teacher", "0013_plan", "0014_admin", "0015_recall", "0016_cert", "0017_made", "0018_prices"]
     rows = db.execute("SELECT cohort, enabled, changed_by FROM flags WHERE module='photo'").fetchall()
     assert rows == [(STAGING, 1, "seed")]
     assert db.execute("SELECT COUNT(*) FROM flag_log WHERE module='photo'").fetchone() == (1,)

@@ -49,7 +49,7 @@ def router(hub, needs) -> APIRouter:
         who = await hub.learner(request)                       # 401 without her token
         if not who["consent_kind"]:
             raise HTTPException(403, "no consent: the certificate is read from her own events")
-        cohort, f, on = await hub.cohort_modules(request.query_params.get("cohort") or who["cohort"], who["band"])
+        cohort, f, on = await hub.cohort_modules(hub.her_cohort(who), who["band"])     # her own class (C5 H1)
         if not cohort or MODULE not in on:
             raise HTTPException(404, "Not Found")
         found = graph.find_pathway(hub.library.graphs, body.path) if PATH.match(body.path) else None

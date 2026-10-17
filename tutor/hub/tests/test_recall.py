@@ -54,7 +54,7 @@ def test_migration_0015_gives_open_and_staging_recall(tmp_path):
     for cid in SEEDS:
         db.execute("INSERT INTO cohorts(id, label, langs, bands, settings, created) "
                    "VALUES(?, 'x', '[]', '[]', '{}', 'now')", (cid,))
-    assert migrate(db) == ["0015_recall", "0016_cert", "0017_made"]
+    assert migrate(db) == ["0015_recall", "0016_cert", "0017_made", "0018_prices"]
     on = db.execute("SELECT cohort, enabled, changed_by FROM flags WHERE module='recall' ORDER BY cohort").fetchall()
     assert on == [("3w2lco2s8f", 1, "seed"), ("qg1j2918yx", 1, "seed")]
     assert db.execute("SELECT COUNT(*) FROM flag_log WHERE module='recall'").fetchone() == (2,)

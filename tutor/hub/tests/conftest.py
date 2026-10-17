@@ -59,3 +59,14 @@ def fake_ai():
 @pytest.fixture
 def anyio_backend():
     return "asyncio"            # the hub runs on asyncio (uvicorn); trio is not used
+
+
+def learner_of(c, cohort: str, band: str = "s1", consent: bool = True) -> dict:
+    """The headers of a new learner in `cohort` (made in the store, as a class code would): since C5 (H1) a request
+    acts in another class only with a token of that class, never through `?cohort=`."""
+    from tutor_hub import learners
+    tok = learners.new_token()
+    extra = {"consent_kind": "self", "consent_version": c.hub.consent_version, "consent_at": learners.minute()} \
+        if consent else {}
+    c.hub.store.sync.add_learner(token_hash=learners.token_hash(tok), cohort=cohort, picture="key", band=band, **extra)
+    return {"X-Learner-Token": tok}

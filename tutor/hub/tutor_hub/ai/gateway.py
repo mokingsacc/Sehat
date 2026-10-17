@@ -12,11 +12,12 @@ identifier (filters.scrub) before they leave.
 
 After a call: sums are recomputed (an answer with a wrong sum is dropped); a hint that gives away an answer is asked
 for again once, then dropped; the call is counted in `ai_usage` (day, cohort, module, purpose, provider, model,
-tokens, cost). A failed or timed-out call is logged and dropped. A dropped answer is never an error to the learner:
+tokens, cost: the admin's price table, US dollars per million tokens, by provider and model). A failed or timed-out call is logged and dropped. A dropped answer is never an error to the learner:
 the brain goes on to lesson passages and the teacher.
 """
 import asyncio
 import logging
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 
@@ -29,6 +30,7 @@ log = logging.getLogger("tutor.ai")
 KEEP_DAYS = 730                                  # ai_usage is kept 2 years (BUILD-PLAN 3.4)
 MATHS_PURPOSES = ("explain", "hint")             # replies whose sums are recomputed
 UNSCREENED = ("read_sheet",)                     # no learner words in the messages: nothing for the rules screen
+PRICE_TTL = 60.0                                 # the price table is read again after a minute (other isolates)
 
 
 @dataclass
@@ -73,6 +75,31 @@ class Gateway:
         self.timeout = timeout
         self.cohort = cohort                     # the hub's own cohort, when a call names none
         self.on_drop = None                      # async (why, cohort): a reply dropped by the leak or maths check
+        self._prices: tuple[float, dict] | None = None
+
+    async def prices(self) -> dict:
+        """The admin's price table (store.ai_prices) as {(provider, model): (usd_in, usd_out)}, kept a minute;
+        `self._prices = None` reads it again at once (the admin panel does, after a change)."""
+        if self.store is None:
+            return {}
+        now = time.monotonic()
+        if self._prices is None or now - self._prices[0] > PRICE_TTL:
+            try:
+                rows = await self.store.ai_prices()
+            except Exception:
+                log.exception("AI prices not read: costs counted at the provider's own price")
+                rows = []
+            self._prices = (now, {(r["provider"], r["model"]): (r["usd_in"], r["usd_out"]) for r in rows})
+        return self._prices[1]
+
+    async def cost_micro(self, p: Provider, reply) -> int:
+        """Millionths of a US dollar for one reply. A price in dollars per million tokens is millionths per token:
+        the row for this provider and model, else the provider's row for any model (''), else the provider's own."""
+        table = await self.prices()
+        row = table.get((p.name, p.model)) or table.get((p.name, ""))
+        if row is None:
+            return p.cost_micro(reply)
+        return round(reply.tokens_in * row[0] + reply.tokens_out * row[1])
 
     def provider_for(self, settings: dict | None) -> Provider | None:
         """The cohort's provider: its `ai_provider` and `ai_model` when set, else the hub's default. Made once per
@@ -200,7 +227,8 @@ class Gateway:
             try:
                 await self.store.add_ai_usage(day=today(), cohort=cohort, module=module, purpose=purpose,
                                               provider=p.name, model=p.model,
-                                              tokens=reply.tokens_in + reply.tokens_out, cost_micro=p.cost_micro(reply),
+                                              tokens=reply.tokens_in + reply.tokens_out,
+                                              cost_micro=await self.cost_micro(p, reply),
                                               held=held)
             except Exception:
                 log.exception("AI usage not counted")

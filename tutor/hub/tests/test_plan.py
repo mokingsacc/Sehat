@@ -4,7 +4,7 @@ without the token. No AI, no network."""
 import pytest
 from fastapi.testclient import TestClient
 
-from tutor_hub import search, sheets
+from tutor_hub import learners, search, sheets
 from tutor_hub.mods import plan
 from tutor_hub.server import create_app, teacher_pin
 
@@ -70,7 +70,10 @@ def test_distress_health_and_off_limits_get_the_kind_message_and_nothing_is_kept
 
 
 def test_the_open_cohort_has_it_and_the_teacher_reads_the_wishes(hub):
-    assert goal(hub, "astronomy", lang="en", cohort=OPEN).json()["kind"] == "wish"
+    tok = learners.new_token()                          # a learner of open: her token says her class (C5 H1)
+    hub.hub.store.sync.add_learner(token_hash=learners.token_hash(tok), cohort=OPEN, picture="key", band="s1")
+    assert goal(hub, "astronomy", lang="en", headers={"X-Learner-Token": tok}).json()["kind"] == "wish"
+    assert [w["cohort"] for w in wishes(hub)] == [OPEN]
     goal(hub, "astronomy", lang="en")
     goal(hub, "astronomy", lang="en")
     goal(hub, "robots", lang="en", band="s2")

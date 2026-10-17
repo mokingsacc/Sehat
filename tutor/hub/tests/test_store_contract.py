@@ -525,7 +525,12 @@ async def test_signoffs_are_kept_per_hash_and_role(store):
     rows = await store.signoffs("maths-7-fractions-add")
     assert [(r["content_hash"], r["role"], r["initials"]) for r in rows] == [
         (H1, "Dari reader", "AB"), (H1, "maths teacher", "CD"), (H2, "Dari reader", "AB")]
-    assert set(rows[0]) == {"lesson", "content_hash", "role", "initials", "signed_on", "added_at"}
+    assert set(rows[0]) == {"lesson", "content_hash", "role", "initials", "signed_on", "added_at", "via"}
+    assert rows[0]["via"] == ""                                        # not said: made before C5 (M4)
+    assert await store.add_signoff(**dict(so, role="adult educator", via="pin")) is True
+    assert [r["via"] for r in await store.all_signoffs()][-1] == "pin"
+    with pytest.raises(ValueError):
+        await store.add_signoff(**dict(so, role="scholar", via="email"))
     assert await store.signoffs("no-such-lesson") == []
 
 

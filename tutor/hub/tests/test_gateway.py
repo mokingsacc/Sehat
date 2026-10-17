@@ -12,6 +12,8 @@ from tutor_hub.ai.fake import FakeProvider
 from tutor_hub.ai.providers import HttpProvider
 from tutor_hub.server import create_app
 
+from conftest import learner_of
+
 # the AI provider switch (17 Oct 2026): any provider may serve any cohort, but each goes only to its own host
 OTHER_HOSTS = ["https://api.anthropic.com/v1", "https://claude.ai/api", "https://generativelanguage.googleapis.com/v1",
                "https://api.example.com/v1", "https://api.openai.com.example.com/v1"]
@@ -287,7 +289,8 @@ def test_budgets_are_per_cohort(fake_hub):
     fake_hub.hub.gateway.budget = 1
     fake_hub.post("/api/ask", json={"text": "چرا آسمان آبی است؟", "lang": "prs"})
     other = fake_hub.hub.seeds["staging"]["id"]
-    a = fake_hub.post(f"/api/ask?cohort={other}", json={"text": "زلزله چرا می‌آید؟", "lang": "prs"}).json()
+    a = fake_hub.post("/api/ask", json={"text": "زلزله چرا می‌آید؟", "lang": "prs"},
+                      headers=learner_of(fake_hub, other)).json()
     assert a["source"] == "ai"
     assert fake_hub.portal.call(fake_hub.hub.store.ai_spent, other, rows_day(fake_hub))["calls"] == 1
 

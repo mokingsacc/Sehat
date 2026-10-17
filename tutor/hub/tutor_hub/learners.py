@@ -24,7 +24,7 @@ from .config import TUTOR
 ALIASES = TUTOR / "content" / "aliases.json"
 CONSENT = TUTOR / "content" / "consent"
 CONSENT_KINDS = ("guardian-on-phone", "self", "partner-paper")
-CONSENT_VERSIONS = {"hub": "hub-2026-10", "online": "online-2026-10"}
+CONSENT_VERSIONS = {"hub": "hub-2026-10b", "online": "online-2026-10b"}   # C5 H3: provider-neutral
 HEADER = "X-Learner-Token"
 TOKEN = re.compile(r"^[A-Za-z0-9_-]{20,64}$")
 CODE_LETTERS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"     # no 0/O, 1/I/L: a code is read off a card and typed

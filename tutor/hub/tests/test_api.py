@@ -3,6 +3,7 @@ import json
 
 from fastapi.testclient import TestClient
 
+from conftest import learner_of
 from tutor_hub import sheets
 from tutor_hub.ai.filters import leaks
 
@@ -246,8 +247,9 @@ def test_print_off_makes_its_routes_404_for_that_cohort_only(hub_client):
     assert hub_client.get("/api/lessons/maths-1-count-5").status_code == 200
     assert hub_client.get("/api/sheets/maths-7-fractions-add/key?seed=1234").status_code == 200
     assert hub_client.post("/api/ask", json={"text": "۱ + ۱", "lang": "prs"}).status_code == 200
-    # another cohort keeps printing
-    assert hub_client.post(f"/api/print?cohort={open_id}", json=base).status_code == 200
+    # another cohort keeps printing: a learner of that class, by her token (C5 H1: never by ?cohort= alone)
+    assert hub_client.post(f"/api/print?cohort={open_id}", json=base).status_code == 404
+    assert hub_client.post("/api/print", json=base, headers=learner_of(hub_client, open_id)).status_code == 200
     hub.prints.wait()
     # switched on again, the next request sees it; both changes are logged
     hub.store.sync.set_flag(hub.cohort_id, "print", enabled=True, changed_by="admin")

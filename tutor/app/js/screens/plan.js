@@ -148,7 +148,7 @@ export default async function plan(args = []) {
     }
     busy = true;
     try {
-      show(await hub.plan({ goal: text, lang, band: cur.band }));
+      show(await hub.plan({ goal: text, lang, band: cur.band }, cur.token));
     } catch (e) {
       if (e.status === 429) { toast(s('slow_down')); return; }
       show(plans.localSearch(cur, text, lang));            // the server is out of reach: the phone's own search

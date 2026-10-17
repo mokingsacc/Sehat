@@ -135,6 +135,7 @@ function setUi(lang) {
 async function api(path, { method = 'GET', body, raw = false } = {}) {
   const headers = { 'content-type': 'application/json' };
   if (me.pin) headers['x-teacher-pin'] = me.pin;
+  if (method !== 'GET') headers['x-qalam'] = '1';      // a staff write (C5 M1): a form from another site cannot send it
   const q = new URLSearchParams({ lang: ui === 'prs' ? 'prs' : 'en' });
   if (me.cohort) q.set('cohort', me.cohort);
   const r = await fetch(`${API}${path}${path.includes('?') ? '&' : '?'}${q}`, { method, headers, cache: 'no-store',

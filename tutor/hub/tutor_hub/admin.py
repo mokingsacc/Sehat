@@ -28,7 +28,8 @@ Every change is logged with the admin's label: a module switch in `flag_log` (as
   release; the open review notes. `POST /api/m/admin/content/{pack}/publish|rollback` `{cohort}`.
 - `GET  /api/m/admin/wishes`: the wishlist across cohorts; `POST` `{wkey, status: new|planned|not_for_qalam}`.
 - `GET  /api/m/admin/spend`: per cohort and day, tokens, estimated cost, calls by purpose and held answers, against
-  the cap (14 days).
+  the cap (14 days); and the AI price table. `POST /api/m/admin/prices` `{provider, model, usd_in, usd_out}`: US
+  dollars per million input and output tokens for a provider's model ('' for any of its models); both null removes it.
 - `GET  /api/m/admin/safety`: per cohort and day, rules hits by kind; the oldest held item; leak and maths drops;
   disputes per sheet item. Counts only: the words stay with the teacher.
 - `GET  /api/m/admin/staff`, `POST` `{email, label, role, cohorts, initials}`, `DELETE /staff/{id}`: labels, roles
@@ -101,6 +102,15 @@ class WishIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     wkey: str = Field(min_length=1, max_length=200)
     status: str = Field(pattern="^(new|planned|not_for_qalam)$")
+
+
+class PriceIn(BaseModel):
+    """One row of the AI price table (owner's decision, C5): US dollars per million tokens; both null removes it."""
+    model_config = ConfigDict(extra="forbid")
+    provider: str = Field(min_length=1, max_length=20)
+    model: str = Field("", max_length=80)
+    usd_in: float | None = Field(None, ge=0, le=10_000)
+    usd_out: float | None = Field(None, ge=0, le=10_000)
 
 
 class StaffIn(BaseModel):
@@ -575,7 +585,25 @@ def router(hub) -> APIRouter:
                         "today": dict(today, pct=p, warn=p is not None and p >= WARN),
                         "by_purpose": dict(purposes),
                         "cost_micro": sum(x["cost_micro"] for x in per.values())})
-        return {"cohorts": out, "days": days}
+        return {"cohorts": out, "days": days, "prices": await hub.store.ai_prices(), "providers": list(policy.PROVIDERS)}
+
+    @r.post("/prices")
+    async def price(body: PriceIn, request: Request):
+        """The AI price table (empty by default, so every estimate is $0 until the admin types a price): one
+        provider and model, or '' for any model of that provider; from the next call on, in the Log."""
+        me = await admin(request)
+        if (body.usd_in is None) != (body.usd_out is None):
+            raise HTTPException(422, "both prices, or neither to remove the row")
+        try:
+            await hub.store.set_ai_price(provider=body.provider, model=body.model.strip(), usd_in=body.usd_in,
+                                         usd_out=body.usd_out)
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from None
+        hub.gateway._prices = None                    # this isolate prices the next call at once; others within a minute
+        name = f"{body.provider} {body.model.strip() or '(any model)'}"
+        await log(me, "prices", f"{name}: removed" if body.usd_in is None
+                  else f"{name}: ${body.usd_in:g} in, ${body.usd_out:g} out per million tokens")
+        return {"ok": True, "prices": await hub.store.ai_prices()}
 
     @r.get("/safety")
     async def safety(request: Request):

@@ -15,6 +15,7 @@ globalThis.localStorage = {
 globalThis.location = { protocol: 'https:', origin: 'https://qalam.example' };
 
 const asked = [];
+const planned = [];
 let up = false;
 let refuseAsk = 0;
 let n = 40;
@@ -32,6 +33,7 @@ globalThis.fetch = async (url, opts = {}) => {
     return reply(200, { id: 'q' + asked.length, text: 'an answer', source: 'bank', waiting: false });
   }
   if (path.endsWith('/api/events')) return reply(200, {});
+  if (path.endsWith('/api/m/plan')) { planned.push([JSON.parse(opts.body).goal, token]); return reply(200, { kind: 'wish', saved: true }); }
   return reply(404, {});
 };
 
@@ -55,6 +57,7 @@ beforeEach(async () => {
   account.reset();
   outbox.reset();
   asked.length = 0;
+  planned.length = 0;
   toasts.length = 0;
   refuseAsk = 0;
 });
@@ -78,6 +81,15 @@ test('a question asked offline waits, is counted with her join, and goes after i
   assert.deepEqual(outbox.waiting(), []);
   assert.equal(toasts.length, 1);
   assert.deepEqual(events.pending(), []);                                       // and her events went too
+});
+
+test('a waiting wish goes with her token, so her own class gets it, never one a link names (C5 H1)', async () => {
+  const c = state.addChild({ year: 8, lang: 'prs', band: 's1' });
+  state.updateChild(c.id, { consent: AGREED });
+  outbox.queueWish(c.id, 'astronomy', 'en');
+  await back();
+  const l = state.byId(c.id);
+  assert.deepEqual(planned, [['astronomy', l.token]]);
 });
 
 test('a question waiting more than 7 days is "Not sent", and "Send again" sends it', async () => {

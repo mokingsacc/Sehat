@@ -167,7 +167,7 @@ def test_the_adviser_and_readers_sign_the_card_set_and_the_lock_lifts(tmp_path):
                      headers=pin).status_code == 403
         rows = c.get("/api/m/review/signoffs", headers=pin).json()["signoffs"]
     assert {r["lesson"] for r in rows} == {"cards:university-1"} and len(rows) == 3
-    report = pull.pull(rows, root / "packs")
+    report = pull.pull(rows, root / "packs", hub_ok="the content lead")
     assert len(report["copied"]) == 3 * (1 + len(real_cards())) and not report["stale"]
     lib = Library(root / "packs")
     assert lib.university_ready() and all(x["_state"] == "signed" for x in lib.card_set("university-1"))

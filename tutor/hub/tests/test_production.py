@@ -66,6 +66,16 @@ def test_the_guard_refuses_staging_sehat_and_anything_but_the_pilots_settings():
     assert g.problems(PROD, TEXT + "\n# deploy beside sehat\n")
     assert g.problems(PROD, TEXT.replace('"qalam"', '"qalam-staging"'))
     assert g.problems(dict(PROD, vars=dict(PROD["vars"], TUTOR_AI_PROVIDER="openai")), TEXT) == []
+    # the owner's decision (17 Oct 2026, C5): any provider the gateway speaks to over the internet, keys only as secrets
+    for name in ("anthropic", "gemini"):
+        assert g.problems(dict(PROD, vars=dict(PROD["vars"], TUTOR_AI_PROVIDER=name)), TEXT) == []
+    compat = dict(PROD["vars"], TUTOR_AI_PROVIDER="openai_compat")
+    assert g.problems(dict(PROD, vars=compat), TEXT)                                  # no address
+    assert g.problems(dict(PROD, vars=dict(compat, TUTOR_COMPAT_URL="http://models.example/v1")), TEXT)
+    assert g.problems(dict(PROD, vars=dict(compat, TUTOR_COMPAT_URL="https://models.example/v1",
+                                           TUTOR_COMPAT_MODEL="an-open-model")), TEXT) == []
+    for key in ("OPENAI_API_KEY", "ANTHROPIC_API_KEY", "TUTOR_COMPAT_API_KEY"):
+        assert g.problems(dict(PROD, vars=dict(PROD["vars"], **{key: "sk-NOT-REAL"})), TEXT)
 
 
 def test_production_differs_from_staging_only_where_it_must():

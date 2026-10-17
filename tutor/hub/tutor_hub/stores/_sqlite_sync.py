@@ -12,7 +12,7 @@ import sqlite3
 import threading
 from datetime import datetime, timedelta, timezone
 
-from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_note,
+from .base import (COUNT_DAYS, EVENT_FIELDS, LOG_DAYS, QUEUE, QUEUE_ORDER, check_changes, check_initials, check_log, check_price, check_via, check_note,
                    check_staff, check_wish_status, WISH_DAYS, WISH_MAX, draw_number, hints_json, new_cert_id,
                    question_status, MADE_DAYS, check_made, check_verdict, made_out)
 
@@ -311,19 +311,31 @@ class Store:
         cut = (datetime.now(timezone.utc) - timedelta(days=keep_days)).strftime("%Y-%m-%d")
         self._x("DELETE FROM ai_usage WHERE day<?", (cut,))
 
+    def ai_prices(self):
+        return self._all("SELECT provider, model, usd_in, usd_out, changed_at FROM ai_prices ORDER BY provider, model")
+
+    def set_ai_price(self, *, provider, model, usd_in, usd_out):
+        if usd_in is None and usd_out is None:
+            self._x("DELETE FROM ai_prices WHERE provider=? AND model=?", (provider, model or ""))
+            return
+        row = check_price(provider=provider, model=model, usd_in=usd_in, usd_out=usd_out)
+        self._x("INSERT OR REPLACE INTO ai_prices(provider, model, usd_in, usd_out, changed_at) VALUES(?,?,?,?,?)",
+                row + (now(),))
+
     # content
-    def add_signoff(self, *, lesson, content_hash, role, initials, signed_on) -> bool:
+    def add_signoff(self, *, lesson, content_hash, role, initials, signed_on, via="") -> bool:
         check_initials(initials)
-        cur = self._x("INSERT OR IGNORE INTO signoffs(lesson, content_hash, role, initials, signed_on, added_at) "
-                      "VALUES(?,?,?,?,?,?)", (lesson, content_hash, role, initials, signed_on, now()))
+        cur = self._x("INSERT OR IGNORE INTO signoffs(lesson, content_hash, role, initials, signed_on, added_at, via) "
+                      "VALUES(?,?,?,?,?,?,?)", (lesson, content_hash, role, initials, signed_on, now(), check_via(via)))
         return cur.rowcount == 1
 
     def signoffs(self, lesson):
-        return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs "
+        return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at, via FROM signoffs "
                          "WHERE lesson=? ORDER BY id", (lesson,))
 
     def all_signoffs(self):
-        return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at FROM signoffs ORDER BY id")
+        return self._all("SELECT lesson, content_hash, role, initials, signed_on, added_at, via FROM signoffs "
+                         "ORDER BY id")
 
     # staff and review notes
     def add_staff(self, *, id_hash, label, role, cohorts, initials) -> None:

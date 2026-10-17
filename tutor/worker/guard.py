@@ -7,8 +7,11 @@ Production is the Worker and D1 database named `qalam` and nothing else: never `
 Worker or database (`sehat`, `fhb`), no routes, KV, R2, queues, Durable Objects or service bindings; the database is
 made once by Mo and only referred to here, without migrations_dir (D1Store.open() applies tutor/migrations). The
 settings are the pilot's: release mode, the online consent text, no printer and no PIN, the Android app's origin,
-the daily retention cron, no staging spike, and learner AI either off or OpenAI through the gateway (never the fake
-or a local model). The staging guard stays where it was, inline in tutor-worker.yml, unchanged.
+the daily retention cron, no staging spike, and learner AI off or any provider the hub's gateway speaks to over the
+internet (OpenAI, Anthropic, Google's Gemini, or an OpenAI-compatible server at an https TUTOR_COMPAT_URL; the
+owner's decision of 17 Oct 2026, C5), with its key only ever a Worker secret: no variable here may hold a key. The
+fake (made-up answers) and `local` (the hub's own network, which a Worker has not got) stay out. The staging guard
+stays where it was, inline in tutor-worker.yml, unchanged.
 """
 import os
 import re
@@ -22,7 +25,10 @@ ZERO = "00000000-0000-0000-0000-000000000000"
 ALLOWED = {"name", "main", "compatibility_date", "compatibility_flags", "workers_dev", "preview_urls", "vars",
            "assets", "d1_databases", "rules", "triggers"}
 VARS = {"TUTOR_COHORT", "TUTOR_AI_PROVIDER", "TUTOR_LACKS", "TUTOR_HOME", "TUTOR_RELEASE", "TUTOR_ORIGINS",
-        "TUTOR_APK_LATEST", "TUTOR_APK_MIN", "TUTOR_KEEP_DAYS"}
+        "TUTOR_APK_LATEST", "TUTOR_APK_MIN", "TUTOR_KEEP_DAYS", "TUTOR_OPENAI_MODEL", "TUTOR_ANTHROPIC_MODEL",
+        "TUTOR_GEMINI_MODEL", "TUTOR_COMPAT_URL", "TUTOR_COMPAT_MODEL"}
+# learner AI in production: off, or a provider over the internet; each key is a Worker secret (wrangler secret put)
+PROVIDERS = ("off", "openai", "anthropic", "gemini", "openai_compat")
 FORBIDDEN_WORDS = ("qalam-staging", "sehat", "fhb")
 
 
@@ -59,8 +65,12 @@ def problems(w: dict, text: str = "", *, deploy: bool = False, ref: str | None =
     for k, val in want.items():
         if v.get(k) != val:
             out.append(f'{k} = "{val}"')
-    if v.get("TUTOR_AI_PROVIDER") not in ("off", "openai"):
-        out.append('TUTOR_AI_PROVIDER is "off" or "openai" (never fake or local)')
+    if v.get("TUTOR_AI_PROVIDER") not in PROVIDERS:
+        out.append(f'TUTOR_AI_PROVIDER is one of {", ".join(PROVIDERS)} (never fake or local)')
+    if v.get("TUTOR_AI_PROVIDER") == "openai_compat" and not str(v.get("TUTOR_COMPAT_URL", "")).startswith("https://"):
+        out.append("openai_compat needs TUTOR_COMPAT_URL, an https address (its key is the secret TUTOR_COMPAT_API_KEY)")
+    if any(re.search(r"KEY|SECRET|TOKEN|PEPPER|PASSWORD", k) for k in v):
+        out.append("no key in [vars]: keys are Worker secrets")
     if not re.fullmatch(r"[a-z0-9]{10}", str(v.get("TUTOR_COHORT", ""))):
         out.append("TUTOR_COHORT is a cohort id")
     if deploy:

@@ -68,7 +68,10 @@ const T = {
     // the Log's `what`, in words (C4 look question 29); the stored value stays the fixed word
     w_module: 'Module switch', 'w_cohort.new': 'New cohort', 'w_cohort.settings': 'Settings', 'w_cohort.kill': 'Kill switch',
     'w_cohort.code': 'New class code', w_release: 'Release', w_rollback: 'Rollback', w_wish: 'Wish marked',
-    'w_staff.add': 'Staff added', 'w_staff.remove': 'Staff removed',
+    'w_staff.add': 'Staff added', 'w_staff.remove': 'Staff removed', 'w_teacher.lock_code': 'Lock reset code', w_prices: 'AI prices',
+    prices: 'AI prices', prices_what: 'US dollars per million tokens, from the provider’s price page. Empty: the estimate stays $0.',
+    no_prices: 'No prices yet.', provider: 'Provider', model: 'Model', any_model: 'any model', usd_in: 'Input, $ per million',
+    usd_out: 'Output, $ per million',
     band_ey: 'early years', band_p1: 'years 1-3', band_p2: 'years 4-6', band_s1: 'years 7-9', band_s2: 'years 10-12',
     band_ad: 'adult', lang_prs: 'Dari', lang_ps: 'Pashto', lang_en: 'English',
     pick_some: 'Tick at least one language and one band.', all_bands: 'every band', school_day: 'School day', tt_default: 'the default timetable', tt_own: 'this cohort’s own timetable',
@@ -104,7 +107,7 @@ const T = {
     new: 'تازه', remove: 'حذف', add_staff: 'کسی را اضافه کن', when: 'وقت', what: 'چه', who: 'توسط', today_n: 'امروز {n}',
     w_module: 'روشن یا خاموش کردن بخش', 'w_cohort.new': 'گروه تازه', 'w_cohort.settings': 'تنظیمات', 'w_cohort.kill': 'کلید قطع',
     'w_cohort.code': 'کد تازهٔ صنف', w_release: 'نشر', w_rollback: 'برگشت', w_wish: 'نشانی خواهش',
-    'w_staff.add': 'کارمند اضافه شد', 'w_staff.remove': 'کارمند حذف شد',
+    'w_staff.add': 'کارمند اضافه شد', 'w_staff.remove': 'کارمند حذف شد', 'w_teacher.lock_code': 'کد باز کردن قفل', w_prices: 'قیمت هوش مصنوعی',
     counts_only: 'فقط شمار: کلمه‌ها نزد معلم می‌مانند.',
     band_ey: 'سال‌های اول', band_p1: 'صنف ۱ تا ۳', band_p2: 'صنف ۴ تا ۶', band_s1: 'صنف ۷ تا ۹', band_s2: 'صنف ۱۰ تا ۱۲',
     band_ad: 'بزرگسال', lang_prs: 'دری', lang_ps: 'پښتو', lang_en: 'انگلیسی',
@@ -159,6 +162,7 @@ function setUi(lang) {
 async function api(path, { method = 'GET', body } = {}) {
   const headers = { 'content-type': 'application/json' };
   if (me.pin) headers['x-admin-pin'] = me.pin;
+  if (method !== 'GET') headers['x-qalam'] = '1';      // a staff write (C5 M1): a form from another site cannot send it
   const r = await fetch(API + path, { method, headers, cache: 'no-store', credentials: 'same-origin',
     body: body ? JSON.stringify(body) : undefined });
   const data = await r.json().catch(() => ({}));
@@ -660,7 +664,30 @@ async function drawSpend() {
       h('small', {}, [`${num(c.today.tokens)} / ${c.cap === null ? t('no_cap') : num(c.cap)}`, t('est', { c: money(c.cost_micro) }) + ' · ' + t('days14'),
         t('held', { n: num(c.days.reduce((a, x) => a + x.held, 0)) }), purposes ? t('by_purpose', { x: purposes }) : t('no_spend')].join(' · ')));
   };
-  frame(h('h2', {}, t('spend')), d.cohorts.map(one));
+  frame(h('h2', {}, t('spend')), d.cohorts.map(one), prices(d));
+}
+
+// the AI price table (empty by default, so the estimate is $0 until a price is typed): dollars per million tokens
+function prices(d) {
+  const sel = h('select', { 'aria-label': t('provider') }, (d.providers || []).map((p) => h('option', { value: p }, p)));
+  const model = h('input', { maxlength: 80, autocomplete: 'off', dir: 'ltr', placeholder: t('any_model'), 'aria-label': t('model') });
+  const pin = h('input', { type: 'number', min: 0, step: 'any', dir: 'ltr', 'aria-label': t('usd_in') });
+  const pout = h('input', { type: 'number', min: 0, step: 'any', dir: 'ltr', 'aria-label': t('usd_out') });
+  const save = async (body) => {
+    try { await api('/prices', { method: 'POST', body }); toast(t('saved')); drawSpend(); } catch (e) { failed(e); }
+  };
+  const row = (x) => h('li', { class: 'row wrap' }, h('span', { class: 'grow' }, m(`${x.provider} ${x.model || '*'}`),
+    ' ', `$${x.usd_in} / $${x.usd_out}`),
+  h('button', { type: 'button', class: 'btn', onClick: () => save({ provider: x.provider, model: x.model, usd_in: null, usd_out: null }) }, t('remove')));
+  const add = (e) => {
+    e.preventDefault();
+    if (pin.value === '' || pout.value === '') return;
+    save({ provider: sel.value, model: model.value.trim(), usd_in: Number(pin.value), usd_out: Number(pout.value) });
+  };
+  return h('section', { class: 'card stack' }, h('h3', {}, t('prices')), h('small', { class: 'muted' }, t('prices_what')),
+    d.prices && d.prices.length ? h('ul', { class: 'plain' }, d.prices.map(row)) : h('p', { class: 'empty' }, t('no_prices')),
+    h('form', { class: 'stack', onSubmit: add }, h('label', {}, t('provider')), sel, h('label', {}, t('model')), model,
+      h('label', {}, t('usd_in')), pin, h('label', {}, t('usd_out')), pout, h('button', { class: 'btn primary', type: 'submit' }, t('save'))));
 }
 
 // the Log's fixed word in the page's words; an unknown one as it is

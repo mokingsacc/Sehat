@@ -12,7 +12,8 @@ preview_urls = false
 
 [vars]
 TUTOR_COHORT = "3w2lco2s8f"            # the open cohort (cohorts/open.json): who joins without a class code
-TUTOR_AI_PROVIDER = "off"              # no learner AI until P18: then "openai", with its key as a Worker secret
+TUTOR_AI_PROVIDER = "off"              # the default for classes that pick none: off, openai, anthropic, gemini or
+                                       # openai_compat (with TUTOR_COMPAT_URL); each key only as a Worker secret
 TUTOR_LACKS = "printer,pin"            # no printer and no teacher PIN online: print and teacher are off here
 TUTOR_HOME = "online"                  # the online consent text
 TUTOR_RELEASE = "1"                    # serve only signed lessons from released packs

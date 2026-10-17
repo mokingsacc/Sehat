@@ -146,7 +146,7 @@ def router(hub, needs) -> APIRouter:
         size = jpeg_size(data) if len(data) <= MAX_BYTES else None
         if size != (STRIP_W, strip_height(len(cells))):
             raise HTTPException(422, "the strip is not this sheet's cells")
-        cohort = request.query_params.get("cohort") or who["cohort"]
+        cohort = hub.her_cohort(who)                          # her own class, never one a link names (C5 H1)
         # her photos today against the cohort's `per_day` (C4.9: five in `open`, ten elsewhere), counted by her token's
         # hash in daily_counts (two days); over it, the phone says photo checking is resting today
         f = await hub.store.flags(cohort)

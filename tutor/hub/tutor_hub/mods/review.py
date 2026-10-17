@@ -297,7 +297,7 @@ def router(hub, needs) -> APIRouter:
         initials = m["initials"] or (body.initials or "").strip().upper()
         try:
             new = await hub.store.add_signoff(lesson=lid, content_hash=lib.hashes[lid], role=role, initials=initials,
-                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"), via=m["via"])
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": lib.hashes[lid][7:15]}
@@ -372,7 +372,7 @@ def router(hub, needs) -> APIRouter:
         try:
             new = await hub.store.add_signoff(lesson="graph:" + sub, content_hash=g["_hash"], role=role,
                                               initials=initials,
-                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"), via=m["via"])
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": g["_hash"][7:15]}
@@ -438,7 +438,7 @@ def router(hub, needs) -> APIRouter:
         initials = m["initials"] or (body.initials or "").strip().upper()
         try:
             new = await hub.store.add_signoff(lesson=QURAN, content_hash=q.hash, role=role, initials=initials,
-                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"), via=m["via"])
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": q.hash[7:15]}
@@ -507,7 +507,7 @@ def router(hub, needs) -> APIRouter:
         initials = m["initials"] or (body.initials or "").strip().upper()
         try:
             new = await hub.store.add_signoff(lesson=CARDS + pid, content_hash=h, role=role, initials=initials,
-                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+                                              signed_on=datetime.now(timezone.utc).strftime("%Y-%m-%d"), via=m["via"])
         except ValueError as e:
             raise HTTPException(422, str(e)) from None
         return {"signed": True, "new": new, "role": role, "short": h[7:15]}
@@ -516,6 +516,7 @@ def router(hub, needs) -> APIRouter:
     async def all_signoffs(request: Request):
         await staff(request)
         return {"signoffs": [{"lesson": s["lesson"], "hash": s["content_hash"], "role": s["role"],
-                              "initials": s["initials"], "date": s["signed_on"]} for s in await hub.store.all_signoffs()]}
+                              "initials": s["initials"], "date": s["signed_on"], "via": s["via"]}
+                             for s in await hub.store.all_signoffs()]}
 
     return r

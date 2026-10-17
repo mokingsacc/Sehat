@@ -88,12 +88,15 @@ AI usage (the gateway's spending, ai/gateway.py)
   tokens, cost_micro, held}` from day `since` on (all when None), by day, module, purpose, provider, model.
 - `ai_spent(cid, day) -> {calls, tokens, cost_micro}`: the cohort's totals for one day; zeros when nothing was spent.
 - `prune_ai_usage(keep_days)`: deletes rows whose day is more than `keep_days` days ago.
+- `ai_prices() -> list`: the admin's price table `{provider, model, usd_in, usd_out, changed_at}` (US dollars per
+  million tokens; `model` '' for any model of the provider), by provider and model.
+- `set_ai_price(*, provider, model, usd_in, usd_out)`: sets one row; with `usd_in` and `usd_out` both None, deletes it.
 
 Content (signoffs and releases, packs.py decides what they mean; kept for good)
-- `add_signoff(*, lesson, content_hash, role, initials, signed_on) -> bool`: one reviewer role signing one content
-  hash; initials only (1 to 4 capital letters, else ValueError), never a name. Signing the same hash in the same
-  role again changes nothing and returns False.
-- `signoffs(lesson) -> list`: `{lesson, content_hash, role, initials, signed_on, added_at}`, oldest first.
+- `add_signoff(*, lesson, content_hash, role, initials, signed_on, via="") -> bool`: one reviewer role signing one
+  content hash; initials only (1 to 4 capital letters, else ValueError), never a name; `via` is how she signed in,
+  `pin` or `access` (C5 M4). Signing the same hash in the same role again changes nothing and returns False.
+- `signoffs(lesson) -> list`: `{lesson, content_hash, role, initials, signed_on, added_at, via}`, oldest first.
 - `all_signoffs() -> list`: every signoff, oldest first (tools/pull_signoffs.py copies them into the packs).
 - `add_release(*, pack, version, content_hash, cohort, released_by) -> id`: a pack version published to a cohort;
   `released_by` is a role.
@@ -176,7 +179,7 @@ CROCKFORD = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 CERT_ID = re.compile(r"^QC-[0-9A-HJKMNP-TV-Z]{5}-[0-9A-HJKMNP-TV-Z]{5}$")
 LOG_DAYS = 730            # flag_log and admin_log are kept 2 years (BUILD-PLAN 3.4)
 ADMIN_WHAT = ("cohort.new", "cohort.settings", "cohort.kill", "cohort.code", "release", "rollback", "wish",
-              "staff.add", "staff.remove")
+              "staff.add", "staff.remove", "teacher.lock_code", "prices")   # C5: a teacher's lock code; AI prices
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
 # the teacher's list: held answers, and answered or waiting questions sent to the teacher; urgent first
 QUEUE = "status='held' OR (to_teacher=1 AND status IN ('answered','waiting'))"
@@ -350,8 +353,14 @@ class Store:
     async def prune_ai_usage(self, keep_days: int) -> None:
         raise NotImplementedError
 
+    async def ai_prices(self) -> list[dict]:
+        raise NotImplementedError
+
+    async def set_ai_price(self, *, provider, model, usd_in, usd_out) -> None:
+        raise NotImplementedError
+
     # content
-    async def add_signoff(self, *, lesson, content_hash, role, initials, signed_on) -> bool:
+    async def add_signoff(self, *, lesson, content_hash, role, initials, signed_on, via="") -> bool:
         raise NotImplementedError
 
     async def signoffs(self, lesson) -> list[dict]:
@@ -464,6 +473,33 @@ def check_initials(initials) -> str:
     if not isinstance(initials, str) or not re.fullmatch(r"[A-Z]{1,4}", initials):
         raise ValueError("initials are 1 to 4 capital letters, never a name")
     return initials
+
+
+SIGNED_VIA = ("", "pin", "access")
+PRICE_MAX = 10_000.0                       # US dollars per million tokens: anything above is a typing slip
+
+
+def check_via(via) -> str:
+    """How a signature was made (C5 M4): the hub's shared PIN, a named Access sign-in, or '' (not known)."""
+    if via not in SIGNED_VIA:
+        raise ValueError("via is pin or access")
+    return via
+
+
+def check_price(*, provider, model, usd_in, usd_out) -> tuple:
+    """One row of the admin's AI price table: a known provider, a model name (or '' for any), two prices."""
+    from ..ai.policy import PROVIDERS
+    if provider not in PROVIDERS:
+        raise ValueError(f"provider is one of {', '.join(PROVIDERS)}")
+    model = model or ""
+    if not isinstance(model, str) or len(model) > 80 or not re.fullmatch(r"[A-Za-z0-9._:/@-]*", model):
+        raise ValueError("a model name is letters, digits and . _ : / @ -, at most 80")
+    out = []
+    for v in (usd_in, usd_out):
+        if isinstance(v, bool) or not isinstance(v, (int, float)) or not 0 <= v <= PRICE_MAX:
+            raise ValueError(f"a price is US dollars per million tokens, 0 to {PRICE_MAX:g}")
+        out.append(float(v))
+    return (provider, model, out[0], out[1])
 
 
 REVIEW_CHIPS = ("spelling", "word", "maths", "picture", "audio", "too_hard", "unsafe")

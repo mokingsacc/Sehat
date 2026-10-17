@@ -212,7 +212,7 @@ export default async function ask(args = []) {
       return;
     }
     try {
-      await hub.toTeacher(a.id);
+      await hub.toTeacher(a.id, state.child().token);
       state.updateAsk(a.id, { sent: true });
       toast(s('sent_teacher'));
     } catch { toast(hub.online() ? s('error') : s('offline')); }

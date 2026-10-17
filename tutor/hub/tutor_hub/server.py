@@ -49,9 +49,9 @@ LANGS = ("prs", "ps", "en")
 class AskIn(BaseModel):
     text: str = Field(..., min_length=1, max_length=2000)
     lang: str = "prs"
-    subject: str | None = None
+    subject: str | None = Field(None, max_length=40)
     year: int | None = Field(None, ge=0, le=12)
-    lesson: str | None = None
+    lesson: str | None = Field(None, max_length=80)
     teacher: bool = False        # "Ask my teacher" from a sheet's hint ladder: straight to the teacher, no answer
 
 
@@ -109,25 +109,33 @@ class EventsIn(BaseModel):
 
 # after each round of five wrong PINs a phone waits longer: a minute, 15 minutes, then an hour each time
 PIN_LOCKS = (60, 15 * 60, 60 * 60)
+HUB_WRONG, HUB_SPACING = 30, 10.0            # wrong PINs an hour from any address, then one check per 10 seconds
+_UNSET = object()
 
 
 class Limit:
     """At most `n` requests in `per` seconds from one phone: on the hub known by its address on the hub's Wi-Fi;
-    online by her learner token, since many phones reach the Worker from one address (`Hub.who`)."""
+    online by her learner token, since many phones reach the Worker from one address (`Hub.who`), else by the
+    address Cloudflare saw (`Hub.addr`)."""
 
     def __init__(self, n: int, per: float):
         self.n, self.per = n, per
         self._seen: dict[str, list[float]] = {}
         self._lock = threading.Lock()
 
-    def check(self, who: str):
+    def check(self, who: str, add: bool = True):
+        """429 once `who` has used up the limit; else count this one, unless `add` is false (`count` adds later)."""
         now = time.monotonic()
         with self._lock:
             recent = [t for t in self._seen.get(who, []) if now - t < self.per]
             if len(recent) >= self.n:
                 self._seen[who] = recent
                 raise HTTPException(429, "too many at once: wait a minute")
-            self._seen[who] = recent + [now]
+            self._seen[who] = recent + ([now] if add else [])
+
+    def count(self, who: str):
+        with self._lock:
+            self._seen.setdefault(who, []).append(time.monotonic())
 
 
 def teacher_pin(data: Path, name: str = "teacher-pin.txt") -> str:
@@ -175,13 +183,18 @@ class Hub:
         self.pin = None if "pin" in cfg.lacks else teacher_pin(cfg.data)   # no PIN: the teacher module is off
         self.admin_pin = None if "pin" in cfg.lacks else admin_pin(cfg.data)   # the admin panel's, on the hub
         self._fails: dict[str, tuple[int, float, int, float]] = {}   # who -> wrong tries, locked until, rounds, last lock
+        self._wrong: list[float] = []                # every wrong PIN this hour, from any address (C5 L2)
+        self._last_try = 0.0
         self._pin_lock = threading.Lock()
         self.clock = time.monotonic
         self.print_lock = asyncio.Lock()
         self.ask_limit = Limit(10, 60)
         self.pdf_limit = Limit(10, 60)
         self.event_limit = Limit(30, 60)
-        self.join_limit = Limit(20, 3600)
+        # joining (C5 H2): a school's Wi-Fi or a mobile carrier puts a whole class behind one address, so joins are
+        # counted high; only a wrong class code counts against the address's 20 an hour
+        self.join_limit = Limit(300, 3600)
+        self.code_limit = Limit(20, 3600)
         self.photo_limit = Limit(6, 60)              # photos of sheets read per phone a minute
         self.reset_limit = Limit(10, 600)            # lock reset codes tried per phone in ten minutes
         self.plan_limit = Limit(30, 60)              # "I want to learn this" goals a minute, by address (no token)
@@ -235,12 +248,19 @@ class Hub:
             n, until, rounds, last = self._fails.get(who, (0, 0.0, 0, 0.0))
             if now < until:
                 raise HTTPException(429, "too many wrong PINs: wait and try again later")
+            # hub-wide (C5 L2): a phone that rejoins the Wi-Fi gets a new address and fresh tries, so after 30 wrong
+            # PINs in an hour from anywhere, one PIN is checked every 10 seconds, whoever asks
+            self._wrong = [t for t in self._wrong if now - t < 3600]
+            if len(self._wrong) >= HUB_WRONG and now - self._last_try < HUB_SPACING:
+                raise HTTPException(429, "too many wrong PINs: wait and try again later")
+            self._last_try = now
             if rounds and now - last > 24 * 3600:         # a quiet day: back to a one-minute wait
                 rounds = 0
             if pin and want and hmac.compare_digest(pin.strip().encode(), want.encode()):
                 self._fails.pop(who, None)
                 return
             n += 1
+            self._wrong.append(now)
             if n >= 5:
                 wait = PIN_LOCKS[min(rounds, len(PIN_LOCKS) - 1)]
                 self._fails[who] = (0, now + wait, rounds + 1, now)
@@ -266,17 +286,30 @@ class Hub:
 
     async def learner(self, request: Request, required: bool = True):
         """The learner whose token the request carries (X-Learner-Token), with today as her last day seen; None
-        without one, or 401 when `required`."""
-        token = request.headers.get(learners.HEADER) or ""
-        row = await self.store.learner(learners.token_hash(token)) if learners.TOKEN.match(token) else None
-        if row is None:
-            if required:
-                raise HTTPException(401, "this learner is not known here: join again")
-            return None
-        today = learners.day()
-        if row["last_seen"] != today:
-            await self.store.update_learner(row["token_hash"], last_seen=today)
+        without one, or 401 when `required`. Looked up once a request (the route guard and the route share it)."""
+        row = request.scope.get("qalam.learner", _UNSET)
+        if row is _UNSET:
+            token = request.headers.get(learners.HEADER) or ""
+            row = await self.store.learner(learners.token_hash(token)) if learners.TOKEN.match(token) else None
+            request.scope["qalam.learner"] = row
+            if row is not None and row["last_seen"] != learners.day():
+                await self.store.update_learner(row["token_hash"], last_seen=learners.day())
+        if row is None and required:
+            raise HTTPException(401, "this learner is not known here: join again")
         return row
+
+    def her_cohort(self, who: dict | None) -> str | None:
+        """The class whose switches, hold, budget and provider apply to a learner's request (C5 H1): with her token
+        her own, always; without one this hub's (`open` online). Never a class the request names (`?cohort=`)."""
+        return (who or {}).get("cohort") or self.cohort_id
+
+    def addr(self, request: Request) -> str:
+        """The address a limit counts without a token: on the hub the phone's on the hub's Wi-Fi. The Worker's
+        ASGI adapter gives no client address, so there the one Cloudflare's edge saw (CF-Connecting-IP, which the
+        edge sets and overwrites); a server that has a socket address never trusts that header (C5 H2)."""
+        if request.client:
+            return request.client.host
+        return request.headers.get("cf-connecting-ip") or "?"
 
     def who(self, request: Request) -> str:
         """Whom a per-phone limit counts: online her learner token (by its hash) when the request carries one, since
@@ -284,7 +317,7 @@ class Hub:
         token = request.headers.get(learners.HEADER) or ""
         if self.cfg.home == "online" and learners.TOKEN.match(token):
             return "t:" + learners.token_hash(token)[:32]
-        return _who(request)
+        return self.addr(request)
 
     def consent_changes(self, c) -> dict:
         if c.version not in {v for (_, v) in self.consent_texts}:
@@ -384,8 +417,32 @@ def _lang(lang: str) -> str:
     return lang if lang in LANGS else "prs"
 
 
-def _who(request: Request) -> str:
-    return request.client.host if request.client else "?"
+STAFF_API = ("/api/m/teacher/", "/api/m/review/")
+# C5 M2: staff pages may not be framed by another site, and run only this site's scripts
+STAFF_HEADERS = ((b"content-security-policy", b"default-src 'self'; img-src 'self' data: blob:; style-src 'self' "
+                  b"'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"),
+                 (b"x-frame-options", b"DENY"), (b"x-content-type-options", b"nosniff"),
+                 (b"referrer-policy", b"no-referrer"))
+STAFF_PAGES = ("/admin", "/teacher", "/review")
+
+
+class StaffHeaders:
+    """The hub serves the staff pages itself (online they are static assets, with worker/build.py's _headers): this
+    adds STAFF_HEADERS to them, and nothing to any other path (the Android app frames the hub's sheets)."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        path = scope.get("path", "") if scope["type"] == "http" else ""
+        if not any(path == p or path.startswith(p + "/") for p in STAFF_PAGES):
+            return await self.app(scope, receive, send)
+
+        async def with_headers(msg):
+            if msg["type"] == "http.response.start":
+                msg = dict(msg, headers=list(msg.get("headers", [])) + list(STAFF_HEADERS))
+            await send(msg)
+        await self.app(scope, receive, with_headers)
 
 
 def create_app(cfg: Config | None = None, store=None) -> FastAPI:
@@ -394,11 +451,22 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     cfg = cfg or Config.from_env()
     hub = Hub(cfg, store)
 
+    async def asking(request: Request) -> str | None:
+        """Whose class a route guard checks (C5 H1): a learner's token says hers, whatever the query says. Without a
+        token, `?cohort=` is read only for a GET (a read that spends and stores nothing) and on the staff routes,
+        whose own gate checks the class (teacher.py `cohort`); any other request is this hub's own cohort's."""
+        who = await hub.learner(request, required=False)
+        if who:
+            return hub.her_cohort(who)
+        if request.method == "GET" or request.url.path.startswith(STAFF_API):
+            return request.query_params.get("cohort")
+        return None
+
     def needs(*mids):
-        """A route guard: the route exists only while these modules are on for the cohort asking (`?cohort=`, else
-        this hub's). A module that is off answers 404, exactly as a route that was never there."""
+        """A route guard: the route exists only while these modules are on for the cohort asking (`asking`). A module
+        that is off answers 404, exactly as a route that was never there."""
         async def guard(request: Request):
-            _, _, on = await hub.cohort_modules(request.query_params.get("cohort"))
+            _, _, on = await hub.cohort_modules(await asking(request))
             if not all(m in on for m in mids):
                 raise HTTPException(404, "Not Found")
         return [Depends(guard)]
@@ -462,7 +530,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     # while `review` is on as well (the scholar reads the set before the reader may be switched on)
     def needs_any(*mids):
         async def guard(request: Request):
-            _, _, on = await hub.cohort_modules(request.query_params.get("cohort"))
+            _, _, on = await hub.cohort_modules(await asking(request))
             q = hub.library.quran
             if not any(m in on for m in mids) or q is None or not q.ok or q.light is not None:
                 raise HTTPException(404, "Not Found")
@@ -513,11 +581,14 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
 
     @app.post("/api/join")
     async def join(j: JoinIn, request: Request):
-        hub.join_limit.check(_who(request))
+        addr = hub.addr(request)
+        hub.join_limit.check(addr)
         if j.cohort_code is not None:
+            hub.code_limit.check(addr, add=False)            # only a wrong code counts against the address
             code = learners.normal_code(j.cohort_code)
             cohort = await hub.store.cohort_by_code(learners.code_hash(code)) if code else None
             if not cohort:
+                hub.code_limit.count(addr)
                 raise HTTPException(404, "no class has this code")
         else:
             cohort = await hub.store.cohort(hub.cohort_id or "")
@@ -577,7 +648,8 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
 
     # Ask
     # Online a question may reach the AI provider, so it needs a learner whose guardian (or who herself) agreed (BUILD-PLAN 5.5);
-    # on the hub nothing leaves the village and the phone asks for consent before its first question.
+    # on the hub the phone asks for consent before her first question (the hub's text says what may leave the centre).
+    # The class whose switches apply is hers, never one the request names (C5 H1).
     @app.post("/api/ask", dependencies=needs("ask"))
     async def ask(a: AskIn, request: Request):
         who = await hub.learner(request, required=hub.cfg.home == "online")
@@ -585,7 +657,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
             raise HTTPException(403, "no consent: questions are not sent")
         hub.ask_limit.check(hub.who(request))
         lang = _lang(a.lang)
-        cohort = request.query_params.get("cohort") or (who or {}).get("cohort") or hub.cohort_id
+        cohort = hub.her_cohort(who)
         if a.teacher:            # "Ask my teacher" (C2.3): the sheet's code, the item and what she wrote
             ans = Answer(WAITING[lang], lang, "none", waiting=True)
         else:
@@ -607,7 +679,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
                                              hints=hints)
         if ans.solution is not None:               # the answer behind the ladder stays here, for "Check my answer"
             await hub.store.add_ladder(token, solution=ans.solution, sure=not ans.unsure)
-        await hub.record("ask.answered", ans.source, cohort_id=request.query_params.get("cohort"))
+        await hub.record("ask.answered", ans.source, cohort_id=cohort)
         if ans.source == "rules" and (hit := rules.screen(a.text)):      # counted for the admin's Safety page (P21)
             await hub.record("safety.flag", hit[0], cohort_id=cohort)
         if held:                                   # she hears only that it went to the teacher
@@ -631,7 +703,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     async def ask_teacher(token: str, request: Request):
         if not await hub.store.send_to_teacher(token):
             raise HTTPException(404, "no such question")
-        await hub.record("ask.to_teacher", cohort_id=request.query_params.get("cohort"))
+        await hub.record("ask.to_teacher", cohort_id=hub.her_cohort(await hub.learner(request, required=False)))
         return {"ok": True}
 
     # events from the phones' queues: verbs and ids only (events.py)
@@ -670,7 +742,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     # checking a certificate (P25b, C4.2): the core's, always on even where `cert` is off; no token
     @app.get("/api/cert/{cid}")
     async def cert_check(cid: str, request: Request):
-        hub.cert_limit.check(_who(request))
+        hub.cert_limit.check(hub.addr(request))
         row = await hub.store.certificate(cid.upper()) if CERT_ID.match(cid.upper()) else None
         found = graph.find_pathway(hub.library.graphs, row["course"]) if row else None
         if not row:
@@ -699,7 +771,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
             return "worksheet"
         if hub.pin is None:
             raise HTTPException(404, "Not Found")
-        hub.check_pin(pin, _who(request))
+        hub.check_pin(pin, hub.addr(request))
         return "answers"
 
     @app.get("/api/sheets/{lid}.html", response_class=HTMLResponse, dependencies=needs("sheets"))
@@ -714,7 +786,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
     @app.get("/api/sheets/{lid}.pdf", dependencies=needs("print"))
     async def sheet_pdf(lid: str, request: Request, lang: str = "prs", seed: int | None = Query(None, ge=0, le=9999),
                         kind: str = "worksheet", x_teacher_pin: str | None = Header(None)):
-        hub.pdf_limit.check(_who(request))
+        hub.pdf_limit.check(hub.addr(request))
         kind = _kind(kind, request, x_teacher_pin)
         seed = _seed(lid, seed)
         try:
@@ -740,7 +812,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         l = hub.lesson(p.lesson)
         if not l.get("sheet"):
             raise HTTPException(404, "this lesson has no sheet")
-        who = _who(request)          # each phone has its own address on the hub's Wi-Fi; the phone can't choose it
+        who = hub.addr(request)      # each phone has its own address on the hub's Wi-Fi; the phone can't choose it
         teacher = p.kind == "answers" or p.copies > cfg.free_copies
         if teacher:
             hub.check_pin(x_teacher_pin, who)
@@ -753,7 +825,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         hub.prints.add(jid, {"lesson": p.lesson, "kind": p.kind, "copies": p.copies, "lang": _lang(p.lang),
                              "seed": seed, "title": sheets.sheet_code(l, seed)})
         await hub.record("print.queued", events.lesson_id(p.lesson), p.copies,
-                         cohort_id=request.query_params.get("cohort"))
+                         cohort_id=hub.her_cohort(await hub.learner(request, required=False)))
         return {"id": jid, "status": "queued", "seed": seed, "printer": hub.printer.status()}
 
     @app.get("/api/print/{jid}", dependencies=needs("print"))
@@ -769,6 +841,7 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
 
     # online the app's files are the Worker's static assets, served before the Worker, so there is no folder here
     if cfg.app.is_dir():
+        app.add_middleware(StaffHeaders)
         app.mount("/fonts", StaticFiles(directory=cfg.app / "fonts"), name="fonts")
         app.mount("/", StaticFiles(directory=cfg.app, html=True), name="app")
     return app

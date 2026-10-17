@@ -347,7 +347,7 @@ def test_the_scholar_reads_every_surah_signs_the_set_and_the_switch_unlocks(tmp_
         assert c.post("/api/m/review/quran/sign", json=sign, headers=pin).json()["signed"] is True
         rows = c.get("/api/m/review/signoffs", headers=pin).json()["signoffs"]
     assert [r["lesson"] for r in rows] == ["quran:set"]
-    report = pull.pull(rows, root / "packs")
+    report = pull.pull(rows, root / "packs", hub_ok="the content lead")
     assert report["copied"] == ["quran:set: Hanafi scholar AB " + rows[0]["date"]]
     q = QuranSet(root / "quran")
     assert q.ok and q.signed and review_state(q.index, q.hash) == "signed"

@@ -10,8 +10,9 @@
   - `{kind: "rules", reason, text}`: distress, health or off-limits words get the rules' kind message, and nothing
     is kept.
 
-No token is read and none is sent (BUILD-PLAN 5.1: what is shared is screened wishlist text with counts, no token):
-the wishlist row holds the cohort, the band, the language, the text with identifiers replaced (ai/filters.scrub),
+No token is kept (BUILD-PLAN 5.1: what is shared is screened wishlist text with counts, no token). Since C5 (H1) the
+phone sends her token only so that her own class's switches, AI and wishlist apply, never a class a link names;
+without one the hub's own cohort's do. The wishlist row holds the cohort, the band, the language, the text with identifiers replaced (ai/filters.scrub),
 a count and two days. The goal is never logged. Typed only in 2027 (C3.5): browser speech input would send her voice
 to a third party. The search is code over titles, units, subjects, lesson text and node titles.
 
@@ -100,8 +101,10 @@ def router(hub, needs) -> APIRouter:
     async def plan(body: PlanIn, request: Request):
         hub.plan_limit.check(hub.who(request))
         lang = body.lang if body.lang in LANGS else "prs"
-        cohort, f, on = await hub.cohort_modules(request.query_params.get("cohort"),
-                                                 body.band if body.band in BANDS else None)
+        # her token, when the phone sends it, says only which class's switches, AI and wishlist apply (C5 H1); it is
+        # never kept with the wish. Without one, this hub's own cohort, never one the request names
+        who = await hub.learner(request, required=False)
+        cohort, f, on = await hub.cohort_modules(hub.her_cohort(who), body.band if body.band in BANDS else None)
         if not cohort or body.band not in BANDS or MODULE not in on:
             raise HTTPException(404, "Not Found")
         goal = " ".join(body.goal.split())

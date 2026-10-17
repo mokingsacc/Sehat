@@ -180,13 +180,14 @@ export async function credits() {
 
 export const ask = (q, token) => call('/api/ask', { method: 'POST', body: q, token, ms: 90000 });
 export const askStatus = (id) => call('/api/ask/' + id);
-export const toTeacher = (id) => call(`/api/ask/${id}/teacher`, { method: 'POST' });
+export const toTeacher = (id, token) => call(`/api/ask/${id}/teacher`, { method: 'POST', token });
 // Homework help's "Check my answer" (P15): right or not yet, never the answer; three tries a question
 export const checkAnswer = (id, answer, token) => call('/api/m/homework/check', { method: 'POST', body: { id, answer }, token });
 // the school day's timetable for her band (P19): no token, so the request says nothing about who asks (F5); the
 // learner's class is added as ?cohort= like every route's
-// "I want to learn this" (P22): her typed goal, never with her token; a miss joins the cohort's wishlist screened
-export const plan = (body) => call('/api/m/plan', { method: 'POST', body, ms: 15000 });
+// "I want to learn this" (P22): her typed goal; a miss joins her class's wishlist screened and without the token,
+// which says only whose class's switches apply (C5 H1: the server never takes the class from ?cohort= on a write)
+export const plan = (body, token) => call('/api/m/plan', { method: 'POST', body, token, ms: 15000 });
 export const timetable = (band) => call('/api/m/timetable?band=' + encodeURIComponent(band), { ms: 8000 });
 export const sendEvents = (list, token) => call('/api/events', { method: 'POST', body: { events: list }, token, ms: 15000 });
 
@@ -212,12 +213,12 @@ export function consentVersion() {
   const saved = cache('consent');
   return typeof saved === 'string' ? saved : null;
 }
-export const printSheet = (job, pin) => call('/api/print', { method: 'POST', body: job, pin });
+export const printSheet = (job, pin, token) => call('/api/print', { method: 'POST', body: job, pin, token });
 export const printStatus = (id) => call('/api/print/' + id);
 // a photo's strip of answer cells (P14): readings come back, never marks; the strip is not kept anywhere
 // certificates (P25b): earned with her token from her own events; printed on the hub with the id only; checked
 export const certEarn = (body, token) => call('/api/m/cert', { method: 'POST', body, token, ms: 20000 });
-export const certPrint = (body) => call('/api/m/cert/print', { method: 'POST', body });
+export const certPrint = (body, token) => call('/api/m/cert/print', { method: 'POST', body, token });
 export const photoMark = (body, token) => call('/api/m/photo/mark', { method: 'POST', body, token, ms: 60000 });
 export const sheetKey = (id, seed, lang) => call(`/api/sheets/${encodeURIComponent(id)}/key?seed=${seed}&lang=${lang}`);
 // the phone keeps no name, so none is sent: she writes hers in the sheet's name box by hand. `print` opens the

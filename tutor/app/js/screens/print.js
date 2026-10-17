@@ -129,7 +129,7 @@ function hubPanel(L, seed, lang, say, status, checkLink) {
     go.disabled = true;
     say(s('printing'));
     try {
-      const r = await hub.printSheet({ lesson: L.id, kind, copies, lang, seed }, pin || undefined);
+      const r = await hub.printSheet({ lesson: L.id, kind, copies, lang, seed }, pin || undefined, (state.child() || {}).token);
       if (pin) state.pin(pin);
       if (kind === 'worksheet') remember(L.id, r.seed, lang);
       watch(r.id);

@@ -53,6 +53,64 @@ countries do not include Afghanistan, and the Gemini API's terms bar services li
   `TUTOR_COMPAT_MODEL` to `[vars]` (neither is a secret), and `npx wrangler secret put TUTOR_COMPAT_API_KEY --name
   qalam-staging`; then pick `openai_compat` for a cohort. Gemini and OpenAI need only their key as a secret.
 
+## Security fixes (C5, 17 Oct 2026)
+
+The first C5 review (`review_c5_opus.md`, part A) found three high, four medium and eight low issues. Fixed in code:
+
+- **H1, a class from a link.** A learner's request now takes its class only from her token (`Hub.her_cohort`): the
+  kill switch, hold for the teacher, budget, provider and module switches are her class's, and a `?cohort=` naming
+  another class is ignored. Without a token a write (Ask on the hub, a goal, a print) is this hub's own cohort's;
+  `?cohort=` is read only for reads that spend and store nothing (hello, the timetable, lessons) and on the staff
+  routes, whose gate checks the class. The phone now sends her token with "Ask my teacher", "I want to learn this"
+  (never kept with the wish), certificate prints and prints.
+- **H2, one bucket for every new learner.** Online, a limit without a token counts the address Cloudflare saw
+  (`CF-Connecting-IP`; a server with a socket address never trusts that header). Joining allows 300 an hour from one
+  address (a school's Wi-Fi); only wrong class codes count against the 20 an hour.
+- **H3, consent.** The consent texts in use are now `hub-2026-10b` and `online-2026-10b` (Dari, Pashto, English;
+  drafts for the native speakers and the solicitor): they name no company, say that an AI service Qalam's admin
+  chooses may read questions and sheet photos, may be in another country and may keep them for a limited time, and
+  on the hub that this happens only if the centre's admin switches such a service on. The app asks again because
+  the version changed; the old texts stay readable for the records that name them.
+- **M1, forged staff writes.** Online, every staff write needs the header `X-Qalam: 1`, which the three staff pages
+  send and a form from another site cannot (403 without it).
+- **M2, headers.** The Worker build writes `build/public/_headers`: on every static file `nosniff` and
+  `frame-ancestors 'self'` (the review page frames the app); on `/admin/*`, `/teacher/*`, `/review/*` a CSP
+  (`default-src 'self'`, no framing) with `X-Frame-Options: DENY` and `Referrer-Policy: no-referrer`. The hub adds the
+  same to its staff pages. After the next staging deploy, check with `curl -I https://<host>/admin/`.
+- **M4, PIN signatures.** Each signature records how it was made (`signoffs.via`: `pin` or `access`);
+  `pull_signoffs.py` leaves out the hub's PIN-made ones unless `--hub-ok "<who vouches>"` names someone.
+- **L1** a teacher's lock reset code is in the admin's Log (who and for which learner, never the code); **L2** after
+  30 wrong PINs in an hour from any address, the hub checks one PIN every 10 seconds; **L3** an unknown Access key id
+  fetches the keys at most once a minute; **L4** Ask's subject and lesson are at most 40 and 80 characters; **L8** the
+  review page has Sign out.
+- **The owner's decisions:** production may use any provider the gateway speaks to over the internet (step 12 of
+  "Going live"), keys only as Worker secrets; and the AI spend page has a price table (US dollars per million input
+  and output tokens, per provider and model or for any model; empty by default, in the Log), so the estimate is no
+  longer $0 once a price is typed.
+
+Not done here, and why: **M3** and the login set-up are Mo's settings (below); **L5** (an encrypted hub backup
+command), **L6** (keeping her online token for the server that issued it) and **L7** (a hashed lock for the hub's
+packages) are larger than the review's "small" and wait until the hub is next touched.
+
+**Login set-up (the review's A2), for Mo.** One self-hosted Access application covering `/admin/*`,
+`/api/m/admin/*`, `/teacher/*`, `/api/m/teacher/*`, `/review/*`, `/api/m/review/*` on the production custom domain:
+
+| Setting | Choose | Why |
+|---|---|---|
+| Ways to sign in | One-time PIN (a code by email) and Google; nothing else | the email code works for any address |
+| Second factor | Independent MFA required on this application: the device's fingerprint or face unlock, a security key, or an authenticator app | an email code alone is one factor; the same rule for all staff, so no second list decides who gets one (M3) |
+| Admins' factors | Mo and each admin register two: a security key or the phone's fingerprint, and a spare | a lost phone does not lock the project out |
+| Who may sign in | An Access list "Qalam staff" (emails), one Allow policy | the panel's Staff page adds the row; the list adds the door |
+| Session | 24 hours (the default) | one sign-in a working day; Sign out ends it at once |
+| Cookie | SameSite Lax, HttpOnly on, binding cookie on | stops forged writes with M1's header, and a copied cookie being used elsewhere |
+| Hostname | Custom domain; `workers_dev = false` in production once it serves | no second door (M3) |
+| Secrets | `TUTOR_ACCESS_TEAM`, `TUTOR_ACCESS_AUD`, a new `TUTOR_STAFF_PEPPER` per environment, in the password manager | as below |
+| Weekly look | Access logs: denied sign-ins | sees a guessing attempt early |
+
+On the village hub: the teacher PIN and the separate admin PIN (six digits each), read on the hub's own screen
+(`python -m tutor_hub pin`, `admin-pin`), the admin PIN only for the hub keeper; both changed each term with `new-pin`
+and `new-admin-pin`, with the Wi-Fi password at the same time. No email or internet sign-in on the hub.
+
 ## Where the spike ran
 
 On Cloudflare, on the account's **Free plan**: the secrets were present and nothing blocked the deploy, so the
@@ -184,7 +242,8 @@ it instead, and the fallback container sets `TUTOR_STAFF_GATE=off` because nothi
    account routed to `qalam-staging` (to be confirmed when it is set up).
 3. Add a self-hosted Access application for `<host>/review/*`, `<host>/api/m/review/*`, `<host>/teacher/*` and
    `<host>/api/m/teacher/*`, `<host>/admin/*` and `<host>/api/m/admin/*`. Its policy allows the reviewers', teachers'
-   and admins' emails, with a second factor for admins. Copy the application's audience tag (AUD).
+   and admins' emails, with independent MFA for every staff member (C5: "Login set-up" above). Copy the
+   application's audience tag (AUD).
 4. Set three Worker secrets (the deploy job never touches secrets, so they stay across deploys):
    `wrangler secret put TUTOR_ACCESS_TEAM` (the team name), `TUTOR_ACCESS_AUD` (the AUD tag) and
    `TUTOR_STAFF_PEPPER` (a long random string, for example from
@@ -307,8 +366,11 @@ Worker, no secret. Staging stays the only deployed copy until Mo does the steps 
 11. **Backups:** run Tutor production with `export` once by hand, do the restore drill in `RELEASE.md`, then set the
     repository variable `QALAM_LIVE = yes` for the weekly export (Sundays 21:41 UTC; kept 35 days, encrypted).
     D1 Time Travel needs nothing: it keeps 30 days on the Paid plan (7 on Free).
-12. **After P18:** `TUTOR_AI_PROVIDER = "openai"` in `wrangler.production.toml` (the guard allows only `off` and
-    `openai`) and the key as a Worker secret, as P18 names it; nothing else changes.
+12. **Learner AI:** `TUTOR_AI_PROVIDER` in `wrangler.production.toml` is the default for classes that pick none:
+    `off`, `openai`, `anthropic`, `gemini` or `openai_compat` (with an https `TUTOR_COMPAT_URL`); the guard refuses
+    `fake`, `local` and any key in `[vars]` (owner's decision, 17 Oct 2026, C5). Each key only as a Worker secret
+    (`npx wrangler secret put ANTHROPIC_API_KEY --name qalam`, and so on); a class may pick any provider in the admin
+    panel as on staging.
 
 Every later release follows `RELEASE.md`.
 

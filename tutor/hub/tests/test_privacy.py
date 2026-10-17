@@ -38,6 +38,7 @@ RETENTION = {
     "certificates": "for good: a pathway, its version, a month and a cohort; no learner in them (C4.2)",
     "daily_counts": "two days (today and yesterday); with the learner (C4.9)",
     "made": "60 days after it was sent or decided, whichever is later; with the learner (C4.8)",
+    "ai_prices": "until the admin changes it: a provider, a model and two prices; no learner in them (C5)",
 }
 
 OLD, OLD_DAY = "2020-01-01T00:00:00+00:00", "2020-01-01"

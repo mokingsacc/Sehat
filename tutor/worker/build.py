@@ -16,6 +16,8 @@
                                               /quran/index.json, /quran/surah/<n>.json and the recitation files fetched
                                               here (/quran/audio/<edition>/<s>_<a>.mp3), only where the build is not for
                                               release or a Hanafi scholar has signed the set (C4.7)
+    build/public/_headers                     security headers for the static files (C5 M2; HEADERS below): Workers
+                                              static assets read it and do not serve it
 
 build/src mirrors tutor/, so the hub's defaults (config.TUTOR) find every folder without a setting. The pictures go
 twice: in the bundle, where the hub checks they exist, and as static assets, which is how phones get them online.
@@ -32,6 +34,22 @@ TUTOR = WORKER.parent
 BUILD = WORKER / "build"
 SKIP = shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache", ".DS_Store")
 AUDIO = ("*.opus", "*.ogg", "*.mp3")
+STAFF_CSP = ("default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; "
+             "base-uri 'none'; form-action 'self'")
+# C5 M2: no other site may frame a page (the review page frames the app itself, so 'self' everywhere but the staff
+# pages); the staff pages also run only this site's scripts. Rules that match one path add up: the two CSP lines
+# become two policies, both enforced; every other header is in one rule only. The Worker's own answers (/api/*,
+# /v/*) are not static files and get none of these.
+HEADERS = f"""/*
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: frame-ancestors 'self'
+"""
+for _staff in ("admin", "teacher", "review"):
+    HEADERS += f"""/{_staff}/*
+  Content-Security-Policy: {STAFF_CSP}
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+"""
 
 
 def build(out: Path = BUILD, config: Path | None = None) -> dict:
@@ -56,6 +74,7 @@ def build(out: Path = BUILD, config: Path | None = None) -> dict:
     for audio in sorted((TUTOR / "content" / "packs").glob("*/audio")):
         shutil.copytree(audio, public / "packs" / audio.parent.name / "audio", ignore=SKIP)
     quran_set(src, public, release=str(settings.get("TUTOR_RELEASE", "")) == "1")
+    (public / "_headers").write_text(HEADERS, encoding="utf-8")
     return {name: sum(f.stat().st_size for f in (out / name).rglob("*") if f.is_file()) for name in ("src", "public")}
 
 

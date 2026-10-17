@@ -108,6 +108,13 @@ def test_build_lays_out_the_hub_as_its_defaults_expect(tmp_path):
     assert list((src / "content" / "packs").glob("*/lessons/*.json"))
     assert (src / "content" / "sources.json").is_file() and (src / "content" / "permissions" / "README.md").is_file()
     assert (src / "content" / "aliases.json").is_file() and list((src / "content" / "consent").glob("*/online-*.json"))
+    # C5 M2: the static files' security headers; the staff pages may not be framed and run only this site's scripts
+    headers = (public / "_headers").read_text(encoding="utf-8")
+    for page in ("/admin/*", "/teacher/*", "/review/*"):
+        rule = headers.split(page + "\n", 1)[1].split("\n/", 1)[0]
+        assert "frame-ancestors 'none'" in rule and "default-src 'self'" in rule and "X-Frame-Options: DENY" in rule
+    assert headers.startswith("/*\n  X-Content-Type-Options: nosniff\n  Content-Security-Policy: frame-ancestors 'self'\n")
+    assert headers.count("nosniff") == 1                  # matching rules add up: one copy, never "nosniff, nosniff"
     assert not list((src / "content").rglob("*.opus"))        # clips are static assets; the hub reads manifests
     assert (public / "index.html").is_file() and not (public / "tests").exists()
     assert list((public / "packs").glob("*/pictures/*.svg"))
@@ -244,10 +251,10 @@ async def test_every_request_stays_well_under_the_free_plans_query_limit(worker)
                 headers = {"X-Learner-Token": r.json()["token"]}
             costs[name] = worker.db.calls - before
     # the start applies each migration once per database (one batch each), so on a fresh database it grows by one
-    # with every migration file (an existing one applies only the new files); it stays under 60% of the plan's
-    # limit, everything but the migrations at 13, every other request at 20
+    # with every migration file (an existing one applies only the new files); it stays near 60% of the plan's
+    # limit (31 since 0018), everything but the migrations at 13, every other request at 20
     first = costs.pop("first request (hub starts)")
-    assert first <= 30 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
+    assert first <= 31 < FREE_PLAN_QUERIES and first - len(list((TUTOR / "migrations").glob("*.sql"))) <= 13, first
     assert max(costs.values()) <= 20 < FREE_PLAN_QUERIES, costs
     assert costs["100 events"] <= 4, costs                    # her record (and her day seen), then one batch
 

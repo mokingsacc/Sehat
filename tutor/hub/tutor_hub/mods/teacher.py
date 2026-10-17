@@ -396,6 +396,9 @@ def router(hub, needs) -> APIRouter:
         code = f"{secrets.randbelow(10 ** 6):06d}"
         expires = (now() + timedelta(minutes=CODE_MINUTES)).isoformat(timespec="seconds")
         await hub.store.set_reset_code(row["token_hash"], code_hash(row["token_hash"], code), expires)
+        # the admin's Log keeps who made it and for which learner number, never the code (C5 L1)
+        await hub.store.add_admin_log(cohort=c["id"], what="teacher.lock_code", detail=f"a lock reset code for {alias}",
+                                      changed_by=f"teacher:{me['label']}"[:60])
         return {"code": code, "minutes": CODE_MINUTES}
 
     @r.get("/lessons", dependencies=needs(MODULE))

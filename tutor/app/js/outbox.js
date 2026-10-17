@@ -79,7 +79,7 @@ async function sendAsks(id) {
       }
     } else if (a.teacherQueued && a.id) {
       try {
-        await hub.toTeacher(a.id);
+        await hub.toTeacher(a.id, l.token);
         state.updateAskOf(id, a.k, { teacherQueued: false, sent: true });
       } catch (e) {
         if (!e.status || e.status >= 500 || e.status === 429) return;
@@ -105,7 +105,7 @@ async function sendWishes(id, now = Date.now()) {
     const rest = () => state.updateChild(id, { wishes: (state.byId(id).wishes || []).slice(1) });
     if (!l.consent || now - w.at > QUESTION_DAYS * DAY) { rest(); continue; }   // not agreed (any more), or too old
     try {
-      await hub.plan({ goal: w.q, lang: w.lang, band: l.band });            // no token: the wishlist never has one
+      await hub.plan({ goal: w.q, lang: w.lang, band: l.band }, l.token);   // her class's; the wish is kept without it
       rest();
     } catch (e) {
       if (!e.status || e.status >= 500 || e.status === 429) return;           // later

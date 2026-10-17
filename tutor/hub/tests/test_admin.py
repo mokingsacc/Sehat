@@ -51,7 +51,7 @@ def post(c, path, body=None, status=200):
 def as_admin(c, rsa, email="admin@example.org", role="admin"):
     asyncio.run(c.hub.store.add_staff(id_hash=staff.id_hash(PEPPER, email), label="Admin A" if role == "admin"
                                       else "Teacher A", role=role, cohorts=[STAGING], initials=""))
-    c.pin = {"Cf-Access-Jwt-Assertion": token(rsa, email=email)}
+    c.pin = {"Cf-Access-Jwt-Assertion": token(rsa, email=email), "X-Qalam": "1"}   # as the page sends
     return c
 
 
@@ -382,7 +382,7 @@ def test_staff_are_added_by_email_kept_as_a_hash_and_the_last_admin_stays(online
     dump = "\n".join(db.iterdump()).lower()
     db.close()
     assert "example.org" not in dump and staff.id_hash(PEPPER, "teacher.b@example.org") in dump
-    online.pin = {"Cf-Access-Jwt-Assertion": token(rsa, email="teacher.b@example.org")}
+    online.pin = {"Cf-Access-Jwt-Assertion": token(rsa, email="teacher.b@example.org"), "X-Qalam": "1"}
     assert online.get("/api/m/teacher/me", headers=online.pin).status_code == 200
     as_admin(online, rsa)
     for bad in ({"email": "nobody", "label": "X", "role": "teacher"}, {"email": "a@b.c", "label": "Girls teacher",

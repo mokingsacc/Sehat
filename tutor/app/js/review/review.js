@@ -25,7 +25,7 @@ const HOLD_MS = 3000;
 // English, and Dari drafts for a native speaker's check
 const T = {
   en: {
-    title: 'Review', loading: 'Loading…', connect: 'Connect to review.', off: 'Review is not open here.',
+    title: 'Review', sign_out: 'Sign out', loading: 'Loading…', connect: 'Connect to review.', off: 'Review is not open here.',
     access: 'Sign in through Cloudflare Access, then open this page again.', not_staff: 'Ask the admin to add you.',
     pin: "Teacher's PIN", open: 'Open', wrong_pin: 'That PIN is not right.', role: 'I review as', initials: 'My initials',
     for_you: 'Lessons for you', none: 'No lesson needs your role.', not_started: 'Not started', step_of: 'Step {a} of {b}',
@@ -53,7 +53,7 @@ const T = {
     sign_cards: 'Sign this card set', todo_cards: 'Every card and the checklist need OK before signing.',
   },
   prs: {
-    title: 'بررسی', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
+    title: 'بررسی', sign_out: 'خروج', loading: 'صبر کن…', connect: 'برای بررسی به انترنت وصل شو.', off: 'بررسی این‌جا باز نیست.',
     access: 'از راه Cloudflare Access وارد شو و این صفحه را دوباره باز کن.', not_staff: 'از مدیر بخواه تو را اضافه کند.',
     pin: 'رمز معلم', open: 'باز کن', wrong_pin: 'این رمز درست نیست.', role: 'نقش من', initials: 'حروف اول نام من',
     for_you: 'درس‌ها برای تو', none: 'هیچ درسی به نقش تو نیاز ندارد.', not_started: 'شروع نشده', step_of: 'قدم {a} از {b}',
@@ -115,12 +115,22 @@ function top(back, title) {
     back ? h('button', { type: 'button', class: 'round', 'aria-label': t('back'), onClick: back }, ui === 'prs' ? '→' : '←') : null,
     h('div', { class: 'grow' }, h('h1', {}, title || t('title'))),
     h('button', { type: 'button', class: 'chip', onClick: () => { setUi(ui === 'en' ? 'prs' : 'en'); start(); } },
-      ui === 'en' ? 'دری' : 'English'));
+      ui === 'en' ? 'دری' : 'English'),
+    me.via ? h('button', { type: 'button', class: 'chip', onClick: signOut }, t('sign_out')) : null);
+}
+
+// as on the teacher and admin pages (C5 L8): Access's own sign-out online; on the hub the PIN, role and initials
+// leave this page's memory
+function signOut() {
+  if (me.via === 'access') { location.href = '/cdn-cgi/access/logout'; return; }
+  Object.assign(me, { pin: '', role: '', initials: '', via: null, roles: [] });
+  pinGate();
 }
 
 async function api(path, { method = 'GET', body } = {}) {
   const headers = { 'content-type': 'application/json' };
   if (me.pin) headers['x-teacher-pin'] = me.pin;
+  if (method !== 'GET') headers['x-qalam'] = '1';      // a staff write (C5 M1): a form from another site cannot send it
   const sep = path.includes('?') ? '&' : '?';
   const url = API + path + (me.via === 'pin' && me.role && method === 'GET' && path !== '/me' ? `${sep}role=${encodeURIComponent(me.role)}` : '');
   const r = await fetch(url, { method, headers, body: body ? JSON.stringify(body) : undefined, cache: 'no-store',

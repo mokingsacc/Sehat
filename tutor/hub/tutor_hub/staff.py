@@ -30,7 +30,9 @@ from fastapi import HTTPException, Request
 log = logging.getLogger("tutor.staff")
 
 ACCESS_HEADER = "cf-access-jwt-assertion"
-KEYS_TTL = 3600                      # Access rotates its keys every six weeks; an unknown key id refetches at once
+KEYS_TTL = 3600                      # Access rotates its keys every six weeks; an unknown key id refetches
+MISS_TTL = 60                        # ... at most once a minute (C5 L3)
+WRITE_HEADER = "x-qalam"             # on every staff write online (C5 M1): `X-Qalam: 1`
 LEEWAY = 60
 # DER of the SHA-256 DigestInfo, the prefix of every PKCS#1 v1.5 SHA-256 signature
 SHA256_INFO = bytes.fromhex("3031300d060960864801650304020105000420")
@@ -117,6 +119,7 @@ class Gate:
         self.mode = mode_of(cfg)
         self.fetcher = fetcher or fetch_keys
         self._keys: tuple[float, list] = (0.0, [])
+        self._miss = 0.0                            # when a key id we did not have last made us fetch (C5 L3)
 
     @property
     def on(self) -> bool:
@@ -124,9 +127,15 @@ class Gate:
 
     async def keys(self, kid: str | None) -> list[dict]:
         at, keys = self._keys
-        if time.time() - at > KEYS_TTL or not any(k.get("kid") == kid for k in keys):
+        now = time.time()
+        stale = now - at > KEYS_TTL
+        # an unknown key id fetches again (Access rotates its keys), but at most once a minute: a made-up `kid` on
+        # every request does not make the Worker fetch the team's keys every time (C5 L3)
+        if stale or (not any(k.get("kid") == kid for k in keys) and now - self._miss > MISS_TTL):
+            if not stale:
+                self._miss = now
             keys = await self.fetcher(self.hub.cfg.access_team)
-            self._keys = (time.time(), keys)
+            self._keys = (now, keys)
         return keys
 
     async def who(self, request: Request) -> dict:
@@ -137,6 +146,10 @@ class Gate:
         if self.mode == "pin":
             self.hub.check_pin(request.headers.get("x-teacher-pin"), self.hub.who(request))
             return {"label": "hub", "role": None, "cohorts": [], "initials": "", "via": "pin"}
+        # C5 M1: the Access cookie goes with a form posted from any site, so a staff write must carry a header a
+        # form cannot set (the staff pages' api() adds it; another site's script would need a CORS preflight)
+        if request.method not in ("GET", "HEAD") and request.headers.get(WRITE_HEADER) != "1":
+            raise HTTPException(403, "a staff change needs the X-Qalam header")
         token = request.headers.get(ACCESS_HEADER)
         if not token:
             raise HTTPException(401, "sign in through Cloudflare Access")

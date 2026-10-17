@@ -186,12 +186,12 @@ def test_a_reviewer_marks_every_step_then_signs_with_initials_only(village):
     assert next(l for p in q["packs"] for l in p["lessons"] if l["id"] == LESSON)["status"] == "signed"
     offs = village.get("/api/m/review/signoffs", headers=h).json()["signoffs"]
     assert offs == [{"lesson": LESSON, "hash": d["hash"], "role": "Dari reader", "initials": "AB",
-                     "date": offs[0]["date"]}]
+                     "date": offs[0]["date"], "via": "pin"}]
 
 
 def test_online_the_role_and_initials_come_from_the_staff_row(online, rsa):
     add_reviewer(online, role="maths teacher", initials="EF")
-    h = {"Cf-Access-Jwt-Assertion": token(rsa)}
+    h = {"Cf-Access-Jwt-Assertion": token(rsa), "X-Qalam": "1"}
     d = review_all(online, None, h)
     r = online.post(f"/api/m/review/lessons/{LESSON}/sign", headers=h, json={"hash": d["hash"], "role": "Dari reader"})
     assert r.status_code == 200 and r.json()["role"] == "maths teacher"       # her row decides, not the request
@@ -211,19 +211,22 @@ def test_pulled_signoffs_pass_release_and_one_changed_word_voids_them(village, t
     f = packs / "starter" / "lessons" / f"{LESSON}.json"
     before = f.read_text(encoding="utf-8")
     assert LESSON not in Library(packs, release=True).lessons                  # unsigned: not served in release
+    assert {o["via"] for o in offs} == {"pin"}                               # the hub's shared PIN (C5 M4)
     report = pull.pull(offs, packs)
+    assert not report["copied"] and len(report["pin"]) == 3 and f.read_text(encoding="utf-8") == before
+    report = pull.pull(offs, packs, hub_ok="the content lead")                # someone named vouches for them
     assert len(report["copied"]) == 3 and not report["stale"]
     after = f.read_text(encoding="utf-8")
     assert after.splitlines()[:5] == before.splitlines()[:5]                    # only the review value changed
     lib = Library(packs, release=True)
     assert LESSON in lib.lessons and not any(LESSON in x for x in lib.hidden), lib.hidden
     assert json.loads(after)["review"]["status"] == "checked"
-    assert pull.pull(offs, packs)["already"]                                    # pulling again changes nothing
+    assert pull.pull(offs, packs, hub_ok="the content lead")["already"]        # pulling again changes nothing
 
     f.write_text(after.replace("کسر یعنی", "کسر یعنی:", 1), encoding="utf-8")   # one changed word
     lib = Library(packs, release=True)
     assert LESSON not in lib.lessons and any(LESSON in x for x in lib.hidden)
-    assert len(pull.pull(offs, packs)["stale"]) == 3                            # the old signatures are left out
+    assert len(pull.pull(offs, packs, hub_ok="the content lead")["stale"]) == 3   # the old signatures are left out
 
 
 def test_the_staff_command_prints_sql_with_a_hash_and_never_the_email(cfg, capsys):
@@ -265,7 +268,7 @@ def test_a_skills_graph_is_reviewed_node_by_node_signed_and_pulled_into_its_file
     shutil.copytree(PACKS.parent / "graph", tmp_path / "graph")
     shutil.copy(PACKS.parent / "sources.json", tmp_path / "sources.json")
     assert Library(tmp_path / "packs", release=True).graphs == {}
-    report = pull.pull(offs, tmp_path / "packs")
+    report = pull.pull(offs, tmp_path / "packs", hub_ok="the content lead")
     assert report["copied"] == [f"graph:maths: {role} EF {offs[0]['date']}", f"graph:maths: adult educator GH {offs[0]['date']}"]
     g = json.loads((tmp_path / "graph" / "maths.json").read_text(encoding="utf-8"))
     assert g["review"]["status"] == "checked" and [o["initials"] for o in g["review"]["signoffs"]] == ["EF", "GH"]

@@ -13,6 +13,12 @@ Only a signature for the lesson's current content hash is copied; one for an old
 since it was signed" and left out, so one changed word voids it. A role the lesson does not need is skipped. The
 lesson file keeps its own layout: only its `review` value is rewritten. Then `validate_pack.py --release` says what
 is still missing. Initials only, never a name.
+
+A signature made with the hub's shared teacher PIN (`via` pin; every signature in a hub's own database made before
+the column existed) may come from anyone who knows the PIN, so it is listed as "pin" and left out unless someone
+named vouches for it (C5 M4):
+
+  python3 tools/pull_signoffs.py --db data/hub.db --hub-ok "the content lead, who sat with the reviewer"
 """
 import argparse
 import json
@@ -34,10 +40,14 @@ def read_json(path: Path) -> list[dict]:
 def read_db(path: Path) -> list[dict]:
     db = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
     try:
-        rows = db.execute("SELECT lesson, content_hash, role, initials, signed_on FROM signoffs ORDER BY id").fetchall()
+        cols = {r[1] for r in db.execute("PRAGMA table_info(signoffs)")}
+        via = "via" if "via" in cols else "''"
+        rows = db.execute(f"SELECT lesson, content_hash, role, initials, signed_on, {via} FROM signoffs "
+                          "ORDER BY id").fetchall()
     finally:
         db.close()
-    return [{"lesson": a, "hash": b, "role": c, "initials": d, "date": e} for a, b, c, d, e in rows]
+    # a hub's own database: its review gate is the shared PIN, so a signature that does not say is a PIN's
+    return [{"lesson": a, "hash": b, "role": c, "initials": d, "date": e, "via": f or "pin"} for a, b, c, d, e, f in rows]
 
 
 def value_span(text: str, key: str) -> tuple[int, int] | None:
@@ -171,11 +181,16 @@ def pull_cards(lib, pid: str, signs: list[dict], report: dict):
         f.write_text(json.dumps(cards, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def pull(rows: list[dict], packs_dir: Path) -> dict:
+def pull(rows: list[dict], packs_dir: Path, hub_ok: str | None = None) -> dict:
     lib = Library(packs_dir)
-    report = {"copied": [], "already": [], "stale": [], "unknown": [], "not_needed": []}
+    report = {"copied": [], "already": [], "stale": [], "unknown": [], "not_needed": [], "pin": []}
     by_lesson: dict[str, list] = {}
     for r in rows:
+        if r.get("via") == "pin":
+            report["pin"].append(f"{r['lesson']}: {r['role']} {r['initials']} {r['date']}"
+                                 + (f" (vouched for by {hub_ok})" if hub_ok else ": left out, made with the shared PIN"))
+            if not hub_ok:
+                continue
         by_lesson.setdefault(r["lesson"], []).append(r)
     for lid, signs in sorted(by_lesson.items()):
         if lid.startswith("graph:"):
@@ -229,9 +244,11 @@ def main(argv=None):
     src = ap.add_mutually_exclusive_group(required=True)
     src.add_argument("--json", help="signoffs saved from /api/m/review/signoffs")
     src.add_argument("--db", help="a hub's SQLite database")
+    ap.add_argument("--hub-ok", help="who vouches for the signatures made with the hub's shared PIN (else left out)")
     a = ap.parse_args(argv)
     rows = read_json(Path(a.json)) if a.json else read_db(Path(a.db))
-    report = pull(rows, Path(a.packs))
+    hub_ok = (a.hub_ok or "").strip() or None
+    report = pull(rows, Path(a.packs), hub_ok)
     for k, items in report.items():
         for x in items:
             print(f"{k:10} {x}")
