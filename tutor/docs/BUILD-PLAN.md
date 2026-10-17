@@ -795,6 +795,31 @@ Builder order (C6): P30a, then P31, then P30b if P30a's browser check is green.
 Builder order (C4): Builder 1 builds P25a, then P26 with 7c, then 7b, then P25b with 7a; Builder 2 builds P27a, P29,
 P28, P32, and P27b only if D12's sentence is signed by then.
 
+### Stage W: the website and the school bag (since 17 October 2026)
+
+The website committee's ruling ([WEBSITE.md](WEBSITE.md), held 17 October 2026, Mo not available, every point
+decided with a default he can overrule) puts a light website at `/` and moves the app to `/app/` before production
+goes live, and keeps a learner's work in step between her phones, the hub and online through seats (one server
+identity per server, closing C5's L6) and the school bag (her whole record, sealed on the phone, relayed by the
+Worker and each hub, opened by a 16-digit code or its text-only card). The site strand (W1 to W3) and the sync
+strand (W4 to W7) can run side by side; W7 needs `/m` from W3.
+
+| Phase | Goal | Done when | Committee |
+|---|---|---|---|
+| W1 The site's first pages (M) | `site/` (templates, strings in three languages as drafts), `tools/make_site.py` with the content lint, the three homes from the final mock-up, `/privacy/`, the site pages' headers, `tools/site_check.mjs` in CI | every check of WEBSITE.md 2.5 passes in Dari, Pashto and English at 360 and 1280 px, light and dark; native speakers have the strings | settled by the website committee |
+| W2 The move to `/app/` (M) | WEBSITE.md 2.2: the build's assembly, the app's few changed lines, the site worker, the forwards, the hub's mount, the manifest | an old class QR `/?join=` joins; a phone with today's worker keeps its learners and opens `/app/` with no picture or clip downloaded again; no 404 under `/app/`; staff pages load with their CSP; `sync-web.sh` and the APK unchanged; hub tests cover `/`, `/app/` and `/teacher/` | settled |
+| W3 The other pages (M) | `/families/`, `/teachers/`, `/partners/`, `/lessons/`, `/credits/`, `/get/` restyled, `/m`, `/offline/`, 404; heading clips; the shell trim | each page within budget; the clips pass the native listener (C5.6); the shell 0.45 MB or less | settled |
+| W4 Seats and clocks (M) | `hello.id` and `now`; `seats` and consent per seat; the token-to-issuer check; the legacy migration; events with `to`; skew; `/api/me/merge`; `/api/me/token` | two fake servers: hub, online, hub keeps one token per server and sends neither to the other; a certificate completes after the move; a 2010 clock's events land in the window; the merge re-keys every `token_hash` column; C5 H1 holds | settled |
+| W5 The bag core (M) | `app/js/bag.js` (code, keys, seal, open, merge), stamps on every `state.js` write, the vendored crypto | property tests (commutative, associative, idempotent); clocks in 2010 and 2030; unknown fields kept; a full record under 64 KB; known-answer vectors; PBKDF2 timed | settled |
+| W6 The relay (M) | `0020_bags.sql`, `meta`, the three bag routes, the pepper, the limits, retention, deletion with her | the same contract tests on the D1 fake and SQLite; a 412 race; 413; 403 without the new consent; the privacy suite's column scan, retention and sentinel | settled |
+| W7 The bag screens (M) | the consent line, making the bag, the card, Settings → School bag, "I already use Qalam", scan and type, `/m`, the intent and `takeBag()`, the file route, "Make a new code", removing her, the stand-in picture, "This is also me" | APK, Chrome, hub and a new phone on throttled 2G: nothing lost; `signup_check.mjs` walks it in three languages | settled |
+| W8 Borrowed phones (S) | "Just for today", `navigator.storage.persist()`, the iPhone advice | nothing reaches storage in that mode; push on "Done" | settled |
+| W9 The teacher's return code (S) | a 6-digit return code and `GET /api/me/progress` | the old token dies; lessons and marks rebuilt; the teacher sees one learner | settled |
+| W10 Field checks (S) | an Android Go phone on 2G, an iPhone, a week offline on two phones, a shutdown drill, a hub-only week | nothing lost, costs as stated; a 9 KB Naskh subset only if iOS lacks a Pashto letter | settled |
+
+Builder order (website): Builder 1 builds W1 to W5 in the judge's order, one commit each; Builder 2 builds W6 to
+W10.
+
 ### Committee sittings
 
 | Sitting | When | Settles | Builders bring |
@@ -806,6 +831,7 @@ P28, P32, and P27b only if D12's sentence is signed by then.
 | C4 | 17 Oct 2026, held early with C0 to C3 | Year 1 modules (P25 to P29, P32); photo and homework for `open` with budgets, an adult study time, spoken goals; the 36 open look questions | decisions in DESIGN.md ("C4 decisions") and specs in DESIGN-C4-SPECS.md; the July 2027 slot becomes a thread review of the pilot report against C4's gates (photo for `open`, `recall` for the pilot cohort, homework's numbers), not a sitting |
 | C5 | 17 Oct 2026, held early with C0 to C4 | security (part A), staff pages in English, Dari and Pashto, staff usability, nine learner polish items, Mo's four decisions of 17 October, the login set-up | decisions in DESIGN.md ("C5 decisions") and specs in DESIGN-C5-SPECS.md |
 | C6 | 17 Oct 2026, held early with C0 to C5, without a member's draft | P30 (live audio classes) and P31 (competitions), both built off by default | decisions in DESIGN.md ("C6 decisions") and specs in DESIGN-C6-SPECS.md; no further sitting is planned: the legal opinions open the gates by thread review |
+| Website | 17 Oct 2026, a judge over three designs (A, B, C), Mo not available | the website at `/`, the app at `/app/`, seats, the school bag, phases W1 to W10 | the ruling filed as [WEBSITE.md](WEBSITE.md) |
 
 Each sitting returns a short decision note for DESIGN.md and the decision log.
 
@@ -963,5 +989,6 @@ slips past 22 December, P13 to P15 are built on the hub first; they do not need 
 | 17 Oct 2026 | Mo: speech practice, live audio classes (P30) and competitions (P31) are built, switched off by default; P30 and P31 specified at C6 | Mo | DESIGN.md "C5 decisions" |
 | 17 Oct 2026 | C5 (design committee, held early): the six security rulings (C5.A1 to A6: the class from her token; `CF-Connecting-IP`, 20 wrong codes and 300 joins an hour an address; consent names the providers; one Access application with independent MFA for every staff member; Lax cookie, 24-hour sessions, `workers_dev = false`; PIN signatures `via: pin`, never a scholar's or adviser's); staff pages in English, Dari and Pashto with one string file per language, the polite plural, Solar Hijri dates (C5.1); B4's ten usability changes with C5.2 and two of the chair's; the nine learner polish items with C5.3 and C5.4 ("بلی" everywhere in Dari); phases P33 to P36 and P27b rewritten; the old P33 (box parity) renumbered P37; D13 (the consent text naming the providers) added | design committee | DESIGN.md "C5 decisions"; DESIGN-C5-SPECS.md; decisions_c5_fable.md |
 | 17 Oct 2026 | C6 (design committee, held early, no member's draft): live audio classes through Cloudflare Realtime SFU and TURN, no video, no media through the Worker, HTTPS polling and no sockets; children listen and raise a hand with one of three reasons, never a child's microphone; the floor for adult-only classes only (P30b); one-time tickets, no links; sound only with two or more learners present; nothing recorded; women teachers for girls' classes kept by assignment, D1 not needed; `live` off everywhere, held without its four secrets, locked by `rtc`, `consent` and `gate`, a 900 GB monthly cap; contests as signed question sets over existing lessons, marked on the server, released per class, no hints, no places, no prizes, a "took part" certificate, locked by `gate` on a release host; D14 and D15 added | design committee | DESIGN.md "C6 decisions", DESIGN-C6-SPECS.md |
+| 17 Oct 2026 | Website committee (a judge over three designs; design A with grafts from B and C): a light site at `/` in Dari, with `/ps/` and `/en/`, system fonts only, one request and at most 14 KB brotli for a home, no analytics, cookies or third parties, a strict CSP; the app moves to `/app/` before production, old `/?join=` cards and a phone with a learner forwarded; seats (one token per server, keyed on `hello.id`, consent per seat; closes C5 L6); the school bag (16 digits with a Damm check, a text QR `Q1 BAG …`, sealed with vendored noble XChaCha20-Poly1305 under PBKDF2 at 100 000 rounds, relayed by the one `qalam` D1 database and each hub's SQLite, deleted with her and after 12 months, consent needed to keep a bag); no App Links (an `intent://` pinned to `org.qalam.app`); the quiet profile; phases W1 to W10 and the fifteen owner decisions of WEBSITE.md 4.2 | website committee | WEBSITE.md |
 
 New decisions are added with date and source; a row is never edited, only superseded.

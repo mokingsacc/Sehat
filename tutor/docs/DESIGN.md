@@ -17,6 +17,11 @@ consent screen and the PIN lock. Builders code from this file; a question it doe
 The renderings are in [Home Tutor App Looks](https://claude.ai/artifact/HPUjNESWe3WBYe6iLVi3aT). The tokens are at the
 top of `app/css/app.css`; screens use only tokens, so a look is changed in one place.
 
+**The website** (the website committee, 17 Oct 2026) is specified apart, in [WEBSITE.md](WEBSITE.md): design A's look
+(Welcome's palette, system fonts with `system-ui` first, one inline picture-book scene, 44 px targets and 14 px text
+at least), the pages and their weight budgets, the move of the app to `/app/`, seats and the school bag. Its rules
+on words, numbers and direction are this file's (the P10 rule on a middle dot beside Persian digits included).
+
 ## Ease of use first
 
 - **Tapping a year starts the app.** No sign-up, no password, no "next" button. No name is ever typed: an alias
