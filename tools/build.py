@@ -359,6 +359,13 @@ for pat in ("css/*.css", "js/*.js", "js/cine/*.js", "anim/*.js", "anim/cine/*.js
 # when it is there and falls back to the SVG version when it is not, so precache whatever exists (sub-folders are listed
 # explicitly because these globs do not recurse). anim/*-3d.js (an earlier plan) is still left out.
 pre = [p for p in pre if not p.startswith("js/sw") and not p.endswith("-3d.js")]
+# Mo's painted pictures (17 Oct 2026): img/topics|pics|app/<name>.webp. Where the old drawing <name>.svg is kept next to
+# one, the drawing is only for the Android app (WebP does not squash in the APK and the 105 pictures would push it over
+# 15 MB): android/sync-web.sh leaves those WebPs out, the app shows the drawing, and its service worker fetches the
+# picture from the website the first time it is shown online and keeps it (PAINTED below, js/sw.template.js).
+PAINTED = {p: hashlib.sha1(open(J(p), "rb").read()).hexdigest()[:8] for p in pre
+           if re.match(r"img/(topics|pics|app)/[^/]+\.webp$", p) and exists(p[:-5] + ".svg")}
+pre = [p for p in pre if not (p.endswith(".svg") and p[:-4] + ".webp" in PAINTED)]
 # picture-step animations (js/steps.js, docs/STEPS_PLAYER.md): only live ones (STEPS in js/anim.js, approved by Mo).
 # Where their pictures live is chosen from the animation's group, never by hand (tools/anims.py, Mo 9 Oct 2026):
 # - "precache": the Emergency and CPR animations (Emergency section, Emergency cards, CPR / choking / newborn pages).
@@ -401,6 +408,7 @@ json.dump({"version": version, "built": book["built"]}, open(J("content/version.
 
 sw = open(J("js/sw.template.js"), encoding="utf-8").read()
 sw = sw.replace("__VERSION__", version).replace("__PRECACHE__", json.dumps(pre, indent=1))
+sw = sw.replace("__SITE__", json.dumps(book["config"].get("appUrl") or "")).replace("__PAINTED__", json.dumps(PAINTED, indent=0, sort_keys=True))
 open(J("sw.js"), "w", encoding="utf-8").write(sw)
 
 # the server's copy of the definitions (server/surveillance.js imports it): one source of truth, content/src/syndromes.json

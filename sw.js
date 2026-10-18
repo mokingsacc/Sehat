@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.18-25ea3c';
+const VERSION = '2026.10.18-a08d42';
 const PRECACHE = [
  "./",
  "index.html",
@@ -564,6 +564,118 @@ const PRECACHE = [
 ];
 const SHELL = 'fhb-shell-' + VERSION;
 const AUDIO = 'fhb-audio-v1';
+// Android app only: Mo's painted pictures that are not inside the app (path -> content hash). The app shows the old
+// drawing (<name>.svg, in the app) until the picture has come once from the website (SITE); then it keeps it here.
+const SITE = "https://mokingsacc.github.io/Sehat/";
+const PAINTED = {
+"img/app/placeholder.webp": "4785567d",
+"img/pics/bite-shake-shoe.webp": "d7d42807",
+"img/pics/fever-touch.webp": "eb594218",
+"img/pics/fire-oil-lid.webp": "5a15aa9d",
+"img/pics/food-bottle-drip.webp": "1433e46b",
+"img/pics/food-chicken-coop.webp": "a7f61b8f",
+"img/pics/food-drying-rack.webp": "037d4a36",
+"img/pics/food-grain-bin.webp": "122e91cd",
+"img/pics/food-money-notebook.webp": "7c970935",
+"img/pics/food-mulch.webp": "53acdc94",
+"img/pics/food-thick-porridge.webp": "acd61f2b",
+"img/pics/home-gas-soapy.webp": "43a95ce3",
+"img/pics/home-gas-valve.webp": "6ef32f0f",
+"img/pics/home-socket.webp": "3cbd89ab",
+"img/pics/hosp-drip.webp": "77324113",
+"img/pics/hosp-stay-child.webp": "36f2fbae",
+"img/pics/hosp-triage.webp": "f8640572",
+"img/pics/hosp-ultrasound.webp": "08bc1fa5",
+"img/pics/look-floppy.webp": "99f223e0",
+"img/pics/look-nappy.webp": "cacd92e7",
+"img/pics/look-skin-colour.webp": "970d2ba5",
+"img/pics/look-skin-pinch.webp": "2b2d3f95",
+"img/pics/look-soft-spot.webp": "eb58bdcf",
+"img/pics/person-baby.webp": "27611c5c",
+"img/pics/person-child.webp": "fe14218d",
+"img/pics/person-man.webp": "456dfc42",
+"img/pics/person-woman.webp": "c11ba031",
+"img/pics/row-feedback.webp": "5e031638",
+"img/pics/row-share.webp": "3004afc1",
+"img/pics/share-install.webp": "ca746fe1",
+"img/pics/well-balance.webp": "df505561",
+"img/pics/well-strength-home.webp": "bb1a4b46",
+"img/pics/well-walk-after-meal.webp": "d9e3605b",
+"img/pics/well-warm-light.webp": "8b466295",
+"img/topics/adults-generic.webp": "8fcaab02",
+"img/topics/after-birth.webp": "ca58619f",
+"img/topics/anaemia.webp": "3f18de90",
+"img/topics/asthma.webp": "7fea4ded",
+"img/topics/birth-plan.webp": "0c9e1735",
+"img/topics/bite-safety.webp": "e1a3ee5a",
+"img/topics/blood-pressure.webp": "3a9b72ba",
+"img/topics/chickens.webp": "91dd046e",
+"img/topics/child-meals.webp": "b9ad64f5",
+"img/topics/children-generic.webp": "553800f9",
+"img/topics/dengue.webp": "b80959c4",
+"img/topics/diabetes.webp": "73ddd210",
+"img/topics/diarrhoea-adult.webp": "e1aa83f7",
+"img/topics/diarrhoea.webp": "199aff73",
+"img/topics/electric-safety.webp": "765ad2ad",
+"img/topics/epilepsy.webp": "d2fcec18",
+"img/topics/evening-routine.webp": "4e3cdf23",
+"img/topics/fever.webp": "5fbd4a5e",
+"img/topics/fire-safety.webp": "f04de63d",
+"img/topics/food-after-birth.webp": "eb81db87",
+"img/topics/food-baby.webp": "fbed69bd",
+"img/topics/food-belly.webp": "027fe299",
+"img/topics/food-bones.webp": "2b18f490",
+"img/topics/food-cough.webp": "27af1670",
+"img/topics/food-eyes.webp": "0f8b2872",
+"img/topics/food-iodine.webp": "51a4d940",
+"img/topics/food-pregnancy.webp": "78ff5967",
+"img/topics/food-store.webp": "a6ec4ce6",
+"img/topics/garden-water.webp": "ca8d7064",
+"img/topics/goats-sheep.webp": "ecb08d32",
+"img/topics/growth.webp": "0d8ddf2d",
+"img/topics/heart-food.webp": "02a03a63",
+"img/topics/hepatitis.webp": "8bb4fdf8",
+"img/topics/home-earning.webp": "774b1a56",
+"img/topics/home-safety.webp": "259179d3",
+"img/topics/hospital-arrive.webp": "1e4cdef9",
+"img/topics/hospital-places.webp": "2776d6e1",
+"img/topics/hospital-ready.webp": "389b5523",
+"img/topics/hospital-stay.webp": "b5a155d9",
+"img/topics/hospital-tests.webp": "e29e1c38",
+"img/topics/hospital-treatments.webp": "3c6fc1a3",
+"img/topics/hygiene.webp": "bd2a524f",
+"img/topics/kit-buy.webp": "a6374bbd",
+"img/topics/kit-first-aid.webp": "9175b9cb",
+"img/topics/kit-oximeter.webp": "0c905354",
+"img/topics/kitchen-garden.webp": "c07b1064",
+"img/topics/leishmaniasis.webp": "388e4999",
+"img/topics/malaria.webp": "61a81ac9",
+"img/topics/measles.webp": "fc70d72d",
+"img/topics/mind-body.webp": "705b274d",
+"img/topics/mind-calm.webp": "92e82c2a",
+"img/topics/mind-cycle.webp": "e6a5f978",
+"img/topics/mind-problems.webp": "49c89557",
+"img/topics/mind-routine.webp": "707d71f3",
+"img/topics/move-daily.webp": "6092cc51",
+"img/topics/pneumonia-adult.webp": "35e48d7c",
+"img/topics/pregnancy-care.webp": "64db6446",
+"img/topics/reading-bp.webp": "031bdff2",
+"img/topics/reading-muac.webp": "fb9e68fe",
+"img/topics/reading-spo2.webp": "fa9126ba",
+"img/topics/reading-sugar.webp": "215510e3",
+"img/topics/reading-temp.webp": "a8c09f64",
+"img/topics/road-safety.webp": "ea7ca49b",
+"img/topics/safe-storage.webp": "c8f705c2",
+"img/topics/scabies.webp": "624edcc3",
+"img/topics/sleep-well.webp": "ace23edc",
+"img/topics/typhoid.webp": "2db10e07",
+"img/topics/urine-infection.webp": "6ecdd307",
+"img/topics/wellbeing.webp": "44b755e7",
+"img/topics/winter-home.webp": "08eb52ad",
+"img/topics/worms.webp": "e1ccd282"
+};
+const PICS = 'fhb-pics-v1';
+const IN_APK = self.location.hostname === 'appassets.androidplatform.net';
 // 'fhb-steps-v1': on-demand picture-step sets, kept by js/anim.js (never deleted here: they outlive app updates)
 
 self.addEventListener('install', (e) => {
@@ -604,6 +716,18 @@ self.addEventListener('fetch', (e) => {
       const res = await fetch(req).catch(() => new Response('', { status: 504, statusText: 'offline' }));
       if (res.ok && res.status === 200) e.waitUntil(c.put(req.url, res.clone()).catch(() => {}));
       return res;
+    }));
+    return;
+  }
+  const rel = path.replace(/^\/+/, '');
+  if (IN_APK && PAINTED[rel] && /^https:\/\//.test(SITE)) {
+    const key = SITE + rel + '?v=' + PAINTED[rel];
+    e.respondWith(caches.open(PICS).then(async (c) => {
+      const hit = await c.match(key);
+      if (hit) return hit;
+      const res = await fetch(key).catch(() => null);
+      if (res && res.ok && res.status === 200) { e.waitUntil(c.put(key, res.clone()).catch(() => {})); return res; }
+      return fetch(rel.replace(/\.webp$/, '.svg')); // offline: the old drawing inside the app
     }));
     return;
   }

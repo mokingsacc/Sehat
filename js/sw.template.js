@@ -3,6 +3,12 @@ const VERSION = '__VERSION__';
 const PRECACHE = __PRECACHE__;
 const SHELL = 'fhb-shell-' + VERSION;
 const AUDIO = 'fhb-audio-v1';
+// Android app only: Mo's painted pictures that are not inside the app (path -> content hash). The app shows the old
+// drawing (<name>.svg, in the app) until the picture has come once from the website (SITE); then it keeps it here.
+const SITE = __SITE__;
+const PAINTED = __PAINTED__;
+const PICS = 'fhb-pics-v1';
+const IN_APK = self.location.hostname === 'appassets.androidplatform.net';
 // 'fhb-steps-v1': on-demand picture-step sets, kept by js/anim.js (never deleted here: they outlive app updates)
 
 self.addEventListener('install', (e) => {
@@ -43,6 +49,18 @@ self.addEventListener('fetch', (e) => {
       const res = await fetch(req).catch(() => new Response('', { status: 504, statusText: 'offline' }));
       if (res.ok && res.status === 200) e.waitUntil(c.put(req.url, res.clone()).catch(() => {}));
       return res;
+    }));
+    return;
+  }
+  const rel = path.replace(/^\/+/, '');
+  if (IN_APK && PAINTED[rel] && /^https:\/\//.test(SITE)) {
+    const key = SITE + rel + '?v=' + PAINTED[rel];
+    e.respondWith(caches.open(PICS).then(async (c) => {
+      const hit = await c.match(key);
+      if (hit) return hit;
+      const res = await fetch(key).catch(() => null);
+      if (res && res.ok && res.status === 200) { e.waitUntil(c.put(key, res.clone()).catch(() => {})); return res; }
+      return fetch(rel.replace(/\.webp$/, '.svg')); // offline: the old drawing inside the app
     }));
     return;
   }

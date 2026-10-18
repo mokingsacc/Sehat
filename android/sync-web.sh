@@ -52,6 +52,24 @@ for sl in bu.get("slots", []):
 print(f"sync-web: {n} Emergency and CPR clips ({size / 1e6:.1f} MB) in {' '.join(bu.get('slots', [])) or 'no voice'}")
 if missing: print("sync-web: warning, clips listed in book.bundle are missing:", ", ".join(missing[:10]), file=sys.stderr)
 PY
+# Mo's painted pictures that keep an old drawing beside them stay on the website (tools/build.py PAINTED): the app shows
+# the drawing and its service worker fetches the picture the first time it is online. Keeps the APK under 15 MB.
+python3 - "$OUT" <<'PY'
+import json, os, re, sys
+out = sys.argv[1]
+p = os.path.join(out, "sw.js"); src = open(p, encoding="utf-8").read()
+m = re.search(r"const PAINTED = (\{.*?\});", src, re.S)
+painted = json.loads(m.group(1)) if m else {}
+size = 0
+for rel in painted:
+    f = os.path.join(out, rel)
+    if os.path.isfile(f) and os.path.isfile(f[:-5] + ".svg"): size += os.path.getsize(f); os.remove(f)
+m = re.search(r"const PRECACHE = (\[.*?\]);", src, re.S)
+pre = [x for x in json.loads(m.group(1)) if x not in painted]
+src = src[:m.start(1)] + json.dumps(pre, indent=1) + src[m.end(1):]
+open(p, "w", encoding="utf-8").write(src)
+print(f"sync-web: {len(painted)} painted pictures left on the website ({size / 1e3:.0f} KB); the app shows their drawings until then")
+PY
 # no hidden files (.DS_Store, .gitkeep) in the APK
 find "$OUT" -name '.*' -type f -delete
 

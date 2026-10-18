@@ -230,6 +230,12 @@ function flush() { flushReports(); Stats.send(); }
 function isStandalone() { return matchMedia('(display-mode: standalone)').matches || navigator.standalone === true; }
 // inside the Android app (android/: its WebView serves the app from this address)
 const IN_APK = location.hostname === 'appassets.androidplatform.net';
+// Android app: a painted picture that is not in the app yet (and no service worker to fetch it, on the very first start)
+// shows the old drawing kept in the app instead (tools/build.py PAINTED, js/sw.template.js)
+if (IN_APK) addEventListener('error', (e) => {
+  const i = e.target, src = (i && i.tagName === 'IMG' && i.getAttribute('src')) || '';
+  if (/^img\/(topics|pics|app)\/[^/]+\.webp$/.test(src) && !i.dataset.drawn) { i.dataset.drawn = '1'; i.src = src.replace(/\.webp$/, '.svg'); }
+}, true);
 const START_HASH = location.hash;
 function platform() { const u = navigator.userAgent; return /iPhone|iPad|iPod/.test(u) ? 'ios' : /Android/.test(u) ? 'android' : 'other'; }
 document.addEventListener('visibilitychange', () => {

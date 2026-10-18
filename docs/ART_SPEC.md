@@ -11,6 +11,9 @@ The app has two kinds of pictures, and they must look like one set:
   On 17 October 2026 Mo replaced 105 of the 106 with painted pictures in the stills' style (480 px WebP, same names,
   .webp instead of .svg; tools/build.py and js/ prefer the .webp). look-rash-glass.svg stays until its redo arrives
   (the glass must lie on its side across the spots).
+  The old drawings stay in the repo for the Android app only: WebP does not squash in the APK, so android/sync-web.sh
+  leaves the 105 pictures out (APK under 15 MB), the app shows the drawing, and its service worker fetches the picture
+  from the website the first time it is shown online and keeps it (tools/build.py PAINTED, js/sw.template.js).
 
 Rules for every picture (the rules below the line are the original brief and are partly out of date):
 - Warm plastered walls, mud-brick stones, red carpets with a diamond border, or dry hills and earth outdoors; soft
