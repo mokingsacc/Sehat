@@ -1,0 +1,12 @@
+{
+  "id": "print",
+  "version": "0.2.0",
+  "maturity": "pilot",
+  "depends": ["sheets"],
+  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": [],
+  "settings": {},
+  "needs": ["printer"],
+  "offline": "no"
+}

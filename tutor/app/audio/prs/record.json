@@ -1,0 +1,6 @@
+{
+"about": "Gemini text-to-speech, one voice per language (C5.6); made by tools/voice.py. Not loaded by the app: manifest.json is.",
+"clips": {},
+"lang": "prs",
+"voice": "Kore"
+}

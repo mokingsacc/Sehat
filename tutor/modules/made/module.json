@@ -1,0 +1,14 @@
+{
+  "id": "made",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["s1", "s2", "ad"],
+  "slots": ["lesson.end"],
+  "capabilities": ["free.text"],
+  "settings": {
+    "per_day": {"type": "int", "default": 10, "min": 1, "max": 50}
+  },
+  "needs": [],
+  "offline": "partly"
+}

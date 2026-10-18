@@ -1,0 +1,15 @@
+{
+  "id": "teacher",
+  "version": "0.2.0",
+  "maturity": "pilot",
+  "depends": [],
+  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": [],
+  "settings": {
+    "hold": {"type": "bool", "default": false},
+    "lock_codes": {"type": "bool", "default": true}
+  },
+  "needs": [],
+  "offline": "no"
+}

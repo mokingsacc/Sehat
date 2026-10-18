@@ -1,0 +1,13 @@
+{
+  "subject": "dari",
+  "version": "2026.10.17",
+  "nodes": [
+    {"id": "letter-sheen", "needs": [], "lessons": ["dari-1-sheen"], "title": {"prs": "حرف «ش»", "ps": "توری «ش»", "en": "The letter sheen"}},
+    {"id": "letters-alef-beh", "needs": [], "lessons": ["adult-dari-1-alef-beh"], "title": {"prs": "حرف‌های «ا» و «ب»", "ps": "توري «ا» او «ب»", "en": "The letters alef and beh"}},
+    {"id": "words-market", "needs": ["letters-alef-beh"], "lessons": ["adult-dari-2-words"], "title": {"prs": "کلمه‌های بازار", "ps": "د بازار کلمې", "en": "Market words"}}
+  ],
+  "pathways": [
+    {"id": "ad-read-dari", "goal": ["words-market"], "bands": ["ad"], "final": "adult-dari-2-words", "certificate": true, "title": {"prs": "خواندن و نوشتن: گام‌های اول", "ps": "لوستل او لیکل: لومړني ګامونه", "en": "Read and write: first steps"}}
+  ],
+  "review": {"status": "draft", "needs": ["literacy teacher", "adult educator"]}
+}

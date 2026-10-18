@@ -1,0 +1,119 @@
+{
+  "id": "english-adult-2-letters",
+  "subject": "english",
+  "year": 0,
+  "order": 2,
+  "unit": {
+    "prs": "حرف‌های انگلیسی",
+    "ps": "انګلیسي توري"
+  },
+  "title": {
+    "prs": "حرف‌های A، B و C",
+    "ps": "توري A، B او C"
+  },
+  "minutes": 12,
+  "steps": [
+    {
+      "kind": "letter",
+      "script": "latn",
+      "letter": "Aa",
+      "english": "apple",
+      "picture": "apple",
+      "text": {
+        "prs": "این حرف A است. گوش بده: صدایش و نامش.",
+        "ps": "دا توری A دی. غوږ ونیسه: غږ یې او نوم یې."
+      }
+    },
+    {
+      "kind": "letter",
+      "script": "latn",
+      "letter": "Bb",
+      "english": "book",
+      "picture": "book",
+      "text": {
+        "prs": "این حرف B است. گوش بده: صدایش و نامش.",
+        "ps": "دا توری B دی. غوږ ونیسه: غږ یې او نوم یې."
+      }
+    },
+    {
+      "kind": "letter",
+      "script": "latn",
+      "letter": "Cc",
+      "english": "candle",
+      "picture": "candle",
+      "text": {
+        "prs": "این حرف C است. گوش بده: صدایش و نامش.",
+        "ps": "دا توری C دی. غوږ ونیسه: غږ یې او نوم یې."
+      }
+    },
+    {
+      "kind": "choice",
+      "english": "book",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. کدام است؟",
+        "ps": "غوږ ونیسه. کوم یو دی؟"
+      },
+      "options": [
+        {
+          "picture": "apple"
+        },
+        {
+          "picture": "book"
+        },
+        {
+          "picture": "candle"
+        }
+      ],
+      "answer": 1,
+      "why": {
+        "prs": "این کتاب است.",
+        "ps": "دا کتاب دی."
+      }
+    },
+    {
+      "kind": "say",
+      "english": "book",
+      "answers": [
+        "book"
+      ],
+      "text": {
+        "prs": "گوش بده، بعد خودت بگو.",
+        "ps": "غوږ ونیسه، بیا یې پخپله ووایه."
+      }
+    }
+  ],
+  "sheet": {
+    "code": "EA-02",
+    "intro": {
+      "prs": "حرف‌ها را با پنسل بنویس.",
+      "ps": "توري په پنسل ولیکه."
+    },
+    "items": [
+      {
+        "kind": "trace",
+        "text": "Aa",
+        "count": 4
+      },
+      {
+        "kind": "trace",
+        "text": "Bb",
+        "count": 4
+      },
+      {
+        "kind": "trace",
+        "text": "Cc",
+        "count": 4
+      }
+    ]
+  },
+  "review": {
+    "status": "draft",
+    "needs": [
+      "Dari reader",
+      "Pashto reader",
+      "English teacher",
+      "adult educator"
+    ]
+  }
+}

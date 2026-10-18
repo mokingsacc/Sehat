@@ -1,0 +1,14 @@
+{
+  "id": "adult-maths-1",
+  "version": "2026.10.17",
+  "title": {"prs": "ریاضی روزمره", "ps": "ورځنی حساب", "en": "Everyday maths"},
+  "about": {"en": "Everyday maths for adults (P26, C4.3): numbers in Persian and Latin digits side by side, money, and the clock. A first three lessons as drafts; the content team adds the rest (about 20). Money is drawn as plain line drawings with a number, never a copy of a real banknote. Every Dari and Pashto line needs a native speaker's check, an adult educator's signature and a recorded clip for every step before release."},
+  "langs": ["prs", "ps"],
+  "audience": "adult",
+  "tracks": ["literacy", "reader"],
+  "lessons": [
+    "adult-maths-1-numbers",
+    "adult-maths-2-change",
+    "adult-maths-3-clock"
+  ]
+}

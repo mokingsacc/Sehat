@@ -1,0 +1,19 @@
+{
+ "version": "online-2026-10",
+ "lang": "en",
+ "home": "online",
+ "draft": true,
+ "note": "A draft: the reviewers, native speakers and, in March, the solicitor sign it before learners see it.",
+ "rows": {
+  "does": "Qalam gives lessons, worksheets and answers to school questions.",
+  "keeps": "It keeps no names and no photos. Questions are kept for 60 days and lessons done for 12 months, without a name.",
+  "sees": "Her teacher sees her questions. OpenAI in the United States reads questions and sheet answers to help answer them, and may keep them for up to 30 days.",
+  "stop": "You can stop any time in Settings."
+ },
+ "full": [
+  "Qalam is a free learning app. It gives lessons, worksheets to print and answers to questions about school lessons. It shows no advertising.",
+  "Qalam never asks for a name, a photo, a phone number or where you live. A learner is a picture and a number, like \"Book 27\". Questions are kept for 60 days so a teacher can answer them; which lessons were done is kept for 12 months as counts, without a name. Qalam keeps its records in the European Union.",
+  "A teacher reads questions and checks answers. To answer some questions, Qalam sends the question, with no name and nothing else about the learner, to OpenAI in the United States, which may keep it for up to 30 days to check for misuse.",
+  "You can stop at any time: Settings, then \"Stop sharing\". What Qalam keeps about this learner is then deleted. Lessons on the phone still work."
+ ]
+}

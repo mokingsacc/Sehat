@@ -1,0 +1,24 @@
+{
+  "id": "university-1",
+  "version": "2026.10.17",
+  "title": {
+    "prs": "آمادگی برای پوهنتون",
+    "ps": "پوهنتون ته چمتووالی",
+    "en": "Getting ready for university"
+  },
+  "about": {
+    "en": "University preparation (P28, C4.6) for s2 and adult readers: a checklist she ticks on her phone (checklist.json) and link cards to free courses and scholarships (links.json), each checked by a person on a date and hidden six months later. No lessons, no promises, nothing copied. Every card and the checklist need an adviser and the Dari and Pashto readers before release; the Dari and Pashto text is a draft for native speakers."
+  },
+  "langs": [
+    "prs",
+    "ps"
+  ],
+  "bands": [
+    "s2",
+    "ad"
+  ],
+  "tracks": [
+    "reader"
+  ],
+  "lessons": []
+}

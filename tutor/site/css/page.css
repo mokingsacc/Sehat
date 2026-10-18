@@ -1,0 +1,33 @@
+/* The reading pages (privacy, families, teachers, partners, credits): a page head on the sky, then sections as
+   cards, each with its heading and a speaker */
+.ph{margin-top:10px;background:var(--sky);border-radius:28px;padding:22px 18px}
+.ph h1{font-size:clamp(28px,7vw,46px);text-wrap:balance}
+.ph .lead{margin-top:6px;color:var(--muted);max-width:36em}
+.prose{display:grid;gap:14px}
+.prose .card{display:grid;gap:10px}
+.prose .sh{margin-bottom:0}
+.prose h2{font-size:clamp(21px,5vw,28px)}
+.prose h3{font-size:18px}
+.prose p,.prose li{max-width:40em}
+.prose ul{margin:0;padding-inline-start:22px}
+.prose .tag{margin-top:2px}
+.prose .fine{color:var(--muted);font-size:15px}
+.ver{font-size:14px;color:var(--muted)}
+.ct{border-inline-start:4px solid var(--acsoft);padding-inline-start:14px;display:grid;gap:8px}
+.ct dl{margin:0;display:grid;gap:6px}
+.ct dt{font-weight:700}
+.ct dd{margin:0}
+@media (min-width:760px){.ph{padding:36px 48px}.prose .card{padding:24px 28px}.cts{display:grid;grid-template-columns:1fr 1fr;gap:24px}}
+/* W3: a page head's button, the credits' rows, the lesson catalogue, an address or hash that must wrap */
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.prose .btn{align-self:flex-start}
+.u{direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere;font-size:15px;color:var(--muted)}
+.cr,.lsns{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.cr li{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--line)}
+.cr li:first-child{border-top:0;padding-top:0}
+.lsn{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;min-height:56px;padding:8px 14px;border:2px solid var(--line);border-radius:16px;text-decoration:none}
+.lsn b{flex:1 1 12em}
+.lsn .sub{font-size:14px;font-weight:700;color:var(--acink)}
+.lsn .muted{font-size:15px}
+.lsn:hover{border-color:var(--ac)}
+@media (min-width:1024px){.lsns{grid-template-columns:1fr 1fr}}

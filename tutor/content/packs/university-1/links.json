@@ -1,0 +1,292 @@
+[
+  {
+    "id": "khan-academy-fa",
+    "source": "khan-academy",
+    "title": "Khan Academy",
+    "about": {
+      "en": "Video lessons and practice in maths and science, in Persian, which is close to Dari.",
+      "prs": "درس‌های ویدیویی و تمرین ریاضی و ساینس، به زبان فارسی که به دری نزدیک است.",
+      "ps": "د ریاضي او ساینس ویډیويي لوستونه او تمرینونه، په فارسي ژبه چې دري ته نږدې ده."
+    },
+    "url": "https://fa.khanacademy.org/",
+    "subject": "university",
+    "kind": "course",
+    "cost": "free",
+    "who": {
+      "en": "Anyone. Watching needs no account.",
+      "prs": "همه. برای دیدن، حساب لازم نیست.",
+      "ps": "هر څوک. د لیدلو لپاره حساب ته اړتیا نشته."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "mit-opencourseware",
+    "source": "mit-opencourseware",
+    "title": "MIT OpenCourseWare",
+    "about": {
+      "en": "Course notes, videos and exams from MIT's university courses, in English.",
+      "prs": "یادداشت‌ها، ویدیوها و امتحان‌های کورس‌های پوهنتون MIT، به انگلیسی.",
+      "ps": "د MIT پوهنتون د کورسونو یادښتونه، ویډیوګانې او ازموینې، په انګلیسي."
+    },
+    "url": "https://ocw.mit.edu/",
+    "subject": "university",
+    "kind": "course",
+    "cost": "free",
+    "who": {
+      "en": "Anyone. No account and no application.",
+      "prs": "همه. نه حساب لازم است و نه درخواست.",
+      "ps": "هر څوک. نه حساب ته اړتیا شته او نه غوښتنلیک ته."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "openstax-books",
+    "source": "openstax",
+    "title": "OpenStax",
+    "about": {
+      "en": "University textbooks in English to read online or download.",
+      "prs": "کتاب‌های درسی پوهنتون به انگلیسی، برای خواندن آنلاین یا دانلود.",
+      "ps": "د پوهنتون درسي کتابونه په انګلیسي، د آنلاین لوستلو یا ډاونلوډ لپاره."
+    },
+    "url": "https://openstax.org/subjects",
+    "subject": "university",
+    "kind": "course",
+    "cost": "free",
+    "who": {
+      "en": "Anyone.",
+      "prs": "همه.",
+      "ps": "هر څوک."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "edx-courses",
+    "source": "edx",
+    "title": "edX",
+    "about": {
+      "en": "University courses online, in English. Many can be watched without paying; a certificate costs money.",
+      "prs": "کورس‌های آنلاین پوهنتون، به انگلیسی. بسیاری را بدون پول می‌توان دید؛ تصدیق‌نامه پول دارد.",
+      "ps": "د پوهنتون آنلاین کورسونه، په انګلیسي. ډېری یې پرته له پیسو لیدل کېږي؛ سند پیسې لري."
+    },
+    "url": "https://www.edx.org/",
+    "subject": "university",
+    "kind": "course",
+    "cost": "audit",
+    "who": {
+      "en": "Anyone with an account. Each course says what you need to know first.",
+      "prs": "هر کسی که حساب بسازد. هر کورس می‌گوید اول چه باید بدانی.",
+      "ps": "هر څوک چې حساب جوړ کړي. هر کورس وايي چې لومړی باید څه پوهېږې."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "coursera-courses",
+    "source": "coursera",
+    "title": "Coursera",
+    "about": {
+      "en": "University courses online, in English. Many can be watched without paying; certificates cost money.",
+      "prs": "کورس‌های آنلاین پوهنتون، به انگلیسی. بسیاری را بدون پول می‌توان دید؛ تصدیق‌نامه‌ها پول دارند.",
+      "ps": "د پوهنتون آنلاین کورسونه، په انګلیسي. ډېری یې پرته له پیسو لیدل کېږي؛ سندونه پیسې لري."
+    },
+    "url": "https://www.coursera.org/",
+    "subject": "university",
+    "kind": "course",
+    "cost": "audit",
+    "who": {
+      "en": "Anyone with an account. Some courses offer help with the cost.",
+      "prs": "هر کسی که حساب بسازد. بعضی کورس‌ها در پرداخت پول کمک می‌کنند.",
+      "ps": "هر څوک چې حساب جوړ کړي. ځینې کورسونه د پیسو په ورکړه کې مرسته کوي."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "uopeople",
+    "source": "uopeople",
+    "title": "University of the People",
+    "about": {
+      "en": "An online university in English with no tuition. It charges fees to apply and for exams, and says it has help with them.",
+      "prs": "پوهنتون آنلاین به انگلیسی بدون فیس درسی. برای درخواست و امتحان‌ها پول می‌گیرد و می‌گوید کمک هم دارد.",
+      "ps": "په انګلیسي یو آنلاین پوهنتون پرته له درسي فیس. د غوښتنلیک او ازموینو پیسې اخلي او وايي چې مرسته هم لري."
+    },
+    "url": "https://www.uopeople.edu/tuition-free/",
+    "subject": "university",
+    "kind": "course",
+    "cost": "fees",
+    "who": {
+      "en": "People who finished secondary school and can study online in English.",
+      "prs": "کسانی که مکتب را تمام کرده‌اند و می‌توانند آنلاین به انگلیسی درس بخوانند.",
+      "ps": "هغه کسان چې ښوونځی یې پای ته رسولی او آنلاین په انګلیسي لوستلی شي."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "turkiye-burslari",
+    "source": "turkiye-burslari",
+    "title": "Türkiye Scholarships",
+    "about": {
+      "en": "The Turkish government's scholarships to study in Türkiye, from a bachelor's degree up.",
+      "prs": "بورسیه‌های دولت ترکیه برای درس خواندن در ترکیه، از لیسانس به بالا.",
+      "ps": "د ترکیې د حکومت بورسونه په ترکیه کې د زده کړې لپاره، له لیسانس څخه پورته."
+    },
+    "url": "https://www.turkiyeburslari.gov.tr/",
+    "subject": "university",
+    "kind": "scholarship",
+    "cost": "free",
+    "who": {
+      "en": "Students from other countries. Read this year's rules and dates on the official site.",
+      "prs": "محصلان کشورهای دیگر. قاعده‌ها و تاریخ‌های امسال را در سایت رسمی بخوان.",
+      "ps": "د نورو هېوادونو زده کوونکي. د سږکال قواعد او نېټې په رسمي سایټ کې ولوله."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "daad-scholarships",
+    "source": "daad",
+    "title": "DAAD",
+    "about": {
+      "en": "A search of scholarships to study in Germany.",
+      "prs": "جستجوی بورسیه‌ها برای درس خواندن در آلمان.",
+      "ps": "په آلمان کې د زده کړې لپاره د بورسونو لټون."
+    },
+    "url": "https://www.daad.de/en/studying-in-germany/scholarships/",
+    "subject": "university",
+    "kind": "scholarship",
+    "cost": "free",
+    "who": {
+      "en": "Each scholarship says who may apply. Read it on the official site.",
+      "prs": "هر بورسیه می‌گوید چه کسی می‌تواند درخواست بدهد. آن را در سایت رسمی بخوان.",
+      "ps": "هر بورس وايي چې څوک غوښتنلیک ورکولی شي. هغه په رسمي سایټ کې ولوله."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "fulbright",
+    "source": "fulbright-foreign-student",
+    "title": "Fulbright",
+    "about": {
+      "en": "Scholarships for a master's degree or a PhD in the United States.",
+      "prs": "بورسیه‌ها برای ماستری یا دکتورا در امریکا.",
+      "ps": "په امریکا کې د ماسټرۍ یا دوکتورا لپاره بورسونه."
+    },
+    "url": "https://foreign.fulbrightonline.org/",
+    "subject": "university",
+    "kind": "scholarship",
+    "cost": "free",
+    "who": {
+      "en": "Graduates from countries on the official list. Afghanistan was on it on 17 October 2026.",
+      "prs": "فارغان کشورهایی که در فهرست رسمی هستند. افغانستان در ۱۷ اکتوبر ۲۰۲۶ در فهرست بود.",
+      "ps": "د هغو هېوادونو فارغان چې په رسمي لېست کې دي. افغانستان د ۲۰۲۶ د اکتوبر په ۱۷ په لېست کې و."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  },
+  {
+    "id": "educationusa",
+    "source": "educationusa",
+    "title": "EducationUSA",
+    "about": {
+      "en": "Official advice on how to apply to study in the United States.",
+      "prs": "مشورهٔ رسمی دربارهٔ اینکه چطور برای درس در امریکا درخواست بدهی.",
+      "ps": "رسمي مشوره چې څنګه په امریکا کې د زده کړې لپاره غوښتنلیک ورکړې."
+    },
+    "url": "https://educationusa.state.gov/",
+    "subject": "university",
+    "kind": "guide",
+    "cost": "free",
+    "who": {
+      "en": "Anyone thinking about study in the United States.",
+      "prs": "هر کسی که به درس خواندن در امریکا فکر می‌کند.",
+      "ps": "هر څوک چې په امریکا کې د زده کړې په اړه فکر کوي."
+    },
+    "checked": "2026-10-17",
+    "review_by": "2027-04-17",
+    "review": {
+      "status": "draft",
+      "needs": [
+        "adviser",
+        "Dari reader",
+        "Pashto reader"
+      ]
+    }
+  }
+]

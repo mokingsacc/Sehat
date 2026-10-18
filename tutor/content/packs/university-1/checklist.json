@@ -1,0 +1,78 @@
+{
+  "steps": [
+    {
+      "id": "finish-maths-science",
+      "text": {
+        "prs": "ریاضی و ساینس مکتب را تمام کن",
+        "ps": "د ښوونځي ریاضي او ساینس پای ته ورسوه",
+        "en": "Finish school maths and science"
+      },
+      "open": "subject:maths"
+    },
+    {
+      "id": "english-a2",
+      "text": {
+        "prs": "انگلیسی را تا سطح A2 یاد بگیر",
+        "ps": "انګلیسي تر A2 کچې زده کړه",
+        "en": "Learn English to level A2"
+      },
+      "open": "subject:english"
+    },
+    {
+      "id": "know-the-tests",
+      "text": {
+        "prs": "ببین امتحان‌های شمولیت و امتحان انگلیسی چه می‌پرسند",
+        "ps": "وګوره چې د شمولیت او انګلیسي ازموینې څه پوښتي",
+        "en": "Know what entrance and English tests ask for"
+      }
+    },
+    {
+      "id": "school-results",
+      "text": {
+        "prs": "نتیجه‌ها و اسناد مکتب خود را جمع کن",
+        "ps": "د ښوونځي پایلې او اسناد دې راټول کړه",
+        "en": "Gather your school results and papers"
+      }
+    },
+    {
+      "id": "courses-now",
+      "text": {
+        "prs": "کورس‌هایی را ببین که همین حالا می‌توانی بخوانی",
+        "ps": "هغه کورسونه وګوره چې همدا اوس یې لوستلی شې",
+        "en": "Look at courses you can take now"
+      }
+    },
+    {
+      "id": "scholarships",
+      "text": {
+        "prs": "دربارهٔ بورسیه‌ها بخوان",
+        "ps": "د بورسونو په اړه ولوله",
+        "en": "Read about scholarships"
+      }
+    },
+    {
+      "id": "write-about-you",
+      "text": {
+        "prs": "دربارهٔ خودت روی کاغذ بنویس",
+        "ps": "د ځان په اړه په کاغذ ولیکه",
+        "en": "Write about yourself, on paper"
+      }
+    },
+    {
+      "id": "teacher-letter",
+      "text": {
+        "prs": "از یک معلم بخواه که برایت یک نامه بنویسد",
+        "ps": "له یوه ښوونکي وغواړه چې تا ته یو لیک ولیکي",
+        "en": "Ask a teacher for a letter about you"
+      }
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "needs": [
+      "adviser",
+      "Dari reader",
+      "Pashto reader"
+    ]
+  }
+}

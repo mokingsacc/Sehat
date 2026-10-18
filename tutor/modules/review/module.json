@@ -1,0 +1,12 @@
+{
+  "id": "review",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["ad"],
+  "slots": [],
+  "capabilities": ["free.text"],
+  "settings": {},
+  "needs": [],
+  "offline": "no"
+}

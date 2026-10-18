@@ -1,0 +1,26 @@
+# The fallback kit (BUILD-PLAN P12), not deployed: Qalam online on Render in Frankfurt, from deploy/Dockerfile.
+# To use it (D6, only if the Worker fails its gate): Render, New, Blueprint, this repository, with this file's path
+# (tutor/deploy/render.yaml). It needs a paid instance, since a free one has no disk and the SQLite database must
+# outlive a restart. No secrets are set here: TUTOR_COHORT and, once a key exists, the AI settings are entered in
+# Render's dashboard (sync: false), never written in this file.
+services:
+  - type: web
+    name: qalam-online
+    runtime: docker
+    region: frankfurt
+    plan: starter
+    rootDir: tutor
+    dockerfilePath: ./deploy/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/hello
+    autoDeploy: false
+    numInstances: 1            # one instance: the SQLite database lives on its disk
+    disk:
+      name: qalam-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: TUTOR_COHORT      # the cohort learners without a class code join (D7)
+        sync: false
+      - key: TUTOR_ORIGINS     # other sites that may call the API; none needed by the app itself
+        sync: false

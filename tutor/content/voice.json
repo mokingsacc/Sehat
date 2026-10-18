@@ -1,0 +1,10 @@
+{
+ "about": "The one voice per language (C5.6): tools/voice.py voices every text Qalam writes with this prebuilt Gemini voice, a woman's, the same voice for every clip of a language. Changing a voice re-renders every clip of that language. native_check is the chair's gate for production: before any clip of a language ships in a release build, a native listener passes its 30-clip sample (python3 tools/voice.py --sample lists them) and writes passed, their initials and the date here. Staging and the hub play the clips without it.",
+ "voices": {"prs": "Kore", "ps": "Kore", "en": "Kore", "zh": "Kore"},
+ "native_check": {
+  "prs": {"passed": false, "by": "", "date": null},
+  "ps": {"passed": false, "by": "", "date": null},
+  "en": {"passed": false, "by": "", "date": null},
+  "zh": {"passed": false, "by": "", "date": null}
+ }
+}

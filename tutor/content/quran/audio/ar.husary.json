@@ -1,0 +1,3431 @@
+{
+"edition": "ar.husary",
+"files": {
+"1:1": {
+"file": "1_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/1.mp3",
+"sha256": "sha256:fedf4ecf35803282ab205a04400db2cfa10056033b4aaa139e7277611a045d8c",
+"bytes": 42417
+},
+"1:2": {
+"file": "1_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/2.mp3",
+"sha256": "sha256:f5fcd36fb185e73dc93ef17e9379b07fbace73f775aa5cb8d72107d317113705",
+"bytes": 51404
+},
+"1:3": {
+"file": "1_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/3.mp3",
+"sha256": "sha256:481e394c905330cda5d48d8df5e4d0a8ca44b6f3847c8a029403d88695e97943",
+"bytes": 37193
+},
+"1:4": {
+"file": "1_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/4.mp3",
+"sha256": "sha256:e52adf7bc6265386dece4fdf66bb46885b093f3b4ae42b3efa084a12dc3d48a7",
+"bytes": 38238
+},
+"1:5": {
+"file": "1_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5.mp3",
+"sha256": "sha256:cfa9669979afeee7e1f4379c7cbcaa674b504fee60e7bc5bf369744266c72bf9",
+"bytes": 56001
+},
+"1:6": {
+"file": "1_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6.mp3",
+"sha256": "sha256:2374d5616668872e61774fbdeb320d40a79ad83501f5d7b869f99c2f2d5ae709",
+"bytes": 44090
+},
+"1:7": {
+"file": "1_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/7.mp3",
+"sha256": "sha256:7f97de1ef1f4c20947398d0113aedb8555f7edeb36334134f9626264634a62c5",
+"bytes": 120786
+},
+"78:1": {
+"file": "78_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5673.mp3",
+"sha256": "sha256:7b63dbf47268a98e486df7ab1b65b17c0d598b0c1cd4468fd9825d238a0b303c",
+"bytes": 65195
+},
+"78:2": {
+"file": "78_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5674.mp3",
+"sha256": "sha256:a7f6374feb6ca783ed4546322bd87d8348352d1d43b7b22b1ca67083b4e628ac",
+"bytes": 44924
+},
+"78:3": {
+"file": "78_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5675.mp3",
+"sha256": "sha256:ca2407d88135818d8585750c54fbd49f55ee257f0f5a003cbb6a83842005c734",
+"bytes": 62686
+},
+"78:4": {
+"file": "78_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5676.mp3",
+"sha256": "sha256:235f436fec35e548ac268741fe3957845720d74490a2a094c7b2c67ea8ff2d9c",
+"bytes": 47849
+},
+"78:5": {
+"file": "78_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5677.mp3",
+"sha256": "sha256:4bdb7be053f2f12e5b8af6a4b8fa8fe291951882cdf47d573150708d8d93e2e6",
+"bytes": 68956
+},
+"78:6": {
+"file": "78_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5678.mp3",
+"sha256": "sha256:96baf7e0c691f0059b823853de3859b5aa8afbf25c53c3ae3013c2f422c85efe",
+"bytes": 55791
+},
+"78:7": {
+"file": "78_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5679.mp3",
+"sha256": "sha256:201b5ebd081f47b781eeb8b3c7056c597660f1b3daf3700006b3c72c86659ecd",
+"bytes": 45759
+},
+"78:8": {
+"file": "78_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5680.mp3",
+"sha256": "sha256:f730cb8be85fab7210904067ef4483497e2286c939d3e529e24f07a64ad347f0",
+"bytes": 50357
+},
+"78:9": {
+"file": "78_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5681.mp3",
+"sha256": "sha256:429752764e32185a7be1ad40fbe226d48e995888b23e6667776b57c1babbb7b8",
+"bytes": 57253
+},
+"78:10": {
+"file": "78_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5682.mp3",
+"sha256": "sha256:f27ea5061819b54b0a302ef3e420675b7a8dcb5c5f27124b217dd71cfb8ead5b",
+"bytes": 52658
+},
+"78:11": {
+"file": "78_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5683.mp3",
+"sha256": "sha256:59fc79b96f314f1a94a408d1991b8ffd7b1f59691b5b70d9450cecc314a83101",
+"bytes": 61644
+},
+"78:12": {
+"file": "78_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5684.mp3",
+"sha256": "sha256:6912451c7e6a83f33749382624ff9b9e612cf440bb5afa000233ba27728053ed",
+"bytes": 72303
+},
+"78:13": {
+"file": "78_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5685.mp3",
+"sha256": "sha256:0f7c5dbd893a73e7a7515bfbc5b66e634d2469d9b0ba71e53d923fa1cc130755",
+"bytes": 69377
+},
+"78:14": {
+"file": "78_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5686.mp3",
+"sha256": "sha256:dc375bdbf0e98dc5b619716cc73a55c94029736cc7c103373fbc05c6696d6278",
+"bytes": 105320
+},
+"78:15": {
+"file": "78_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5687.mp3",
+"sha256": "sha256:184cde99ba09eaae664dd347d99f9a0eafc5a701ac4e7261c1aedb21e5f2aedc",
+"bytes": 75855
+},
+"78:16": {
+"file": "78_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5688.mp3",
+"sha256": "sha256:8eaf56180b21ea9a92eb0b63f516a03f0ff631ff5f536b257819221717516c07",
+"bytes": 54121
+},
+"78:17": {
+"file": "78_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5689.mp3",
+"sha256": "sha256:8c8269effb91bf4782aa99a3ddc1ed7da87288d95871c0ad0fd42d776a987abb",
+"bytes": 78362
+},
+"78:18": {
+"file": "78_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5690.mp3",
+"sha256": "sha256:1a4830579c87e1cc0902647fb6daaa5d7fab1a6b676821ef08c45da2416abeee",
+"bytes": 86930
+},
+"78:19": {
+"file": "78_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5691.mp3",
+"sha256": "sha256:d2b1b5dd61f82faf9b2ccd17593a06cfc154786259b54bdf1891fbea9c76ce03",
+"bytes": 83795
+},
+"78:20": {
+"file": "78_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5692.mp3",
+"sha256": "sha256:f15ca3008c84156108d10be5b668932e67b6c8d6aaf88ab2b9e0857cefe93b09",
+"bytes": 72302
+},
+"78:21": {
+"file": "78_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5693.mp3",
+"sha256": "sha256:d06a8ee99591126a508b1ccfa836003a8980a83c849dd9570557495967c7e0b0",
+"bytes": 80452
+},
+"78:22": {
+"file": "78_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5694.mp3",
+"sha256": "sha256:5d52383fd09c7aab2c32593c05c3548b37641f98de48dc7d4067eddb45cb5840",
+"bytes": 47642
+},
+"78:23": {
+"file": "78_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5695.mp3",
+"sha256": "sha256:83467ba4f73026664ae6a1365de6db4786c8dbcf1b22d3e256a976c88fd99a2a",
+"bytes": 67704
+},
+"78:24": {
+"file": "78_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5696.mp3",
+"sha256": "sha256:a97653dd7ee94d01316bd2af878d3b8ceb7163a1baaf3421b6fcc48d75d10190",
+"bytes": 83587
+},
+"78:25": {
+"file": "78_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5697.mp3",
+"sha256": "sha256:677c0a7cee751cb6859fd23152239ed057e929d8875a54ffba136a82dd69520e",
+"bytes": 62689
+},
+"78:26": {
+"file": "78_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5698.mp3",
+"sha256": "sha256:8f5241c2beb7d7eb7e72c711cfa97a1254253986d3d91de3cedef087786a6035",
+"bytes": 67077
+},
+"78:27": {
+"file": "78_27.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5699.mp3",
+"sha256": "sha256:b98c246115db4f4b1d65b2dc912cf8a5755d0427204361325eee589c8ac3ee24",
+"bytes": 74809
+},
+"78:28": {
+"file": "78_28.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5700.mp3",
+"sha256": "sha256:9060b6b5a39796892bf4b598f79817208dde097f9432ff0c0bb0638cda9e93ee",
+"bytes": 71257
+},
+"78:29": {
+"file": "78_29.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5701.mp3",
+"sha256": "sha256:f64463d1f606b6de30b4a3b774b06754b0a7e309fad68801f34df20285bfd16f",
+"bytes": 70003
+},
+"78:30": {
+"file": "78_30.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5702.mp3",
+"sha256": "sha256:105ceb173d3a632da698110422248779484ed79be03025ca4df1c827a201f8e4",
+"bytes": 94662
+},
+"78:31": {
+"file": "78_31.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5703.mp3",
+"sha256": "sha256:ac8a9e17c0d52ed262b94727d4efb103e55b7af5112efdaff88d6dfcd0da9560",
+"bytes": 61227
+},
+"78:32": {
+"file": "78_32.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5704.mp3",
+"sha256": "sha256:7a114b7c9502ad0a2ccb00fdc9526ee3f936863e24483532ccf535fcdb18e445",
+"bytes": 55583
+},
+"78:33": {
+"file": "78_33.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5705.mp3",
+"sha256": "sha256:0b94174fb12548f501c23ee5b398c393bcf8dcd1806f54acd088ffb279cd7c9d",
+"bytes": 47851
+},
+"78:34": {
+"file": "78_34.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5706.mp3",
+"sha256": "sha256:6bd25f92c8e7ce11a9460717d6097af43204e86c5c53969a8ab8151fa02ca322",
+"bytes": 45761
+},
+"78:35": {
+"file": "78_35.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5707.mp3",
+"sha256": "sha256:86956c4d979c3e0d9c95c28f6c2545a5317032ef532bb0153329ba7a93babb13",
+"bytes": 90483
+},
+"78:36": {
+"file": "78_36.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5708.mp3",
+"sha256": "sha256:b1c85c4438dbdac4ff4a6524ddf781d18e3e8c6335e56a0e451076602ce00479",
+"bytes": 102186
+},
+"78:37": {
+"file": "78_37.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5709.mp3",
+"sha256": "sha256:563041140138d9d44ae49fa423892dcaee37183c2e8a32b6937457e2172e0b91",
+"bytes": 140220
+},
+"78:38": {
+"file": "78_38.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5710.mp3",
+"sha256": "sha256:117d7ccf390463ad797212b99037f7d0fcfbc489ecebed2e750f81c68a2ed54f",
+"bytes": 204168
+},
+"78:39": {
+"file": "78_39.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5711.mp3",
+"sha256": "sha256:e983b323ea8220388fad4a2b0ced5836322da3ed3d216ec840adb9d92c0031b1",
+"bytes": 158610
+},
+"78:40": {
+"file": "78_40.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5712.mp3",
+"sha256": "sha256:a71cf14adc9da1bb153681c7db0bc3ee1d173a3eefe3cc5f621bb78da31509c7",
+"bytes": 247217
+},
+"79:1": {
+"file": "79_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5713.mp3",
+"sha256": "sha256:9a721b35adf98658169b4aad6c19021c89750488a4795331349c513dd5ad221e",
+"bytes": 49527
+},
+"79:2": {
+"file": "79_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5714.mp3",
+"sha256": "sha256:4de74a45d8af1be2b23757b5411cf529d428dd4435f199138e60245c5030aa1b",
+"bytes": 53914
+},
+"79:3": {
+"file": "79_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5715.mp3",
+"sha256": "sha256:305aa3220327dfc5ecfafa89b43de3b804adaa4b18c5a11cc044c9e460adaec2",
+"bytes": 53496
+},
+"79:4": {
+"file": "79_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5716.mp3",
+"sha256": "sha256:468b69517218f90c595a267e379e9c37dbfa406f5bb47160c11208319609b76a",
+"bytes": 49108
+},
+"79:5": {
+"file": "79_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5717.mp3",
+"sha256": "sha256:84ee1fd2211309caeb55c0012ac32de3791c26b9dce1e648a06a2352a49ff1b4",
+"bytes": 54959
+},
+"79:6": {
+"file": "79_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5718.mp3",
+"sha256": "sha256:87864faf5d3393bcdcad693ad5c7534fb9fa01351d24e6864e928edb1746092b",
+"bytes": 47228
+},
+"79:7": {
+"file": "79_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5719.mp3",
+"sha256": "sha256:abd3f9100a12c1bc39ed1277e330bd74a2ff5e024eeb6fd518bf7ee9d23cf436",
+"bytes": 45973
+},
+"79:8": {
+"file": "79_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5720.mp3",
+"sha256": "sha256:836c4afa8324f9c0a3bdfd5cf5c45ed88249eea7893c547f7c1b8a42eba42b78",
+"bytes": 65617
+},
+"79:9": {
+"file": "79_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5721.mp3",
+"sha256": "sha256:dfbd34461a40646ce735ff587944448668390f0a87cbd47c6d698532b511a0e0",
+"bytes": 49736
+},
+"79:10": {
+"file": "79_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5722.mp3",
+"sha256": "sha256:1b19a5ebc57aec143d643ba9bf4a501ba50c396c401d592a04bd9af4656bdfeb",
+"bytes": 90906
+},
+"79:11": {
+"file": "79_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5723.mp3",
+"sha256": "sha256:d84b977019de3bcaa0dc13e97ed178bf3b4a0e23e576c55cf7798d9949dd588d",
+"bytes": 68128
+},
+"79:12": {
+"file": "79_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5724.mp3",
+"sha256": "sha256:2c1e48e68a2eb250c765662626b08f9baefe93552ccec032a4ea237c7dc989ac",
+"bytes": 76487
+},
+"79:13": {
+"file": "79_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5725.mp3",
+"sha256": "sha256:08a5f0f8c480dd61ff46937bc70fce1dad60a58c75bb640ef28c72d30b065ff6",
+"bytes": 77322
+},
+"79:14": {
+"file": "79_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5726.mp3",
+"sha256": "sha256:33c8261882458c33c30815b47165f1c3619bb45caa78e178d6550b5d4b3ba02b",
+"bytes": 56424
+},
+"79:15": {
+"file": "79_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5727.mp3",
+"sha256": "sha256:33cc002b4deeda916b62cb1ab8eea47ff367abd4e6dbfbe38252b8eb4445c275",
+"bytes": 55379
+},
+"79:16": {
+"file": "79_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5728.mp3",
+"sha256": "sha256:1c60a594593891d2a5921bea2a135e2d450a6e20f2fee048c887bbaf1ae2e688",
+"bytes": 91951
+},
+"79:17": {
+"file": "79_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5729.mp3",
+"sha256": "sha256:4140489b41acf770d2d486f42c7aea93cfae61e16e907928691913b9c098c0f7",
+"bytes": 71262
+},
+"79:18": {
+"file": "79_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5730.mp3",
+"sha256": "sha256:f03e650c341d3131905f9bfe56e7d5e1bcc11e0a765ab54d32fb70e425e61eb1",
+"bytes": 74187
+},
+"79:19": {
+"file": "79_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5731.mp3",
+"sha256": "sha256:48e4f5d069883fbda0eb58b9147418fa55f001056025510fa8d7cf3c55989ffc",
+"bytes": 63738
+},
+"79:20": {
+"file": "79_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5732.mp3",
+"sha256": "sha256:276313e4f424f17f0f4af20f94674763cbc538e52f8fb97ef634e4ba0e03682f",
+"bytes": 59768
+},
+"79:21": {
+"file": "79_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5733.mp3",
+"sha256": "sha256:b3db888d01247dab6f28ff668c650237ea27687de3c72da3224648831711c914",
+"bytes": 35944
+},
+"79:22": {
+"file": "79_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5734.mp3",
+"sha256": "sha256:5ab07448b2f84ec5552cd99043d6319f210227367f6cc58959b55cacb1635715",
+"bytes": 48901
+},
+"79:23": {
+"file": "79_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5735.mp3",
+"sha256": "sha256:57aa3a808c18a2404fe492e2c071d4a4518ba081141b4d1d2e3984afc137f2b4",
+"bytes": 41795
+},
+"79:24": {
+"file": "79_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5736.mp3",
+"sha256": "sha256:60a9bafd5e65028c027fec03679f08844bfb1d85bf08a22c8b1a47a8004ffaee",
+"bytes": 56424
+},
+"79:25": {
+"file": "79_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5737.mp3",
+"sha256": "sha256:4b0c37b2b4abb0616a54c8d647ca85b7a96cd718cb98dac4d3d491e9f9221715",
+"bytes": 87563
+},
+"79:26": {
+"file": "79_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5738.mp3",
+"sha256": "sha256:1c3e97e8e761a6c6ad795ce1e5d858ec25f2c11450ffe735543b792c928e6b25",
+"bytes": 87771
+},
+"79:27": {
+"file": "79_27.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5739.mp3",
+"sha256": "sha256:72e57aa74ac3f89bdaf8105015762e9f8c457671bf2e136c01970e556f63e4ac",
+"bytes": 114311
+},
+"79:28": {
+"file": "79_28.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5740.mp3",
+"sha256": "sha256:c373bb73e352b9fa8c9bbd4690221d2ccebe1359aee2fcdb6f448b8fe8649fd1",
+"bytes": 63111
+},
+"79:29": {
+"file": "79_29.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5741.mp3",
+"sha256": "sha256:fd65a808272685a9740029ee721ac6b5099c2d32bd1549a59fd4a334f5cacb1c",
+"bytes": 70008
+},
+"79:30": {
+"file": "79_30.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5742.mp3",
+"sha256": "sha256:363010a8ec41a041991b6f2c4172725fc9766b9b86b98d689dc4926f1c3afe2d",
+"bytes": 63738
+},
+"79:31": {
+"file": "79_31.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5743.mp3",
+"sha256": "sha256:425096174926c7a06434f92c41bfcf9d4e28a132befeae55717eacc22173a092",
+"bytes": 80249
+},
+"79:32": {
+"file": "79_32.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5744.mp3",
+"sha256": "sha256:920f3c5dbdab3d869fdcfaa50f80ce83ba0933e6c70a467db95686955b63698f",
+"bytes": 47229
+},
+"79:33": {
+"file": "79_33.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5745.mp3",
+"sha256": "sha256:fcca685c9c69d97efb1551efa9ddd8c35f51c3b1497af31664f94b28634576fd",
+"bytes": 62693
+},
+"79:34": {
+"file": "79_34.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5746.mp3",
+"sha256": "sha256:101eaa81bec8975950185c08c997864d64c80f2cdbf241f5e9e5d453a813d6ba",
+"bytes": 102400
+},
+"79:35": {
+"file": "79_35.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5747.mp3",
+"sha256": "sha256:cf21953e97c4e3e4938a66de14417e39f4643f0106921876ab404ba094ec0ed0",
+"bytes": 83383
+},
+"79:36": {
+"file": "79_36.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5748.mp3",
+"sha256": "sha256:1d51760561e44ebda70b5436665400ddb66a64eda2ca3659415f35850af957e5",
+"bytes": 64574
+},
+"79:37": {
+"file": "79_37.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5749.mp3",
+"sha256": "sha256:668c4a26b16f9541ed8687aa47b54deb2771dec78a50a10dace5e899df59d659",
+"bytes": 61231
+},
+"79:38": {
+"file": "79_38.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5750.mp3",
+"sha256": "sha256:85c77609e6532c0d1630e267a254cdb92717aab74ff17e3973f138d46bd2e62f",
+"bytes": 54543
+},
+"79:39": {
+"file": "79_39.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5751.mp3",
+"sha256": "sha256:fd229c9d227134007543466deabef990f93073465f20bb05598252e218690773",
+"bytes": 59769
+},
+"79:40": {
+"file": "79_40.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5752.mp3",
+"sha256": "sha256:03a3ec3308da2456e4c918727ae83f0aff916a0f1712695a21b9bd974589e88b",
+"bytes": 115983
+},
+"79:41": {
+"file": "79_41.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5753.mp3",
+"sha256": "sha256:9c4708d6d4a64ddd0df6c87cd8cf8a33bd9bc0c86a3f09a04068a4afd8f66822",
+"bytes": 69172
+},
+"79:42": {
+"file": "79_42.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5754.mp3",
+"sha256": "sha256:60f849eb528091d7de7e69524a80352950fd9c372f3da485824f65a1b0450323",
+"bytes": 93622
+},
+"79:43": {
+"file": "79_43.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5755.mp3",
+"sha256": "sha256:63dbe4e1337a4e62ff7192fc52bdadf568f65129330b9f96d2dda5faa8bd51e4",
+"bytes": 63529
+},
+"79:44": {
+"file": "79_44.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5756.mp3",
+"sha256": "sha256:0e2784140847ee353069fff8eaafca79d698455fa36daf4f2218be7c7b53cddb",
+"bytes": 62276
+},
+"79:45": {
+"file": "79_45.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5757.mp3",
+"sha256": "sha256:4fadd4022002438db78d41f0cda09ec2d901a371542d0114bb8775a93a7cf6aa",
+"bytes": 95503
+},
+"79:46": {
+"file": "79_46.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5758.mp3",
+"sha256": "sha256:2185f5166dc54d0dc699c33c7cced8c2484f11ce7b25fc5918b8d1be64ca6ba4",
+"bytes": 138553
+},
+"80:1": {
+"file": "80_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5759.mp3",
+"sha256": "sha256:de2c52003c9f123ffe3edbad26810cce0ce859b7a875d4629fb32c2a98ef4fb1",
+"bytes": 35727
+},
+"80:2": {
+"file": "80_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5760.mp3",
+"sha256": "sha256:9a494daf74060631df2d5080efe699c7d99f82a1b6bc81881dc46889c8d8faa6",
+"bytes": 53489
+},
+"80:3": {
+"file": "80_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5761.mp3",
+"sha256": "sha256:52b204f20fcaa9ddb81ee4fccfc28de010ed8ed89f6a02e6d0d82dcc3750224e",
+"bytes": 66446
+},
+"80:4": {
+"file": "80_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5762.mp3",
+"sha256": "sha256:e594ae5f876f69dce1c4159701c14055bc23e2f97db42e396451a78b986dece0",
+"bytes": 67909
+},
+"80:5": {
+"file": "80_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5763.mp3",
+"sha256": "sha256:5d0db39fd26a4c1bd77802c5fb378715afe8187b08b4c9ace303783be05ad842",
+"bytes": 44086
+},
+"80:6": {
+"file": "80_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5764.mp3",
+"sha256": "sha256:70c467c78ec4e39d037b3fd64a2c601a5c8762bcc0aa18fcc82512e695ad721c",
+"bytes": 44712
+},
+"80:7": {
+"file": "80_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5765.mp3",
+"sha256": "sha256:f7e7d67500beb3f1ed4ac6d6d119bbbf122921fa52201a9e22dbb91a5630f19a",
+"bytes": 61641
+},
+"80:8": {
+"file": "80_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5766.mp3",
+"sha256": "sha256:b84fd4b918425c2027fc6f90f6d1c0e060ab0c4e9439a07b94ba6096f8afe2b6",
+"bytes": 69581
+},
+"80:9": {
+"file": "80_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5767.mp3",
+"sha256": "sha256:c6cd10c61471745437469b5f2f219aef297766882f3cd896122faf1c722bd586",
+"bytes": 31547
+},
+"80:10": {
+"file": "80_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5768.mp3",
+"sha256": "sha256:ff75d126a1defa5d7cf0448387bc509733e480278280e526135aa5d9017df8c9",
+"bytes": 49312
+},
+"80:11": {
+"file": "80_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5769.mp3",
+"sha256": "sha256:51062bc767180a27beb908b360c834c0075042d8d48887962700376ad18c0984",
+"bytes": 60388
+},
+"80:12": {
+"file": "80_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5770.mp3",
+"sha256": "sha256:d80f31ab3466e24173463f3595937a879dd32bb1604d66699954e9d86eec9695",
+"bytes": 49103
+},
+"80:13": {
+"file": "80_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5771.mp3",
+"sha256": "sha256:9b5c39ec73985743d96eac2287cc919831d519c30e4807ac072ba038c127f976",
+"bytes": 43669
+},
+"80:14": {
+"file": "80_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5772.mp3",
+"sha256": "sha256:6230433c1d86950bb8cf7e58727920f648b09e61bdf34fd0b49d4f6f49efcc3c",
+"bytes": 49939
+},
+"80:15": {
+"file": "80_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5773.mp3",
+"sha256": "sha256:b8aa462851c4850982ac9e3cd09cf501784250eba01e56b5cae917d72caa9b9c",
+"bytes": 34266
+},
+"80:16": {
+"file": "80_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5774.mp3",
+"sha256": "sha256:664d6d54c6e1f9bfa441bb4358df62b7c4c4852a1094308f388f6277ccb1c1af",
+"bytes": 35937
+},
+"80:17": {
+"file": "80_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5775.mp3",
+"sha256": "sha256:65c2334bb21a80eae8df652508a6970c2a247cd763610d4ddc1d9a3d1fa8d078",
+"bytes": 60388
+},
+"80:18": {
+"file": "80_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5776.mp3",
+"sha256": "sha256:f663f4ce56872122052ddca5c07a35d547d1e59d09d8063c09d383ce1eb32545",
+"bytes": 36147
+},
+"80:19": {
+"file": "80_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5777.mp3",
+"sha256": "sha256:def0c7f02a88d17c1297c9616715e901a8ac7215f700b560b7d38035e688849e",
+"bytes": 48267
+},
+"80:20": {
+"file": "80_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5778.mp3",
+"sha256": "sha256:a390a7139732856d93616aca630cab18d6f08bd2e228b1cc38a1dcb00e1b10b3",
+"bytes": 37609
+},
+"80:21": {
+"file": "80_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5779.mp3",
+"sha256": "sha256:d430dc28b91025b8a4be5e9e02016444d7d553bba38c9efa93a54accf0f3fc79",
+"bytes": 41788
+},
+"80:22": {
+"file": "80_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5780.mp3",
+"sha256": "sha256:d3c2bd464aafbfc0fddce7115d35828c381cf2affdc5812f52d3164cdb873a5d",
+"bytes": 66239
+},
+"80:23": {
+"file": "80_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5781.mp3",
+"sha256": "sha256:641d6f162c80ba0087ff00530d7d49c657d5c8031f42eccec052896d1c300831",
+"bytes": 61433
+},
+"80:24": {
+"file": "80_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5782.mp3",
+"sha256": "sha256:1099830245c2a886030dd7bbd056bb0fbe2149376c9104a657a18e139be86fc0",
+"bytes": 64149
+},
+"80:25": {
+"file": "80_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5783.mp3",
+"sha256": "sha256:42989714e07aa5062f6cc1d1bf0848aa7e8bf856bd85a23cc945c472afcdb3b4",
+"bytes": 69165
+},
+"80:26": {
+"file": "80_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5784.mp3",
+"sha256": "sha256:020bc3cadb262d1598918a9ea5bb18352087a9849d20790fdf0efa19924f7c5d",
+"bytes": 60597
+},
+"80:27": {
+"file": "80_27.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5785.mp3",
+"sha256": "sha256:82723d094ac6b907bc299f45b6998a05bb800d41989d55add636a055583272cb",
+"bytes": 48686
+},
+"80:28": {
+"file": "80_28.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5786.mp3",
+"sha256": "sha256:3573e034b3d2bad20d4af2b2f35dc721f44e85109f664647e13f3752a0da6bea",
+"bytes": 39700
+},
+"80:29": {
+"file": "80_29.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5787.mp3",
+"sha256": "sha256:dc4a208b28e7f9581104d18dea64befa04afeb88a5b842864fa82b5a6f6d9af5",
+"bytes": 41580
+},
+"80:30": {
+"file": "80_30.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5788.mp3",
+"sha256": "sha256:2967912dae7b76bf4755a873603d541c88bc5a5fe64a22b0cc21b009aac5e729",
+"bytes": 41788
+},
+"80:31": {
+"file": "80_31.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5789.mp3",
+"sha256": "sha256:21e16c319415efcdcdf094c29953add1ca9fa62ebd52a2ddf6ae861919c48610",
+"bytes": 40745
+},
+"80:32": {
+"file": "80_32.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5790.mp3",
+"sha256": "sha256:b568f83a0a607a0bfc13d0e4d26331cac1cd00bc45944911998a0d54a796ad9b",
+"bytes": 57880
+},
+"80:33": {
+"file": "80_33.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5791.mp3",
+"sha256": "sha256:c407bf8d0d833c5fe9cff1bcaa14595da23199f4edd7e30d4ce1ba0c82929446",
+"bytes": 77733
+},
+"80:34": {
+"file": "80_34.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5792.mp3",
+"sha256": "sha256:6f10a5d368995ed572f876928d0b368a8777a31dc6db3084035c55f9feed918b",
+"bytes": 67702
+},
+"80:35": {
+"file": "80_35.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5793.mp3",
+"sha256": "sha256:10391931787f01c4f29ca53e50b708ed1cc475d59e3124781b6806b9e23d40a8",
+"bytes": 45132
+},
+"80:36": {
+"file": "80_36.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5794.mp3",
+"sha256": "sha256:4a7b7096db0382a45afc5587156b56804c68bfd950929d4096354acf4c8c2661",
+"bytes": 49312
+},
+"80:37": {
+"file": "80_37.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5795.mp3",
+"sha256": "sha256:092006ffa5530a65c93401a6c9782505df20f07815dd31225185a550be03f5e9",
+"bytes": 92780
+},
+"80:38": {
+"file": "80_38.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5796.mp3",
+"sha256": "sha256:ae1437da395e88a783ecb7df69dfe69065fa0aeaaf215e1bd0f59a8142ec16bc",
+"bytes": 60806
+},
+"80:39": {
+"file": "80_39.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5797.mp3",
+"sha256": "sha256:5cd94146a3b494361473a828f01fcc90c11faa5968abab9790f43cdba14fec39",
+"bytes": 51820
+},
+"80:40": {
+"file": "80_40.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5798.mp3",
+"sha256": "sha256:e2db345535969e366b91be2f1e9201e9038bd0bdb65db0d1b6e8d8c1de1ce9d5",
+"bytes": 69792
+},
+"80:41": {
+"file": "80_41.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5799.mp3",
+"sha256": "sha256:28e38960c8c2903b3e215e2704a6bcba6c13c0249d7cee4f06525c7ec518f6c9",
+"bytes": 38654
+},
+"80:42": {
+"file": "80_42.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5800.mp3",
+"sha256": "sha256:6a37a47345e0297b5323d336d80e9d10cbef352efe8c055f8a50bd517eb42459",
+"bytes": 62477
+},
+"81:1": {
+"file": "81_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5801.mp3",
+"sha256": "sha256:be5e4ec2bd5862dbc120dfcb824ae7dd442b83d8f2bfbb32d496c6fa4e96566d",
+"bytes": 41999
+},
+"81:2": {
+"file": "81_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5802.mp3",
+"sha256": "sha256:0b1d1ed50d642257b964b09eef5cd4eb138837cbbad7b8e7dd5bc848c851fea8",
+"bytes": 51404
+},
+"81:3": {
+"file": "81_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5803.mp3",
+"sha256": "sha256:c52d9cb66b0a7400c3d4c888b97b66053a35786aac34d81e4c85b9bc0396093c",
+"bytes": 43880
+},
+"81:4": {
+"file": "81_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5804.mp3",
+"sha256": "sha256:76b3a87a55336c94b26f2336f256159e655135d92dd8d03a991c52036bd5c99b",
+"bytes": 46389
+},
+"81:5": {
+"file": "81_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5805.mp3",
+"sha256": "sha256:40b400090c729ae550a4b33c7d2a11f2dbcad28fdec46f10af7e85a93db08203",
+"bytes": 41999
+},
+"81:6": {
+"file": "81_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5806.mp3",
+"sha256": "sha256:7740cb951033b3701c6e796ce9ec1db7a5f8efee46c31a36a8309d3ad9255d89",
+"bytes": 46179
+},
+"81:7": {
+"file": "81_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5807.mp3",
+"sha256": "sha256:d03dcab19c28bdda0e488ed6ad46ac726c73e5d3c2361e0c25e06cddc0187f47",
+"bytes": 49105
+},
+"81:8": {
+"file": "81_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5808.mp3",
+"sha256": "sha256:cbc979ab76bd813e16a23846e69dd7c03da6ab3535204d428f6c66ee6192c9be",
+"bytes": 45970
+},
+"81:9": {
+"file": "81_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5809.mp3",
+"sha256": "sha256:834ee72127ba3b5f2346d453ffb075b356bdd5406b0b12f30a5f7995ba70c7fa",
+"bytes": 53493
+},
+"81:10": {
+"file": "81_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5810.mp3",
+"sha256": "sha256:f656d6250fffd3a9d6d6e01dbad014ffc4bc44e26c247708143bfb979524526d",
+"bytes": 42837
+},
+"81:11": {
+"file": "81_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5811.mp3",
+"sha256": "sha256:e1ff27930224096c98c05a685f66735d97826ee5aefe03267945340a7fee1bb7",
+"bytes": 48899
+},
+"81:12": {
+"file": "81_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5812.mp3",
+"sha256": "sha256:c795d242a7aebbef07ebf2f2da75351909131a8da259060fc31f5e69d5377e2b",
+"bytes": 42419
+},
+"81:13": {
+"file": "81_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5813.mp3",
+"sha256": "sha256:4b127555898e48f18907bf9229ca7388ff5ca0a438c1f3e064e17af510afde46",
+"bytes": 46808
+},
+"81:14": {
+"file": "81_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5814.mp3",
+"sha256": "sha256:7a4dee48424f95a8097d81cfcf564de586471e11cec7d1ed4f2a9468b9424b99",
+"bytes": 68751
+},
+"81:15": {
+"file": "81_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5815.mp3",
+"sha256": "sha256:2581a00b082b65f3def98cbdf6c8431231886aaf03a7d0d60434596438687809",
+"bytes": 58093
+},
+"81:16": {
+"file": "81_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5816.mp3",
+"sha256": "sha256:96a2a5bf5243fce71dd57a0832e254d6b467e89a745fc94a768acd8348ea920c",
+"bytes": 43882
+},
+"81:17": {
+"file": "81_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5817.mp3",
+"sha256": "sha256:647184d9aa9ed3a39ec68533ae61fd7b8b9fd5ad8f2060b498260c1135b83547",
+"bytes": 46181
+},
+"81:18": {
+"file": "81_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5818.mp3",
+"sha256": "sha256:02398755960a1907e348dc24bf84606cdacdceb8e92c4b0d658ed2170f1e3122",
+"bytes": 48689
+},
+"81:19": {
+"file": "81_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5819.mp3",
+"sha256": "sha256:64a76c3bee6f6a5495145a6a405ec714a8eee1d49c73c2df85f016c4c6c84e0d",
+"bytes": 83797
+},
+"81:20": {
+"file": "81_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5820.mp3",
+"sha256": "sha256:1df685a046bb562138b8fb027609b9da998ab07c73402e8d6bc76c81b1d013e3",
+"bytes": 74393
+},
+"81:21": {
+"file": "81_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5821.mp3",
+"sha256": "sha256:9e719bf4bb56f6ecc98321cc620e5b225037d21cbacc499998b80b8d2c1bd0c4",
+"bytes": 57049
+},
+"81:22": {
+"file": "81_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5822.mp3",
+"sha256": "sha256:3a0bec944e77eb8b6351a9fcac51c7113abafcfb6bbd970ca1ae2e1e5abef64e",
+"bytes": 72930
+},
+"81:23": {
+"file": "81_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5823.mp3",
+"sha256": "sha256:064063cc83ea01a7a1cfef3725d1abf09ca71c7ba21a3df0bbdf55a7a5dc2a5e",
+"bytes": 61228
+},
+"81:24": {
+"file": "81_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5824.mp3",
+"sha256": "sha256:64fbfc4fd7e46a459bbdb09e4b24144785f419902bb311d324639c44baa9dbdf",
+"bytes": 63108
+},
+"81:25": {
+"file": "81_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5825.mp3",
+"sha256": "sha256:a8d267889c7e3a85a125f63a6416ce72501fd7a4d3959c3d156d6e3154f0d9c7",
+"bytes": 75020
+},
+"81:26": {
+"file": "81_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5826.mp3",
+"sha256": "sha256:ba77746b05a578c8ef013e1e992221209c2c4ba6c3e9a1eb5201dd7aa3e09b75",
+"bytes": 37822
+},
+"81:27": {
+"file": "81_27.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5827.mp3",
+"sha256": "sha256:6e66aef39c8730dcbf8153346a6973186689c479b93073c84fb58fc19d8f686d",
+"bytes": 70842
+},
+"81:28": {
+"file": "81_28.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5828.mp3",
+"sha256": "sha256:52601a833fe6d07cae5e395239876980c263f5bd85f54ea9a8a813d5355d5bc5",
+"bytes": 85260
+},
+"81:29": {
+"file": "81_29.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5829.mp3",
+"sha256": "sha256:91b52843c2fe70e9db98897937799655e8e8f51eb3e925235cc1b58f085273e0",
+"bytes": 140222
+},
+"82:1": {
+"file": "82_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5830.mp3",
+"sha256": "sha256:e48b9e44b044730f593a6feec1546df2f71ba621dc643c6339db9a909e3e059b",
+"bytes": 60392
+},
+"82:2": {
+"file": "82_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5831.mp3",
+"sha256": "sha256:e5a2f421234620fb9b2afc82db9ee78e220c7282037fe95dc83524022bac809d",
+"bytes": 52659
+},
+"82:3": {
+"file": "82_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5832.mp3",
+"sha256": "sha256:9543067ae0f1e8058167b341ab6221e0b0918276700959b4bd92d8549c22fbf5",
+"bytes": 47226
+},
+"82:4": {
+"file": "82_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5833.mp3",
+"sha256": "sha256:3aa46a259a59c8cb1fa85c28b357c734bf4eec262db0bdfd0e391ed6b6aa42a7",
+"bytes": 44300
+},
+"82:5": {
+"file": "82_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5834.mp3",
+"sha256": "sha256:61b3e1199e64236bf0e460407368738c462796b9c4b92777b9353707bf28f253",
+"bytes": 70632
+},
+"82:6": {
+"file": "82_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5835.mp3",
+"sha256": "sha256:18abe9e1ec9deba9ff1280df594c769aeaddb0e57454a9e447052a4cbcd6fd7d",
+"bytes": 110756
+},
+"82:7": {
+"file": "82_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5836.mp3",
+"sha256": "sha256:0c040b5d6e8428a8465884ab882c2492280b267b053b850c60d85d5741274622",
+"bytes": 69379
+},
+"82:8": {
+"file": "82_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5837.mp3",
+"sha256": "sha256:0497d539a414568000d40ac6de5f79b583dd8437069febb1f5aacc591b6a004d",
+"bytes": 87977
+},
+"82:9": {
+"file": "82_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5838.mp3",
+"sha256": "sha256:547955fbed7bce6513139de7a0de7675e3eb8de669255f2b5d6467ba908f9586",
+"bytes": 67498
+},
+"82:10": {
+"file": "82_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5839.mp3",
+"sha256": "sha256:ae986ff0b436aa2d90e697153d551b2f8f0eb081840ad7edba1fde2b1930ad23",
+"bytes": 74395
+},
+"82:11": {
+"file": "82_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5840.mp3",
+"sha256": "sha256:5c9b7c6bb7788aad12844d1c4d40ba37635519f55763185e91c20e48f16a8344",
+"bytes": 49946
+},
+"82:12": {
+"file": "82_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5841.mp3",
+"sha256": "sha256:98348c3cda43dff73d5663344cf3841d92c1604c19b1119b673a0c149ab58e4e",
+"bytes": 66245
+},
+"82:13": {
+"file": "82_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5842.mp3",
+"sha256": "sha256:2a9cddbaeafa10dfbbd4a1d1c859c70803f96b9cae9c3634f46384bbf77c6456",
+"bytes": 63737
+},
+"82:14": {
+"file": "82_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5843.mp3",
+"sha256": "sha256:ccdb6d49411a1d3db00f754f1c813d52cb2d77400e8b17736a96bfe07d7a837f",
+"bytes": 67708
+},
+"82:15": {
+"file": "82_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5844.mp3",
+"sha256": "sha256:1b41775ce60580ddec099806e20a4c6334389d48c5ac605231a3f062eec41383",
+"bytes": 59349
+},
+"82:16": {
+"file": "82_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5845.mp3",
+"sha256": "sha256:e05bd5e1bbe953b5a74249aff4f7acf3daed8f076b9ea2c19fb1e2e2e5ad67c0",
+"bytes": 86098
+},
+"82:17": {
+"file": "82_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5846.mp3",
+"sha256": "sha256:8f860f909b87349347252dfa22f0fc2ea206e8251f44d66159ee82eaa117cc6f",
+"bytes": 77530
+},
+"82:18": {
+"file": "82_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5847.mp3",
+"sha256": "sha256:ad3c872b676b710392a0b992d9b35f6b1a7baa88efd261b8e8d35ffad64128f0",
+"bytes": 92786
+},
+"82:19": {
+"file": "82_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5848.mp3",
+"sha256": "sha256:f4f16f409e383765db3872dae0a2d737c749642b8b831438e47f3591ede97f32",
+"bytes": 137089
+},
+"83:1": {
+"file": "83_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5849.mp3",
+"sha256": "sha256:8477b0e2e7a8b0fbf0eb27b1700e54ce1803df78372c6a0661cec022e9b970e3",
+"bytes": 47646
+},
+"83:2": {
+"file": "83_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5850.mp3",
+"sha256": "sha256:7376cf35c1e2624f55c5779538289a7ac5e5e19e7f65dfead54695c1f98f4723",
+"bytes": 87770
+},
+"83:3": {
+"file": "83_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5851.mp3",
+"sha256": "sha256:f869067aa082ce26814b89e68ddf98b1c7d64075f9fa9d31d19dd07796795e8f",
+"bytes": 92787
+},
+"83:4": {
+"file": "83_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5852.mp3",
+"sha256": "sha256:94d2f1146d90234fae58567d244a023b75c0355d04072141a8631e6ecf0f5c0e",
+"bytes": 101981
+},
+"83:5": {
+"file": "83_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5853.mp3",
+"sha256": "sha256:a4e12359c6fc26f7d996d0a76011f2a901131035f97bea7ac89d4459c40b8576",
+"bytes": 40750
+},
+"83:6": {
+"file": "83_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5854.mp3",
+"sha256": "sha256:e1b04297284a1ad0c192b17732d2aa5529ce1b698c424443af5719ac3f6ad4ad",
+"bytes": 89860
+},
+"83:7": {
+"file": "83_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5855.mp3",
+"sha256": "sha256:c2b7699ad6a3e378104d33fe59644602bf6a37c6306dd80cc08b94310e0d0106",
+"bytes": 105951
+},
+"83:8": {
+"file": "83_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5856.mp3",
+"sha256": "sha256:4991e913db536d493eb2ccd41e213cb70453ba8c32042649851f9fd51e04c8bb",
+"bytes": 70007
+},
+"83:9": {
+"file": "83_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5857.mp3",
+"sha256": "sha256:6ee70fd7dba84dc31e0ef966ff02ababe096d780b0f98148e1e2beefe0f11275",
+"bytes": 51827
+},
+"83:10": {
+"file": "83_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5858.mp3",
+"sha256": "sha256:95c6754f2131a267e31c237a259d321a947e1d90e3addbfaa7d145f71b4af290",
+"bytes": 84428
+},
+"83:11": {
+"file": "83_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5859.mp3",
+"sha256": "sha256:102b86176e3c2764cfc928d5d4661a78a6aae919eefda5fa70790fcffcc63db8",
+"bytes": 76278
+},
+"83:12": {
+"file": "83_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5860.mp3",
+"sha256": "sha256:72e6f0910d417d224ea1abbe612f429ccba217d757605c6bcc323bec7f3e99bc",
+"bytes": 101566
+},
+"83:13": {
+"file": "83_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5861.mp3",
+"sha256": "sha256:1e8801061ac74c40ff0c2fca2229e875e16517a8254b6218bd7d1007c7ba3674",
+"bytes": 122463
+},
+"83:14": {
+"file": "83_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5862.mp3",
+"sha256": "sha256:deeea7e9307bcbe8ece135252927ede1d25ddbc7d0664c256738b5a9be0ea7fd",
+"bytes": 117239
+},
+"83:15": {
+"file": "83_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5863.mp3",
+"sha256": "sha256:8a25a36eab83f12601a1d5cfb5c4f26a8c19497a024888fa26078e923743c3f4",
+"bytes": 118911
+},
+"83:16": {
+"file": "83_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5864.mp3",
+"sha256": "sha256:bd3e2d7ad0ed08b94ef864e1fa975d5893c62eca3a1b32fac9dde3ab949dbb9d",
+"bytes": 73143
+},
+"83:17": {
+"file": "83_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5865.mp3",
+"sha256": "sha256:0a8c384698d8c7dc132ee14824369dfc75816ceb7a309f0d8603c2c702e0a48f",
+"bytes": 117866
+},
+"83:18": {
+"file": "83_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5866.mp3",
+"sha256": "sha256:e98af8c3e1eec9fb6bb3cc4af5c88451a989d10a715ec33655533c7cb043c475",
+"bytes": 110342
+},
+"83:19": {
+"file": "83_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5867.mp3",
+"sha256": "sha256:be25209aaada2bb99b5e305e14d96d607c557f5fd9fb03ba595815797bab0ac1",
+"bytes": 74607
+},
+"83:20": {
+"file": "83_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5868.mp3",
+"sha256": "sha256:5d5f4b86e16904f7cb5f252d9aefa6de7a235bb5f9826f1f9c308c1d974d69d3",
+"bytes": 52455
+},
+"83:21": {
+"file": "83_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5869.mp3",
+"sha256": "sha256:cf7b41831e3541e9cb466fa0e90ad7b96ca36d760f5856eaf74885849e700550",
+"bytes": 61232
+},
+"83:22": {
+"file": "83_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5870.mp3",
+"sha256": "sha256:0de0e5422db572eb72c5c144faa2320b01ffc7d3d293ac99cb4d2a87f472ea2a",
+"bytes": 64784
+},
+"83:23": {
+"file": "83_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5871.mp3",
+"sha256": "sha256:c99ceacaf9955eeda1eca22c7a7ddcd511283213c45eacd170d55ddd351b662f",
+"bytes": 77115
+},
+"83:24": {
+"file": "83_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5872.mp3",
+"sha256": "sha256:a78f9b30ead5ac033da562244d63452b2d17db2e57e72c5c7347dd08f02b0a17",
+"bytes": 87981
+},
+"83:25": {
+"file": "83_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5873.mp3",
+"sha256": "sha256:d7dccd208254fa1c7ed464b8392f02bda01aa6fc136b7e49cebb813de6bb70dc",
+"bytes": 70428
+},
+"83:26": {
+"file": "83_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5874.mp3",
+"sha256": "sha256:90b20f21adb80cb6dd23a0571afa39e6eddfae191dcb93a09e87af9c6ee70811",
+"bytes": 131031
+},
+"83:27": {
+"file": "83_27.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5875.mp3",
+"sha256": "sha256:40be9494efdecc22ed546c948b9d7ad0ca08863af2f209cf7d8069f7a7cdbca3",
+"bytes": 65411
+},
+"83:28": {
+"file": "83_28.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5876.mp3",
+"sha256": "sha256:fc412a0da31de8f1588fcdd976b64cf259f43359cd8472138df422d6db145f5e",
+"bytes": 77950
+},
+"83:29": {
+"file": "83_29.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5877.mp3",
+"sha256": "sha256:9df741205f1282bd6d11b0e93acec21bfe85dcd4c92faedf7865e6300721619e",
+"bytes": 130404
+},
+"83:30": {
+"file": "83_30.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5878.mp3",
+"sha256": "sha256:1ec7be5f68c005970422e874acab67e2dbf509e4aed18c5c6032e64cccc39e2f",
+"bytes": 77323
+},
+"83:31": {
+"file": "83_31.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5879.mp3",
+"sha256": "sha256:75d2332f696fd442dcfc00c14bdea01dbb22530436f25bf6a9caffc707a9961a",
+"bytes": 113686
+},
+"83:32": {
+"file": "83_32.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5880.mp3",
+"sha256": "sha256:04abd9e0713b234697a253e6341f97415d99d92aa8cf0f2b27d251c35284fe33",
+"bytes": 169275
+},
+"83:33": {
+"file": "83_33.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5881.mp3",
+"sha256": "sha256:c134828d5299b0421f84fcbb851c0486fa8726ecaedf98dcdfad287f70114f8e",
+"bytes": 89653
+},
+"83:34": {
+"file": "83_34.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5882.mp3",
+"sha256": "sha256:7943da87ec3da028c5ffd3bd2cff4381b9a39c8bb9e818f9e678ae4f70ba43a7",
+"bytes": 101147
+},
+"83:35": {
+"file": "83_35.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5883.mp3",
+"sha256": "sha256:da6c2fe7fc1d4b57277c3a28b9354b6072695d0499a7bdb25e7df573edd42dad",
+"bytes": 66665
+},
+"83:36": {
+"file": "83_36.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5884.mp3",
+"sha256": "sha256:b2d9b963d11415517107c2bff7d28b707543ca0794b0d3a3544a7f9dea7c5310",
+"bytes": 88817
+},
+"84:1": {
+"file": "84_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5885.mp3",
+"sha256": "sha256:569c4b87d9429340bda1e5274f799e5020e7b14ca0011d9c944830d11e98e923",
+"bytes": 64154
+},
+"84:2": {
+"file": "84_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5886.mp3",
+"sha256": "sha256:08010c557f986683b5d0ff1e7417e2db75f9ee3318c4be7f78ead20e6011598c",
+"bytes": 58304
+},
+"84:3": {
+"file": "84_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5887.mp3",
+"sha256": "sha256:4ae749075fc73c933f2a6cc1b69de342aebbbed2e3caff70b12ef5389b718e38",
+"bytes": 40959
+},
+"84:4": {
+"file": "84_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5888.mp3",
+"sha256": "sha256:611bd8126b84c70e14547b9cba2fea71a590bdd97bead3b2c458dbc8949c6038",
+"bytes": 60393
+},
+"84:5": {
+"file": "84_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5889.mp3",
+"sha256": "sha256:d77eeb017706d96f6e0ef9c06f149894edaac3134de27afed05c0ee8907f1016",
+"bytes": 61647
+},
+"84:6": {
+"file": "84_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5890.mp3",
+"sha256": "sha256:6ea1f42e9997c93dc210792c0547152a8bf1ffd6ff18320b5217954834741977",
+"bytes": 152553
+},
+"84:7": {
+"file": "84_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5891.mp3",
+"sha256": "sha256:f310a196a7904e28386ab96faecb366fa74f7e20b7171e3d47eec643dbd1f918",
+"bytes": 81083
+},
+"84:8": {
+"file": "84_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5892.mp3",
+"sha256": "sha256:35bba6b08f9055539b9e4b8a2969f1e9f74aef06688ff8987d67d09c195e0d36",
+"bytes": 73350
+},
+"84:9": {
+"file": "84_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5893.mp3",
+"sha256": "sha256:c4bb9ef783564f89848c13cc53a573347b35e8949eb4ea6e993667769d05190b",
+"bytes": 83380
+},
+"84:10": {
+"file": "84_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5894.mp3",
+"sha256": "sha256:f020accb8472b6e3c34e89f02a991b598c5d974c6a84414597bb7c34cf695355",
+"bytes": 93831
+},
+"84:11": {
+"file": "84_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5895.mp3",
+"sha256": "sha256:f94bc17a992bfcbb8a518601f41e1c9b0866078cc3f7f64551bfcf2cb98f3791",
+"bytes": 46602
+},
+"84:12": {
+"file": "84_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5896.mp3",
+"sha256": "sha256:473ec30f2c848e070969e6f3a10bf6bb26cc02a58f69627b3474b0dc2f049595",
+"bytes": 44721
+},
+"84:13": {
+"file": "84_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5897.mp3",
+"sha256": "sha256:9cf1df94bf38bef40c5acb2598946299eddd42a20fbf7e570a8ad2a1917306c8",
+"bytes": 87144
+},
+"84:14": {
+"file": "84_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5898.mp3",
+"sha256": "sha256:75fe5ed280f13742ac267b3849e794cd74f07d75bdfc98f573d45425331fda24",
+"bytes": 70008
+},
+"84:15": {
+"file": "84_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5899.mp3",
+"sha256": "sha256:f0ff541ee5de195f4da5df8dd85f229c8ed4afdfd830b2ea8ef3319739d635f8",
+"bytes": 96548
+},
+"84:16": {
+"file": "84_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5900.mp3",
+"sha256": "sha256:492b68129490800aef83ff9b319b3c6cc5698ca68e005ea9ac8e03fa56ed5618",
+"bytes": 56633
+},
+"84:17": {
+"file": "84_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5901.mp3",
+"sha256": "sha256:65fb34af51f69078b321633f9b0a01402b95fa912b54a1696b109dd5e6a5d8ed",
+"bytes": 44721
+},
+"84:18": {
+"file": "84_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5902.mp3",
+"sha256": "sha256:04b6127829a9a4db474b84ad6070f8d9ecb165ba230158e156a3e32800a150e6",
+"bytes": 37198
+},
+"84:19": {
+"file": "84_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5903.mp3",
+"sha256": "sha256:df5aee3797007021ce47198deaaa6aac7e3be666af9462ab1e91b8036492659e",
+"bytes": 66664
+},
+"84:20": {
+"file": "84_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5904.mp3",
+"sha256": "sha256:009e7c42159a239370d969ca8564593b4439a08b94788adb99652f26f5b0d669",
+"bytes": 54543
+},
+"84:21": {
+"file": "84_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5905.mp3",
+"sha256": "sha256:9b753fdee3a4fe6482c850422568beabd17c0ee6adf477b8301506f1bf57b1a7",
+"bytes": 92369
+},
+"84:22": {
+"file": "84_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5906.mp3",
+"sha256": "sha256:affa5f49ef512c38e21bdaa0bd6704aeabd6892d0eb06211f80ce89e5b9ab3c8",
+"bytes": 63112
+},
+"84:23": {
+"file": "84_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5907.mp3",
+"sha256": "sha256:01f5fd574ea1334c10a58a241e9203737f9c3a618b4cf0768c915e64ef6f173c",
+"bytes": 75232
+},
+"84:24": {
+"file": "84_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5908.mp3",
+"sha256": "sha256:3cb490237b285cccd5553265e77299ca745019e537982a0854a8949a7fd0d0d0",
+"bytes": 70844
+},
+"84:25": {
+"file": "84_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5909.mp3",
+"sha256": "sha256:b545692d95de8e9017b00298733ae38e9dd424a40e0c6ce641baaa0963894d90",
+"bytes": 128104
+},
+"85:1": {
+"file": "85_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5910.mp3",
+"sha256": "sha256:f5b10b008a44794f42d29eabe2403200c0f796c6ee6d3a975f1e7a711de9f2e4",
+"bytes": 71049
+},
+"85:2": {
+"file": "85_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5911.mp3",
+"sha256": "sha256:7ac44f5b0aead515bfe529e6506f8b7e5ee99066e185956acf4d73ec7145f98c",
+"bytes": 51195
+},
+"85:3": {
+"file": "85_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5912.mp3",
+"sha256": "sha256:07da68f96e635b4684d8926a6526f1e67a56001032166df57ac588e321fdad7c",
+"bytes": 54329
+},
+"85:4": {
+"file": "85_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5913.mp3",
+"sha256": "sha256:bf2c8feac4d2be53d41c3ce9ed90f9e9a00b4cc8470c9a6bc07a49febc77f790",
+"bytes": 55374
+},
+"85:5": {
+"file": "85_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5914.mp3",
+"sha256": "sha256:3bc0082383d0d477752b57bd7b45bda86fd69afca29452c286816a8ea11e2587",
+"bytes": 55792
+},
+"85:6": {
+"file": "85_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5915.mp3",
+"sha256": "sha256:0903a3fb94c1548a507f5562ee377244661b9da33298babff568786262cb320b",
+"bytes": 54747
+},
+"85:7": {
+"file": "85_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5916.mp3",
+"sha256": "sha256:f0c56ec95cecc2517be358ad76aa833efa89ea665373612987994d24f7eb345d",
+"bytes": 105530
+},
+"85:8": {
+"file": "85_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5917.mp3",
+"sha256": "sha256:77c61601655e72373cbc001fe0c57887a87e07d12d8c4264014acfcc0a14c3bc",
+"bytes": 144190
+},
+"85:9": {
+"file": "85_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5918.mp3",
+"sha256": "sha256:47847c5d9cc8f460d739cccfd259d5925227d5180f7774529a00202832e5ba57",
+"bytes": 165715
+},
+"85:10": {
+"file": "85_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5919.mp3",
+"sha256": "sha256:d25f277769d62d94dd71c3894d78097bdbe428a6fffd7b0787965d8a88bb2c96",
+"bytes": 204798
+},
+"85:11": {
+"file": "85_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5920.mp3",
+"sha256": "sha256:80d043ddc9d29d702604db0cf74f1b640964b19a405f8781176fb7b2dd5ec418",
+"bytes": 236145
+},
+"85:12": {
+"file": "85_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5921.mp3",
+"sha256": "sha256:d24a99df44414e7481145279185fd36248584bd37a8ce18015c5e0b2e5c77c4d",
+"bytes": 58093
+},
+"85:13": {
+"file": "85_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5922.mp3",
+"sha256": "sha256:1aeeec461464293af7a5724fd9d884942a70a0d21fc40744f66cf9d98166fa7b",
+"bytes": 62690
+},
+"85:14": {
+"file": "85_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5923.mp3",
+"sha256": "sha256:fef9173312b8e9ea7d73c4b8c1e50e6a4d2693af56f6325739d38758964a6048",
+"bytes": 48690
+},
+"85:15": {
+"file": "85_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5924.mp3",
+"sha256": "sha256:f52cfc7d6e15b1d0127e2be79063bffb61fae2b705a1d63e6fd20c37e7c9c360",
+"bytes": 47017
+},
+"85:16": {
+"file": "85_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5925.mp3",
+"sha256": "sha256:d0cf9e04c3fc1dc72ea1125d6f67276f7f028af37fadf0b664d659da9be6e003",
+"bytes": 56630
+},
+"85:17": {
+"file": "85_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5926.mp3",
+"sha256": "sha256:ae5c0f96cb7db636eda64e5602384e5d8774e4e3968dc66c0f17343e60f9f664",
+"bytes": 58303
+},
+"85:18": {
+"file": "85_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5927.mp3",
+"sha256": "sha256:eb8a19bcbd9b070401ca189fd7110e0bced1aba298531db893454a4607423609",
+"bytes": 48898
+},
+"85:19": {
+"file": "85_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5928.mp3",
+"sha256": "sha256:6797e12e9655911475e6588f8efa32f406df31a8f697f4f7f113578540a9927e",
+"bytes": 73975
+},
+"85:20": {
+"file": "85_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5929.mp3",
+"sha256": "sha256:16380bccf15e3beb4475939d1bb35290124f14a53a8a6f9d9a9ef112f3cfe6c4",
+"bytes": 81290
+},
+"85:21": {
+"file": "85_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5930.mp3",
+"sha256": "sha256:eb291e2d5af4143119dd0bd97e72f1834622da956bcf852ebccfb20a130dde92",
+"bytes": 62272
+},
+"85:22": {
+"file": "85_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5931.mp3",
+"sha256": "sha256:f9d4a8f8db4f1f53f4afa2368043f34dd3721af45c2ef19aca9dca6243071d9e",
+"bytes": 54331
+},
+"86:1": {
+"file": "86_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5932.mp3",
+"sha256": "sha256:fe517ce5a0ce702795f7891d7c6597101075f5be011439fe0c56320c259ecfa9",
+"bytes": 52657
+},
+"86:2": {
+"file": "86_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5933.mp3",
+"sha256": "sha256:215cb12523158e4978c49d3f9bf456a9582f127f8e655ac1b235178a93985bed",
+"bytes": 58509
+},
+"86:3": {
+"file": "86_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5934.mp3",
+"sha256": "sha256:1096a027e0f3571cfea01bb2fd19b6e3cdeb7ac3ba25c50763e602f266b36d96",
+"bytes": 38239
+},
+"86:4": {
+"file": "86_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5935.mp3",
+"sha256": "sha256:6d9c75de1130d78fe4a6fb6060eb1aada564caba459300280030be79a454ff8a",
+"bytes": 82543
+},
+"86:5": {
+"file": "86_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5936.mp3",
+"sha256": "sha256:d9df67ec87553a33ce697e02f25c529f334da729ad5cfa818a49950f6c0e020a",
+"bytes": 72510
+},
+"86:6": {
+"file": "86_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5937.mp3",
+"sha256": "sha256:a839de8099aa4aef096e79fa1b941f2a2f278502322adffca6e0688b662235d1",
+"bytes": 64569
+},
+"86:7": {
+"file": "86_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5938.mp3",
+"sha256": "sha256:784fadbf7af24ee04e5c914f89cb3b2314dfdf1c431161a88da818b62ab958e7",
+"bytes": 74600
+},
+"86:8": {
+"file": "86_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5939.mp3",
+"sha256": "sha256:e39d2c1495fab32066aead411a03d00f1fb2832faf3e4c0c62a95399ac5e1dd5",
+"bytes": 73973
+},
+"86:9": {
+"file": "86_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5940.mp3",
+"sha256": "sha256:ebdeff800cdcc08e7e648141a8801a1cb9b8dcbb2008b529c1b5593b524d9b38",
+"bytes": 52449
+},
+"86:10": {
+"file": "86_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5941.mp3",
+"sha256": "sha256:a0c7b5c48093bf956a625953f84d26cdc0f8a5530241c344d20106d0471ba1a9",
+"bytes": 86305
+},
+"86:11": {
+"file": "86_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5942.mp3",
+"sha256": "sha256:dbb05abcd62f701ab37cb84ea2cd04e0bdc9e4a78af79e3aef28f788af9c1f3a",
+"bytes": 56839
+},
+"86:12": {
+"file": "86_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5943.mp3",
+"sha256": "sha256:5c3fb4679663914fdbfa73784524d8b093af029fc6eefebe0ae2097cbda5c89c",
+"bytes": 47017
+},
+"86:13": {
+"file": "86_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5944.mp3",
+"sha256": "sha256:bf93a61f8428e4144338015e0db9c45cbbb5bef6af4a078e704a852d4f287918",
+"bytes": 55585
+},
+"86:14": {
+"file": "86_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5945.mp3",
+"sha256": "sha256:d87b1eae5f3603f0b405a9cfa1d72ed3177563b607cedb2d4ea4850524923e8f",
+"bytes": 42419
+},
+"86:15": {
+"file": "86_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5946.mp3",
+"sha256": "sha256:d2b32c464c342d4cbc11b3d2b00e4839a6b438443402548bc2876b0e22b2a988",
+"bytes": 57675
+},
+"86:16": {
+"file": "86_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5947.mp3",
+"sha256": "sha256:81b434e733751e832451268f30552f251be41dfdb6f5dfbbd2ec14692303da95",
+"bytes": 37404
+},
+"86:17": {
+"file": "86_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5948.mp3",
+"sha256": "sha256:b037cba8ed29450cdbd5bc38e6e330c9453ecc06d19c52d07bd4b7d95a123392",
+"bytes": 73348
+},
+"87:1": {
+"file": "87_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5949.mp3",
+"sha256": "sha256:e4c0a2c4a81a1f6e3e6210a2216020b6d18631d763fca18804beb12dcf640ca9",
+"bytes": 55373
+},
+"87:2": {
+"file": "87_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5950.mp3",
+"sha256": "sha256:21d53ef70b2ee6d1d4250d56a3caba4f43aa3461835539813f5194300bd51789",
+"bytes": 50149
+},
+"87:3": {
+"file": "87_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5951.mp3",
+"sha256": "sha256:211ed7687cc25762b11a7389a11d5bc30de2197f10f0538e9fde9f6bc1affff3",
+"bytes": 53074
+},
+"87:4": {
+"file": "87_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5952.mp3",
+"sha256": "sha256:ecb5f0dc24c78ecc88c353f5414559402d52f2a115c1961949702987e11ff039",
+"bytes": 59136
+},
+"87:5": {
+"file": "87_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5953.mp3",
+"sha256": "sha256:4f01d7f6a95b79b8606ad13fceb1b6e182a80aa35fba03df4ad29b1290cba3db",
+"bytes": 64986
+},
+"87:6": {
+"file": "87_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5954.mp3",
+"sha256": "sha256:583e7ff624719f1d8d64b565fdb75c2350c23a0bb20bed975ab9112e6e88c879",
+"bytes": 56627
+},
+"87:7": {
+"file": "87_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5955.mp3",
+"sha256": "sha256:c1497783869e368e0fafcb30f528d2d516b45bee31a83ee53e960fd96e5c7080",
+"bytes": 144189
+},
+"87:8": {
+"file": "87_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5956.mp3",
+"sha256": "sha256:4bdc6143881c3314705c15dd34aa690e0357a7202b06cb40a09d3144c16baa51",
+"bytes": 51403
+},
+"87:9": {
+"file": "87_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5957.mp3",
+"sha256": "sha256:5400ccf622165f4628d8a3d578889acf2d247a7a09d5df02edbc88a3998b906b",
+"bytes": 62269
+},
+"87:10": {
+"file": "87_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5958.mp3",
+"sha256": "sha256:352835082cbdd050e08523e527ed621417597c032ee68e09140bd20222b03bf0",
+"bytes": 57883
+},
+"87:11": {
+"file": "87_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5959.mp3",
+"sha256": "sha256:98ba2ce08dafa0ae97d98486dc5942a9df29e45f564e050aa65c4b309f8b8d20",
+"bytes": 57465
+},
+"87:12": {
+"file": "87_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5960.mp3",
+"sha256": "sha256:9e909a8e71a23f83bb1e08e62cec4b82df36fd17bb2b6dc9798b9814f5b12303",
+"bytes": 58301
+},
+"87:13": {
+"file": "87_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5961.mp3",
+"sha256": "sha256:c2eb01306be1024a8681c2dfed3ca1893b2050a7a079d35c7e27222a817b0039",
+"bytes": 86095
+},
+"87:14": {
+"file": "87_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5962.mp3",
+"sha256": "sha256:fdd4ef9942ce0bc16050c79856c5d971ce8fb201f66a2a884d284db0891807b2",
+"bytes": 52868
+},
+"87:15": {
+"file": "87_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5963.mp3",
+"sha256": "sha256:eb16cff66b1133234e125314c57f997fce83fefdae9f1ad5653e2c9fecbec1ea",
+"bytes": 57256
+},
+"87:16": {
+"file": "87_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5964.mp3",
+"sha256": "sha256:d7fe7b79604f69a208aecc4c2a80a43d16e30516b19959de9fac56f3258ed952",
+"bytes": 68123
+},
+"87:17": {
+"file": "87_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5965.mp3",
+"sha256": "sha256:df7e22a7be8e12621b2a7b82ad0af556ba7fc34845e817373b0d046302674e94",
+"bytes": 60600
+},
+"87:18": {
+"file": "87_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5966.mp3",
+"sha256": "sha256:fe123dced8a23459772ed3b08f941088a61b187c257ce7439523255b55e7949a",
+"bytes": 67914
+},
+"87:19": {
+"file": "87_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5967.mp3",
+"sha256": "sha256:120bda8635193aef27c64f31f62c9a5e7badd7ec3de1daeb60b48521278d550e",
+"bytes": 58928
+},
+"88:1": {
+"file": "88_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5968.mp3",
+"sha256": "sha256:2c44ab689d58d913c95f1dd365a510ea0969e0a346aa9e761be1a279053843bc",
+"bytes": 65617
+},
+"88:2": {
+"file": "88_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5969.mp3",
+"sha256": "sha256:c20004ad4c822ba80f4741d0b28c962285c0accab0353b034fd8d5a3d07727d7",
+"bytes": 69379
+},
+"88:3": {
+"file": "88_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5970.mp3",
+"sha256": "sha256:e806d759ca3e1265c0fbd1db455088687ea2742f5b234a69de34e194cd50411a",
+"bytes": 50571
+},
+"88:4": {
+"file": "88_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5971.mp3",
+"sha256": "sha256:6cfa59fedf1f1355018f13c3adfca02bee84974cdcb6b9830814456a89899cb0",
+"bytes": 54333
+},
+"88:5": {
+"file": "88_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5972.mp3",
+"sha256": "sha256:541e9af56a7a273d4c355b4ea5b311b98f70ef9cf5bf83d169e0f8f61cb04121",
+"bytes": 60185
+},
+"88:6": {
+"file": "88_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5973.mp3",
+"sha256": "sha256:0e616f700e804471eb58f934f1215953a0841a3736673610ba22273729631437",
+"bytes": 85052
+},
+"88:7": {
+"file": "88_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5974.mp3",
+"sha256": "sha256:c07d67064644a916d47fd9ff36498cf6024b7bb0f15236e89468d806ab66e5a1",
+"bytes": 91323
+},
+"88:8": {
+"file": "88_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5975.mp3",
+"sha256": "sha256:25ceee04202d0f20c20a8ec204b32321701e781e82ebbabf6843762748ca41f9",
+"bytes": 64572
+},
+"88:9": {
+"file": "88_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5976.mp3",
+"sha256": "sha256:3f94d813c8da62236d5317132c144d0ba0b9a70cb851d9f08e653d37fd0999ca",
+"bytes": 49317
+},
+"88:10": {
+"file": "88_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5977.mp3",
+"sha256": "sha256:afa9bfd172b4fac2a8d4aa34839cf0da06d71b29208890e33cdc0c0b1976d69b",
+"bytes": 53916
+},
+"88:11": {
+"file": "88_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5978.mp3",
+"sha256": "sha256:ee587f106a6affb4aba761647c4f3ec8b382f7d9017c8b2677af67b6532a9c57",
+"bytes": 64156
+},
+"88:12": {
+"file": "88_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5979.mp3",
+"sha256": "sha256:699a10a56324b62d2f2cb7e9513ed806712b58fca6d2b05f4f1e82a543e93aa8",
+"bytes": 59977
+},
+"88:13": {
+"file": "88_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5980.mp3",
+"sha256": "sha256:2f433403be50bd07f1354439432bd7ad941730272c1ff4c90200215b991614bc",
+"bytes": 62485
+},
+"88:14": {
+"file": "88_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5981.mp3",
+"sha256": "sha256:4435cceac0a167e0137b531336400c6a5c1f7d0a5e3835d674f10e9b166eae54",
+"bytes": 57260
+},
+"88:15": {
+"file": "88_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5982.mp3",
+"sha256": "sha256:2a71a38ef13944cc5dbba94731ece8b531727db0c538132f6bec42ae27b626d1",
+"bytes": 50782
+},
+"88:16": {
+"file": "88_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5983.mp3",
+"sha256": "sha256:2a62eaa6f4d3c44ff8e9264c0a811e9f9cecdd05b908caea74c9bca37fb9377b",
+"bytes": 57469
+},
+"88:17": {
+"file": "88_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5984.mp3",
+"sha256": "sha256:dd3eb9589dcc8da077ce00fa1096d9571b8d8c5b123c5bb31aa199c33be08089",
+"bytes": 86309
+},
+"88:18": {
+"file": "88_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5985.mp3",
+"sha256": "sha256:585cf963e26b5b9d188307ad7598583fb8464bea5538742cab70398b1916bbe8",
+"bytes": 69800
+},
+"88:19": {
+"file": "88_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5986.mp3",
+"sha256": "sha256:67e8f9ee30ff0b6a64378e69b0f3d02bc15615aa0c3e5b4e9a90a32b3ffa8144",
+"bytes": 57678
+},
+"88:20": {
+"file": "88_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5987.mp3",
+"sha256": "sha256:ce990e40ee14d90eb4968893a73e810b1ea74b74c5a60f85e0216be8f6dbe33f",
+"bytes": 61232
+},
+"88:21": {
+"file": "88_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5988.mp3",
+"sha256": "sha256:22aeb87934228f09fb8cc630689eafcd6411c7cb87d8665aefe42faf3fea3451",
+"bytes": 83382
+},
+"88:22": {
+"file": "88_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5989.mp3",
+"sha256": "sha256:947cd83b807ec58d61a40164391ec2aad5428740850a48ffb2541238b7f387eb",
+"bytes": 60814
+},
+"88:23": {
+"file": "88_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5990.mp3",
+"sha256": "sha256:e1dace79f37818d01812d11d4e4bed87f49fecb795b03fd844ca37a8f572ac03",
+"bytes": 63111
+},
+"88:24": {
+"file": "88_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5991.mp3",
+"sha256": "sha256:e7fab19a71f6c3818ed9cdbdc565e69b28bd6145ce257b62f6bc25dbf00f6427",
+"bytes": 79203
+},
+"88:25": {
+"file": "88_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5992.mp3",
+"sha256": "sha256:b98e5b74eb86094f6149237fcf4606deb6ad24189f6bb71bae32727c3bf1501e",
+"bytes": 76695
+},
+"88:26": {
+"file": "88_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5993.mp3",
+"sha256": "sha256:870904fdb5895ed7650ddd520cbb4d1ea7c3b0d6502cda07eaf6153530565f4b",
+"bytes": 69382
+},
+"89:1": {
+"file": "89_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5994.mp3",
+"sha256": "sha256:d9906a3bc1288402f08666475aec71b07ec55cd7eb78eb2a325da1b3084fe4f2",
+"bytes": 31341
+},
+"89:2": {
+"file": "89_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5995.mp3",
+"sha256": "sha256:8d4b983ba8b6beb65a1cff8f255ccf8603906c2143eb6685db33699d3d2337fc",
+"bytes": 42625
+},
+"89:3": {
+"file": "89_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5996.mp3",
+"sha256": "sha256:0c80bc982618c8b36639855b68329c07aa1f0897e946a6f5192ff9f104ea71e3",
+"bytes": 40954
+},
+"89:4": {
+"file": "89_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5997.mp3",
+"sha256": "sha256:49f2a9feecd71b27589b53591909cfc9f4c392bc948098d8948a9ff453a1286b",
+"bytes": 45968
+},
+"89:5": {
+"file": "89_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5998.mp3",
+"sha256": "sha256:c754d996b1700993ef5b46582f066e7c91f91b9248a9dd628c44df98e1cc9fa1",
+"bytes": 67076
+},
+"89:6": {
+"file": "89_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/5999.mp3",
+"sha256": "sha256:79b98dd038bdc8a691ea4e20e18dcef9c94b117db05a0b7cd81bf21a4460e7b1",
+"bytes": 81914
+},
+"89:7": {
+"file": "89_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6000.mp3",
+"sha256": "sha256:8786d973b8ed1d7045e602d84f50f7abdc60af7891e6ecace150028080f34197",
+"bytes": 49731
+},
+"89:8": {
+"file": "89_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6001.mp3",
+"sha256": "sha256:4e14b94a00bb695b6991a7b404be5b484b793ba207d64e0886c2fa8b199b882f",
+"bytes": 85674
+},
+"89:9": {
+"file": "89_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6002.mp3",
+"sha256": "sha256:b4b3c66e46f6141ea00bc2f3f9fc74a5c5a532356db0dc89ab8507781342efaa",
+"bytes": 86510
+},
+"89:10": {
+"file": "89_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6003.mp3",
+"sha256": "sha256:321f531d851acd2845463592e8e247dfd2aacf0d049b062ba3702d86cbb02428",
+"bytes": 58718
+},
+"89:11": {
+"file": "89_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6004.mp3",
+"sha256": "sha256:f449dc5bf22b91ae64cc7ec286deb965f7aa3bd954636c6779967f5ed58520bf",
+"bytes": 66241
+},
+"89:12": {
+"file": "89_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6005.mp3",
+"sha256": "sha256:fd6ead995a16f822366baa4d1318910d2308552a5e8fbbf6c9087b9cbd5e5c04",
+"bytes": 59972
+},
+"89:13": {
+"file": "89_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6006.mp3",
+"sha256": "sha256:6b0f0ef5e0604dae541e7f4e10e6aaef32f79590e28fee2dded18b90777dd07e",
+"bytes": 76690
+},
+"89:14": {
+"file": "89_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6007.mp3",
+"sha256": "sha256:f0c377a10b893807b04b06ab3816c0f4a371848d1fc7e9c75fb44146120065a3",
+"bytes": 78989
+},
+"89:15": {
+"file": "89_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6008.mp3",
+"sha256": "sha256:7d6f53c80b4af65abae3bbc7a45fa2572a0e6076f2f6b9815458fba9961001f9",
+"bytes": 186822
+},
+"89:16": {
+"file": "89_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6009.mp3",
+"sha256": "sha256:6fd79fedf0954fe09824e46205c615bc49cec480959e3d79db017e23f35e715e",
+"bytes": 161954
+},
+"89:17": {
+"file": "89_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6010.mp3",
+"sha256": "sha256:0dee7f1e3ac85c3d6d278205591f6497f299f93bf324115be943b00eb195351f",
+"bytes": 91946
+},
+"89:18": {
+"file": "89_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6011.mp3",
+"sha256": "sha256:13b10acca97f95f69978c0d8ca84147c005c2a64c3b6d9c106ce451a559a3f43",
+"bytes": 114097
+},
+"89:19": {
+"file": "89_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6012.mp3",
+"sha256": "sha256:6d162508233a84a8a68f30de20795e6ae987587c040ee0d32714a0be5c625bc7",
+"bytes": 80870
+},
+"89:20": {
+"file": "89_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6013.mp3",
+"sha256": "sha256:3bfd3b0a06597c6e42bbc69010e38aff927ddf42f81a27fff09c9244feff2e5d",
+"bytes": 76690
+},
+"89:21": {
+"file": "89_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6014.mp3",
+"sha256": "sha256:f7a3b7a59679e1e2a99fb4e2d3196fa378b63bd81a4f7c008dad9d19638c143f",
+"bytes": 103022
+},
+"89:22": {
+"file": "89_22.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6015.mp3",
+"sha256": "sha256:a6922de627171b24f0c77eca881f33474cf9812c8982a57a768bc0ac6372fbd2",
+"bytes": 95289
+},
+"89:23": {
+"file": "89_23.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6016.mp3",
+"sha256": "sha256:a671bdde59a842e6a251bc70ddd9204bdd28d56a90a75e3ac6023fcf0ba33b41",
+"bytes": 198317
+},
+"89:24": {
+"file": "89_24.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6017.mp3",
+"sha256": "sha256:037b5811e2b56f8bd9820c82f39deebd0820277795194ea8a9e17e9eb0c8abd8",
+"bytes": 105111
+},
+"89:25": {
+"file": "89_25.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6018.mp3",
+"sha256": "sha256:6d3481ffd875ef25bad23ee7212b85a85cf9fc281456ee19519c8ab7f6e7a416",
+"bytes": 90065
+},
+"89:26": {
+"file": "89_26.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6019.mp3",
+"sha256": "sha256:2f962d457fcc649968d34dc2d1b5070fd493543efc304d712bb54644fac85676",
+"bytes": 72302
+},
+"89:27": {
+"file": "89_27.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6020.mp3",
+"sha256": "sha256:f73928094f4c87ea9d4cb16535d02ddbe870571b8c48a0c2dee3691e52486874",
+"bytes": 91946
+},
+"89:28": {
+"file": "89_28.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6021.mp3",
+"sha256": "sha256:4dd441ca533d4e1fb96c63abe67bfccbb0652123d67438cda8457ddaec8aeea4",
+"bytes": 98215
+},
+"89:29": {
+"file": "89_29.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6022.mp3",
+"sha256": "sha256:ab73df46f047f0f9ea18d19c63016c8eb4a70a0a2716207811051e1dbbbf3684",
+"bytes": 48060
+},
+"89:30": {
+"file": "89_30.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6023.mp3",
+"sha256": "sha256:2b3599575b996934eef08de4bfdfd945c72860d6a0ad31712c8f032f3bd56ad9",
+"bytes": 56211
+},
+"90:1": {
+"file": "90_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6024.mp3",
+"sha256": "sha256:cf84f6bc20b180662e1776887e4372917fc7ad34255a0dc15620571ec9714bff",
+"bytes": 66867
+},
+"90:2": {
+"file": "90_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6025.mp3",
+"sha256": "sha256:4a51b892d30317c398cc2396e9973a79914c090b072e47ff129afcc965d2f3ad",
+"bytes": 64150
+},
+"90:3": {
+"file": "90_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6026.mp3",
+"sha256": "sha256:177112f8b830354ca76a9566e007ab3b1c49aad97d84b2c963b72cc9925f7fba",
+"bytes": 50985
+},
+"90:4": {
+"file": "90_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6027.mp3",
+"sha256": "sha256:9aecb8fd86c186e351e9493fb65ac0c1770d31ebc8e818dbeb4eaffc34c084dc",
+"bytes": 74390
+},
+"90:5": {
+"file": "90_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6028.mp3",
+"sha256": "sha256:087ea608ed03367c2b0aceea444600c3b078ead2b67d75fb98a89fd0d849e420",
+"bytes": 73764
+},
+"90:6": {
+"file": "90_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6029.mp3",
+"sha256": "sha256:9ae53c1dd4de4cd3ad6d61a7eaf132ee144fa6f2365bfbb793b44e2727d88c9c",
+"bytes": 62897
+},
+"90:7": {
+"file": "90_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6030.mp3",
+"sha256": "sha256:0b7e34a38fcfe563a6ae3aa9ee0ce4bf017185fab61c938d51579e9731f3676a",
+"bytes": 77108
+},
+"90:8": {
+"file": "90_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6031.mp3",
+"sha256": "sha256:f34b6bba98ce4af76077cfc4845430bb1e5e0886255b77ffdbfea907d048c47e",
+"bytes": 61643
+},
+"90:9": {
+"file": "90_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6032.mp3",
+"sha256": "sha256:8f506e1bd9de2e9bb1e1406f0e8075a7c4819755e2401f09f1feb22875a654dc",
+"bytes": 62269
+},
+"90:10": {
+"file": "90_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6033.mp3",
+"sha256": "sha256:a1817fe44add79da7e022875971306fa7efa0b0c04aa478d28dc83e234db9936",
+"bytes": 68333
+},
+"90:11": {
+"file": "90_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6034.mp3",
+"sha256": "sha256:aa483e6eae8703e84f74af0da3fb3bfe61c27850bfa6db2e77f79fe864107313",
+"bytes": 44717
+},
+"90:12": {
+"file": "90_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6035.mp3",
+"sha256": "sha256:79b4a009ec141d6e7e6a8d4b61010864096db803bce8cd6afd74f5bab0371042",
+"bytes": 64152
+},
+"90:13": {
+"file": "90_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6036.mp3",
+"sha256": "sha256:ef39625a7d4fd21d9d801d889e21ed6d0ad4377a1eb5c63c7a41d87accc95682",
+"bytes": 49315
+},
+"90:14": {
+"file": "90_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6037.mp3",
+"sha256": "sha256:9f76eace530138f4ffb5885bd88295951d4fddc554be0c6b9a19cd945b1de4ed",
+"bytes": 82334
+},
+"90:15": {
+"file": "90_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6038.mp3",
+"sha256": "sha256:704f150ff4237d2a7710df5f0381157e0c35a9d5c44c1816350054bfb3d4d76c",
+"bytes": 55166
+},
+"90:16": {
+"file": "90_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6039.mp3",
+"sha256": "sha256:9181dd79c97f6cc1ba8ccb820be9fd19bcf4963dd9ff4653d2bbe4f8ca25a16e",
+"bytes": 60183
+},
+"90:17": {
+"file": "90_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6040.mp3",
+"sha256": "sha256:2718cb6d17e982a701cd199763a93e2bd57f2c1cdb9524377057de9f58e5cd3a",
+"bytes": 149208
+},
+"90:18": {
+"file": "90_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6041.mp3",
+"sha256": "sha256:fa8c90fb7b8d7dbf1b2db8f9addafd37641e403dd111b053a5250f3f693756a7",
+"bytes": 67287
+},
+"90:19": {
+"file": "90_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6042.mp3",
+"sha256": "sha256:859b4fd6d98658af74c0e350f7a9e2909e54329c424949db5a2108f527914d48",
+"bytes": 109711
+},
+"90:20": {
+"file": "90_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6043.mp3",
+"sha256": "sha256:a8a53388adb492916a03dada0b51050bace28a0a946e2cccc00a1843be4672c4",
+"bytes": 56838
+},
+"91:1": {
+"file": "91_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6044.mp3",
+"sha256": "sha256:67a95a44ac0e66a7a8af72d53323239d7ea21124c212bce1a405fe81736267e2",
+"bytes": 40955
+},
+"91:2": {
+"file": "91_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6045.mp3",
+"sha256": "sha256:2a3aa91f54c2c7f62d778ed79f1bd40e0647653ea702c6830a3d5b0ce2a271e9",
+"bytes": 40747
+},
+"91:3": {
+"file": "91_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6046.mp3",
+"sha256": "sha256:cace3bdd06b52f96eb9fd775c58f8e761a9e205962d550d58c40143d914bf6b0",
+"bytes": 51823
+},
+"91:4": {
+"file": "91_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6047.mp3",
+"sha256": "sha256:d848f8b8fdf6db57b513fe04259b6f586fd979753396bd7118c0b75e5890029f",
+"bytes": 55375
+},
+"91:5": {
+"file": "91_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6048.mp3",
+"sha256": "sha256:efb375189b1b3d2c7b2195d1cd9b13903a9d1d39c5ad7e585664e2a0da8528fc",
+"bytes": 60809
+},
+"91:6": {
+"file": "91_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6049.mp3",
+"sha256": "sha256:8c4d5986be899070ebb1bf9bc40851d77d05bee2e6b996313fb8c8e27d564a52",
+"bytes": 47434
+},
+"91:7": {
+"file": "91_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6050.mp3",
+"sha256": "sha256:c4b937def0489cb8f84b8806459dcad68267cbc342cb2a34d696d2bf9af94537",
+"bytes": 55584
+},
+"91:8": {
+"file": "91_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6051.mp3",
+"sha256": "sha256:36947d9d4c20a71ee7a8c3cd9aed628d109c320c2a6dc3f283f399aac209c990",
+"bytes": 76899
+},
+"91:9": {
+"file": "91_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6052.mp3",
+"sha256": "sha256:d5f3416f563dfdc03317c8d8035fa2a19379a10783ba8df4d091639e1642c221",
+"bytes": 62897
+},
+"91:10": {
+"file": "91_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6053.mp3",
+"sha256": "sha256:cca711e38283b33ba3c4d08b7e6dfe3e2b14c94378e1a3320bbb851f3c87e2a3",
+"bytes": 56630
+},
+"91:11": {
+"file": "91_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6054.mp3",
+"sha256": "sha256:529fd3b6bab5729311011e7a9938074ba2a19a73442ff1ad3aa96b11fb101d7b",
+"bytes": 62899
+},
+"91:12": {
+"file": "91_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6055.mp3",
+"sha256": "sha256:b0bf9914f091da2d6ce9d673bb204e23e7ffac7e8ae0deb8072e58dd80b9b21a",
+"bytes": 49525
+},
+"91:13": {
+"file": "91_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6056.mp3",
+"sha256": "sha256:cd8280c1c1275f10dc23a09b08f5e5b4c6b781935fc3ab2a942a693ec5114238",
+"bytes": 98008
+},
+"91:14": {
+"file": "91_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6057.mp3",
+"sha256": "sha256:422be1fb7860243d3ecf01616dcb8791b665c989346b383fcc7cdd09a0550013",
+"bytes": 136878
+},
+"91:15": {
+"file": "91_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6058.mp3",
+"sha256": "sha256:313de4c58a4dc0ea73e45a5ba1697133661784bbaf397169dbedb8eb38a50119",
+"bytes": 51615
+},
+"92:1": {
+"file": "92_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6059.mp3",
+"sha256": "sha256:18d7a582aee9cda8c27451e86cbf43fa3127328cc2880d15d9beeddb6acbcdf0",
+"bytes": 47013
+},
+"92:2": {
+"file": "92_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6060.mp3",
+"sha256": "sha256:65bd78d72c2c2d13e9f7e39766c08bca0879821edb0f29446b9e08dbdfd2a794",
+"bytes": 60179
+},
+"92:3": {
+"file": "92_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6061.mp3",
+"sha256": "sha256:8571908c8c613fa86c9039d3add06b9beaba091e047dae9952599b8977a51ab7",
+"bytes": 58298
+},
+"92:4": {
+"file": "92_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6062.mp3",
+"sha256": "sha256:9749ca8891ca1aac3172c334a33be56f49a1ecedb08a3e444988ec0bc60d9943",
+"bytes": 54536
+},
+"92:5": {
+"file": "92_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6063.mp3",
+"sha256": "sha256:2dd1302effe37ce90d096a252884a88102ff7177dbe01afb0a2b8532b2227553",
+"bytes": 62268
+},
+"92:6": {
+"file": "92_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6064.mp3",
+"sha256": "sha256:731efab183bcc99ad18fa737cfd2d3b1e5bc639646a9d36d191df48b5e9fd9f9",
+"bytes": 44714
+},
+"92:7": {
+"file": "92_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6065.mp3",
+"sha256": "sha256:e4dfe6ef4a6c44a8a06eb0e8eb908ca3f1ebbc2c6cb72ee72e272c09c171a5d8",
+"bytes": 56836
+},
+"92:8": {
+"file": "92_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6066.mp3",
+"sha256": "sha256:4316d342a330503b70a82b5cc659e8fab8e0fb4c6a8089ec09bffcedb6cde9ea",
+"bytes": 61434
+},
+"92:9": {
+"file": "92_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6067.mp3",
+"sha256": "sha256:66e636c3f25216af702dee2e3c9d45cd5592df08b71236b184fc7f436fccf7cb",
+"bytes": 41163
+},
+"92:10": {
+"file": "92_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6068.mp3",
+"sha256": "sha256:69eda001bd9de9978a5e9dbcee15148aa23b8bd802c3f31304604563468621f8",
+"bytes": 52239
+},
+"92:11": {
+"file": "92_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6069.mp3",
+"sha256": "sha256:713d24636821402c905a44bd36d2d752a8dac48f713bcd17c5393019bfff0ce8",
+"bytes": 95080
+},
+"92:12": {
+"file": "92_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6070.mp3",
+"sha256": "sha256:837f90ae4c3d2cbccf2f1a479fe08bca508c86ab1991378d43c6e26e0dc48e02",
+"bytes": 53285
+},
+"92:13": {
+"file": "92_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6071.mp3",
+"sha256": "sha256:31a3105814381d5e7abebdcd9eeb13152c4ea2bb484cc0f5b32360be1d012a81",
+"bytes": 71884
+},
+"92:14": {
+"file": "92_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6072.mp3",
+"sha256": "sha256:c802673fbc9964a4e2ecb83a370de25ac66d255ceb7e4a9c801fec605aaabe8c",
+"bytes": 69586
+},
+"92:15": {
+"file": "92_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6073.mp3",
+"sha256": "sha256:18ed5137dd4829e3d74f7753573a5137f81dde5b6dd9adb950089fff38724889",
+"bytes": 65615
+},
+"92:16": {
+"file": "92_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6074.mp3",
+"sha256": "sha256:039461150e8d52ea12d82a36807f4a1bf25b5aa389a9ee95b88e75aa67624763",
+"bytes": 51822
+},
+"92:17": {
+"file": "92_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6075.mp3",
+"sha256": "sha256:aee999a180f1fb0b8f9539a56d2fc9e76b08e1c05925a6d4444b112309f7e15b",
+"bytes": 45761
+},
+"92:18": {
+"file": "92_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6076.mp3",
+"sha256": "sha256:a202f6f7b9fa098759ee458b76ed3d2ac33ba581a64fdc53b70ac54d53254255",
+"bytes": 68749
+},
+"92:19": {
+"file": "92_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6077.mp3",
+"sha256": "sha256:6c4990afd4995e809cac28f0a2ce203d120bb906bc57efdde636845287513d60",
+"bytes": 92155
+},
+"92:20": {
+"file": "92_20.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6078.mp3",
+"sha256": "sha256:04fa4fe99794c1760c776c874c5108de1a70b553b9832ebe26fa8b108d6fb06c",
+"bytes": 76063
+},
+"92:21": {
+"file": "92_21.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6079.mp3",
+"sha256": "sha256:c20866484b45581b094f08196e7bd05a3d9e4880183a3f4fa6a2e67f527ed83f",
+"bytes": 34895
+},
+"93:1": {
+"file": "93_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6080.mp3",
+"sha256": "sha256:8ada1d7b8b2e733211d138492eb7f2ad1061096d0e49d0f9579a5bf6f877fb3f",
+"bytes": 25699
+},
+"93:2": {
+"file": "93_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6081.mp3",
+"sha256": "sha256:c6f3cbbb5bec53b6de199a67acd23e80501a58212f1d445d64667be5f4407436",
+"bytes": 43253
+},
+"93:3": {
+"file": "93_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6082.mp3",
+"sha256": "sha256:35f0aaa23e3f5d4f9387aa6ff617333b76dd0d416a7f93e21f1dd91148e9e090",
+"bytes": 57464
+},
+"93:4": {
+"file": "93_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6083.mp3",
+"sha256": "sha256:3970950cf5669b8cf5611a4e3710208bdb6c60473f2efe2f080c424ae2a74167",
+"bytes": 70003
+},
+"93:5": {
+"file": "93_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6084.mp3",
+"sha256": "sha256:e759bb78c7dd6526272e52c8c97d42b3dc9f653b14f3816f99931ce1adcce9c1",
+"bytes": 71675
+},
+"93:6": {
+"file": "93_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6085.mp3",
+"sha256": "sha256:b7303bd3d59ffc8e41eb69566b20ee1608e8b9317fd8d3cf87a71232644139c7",
+"bytes": 62270
+},
+"93:7": {
+"file": "93_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6086.mp3",
+"sha256": "sha256:9fb76a3f3809107ab8db65b584bbfb261d67847c188635054b96299031f9e819",
+"bytes": 72094
+},
+"93:8": {
+"file": "93_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6087.mp3",
+"sha256": "sha256:23dcad3bb1995b076416c305c39cf88f12528e36ce9a5d3e58ca84be4e8f41af",
+"bytes": 70003
+},
+"93:9": {
+"file": "93_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6088.mp3",
+"sha256": "sha256:ea3a87a13b5390e240537a0bc5e7381d4209813cf418b6c90d13461b9777af29",
+"bytes": 61435
+},
+"93:10": {
+"file": "93_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6089.mp3",
+"sha256": "sha256:477e3dabcf0a1ad30bc115117b2e529e7aaf3f30cdd740ffdba60dd0a22ab10a",
+"bytes": 73558
+},
+"93:11": {
+"file": "93_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6090.mp3",
+"sha256": "sha256:eb9cbdf3495fb5fe3b135fe9b806a44d5947467b2633d57e32a6a6c192451f59",
+"bytes": 66035
+},
+"94:1": {
+"file": "94_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6091.mp3",
+"sha256": "sha256:184c79711b616577a5bbd5f0a43a27476dc570f2e42e4c70c17c482c27d9f7c9",
+"bytes": 51196
+},
+"94:2": {
+"file": "94_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6092.mp3",
+"sha256": "sha256:728f92eeaca34ca43e652958882d4e88a17cfb90b72e4141a7f408650659064f",
+"bytes": 53493
+},
+"94:3": {
+"file": "94_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6093.mp3",
+"sha256": "sha256:56f39ede795dbe3b85e73867229416cacc014a8925933326241367b26e79327b",
+"bytes": 59554
+},
+"94:4": {
+"file": "94_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6094.mp3",
+"sha256": "sha256:5da1e451c39806ff6013376df7f5b55ce928b7e01e5653c739f1f9523db8ee84",
+"bytes": 51195
+},
+"94:5": {
+"file": "94_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6095.mp3",
+"sha256": "sha256:591f4b367368bffec47ee941f0bd848d1f8320a356abc491d1f6df309f744178",
+"bytes": 59345
+},
+"94:6": {
+"file": "94_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6096.mp3",
+"sha256": "sha256:990ff8a7c1f653a7626e32f9b26fad180b7782059dccac70cdad9b1960b410b8",
+"bytes": 52030
+},
+"94:7": {
+"file": "94_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6097.mp3",
+"sha256": "sha256:55575a31f88f654b08f55ecd0f7546861e3b8efd7eb16f03f7314d07a468f4da",
+"bytes": 48479
+},
+"94:8": {
+"file": "94_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6098.mp3",
+"sha256": "sha256:7e92c52ecf0eec24a2b4b3c947f4726e37ce803b88bf8d2a45f42ef9bf0188e3",
+"bytes": 44298
+},
+"95:1": {
+"file": "95_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6099.mp3",
+"sha256": "sha256:ef64bc35813af6e1fd706a40a4d7d4f8240aa278986720e9c950251e48b9cde0",
+"bytes": 49102
+},
+"95:2": {
+"file": "95_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6100.mp3",
+"sha256": "sha256:56a899f0cacb15cfa44b7b53435b5c9d776b99131e59060299c70b1da9ac946c",
+"bytes": 40116
+},
+"95:3": {
+"file": "95_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6101.mp3",
+"sha256": "sha256:0ba44f9872da48abe89b1bedf01b7105693120de7ab1c28c6d9388ae1fa3b973",
+"bytes": 50565
+},
+"95:4": {
+"file": "95_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6102.mp3",
+"sha256": "sha256:87abeaf927c38950db04febf94c5122e3a3168308e2d174dcb1964b3e4863b61",
+"bytes": 103854
+},
+"95:5": {
+"file": "95_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6103.mp3",
+"sha256": "sha256:25fffc4579f7601b61d9a175e3829c40609640a3ba29664394d94f3ea8dc966a",
+"bytes": 76687
+},
+"95:6": {
+"file": "95_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6104.mp3",
+"sha256": "sha256:c6b3493af54bf56dff26a842448fda86867fdfd86c173737593132e54bf2d025",
+"bytes": 136037
+},
+"95:7": {
+"file": "95_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6105.mp3",
+"sha256": "sha256:b17c06209666d5191386bfb0b8b33c8916d248434eb54c0acada6acaaba20f88",
+"bytes": 67702
+},
+"95:8": {
+"file": "95_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6106.mp3",
+"sha256": "sha256:a337b7f6a52e89ed7164d72c60866e26a300511bb1d9aecda305e61a96d7da91",
+"bytes": 70000
+},
+"96:1": {
+"file": "96_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6107.mp3",
+"sha256": "sha256:6389352d8cf26f8c0e44e3f77727203e4ae317c5380912a0726ac10a35dac503",
+"bytes": 63940
+},
+"96:2": {
+"file": "96_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6108.mp3",
+"sha256": "sha256:786f6eb87f036df6b868cc22e6a625f87f3df0e9c7381fc1c2832921fa27fdeb",
+"bytes": 57462
+},
+"96:3": {
+"file": "96_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6109.mp3",
+"sha256": "sha256:bdf78c959418f76ee177e5fea3943904ccac966e16c8d1fcfb917a79b1cbdbcc",
+"bytes": 53074
+},
+"96:4": {
+"file": "96_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6110.mp3",
+"sha256": "sha256:c1582c489216cc1c5a9877623d3f0917c91d0d55ded39ec5d808a8f28c3d0470",
+"bytes": 48894
+},
+"96:5": {
+"file": "96_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6111.mp3",
+"sha256": "sha256:e255de0cd05dbcef399246cc2694be14aa611b9acddb04fb2585aa55e98c4809",
+"bytes": 79614
+},
+"96:6": {
+"file": "96_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6112.mp3",
+"sha256": "sha256:8ffc4273b818e9f5067d38aaf9dc51cd7d4ba0f69c4663b7f5982aee829c0bd3",
+"bytes": 86093
+},
+"96:7": {
+"file": "96_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6113.mp3",
+"sha256": "sha256:3ef1cefd9d71d307bb92b2c543c643e66afa9de2c5307a126eaf4f41194b64ee",
+"bytes": 41788
+},
+"96:8": {
+"file": "96_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6114.mp3",
+"sha256": "sha256:bb2cf658ab17e0c2e505f4913b0cf1e055fac7611f072c474ef9a0633ff4bbb9",
+"bytes": 70419
+},
+"96:9": {
+"file": "96_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6115.mp3",
+"sha256": "sha256:83611e4fe47940f29e25cb1c821762a925d9524b4d3ddfac37475f3aee733fa5",
+"bytes": 50357
+},
+"96:10": {
+"file": "96_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6116.mp3",
+"sha256": "sha256:2df032530e69ebec1d102ef962842e44494130716bc034d9d051ac2c64cc04a3",
+"bytes": 51822
+},
+"96:11": {
+"file": "96_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6117.mp3",
+"sha256": "sha256:56fccd31883221cb38c089f38cd565612ebe047af590f83cb824cd35f0bdcac9",
+"bytes": 61644
+},
+"96:12": {
+"file": "96_12.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6118.mp3",
+"sha256": "sha256:b0ca2d777cb543f97df8208dec6cdac5704a4b57fa6b2f7552f8f72643d29ca2",
+"bytes": 43463
+},
+"96:13": {
+"file": "96_13.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6119.mp3",
+"sha256": "sha256:294799ecbf76c36832185b2a93d48bc666f8378e306f9992b053d7fa3e4a5e86",
+"bytes": 62270
+},
+"96:14": {
+"file": "96_14.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6120.mp3",
+"sha256": "sha256:3d1334916c832bf978e529831a820dd92abab16385734aa2c668cca12c5d0c58",
+"bytes": 74600
+},
+"96:15": {
+"file": "96_15.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6121.mp3",
+"sha256": "sha256:d26d66452c9c762dbf4bd4dd18e7a1460c6565e6c65e9f5530c989f52374972b",
+"bytes": 105320
+},
+"96:16": {
+"file": "96_16.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6122.mp3",
+"sha256": "sha256:d5876d42d49b23829b5fff6b7dfcdd032cd2c101a16c767ea38f8b029e407079",
+"bytes": 71048
+},
+"96:17": {
+"file": "96_17.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6123.mp3",
+"sha256": "sha256:9139172b2904a9cab7454dda5d8423a67dac89925ee2002a632021cca6dcec9a",
+"bytes": 41582
+},
+"96:18": {
+"file": "96_18.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6124.mp3",
+"sha256": "sha256:3166153a9cb81cca91f237933d4bd2df9edeab039baccb6ea9bdd9d9638a2da8",
+"bytes": 43881
+},
+"96:19": {
+"file": "96_19.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6125.mp3",
+"sha256": "sha256:6927281122cc2070e83c630118e1fee13725713a6769c5c7e2de3dc568720056",
+"bytes": 67705
+},
+"97:1": {
+"file": "97_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6126.mp3",
+"sha256": "sha256:ae989b66ab503a1b56bec1304368d24ca6e6e382bd33b5dd592547a4e3ae463f",
+"bytes": 96333
+},
+"97:2": {
+"file": "97_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6127.mp3",
+"sha256": "sha256:819badc95f7b1bf512648d66b511d3b4b1f44352bb23c6f3352b7f621e2cd93f",
+"bytes": 75225
+},
+"97:3": {
+"file": "97_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6128.mp3",
+"sha256": "sha256:fc694871511d8590a76ac2bfa8f8ca879c69884cd06427f344dca828c7432830",
+"bytes": 79823
+},
+"97:4": {
+"file": "97_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6129.mp3",
+"sha256": "sha256:7353526f615546615b3e14732c96df331fd7965d93dd7b36e2201eed6dc87094",
+"bytes": 138964
+},
+"97:5": {
+"file": "97_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6130.mp3",
+"sha256": "sha256:f66e7b25431c1c13df89f6f7855f9b21ec48bc3b058031feea8923c415830a03",
+"bytes": 61434
+},
+"98:1": {
+"file": "98_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6131.mp3",
+"sha256": "sha256:53e171848a25d1689d56c33337d80f5a46ea52f7d8b1eae247befd3b57e8bf9b",
+"bytes": 183898
+},
+"98:2": {
+"file": "98_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6132.mp3",
+"sha256": "sha256:868dc2dc9694064f99c03acd634310f7ae35e2f1b1e02828ecc7312b99a74ca0",
+"bytes": 97380
+},
+"98:3": {
+"file": "98_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6133.mp3",
+"sha256": "sha256:b3a33993c9b1d414d632981167bc348df8cb95bbe442c6dcb922450128731b44",
+"bytes": 53912
+},
+"98:4": {
+"file": "98_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6134.mp3",
+"sha256": "sha256:8ae12f434df4bac0319dc5bea30a55e7309a27a57eeae43a349fbf31dfbca3f3",
+"bytes": 156730
+},
+"98:5": {
+"file": "98_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6135.mp3",
+"sha256": "sha256:e6e8be25dae3bad6051dbb4bf0230b4b2fe95441f20b96d3213b9d0662309216",
+"bytes": 250145
+},
+"98:6": {
+"file": "98_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6136.mp3",
+"sha256": "sha256:61cc59b55c70190548879bb64dfd2d1d3aed4e66c5728b5d3f1303e5273d3d69",
+"bytes": 215664
+},
+"98:7": {
+"file": "98_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6137.mp3",
+"sha256": "sha256:6f8775f4578cbf559a3601d79c8df7fd654bf0537501a5a70689239c02063af2",
+"bytes": 143356
+},
+"98:8": {
+"file": "98_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6138.mp3",
+"sha256": "sha256:264809be802fba1da3a7755244a7ef0cccb0b9c56ee171eae4b4f97881e42878",
+"bytes": 306569
+},
+"99:1": {
+"file": "99_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6139.mp3",
+"sha256": "sha256:f1dcec41f39fa346e2133a480e50ace489dae7523c3dec19bc6d03a27e220e3f",
+"bytes": 68959
+},
+"99:2": {
+"file": "99_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6140.mp3",
+"sha256": "sha256:abbcefeab1d4031707ec8f497809d35f3232c8119b4b4e674f876d2427dd226f",
+"bytes": 61018
+},
+"99:3": {
+"file": "99_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6141.mp3",
+"sha256": "sha256:a57165e90d69f18f6772883d26c3b211ad22e087777737392a46d5b6c39c54bb",
+"bytes": 64362
+},
+"99:4": {
+"file": "99_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6142.mp3",
+"sha256": "sha256:d86df1be9721079915d2c8c150b9b3251e09053e36922001c633fa145598354b",
+"bytes": 70840
+},
+"99:5": {
+"file": "99_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6143.mp3",
+"sha256": "sha256:e651bed20e73602b2edd90ba6bcae091a29c51c5f49e10bc2b96cc515552c484",
+"bytes": 61437
+},
+"99:6": {
+"file": "99_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6144.mp3",
+"sha256": "sha256:1bd0900783aae28134149e5bba67bd08646623cf39bb598e02c071c75a390419",
+"bytes": 113054
+},
+"99:7": {
+"file": "99_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6145.mp3",
+"sha256": "sha256:7f7c02858fb1ac3da10656d6faec38795339c7e579b33612379dc8b09e37a80f",
+"bytes": 94872
+},
+"99:8": {
+"file": "99_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6146.mp3",
+"sha256": "sha256:807399688b66b42599db0badf2ed64bf97c6d832273c5ec3f594b55957f545ca",
+"bytes": 89439
+},
+"100:1": {
+"file": "100_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6147.mp3",
+"sha256": "sha256:6dd4686ec0465b1b3ca6f5b1136a2365ac15516b6907a6791dc127a9fb2e75a2",
+"bytes": 47018
+},
+"100:2": {
+"file": "100_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6148.mp3",
+"sha256": "sha256:dc940044f632e0672bc2b9a91e83b186df7cb1fbb781d6ec1dff955de7249743",
+"bytes": 46809
+},
+"100:3": {
+"file": "100_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6149.mp3",
+"sha256": "sha256:a7c903b604e4a53947a93b52bb87f1fadce5eee260132f0927160194775a6e1e",
+"bytes": 43884
+},
+"100:4": {
+"file": "100_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6150.mp3",
+"sha256": "sha256:64d79fabae7eb51171daae31b1bc779db4835cadc6ca9b8300cc977d91f07e61",
+"bytes": 45137
+},
+"100:5": {
+"file": "100_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6151.mp3",
+"sha256": "sha256:33bc728d495789647488e401145b80b7fc12be89fbfc2cde02babe1ee11c016b",
+"bytes": 47227
+},
+"100:6": {
+"file": "100_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6152.mp3",
+"sha256": "sha256:30d22c0444ec99fda811fd71583c567b4ccfa774e43c8c8ee4a34e557e0fe867",
+"bytes": 86097
+},
+"100:7": {
+"file": "100_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6153.mp3",
+"sha256": "sha256:51805b049667b80239e7ba06c54c149cdd717134960d6d4f3deefee5e4c0dc5f",
+"bytes": 67289
+},
+"100:8": {
+"file": "100_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6154.mp3",
+"sha256": "sha256:435240efa70209126611486cb05a7d66aecdc9915d41ad50b97e8379fca2ee34",
+"bytes": 76484
+},
+"100:9": {
+"file": "100_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6155.mp3",
+"sha256": "sha256:8e4d8e3c74b1e29652064ba5070ea60f2bccee220c007ee013791d2fed6837a0",
+"bytes": 78574
+},
+"100:10": {
+"file": "100_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6156.mp3",
+"sha256": "sha256:8c81557499e51800a1ca88bf3d2e60ab1b68388944317c9b6ad60a3ea4039de7",
+"bytes": 48901
+},
+"100:11": {
+"file": "100_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6157.mp3",
+"sha256": "sha256:ef13b271f400f03b08d294a80fab1f9305375b6d8b369b944106b48e82e56054",
+"bytes": 85682
+},
+"101:1": {
+"file": "101_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6158.mp3",
+"sha256": "sha256:d2c19029c4b8d6e8ef49501ea85bd4446422066c1b208fc0b9d0d397bfdea76a",
+"bytes": 31136
+},
+"101:2": {
+"file": "101_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6159.mp3",
+"sha256": "sha256:179df6ebd3cc57d2e60bf9d90ce979d1355083aa51aa370c30c16097a35c39c7",
+"bytes": 31344
+},
+"101:3": {
+"file": "101_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6160.mp3",
+"sha256": "sha256:b6389aea9a56d646faf88f148b2aa56bdf8673c22c2333ea0eb2ce87f10e5915",
+"bytes": 63735
+},
+"101:4": {
+"file": "101_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6161.mp3",
+"sha256": "sha256:95ff794912a9638a96ea6f5df66432e1bccf6b6be79417add1d1a49d70a7d8c4",
+"bytes": 87351
+},
+"101:5": {
+"file": "101_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6162.mp3",
+"sha256": "sha256:ef4d0f9105f75182ee2997e12234041e24b1402206107a2ecf4dc40b98054540",
+"bytes": 89440
+},
+"101:6": {
+"file": "101_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6163.mp3",
+"sha256": "sha256:906b80cecbd3392bfce0d8cca1246c48056e76b7148f18fb0eb7596e0555a5df",
+"bytes": 69588
+},
+"101:7": {
+"file": "101_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6164.mp3",
+"sha256": "sha256:a33120eca99dd5891f09d5e0a2dcaf5e7f5df65d322516a1f632008ffa7067e9",
+"bytes": 57675
+},
+"101:8": {
+"file": "101_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6165.mp3",
+"sha256": "sha256:c151bf7548eeda09963d10599bf4d0ac44a87067e25de2574c0f30dd7bb6d0a8",
+"bytes": 66870
+},
+"101:9": {
+"file": "101_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6166.mp3",
+"sha256": "sha256:b7875de1dfe488d7a0c62b0bd48dbaea59e2b5ee635cc1ee52433823fc7b3b99",
+"bytes": 44509
+},
+"101:10": {
+"file": "101_10.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6167.mp3",
+"sha256": "sha256:4a30db66416c64c3deac9a74c125ffaa00f48a1cc5247c3330e2ba01f3d2fcd7",
+"bytes": 57051
+},
+"101:11": {
+"file": "101_11.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6168.mp3",
+"sha256": "sha256:90e52671f77cba6393c5e6be08b1a33d84d977dc755ce4fc1f4690a41975e831",
+"bytes": 42840
+},
+"102:1": {
+"file": "102_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6169.mp3",
+"sha256": "sha256:a41b2c026c6ceae23d792497710e4415d33b638932274db43dc734bc4d3b308d",
+"bytes": 43676
+},
+"102:2": {
+"file": "102_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6170.mp3",
+"sha256": "sha256:3feb4813b1f973c9cb63c053808ee99d3a30dc331d07854e1a0a0fe7ceb76b28",
+"bytes": 49109
+},
+"102:3": {
+"file": "102_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6171.mp3",
+"sha256": "sha256:a289b9a9d296914ce6d8d24cc5cc61e4af491849b0fc4f56bb4d80b0a5b428b1",
+"bytes": 54751
+},
+"102:4": {
+"file": "102_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6172.mp3",
+"sha256": "sha256:7f38e0a23e11d5d862054d894b3a7670ddb1274525548d23bcf022830185f842",
+"bytes": 76067
+},
+"102:5": {
+"file": "102_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6173.mp3",
+"sha256": "sha256:fdbddcfde9c7b01562efc135651550e5f77eaef6ece7e76fa744d954e9849929",
+"bytes": 73977
+},
+"102:6": {
+"file": "102_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6174.mp3",
+"sha256": "sha256:e12bc3b188e30f207ed49fffdb71079e6547263b0a84aa6591229e287c1162a9",
+"bytes": 49109
+},
+"102:7": {
+"file": "102_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6175.mp3",
+"sha256": "sha256:8d14b255fdd5e1a1185b8245e6ff8e12e080c275bec8584ff3e5fecdfce830bc",
+"bytes": 74186
+},
+"102:8": {
+"file": "102_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6176.mp3",
+"sha256": "sha256:0ca41fc71c711ec466e3ae88f56f6d36a583a8cbd1b0ccaa2a6bbfcba322be47",
+"bytes": 95502
+},
+"103:1": {
+"file": "103_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6177.mp3",
+"sha256": "sha256:294795d6f93bc9910703ca072af6fb70d671913a4f8b8c36be36844be8d93eba",
+"bytes": 23398
+},
+"103:2": {
+"file": "103_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6178.mp3",
+"sha256": "sha256:483045ebd3d8d783d0091a5c816ef27431af6a2cfece32d5429ccecfe6ccb706",
+"bytes": 57880
+},
+"103:3": {
+"file": "103_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6179.mp3",
+"sha256": "sha256:925a440b3fe913bd57980d34803f5a5aca4b11dbeab0af6bed688c47f490559d",
+"bytes": 158190
+},
+"104:1": {
+"file": "104_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6180.mp3",
+"sha256": "sha256:590c1265bc47b8cdfe5ad37a4e6e95c9db7987776903a132828a3910030fb9c0",
+"bytes": 56003
+},
+"104:2": {
+"file": "104_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6181.mp3",
+"sha256": "sha256:658c4debbcc6f0bf2da467e437f89e72952fcfbed04ce5cb2ae90064c00fb310",
+"bytes": 64570
+},
+"104:3": {
+"file": "104_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6182.mp3",
+"sha256": "sha256:bbd95482c562370bcf7d64d27582ed5452380cfd2d1e9b595075c1fd9d44f105",
+"bytes": 66869
+},
+"104:4": {
+"file": "104_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6183.mp3",
+"sha256": "sha256:aef97d96b009d6d50650c02af35d680b7392bf4adb11817865ee3e5fea342c94",
+"bytes": 73557
+},
+"104:5": {
+"file": "104_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6184.mp3",
+"sha256": "sha256:7a4ebf92867ad85db0ca47cb154aae776b247be154d2610cfe706a0d1b8cae34",
+"bytes": 62689
+},
+"104:6": {
+"file": "104_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6185.mp3",
+"sha256": "sha256:a1519916ece4b7f1fd706053146df304cc0f8da97aa528ae787ddd0870eefd66",
+"bytes": 55793
+},
+"104:7": {
+"file": "104_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6186.mp3",
+"sha256": "sha256:1da40343a12a5de08bf1f48f2c91798a3ea59a9632718782068255ca0ccef8a5",
+"bytes": 62271
+},
+"104:8": {
+"file": "104_8.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6187.mp3",
+"sha256": "sha256:ac7294ec41412ac4b5071d3dd7a03abafe613e069e098e467e2a8ec58ed569af",
+"bytes": 58510
+},
+"104:9": {
+"file": "104_9.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6188.mp3",
+"sha256": "sha256:568ab9027c05665a8819c3d568f683ebe2b14dc23fa89eff68f8004be33a9f43",
+"bytes": 50360
+},
+"105:1": {
+"file": "105_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6189.mp3",
+"sha256": "sha256:3e969435dde01888f9a9a6c4db5f2586557eb7b5e277c0f2c1f6759bb468195b",
+"bytes": 83793
+},
+"105:2": {
+"file": "105_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6190.mp3",
+"sha256": "sha256:5ccb8bebc275bd89255052c7953526b266e82637de4c282f81b8f881714e79d9",
+"bytes": 68747
+},
+"105:3": {
+"file": "105_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6191.mp3",
+"sha256": "sha256:bb80df5fe153e49081e8c36e1a117d5171f5d3a72d1452d799acdf129de95557",
+"bytes": 75852
+},
+"105:4": {
+"file": "105_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6192.mp3",
+"sha256": "sha256:a4f3c3e99c0bf8ea24f27d5d5e9f05a2837a3a49ffc1defdc109d54bef5852a0",
+"bytes": 79823
+},
+"105:5": {
+"file": "105_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6193.mp3",
+"sha256": "sha256:0ba67719d68b70063dbdb730a38372d0ecb96db2199ed8519372103e14fcdd9a",
+"bytes": 69165
+},
+"106:1": {
+"file": "106_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6194.mp3",
+"sha256": "sha256:cd161439ef03fdf9e1c96b810659469beb8c336e3f60bade13b84893a2663e9e",
+"bytes": 47851
+},
+"106:2": {
+"file": "106_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6195.mp3",
+"sha256": "sha256:8cf3f5834b560b17737d9052f8d44b8f1e69d06d08b9820ee286255e7478b9de",
+"bytes": 88601
+},
+"106:3": {
+"file": "106_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6196.mp3",
+"sha256": "sha256:dbd702de0a8a5659aa9d21c975cab079095a9e82525e60f0d2d4ebbf28dd502b",
+"bytes": 71256
+},
+"106:4": {
+"file": "106_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6197.mp3",
+"sha256": "sha256:cc1447f5066d46a03e19dd7ece11fb447fe9c61bffabd51ad7549d11dfe41a69",
+"bytes": 118276
+},
+"107:1": {
+"file": "107_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6198.mp3",
+"sha256": "sha256:4e5b119553faf08d0d346f0106d650600b962ed9de4511a31d148c13b41111b7",
+"bytes": 67287
+},
+"107:2": {
+"file": "107_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6199.mp3",
+"sha256": "sha256:7d7532e578dbf362ffb405f231a8bdf63c491ab204fccf9b24cd55bde6ea06e6",
+"bytes": 65824
+},
+"107:3": {
+"file": "107_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6200.mp3",
+"sha256": "sha256:ea7ea375981a5b3506c15236e22a2ce051be7a2c9fb800548e10bf55502dec5d",
+"bytes": 72303
+},
+"107:4": {
+"file": "107_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6201.mp3",
+"sha256": "sha256:954ff889c11f4c92a054d17efa23d7ce10b74246a6728652e8f312ed9fbb0178",
+"bytes": 50987
+},
+"107:5": {
+"file": "107_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6202.mp3",
+"sha256": "sha256:fa5437e1a84f6dbe699cabaed61c063ec4257278a0967e4cd6e69ccd0a02f961",
+"bytes": 83587
+},
+"107:6": {
+"file": "107_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6203.mp3",
+"sha256": "sha256:a68f00d47d8cbc5028283494758daa0ef603ed1594f7bad4988ae8baf5d458a8",
+"bytes": 64152
+},
+"107:7": {
+"file": "107_7.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6204.mp3",
+"sha256": "sha256:fb87c95143d8a090e4f380589cb52aef78f3081bac7c82cd93cc5fe9dd1aff7d",
+"bytes": 55375
+},
+"108:1": {
+"file": "108_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6205.mp3",
+"sha256": "sha256:a1bc0b187d9c8570f5600500d39c17e5d9f2d9176bb86ea105bcee1713d0ef43",
+"bytes": 72721
+},
+"108:2": {
+"file": "108_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6206.mp3",
+"sha256": "sha256:4a0682cb508a1fd98b7aa64dc45c9119fd9792e132584ea605200148981e963a",
+"bytes": 47435
+},
+"108:3": {
+"file": "108_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6207.mp3",
+"sha256": "sha256:ae659c0e2e0b1ee6c9eb40f8bf832c23abeb061cc25acce7817c3982af08908a",
+"bytes": 63944
+},
+"109:1": {
+"file": "109_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6208.mp3",
+"sha256": "sha256:20646a446ed3843835f1cba4aff89acb23c6031c5399570ac766b76f570a8c71",
+"bytes": 78784
+},
+"109:2": {
+"file": "109_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6209.mp3",
+"sha256": "sha256:49792513d6a3a3c602e2332a1cecbdb4763a4d2ab0d0667df783bdc852040fc8",
+"bytes": 62066
+},
+"109:3": {
+"file": "109_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6210.mp3",
+"sha256": "sha256:ae2546284cc03a0128fb1c24f1afa4f91d1c718dfb9e9b40c74451b680af2510",
+"bytes": 86307
+},
+"109:4": {
+"file": "109_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6211.mp3",
+"sha256": "sha256:5c5544c968a865a0e69c5ae105bc0b6ec72e6546a1c632bba7939dfa76ccade4",
+"bytes": 71679
+},
+"109:5": {
+"file": "109_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6212.mp3",
+"sha256": "sha256:691f80d7013016fe47bdf0de010356e45e7bd08ec0f345fd9497c38e2de92ab0",
+"bytes": 83172
+},
+"109:6": {
+"file": "109_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6213.mp3",
+"sha256": "sha256:7b850356be458033c3b94f3682608f7799e69af4869a87576d7c2408f3906910",
+"bytes": 57678
+},
+"110:1": {
+"file": "110_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6214.mp3",
+"sha256": "sha256:e3ba8e97aef79b3175b4976bb68d11c380bc1d1b7aac9847c814133bedd3a568",
+"bytes": 75226
+},
+"110:2": {
+"file": "110_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6215.mp3",
+"sha256": "sha256:89a2d1971c5ab50e372ac524fd19e986f1263d94362ba92588a04edfc55ba440",
+"bytes": 104274
+},
+"110:3": {
+"file": "110_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6216.mp3",
+"sha256": "sha256:eca5991a88fa495d3ef610cd725a10908f93892b65dafa2601c83d440bb32a46",
+"bytes": 129770
+},
+"111:1": {
+"file": "111_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6217.mp3",
+"sha256": "sha256:25c84cd9017bab6455750df4554e81eaf94265c2bab5421386c1ee5a3f8fa438",
+"bytes": 78154
+},
+"111:2": {
+"file": "111_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6218.mp3",
+"sha256": "sha256:b140a7ee45ff648bd038f76b5a0454d8081a444eab241e1e0b3309f99c20f05f",
+"bytes": 82750
+},
+"111:3": {
+"file": "111_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6219.mp3",
+"sha256": "sha256:97b787d3cad6b92cebcd4ac51072cc651064a9defff701ffe165e3198030b156",
+"bytes": 63734
+},
+"111:4": {
+"file": "111_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6220.mp3",
+"sha256": "sha256:93cc96b6c49874da521c630f30ff06d57362f96315d44fb7cdcb785c26a76d4f",
+"bytes": 61017
+},
+"111:5": {
+"file": "111_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6221.mp3",
+"sha256": "sha256:55c8aa52f5f511cffcad496444b7063b45376012c3b4853f5bfdf8cb97d7565f",
+"bytes": 65614
+},
+"112:1": {
+"file": "112_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6222.mp3",
+"sha256": "sha256:353f119a01ee0d1af7cf71bb9fff5f499f82a282f8fab7d0eb5b1b22e2b5030d",
+"bytes": 47853
+},
+"112:2": {
+"file": "112_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6223.mp3",
+"sha256": "sha256:be0c54f686084cb39838eba9c330f4bc50fc11f3a05f3bd9d2c37162195ac0dd",
+"bytes": 41584
+},
+"112:3": {
+"file": "112_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6224.mp3",
+"sha256": "sha256:536bd442ecd62ff7468f5eda9a4bd1ce4ae7715a89d6f75f67b15682d6024def",
+"bytes": 48689
+},
+"112:4": {
+"file": "112_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6225.mp3",
+"sha256": "sha256:16b935a6dca8b28bf84ccc40b58544265b56ce6b0994d71f0a0c674fd8731b56",
+"bytes": 66243
+},
+"113:1": {
+"file": "113_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6226.mp3",
+"sha256": "sha256:799e442cfd39d8d99e8cc0b23488817fd7fb8022638d08f538f19d82d3bf6c9a",
+"bytes": 51613
+},
+"113:2": {
+"file": "113_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6227.mp3",
+"sha256": "sha256:93b8121af7f9542dac80260a386bb51c7060927b496c2554c1110a9ec05f9b67",
+"bytes": 44925
+},
+"113:3": {
+"file": "113_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6228.mp3",
+"sha256": "sha256:695137bbcd6da20d7a3d7d0839f28422f9e841b7e6e2681728c8d5ab213621a8",
+"bytes": 62479
+},
+"113:4": {
+"file": "113_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6229.mp3",
+"sha256": "sha256:dc21c514d78c94c8e0815739bc8b99762a2d23d55b74f13b7153038fa3246b68",
+"bytes": 75018
+},
+"113:5": {
+"file": "113_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6230.mp3",
+"sha256": "sha256:b68da9292ca9b80c3a0478477aff7c85fd883efaab8679cfbe6e93a5213f1eb7",
+"bytes": 63316
+},
+"114:1": {
+"file": "114_1.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6231.mp3",
+"sha256": "sha256:12cc660e8e063b06710a312ff66910ee16dfb3de3299e46c853871b50fa34848",
+"bytes": 64568
+},
+"114:2": {
+"file": "114_2.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6232.mp3",
+"sha256": "sha256:789c0b85bd738e58b4d601c30628852acb8d573bd063fe33a05001c70e508858",
+"bytes": 38865
+},
+"114:3": {
+"file": "114_3.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6233.mp3",
+"sha256": "sha256:684d346c1524fee552bc74ae2a4de2baadc3b4201a880a07e2c37b3f6a2a6873",
+"bytes": 40955
+},
+"114:4": {
+"file": "114_4.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6234.mp3",
+"sha256": "sha256:0247039a91df60d7e0061aa7b2e5a28a8c5c4742642c9c01238516d2eef471e4",
+"bytes": 76690
+},
+"114:5": {
+"file": "114_5.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6235.mp3",
+"sha256": "sha256:f3134c09d81e87d2a93f7edebed7be4580014f598f54d49a0ade761b20eddc47",
+"bytes": 85048
+},
+"114:6": {
+"file": "114_6.mp3",
+"url": "https://cdn.islamic.network/quran/audio/64/ar.husary/6236.mp3",
+"sha256": "sha256:1c1b7f24325339e24441bdd3a1af0a2ca49a28679a28193096af2467776893f3",
+"bytes": 69166
+}
+}
+}

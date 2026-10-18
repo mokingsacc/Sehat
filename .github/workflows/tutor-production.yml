@@ -1,0 +1,119 @@
+# Qalam's production Worker (P24; tutor/docs/HOSTING.md "Going live"). Never runs on a push: Mo (or the second
+# admin) starts a deploy by hand from main, and the GitHub environment `production` waits for a reviewer's approval.
+#   deploy: checks worker/wrangler.production.toml with worker/guard.py, confirms the database id names the D1
+#           database `qalam`, builds, deploys, opens the store with /api/hello and checks it, read only.
+#   export: the weekly backup beside D1 Time Travel: `wrangler d1 export` of `qalam`, encrypted on the runner to Mo's
+#           public key (variable QALAM_BACKUP_PUBKEY) and kept 35 days as a run artifact; never stored unencrypted.
+#           Weekly once QALAM_LIVE = yes, or by hand; in the environment `production-backup` (main only, no approval,
+#           a token with the D1 permission only, which cannot deploy), so the weekly run waits for no reviewer.
+# It creates nothing: no database, no secret, no route or domain. It uses only its environment's own
+# QALAM_PROD_CF_TOKEN and QALAM_PROD_CF_ACCOUNT, never Sehat's secrets, and touches no Worker or database but `qalam`.
+name: Tutor production
+on:
+  workflow_dispatch:
+    inputs:
+      what:
+        description: "deploy or export"
+        required: true
+        default: export
+        type: choice
+        options: [deploy, export]
+  schedule:
+    - cron: "41 21 * * 0"          # Sunday 21:41 UTC, 02:11 on Monday in Afghanistan: D1 holds requests while it exports
+                                   # (scheduled runs use main; off until QALAM_LIVE = yes)
+permissions:
+  contents: read
+concurrency: { group: tutor-production, cancel-in-progress: false }
+jobs:
+  production:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || vars.QALAM_LIVE == 'yes')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: ${{ (github.event_name == 'schedule' || inputs.what == 'export') && 'production-backup' || 'production' }}
+    env:
+      # the production environment's own secrets, under their own names: a repository secret cannot stand in
+      CLOUDFLARE_API_TOKEN: ${{ secrets.QALAM_PROD_CF_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.QALAM_PROD_CF_ACCOUNT }}
+      D1_ID: ${{ vars.QALAM_PROD_D1_ID }}
+      WHAT: ${{ github.event_name == 'schedule' && 'export' || inputs.what }}
+      WRANGLER_VERSION: 4.148.0
+      WORKERS_PY: workers-py==1.17.7
+      UV_VERSION: 0.12.21
+      WRANGLER_SEND_METRICS: "false"
+      NAME: qalam
+    defaults: { run: { working-directory: tutor/worker } }
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with: { node-version: 22 }
+
+      - name: "Guard: production is qalam and nothing else"
+        run: |
+          [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || {
+            echo "::error::this environment has no QALAM_PROD_CF_TOKEN or QALAM_PROD_CF_ACCOUNT"; exit 1; }
+          [ -n "$D1_ID" ] || { echo "::error::set the variable QALAM_PROD_D1_ID (docs/HOSTING.md, Going live)"; exit 1; }
+          cp wrangler.production.toml wrangler.toml
+          python3 guard.py wrangler.toml
+          sed -i "s/^database_id = .*/database_id = \"$D1_ID\"/" wrangler.toml
+          python3 guard.py wrangler.toml --deploy
+
+      - name: Install wrangler (pinned)
+        run: |
+          npm install --no-save --no-package-lock --no-audit --no-fund "wrangler@$WRANGLER_VERSION"
+          npx --no-install wrangler --version
+
+      - name: "Guard: the database id is the D1 database qalam (never created here)"
+        run: |
+          got=$(npx --no-install wrangler d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const d=JSON.parse(s).find(x=>x.uuid===process.env.D1_ID);process.stdout.write(d?d.name:"")})')
+          [ "$got" = "$NAME" ] || { echo "::error::QALAM_PROD_D1_ID is not the database named $NAME (it is '${got:-nothing}')"; exit 1; }
+          echo "D1 $NAME found"
+
+      - name: Build and deploy
+        if: env.WHAT == 'deploy'
+        timeout-minutes: 15
+        run: |
+          python3 -m venv "$RUNNER_TEMP/uv" && "$RUNNER_TEMP/uv/bin/pip" install --quiet "uv==$UV_VERSION"
+          export PATH="$RUNNER_TEMP/uv/bin:$PATH"
+          python3 build.py
+          uvx --from "$WORKERS_PY" pywrangler sync
+          uvx --from "$WORKERS_PY" pywrangler deploy 2>&1 | tee deploy.log
+          url=$(sed 's/\x1b\[[0-9;]*m//g' deploy.log | grep -oE "https://$NAME\.[a-z0-9-]+\.workers\.dev" | head -1)
+          [ -n "$url" ] || { echo "::error::no workers.dev address in the deploy log"; exit 1; }
+          echo "URL=$url" >> "$GITHUB_ENV"; echo "Production: $url" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Open the store and check it (read only; no learner is made in production)
+        if: env.WHAT == 'deploy'
+        run: |
+          for i in $(seq 1 30); do
+            code=$(curl -sS -o hello.json -w "%{http_code}" "$URL/api/hello" || echo 000)
+            [ "$code" = 200 ] && break; echo "try $i: $code"; sleep 5
+          done
+          [ "$code" = 200 ] || { echo "::error::/api/hello answered $code"; exit 1; }
+          python3 -c "import json; h=json.load(open('hello.json')); assert h['home'] == 'online' and h['printer']['state'] == 'off', h; print('hello:', h['cohort'], [m['id'] for m in h['modules']], h['lessons'], 'lessons')"
+          for path in /api/_spike /api/print/1; do
+            [ "$(curl -sS -o /dev/null -w "%{http_code}" "$URL$path")" = 404 ] || { echo "::error::$path is served"; exit 1; }
+          done
+
+      - name: Export D1 and encrypt it
+        if: env.WHAT == 'export'
+        env:
+          PUBKEY: ${{ vars.QALAM_BACKUP_PUBKEY }}
+        run: |
+          [ -n "$PUBKEY" ] || { echo "::error::set the variable QALAM_BACKUP_PUBKEY (docs/HOSTING.md); nothing was exported"; exit 1; }
+          umask 077
+          day=$(date -u +%Y-%m-%d)
+          printf '%s\n' "$PUBKEY" > "$RUNNER_TEMP/backup.asc"
+          npx --no-install wrangler d1 export "$NAME" --remote --output "$RUNNER_TEMP/qalam-$day.sql"
+          gpg --batch --yes --trust-model always --recipient-file "$RUNNER_TEMP/backup.asc" \
+            --output "$RUNNER_TEMP/qalam-$day.sql.gpg" --encrypt "$RUNNER_TEMP/qalam-$day.sql"
+          shred -u "$RUNNER_TEMP/qalam-$day.sql"
+          mkdir -p "$RUNNER_TEMP/backup" && mv "$RUNNER_TEMP/qalam-$day.sql.gpg" "$RUNNER_TEMP/backup/"
+          ls -l "$RUNNER_TEMP/backup" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: env.WHAT == 'export'
+        with:
+          name: qalam-d1-export
+          path: ${{ runner.temp }}/backup/*.gpg
+          retention-days: 35
+          if-no-files-found: error

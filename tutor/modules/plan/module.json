@@ -1,0 +1,17 @@
+{
+  "id": "plan",
+  "version": "0.2.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["s1", "s2", "ad"],
+  "slots": ["home.action"],
+  "capabilities": ["free.text", "ai.call"],
+  "ai": {
+    "purposes": ["plan"]
+  },
+  "settings": {
+    "plan_ai": {"type": "bool", "default": false}
+  },
+  "needs": [],
+  "offline": "partly"
+}

@@ -1,0 +1,43 @@
+# Qalam online, production (P24): the same Worker as staging (wrangler.toml), for learners. Not deployed yet.
+# Only .github/workflows/tutor-production.yml uses this file: by hand, from main, after a reviewer approves the
+# GitHub environment `production`. It copies this file over wrangler.toml on the runner, and worker/guard.py refuses
+# to go on unless the name and database_name are both "qalam" and the settings below hold (docs/HOSTING.md,
+# "Going live"). The database is made once by Mo, by hand; the workflow never creates a database or a secret.
+name = "qalam"
+main = "build/src/entry.py"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["python_workers"]
+workers_dev = true                     # https://qalam.<account>.workers.dev; a custom domain is Mo's step (HOSTING)
+preview_urls = false
+
+[vars]
+TUTOR_COHORT = "3w2lco2s8f"            # the open cohort (cohorts/open.json): who joins without a class code
+TUTOR_AI_PROVIDER = "off"              # the default for classes that pick none: off, openai, anthropic, gemini or
+                                       # openai_compat (with TUTOR_COMPAT_URL); each key only as a Worker secret
+TUTOR_LACKS = "printer,pin"            # no printer and no teacher PIN online: print and teacher are off here
+TUTOR_HOME = "online"                  # the online consent text
+TUTOR_RELEASE = "1"                    # serve only signed lessons from released packs
+TUTOR_ORIGINS = "https://appassets.androidplatform.net"   # the Android app's own page may call the API
+
+# the app and the lesson pictures, served before the Worker; only /api/ and /v/ (a certificate's check page, P25b)
+# reach Python
+[assets]
+directory = "build/public"
+run_worker_first = ["/api/*", "/v/*"]
+not_found_handling = "404-page"          # any other address no file answers: the site's 404.html (WEBSITE.md W3)
+
+[[d1_databases]]
+binding = "DB"
+database_name = "qalam"
+database_id = "00000000-0000-0000-0000-000000000000"   # set on the runner from the variable QALAM_PROD_D1_ID
+
+[[rules]]
+type = "Data"
+globs = ["**/*.json", "**/*.sql", "**/*.svg", "**/*.webp", "**/*.png", "**/*.jpg", "**/*.md"]
+fallthrough = false
+
+# the retention job: once a day, 22:17 UTC, 02:47 in Afghanistan (worker/entry.py `scheduled`)
+[triggers]
+crons = ["17 22 * * *"]
+
+# no [observability]: Workers Logs stay off, as the hub keeps no access log

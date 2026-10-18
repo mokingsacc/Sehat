@@ -1,0 +1,51 @@
+{
+  "id": "english-4-hello",
+  "subject": "english",
+  "year": 4,
+  "order": 1,
+  "unit": {"prs": "سلام و احوال‌پرسی", "ps": "سلام او ستړي مه شې"},
+  "title": {"prs": "سلام دادن به انگلیسی", "ps": "په انګلیسي سلام اچول", "en": "Saying hello"},
+  "minutes": 12,
+  "steps": [
+    {"kind": "read", "english": "Hello!",
+     "text": {"prs": "«Hello» یعنی سلام.", "ps": "«Hello» یعنې سلام."}},
+    {"kind": "read", "english": "Good morning!", "picture": "sun",
+     "text": {"prs": "صبح‌ها می‌گوییم «Good morning»، یعنی صبح بخیر.", "ps": "سهار وایو «Good morning»، یعنې سهار مو پخیر."}},
+    {"kind": "read", "english": "My name is Maryam.",
+     "text": {"prs": "نامت را این‌طور می‌گویی: «My name is ...» یعنی نام من ... است.", "ps": "خپل نوم داسې وایې: «My name is ...» یعنې زما نوم ... دی."}},
+    {"kind": "choice",
+     "prompt": {"prs": "صبح به انگلیسی چه می‌گوییم؟", "ps": "سهار په انګلیسي څه وایو؟"},
+     "options": ["Good night", "Good morning", "Goodbye"],
+     "answer": 1,
+     "why": {"prs": "«Good morning» یعنی صبح بخیر.", "ps": "«Good morning» یعنې سهار مو پخیر."}},
+    {"kind": "say", "english": "Hello! My name is ...",
+     "text": {"prs": "به انگلیسی سلام بده و نام خودت را بگو.", "ps": "په انګلیسي سلام واچوه او خپل نوم ووایه."}},
+    {"kind": "choice",
+     "prompt": {"prs": "«Goodbye» یعنی چه؟", "ps": "«Goodbye» یعنې څه؟"},
+     "options": [{"prs": "خدا حافظ", "ps": "په مخه دې ښه"}, {"prs": "سلام", "ps": "سلام"}, {"prs": "تشکر", "ps": "مننه"}],
+     "answer": 0,
+     "why": {"prs": "وقتی می‌روی می‌گویی «Goodbye».", "ps": "کله چې ځې، وایې «Goodbye»."}}
+  ],
+  "sheet": {
+    "code": "E4-01",
+    "intro": {"prs": "کلمه‌های انگلیسی را با مداد بنویس.", "ps": "انګلیسي کلمې په پنسل ولیکه."},
+    "items": [
+      {"kind": "trace", "text": "Hello", "count": 3},
+      {"kind": "trace", "text": "Good morning", "count": 2},
+      {"kind": "write",
+       "prompt": {"prs": "نام خودت را به انگلیسی بنویس: My name is ...", "ps": "خپل نوم په انګلیسي ولیکه: My name is ..."},
+       "a": "My name is ...", "lines": 2},
+      {"kind": "draw",
+       "prompt": {"prs": "خورشید صبح را بکش و زیرش بنویس: Good morning", "ps": "د سهار لمر رسم کړه او لاندې یې ولیکه: Good morning"}}
+    ]
+  },
+  "bank": [
+    {"q": {"prs": "Hello یعنی چه؟", "ps": "Hello یعنې څه؟"},
+     "a": {"prs": "«Hello» یعنی سلام.", "ps": "«Hello» یعنې سلام."}},
+    {"q": {"prs": "شب بخیر به انگلیسی چه می‌شود؟", "ps": "شپه مو پخیر په انګلیسي څه کېږي؟"},
+     "a": {"prs": "«Good night» یعنی شب بخیر.", "ps": "«Good night» یعنې شپه مو پخیر."}},
+    {"q": {"prs": "تشکر به انگلیسی چه می‌شود؟", "ps": "مننه په انګلیسي څه کېږي؟"},
+     "a": {"prs": "«Thank you» یعنی تشکر.", "ps": "«Thank you» یعنې مننه."}}
+  ],
+  "review": {"status": "draft", "needs": ["Dari reader", "Pashto reader", "English teacher"]}
+}

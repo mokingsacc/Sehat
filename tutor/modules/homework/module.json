@@ -1,0 +1,15 @@
+{
+  "id": "homework",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["ask"],
+  "bands": ["p2", "s1", "s2"],
+  "slots": ["home.action"],
+  "capabilities": ["free.text", "ai.call"],
+  "ai": {
+    "purposes": ["hint"]
+  },
+  "settings": {},
+  "needs": ["internet"],
+  "offline": "no"
+}

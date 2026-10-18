@@ -1,0 +1,40 @@
+{
+  "id": "3w2lco2s8f",
+  "label": "Open",
+  "langs": [
+    "prs",
+    "ps",
+    "en"
+  ],
+  "bands": [
+    "ey",
+    "p1",
+    "p2",
+    "s1",
+    "s2",
+    "ad"
+  ],
+  "settings": {
+    "maturity": [
+      "pilot",
+      "stable"
+    ],
+    "timetable": "default"
+  },
+  "modules": {
+    "lessons": true,
+    "sheets": true,
+    "check": true,
+    "ask": false,
+    "print": false,
+    "teacher": false,
+    "photo": {"enabled": false, "settings": {"per_day": 5}},
+    "homework": false,
+    "review": false,
+    "timetable": true,
+    "plan": true,
+    "recall": true,
+    "cert": true,
+    "speak": false
+  }
+}

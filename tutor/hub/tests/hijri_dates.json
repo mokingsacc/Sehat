@@ -1,0 +1,205 @@
+{
+ "what": "25 known days of the Solar Hijri calendar as Afghanistan keeps it: the 1st and the 15th of each month of 1405, and Nowruz 1406 (C5.1 item 8). Hamal 1405 begins on 21 March 2026; six months of 31 days, five of 30, Hut 1405 has 29. One table for cert.py's hijri_date() and the staff pages' lang.js hijri().",
+ "days": [
+  {
+   "gregorian": "2026-03-21",
+   "hijri": [
+    1405,
+    1,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-04-04",
+   "hijri": [
+    1405,
+    1,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-04-21",
+   "hijri": [
+    1405,
+    2,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-05-05",
+   "hijri": [
+    1405,
+    2,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-05-22",
+   "hijri": [
+    1405,
+    3,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-06-05",
+   "hijri": [
+    1405,
+    3,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-06-22",
+   "hijri": [
+    1405,
+    4,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-07-06",
+   "hijri": [
+    1405,
+    4,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-07-23",
+   "hijri": [
+    1405,
+    5,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-08-06",
+   "hijri": [
+    1405,
+    5,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-08-23",
+   "hijri": [
+    1405,
+    6,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-09-06",
+   "hijri": [
+    1405,
+    6,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-09-23",
+   "hijri": [
+    1405,
+    7,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-10-07",
+   "hijri": [
+    1405,
+    7,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-10-23",
+   "hijri": [
+    1405,
+    8,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-11-06",
+   "hijri": [
+    1405,
+    8,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-11-22",
+   "hijri": [
+    1405,
+    9,
+    1
+   ]
+  },
+  {
+   "gregorian": "2026-12-06",
+   "hijri": [
+    1405,
+    9,
+    15
+   ]
+  },
+  {
+   "gregorian": "2026-12-22",
+   "hijri": [
+    1405,
+    10,
+    1
+   ]
+  },
+  {
+   "gregorian": "2027-01-05",
+   "hijri": [
+    1405,
+    10,
+    15
+   ]
+  },
+  {
+   "gregorian": "2027-01-21",
+   "hijri": [
+    1405,
+    11,
+    1
+   ]
+  },
+  {
+   "gregorian": "2027-02-04",
+   "hijri": [
+    1405,
+    11,
+    15
+   ]
+  },
+  {
+   "gregorian": "2027-02-20",
+   "hijri": [
+    1405,
+    12,
+    1
+   ]
+  },
+  {
+   "gregorian": "2027-03-06",
+   "hijri": [
+    1405,
+    12,
+    15
+   ]
+  },
+  {
+   "gregorian": "2027-03-21",
+   "hijri": [
+    1406,
+    1,
+    1
+   ]
+  }
+ ]
+}

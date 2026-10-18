@@ -1,0 +1,27 @@
+{
+  "id": "qg1j2918yx",
+  "label": "Staging",
+  "langs": ["prs", "ps", "en"],
+  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "settings": {
+    "maturity": ["draft", "pilot", "stable"],
+    "timetable": "default"
+  },
+  "modules": {
+    "lessons": true,
+    "sheets": true,
+    "ask": true,
+    "print": true,
+    "check": true,
+    "teacher": true,
+    "photo": true,
+    "homework": true,
+    "review": true,
+    "timetable": true,
+    "plan": true,
+    "recall": true,
+    "cert": true,
+    "quran": true,
+    "university": true
+  }
+}

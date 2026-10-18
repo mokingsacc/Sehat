@@ -1,0 +1,102 @@
+{
+ "about": "The alias pictures (DESIGN.md 6; BUILD-PLAN 3.4): the phone picks one no other learner on that phone uses, and the server adds a number. Drafts: reviewers strike any gendered, religious or name-like item, and native speakers check the Dari and Pashto words. The app's copy is app/js/aliases.js (a test keeps them the same).",
+ "draft": true,
+ "pictures": [
+  {
+   "id": "book",
+   "name": {
+    "prs": "کتاب",
+    "ps": "کتاب",
+    "en": "Book"
+   }
+  },
+  {
+   "id": "key",
+   "name": {
+    "prs": "کلید",
+    "ps": "کیلي",
+    "en": "Key"
+   }
+  },
+  {
+   "id": "cup",
+   "name": {
+    "prs": "پیاله",
+    "ps": "پیاله",
+    "en": "Cup"
+   }
+  },
+  {
+   "id": "teapot",
+   "name": {
+    "prs": "چاینک",
+    "ps": "چاینکه",
+    "en": "Teapot"
+   }
+  },
+  {
+   "id": "clock",
+   "name": {
+    "prs": "ساعت",
+    "ps": "ګړۍ",
+    "en": "Clock"
+   }
+  },
+  {
+   "id": "apple",
+   "name": {
+    "prs": "سیب",
+    "ps": "مڼه",
+    "en": "Apple"
+   }
+  },
+  {
+   "id": "grapes",
+   "name": {
+    "prs": "انگور",
+    "ps": "انګور",
+    "en": "Grapes"
+   }
+  },
+  {
+   "id": "pomegranate",
+   "name": {
+    "prs": "انار",
+    "ps": "انار",
+    "en": "Pomegranate"
+   }
+  },
+  {
+   "id": "mountain",
+   "name": {
+    "prs": "کوه",
+    "ps": "غر",
+    "en": "Mountain"
+   }
+  },
+  {
+   "id": "boat",
+   "name": {
+    "prs": "کشتی",
+    "ps": "بېړۍ",
+    "en": "Boat"
+   }
+  },
+  {
+   "id": "umbrella",
+   "name": {
+    "prs": "چتری",
+    "ps": "چترۍ",
+    "en": "Umbrella"
+   }
+  },
+  {
+   "id": "bell",
+   "name": {
+    "prs": "زنگ",
+    "ps": "زنګ",
+    "en": "Bell"
+   }
+  }
+ ]
+}

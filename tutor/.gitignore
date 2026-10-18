@@ -1,0 +1,14 @@
+# the hub's own records (questions, teacher PIN, print outbox) never leave the hub
+data/
+.venv/
+.pytest_cache/
+review-sheets/
+# the Quran set's recitation files beyond Al-Fatiha: fetched with tools/quran_set.py fetch-audio (tens of MB)
+content/quran/audio/*/*.mp3
+!content/quran/audio/*/1_*.mp3
+# tools/voice.py: a batch sent and not yet collected, and its working files
+.voice-batch.json*
+.voice-tmp/
+# tools/make_site.py: the website rendered here by hand (worker/build.py renders into its own build/)
+site/build/
+node_modules/

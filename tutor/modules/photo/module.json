@@ -1,0 +1,17 @@
+{
+  "id": "photo",
+  "version": "0.2.0",
+  "maturity": "pilot",
+  "depends": ["sheets", "check"],
+  "bands": ["p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": ["photo.upload", "ai.call"],
+  "ai": {
+    "purposes": ["read_sheet"]
+  },
+  "settings": {
+    "per_day": {"type": "int", "default": 10, "min": 1, "max": 100}
+  },
+  "needs": ["internet"],
+  "offline": "no"
+}

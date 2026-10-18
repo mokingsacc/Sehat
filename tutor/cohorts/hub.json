@@ -1,0 +1,26 @@
+{
+  "id": "d6co6etep6",
+  "label": "Village hub",
+  "langs": ["prs", "ps", "en"],
+  "bands": ["ey", "p1", "p2", "s1", "s2", "ad"],
+  "settings": {
+    "maturity": ["pilot", "stable"],
+    "timetable": "default"
+  },
+  "modules": {
+    "lessons": true,
+    "sheets": true,
+    "ask": true,
+    "print": true,
+    "check": true,
+    "teacher": true,
+    "photo": false,
+    "homework": false,
+    "review": false,
+    "timetable": true,
+    "plan": true,
+    "recall": false,
+    "cert": true,
+    "speak": false
+  }
+}

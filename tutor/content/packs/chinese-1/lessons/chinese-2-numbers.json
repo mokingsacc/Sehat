@@ -1,0 +1,131 @@
+{
+  "id": "chinese-2-numbers",
+  "subject": "chinese",
+  "year": 0,
+  "order": 2,
+  "unit": {
+    "prs": "عددها به چینایی",
+    "ps": "عددونه په چینايي"
+  },
+  "title": {
+    "prs": "یک، دو، سه",
+    "ps": "یو، دوه، درې"
+  },
+  "minutes": 10,
+  "steps": [
+    {
+      "kind": "read",
+      "zh": "一",
+      "pinyin": "yī",
+      "text": {
+        "prs": "این یعنی یک: ۱. لحن اول صاف و بلند است.",
+        "ps": "دا یعنې یو: ۱. لومړی غږ برابر او لوړ دی."
+      }
+    },
+    {
+      "kind": "read",
+      "zh": "二",
+      "pinyin": "èr",
+      "text": {
+        "prs": "این یعنی دو: ۲. لحن چهارم پایین می‌آید.",
+        "ps": "دا یعنې دوه: ۲. څلورم غږ ښکته راځي."
+      }
+    },
+    {
+      "kind": "read",
+      "zh": "三",
+      "pinyin": "sān",
+      "text": {
+        "prs": "این یعنی سه: ۳.",
+        "ps": "دا یعنې درې: ۳."
+      }
+    },
+    {
+      "kind": "choice",
+      "zh": "二",
+      "pinyin": "èr",
+      "hide": true,
+      "prompt": {
+        "prs": "گوش بده. کدام عدد است؟",
+        "ps": "غوږ ونیسه. کوم عدد دی؟"
+      },
+      "options": [
+        "۱",
+        "۲",
+        "۳"
+      ],
+      "answer": 1,
+      "why": {
+        "prs": "«èr» یعنی ۲.",
+        "ps": "«èr» یعنې ۲."
+      }
+    },
+    {
+      "kind": "say",
+      "zh": "三",
+      "pinyin": "sān",
+      "text": {
+        "prs": "گوش بده، بعد خودت بگو.",
+        "ps": "غوږ ونیسه، بیا یې پخپله ووایه."
+      }
+    }
+  ],
+  "sheet": {
+    "code": "ZH-02",
+    "intro": {
+      "prs": "عددها را با پنسل بنویس.",
+      "ps": "عددونه په پنسل ولیکه."
+    },
+    "items": [
+      {
+        "kind": "trace",
+        "text": "一",
+        "count": 4
+      },
+      {
+        "kind": "trace",
+        "text": "二",
+        "count": 4
+      },
+      {
+        "kind": "trace",
+        "text": "三",
+        "count": 4
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "cc-cedict",
+      "item": "一",
+      "title": "CC-CEDICT entry 一",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    },
+    {
+      "id": "cc-cedict",
+      "item": "二",
+      "title": "CC-CEDICT entry 二",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    },
+    {
+      "id": "cc-cedict",
+      "item": "三",
+      "title": "CC-CEDICT entry 三",
+      "url": "https://cc-cedict.org/wiki/",
+      "licence": "CC BY-SA 4.0",
+      "checked": "2026-10-17"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "needs": [
+      "Dari reader",
+      "Pashto reader",
+      "Chinese teacher"
+    ]
+  }
+}

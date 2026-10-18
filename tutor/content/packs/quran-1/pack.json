@@ -1,0 +1,28 @@
+{
+  "id": "quran-1",
+  "version": "2026.10.17",
+  "title": {
+    "prs": "قرآن",
+    "ps": "قرآن",
+    "en": "Quran"
+  },
+  "about": {
+    "en": "Quran lessons (P29, C4.7): listen and repeat, Al-Fatiha and Juz 'Amma first, p1 to adults. Each lesson is its verses, named by number (ayah steps); the text, the translations of the meanings and the recitation come from the Quran set (content/quran), never typed here. Marked NC because the recitation is Islamic Network's (free, non-commercial redistribution). No lessons yet: they are drafted by a person with a Hanafi scholar, never by a tool or a model, and each verse needs its translation recorded by native Dari and Pashto speakers before release."
+  },
+  "langs": [
+    "prs",
+    "ps"
+  ],
+  "bands": [
+    "p1",
+    "p2",
+    "s1",
+    "s2",
+    "ad"
+  ],
+  "tracks": [
+    "reader"
+  ],
+  "licence": "NC",
+  "lessons": []
+}

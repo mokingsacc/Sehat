@@ -1,0 +1,23 @@
+/* The small pages (/offline/, and in W3 the 404 page and /m): at most 4 KB each, so only what they draw. The same
+   tokens as base.css, light and dark. */
+:root{--bg:#fff;--card:#fff;--line:#e3e8ec;--ink:#14213d;--muted:#5a6478;--ac:#0d7c7e;--onac:#fff;--acsh:#095c5e;--acink:#095c5e;--warm:#c2540a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1517;--card:#172125;--line:#2c3c42;--ink:#e7eef0;--muted:#a7b4b9;--ac:#4fbdb8;--onac:#062322;--acsh:#2a7a76;--acink:#4fbdb8;--warm:#f0904a;color-scheme:dark}}
+*{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.8 system-ui,"Noto Naskh Arabic UI","Noto Naskh Arabic","Noto Sans Arabic UI","Segoe UI",Tahoma,sans-serif;overflow-wrap:break-word}
+[lang=en]{font-size:16px;line-height:1.55}
+h1{margin:0;font-size:clamp(26px,6.5vw,38px);line-height:1.4;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.w{width:calc(100% - 32px);max-width:720px;margin:0 auto;padding:20px 0 36px}
+.logo{width:48px;height:48px;border-radius:13px;display:block}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.multi{padding:18px 0}
+.multi+.multi{border-top:2px dashed var(--line)}
+.lead{margin-top:6px;color:var(--muted);max-width:36em}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:6px 22px;border-radius:16px;text-decoration:none;border:2px solid var(--ac);background:var(--card);color:var(--acink);font-weight:700}
+.btn.pri{background:var(--ac);color:var(--onac);box-shadow:0 4px 0 var(--acsh)}
+.no-app,html[data-app=none] .has-app{display:none!important}
+html[data-app=none] .no-app{display:block!important}

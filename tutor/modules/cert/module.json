@@ -1,0 +1,14 @@
+{
+  "id": "cert",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["p1", "p2", "s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": [],
+  "settings": {
+    "per_day": {"type": "int", "default": 5, "min": 1, "max": 20}
+  },
+  "needs": [],
+  "offline": "partly"
+}

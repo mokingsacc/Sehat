@@ -1,0 +1,8 @@
+# The hub's Python packages (tested with these versions). WeasyPrint also needs the Pango library:
+# sudo apt install libpango-1.0-0 libpangoft2-1.0-0   (setup/install.sh does this)
+fastapi==0.143.0
+uvicorn==0.53.0
+httpx==0.28.1
+weasyprint==70.0
+segno==1.6.6
+pytest==9.1.1

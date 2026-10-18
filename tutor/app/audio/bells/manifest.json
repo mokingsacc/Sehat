@@ -1,0 +1,18 @@
+{
+  "about": "The school day's bells (P19): Qalam's own struck tones, no voice, made by tools/make_bells.py and given to the public domain (CC0; content/sources.json, qalam-bells). start rings at the opening, each period and sheet time; break at the break; end at the close. They play only while Qalam is on screen.",
+  "source": "qalam-bells",
+  "sounds": {
+    "start": {
+      "file": "start.opus",
+      "sha256": "sha256:82fcb946c3e823eaaf98f797c09f071310601b4ca7a041fbb6868e21f86b3a07"
+    },
+    "break": {
+      "file": "break.opus",
+      "sha256": "sha256:e4e68242c5822fc87a4e3e93d954f89097e9530fabfdfb378ddc920517299624"
+    },
+    "end": {
+      "file": "end.opus",
+      "sha256": "sha256:021d038eb5dc1908ea5a4b37baa3054a1318c96e6b671e44ad075130356a3b4a"
+    }
+  }
+}

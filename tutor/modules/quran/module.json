@@ -1,0 +1,12 @@
+{
+  "id": "quran",
+  "version": "0.1.0",
+  "maturity": "pilot",
+  "depends": ["lessons"],
+  "bands": ["s1", "s2", "ad"],
+  "slots": [],
+  "capabilities": [],
+  "settings": {},
+  "needs": [],
+  "offline": "partly"
+}

@@ -1,0 +1,20 @@
+# The AI slot: llama.cpp's server with whichever model file is /opt/qalam/models/current.gguf.
+# Swap the model by pointing current.gguf at another file and restarting; the hub needs no change.
+# Only the hub on this machine can reach it (127.0.0.1). Optional: the hub works without it.
+[Unit]
+Description=Qalam local AI model server (llama.cpp)
+After=network.target
+
+[Service]
+User=qalam
+Group=qalam
+ExecStart=/opt/qalam/llama.cpp/build/bin/llama-server -m /opt/qalam/models/current.gguf --host 127.0.0.1 --port 8081 -c 4096 --parallel 2
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

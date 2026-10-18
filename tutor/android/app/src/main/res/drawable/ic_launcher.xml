@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Qalam's icon, as app/icon.svg: a teal square, a white pen and a gold line (Android 5 to 7) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp" android:viewportWidth="64" android:viewportHeight="64">
+    <path android:fillColor="#0D7C7E" android:pathData="M14,0h36a14,14 0,0 1,14 14v36a14,14 0,0 1,-14 14h-36a14,14 0,0 1,-14 -14v-36a14,14 0,0 1,14 -14z" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineJoin="round"
+        android:pathData="M18,46l3,-10 21,-21a4.2,4.2 0,0 1,6 6L27,42z" />
+    <path android:strokeColor="#F2B134" android:strokeWidth="4.5" android:strokeLineCap="round" android:pathData="M16,50h32" />
+</vector>

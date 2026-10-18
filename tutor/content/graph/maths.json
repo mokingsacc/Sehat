@@ -1,0 +1,17 @@
+{
+  "subject": "maths",
+  "version": "2026.10.17",
+  "nodes": [
+    {"id": "count-5", "needs": [], "lessons": ["maths-1-count-5"], "title": {"prs": "شمردن تا ۵", "ps": "تر ۵ پورې شمېرل", "en": "Count to 5"}},
+    {"id": "frac-what", "needs": [], "lessons": [], "title": {"prs": "کسر چیست", "ps": "کسر څه دی", "en": "What a fraction is"}},
+    {"id": "frac-add", "needs": ["frac-what"], "lessons": ["maths-7-fractions-add"], "title": {"prs": "جمع کسرها", "ps": "د کسرونو جمع", "en": "Add fractions"}},
+    {"id": "num-digits", "needs": [], "lessons": ["adult-maths-1-numbers"], "title": {"prs": "عددها به دو شکل", "ps": "عددونه په دوو بڼو", "en": "Numbers in both kinds of digits"}},
+    {"id": "money-change", "needs": ["num-digits"], "lessons": ["adult-maths-2-change"], "title": {"prs": "پول باقی", "ps": "پاتې پیسې", "en": "Money and change"}},
+    {"id": "time-clock", "needs": ["num-digits"], "lessons": ["adult-maths-3-clock"], "title": {"prs": "ساعت", "ps": "ساعت", "en": "Read the time"}}
+  ],
+  "pathways": [
+    {"id": "s1-fractions", "goal": ["frac-add"], "bands": ["s1"], "final": "maths-7-fractions-add", "certificate": true, "title": {"prs": "کسرها: جمع", "ps": "کسرونه: جمع", "en": "Fractions: adding"}},
+    {"id": "ad-money", "goal": ["money-change"], "bands": ["ad"], "final": "adult-maths-2-change", "certificate": true, "title": {"prs": "ریاضی روزمره: پول", "ps": "ورځنی حساب: پیسې", "en": "Everyday maths: money"}}
+  ],
+  "review": {"status": "draft", "needs": ["maths teacher", "adult educator"]}
+}

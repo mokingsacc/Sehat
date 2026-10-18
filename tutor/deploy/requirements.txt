@@ -1,0 +1,5 @@
+# The fallback container's Python packages: the hub's own (hub/requirements.txt), at the same versions, without
+# WeasyPrint (no printer online) and pytest. hub/tests/test_fallback_kit.py keeps the versions equal.
+fastapi==0.143.0
+uvicorn==0.53.0
+httpx==0.28.1

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- the launcher name is "Qalam", never a disguised one (C3.6) -->
+    <string name="app_name">Qalam</string>
+    <!-- the alarm's notification channel and its only words (C3.1: the notification says only "Qalam") -->
+    <string name="channel_bells">Qalam</string>
+</resources>
