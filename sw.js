@@ -1,5 +1,5 @@
 // Service worker: keeps the whole book on the phone. Generated from js/sw.template.js by tools/build.py.
-const VERSION = '2026.10.18-a08d42';
+const VERSION = '2026.10.18-fc17e2';
 const PRECACHE = [
  "./",
  "index.html",
@@ -235,7 +235,6 @@ const PRECACHE = [
  "img/pics/em-spine-hold.svg",
  "img/pics/home-co-fresh-air.svg",
  "img/pics/hosp-blood-test.svg",
- "img/pics/look-rash-glass.svg",
  "img/pics/measure-height.svg",
  "img/pics/measure-hold.svg",
  "img/pics/measure-length.svg",
@@ -262,6 +261,7 @@ const PRECACHE = [
  "img/pics/hosp-ultrasound.webp",
  "img/pics/look-floppy.webp",
  "img/pics/look-nappy.webp",
+ "img/pics/look-rash-glass.webp",
  "img/pics/look-skin-colour.webp",
  "img/pics/look-skin-pinch.webp",
  "img/pics/look-soft-spot.webp",
@@ -588,6 +588,7 @@ const PAINTED = {
 "img/pics/hosp-ultrasound.webp": "08bc1fa5",
 "img/pics/look-floppy.webp": "99f223e0",
 "img/pics/look-nappy.webp": "cacd92e7",
+"img/pics/look-rash-glass.webp": "1e26e5fd",
 "img/pics/look-skin-colour.webp": "970d2ba5",
 "img/pics/look-skin-pinch.webp": "2b2d3f95",
 "img/pics/look-soft-spot.webp": "eb58bdcf",
