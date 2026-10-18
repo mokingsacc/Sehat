@@ -516,10 +516,33 @@ class D1Store(Store):
         t = now()
         ok, wrong = await self._batch_rows([      # one round trip: a right code is used up, a wrong one counted
             self._stmt("DELETE FROM reset_codes WHERE token_hash=? AND code_hash=? AND expires>=? AND tries<? "
-                       "RETURNING token_hash", token_hash, code_hash, t, int(tries)),
+                       "AND code_hash NOT LIKE 'r:%' RETURNING token_hash", token_hash, code_hash, t, int(tries)),
             self._stmt("UPDATE reset_codes SET tries=tries+1 WHERE token_hash=? AND code_hash!=? AND expires>=? "
-                       "AND tries<? RETURNING tries", token_hash, code_hash, t, int(tries))])
+                       "AND tries<? AND code_hash NOT LIKE 'r:%' RETURNING tries", token_hash, code_hash, t, int(tries))])
         return "ok" if ok else "wrong" if wrong else "none"
+
+    # W9: the teacher's return code (see _sqlite_sync.py); D1 has no transaction to look inside, so one batch makes
+    # the wrong-try count conditional on no code matching, then uses up the one that matches
+    async def return_code_free(self, cohort, code_hash) -> bool:
+        return await self._one("SELECT 1 AS x FROM reset_codes WHERE code_hash=? AND expires>=? AND token_hash IN "
+                               "(SELECT token_hash FROM learners WHERE cohort=?)", code_hash, now(), cohort) is None
+
+    async def use_return_code(self, cohort, code_hash, tries=5) -> str:
+        t, n = now(), int(tries)
+        mine = "token_hash IN (SELECT token_hash FROM learners WHERE cohort=?)"
+        wrong, ok = await self._batch_rows([
+            self._stmt(f"UPDATE reset_codes SET tries=tries+1 WHERE code_hash LIKE 'r:%' AND expires>=? AND tries<? AND {mine} "
+                       f"AND NOT EXISTS (SELECT 1 FROM reset_codes WHERE code_hash=? AND expires>=? AND tries<? AND {mine}) "
+                       "RETURNING tries", t, n, cohort, code_hash, t, n, cohort),
+            self._stmt(f"DELETE FROM reset_codes WHERE code_hash=? AND expires>=? AND tries<? AND {mine} RETURNING token_hash",
+                       code_hash, t, n, cohort)])
+        if len(ok) == 1:
+            return ok[0]["token_hash"]
+        return "wrong" if wrong else "none"
+
+    async def progress_events(self, token_hash, since):
+        return await self._all("SELECT at, verb, object, value FROM events WHERE token_hash=? AND at>=? AND verb IN "
+                               "('lesson.done', 'check.done') ORDER BY at, id", token_hash, since)
 
     async def delete_learner(self, token_hash) -> bool:
         res = await self._batch([self._stmt("DELETE FROM events WHERE token_hash=?", token_hash),

@@ -16,7 +16,10 @@ hub's own), named by `?cohort=`. No name anywhere: learners are a picture and a 
   reply through the identifier filter and the leak check (a reply that hands her the answer is refused). The verdict
   reaches her phone at `#/made`.
 - `GET  /api/m/teacher/class`: four counts for this week and the class list by picture and number.
-- `GET  /api/m/teacher/class/{alias}`: her lessons with % right, hints used; `POST .../reset-code`: a lock reset code.
+- `GET  /api/m/teacher/class/{alias}`: her lessons with % right, hints used; `POST .../reset-code`: a lock reset code;
+  `POST .../return-code` (W9, WEBSITE.md 3.12): a return code for her lost phone, the same six digits, 15 minutes,
+  once and five tries; on her new phone she types the class code and these digits (`POST /api/me/return`), her row
+  gets a new token (the lost phone's dies) and her lessons and marks come back from her events.
 - `GET  /api/m/teacher/lessons`, `/lessons/{id}`: did it, mastered, the hardest item, disputes, hint rungs; bars per
   item. `GET /api/m/teacher/answers/{id}.html`: the answer sheet (C2.3: the answers are the teacher's).
 - `GET  /api/m/teacher/wishes`: the cohort's screened wishlist (P22): text, count, bands, days; never who asked.
@@ -72,6 +75,12 @@ class CardIn(BaseModel):
 
 def code_hash(token_hash: str, code: str) -> str:
     return hashlib.sha256(f"{token_hash}:{code}".encode()).hexdigest()
+
+
+def return_hash(cohort: str, code: str) -> str:
+    """W9: a return code's hash, kept in reset_codes: "r:" and the class with the six digits, since the new phone that
+    types it has no token yet (so it never matches a lock code, whose hash is made with her token's)."""
+    return "r:" + hashlib.sha256(f"return:{cohort}:{code}".encode()).hexdigest()
 
 
 def alias_of(r: dict) -> str:
@@ -399,6 +408,23 @@ def router(hub, needs) -> APIRouter:
         await hub.store.set_reset_code(row["token_hash"], code_hash(row["token_hash"], code), expires)
         # the admin's Log keeps who made it and for which learner number, never the code (C5 L1)
         await hub.store.add_admin_log(cohort=c["id"], what="teacher.lock_code", detail=f"a lock reset code for {alias}",
+                                      changed_by=f"teacher:{me['label']}"[:60])
+        return {"code": code, "minutes": CODE_MINUTES}
+
+    @r.post("/class/{alias}/return-code", dependencies=needs(MODULE))
+    async def return_code(alias: str, request: Request):
+        me = await staff(request)
+        c, _, _ = await cohort(request, me)
+        row = await learner_by_alias(c["id"], alias)
+        for _ in range(8):                           # one live return code per six digits in a class
+            code = f"{secrets.randbelow(10 ** 6):06d}"
+            if await hub.store.return_code_free(c["id"], return_hash(c["id"], code)):
+                break
+        else:
+            raise HTTPException(503, "try again")
+        expires = (now() + timedelta(minutes=CODE_MINUTES)).isoformat(timespec="seconds")
+        await hub.store.set_reset_code(row["token_hash"], return_hash(c["id"], code), expires)
+        await hub.store.add_admin_log(cohort=c["id"], what="teacher.return_code", detail=f"a return code for {alias}",
                                       changed_by=f"teacher:{me['label']}"[:60])
         return {"code": code, "minutes": CODE_MINUTES}
 

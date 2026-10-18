@@ -1106,3 +1106,79 @@ Decisions to confirm:
 
 Not verified here: a real iPhone (the advice's detection, Safari's 7-day rule, and the Home Screen exemption); a
 real borrowed Android phone; `persist()` being granted (Chrome decides by its own rules; the check counts the request).
+
+### W9: the teacher's return code and the progress rebuild
+
+Built:
+- The teacher's page, a learner's card: "Return code (lost phone)" → "Make a return code" (`POST
+  /api/m/teacher/class/{alias}/return-code`): six digits, 15 minutes, once, five tries, as the lock reset code. It
+  is kept in `reset_codes` beside the lock codes, with a hash that starts "r:" and is made from the class and the
+  digits (the new phone has no token to bind them to), so no migration was needed and the Worker's first-request
+  budget is unchanged. The admin log says "a return code for key-27", never the code.
+- The new phone: "I already use Qalam" → "No card? A code from my teacher" (`#/return`, `screens/returncode.js`,
+  loaded only when opened and kept by the service worker once used, outside the first open). She types her class
+  code (empty at the school's centre: the hub's own class) and the six digits, in Persian or Latin shapes.
+  `POST /api/me/return` uses the code up, gives her row a new token (the lost phone's is refused from then on) and
+  answers what `/api/me` gives. The phone keeps her as she was: her picture (a stand-in if another learner here
+  shows it), her number, class and consent, in a seat with the new token; a learner already on this phone with that
+  seat takes the new token instead of a second learner being made.
+- `GET /api/me/progress`: her finished lessons (the most stars, the latest time) and her latest sheet mark per
+  lesson, from her events of the last 12 months. The phone lays them over what it has and sends none of them again
+  as events. "Welcome back, [her picture] ۲۷. 14 lessons came back." Then the lock is offered, as after a class join.
+- The teacher sees one learner: no row is added, and the class list's count is unchanged.
+- `/teachers/` (a forgotten lock, a lost phone) and `/families/` say how it works.
+- Tests: `test_return.py` (the store's half on SQLite and the D1 fake: once, a wrong guess, five tries, past its
+  time, lock codes and return codes never touching, the events read back; the routes on the hub and online:
+  Persian digits, the old token refused, the same number and picture, progress, 403, 404, 410, 422, 429, the log
+  without the code); `returncode.test.js` (the phone's half: the rebuild's rules, the seat, the lock offer, an
+  adult, a learner already here); `tools/bag_check.mjs` phase 7 (in Chromium on poor 2G: a learner of the hub's
+  class, her events at the hub, the teacher's code, a new phone, the old token refused, her lessons back and not
+  sent again, the class list as long as before, the used code refused); `tools/staff_check.mjs` (the teacher's
+  learner card and the return code, in three languages and two widths).
+
+Decisions to confirm:
+- One code per learner at a time: a return code replaces a lock reset code, and the other way round. A lock reset
+  (`/api/me/pin-reset`) never touches a return code, so wrong lock tries on the lost phone cannot spend it.
+- A wrong return code counts a try on every live return code of that class (a phone with no token can only say
+  which class); five wrong guesses end them all, and the teacher makes a new one. Besides that, 10 tries in ten
+  minutes per address (`reset_limit`) and a wrong class code counts against the class-code limit (20 an hour).
+  Guessing one of a million codes in 5 tries is about 1 in 200 000 per live code.
+- The return code is not switched off by the class's "lock reset codes" setting: that setting is about the lock.
+- No "Is this you?" step: the teacher hands the code to the right child; the welcome line shows her picture and
+  number.
+- An empty class code means the server's own class (the village hub's). Online that is the open cohort, which has
+  no teacher in practice, so online learners type their class code.
+- The server keeps her band, not her year: she comes back at the band's first year (year 7 for secondary) and
+  changes it in Settings; an adult comes back on the literacy track; the language is the one the phone shows.
+- What comes back: finished lessons with their stars and the latest sheet marks, from the events her class's server
+  holds (since W4 a learner's events go to her class's seat, else to her first server). Not rebuilt: plans,
+  spaced-review items, questions and answers, certificates, settings and her PIN (she sets a new one). Her school
+  bag cannot be opened without its code; she makes a new one on the new phone, and its first write ends the old
+  bag (one bag per seat).
+- A lost phone that is found and opened again is refused (401) and, like any phone whose token a server no longer
+  knows, joins again as a new learner of the class with what it holds; the teacher then sees one more learner,
+  whom the 12-month rule removes if nobody uses it. A tombstone for the old token would stop that; it was not added.
+
+Not verified here: the online return on staging with a real teacher (Cloudflare Access sign-in is the owner's; the
+staging check covered the learner routes only, below); a real lost phone; the Worker's D1 under two phones typing
+codes at once (the store's batch is tested on the D1 fake).
+
+### W10: field checks (not done here; what they must check)
+
+- An Android Go phone on real 2G: the first open (0.45 MB), "I already use Qalam" with the 16 digits, Sync now, the
+  card printed at the hub and scanned with the camera; each screen within its budget; the slowest pilot phone's
+  PBKDF2 time (100 000 rounds) on the hub's insecure page.
+- An iPhone: the Pashto and Dari glyphs in system fonts (ټ ډ ړ ږ ښ ګ ڼ ۍ ې and the Persian digits); if a letter
+  is missing, add the 9 KB Naskh subset with `font-display: optional`. The iPhone advice shown in Safari and not on
+  the Home Screen; Safari's 7-day rule and the Home Screen exemption.
+- A week offline on two phones, then one sync: every lesson at its highest stars, the newest plan, each question
+  sent exactly once, no event twice, no second learner at the hub or online.
+- A shutdown drill: the hub's power cut during a bag write and a join; the hub back; nothing lost or doubled.
+- A hub-only week, then online: her events, her bag and her seats reach the online relay and Worker; the costs
+  (requests, D1 rows, bytes) as stated in 3.9.
+- A borrowed phone (Just for today) on a real Android phone: nothing of hers in its storage after Done.
+- A lost phone in a real class: the teacher's return code read aloud, typed on a new phone, the old phone refused,
+  the lessons back; then the old phone found and opened (the extra learner in the class list).
+- The Android app's handoff both ways (`qalam://bag` and "Use Qalam in this browser too") on a real device, and the
+  APK still under 3 MB with no audio inside.
+- A native Dari and a native Pashto reader through every W7 to W9 string (all drafts).

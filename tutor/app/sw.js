@@ -7,7 +7,7 @@
 // the site's root (/audio/), shared with the website's speakers; the site's own worker at /sw.js keeps the website and
 // shares media-v1 and quran-v1 with this one. app/tests/sw.test.js keeps SHELL equal to the app's files.
 
-const VERSION = 'qalam-w8-1';     // a new name installs the whole shell at once: W8's Just for today, state.js and events.js go together
+const VERSION = 'qalam-w9-1';     // a new name installs the whole shell at once: W9's return code, hub.js and main.js go together
 const SHELL_CACHE = 'app-shell-' + VERSION;      // not shell-*: the site's worker deletes the old root worker's cache
 const MEDIA_CACHE = 'media-v1';                // pack pictures and clips: their names change when they change
 const QURAN_CACHE = 'quran-v1';                // P29: each surah and verse recitation once opened, never all at once
@@ -17,14 +17,14 @@ const BASE = new URL('./', self.location).pathname;   // /app/ online and on the
 // those lessons draw; each language's voice manifest, which speech.js asks for in her own language only; and the
 // bells, which the school day fetches at her first tap while it is on (timetable.js unlockOnFirstTap), so they still
 // ring offline; and the school bag's code and its vendored crypto (W5), loaded only when her bag is used, with the
-// card's QR maker (W7).
+// card's QR maker (W7); and W9's "A code from my teacher", which needs the server anyway.
 const LAZY = ['fonts/amiri-quran.woff2', 'fonts/noto-sc.woff2', '/audio/en/manifest.json', '/audio/prs/manifest.json',
   '/audio/ps/manifest.json', '/audio/bells/break.opus', '/audio/bells/end.opus', '/audio/bells/start.opus',
   'js/bag.js', 'js/qr.js', 'js/vendor/noble-ciphers/chacha.js', 'js/vendor/noble-ciphers/_arx.js',
   'js/vendor/noble-ciphers/_poly1305.js', 'js/vendor/noble-ciphers/utils.js', 'js/vendor/noble-hashes/pbkdf2.js',
   'js/vendor/noble-hashes/hkdf.js', 'js/vendor/noble-hashes/hmac.js', 'js/vendor/noble-hashes/sha2.js',
   'js/vendor/noble-hashes/_md.js', 'js/vendor/noble-hashes/_u64.js', 'js/vendor/noble-hashes/utils.js',
-  'js/vendor/noble-hashes/crypto.js'];
+  'js/vendor/noble-hashes/crypto.js', 'js/screens/returncode.js'];
 const SHELL = [
   './',
   'index.html',

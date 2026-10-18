@@ -274,6 +274,15 @@ class SqliteStore(Store):
     async def use_reset_code(self, token_hash, code_hash, tries=5) -> str:
         return await self._run("use_reset_code", token_hash, code_hash, tries)
 
+    async def return_code_free(self, cohort, code_hash) -> bool:
+        return await self._run("return_code_free", cohort, code_hash)
+
+    async def use_return_code(self, cohort, code_hash, tries=5) -> str:
+        return await self._run("use_return_code", cohort, code_hash, tries)
+
+    async def progress_events(self, token_hash, since):
+        return await self._run("progress_events", token_hash, since)
+
     async def delete_learner(self, token_hash) -> bool:
         return await self._run("delete_learner", token_hash)
 

@@ -50,12 +50,14 @@ const photo = (args) => import('./modules/photo.js').then((m) => m.default(args)
 const live = (args) => import('./modules/live.js').then((m) => m.default(args));
 // the contest screens load only when opened (the `contest` module, P31)
 const contest = (args) => import('./screens/contest.js').then((m) => m.default(args));
+// W9: "A code from my teacher" (a lost phone, no card) loads only when opened; it needs the server anyway
+const returning = (args) => import('./screens/returncode.js').then((m) => m.default(args));
 
 const SCREENS = { home, subject, subjects, plan, lesson, ask, print, check, photo, live, contest, welcome, who, credits, consent, lock: lockScreen,
-  settings, signup, cert, quran, university, made, bag, move, today };
-const NEEDS_NO_CHILD = new Set(['welcome', 'signup', 'move']);
-const CLEAN = new Set(['welcome', 'signup', 'move']);          // the clean adult look, not the learner's
-const OPEN = new Set(['welcome', 'who', 'signup', 'lock', 'move']);   // shown without opening her lock
+  settings, signup, cert, quran, university, made, bag, move, today, return: returning };
+const NEEDS_NO_CHILD = new Set(['welcome', 'signup', 'move', 'return']);
+const CLEAN = new Set(['welcome', 'signup', 'move', 'return']);          // the clean adult look, not the learner's
+const OPEN = new Set(['welcome', 'who', 'signup', 'lock', 'move', 'return']);   // shown without opening her lock
 const AWAY_MS = 5 * 60e3;
 const app = document.getElementById('app');
 let current = null;

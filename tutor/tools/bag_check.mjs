@@ -20,13 +20,18 @@
 //      lesson and a question (the online Ask failing); nothing reaches its storage (localStorage, sessionStorage,
 //      IndexedDB) and it is not asked to persist; Done pushes her bag and opens the app again with the owner's
 //      learner only; her own phone gets the lesson and sends the question once.
+//   7. W9: a learner of the hub's own class (her lessons' events go there), her phone lost and no card: her teacher
+//      at the hub makes a return code; a new phone at the hub types it (no class code: the hub's own class) and is
+//      her learner again: the same picture and number, a new token (the old one is refused), the lock offered, her
+//      lessons back from the hub's events and none sent again, and the teacher's class list as long as before.
 // Each question reaches a server exactly once (the stand-in front logs every POST /api/ask), and neither the code
 // nor the keys ever leave a phone.
 // One front server stands in for the three hosts (a self-signed certificate; Chromium maps the names to it):
 // appassets.androidplatform.net serves tutor/app as the APK does, online.qalam.test goes to an online-mode hub
 // (TUTOR_HOME=online, TUTOR_ORIGINS=https://appassets.androidplatform.net), qalam.lan to a village hub. The app's
 // other hub addresses (10.42.0.1, 192.168.4.1) are refused at once. Run from tutor/:
-//   PLAYWRIGHT=… CHROMIUM=… node tools/bag_check.mjs --hub http://127.0.0.1:8013 --online http://127.0.0.1:8014 [--out shots]
+//   PLAYWRIGHT=… CHROMIUM=… node tools/bag_check.mjs --hub http://127.0.0.1:8013 --hub-data <its TUTOR_DATA> \
+//     --online http://127.0.0.1:8014 [--out shots]
 // Exit code 1 when a check fails.
 
 import { execFileSync } from 'node:child_process';
@@ -44,6 +49,7 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
 const HUB = new URL(args.hub || 'http://127.0.0.1:8013');
 const ONLINE = new URL(args.online || 'http://127.0.0.1:8014');
 const OUT = args.out || 'shots';
+const TEACHER_PIN = readFileSync(join(args['hub-data'] || '', 'teacher-pin.txt'), 'utf8').trim();   // the village hub's
 const APP = new URL('../app/', import.meta.url).pathname;
 const APK = 'https://appassets.androidplatform.net';
 const WEB = 'https://online.qalam.test';
@@ -164,7 +170,7 @@ async function open(ph, url) {
 // the route, and its screen drawn (a screen waits for what it reads from the server, so over 2G the last one stays a while)
 const SCREENS = [['#/bag/ready/', '.bag-card'], ['#/bag/again', '.bag-card'], ['#/bag/code-new', '.bag-card'], ['#/bag/newcode', '.btn.danger'],
   ['#/bag', '.screen.bag'], ['#/home', '.screen.home'], ['#/settings', '.screen.settings:not(.bag)'], ['#/lock', '.screen.lock'],
-  ['#/welcome', '.screen.welcome:not(.move)'], ['#/move', '.screen.move'], ['#/consent/', '.screen.consent'], ['#/ask', '.thread']];
+  ['#/welcome', '.screen.welcome:not(.move)'], ['#/move', '.screen.move'], ['#/consent/', '.screen.consent'], ['#/ask', '.thread'], ['#/return', '.screen.return']];
 const slow = [];
 async function at(page, want, ms = 90000) {
   const t = Date.now();
@@ -440,10 +446,85 @@ try {
   check(asks('the borrowed phone question').length === 1 && asks('the borrowed phone question')[0].phase === '6 borrowed phone',
     'the question left waiting on the borrowed phone was sent once, by her own phone');
 
+  // 7. W9: a learner of the hub's own class; her phone lost, no card: the teacher's return code at the village hub
+  phase = '7 return code';
+  reach.hub = true;
+  reach.online = false;                                 // at school: the hub is her class's server
+  const G = await phone('G');
+  const g = await open(G, `${LAN}/app/`);
+  await at(g, '#/welcome');
+  await g.click('.yearbox.secondary:not(.adults) .years button >> nth=2');        // year 9
+  await at(g, '#/home');
+  await g.evaluate(() => { location.hash = '#/settings'; });
+  await at(g, '#/settings');
+  await g.click('a[href="#/consent/settings"]');
+  await at(g, '#/consent/');
+  await g.waitForSelector('.consent .hold', { timeout: 60000 });
+  await hold(g);
+  await at(g, '#/bag/ready/', 90000);
+  await g.click('.bag .btn.outline');                  // the card is not printed, and later the phone is lost
+  await at(g, '#/lock/offer/');
+  await g.keyboard.type(PIN);
+  await g.waitForTimeout(400);
+  await g.keyboard.type(PIN);
+  await at(g, '#/settings');
+  await work(g, 'done', ['bagcheck-seven', 3]);
+  await work(g, 'done', ['bagcheck-eight', 1]);
+  await g.evaluate(async () => { const a = await import(new URL('js/account.js', document.baseURI).href); await a.sync(); });
+  await g.waitForTimeout(3000);
+  check(log.filter((e) => e.phase === '7 return code' && e.server === 'hub' && e.path === '/api/events' && e.body.includes('lesson.done')).length >= 1,
+    'a learner of the hub\'s class: her lessons\' events reached the hub');
+  const api = (path, { token, pin, method = 'GET' } = {}) => fetch(new URL(path, HUB), { method, headers: { 'content-type': 'application/json',
+    'x-qalam': '1', ...(token ? { 'x-learner-token': token } : {}), ...(pin ? { 'x-teacher-pin': pin } : {}) } })
+    .then(async (r) => ({ status: r.status, data: await r.json().catch(() => ({})) }));
+  const hubSid = (await api('/api/hello')).data.id;
+  const lost = await learner(g);
+  const was = lost.seats[hubSid];
+  check(!!(was && was.token && was.number), 'her phone has her seat at the hub (the phone she will lose)');
+  const classBefore = (await api('/api/m/teacher/class', { pin: TEACHER_PIN })).data.learners;
+  const made = await api(`/api/m/teacher/class/${lost.picture}-${was.number}/return-code`, { pin: TEACHER_PIN, method: 'POST' });
+  check(made.status === 200 && /^\d{6}$/.test(made.data.code) && made.data.minutes === 15, 'the teacher made a return code: six digits, 15 minutes');
+  await G.ctx.close();                                  // the phone is lost
+  phase = '7 new phone';
+  const F = await phone('F');
+  const f = await open(F, `${LAN}/app/`);
+  await at(f, '#/welcome');
+  await f.click('a[href="#/move"]');
+  await at(f, '#/move');
+  await f.click('.move .return-link');
+  await at(f, '#/return');
+  await shot(f, 'return-code');
+  await f.fill('.return-digits', made.data.code.replace(/\d/g, (x) => '۰۱۲۳۴۵۶۷۸۹'[x]));
+  await f.click('.return form button[type=submit]');
+  await f.waitForSelector('.return .found', { timeout: 90000 });
+  await shot(f, 'return-welcome');
+  const fl = await learner(f);
+  const seat = fl.seats[hubSid] || {};
+  check(fl.picture === lost.picture && seat.number === was.number && seat.token && seat.token !== was.token,
+    'the new phone: her picture and number, with a new token');
+  check((await api('/api/me', { token: was.token })).status === 401, 'the lost phone\'s token is refused at the hub');
+  const prog = (await api('/api/me/progress', { token: seat.token })).data;
+  check((prog.done['bagcheck-seven'] || {}).stars === 3 && (fl.done['bagcheck-seven'] || {}).stars === 3
+    && (fl.done['bagcheck-eight'] || {}).stars === 1 && Object.keys(prog.done).every((k) => fl.done[k] && fl.done[k].stars >= prog.done[k].stars),
+    'her lessons came back from the hub\'s events' + ` (${Object.keys(fl.done).length} lessons)`);
+  await f.click('.return .return-on');
+  await at(f, '#/lock/offer/');
+  await f.keyboard.type(PIN);
+  await f.waitForTimeout(400);
+  await f.keyboard.type(PIN);
+  await at(f, '#/home');
+  check(true, 'the new phone: the lock offered, then Home');
+  await f.waitForTimeout(5000);
+  check(!log.some((e) => e.phase === '7 new phone' && (e.path === '/api/join' || (e.path === '/api/events' && e.body.includes('lesson.done')))),
+    'the new phone joined nowhere again and sent none of her lessons again');
+  check((await api('/api/m/teacher/class', { pin: TEACHER_PIN })).data.learners === classBefore, 'the teacher sees one learner, as before');
+  check((await f.evaluate(async (c) => { try { await (await import(new URL('js/hub.js', document.baseURI).href)).returnCode({ code: c }); return 0; }
+      catch (e) { return e.status; } }, made.data.code)) === 410, 'a used return code is refused (410)');
+
   const all = seen.join('\n');
   const keys = [dl.bag.k, dl.bag.f, dl.bag.w, dl2.bag.k, dl2.bag.f, dl2.bag.w];
   check(![code, code2, ...keys].some((x) => x && all.includes(x)), 'neither code nor its keys ever left a phone');
-  check(A.errors.length + D.errors.length + E.errors.length === 0, 'no page errors' + [...A.errors, ...D.errors, ...E.errors].map((e) => ': ' + e).join(''));
+  check(A.errors.length + D.errors.length + E.errors.length + F.errors.length + G.errors.length === 0, 'no page errors' + [...A.errors, ...D.errors, ...E.errors, ...F.errors, ...G.errors].map((e) => ': ' + e).join(''));
 } catch (e) {
   const where = (String(e.stack).match(/bag_check\.mjs:(\d+)/) || [])[1];
   check(false, `the walk stopped (line ${where}, in ${phase}): ${e.message.split('\n')[0]}`);

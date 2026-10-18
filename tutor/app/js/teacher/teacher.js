@@ -316,15 +316,20 @@ async function drawLearner(alias) {
   let d;
   try { d = await api('/class/' + encodeURIComponent(alias)); } catch (e) { return failed(e); }
   const codeBox = h('div', { class: 'stack' });
-  const make = async () => {
+  const returnBox = h('div', { class: 'stack' });
+  // six digits for her, 15 minutes, once: a lock reset code, or (W9) a return code for her lost phone. One code
+  // at a time: a new one of either kind replaces the last.
+  const code = (what, box, tell) => async () => {
     try {
-      const r = await api(`/class/${encodeURIComponent(alias)}/reset-code`, { method: 'POST' });
+      const r = await api(`/class/${encodeURIComponent(alias)}/${what}`, { method: 'POST' });
       const latin = r.code.replace(/(\d{3})(\d{3})/, '$1 $2');
-      put(codeBox, h('p', { class: 'code-big', dir: 'ltr' }, latin.replace(/[0-9]/g, (x) => '۰۱۲۳۴۵۶۷۸۹'[x])),
+      put(codeBox); put(returnBox);
+      put(box, h('p', { class: 'code-big', dir: 'ltr' }, latin.replace(/[0-9]/g, (x) => '۰۱۲۳۴۵۶۷۸۹'[x])),
         h('p', { class: 'code-big latin', dir: 'ltr' }, latin), h('p', { class: 'muted small' }, t('code_for', { n: num(r.minutes) })),
-        h('p', { class: 'small' }, t('code_tell')));
+        h('p', { class: 'small' }, t(tell)));
     } catch (e) { failed(e); }
   };
+  const make = code('reset-code', codeBox, 'code_tell');
   const back = h('button', { type: 'button', class: 'btn', onClick: () => drawClass() }, t('back'));
   page(h('div', { class: 'row pad' }, back),
     h('section', { class: 'card pad-card stack' },
@@ -341,7 +346,10 @@ async function drawLearner(alias) {
       h('h3', {}, t('hints_used')),
       h('p', { class: 'small' }, L.join([1, 2, 3].map((n) => t('rung', { n: num(n), m: num(d.hints[n] || 0) })))),
       d.lock_codes ? [h('h3', {}, t('reset')), codeBox,
-        h('button', { type: 'button', class: 'btn primary', onClick: make }, t('make_code'))] : null));
+        h('button', { type: 'button', class: 'btn primary', onClick: make }, t('make_code'))] : null,
+      h('h3', {}, t('return')), h('p', { class: 'small muted' }, t('return_why')), returnBox,
+      h('button', { type: 'button', class: 'btn return-code', onClick: code('return-code', returnBox, 'return_tell') },
+        t('return_make'))));
 }
 
 function classCard() {

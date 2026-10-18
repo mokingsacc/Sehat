@@ -16,6 +16,7 @@ import secrets
 import threading
 import time
 from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Literal
 
@@ -106,6 +107,13 @@ class MergeIn(BaseModel):
     """Her other token for this server (W4, WEBSITE.md 3.3): two of her devices joined it apart."""
     model_config = ConfigDict(extra="forbid")
     other: StrictStr = Field(..., min_length=20, max_length=64)
+
+
+class ReturnIn(BaseModel):
+    """W9: on her new phone, the class code (none: this server's own class) and the teacher's six-digit return code."""
+    model_config = ConfigDict(extra="forbid")
+    code: StrictStr = Field(..., min_length=6, max_length=12)
+    cohort_code: StrictStr | None = Field(None, max_length=20)
 
 
 class PinResetIn(BaseModel):
@@ -904,6 +912,56 @@ def create_app(cfg: Config | None = None, store=None) -> FastAPI:
         if got == "none":
             raise HTTPException(404, "no code from your teacher now")
         return {"ok": True}
+
+    # W9 (WEBSITE.md 3.12): a lost phone, no card, in a class. Her teacher made a return code (teacher.py); her new
+    # phone sends the class code and the six digits, with no token. The code is used up, her row gets a new token (the
+    # lost phone's dies, as with /api/me/token), and the answer is what /api/join gives, so the phone keeps her seat.
+    # A wrong code counts a try on every live return code of the class (five end each); 10 tries in ten minutes per
+    # phone, and a wrong class code counts as one (20 an hour per address).
+    @app.post("/api/me/return")
+    async def me_return(body: ReturnIn, request: Request):
+        addr = hub.addr(request)
+        hub.reset_limit.check(hub.who(request))
+        code = digits_to_latin(body.code).replace(" ", "")
+        if not code.isdigit() or len(code) != 6:
+            raise HTTPException(422, "six digits, please")
+        if body.cohort_code is not None:
+            hub.code_limit.check(addr, add=False)
+            cc = learners.normal_code(body.cohort_code)
+            cohort = await hub.store.cohort_by_code(learners.code_hash(cc)) if cc else None
+            if not cohort:
+                hub.code_limit.count(addr)
+                raise HTTPException(404, "no class has this code")
+        else:
+            cohort = await hub.store.cohort(hub.cohort_id or "")
+            if not cohort:
+                raise HTTPException(404, "no such cohort")
+        got = await hub.store.use_return_code(cohort["id"], teacher_mod.return_hash(cohort["id"], code),
+                                              teacher_mod.CODE_TRIES)
+        if got == "wrong":
+            raise HTTPException(403, "that code is not right")
+        token = learners.new_token()
+        if got == "none" or not await hub.store.rekey_learner(got, learners.token_hash(token)):
+            raise HTTPException(410, "no code from your teacher now")
+        row = await hub.store.learner(learners.token_hash(token))
+        return {"token": token, **learners.public(row, cohort)}
+
+    # W9: her finished lessons (the most stars) and her latest sheet marks, from her events of the last 12 months, so a
+    # phone that came back with a return code has them again
+    @app.get("/api/me/progress")
+    async def me_progress(request: Request):
+        row = await hub.learner(request)
+        since = events.minute(datetime.now(timezone.utc) - timedelta(days=events.KEEP_DAYS))
+        done, marks = {}, {}
+        for e in await hub.store.progress_events(row["token_hash"], since):
+            v = e["value"]
+            if e["verb"] == "lesson.done":
+                d = done.setdefault(e["object"], {"stars": 0, "at": e["at"]})
+                d["stars"] = max(d["stars"], v if isinstance(v, int) and 0 <= v <= 3 else 0)
+                d["at"] = e["at"]
+            elif isinstance(v, (int, float)) and 0 <= v <= 100:
+                marks[e["object"]] = round(v)
+        return {"done": done, "marks": marks}
 
     # Ask
     # Online a question may reach the AI provider, so it needs a learner whose guardian (or who herself) agreed (BUILD-PLAN 5.5);

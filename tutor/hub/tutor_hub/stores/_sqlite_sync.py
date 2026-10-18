@@ -425,13 +425,37 @@ class Store:
         with self.lock:
             r = self.db.execute("SELECT code_hash, expires, tries FROM reset_codes WHERE token_hash=?",
                                 (token_hash,)).fetchone()
-            if not r or r["expires"] < now() or r["tries"] >= tries:
-                return "none"
+            if not r or r["code_hash"].startswith("r:") or r["expires"] < now() or r["tries"] >= tries:
+                return "none"                                  # a return code (W9) is not a lock code
             if r["code_hash"] != code_hash:
                 self.db.execute("UPDATE reset_codes SET tries=tries+1 WHERE token_hash=?", (token_hash,))
                 return "wrong"
             self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (token_hash,))
             return "ok"
+
+    # W9: the teacher's return code, kept in reset_codes beside the lock codes; its hash starts "r:" and is made from the
+    # class and the six digits (a phone with no token says only those), so a wrong one counts on every return code of
+    # that class, and a right one is used up and names her
+    def return_code_free(self, cohort, code_hash) -> bool:
+        return self._one("SELECT 1 AS x FROM reset_codes WHERE code_hash=? AND expires>=? AND token_hash IN "
+                         "(SELECT token_hash FROM learners WHERE cohort=?)", (code_hash, now(), cohort)) is None
+
+    def use_return_code(self, cohort, code_hash, tries=5) -> str:
+        with self.lock:
+            t = now()
+            mine = "token_hash IN (SELECT token_hash FROM learners WHERE cohort=?)"
+            r = self.db.execute(f"SELECT token_hash FROM reset_codes WHERE code_hash=? AND expires>=? AND tries<? AND {mine}",
+                                (code_hash, t, int(tries), cohort)).fetchall()
+            if len(r) == 1:
+                self.db.execute("DELETE FROM reset_codes WHERE token_hash=?", (r[0]["token_hash"],))
+                return r[0]["token_hash"]
+            n = self.db.execute(f"UPDATE reset_codes SET tries=tries+1 WHERE code_hash LIKE 'r:%' AND expires>=? AND tries<? "
+                                f"AND {mine}", (t, int(tries), cohort)).rowcount
+            return "wrong" if n else "none"
+
+    def progress_events(self, token_hash, since):
+        return self._all("SELECT at, verb, object, value FROM events WHERE token_hash=? AND at>=? AND verb IN "
+                         "('lesson.done', 'check.done') ORDER BY at, id", (token_hash, since))
 
     def delete_learner(self, token_hash) -> bool:
         with self.lock:

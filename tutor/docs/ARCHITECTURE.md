@@ -484,6 +484,13 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 
 ## Privacy
 
+- **The teacher's return code (W9, WEBSITE.md 3.12):** a learner in a class whose phone is lost with no card. Her
+  teacher's page makes six digits (`return-code`, kept in `reset_codes` as "r:" and a hash of the class and the
+  digits, since the new phone has no token to bind them to). The new phone (`#/return`, `screens/returncode.js`,
+  loaded only when opened) sends the class code and the digits to `POST /api/me/return`: her row gets a new token,
+  the lost phone's is refused from then on, and the phone keeps her as she was (picture, number, class, consent),
+  her finished lessons and marks rebuilt from `GET /api/me/progress` and never sent again as events; then the lock
+  is offered. No new row: the teacher's class list stays one learner long.
 - The hub stores no names. A question is kept with a random token (so the asking phone can fetch the teacher's
   answer), the year, subject, lesson and class (cohort id); questions are deleted after `TUTOR_KEEP_DAYS` (60).
 - Progress and the asked-questions list stay on the phone (`localStorage`, key `qalam.v2`). `qalam.v2` holds no name:
@@ -531,6 +538,8 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `GET`, `POST`, `DELETE /api/me` | Her own record (`{band?, consent?}` to change it); header `X-Learner-Token` |
 | `POST /api/me/merge` | `{other}`, her second token for this server -> `{kept: "this" or "other", number, picture, cohort}`; 409 in different classes, 401 her token folded already; 5 a day per token (W4) |
 | `POST /api/me/token` | A new token for her record -> `{token}`; the old one dies; 5 a day per token (W4) |
+| `POST /api/me/return` | `{code, cohort_code?}` (her teacher's return code, six digits in any script; no class code: this server's own class), no token -> what `GET /api/me` gives, with her new `token`; the old token dies; 403 a wrong code (a try on every live return code of the class, five end each), 404 no class has this code, 410 no live code, 422 not six digits; 10 tries in 10 minutes per address (W9) |
+| `GET /api/me/progress` | Her token -> `{done: {lesson: {stars, at}}, marks: {lesson: pct}}`: the most stars per finished lesson and her latest sheet mark, from her events of the last 12 months (W9) |
 | `POST /api/bag/get` | `{f, etag?}` (F_r, 64 hex; no token) -> 200 `{etag, blob}` (the sealed bag, base64), 304 unchanged, 404 not here (counts as a wrong code: 20 an hour per address), 410 `{gone}` stopped; 60 an hour per caller (W6) |
 | `POST /api/bag/put` | `{f, w, if: etag or "new", blob}` with her token -> 200 `{etag}`; 412 `{etag}` another phone wrote first (pull, merge, write again); 403 a wrong W_r, or her seat's consent does not name the bag; 410 `{gone}`; 413 over 64 KB; 422 not a sealed bag's shape; 30 an hour per token, one stored write every 10 s per bag (W6) |
 | `POST /api/bag/delete` | `{f, w}` with her token -> 204, the bag a tombstone for 30 days; 403 a wrong W_r (W6) |
@@ -550,7 +559,7 @@ then 100 to 999), `learner`, `update_learner`, `delete_learner` (her events go w
 | `POST /api/print` | `{lesson, kind, copies, lang, seed}`; PIN header for answer sheets or many copies |
 | `GET /api/print/{job}` | queued, printing, done, saved or failed |
 | `POST /api/m/photo/mark` | `{code, seed, lang, strip}` (a JPEG of the answer cells, base64) -> `{code, readings: [{n, read}]}`; header `X-Learner-Token`, her consent needed; 6 a minute |
-| `GET /api/m/teacher/me`, `todo`, `class`, `class/{alias}`, `lessons`, `lessons/{id}`, `answers/{id}.html`, `wishes`; `POST /api/m/teacher/todo/{id}`, `class/{alias}/reset-code`, `class-card`, `hub-card` | The teacher dashboard (P20); the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online, role teacher or admin), `?cohort=` one of hers |
+| `GET /api/m/teacher/me`, `todo`, `class`, `class/{alias}`, `lessons`, `lessons/{id}`, `answers/{id}.html`, `wishes`; `POST /api/m/teacher/todo/{id}`, `class/{alias}/reset-code`, `class/{alias}/return-code` (W9), `class-card`, `hub-card` | The teacher dashboard (P20); the staff gate (`X-Teacher-Pin` on the hub, Cloudflare Access online, role teacher or admin), `?cohort=` one of hers |
 | `POST /api/m/plan` | `{goal, lang, band}` (s1, s2, ad) -> `{kind: plan, label, lessons}`, `{kind: closest, lessons}` (three at most), `{kind: wish, saved}` (the screened text joins the wishlist) or `{kind: rules, reason, text}` (nothing kept); her token, when sent, only picks her class (C5 H1) and is never kept with the wish; 30 a minute a phone |
 | `POST /api/me/pin-reset` | `{code}`, six digits in any script -> `{ok}`; 403 a wrong code, 404 none waiting; header `X-Learner-Token`; 10 tries in 10 minutes an address |
 | `POST /api/m/cert` | `{path, version, lang}` -> `{id, month, months, url, lessons, paper: {css, body}}` when her own events show every lesson of the pathway (409 `{missing}` when not); header `X-Learner-Token`, her consent needed; `per_day` (5) a token |
@@ -577,7 +586,7 @@ learner routes, the admin panel's (behind its gate) and the app's files are alwa
 
 - `main.js` starts up and routes by the address after `#` (`#/home`, `#/subjects`, `#/lesson/{id}`, `#/print/{id}`,
   `#/check/{id}/{seed}`, `#/photo/{id}/{seed}`, `#/ask`, `#/teacher`, `#/who`, `#/welcome`, `#/signup/code`, `#/consent/{then}`,
-  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/bag` and `#/move` (W7), `#/today` (W8), `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
+  `#/cert/{pathway}` (P25b), `#/lock`, `#/settings`, `#/bag` and `#/move` (W7), `#/today` (W8), `#/return` (W9), `#/credits`). It takes `?join=CODE` off the address into Welcome, and shows a locked
   learner's lock on start, on switching to her and after 5 minutes away (Welcome, Who is learning, the class code
   and the teacher's page stay open).
 - Sign-up (DESIGN.md 6 to 8): `screens/welcome.js` (the doors, no name field), `screens/signup.js` (the ordered
@@ -751,7 +760,9 @@ certificate's month names; `cert.hijri_date()` is the Python copy and `hub/tests
     picture and number with band, last seen, lessons, sheets and average, and "needs help" when three or more items
     stayed wrong after the last hint. Her page: lessons with her latest score, hint steps used, and the lock reset
     code (six digits, 15 minutes, once, five tries; `POST /api/me/pin-reset` from her lock screen's "I have a code
-    from my teacher"). "Print class card": the teacher types the class code (only its hash is kept) and gets a QR
+    from my teacher"), and since W9 the return code for a lost phone with no card (the same six digits, 15 minutes,
+    once; `POST /api/me/return` from "I already use Qalam" → "No card? A code from my teacher"; one code per learner
+    at a time, so a new one of either kind replaces the last). "Print class card": the teacher types the class code (only its hash is kept) and gets a QR
     of `<address>/?join=CODE` (byte mode, `qr.py`) with the code in text; the hub card stays on the hub.
   - *Lessons*: did it, mastered (her latest sheet at 80% or more), the hardest item, disputes and hint steps, and
     per item right, wrong, disputes and hints, all counted from events over their retention; the answer sheet

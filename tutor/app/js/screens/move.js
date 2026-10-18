@@ -9,7 +9,7 @@
 // (android.takeBag). Either way the digits are read once and forgotten, and never reach an address a server sees.
 // W8: "Just for today (a borrowed phone)" beside Yes: she is kept in memory only (state.js startToday), with Done on
 // every screen (screens/today.js); with no relay in reach (a bag file) she is told first that today's work stays only
-// until Qalam is closed.
+// until Qalam is closed. W9: "No card? A code from my teacher" opens #/return (screens/returncode.js).
 
 import * as account from '../account.js';
 import { aliasIcon, aliasName } from '../aliases.js';
@@ -89,7 +89,9 @@ export default function move() {
     function draw() {
       fill(root, topbar({ back, title: s('move_title') }),
         h('div', { class: 'stack pad' }, line(s('move_lead'), 'grow lead'), box.form, scanRow,
-          said(h('button', { type: 'button', class: 'btn', onClick: () => pick.click() }, icon('file', 22), s('bag_open_file'))), pick));
+          said(h('button', { type: 'button', class: 'btn', onClick: () => pick.click() }, icon('file', 22), s('bag_open_file'))), pick,
+          // W9: no card, but in a class: her teacher's return code (screens/returncode.js)
+          h('a', { class: 'link return-link', href: '#/return' }, icon('key', 20), s('return_link'))));
     }
     draw();
     if (code) setTimeout(() => box.submit(), 50);           // handed over: look it up at once

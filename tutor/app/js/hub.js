@@ -275,6 +275,10 @@ export const sheetUrl = (id, { seed = 0, lang = 'prs', pdf = false, print = fals
 
 // "I have a code from my teacher" (P20): the six digits she was given open a new PIN; the lock is the phone's
 export const pinReset = (token, code) => call('/api/me/pin-reset', { method: 'POST', body: { code }, token, ms: 15000 });
+// W9 (WEBSITE.md 3.12): a lost phone, no card: the class code and her teacher's return code, with no token; her new
+// token and seat, then her finished lessons and marks from her events
+export const returnCode = (body) => call('/api/me/return', { method: 'POST', body, ms: 15000 });
+export const progress = (token) => call('/api/me/progress', { token, ms: 20000 });
 
 // live classes (P30a, C6.1): her token says her class; the sound itself goes through the relay, never through here
 const liveP = (id, what) => `/api/m/live/${encodeURIComponent(id)}/${what}`;

@@ -55,6 +55,12 @@ if (args.seed) {
     }
     if (label === 'Evening adults') await call(`/api/m/admin/cohorts/${r.data.id}/kill`, { method: 'POST', body: { switch: 'ai', on: false } });
   }
+  // two learners in the hub's own class, so the teacher's class list has a learner to open (her lock and return codes)
+  const mine = await fetch(`${HUB}/api/m/teacher/class`, { headers: { 'x-teacher-pin': PIN } }).then((r) => r.json()).catch(() => ({}));
+  for (const picture of mine.learners ? [] : ['cup', 'key']) {
+    await fetch(`${HUB}/api/join`, { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ band: 's1', lang: 'prs', picture }) });
+  }
 }
 
 // runs in the page: the layout checks
@@ -164,6 +170,9 @@ const SCREENS = {
     ['pin', async () => {}],
     ['todo', async (p) => { await pin(p, PIN); }],
     ['class', async (p) => p.click('main .ttabs button:nth-child(2)')],
+    // a learner, then (W9) a return code for her lost phone: the six digits, in Persian and Latin shapes
+    ['learner', async (p) => p.click('main nav.class-list a >> nth=0')],
+    ['return-code', async (p) => { await p.click('main .btn.return-code'); await p.waitForSelector('main .code-big.latin'); }],
     ['lessons', async (p) => p.click('main .ttabs button:nth-child(3)')],
     ['wishes', async (p) => p.click('main .ttabs button:nth-child(4)')],
     // the Live tab (P30a, C6.3) with the live routes, the microphone and WebRTC as stand-ins (liveStubs)

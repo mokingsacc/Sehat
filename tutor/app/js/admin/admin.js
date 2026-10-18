@@ -718,6 +718,7 @@ function detailLine(what, detail) {
     return `${modName(x[1])}: ${t('common.' + x[2])}` + (extra.length ? ` (${extra.join(comma())})` : '');
   }
   if (what === 'teacher.lock_code' && (x = /^a lock reset code for (.+)$/.exec(d))) return t('log.lock_code', { a: x[1] });
+  if (what === 'teacher.return_code' && (x = /^a return code for (.+)$/.exec(d))) return t('log.return_code', { a: x[1] });
   if (what === 'wish' && (x = /^a wish marked (.+)$/.exec(d))) return t('log.wish_marked', { s: L.t('admin.' + x[1].replace(/ /g, '_'), {}, x[1]).toLowerCase() });
   if (what === 'rollback' && (x = /^(\S+) back to (\S+) \((\w+)\)$/.exec(d))) return t('log.back_to', { p: x[1], v: x[2] });
   if (what === 'release' && (x = /^contest:(\S+) (open|closed) \((\w+)\)$/.exec(d))) return t('log.contest_' + x[2], { p: x[1] });

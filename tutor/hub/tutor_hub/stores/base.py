@@ -131,7 +131,15 @@ Learners (learners.py decides what they mean; never a name)
 - `set_reset_code(token_hash, code_hash, expires)`: a lock reset code the teacher made for her (P20, C1.6), hashed,
   replacing any earlier one, with no tries used; `expires` is an ISO time.
 - `use_reset_code(token_hash, code_hash, tries=5) -> str`: "ok" (the code is right: it is used up), "wrong" (one
-  more try counted) or "none" (no code, past its time, or `tries` wrong tries spent).
+  more try counted) or "none" (no code, past its time, `tries` wrong tries spent, or a return code: a lock code
+  never touches one).
+- `return_code_free(cohort, code_hash) -> bool` (W9): no live code of a learner in the class has this hash.
+- `use_return_code(cohort, code_hash, tries=5) -> str` (W9): the teacher's return code for a lost phone, kept in
+  `reset_codes` with a hash that starts "r:" and is made from the class and the six digits. The token hash of the one
+  learner of the class whose live code it is (the code is used up); else "wrong" (one more try counted on every live
+  return code of the class) or "none" (no live return code in the class).
+- `progress_events(token_hash, since) -> list` (W9): her `lesson.done` and `check.done` events from the minute `since`
+  on, oldest first, each `{at, verb, object, value}` (`GET /api/me/progress`).
 - `delete_learner(token_hash) -> bool`: deletes the learner, every event carrying her token's hash and her reset
   code, together.
 - `prune_learners(idle_days)`: deletes learners not seen for `idle_days` days, with their events and reset codes.
@@ -241,8 +249,9 @@ LIVE_IDLE_MIN = 10        # a class whose teacher has not polled for 10 minutes 
 LIVE_LONGEST_MIN = 105    # nor does any class outlive the longest max_minutes (90) and 15 minutes
 LIVE_REASONS = (1, 2, 3)  # a raised hand's reason: a chip code, never text
 LOG_DAYS = 730            # flag_log and admin_log are kept 2 years (BUILD-PLAN 3.4)
+# C5: a teacher's lock code; W9: a return code for a lost phone; AI prices
 ADMIN_WHAT = ("cohort.new", "cohort.settings", "cohort.kill", "cohort.code", "release", "rollback", "wish",
-              "staff.add", "staff.remove", "teacher.lock_code", "prices")   # C5: a teacher's lock code; AI prices
+              "staff.add", "staff.remove", "teacher.lock_code", "teacher.return_code", "prices")
 EVENT_FIELDS = ("at", "token_hash", "cohort", "module", "verb", "object", "value")
 # the teacher's list: held answers, and answered or waiting questions sent to the teacher; urgent first
 QUEUE = "status='held' OR (to_teacher=1 AND status IN ('answered','waiting'))"
@@ -562,6 +571,15 @@ class Store:
         raise NotImplementedError
 
     async def use_reset_code(self, token_hash, code_hash, tries=5) -> str:
+        raise NotImplementedError
+
+    async def return_code_free(self, cohort, code_hash) -> bool:
+        raise NotImplementedError
+
+    async def use_return_code(self, cohort, code_hash, tries=5) -> str:
+        raise NotImplementedError
+
+    async def progress_events(self, token_hash, since) -> list[dict]:
         raise NotImplementedError
 
     async def delete_learner(self, token_hash) -> bool:

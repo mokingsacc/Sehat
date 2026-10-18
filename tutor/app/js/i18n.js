@@ -570,6 +570,16 @@ const S = {
     today_offline: 'اینجا مرکز درسی یا انترنت نیست. کار امروز تنها تا بسته شدن قلم می‌ماند.',
     today_go: 'باز هم شروع کن',
     bag_iphone: 'در آیفون، سفاری ممکن است قلم را بعد از یک هفته استفاده نکردن پاک کند. قلم را به صفحهٔ اصلی اضافه کن و کارت را نگه دار.',
+    // W9 (WEBSITE.md 3.12): the teacher's return code for a lost phone; drafts for a native speaker's check
+    return_link: 'کارت نداری؟ یک کد از معلمم',
+    return_title: 'کد برگشت از معلم',
+    return_lead: 'تلفنت گم شده و کارت نداری؟ معلمت می‌تواند یک کد برگشت به تو بدهد. کد صنف و شش رقم را بنویس.',
+    return_class: 'کد صنف (در مرکز درسی مکتب، خالی بگذار)',
+    return_digits: 'شش رقم از معلمت',
+    return_go: 'برگرد',
+    return_none: 'این کد استفاده شده یا وقتش گذشته. از معلمت یک کد تازه بخواه.',
+    return_class_bad: 'هیچ صنفی این کد را ندارد.',
+    return_welcome: '{who}، خوش آمدی. {n} درس تو برگشت.',
   },
   ps: {
     app: 'قلم',
@@ -1135,6 +1145,16 @@ const S = {
     today_offline: 'دلته د زده کړې مرکز یا انټرنېټ نشته. د نن کار یوازې تر هغه پاتې کېږي چې قلم بند شي.',
     today_go: 'بیا هم پیل کړه',
     bag_iphone: 'په آیفون کې سفاري کېدای شي قلم د یوې اونۍ نه کارولو وروسته پاک کړي. قلم د کور پاڼې ته ور اضافه کړه او کارت وساته.',
+    // W9 (WEBSITE.md 3.12): the teacher's return code for a lost phone; drafts for a native speaker's check
+    return_link: 'کارت نه لرې؟ له ښوونکي یو کوډ',
+    return_title: 'له ښوونکي د بېرته راتګ کوډ',
+    return_lead: 'ټیلیفون دې ورک شوی او کارت نه لرې؟ ښوونکی دې د بېرته راتګ یو کوډ درکولی شي. د ټولګي کوډ او شپږ عددونه ولیکه.',
+    return_class: 'د ټولګي کوډ (د ښوونځي د زده کړې په مرکز کې یې خالي پرېږده)',
+    return_digits: 'له ښوونکي شپږ عددونه',
+    return_go: 'بېرته راشه',
+    return_none: 'دا کوډ کارول شوی یا یې وخت تېر شوی. له ښوونکي نوی کوډ وغواړه.',
+    return_class_bad: 'هېڅ ټولګی دا کوډ نه لري.',
+    return_welcome: '{who}، ښه راغلې. ستا {n} درسونه بېرته راغلل.',
   },
   en: {
     app: 'Qalam',
@@ -1701,6 +1721,16 @@ const S = {
     today_offline: 'No centre or internet here. Today’s work stays only until Qalam is closed.',
     today_go: 'Start anyway',
     bag_iphone: 'On an iPhone, Safari can clear Qalam after a week without use. Add Qalam to the Home Screen, and keep the card.',
+    // W9 (WEBSITE.md 3.12): the teacher's return code for a lost phone
+    return_link: 'No card? A code from my teacher',
+    return_title: 'A return code from my teacher',
+    return_lead: 'Lost your phone, and no card? Your teacher can give you a return code. Type your class code and the six digits.',
+    return_class: 'Class code (leave it empty at your school’s centre)',
+    return_digits: 'The six digits from your teacher',
+    return_go: 'Come back',
+    return_none: 'This code is used or too old. Ask your teacher for a new one.',
+    return_class_bad: 'No class has this code.',
+    return_welcome: 'Welcome back, {who}. {n} lessons came back.',
   },
 };
 
